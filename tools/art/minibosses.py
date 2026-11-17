@@ -2719,3 +2719,371 @@ def cook_chibi():
 
 
 BUILDERS.update({"cook_chibi": cook_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 9 OF 14 - THE SLUICEKEEPER, 16 Nov
+#
+# Same read, same props, same idea, rebuilt in the game's own register; see
+# the block above drillmaster_chibi for the measured Knight proportions and
+# the one above snuffer_chibi for the rule that register is MASS AND COUNT,
+# not man-proportions.
+#
+# THE THREE LESSONS THIS ONE INHERITS AND SPENDS, rather than re-learning:
+#   THE COOK'S:   an X offset is DEPTH, not separation. The original stood the
+#                 whole sluice frame at x +1.02 with y +0.16 - an X-only
+#                 offset - so at azimuth 90 the camera looks straight down the
+#                 line of man and machine and the frame stands in front of
+#                 him. The machine goes DIAGONAL IN PLAN, about 30 degrees.
+#   THE SNUFFER'S AND THE COOK'S: a flat disc is a LINE at this elevation, and
+#                 a horizontal feature only reads if it is the TOPMOST thing
+#                 at its own radius. The water is the creature's whole
+#                 mechanic and it lies on the floor, which is the worst place
+#                 a feature can be - so it is given a PROUD RIM that is the
+#                 topmost thing at the basin's radius, and the rim is a closed
+#                 ring, so there is no azimuth from which the water is not
+#                 visibly standing.
+#   THE COOK'S AGAIN: a lit thing only reads against DARK, so the basin gets a
+#                 dark kerb outside the glow and nothing pale touches the water.
+#
+# AND ONE OF ITS OWN, WHICH IS THE DISC LESSON APPLIED TO A RING: the handwheel
+# is the silhouette and a ring faces ONE WAY. Stood "up facing the room" as the
+# original had it, it is a fat ellipse from the front and a VERTICAL LINE from
+# the side. So the wheel's plane is turned 40 degrees in plan: it is oblique to
+# both cameras and open in both - 77% of its width from the front, 64% from the
+# side - and there is no view in which it collapses.
+#
+# THE VALUE PLAN, MEASURED. At this wear of 0.95 - the highest in the file, and
+# justified, because this is the one thing down there that is never dry - the
+# generator's `body` lands at luminance 0.299 and its `bone` at 0.342: a 14%
+# separation, WEAKER THAN THE COOK'S 19% and the weakest in the file. So
+# nothing here leans on body-versus-bone. The man is `body`, every break on him
+# is `dark` (luminance 0.060), the machine is `dark`, the gate board is the one
+# `bone` object on the creature, and the water is the only `glow`.
+#
+# THE CARRIED FAULT TAKEN THIS RUN: "the legs read as two dark blocks" - the
+# Sexton's fault 9, the Porter's 12, the Tallyman's 10 and the Cook's 6, carried
+# four times and never taken. The cause was that shin and boot were both `dark`,
+# which is 0.060 against 0.060. Here the shins are `body` and only the boot is
+# `dark`, so the leg has a value break in it at the ankle where the real one is.
+# ===========================================================================
+CANON.update({
+    "sluicekeeper_chibi": ("The Sluicekeeper (chibi)", 2.50, (0.46, 0.54, 0.56),
+                           (0.40, 0.80, 1.00), "flooded",
+                           "IT RAISES THE WATER - rebuilt in the game's own register",
+                           0.95, "The water is coming up."),
+})
+
+
+def sluicekeeper_chibi():
+    """The Sluicekeeper in the game's register. Same read - A MAN WITH BOTH
+    MITTS ON A BIG OPEN WHEEL, A SCREW CLIMBING BEHIND IT, STANDING IN LIT
+    WATER - with the wire man taken to a chibi weight, the wheel made bolder
+    and turned oblique so it never goes edge-on, the clutter dropped (the
+    chest plank and the drag-board bought nothing at cell size) and the water
+    rebuilt as a basin with a proud rim instead of a flat puddle.
+
+    The pose IS the mechanic: two hands on one wheel, at two points on it, is
+    the only pose that reads as WINDING SOMETHING OPEN. Everything else on the
+    creature is the machine he is winding and the water it has already let in."""
+    P = Parts("sluicekeeper_chibi")
+
+    # The machine sits DIAGONAL from the man in plan - the Cook's lesson. The
+    # man is back-left, the frame front-right, and the basin is centred between
+    # them, so front sees man-then-wheel, side sees wheel-then-man, and neither
+    # view has one standing inside the other.
+    #
+    # PASS 5 - THE ARMS CAME BACK AS A PLANK, AND THE CAUSE WAS THE LAYOUT,
+    # NOT THE ARMS. Passes 1-4 stood the man back-LEFT of the machine while the
+    # wheel's plane runs along U, so the rim nearest him was still 0.85 m away
+    # ACROSS the wheel: both arms had to span the whole thing to reach it and
+    # they merged into one diagonal bar with a ball on the end - a boom, not a
+    # pair of arms. Lengthening or bending them could not have fixed it.
+    # THE RULE, AND IT IS NEW: A FIGURE OPERATING A MACHINE MUST STAND IN THE
+    # MACHINE'S OWN PLANE. You turn a handwheel from its EDGE, with the rim
+    # coming past your hands - not from off to one side of it. So the man moves
+    # along +U, which puts him in the wheel's plane, 1.30 m out: the near rim
+    # is then 0.70 m from his shoulder, the arms are a chibi's length again,
+    # and the plan offset from the frame is (1.00, 0.84) - still a diagonal on
+    # BOTH axes, which is the Cook's lesson and is what keeps the man and the
+    # machine out of each other in front, side and back alike.
+    # He stays on the camera's FAR side of the machine (+y), because the frame
+    # is nearer the lens at azimuth 0 and a man standing in front of the wheel
+    # would hide the one shape this creature is recognised by.
+    # PASS 6 - HE WAS STANDING ON THE WHEEL. At 1.30 m out his own body and his
+    # near arm crossed the rim, so the one shape this creature is recognised by
+    # was read through a man. 1.62 m puts his shoulder outside the rim and the
+    # arms EXTENDED to it, which is also the truer pose: you turn a wheel at
+    # arm's length, not with it against your chest.
+    FX, FY = 0.62, -0.34
+    # PASS 7 pulls that back to 1.45: 1.62 cleared the rim but put the near
+    # grip 0.79 m from the shoulder, and an arm that long on a 2.10 m chibi is
+    # a boom again. 1.45 is the compromise and it is NAMED rather than hidden -
+    # the arms still run about 0.78 m, which is long for this register.
+    MX, MY = FX + 0.766 * 1.45, FY + 0.643 * 1.45
+    HIP = 0.50                                   # 21% of the man, off the Knight
+
+    # --- LEGS. Stubs, planted wide, braced against standing water. THE SHINS
+    # ARE `body` AND ONLY THE BOOT IS `dark`: the carried fault, taken.
+    for s in (-1, 1):
+        limb(P, [(MX + s * 0.21, MY + 0.03, HIP), (MX + s * 0.24, MY + 0.00, 0.23),
+                 (MX + s * 0.26, MY - 0.03, 0.11)], 0.150, 0.136, 'body')
+        P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(MX + s * 0.26, MY - 0.09, 0.065))
+
+    # --- TORSO. A barrel, and a pelvis bridging hips to torso, because the
+    # Cook proved that without one the back view is two stumps under a floating
+    # ball and no apron exists to hide it.
+    P.add(L.sphere(0.345, 0.275, 0.175, 16, 10), 'body', loc=(MX, MY, 0.58))
+    P.add(L.sphere(0.420, 0.335, 0.400, 18, 12), 'body', loc=(MX, MY - 0.02, 1.02))
+    # the shoulders: the WHEEL SIDE IS RAISED, because his hand is up on the
+    # crank. The Cook's loaded shoulder dropped; this one lifts. Same device,
+    # opposite sign, and it is the only thing that explains the arms.
+    P.add(L.sphere(0.200, 0.190, 0.180, 12, 8), 'body', loc=(MX - 0.36, MY - 0.06, 1.34))
+    P.add(L.sphere(0.200, 0.190, 0.180, 12, 8), 'body', loc=(MX + 0.36, MY - 0.04, 1.24))
+    # a belt, dark, one band - the only break on the body
+    P.add(L.box(0.80, 0.66, 0.085), 'dark', loc=(MX, MY - 0.02, 0.74))
+
+    # --- THE HEAD AND THE HOOD. The one thing a gate-keeper owns is a hood,
+    # and it is sodden. NOTHING ROUND SITS ON TOP OF SOMETHING ROUND - the
+    # Sexton's saucer, the Snuffer's lampshade, the Tallyman's martini glass
+    # and the Cook's cap each paid for that separately - so the hood is a
+    # shallow dome set INTO the crown, NARROWER than the skull (0.275 against
+    # 0.300), with a dark band at the join doing the value break, and a
+    # drawn-back peak so it reads as cloth and not as a helmet.
+    HZ = 1.80
+    P.add(aim(L.cone(0.145, 0.175, 0.17, 10), (MX, MY - 0.03, 1.42),
+              (0.0, 0.0, 1.0)), 'body')                            # the neck
+    P.add(L.box(0.50, 0.48, 0.06), 'dark', loc=(MX, MY - 0.04, 1.52))   # the cowl
+    P.add(L.sphere(0.300, 0.280, 0.285, 16, 10), 'body', loc=(MX, MY - 0.04, HZ))
+    P.add(L.sphere(0.275, 0.260, 0.145, 16, 8), 'dark', loc=(MX, MY - 0.04, 1.95))
+    P.add(L.box(0.56, 0.53, 0.055), 'dark', loc=(MX, MY - 0.04, 1.87))
+    P.raw(aim(L.cone(0.150, 0.0, 0.34, 10), (MX, MY + 0.10, 1.98),
+              (0.0, 0.62, 0.78)), 'dark')                          # the peak, drawn back
+    # THE EYES ARE ON THE FACE AND NOT IN THE SKULL. The skull's front face is
+    # at y MY-0.34; sclera at -0.30, pupil at -0.335. Called at the head's own
+    # y centre, which is the fault the Drillmaster found and the Cook shipped.
+    eyes(P, (MX, MY - 0.04, 1.80), 0.108, 0.058, -0.26, 'bone')
+    eyes(P, (MX, MY - 0.04, 1.805), 0.108, 0.029, -0.295, 'dark')
+
+    # --- THE SLUICE FRAME. Two stout posts and a head beam, straddling the
+    # screw ALONG THE MACHINE'S OWN AXIS, so the frame turns with the wheel and
+    # the whole assembly is one oblique object rather than a wheel pasted on a
+    # square frame. U is that axis in plan; N is the wheel's normal.
+    #
+    # PASS 2 - THE MACHINE CAME BACK AS A TANGLE AND IT WAS MY OWN VALUE PLAN
+    # THAT DID IT. Pass 1 read the measurement "bone is only 14% off body" and
+    # concluded "put the whole creature in body and dark", which threw away the
+    # pair that IS strong here: bone against dark is 0.342 against 0.060. With
+    # frame, screw, wheel and beam all `dark`, the front view had a dark wheel
+    # crossed by dark posts under a dark beam and the handwheel - the entire
+    # silhouette of this creature - disappeared into it. The frame and the beam
+    # go back to `bone`, the wheel and the screw stay `dark`, and the wheel is
+    # then the one dark object standing on a pale frame. THE LESSON, GENERAL: a
+    # weak pair somewhere in the palette is not a reason to use ONE value for
+    # everything; it is a reason to find which pair IS strong and build on it.
+    UX, UY = 0.766, 0.643                        # the machine's axis, 40 deg
+    for s in (-1, 1):
+        limb(P, [(FX + s * UX * 0.50, FY + s * UY * 0.50, 0.02),
+                 (FX + s * UX * 0.52, FY + s * UY * 0.52, 1.20),
+                 (FX + s * UX * 0.54, FY + s * UY * 0.54, 2.22)], 0.095, 0.078, 'bone')
+    P.raw(L.tube([Vector((FX - UX * 0.60, FY - UY * 0.60, 2.26)),
+                  Vector((FX + UX * 0.60, FY + UY * 0.60, 2.26))], [0.105] * 2, 8), 'bone')
+
+    # --- THE SCREW. Six deep collars, not eight thin ones: at cell size a fine
+    # thread is a smooth pole, and the Tallyman's and the Cook's stacks both
+    # fused because the pitch was not checked against the radius. 0.26 of pitch
+    # against a 0.05 collar gives 0.21 of clear stem between every pair.
+    limb(P, [(FX, FY, 0.30), (FX, FY, 2.22)], 0.072, 0.062, 'dark')
+    for k in range(6):
+        P.raw(aim(L.cone(0.135, 0.135, 0.050, 12), (FX, FY, 0.52 + k * 0.26),
+                  (0.0, 0.0, 1.0)), 'dark')
+
+    # --- THE HANDWHEEL. 1.20 m across, open, and OBLIQUE: its plane is spanned
+    # by U (horizontal, 40 degrees off the X axis) and Z, so it is an open
+    # ellipse from the front AND from the side and a line from neither. Four
+    # thick spokes rather than six thin ones - the rim gap at the hub is what
+    # fuses a wheel into a disc, and 4 spokes of 0.055 on a 0.60 ring leave
+    # 0.94 m of air between them at the rim.
+    WZ, WR = 1.62, 0.60
+    pts = [Vector((FX + WR * math.cos(TAU * i / 30.0) * UX,
+                   FY + WR * math.cos(TAU * i / 30.0) * UY,
+                   WZ + WR * math.sin(TAU * i / 30.0))) for i in range(31)]
+    P.raw(L.tube(pts, [0.095] * len(pts), 8), 'dark')
+    for k in range(4):
+        a = TAU * k / 4.0 + 0.30
+        P.raw(aim(L.cone(0.055, 0.048, WR, 8), (FX, FY, WZ),
+                  (math.cos(a) * UX, math.cos(a) * UY, math.sin(a))), 'dark')
+    P.add(L.sphere(0.165, 0.165, 0.165, 12, 8), 'dark', loc=(FX, FY, WZ))
+    # THE CRANK PEG, standing off the rim toward the room on the wheel's own
+    # normal - the one part that says this wheel TURNS rather than hangs.
+    NX, NY = 0.643, -0.766                       # the wheel's normal in plan
+
+    def rim(a):
+        return Vector((FX + WR * math.cos(a) * UX, FY + WR * math.cos(a) * UY,
+                       WZ + WR * math.sin(a)))
+
+    def nearest(sh, lo, hi):
+        """The rim point NEAREST this shoulder, scanned rather than guessed.
+        Hand placement by arithmetic is how pass 1 ended up with a 1.01 m arm
+        on a 2.10 m man; the ring knows where its own nearest point is."""
+        best, bd = None, 1e9
+        for i in range(61):
+            a = lo + (hi - lo) * i / 60.0
+            q = rim(a)
+            d = (q - Vector(sh)).length
+            if d < bd:
+                best, bd = a, d
+        return best
+
+    # THE CRANK PEG, standing off the rim toward the man on the wheel's own
+    # normal - the one part that says this wheel TURNS rather than hangs, and
+    # now the thing his upper mitt is actually closed on.
+    SH_HI = (MX - 0.36, MY - 0.08, 1.34)
+    SH_LO = (MX + 0.36, MY - 0.06, 1.24)
+    # PASS 7 - AND THIS WAS A STRAIGHT BUG, NOT A JUDGEMENT. The scan ran over
+    # a in [pi-1.30, pi+0.10], which is the rim's FAR side: cos(a)*WR is the
+    # coordinate ALONG U, so a near pi is the quadrant pointing AWAY from the
+    # man. Both hands were therefore sent across the wheel to the rim behind
+    # it, which is why four passes of arm work kept producing one long bar -
+    # the nearest-point scan was faithfully finding the nearest point of the
+    # wrong half. The upper hand now takes the near-TOP quadrant and the lower
+    # hand the near-BOTTOM one, so the arms diverge vertically and read as two.
+    CA = nearest(SH_HI, 0.15, 0.95)
+    CP = rim(CA)
+    limb(P, [(CP.x, CP.y, CP.z), (CP.x + NX * 0.26, CP.y + NY * 0.26, CP.z + 0.02)],
+         0.055, 0.048, 'body')
+
+    # --- THE GATE BOARD, drawn up inside the frame with dark air under its
+    # lip. It is the ONE pale object on the creature, and it is deliberately
+    # NOT touching the water: the Cook's sixth pass proved that pale against
+    # glow is no contrast at all, and the lit basin is the mechanic.
+    GX, GY = FX - NX * 0.26, FY - NY * 0.26
+    P.raw(L.membrane([(GX - UX * 0.44, GY - UY * 0.44, 0.62),
+                      (GX + UX * 0.44, GY + UY * 0.44, 0.62),
+                      (GX + UX * 0.44, GY + UY * 0.44, 1.46),
+                      (GX - UX * 0.44, GY - UY * 0.44, 1.46)], 0.085), 'bone')
+    P.raw(L.tube([Vector((GX - UX * 0.46, GY - UY * 0.46, 0.60)),
+                  Vector((GX + UX * 0.46, GY + UY * 0.46, 0.60))], [0.070] * 2, 8), 'dark')
+
+    # --- THE WATER. The mechanic, and the only `glow` on the creature. It is
+    # RADIALLY SYMMETRIC, so there is no azimuth from which the room is not
+    # visibly flooding - the front-only fault the Cook's lit mouth closed for
+    # the pot and this closes for the floor.
+    #
+    # PASS 3 - THE WATER CAME BACK AS A DISPLAY PLINTH. Pass 1 built it as a
+    # true circle, flat on the floor at 0.09, with a dark kerb ring outside the
+    # bright rim - and a pale disc with a dark bevel around it carrying a
+    # figure is a CAKE STAND. Every cue added for legibility was a cue for
+    # furniture: the circle said "turned", the kerb said "moulded edge", and
+    # sitting ON the floor rather than IN the room said "base". Three things
+    # change and they are all the same thing - WATER HAS NO EDGE OF ITS OWN, IT
+    # TAKES THE EDGE OF WHAT IT IS IN:
+    #   the kerb GOES (it was the plate rim),
+    #   the outline becomes IRREGULAR - eight unequal lobes, no two the same,
+    #   and the surface RISES to 0.30, which is mid-shin on him and well up the
+    #   posts, so it CUTS his legs and the frame instead of carrying them.
+    # A plinth is under a thing; water is around it, and the giveaway is that
+    # it hides the bottom of whatever it touches. The proud rim stays - that is
+    # the elevation rule, and the only reason a horizontal surface reads here
+    # at all - but it follows the irregular edge, so it is a lapping line and
+    # not a hoop.
+    # PASS 6 - AND THE BASIN IS NOW DERIVED, NOT TYPED, AND IT IS AN ELLIPSE.
+    # Pass 5 left a 1.06 m circle at a hand-picked centre and the OUTER BOOT
+    # CORNER STUCK OUT OF THE WATER at 1.11 m - a small dark block sitting on
+    # the surface in the side and back views, exactly the sort of thing a
+    # viewer sees before anybody else does. It was found by measuring the dark
+    # slot's vertices below the waterline against the lobe radius at their own
+    # angle, not by staring at the render.
+    # Deriving a CIRCLE from that fixed it and broke the frame instead: man and
+    # machine are 1.62 m apart along U, so a circle covering both is 1.8 m of
+    # radius and the pair went to 5.77 m against a 5.60 m cell. A puddle is not
+    # round anyway - it is the shape of the floor it is lying on, and this
+    # floor is a channel. So the basin is an ELLIPSE ON THE MACHINE'S OWN AXIS,
+    # with both semi-axes COMPUTED from the things that must not be left dry -
+    # his boot corners and the posts' feet - against the SMALLEST lobe. The
+    # flood cannot leave a foot dry by construction, and it costs the frame
+    # nothing because it is long the way the machine is long.
+    lobe = (1.00, 0.88, 1.06, 0.93, 1.12, 0.90, 1.02, 0.86)
+    VX, VY = -UY, UX                              # across the machine's axis
+    # PASS 8 - THE WATERLINE, AND I HAD THE ELEVATION ARITHMETIC BACKWARDS.
+    # Pass 4 raised the surface to 0.30 and the front view came back right, so
+    # I called it closed. The BACK view still showed his boots through the
+    # water, and the reason is not coverage - it is REACH, and it is the wrong
+    # way round from how I first wrote it. An ortho ray at 6 degrees of
+    # elevation, aimed at the top of a 0.13 m boot, crosses the z = BZ plane
+    # (BZ - 0.13) / tan(6 deg) BEFORE it gets there: at BZ 0.30 that is 1.62 m
+    # of water that has to lie between the camera and the boot. From the front
+    # the man stands at the far end of the pool and there is nearly that much;
+    # from the back he is at the near edge and there is 0.22 m, so the camera
+    # looks under the surface and lands on the floor.
+    # Widening the pool to 1.6 m of margin was tried and it put the pair at
+    # 5.86 m against a 5.60 m cell, so the frame refused it - correctly.
+    # THE SURFACE COMES DOWN INSTEAD. At BZ 0.15 the required reach is 0.19 m,
+    # which the 0.22 m margin already has, and the flood covers his boots from
+    # every azimuth. It is a SHALLOWER flood than pass 4's and that is the
+    # honest version of this creature anyway: the line is "the water is coming
+    # up", not "the water is up". THE RULE, STATED SO IT IS NOT RE-DERIVED: at
+    # this elevation a raised surface hides what stands in it only if it
+    # reaches (height - object top) / 0.105 metres toward the camera.
+    BZ = 0.15
+    BCX, BCY = FX + UX * 0.95, FY + UY * 0.95
+    wet = [(FX + s_ * UX * 0.50, FY + s_ * UY * 0.50) for s_ in (-1, 1)]
+    for s_ in (-1, 1):
+        for ex, ey in ((0.19, 0.11), (0.19, -0.29), (-0.19, 0.11), (-0.19, -0.29)):
+            wet.append((MX + s_ * 0.26 + ex, MY - 0.09 + ey))
+    BA = BB = 0.0
+    for wx, wy in wet:
+        du = (wx - BCX) * UX + (wy - BCY) * UY
+        dv = (wx - BCX) * VX + (wy - BCY) * VY
+        BA, BB = max(BA, abs(du)), max(BB, abs(dv))
+    BA = (BA + 0.22) / min(lobe)
+    BB = (BB + 0.22) / min(lobe)
+    edge = []
+    for i in range(41):
+        t = TAU * i / 40.0
+        f = i / 40.0 * len(lobe)
+        k = int(f) % len(lobe)
+        k2 = (k + 1) % len(lobe)
+        w = lobe[k] + (lobe[k2] - lobe[k]) * (f - int(f))
+        du, dv = BA * w * math.cos(t), BB * w * math.sin(t)
+        edge.append(Vector((BCX + du * UX + dv * VX, BCY + du * UY + dv * VY, BZ)))
+    P.raw(surf([[Vector((BCX + (q.x - BCX) * u, BCY + (q.y - BCY) * u, BZ))
+                 for q in edge] for u in (0.0, 0.55, 1.0)], 0.030), 'glow')
+    P.raw(L.tube(edge, [0.050] * len(edge), 7), 'glow')
+    # PASS 4 - AND IT IS THE ELEVATION RULE BITING FROM THE OTHER SIDE. Pass 3
+    # raised the surface to 0.30 and HIS BOOTS WERE STILL VISIBLE UNDER IT: at
+    # 6 degrees of elevation a ray that clears the near edge of a raised sheet
+    # has dropped only 0.10 by the time it reaches the middle, so the camera
+    # looks UNDERNEATH the water and sees the floor it is supposed to have
+    # covered. A sheet is not a flood. So the water gets its own SIDE - a skirt
+    # from the lapping edge down to the floor - and becomes a VOLUME. It now
+    # hides the bottom of everything standing in it, which is the single thing
+    # that tells a viewer the floor has gone under, and that is the whole point
+    # of this creature.
+    for i in range(len(edge) - 1):
+        a_, b_ = edge[i], edge[i + 1]
+        P.raw(surf([[a_, b_], [Vector((a_.x, a_.y, 0.0)), Vector((b_.x, b_.y, 0.0))]],
+                   0.012), 'glow')
+
+    # --- ARMS. Short and thick, and BOTH MITTS ARE ON THE WHEEL at two
+    # different points on it: the upper one closed on the crank peg, the lower
+    # one on the rim. One hand on a wheel is a man leaning on a wheel; two
+    # hands at two points is a man TURNING it, and that is the fight in one
+    # silhouette. Each hand goes to the rim point NEAREST ITS OWN SHOULDER
+    # (scanned, see `nearest`), so neither arm reaches across the wheel.
+    limb(P, [SH_HI, ((SH_HI[0] + CP.x) / 2.0 + NX * 0.16,
+                     (SH_HI[1] + CP.y) / 2.0 + NY * 0.16, SH_HI[2] + 0.06),
+             (CP.x + NX * 0.22, CP.y + NY * 0.22, CP.z + 0.02)], 0.150, 0.120, 'body')
+    P.add(L.sphere(0.165, 0.160, 0.150, 10, 7), 'body',
+          loc=(CP.x + NX * 0.22, CP.y + NY * 0.22, CP.z + 0.02))
+    LA = nearest(SH_LO, -0.95, -0.15)
+    LR = rim(LA)
+    limb(P, [SH_LO, ((SH_LO[0] + LR.x) / 2.0 + NX * 0.10,
+                     (SH_LO[1] + LR.y) / 2.0 + NY * 0.10, (SH_LO[2] + LR.z) / 2.0 - 0.04),
+             (LR.x + NX * 0.10, LR.y + NY * 0.10, LR.z)], 0.145, 0.118, 'body')
+    P.add(L.sphere(0.160, 0.155, 0.148, 10, 7), 'body',
+          loc=(LR.x + NX * 0.12, LR.y + NY * 0.12, LR.z))
+    return P
+
+
+BUILDERS.update({"sluicekeeper_chibi": sluicekeeper_chibi})

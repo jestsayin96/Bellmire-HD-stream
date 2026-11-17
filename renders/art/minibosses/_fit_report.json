@@ -1262,6 +1262,67 @@
     }
    },
    "proving_views": 3
+  },
+  "pressman": {
+   "creature_h": 2.85,
+   "hero_h": 2.45,
+   "ratio": 1.16,
+   "pair_w": 4.47,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 60839,
+      "vis": 60839,
+      "delta": 63083,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43685,
+      "vis": 43685,
+      "delta": 54628,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 39218,
+      "vis": 39218,
+      "delta": 40351,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 38859,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 60662,
+      "vis": 60662,
+      "delta": 62634,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44034,
+      "vis": 44034,
+      "delta": 46579,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -1274,51 +1335,13 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve"
+  "pressman"
  ],
  "asked": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve"
+  "pressman"
  ],
  "blank_check": {
-  "files": 60,
+  "files": 3,
   "failures": []
  },
  "verdict": "GREEN"

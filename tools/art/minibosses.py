@@ -5962,12 +5962,17 @@ def tapster():
     # both are the real objects now.
     # IT DID NOT FIX THE CASK, AND THE PICTURE SAID SO WHILE THE REPORT STAYED
     # GREEN. The staves still came back as TORN SHARDS WITH HOLES BETWEEN THEM.
-    # PASS 3 PROBED THE FILE INSTEAD OF GUESSING TWICE: Barrel is ONE object
-    # with TWO material slots - 0 MI_Trim_Furniture, the wooden cask, z 0.003
-    # to 0.901 at radius 0.348; 1 MI_Trim_Metal, the pack's own hoops, z 0.150
-    # to 0.733 at radius 0.349. ONE MILLIMETRE OF CLEARANCE. The shards were
-    # Z-FIGHTING between two coincident surfaces, which no decimate ratio was
-    # ever going to change.
+    # PASS 3 PROBED THE FILE INSTEAD OF GUESSING TWICE and got the CAUSE WRONG,
+    # corrected here 17 Nov 19:00 CT - see docs/art/PROPS_SLOT_AUDIT.md. It read
+    # the two slots' overall MAX radii (0.343 wood, 0.346 metal), called the
+    # 3 mm between two numbers taken at different heights "one millimetre of
+    # clearance", and blamed Z-FIGHTING. Measured properly the slots do not
+    # touch (no triangle intersection, 2.245 mm nearest surface distance, and
+    # perpendicular where they are closest), and the whole 824-face Barrel
+    # renders CLEAN with both slots. THE SHARDS WERE THE 110-FACE CAP - a
+    # decimate ratio of 0.1335 on a model made of 240 loose parts. Dropping
+    # slot 1 worked only because 392 faces then fell under the 440 cap this
+    # same change raised it to. The cap was the cause and the cap was the cure.
     # So slot 1 is dropped and the cask is taken alone. This body draws its own
     # four hoops below at 0.044 m - heavier than the pack's and standing clear
     # of the staves - so nothing is lost by it.
@@ -6171,3 +6176,260 @@ def tapster():
 
 
 BUILDERS.update({"tapster": tapster})
+
+
+# ---------------------------------------------- 22 THE PRESSMAN: a yoke of irons
+#
+# PRISON, and the theme argument is measured off dungeon_hd.gd:737-743 the same
+# way the Tanner's and the Loader's were: the miniboss roll is 35 on barracks
+# and workshop, 10 on shrine and crypt, and 15 on prison and every unlisted
+# theme. PRISON HAS EXACTLY ONE BODY BEHIND IT - the Gaoler - so every miniboss
+# a prison floor has ever shown is the same creature.
+CANON.update({
+    "pressman": ("The Pressman", 2.85, (0.62, 0.60, 0.56), (0.96, 0.74, 0.30),
+                 "prison",
+                 "IT PRESSES YOUR FALLEN - a hero that goes down in this room is "
+                 "collared and stood back up on ITS side; get them up, or break the "
+                 "yoke, before the collar shuts",
+                 0.88, "Irons just came off the yoke."),
+})
+ORDER = ORDER + ["pressman"]
+
+
+def _open_ring(P, c, r, slot='dark', rad=0.034, n=16, gap=0.30, axis='y',
+               phase=0.0, tilt=0.0, yaw=0.0):
+    """A collar that is NOT closed: an arc of iron with a visible gap, which is
+    the whole of what this creature is about. `gap` is the fraction of the
+    circle left out, and the opening is turned by `phase`.
+
+    It is drawn as an arc and not as a torus with a hole punched in it because
+    the gap has to survive at stream distance: an open collar silhouettes as a
+    C and a closed one as an O, and that is the difference between 'empty' and
+    'occupied' at a glance.
+    """
+    pts = []
+    sweep = TAU * (1.0 - gap)
+    cy, sy = math.cos(yaw), math.sin(yaw)
+    for i in range(n + 1):
+        t = phase + sweep * i / n
+        ct, st = math.cos(t), math.sin(t)
+        if axis == 'y':
+            # the ring lies in a VERTICAL plane turned by `yaw` about Z. At
+            # yaw 0 it faces the front camera and is EDGE-ON from the side -
+            # which is pass 1's fault, found by looking at side.png: four
+            # collars became four sticks. Turned 40-55 degrees a ring is an
+            # ellipse from both cameras and reads as a ring from both.
+            pts.append(Vector((c[0] + r * ct * cy, c[1] + r * ct * sy + r * st * math.sin(tilt),
+                               c[2] + r * st * math.cos(tilt))))
+        else:
+            pts.append(Vector((c[0] + r * ct * math.cos(tilt), c[1] + r * st,
+                               c[2] + r * ct * math.sin(tilt))))
+    P.raw(L.tube(pts, [rad] * len(pts), 5), slot)
+
+
+def pressman():
+    """IT PRESSES YOUR FALLEN. It does not kill the party and it does not call
+    anyone in from outside: it waits for one of you to go down, puts a collar on
+    them where they lie, and stands them up facing the other way. Every hero it
+    takes is a hero the rest have to fight, so the fight gets harder at exactly
+    the rate you are losing it. The counter is a decision and not a damage race
+    - get the downed hero up before the collar shuts, or break the yoke the
+    irons hang on and it has nothing left to take.
+
+    WHY IT IS NOT ONE OF THE TWENTY-ONE, checked against CANON by parsing the
+    file rather than by remembering it. The set summons, armours itself, drags,
+    darkens, will not stay down, bars the door, steals gear, heals the pack,
+    raises water, plants the ground, pre-sets the room, scales with the fire,
+    rings from elsewhere, sets the floor, comes apart in two, arms the room,
+    weighs you down, cuts the room in two, refuses the same blow twice, takes
+    the haul and drinks what you brought. NOT ONE OF THEM CHANGES WHO IS ON
+    WHICH SIDE. The three near neighbours, named rather than waved at:
+      - the DRILLMASTER summons, but what arrives is ITS garrison. Reinforcement
+        from outside the fight. This one's reinforcement is YOUR OWN LINE, which
+        means killing it is the only way to get them back;
+      - the GAOLER drags a STANDING hero across the floor to itself - a position
+        change, and the hero is still yours. This one takes a hero who has
+        already fallen, and the loss is not position, it is the roster;
+      - the SEXTON will not stay DOWN itself. That is its own body. This is
+        yours.
+
+    SILHOUETTE INTENT - A MAN UNDER A LONG BAR, AND FOUR EMPTY COLLARS HANGING
+    OFF IT:
+      - the mass is ABOVE THE HEAD, so the outline is a T with holes in the
+        crossbar. Nothing in the set ends that way: the Drillmaster's disc is
+        off to one side and solid, the Tapster ends in a row of SOLID pendant
+        flasks, the Hurdleman's panel is a filled rectangle, the Quartermaster's
+        sheaf bristles. Four open rings read as NEGATIVE SPACE, and negative
+        space is the one thing a still picture can say about a mechanic that has
+        not happened yet: those are empty, and they are your size;
+      - THE COLLARS ARE STAGGERED IN Y, 0.14 m apart, and that is the Reeve's
+        pass-2 fault applied first time rather than found again. Side-on the
+        camera looks along X, so four rings all hung at the same depth collapse
+        into ONE ring and the crossbar becomes a stick. Staggered, the side view
+        still counts four;
+      - ONE COLLAR IS SHUT AND IT IS ON THE FLOOR, with its chain running back
+        to the man's heel. It is the only closed O on the body, it is the only
+        lit thing on the body, and it gives the side and back views a long
+        horizontal at ground level where everything else is up at head height;
+      - BOTH ARMS RUN ACROSS THE PICTURE IN X - the Tanner's pass-3 and the
+        Reeve's pass-3 finding. His near hand holds an open collar out to the
+        room at chest height (GIVE ME YOUR WRIST); his far hand is up on the
+        yoke bar, which ties the man and the bar into one creature instead of a
+        man standing under furniture;
+      - WEAR 0.88 is the second-highest in the set after the Sluicekeeper's 0.95
+        and the Snuffer's 0.90, and it is the irons that justify it, not the
+        coat: this is the oldest fixed kit on the floor and it has never once
+        been out of service. Mr. E's rule 2 - condition is the receipt, and this
+        receipt reads USED, CONSTANTLY, BY SOMEBODY ELSE.
+
+    Front is -Y, the same as the twenty-one before it. Static: no anims entry.
+    """
+    P = Parts("pressman")
+    P.spans = {}
+    P.used_pack = False
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = -0.08                       # the man, a little left of centre
+    HIP, SH, HEAD = 0.94, 1.52, 1.80
+    BAR_Z, BAR_HALF = 2.12, 0.86     # the yoke: above the head, 1.72 m across
+
+    # ---- THE MAN. Planted, stooped a little under the weight of the bar.
+    _i_man = len(P.items)
+    _legs(P, MX, y=0.0, hip=HIP, stance=0.20)
+    limb(P, [(MX, 0.10, HIP - 0.06), (MX - 0.02, 0.02, 1.22), (MX - 0.05, -0.06, SH)],
+         0.235, 0.255)
+    P.add(L.box(0.56, 0.30, 0.095), 'dark', loc=(MX - 0.01, -0.02, 1.08))     # belt
+    # the coat: a short flare off the belt so he is a working man and not armour
+    # PASS 2, FAULT 1: pass 1's coat was a 0.40 m cone 0.46 m long and it read
+    # as A WOODEN TUB ROUND HIS HIPS from both cameras - wider than his
+    # shoulders and stopping above the knee. Narrower than the shoulders and
+    # down past the knee is a coat.
+    # PASS 3: narrowing it did not stop it reading as a VESSEL - a straight
+    # 0.74 m tube with a flat bottom hung between two legs is a churn, and the
+    # side view showed the near SHIN COMING THROUGH ITS FRONT PANEL at the
+    # knee, which is a clip and not a style. A short skirted coat to mid-thigh
+    # clears the knee by construction and stops the tub read at the same time:
+    # the legs are then OUTSIDE the outline where they belong.
+    # PASS 5, THIRD GO AT THE SAME ELEMENT AND THE FIRST ONE THAT ASKS WHY
+    # RATHER THAN HOW BIG. Passes 1-3 made the coat narrower and then shorter
+    # and it still read as a TUB AT HIS HIPS on the pair shot, because the
+    # fault was never the size: a cone that TAPERS INWARD with a flat bottom is
+    # the shape of a vessel, and cloth does the opposite - it hangs and FLARES.
+    # Flared, falling to mid-shin and sitting under a belt, it is a coat.
+    P.add(aim(L.cone(0.270, 0.355, 0.62, 12), (MX - 0.01, -0.02, 1.06), (0.0, 0.0, -1.0)),
+          'body')
+    for s in (-1, 1):
+        P.add(L.sphere(0.165, 0.155, 0.135, 12, 8), 'body', loc=(MX - 0.05 + s * 0.28, -0.06, SH))
+    # head, low flat cap, face kept clear of the bar above it
+    P.add(L.sphere(0.152, 0.168, 0.172, 14, 9), 'bone', loc=(MX - 0.06, -0.19, HEAD))
+    P.add(aim(L.cone(0.225, 0.215, 0.055, 14), (MX - 0.06, -0.19, HEAD + 0.14), (0.0, 0.0, 1.0)),
+          'dark')
+    eyes(P, (MX - 0.06, -0.09, HEAD - 0.01), 0.056, 0.028, -0.26)
+    _span("man", _i_man)
+
+    # ---- THE YOKE. A harness over the shoulders, two short uprights, one bar.
+    _i_yoke = len(P.items)
+    P.add(L.box(0.86, 0.19, 0.085), 'dark', loc=(MX - 0.05, 0.03, SH + 0.13))   # shoulder pad
+    for s in (-1, 1):
+        # PASS 2, FAULT 2: at s*0.26 and y -0.04 these two posts stood either
+        # side of the face and one crossed the chin - the head read as a man
+        # looking out through bars, which is the WRONG creature's idea.
+        # Outboard to 0.40 and back to y +0.17, behind the head entirely.
+        limb(P, [(MX - 0.05 + s * 0.40, 0.14, SH + 0.10),
+                 (MX - 0.04 + s * 0.38, 0.17, BAR_Z - 0.06)], 0.062, 0.050, 'dark')
+    P.add(L.box(BAR_HALF * 2.0, 0.115, 0.115), 'dark', loc=(MX, 0.06, BAR_Z))
+    for s in (-1, 1):                                        # squared ends, as forged
+        P.add(L.box(0.085, 0.165, 0.165), 'dark', loc=(MX + s * BAR_HALF, 0.06, BAR_Z))
+    _span("yoke", _i_yoke)
+
+    # ---- FOUR EMPTY COLLARS. The mechanic, and the only part of it a still
+    # picture can carry. Staggered in Y so the SIDE view still counts four.
+    _i_coll = len(P.items)
+    # (dx, dy, drop, yaw). PASS 2: every ring is turned 38-58 degrees off the
+    # front plane. dy also widened to +/-0.20 - in pass 1 the two left collars
+    # sat behind the raised arm and the head and could not be counted at all.
+    HANG = ((-0.76, 0.20, 0.30, 0.95), (-0.34, 0.22, 0.40, -0.72),
+            (0.26, 0.18, 0.28, 0.68), (0.70, -0.14, 0.38, -1.00))
+    for dx, dy, drop, yw in HANG:
+        x, y = MX + dx, 0.06 + dy
+        # the link it hangs by - short, so the collar stays up near the bar
+        limb(P, [(x, y, BAR_Z - 0.06), (x, y, BAR_Z - 0.06 - drop + 0.21)],
+             0.026, 0.024, 'dark')
+        _open_ring(P, (x, y, BAR_Z - 0.06 - drop), 0.205, 'dark', rad=0.036,
+                   n=16, gap=0.28, axis='y', phase=1.35, yaw=yw)
+    _span("collars", _i_coll)
+
+    # ---- THE ONE THAT IS SHUT, on the floor, with its chain run back to him.
+    # Closed O against four open Cs, lit from inside, and the only thing on this
+    # body below knee height.
+    _i_taken = len(P.items)
+    # PASS 2, FAULT 5: laid FLAT with a filled lit disc inside it, this read as
+    # A FRYING PAN - the chain was its handle and the glow was its contents. On
+    # edge against his heel it is a collar, and the light is now a thin ring
+    # inside the iron rather than a solid plate of dough (the Reeve's pass-4
+    # lesson, which I had taken and then undone).
+    # PASS 4, AND THE SAME FAULT SURVIVED TWO FIXES IN TWO DIFFERENT COSTUMES.
+    # Flat with a lit plate in it, it was a frying pan. Stood on edge at the
+    # end of a chain it became A WHEEL ON A STICK - from the side, a scooter.
+    # Both times the fault was the same one: A RING AT THE END OF A LINE IS A
+    # TOOL, whatever plane it is in. So the iron goes DOWN at the heel, laid
+    # over on the floor and tucked half behind the boot, and the chain runs to
+    # it along the ground instead of out from the body. It is now the only
+    # thing in the picture lying down, which is what it is meant to say.
+    TK = (MX + 0.50, 0.30, 0.055)
+    _open_ring(P, TK, 0.175, 'dark', rad=0.038, n=18, gap=0.0, axis='z',
+               phase=0.0, tilt=0.26)
+    _open_ring(P, TK, 0.138, 'glow', rad=0.012, n=18, gap=0.0, axis='z',
+               phase=0.0, tilt=0.26)
+    # PASS 3: one straight taut diagonal into a ring is a RACKET, from both
+    # cameras. Chain has no tension in it when the other end is on the floor -
+    # so it falls to the ground first and lies along it, which also gives the
+    # side and back views the long low horizontal they were short of.
+    link = [Vector((MX + 0.30, 0.10, 0.96)), Vector((MX + 0.46, 0.16, 0.60)),
+            Vector((MX + 0.56, 0.22, 0.26)), Vector((MX + 0.60, 0.26, 0.08)),
+            Vector((TK[0] + 0.14, TK[1] + 0.02, TK[2] + 0.01))]
+    P.raw(L.tube(link, [0.030] * 5, 5), 'dark')
+    _span("taken", _i_taken)
+
+    # ---- THE ARMS, BOTH ACROSS THE PICTURE IN X.
+    _i_arms = len(P.items)
+    # PASS 2, FAULT 3, AND IT IS THE ONE THAT WOULD HAVE EMBARRASSED THE SET.
+    # Pass 1 ran this arm STRAIGHT UP to the bar, and with a long loaded bar
+    # overhead and both ends squared off the whole creature read as A MAN
+    # PRESSING A BARBELL. For a thing called the Pressman that is not a near
+    # miss, it is the picture naming itself wrong. The arm comes down and takes
+    # the CHAIN of the one it has already collared, which says the same thing
+    # about man-and-yoke being one creature and says the mechanic as well.
+    limb(P, [(MX - 0.30, -0.08, SH - 0.04), (MX - 0.42, -0.14, 1.26),
+             (MX - 0.30, -0.10, 1.00)], 0.088, 0.070)
+    P.add(L.sphere(0.090, 0.085, 0.080, 10, 7), 'bone', loc=(MX - 0.28, -0.10, 0.96))
+    hang = [Vector((MX - 0.27, -0.10, 0.94)), Vector((MX - 0.18, -0.04, 0.66)),
+            Vector((MX + 0.04, 0.04, 0.46)), Vector((MX + 0.30, 0.10, 0.96))]
+    P.raw(L.tube(hang, [0.028] * 4, 5), 'dark')
+    # near arm out to the room, holding an open collar at chest height
+    limb(P, [(MX + 0.23, -0.08, SH - 0.04), (MX + 0.50, -0.20, 1.34),
+             (MX + 0.72, -0.26, 1.26)], 0.088, 0.070)
+    P.add(L.sphere(0.092, 0.086, 0.082, 10, 7), 'bone', loc=(MX + 0.75, -0.27, 1.25))
+    _open_ring(P, (MX + 0.92, -0.30, 1.22), 0.195, 'dark', rad=0.034, n=16,
+               gap=0.30, axis='y', phase=0.35, tilt=0.42)
+    _span("arms", _i_arms)
+
+    # ---- THE LIST. One ornament, and it is the lawful-looking part the way the
+    # Reeve's seal and the Tapster's slate were: a tally board at the belt with
+    # four struck lines on it. Four names, four collars.
+    _i_list = len(P.items)
+    # PASS 2, FAULT 6: at x-0.30 the board was INSIDE the coat's outline and
+    # one sliver of it showed. Outboard and forward, on the hip, clear of both.
+    P.add(L.box(0.22, 0.028, 0.30), 'bone', loc=(MX - 0.44, -0.26, 1.00),
+          rot=(0.0, 0.0, 0.22))
+    for i in range(4):
+        P.add(L.box(0.016, 0.012, 0.115), 'dark',
+              loc=(MX - 0.50 + i * 0.040, -0.276, 1.01), rot=(0.0, 0.09 * (i - 1.5), 0.22))
+    _span("list", _i_list)
+
+    return P
+
+
+BUILDERS.update({"pressman": pressman})

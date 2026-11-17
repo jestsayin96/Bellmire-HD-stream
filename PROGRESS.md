@@ -8214,3 +8214,9 @@ Twelve `.b22_*.log` / `.b22_*.rc` files written at the worktree root and DELETED
 Godot closed, lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. No secrets written anywhere.
+
+C-83 (2026-11-17 CT, clock 05:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a fourth time (lore_lines.json only)
+- TAKE THIS NEXT (04:58 CT block) gave CONTENT: keep going in `barks` for depth; four dead pools and the 29 trick-only shape lines left alone. C-55 already done.
+- data/lore_lines.json `barks`: +71 lines. enter +16, lord +11, trap +11, hurt +12, drink +11, misfire +10. Counts now enter 175, lord 169, trap 171, hurt 171, drink 163, misfire 167. Plain register, no floor counts.
+- VALIDATION OK: all four owned files parse; every other top-level key equal on a parsed compare; each existing bark list an unchanged prefix of its new list; all entries strings; no case-insensitive duplicate added (cross-list duplicates: 7 before, 7 after).
+- CODE WIRING: none. delve.gd:3432 reads `barks` by kind.

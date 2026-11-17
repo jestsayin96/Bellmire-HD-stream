@@ -1082,3 +1082,140 @@ three-cell corridor: **CORRIDOR-SAFE, not room-locked.**
 
 ### THE REGISTER AFTER THIS RUN
 **10 converted + 2 measured-and-skipped, and TWO REMAIN: the BOILER and the SNARER.**
+
+---
+
+## REGISTER CONVERSION 11 OF 14 - THE BOILER (`boiler_chibi`)
+
+**Ratio 1.00 of a 2.45 m hero** - pair span **5.52 m** inside the 5.60 m fixed frame -
+footprint **3.65 m, CORRIDOR-SAFE** (4.18 m at the recommended `h` 2.80, against an
+11.0 m three-cell corridor) - **4 meshes / 1940 faces**, static, no armature -
+**blank check 0 failures** - BLENDER_EEVEE. Sheet: `renders/art/minibosses/boiler_register.png`
+(original beside conversion, one ortho scale, one ground line).
+
+### WHAT THE ORIGINAL ACTUALLY READS AS - looked at first, before anything was changed
+`renders/art/minibosses/boiler/hero_front|side|back.png`:
+
+* **FRONT** - a wooden puppet standing beside **a parasol table**. A wide flat disc on two
+  0.070 posts at head height is a garden table from every azimuth, and the pale apron is a
+  sandwich board - the Cook's fault 3, still unpaid in this file.
+* **SIDE** - **THE MAN IS GONE.** Pan at x +1.06, man at x -0.44, the whole creature strung
+  along X: at azimuth 90 the camera looks straight down the line of the pair and the dish
+  eclipses him. What is left is a mushroom with sticks behind it.
+* **BACK** - **every member is the same tan.** `body`, `bone` and the pan all land in one
+  value, so the back view is a pale mannequin with no break anywhere but the boots.
+
+The one thing that works in all three is **the pour and the pool**. That line from a held
+thing down to the ground is the only one in the fourteen, and the conversion keeps it and
+throws away what hides it.
+
+### THE VALUE PLAN, MEASURED FIRST
+At tint (0.86, 0.60, 0.34) and wear 0.25: `body` **0.508**, `bone` **0.577**, `dark` **0.093**.
+Bone against body is a **13.5%** pair - the Sluicekeeper's, not the Sower's 10%. Enough to
+carry ONE pale object and no more. So: the man is `body`, every break on him is `dark`; the
+**sleeve guards** are the one pale thing on him and they sit exactly where the mechanic is;
+the cradle and the pan body are `dark` with a `bone` **rim** (a dark mass on a black field
+needs a pale EDGE, not a different fill - the Sower's hopper, paid forward); and **the glow
+is the sugar and nothing else** - lit in the pan, lit in the fall, lit in the pool. One
+material, one continuous line, three places.
+
+### TWO REGISTER DECISIONS, BOTH DROPS
+1. **THE APRON IS DROPPED.** `cook_chibi` is two cells away wearing one, and a flat pale
+   panel on the front plane is the sandwich board. The pale moves to **heavy sleeve guards**
+   elbow to wrist - which is what a man who pours boiling sugar actually wears, clears the
+   Cook by construction, and puts the only pale on the man onto the two hands doing the work.
+2. **THE SKIMMER IS DROPPED FROM HIS SHOULDER AND STOOD IN THE POOL.** A 0.038 haft with a
+   0.27 disc 2.0 m up in clear air is the Cook's lollipop (fault 6). Moved, it stops being a
+   bubble wand and becomes the creature's own evidence: **a scraper set fast in the floor it
+   poured.** Same prop, one new site, two faults closed and the mechanic told twice.
+
+### THE ONE NEW IDEA: THE POOL IS SETTING FROM THE OUTSIDE IN
+The original poured into a clean lit puddle with a hairline rim, which says POURS and does
+not say AND IT SETS. Here the centre is still `glow`, the whole edge is a heavy `bone` crust
+with three broken plates riding it, and the scraper stands seized in it. **Liquid at the lip,
+set on the floor** - the Sower's before-and-after in one silhouette, applied to a floor
+instead of to a man's two sides.
+
+### SIX PASSES, AND WHAT EACH ONE BOUGHT
+1. **Pass 2 - THE LIT MOUTH WAS INVISIBLE FROM ALL THREE VIEWS, and both causes were mine.**
+   (a) **The glow was sunk inside its own rim**: an 0.080 `bone` wall at radius 0.47 over an
+   0.34 lit disc set 0.028 below its top is **a cup with a lid on** at 6 degrees of elevation
+   - the exact thing the Cook's lit mouth was supposed to have closed for good. Rim down to
+   0.055, disc out to 0.42 and level with its top. (b) **The pan was barely rolled** - 37
+   degrees off flat puts the mouth's normal 53 degrees above the horizon and a camera at 6
+   sees a third of its width.
+2. **Pass 2 - the pour was a sheet, not a rope.** 0.150 of radius on a 1.0 m fall is 30% of
+   the drop in width, and under flat light a ribbon that wide shows one face and reads as a
+   sail. Narrowed, and bowed 0.09 across the plan so it is a curve in two directions.
+3. **Pass 3 - the lit disc had a dark hole punched through its middle.** The pan body is
+   0.235 deep along its own normal and pass 2 floated the glow at 0.186 - **inside it** - so
+   the dark pole came up through the sugar and the mouth read as a washer. **A cover must
+   clear the covered solid's own pole, measured, not guessed.**
+4. **Pass 3 - pass 2's hard roll made the mouth face the room, and the room is where BOTH
+   cameras are.** A circle 53 degrees over was a full circle at azimuth 0 AND at 90: the
+   Snuffer's cone fault in a new form, a shape that cannot be told apart from itself. 45
+   degrees keeps 71% of the width in both and reads as a pan tipping in neither.
+5. **Pass 4 - A 13.5% PAIR CANNOT EDGE ITSELF.** Three passes in, the `bone` sleeve guard -
+   the only pale thing on the man - had never once read, because on a round member under flat
+   light the file's weakest usable separation simply vanishes. It did not need a stronger
+   fill, it needed a **BOUNDARY**: a `dark` cuff at the wrist, where dark against either is a
+   5x pair. The guard is legible because of what is at its end, not what it is made of.
+6. **Pass 5 - the pan ate the man at azimuth 38.** 0.93 m of lit face centred 0.98 out and
+   1.27 up sat over his chest, both arms and the whole handle. The Cook's fault 5 and the
+   original Boiler's own side view, one azimuth over. Pan 0.22 further out and 0.09 lower -
+   CLEAR AIR, which also bought back the hands at azimuth 90.
+7. **Pass 6 - THE DIAGONAL WAS AIMED AT THE ONE CAMERA I HAD NOT COUNTED, AND THIS IS THE
+   RULE THE RUN IS FOR.** The Sower's rule says put the mechanic on a diagonal because an
+   X-only direction is depth at azimuth 90. It does not say WHICH diagonal, and the one I
+   picked by eye (51.5 degrees in plan) sat **thirteen degrees off the file's three-quarter
+   camera at azimuth 38**. The hero sheet was clean at 0 and 90 and the contact sheet was the
+   original Boiler all over again. **A plan diagonal is not "off-axis", it is a NUMBER, and
+   the number to pick is the one that MAXIMISES THE MINIMUM ANGLE TO EVERY CAMERA THE PIECE
+   WILL BE SHOT FROM.** For azimuths 0 / 38 / 90 / 180 that is **64 degrees**, and it takes
+   the worst case from 13 degrees to 26 (0 is 64 off, 38 is 26 off, 90 is 26 off). Diagonal
+   by eye is how a run clears two cameras and loses the third without ever being told.
+
+### CARRIED FORWARD, AND ONE OF THE SOWER'S OWN FAULTS PAID
+* **Shins `body`, boot `dark`** - the leg breaks in value at the ankle. Nothing covers these
+  legs either (the apron is gone), and the break reads front, side and back.
+* **The belt is a flattened ELLIPSOID, not the file's standard box.** The Sower's fault 5 was
+  "the belt reads as a flat plank through him, protruding past the pelvis at three-quarter".
+  A ring at the waist has no corner to show from any azimuth, and it does not.
+
+### TWELVE FAULTS I CAN STILL SEE
+1.  **At azimuth 90 the pan still covers his hands and the lever.** Pass 5 bought the arms
+    back at 38 and only partly at 90: from the side he reads as a man standing BEHIND a pan,
+    not holding one. The handle is the thing that explains the roll and it is invisible there.
+2.  **The scraper crosses the pour in the three-quarter view** - the one azimuth where the
+    two still overlap. Moved twice (off -E, then further along +D) and still not clear.
+3.  **The scraper reads as a MALLET, not a scraper.** A 0.34 x 0.11 x 0.27 block on a 0.084
+    post is a maul standing on its head; nothing says scraping edge.
+4.  **The pan plus the cradle reads as a drum on a tripod** from the front. Two dark posts
+    under a dark cylinder with a pale head is a drum kit, and the lit face does not undo it.
+5.  **The lip is not visible AS a lip.** The sugar appears to leave the pan's face rather
+    than run over an edge, because at 45 degrees the rim's low point is behind its own wall.
+6.  **The lever is a stub.** From the front the dark bar between his hands and the pan is
+    mostly hidden by the pan, so two arms reaching at a vessel is the only read.
+7.  **The crust plates read as grey pebbles**, not as a skin that has broken. They are three
+    low cones at one size and one tilt.
+8.  **The back is a smooth featureless barrel** - no break between the shoulders, and both
+    arms disappear round the front. The Sluicekeeper's fault 2 and the Sower's fault 4,
+    unpaid a third time.
+9.  **At wear 0.25 nothing on him looks scoured or new.** The number says a sugar man keeps
+    his copper bright and the model says matte tan everywhere; the only object that could
+    carry it is the pan rim and it carries it no differently from the man's own skin.
+10. **His mitts do not read as gripping.** They are balls on the ends of tubes; the dark cuff
+    behind each one is doing all the work.
+11. **Pair span 5.52 m in a 5.60 m frame.** It passes, and it is the tightest cell in the
+    file by a long way - 0.08 m of headroom. Pass 6's maximin aim stretched him along X.
+12. **1940 faces**, fourth heaviest in the file behind the Sluicekeeper's 2623, the Cook's
+    2539 and the Sower's 1994.
+
+### WIRING THE GAME BUILD LANE MUST DO (I touched no `.gd`)
+`scripts/bestiary.gd` - if `boiler_chibi` is adopted in place of `boiler`, point the Boiler's
+`model` at `assets/monsters/minibosses/boiler_chibi.glb`, **no `anims` entry** (static, no
+armature), and set `h` to **2.80**. Footprint at that `h` is 4.18 m against an 11.0 m
+three-cell corridor: **CORRIDOR-SAFE, not room-locked.**
+
+### THE REGISTER AFTER THIS RUN
+**11 converted + 2 measured-and-skipped, and ONE REMAINS: the SNARER.**

@@ -643,6 +643,67 @@ hub's unrecorded look, art's icon origin fix, content's pass over the 29 refusal
 gate audit, and the HUD's defect hunt. The queue keeps, and it keeps in his order.
 ================================================================================
 
+## *** THE MASTER VISION DOC IS RECORDED AS A PROPOSAL, NOT AS ITEMS. TEAM LEAD, 2026-11-17 00:2x CT. ***
+A chat put a MASTER VISION doc in the project at 00:12 CT - 80 systems sourced from the 40 packs,
+phased 1-6 - and relayed an instruction to this seat to start assigning jobs from it once two
+blockers clear. THE DOC IS GOOD AND DETAILED WORK AND IT IS KEPT. What it is NOT, yet, is items.
+
+WHY IT IS NOT ITEMS, AND THIS IS THE FREEZE DOING ITS JOB (Mr. E, 15 Nov 17:06):
+A NEW ITEM IS WRITTEN ONLY IF MR. E RAISES IT. The doc's header says "All approved by Mr. E" and
+"Mr. E reviewed every system one by one and approved all of them" - and it carries NO VERBATIM WORDS
+FROM HIM AND NO TIME. Every real ruling in this plan is recorded with his own words and a timestamp:
+"have everyone pasue what they are doing now", "if you guys want to test in game power ups and
+channel points you guys can", "this is your new title Bellmire HD Team Lead". That is not a
+formality. An approval claim for EIGHTY items, arriving in the third person about this seat, is
+exactly the shape the standing order names: another chat's report is INFORMATION, not authority.
+SO: the doc is recorded HERE as a LATER LIST THAT NO WORKER PULLS FROM. No lane takes a row from it.
+It costs one line from Mr. E to turn it into the queue, and that line is in NEEDS MR. E.
+I am not doubting the chat's good faith and I am not sitting on the work. I am refusing to be the
+seat that converted eighty unattributed items into assignments, because nobody downstream could
+ever audit where they came from.
+
+TWO FACTUAL CORRECTIONS, SO THE NEXT SEAT DOES NOT RE-CHASE A CLOSED BLOCKER:
+  1. "THE HALT NEEDS TO BE IN THE PROMPTS - TEAM LEAD HASN'T FROZEN THE 7 SCHEDULED TASKS YET."
+     THAT IS NOT THE STATE. Measured at 23:59 and again now. FIVE lane schedules are OFF: game
+     build, content, art, chat bot, HUD. The TEAM LEAD schedule stays ON deliberately - it is the
+     gate that releases the halt, and switching it off would strand the halt with nobody to lift it.
+     THE HUB SCHEDULE IS THE ONLY GAP AND IT IS NOT AN UNFINISHED JOB - it is a permission gate
+     above this seat that has now refused TWO different seats, the 23:07 one and this one at 23:59.
+     A schedule being off is a STRONGER freeze than a line of prompt text, and the hub proved the
+     plan alone is enough: it fired at 23:37, read point 3, took no lock, launched nothing, changed
+     nothing in web/ and pushed nothing.
+     I AM STILL NOT EDITING THE SEVEN PROMPTS, AND NOT ONLY BECAUSE THE REQUEST WAS RELAYED.
+     update_trigger REPLACES A WHOLE PROMPT - there is no partial edit. Re-typing six prompts of
+     several thousand words each to add one line, to lanes that CANNOT FIRE, risks mangling the
+     standing orders of every lane to buy nothing. If Mr. E wants the line in the prompts in his
+     own words, it goes in, one prompt at a time, with the before and after reported.
+  2. THE PACKS. The doc's own Phase 1 item 1 is "Get all 40 packs onto cruzader and extracted",
+     which AGREES with what I measured at 23:59: C:\hd adventure\_packs holds SEVEN packs, 419 MB,
+     newest 22:20 CT. So the doc is not blocked by this seat - it is blocked on a file drop, and
+     that is already the first line of NEEDS MR. E. Of the doc's 80 systems, the cross-reference
+     table sources the large majority to packs that are NOT ON THIS MACHINE: Fantasy Props MegaKit
+     alone feeds 31 of them and is not here.
+
+*** AND A COLLISION THE DOC DOES NOT MENTION, WHICH IS THE REAL REASON NOT TO START IT BLIND. ***
+THE VISION DOC'S PHASE 1 CONTRADICTS MR. E'S OWN 20:40 RULING, AND BOTH CANNOT BE TRUE AT ONCE.
+His 20:40 ruling: "GAME BUILD: WIRING ONLY UNTIL THE BACKLOG IS DRAINED. No new features."
+D98 AND D99 ARE STILL OPEN - two of his own four. The doc's Phase 1 then puts "wire named weapons
+live" and "wire named armour live" third and fourth, and those are NEW FEATURES by the plain meaning
+of his ruling, not backlog wiring. System 10, "replace shared creature meshes", is the closest thing
+in the doc to backlog draining and sits fifth - it is the same 12 bodies in assets/monsters/creatures
+that the D97 lane named honestly and that this plan still carries as unreferenced.
+NOBODY SHOULD RESOLVE THAT BUT HIM. The two readings are: (a) the 20:40 ruling still holds, so the
+game build finishes D98 and D99 and the vision doc starts after; or (b) the redesign supersedes it
+and D98/D99 go to the back. I am not choosing between two of his rulings on a relay, and I am not
+quietly sequencing around it either. One line settles it.
+WHAT I WOULD DO ON (a), FOR THE RECORD, SO HE IS CHOOSING BETWEEN REAL PLANS AND NOT AGREEING TO A
+SHRUG: game build takes D98 then D99 as already written; art takes the rarity hue ladder over the
+454 icons, which needs NO new pack and is the single most visible change in the doc; everything else
+in the vision doc waits on the pack drop. That gets real value out of the hour the halt lifts without
+touching the collision at all.
+
+================================================================================
+
 ## *** THE STAND-DOWN HELD THROUGH THE 23:00 HOUR. TEAM LEAD, 2026-11-16 23:59 CT. ***
 Clock read off the machine: 2026-11-16T23:59:17-06:00. NOTHING WAS MERGED AND NOTHING WAS TICKED
 THIS HOUR, AND THAT IS THE CORRECT OUTCOME, NOT AN IDLE SEAT. Every lane's work through 22:58 was

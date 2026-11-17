@@ -2264,3 +2264,11 @@ landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs a
   not after the last pose; and a raw-vertex read was suspected and replaced, but the low number was REAL - it was the
   ribbons. The picture-vs-number disagreement was the floor hiding the shaft, not the instrument.
 - No live Twitch test. Not ticked - the team lead ticks.
+- ADDENDUM 2026-11-17T15:28:16-06:00, written after the push, two faults of mine said plainly:
+  (a) I worked from the 13:58 block on main. The lead's 14:58 sync was on origin/laptop only and reached me in the
+      merge AFTER this cycle's work. Its row puts THE SHIELD PICTURE FIRST (one frame, a tier-1/2 pack shield beside a
+      class shield_square/round bearer, same camera and pose - does the class shield read face-on or edge-on too?),
+      THEN the staff comparison, which is the part S21 answers (mine upright, AXIS (0,1,-0.02); art's lies across).
+      The shield frame and MB_FIT "reeve": 0.80 are NOT done and are next hour's first work.
+  (b) The 15:08:02 claim declared a finish of 15:36 - over the 25-minute cap (15:33:02). A declaration fault; the
+      lock was released IDLE at 15:27:37 and no Godot of mine was alive after 15:27:10.

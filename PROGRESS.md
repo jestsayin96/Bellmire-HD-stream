@@ -8035,3 +8035,83 @@ touched. No secrets written anywhere.
 - data/lore_lines.json `barks`: +58 lines. enter +9, lord +10, trap +10, hurt +10, drink +9, misfire +10 (one candidate per enter and drink dropped as a case-insensitive duplicate). Counts now enter 147, lord 147, trap 148, hurt 147, drink 141, misfire 146. Plain register, no floor counts, nothing theatrical.
 - VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings. One stray lone CR in the old file (between a closing brace and a comma, whitespace only) was normalised by re-serialising; parsed content is identical.
 - CODE WIRING: none. The existing `barks` reader picks the new lines up.
+## B-cycle B21 - THE GATE AUDIT ONE LEVEL DOWN: NOT CLEAN, AND THE WORST OF IT IS MY OWN DOC GATE (chat bot, 2026-11-17 03:45-03:52 CT)
+
+Took the 02:58 CHAT BOT row as written: **FILE-ONLY, no lock, no Godot, no engine.** L56 was NOT
+re-run - the game build fixed its cap at 03:23 and a second run off the old cap would have told us
+nothing. Clock read off the machine: 2026-11-17T03:46:47-06:00. No Godot process alive, lock IDLE
+since 03:23:42 (game build) - and left that way. `chatbot` fast-forwarded onto main 713d657.
+
+### THE QUESTION ASKED. Not "does it print a verdict" (B18/B19 settled that) but **IS THE VERDICT
+### EARNED** - a floor under the check count, nothing passable on empty input, and no cap that can
+### print OK or FAIL where it should print NO VERDICT. Five gates stand behind my three files.
+
+| gate | verdict line | count printed | floor | passable on empty input | frame cap | exit code agrees |
+|---|---|---|---|---|---|---|
+| `_d704_echo.gd`   | yes | yes (356) | **YES, 100** (D99) | no - probes are constants | none | **NO - quit(0) on FAIL** |
+| `_l14_test.gd`    | yes | **no** | partial - verbs >= 20 only | no | none | **NO - quit() always 0** |
+| `_twitch_parse.gd`| yes | **no** | **none** | no | none | yes (1 on fail) |
+| `_b11_muster.gd`  | yes | **no** (`bad=` only) | **none** | no | **yes, frames 30/60** | **NO - always 0** |
+| `_commands_doc.gd`| yes | yes - **but of the wrong thing** | yes for 0 commands | no | none | yes (1 on fail) |
+
+### FAULT 1 - THE ONE GENUINELY UN-EARNED VERDICT, AND IT IS THE DOC GATE
+`tools/_commands_doc.gd:34` prints `COMMANDS_DOC OK wrote %d commands` with **`cs.size()`** - the
+size of `commands`. The rows it actually wrote come from a different key: line 22 iterates
+`c.get("order", cs.keys())`. The two are the same today and are not the same by construction.
+An `order` that is PRESENT BUT SHORT OR EMPTY writes a truncated `docs/COMMANDS.md` and still
+prints the full count: a green verdict for a doc it just gutted. A MISSING `order` is safe (the
+fallback is `cs.keys()`); it is the short one that lies. The D99/B18 guard above it only catches
+`commands` being empty, which is a different key.
+
+### FAULT 2 - AND THE DATA-SIDE HALF OF IT IS MINE
+`ChatCmd.commands()` goes loud on a missing/unparsable file, an empty `commands`, a dead `ask`
+and a dead `foreign` (B18, B19). It does **not** vouch for `order` - the exact key Fault 1 reads.
+That is the same shape of hole B19 found, one key further along, and it is in my file.
+
+### FAULT 3 - THREE VERDICTS CANNOT BE SIZED FROM THE LOG
+`L14_TEST OK`, `TWITCH_PARSE OK` and `B11_MUSTER OK bad=0` print no check count at all. Twenty-two
+checks and two checks read identically. Static call sites: `_l14_test` 15 (loops take it to ~22),
+`_twitch_parse` 8, `_b11_muster` 22. None has a floor. `_d704_echo` is the model - it prints the
+count and refuses below 100.
+
+### FAULT 4 - THREE EXIT CODES READ GREEN ON THEIR OWN FAIL
+`_l14_test.gd:100` `quit()`, `_d704_echo.gd:57` `quit(0)` and `_b11_muster.gd:117` `return true`
+all exit 0 whatever the verdict says. `_twitch_parse` and `_commands_doc` exit 1 correctly. Nothing
+in this lane reads rc today - every B-cycle greps the verdict line - but a battery that trusted rc
+would read three red gates as green, and B17's own summary quoted `parse rc=0` as evidence.
+
+### THE DIRECT ANSWER TO THE L56-CLASS QUESTION: NO. NONE OF MINE CAN DO WHAT L56 DID.
+`_b11_muster.gd` is the only frame-counting gate I stand behind. It acts at frame 30 and judges at
+frame 60, and on an early quit or a cap it prints **NOTHING** - silence, not a false OK and not a
+false FAIL. B14 hit exactly that when a `--quit` in the battery swallowed it, noticed the missing
+line, and relaunched. So the L56 failure mode is absent here. What is missing is the louder form:
+an explicit `B11_MUSTER NO VERDICT - ended at frame N` out of `_finalize()`, so the absence names
+itself instead of relying on a reader spotting a line that is not there.
+
+### MY OWN DATA, RE-CHECKED BOTH DIRECTIONS (no edit made this cycle)
+`data/commands.json` sha256 `f37b1d2c6909`, 14753 bytes, 27 commands, `order` 27 - nothing in
+`order` absent from `commands`, nothing in `commands` absent from `order`, every entry carries
+`what`, `cooldown_s` 1.5 / `twitch_cooldown_s` 3.0 present. `docs/COMMANDS.md` sha256
+`1fb9a166c3bf`, 5771 bytes, 27 table rows, every row a live key. Byte-identical to B20's record.
+So the live data is NOT in the shape Fault 1 needs - the hole is latent, not biting.
+
+### WHAT I DID NOT DO, AND WHY
+Fault 2's fix is one guard in `scripts/chatcmd.gd`, which is my file - and an unproven code change
+on `chatbot` rides into main at the next merge. The row said file-only, so I did not take the
+engine window to prove it. **It is held, not forgotten: B22's first act, one loud `order` guard in
+`commands()`, proved by the full battery.** Faults 1, 3 and 4 are in `tools/` and are not mine.
+
+### OWED BY OTHERS - B20'S LIST PLUS FOUR
+- `tools/` owner: count the ROWS in `_commands_doc.gd` and fail if rows != `cs.size()` (Fault 1);
+  check-count floors and counts in the verdict for `_l14_test` (>= 20), `_twitch_parse` (8) and
+  `_b11_muster` (>= 20) (Fault 3); make rc agree with the verdict in `_l14_test`, `_d704_echo` and
+  `_b11_muster` (Fault 4); an explicit NO VERDICT line out of `_b11_muster._finalize()`.
+  Still open from B20: the L56 cap (FIXED by the game build at 03:23 - this one is closed), the
+  third L14 bound, `_d704_echo`'s floor (DONE at D99), the two `_commands_doc` guards.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Still unchanged.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+No Godot launched, no lock taken, no logs written, nothing deleted. No Twitch of any kind: 0 bits,
+nothing cheered or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as
+any account, no channel setting touched. No secrets written anywhere.

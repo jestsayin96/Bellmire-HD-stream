@@ -545,6 +545,38 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "sower_chibi": {
+   "title": "The Sower (chibi)",
+   "theme": "grassland",
+   "idea": "IT PLANTS THE GROUND AGAINST YOU - rebuilt in the game's own register",
+   "wear": 0.4,
+   "feed_line": "Something is broadcasting seed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1994,
+   "size": [
+    3.29,
+    3.2,
+    2.4
+   ],
+   "footprint_span": 3.29,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.591340980018317,
+    "ortho": 4.930654048919678,
+    "clip": [
+     9.567414283752441,
+     24.284360885620117
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

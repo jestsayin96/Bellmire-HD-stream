@@ -8986,6 +8986,70 @@ is mid-Phase-2 and a dry lane should not be sitting on a lock to re-prove unchan
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward created or re-priced, no channel setting touched.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+## C-91 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (12:58 block): nine named daggers at tiers 1-3, so the wired dagger meshes are reachable by name (items.json only)
+- TAKE THIS NEXT (12:58 CT team-lead block) gave CONTENT: the game build's S18 finding - every named tier 1-3 blade was a sword word, so the dagger meshes wired at S18 were only reached by the unnamed !forge path. Taken. Zero engine work.
+- data/items.json equipment.weapons: +9 blade-family pieces (86 -> 95): tier 1 Fishwife's Knife, Watchman's Dagger, Ropecutter's Knife; tier 2 Guild-Stamped Dagger, Chandler's Wick-Knife, Sallow-Gate Dagger; tier 3 Lamp-Etched Dagger, Bellsteel Knife, Seam-Parting Dagger. Each name carries 'knife' or 'dagger' (gear.gd D94_KIND_WORDS reads kind from the name; checked no earlier-listed word matches). Rarity is the tier read straight across (uncommon / rare / very rare). Routes shop/forged/looted only - no caravan, no artifact, nothing legendary. Condition tracks tier: tier 1 a working tool, tier 3 paid-for and new-made. Plain register.
+- Top-level `_note_c91` added after `_note_c71`. No new pool opened. Nothing written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop.
+- VALIDATION OK: all four owned files parse; every pre-existing key in items.json equal on parsed compare (weapons, the other equipment keys, every other top-level key); only addition outside weapons is `_note_c91`; no duplicate names; all nine names resolve to kind dagger.
+- CODE WIRING: none required for the pieces to be read - gear.gd weapon_id() already pools every blade piece of a tier. Two side effects to know: (1) the tier 1-3 blade pools grow 3->5/4/4... so the stable hash pick for a hero with no stamped wname can land on a different piece than before; (2) the nine new ids have no hub icon yet (icons are keyed per piece) - art/hub to regenerate if thumbnails must cover every id.
 
 ## H32 hub standing check (2026-11-17 13:40 CT) - nothing new to build
 Merged origin/hub (308b4c4) and origin/main (42182c2) clean; web/ and docs/HUB_SECURITY.md byte-unchanged (git diff empty vs 991c3d5). Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap, 520 thumbnails; source assets/icons/items last changed 4ab066d (01:02 CT), no drift. No new screenshot (web/ unchanged). Open for supervisor, not mine: U55 option (a) - hub drawing the rarity hue from art's RARITY_HUE table - awaits Mr. E's pick. Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked, named here: delete refused on this machine. Not published by me.
+
+## U57 - hardening my own gate: the harness now fails a BLANK FRAME (2026-11-17 13:55 CT)
+Plan block 12:58 gave HUD no item and said "your own choice, out of what you shipped". Two of my instruments passed a frame a human would fail (blank grey frame at U55, collided row at U56). The row case was fixed at U56; this closes the other: tools/_u55_hue.gd gains _check_frame(), sampling a 48x27 grid of the saved PNG and failing if fewer than 8 distinct colours or under 5% of samples differ from the dominant one. Real frames: 17/23/14 distinct, 8.1/12.5/16.2% non-dominant. RED PATH PROVED: threshold forced to 99% -> three FAIL lines, U56_HUE FAIL 3; restored to 5%, parse 0 errors, U56_HUE OK. Looked at u55_125.png: pips and ink as at U56. No owned .gd file changed. Not covered: a Hand-me-down boots row still ellipsizes (intended, gated at U56). Note: a chat-bot IDLE stamp at 13:56:40 was written while the machine clock read 13:53 - a future stamp, flagged for the supervisor.
+
+## B-cycle B31 - THE COMMAND SURFACE IS UNTOUCHED, SO I SPENT THE :45 WINDOW RE-PROVING THE GATES ON THE MERGED TREE (chat bot, 2026-11-17 13:46-13:55 CT)
+
+- THE ROW SAID STAND DOWN AND COMPUTE IT RATHER THAN TAKE IT, SO I COMPUTED IT. Main moved from
+  8ec021a to 42182c2 (22 commits into this worktree: 15 weapon models, Systems 2 engine half,
+  a HUD theme change, +50 lore lines, two plan syncs).
+    git diff 8ec021a..origin/main -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md  EMPTY
+    git diff 1807d16..origin/main -- the same three                                          EMPTY
+    git log 8ec021a..origin/main -- scripts/ data/commands.json                              NO COMMITS
+  No command, alias, cooldown, `ask` phrasing or `foreign` prefix moved. Fourth hour with no item
+  on the command surface, and that is a measurement, not a guess.
+
+- BUT A DRY LANE IS NOT THE SAME AS AN UNPROVEN TREE, AND THAT IS WHY THIS HOUR IS NOT A
+  STAND-DOWN. My files did not move; the tree UNDER them moved by 22 commits. The HUD lane hit
+  exactly this an hour ago - its 12:55 run printed 9 parse errors purely because merged main's new
+  GLBs were not imported in its worktree, and its own IDLE line had already claimed 0. The gates
+  owed on L69/L70 had last run against a different tree. The :45 window exists for short gates, the
+  lock was IDLE since 13:20:07 with no Godot process alive, so I took it and re-measured.
+
+- GATE BATTERY, ALL GREEN, ONE RUN (13:48-13:52, after an explicit --import pass first):
+    --headless --path W6 --import                    completed, no leftover import work
+    parse  --headless --path W6 --quit-after 300     rc=0, 0 SCRIPT ERROR, 0 Parse Error,
+                                                     and the join line is there: TWITCH joined #jestsayin96
+    tools/_l14_test.gd                               L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                           TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                           COMMANDS_DOC OK wrote 27 commands
+  The parse's only output below the errors is pre-existing MI_Cobble.tres invalid-UID warnings out
+  of town.gd:820 - the game build's file, not mine, and warnings not errors. I am not raising them
+  as an item; I am naming them so the next seat does not "find" them.
+
+- COMMANDS_DOC WAS A TRUE NO-OP AND I PROVED IT THE ONLY WAY THAT COUNTS: git status over
+  scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md after the generator ran came back
+  CLEAN. The real generator rewrote the file and produced byte-identical bytes to what is
+  committed. It says 27, not the 26 the lane's standing note predicted, because the data carries 27
+  commands now; the generator is the authority and the stale number was the prompt's, not the
+  file's.
+
+- ITEM 4 OF THE OWED LIST (_b2_ask.gd, B2_ASK OK, then delete it and the .b2_* logs) WAS ALREADY
+  CLOSED in an earlier cycle - B2_ASK passed on the real engine, the harness and the .b2_* logs are
+  gone, and `ls _b2_*` finds nothing in the worktree. So the five owed engine gates behind L69/L70
+  are all green, and all five are now green against TODAY's main rather than against the tree they
+  were first proved on.
+
+- NOTHING WAS COMMITTED TO MY THREE FILES, because nothing needed changing. This cycle is the
+  measurement.
+
+- LOCK: claimed RUNNING 2026-11-17T13:48:30-06:00 with the finish declared at 14:08 (20 min, inside
+  the 25-minute cap); released IDLE the same slot. Godot closed. No second Godot ran beside
+  another lane's - checked by process, not by the file, and the file agreed.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created or re-priced, no channel setting touched. The parse run
+does JOIN #jestsayin96 as bellmirebro - that is the standing B18 gate and it is silent, no message
+is sent.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

@@ -85,6 +85,13 @@ beside them: `dagger_{common,uncommon,rare}.glb` in `assets/gear/dungeon/`, copi
 `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from `*.gltf.glb`). Wired as gear.gd KINDS dagger
 tiers 1-3. The pack's staves were copied, rendered, judged wrong in the hand and REMOVED the same hour -
 they are not in the repo.
+
+### 17 Nov 2026 - S19, System 2 second half (part 3): dungeon-pack staves and crossbows in the hand (game build)
+Six more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, same licence file already
+beside them: `staff_{common,uncommon,rare}.glb` and `crossbow_{common,uncommon,rare}.glb` in
+`assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from
+`*.gltf.glb`). Wired as gear.gd KINDS staff and crossbow tiers 1-3. The staves S18 removed are back, now
+with a measured held rotation (gear.gd held_rot) and x1.9 scale.
 ## KayKit Dungeon Pack 1.0 - the tiered weapon ladder (S2, art's half of System 2)
 - Pack: KayKit : Dungeon Pack (1.0)
 - Author: Kay Lousberg (www.kaylousberg.com)

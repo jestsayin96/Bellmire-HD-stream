@@ -716,6 +716,77 @@ static func commands() -> Dictionary:
             if not ghost.is_empty():
                 push_error("COMMANDS_DATA ORDER GHOST: `order` names %d key(s) no command answers: %s" % [ghost.size(), ghost])
                 printerr("COMMANDS_DATA ORDER GHOST - `order` names %d dead key(s): %s" % [ghost.size(), ghost])
+        # B23: the earnability pass run over my own files. Every guard above stops at the key
+        # it names, and five live reads sit one level below them. `ask` being a non-empty
+        # dictionary says nothing about `topics`, and `ask.order` is the same instrument as
+        # `order` above with a worse failure: a topic absent from `ask.order` is UNREACHABLE,
+        # because ask_topic() walks `order` and never the topic keys. A topic that matches and
+        # carries neither `cmd` nor `reply` is worse still - the line is recognised and the bot
+        # then says nothing, which is the one failure L69 was built to end. And help_line()
+        # reads `c["what"]` as the default of a .get(), so GDScript evaluates it even when
+        # `short` is there: one command with no `what` breaks !help for that command. None of
+        # the five is fatal, so all five say it out loud and carry on, as `ask`/`foreign`/`order`
+        # do. A battery greps COMMANDS_DATA; no line is the healthy reading.
+        if typeof(ask_d) == TYPE_DICTIONARY and not (ask_d as Dictionary).is_empty():
+            var ask_k: Dictionary = ask_d as Dictionary
+            var tps_v: Variant = ask_k.get("topics", {})
+            if typeof(tps_v) != TYPE_DICTIONARY or (tps_v as Dictionary).is_empty():
+                push_error("COMMANDS_DATA ASK NO TOPICS: `ask` carries no usable `topics` - every plain question gets silence")
+                printerr("COMMANDS_DATA ASK NO TOPICS - `ask` carries no usable `topics`")
+            else:
+                var tps: Dictionary = tps_v as Dictionary
+                var ao_v: Variant = ask_k.get("order", [])
+                if typeof(ao_v) != TYPE_ARRAY:
+                    push_error("COMMANDS_DATA ASK ORDER UNUSABLE: `ask.order` is not an array")
+                    printerr("COMMANDS_DATA ASK ORDER UNUSABLE - `ask.order` is not an array")
+                elif not (ao_v as Array).is_empty():
+                    var ao: Array = ao_v as Array
+                    var t_miss: Array = []
+                    for k in tps:
+                        if not ao.has(k):
+                            t_miss.append(k)
+                    var t_ghost: Array = []
+                    for k in ao:
+                        if not tps.has(k):
+                            t_ghost.append(k)
+                    if not t_miss.is_empty():
+                        push_error("COMMANDS_DATA ASK ORDER SHORT: %d topic(s) absent from `ask.order` can never be matched: %s" % [t_miss.size(), t_miss])
+                        printerr("COMMANDS_DATA ASK ORDER SHORT - %d topic(s) unreachable: %s" % [t_miss.size(), t_miss])
+                    if not t_ghost.is_empty():
+                        push_error("COMMANDS_DATA ASK ORDER GHOST: `ask.order` names %d topic(s) that do not exist: %s" % [t_ghost.size(), t_ghost])
+                        printerr("COMMANDS_DATA ASK ORDER GHOST - `ask.order` names %d dead topic(s): %s" % [t_ghost.size(), t_ghost])
+                var mute: Array = []
+                var nophr: Array = []
+                for k in tps:
+                    var t: Dictionary = tps[k] as Dictionary if tps[k] is Dictionary else {}
+                    if (t.get("phrases", []) as Array).is_empty():
+                        nophr.append(k)
+                    if String(t.get("cmd", "")) == "" and String(t.get("reply", "")) == "":
+                        mute.append(k)
+                if not nophr.is_empty():
+                    push_error("COMMANDS_DATA ASK TOPIC NO PHRASES: %d topic(s) nothing can match: %s" % [nophr.size(), nophr])
+                    printerr("COMMANDS_DATA ASK TOPIC NO PHRASES - %d topic(s) nothing can match: %s" % [nophr.size(), nophr])
+                if not mute.is_empty():
+                    push_error("COMMANDS_DATA ASK TOPIC MUTE: %d topic(s) match a question and answer with nothing: %s" % [mute.size(), mute])
+                    printerr("COMMANDS_DATA ASK TOPIC MUTE - %d topic(s) answer with nothing: %s" % [mute.size(), mute])
+        var no_what: Array = []
+        for k in cmd_d:
+            if not (cmd_d[k] is Dictionary) or String((cmd_d[k] as Dictionary).get("what", "")) == "":
+                no_what.append(k)
+        if not no_what.is_empty():
+            push_error("COMMANDS_DATA NO WHAT: %d command(s) carry no `what` - !help <command> breaks on them: %s" % [no_what.size(), no_what])
+            printerr("COMMANDS_DATA NO WHAT - %d command(s) carry no `what`: %s" % [no_what.size(), no_what])
+        if typeof(for_d) == TYPE_DICTIONARY:
+            var dead_app: Array = []
+            for app in (for_d as Dictionary):
+                if String(app).begins_with("_"):
+                    continue          # `_why` and friends are comments in the data, not apps
+                var fa: Dictionary = (for_d as Dictionary)[app] as Dictionary if (for_d as Dictionary)[app] is Dictionary else {}
+                if (fa.get("prefixes", []) as Array).is_empty() and (fa.get("exact", []) as Array).is_empty():
+                    dead_app.append(app)
+            if not dead_app.is_empty():
+                push_error("COMMANDS_DATA FOREIGN APP EMPTY: %d app(s) in `foreign` name nothing, so their commands are answered: %s" % [dead_app.size(), dead_app])
+                printerr("COMMANDS_DATA FOREIGN APP EMPTY - %d app(s) name nothing: %s" % [dead_app.size(), dead_app])
         _cmds = parsed
     return _cmds
 

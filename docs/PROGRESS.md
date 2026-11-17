@@ -2451,3 +2451,95 @@ AMBIGUOUS AUTHORITY - A QUESTION, NOT AN ITEM, AND I AM NOT INVENTING ONE (freez
 ### FOR THE GAME BUILD LANE: nothing. No twitch_eventsub.gd signature touched, nothing owed.
 ### FOR MR. E: nothing to decide. No live Twitch test this cycle - no account used, no bits, no
 ### redemption, no channel-point reward created, deleted or re-priced, and bellmirebro posted nothing.
+
+## B-cycle - B35 THE SMALLEST REMAINING NUMERIC CLAIM IS GUARDED: THE FREE LOOK'S TEN SECONDS, 2026-11-17T18:00:00-06:00 (chat bot)
+THE ROW: "take the SMALLEST of those fifteen whose authority is a NUMBER LIVING IN CODE - a cost, a
+cooldown, a cap, a limit - and guard it in the same shape, ANCHOR case included. One is enough...
+Say which one you took and why it was the smallest, and name what is left after it."
+One is taken. It is `look`.what's "10-second pane" against Spotlight.LOOK_S.
+
+### WHY IT WAS THE SMALLEST, AND I MEASURED RATHER THAN TRUSTING MY OWN LIST
+B34's fifteen is itself a hand-written list, so I did not read it and pick. I walked all 27 `what`
+strings again for digits AND number words and took the four whose authority is a number:
+  `look`     "a 10-second pane"   -> Spotlight.LOOK_S      1 declaration, 1 use site, LITERAL DIGIT
+  `satchel`  "two fifths"         -> SELL_BACK 0.4         2 declarations, ~10 use sites, IN WORDS
+  `bestiary` "the eight lords"    -> bosses.json 4+4       a count over a DATA file, not a const
+  `oil`      "for two delvers"    -> the burn in delve.gd  a RATE across a floor, no constant
+`look` is smallest on every count that matters:
+  - ONE authority. `satchel`'s 0.4 is declared TWICE - leaderboard_panel.gd Satchel:65 and
+    snapshot_pub.gd:40 - so those two can disagree with EACH OTHER before either disagrees with my
+    sentence, and a guard has to decide which is authoritative. That is a bigger piece of work and
+    it is NOT done here; it is the obvious next one.
+  - A LITERAL DIGIT in the sentence, so no word-to-number table. `muster` needed one; `satchel`
+    would need a fraction table on top of it.
+  - NO NEW DEPENDENCY. chatcmd.gd ALREADY reads Spotlight.SUB_S and Spotlight.POINTS_S at lines
+    290-292, which sit on the two lines under LOOK_S in spotlight.gd. I checked that before writing
+    a word: spotlight.gd:92 references ChatCmd back, so the cycle already exists and already
+    parses. Nothing new is imported into my file and the parse gate confirmed it.
+WHY IT IS WORTH GUARDING AT ALL, not just small: the free `look` is the ONE pane a viewer gets
+without paying, so its length is the number most likely to be quietly tuned - and it sits directly
+above the two paid holds. A viewer reads "10-second" in docs/COMMANDS.md; the pane is whatever
+LOOK_S says. They agree today - 10 published, 10.0 enforced - by coincidence, not construction,
+which is exactly how `greataxe` and `sceptre` reached the smithy unpublished.
+
+### THE GUARD - THREE PATHS, THE MUSTER SHAPE PLUS ONE (scripts/chatcmd.gd, in commands())
+  LOOK SECONDS  - published number != LOOK_S. One check covers both directions for a scalar.
+  LOOK ANCHOR   - the sentence no longer says "<number>-second pane", so no number can be found.
+                  This is the path that stops the guard going quietly blind on a reword.
+  LOOK FRACTION - LOOK_S becomes fractional (10.5), which NO whole-second sentence can state
+                  truthfully and which a bare int compare would pass as 10.
+Not fatal, the shape every guard above it uses: push_error + printerr, the commands still answer,
+and a battery greps COMMANDS_DATA. No line is the healthy reading.
+
+### RED PATHS - TWO PROVED, AND I AM NAMING THE THIRD AS UNPROVED RATHER THAN CLAIMING IT
+Injected into data/commands.json, run through tools/_l14_test.gd, verbatim:
+  COMMANDS_DATA LOOK SECONDS: `look`.what publishes a 15-second pane and Spotlight.LOOK_S holds it
+    for 10.0 - docs/COMMANDS.md promises a look the spotlight does not give
+  COMMANDS_DATA LOOK ANCHOR: `look`.what no longer says "<number>-second pane" - the published
+    length of the free look can no longer be checked against Spotlight.LOOK_S (10.0)
+LOOK FRACTION IS NOT PROVED RED. Its trigger is a fractional LOOK_S, and LOOK_S lives in
+spotlight.gd - NOT one of my three files. Proving it would mean editing another lane's script, so
+the branch is written and reviewed but UNFIRED, and I would rather say that than let a third
+"proved" stand on two runs. It is reachable only from that file; whoever owns spotlight.gd can fire
+it in one character if they ever want it demonstrated.
+data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before the first injection and after the
+last restore - identical. L14_TEST still printed OK (22 checks) under both red runs, as every other
+COMMANDS_DATA guard does by design; the verdict is the grep, not the exit code.
+
+### GATES (on the exact bytes committed)
+    --headless --path W6 --quit-after 300           parse, rc=0, 0 script/parse errors, 0 cyclic
+    tools/_l14_test.gd                              L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                          COMMANDS_DOC OK wrote 27 commands
+  0 COMMANDS_DATA lines across the green battery - the nine older guards and the new one all silent.
+  COMMANDS_DOC is a no-op BY CONSTRUCTION: data/commands.json is byte-identical to HEAD, so the
+  generator cannot produce a different docs/COMMANDS.md, and md5 553eb7d03245646838938e65cbf47c2e
+  was unchanged before and after it ran. ONLY scripts/chatcmd.gd is edited this cycle.
+  Drift checked BOTH directions in python besides: 27 keys, 27 in `order`, 0 missing, 0 ghost,
+  0 commands with no `what`, 0 alias collisions, 0 aliases shadowing a command.
+
+### WHAT IS LEFT AFTER IT - 14 UNGUARDED, AND THE NUMERIC ONES ARE NOW THREE
+  NUMERIC, NEXT: `satchel` two fifths vs SELL_BACK 0.4 (two declarations - the real work is
+    deciding which is authoritative, and a guard that makes those two agree with each other is
+    worth more than one that only checks mine); `bestiary` eight lords vs bosses.json 4+4 (a data
+    file the content lane adds to most hours); `oil` two delvers (a rate, still not a constant).
+  ENUMERATIONS, IN REACH: `armoury` tier list vs the armour table in gear.gd:32-35; `armoury`
+    "boots, pauldrons, a helm" vs what gear.gd:257-258 only says in a comment.
+  MINE, SMALL: `brew` default "mending"; `wear` "!wear off ring"; `catchup`'s claim about its own
+    reply's shape.
+  ANOTHER LANE'S, REPORTED NOT REACHED: `look`'s "(teal)" and "channel-points lane" (the HUD's
+    colour and the lane branch, not a constant - the SECONDS half is now mine and done); `hub`'s
+    section list (web/); `wear`'s accessory and cosmetic families (items.json suffixes, the content
+    writer's naming to break); `reroll`'s rule; `help` (already covered by the NO WHAT and ORDER
+    guards).
+  AMBIGUOUS, A QUESTION AND NOT AN ITEM (freeze holds, unchanged from B34): `brew` names 12 of 232
+    brews, `dye` 10 of 265 colours. Whether the rest are meant to be found rather than published is
+    a CONTENT call. Naming it and leaving it.
+
+### FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd untouched, the twitch_reply(user_login,
+### text) signature unchanged, nothing owed and nothing to expose.
+### FOR MR. E: nothing to decide.
+### LIVE TWITCH: no test run. No account used, no bits cheered by any account, no channel-point
+### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. The parse gate
+### boots the real game, so twitch_eventsub.gd connected to #jestsayin96 and subscribed as it does
+### on every lane's parse run - that is the boot, not a test, and the bot sent no message.

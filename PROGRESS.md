@@ -8132,3 +8132,9 @@ FOUR FAULTS IN MY OWN GATES (tools/, hud-ui lane's):
 4. _board_test.gd and _director_test.gd - (a). They print only `DIRECTOR_TEST done` and save screenshots; there is no verdict by design. They are cameras, not gates, and must never be cited as gates. PROPOSED: rename the last line to `..._SHOTS done (not a gate)`.
 CLEAN: _l67_test (floors via merged>0, crit_admit>=1, protected 0; verdict OK/FAIL), _l64_test (cuts>=8), _l64_long (cuts>=20 and worst streak), _l73_long (events>=5; fails counted; wall cap ends in the same verdict, flagged as a mild (c) since a cap before 5 events prints FAIL rather than NO VERDICT), _mbfeed_test (checks counted, OK token, exit code), _l62_test (counts checks but has no OK token and no floor - minor, exit code carries it).
 Faults 1-3 are mine and cheap, but proving them needs a windowed run, so they ride the next engine slot (:52-:07) as one short batch: fix, then break each on purpose (hide FeedHUD, empty the box, drop the lord) and confirm NO VERDICT/FAIL, not OK. NEEDED FROM THE GAME BUILD: nothing. NEEDED FROM MR. E: nothing.
+
+C-82 (2026-11-17 CT, clock 04:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a third time (lore_lines.json only)
+- TAKE THIS NEXT (03:58 CT block) gave CONTENT: keep going in `barks` for depth; four dead pools and the 29 trick-only shape lines left alone. C-55 was already done.
+- data/lore_lines.json `barks`: +69 lines. enter +12, lord +11, trap +12, hurt +12, drink +11, misfire +11. Counts now enter 159, lord 158, trap 160, hurt 159, drink 152, misfire 157. Plain register, no floor counts.
+- VALIDATION OK: parses; every other top-level key equal on a parsed compare; each existing bark list an unchanged prefix of its new list; all entries strings; no case-insensitive duplicates added.
+- CODE WIRING: none. delve.gd:3432 reads `barks` by kind.

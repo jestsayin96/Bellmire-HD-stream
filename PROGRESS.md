@@ -8955,3 +8955,11 @@ Fixed in ui_theme.gd by scaling down only: VIEWER .47/.30/.02, TEAL_ON_PARCH .05
 GOOD .10/.39/.16. Re-run: U58_CONTRAST OK 14 pairs; U56_HUE OK windowed; parse 0 errors. Looked at u55_100.png.
 STILL ON TRUST: the pair list is hand-written - a new colour added to UiTheme is not checked until someone lists it;
 and alpha panels over a real world frame are not sampled, only the two extremes.
+
+## U59 (HUD, 2026-11-17 ~16:55 CT) - the contrast gate ENUMERATES UiTheme instead of reciting a pair list
+Item: the 15:58 TAKE THIS NEXT HUD row (close the gap U58 named: the pair list was hand-written). The 15:52 window produced nothing from this lane; no reason is recorded and I will not invent one.
+tools/_u58_contrast.gd now walks UiTheme.get_script_constant_map() and requires every Color constant to be classified: TEXT (measured against its surface(s), >=4.5:1), CHIPPED (ON_KIND, WHITE - held by chip_bg's own ratio), UNMEASURED (named, counted), or FILL. An unlisted colour is FAIL, and a listed name UiTheme no longer has is FAIL (STALE).
+RED PATH PROVEN BY ACCIDENT, THEN KEPT: the first run failed on `PARCH` (an alias of PARCHMENT I had not classified) - exactly the "unlisted colour" case. Classified it FILL, re-ran.
+RESULT: U59_CONTRAST OK 49 colours walked, 14 pairs, 2 unmeasured. Parse 0 errors. No ui_theme.gd change this cycle.
+STILL ON TRUST / NAMED: WORD_HI (Chronicle word on the scroll) and TAG_GOLD (a modulate tint) are text whose surface is not a theme colour - printed as UNMEASURED, not passed. Alpha panels over a live world frame still only get the two extremes. NO PICTURE LOOKED AT: this is pure colour arithmetic and no pixel changed.
+Lock: RUNNING 16:54:20 -> IDLE 16:54:56, well inside :07. Not ticked by me.

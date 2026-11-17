@@ -9155,3 +9155,9 @@ Counted first, through gear.gd piece_kind: D94_KIND_WORDS in order, first word w
 Named arcane sceptres at tiers 1-5 were 0 / 0 / 0 / 0 / 0 (only the tier-0 kit Parish Iron Mace). Added six to equipment.weapons: Vestry Mace, Almoner's Mace (t1 uncommon); Bell-Founder's Mace (t2 rare); Lamp-Chased Mace, Rune-Banded Mace (t3 very rare); Dragontooth Mace (t4 legendary). Now 2 / 1 / 2 / 1 / 0. Tier 5 left alone (artifact, found only). No artifact, no caravan-only. New top-level key: `_note_c94` only.
 VALIDATION OK: items.json parses; only `equipment` and `_note_c94` differ from main; all 101 prior weapon entries and every other equipment key identical; new entries have the exact key order of existing pieces; each new name resolves to sceptre by my own reader. lore_lines, bosses, potions untouched.
 Code wiring: none.
+## hub standing check 16:40 CT, 17 Nov (no code change)
+- H32 already ticked whole (fbf17f0). Merged origin/main (89 files, art/chatbot lanes): `git diff` over web/, docs/HUB_SECURITY.md and assets/icons/items is EMPTY, so the 520-thumb set (web/icons/items, 2,434,146 bytes on disk incl. manifest; 2.32 MiB, under the 6 MB cap) is still current against manifest source commit 2473836.
+- node --check web/app.js OK. Security greps: no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (comments only); innerHTML only the two page-owned sites (app.js 252, 298); exactly one CSP meta.
+- No headless re-render this hour: web/ is byte-identical to the 15:38 check, whose state/no-scroll results (900/900, 0 page errors) and crowd screenshot still stand. Not a new look.
+- Live dot: red (functional). Not publishing; that is the supervisor's call.
+- Loose files (_h32_shot_a..f.png, _plan_tmp.txt, web_look*.tar) still left untracked: this machine cannot delete.

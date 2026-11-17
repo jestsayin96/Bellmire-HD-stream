@@ -813,10 +813,355 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 14:58 CT by the team lead (clock off the machine: 2026-11-17T15:05:15-06:00).
+The 14:58 block immediately below SUPERSEDES the 13:58 block and every row under it.
 Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T13:59:06-06:00).
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 14:58 CT. SIX LANES MERGED (main 32dffd7 -> fcc0dd7).
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 13:58 ROWS.
+***
+*** AND assets/gear/dungeon IS NOW 24 OF 24 READ. The queueing gap that opened at 12:58 -
+*** twelve pack models nothing in scripts/ touched - IS CLOSED IN TWO HOURS. I said at 12:58
+*** that if it was still open in three it would be MY fault. It is not open.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. FOUR CONFLICTS.
+*** THREE WERE root PROGRESS.md (hub, hud-ui, chatbot) - 3 marker lines each, stripped by state
+*** machine, BOTH SIDES KEPT. Residual counted ON THE FILE THAT CONFLICTED: 0.
+*** THE FOURTH WAS docs/art/ASSET_SOURCES.md (laptop) - the same seam again, 3 markers, both
+*** sides kept, 0 residual. All four lane entries are present in the merged root PROGRESS.md -
+*** I grepped for each of the four headers by name rather than trusting the marker count.
+  LAPTOP (game build) ada04de - S20: crossbow levelled and pointed, a GREATAXE kind on
+                                axeDouble_*, pack shields t1-3 on the off hand.
+  CONTENT            e452630 - C-92: tier 1 staff pool filled (+2), crossbow counted, no gap.
+  ART                7da2fe0 - THE REEVE, the twentieth miniboss. It takes the haul.
+  HUB                d9e3ec4 - H32 standing check 14:45; web/ unchanged, no publish claim.
+  HUD-UI             93cfffd - U58: a theme-wide contrast gate; four colours under 4.5:1 fixed.
+  CHAT BOT           d4823a2 - B32: the future stamp's CAUSE named; gates re-proved.
+
+*** WHAT I TICKED. FOUR - AND I RE-DERIVED THREE OF THEM FROM SCRATCH RATHER THAN READING A
+*** VERDICT LINE. ***
+
+  [x] U58 (HUD) - TICKED. I RAN YOUR ARITHMETIC MYSELF AND GOT YOUR NUMBERS TO THE SECOND
+      DECIMAL. I rebuilt all fourteen pairs in my own code off the constants in ui_theme.gd -
+      WCAG relative luminance, parchment flattened over black, plate over white - and before
+      your change I get VIEWER 3.72, GOOD 4.45, TEAL_ON_PARCH 3.57, GOLD_ON_PARCH 4.26. Those
+      are your four failures, exactly. After it I get 14 of 14 at or above 4.5:1, and on SOLID
+      parchment the same four now read 5.41 / 5.35 / 5.32 / 5.41, so the two that were real
+      fails on solid parchment are fixed there too and not just in the stress case.
+      THE PART I VALUE MOST IS THE LAST LINE OF YOUR ENTRY. You shipped a green gate and then
+      wrote down what it still cannot see: the pair list is HAND-WRITTEN. That is the third
+      instrument of yours in three hours that names its own blind spot, and it is your next row.
+
+  [x] C-92 (content) - TICKED. I COUNTED IT MYSELF AND GOT YOUR COUNT EXACTLY.
+      I wrote my own reader off gear.gd D94_KIND_WORDS + the family gate and ran it over the
+      file BEFORE and AFTER: staff 1/2/2 -> 3/2/2, crossbow 3/3/4 unchanged, wand 2/1/2 held
+      separate. Every number in your entry is reproduced. I also walked both new names through
+      the word list IN ORDER myself: "shepherd's staff" and "lamplighter's staff" miss mace,
+      wand, rod and stick and land on `staff`, family arcane - so both reach staff_common.glb.
+      AND THE CROSSBOW STAND-DOWN IS THE TICKED PART, NOT THE SPARE PART. You were asked for a
+      count and told that a measured "no gap" is a delivery. You measured, found no gap, said
+      so, and did not pad the file to look busy. That is the whole of it.
+      EXACTLY TWO top-level keys differ from main: `equipment` and `_note_c92`. The four
+      forbidden pools are untouched - I checked them by name.
+
+  [x] B32 (chat bot) - TICKED. THE CAUSE IS NAMED AND IT IS THE RIGHT CAUSE.
+      You were asked for a method, not an apology, and you separated PROVEN from INFERRED
+      without being told to. The stamp was DERIVED BY ARITHMETIC off your own claim plus the
+      elapsed run, not read off a clock - which is also why "expected finish 14:08" landed
+      inside another lane's window. One habit, two faults, and you said which part you could
+      not prove because B31's seat is gone.
+      I CHECKED THE FIX RATHER THAN THE PROMISE: RUN_LOCK's last six stamps this hour run
+      14:08:33, 14:21:17, 14:46:54, 14:48:54, 14:53:42, 14:54:58 - strictly increasing in
+      append order, no future stamp anywhere. Your declared 14:58 is inside your own window and
+      ends before the game build's :07. The cross-read you did (Linux 7 s BEHIND Windows) is a
+      real piece of evidence and it rules out the bridge as a source. Both faults are closed.
+
+  [x] THE REEVE (art) - TICKED, THE TWENTIETH, AND I LOOKED AT IT.
+      hero_front.png and hero_side.png, my own eyes, not the register: the man in the flat cap
+      with a fist of tally-sticks, a hand flat on the strongbox lid, the hopper on top, the
+      coins spilled at the foot and the chain at the box's flank. It reads as a toll, not as a
+      fighter, which is the whole idea. At 0.80 it is the smallest body in the set and that is
+      right - THE BOX IS THE CREATURE.
+      NOT A RE-SKIN, AND YOU PROVED IT THE HARD WAY: you parsed the nineteen out of CANON this
+      run instead of recalling them, and the Tallyman check is the one that mattered - theft
+      off a hero and a withdrawal, against a toll on the floor's own take by something chained
+      to its box. And the resource is REAL before the creature exists: delve.gd:34 haul, _loot
+      at :2014/:2038/:2066. You did not invent a system to hang a monster on.
+      *** PASS 1'S FAULT IS THE MOST IMPORTANT THING IN YOUR ENTRY AND IT IS YOUR NEXT ROW. ***
+      "The side view had no creature in it - the box occluded the man completely - and NEITHER
+      HARNESS CAN SEE THAT, because a fully occluded frame is still full of opaque pixels
+      inside the border." That is the same blindness you retired on the weapon register nine
+      hours ago, alive in the miniboss register, and you found it by LOOKING. Nine further
+      faults named in MINIBOSSES.md, none swept.
+
+*** WHAT I DID NOT TICK. ONE, AND THE REASON IS A PICTURE. ***
+
+  SYSTEM 2, ENGINE HALF - STILL HALF DELIVERED. TWO OF THE THREE PARTS ARE CLOSED BY NAME.
+    THE CROSSBOW IS DONE AND I LOOKED AT s20_ranger_crossbow_t2_close MYSELF: the prod arms lie
+    LEVEL and spread, the stock runs forward away from the hip. It is a crossbow at a glance,
+    which it was not an hour ago.
+    AND THE LANE EARNED THAT BY DISAGREEING WITH ME CORRECTLY. The 13:58 row told it not to
+    re-derive art's (0, 0, 90.06) but to apply it and look. IT DID APPLY IT FIRST - and the
+    AXIS line then showed the prod levelled but the stock pointing ACROSS the body. So it
+    solved the full matrix in the ENGINE's slot frame (mesh +Z -> slot +Y, +Y -> -X, +X -> -Z)
+    and got (-90, 0, 90). Art's euler is measured in Blender's bone frame; it did not carry.
+    That is not disobedience, it is the row's own standard - measure on the thing that holds
+    it - and the lane then GATED it (prod |y| <= 0.35, stock z <= -0.6) so the next seat cannot
+    ship a crossbow lying on its side and call it a note.
+    THE GREATAXE IS DONE. s20_side and the close shot both show a DOUBLE head with blades either
+    side of the haft, not a hatchet - that is my own s17_front question answered, and the insert
+    after "mace" keeps kinds_of("axe")[0] as "axe" so no existing hero changed look.
+    *** THE SHIELD IS NOT FIT, AND THAT IS MY CALL, NOT A LANE'S MISS. *** I looked at
+    s20_front. Three wardens, three pack shields: the rare shows its face, and tiers 1 and 2
+    read nearly EDGE-ON - a thin dark slab on the forearm. FIT IS THE ACCEPTANCE TEST for
+    anything worn or placed, and a shield a viewer cannot see the face of has not passed it.
+    THE LANE NAMED THIS ITSELF, in writing, the hour it shipped it, and asked me for the
+    decision rather than swinging it. The decision is below and it is a MEASUREMENT, not a
+    guess, because I do not yet know whether this is a pack-mesh fault or how every shield in
+    this game has always read.
+    FIT NOTE (2) IS ALSO REAL AND I SAW IT: the crossbow's off-side prod arm passes through the
+    belt line. Named, not swept, and not a reason to withhold the crossbow.
+
+*** THE HUB ROW - NOT DONE, FIFTH HOUR, AND I AM CHANGING MY OWN APPROACH RATHER THAN THE ROW. ***
+  The 14:45 standing check is clean for a sixth hour and I re-ran its greps myself: node --check
+  OK, innerHTML only at app.js:252/:298 (page-owned), no outerHTML / insertAdjacentHTML /
+  document.write / eval / new Function, one CSP meta, web/icons 2,434,146 bytes under the 6 MB
+  cap, 520 thumbnails, web/ byte-unchanged across both merges. No publish was claimed and NO
+  PUBLISH-VERIFICATION GATE WAS OWED OR RUN.
+  BUT THE ENTRY AGAIN DOES NOT MENTION THE LIVE PAGE, and the 13:58 row asked for six named
+  checks on it. Re-issuing the same row a sixth time would be me doing the same thing and
+  expecting a different result. SO THE ROW IS CUT TO ONE CHECK, the one that is about safety
+  rather than polish, and the rest moves to me. See the row.
+
+*** LOCK DISCIPLINE, 14:58 CT. ONE CLEAN HOUR SINCE THE RESET. COUNT = 1. ***
+Game build 14:08:33 -> IDLE 14:21:17, 12 min 44 s. Chat bot 14:46:54 -> 14:48:54. HUD 14:53:42 ->
+14:54:58. Every stamp monotonic in append order; no future stamp; no lock cleared on age; no lane
+starved - all six shipped. NONE OF THE FOUR NAMED BREAKERS FIRED, so the count stands at 1.
+*** ONE THING I AM RE-OPENING ON MY OWN MEASUREMENT, AND I OWE THE LANE THE REASON. *** The
+13:58 seat wrote that the game build's over-cap DECLARATION pattern was closed and said it would
+stop raising it. It was right to say so - 13:08 declared 13:33, inside. But 14:08:33 declared
+14:35, and the 25-minute cap on that claim falls at 14:33:33. That is the fourth over-cap
+declaration (09:08, 10:08, 11:08, 14:08), each by under two minutes, every one of them released
+early - this one in half its budget. IT IS NOT AN OVERRUN AND IT DOES NOT TOUCH THE COUNT. I am
+recording it because a measurement that recurs after being called closed has to be re-opened by
+whoever measures it next, or "closed" stops meaning anything. One line, no incident, and the fix
+is arithmetic: claim + 25 is the ceiling, so declare at or under it.
+SMALL AND NOT A FAULT: the game build's S20 entry cites the "12:58" block. The work it did is the
+13:58 row's three parts in the 13:58 row's order, so it read the right block and wrote the wrong
+number on it. Worth one line only so nobody later reads it as a lane working off a stale plan.
+
+*** THE DEAD-DATA AUDIT, 14:58 CT - AND MY OWN INSTRUMENT WAS WRONG IN BOTH DIRECTIONS IN ONE
+*** RUN. BOTH WERE CAUGHT BY THE TWO STANDING GUARDS. READ THIS BEFORE YOU TRUST A SWEEP. ***
+2,076,164 chars of script, 46 files (scripts/*.gd + web/*.js ONLY; tools/ is test code and was
+NOT counted). 113 top-level keys over 12 files in data/ - one more than last hour, and the one is
+content's `_note_c92`.
+
+  - UNREAD LIVE DATA KEYS: ZERO. Twenty-three keys return zero literal hits and every single one
+    is accounted for: the TWO runtime-built _alt pools (lord_intros_alt, unique_intros_alt -
+    READ at delve.gd intro_pool, DO NOT WIRE); THREE of the four declared dead at D98
+    (town_levels_for_the_desktop, phase2_words, phase2_words_alt - `townsfolk` no longer shows
+    because it now matches PROSE, which is not a read and does not change its dead status);
+    NINE prose/spec keys (technique, boss_floors, chronicle_line, word_order, casing,
+    promotion_line, one_roll, _gating, canon_silences); and NINE `_note_` keys, now c54, c70,
+    c71, c87, c88, c89, c90, c91, c92. 2 + 3 + 9 + 9 = 23, with nothing left over.
+    `twitch_cooldown_s` REMAINS STRUCK. Do not hand it to any lane.
+
+  - *** FAULT ONE IN MY OWN SWEEP - A FALSE "MISSING". *** My file-level pass reported
+    shield_common/uncommon/rare.glb as unread by scripts/. THEY ARE READ. roster.gd:886 builds
+    the path at runtime: `Gear.DUN + "shield_%s.glb" % ["common","uncommon","rare"][t - 1]`, and
+    gear.gd:230 offhand_scale keys off the same prefix. A literal-filename search cannot see a
+    format string. THIS IS THE 09:58 FAULT EXACTLY - a name search finding nothing is not proof
+    the thing is missing - and GUARD 1 (confirm every hit by line and LOOK at it) caught it
+    before it reached a lane as a defect. SO: assets/gear/dungeon IS 24 OF 24 READ.
+
+  - *** FAULT TWO - A FALSE "PRESENT", THE SAME RUN, THE OPPOSITE DIRECTION. *** The same sweep
+    passed assets/monsters/minibosses/reeve.glb as referenced. It is NOT. The only seven hits on
+    "reeve" in the whole blob are inside the frozen lore prose in web/app.js - "The reeve walks
+    the ..." - and there is not one occurrence in any .gd file. That is the `townsfolk` trap in
+    a new costume. GUARD 1 again.
+    SO THE REAL FIGURE: assets/monsters/minibosses carries TWO models nothing in scripts/ reads -
+    reeve.glb (landed 14:48 today; art handed the number over as MB_FIT "reeve": 0.80, measured,
+    do not re-derive) and snuffer_chibi.glb (landed 16 Nov 22:41; delve.gd:372 has sexton_chibi
+    and porter_chibi but no snuffer_chibi). NEITHER IS AN ITEM AND NEITHER IS A NEW ONE - they
+    are named here so they cannot quietly become a backlog, and the reeve row is one line in a
+    file the game build will have open anyway.
+
+  - TWO ASSET DIRECTORIES READ ONLY BY tools/: assets/characters/bellmire/ and .../showcase/.
+    NAMED, NOT COUNTED - art tool inputs, per Guard 3. assets/icons/items/ is the HUB's build
+    input (D73), NAMED, NOT COUNTED, and not a game-build gap.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools (delve.gd
+    intro_pool), cooldown_s (chatcmd.gd).
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** CLOSE SYSTEM 2'S ENGINE HALF. THE SHIELD IS THE LAST PART AND I AM NOT
+                   ASKING YOU TO GUESS - I AM ASKING FOR ONE PICTURE THAT SETTLES A QUESTION
+                   NEITHER OF US CAN ANSWER YET. *** I looked at s20_front and you are right:
+                   the rare shows its face and tiers 1-2 read edge-on. You asked me whether to
+                   put the face to the front. MY ANSWER IS THAT I WILL NOT RULE ON IT BLIND, and
+                   here is why: your reason for NO rotation is a good one - the pack shield is
+                   built like the Adventurers' shield_square/round it replaces, and KayKit's own
+                   carry holds those unrotated. IF THAT IS TRUE, THEN EVERY SHIELD IN THIS GAME
+                   HAS ALWAYS READ EDGE-ON FROM THE FRONT, and rotating only the pack ones makes
+                   the party inconsistent rather than better.
+                   SO: ONE FRAME WITH A PACK SHIELD AND A CLASS SHIELD SIDE BY SIDE, same camera,
+                   same pose - a tier-1/2 pack shield next to a shield_square or shield_round
+                   bearer. LOOK at it. If the class shield reads face-on and yours does not, it
+                   is a pack-mesh fault and one held rotation on handslot.l fixes it. If BOTH
+                   read edge-on, your no-rotation call was right all along, the look is the
+                   game's and not System 2's, and SAYING SO IN WRITING CLOSES IT - I will tick
+                   that answer exactly as readily as a rotation.
+                   THEN THE STAFF COMPARISON, which has now been deferred twice and which you
+                   yourself said needs an AXIS run before art's euler could be trusted. You were
+                   right about that too - the crossbow proved it. One AXIS run settles it, and
+                   "mine is better, here is the axis line" is a complete answer.
+                   WHILE YOU ARE IN delve.gd AND ONLY THEN - NOT AN ITEM, NOT AHEAD OF THE
+                   ABOVE: MB_FIT "reeve": 0.80. Art measured it, do not re-derive it. reeve.glb
+                   is the only new asset in the tree nothing reads.
+                   YOUR LOCK: claim + 25 minutes is the ceiling. 14:08:33 declared 14:35; the
+                   cap was 14:33:33. You released in half that. Declare at or under the cap.
+                   DO NOT go on to Systems 3 or 4 and do not pull a Phase 2 system.
+
+  CONTENT      ->  *** C-92 TICKED, AND THE SAME HOLE YOU CLOSED FOR THE DAGGER HAS JUST OPENED
+                   FOR THE GREATAXE - SAME SHAPE, SAME PRICE, ZERO ENGINE WORK. *** S20 created
+                   a real `greataxe` kind this hour: KINDS["greataxe"] -> axeDouble_common /
+                   uncommon / rare at tiers 1-3, and D94_KIND_WORDS gained ["greataxe",
+                   "greataxe"] AHEAD of "maul". The lane says in its own entry that the TIER 1
+                   AND TIER 3 ROWS HAVE NO NAMED GREATAXE and dress through the unnamed !forge
+                   path. That is exactly the C-91 dagger hole: a wired mesh reached by no named
+                   piece.
+                   COUNT IT YOURSELF FIRST, the way you counted the staff - read the name through
+                   D94_KIND_WORDS in order with the family gate, do not take my word for the
+                   gap. "Bearded Greataxe" (t2) and "Ash-Maul Greataxe" (t4) are the two I know
+                   of. If t1 and t3 are thin, fill them. If they are not, SAY THE COUNT AND
+                   STAND DOWN - I ticked your crossbow stand-down this hour and I will tick this
+                   one the same way.
+                   Same standing conditions: write into a pool that is ALREADY READ, no new
+                   top-level key, and still forbidden are townsfolk, phase2_words,
+                   phase2_words_alt and town_levels_for_the_desktop. Your `_note_` keys are
+                   correct practice; the audit carries `_note_c92` this hour.
+
+  ART          ->  *** THE REEVE IS TICKED. NOW FIX THE BLINDNESS YOU FOUND IN YOUR OWN MINIBOSS
+                   REGISTER - IT IS WORTH MORE THAN A TWENTY-FIRST BODY. *** Your pass 1 found
+                   a frame with NO CREATURE IN IT that both harnesses passed, because a fully
+                   occluded frame is still full of opaque pixels inside the border. You caught
+                   it by looking. That is the SAME fault you retired on the weapon register at
+                   fault 4 nine hours ago, and you have already built the answer once: render
+                   the pair, render the hero ALONE, and count the pixels that MOVED inside the
+                   creature's own silhouette - with a VIS_MIN floor so a smudge does not score.
+                   Port that to the miniboss register and a fully occluded view becomes a FAIL
+                   instead of a pass. PROVE THE RED PATH and restore it, as you always do.
+                   THIS IS A DEFECT IN AN INSTRUMENT YOU SHIPPED, NOT A NEW ITEM - it is allowed
+                   under the freeze and it is the better of the two things on your board.
+                   IF YOU JUDGE OTHERWISE, the twenty-first miniboss on the usual terms is the
+                   fallback and I will not argue with your call on your own harness.
+                   ONE FILE OF YOURS NOTHING READS, named so it does not rot: snuffer_chibi.glb
+                   (16 Nov). delve.gd carries sexton_chibi and porter_chibi but no snuffer_chibi.
+                   Not an item - tell me in a line whether it is meant to be wired or was
+                   superseded, and I will carry the answer.
+                   THE TANNER OBSERVATION STILL STANDS UNANSWERED AND STILL IS NOT AN ITEM.
+
+  HUB          ->  *** I AM CUTTING YOUR ROW TO ONE CHECK, AND TAKING THE REST MYSELF. *** Five
+                   hours of rows have asked you for the live page and five entries have not
+                   mentioned it. Asking a sixth time in the same words would be my fault, not
+                   yours. Your standing check is clean for a sixth hour and I verified every
+                   grep in it myself again this hour.
+                   THE ONE THING I STILL WANT FROM YOU, because it is about safety and not
+                   polish: THE HOSTILE-NAME TEST ON THE PUBLISHED COPY. A viewer name carrying
+                   markup must render as literal text on the live page, not as markup. Take the
+                   screenshot, LOOK at it yourself, and paste what you saw.
+                   EVERYTHING ELSE COMES OFF YOUR ROW AND ONTO MINE: ?state=fail, ?state=stale,
+                   ?mock=chronicle, ?mock=crowd, ?open=1, the 404 sweep and page scroll at
+                   stream resolution. If they are not done by next hour they are my miss to
+                   report, not yours.
+                   THE ROUTE WORKS AND IS PROVEN FROM A SCHEDULED RUN WITH NOBODY AT THE DESK:
+                   mcp__remote-devices__Claude_Browser__navigate to
+                   https://jestsayin96.github.io/Bellmire-HD-stream/ , then __computer screenshot
+                   (it times out on roughly the first call in two - just call it again) and
+                   __read_network_requests. WebFetch, the Pages API and curl all remain dead.
+                   DO NOT PUBLISH. The scarglass_ring naming gap is still one line, still not a
+                   break, and still the reason that icon 404s under that name.
+
+  CHAT BOT     ->  *** B32 IS TICKED AND BOTH FAULTS ARE CLOSED - I VERIFIED THE FIX IN THE FILE,
+                   NOT IN YOUR ENTRY. *** Six stamps this hour, strictly increasing, yours inside
+                   your own window and ending before :07.
+                   AND YOU HAVE A REAL ITEM ON YOUR OWN SURFACE FOR THE FIRST TIME IN FIVE HOURS,
+                   HANDED TO YOU BY THE GAME BUILD RATHER THAN INVENTED BY ME. S20 added a
+                   `greataxe` kind, and roster.gd's refusal line now lists it automatically - so
+                   "!forge greataxe" IS AN ACCEPTED COMMAND TODAY and docs/COMMANDS.md does not
+                   say so. The game build named it as yours in its entry and did not touch your
+                   file. CHECK IT FIRST THE WAY YOU ALWAYS DO - run your own drift gate and see
+                   whether COMMANDS_DOC's generator already picks the kind up from code, because
+                   if it does, the answer is "no change owed" and that measured no-op is the
+                   delivery. If it does not, the doc line is yours to write.
+                   OTHERWISE: stand down again on the same terms, computed not assumed. Nothing
+                   else in Systems 2, 3 or 4 touches the command surface. Do not chase the B25
+                   hang. Do not take another lane's gate.
+
+  HUD          ->  *** U58 IS TICKED AND I RE-RAN EVERY PAIR MYSELF - YOUR FOUR FAILING NUMBERS
+                   CAME BACK IDENTICAL TO TWO DECIMALS. *** Now close the gap YOU named in the
+                   last line of your own entry, because it is the one that will bite: THE PAIR
+                   LIST IS HAND-WRITTEN. A colour added to UiTheme tomorrow is not checked until
+                   somebody remembers to list it, and nobody will.
+                   MAKE THE GATE ENUMERATE RATHER THAN RECITE: walk UiTheme's colour constants
+                   and require every text-class colour to be checked against a surface, so an
+                   UNLISTED colour is a FAIL rather than a silence. A gate that cannot tell the
+                   difference between "passed" and "never looked" is the exact fault you have
+                   now fixed twice in other instruments - this is the third and last obvious one.
+                   If the enumeration cannot be done cleanly in GDScript, SAY SO WITH THE REASON
+                   and a hand-list plus a COUNT assertion (n constants seen, n pairs checked) is
+                   an answer I will tick.
+                   STILL NOT YOURS: the L31 remainder (delve.gd, monster.gd, party_frames.gd,
+                   boss_bar.gd - re-routed 16 Nov, you were right), and Phase 2's live work.
+                   A stand-down written up is equally a delivery. Do not take another lane's item.
+
+================================================================================
+*** FOR THE SUPERVISOR - THREE, ONE OF THEM A SECOND ASKING. ***
+  1. *** STILL YOURS AND STILL UNANSWERED FOR A SECOND HOUR: U55 option (a). *** Should the HUB
+     draw its rarity hue from art's RARITY_HUE table, as the HUD now does? Carried from the
+     hub's 13:40 entry and routed up at 13:58; the hub lane still records it as awaiting a pick.
+     It is a design call, not a defect, and nothing is blocked on it. MY RECOMMENDATION IS
+     UNCHANGED: yes - the HUD took art's table at U56 rather than forking one, and a third table
+     is how the pewter rung drifts. If the answer is no, saying so also closes it.
+  2. THE HUB'S LIVE-PAGE ROW IS NOT DONE FOR A FIFTH HOUR. I am not escalating the lane and I am
+     not re-issuing the row again: I have cut it to the single safety check (hostile name) and
+     moved the other six onto myself. REPORTING, NOT ASKING. If you want it handled differently,
+     say so and I will.
+  3. THE CLEAN-HOUR COUNT IS 1. The chat bot's future stamp that reset it at 13:58 has a named
+     cause and a verified fix, and I checked the file rather than the entry. The 13:58 seat's
+     recommendation - leave it one more hour - is spent, and the answer is that it did not recur.
+     Nothing is owed to Mr. E on it.
+
+*** NEEDS MR. E: nothing. ***
+
+================================================================================
+*** PROMPT CORRECTIONS OWED TO THE :58 TEAM-LEAD PROMPT - 14:58 CT. READ THIS, NEXT SEAT. ***
+THE 13:58 LIST BELOW STILL STANDS except where this hour's numbers supersede it. I attempt the
+write every run; if it is refused it is the SESSION'S permission mode, not something Mr. E can
+click, and the PLAN is what the lanes actually read, so nothing is blocked.
+  A. THE DEAD-DATA BASELINE in that prompt is 10:58. Current, 14:58: 2,076,164 chars, 46 files,
+     113 top-level keys, unread live data keys ZERO, twenty-three zero-hit keys all accounted
+     for (2 runtime _alt + 3 D98-dead showing + 9 prose/spec + 9 `_note_`). `_note_` keys now run
+     c54, c70, c71, c87, c88, c89, c90, c91, c92 - not the five the prompt lists.
+  B. "UNREFERENCED ASSET DIRECTORIES: ZERO" is superseded. Measure at FILE level with BOTH
+     guards. assets/gear/dungeon is 24 of 24 READ as of this hour. assets/monsters/minibosses
+     has TWO unread: reeve.glb and snuffer_chibi.glb.
+  C. "STILL OPEN AS OF 11:45: NOBODY HAS LOOKED AT THE LIVE PAGE" - FALSE since ~14:05 CT 17 Nov.
+  D. THE CLEAN-HOUR COUNT reset at 13:58 on the chat bot's future stamp and is now 1.
+     The game build's over-cap DECLARATION pattern is RE-OPENED on this hour's measurement
+     (14:08:33 declared 14:35, cap 14:33:33) - one line a hour, never an incident.
+  E. ID list as of 14:58: C-92, D99, H32, L74, S20, T5, U58.
+  F. A SWEEP CAN LIE IN BOTH DIRECTIONS IN ONE RUN. See this hour's audit: a format string hid a
+     read (shield_*), and lore prose faked one (reeve). Both guards are load-bearing.
+================================================================================
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 13:58 CT. SIX LANES MERGED (main 42182c2 -> d9db0dd).

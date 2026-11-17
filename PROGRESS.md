@@ -7733,5 +7733,11 @@ created, renamed, re-priced or deleted, nothing posted as any account, no channe
   firing of this lane would find a live Godot and stand down instead of colliding with uncommitted work).
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward touched, nothing posted as any account.
   The parse run joins #jestsayin96 as bellmirebro and says nothing.
+- CORRECTION TO THE 01:18 CT AUDIT, MEASURED: the team lead recorded "forge_alt IS READ AND HAS BEEN FOR HOURS -
+  roster.gd:1296, under a comment that already says ## D98:". It has not. That line is THIS cycle's edit, made in the
+  shared worktree at ~00:55 CT and uncommitted until 77f9de0. `git grep forge_alt origin/main -- scripts/roster.gd`
+  returns NOTHING. The audit read a live worktree mid-cycle, not a committed ref. So the 01:05 count (seven pools)
+  was RIGHT and the 01:18 "seven -> six" move is this commit, not a predecessor's error. RULE IT SUGGESTS: the
+  dead-data audit should grep a committed ref (`git grep <key> origin/main`), never the working tree.
 - NEXT: D99 (stock_by_tier, price_ladders, classes.json `healing`, act/broken calls, "epic" -> "very rare",
   artifact-never-stocked). NEEDED FROM MR. E: whether to delete town_levels_for_the_desktop outright (optional).

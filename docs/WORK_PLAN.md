@@ -798,6 +798,378 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 03:58 CT by the team lead (clock off the machine: 2026-11-17T03:58:53-06:00).
+The 03:58 block immediately below SUPERSEDES the 02:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 03:58 CT (clock off the machine: 2026-11-17T03:58:53-06:00).
+*** SIX LANES MERGED (main 713d657 -> bb06237). THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW
+*** BELOW IT, INCLUDING THE 02:58 ROWS. TWO THINGS GO UP TO THE SUPERVISOR THIS HOUR, NOT ONE.
+================================================================================
+
+*** MY OWN FAULT FIRST, AND IT IS A SCHEDULING ONE. *** This seat exists nine minutes ahead of the
+game build so its rows land before that lane fires. This run took longer than nine minutes - the
+merge, a six-page browser acceptance run and a glove row re-verified by loading four report files -
+so the GAME BUILD'S 04:07 FIRING READ THE 02:58 ROWS, NOT THESE. No harm done this once, because the
+02:58 row's item 1 (the L56 cap) was already delivered at 03:23 and its item 2 is SYSTEM 10, which
+is exactly what this block gives it too. Recorded so it is not discovered later as a mystery.
+
+*** MERGED THIS HOUR (main 713d657 -> bb06237, six merges, no force, no history rewritten,
+*** nothing left unmerged on any branch - rev-list HEAD..origin/<b> is 0 on all six). ***
+  LAPTOP (game build) 74ad0af - D100: T1_TEST and S2_TEST red gates made GREEN; L56's cap speaks.
+  CONTENT            eb822bc - C-81: +58 bark lines across six READ subkeys, dead pools untouched.
+  ART                9299dd7 - D94 GLOVES PASS 7. The glove was inside the limb it wraps.
+  CHAT BOT           29b42bd - B21: the gate audit one level down. Not clean, and it said so.
+  HUB                1d27faa - H32 standing check + READY TO PUBLISH claimed. Verified below.
+  HUD-UI             81de8ae - U48: four fault shapes found in its OWN gates. It wrote the stand-up.
+  THREE CONFLICTS, all in PROGRESS.md (chatbot, hub, hud-ui): 3 marker lines stripped each, BOTH
+  SIDES KEPT, no cycle renumbered. `git grep -c` over PROGRESS.md and docs/PROGRESS.md returns no
+  matches, so 0 markers are left in either file.
+
+*** THE WHO-TICKS CONTEST IS STILL OPEN AND I STILL DID NOT TICK. *** Unchanged from 01:58 and
+02:58. Everything below reads VERIFIED, RECOMMEND TICK and the supervisor ticks. I did not edit this
+seat's prompt to strip its ticking clause, for the reason three seats have now put on the record:
+only Mr. E's own words change who owns what. THE COST IS NOW TWO LANES, NOT ONE: HUD's L31 remainder
+is still paused on "the hour D99 ticks", and the gloves ruling below is the second thing finished
+and waiting. Two ticks release both.
+
+*** WHAT I VERIFIED MYSELF, BY LOADING THE FILE OR BY MY OWN GREP - NOT BY THE LANE'S WORD. ***
+
+  THE GLOVES PROOF ROW (art, 9299dd7) - *** VERIFIED, RECOMMEND TICK. MR. E'S GLOVES RULING IS MET
+    AND THIS IS THE FIRST HOUR I HAVE BEEN ABLE TO WRITE THAT. *** The row is keyed to its own proof
+    and the condition this plan set was: re-measured with the SAME method, and the number stated.
+    SAME METHOD, CHECKED AND NOT TAKEN: `git diff origin/main origin/art -- tools/art/d94proof.py`
+    is EMPTY. The harness did not move. The only files art touched under tools/ are showcase.py and
+    two new probes; `tools/art/icons.py` is NOT in its diff, so the SHARED `glove_form` dials behind
+    the 520 ticked hub icons did not move either - which is the thing I most wanted to check.
+    THE NUMBER, out of four _report.json files I loaded myself, all three views:
+      front (d94g7b)  TELLS APART  worst pair 5.34%  median 7.70%  15 pairs  0 fit faults  ok:true
+      side  (d94g7bs) TELLS APART  worst pair 4.80%  median 8.18%  15 pairs  0 fit faults  ok:true
+      back  (d94g7bk) TELLS APART  worst pair 4.17%  median 6.95%  15 pairs  0 fit faults  ok:true
+    Against g6 at 02:37: PARTLY TOO SMALL 1/15, worst pair 0.25%, median 2.251%, 6 fit faults. So
+    the fail word is GONE, the too-small count is 0 of 15, the fit faults went 6 -> 0, and blank is
+    12 files / 0 failures with outside:0 - the harness guard is still measuring something real.
+    AND I LOOKED AT IT, because fit is the acceptance test and this ruling is about reading at
+    stream distance: renders/art/d94g7b/_row_gloves.png, strip 3. The six DO tell apart at stream
+    size - a dark lump, small plates, a brown wrap, a white trumpet, a gold trumpet with a spur, a
+    gold cuff with a bar. Baker's and Bellringer's are the closest pair and they still differ by
+    colour, which is what worst-pair 5.34% looks like.
+    THE LANE ALSO OVERTURNED MY DIAGNOSIS AND IT WAS RIGHT TO. My 02:58 row told it to pull the
+    small cuts' inboard wall out of the TORSO. It measured first: the failing wrap's cuff is 5.2% in
+    the torso and 89.4% in the ARM - it was swallowed by the limb it wraps, not buried in the body.
+    Had it obeyed the row it would have moved almost nothing. A lane that measures before it obeys
+    is behaving exactly as this plan asks, and the row was mine and wrong.
+    AND IT CAUGHT ITS OWN INSTRUMENT LYING MID-RUN - `ray_out` taking the outermost hit returned the
+    OTHER arm half a metre away - fixed it before touching geometry, and then NAMED the column of
+    its own JSON that is still untrustworthy and rested no conclusion on it. That is the standard.
+    WHAT I AM NOT HIDING INSIDE THIS RECOMMENDATION: the lane's own honest fit list says the hand is
+    hidden behind the cuff on three of six from the front and side, so the KNUCKLE DIAL - one of the
+    four dials Mr. E's ruling names - does not read on the body at all. The ruling is met on its own
+    proof row and on more derived variation, which is what it asks for; but one of its four dials is
+    currently spent, and that is art's next row below rather than a reason to withhold the tick.
+
+  D100 (game build, laptop 74ad0af) - VERIFIED, RECOMMEND RECORDING. Not an item of its own; it is
+    two red gates made green plus a lying cap taught to speak, all of which this plan says are
+    fixable at any time and are never new work. I READ THE VERDICT LINES OFF THE LOGS, NOT THE
+    RETURN CODES, and I read the BEFORE log as well as the AFTER one in both cases:
+      t1.log  T1_TEST 1 FAILED   -> t1b.log  T1_TEST OK
+      s2.log  S2_TEST FAIL (19 checks, 1 failed, bad: new ashwight -> '') -> s2b.log S2_TEST OK (19, 0)
+      TOWNWALK in_solid=0/18958 (0.000%) raid_in_solid 0/3946 PASS; TWITCH_PARSE OK;
+      OFFFLOOR 0 of 1872; parse / parse2 / delve / offfloor: 0 SCRIPT ERROR and 0 Parse Error each.
+    THE L56 CAP FIX IS REAL AND I CHECKED THE SHAPE OF IT: l56.log's last line now reads
+    `L56 CAP HIT - NO VERDICT (4 of 4 runs capped ...; 1 check(s) unmet and unearnable)`. That is
+    COORDINATION 15 applied in the right direction. ONE LINE OF HONESTY ABOUT IT, AND IT IS SMALL:
+    the log STILL prints `FAIL L45: lords actually RISE on boss floors in play (0 kinds seen)` and
+    `CHECKS 4 FAILS 1` three lines above that summary. The last line is the verdict and it is correct
+    and unambiguous, so this is not a red gate - but a careless reader grepping for FAIL still finds
+    one. Worth a line, not a re-open.
+
+  C-81 (content, eb822bc) - VERIFIED, RECOMMEND RECORDING. I did not read the diff; I loaded
+    data/lore_lines.json at 713d657 and at HEAD and counted every key with the same function.
+    EXACTLY +58 lines and EVERY ONE of them in `barks`: enter 138->147, lord 137->147, trap 138->148,
+    hurt 137->147, drink 132->141, misfire 136->146. No other top-level key changed by a single line.
+    THE FOUR DEAD POOLS ARE BYTE-STABLE, measured not taken: townsfolk, phase2_words,
+    phase2_words_alt and town_levels_for_the_desktop are identical before and after.
+    AND `barks` IS READ - scripts/delve.gd:3432, `lore().get("barks", {}).get(kind, [])`, by kind,
+    so all six widened subkeys are spoken. The lane went where its row sent it and nowhere else.
+
+  B21 (chat bot, 29b42bd) - VERIFIED, RECOMMEND RECORDING, and it is the fourth hour running this
+    lane has turned an instrument red before anyone asked. It took the file-only row as written: no
+    lock, no Godot, clock read off the machine, and it did NOT re-run L56 because the cap fix had
+    landed - exactly the restraint its row asked for. It audited the five gates behind its three
+    files for EARNABILITY and came back NOT CLEAN, naming its own doc gate as the worst of it:
+    `tools/_commands_doc.gd:34` prints the size of `commands` while line 22 writes from
+    `c.get("order", cs.keys())` - a PRESENT BUT SHORT `order` gutters docs/COMMANDS.md and still
+    prints the full count. The D99/B18 guard above it only catches an empty `commands`, a different
+    key. Three gates also quit(0) on FAIL, and three print no check count at all.
+
+  U48 (HUD, 81de8ae) - VERIFIED, RECOMMEND RECORDING, AND THE SILENCE IS OVER. Last hour this lane
+    shipped nothing and I said so plainly; this hour it took the file-only row exactly as written -
+    no lock, no Godot, lock read at 03:53 and left untouched, no tools/ file edited because the fixes
+    need the engine to prove. FOUR FAULT SHAPES IN ITS OWN GATES, each with a proposed fix:
+    _l71/_l74 have no frame cap and no floor (an empty feed box audits zero labels and reads OK);
+    _l72 prints no OK/FAIL token at all and `fails=0` is reachable with no lord filmed; _l73_test is
+    the L56 shape exactly - a 330 s cap falls through and prints FAIL rather than NO VERDICT; and
+    _board_test/_director_test are CAMERAS, not gates, and it asked that they never be cited as
+    gates again. IT ALSO LEFT tools/_l56_test.gd ALONE because it is not its file. Correct.
+
+  HUB (1d27faa) - *** IT CLAIMED "READY TO PUBLISH", SO THE GATE IS OWED AND I RAN IT. IT IS THE
+    FIRST TIME THIS SEAT HAS RUN THE WHOLE PUBLISH GATE, AND I RAN IT MYSELF RATHER THAN READING THE
+    LANE'S RUN. *** What I did, in order, all on merged main:
+    1. EVERY H32 PASS MERGED AND TICKED: the ledger at this file's line 1765 reads "H32 TICKED WHOLE
+       2026-11-16 22:05 CT (hub ddee675 acceptance run)", and passes 1-5 are each ticked above it.
+       Nothing is unmerged on origin/hub. So the item is whole, not part-delivered.
+    2. SECURITY, BY MY OWN GREP AND BY READING EVERY HIT, NOT BY THE LANE'S WORD:
+       - innerHTML appears 6 times in web/app.js. FOUR ARE COMMENTS. The two live sites are 252 and
+         298, and I read both: 298 is two whole-string page literals with no interpolation at all;
+         252 interpolates exactly two values, `esc(lastError)` and `esc(age)`, both escaped and
+         neither a snapshot value. NO SNAPSHOT VALUE REACHES innerHTML.
+       - NO outerHTML, NO insertAdjacentHTML, NO document.write, NO eval, NO new Function anywhere.
+       - ONE `.src =` in the whole file, app.js:3750, and it takes `itemIconFile()`, which is a
+         lookup in the GENERATED ITEM_ICONS whitelist returning a page-constant path, or "". The alt
+         text is `ctrlStrip(name).slice(0,60)` - text, not a URL.
+       - ONE data-driven `.href =`, app.js:2710, and it is host-gated: `/^https:\/\/(www\.)?twitch\.tv\//`
+         must match or the URL is rendered as plain text. The value is Twitch's own device-flow
+         response, not snapshot data, and it is gated anyway.
+       - NO cssText and NO setAttribute("style", ...) anywhere, so no snapshot value reaches style.
+       - CSP INTACT AND STRICT, read off index.html:5: default-src 'none'; script-src 'self';
+         style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'.
+    3. THE STATE CHECKS, RUN BY ME. I served web/ off 127.0.0.1 and drove headless Chrome at
+       1400x850 over all six: ?mock=crowd, ?state=empty, ?state=fail, ?state=stale, ?mock=chronicle,
+       ?open=1. ALL SIX RENDERED, every one returned 200 for index, style.css, app.js and the font,
+       and nothing else was requested - no network call left the page.
+    4. AND I LOOKED AT TWO OF THEM, which is the part of this gate that cannot be delegated.
+       ?mock=crowd: the three-column shell is there - hero rail with levels, stage, opt-in guild
+       chat behind a button - the Welcome panel sits ABOVE the stage, the section pills are a top
+       bar, and the stale banner reads "Last word from the town 2 days ago". Palette is deep ink and
+       charcoal, parchment, ONE teal accent and restrained gold. NO TWITCH PURPLE, no wordmark, no
+       logo - the word "Twitch" appears as prose only. No page scroll.
+       ?state=fail: red status dot, "Couldn't reach the town's records (test: no answer)", a Try
+       again button, and a parchment card saying the records are out of reach. Clean, no scroll.
+    5. ON THE HOSTILE NAME I AM BEING EXACT RATHER THAN GENEROUS: I did not render a hostile name
+       and look at it this hour. What I proved is the MECHANISM - there is no innerHTML, src, href
+       or style path by which a snapshot value could become markup, so a hostile name has nowhere
+       to go but textContent. The lane rendered the hostile string this hour and reported it literal
+       in six mocks. I am citing its run for that one condition and my own grep for why it holds.
+    THE ONE LOOK FAULT I FOUND MYSELF AND THE LANE DID NOT NAME: at 1400x850 on ?mock=crowd the
+    section pill row is CLIPPED at the right edge - "The Fallen 8" is cut off by the stage column.
+    It does not clip on ?state=fail, where the pills carry no count badges, so it is the badges
+    widening the row. Small, cosmetic, and it is a defect in shipped work rather than a new item.
+    THUMBNAIL CURRENCY, MEASURED: web/icons/items holds 520 .webp, _manifest.json count 520 against
+    520 source PNGs in assets/icons/items, 2,430,050 bytes against the 6 MB ceiling, and
+    `git log 2473836..HEAD -- assets/icons/items` is EMPTY, so the manifest's source_commit is still
+    the current state of the icons. (The lane reported 2,341,956 bytes off its own branch; I measure
+    2,430,050 on main. Both are far under the ceiling and I am not calling the difference a fault,
+    but I am stating my number rather than repeating its.)
+    MY RECOMMENDATION HAS CHANGED FROM HOLD TO PUBLISH, and it goes UP. See the block at the end.
+
+*** THE DEAD-DATA AUDIT, 03:58 CT, OFF 2,055,050 CHARS OF SCRIPT (scripts/*.gd + web/*.js, 46 files,
+*** .bak EXCLUDED, tools/ EXCLUDED BECAUSE tools/ IS NOT THE GAME).
+*** THE COUNT DID NOT MOVE: FOUR LORE POOLS AND ONE DIRECTORY, ALL FIVE ALREADY ACCOUNTED FOR. ***
+  - lore_lines.json: the same 4 of 26 pools - townsfolk, phase2_words, phase2_words_alt,
+    town_levels_for_the_desktop - and all four are DECLARED DEAD IN WRITING in this plan. ZERO
+    UNDECLARED DEAD KEYS IN data/, unchanged from 02:58.
+  - assets/monsters/creatures - 12 .glb, 0 referencing files. THE LAST DEAD ASSET DIRECTORY and it
+    is System 10's game-build half, in that lane's row. minibosses (44 files) and lords (8) both
+    carry real path references and stay closed.
+  - BOTH GUARDS RAN AND THE SUFFIX GUARD EARNED ITS KEEP AGAIN. It flagged `lord_intros_alt`,
+    `unique_intros_alt` and `phase2_words_alt` as suffix-built candidates, and I read the builder at
+    scripts/delve.gd:3379-3384 rather than guessing: `var base := "unique_intros" if uniq else
+    "lord_intros"` then `lore().get(base + "_alt", {})`. So that line can only ever build the first
+    two keys. The first two are READ. `phase2_words_alt` is NOT reachable by it and stays correctly
+    dead. A plain literal grep calls all three dead; a careless suffix guard would have called all
+    three read. Both failures are now closed by the same four lines of reading.
+  - READ AND STAYING READ - DO NOT RE-WIRE: forge_alt (roster.gd:1296), lord_intros_alt and
+    unique_intros_alt (delve.gd:3382), cooldown_s (chatcmd.gd:702), twitch_cooldown_s
+    (twitch_chat.gd:10, ENFORCED since D99), barks (delve.gd:3432), stock_by_tier / price_ladders /
+    classes.json healing (economy.gd, D99).
+  - PROSE, NOT POOLS - reported so they stop resurfacing: biomes `technique`; origins
+    `chronicle_line`, `word_order`, `casing`; ranks `one_roll`; bosses `boss_floors`; items
+    `_note_c54`, `_note_c71`; lore `_note_c70`; strains `_gating`. I loaded each value.
+  - TWO FINDINGS, NEITHER AN ITEM, NEITHER TO BE WIRED ON ANY LANE'S OWN INITIATIVE:
+    `canon_silences` (world.json) 0 hits, carried since 01:58; and NEW THIS HOUR, ranks.json
+    `promotion_line` - "X is raised to {rank} of the Bellmire Guild." It is a TEMPLATE, not prose,
+    and nothing reads it. I am recording it as a finding rather than writing an item, because the
+    freeze says a good idea nobody asked for is not work.
+
+================================================================================
+*** THE SIX ROWS. 2026-11-17 03:58 CT. ***
+================================================================================
+
+  GAME BUILD   ->  *** SYSTEM 10'S GAME-BUILD HALF. IT IS THE LAST DEAD ASSET DIRECTORY IN THE TREE
+                   AND IT IS THE WHOLE OF WHAT REMAINS OF MR. E'S 20:40 GAP. *** Your 02:58 row's
+                   items 1 and 2 were the L56 cap (delivered 03:23) and this; item 1 is closed, so
+                   this is item 1 now. Twelve bodies in assets/monsters/creatures, 0 references.
+                   ART HAS PROVEN THE FIT - do not re-derive scale and do not rebuild a body. THE
+                   TWELVE ARE STATIC, so bestiary.gd needs a `model` path and NO `anims` entry.
+                   THEN, AND ONLY THEN: Systems 2, 3 and 4 (named weapons, armour, accessories).
+                   TWO SMALL THINGS THAT ARE YOURS AND ARE NOT NEW WORK, either before or after:
+                   (a) tools/_l56_test.gd still prints `FAIL L45 ...` and `CHECKS 4 FAILS 1` three
+                       lines above its own `CAP HIT - NO VERDICT` summary. The summary is right and
+                       the gate is not red; but a grep for FAIL still finds one in a capped run.
+                       Suppress or re-word the per-check FAIL when the cap was hit.
+                   (b) THE CHAT BOT FOUND A GENUINELY UN-EARNED VERDICT IN tools/_commands_doc.gd
+                       AND IT IS THE FILE YOU TOUCHED AT D99, SO SAY WHOSE IT IS RATHER THAN BOTH OF
+                       YOU LEAVING IT: line 34 prints `cs.size()` while line 22 writes from
+                       `c.get("order", cs.keys())`. A PRESENT BUT SHORT `order` gutters
+                       docs/COMMANDS.md and still prints the full count. If you take it, count the
+                       rows actually written. If you do not, say so in one line and it goes to the
+                       chat bot's :45 window.
+                   DO NOT TAKE A PHASE 2 SYSTEM (5-80). Phase 2 begins the hour D99 ticks.
+
+  ART          ->  *** THE GLOVES RULING IS VERIFIED AND RECOMMENDED FOR TICK. THREE VIEWS, TELLS
+                   APART ON ALL THREE, 0 TOO-SMALL PAIRS, 0 FIT FAULTS, SAME HARNESS - I CHECKED THE
+                   HARNESS DIFF MYSELF AND IT IS EMPTY. YOU CLOSED MR. E'S RULING. *** And you did it
+                   by overturning my row's diagnosis with a measurement before obeying it, which is
+                   what this plan asks of every lane and what I got wrong. Recorded above as mine.
+                   DO NOT RE-SHOOT THE GLOVES ROW AGAIN. It is finished and it is with the supervisor.
+                   NEXT, AND IT IS OUT OF YOUR OWN HONEST FIT LIST, NOT A NEW ITEM: THE KNUCKLE DIAL
+                   IS SPENT. You wrote that the hand is hidden behind the cuff on Quarreller's,
+                   Forgemaster's and Raidbreaker's from the front AND the side, so the knuckle
+                   treatments - spikes, studs, dome - do not read on the body at all and live only in
+                   strip 1. KNUCKLE TREATMENT IS ONE OF THE FOUR DIALS MR. E'S RULING NAMES BY NAME.
+                   The ruling is met without it, but a dial that cannot be seen is a dial you cannot
+                   spend later. Make the knuckle read on the body, or say in writing that the cuff
+                   silhouette is the better trade and the knuckle dial is retired - either closes it,
+                   the same way a written refusal closed D97's 29 shape lines. Re-shoot the same row
+                   if you change geometry; do not change `icons.glove_form` - the 520 hub icons are
+                   ticked and must not move, and you correctly did not touch it this hour.
+                   SECOND, SMALLER, AND ALSO YOURS: Carder's Gloves is the least glove-like of the
+                   six by your own list, and Forgemaster's and Raidbreaker's throw a thin blade-like
+                   spur forward off the lip's outboard skew. Neither is a clip and neither blocks.
+                   STILL OWED, SMALL AND NOW UNANSWERED FOR THREE HOURS: say whether
+                   assets/monsters/minibosses/snarer_chibi.glb is wanted at all - no .glb.import
+                   sibling, and no lane is blocked either way. One line closes it.
+
+  HUB          ->  *** YOUR READY-TO-PUBLISH CLAIM WAS EARNED AND I HAVE ROUTED IT UP WITH A
+                   RECOMMENDATION TO PUBLISH. I RAN THE WHOLE GATE MYSELF - grep, six state/mock
+                   pages in headless Chrome, and I looked at two of them. *** You do not publish and
+                   you do not push gh-pages; the decision is the supervisor's and it is now in front
+                   of that seat with my evidence. Nothing in this row asks you to wait idle for it.
+                   ONE LOOK FAULT I FOUND THAT YOU DID NOT NAME, AND IT IS YOURS: at 1400x850 on
+                   ?mock=crowd the section pill row is CLIPPED at the right edge - "The Fallen 8" is
+                   cut off by the stage column. It does NOT clip on ?state=fail, where the pills
+                   carry no count badges, so the badges are widening the row past its container.
+                   Fix the pill row so the last pill is never cut at 1400x850, and re-shoot that one
+                   mock. That is a defect in shipped work, not a new item.
+                   THEN, AND IT IS THE LINE YOU HAVE OWED FOR TWO HOURS: the manifest names 520 files
+                   but 519 NAMES, with ring/scarglass_ring dropped for ring/scar_ring, both
+                   "Scarglass Ring". Decide which key keeps the name, or say in one line that the
+                   glyph fallback is the intended answer. Either closes it; silence does not.
+                   YOUR HOUSEKEEPING ANSWER IS ACCEPTED as written - the six _h32_shot_*.png, the
+                   two tars and the scratch logs are untracked on purpose, delete is refused on this
+                   machine, and naming them is the right close. Do not re-raise it.
+
+  CONTENT      ->  *** C-81 IS VERIFIED AND RECORDED. +58 LINES, ALL OF THEM IN `barks`, NOT ONE
+                   LINE ANYWHERE ELSE - I COUNTED IT OFF THE FILE AT BOTH COMMITS RATHER THAN OFF
+                   YOUR DIFF, AND THE FOUR DEAD POOLS ARE BYTE-STABLE. *** You are not throttled,
+                   not waiting on any lane, and nobody is sitting on your work.
+                   KEEP GOING IN `barks` IF YOU WANT DEPTH - it is read at delve.gd:3432 by kind and
+                   every line you add is spoken; the six subkeys now stand at 141-148 each.
+                   THE STANDING REFUSALS ARE UNCHANGED AND BOTH ARE STRUCTURAL, NOT A JUDGEMENT ON
+                   YOUR WRITING: the 29 trick-only shape lines stay refused while the wiring-only
+                   ruling stands, and D99 put the same reasoning on act/broken - both are blocked on
+                   the fourteen miniboss MECHANICS, which are behaviour and not wiring. Skew-and-
+                   flavour shape lines are fully honoured and always were. Do not write more
+                   trick-only lines expecting them built.
+                   ONE THING YOU MAY WANT TO KNOW RATHER THAN AN INSTRUCTION: ranks.json
+                   `promotion_line` is a TEMPLATE - "X is raised to {rank} of the Bellmire Guild." -
+                   and nothing in scripts/ reads it. It is recorded as a FINDING, not an item, and
+                   nobody is to wire it on their own initiative. Do not write more into it meanwhile.
+
+  CHAT BOT     ->  *** B21 IS VERIFIED AND RECORDED, AND IT IS THE FOURTH HOUR RUNNING YOU HAVE
+                   TURNED AN INSTRUMENT RED BEFORE ANYONE ASKED - B18's loader, B19's ask/foreign,
+                   B20's L56 cap, and now your OWN doc gate. Naming your own as the worst of the
+                   five is the reason this lane's reports are trusted. *** You also did NOT re-run
+                   L56 once the cap fix landed. Exactly right.
+                   NOW FIX WHAT YOU FOUND, IN YOUR :45 WINDOW, AS ONE SHORT BATTERY:
+                   1. THE THREE LYING EXIT CODES FIRST - _d704_echo, _l14_test and _b11_muster all
+                      quit(0) on FAIL. A battery that reports the return code reads them green, and
+                      COORDINATION 15 point 3 only holds because somebody reads the verdict line.
+                      Make the exit code agree with the verdict.
+                   2. THE THREE MISSING COUNTS - _l14_test, _twitch_parse and _b11_muster print no
+                      check count at all, so no floor can be put under them. Print the count, then
+                      put a floor under it, the way D99 put 100 under _d704_echo.
+                   3. tools/_commands_doc.gd IS THE ONE GENUINELY UN-EARNED VERDICT AND OWNERSHIP IS
+                      BEING SETTLED THIS HOUR - the game build's row asks it to say whether that file
+                      is its own, since it edited it at D99. If it declines in writing, take it: count
+                      the rows actually written from `order`, not `cs.size()`. DO NOT take it before
+                      that answer; two lanes editing one gate is how a prompt loses its attribution.
+                   DO NOT TOUCH tools/_l56_test.gd. It is not yours and its cap is already fixed.
+
+  HUD          ->  *** U48 IS VERIFIED AND RECORDED AND THE SILENCE IS OVER. FOUR FAULT SHAPES IN
+                   YOUR OWN GATES, EACH WITH A PROPOSED FIX, AND YOU LEFT tools/_l56_test.gd ALONE
+                   BECAUSE IT IS NOT YOURS. THAT IS THE WHOLE JOB DONE RIGHT. *** You also read the
+                   lock at 03:53 and left it untouched, and you did not edit a tools/ file you could
+                   not prove. Both correct.
+                   NOW LAND YOUR OWN THREE, AND THIS ONE DOES NEED THE ENGINE: take your :52-:07
+                   window as ONE short battery with an expected finish inside the 15-minute cap, and
+                   prove each fix by BREAKING IT ON PURPOSE the way you proposed - hide FeedHUD,
+                   empty the feed box, drop the lord shot - and confirm the gate prints NO VERDICT or
+                   FAIL and never OK. Fault 4 (_board_test / _director_test are cameras, not gates)
+                   is a one-line rename and needs no engine at all; do that one first, in the file.
+                   SPLIT IT IF IT WILL NOT FIT. A declared relaunch on its own line with its own
+                   expected finish is correct behaviour, not a fault.
+                   YOUR L31 REMAINDER (the status-effect icons) STILL RETURNS THE HOUR D99 TICKS, and
+                   D99 has been delivered, verified and sitting with the supervisor since 02:22. You
+                   are not blocked by a lane and nobody is sitting on your work - it is one tick away
+                   and I have said so again in the block below.
+                   Do not invent an item and do not take a Phase 2 system.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-17 03:58 CT. THREE THINGS. ***
+================================================================================
+  1. *** VERIFIED, RECOMMEND TICK: MR. E'S GLOVES RULING (art 9299dd7, D94 pass 7). *** The ruling
+     is keyed to its own proof row and the row now reads TELLS APART on all three views - front
+     worst pair 5.34%, side 4.80%, back 4.17% - 15 pairs each, 0 too-small, 0 fit faults, ok:true,
+     against PARTLY TOO SMALL 1/15 and worst 0.25% at 02:37. SAME METHOD: the harness diff
+     (tools/art/d94proof.py, main vs art) is EMPTY, and tools/art/icons.py is untouched so the 520
+     ticked hub icons did not move. I looked at the row myself at stream size and the six tell apart.
+     ONE THING TO TICK IT KNOWING: the lane's own fit list says the hand is hidden behind the cuff on
+     three of six, so the KNUCKLE dial - one of the four Mr. E names - does not read on the body. The
+     ruling asks for more derived variation and gets it; I am flagging the spent dial rather than
+     burying it, and it is art's next row either way.
+
+  2. *** HUB READY TO PUBLISH - AND MY RECOMMENDATION IS PUBLISH, CHANGED FROM HOLD. *** The lane
+     claimed it at 03:40 and I ran the gate myself rather than reading its run.
+     WHAT WOULD GO OUT: the H32 three-column hub - hero rail, stage, opt-in guild chat - with 520
+     derived WebP item thumbnails at 160x160, 2,430,050 bytes against the 6 MB ceiling, manifest
+     source_commit 2473836 still current (`git log 2473836..HEAD -- assets/icons/items` is empty).
+     WHAT I CHECKED, ALL OF IT MYSELF: every H32 pass merged and TICKED (passes 1-5, and H32 ticked
+     WHOLE 16 Nov 22:05 at this file's line 1765), nothing unmerged on origin/hub; no innerHTML on
+     any snapshot value (6 hits, 4 comments, 2 page-owned - I read both); no outerHTML /
+     insertAdjacentHTML / document.write / eval / new Function anywhere; one `.src` and it is a
+     whitelist-chosen page constant; one data-driven `.href` and it is host-gated to twitch.tv; no
+     cssText and no setAttribute("style"); CSP intact and strict (default-src 'none', script-src
+     'self', img-src 'self' data:, base-uri 'none', form-action 'none'); six state/mock pages served
+     off localhost and driven in headless Chrome at 1400x850 - ?state=empty, ?state=fail,
+     ?state=stale, ?mock=chronicle, ?mock=crowd, ?open=1 - all six rendered with no outbound network
+     call; and I LOOKED at ?mock=crowd and ?state=fail. Palette holds: ink, parchment, one teal, gold.
+     No Twitch purple, no wordmark, no logo.
+     THE TWO THINGS I AM NOT OVERSTATING. (a) I did not render a hostile name and look at it myself
+     this hour; I proved the MECHANISM by grep - there is no markup, URL or style path a snapshot
+     value can reach - and the lane rendered it literal in six mocks this hour. (b) ONE COSMETIC
+     DEFECT I FOUND AND THE LANE DID NOT: the section pill row clips "The Fallen 8" at the right edge
+     at 1400x850 when the count badges are present. It is in the hub's row to fix. IT IS COSMETIC AND
+     I DO NOT THINK IT SHOULD HOLD A PUBLISH, but you are the seat that decides that and you should
+     decide it knowing, not find it on the live page.
+
+  3. *** D99 IS STILL WAITING AND IT IS NOW BLOCKING A SECOND LANE-HOUR. *** Unchanged and
+     re-verified by me this hour only in the sense that nothing has disturbed it: it was verified
+     term by term at 02:58 and recommended then. HUD's L31 remainder is paused by Mr. E's 20:40
+     ruling "returning the hour D99 ticks", and HUD has now spent two hours on file-only work it did
+     well while the thing that unblocks it sits finished on main. One tick releases a lane. The
+     act/broken refusal is written up in the 02:58 entry and I still endorse it.
+
+  AND THE STANDING ONE, NOT A REQUEST: THE WHO-TICKS CONTEST IS STILL OPEN. Your 01:50 order and
+  Mr. E's 01:44 reporting line are both in this plan and they disagree. I complied with the narrower
+  reading for the third hour running and did not edit my own prompt. It is now holding two finished
+  things - the gloves ruling and D99 - and it will hold more each hour. Routed up at 01:58 and still
+  open; only Mr. E's own words settle it, and I have not asked him myself because it is not mine to
+  take to him over your head.
+
+  NEEDS MR. E - nothing this hour.
+
 Updated 2026-11-17 02:58 CT by the team lead (clock off the machine: 2026-11-17T02:59:01-06:00).
 The 02:58 block immediately below SUPERSEDES the 01:58 block and every row under it.
 

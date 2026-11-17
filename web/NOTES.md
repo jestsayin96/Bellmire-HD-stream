@@ -862,3 +862,5 @@ Headless Chromium, real-shaped snapshots (publisher v4 shape: shops[{name,level,
 - Stale (30 min old): "Last word from the town 30 minutes ago ... may be out of date". ?state=stale, ?state=empty, ?state=fail, ?mock=chronicle, ?mock=crowd, ?open=1 all behave.
 - Unknown v9: honest "needs an update" problem, no tab content.
 - Still open on the GAME BUILD side: snapshot_pub.gd sends shops WITHOUT `stock`, and no `caravan`/`trader`/`orders` yet, so each shelf honestly reads "The shelf has not been published yet." The hub needs no change; it lights up when those fields arrive (items.json shop_stock / trader_cargo wiring in the publisher).
+
+- 2026-11-16 ~17:40 CT hub run: lane STOOD DOWN. Read WORK_PLAN hub row (H14-H31 all ticked) + H29/H30 items; H29 point 6 still blocked on the game build publisher (snapshot_pub.gd sends shops without stock/caravan/orders). Checked app.js: node --check OK, no innerHTML on snapshot data (2 page-owned sites), CSP meta present. No defect found, no web/ code changed.

@@ -104,6 +104,8 @@ func _process(_dt: float) -> bool:
 	return _finish()
 
 func _finish() -> bool:
+	if _checks < 80:  ## S11: measured 80; fewer means something stopped being checked
+		_fails.append("check floor: %d checks is under 80" % _checks)
 	if _fails.is_empty():
 		print("MBFEED_TEST OK %d checks" % _checks)
 	else:

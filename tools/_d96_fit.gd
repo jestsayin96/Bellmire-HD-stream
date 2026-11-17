@@ -122,7 +122,10 @@ func _check_and_clear() -> void:
 	var mh := 0.0
 	var hh := 0.0
 	if m._body:
-		mh = m._local_bounds(m._body).size.y * m._body.scale.y
+		## S11: measure at REST scale. A hit landing during the wait squashes the body to 0.86 y for
+		## 0.3 s (L26a flinch), and one 05:10 run read the Pale Duchess 4% short off that - a flaky gate.
+		var sy: float = m._base_scale.y if m._base_scale != Vector3.ZERO else m._body.scale.y
+		mh = m._local_bounds(m._body).size.y * sy
 	if b._mdl:
 		hh = m._local_bounds(b._mdl).size.y * b._mdl.scale.y
 	# the gate holds the MINIBOSS to art's number against art's hero (2.45 m, posed knight, no
@@ -154,6 +157,8 @@ func _process(_dt: float) -> bool:
 			print("D96 ROWS:")
 			for r in _rows:
 				print("  " + r)
+			if _checks < 70:  ## S11: measured 70; fewer means something stopped being checked
+				_fails.append("check floor: %d checks is under 70" % _checks)
 			if _fails.is_empty():
 				print("D96_FIT OK %d checks, 14 minibosses in their own bodies" % _checks)
 			else:

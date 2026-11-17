@@ -120,6 +120,8 @@ func _process(_dt: float) -> bool:
 		_ok(p.size() == 1 + alt.size(), "forge tier %s: pool is live + alt = %d (%d)" % [t, 1 + alt.size(), p.size()])
 		_spread("forge tier %s" % t, p, String(fl[t]), alt, func(): return Roster.forge_flavour(int(t)))
 	print("D98 alt lines now reachable: %s" % str(total))
+	if _checks < 106:  ## S11: measured 106; fewer means something stopped being checked
+		_fails.append("check floor: %d checks is under 106" % _checks)
 	if _fails.is_empty():
 		print("D98_TEST OK %d checks" % _checks)
 	else:

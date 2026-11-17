@@ -31,4 +31,15 @@ func _process(_dt: float) -> bool:
             for mo in _d._foes():
                 ms.append([(mo as Node3D).global_position.snapped(Vector3.ONE * 0.1), mo.state])
         print("T", _f / 60, "s floor=", _d.floor_no, " state=", _d.state, " foes=", _d._foes().size() if _d.dun else -1, " ", hp)
-    return _d.state == "home" or _f > 60 * 150
+    if _d.state == "home" or _f > 60 * 150:
+        ## S11: this gate printed no verdict at all and passed on silence. It is a SMOKE run:
+        ## the verdict says the delve got going; SCRIPT ERROR is still read off the log.
+        var why := "home" if _d.state == "home" else "capped at %d frames" % _f
+        if _d.floor_no < 1 or _f < 600:
+            print("DELVE_TEST NO VERDICT: floor %d, %d frames (%s) - the delve never got going" % [_d.floor_no, _f, why])
+            quit(2)
+        else:
+            print("DELVE_TEST OK ran %d frames, floor reached %d, state %s (%s); engine error lines are still read off the log" % [_f, _d.floor_no, _d.state, why])
+            quit(0)
+        return true
+    return false

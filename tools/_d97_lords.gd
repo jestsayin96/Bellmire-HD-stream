@@ -117,7 +117,10 @@ func _check_and_clear() -> void:
 	_ok(m._body != null, "%s: the model loaded" % tag)
 	var mh := 0.0
 	if m._body:
-		mh = m._local_bounds(m._body).size.y * m._body.scale.y
+		## S11: measure at REST scale. A hit landing during the wait squashes the body to 0.86 y for
+		## 0.3 s (L26a flinch), and one 05:10 run read the Pale Duchess 4% short off that - a flaky gate.
+		var sy: float = m._base_scale.y if m._base_scale != Vector3.ZERO else m._body.scale.y
+		mh = m._local_bounds(m._body).size.y * sy
 	var art_z := float(((_art.get(id, {}) as Dictionary).get("size", [0, 0, 0]) as Array)[2])
 	var size := float(m.def.get("uniq_size", 1.0))
 	var want := art_z * Bestiary.LORD_SCALE * size
@@ -164,6 +167,8 @@ func _process(_dt: float) -> bool:
 			for r in _rows:
 				print("  " + r)
 			print("D97 no-model lords: %s" % str(Bestiary.lord_no_model))
+			if _checks < 139:  ## S11: measured 139; fewer means something stopped being checked
+				_fails.append("check floor: %d checks is under 139" % _checks)
 			if _fails.is_empty():
 				print("D97_LORDS OK %d checks, %d risings" % [_checks, _plan.size()])
 			else:

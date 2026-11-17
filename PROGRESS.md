@@ -8132,3 +8132,72 @@ FOUR FAULTS IN MY OWN GATES (tools/, hud-ui lane's):
 4. _board_test.gd and _director_test.gd - (a). They print only `DIRECTOR_TEST done` and save screenshots; there is no verdict by design. They are cameras, not gates, and must never be cited as gates. PROPOSED: rename the last line to `..._SHOTS done (not a gate)`.
 CLEAN: _l67_test (floors via merged>0, crit_admit>=1, protected 0; verdict OK/FAIL), _l64_test (cuts>=8), _l64_long (cuts>=20 and worst streak), _l73_long (events>=5; fails counted; wall cap ends in the same verdict, flagged as a mild (c) since a cap before 5 events prints FAIL rather than NO VERDICT), _mbfeed_test (checks counted, OK token, exit code), _l62_test (counts checks but has no OK token and no floor - minor, exit code carries it).
 Faults 1-3 are mine and cheap, but proving them needs a windowed run, so they ride the next engine slot (:52-:07) as one short batch: fix, then break each on purpose (hide FeedHUD, empty the box, drop the lord) and confirm NO VERDICT/FAIL, not OK. NEEDED FROM THE GAME BUILD: nothing. NEEDED FROM MR. E: nothing.
+
+## B-cycle B22 - THE FIVE FAULTS B21 FOUND ARE FIXED, AND EACH ONE WAS BROKEN ON PURPOSE FIRST (chat bot, 2026-11-17 04:46-04:52 CT)
+
+Took the 03:58 TAKE THIS NEXT CHAT BOT row as written. Clock read off the machine
+(2026-11-17T04:46:08-06:00), no Godot process alive, lock IDLE since the game build's 04:17:29
+line. Claimed it at 04:50:10, ONE battery, nothing queued after it. `chatbot` fast-forwarded onto
+main 909dbb4 (23 commits, no conflicts - PROGRESS.md included).
+
+### ITEM 1 - THE THREE LYING EXIT CODES. FIXED.
+`_d704_echo.gd` `quit(0)`, `_l14_test.gd` `quit()` and `_b11_muster.gd` `return true` all exited 0
+whatever the verdict said. All three now exit 1 on their own FAIL. PROVEN, not asserted: break B
+below drove `_l14_test` to FAIL and **rc read 1**. Before this cycle that same FAIL read rc=0.
+
+### ITEM 2 - THE THREE MISSING COUNTS. FIXED, WITH A FLOOR UNDER EACH.
+`_l14_test` prints `(22 checks)` and refuses below 20. `_b11_muster` prints `checks=22` and refuses
+below 20. `_twitch_parse` prints `(8 checks)` and refuses below 8 - the number the row named, and
+the gate's exact size, so it has no margin and will go red the moment a case is deleted.
+`_b11_muster` also gained `_finalize()`: a run that never reaches frame 60 now prints
+**`B11_MUSTER NO VERDICT - ended at frame N of 60`** instead of printing nothing at all. NO VERDICT,
+never FAIL - a capped run measured nothing about the muster, which is not the same as a broken one.
+
+### ITEM 3 - NOT TAKEN, AND IT IS ANSWERED, NOT SKIPPED.
+The row said do not touch `tools/_commands_doc.gd` before the game build answered in writing on
+ownership. **It answered by doing it**: its 04:17:29 lock line reads "_commands_doc counts rows
+written, fails on a short order". Fault 1 is closed by its owner. I left the file alone.
+`tools/_l56_test.gd` untouched, as instructed.
+
+### FAULT 2, THE DATA-SIDE HALF, WHICH IS MINE - `ChatCmd.commands()` NOW VOUCHES FOR `order`
+B21 held this back as an unproven code change. It is in and proved. `commands()` already went loud
+on a missing/unparsable file, an empty `commands`, a dead `ask` and a dead `foreign`; it now also
+names an `order` that is not an array, an `order` SHORT of a live command, and an `order` naming a
+GHOST key no command answers. Loud and carries on - the commands answer either way, and killing
+the bot over a dead sibling would be the bigger fault.
+
+### BROKEN ON PURPOSE, THEN RESTORED BYTE-IDENTICAL
+  A. dropped `help` from `order` (present-but-short, the exact shape Fault 1 needs):
+     `COMMANDS_DATA ORDER SHORT - 1 command(s) absent from `order`: ["help"]`.
+     **`L14_TEST` still read OK (22 checks).** That is the whole point: no gate in this lane could
+     see a doc about to be gutted. The loader says it now.
+  B. deleted the `help` command, leaving it in `order`:
+     `COMMANDS_DATA ORDER GHOST - `order` names 1 dead key(s): ["help"]`, `L14_TEST FAIL 2
+     (22 checks)`, **rc=1**.
+  `data/commands.json` restored and re-hashed: sha256 `f37b1d2c6909`, 14753 bytes - byte-identical
+  to B20's and B21's record. Both directions re-checked, nothing in `order` absent from `commands`,
+  nothing in `commands` absent from `order`.
+
+### THE BATTERY - SIX FOR SIX, ONE RUN, ALL SIX IN PARALLEL
+  parse (300 frames)   rc=0, 9799 chars, **0 SCRIPT ERROR, 0 Parse Error**, TWITCH joined
+                       #jestsayin96, and **NO COMMANDS_DATA line anywhere** - the healthy reading
+  L14_TEST             OK (22 checks)  rc=0
+  TWITCH_PARSE         OK (8 checks)   rc=0
+  D704_ECHO            OK (356 checks) rc=0
+  B11_MUSTER           OK bad=0 checks=22  rc=0, run without `--quit`
+  COMMANDS_DOC         OK wrote 27 commands, `docs/COMMANDS.md` sha256 `1fb9a166c3bf`, 5771 bytes,
+                       27 rows - BYTE-IDENTICAL. The generator changed nothing, so the no-op holds.
+
+### OWED BY OTHERS
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Still unchanged, five cycles
+  on. It is one line and it is the last thing standing between the published cooldown and the
+  enforced one on the Twitch path.
+- `tools/` owner: nothing from this lane. B21's four faults are all closed - three by me this
+  cycle, Fault 1 by the game build at 04:17.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+Twelve `.b22_*.log` / `.b22_*.rc` files written at the worktree root and DELETED in the same run.
+Godot closed, lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
+reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
+touched. No secrets written anywhere.

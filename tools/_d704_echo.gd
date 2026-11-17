@@ -54,7 +54,8 @@ func _initialize() -> void:
 		print("D704_ECHO FAIL (%d checks, %d bad)" % [_checks, _fails.size()])
 		for f in _fails:
 			print("  - %s" % f)
-	quit(0)
+	# B22 (B21 Fault 4): rc agrees with the verdict. It read 0 on FAIL.
+	quit(0 if _fails.is_empty() else 1)
 
 ## ------------------------------------------------- 1. no control character survives
 func _declaws() -> void:

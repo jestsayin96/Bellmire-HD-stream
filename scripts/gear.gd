@@ -160,14 +160,17 @@ const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
 ## S16 (System 2, first half): the KayKit DUNGEON pack's tiered weapons (CC0, LICENSE in the dir).
 ## KINDS below IS the family+tier -> model map (family, then per-tier kit). One family is wired end to
 ## end so far: blade/sword tiers 1-3 take the pack's common/uncommon/rare sword.
+## S17 (System 2, second half, part 1): axe/axe and axe/mace tiers 1-3 take the pack's axe_* and
+## hammer_* the same way (tiers 4-5 keep their existing kit). Same 0.8 hand_scale: measured off the
+## .glb accessors, axe 0.89/0.95/0.95 and hammer 0.86/0.87/0.90 long, origin in the grip.
 const DUN := "res://assets/gear/dungeon/"
 const KINDS := {
     "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
     "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", SKA + "Skeleton_Blade.gltf"]},
     "dagger":     {"family": "blade", "noun": "dagger", "kit": [ADV + "dagger.gltf", ADV + "dagger.gltf", KIT + "knife.gltf", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
-    "axe":        {"family": "axe", "noun": "axe", "kit": [ADV + "axe_1handed.gltf", KIT + "axe_A.gltf", ADV + "axe_2handed.gltf", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
-    "mace":       {"family": "axe", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
+    "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
+    "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
     "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     # D94b: an arcane MACE ("Parish Iron Mace") had no kind and fell back to a staff
     "sceptre":    {"family": "arcane", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},

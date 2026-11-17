@@ -4,7 +4,11 @@
   "boss_floors": "every 5th floor",
   "lesser": [
     {
-      "name": "Hollow King"
+      "name": "Hollow King",
+      "hp": 150,
+      "speed": 3.4,
+      "attack": 15,
+      "shape": "cold fire on a timer - it stands back and lets it roll"
     },
     {
       "name": "Grubmother",
@@ -13,7 +17,11 @@
       "shape": "a wall"
     },
     {
-      "name": "Rattling Host"
+      "name": "Rattling Host",
+      "hp": 165,
+      "speed": 4.1,
+      "attack": 14,
+      "shape": "comes apart as it breaks - men drop out of the harness"
     },
     {
       "name": "Nightwing",
@@ -24,10 +32,18 @@
   ],
   "greater": [
     {
-      "name": "Gravewyrm"
+      "name": "Gravewyrm",
+      "hp": 260,
+      "speed": 3.0,
+      "attack": 22,
+      "shape": "breath first, then rage when it is low"
     },
     {
-      "name": "Ossuary Lord"
+      "name": "Ossuary Lord",
+      "hp": 330,
+      "speed": 2.5,
+      "attack": 18,
+      "shape": "slow, warded, and calls its bones up"
     },
     {
       "name": "Pale Duchess",
@@ -35,7 +51,11 @@
       "shape": "hits hardest"
     },
     {
-      "name": "Mourncoil"
+      "name": "Mourncoil",
+      "hp": 300,
+      "speed": 2.8,
+      "attack": 24,
+      "shape": "frost in sheets, and slow to cross a room"
     }
   ],
   "rule": "Bosses are deliberately different SHAPES, not bigger numbers. Each carries a note that prints when it rises.",

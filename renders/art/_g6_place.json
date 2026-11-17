@@ -1,0 +1,561 @@
+{
+ "anchor_y": null,
+ "cells": [
+  {
+   "key": "baker_mitts",
+   "cost": 200,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_leather_baker_mitts",
+     "cz": 0.6259,
+     "zmin": 0.5577,
+     "zmax": 0.6638,
+     "cx": 0.324,
+     "width_x": 0.2456
+    },
+    {
+     "name": "Acc_GloveL_cloth_baker_mitts",
+     "cz": 0.4919,
+     "zmin": 0.4195,
+     "zmax": 0.587,
+     "cx": 0.3424,
+     "width_x": 0.2188
+    },
+    {
+     "name": "Acc_GloveL_dark_baker_mitts",
+     "cz": 0.5412,
+     "zmin": 0.4974,
+     "zmax": 0.585,
+     "cx": 0.4345,
+     "width_x": 0.0762
+    },
+    {
+     "name": "Acc_GloveR_leather_baker_mitts",
+     "cz": 0.6308,
+     "zmin": 0.5625,
+     "zmax": 0.6687,
+     "cx": -0.3376,
+     "width_x": 0.2456
+    },
+    {
+     "name": "Acc_GloveR_cloth_baker_mitts",
+     "cz": 0.4968,
+     "zmin": 0.4244,
+     "zmax": 0.5919,
+     "cx": -0.356,
+     "width_x": 0.2188
+    },
+    {
+     "name": "Acc_GloveR_dark_baker_mitts",
+     "cz": 0.546,
+     "zmin": 0.5022,
+     "zmax": 0.5898,
+     "cx": -0.4481,
+     "width_x": 0.0762
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 47.3,
+     "penetration_m": 0.0747
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 56.9,
+     "penetration_m": 0.0697
+    }
+   ]
+  },
+  {
+   "key": "carder_gloves",
+   "cost": 200,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_metal_carder_gloves",
+     "cz": 0.6681,
+     "zmin": 0.5009,
+     "zmax": 0.8087,
+     "cx": 0.3391,
+     "width_x": 0.2511
+    },
+    {
+     "name": "Acc_GloveL_cloth_carder_gloves",
+     "cz": 0.505,
+     "zmin": 0.4749,
+     "zmax": 0.5843,
+     "cx": 0.3455,
+     "width_x": 0.138
+    },
+    {
+     "name": "Acc_GloveR_metal_carder_gloves",
+     "cz": 0.6729,
+     "zmin": 0.5058,
+     "zmax": 0.8135,
+     "cx": -0.3528,
+     "width_x": 0.2511
+    },
+    {
+     "name": "Acc_GloveR_cloth_carder_gloves",
+     "cz": 0.5098,
+     "zmin": 0.4797,
+     "zmax": 0.5891,
+     "cx": -0.3592,
+     "width_x": 0.138
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 73.2,
+     "penetration_m": 0.0602
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 71.8,
+     "penetration_m": 0.0602
+    }
+   ]
+  },
+  {
+   "key": "bellrope_wraps",
+   "cost": 240,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_leather_bellrope_wraps",
+     "cz": 0.6202,
+     "zmin": 0.5616,
+     "zmax": 0.675,
+     "cx": 0.3249,
+     "width_x": 0.1934
+    },
+    {
+     "name": "Acc_GloveL_cloth_bellrope_wraps",
+     "cz": 0.5395,
+     "zmin": 0.4748,
+     "zmax": 0.6643,
+     "cx": 0.3225,
+     "width_x": 0.1902
+    },
+    {
+     "name": "Acc_GloveL_metal_bellrope_wraps",
+     "cz": 0.5339,
+     "zmin": 0.5086,
+     "zmax": 0.5576,
+     "cx": 0.4159,
+     "width_x": 0.0332
+    },
+    {
+     "name": "Acc_GloveR_leather_bellrope_wraps",
+     "cz": 0.625,
+     "zmin": 0.5665,
+     "zmax": 0.6799,
+     "cx": -0.3385,
+     "width_x": 0.1934
+    },
+    {
+     "name": "Acc_GloveR_cloth_bellrope_wraps",
+     "cz": 0.5444,
+     "zmin": 0.4796,
+     "zmax": 0.6693,
+     "cx": -0.3361,
+     "width_x": 0.1902
+    },
+    {
+     "name": "Acc_GloveR_metal_bellrope_wraps",
+     "cz": 0.5387,
+     "zmin": 0.515,
+     "zmax": 0.564,
+     "cx": -0.4295,
+     "width_x": 0.0332
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 78.8,
+     "penetration_m": 0.0867
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 80.5,
+     "penetration_m": 0.0815
+    }
+   ]
+  },
+  {
+   "key": "quarreller_gloves",
+   "cost": 280,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_metal_quarreller_gloves",
+     "cz": 0.7223,
+     "zmin": 0.5047,
+     "zmax": 0.8442,
+     "cx": 0.3223,
+     "width_x": 0.3124
+    },
+    {
+     "name": "Acc_GloveL_cloth_quarreller_gloves",
+     "cz": 0.505,
+     "zmin": 0.4745,
+     "zmax": 0.5847,
+     "cx": 0.3456,
+     "width_x": 0.1433
+    },
+    {
+     "name": "Acc_GloveR_metal_quarreller_gloves",
+     "cz": 0.7272,
+     "zmin": 0.5096,
+     "zmax": 0.849,
+     "cx": -0.336,
+     "width_x": 0.3134
+    },
+    {
+     "name": "Acc_GloveR_cloth_quarreller_gloves",
+     "cz": 0.5099,
+     "zmin": 0.4793,
+     "zmax": 0.5895,
+     "cx": -0.3593,
+     "width_x": 0.1433
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 68.2,
+     "penetration_m": 0.0541
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 59.5,
+     "penetration_m": 0.0559
+    }
+   ]
+  },
+  {
+   "key": "forge_grips",
+   "cost": 300,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_metal_forge_grips",
+     "cz": 0.6104,
+     "zmin": 0.4839,
+     "zmax": 0.7588,
+     "cx": 0.3484,
+     "width_x": 0.2787
+    },
+    {
+     "name": "Acc_GloveL_cloth_forge_grips",
+     "cz": 0.505,
+     "zmin": 0.4746,
+     "zmax": 0.5846,
+     "cx": 0.3456,
+     "width_x": 0.1423
+    },
+    {
+     "name": "Acc_GloveL_gem_forge_grips",
+     "cz": 0.556,
+     "zmin": 0.5443,
+     "zmax": 0.5678,
+     "cx": 0.4339,
+     "width_x": 0.0174
+    },
+    {
+     "name": "Acc_GloveR_metal_forge_grips",
+     "cz": 0.6153,
+     "zmin": 0.4887,
+     "zmax": 0.7637,
+     "cx": -0.362,
+     "width_x": 0.2787
+    },
+    {
+     "name": "Acc_GloveR_cloth_forge_grips",
+     "cz": 0.5099,
+     "zmin": 0.4794,
+     "zmax": 0.5895,
+     "cx": -0.3593,
+     "width_x": 0.1423
+    },
+    {
+     "name": "Acc_GloveR_gem_forge_grips",
+     "cz": 0.5609,
+     "zmin": 0.5491,
+     "zmax": 0.5726,
+     "cx": -0.4475,
+     "width_x": 0.0174
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 63.0,
+     "penetration_m": 0.072
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 48.7,
+     "penetration_m": 0.0716
+    }
+   ]
+  },
+  {
+   "key": "raidbreaker_gloves",
+   "cost": 380,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ]
+   },
+   "gloves": [
+    {
+     "name": "Acc_GloveL_metal_raidbreaker_gloves",
+     "cz": 0.6665,
+     "zmin": 0.4321,
+     "zmax": 0.8338,
+     "cx": 0.3358,
+     "width_x": 0.379
+    },
+    {
+     "name": "Acc_GloveL_cloth_raidbreaker_gloves",
+     "cz": 0.5051,
+     "zmin": 0.4737,
+     "zmax": 0.5855,
+     "cx": 0.3459,
+     "width_x": 0.1542
+    },
+    {
+     "name": "Acc_GloveL_gem_raidbreaker_gloves",
+     "cz": 0.5605,
+     "zmin": 0.5375,
+     "zmax": 0.5834,
+     "cx": 0.4631,
+     "width_x": 0.034
+    },
+    {
+     "name": "Acc_GloveR_metal_raidbreaker_gloves",
+     "cz": 0.6714,
+     "zmin": 0.4369,
+     "zmax": 0.8386,
+     "cx": -0.3494,
+     "width_x": 0.3777
+    },
+    {
+     "name": "Acc_GloveR_cloth_raidbreaker_gloves",
+     "cz": 0.5099,
+     "zmin": 0.4785,
+     "zmax": 0.5904,
+     "cx": -0.3596,
+     "width_x": 0.1542
+    },
+    {
+     "name": "Acc_GloveR_gem_raidbreaker_gloves",
+     "cz": 0.5653,
+     "zmin": 0.5423,
+     "zmax": 0.5883,
+     "cx": -0.4767,
+     "width_x": 0.034
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 38.8,
+     "penetration_m": 0.0519
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 30.1,
+     "penetration_m": 0.026
+    }
+   ]
+  }
+ ]
+}

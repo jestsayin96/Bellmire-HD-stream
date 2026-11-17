@@ -880,3 +880,6 @@ signal used nowhere else. Welcome panel placement and chat are still to do (pass
   opens it full-screen). It remains opt-in - the viewer still presses "Open the guild chat" - because
   auto-connecting to Twitch on page load would change the privacy behaviour H8 was built around. That is
   Mr. E's call (see the run summary). The "Guild chat" tab is gone; the column replaces it.
+- H32 pass 4: Shops stock is a card grid (picture, name, rarity pill, price; rarity as a frame) with a hover/focus
+  preview overlay; Bestiary cards lift on hover/focus; Lore chapters are browse cards. Pictures are derived
+  160 px WebP thumbnails (1.94 MB for 463) chosen by a generated name whitelist - see docs/HUB_SECURITY.md.

@@ -1,0 +1,2336 @@
+{
+ "conflicts": [
+  {
+   "dropped": "ring/scarglass_ring",
+   "kept": "ring/scar_ring",
+   "name": "Scarglass Ring"
+  }
+ ],
+ "count": 463,
+ "files": [
+  {
+   "bytes": 6562,
+   "path": "amulet/barracks_key.webp"
+  },
+  {
+   "bytes": 6436,
+   "path": "amulet/bell_amulet.webp"
+  },
+  {
+   "bytes": 7078,
+   "path": "amulet/blight_charm.webp"
+  },
+  {
+   "bytes": 6640,
+   "path": "amulet/boatwright_amulet.webp"
+  },
+  {
+   "bytes": 6766,
+   "path": "amulet/brewster_amulet.webp"
+  },
+  {
+   "bytes": 6676,
+   "path": "amulet/carp_charm.webp"
+  },
+  {
+   "bytes": 6766,
+   "path": "amulet/chandler_amulet.webp"
+  },
+  {
+   "bytes": 7076,
+   "path": "amulet/chapel_amulet.webp"
+  },
+  {
+   "bytes": 6212,
+   "path": "amulet/chapman_amulet.webp"
+  },
+  {
+   "bytes": 7486,
+   "path": "amulet/deeplamp_amulet.webp"
+  },
+  {
+   "bytes": 6630,
+   "path": "amulet/doorkeep_amulet.webp"
+  },
+  {
+   "bytes": 7504,
+   "path": "amulet/falconer_amulet.webp"
+  },
+  {
+   "bytes": 7126,
+   "path": "amulet/farrier_amulet.webp"
+  },
+  {
+   "bytes": 6252,
+   "path": "amulet/ferry_locket.webp"
+  },
+  {
+   "bytes": 6334,
+   "path": "amulet/ferrybell_amulet.webp"
+  },
+  {
+   "bytes": 6592,
+   "path": "amulet/flaskcount_amulet.webp"
+  },
+  {
+   "bytes": 6720,
+   "path": "amulet/fuller_amulet.webp"
+  },
+  {
+   "bytes": 7082,
+   "path": "amulet/gaoler_amulet.webp"
+  },
+  {
+   "bytes": 6766,
+   "path": "amulet/gate_whistle.webp"
+  },
+  {
+   "bytes": 6592,
+   "path": "amulet/grain_amulet.webp"
+  },
+  {
+   "bytes": 7100,
+   "path": "amulet/grainward_amulet.webp"
+  },
+  {
+   "bytes": 6562,
+   "path": "amulet/hearth_amulet.webp"
+  },
+  {
+   "bytes": 6170,
+   "path": "amulet/horner_amulet.webp"
+  },
+  {
+   "bytes": 6842,
+   "path": "amulet/host_amulet.webp"
+  },
+  {
+   "bytes": 6354,
+   "path": "amulet/kindling_amulet.webp"
+  },
+  {
+   "bytes": 7086,
+   "path": "amulet/lamplight_amulet.webp"
+  },
+  {
+   "bytes": 7492,
+   "path": "amulet/measure_amulet.webp"
+  },
+  {
+   "bytes": 6842,
+   "path": "amulet/millwright_amulet.webp"
+  },
+  {
+   "bytes": 6882,
+   "path": "amulet/mourncoil_amulet.webp"
+  },
+  {
+   "bytes": 6842,
+   "path": "amulet/ninthbell_amulet.webp"
+  },
+  {
+   "bytes": 6228,
+   "path": "amulet/ostler_amulet.webp"
+  },
+  {
+   "bytes": 6220,
+   "path": "amulet/potter_amulet.webp"
+  },
+  {
+   "bytes": 6592,
+   "path": "amulet/saltline_amulet.webp"
+  },
+  {
+   "bytes": 6220,
+   "path": "amulet/sawyer_amulet.webp"
+  },
+  {
+   "bytes": 6452,
+   "path": "amulet/scribe_amulet.webp"
+  },
+  {
+   "bytes": 6954,
+   "path": "amulet/secondflask_amulet.webp"
+  },
+  {
+   "bytes": 6452,
+   "path": "amulet/shepherd_charm.webp"
+  },
+  {
+   "bytes": 6236,
+   "path": "amulet/skep_amulet.webp"
+  },
+  {
+   "bytes": 7100,
+   "path": "amulet/sluice_amulet.webp"
+  },
+  {
+   "bytes": 7076,
+   "path": "amulet/taverner_amulet.webp"
+  },
+  {
+   "bytes": 6220,
+   "path": "amulet/thawbell_amulet.webp"
+  },
+  {
+   "bytes": 6592,
+   "path": "amulet/threshing_amulet.webp"
+  },
+  {
+   "bytes": 6452,
+   "path": "amulet/votive_amulet.webp"
+  },
+  {
+   "bytes": 6452,
+   "path": "amulet/ward_pendant.webp"
+  },
+  {
+   "bytes": 6252,
+   "path": "amulet/weighstone_amulet.webp"
+  },
+  {
+   "bytes": 7080,
+   "path": "amulet/weirkeep_amulet.webp"
+  },
+  {
+   "bytes": 2414,
+   "path": "banner/banner_apothecary.webp"
+  },
+  {
+   "bytes": 3298,
+   "path": "banner/banner_architect.webp"
+  },
+  {
+   "bytes": 3182,
+   "path": "banner/banner_armourer.webp"
+  },
+  {
+   "bytes": 3458,
+   "path": "banner/banner_barracks.webp"
+  },
+  {
+   "bytes": 3476,
+   "path": "banner/banner_bellfounder.webp"
+  },
+  {
+   "bytes": 2600,
+   "path": "banner/banner_blue.webp"
+  },
+  {
+   "bytes": 1922,
+   "path": "banner/banner_bodger.webp"
+  },
+  {
+   "bytes": 2522,
+   "path": "banner/banner_brewster.webp"
+  },
+  {
+   "bytes": 2300,
+   "path": "banner/banner_brickmaker.webp"
+  },
+  {
+   "bytes": 3360,
+   "path": "banner/banner_bucketline.webp"
+  },
+  {
+   "bytes": 2392,
+   "path": "banner/banner_butcher.webp"
+  },
+  {
+   "bytes": 2192,
+   "path": "banner/banner_carp.webp"
+  },
+  {
+   "bytes": 2500,
+   "path": "banner/banner_chainsmith.webp"
+  },
+  {
+   "bytes": 2380,
+   "path": "banner/banner_chalk.webp"
+  },
+  {
+   "bytes": 1726,
+   "path": "banner/banner_chronicle.webp"
+  },
+  {
+   "bytes": 3592,
+   "path": "banner/banner_clapper.webp"
+  },
+  {
+   "bytes": 2408,
+   "path": "banner/banner_clogger.webp"
+  },
+  {
+   "bytes": 2128,
+   "path": "banner/banner_coldforge.webp"
+  },
+  {
+   "bytes": 2072,
+   "path": "banner/banner_collier.webp"
+  },
+  {
+   "bytes": 2352,
+   "path": "banner/banner_cooper.webp"
+  },
+  {
+   "bytes": 3068,
+   "path": "banner/banner_cordwainer.webp"
+  },
+  {
+   "bytes": 3132,
+   "path": "banner/banner_crane.webp"
+  },
+  {
+   "bytes": 1652,
+   "path": "banner/banner_crater.webp"
+  },
+  {
+   "bytes": 2884,
+   "path": "banner/banner_cutler.webp"
+  },
+  {
+   "bytes": 3630,
+   "path": "banner/banner_e3po.webp"
+  },
+  {
+   "bytes": 3410,
+   "path": "banner/banner_falconer.webp"
+  },
+  {
+   "bytes": 1538,
+   "path": "banner/banner_farrier.webp"
+  },
+  {
+   "bytes": 1896,
+   "path": "banner/banner_ferry.webp"
+  },
+  {
+   "bytes": 1646,
+   "path": "banner/banner_fletcher.webp"
+  },
+  {
+   "bytes": 2040,
+   "path": "banner/banner_fogrun.webp"
+  },
+  {
+   "bytes": 2488,
+   "path": "banner/banner_ford.webp"
+  },
+  {
+   "bytes": 2104,
+   "path": "banner/banner_fuller.webp"
+  },
+  {
+   "bytes": 2272,
+   "path": "banner/banner_garrison.webp"
+  },
+  {
+   "bytes": 3128,
+   "path": "banner/banner_glazier.webp"
+  },
+  {
+   "bytes": 2250,
+   "path": "banner/banner_green.webp"
+  },
+  {
+   "bytes": 3472,
+   "path": "banner/banner_grubmother.webp"
+  },
+  {
+   "bytes": 2192,
+   "path": "banner/banner_guild.webp"
+  },
+  {
+   "bytes": 3466,
+   "path": "banner/banner_harvest.webp"
+  },
+  {
+   "bytes": 2374,
+   "path": "banner/banner_horner.webp"
+  },
+  {
+   "bytes": 2800,
+   "path": "banner/banner_hurdler.webp"
+  },
+  {
+   "bytes": 2550,
+   "path": "banner/banner_joiner.webp"
+  },
+  {
+   "bytes": 3254,
+   "path": "banner/banner_keepdoor.webp"
+  },
+  {
+   "bytes": 2868,
+   "path": "banner/banner_kindling.webp"
+  },
+  {
+   "bytes": 2614,
+   "path": "banner/banner_lamplight.webp"
+  },
+  {
+   "bytes": 2316,
+   "path": "banner/banner_limeburner.webp"
+  },
+  {
+   "bytes": 2076,
+   "path": "banner/banner_lockkeep.webp"
+  },
+  {
+   "bytes": 1944,
+   "path": "banner/banner_longcount.webp"
+  },
+  {
+   "bytes": 2728,
+   "path": "banner/banner_lorimer.webp"
+  },
+  {
+   "bytes": 2596,
+   "path": "banner/banner_maltster.webp"
+  },
+  {
+   "bytes": 3006,
+   "path": "banner/banner_marketday.webp"
+  },
+  {
+   "bytes": 1738,
+   "path": "banner/banner_memorial.webp"
+  },
+  {
+   "bytes": 1782,
+   "path": "banner/banner_mender.webp"
+  },
+  {
+   "bytes": 2360,
+   "path": "banner/banner_mill.webp"
+  },
+  {
+   "bytes": 2850,
+   "path": "banner/banner_mourncoil.webp"
+  },
+  {
+   "bytes": 2194,
+   "path": "banner/banner_nailer.webp"
+  },
+  {
+   "bytes": 2760,
+   "path": "banner/banner_nightwing.webp"
+  },
+  {
+   "bytes": 3666,
+   "path": "banner/banner_ninthbell.webp"
+  },
+  {
+   "bytes": 2028,
+   "path": "banner/banner_orchard.webp"
+  },
+  {
+   "bytes": 2466,
+   "path": "banner/banner_osier.webp"
+  },
+  {
+   "bytes": 2604,
+   "path": "banner/banner_ossuary.webp"
+  },
+  {
+   "bytes": 2080,
+   "path": "banner/banner_paver.webp"
+  },
+  {
+   "bytes": 2408,
+   "path": "banner/banner_pewterer.webp"
+  },
+  {
+   "bytes": 2538,
+   "path": "banner/banner_pieman.webp"
+  },
+  {
+   "bytes": 1780,
+   "path": "banner/banner_pilgrim.webp"
+  },
+  {
+   "bytes": 2740,
+   "path": "banner/banner_potter.webp"
+  },
+  {
+   "bytes": 2262,
+   "path": "banner/banner_quarreller.webp"
+  },
+  {
+   "bytes": 1986,
+   "path": "banner/banner_quarry.webp"
+  },
+  {
+   "bytes": 2216,
+   "path": "banner/banner_quarryman.webp"
+  },
+  {
+   "bytes": 1918,
+   "path": "banner/banner_red.webp"
+  },
+  {
+   "bytes": 2284,
+   "path": "banner/banner_reedcutter.webp"
+  },
+  {
+   "bytes": 2068,
+   "path": "banner/banner_reeve.webp"
+  },
+  {
+   "bytes": 1888,
+   "path": "banner/banner_ropeworks.webp"
+  },
+  {
+   "bytes": 2726,
+   "path": "banner/banner_saddler.webp"
+  },
+  {
+   "bytes": 2394,
+   "path": "banner/banner_saltline.webp"
+  },
+  {
+   "bytes": 2120,
+   "path": "banner/banner_saltline_works.webp"
+  },
+  {
+   "bytes": 2176,
+   "path": "banner/banner_scar.webp"
+  },
+  {
+   "bytes": 1802,
+   "path": "banner/banner_sexton.webp"
+  },
+  {
+   "bytes": 2850,
+   "path": "banner/banner_shepherd.webp"
+  },
+  {
+   "bytes": 2446,
+   "path": "banner/banner_skep.webp"
+  },
+  {
+   "bytes": 2328,
+   "path": "banner/banner_soaper.webp"
+  },
+  {
+   "bytes": 3032,
+   "path": "banner/banner_spurrier.webp"
+  },
+  {
+   "bytes": 2122,
+   "path": "banner/banner_stair.webp"
+  },
+  {
+   "bytes": 2498,
+   "path": "banner/banner_tanner.webp"
+  },
+  {
+   "bytes": 2296,
+   "path": "banner/banner_tavern.webp"
+  },
+  {
+   "bytes": 2104,
+   "path": "banner/banner_taverner.webp"
+  },
+  {
+   "bytes": 2010,
+   "path": "banner/banner_temple.webp"
+  },
+  {
+   "bytes": 2508,
+   "path": "banner/banner_thatch.webp"
+  },
+  {
+   "bytes": 3490,
+   "path": "banner/banner_thaw.webp"
+  },
+  {
+   "bytes": 2584,
+   "path": "banner/banner_tiler.webp"
+  },
+  {
+   "bytes": 2264,
+   "path": "banner/banner_tithe.webp"
+  },
+  {
+   "bytes": 1908,
+   "path": "banner/banner_toll.webp"
+  },
+  {
+   "bytes": 2464,
+   "path": "banner/banner_towpath.webp"
+  },
+  {
+   "bytes": 2260,
+   "path": "banner/banner_turbary.webp"
+  },
+  {
+   "bytes": 2394,
+   "path": "banner/banner_wakeward.webp"
+  },
+  {
+   "bytes": 1964,
+   "path": "banner/banner_wall.webp"
+  },
+  {
+   "bytes": 1706,
+   "path": "banner/banner_watch.webp"
+  },
+  {
+   "bytes": 2528,
+   "path": "banner/banner_watchfire.webp"
+  },
+  {
+   "bytes": 3042,
+   "path": "banner/banner_weirkeep.webp"
+  },
+  {
+   "bytes": 2206,
+   "path": "banner/banner_wellhead.webp"
+  },
+  {
+   "bytes": 2454,
+   "path": "banner/banner_winterwatch.webp"
+  },
+  {
+   "bytes": 3122,
+   "path": "banner/banner_woodward.webp"
+  },
+  {
+   "bytes": 2364,
+   "path": "banner/banner_yellow.webp"
+  },
+  {
+   "bytes": 5450,
+   "path": "boots/ashfoot_boots.webp"
+  },
+  {
+   "bytes": 4384,
+   "path": "boots/bolter_boots.webp"
+  },
+  {
+   "bytes": 5338,
+   "path": "boots/brickmaker_boots.webp"
+  },
+  {
+   "bytes": 4886,
+   "path": "boots/carter_boots.webp"
+  },
+  {
+   "bytes": 4384,
+   "path": "boots/chapel_clogs.webp"
+  },
+  {
+   "bytes": 4298,
+   "path": "boots/clogger_boots.webp"
+  },
+  {
+   "bytes": 5402,
+   "path": "boots/cordwainer_boots.webp"
+  },
+  {
+   "bytes": 5668,
+   "path": "boots/craterglass_boots.webp"
+  },
+  {
+   "bytes": 4254,
+   "path": "boots/creeler_boots.webp"
+  },
+  {
+   "bytes": 4702,
+   "path": "boots/dauber_boots.webp"
+  },
+  {
+   "bytes": 4338,
+   "path": "boots/drover_boots.webp"
+  },
+  {
+   "bytes": 4398,
+   "path": "boots/drover_spurs.webp"
+  },
+  {
+   "bytes": 4384,
+   "path": "boots/eeler_boots.webp"
+  },
+  {
+   "bytes": 4886,
+   "path": "boots/fen_boots.webp"
+  },
+  {
+   "bytes": 5144,
+   "path": "boots/ferrystep_boots.webp"
+  },
+  {
+   "bytes": 6114,
+   "path": "boots/firstlight_boots.webp"
+  },
+  {
+   "bytes": 5044,
+   "path": "boots/ford_boots.webp"
+  },
+  {
+   "bytes": 4404,
+   "path": "boots/fordwarden_boots.webp"
+  },
+  {
+   "bytes": 5668,
+   "path": "boots/gate_boots.webp"
+  },
+  {
+   "bytes": 4338,
+   "path": "boots/gravepath_boots.webp"
+  },
+  {
+   "bytes": 4732,
+   "path": "boots/hayward_boots.webp"
+  },
+  {
+   "bytes": 5736,
+   "path": "boots/hive_boots.webp"
+  },
+  {
+   "bytes": 4702,
+   "path": "boots/kennel_boots.webp"
+  },
+  {
+   "bytes": 4732,
+   "path": "boots/kiln_boots.webp"
+  },
+  {
+   "bytes": 4950,
+   "path": "boots/lockkeep_waders.webp"
+  },
+  {
+   "bytes": 5758,
+   "path": "boots/longcount_boots.webp"
+  },
+  {
+   "bytes": 4338,
+   "path": "boots/miller_clogs.webp"
+  },
+  {
+   "bytes": 5338,
+   "path": "boots/millrace_boots.webp"
+  },
+  {
+   "bytes": 5262,
+   "path": "boots/mudplank_boots.webp"
+  },
+  {
+   "bytes": 4826,
+   "path": "boots/nightwing_boots.webp"
+  },
+  {
+   "bytes": 4640,
+   "path": "boots/oarmaker_boots.webp"
+  },
+  {
+   "bytes": 5008,
+   "path": "boots/pavers_boots.webp"
+  },
+  {
+   "bytes": 5770,
+   "path": "boots/pitwalk_boots.webp"
+  },
+  {
+   "bytes": 4494,
+   "path": "boots/quiet_boots.webp"
+  },
+  {
+   "bytes": 4560,
+   "path": "boots/reedcutter_boots.webp"
+  },
+  {
+   "bytes": 5432,
+   "path": "boots/road_boots.webp"
+  },
+  {
+   "bytes": 4640,
+   "path": "boots/scout_boots.webp"
+  },
+  {
+   "bytes": 4334,
+   "path": "boots/stairhold_boots.webp"
+  },
+  {
+   "bytes": 4730,
+   "path": "boots/tanyard_boots.webp"
+  },
+  {
+   "bytes": 4110,
+   "path": "boots/tinker_boots.webp"
+  },
+  {
+   "bytes": 5000,
+   "path": "boots/tollgate_boots.webp"
+  },
+  {
+   "bytes": 4298,
+   "path": "boots/towpath_boots.webp"
+  },
+  {
+   "bytes": 5216,
+   "path": "boots/warrener_boots.webp"
+  },
+  {
+   "bytes": 4258,
+   "path": "cloak/backstair_cloak.webp"
+  },
+  {
+   "bytes": 4422,
+   "path": "cloak/barracks_cloak.webp"
+  },
+  {
+   "bytes": 4532,
+   "path": "cloak/bowyer_cloak.webp"
+  },
+  {
+   "bytes": 4566,
+   "path": "cloak/bucketline_cloak.webp"
+  },
+  {
+   "bytes": 4278,
+   "path": "cloak/butcher_cloak.webp"
+  },
+  {
+   "bytes": 4726,
+   "path": "cloak/caravan_cloak.webp"
+  },
+  {
+   "bytes": 4590,
+   "path": "cloak/chronicle_cloak.webp"
+  },
+  {
+   "bytes": 4706,
+   "path": "cloak/commander_cloak.webp"
+  },
+  {
+   "bytes": 4384,
+   "path": "cloak/commander_mantle.webp"
+  },
+  {
+   "bytes": 4492,
+   "path": "cloak/constable_cloak.webp"
+  },
+  {
+   "bytes": 4594,
+   "path": "cloak/crane_cloak.webp"
+  },
+  {
+   "bytes": 4720,
+   "path": "cloak/crier_cloak.webp"
+  },
+  {
+   "bytes": 4490,
+   "path": "cloak/deep_cloak.webp"
+  },
+  {
+   "bytes": 4366,
+   "path": "cloak/feast_cloak.webp"
+  },
+  {
+   "bytes": 4432,
+   "path": "cloak/fogrun_cloak.webp"
+  },
+  {
+   "bytes": 3862,
+   "path": "cloak/gravewyrm_cloak.webp"
+  },
+  {
+   "bytes": 4976,
+   "path": "cloak/guild_cloak.webp"
+  },
+  {
+   "bytes": 4740,
+   "path": "cloak/harl_cloak.webp"
+  },
+  {
+   "bytes": 4674,
+   "path": "cloak/hedgeward_cloak.webp"
+  },
+  {
+   "bytes": 4124,
+   "path": "cloak/hurdler_cloak.webp"
+  },
+  {
+   "bytes": 4372,
+   "path": "cloak/lamp_cloak.webp"
+  },
+  {
+   "bytes": 4430,
+   "path": "cloak/lighterman_cloak.webp"
+  },
+  {
+   "bytes": 4482,
+   "path": "cloak/limeburner_cloak.webp"
+  },
+  {
+   "bytes": 4618,
+   "path": "cloak/lockkeep_cloak.webp"
+  },
+  {
+   "bytes": 4158,
+   "path": "cloak/mire_cloak.webp"
+  },
+  {
+   "bytes": 4030,
+   "path": "cloak/mourner_cloak.webp"
+  },
+  {
+   "bytes": 4472,
+   "path": "cloak/orchard_cloak.webp"
+  },
+  {
+   "bytes": 4030,
+   "path": "cloak/osier_cloak.webp"
+  },
+  {
+   "bytes": 3560,
+   "path": "cloak/ossuary_cloak.webp"
+  },
+  {
+   "bytes": 3970,
+   "path": "cloak/pilgrim_cloak.webp"
+  },
+  {
+   "bytes": 4512,
+   "path": "cloak/raftsman_cloak.webp"
+  },
+  {
+   "bytes": 4696,
+   "path": "cloak/raid_cloak.webp"
+  },
+  {
+   "bytes": 4558,
+   "path": "cloak/saltboiler_cloak.webp"
+  },
+  {
+   "bytes": 4598,
+   "path": "cloak/scarwatch_cloak.webp"
+  },
+  {
+   "bytes": 4502,
+   "path": "cloak/scarweave_cloak.webp"
+  },
+  {
+   "bytes": 3554,
+   "path": "cloak/sexton_cloak.webp"
+  },
+  {
+   "bytes": 4310,
+   "path": "cloak/shingler_cloak.webp"
+  },
+  {
+   "bytes": 4272,
+   "path": "cloak/sparewall_cloak.webp"
+  },
+  {
+   "bytes": 4416,
+   "path": "cloak/tanner_cloak.webp"
+  },
+  {
+   "bytes": 4320,
+   "path": "cloak/thatcher_cloak.webp"
+  },
+  {
+   "bytes": 4590,
+   "path": "cloak/tiler_cloak.webp"
+  },
+  {
+   "bytes": 4462,
+   "path": "cloak/turbary_cloak.webp"
+  },
+  {
+   "bytes": 4090,
+   "path": "cloak/wakeward_cloak.webp"
+  },
+  {
+   "bytes": 4570,
+   "path": "cloak/wall_cloak.webp"
+  },
+  {
+   "bytes": 4350,
+   "path": "cloak/warhorn_mantle.webp"
+  },
+  {
+   "bytes": 4400,
+   "path": "cloak/watch_mantle.webp"
+  },
+  {
+   "bytes": 5132,
+   "path": "cloak/weaver_cloak.webp"
+  },
+  {
+   "bytes": 4748,
+   "path": "cloak/winterwatch_cloak.webp"
+  },
+  {
+   "bytes": 4738,
+   "path": "cloak/woodward_cloak.webp"
+  },
+  {
+   "bytes": 6052,
+   "path": "gloves/archer_gloves.webp"
+  },
+  {
+   "bytes": 5896,
+   "path": "gloves/armourer_gloves.webp"
+  },
+  {
+   "bytes": 3590,
+   "path": "gloves/baker_mitts.webp"
+  },
+  {
+   "bytes": 4292,
+   "path": "gloves/beeswax_gloves.webp"
+  },
+  {
+   "bytes": 5014,
+   "path": "gloves/bellringer_gloves.webp"
+  },
+  {
+   "bytes": 3626,
+   "path": "gloves/bellringer_mitts.webp"
+  },
+  {
+   "bytes": 4494,
+   "path": "gloves/bellrope_wraps.webp"
+  },
+  {
+   "bytes": 3342,
+   "path": "gloves/bodger_gloves.webp"
+  },
+  {
+   "bytes": 4730,
+   "path": "gloves/bowyer_wraps.webp"
+  },
+  {
+   "bytes": 5272,
+   "path": "gloves/bucketline_gloves.webp"
+  },
+  {
+   "bytes": 5332,
+   "path": "gloves/carder_gloves.webp"
+  },
+  {
+   "bytes": 3862,
+   "path": "gloves/chainsmith_gloves.webp"
+  },
+  {
+   "bytes": 5640,
+   "path": "gloves/chalkline_gloves.webp"
+  },
+  {
+   "bytes": 3482,
+   "path": "gloves/coldforge_mitts.webp"
+  },
+  {
+   "bytes": 4884,
+   "path": "gloves/currier_gloves.webp"
+  },
+  {
+   "bytes": 4886,
+   "path": "gloves/duchess_gloves.webp"
+  },
+  {
+   "bytes": 3612,
+   "path": "gloves/farrier_mitts.webp"
+  },
+  {
+   "bytes": 3648,
+   "path": "gloves/fletcher_tabs.webp"
+  },
+  {
+   "bytes": 5168,
+   "path": "gloves/forge_grips.webp"
+  },
+  {
+   "bytes": 4442,
+   "path": "gloves/fuller_grips.webp"
+  },
+  {
+   "bytes": 5336,
+   "path": "gloves/glazier_gloves.webp"
+  },
+  {
+   "bytes": 4350,
+   "path": "gloves/harvest_gloves.webp"
+  },
+  {
+   "bytes": 3776,
+   "path": "gloves/hive_gloves.webp"
+  },
+  {
+   "bytes": 5062,
+   "path": "gloves/joiner_gloves.webp"
+  },
+  {
+   "bytes": 4634,
+   "path": "gloves/ledger_gloves.webp"
+  },
+  {
+   "bytes": 4618,
+   "path": "gloves/lockkeep_gloves.webp"
+  },
+  {
+   "bytes": 3520,
+   "path": "gloves/mason_mitts.webp"
+  },
+  {
+   "bytes": 4586,
+   "path": "gloves/mender_wraps.webp"
+  },
+  {
+   "bytes": 3688,
+   "path": "gloves/mill_mitts.webp"
+  },
+  {
+   "bytes": 3854,
+   "path": "gloves/miner_grips.webp"
+  },
+  {
+   "bytes": 3486,
+   "path": "gloves/mortar_gloves.webp"
+  },
+  {
+   "bytes": 3580,
+   "path": "gloves/physic_gloves.webp"
+  },
+  {
+   "bytes": 5888,
+   "path": "gloves/pick_gloves.webp"
+  },
+  {
+   "bytes": 5274,
+   "path": "gloves/plaster_gloves.webp"
+  },
+  {
+   "bytes": 5208,
+   "path": "gloves/quarreller_gloves.webp"
+  },
+  {
+   "bytes": 4978,
+   "path": "gloves/quarry_gloves.webp"
+  },
+  {
+   "bytes": 6538,
+   "path": "gloves/raidbreaker_gloves.webp"
+  },
+  {
+   "bytes": 4764,
+   "path": "gloves/rattling_gauntlets.webp"
+  },
+  {
+   "bytes": 4586,
+   "path": "gloves/retter_gloves.webp"
+  },
+  {
+   "bytes": 3734,
+   "path": "gloves/rivet_mitts.webp"
+  },
+  {
+   "bytes": 4652,
+   "path": "gloves/ropeburn_gloves.webp"
+  },
+  {
+   "bytes": 4542,
+   "path": "gloves/ropewalk_gloves.webp"
+  },
+  {
+   "bytes": 3560,
+   "path": "gloves/saddler_gloves.webp"
+  },
+  {
+   "bytes": 4856,
+   "path": "gloves/smith_gloves.webp"
+  },
+  {
+   "bytes": 4756,
+   "path": "gloves/soaper_gloves.webp"
+  },
+  {
+   "bytes": 4920,
+   "path": "gloves/spinner_gloves.webp"
+  },
+  {
+   "bytes": 4848,
+   "path": "gloves/splintwrap_gloves.webp"
+  },
+  {
+   "bytes": 4818,
+   "path": "gloves/tanner_gloves.webp"
+  },
+  {
+   "bytes": 4922,
+   "path": "gloves/thresher_gloves.webp"
+  },
+  {
+   "bytes": 3436,
+   "path": "gloves/weasel_gloves.webp"
+  },
+  {
+   "bytes": 4782,
+   "path": "gloves/wheelwright_gloves.webp"
+  },
+  {
+   "bytes": 3488,
+   "path": "hat/apothecary_cap.webp"
+  },
+  {
+   "bytes": 5784,
+   "path": "hat/architect_hat.webp"
+  },
+  {
+   "bytes": 4050,
+   "path": "hat/armourer_visor.webp"
+  },
+  {
+   "bytes": 3922,
+   "path": "hat/beadle_hat.webp"
+  },
+  {
+   "bytes": 3912,
+   "path": "hat/bell_coif.webp"
+  },
+  {
+   "bytes": 4540,
+   "path": "hat/bellfounder_coif.webp"
+  },
+  {
+   "bytes": 4588,
+   "path": "hat/bodger_hat.webp"
+  },
+  {
+   "bytes": 3586,
+   "path": "hat/bowyer_cap.webp"
+  },
+  {
+   "bytes": 3542,
+   "path": "hat/brewster_coif.webp"
+  },
+  {
+   "bytes": 3862,
+   "path": "hat/brickmaker_cap.webp"
+  },
+  {
+   "bytes": 5164,
+   "path": "hat/bridgeward_helm.webp"
+  },
+  {
+   "bytes": 3604,
+   "path": "hat/bucketline_cap.webp"
+  },
+  {
+   "bytes": 3838,
+   "path": "hat/butcher_cap.webp"
+  },
+  {
+   "bytes": 5368,
+   "path": "hat/carp_crown.webp"
+  },
+  {
+   "bytes": 3542,
+   "path": "hat/cartwright_cap.webp"
+  },
+  {
+   "bytes": 3528,
+   "path": "hat/chainsmith_coif.webp"
+  },
+  {
+   "bytes": 3632,
+   "path": "hat/chalk_cap.webp"
+  },
+  {
+   "bytes": 3192,
+   "path": "hat/chronicle_cap.webp"
+  },
+  {
+   "bytes": 3798,
+   "path": "hat/clogger_cap.webp"
+  },
+  {
+   "bytes": 4058,
+   "path": "hat/coldforge_mask.webp"
+  },
+  {
+   "bytes": 3006,
+   "path": "hat/collier_hood.webp"
+  },
+  {
+   "bytes": 5358,
+   "path": "hat/commander_helm.webp"
+  },
+  {
+   "bytes": 3628,
+   "path": "hat/cooper_cap.webp"
+  },
+  {
+   "bytes": 3434,
+   "path": "hat/cordwainer_cap.webp"
+  },
+  {
+   "bytes": 4842,
+   "path": "hat/crane_helm.webp"
+  },
+  {
+   "bytes": 5800,
+   "path": "hat/crater_coronet.webp"
+  },
+  {
+   "bytes": 2766,
+   "path": "hat/crier_hat.webp"
+  },
+  {
+   "bytes": 3424,
+   "path": "hat/crier_plume.webp"
+  },
+  {
+   "bytes": 5348,
+   "path": "hat/crown_of_ash.webp"
+  },
+  {
+   "bytes": 3330,
+   "path": "hat/currier_hood.webp"
+  },
+  {
+   "bytes": 4094,
+   "path": "hat/cutler_visor.webp"
+  },
+  {
+   "bytes": 3538,
+   "path": "hat/drover_cap.webp"
+  },
+  {
+   "bytes": 3166,
+   "path": "hat/eeler_cap.webp"
+  },
+  {
+   "bytes": 3862,
+   "path": "hat/falconer_hood.webp"
+  },
+  {
+   "bytes": 4084,
+   "path": "hat/farrier_visor.webp"
+  },
+  {
+   "bytes": 3718,
+   "path": "hat/feather_cap.webp"
+  },
+  {
+   "bytes": 3366,
+   "path": "hat/fen_hood.webp"
+  },
+  {
+   "bytes": 3460,
+   "path": "hat/ferry_hood.webp"
+  },
+  {
+   "bytes": 5698,
+   "path": "hat/ferrybell_circlet.webp"
+  },
+  {
+   "bytes": 5716,
+   "path": "hat/firstlight_circlet.webp"
+  },
+  {
+   "bytes": 3326,
+   "path": "hat/fisher_hood.webp"
+  },
+  {
+   "bytes": 3370,
+   "path": "hat/flask_coif.webp"
+  },
+  {
+   "bytes": 3704,
+   "path": "hat/fletcher_hood.webp"
+  },
+  {
+   "bytes": 3838,
+   "path": "hat/fogrun_hood.webp"
+  },
+  {
+   "bytes": 5144,
+   "path": "hat/ford_circlet.webp"
+  },
+  {
+   "bytes": 3666,
+   "path": "hat/fuller_coif.webp"
+  },
+  {
+   "bytes": 3566,
+   "path": "hat/gaoler_coif.webp"
+  },
+  {
+   "bytes": 4142,
+   "path": "hat/glazier_visor.webp"
+  },
+  {
+   "bytes": 5162,
+   "path": "hat/gravewyrm_helm.webp"
+  },
+  {
+   "bytes": 5224,
+   "path": "hat/guard_helm.webp"
+  },
+  {
+   "bytes": 3552,
+   "path": "hat/guild_hood.webp"
+  },
+  {
+   "bytes": 3936,
+   "path": "hat/horner_hood.webp"
+  },
+  {
+   "bytes": 4162,
+   "path": "hat/host_coif.webp"
+  },
+  {
+   "bytes": 3964,
+   "path": "hat/hurdler_cap.webp"
+  },
+  {
+   "bytes": 3914,
+   "path": "hat/joiner_cap.webp"
+  },
+  {
+   "bytes": 5746,
+   "path": "hat/kindling_crown.webp"
+  },
+  {
+   "bytes": 3820,
+   "path": "hat/lampwright_cap.webp"
+  },
+  {
+   "bytes": 4138,
+   "path": "hat/limeburner_mask.webp"
+  },
+  {
+   "bytes": 3390,
+   "path": "hat/lockkeep_cap.webp"
+  },
+  {
+   "bytes": 3380,
+   "path": "hat/longcount_hood.webp"
+  },
+  {
+   "bytes": 4030,
+   "path": "hat/lorimer_cap.webp"
+  },
+  {
+   "bytes": 4032,
+   "path": "hat/maltster_cap.webp"
+  },
+  {
+   "bytes": 3812,
+   "path": "hat/mason_dustcap.webp"
+  },
+  {
+   "bytes": 3922,
+   "path": "hat/memorial_veil.webp"
+  },
+  {
+   "bytes": 3666,
+   "path": "hat/mender_coif.webp"
+  },
+  {
+   "bytes": 3910,
+   "path": "hat/miller_cap.webp"
+  },
+  {
+   "bytes": 4076,
+   "path": "hat/millwright_cap.webp"
+  },
+  {
+   "bytes": 3190,
+   "path": "hat/mire_hood.webp"
+  },
+  {
+   "bytes": 3960,
+   "path": "hat/mourner_veil.webp"
+  },
+  {
+   "bytes": 3592,
+   "path": "hat/nailer_hood.webp"
+  },
+  {
+   "bytes": 3064,
+   "path": "hat/nightwing_hood.webp"
+  },
+  {
+   "bytes": 4420,
+   "path": "hat/ninthbell_coif.webp"
+  },
+  {
+   "bytes": 3562,
+   "path": "hat/orchard_straw.webp"
+  },
+  {
+   "bytes": 4034,
+   "path": "hat/osier_hat.webp"
+  },
+  {
+   "bytes": 5734,
+   "path": "hat/ossuary_circlet.webp"
+  },
+  {
+   "bytes": 4110,
+   "path": "hat/pale_veil.webp"
+  },
+  {
+   "bytes": 3538,
+   "path": "hat/paver_cap.webp"
+  },
+  {
+   "bytes": 3638,
+   "path": "hat/pewterer_cap.webp"
+  },
+  {
+   "bytes": 4300,
+   "path": "hat/pieman_hood.webp"
+  },
+  {
+   "bytes": 3642,
+   "path": "hat/pilgrim_hood.webp"
+  },
+  {
+   "bytes": 4680,
+   "path": "hat/pinder_hat.webp"
+  },
+  {
+   "bytes": 3132,
+   "path": "hat/pitwalk_hood.webp"
+  },
+  {
+   "bytes": 5024,
+   "path": "hat/plumed_helm.webp"
+  },
+  {
+   "bytes": 3844,
+   "path": "hat/potter_wrap.webp"
+  },
+  {
+   "bytes": 4266,
+   "path": "hat/quarreller_cap.webp"
+  },
+  {
+   "bytes": 3764,
+   "path": "hat/quarry_cap.webp"
+  },
+  {
+   "bytes": 4862,
+   "path": "hat/quarry_helm.webp"
+  },
+  {
+   "bytes": 3772,
+   "path": "hat/reedcutter_hat.webp"
+  },
+  {
+   "bytes": 3804,
+   "path": "hat/reeve_hat.webp"
+  },
+  {
+   "bytes": 3702,
+   "path": "hat/ropeburn_cap.webp"
+  },
+  {
+   "bytes": 4096,
+   "path": "hat/rot_mask.webp"
+  },
+  {
+   "bytes": 3706,
+   "path": "hat/saddler_hood.webp"
+  },
+  {
+   "bytes": 3682,
+   "path": "hat/saltboiler_cap.webp"
+  },
+  {
+   "bytes": 3762,
+   "path": "hat/saltline_hood.webp"
+  },
+  {
+   "bytes": 5404,
+   "path": "hat/scarglass_circlet.webp"
+  },
+  {
+   "bytes": 4742,
+   "path": "hat/sexton_hat.webp"
+  },
+  {
+   "bytes": 3814,
+   "path": "hat/shepherd_hood.webp"
+  },
+  {
+   "bytes": 4282,
+   "path": "hat/skep_veil.webp"
+  },
+  {
+   "bytes": 3650,
+   "path": "hat/soaper_wrap.webp"
+  },
+  {
+   "bytes": 3892,
+   "path": "hat/spurrier_cap.webp"
+  },
+  {
+   "bytes": 4914,
+   "path": "hat/stairhold_helm.webp"
+  },
+  {
+   "bytes": 3538,
+   "path": "hat/straw_hat.webp"
+  },
+  {
+   "bytes": 3452,
+   "path": "hat/tanner_cap.webp"
+  },
+  {
+   "bytes": 3554,
+   "path": "hat/taverner_cap.webp"
+  },
+  {
+   "bytes": 4124,
+   "path": "hat/thatcher_cap.webp"
+  },
+  {
+   "bytes": 5484,
+   "path": "hat/thaw_circlet.webp"
+  },
+  {
+   "bytes": 4180,
+   "path": "hat/thaw_hood.webp"
+  },
+  {
+   "bytes": 3988,
+   "path": "hat/tiler_hood.webp"
+  },
+  {
+   "bytes": 3818,
+   "path": "hat/tithe_cap.webp"
+  },
+  {
+   "bytes": 3594,
+   "path": "hat/toll_cap.webp"
+  },
+  {
+   "bytes": 3514,
+   "path": "hat/toll_hood.webp"
+  },
+  {
+   "bytes": 3580,
+   "path": "hat/towpath_hood.webp"
+  },
+  {
+   "bytes": 3146,
+   "path": "hat/turbary_hood.webp"
+  },
+  {
+   "bytes": 4380,
+   "path": "hat/votive_veil.webp"
+  },
+  {
+   "bytes": 3902,
+   "path": "hat/wakeward_veil.webp"
+  },
+  {
+   "bytes": 5038,
+   "path": "hat/watch_helm.webp"
+  },
+  {
+   "bytes": 5140,
+   "path": "hat/watchfire_helm.webp"
+  },
+  {
+   "bytes": 3552,
+   "path": "hat/weirkeep_hood.webp"
+  },
+  {
+   "bytes": 3566,
+   "path": "hat/wellkeep_coif.webp"
+  },
+  {
+   "bytes": 3026,
+   "path": "hat/wide_hat.webp"
+  },
+  {
+   "bytes": 4984,
+   "path": "hat/winterwatch_helm.webp"
+  },
+  {
+   "bytes": 3230,
+   "path": "hat/woodward_hood.webp"
+  },
+  {
+   "bytes": 6434,
+   "path": "ring/architect_ring.webp"
+  },
+  {
+   "bytes": 6888,
+   "path": "ring/beadle_ring.webp"
+  },
+  {
+   "bytes": 6292,
+   "path": "ring/bellfounder_ring.webp"
+  },
+  {
+   "bytes": 6546,
+   "path": "ring/bridgeward_ring.webp"
+  },
+  {
+   "bytes": 6744,
+   "path": "ring/cartwright_ring.webp"
+  },
+  {
+   "bytes": 6464,
+   "path": "ring/chitin_ring.webp"
+  },
+  {
+   "bytes": 7158,
+   "path": "ring/clapper_ring.webp"
+  },
+  {
+   "bytes": 6920,
+   "path": "ring/collier_ring.webp"
+  },
+  {
+   "bytes": 6240,
+   "path": "ring/cooper_ring.webp"
+  },
+  {
+   "bytes": 7214,
+   "path": "ring/crater_ring.webp"
+  },
+  {
+   "bytes": 6464,
+   "path": "ring/cutler_ring.webp"
+  },
+  {
+   "bytes": 5940,
+   "path": "ring/e3po_signet.webp"
+  },
+  {
+   "bytes": 6210,
+   "path": "ring/ferryman_ring.webp"
+  },
+  {
+   "bytes": 6910,
+   "path": "ring/fletcher_ring.webp"
+  },
+  {
+   "bytes": 5876,
+   "path": "ring/hollow_ring.webp"
+  },
+  {
+   "bytes": 6896,
+   "path": "ring/lampfast_ring.webp"
+  },
+  {
+   "bytes": 6790,
+   "path": "ring/lampwright_ring.webp"
+  },
+  {
+   "bytes": 6320,
+   "path": "ring/lastcoin_ring.webp"
+  },
+  {
+   "bytes": 6324,
+   "path": "ring/limner_ring.webp"
+  },
+  {
+   "bytes": 5884,
+   "path": "ring/lockkeep_ring.webp"
+  },
+  {
+   "bytes": 6722,
+   "path": "ring/lorimer_ring.webp"
+  },
+  {
+   "bytes": 6944,
+   "path": "ring/maltster_ring.webp"
+  },
+  {
+   "bytes": 5848,
+   "path": "ring/market_ring.webp"
+  },
+  {
+   "bytes": 6476,
+   "path": "ring/mason_ring.webp"
+  },
+  {
+   "bytes": 6580,
+   "path": "ring/nailer_ring.webp"
+  },
+  {
+   "bytes": 6114,
+   "path": "ring/netmender_ring.webp"
+  },
+  {
+   "bytes": 6500,
+   "path": "ring/nightwatch_ring.webp"
+  },
+  {
+   "bytes": 5918,
+   "path": "ring/oath_ring.webp"
+  },
+  {
+   "bytes": 6362,
+   "path": "ring/oathwrong_ring.webp"
+  },
+  {
+   "bytes": 7076,
+   "path": "ring/orchard_ring.webp"
+  },
+  {
+   "bytes": 6718,
+   "path": "ring/pewterer_ring.webp"
+  },
+  {
+   "bytes": 6770,
+   "path": "ring/pilgrim_ring.webp"
+  },
+  {
+   "bytes": 6552,
+   "path": "ring/pinder_ring.webp"
+  },
+  {
+   "bytes": 5752,
+   "path": "ring/quarryman_ring.webp"
+  },
+  {
+   "bytes": 5894,
+   "path": "ring/reeve_ring.webp"
+  },
+  {
+   "bytes": 6504,
+   "path": "ring/rollkeeper_ring.webp"
+  },
+  {
+   "bytes": 6740,
+   "path": "ring/scar_ring.webp"
+  },
+  {
+   "bytes": 7156,
+   "path": "ring/scarglass_ring.webp"
+  },
+  {
+   "bytes": 6392,
+   "path": "ring/scarward_ring.webp"
+  },
+  {
+   "bytes": 6944,
+   "path": "ring/sedge_ring.webp"
+  },
+  {
+   "bytes": 6778,
+   "path": "ring/sexton_ring.webp"
+  },
+  {
+   "bytes": 6736,
+   "path": "ring/spurrier_ring.webp"
+  },
+  {
+   "bytes": 5768,
+   "path": "ring/tally_ring.webp"
+  },
+  {
+   "bytes": 6630,
+   "path": "ring/tanner_ring.webp"
+  },
+  {
+   "bytes": 7076,
+   "path": "ring/thaw_ring.webp"
+  },
+  {
+   "bytes": 6908,
+   "path": "ring/tithe_ring.webp"
+  },
+  {
+   "bytes": 6622,
+   "path": "ring/toll_ring.webp"
+  },
+  {
+   "bytes": 6546,
+   "path": "ring/tollkeep_ring.webp"
+  },
+  {
+   "bytes": 6278,
+   "path": "ring/watchfire_ring.webp"
+  },
+  {
+   "bytes": 6504,
+   "path": "ring/wellhead_ring.webp"
+  }
+ ],
+ "format": "webp",
+ "named": 462,
+ "names": {
+  "amulet of the measure": "amulet/measure_amulet",
+  "apothecary banner (green)": "banner/banner_apothecary",
+  "apothecary's cap": "hat/apothecary_cap",
+  "apothecary's gloves": "gloves/physic_gloves",
+  "architect's banner": "banner/banner_architect",
+  "architect's hat": "hat/architect_hat",
+  "architect's ring": "ring/architect_ring",
+  "armourer's gauntlets": "gloves/armourer_gloves",
+  "armourer's visor": "hat/armourer_visor",
+  "armourers' banner": "banner/banner_armourer",
+  "ash-wood circlet": "hat/crown_of_ash",
+  "ashfoot's boots": "boots/ashfoot_boots",
+  "backstair cloak": "cloak/backstair_cloak",
+  "baker's mitts": "gloves/baker_mitts",
+  "barracks banner": "banner/banner_barracks",
+  "barracks key": "amulet/barracks_key",
+  "barracks watch-cloak": "cloak/barracks_cloak",
+  "beadle's hat": "hat/beadle_hat",
+  "beadle's ring": "ring/beadle_ring",
+  "beeswax gloves": "gloves/beeswax_gloves",
+  "bell-ringer's gloves": "gloves/bellringer_gloves",
+  "bell-ringer's mitts": "gloves/bellringer_mitts",
+  "bellfounder's coif": "hat/bellfounder_coif",
+  "bellfounder's ring": "ring/bellfounder_ring",
+  "bellfounders' banner (bronze)": "banner/banner_bellfounder",
+  "bellringer's coif": "hat/bell_coif",
+  "bellringer's wraps": "gloves/bellrope_wraps",
+  "blightward charm": "amulet/blight_charm",
+  "boatwright's charm": "amulet/boatwright_amulet",
+  "bodger's gloves": "gloves/bodger_gloves",
+  "bodger's hat": "hat/bodger_hat",
+  "bodgers' banner": "banner/banner_bodger",
+  "bolter's boots": "boots/bolter_boots",
+  "boots of the west road": "boots/road_boots",
+  "bowyer's cap": "hat/bowyer_cap",
+  "bowyer's shoulder-cloak": "cloak/bowyer_cloak",
+  "bowyer's wraps": "gloves/bowyer_wraps",
+  "brewster's banner": "banner/banner_brewster",
+  "brewster's charm": "amulet/brewster_amulet",
+  "brewster's coif": "hat/brewster_coif",
+  "brickfield banner": "banner/banner_brickmaker",
+  "brickmaker's boots": "boots/brickmaker_boots",
+  "brickmaker's cap": "hat/brickmaker_cap",
+  "bridgeward's helm": "hat/bridgeward_helm",
+  "bridgeward's ring": "ring/bridgeward_ring",
+  "brood-iron ring": "ring/chitin_ring",
+  "bucket-line banner": "banner/banner_bucketline",
+  "bucket-line cap": "hat/bucketline_cap",
+  "bucket-line cloak": "cloak/bucketline_cloak",
+  "bucket-line gloves": "gloves/bucketline_gloves",
+  "butcher's cap": "hat/butcher_cap",
+  "butcher's oilcloth": "cloak/butcher_cloak",
+  "caravan cloak": "cloak/caravan_cloak",
+  "carder's gloves": "gloves/carder_gloves",
+  "carp banner (river-green)": "banner/banner_carp",
+  "carter's boots": "boots/carter_boots",
+  "cartwright's cap": "hat/cartwright_cap",
+  "cartwright's ring": "ring/cartwright_ring",
+  "chainsmith's coif": "hat/chainsmith_coif",
+  "chainsmith's mitts": "gloves/chainsmith_gloves",
+  "chainsmiths' banner": "banner/banner_chainsmith",
+  "chalker's cap": "hat/chalk_cap",
+  "chalkline banner (white)": "banner/banner_chalk",
+  "chalkline gloves": "gloves/chalkline_gloves",
+  "chandler's amulet": "amulet/chandler_amulet",
+  "chapel candle amulet": "amulet/chapel_amulet",
+  "chapel clogs": "boots/chapel_clogs",
+  "chapman's charm": "amulet/chapman_amulet",
+  "chronicle banner (ink)": "banner/banner_chronicle",
+  "chronicler's cap": "hat/chronicle_cap",
+  "chronicler's cloak": "cloak/chronicle_cloak",
+  "clapperless bell banner": "banner/banner_clapper",
+  "clapperless charm": "amulet/bell_amulet",
+  "clapperless ring": "ring/clapper_ring",
+  "clogger's cap": "hat/clogger_cap",
+  "clogger's clogs": "boots/clogger_boots",
+  "cloggers' banner": "banner/banner_clogger",
+  "cold-forge banner (char)": "banner/banner_coldforge",
+  "cold-forge mask": "hat/coldforge_mask",
+  "cold-forge mitts": "gloves/coldforge_mitts",
+  "collier's band": "ring/collier_ring",
+  "collier's banner": "banner/banner_collier",
+  "collier's hood": "hat/collier_hood",
+  "commander's cloak": "cloak/commander_cloak",
+  "commander's crested helm": "hat/commander_helm",
+  "commander's field mantle": "cloak/commander_mantle",
+  "constable's cloak": "cloak/constable_cloak",
+  "cooper's banner": "banner/banner_cooper",
+  "cooper's cap": "hat/cooper_cap",
+  "cooper's ring": "ring/cooper_ring",
+  "cordwainer's boots": "boots/cordwainer_boots",
+  "cordwainer's cap": "hat/cordwainer_cap",
+  "cordwainers' banner": "banner/banner_cordwainer",
+  "craft banner (yellow)": "banner/banner_yellow",
+  "cranesman's cloak": "cloak/crane_cloak",
+  "cranesman's helm": "hat/crane_helm",
+  "cranesmen's banner (rope grey)": "banner/banner_crane",
+  "crater banner": "banner/banner_crater",
+  "crater-glass coronet": "hat/crater_coronet",
+  "crater-glass ring": "ring/crater_ring",
+  "craterglass boots": "boots/craterglass_boots",
+  "creeler's boots": "boots/creeler_boots",
+  "crier's cloak": "cloak/crier_cloak",
+  "crier's plume": "hat/crier_plume",
+  "crier's tall hat": "hat/crier_hat",
+  "crown of carp scales": "hat/carp_crown",
+  "currier's gloves": "gloves/currier_gloves",
+  "currier's hood": "hat/currier_hood",
+  "cutler's ring": "ring/cutler_ring",
+  "cutler's visor": "hat/cutler_visor",
+  "cutlers' banner": "banner/banner_cutler",
+  "dauber's boots": "boots/dauber_boots",
+  "deep-lamp amulet": "amulet/deeplamp_amulet",
+  "deepwarden's cloak": "cloak/deep_cloak",
+  "doorkeeper's amulet": "amulet/doorkeep_amulet",
+  "drover's boots": "boots/drover_boots",
+  "drover's flat cap": "hat/drover_cap",
+  "drover's spurs": "boots/drover_spurs",
+  "e3po's signet": "ring/e3po_signet",
+  "e3po's standard (guard blue)": "banner/banner_e3po",
+  "eeler's cap": "hat/eeler_cap",
+  "eeler's waders": "boots/eeler_boots",
+  "falconer's hood": "hat/falconer_hood",
+  "falconer's vervel": "amulet/falconer_amulet",
+  "falconers' banner": "banner/banner_falconer",
+  "farrier's mitts": "gloves/farrier_mitts",
+  "farrier's nail": "amulet/farrier_amulet",
+  "farrier's visor": "hat/farrier_visor",
+  "farriers' banner (anvil black)": "banner/banner_farrier",
+  "feast-night cloak": "cloak/feast_cloak",
+  "feathered cap": "hat/feather_cap",
+  "fen-strider's boots": "boots/fen_boots",
+  "fenwalker's hood": "hat/fen_hood",
+  "ferry banner": "banner/banner_ferry",
+  "ferrybell amulet": "amulet/ferrybell_amulet",
+  "ferrybell circlet": "hat/ferrybell_circlet",
+  "ferryman's hood": "hat/ferry_hood",
+  "ferryman's ring": "ring/ferryman_ring",
+  "ferrystep boots": "boots/ferrystep_boots",
+  "ferrywife's locket": "amulet/ferry_locket",
+  "first light boots": "boots/firstlight_boots",
+  "first light circlet": "hat/firstlight_circlet",
+  "fisher's oilskin hood": "hat/fisher_hood",
+  "flask-counter's amulet": "amulet/flaskcount_amulet",
+  "flask-counter's coif": "hat/flask_coif",
+  "fletcher's gloves": "gloves/archer_gloves",
+  "fletcher's hood": "hat/fletcher_hood",
+  "fletcher's tabs": "gloves/fletcher_tabs",
+  "fletcher's thumb-ring": "ring/fletcher_ring",
+  "fletchers' banner (goose grey)": "banner/banner_fletcher",
+  "fog-run banner (fog)": "banner/banner_fogrun",
+  "fog-run cloak": "cloak/fogrun_cloak",
+  "fog-run hood": "hat/fogrun_hood",
+  "ford banner (river)": "banner/banner_ford",
+  "ford circlet": "hat/ford_circlet",
+  "ford-wader's boots": "boots/ford_boots",
+  "fordwarden boots": "boots/fordwarden_boots",
+  "forgemaster's grips": "gloves/forge_grips",
+  "fuller's coif": "hat/fuller_coif",
+  "fuller's grips": "gloves/fuller_grips",
+  "fuller's token": "amulet/fuller_amulet",
+  "fullers' banner (cloth white)": "banner/banner_fuller",
+  "gaoler's coif": "hat/gaoler_coif",
+  "gaoler's keyring": "amulet/gaoler_amulet",
+  "garrison banner (steel)": "banner/banner_garrison",
+  "gatehouse whistle": "amulet/gate_whistle",
+  "gatewarden's boots": "boots/gate_boots",
+  "glazier's gloves": "gloves/glazier_gloves",
+  "glazier's visor": "hat/glazier_visor",
+  "glaziers' banner (glass blue)": "banner/banner_glazier",
+  "grainward amulet": "amulet/grainward_amulet",
+  "grainward charm": "amulet/grain_amulet",
+  "gravewyrm helm": "hat/gravewyrm_helm",
+  "gravewyrm hide cloak": "cloak/gravewyrm_cloak",
+  "grinning carp charm": "amulet/carp_charm",
+  "grubmother banner (pale)": "banner/banner_grubmother",
+  "guard's helm": "hat/guard_helm",
+  "guild banner (grey)": "banner/banner_guild",
+  "guild cloak": "cloak/guild_cloak",
+  "guild hood": "hat/guild_hood",
+  "guild scribe's seal": "amulet/scribe_amulet",
+  "harvest gloves": "gloves/harvest_gloves",
+  "harvest-saved banner": "banner/banner_harvest",
+  "hayward's boots": "boots/hayward_boots",
+  "hearthstone amulet": "amulet/hearth_amulet",
+  "hedgeward's cloak": "cloak/hedgeward_cloak",
+  "hollowbone ring": "ring/hollow_ring",
+  "homes banner (green)": "banner/banner_green",
+  "horner's hood": "hat/horner_hood",
+  "horner's pendant": "amulet/horner_amulet",
+  "horners' banner": "banner/banner_horner",
+  "hurdler's cap": "hat/hurdler_cap",
+  "hurdler's cloak": "cloak/hurdler_cloak",
+  "hurdlers' banner": "banner/banner_hurdler",
+  "joiner's cap": "hat/joiner_cap",
+  "joiner's gloves": "gloves/joiner_gloves",
+  "joiners' banner": "banner/banner_joiner",
+  "keep banner (blue)": "banner/banner_blue",
+  "keep the door banner": "banner/banner_keepdoor",
+  "kennelman's boots": "boots/kennel_boots",
+  "kindling amulet": "amulet/kindling_amulet",
+  "kindling banner (first-beam gold)": "banner/banner_kindling",
+  "kindling crown": "hat/kindling_crown",
+  "lampfast ring": "ring/lampfast_ring",
+  "lamplight banner (amber)": "banner/banner_lamplight",
+  "lamplighter's amulet": "amulet/lamplight_amulet",
+  "lamplighter's cloak": "cloak/lamp_cloak",
+  "lampwright's cap": "hat/lampwright_cap",
+  "lampwright's ring": "ring/lampwright_ring",
+  "last coin ring": "ring/lastcoin_ring",
+  "ledger-keeper's gloves": "gloves/ledger_gloves",
+  "lighterman's mantle": "cloak/lighterman_cloak",
+  "limeburner's mantle": "cloak/limeburner_cloak",
+  "limeburner's mask": "hat/limeburner_mask",
+  "limeburners' banner": "banner/banner_limeburner",
+  "limner's ring": "ring/limner_ring",
+  "lockkeeper's cap": "hat/lockkeep_cap",
+  "lockkeeper's gloves": "gloves/lockkeep_gloves",
+  "lockkeeper's oilcloth": "cloak/lockkeep_cloak",
+  "lockkeeper's ring": "ring/lockkeep_ring",
+  "lockkeeper's waders": "boots/lockkeep_waders",
+  "lockkeepers' banner (weir green)": "banner/banner_lockkeep",
+  "long count banner (iron)": "banner/banner_longcount",
+  "long count boots": "boots/longcount_boots",
+  "long count hood": "hat/longcount_hood",
+  "lorimer's cap": "hat/lorimer_cap",
+  "lorimer's ring": "ring/lorimer_ring",
+  "lorimers' banner": "banner/banner_lorimer",
+  "lye-boiler's gloves": "gloves/soaper_gloves",
+  "lye-boiler's wrap": "hat/soaper_wrap",
+  "lye-yard banner": "banner/banner_soaper",
+  "maltster's banner": "banner/banner_maltster",
+  "maltster's cap": "hat/maltster_cap",
+  "maltster's ring": "ring/maltster_ring",
+  "market banner (red)": "banner/banner_red",
+  "market day banner (saffron)": "banner/banner_marketday",
+  "market seal": "ring/market_ring",
+  "mason's band": "ring/mason_ring",
+  "mason's dust cap": "hat/mason_dustcap",
+  "mason's mitts": "gloves/mason_mitts",
+  "memorial banner (grey-violet)": "banner/banner_memorial",
+  "memorial veil": "hat/memorial_veil",
+  "mender's coif": "hat/mender_coif",
+  "mender's wraps": "gloves/mender_wraps",
+  "menders' banner (pale green)": "banner/banner_mender",
+  "mill banner (wheat)": "banner/banner_mill",
+  "miller's cap": "hat/miller_cap",
+  "miller's clogs": "boots/miller_clogs",
+  "millhand's mitts": "gloves/mill_mitts",
+  "millrace boots": "boots/millrace_boots",
+  "millwright's amulet": "amulet/millwright_amulet",
+  "millwright's cap": "hat/millwright_cap",
+  "miner's grips": "gloves/miner_grips",
+  "mire hood": "hat/mire_hood",
+  "mire-walker's cloak": "cloak/mire_cloak",
+  "mortarman's gloves": "gloves/mortar_gloves",
+  "mourncoil banner": "banner/banner_mourncoil",
+  "mourncoil scale": "amulet/mourncoil_amulet",
+  "mourner's grey": "cloak/mourner_cloak",
+  "mourner's veil": "hat/mourner_veil",
+  "mudplank boots": "boots/mudplank_boots",
+  "nailer's hood": "hat/nailer_hood",
+  "nailer's ring": "ring/nailer_ring",
+  "nailers' banner": "banner/banner_nailer",
+  "netmender's ring": "ring/netmender_ring",
+  "nightwing banner": "banner/banner_nightwing",
+  "nightwing boots": "boots/nightwing_boots",
+  "nightwing hood": "hat/nightwing_hood",
+  "ninth bell amulet": "amulet/ninthbell_amulet",
+  "ninth bell banner (bronze)": "banner/banner_ninthbell",
+  "ninth bell coif": "hat/ninthbell_coif",
+  "oar-maker's boots": "boots/oarmaker_boots",
+  "oathkeeper's ring": "ring/oath_ring",
+  "orchard banner": "banner/banner_orchard",
+  "orchard ring": "ring/orchard_ring",
+  "orchard straw hat": "hat/orchard_straw",
+  "orchardman's cloak": "cloak/orchard_cloak",
+  "osier-cutter's cloak": "cloak/osier_cloak",
+  "osier-cutter's hat": "hat/osier_hat",
+  "ossuary banner": "banner/banner_ossuary",
+  "ossuary circlet": "hat/ossuary_circlet",
+  "ossuary mantle": "cloak/ossuary_cloak",
+  "ostler's amulet": "amulet/ostler_amulet",
+  "pale duchess's gloves": "gloves/duchess_gloves",
+  "pale veil": "hat/pale_veil",
+  "paver's boots": "boots/pavers_boots",
+  "paver's cap": "hat/paver_cap",
+  "pavers' banner (stone)": "banner/banner_paver",
+  "peat-cutter's cloak": "cloak/turbary_cloak",
+  "peat-cutter's hood": "hat/turbary_hood",
+  "pewterer's cap": "hat/pewterer_cap",
+  "pewterer's ring": "ring/pewterer_ring",
+  "pewterers' banner": "banner/banner_pewterer",
+  "pickman's gloves": "gloves/pick_gloves",
+  "pieman's banner": "banner/banner_pieman",
+  "pieman's hood": "hat/pieman_hood",
+  "pilgrim's cloak": "cloak/pilgrim_cloak",
+  "pilgrim's hood": "hat/pilgrim_hood",
+  "pilgrim's ring": "ring/pilgrim_ring",
+  "pilgrims' banner (road brown)": "banner/banner_pilgrim",
+  "pinder's hat": "hat/pinder_hat",
+  "pinder's ring": "ring/pinder_ring",
+  "pitwalker's boots": "boots/pitwalk_boots",
+  "pitwalker's hood": "hat/pitwalk_hood",
+  "plasterer's gloves": "gloves/plaster_gloves",
+  "plumed helm": "hat/plumed_helm",
+  "potter's headwrap": "hat/potter_wrap",
+  "potter's kiln boots": "boots/kiln_boots",
+  "potter's thumbmark": "amulet/potter_amulet",
+  "potters' banner (kiln red)": "banner/banner_potter",
+  "quarreller's cap": "hat/quarreller_cap",
+  "quarreller's tabs": "gloves/quarreller_gloves",
+  "quarrellers' banner": "banner/banner_quarreller",
+  "quarry banner (slate)": "banner/banner_quarry",
+  "quarryman's cap": "hat/quarry_cap",
+  "quarryman's gloves": "gloves/quarry_gloves",
+  "quarryman's helm": "hat/quarry_helm",
+  "quarryman's ring": "ring/quarryman_ring",
+  "quarrymen's banner (dust)": "banner/banner_quarryman",
+  "raftsman's cloak": "cloak/raftsman_cloak",
+  "raidbreaker's gauntlets": "gloves/raidbreaker_gloves",
+  "raider's trophy cloak": "cloak/raid_cloak",
+  "rattling coif": "hat/host_coif",
+  "rattling gauntlets": "gloves/rattling_gauntlets",
+  "rattling host amulet": "amulet/host_amulet",
+  "red harl's cloak": "cloak/harl_cloak",
+  "reedcutter's boots": "boots/reedcutter_boots",
+  "reedcutter's hat": "hat/reedcutter_hat",
+  "reedcutters' banner": "banner/banner_reedcutter",
+  "reeve's banner": "banner/banner_reeve",
+  "reeve's hat": "hat/reeve_hat",
+  "reeve's signet": "ring/reeve_ring",
+  "retter's gloves": "gloves/retter_gloves",
+  "ring of the night watch": "ring/nightwatch_ring",
+  "ring of the thaw": "ring/thaw_ring",
+  "rivet mitts": "gloves/rivet_mitts",
+  "roll-keeper's ring": "ring/rollkeeper_ring",
+  "rope-burn cap": "hat/ropeburn_cap",
+  "rope-burn gloves": "gloves/ropeburn_gloves",
+  "ropewalk gloves": "gloves/ropewalk_gloves",
+  "ropeworks banner (hemp)": "banner/banner_ropeworks",
+  "rotwarden's mask": "hat/rot_mask",
+  "saddler's gloves": "gloves/saddler_gloves",
+  "saddler's hood": "hat/saddler_hood",
+  "saddlers' banner": "banner/banner_saddler",
+  "saltboiler's cap": "hat/saltboiler_cap",
+  "saltboiler's cloak": "cloak/saltboiler_cloak",
+  "saltline amulet": "amulet/saltline_amulet",
+  "saltline banner (pale blue)": "banner/banner_saltline",
+  "saltline hood": "hat/saltline_hood",
+  "saltworks banner": "banner/banner_saltline_works",
+  "sawyer's token": "amulet/sawyer_amulet",
+  "scar banner (violet)": "banner/banner_scar",
+  "scarglass circlet": "hat/scarglass_circlet",
+  "scarglass ring": "ring/scar_ring",
+  "scarward ring": "ring/scarward_ring",
+  "scarwatch cloak": "cloak/scarwatch_cloak",
+  "scarweave cloak": "cloak/scarweave_cloak",
+  "scout's boots": "boots/scout_boots",
+  "second flask amulet": "amulet/secondflask_amulet",
+  "sedge's toll-ring": "ring/sedge_ring",
+  "sexton's banner (grave black)": "banner/banner_sexton",
+  "sexton's black": "cloak/sexton_cloak",
+  "sexton's hobnails": "boots/gravepath_boots",
+  "sexton's low hat": "hat/sexton_hat",
+  "sexton's ring": "ring/sexton_ring",
+  "shambles banner": "banner/banner_butcher",
+  "shepherd's banner": "banner/banner_shepherd",
+  "shepherd's charm": "amulet/shepherd_charm",
+  "shepherd's hood": "hat/shepherd_hood",
+  "shingler's cloak": "cloak/shingler_cloak",
+  "skepward's charm": "amulet/skep_amulet",
+  "skepward's gloves": "gloves/hive_gloves",
+  "skepward's soft boots": "boots/hive_boots",
+  "skepward's veil": "hat/skep_veil",
+  "skepwards' banner (wax gold)": "banner/banner_skep",
+  "sluicekeeper's amulet": "amulet/sluice_amulet",
+  "smith's gauntlets": "gloves/smith_gloves",
+  "soft boots": "boots/quiet_boots",
+  "spare wall cloak": "cloak/sparewall_cloak",
+  "spinner's gloves": "gloves/spinner_gloves",
+  "splint-wrap gloves": "gloves/splintwrap_gloves",
+  "spurrier's cap": "hat/spurrier_cap",
+  "spurrier's ring": "ring/spurrier_ring",
+  "spurriers' banner": "banner/banner_spurrier",
+  "stairhold banner (grey-blue)": "banner/banner_stair",
+  "stairhold boots": "boots/stairhold_boots",
+  "stairholder's helm": "hat/stairhold_helm",
+  "straw hat": "hat/straw_hat",
+  "tallykeeper's ring": "ring/tally_ring",
+  "tanner's apron-cloak": "cloak/tanner_cloak",
+  "tanner's cap": "hat/tanner_cap",
+  "tanner's gloves": "gloves/tanner_gloves",
+  "tanner's ring": "ring/tanner_ring",
+  "tanners' banner (hide brown)": "banner/banner_tanner",
+  "tanyard boots": "boots/tanyard_boots",
+  "tavern banner": "banner/banner_taverner",
+  "tavern banner (ale)": "banner/banner_tavern",
+  "taverner's cap": "hat/taverner_cap",
+  "taverner's token": "amulet/taverner_amulet",
+  "temple banner (white)": "banner/banner_temple",
+  "thatcher's cap": "hat/thatcher_cap",
+  "thatcher's cloak": "cloak/thatcher_cloak",
+  "thatchers' banner (reed gold)": "banner/banner_thatch",
+  "thaw banner": "banner/banner_thaw",
+  "thaw circlet": "hat/thaw_circlet",
+  "thaw hood": "hat/thaw_hood",
+  "thaw-bell amulet": "amulet/thawbell_amulet",
+  "the weasel's gloves": "gloves/weasel_gloves",
+  "thresher's gloves": "gloves/thresher_gloves",
+  "threshing charm": "amulet/threshing_amulet",
+  "tiler's hood": "hat/tiler_hood",
+  "tiler's shoulder-cloak": "cloak/tiler_cloak",
+  "tilers' banner": "banner/banner_tiler",
+  "tinker's boots": "boots/tinker_boots",
+  "tithe banner (wax-white)": "banner/banner_tithe",
+  "tithe cap": "hat/tithe_cap",
+  "tithe ring": "ring/tithe_ring",
+  "toll banner": "banner/banner_toll",
+  "toll ring": "ring/toll_ring",
+  "toll-gate boots": "boots/tollgate_boots",
+  "toll-keeper's cap": "hat/toll_cap",
+  "toll-taker's hood": "hat/toll_hood",
+  "tollkeep's ring": "ring/tollkeep_ring",
+  "towpath banner (bank green)": "banner/banner_towpath",
+  "towpath boots": "boots/towpath_boots",
+  "towpath hood": "hat/towpath_hood",
+  "turbary banner": "banner/banner_turbary",
+  "votive amulet": "amulet/votive_amulet",
+  "votive veil": "hat/votive_veil",
+  "wake-ward banner (slate)": "banner/banner_wakeward",
+  "wake-ward cloak": "cloak/wakeward_cloak",
+  "wake-ward veil": "hat/wakeward_veil",
+  "wall banner (stone)": "banner/banner_wall",
+  "wall-walker's cloak": "cloak/wall_cloak",
+  "wardstone pendant": "amulet/ward_pendant",
+  "warhorn mantle": "cloak/warhorn_mantle",
+  "warrener's boots": "boots/warrener_boots",
+  "watch banner (black)": "banner/banner_watch",
+  "watchfire banner (ember)": "banner/banner_watchfire",
+  "watchfire helm": "hat/watchfire_helm",
+  "watchfire ring": "ring/watchfire_ring",
+  "watchman's kettle-helm": "hat/watch_helm",
+  "watchman's mantle": "cloak/watch_mantle",
+  "weaver's long cloak": "cloak/weaver_cloak",
+  "weighstone amulet": "amulet/weighstone_amulet",
+  "weir banner": "banner/banner_weirkeep",
+  "weir-keeper's charm": "amulet/weirkeep_amulet",
+  "weir-keeper's hood": "hat/weirkeep_hood",
+  "wellhead banner": "banner/banner_wellhead",
+  "wellhead ring": "ring/wellhead_ring",
+  "wellkeeper's coif": "hat/wellkeep_coif",
+  "wheelwright's gloves": "gloves/wheelwright_gloves",
+  "wide-brimmed hat": "hat/wide_hat",
+  "winterwatch banner": "banner/banner_winterwatch",
+  "winterwatch cloak": "cloak/winterwatch_cloak",
+  "winterwatch helm": "hat/winterwatch_helm",
+  "withy-bed banner": "banner/banner_osier",
+  "woodward's banner": "banner/banner_woodward",
+  "woodward's green": "cloak/woodward_cloak",
+  "woodward's hood": "hat/woodward_hood",
+  "wrong-hand ring": "ring/oathwrong_ring"
+ },
+ "no_name_in_items_json": [],
+ "quality": 85,
+ "source_commit": "7c9b90f93a19089e0c39cca310ed35c703caad12",
+ "source_dir": "assets/icons/items",
+ "thumb_px": 160,
+ "total_bytes": 2038188
+}

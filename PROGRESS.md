@@ -7946,3 +7946,79 @@ parse gate has not seen this file.
 
 ## U47 (2026-11-17 01:53 CT) - HUD stand-down, queue empty (file-only)
 Fetched and merged origin/main into hud-ui, no conflicts. L73 and L74 both read [x] in WORK_PLAN; L31's open remainder is the game build's (delve/monster/party_frames/boss_bar), L66 is the hub's H31. No new HUD item raised. RUN_LOCK IDLE (last: game build D98, 01:12), no Godot alive; none launched, lock untouched. None of my seven files edited.
+
+## B-cycle B20 - THE OWED BATTERY IS PAID AND L56 HAS ITS FIRST REAL VERDICT: RED (chat bot, 2026-11-17 02:45-02:58 CT)
+
+Branch `chatbot`, merged origin/main 463ab1b as a fast-forward, no conflicts. Lock was genuinely
+free: last line IDLE 2026-11-17T02:22:25-06:00 (game build D99), Get-Process for `*odot*` returned
+nothing at 02:46:49 read off the machine. Claimed at 02:48:12, ONE battery, seven gates in
+parallel, nothing queued behind it.
+
+### THE SIX GATES B19 OWED - ALL SIX GREEN, AND THE LOADER STAYED QUIET
+Verdict lines, not return codes:
+  - parse (`--quit-after 300`): 0 SCRIPT ERROR, 0 Parse Error, and the join line is there
+    (`TWITCH joined #jestsayin96`), plus `TWITCH_EVENTSUB subscribed 7 of 7`.
+  - `B11_MUSTER OK bad=0` - run WITHOUT `--quit`, 22 ok lines. `B11_SOURCE_QUEUEING YES`.
+  - `TWITCH_PARSE OK` (8 passes).
+  - `L14_TEST OK` - 64 verbs, missing [], unanswered [], and the doc carries every command.
+  - `D704_ECHO OK (356 checks)`.
+  - `COMMANDS_DOC wrote 27 commands` and left `docs/COMMANDS.md` BYTE-IDENTICAL
+    (sha256 1fb9a166c3bf, 5771 bytes). `data/commands.json` unchanged (sha256 f37b1d2c6909,
+    27 commands) - nothing to regenerate.
+  - **No `COMMANDS_DATA` line anywhere in any of the seven logs** - the B18/B19 loader guards did
+    not fire, which is the healthy reading. B19 is PROVEN.
+
+### L56 - THE DELVE-HEAVY SOAK RAN TO A VERDICT AND THE VERDICT IS `L56_TEST FAIL` (3 of 4 checks)
+`tools/_l56_test.gd` was already on main and had never been run to its summary. It has now:
+```
+  trap_log aggregate across 4 delves: { spotted: 1, disarmed: 0, sprung: 0, saved: 0, damage: 0.0 }
+  lords seen: 0 kinds, 0 killed
+  FAIL L46: traps actually SPRING in play (0 sprung across the soak)
+  FAIL L46: trap damage LANDS - a hero loses hp to a trap (0.0 total)
+  FAIL L45: lords actually RISE on boss floors in play (0 kinds seen)
+  ok   L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (1.28 vs 1.00)
+  CHECKS 4 FAILS 3   ->   L56_TEST FAIL
+```
+**READ THE PER-RUN LINES BEFORE READING THE FAILS AS A GAME DEFECT.** Every one of the four runs
+ended on the gate's OWN 2-minute frame cap, not at `state == "home"`:
+```
+  run 1 ended state=descend floors_visited=1
+  run 2 ended state=fight   floors_visited=3
+  run 3 ended state=descend floors_visited=4
+  run 4 ended state=descend floors_visited=5
+```
+The gate declares `START_FLOOR 3`, `FLOORS_PER 8` - floors 3..10, "TWO lord floors in each run".
+It reached at most 5 floors before the cap cut it off. So "0 kinds seen" is measured on a sample
+that **never arrived at the depth the check is about**, and the L45 fail is the gate's framing, not
+evidence about lords. Said plainly so nobody ticks or un-ticks L45 on it.
+
+The trap numbers are the ones worth keeping: across 4 delves and 13 floors, `spotted: 1` and
+`sprung: 0`. Something IS registering on `_d.trap_log` now - this is not B-run-1's all-zero
+blindness, where the feed showed a trap and the log showed nothing. One spotted, nothing sprung,
+no damage. Whether that is a thin sample or a real L46 defect is NOT decided here.
+
+### NOT MINE AND NOT TOUCHED
+`tools/_l56_test.gd` is in `tools/` and is not this lane's file. I did not edit it. What it needs
+is one of: a wall-clock or floors-visited budget instead of a frame cap, a deeper `START_FLOOR`, or
+`Engine.time_scale` so 8 floors fit the cap - whoever owns `tools/` decides which. Until then the
+gate's own L45 check cannot pass and its FAIL must not be read as a game verdict.
+
+### AND MY OWN QUICK DRIFT CHECK WAS THE WRONG INSTRUMENT A THIRD TIME (B17, B19, now B20)
+My throwaway python regex reported 15+ "dispatch labels not in data" - `a`, `an`, `args`,
+`aliases`, `bits`, the alphabet string. All false: it harvests every quoted lowercase word in the
+file, not the dispatch labels. `L14_TEST` gets both directions right and says missing [] and
+unanswered []. Real drift: none, either direction. Third time running my hand check has been worse
+than the gate; the gate is the authority and I will stop reporting the hand check as a finding.
+
+### CLEANUP
+Seven `.b20_*.log` / `.log.err` files written at the worktree root and DELETED in the same run.
+Godot closed, lock released IDLE 02:58. No Twitch of any kind: 0 bits, nothing cheered or redeemed,
+no reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
+touched. No secrets written anywhere.
+
+### OWED BY OTHERS - UNCHANGED FROM B19 PLUS ONE
+- `tools/` owner: the L56 cap above; the third L14 bound (bound the verb harvest to the dispatch
+  block - B19 measured it latent, lines 881-887); B18's `_d704_echo.gd` check floor and the two
+  `_commands_doc.gd` guards.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Still unchanged.
+- Mr. E: nothing in this lane.

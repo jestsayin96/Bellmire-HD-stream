@@ -177,6 +177,10 @@ const KINDS := {
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
     "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
+    # S20 (System 2 engine half, art's SYSTEM2_WEAPONS (b)): a GREATAXE is double-headed, not a hatchet. Tiers 1-3
+    # take the pack's axeDouble_*; 4-5 keep the axe kit until a heavier model exists. "Bearded Greataxe" (t2) and
+    # "Ash-Maul Greataxe" (t4) reach it through D94_KIND_WORDS. Added AFTER "mace" so kinds_of("axe")[0] stays "axe".
+    "greataxe":   {"family": "axe", "noun": "greataxe", "kit": [DUN + "axeDouble_common.glb", DUN + "axeDouble_uncommon.glb", DUN + "axeDouble_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "staff":      {"family": "arcane", "noun": "staff", "kit": [DUN + "staff_common.glb", DUN + "staff_uncommon.glb", DUN + "staff_rare.glb", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     # D94b: an arcane MACE ("Parish Iron Mace") had no kind and fell back to a staff
     "sceptre":    {"family": "arcane", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
@@ -210,7 +214,23 @@ static func kind_path(kind: String, tier: int) -> String:
 static func held_rot(path: String) -> Vector3:
     if path.begins_with(DUN + "staff_"):
         return Vector3(0, 0, 90)
+    ## S20: the pack crossbow is built with its stock along the mesh's +Z (prod at the +Z end), its prod (bow arms)
+    ## along +X and its thin axis along +Y. Held plain, the prod stood VERTICAL and the stock pointed ACROSS the
+    ## body (s19_side). Art's (0, 0, 90.06) was tried first: it levelled the prod but left the stock across the
+    ## body (AXIS: prod +X along world -Z). The wanted map in the slot frame (+Y forward, +X down, measured S19) is
+    ## mesh +Z -> slot +Y (stock forward), mesh +Y -> slot -X (up), mesh +X -> slot -Z (prod across): Godot YXZ
+    ## euler (-90, 0, 90), solved off that matrix, not guessed. tools/_s20_hand.gd gates prod level + stock forward.
+    if path.begins_with(DUN + "crossbow_"):
+        return Vector3(-90, 0, 90)
     return Vector3.ZERO
+
+## S20: the off hand's scale. The pack shield is built like the Adventurers' shields it replaces (face in the mesh
+## XY plane, centred on its origin, boss toward +Z) so it needs NO held rotation on handslot.l; it is smaller
+## (0.68-0.76 wide against shield_square's 0.88), so x1.2 brings it to the kit shield's size.
+static func offhand_scale(path: String) -> float:
+    if path.begins_with(DUN + "shield_"):
+        return 1.2
+    return 1.0
 
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
 ## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small
@@ -1486,6 +1506,7 @@ const D94_KIND_WORDS := [
     ["rapier", "sword"], ["cutlass", "sword"], ["sabre", "sword"], ["falchion", "sword"],
     ["backsword", "sword"], ["longsword", "sword"], ["brand", "sword"], ["sword", "sword"], ["blade", "sword"],
     ["fang", "sword"], ["edge", "sword"],
+    ["greataxe", "greataxe"],   # S20: before "maul", so "Ash-Maul Greataxe" is a greataxe
     ["mace", "mace"], ["mace", "sceptre"], ["maul", "axe"], ["hatchet", "axe"], ["cleaver", "axe"], ["splitter", "axe"],
     ["greataxe", "axe"], ["hewer", "axe"], ["breaker", "axe"], ["axe", "axe"],
     ["quarterstaff", "quarterstaff"], ["wraps", "wraps"], ["knuckles", "wraps"], ["fist", "wraps"],

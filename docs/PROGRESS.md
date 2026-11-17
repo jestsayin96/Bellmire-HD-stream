@@ -2173,3 +2173,52 @@ daggers; this cycle is the staff and the crossbow S18 left. Systems 3/4 and Phas
   rotation and a shorter staff. Next hour: put art's numbers into held_rot (crossbow + shield), compare
   the two staff answers on one picture and keep the better, then the greataxe. Merged 12:58 plan is on
   my branch now.
+
+## D-cycle - S20 System 2 engine half: the crossbow levelled and pointed, a GREATAXE kind on axeDouble_*, pack shields on the off hand, 2026-11-17T14:20:00-06:00 (game build)
+TAKE THIS NEXT (12:58) gave: SYSTEM 2, ENGINE HALF, FINISH IT - art's SYSTEM2_WEAPONS.md (a)-(d). Read this
+hour, before the first edit. (a) was S16-S19. This cycle is (b), (c) for the crossbow, and (d). Systems 3/4
+and Phase 2 NOT touched.
+- (c) CROSSBOW, gear.gd held_rot: DUN crossbow_* -> (-90, 0, 90). ART'S (0, 0, 90.06) WAS TRIED FIRST and it
+  is half right: it levels the prod, but the AXIS line showed the prod (+X) along world -Z and the stock (+Z)
+  pointing ACROSS the body. Art's number is in Blender's bone frame; mine is solved in the engine's slot frame
+  (S19 measured: slot +Y forward, slot +X down). Wanted map mesh +Z -> slot +Y (stock forward), mesh +Y ->
+  slot -X (up), mesh +X -> slot -Z (prod across); that matrix as Godot YXZ euler is (-90, 0, 90). AXIS after,
+  all three tiers: prod +X (-0.96, -0.01, -0.26) level, stock +Z (0.26, -0.03, -0.96) = the way the hero
+  faces, +Y (0, 1, -0.03) up. The harness now GATES both (prod |y| <= 0.35, stock z <= -0.6) - a crossbow
+  rolled on its side or turned across the body is a FAIL, not a note.
+- (b) GREATAXE: new KINDS["greataxe"] (family axe) -> axeDouble_common/uncommon/rare at tiers 1-3, the axe
+  kit at 4-5. Inserted AFTER "mace" so kinds_of("axe")[0] is still "axe" (no existing hero changes look).
+  D94_KIND_WORDS gains ["greataxe","greataxe"] AHEAD of "maul", so "Bearded Greataxe" (t2) AND "Ash-Maul
+  Greataxe" (t4) are greataxes. The t1 and t3 rows have no named greataxe and dress through the unnamed
+  !forge greataxe path (named in the gate's NOTE lines). NEW CHAT SURFACE, SAID OUT LOUD: "!forge greataxe"
+  is now an accepted kind for axe classes - roster.gd's refusal line lists it automatically. COMMANDS.md is
+  the chat bot lane's; it may want a line. This settles the lead's s17_front question: s20_side shows the
+  Bearded Greataxe double-headed, not a hatchet.
+- (d) SHIELDS: roster.offhand_mesh - a shield-bearer (class offhand begins "shield") at ARMOUR tier 1-3 holds
+  DUN shield_common/uncommon/rare on handslot.l; tier 0 and 4-5 keep the class kit. The CLASS FIELD IS
+  UNCHANGED, so armour_class's +2 and delve.gd:3530's shield check read as before. New Gear.offhand_scale:
+  x1.2 for pack shields (0.68-0.76 wide vs shield_square 0.88), 1.0 for everything else; hero_body passes it.
+  NO ROTATION, and here I DISAGREE WITH ART'S "same rotation" FOR A REASON: the pack shield is built exactly
+  like the Adventurers' shield_square/round it replaces (face in mesh XY, centred, boss toward +Z - read off
+  both files' accessors), and KayKit's own carry holds those unrotated on handslot.l.
+- LOOKED AT: s20_side (rangers: crossbow level at the hip, stock forward; barbarians and wardens: the
+  greataxe double head reads at stream distance), s20_front (wardens: pack shield on the left forearm),
+  s20_*_close.
+- HONEST FIT NOTES, NOT FIXED: (1) the shield is carried face-OUTWARD to the side, KayKit's carry - from a
+  front camera tiers 1-2 read nearly edge-on and only the rare's face shows. If the lead wants the face to
+  the front, that is one held rotation on handslot.l and a look. (2) the crossbow prod's off-side arm passes
+  through the belt line in s20_front. (3) THE STAFF COMPARISON THE ADDENDUM PROMISED IS NOT DONE: mine is
+  (0,0,90) x1.9 (upright, AXIS (0,1,-0.02)), art's is (-85.13,-90.06,85.26) x1.30. Given the crossbow
+  result - art's Blender euler did not carry over to the engine frame - I would not apply art's staff euler
+  without an AXIS run. Next hour if the lead wants it.
+- tools/_s20_hand.gd (new, windowed, cloned from _s19_hand.gd): ranger crossbow, barbarian greataxe and
+  warden greataxe+shield rows, three tiers each; floors: >= 6 pieces held AND 3 pack shields held; crossbow
+  level + forward gated.
+- Battery (verdict lines, re-run on the FINAL code 14:16-14:20, after the shield edit): parse 0 SCRIPT ERROR /
+  0 Parse Error (after --import); S20_HEFT OK (11 shots, 0 failures); TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2028 samples off the floor (home); TOWNWALK in_solid=0/18950 (0.000%)
+  raid_in_solid=0/5272 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR;
+  S19_HEFT OK (8 shots, 0 failures); S18_HEFT OK (5 shots, 0 failures).
+- Merge: origin/main had ONE conflict, docs/art/ASSET_SOURCES.md (my S19 row vs art's pack row + the lead's
+  note) - both sides kept, 0 markers left. Lock: claimed 14:08:33 declaring 14:35. No live Twitch test.
+  Not ticked - the team lead ticks.

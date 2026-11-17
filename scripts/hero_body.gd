@@ -32,7 +32,8 @@ func refresh() -> void:
     Gear.tint_piece(held, look.get("piece", {}))
     # D94b: and its own furniture (wrap, ribbons, stone, collars), so siblings sharing a mesh differ
     Gear.deco_piece(held, look.get("piece", {}))
-    Gear.equip(_mdl, _adv(roster.offhand_mesh(h)), roster.offhand_bone(h), "offhand")
+    var off := _adv(roster.offhand_mesh(h))
+    Gear.equip(_mdl, off, roster.offhand_bone(h), "offhand", Gear.offhand_scale(off))
     # the roster's own RANKS table (same guild roll as data/ranks.json)
     Gear.rank_trim(_mdl, Roster.RANKS.find(roster.rank_row(h)))
 

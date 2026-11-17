@@ -45,8 +45,17 @@
   }
  },
  "errors": [],
+ "measured": [
+  "stoker",
+  "stoker_chibi"
+ ],
+ "asked": [
+  "stoker",
+  "stoker_chibi"
+ ],
  "blank_check": {
   "files": 2,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

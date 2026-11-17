@@ -45,8 +45,17 @@
   }
  },
  "errors": [],
+ "measured": [
+  "gaoler",
+  "gaoler_chibi"
+ ],
+ "asked": [
+  "gaoler",
+  "gaoler_chibi"
+ ],
  "blank_check": {
   "files": 2,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

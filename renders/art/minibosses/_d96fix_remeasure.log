@@ -1,0 +1,42 @@
+
+===== snuffer_register (snuffer,snuffer_chibi)
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"snuffer": [1.06, 3.37, true], "snuffer_chibi": [1.06, 4.21, true]}}
+RC 0
+STDERR:C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+
+===== gaoler_register (gaoler,gaoler_chibi)
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"gaoler": [0.96, 5.58, true], "gaoler_chibi": [0.96, 5.58, true]}}
+RC 0
+STDERR:C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+
+===== porter_register (porter,porter_chibi)
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"porter": [0.94, 5.39, true], "porter_chibi": [0.94, 5.52, true]}}
+RC 0
+STDERR:C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+
+===== sexton_register (sexton,sexton_chibi)
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"sexton": [1.0, 4.0, true], "sexton_chibi": [1.0, 3.93, true]}}
+RC 0
+STDERR:C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+
+===== stoker_register (stoker,stoker_chibi)
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"stoker": [0.98, 4.86, true], "stoker_chibi": [0.98, 4.74, true]}}
+RC 0
+STDERR:C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+
+===== d96red_probe (snuffer,snuffer_chibi) [--sheet, RED PROOF]
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {}, "errors": ["hero: never measured. An empty hero block is RED, not ok - every ratio is a ratio TO the hero.", "pairs: EMPTY. This register measured NOTHING and must not report ok. Re-run without --sheet.", "no ratio on record for: snuffer,snuffer_chibi (asked for 2, measured 0)"], "blank": {"files": 2, "failures": []}, "ratios": {}}
+RC 0
+STDERR:
+
+===ALL DONE===

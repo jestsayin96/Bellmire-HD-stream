@@ -45,8 +45,17 @@
   }
  },
  "errors": [],
+ "measured": [
+  "porter",
+  "porter_chibi"
+ ],
+ "asked": [
+  "porter",
+  "porter_chibi"
+ ],
  "blank_check": {
   "files": 2,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

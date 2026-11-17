@@ -287,6 +287,30 @@ def main():
                 rep["ok"] = False
                 rep["errors"].append("%s: %s" % (key, traceback.format_exc()[-800:]))
 
+    # *** AN EMPTY MEASUREMENT IS RED. ***
+    # _fit_snuffer_register.json shipped as ok:true with hero:{} and pairs:{}
+    # and another lane's ticked item (D96) then leaned on it. It was born from
+    # a --sheet-only run: that path skips the measurement loop entirely, and
+    # nothing here checked that the keys being sheeted had ever been measured.
+    # ok used to mean "nothing raised" - it now means "every key asked for has
+    # a ratio on record". A register that measures nothing reports RED.
+    measured = [k for k in keys if k in rep["pairs"]]
+    missing = [k for k in keys if k not in rep["pairs"]]
+    rep["measured"] = measured
+    rep["asked"] = list(keys)
+    if not rep["hero"]:
+        rep["ok"] = False
+        rep["errors"].append("hero: never measured. An empty hero block is RED, "
+                             "not ok - every ratio is a ratio TO the hero.")
+    if not rep["pairs"]:
+        rep["ok"] = False
+        rep["errors"].append("pairs: EMPTY. This register measured NOTHING and "
+                             "must not report ok. Re-run without --sheet.")
+    if missing:
+        rep["ok"] = False
+        rep["errors"].append("no ratio on record for: %s (asked for %d, measured %d)"
+                             % (",".join(missing), len(keys), len(measured)))
+
     G.purge()
     try:
         hero = rep["hero"] if rep["hero"] else {"h": 1.0}
@@ -300,9 +324,11 @@ def main():
         rep["errors"].append("sheet: %s" % traceback.format_exc()[-800:])
 
     os.makedirs(os.path.dirname(out), exist_ok=True)
+    rep["verdict"] = "GREEN" if rep["ok"] else "RED"
     with open(out, "w") as f:
         json.dump(rep, f, indent=1)
     print("MINIBOSSFIT_REPORT " + json.dumps({
+        "verdict": "GREEN" if rep["ok"] else "RED",
         "ok": rep["ok"], "hero": rep["hero"], "errors": rep["errors"][:4],
         "blank": rep.get("blank_check", {}),
         "ratios": {k: (v["ratio"], v["pair_w"], v["fits_frame"])

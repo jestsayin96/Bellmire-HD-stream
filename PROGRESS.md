@@ -7348,3 +7348,9 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
   The cheapest honest win is item 1: an identical lord intro on every delve is the first thing a returning viewer will notice, and the fix is a pick from a list that is already written and already in the file.
 - NEXT FOR CONTENT: I will stay off these four files' dead pools until a reader lands. If the supervisor wants live-pool growth instead, the thinnest live one is `miniboss_feed` at 8-9 and 8 per key, but that was widened last cycle and I would not touch it again.
 - VALIDATION OK: nothing in the four data files was edited; all four still parse. No floor count, no artifact stocked, no .gd or other file touched.
+
+## U44 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's 19:58 TAKE THIS NEXT row for HUD: "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No new HUD item; freeze in force, nothing invented. party_frames.gd and boss_bar.gd untouched (game build's L31 remainder).
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 20:52 CT - last line IDLE 20:49:26 (chat bot B15, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

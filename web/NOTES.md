@@ -884,3 +884,10 @@ signal used nowhere else. Welcome panel placement and chat are still to do (pass
   preview overlay; Bestiary cards lift on hover/focus; Lore chapters are browse cards. Pictures are derived
   160 px WebP thumbnails (1.94 MB for 463) chosen by a generated name whitelist - see docs/HUB_SECURITY.md.
 - H32 pass 5 (polish): thin dark scrollbars on the three scroll regions (the narrow top strip showed a white native bar); a fade on the right edge of the section bar and the active tab scrolled into view, so a clipped tab reads as "more this way"; a skip link to the stage; keyboard shortcuts while not typing - "[" folds the rail, "]" folds/opens the chat, "g" focuses the rail (the listbox keeps Up/Down/Home/End/Enter). Layout and keys only: no data, no CSP change, no new storage key. Live dot stayed red (--live): it does not fight the gold because it is 8 px and used only for the dot and the LIVE badge.
+
+## H32 acceptance run (hub, 2026-11-17 ~03:45 UTC / 16 Nov evening CT)
+No code changed. Headless Chromium 1440x900 against the merged tree (hub + origin/main), Supabase fetch stubbed with a v5 payload containing a hostile hero name and hostile shop name.
+- ?state=empty, ?state=fail, ?state=stale, ?mock=chronicle, ?mock=crowd (60-row rail page), ?open=1, ?mock=bands (6 rail rows), ?mock=shops, ?mock=bestiary, ?mock=lore, payload v=9: 0 page errors, 0 dialogs, 0 injected <img>, document scrollHeight - innerHeight = 0 in every case (H13 holds), honest status line text per state, unknown version shows no town data.
+- Hostile `<img src=x onerror=alert(1)>` renders as literal text in rail, shop names, caravan stock and bestiary cards.
+- LOOKED AT: Shops card grid (picture, rarity pill + rarity frame, price; bare / not-published shelves read honestly), Bestiary cards, Lore chapter cards, the 420 px one-column layout (rail becomes a top strip, chat a top-bar button). Item pictures in the capture are the generic gem because only 10 thumbnails were staged for the run; the real set is web/icons/items/.
+- Live dot: red (--live), unchanged.

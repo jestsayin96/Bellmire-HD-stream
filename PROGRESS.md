@@ -7384,3 +7384,13 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced
   or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## C-76 (2026-11-16 21:23 Central Standard Time) - stalest live file named, working shown; NO DATA ADDED, NO STALE LIVE POOL (content)
+- TAKE THIS NEXT gave CONTENT C-76: name the stalest LIVE file and show the working, stay off the dead pools, do not re-widen miniboss_feed, and if nothing is worth writing say so in one line and stop. Merged origin/main (b9029c0) before reading.
+- THERE IS NO STALE LIVE POOL THIS CYCLE. Nothing was written.
+- THE WORKING. Re-grepped scripts/ and web/ (46 .gd/.js files) for every lore_lines.json top-level key. Still read by nothing, unchanged since C-75: lord_intros_alt (96), unique_intros_alt (60), forge_alt (80), townsfolk (1030), phase2_words (182), phase2_words_alt (179), town_levels_for_the_desktop. `lord_intros_alt` has 0 references anywhere; no reader landed since C-75 (last delve.gd commit is 72096ad, D61.1). Those stay untouched.
+- LIVE POOLS BY SIZE (delve.gd readers): tells 46 per origin x 8, descend 299, cleared 299, barks 123-128 per kind x 6, epitaphs 477, miniboss_feed arrive 8-9 / fall 8 per key. misfire 80 is the smallest unthrottled live pool.
+- SECOND-ORDER QUESTION (thin relative to fire rate), answered from the code and not from a run - I never run Godot, so no fire rate was measured. delve.gd:2473 draws `_pick_line("misfire")` on every failed scar roll, with no throttle; the paired bark (delve.gd:2474) draws from 126 and is limited to one per hero per eight seconds. So misfire's 80 lines are the only live pool below 100 on a per-event path. It is the CANDIDATE if a measured run shows scar misfires firing more than a few dozen times a night. I did not pad it on a guess.
+- miniboss_feed act (6-7) and broken (4) per key are READABLE but UNWIRED: delve.gd:3332 says those phases wait on each miniboss's own mechanic. They are dead pools until that lands, so I left them. arrive/fall are wired and were not widened (C-74).
+- NEEDED OF THE GAME BUILD, unchanged from C-75: delve.gd:190 pick from [lord_intros[id]] + lord_intros_alt[id] (and the unique pair); roster.gd:1289 forge[tier] + forge_alt[tier]. If a run can log how often `_pick_line("misfire")` fires per delve, that number decides whether misfire gets a second pool.
+- VALIDATION OK: no data file edited; items.json, lore_lines.json, bosses.json, potions.json all parse and are unchanged (git diff on data/ is empty). No floor count, no artifact stocked, no .gd or other file touched.

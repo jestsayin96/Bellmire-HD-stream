@@ -56,6 +56,15 @@ sig = IC.sig
 
 TAU = math.pi * 2.0
 
+# *** A SWITCH THAT EXISTS ONLY SO A PROBE CAN MEASURE ONE BLOCK. ***
+# 17 Nov: the team lead's row says the knuckle treatment does not READ on the
+# body - the cuff hides the hand on three of the six cells from the front AND
+# the side - so the dial lives only in strip 1. "Does it read" is a question
+# about PIXELS, and the only honest way to count the knuckle's pixels is to
+# render the same cell twice and difference the two images. Nothing in the
+# normal path touches DROP; it is empty unless tools/art/_g8_knuck.py sets it.
+DROP = set()
+
 TIER_NAME = ["rags", "plain steel", "fine steel", "runed", "dragontooth", "scarforged"]
 ARM_NAME = ["rags", "leather", "chainmail", "plate", "warded plate", "scarwoven mail"]
 RARITY = ["starting", "common", "uncommon", "rare", "very rare", "legendary"]
@@ -762,6 +771,8 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
     COST. The shell is never smaller than the hand under it - that was the
     whole fault: 0.085 of glove on 0.15 of fist.
     """
+    if 'glove' in DROP:        # the CONTROL. See DROP above and _g8_knuck.py:
+        return []             # what can this view's silhouette check SEE AT ALL?
     v, orn = ctx['variant'], ctx['orn']
     D = sig(key, name)
     F = IC.glove_form(v, orn, D)
@@ -963,46 +974,47 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         p.raw(L.tube([Vector((hd.x + sgn * handlen * 0.08, hd.y - hw * 0.62, hd.z)),
                       Vector((hd.x + sgn * handlen * 0.30, hd.y - hw * 0.80, hd.z - hw * 0.10))],
                      [hw * 0.24, hw * 0.17], 7), 'cloth')
-        # 3. THE KNUCKLE TREATMENT - not just a height now. The kind comes off
-        #    the item's key inside what the cut allows, so the studded glove
-        #    and the wrap that were identical at stream size are a spiked
-        #    knuckle and a studded one.
-        kn = hw * F['knuck'] * 0.55
-        kind = F['knuck_kind']
-        kz = hd.z + hw * 0.66
-        mat = 'metal' if F['metal'] else 'dark'
-        if kind == 'ridge' and kn > 0.008:
-            for k in range(max(1, F['plates'])):
-                p.add(L.box(handlen * 0.13, hw * 1.34, max(0.010, kn * 0.52)), mat,
-                      loc=(hd.x + sgn * (handlen * 0.06 + handlen * 0.15 * k),
-                           hd.y, kz + kn * 0.46))
-            p.add(L.box(handlen * 0.40, hw * 0.30, max(0.012, kn * 1.05)), mat,
-                  loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.80))
-        elif kind == 'dome':
-            r = max(0.010, kn * 1.30 + hw * 0.22)
-            p.add(L.sphere(r * 1.15, r * 1.30, r, 12, 8), mat,
-                  loc=(hd.x + sgn * handlen * 0.14, hd.y, kz + r * 0.30))
-        elif kind == 'spikes':
-            for k in range(max(2, min(4, 1 + F['plates'] // 2))):
-                dy = -hw * 0.46 + (hw * 0.92 / max(1, max(2, min(4, 1 + F['plates'] // 2)) - 1)) * k
-                p.raw(aim(L.cone(max(0.006, hw * 0.17), 0.0,
-                                 max(0.018, kn * 1.5 + hw * 0.30), 7),
-                          (hd.x + sgn * handlen * 0.16, hd.y + dy, kz), (0, 0, 1)), mat)
-            p.add(L.box(handlen * 0.34, hw * 1.20, max(0.010, kn * 0.40)), mat,
-                  loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.10))
-        elif kind == 'studs':
-            for k in range(4):
-                for q in range(2):
-                    p.add(L.sphere(hw * 0.15, hw * 0.15, hw * 0.15, 7, 6), 'metal',
-                          loc=(hd.x + sgn * handlen * (0.10 + 0.14 * q),
-                               hd.y - hw * 0.46 + hw * 0.31 * k, kz + hw * 0.10))
-        if F['metal'] and kind in ('ridge', 'spikes'):
-            p.add(L.sphere(max(0.006, kn * 0.46), max(0.006, kn * 0.40),
-                           max(0.005, kn * 0.34), 10, 7), 'gem',
-                  loc=(hd.x + sgn * handlen * 0.04, hd.y, kz + kn * 0.92 + hw * 0.06))
-        elif kind == 'none' and orn > 0.45:
-            p.add(L.sphere(hw * 0.20, hw * 0.17, hw * 0.15, 10, 7), 'gem',
-                  loc=(hd.x + sgn * handlen * 0.10, hd.y, kz + hw * 0.06))
+        if 'knuck' not in DROP:
+            # 3. THE KNUCKLE TREATMENT - not just a height now. The kind comes off
+            #    the item's key inside what the cut allows, so the studded glove
+            #    and the wrap that were identical at stream size are a spiked
+            #    knuckle and a studded one.
+            kn = hw * F['knuck'] * 0.55
+            kind = F['knuck_kind']
+            kz = hd.z + hw * 0.66
+            mat = 'metal' if F['metal'] else 'dark'
+            if kind == 'ridge' and kn > 0.008:
+                for k in range(max(1, F['plates'])):
+                    p.add(L.box(handlen * 0.13, hw * 1.34, max(0.010, kn * 0.52)), mat,
+                          loc=(hd.x + sgn * (handlen * 0.06 + handlen * 0.15 * k),
+                               hd.y, kz + kn * 0.46))
+                p.add(L.box(handlen * 0.40, hw * 0.30, max(0.012, kn * 1.05)), mat,
+                      loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.80))
+            elif kind == 'dome':
+                r = max(0.010, kn * 1.30 + hw * 0.22)
+                p.add(L.sphere(r * 1.15, r * 1.30, r, 12, 8), mat,
+                      loc=(hd.x + sgn * handlen * 0.14, hd.y, kz + r * 0.30))
+            elif kind == 'spikes':
+                for k in range(max(2, min(4, 1 + F['plates'] // 2))):
+                    dy = -hw * 0.46 + (hw * 0.92 / max(1, max(2, min(4, 1 + F['plates'] // 2)) - 1)) * k
+                    p.raw(aim(L.cone(max(0.006, hw * 0.17), 0.0,
+                                     max(0.018, kn * 1.5 + hw * 0.30), 7),
+                              (hd.x + sgn * handlen * 0.16, hd.y + dy, kz), (0, 0, 1)), mat)
+                p.add(L.box(handlen * 0.34, hw * 1.20, max(0.010, kn * 0.40)), mat,
+                      loc=(hd.x + sgn * handlen * 0.16, hd.y, kz + kn * 0.10))
+            elif kind == 'studs':
+                for k in range(4):
+                    for q in range(2):
+                        p.add(L.sphere(hw * 0.15, hw * 0.15, hw * 0.15, 7, 6), 'metal',
+                              loc=(hd.x + sgn * handlen * (0.10 + 0.14 * q),
+                                   hd.y - hw * 0.46 + hw * 0.31 * k, kz + hw * 0.10))
+            if F['metal'] and kind in ('ridge', 'spikes'):
+                p.add(L.sphere(max(0.006, kn * 0.46), max(0.006, kn * 0.40),
+                               max(0.005, kn * 0.34), 10, 7), 'gem',
+                      loc=(hd.x + sgn * handlen * 0.04, hd.y, kz + kn * 0.92 + hw * 0.06))
+            elif kind == 'none' and orn > 0.45:
+                p.add(L.sphere(hw * 0.20, hw * 0.17, hw * 0.15, 10, 7), 'gem',
+                      loc=(hd.x + sgn * handlen * 0.10, hd.y, kz + hw * 0.06))
         if v == 2:                                 # studs down the fingers
             for k in range(4):
                 p.add(L.sphere(hw * 0.11, hw * 0.11, hw * 0.11, 6, 5), 'metal',

@@ -19,8 +19,19 @@ func _initialize() -> void:
 	out.append("")
 	out.append("| Command | Also | Arguments | Cost | What it does | Example |")
 	out.append("|---|---|---|---|---|---|")
-	for k in c.get("order", cs.keys()):
+	# a present-but-short `order` would gutter the doc and still print the full count: the doc
+	# is written only when every command gets a row, and the count printed is the rows written
+	var order: Array = c.get("order", cs.keys())
+	var missing: Array = cs.keys().filter(func(k): return not order.has(k))
+	var unknown: Array = order.filter(func(k): return not cs.has(k))
+	if not missing.is_empty() or not unknown.is_empty():
+		print("COMMANDS_DOC FAIL: `order` misses %s and names unknown %s - docs/COMMANDS.md left untouched" % [missing, unknown])
+		quit(1)
+		return
+	var rows := 0
+	for k in order:
 		var d: Dictionary = cs[k]
+		rows += 1
 		var al := ", ".join(PackedStringArray((d.get("aliases", []) as Array).map(func(a): return "!" + String(a))))
 		out.append("| `!%s` | %s | %s | %s | %s%s | `%s` |" % [k, al, String(d.get("args", "")).replace("|", "/"), d.get("cost", "free"), d["what"], "" if bool(d.get("needs_hero", true)) else " (no hero needed)", d.get("example", "!" + k)])
 	out.append("")
@@ -31,5 +42,5 @@ func _initialize() -> void:
 		return
 	f.store_string("\n".join(out))
 	f.close()
-	print("COMMANDS_DOC OK wrote %d commands" % cs.size())
+	print("COMMANDS_DOC OK wrote %d commands" % rows)
 	quit()

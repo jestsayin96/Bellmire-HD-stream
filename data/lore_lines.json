@@ -1341,7 +1341,19 @@
       "Stair's dry. Good start.",
       "Hands where I can see them.",
       "Hats on. Low ceilings.",
-      "Cold air. Door's open somewhere."
+      "Cold air. Door's open somewhere.",
+      "Lamp trimmed. Boots laced.",
+      "Whoever's last, shut the door.",
+      "Nobody wanders off.",
+      "Slow on the stair.",
+      "Same rules as yesterday.",
+      "Fill the lamp before you need it.",
+      "Quiet now. Listen first.",
+      "We go down together.",
+      "Check your straps.",
+      "Tally the rope.",
+      "Mind the first step. It's loose.",
+      "Hum if you must. Softly."
     ],
     "lord": [
       "Hold together!",
@@ -1490,7 +1502,18 @@
       "Nobody turns their back.",
       "Short strikes. Keep your feet.",
       "Call it when it moves.",
-      "Steady. Steady. Now."
+      "Steady. Steady. Now.",
+      "Wait for it to commit.",
+      "Brace. Don't flinch.",
+      "Share the weight of it.",
+      "Don't chase. Let it come.",
+      "Mind its reach.",
+      "Two on the flank. One in front.",
+      "It tires too. Outlast it.",
+      "Eyes up. Feet steady.",
+      "Keep the lamp lit.",
+      "Watch the floor under it.",
+      "One word at a time. Listen for mine."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1640,7 +1663,19 @@
       "Dust is disturbed. Not by us.",
       "Smells of fresh grease.",
       "Don't lean on the wall.",
-      "Doorframe's warm. Odd."
+      "Doorframe's warm. Odd.",
+      "Hush. Let me look.",
+      "Something clicked far off.",
+      "Lintel's been tampered with.",
+      "That plate is newer than the rest.",
+      "Hold. Smell that?",
+      "Stones don't sweat. These do.",
+      "Probe it before the foot.",
+      "Cord across the ankle. Easy.",
+      "Don't whistle. Echo's wrong.",
+      "Spare me the heroics. Go round.",
+      "Fresh mortar. Who's been here?",
+      "Gap in the dust. Step over."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1789,7 +1824,19 @@
       "Count my flasks. I'm short.",
       "Hand's shaking. It'll stop.",
       "Not bleeding much. Mostly.",
-      "Behind you. I'm still here."
+      "Behind you. I'm still here.",
+      "Press here. Harder.",
+      "I can still hold a lamp.",
+      "Pull me back a pace.",
+      "It's only meat. Mend it.",
+      "Give me a breath.",
+      "The cloth's soaked. Another.",
+      "I'll keep up. Slower.",
+      "Just a scrape. A big one.",
+      "Wrap it. Don't fuss.",
+      "Teeth are fine. The rest, less so.",
+      "Stay close. I'm unsteady.",
+      "Mind my side. It's tender."
     ],
     "drink": [
       "Bottoms up.",
@@ -1932,7 +1979,18 @@
       "Smells like the apothecary's shelf.",
       "Slow sip. Don't waste it.",
       "Thank the brewer.",
-      "Down the hatch. Up on my feet."
+      "Down the hatch. Up on my feet.",
+      "Bitter. Good sign.",
+      "The brewer's earned his bread.",
+      "Colour's back, they tell me.",
+      "That'll do for a while.",
+      "Tastes like the hearth at home.",
+      "Sharp. Then calm.",
+      "Better than nothing. Far better.",
+      "The cork was honest.",
+      "Wipe the neck. Pass it on.",
+      "Last drop. Make it count.",
+      "Thanks to whoever mixed that."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2080,7 +2138,18 @@
       "It fizzled. Say nothing.",
       "Breath ran out mid-word.",
       "The spell turned over and slept.",
-      "Nothing. Wipe the chalk and go again."
+      "Nothing. Wipe the chalk and go again.",
+      "The words came out crooked.",
+      "Not enough breath.",
+      "The scar ate it.",
+      "Give me a moment. I'll find it.",
+      "My hands forgot the shape.",
+      "That was half a spell.",
+      "Spark, then nothing.",
+      "It heard me. It didn't answer.",
+      "Wrong day to be clever.",
+      "The chalk smudged. My fault.",
+      "I'll say it slower."
     ]
   },
   "misfire": [

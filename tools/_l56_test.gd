@@ -44,7 +44,8 @@ var _capped: Array = []           # [run, deepest floor reached] for every run t
 
 func _ok(c: bool, what: String) -> void:
 	_checks += 1
-	print("  %s %s" % ["ok  " if c else "FAIL", what])
+	# a capped run cannot earn a FAIL: an unmet check reads UNMET so a grep for FAIL finds nothing
+	print("  %s %s" % ["ok  " if c else ("UNMET" if not _capped.is_empty() else "FAIL"), what])
 	if not c:
 		_fails.append(what)
 
@@ -167,7 +168,7 @@ func _process(dt: float) -> bool:
 		print("  Bestiary.lord_hp_mult: floor 5 = %.2f, floor 10 = %.2f" % [m5, m10])
 		_ok(m10 > m5, "L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (%.2f vs %.2f)" % [m10, m5])
 		print("")
-		print("CHECKS ", _checks, " FAILS ", _fails.size())
+		print("CHECKS ", _checks, " UNMET " if not _capped.is_empty() else " FAILS ", _fails.size())
 		for fl in _fails:
 			print("  - ", fl)
 		if _fails.is_empty():

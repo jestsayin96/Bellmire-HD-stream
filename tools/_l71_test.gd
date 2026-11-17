@@ -12,6 +12,7 @@ var _tag := "after"
 var _step := 0
 var _phase := 0
 var _bad := 0
+var _audited := 0   # labels actually inspected: a gate that audited nothing must not say OK
 const LINES := [
 	"Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.",
 	"Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).",
@@ -34,8 +35,12 @@ func _process(d: float) -> bool:
 		_t.add_child(_eye)
 		_eye.setup(_t)
 		for c in _t.get_children():
-			if c is FeedHUD:
+			if c is FeedHUD and _tag != "break_nohud":   # break_nohud: prove a missing HUD gives NO VERDICT
 				_hud = c
+	if _f > 1800 and _hud == null:
+		print("L71_TEST NO VERDICT - FeedHUD never found in 1800 frames"); quit(2); return true
+	if _f > 40000:
+		print("L71_TEST NO VERDICT - frame cap hit at step ", _step); quit(2); return true
 	if _f < 60 or _hud == null:
 		return false
 	if _t0 < 0.0:
@@ -68,12 +73,16 @@ func _process(d: float) -> bool:
 		_phase = 0
 		_step += 1
 		if _step >= UiTheme.STEPS.size():
-			print("L71_TEST ", "OK" if _bad == 0 else "FAIL")
+			if _audited < 15:
+				print("L71_TEST NO VERDICT - only ", _audited, " labels audited (floor 15)"); quit(2); return true
+			print("L71_TEST ", "OK" if _bad == 0 else "FAIL", " audited=", _audited)
+			if _bad > 0: quit(1)
 			return true
 	return false
 func _audit(pct: int) -> void:
-	for lb in _hud._box.get_children():
+	for lb in ([] if _tag == "break_empty" else _hud._box.get_children()):   # break_empty: prove an empty box is not OK
 		var l := lb as Label
+		_audited += 1
 		if "..." in l.text or "…" in l.text or l.text_overrun_behavior != TextServer.OVERRUN_NO_TRIMMING:
 			print("FAIL ellipsis @", pct, " ", l.text); _bad += 1
 		print("  [", pct, "] ", l.get_line_count(), "L: ", l.text)

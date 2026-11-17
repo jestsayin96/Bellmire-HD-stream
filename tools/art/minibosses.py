@@ -4482,3 +4482,285 @@ def quartermaster():
 
 
 BUILDERS.update({"quartermaster": quartermaster})
+
+
+# =====================================================================
+# 17 THE LOADER - the SECOND MESS-HALL set piece, 17 Nov 2026.
+#
+# MEASURED, NOT REMEMBERED, before a vertex was written:
+#   - dungeon_hd.gd:737-743 - the miniboss roll is 35 on BARRACKS and WORKSHOP,
+#     15 on prison and on every unlisted theme, and 10 on shrine and crypt.
+#     Barracks and workshop both got a second body in the last two hours
+#     (the Jointer, the Quartermaster), so the 35s are served. TEN themes tie
+#     at 15 with exactly ONE body each; MESS is one of them.
+#   - floorgen.gd THEMES - the mess hall's own clusters are "feast", "feast",
+#     "kegs", "shelf_stock". It is the one 15-weight floor that is already
+#     FULL OF CRATES AND KEGS, so a creature built out of the room's own
+#     stores belongs there and needs no new prop to explain itself. Its one
+#     body, the Cook, HEALS the room - nothing of this mechanic.
+#
+#   THE LOADER     it WEIGHS YOU DOWN - it does not take anything off you and
+#                  it does not call anyone in. It puts a load ON you. A hero
+#                  it reaches is carrying something, and carries it until they
+#                  spend the time to drop it. Nothing is stolen, nothing dies
+#                  faster - the whole party just gets slower while it works.
+#
+# NOT A SEVENTEENTH COAT OF AN IDEA ALREADY BUILT. Checked against all sixteen,
+# and the two it could have collided with are named: the TALLYMAN takes gear
+# OFF a hero and withdraws with it; the QUARTERMASTER hands weapons to the
+# other monsters. This one gives something to the HEROES and it is a penalty,
+# not a theft and not a buff. ENCUMBRANCE IS A MECHANIC CLASS NOTHING IN THIS
+# FILE USES: sixteen bodies summon, armour, drag, darken, revive, bar, steal,
+# heal, flood, plant, trap, depend on fuel, misdirect, set the floor, split and
+# arm the room - not one of them touches what a hero can CARRY.
+#
+# THE IDEA IS VISIBLE FROM THE DOORWAY (the Scrapwright lesson): the thing is a
+# STACK OF CRATES WITH LEGS, bent double under its own load, and one more crate
+# is already swinging out on a boom at hip height - the next one is yours.
+#
+# SILHOUETTE COLLISIONS CHECKED AND AVOIDED:
+#   - a lopsided pile reads as the SCRAPWRIGHT  -> the Scrapwright is a rounded
+#     organic mound of torn plates. This is a DEAD-SQUARE REGULAR COLUMN of
+#     six like boxes - the only right-angled stack in the file.
+#   - a long level bar reads as the PORTER's leaf, and things hung off a level
+#     bar read as the TALLYMAN -> the boom is a DIAGONAL, dropping 0.44 m over
+#     0.84 m, and ONE load hangs off it. Everything else is stacked, not hung.
+#   - a big disc reads as the DRILLMASTER's gong -> nothing round and large.
+#   - a splayed fan of straight shafts reads as the QUARTERMASTER -> the column
+#     is solid and opaque; there is no fan anywhere on it.
+#
+# USE WHAT IS ON DISK BEFORE GENERATING A MESH (Mr. E, 16 Nov 04:46): the
+# crates, the keg and the sack are REAL GEOMETRY out of the KayKit Dungeon Pack
+# (CC0) already sitting in _packs/, decimated on import and baked into the
+# exported .glb. Procedural boxes are the fallback and the report says which
+# was used. Logged in docs/art/ASSET_SOURCES.md.
+#
+# WEAR 0.75 - the one value left unused in the set's .15-.95 ladder, and the
+# right one for a stores hand in daily use: the canvas and the timber are
+# worn through, the iron banding is kept because the load would spill without.
+# =====================================================================
+
+CANON.update({
+    "loader": ("The Loader", 2.65, (0.58, 0.52, 0.42), (0.86, 0.94, 0.58),
+               "mess",
+               "IT WEIGHS YOU DOWN - it loads you, and you fight slower until you drop it",
+               0.75, "Something is putting a load on you."),
+})
+ORDER = ORDER + ["loader"]
+
+# the KayKit Dungeon Pack (CC0) bits this body stands on, by file stem
+_DUNGEON_GLB = ("kaykit_dungeon_pack_CC0", "Models", "gltf")
+
+
+def _dungeon_mesh(stem, max_faces=90):
+    """Real pack geometry, normalised into the UNIT CUBE (0..1 on every axis,
+    min corner at the origin) so the caller can place it by metres.
+
+    Looked for in the repo's own assets/gear first, then in the pack tree at
+    `<repo parent>/_packs/kaykit_dungeon_pack_CC0/Models/gltf/`. Returns None
+    when neither answers, and the caller falls back to a plain box and SAYS SO
+    in the report - a silent substitution is the same fault class as a lying
+    gate.
+    """
+    ck = ("dung", stem, max_faces)
+    if ck in _PACK_CACHE:
+        return _PACK_CACHE[ck]
+    out = None
+    try:
+        import bpy
+        root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            os.pardir, os.pardir))
+        cands = [os.path.join(root, "assets", "gear", stem + ".gltf"),
+                 os.path.join(os.path.dirname(root), "_packs", *_DUNGEON_GLB,
+                              stem + ".gltf.glb")]
+        path = next((p for p in cands if os.path.isfile(p)), None)
+        if path:
+            before = set(bpy.data.objects)
+            bpy.ops.import_scene.gltf(filepath=path)
+            new = [o for o in bpy.data.objects if o not in before]
+            for ob in [o for o in new if o.type == 'MESH']:
+                if len(ob.data.polygons) > max_faces:
+                    m = ob.modifiers.new("dec", 'DECIMATE')
+                    m.decimate_type = 'COLLAPSE'
+                    m.ratio = max(0.10, float(max_faces) / len(ob.data.polygons))
+            verts, faces = [], []
+            dg = bpy.context.evaluated_depsgraph_get()
+            for ob in [o for o in new if o.type == 'MESH']:
+                obe = ob.evaluated_get(dg)
+                me = obe.to_mesh()
+                mw = obe.matrix_world
+                off = len(verts)
+                verts.extend([mw @ v.co for v in me.vertices])
+                for p in me.polygons:
+                    faces.append(tuple(i + off for i in p.vertices))
+                obe.to_mesh_clear()
+            for ob in new:
+                try:
+                    bpy.data.objects.remove(ob, do_unlink=True)
+                except Exception:
+                    pass
+            if verts and faces:
+                mn = [min(v[i] for v in verts) for i in range(3)]
+                mx = [max(v[i] for v in verts) for i in range(3)]
+                ex = [max(1e-6, mx[i] - mn[i]) for i in range(3)]
+                out = ([Vector(((v[0] - mn[0]) / ex[0], (v[1] - mn[1]) / ex[1],
+                                (v[2] - mn[2]) / ex[2])) for v in verts], faces)
+    except Exception:
+        out = None
+    _PACK_CACHE[ck] = out
+    return out
+
+
+def _unit_box():
+    """The fallback: lordlib's box carried into the same 0..1 unit cube."""
+    v, f = L.box(1.0, 1.0, 1.0)
+    return ([Vector((x[0] + 0.5, x[1] + 0.5, x[2] + 0.5)) for x in v], f)
+
+
+def _crate(P, vf, slot, cx, cy, cz, sx, sy, sz, yaw=0.0):
+    """Place a unit-cube pack part as a real box: centred on (cx, cy), BASE at
+    cz, `sx/sy/sz` metres, spun `yaw` radians about its own centre."""
+    v, f = vf
+    ca, sa = math.cos(yaw), math.sin(yaw)
+    out = []
+    for p in v:
+        x = (p.x - 0.5) * sx
+        y = (p.y - 0.5) * sy
+        out.append(Vector((cx + x * ca - y * sa, cy + x * sa + y * ca, cz + p.z * sz)))
+    P.raw((out, f), slot)
+
+
+# ------------------- 17 THE LOADER: a stack of crates with legs, and one more
+def loader():
+    """IT WEIGHS YOU DOWN. A stores hand bent double under a column of crates,
+    with one more already swung out on a boom at the height of your chest.
+
+    Silhouette intent - SQUARE COLUMN ABOVE, BENT BODY UNDER IT, ONE LOAD OUT:
+      - the column is SIX LIKE BOXES stacked dead square, stepping a little
+        left and right as a real stack settles, the top one overhanging. It is
+        the whole upper outline and it is solid: no fan, no disc, no curve;
+      - the body underneath is SHORT, WIDE AND PITCHED FORWARD about 50
+        degrees, so the back is a near-level platform the column stands on and
+        the thing reads BENT, not standing. A hero stands upright; this does
+        not;
+      - NO HEAD. A hooded shoulder hump with the eyes low and deep under its
+        brim, where a man carrying a load would have his face;
+      - ONE BOOM out on the near side, falling on the diagonal, with a single
+        crate hanging off its end on a short chain at hip height - the one
+        that is about to be yours;
+      - a keg and a sack already dumped on the floor on the far side, so the
+        store reads as a store from the front where the column foreshortens.
+
+    Front is -Y here, same as the sixteen before it."""
+    P = Parts("loader")
+    # PASS 2, AND THE PICTURE IS WHY. Pass 1 built all six stacked crates from
+    # the pack mesh decimated to 90 faces, because six pack crates at usable
+    # fidelity would have blown the set's face budget on their own. On the
+    # render every one of them came back as an OPEN CRUMPLED TRAY - the decimate
+    # ate the lids and the box corners, so the column read as a tiered drying
+    # rack and the keg on the floor read as a spiked ball. A pack mesh is only
+    # worth loading where its detail can be AFFORDED, so: the stack is built as
+    # closed banded boxes (dead square, which is the silhouette intent anyway),
+    # and the pack geometry is spent where it is actually looked at - THE ONE
+    # CRATE BEING HANDED OVER, the keg and the sack - at 300/160/140 faces.
+    CRATE = _dungeon_mesh("crate", 300)
+    KEG = _dungeon_mesh("barrelDark", 160)
+    SACK = _dungeon_mesh("lootSackA", 140)
+    used_pack = CRATE is not None
+    if CRATE is None:
+        CRATE = _unit_box()
+    if KEG is None:
+        KEG = _unit_box()
+    if SACK is None:
+        SACK = _unit_box()
+
+    # ---- the base: short, wide, planted. This thing carries, it does not run.
+    _legs(P, 0.0, hip=0.72, stance=0.30, r0=0.125, r1=0.100, boot=(0.34, 0.50, 0.13))
+    P.add(L.box(0.66, 0.18, 0.09), 'dark', loc=(0.0, 0.04, 0.36))      # cross-brace
+
+    # ---- THE BENT BODY. The spine pitches forward to -Y: hips at +0.10,
+    # shoulders out at -0.34, so the back lies back and up as a platform.
+    limb(P, [(0.0, 0.10, 0.66), (0.0, -0.10, 1.02), (0.0, -0.34, 1.22)], 0.270, 0.230, 'body')
+    P.add(L.box(0.78, 0.44, 0.46), 'body', loc=(0.0, -0.16, 1.00), rot=(-0.42, 0.0, 0.0))
+    for z, y in ((0.86, -0.06), (1.16, -0.26)):                        # two iron straps
+        P.add(L.box(0.84, 0.50, 0.055), 'dark', loc=(0.0, y, z), rot=(-0.42, 0.0, 0.0))
+    # the hooded hump where a head would be, and the eyes down under its brim
+    P.add(L.sphere(0.22, 0.24, 0.17, 12, 8), 'body', loc=(0.0, -0.36, 1.30))
+    P.add(L.box(0.46, 0.30, 0.07), 'dark', loc=(0.0, -0.44, 1.36), rot=(0.30, 0.0, 0.0))
+    eyes(P, (0.0, -0.30, 1.22), 0.048, 0.025, -0.24)
+
+    # ---- THE BACK FRAME the column stands on. Two uprights off the hips and
+    # one crossbar, so the stack is CARRIED and not balanced on a shoulder.
+    # PASS 5, AND IT IS THE SIDE VIEW THAT SAYS SO. At pass 4 the column sat
+    # at y +0.15 while the body leaned forward to -0.34, so from the side there
+    # was OPEN AIR between the creature's back and the bottom crate and the
+    # whole load read as a stack balanced on a thin pole standing behind a
+    # crouching thing. The load must be ON the body: the frame is thicker and
+    # stands further forward, the shelf comes forward with it, and a pad block
+    # bridges the shoulders to the lowest crate so the two actually touch.
+    for s in (-1, 1):
+        limb(P, [(s * 0.26, 0.12, 0.70), (s * 0.28, 0.14, 1.14), (s * 0.26, 0.12, 1.40)],
+             0.075, 0.062, 'dark')
+    P.add(L.box(0.68, 0.16, 0.08), 'dark', loc=(0.0, 0.13, 1.36))
+    P.add(L.box(0.78, 0.52, 0.07), 'dark', loc=(0.0, 0.06, 1.42))      # the shelf
+    # the pad the load rests on, from the shoulders back to the shelf
+    P.add(L.box(0.62, 0.40, 0.10), 'body', loc=(0.0, -0.16, 1.40), rot=(-0.22, 0.0, 0.0))
+
+    # ---- THE COLUMN. PASS 3, AND AGAIN THE PICTURE IS WHY. Pass 2's boxes
+    # were 0.80 of their own width tall and each carried a lid plate, so on the
+    # render the column read as a STACK OF TRAYS - flat lipped things, a
+    # wedding cake, not cargo. A crate is CUBIC and it has no lip. Four cubic
+    # boxes with two iron bands each and nothing on top, stepping a little as a
+    # real stack settles. The body shrinks under the normalisation when the
+    # load gets taller, which is the right way round for this creature.
+    #      (base z, side, x offset, y offset, yaw)
+    for bz, sd, dx, dy, yw in ((1.42, 0.50, -0.03, 0.04, 0.05),
+                               (1.92, 0.45, 0.06, 0.07, -0.10),
+                               (2.37, 0.40, -0.05, 0.03, 0.13),
+                               (2.77, 0.35, 0.08, 0.06, -0.07)):
+        P.add(L.box(sd, sd * 0.94, sd), 'body' if int(bz * 100) % 2 else 'bone',
+              loc=(dx, dy, bz + sd / 2.0), rot=(0.0, 0.0, yw))
+        for t in (0.26, 0.74):                                   # two iron bands
+            P.add(L.box(sd * 1.04, sd * 0.97, 0.038), 'dark',
+                  loc=(dx, dy, bz + sd * t), rot=(0.0, 0.0, yw))
+    # PASS 4, AND IT IS TWO PARTS THAT EXISTED AND DID NOTHING. On the pass-3
+    # render NEITHER the lashing rope NOR the signal lamp could be seen in any
+    # view: both sat at y +0.15..+0.18, which is INSIDE the column's own
+    # footprint, so the crates ate them. A part the camera cannot see is not a
+    # part. Both are now carried on the FRONT faces at y -0.16, where the one
+    # thing standing in front of them is air.
+    # the rope: one turn up the front of the stack and over its shoulder
+    P.raw(L.tube([Vector((-0.28, -0.24, 1.58)), Vector((-0.06, -0.26, 1.88)),
+                  Vector((0.10, -0.20, 2.14)), Vector((0.22, -0.10, 2.40))],
+                 [0.030, 0.034, 0.030, 0.026], 7), 'dark')
+    # the signal lamp, socketed on the shelf's own near edge and standing clear
+    # of the bottom crate (side 0.50 at x -0.03, so its face is at x -0.28)
+    P.add(L.box(0.11, 0.11, 0.13), 'dark', loc=(-0.46, -0.26, 1.46))
+    P.add(L.sphere(0.060, 0.060, 0.068, 10, 7), 'glow', loc=(-0.46, -0.26, 1.57))
+
+    # ---- THE BOOM, ON THE NEAR (-X) SIDE, where the three_quarter camera can
+    # see it. A diagonal: 0.84 m across, 0.44 m down. Never level.
+    limb(P, [(-0.30, -0.14, 1.26), (-0.70, -0.40, 1.04), (-1.14, -0.62, 0.82)],
+         0.085, 0.060, 'body')
+    P.add(L.sphere(0.092, 0.088, 0.084, 10, 7), 'dark', loc=(-1.14, -0.62, 0.82))
+    # the chain, and THE CRATE THAT IS ABOUT TO BE YOURS, hanging off its end.
+    # This one is REAL PACK GEOMETRY - it is the mechanic and it is the thing
+    # the eye lands on.
+    limb(P, [(-1.14, -0.62, 0.80), (-1.16, -0.62, 0.62)], 0.022, 0.022, 'bone')
+    _crate(P, CRATE, 'bone', -1.16, -0.62, 0.26, 0.46, 0.42, 0.36, 0.22)
+    # PASS 2: the lit issue band ran 0.44 m and stood out past both sides of
+    # that crate - at pane distance it read as a white plank skewered through
+    # it. It is now a short mark on the near face only.
+    limb(P, [(-1.26, -0.84, 0.40), (-1.06, -0.84, 0.40)], 0.018, 0.018, 'glow')
+
+    # ---- THE STORE ON THE FLOOR, far (+X) side, clear of the boom.
+    # PASS 2: pass 1 put a keg, a sack AND a third crate inside 0.40 m of each
+    # other and they read as one spiked lump. Two objects, set apart.
+    _crate(P, KEG, 'bone', 0.82, -0.10, 0.0, 0.40, 0.40, 0.52)
+    _crate(P, SACK, 'dark', 1.18, -0.52, 0.0, 0.44, 0.40, 0.34, 0.5)
+
+    P.used_pack = used_pack
+    return P
+
+
+BUILDERS.update({"loader": loader})

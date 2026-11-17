@@ -8340,6 +8340,26 @@ said nothing. No secrets written anywhere.
   same hour: first commit 06:18:37, IDLE 06:23:52. The 06:23:00 RUNNING line was therefore a future
   stamp by about three minutes. The work behind both is unaffected; the lock was IDLE at 06:23:52.
 
+## D-cycle - S13 the sixteenth miniboss gets its MB_FIT key and its .import sibling, 2026-11-17T07:16:31-06:00 (game build)
+- TAKE THIS NEXT (06:58 CT block) gave GAME BUILD: add "quartermaster": 0.96 to scripts/delve.gd MB_FIT,
+  run one import for quartermaster.glb.import, declare :33 not :35 on the opening claim. Systems 2-4 still frozen.
+- scripts/delve.gd MB_FIT gains "quartermaster": 0.96 - art's number, read from
+  renders/art/minibosses/_fit_report.json pairs.quartermaster.ratio (0.96, verdict GREEN), not re-derived.
+  One comment line names the source. "quartermaster" still appears in no miniboss def in scripts/ or data/;
+  the key is in place for when one names it (same shape as jointer).
+- --headless --import wrote assets/monsters/minibosses/quartermaster.glb.import. Minibosses now 27 .glb / 27 .import.
+- VERDICT LINES (Godot chain 07:10:06-07:16:xx, one claim): import rc 0, parse 0 SCRIPT ERROR / 0 Parse Error,
+  OFFFLOOR_VERDICT OK 0 of 2007 samples off the floor, TWITCH_PARSE OK (8 checks),
+  TOWNWALK in_solid=0/16845 raid_in_solid=0/8042 PASS, DELVE_TEST OK ran 9001 frames,
+  D96_FIT OK 70 checks, 14 minibosses in their own bodies.
+- LOCK, MY FAULT AGAIN AND NAMED: the opening claim still declared 07:35 from 07:08:30 (26.5 min) - I took
+  the lock before reading the row that told me to declare :33. Corrected on a second line with 07:33.
+  That second line was first TYPED as 07:11:40 when the machine read ~07:09 - a future stamp; corrected in
+  place with a note once the machine read 07:11:18. Next firing: read the clock, then write the line, and
+  declare :33.
+- No live Twitch test: nothing redeemed, cheered or posted; 0 bits. The game's boot joins #jestsayin96
+  silently as always. No secrets written.
+
 ## C-84 (2026-11-17 CT, clock ~06:0x) - TAKE THIS NEXT row for CONTENT: barks deepened a fifth time (lore_lines.json only)
 - TAKE THIS NEXT (05:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
 - data/lore_lines.json `barks`: +65 lines. enter +11, lord +10, trap +11, hurt +10, drink +12, misfire +11. Counts now enter 186, lord 179, trap 182, hurt 181, drink 175, misfire 178. Plain register, no floor counts. Case-insensitive duplicates dropped.
@@ -8410,6 +8430,64 @@ reward created / renamed / re-priced / deleted, nothing posted as any account, n
 touched. The parse runs joined #jestsayin96 as the game always does on boot and said nothing.
 No secrets written anywhere.
 
+## B-cycle B25 - THE HANG IS THE HARNESS, AND IT HANGS ON HEALTHY DATA TOO (chat bot, 2026-11-17 07:47-07:51 CT)
+The row assigned nothing new and named the honest work: chase B23's unexplained hang with a
+capped, redirected run that prints a verdict either way. It is chased. It is REPRODUCED, and it
+is EXPLAINED one step further than "not the guard".
+
+### WHAT B24 LEFT AND WHAT THIS RUN CHANGED
+B24 proved break D (`what` removed from `enlist`) exits rc=0 in 20.6 s with stdout REDIRECTED TO
+A FILE under a 75 s cap. That cleared the guard. It did not account for the hang, because the one
+thing B24 changed was the thing it never changed back: the REDIRECT. B23 ran the same break with
+stdout on a PIPE NOBODY READ. So the single uncontrolled variable was the harness, not the data,
+and this run flipped it back deliberately.
+
+### THE MEASUREMENT - TWO RUNS, BOTH CAPPED, BOTH KILLED BY MY OWN CLOCK
+  RUN 1  break D applied, stdout on an UNREAD PIPE, 60 s hard cap
+         **HUNG. killed at 60.0 s, rc none, 73 bytes ever emitted** - the Godot banner line and
+         nothing after it. The same symptom B23 saw: alive, silent, no verdict, no exit code.
+  RUN 2  THE CONTROL. data/commands.json RESTORED HEALTHY (f37b1d2c6909), same unread pipe,
+         same 60 s cap.
+         **HUNG IDENTICALLY. killed at 60.0 s, rc none, 73 bytes.**
+THE CONTROL IS THE RESULT. Healthy data hangs exactly as the break does, so break D never had
+anything to do with it and neither did any of the five B23 guards. What hangs this Godot build is
+STDOUT ON A PIPE THAT IS NOT DRAINED; the same binary, same project, same data, with stdout
+redirected to a FILE, exits rc=0 in about 20 s.
+
+### WHAT IS PROVED AND WHAT IS STILL NOT
+PROVED: the condition. Unread pipe -> no progress, no exit, banner only, every time, data-
+independent. File redirect -> clean run. That is the variable isolated by a control.
+NOT PROVED: the mechanism. 73 bytes is far short of any ordinary pipe buffer, so "the buffer
+filled" is a guess and I am not writing it down as a finding. Something stalls this build at
+start-up when stdout is a pipe rather than a file or a console. Naming it would take a run I did
+not have the window for, and it costs nothing to leave unexplained now that the condition is
+known.
+STANDING ADVICE TO EVERY LANE, which is the whole use of this: NEVER LAUNCH GODOT WITH stdout ON
+AN UNREAD PIPE. Redirect to a file and read the file. A lane that pipes will see a hang that is
+not in its code, and will spend its slot looking for it in the wrong house - which is exactly what
+B23 and B24 cost this lane.
+
+### NO FILE OF MINE CHANGED
+`scripts/chatcmd.gd` 825b76127050, `data/commands.json` f37b1d2c6909 (14753 bytes, byte-identical
+to B20-B24; the break was applied from an in-run backup and restored from it), `docs/COMMANDS.md`
+1fb9a166c3bf (5771 bytes). No gate was re-run this slot and none is claimed; the six-for-six
+battery stands as B24 left it on main e3ec68a.
+
+### OWED
+- THIS LANE: nothing. The row's one named item is delivered.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, eight cycles on.
+- `tools/` owner: nothing. No gate needs a cap for this - the cap belongs in the LAUNCHER.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b25_run.log`, `.b25_control.log` and `.b25_commands.bak` written at the worktree root and ALL
+DELETED in the same run. Both Godot processes were ended by my own 60 s cap, both confirmed gone
+by tasklist, none left alive. Lock claimed 07:49:30 and released IDLE 07:51:10 - and my claim line
+carried a FUTURE STAMP (machine read 07:47:30 when I wrote 07:49:30); it is named in the lock file
+and here rather than left for the next reader to catch. No Twitch of any kind: 0 bits, nothing
+cheered or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any
+account, no channel setting touched. Neither run reached the frame where the game joins chat - 73
+bytes is the banner alone. No secrets written anywhere.
 ## U51 (2026-11-17 06:58 CT) - HUD: _l73_test cap hit prints NO VERDICT, not FAIL (U48 fault 3), proved by deliberate break
 TAKE THIS NEXT gave HUD: the fault-3 remainder (_l73_test cap prints FAIL), one chunk inside :52-:07. Lock RUNNING 06:54, IDLE ~06:58 (~4 min, under the 15 cap).
 FIX (tools/_l73_test.gd, my lane's file): wall cap is now a variable (user arg cap=N); if the cap is hit and no death happened it prints "L73_TEST NO VERDICT - wall cap Ns hit before any death" and exits 2. A real death that then fails keeps FAIL (rc 1). Added the missing final token L73_TEST OK/FAIL and exit codes 0/1.
@@ -8417,8 +8495,45 @@ PROOF (windowed 1920x1080): parse 0 errors. Normal run -> hold>=3s true, breath 
 NOT DONE: L31 status-icon remainder still waits on the D99 tick.
 NEEDED FROM MR. E: nothing.
 
+## C-85 (2026-11-17 CT, clock ~07:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a sixth time (lore_lines.json only)
+- TAKE THIS NEXT (06:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
+- data/lore_lines.json `barks`: +65 lines. enter +11, lord +11, trap +11, hurt +11, drink +11, misfire +10. Counts now enter 197, lord 190, trap 193, hurt 191, drink 186, misfire 189. Plain register, no floor counts. Case-insensitive duplicates dropped.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings.
+- CODE WIRING: none. The existing `barks` reader picks the new lines up.
+
+
+## ART - 17 Nov 2026 07:55 CT - THE LOADER, a seventeenth miniboss (mess hall)
+- TOOK THE ART ROW OF THE 06:58 "TAKE THIS NEXT" AS WRITTEN: dry lane, and the one licence the
+  freeze grants is to INVENT A MINIBOSS. Gloves are ticked and were not touched; icons.py untouched.
+- CHECKED FIRST, MEASURED NOT REMEMBERED: dungeon_hd.gd:737-743 - miniboss weight 35 barracks/
+  workshop (both already two bodies), 15 prison + every unlisted theme, 10 shrine/crypt. Ten themes
+  tie at 15 with one body each; floorgen.gd THEMES broke the tie - the mess hall's own clusters are
+  feast/feast/kegs/shelf_stock, the one 15-weight floor already full of stores.
+- THE IDEA, AND IT IS A CLASS NOTHING IN THE SET USES: IT WEIGHS YOU DOWN. It loads a hero and they
+  fight slower until they drop it. Tallyman takes gear OFF and leaves; Quartermaster arms the
+  monsters; this gives the HEROES a penalty. Sixteen bodies and not one touches what a hero carries.
+- PACKS BEFORE GEOMETRY, AND WHERE THE RULE STOPPED PAYING: the handed-over crate, the keg and the
+  sack are real KayKit Dungeon Pack (CC0) meshes out of _packs/ at 300/160/140 faces. Pass 1 built
+  all six stacked crates the same way at 90 faces and THE DECIMATE ATE THE LIDS - every one rendered
+  as an open crumpled tray. Stack is now closed banded boxes. pack_used recorded in the report.
+- GREEN: 4 meshes, 1,208 faces, span 2.39 m CORRIDOR-SAFE (11.0 m clear), h 2.65, wear 0.75 (the one
+  unused value), ratio 1.08 vs the posed Knight, pair_w 4.26, fits_frame true, errors [].
+- FIT PROOF ON A BODY, FRONT/SIDE/BACK, AND I LOOKED: five passes, one change each, every one driven
+  by the picture. Pass 4's rope and lamp sat inside the column's own footprint and COULD NOT BE SEEN
+  IN ANY VIEW; pass 5 seats the load on the body after the side view showed open air between them.
+  Eight faults listed in docs/art/MINIBOSSES.md - worst: the body barely reads as a body at 90
+  degrees, the rope reads as a stick, the floor keg reads as a basket.
+- HARNESS FAULT FOUND AND FIXED THE SAME RUN: minibossfit.py's blank check only ever opened
+  hero_front.png, so two of every three fit renders entered the register unchecked - a GREEN over
+  pictures it never opened. Now opens all three and fails on a missing one: 1 -> 51 files, 0 failures.
+- WIRING, NOT MINE: scripts/delve.gd MB_FIT needs "loader": 1.08 (measured, do not re-derive), the
+  body is STATIC so no anims entry, and it has no .glb.import sibling - one import run covers it and
+  quartermaster.glb. No .gd touched outside tools/art/.
 ## H32 hub standing check (2026-11-17 07:40 CT) - nothing new to build
 ff to origin/hub (9b0995e), merged origin/main clean. `git diff origin/main -- web docs/HUB_SECURITY.md` EMPTY: web/ byte-identical to the looked-at build; no new screenshot (a picture of an unchanged build proves nothing new). Passes 1-5 in, queue empty.
 MEASURED: 520 thumbnails, web/icons/items 2,430,050 bytes on disk (manifest total 2,341,956) vs 6 MB cap; manifest source commit 2473836; `git log 2473836..HEAD -- assets/icons/items` EMPTY, so no re-derive owed.
 SECURITY BY GREP: node --check OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP default-src 'none' present. Live dot red --live #e5484d.
 Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left untracked and named here; delete refused on this machine. Not published.
+## U52 (2026-11-17T07:53:37-06:00) - HUD stand-down, file-only (no lock taken, no Godot launched)
+TAKE THIS NEXT (06:58 block) gave HUD: gate work or the stand-down; L73/L74 already ticked, all four U48 gate faults closed (U49-U51), L31 remainder waits on the D99 tick (origin/main a2b6f04 shows D99 still not ticked). Lock: last line IDLE 07:51:10 (chat bot), no Godot alive. None launched, lock untouched, none of my seven files edited. I did not invent an item or touch another lane's file.
+NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 remainder to its owners.

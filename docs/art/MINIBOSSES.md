@@ -609,3 +609,86 @@ outside `tools/art/`. What the game build needs, when its own queue allows:
 6. As with every other body in this directory, there is **no `.glb.import`
    sibling** - the art lane never runs Godot. An import run writes it, and
    `delve.gd:377` already falls back safely until then.
+
+================================================================================
+## 17 - THE LOADER. Mess hall. 2026-11-17 07:55 CT.
+
+**IT WEIGHS YOU DOWN.** It takes nothing off you and calls nobody in: it puts a
+load ON you. A hero it reaches is carrying something and keeps carrying it
+until they spend the time to drop it. Nothing is stolen and nothing dies
+faster - the party just gets slower while it works.
+
+### WHY THE MESS HALL, MEASURED BEFORE A VERTEX WAS WRITTEN
+`dungeon_hd.gd:737-743`: the miniboss roll is **35 on barracks and workshop**,
+**15 on prison and every unlisted theme**, **10 on shrine and crypt**. Both 35s
+now carry two bodies (the Jointer last hour, the Quartermaster this morning).
+Ten themes tie at 15 with exactly one body each. `floorgen.gd THEMES` decides
+between them: the mess hall's own clusters are `feast`, `feast`, `kegs`,
+`shelf_stock` - it is the one 15-weight floor **already full of crates and
+kegs**, so a creature built out of the room's own stores needs no new prop to
+explain itself. Its one body, the Cook, HEALS the room and shares nothing with
+this mechanic.
+
+### ENCUMBRANCE IS A MECHANIC CLASS NOTHING ELSE IN THE SET USES
+Checked against all sixteen. The two near neighbours, named: the **Tallyman**
+takes gear OFF a hero and withdraws with it; the **Quartermaster** hands
+weapons to the other monsters. This one gives something to the HEROES and it is
+a penalty. The sixteen summon, armour, drag, darken, revive, bar, steal, heal,
+flood, plant, trap, depend on fuel, misdirect, set the floor, split and arm the
+room - **not one of them touches what a hero can carry**.
+
+### THE NUMBERS
+height 2.65 m (unused in the set) | wear **0.75** (the one value left unused in
+the .15-.95 ladder) | theme mess | 4 meshes | 1,208 faces | footprint span
+2.39 m, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span | ratio vs a
+2.45 m posed KayKit Knight **1.08** | pair_w 4.26 m, fits_frame true | verdict
+GREEN, blank+border check 51 files 0 failures, errors [].
+
+### PACKS BEFORE GEOMETRY, AND WHERE THAT RULE STOPPED PAYING
+The crate being handed over, the keg and the sack are **real KayKit Dungeon
+Pack (CC0) geometry** out of `_packs/`, at 300/160/140 faces. Pass 1 built all
+six stacked crates the same way at 90 faces each, because six at usable
+fidelity would have blown the set's face budget - and **the decimate ate the
+lids and corners, so every one came back as an open crumpled tray**. A pack
+mesh is only worth loading where its detail can be afforded. The stack is now
+closed banded boxes, which was the silhouette intent anyway.
+
+### WHAT THE GAME BUILD MUST DO - NOT MINE, I TOUCHED NO .gd OUTSIDE tools/art/
+1. `assets/monsters/minibosses/loader.glb` - **static, no armature**: a `model`
+   path and **NO `anims` entry**, same as the other sixteen.
+2. `scripts/delve.gd` `MB_FIT`: add `"loader": 1.08` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json` `pairs.loader.ratio`. Do not
+   re-derive it. (Same shape as the `"quartermaster": 0.96` row already owed.)
+3. No `.glb.import` sibling - the art lane never runs Godot. One import run
+   covers this and `quartermaster.glb`; `delve.gd:377` falls back until then.
+4. Feed line, if one is wanted: *"Something is putting a load on you."*
+5. **The idea is a BEHAVIOUR.** Shipped as a reskin with more hit points it is
+   wasted: the crate on the hook is a promise that this thing makes the party
+   slower until it is dealt with.
+
+### THE FIT PROOF - I LOOKED, AND HERE IS WHAT IS WRONG WITH IT
+On a body, front/side/back, beside the posed Knight at one ground line:
+1. **From the side the body barely reads as a body** - a lump under a column.
+   The hump and the eyes are hidden behind the boom shoulder at 90 degrees.
+2. **The lashing rope reads as a stick**, not a rope: a straight tube with no
+   sag and no wrap around anything.
+3. **The keg on the floor reads as a wicker basket** and **the sack reads as a
+   dark rock** - both are pack meshes at the small end of their useful size.
+4. **The iron bands on the crates vanish at hero scale** - at the pair framing
+   the column is a stepped grey tower and the bands are one pixel.
+5. **The signal lamp is a white dot** at hero scale; it only works in the
+   creature's own three views.
+6. From the front the eyes under the brim read as **a visored face**, which is
+   nearer a head than the brief wants, though the body is bent and headless.
+7. The hanging crate slightly **overlaps the body outline** on the side view.
+8. Fixed on the way, both found by looking: pass 4's rope and lamp sat INSIDE
+   the column's footprint and **could not be seen in any view** - a part the
+   camera cannot see is not a part; and pass 4's load sat behind the leaning
+   body with **open air between them** on the side view.
+
+### A HARNESS FAULT FOUND AND FIXED IN THE SAME RUN
+`minibossfit.py`'s blank check **only ever opened `hero_front.png`**. Each key
+writes three views, so two of the three went into the register unchecked - an
+instrument that can return GREEN over renders it never opened. It now opens all
+three and a missing one fails the run: the count went **1 -> 51 files** for the
+same seventeen keys, 0 failures.

@@ -866,11 +866,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "loader": {
+   "title": "The Loader",
+   "theme": "mess",
+   "idea": "IT WEIGHS YOU DOWN - it loads you, and you fight slower until you drop it",
+   "wear": 0.75,
+   "feed_line": "Something is putting a load on you.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1221,
+   "size": [
+    2.39,
+    1.02,
+    2.65
+   ],
+   "footprint_span": 2.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.85654327599654,
+    "ortho": 3.3227827548980713,
+    "clip": [
+     7.549501419067383,
+     19.51810073852539
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 48,
+  "files": 51,
   "failures": []
  }
 }

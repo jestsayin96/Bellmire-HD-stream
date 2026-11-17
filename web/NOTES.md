@@ -864,3 +864,15 @@ Headless Chromium, real-shaped snapshots (publisher v4 shape: shops[{name,level,
 - Still open on the GAME BUILD side: snapshot_pub.gd sends shops WITHOUT `stock`, and no `caravan`/`trader`/`orders` yet, so each shelf honestly reads "The shelf has not been published yet." The hub needs no change; it lights up when those fields arrive (items.json shop_stock / trader_cargo wiring in the publisher).
 
 - 2026-11-16 ~17:40 CT hub run: lane STOOD DOWN. Read WORK_PLAN hub row (H14-H31 all ticked) + H29/H30 items; H29 point 6 still blocked on the game build publisher (snapshot_pub.gd sends shops without stock/caravan/orders). Checked app.js: node --check OK, no innerHTML on snapshot data (2 page-owned sites), CSP meta present. No defect found, no web/ code changed.
+
+## H32 - navigating like Twitch (passes 1-2 so far)
+
+Read as: Twitch's STRUCTURE and INTERACTION, not its colours (the palette ruling stands) and never its
+brand. Pass 1 - a fixed top bar and a three-column shell, three independent scroll regions, no page
+scroll. Pass 2 - the left rail: a listbox of live things. A hero mid-delve is a live channel: sigil for
+the avatar, name, "Floor 7 - The Ford Wardens", a LIVE dot and, where Twitch puts the viewer count, the
+FLOOR (it moves and it is what a delve is about). A band's number is its head-count; an idle hero shows
+level, dimmed. Live first, idle below, the fallen not on the rail (they have their own tab). The rail
+collapses to sigils only. Picking an entry opens the new "Live" stage: a dark player banner, an info row
+(title / who / tags / Follow) and the full sheet beneath. The LIVE dot is red (`--live`), a functional
+signal used nowhere else. Welcome panel placement and chat are still to do (passes 3 and 5).

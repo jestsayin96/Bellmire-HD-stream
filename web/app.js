@@ -290,7 +290,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
+const SECTIONS = ["watch", "boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -303,6 +303,7 @@ function renderNothing(failed) {
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
   { const nb = $("nBands"); if (nb) nb.textContent = ""; }
+  try { renderRail({}); } catch (e) {}
   renderCommands(null);
   renderRolls(null);
 }
@@ -331,6 +332,7 @@ function render(p) {
   renderTown(t);
   renderBoards(arr(p.heroes), arr(p.fallen));
   renderHeroes(arr(p.heroes));
+  try { renderRail(p); } catch (e) { /* the rail must never break the rest of the page */ }
   renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
   try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
@@ -3737,7 +3739,294 @@ function renderSeason(p) {
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
+// ============================================================ H32: THE RAIL AND THE LIVE STAGE
+// Mr. E, 16 Nov: "make the hub feel like you are navigating on twitch". The page borrows Twitch's
+// NAVIGATION GRAMMAR: a persistent left rail of LIVE THINGS (a hero mid-delve is a live channel: a
+// sigil for the avatar, a name, one line of what they are doing, a LIVE dot, and a number where
+// Twitch puts the viewer count). Picking one puts it on the STAGE with an info row beneath it.
+// Layout only: the rail is built from the snapshot the page already holds (p.heroes, p.parties),
+// no new fetch, no new data, no CSP change. SECURITY: every name and line below reaches the DOM
+// through el()/textContent; sigil() only HASHES a name to choose a known drawing; no snapshot
+// value is ever a URL, src, href, selector or style (the HP fills are CSSOM numbers). The selection
+// is held in a JS variable and compared against names - never put in a selector.
+// The number on a LIVE hero is FLOOR DEPTH (it moves, and it is what the delve is about); a band's
+// is its head-count; an idle hero shows level, dimmed. The fallen are not on the rail (they have
+// their own tab): a hero who is not breathing is not "live".
+const RAIL_KEY = "bellmire.rail.v1";            // "min" | "full" - whitelist-checked on read
+const RAIL_IDLE_CAP = 60;
+let railItems = [];                              // the built model, newest snapshot
+let railSel = null;                              // {k: "hero"|"band", n: lower-cased name} or null (auto)
+let railAutoPick = null;
+function railGetMode() { try { return localStorage.getItem(RAIL_KEY) === "min" ? "min" : "full"; } catch (e) { return "full"; } }
+function railSetMode(m, keep) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-rail", m === "min" ? "min" : "full");
+  const b = $("railToggle");
+  if (b) {
+    b.setAttribute("aria-expanded", m === "min" ? "false" : "true");
+    b.setAttribute("aria-label", m === "min" ? "Expand the rail" : "Collapse the rail to sigils only");
+    b.title = m === "min" ? "Expand the rail" : "Collapse the rail";
+  }
+  if (keep !== false) { try { localStorage.setItem(RAIL_KEY, m === "min" ? "min" : "full"); } catch (e) {} }
+}
+function railBuild(p) {
+  const parties = normalizeParties(p && p.parties != null ? p.parties : (p && p.bands));
+  const heroes = arr(p && p.heroes).filter((h) => h && typeof h === "object");
+  const inBand = new Map();
+  parties.forEach((b, bi) => b.members.forEach((m) => {
+    if (m.name && m.status !== "fallen") inBand.set(m.name.toLowerCase(), { bi, floor: b.floor, band: b.name });
+  }));
+  const bands = parties.map((b) => {
+    const alive = b.members.filter((m) => m.status !== "fallen").length;
+    return { kind: "band", live: true, name: b.name || "A band", key: (b.name || "a band").toLowerCase(),
+      what: (b.floor != null ? "Floor " + num(b.floor) + " · " : "") + alive + (alive === 1 ? " delver" : " delvers"),
+      num: alive, numLab: alive === 1 ? "delver" : "delvers", floor: b.floor, party: b };
+  }).sort((a, b) => n0(b.floor) - n0(a.floor));
+  const hs = heroes.map((h) => {
+    const key = nameOf(h).toLowerCase();
+    const bd = inBand.get(key);
+    const own = firstStr(h.status, h.state, h.activity, h.where).toLowerCase().trim();
+    const live = !!bd || own === "delving" || own === "active" || PARTY_STATUS[own] === "burning";
+    const max = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax), hp = pickNum(h.hp);
+    const lv = pickNum(h.level);
+    const floor = bd && bd.floor != null ? bd.floor : null;
+    const cls = (cap(h.species) + " " + cap(h.class)).trim();
+    let what, numTxt, numLab;
+    if (live) {
+      what = floor != null ? "Floor " + num(floor) + (bd.band ? " · " + bd.band : "") : "Delving now";
+      numTxt = floor != null ? num(floor) : "—"; numLab = "floor";
+    } else {
+      what = (cls || "Adventurer") + (lv != null && lv > 0 ? ", level " + num(lv) : "");
+      numTxt = lv != null && lv > 0 ? "Lv " + num(lv) : ""; numLab = "level";
+    }
+    return { kind: "hero", live, name: nameOf(h) || "(no name)", key, what, num: numTxt, numLab,
+      floor, hp, max, lv: lv || 0, h, band: bd ? bd.band : "" };
+  });
+  const liveH = hs.filter((x) => x.live).sort((a, b) => (b.floor != null ? b.floor : -1) - (a.floor != null ? a.floor : -1));
+  const idleH = hs.filter((x) => !x.live).sort((a, b) => b.lv - a.lv);
+  return { bands, liveH, idleH };
+}
+function railSame(it, sel) { return !!sel && it.kind === sel.k && it.key === sel.n; }
+function railCurrent() {
+  if (railSel) { const f = railItems.find((it) => railSame(it, railSel)); if (f) return f; }
+  const live = railItems.find((it) => it.kind === "band") || railItems.find((it) => it.kind === "hero" && it.live);
+  return live || null;
+}
+function railItemEl(it, idx, selected) {
+  const d = el("div", "rail-item" + (it.live ? " live" : " idle") + (it.kind === "band" ? " isband" : ""));
+  d.setAttribute("role", "option");
+  d.setAttribute("aria-selected", selected ? "true" : "false");
+  d.tabIndex = selected ? 0 : -1;
+  d.dataset.ri = String(idx);                      // an integer the page owns
+  d.title = it.name;
+  const av = el("span", "rail-av");
+  av.append(sigil(it.name, "sm"));
+  const txt = el("span", "rail-txt");
+  txt.append(el("span", "rail-name", it.name));
+  txt.append(el("span", "rail-what", it.what));
+  if (it.kind === "hero" && it.live && it.hp != null && it.max != null && it.max > 0) {
+    const tr = el("span", "rail-hp"); tr.setAttribute("aria-hidden", "true");
+    const f = el("span", "rail-hpf");
+    f.style.setProperty("--hp", Math.max(0.03, Math.min(1, it.hp / it.max)));   // CSSOM number only
+    tr.append(f); txt.append(tr);
+  }
+  const right = el("span", "rail-num");
+  if (it.live) { const dot = el("span", "live-dot"); dot.setAttribute("aria-hidden", "true"); right.append(dot); }
+  if (it.num !== "" && it.num != null) {
+    const n = el("span", "rail-n", it.num);
+    right.append(n);
+    if (it.numLab) right.append(el("span", "rail-nl", it.numLab));
+  }
+  if (it.live) right.append(el("span", "rail-live-sr", "live"));
+  d.append(av, txt, right);
+  return d;
+}
+function renderRail(p) {
+  const box = $("railList");
+  if (!box) return;
+  const hadFocus = box.contains(document.activeElement);
+  const focusKey = hadFocus && document.activeElement.dataset ? document.activeElement.dataset.ri : null;
+  const prevFocus = focusKey != null && railItems[+focusKey] ? railItems[+focusKey] : null;
+  const m = railBuild(p || {});
+  const idleShown = m.idleH.slice(0, RAIL_IDLE_CAP);
+  railItems = [].concat(m.bands, m.liveH, idleShown);
+  const cur = railCurrent();
+  railAutoPick = cur;
+  box.replaceChildren();
+  const group = (label, list, startIdx) => {
+    if (!list.length) return;
+    const g = el("div", "rail-group");
+    g.setAttribute("role", "group");
+    g.setAttribute("aria-label", label);
+    g.append(el("span", "rail-h", label));
+    list.forEach((it, i) => g.append(railItemEl(it, startIdx + i, cur === it)));
+    box.append(g);
+  };
+  group("Bands in the scar", m.bands, 0);
+  group("Heroes delving now", m.liveH, m.bands.length);
+  group("Heroes in town", idleShown, m.bands.length + m.liveH.length);
+  if (m.idleH.length > idleShown.length) {
+    const more = el("button", "rail-more", "+" + (m.idleH.length - idleShown.length) + " more in Heroes");
+    more.type = "button";
+    more.addEventListener("click", () => setActiveTab("heroes"));
+    box.append(more);
+  }
+  if (!railItems.length) box.append(el("p", "rail-empty", "Nobody is on the roll yet. When a hero enlists - or a band goes down into the scar - they appear here, live."));
+  // exactly one item is in the tab order
+  if (!box.querySelector('[tabindex="0"]')) { const f = box.querySelector(".rail-item"); if (f) f.tabIndex = 0; }
+  const nl = $("nLive");
+  const liveN = m.liveH.length + m.bands.length;
+  if (nl) nl.textContent = liveN ? liveN : "";
+  const cnt = $("railCount"); if (cnt) cnt.textContent = liveN ? liveN + " live" : "";
+  if (prevFocus) {
+    const again = railItems.findIndex((it) => it.kind === prevFocus.kind && it.key === prevFocus.key);
+    if (again >= 0) { const e = box.querySelector('[data-ri="' + again + '"]'); if (e) { e.tabIndex = 0; try { e.focus({ preventScroll: true }); } catch (x) {} } }
+  }
+  try { renderStage(); } catch (e) { /* the stage must never break the rest of the page */ }
+}
+function railPick(idx) {
+  const it = railItems[idx]; if (!it) return;
+  railSel = { k: it.kind, n: it.key };
+  const box = $("railList");
+  if (box) for (const e of box.querySelectorAll(".rail-item")) {
+    const on = e.dataset.ri === String(idx);
+    e.setAttribute("aria-selected", on ? "true" : "false");
+  }
+  setActiveTab("watch");
+  try { renderStage(); } catch (e) {}
+  const st = $("stageScroll"); if (st) st.scrollTop = 0;
+}
+// ---- the stage: what the rail selected, with an info row beneath it the way Twitch puts the
+// title, the streamer and the tags under the player. Reuses the sheet and band card the page
+// already has; adds only layout and the "Follow" toggle (the existing pinned-hero setting).
+function stageTag(text, cls) { return el("span", "sw-tag" + (cls ? " " + cls : ""), text); }
+function stageInfo(it) {
+  const info = el("div", "sw-info");
+  const av = el("span", "sw-av"); av.append(sigil(it.name, "md"));
+  const mid = el("div", "sw-infomid");
+  const title = it.kind === "band"
+    ? (it.floor != null ? "Delving on floor " + num(it.floor) : "Delving in the scar")
+    : (it.live ? (it.floor != null ? "On floor " + num(it.floor) + (it.band ? " with " + it.band : "") : "Delving now") : "In town, between delves");
+  mid.append(el("div", "sw-title", title));
+  const who = el("div", "sw-who");
+  who.append(el("span", "sw-whoname", it.name));
+  if (it.kind === "hero" && it.h.title) who.append(el("span", "sw-whotitle", String(it.h.title)));
+  mid.append(who);
+  const tags = el("div", "sw-tags");
+  if (it.kind === "band") {
+    tags.append(stageTag(it.num + (it.num === 1 ? " delver" : " delvers")));
+    if (it.floor != null) tags.append(stageTag("Floor " + num(it.floor)));
+    const fl = it.party.members.filter((x) => x.status === "fallen").length;
+    if (fl) tags.append(stageTag(fl + " fallen", "bad"));
+  } else {
+    const h = it.h;
+    if (h.class) tags.append(stageTag(cap(h.class)));
+    if (h.species) tags.append(stageTag(cap(h.species)));
+    if (it.lv) tags.append(stageTag("Level " + num(it.lv)));
+    if (h.rank) tags.append(stageTag(String(h.rank)));
+    if (it.band) tags.append(stageTag(it.band, "inband"));
+  }
+  mid.append(tags);
+  info.append(av, mid);
+  if (it.kind === "hero") {
+    const mine = isMyHero(it.h);
+    const f = el("button", "sw-follow" + (mine ? " on" : ""), mine ? "Following" : "Follow");
+    f.type = "button";
+    f.setAttribute("aria-pressed", mine ? "true" : "false");
+    f.title = mine ? "This is your pinned hero. Click to unpin." : "Pin this hero as yours - it floats to the top of Heroes.";
+    f.addEventListener("click", () => { setMyHero(mine ? "" : nameOf(it.h)); renderStage(); });
+    info.append(f);
+  }
+  return info;
+}
+function stagePlayer(it) {
+  const pl = el("div", "sw-player" + (it.live ? " live" : ""));
+  const art = el("div", "sw-art");
+  art.append(it.kind === "hero" ? coat(it.name, "lg") : sigil(it.name, "md"));
+  const mid = el("div", "sw-pmid");
+  const badge = el("span", "sw-badge" + (it.live ? " live" : ""));
+  if (it.live) badge.append(el("span", "live-dot"));
+  badge.append(document.createTextNode(it.live ? "LIVE" : "IN TOWN"));
+  mid.append(badge);
+  if (it.live) {
+    const f = it.floor;
+    const big = el("div", "sw-depth");
+    big.append(el("span", "sw-depth-k", it.kind === "band" ? "Delving on floor" : "On floor"), el("span", "sw-depth-n", f != null ? num(f) : "—"));
+    mid.append(big);
+  } else {
+    mid.append(el("div", "sw-depth-k", "Not in the scar right now"));
+    const deep = it.kind === "hero" ? pickNum(it.h.deepest) : null;
+    if (deep != null && deep > 0) mid.append(el("div", "sw-depth-k", "Deepest so far: floor " + num(deep)));
+  }
+  if (it.kind === "hero" && it.hp != null) {
+    const bar = hpBar(it.h); bar.classList.add("sw-hp"); mid.append(bar);
+  }
+  pl.append(art, mid);
+  return pl;
+}
+function renderStage() {
+  const box = $("watchBody");
+  if (!box) return;
+  box.replaceChildren();
+  const it = railCurrent();
+  if (!it) {
+    const e = el("div", "sw-empty");
+    e.append(el("h2", "sw-empty-h", "Nobody is delving right now"));
+    e.append(el("p", null, "When a hero goes down into the scar, or a band does, they appear on the rail on the left and the stage fills with them. Until then, the Chronicle, the Boards and the rest are along the tabs above."));
+    box.append(e);
+    return;
+  }
+  box.append(stagePlayer(it), stageInfo(it));
+  const sheet = el("div", "panel sw-sheet");
+  if (it.kind === "hero") {
+    sheet.append(heroSheet(it.h));
+  } else {
+    const btns = el("div", "sw-members");
+    btns.append(el("p", "eyebrow", "Pick a delver to watch"));
+    const row = el("div", "sw-memberrow");
+    const heroByName = new Map(); railItems.forEach((x, i) => { if (x.kind === "hero") heroByName.set(x.key, i); });
+    for (const m of it.party.members) {
+      const idx = heroByName.get(String(m.name || "").toLowerCase());
+      const b = el("button", "chip", m.name || "(no name)");
+      b.type = "button";
+      if (idx == null) { b.disabled = true; b.title = "No sheet published for this delver"; }
+      else b.addEventListener("click", () => railPick(idx));
+      row.append(b);
+    }
+    btns.append(row);
+    sheet.append(btns, partyCard(it.party));
+  }
+  box.append(sheet);
+}
+(function wireRail() {
+  const box = $("railList"), tog = $("railToggle");
+  if (tog) tog.addEventListener("click", () => railSetMode((($("app") && $("app").getAttribute("data-rail")) === "min") ? "full" : "min"));
+  railSetMode(railGetMode(), false);
+  if (!box) return;
+  box.addEventListener("click", (e) => {
+    const t = e.target && e.target.closest ? e.target.closest(".rail-item") : null;
+    if (!t || !box.contains(t)) return;
+    railPick(+t.dataset.ri);
+  });
+  box.addEventListener("keydown", (e) => {
+    const t = e.target && e.target.closest ? e.target.closest(".rail-item") : null;
+    if (!t) return;
+    const all = Array.from(box.querySelectorAll(".rail-item"));
+    const i = all.indexOf(t);
+    let j = -1;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); railPick(+t.dataset.ri); return; }
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") j = Math.min(all.length - 1, i + 1);
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") j = Math.max(0, i - 1);
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = all.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    all.forEach((x) => { x.tabIndex = -1; });
+    all[j].tabIndex = 0; all[j].focus();
+  });
+})();
+
+const TABS = ["watch","boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {

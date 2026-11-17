@@ -162,8 +162,18 @@
   </div>
 
   <div class="shell" id="shell">
+    <!-- H32 pass 2: the rail. A LISTBOX of live things (bands in the scar, heroes delving, then the
+         heroes in town) - not a tablist: each entry is an option that puts that hero or band on the
+         stage. app.js builds every entry with el(); nothing here is snapshot data. -->
     <aside class="rail" id="rail" aria-label="Live in Bellmire">
-      <p class="rail-ph">Live in Bellmire</p>
+      <div class="rail-head">
+        <button type="button" class="rail-toggle" id="railToggle" aria-expanded="true" aria-controls="railList" aria-label="Collapse the rail to sigils only" title="Collapse the rail">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <span class="rail-title">Live in Bellmire</span>
+        <span class="rail-count" id="railCount"></span>
+      </div>
+      <div class="rail-list" id="railList" role="listbox" aria-label="Live bands and heroes - choose one to watch" aria-orientation="vertical"></div>
     </aside>
 
     <div class="stagecol" id="stagecol">
@@ -179,6 +189,7 @@
        (ArrowLeft/Right, Home/End move; Enter/Space activate) per the WAI-ARIA tabs
        pattern. Reduced-motion is respected (no new animation here either way). -->
   <nav id="tabs" role="tablist" aria-label="Sections of the hub">
+    <button type="button" role="tab" id="tab-watch"     data-tab="watch"     aria-controls="watch"     aria-selected="false" tabindex="-1">Live<span class="n" id="nLive"></span></button>
     <button type="button" role="tab" id="tab-boards"    data-tab="boards"    aria-controls="boards"    aria-selected="false" tabindex="-1">Boards</button>
     <button type="button" role="tab" id="tab-state"     data-tab="state"     aria-controls="state"     aria-selected="false" tabindex="-1">Town</button>
   <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
@@ -217,6 +228,13 @@
 
   <main id="main">
     <section class="panel big-msg hide" id="nothing"></section>
+
+    <!-- H32: the live stage. Whatever the rail selected (a hero or a band), with the info row beneath it.
+         Built in app.js from the snapshot with el(); the only markup here is page-owned. -->
+    <section class="plain stagewatch" id="watch" role="tabpanel" aria-labelledby="tab-watch" tabindex="0">
+      <h2 class="sr-only">Live stage</h2>
+      <div id="watchBody"></div>
+    </section>
 
     <section class="panel" id="boards" role="tabpanel" aria-labelledby="tab-boards" tabindex="0">
       <h2 class="title">The Boards <small id="boardCount"></small></h2>

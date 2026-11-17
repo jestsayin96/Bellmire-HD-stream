@@ -655,3 +655,26 @@ Buttons send a chat command over the existing H6/H8 IRC socket. Built only by sa
 "very rare" contains a space, so the snapshot string is never used as a class: only the slug
 from the map is. Unknown values (including `<x>`) produce no class and render as text only.
 The hub reads the stored `rarity` key and never bands anything by cost (C-61). No CSP change.
+
+## H32 - the Twitch-shaped shell, the rail and the live stage (layout only)
+
+Mr. E, 16 Nov: "make the hub feel like you are navigating on twitch." Reading: Twitch's navigation
+grammar, not its colours or brand. **No new data, no new fetch, no CSP change.** Every invariant above
+is unchanged; what this adds:
+
+- **Shell (pass 1).** `index.html` is now a fixed top bar plus three columns (rail / stage / chat
+  column). The page itself does not scroll (H13); the rail, the stage and the chat column each scroll
+  inside themselves. Overlay and Night watch keep their old flow layouts.
+- **The rail (pass 2)** is a `role="listbox"` (NOT a tablist) of `role="group"` / `role="option"`
+  entries, roving tabindex, Up/Down/Home/End to move, Enter/Space to pick. It is built in
+  `renderRail()` from `p.heroes` and `p.parties`, which the page already holds. Every name and line is
+  set through `el()` / textContent. `sigil(name)` only hashes a name to choose a known drawing. The
+  HP and LIVE fills are CSSOM numbers. The selection (`railSel`) is a JS variable holding a lower-cased
+  name that is only ever COMPARED against snapshot names - never used in a selector, URL, src, href or
+  style; DOM entries are addressed by an integer index the page owns (`data-ri`). The collapsed state is
+  one whitelisted localStorage value (`bellmire.rail.v1` = `min` | `full`).
+- **The live stage** (new first tab "Live") reuses `heroSheet()` / `partyCard()` and adds an info row
+  and a Follow toggle that calls the existing `setMyHero()` (the H11 pin). No other state is added.
+- **Colour.** One new functional colour: `--live` (a red LIVE dot and badge), used for nothing else.
+- No `innerHTML` was added anywhere in this item; the only `innerHTML` in the file is still the
+  page-owned `renderNothing` template.

@@ -8986,3 +8986,58 @@ is mid-Phase-2 and a dry lane should not be sitting on a lock to re-prove unchan
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward created or re-priced, no channel setting touched.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## B-cycle B31 - THE COMMAND SURFACE IS UNTOUCHED, SO I SPENT THE :45 WINDOW RE-PROVING THE GATES ON THE MERGED TREE (chat bot, 2026-11-17 13:46-13:55 CT)
+
+- THE ROW SAID STAND DOWN AND COMPUTE IT RATHER THAN TAKE IT, SO I COMPUTED IT. Main moved from
+  8ec021a to 42182c2 (22 commits into this worktree: 15 weapon models, Systems 2 engine half,
+  a HUD theme change, +50 lore lines, two plan syncs).
+    git diff 8ec021a..origin/main -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md  EMPTY
+    git diff 1807d16..origin/main -- the same three                                          EMPTY
+    git log 8ec021a..origin/main -- scripts/ data/commands.json                              NO COMMITS
+  No command, alias, cooldown, `ask` phrasing or `foreign` prefix moved. Fourth hour with no item
+  on the command surface, and that is a measurement, not a guess.
+
+- BUT A DRY LANE IS NOT THE SAME AS AN UNPROVEN TREE, AND THAT IS WHY THIS HOUR IS NOT A
+  STAND-DOWN. My files did not move; the tree UNDER them moved by 22 commits. The HUD lane hit
+  exactly this an hour ago - its 12:55 run printed 9 parse errors purely because merged main's new
+  GLBs were not imported in its worktree, and its own IDLE line had already claimed 0. The gates
+  owed on L69/L70 had last run against a different tree. The :45 window exists for short gates, the
+  lock was IDLE since 13:20:07 with no Godot process alive, so I took it and re-measured.
+
+- GATE BATTERY, ALL GREEN, ONE RUN (13:48-13:52, after an explicit --import pass first):
+    --headless --path W6 --import                    completed, no leftover import work
+    parse  --headless --path W6 --quit-after 300     rc=0, 0 SCRIPT ERROR, 0 Parse Error,
+                                                     and the join line is there: TWITCH joined #jestsayin96
+    tools/_l14_test.gd                               L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                           TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                           COMMANDS_DOC OK wrote 27 commands
+  The parse's only output below the errors is pre-existing MI_Cobble.tres invalid-UID warnings out
+  of town.gd:820 - the game build's file, not mine, and warnings not errors. I am not raising them
+  as an item; I am naming them so the next seat does not "find" them.
+
+- COMMANDS_DOC WAS A TRUE NO-OP AND I PROVED IT THE ONLY WAY THAT COUNTS: git status over
+  scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md after the generator ran came back
+  CLEAN. The real generator rewrote the file and produced byte-identical bytes to what is
+  committed. It says 27, not the 26 the lane's standing note predicted, because the data carries 27
+  commands now; the generator is the authority and the stale number was the prompt's, not the
+  file's.
+
+- ITEM 4 OF THE OWED LIST (_b2_ask.gd, B2_ASK OK, then delete it and the .b2_* logs) WAS ALREADY
+  CLOSED in an earlier cycle - B2_ASK passed on the real engine, the harness and the .b2_* logs are
+  gone, and `ls _b2_*` finds nothing in the worktree. So the five owed engine gates behind L69/L70
+  are all green, and all five are now green against TODAY's main rather than against the tree they
+  were first proved on.
+
+- NOTHING WAS COMMITTED TO MY THREE FILES, because nothing needed changing. This cycle is the
+  measurement.
+
+- LOCK: claimed RUNNING 2026-11-17T13:48:30-06:00 with the finish declared at 14:08 (20 min, inside
+  the 25-minute cap); released IDLE the same slot. Godot closed. No second Godot ran beside
+  another lane's - checked by process, not by the file, and the file agreed.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created or re-priced, no channel setting touched. The parse run
+does JOIN #jestsayin96 as bellmirebro - that is the standing B18 gate and it is silent, no message
+is sent.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

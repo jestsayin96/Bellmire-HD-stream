@@ -1,0 +1,53 @@
+\config.ocio
+10:47:34 | INFO: Data are loaded, start creating Blender stuff
+10:47:34 | INFO: Blender create Mesh node Cube.125
+10:47:34 | INFO: Blender create Mesh node Cube.126
+10:47:34 | INFO: Blender create Mesh node PrototypePete_body.020
+10:47:34 | INFO: Blender create Mesh node PrototypePete_head.001
+10:47:34 | INFO: Blender create Mesh node Cube.128
+10:47:34 | INFO: Blender create Mesh node Cube.127
+10:47:34 | INFO: Blender create Mesh node Cube.003
+10:47:34 | INFO: Blender create Mesh node Cylinder.280
+10:47:34 | INFO: Blender create Mesh node Cylinder.005
+10:47:34 | INFO: Blender create Mesh node Cylinder.010
+10:47:34 | INFO: Blender create Mesh node Cylinder.022
+10:47:34 | INFO: Blender create Mesh node Cube.11839
+10:47:34 | INFO: Blender create Mesh node Cube.12993
+10:47:34 | INFO: Blender create Mesh node Cube.124
+10:47:34 | INFO: Blender create Mesh node Plane.004
+10:47:34 | INFO: glTF import finished in 0.49s
+00:02.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_front.png'
+00:03.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_side.png'
+00:03.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_back.png'
+10:47:36 | INFO: Data are loaded, start creating Blender stuff
+10:47:36 | INFO: Blender create Mesh node Cube.125
+10:47:36 | INFO: Blender create Mesh node Cube.126
+10:47:36 | INFO: Blender create Mesh node PrototypePete_body.020
+10:47:36 | INFO: Blender create Mesh node PrototypePete_head.001
+10:47:36 | INFO: Blender create Mesh node Cube.128
+10:47:36 | INFO: Blender create Mesh node Cube.127
+10:47:36 | INFO: Blender create Mesh node Cube.003
+10:47:36 | INFO: Blender create Mesh node Cylinder.280
+10:47:36 | INFO: Blender create Mesh node Cylinder.005
+10:47:36 | INFO: Blender create Mesh node Cylinder.010
+10:47:36 | INFO: Blender create Mesh node Cylinder.022
+10:47:36 | INFO: Blender create Mesh node Cube.11839
+10:47:36 | INFO: Blender create Mesh node Cube.12993
+10:47:36 | INFO: Blender create Mesh node Cube.124
+10:47:36 | INFO: Blender create Mesh node Plane.004
+10:47:36 | INFO: glTF import finished in 0.52s
+00:04.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler_chibi\hero_front.png'
+00:04.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler_chibi\hero_side.png'
+00:04.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"gaoler": [0.96, 5.58, true], "gaoler_chibi": [0.96, 5.58, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+==STDERR==
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+==RC 0==
+
+==DONE==

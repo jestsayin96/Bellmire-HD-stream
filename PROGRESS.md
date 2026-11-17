@@ -8636,5 +8636,118 @@ NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no 
 bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
 
+## D-cycle - S15 the eighteenth miniboss (hurdleman) gets its MB_FIT key and its .import sibling, 2026-11-17T09:19:00-06:00 (game build)
+- STAMP CORRECTED: first written as 09:21, a FUTURE STAMP - the machine read 09:19:35. Mine, named.
+- Row (08:58 TAKE THIS NEXT): add "hurdleman": 1.04 to scripts/delve.gd MB_FIT, copied from ART'S
+  renders/art/minibosses/_fit_report.json pairs.hurdleman.ratio = 1.04 (verdict GREEN, blank_check 54 files / 0
+  failures) - NOT re-derived. One line, delve.gd:375. Looked at art's hurdleman/hero_front.png: pair height reads right.
+- Import run committed assets/monsters/minibosses/hurdleman.glb.import. Minibosses now 29 .glb / 29 .import.
+- NOT BUILT: the hurdleman's party-split idea, nor the loader's encumbrance. New mechanics; wiring-only ruling.
+  No miniboss def exists in data/ for either, so neither spawns - no engine render of it, and none claimed.
+- Lock: opening claim 09:08:30 declared :35 against the 07:58 row's :33 - MINE, named in the lock file. It was a
+  stand-down claim written before the 08:58 block reached laptop; the S15 claim at 09:09:35 declared :33.
+- MY OWN FAULT, CAUGHT AND FIXED IN THE SLOT: first D96_FIT run used --headless, got a null viewport image
+  (SCRIPT ERROR save_png on null, _d96_fit.gd:176, rc=1, no verdict = RED). Killed my own Godot, relaunched
+  windowed as S14 did - D96_FIT OK. The tool is not at fault; the gate renders, so it needs a window.
+- Verdicts: import rc0 0 errors; parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2102;
+  TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16175 raid_in_solid=0/7075 PASS; DELVE_TEST OK 9001 frames
+  floor reached 2; D96_FIT OK 70 checks, 14 minibosses; S15_CHECK OK (hurdleman 1.04 vs art 1.04; glb 29
+  import 29; 0 MB_FIT values disagree with art's report).
+- FINDING CARRIED, NOT ACTED ON: art pair "snuffer_chibi" (1.06) still has no MB_FIT key; "snuffer" is 1.06 so
+  nothing reads wrong. Godot stdout went to files (build/_s15/*.log), never a pipe.
+## C-87 (2026-11-17 CT, clock ~09:2x) - TAKE THIS NEXT row for CONTENT: hurdleman feed lines, barks deepened an eighth time (lore_lines.json only)
+- TAKE THIS NEXT (08:58 CT block) gave CONTENT: hurdleman arrive and fall lines in miniboss_feed.by_key, 8 and 8, act and broken omitted; then keep going in barks. Not written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop (declared dead).
+- data/lore_lines.json `miniboss_feed.by_key`: +1 key `hurdleman`, arrive 8 and fall 8 (16 lines). `_note_c87` added. Includes the art lane's suggested feed line, "A hurdle just went down between you."
+- data/lore_lines.json `barks`: +47 lines (case-insensitive duplicates dropped). enter 218, lord 209, trap 211, hurt 205, drink 201, misfire 205. Plain register, no floor counts.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; existing by_key rows unchanged; all bark entries strings.
+- CODE WIRING: none for barks. For `hurdleman` the reader (delve.gd miniboss_lines) takes any key; the code lane should fire _miniboss_say("hurdleman", "arrive"/"fall") when it adds it to the spawn table with MB_FIT hurdleman 1.04 (art's measured number). No .gd touched.
 ## H32 hub standing check (2026-11-17 09:45 CT) - nothing new to build
 Fast-forwarded to origin/hub (5926fd8), merged origin/main clean (ead0b8a); `git diff` of web/ and docs/HUB_SECURITY.md across both was EMPTY, so web/ is byte-identical to the looked-at 02:00 build. Passes 1-5 in, H32 ticked WHOLE; queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned status line and failed-fetch box); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta, img-src 'self' data:, unchanged. MEASURED: web/icons 2,434,146 bytes on disk vs 6 MB cap. No new screenshot (unchanged build). Live dot red --live #e5484d. Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose: delete refused on this machine, ~7 MB binary not worth keeping in git.
+
+## Cycle A-19 - THE HURDLEMAN'S THREE WORST FAULTS, MEASURED (2026-11-17 09:48 CT)
+Clock read off the machine with `TZ=America/Chicago date`. The team lead was right about my
+last entry: it was headed 09:10 when the machine said 08:59. A future stamp, named and corrected.
+
+- THE ITEM WAS THE PLAN'S, NOT MY PROMPT'S. `TAKE THIS NEXT` 08:58 CT gives ART: fix the three
+  worst of the eight faults I named myself on the hurdleman before building a nineteenth.
+  System 10 is NOT my item this hour - the audit says `assets/monsters/creatures` is read at
+  `bestiary.gd:155` and the directory is no longer unreferenced; both halves are shipped and only
+  its tick is missing, above this seat.
+- WHAT I CHECKED FOR FIRST, MEASURED: I did not rebuild anything. I read my own eight-fault list
+  and the builder, and built an INSTRUMENT for the three before touching geometry -
+  `tools/art/_hurdle_probe.py`. It renders each part group alone through one camera off index
+  spans the builder now records, and **goes RED on an empty mask**.
+- THE THREE, SAME METHOD BEFORE AND AFTER:
+  - "the posts splay and cross at odd angles" -> panel axis spread **13.63 -> 10.07 deg**, and
+    an even step (97.74/92.25/84.11 -> 95.11/90.06/85.04). One height, an even yaw step, a wider
+    lateral step, and a strap across the fan.
+  - "the hurdle covers the body from the chest down" -> man hidden in the three-quarter view
+    **0.4662 -> 0.3781**. Hurdle height 1.78 -> 1.40 m. Place untouched: moving it would undo
+    pass 4, which is what gives the side view a creature.
+  - "the withy head reads as a helmet with a visor band" -> weave band score **0.5618 -> 0.1379**.
+    The cause was in the loop: the three rings ran y, x AND **z**, and a ring on z is a horizontal
+    hoop round the skull. Every hoop is a meridian now; the eyes drop off the brow line.
+- THREE TIMES THE INSTRUMENT AND THE PICTURE DISAGREED AND I KEPT BOTH:
+  (1) my FIRST metric did not measure the fault - edge concentration read 0.8993 on the pass the
+  eye calls a jumble - so I rebuilt it to ask the written question;
+  (2) the best overlap number I got (all three at 0.387) made the FRONT and THREE-QUARTER views
+  worse than the start - a man penned between two fences - so the picture won and the overlap
+  went back up to 0.769 on the middle panel. Said plainly rather than dressed up;
+  (3) lying the panels flatter took the splay to **24.34 deg, worse than the 13.63 I began with**.
+  Pitch and yaw are not independent on screen. The number caught it; my eye had called it better.
+- FIT PROOF, LOOKED AT NOT ASSERTED: renders/art/minibosses/hurdleman/{front,side,three_quarter}.png
+  and hero_{front,side,back}.png beside the posed 2.45 m KayKit Knight. Register **GREEN**,
+  asked 18 / measured 18, blank+border **54 files, 0 failures**, errors [].
+  4 meshes, 1,790 faces, span **3.07 m CORRIDOR-SAFE**, **ratio 1.04 UNCHANGED**, pair_w 4.93.
+- EIGHT FAULTS STILL NAMED IN WRITING in docs/art/MINIBOSSES.md, including two this pass made
+  WORSE and I am not hiding: the man is more hidden from behind (0.3944 -> 0.4209), and the head
+  now has no face at all - the visor is gone and so are the eyes at pair scale.
+- GAME BUILD, NOT MINE, AND UNCHANGED BY THIS PASS: `scripts/delve.gd` MB_FIT `"hurdleman": 1.04`
+  is still the right number - the ratio did not move - plus one import run for the `.glb.import`
+  sibling. I touched no `.gd` outside tools/art/.
+## B-cycle B27 - STAND-DOWN HELD; SIX FOR SIX RE-PROVED ON MAIN 416c35d (chat bot, 2026-11-17 09:45-09:52 CT)
+THE 08:58 ROW SAYS STAND DOWN, NOTHING NEW IS ASSIGNED, with ONE named exception: "re-prove only if
+main moves materially again". IT DID, so this is that re-prove and nothing else. Nothing was invented,
+no other lane's gate was touched, no Phase 2 system was taken.
+
+WHAT MOVED, MEASURED BEFORE DECIDING rather than assumed: b4b6a7f (B26's base) -> origin/main 416c35d,
+20 commits. Against my three files' blast radius the diff is small and I say so plainly:
+  scripts/delve.gd         1 line  (in the parse set, so the parse gate is the honest reason to re-run)
+  data/lore_lines.json   +115 lines (content's file; the Chronicle reads it)
+  tools/art/minibosses.py  new     (art's tool, no bearing here)
+plus the Hurdleman body and its renders. That is "material" on the narrowest reading - one engine
+script - and that is the reading I used.
+
+MACHINE CLOCK READ FIRST: 09:46:33 CT, then 09:47:14 at the moment the claim line was written - no
+future stamp. Lock last line IDLE 2026-11-17T09:19:35-06:00 (game build S15). NO GODOT PROCESS ALIVE,
+checked by tasklist twice, not by the file. Claimed 09:47:14, named a 09:56 finish, started NOTHING
+after the battery. Every launch redirected stdout to a FILE (B25's house rule); no unread pipe.
+
+SIX FOR SIX, ONE BATTERY, UNDER 50 SECONDS WALL CLOCK, every exit code rc=0:
+  parse 300 frames  - 0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA (the B18/B23 loader guards stay
+                      silent on healthy data, as they must), and the join line is present
+  L14_TEST OK 22    - drift clean both directions
+  TWITCH_PARSE OK   - 8 checks
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+
+THE THREE FILES THIS LANE OWNS ARE UNCHANGED, SAID BY HASH AND BY git status, not by assertion:
+  data/commands.json  f37b1d2c6909  (14753 bytes) - same as B26 and as the supervisor's own reading
+  docs/COMMANDS.md    1fb9a166c3bf  (5771 bytes)  - unchanged by the REAL generator, not an emulation
+  scripts/chatcmd.gd  unchanged     (git status clean for all three after the generator ran)
+
+NAMED AGAIN FOR THE GAME BUILD LANE, NOT TAKEN AND NOT MINE: a plain parse run still brings up the
+real EventSub client - the tail reads "TWITCH joined #jestsayin96" and "TWITCH_EVENTSUB subscribed
+7 of 7". Any lane's parse gate therefore opens a live socket as bellmirebro. twitch_eventsub.gd is
+the GAME BUILD's file. Second cycle this has been named; it is their line to draw, not mine.
+NOT TAKEN, NINTH CYCLE RUNNING: `twitch_cooldown_s` is the game build's one line.
+NOT CHASED: the unread-pipe hang. The row said leave it; the condition is proved and that is enough.
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone. Logs (_b27logs) deleted. Godot closed.
+NEEDED FROM MR. E: nothing.
+## U53 - HUD stand-down, file-only (no lock taken, no Godot launched), 2026-11-17T09:53:58-06:00
+TAKE THIS NEXT (08:58 block) gave HUD: WRITE THE STAND-DOWN (08:52 slot was missed; a dry hour still gets one entry).
+Checked: L73/L74 ticked; U49-U51 closed the four U48 gate faults; the supervisor's 09:25 report ticks D99, so the L31 remainder is released - but its open half (damage numbers, status-effect icons) lives in delve.gd / monster.gd / party_frames.gd / boss_bar.gd, none of which are mine, and the plan re-routed it to the GAME BUILD on 16 Nov 18:02. L66 stays closed (H31). None of my seven files edited; no gate of mine reads red.
+Lock: last line "IDLE 2026-11-17T09:19:35-06:00 - game build S15: MB_FIT hurdleman 1.04 (art's, not re-derived) + hurdleman.glb.import (29/29). parse 0 errors, OFFFLOOR OK 0/2102, TWITCH_PARSE OK 8, TOWNWALK PASS, DEL"; Godot not running (tasklist empty). Lock untouched.
+NEEDED FROM MR. E: nothing. For the supervisor: if you want status-effect icons on stream, name the file owner who exposes the status state; HUD can draw it from a feed it is handed.

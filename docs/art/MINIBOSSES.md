@@ -760,24 +760,86 @@ Procedural, no pack geometry (`pack_used` false).
 6. **From behind it read TWO-HEADED**: a pale shoulder sphere sat beside the
    withy head at the same tone. Smaller, and in the dark slot.
 
-### WHAT IS STILL WRONG WITH IT - I LOOKED, AND THIS IS THE HONEST LIST
-1. **From the back the three spares read as a loose jumble of sticks**, not as
-   panels carried in a fan - the posts splay and cross at odd angles.
-2. **From the back the body is almost entirely behind the spares**: a withy
-   head, one shoulder, and nothing else of the creature.
-3. In the creature's own three-quarter framing **the standing hurdle covers the
-   body from the chest down**. It is a strong image and it is the mechanic, but
-   it is a hurdle with a man behind it, not a man with a hurdle.
-4. **The withy head still reads as a helmet with a visor band** at pair scale -
-   the crossing rings plus two lit eyes. The Loader has the same fault from a
-   different cause and I have not solved it in either.
-5. **The withy coil on the floor reads as a dark tyre**, not a coil of binding.
-6. **The maul is invisible in the back view** and its haft is hidden behind the
-   lattice in the front and three-quarter views; only the side view shows the
-   whole tool.
-7. **The stakes on the floor read as flat planks**, not sharpened stakes - at
-   hero scale the points are gone.
-8. **Everything is one tone.** At wear 1.00 the body, the hurdle and the spares
-   sit within a narrow grey-green band, so the man does not separate from his
-   own fences except by silhouette. It is honest for weathered wood and it is
-   still the thing I would change next.
+### PASSES 7-10: THE THREE WORST OF THE EIGHT, FIXED AND MEASURED
+The team lead's 08:58 row named three of the eight faults below and said:
+re-measure with the same method, state the number, do not assert the change.
+So each of the three got AN INSTRUMENT BEFORE IT GOT A FIX -
+`tools/art/_hurdle_probe.py`, which renders each part group of the body ON ITS
+OWN through one camera off index spans the builder now records, and **reports
+RED on an empty mask**, because a metric computed over nothing reads green and
+means nothing.
+
+| what the written fault says | the number for it | before | after |
+|---|---|---|---|
+| "the posts splay and cross at odd angles" | spread between the three panels' own screen axes, back view | **13.63 deg** (97.74 / 92.25 / 84.11) | **10.07 deg**, and an EVEN step (95.11 / 90.06 / 85.04) |
+| " " | each panel's share buried behind another | 0.667 / 0.587 / 0.603 | 0.531 / **0.769** / 0.540 |
+| "the standing hurdle covers the body from the chest down" | share of the man's own pixels behind the hurdle, three-quarter | **0.4662** | **0.3781** |
+| " " | the same below his chest line | 0.5305 | 0.5309 |
+| "the withy head still reads as a helmet with a visor band" | worst weave row's coverage minus the median row's, front | **0.5618** | **0.1379** |
+| " " | the two lit eyes: pixels / row span / column span | 251 / 13 / 39 | 156 / 10 / 30 |
+
+WHAT WAS ACTUALLY CHANGED, one lever at a time:
+1. **The fan.** The panels sat at three different heights with an uneven yaw
+   step and nothing tying them - so every post ended somewhere of its own.
+   Now: one height, an even step, a wider step sideways, and a STRAP across
+   the fan and over the shoulder, which is what makes a bundle read as carried.
+2. **The hurdle.** 1.78 m to 1.40 m. The lever is height, not place - moving it
+   would undo pass 4, which put it forward so the side view has a creature in
+   it. A real sheep hurdle is chest-high on a man anyway.
+3. **The head.** The three rings ran y, x AND **z** - and a ring on z is a
+   horizontal hoop round the skull, i.e. a visor, whatever it is made of. Every
+   hoop is now a MERIDIAN through the crown, so the dark runs top to bottom like
+   the rods of a hurdle; one binding hoop stays, dropped to the neck. The eyes
+   come off the brow line, down into the weave, smaller and closer.
+
+### AND THREE THINGS THE INSTRUMENT AND THE PICTURE DISAGREED ABOUT. BOTH WERE USEFUL.
+- **The first instrument did not measure the fault.** Edge-orientation
+  concentration came back 0.8993 on the pass the eye calls a jumble, and the
+  component count came back 1. Both true, neither about splay. Rebuilt to render
+  the panels one at a time and ask the written question.
+- **The picture vetoed a winning number.** A 0.20 m lateral step levelled all
+  three overlaps at 0.387 - the best reading I got - and made the FRONT and
+  THREE-QUARTER views worse than what I started with: the fan reached past both
+  shoulders and read as a second fence, a man penned between two hurdles. Step
+  back to 0.12 m, overlap back up to 0.769 on the middle panel, and I am not
+  going to dress that up: it is a back-view measure and the written fault it was
+  built for is fixed by the even yaw step, which survived.
+- **The number caught a change my eye called an improvement.** Lying the panels
+  back (pitch 0.26 -> 0.38) to get their tops under his shoulders took the splay
+  to **24.34 deg - worse than the 13.63 I started from**. Pitch and yaw are not
+  independent on screen. The tops came down by TRANSLATION instead (dz 1.00 ->
+  0.84), which cannot rotate a projected axis.
+
+### WHAT IS STILL WRONG WITH IT - I LOOKED AT THE NEW RENDERS, AND THIS IS THE HONEST LIST
+1. **From the back the man is still mostly behind his own gear**, and this pass
+   made it slightly worse, not better: 0.3944 of him hidden by the spares before,
+   **0.4209 now**. The fan is wider and deeper than it was. That is the price of
+   the three panels reading as three panels and I paid it knowingly.
+2. **In the three-quarter view he is still a man among fences** - hurdle in
+   front, fan behind. He is now the tallest and most central thing in the frame,
+   which the lowered hurdle bought, but the enclosure is still there.
+3. **Below his chest the hurdle hides as much as it ever did** (0.5309 against
+   0.5305). Height could not move that number and nothing but moving the hurdle
+   sideways will - which pass 4 forbids, because that is what gives the side
+   view a creature.
+4. **The head now has no face at all.** The visor read is gone, and so are the
+   eyes: 156 px of glow, invisible at pair scale from the front. "Eyes deep
+   inside the weave" is honest to the intent and reads as a blank basket.
+5. **The strap does not read.** It is dark withy on dark withy behind an open
+   lattice. It did its job in the geometry and none of it on screen.
+6. **The maul is still invisible in the back view** and its haft is still lost
+   behind the lattice from the front; only the side view shows the whole tool.
+   Unchanged, and still fault 6 of the original eight.
+7. **The withy coil on the floor still reads as a dark tyre**, and **the stakes
+   still read as flat planks** - the points are gone at hero scale. Unchanged.
+8. **Everything is still one tone.** At wear 1.00 the body, the hurdle and the
+   spares sit in one narrow grey-green band. Unchanged, and still the thing I
+   would change next.
+
+### THE NUMBERS AFTER, SAME METHOD AS BEFORE
+4 meshes, **1,790 faces** (1,418 before - the meridional weave and the strap),
+span **3.07 m CORRIDOR-SAFE** against the 11.0 m three-cell clear span,
+**ratio 1.04 UNCHANGED** - so the game build's one-line `MB_FIT` entry is still
+the right number and does not need re-deriving - pair_w **4.93** (4.96 before),
+fits_frame true. Register verdict **GREEN**, asked 18 / measured 18, blank and
+border check **54 files, 0 failures**, errors [].

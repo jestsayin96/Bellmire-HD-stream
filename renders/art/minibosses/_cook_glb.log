@@ -1,0 +1,21 @@
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+16:51:47 | INFO: Starting glTF 2.0 export
+16:51:47 | INFO: Extracting primitive: cook_chibi_body
+16:51:47 | INFO: Primitives created: 1
+16:51:47 | INFO: Extracting primitive: cook_chibi_bone
+16:51:47 | INFO: Primitives created: 1
+16:51:47 | INFO: Extracting primitive: cook_chibi_dark
+16:51:47 | INFO: Primitives created: 1
+16:51:47 | INFO: Extracting primitive: cook_chibi_glow
+16:51:47 | INFO: Primitives created: 1
+16:51:47 | INFO: Finished glTF 2.0 export in 0.036682844161987305 s
+00:02.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\front.png'
+00:02.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\three_quarter.png'
+00:02.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\side.png'
+
+MINIBOSSGEN_REPORT {"ok": true, "n": 16, "errors": [], "blank": [], "spans": {"snarer": [3.25, "CORRIDOR-SAFE", 4, 1529], "drillmaster": [1.39, "CORRIDOR-SAFE", 4, 1366], "scrapwright": [2.76, "CORRIDOR-SAFE", 4, 975], "gaoler": [3.72, "CORRIDOR-SAFE", 4, 1816], "snuffer": [1.51, "CORRIDOR-SAFE", 4, 1107], "sexton": [2.14, "CORRIDOR-SAFE", 4, 1292], "porter": [3.52, "CORRIDOR-SAFE", 4, 1094], "tallyman": [1.89, "CORRIDOR-SAFE", 4, 1722], "cook": [2.39, "CORRIDOR-SAFE", 4, 1324], "sluicekeeper": [2.66, "CORRIDOR-SAFE", 4, 1166], "sower": [3.43, "CORRIDOR-SAFE", 4, 1029], "stoker": [3.0, "CORRIDOR-SAFE", 4, 864], "bellman": [2.72, "CORRIDOR-SAFE", 4, 842], "boiler": [3.65, "CORRIDOR-SAFE", 4, 1426], "tallyman_chibi": [1.72, "CORRIDOR-SAFE", 4, 1558], "cook_chibi": [2.1, "CORRIDOR-SAFE", 4, 2539]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

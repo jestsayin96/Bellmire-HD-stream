@@ -25,6 +25,9 @@ class FakeTown extends Node:
         spots.append([uid, lane, seconds, reason])
 
 var _fails := 0
+var _checks := 0
+## S12: measured 18 checks (16 at _initialize + 2 paced). Fewer is NO VERDICT, never OK.
+const MIN_CHECKS := 18
 var _n := 0
 var ev: TwitchEventSub
 var town: FakeTown
@@ -32,6 +35,7 @@ var _f := 0
 var _t0 := 0.0
 
 func _check(name: String, ok: bool) -> void:
+    _checks += 1
     print(("PASS " if ok else "FAIL ") + name)
     if not ok:
         _fails += 1
@@ -189,6 +193,13 @@ func _process(_delta: float) -> bool:
             if m == "@mossymage MossyMage carries a staff":
                 reps += 1
         _check("18 repeat inside 30 s dropped", reps == 1)
-        print("T1_TEST ", "OK" if _fails == 0 else "%d FAILED" % _fails)
-        quit(1 if _fails > 0 else 0)
+        if _fails > 0:
+            print("T1_TEST FAIL %d of %d checks" % [_fails, _checks])
+            quit(1)
+        elif _checks < MIN_CHECKS:
+            print("T1_TEST NO VERDICT: %d checks is under the floor of %d" % [_checks, MIN_CHECKS])
+            quit(2)
+        else:
+            print("T1_TEST OK %d checks" % _checks)
+            quit(0)
     return false

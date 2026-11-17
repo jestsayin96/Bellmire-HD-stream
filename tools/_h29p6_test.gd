@@ -19,6 +19,8 @@ class FakeTown extends Node3D:
 	var heroes := {}
 
 var _checks := 0
+## S12: measured 22 checks. Fewer is a FAIL by floor, never OK.
+const MIN_CHECKS := 22
 var _fails: Array = []
 
 func _ok(c: bool, what: String) -> void:
@@ -127,5 +129,7 @@ func _initialize() -> void:
 	if f:
 		f.store_string(JSON.stringify(dump))
 		f.close()
+	if _checks < MIN_CHECKS:
+		_fails.append("check floor: %d checks is under %d" % [_checks, MIN_CHECKS])
 	print("H29P6_TEST %s %d checks%s" % ["OK" if _fails.is_empty() else "FAIL", _checks, "" if _fails.is_empty() else " " + str(_fails)])
 	quit(0 if _fails.is_empty() else 1)

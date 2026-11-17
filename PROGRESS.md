@@ -7428,7 +7428,7 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - LOCK: RUN_LOCK read at 21:53 CT - last line IDLE 21:49:16 (chat bot B16, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
 
-## D-cycle D94f (ART) - DIRECTIONAL FLARE: the gloves' _G_FLARE re-tune (2026-11-17)
+## D-cycle D94f (ART) - DIRECTIONAL FLARE: the gloves' _G_FLARE re-tune (2026-11-16 CT, evening - was headed 2026-11-17, the UTC date on a CT ledger; corrected by the team lead)
 - THE ITEM: the ART row's "still open and still yours after the Snarer" - the only number that can
   move the gloves off PARTLY TOO SMALL 3/15. Same harness, same six cells, same framing, same light.
 - CHECKED FIRST, MEASURED NOT REMEMBERED: pose_at_post turns each upper arm about the armature's own
@@ -7487,3 +7487,45 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
   re-priced or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## TEAM LEAD - 2026-11-16 22:05 CT (clock read off the machine: 2026-11-16T22:00:54-06:00)
+SIX OF SIX LANES SHIPPED AND ALL SIX MERGED AND TICKED.
+- *** D96 TICKED *** (laptop adf9a94) - 14 of 14 minibosses stand up in their own bodies, rendered at
+  1080p (14 PNGs in renders/cycles/d96/), D96_FIT OK 70, MBFEED_TEST OK 80, every other gate green.
+  THE FIRST OF MR. E'S FOUR IS CLOSED. The dead-data audit agrees: minibosses 19 unreferenced -> 0.
+- *** H32 TICKED WHOLE *** (hub ddee675) - the acceptance run was the item's last gate and it held on
+  every state and against two hostile names; H13 holds (scrollHeight - innerHeight = 0 everywhere).
+  I verified the CSP and all four pass-4 icon conditions by grep and by measuring the files, not by
+  taking the claim. 463 WebP at 2,122,427 bytes; manifest source commit 7c9b90f; whitelist generated.
+- *** THE GLOVES RULING CLOSED *** (art 44ca6a5) - re-measured by the SAME method: front 3/15 -> 1/15,
+  back 3/15 -> 1/15, side TELLS APART, medians 1.08 -> 2.25 and 0.95 -> 1.99. Moved by MORE DERIVED
+  VARIATION (a mean-preserving skew on the cuff rings), not a bigger glove, which is what was asked.
+  The lane named its own cost (penetration deeper on five of six) unprompted.
+- *** REGISTER CONVERSION 12 OF 14 - THE SNARER, AND THE REGISTER CLOSES *** (art eca1c48).
+- *** C-76 TICKED *** (content 7fcabe0) - stalest live pool named, none stale, no data added to pad it.
+- *** B16 TICKED *** (chatbot 5c035d2) - six of six gates re-proved on the new main, B11_MUSTER run
+  without --quit under its own rule; and B11_SOURCE_QUEUEING FLIPPED NO -> YES, so the union-read drop
+  the lane deferred twice is UNBLOCKED. It named it for me and did not take it with the window over.
+- *** U45 TICKED *** (hud-ui 57ae3e5) - the stand-down accounting, which is the item set when dry.
+
+NOT TICKED, EACH FOR A STATED REASON: D97, D98, D99 - not started; the game build's slot went to D96,
+which is the order Mr. E set. Nothing was withheld from a lane that delivered.
+
+ONE FAULT NAMED, AND IT CROSSES TWO LANES WITHOUT BEING EITHER LANE'S FAILURE: D96 applied art's
+measured ratio to five bodies where the measurement does not describe the body on the floor -
+_fit_snuffer_register.json is ok:true with hero:{} and pairs:{} (it measured NOTHING and reported
+success), and gaoler/porter/sexton/stoker key a _chibi with no committed .glb on any branch. The game
+build loaded the BASE bodies and said so; art found the register fault itself, unprompted, in the same
+hour. Assigned to art as its next item. D96 is NOT re-opened: fourteen bodies are on the floor.
+
+TWO FUTURE STAMPS CORRECTED: art headed D94f "(2026-11-17)" and the hub headed its acceptance run
+"2026-11-17 ~03:45 UTC". Both are the UTC date on a CT ledger describing the evening of 16 Nov CT.
+
+A CORRECTION I OWE MY OWN AUDIT: a loose substring test told me bosses.json `lesser`/`uniques` and
+classes.json `healing` had become read this hour. A strict test (quoted key or dotted access) says they
+have NOT. The loose instrument was lying and the strict number is the one reported. This is the third
+time this audit's METHOD, not its subject, has been the fault - after sfx.gd's DIR constant and the
+hub's lazy-loading set as a property rather than an attribute.
+
+NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
+created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.

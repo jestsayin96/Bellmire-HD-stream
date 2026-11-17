@@ -98,6 +98,7 @@ static func equip(model_root: Node, path: String, bone := "handslot.r", slot := 
     sk.add_child(att)
     var m: Node3D = (_cache[path] as PackedScene).instantiate()
     m.scale = Vector3.ONE * scale
+    m.rotation_degrees = held_rot(path)
     att.add_child(m)
     if glow > 0.0:
         ignite(m, glow)
@@ -165,9 +166,9 @@ const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
 ## .glb accessors, axe 0.89/0.95/0.95 and hammer 0.86/0.87/0.90 long, origin in the grip.
 ## S18 (System 2, second half, part 2): dagger tiers 1-3 take the pack's dagger_*. Measured off the .glb
 ## accessors: 0.90/1.03/1.15 long, origin at the grip -> hand_scale 0.5 (0.45/0.54/0.65 m in the fist).
-## The pack's staff_* is NOT wired: rendered in a mage's hand (s18) it lies HORIZONTAL off the fist with
-## its origin mid-shaft, reading as a wand, not a staff - it needs a held rotation + a grip offset first.
-## The pack's crossbow_* is built along +Z (not +Y) and needs a held rotation - NOT wired yet.
+## S19: staff and crossbow tiers 1-3 take the pack's staff_*/crossbow_*. Neither needed the held rotation
+## S18 thought: both are built on the SAME axes as the Adventurers' staff/crossbow they replace. The S18
+## staff read as a wand because it was scaled 0.8 - see hand_scale.
 const DUN := "res://assets/gear/dungeon/"
 const KINDS := {
     "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
@@ -176,11 +177,11 @@ const KINDS := {
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
     "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
-    "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "staff":      {"family": "arcane", "noun": "staff", "kit": [DUN + "staff_common.glb", DUN + "staff_uncommon.glb", DUN + "staff_rare.glb", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     # D94b: an arcane MACE ("Parish Iron Mace") had no kind and fell back to a staff
     "sceptre":    {"family": "arcane", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
     "wand":       {"family": "arcane", "noun": "wand", "kit": [ADV + "wand.gltf", KIT + "wand_A.gltf", ADV + "wand.gltf", KIT + "wand_A.gltf", KIT + "wand_A.gltf"]},
-    "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [ADV + "crossbow_1handed.gltf", ADV + "crossbow_1handed.gltf", ADV + "crossbow_2handed.gltf", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
+    "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [DUN + "crossbow_common.glb", DUN + "crossbow_uncommon.glb", DUN + "crossbow_rare.glb", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
     "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf"]},
     # L4: the monk's open hand - a quarterstaff, or bare wrapped fists (no mesh)
     "quarterstaff": {"family": "open", "noun": "quarterstaff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
@@ -201,11 +202,31 @@ static func kind_path(kind: String, tier: int) -> String:
     var l: Array = KINDS[kind]["kit"]
     return String(l[clampi(tier - 1, 0, l.size() - 1)])
 
+## S19: a per-path HELD ROTATION. The hand slot's +Y points FORWARD out of the fist in the idle pose, so
+## a mesh built along +Y lies horizontal (s19_side, first run: the pack staff at x1.9 was a lance).
+## A staff wants its shaft UP. MEASURED, not guessed (tools/_s19_hand.gd AXIS lines, posed idle): the
+## slot's +Y is world-forward and its +X is world-DOWN (-0.99), so +90 about Z turns the mesh's +Y onto
+## the slot's -X = world UP. (A first guess, -90 about X, laid it sideways across the body.)
+static func held_rot(path: String) -> Vector3:
+    if path.begins_with(DUN + "staff_"):
+        return Vector3(0, 0, 90)
+    return Vector3.ZERO
+
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
 ## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small
 static func hand_scale(path: String) -> float:
     if path.ends_with("bow_A_withString.gltf"):
         return 0.92
+    ## S19: the S18 staff was not lying wrong, it was SMALL. The Adventurers' own staff.gltf - which reads
+    ## as a staff in every mage's hand - is built the SAME way (along +Y, origin in the shaft, -0.90..1.25,
+    ## 2.15 long); the pack staff is 0.91/1.12/1.16 long, so at 0.8 it was a 0.7-0.9 m wand. x1.9 puts it
+    ## at 1.7/2.1/2.2 m, the Adventurers' length.
+    if path.begins_with(DUN + "staff_"):
+        return 1.9
+    ## S19: the pack crossbow is built along +Z exactly like the Adventurers' crossbow_1handed (z -0.28..0.94,
+    ## held at x1.0); 0.64-0.76 deep and 0.69-1.04 wide, so it needs no held rotation - only x1.0, not 0.8.
+    if path.begins_with(DUN + "crossbow_"):
+        return 1.0
     if path.begins_with(DUN + "dagger_"):   # S18: pack daggers are 0.9-1.15 long; 0.5 puts them at a long knife
         return 0.5
     if path.begins_with(DUN):   # S16: dungeon-pack blades are ~1.3-1.9 long; 0.8 puts the common at an arming sword

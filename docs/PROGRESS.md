@@ -2125,3 +2125,51 @@ questions off s17_front.png. Systems 3/4 and Phase 2 NOT touched.
 - Lock: my 12:08:01 line declared 12:38 - over the 25-minute cap - and I restated it at 12:08:19 to 12:33
   on its own line, naming the correction. No live Twitch test. Not ticked - the team lead ticks.
 
+
+## D-cycle - S19 System 2, second half (part 3): dungeon-pack staves and crossbows; a MEASURED held rotation for the staff, 2026-11-17T13:20:00-06:00 (game build)
+TAKE THIS NEXT (11:58) gave: System 2 second half part 2 - dagger, staff, crossbow. S18 landed the
+daggers; this cycle is the staff and the crossbow S18 left. Systems 3/4 and Phase 2 NOT touched.
+- WIRED: assets/gear/dungeon/staff_{common,uncommon,rare}.glb and crossbow_{common,uncommon,rare}.glb
+  (CC0, same pack, S19 row in ASSET_SOURCES). KINDS["staff"] and KINDS["crossbow"] tiers 1-3 take them;
+  tiers 4-5 keep their kit. ALL SIX are reached by a NAMED piece (Hedge-Witch's / Ashen / Rune-Wrapped
+  Staff; Ford-Stalker's Crossbow / Guild Arbalest / Emberbolt Crossbow) - no unnamed-path fallback needed.
+- S18 WAS HALF WRONG ABOUT THE STAFF, AND I SAY SO. S18 said "horizontal off the fist, origin mid-shaft,
+  needs a held rotation". First run this hour I believed it was only SCALE (the Adventurers' staff.gltf is
+  built on the same +Y axis) and set x1.9 with no rotation. s19_side showed the staff as a 2 m LANCE
+  pointing forward - S18 was right about the rotation. Fixed with a new gear.gd held_rot(path), applied
+  in Gear.equip, and the angle was MEASURED, not guessed: _s19_hand.gd prints the held mesh's +Y in the
+  world, posed idle. A first guess (-90 about X) printed (-0.96, -0.01, -0.26) - sideways across the
+  body. The slot's +X measured world-DOWN, so +90 about Z: printed (0.0, 1.0, -0.02) on all three tiers.
+  Only DUN staff_ paths rotate; every other path returns Vector3.ZERO, so nothing already held moves
+  (S17_HEFT and S18_HEFT re-run green to prove it).
+- STAFF SCALE: hand_scale x1.9 -> 1.70 / 2.36 / 2.38 m (the pack staff is 0.91/1.12/1.16 long; at the
+  generic 0.8 it was a 0.7-0.9 m wand). Hand lands at ~40% up the shaft, a quarterstaff grip.
+- CROSSBOW: x1.0 (pack built along +Z like the Adventurers' crossbow it replaces, so no rotation).
+- LOOKED AT: s19_front (three mages, a full-height staff beside each, head above the shoulder, butt at
+  the boot), s19_side (staff upright in the fist, the crystal head at hat-brim height; rangers with the
+  crossbow at the hip, stock forward), s19_crossbow_t2_close.
+- TWO HONEST FIT NOTES, NOT FIXED THIS HOUR:
+  (1) THE CROSSBOW IS HELD ROLLED ON ITS SIDE - in s19_side the prod (the bow arms) stands VERTICAL, not
+  horizontal. It is how the Adventurers' crossbow it replaces was held too (same axes, no rotation), so
+  this is not a regression, but it is wrong. held_rot can carry a crossbow roll now; it needs one AXIS
+  run and a look. Next hour if the lead wants it.
+  (2) The staff butt reaches the boot sole; the tier-2/3 staves (2.36-2.38 m) may graze the floor in a
+  lower pose. The staff head is partly hidden by the mage's hat brim from the side.
+- tools/_s19_hand.gd (new, windowed, cloned from _s18_hand.gd): two rows x three tiers, FLOOR raised to
+  6 pieces held (fewer is FAIL), plus the AXIS probe lines.
+- Battery (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (after --import); S19_HEFT OK (8 shots,
+  0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2267 samples off the floor (home);
+  TOWNWALK in_solid=0/17864 (0.000%) raid_in_solid=0/4905 (0.000%) PASS; DELVE_TEST OK ran 9001 frames,
+  floor reached 2 (capped), 0 SCRIPT ERROR; S18_HEFT OK (5 shots, 0 failures); S17_HEFT OK (6 shots, 0
+  failures).
+- Lock: claimed 13:08:40 declaring 13:33 (25 min - inside the cap, per the lead's note). No live Twitch
+  test. Not ticked - the team lead ticks.
+- ADDENDUM 13:22 CT, AFTER THE PUSH, AND IT IS A PROCESS MISS OF MINE: I merged origin/main at 13:08 but
+  the lead's 12:58 block landed on origin/laptop, so I worked from the 11:58 row and did NOT read
+  docs/art/SYSTEM2_WEAPONS.md. Art measured: staff euler (-85.13, -90.06, 85.26) at hand_scale 1.30;
+  crossbow euler (0, 0, 90.06); shields the same rotation on handslot.l; a greataxe path off axeDouble_*.
+  WHAT THAT MEANS FOR S19: the crossbow roll I named in fit note (1) is exactly art's (0,0,90) - not yet
+  applied. My staff is (0,0,90) at x1.9 and printed upright (0.0, 1.0, -0.02); art's euler is a different
+  rotation and a shorter staff. Next hour: put art's numbers into held_rot (crossbow + shield), compare
+  the two staff answers on one picture and keep the better, then the greataxe. Merged 12:58 plan is on
+  my branch now.

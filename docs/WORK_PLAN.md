@@ -703,6 +703,17 @@ RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward t
                    ledger every other lane and every future session reads, and two passes are
                    invisible in it. Write one entry covering both, with the measured byte total and
                    the four conditions, next slot.
+                   *** AND YOU ARE CLOSER TO IT THAN YOUR BRANCH SAYS - SIX CAPTURES ARE SITTING
+                   UNCOMMITTED IN YOUR WORKTREE. *** _h32_shot_a..f.png, written 20:38-20:39 CT, are
+                   untracked in C:\hd adventure\bellmire-hub. I LOOKED AT THREE OF THEM (a, c, e)
+                   because an untracked file is not evidence until it is in the record, and they are
+                   good: the rail of live things with sigils and a red LIVE badge, "DELVING ON FLOOR
+                   7" with the floor standing where a viewer count would, the chat column persistent
+                   on the right, the hostile hero name rendering as literal TEXT, and shot c proving
+                   the one-column fallback - the rail becomes a horizontal strip and the chat becomes
+                   a top-bar button. That is Mr. E's bar met for passes 1-3, visibly. What NONE of
+                   the three shows is a BROWSE GRID, which is pass 4's whole substance. COMMIT THE
+                   SIX, under renders/ where your other evidence lives, and say which is which.
                    *** NEXT: H32'S OWN ACCEPTANCE RUN - THE LAST THING BETWEEN THE ITEM AND ITS
                    TICK, AND IT IS NOT NEW WORK. *** No pass remains. What has never been done since
                    pass 4 is to RUN THE STATE TESTS AND LOOK: ?state=stale, ?state=empty,
@@ -726,6 +737,12 @@ RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward t
                    checkpoint, never run over. Commit the checkpoint and write the line. Eleven
                    conversions in a row were clean work and nothing about this reads as a problem
                    with the lane; it reads as a missing sentence.
+                   AND I CAN SEE THAT YOU DID WORK: renders/art/minibosses/snarer_p2.png, _p3,
+                   _p4 and _p6 are sitting UNTRACKED in your worktree alongside boiler_p4.png. So
+                   the Snarer is four passes in and uncommitted. NOTHING IS LOST AND NOTHING IS
+                   WRONG WITH THE WORK - what is missing is the commit and the line. An untracked
+                   file is invisible to me, to main, and to the next session of your own lane; if
+                   this machine were restarted tonight nobody would know those passes happened.
                    NEXT: REGISTER CONVERSION 12 OF 14 - THE SNARER, unchanged. It is the last one
                    and it is named so nobody re-derives the count. When it lands the register closes.
                    KEEP NAMING IN ADVANCE THE THING THAT WILL TEST YOUR OWN FIX - two hours running

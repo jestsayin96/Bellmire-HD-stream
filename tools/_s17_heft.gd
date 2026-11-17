@@ -97,8 +97,8 @@ func _swords() -> void:
             var nm := "s17_%s_t%d_close" % [row[0], t]
             _held[nm] = held
             _shots.append([nm, Vector3(x, 1.2, -1.6), Vector3(x, 0.9, 0)])
-    _shots.push_front(["s17_side", Vector3(6.0, 1.3, 0), Vector3(0, 1.0, 0)])
-    _shots.push_front(["s17_front", Vector3(0, 1.6, -7.0), Vector3(0, 1.0, 0)])
+    _shots.push_front(["s17_side", Vector3(9.0, 1.4, 0), Vector3(0, 1.0, 0)])
+    _shots.push_front(["s17_front", Vector3(0.45, 1.5, -10.0), Vector3(0.45, 1.0, 0)])
 
 func _adv(f: String) -> String:
     return "" if f == "" else (f if f.begins_with("res://") else Gear.ADV + f)

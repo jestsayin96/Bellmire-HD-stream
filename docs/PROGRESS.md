@@ -2054,3 +2054,25 @@ S16 did the first half; this is the second half's first part - two more families
 - NEXT (System 2, rest): dagger (pack daggers are 0.9-1.15 m - want their own hand_scale, ~0.5),
   staff (1.1-1.2 m, origin mid-shaft), crossbow (built along +Z, not +Y - needs a held rotation), and
   whether tint_piece should spare blade/head. No live Twitch test. Not ticked - the team lead ticks.
+- ADDENDUM 11:25 CT, after the 10:58 plan landed mid-run (merged at push): its game-build row is this
+  same work, plus two things owed, BOTH DONE IN A DECLARED RELAUNCH:
+  (1) THE REFRAME. s16_front now (0,1.4,-8.0), side (7.5,1.3,0); s17 front/side widened the same way.
+  All three knights are in frame. THE THIRD SWORD IS NOT MISSING: Ford Cutlass is held (S16_SWORD's
+  held-node and mesh checks pass for tier 1, sword_common.glb, 1.02 m) but in the idle pose its blade
+  points AWAY from the camera, so from the front only the guard at the fist shows. Named, not framed
+  round: a front-on camera cannot show it; s16_side and s16_t1_close do.
+  (2) THE TINT DECISION - MINE, TAKEN: tint_piece NOW SPARES THE EDGE. gear.gd EDGE_MATS = Metal,
+  Stone, StoneDark, White - the dungeon pack's blade/head materials by name; their albedo is left
+  alone, every other surface (haft, grip, guard, trim) still takes the material word's tint, and the
+  GLOW still reaches the edge. WHY: the tint carries the piece's material ("bell" bronze, "ember",
+  "ash"...) and that reads better on the furniture than as a wash - a whole-mesh lerp turned
+  Bellwright's Falchion into a wooden practice sword. Looked at after: the Falchion's blade is steel
+  with a bronze guard; Emberline's blade is pale with the ember glow and an orange guard; Emberhaft's
+  axe edge is pale on an orange haft. KNOWN LIMIT: the atlas-textured kits (KayKit adventurers/
+  weapons/skeletons) have one material, match none of the names, and keep the old whole-mesh wash;
+  hammer_rare's head is "Gold" so it still takes the tint (a gold head reading ember-orange is fine).
+  hero_body.gd:32 is tint_piece's only caller, so nothing but held weapons changes.
+  Battery after the change (verdict lines): parse 0 errors; S16_SWORD OK (5 shots, 0 failures);
+  S17_HEFT OK (6 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1876 samples
+  off the floor (home); TOWNWALK in_solid=0/17320 (0.000%) raid_in_solid=0/7618 (0.000%) PASS;
+  DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.

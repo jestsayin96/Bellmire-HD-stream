@@ -1743,6 +1743,10 @@ static func deco_piece(n: Node3D, look: Dictionary) -> void:
             col.name = "d94_collar"
 
 ## tint an instanced weapon's materials toward its piece's stuff, and give it the piece's glow
+## S17: material names (KayKit dungeon pack) that are the cutting edge or striking head of a weapon;
+## tint_piece leaves their albedo alone (the glow still reaches them). Atlas-textured kits match none.
+const EDGE_MATS := ["Metal", "Stone", "StoneDark", "White"]
+
 static func tint_piece(n: Node, look: Dictionary) -> void:
     if n == null:
         return
@@ -1760,7 +1764,10 @@ static func tint_piece(n: Node, look: Dictionary) -> void:
                 var src: Material = mi.get_active_material(i)
                 if src is StandardMaterial3D:
                     var d: StandardMaterial3D = src.duplicate()
-                    d.albedo_color = d.albedo_color.lerp(tint, amt)
+                    # S17: the EDGE keeps its own colour - the material word tints the haft, grip and
+                    # trim, not the blade or the head (a whole-mesh wash made a falchion read as wood)
+                    if not EDGE_MATS.has(String(src.resource_name)):
+                        d.albedo_color = d.albedo_color.lerp(tint, amt)
                     if gc.a > 0.0:
                         d.emission_enabled = true
                         d.emission = gc

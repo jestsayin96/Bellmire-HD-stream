@@ -8986,3 +8986,6 @@ is mid-Phase-2 and a dry lane should not be sitting on a lock to re-prove unchan
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward created or re-priced, no channel setting touched.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## H32 hub standing check (2026-11-17 13:40 CT) - nothing new to build
+Merged origin/hub (308b4c4) and origin/main (42182c2) clean; web/ and docs/HUB_SECURITY.md byte-unchanged (git diff empty vs 991c3d5). Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap, 520 thumbnails; source assets/icons/items last changed 4ab066d (01:02 CT), no drift. No new screenshot (web/ unchanged). Open for supervisor, not mine: U55 option (a) - hub drawing the rarity hue from art's RARITY_HUE table - awaits Mr. E's pick. Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked, named here: delete refused on this machine. Not published by me.

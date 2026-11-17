@@ -8705,3 +8705,44 @@ last entry: it was headed 09:10 when the machine said 08:59. A future stamp, nam
 - GAME BUILD, NOT MINE, AND UNCHANGED BY THIS PASS: `scripts/delve.gd` MB_FIT `"hurdleman": 1.04`
   is still the right number - the ratio did not move - plus one import run for the `.glb.import`
   sibling. I touched no `.gd` outside tools/art/.
+## B-cycle B27 - STAND-DOWN HELD; SIX FOR SIX RE-PROVED ON MAIN 416c35d (chat bot, 2026-11-17 09:45-09:52 CT)
+THE 08:58 ROW SAYS STAND DOWN, NOTHING NEW IS ASSIGNED, with ONE named exception: "re-prove only if
+main moves materially again". IT DID, so this is that re-prove and nothing else. Nothing was invented,
+no other lane's gate was touched, no Phase 2 system was taken.
+
+WHAT MOVED, MEASURED BEFORE DECIDING rather than assumed: b4b6a7f (B26's base) -> origin/main 416c35d,
+20 commits. Against my three files' blast radius the diff is small and I say so plainly:
+  scripts/delve.gd         1 line  (in the parse set, so the parse gate is the honest reason to re-run)
+  data/lore_lines.json   +115 lines (content's file; the Chronicle reads it)
+  tools/art/minibosses.py  new     (art's tool, no bearing here)
+plus the Hurdleman body and its renders. That is "material" on the narrowest reading - one engine
+script - and that is the reading I used.
+
+MACHINE CLOCK READ FIRST: 09:46:33 CT, then 09:47:14 at the moment the claim line was written - no
+future stamp. Lock last line IDLE 2026-11-17T09:19:35-06:00 (game build S15). NO GODOT PROCESS ALIVE,
+checked by tasklist twice, not by the file. Claimed 09:47:14, named a 09:56 finish, started NOTHING
+after the battery. Every launch redirected stdout to a FILE (B25's house rule); no unread pipe.
+
+SIX FOR SIX, ONE BATTERY, UNDER 50 SECONDS WALL CLOCK, every exit code rc=0:
+  parse 300 frames  - 0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA (the B18/B23 loader guards stay
+                      silent on healthy data, as they must), and the join line is present
+  L14_TEST OK 22    - drift clean both directions
+  TWITCH_PARSE OK   - 8 checks
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+
+THE THREE FILES THIS LANE OWNS ARE UNCHANGED, SAID BY HASH AND BY git status, not by assertion:
+  data/commands.json  f37b1d2c6909  (14753 bytes) - same as B26 and as the supervisor's own reading
+  docs/COMMANDS.md    1fb9a166c3bf  (5771 bytes)  - unchanged by the REAL generator, not an emulation
+  scripts/chatcmd.gd  unchanged     (git status clean for all three after the generator ran)
+
+NAMED AGAIN FOR THE GAME BUILD LANE, NOT TAKEN AND NOT MINE: a plain parse run still brings up the
+real EventSub client - the tail reads "TWITCH joined #jestsayin96" and "TWITCH_EVENTSUB subscribed
+7 of 7". Any lane's parse gate therefore opens a live socket as bellmirebro. twitch_eventsub.gd is
+the GAME BUILD's file. Second cycle this has been named; it is their line to draw, not mine.
+NOT TAKEN, NINTH CYCLE RUNNING: `twitch_cooldown_s` is the game build's one line.
+NOT CHASED: the unread-pipe hang. The row said leave it; the condition is proved and that is enough.
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone. Logs (_b27logs) deleted. Godot closed.
+NEEDED FROM MR. E: nothing.

@@ -2357,3 +2357,20 @@ S21), and MB_FIT "reeve": 0.80. Systems 3/4 and Phase 2 NOT touched.
   (15:52:10 against a 15:48:50 clock), noticed it in the same call that wrote it, and rewrote the line with
   the clock read inside the writing call. That is the B32 fault and it did not leave the file.
 - No live Twitch test. Nothing owed by the GAME BUILD lane. Not ticked - the supervisor ticks.
+
+## D-cycle - S23 no new row: the 15:58 GAME BUILD row is fully delivered (S22 + S22b) and the lead's 16:58 block has not landed; merged main and re-proved the gates. 2026-11-17T17:16:23-06:00 (game build)
+- TAKE THIS NEXT is still the 15:58 block (origin/main 207f563, 16:08). Its three asks are all answered on laptop already:
+  the shield picture (S22, fddf7dc - both read edge-on, S20 no-rotation stands), the staff multiplier sweep (S22b,
+  7f19c09 - largest clearing x0.90 reads as a wand, so by the lead's own clause the answer is pose-aware), and MB_FIT
+  reeve 0.80 (S22). No 16:58 row exists to take. I did NOT start the pose-aware staff on my own reading - it adds a
+  pose-indexed branch to the slot every weapon uses, the lead disfavoured exactly that, and it is his call with the
+  S22b numbers in hand. Systems 3/4 and Phase 2 NOT touched. gear.gd and every script UNCHANGED this firing.
+- Merge: origin/main into laptop conflicted in docs/PROGRESS.md only (both sides appended a cycle block at the same
+  place); resolved by keeping both blocks whole, no line dropped (7ef0bb6).
+- Battery on the MERGED tree (build/s23_battery.log, not staged): parse rc=0 with 0 SCRIPT ERROR / 0 Parse Error in the
+  whole log; OFFFLOOR_VERDICT OK 0 of 1946 samples off the floor (home); TWITCH_PARSE OK (8 checks); TOWNWALK
+  in_solid=0/16687 (0.000%) raid_in_solid=0/7329 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped).
+- Left alone, not mine to stage: tracked renders under renders/cycles/d96, h29p6, s17-s20 show modified in the worktree
+  and ~hundreds of untracked web/icons/**/*.webp.import files (Godot import side-files for the hub's icons). Named so
+  the lead can decide whether the .import files belong in .gitignore.
+- Lock: claimed 17:08:40, declared finish 17:35, released at this stamp. No live Twitch test. Not ticked.

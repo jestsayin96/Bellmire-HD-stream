@@ -215,3 +215,9 @@ RUNNING 2026-11-16T21:12:30-06:00 (game build D96 relaunch: parse + D96_FIT wind
 RUNNING 2026-11-16T21:16:41-06:00 (game build D96 relaunch 2: parse + D96_FIT windowed + MBFEED, expected finish 21:24)
 RUNNING 2026-11-16T21:20:25-06:00 (game build D96 gates: D96_FIT + offfloor + twitch_parse + townwalk + delve_test, expected finish 21:29)
 IDLE 2026-11-16T21:25:59-06:00 - game build D96 (14 minibosses stand up in their own bodies at art's measured ratio, renders/cycles/d96): parse 0 errors, D96_FIT OK 70, MBFEED_TEST OK 80, TWITCH_PARSE OK, OFFFLOOR 0/2096, TOWNWALK PASS, _delve_test 0 SCRIPT ERROR. Godot closed (game build)
+
+RUNNING 2026-11-16T21:47:24-06:00 (chat bot B16 re-prove battery on new main 831ad36: parse + L14 drift + TWITCH_PARSE + D704_ECHO + B11_MUSTER + commands doc no-op - ONE battery, nothing queued after it; expected finish 21:54)
+IDLE 2026-11-16T21:49:16-06:00 - B16 stand-down: six of six re-proved on the new main 831ad36 (parse 0 errors, L14_TEST OK, TWITCH_PARSE OK, D704_ECHO OK 356, B11_MUSTER OK bad=0 without --quit, COMMANDS_DOC 27 doc byte-identical). B11_SOURCE_QUEUEING FLIPPED NO->YES: D41 source-queueing is on main, so the deferred union-read DROP is now unblocked - named for the team lead, not taken, window over. Godot closed (chat bot)
+RUNNING 2026-11-16T22:07:59-06:00 (game build D97 boss uniques, expected finish 22:36)
+RUNNING 2026-11-16T22:12:32-06:00 (game build D97 relaunch: D97_LORDS windowed + offfloor + twitch_parse + townwalk + delve_test, expected finish 22:26)
+IDLE 2026-11-16T22:18:13-06:00 - game build D97 (8 lords in their own bodies at art's height, lesser/greater stats read, 40 shape lines answered): parse 0 errors, D97_LORDS OK 139, OFFFLOOR 0/2144, TWITCH_PARSE OK, TOWNWALK PASS, _delve_test 0 SCRIPT ERROR. Godot closed (game build)

@@ -6552,3 +6552,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - NEEDED FROM THE SUPERVISOR: either re-route the L31 remainder to its owner (game build) as a new item, or name a HUD item inside hud_dock/spotlight/auto_director/dice/feed_hud/leaderboard_panel/ui_theme. L73 and L74 are ticked, so my queue is empty otherwise.
 - LOCK: RUN_LOCK read at 17:52 CT, last line a chat bot NOTE, no Godot alive (tasklist). I took no lock and launched no Godot this slot. Released nothing because nothing was held.
 - LOOKED: nothing rendered this slot; no code changed.
+
+## U42 - STOOD DOWN, QUEUE EMPTY (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's TAKE THIS NEXT row for HUD (WORK_PLAN ~line 623): "YOUR QUEUE IS GENUINELY EMPTY AND YOU STAND DOWN" - L73 and L74 ticked, U40/U41 in, L31 remainder belongs to the game build. Freeze in force: a dry lane does not invent work.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, so none was looked for or fixed.
+- LOCK: RUN_LOCK read at 18:53 CT - last line IDLE 18:48 (chat bot B13/B12 battery, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

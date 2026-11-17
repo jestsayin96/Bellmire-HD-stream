@@ -8818,3 +8818,53 @@ LOOKED, BY READING (data/items.json equipment.weapons 86 + armour 33, every row 
 THE GAP, NAMED: leaderboard_panel.gd _piece (line 193) paints the name in INK whatever the piece's rarity, and ui_theme.gd carries NO rarity-hue token (grep of all seven files for "rarity": zero hits). System 1's hue ladder exists on the icons (art) but nothing in the interface reads it. To show a rarity hue the HUD needs (a) five tokens in ui_theme.gd for common..legendary, legible on parchment AND dark, and (b) the piece's rarity handed to _piece - from Gear.weapon_piece(id)["rarity"] for weapons and the armour equivalent. Nothing else of mine breaks; hud_dock/feed_hud/spotlight/dice/auto_director read no item names.
 NEEDED FROM THE SUPERVISOR/TEAM LEAD: say whether the hue ladder (colours) is art's System 1 table or mine to choose - I will not invent a palette that disagrees with the icons. Then it is a one-hour HUD item with a windowed 100/125/150% render.
 Lock untouched, no Godot, none of my seven files edited. NEEDED FROM MR. E: nothing.
+## B-cycle B28 - THE twitch_cooldown_s FINDING IS ALREADY CLOSED, AND NOT BY ME; SIX FOR SIX ON MAIN 60fbbdf (chat bot, 2026-11-17 10:46-10:52 CT)
+TAKE THIS NEXT (09:58 block), CHAT BOT row: stand down, re-prove only if main moves materially, do
+not chase the B25 hang, do not take another lane's gate - and ONE offered item: "`twitch_cooldown_s`
+is in data and live, but twitch_chat.gd still enforces a hard-coded COOLDOWN_MS. Close it or write
+down why it should stay hard-coded."
+MAIN MOVED 416c35d -> 60fbbdf, so the re-prove was earned, not invented. chatbot fast-forwarded onto
+it; no conflict, no cycle renumbered.
+
+*** THE OFFERED ITEM IS A STALE FINDING. I MEASURED IT BEFORE WORKING ON IT AND THERE IS NOTHING
+*** LEFT TO CLOSE. The audit has carried it for days; the code moved underneath the audit.
+  scripts/twitch_chat.gd:9   const COOLDOWN_MS := 3000   # fallback only - D99: data/commands.json twitch_cooldown_s wins
+  scripts/twitch_chat.gd:10  var _cooldown_ms: int = int(round(float(ChatCmd.commands().get("twitch_cooldown_s", COOLDOWN_MS / 1000.0)) * 1000.0))
+  scripts/twitch_chat.gd:123 if _last.has(uid) and now - int(_last[uid]) < _cooldown_ms:
+  data/commands.json:5       "twitch_cooldown_s": 3.0
+The enforced number is the published one. COOLDOWN_MS is reached only when the key is absent. The
+game build closed this at D99 ("twitch_cooldown_s read", named in its own 09:08 lock line). The row
+credited the defect to me and the file is not mine - saying so is the delivery, not a complaint.
+
+TWO RESIDUALS, NAMED AND NOT TAKEN.
+  1. FOR THE GAME BUILD, THEIR FILE: `_cooldown_ms` is a MEMBER INITIALIZER - it reads commands()
+     ONCE, at node construction, before setup(). ChatCmd.cooldown() (chatcmd.gd:799) re-reads the
+     data on EVERY call. So after B18's loud loader reloads the file, the local chat box honours a
+     changed cooldown and live Twitch chat does not, until the scene is rebuilt. One line in their
+     file turns the initializer into a read at use. Not mine, not taken.
+  2. MINE, AND IT IS A HOLE IN MY OWN GUARD COVERAGE, NOT A BUG: no gate of mine asserts that
+     `twitch_cooldown_s` EXISTS in data/commands.json. B23 put five COMMANDS_DATA guards one level
+     below ask/foreign/order, but a key that only ANOTHER lane's script reads has no drift guard
+     either direction - delete it and twitch_chat.gd falls silently back to 3000 ms with every gate
+     still green. That is exactly the drift L14 was built to refuse, one file over. I did NOT add
+     the guard this hour: the battery was already in flight and the freeze forbids inventing work.
+     IT IS A ONE-GATE ITEM IN MY OWN FILES AND I WILL TAKE IT THE MOMENT A ROW SAYS SO.
+
+THE BATTERY - ONE RUN, SIX GATES IN PARALLEL, ALL STDOUT REDIRECTED TO FILES, NOTHING QUEUED AFTER IT.
+  parse 300 frames  - rc 0, 0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA lines
+  L14_TEST OK       - 22 checks, 64 verbs, missing [], unanswered []
+  TWITCH_PARSE OK   - 8 checks (PASS 5 is the cooldown path itself)
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL (md5 unchanged
+                      across the run: fc67173cfaa05ab7b522ef7305531f23)
+data/commands.json md5 68b9b33a709022a135d0c6c03916091f, unchanged across the run; chatcmd.gd
+unchanged; git status clean for all three before the PROGRESS write.
+
+NAMED AGAIN FOR THE GAME BUILD, TENTH CYCLE: a plain parse run still brings up the real EventSub
+client - this run's parse log ends "TWITCH joined #jestsayin96" and "TWITCH_EVENTSUB subscribed 7 of
+7". Every lane's parse gate opens a live socket as bellmirebro. twitch_eventsub.gd is theirs.
+NOT CHASED: the B25 unread-pipe hang. The row said leave it.
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward or channel setting touched. Logs (_b28) deleted. Godot closed.
+NEEDED FROM MR. E: nothing.

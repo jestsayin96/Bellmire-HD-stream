@@ -1904,3 +1904,40 @@ waits on that tick, so this hour took only what the ruling allows at any time: g
   is only earnable by starting ON a lord floor, not by a longer cap. Also `floors_visited` in the
   per-run line is cumulative across runs (cosmetic, left as is).
 - System 10 (row 2) NOT STARTED this hour - out of window. See the static-vs-animated finding above.
+
+## D-cycle - S10 System 10's game-build half: the twelve creatures stand up in their own bodies, 2026-11-17T04:16:30-06:00 (game build)
+- From the 02:58 TAKE THIS NEXT, game build row 2 (row 1, the L56 cap, was closed at D100 part 2).
+- scripts/bestiary.gd: `CREATURE_DIR` + `Bestiary.own_body(k, d)`, applied in def_of() to every
+  NEW_TYPES key. When assets/monsters/creatures/<key>.glb exists the def takes that `path`, keeps the
+  old one as `shared_path`, clears `anims` (static - no armature), `hand` and `off` (the body carries
+  its own bow, shield, blades) and drops its own tint/glow (art painted it; a non-plain strain still
+  tints it, make() decides). A missing file keeps the shared animated mesh - no silent break.
+  This closes the last dead asset directory in the tree: assets/monsters/creatures is now read.
+- ART'S WARNING, ANSWERED IN CODE RATHER THAN BY DROPPING IT: the twelve are static, so swapping them
+  in would have made twelve common creatures slide as statues. scripts/monster.gd now gives ANY
+  unrigged body (these twelve, and the D96 minibosses and D97 lords, which glided until now) a
+  procedural step while walking (a small hop scaled to its height, measured once, and a side rock),
+  a lunge on attack/cast (rears back, drives at the mark, springs home; holds busy 0.45 s), and a
+  keel-over onto its side on death before the existing sink. Rigged bodies are untouched (_ap != null).
+- New gate tools/_s10_fit.gd (windowed, quits itself). VERDICT: S10_FIT OK 50 checks - all twelve
+  spawn through Bestiary.make() on their own .glb, no clip names, no props, unrigged, height equals
+  bestiary h to the centimetre at scale 1.000 (matches art's register), the sentinel's swing lunges,
+  the walking bowman steps.
+- LOOKED AT: renders/cycles/s10/lineup.png - all twelve beside the posed knight. Faults I can see,
+  all ART-side and already in art's own list: sentinel reads as a door from the front; gravecaller
+  carries four headstones on the ground that will travel with it; bowman is frozen in a T-pose. Plus
+  one of mine: the gate's spacing lets the hewer/bowman/cutthroat labels overlap - a shot fault only.
+  Whether those three should stay on their shared rigged mesh instead is art's option 1 - not mine
+  to decide, flagged for the lead.
+- Battery (renders/cycles/s10/): --import rc 0; parse 0 SCRIPT ERROR / 0 Parse Error;
+  OFFFLOOR 0 of 2135 samples, MON_INPROP 0 of 279; TWITCH_PARSE OK; TOWNWALK in_solid=0/18425
+  raid_in_solid=0/6312 PASS; _delve_test 0 SCRIPT ERROR.
+- No live Twitch test this cycle. Not ticked - the team lead ticks.
+- S10 part 2, 2026-11-17T04:17:29-06:00: the 03:58 row's two small gate items, both in this lane's own touch.
+  (a) tools/_l56_test.gd: a capped run's per-check line now reads UNMET, and the tally reads
+      `CHECKS n UNMET k`, so a grep for FAIL finds nothing in a capped run; an uncapped run still
+      prints FAIL. --check-only rc 0, no error. Not re-run as a soak this hour (2-min x 4 runs).
+  (b) tools/_commands_doc.gd: TAKEN - it is the file I touched at D99. A present-but-short or
+      unknown-keyed `order` now prints COMMANDS_DOC FAIL and leaves docs/COMMANDS.md untouched; the
+      OK count is the rows actually written. Run: COMMANDS_DOC OK wrote 27 commands, docs/COMMANDS.md
+      byte-identical (git diff empty).

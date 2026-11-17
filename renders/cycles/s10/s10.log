@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+  ok   sentinel: own body path (sentinel.glb)
+  ok   sentinel: no clip names, no props
+  ok   hewer: own body path (hewer.glb)
+  ok   hewer: no clip names, no props
+  ok   bowman: own body path (bowman.glb)
+  ok   bowman: no clip names, no props
+  ok   cutthroat: own body path (cutthroat.glb)
+  ok   cutthroat: no clip names, no props
+  ok   gravecaller: own body path (gravecaller.glb)
+  ok   gravecaller: no clip names, no props
+  ok   silkmother: own body path (silkmother.glb)
+  ok   silkmother: no clip names, no props
+  ok   spiderling: own body path (spiderling.glb)
+  ok   spiderling: no clip names, no props
+  ok   scarrat: own body path (scarrat.glb)
+  ok   scarrat: no clip names, no props
+  ok   lurker: own body path (lurker.glb)
+  ok   lurker: no clip names, no props
+  ok   pitwyrm: own body path (pitwyrm.glb)
+  ok   pitwyrm: no clip names, no props
+  ok   gloombat: own body path (gloombat.glb)
+  ok   gloombat: no clip names, no props
+  ok   slimeling: own body path (slimeling.glb)
+  ok   slimeling: no clip names, no props
+  ok   sentinel: static body loaded, unrigged
+  ok   sentinel: stands 1.90m vs bestiary h 1.90, scale 1.000
+  ok   hewer: static body loaded, unrigged
+  ok   hewer: stands 1.85m vs bestiary h 1.85, scale 1.000
+  ok   bowman: static body loaded, unrigged
+  ok   bowman: stands 1.60m vs bestiary h 1.60, scale 1.000
+  ok   cutthroat: static body loaded, unrigged
+  ok   cutthroat: stands 1.60m vs bestiary h 1.60, scale 1.000
+  ok   gravecaller: static body loaded, unrigged
+  ok   gravecaller: stands 1.85m vs bestiary h 1.85, scale 1.000
+  ok   silkmother: static body loaded, unrigged
+  ok   silkmother: stands 1.30m vs bestiary h 1.30, scale 1.000
+  ok   spiderling: static body loaded, unrigged
+  ok   spiderling: stands 0.35m vs bestiary h 0.35, scale 1.000
+  ok   scarrat: static body loaded, unrigged
+  ok   scarrat: stands 0.80m vs bestiary h 0.80, scale 1.000
+  ok   lurker: static body loaded, unrigged
+  ok   lurker: stands 1.50m vs bestiary h 1.50, scale 1.000
+  ok   pitwyrm: static body loaded, unrigged
+  ok   pitwyrm: stands 4.00m vs bestiary h 4.00, scale 1.000
+  ok   gloombat: static body loaded, unrigged
+  ok   gloombat: stands 1.20m vs bestiary h 1.20, scale 1.000
+  ok   slimeling: static body loaded, unrigged
+  ok   slimeling: stands 0.50m vs bestiary h 0.50, scale 1.000
+  ok   sentinel: an unrigged swing lunges (lunges=1)
+  ok   bowman: walking body steps (rot.z -0.063, y 0.058)
+S10_FIT OK 50 checks, 12 creatures in their own bodies

@@ -8561,3 +8561,8 @@ NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 r
 - data/lore_lines.json `barks`: +56 lines (case-insensitive duplicates dropped). enter 208, lord 201, trap 203, hurt 198, drink 194, misfire 198. Plain register, no floor counts.
 - VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; existing by_key rows unchanged; all bark entries strings. Raw diff deletions are trailing-comma lines only.
 - CODE WIRING: none for barks. For the new feed keys the reader (delve.gd miniboss_lines) already takes any key; the code lane should fire _miniboss_say("quartermaster"/"loader", "arrive"/"fall") when it adds them to the spawn table alongside MB_FIT (loader 1.08 still owed there). No new .gd touched.
+## H32 hub standing check (2026-11-17 08:40 CT) - nothing new to build
+Fast-forwarded to origin/hub (3cab4ea), merged origin/main clean (688f44f); the merge touched no web/ file. Passes 1-5 in, H32 ticked WHOLE; queue empty. No new screenshot (web/ byte-identical to the looked-at 02:00 build).
+MEASURED: 520 thumbnails, web/icons 2,434,146 bytes on disk vs 6 MB cap; assets/icons/items unchanged since manifest source commit 2473836, no re-derive owed.
+SECURITY BY GREP: node --check OK; innerHTML only app.js:252 and :298 (page-owned); the one outerHTML/eval-pattern hit is a comment; CSP meta unchanged. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left untracked and named here; delete refused on this machine. Not published.

@@ -1289,6 +1289,19 @@ click, and the PLAN is what the lanes actually read, so nothing is blocked.
      answer, and only if it LANDS is it worth composing the full replacement.
      THIS DOES NOT RELAX THE STANDING ORDER - still attempt it every run, still never report it
      as a law of the machine, because the 11:38 write landed the moment there was a live turn.
+  H. *** CORRECTION TO G, AND TO A BELIEF IN THE :58 PROMPT ITSELF, MEASURED AT 15:48 CT IN A
+     LIVE TURN. A LIVE TURN IS NOT ENOUGH. *** The prompt says the 11:38 write "landed the moment
+     there WAS a live turn". I tested that directly: Mr. E answered the U55 question at 15:47, so
+     there WAS a live turn, and I probed with the most harmless call available - update_trigger
+     with `enabled: true` on a trigger that is already enabled, a no-op in effect. STILL REFUSED,
+     [Cowork Scheduled Task Write].
+     SO THE REAL CONDITION IS NARROWER THAN THE PROMPT STATES. What landed at 11:38 was not a
+     live turn by itself - it was Mr. E explicitly saying "Just rety now", i.e. the turn ASKING
+     for the write is what carries the approval. A live turn about something else does not.
+     WHAT THAT MEANS FOR THE NEXT SEAT, PRACTICALLY: do not hold a correction back waiting for a
+     live turn, and do not compose the full replacement text on the strength of one. Put the
+     correction in THIS FILE, which is what the lanes actually read, and attempt the write with
+     the one-field probe. The only thing that changes the answer is Mr. E asking for it.
 ================================================================================
 
 

@@ -3087,3 +3087,223 @@ def sluicekeeper_chibi():
 
 
 BUILDERS.update({"sluicekeeper_chibi": sluicekeeper_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 10 OF 14 - THE SOWER, 17 Nov
+#
+# Same read, same props, same idea, rebuilt in the game's own register; see
+# the block above drillmaster_chibi for the measured Knight proportions and
+# the one above snuffer_chibi for the rule that register is MASS AND COUNT,
+# not man-proportions.
+#
+# THE VALUE PLAN, MEASURED FIRST - AND THIS IS THE WEAKEST PAIR IN THE FILE.
+# At tint (0.72, 0.68, 0.44) and wear 0.40 the generator's `body` lands at
+# luminance 0.498 and its `bone` at 0.549: a 10% separation, against the
+# Sluicekeeper's 14% and the Cook's 19%. So bone-against-body carries NOTHING
+# here. The pairs that are strong are dark (0.092) against either of them, and
+# glow against all three. Hence:
+#   the man is `body`, every break on him is `dark`,
+#   the hat is the ONE `bone` object, and it only ever reads against the black
+#       above his shoulders, never against his own body - with a `dark` band at
+#       the join doing the work where the two do touch,
+#   the shoots are `dark` stems, and
+#   the SEED IS THE ONLY `glow` ON THE CREATURE - in the hopper's mouth, in the
+#       air out of his hand, and again as the thorn standing up out of the
+#       floor. One lit material, told three times, is the whole mechanic:
+#       WHAT HE THROWS IS WHAT COMES UP.
+#
+# THAT CLOSES THE ORIGINAL'S FIRST TWO FAULTS BY CONSTRUCTION. The old shoots
+# were `bone` - "the same pale wood colour as his hat, and they read as loose
+# sticks rather than something that grew" - and the old cast was four 0.042
+# spheres that vanish at cell size. Dark stems with lit thorns cannot be
+# confused with the hat, and the seeds are now 0.095 - 4% of his height.
+#
+# AND THE THIRD FAULT IS WHY THE HAT IS NOT A CONE. "His wide hat is the
+# second wide cone in the file after the Snuffer's." A cone is a cone from
+# every azimuth, so posture cannot separate two of them. This hat is a FLAT
+# BRIM with a LOW CROWN: at the file's 6 degrees of elevation a flat disc is a
+# LINE (the Snuffer's and the Cook's lesson), and that is exactly what is
+# wanted here - the Snuffer reads as a triangle on a stalk and the Sower as a
+# horizontal bar on a head, which is the one silhouette a straw hat makes.
+# The brim is also the topmost thing at its own radius, so the line is never
+# crossed by anything, and NOTHING ROUND SITS ON SOMETHING ROUND: the crown is
+# a shallow dome NARROWER than the skull (0.255 against 0.300) set into it,
+# with the dark band at the join - the Sexton's saucer, the Snuffer's
+# lampshade, the Tallyman's martini glass and the Cook's cap, paid for once.
+#
+# THE CARRIED LEG FAULT, AND THIS IS THE CREATURE IT SHOWS ON. The Sexton's
+# fault 9, the Porter's 12, the Tallyman's 10 and the Cook's 6 - "the legs read
+# as two dark blocks" - was fixed in the Sluicekeeper's file and INVISIBLE
+# there, because pass 8's waterline covered his legs to the ankle. Nothing
+# covers these legs. Shins are `body` and only the boot is `dark`, so the leg
+# breaks in value at the ankle, where a real one does, in all three views.
+# ===========================================================================
+CANON.update({
+    "sower_chibi": ("The Sower (chibi)", 2.40, (0.72, 0.68, 0.44),
+                    (0.55, 1.00, 0.42), "grassland",
+                    "IT PLANTS THE GROUND AGAINST YOU - rebuilt in the game's own register",
+                    0.40, "Something is broadcasting seed."),
+})
+
+
+def sower_chibi():
+    """The Sower in the game's register. Same read - A MAN WITH A HOPPER ON
+    HIS CHEST, ONE ARM THROWN WIDE WITH SEED IN THE AIR, AND THORN ALREADY
+    STANDING BEHIND HIM - with the wire man taken to a chibi weight, the hat
+    rebuilt as a flat brim instead of a second cone, the stems darkened off the
+    hat's value and the seed made the only lit thing on the creature.
+
+    THE CAST AND THE THORN ARE ON OPPOSITE SIDES OF HIM, and that is the
+    conversion's one new idea: seed leaving his hand on the left, thorn already
+    up on the right, so the creature carries its own BEFORE AND AFTER in one
+    silhouette. A viewer who sees it once knows what the fight is going to do
+    to the floor."""
+    P = Parts("sower_chibi")
+    MX, MY = 0.0, 0.0
+    HIP = 0.50                                   # 21% of the man, off the Knight
+    # THE LINE HE WALKS, DIAGONAL IN PLAN (37 degrees). U runs along it - the
+    # cast goes out along -U and the thorn stands up along +U - and V is across
+    # it, which is where the thorns point. See pass 2 below for why this is not
+    # a decoration: on the X axis the whole mechanic disappears from the side.
+    UX, UY = 0.800, 0.600
+    VX, VY = -0.600, 0.800
+
+    # --- LEGS. Stubs, planted wide, with the lead foot carried forward on the
+    # line he walks. THE SHINS ARE `body` AND ONLY THE BOOT IS `dark`.
+    for s in (-1, 1):
+        fy = -0.14 if s < 0 else 0.12            # the stride, along his line
+        limb(P, [(MX + s * 0.21, MY + 0.03, HIP), (MX + s * 0.24, MY + fy * 0.5, 0.23),
+                 (MX + s * 0.26, MY + fy, 0.11)], 0.150, 0.136, 'body')
+        P.add(L.box(0.30, 0.40, 0.13), 'dark', loc=(MX + s * 0.26, MY + fy - 0.06, 0.065))
+
+    # --- TORSO. A barrel over a pelvis that bridges the hips, because the Cook
+    # proved that without one the back view is two stumps under a floating ball.
+    P.add(L.sphere(0.345, 0.275, 0.175, 16, 10), 'body', loc=(MX, MY, 0.58))
+    P.add(L.sphere(0.420, 0.335, 0.400, 18, 12), 'body', loc=(MX, MY - 0.02, 1.02))
+    P.add(L.box(0.80, 0.66, 0.085), 'dark', loc=(MX, MY - 0.02, 0.74))        # belt
+    # the CASTING shoulder is the raised one - the Sluicekeeper's device, same
+    # sign: the arm that is doing the work explains the whole posture.
+    P.add(L.sphere(0.200, 0.190, 0.180, 12, 8), 'body', loc=(MX - 0.36, MY - 0.06, 1.34))
+    P.add(L.sphere(0.200, 0.190, 0.180, 12, 8), 'body', loc=(MX + 0.36, MY - 0.04, 1.24))
+
+    # --- HEAD. Neck, skull, eyes on the FACE and not in the skull.
+    P.add(aim(L.cone(0.145, 0.175, 0.17, 10), (MX, MY - 0.03, 1.42),
+              (0.0, 0.0, 1.0)), 'body')
+    P.add(L.sphere(0.300, 0.280, 0.285, 16, 10), 'body', loc=(MX, MY - 0.04, 1.80))
+    eyes(P, (MX, MY - 0.04, 1.78), 0.108, 0.058, -0.26, 'bone')
+    eyes(P, (MX, MY - 0.04, 1.785), 0.108, 0.029, -0.295, 'dark')
+
+    # --- THE HAT: A FLAT BRIM AND A LOW CROWN, not a cone. 1.12 m across, the
+    # topmost thing at its own radius, dipped 7 degrees toward the room so the
+    # line is a hat and not a shelf. Straw at wear 0.40 - kept, not new.
+    P.raw(aim(L.cone(0.560, 0.200, 0.045, 20), (MX, MY - 0.02, 2.00),
+              (0.0, 0.12, 1.0)), 'bone')
+    P.add(L.box(0.52, 0.50, 0.055), 'dark', loc=(MX, MY - 0.03, 2.025))   # the join
+    P.add(L.sphere(0.255, 0.245, 0.145, 16, 9), 'bone', loc=(MX, MY - 0.03, 2.035))
+
+    # --- THE HOPPER. A BOX, deliberately - a box cannot be mistaken for the
+    # Drillmaster's gong or the Tallyman's discs - slung across the chest on a
+    # broad strap and tipped toward his casting hand. Its mouth is lit, which
+    # is the Cook's lit-mouth lesson: a container only reads as FULL if you can
+    # see into it, and what is in this one is the mechanic.
+    HX, HY, HZ = MX - 0.16, MY - 0.34, 1.00
+    P.add(L.box(0.58, 0.30, 0.38), 'dark', loc=(HX, HY, HZ), rot=(0.0, 0.20, 0.0))
+    # PASS 4 - A DARK PROP ON A BLACK FIELD HAS NO SILHOUETTE, AND THE HOPPER
+    # IS THE PROP THAT NAMES THIS CREATURE. `dark` is luminance 0.092 and the
+    # cell background is 0.045: against his body the box read as the boldest
+    # thing on him, and the moment it cleared his body - which is every view
+    # but the front - it was gone. One prop visible from one azimuth out of
+    # three is the front-only fault the Cook's lit mouth closed for the pot.
+    # THE RULE: a dark mass needs a PALE EDGE where it stands against the room,
+    # not a different fill - so the hopper keeps its dark body (which is what
+    # reads against him) and gains a bone RIM round its mouth, which is what
+    # reads against the dark. It is also what a seed hopper has: a lip you run
+    # your hand along. The lit seed sits inside the rim.
+    P.add(L.box(0.62, 0.34, 0.06), 'bone', loc=(HX - 0.02, HY, HZ + 0.185),
+          rot=(0.0, 0.20, 0.0))
+    P.raw(aim(L.cone(0.235, 0.215, 0.040, 16), (HX - 0.03, HY - 0.01, HZ + 0.225),
+              (0.20, 0.0, 1.0)), 'glow')
+    P.raw(L.membrane([(MX + 0.30, MY - 0.16, 1.38), (MX + 0.38, MY - 0.08, 1.34),
+                      (HX - 0.18, HY - 0.10, HZ + 0.18), (HX - 0.26, HY - 0.02, HZ + 0.22)],
+                     0.045), 'dark')
+
+    # --- THE CAST. The far arm thrown wide and low, palm turned out, and the
+    # seed leaving it in a falling arc. Four seeds at 0.095 - the original's
+    # 0.042 was a crumb at cell size.
+    #
+    # PASS 2 - THE SIDE VIEW HAD NO MECHANIC IN IT, AND IT IS THE COOK'S FAULT
+    # AGAIN: AN X-ONLY DIRECTION IS DEPTH, NOT SEPARATION. Pass 1 threw the arm
+    # and the seed along -X and set the thorns out along +-X, so at azimuth 90
+    # the camera looked straight down the line of the cast: the arm
+    # foreshortened into a lump on his chest, the four seeds stacked into two
+    # dots at his hip, and every thorn on every shoot went edge-on and
+    # vanished, leaving three bare poles with a ball on top - candles, not
+    # thorn. The front and back views were right and the side view was a
+    # different creature. So EVERY DIRECTION ON THIS CREATURE THAT WAS X-ONLY
+    # IS NOW DIAGONAL IN PLAN: the cast runs along -U at 37 degrees, the seed
+    # falls along it, and the thorns stand out along +-V, across that line.
+    # Nothing is now parallel to either camera.
+    SH = (MX - 0.36, MY - 0.08, 1.34)
+    HAND = (MX - UX * 0.95, MY - UY * 0.95, 1.06)
+    limb(P, [SH, (MX - UX * 0.62, MY - UY * 0.62 - 0.06, 1.16), HAND], 0.150, 0.120, 'body')
+    P.add(L.sphere(0.165, 0.160, 0.150, 10, 7), 'body', loc=HAND)
+    for k in range(4):
+        t = k / 3.0
+        d = 0.26 + t * 0.62
+        P.add(L.sphere(0.095, 0.095, 0.095, 9, 6), 'glow',
+              loc=(HAND[0] - UX * d, HAND[1] - UY * d, HAND[2] - 0.04 - t * 0.52))
+
+    # --- THE NEAR ARM steadying the hopper's rim. Short, and it comes FORWARD
+    # and in rather than down, because a chibi arm is short enough that the
+    # elbow IS the silhouette.
+    limb(P, [(MX + 0.36, MY - 0.04, 1.24), (MX + 0.30, MY - 0.30, 1.10),
+             (MX + 0.10, MY - 0.44, 1.02)], 0.145, 0.118, 'body')
+    P.add(L.sphere(0.160, 0.155, 0.148, 10, 7), 'body', loc=(MX + 0.06, MY - 0.46, 1.01))
+
+    # --- THE THORN ALREADY UP. Three shoots, crooked, diverging, at three
+    # heights - and SPREAD IN PLAN, 2 to 66 degrees off his line, so there is
+    # no azimuth from which all three stand behind him in one bar. Dark stems
+    # (the hat's value is now nowhere near them) with the seed standing in them
+    # as lit thorn: three bold thorns a stem, not five fine ones, because
+    # register is COUNT as much as mass.
+    # PASS 5 - THE THORN WAS GROWING THROUGH HIM. Pass 3's bolder thorns made
+    # the near shoot's reach 0.30 m instead of 0.21, and the nearest stem stood
+    # 0.95 m out on a man whose shoulder and casting arm already reach 0.56 -
+    # so from the front two thorns crossed his arm and the before-and-after
+    # read as one tangle. The shoots step 0.25 further out along the line he
+    # walks: that is the same distance for all three, so the fan he planted
+    # keeps its shape and only the gap between him and it changes.
+    for sd, se, hh, bend in ((1.22, 0.08, 1.46, 0.22),
+                             (1.05, -0.62, 1.02, -0.16),
+                             (1.30, 0.78, 1.22, 0.10)):
+        sx, sy = UX * sd + VX * se, UY * sd + VY * se
+        base = (MX + sx, MY + sy, 0.0)
+        tip = (MX + sx + VX * bend, MY + sy + VY * bend + 0.10, hh)
+        limb(P, arc(base, tip, 0.0, 7, side=bend * 0.8), 0.085, 0.030, 'dark')
+        # PASS 3 - THE THORNS WERE STILL FLECKS, AND ALTERNATING THEM ALONG ONE
+        # AXIS IS THE SAME MISTAKE ONE STEP SMALLER. Pass 2 moved them off X
+        # onto V, which made them visible from the side instead of from the
+        # front - it did not make them visible from BOTH, because two
+        # directions is still a plane, and at azimuth 90 a thorn lying in it is
+        # 0.21 m seen at a slant. From two of the three views the shoots read
+        # as bare poles with a lit ball on top: lollipops, not thorn.
+        # THE RULE, AND IT GENERALISES PAST THIS CREATURE: a feature repeated
+        # along a member must be placed ON A HELIX, not alternated on an axis -
+        # then every azimuth sees some of it broadside by construction and
+        # none sees all of it edge-on. Four thorns a stem at 0.30 (was three at
+        # 0.21), each 80 degrees around from the last.
+        for k in range(4):
+            t = 0.30 + 0.20 * k
+            px = MX + sx + VX * bend * t
+            py = MY + sy + VY * bend * t + 0.10 * t
+            a = 1.40 * k + 0.6
+            ox, oy = math.cos(a), math.sin(a)
+            P.raw(aim(L.cone(0.075, 0.0, 0.30, 7), (px, py, hh * t),
+                      (ox, oy, 0.34)), 'glow')
+        P.add(L.sphere(0.075, 0.075, 0.075, 9, 6), 'glow',
+              loc=(tip[0], tip[1], tip[2] - 0.02))
+    return P
+
+
+BUILDERS.update({"sower_chibi": sower_chibi})

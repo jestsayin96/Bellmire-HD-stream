@@ -1412,7 +1412,17 @@
       "Straw on the flags. Somebody slept.",
       "Count heads at the door.",
       "Cold air from the left. Keep right.",
-      "Tally the flasks before we go in."
+      "Tally the flasks before we go in.",
+      "Boots wet already. Fine.",
+      "Sconce is out. Bring ours.",
+      "Chalk mark on the jamb. Someone was here.",
+      "Nail in the lintel. Mind the hook.",
+      "Door's swollen. Shoulder it.",
+      "Smoke on the ceiling. Old fire.",
+      "Count the exits. Two. Good.",
+      "Stone's sweating. Go slow.",
+      "Rope on the floor. Cut, not frayed.",
+      "Cobweb's whole. Nobody's come through."
     ],
     "lord": [
       "Hold together!",
@@ -1623,7 +1633,15 @@
       "It tires. We tire slower.",
       "Keep the healer behind the post.",
       "Hit the leg. Then the leg again.",
-      "Don't shout. Just stand."
+      "Don't shout. Just stand.",
+      "Weapons up. Say nothing.",
+      "It looks at the big one. Good.",
+      "Stay off its left.",
+      "Rotate when you're told.",
+      "Steady. It wants us to rush.",
+      "Hold the door behind us.",
+      "Count its swings. Three. Then in.",
+      "Mind the floor near its feet."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1836,7 +1854,15 @@
       "Bone dust on the step. Back up.",
       "Ceiling is lower here. Mind your head.",
       "Plate clicks. Don't lean.",
-      "Twine across the door. Cut it from the side."
+      "Twine across the door. Cut it from the side.",
+      "Dust is thinner there. Step round.",
+      "Wire at the ankle. Lift your foot.",
+      "Slab rocks. Weight on the rim.",
+      "Hinge oil, fresh. Somebody maintains this.",
+      "Smell of tar. Stop.",
+      "Grit falling from above. Hold still.",
+      "Spike holes in the floor. Count them.",
+      "Lever's too clean. Leave it."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2043,7 +2069,15 @@
       "Pass the cloth.",
       "It'll scab. Keep moving.",
       "Not my sword arm. Good enough.",
-      "Wipe it off. Go."
+      "Wipe it off. Go.",
+      "That one will want stitching.",
+      "Keep pressure on it.",
+      "Hurts. Still walking.",
+      "Salt in it. Nothing for it.",
+      "Left hand's numb. It'll come back.",
+      "Tie it tight. Move.",
+      "Don't look at it. Walk.",
+      "Hit the wall. Got up. Fine."
     ],
     "drink": [
       "Bottoms up.",
@@ -2246,7 +2280,13 @@
       "Tastes like pennies.",
       "Cork back in. Save the rest.",
       "One mouthful. No more.",
-      "Burns, then it steadies."
+      "Burns, then it steadies.",
+      "Warm. Almost sweet.",
+      "Thick. Swallowed it anyway.",
+      "Two swallows. Hold the rest.",
+      "Bitter. It works.",
+      "Clean taste. Clean head.",
+      "Stoppered again. Save the dregs."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2453,7 +2493,15 @@
       "Too quick. Too loose.",
       "A spark. Then nothing.",
       "Wrong breath. Wrong word.",
-      "It sat there. Did not go."
+      "It sat there. Did not go.",
+      "Mouth was dry. Lost the word.",
+      "Hands shook. It slipped.",
+      "Fizzled out. Again.",
+      "Lost my footing mid-word.",
+      "Spoke it flat. It knew.",
+      "Nothing but a smell of smoke.",
+      "Too tired. Next one's better.",
+      "Dropped the thread. Pick it up."
     ]
   },
   "misfire": [
@@ -11408,5 +11456,6 @@
     }
   },
   "_note_c70": "C-70: backlog item 2 - descend, cleared, epitaphs and barks widened, additive. Placeholders as the existing lines: descend lines starting '%s %s' take hero and verb, 'Floor %d' takes the floor stood on only, never a total.",
-  "_note_c87": "C-87: barks deepened an eighth time (enter, lord, trap, hurt, drink, misfire). Plain register, no floor counts. Additive only."
+  "_note_c87": "C-87: barks deepened an eighth time (enter, lord, trap, hurt, drink, misfire). Plain register, no floor counts. Additive only.",
+  "_note_c88": "C-88: barks deepened a ninth time. Appended only; plain register; no floor counts."
 }

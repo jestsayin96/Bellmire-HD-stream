@@ -8751,3 +8751,9 @@ TAKE THIS NEXT (08:58 block) gave HUD: WRITE THE STAND-DOWN (08:52 slot was miss
 Checked: L73/L74 ticked; U49-U51 closed the four U48 gate faults; the supervisor's 09:25 report ticks D99, so the L31 remainder is released - but its open half (damage numbers, status-effect icons) lives in delve.gd / monster.gd / party_frames.gd / boss_bar.gd, none of which are mine, and the plan re-routed it to the GAME BUILD on 16 Nov 18:02. L66 stays closed (H31). None of my seven files edited; no gate of mine reads red.
 Lock: last line "IDLE 2026-11-17T09:19:35-06:00 - game build S15: MB_FIT hurdleman 1.04 (art's, not re-derived) + hurdleman.glb.import (29/29). parse 0 errors, OFFFLOOR OK 0/2102, TWITCH_PARSE OK 8, TOWNWALK PASS, DEL"; Godot not running (tasklist empty). Lock untouched.
 NEEDED FROM MR. E: nothing. For the supervisor: if you want status-effect icons on stream, name the file owner who exposes the status state; HUD can draw it from a feed it is handed.
+
+## C-88 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (09:58 block): barks deepened a ninth time (lore_lines.json only)
+- TAKE THIS NEXT (09:58 CT team-lead block) gave CONTENT: keep producing in `barks`; write only into pools already read. C-55 rarity ladder was already done. Nothing written into any dead pool.
+- data/lore_lines.json `barks`: +48 lines (duplicates dropped case-insensitively). enter 228, lord 217, trap 219, hurt 213, drink 207, misfire 213. `_note_c88` added. Plain register, no floor counts.
+- VALIDATION OK: all four owned files parse; every other top-level key equal on parsed compare; every existing bark list is an unchanged prefix; file round-trips byte-identical before edit.
+- CODE WIRING: none. Pickers must size off len().

@@ -210,6 +210,21 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3):
             sh[cy:cy + ch, cx:cx + cw, 0:3] = a[..., 0:3] * al + dst * (1.0 - al)
         else:
             bad.append((p, "missing"))
+        # 17 Nov: THE BLANK CHECK ONLY EVER LOOKED AT hero_front. Each key
+        # writes THREE views and two of them went into the register unchecked -
+        # an instrument that can return a GREEN verdict over renders it never
+        # opened. Same fault class as a gate that cannot go red. The other two
+        # are now opened and counted here, and a missing one fails the run.
+        for extra in ("hero_side.png", "hero_back.png"):
+            q = os.path.join(root, key, extra)
+            if os.path.isfile(q):
+                b = G.read_png(q)
+                m = int((b[..., 3] > 0.02).sum())
+                checked.append((os.path.relpath(q, repo), m))
+                if m < 400:
+                    bad.append((q, "blank or near-blank: %d opaque px" % m))
+            else:
+                bad.append((q, "missing"))
         # the two rules: ground, and the hero's head carried across the cell
         sh[cy + ground_row:cy + ground_row + 1, cx:cx + cw, 0:3] = np.array((0.30, 0.32, 0.36))
         for x in range(cx + 4, cx + cw - 4, 14):

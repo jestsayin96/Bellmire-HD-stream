@@ -53,3 +53,13 @@ re-exported as a standalone asset** and nothing is redistributed AS an asset,
 which is the only line the Quaternius licence draws either. The decimate is a
 Blender modifier applied at import time inside `tools/art/minibosses.py`; the
 files in `assets/gear/` are untouched.
+
+### 17 Nov 2026 - THE LOADER (miniboss 17)
+Uses three more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0
+1.0)** already listed in the table above - `crate`, `barrelDark` and
+`lootSackA`, read out of `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` at
+generation time, decimated and **baked into the exported `loader.glb`**. CC0,
+so no attribution is required and none is owed; recorded here because every
+pack used gets recorded. Nothing is redistributed as an asset. The generator
+falls back to procedural boxes if the pack is absent and the report records
+`pack_used` either way.

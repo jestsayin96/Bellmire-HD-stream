@@ -2164,3 +2164,12 @@ daggers; this cycle is the staff and the crossbow S18 left. Systems 3/4 and Phas
   failures).
 - Lock: claimed 13:08:40 declaring 13:33 (25 min - inside the cap, per the lead's note). No live Twitch
   test. Not ticked - the team lead ticks.
+- ADDENDUM 13:22 CT, AFTER THE PUSH, AND IT IS A PROCESS MISS OF MINE: I merged origin/main at 13:08 but
+  the lead's 12:58 block landed on origin/laptop, so I worked from the 11:58 row and did NOT read
+  docs/art/SYSTEM2_WEAPONS.md. Art measured: staff euler (-85.13, -90.06, 85.26) at hand_scale 1.30;
+  crossbow euler (0, 0, 90.06); shields the same rotation on handslot.l; a greataxe path off axeDouble_*.
+  WHAT THAT MEANS FOR S19: the crossbow roll I named in fit note (1) is exactly art's (0,0,90) - not yet
+  applied. My staff is (0,0,90) at x1.9 and printed upright (0.0, 1.0, -0.02); art's euler is a different
+  rotation and a shorter staff. Next hour: put art's numbers into held_rot (crossbow + shield), compare
+  the two staff answers on one picture and keep the better, then the greataxe. Merged 12:58 plan is on
+  my branch now.

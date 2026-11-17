@@ -42,7 +42,12 @@ const SELL_BACK := 0.4
 ## last_seen + events). Additive over v3. The hub's KNOWN_V took "4" in H23 (c19608c), so
 ## v4 ships. NEVER bump this past what web/app.js KNOWN_V accepts - the hub refuses an
 ## unknown number outright ("the page needs an update" instead of a town).
-const PAYLOAD_V := 4
+## H29.6: v5 = the shelves (shops[].stock), the caravan and the open orders, read from
+## data/items.json (trade_stock / shop_stock / stock_retirement / caravan_manifests /
+## trader_cargo). The hub's KNOWN_V took "5" in H29, so v5 ships. Additive over v4.
+const PAYLOAD_V := 5
+const SHELF_MAX := 60               # goods per shelf (the hub stops reading at 80)
+const ORDERS_MAX := 40
 const SATCHEL_MAX := 40             # the hub stops reading rows at 40
 const NAME_MAX := 25                # W1a: every published name is capped here
 ## kind -> the hub's icon map (web/app.js SATCHEL_ICON). Only these words are sent;
@@ -165,7 +170,13 @@ func build_payload() -> Dictionary:
         "parties": _parties(),
         "chronicle": chronicle(),
         "rolls": _rolls(),
+        "shops": [],
+        "caravan": _caravan_block(),
+        "orders": _orders(),
     }
+    # H29.6: the hub reads p.shops at the TOP of the payload (web/app.js renderShops); the
+    # town block's copy stays for anything that already reads it there.
+    out["shops"] = (out["town"] as Dictionary).get("shops", [])
     if r:
         out["guild_roll"] = r.leaderboard("standing", ROLL_MAX)
         var dead: Array = []
@@ -378,11 +389,129 @@ func _town_block(e: Economy) -> Dictionary:
         out["weather"] = String(dl.weather)
     # D64: each shop's level and the best rarity it may sell (additive; v unchanged)
     if e.has_method("shop_level"):
-        var shops: Array = []
-        for k in e.SHOP_NAMES.keys():
-            shops.append({"name": String(e.SHOP_NAMES[k]), "level": e.shop_level(k),
-                "sells_to": e.shop_sells_to(k)})
-        out["shops"] = shops
+        out["shops"] = _shelves(e)
+    return out
+
+## H29.6: every shop open at the town's growth tier, with what is on its shelf RIGHT NOW.
+## The shelf rule is the content writer's, verbatim from items.json trade_stock._note: a
+## trade exists from its opens_tier; a good is on its shelf when max(good.tier, opens_tier)
+## <= tier and the tier is not past the good's last_tier (stock_retirement / own last_tier).
+## The smithy is the one shop with a LEVEL of its own (D64, viewers raise it): its card keeps
+## that level and sells_to, and its shelf leads with the steel and armour the counter will
+## actually sell at that level - so the smithy is listed even before its goods open at tier 3.
+## Every other trade's shelf is governed by the town's growth tier, so that is its level.
+func _shelves(e: Economy) -> Array:
+    var tier := clampi(int(e.town_level), 1, 12)
+    var it := Economy.items_data()
+    var ss: Dictionary = it.get("shop_stock", {})
+    var ret: Dictionary = (it.get("stock_retirement", {}) as Dictionary).get("shop_goods", {})
+    var trades: Dictionary = (it.get("trade_stock", {}) as Dictionary).get("trades", {})
+    var out: Array = []
+    var have_smith := false
+    for tk: String in trades:
+        var t: Dictionary = trades[tk]
+        var opens := int(t.get("opens_tier", 1))
+        var smith := tk == "smith"
+        if opens > tier and not smith:
+            continue
+        var goods: Array = []
+        if opens <= tier:
+            for key in (t.get("carries", []) as Array):
+                var g: Variant = ss.get(String(key))
+                if g is Dictionary:
+                    var last := int((ret.get(String(key), {}) as Dictionary).get("last_tier", 12))
+                    _shelf_add(goods, g, opens, tier, last)
+            var own: Dictionary = t.get("own_goods", {})
+            for key in own:
+                var g2: Variant = own[key]
+                if g2 is Dictionary:
+                    _shelf_add(goods, g2, opens, tier, int((g2 as Dictionary).get("last_tier", 12)))
+        # the newest goods first (what the town just grew into), then the cap
+        goods.sort_custom(func(a, b): return int(a["_t"]) > int(b["_t"]) or (int(a["_t"]) == int(b["_t"]) and int(a["cost"]) < int(b["cost"])))
+        goods = goods.slice(0, SHELF_MAX)
+        for g3 in goods:
+            (g3 as Dictionary).erase("_t")
+        var row := {"name": clean_name(String(t.get("name", tk))), "level": tier, "stock": goods}
+        if smith:
+            have_smith = true
+            row["level"] = e.shop_level("smithy")
+            row["sells_to"] = e.shop_sells_to("smithy")
+            row["stock"] = _smith_gear(e) + goods
+        out.append(row)
+    if not have_smith:
+        out.push_front({"name": "Smithy", "level": e.shop_level("smithy"),
+            "sells_to": e.shop_sells_to("smithy"), "stock": _smith_gear(e)})
+    return out
+
+static func _shelf_add(goods: Array, g: Dictionary, opens: int, tier: int, last: int) -> void:
+    var first := maxi(int(g.get("tier", 1)), opens)
+    if first > tier or tier > last:
+        return
+    goods.append({"name": clean_name(String(g.get("name", "?"))), "cost": maxi(0, int(g.get("cost", 0))), "_t": first})
+
+## what the counter will forge at the smithy's level, at list price (a hero's haggle can
+## only lower it). Found-only tiers are never on a shelf.
+func _smith_gear(e: Economy) -> Array:
+    var rows: Array = []
+    var cap := e.shop_cap("smithy")
+    for pair in [[Roster.WEAPONS, "steel"], [Roster.ARMOUR, "armour"]]:
+        var table: Array = pair[0]
+        for i in range(1, mini(cap, table.size() - 1) + 1):
+            var w: Dictionary = table[i]
+            if bool(w.get("found", false)):
+                continue
+            var nm := String(w["name"]) + (" steel" if String(pair[1]) == "steel" and not String(w["name"]).ends_with("steel") else (" armour" if String(pair[1]) == "armour" else ""))
+            rows.append({"name": clean_name(nm.left(1).to_upper() + nm.substr(1)),
+                "cost": int(w["cost"]), "rarity": Economy.rarity_of(i)})
+    return rows
+
+## H29.6: the caravan in town, if one is - {present, leaves_in?, name?, cargo[]}. Cargo is the
+## content writer's manifest (items.json caravan_manifests -> trader_cargo) picked when the
+## wagon was spawned; leaves_in is whole minutes, given only while it stands trading.
+func _caravan_block() -> Dictionary:
+    var cs: Variant = town.get("_caravans") if town else null
+    if not (cs is Array):
+        return {"present": false, "cargo": []}
+    for c in (cs as Array):
+        if not (c is Dictionary) or String(c.get("phase", "")) == "out":
+            continue
+        var out := {"present": true, "cargo": []}
+        if String(c.get("phase", "")) == "trade":
+            out["leaves_in"] = maxi(1, ceili(float(c.get("t", 0.0)) / 60.0))
+        var it := Economy.items_data()
+        var tc: Dictionary = it.get("trader_cargo", {})
+        for m in ((it.get("caravan_manifests", {}) as Dictionary).get("caravans", []) as Array):
+            if m is Dictionary and String(m.get("id", "")) == String(c.get("manifest", "")) and String(c.get("manifest", "")) != "":
+                out["name"] = clean_name(String(m.get("name", "")))
+                for line in (m.get("cargo", []) as Array):
+                    var g: Variant = tc.get(String((line as Dictionary).get("good", "")))
+                    if g is Dictionary:
+                        out["cargo"].append({"name": clean_name(String(g.get("name", "?"))),
+                            "cost": maxi(0, int(g.get("cost", 0))), "qty": maxi(1, int(line.get("qty", 1)))})
+                break
+        return out
+    return {"present": false, "cargo": []}
+
+## H29.6: open orders - a purchase made at the counter whose hero is still walking to the
+## yard to collect it (town.gd shop_orders). `who` is the hero's name, which is the viewer's
+## display name; the hub marks the rows whose `who` is the signed-in login as "yours".
+func _orders() -> Array:
+    var out: Array = []
+    var so: Variant = town.get("shop_orders") if town else null
+    var hs: Variant = town.get("heroes") if town else null
+    if not (so is Dictionary) or not (hs is Dictionary):
+        return out
+    var r: Roster = town.get("roster")
+    for uid in (so as Dictionary):
+        var b = (hs as Dictionary).get(uid)
+        if b == null or not is_instance_valid(b) or String(b.get("errand")) == "":
+            continue
+        var o: Dictionary = so[uid]
+        var nm := clean_name(String(r.get_hero(uid).get("name", ""))) if r else ""
+        out.append({"who": nm, "item": clean_name(String(o.get("item", ""))),
+            "shop": clean_name(String(o.get("shop", "Smithy"))), "walker": nm, "status": "walking"})
+        if out.size() >= ORDERS_MAX:
+            break
     return out
 
 ## D57: one hero's sell sheet for the hub's Satchel (H11). Plain data, no new fetch,

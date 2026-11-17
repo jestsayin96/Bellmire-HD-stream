@@ -1,0 +1,36 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+H29P6_TEST start
+  ok   payload v5 and the hub's KNOWN_V carries "5"
+  ok   tier 1: General Goods has level 1 and a stock array (24)
+  ok   tier 1: Smithy has level 1 and a stock array (2)
+    tier 1 shops: ["General Goods", "Smithy"]
+  ok   tier 1: General Goods + Smithy only
+    tier 1 smithy: ["Plain steel", "Leather armour"]
+  ok   smithy keeps D64 level 1 / sells common
+  ok   a level 1 smithy shelves only common gear
+  ok   General Goods has a crossing's shelf (24 goods)
+  ok   grain (tier 2) is not on a crossing's shelf
+    tier 12 shops: ["General Goods", "Guild Counter", "Smithy", "Apothecary", "Stables"]
+  ok   tier 12 opens all five trades
+  ok   raised smithy: level 4, very rare, dragontooth on the shelf
+  ok   General Goods shelf capped (60)
+  ok   Guild Counter shelf capped (34)
+  ok   Smithy shelf capped (62)
+  ok   Apothecary shelf capped (33)
+  ok   Stables shelf capped (19)
+  ok   retired 'Clay Cups' (last tier 6) is off every tier-12 shelf
+  ok   no caravan -> present false
+    caravan: {"cargo":[{"cost":95,"name":"Sacks of Seed Corn","qty":4},{"cost":70,"name":"Sacks of Oatmeal","qty":3}],"leaves_in":1,"name":"The First Cart","present":true}
+  ok   trading caravan -> present, named, cargo from its manifest, leaves in 1 min
+  ok   a caravan on its way out is not 'in town'
+  ok   an order whose hero is not walking is not listed
+    orders: [{"item":"img src=x onerror=alert(…","shop":"Smithy","status":"walking","walker":"Aldric","who":"Aldric"}]
+  ok   a walking order is listed, hostile item name cleaned
+    shelf blob bytes at tier 12: 8139
+  ok   payload addition stays small (8139 bytes)
+H29P6_TEST OK 22 checks
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

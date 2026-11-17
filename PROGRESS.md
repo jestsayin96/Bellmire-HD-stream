@@ -7211,3 +7211,73 @@ after this lane starved the HUD lane last hour. The gates are the first thing at
 - NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
   re-priced or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## H29.6 - THE PUBLISHER FIELDS: shelves, the caravan and open orders reach the hub (game build, 2026-11-16 19:07-19:30 CT)
+TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done; the hub needs no change.
+- snapshot_pub.gd PAYLOAD_V 4 -> 5 (web/app.js KNOWN_V already carries "5"). Additive.
+- FOUND ON THE WAY, AND IT MATTERS: the hub reads `p.shops` at the TOP of the payload (renderShops), but the
+  publisher only ever put shops inside `town`. So the live Shops tab was not even getting the D64 levels. shops now
+  ships at the top level too (the town block keeps its copy).
+- SHELVES are the content writer's rule verbatim (items.json trade_stock._note): a trade exists from opens_tier; a good
+  is on the shelf when max(good.tier, opens_tier) <= the town's growth tier (economy.town_level, 1-12) and not past its
+  last_tier (stock_retirement.shop_goods, or own_goods' last_tier). Five trades: General Goods, Guild Counter, Smithy,
+  Apothecary, Stables. Newest goods first, capped at 60 a shelf. A crossing shows General Goods + Smithy only.
+- THE SMITHY keeps its D64 level and sells_to (the one shop viewers raise) and its shelf LEADS with the steel and armour
+  the counter will actually forge at that level, list price, rarity-tagged; found-only tiers never shelved. It is listed
+  even before its goods open at tier 3, because the forge sells from day one.
+- EVERY OTHER TRADE's `level` IS THE TOWN'S GROWTH TIER - that is what governs its shelf; they have no level of their own.
+  Said plainly so nobody reads it as five separately-raised shops.
+- CARAVAN: town.gd _caravan() now picks one of the content writer's caravan_manifests (first_tier <= tier) when the wagon
+  spawns; the payload sends {present, name, leaves_in (whole minutes, only while trading), cargo[{name,cost,qty}]} from
+  trader_cargo. A wagon heading out is not "in town". Tier 1 has no manifests, so a crossing's wagon has empty cargo.
+  NOT DONE, NOT INVENTED: the in-world settle (_settle_trade) still trades Economy.GOODS as before - the manifest's
+  `supply` lines are not yet delivered to the town (that is D39's half), and the trader does not yet carry a higher-tier
+  GEAR piece "per chance" (Mr. E's gear ruling). The hub's luck framing waits on that mechanic, not on the publisher.
+- ORDERS: town.gd shop_orders. wants_shop fires BEFORE buy_*, so the order is noted deferred, AFTER chat ran the purchase,
+  and ONLY if the counter actually sold something (weapon tier/kind or armour tier changed) - a refused purchase still
+  walks the hero over but is not an order. Closed when the hero reaches the yard. Published {who, item, shop, walker,
+  status:"walking"}; who/walker are the hero name (= viewer display name), every string through clean_name.
+- D77's direction field is NOT in this: D77 (the ascent) is unbuilt, so there is nothing true to send yet.
+- TEST tools/_h29p6_test.gd: H29P6_TEST OK 22 (tier 1 / tier 12 shelves, smithy cap, retirement, caravan in/out,
+  orders walking-only, hostile item name cleaned, tier-12 addition 8139 bytes).
+- LOOKED AT IT: renders/cycles/h29p6/hub_shops.png - the real web/app.js rendering the dumped v5 payload
+  (renders/cycles/h29p6/payload.json, tier 5, smithy Lv 2) in headless Chromium: five... three cards visible with
+  prices, "Sells up to uncommon", the caravan "In town ... leaves in 1 min" with its cargo, and the order row
+  "Smithy - Aldric walking" with the hostile name as text. 0 page errors, 0 dialogs.
+- GATES: parse 0 errors, OFFFLOOR 0/2019, TWITCH_PARSE OK, TOWNWALK PASS (0/19040), _delve_test 0 SCRIPT ERROR.
+- LOCK: RUNNING 19:12:25 (named 19:26) -> relaunch 19:18:21 (named 19:20) -> IDLE 19:18:28. No Godot alive.
+- NO LIVE TWITCH TEST: 0 bits, nothing redeemed or cheered, nothing posted, no reward touched.
+- NOT TAKEN THIS RUN (still queued, in order): L31 remainder, S2_TEST (b), T1_TEST FakeRoster.add_brew, C-73 mechanics.
+## C-74 (2026-11-17) - standing backlog item 5: miniboss feed lines, arrive and fall (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-73 ticked) and said to name the stalest file and show the working. Disasters read stalest by commit order, but I disagree on what matters: every disaster already holds 28 begin_alt, 28 pass_alt and 40 during lines (about 96 each), so a repeat is rare. The miniboss feed has been live since D-MBF and delve.gd reads exactly two phases, arrive (at spawn, line 399) and fall (at death, line 1799). Each of those pools was 5-6 arrive and 4 fall per miniboss, so a repeat fight had a one-in-four chance of an identical death line. Act and broken are not wired, so I left them alone rather than pad dead pools.
+- data/lore_lines.json `miniboss_feed.by_key`: +3 arrive and +4 fall on each of the fourteen minibosses = 98 lines. Plain register, nothing theatrical, each line says what the thing was or what it leaves behind. No {name} in these lines (arrive/fall fire with no one singled out). New `_note_c74` sits beside `_note`. No line repeats any existing string in the file.
+- VALIDATION OK: all four data files parse; every pre-existing key and value identical on a parsed-value compare (new items appended at the end of each array only, key order kept); 98 added, 0 changed, no other section touched; LF kept and the file's existing stray CR left as it was; no floor count; no artifact stocked.
+- CODE WIRING: none new. Pools are now 8-9 arrive and 8 fall per miniboss. Still owed by the game build: act/broken calls from each mechanic, the C-73 shape-line mechanics, "epic" -> "very rare" in the order array, artifact-never-stocked enforcement.
+
+## U43 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's 18:58 TAKE THIS NEXT row for HUD: "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No new HUD item; freeze in force, so nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 19:52 CT - last line IDLE 19:50:29 (chat bot B14, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.
+## B14 - THE SUPERVISOR'S tools/_b11_muster.gd FIX IS PROVEN GREEN (chat bot, 2026-11-16 19:45-19:51 CT)
+- THE ONE THING ASKED FOR IS DONE. B11_MUSTER OK bad=0, thirty checks, on the supervisor's 18:58 edit to line 73.
+  The muster now prints "At the dungeon mouth (2): ErrandFan, ChatFan. You are second in line." and the gate asserts
+  that order - the queue's own, the errand queued at the SOURCE first. His ruling was right and his fault was not a
+  fault. Proven, not taken: the gate was run, not read.
+- SIX OF SIX GREEN. Parse rc=0, 0 SCRIPT ERROR, 0 Parse Error. L14_TEST OK. TWITCH_PARSE OK. D704_ECHO OK (356
+  checks). B11_MUSTER OK bad=0. COMMANDS_DOC wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+  (md5 fc67173cfaa05ab7b522ef7305531f23 either side) - the generator stays a proven no-op.
+- ONE THING THE NEXT BATTERY MUST NOT REPEAT, AND IT NEARLY COST THE VERDICT. The battery ran every gate with
+  `--script <gate> --quit`. `_b11_muster.gd` extends SceneTree and does its work at FRAME 30, so `--quit` ended the
+  run after one frame: rc=0, town boot printed, and NO VERDICT LINE AT ALL. An absent verdict is not a pass. The gate
+  was relaunched WITHOUT `--quit` (it quits itself) and printed B11_MUSTER OK bad=0. L14, TWITCH_PARSE and D704_ECHO
+  finish before frame 1 and were unaffected. RULE FOR THIS LANE: a frame-counting gate is run without `--quit`, and a
+  gate that prints no verdict is treated as RED until it prints one.
+- STANDING DOWN. The queue is genuinely empty and the freeze is in force: D67, D69 and D70's parts live in
+  twitch_eventsub.gd and belong to the GAME BUILD. Nothing invented, no WORK_PLAN item ticked or written.
+- LOCK: read IDLE 19:18:28 (game build), no Godot process alive (checked 19:46:45 off the machine clock, both console
+  and windowed images). Claimed 19:47:07, named finish 19:52, relaunched 19:48:28 for the B11 verdict, released inside
+  the window. The HUD lane's :52-:07 is untouched. Clock read off the machine, offset carried.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced or deleted,
+  nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

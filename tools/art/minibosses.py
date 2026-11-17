@@ -3307,3 +3307,324 @@ def sower_chibi():
 
 
 BUILDERS.update({"sower_chibi": sower_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 11 OF 14 - THE BOILER, 17 Nov
+#
+# Same read, same props, same idea, rebuilt in the game's own register; see
+# the block above drillmaster_chibi for the measured Knight proportions and
+# the one above snuffer_chibi for the rule that register is MASS AND COUNT,
+# not man-proportions.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/boiler/hero_front|side|back.png):
+#   FRONT - a wooden puppet standing beside A PARASOL TABLE. A wide flat disc
+#           on two thin posts at head height is a garden table from every
+#           azimuth, and the pale apron is a sandwich board (the Cook's fault
+#           3, unpaid in this file).
+#   SIDE  - THE MAN IS GONE. Pan at x +1.06 with the man at x -0.44 and the
+#           whole creature strung along X, so at azimuth 90 the camera looks
+#           straight down the line of the pair and the dish eclipses him. What
+#           is left is a mushroom with sticks behind it. This is the Cook's
+#           fault 5 and the Sower's pass 2, a third time.
+#   BACK  - EVERY MEMBER IS THE SAME TAN. body, bone and the pan all land in
+#           the same value, so the back view is one pale wooden mannequin with
+#           no break anywhere except the boots.
+# The one thing that works in all three is THE POUR AND THE POOL. That line
+# from a held thing down to the ground is the only one in the fourteen, and
+# the conversion is built around keeping it and throwing away what hides it.
+#
+# THE VALUE PLAN, MEASURED FIRST. At tint (0.86, 0.60, 0.34) and wear 0.25 the
+# generator's `body` lands at luminance 0.508 and its `bone` at 0.577: a 14%
+# separation - the Sluicekeeper's pair, not the Sower's 10%. That is enough to
+# carry ONE pale object against him and no more. So:
+#   the man is `body`, every break on him is `dark` (belt, boots, brow rag),
+#   the SLEEVE GUARDS are the one pale thing ON him - and they are pale
+#       exactly where the mechanic is, on the two hands at the handle,
+#   the CRADLE AND THE PAN BODY ARE `dark`, with a `bone` RIM round the pan's
+#       mouth, because a dark mass on a black field has no silhouette and
+#       needs a PALE EDGE, not a different fill (the Sower's hopper, paid
+#       forward), and
+#   the GLOW IS THE SUGAR AND NOTHING ELSE: lit in the pan, lit in the fall,
+#       lit in the pool. One material, one continuous line, three places.
+#
+# TWO REGISTER DECISIONS, BOTH DROPS, BOTH SAID OUT LOUD:
+#  1. THE APRON IS DROPPED. 0.64 x 0.56 of flat `bone` panel hung on the front
+#     plane is the Cook's sandwich board, and cook_chibi is two cells away
+#     wearing one. A man who pours boiling sugar wears his armour ON HIS ARMS.
+#     The pale moves to heavy sleeve guards from elbow to wrist, which clears
+#     the Cook by construction and puts the only pale thing on the man onto
+#     the two hands that are doing the work.
+#  2. THE SKIMMER IS DROPPED FROM HIS SHOULDER AND STOOD IN THE POOL. A 0.038
+#     haft with a 0.27 disc 2.0 m up in clear air is the Cook's lollipop
+#     (fault 6) and from the side it was the only thing above the pan. Moved,
+#     it stops being a bubble wand and becomes the creature's own evidence: a
+#     scraper SET FAST in the floor it poured. Same prop, one site, two faults
+#     closed and the mechanic told twice.
+#
+# THE CONVERSION'S ONE NEW IDEA: THE POOL IS SETTING FROM THE OUTSIDE IN.
+# The original poured into a clean lit puddle with a hairline rim, which says
+# POURS and does not say AND IT SETS. Here the centre is still `glow` and the
+# whole edge is a heavy `bone` CRUST with three broken plates riding it, and a
+# `dark` scraper standing seized in it. Liquid at the lip, set on the floor -
+# the Sower's before-and-after in one silhouette, applied to a floor instead
+# of to a man's two sides.
+#
+# EVERYTHING IS DIAGONAL IN PLAN (38 degrees): D is the pour line, E is across
+# it. On the X axis this creature loses its whole mechanic at azimuth 90 and
+# the original proves it. Nothing here is parallel to either camera.
+#
+# CARRIED FORWARD: shins `body`, boot `dark`, so the leg breaks in value at
+# the ankle - proven on the Sower, where nothing covered the legs. Here the
+# apron is gone, so nothing covers them either.
+# PAYING ONE OF THE SOWER'S OWN FAULTS: its fault 5, "the belt reads as a flat
+# plank through him, protruding past the pelvis at three-quarter". The belt on
+# this creature is a FLATTENED ELLIPSOID, not the file's standard box - a ring
+# at the waist cannot show a corner from any azimuth.
+# ===========================================================================
+CANON.update({
+    "boiler_chibi": ("The Boiler (chibi)", 2.45, (0.86, 0.60, 0.34),
+                     (1.00, 0.78, 0.60), "confection",
+                     "IT POURS AND IT SETS - rebuilt in the game's own register",
+                     0.25, "Something is pouring."),
+})
+
+
+def boiler_chibi():
+    """The Boiler in the game's register. Same read - A BRACED MAN ROLLING A
+    PAN OFF ITS LIP AND ONE THICK LIT ROPE OF SUGAR RUNNING FROM THAT LIP TO A
+    POOL ON THE FLOOR - with the wire man taken to a chibi weight, the parasol
+    disc rebuilt as a deep vessel on a squat cradle, the apron and the skimmer
+    dropped, and the sugar made the only lit thing on the creature.
+
+    HE LEANS BACK AND BOTH HANDS ARE ON ONE BAR. The Cook stoops under a
+    weight; this man is braced AGAINST one, and two arms converging on a
+    single handle is a silhouette nothing else in the fourteen makes."""
+    P = Parts("boiler_chibi")
+    MX, MY = 0.0, 0.0
+    HIP = 0.46                                   # squatter than the Sower: braced
+    # PASS 6 - THE DIAGONAL WAS AIMED AT THE ONE CAMERA I HAD NOT COUNTED.
+    # The Sower's rule says every X-only direction is depth at azimuth 90, so
+    # this creature's whole mechanic was put on a diagonal - and the diagonal
+    # chosen (51.5 degrees in plan) sat THIRTEEN DEGREES off the file's
+    # three-quarter camera at azimuth 38. The hero sheet was clean at 0 and 90
+    # and the contact sheet was the original Boiler all over again: a drum on
+    # a stand with a man behind it, because at 38 you look straight down the
+    # pour. THE RULE, AND IT GENERALISES PAST THIS CREATURE AND PAST THIS
+    # FILE: a plan diagonal is not "off-axis", it is a NUMBER, and the number
+    # to pick is the one that MAXIMISES THE MINIMUM ANGLE TO EVERY CAMERA THE
+    # PIECE WILL BE SHOT FROM. The azimuths here are 0, 38 and 90 (lordgen
+    # VIEWS) plus 180 on the fit sheet; 64 degrees is the maximin, and it
+    # takes the worst case from 13 degrees to 26 - 0 is 64 off, 38 is 26 off,
+    # 90 is 26 off. "Diagonal" by eye is how a run clears two cameras and
+    # loses the third without ever being told.
+    DX, DY = 0.899, -0.438                       # the pour line, 64 deg in plan
+    EX, EY = 0.438, 0.899                        # across it
+    D = Vector((DX, DY, 0.0))
+
+    # --- LEGS. Stubs, planted wide and braced along the pour line - the lead
+    # foot under the pan, the back foot set behind him taking the weight.
+    # SHINS ARE `body` AND ONLY THE BOOT IS `dark` (carried from the Sower).
+    bang = math.atan2(DY, DX) + math.pi / 2.0
+    for s in (-1, 1):
+        st = 0.13 if s > 0 else -0.19            # the brace, along his line
+        hx, hy = EX * s * 0.21, EY * s * 0.21
+        fx, fy = EX * s * 0.235 + DX * st, EY * s * 0.235 + DY * st
+        limb(P, [(MX + hx, MY + hy, HIP),
+                 (MX + (hx + fx) * 0.5, MY + (hy + fy) * 0.5, 0.22),
+                 (MX + fx, MY + fy, 0.11)], 0.152, 0.137, 'body')
+        P.add(L.box(0.31, 0.42, 0.13), 'dark',
+              loc=(MX + fx + DX * 0.05, MY + fy + DY * 0.05, 0.065),
+              rot=(0.0, 0.0, bang))
+
+    # --- TORSO. Pelvis bridging the hips (without one the back view is two
+    # stumps under a floating ball - the Cook proved it), and a barrel LEANING
+    # BACK off the pour line.
+    P.add(L.sphere(0.350, 0.300, 0.180, 14, 9), 'body', loc=(MX, MY, 0.54))
+    P.add(L.sphere(0.435, 0.360, 0.405, 16, 10), 'body',
+          loc=(MX - DX * 0.08, MY - DY * 0.08, 1.00))
+    # THE BELT IS AN ELLIPSOID, NOT THE FILE'S BOX - see the header. A ring at
+    # the waist has no corner to show at three-quarter.
+    P.add(L.sphere(0.452, 0.388, 0.058, 14, 6), 'dark',
+          loc=(MX - DX * 0.04, MY - DY * 0.04, 0.735))
+    # both shoulders come FORWARD onto the bar; the near one drops
+    SHA = (MX - EX * 0.34 + DX * 0.02, MY - EY * 0.34 + DY * 0.02, 1.31)
+    SHB = (MX + EX * 0.34 + DX * 0.06, MY + EY * 0.34 + DY * 0.06, 1.25)
+    for sh in (SHA, SHB):
+        P.add(L.sphere(0.200, 0.192, 0.182, 11, 7), 'body', loc=sh)
+
+    # --- HEAD. Neck, skull, and HE IS LOOKING AT THE PAN - the eyes are set
+    # forward along D, not along -Y, because the one thing he would be
+    # watching is the lip.
+    P.add(aim(L.cone(0.145, 0.178, 0.17, 10), (MX - DX * 0.03, MY - DY * 0.03, 1.43),
+              (0.0, 0.0, 1.0)), 'body')
+    SK = (MX - DX * 0.02, MY - DY * 0.02, 1.82)
+    P.add(L.sphere(0.300, 0.288, 0.290, 15, 10), 'body', loc=SK)
+    for s in (-1, 1):
+        ex, ey = EX * s * 0.108, EY * s * 0.108
+        P.add(L.sphere(0.058, 0.058, 0.058, 8, 6), 'bone',
+              loc=(SK[0] + ex + DX * 0.262, SK[1] + ey + DY * 0.262, 1.800))
+        P.add(L.sphere(0.029, 0.029, 0.029, 8, 6), 'dark',
+              loc=(SK[0] + ex + DX * 0.292, SK[1] + ey + DY * 0.292, 1.806))
+    # the brow rag - one `dark` band, the only thing on his head. No hat: the
+    # file already carries the Snuffer's cone, the Sower's brim and the Cook's
+    # cap, and a fourth is a repeat, not a character.
+    P.add(L.sphere(0.303, 0.291, 0.072, 12, 6), 'dark',
+          loc=(SK[0], SK[1], 1.952))
+
+    # --- THE CRADLE. Two THICK splayed posts and a pivot bar, out along +D.
+    # The original's 0.070 posts under a 1.18 m disc are what made the parasol;
+    # at chibi weight they read as a stand built to hold something heavy.
+    CD = 1.14                                    # how far out along D it stands
+    for s in (-1, 1):
+        limb(P, [(MX + DX * CD + EX * s * 0.44, MY + DY * CD + EY * s * 0.44, 0.0),
+                 (MX + DX * CD + EX * s * 0.33, MY + DY * CD + EY * s * 0.33, 1.03)],
+             0.118, 0.096, 'dark')
+    limb(P, [(MX + DX * CD - EX * 0.40, MY + DY * CD - EY * 0.40, 1.03),
+             (MX + DX * CD + EX * 0.40, MY + DY * CD + EY * 0.40, 1.03)],
+         0.060, 0.060, 'dark')
+
+    # --- THE PAN. DEEP, not a dish, and ROLLED HARD off its far lip so the
+    # camera sees INTO it at the file's 6 degrees of elevation. A wide shallow
+    # disc is a table top whatever you tilt it; depth plus roll is what makes
+    # a vessel. `dark` body, `bone` rim, `glow` inside.
+    #
+    # PASS 2 - THE LIT MOUTH WAS INVISIBLE FROM ALL THREE VIEWS, AND BOTH
+    # CAUSES WERE MINE. (a) THE GLOW WAS SUNK INSIDE ITS OWN RIM: an 0.080
+    # tall `bone` rim wall at radius 0.47 standing over an 0.34 `glow` disc
+    # set 0.028 below its top is a CUP WITH A LID ON at 6 degrees of
+    # elevation - the one thing the Cook's lit mouth was supposed to have
+    # closed for good. The rim is now 0.055 tall and the lit disc is 0.42
+    # across and sits level with its top: the sugar fills the mouth, which is
+    # what full means. (b) THE PAN WAS BARELY ROLLED. At 37 degrees off flat
+    # the mouth's normal stands 53 degrees above the horizon and a camera at 6
+    # sees the disc at a third of its width, so the pan read as a dark drum
+    # with a pale lid. The roll is now 53 degrees - the mouth faces the room,
+    # not the ceiling - and THAT is what makes a shallow vessel read as one
+    # being poured out rather than as a table top.
+    #
+    # PASS 5 - THE PAN ATE THE MAN AT AZIMUTH 38. The three-quarter view is
+    # the file's own acceptance view and it was the worst of the four: with
+    # the pan centred 0.98 out and 1.27 up, its 0.93 m lit face sat exactly
+    # over his chest, both arms and the whole handle, and what was left was a
+    # head above a dinner plate on four legs. It is the Cook's fault 5 and the
+    # original Boiler's own side view, moved one azimuth over - ONE MEMBER
+    # PHYSICALLY SWALLOWING THE FIGURE - and the fix is the same one that
+    # worked there: CLEAR AIR. The pan goes 0.22 further out and 0.09 lower,
+    # which also buys back the hands at azimuth 90, where they had been behind
+    # it since pass 2 and the man read as standing BEHIND a pan rather than
+    # holding one. It costs 0.2 m of footprint and the corridor has 11.
+    PC = Vector((MX + DX * 1.20, MY + DY * 1.20, 1.18))
+    #
+    # PASS 3 - TWO THINGS, AND THE FIRST IS A PLAIN BUG I PUT THERE. (a) THE
+    # LIT DISC HAD A DARK HOLE PUNCHED THROUGH ITS MIDDLE. The pan body is an
+    # ellipsoid 0.235 deep along N and pass 2 floated the `glow` disc at
+    # N*0.186 - INSIDE it - so the dark pole came up through the sugar and the
+    # mouth read as a washer. Anything meant to cover a solid must clear that
+    # solid's own pole, measured, not guessed: the disc now sits at N*0.248.
+    # (b) PASS 2 ROLLED THE PAN SO FAR THAT ITS MOUTH FACED THE ROOM FLAT ON -
+    # and the room is where BOTH cameras are. A circle 53 degrees over was a
+    # full circle at azimuth 0 AND at azimuth 90: the Snuffer's cone fault in
+    # a new form, a shape that cannot be told apart from itself. 45 degrees
+    # keeps 71% of the width in both views and reads as a pan TIPPING in
+    # neither - which is the thing it actually is.
+    N = Vector((DX * 0.70, DY * 0.70, 0.71)).normalized()
+    TL = Vector((DX * 0.71, DY * 0.71, -0.70)).normalized()   # down-slope: the lip
+    P.raw(aim(L.sphere(0.445, 0.445, 0.235, 18, 10), PC, N), 'dark')
+    P.raw(aim(L.cone(0.462, 0.476, 0.070, 20), PC + N * 0.188, N), 'bone')
+    P.raw(aim(L.cone(0.418, 0.430, 0.030, 18), PC + N * 0.248, N), 'glow')
+
+    # --- THE HANDLE. One long bar from the pan's near side back to BOTH his
+    # hands. This is what explains the roll, and two arms on one bar is the
+    # silhouette that clears every other man in the file.
+    LIP = PC + N * 0.150 + TL * 0.455
+    # PASS 3 - THE ARMS WERE SWALLOWED BY THE BELLY. At z 1.09 and 1.01 the
+    # hands sat level with the torso's own widest band, so from every azimuth
+    # the two arms, the chest and the pelvis merged into one gourd and the
+    # pale sleeve guards - the only `bone` on the man - had nothing to stand
+    # against. Hands up to 1.20/1.13 and further out: the arms now leave the
+    # silhouette as arms, with air under them.
+    HA = Vector((MX + DX * 0.58 - EX * 0.17, MY + DY * 0.58 - EY * 0.17, 1.20))
+    HB = Vector((MX + DX * 0.42 + EX * 0.22, MY + DY * 0.42 + EY * 0.22, 1.13))
+    # the lever comes off the BACK of the pan at its own height and runs down
+    # to the two hands. Pass 1 hung it off the rolled rim, which put it at
+    # 1.61 m, straight across his face.
+    limb(P, [(PC - D * 0.46 + Vector((0, 0, 0.08))), HA, HB], 0.064, 0.058, 'dark')
+
+    # --- THE ARMS. Short, with the elbow as the silhouette, and the ONE pale
+    # thing on the man: heavy sleeve guards from elbow to wrist.
+    for sh, hd in ((SHA, HA), (SHB, HB)):
+        el = Vector(((sh[0] + hd.x) * 0.5 + DX * 0.06,
+                     (sh[1] + hd.y) * 0.5 + DY * 0.06,
+                     (sh[2] + hd.z) * 0.5 - 0.09))
+        limb(P, [sh, el, hd], 0.150, 0.120, 'body')
+        limb(P, [el, (el + hd) * 0.5, hd - (hd - el) * 0.14], 0.172, 0.146, 'bone')
+        # PASS 4 - A 13.5% PAIR CANNOT EDGE ITSELF. The `bone` sleeve guard
+        # against the `body` arm is the file's weakest usable separation and
+        # on a round member under flat light it simply vanished: three passes
+        # and the only pale thing on the man had never once read. It does not
+        # need a stronger fill, it needs a BOUNDARY - a `dark` cuff at the
+        # wrist, where dark against either of them is a 5x pair. The guard is
+        # now legible because of what is at its end, not because of what it
+        # is made of.
+        P.add(L.sphere(0.158, 0.158, 0.062, 10, 6), 'dark',
+              loc=(hd.x - (hd.x - el.x) * 0.20, hd.y - (hd.y - el.y) * 0.20,
+                   hd.z - (hd.z - el.z) * 0.20))
+        P.add(L.sphere(0.165, 0.160, 0.152, 10, 7), 'body', loc=(hd.x, hd.y, hd.z))
+
+    # --- THE POUR. One thick unbroken lit rope off the lip, travelling 0.6 m
+    # further out along D before it reaches the floor, so it is a long clear
+    # diagonal and never falls inside the pan's own footprint.
+    EV = Vector((EX, EY, 0.0))
+    pour = [LIP,
+            LIP + D * 0.26 + EV * 0.075 + Vector((0, 0, -(LIP.z - 0.74))),
+            LIP + D * 0.46 + EV * 0.090 + Vector((0, 0, -(LIP.z - 0.30))),
+            LIP + D * 0.56 + EV * 0.060 + Vector((0, 0, -(LIP.z - 0.02)))]
+    # PASS 2 - THE POUR WAS A SHEET, NOT A ROPE. 0.150 of radius on a 1.0 m
+    # fall is 30% of the drop in width, and a ribbon that wide under flat
+    # light shows one face and reads as a SAIL. Narrower, and bowed 0.09
+    # across E so it is a curve in plan as well as in elevation - a falling
+    # rope of sugar swings, a sail does not.
+    P.raw(L.tube(pour, [0.126, 0.114, 0.107, 0.132], 10), 'glow')
+
+    # --- THE POOL, SETTING FROM THE OUTSIDE IN. Lit centre, heavy `bone`
+    # crust all round it, three broken plates riding the edge, and the scraper
+    # standing seized in it.
+    PL = (pour[-1].x + DX * 0.13, pour[-1].y + DY * 0.13)
+    P.add(L.sphere(0.495, 0.495, 0.032, 18, 6), 'glow', loc=(PL[0], PL[1], 0.018))
+    _ring(P, (PL[0], PL[1], 0.038), 0.515, 'z', 'bone', 0.072, 20)
+    for k in range(3):
+        a = 1.05 + TAU * k / 3.0
+        cx, cy = PL[0] + 0.60 * math.cos(a), PL[1] + 0.60 * math.sin(a)
+        P.raw(aim(L.cone(0.185, 0.150, 0.050, 10), (cx, cy, 0.030),
+                  (math.cos(a) * 0.42, math.sin(a) * 0.42, 1.0)), 'bone')
+    # PASS 2 - THE SEIZED SCRAPER WAS A GALLOWS. Pass 1 leaned a thin haft far
+    # over and capped it with a 0.215 DISC, which is the lollipop I had just
+    # dropped off his shoulder, put back in the floor: from the back it read
+    # as a sign bracket and from the side as a music stand. A DISC ON A STICK
+    # IS ALWAYS A LOLLIPOP - a tool is a BOX ON A STICK. The haft now stands
+    # nearly upright, thick, and carries a flat rectangular blade whose face
+    # turns back toward the room.
+    # PASS 3 - and it stands on the OTHER side of the pool. On +E it was
+    # directly behind the falling sugar at azimuth 90 and disappeared
+    # completely from the side view; on -E it is clear of the pour in all
+    # three. Shorter too - 0.90 of upright post beside a 0.50 pool was a
+    # signpost, and a seized tool leans.
+    # PASS 4 - IT STANDS BEYOND THE POOL NOW, NOT BESIDE IT. On -E it crossed
+    # the falling sugar at azimuth 0 and cut the one line that IS this
+    # creature in half, and at azimuth 180 it hid behind the same line
+    # entirely: a prop that is either in front of the mechanic or behind it
+    # is in the wrong place, and the only place clear of a diagonal in all
+    # three views is FURTHER ALONG IT.
+    SC0 = (PL[0] + DX * 0.66 - EX * 0.26, PL[1] + DY * 0.66 - EY * 0.26, 0.04)
+    SC1 = (PL[0] + DX * 0.52 - EX * 0.38, PL[1] + DY * 0.52 - EY * 0.38, 0.74)
+    limb(P, [SC0, SC1], 0.084, 0.070, 'dark')
+    P.add(L.box(0.34, 0.11, 0.27), 'bone', loc=(SC1[0], SC1[1], SC1[2] + 0.10),
+          rot=(0.0, 0.0, bang))
+    P.add(L.box(0.30, 0.07, 0.055), 'dark', loc=(SC1[0], SC1[1], SC1[2] - 0.015),
+          rot=(0.0, 0.0, bang))
+    return P
+
+
+BUILDERS.update({"boiler_chibi": boiler_chibi})

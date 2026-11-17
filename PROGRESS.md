@@ -7253,3 +7253,9 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - data/lore_lines.json `miniboss_feed.by_key`: +3 arrive and +4 fall on each of the fourteen minibosses = 98 lines. Plain register, nothing theatrical, each line says what the thing was or what it leaves behind. No {name} in these lines (arrive/fall fire with no one singled out). New `_note_c74` sits beside `_note`. No line repeats any existing string in the file.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical on a parsed-value compare (new items appended at the end of each array only, key order kept); 98 added, 0 changed, no other section touched; LF kept and the file's existing stray CR left as it was; no floor count; no artifact stocked.
 - CODE WIRING: none new. Pools are now 8-9 arrive and 8 fall per miniboss. Still owed by the game build: act/broken calls from each mechanic, the C-73 shape-line mechanics, "epic" -> "very rare" in the order array, artifact-never-stocked enforcement.
+
+## U43 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's 18:58 TAKE THIS NEXT row for HUD: "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No new HUD item; freeze in force, so nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 19:52 CT - last line IDLE 19:50:29 (chat bot B14, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

@@ -7421,3 +7421,9 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - miniboss_feed act (6-7) and broken (4) per key are READABLE but UNWIRED: delve.gd:3332 says those phases wait on each miniboss's own mechanic. They are dead pools until that lands, so I left them. arrive/fall are wired and were not widened (C-74).
 - NEEDED OF THE GAME BUILD, unchanged from C-75: delve.gd:190 pick from [lord_intros[id]] + lord_intros_alt[id] (and the unique pair); roster.gd:1289 forge[tier] + forge_alt[tier]. If a run can log how often `_pick_line("misfire")` fires per delve, that number decides whether misfire gets a second pool.
 - VALIDATION OK: no data file edited; items.json, lore_lines.json, bosses.json, potions.json all parse and are unchanged (git diff on data/ is empty). No floor count, no artifact stocked, no .gd or other file touched.
+
+## U45 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: the plan's HUD row (WORK_PLAN ~line 68-70, supervisor 20:58 / 21:58 text): "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No TAKE THIS NEXT block names a new HUD item; L73 and L74 are ticked, L31 remainder belongs to the game build. Nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 21:53 CT - last line IDLE 21:49:16 (chat bot B16, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

@@ -1,0 +1,47 @@
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+16:50:27 | INFO: Data are loaded, start creating Blender stuff
+16:50:27 | INFO: Blender create Mesh node Cube.125
+16:50:27 | INFO: Blender create Mesh node Cube.126
+16:50:27 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:27 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:27 | INFO: Blender create Mesh node Cube.128
+16:50:27 | INFO: Blender create Mesh node Cube.127
+16:50:27 | INFO: Blender create Mesh node Cube.003
+16:50:27 | INFO: Blender create Mesh node Cylinder.280
+16:50:27 | INFO: Blender create Mesh node Cylinder.005
+16:50:27 | INFO: Blender create Mesh node Cylinder.010
+16:50:27 | INFO: Blender create Mesh node Cylinder.022
+16:50:27 | INFO: Blender create Mesh node Cube.11839
+16:50:27 | INFO: Blender create Mesh node Cube.12993
+16:50:27 | INFO: Blender create Mesh node Cube.124
+16:50:27 | INFO: Blender create Mesh node Plane.004
+16:50:27 | INFO: glTF import finished in 0.49s
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:02.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_front.png'
+00:03.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_side.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_back.png'
+16:50:29 | INFO: Data are loaded, start creating Blender stuff
+16:50:29 | INFO: Blender create Mesh node Cube.125
+16:50:29 | INFO: Blender create Mesh node Cube.126
+16:50:29 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:29 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:29 | INFO: Blender create Mesh node Cube.128
+16:50:29 | INFO: Blender create Mesh node Cube.127
+16:50:29 | INFO: Blender create Mesh node Cube.003
+16:50:29 | INFO: Blender create Mesh node Cylinder.280
+16:50:29 | INFO: Blender create Mesh node Cylinder.005
+16:50:29 | INFO: Blender create Mesh node Cylinder.010
+16:50:29 | INFO: Blender create Mesh node Cylinder.022
+16:50:29 | INFO: Blender create Mesh node Cube.11839
+16:50:29 | INFO: Blender create Mesh node Cube.12993
+16:50:29 | INFO: Blender create Mesh node Cube.124
+16:50:29 | INFO: Blender create Mesh node Plane.004
+16:50:29 | INFO: glTF import finished in 0.50s
+00:04.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\hero_front.png'
+00:04.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\hero_side.png'
+00:04.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook_chibi\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"cook": [0.84, 4.26, true], "cook_chibi": [0.84, 3.96, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

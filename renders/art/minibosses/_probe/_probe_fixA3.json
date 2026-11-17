@@ -1,0 +1,46 @@
+{
+ "tag": "fixA3",
+ "ok": true,
+ "errors": [],
+ "metrics": {
+  "fan_axis_splay_deg": 24.34,
+  "fan_panel_angles_deg": [
+   102.17,
+   90.04,
+   77.83
+  ],
+  "fan_panel_overlap": [
+   0.5192,
+   0.7551,
+   0.5401
+  ],
+  "fan_panel_overlap_max": 0.7551,
+  "fan_axis_concentration": 0.8882,
+  "fan_edge_px": 8392,
+  "fan_components": 1,
+  "fan_components_over_60px": 1,
+  "back_man_px": 58855,
+  "back_man_hidden_by_spares": 0.413,
+  "tq_man_px": 54713,
+  "tq_man_hidden_by_hurdle": 0.3774,
+  "tq_man_below_chest_px": 38948,
+  "tq_below_chest_hidden": 0.5301,
+  "head_weave_band_score": 0.1337,
+  "head_weave_px": 4308,
+  "head_glow_px": 157,
+  "head_glow_row_span_px": 10,
+  "head_glow_col_span_px": 30
+ },
+ "counts": {
+  "back_spares": 62275,
+  "back_spare0": 31004,
+  "back_spare1": 28072,
+  "back_spare2": 31007,
+  "back_man": 58855,
+  "tq_man": 54713,
+  "tq_hurdle": 57838,
+  "front_head_dark": 4308,
+  "front_head_glow": 157
+ },
+ "verdict": "GREEN"
+}

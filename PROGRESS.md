@@ -8663,3 +8663,45 @@ NEEDED FROM MR. E: nothing.
 - CODE WIRING: none for barks. For `hurdleman` the reader (delve.gd miniboss_lines) takes any key; the code lane should fire _miniboss_say("hurdleman", "arrive"/"fall") when it adds it to the spawn table with MB_FIT hurdleman 1.04 (art's measured number). No .gd touched.
 ## H32 hub standing check (2026-11-17 09:45 CT) - nothing new to build
 Fast-forwarded to origin/hub (5926fd8), merged origin/main clean (ead0b8a); `git diff` of web/ and docs/HUB_SECURITY.md across both was EMPTY, so web/ is byte-identical to the looked-at 02:00 build. Passes 1-5 in, H32 ticked WHOLE; queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned status line and failed-fetch box); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta, img-src 'self' data:, unchanged. MEASURED: web/icons 2,434,146 bytes on disk vs 6 MB cap. No new screenshot (unchanged build). Live dot red --live #e5484d. Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose: delete refused on this machine, ~7 MB binary not worth keeping in git.
+
+## Cycle A-19 - THE HURDLEMAN'S THREE WORST FAULTS, MEASURED (2026-11-17 09:48 CT)
+Clock read off the machine with `TZ=America/Chicago date`. The team lead was right about my
+last entry: it was headed 09:10 when the machine said 08:59. A future stamp, named and corrected.
+
+- THE ITEM WAS THE PLAN'S, NOT MY PROMPT'S. `TAKE THIS NEXT` 08:58 CT gives ART: fix the three
+  worst of the eight faults I named myself on the hurdleman before building a nineteenth.
+  System 10 is NOT my item this hour - the audit says `assets/monsters/creatures` is read at
+  `bestiary.gd:155` and the directory is no longer unreferenced; both halves are shipped and only
+  its tick is missing, above this seat.
+- WHAT I CHECKED FOR FIRST, MEASURED: I did not rebuild anything. I read my own eight-fault list
+  and the builder, and built an INSTRUMENT for the three before touching geometry -
+  `tools/art/_hurdle_probe.py`. It renders each part group alone through one camera off index
+  spans the builder now records, and **goes RED on an empty mask**.
+- THE THREE, SAME METHOD BEFORE AND AFTER:
+  - "the posts splay and cross at odd angles" -> panel axis spread **13.63 -> 10.07 deg**, and
+    an even step (97.74/92.25/84.11 -> 95.11/90.06/85.04). One height, an even yaw step, a wider
+    lateral step, and a strap across the fan.
+  - "the hurdle covers the body from the chest down" -> man hidden in the three-quarter view
+    **0.4662 -> 0.3781**. Hurdle height 1.78 -> 1.40 m. Place untouched: moving it would undo
+    pass 4, which is what gives the side view a creature.
+  - "the withy head reads as a helmet with a visor band" -> weave band score **0.5618 -> 0.1379**.
+    The cause was in the loop: the three rings ran y, x AND **z**, and a ring on z is a horizontal
+    hoop round the skull. Every hoop is a meridian now; the eyes drop off the brow line.
+- THREE TIMES THE INSTRUMENT AND THE PICTURE DISAGREED AND I KEPT BOTH:
+  (1) my FIRST metric did not measure the fault - edge concentration read 0.8993 on the pass the
+  eye calls a jumble - so I rebuilt it to ask the written question;
+  (2) the best overlap number I got (all three at 0.387) made the FRONT and THREE-QUARTER views
+  worse than the start - a man penned between two fences - so the picture won and the overlap
+  went back up to 0.769 on the middle panel. Said plainly rather than dressed up;
+  (3) lying the panels flatter took the splay to **24.34 deg, worse than the 13.63 I began with**.
+  Pitch and yaw are not independent on screen. The number caught it; my eye had called it better.
+- FIT PROOF, LOOKED AT NOT ASSERTED: renders/art/minibosses/hurdleman/{front,side,three_quarter}.png
+  and hero_{front,side,back}.png beside the posed 2.45 m KayKit Knight. Register **GREEN**,
+  asked 18 / measured 18, blank+border **54 files, 0 failures**, errors [].
+  4 meshes, 1,790 faces, span **3.07 m CORRIDOR-SAFE**, **ratio 1.04 UNCHANGED**, pair_w 4.93.
+- EIGHT FAULTS STILL NAMED IN WRITING in docs/art/MINIBOSSES.md, including two this pass made
+  WORSE and I am not hiding: the man is more hidden from behind (0.3944 -> 0.4209), and the head
+  now has no face at all - the visor is gone and so are the eyes at pair scale.
+- GAME BUILD, NOT MINE, AND UNCHANGED BY THIS PASS: `scripts/delve.gd` MB_FIT `"hurdleman": 1.04`
+  is still the right number - the ratio did not move - plus one import run for the `.glb.import`
+  sibling. I touched no `.gd` outside tools/art/.

@@ -4880,7 +4880,18 @@ def hurdleman():
 
     Front is -Y, the same as the seventeen before it."""
     P = Parts("hurdleman")
+    # 17 Nov: PART SPANS, so each fault can be measured ON ITS OWN and not by
+    # eye. tools/art/_hurdle_probe.py renders one group at a time off these
+    # index ranges - a metric computed over a group that is EMPTY reports RED.
+    # Purely a record of where each section starts and ends in P.items; it
+    # changes no geometry.
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
     MX = -0.46                                   # the man stands left of centre
+    _i_man = len(P.items)
 
     # ---- planted, and leaning into the swing rather than standing to attention
     _legs(P, MX, hip=0.84, stance=0.25, r0=0.098, r1=0.080, boot=(0.27, 0.44, 0.11))
@@ -4903,13 +4914,47 @@ def hurdleman():
     # reading as a visor and I named it; this is the other answer - the head is
     # made of the same woven rod as the hurdles, so the creature and its work
     # are one material.
+    _span("man_lower", _i_man)
+    _i_head = len(P.items)
     HD = (MX + 0.30, -0.16, 1.76)
     limb(P, [(MX + 0.26, -0.13, 1.52), HD], 0.070, 0.058, 'bone')
     P.add(L.sphere(0.175, 0.170, 0.160, 12, 8), 'bone', loc=HD)
-    for k, ax in enumerate(('y', 'x', 'z')):
-        _ring(P, (HD[0], HD[1], HD[2] + (k - 1) * 0.035), 0.172 - k * 0.012,
-              axis=ax, slot='dark', rad=0.018, n=12)
-    eyes(P, (HD[0], HD[1], HD[2] - 0.01), 0.055, 0.027, -0.13)
+    # PASS 7, FAULT 4 OF THE EIGHT, AND IT IS THE ONE I SAID I HAD NOT SOLVED.
+    # Written at the time: "the withy head still reads as a helmet with a visor
+    # band at pair scale - the crossing rings plus two lit eyes." The cause was
+    # in the loop, not in the idea: the three rings ran y, x AND Z, and a ring
+    # on the Z axis is a HORIZONTAL HOOP ROUND THE HEAD. One dark band across a
+    # pale skull at eye height IS a visor, whatever it is made of, and two lit
+    # dots sitting on it finish the helmet. Measured: a band score of 0.5618 -
+    # the worst row of the weave covering 56 points more of its row than the
+    # median row does.
+    # A BASKET IS WOVEN THE OTHER WAY. Every hoop is now a MERIDIAN - a vertical
+    # ring through the crown, stepped round in yaw - so the dark runs top to
+    # bottom like the rods of a hurdle and the head is made of the same stuff as
+    # the fences, which was always the intent. One slack binding hoop stays, but
+    # it is dropped to the NECK, below the skull, where a withy head would be
+    # tied off and where it cannot be read as a brow.
+    for _k in range(5):
+        _yw = math.pi * _k / 5.0
+        _c, _s2 = math.cos(_yw), math.sin(_yw)
+        _pts = []
+        for _i in range(17):
+            _t = TAU * _i / 16.0
+            _rr = 0.170 * math.cos(_t)
+            _pts.append(Vector((HD[0] + _rr * _c, HD[1] + _rr * _s2,
+                                HD[2] + 0.163 * math.sin(_t))))
+        P.raw(L.tube(_pts, [0.016] * len(_pts), 6), 'dark')
+    _ring(P, (HD[0], HD[1], HD[2] - 0.158), 0.088, axis='z', slot='dark',
+          rad=0.019, n=12)
+    # AND THE EYES COME OFF THE BROW LINE. Two dots side by side at the widest
+    # part of a head are a visor's eye slot no matter what is round them, so
+    # they drop into the weave below the equator, draw closer together and
+    # shrink - a light INSIDE the basket, which is what the written intent
+    # ("the eyes deep inside the weave") said in the first place.
+    eyes(P, (HD[0], HD[1], HD[2] - 0.072), 0.042, 0.021, -0.11)
+
+    _span("head", _i_head)
+    _i_tool = len(P.items)
 
     # ---- THE BEETLE, two-handed, on a long diagonal down to the hurdle's foot.
     # It is the one clean straight line on the creature and it points AT the
@@ -4930,6 +4975,9 @@ def hurdleman():
                   BD), 'bone')
     limb(P, [SL, (MX + 0.16, -0.30, 1.32), (MX + 0.52, -0.28, 1.30)], 0.082, 0.058, 'body')
     limb(P, [SR, (MX + 0.68, -0.42, 1.18), (MX + 0.82, -0.58, 0.90)], 0.082, 0.058, 'body')
+
+    _span("tool_arms", _i_tool)
+    _i_hurdle = len(P.items)
 
     # ---- THE HURDLE ALREADY UP. Off to his right and forward, yawed 34
     # degrees and a little out of plumb, as a panel driven in by hand is.
@@ -4953,15 +5001,88 @@ def hurdleman():
     # metre clear of the body, and the yaw opens to 41 degrees. It now stands
     # BETWEEN the camera and the creature in the side view, which is not a
     # compromise - it is the mechanic drawn: the fence is between you and it.
-    _hurdle(P, ox=0.46, oy=-0.92, yaw=0.72, w=1.18, h=1.78, tilt=0.05)
+    # PASS 7, FAULT 3 OF THE EIGHT. Written at the time: "in the creature's own
+    # three-quarter framing the standing hurdle covers the body from the chest
+    # down - a strong image, and it is the mechanic, but it is A HURDLE WITH A
+    # MAN BEHIND IT, not a man with a hurdle." Measured off isolated renders
+    # through one camera: 46.6% of the man's own pixels sat behind the hurdle,
+    # and 53.1% of everything below his chest line.
+    # THE LEVER IS HEIGHT, NOT PLACE. Moving it would undo pass 4 part B, which
+    # put the hurdle a metre forward so the SIDE view has a creature in it. A
+    # real sheep hurdle is waist-to-chest high on a man anyway - 1.78 m was
+    # a door. 1.40 m clears his belt and leaves the whole torso, the arms, the
+    # swing and the head standing above it, and the fence still crosses the
+    # floor in front of him, which is the whole mechanic.
+    _hurdle(P, ox=0.46, oy=-0.92, yaw=0.72, w=1.18, h=1.40, tilt=0.05)
+
+    _span("hurdle", _i_hurdle)
+    _i_spares = len(P.items)
 
     # ---- THE SPARES ON HIS BACK: three flat panels, fanned. WIDE AND THIN is
     # the whole instruction - the Loader is a square column and these must not
     # be mistaken for it from across a room.
-    for yw, dx, dy, dz in ((-0.34, -0.16, 0.30, 1.04),
-                           (-0.08, -0.24, 0.40, 1.10),
-                           (0.20, -0.32, 0.48, 1.00)):
+    # PASS 7, FAULT 1 OF THE EIGHT I WROTE DOWN, AND IT IS A BACK-VIEW FAULT.
+    # Written at the time: "from the back the three spares read as a loose
+    # jumble of sticks, not as panels carried in a fan - the posts splay and
+    # cross at odd angles". Measured, that was a 13.63 degree spread between
+    # the three panels' own screen axes and every panel two-thirds buried
+    # behind another (overlap 0.67 / 0.59 / 0.60).
+    # THREE THINGS MAKE A CARRIED BUNDLE READ AS ONE: the panels sit at the
+    # SAME height, they step by the SAME angle, and SOMETHING TIES THEM. They
+    # had none of the three - different heights, an uneven yaw step and
+    # nothing holding them - so each post ended somewhere of its own and the
+    # fan came back as kindling. Even step, one height, and a strap.
+    # AND THE STEP HAD TO BE WIDER THAN MY FIRST TRY, WHICH THE NUMBER CAUGHT
+    # AND MY EYE WOULD NOT HAVE: the even yaw step alone took the splay from
+    # 13.63 to 9.92 degrees but drove the MIDDLE panel's overlap UP from 0.59
+    # to 0.76 - sandwiched between its neighbours, i.e. three panels showing
+    # two. A 0.20 m lateral step levelled all three at 0.387.
+    #
+    # *** AND THEN THE PICTURE VETOED THE NUMBER, WHICH IS THE WHOLE REASON
+    # *** THE RULE IS LOOK AT IT. At 0.20 m the back view was right and the
+    # FRONT and THREE-QUARTER were worse than what I started with: the fan
+    # reached out past both his shoulders and read as a SECOND FENCE standing
+    # beside him - a man penned between two hurdles instead of a man carrying
+    # spares. Every number I had was still improving. So the lateral step comes
+    # back to 0.12 m and the separation moves into DEPTH, where it costs the
+    # front view nothing, and the panels lie back harder (pitch 0.26 -> 0.38)
+    # so their tops stay under his shoulders instead of rising past his ears.
+    # *** AND THE PITCH CHANGE WAS A MISTAKE AND THE NUMBER CAUGHT IT. *** Lying
+    # them back to 0.38 took the splay to 24.34 degrees - WORSE THAN THE 13.63
+    # I started from, and worse in the exact way the fault describes. Pitch and
+    # yaw are not independent on screen: tipping a yawed panel back rotates its
+    # projected long axis, so the flatter lie re-created the splay the even yaw
+    # step had just removed. Pitch goes back to 0.26 and ONLY the lateral step
+    # and the depth step carry the fix. I would not have seen this by eye.
+    # The overlap number goes back up and I am not going to pretend otherwise:
+    # it is a BACK-VIEW measure, and the fault it was built for - "the posts
+    # splay and cross at odd angles" - is fixed by the even yaw step, which
+    # this keeps.
+    # AND THE TOPS COME DOWN BY TRANSLATION, WHICH IS THE LEVER THE PITCH
+    # SHOULD HAVE BEEN. At dz 1.00 the panels topped out at 1.61 against a head
+    # at 1.76, so in the three-quarter view they stood up round his skull and
+    # the whole thing read as A MAN IN A PEN - fence in front, fan behind, him
+    # in the middle - which is the opposite of a man who BUILDS the pen. Moving
+    # them down is a pure translation: it cannot rotate a projected axis, so the
+    # splay fix is untouched, and the tops now sit at his shoulder.
+    for _pi, (yw, dx, dy, dz) in enumerate(((-0.16, -0.30, 0.24, 0.84),
+                                            (0.00, -0.18, 0.40, 0.84),
+                                            (0.16, -0.06, 0.56, 0.84))):
+        _i_p = len(P.items)
         _spare_panel(P, MX + dx, dy, dz, yw, 0.26)
+        _span("spare%d" % _pi, _i_p)
+    # THE STRAP. Two bands of dark withy across the whole fan and one over the
+    # right shoulder - the thing that says CARRIED rather than LEANING. It is
+    # also the only part of the fan that crosses the panels on purpose, so the
+    # crossings the eye does see now mean something.
+    for _t, _r in ((0.30, 0.052), (-0.26, 0.046)):
+        limb(P, [(MX - 0.42, 0.20, 0.84 + _t), (MX - 0.18, 0.38, 0.84 + _t),
+                 (MX + 0.02, 0.58, 0.84 + _t)], _r, _r * 0.86, 'dark')
+    limb(P, [(MX + 0.30, 0.16, 1.40), (MX + 0.26, 0.32, 1.10),
+             (MX + 0.02, 0.54, 0.86)], 0.050, 0.042, 'dark')
+
+    _span("spares", _i_spares)
+    _i_floor = len(P.items)
 
     # ---- AND THERE IS MORE WHERE THAT CAME FROM, which is the Scrapwright's
     # trick and the right one: the floor says the fight is not over after one
@@ -4972,6 +5093,7 @@ def hurdleman():
     _ring(P, (0.30, -0.66, 0.045), 0.21, axis='z', slot='dark', rad=0.038, n=14)
     _ring(P, (0.30, -0.66, 0.105), 0.17, axis='z', slot='dark', rad=0.034, n=14)
 
+    _span("floor", _i_floor)
     P.used_pack = False
     return P
 

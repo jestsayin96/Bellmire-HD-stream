@@ -1,0 +1,47 @@
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+17:36:20 | INFO: Data are loaded, start creating Blender stuff
+17:36:20 | INFO: Blender create Mesh node Cube.125
+17:36:20 | INFO: Blender create Mesh node Cube.126
+17:36:20 | INFO: Blender create Mesh node PrototypePete_body.020
+17:36:20 | INFO: Blender create Mesh node PrototypePete_head.001
+17:36:20 | INFO: Blender create Mesh node Cube.128
+17:36:20 | INFO: Blender create Mesh node Cube.127
+17:36:20 | INFO: Blender create Mesh node Cube.003
+17:36:20 | INFO: Blender create Mesh node Cylinder.280
+17:36:20 | INFO: Blender create Mesh node Cylinder.005
+17:36:20 | INFO: Blender create Mesh node Cylinder.010
+17:36:20 | INFO: Blender create Mesh node Cylinder.022
+17:36:20 | INFO: Blender create Mesh node Cube.11839
+17:36:20 | INFO: Blender create Mesh node Cube.12993
+17:36:20 | INFO: Blender create Mesh node Cube.124
+17:36:20 | INFO: Blender create Mesh node Plane.004
+17:36:20 | INFO: glTF import finished in 0.49s
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:140: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:02.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_front.png'
+00:03.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_side.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_back.png'
+17:36:22 | INFO: Data are loaded, start creating Blender stuff
+17:36:22 | INFO: Blender create Mesh node Cube.125
+17:36:22 | INFO: Blender create Mesh node Cube.126
+17:36:22 | INFO: Blender create Mesh node PrototypePete_body.020
+17:36:22 | INFO: Blender create Mesh node PrototypePete_head.001
+17:36:22 | INFO: Blender create Mesh node Cube.128
+17:36:22 | INFO: Blender create Mesh node Cube.127
+17:36:22 | INFO: Blender create Mesh node Cube.003
+17:36:22 | INFO: Blender create Mesh node Cylinder.280
+17:36:22 | INFO: Blender create Mesh node Cylinder.005
+17:36:22 | INFO: Blender create Mesh node Cylinder.010
+17:36:22 | INFO: Blender create Mesh node Cylinder.022
+17:36:22 | INFO: Blender create Mesh node Cube.11839
+17:36:22 | INFO: Blender create Mesh node Cube.12993
+17:36:22 | INFO: Blender create Mesh node Cube.124
+17:36:22 | INFO: Blender create Mesh node Plane.004
+17:36:22 | INFO: glTF import finished in 0.52s
+00:03.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_front.png'
+00:04.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_side.png'
+00:04.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_back.png'
+MINIBOSSFIT_REPORT {"ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blank": {"files": 2, "failures": []}, "ratios": {"scrapwright": [0.82, 4.62, true], "bellman": [1.1, 4.58, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

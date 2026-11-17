@@ -9064,3 +9064,13 @@ NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
 - CODE WIRING: none. weapon_id() pools every arcane piece of a tier. Side effect: the tier 1 arcane pool grows 3 -> 5, so the stable hash pick for a hero with no stamped wname can land on a different piece. The two new ids have no hub icon yet (icons are keyed per piece).
 ## H32 hub standing check (2026-11-17 14:45 CT) - nothing new to build
 Fast-forwarded to origin/hub (4d9c058) and merged origin/main (32dffd7) clean; `git diff` of web/ and docs/HUB_SECURITY.md across both merges was EMPTY, so web/ is byte-identical to the looked-at build. Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP), 520 thumbnails, vs 6 MB cap. No new screenshot (web/ unchanged). Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose, named here: delete refused on this machine. Not published by me.
+
+## U58 (HUD, 2026-11-17 ~14:55 CT) - the whole theme's text colours, measured against their own surface
+Item: my own choice (13:58 row gave HUD no item; the candidate named was what U55 still takes on trust).
+tools/_u58_contrast.gd walks 14 text-on-surface pairs in UiTheme at >=4.5:1, parchment flattened over BLACK and
+plate over WHITE (worst case). First run: 4 FAIL - VIEWER 3.72, TEAL_ON_PARCH 3.57, GOLD_ON_PARCH 4.26, GOOD 4.45.
+On SOLID parchment VIEWER (4.33) and TEAL_ON_PARCH (4.15) were real fails, not just stress-case artefacts.
+Fixed in ui_theme.gd by scaling down only: VIEWER .47/.30/.02, TEAL_ON_PARCH .05/.38/.38, GOLD_ON_PARCH .47/.30/.02,
+GOOD .10/.39/.16. Re-run: U58_CONTRAST OK 14 pairs; U56_HUE OK windowed; parse 0 errors. Looked at u55_100.png.
+STILL ON TRUST: the pair list is hand-written - a new colour added to UiTheme is not checked until someone lists it;
+and alpha panels over a real world frame are not sampled, only the two extremes.

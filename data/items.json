@@ -2844,6 +2844,111 @@
         ],
         "flavour": "It cuts along the line a thing was always going to break. The scar did the teaching."
       },
+      "w_blade_fishwife_knife": {
+        "name": "Fishwife's Knife",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Gutted ten thousand eels before anyone pointed it at anything else."
+      },
+      "w_blade_watchman_dagger": {
+        "name": "Watchman's Dagger",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Worn bright on one side where the thumb goes. The other side is not worn."
+      },
+      "w_blade_ropecutter_knife": {
+        "name": "Ropecutter's Knife",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Made to part a line in one pull. Does the same for a belt."
+      },
+      "w_blade_guild_stamped_dagger": {
+        "name": "Guild-Stamped Dagger",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Stamped, numbered and entered in a ledger. Someone will ask where it went."
+      },
+      "w_blade_chandler_wick_knife": {
+        "name": "Chandler's Wick-Knife",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "forged"
+        ],
+        "flavour": "Made to trim a wick. A good smith made it, so it trims other things as well."
+      },
+      "w_blade_sallow_gate_dagger": {
+        "name": "Sallow-Gate Dagger",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Carried by the gate-ward who counted every coin in. Found with none on him."
+      },
+      "w_blade_lamp_etched_dagger": {
+        "name": "Lamp-Etched Dagger",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Etched by the lampwright, small and even. The runes are paid for and look it."
+      },
+      "w_blade_bellsteel_knife": {
+        "name": "Bellsteel Knife",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Cast from the bell that cracked in the second winter. It still keeps a note."
+      },
+      "w_blade_seam_parting_dagger": {
+        "name": "Seam-Parting Dagger",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Parts a seam clean. What was sewn there does not stay sewn."
+      },
       "w_axe_woodsman": {
         "name": "Woodsman's Hatchet",
         "family": "axe",
@@ -6710,5 +6815,6 @@
   "_note_c54": "C-cycle 54: more cosmetics, accessories and dyes themed on the guild post, the scar stair, the wall, the feast, the harvest and the Commander. Additive only.",
   "_note_c58": "C-58 (WORK_PLAN C-55 step 2): every equipment piece and every accessory now carries \"rarity\", one rung of the shared ladder junk(fishing only) < common < uncommon < rare < very rare < legendary < artifact. Equipment rarity is its tier read straight across (0 common, 1 uncommon, 2 rare, 3 very rare, 4 legendary, 5 artifact - the found-only scarforged and scarwoven pieces). Accessories are all bought, so they stop at legendary and are banded by cost: up to 230 common, 231-300 uncommon, 301-360 rare, 361-440 very rare, 441 and over legendary. Rarity is a label on existing tiers and costs: it changes no number. ARTIFACT is never stocked by a shop and never carried by a trader. Cosmetics and dyes carry no rarity.",
   "_note_c61": "C-61 (WORK_PLAN D94 remainder): accessory rarity is now banded PER SLOT, superseding the single global 441+ cut in _note_c58 for accessories. Within each slot (ring, amulet, cloak, boots, gloves) a piece takes its midrank cost percentile among that slot's own pieces (equal costs share a rung) and the same cuts as the C-58 population: below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above that legendary. Every slot therefore has a legendary band. No cost, stat, price or tier changed; no rung was added, renamed or doubled. Equipment rarity is unchanged. ARTIFACT is still found-only: no shop at any level and no trader may ever stock one, and no accessory is an artifact. Readers must use the stored rarity key, never a global cost threshold.",
-  "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere."
+  "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere.",
+  "_note_c91": "C-91 (TAKE THIS NEXT 12:58, CONTENT row; game build S18 finding): nine NAMED blade-family daggers at tiers 1-3, three per tier, in equipment.weapons. Every tier 1-3 blade was a sword word, so the dagger meshes wired at S18 (gear.gd KINDS dagger, dagger_common/uncommon/rare) were reached only by the unnamed !forge path. gear.gd D94_KIND_WORDS reads a piece's kind from its NAME ('shortknife', 'knife', 'dagger' -> dagger), so each new name carries one of those words and no earlier-listed word. Same shape as every other piece: name, family, tier, tier_name, rarity (tier read straight across: 1 uncommon, 2 rare, 3 very rare), routes, flavour. No costs here. None is tier 4 or 5 and none is an artifact. Condition tracks tier: tier 1 is a working tool, tier 3 is paid-for and new-made. Tier 4+ daggers are not added because the dagger kit reuses ADV dagger.gltf there."
 }

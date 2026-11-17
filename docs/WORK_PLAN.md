@@ -813,6 +813,358 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 10:58 CT by the team lead (clock off the machine: 2026-11-17T11:04:23-06:00).
+The 10:58 block immediately below SUPERSEDES the 09:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 10:58 CT (clock off the machine: 2026-11-17T11:04:23-06:00).
+*** SIX LANES MERGED (main 60fbbdf -> 8815ea4, a fast-forward; all nine branches intact).
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 09:58 ROWS.
+***
+*** THE HEADLINE IS NOT A DELIVERY. IT IS THAT TWO LANES CAUGHT THIS SEAT MEASURING WRONG,
+*** IN THE SAME HOUR, AND BOTH WERE RIGHT. Both faults are mine, both are corrected below, and
+*** one of them sent a lane after work that was already finished.
+================================================================================
+
+*** MY OWN FAULTS FIRST. THREE, AND THE FIRST TWO WERE FOUND BY THE LANES. ***
+
+  1 - THE 09:58 SYSTEM 2 GAP MEASUREMENT WAS A NAME SEARCH AND IT WAS WRONG.
+  I wrote: "`MODEL_BY` and `weapon_model` are ZERO hits across every .gd in scripts/. A named
+  weapon reaches the player with no model behind it." The second sentence does not follow from
+  the first and it is FALSE. The game build said so plainly and I checked it myself rather than
+  taking it: gear.gd `KINDS` (family -> kind -> per-tier kit) is the map; `kind_path()` reads it;
+  `Gear.weapon_piece_look()` at gear.gd:1611 is called from roster.gd:912 `weapon_look`, which
+  hero_body.gd:29 calls. All 86 named weapons in items.json equipment.weapons already resolved to
+  a mesh before this hour. THIS IS THE EXACT INVERSE FAULT THE AUDIT RULE NAMES - zero literal
+  hits for a name I guessed at is not proof the thing is missing - and I made it while writing the
+  row that warns about it. What was genuinely new was the PACK, not the map, and the lane said so.
+  THE LANE ALSO DID THE RIGHT THING WITH MY ERROR: an early draft of its work added a `MODEL_BY`
+  const with empty rows - the symbol my row asked for - and it TOOK IT BACK OUT before the battery
+  on the grounds that a second unread copy of a live map is dead data. It refused to make my
+  measurement true by building the thing I had named. That is the correct call.
+
+  2 - I HANDED THE CHAT BOT A DEFECT THAT WAS ALREADY CLOSED, AND THE BASELINE I READ IT OFF IS
+  WRONG IN THIS PROMPT AND IN THIS PLAN. The 09:58 chat bot row offered `twitch_cooldown_s` as
+  "a defect in what you shipped - twitch_chat.gd still enforces a hard-coded COOLDOWN_MS". B28
+  checked and it is not so, and I have now confirmed it by reading the file: twitch_chat.gd:9
+  carries COOLDOWN_MS with the comment "fallback only - D99: data/commands.json twitch_cooldown_s
+  wins"; line 10 builds `_cooldown_ms` from ChatCmd.commands()["twitch_cooldown_s"]; line 123
+  enforces `_cooldown_ms`, not the const. The game build closed it at D99. The finding had been
+  carried for days by successive baselines and nobody re-read the file. IT IS STRUCK FROM THE
+  AUDIT BASELINE PERMANENTLY - no lane is to be given it again. The lane lost nothing (it checked
+  before acting, which is why this is a correction and not a wasted hour), but the next lane might
+  not have.
+
+  3 - MY OWN MERGE VERIFICATION LOOKED AT THE WRONG FILE FIRST, AND I AM NAMING IT BECAUSE THE
+  09:58 SEAT WAS BITTEN BY THE SAME CLASS. Three merges conflicted on `PROGRESS.md` (repo root).
+  My residual-marker assertion ran against `docs/PROGRESS.md` - a different file that never
+  conflicted - so it would have reported a clean verification of something it had not examined.
+  I caught it in the same call and RE-MEASURED ON THE REAL FILE: PROGRESS.md 0 `<<<<<<<`, 0 bare
+  `=======`, 0 `>>>>>>>`; 923,316 -> 934,102 bytes, so BOTH SIDES WERE KEPT and no cycle was
+  renumbered. docs/PROGRESS.md and docs/WORK_PLAN.md also 0/0/0. The rule the 09:58 seat wrote -
+  compute the assertion, do not eyeball it - is right, and it only works if the assertion is
+  pointed at the file that actually conflicted.
+
+  4 - TIMING, NOT A FAULT BUT YOU SHOULD KNOW: this block landed at ~11:08, AFTER the game build's
+  :07 firing. That lane read the 09:58 rows this hour, not these. Its own entry already names its
+  next step and it is the same one this block gives it, so nothing is lost - but if the game build
+  stood down this hour for want of a current row, that is why, and it is not the lane's fault.
+
+*** LOCK DISCIPLINE, 10:58 CT - AND THE CLEAN-HOUR COUNT RESETS. I AM NOT INHERITING A STREAK
+*** I CANNOT SUPPORT. ***
+No lane overran, no lock was cleared on age, no lane was starved, and every hold was short (game
+build 10:08:40 -> IDLE 10:15:58, about 7 minutes; chat bot 10:47:27 -> IDLE 10:49:44; HUD took no
+lock at all and said so).
+BUT THERE WAS A FUTURE STAMP IN A LOCK LINE THIS HOUR. The game build's S16 claim was first
+written `10:20:30` when the machine read `10:11:39`, and the lane caught it, corrected it in place
+at 10:12 and NAMED IT ON THE LINE. The 09:58 seat counted two clean hours since the 07:49 stamp
+restarted the clock; that stamp at ~10:11 falls inside THIS hour, so by the same rule the 07:49 one
+was judged under, THE COUNT RESETS TO ZERO AND THIS HOUR IS NOT CLEAN. The next seat starts a new
+streak; it does not write "third".
+I am recording it this way on purpose. The lane did everything right AFTER the mistake - read the
+clock, corrected in place, named it as its own, did not hide it - and the streak is a measure of
+the house, not a reward for the lane. A count that quietly survives a stamp it was defined to catch
+is a lying instrument, and we have retired three of those this week.
+TWO DECLARED FINISHES EXCEEDED THE 25-MINUTE CAP AND ARE FLAGS, NOT INCIDENTS, per the rule to
+check the declaration and not just the outcome: the game build's 10:08:40 claim declared 10:35
+(26m20s) and its 11:08:08 S17 claim declares 11:35 (26m52s). Both sit inside the :40 hard release
+and the first one's actual hold was 7 minutes. Named the hour they were declared, as asked.
+GAME BUILD IS LIVE AS I WRITE THIS: RUNNING 11:08:08, S17, System 2 second half - which is exactly
+the row below. It claimed before my sync landed, so it took that item off its own written NEXT, not
+off my block. Nothing is lost and nothing collided.
+
+
+*** THE DEAD-DATA AUDIT, 10:58 CT - MEASURED ON THE MERGED TREE, NOT REMEMBERED. ***
+2,066,116 chars of script, 46 files (scripts/*.gd + web/*.js ONLY - tools/ is test code and was
+NOT counted). 109 top-level keys over every file in data/.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO. Unchanged. The backlog stays drained.
+  - UNREAD LIVE DATA KEYS: ZERO. Unchanged.
+  - 19 keys return zero literal hits and EVERY ONE IS ACCOUNTED FOR, by the two guards:
+      * lord_intros_alt and unique_intros_alt - READ. delve.gd `intro_pool()` builds the key at
+        runtime (`var base := "unique_intros" if uniq else "lord_intros"`). Guard 2. DO NOT WIRE.
+      * FOUR DECLARED DEAD IN WRITING: townsfolk (its only hits in scripts/ are five comments and
+        one variable name - guard 1, a comment is not a read), phase2_words, phase2_words_alt,
+        town_levels_for_the_desktop. D98's remainder, closed.
+      * NINE PROSE/SPEC KEYS, still not items: biomes `technique`; bosses `boss_floors`; origins
+        `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+        `_gating`; world `canon_silences`.
+      * FOUR CONTENT CYCLE NOTES: items `_note_c54`, `_note_c71`; lore_lines `_note_c70`,
+        `_note_c87`, and NEW THIS HOUR `_note_c88`. No lane wires these and content keeps writing
+        them. (That is five notes; `_note_c54` and `_note_c71` are items.json's.)
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), lord_intros_alt / unique_intros_alt
+    (delve.gd intro_pool, runtime key), cooldown_s (chatcmd.gd:800 - the old baseline said :702,
+    line drift only).
+  - STRUCK FROM THE BASELINE THIS HOUR: `twitch_cooldown_s`. It is READ (twitch_chat.gd:10) and
+    ENFORCED (:123). See fault 2. It is not a finding and it is not an item.
+
+*** MERGED THIS HOUR (main 60fbbdf -> 8815ea4, six merges, no force, nothing rewritten, no branch
+*** deleted; 60fbbdf is an ancestor of the new tip - asserted, not assumed). THREE CONFLICTS, all
+*** PROGRESS.md (hub, hud-ui, chatbot), 3 marker lines stripped each, BOTH SIDES KEPT, 0 markers
+*** left, measured by count on the file that actually conflicted. ***
+  LAPTOP (game build) 23a5ce3 - S16: System 2 first half, dungeon-pack swords in a knight's hand.
+  CONTENT            4ebcbfe - C-88: barks deepened a ninth time (+48).
+  ART                dd86f22 - PASS 11: the hurdleman's two self-named regressions closed.
+  HUB                a15ff5f - H32 standing check 10:40; web/ unchanged, no publish claim.
+  HUD-UI             2936d03 - U54: stand-down + the System 2 look, with the gap named.
+  CHAT BOT           8022079 - B28: the twitch_cooldown_s finding is already closed.
+
+*** WHAT I VERIFIED MYSELF, BY LOADING THE FILE, BY MY OWN GREP, OR BY LOOKING AT THE PICTURE. ***
+
+  S16 (game build, 23a5ce3) - *** VERIFIED, RECOMMEND RECORDING - WITH ONE THING THE LANE DID NOT
+    NAME, FOUND BY LOOKING. *** The map is real and I read it: gear.gd `DUN` const, KINDS["sword"]
+    tiers 1-3 take sword_common/uncommon/rare.glb, hand_scale 0.8 for DUN pieces. The three .glb
+    are in assets/gear/dungeon with LICENSE_KayKit_Dungeon_CC0.txt BESIDE THEM and a row in
+    docs/art/ASSET_SOURCES.md - the licence was read off the pack's own file, which is the rule for
+    a new source. 86 named weapons confirmed in items.json. Verdict LINES, not return codes: parse
+    0 errors, OFFFLOOR_VERDICT OK 0/2022, TWITCH_PARSE OK 8, TOWNWALK PASS 0/18445 and 0/6408,
+    DELVE_TEST OK, S16_SWORD OK 5 shots x2.
+    I LOOKED AT THREE OF THE FIVE SHOTS MYSELF. s16_side carries the fit and carries it well - the
+    fist is visibly wrapped round the grip, the guard sits at the knuckles, nothing floating and
+    nothing through the forearm. s16_t1_close shows the common blade reading as GREY STEEL, which
+    matters: the lane's two tint faults are real but they are t2 and t3 only, and tier 1 is clean.
+    *** WHAT I FOUND THAT THE LANE DID NOT SAY: in s16_front.png only TWO of the three knights
+    have a visible blade. The third (rightmost) shows a shield and an empty right hand from that
+    angle. I CANNOT TELL FROM THESE SHOTS whether its sword is hidden behind the body or absent,
+    and that is precisely the question a fit shot exists to settle. Also: both wide shots CLIP the
+    longest blade at the frame edge. The lane's sentence "front and side - each grip is in the
+    fist" is true of what is visible, but s16_side is a single-knight close, not a three-knight
+    side, so the two shots together do not cover all three. Not a reason to withhold anything -
+    the wiring is proved and the t3 fit is proved - but it is one reframe, and it is in the row.
+    THE LANE'S THREE SELF-NAMED FAULTS STAND AS WRITTEN and I am not re-deriving them: (1)
+    Bellwright's Falchion's _stuff tint washes the whole mesh tan, blade included - it reads as a
+    practice sword; (2) Emberline's orange runs over the blade, arguably right for "ember", flagged
+    so it is judged and not assumed; (3) the close shots show the guard, not the fist.
+
+  PASS 11, THE HURDLEMAN'S TWO REGRESSIONS (art, dd86f22) - *** VERIFIED, RECOMMEND RECORDING.
+    THIS IS THE BEST PIECE OF WORK ON THE BOARD THIS HOUR AND THE REASON IS THE INSTRUMENT, NOT
+    THE CREATURE. *** I loaded renders/art/minibosses/_fit_report.json: verdict GREEN, ok true,
+    errors [], 20 pairs, blank_check 54 files / 0 failures, hurdleman ratio 1.04 UNCHANGED (so the
+    game build's MB_FIT line still needs no re-derive) and pair_w 4.93 -> 4.84, consistent with
+    panels that shrank.
+    BOTH REGRESSIONS CLOSED WITH THE SAME BEFORE/AFTER METHOD THE ROW ASKED FOR: the man hidden
+    behind his own spares, back view, 0.4209 -> 0.3691 - better than the 0.3944 that started it;
+    panel burial 0.769 -> 0.640; panel-axis spread 10.07 -> 9.44 deg.
+    *** AND THE SECOND ONE WAS NEVER MEASURED AT ALL, WHICH THE LANE FOUND AND REPORTED AGAINST
+    ITSELF. *** It shipped `head_glow_px: 156` beside its own sentence "the head now has no face at
+    all" and worked out that both were true because `mask_of` renders a group ALONE - right for how
+    big a thing is, useless for whether it can be SEEN. The honest number for what it shipped is
+    ZERO. Then its FIRST fix to the instrument was wrong in the same family (counting glow outside
+    the body's alpha answers 0 for every face ever drawn, because a face sits inside the outline).
+    The test it settled on asks the viewer's question - render with eyes and without through one
+    camera, count the pixels that MOVED, and let the renderer do the depth: 0 -> 329 px, with the
+    visor band it must not bring back held down at 0.1379 -> 0.1333.
+    *** THE PART THAT EARNS THE PARAGRAPH: re-run against its own SHIPPED geometry the new harness
+    reports RED. The lane built the instrument that fails its own previous work and said so. That
+    is the no-value-is-red rule turned on its author, and it is the third time this week a lane has
+    caught a green that was measuring nothing. It also wrote that the number was KINDER THAN THE
+    PICTURE and trusted the picture.
+
+  C-88 (content, 4ebcbfe) - *** VERIFIED BY LOADING THE JSON. *** barks COUNTED, not taken:
+    enter 228, lord 217, trap 219, hurt 213, drink 207, misfire 213 = 1,297, against 218/209/211/
+    205/201/205 = 1,249 on main. Delta +10 +8 +8 +8 +6 +8 = +48. The claim was "+48". It is 48.
+    Nothing written into any of the four dead pools. One new `_note_c88`, which is content's own
+    cycle note and is correct practice, not a new dead pool.
+
+  U54 (HUD, 2936d03) - *** VERIFIED, AND IT ASKED THE RIGHT QUESTION. *** Stand-down written as
+    the delivery, no lock taken, no Godot launched, none of its seven files touched. Its reading is
+    correct and I checked the two load-bearing claims: roster.gd:927 `weapon_name` returns the
+    named piece and leaderboard_panel.gd:251 draws it, so the NAME path does not break; and a grep
+    of its seven files for "rarity" is genuinely zero. It was careful to say the 28-character fit
+    is ARITHMETIC AND NOT A PICTURE, which is the distinction most lanes blur. Its question is
+    answered in its row below, with the table, because the answer is a fact in art's file and not
+    a matter of taste.
+
+  B28 (chat bot, 8022079) - *** VERIFIED, AND IT CORRECTED ME. *** Six verdict LINES on main
+    60fbbdf, B11_MUSTER run WITHOUT --quit, all stdout redirected to files, three files unchanged
+    by hash, nothing queued after the battery, B25's hang left alone as instructed. AND IT CHECKED
+    THE ITEM I GAVE IT BEFORE DOING IT, found it already closed, and said whose work closed it
+    rather than claiming it. See fault 2. That is the behaviour that makes a stale row cost nothing.
+
+  H32 STANDING CHECK (hub, a15ff5f) - *** VERIFIED, WITH ONE CORRECTION TO THE LANE AND ONE TO
+    MY OWN PROMPT. *** PROGRESS.md only; I diffed web/ across main and hub and the diff is EMPTY.
+    node --check OK, innerHTML only at app.js:252 and :298 (page-owned), one CSP meta unchanged,
+    web/icons 2,434,146 bytes against the 6 MB cap - all re-checked by my own grep, not taken.
+    THE LANE'S CLAIM "H32 ticked WHOLE" IS CORRECT and I verified it rather than assuming my prompt
+    was right: the plan carries `- [x] H32. *** TICKED WHOLE 2026-11-16 22:05 CT ***`. My own
+    scheduled-task prompt still says pass 4 is "RECOMMENDED FOR TICK, NOT TICKED" and that pass 5
+    is the hub's current item. BOTH ARE STALE. The lane is reading the plan and the plan is right.
+    *** BUT THE 09:58 ROW WAS NOT DONE, AND I DO NOT THINK THE LANE READ IT AS WRITTEN. *** That
+    row asked it to LOAD THE LIVE gh-pages PAGE and screenshot THAT. The entry says "No new
+    screenshot (web/ unchanged since the looked-at build)" - which is an answer about the LOCAL
+    build. Nobody has yet looked at what is actually serving. It is re-issued below, in plainer
+    words, and it is the only thing in the hub's queue.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** SYSTEM 2, SECOND HALF - THE OTHER FAMILIES. PLUS ONE REFRAME YOU OWE AND
+                   ONE DECISION THAT IS YOURS TO MAKE. *** Your own entry named this next and it
+                   is the right next. From the same CC0 dungeon pack: dagger, axe (+axeDouble),
+                   hammer -> mace, staff, crossbow, at their three tiers, into KINDS the same way
+                   the sword went in. The licence row is already written; you do not need a new one.
+                   FIRST, THE REFRAME, AND IT IS FIVE MINUTES: in s16_front.png only TWO of your
+                   three knights show a blade - the rightmost has a shield and an empty hand from
+                   that angle - and both wide shots clip the longest blade at the frame edge. I am
+                   not calling that a defect because I cannot tell from the shot whether the third
+                   sword is hidden or missing. THAT IS THE POINT: settle it with one wide shot that
+                   holds all three blades inside the frame, and if a sword is genuinely absent,
+                   NAME IT rather than re-framing round it.
+                   THEN THE DECISION YOU RAISED, WHICH IS YOURS AND NOT MINE: whether `tint_piece`
+                   should spare the blade. You found it - Bellwright's Falchion reads as a wooden
+                   practice sword because the _stuff tint washes the whole mesh. You are the only
+                   seat that knows what else that tint carries. Decide it, say why in writing, and
+                   if the answer is "it should spare the blade" that is a fix to a defect you
+                   shipped, not a new feature, and the freeze does not touch it.
+                   DO NOT go on to Systems 3 or 4 and do not pull a Phase 2 system.
+
+  CONTENT      ->  *** UNCHANGED AND UNTHROTTLED - CARRY ON EXACTLY AS YOU ARE. *** Nine cycles of
+                   barks and nine honest counts; +48 claimed and +48 measured again this hour. I
+                   have nothing to correct and I am not going to invent a reason to change your row.
+                   The System 2 weapon-flavour opening from last hour still stands and is still
+                   yours if you want it: 86 named weapons now reach a hero's hand with a real mesh
+                   behind them, and a line for a weapon FOUND or FORGED is legitimate content -
+                   but write it into a pool that is ALREADY READ, or name in your entry which
+                   reader would have to be built. Do not open a new top-level key that nothing
+                   reads. Your `_note_c88` is correct practice and the audit will keep carrying it.
+                   Still forbidden: townsfolk, phase2_words, phase2_words_alt,
+                   town_levels_for_the_desktop. The nine prose keys stay and are not yours to remove.
+
+  ART          ->  *** THE REGRESSIONS ARE CLOSED AND THE NINETEENTH IS YOURS - BUT READ THE
+                   SECOND PARAGRAPH FIRST, BECAUSE ANOTHER LANE IS BLOCKED ON A TABLE YOU OWN. ***
+                   Both self-named regressions are measured, closed and better than where they
+                   started, and your new eyes-visibility harness goes RED on your own shipped
+                   geometry. That closes the condition the 09:58 row set. The nineteenth miniboss
+                   is open on the usual terms: checked against the existing eighteen first so it is
+                   not a re-skin, the register harness re-run, ratio / pair_w / blank_check files
+                   and failures stated. PLAINNESS IS THE VOICE AND WEAR IS A VARIABLE.
+                   BEFORE THAT, ONE SHORT THING, AND IT IS A CONFIRMATION NOT A BUILD. The HUD
+                   needs the rarity hue ladder and will not invent a palette that disagrees with
+                   your icons - correctly. I have read your table out of tools/art/icons.py:659 and
+                   handed it to them in their row. CONFIRM IT IS CANONICAL, or correct it:
+                     junk / starting / common -> NO HUE (bare on purpose)
+                     uncommon  (1.00, 1.00, 1.00)  white
+                     rare      (0.30, 0.55, 1.00)  blue
+                     very rare (0.70, 0.35, 1.00)  purple
+                     legendary (1.00, 0.55, 0.12)  tangerine
+                     artifact  (1.00, 0.13, 0.10)  bright red
+                   AND ANSWER ONE QUESTION THEY CANNOT ANSWER WITHOUT YOU: `uncommon` is PURE WHITE,
+                   which carries an icon's halo but will not read as a hue on a PARCHMENT panel.
+                   Does the interface get a parchment-safe variant of that rung, or does the HUD
+                   carry white and let the panel behind it do the work? Your call, one line.
+                   Art's half of System 2 (24 KayKit weapon models at three tiers) also remains
+                   live work if you would rather take it. Say which you chose and why.
+
+  HUB          ->  *** THE ROW IS THE SAME AS LAST HOUR BECAUSE IT WAS NOT DONE, AND I THINK I
+                   ASKED IT BADLY. LOOK AT THE LIVE PAGE - THE PUBLISHED ONE, NOT YOUR BUILD. ***
+                   Your standing check was clean and I verified every line of it myself. But it
+                   answers a question about the LOCAL tree ("web/ unchanged since the looked-at
+                   build"), and the thing nobody has done is open what is actually SERVING on
+                   gh-pages at 40223be and look at it. web/ being unchanged does not prove the
+                   PUBLISH landed correctly - a tree can be right and the served page still wrong.
+                   SO: load the live site. Icons present and not 404ing, no page scroll, the
+                   hostile-name test still rendering as literal text, and the state checks
+                   (?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1)
+                   behaving on the PUBLISHED copy. TAKE A SCREENSHOT OF THE LIVE PAGE AND LOOK AT
+                   IT. If it is clean, one entry and stop - and that entry closes this for good.
+                   If something is broken out there, it is a real defect in what you shipped and
+                   fixing it is yours at any time.
+                   DO NOT PUBLISH AGAIN YOURSELF. Publishing was never the hub lane's and one of
+                   us doing it on a standing approval does not move the permission.
+                   The scarglass_ring naming gap went out with the publish and is still one line.
+
+  CHAT BOT     ->  *** STAND DOWN - AND THE ITEM I GAVE YOU LAST HOUR WAS ALREADY CLOSED. THAT WAS
+                   MY ERROR, NOT YOURS. *** You checked `twitch_cooldown_s` before doing anything
+                   to it, found twitch_chat.gd:9/10/123 already reading and enforcing it, and named
+                   the game build's D99 as what closed it instead of taking the credit. I have read
+                   the file myself and you are right. It is struck from the audit baseline
+                   permanently and no seat will hand it to you again.
+                   NOTHING IN SYSTEMS 2, 3 OR 4 TOUCHES THE COMMAND SURFACE, so Phase 2 opening
+                   still does not give you an item. Re-prove only if main moves materially. Do not
+                   chase the B25 hang - the CONDITION is proved, the MECHANISM is deliberately
+                   unclaimed, and that is the right place to leave it. Do not take another lane's
+                   gate. The two residuals you named this hour are yours to close IF you judge them
+                   real; if you judge them not worth it, write that down and it is a delivery.
+
+  HUD          ->  *** YOUR QUESTION IS ANSWERED. THE LADDER IS ART'S AND HERE IT IS - AND YOUR
+                   OWN DESCRIPTION OF IT NEEDS ONE CORRECTION BEFORE YOU BUILD. *** You asked
+                   whether the hue ladder is art's System 1 table or yours to choose. IT IS ART'S,
+                   it is written down, and you were right not to invent one. `icons.RARITY_HUE`,
+                   tools/art/icons.py:659, is the source of truth:
+                     junk / starting / common -> NO HUE AT ALL (bare on purpose)
+                     uncommon  (1.00, 1.00, 1.00)  white
+                     rare      (0.30, 0.55, 1.00)  blue
+                     very rare (0.70, 0.35, 1.00)  purple
+                     legendary (1.00, 0.55, 0.12)  tangerine
+                     artifact  (1.00, 0.13, 0.10)  bright red
+                   THE CORRECTION: you proposed "five tokens in ui_theme.gd for common..legendary".
+                   That is not the shape of the ladder. There are EIGHT rungs and only FIVE carry a
+                   hue; `common` is deliberately BARE, and you are missing `very rare` and
+                   `artifact` off the top. A token for common would invent a colour art chose not
+                   to have. Art's ICONS.md is explicit that there is NO cost-quartile fallback -
+                   the hue comes off the STORED rarity or there is no hue - so a piece with no
+                   rarity gets ink, exactly as now.
+                   ONE THING I HAVE ASKED ART, DO NOT GUESS IT: `uncommon` is pure white, which
+                   works as a halo on an icon and will not read as a hue on a PARCHMENT panel. Art
+                   answers that this hour. Build the other four rungs if you want to start.
+                   I AM TREATING THIS AS THE HUD HALF OF SYSTEM 2, NOT AS A NEW ITEM, and I am
+                   saying so out loud so it can be overruled: System 2 is Mr. E's own ("named
+                   weapons wired live"), a named weapon now reaches a hero with a real mesh, and a
+                   rarity the interface cannot show is that system half-landed. The supervisor can
+                   tell me I have read that too widely and I will pull it back.
+                   Your path through `Gear.weapon_piece(id)["rarity"]` is the right one. Windowed
+                   render at 100/125/150% when you have it, as you proposed.
+
+================================================================================
+*** FOR THE SUPERVISOR - THREE THINGS, AND ONE OF THEM IS A JUDGEMENT I WOULD LIKE CHECKED. ***
+  1. *** I HAVE READ THE HUD'S RARITY-HUE WORK AS THE HUD HALF OF SYSTEM 2 RATHER THAN AS A NEW
+     ITEM. PLEASE CHECK ME ON THAT. *** Mr. E's System 2 is "named weapons wired live". The game
+     build landed the mesh half this hour; the HUD then found that its panel paints every name in
+     ink because nothing in the interface reads rarity. I judged that "live" includes the player
+     being able to SEE which weapon is rare, so it is half of an existing item of his and not an
+     invention of mine - the freeze forbids inventing WORK, and I do not think this is that. But it
+     is the closest I have come to writing an item, it is a judgement and not a measurement, and if
+     you read it the other way say so and I will pull it out of the HUD's row.
+  2. *** S16, PASS 11, C-88, U54, B28 AND THE HUB'S STANDING CHECK - ALL SIX VERIFIED, RECOMMEND
+     RECORDING. *** Production rather than items; every one measured by me, by loading the file,
+     by my own grep, or by looking at the picture. Evidence above. Two of the six corrected THIS
+     SEAT and both corrections were right - details in my faults block, which is at the top where
+     it belongs.
+  3. *** THE WHO-TICKS CONTEST - ROUTED UP AT 01:58, NOW OPEN NINE HOURS. *** Only Mr. E's own
+     words settle it. I have still not ticked anything.
+  NOT FOR YOU, JUST SO YOU HAVE IT: the hub publish you cleared last hour is still good - web/ is
+  byte-identical across main and hub and I re-ran the security greps myself. But NOBODY HAS LOOKED
+  AT THE LIVE PAGE YET. I have put that in the hub's row in plainer words than last hour, because
+  the row as written got answered about the local build instead. If it comes back clean that is the
+  last thread on the publish.
+  ALSO NOT YOURS: my scheduled-task prompt is now NINE HOURS STALE - it still calls D98, H32 pass
+  4, D99 and System 10 unticked, still says the L31 remainder returns to HUD, and still carries the
+  struck `twitch_cooldown_s` finding. Six seats have now been refused on the write. The plan is
+  right and the lanes obey the plan, so nothing is blocked; it costs every firing its first
+  minutes. That needs Mr. E at the keyboard, not you.
+
+================================================================================
+
 Updated 2026-11-17 09:58 CT by the team lead (clock off the machine: 2026-11-17T10:04:53-06:00).
 The 09:58 block immediately below SUPERSEDES the 08:58 block and every row under it.
 

@@ -276,51 +276,30 @@
     "hero_side.png",
     "hero_back.png"
    ]
+  },
+  "tanner": {
+   "creature_h": 2.75,
+   "hero_h": 2.45,
+   "ratio": 1.12,
+   "pair_w": 4.36,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
   }
  },
  "errors": [],
  "measured": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman"
+  "tanner"
  ],
  "asked": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman"
+  "tanner"
  ],
  "blank_check": {
-  "files": 54,
+  "files": 3,
   "failures": []
  },
  "verdict": "GREEN"

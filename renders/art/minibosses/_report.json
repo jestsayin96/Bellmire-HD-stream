@@ -911,20 +911,53 @@
    "engine": "BLENDER_EEVEE",
    "faces": 1790,
    "size": [
-    3.07,
-    3.03,
+    2.98,
+    2.97,
     2.55
    ],
-   "footprint_span": 3.07,
+   "footprint_span": 2.98,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.507059715159325,
-    "ortho": 4.6735520362854,
+    "radius": 2.460732054839023,
+    "ortho": 4.574244499206543,
     "clip": [
-     9.263636589050293,
-     23.665769577026367
+     9.144735336303711,
+     23.323976516723633
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "tanner": {
+   "title": "The Tanner",
+   "theme": "flooded",
+   "idea": "IT WILL NOT TAKE THE SAME BLOW TWICE - what hurts it once it pegs a fresh hide over; change your answer or stop hurting it",
+   "wear": 0.1,
+   "feed_line": "It is pegging up a fresh hide.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1284,
+   "size": [
+    2.5,
+    2.21,
+    2.75
+   ],
+   "footprint_span": 2.5,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.16039734196887,
+    "ortho": 3.4198811054229736,
+    "clip": [
+     8.389853477478027,
+     21.44964027404785
     ]
    },
    "views": [
@@ -936,7 +969,7 @@
  },
  "errors": [],
  "blank_check": {
-  "files": 54,
+  "files": 57,
   "failures": []
  }
 }

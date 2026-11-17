@@ -2314,3 +2314,97 @@ landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs a
   (15:52:10 against a 15:48:50 clock), noticed it in the same call that wrote it, and rewrote the line with
   the clock read inside the writing call. That is the B32 fault and it did not leave the file.
 - No live Twitch test. Nothing owed by the GAME BUILD lane. Not ticked - the supervisor ticks.
+
+## B-cycle - B34 I WALKED ALL 27 `what` STRINGS AND COUNTED THE CHECKABLE CLAIMS; THREE MORE ARE GUARDED, 2026-11-17T17:06:00-06:00 (chat bot)
+THE ROW: "walk the other 26 commands' `what` strings and ask of each: does this sentence make a
+CLAIM a viewer can check against code - a number, a list, a cost, a cooldown, a limit? Report the
+COUNT of checkable claims and how many already have a guard." The count is below and the walk is
+behind it. It is NOT zero, and the forge was NOT the last one.
+
+### THE COUNT, AND IT IS THE WHOLE ANSWER TO THE ROW
+  27 commands walked. 14 carry at least one checkable claim; 13 carry none.
+  19 CHECKABLE CLAIMS in total.
+  GUARDED BEFORE THIS HOUR: 1  (`forge`.what kinds -> Gear.KINDS, B33)
+  GUARDED AFTER THIS HOUR:  4  (+ enlist callings, enlist peoples, muster count)
+  STILL UNGUARDED:         15  - every one named below with its authority and the reason.
+Two more sentences (`hero`, `inventory`) list the fields their own reply prints. They are prose
+summaries of a reply, not claims against an enumeration, and I have EXCLUDED them from the 19
+rather than padding the count with them. Saying so is part of the measurement.
+
+### THE THREE I GUARDED (scripts/chatcmd.gd, in commands(), the forge's shape)
+Picked on one rule: the authority is an ENUMERATION or a single NUMBER I can compare exactly, with
+no judgement in the middle. All three READ CORRECT TODAY. That is the point - they agree by
+coincidence, not construction, which is exactly how `greataxe` and `sceptre` got into the smithy
+unpublished.
+  1. `enlist`.what "Callings: ..." vs Roster.CLASSES - 15 said, 15 accepted, in order.
+  2. `enlist`.what "Peoples: ..."  vs Roster.SPECIES - 6 said, 6 accepted, in order.
+     These are the TWO LONGEST hand-written lists in data/commands.json - 21 names between them,
+     longer than the forge list that had drifted twice.
+  3. `muster`.what "takes six from chat" vs ChatCmd.QUEUE_MAX (6) - the constant that actually
+     turns the seventh viewer away, in MY OWN FILE, promised to viewers by a word nothing read.
+Each carries DRIFT (accepted but unpublished), GHOST (published but refused) and an ANCHOR that
+fires if the sentence is reworded so the list or the number can no longer be found - the third one
+being the part that stops the guard going quietly blind.
+
+### RED PATH PROVED, FIVE OF SEVEN PATHS, AND THE DATA RESTORED BYTE-IDENTICAL
+I injected faults into data/commands.json and ran tools/_l14_test.gd on each. Verbatim:
+  COMMANDS_DATA ENLIST CALLING DRIFT: 1 calling(s) ... absent from `enlist`.what: ["bard"]
+  COMMANDS_DATA ENLIST PEOPLE GHOST: `enlist`.what names 1 people(s) that do not exist ... ["gnome"]
+  COMMANDS_DATA MUSTER COUNT: `muster`.what publishes a chat queue of 7 and QUEUE_MAX turns the
+    viewer away at 6
+  COMMANDS_DATA ENLIST ANCHOR: `enlist`.what no longer carries "Callings: "
+  COMMANDS_DATA MUSTER ANCHOR: `muster`.what no longer says "takes <number> from chat"
+CALLING GHOST and PEOPLE DRIFT are the SAME two code paths as the two proved above, reached with
+the other list - I am saying that rather than claiming seven proofs for five runs.
+data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before the first injection and after the
+last restore, and `cmp` against the saved copy reports identical. The data file and
+docs/COMMANDS.md ARE UNCHANGED THIS CYCLE; the only edited file is scripts/chatcmd.gd.
+
+### THE 15 I DID NOT GUARD, EACH WITH ITS AUTHORITY AND WHY NOT. NO SILENCES.
+IN REACH, AND THE OBVIOUS NEXT THREE (authority is a clean enumeration, I ran out of window):
+  - `armoury`.what tier list "leather, chainmail, plate, warded plate" -> the armour table in
+    gear.gd (lines 32-35). Same shape as the forge guard, one table over.
+  - `armoury`.what "It shows: boots, pauldrons, a helm" -> gear.gd:257-258 says exactly that in a
+    comment; the code behind it is what would have to be enumerated.
+  - `bestiary`.what "the eight lords that hold the deep" -> bosses.json `lesser` (4) + `greater`
+    (4) = 8. I COUNTED IT: it is right today. A fifth greater lord makes the sentence wrong in
+    silence, and the content lane adds to that file most hours.
+  - `satchel`.what "two fifths of its shop cost" -> SELL_BACK 0.4, declared TWICE, in
+    leaderboard_panel.gd:65 and snapshot_pub.gd:40. chatcmd.gd:472 already carries a comment
+    saying chat and the hub must quote the same number, and NOTHING checks that they do.
+MINE, UNGUARDED, SMALL:
+  - `brew`.what "No name buys Draughts of Mending" -> the default key "mending" in _brew.
+  - `wear`.what "!wear off ring takes one off" -> the verb in my own dispatch.
+  - `catchup`.what "One line, kept short on purpose" -> a claim about the shape of its own reply.
+ANOTHER LANE'S SURFACE - I report, I do not reach in:
+  - `oil`.what "one flask lights a floor for two delvers" -> the oil burn in delve.gd, which is a
+    RATE across a floor, not a constant I can read off.
+  - `look`.what "a 10-second pane" and "(teal)" -> the channel-points lane and the HUD's colour.
+  - `hub`.what's section list -> web/, the hub lane's.
+  - `wear`.what accessory families (rings, amulets, cloaks, boots, gloves) and cosmetic families
+    (hats, banners, a pet, a title) -> the key suffixes and prefixes in items.json, the content
+    writer's file. Guardable by suffix, but the naming convention is theirs to break, not mine.
+  - `reroll`.what "a worse throw keeps the old ones" -> a RULE in _reroll, not a list or a number.
+  - `help`.what "!help <command> for one in detail" -> already effectively covered by the NO WHAT
+    and ORDER guards, which is why I am not counting it as a new surface.
+AMBIGUOUS AUTHORITY - A QUESTION, NOT AN ITEM, AND I AM NOT INVENTING ONE (freeze holds):
+  - `brew`.what names 12 brews. data/potions.json carries 232 and buy_brew accepts ANY of them.
+  - `dye`.what names 10 colours. items.json `dyes` carries 265.
+    Both shortlists READ as the list. Whether the other 220 and 255 are meant to be found rather
+    than published is a CONTENT call, not a drift I can assert, and a guard that demanded all 232
+    be recited in a chat line would be wrong. NAMING IT AND LEAVING IT.
+
+### GATES (run on the EXACT bytes being committed - md5 above, taken before and after the red runs)
+    --headless --path W6 --quit-after 300           parse, 0 errors, rc=0
+    tools/_l14_test.gd                              L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                          COMMANDS_DOC OK wrote 27 commands
+  ZERO COMMANDS_DATA lines across the whole green battery, which is the healthy reading - the six
+  older guards and the three new ones are all silent on this tree.
+  COMMANDS_DOC is a no-op by construction this cycle, not by inspection: data/commands.json is
+  byte-identical to HEAD, so the generator cannot produce a different docs/COMMANDS.md.
+  Merged origin/main first: a clean FAST-FORWARD, 44 commits, no conflict (chatbot -> 207f563).
+
+### FOR THE GAME BUILD LANE: nothing. No twitch_eventsub.gd signature touched, nothing owed.
+### FOR MR. E: nothing to decide. No live Twitch test this cycle - no account used, no bits, no
+### redemption, no channel-point reward created, deleted or re-priced, and bellmirebro posted nothing.

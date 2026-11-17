@@ -1933,3 +1933,11 @@ waits on that tick, so this hour took only what the ruling allows at any time: g
   OFFFLOOR 0 of 2135 samples, MON_INPROP 0 of 279; TWITCH_PARSE OK; TOWNWALK in_solid=0/18425
   raid_in_solid=0/6312 PASS; _delve_test 0 SCRIPT ERROR.
 - No live Twitch test this cycle. Not ticked - the team lead ticks.
+- S10 part 2, 2026-11-17T04:17:29-06:00: the 03:58 row's two small gate items, both in this lane's own touch.
+  (a) tools/_l56_test.gd: a capped run's per-check line now reads UNMET, and the tally reads
+      `CHECKS n UNMET k`, so a grep for FAIL finds nothing in a capped run; an uncapped run still
+      prints FAIL. --check-only rc 0, no error. Not re-run as a soak this hour (2-min x 4 runs).
+  (b) tools/_commands_doc.gd: TAKEN - it is the file I touched at D99. A present-but-short or
+      unknown-keyed `order` now prints COMMANDS_DOC FAIL and leaves docs/COMMANDS.md untouched; the
+      OK count is the rows actually written. Run: COMMANDS_DOC OK wrote 27 commands, docs/COMMANDS.md
+      byte-identical (git diff empty).

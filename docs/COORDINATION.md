@@ -475,6 +475,13 @@ THE RULES, FOR EVERY LANE:
   4. THE SAME CAUTION APPLIES TO ANY WRITE UNDER A CONNECTED FOLDER that you expect to overwrite:
      this bridge cannot delete, so an existing file is not always replaceable.
 
+## *** THE NUMBER 17 IS USED TWICE IN THIS FILE AND NEITHER HEADING IS BEING RENAMED. ***
+## The stale-/tmp-scratch ruling above and the prompt-ownership ruling below were both written at
+## 21:10 and 21:20 CT on 16 Nov and both STAND. A heading other prompts may already cite is not
+## renamed to tidy a number. CITE THEM AS "COORDINATION 17 (stale scratch)" AND "COORDINATION 17
+## (prompt ownership)". Numbering continues at 18. Found and recorded by the team lead, 22:58 CT -
+## it is my own file and my own collision.
+
 ## 17. THE TEAM LEAD OWNS THE SEVEN SCHEDULED-TASK PROMPTS (Mr. E, 2026-11-16 21:20 CT)
 He was asked whether the team lead keeps ruling AND owns the prompts, or whether prompt edits sit
 with another chat, or whether this seat becomes a prompt writer under a separate decider. HE CHOSE:
@@ -508,3 +515,25 @@ to "write in H32 and lift the hub stand-down" (done at 18:58) and still said the
 D70 in Phase 2 (ticked whole at 18:58). It now carries the Team Lead title, the D96-D99 wiring
 ruling, the dead-data audit as STEP 0, COORDINATION 15's no-verdict-is-red rule, the H32 pass-by-
 pass and icon rulings, the updated ID ceiling and lock ledger, and prompt-change reporting.
+
+================================================================================
+## 18. A KEY THAT HOLDS PROSE IS NOT A DEAD POOL (team lead ruling, 2026-11-16 22:58 CT)
+WHO FOUND IT: the GAME BUILD lane, correcting my own measurement, while shipping D97.
+
+My 20:35 dead-data baseline said bosses.json `uniques`, `rule` and `boss_floors` were unread data and
+that "nothing spawns any of the 390 uniques". The lane measured instead of accepting it and showed that
+`uniques` is a PROSE STRING DESCRIBING the lists, not the lists; `rule` is the sentence "every 5th
+floor", which `is_boss_floor()` already implements; `boss_floors` is prose as well. The real uniques
+live under `lesser_uniques` / `greater_uniques` and have been read since 15 Nov. So three of the keys I
+counted as dead data were never data, and one of my headline numbers was wrong.
+
+THE RULE, BINDING ON THE DEAD-DATA AUDIT FROM THIS HOUR ON:
+  1. A top-level key whose VALUE IS A STRING (or a `_note`/`_source`-style annotation) is DOCUMENTATION.
+     It is reported in its own line as PROSE, never counted in the unread-data total.
+  2. An unread count is only as good as what it counted. The audit says what it measured and how, so
+     any lane can contradict it with a measurement - and a lane that does is right by default until
+     the audit re-measures.
+  3. A LANE CORRECTING THIS SEAT'S NUMBER IS A DELIVERY, NOT A DISAGREEMENT. It is recorded in the
+     same breath as the tick, with the error named. A baseline nobody is allowed to correct is worse
+     than no baseline, and this is the second time in two hours that a worker caught something this
+     seat asserted (the first was `loading="lazy"` as an attribute instead of a JS property).

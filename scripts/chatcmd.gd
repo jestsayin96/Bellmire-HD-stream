@@ -104,7 +104,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         # L69: no "!" at all - the bot still answers what chat plainly asks
         return _ask_line(user_id, display, login, msg)
     var now := Time.get_ticks_msec()
-    if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
+    if now - int(_last.get(user_id, -99999)) < int(cooldown() * 1000.0):
         return ""
     var parts := msg.substr(1).split(" ", false)
     if parts.is_empty():
@@ -650,12 +650,40 @@ func _catchup(user_id: String) -> String:
 
 ## ---- L14: the command list, from data/commands.json (the one source)
 static var _cmds: Dictionary = {}
+## B18: THIS LOADER WAS THE QUIETEST INSTRUMENT IN THE LANE AND IT IS THE ONE EVERY GATE READS.
+## It used to return {} on a missing file, and `null` on malformed JSON, WITHOUT A WORD. Every
+## downstream check then measured an empty dictionary: `!help` names nothing, the doc generator
+## writes a header and prints "wrote 0 commands", and a reader skimming a battery sees a count
+## rather than a failure. That is COORDINATION 15's fault at its source - a pass nothing earned.
+## It now says so out loud, three ways, so a battery turns RED instead of going blind.
 static func commands() -> Dictionary:
     if _cmds.is_empty():
         var f := FileAccess.open("res://data/commands.json", FileAccess.READ)
-        if f:
-            _cmds = JSON.parse_string(f.get_as_text())
+        if f == null:
+            push_error("COMMANDS_DATA MISSING: res://data/commands.json would not open (err %d)" % FileAccess.get_open_error())
+            printerr("COMMANDS_DATA MISSING - res://data/commands.json would not open")
+            return {}
+        var parsed: Variant = JSON.parse_string(f.get_as_text())
+        if typeof(parsed) != TYPE_DICTIONARY:
+            push_error("COMMANDS_DATA UNPARSABLE: data/commands.json is not a JSON object")
+            printerr("COMMANDS_DATA UNPARSABLE - data/commands.json is not a JSON object")
+            return {}
+        if not (parsed as Dictionary).has("commands") or (parsed["commands"] as Dictionary).is_empty():
+            push_error("COMMANDS_DATA EMPTY: data/commands.json carries no `commands`")
+            printerr("COMMANDS_DATA EMPTY - data/commands.json carries no `commands`")
+            return {}
+        _cmds = parsed
     return _cmds
+
+## B18: the published cooldown is now the ENFORCED one. data/commands.json carries `cooldown_s`
+## (1.5) and tools/_commands_doc.gd prints it into docs/COMMANDS.md as a promise to viewers -
+## "one every 1.5 s" - while the gate actually used the constant below. The two agreed by
+## coincidence, not by construction, so editing the data would have made my own doc lie. The
+## key is READ now, which closes it the way D98 closes a pool. COOLDOWN stays as the fallback
+## for a run with no data file, and is the only number a reader has to trust.
+static func cooldown() -> float:
+    var v: float = float(commands().get("cooldown_s", COOLDOWN))
+    return v if v > 0.0 else COOLDOWN
 
 ## an alias -> its command ("inv" -> "inventory"); anything else unchanged
 static func canonical(word: String) -> String:
@@ -765,7 +793,7 @@ func _ask_line(user_id: String, display: String, login: String, msg: String) -> 
     if out == "":
         return ""
     var now := Time.get_ticks_msec()
-    if now - int(_last.get(user_id, -99999)) < int(COOLDOWN * 1000.0):
+    if now - int(_last.get(user_id, -99999)) < int(cooldown() * 1000.0):
         return ""
     if now - int(_said.get(topic, -999999999)) < int(float(ask().get("gap_s", 45.0)) * 1000.0):
         return ""                              # already said to the channel; saying it again is noise

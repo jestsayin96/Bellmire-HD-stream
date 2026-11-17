@@ -8868,3 +8868,6 @@ NOT CHASED: the B25 unread-pipe hang. The row said leave it.
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward or channel setting touched. Logs (_b28) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+
+## H32 hub standing check (2026-11-17 11:45 CT) - nothing new to build
+Merged origin/main (663ef6e) and origin/hub (678e63d) clean; web/ and docs/HUB_SECURITY.md byte-unchanged since the looked-at build. Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta unchanged. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap; source assets/icons/items still 520 PNGs, last changed 4ab066d (01:02 CT), so no thumbnail drift. Live dot red --live #e5484d. No new screenshot (web/ unchanged). Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked: delete refused on this machine. Not published by me.

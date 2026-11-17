@@ -432,3 +432,21 @@ but rule 2 applies to them identically.
 WHY THIS SITS IN THE CONTRACT AND NOT JUST IN ONE LANE'S PROGRESS.md: the lock protocol, the tick
 protocol and every "gates green" line in this project rest on gate output being trustworthy. An
 instrument that can report silence as success invalidates all three.
+
+## 16. THE ROLE IS NAMED TEAM LEAD (Mr. E, 2026-11-16 20:50 CT)
+Verbatim: "this is your new title  Bellmire HD Team Lead"
+
+THE ROLE THAT MERGES, TICKS, RULES, KEEPS THE PLAN HONEST AND FEEDS THE SIX LANES IS NOW THE
+**BELLMIRE HD TEAM LEAD**. Everything about the job is unchanged - the duties, the freeze, the lock
+protocol, the tick authority, the dead-data audit - only the name.
+
+HOW IT APPLIES, so nobody wastes a slot on a rename:
+  - FORWARD ONLY. New entries, rulings and TAKE THIS NEXT blocks are signed "team lead". Every
+    historical line in WORK_PLAN.md, PROGRESS.md and this file stays exactly as it was written -
+    the record is not rewritten to flatter a title change.
+  - NO LANE RENAMES ANYTHING. Do not sweep "supervisor" out of old entries, docs, comments or
+    commit messages. That is not work, and it would destroy the audit trail the ledger depends on.
+  - THIS FILE WINS OVER A BRIEF (see the header). The hourly stored prompt still opens "You are the
+    SUPERVISOR"; it means the Team Lead, and this line is the authority for that until Mr. E has
+    that prompt changed. A worker reading either word is reading about the same role.
+  - "The supervisor ticks it" in any existing item still binds, and still means this role.

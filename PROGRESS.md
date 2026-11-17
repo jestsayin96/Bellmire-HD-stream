@@ -8339,3 +8339,9 @@ said nothing. No secrets written anywhere.
   06:23:00) and this cycle's header time were TYPED, not read off the machine. Machine stamps read the
   same hour: first commit 06:18:37, IDLE 06:23:52. The 06:23:00 RUNNING line was therefore a future
   stamp by about three minutes. The work behind both is unaffected; the lock was IDLE at 06:23:52.
+
+## C-84 (2026-11-17 CT, clock ~06:0x) - TAKE THIS NEXT row for CONTENT: barks deepened a fifth time (lore_lines.json only)
+- TAKE THIS NEXT (05:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
+- data/lore_lines.json `barks`: +65 lines. enter +11, lord +10, trap +11, hurt +10, drink +12, misfire +11. Counts now enter 186, lord 179, trap 182, hurt 181, drink 175, misfire 178. Plain register, no floor counts. Case-insensitive duplicates dropped.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings.
+- CODE WIRING: none. The existing `barks` reader picks the new lines up.

@@ -336,3 +336,5 @@ RUNNING 2026-11-17T16:54:20-06:00 (HUD U59 contrast gate enumerates UiTheme: one
 IDLE 2026-11-17T16:54:56-06:00 - HUD U59: contrast gate now enumerates UiTheme's Color constants (unlisted = FAIL), U59_CONTRAST OK 49 colours walked, 14 pairs, 2 unmeasured, parse 0 errors. Godot closed (HUD)
 RUNNING 2026-11-17T17:08:40-06:00 (game build: merge main, next TAKE THIS NEXT item, parse + gates; expected finish 17:35)
 IDLE 2026-11-17T17:16:23-06:00 - game build S23: no new row (15:58 row delivered at S22/S22b); merged main, battery green on merged tree - parse 0, OFFFLOOR 0/1946, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Godot closed (game build)
+RUNNING 2026-11-17T17:17:37-06:00 (game build S23 relaunch: MB_FIT tapster line in delve.gd, gate battery; expected finish 17:24, inside the 17:33:40 cap of the 17:08:40 claim)
+IDLE 2026-11-17T17:24:14-06:00 - game build S23b: MB_FIT tapster 1.14 in delve.gd; battery green - parse 0, OFFFLOOR 0/2053, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Pose-aware staff is next firing. Godot closed (game build)

@@ -78,3 +78,10 @@ Six more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, sa
 beside them: `axe_{common,uncommon,rare}.glb` and `hammer_{common,uncommon,rare}.glb` in
 `assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed
 from `*.gltf.glb`). Wired as gear.gd KINDS axe and mace tiers 1-3.
+
+### 17 Nov 2026 - S18, System 2 second half (part 2): dungeon-pack daggers in the hand (game build)
+Three more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, same licence file already
+beside them: `dagger_{common,uncommon,rare}.glb` in `assets/gear/dungeon/`, copied unchanged from
+`_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from `*.gltf.glb`). Wired as gear.gd KINDS dagger
+tiers 1-3. The pack's staves were copied, rendered, judged wrong in the hand and REMOVED the same hour -
+they are not in the repo.

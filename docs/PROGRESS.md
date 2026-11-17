@@ -2076,3 +2076,52 @@ S16 did the first half; this is the second half's first part - two more families
   S17_HEFT OK (6 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1876 samples
   off the floor (home); TOWNWALK in_solid=0/17320 (0.000%) raid_in_solid=0/7618 (0.000%) PASS;
   DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.
+
+## D-cycle - S18 System 2, second half (part 2): dungeon-pack daggers; the staff refused on its picture; the two S17 questions answered, 2026-11-17T12:14:00-06:00 (game build)
+TAKE THIS NEXT (11:58) gave: System 2 second half part 2 - dagger, staff, crossbow - after settling two
+questions off s17_front.png. Systems 3/4 and Phase 2 NOT touched.
+- THE TWO S17 QUESTIONS, settled by looking at s17_front AND s17_side together:
+  (1) THE BEARDED GREATAXE IS HELD, NOT ABSENT. It is the same thing S16 found on the Ford Cutlass: in
+  the idle pose the hand slot points the haft AWAY from a front camera, so from the front only the grey
+  butt of the haft shows at the fist (visible at the middle figure's right hand). S17_HEFT's held-node
+  and mesh checks pass for tier 2 (axe_uncommon.glb, 0.76 m) and s17_axe_t2_close shows the bearded head
+  in the fist. Hidden by the angle, present in the hand.
+  (2) THE ORANGE SHAPE IS THE EMBERHAFT MAUL (hammer_rare.glb), HELD, NOT FLOATING, AND THE ORANGE IS
+  INTENDED. Two reasons it looked wrong in the front shot: the mace row stands BEHIND the axe row, so the
+  front camera overlaps two Emberhaft barbarians (the label is printed twice) and the maul belongs to the
+  rear one; and the hammer head hangs down beside the hip. s17_side shows it plainly: haft in the green
+  fist, the maul head below it. The colour is the "ember" material word's tint: hammer_rare's head
+  material is "Gold", which is NOT in EDGE_MATS, so it takes the tint by design (written in the S17
+  addendum). It is opaque, not translucent. Not a defect - stop raising it unless you judge the colour.
+- WIRED: assets/gear/dungeon/dagger_{common,uncommon,rare}.glb (CC0, same pack, row in ASSET_SOURCES).
+  KINDS["dagger"] tiers 1-3 take them; tiers 4-5 keep their kit. Own hand_scale 0.5 (accessors: 0.90/
+  1.03/1.15 long, origin at the grip) -> 0.45/0.54/0.65 m in the fist.
+- A FINDING, SAME CLASS AS S17's MACE NOTE: NO NAMED PIECE REACHES THE DAGGER MESH AT TIERS 1-3. Every
+  tier 1-3 blade in items.json is a sword word (Blade, Cutlass, Sabre, Longsword, Falchion, Backsword,
+  Runeblade); the only dagger words are tier-0 kit (Pawn-Shop Shortknife, Stage Dagger). Daggers reach
+  the screen through the unnamed !forge dagger path ("plain steel / fine steel / runed dagger"), and
+  the gate dresses THAT path rather than skipping. CONTENT: a named tier 1-3 blade with a dagger word
+  would put a named piece on it with no code.
+- THE STAFF IS REFUSED, ON ITS PICTURE. I wired staff_{common,uncommon,rare}.glb, rendered three mages
+  holding the named Hedge-Witch's / Ashen / Rune-Wrapped Staff, and LOOKED: the staff lies HORIZONTAL
+  off the fist pointing forward, with its origin mid-shaft so half the shaft is behind the hand - it
+  reads as a crystal wand, not a staff (the evidence is kept: renders/cycles/s18/
+  s18_staff_t1/t2/t3_close.png from that run; front/side were overwritten by the dagger-only rerun). Reverted KINDS["staff"] to its old kit and REMOVED the three .glb from the
+  repo the same hour so no unreferenced file is left. Needs a held rotation (vertical) and a grip offset
+  to the lower third before it goes in.
+- CROSSBOW NOT STARTED: the pack's crossbow_* is built along +Z (accessors z 0.53-0.65, y ~0.2), so it
+  needs the same held-rotation support the staff needs. That is ONE piece of work for both: a per-path
+  held rotation + grip offset in Gear.equip. Next hour.
+- tools/_s18_hand.gd (new, windowed, cloned from _s17_heft.gd) with a FLOOR: fewer than 3 pieces held
+  is FAIL. The floor earned itself on the first run - 3 held of an expected 6 printed
+  `S18_HEFT FLOOR UNMET: 3 pieces held, need >= 4` / `S18_HEFT FAIL`, before the unnamed path was added.
+- Looked at: s18_front, s18_side, s18_dagger_t2_close - each dagger grip in the fist, blade out past the
+  knuckles, nothing through the forearm, length steps up by tier.
+- Battery (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (after --import, on the final tree);
+  S18_HEFT OK (5 shots, 0 failures) on the final dagger-only tree; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 1926 samples off the floor (home); TOWNWALK in_solid=0/18269 (0.000%)
+  raid_in_solid=0/6074 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT
+  ERROR; S17_HEFT OK (6 shots, 0 failures) re-run so the axe/mace half is not broken.
+- Lock: my 12:08:01 line declared 12:38 - over the 25-minute cap - and I restated it at 12:08:19 to 12:33
+  on its own line, naming the correction. No live Twitch test. Not ticked - the team lead ticks.
+

@@ -360,6 +360,29 @@ func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
 ## climbs by MINIBOSS_RALLY_MULT and the Chronicle writes a tell so a viewer
 ## reading the panes or the Chronicle sees the beat land. One rally per
 ## miniboss; the meta flag below gates it so it never fires twice.
+## D96: the miniboss bodies (assets/monsters/minibosses/, art lane). A _chibi variant is the
+## art register conversion and is preferred when it is on disk. MB_FIT is art's MEASURED
+## creature-to-hero height ratio per model (renders/art/minibosses/_fit_*_register.json and
+## _fit_report.json, hero = the posed KayKit knight at 2.45) - copied, not re-derived.
+const MB_DIR := "res://assets/monsters/minibosses/"
+const MB_HERO_H := 2.45
+const MB_FIT := {
+	"drillmaster": 0.90, "drillmaster_chibi": 0.90, "scrapwright": 0.82, "gaoler": 0.96, "gaoler_chibi": 0.96,
+	"snuffer": 1.06, "sexton": 1.00, "sexton_chibi": 1.00, "porter": 0.94, "porter_chibi": 0.94,
+	"tallyman": 0.88, "tallyman_chibi": 0.88, "cook": 0.84, "cook_chibi": 0.84,
+	"sluicekeeper": 1.02, "sluicekeeper_chibi": 1.02, "sower": 0.92, "sower_chibi": 0.98,
+	"snarer": 0.94, "stoker": 0.98, "stoker_chibi": 0.98, "bellman": 1.10,
+	"boiler": 0.86, "boiler_chibi": 1.00}
+static var miniboss_no_model: Array = []
+static func miniboss_model(key: String) -> String:
+	for nm: String in [key + "_chibi", key]:
+		var p: String = MB_DIR + nm + ".glb"
+		if ResourceLoader.exists(p):
+			return p
+	return ""
+static func miniboss_ratio(key: String, path: String) -> float:
+	var nm := path.get_file().get_basename()
+	return float(MB_FIT.get(nm, MB_FIT.get(key, 1.0)))
 const MINIBOSS_HP_MULT := 2.0
 const MINIBOSS_ATK_MULT := 1.2
 const MINIBOSS_RALLY_FRAC := 0.5          # hp fraction that triggers the rally
@@ -378,6 +401,22 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	if mb_key != "" and not miniboss_lines(mb_key, "arrive").is_empty():
 		def = def.duplicate()
 		def["name"] = mb_key.capitalize()
+		# D96: the miniboss stands up in ITS OWN BODY. The art lane's model replaces the
+		# theme creature's mesh; scale is art's measured ratio to the posed hero, not ours.
+		var mb_path := miniboss_model(mb_key)
+		if mb_path != "":
+			def["path"] = mb_path
+			def["h"] = MB_HERO_H * miniboss_ratio(mb_key, mb_path)
+			def["anims"] = {}          # static meshes: no armature, no clip names apply
+			def["hand"] = ""           # the model carries its own tools; no KayKit props
+			def["off"] = ""
+			def["lift"] = 0.0
+			def["tint"] = Color(1, 1, 1)   # art painted it; a theme tint would repaint it
+			def["glow"] = Color(0, 0, 0)
+			def["particle"] = ""
+			def["mb_model"] = true
+		else:
+			Delve.miniboss_no_model.append(mb_key)
 	else:
 		mb_key = ""
 	var m := Monster.new()

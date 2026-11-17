@@ -1,0 +1,255 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 16 barracks: 2 (cap 12), creatures 8; lights 52 (shadowed 1)
+L28D_DECALS floor 16 barracks: 18 (cap 24)
+FEED A man in a dun coat stands in the barracks, mallet up.
+FEED The Drillmaster holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   drillmaster: spawns with its own model (drillmaster.glb)
+  ok   drillmaster: the model loaded
+  ok   drillmaster: stands 2.21m = 0.90 x hero vs art register 0.90 (live hero bounds incl. weapon 2.54m, info only)
+  ok   drillmaster: arrive line fired with the body present
+FEED Dismissed.
+FEED The chamber keeps a purse of 247 gold - 247 a share, 1 ways.
+  ok   drillmaster: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 3; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED The bench is empty. Everything that was on it is walking.
+FEED The Scrapwright holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   scrapwright: spawns with its own model (scrapwright.glb)
+  ok   scrapwright: the model loaded
+  ok   scrapwright: stands 2.01m = 0.82 x hero vs art register 0.82 (live hero bounds incl. weapon 2.54m, info only)
+  ok   scrapwright: arrive line fired with the body present
+FEED The Scrapwright is down. The bench has its tools back.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   scrapwright: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 11 prison: 3 (cap 12), creatures 9; lights 52 (shadowed 1)
+L28D_DECALS floor 11 prison: 18 (cap 24)
+FEED A chain is paying out in the dark.
+FEED The Gaoler holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   gaoler: spawns with its own model (gaoler.glb)
+  ok   gaoler: the model loaded
+  ok   gaoler: stands 2.35m = 0.96 x hero vs art register 0.96 (live hero bounds incl. weapon 2.67m, info only)
+  ok   gaoler: arrive line fired with the body present
+FEED The row is unwatched for the first time in years.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   gaoler: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 9 shrine: 2 (cap 12), creatures 4; lights 51 (shadowed 1)
+L28D_DECALS floor 9 shrine: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 20 shrine: 3 (cap 12), creatures 9; lights 61 (shadowed 2)
+L28D_DECALS floor 20 shrine: 17 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 31 shrine: 2 (cap 12), creatures 7; lights 59 (shadowed 1)
+L28D_DECALS floor 31 shrine: 18 (cap 24)
+FEED Cold wax, and a smell like a blown-out candle.
+FEED The Snuffer holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   snuffer: spawns with its own model (snuffer.glb)
+  ok   snuffer: the model loaded
+  ok   snuffer: stands 2.60m = 1.06 x hero vs art register 1.06 (live hero bounds incl. weapon 1.98m, info only)
+  ok   snuffer: arrive line fired with the body present
+FEED Light on every wall. It was never a lot to ask.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   snuffer: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 13 crypt: 3 (cap 12), creatures 7; lights 73 (shadowed 1)
+L28D_DECALS floor 13 crypt: 18 (cap 24)
+FEED A bell tolls once for no one yet.
+FEED The Sexton holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   sexton: spawns with its own model (sexton.glb)
+  ok   sexton: the model loaded
+  ok   sexton: stands 2.45m = 1.00 x hero vs art register 1.00 (live hero bounds incl. weapon 2.54m, info only)
+  ok   sexton: arrive line fired with the body present
+FEED The Sexton is down. Somebody should dig for him.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   sexton: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 14 keep: 3 (cap 12), creatures 9; lights 60 (shadowed 1)
+L28D_DECALS floor 14 keep: 17 (cap 24)
+FEED The leaf is across the door. The Porter is in front of it.
+FEED The Porter holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   porter: spawns with its own model (porter.glb)
+  ok   porter: the model loaded
+  ok   porter: stands 2.30m = 0.94 x hero vs art register 0.94 (live hero bounds incl. weapon 2.54m, info only)
+  ok   porter: arrive line fired with the body present
+FEED The Porter is down. His keys stay on his belt.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   porter: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 2; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+FEED Slate, nail and chalk. Someone is adding up.
+FEED The Tallyman holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   tallyman: spawns with its own model (tallyman_chibi.glb)
+  ok   tallyman: the model loaded
+  ok   tallyman: stands 2.16m = 0.88 x hero vs art register 0.88 (live hero bounds incl. weapon 2.67m, info only)
+  ok   tallyman: arrive line fired with the body present
+FEED Get your things off the frame.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   tallyman: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 26 mess: 2 (cap 12), creatures 8; lights 58 (shadowed 1)
+L28D_DECALS floor 26 mess: 18 (cap 24)
+FEED The Cook is stirring. He does not look up.
+FEED The Cook holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   cook: spawns with its own model (cook_chibi.glb)
+  ok   cook: the model loaded
+  ok   cook: stands 2.06m = 0.84 x hero vs art register 0.84 (live hero bounds incl. weapon 2.54m, info only)
+  ok   cook: arrive line fired with the body present
+FEED The Cook is down. The kitchen smells of smoke and nothing else.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   cook: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED He has been waiting for the river for a long time.
+FEED The Sluicekeeper holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   sluicekeeper: spawns with its own model (sluicekeeper_chibi.glb)
+  ok   sluicekeeper: the model loaded
+  ok   sluicekeeper: stands 2.50m = 1.02 x hero vs art register 1.02 (live hero bounds incl. weapon 2.19m, info only)
+  ok   sluicekeeper: arrive line fired with the body present
+FEED Dry again, in time. Wring out your cloak.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   sluicekeeper: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 27 grassland: 2 (cap 12), creatures 7; lights 43 (shadowed 1)
+L28D_DECALS floor 27 grassland: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 38 grassland: 2 (cap 12), creatures 9; lights 62 (shadowed 1)
+L28D_DECALS floor 38 grassland: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 49 grassland: 2 (cap 12), creatures 8; lights 59 (shadowed 1)
+L28D_DECALS floor 49 grassland: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 60 grassland: 3 (cap 12), creatures 6; lights 62 (shadowed 2)
+L28D_DECALS floor 60 grassland: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 71 grassland: 2 (cap 12), creatures 7; lights 56 (shadowed 1)
+L28D_DECALS floor 71 grassland: 18 (cap 24)
+FEED The field does not belong here. The Sower walks it anyway.
+FEED The Sower holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   sower: spawns with its own model (sower_chibi.glb)
+  ok   sower: the model loaded
+  ok   sower: stands 2.40m = 0.98 x hero vs art register 0.98 (live hero bounds incl. weapon 1.98m, info only)
+  ok   sower: arrive line fired with the body present
+FEED The Sower is down. The thorn begins to brown.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   sower: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 8; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 21 wood: 2 (cap 12), creatures 5; lights 56 (shadowed 1)
+L28D_DECALS floor 21 wood: 18 (cap 24)
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 32 wood: 2 (cap 12), creatures 5; lights 55 (shadowed 1)
+L28D_DECALS floor 32 wood: 18 (cap 24)
+FEED A branch bent back and held. It is not holding itself.
+FEED The Snarer holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   snarer: spawns with its own model (snarer.glb)
+  ok   snarer: the model loaded
+  ok   snarer: stands 2.30m = 0.94 x hero vs art register 0.94 (live hero bounds incl. weapon 2.19m, info only)
+  ok   snarer: arrive line fired with the body present
+FEED Walk soft. The loose cord still bites.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   snarer: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 1; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED The heat comes before the man.
+FEED The Stoker holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   stoker: spawns with its own model (stoker.glb)
+  ok   stoker: the model loaded
+  ok   stoker: stands 2.40m = 0.98 x hero vs art register 0.98 (live hero bounds incl. weapon 2.54m, info only)
+  ok   stoker: arrive line fired with the body present
+FEED Nothing left to feed. It is quiet now.
+FEED The chamber keeps a purse of 113 gold - 113 a share, 1 ways.
+  ok   stoker: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 12 fogbound: 3 (cap 12), creatures 3; lights 64 (shadowed 1)
+L28D_DECALS floor 12 fogbound: 18 (cap 24)
+FEED A bell tolls and you cannot say from where.
+FEED The Bellman holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   bellman: spawns with its own model (bellman.glb)
+  ok   bellman: the model loaded
+  ok   bellman: stands 2.70m = 1.10 x hero vs art register 1.10 (live hero bounds incl. weapon 2.70m, info only)
+  ok   bellman: arrive line fired with the body present
+FEED Silence in the fog. The right kind.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   bellman: fall line on the kill
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 28 confection: 2 (cap 12), creatures 5; lights 61 (shadowed 1)
+L28D_DECALS floor 28 confection: 18 (cap 24)
+FEED Sugar scorching somewhere nearby.
+FEED The Boiler holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   boiler: spawns with its own model (boiler_chibi.glb)
+  ok   boiler: the model loaded
+  ok   boiler: stands 2.45m = 1.00 x hero vs art register 1.00 (live hero bounds incl. weapon 1.98m, info only)
+  ok   boiler: arrive line fired with the body present
+FEED The Boiler is down. The pan is cold.
+FEED The chamber keeps a purse of 60 gold - 60 a share, 1 ways.
+  ok   boiler: fall line on the kill
+D96 ROWS:
+  drillmaster floor 16 (barracks) model drillmaster.glb ratio 0.90/0.90 live-hero 2.54m
+  scrapwright floor 7 (workshop) model scrapwright.glb ratio 0.82/0.82 live-hero 2.54m
+  gaoler floor 11 (prison) model gaoler.glb ratio 0.96/0.96 live-hero 2.67m
+  snuffer floor 31 (shrine) model snuffer.glb ratio 1.06/1.06 live-hero 1.98m
+  sexton floor 13 (crypt) model sexton.glb ratio 1.00/1.00 live-hero 2.54m
+  porter floor 14 (keep) model porter.glb ratio 0.94/0.94 live-hero 2.54m
+  tallyman floor 8 (treasury) model tallyman_chibi.glb ratio 0.88/0.88 live-hero 2.67m
+  cook floor 26 (mess) model cook_chibi.glb ratio 0.84/0.84 live-hero 2.54m
+  sluicekeeper floor 4 (flooded) model sluicekeeper_chibi.glb ratio 1.02/1.02 live-hero 2.19m
+  sower floor 71 (grassland) model sower_chibi.glb ratio 0.98/0.98 live-hero 1.98m
+  snarer floor 32 (wood) model snarer.glb ratio 0.94/0.94 live-hero 2.19m
+  stoker floor 6 (firepit) model stoker.glb ratio 0.98/0.98 live-hero 2.54m
+  bellman floor 12 (fogbound) model bellman.glb ratio 1.10/1.10 live-hero 2.70m
+  boiler floor 28 (confection) model boiler_chibi.glb ratio 1.00/1.00 live-hero 1.98m
+D96_FIT OK 70 checks, 14 minibosses in their own bodies
+ERROR: 2 RID allocations of type 'N10RendererRD14TextureStorage13DecalInstanceE' were leaked at exit.
+ERROR: 2 RID allocations of type 'N10RendererRD14TextureStorage5DecalE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: 2 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: Decal Atlas: 1 textures were not removed from the atlas.
+   at: ~TextureStorage (servers/rendering/renderer_rd/storage_rd/texture_storage.cpp:672)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 3 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+RC=0

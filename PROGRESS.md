@@ -8305,3 +8305,9 @@ run. Godot killed (PID 11948), lock released IDLE. No Twitch of any kind: 0 bits
 or redeemed, no reward created / renamed / re-priced / deleted, nothing posted as any account, no
 channel setting touched. The parse run joined #jestsayin96 as the game always does on boot and
 said nothing. No secrets written anywhere.
+
+## H32 hub standing check (2026-11-17 06:38 CT) - nothing new to build
+Fast-forwarded to origin/hub (54d5935), merged origin/main clean (d95391d). `git diff` of web/ and docs/HUB_SECURITY.md vs origin/main is EMPTY and across the ff was EMPTY: web/ is byte-identical to the looked-at build; no new screenshot (a picture of an unchanged build proves nothing new). Queue empty, passes 1-5 in.
+MEASURED: web/icons 2,434,146 bytes (unchanged from 05:40) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY.
+SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252, :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src 'none' present. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose; delete refused on this machine. Not published.

@@ -7861,3 +7861,85 @@ have launched if a schedule had been live. `_b18_battery.log` deleted.
 - NOT TICKED BY ME. No floor count stated, no artifact stocked, no .gd or other file touched.
 - CODE WIRING: none - lord_canon already reads hp/attack/speed by these names and prefers the file over BOSS_DEFS.
 - OPEN QUESTION still for the game lane: does `grudge: true` on the Pale Duchess already equal a first-struck fixation (Parish-Ledgered, bin C in C-78)?
+
+## B-cycle B19 - THE LOADER VOUCHED FOR ONE KEY AND TWO SHIPPED FEATURES READ THE OTHERS BLIND (chat bot, 2026-11-17 01:45-01:58 CT)
+- ITEM GIVEN: the plan's CHAT BOT row, unchanged - "GO LOOKING, IN WRITING, FOR THE NEXT INSTRUMENT
+  IN YOUR OWN LANE THAT COULD REPORT A PASS IT HAS NOT EARNED." B18 audited the six instruments my
+  batteries run and fixed the one in my own file. This cycle went one level up from the gates, to the
+  data the gates all read, and found the same fault twice more - in my file, not in tools/.
+
+### THE FIX, AND IT IS IN scripts/chatcmd.gd - MINE (defect in what this lane shipped, never new work)
+B18 made `ChatCmd.commands()` go RED on a missing, unparsable or `commands`-less data file. It
+vouched for ONE KEY. Two shipped features read siblings of that key with a silent `.get(key, {})`:
+  - `ask()` -> `commands().get("ask", {})`. L69's whole point is that a viewer who does not know the
+    commands still gets an answer. An `ask` that goes missing answers a plain question with NOTHING,
+    and the comment above ask() in this same file already says silence reads as a broken bot. 5 topics
+    today; no gate asserts there is even one.
+  - `foreign()` -> `commands().get("foreign", {})`. WORSE THAN QUIET. An empty dictionary makes
+    foreign() return false for every word, so Bellmire starts typo-nudging ANOTHER APP'S COMMANDS
+    through the one door D70.4 built - a visible-on-stream misbehaviour produced by silence. 3 apps
+    today.
+Both now push_error + printerr with their own tokens - COMMANDS_DATA NO ASK, COMMANDS_DATA NO FOREIGN
+- and are type-checked, so a key present but not a Dictionary is caught too (the `commands` check
+above it would crash on that; I did not rewrite B18's line, I did not repeat its exposure).
+**NEITHER IS FATAL AND NEITHER RETURNS {}.** Deliberate, and the reasoning is the point: the commands
+themselves still answer off a file with a dead sibling, so killing the whole bot would be a BIGGER
+fault than the one being reported. Loud and carry on. A battery greps COMMANDS_DATA; no line is the
+healthy reading, which is the discipline B18 recorded and this extends rather than replaces.
+
+### A THIRD L14 BLIND SPOT, AND IT IS THE ONE B18 MISSED (tools/_l14_test.gd - NOT MINE TO FIX)
+B18 named two edges on this gate. There is a third, in the OTHER direction, and it is the same
+fault class. `verbs` is harvested by one regex over the whole source file - "any 8-space quoted
+label anywhere" - and chatcmd.gd has a SECOND match block at lines 881-887 (the hint/category
+block) with the same shape. So the check at line 30, "every command in the data is answered", can
+be satisfied by a label that is NOT in the dispatch at all. A command could be documented, listed
+by !help, and answer nothing, and this gate would read green.
+LATENT, NOT LIVE, AND MEASURED: 881-887 only repeat verbs the dispatch also carries, so nothing is
+masked tonight. ONE-LINE FIX, FOR WHOEVER OWNS tools/: bound the search to the dispatch block, or
+harvest from the first match only.
+
+### B18's TWO BLIND SPOTS - MEASURED TONIGHT, BOTH LATENT, NEITHER LIVE
+Not asserted. Run against the real files this cycle:
+  (a) the 8-space lowercase-only verb regex. ALL 28 dispatch label lines are visible to it; 64 verbs
+      harvested; the only lines it cannot see (499, 500, indent 18) are a dictionary, not verbs, and
+      it is right to skip them. NO verb is hidden from the gate today.
+  (b) the loose `before.contains(what.substr(0, 30))` doc check. 27 commands: ZERO share their first
+      30 characters, and ZERO rows' first 30 characters occur inside another row's text. Four `what`
+      strings are shorter than 30 chars, so for them the "loose" check is the whole string. The check
+      is exact BY ACCIDENT today, not by construction - worth re-measuring whenever a row is reworded.
+
+### AND MY OWN DRIFT CHECK WAS THE WRONG INSTRUMENT AGAIN - SECOND TIME (B17 WAS THE FIRST)
+The prompt asks for a drift check both directions after every edit. Mine reported five entries with
+no command (`commands`, `sheet`, `spotlight`, `stats`, `watch`) and three commands with no entry
+(`testbits`, `testsub`, `testpoints`). ALL EIGHT ARE FALSE. The five are ALIASES, resolved by
+canonical() before the match ever runs; the three are the local-only !test* verbs, deliberately
+undocumented. tools/_l14_test.gd gets both right - it calls ChatCmd.canonical(v) and excludes
+`begins_with("test")` on L17's ruling. THE GATE WAS CORRECT AND I WAS NOT, and I am recording that
+rather than the first reading. The real drift, measured properly: NONE, either direction.
+Data file UNCHANGED this cycle (sha256 f37b1d2c6909, 27 commands) so docs/COMMANDS.md needs no
+regeneration and cannot have drifted.
+
+### GATES - NOT RUN. THE WINDOW CLOSED FIRST AND I DID NOT TAKE THE NEXT LANE'S SLOT.
+RUN_LOCK read at 01:46: last line `IDLE 2026-11-17T01:12:00-06:00 (game build D98)`. Get-Process for
+*odot* returned NOTHING - no Godot alive, lock genuinely free. I STILL DID NOT LAUNCH, and that is
+the whole point of the entry: by the time the fix was written and the two blind spots measured it was
+01:53, and the shortest honest battery this lane has ever run is 3 minutes (B16) with B18's at 5. Any
+launch lands inside HUD's :52-:07 claim. ALL SEVEN LANE SCHEDULES CAME BACK ON AT 00:58 CT, so unlike
+B18 there WAS a lane to starve, and HUD has stood down seven times already. I took no lock and wrote
+no RUNNING line.
+SO THIS IS A CHECKPOINT COMMIT, which is the sanctioned move (ruling 08:58: never leave work loose in
+a worktree; split across runs). OWED TO B20 AT 02:45, one battery, nothing queued behind it:
+    parse --headless --quit-after 300   (0 errors AND the join line - B18's standing rule)
+    tools/_b11_muster.gd                (no --quit)
+    tools/_twitch_parse.gd
+    tools/_l14_test.gd
+    tools/_d704_echo.gd
+    tools/_commands_doc.gd              (no-op, 27, doc byte-identical)
+The new guards are in the loader EVERY one of those reads, so the healthy reading is what it was for
+B18: six verdict lines green and NO COMMANDS_DATA line printed anywhere. UNPROVEN UNTIL THEN - the
+parse gate has not seen this file.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
+  re-priced or deleted, nothing posted as any account, no channel setting touched, no Godot launched.
+- NEEDED FROM WHOEVER OWNS tools/: the third L14 bound above, plus B18's still-open `_d704_echo.gd`
+  check floor and two `_commands_doc.gd` guards. NEEDED FROM THE GAME BUILD: B18's one twitch_chat.gd
+  line for `twitch_cooldown_s`, unchanged. NEEDED FROM MR. E: nothing in this lane.

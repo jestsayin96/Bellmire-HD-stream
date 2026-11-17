@@ -672,6 +672,23 @@ static func commands() -> Dictionary:
             push_error("COMMANDS_DATA EMPTY: data/commands.json carries no `commands`")
             printerr("COMMANDS_DATA EMPTY - data/commands.json carries no `commands`")
             return {}
+        # B19: `commands` was the only key this loader vouched for, and two SHIPPED features
+        # read siblings of it with a silent `.get(key, {})`. An `ask` that goes missing makes
+        # the bot answer a plain question with nothing - and the comment above ask() in this
+        # same file already says silence reads as a broken bot. A `foreign` that goes missing
+        # is worse than quiet: foreign() then returns false for every word, so Bellmire starts
+        # nudging another app's commands through the one door D70.4 built. NEITHER IS FATAL and
+        # neither returns {} - the commands themselves still answer, and killing the bot over a
+        # dead sibling would be a bigger fault than the one being reported. So they say it out
+        # loud and carry on. A battery greps COMMANDS_DATA; no line is the healthy reading.
+        var ask_d: Variant = (parsed as Dictionary).get("ask", {})
+        if typeof(ask_d) != TYPE_DICTIONARY or (ask_d as Dictionary).is_empty():
+            push_error("COMMANDS_DATA NO ASK: data/commands.json carries no usable `ask` - a plain question gets no answer")
+            printerr("COMMANDS_DATA NO ASK - data/commands.json carries no usable `ask`")
+        var for_d: Variant = (parsed as Dictionary).get("foreign", {})
+        if typeof(for_d) != TYPE_DICTIONARY or (for_d as Dictionary).is_empty():
+            push_error("COMMANDS_DATA NO FOREIGN: data/commands.json carries no usable `foreign` - another app's commands would be answered")
+            printerr("COMMANDS_DATA NO FOREIGN - data/commands.json carries no usable `foreign`")
         _cmds = parsed
     return _cmds
 

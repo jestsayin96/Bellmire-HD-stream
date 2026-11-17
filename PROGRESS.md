@@ -9149,3 +9149,10 @@ VALIDATION OK: items.json parses; only `equipment` and `_note_c93` differ from m
 - node --check web/app.js OK. Security greps: no outerHTML/insertAdjacentHTML/document.write/eval/new Function; innerHTML only the two page-owned sites (app.js 252, 298); one CSP meta.
 - Headless 1440x900 over file:// (no network, so every state renders as the fetch-failed state; ?mock=crowd could not show live data this way): ?mock=crowd ?state=empty ?state=fail ?state=stale ?mock=chronicle ?open=1 all scrollHeight 900 = viewport (no page scroll, 900/900), rail listbox present, 0 page errors. Looked at the crowd shot: rail/stage/chat three columns correct, honest failed-fetch banner. Not a real-set look; the real-set look is f3e447c / 61c9269.
 - Live dot: red (functional). Not publishing. Loose files (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) left untracked: this machine cannot delete.
+
+## hub standing check 16:40 CT, 17 Nov (no code change)
+- H32 already ticked whole (fbf17f0). Merged origin/main (89 files, art/chatbot lanes): `git diff` over web/, docs/HUB_SECURITY.md and assets/icons/items is EMPTY, so the 520-thumb set (web/icons/items, 2,434,146 bytes on disk incl. manifest; 2.32 MiB, under the 6 MB cap) is still current against manifest source commit 2473836.
+- node --check web/app.js OK. Security greps: no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (comments only); innerHTML only the two page-owned sites (app.js 252, 298); exactly one CSP meta.
+- No headless re-render this hour: web/ is byte-identical to the 15:38 check, whose state/no-scroll results (900/900, 0 page errors) and crowd screenshot still stand. Not a new look.
+- Live dot: red (functional). Not publishing; that is the supervisor's call.
+- Loose files (_h32_shot_a..f.png, _plan_tmp.txt, web_look*.tar) still left untracked: this machine cannot delete.

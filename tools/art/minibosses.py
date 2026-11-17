@@ -5417,3 +5417,320 @@ def tanner():
 
 
 BUILDERS.update({"tanner": tanner})
+
+
+# ============================================================ 20 THE REEVE
+# WHY THIS ONE, MEASURED OFF minibosses.py, dungeon_hd.gd AND delve.gd - NOT
+# REMEMBERED. Every claim below was re-derived this run.
+#   - NINETEEN IDEAS EXIST AND NOT ONE OF THEM TOUCHES WHAT THE FLOOR PAYS.
+#     Parsed out of CANON rather than recalled: summon, self-armour, drag a
+#     hero out, douse the lamps, will-not-stay-down, bar the door, steal worn
+#     gear, heal the pack, raise the water, plant the ground, pre-set the room,
+#     scale with the fire, ring from elsewhere, set the floor, come apart in
+#     two, arm the room, weigh you down, cut the room in two, adaptive
+#     resistance. Every one of them is about the FIGHT. None is about the TAKE.
+#     THE REWARD IS A REAL RESOURCE IN THE CODE, not an invention of mine:
+#     delve.gd:34 carries `haul` = {ore, stone, gear, potion} and _loot() at
+#     :2014 adds gold at :2038 and ore/stone at :2066-7. So a creature that
+#     stands between the party and that dictionary is attacking something the
+#     game already has, with no new system behind it.
+#   - IT IS NOT THE TALLYMAN, AND THAT IS THE ONE IT HAD TO BE CHECKED
+#     AGAINST. The Tallyman lifts gear OFF A HERO, wears it, and WITHDRAWS -
+#     it is theft from a body and it leaves. The Reeve never touches a hero and
+#     never leaves: it is chained to its own box by construction, and what it
+#     takes is the FLOOR'S take, which nobody is carrying yet. One is a
+#     pickpocket, the other is a toll. The pressure is different too: the
+#     Tallyman makes you chase, the Reeve makes you HURRY.
+#   - THEME `keep`, measured off dungeon_hd.gd:737-743 - the miniboss roll is
+#     35 on barracks and workshop, 10 on shrine and crypt, 15 on prison and
+#     every unlisted theme. `keep` is unlisted, so it rolls at 15 with exactly
+#     ONE body behind it (the Porter), the same single-body case the Loader
+#     and the Tanner were built for. And floorgen.gd:183 makes the room argue
+#     for it without a word of lore: the inner keep is the only theme with
+#     BLUE BANNERS, `feast` and `shelf_stock` clusters and decorated pillars -
+#     the lord's own hall is where a share is rendered.
+#   - HEIGHT 1.95 EXTENDS THE BOTTOM OF A FULL LADDER. All nineteen checked by
+#     parsing CANON: 2.00 to 2.75 in steps of 0.05 is FULL (the Tanner took
+#     2.75 to extend the top). 1.95 is honest rather than a repeat, and it is
+#     the right number: THE BOX IS THE CREATURE and the man beside it is small
+#     on purpose. At 0.80x a hero this is the smallest thing in the set.
+#   - WEAR 0.05 EXTENDS THE BOTTOM TOO, and for a different reason than the
+#     Tanner's 0.10, which is the only other value down there. The Tanner is
+#     fresh because of a PROCESS - it re-covers itself hourly. The Reeve is
+#     fresh because NOTHING IT OWNS IS EVER USED: a strongbox that is only
+#     filled, never opened and never fought with has no scars on it. Mr. E's
+#     rule 2 - condition is the receipt - and this receipt reads UNTOUCHED.
+CANON.update({
+    "reeve": ("The Reeve", 1.95, (0.74, 0.70, 0.58), (1.00, 0.84, 0.40),
+              "keep",
+              "IT TAKES THE HAUL - while it stands the floor pays its box and not you; "
+              "break the box or walk out of here with nothing",
+              0.05, "It is here for the lord's share."),
+})
+ORDER = ORDER + ["reeve"]
+
+
+def _strongbox(P, bx, by, w=1.26, d=0.78, hbody=0.74, foot=0.22):
+    """THE BOX. A WIDE LOW BANDED CHEST ON IRON FEET - the one shape in this
+    set that is HORIZONTAL and solid.
+
+    CHECKED AGAINST THE LOADER BEFORE A VERTEX WAS WRITTEN, because that is
+    the one body in the set that also carries boxes. The Loader's load is a
+    STEPPED VERTICAL TOWER of six crates hanging off a boom - height-dominant,
+    and the fault list on it says the iron bands vanish at hero scale. This is
+    the opposite shape on purpose: one chest, wider than it is tall, planted on
+    the floor, with bands heavy enough to survive the pair framing. A tower of
+    crates and a strongbox read as different objects at pane distance, which
+    is the only test that matters.
+    """
+    z0 = foot
+    cz = z0 + hbody / 2.0
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            P.add(L.box(0.15, 0.15, foot), 'dark',
+                  loc=(bx + sx * (w / 2.0 - 0.10), by + sy * (d / 2.0 - 0.10), foot / 2.0))
+    P.add(L.box(w, d, hbody), 'body', loc=(bx, by, cz))
+    # the lid overhangs, which is what makes it a chest and not a crate
+    P.add(L.box(w + 0.08, d + 0.08, 0.12), 'body', loc=(bx, by, z0 + hbody + 0.06))
+    # THREE VERTICAL BANDS AND TWO STRAPS - heavy, because the Loader's lesson
+    # is that a band thinner than this is one pixel on the pair shot.
+    for t in (-0.36, 0.0, 0.36):
+        P.add(L.box(0.095, d + 0.03, hbody + 0.02), 'dark', loc=(bx + t * w, by, cz))
+    for t in (0.26, 0.74):
+        P.add(L.box(w + 0.03, d + 0.03, 0.075), 'dark', loc=(bx, by, z0 + hbody * t))
+    # the lock plate on the near face, and it is BONE so it is the second
+    # brightest thing after the throat - a locked box is the whole promise
+    P.add(L.box(0.30, 0.07, 0.34), 'bone', loc=(bx, by - d / 2.0 - 0.02, z0 + hbody * 0.62))
+    P.add(L.sphere(0.052, 0.040, 0.052, 9, 6), 'dark',
+          loc=(bx, by - d / 2.0 - 0.055, z0 + hbody * 0.62))
+    # hasp: a staple over the lid seam, so the lid reads as a lid
+    P.add(L.box(0.13, 0.05, 0.26), 'dark', loc=(bx, by - d / 2.0 - 0.02, z0 + hbody + 0.02))
+    return z0 + hbody + 0.12
+
+
+def _hopper(P, hx, hy, z_top, z_bot, mouth=0.33, throat=0.115):
+    """THE MOUTH THE TAKE GOES INTO - and it is SQUARE, of plank and iron.
+
+    The one thing in the set that is nothing but an opening. Deliberately NOT
+    round: the Cook has a pot and the Boiler has a vat, and a round funnel at
+    this size would read as a third kettle. Four flat faces, a heavy square
+    rim, and a lit throat inside it so the opening is not a black hole in the
+    silhouette - an opening nobody can see is not an opening.
+    """
+    ring = []
+    for i in range(9):
+        t = TAU * i / 8.0
+        # a square ring, not a circle: push the unit circle out to the square
+        c, s = math.cos(t), math.sin(t)
+        k = 1.0 / max(abs(c), abs(s), 1e-6)
+        ring.append((c * k, s * k))
+    rows = []
+    for v, r in ((0.0, mouth), (0.55, mouth * 0.55 + throat * 0.45), (1.0, throat)):
+        z = z_top + (z_bot - z_top) * v
+        rows.append([Vector((hx + ux * r, hy + uy * r, z)) for ux, uy in ring])
+    P.raw(surf(rows, 0.030), 'body')
+    # the rim: four bars round the mouth
+    for ax in (0, 1):
+        for sgn in (-1, 1):
+            if ax == 0:
+                P.add(L.box(0.075, mouth * 2.1, 0.075), 'dark',
+                      loc=(hx + sgn * mouth, hy, z_top))
+            else:
+                P.add(L.box(mouth * 2.1, 0.075, 0.075), 'dark',
+                      loc=(hx, hy + sgn * mouth, z_top))
+    # *** PASS 4, ONE PART. THE LIT THROAT, AND PASS 3's VERSION WAS A LUMP OF
+    # *** DOUGH. *** A solid glow cone 0.49 m across filled the mouth edge to
+    # edge, and with the view transform on it came back as a CREAM-COLOURED
+    # MASS sitting in the funnel - the creature read as a hopper full of
+    # batter, which is the Boiler's trade and not this one. Light reads as
+    # light when it is a thin SOURCE against a dark interior, not when it is a
+    # solid the size of the opening. So: a lit ring just inside the rim, and a
+    # small plug far down the throat. What the camera gets is a dark square
+    # hole with its edge alight and something burning at the bottom of it.
+    lit = []
+    for i in range(25):
+        t = TAU * i / 24.0
+        c2, s2 = math.cos(t), math.sin(t)
+        k2 = 1.0 / max(abs(c2), abs(s2), 1e-6)
+        lit.append(Vector((hx + c2 * k2 * mouth * 0.80, hy + s2 * k2 * mouth * 0.80,
+                           z_top - 0.055)))
+    P.raw(L.tube(lit, [0.028] * len(lit), 6), 'glow')
+    P.add(L.cone(throat * 1.05, throat * 0.70, 0.07, 9), 'glow',
+          loc=(hx, hy, z_bot + 0.16))
+    # the neck down into the lid
+    P.add(L.box(throat * 2.3, throat * 2.3, 0.14), 'dark', loc=(hx, hy, z_bot - 0.05))
+
+
+def reeve():
+    """IT TAKES THE HAUL. It does not hit hard and it does not call anybody: it
+    stands over a strongbox chained to the floor and everything this floor
+    would have paid you goes into it while it is alive. Break the box and you
+    get the lot. Leave it standing and you walk out of a cleared floor with
+    nothing to show for it. The fight is a SHOT CLOCK ON YOUR WAGES, which is
+    a pressure no other body in this set applies.
+
+    Silhouette intent - A WIDE LOW CHEST, A SQUARE MOUTH ABOVE IT, AND A SMALL
+    MAN WITH HIS HAND OUT:
+      - the BOX is the mass and it is HORIZONTAL - the first wide-not-tall
+        silhouette in the set. It is planted, chained to a floor spike, and
+        bigger than the man beside it;
+      - the HOPPER tops the whole creature, so the silhouette ends in a SQUARE
+        OPENING rather than a head. Nothing else here tops out in a rectangle;
+      - the MAN is SHORT and reads as an officer, not a fighter: flat cap, long
+        coat, one hand flat on the lid (ownership) and one held out palm-up
+        (the taking). Both arms run ACROSS the picture, in the plane of the
+        front camera - the Tanner's pass-3 finding, applied first time: a
+        forearm pointing at the lens foreshortens to nothing;
+      - the SPILL at the foot of the box and the lumps on the lip say which
+        way the stuff is travelling, which is the only part of the mechanic a
+        still picture can carry.
+
+    Front is -Y, the same as the nineteen before it.
+    """
+    P = Parts("reeve")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX, BX, BY = -0.64, 0.48, 0.04
+    _i_box = len(P.items)
+    lid_z = _strongbox(P, BX, BY)
+    _span("box", _i_box)
+
+    _i_hop = len(P.items)
+    # the hopper sits toward the man's end of the lid so it never covers the
+    # lock plate, and its mouth is the top of the creature
+    _hopper(P, BX - 0.26, BY + 0.02, 1.58, lid_z)
+    # three lumps of the floor's own take on the lip and in the throat
+    for dx, dy, dz, r in ((-0.20, -0.14, 1.60, 0.062), (0.06, -0.19, 1.57, 0.052),
+                          (-0.04, 0.12, 1.55, 0.044)):
+        P.add(L.sphere(r, r * 0.86, r * 0.74, 7, 5), 'bone',
+              loc=(BX - 0.26 + dx, BY + dy, dz))
+    _span("hopper", _i_hop)
+
+    _i_chain = len(P.items)
+    # ---- CHAINED TO THE FLOOR. This is the line that separates it from the
+    # Tallyman in one glance: that one withdraws with what it took, this one
+    # cannot leave the box and the box cannot leave the room.
+    _ring(P, (BX + 0.70, BY + 0.10, 0.52), 0.11, axis='x', slot='dark', rad=0.030, n=12)
+    ch = arc((BX + 0.78, BY + 0.10, 0.50), (BX + 0.96, BY + 0.42, 0.10), -0.13, 7)
+    P.raw(L.tube(ch, [0.034] * len(ch), 7), 'dark')
+    P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX + 0.96, BY + 0.42, 0.17),
+          rot=(math.pi, 0.0, 0.0))
+    _span("chain", _i_chain)
+
+    _i_spill = len(P.items)
+    # ---- THE SPILL. A short drift of lumps at the near foot of the box,
+    # heavier toward the room, so the floor reads as paying INTO it.
+    for i, (sx, sy, r) in enumerate(((-0.46, -0.62, 0.070), (-0.26, -0.70, 0.058),
+                                     (-0.08, -0.60, 0.050), (0.14, -0.72, 0.044),
+                                     (0.34, -0.62, 0.038))):
+        P.add(L.sphere(r, r * 0.88, r * 0.66, 7, 5), 'bone',
+              loc=(BX + sx, BY + sy, r * 0.60))
+    _span("spill", _i_spill)
+
+    _i_man = len(P.items)
+    # *** PASS 2, AND IT IS ONE CHANGE: THE MAN STANDS FORWARD OF THE BOX. ***
+    # Pass 1 put him beside the box in X only (man -0.64, box +0.48) and the
+    # SIDE CAMERA LOOKS ALONG X - so at azimuth 90 the box stood in front of
+    # him and HE WAS NOT IN THE PICTURE AT ALL. One of the three views the
+    # register demands showed a chest and a spike and no creature. The blank
+    # check cannot see this: the frame is full of opaque pixels, they are just
+    # all box. Same fault class as the Tanner's pass 5 and as minibossfit's own
+    # hero offset, which separates the pair in BOTH axes for exactly this
+    # reason. He now stands a clear 0.37 m forward of the box's near face, so
+    # front and back separate him in X and the side view separates him in Y.
+    MY = -0.72
+    # *** PASS 5, ONE THING: THE MAN'S MASS. *** On the hero pair shot at
+    # 5.60 m of frame the box held up - bands, lock, feet all read - and the
+    # MAN CAME BACK A STICK FIGURE beside a KayKit adventurer. Those bodies are
+    # chibi and chunky (measured here: 2.45 m tall, 1.32 m across the
+    # shoulders); a 0.086 m shin next to that is a wire. Nothing moves in this
+    # pass and nothing is added - the same skeleton at honest thickness, so if
+    # the read improves it is mass that did it and not a new part.
+    _legs(P, MX, y=MY, hip=0.72, stance=0.185, r0=0.118, r1=0.094,
+          boot=(0.27, 0.40, 0.12))
+    limb(P, [(MX, MY + 0.08, 0.66), (MX, MY + 0.00, 0.92), (MX, MY - 0.05, 1.14)],
+         0.215, 0.172, 'body')
+    # THE LONG COAT. It is what makes a short upright biped read as an OFFICER
+    # rather than a small hero: a clean unbroken skirt to the shin with no
+    # belt-and-buckle fighting kit on it.
+    coat = []
+    for i in range(5):
+        v = i / 4.0
+        z = 1.06 - 0.62 * v
+        hw = 0.235 + 0.105 * v
+        yb = MY + 0.015 - 0.030 * v
+        coat.append([Vector((MX + u * hw, yb - 0.085 * math.sin(math.pi * v) - 0.10,
+                             z)) for u in (-1.0, -0.5, 0.0, 0.5, 1.0)])
+    P.raw(surf(coat, 0.028), 'dark')
+    for sh in ((MX - 0.235, MY - 0.04, 1.145), (MX + 0.235, MY - 0.04, 1.145)):
+        P.add(L.sphere(0.098, 0.092, 0.084, 9, 6), 'dark', loc=sh)
+    _span("man", _i_man)
+
+    _i_head = len(P.items)
+    HD = (MX, MY - 0.07, 1.315)
+    limb(P, [(MX, MY - 0.04, 1.16), HD], 0.086, 0.072, 'body')
+    P.add(L.sphere(0.172, 0.176, 0.166, 12, 8), 'bone', loc=HD)
+    # THE FLAT CAP, and it sits ABOVE THE EQUATOR. Three bodies in this set
+    # have come back reading as A VISORED FACE because a dark horizontal band
+    # crossed the middle of the head; this one keeps the band on top of the
+    # skull where a cap is, and nothing crosses the face.
+    P.add(L.cone(0.232, 0.210, 0.056, 12), 'dark', loc=(HD[0], HD[1] + 0.008, HD[2] + 0.132))
+    P.add(L.cone(0.150, 0.166, 0.082, 12), 'dark', loc=(HD[0], HD[1] + 0.008, HD[2] + 0.086))
+    # eyes BREAK the bone surface (0.156 forward at this height) - the pass-11
+    # finding: a light inside its own skull measures bright and renders black.
+    eyes(P, (HD[0], HD[1], HD[2] - 0.014), 0.054, 0.031, -0.188)
+    _span("head", _i_head)
+
+    _i_arms = len(P.items)
+    # ---- BOTH ARMS ACROSS THE PICTURE. The right hand lies FLAT ON THE NEAR
+    # CORNER OF THE LID - the two masses touch, so the man and the box are
+    # obviously one creature and not a man standing near furniture. The left is
+    # the taking hand. Pass 2 moved the lid hand to the lid's near corner so
+    # that the reach is mostly ACROSS the front camera even with the man now
+    # standing forward of the box.
+    SR = (MX + 0.235, MY - 0.05, 1.145)
+    SL = (MX - 0.235, MY - 0.05, 1.145)
+    HR = (BX - 0.62, BY - 0.34, lid_z + 0.07)
+    HL = (MX - 0.52, MY - 0.17, 0.985)
+    limb(P, [SR, (MX + 0.44, MY - 0.12, 1.08), HR], 0.096, 0.070, 'body')
+    limb(P, [SL, (MX - 0.44, MY - 0.12, 1.055), HL], 0.096, 0.070, 'body')
+    # *** PASS 3, ONE PART, AND IT IS THE PART THE WHOLE MECHANIC RESTS ON. ***
+    # Pass 2's hands were flat plates whose BROAD FACE POINTED AT THE CEILING,
+    # so the front camera - which looks along -Y - only ever saw their 0.05 m
+    # edge. The taking hand came back as A BLADE held out at arm's length and
+    # on the side view the two of them lined up into ONE LONG PLANK running
+    # from his chest to the far side of the box: a creature built around an
+    # open palm read as a man with a cleaver. The palm is now TIPPED UP TO
+    # FACE THE ROOM (1.18 rad, not 0.34) and it has fingers, which is what
+    # makes a small pale shape read as a hand rather than a tool. The lid hand
+    # loses its plate entirely - a hand resting on a lid is a knuckled lump,
+    # not a board - because its plate was half of that plank.
+    P.add(L.sphere(0.102, 0.094, 0.062, 9, 6), 'bone', loc=HR)
+    for fx in (-0.055, 0.0, 0.055):
+        P.add(L.cone(0.021, 0.017, 0.085, 6), 'bone',
+              loc=(HR[0] + fx, HR[1] - 0.085, HR[2] - 0.012),
+              rot=(math.pi / 2.0, 0.0, 0.0))
+    P.add(L.box(0.180, 0.060, 0.200), 'bone', loc=HL, rot=(-1.18, 0.0, 0.0))
+    for fx in (-0.052, 0.0, 0.052):
+        P.add(L.cone(0.020, 0.016, 0.080, 6), 'bone',
+              loc=(HL[0] + fx, HL[1] - 0.030, HL[2] + 0.115), rot=(-0.30, 0.0, 0.0))
+    # the thumb, off the inboard edge, square to the fingers
+    P.add(L.cone(0.022, 0.018, 0.075, 6), 'bone',
+          loc=(HL[0] + 0.085, HL[1] - 0.028, HL[2] + 0.030), rot=(0.0, 1.30, 0.0))
+    # ---- THE SEAL on a short chain at the belt: the thing that makes a taking
+    # lawful, and the only ornament on the whole body.
+    sc = [(MX + 0.10, MY - 0.145, 1.00), (MX + 0.12, MY - 0.175, 0.92),
+          (MX + 0.12, MY - 0.185, 0.86)]
+    limb(P, sc, 0.016, 0.014, 'dark', ring=6)
+    P.add(L.cone(0.070, 0.070, 0.028, 10), 'bone', loc=(MX + 0.12, MY - 0.188, 0.835),
+          rot=(math.pi / 2.0, 0.0, 0.0))
+    _span("arms", _i_arms)
+
+    P.used_pack = False
+    return P
+
+
+BUILDERS.update({"reeve": reeve})

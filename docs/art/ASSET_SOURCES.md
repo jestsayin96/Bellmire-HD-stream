@@ -92,6 +92,7 @@ beside them: `staff_{common,uncommon,rare}.glb` and `crossbow_{common,uncommon,r
 `assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from
 `*.gltf.glb`). Wired as gear.gd KINDS staff and crossbow tiers 1-3. The staves S18 removed are back, now
 with a measured held rotation (gear.gd held_rot) and x1.9 scale.
+
 ## KayKit Dungeon Pack 1.0 - the tiered weapon ladder (S2, art's half of System 2)
 - Pack: KayKit : Dungeon Pack (1.0)
 - Author: Kay Lousberg (www.kaylousberg.com)
@@ -115,3 +116,11 @@ with a measured held rotation (gear.gd held_rot) and x1.9 scale.
 > and shield_* ARE in assets/gear/dungeon/ - art's copies - and nothing in scripts/ reads them
 > yet. That is queued work with art's carry numbers attached (docs/art/SYSTEM2_WEAPONS.md), not
 > a stray asset. One licence covers all 24; no new row is owed.
+
+> TEAM LEAD ADDENDUM, 2026-11-17 14:58 CT. The 12:58 note above ends "nothing in scripts/ reads
+> them yet". THAT CLAUSE IS NOW OUT OF DATE and I am correcting it where it sits rather than
+> editing what was true when written. As of S19 and S20 all 24 dungeon-pack models ARE read:
+> sword/axe/hammer at S16-S17, dagger at S18, staff and crossbow at S19, axeDouble and shield at
+> S20 (shield_* via a runtime format string at roster.gd:886, which a literal filename search
+> cannot see - see this hour's dead-data audit). The licence row and the merge note stand
+> unchanged; only the "nothing reads them" clause is superseded.

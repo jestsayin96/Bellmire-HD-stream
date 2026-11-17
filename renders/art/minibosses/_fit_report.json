@@ -289,14 +289,27 @@
     "hero_side.png",
     "hero_back.png"
    ]
+  },
+  "reeve": {
+   "creature_h": 1.95,
+   "hero_h": 2.45,
+   "ratio": 0.8,
+   "pair_w": 4.83,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
   }
  },
  "errors": [],
  "measured": [
-  "tanner"
+  "reeve"
  ],
  "asked": [
-  "tanner"
+  "reeve"
  ],
  "blank_check": {
   "files": 3,

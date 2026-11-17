@@ -965,11 +965,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "reeve": {
+   "title": "The Reeve",
+   "theme": "keep",
+   "idea": "IT TAKES THE HAUL - while it stands the floor pays its box and not you; break the box or walk out of here with nothing",
+   "wear": 0.05,
+   "feed_line": "It is here for the lord's share.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1420,
+   "size": [
+    2.96,
+    1.71,
+    1.95
+   ],
+   "footprint_span": 2.96,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9686456077388914,
+    "ortho": 2.696118116378784,
+    "clip": [
+     7.551932334899902,
+     20.22943878173828
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 57,
+  "files": 60,
   "failures": []
  }
 }

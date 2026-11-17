@@ -64,7 +64,7 @@ const INK_SOFT := Color(0.38, 0.28, 0.19)
 const INK_RED := Color(0.48, 0.20, 0.12)
 const EDGE := Color(0.45, 0.30, 0.16, 0.95)
 const TEAL := Color(0.10, 0.62, 0.62)   # the accent fill (rules, gems)
-const VIEWER := Color(0.55, 0.35, 0.02)      # a viewer's name on parchment (deep gold)
+const VIEWER := Color(0.47, 0.30, 0.02)      # a viewer's name on parchment (deep gold)
 const BAND := Color(0.24, 0.27, 0.34)        # the town's own band (slate)
 const TITLE := 30
 const BODY := 26
@@ -165,12 +165,12 @@ const PLATE_SOLID := Color(0.10, 0.07, 0.06, 1.0)
 const ON_DARK := Color(0.93, 0.86, 0.69)        # parchment-coloured text on PLATE
 const ON_DARK_SOFT := Color(0.74, 0.66, 0.50)
 const ON_DARK_SHADOW := Color(0.0, 0.0, 0.0)
-const GOOD := Color(0.10, 0.40, 0.16)
+const GOOD := Color(0.10, 0.39, 0.16)
 const BAD := Color(0.60, 0.14, 0.10)
 ## TEAL (the one accent) and GOLD, each with an on-parchment and an on-dark value.
-const TEAL_ON_PARCH := Color(0.06, 0.45, 0.45)
+const TEAL_ON_PARCH := Color(0.05, 0.38, 0.38)
 const TEAL_ON_DARK := Color(0.30, 0.78, 0.76)
-const GOLD_ON_PARCH := Color(0.50, 0.32, 0.02)
+const GOLD_ON_PARCH := Color(0.47, 0.30, 0.02)
 const GOLD_ON_DARK := Color(0.78, 0.62, 0.30)
 ## ---- U56: uncommon takes art's RARITY_HUE_PARCHMENT pewter (the interface variant; every other rung is canonical).
 ## ---- U55 (System 2, HUD half): the rarity hue ladder. SOURCE OF TRUTH is art's icons.RARITY_HUE

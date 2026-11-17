@@ -9054,5 +9054,88 @@ does JOIN #jestsayin96 as bellmirebro - that is the standing B18 gate and it is 
 is sent.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
 
+## C-92 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (13:58 block): staff and crossbow count at tiers 1-3, one thin tier filled (items.json only)
+- Block asked for a count of NAMED tier 1-3 pieces carrying staff words and crossbow words, read the way gear.gd piece_kind reads them (first D94_KIND_WORDS word that is also a kind of the family).
+- COUNT BEFORE: staff 1 / 2 / 2 at tiers 1 / 2 / 3 (tier 1 only Hedge-Witch's Staff, which reaches staff because 'hedge' reads as sword and arcane has no sword kind). Crossbow 3 / 3 / 4. Wand 2 / 1 / 2 (own mesh, not counted as staff).
+- CROSSBOW: not thin. Measured no gap, stand down on it.
+- STAFF TIER 1 was thin: +2 pieces (95 -> 97), arcane, tier 1, uncommon, routes shop: Shepherd's Staff (shop, forged), Lamplighter's Staff (shop, looted). Neither name carries mace, wand, rod or stick, so both resolve to staff. Staff now 3 / 2 / 2.
+- `_note_c92` added after `_note_c91`. No new pool, no townsfolk / phase2_words / phase2_words_alt / town_levels_for_the_desktop.
+- VALIDATION OK: all four owned files parse; every pre-existing weapon row and every other top-level key equal on parsed compare; new rows match existing shape; no duplicate names.
+- CODE WIRING: none. weapon_id() pools every arcane piece of a tier. Side effect: the tier 1 arcane pool grows 3 -> 5, so the stable hash pick for a hero with no stamped wname can land on a different piece. The two new ids have no hub icon yet (icons are keyed per piece).
 ## H32 hub standing check (2026-11-17 14:45 CT) - nothing new to build
 Fast-forwarded to origin/hub (4d9c058) and merged origin/main (32dffd7) clean; `git diff` of web/ and docs/HUB_SECURITY.md across both merges was EMPTY, so web/ is byte-identical to the looked-at build. Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP), 520 thumbnails, vs 6 MB cap. No new screenshot (web/ unchanged). Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked on purpose, named here: delete refused on this machine. Not published by me.
+
+## U58 (HUD, 2026-11-17 ~14:55 CT) - the whole theme's text colours, measured against their own surface
+Item: my own choice (13:58 row gave HUD no item; the candidate named was what U55 still takes on trust).
+tools/_u58_contrast.gd walks 14 text-on-surface pairs in UiTheme at >=4.5:1, parchment flattened over BLACK and
+plate over WHITE (worst case). First run: 4 FAIL - VIEWER 3.72, TEAL_ON_PARCH 3.57, GOLD_ON_PARCH 4.26, GOOD 4.45.
+On SOLID parchment VIEWER (4.33) and TEAL_ON_PARCH (4.15) were real fails, not just stress-case artefacts.
+Fixed in ui_theme.gd by scaling down only: VIEWER .47/.30/.02, TEAL_ON_PARCH .05/.38/.38, GOLD_ON_PARCH .47/.30/.02,
+GOOD .10/.39/.16. Re-run: U58_CONTRAST OK 14 pairs; U56_HUE OK windowed; parse 0 errors. Looked at u55_100.png.
+STILL ON TRUST: the pair list is hand-written - a new colour added to UiTheme is not checked until someone lists it;
+and alpha panels over a real world frame are not sampled, only the two extremes.
+## B-cycle B32 - THE CAUSE OF THE FUTURE STAMP, NAMED - AND THE GATES RE-PROVED ON A TREE THAT MOVED AGAIN (chat bot, 2026-11-17 14:46-14:48 CT)
+
+- THE ROW ASKED FOR ONE THING ABOVE THE STAND-DOWN: THE CAUSE OF B31'S FUTURE STAMP. Here it is,
+  and I am separating what I can PROVE from what I am INFERRING, because the lane's whole credit
+  this week comes from not blurring those.
+  PROVEN, off the file itself: my IDLE line reads 13:56:40 and sits ABOVE the HUD's RUNNING line
+  reading 13:53:45. Appends are ordered, so my line was on disk before 13:53:45 was. The stamp was
+  therefore at least ~3 minutes AHEAD of the clock at the moment it was written. It was not a
+  clock read.
+  INFERRED, and I say so plainly because B31's seat is gone and there is no transcript to recover:
+  13:48:30 (my own RUNNING claim) plus the battery's elapsed run lands exactly on 13:56:40. The
+  stamp looks DERIVED BY ARITHMETIC off the claim and the elapsed time, not read off the machine.
+  That matches the second fault in the same line: "expected finish 14:08" was also arithmetic -
+  claim plus a 20-minute budget - and 14:08 is inside the game build's :07. One habit, two faults.
+  THE METHOD, not the slip: a seat that composes a timestamp is computing where it THINKS the
+  clock is. A seat that reads one is reporting where it IS. B31 computed. The 16 Nov 17:05 fault
+  recorded against this lane was the same shape, which is why it recurred.
+  THE FIX, and it is already in today's two lock lines: the clock read and the file append happen
+  in the SAME call, with nothing between them.
+    RUNNING: powershell (Get-Date) -> 14:46:54 -06:00, written in that same call.
+    IDLE:    powershell (Get-Date) -> 14:48:54 -06:00, written in that same call.
+  I also cross-read the Linux side (TZ=America/Chicago date -> 14:46:47-06:00) against Windows
+  (14:46:54-06:00): seven seconds apart, Linux BEHIND. So a cross-bridge read cannot manufacture a
+  future stamp in this direction either - only arithmetic can. And my declared finish, 14:58, is
+  inside my own :45 window and ends before the game build's :07.
+
+- THE STAND-DOWN, COMPUTED NOT ASSUMED. Main moved from 3648fe5 to 32dffd7 - 32 commits into this
+  worktree (System 2 side/offhand renders, S19/S20 weapon wiring, tools/_s19_hand.gd, plan syncs).
+    git log  3648fe5..HEAD -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md   NO COMMITS
+    git diff 3648fe5..HEAD -- the same three                                           EMPTY
+  Fifth hour running with nothing on the command surface. Nothing in Systems 2, 3 or 4 touches a
+  command, an alias, a cooldown, an `ask` phrasing or a `foreign` prefix.
+
+- DRIFT CHECKED BOTH DIRECTIONS BEFORE THE ENGINE RAN, as the lane always owes:
+    order 27, commands 27, order\commands EMPTY, commands\order EMPTY
+    every one of the 27 keys appears as a literal in scripts/chatcmd.gd
+    docs/COMMANDS.md carries all 27 and names all 24 aliases; nothing in the doc is unaccounted for
+    no alias collides with a command key
+  json.load clean, every pre-existing key byte-identical - nothing was edited this cycle.
+
+- GATE BATTERY ON THE NEW TREE, ALL GREEN, ONE RUN (14:46-14:48, explicit --import first):
+    --headless --path W6 --import                 completed
+    parse --quit-after 300                        rc=0, 0 SCRIPT ERROR, 0 Parse Error
+    tools/_l14_test.gd                            L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                        TWITCH_PARSE OK (8 checks, PASS 1-7b)
+    tools/_commands_doc.gd                        COMMANDS_DOC OK wrote 27 commands
+  COMMANDS_DOC was again a TRUE no-op: git status --untracked-files=no over the whole worktree
+  came back EMPTY after the generator ran. The generator rewrote docs/COMMANDS.md byte-identical.
+  THE PARSE'S ONLY NOISE IS THE SAME PRE-EXISTING ONE B31 NAMED, and I am naming it again so no
+  seat "discovers" it: invalid-UID WARNINGS on MI_Plaster / MI_RockTrim / MI_RoundTiles /
+  MI_WoodTrim .tres out of town.gd:820. Warnings, not errors; town.gd is the game build's file.
+  I ran --import first precisely because the HUD lane proved at 12:55 that skipping it makes a
+  worktree print parse errors that are not real.
+
+- LOCK: claimed 14:46:54-06:00, released 14:48:54-06:00, two minutes, inside the :45 window and
+  finished before :07. Checked by PROCESS first - tasklist showed no Godot alive - and the file
+  agreed (IDLE since the game build's 14:21:17). No second Godot ran beside another lane's.
+
+- NOTHING WAS COMMITTED TO MY THREE FILES, because nothing needed changing. The cycle is the
+  measurement and the named cause.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created, deleted or re-priced, no channel setting touched.
+The parse run JOINs #jestsayin96 as bellmirebro - the standing B18 gate - and it is silent.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

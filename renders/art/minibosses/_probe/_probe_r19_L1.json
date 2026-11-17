@@ -1,0 +1,46 @@
+{
+ "tag": "r19_L1",
+ "ok": true,
+ "errors": [],
+ "metrics": {
+  "fan_axis_splay_deg": 8.73,
+  "fan_panel_angles_deg": [
+   94.49,
+   90.0,
+   85.76
+  ],
+  "fan_panel_overlap": [
+   0.6125,
+   0.8441,
+   0.6129
+  ],
+  "fan_panel_overlap_max": 0.8441,
+  "fan_axis_concentration": 0.9025,
+  "fan_edge_px": 7130,
+  "fan_components": 1,
+  "fan_components_over_60px": 1,
+  "back_man_px": 64211,
+  "back_man_hidden_by_spares": 0.331,
+  "tq_man_px": 59338,
+  "tq_man_hidden_by_hurdle": 0.3768,
+  "tq_man_below_chest_px": 42446,
+  "tq_below_chest_hidden": 0.5268,
+  "head_weave_band_score": 0.1111,
+  "head_weave_px": 4686,
+  "head_glow_px": 178,
+  "head_glow_row_span_px": 11,
+  "head_glow_col_span_px": 32
+ },
+ "counts": {
+  "back_spares": 46837,
+  "back_spare0": 25550,
+  "back_spare1": 23471,
+  "back_spare2": 25538,
+  "back_man": 64211,
+  "tq_man": 59338,
+  "tq_hurdle": 61551,
+  "front_head_dark": 4686,
+  "front_head_glow": 178
+ },
+ "verdict": "GREEN"
+}

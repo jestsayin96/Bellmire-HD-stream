@@ -4951,7 +4951,19 @@ def hurdleman():
     # they drop into the weave below the equator, draw closer together and
     # shrink - a light INSIDE the basket, which is what the written intent
     # ("the eyes deep inside the weave") said in the first place.
-    eyes(P, (HD[0], HD[1], HD[2] - 0.072), 0.042, 0.021, -0.11)
+    # *** PASS 11, REGRESSION 2 OF THE TWO, AND THE INSTRUMENT WAS LYING TO ME
+    # *** UNTIL THIS RUN. *** I wrote at pass 10 that "the head now has no face
+    # at all" and recorded 156 px of glow beside it, and both were true at once,
+    # which should have been the tell. The probe renders a group ALONE, so it
+    # measured two spheres that were INSIDE THE SKULL: the bone head's surface
+    # at this height is 0.152 forward and the eyes sat at 0.110 - forty
+    # millimetres behind their own face. Occlusion-aware, the honest number for
+    # what I shipped is head_glow_visible_px = 0. Not dim. NONE.
+    # So the eyes come OUT to the weave line rather than deeper into it. They
+    # stay BELOW the equator and stay CLOSE together, because that is what kept
+    # the visor read away (band score 0.5618 -> 0.1379 and it must not come
+    # back) - what changes is that they now break the surface and can be seen.
+    eyes(P, (HD[0], HD[1], HD[2] - 0.072), 0.044, 0.027, -0.168)
 
     _span("head", _i_head)
     _i_tool = len(P.items)
@@ -5065,11 +5077,32 @@ def hurdleman():
     # in the middle - which is the opposite of a man who BUILDS the pen. Moving
     # them down is a pure translation: it cannot rotate a projected axis, so the
     # splay fix is untouched, and the tops now sit at his shoulder.
-    for _pi, (yw, dx, dy, dz) in enumerate(((-0.16, -0.30, 0.24, 0.84),
+    # PASS 11b, AND IT IS THE SECOND LEVER, MEASURED ON ITS OWN. Shrinking the
+    # panels uncovered the man (0.4209 -> 0.3310) and cost overlap: the three
+    # buried each other harder (0.531/0.769/0.540 -> 0.613/0.844/0.613), i.e.
+    # three panels showing as two. The 0.20 m lateral step the PICTURE vetoed at
+    # pass 7 was vetoed because the fan reached past both shoulders - at 0.86 m
+    # panels. At 0.67 m the fan has 0.19 m of width back to spend, so the step
+    # goes to 0.15 and the bundle is still narrower than it was before I touched
+    # it. If the picture vetoes it again the number does not get to win.
+    for _pi, (yw, dx, dy, dz) in enumerate(((-0.16, -0.33, 0.24, 0.84),
                                             (0.00, -0.18, 0.40, 0.84),
-                                            (0.16, -0.06, 0.56, 0.84))):
+                                            (0.16, -0.03, 0.56, 0.84))):
         _i_p = len(P.items)
-        _spare_panel(P, MX + dx, dy, dz, yw, 0.26)
+        # PASS 11, REGRESSION 1 OF THE TWO I NAMED AS MADE WORSE. Written at the
+        # time: "from the back the man is still mostly behind his own gear, and
+        # this pass made it slightly worse - 0.3944 hidden before, 0.4209 now."
+        # I looked at the pair render before touching a dial and the number is
+        # KINDER THAN THE PICTURE: from behind there is no creature in the frame
+        # at all, only a head and two shoulder knobs over a wall of fence.
+        # THE LEVER IS PANEL SIZE, and it is one lever - a uniform scale on the
+        # panel, not a new placement. At w 0.86 the fan is 1.10 m across against
+        # SHOULDERS THAT MEASURE 0.52 - he was carrying a bundle more than twice
+        # his own width, which is why he disappeared behind it and why the front
+        # view read as a man penned between two fences. Spares are SPARES: they
+        # are carried, so they are smaller than the one already standing (1.18 m
+        # wide), and at 0.78 of their old size they still weave five bars.
+        _spare_panel(P, MX + dx, dy, dz, yw, 0.26, w=0.86 * 0.78, h=1.22 * 0.78)
         _span("spare%d" % _pi, _i_p)
     # THE STRAP. Two bands of dark withy across the whole fan and one over the
     # right shoulder - the thing that says CARRIED rather than LEANING. It is

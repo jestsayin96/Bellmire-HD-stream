@@ -1,0 +1,49 @@
+{
+ "tag": "r19_L2c",
+ "ok": true,
+ "errors": [],
+ "metrics": {
+  "fan_axis_splay_deg": 9.44,
+  "fan_panel_angles_deg": [
+   94.69,
+   90.01,
+   85.25
+  ],
+  "fan_panel_overlap": [
+   0.5791,
+   0.6397,
+   0.5803
+  ],
+  "fan_panel_overlap_max": 0.6397,
+  "fan_axis_concentration": 0.9032,
+  "fan_edge_px": 5222,
+  "fan_components": 1,
+  "fan_components_over_60px": 1,
+  "back_man_px": 62696,
+  "back_man_hidden_by_spares": 0.3691,
+  "tq_man_px": 58069,
+  "tq_man_hidden_by_hurdle": 0.3772,
+  "tq_man_below_chest_px": 41374,
+  "tq_below_chest_hidden": 0.5295,
+  "head_weave_band_score": 0.1333,
+  "head_weave_px": 4576,
+  "head_glow_visible_px": 329,
+  "head_glow_visible_share": 1.1964,
+  "head_glow_share_of_weave": 0.0601,
+  "head_glow_px": 275,
+  "head_glow_row_span_px": 13,
+  "head_glow_col_span_px": 34
+ },
+ "counts": {
+  "back_spares": 51116,
+  "back_spare0": 24937,
+  "back_spare1": 22943,
+  "back_spare2": 24939,
+  "back_man": 62696,
+  "tq_man": 58069,
+  "tq_hurdle": 60672,
+  "front_head_dark": 4576,
+  "front_head_glow": 275
+ },
+ "verdict": "GREEN"
+}

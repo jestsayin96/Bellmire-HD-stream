@@ -1,0 +1,703 @@
+{
+ "verdict": "GREEN",
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "cells": 24,
+ "blanks": [],
+ "frame_clips": [],
+ "errors": [],
+ "models": {
+  "sword_common": {
+   "model": "assets/gear/dungeon/sword_common.glb",
+   "verts": 279,
+   "checked": 148,
+   "reach": 0.158,
+   "drop": 0.158,
+   "span": 1.015,
+   "tip_z": 0.798,
+   "hero_h": 2.45,
+   "clip": 23,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 99237,
+    "side": 81339,
+    "back": 100001
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "sword_uncommon": {
+   "model": "assets/gear/dungeon/sword_uncommon.glb",
+   "verts": 382,
+   "checked": 187,
+   "reach": 0.164,
+   "drop": 0.164,
+   "span": 1.201,
+   "tip_z": 0.805,
+   "hero_h": 2.45,
+   "clip": 50,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 100513,
+    "side": 81339,
+    "back": 101306
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "sword_rare": {
+   "model": "assets/gear/dungeon/sword_rare.glb",
+   "verts": 716,
+   "checked": 494,
+   "reach": 0.297,
+   "drop": 0.297,
+   "span": 1.503,
+   "tip_z": 0.937,
+   "hero_h": 2.45,
+   "clip": 76,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 103712,
+    "side": 81339,
+    "back": 104497
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axe_common": {
+   "model": "assets/gear/dungeon/axe_common.glb",
+   "verts": 296,
+   "checked": 283,
+   "reach": 0.219,
+   "drop": 0.086,
+   "span": 0.706,
+   "tip_z": 0.86,
+   "hero_h": 2.45,
+   "clip": 101,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96850,
+    "side": 81339,
+    "back": 97614
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axe_uncommon": {
+   "model": "assets/gear/dungeon/axe_uncommon.glb",
+   "verts": 413,
+   "checked": 335,
+   "reach": 0.317,
+   "drop": 0.067,
+   "span": 0.757,
+   "tip_z": 0.958,
+   "hero_h": 2.45,
+   "clip": 38,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 98350,
+    "side": 81339,
+    "back": 99102
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axe_rare": {
+   "model": "assets/gear/dungeon/axe_rare.glb",
+   "verts": 856,
+   "checked": 653,
+   "reach": 0.323,
+   "drop": 0.11,
+   "span": 0.754,
+   "tip_z": 0.964,
+   "hero_h": 2.45,
+   "clip": 24,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 98643,
+    "side": 81339,
+    "back": 99390
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "hammer_common": {
+   "model": "assets/gear/dungeon/hammer_common.glb",
+   "verts": 384,
+   "checked": 371,
+   "reach": 0.211,
+   "drop": 0.212,
+   "span": 0.685,
+   "tip_z": 0.852,
+   "hero_h": 2.45,
+   "clip": 101,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 99060,
+    "side": 81339,
+    "back": 99670
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "hammer_uncommon": {
+   "model": "assets/gear/dungeon/hammer_uncommon.glb",
+   "verts": 506,
+   "checked": 454,
+   "reach": 0.315,
+   "drop": 0.315,
+   "span": 0.695,
+   "tip_z": 0.956,
+   "hero_h": 2.45,
+   "clip": 64,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 102004,
+    "side": 81339,
+    "back": 102743
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "hammer_rare": {
+   "model": "assets/gear/dungeon/hammer_rare.glb",
+   "verts": 1714,
+   "checked": 1636,
+   "reach": 0.338,
+   "drop": 0.338,
+   "span": 0.729,
+   "tip_z": 0.978,
+   "hero_h": 2.45,
+   "clip": 110,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 103597,
+    "side": 81339,
+    "back": 104363
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "dagger_common": {
+   "model": "assets/gear/dungeon/dagger_common.glb",
+   "verts": 128,
+   "checked": 21,
+   "reach": 0.06,
+   "drop": 0.06,
+   "span": 0.713,
+   "tip_z": 0.701,
+   "hero_h": 2.45,
+   "clip": 3,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 95749,
+    "side": 81339,
+    "back": 96521
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "dagger_uncommon": {
+   "model": "assets/gear/dungeon/dagger_uncommon.glb",
+   "verts": 349,
+   "checked": 64,
+   "reach": 0.155,
+   "drop": 0.155,
+   "span": 0.819,
+   "tip_z": 0.795,
+   "hero_h": 2.45,
+   "clip": 8,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96137,
+    "side": 81339,
+    "back": 96920
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "dagger_rare": {
+   "model": "assets/gear/dungeon/dagger_rare.glb",
+   "verts": 553,
+   "checked": 152,
+   "reach": 0.15,
+   "drop": 0.15,
+   "span": 0.916,
+   "tip_z": 0.79,
+   "hero_h": 2.45,
+   "clip": 19,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96938,
+    "side": 81339,
+    "back": 97733
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "staff_common": {
+   "model": "assets/gear/dungeon/staff_common.glb",
+   "verts": 315,
+   "checked": 294,
+   "reach": 0.08,
+   "drop": 0.089,
+   "span": 0.722,
+   "tip_z": 0.721,
+   "hero_h": 2.45,
+   "clip": 51,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 95443,
+    "side": 81339,
+    "back": 96191
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "staff_uncommon": {
+   "model": "assets/gear/dungeon/staff_uncommon.glb",
+   "verts": 331,
+   "checked": 310,
+   "reach": 0.099,
+   "drop": 0.11,
+   "span": 0.891,
+   "tip_z": 0.739,
+   "hero_h": 2.45,
+   "clip": 38,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96700,
+    "side": 81339,
+    "back": 97439
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "staff_rare": {
+   "model": "assets/gear/dungeon/staff_rare.glb",
+   "verts": 890,
+   "checked": 827,
+   "reach": 0.086,
+   "drop": 0.086,
+   "span": 0.921,
+   "tip_z": 0.727,
+   "hero_h": 2.45,
+   "clip": 207,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96281,
+    "side": 81339,
+    "back": 97036
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "crossbow_common": {
+   "model": "assets/gear/dungeon/crossbow_common.glb",
+   "verts": 395,
+   "checked": 202,
+   "reach": 0.277,
+   "drop": 0.276,
+   "span": 0.122,
+   "tip_z": 0.917,
+   "hero_h": 2.45,
+   "clip": 98,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 94212,
+    "side": 81339,
+    "back": 94969
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "crossbow_uncommon": {
+   "model": "assets/gear/dungeon/crossbow_uncommon.glb",
+   "verts": 531,
+   "checked": 338,
+   "reach": 0.414,
+   "drop": 0.414,
+   "span": 0.149,
+   "tip_z": 1.055,
+   "hero_h": 2.45,
+   "clip": 127,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 94463,
+    "side": 81392,
+    "back": 95128
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "crossbow_rare": {
+   "model": "assets/gear/dungeon/crossbow_rare.glb",
+   "verts": 688,
+   "checked": 500,
+   "reach": 0.418,
+   "drop": 0.418,
+   "span": 0.151,
+   "tip_z": 1.059,
+   "hero_h": 2.45,
+   "clip": 194,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 94424,
+    "side": 81413,
+    "back": 95096
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axeDouble_common": {
+   "model": "assets/gear/dungeon/axeDouble_common.glb",
+   "verts": 330,
+   "checked": 276,
+   "reach": 0.219,
+   "drop": 0.219,
+   "span": 0.706,
+   "tip_z": 0.86,
+   "hero_h": 2.45,
+   "clip": 60,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 98118,
+    "side": 81339,
+    "back": 98889
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axeDouble_uncommon": {
+   "model": "assets/gear/dungeon/axeDouble_uncommon.glb",
+   "verts": 527,
+   "checked": 436,
+   "reach": 0.317,
+   "drop": 0.317,
+   "span": 0.757,
+   "tip_z": 0.958,
+   "hero_h": 2.45,
+   "clip": 25,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 101109,
+    "side": 81339,
+    "back": 101835
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "axeDouble_rare": {
+   "model": "assets/gear/dungeon/axeDouble_rare.glb",
+   "verts": 1001,
+   "checked": 821,
+   "reach": 0.323,
+   "drop": 0.323,
+   "span": 0.754,
+   "tip_z": 0.964,
+   "hero_h": 2.45,
+   "clip": 0,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 101208,
+    "side": 81339,
+    "back": 101929
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "shield_common": {
+   "model": "assets/gear/dungeon/shield_common.glb",
+   "verts": 854,
+   "checked": 630,
+   "reach": 0.275,
+   "drop": 0.275,
+   "span": 0.544,
+   "tip_z": 0.916,
+   "hero_h": 2.45,
+   "clip": 355,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 96642,
+    "side": 81339,
+    "back": 97406
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "shield_uncommon": {
+   "model": "assets/gear/dungeon/shield_uncommon.glb",
+   "verts": 626,
+   "checked": 626,
+   "reach": 0.303,
+   "drop": 0.303,
+   "span": 0.661,
+   "tip_z": 0.943,
+   "hero_h": 2.45,
+   "clip": 343,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 97060,
+    "side": 81339,
+    "back": 97797
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  },
+  "shield_rare": {
+   "model": "assets/gear/dungeon/shield_rare.glb",
+   "verts": 327,
+   "checked": 291,
+   "reach": 0.28,
+   "drop": 0.28,
+   "span": 0.7,
+   "tip_z": 0.921,
+   "hero_h": 2.45,
+   "clip": 140,
+   "ground": 0,
+   "hand_scale": 0.8,
+   "opaque": {
+    "front": 97400,
+    "side": 81339,
+    "back": 98099
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   }
+  }
+ }
+}

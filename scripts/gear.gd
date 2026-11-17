@@ -163,11 +163,16 @@ const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
 ## S17 (System 2, second half, part 1): axe/axe and axe/mace tiers 1-3 take the pack's axe_* and
 ## hammer_* the same way (tiers 4-5 keep their existing kit). Same 0.8 hand_scale: measured off the
 ## .glb accessors, axe 0.89/0.95/0.95 and hammer 0.86/0.87/0.90 long, origin in the grip.
+## S18 (System 2, second half, part 2): dagger tiers 1-3 take the pack's dagger_*. Measured off the .glb
+## accessors: 0.90/1.03/1.15 long, origin at the grip -> hand_scale 0.5 (0.45/0.54/0.65 m in the fist).
+## The pack's staff_* is NOT wired: rendered in a mage's hand (s18) it lies HORIZONTAL off the fist with
+## its origin mid-shaft, reading as a wand, not a staff - it needs a held rotation + a grip offset first.
+## The pack's crossbow_* is built along +Z (not +Y) and needs a held rotation - NOT wired yet.
 const DUN := "res://assets/gear/dungeon/"
 const KINDS := {
     "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
     "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", SKA + "Skeleton_Blade.gltf"]},
-    "dagger":     {"family": "blade", "noun": "dagger", "kit": [ADV + "dagger.gltf", ADV + "dagger.gltf", KIT + "knife.gltf", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
+    "dagger":     {"family": "blade", "noun": "dagger", "kit": [DUN + "dagger_common.glb", DUN + "dagger_uncommon.glb", DUN + "dagger_rare.glb", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
     "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
     "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
@@ -201,6 +206,8 @@ static func kind_path(kind: String, tier: int) -> String:
 static func hand_scale(path: String) -> float:
     if path.ends_with("bow_A_withString.gltf"):
         return 0.92
+    if path.begins_with(DUN + "dagger_"):   # S18: pack daggers are 0.9-1.15 long; 0.5 puts them at a long knife
+        return 0.5
     if path.begins_with(DUN):   # S16: dungeon-pack blades are ~1.3-1.9 long; 0.8 puts the common at an arming sword
         return 0.8
     return 0.62 if path.begins_with(KIT) else 1.0

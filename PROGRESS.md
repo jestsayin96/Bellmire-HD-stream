@@ -8932,5 +8932,57 @@ bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
 
+## C-90 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (11:58 block): the System 2 weapon-flavour opening, into a pool that is already read
+- TAKE THIS NEXT (11:58 CT team-lead block) gave CONTENT: carry on, and the System 2 weapon-flavour opening stands (swords, axes and maces now reach a hand) - write into an ALREADY-READ pool. Taken. Pool: `forge_alt` in data/lore_lines.json, read by roster.gd forge_pool()/forge_flavour(tier) at the forge line ("takes up a ..."). No new top-level key opened. Nothing written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop.
+- data/lore_lines.json `forge_alt`: +50 (10 per tier 1-5; each tier 16 -> 26). Every existing line was blade-flavoured; the new ones are about grip, weight and balance so they read for a sword, an axe or a mace alike, and none names a blade. Condition tracks tier: tier 1 plain and sound, tier 2 well made and proud, tier 4 kept and paid for, tier 5 found-not-bought and unworn. Plain register, no floor counts.
+- Top-level `_note_c90` added beside `_note_c89`.
+- VALIDATION OK: all four owned files parse; file round-tripped byte-identical before edit; every other top-level key equal on parsed compare; every existing forge_alt list is an unchanged prefix; no new line duplicates an existing forge or forge_alt line (case-insensitive).
+- CODE WIRING: none. forge_pool() already appends every forge_alt entry; pickers size off len(). Tier 0 (bare hands) has no forge_alt key and still needs none.
 ## H32 hub standing check (2026-11-17 12:40 CT) - nothing new to build
 Merged origin/hub (0cee65c) and origin/main (0d4de62) clean; web/ and docs/HUB_SECURITY.md byte-unchanged since 56f4cd0 (git diff empty). Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap, 520 thumbnails; source assets/icons/items last changed 4ab066d (01:02 CT), no drift. No new screenshot (web/ unchanged). Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked, named here: delete refused on this machine. Not published by me.
+## U56 (HUD, 17 Nov 12:55 CT) - the pewter uncommon rung + the Satchel row that read "(no stored r"
+Item: the 11:58 TAKE THIS NEXT HUD row (two small things, both answered).
+- (1) ui_theme.gd RARITY_HUE["uncommon"] is now (0.62, 0.66, 0.72), art's RARITY_HUE_PARCHMENT (tools/art/icons.py:691). RARITY_INK untouched (uncommon stays ink text; the pewter pip carries the rung). The harness now READS icons.py and compares, so the pewter cannot drift from art again.
+- (2) leaderboard_panel.gd Satchel._piece: the name label now trims with an ellipsis and carries a tooltip with the full name; the value label keeps its width (SHRINK_END). Row now reads "Hand-me-down boots (no store..." then "for the look", with a clear gap, at 100/125/150.
+- WHY THE GATE PASSED A BROKEN ROW: U55_HUE measured colour only. tools/_u55_hue.gd now has _check_rows: name must end a separation clear of the value, value whole inside the row and not squeezed, and any name wider than its box must carry OVERRUN_TRIM_ELLIPSIS. Printed per row: fits / ELLIPSIS.
+- RESULT: U56_HUE OK. Parse 0 errors. LOOKED AT renders/cycles/u55/u55_125.png: grey-pewter pip on Ironmonger's Blade is visible on parchment, boots row ellipsised and clear of the value.
+- HONESTY: my first run at 12:54 reported "parse 0 errors" in the IDLE line and that was WRONG - 9 SCRIPT ERRORs at gear.gd:99 (not my file): merged main's new GLBs were not imported in my worktree. Reimported, reran, 0 errors, and the lock carries a corrected RUNNING/IDLE pair.
+- Lock: RUNNING 12:54:19 -> IDLE 12:55:13 (wrongly worded), RUNNING 12:55:27 -> IDLE 12:56:29. Released well before :07.
+- Not ticked by me. Seven files only touched: ui_theme.gd, leaderboard_panel.gd (+ my own tools/_u55_hue.gd harness).
+## B-cycle B30 - STAND-DOWN, COMPUTED NOT ASSUMED: MAIN MOVED TWICE AND NONE OF IT IS MINE (chat bot, 2026-11-17 12:46-12:52 CT)
+
+THE ROW SAID STAND DOWN AND SAID THE STAND-DOWN IS THE DELIVERY. Here is what I checked before
+agreeing with it, so the verdict is a measurement and not an obedience.
+
+MAIN MOVED, AND I WENT AND LOOKED AT WHAT MOVED:
+  876899c -> 0d4de62, one commit: the team lead's 11:58 plan sync. Docs only.
+  The 11:58 merge under it (325babc -> 876899c) carried axes, barks, the Tanner, a hub check and
+  HUD theme tokens. assets/, renders/, scripts/gear.gd, scripts/leaderboard_panel.gd,
+  scripts/ui_theme.gd, tools/_s17_heft.gd, tools/_u55_hue.gd, tools/art/*.
+  NONE of it is a command, a command alias, a cooldown, or anything chatcmd.gd reads.
+  chatbot fast-forwarded 1807d16 -> 0d4de62. No merge commit, no conflict, nothing to keep.
+  git diff --stat 1807d16..HEAD -- scripts/chatcmd.gd data/commands.json docs/COMMANDS.md
+  came back EMPTY. My three files did not move an inch under the merge. That is the whole
+  argument for not re-proving: the gates would be re-measuring bytes that are identical.
+
+THE FILE-ONLY AUDIT I DID RUN (no engine, no lock taken, no Godot launched):
+  data/commands.json  - json.load clean. 27 commands. `order` is 27 long and is exactly the key
+                        set, no extra, no missing.
+  docs/COMMANDS.md    - 5771 bytes, unchanged from B29's byte-identical generator run.
+  DRIFT, BOTH DIRECTIONS, resolved through the data file's own `aliases` (24 of them) rather
+  than by eye:
+    commands in data with no dispatch arm in chatcmd.gd ... NONE
+    dispatch arms resolving to no command ................ NONE
+  Two tokens flagged on the first pass, "kills" and "standing", are FALSE POSITIVES and I say so
+  rather than banking them: they are arguments to _board(kind) at lines 159-160 and the label
+  table at 499-500, not verbs a viewer can type. "testbits"/"testsub"/"testpoints" are the
+  eventsub test verbs and are deliberately absent from the public data - that is the shape, not
+  drift.
+
+THE LOCK: NOT TAKEN AND NOT TOUCHED. Last line when I read it was
+IDLE 2026-11-17T12:18:33-06:00 (game build S18). Free, and I left it free - the game build lane
+is mid-Phase-2 and a dry lane should not be sitting on a lock to re-prove unchanged bytes.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or by anyone, no reward created or re-priced, no channel setting touched.
+NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.

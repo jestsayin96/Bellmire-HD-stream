@@ -1,0 +1,102 @@
+{
+ "blanks": [],
+ "frame_clips": [],
+ "families": {
+  "staff": {
+   "axis_to_up": "z",
+   "local_euler_deg": [
+    -85.13,
+    -90.06,
+    85.26
+   ],
+   "local_quat": [
+    0.70708,
+    0.00071,
+    -0.70714,
+    0.0
+   ],
+   "common": {
+    "clip_after": 168,
+    "checked": 294,
+    "tip_z": 1.02,
+    "low_z": 0.295
+   },
+   "uncommon": {
+    "clip_after": 148,
+    "checked": 310,
+    "tip_z": 1.178,
+    "low_z": 0.28
+   },
+   "rare": {
+    "clip_after": 490,
+    "checked": 827,
+    "tip_z": 1.211,
+    "low_z": 0.282
+   }
+  },
+  "crossbow": {
+   "axis_to_up": "y",
+   "local_euler_deg": [
+    -0.0,
+    0.0,
+    90.06
+   ],
+   "local_quat": [
+    0.70675,
+    -6e-05,
+    -0.0,
+    0.70746
+   ],
+   "common": {
+    "clip_after": 110,
+    "checked": 202,
+    "tip_z": 0.725,
+    "low_z": 0.214
+   },
+   "uncommon": {
+    "clip_after": 127,
+    "checked": 338,
+    "tip_z": 0.725,
+    "low_z": 0.118
+   },
+   "rare": {
+    "clip_after": 215,
+    "checked": 500,
+    "tip_z": 0.713,
+    "low_z": 0.12
+   }
+  },
+  "shield": {
+   "axis_to_up": "y",
+   "local_euler_deg": [
+    -0.0,
+    0.0,
+    90.06
+   ],
+   "local_quat": [
+    0.70675,
+    -6e-05,
+    -0.0,
+    0.70746
+   ],
+   "common": {
+    "clip_after": 322,
+    "checked": 630,
+    "tip_z": 0.663,
+    "low_z": 0.559
+   },
+   "uncommon": {
+    "clip_after": 311,
+    "checked": 626,
+    "tip_z": 0.734,
+    "low_z": 0.574
+   },
+   "rare": {
+    "clip_after": 163,
+    "checked": 291,
+    "tip_z": 0.764,
+    "low_z": 0.473
+   }
+  }
+ }
+}

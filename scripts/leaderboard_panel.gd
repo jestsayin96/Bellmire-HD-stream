@@ -201,10 +201,13 @@ class Satchel extends PanelContainer:
         h.add_child(pip)
         var a := UiTheme.label(what, 22, UiTheme.rarity_ink(rarity, INK))
         a.clip_text = true
+        a.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS   # U56: a long name ends in an ellipsis, never a bare cut
+        a.tooltip_text = what                         # and the whole name stays one hover away
         a.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         h.add_child(a)
         var b := UiTheme.label(gives, 22, col)
         b.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+        b.size_flags_horizontal = Control.SIZE_SHRINK_END         # U56: the value column keeps its own width; the name gives way, not the numbers
         h.add_child(b)
         _list.add_child(h)
 

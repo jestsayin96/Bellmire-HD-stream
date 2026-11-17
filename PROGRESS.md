@@ -7211,3 +7211,40 @@ after this lane starved the HUD lane last hour. The gates are the first thing at
 - NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
   re-priced or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## H29.6 - THE PUBLISHER FIELDS: shelves, the caravan and open orders reach the hub (game build, 2026-11-16 19:07-19:30 CT)
+TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done; the hub needs no change.
+- snapshot_pub.gd PAYLOAD_V 4 -> 5 (web/app.js KNOWN_V already carries "5"). Additive.
+- FOUND ON THE WAY, AND IT MATTERS: the hub reads `p.shops` at the TOP of the payload (renderShops), but the
+  publisher only ever put shops inside `town`. So the live Shops tab was not even getting the D64 levels. shops now
+  ships at the top level too (the town block keeps its copy).
+- SHELVES are the content writer's rule verbatim (items.json trade_stock._note): a trade exists from opens_tier; a good
+  is on the shelf when max(good.tier, opens_tier) <= the town's growth tier (economy.town_level, 1-12) and not past its
+  last_tier (stock_retirement.shop_goods, or own_goods' last_tier). Five trades: General Goods, Guild Counter, Smithy,
+  Apothecary, Stables. Newest goods first, capped at 60 a shelf. A crossing shows General Goods + Smithy only.
+- THE SMITHY keeps its D64 level and sells_to (the one shop viewers raise) and its shelf LEADS with the steel and armour
+  the counter will actually forge at that level, list price, rarity-tagged; found-only tiers never shelved. It is listed
+  even before its goods open at tier 3, because the forge sells from day one.
+- EVERY OTHER TRADE's `level` IS THE TOWN'S GROWTH TIER - that is what governs its shelf; they have no level of their own.
+  Said plainly so nobody reads it as five separately-raised shops.
+- CARAVAN: town.gd _caravan() now picks one of the content writer's caravan_manifests (first_tier <= tier) when the wagon
+  spawns; the payload sends {present, name, leaves_in (whole minutes, only while trading), cargo[{name,cost,qty}]} from
+  trader_cargo. A wagon heading out is not "in town". Tier 1 has no manifests, so a crossing's wagon has empty cargo.
+  NOT DONE, NOT INVENTED: the in-world settle (_settle_trade) still trades Economy.GOODS as before - the manifest's
+  `supply` lines are not yet delivered to the town (that is D39's half), and the trader does not yet carry a higher-tier
+  GEAR piece "per chance" (Mr. E's gear ruling). The hub's luck framing waits on that mechanic, not on the publisher.
+- ORDERS: town.gd shop_orders. wants_shop fires BEFORE buy_*, so the order is noted deferred, AFTER chat ran the purchase,
+  and ONLY if the counter actually sold something (weapon tier/kind or armour tier changed) - a refused purchase still
+  walks the hero over but is not an order. Closed when the hero reaches the yard. Published {who, item, shop, walker,
+  status:"walking"}; who/walker are the hero name (= viewer display name), every string through clean_name.
+- D77's direction field is NOT in this: D77 (the ascent) is unbuilt, so there is nothing true to send yet.
+- TEST tools/_h29p6_test.gd: H29P6_TEST OK 22 (tier 1 / tier 12 shelves, smithy cap, retirement, caravan in/out,
+  orders walking-only, hostile item name cleaned, tier-12 addition 8139 bytes).
+- LOOKED AT IT: renders/cycles/h29p6/hub_shops.png - the real web/app.js rendering the dumped v5 payload
+  (renders/cycles/h29p6/payload.json, tier 5, smithy Lv 2) in headless Chromium: five... three cards visible with
+  prices, "Sells up to uncommon", the caravan "In town ... leaves in 1 min" with its cargo, and the order row
+  "Smithy - Aldric walking" with the hostile name as text. 0 page errors, 0 dialogs.
+- GATES: parse 0 errors, OFFFLOOR 0/2019, TWITCH_PARSE OK, TOWNWALK PASS (0/19040), _delve_test 0 SCRIPT ERROR.
+- LOCK: RUNNING 19:12:25 (named 19:26) -> relaunch 19:18:21 (named 19:20) -> IDLE 19:18:28. No Godot alive.
+- NO LIVE TWITCH TEST: 0 bits, nothing redeemed or cheered, nothing posted, no reward touched.
+- NOT TAKEN THIS RUN (still queued, in order): L31 remainder, S2_TEST (b), T1_TEST FakeRoster.add_brew, C-73 mechanics.

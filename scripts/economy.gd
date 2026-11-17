@@ -627,6 +627,20 @@ var shop_raised := {"smithy": 0}
 var _counter_told := {}           # "user_id|level" -> true: the counter says it once per level
 var counter_refusals := 0         # tests: times a richer hero was turned away by the cap
 
+## H29.6: the content writer's data/items.json, read ONCE and shared (the shelves, the
+## caravans' cargo and the retirements are all in it). Read-only; {} if it is missing.
+static var _items_cache: Dictionary = {}
+static var _items_loaded := false
+static func items_data() -> Dictionary:
+    if not _items_loaded:
+        _items_loaded = true
+        var f := FileAccess.open("res://data/items.json", FileAccess.READ)
+        if f:
+            var d: Variant = JSON.parse_string(f.get_as_text())
+            if d is Dictionary:
+                _items_cache = d
+    return _items_cache
+
 static func rarity_of(tier: int) -> String:
     return String(RARITY[clampi(tier, 0, RARITY.size() - 1)])
 

@@ -5345,20 +5345,43 @@ func _raise(uid: String) -> void:
     heroes[uid] = b
     people.append(b)
 
+## H29.6: a viewer's outstanding orders for the hub - uid -> {item, shop}. An order exists
+## ONLY when the counter actually sold something (checked after chat has run the purchase,
+## because wants_shop is emitted before buy_*); it is closed when the hero reaches the yard.
+## A refused purchase still walks the hero over, but it is not an order and is not listed.
+var shop_orders := {}
+
 func _on_shop(uid: String, kind: String) -> void:
     if not heroes.has(uid):
         return
+    var h0 := roster.get_hero(uid)
+    var before := [int(h0.get("weapon", 0)), String(h0.get("wkind", "")), int(h0.get("armour", 0))]
     for sh in shops:
         if String(sh[0]) == kind:
             var y: Vector3 = sh[1]
             var f: Vector3 = sh[2]
             var b: HeroBody = heroes[uid]
             var slot := float(heroes.keys().find(uid) % 4) - 1.5
+            shop_orders.erase(uid)
+            call_deferred("_note_order", uid, kind, before)
             b.go(y + f * 4.5 + Vector3(-f.z, 0, f.x) * slot * 1.4, kind, func() -> void:
+                shop_orders.erase(uid)
                 b.face_yaw = atan2(-f.x, -f.z)
                 b.rotation.y = b.face_yaw
                 b.refresh())
             return
+
+func _note_order(uid: String, kind: String, before: Array) -> void:
+    var h := roster.get_hero(uid)
+    if h.is_empty() or not heroes.has(uid) or (heroes[uid] as HeroBody).errand != kind:
+        return
+    var item := ""
+    if kind == "armorer" and int(h.get("armour", 0)) != int(before[2]):
+        item = roster.armour_name(h)
+    elif kind == "blacksmith" and (int(h.get("weapon", 0)) != int(before[0]) or String(h.get("wkind", "")) != String(before[1])):
+        item = roster.weapon_name(h)
+    if item != "":
+        shop_orders[uid] = {"item": item, "shop": "Smithy"}
 
 func _on_fish(uid: String) -> void:
     if not heroes.has(uid) or docks.is_empty():
@@ -6168,7 +6191,18 @@ func _caravan() -> void:
     var stand := _market_pos + Vector3(randf_range(-4, 4), 0, randf_range(-4, 4))
     v._route = route(start, stand)
     v._linger = 99999.0
-    _caravans.append({"v": v, "start": start, "phase": "in", "t": 0.0, "wagon": w})
+    # H29.6: which of the content writer's caravans this is (items.json caravan_manifests,
+    # first_tier <= the town's growth tier). A crossing has none listed: "" = no manifest.
+    var man := ""
+    var cms: Variant = (Economy.items_data().get("caravan_manifests", {}) as Dictionary).get("caravans", [])
+    if cms is Array and economy:
+        var ok: Array = []
+        for m in (cms as Array):
+            if m is Dictionary and int((m as Dictionary).get("first_tier", 99)) <= int(economy.town_level):
+                ok.append(String((m as Dictionary).get("id", "")))
+        if not ok.is_empty():
+            man = String(ok[randi() % ok.size()])
+    _caravans.append({"v": v, "start": start, "phase": "in", "t": 0.0, "wagon": w, "manifest": man})
     feed.append("A trade caravan is sighted on the west road.")
     tag_feed("caravan")
     # D37: E3PO greets an arriving caravan (notables is town-held, call it directly)

@@ -283,3 +283,4 @@ IDLE 2026-11-17T09:49:21-06:00 - B27: six of six re-proved on main 416c35d (pars
 RUNNING 2026-11-17T10:08:40-06:00 (game build: claim first, then fetch/merge and TAKE THIS NEXT; expected finish 10:35)
 RUNNING 2026-11-17T10:10:00-06:00 (game build S16 System 2 first half: import + parse + S16_SWORD windowed + gates, stdout to files, expected finish 10:25. STAMP CORRECTED at 10:12: first written as 10:20:30, a FUTURE stamp - I guessed the clock instead of reading it; machine read 10:11:39)
 RUNNING 2026-11-17T10:14:55-06:00 (game build S16 relaunch: S16_SWORD windowed, close shots re-framed on the live hand; expected finish +2 min)
+IDLE 2026-11-17T10:15:58-06:00 - game build S16: System 2 first half, dungeon-pack swords wired as blade/sword t1-3 (laptop 235665d, merged 6db6bae). parse 0 errors, OFFFLOOR_VERDICT OK 0/2022, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK, S16_SWORD OK 5 shots x2. Logs in build/_s16 (untracked). Godot closed (game build)

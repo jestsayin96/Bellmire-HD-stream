@@ -8635,3 +8635,10 @@ NOT CHASED: the unread-pipe hang. The row said leave it; the condition is known 
 NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+
+## C-87 (2026-11-17 CT, clock ~09:2x) - TAKE THIS NEXT row for CONTENT: hurdleman feed lines, barks deepened an eighth time (lore_lines.json only)
+- TAKE THIS NEXT (08:58 CT block) gave CONTENT: hurdleman arrive and fall lines in miniboss_feed.by_key, 8 and 8, act and broken omitted; then keep going in barks. Not written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop (declared dead).
+- data/lore_lines.json `miniboss_feed.by_key`: +1 key `hurdleman`, arrive 8 and fall 8 (16 lines). `_note_c87` added. Includes the art lane's suggested feed line, "A hurdle just went down between you."
+- data/lore_lines.json `barks`: +47 lines (case-insensitive duplicates dropped). enter 218, lord 209, trap 211, hurt 205, drink 201, misfire 205. Plain register, no floor counts.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; existing by_key rows unchanged; all bark entries strings.
+- CODE WIRING: none for barks. For `hurdleman` the reader (delve.gd miniboss_lines) takes any key; the code lane should fire _miniboss_say("hurdleman", "arrive"/"fall") when it adds it to the spawn table with MB_FIT hurdleman 1.04 (art's measured number). No .gd touched.

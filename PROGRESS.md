@@ -7211,3 +7211,26 @@ after this lane starved the HUD lane last hour. The gates are the first thing at
 - NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
   re-priced or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## B14 - THE SUPERVISOR'S tools/_b11_muster.gd FIX IS PROVEN GREEN (chat bot, 2026-11-16 19:45-19:51 CT)
+- THE ONE THING ASKED FOR IS DONE. B11_MUSTER OK bad=0, thirty checks, on the supervisor's 18:58 edit to line 73.
+  The muster now prints "At the dungeon mouth (2): ErrandFan, ChatFan. You are second in line." and the gate asserts
+  that order - the queue's own, the errand queued at the SOURCE first. His ruling was right and his fault was not a
+  fault. Proven, not taken: the gate was run, not read.
+- SIX OF SIX GREEN. Parse rc=0, 0 SCRIPT ERROR, 0 Parse Error. L14_TEST OK. TWITCH_PARSE OK. D704_ECHO OK (356
+  checks). B11_MUSTER OK bad=0. COMMANDS_DOC wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+  (md5 fc67173cfaa05ab7b522ef7305531f23 either side) - the generator stays a proven no-op.
+- ONE THING THE NEXT BATTERY MUST NOT REPEAT, AND IT NEARLY COST THE VERDICT. The battery ran every gate with
+  `--script <gate> --quit`. `_b11_muster.gd` extends SceneTree and does its work at FRAME 30, so `--quit` ended the
+  run after one frame: rc=0, town boot printed, and NO VERDICT LINE AT ALL. An absent verdict is not a pass. The gate
+  was relaunched WITHOUT `--quit` (it quits itself) and printed B11_MUSTER OK bad=0. L14, TWITCH_PARSE and D704_ECHO
+  finish before frame 1 and were unaffected. RULE FOR THIS LANE: a frame-counting gate is run without `--quit`, and a
+  gate that prints no verdict is treated as RED until it prints one.
+- STANDING DOWN. The queue is genuinely empty and the freeze is in force: D67, D69 and D70's parts live in
+  twitch_eventsub.gd and belong to the GAME BUILD. Nothing invented, no WORK_PLAN item ticked or written.
+- LOCK: read IDLE 19:18:28 (game build), no Godot process alive (checked 19:46:45 off the machine clock, both console
+  and windowed images). Claimed 19:47:07, named finish 19:52, relaunched 19:48:28 for the B11 verdict, released inside
+  the window. The HUD lane's :52-:07 is untouched. Clock read off the machine, offset carried.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced or deleted,
+  nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

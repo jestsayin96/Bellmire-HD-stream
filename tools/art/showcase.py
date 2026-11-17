@@ -781,12 +781,50 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         # pass of these gloves into dinner plates. Bone spacing is exact and
         # scales with any body: on the KayKit adventurer handlen is 0.1477 and
         # the fist measures 0.15 across (x0.50) and the forearm 0.11 (x0.38).
-        fist = handlen * 1.00                      # across, = 2 x 0.50
-        ar = handlen * 0.38                        # forearm RADIUS
+        # *** PASS 7, 17 NOV. THE TWO NUMBERS EVERY GLOVE DIAL IS BUILT ON WERE
+        # *** WRONG BY 2.1x AND 1.4x, AND THAT IS WHY GLOVES DO NOT READ.
+        # The comment this replaces said the fist is 0.15 across (radius
+        # 0.075) and the forearm radius 0.055, and dismissed a mesh scan that
+        # returned 0.154 as the thing that "turned the first pass into dinner
+        # plates". THE MESH SCAN WAS RIGHT. Measured off the POSED body by
+        # 16-way ray cast from the bone axis at eight stations between wrist
+        # and elbow, nearest wall, arm meshes only - tools/art/_g7_arm.py,
+        # renders/art/_g7_arm.json, 17 Nov 03:45 CT:
+        #     forearm RADIUS  0.110 thinnest ring .. 0.123 mean ring
+        #     hand    RADIUS  0.130 nearest wall  .. 0.154 mean of 26 ways
+        # The old bases gave a cuff mouth of 0.066-0.149 against a forearm of
+        # 0.123, and a hand shell half-extent of 0.066-0.085 against a hand of
+        # 0.130-0.200. SO THE GLOVE WAS INSIDE THE LIMB IT WRAPS. Two
+        # independent instruments say the same thing: _g7_probe.json reports
+        # the hand shell 100.0% inside the body mesh on ALL SIX cells, and the
+        # cuff's inside_pct is MONOTONE IN FLARE - raidbreaker (dearest flare)
+        # 31%, carder 71%, bellrope 76%. A piece with nothing outside the skin
+        # cannot differ from another piece with nothing outside the skin, which
+        # is the failing pair.
+        # WHY THIS IS NOT THE DINNER PLATE AGAIN: that experiment raised the
+        # MOUTH on a shell that stayed buried - a lip on an invisible glove.
+        # Here the mouth and the shell are both re-based on the limb's own
+        # measured radius, so each sits just OUTSIDE the surface it covers and
+        # nothing is bigger than the body asks for. The ladder is kept as a
+        # FRACTION OF THE LIMB: 1.06-1.48 of the forearm, 1.05-1.31 of the
+        # hand. The sheet is the judge and it is looked at, not asserted.
+        ARM_R = handlen * 0.83                     # 0.123, MEASURED
+        HAND_R = handlen * 1.04                    # 0.154, MEASURED
+        fist = HAND_R * 2.0                        # across, kept as a diameter
+        ar = ARM_R                                 # forearm RADIUS, MEASURED
         p = Part("Acc_Glove" + side.upper(), "hand." + side, item=name, slot="gloves")
         cuff = forearm * F['cuff']                 # up the forearm: 0.04 -> 0.24
-        mouth = ar * F['flare']                    # the lip, CLEAR of the arm
-        hw = fist * 0.5 * F['shell']               # ALWAYS > the fist
+        # THE LADDER, RE-BASED. F['flare'] and F['shell'] are the SHARED dials
+        # (icons.glove_form) and they are NOT touched - the 520 hub icons are
+        # ticked and must not move. What changes is only how the worn piece
+        # reads them: the cut's rung is normalised out of the dial's own range
+        # and then applied as a fraction of the limb's MEASURED radius, and
+        # the key's own jitter is put back multiplicatively so two same-cut
+        # gloves still differ (D94b's rule).
+        fn = max(0.0, min(1.0, (F['flare'] - 1.18) / 1.47))
+        sn = max(0.0, min(1.0, (F['shell'] - 1.26) / 0.36))
+        mouth = ar * (1.06 + 0.42 * fn) * D.u(1, 0.95, 1.08)
+        hw = HAND_R * (1.05 + 0.26 * sn) * D.u(3, 0.97, 1.06)
         # DIRECTIONAL FLARE (17 Nov) - THE ONE CHANGE THIS PASS.
         # aim() builds its rotation with to_track_quat('Z','Y'), so for the
         # cuff's own axis (-sgn,0,0) the cone's LOCAL +X lands on rest-world
@@ -798,7 +836,22 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         # those +Z IS the outboard axis already.
         skew = F['skew']
         lskew = skew * sgn
-        mid = mouth * 0.62 + hw * 0.38       # the stepped cuff's shoulder
+        # *** PASS 7b, AND I FOUND IT BY LOOKING AT PASS 7a's SHEET. ***
+        # 7a put the glove outside the limb for the first time and the row
+        # went TELLS APART, but the four metal cuts came out as STACKS OF
+        # PANCAKES - a drum of near-constant diameter sticking sideways out
+        # of the hip with four rings round it. The cause is arithmetic, not
+        # taste: the cuff cone runs from hw*0.99 at the hand to mouth at the
+        # elbow, and once hw was re-based on the HAND (0.162-0.202) while
+        # mouth is based on the FOREARM (0.130-0.181), hw EXCEEDS mouth on
+        # most cuts - so the "cone" is a cylinder or a reverse taper. A glove
+        # has a WAIST: wide over the hand, narrow at the wrist, flaring again
+        # at the cuff mouth. The cuff's hand end is therefore the ARM's own
+        # radius, not the hand's, and the hand shell stays the wider mass it
+        # already is. One change; the mouth, the reach, the lames, the cop and
+        # the shell are all untouched so the sheet says which one moved.
+        wrist_r = ar * 1.02                  # the waist, on the arm's radius
+        mid = mouth * 0.62 + wrist_r * 0.38  # the stepped cuff's shoulder
         # 1. THE CUFF - the readable mass. IT STAYS ON THE HAND BONE. Moving
         #    it to lowerarm.<side> was tried and is wrong: merge_parts carries
         #    each part rigidly on its own bone, so the cuff and the hand shell
@@ -818,7 +871,7 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         if F['stepped']:
             # a straight sleeve with ONE shoulder in it - a different outline
             # from the bell, which is the point: same price, different glove.
-            p.raw(aim(L.scone(hw * 0.99, mid, cuff * 0.55 + handlen * 0.30, 14,
+            p.raw(aim(L.scone(wrist_r, mid, cuff * 0.55 + handlen * 0.30, 14,
                               0.0, lskew * 0.55), base, axis),
                   'metal' if F['metal'] else 'leather')
             p.raw(aim(L.scone(mid * 1.04, mouth, cuff * 0.45, 14,
@@ -826,7 +879,7 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
                       (w.x - sgn * cuff * 0.55, w.y, w.z), axis),
                   'metal' if F['metal'] else 'leather')
         else:
-            p.raw(aim(L.scone(hw * 0.99, mouth, cuff + handlen * 0.30, 14,
+            p.raw(aim(L.scone(wrist_r, mouth, cuff + handlen * 0.30, 14,
                               0.0, lskew), base, axis),
                   'metal' if F['metal'] else 'leather')
         # THE CUFF'S OWN PROFILE, SO EVERYTHING WRAPPED ROUND IT HUGS IT.
@@ -845,11 +898,11 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
                 tA = (cuff * 0.55 + handlen * 0.30) / max(1e-6, Lc)
                 if t <= tA:
                     u = t / max(1e-6, tA)
-                    return (hw * 0.99 + (mid - hw * 0.99) * u, skew * 0.55 * u)
+                    return (wrist_r + (mid - wrist_r) * u, skew * 0.55 * u)
                 u = (t - tA) / max(1e-6, 1.0 - tA)
                 return (mid * 1.04 + (mouth - mid * 1.04) * u,
                         skew * (0.55 + 0.45 * u))
-            return (hw * 0.99 + (mouth - hw * 0.99) * t, skew * t)
+            return (wrist_r + (mouth - wrist_r) * t, skew * t)
 
         if F['lip']:                               # a hard flared rim
             lipx = w.x - sgn * cuff

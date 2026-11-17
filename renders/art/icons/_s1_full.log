@@ -1,0 +1,7 @@
+STARTED
+ICONGEN_REPORT {"verdict": "GREEN", "ok": true, "n": 520, "by_family": {"ring": 55, "amulet": 51, "cloak": 49, "boots": 48, "gloves": 51, "hat": 146, "banner": 120}, "by_hue": {"white": 109, "blue": 52, "none": 306, "purple": 36, "tangerine": 17}, "blanks": [], "errors": []}
+RC 0
+C:\hd adventure\bellmire-art\tools\art\icongen.py:172: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+DONE

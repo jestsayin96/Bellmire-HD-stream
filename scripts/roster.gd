@@ -876,7 +876,15 @@ func weapon_mesh(h: Dictionary) -> String:
     return String(list[clampi(t - 1, 0, list.size() - 1)])
 
 func offhand_mesh(h: Dictionary) -> String:
-    return String(CLASSES[h["class"]]["offhand"])
+    var off := String(CLASSES[h["class"]]["offhand"])
+    # S20 (System 2 engine half, art's SYSTEM2_WEAPONS (d)): a shield-bearer at ARMOUR tier 1-3 carries the
+    # KayKit dungeon pack's shield ladder on the off hand; tier 0 and 4-5 keep the class's own kit shield.
+    # The class field is untouched, so the +2 AC (armour_class) and delve's shield check read exactly as before.
+    if off.begins_with("shield"):
+        var t := int(h.get("armour", 0))
+        if t >= 1 and t <= 3:
+            return Gear.DUN + "shield_%s.glb" % ["common", "uncommon", "rare"][t - 1]
+    return off
 
 # most offhands are held; a quiver is worn
 func offhand_bone(h: Dictionary) -> String:

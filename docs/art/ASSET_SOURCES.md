@@ -92,6 +92,7 @@ beside them: `staff_{common,uncommon,rare}.glb` and `crossbow_{common,uncommon,r
 `assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from
 `*.gltf.glb`). Wired as gear.gd KINDS staff and crossbow tiers 1-3. The staves S18 removed are back, now
 with a measured held rotation (gear.gd held_rot) and x1.9 scale.
+
 ## KayKit Dungeon Pack 1.0 - the tiered weapon ladder (S2, art's half of System 2)
 - Pack: KayKit : Dungeon Pack (1.0)
 - Author: Kay Lousberg (www.kaylousberg.com)

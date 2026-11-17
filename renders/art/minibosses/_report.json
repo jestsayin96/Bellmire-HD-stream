@@ -577,6 +577,38 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "boiler_chibi": {
+   "title": "The Boiler (chibi)",
+   "theme": "confection",
+   "idea": "IT POURS AND IT SETS - rebuilt in the game's own register",
+   "wear": 0.25,
+   "feed_line": "Something is pouring.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1940,
+   "size": [
+    3.65,
+    2.48,
+    2.45
+   ],
+   "footprint_span": 3.65,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.524911928057254,
+    "ortho": 3.8164608478546143,
+    "clip": [
+     9.237131118774414,
+     24.144655227661133
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

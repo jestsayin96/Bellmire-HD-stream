@@ -3137,7 +3137,17 @@
       "A beginner's blade. Beginners who keep it stop being beginners.",
       "Hammered flat on a Tuesday, sharpened on a Wednesday. Good enough for Thursday.",
       "Nothing about it is clever. That is why it is still in one piece.",
-      "Common iron. The scar has eaten better and spat this one out."
+      "Common iron. The scar has eaten better and spat this one out.",
+      "The grip is wrapped in town twine. It stays put, which is the point.",
+      "Balanced by the smith's thumb and a guess. The guess was good.",
+      "A little heavy at the business end. You stop noticing by the second morning.",
+      "Tool-handle plain. Made for hands that already carry things.",
+      "The wrap is cut from an old harness. It does not slip.",
+      "Nothing to polish and no reason to. Oil it, hang it, use it.",
+      "It sits in the hand the way a good spade does.",
+      "The smith tried it on a fence post. The post lost.",
+      "Worth more in the hand than it looks on the rack.",
+      "Sold by weight, priced by weight, and it weighs about right."
     ],
     "2": [
       "Folded twice and stamped. The smith puts her mark where you can see it.",
@@ -3155,7 +3165,17 @@
       "Beaten twice as long as it needed. You feel the difference in your wrist.",
       "The folds show under oil like the rings of a tree. Count them and respect them.",
       "A smith's pride, sharpened. He will ask for it back for a polish. Let him.",
-      "Two folds, one signature, no apologies."
+      "Two folds, one signature, no apologies.",
+      "Balanced to the hand, not to the rack. The smith checks both.",
+      "The grip is leather, stitched once and stitched again. It will outlast your patience.",
+      "A good weight forward. It carries the swing for you.",
+      "Oiled and wrapped, and ready for a hand that means it.",
+      "The smith had you hold it before she named the price. She read your grip and took a copper off.",
+      "It comes up quick and goes down sure.",
+      "Clean, even, and heavier than it looks. The weight is where you want it.",
+      "The guild buys these by the dozen. The smith keeps one back for herself. This is close to that one.",
+      "A fair weapon, fairly made, fairly priced. Bellmire is proud of that.",
+      "Set in the hand, it stops being a purchase and starts being yours."
     ],
     "3": [
       "Runes down the fuller wake when it is drawn, and sulk when it is sheathed.",
@@ -3173,7 +3193,17 @@
       "Chapel-blessed, rune-struck. It burns a pale orange when angry.",
       "The edge hisses on the air as though it were hot. It is not. Not quite.",
       "Runes down the fuller, sullen and glowing. The priest charged for the blessing. The smith did not ask how much.",
-      "It lights a small circle round the wielder in the cellars. Someone thought that was kind."
+      "It lights a small circle round the wielder in the cellars. Someone thought that was kind.",
+      "The runes run up the grip as well as the head. Hold it and they warm to your palm.",
+      "Lighter in a steady hand and heavier in a shaking one.",
+      "The balance shifts a little when it is angry. You will learn to feel it.",
+      "Swing it once in the yard and the birds leave. Nobody has asked why.",
+      "A faint pulse in the grip, slow as a sleeper's. It quickens when a lord is near.",
+      "Heft it. The weight is right and the cold is not.",
+      "The chapel blessed it. The priest washed his hands after.",
+      "Nothing rattles in the grip. Something hums.",
+      "It sits in the hand as if it had been waiting to be asked.",
+      "The smith would not oil the runes. He oiled everything around them."
     ],
     "4": [
       "Dragontooth. Bellmire will sell it to you and still not say whose tooth.",
@@ -3191,7 +3221,17 @@
       "The smith swears the tooth came from the river. The river has never grown teeth that large.",
       "Grey scale on the hilt, ivory on the edge. The guild will not say whose it was.",
       "It rings low when struck, like a bell thinking of something else.",
-      "The tooth is warm, as if it were still in a mouth."
+      "The tooth is warm, as if it were still in a mouth.",
+      "Heavy as a debt and as sure. It wants a strong arm and repays one.",
+      "The grip is wrapped in scale and stays dry in the rain. The scale is not from the river.",
+      "Hang it on a wall and the room goes quiet. Take it down and it gets quieter.",
+      "It does not swing so much as arrive.",
+      "All the weight sits behind the edge. You steer it. It decides the rest.",
+      "Dragontooth does not dull. It sulks, and then it bites.",
+      "A kept weapon, well kept. Someone paid for the oil and the leather and the silence.",
+      "The grip is warm in the hand. The tooth remembers a body.",
+      "Bellmire can afford this now, and does not ask what the sellers carried it past.",
+      "It leaves a thin white line on the air a moment after the cut."
     ],
     "5": [
       "Scarforged. It hums when the dark leans close, and it has never been wrong yet.",
@@ -3209,7 +3249,17 @@
       "Hold it and the whole scar leans toward you. It likes being held.",
       "The edge drinks light the way a well drinks coins.",
       "Nobody forges this by choice. It was asked for, and the asking was answered.",
-      "Scarforged steel: cold in the hand, hot in the fight, never quite empty."
+      "Scarforged steel: cold in the hand, hot in the fight, never quite empty.",
+      "Found, not bought. Nothing in Bellmire has a price that fits it.",
+      "The grip fits whoever takes it up. Nobody has asked how.",
+      "No wear on it. The scar does not allow wear.",
+      "It weighs nothing until the dark is near, and then it weighs what it has to.",
+      "Take it up and the hand goes steady. Set it down and the hand remembers.",
+      "The edge was never ground. It was always that sharp.",
+      "Cold at the grip, warm at the edge, and no smith in town can say why.",
+      "It leans toward the floor below, gently, the way a dog leans toward home.",
+      "Whoever carried it before did not put it down. It was put down for them.",
+      "It needs no oil and no whetstone. Keep the sheath anyway. It likes it."
     ]
   },
   "town_levels_for_the_desktop": {
@@ -11505,5 +11555,6 @@
   "_note_c70": "C-70: backlog item 2 - descend, cleared, epitaphs and barks widened, additive. Placeholders as the existing lines: descend lines starting '%s %s' take hero and verb, 'Floor %d' takes the floor stood on only, never a total.",
   "_note_c87": "C-87: barks deepened an eighth time (enter, lord, trap, hurt, drink, misfire). Plain register, no floor counts. Additive only.",
   "_note_c88": "C-88: barks deepened a ninth time. Appended only; plain register; no floor counts.",
-  "_note_c89": "C-89: barks deepened a tenth time. Plain register, no floor counts. Pickers size off len()."
+  "_note_c89": "C-89: barks deepened a tenth time. Plain register, no floor counts. Pickers size off len().",
+  "_note_c90": "C-90: forge_alt +50 (10 per tier), hand-feel lines that read for any weapon family: grip, weight, balance. Read by roster.forge_pool. Pickers size off len()."
 }

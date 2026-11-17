@@ -8931,3 +8931,10 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
+
+## C-90 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (11:58 block): the System 2 weapon-flavour opening, into a pool that is already read
+- TAKE THIS NEXT (11:58 CT team-lead block) gave CONTENT: carry on, and the System 2 weapon-flavour opening stands (swords, axes and maces now reach a hand) - write into an ALREADY-READ pool. Taken. Pool: `forge_alt` in data/lore_lines.json, read by roster.gd forge_pool()/forge_flavour(tier) at the forge line ("takes up a ..."). No new top-level key opened. Nothing written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop.
+- data/lore_lines.json `forge_alt`: +50 (10 per tier 1-5; each tier 16 -> 26). Every existing line was blade-flavoured; the new ones are about grip, weight and balance so they read for a sword, an axe or a mace alike, and none names a blade. Condition tracks tier: tier 1 plain and sound, tier 2 well made and proud, tier 4 kept and paid for, tier 5 found-not-bought and unworn. Plain register, no floor counts.
+- Top-level `_note_c90` added beside `_note_c89`.
+- VALIDATION OK: all four owned files parse; file round-tripped byte-identical before edit; every other top-level key equal on parsed compare; every existing forge_alt list is an unchanged prefix; no new line duplicates an existing forge or forge_alt line (case-insensitive).
+- CODE WIRING: none. forge_pool() already appends every forge_alt entry; pickers size off len(). Tier 0 (bare hands) has no forge_alt key and still needs none.

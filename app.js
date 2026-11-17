@@ -290,7 +290,7 @@ async function load() {
   showStatus();
 }
 
-const SECTIONS = ["boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
+const SECTIONS = ["watch", "boards", "state", "dice", "heroes", "bands", "chronicle", "lore", "bestiary", "shops", "season", "roll", "fallen"];
 
 function renderNothing(failed) {
   const box = $("nothing");
@@ -303,6 +303,7 @@ function renderNothing(failed) {
   $("nHeroes").textContent = "";
   $("nFallen").textContent = "";
   { const nb = $("nBands"); if (nb) nb.textContent = ""; }
+  try { renderRail({}); } catch (e) {}
   renderCommands(null);
   renderRolls(null);
 }
@@ -331,6 +332,7 @@ function render(p) {
   renderTown(t);
   renderBoards(arr(p.heroes), arr(p.fallen));
   renderHeroes(arr(p.heroes));
+  try { renderRail(p); } catch (e) { /* the rail must never break the rest of the page */ }
   renderBands(p.parties != null ? p.parties : p.bands);
   renderChronicle(p.chronicle, { auto: true });
   try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
@@ -2789,11 +2791,11 @@ const LORE_FROZEN = {"town_life":{"crier":["Grain measured, flasks counted, door
 
 // chapter tabs: id, label, icon (from ICON_SET), builder.
 const LORE_CHAPTERS = [
-  { id: "town",    label: "Town life",     icon: "town",  build: loreTownLife },
-  { id: "growth",  label: "The town's growth", icon: "town",  build: loreGrowth   },
-  { id: "e3po",    label: "Commander E3PO", icon: "shield", build: loreE3po    },
-  { id: "lords",   label: "The dark lords", icon: "raid",  build: loreLords   },
-  { id: "tales",   label: "Tales of the valley", icon: "lore", build: loreTales  },
+  { id: "town",    label: "Town life",     icon: "town",  blurb: "What the crier says, and the market", build: loreTownLife },
+  { id: "growth",  label: "The town's growth", icon: "town",  blurb: "Every stage the town can reach", build: loreGrowth   },
+  { id: "e3po",    label: "Commander E3PO", icon: "shield", blurb: "The Commander, in his own words", build: loreE3po    },
+  { id: "lords",   label: "The dark lords", icon: "raid",  blurb: "Who waits at the bottom", build: loreLords   },
+  { id: "tales",   label: "Tales of the valley", icon: "lore", blurb: "Stories told about the valley", build: loreTales  },
 ];
 let loreTab = "town";
 
@@ -2967,7 +2969,8 @@ function renderLore() {
   const chipBox = $("loreChips");
   if (chipBox && !chipBox.firstChild) {
     for (const c of LORE_CHAPTERS) {
-      const btn = el("button", "chip", c.label);
+      const btn = el("button", "chip lorecard", "");
+      btn.append(icon(c.icon, "lc-ic"), el("span", "lc-t", c.label), el("span", "lc-b", c.blurb || ""));   // page-owned constants
       btn.setAttribute("type", "button");
       btn.setAttribute("role", "tab");
       btn.dataset.tab = c.id;
@@ -3094,6 +3097,7 @@ function beastTitle(key) {
 function beastCard(b, rows, stats) {
   const m = beastMentions(rows, b.terms);
   const card = el("article", "beast " + (m.n ? "met" : "rumour"));
+  card.tabIndex = 0;
   const head = el("div", "beast-head");
   head.append(sigil(b.name, "md"));
   const hb = el("div", "beast-hb");
@@ -3194,9 +3198,565 @@ let lastBeastPayload = null;
 //   p.orders[] = {who, item, shop, status?, walker?}                                       (v5)
 // A snapshot value only ever chooses WHICH known glyph / rarity frame; it is never a URL, src,
 // href, class name or style. Rarity is matched to a page-owned whitelist before it picks a class.
-const SHOP_RARITY = new Set(["common", "uncommon", "rare", "epic", "legendary"]);
-function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + k : ""; }
+// C-55: the game's ladder is common < uncommon < rare < very rare < legendary < artifact (economy.gd RARITY).
+// "very rare" has a space, so the CLASS is a page-owned slug from this map - never the snapshot string.
+// "epic" was retired by the game build; it is kept only as a legacy alias so an old snapshot still frames.
+// C-61: this reads the STORED rarity key and nothing else - the hub never bands anything by cost.
+const SHOP_RARITY = new Map([["common", "common"], ["uncommon", "uncommon"], ["rare", "rare"],
+  ["very rare", "very-rare"], ["very-rare", "very-rare"], ["very_rare", "very-rare"], ["epic", "very-rare"],
+  ["legendary", "legendary"], ["artifact", "artifact"]]);
+function rarityClass(r) { const k = String(r == null ? "" : r).toLowerCase().trim(); return SHOP_RARITY.has(k) ? "rar-" + SHOP_RARITY.get(k) : ""; }
 function shopIconFor(name) { return /smith|forge|anvil/i.test(String(name || "")) ? "anvil" : "stall"; }
+// ---- H32 pass 4: item pictures. SECURITY: a snapshot item NAME never becomes a URL. itemIconFile() looks the
+// control-stripped, lower-cased name up in ITEM_ICONS (a Map GENERATED from web/icons/items/_manifest.json by
+// web/tools/make_item_icons.py - never hand-typed); a hit yields a page-constant "slot/key" and the path is built
+// from THAT, a miss falls through to the SVG glyph ("loot", a whitelisted ICON_SET id). No onerror handler, no
+// snapshot value in src/href/style; alt is set as text. See docs/HUB_SECURITY.md (H32 pass 4).
+// ITEM_ICONS:BEGIN (generated by web/tools/make_item_icons.py - do not edit by hand)
+// source commit 2473836; 519 names; thumbnails 160px webp, 2341956 bytes
+const ITEM_ICONS = new Map([
+  ["amulet of the measure", "amulet/measure_amulet"],
+  ["apothecary banner (green)", "banner/banner_apothecary"],
+  ["apothecary's cap", "hat/apothecary_cap"],
+  ["apothecary's gloves", "gloves/physic_gloves"],
+  ["architect's banner", "banner/banner_architect"],
+  ["architect's hat", "hat/architect_hat"],
+  ["architect's ring", "ring/architect_ring"],
+  ["armourer's gauntlets", "gloves/armourer_gloves"],
+  ["armourer's visor", "hat/armourer_visor"],
+  ["armourers' banner", "banner/banner_armourer"],
+  ["ash-wood circlet", "hat/crown_of_ash"],
+  ["ashfoot's boots", "boots/ashfoot_boots"],
+  ["backstair cloak", "cloak/backstair_cloak"],
+  ["baker's mitts", "gloves/baker_mitts"],
+  ["barracks banner", "banner/banner_barracks"],
+  ["barracks boots", "boots/barracks_boots"],
+  ["barracks cap", "hat/barracks_cap"],
+  ["barracks key", "amulet/barracks_key"],
+  ["barracks watch-cloak", "cloak/barracks_cloak"],
+  ["beadle's hat", "hat/beadle_hat"],
+  ["beadle's ring", "ring/beadle_ring"],
+  ["beekeeper's veil", "hat/beekeepers_veil"],
+  ["beeswax gloves", "gloves/beeswax_gloves"],
+  ["bell-ringer's gloves", "gloves/bellringer_gloves"],
+  ["bell-ringer's hat", "hat/bell_ringer_hat"],
+  ["bell-ringer's mitts", "gloves/bellringer_mitts"],
+  ["bellfounder's coif", "hat/bellfounder_coif"],
+  ["bellfounder's ring", "ring/bellfounder_ring"],
+  ["bellfounders' banner (bronze)", "banner/banner_bellfounder"],
+  ["bellmire felt", "hat/bellmire_felt"],
+  ["bellringer's coif", "hat/bell_coif"],
+  ["bellringer's wraps", "gloves/bellrope_wraps"],
+  ["blightward charm", "amulet/blight_charm"],
+  ["boatwright's charm", "amulet/boatwright_amulet"],
+  ["bodger's gloves", "gloves/bodger_gloves"],
+  ["bodger's hat", "hat/bodger_hat"],
+  ["bodgers' banner", "banner/banner_bodger"],
+  ["bolter's boots", "boots/bolter_boots"],
+  ["boots of the west road", "boots/road_boots"],
+  ["bowyer's cap", "hat/bowyer_cap"],
+  ["bowyer's shoulder-cloak", "cloak/bowyer_cloak"],
+  ["bowyer's wraps", "gloves/bowyer_wraps"],
+  ["brewster's banner", "banner/banner_brewster"],
+  ["brewster's charm", "amulet/brewster_amulet"],
+  ["brewster's coif", "hat/brewster_coif"],
+  ["brickfield banner", "banner/banner_brickmaker"],
+  ["brickmaker's boots", "boots/brickmaker_boots"],
+  ["brickmaker's cap", "hat/brickmaker_cap"],
+  ["bridgeward's helm", "hat/bridgeward_helm"],
+  ["bridgeward's ring", "ring/bridgeward_ring"],
+  ["brood-iron ring", "ring/chitin_ring"],
+  ["bucket-line banner", "banner/banner_bucketline"],
+  ["bucket-line cap", "hat/bucketline_cap"],
+  ["bucket-line cloak", "cloak/bucketline_cloak"],
+  ["bucket-line gloves", "gloves/bucketline_gloves"],
+  ["butcher's cap", "hat/butcher_cap"],
+  ["butcher's oilcloth", "cloak/butcher_cloak"],
+  ["caravan cloak", "cloak/caravan_cloak"],
+  ["caravan road banner", "banner/banner_caravan_road"],
+  ["carder's gloves", "gloves/carder_gloves"],
+  ["carp banner (river-green)", "banner/banner_carp"],
+  ["carter's boots", "boots/carter_boots"],
+  ["cartwright's cap", "hat/cartwright_cap"],
+  ["cartwright's flat cap", "hat/cartwright_flat_cap"],
+  ["cartwright's ring", "ring/cartwright_ring"],
+  ["chainsmith's coif", "hat/chainsmith_coif"],
+  ["chainsmith's mitts", "gloves/chainsmith_gloves"],
+  ["chainsmiths' banner", "banner/banner_chainsmith"],
+  ["chalker's cap", "hat/chalk_cap"],
+  ["chalkline banner (white)", "banner/banner_chalk"],
+  ["chalkline gloves", "gloves/chalkline_gloves"],
+  ["chandler's amulet", "amulet/chandler_amulet"],
+  ["chapel bell banner", "banner/banner_chapel_bell"],
+  ["chapel candle amulet", "amulet/chapel_amulet"],
+  ["chapel clogs", "boots/chapel_clogs"],
+  ["chapman's charm", "amulet/chapman_amulet"],
+  ["chronicle banner (ink)", "banner/banner_chronicle"],
+  ["chronicler's cap", "hat/chronicle_cap"],
+  ["chronicler's cloak", "cloak/chronicle_cloak"],
+  ["clapperless bell amulet", "amulet/clapperless_amulet"],
+  ["clapperless bell banner", "banner/banner_clapper"],
+  ["clapperless charm", "amulet/bell_amulet"],
+  ["clapperless ring", "ring/clapper_ring"],
+  ["clogger's cap", "hat/clogger_cap"],
+  ["clogger's clogs", "boots/clogger_boots"],
+  ["cloggers' banner", "banner/banner_clogger"],
+  ["cold-forge banner (char)", "banner/banner_coldforge"],
+  ["cold-forge mask", "hat/coldforge_mask"],
+  ["cold-forge mitts", "gloves/coldforge_mitts"],
+  ["collier's band", "ring/collier_ring"],
+  ["collier's banner", "banner/banner_collier"],
+  ["collier's hood", "hat/collier_hood"],
+  ["commander's banner", "banner/banner_commander"],
+  ["commander's cloak", "cloak/commander_cloak"],
+  ["commander's crested helm", "hat/commander_helm"],
+  ["commander's field mantle", "cloak/commander_mantle"],
+  ["constable's cloak", "cloak/constable_cloak"],
+  ["cooper's banner", "banner/banner_cooper"],
+  ["cooper's cap", "hat/cooper_cap"],
+  ["cooper's ring", "ring/cooper_ring"],
+  ["cordwainer's boots", "boots/cordwainer_boots"],
+  ["cordwainer's cap", "hat/cordwainer_cap"],
+  ["cordwainers' banner", "banner/banner_cordwainer"],
+  ["craft banner (yellow)", "banner/banner_yellow"],
+  ["cranesman's cloak", "cloak/crane_cloak"],
+  ["cranesman's helm", "hat/crane_helm"],
+  ["cranesmen's banner (rope grey)", "banner/banner_crane"],
+  ["crater banner", "banner/banner_crater"],
+  ["crater-glass coronet", "hat/crater_coronet"],
+  ["crater-glass ring", "ring/crater_ring"],
+  ["craterglass boots", "boots/craterglass_boots"],
+  ["creeler's boots", "boots/creeler_boots"],
+  ["crier's cloak", "cloak/crier_cloak"],
+  ["crier's plume", "hat/crier_plume"],
+  ["crier's tall hat", "hat/crier_hat"],
+  ["crown of carp scales", "hat/carp_crown"],
+  ["currier's gloves", "gloves/currier_gloves"],
+  ["currier's hood", "hat/currier_hood"],
+  ["cutler's ring", "ring/cutler_ring"],
+  ["cutler's visor", "hat/cutler_visor"],
+  ["cutlers' banner", "banner/banner_cutler"],
+  ["dauber's boots", "boots/dauber_boots"],
+  ["deep-lamp amulet", "amulet/deeplamp_amulet"],
+  ["deepwarden's cloak", "cloak/deep_cloak"],
+  ["delver's boots", "boots/delvers_boots"],
+  ["delver's lamp cap", "hat/delvers_lamp_cap"],
+  ["door-kept banner", "banner/banner_door_kept"],
+  ["doorkeeper's amulet", "amulet/doorkeep_amulet"],
+  ["doorkeeper's band", "ring/doorkeeper_ring"],
+  ["doorkeeper's helm", "hat/doorkeeper_helm"],
+  ["drover's boots", "boots/drover_boots"],
+  ["drover's flat cap", "hat/drover_cap"],
+  ["drover's spurs", "boots/drover_spurs"],
+  ["e3po's signet", "ring/e3po_signet"],
+  ["e3po's standard (guard blue)", "banner/banner_e3po"],
+  ["eeler's cap", "hat/eeler_cap"],
+  ["eeler's waders", "boots/eeler_boots"],
+  ["falconer's hood", "hat/falconer_hood"],
+  ["falconer's vervel", "amulet/falconer_amulet"],
+  ["falconers' banner", "banner/banner_falconer"],
+  ["farrier's mitts", "gloves/farrier_mitts"],
+  ["farrier's nail", "amulet/farrier_amulet"],
+  ["farrier's visor", "hat/farrier_visor"],
+  ["farriers' banner (anvil black)", "banner/banner_farrier"],
+  ["feast-night banner", "banner/banner_feast_night"],
+  ["feast-night cloak", "cloak/feast_cloak"],
+  ["feathered cap", "hat/feather_cap"],
+  ["fen-strider's boots", "boots/fen_boots"],
+  ["fenwalker's hood", "hat/fen_hood"],
+  ["ferry banner", "banner/banner_ferry"],
+  ["ferrybell amulet", "amulet/ferrybell_amulet"],
+  ["ferrybell circlet", "hat/ferrybell_circlet"],
+  ["ferryman's hood", "hat/ferry_hood"],
+  ["ferryman's ring", "ring/ferryman_ring"],
+  ["ferrystep boots", "boots/ferrystep_boots"],
+  ["ferrywife's locket", "amulet/ferry_locket"],
+  ["festival garland", "hat/festival_garland"],
+  ["first light boots", "boots/firstlight_boots"],
+  ["first light circlet", "hat/firstlight_circlet"],
+  ["first wall banner", "banner/banner_wall_first"],
+  ["fisher's oilskin hood", "hat/fisher_hood"],
+  ["flask-count banner", "banner/banner_flask_count"],
+  ["flask-count pendant", "amulet/flask_amulet"],
+  ["flask-counter's amulet", "amulet/flaskcount_amulet"],
+  ["flask-counter's cap", "hat/flaskcounter_cap"],
+  ["flask-counter's coif", "hat/flask_coif"],
+  ["fletcher's gloves", "gloves/archer_gloves"],
+  ["fletcher's hood", "hat/fletcher_hood"],
+  ["fletcher's tabs", "gloves/fletcher_tabs"],
+  ["fletcher's thumb-ring", "ring/fletcher_ring"],
+  ["fletchers' banner (goose grey)", "banner/banner_fletcher"],
+  ["fog-run banner (fog)", "banner/banner_fogrun"],
+  ["fog-run cloak", "cloak/fogrun_cloak"],
+  ["fog-run hood", "hat/fogrun_hood"],
+  ["ford banner (river)", "banner/banner_ford"],
+  ["ford circlet", "hat/ford_circlet"],
+  ["ford crossing banner", "banner/banner_ford_crossing"],
+  ["ford-wader's boots", "boots/ford_boots"],
+  ["ford-wader's hat", "hat/ford_wader_hat"],
+  ["ford-wader's tarred boots", "boots/fordwader_boots"],
+  ["fordwarden boots", "boots/fordwarden_boots"],
+  ["forgemaster's grips", "gloves/forge_grips"],
+  ["fuller's coif", "hat/fuller_coif"],
+  ["fuller's grips", "gloves/fuller_grips"],
+  ["fuller's token", "amulet/fuller_amulet"],
+  ["fullers' banner (cloth white)", "banner/banner_fuller"],
+  ["gaoler's coif", "hat/gaoler_coif"],
+  ["gaoler's keyring", "amulet/gaoler_amulet"],
+  ["garrison banner (steel)", "banner/banner_garrison"],
+  ["gatehouse whistle", "amulet/gate_whistle"],
+  ["gatewarden's boots", "boots/gate_boots"],
+  ["glazier's gloves", "gloves/glazier_gloves"],
+  ["glazier's visor", "hat/glazier_visor"],
+  ["glaziers' banner (glass blue)", "banner/banner_glazier"],
+  ["grain-measure banner", "banner/banner_grain_measured"],
+  ["grainmeasure charm", "amulet/grainmeasure_charm"],
+  ["grainmeasurer's hat", "hat/grainmeasure_hat"],
+  ["grainward amulet", "amulet/grainward_amulet"],
+  ["grainward charm", "amulet/grain_amulet"],
+  ["gravewyrm helm", "hat/gravewyrm_helm"],
+  ["gravewyrm hide cloak", "cloak/gravewyrm_cloak"],
+  ["grinning carp charm", "amulet/carp_charm"],
+  ["grubmother banner (pale)", "banner/banner_grubmother"],
+  ["guard's helm", "hat/guard_helm"],
+  ["guild banner (grey)", "banner/banner_guild"],
+  ["guild cloak", "cloak/guild_cloak"],
+  ["guild hood", "hat/guild_hood"],
+  ["guild post banner", "banner/banner_guild_post"],
+  ["guild scribe's seal", "amulet/scribe_amulet"],
+  ["harvest crown", "hat/harvest_crown"],
+  ["harvest gloves", "gloves/harvest_gloves"],
+  ["harvest-cart banner", "banner/banner_harvest_cart"],
+  ["harvest-saved banner", "banner/banner_harvest"],
+  ["hayward's boots", "boots/hayward_boots"],
+  ["hearthstone amulet", "amulet/hearth_amulet"],
+  ["hearthwarden's hat", "hat/hearthwarden_hat"],
+  ["hearthwarden's ring", "ring/hearth_ring"],
+  ["hedgeward's cloak", "cloak/hedgeward_cloak"],
+  ["hero-home banner", "banner/banner_hero_home"],
+  ["hollowbone ring", "ring/hollow_ring"],
+  ["homecomer's boots", "boots/hero_home_boots"],
+  ["homes banner (green)", "banner/banner_green"],
+  ["horner's hood", "hat/horner_hood"],
+  ["horner's pendant", "amulet/horner_amulet"],
+  ["horners' banner", "banner/banner_horner"],
+  ["hurdler's cap", "hat/hurdler_cap"],
+  ["hurdler's cloak", "cloak/hurdler_cloak"],
+  ["hurdlers' banner", "banner/banner_hurdler"],
+  ["joiner's cap", "hat/joiner_cap"],
+  ["joiner's gloves", "gloves/joiner_gloves"],
+  ["joiners' banner", "banner/banner_joiner"],
+  ["keep banner (blue)", "banner/banner_blue"],
+  ["keep the door banner", "banner/banner_keepdoor"],
+  ["kennelman's boots", "boots/kennel_boots"],
+  ["kindling amulet", "amulet/kindling_amulet"],
+  ["kindling banner (first-beam gold)", "banner/banner_kindling"],
+  ["kindling crown", "hat/kindling_crown"],
+  ["lampfast ring", "ring/lampfast_ring"],
+  ["lamplight banner (amber)", "banner/banner_lamplight"],
+  ["lamplighter's amulet", "amulet/lamplight_amulet"],
+  ["lamplighter's cloak", "cloak/lamp_cloak"],
+  ["lampwright's cap", "hat/lampwright_cap"],
+  ["lampwright's ring", "ring/lampwright_ring"],
+  ["lanternman's amulet", "amulet/lanternman_amulet"],
+  ["lanternman's cap", "hat/lanternman_cap"],
+  ["last coin ring", "ring/lastcoin_ring"],
+  ["ledger banner", "banner/banner_ledger_black"],
+  ["ledger-keeper's cowl", "hat/ledger_cowl"],
+  ["ledger-keeper's gloves", "gloves/ledger_gloves"],
+  ["ledger-keeper's ring", "ring/ledger_ring"],
+  ["lighterman's mantle", "cloak/lighterman_cloak"],
+  ["limeburner's mantle", "cloak/limeburner_cloak"],
+  ["limeburner's mask", "hat/limeburner_mask"],
+  ["limeburners' banner", "banner/banner_limeburner"],
+  ["limner's ring", "ring/limner_ring"],
+  ["lockkeeper's cap", "hat/lockkeep_cap"],
+  ["lockkeeper's gloves", "gloves/lockkeep_gloves"],
+  ["lockkeeper's oilcloth", "cloak/lockkeep_cloak"],
+  ["lockkeeper's ring", "ring/lockkeep_ring"],
+  ["lockkeeper's waders", "boots/lockkeep_waders"],
+  ["lockkeepers' banner (weir green)", "banner/banner_lockkeep"],
+  ["long count banner (iron)", "banner/banner_longcount"],
+  ["long count boots", "boots/longcount_boots"],
+  ["long count hood", "hat/longcount_hood"],
+  ["lord-felled banner", "banner/banner_lord_felled"],
+  ["lorimer's cap", "hat/lorimer_cap"],
+  ["lorimer's ring", "ring/lorimer_ring"],
+  ["lorimers' banner", "banner/banner_lorimer"],
+  ["lye-boiler's gloves", "gloves/soaper_gloves"],
+  ["lye-boiler's wrap", "hat/soaper_wrap"],
+  ["lye-yard banner", "banner/banner_soaper"],
+  ["maltster's banner", "banner/banner_maltster"],
+  ["maltster's cap", "hat/maltster_cap"],
+  ["maltster's ring", "ring/maltster_ring"],
+  ["market banner (red)", "banner/banner_red"],
+  ["market day banner (saffron)", "banner/banner_marketday"],
+  ["market seal", "ring/market_ring"],
+  ["mason's band", "ring/mason_ring"],
+  ["mason's dust cap", "hat/mason_dustcap"],
+  ["mason's mitts", "gloves/mason_mitts"],
+  ["memorial banner (grey-violet)", "banner/banner_memorial"],
+  ["memorial veil", "hat/memorial_veil"],
+  ["mender's coif", "hat/mender_coif"],
+  ["mender's wraps", "gloves/mender_wraps"],
+  ["menders' banner (pale green)", "banner/banner_mender"],
+  ["mill banner (wheat)", "banner/banner_mill"],
+  ["miller's cap", "hat/miller_cap"],
+  ["miller's clogs", "boots/miller_clogs"],
+  ["miller's felt", "hat/miller_felt"],
+  ["millhand's mitts", "gloves/mill_mitts"],
+  ["millrace boots", "boots/millrace_boots"],
+  ["millwright's amulet", "amulet/millwright_amulet"],
+  ["millwright's cap", "hat/millwright_cap"],
+  ["miner's grips", "gloves/miner_grips"],
+  ["mire hood", "hat/mire_hood"],
+  ["mire-walker's cloak", "cloak/mire_cloak"],
+  ["mortarman's gloves", "gloves/mortar_gloves"],
+  ["mourncoil banner", "banner/banner_mourncoil"],
+  ["mourncoil scale", "amulet/mourncoil_amulet"],
+  ["mourner's black veil", "hat/mourners_black_veil"],
+  ["mourner's grey", "cloak/mourner_cloak"],
+  ["mourner's veil", "hat/mourner_veil"],
+  ["mudplank boots", "boots/mudplank_boots"],
+  ["nailer's hood", "hat/nailer_hood"],
+  ["nailer's ring", "ring/nailer_ring"],
+  ["nailers' banner", "banner/banner_nailer"],
+  ["netmender's ring", "ring/netmender_ring"],
+  ["nightwing banner", "banner/banner_nightwing"],
+  ["nightwing boots", "boots/nightwing_boots"],
+  ["nightwing hood", "hat/nightwing_hood"],
+  ["ninth bell amulet", "amulet/ninthbell_amulet"],
+  ["ninth bell banner (bronze)", "banner/banner_ninthbell"],
+  ["ninth bell coif", "hat/ninthbell_coif"],
+  ["oar-maker's boots", "boots/oarmaker_boots"],
+  ["oathkeeper's amulet", "amulet/oath_amulet"],
+  ["oathkeeper's ring", "ring/oath_ring"],
+  ["orchard banner", "banner/banner_orchard"],
+  ["orchard ring", "ring/orchard_ring"],
+  ["orchard straw hat", "hat/orchard_straw"],
+  ["orchardman's cloak", "cloak/orchard_cloak"],
+  ["osier-cutter's cloak", "cloak/osier_cloak"],
+  ["osier-cutter's hat", "hat/osier_hat"],
+  ["ossuary banner", "banner/banner_ossuary"],
+  ["ossuary circlet", "hat/ossuary_circlet"],
+  ["ossuary mantle", "cloak/ossuary_cloak"],
+  ["ostler's amulet", "amulet/ostler_amulet"],
+  ["pale duchess's gloves", "gloves/duchess_gloves"],
+  ["pale veil", "hat/pale_veil"],
+  ["paver's boots", "boots/pavers_boots"],
+  ["paver's cap", "hat/paver_cap"],
+  ["pavers' banner (stone)", "banner/banner_paver"],
+  ["peat-cutter's cloak", "cloak/turbary_cloak"],
+  ["peat-cutter's hood", "hat/turbary_hood"],
+  ["pewterer's cap", "hat/pewterer_cap"],
+  ["pewterer's ring", "ring/pewterer_ring"],
+  ["pewterers' banner", "banner/banner_pewterer"],
+  ["pickman's gloves", "gloves/pick_gloves"],
+  ["pieman's banner", "banner/banner_pieman"],
+  ["pieman's hood", "hat/pieman_hood"],
+  ["pilgrim's cloak", "cloak/pilgrim_cloak"],
+  ["pilgrim's hood", "hat/pilgrim_hood"],
+  ["pilgrim's ring", "ring/pilgrim_ring"],
+  ["pilgrim's wide hat", "hat/pilgrims_wide"],
+  ["pilgrims' banner (road brown)", "banner/banner_pilgrim"],
+  ["pinder's hat", "hat/pinder_hat"],
+  ["pinder's ring", "ring/pinder_ring"],
+  ["pitwalker's boots", "boots/pitwalk_boots"],
+  ["pitwalker's hood", "hat/pitwalk_hood"],
+  ["plasterer's gloves", "gloves/plaster_gloves"],
+  ["plumed helm", "hat/plumed_helm"],
+  ["potter's headwrap", "hat/potter_wrap"],
+  ["potter's kiln boots", "boots/kiln_boots"],
+  ["potter's thumbmark", "amulet/potter_amulet"],
+  ["potters' banner (kiln red)", "banner/banner_potter"],
+  ["quarreller's cap", "hat/quarreller_cap"],
+  ["quarreller's tabs", "gloves/quarreller_gloves"],
+  ["quarrellers' banner", "banner/banner_quarreller"],
+  ["quarry banner (slate)", "banner/banner_quarry"],
+  ["quarryman's cap", "hat/quarry_cap"],
+  ["quarryman's gloves", "gloves/quarry_gloves"],
+  ["quarryman's helm", "hat/quarry_helm"],
+  ["quarryman's ring", "ring/quarryman_ring"],
+  ["quarrymen's banner (dust)", "banner/banner_quarryman"],
+  ["raftsman's cloak", "cloak/raftsman_cloak"],
+  ["raid-held banner", "banner/banner_raid_held"],
+  ["raidbreaker's gauntlets", "gloves/raidbreaker_gloves"],
+  ["raidbreaker's helm", "hat/raiders_bane_helm"],
+  ["raider's trophy cloak", "cloak/raid_cloak"],
+  ["rattling coif", "hat/host_coif"],
+  ["rattling gauntlets", "gloves/rattling_gauntlets"],
+  ["rattling host amulet", "amulet/host_amulet"],
+  ["red harl's cloak", "cloak/harl_cloak"],
+  ["reedcutter's boots", "boots/reedcutter_boots"],
+  ["reedcutter's hat", "hat/reedcutter_hat"],
+  ["reedcutters' banner", "banner/banner_reedcutter"],
+  ["reeve's banner", "banner/banner_reeve"],
+  ["reeve's hat", "hat/reeve_hat"],
+  ["reeve's signet", "ring/reeve_ring"],
+  ["retter's gloves", "gloves/retter_gloves"],
+  ["ring of the night watch", "ring/nightwatch_ring"],
+  ["ring of the scar-guard", "ring/scar_guard_ring"],
+  ["ring of the thaw", "ring/thaw_ring"],
+  ["rivet mitts", "gloves/rivet_mitts"],
+  ["roll-keeper's ring", "ring/rollkeeper_ring"],
+  ["rope-burn cap", "hat/ropeburn_cap"],
+  ["rope-burn gloves", "gloves/ropeburn_gloves"],
+  ["ropewalk gloves", "gloves/ropewalk_gloves"],
+  ["ropeworks banner (hemp)", "banner/banner_ropeworks"],
+  ["rotwarden's mask", "hat/rot_mask"],
+  ["saddler's gloves", "gloves/saddler_gloves"],
+  ["saddler's hood", "hat/saddler_hood"],
+  ["saddlers' banner", "banner/banner_saddler"],
+  ["saltboiler's cap", "hat/saltboiler_cap"],
+  ["saltboiler's cloak", "cloak/saltboiler_cloak"],
+  ["saltline amulet", "amulet/saltline_amulet"],
+  ["saltline banner (pale blue)", "banner/banner_saltline"],
+  ["saltline hood", "hat/saltline_hood"],
+  ["saltworks banner", "banner/banner_saltline_works"],
+  ["sawyer's token", "amulet/sawyer_amulet"],
+  ["scar banner (violet)", "banner/banner_scar"],
+  ["scar-marked hood", "hat/scarmarked_hood"],
+  ["scar-mouth banner", "banner/banner_scar_mouth"],
+  ["scarforged banner", "banner/banner_scarforged"],
+  ["scarforged ring", "ring/scarforged_ring"],
+  ["scarglass circlet", "hat/scarglass_circlet"],
+  ["scarglass ring", "ring/scar_ring"],
+  ["scarward ring", "ring/scarward_ring"],
+  ["scarwatch cloak", "cloak/scarwatch_cloak"],
+  ["scarwatch hood", "hat/scarwatch_hood"],
+  ["scarweave cloak", "cloak/scarweave_cloak"],
+  ["scout's boots", "boots/scout_boots"],
+  ["second flask amulet", "amulet/secondflask_amulet"],
+  ["sedge's toll-ring", "ring/sedge_ring"],
+  ["sexton's banner (grave black)", "banner/banner_sexton"],
+  ["sexton's black", "cloak/sexton_cloak"],
+  ["sexton's hobnails", "boots/gravepath_boots"],
+  ["sexton's low hat", "hat/sexton_hat"],
+  ["sexton's ring", "ring/sexton_ring"],
+  ["shambles banner", "banner/banner_butcher"],
+  ["shepherd's banner", "banner/banner_shepherd"],
+  ["shepherd's charm", "amulet/shepherd_charm"],
+  ["shepherd's hood", "hat/shepherd_hood"],
+  ["shingler's cloak", "cloak/shingler_cloak"],
+  ["skepward's charm", "amulet/skep_amulet"],
+  ["skepward's gloves", "gloves/hive_gloves"],
+  ["skepward's soft boots", "boots/hive_boots"],
+  ["skepward's veil", "hat/skep_veil"],
+  ["skepwards' banner (wax gold)", "banner/banner_skep"],
+  ["sluicekeeper's amulet", "amulet/sluice_amulet"],
+  ["smith's gauntlets", "gloves/smith_gloves"],
+  ["smith's mark banner", "banner/banner_smiths_mark"],
+  ["soft boots", "boots/quiet_boots"],
+  ["spare wall cloak", "cloak/sparewall_cloak"],
+  ["spinner's gloves", "gloves/spinner_gloves"],
+  ["splint-wrap gloves", "gloves/splintwrap_gloves"],
+  ["spurrier's cap", "hat/spurrier_cap"],
+  ["spurrier's ring", "ring/spurrier_ring"],
+  ["spurriers' banner", "banner/banner_spurrier"],
+  ["stair-walker's boots", "boots/stairwalker_boots"],
+  ["stairhold banner (grey-blue)", "banner/banner_stair"],
+  ["stairhold boots", "boots/stairhold_boots"],
+  ["stairholder's helm", "hat/stairhold_helm"],
+  ["straw hat", "hat/straw_hat"],
+  ["tallykeeper's ring", "ring/tally_ring"],
+  ["tanner's apron-cloak", "cloak/tanner_cloak"],
+  ["tanner's cap", "hat/tanner_cap"],
+  ["tanner's gloves", "gloves/tanner_gloves"],
+  ["tanner's ring", "ring/tanner_ring"],
+  ["tanners' banner (hide brown)", "banner/banner_tanner"],
+  ["tanyard boots", "boots/tanyard_boots"],
+  ["tavern banner", "banner/banner_taverner"],
+  ["tavern banner (ale)", "banner/banner_tavern"],
+  ["taverner's cap", "hat/taverner_cap"],
+  ["taverner's token", "amulet/taverner_amulet"],
+  ["temple banner (white)", "banner/banner_temple"],
+  ["thatcher's cap", "hat/thatcher_cap"],
+  ["thatcher's cloak", "cloak/thatcher_cloak"],
+  ["thatchers' banner (reed gold)", "banner/banner_thatch"],
+  ["thaw banner", "banner/banner_thaw"],
+  ["thaw circlet", "hat/thaw_circlet"],
+  ["thaw hood", "hat/thaw_hood"],
+  ["thaw-bell amulet", "amulet/thawbell_amulet"],
+  ["the weasel's gloves", "gloves/weasel_gloves"],
+  ["thresher's gloves", "gloves/thresher_gloves"],
+  ["threshing charm", "amulet/threshing_amulet"],
+  ["tiler's hood", "hat/tiler_hood"],
+  ["tiler's shoulder-cloak", "cloak/tiler_cloak"],
+  ["tilers' banner", "banner/banner_tiler"],
+  ["tinker's boots", "boots/tinker_boots"],
+  ["tithe banner (wax-white)", "banner/banner_tithe"],
+  ["tithe cap", "hat/tithe_cap"],
+  ["tithe ring", "ring/tithe_ring"],
+  ["tithe-collector's hat", "hat/tithe_collector_hat"],
+  ["toll banner", "banner/banner_toll"],
+  ["toll ring", "ring/toll_ring"],
+  ["toll-gate boots", "boots/tollgate_boots"],
+  ["toll-keeper's cap", "hat/toll_cap"],
+  ["toll-taker's hood", "hat/toll_hood"],
+  ["tollkeep's ring", "ring/tollkeep_ring"],
+  ["towpath banner (bank green)", "banner/banner_towpath"],
+  ["towpath boots", "boots/towpath_boots"],
+  ["towpath hood", "hat/towpath_hood"],
+  ["turbary banner", "banner/banner_turbary"],
+  ["votive amulet", "amulet/votive_amulet"],
+  ["votive veil", "hat/votive_veil"],
+  ["wake-ward banner (slate)", "banner/banner_wakeward"],
+  ["wake-ward cloak", "cloak/wakeward_cloak"],
+  ["wake-ward veil", "hat/wakeward_veil"],
+  ["wall banner (stone)", "banner/banner_wall"],
+  ["wall-walker's cap", "hat/wall_walker_cap"],
+  ["wall-walker's cloak", "cloak/wall_cloak"],
+  ["wardstone pendant", "amulet/ward_pendant"],
+  ["warhorn mantle", "cloak/warhorn_mantle"],
+  ["warrener's boots", "boots/warrener_boots"],
+  ["watch banner (black)", "banner/banner_watch"],
+  ["watchfire banner (ember)", "banner/banner_watchfire"],
+  ["watchfire helm", "hat/watchfire_helm"],
+  ["watchfire hood", "hat/watchfire_hood"],
+  ["watchfire ring", "ring/watchfire_ring"],
+  ["watchman's kettle-helm", "hat/watch_helm"],
+  ["watchman's mantle", "cloak/watch_mantle"],
+  ["weaver's long cloak", "cloak/weaver_cloak"],
+  ["weighstone amulet", "amulet/weighstone_amulet"],
+  ["weir banner", "banner/banner_weirkeep"],
+  ["weir-keeper's charm", "amulet/weirkeep_amulet"],
+  ["weir-keeper's hood", "hat/weirkeep_hood"],
+  ["wellhead banner", "banner/banner_wellhead"],
+  ["wellhead ring", "ring/wellhead_ring"],
+  ["wellkeeper's coif", "hat/wellkeep_coif"],
+  ["wheelwright's gloves", "gloves/wheelwright_gloves"],
+  ["wide-brimmed hat", "hat/wide_hat"],
+  ["winterwatch banner", "banner/banner_winterwatch"],
+  ["winterwatch cloak", "cloak/winterwatch_cloak"],
+  ["winterwatch helm", "hat/winterwatch_helm"],
+  ["withy-bed banner", "banner/banner_osier"],
+  ["woodward's banner", "banner/banner_woodward"],
+  ["woodward's green", "cloak/woodward_cloak"],
+  ["woodward's hood", "hat/woodward_hood"],
+  ["wrong-hand ring", "ring/oathwrong_ring"],
+]);
+// ITEM_ICONS:END
+function itemIconFile(name) {
+  const k = ctrlStrip(name).replace(/\s+/g, " ").toLowerCase();
+  const v = ITEM_ICONS.get(k);
+  return v ? "icons/items/" + v + ".webp" : "";
+}
+function itemPic(name, cls) {
+  const box = el("span", "ipic " + (cls || ""));
+  const f = itemIconFile(name);
+  if (f) {
+    const img = document.createElement("img");
+    img.className = "ipic-img";
+    img.src = f;                                  // a page-constant path chosen by the whitelist, never snapshot text
+    img.alt = ctrlStrip(name).slice(0, 60);      // alt is text, not a URL
+    img.loading = "lazy"; img.decoding = "async"; img.width = 80; img.height = 80; img.draggable = false;
+    box.append(img);
+  } else {
+    box.classList.add("nopic");
+    box.append(icon("loot", "ipic-fb"));
+  }
+  return box;
+}
 let lastShopP = null;
 function shopGood(g, passing) {
   const row = el("li", "shop-good" + (passing ? " passing" : ""));
@@ -3211,6 +3771,36 @@ function shopGood(g, passing) {
   price.append(icon("coin"), document.createTextNode(" " + (g && Number.isFinite(+g.cost) ? num(g.cost) : "-")));
   row.append(price);
   return row;
+}
+// H32 pass 4: a stock item as a CARD (picture, name, category pill, price) with a hover/focus PREVIEW that
+// reveals more without a click - the way Twitch previews a stream. The preview is an overlay INSIDE the card's
+// fixed box, so nothing reflows. Every string goes through el()/textContent; the picture is itemPic() (a
+// whitelist lookup, never a snapshot URL); rarity picks a page-owned frame class via SHOP_RARITY.
+function shopCard(g, passing, shopName) {
+  const li = el("li", "gcard" + (passing ? " passing" : ""));
+  const rc = rarityClass(g && g.rarity);
+  if (rc) li.classList.add(rc);
+  const nm = g && g.name != null && String(g.name).trim() ? ctrlStrip(g.name).slice(0, 60) : "(unnamed)";
+  const rar = g && g.rarity ? ctrlStrip(g.rarity).slice(0, 16) : "";
+  const cost = g && Number.isFinite(+g.cost) ? num(g.cost) : "-";
+  li.tabIndex = 0;
+  li.append(itemPic(nm));
+  li.append(el("span", "gc-name", nm));
+  const foot = el("span", "gc-foot");
+  if (rar) foot.append(el("span", "gc-pill", rar));
+  const price = el("span", "gcost");
+  price.append(icon("coin"), document.createTextNode(" " + cost));
+  foot.append(price);
+  li.append(foot);
+  const peek = el("span", "gc-peek");
+  peek.append(itemPic(nm, "big"));
+  peek.append(el("span", "gc-pname", nm));
+  peek.append(el("span", "gc-pline", "Costs " + cost + " gold" + (g && g.qty != null && Number.isFinite(+g.qty) ? "  \u00b7  " + num(g.qty) + " on the shelf" : "")));
+  if (rar) peek.append(el("span", "gc-pline", cap(rar) + (rc ? "" : "")));
+  if (passing) peek.append(el("span", "gc-pline", "Passing through with the caravan"));
+  else if (shopName) peek.append(el("span", "gc-pline", "At " + ctrlStrip(shopName).slice(0, 40)));
+  li.append(peek);
+  return li;
 }
 function renderShops(p) {
   const box = $("shopsBody");
@@ -3240,8 +3830,8 @@ function renderShops(p) {
     }
     const stock = Array.isArray(s.stock) ? s.stock.filter((g) => g && typeof g === "object") : null;
     if (stock && stock.length) {
-      const ul = el("ul", "shop-stock");
-      stock.slice().sort((a, b) => (+a.cost || 0) - (+b.cost || 0)).slice(0, 80).forEach((g) => ul.append(shopGood(g, false)));
+      const ul = el("ul", "shop-stock good-grid");
+      stock.slice().sort((a, b) => (+a.cost || 0) - (+b.cost || 0)).slice(0, 80).forEach((g) => ul.append(shopCard(g, false, s.name)));
       card.append(ul);
     } else if (stock) {
       card.append(el("p", "shop-empty", "The shelf is bare."));
@@ -3261,7 +3851,7 @@ function renderShops(p) {
   if (here) {
     tr.append(el("p", "shop-sells", "Passing through" + (caravan.leaves_in != null && Number.isFinite(+caravan.leaves_in) ? ", leaves in " + num(caravan.leaves_in) + " min" : "") + ". What it carries is worth a look."));
     const cargo = arr(caravan.cargo).filter((g) => g && typeof g === "object");
-    if (cargo.length) { const ul = el("ul", "shop-stock"); cargo.slice(0, 80).forEach((g) => ul.append(shopGood(g, true))); tr.append(ul); }
+    if (cargo.length) { const ul = el("ul", "shop-stock good-grid"); cargo.slice(0, 80).forEach((g) => ul.append(shopCard(g, true))); tr.append(ul); }
     else tr.append(el("p", "shop-empty", "The cargo list has not been published yet."));
   } else {
     tr.append(el("p", "shop-empty", "No caravan is in town. When one arrives its cargo is listed here."));
@@ -3731,7 +4321,335 @@ function renderSeason(p) {
 // The stored value is NEVER used as a URL, href, src, selector, query parameter
 // or style - only to look up a known id in TABS. In a private window (storage
 // throws) the page silently falls back to the default tab. (docs/HUB_SECURITY.md, H13.)
-const TABS = ["boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","chat","commands"];
+// ============================================================ H32: THE RAIL AND THE LIVE STAGE
+// Mr. E, 16 Nov: "make the hub feel like you are navigating on twitch". The page borrows Twitch's
+// NAVIGATION GRAMMAR: a persistent left rail of LIVE THINGS (a hero mid-delve is a live channel: a
+// sigil for the avatar, a name, one line of what they are doing, a LIVE dot, and a number where
+// Twitch puts the viewer count). Picking one puts it on the STAGE with an info row beneath it.
+// Layout only: the rail is built from the snapshot the page already holds (p.heroes, p.parties),
+// no new fetch, no new data, no CSP change. SECURITY: every name and line below reaches the DOM
+// through el()/textContent; sigil() only HASHES a name to choose a known drawing; no snapshot
+// value is ever a URL, src, href, selector or style (the HP fills are CSSOM numbers). The selection
+// is held in a JS variable and compared against names - never put in a selector.
+// The number on a LIVE hero is FLOOR DEPTH (it moves, and it is what the delve is about); a band's
+// is its head-count; an idle hero shows level, dimmed. The fallen are not on the rail (they have
+// their own tab): a hero who is not breathing is not "live".
+const RAIL_KEY = "bellmire.rail.v1";            // "min" | "full" - whitelist-checked on read
+const RAIL_IDLE_CAP = 60;
+let railItems = [];                              // the built model, newest snapshot
+let railSel = null;                              // {k: "hero"|"band", n: lower-cased name} or null (auto)
+let railAutoPick = null;
+function railGetMode() { try { return localStorage.getItem(RAIL_KEY) === "min" ? "min" : "full"; } catch (e) { return "full"; } }
+function railSetMode(m, keep) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-rail", m === "min" ? "min" : "full");
+  const b = $("railToggle");
+  if (b) {
+    b.setAttribute("aria-expanded", m === "min" ? "false" : "true");
+    b.setAttribute("aria-label", m === "min" ? "Expand the rail" : "Collapse the rail to sigils only");
+    b.title = m === "min" ? "Expand the rail" : "Collapse the rail";
+  }
+  if (keep !== false) { try { localStorage.setItem(RAIL_KEY, m === "min" ? "min" : "full"); } catch (e) {} }
+}
+function railBuild(p) {
+  const parties = normalizeParties(p && p.parties != null ? p.parties : (p && p.bands));
+  const heroes = arr(p && p.heroes).filter((h) => h && typeof h === "object");
+  const inBand = new Map();
+  parties.forEach((b, bi) => b.members.forEach((m) => {
+    if (m.name && m.status !== "fallen") inBand.set(m.name.toLowerCase(), { bi, floor: b.floor, band: b.name });
+  }));
+  const bands = parties.map((b) => {
+    const alive = b.members.filter((m) => m.status !== "fallen").length;
+    return { kind: "band", live: true, name: b.name || "A band", key: (b.name || "a band").toLowerCase(),
+      what: (b.floor != null ? "Floor " + num(b.floor) + " · " : "") + alive + (alive === 1 ? " delver" : " delvers"),
+      num: alive, numLab: alive === 1 ? "delver" : "delvers", floor: b.floor, party: b };
+  }).sort((a, b) => n0(b.floor) - n0(a.floor));
+  const hs = heroes.map((h) => {
+    const key = nameOf(h).toLowerCase();
+    const bd = inBand.get(key);
+    const own = firstStr(h.status, h.state, h.activity, h.where).toLowerCase().trim();
+    const live = !!bd || own === "delving" || own === "active" || PARTY_STATUS[own] === "burning";
+    const max = pickNum(h.max_hp, h.hp_max, h.maxhp, h.hpmax), hp = pickNum(h.hp);
+    const lv = pickNum(h.level);
+    const floor = bd && bd.floor != null ? bd.floor : null;
+    const cls = (cap(h.species) + " " + cap(h.class)).trim();
+    let what, numTxt, numLab;
+    if (live) {
+      what = floor != null ? "Floor " + num(floor) + (bd.band ? " · " + bd.band : "") : "Delving now";
+      numTxt = floor != null ? num(floor) : "—"; numLab = "floor";
+    } else {
+      what = (cls || "Adventurer") + (lv != null && lv > 0 ? ", level " + num(lv) : "");
+      numTxt = lv != null && lv > 0 ? "Lv " + num(lv) : ""; numLab = "level";
+    }
+    return { kind: "hero", live, name: nameOf(h) || "(no name)", key, what, num: numTxt, numLab,
+      floor, hp, max, lv: lv || 0, h, band: bd ? bd.band : "" };
+  });
+  const liveH = hs.filter((x) => x.live).sort((a, b) => (b.floor != null ? b.floor : -1) - (a.floor != null ? a.floor : -1));
+  const idleH = hs.filter((x) => !x.live).sort((a, b) => b.lv - a.lv);
+  return { bands, liveH, idleH };
+}
+function railSame(it, sel) { return !!sel && it.kind === sel.k && it.key === sel.n; }
+function railCurrent() {
+  if (railSel) { const f = railItems.find((it) => railSame(it, railSel)); if (f) return f; }
+  const live = railItems.find((it) => it.kind === "band") || railItems.find((it) => it.kind === "hero" && it.live);
+  return live || null;
+}
+function railItemEl(it, idx, selected) {
+  const d = el("div", "rail-item" + (it.live ? " live" : " idle") + (it.kind === "band" ? " isband" : ""));
+  d.setAttribute("role", "option");
+  d.setAttribute("aria-selected", selected ? "true" : "false");
+  d.tabIndex = selected ? 0 : -1;
+  d.dataset.ri = String(idx);                      // an integer the page owns
+  d.title = it.name;
+  const av = el("span", "rail-av");
+  av.append(sigil(it.name, "sm"));
+  const txt = el("span", "rail-txt");
+  txt.append(el("span", "rail-name", it.name));
+  txt.append(el("span", "rail-what", it.what));
+  if (it.kind === "hero" && it.live && it.hp != null && it.max != null && it.max > 0) {
+    const tr = el("span", "rail-hp"); tr.setAttribute("aria-hidden", "true");
+    const f = el("span", "rail-hpf");
+    f.style.setProperty("--hp", Math.max(0.03, Math.min(1, it.hp / it.max)));   // CSSOM number only
+    tr.append(f); txt.append(tr);
+  }
+  const right = el("span", "rail-num");
+  if (it.live) { const dot = el("span", "live-dot"); dot.setAttribute("aria-hidden", "true"); right.append(dot); }
+  if (it.num !== "" && it.num != null) {
+    const n = el("span", "rail-n", it.num);
+    right.append(n);
+    if (it.numLab) right.append(el("span", "rail-nl", it.numLab));
+  }
+  if (it.live) right.append(el("span", "rail-live-sr", "live"));
+  d.append(av, txt, right);
+  return d;
+}
+function renderRail(p) {
+  const box = $("railList");
+  if (!box) return;
+  const hadFocus = box.contains(document.activeElement);
+  const focusKey = hadFocus && document.activeElement.dataset ? document.activeElement.dataset.ri : null;
+  const prevFocus = focusKey != null && railItems[+focusKey] ? railItems[+focusKey] : null;
+  const m = railBuild(p || {});
+  const idleShown = m.idleH.slice(0, RAIL_IDLE_CAP);
+  railItems = [].concat(m.bands, m.liveH, idleShown);
+  const cur = railCurrent();
+  railAutoPick = cur;
+  box.replaceChildren();
+  const group = (label, list, startIdx) => {
+    if (!list.length) return;
+    const g = el("div", "rail-group");
+    g.setAttribute("role", "group");
+    g.setAttribute("aria-label", label);
+    g.append(el("span", "rail-h", label));
+    list.forEach((it, i) => g.append(railItemEl(it, startIdx + i, cur === it)));
+    box.append(g);
+  };
+  group("Bands in the scar", m.bands, 0);
+  group("Heroes delving now", m.liveH, m.bands.length);
+  group("Heroes in town", idleShown, m.bands.length + m.liveH.length);
+  if (m.idleH.length > idleShown.length) {
+    const more = el("button", "rail-more", "+" + (m.idleH.length - idleShown.length) + " more in Heroes");
+    more.type = "button";
+    more.addEventListener("click", () => setActiveTab("heroes"));
+    box.append(more);
+  }
+  if (!railItems.length) box.append(el("p", "rail-empty", "Nobody is on the roll yet. When a hero enlists - or a band goes down into the scar - they appear here, live."));
+  // exactly one item is in the tab order
+  if (!box.querySelector('[tabindex="0"]')) { const f = box.querySelector(".rail-item"); if (f) f.tabIndex = 0; }
+  const nl = $("nLive");
+  const liveN = m.liveH.length + m.bands.length;
+  if (nl) nl.textContent = liveN ? liveN : "";
+  const cnt = $("railCount"); if (cnt) cnt.textContent = liveN ? liveN + " live" : "";
+  if (prevFocus) {
+    const again = railItems.findIndex((it) => it.kind === prevFocus.kind && it.key === prevFocus.key);
+    if (again >= 0) { const e = box.querySelector('[data-ri="' + again + '"]'); if (e) { e.tabIndex = 0; try { e.focus({ preventScroll: true }); } catch (x) {} } }
+  }
+  try { renderStage(); } catch (e) { /* the stage must never break the rest of the page */ }
+}
+function railPick(idx) {
+  const it = railItems[idx]; if (!it) return;
+  railSel = { k: it.kind, n: it.key };
+  const box = $("railList");
+  if (box) for (const e of box.querySelectorAll(".rail-item")) {
+    const on = e.dataset.ri === String(idx);
+    e.setAttribute("aria-selected", on ? "true" : "false");
+  }
+  setActiveTab("watch");
+  try { renderStage(); } catch (e) {}
+  const st = $("stageScroll"); if (st) st.scrollTop = 0;
+}
+// ---- the stage: what the rail selected, with an info row beneath it the way Twitch puts the
+// title, the streamer and the tags under the player. Reuses the sheet and band card the page
+// already has; adds only layout and the "Follow" toggle (the existing pinned-hero setting).
+function stageTag(text, cls) { return el("span", "sw-tag" + (cls ? " " + cls : ""), text); }
+function stageInfo(it) {
+  const info = el("div", "sw-info");
+  const av = el("span", "sw-av"); av.append(sigil(it.name, "md"));
+  const mid = el("div", "sw-infomid");
+  const title = it.kind === "band"
+    ? (it.floor != null ? "Delving on floor " + num(it.floor) : "Delving in the scar")
+    : (it.live ? (it.floor != null ? "On floor " + num(it.floor) + (it.band ? " with " + it.band : "") : "Delving now") : "In town, between delves");
+  mid.append(el("div", "sw-title", title));
+  const who = el("div", "sw-who");
+  who.append(el("span", "sw-whoname", it.name));
+  if (it.kind === "hero" && it.h.title) who.append(el("span", "sw-whotitle", String(it.h.title)));
+  mid.append(who);
+  const tags = el("div", "sw-tags");
+  if (it.kind === "band") {
+    tags.append(stageTag(it.num + (it.num === 1 ? " delver" : " delvers")));
+    if (it.floor != null) tags.append(stageTag("Floor " + num(it.floor)));
+    const fl = it.party.members.filter((x) => x.status === "fallen").length;
+    if (fl) tags.append(stageTag(fl + " fallen", "bad"));
+  } else {
+    const h = it.h;
+    if (h.class) tags.append(stageTag(cap(h.class)));
+    if (h.species) tags.append(stageTag(cap(h.species)));
+    if (it.lv) tags.append(stageTag("Level " + num(it.lv)));
+    if (h.rank) tags.append(stageTag(String(h.rank)));
+    if (it.band) tags.append(stageTag(it.band, "inband"));
+  }
+  mid.append(tags);
+  info.append(av, mid);
+  if (it.kind === "hero") {
+    const mine = isMyHero(it.h);
+    const f = el("button", "sw-follow" + (mine ? " on" : ""), mine ? "Following" : "Follow");
+    f.type = "button";
+    f.setAttribute("aria-pressed", mine ? "true" : "false");
+    f.title = mine ? "This is your pinned hero. Click to unpin." : "Pin this hero as yours - it floats to the top of Heroes.";
+    f.addEventListener("click", () => { setMyHero(mine ? "" : nameOf(it.h)); renderStage(); });
+    info.append(f);
+  }
+  return info;
+}
+function stagePlayer(it) {
+  const pl = el("div", "sw-player" + (it.live ? " live" : ""));
+  const art = el("div", "sw-art");
+  art.append(it.kind === "hero" ? coat(it.name, "lg") : sigil(it.name, "md"));
+  const mid = el("div", "sw-pmid");
+  const badge = el("span", "sw-badge" + (it.live ? " live" : ""));
+  if (it.live) badge.append(el("span", "live-dot"));
+  badge.append(document.createTextNode(it.live ? "LIVE" : "IN TOWN"));
+  mid.append(badge);
+  if (it.live) {
+    const f = it.floor;
+    const big = el("div", "sw-depth");
+    big.append(el("span", "sw-depth-k", it.kind === "band" ? "Delving on floor" : "On floor"), el("span", "sw-depth-n", f != null ? num(f) : "—"));
+    mid.append(big);
+  } else {
+    mid.append(el("div", "sw-depth-k", "Not in the scar right now"));
+    const deep = it.kind === "hero" ? pickNum(it.h.deepest) : null;
+    if (deep != null && deep > 0) mid.append(el("div", "sw-depth-k", "Deepest so far: floor " + num(deep)));
+  }
+  if (it.kind === "hero" && it.hp != null) {
+    const bar = hpBar(it.h); bar.classList.add("sw-hp"); mid.append(bar);
+  }
+  pl.append(art, mid);
+  return pl;
+}
+function renderStage() {
+  const box = $("watchBody");
+  if (!box) return;
+  box.replaceChildren();
+  const it = railCurrent();
+  if (!it) {
+    const e = el("div", "sw-empty");
+    e.append(el("h2", "sw-empty-h", "Nobody is delving right now"));
+    e.append(el("p", null, "When a hero goes down into the scar, or a band does, they appear on the rail on the left and the stage fills with them. Until then, the Chronicle, the Boards and the rest are along the tabs above."));
+    box.append(e);
+    return;
+  }
+  box.append(stagePlayer(it), stageInfo(it));
+  const sheet = el("div", "panel sw-sheet");
+  if (it.kind === "hero") {
+    sheet.append(heroSheet(it.h));
+  } else {
+    const btns = el("div", "sw-members");
+    btns.append(el("p", "eyebrow", "Pick a delver to watch"));
+    const row = el("div", "sw-memberrow");
+    const heroByName = new Map(); railItems.forEach((x, i) => { if (x.kind === "hero") heroByName.set(x.key, i); });
+    for (const m of it.party.members) {
+      const idx = heroByName.get(String(m.name || "").toLowerCase());
+      const b = el("button", "chip", m.name || "(no name)");
+      b.type = "button";
+      if (idx == null) { b.disabled = true; b.title = "No sheet published for this delver"; }
+      else b.addEventListener("click", () => railPick(idx));
+      row.append(b);
+    }
+    btns.append(row);
+    sheet.append(btns, partyCard(it.party));
+  }
+  box.append(sheet);
+}
+(function wireRail() {
+  const box = $("railList"), tog = $("railToggle");
+  if (tog) tog.addEventListener("click", () => railSetMode((($("app") && $("app").getAttribute("data-rail")) === "min") ? "full" : "min"));
+  railSetMode(railGetMode(), false);
+  if (!box) return;
+  box.addEventListener("click", (e) => {
+    const t = e.target && e.target.closest ? e.target.closest(".rail-item") : null;
+    if (!t || !box.contains(t)) return;
+    railPick(+t.dataset.ri);
+  });
+  box.addEventListener("keydown", (e) => {
+    const t = e.target && e.target.closest ? e.target.closest(".rail-item") : null;
+    if (!t) return;
+    const all = Array.from(box.querySelectorAll(".rail-item"));
+    const i = all.indexOf(t);
+    let j = -1;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); railPick(+t.dataset.ri); return; }
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") j = Math.min(all.length - 1, i + 1);
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") j = Math.max(0, i - 1);
+    else if (e.key === "Home") j = 0;
+    else if (e.key === "End") j = all.length - 1;
+    if (j < 0) return;
+    e.preventDefault();
+    all.forEach((x) => { x.tabIndex = -1; });
+    all[j].tabIndex = 0; all[j].focus();
+  });
+})();
+
+// ---- H32 pass 3: the guild chat column. The chat that used to be tab fourteen now sits beside the
+// stage, always present (the H8 native chat, unchanged and still OPT-IN: nothing contacts Twitch until
+// the viewer presses "Open the guild chat"). Collapsible to a thin strip on a wide screen; on a narrow
+// one the column is hidden and a top-bar button opens it full-screen. Layout only: no snapshot value
+// is involved; the only stored state is one whitelisted localStorage value (bellmire.chatcol.v1).
+const CHATCOL_KEY = "bellmire.chatcol.v1";
+const NARROW = window.matchMedia ? window.matchMedia("(max-width: 900px)") : { matches: false };
+function chatColGetMode() { try { return localStorage.getItem(CHATCOL_KEY) === "min" ? "min" : "full"; } catch (e) { return "full"; } }
+function chatColSet(mode, keep) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-chat", mode === "min" ? "min" : "full");
+  const b = $("chatToggle");
+  if (b) {
+    b.setAttribute("aria-expanded", mode === "min" ? "false" : "true");
+    b.setAttribute("aria-label", mode === "min" ? "Expand the chat column" : "Collapse the chat column");
+    b.title = mode === "min" ? "Show the chat" : "Collapse the chat";
+  }
+  if (keep !== false) { try { localStorage.setItem(CHATCOL_KEY, mode === "min" ? "min" : "full"); } catch (e) {} }
+}
+function chatNarrowOpen(on) {
+  const app = $("app"); if (!app) return;
+  app.setAttribute("data-chatopen", on ? "1" : "0");
+  const nb = $("chatNarrowBtn"); if (nb) nb.setAttribute("aria-expanded", on ? "true" : "false");
+  const tg = $("chatToggle");
+  if (tg && NARROW.matches) { tg.setAttribute("aria-label", on ? "Close the chat" : "Collapse the chat column"); tg.setAttribute("aria-expanded", on ? "true" : "false"); }
+}
+(function wireChatCol() {
+  const tog = $("chatToggle"), nb = $("chatNarrowBtn");
+  chatColSet(chatColGetMode(), false);
+  chatNarrowOpen(false);
+  if (tog) tog.addEventListener("click", () => {
+    if (NARROW.matches) { chatNarrowOpen(false); if (nb) nb.focus(); return; }
+    chatColSet((($("app") && $("app").getAttribute("data-chat")) === "min") ? "full" : "min");
+  });
+  if (nb) nb.addEventListener("click", () => { chatNarrowOpen(true); const f = $("chatLoad") && !$("chatLoad").classList.contains("hide") ? $("chatLoad") : $("chatInput"); if (f && f.focus) { try { f.focus(); } catch (e) {} } });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && NARROW.matches && $("app") && $("app").getAttribute("data-chatopen") === "1") { chatNarrowOpen(false); if (nb) nb.focus(); }
+  });
+  if (NARROW.addEventListener) NARROW.addEventListener("change", () => chatNarrowOpen(false));
+})();
+
+const TABS = ["watch","boards","state","heroes","bands","chronicle","dice","roll","fallen","lore","bestiary","shops","satchel","season","commands"];
 const TAB_KEY = "bellmire.tab";
 function cleanTab(s) { return ctrlStrip(s).slice(0, 25); }
 function getStoredTab() {
@@ -3751,6 +4669,9 @@ function setActiveTab(id) {
     if (panel) { if (on) panel.classList.add("active"); else panel.classList.remove("active"); }
   }
   storeTab(id);
+  // H32 pass 5: keep the chosen tab inside the (horizontally scrolling) section bar
+  const cur = $("tab-" + id);
+  if (cur && cur.scrollIntoView) { try { cur.scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) {} }
 }
 (function wireTabs() {
   const navEl = $("tabs");
@@ -4085,9 +5006,9 @@ function withMock(p) {
         { name: "The Provisioner", level: 3, sells_to: "uncommon", stock: [{ name: "Loaf", cost: 2 }, { name: bad + " Ale", cost: 5, rarity: "common" }, { name: "Flask of Oil", cost: 6, qty: 4 }] },
         { name: bad + " Smithy", level: 2, sells_to: "rare", stock: [{ name: "<b>Iron sword</b>", cost: 90, rarity: "uncommon" }, { name: "Moonlit dagger", cost: 400, rarity: "rare" }] },
         { name: "The Apothecary", level: 1, sells_to: "<script>x</script>", stock: [] },
-        { name: "The Stables", level: 4, sells_to: "epic" },
+        { name: "The Stables", level: 4, sells_to: "very rare" },
       ];
-      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "epic" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
+      out.caravan = { present: true, leaves_in: 12, cargo: [{ name: "Bale of Silk", cost: 180, rarity: "very rare" }, { name: bad + " Spice", cost: 120, qty: 3, rarity: "<x>" }] };
       out.orders = [{ who: "viewer1", item: bad, shop: "The Smithy", walker: "Brum" }, { who: bad, item: "Loaf", shop: "The Provisioner", status: "ready" }];
     }
     out.v = "5";
@@ -4470,5 +5391,27 @@ function finderOpen(r) {
     const t = ev.target, tag = t && t.tagName ? t.tagName : "";
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
     ev.preventDefault(); inp.focus();
+  });
+})();
+
+// ---------------------------------------------------------------- H32 pass 5: keyboard
+// Twitch-style shortcuts, only while the viewer is not typing: "[" folds the rail, "]" folds the
+// chat column, "g" jumps to the rail (then Up/Down/Enter as usual). Page-local, no data.
+(function wireShortcuts() {
+  document.addEventListener("keydown", (ev) => {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey || ev.defaultPrevented) return;
+    if (ev.key !== "[" && ev.key !== "]" && ev.key !== "g") return;
+    const t = ev.target, tag = t && t.tagName ? t.tagName : "";
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    const app = $("app"); if (!app) return;
+    if (ev.key === "[") { if (NARROW.matches) return; railSetMode(railGetMode() === "min" ? "full" : "min"); ev.preventDefault(); }
+    else if (ev.key === "]") {
+      if (NARROW.matches) { chatNarrowOpen(app.getAttribute("data-chatopen") !== "1"); }
+      else chatColSet(app.getAttribute("data-chat") === "min" ? "full" : "min");
+      ev.preventDefault();
+    } else {
+      const r = $("railList"), f = r && (r.querySelector('[tabindex="0"]') || r.querySelector('[role="option"]'));
+      if (f) { try { f.focus(); } catch (e) {} ev.preventDefault(); }
+    }
   });
 })();

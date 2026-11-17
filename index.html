@@ -60,6 +60,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip-link" href="#stageScroll">Skip to the stage</a>
 
 <!-- Icon sprite: hand-drawn line glyphs, no external asset and no <img> request.
      Each <symbol> is page-authored and static; app.js references one with
@@ -100,8 +101,13 @@
   </defs>
 </svg>
 
-<div class="wrap">
+<div class="wrap app" id="app">
 
+  <!-- H32 pass 1: the Twitch-shaped shell. Three independent scroll regions under one fixed
+       top bar: a LEFT RAIL (live heroes and bands - filled in pass 2), the STAGE in the middle
+       (everything the page had before, unchanged), and a RIGHT COLUMN for guild chat (pass 3).
+       The PAGE itself does not scroll (H13). Layout only: no new data, no new fetch, no CSP change. -->
+  <div class="topbar" id="topbar">
   <header class="hero">
     <div class="crest">
       <!-- The Bellmire mark: the keep above the valley, the teal scar below it,
@@ -132,17 +138,78 @@
     </ul>
   </header>
 
-  <ul class="town" id="town" aria-label="The town"></ul>
-  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+  <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
+       the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
+       path. Results are built in app.js with el() only. -->
+  <div class="finder" id="finder" role="search">
+    <label class="finder-label" for="finderInput">Find</label>
+    <input class="finder-input" id="finderInput" type="search" maxlength="60" autocomplete="off" spellcheck="false"
+           placeholder="A hero, a lord, a band, a word from the Chronicle  (press / )"
+           role="combobox" aria-expanded="false" aria-controls="finderList" aria-autocomplete="list">
+    <div class="finder-panel hide" id="finderPanel">
+      <p class="finder-note" id="finderNote" role="status" aria-live="polite"></p>
+      <ul class="finder-list" id="finderList" role="listbox" aria-label="Places to go"></ul>
+    </div>
+  </div>
 
   <!-- H25 Night watch: a page-owned toggle. It carries no snapshot data; app.js flips one class on <html>
        and keeps the choice in this browser only (localStorage, whitelist-validated on read). -->
   <div class="watchbar" id="watchbar">
     <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
+    <button type="button" class="watchbtn chatbtn-narrow" id="chatNarrowBtn" aria-controls="chatcol" aria-expanded="false">Guild chat</button>
     <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
     <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
   </div>
 
+  </div>
+
+  <div class="shell" id="shell">
+    <!-- H32 pass 2: the rail. A LISTBOX of live things (bands in the scar, heroes delving, then the
+         heroes in town) - not a tablist: each entry is an option that puts that hero or band on the
+         stage. app.js builds every entry with el(); nothing here is snapshot data. -->
+    <aside class="rail" id="rail" aria-label="Live in Bellmire">
+      <div class="rail-head">
+        <button type="button" class="rail-toggle" id="railToggle" aria-expanded="true" aria-controls="railList" aria-label="Collapse the rail to sigils only" title="Collapse the rail">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <span class="rail-title">Live in Bellmire</span>
+        <span class="rail-count" id="railCount"></span>
+      </div>
+      <div class="rail-list" id="railList" role="listbox" aria-label="Live bands and heroes - choose one to watch" aria-orientation="vertical"></div>
+    </aside>
+
+    <div class="stagecol" id="stagecol">
+      <div class="stage-top">
+  <ul class="town" id="town" aria-label="The town"></ul>
+  <div class="status" id="status" role="status" aria-live="polite">Asking the town crier for the latest&hellip;</div>
+
+  <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
+       tab button here; app.js shows the matching tabpanel below and remembers the
+       choice in localStorage (control-stripped, 25-cap, matched against a WHITELIST
+       before use - never built into a URL, href, src, selector or style). Pure
+       layout rework: no new data, no new fetch, no CSP change. Keyboard-navigable
+       (ArrowLeft/Right, Home/End move; Enter/Space activate) per the WAI-ARIA tabs
+       pattern. Reduced-motion is respected (no new animation here either way). -->
+  <nav id="tabs" role="tablist" aria-label="Sections of the hub">
+    <button type="button" role="tab" id="tab-watch"     data-tab="watch"     aria-controls="watch"     aria-selected="false" tabindex="-1">Live<span class="n" id="nLive"></span></button>
+    <button type="button" role="tab" id="tab-boards"    data-tab="boards"    aria-controls="boards"    aria-selected="false" tabindex="-1">Boards</button>
+    <button type="button" role="tab" id="tab-state"     data-tab="state"     aria-controls="state"     aria-selected="false" tabindex="-1">Town</button>
+  <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
+    <button type="button" role="tab" id="tab-bands"     data-tab="bands"     aria-controls="bands"     aria-selected="false" tabindex="-1">Bands<span class="n" id="nBands"></span></button>
+    <button type="button" role="tab" id="tab-chronicle" data-tab="chronicle" aria-controls="chronicle" aria-selected="false" tabindex="-1">Chronicle</button>
+    <button type="button" role="tab" id="tab-dice"      data-tab="dice"      aria-controls="dice"      aria-selected="false" tabindex="-1">The die</button>
+    <button type="button" role="tab" id="tab-roll"      data-tab="roll"      aria-controls="roll"      aria-selected="false" tabindex="-1">Guild Roll</button>
+    <button type="button" role="tab" id="tab-fallen"    data-tab="fallen"    aria-controls="fallen"    aria-selected="false" tabindex="-1">The Fallen<span class="n" id="nFallen"></span></button>
+    <button type="button" role="tab" id="tab-lore"      data-tab="lore"      aria-controls="lore"      aria-selected="false" tabindex="-1">Lore</button>
+    <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
+    <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
+    <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
+    <button type="button" role="tab" id="tab-season"    data-tab="season"    aria-controls="season"    aria-selected="false" tabindex="-1">Season</button>
+    <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
+  </nav>
+
+      </div>
+      <div class="stage-scroll" id="stageScroll" tabindex="-1">
   <!-- H22: the first minute. A page-owned welcome for a newcomer: what Bellmire is, one live line built
        in app.js from the snapshot already on the page (el()/textContent only), and three doors that
        just switch to the tab that already does that job. Static copy only - no snapshot data in this
@@ -160,47 +227,15 @@
     <button type="button" class="welcome-dismiss" id="welcomeDismiss">Got it &ndash; don&rsquo;t show this again</button>
   </section>
 
-  <!-- H24: the finder. One field over everything the page already holds in memory (heroes,
-       the fallen, bands, lords, remembered Chronicle lines). Page-local: no fetch, no write
-       path. Results are built in app.js with el() only. -->
-  <div class="finder" id="finder" role="search">
-    <label class="finder-label" for="finderInput">Find</label>
-    <input class="finder-input" id="finderInput" type="search" maxlength="60" autocomplete="off" spellcheck="false"
-           placeholder="A hero, a lord, a band, a word from the Chronicle  (press / )"
-           role="combobox" aria-expanded="false" aria-controls="finderList" aria-autocomplete="list">
-    <div class="finder-panel hide" id="finderPanel">
-      <p class="finder-note" id="finderNote" role="status" aria-live="polite"></p>
-      <ul class="finder-list" id="finderList" role="listbox" aria-label="Places to go"></ul>
-    </div>
-  </div>
-
-  <!-- H13: no-scroll, tabbed layout. A viewer picks one section at a time with a
-       tab button here; app.js shows the matching tabpanel below and remembers the
-       choice in localStorage (control-stripped, 25-cap, matched against a WHITELIST
-       before use - never built into a URL, href, src, selector or style). Pure
-       layout rework: no new data, no new fetch, no CSP change. Keyboard-navigable
-       (ArrowLeft/Right, Home/End move; Enter/Space activate) per the WAI-ARIA tabs
-       pattern. Reduced-motion is respected (no new animation here either way). -->
-  <nav id="tabs" role="tablist" aria-label="Sections of the hub">
-    <button type="button" role="tab" id="tab-boards"    data-tab="boards"    aria-controls="boards"    aria-selected="false" tabindex="-1">Boards</button>
-    <button type="button" role="tab" id="tab-state"     data-tab="state"     aria-controls="state"     aria-selected="false" tabindex="-1">Town</button>
-  <button type="button" role="tab" id="tab-heroes"    data-tab="heroes"    aria-controls="heroes"    aria-selected="false" tabindex="-1">Heroes<span class="n" id="nHeroes"></span></button>
-    <button type="button" role="tab" id="tab-bands"     data-tab="bands"     aria-controls="bands"     aria-selected="false" tabindex="-1">Bands<span class="n" id="nBands"></span></button>
-    <button type="button" role="tab" id="tab-chronicle" data-tab="chronicle" aria-controls="chronicle" aria-selected="false" tabindex="-1">Chronicle</button>
-    <button type="button" role="tab" id="tab-dice"      data-tab="dice"      aria-controls="dice"      aria-selected="false" tabindex="-1">The die</button>
-    <button type="button" role="tab" id="tab-roll"      data-tab="roll"      aria-controls="roll"      aria-selected="false" tabindex="-1">Guild Roll</button>
-    <button type="button" role="tab" id="tab-fallen"    data-tab="fallen"    aria-controls="fallen"    aria-selected="false" tabindex="-1">The Fallen<span class="n" id="nFallen"></span></button>
-    <button type="button" role="tab" id="tab-lore"      data-tab="lore"      aria-controls="lore"      aria-selected="false" tabindex="-1">Lore</button>
-    <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
-    <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
-    <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
-    <button type="button" role="tab" id="tab-season"    data-tab="season"    aria-controls="season"    aria-selected="false" tabindex="-1">Season</button>
-    <button type="button" role="tab" id="tab-chat"      data-tab="chat"      aria-controls="chat"      aria-selected="false" tabindex="-1">Guild chat</button>
-    <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
-  </nav>
-
   <main id="main">
     <section class="panel big-msg hide" id="nothing"></section>
+
+    <!-- H32: the live stage. Whatever the rail selected (a hero or a band), with the info row beneath it.
+         Built in app.js from the snapshot with el(); the only markup here is page-owned. -->
+    <section class="plain stagewatch" id="watch" role="tabpanel" aria-labelledby="tab-watch" tabindex="0">
+      <h2 class="sr-only">Live stage</h2>
+      <div id="watchBody"></div>
+    </section>
 
     <section class="panel" id="boards" role="tabpanel" aria-labelledby="tab-boards" tabindex="0">
       <h2 class="title">The Boards <small id="boardCount"></small></h2>
@@ -411,17 +446,26 @@
       <p class="note">Standings count the living and the fallen. A board with no data says so rather than guessing; the stream shows no leaderboard - this is where it lives.</p>
     </section>
 
-    <!--
-      Guild chat (H8): the channel's live Twitch chat, drawn by THIS page over
-      Twitch's own chat protocol - no iframe. The old embed died for every viewer
-      whose browser blocks third-party cookies (Brave, Safari, strict Chrome).
-      Still OPT-IN: nothing contacts Twitch until the viewer opens it. Reading is
-      anonymous; talking uses the viewer's own sign-in (under Heroes). Every
-      incoming line is attacker-controlled text and renders through el() only -
-      plain text, no emote images, no markup, ever. See docs/HUB_SECURITY.md (H8).
-    -->
-    <section class="plain" id="chat" role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
-      <h2 class="title light">Guild chat <small>the channel's live chat</small></h2>
+  </main>
+
+  <footer>
+    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
+    <br>Bellmire HD &middot; JestSayin
+  </footer>
+      </div>
+    </div>
+
+    <!-- H32 pass 3: guild chat lives HERE, beside whatever is on the stage, not in a tab. It is the same
+         H8 native chat as before (same ids, same opt-in: nothing contacts Twitch until the viewer opens it,
+         reading is anonymous, talking uses the viewer's own sign-in). Collapsible. -->
+    <aside class="chatcol" id="chatcol" aria-label="Guild chat">
+      <div class="chat-head">
+        <h2 class="chat-title">Guild chat</h2>
+        <span class="chat-sub">the channel&rsquo;s live chat</span>
+        <button type="button" class="chat-toggle" id="chatToggle" aria-expanded="true" aria-controls="chatBox" aria-label="Collapse the chat column" title="Collapse the chat">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
       <div class="chatbox" id="chatBox">
         <button type="button" class="chatload" id="chatLoad">Open the guild chat</button>
         <p class="chatnote" id="chatNote">Live Twitch chat, drawn by this page itself - it works in every browser, no Twitch frame, no cookies. Nothing contacts Twitch until you open it. Reading needs nothing; sign in under Heroes to talk.</p>
@@ -435,13 +479,8 @@
           </div>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
-    <br>Bellmire HD &middot; JestSayin
-  </footer>
+    </aside>
+  </div>
 </div>
 
 <script src="app.js" defer></script>

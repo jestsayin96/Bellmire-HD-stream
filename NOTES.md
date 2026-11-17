@@ -855,3 +855,57 @@ Four cards, top ten each, living + fallen: Went deepest (`deepest`), Earned most
 floor), Lived longest. Honest gaps: the publisher sends only current `gold` today, so "Earned most" ranks gold held and
 says so; no age/born_day fields exist yet, so "Lived longest" shows an explanatory empty state. Both light up by
 themselves when the fields arrive (names in HUB_SECURITY.md). Checks: ?mock=season | season0 | season3.
+
+## Version-gate re-verification (hub run, 2026-11-16 ~21:40 UTC)
+Headless Chromium, real-shaped snapshots (publisher v4 shape: shops[{name,level,sells_to}] with no stock/caravan/orders yet), hostile name `<img src=x onerror=alert(1)>` in hero, satchel row and shop name.
+- v4 and v5 payloads: Shops tab lights up by itself (levels, "sells up to" with rarity slug incl. "very rare"); Satchel renders; no page errors; 0 dialogs; hostile names are text (no injected <img>).
+- Stale (30 min old): "Last word from the town 30 minutes ago ... may be out of date". ?state=stale, ?state=empty, ?state=fail, ?mock=chronicle, ?mock=crowd, ?open=1 all behave.
+- Unknown v9: honest "needs an update" problem, no tab content.
+- Still open on the GAME BUILD side: snapshot_pub.gd sends shops WITHOUT `stock`, and no `caravan`/`trader`/`orders` yet, so each shelf honestly reads "The shelf has not been published yet." The hub needs no change; it lights up when those fields arrive (items.json shop_stock / trader_cargo wiring in the publisher).
+
+- 2026-11-16 ~17:40 CT hub run: lane STOOD DOWN. Read WORK_PLAN hub row (H14-H31 all ticked) + H29/H30 items; H29 point 6 still blocked on the game build publisher (snapshot_pub.gd sends shops without stock/caravan/orders). Checked app.js: node --check OK, no innerHTML on snapshot data (2 page-owned sites), CSP meta present. No defect found, no web/ code changed.
+
+## H32 - navigating like Twitch (passes 1-2 so far)
+
+Read as: Twitch's STRUCTURE and INTERACTION, not its colours (the palette ruling stands) and never its
+brand. Pass 1 - a fixed top bar and a three-column shell, three independent scroll regions, no page
+scroll. Pass 2 - the left rail: a listbox of live things. A hero mid-delve is a live channel: sigil for
+the avatar, name, "Floor 7 - The Ford Wardens", a LIVE dot and, where Twitch puts the viewer count, the
+FLOOR (it moves and it is what a delve is about). A band's number is its head-count; an idle hero shows
+level, dimmed. Live first, idle below, the fallen not on the rail (they have their own tab). The rail
+collapses to sigils only. Picking an entry opens the new "Live" stage: a dark player banner, an info row
+(title / who / tags / Follow) and the full sheet beneath. The LIVE dot is red (`--live`), a functional
+signal used nowhere else. Welcome panel placement and chat are still to do (passes 3 and 5).
+- H32 pass 3: Guild chat is now a persistent right column (collapsible; on a narrow screen a top-bar button
+  opens it full-screen). It remains opt-in - the viewer still presses "Open the guild chat" - because
+  auto-connecting to Twitch on page load would change the privacy behaviour H8 was built around. That is
+  Mr. E's call (see the run summary). The "Guild chat" tab is gone; the column replaces it.
+- H32 pass 4: Shops stock is a card grid (picture, name, rarity pill, price; rarity as a frame) with a hover/focus
+  preview overlay; Bestiary cards lift on hover/focus; Lore chapters are browse cards. Pictures are derived
+  160 px WebP thumbnails (1.94 MB for 463) chosen by a generated name whitelist - see docs/HUB_SECURITY.md.
+- H32 pass 5 (polish): thin dark scrollbars on the three scroll regions (the narrow top strip showed a white native bar); a fade on the right edge of the section bar and the active tab scrolled into view, so a clipped tab reads as "more this way"; a skip link to the stage; keyboard shortcuts while not typing - "[" folds the rail, "]" folds/opens the chat, "g" focuses the rail (the listbox keeps Up/Down/Home/End/Enter). Layout and keys only: no data, no CSP change, no new storage key. Live dot stayed red (--live): it does not fight the gold because it is 8 px and used only for the dot and the LIVE badge.
+
+## H32 acceptance run (hub, 2026-11-16 ~21:45 CT - was headed with the 2026-11-17 UTC date first; CT leads on this ledger)
+No code changed. Headless Chromium 1440x900 against the merged tree (hub + origin/main), Supabase fetch stubbed with a v5 payload containing a hostile hero name and hostile shop name.
+- ?state=empty, ?state=fail, ?state=stale, ?mock=chronicle, ?mock=crowd (60-row rail page), ?open=1, ?mock=bands (6 rail rows), ?mock=shops, ?mock=bestiary, ?mock=lore, payload v=9: 0 page errors, 0 dialogs, 0 injected <img>, document scrollHeight - innerHeight = 0 in every case (H13 holds), honest status line text per state, unknown version shows no town data.
+- Hostile `<img src=x onerror=alert(1)>` renders as literal text in rail, shop names, caravan stock and bestiary cards.
+- LOOKED AT: Shops card grid (picture, rarity pill + rarity frame, price; bare / not-published shelves read honestly), Bestiary cards, Lore chapter cards, the 420 px one-column layout (rail becomes a top strip, chat a top-bar button). Item pictures in the capture are the generic gem because only 10 thumbnails were staged for the run; the real set is web/icons/items/.
+- Live dot: red (--live), unchanged.
+
+## H32 real-set LOOK (hub, 2026-11-17 ~01:00 CT, after the halt was lifted)
+No code changed. Headless Chromium against the merged tree (hub + origin/main 93770e6) with the Supabase fetch stubbed by a v5 payload: a 465-item Blacksmith shelf built from the REAL whitelist names plus a hostile item name and a hostile shop name (`<b>x</b>`), a 30-item Chandler, a bare Provisioner.
+- Real thumbnails (web/icons/items, 463 files, 1.94 MB): at 1440x900 and 420x800, 216 shelf images rendered (the rest are lazy, below the fold), 0 broken, 216 of 216 `loading="lazy"`.
+- H13: document scrollHeight - innerHeight = 0 and scrollWidth - innerWidth = 0 at BOTH widths, with the real images loaded. The grid scrolls inside the stage.
+- Security: hostile item and shop names render as literal text, 0 injected `<img>`, 0 dialogs, 0 page errors. An unknown item name falls to the generic gem (honest fallback, never a guessed path).
+- LOOKED AT (1440 screenshot, hover shot, 420 shot): rarity frames and pills read correctly (epic purple, rare blue, uncommon green, legendary gold, common bare), prices align, the hover/focus preview enlarges the card and adds "Costs N gold - N on the shelf". Seen and judged fine: on a first visit the Welcome panel sits above the stage and pushes the shelves below the fold (it is dismissible and was ruled to stay above the stage); at 420 px the rail is a thin top strip with a clipped sentence when nobody is on the roll. Names truncate with an ellipsis in the narrow cards ("Unknown Thing Not In..") - full name is in the hover preview.
+- Live dot: red (--live), unchanged. The UNCOMMON pill clip fix (cf40e31) was the only change the earlier look needed; this ledger entry is the record that was missing.
+- Housekeeping: the seven loose files in the worktree (_h32_shot_a..f.png, web_look.tar, _plan_tmp.txt) are NOT committed - superseded by this look, and web_look.tar is 3 MB of binary git would keep forever. The attempt to delete them from the worktree was refused by the permission gate, so they are still sitting there untracked: Mr. E or the supervisor can delete them, or give the hub a go-ahead.
+
+## H32 icon refresh (hub, 2026-11-17 ~02:00 CT, after the halt was released)
+Art's System 1 (rarity hue ladder + icon origin fix, origin/main 2473836) replaced the pictures under assets/icons/items and added 57, so the 463 thumbnails were stale. Re-ran web/tools/make_item_icons.py --commit 2473836: 520 WebP at 2,341,956 bytes (budget 6 MB), whitelist block in app.js regenerated, one name conflict recorded in the manifest (Scarglass Ring dropped for Scar Ring). The converter's rmtree now ignores errors so it can overwrite in place where deletion is not permitted; it still reads-never-writes assets/.
+- LOOKED AT: headless Chromium 1440x900 and 420x800, Supabase stubbed with a 401-item Blacksmith shelf from the real manifest names plus a hostile item and a hostile shop name. 158 item images rendered (rest lazy), 0 broken, scrollHeight/scrollWidth overflow 0 at both widths, 0 page errors, 0 dialogs, 0 injected <img>. Hostile names render as literal text and fall to the generic gem. Real pictures show (amulet, banner) inside rarity frames and pills.
+- Wrong in the picture: the welcome card pushes the first shelf row below the fold at 900 high on a first visit (dismissible, not changed). In my stub the rarity pill is cycled by me, so a "COMMON" pill on a purple-tinted amulet is the stub, not the page.
+- No CSP change, no innerHTML added, live dot unchanged (--live red). Stale files from renamed icons, if any, remain on disk until a delete-permitted run; they are not in the whitelist.
+
+## H32 standing check (hub, 2026-11-17 ~02:45 CT, after merging origin/main 463ab1b)
+No code changed; H32 passes 1-5 are all in (ticked whole at ddee675) and the thumbnails are the 520-file set. Re-checked the tree by grep and measurement: `node --check app.js` OK; the only two innerHTML sites are the page-owned status line and failed-fetch box; CSP unchanged (img-src 'self' data:, no new origin); web/icons/items = 520 WebP, 2,430,050 bytes on disk (manifest count 520, budget 6 MB). No new screenshot this hour - nothing visual changed since the 02:00 look. Live dot: red (--live). The nine loose files in the worktree root (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) stay untracked: deleting is refused on this machine and 6 MB of binary is not worth keeping in git.

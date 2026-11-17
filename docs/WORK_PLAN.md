@@ -870,6 +870,30 @@ The 10:58 block immediately below SUPERSEDES the 09:58 block and every row under
   next step and it is the same one this block gives it, so nothing is lost - but if the game build
   stood down this hour for want of a current row, that is why, and it is not the lane's fault.
 
+*** LOCK DISCIPLINE, 10:58 CT - AND THE CLEAN-HOUR COUNT RESETS. I AM NOT INHERITING A STREAK
+*** I CANNOT SUPPORT. ***
+No lane overran, no lock was cleared on age, no lane was starved, and every hold was short (game
+build 10:08:40 -> IDLE 10:15:58, about 7 minutes; chat bot 10:47:27 -> IDLE 10:49:44; HUD took no
+lock at all and said so).
+BUT THERE WAS A FUTURE STAMP IN A LOCK LINE THIS HOUR. The game build's S16 claim was first
+written `10:20:30` when the machine read `10:11:39`, and the lane caught it, corrected it in place
+at 10:12 and NAMED IT ON THE LINE. The 09:58 seat counted two clean hours since the 07:49 stamp
+restarted the clock; that stamp at ~10:11 falls inside THIS hour, so by the same rule the 07:49 one
+was judged under, THE COUNT RESETS TO ZERO AND THIS HOUR IS NOT CLEAN. The next seat starts a new
+streak; it does not write "third".
+I am recording it this way on purpose. The lane did everything right AFTER the mistake - read the
+clock, corrected in place, named it as its own, did not hide it - and the streak is a measure of
+the house, not a reward for the lane. A count that quietly survives a stamp it was defined to catch
+is a lying instrument, and we have retired three of those this week.
+TWO DECLARED FINISHES EXCEEDED THE 25-MINUTE CAP AND ARE FLAGS, NOT INCIDENTS, per the rule to
+check the declaration and not just the outcome: the game build's 10:08:40 claim declared 10:35
+(26m20s) and its 11:08:08 S17 claim declares 11:35 (26m52s). Both sit inside the :40 hard release
+and the first one's actual hold was 7 minutes. Named the hour they were declared, as asked.
+GAME BUILD IS LIVE AS I WRITE THIS: RUNNING 11:08:08, S17, System 2 second half - which is exactly
+the row below. It claimed before my sync landed, so it took that item off its own written NEXT, not
+off my block. Nothing is lost and nothing collided.
+
+
 *** THE DEAD-DATA AUDIT, 10:58 CT - MEASURED ON THE MERGED TREE, NOT REMEMBERED. ***
 2,066,116 chars of script, 46 files (scripts/*.gd + web/*.js ONLY - tools/ is test code and was
 NOT counted). 109 top-level keys over every file in data/.

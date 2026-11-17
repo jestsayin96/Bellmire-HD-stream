@@ -172,6 +172,50 @@ const TEAL_ON_PARCH := Color(0.06, 0.45, 0.45)
 const TEAL_ON_DARK := Color(0.30, 0.78, 0.76)
 const GOLD_ON_PARCH := Color(0.50, 0.32, 0.02)
 const GOLD_ON_DARK := Color(0.78, 0.62, 0.30)
+## ---- U55 (System 2, HUD half): the rarity hue ladder. SOURCE OF TRUTH is art's icons.RARITY_HUE
+## (tools/art/icons.py:659) - never re-chosen here. EIGHT rungs, FIVE carry a hue; junk / starting /
+## common are BARE on purpose and a piece with no stored rarity gets none (no cost-quartile guess).
+const RARITY_HUE := {
+	"uncommon": Color(1.00, 1.00, 1.00),    # white   - carries an icon halo, NOT a hue on parchment
+	"rare": Color(0.30, 0.55, 1.00),        # blue
+	"very rare": Color(0.70, 0.35, 1.00),   # purple
+	"legendary": Color(1.00, 0.55, 0.12),   # tangerine
+	"artifact": Color(1.00, 0.13, 0.10),    # bright red
+}
+## the same four hued rungs darkened until a NAME reads on parchment (>= 4.5:1); uncommon stays ink
+## and is carried by the pip alone, because pure white cannot be text on a cream panel
+const RARITY_INK := {
+	"rare": Color(0.10, 0.28, 0.66),
+	"very rare": Color(0.46, 0.14, 0.70),
+	"legendary": Color(0.58, 0.24, 0.00),
+	"artifact": Color(0.66, 0.07, 0.05),
+}
+
+## the art hue for a stored rarity, or a clear Color when the rung is bare / unknown
+static func rarity_hue(rarity: String) -> Color:
+	return RARITY_HUE.get(rarity.to_lower(), Color(0, 0, 0, 0))
+
+## the parchment-safe text colour for a name of this rarity (INK when bare)
+static func rarity_ink(rarity: String, fallback := INK) -> Color:
+	return RARITY_INK.get(rarity.to_lower(), fallback)
+
+## a round gem in the icon's own hue with a dark rim so white reads on cream; null when bare
+static func rarity_pip(rarity: String, d := 14.0) -> Control:
+	var hue := rarity_hue(rarity)
+	if hue.a <= 0.0:
+		return null
+	var pip := Panel.new()
+	pip.custom_minimum_size = Vector2(px(d), px(d))
+	pip.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	pip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = hue
+	sb.border_color = INK
+	sb.set_border_width_all(maxi(1, px(2)))
+	sb.set_corner_radius_all(px(d))
+	pip.add_theme_stylebox_override("panel", sb)
+	return pip
+
 ## BORDER and CORNER constants
 const BORDER := 2
 const BORDER_PANEL := 3

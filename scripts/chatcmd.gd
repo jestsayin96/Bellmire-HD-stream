@@ -337,37 +337,32 @@ func _delve(user_id: String) -> String:
     return "%s sets out for the dungeon mouth. (%d in the party)" \
         % [roster.get_hero(user_id)["name"], delve_queue.size()]
 
-## THE QUEUE READ. A channel-point errand ("Send my hero delving") sends a hero to the scar
-## through the town, NOT through !delve, so delve_queue never hears of it. This reads BOTH:
-## the names chat put in, in that order, then anyone the town has on the road or at the mouth.
-## "below, in the scar" is a hero already down - they are not mustering. Needs no hero of its
-## own: a bystander may ask who is going down.
+## THE QUEUE READ - ONE LIST, AND THE UNION IS OUT (B12). D41's source-queueing reached main
+## at 16:58 (town.gd: _on_delve appends to chat.delve_queue before it sets away), so a
+## channel-point errand and a !delve now land in the SAME list, in the order they happened.
+## !muster reads that list and takes no name from anywhere else. The gate proved the premise
+## before the union came out: B11_SOURCE_QUEUEING read YES.
 ##
-## B11 WAS RULED TO DROP THIS UNION AND DID NOT, BECAUSE THE RULING'S PREMISE IS NOT ON MAIN
-## YET. The ruling is right in principle - two places reconciling one truth is the drift D41
-## closed - and it rests on town._on_delve appending to delve_queue at the source. That append
-## exists on `laptop` (D41, b0ce9d8) and NOT on origin/main, which is what this branch builds
-## against: here _on_delve sets away and queues nothing. The B11 gate measured it rather than
-## trusting it - the errand hero's queue read back [] and !muster counted 0 of 1. Dropping the
-## union today would blind !muster to every point-redeemed errand on the live build.
-## DROP IT THE SLOT AFTER D41 REACHES MAIN. tools/_b11_muster.gd measures the source-queueing
-## every run and prints the verdict either way, so nobody has to remember: the run it starts
-## printing B11_SOURCE_QUEUEING YES is the run this union comes out.
+## WHAT IS NOT OUT, AND WHY - the town erases the queue when the DELVE ENDS, not when the
+## party goes below (town.gd: delve.ended -> delve_queue.erase). So for the whole descent the
+## names are still in the queue, and a plain read would stand heroes who are underground at
+## the dungeon mouth and count them in the muster. The away-state is read here for ONE thing:
+## to LEAVE OUT a hero already below. That is an exclusion, not a second source of membership
+## - no name enters the muster from away, so there is nothing left to reconcile.
+## Needs no hero of its own: a bystander may ask who is going down.
 const LINE_WORDS := ["first", "second", "third", "fourth", "fifth", "sixth"]
 
-## is this away-state a hero waiting to go down (not one already below)?
-static func _mustering(state: String) -> bool:
-    var t := state.to_lower()
-    return t.contains("scar") and not t.contains("below")
+## is this away-state a hero already underground, rather than one waiting to go down?
+static func _below(state: String) -> bool:
+    return state.to_lower().contains("below")
 
 func _muster(user_id: String) -> String:
     var uids: Array = []
     for uid in delve_queue:
-        uids.append(String(uid))
-    for uid in away:
         var u := String(uid)
-        if not uids.has(u) and _mustering(String(away[u])):
-            uids.append(u)
+        if away.has(u) and _below(String(away[u])):
+            continue
+        uids.append(u)
     if uids.is_empty():
         return "Nobody at the dungeon mouth. !delve puts your name in."
     var names: Array = []

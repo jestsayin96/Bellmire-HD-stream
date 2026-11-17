@@ -8538,8 +8538,100 @@ Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left un
 TAKE THIS NEXT (06:58 block) gave HUD: gate work or the stand-down; L73/L74 already ticked, all four U48 gate faults closed (U49-U51), L31 remainder waits on the D99 tick (origin/main a2b6f04 shows D99 still not ticked). Lock: last line IDLE 07:51:10 (chat bot), no Godot alive. None launched, lock untouched, none of my seven files edited. I did not invent an item or touch another lane's file.
 NEEDED FROM MR. E: nothing. Seat above the team lead: D99 tick returns the L31 remainder to its owners.
 
+## D-cycle - S14 the seventeenth miniboss (loader) gets its MB_FIT key and its .import sibling, 2026-11-17T08:16:00-06:00 (game build)
+- Row (07:58 TAKE THIS NEXT): add "loader": 1.08 to scripts/delve.gd MB_FIT, copied from ART'S
+  renders/art/minibosses/_fit_report.json pairs.loader.ratio = 1.08 - NOT re-derived. One line, delve.gd:375.
+- Import run committed assets/monsters/minibosses/loader.glb.import. Minibosses now 28 .glb / 28 .import.
+- NOT BUILT: the loader's encumbrance idea. New mechanic; the wiring-only ruling forbids it. No miniboss
+  def exists for "loader" in data/, so it cannot spawn yet - no engine render of it, and none claimed.
+- Lock: opening claim declared :33 this time (corrected in place before Godot launched, 08:08:28).
+  Godot stdout went to FILES (build/_s14/*.log), never an unread pipe.
+- Verdicts: import rc0 0 errors; parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2193;
+  TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16935 raid_in_solid=0/5573 PASS; DELVE_TEST OK
+  9001 frames floor reached 2; D96_FIT OK 70 checks, 14 minibosses; S14_CHECK OK (loader 1.08 vs art
+  1.08; glb 28 import 28; 0 MB_FIT values disagree with art's report).
+- FINDING, NOT ACTED ON: art's report has a pair "snuffer_chibi" (1.06) with no MB_FIT key; "snuffer" is
+  1.06 too, so nothing reads wrong today. Named so the next audit does not rediscover it.
+- Left untouched in the worktree: renders/cycles/d96/*.png and renders/cycles/h29p6/payload.json
+  (gate outputs rewritten by the batteries; not staged).
+
+## C-86 (2026-11-17 CT, clock ~08:2x) - TAKE THIS NEXT row for CONTENT: quartermaster and loader feed lines, barks deepened a seventh time (lore_lines.json only)
+- TAKE THIS NEXT (07:58 CT block) gave CONTENT: keep going in `barks`; arrive and fall lines for the quartermaster and the loader are legitimate and not owed. C-55 and the earlier cycles are done and were not redone.
+- data/lore_lines.json `miniboss_feed.by_key`: +2 keys, `quartermaster` and `loader`, arrive 8 and fall 8 each (32 lines). act and broken omitted on purpose: they belong to mechanics not built (the loader's encumbrance is refused under the wiring-only ruling) and miniboss_lines() returns [] for a missing phase. `_note_c86` added.
+- data/lore_lines.json `barks`: +56 lines (case-insensitive duplicates dropped). enter 208, lord 201, trap 203, hurt 198, drink 194, misfire 198. Plain register, no floor counts.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; existing by_key rows unchanged; all bark entries strings. Raw diff deletions are trailing-comma lines only.
+- CODE WIRING: none for barks. For the new feed keys the reader (delve.gd miniboss_lines) already takes any key; the code lane should fire _miniboss_say("quartermaster"/"loader", "arrive"/"fall") when it adds them to the spawn table alongside MB_FIT (loader 1.08 still owed there). No new .gd touched.
 ## H32 hub standing check (2026-11-17 08:40 CT) - nothing new to build
 Fast-forwarded to origin/hub (3cab4ea), merged origin/main clean (688f44f); the merge touched no web/ file. Passes 1-5 in, H32 ticked WHOLE; queue empty. No new screenshot (web/ byte-identical to the looked-at 02:00 build).
 MEASURED: 520 thumbnails, web/icons 2,434,146 bytes on disk vs 6 MB cap; assets/icons/items unchanged since manifest source commit 2473836, no re-derive owed.
 SECURITY BY GREP: node --check OK; innerHTML only app.js:252 and :298 (page-owned); the one outerHTML/eval-pattern hit is a comment; CSP meta unchanged. Live dot red --live #e5484d.
 Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) left untracked and named here; delete refused on this machine. Not published.
+
+
+## ART - THE HURDLEMAN, an eighteenth miniboss (2026-11-17 09:10 CT)
+Took the plan's 07:58 ART row off `origin/main`, not off the prompt: "an eighteenth is welcome on
+the same terms - measured on a body, six views, through the register harness".
+- **IT CUTS THE ROOM IN TWO.** It plants a hurdle through the middle of your line and the party
+  becomes two fights. Measured first: SEVENTEEN existing ideas parsed out of `minibosses.py` CANON
+  and NOT ONE divides the party. It is not the Porter - being shut in is not being cut in half.
+- Theme **grassland**, chosen off the game's own files (`floorgen.gd` THEMES+BIOMES = 14 themes,
+  `dungeon_hd.gd:737-743` weights): barracks/workshop/mess carry 2 bodies each, every other theme 1.
+- **wear 1.00 extends the ladder** - .15-.95 was full at seventeen creatures, every step checked.
+  Height 2.55 was the free gap.
+- 4 meshes, 1,418 faces, span **3.10 m CORRIDOR-SAFE** (11.0 m clear), **ratio 1.04** vs the posed
+  2.45 m Knight, pair_w 4.96, fits_frame true. Verdict **GREEN**, asked 18 / measured 18,
+  blank+border **54 files, 0 failures**, errors []. Procedural, no pack geometry.
+- SIX PASSES, ONE CHANGE EACH, EVERY ONE OFF A PICTURE. The harness went **RED on its own author**
+  at pass 1 (4.89 m footprint, widest of the eighteen, pair 6.75 against a 5.60 frame) and again at
+  pass 2 (5.64 - a 40 mm miss is a miss) and corrected me on WHERE the width was. Then: the spare
+  panels read as one solid grey billboard, so they were rebuilt as open lattices; the side view had
+  no creature in it at all, so the hurdle moved a metre forward and now stands between the camera
+  and the body, which is the mechanic drawn; the beetle head read as a barrel on the floor, so it
+  became a squared block in front of the panel; and from behind it read TWO-HEADED, so the shoulder
+  spheres came down and went dark.
+- **EIGHT FAULTS NAMED IN WRITING** in `docs/art/MINIBOSSES.md`, worst first: from the back the
+  spares read as a jumble of sticks and the body is behind them; the three-quarter view is a hurdle
+  with a man behind it; the withy head still reads as a visor at pair scale.
+- GAME BUILD, NOT MINE: `scripts/delve.gd` MB_FIT `"hurdleman": 1.04` (measured, in
+  `renders/art/minibosses/_fit_report.json`), static model with no `anims`, and no `.glb.import`
+  sibling - one import run covers hurdleman, loader and quartermaster.
+## B-cycle B26 - STAND-DOWN AS ORDERED; SIX FOR SIX RE-PROVED ON THE NEW MAIN 87bb47a (chat bot, 2026-11-17 08:46-08:53 CT)
+THE ROW SAID NOTHING NEW IS ASSIGNED, so nothing new was invented. The 07:58 TAKE THIS NEXT gave this
+lane: do not chase the hang further, do not take another lane's gate, do not take a Phase 2 system,
+write the stand-down if dry. This is the stand-down, and it carries a battery because main moved 21
+commits since the last one this lane proved anything on (B24 ran on e3ec68a; main is now 87bb47a).
+
+MACHINE CLOCK READ FIRST: 08:47:02 CT. Lock last line IDLE 2026-11-17T08:16:30-06:00 (game build S14).
+NO GODOT PROCESS ALIVE - checked by process, not by the file (tasklist and a PowerShell Get-Process
+sweep, both empty). Claimed at 08:47:32, named a 08:56 finish, started NOTHING after the battery.
+
+EVERY LAUNCH IN THIS BATTERY REDIRECTED STDOUT TO A FILE. That is B25's own finding turned into
+practice the first hour it was available: no Godot in this run ever wrote to an unread pipe.
+
+SIX FOR SIX, ONE BATTERY, 66 SECONDS WALL CLOCK, every exit code rc=0:
+  parse 300 frames  - 0 SCRIPT ERROR, 0 Parse Error, and NO COMMANDS_DATA line (the B18/B23 loader
+                      guards stay silent on healthy data, as they must)
+  L14_TEST OK 22    - both drift directions clean: 64 verbs, missing [], unanswered []
+  TWITCH_PARSE OK   - 8 checks
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands and left docs/COMMANDS.md BYTE-IDENTICAL
+
+THE THREE FILES THIS LANE OWNS ARE UNCHANGED AND SAID SO BY HASH, not by assertion:
+  data/commands.json  f37b1d2c6909  (14753 bytes) - same hash the supervisor confirmed on main
+  docs/COMMANDS.md    1fb9a166c3bf  (5771 bytes)  - unchanged by the real generator
+  scripts/chatcmd.gd  825b76127050  (1018 lines)
+A read-only drift audit beside the gate agreed with it both ways: every one of the 27 command keys
+and all 24 aliases appear in chatcmd.gd, and L14 found no verb without an entry.
+
+ONE THING WORTH THE GAME BUILD LANE'S EYE, NOT A FINDING AND NOT MINE TO FIX: the 300-frame parse run
+brings up the real EventSub client - its tail reads "TWITCH_EVENTSUB subscribed 7 of 7". A plain parse
+gate therefore opens a live socket as bellmirebro every time any lane runs it. Nothing was posted, no
+redemption touched, no bits anywhere near it, and twitch_eventsub.gd is the GAME BUILD's file, so I am
+naming it and not touching it. If that lane wants a parse run that stays offline, that is their line.
+
+NOT TAKEN, NAMED FOR THE EIGHTH CYCLE RUNNING: `twitch_cooldown_s` is still the game build's one line.
+NOT CHASED: the unread-pipe hang. The row said leave it; the condition is known and that is enough.
+NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
+NEEDED FROM MR. E: nothing.

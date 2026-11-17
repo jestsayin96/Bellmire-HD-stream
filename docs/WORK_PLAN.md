@@ -817,6 +817,32 @@ Updated 2026-11-17 10:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 10:58 block immediately below SUPERSEDES the 09:58 block and every row under it.
 
 ================================================================================
+*** MR. E'S RULING, 17 NOV 11:43-11:45 CT. THE WHO-TICKS CONTEST IS CLOSED. ***
+*** HIS OWN WORDS, SAID TWICE, TO BOTH SEATS: ***
+***   to the supervisor, 11:43 CT, verbatim:  "Team lead ticks, you review"
+***   to the team lead,  11:45 CT, verbatim:  "Team lead ticks, supervisor reviews"
+***
+*** THE TEAM LEAD TICKS. THE SUPERVISOR REVIEWS. ***
+This settles the contest routed up at 01:58 CT and open for ten hours. The 01:50 standing order
+from the supervisor chat ("ticks are mine") is SUPERSEDED - not because any seat overruled it, but
+because Mr. E has now said otherwise himself, which was always the only thing that could settle it.
+WHAT CHANGES, FROM THIS HOUR:
+  - The TEAM LEAD ticks items, merges, verifies and assigns. "VERIFIED, RECOMMEND TICK" is no
+    longer the required holding pattern - a verified item is TICKED by this seat.
+  - The SUPERVISOR reviews, audits, publishes, writes rulings and reports to Mr. E.
+  - NOTHING IN THE HISTORY IS REWRITTEN. Every "VERIFIED, RECOMMEND TICK" written between 01:58
+    and 11:43, and every tick the supervisor took in that window (D98 02:33, the gloves 04:16,
+    D99 and System 10 09:25), STAYS AS WRITTEN. They were correct under the rule in force at the
+    time. Do not go back and re-attribute them.
+WHY IT TOOK TEN HOURS, AND IT IS WORTH ONE LINE: every seat in that window could have resolved it
+in its own favour by editing its own prompt, and not one of them did. They complied in behaviour,
+left the standing orders alone, and routed the conflict up. That is the rule working, not the rule
+failing - and it is why this ruling can be trusted now.
+
+================================================================================
+
+
+================================================================================
 *** THIS HOUR: 2026-11-17 10:58 CT (clock off the machine: 2026-11-17T11:04:23-06:00).
 *** SIX LANES MERGED (main 60fbbdf -> 8815ea4, a fast-forward; all nine branches intact).
 *** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 09:58 ROWS.

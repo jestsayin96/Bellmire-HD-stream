@@ -8345,3 +8345,9 @@ said nothing. No secrets written anywhere.
 - data/lore_lines.json `barks`: +65 lines. enter +11, lord +10, trap +11, hurt +10, drink +12, misfire +11. Counts now enter 186, lord 179, trap 182, hurt 181, drink 175, misfire 178. Plain register, no floor counts. Case-insensitive duplicates dropped.
 - VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings.
 - CODE WIRING: none. The existing `barks` reader picks the new lines up.
+
+## H32 hub standing check (2026-11-17 06:38 CT) - nothing new to build
+Fast-forwarded to origin/hub (54d5935), merged origin/main clean (d95391d). `git diff` of web/ and docs/HUB_SECURITY.md vs origin/main is EMPTY and across the ff was EMPTY: web/ is byte-identical to the looked-at build; no new screenshot (a picture of an unchanged build proves nothing new). Queue empty, passes 1-5 in.
+MEASURED: web/icons 2,434,146 bytes (unchanged from 05:40) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY.
+SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252, :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src 'none' present. Live dot red --live #e5484d.
+Scratch (_h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose; delete refused on this machine. Not published.

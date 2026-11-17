@@ -1,0 +1,576 @@
+{
+ "ok": true,
+ "errors": [],
+ "res": [
+  840,
+  1200
+ ],
+ "views": [
+  "front",
+  "side"
+ ],
+ "metric": "percent of the hero's own pixels the knuckle changes",
+ "stream_div": 3,
+ "cells": [
+  {
+   "key": "baker_mitts",
+   "name": "Baker's Mitts",
+   "cost": 200,
+   "variant": 1,
+   "orn": 0.0,
+   "dials": {
+    "cut": "mitt",
+    "variant": 1,
+    "cuff": 0.1244,
+    "reach": 0.1244,
+    "flare": 1.3434,
+    "knuck": 0.1109,
+    "shell": 1.7433,
+    "plates": 0,
+    "metal": false,
+    "fingers": 0,
+    "lames": 0,
+    "knuck_kind": "dome",
+    "fplate": 0,
+    "stepped": true,
+    "tail": 0.0,
+    "skew": 0.3009,
+    "cop": false,
+    "lip": false
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 172,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.191,
+      "changed": 2903,
+      "sil_pct": 1.026,
+      "sil_px": 2501,
+      "hero_px": 243680,
+      "peak": 48.63
+     },
+     "stream": {
+      "pct": 1.279,
+      "changed": 350,
+      "sil_pct": 1.023,
+      "sil_px": 280,
+      "hero_px": 27367,
+      "peak": 46.53
+     },
+     "glove_verts_on": 376,
+     "glove_verts_off": 204,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 4.874,
+      "changed": 1334,
+      "sil_pct": 1.82,
+      "sil_px": 498,
+      "hero_px": 27367,
+      "peak": 57.25
+     }
+    },
+    "side": {
+     "knuckle_verts": 172,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.414,
+      "changed": 2960,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 30.2
+     },
+     "stream": {
+      "pct": 1.534,
+      "changed": 361,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 28.37
+     },
+     "glove_verts_on": 376,
+     "glove_verts_off": 204,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 4.395,
+      "changed": 1034,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 37.95
+     }
+    }
+   }
+  },
+  {
+   "key": "carder_gloves",
+   "name": "Carder's Gloves",
+   "cost": 200,
+   "variant": 3,
+   "orn": 0.0,
+   "dials": {
+    "cut": "vambrace",
+    "variant": 3,
+    "cuff": 0.5906,
+    "reach": 0.5906,
+    "flare": 1.5427,
+    "knuck": 0.1498,
+    "shell": 1.3512,
+    "plates": 1,
+    "metal": true,
+    "fingers": 4,
+    "lames": 3,
+    "knuck_kind": "dome",
+    "fplate": 0,
+    "stepped": false,
+    "tail": 0.0,
+    "skew": 0.3154,
+    "cop": true,
+    "lip": false
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 172,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.007,
+      "changed": 2451,
+      "sil_pct": 0.915,
+      "sil_px": 2226,
+      "hero_px": 243407,
+      "peak": 67.45
+     },
+     "stream": {
+      "pct": 1.068,
+      "changed": 292,
+      "sil_pct": 0.911,
+      "sil_px": 249,
+      "hero_px": 27342,
+      "peak": 67.41
+     },
+     "glove_verts_on": 964,
+     "glove_verts_off": 792,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 5.866,
+      "changed": 1604,
+      "sil_pct": 1.693,
+      "sil_px": 463,
+      "hero_px": 27342,
+      "peak": 67.41
+     }
+    },
+    "side": {
+     "knuckle_verts": 172,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.421,
+      "changed": 2975,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 39.22
+     },
+     "stream": {
+      "pct": 1.517,
+      "changed": 357,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 33.86
+     },
+     "glove_verts_on": 964,
+     "glove_verts_off": 792,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 6.04,
+      "changed": 1421,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 36.34
+     }
+    }
+   }
+  },
+  {
+   "key": "bellrope_wraps",
+   "name": "Bellringer's Wraps",
+   "cost": 240,
+   "variant": 4,
+   "orn": 0.222,
+   "dials": {
+    "cut": "wrap",
+    "variant": 4,
+    "cuff": 0.1713,
+    "reach": 0.1713,
+    "flare": 1.1603,
+    "knuck": 0.0965,
+    "shell": 1.3729,
+    "plates": 0,
+    "metal": false,
+    "fingers": 4,
+    "lames": 0,
+    "knuck_kind": "studs",
+    "fplate": 0,
+    "stepped": false,
+    "tail": 0.69,
+    "skew": 0.6506,
+    "cop": false,
+    "lip": false
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 592,
+     "has_knuckle": true,
+     "render": {
+      "pct": 0.411,
+      "changed": 989,
+      "sil_pct": 0.35,
+      "sil_px": 843,
+      "hero_px": 240757,
+      "peak": 69.02
+     },
+     "stream": {
+      "pct": 0.448,
+      "changed": 121,
+      "sil_pct": 0.363,
+      "sil_px": 98,
+      "hero_px": 27029,
+      "peak": 68.06
+     },
+     "glove_verts_on": 830,
+     "glove_verts_off": 238,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 3.322,
+      "changed": 898,
+      "sil_pct": 0.659,
+      "sil_px": 178,
+      "hero_px": 27029,
+      "peak": 68.06
+     }
+    },
+    "side": {
+     "knuckle_verts": 592,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.344,
+      "changed": 2813,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 29.02
+     },
+     "stream": {
+      "pct": 1.462,
+      "changed": 344,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 24.18
+     },
+     "glove_verts_on": 830,
+     "glove_verts_off": 238,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 3.311,
+      "changed": 779,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 38.04
+     }
+    }
+   }
+  },
+  {
+   "key": "quarreller_gloves",
+   "name": "Quarreller's Tabs",
+   "cost": 280,
+   "variant": 3,
+   "orn": 0.444,
+   "dials": {
+    "cut": "vambrace",
+    "variant": 3,
+    "cuff": 0.6948,
+    "reach": 0.6948,
+    "flare": 1.988,
+    "knuck": 0.2737,
+    "shell": 1.409,
+    "plates": 2,
+    "metal": true,
+    "fingers": 4,
+    "lames": 4,
+    "knuck_kind": "none",
+    "fplate": 1,
+    "stepped": true,
+    "tail": 0.0,
+    "skew": 0.4131,
+    "cop": true,
+    "lip": true
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 0,
+     "has_knuckle": false,
+     "render": {
+      "pct": 0.0,
+      "changed": 0,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 243697,
+      "peak": 0.0
+     },
+     "stream": {
+      "pct": 0.0,
+      "changed": 0,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 27377,
+      "peak": 0.0
+     },
+     "glove_verts_on": 1330,
+     "glove_verts_off": 1330,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 6.896,
+      "changed": 1888,
+      "sil_pct": 1.793,
+      "sil_px": 491,
+      "hero_px": 27377,
+      "peak": 78.21
+     }
+    },
+    "side": {
+     "knuckle_verts": 0,
+     "has_knuckle": false,
+     "render": {
+      "pct": 0.0,
+      "changed": 0,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 0.0
+     },
+     "stream": {
+      "pct": 0.0,
+      "changed": 0,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 0.0
+     },
+     "glove_verts_on": 1330,
+     "glove_verts_off": 1330,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 7.893,
+      "changed": 1857,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 47.23
+     }
+    }
+   }
+  },
+  {
+   "key": "forge_grips",
+   "name": "Forgemaster's Grips",
+   "cost": 300,
+   "variant": 2,
+   "orn": 0.556,
+   "dials": {
+    "cut": "studded",
+    "variant": 2,
+    "cuff": 0.4758,
+    "reach": 0.4758,
+    "flare": 1.7955,
+    "knuck": 0.4558,
+    "shell": 1.3981,
+    "plates": 4,
+    "metal": true,
+    "fingers": 4,
+    "lames": 3,
+    "knuck_kind": "spikes",
+    "fplate": 2,
+    "stepped": false,
+    "tail": 0.0,
+    "skew": 0.5606,
+    "cop": false,
+    "lip": false
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 188,
+     "has_knuckle": true,
+     "render": {
+      "pct": 0.548,
+      "changed": 1332,
+      "sil_pct": 0.469,
+      "sil_px": 1140,
+      "hero_px": 243003,
+      "peak": 87.06
+     },
+     "stream": {
+      "pct": 0.611,
+      "changed": 167,
+      "sil_pct": 0.472,
+      "sil_px": 129,
+      "hero_px": 27314,
+      "peak": 81.26
+     },
+     "glove_verts_on": 1260,
+     "glove_verts_off": 1072,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 5.616,
+      "changed": 1534,
+      "sil_pct": 1.49,
+      "sil_px": 407,
+      "hero_px": 27314,
+      "peak": 81.26
+     }
+    },
+    "side": {
+     "knuckle_verts": 188,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.339,
+      "changed": 2802,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 40.0
+     },
+     "stream": {
+      "pct": 1.441,
+      "changed": 339,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 29.37
+     },
+     "glove_verts_on": 1260,
+     "glove_verts_off": 1072,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 5.861,
+      "changed": 1379,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 46.67
+     }
+    }
+   }
+  },
+  {
+   "key": "raidbreaker_gloves",
+   "name": "Raidbreaker's Gauntlets",
+   "cost": 380,
+   "variant": 0,
+   "orn": 1.0,
+   "dials": {
+    "cut": "gauntlet",
+    "variant": 0,
+    "cuff": 0.6385,
+    "reach": 0.6385,
+    "flare": 2.7058,
+    "knuck": 0.8148,
+    "shell": 1.5275,
+    "plates": 6,
+    "metal": true,
+    "fingers": 4,
+    "lames": 4,
+    "knuck_kind": "ridge",
+    "fplate": 4,
+    "stepped": false,
+    "tail": 0.0,
+    "skew": 0.1728,
+    "cop": true,
+    "lip": true
+   },
+   "views": {
+    "front": {
+     "knuckle_verts": 236,
+     "has_knuckle": true,
+     "render": {
+      "pct": 1.451,
+      "changed": 3578,
+      "sil_pct": 1.121,
+      "sil_px": 2766,
+      "hero_px": 246656,
+      "peak": 90.98
+     },
+     "stream": {
+      "pct": 1.543,
+      "changed": 428,
+      "sil_pct": 1.179,
+      "sil_px": 327,
+      "hero_px": 27733,
+      "peak": 86.75
+     },
+     "glove_verts_on": 1702,
+     "glove_verts_off": 1466,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 8.167,
+      "changed": 2265,
+      "sil_pct": 2.913,
+      "sil_px": 808,
+      "hero_px": 27733,
+      "peak": 86.75
+     }
+    },
+    "side": {
+     "knuckle_verts": 236,
+     "has_knuckle": true,
+     "render": {
+      "pct": 2.786,
+      "changed": 5830,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 209294,
+      "peak": 41.57
+     },
+     "stream": {
+      "pct": 2.801,
+      "changed": 659,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 41.22
+     },
+     "glove_verts_on": 1702,
+     "glove_verts_off": 1466,
+     "glove_verts_none": 0,
+     "control_whole_glove": {
+      "pct": 8.752,
+      "changed": 2059,
+      "sil_pct": 0.0,
+      "sil_px": 0,
+      "hero_px": 23527,
+      "peak": 49.15
+     }
+    }
+   }
+  }
+ ],
+ "blank": {
+  "files": 24,
+  "failures": []
+ },
+ "any_knuckle_geometry": true,
+ "does_not_read_at_stream": [],
+ "views_blind_to_silhouette": [
+  "baker_mitts/side control sil 0.000%",
+  "carder_gloves/side control sil 0.000%",
+  "bellrope_wraps/side control sil 0.000%",
+  "quarreller_gloves/side control sil 0.000%",
+  "forge_grips/side control sil 0.000%",
+  "raidbreaker_gloves/side control sil 0.000%"
+ ]
+}

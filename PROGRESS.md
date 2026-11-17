@@ -8931,3 +8931,6 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
+
+## H32 hub standing check (2026-11-17 12:40 CT) - nothing new to build
+Merged origin/hub (0cee65c) and origin/main (0d4de62) clean; web/ and docs/HUB_SECURITY.md byte-unchanged since 56f4cd0 (git diff empty). Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap, 520 thumbnails; source assets/icons/items last changed 4ab066d (01:02 CT), no drift. No new screenshot (web/ unchanged). Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked, named here: delete refused on this machine. Not published by me.

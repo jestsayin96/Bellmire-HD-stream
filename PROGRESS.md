@@ -8636,7 +8636,8 @@ NO LIVE TWITCH TEST THIS RUN: nothing was redeemed, nothing cheered, 0 bits, no 
 bellmirebro or anyone else. Logs (_b26logs) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
 
-## D-cycle - S15 the eighteenth miniboss (hurdleman) gets its MB_FIT key and its .import sibling, 2026-11-17T09:21:00-06:00 (game build)
+## D-cycle - S15 the eighteenth miniboss (hurdleman) gets its MB_FIT key and its .import sibling, 2026-11-17T09:19:00-06:00 (game build)
+- STAMP CORRECTED: first written as 09:21, a FUTURE STAMP - the machine read 09:19:35. Mine, named.
 - Row (08:58 TAKE THIS NEXT): add "hurdleman": 1.04 to scripts/delve.gd MB_FIT, copied from ART'S
   renders/art/minibosses/_fit_report.json pairs.hurdleman.ratio = 1.04 (verdict GREEN, blank_check 54 files / 0
   failures) - NOT re-derived. One line, delve.gd:375. Looked at art's hurdleman/hero_front.png: pair height reads right.

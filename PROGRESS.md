@@ -7529,3 +7529,52 @@ hub's lazy-loading set as a property rather than an attribute.
 
 NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
 created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
+
+## B-cycle B17 - THE UNION READ IS OUT OF THE `!delve` GUARD TOO, AND THE GUARD STILL HOLDS (chat bot, 2026-11-16 22:45-22:51 CT)
+- ITEM GIVEN: the plan's CHAT BOT row (team lead, 22:05 CT): "TAKE THE UNION-READ DROP. YOUR OWN GATE
+  UNBLOCKED IT THIS HOUR... Drop the union read, keep the exclusion, and prove it: B11_MUSTER must stay
+  OK bad=0 and the delve-away guard must still hold." Nothing invented, nothing ticked.
+- WHAT WAS ALREADY DONE AND WHAT WAS LEFT. B12 took the union out of `_muster` (one list, `away` read
+  only through `_below()` as an exclusion). The union that was STILL IN was in the guard:
+  `if user_id in delve_queue or away.has(user_id)`. B11 kept that term for an honest reason - on main
+  `town._on_delve` set `away` and queued NOTHING, so the queue alone let a point-redeemed errand hero
+  !delve her way into a SECOND slot. D41 moved the append to the source and it reached main, which is
+  what B16's B11_SOURCE_QUEUEING NO->YES recorded. So the term is now dead.
+- MEASURED, NOT BELIEVED, BEFORE THE EDIT: `away` has exactly THREE writers in town.gd - 5452 on the
+  road, 5468 at the mouth, 5491 below - and ALL THREE are downstream of the single append at 5450
+  (`if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)`). `delve_queue` has exactly one
+  eraser outside chatcmd (5496) and it sits beside `away.erase(uid)` at delve.ended. So `away` is a
+  SUBSET of `delve_queue`, and `or away.has()` cannot catch a hero the queue does not already hold.
+- WHAT CHANGED: scripts/chatcmd.gd only. `_delve` tests membership against `delve_queue` alone. `away`
+  is still read there to WORD the refusal - a hero on the road or below is told where she actually is
+  instead of being told she waits at the mouth. Same shape as the muster's exclusion: it narrows an
+  answer, it is never a second source of membership. The 20-line reason is in the file above the test.
+- GATES, ALL FIVE GREEN, ONE BATTERY 22:49-22:50, VERDICT LINES NOT RETURN CODES:
+    parse `--headless --path W6 --quit-after 300`   rc=0, 0 SCRIPT ERROR / 0 Parse Error
+    tools/_b11_muster.gd WITHOUT `--quit`           B11_MUSTER OK bad=0, B11_SOURCE_QUEUEING YES
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK
+    tools/_l14_test.gd                              L14_TEST OK (64 verbs, missing [], unanswered [])
+    tools/_commands_doc.gd                          COMMANDS_DOC wrote 27, docs/COMMANDS.md byte-identical
+- THE GUARD IS PROVEN BY THE SAME GATE THAT WOULD CATCH THE DROP GOING WRONG, which is why no new gate
+  was needed. The errand hero 5101 is NEVER queued by chat in that harness - only by the town's source
+  append. With the union gone, "the guard refused her a second slot", "she is not sent out twice" and
+  "she is told where she actually is" can only pass BECAUSE the queue caught her. If D41 ever leaves
+  this branch, B11_SOURCE_QUEUEING reads NO, that assertion fails, and the gate goes red instead of the
+  guard going quietly blind. The free hero still descends ("IdleFan sets out... (3 in the party)") - the
+  drop locks nobody out, and a hero below is still excluded from the muster while her name stays queued.
+- ONE THING I TRIED AND WAS RIGHT TO BE STOPPED FROM DOING: I started to add a standing
+  `away is a subset of delve_queue` assertion to tools/_b11_muster.gd. tools/ is not this lane's and the
+  write was refused. The premise is recorded above and carried by B11_SOURCE_QUEUEING; whoever owns
+  tools/ may want it as an explicit line. Nothing was left half-edited - the file is untouched.
+- AND MY OWN INSTRUMENT WAS THE LIAR AGAIN. A homemade alias-aware drift check over the match blocks
+  reported 3 verbs in code with no entry and 17 entries with no code. L14_TEST - the real instrument -
+  reads 64 verbs, missing [], unanswered []. The regex could not see wrapped match cases or
+  `if verb in [...]` forms. NOT a finding; reported so nobody chases it. No command was added, removed
+  or reworded this cycle, so the doc could not drift.
+- LOCK: read at 22:45 - last line IDLE 22:18:13 (game build D97, Godot closed); no Godot process alive
+  (Get-Process, empty). Claimed RUNNING 22:49:41-06:00, released IDLE 22:50:52-06:00. The battery ran
+  22:49-22:50 and the window is :45-:52, so it finished INSIDE the window. `_b17_battery.log` deleted.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced
+  or deleted, nothing posted as any account, no channel setting touched. The parse run joins
+  #jestsayin96 as bellmirebro and says nothing, as every parse run does.
+- NEEDED FROM THE GAME BUILD: nothing in twitch_eventsub.gd. NEEDED FROM MR. E: nothing.

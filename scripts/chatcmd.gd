@@ -315,16 +315,25 @@ func _delve(user_id: String) -> String:
     var gate := _needs(user_id, func(): return "ok")
     if gate != "ok":
         return gate
-    # B11: THE AWAY-GUARD IS REAL, AND THE GATE IS WHAT PROVED IT. B9 would not guess at this
-    # because a wrong guard locks viewers out of !delve on stream. The evidence settles it:
-    # `away` has exactly THREE writers (town._on_delve on the road, at the mouth, and
-    # _begin_delve below) and ONE eraser, at delve.ended beside the queue's own erase. There
-    # is no errand, shop or craft that sets it, so a hero with an away-state is on a delve and
-    # nothing else - guarding on it cannot cost anyone a descent.
-    # It is not redundant with the queue either: on `main` town._on_delve sets away WITHOUT
-    # queueing (D41 moved the append to the source on `laptop` only), so the queue alone lets
-    # a point-redeemed errand hero !delve her way into a SECOND slot. Checked both ways.
-    if user_id in delve_queue or away.has(user_id):
+    # B17: THE UNION IS OUT OF THE GUARD TOO, AND THE GUARD STILL HOLDS. B11 kept
+    # `or away.has(user_id)` for one honest reason: on `main` town._on_delve set `away`
+    # WITHOUT queueing, so the queue alone let a point-redeemed errand hero !delve her way
+    # into a SECOND slot. D41 moved the append to the source and it reached main - town.gd
+    # _on_delve now appends to chat.delve_queue BEFORE it writes the away-state - so every
+    # away-state is now carried by a name that is already in the queue:
+    #   `away` has exactly THREE writers (on the road 5452, at the mouth 5468, below 5491),
+    #   all downstream of the one append at 5450, and ONE eraser at delve.ended which erases
+    #   the queue entry in the same breath. `delve_queue` has exactly ONE other eraser and it
+    #   is that same line. So away is a SUBSET of the queue, and `or away.has()` can no longer
+    #   catch a hero the queue does not already hold.
+    # THE DROP IS MEMBERSHIP ONLY. `away` is still read here to WORD the refusal - a hero on
+    # the road or below is told where she actually is instead of being told she waits at the
+    # mouth. That is the same shape as the muster's exclusion: it narrows an answer, it is
+    # never a second source of membership. The subset premise is an ASSERTION in
+    # tools/_b11_muster.gd, not a belief: plant an away-only uid and !delve must still refuse
+    # to send her out, so if a future writer ever sets `away` without queueing, the gate says
+    # so rather than the guard going quietly blind.
+    if user_id in delve_queue:
         var qn := String(roster.get_hero(user_id)["name"])
         if away.has(user_id):
             return "%s is %s." % [qn, away[user_id]]

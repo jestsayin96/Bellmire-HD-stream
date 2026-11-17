@@ -18,7 +18,10 @@ extends SceneTree
 var _t: Node3D
 var _f := 0
 var _bad := 0
+var _checks := 0
+var _verdict := false
 func _ck(ok: bool, what: String) -> void:
+	_checks += 1
 	print("  ", "ok   " if ok else "FAIL ", what)
 	if not ok:
 		_bad += 1
@@ -113,5 +116,19 @@ func _process(_dt: float) -> bool:
 	_ck(r3.contains("sets out"), "a hero with no away-state still descends - the guard locks nobody out")
 	_ck(c.delve_queue.has("5103"), "and her name goes in")
 
-	print("B11_MUSTER ", "OK" if _bad == 0 else "FAIL", " bad=", _bad)
+	# B22 (B21 Faults 3+4): the count is printed, a floor sits under it, and rc agrees.
+	if _checks < 20:
+		_bad += 1
+		print("  FAIL only %d checks ran - below the floor of 20" % _checks)
+	_verdict = true
+	print("B11_MUSTER ", "OK" if _bad == 0 else "FAIL", " bad=", _bad, " checks=", _checks)
+	quit(0 if _bad == 0 else 1)
 	return true
+
+## B22 (B21): this gate judges at frame 60. An early quit or a cap printed NOTHING at all -
+## silence, which B14 caught only because a reader noticed a line that was not there. The absence
+## names itself now, and it is NO VERDICT, never FAIL: a run that never reached frame 60 measured
+## nothing about the muster.
+func _finalize() -> void:
+	if not _verdict:
+		print("B11_MUSTER NO VERDICT - ended at frame %d of 60, %d checks ran" % [_f, _checks])

@@ -4,8 +4,10 @@ extends SceneTree
 ## short and detailed; typos get a nudge, other bots' commands are left alone;
 ## friendly gold replies; docs/COMMANDS.md matches the data. Prints L14_TEST OK.
 var _fail := 0
+var _checks := 0
 
 func _ok(c: bool, what: String) -> void:
+	_checks += 1
 	print(("  ok  " if c else "  FAIL ") + what)
 	if not c:
 		_fail += 1
@@ -96,5 +98,10 @@ func _initialize() -> void:
 		if not before.contains("`!%s`" % k) or not before.contains(String(cs[k]["what"]).substr(0, 30)):
 			ok_doc = false
 	_ok(ok_doc, "docs/COMMANDS.md carries every command from the data")
-	print("L14_TEST OK" if _fail == 0 else "L14_TEST FAIL %d" % _fail)
-	quit()
+	# B22 (B21 Faults 3+4): the count is printed, a floor sits under it, and rc agrees.
+	# Twenty-two checks and two checks used to read identically in the log.
+	if _checks < 20:
+		_fail += 1
+		print("  FAIL only %d checks ran - below the floor of 20" % _checks)
+	print(("L14_TEST OK (%d checks)" % _checks) if _fail == 0 else ("L14_TEST FAIL %d (%d checks)" % [_fail, _checks]))
+	quit(0 if _fail == 0 else 1)

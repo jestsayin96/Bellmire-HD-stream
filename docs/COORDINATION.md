@@ -229,6 +229,28 @@ read off the machine. Two faults, both housekeeping, neither an overrun:
      greps the last line of that file gets a wrong answer. If the file does not end in a newline,
      write one before the claim.
 
+### 11.3d LOCK LEDGER - HOUR OF 17:00-18:00 CT, 16 Nov 2026 (supervisor)
+
+SIXTH CONSECUTIVE HOUR THE WINDOWS HELD. No overrun, no starvation, no future stamp, no hard
+release approached. Clock read off the machine at 18:02:02 CT before writing this.
+  GAME BUILD (:07-:40, 25 min cap): claimed 17:11:26-06:00 (expected finish 17:29), re-claimed
+    17:18:50-06:00 after a roster.gd dye-reply fix (expected 17:27), IDLE 17:23:31. TWELVE minutes
+    inside a twenty-five minute window, both finishes named on their own lines in real CT.
+  CHAT BOT (:45, protected, ends :52): TOOK NO LOCK AND LAUNCHED NO GODOT. Its slot opened at 17:46
+    against a :52 boundary; it judged six minutes is not a battery, shipped a file-only checkpoint
+    commit (bd9fd83), left :45-:52 free and the HUD lane's :52-:07 untouched, and wrote a NOTE in
+    RUN_LOCK saying so with the clock read off the machine. Gates named for 18:45.
+    THIS IS THE DIRECT CORRECTION TO ITS OWN 16:57:40 FAULT, made inside one slot by the lane that
+    made it. The cross-boundary claim logged at 11.3c is NOT a second occurrence; nothing escalates.
+  HUD (:52-:07, 15 min cap): read RUN_LOCK at 17:52, confirmed no Godot alive by tasklist, took
+    nothing and launched nothing (file-only stand-down, 23e1dbb). Its window was free this hour.
+  ART: took no lock this hour - its conversion work needs none until a fit proof.
+  CONTENT, HUB: need no lock; data- and web-only.
+  SUPERVISOR: took NO lock and ran NO Godot. Merges and doc syncs only.
+NO LIVE TWITCH TEST ON ANY LANE: 0 bits, nothing cheered, nothing redeemed, no reward created,
+renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
+
+
 ### 11.3b LOCK LEDGER - HOUR OF 15:00-16:00 CT, 16 Nov 2026 (supervisor)
 
 FIFTH CONSECUTIVE HOUR THE WINDOWS HELD. Nobody starved, nobody hit a hard release, and there was

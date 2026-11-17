@@ -801,11 +801,43 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "jointer": {
+   "title": "The Jointer",
+   "theme": "workshop",
+   "idea": "IT COMES APART AND BOTH HALVES KEEP WORKING - drive the pin or break it and there are two",
+   "wear": 0.35,
+   "feed_line": "It is pinned together.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1005,
+   "size": [
+    2.18,
+    1.1,
+    2.25
+   ],
+   "footprint_span": 2.18,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6600336186612612,
+    "ortho": 2.647186756134033,
+    "clip": [
+     6.537636756896973,
+     18.037967681884766
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 42,
+  "files": 45,
   "failures": []
  }
 }

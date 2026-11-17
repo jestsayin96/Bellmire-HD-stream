@@ -65,6 +65,23 @@ func _check_rows(sc: float) -> void:
 			_bad += 1; print("FAIL bare cut, no ellipsis @", sc, ": ", a.text)
 		print("ROW @%.2f name %.0f/%.0f px %s | %s" % [sc, full, a.size.x, "ELLIPSIS" if full > a.size.x + 0.5 else "fits", a.text.left(28)])
 
+func _check_frame(img: Image, sc: float) -> void:
+	## U57: a frame a human would fail as BLANK or HERO-LESS must fail the gate too. Sample a 48x27 grid;
+	## count distinct quantised colours and the share of samples that differ from the most common one.
+	var seen := {}
+	var w := img.get_width(); var h := img.get_height()
+	for gy in 27:
+		for gx in 48:
+			var c := img.get_pixel(int((gx + 0.5) * w / 48.0), int((gy + 0.5) * h / 27.0))
+			var k := "%d,%d,%d" % [int(c.r * 15.0), int(c.g * 15.0), int(c.b * 15.0)]
+			seen[k] = int(seen.get(k, 0)) + 1
+	var top := 0
+	for k in seen: top = maxi(top, int(seen[k]))
+	var share := 1.0 - float(top) / (48.0 * 27.0)
+	print("FRAME @%.2f distinct %d non-dominant %.1f%%" % [sc, seen.size(), share * 100.0])
+	if seen.size() < 8 or share < 0.05:
+		_bad += 1; print("FAIL frame reads blank @", sc)
+
 func _process(_d: float) -> bool:
 	_f += 1
 	if _f == 30:
@@ -96,6 +113,7 @@ func _process(_d: float) -> bool:
 	if _f % 40 == 20:
 		var img := root.get_viewport().get_texture().get_image()
 		img.save_png(_out + "u55_%d.png" % int(sc * 100))
+		_check_frame(img, sc)
 		_check_rows(sc)
 		print("shot ", sc)
 		_step += 1

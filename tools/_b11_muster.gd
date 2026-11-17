@@ -70,7 +70,13 @@ func _process(_dt: float) -> bool:
 	var m2: String = c._muster("5102")
 	print("  muster: ", m2)
 	_ck(m2.contains("(2)"), "!muster counts 2 - both paths in one list")
-	_ck(m2.find("ChatFan") < m2.find("ErrandFan"), "chat's own names come first, in chat order")
+	# SUPERVISOR RULING 2026-11-16 18:58 CT. The union-era line asserted the reverse of what the
+	# muster now does. B12 made delve_queue the ONE source, read in the order things happened:
+	# the errand (5101) is queued at the source FIRST, the !delve (5102) arrives SECOND. The old
+	# line demanded chat-first because the muster used to be two lists glued together, and it
+	# would have the muster tell a viewer who was first in the queue that she is second.
+	# THE CODE WAS RIGHT AND THE GATE WAS STALE. The assertion is now the queue's own order.
+	_ck(m2.find("ErrandFan") < m2.find("ChatFan"), "the muster prints in delve_queue order - the errand queued first")
 
 	# a bystander gets the invitation, not a place, and does not inflate the count
 	var m3: String = c._muster("5103")

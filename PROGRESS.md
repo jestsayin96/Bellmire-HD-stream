@@ -7176,3 +7176,38 @@ after this lane starved the HUD lane last hour. The gates are the first thing at
   deleted, nothing posted as any account, no channel setting touched. The parse run joins #jestsayin96 and opens
   EventSub as it always has (bot token valid, 7 of 7 subscriptions) and posts nothing.
 - Files: PROGRESS.md only. scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md unchanged this cycle.
+
+## SUPERVISOR 18:58 CT - FIVE OF SIX SHIPPED, ALL SIX MERGED; D70 TICKED WHOLE; H32 WRITTEN IN AND THE HUB STAND-DOWN LIFTED
+- MERGED TO MAIN: laptop d13ce5a, content 75520c7, art c2532ea, hub b4bf9b4, hud-ui aad05bd, chatbot 0f0a345.
+  PROGRESS.md conflicts resolved by KEEPING BOTH SIDES and stripping only marker lines; no cycle renumbered.
+- TICKED: **D70 WHOLE** (.2's rare-find and felled-a-lord moments landed; the 45 s MOMENT_GAP known-imperfect closed in
+  the same commit by ALWAYS_TOLD; D702_TEST OK 14, D70_TEST OK 16). **REGISTER CONVERSION 10 OF 14, the Sower** (ratio
+  0.98, pair 5.16 m, footprint 3.29 m corridor-safe, blank check 0 failures; and the carried leg fault PROVEN on the
+  first creature whose legs nothing covers - the test the art lane named for itself last hour). **C-73** (40 shape-first
+  lord uniques; every pre-existing entry identical on a parsed compare; mechanics written precisely enough to build
+  from). **B12 AND B13** (five of six gates green in 95 seconds of lock). **U42**, the HUD stand-down accounting, which
+  was the whole item set for that lane.
+- NOT TICKED: THE HUB SHIPPED NOTHING. `hub` b4bf9b4 is a plan sync plus a merge of main - no H32 pass, no PROGRESS
+  line, no web/ change. Its item changed at 18:12 and it fired at 18:37. Recorded, not escalated.
+- SUPERVISOR RULING + EDIT, tools/_b11_muster.gd:73. The chat bot's one red was a UNION-ERA ASSERTION, not a code
+  fault: `m2.find("ChatFan") < m2.find("ErrandFan")` was true only while the muster was two lists glued together. B12
+  made delve_queue the one source, read in the order things happened; in the gate's own scenario the errand is queued
+  at the SOURCE first (5101) and the !delve arrives second (5102), so the honest print is "ErrandFan, ChatFan" and the
+  stale line demanded the reverse - it would have had the muster tell a viewer who was first that she is second. I made
+  the one-line change MYSELF with the ruling written into the file above it; the chat bot was right not to rewrite a
+  red assertion inside the run that produced it (tools/ is not its lane). B11_MUSTER goes green or red at 19:45 and if
+  it goes red the fault is mine, in public.
+- H32 WRITTEN INTO THE PLAN as Mr. E's own item (18:11 CT: "try to make the hub feel like you are navigating on
+  twitch"), with the hub stand-down LIFTED and the HUB row of TAKE THIS NEXT set to H32 PASS ONE (the shell). Twitch's
+  STRUCTURE, not its colours: the palette ruling, H13's no-scroll ruling, every security invariant, the ARIA rule (a
+  rail is a LIST, not a tablist) and responsive-to-one-column all stand unrelaxed. One new colour permitted - the live
+  dot. Passes tick INDIVIDUALLY; the item does not tick until every pass is in and the hub still passes its tests.
+- PUBLISHER FIELDS (H29 point 6) MOVED TO THE TOP OF THE GAME BUILD'S QUEUE. It is the hub's EIGHTH blocked slot, and
+  H32's browse grid over Shops makes a shelf of "not published yet" cards the first thing Mr. E will look at.
+- LOCK, SEVENTH HOUR CLEAN: game build RUNNING 18:10:52 (named 18:28) -> IDLE 18:16:54, six minutes inside its
+  25-minute :07-:40 window. Chat bot RUNNING 18:46:33 (named 18:52) -> IDLE 18:48:08, NINETY-FIVE SECONDS, four minutes
+  inside :45-:52, the HUD lane's :52-:07 left free. HUD read the lock at 18:53, confirmed no Godot alive, took nothing.
+  NO OVERRUN, NOBODY STARVED, NO FUTURE STAMP, NO STALE LOCK CLEARED. I took no lock and ran no Godot.
+- NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
+  re-priced or deleted, nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

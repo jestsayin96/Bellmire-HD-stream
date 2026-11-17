@@ -7248,7 +7248,7 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - LOCK: RUNNING 19:12:25 (named 19:26) -> relaunch 19:18:21 (named 19:20) -> IDLE 19:18:28. No Godot alive.
 - NO LIVE TWITCH TEST: 0 bits, nothing redeemed or cheered, nothing posted, no reward touched.
 - NOT TAKEN THIS RUN (still queued, in order): L31 remainder, S2_TEST (b), T1_TEST FakeRoster.add_brew, C-73 mechanics.
-## C-74 (2026-11-17) - standing backlog item 5: miniboss feed lines, arrive and fall (lore_lines.json only)
+## C-74 (2026-11-16 19:25 CT) - standing backlog item 5: miniboss feed lines, arrive and fall (lore_lines.json only)
 - TAKE THIS NEXT gave CONTENT no WORK_PLAN item (C-73 ticked) and said to name the stalest file and show the working. Disasters read stalest by commit order, but I disagree on what matters: every disaster already holds 28 begin_alt, 28 pass_alt and 40 during lines (about 96 each), so a repeat is rare. The miniboss feed has been live since D-MBF and delve.gd reads exactly two phases, arrive (at spawn, line 399) and fall (at death, line 1799). Each of those pools was 5-6 arrive and 4 fall per miniboss, so a repeat fight had a one-in-four chance of an identical death line. Act and broken are not wired, so I left them alone rather than pad dead pools.
 - data/lore_lines.json `miniboss_feed.by_key`: +3 arrive and +4 fall on each of the fourteen minibosses = 98 lines. Plain register, nothing theatrical, each line says what the thing was or what it leaves behind. No {name} in these lines (arrive/fall fire with no one singled out). New `_note_c74` sits beside `_note`. No line repeats any existing string in the file.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical on a parsed-value compare (new items appended at the end of each array only, key order kept); 98 added, 0 changed, no other section touched; LF kept and the file's existing stray CR left as it was; no floor count; no artifact stocked.
@@ -7281,3 +7281,23 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced or deleted,
   nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## C-75 (2026-11-16 20:40 CT) - stalest file named, working shown; NO DATA ADDED, FOUR READERS ARE DEAD (content)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item and the standing row: name the stalest file again and show the working, judged by what a viewer would notice twice. C-55 and C-73 are ticked and C-74 is in. Clock read off the machine: 20:22 CT, 16 Nov. The C-74 header above now carries that CT stamp instead of the UTC date; header line only.
+- THE WORKING. I grepped scripts/ for every key in lore_lines.json that carries an `_alt` pool and for who reads it. Only `disasters.*.begin_alt` and `pass_alt` are read (economy.gd:531-572, `_dis_phrase`). These are written and read by NOTHING:
+  - `lord_intros_alt` - 96 lines, 12 per lord, eight lords. delve.gd:186-190 reads `lord_intros` as ONE string by lord id and says it. So every sighting of a given lord prints the same single line, every delve, all night. This is the most repeated line on stream that I can find: a lord rises in every delve and there are eight of them.
+  - `unique_intros_alt` - 60 lines, 12 per unique, five uniques. Same reader (delve.gd:190, `unique_intros`), same single string.
+  - `forge_alt` - 80 lines, 16 per tier. roster.gd:1289 reads `forge[tier]` as one string.
+  - `e3po.tier_up_alt` - 36 lines, 3 per town level. notables.gd:726 asks for `tier_up` only.
+  - `events.wandering_boss` (appears_alt, while_alt, cleared_alt, 29 each) - nothing in scripts/ reads the section at all.
+  - `phase2_words` and `phase2_words_alt` - unread (only snapshot_pub.gd and app.js touch three of the keys).
+  About 360 written lines never reach a viewer. The live pools I could find are all 36 lines or more (descend 299, cleared 299, epitaphs 477, barks about 125 a kind, tells 46 an origin, misfire 80, e3po categories 36-96, miniboss feed 8-9 arrive and 8 fall), so none of them is the stale one. The stale one is the lord intro, and it is stale because of a reader, not because of a writer.
+- WHAT I DID NOT DO, ON PURPOSE. I added no lines. Every pool I could grow either already holds 36 or more, or is unread, and writing into an unread pool is the padding I have refused eight cycles running. I did not turn `lord_intros[id]` from a string into a list: that rewords an existing key, and the reader does `String(...)`, so it would break the line instead of freeing it. No data file changed this cycle. Pre-existing keys are trivially identical because nothing was touched.
+- CODE WIRING OWED (game build, delve.gd, three lines, and the data is ready now):
+  1. delve.gd:190 - for a lord, pick at random from `[lord_intros[id]] + lord_intros_alt[id]`; for a unique, from `[unique_intros[id]] + unique_intros_alt[id]`. The `_note` on each alt block already says this was the plan since cycle 8. Guard `_note` keys (they are strings, not pools; ids never collide with them).
+  2. roster.gd:1289 - same shape for `forge[tier]` plus `forge_alt[tier]`.
+  3. notables.gd:726 - `tier_up` is a list of twelve in level order; `tier_up_alt` is keyed by the town's name (Crossing ... City in all but Charter), three each. Either say one of the three on the tier-up beat or leave it; the twelve-in-order main list is what is wired and I am not asking for a change there unless the game build wants variety on a one-time beat.
+  4. The wandering boss and the Phase-2 words stay unwired until their mechanics exist; nothing to do now.
+  The cheapest honest win is item 1: an identical lord intro on every delve is the first thing a returning viewer will notice, and the fix is a pick from a list that is already written and already in the file.
+- NEXT FOR CONTENT: I will stay off these four files' dead pools until a reader lands. If the supervisor wants live-pool growth instead, the thinnest live one is `miniboss_feed` at 8-9 and 8 per key, but that was widened last cycle and I would not touch it again.
+- VALIDATION OK: nothing in the four data files was edited; all four still parse. No floor count, no artifact stocked, no .gd or other file touched.

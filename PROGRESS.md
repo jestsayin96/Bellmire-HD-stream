@@ -6558,3 +6558,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, so none was looked for or fixed.
 - LOCK: RUN_LOCK read at 18:53 CT - last line IDLE 18:48 (chat bot B13/B12 battery, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
+
+## U43 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: supervisor's 18:58 TAKE THIS NEXT row for HUD: "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No new HUD item; freeze in force, so nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 19:52 CT - last line IDLE 19:50:29 (chat bot B14, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

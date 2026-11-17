@@ -689,6 +689,33 @@ static func commands() -> Dictionary:
         if typeof(for_d) != TYPE_DICTIONARY or (for_d as Dictionary).is_empty():
             push_error("COMMANDS_DATA NO FOREIGN: data/commands.json carries no usable `foreign` - another app's commands would be answered")
             printerr("COMMANDS_DATA NO FOREIGN - data/commands.json carries no usable `foreign`")
+        # B22 (B21 Fault 2): `order` is the key the doc generator actually walks, and this loader
+        # never vouched for it. A MISSING `order` is safe - the generator falls back to the command
+        # keys - but a PRESENT-BUT-SHORT one writes a truncated docs/COMMANDS.md while the count
+        # still reads full: a doc that quietly drops commands a viewer can type. Not fatal - the
+        # commands answer either way - so it says it out loud and carries on, the same shape as
+        # `ask` and `foreign` above.
+        var ord_v: Variant = (parsed as Dictionary).get("order", [])
+        var cmd_d: Dictionary = parsed["commands"] as Dictionary
+        if typeof(ord_v) != TYPE_ARRAY:
+            push_error("COMMANDS_DATA ORDER UNUSABLE: data/commands.json `order` is not an array")
+            printerr("COMMANDS_DATA ORDER UNUSABLE - `order` is not an array")
+        elif not (ord_v as Array).is_empty():
+            var ord_a: Array = ord_v as Array
+            var miss: Array = []
+            for k in cmd_d:
+                if not ord_a.has(k):
+                    miss.append(k)
+            var ghost: Array = []
+            for k in ord_a:
+                if not cmd_d.has(k):
+                    ghost.append(k)
+            if not miss.is_empty():
+                push_error("COMMANDS_DATA ORDER SHORT: %d command(s) absent from `order` would be dropped from docs/COMMANDS.md: %s" % [miss.size(), miss])
+                printerr("COMMANDS_DATA ORDER SHORT - %d command(s) absent from `order`: %s" % [miss.size(), miss])
+            if not ghost.is_empty():
+                push_error("COMMANDS_DATA ORDER GHOST: `order` names %d key(s) no command answers: %s" % [ghost.size(), ghost])
+                printerr("COMMANDS_DATA ORDER GHOST - `order` names %d dead key(s): %s" % [ghost.size(), ghost])
         _cmds = parsed
     return _cmds
 

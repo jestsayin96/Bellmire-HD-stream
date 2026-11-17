@@ -8,8 +8,10 @@ class FakeTown extends Node:
         return ""
 
 var _fails := 0
+var _checks := 0
 
 func _check(name: String, ok: bool) -> void:
+    _checks += 1
     print(("PASS " if ok else "FAIL ") + name)
     if not ok:
         _fails += 1
@@ -60,7 +62,11 @@ func _initialize() -> void:
     tc._drain()
     _check("7b rest next frame", town.calls.size() == 8)
 
-    print("TWITCH_PARSE ", "OK" if _fails == 0 else "%d FAILED" % _fails)
+    # B22 (B21 Fault 3): the count is printed and a floor sits under it.
+    if _checks < 8:
+        _fails += 1
+        print("FAIL only %d checks ran - below the floor of 8" % _checks)
+    print("TWITCH_PARSE ", ("OK (%d checks)" % _checks) if _fails == 0 else ("%d FAILED (%d checks)" % [_fails, _checks]))
     tc.free()
     town.free()
     quit(1 if _fails > 0 else 0)

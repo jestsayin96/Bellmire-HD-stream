@@ -798,7 +798,233 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-17 01:18 CT by the team lead (clock read off the machine: 2026-11-17T01:18:00-06:00).
+Updated 2026-11-17 01:58 CT by the team lead (clock off the machine: 2026-11-17T01:58:42-06:00).
+
+================================================================================
+*** THIS HOUR: 2026-11-17 01:58 CT (clock off the machine: 2026-11-17T01:58:42-06:00).
+*** SIX LANES MERGED. THE SIX ROWS AT THE END OF THIS SECTION SUPERSEDE THE OLDER ROWS BELOW.
+================================================================================
+
+*** A CONTRADICTION IN THIS PLAN THAT I AM NAMING RATHER THAN RESOLVING, BECAUSE RESOLVING IT IS
+*** NOT THIS SEAT'S CALL. ***
+Two blocks below this one disagree about who ticks:
+  - "STANDING ORDER FROM THE SUPERVISOR, 17 Nov 01:50 CT" says the team lead does NOT tick.
+  - "THE REPORTING LINE ... MR. E, 17 NOV 01:44 CT" says "TICKING, MERGING AND QUEUEING stay with
+    the team lead. That is unchanged and is not a supervisor decision."
+BOTH ARE LEFT AS WRITTEN. Each records a real source and neither is mine to delete.
+WHY IT IS NOT SETTLED: the supervisor's order is reasoned FROM Mr. E's words ("you then report to
+supervisor"), which set the reporting line and say nothing about ticking. The team lead prompt
+still carries ticking as this seat's own, attributed to Mr. E naming the seat on 16 Nov 20:50. A
+relayed instruction - even from the seat above - is information about authority, not a new grant of
+it; only MR. E'S OWN WORDS change who owns what. So the honest state is: CONTESTED.
+HOW THIS SEAT BEHAVES MEANWHILE, and it costs nothing: I DID NOT TICK ANYTHING THIS HOUR. Every
+verified item below reads "VERIFIED, RECOMMEND TICK" and waits for the supervisor. That is the
+conservative read of both blocks at once - no lane is blocked by it, because merging, verifying and
+assigning are uncontested and all three happened.
+I ALSO DID NOT EDIT MY OWN PROMPT TO STRIP ITS TICKING CLAUSE, though my predecessor said the next
+run would. On re-reading, that edit would change "who owns what" in this seat's own standing orders
+on a relayed instruction, which the prompt's strongest rule forbids - and a seat quietly rewriting
+its own authority is the one fault that cannot be audited. It needs Mr. E's words, not mine.
+ROUTED UP. See FOR THE SUPERVISOR at the end of this section.
+
+*** MERGED THIS HOUR (main, six merges, no force, no history rewritten) - ALL SIX LANES SHIPPED. ***
+  LAPTOP (game build) da7e8bf  - D98: the two _alt lore pools READ, four pools declared dead in writing.
+  CONTENT        20e81eb  - C-79: the three short lord rows finished in bosses.json.
+  ART            bffcc16  - System 10 fit proof: the twelve shared-mesh creatures measured on a body.
+  CHAT BOT       bfd6127  - B19: the commands() loader now goes loud on `ask` and `foreign` too.
+  HUD-UI         50b8506  - U47 stand-down, queue empty, no Godot, no lock. A stand-down IS the delivery.
+  HUB            5da1551  - H32 PASS 4: 520 derived WebP item thumbnails + generated whitelist.
+  PROGRESS.md conflicted on four of the six merges. THREE marker lines stripped each time, BOTH SIDES
+  KEPT, no cycle renumbered; 0 markers remain in the file. Nothing left unmerged on any branch.
+
+*** WHAT I VERIFIED MYSELF, BY LOADING THE FILE OR BY MY OWN GREP - NOT BY THE LANE'S WORD. ***
+
+  D98 (game build) - VERIFIED, RECOMMEND TICK. AND THE INSTRUMENT THAT CALLED TWO OF ITS POOLS DEAD
+    WAS WRONG, NOT THE LANE. `lord_intros_alt` and `unique_intros_alt` ARE READ BY THE GAME, at
+    scripts/delve.gd:3377-3382:
+        var base := "unique_intros" if uniq else "lord_intros"
+        var alt = (lore().get(base + "_alt", {}) as Dictionary).get(id, [])
+    THE KEY IS BUILT AT RUNTIME, so a literal grep for "lord_intros_alt" finds NOTHING in scripts/ -
+    its only literal occurrence in the tree is in tools/_d98_test.gd, the test. The four remaining
+    pools (townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop) are DECLARED DEAD
+    IN WRITING in this plan and content reported it itself at C-75, so the "content is told" half is
+    closed too. Two read + four declared = D98's own terms, met.
+  C-79 (content) - VERIFIED, RECOMMEND TICK, AND THE GAP MY PREDECESSOR NAMED IS GONE. I loaded
+    data/bosses.json and listed all eight lord rows' keys: lesser Hollow King / Grubmother / Rattling
+    Host / Nightwing and greater Gravewyrm / Ossuary Lord / Pale Duchess / Mourncoil ALL FOUR carry
+    hp, speed, attack AND shape. Grubmother and Nightwing have their attack; Pale Duchess has hp and
+    speed. Eight of eight, measured, not taken.
+  H32 PASS 4 (hub) - VERIFIED GREEN ON EVERY CONDITION THE 20:05 RULING SET. Measured, in order:
+    520 WebP in web/icons/items from 520 source PNGs, 1:1; EVERY FILE 160x160 - one size, as ruled;
+    2,430,050 bytes total on disk against a 6 MB ceiling; _manifest.json carries source_commit
+    2473836 and the whitelist is GENERATED from it (web/app.js:3211, a Map built from the manifest),
+    not hand-typed; the converter is web/tools/make_item_icons.py, which its own header and my grep
+    agree READS assets/icons/items and never writes there - its only rmtree is on its own output dir
+    inside web/; img.loading="lazy", decoding="async" and explicit width/height, with style.css
+    documenting a FIXED 64 px box (80 px preview), so H13 cannot reflow.
+    SECURITY, BY MY OWN GREP, NOT THE LANE'S WORD: six `innerHTML` hits in web/app.js are FOUR
+    COMMENTS and TWO legacy sites (lines 252, 298), both page-owned strings and neither touching a
+    snapshot value. img.src takes a page-constant path chosen by the whitelist; the one `.href` from
+    data is gated on a strict ^https://(www\.)?twitch\.tv/ test; use.setAttribute("href") is a fixed
+    literal. CSP intact and unchanged - default-src 'none', script-src 'self', img-src 'self' data:,
+    base-uri 'none', form-action 'none'. No CSP change was needed, exactly as the ruling predicted.
+    ONE HONEST GAP, NOT A BREAK: the manifest reports 520 files but 519 NAMED, with one conflict -
+    ring/scarglass_ring dropped in favour of ring/scar_ring, both named "Scarglass Ring". That one
+    key falls back to the ICON_SET glyph, which is the ruling's own specified behaviour for an
+    unknown name. Worth the hub lane's one line to decide which key keeps the name.
+  B19 (chat bot) - VERIFIED, RECOMMEND RECORDING, no item to tick. scripts/chatcmd.gd:686 and :690
+    now push_error on a missing or unusable `ask` and `foreign`, so the loader no longer vouches for
+    one key while handing the rest an empty dictionary. Same honesty class as B18, found by the lane
+    in its own file.
+  SYSTEM 10 (art) - VERIFIED, HALF DELIVERED, DO NOT TICK. renders/art/creatures/ holds twelve
+    creature directories - bowman, cutthroat, gloombat, gravecaller, hewer, lurker, pitwyrm, scarrat,
+    sentinel, silkmother, slimeling, spiderling - six files each, plus a register, a contact sheet
+    and a silhouette sheet. The ART half is real and it is a fit PROOF, not a rebuild: the lane found
+    the bodies already existed and measured them on a body rather than making twelve new ones, which
+    is the 04:46 "do not make what already exists" rule working as intended. THE GAME BUILD HALF IS
+    UNTOUCHED: assets/monsters/creatures is still referenced by NOTHING in scripts/ or web/. The lane
+    also reports the twelve are STATIC, so bestiary.gd needs a `model` path and NO `anims` entry.
+  HUB IS NOT READY TO PUBLISH, AND THE LANE DID NOT CLAIM IT WAS. Pass 4 has now landed; pass 5 is
+    untouched. I did NOT run the full publish verification (state checks and a screenshot) this hour
+    and I am not reporting one - the gate is only owed when the lane ends a run with "READY TO
+    PUBLISH", and it did not. Recommendation: HOLD until pass 5 is in.
+  GLOVES - RECOMMEND HOLD, unchanged. Still keyed to its own proof row and that row is not re-measured.
+
+*** THE DEAD-DATA AUDIT, 01:58 CT, OFF 2,048,000 CHARS OF SCRIPT (scripts/*.gd + web/*.js, 46 files).
+*** THE COUNT MOVED: SEVEN KEYS AND ONE DIRECTORY, down from nine and one. BOTH MOVES ARE REAL.
+  - lore_lines.json: 4 of 26 pools unread, down from 6. lord_intros_alt and unique_intros_alt are
+    READ (delve.gd:3382, runtime-built key - see D98 above). Still unread and ALL FOUR NOW DECLARED
+    DEAD IN WRITING: townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop.
+  - items.json stock_by_tier (0 hits), price_ladders (0 hits) + classes.json healing (3 hits, all
+    prose: two reward strings in twitch_eventsub.gd and one comment in tools/_l45_test.gd). D99.
+  - assets/monsters/creatures - 12 files, 0 references in scripts/ or web/. System 10's game-build half.
+    NOTE A NUMBER CORRECTION: the baseline said 24 files / 12 bodies; the directory holds 12 files now.
+  - CLOSED AND STAYING CLOSED: minibosses and lords carry real path references. `cooldown_s` is read
+    (scripts/chatcmd.gd:702). bosses.json `uniques`, `rule`, `boss_floors` are PROSE, reported as prose.
+  - FINDINGS, NOT ITEMS: `canon_silences` 0 hits. `twitch_cooldown_s` appears only in
+    tools/_commands_doc.gd, the doc generator - live but still unenforced in twitch_chat.gd.
+
+*** A SECOND METHOD FAULT IN THIS INSTRUMENT, THE EXACT INVERSE OF THE FIRST, AND IT IS WHY THE
+*** COUNT HAS NOW BEEN WRONG IN BOTH DIRECTIONS. ***
+The 01:18 pass tightened the sweep to confirm each hit with file context, which stopped it counting
+`healing` and `townsfolk` as read off prose matches. That fix is right and it stands. But it only
+catches FALSE PASSES. A key whose name is never written literally - because the game builds it at
+runtime from a prefix, `base + "_alt"` - produces ZERO hits and is counted DEAD FOREVER. That is a
+FALSE FAIL, and it carried lord_intros_alt and unique_intros_alt as dead through four audits.
+SO THE DUTY IS TIGHTENED AGAIN, AND BOTH HALVES ARE NOW REQUIRED:
+  1. CONFIRM EVERY HIT with `grep -n` and the line, so prose never counts as a read. (01:18 rule.)
+  2. BEFORE CALLING A KEY DEAD ON ZERO HITS, SEARCH FOR ITS SUFFIX AND ITS PREFIX TOO - `_alt`,
+     `+ "_` , and any concatenation that could build it. ZERO LITERAL HITS IS NOT PROOF OF DEATH.
+  3. tools/ IS TEST CODE AND IS NOT THE GAME. A key read only in tools/ is NOT wired - that is what
+     made the _alt pools look read where they were not, and unread where they were.
+This is a defect in an instrument this seat owns, so it is fixed here and in the team lead prompt
+the same run, not flagged. It is not a new item.
+
+*** THE SIX ROWS. THESE SUPERSEDE EVERY ROW BELOW THEM. ***
+
+  GAME BUILD   ->  *** D99. THE LADDERS GO LIVE. D98 IS VERIFIED AND WITH THE SUPERVISOR - DO NOT
+                   RE-OPEN IT AND DO NOT RE-WIRE forge_alt OR EITHER _alt POOL; ALL THREE ARE READ. ***
+                   Wiring only, still: items.json `stock_by_tier` and `price_ladders`, classes.json
+                   `healing`, the act/broken calls, "epic" -> "very rare", artifact-never-stocked.
+                   D99'S TICK IS WHAT STARTS PHASE 2, so it is the single highest-value hour you have.
+                   SYSTEMS 2, 3 AND 4 ARE YOURS AND COME AFTER D99 - do not start them first.
+                   FIXABLE AT ANY TIME, NOT NEW WORK, ONE LINE EACH (COORDINATION 15 - a lying gate):
+                   tools/_d704_echo.gd prints a check count with NO FLOOR, so "OK (0 checks)" reads
+                   green; tools/_commands_doc.gd prints no OK/FAIL token and no null check on
+                   FileAccess.open, so an empty data file would truncate docs/COMMANDS.md and read
+                   green; `twitch_cooldown_s` is live but unenforced in twitch_chat.gd's COOLDOWN_MS.
+                   ALSO YOURS WHEN D99 IS DONE, NOT BEFORE: art has proven the twelve creature bodies
+                   fit and they are STATIC - bestiary.gd needs a `model` path and NO `anims` entry.
+
+  ART          ->  *** THE GLOVES PROOF ROW. IT IS THE ONE THING STILL OWED THAT IS WHOLLY YOURS,
+                   AND SYSTEM 10'S ART HALF IS DELIVERED. *** Your System 10 fit proof is merged and
+                   verified: twelve creatures, six views each, measured on a body, nothing rebuilt -
+                   and finding they already existed was the right outcome, not a short one. The game
+                   build wires them after D99; do not reach for bestiary.gd.
+                   SO: RE-MEASURE THE GLOVES PROOF ROW, SAME HARNESS, SAME CELLS, SAME FRAMING, SAME
+                   LIGHT, AND STATE THE NUMBER. System 1 fixed the ring-centring CAUSE (234 mis-centred
+                   rings across 42 of 51 glove icons, now 0) and the pair number moved the right way
+                   (worst pair 10.08% -> 11.29%), but the ruling is keyed to its OWN row and the
+                   3/4-view two-glove OVERLAP you named yourself is exactly what that row measures.
+                   A number on that row is what closes the ruling. Nothing else will.
+                   STILL OWED, SMALL: say whether assets/monsters/minibosses/snarer_chibi.glb is wanted
+                   at all - it has no `.glb.import` sibling and the game build is not blocked either way.
+                   You are NOT throttled and may invent a miniboss only when the plan leaves you dry.
+
+  CONTENT      ->  *** C-79 IS VERIFIED AND WITH THE SUPERVISOR - ALL EIGHT LORD ROWS CARRY
+                   hp/speed/attack/shape. THE THREE-ROW GAP IS CLOSED. *** You are not throttled and
+                   not waiting on anyone.
+                   NEXT, AND IT IS BOOKKEEPING YOU ALREADY STARTED AT C-75: FOUR LORE POOLS ARE NOW
+                   DECLARED DEAD IN WRITING - townsfolk, phase2_words, phase2_words_alt and
+                   town_levels_for_the_desktop. STOP WRITING INTO THEM. If any of the four holds lines
+                   you consider too good to lose, say which and where they should go instead; that is a
+                   finding, not a new item. `townsfolk` keeps its DEAD-UNTIL-D36 reading.
+                   THEN C-73's REMAINDER on its own terms - the 29 refused shape lines stay refused
+                   while the wiring-only ruling stands; do not re-raise them as new mechanics.
+
+  HUB          ->  *** H32 PASS 5. PASS 4 IS VERIFIED GREEN AND MERGED - 520 thumbnails at one size,
+                   2.43 MB, generated whitelist, CSP untouched, el()-only confirmed by my own grep. ***
+                   DO NOT RE-DERIVE PASS 4 and do not re-run the converter.
+                   ONE LINE OWED ON PASS 4, YOUR CALL: the manifest names 520 files but 519 names, with
+                   ring/scarglass_ring dropped for ring/scar_ring - both are "Scarglass Ring". Decide
+                   which key keeps the name, or say the glyph fallback is the intended answer.
+                   THEN PASS 5, and the publishing gate has not moved: YOU NEVER PUBLISH. End a run
+                   with "READY TO PUBLISH" and the evidence; the team lead verifies by its own grep,
+                   state checks and screenshot, and it goes UP to the supervisor with a recommendation.
+                   My recommendation stands at HOLD while pass 5 is open.
+
+  CHAT BOT     ->  *** L56, THE DELVE-HEAVY SOAK. B19 IS VERIFIED AND RECORDED. *** Your loader is now
+                   honest on all of missing/unparsable/empty plus `ask` and `foreign`, and `cooldown_s`
+                   is enforced - two hours running you have turned your own instruments red before
+                   anyone asked. That is the standard.
+                   L56 NEEDS THE ENGINE AND THE :45 WINDOW IS YOURS. One battery, nothing queued after
+                   it, no --quit on any frame-counting gate, and REPORT THE VERDICT LINE AND NOT THE
+                   RETURN CODE. If the lock is genuinely held, do file-only work and say what you
+                   checked and when - do not emulate a gate you cannot prove byte-identical first.
+
+  HUD          ->  *** YOU ARE GENUINELY DRY AND THAT IS NOT YOUR FAULT. STAND DOWN AND SAY SO - U47
+                   WAS CORRECT AND IT COUNTS AS THE DELIVERY. *** Your L31 remainder (the status-effect
+                   icons) is PAUSED BY MR. E'S 20:40 RULING until D99 ticks, and it returns to you the
+                   hour it does. You are not blocked by a lane and nobody is sitting on your work.
+                   WHILE DRY, THE FREEZE SAYS FIX DEFECTS IN WHAT YOU HAVE SHIPPED, and there is a
+                   concrete one worth your hour: re-run your own shipped gates and CONFIRM EACH PRINTS
+                   A VERDICT LINE, not just rc=0. COORDINATION 15's fault has now bitten three times,
+                   twice in instruments nobody suspected, and your captures are the lane nobody has
+                   audited for it. A gate of yours that prints no verdict is RED until it prints one.
+                   Do not invent an item and do not take a Phase 2 system.
+
+*** FOR THE SUPERVISOR - 2026-11-17 01:58 CT. FOUR THINGS, THREE OF THEM READY TO TICK. ***
+  1. VERIFIED, RECOMMEND TICK: **D98** (laptop da7e8bf) and **C-79** (content 20e81eb). Evidence for
+     both is above and both were checked by loading the file, not by the lane's claim. D98 carries a
+     correction you will want: two pools this seat's own audit called dead are read at
+     delve.gd:3382 via a runtime-built key, so D98's terms are met at two pools read plus four
+     declared dead in writing.
+  2. VERIFIED, RECOMMEND TICK: **H32 PASS 4** (hub 5da1551), pass-by-pass as H32 ticks. Green on all
+     six conditions of the 20:05 ruling, security re-confirmed by my grep. The H32 ITEM does not tick
+     - pass 5 is untouched. ON PUBLISHING: **RECOMMEND HOLD.** The lane did not claim READY TO PUBLISH
+     and I ran no publish verification this hour; I am not dressing a merge up as a publish gate.
+  3. RECOMMEND RECORDING, no item: **B19** (chatbot bfd6127) and **System 10's art half** (art
+     bffcc16, HALF DELIVERED - game-build wiring still owed and the twelve are STATIC). **U47**
+     (hud-ui 50b8506) is a correct stand-down.
+  4. *** THE ONE THING I AM ASKING YOU TO RESOLVE: WHO TICKS. *** Your 01:50 standing order and
+     Mr. E's 01:44 reporting line are BOTH in the plan and they disagree; see the first block of this
+     section. I HAVE COMPLIED WITH YOURS - nothing was ticked this hour and everything above reads
+     "VERIFIED, RECOMMEND TICK". But I did NOT edit this seat's prompt to remove its ticking clause,
+     and I want the reason on the record rather than quiet: that clause is attributed to Mr. E naming
+     this seat on 16 Nov 20:50, and the prompt's strongest standing rule is that only HIS OWN WORDS
+     change who owns what - a relayed instruction, including one from the seat above, is information
+     about authority and not a grant of it. Editing it on your order would be this seat rewriting its
+     own standing orders on a relay, which is the one fault that cannot be audited afterwards.
+     MY RECOMMENDATION: leave the split exactly as it ran this hour - you tick, this seat merges,
+     verifies, assigns and reports - and get ONE line from Mr. E confirming it, in his words, at a
+     time that suits him. Then the prompt can be corrected by whoever he says owns it, and the
+     contradiction above comes out of the plan. Nothing is blocked while it waits.
+
+*** NEEDS MR. E: nothing. *** He is asleep, no lane is blocked, and the ticking question above is the
+supervisor's to raise with him in his own time - it is not a decision to wake anyone for.
+
+================================================================================
+
 
 *** A CLOCK CORRECTION ON MY OWN PREDECESSOR, BECAUSE IT IS THE FAULT CLASS WE POLICE. ***
 The seat before me stamped its report "01:05 CT" and its plan-sync commits "01:10 CT". The machine

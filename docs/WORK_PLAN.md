@@ -1,6 +1,89 @@
 # WORK PLAN - Bellmire HD
 
 ================================================================================
+## *** MR. E'S RULING, 16 NOV 20:40 CT - THE GAME BUILD WIRES THE BACKLOG BEFORE IT BUILDS
+## ANYTHING NEW. D96-D99 ARE THE QUEUE AND THEY COME BEFORE EVERY OTHER GAME-BUILD ITEM. ***
+
+HE ASKED WHY SO MUCH FINISHED WORK IS NOT IN THE GAME. The answer was mine to give and it was not
+flattering: five lanes produce, ONE lane owns every engine script and gets about 33 minutes an hour,
+and every hour the supervisor handed that one lane a NEW feature - D70, then H29 point 6, then D61.1
+- so already-finished work never got wired. The producers kept producing and the one consumer kept
+being pointed somewhere else. That is a queueing fault by the SUPERVISOR, not a shortfall by any
+worker. No lane is to read this as blame.
+
+WHAT HE RULED, after being shown the measured numbers:
+  1. GAME BUILD: WIRING ONLY UNTIL THE BACKLOG IS DRAINED. No new features. D96-D99 below.
+  2. ART AND CONTENT: KEEP PRODUCING. Nothing they have made is wasted; it is queued work. Art
+     finishes the register (the Snarer is the last), content keeps auditing. They are NOT throttled.
+
+THE MEASUREMENT, taken by the supervisor at 20:35 CT off the actual tree, not off a summary - every
+.gd in scripts/ and every .js in web/ concatenated (2,002,217 chars) and each data key and asset
+filename searched for in it:
+  - assets/monsters/minibosses/ holds 19 files. NOTHING IN scripts/ REFERENCES THAT PATH.
+  - bosses.json keys `lesser`, `uniques`, `rule`, `boss_floors`: NOT READ. Only bestiary.gd opens
+    the file at all.
+  - lore_lines.json: 17 of 26 keys read, SEVEN NOT READ - lord_intros_alt, unique_intros_alt,
+    forge_alt, townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop.
+  - items.json: `stock_by_tier` and `price_ladders` NOT READ (H29.6 wired shop_stock/trader_cargo).
+  - classes.json: `healing` NOT READ.
+  - assets/icons/items/ 463 PNGs: not referenced in scripts/, which is CORRECT - they are the hub's
+    (D73) and H32 pass 4 is wiring them now. NOT a game-build item.
+
+### THE WIRING QUEUE. IN THIS ORDER. EACH ONE TICKS ON ITS OWN.
+
+- [ ] D96. THE MINIBOSSES STAND UP IN THE GAME. The worst of them and the reason it is first.
+      Nineteen miniboss models exist and the delve already TALKS about minibosses - delve.gd fires
+      the arrive line at spawn and the fall line at death, and content has written 8-9 arrive and 8
+      fall lines for all fourteen. So the Chronicle describes a creature that has no body on screen.
+      A viewer is told something arrived and sees nothing arrive.
+      DONE: a miniboss spawns on a floor WITH ITS OWN MODEL, the arrive line fires with the body
+      present, it fights, it dies, the fall line fires. FIT IS THE ACCEPTANCE TEST, as it is for
+      anything worn or placed: rendered on the floor at 1080p, not asserted in a gate. Art has
+      already measured every one of these against the posed hero (ratio and pair span per creature
+      in renders/art/minibosses/_fit_*_register.json) - USE THOSE NUMBERS, do not re-derive scale.
+      If a model will not load or will not fit, NAME IT and move to the next; a list of three that
+      refused is worth more than a silent fallback to a generic body.
+
+- [ ] D97. THE BOSS UNIQUES ARE ACTUALLY FOUGHT. bosses.json carries 198 lesser and 192 greater
+      uniques, including C-73's 40 shape-first lord uniques whose shape lines name real mechanics
+      (fire on a latch, break the drummer, strikes inside a ring, re-strikes the first hero hit,
+      cannot be gone round). Nothing spawns any of them.
+      DONE: a lord rises with one of ITS uniques, the stats come from the file rather than a table
+      in code, and the Chronicle names it. THE SHAPE MECHANICS ARE A SEPARATE, SMALLER PROMISE: say
+      IN WRITING which you can honour and which you cannot, the same refusal you made on ACT and
+      BROKEN, which the supervisor recorded as correct. A written refusal closes it; silence leaves
+      content writing into a file nobody reads.
+
+- [ ] D98. THE SEVEN DEAD LORE POOLS ARE READ OR DECLARED DEAD IN WRITING. lord_intros_alt,
+      unique_intros_alt, forge_alt, townsfolk, phase2_words, phase2_words_alt and
+      town_levels_for_the_desktop. Content reported this itself at C-75 before anyone asked it to.
+      DONE: each pool is either READ by the thing it was written for, or DECLARED DEAD with the
+      reason - and if it is dead, CONTENT IS TOLD, so it stops writing into a pool that will never
+      be spoken. Either outcome closes the item. Half of these are probably genuinely dead and
+      saying so is the delivery.
+
+- [ ] D99. THE LADDERS GO LIVE AND THE SMALL OWED WIRING CLOSES. items.json `stock_by_tier` and
+      `price_ladders` (H29.6 wired shop_stock and trader_cargo; these two remain), classes.json
+      `healing`, plus the three things content has been owed for several cycles: the act/broken
+      calls from each mechanic, "epic" -> "very rare" in the order array, and artifact-never-stocked
+      enforcement. These are small. They are in one item so they stop being carried.
+
+### THE RULE THAT GOES WITH IT
+NO NEW GAME-BUILD FEATURE UNTIL D96-D99 ARE TICKED. The L31 remainder (damage numbers landed as
+D61.1; status-effect icons remain), S2_TEST FAIL (b) and T1_TEST's FakeRoster add_brew are PAUSED,
+NOT CANCELLED - they come back the hour D99 ticks. If a wiring item turns out to be blocked on
+something outside scripts/, say so with the evidence and take the NEXT wiring item, not a feature.
+A gate reading red is still allowed to be fixed at any time: a lying instrument is never "new work".
+
+### AND A NEW STANDING DUTY ON THE SUPERVISOR, NOT ON ANY WORKER
+EVERY HOUR, BEFORE WRITING "TAKE THIS NEXT", THE SUPERVISOR RUNS THE DEAD-DATA AUDIT: concatenate
+every .gd in scripts/ and every .js in web/, then check each top-level key of every file in data/
+and each generated asset directory for a reference. Report the unread count in the hour's summary.
+This hour's numbers above are the baseline. The reason this duty exists is that the gap took a full
+day to notice and was noticed by the workers, not by me.
+================================================================================
+
+================================================================================
 ## *** HARD DELIVERABLE, DUE 09:00 MON 16 NOV *** D95 - THE TEN-CHARACTER SHOWCASE
 
 ### [x] D95 - DELIVERED, MERGED AND TICKED BY THE SUPERVISOR, 2026-11-16 02:05 CT
@@ -481,40 +564,60 @@ NEEDS MR. E rather than being quietly absorbed.
 
 ================================================================================
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
-Updated 2026-11-16 19:58 CT by the supervisor (clock read off the machine: 19:59:08 CT). If you own
+Updated 2026-11-16 20:58 CT by the team lead (clock read off the machine: 21:05:18-06:00). If you own
 a lane, your next item is named here. Search the file for its ID and work it. DO NOT take "the first
 unchecked item you find reading down the file." THERE ARE SIX LANES: the CHAT BOT lane owns
 scripts/chatcmd.gd, data/commands.json AND docs/COMMANDS.md exclusively, on branch `chatbot`.
 
-*** SIX OF SIX SHIPPED AND ALL SIX ARE MERGED TO MAIN. FIRST FULL HOUSE SINCE THE HUB CAME BACK. ***
-game build H29 POINT 6 (laptop 63c21ad); hub H32 PASSES ONE, TWO AND THREE (a5fc84f); art REGISTER
-CONVERSION 11 OF 14, the Boiler (904293e); content C-74 (183a931); chat bot B14 (39847b3); HUD U43
-(8d46c8a). Every one is ticked below. Nothing was held back this hour.
+*** MR. E NAMED THE ROLE AT 20:50 CT: BELLMIRE HD TEAM LEAD. *** COORDINATION 16 has it. It is
+forward-only - no lane renames anything already written, and the record stays as it stands.
 
-*** THE EIGHTH BLOCKED HUB SLOT IS OVER: H29 POINT 6 IS IN. *** snapshot_pub.gd now ships payload
-v5 - shops with `stock`, the caravan with its manifest and `present`/`leaves_in`, and open orders
-with who is walking. H29P6_TEST OK 22 checks, and the checks are the right ones: a crossing's shelf
-carries only common gear, a retired item is off every shelf, a caravan on its way out is NOT "in
-town", an order whose hero is not walking is not listed, and the hostile item name
-`<img src=x onerror=alert(1)>` comes back CLEANED in the payload. The shelf blob is 8139 bytes at
-tier 12, so the hub's grid gets real shelves without the payload bloating. THE HUB NEEDED NO CHANGE
-AND IT LIGHTS UP BY ITSELF - that was the ruling and it held.
+*** FIVE OF SIX SHIPPED AND ALL FIVE ARE MERGED TO MAIN. *** game build D61.1 (laptop 72096ad);
+hub H32 PASSES 4 AND 5 (12bbee2, ec61995); content C-75 (b95d002); chat bot B15 (e7b12f6); HUD U44
+(7377f83). ART IS THE ONE LANE WITH NOTHING ON ITS BRANCH THIS HOUR - see its row.
 
-*** THE LOCK HELD FOR AN EIGHTH HOUR. *** game build claimed 19:12:25 naming 19:26, relaunched
-19:18:21 naming 19:20, released IDLE 19:18:28 - six minutes inside its 25-minute :07-:40 window.
-Chat bot claimed 19:47:07 naming 19:52, relaunched 19:48:28 for one verdict line, released IDLE
-19:50:29 - three and a half minutes, and the HUD lane's :52-:07 left completely free. HUD read the
-lock at 19:52, confirmed no Godot alive, took nothing. NO OVERRUN, NO STARVED LANE, NO FUTURE STAMP,
-NO STALE LOCK CLEARED. I took no lock and ran no Godot. Both relaunches were DECLARED on their own
-lines with their own expected finishes, which is the behaviour, not a fault.
+*** THE DEAD-DATA AUDIT, THIS HOUR'S NUMBERS (the standing duty Mr. E's 20:40 ruling put on me).
+TAKEN OFF THE MERGED TREE AT 21:00 CT, NOT OFF A SUMMARY. *** 157 .gd and .js files, 2,041,133
+chars concatenated; every top-level key of every data/*.json checked, plus the second level of
+lore_lines.json, plus every generated asset directory.
+  - THE BACKLOG HAS NOT MOVED, AND THAT IS CORRECT: D96-D99 were written at 20:45 and the game
+    build's :07 slot was already spent on D61.1. stock_by_tier, price_ladders, classes.json
+    `healing`, bosses.json `lesser`/`uniques`/`rule`, and lord_intros_alt / unique_intros_alt /
+    forge_alt / townsfolk / phase2_words / phase2_words_alt / town_levels_for_the_desktop all still
+    read by nothing. Unchanged from the 20:35 baseline.
+  - WIDER THAN THE BASELINE SAID, AND THIS IS NEW: the dark model directories are not only the
+    minibosses. assets/monsters/minibosses 19 files, assets/monsters/lords 8, assets/monsters/
+    creatures 12 - THIRTY-NINE models, and NOT ONE of those three paths appears anywhere in
+    scripts/. The minibosses at least appear in five tools/ fit harnesses; lords and creatures
+    appear in NO file in the repo. So a lord rises in every delve with no model of its own. THAT
+    WIDENS D96 AND D97; it does not add an item.
+  - ALSO NEWLY MEASURED (second-level keys the baseline did not reach): lore_lines.json
+    `e3po.tier_up_alt` (36 lines), `townsfolk.react`, `phase2_words.ascent`/`.upgrade_poll` and
+    their _alt twins, and `events.wandering_boss` which content found itself - 87 lines nothing
+    opens. data/commands.json `cooldown_s` and `twitch_cooldown_s`, data/world.json
+    `district_rules` and `canon_silences`, data/ranks.json `promotion_line` and `one_roll` are
+    unread too. Content's own count stands: ABOUT 360 WRITTEN LINES NEVER REACH A VIEWER.
+  - A CORRECTION I OWE THE AUDIT ITSELF: my first pass flagged assets/audio as dark. IT IS NOT.
+    sfx.gd names its files relative to a DIR constant, so a path-string test lies about it - 206
+    paths named, 21 of 21 sfx, 170 of 172 rpg, 4 of 4 amb, 11 of 11 music. A directory reading
+    DARK means the AUDIT could not see a reference, which is not the same as there being none.
+    bosses.json `boss_floors` is the same shape: the HUB reads it, scripts/ does not.
 
-*** A GATE THAT PRINTS NO VERDICT IS RED. A NEW STANDING RULE, FOUND BY THE CHAT BOT, GOOD FOR
-EVERY LANE. *** The B14 battery ran every gate as `--script <gate> --quit`. `_b11_muster.gd` extends
-SceneTree and does its work at FRAME 30, so `--quit` ended the run after one frame: rc=0, town boot
-printed, and NO VERDICT LINE AT ALL. rc=0 with no verdict had been one relaunch away from being read
-as a pass. THE RULE: a frame-counting gate is run WITHOUT `--quit` (it quits itself), and any gate
-that prints no verdict line is treated as RED until it prints one. This applies to every lane that
-runs a battery, not just the chat bot.
+*** H32 IS STILL NOT TICKED AND THE REASON IS NARROW. *** All five passes are in and all five are
+ticked. What is missing is the item's own acceptance: nobody has RUN the hub's state tests or LOOKED
+at the browse grids since pass 4 landed. That is one hub slot's work and it is the hub's next item.
+Security I verified myself and it held with no exceptions - see the hub row.
+
+*** THE GAME BUILD'S D61 FINDING IS ANSWERED BY A RULING THAT ALREADY EXISTS, SO NOBODY WAITS AND
+NOBODY ASKS MR. E. *** The lane reported, correctly and unprompted, that in the resting 2x2 grid the
+director quarter culls HudDock.L_FLOAT, so on the stream's normal layout NO damage number is drawn -
+old or new. It asked whether that is a HUD ruling. IT IS MR. E'S OWN RULING, L21 (Nov 11), and it is
+explicit: "Floating text clamped to its pane and off in quarter panes." So the numbers being absent
+from a quarter pane is CORRECT BEHAVIOUR, not a defect, and D61.1 is not diminished by it - the
+capture folds the grid the L51 way, which is a layout a viewer actually sees. NOTHING CHANGES, NO
+LANE TOUCHES IT, AND IT DOES NOT GO TO MR. E: re-asking a question he has already answered costs him
+more than silence. If D61.2's condition icons hit the same wall, report it the same way and I will
+answer it the same way.
 
 *** W-LIVE REMAINS FULLY PROVEN AND BEING PROVEN RELAXES NOTHING. *** Bits are free ONLY as
 JestSayin96 and ONLY in jestsayin96's own chat. BELLMIREBRO PAYS FOR BITS - THE BOT MUST NEVER
@@ -523,176 +626,225 @@ NO SUBSCRIPTIONS - a sub event is a SYNTHETIC payload, never a purchase. Do not 
 rename or re-price a reward. Check whether he is live before any chatty test. NO LIVE TWITCH TEST
 RAN THIS HOUR ON ANY LANE: 0 bits, nothing redeemed, nothing posted, no reward touched.
 
-  GAME BUILD   ->  *** H29 POINT 6 IS IN AND TICKED (laptop 63c21ad, on main). THE HUB'S EIGHTH
-                   BLOCKED SLOT IS CLOSED AND YOU CLOSED IT IN ONE WINDOW. *** payload v5 carries
-                   shops[].stock, the caravan (name, cargo manifest, present, leaves_in) and open
-                   orders (item, shop, who, walker, status). H29P6_TEST OK 22, OFFFLOOR 0/2019,
-                   TWITCH_PARSE OK, TOWNWALK PASS, _delve_test 0 SCRIPT ERROR, parse 0 errors.
-                   THE CHECKS ARE WHAT MAKE THIS TICKABLE, not the count: tier gating proved both
-                   ways (a crossing carries only common gear AND tier 12 opens all five trades), a
-                   RETIRED item proved off every shelf, a caravan ON ITS WAY OUT proved not "in
-                   town", an order whose hero is not walking proved unlisted, the hostile item name
-                   cleaned IN THE PAYLOAD, and the blob measured (8139 bytes) rather than assumed.
-                   You tested the negative cases. That is the difference between a feature and a
-                   feature that can be trusted on stream.
-                   NEXT: THE L31 REMAINDER - yours by ownership, not by invention. The HUD half
-                   shipped (banner at U26, Chronicle legibility at U40); DAMAGE NUMBERS and
-                   STATUS-EFFECT ICONS live in delve.gd, monster.gd, party_frames.gd and
-                   boss_bar.gd, all four yours. Parchment/ink/teal, 1080p acceptance capture.
-                   THEN, IN THIS ORDER, AND THE FIRST OF THEM IS CHEAP: answer content's C-73 and
-                   C-74 - say which of the 40 shape-first lord mechanics you can honour and which
-                   you cannot (the same refusal you made on ACT and BROKEN, which I recorded as
-                   correct), and say the same about C-74's owed wiring: act/broken calls from each
-                   mechanic, "epic" -> "very rare" in the order array, artifact-never-stocked.
-                   A written refusal closes an item; silence leaves content guessing.
-                   THEN: S2_TEST FAIL (b), "new ashwight -> ''" - no registered creature voice.
-                   THEN: T1_TEST's FakeRoster has no add_brew, which _do_bits_tier calls on an
-                   anonymous cheer - PRE-EXISTING, but a gate reading red must be made to read true.
+  GAME BUILD   ->  *** D61.1 IS IN AND TICKED (laptop 72096ad, on main) AND YOU DREW THE LINE ROUND
+                   IT YOURSELF. *** You were given "the L31 remainder" and you delivered POINT ONE
+                   and said in writing that .2, .3 and the whole-boss-fight capture are NOT done and
+                   NOT claimed. D61 and L31 stay open because you said they should. That is the
+                   behaviour.
+                   WHAT MAKES IT TICKABLE IS THAT YOU LOOKED AND THEN FIXED WHAT LOOKING FOUND,
+                   TWICE: the numbers were invisible in the resting grid, and three results in one
+                   beat printed on top of each other - and the first fix (offset along world X) did
+                   not work because on this camera X is partly depth, so you offset along the
+                   CAMERA'S RIGHT instead. Then you said the remaining imperfection out loud: at
+                   2.3 m lane spacing the save's last digit still touches the crit's C. Legible, not
+                   yet roomy, in your own words. A lane that reports the blemish in the capture it
+                   is submitting is a lane I can tick on a number I did not take.
+                   D61_TEST OK 7, parse 0 errors, TWITCH_PARSE OK, OFFFLOOR 0/2278, TOWNWALK PASS,
+                   _delve_test 0 SCRIPT ERROR. Organic tally in the final run: miss 13, hit 11,
+                   crit 1, save 1 - so a miss and a save now say so in an unscripted fight. Resist
+                   and vuln are proved by the scripted burst only and you said so.
+                   *** NEXT: D96 - THE MINIBOSSES STAND UP IN THE GAME. UNCHANGED, AND NOW WIDER
+                   THAN WHEN IT WAS WRITTEN. *** My audit this hour found that minibosses are not
+                   the only dark models: assets/monsters/lords (8 files) and assets/monsters/
+                   creatures (12) appear in NO file in this repo either. Thirty-nine models. So
+                   when you spawn a miniboss with its own body, you will be standing next to the
+                   same hole for lords, which is D97's. DO NOT widen D96 to cover all three - do
+                   the minibosses, name what you learn about the loader, and D97 inherits it.
+                   Art has already measured every miniboss against the posed hero (ratio and pair
+                   span in renders/art/minibosses/_fit_*_register.json): USE THOSE NUMBERS. FIT IS
+                   THE ACCEPTANCE TEST - rendered on the floor at 1080p, not asserted in a gate. A
+                   model that will not load or will not fit gets NAMED and you move on; three named
+                   refusals are worth more than one silent generic body.
+                   THEN D97, THEN D98, THEN D99. ONE THING TO CARRY INTO D98 WHEN YOU GET THERE,
+                   BECAUSE CONTENT HANDED IT TO YOU ALREADY MEASURED: the cheapest honest win in
+                   the whole backlog is delve.gd:190 - `lord_intros[id]` is read as ONE string, so
+                   the same lord says the same line every delve, all night, and 96 written
+                   alternatives sit in `lord_intros_alt` unread. Pick from
+                   `[lord_intros[id]] + lord_intros_alt[id]`, guard the `_note` keys, and the same
+                   shape at roster.gd:1289 for `forge_alt`. Content wrote the exact line numbers in
+                   C-75. It is three lines and it is the first thing a returning viewer notices.
+                   PAUSED, NOT CANCELLED, BACK THE HOUR D99 TICKS: D61.2/.3, L31's remainder,
+                   S2_TEST FAIL (b), T1_TEST's FakeRoster add_brew. A GATE READING RED IS STILL
+                   FIXABLE AT ANY TIME - a lying instrument is never "new work".
                    YOUR WINDOW IS :07-:40, no single claim over 25 minutes, hard release at :40, and
                    the claim line names its expected finish IN REAL CENTRAL TIME, ON ITS OWN LINE.
-                   FIVE HOURS RUNNING YOU HAVE DONE ALL THREE RIGHT.
-  HUB          ->  *** THREE PASSES IN ONE HOUR AND ALL THREE ARE TICKED (hub a5fc84f, on main):
-                   H32 PASS 1 THE SHELL, PASS 2 THE RAIL, PASS 3 THE CHAT COLUMN. *** Last hour you
-                   were the one lane of six that shipped nothing and I said it was the NEXT hour I
-                   would hold you to. You shipped three fifths of Mr. E's item in it.
-                   PASS 2 IS THE ONE THAT MATTERS AND YOU GOT THE IDEA, NOT JUST THE LAYOUT: a hero
-                   mid-delve IS a live channel. Sigil where the avatar goes, name, "Floor 7 - The
-                   Ford Wardens" where the stream title goes, a live dot, and THE FLOOR where the
-                   viewer count goes - a number that moves and that is what a delve is actually
-                   about. Live first, idle below dimmed, the fallen not on the rail because they
-                   have their own tab. That is the acceptance test met: a viewer who lives on Twitch
-                   knows where to click without being told.
-                   AND THE ARIA IS RIGHT WHERE IT WOULD HAVE BEEN EASIEST TO GET WRONG: the rail is
-                   a role="listbox" of role="option" with roving tabindex and Up/Down/Home/End -
-                   NOT a tablist. You did not carry the tab roles across. The fourteen sections
-                   keep their tablist and every panel still reaches.
-                   SECURITY HELD WITH NO EXCEPTIONS, CHECKED BY ME AND NOT TAKEN ON YOUR WORD: no
-                   innerHTML was added (the only two sites in app.js are the page-owned status and
-                   renderNothing strings, both there before), no insertAdjacentHTML, no snapshot
-                   value reaching a selector, URL, src, href or style - railSel is COMPARED against
-                   snapshot names and DOM rows are addressed by an integer index the page owns -
-                   and the CSP meta is byte-for-byte the strict one. Two new localStorage keys,
-                   both whitelisted single values (bellmire.rail.v1, bellmire.chatcol.v1).
-                   THE ONE NEW COLOUR IS RED (--live) AND YOU SAID WHY: a functional signal used
-                   nowhere else. That is exactly the latitude the item gave and nothing more. No
-                   purple, no wordmark, no logo.
-                   AND YOU KEPT CHAT OPT-IN RATHER THAN QUIETLY CHANGING IT. The item said LAYOUT
-                   ONLY and you moved the layout and left the privacy behaviour H8 was built around
-                   alone. Correct call, correctly reported. I am NOT putting it to Mr. E: the item
-                   settled it.
-                   ON YOUR REPORT THAT MR. E HAS OK'D OPT-IN CHAT AND THE WELCOME PANEL ABOVE THE
-                   STAGE: recorded as YOUR report, and I have no independent record of him saying
-                   it. NOTHING TURNS ON IT EITHER WAY - opt-in already followed from "layout only",
-                   and the Welcome panel's placement was never constrained - so both stand and
-                   neither needs re-asking. I am not writing it up as a ruling of his. IF A LANE
-                   EVER REPORTS A DECISION FROM MR. E THAT WOULD CHANGE WHAT IS ALLOWED, quote him
-                   verbatim with the time, the way the W-LIVE and H32 permissions are quoted.
-                   *** YOUR ICON QUESTION IS ANSWERED: YES, WITH FOUR CONDITIONS, AND THEY ARE
-                   WRITTEN OUT UNDER PASS 4 IN THE H32 BLOCK. *** The whitelist mechanism is
-                   approved exactly as you proposed it - a snapshot name is LOOKED UP and yields a
-                   CONSTANT path, an unknown name falls back to the ICON_SET glyph, and img-src
-                   'self' already covers it so the CSP does not move. You were right that this is
-                   the same rule one step further, and right to ask before taking the step.
-                   WHAT I WILL NOT SIGN OFF IS A VERBATIM COPY. I measured the source: 463 PNGs,
-                   22,302,016 bytes, mean 48 KB. That is 23 MB into the repo forever, 23 MB onto
-                   gh-pages, and a grid of 48 KB images on a viewer's phone - and another 23 MB of
-                   blobs every time art regenerates. So: a DERIVED THUMBNAIL set at ONE size, under
-                   6 MB with the measured total reported; the conversion a script in web/tools/
-                   that never edits anything under assets/; a _manifest.json carrying the source
-                   commit, with THE WHITELIST GENERATED FROM IT, never hand-typed; and lazy-loading
-                   with a fixed aspect box so H13 cannot reflow. Full conditions under PASS 4.
-                   NEXT: H32 PASS FOUR - BROWSE AS A CARD GRID WITH HOVER PREVIEWS for Bestiary,
-                   Shops and Lore, using D73's 454 item icons. Cards with pictures, not rows of
-                   text. AND THE TIMING IS WITH YOU FOR ONCE: H29 point 6 landed THIS HOUR, so the
-                   Shops grid has real shelves, a real caravan and real open orders to draw - the
-                   first browse surface that will not say "not published yet". Build the Bestiary
-                   and Lore grids to the same shape.
-                   WHAT DOES NOT RELAX: H13's no-scroll ruling; every security invariant (el()
-                   only, no innerHTML for snapshot values, no snapshot value as URL/src/href/style,
-                   the ICON_SET whitelist, strict CSP kept - a card grid of EXISTING icons needs no
-                   new data and no CSP change, and a hover preview is not a reason to touch img-src);
-                   responsive down to one column; the palette. Pass five is polish.
-                   DO NOT publish to gh-pages - that is MR. E'S CALL ALONE.
-  ART          ->  *** REGISTER CONVERSION 11 OF 14 IS IN AND TICKED - THE BOILER (art 904293e). ***
-                   Ratio 1.00 against the hero's 2.45 m, pair span 5.52 m inside the frame, fit
-                   MEASURED off the posed Knight front/side/back, errors [], blank check 2 files 0
-                   failures, BLENDER_EEVEE. The register stands at 11 converted + 2
-                   measured-and-skipped, and ONE remains.
-                   NEXT: REGISTER CONVERSION 12 OF 14 - THE SNARER. It is the last one and it is
-                   named so nobody re-derives the count. When it lands the register is closed.
-                   KEEP NAMING IN ADVANCE THE THING THAT WILL TEST YOUR OWN FIX. Two hours running
-                   you have called the test before the run and then reported it, which is the only
-                   reason I can tick you on a number I did not take myself.
+                   SIX HOURS RUNNING YOU HAVE DONE ALL THREE RIGHT - and this hour you declared
+                   six relaunches on their own lines rather than hiding them in one claim.
+  HUB          ->  *** PASSES 4 AND 5 ARE IN AND BOTH ARE TICKED (hub 12bbee2 + ec61995, on main).
+                   FIVE PASSES IN TWO HOURS. *** Pass 4 is the one Mr. E will see first: Shops is a
+                   card grid with a picture, a rarity frame and a price, with a hover/focus preview
+                   inside the card's own box; the Bestiary lifts; Lore chapters are browse cards.
+                   *** AND YOU MET ALL FOUR ICON CONDITIONS, WHICH I CHECKED MYSELF OFF THE DISK
+                   RATHER THAN OFF YOUR WORD. *** (1) Derived thumbnails, ONE size, 160 px - and the
+                   budget is not close: 2,038,188 bytes for 463 files, 2.02 MB for the whole
+                   directory with the manifest, against a 6 MB ceiling, and your script EXITS
+                   NON-ZERO if it ever goes over, which is better than reporting a number.
+                   (2) web/tools/make_item_icons.py, one command, and its docstring states it reads
+                   assets/ and never writes there. (3) _manifest.json carries source_commit
+                   7c9b90f, count 463, named 462, total_bytes - and the ITEM_ICONS Map is GENERATED
+                   between markers, with a hand-edit forbidden in the marker line itself. (4)
+                   loading="lazy" with width/height set and a fixed 64 px (.ipic) / 80 px (.big)
+                   box, so H13 cannot reflow.
+                   SECURITY HELD WITH NO EXCEPTIONS: node --check clean; the only two innerHTML
+                   sites in app.js are the page-owned status and renderNothing strings that predate
+                   H32; no insertAdjacentHTML, no onerror, no eval; the CSP meta is BYTE-IDENTICAL
+                   to main's (index.html's whole diff is the skip link and tabindex="-1"); and the
+                   picture path is the whole point - a snapshot name is control-stripped,
+                   lower-cased, looked up in the Map, and a MISS falls through to the SVG glyph, so
+                   a snapshot string never becomes a URL.
+                   AND THE PALETTE DID NOT MOVE. The rarity frames (#6aa84f, #4a86c8, #9b6bc8,
+                   #d9643a) are not new colours - they are the SAME five hexes already at
+                   style.css:1373-1375 for the list view, reused as a border instead of a fill. I
+                   checked, because a purple on a hub that must never look like Twitch is exactly
+                   the thing to check. The live dot stayed red and nothing else was added.
+                   ONE REAL GAP AND IT IS THE REPORTING, NOT THE WORK: PASSES 4 AND 5 HAVE NO
+                   PROGRESS.md ENTRY. You wrote them up in web/NOTES.md, docs/HUB_SECURITY.md and
+                   the commit bodies - which is where the detail belongs - but PROGRESS.md is the
+                   ledger every other lane and every future session reads, and two passes are
+                   invisible in it. Write one entry covering both, with the measured byte total and
+                   the four conditions, next slot.
+                   *** NEXT: H32'S OWN ACCEPTANCE RUN - THE LAST THING BETWEEN THE ITEM AND ITS
+                   TICK, AND IT IS NOT NEW WORK. *** No pass remains. What has never been done since
+                   pass 4 is to RUN THE STATE TESTS AND LOOK: ?state=stale, ?state=empty,
+                   ?state=fail, ?mock=chronicle, ?mock=crowd, ?open=1, an unknown payload version,
+                   and the hub rendering a REAL v5 payload - the game build left one at
+                   renders/cycles/h29p6/payload.json. Capture the Shops grid, the Bestiary grid and
+                   Lore at 1080p AND at one column, and check two things specifically: that a
+                   lazy-loaded picture arriving cannot reflow a grid (H13), and that a card with NO
+                   picture falls back to the glyph without a gap in the row. 0 page errors, 0
+                   dialogs, as you measured H29 point 6. Then I tick H32 itself.
+                   WHAT DOES NOT RELAX: H13's no-scroll ruling; every security invariant; the
+                   palette; responsive to one column. DO NOT publish to gh-pages - MR. E'S CALL
+                   ALONE.
+  ART          ->  *** YOU SHIPPED NOTHING THIS HOUR AND I AM NOT GUESSING WHY - SAY SO IN ONE
+                   LINE. *** `origin/art` carries only the two plan syncs since 19:58; the 20:34
+                   slot produced no commit and no PROGRESS entry. A SILENT SLOT AND A DEAD LANE
+                   LOOK IDENTICAL FROM HERE, which is the rule I hold every other lane to, and the
+                   chat bot and HUD lanes have both written stand-down lines rather than go quiet.
+                   If the Snarer is mid-conversion and did not finish inside the slot, THAT IS
+                   FINE AND IT IS THE RIGHT CALL - a job too long for its window is split with a
+                   checkpoint, never run over. Commit the checkpoint and write the line. Eleven
+                   conversions in a row were clean work and nothing about this reads as a problem
+                   with the lane; it reads as a missing sentence.
+                   NEXT: REGISTER CONVERSION 12 OF 14 - THE SNARER, unchanged. It is the last one
+                   and it is named so nobody re-derives the count. When it lands the register closes.
+                   KEEP NAMING IN ADVANCE THE THING THAT WILL TEST YOUR OWN FIX - two hours running
+                   you did, and it is the only reason I can tick you on a number I did not take.
                    STILL OPEN AND STILL YOURS AFTER THE SNARER: the gloves' _G_FLARE0/_G_FLAREK
                    re-tune. D94e ported your derivation into gear.gd bit for bit, so the game's
                    glove IS your proof row, and your re-shot row - SAME METHOD - is the ONLY number
                    that can move the gloves off PARTLY TOO SMALL 3 of 15. You take the lock only to
                    prove fit, so it fits in any gap.
+                   AND ONE THING YOUR WORK IS ABOUT TO BE NEEDED FOR: D96 goes to the game build
+                   next and it is told to use YOUR measured numbers
+                   (renders/art/minibosses/_fit_*_register.json) rather than re-derive scale. If a
+                   register entry is stale or you would not stand behind one of those ratios, say
+                   which, now, before it is built on.
                    THE FREEZE GIVES YOU ONE LATITUDE NOBODY ELSE HAS: if you go genuinely dry, you
                    may invent MINIBOSSES. Nothing else.
-  CONTENT      ->  *** C-74 IS IN AND TICKED (content 183a931), AND YOU WERE RIGHT TO DISAGREE WITH
-                   ME. *** I said disasters was the stalest file by commit order. You said commit
-                   order is not what matters and showed the working: every disaster already holds
-                   about 96 lines, so a repeat is rare, while the miniboss feed - LIVE since D-MBF
-                   and read by delve.gd at exactly two phases, arrive (line 399) and fall (line
-                   1799) - had 5-6 arrive and 4 fall per miniboss, so a repeat fight had a
-                   ONE-IN-FOUR chance of an identical death line. That is a player-visible defect
-                   measured, not a file date. You followed your reading and showed me why, which is
-                   precisely what I asked for. 98 lines, pools now 8-9 arrive and 8 fall across all
-                   fourteen minibosses.
-                   AND YOU REFUSED THE EASY COUNT AGAIN: act and broken are NOT wired, so you left
-                   them alone rather than pad dead pools. Eighth cycle without padding.
-                   VALIDATION THE WAY YOU ALWAYS DO IT: all four data files parse, every
-                   pre-existing key and value identical on a parsed-value compare, appends only,
-                   key order kept, 98 added 0 changed, no line repeating an existing string, LF
-                   kept, no floor count, no artifact stocked.
-                   ONE SMALL THING TO FIX AND IT IS NOT THE WORK: your PROGRESS.md header reads
-                   "## C-74 (2026-11-17)". The commit landed 19:25 CT on 16 Nov. That is the UTC
-                   date on a CT ledger - the same class of fault as the future stamps. READ THE
-                   CLOCK OFF THE MACHINE AND WRITE CT.
-                   NEXT: NAME THE STALEST FILE AGAIN AND SHOW THE WORKING - same standing item,
-                   and judge it the way you just did, by what a viewer would notice twice, not by
-                   commit date. Your own entry says act and broken stay dead until the game build
-                   wires them; I have put that question to the game build IN WRITING this hour, so
-                   you will get an answer rather than silence.
+  CONTENT      ->  *** C-75 IS IN AND TICKED (content b95d002) AND IT IS THE MOST VALUABLE THING
+                   ANY LANE SHIPPED THIS HOUR, WITH ZERO LINES WRITTEN. *** You were asked to name
+                   the stalest file. You went looking for who READS each pool, found that
+                   `lord_intros[id]` is read as a single string so the same lord says the same line
+                   every delve all night, and named four alt pools plus the wandering boss - about
+                   360 written lines that reach nobody - with the reader's file and LINE NUMBER for
+                   each. Then you added nothing, on purpose, because every pool you could grow is
+                   either already 36+ lines or unread. NINTH CYCLE WITHOUT PADDING, and this time
+                   the refusal came with the three-line fix that would free 236 of those lines.
+                   IT IS ALREADY DOING WORK: your findings are written into the game build's row
+                   above as the thing it carries into D98, with your line numbers, and my own audit
+                   this hour confirmed every one of them independently and found four more unread
+                   keys outside your files. You reported this before anyone asked you to, which is
+                   why D98 exists at all.
+                   AND THE DATE HEADER IS FIXED - C-74 now reads 2026-11-16, CT off the machine.
+                   NEXT: C-76 - NAME THE STALEST LIVE FILE AND SHOW THE WORKING, same standing
+                   item, with the restriction you set yourself: STAY OFF THE DEAD POOLS until a
+                   reader lands, and do not re-widen miniboss_feed, which you widened last cycle.
+                   If that leaves you with nothing worth writing, SAY THAT IN ONE LINE AND STOP -
+                   "there is no stale live pool this cycle" is a true and useful finding under this
+                   freeze, and I will take it over a padded file. If you would rather spend the
+                   slot on something harder: the SECOND-ORDER question your own method raises is
+                   which live pools are thin RELATIVE TO HOW OFTEN THEY FIRE - a 36-line pool on a
+                   beat that fires every ninety seconds repeats sooner than a 46-line pool on a
+                   beat that fires twice a night. You have the readers mapped now. Your call.
                    You need no lock, so your slot is never blocked.
-  CHAT BOT     ->  *** B14 IS TICKED AND MY EDIT WAS RIGHT - YOU PROVED IT INSTEAD OF TAKING IT
-                   (chatbot 39847b3, on main). *** B11_MUSTER OK bad=0 over thirty checks on my
-                   18:58 change to tools/_b11_muster.gd:73. The muster now prints "At the dungeon
-                   mouth (2): ErrandFan, ChatFan. You are second in line." and the gate asserts the
-                   queue's own order. SIX OF SIX GREEN: parse rc=0 with zero SCRIPT ERROR and zero
-                   Parse Error, L14_TEST OK, TWITCH_PARSE OK, D704_ECHO OK 356, B11_MUSTER OK, and
-                   COMMANDS_DOC wrote 27 commands leaving docs/COMMANDS.md BYTE-IDENTICAL (md5
-                   fc67173cfaa05ab7b522ef7305531f23 either side).
-                   *** AND YOU FOUND SOMETHING WORTH MORE THAN THE ITEM. *** `--quit` was silencing
-                   the frame-30 gate: rc=0, no verdict, and an absent verdict read as a pass. You
-                   caught it, relaunched without `--quit`, and wrote the rule. I have promoted it to
-                   a STANDING RULE FOR EVERY LANE at the top of this block. A worker that notices
-                   its own instrument is lying is worth more than a worker that ships.
-                   NEXT: STAND DOWN AND WRITE THE LINE. Your queue is genuinely empty - D67, D69
-                   and D70's parts all live in twitch_eventsub.gd and are the GAME BUILD's, and
-                   tools/ is not yours. THE FREEZE IS IN FORCE: a dry lane does not invent work.
-                   One line in PROGRESS.md saying you stood down and why, plus the lock state you
-                   read. A silent slot and a dead lane look identical here.
-                   IF YOU RUN A BATTERY AT ALL: run it under the new rule - no `--quit` on a
-                   frame-counting gate, and no verdict means RED.
+  CHAT BOT     ->  *** B15 IS TICKED (chatbot e7b12f6) AND IT IS EXACTLY THE ITEM I SET YOU. ***
+                   You stood down, wrote the line, and then did the thing that was worth doing with
+                   the slot: RE-PROVED ALL SIX GATES ON THE NEW MAIN b9bd5cd rather than assuming
+                   last hour's green survived four lanes merging. Parse 0 errors, L14_TEST OK,
+                   TWITCH_PARSE OK, D704_ECHO OK 356, B11_MUSTER OK bad=0, COMMANDS_DOC 27 with
+                   docs/COMMANDS.md byte-identical. AND YOU RAN B11_MUSTER WITHOUT `--quit`, under
+                   the rule you wrote yourself last hour. A lane that applies its own finding
+                   without being told to is the whole point of writing rules down.
+                   NEXT: STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged. Your queue
+                   is genuinely empty: D67, D69 and D70's parts all live in twitch_eventsub.gd and
+                   are the GAME BUILD's, tools/ is not yours, and the game build is on WIRING ONLY
+                   until D99 ticks so nothing of yours is coming back this hour. THE FREEZE IS IN
+                   FORCE: a dry lane does not invent work.
+                   RE-PROVING THE BATTERY ON A CHANGED MAIN IS A LEGITIMATE USE OF YOUR SLOT and
+                   you may do it again - main moved again this hour (five lanes merged, including
+                   scripts/monster.gd and scripts/delve.gd, which D704_ECHO and L14 sit downstream
+                   of). If you run it: no `--quit` on a frame-counting gate, and NO VERDICT MEANS
+                   RED.
                    Your window is :45 and IT ENDS AT :52.
-  HUD          ->  *** U43 IS A STAND-DOWN AND I AM COUNTING IT AS DELIVERY AGAIN, BECAUSE IT IS
-                   THE WHOLE ITEM I SET YOU (hud-ui 8d46c8a, on main). *** Queue empty with the
-                   reason, freeze acknowledged, no defect known in the seven HUD files since U40,
-                   RUN_LOCK read at 19:52 CT with the last line IDLE 19:50:29, tasklist showing no
-                   Godot, nothing claimed and nothing to release. File-only, no lock taken, and the
-                   :52-:07 window left free for a lane that might have needed it.
-                   THREE SLOTS RUNNING YOU HAVE BEEN DRY AND THREE SLOTS RUNNING YOU HAVE NOT
-                   INVENTED ANYTHING. Under this freeze that is the behaviour, not a shortfall.
+  HUD          ->  *** U44 IS A STAND-DOWN AND I AM COUNTING IT AS DELIVERY FOR THE FOURTH TIME,
+                   BECAUSE IT IS THE WHOLE ITEM I SET YOU (hud-ui 7377f83, on main). *** Queue empty
+                   with the reason, freeze acknowledged, no defect known in the seven HUD files
+                   since U40, RUN_LOCK read at 20:52 CT with the last line IDLE 20:49:26, tasklist
+                   showing no Godot, nothing claimed and nothing to release, and party_frames.gd and
+                   boss_bar.gd explicitly left alone because they are the game build's.
+                   FOUR SLOTS DRY AND FOUR SLOTS WITHOUT INVENTING ANYTHING. Under this freeze that
+                   is the behaviour, not a shortfall.
+                   *** ONE THING THAT LOOKS LIKE A HUD DEFECT THIS HOUR AND IS NOT - DO NOT ACT ON
+                   IT. *** The game build reported that in the resting 2x2 grid the director quarter
+                   culls HudDock.L_FLOAT, so D61.1's new damage numbers are drawn nowhere on the
+                   stream's normal layout. That cull is L21, MR. E'S OWN RULING of Nov 11:
+                   "floating text clamped to its pane and off in quarter panes." YOUR CODE IS DOING
+                   WHAT HE ASKED. Do not relax it, do not special-case crits into the quarter, and
+                   do not raise it with him - I have answered it in the game build's row and it is
+                   closed.
                    NEXT: STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged. DO NOT go
                    looking for something to build. If you can see a DEFECT in shipped HUD work -
                    not a feature, a defect - in hud_dock / spotlight / auto_director / dice /
                    feed_hud / leaderboard_panel / ui_theme, fix that instead and name it.
                    DO NOT TOUCH party_frames.gd OR boss_bar.gd - both are the game build's, and
-                   they are named in the game build's L31 remainder THIS HOUR, so staying off them
-                   matters more than usual.
+                   D61.2 and D61.3 are named in its paused queue, so staying off them still matters.
                    YOUR WINDOW IS :52-:07, no single claim over 15 minutes, hard release at :07.
+
+
+FIVE OF SIX SHIPPED, ALL FIVE MERGED AND TICKED (team lead, 2026-11-16 20:58 CT, clock read off the
+machine at 21:05:18-06:00).
+TICKED THIS HOUR: *** D61.1 *** (laptop 72096ad) - a number in the world says what KIND of result it
+was: hit, "CRIT 23!", "miss", "save 7", "resist 7", "7 x2!", ordinary hits pooling inside 0.35 s,
+three live labels per creature, offset along the camera's right so a beat of three does not print on
+itself. D61_TEST OK 7 and the lane said in writing that D61.2/.3 and the boss-fight capture are not
+claimed, so D61 and L31 stay open. *** H32 PASSES 4 AND 5 *** (hub 12bbee2, ec61995) - browse as
+card grids with hover previews, item pictures through a GENERATED whitelist, 463 derived 160 px WebP
+thumbnails at 2,038,188 bytes against a 6 MB budget the script enforces itself, CSP byte-identical,
+no new colour; then polish - dark scrollbars, a section-bar fade, a skip link, "[" "]" "g" keys.
+*** C-75 *** (content b95d002) - the stalest thing in the data is a READER, not a writer:
+`lord_intros[id]` read as one string while 96 alternatives sit unread, four dead alt pools plus the
+wandering boss named with their reader line numbers, about 360 lines that reach nobody, and NO DATA
+ADDED. *** B15 *** (chatbot e7b12f6) - stood down and re-proved six of six gates on the new main,
+B11_MUSTER run without `--quit` under its own rule. *** U44 *** (hud-ui 7377f83) - the stand-down
+accounting, which was the whole item set.
+NOT TICKED, DELIBERATELY, AND EACH FOR A STATED REASON: H32 THE ITEM - all five passes are in and
+ticked, but the hub's state tests and a look at the browse grids have not been run since pass 4, and
+that acceptance is the item's own terms, not a withheld tick. D61 AND L31 - the lane itself said .2,
+.3 and the capture are not done. THE GLOVES - no re-shot proof row this hour, so the number is still
+3 of 15 by the old method. D96-D99 - written at 20:45, after the game build's slot was spent.
+ART - nothing to tick: no commit and no entry on `origin/art` this hour.
+THE LOCK: NINTH HOUR RUNNING WITH NO OVERRUN, NOBODY STARVED, NO FUTURE STAMP, NO STALE LOCK
+CLEARED. game build claimed 20:10:28 naming 20:26 and then DECLARED six relaunches on their own
+lines, each with its own expected finish (20:12:23, 20:17:25, 20:19:17, 20:20:47, 20:22:33,
+20:24:19 naming 20:34), releasing IDLE 20:30:26 - twenty minutes inside its 25-minute :07-:40
+window. Chat bot claimed 20:47:26 naming 20:52, released IDLE 20:49:26 - two minutes, and the HUD
+lane's :52-:07 left completely free. HUD read the lock at 20:52, confirmed no Godot alive, took
+nothing. The hub took no lock (it never needs one) and art took none. I took no lock and ran no
+Godot. SIX DECLARED RELAUNCHES IN ONE WINDOW IS NOT AN OVERRUN - it is a lane iterating on a
+capture and saying so each time, which is the behaviour the protocol asks for.
+NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
+created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
 
 
 SIX OF SIX SHIPPED, ALL SIX MERGED AND TICKED (supervisor, 2026-11-16 19:58 CT, clock read off the
@@ -794,7 +946,7 @@ THE PASS LEDGER (the supervisor ticks each pass as it lands; H32 itself stays op
         OPT-IN - nothing contacts irc-ws.chat.twitch.tv until the viewer presses "Open the guild
         chat". That is LAYOUT ONLY, which is what the item asked for, and it leaves H8's privacy
         behaviour alone. The "Guild chat" tab is gone; the column replaces it.
-  - [ ] PASS 4 - BROWSE AS A CARD GRID WITH HOVER PREVIEWS (Bestiary, Shops, Lore) off D73's 454
+  - [x] PASS 4 - BROWSE AS A CARD GRID WITH HOVER PREVIEWS (Bestiary, Shops, Lore) off D73's 454
         icons. H29 point 6 landed 2026-11-16 19:19 CT, so the Shops grid now has real shelves, a
         real caravan and real open orders - it will NOT read "not published yet".
 
@@ -837,7 +989,51 @@ THE PASS LEDGER (the supervisor ticks each pass as it lands; H32 itself stays op
         alt is not a URL and it is not markup.
         RECORD ALL OF THIS IN docs/HUB_SECURITY.md as the extension of the whitelist rule. That file
         is yours; I am not writing in it.
-  - [ ] PASS 5 - POLISH.
+        *** TICKED 2026-11-16 20:58 CT (hub 12bbee2, merged to main). ALL FOUR CONDITIONS MET AND
+        CHECKED BY THE TEAM LEAD OFF THE DISK, NOT OFF THE LANE'S WORD. *** Shops stock is a card
+        grid - picture, name, rarity pill, price, rarity as a FRAME not a fill - with a hover/focus
+        preview overlay inside the card's own fixed box; the Bestiary cards lift on hover/focus; the
+        Lore chapters are browse cards and keep their tablist. CONDITION 1: 463 derived 160 px WebP
+        thumbnails, one size (160 = 2x the largest 80 px box), 2,038,188 bytes, 2.02 MB for the whole
+        directory including the manifest, against the 6 MB ceiling - and make_item_icons.py EXITS
+        NON-ZERO if it ever exceeds the budget, which is stronger than reporting a number. CONDITION
+        2: web/tools/make_item_icons.py, one command, reads assets/icons/items/ and data/items.json
+        and writes only under web/ - nothing under assets/ is edited, moved or rewritten. CONDITION
+        3: web/icons/items/_manifest.json carries source_commit 7c9b90f, count 463, named 462,
+        thumb_px 160 and total_bytes, and the ITEM_ICONS Map in app.js is GENERATED between
+        markers by the same script, the marker line itself forbidding a hand edit. CONDITION 4:
+        loading="lazy" with decoding="async", width and height set, and a fixed .ipic 64 px /
+        .ipic.big 80 px box, so an arriving picture cannot reflow and H13 holds.
+        SECURITY, VERIFIED: node --check clean; the only two innerHTML sites in app.js are the
+        page-owned status and renderNothing strings that predate H32; no insertAdjacentHTML, no
+        onerror attribute, no eval; the CSP meta is BYTE-IDENTICAL to main's; and a snapshot item
+        name is control-stripped, lower-cased and LOOKED UP - a hit yields a page-constant path, a
+        miss falls through to the ICON_SET glyph - so a snapshot string never becomes a URL. `alt`
+        is set from the name as text, which the sign-off expected.
+        THE PALETTE DID NOT MOVE: the rarity frame hexes (#6aa84f, #4a86c8, #9b6bc8, #d9643a) are
+        the SAME five already at style.css:1373-1375 for the list view, reused as a border. No new
+        colour was added by this pass. Recorded in docs/HUB_SECURITY.md as required.
+        ONE GAP, IN THE REPORTING AND NOT THE WORK: this pass and pass 5 have NO PROGRESS.md entry -
+        they are written up in web/NOTES.md, docs/HUB_SECURITY.md and the commit bodies only. The
+        hub lane owes one entry covering both.
+  - [x] PASS 5 - POLISH. TICKED 2026-11-16 20:58 CT (hub ec61995, merged to main). Thin dark
+        scrollbars on the three scroll regions (the narrow top strip had been showing a white native
+        bar), a mask fade on the right edge of the section bar with the active tab scrolled into
+        view so a clipped tab reads as "more this way", a skip link to the stage, a quiet focus ring
+        on the stage, and keyboard shortcuts while not typing: "[" folds the rail, "]" folds or
+        opens the chat, "g" focuses the rail (the listbox keeps Up/Down/Home/End/Enter). Layout and
+        keys only: no new data, no CSP change (index.html's entire diff is the skip link and
+        tabindex="-1"), no new storage key, no snapshot value used as a selector, URL, src, href or
+        style. The live dot stayed red; nothing was added to the palette.
+
+ALL FIVE PASSES ARE IN AND ALL FIVE ARE TICKED AS OF 2026-11-16 20:58 CT. H32 ITSELF IS STILL OPEN,
+and the only thing left is the item's own acceptance, which is NOT new work: the hub's state tests
+(?state=stale, ?state=empty, ?state=fail, ?mock=chronicle, ?mock=crowd, ?open=1, an unknown payload
+version) have not been run since pass 4 landed, and nobody has LOOKED at the browse grids. Render a
+real v5 payload (the game build left one at renders/cycles/h29p6/payload.json), capture Shops, the
+Bestiary and Lore at 1080p AND at one column, and prove two things specifically: a lazy-loaded
+picture arriving cannot reflow a grid, and a card with no picture falls back to the glyph without a
+gap in the row. 0 page errors, 0 dialogs. Then the item ticks.
 SECURITY ACROSS PASSES 1-3, VERIFIED BY THE SUPERVISOR AND NOT TAKEN ON THE LANE'S WORD: no
 innerHTML added (the only two sites in app.js are page-owned strings that predate H32), no
 insertAdjacentHTML, no snapshot value used as a selector, URL, src, href or style (railSel is only
@@ -6529,6 +6725,22 @@ CHANGELOG 2026-11-14 05:45 (supervisor): shipped to main this session - bit-chee
          miss that says so rather than showing nothing, a save made, a hit resisted and a hit that landed
          for extra. Pooled and rate-capped so a flurry reads as a flurry instead of a wall of digits, and
          legible at 1080p over a dark floor.
+      .1 IS DONE AND TICKED (2026-11-16 20:58 CT, laptop 72096ad on main) - D61 STAYS OPEN. monster.gd
+         show_result(kind, amount): six looks from one table, parchment figures on an ink outline, teal for
+         the defender's wins - "14", "CRIT 23!" (104 px, gold, a scale pop, 1.3 s), "miss", "save 7",
+         "resist 7", "7 x2!". Ordinary hits POOL inside 0.35 s into one climbing figure and crits never
+         pool; LIVE_CAP 3 labels per creature, oldest dropped; simultaneous labels step sideways along the
+         CAMERA'S RIGHT (an earlier fix offset along world X, which on this camera is partly depth and did
+         not separate them). delve.gd wires miss, save, smite-on-the-dead as x2 and a lord's ward as resist;
+         no damage arithmetic changed. D61_TEST OK 7, and the organic tally in the final run was miss 13,
+         hit 11, crit 1, save 1 - resist and vuln are proved by the scripted burst only, which the lane
+         said. Looked at: renders/cycles/d61a/burst_1080.png. STATED IMPERFECTION, NOT HIDDEN: at 2.3 m
+         lane spacing the save's last digit still touches the crit's C - legible, not yet roomy.
+         AND A FINDING ANSWERED BY AN EXISTING RULING, SO NOBODY WAITS: in the resting 2x2 grid the
+         director quarter culls HudDock.L_FLOAT, so no damage number - old or new - is drawn on the
+         stream's normal layout. That cull is L21, MR. E'S OWN RULING of Nov 11 ("floating text clamped to
+         its pane and off in quarter panes"). It is CORRECT BEHAVIOUR, not a defect; no lane changes it and
+         it does NOT go back to Mr. E. The capture folds the grid the L51 way, which is a real layout.
       .2 CONDITIONS YOU CAN SEE. The conditions the game already applies, shown as icons - on the party
          frames for heroes and over the monster for monsters - with duration or stack where the game knows
          it. Icons come from the project's own set; no new asset without a CC0 LICENSE note. A viewer who

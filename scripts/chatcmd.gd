@@ -787,6 +787,24 @@ static func commands() -> Dictionary:
             if not dead_app.is_empty():
                 push_error("COMMANDS_DATA FOREIGN APP EMPTY: %d app(s) in `foreign` name nothing, so their commands are answered: %s" % [dead_app.size(), dead_app])
                 printerr("COMMANDS_DATA FOREIGN APP EMPTY - %d app(s) name nothing: %s" % [dead_app.size(), dead_app])
+        # B29 (B28 residual 2, closed): the two COOLDOWN keys are the only published numbers in
+        # this file that NOTHING vouches for. `cooldown_s` is read by cooldown() below with a
+        # silent fallback to COOLDOWN; `twitch_cooldown_s` is read by the game build's
+        # twitch_chat.gd with a silent fallback to its own constant. Delete either key and every
+        # gate in the house stays green while the bot quietly enforces a DIFFERENT number from
+        # the one docs/COMMANDS.md promises a viewer - the exact drift L14 was built to refuse,
+        # one key over. A wrong TYPE is the same fault: a string "1.5" reads as 0.0 and falls
+        # back. Neither is fatal, so both say it out loud and carry on, the shape every guard
+        # above uses. A battery greps COMMANDS_DATA; no line is the healthy reading.
+        for ck in ["cooldown_s", "twitch_cooldown_s"]:
+            if not (parsed as Dictionary).has(ck):
+                push_error("COMMANDS_DATA COOLDOWN MISSING: data/commands.json carries no `%s` - the enforced wait silently falls back and docs/COMMANDS.md still promises the old number" % ck)
+                printerr("COMMANDS_DATA COOLDOWN MISSING - no `%s`; the published wait and the enforced wait can now differ" % ck)
+                continue
+            var cv: Variant = (parsed as Dictionary)[ck]
+            if not (typeof(cv) == TYPE_FLOAT or typeof(cv) == TYPE_INT) or float(cv) <= 0.0:
+                push_error("COMMANDS_DATA COOLDOWN UNUSABLE: data/commands.json `%s` is not a positive number (%s) - the read falls back and the published wait lies" % [ck, str(cv)])
+                printerr("COMMANDS_DATA COOLDOWN UNUSABLE - `%s` is not a positive number (%s)" % [ck, str(cv)])
         _cmds = parsed
     return _cmds
 

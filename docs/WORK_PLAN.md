@@ -832,6 +832,24 @@ VALUE IS RED, NOT EMPTY:
   4. MERGE EVERY LANE INTO MAIN BEFORE YOU SYNC. That is what made this recoverable, and it should
      stay the order for that reason alone.
 
+*** THE REPORTING LINE, AND WHO DECIDES PUBLISHING. MR. E, 17 NOV 01:44 CT, verbatim:
+*** "so all those under you report to you. you then report to supervisor". ***
+THREE SEATS, NOT TWO. The six lanes report to the TEAM LEAD (:58). The TEAM LEAD reports UP to a
+separate SUPERVISOR chat Mr. E runs - confirmed by him at 01:50 CT. The team lead is the middle.
+  - TICKING, MERGING AND QUEUEING stay with the team lead. That is unchanged and is not a
+    supervisor decision.
+  - REPUBLISHING THE HUB TO gh-pages IS THE SUPERVISOR'S CALL. Mr. E, 01:40 CT: "publishing is not
+    up to me its up to supervisor". It is NOT Mr. E's any more and it is NOT the team lead's. The
+    hub lane never publishes; it ends a run with "READY TO PUBLISH" and the evidence, the team lead
+    VERIFIES it by its own grep and screenshot, and it goes UP with a recommendation.
+  - Every team lead run now ends with a "FOR THE SUPERVISOR" line - what is waiting above, with a
+    recommendation, or "nothing".
+  - NOTE THE WORD. In entries written BEFORE 16 Nov 20:50 "supervisor" means the seat now called
+    team lead. From 01:44 CT on 17 Nov it means the seat ABOVE it. A team lead seat read it wrong
+    at 01:40, wrote itself the publishing authority, and put that into two prompts; it was caught
+    and reversed within ten minutes (team lead prompt 01:46, hub prompt 01:51). IF A SENTENCE COULD
+    MEAN EITHER SEAT, IT IS NOT YOURS - route it up or ask.
+
 *** MERGED AND TICKED THIS HOUR (main 01:18 CT) - FOUR LANES SHIPPED INTO THE RESTART. ***
   ART - SYSTEM 1 IS TICKED (origin/art 4ab066d). See the tick under the ART row below.
   CONTENT - C-78 (origin/content 6f741dc) MERGED, **NOT TICKED, HALF DELIVERED** - measured below.

@@ -8340,6 +8340,26 @@ said nothing. No secrets written anywhere.
   same hour: first commit 06:18:37, IDLE 06:23:52. The 06:23:00 RUNNING line was therefore a future
   stamp by about three minutes. The work behind both is unaffected; the lock was IDLE at 06:23:52.
 
+## D-cycle - S13 the sixteenth miniboss gets its MB_FIT key and its .import sibling, 2026-11-17T07:16:31-06:00 (game build)
+- TAKE THIS NEXT (06:58 CT block) gave GAME BUILD: add "quartermaster": 0.96 to scripts/delve.gd MB_FIT,
+  run one import for quartermaster.glb.import, declare :33 not :35 on the opening claim. Systems 2-4 still frozen.
+- scripts/delve.gd MB_FIT gains "quartermaster": 0.96 - art's number, read from
+  renders/art/minibosses/_fit_report.json pairs.quartermaster.ratio (0.96, verdict GREEN), not re-derived.
+  One comment line names the source. "quartermaster" still appears in no miniboss def in scripts/ or data/;
+  the key is in place for when one names it (same shape as jointer).
+- --headless --import wrote assets/monsters/minibosses/quartermaster.glb.import. Minibosses now 27 .glb / 27 .import.
+- VERDICT LINES (Godot chain 07:10:06-07:16:xx, one claim): import rc 0, parse 0 SCRIPT ERROR / 0 Parse Error,
+  OFFFLOOR_VERDICT OK 0 of 2007 samples off the floor, TWITCH_PARSE OK (8 checks),
+  TOWNWALK in_solid=0/16845 raid_in_solid=0/8042 PASS, DELVE_TEST OK ran 9001 frames,
+  D96_FIT OK 70 checks, 14 minibosses in their own bodies.
+- LOCK, MY FAULT AGAIN AND NAMED: the opening claim still declared 07:35 from 07:08:30 (26.5 min) - I took
+  the lock before reading the row that told me to declare :33. Corrected on a second line with 07:33.
+  That second line was first TYPED as 07:11:40 when the machine read ~07:09 - a future stamp; corrected in
+  place with a note once the machine read 07:11:18. Next firing: read the clock, then write the line, and
+  declare :33.
+- No live Twitch test: nothing redeemed, cheered or posted; 0 bits. The game's boot joins #jestsayin96
+  silently as always. No secrets written.
+
 ## C-84 (2026-11-17 CT, clock ~06:0x) - TAKE THIS NEXT row for CONTENT: barks deepened a fifth time (lore_lines.json only)
 - TAKE THIS NEXT (05:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
 - data/lore_lines.json `barks`: +65 lines. enter +11, lord +10, trap +11, hurt +10, drink +12, misfire +11. Counts now enter 186, lord 179, trap 182, hurt 181, drink 175, misfire 178. Plain register, no floor counts. Case-insensitive duplicates dropped.

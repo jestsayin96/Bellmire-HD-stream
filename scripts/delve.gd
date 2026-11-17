@@ -364,6 +364,7 @@ func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
 ## art register conversion and is preferred when it is on disk. MB_FIT is art's MEASURED
 ## creature-to-hero height ratio per model (renders/art/minibosses/_fit_*_register.json and
 ## _fit_report.json, hero = the posed KayKit knight at 2.45) - copied, not re-derived.
+## S13: quartermaster 0.96 from _fit_report.json pairs.quartermaster.ratio (art, 0f0caea).
 const MB_DIR := "res://assets/monsters/minibosses/"
 const MB_HERO_H := 2.45
 const MB_FIT := {
@@ -371,7 +372,7 @@ const MB_FIT := {
 	"snuffer": 1.06, "sexton": 1.00, "sexton_chibi": 1.00, "porter": 0.94, "porter_chibi": 0.94,
 	"tallyman": 0.88, "tallyman_chibi": 0.88, "cook": 0.84, "cook_chibi": 0.84,
 	"sluicekeeper": 1.02, "sluicekeeper_chibi": 1.02, "sower": 0.92, "sower_chibi": 0.98,
-	"snarer": 0.94, "snarer_chibi": 1.00, "jointer": 0.92, "stoker": 0.98, "stoker_chibi": 0.98, "bellman": 1.10,
+	"snarer": 0.94, "snarer_chibi": 1.00, "jointer": 0.92, "quartermaster": 0.96, "stoker": 0.98, "stoker_chibi": 0.98, "bellman": 1.10,
 	"boiler": 0.86, "boiler_chibi": 1.00}
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:

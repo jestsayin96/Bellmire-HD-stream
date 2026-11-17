@@ -255,3 +255,14 @@ RUNNING 2026-11-17T06:16:00-06:00 (game build S12: relaunch - floors on T1/S2/H2
 IDLE 2026-11-17T06:18:37-06:00 - game build S12: floors on T1/S2/H29P6/D70 gates, S2 exit code matches verdict. parse 0 errors, T1_TEST OK 18 (break NO VERDICT rc2), H29P6 OK 22, D70 OK 16, S2 OK 19, TWITCH_PARSE OK, OFFFLOOR_VERDICT OK 0/2099, TOWNWALK PASS, DELVE_TEST OK. Godot closed (game build)
 RUNNING 2026-11-17T06:23:00-06:00 (game build S12b: relaunch - 05:58 row: MB_FIT snarer_chibi/jointer + --import for .glb.import siblings, parse + d96_fit; expected finish 06:36)
 IDLE 2026-11-17T06:23:52-06:00 - game build S12b: MB_FIT snarer_chibi 1.00 + jointer 0.92 (art's numbers), 27 .glb.import siblings committed. import 0 errors, parse 0 errors, D96_FIT OK 70. Godot closed (game build)
+
+RUNNING 2026-11-17T06:47:55-06:00 (chat bot B24: the ONE thing owed - break D (`what` removed) and break E (foreign app emptied) re-run with stdout redirected to a file and a HARD WALL-CLOCK CAP so a hang prints its own verdict, then one healthy confirm. ONE battery, nothing queued after it; expected finish 06:54)
+IDLE 2026-11-17T06:51:03-06:00 - B24: break D (`what` removed from a command) and break E (foreign app emptied) BOTH PROVED, rc=0 in ~20 s each under a 75 s wall-clock cap - B23's hang was NOT the guard and stays unexplained, not fixed. Healthy on main e3ec68a: parse 0 errors / 0 COMMANDS_DATA, L14_TEST OK 22, COMMANDS_DOC OK 27 doc byte-identical, commands.json restored f37b1d2c6909. Logs deleted, Godot exited on its own (chat bot)
+
+RUNNING 2026-11-17T06:53:59-06:00 (HUD U51: _l73_test cap -> NO VERDICT; parse, cap=15 break, then one normal run; expected finish 07:02, hard release by 07:07)
+
+IDLE 2026-11-17T06:57:09-06:00 - HUD U51: _l73_test cap -> NO VERDICT proved (cap=5 rc 2), normal L73_TEST OK rc 0, parse 0. Godot closed (HUD)
+
+RUNNING 2026-11-17T07:08:30-06:00 (game build D98, expected finish 07:35, hard release by 07:40)
+RUNNING 2026-11-17T07:09:30-06:00 [TYPED; first written as 07:11:40, a future stamp - machine read 07:11:18 afterwards; corrected] (game build: corrected claim line - MB_FIT quartermaster + import run, expected finish 07:33, inside the 25-min cap)
+IDLE 2026-11-17T07:16:48-06:00 - game build S13: MB_FIT quartermaster 0.96 (art, not re-derived) + quartermaster.glb.import. import rc0, parse 0 errors, OFFFLOOR OK 0/2007, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK, D96_FIT OK 70. Godot closed (game build)

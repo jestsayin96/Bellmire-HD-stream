@@ -1,0 +1,1069 @@
+{
+ "sweep_m": [
+  0.0,
+  0.01,
+  0.02,
+  0.03,
+  0.04,
+  0.05,
+  0.06
+ ],
+ "cells": [
+  {
+   "key": "baker_mitts",
+   "cost": 200,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 142,
+     "n_shell": 46,
+     "cuff": {
+      "inside_pct": 43.7,
+      "pen_m": 0.0747,
+      "n": 142,
+      "in_arm_pct": 59.9,
+      "in_torso_pct": 16.2,
+      "zmin": 0.4974,
+      "zmax": 0.6638
+     },
+     "shell": {
+      "inside_pct": 58.7,
+      "pen_m": 0.0285,
+      "n": 46,
+      "in_arm_pct": 78.3,
+      "in_torso_pct": 50.0,
+      "zmin": 0.4195,
+      "zmax": 0.587
+     },
+     "all": {
+      "inside_pct": 47.3,
+      "pen_m": 0.0747,
+      "n": 188,
+      "in_arm_pct": 64.4,
+      "in_torso_pct": 24.5,
+      "zmin": 0.4195,
+      "zmax": 0.6638
+     },
+     "sweep_cuff": [
+      43.7,
+      54.9,
+      48.6,
+      33.8,
+      23.9,
+      21.8,
+      19.7
+     ],
+     "sweep_all": [
+      47.3,
+      51.6,
+      50.0,
+      37.2,
+      27.7,
+      27.7,
+      25.0
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 142,
+     "n_shell": 46,
+     "cuff": {
+      "inside_pct": 53.5,
+      "pen_m": 0.0697,
+      "n": 142,
+      "in_arm_pct": 59.9,
+      "in_torso_pct": 17.6,
+      "zmin": 0.5022,
+      "zmax": 0.6687
+     },
+     "shell": {
+      "inside_pct": 67.4,
+      "pen_m": 0.0339,
+      "n": 46,
+      "in_arm_pct": 82.6,
+      "in_torso_pct": 39.1,
+      "zmin": 0.4244,
+      "zmax": 0.5919
+     },
+     "all": {
+      "inside_pct": 56.9,
+      "pen_m": 0.0697,
+      "n": 188,
+      "in_arm_pct": 65.4,
+      "in_torso_pct": 22.9,
+      "zmin": 0.4244,
+      "zmax": 0.6687
+     },
+     "sweep_cuff": [
+      53.5,
+      57.0,
+      47.2,
+      31.0,
+      24.6,
+      21.8,
+      20.4
+     ],
+     "sweep_all": [
+      56.9,
+      56.4,
+      48.4,
+      35.6,
+      31.4,
+      29.3,
+      24.5
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 47.3,
+     "penetration_m": 0.0747,
+     "min_z": 0.4195
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 56.9,
+     "penetration_m": 0.0697,
+     "min_z": 0.4244
+    }
+   ]
+  },
+  {
+   "key": "carder_gloves",
+   "cost": 200,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 412,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 71.4,
+      "pen_m": 0.0602,
+      "n": 412,
+      "in_arm_pct": 87.9,
+      "in_torso_pct": 51.7,
+      "zmin": 0.5009,
+      "zmax": 0.8087
+     },
+     "shell": {
+      "inside_pct": 84.3,
+      "pen_m": 0.0371,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 78.6,
+      "zmin": 0.4749,
+      "zmax": 0.5843
+     },
+     "all": {
+      "inside_pct": 73.2,
+      "pen_m": 0.0602,
+      "n": 482,
+      "in_arm_pct": 89.6,
+      "in_torso_pct": 55.6,
+      "zmin": 0.4749,
+      "zmax": 0.8087
+     },
+     "sweep_cuff": [
+      71.4,
+      77.9,
+      69.9,
+      64.3,
+      58.0,
+      48.1,
+      40.0
+     ],
+     "sweep_all": [
+      73.2,
+      77.8,
+      67.8,
+      60.8,
+      53.5,
+      47.3,
+      42.1
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 412,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 74.3,
+      "pen_m": 0.0602,
+      "n": 412,
+      "in_arm_pct": 89.1,
+      "in_torso_pct": 48.1,
+      "zmin": 0.5058,
+      "zmax": 0.8135
+     },
+     "shell": {
+      "inside_pct": 57.1,
+      "pen_m": 0.0274,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 54.3,
+      "zmin": 0.4797,
+      "zmax": 0.5891
+     },
+     "all": {
+      "inside_pct": 71.8,
+      "pen_m": 0.0602,
+      "n": 482,
+      "in_arm_pct": 90.7,
+      "in_torso_pct": 49.0,
+      "zmin": 0.4797,
+      "zmax": 0.8135
+     },
+     "sweep_cuff": [
+      74.3,
+      78.2,
+      73.8,
+      63.3,
+      53.2,
+      43.4,
+      40.8
+     ],
+     "sweep_all": [
+      71.8,
+      74.7,
+      67.8,
+      57.5,
+      51.0,
+      45.0,
+      44.2
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 73.2,
+     "penetration_m": 0.0602,
+     "min_z": 0.4749
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 71.8,
+     "penetration_m": 0.0602,
+     "min_z": 0.4797
+    }
+   ]
+  },
+  {
+   "key": "bellrope_wraps",
+   "cost": 240,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 324,
+     "n_shell": 91,
+     "cuff": {
+      "inside_pct": 75.9,
+      "pen_m": 0.0836,
+      "n": 324,
+      "in_arm_pct": 86.4,
+      "in_torso_pct": 5.2,
+      "zmin": 0.5086,
+      "zmax": 0.675
+     },
+     "shell": {
+      "inside_pct": 89.0,
+      "pen_m": 0.0867,
+      "n": 91,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 69.2,
+      "zmin": 0.4748,
+      "zmax": 0.6643
+     },
+     "all": {
+      "inside_pct": 78.8,
+      "pen_m": 0.0867,
+      "n": 415,
+      "in_arm_pct": 89.4,
+      "in_torso_pct": 19.3,
+      "zmin": 0.4748,
+      "zmax": 0.675
+     },
+     "sweep_cuff": [
+      75.9,
+      59.3,
+      39.2,
+      10.5,
+      6.2,
+      4.9,
+      4.9
+     ],
+     "sweep_all": [
+      78.8,
+      62.9,
+      44.8,
+      18.1,
+      14.5,
+      16.6,
+      19.5
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 324,
+     "n_shell": 91,
+     "cuff": {
+      "inside_pct": 84.9,
+      "pen_m": 0.0721,
+      "n": 324,
+      "in_arm_pct": 86.7,
+      "in_torso_pct": 4.3,
+      "zmin": 0.515,
+      "zmax": 0.6799
+     },
+     "shell": {
+      "inside_pct": 64.8,
+      "pen_m": 0.0815,
+      "n": 91,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 49.5,
+      "zmin": 0.4796,
+      "zmax": 0.6693
+     },
+     "all": {
+      "inside_pct": 80.5,
+      "pen_m": 0.0815,
+      "n": 415,
+      "in_arm_pct": 89.6,
+      "in_torso_pct": 14.2,
+      "zmin": 0.4796,
+      "zmax": 0.6799
+     },
+     "sweep_cuff": [
+      84.9,
+      63.6,
+      36.7,
+      10.5,
+      5.9,
+      5.2,
+      4.9
+     ],
+     "sweep_all": [
+      80.5,
+      62.2,
+      37.6,
+      16.6,
+      17.3,
+      18.3,
+      20.0
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 78.8,
+     "penetration_m": 0.0867,
+     "min_z": 0.4748
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 80.5,
+     "penetration_m": 0.0815,
+     "min_z": 0.4796
+    }
+   ]
+  },
+  {
+   "key": "quarreller_gloves",
+   "cost": 280,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 298,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 64.4,
+      "pen_m": 0.0541,
+      "n": 298,
+      "in_arm_pct": 70.1,
+      "in_torso_pct": 57.7,
+      "zmin": 0.5047,
+      "zmax": 0.8442
+     },
+     "shell": {
+      "inside_pct": 84.3,
+      "pen_m": 0.0349,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 77.1,
+      "zmin": 0.4745,
+      "zmax": 0.5847
+     },
+     "all": {
+      "inside_pct": 68.2,
+      "pen_m": 0.0541,
+      "n": 368,
+      "in_arm_pct": 75.8,
+      "in_torso_pct": 61.4,
+      "zmin": 0.4745,
+      "zmax": 0.8442
+     },
+     "sweep_cuff": [
+      64.4,
+      59.7,
+      55.4,
+      53.7,
+      52.3,
+      54.0,
+      51.3
+     ],
+     "sweep_all": [
+      68.2,
+      63.3,
+      55.7,
+      50.5,
+      47.8,
+      52.2,
+      51.9
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 298,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 60.1,
+      "pen_m": 0.0559,
+      "n": 298,
+      "in_arm_pct": 67.8,
+      "in_torso_pct": 54.4,
+      "zmin": 0.5096,
+      "zmax": 0.8474
+     },
+     "shell": {
+      "inside_pct": 57.1,
+      "pen_m": 0.0265,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 50.0,
+      "zmin": 0.4793,
+      "zmax": 0.5895
+     },
+     "all": {
+      "inside_pct": 59.5,
+      "pen_m": 0.0559,
+      "n": 368,
+      "in_arm_pct": 73.9,
+      "in_torso_pct": 53.5,
+      "zmin": 0.4793,
+      "zmax": 0.8474
+     },
+     "sweep_cuff": [
+      60.1,
+      60.4,
+      53.0,
+      51.3,
+      48.7,
+      52.7,
+      50.3
+     ],
+     "sweep_all": [
+      59.5,
+      59.2,
+      49.5,
+      45.9,
+      47.8,
+      53.0,
+      53.0
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 68.2,
+     "penetration_m": 0.0541,
+     "min_z": 0.4745
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 59.5,
+     "penetration_m": 0.0559,
+     "min_z": 0.4793
+    }
+   ]
+  },
+  {
+   "key": "forge_grips",
+   "cost": 300,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 311,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 56.6,
+      "pen_m": 0.0699,
+      "n": 311,
+      "in_arm_pct": 72.7,
+      "in_torso_pct": 40.8,
+      "zmin": 0.4892,
+      "zmax": 0.7582
+     },
+     "shell": {
+      "inside_pct": 85.7,
+      "pen_m": 0.0354,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 80.0,
+      "zmin": 0.4746,
+      "zmax": 0.5846
+     },
+     "all": {
+      "inside_pct": 61.9,
+      "pen_m": 0.0699,
+      "n": 381,
+      "in_arm_pct": 77.7,
+      "in_torso_pct": 48.0,
+      "zmin": 0.4746,
+      "zmax": 0.7582
+     },
+     "sweep_cuff": [
+      56.6,
+      42.4,
+      34.4,
+      34.4,
+      41.8,
+      49.5,
+      51.1
+     ],
+     "sweep_all": [
+      61.9,
+      49.1,
+      38.6,
+      35.2,
+      39.4,
+      48.6,
+      51.7
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 311,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 45.0,
+      "pen_m": 0.0716,
+      "n": 311,
+      "in_arm_pct": 72.3,
+      "in_torso_pct": 28.0,
+      "zmin": 0.4887,
+      "zmax": 0.7637
+     },
+     "shell": {
+      "inside_pct": 57.1,
+      "pen_m": 0.027,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 50.0,
+      "zmin": 0.4794,
+      "zmax": 0.5895
+     },
+     "all": {
+      "inside_pct": 47.2,
+      "pen_m": 0.0716,
+      "n": 381,
+      "in_arm_pct": 77.4,
+      "in_torso_pct": 32.0,
+      "zmin": 0.4794,
+      "zmax": 0.7637
+     },
+     "sweep_cuff": [
+      45.0,
+      39.5,
+      35.0,
+      37.9,
+      44.1,
+      51.8,
+      54.7
+     ],
+     "sweep_all": [
+      47.2,
+      42.3,
+      34.9,
+      35.2,
+      44.1,
+      52.2,
+      56.4
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 63.0,
+     "penetration_m": 0.072,
+     "min_z": 0.4746
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 48.7,
+     "penetration_m": 0.0716,
+     "min_z": 0.4794
+    }
+   ]
+  },
+  {
+   "key": "raidbreaker_gloves",
+   "cost": 380,
+   "variant": null,
+   "anchors": {
+    "hand.l": [
+     0.336,
+     0.0,
+     0.5471
+    ],
+    "hand.r": [
+     -0.3496,
+     0.0,
+     0.552
+    ],
+    "wrist.l": [
+     0.3249,
+     -0.0,
+     0.6201
+    ],
+    "lowerarm.l": [
+     0.2859,
+     0.0139,
+     0.8768
+    ],
+    "upperarm.l": [
+     0.212,
+     -0.0,
+     1.1068
+    ],
+    "chest": [
+     -0.0,
+     0.0,
+     0.9726
+    ],
+    "spine": [
+     0.0,
+     0.0,
+     0.5976
+    ]
+   },
+   "body_meshes": [
+    "Knight_ArmLeft",
+    "Knight_ArmRight",
+    "Knight_Body",
+    "Knight_Head",
+    "Knight_LegLeft",
+    "Knight_LegRight"
+   ],
+   "sides": [
+    {
+     "side": "L",
+     "axis": [
+      0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 422,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 31.0,
+      "pen_m": 0.0519,
+      "n": 422,
+      "in_arm_pct": 34.8,
+      "in_torso_pct": 39.8,
+      "zmin": 0.4321,
+      "zmax": 0.8338
+     },
+     "shell": {
+      "inside_pct": 85.7,
+      "pen_m": 0.0344,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 77.1,
+      "zmin": 0.4737,
+      "zmax": 0.5855
+     },
+     "all": {
+      "inside_pct": 38.8,
+      "pen_m": 0.0519,
+      "n": 492,
+      "in_arm_pct": 44.1,
+      "in_torso_pct": 45.1,
+      "zmin": 0.4321,
+      "zmax": 0.8338
+     },
+     "sweep_cuff": [
+      31.0,
+      28.0,
+      27.7,
+      30.6,
+      34.4,
+      37.2,
+      34.4
+     ],
+     "sweep_all": [
+      38.8,
+      35.0,
+      30.9,
+      32.1,
+      33.9,
+      38.4,
+      36.8
+     ]
+    },
+    {
+     "side": "R",
+     "axis": [
+      -0.9887,
+      -0.0,
+      0.1502
+     ],
+     "n_cuff": 422,
+     "n_shell": 70,
+     "cuff": {
+      "inside_pct": 25.4,
+      "pen_m": 0.026,
+      "n": 422,
+      "in_arm_pct": 35.5,
+      "in_torso_pct": 34.1,
+      "zmin": 0.4369,
+      "zmax": 0.8366
+     },
+     "shell": {
+      "inside_pct": 58.6,
+      "pen_m": 0.0235,
+      "n": 70,
+      "in_arm_pct": 100.0,
+      "in_torso_pct": 48.6,
+      "zmin": 0.4785,
+      "zmax": 0.5904
+     },
+     "all": {
+      "inside_pct": 30.1,
+      "pen_m": 0.026,
+      "n": 492,
+      "in_arm_pct": 44.7,
+      "in_torso_pct": 36.2,
+      "zmin": 0.4369,
+      "zmax": 0.8366
+     },
+     "sweep_cuff": [
+      25.4,
+      26.3,
+      25.6,
+      29.1,
+      37.9,
+      36.3,
+      34.1
+     ],
+     "sweep_all": [
+      30.1,
+      29.1,
+      26.6,
+      29.5,
+      39.2,
+      38.6,
+      38.2
+     ]
+    }
+   ],
+   "fit": [
+    {
+     "part": "Acc_GloveL",
+     "inside_pct": 38.8,
+     "penetration_m": 0.0519,
+     "min_z": 0.4321
+    },
+    {
+     "part": "Acc_GloveR",
+     "inside_pct": 30.1,
+     "penetration_m": 0.026,
+     "min_z": 0.4369
+    }
+   ]
+  }
+ ]
+}

@@ -72,3 +72,9 @@ them as `LICENSE_KayKit_Dungeon_CC0.txt`. Licence read off that file on first us
 10:10 CT: "License: (Creative Commons Zero, CC0) ... free to use in personal, educational and
 commercial projects", crediting optional. Wired as gear.gd `KINDS["sword"]` tiers 1-3. Nothing
 redistributed as an asset.
+
+### 17 Nov 2026 - S17, System 2 second half (part 1): dungeon-pack axes and hammers in the hand (game build)
+Six more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, same licence file already
+beside them: `axe_{common,uncommon,rare}.glb` and `hammer_{common,uncommon,rare}.glb` in
+`assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed
+from `*.gltf.glb`). Wired as gear.gd KINDS axe and mace tiers 1-3.

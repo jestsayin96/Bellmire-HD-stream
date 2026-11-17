@@ -33,6 +33,14 @@ import lordlib as L
 
 ADV = os.path.join("addons", "kaykit_character_pack_adventures", "Assets", "gltf")
 GEAR = os.path.join("assets", "gear")
+# S2 (art's half of System 2): the KayKit DUNGEON pack's eight tiered weapon
+# families, common / uncommon / rare, CC0, licence in docs/art/ASSET_SOURCES.md.
+# Nine of the 24 (sword, axe, hammer) were already here and already wired by the
+# game build at S16/S17; the other fifteen were still sitting in the pack. They
+# are the only models in this file that are a DESIGNED LADDER - one family, three
+# tiers, the same smith's hand - so they take tiers 1-3 of their families and the
+# older kit models keep 4-5, which is exactly how gear.gd:167 does it.
+DUN = os.path.join("assets", "gear", "dungeon")
 
 # family -> tier -> CANDIDATE MODELS. Five tiers, five different shapes wherever
 # the packs can give five, so the ladder is visible as SHAPE and not only as
@@ -52,21 +60,30 @@ HAMMER = {1: [(GEAR, "hammer_A"), (GEAR, "mallet")], 2: [(GEAR, "hammer_A"), (GE
           4: [(GEAR, "hammer_B"), (GEAR, "hammer_A")],
           5: [(GEAR, "hammer_B"), (GEAR, "hammer")]}
 POLE = {t: [(GEAR, "halberd"), (GEAR, "spear_A")] for t in range(1, 6)}
-STAFF = {1: [(GEAR, "staff_A")], 2: [(ADV, "staff"), (GEAR, "staff_A")],
-         3: [(GEAR, "staff_B"), (ADV, "staff")], 4: [(GEAR, "staff_B"), (ADV, "staff")],
+STAFF = {1: [(DUN, "staff_common")], 2: [(DUN, "staff_uncommon")],
+         3: [(DUN, "staff_rare")], 4: [(GEAR, "staff_B"), (ADV, "staff")],
          5: [(GEAR, "staff_B"), (ADV, "staff")]}
 WAND = {1: [(ADV, "wand")], 2: [(ADV, "wand")], 3: [(GEAR, "wand_A"), (ADV, "wand")],
         4: [(GEAR, "wand_A")], 5: [(GEAR, "wand_A")]}
-CROSSBOW = {1: [(ADV, "crossbow_1handed")], 2: [(ADV, "crossbow_1handed")],
-            3: [(ADV, "crossbow_2handed"), (ADV, "crossbow_1handed")],
+CROSSBOW = {1: [(DUN, "crossbow_common")], 2: [(DUN, "crossbow_uncommon")],
+            3: [(DUN, "crossbow_rare")],
             4: [(ADV, "crossbow_2handed")], 5: [(ADV, "crossbow_2handed")]}
 # ONE bow model exists in the repo, so a bow's identity cannot come from the
 # file. It comes from ornament(), which is per-item for this family.
 BOW = {t: [(GEAR, "bow_A_withString")] for t in range(1, 6)}
-DAGGER = {t: [(ADV, "dagger"), (GEAR, "knife")] for t in range(1, 6)}
-SHIELDS = {1: [(GEAR, "shield_A")], 2: [(ADV, "shield_square"), (GEAR, "shield_C")],
-           3: [(GEAR, "shield_B"), (GEAR, "shield_C")],
+DAGGER = {1: [(DUN, "dagger_common")], 2: [(DUN, "dagger_uncommon")],
+          3: [(DUN, "dagger_rare")], 4: [(ADV, "dagger"), (DUN, "dagger_rare")],
+          5: [(GEAR, "knife"), (DUN, "dagger_rare")]}
+SHIELDS = {1: [(DUN, "shield_common")], 2: [(DUN, "shield_uncommon")],
+           3: [(DUN, "shield_rare")],
            4: [(ADV, "shield_round")], 5: [(ADV, "shield_spikes")]}
+# A GREATAXE is not a hatchet with more hit points - the pack ships a double-headed
+# axe at all three tiers and nothing in this repo was using it. The team lead could
+# not tell from s17_front.png whether the "Bearded Greataxe" was behind the body or
+# absent; this gives that item its own silhouette either way.
+GREATAXE = {1: [(DUN, "axeDouble_common")], 2: [(DUN, "axeDouble_uncommon")],
+            3: [(DUN, "axeDouble_rare")], 4: [(DUN, "axeDouble_rare")],
+            5: [(ADV, "axe_2handed"), (DUN, "axeDouble_rare")]}
 
 
 def ihash(s):
@@ -97,6 +114,8 @@ def pick(family, name, tier, key=""):
             return _one(POLE, t, sel)
         return _one(BLADE, t, sel)
     if family == "axe":
+        if any(w in hay for w in ("greataxe", "great axe", "twinbit", "double")):
+            return _one(GREATAXE, t, sel)
         if any(w in hay for w in ("hammer", "maul", "mallet")):
             return _one(HAMMER, t, sel)
         if any(w in hay for w in ("halberd", "poleaxe", "glaive")):

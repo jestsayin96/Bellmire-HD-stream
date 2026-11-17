@@ -1,0 +1,412 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok   every literal Sfx kind in the wired files is registered (22 named, bad: [])
+  ok   every kind in the sound tables is registered (73, bad: [])
+  ok   every creature (43: types, lords, uniques) has a registered voice (bad: [])
+  ok   the brief's mapping holds (slime, bat, spider, skeleton, dragon, demon; a giant RAT is not a giant): { "type minion": "skeleton_rattle", "type warrior": "skeleton_rattle", "type cutpurse": "skeleton_rattle", "type warlock": "skeleton_rattle", "type slime": "slime_squish", "type bat": "bat_screech", "type bones": "skeleton_rattle", "type rat": "cat_hiss", "type spider": "spider_skitter", "type frog": "frog_ribbit", "type snake": "snake_hiss", "type adder": "snake_hiss", "type wasp": "insect_buzz", "type imp": "demon_growl", "type puglin": "goblin_screech", "new bowman": "skeleton_rattle", "new sentinel": "skeleton_rattle", "new gravecaller": "skeleton_rattle", "new lost": "male_grunt", "new whelp": "dragon_roar", "new slimeling": "slime_squish", "new hewer": "skeleton_rattle", "new cutthroat": "skeleton_rattle", "new silkmother": "spider_skitter", "new spiderling": "spider_skitter", "new scarrat": "cat_hiss", "new lurker": "frog_ribbit", "new pitwyrm": "dragon_roar", "new ashwight": "wraith_whisper", "new gloombat": "bat_screech", "lord hollow_king": "skeleton_rattle", "lord grubmother": "slime_squish", "lord rattling_host": "cat_hiss", "lord nightwing": "wolf_growl", "lord gravewyrm": "dragon_roar", "lord ossuary_lord": "skeleton_rattle", "lord pale_duchess": "skeleton_rattle", "lord mourncoil": "dragon_roar", "unique gnawbone": "skeleton_rattle", "unique mother_silk": "spider_skitter", "unique weeping_bowman": "skeleton_rattle", "unique cinderjack": "demon_growl", "unique kept": "male_grunt" }
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+  ok   the town's Sfx is running
+  ok   voices by body: the knight a man, the rogue a woman (male / female)
+  ok   the ranger's voice is stable (female)
+FEED Ash carries Ferryman's Rune-Blade and wears Ferryman's Plate  |  1 Mending, 4 oil, 5000 gold
+FEED No !hro here - did you mean !hero? (!help lists them all)
+FEED Ash buys 1 flask of oil. Now carrying 5. Haggled 13% off (15).
+FEED Ash buys 1 potion. Now carrying 2. Haggled 11% off (13).
+  ok   chat: the pack opens, a typo errors, buys chink, a brew is drunk ({ "inventory_open": 1, "error": 1, "coins_stack": 2, "potion_drink": 1 })
+FEED Ash and 3 others descend in, lamp-first, as the roll demands.
+FEED They carry 17 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 3 bone sentinels, 1 skeleton mage, 1 hollowed skeleton warrior.
+FEED The street sign names a lane that was never built above.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Everything upright in that corridor is dead and knows it.
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+FEED Dawn casts Smite at skeleton mage.
+FEED Dawn casts Smite at bone sentinel.
+FEED Dawn's smite turns in their hand - the scar answers (10 vs DC 12).
+FEED Dawn casts Bolt at bone sentinel.
+FEED Dawn casts Bolt at bone sentinel.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Dawn casts Bolt at The Rattling Host.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host falls to Dawn.
+FEED Dawn casts Ward at Cole.
+FEED Ash turns on the wounded risen bones to finish it.
+FEED Ash rolls a 20 - and the risen bones is gone.
+FEED Dawn casts Bolt at risen bones.
+FEED Ash searches (Investigation 15) and turns up 59 gold on floor 5.
+FEED Over. The stair is kinder on the way up.
+FEED Ash finds a vial of Thistle Tea.
+FEED Battered, the party climbs back out from floor 5.
+FEED Ash and 3 others come home to Bellmire with 59 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 10 kills between them.
+FEED Talen Bramble settles in Bellmire, looking for work.
+FEED Ingrid Hollow settles in Bellmire, looking for work.
+FEED Hilda Coalfoot settles in Bellmire, looking for work.
+FEED Maela Quarryman settles in Bellmire, looking for work.
+MUSTER timed out: dists=[81, 109, 85, 111, 65, 84, 35, 53] vis=true stay=false route=59 inside=false
+FEED Cort Rivers settles in Bellmire, looking for work.
+FEED Osric Quarryman and 2 others descend below with bread in the pack and nothing to say.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 cave bat, 1 giant rat.
+FEED A ceremonial way runs dead straight to a door meant to stay shut.
+FEED Petra the Younger searches (Investigation 17) and turns up 13 gold on floor 1.
+FEED Dust settles. The guild notes the date.
+FEED Petra the Younger finds a vial of Tallow Cup.
+FEED Osric Quarryman and 2 others take a breather, and press on deeper.
+FEED Mira of the Ford settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 bog frog, 1 slime, 1 giant rat.
+FEED Petra the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Osric Quarryman casts Smite at giant rat.
+FEED Osric Quarryman's bolt doubles back and finds them first (1 vs DC 11).
+FEED The slime divides.
+FEED Osric Quarryman casts Smite at slimeling.
+FEED Edda Ashwood and 4 others descend on the guild's coin, and the guild wants a return.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 slime, 1 hollowed skeleton minion.
+FEED The incense is lit. The censer is cold.
+FEED Osric Quarryman casts Bolt at bog frog.
+FEED Petra the Younger searches (Investigation 10) and turns up 17 gold on floor 2.
+FEED Floor 2 falls quiet. The torches steady one by one.
+FEED Ingrid Coalfoot casts Frost at slime.
+FEED Edda Ashwood casts Frost at slime.
+FEED Talen the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Talen Thatcher turns on the wounded slimeling to finish it.
+FEED Ingrid Coalfoot turns on the wounded slimeling to finish it.
+FEED Talen the Younger turns on the wounded slimeling to finish it.
+FEED Ingrid Coalfoot pays for frost and the scar keeps the receipt (8 vs DC 10).
+FEED Dunn Stonehand turns on the wounded cave spider to finish it.
+FEED Ingrid Coalfoot casts Bolt at slimeling.
+FEED Osric Quarryman and 2 others take a breather, and press on deeper.
+FEED Petra the Younger finds a man in a cage still alive. He slips 42 gold to them on the way out, 3 ways to split it.
+FEED Ingrid Coalfoot casts Frost at hollowed skeleton minion.
+FEED Talen the Younger's bolt curdles on the tongue and comes out wrong (8 vs DC 10).
+FEED Edda Ashwood casts Bolt at hollowed skeleton minion.
+FEED Talen the Younger searches (Investigation 6) and turns up 6 gold on floor 1.
+FEED Nothing left standing but the nerve.
+FEED Corvin Ashwood settles in Bellmire, looking for work.
+FEED Edda Ashwood and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 skeleton minion, 1 drowned slime, 1 drowned puglin.
+FEED The oil is running low.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 cave spider, 1 bog frog, 1 puglin.
+FEED Ingrid Coalfoot calls bolt and the wall calls back (1 vs DC 11).
+FEED Talen the Younger mutters chain, and the rune mutters back something else (10 vs DC 11).
+FEED Edda Ashwood's bolt goes out like a lamp in wind - wild magic (1 vs DC 11).
+FEED Edda Ashwood casts Frost at bog frog.
+FEED Ingrid Coalfoot casts Frost at bog frog.
+FEED Ingrid Coalfoot casts Frost at cave spider.
+FEED Talen the Younger casts Chain Bolt at cave spider.
+FEED Edda Ashwood casts Bolt at cave spider.
+FEED Osric Quarryman calls bolt down and the scar answers up (7 vs DC 11).
+FEED Osric Quarryman casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Edda Ashwood casts Frost at skeleton minion.
+FEED Ingrid Coalfoot casts Frost at skeleton minion.
+FEED Harl Ashwood rolls a 20 - and the cave bat is gone.
+FEED Dunn the Younger settles in Bellmire, looking for work.
+FEED Edda Ashwood casts Frost at puglin.
+FEED Talen the Younger casts Bolt at puglin.
+FEED Ingrid Coalfoot casts Frost at puglin.
+FEED Dunn Stonehand rolls a 20 - and the puglin is gone.
+FEED Talen the Younger searches (Investigation 24) and turns up 29 gold on floor 2.
+FEED Floor 2 gives it up. The lamps go lower.
+FEED Talen the Younger finds a vial of The Gleaner's Cup.
+FEED Osric Quarryman casts Smite at skeleton minion.
+FEED Talen the Younger searches the chest - Successfully found loot!! 24 gold (Investigation 18 vs DC 11).
+FEED Talen the Younger cannot get to the chest and leaves it.
+FEED Edda Ashwood and 4 others take a breather, and press on deeper.
+FEED Petra the Younger searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED Floor done. Bellmire gets a tale; the scar gets nothing.
+FEED Petra the Younger spots a fire grate (Perception 21 vs DC 11) and steps round it.
+FEED Osric Quarryman and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned risen bones, 3 slimes.
+FEED Osric Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 risen bones, 1 hollowed puglin, 1 drowned slime, 1 drowned giant rat.
+FEED The oil is running low.
+FEED The slime divides.
+FEED Harl Ashwood turns on the wounded slimeling to finish it.
+FEED Osric Quarryman calls bolt and the wall calls back (9 vs DC 12).
+FEED Edda Ashwood casts Bolt at drowned slime.
+FEED Ingrid Coalfoot casts Bolt at drowned slime.
+FEED Edda Ashwood reaches for frost; the scar reaches back (8 vs DC 11).
+FEED Ingrid Coalfoot works frost; the scar does the last line for them (1 vs DC 11).
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 3, the watch 21 - the watch is ready for them.
+FEED The drowned slime divides.
+FEED Talen the Younger casts Chain Bolt at drowned slimeling.
+FEED Ingrid Coalfoot casts Frost at drowned slimeling.
+FEED Edda Ashwood casts Frost at risen bones.
+FEED Talen the Younger casts Bolt at risen bones.
+FEED Ingrid Coalfoot casts Frost at drowned giant rat.
+FEED Harl Ashwood turns on the wounded slimeling to finish it.
+FEED Petra the Younger searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Floor 4 cleared. Write it on the roll.
+FEED Ingrid Coalfoot casts Bolt at hollowed puglin.
+FEED Edda Ashwood casts Bolt at hollowed puglin.
+FEED Talen the Younger casts Chain Bolt at hollowed puglin.
+FEED Talen the Younger searches (Investigation 8) and turns up 26 gold on floor 3.
+FEED Floor 3 held. Bellmire will hear about it.
+FEED Petra the Younger searches the chest - Successfully found loot!! 41 gold (Investigation 18 vs DC 12).
+FEED Petra the Younger cannot get to the chest and leaves it.
+FEED Out of oil, the party feels its way back up from floor 4.
+FEED Osric Quarryman and 2 others come home to Bellmire with 152 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 4 potions. 26 kills between them.
+FEED Petra the Younger is fitted with Ford Leathers. (+10 hp)
+FEED Harl Ashwood is fitted with Ford Leathers. (+10 hp)
+FEED A building is burning!
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Talen the Younger searches the chest - ...no loot... (Investigation 7 vs DC 11).
+FEED Cort Ashwood goes down and claws back up. (CON save 10)
+FEED Cort Ashwood is killed by a bandit.
+FEED Edda Ashwood and 4 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+FEED The attack is driven off. The gates hold.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 2 puglins, 1 slime, 1 bone bowman.
+FEED The Weeping Bowman is down here. It never stops drawing.
+FEED A sob, a draw, a snap. In that order, always.
+FEED Ingrid Coalfoot's bolt fizzles into a damp little hiss (8 vs DC 12).
+FEED Talen the Younger calls bolt and the scar calls louder (1 vs DC 12).
+FEED Talen Thatcher steps on a loose flagstone - darts! DEX 19 vs DC 12, 6 damage (halved).
+FEED Edda Ashwood's bolt goes somewhere, and not where it was sent (11 vs DC 12).
+FEED The townsfolk raise the ruin again.
+FEED Ingrid Coalfoot turns on the wounded puglin to finish it.
+FEED Talen the Younger turns on the wounded puglin to finish it.
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman nocks a volley - cover!
+FEED Ingrid Coalfoot breaks off to mend Dunn Stonehand, who is nearly down.
+FEED Osric Quarryman and 2 others descend below the Ford, below the ledger, below mercy.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 hollowed cave spider, 1 cave bat.
+FEED The lids were moved from the inside, and then put back.
+FEED Edda Ashwood breaks off to mend Dunn Stonehand, who is nearly down.
+FEED The slime divides.
+FEED Dunn Stonehand turns on the wounded slimeling to finish it.
+FEED The Weeping Bowman nocks a volley - cover!
+FEED Ingrid Coalfoot breaks off to mend Dunn Stonehand, who is nearly down.
+FEED Edda Ashwood breaks off to mend Dunn Stonehand, who is nearly down.
+FEED Ingrid Coalfoot breaks off to mend Dunn Stonehand, who is nearly down.
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman shifts, and the fight changes with it.
+FEED The Weeping Bowman is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The townsfolk raise the ruin again.
+FEED Dunn Stonehand has the wind back and turns to fight.
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman falls to Ingrid Coalfoot.
+FEED The Weeping Bowman is slain on floor 4!
+FEED The hoard is split 5 ways - 14 gold each to Edda Ashwood, Dunn Stonehand, Talen Thatcher, Ingrid Coalfoot, Talen the Younger.
+FEED Aldric Coalfoot settles in Bellmire, looking for work.
+FEED Osric Quarryman casts Smite at slime.
+FEED The slime divides.
+FEED Osric Quarryman casts Bolt at slimeling.
+FEED Petra the Younger searches (Investigation 6) and turns up 8 gold on floor 1.
+FEED Floor's quiet. Nothing standing but the band.
+FEED Edda Ashwood and 4 others take a breather, and press on deeper.
+FEED Osric Quarryman and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 bone bowman, 1 bone sentinel, 1 drowned bone bowman.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED Something is birthing in the dark ahead, and not stopping.
+FEED Dunn Stonehand rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed bog frog, 1 hollowed skeleton minion, 1 hollowed slime, 1 bog frog.
+FEED Ingrid Coalfoot starts frost, loses the thread, and finishes it badly (7 vs DC 12).
+FEED The hollowed slime divides.
+FEED Osric Quarryman casts Smite at hollowed slimeling.
+FEED Osric Quarryman's bolt goes wrong - the scar answers (1 vs DC 11).
+FEED 7 creatures boil out of the dungeon!
+FEED Initiative: the raiders 14, the watch 22 - the watch is ready for them.
+FEED Talen the Younger reaches for chain and the scar reaches back (11 vs DC 12).
+FEED Talen Thatcher is badly hurt and breaks off, making for the way up.
+FEED Edda Ashwood speaks renew; something else finishes it (8 vs DC 12).
+FEED Talen Thatcher the knight falls on floor 5 to the dark below. Level 2, 2 kills. !reroll to rise again.
+FEED Osric Quarryman casts Smite at bog frog.
+FEED Petra the Younger searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED A lamp is set down in the middle of the floor and left burning.
+FEED Petra the Younger finds a vial of The Thatcher's Cup.
+FEED Ingrid Coalfoot is badly hurt and breaks off, making for the way up.
+FEED Edda Ashwood breaks off to mend Ingrid Coalfoot, who is nearly down.
+FEED Talen the Younger should be dead - and stands back up (13).
+FEED Edda Ashwood breaks off to mend Talen the Younger, who is nearly down.
+FEED Talen the Younger the necromancer falls on floor 5 to the dark below. Level 2, 4 kills. !reroll to rise again.
+FEED Talen the Younger is badly hurt and breaks off, making for the way up.
+FEED Osric Quarryman and 2 others take a breather, and press on deeper.
+FEED Edda Ashwood breaks off to mend Talen the Younger, who is nearly down.
+FEED 
+FEED Edda Ashwood casts Renew at Ingrid Coalfoot.
+FEED Edda Ashwood is cut off and falls back to the others.
+FEED Dunn Stonehand is cut off and falls back to the others.
+FEED Ingrid Coalfoot has the wind back and turns to fight.
+FEED Garm Bramble settles in Bellmire, looking for work.
+FEED Ingrid Coalfoot is cut off and falls back to the others.
+FEED Ingrid Coalfoot is cut off and falls back to the others.
+FEED Edda Ashwood casts Bolt at The Grubmother.
+FEED The Grubmother's brood spills out of her.
+FEED Dunn Stonehand is cut off and falls back to the others.
+FEED Ingrid Coalfoot is cut off and falls back to the others.
+FEED Edda Ashwood casts Bolt at The Grubmother.
+  ok   everything Sfx played is a registered kind (53 kinds, bad: [])
+  ok   every sound the delve asked for is registered (bad: [])
+  delve sounds: { "bow_draw": 11, "dagger_stab": 13, "sword_clash": 15, "skeleton_rattle": 2, "sword_swing": 11, "arrow_shot": 5, "female_effort": 6, "shield_bash": 4, "block": 5, "male_effort": 2, "chest_open": 1, "spider_skitter": 1 }
+  creature voices: { "cat_hiss": 4, "skeleton_rattle": 19, "bat_screech": 2, "slime_squish": 11, "frog_ribbit": 4, "spider_skitter": 4, "goblin_screech": 3 }
+  ok   the swing has the weapon's sound: sword, dagger, bow
+  ok   a blow that lands is heard
+  ok   the ranger looses
+  ok   a spell is heard (365)
+  ok   the delvers cry out now and then (8)
+  ok   voices are sampled, not one per blow (8 voices, 35 swings)
+  ok   the lord roared as it rose (cat_hiss)
+  ok   creatures are heard ({ "cat_hiss": 4, "skeleton_rattle": 19, "bat_screech": 2, "slime_squish": 11, "frog_ribbit": 4, "spider_skitter": 4, "goblin_screech": 3 })
+  ok   every creature voice heard is registered
+S2_TEST OK (19 checks, 0 failed)

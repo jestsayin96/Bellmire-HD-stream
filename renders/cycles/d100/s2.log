@@ -1,0 +1,180 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok   every literal Sfx kind in the wired files is registered (22 named, bad: [])
+  ok   every kind in the sound tables is registered (72, bad: [])
+  FAIL every creature (43: types, lords, uniques) has a registered voice (bad: ["new ashwight -> \'\'"])
+  ok   the brief's mapping holds (slime, bat, spider, skeleton, dragon, demon; a giant RAT is not a giant): { "type minion": "skeleton_rattle", "type warrior": "skeleton_rattle", "type cutpurse": "skeleton_rattle", "type warlock": "skeleton_rattle", "type slime": "slime_squish", "type bat": "bat_screech", "type bones": "skeleton_rattle", "type rat": "cat_hiss", "type spider": "spider_skitter", "type frog": "frog_ribbit", "type snake": "snake_hiss", "type adder": "snake_hiss", "type wasp": "insect_buzz", "type imp": "demon_growl", "type puglin": "goblin_screech", "new bowman": "skeleton_rattle", "new sentinel": "skeleton_rattle", "new gravecaller": "skeleton_rattle", "new lost": "male_grunt", "new whelp": "dragon_roar", "new slimeling": "slime_squish", "new hewer": "skeleton_rattle", "new cutthroat": "skeleton_rattle", "new silkmother": "spider_skitter", "new spiderling": "spider_skitter", "new scarrat": "cat_hiss", "new lurker": "frog_ribbit", "new pitwyrm": "dragon_roar", "new ashwight": "", "new gloombat": "bat_screech", "lord hollow_king": "skeleton_rattle", "lord grubmother": "slime_squish", "lord rattling_host": "cat_hiss", "lord nightwing": "wolf_growl", "lord gravewyrm": "dragon_roar", "lord ossuary_lord": "skeleton_rattle", "lord pale_duchess": "skeleton_rattle", "lord mourncoil": "dragon_roar", "unique gnawbone": "skeleton_rattle", "unique mother_silk": "spider_skitter", "unique weeping_bowman": "skeleton_rattle", "unique cinderjack": "demon_growl", "unique kept": "male_grunt" }
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:820)
+       [1] _ready (res://scripts/town.gd:375)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+  ok   the town's Sfx is running
+  ok   voices by body: the knight a man, the rogue a woman (male / female)
+  ok   the ranger's voice is stable (female)
+FEED Ash carries Ferryman's Rune-Blade and wears Ferryman's Plate  |  1 Mending, 4 oil, 5000 gold
+FEED No !hro here - did you mean !hero? (!help lists them all)
+FEED Ash buys 1 flask of oil. Now carrying 5.
+FEED Ash buys 1 potion. Now carrying 2. Haggled 18% off (20).
+  ok   chat: the pack opens, a typo errors, buys chink, a brew is drunk ({ "inventory_open": 1, "error": 1, "coins_stack": 2, "potion_drink": 1 })
+FEED Ash and 3 others descend down, and the bell says nothing.
+FEED They carry 17 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed bone sentinel, 1 risen bones, 1 hollowed risen bones, 1 bone bowman, 1 drowned bone bowman.
+FEED A doll in a window box. Someone waved from here, once.
+FEED Nightwing rises. Too fast to see coming.
+FEED The lamps all flinch towards the floor at once.
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+FEED Dawn casts smite and gets weather for it (11 vs DC 12).
+FEED Dawn casts Bolt at hollowed risen bones.
+FEED Dawn casts Smite at risen bones.
+FEED Dawn casts Bolt at hollowed bone sentinel.
+FEED Bats pour out of the dark around Nightwing.
+FEED Dawn casts Bolt at Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Dawn.
+FEED Dawn casts Smite at drowned bone bowman.
+FEED Cole searches (Investigation 16) and turns up 61 gold on floor 5.
+FEED Floor 5 holds no more of them. The mess is another matter.
+FEED Cole finds a vial of Wyrmsbane.
+FEED Cole searches the chest - Successfully found loot!! 82 gold (Investigation 24 vs DC 12).
+FEED Battered, the party climbs back out from floor 5.
+FEED Ash and 3 others come home to Bellmire with 143 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 7 kills between them.
+FEED Dunn Ashwood settles in Bellmire, looking for work.
+  ok   everything Sfx played is a registered kind (33 kinds, bad: [])
+  ok   every sound the delve asked for is registered (bad: [])
+  delve sounds: { "bow_draw": 8, "arrow_shot": 5, "female_hurt": 1, "dagger_stab": 5, "sword_clash": 5, "bat_screech": 2, "sword_swing": 3, "male_effort": 1, "skeleton_rattle": 1, "female_effort": 2, "shield_bash": 1, "block": 1, "hit_impact": 1, "chest_open": 2 }
+  creature voices: { "wolf_growl": 2, "skeleton_rattle": 1 }
+  ok   the swing has the weapon's sound: sword, dagger, bow
+  ok   a blow that lands is heard
+  ok   the ranger looses
+  ok   a spell is heard (25)
+  ok   the delvers cry out now and then (4)
+  ok   voices are sampled, not one per blow (4 voices, 16 swings)
+  ok   the lord roared as it rose (wolf_growl)
+  ok   creatures are heard ({ "wolf_growl": 2, "skeleton_rattle": 1 })
+  ok   every creature voice heard is registered
+S2_TEST FAIL (19 checks, 1 failed)

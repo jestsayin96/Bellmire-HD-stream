@@ -7,6 +7,11 @@ class FakeRoster extends RefCounted:
     var heroes := {"111": {"name": "BigAxe"}, "222": {"name": "MossyMage"}, "333": {"name": "Corvin"}, "444": {"name": "Gifter"}}
     func get_hero(uid: String) -> Dictionary:
         return heroes.get(uid, {})
+    var brews: Array = []
+    ## D100: twitch_eventsub's bits tiers hand the buyer a brew through Roster.add_brew; the fake
+    ## lacked it, so every tier-1+ cheer threw a SCRIPT ERROR and T1 read 1 FAILED.
+    func add_brew(h: Dictionary, key: String, n: int) -> void:
+        brews.append([String(h.get("name", "")), key, n])
 
 class FakeChat extends Node:
     signal twitch_reply(user_login: String, text: String)
@@ -73,8 +78,14 @@ func _initialize() -> void:
         and town.spots[0] == ["111", "bits", 15.0, "cheered 10 bits"]
         and town.spots[1][2] == 20.0 and town.spots[2][2] == 30.0 and town.spots[2][3] == "cheered 500 bits")
     var anon := {"user_id": null, "user_login": null, "user_name": null, "is_anonymous": true, "bits": 100}
+    var feed0 := town.feed.size()
     ev.on_message(_frame("channel.cheer", anon))
-    _check("3 anonymous cheer -> Chronicle only", town.spots.size() == 3 and String(town.feed.back()).find("stranger") >= 0)
+    # D100: the bits tiers now add town-wide lines AFTER the stranger's, so the stranger line is
+    # looked for among this cheer's lines, not only the last one.
+    var stranger := false
+    for i in range(feed0, town.feed.size()):
+        stranger = stranger or String(town.feed[i]).find("stranger") >= 0
+    _check("3 anonymous cheer -> Chronicle only", town.spots.size() == 3 and stranger)
 
     # subs
     var s := _user("222", "MossyMage")

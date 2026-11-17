@@ -1,0 +1,58 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+TWITCH_EVENTSUB welcome, session sess-abc, keepalive 10 s
+PASS 1 welcome -> session id + keepalive
+FEED BigAxe cheers 10 bits for Bellmire!
+FEED Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.
+FEED BigAxe cheers 60 bits for Bellmire!
+FEED Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.
+FEED BigAxe is given a Supreme Mending from the grateful apothecary.
+FEED Blessed supplies arrive - the stores overflow with fresh goods!
+FEED BigAxe cheers 500 bits for Bellmire!
+FEED Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.
+FEED BigAxe is given a Stormcaller's Draught from the grateful apothecary.
+FEED Blessed supplies arrive - the stores overflow with fresh goods!
+FEED Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime.
+FEED A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!
+PASS 2 cheers -> bits lane 15/20/30 s
+FEED A stranger tosses 100 bits into Bellmire's well.
+FEED Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.
+FEED Blessed supplies arrive - the stores overflow with fresh goods!
+PASS 3 anonymous cheer -> Chronicle only
+FEED MossyMage joins the guild of Bellmire!
+PASS 4 new sub -> subs lane 30 s
+FEED Corvin renews their oath to Bellmire - 7 months.
+PASS 5 resub -> subs lane 30 s
+FEED Gifter gifts 5 guild places!
+FEED Lucky0 is gifted a place in the guild.
+FEED Lucky1 is gifted a place in the guild.
+FEED Lucky2 is gifted a place in the guild.
+FEED Lucky3 is gifted a place in the guild.
+FEED Lucky4 is gifted a place in the guild.
+PASS 6 gift bomb -> one 30 s pane for the gifter
+FEED NewFriend now follows the banner of Bellmire.
+PASS 7 follow -> Chronicle only
+PASS 8 our reward id -> points lane 15 s
+PASS 9 other app's rewards ignored (by id, not title)
+FEED Nobody calls for the spotlight, but has no hero yet - !enlist first. Points returned.
+PASS 10 no hero -> no pane, refund line + chat answer
+FEED BigAxe cheers 500 bits for Bellmire!
+FEED Bellmire's well glows - every hero is handed a Draught of Mending and the stores are restocked.
+FEED BigAxe is given a Hammerman's Heft from the grateful apothecary.
+FEED Blessed supplies arrive - the stores overflow with fresh goods!
+FEED Fortune smiles on Bellmire! Gold rains, brews flow, and the smith works overtime.
+FEED A Festival of Plenty! Music fills the square, caravans race to Bellmire, and the forge burns white-hot!
+PASS 11 repeated message id handled once
+PASS 12 Bellmire reward titles avoid fightoverlay words
+PASS 13 twitch_reply connected and queued
+PASS 14 long answer cut to 480
+PASS 15 fresh token not due
+PASS 16 forced expiry -> due
+TWITCH_EVENTSUB chat not sent (dry_run_chat) @bigaxe: BigAxe the knight, level 3, AC 16
+TWITCH_EVENTSUB chat not sent (dry_run_chat) @mossymage: MossyMage carries a staff
+TWITCH_EVENTSUB chat skipped (duplicate within 30s) @mossymage: MossyMage carries a staff
+TWITCH_EVENTSUB chat not sent (dry_run_chat) @x: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+T1 sent chat: ["@bigaxe BigAxe the knight, level 3, AC 16", "@mossymage MossyMage carries a staff", "@x yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy..."]
+PASS 17 chat paced 1.6 s and @prefixed
+PASS 18 repeat inside 30 s dropped
+T1_TEST OK

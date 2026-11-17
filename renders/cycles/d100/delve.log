@@ -1,0 +1,45 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend below, oil topped, flasks measured, nothing owed above.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 puglin.
+FEED A second bench, built facing the first - and the first is not empty.
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+FEED DawnCleric starts bolt, loses the thread, and finishes it badly (1 vs DC 10).
+T10s floor=1 state=fight foes=2 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at puglin.
+T20s floor=1 state=fight foes=1 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED MossyMage searches (Investigation 20) and turns up 14 gold on floor 1.
+FEED The lamps burn steady. That is the whole victory.
+FEED MossyMage finds a vial of Salter's Cure.
+T30s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED MossyMage searches the chest - Successfully found loot!! 22 gold (Investigation 19 vs DC 10).
+T40s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+T50s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T60s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+T70s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+T80s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+T90s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 giant rat, 1 skeleton minion, 1 hollowed bog frog.
+FEED The oil is running low.
+T100s floor=2 state=fight foes=4 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED DawnCleric's smite answers to the ground instead (8 vs DC 11).
+FEED MossyMage casts Bolt at skeleton minion.
+T110s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Chain Bolt at giant rat.
+T120s floor=2 state=fight foes=2 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+T130s floor=2 state=fight foes=2 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at slime.
+FEED MossyMage casts Fire at slime.
+T140s floor=2 state=fight foes=2 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]
+FEED The slime divides.
+FEED DawnCleric casts Smite at slimeling.
+FEED MossyMage calls bolt and something older takes the call (9 vs DC 11).
+T150s floor=2 state=fight foes=1 ["JestFan 113/113", "MossyMage 73/73", "DawnCleric 86/86", "BigAxe 119/119"]

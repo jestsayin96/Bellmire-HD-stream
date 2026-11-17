@@ -891,3 +891,12 @@ No code changed. Headless Chromium 1440x900 against the merged tree (hub + origi
 - Hostile `<img src=x onerror=alert(1)>` renders as literal text in rail, shop names, caravan stock and bestiary cards.
 - LOOKED AT: Shops card grid (picture, rarity pill + rarity frame, price; bare / not-published shelves read honestly), Bestiary cards, Lore chapter cards, the 420 px one-column layout (rail becomes a top strip, chat a top-bar button). Item pictures in the capture are the generic gem because only 10 thumbnails were staged for the run; the real set is web/icons/items/.
 - Live dot: red (--live), unchanged.
+
+## H32 real-set LOOK (hub, 2026-11-17 ~01:00 CT, after the halt was lifted)
+No code changed. Headless Chromium against the merged tree (hub + origin/main 93770e6) with the Supabase fetch stubbed by a v5 payload: a 465-item Blacksmith shelf built from the REAL whitelist names plus a hostile item name and a hostile shop name (`<b>x</b>`), a 30-item Chandler, a bare Provisioner.
+- Real thumbnails (web/icons/items, 463 files, 1.94 MB): at 1440x900 and 420x800, 216 shelf images rendered (the rest are lazy, below the fold), 0 broken, 216 of 216 `loading="lazy"`.
+- H13: document scrollHeight - innerHeight = 0 and scrollWidth - innerWidth = 0 at BOTH widths, with the real images loaded. The grid scrolls inside the stage.
+- Security: hostile item and shop names render as literal text, 0 injected `<img>`, 0 dialogs, 0 page errors. An unknown item name falls to the generic gem (honest fallback, never a guessed path).
+- LOOKED AT (1440 screenshot, hover shot, 420 shot): rarity frames and pills read correctly (epic purple, rare blue, uncommon green, legendary gold, common bare), prices align, the hover/focus preview enlarges the card and adds "Costs N gold - N on the shelf". Seen and judged fine: on a first visit the Welcome panel sits above the stage and pushes the shelves below the fold (it is dismissible and was ruled to stay above the stage); at 420 px the rail is a thin top strip with a clipped sentence when nobody is on the roll. Names truncate with an ellipsis in the narrow cards ("Unknown Thing Not In..") - full name is in the hover preview.
+- Live dot: red (--live), unchanged. The UNCOMMON pill clip fix (cf40e31) was the only change the earlier look needed; this ledger entry is the record that was missing.
+- Housekeeping: the seven loose files in the worktree (_h32_shot_a..f.png, web_look.tar, _plan_tmp.txt) were DISCARDED, not committed - superseded by this look and 3 MB of binary that git would keep forever.

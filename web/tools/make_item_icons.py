@@ -59,7 +59,7 @@ def walk(o):
 walk(items)
 
 files, namemap, conflicts, missing_name = [], {}, [], []
-if os.path.isdir(out_root): shutil.rmtree(out_root)
+if os.path.isdir(out_root): shutil.rmtree(out_root, ignore_errors=True)  # overwrite in place where deletion is not permitted
 for slot in sorted(os.listdir(src_root)):
     sd = os.path.join(src_root, slot)
     if not os.path.isdir(sd): continue

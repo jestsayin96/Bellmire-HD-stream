@@ -481,6 +481,70 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "cook_chibi": {
+   "title": "The Cook (chibi)",
+   "theme": "mess",
+   "idea": "IT KEEPS THE PACK ALIVE - rebuilt in the game's own register",
+   "wear": 0.6,
+   "feed_line": "The pot is on.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2539,
+   "size": [
+    2.1,
+    1.8,
+    2.05
+   ],
+   "footprint_span": 2.1,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7195794271663998,
+    "ortho": 2.770378351211548,
+    "clip": [
+     7.0628767013549805,
+     18.207914352416992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sluicekeeper_chibi": {
+   "title": "The Sluicekeeper (chibi)",
+   "theme": "flooded",
+   "idea": "IT RAISES THE WATER - rebuilt in the game's own register",
+   "wear": 0.95,
+   "feed_line": "The water is coming up.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2623,
+   "size": [
+    3.5,
+    3.06,
+    2.5
+   ],
+   "footprint_span": 3.5,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.6386402503771986,
+    "ortho": 4.710099697113037,
+    "clip": [
+     9.725982666015625,
+     24.757610321044922
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

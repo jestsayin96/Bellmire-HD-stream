@@ -6824,6 +6824,11 @@ and PROGRESS.md are touched.
 - data/items.json: cosmetics +48 titles (kind title, keys name/kind/cost/flavour, same as the 206 existing), dyes +35 (plain 6-hex, no hex repeats an existing dye). Titles cover Phase 2 (ascent, errand, Guild Vault, carry weight, teleportation stone: bought, one hero, dead weight on a lord's floor) plus a prosperous top band, cost 300-480 (slate roofs, Lamp Street, Guild Hall seat, charter, gilded bell, Father of the Town), so a late-game viewer's title reads as a rich town, not make-do. Low band stays patched and plain. New top-level `_note_c71`.
 - VALIDATION OK: all four data files parse; every pre-existing key and value identical (parsed-value compare, order of existing keys preserved, new entries spliced at block ends as text so existing formatting is byte-identical); new entries match the existing title shape. LF kept. No artifact stocked anywhere; no equipment, accessory, rarity, stock or price changed; no floor count.
 - CODE WIRING: none new. Titles and dyes are read by the existing !title / !dye pickers; any code that caps the title list or the dye picker length should be rechecked (titles 254, dyes 281). Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
+## C-72 (2026-11-16) - standing backlog, next-stalest file: potions.json (potions.json only)
+- TAKE THIS NEXT gave CONTENT no WORK_PLAN item; told it to pick bosses or potions on staleness and name it. Both last touched at C-68 (same commit), so the tie broke on size: bosses carry 350 variants, potions 208 brews. Took potions. Did NOT write more miniboss_feed lines; the reader is still unwritten.
+- data/potions.json: +24 brews (208 -> 232), same four key shapes as existing (name, cost, tier, then heal | gives, secs, cures, then aliases, flavour). Tier 1 x4, tier 2 x7, tier 3 x8, tier 4 x5, every cost inside its tier's existing band. Fills thin ground: scar_touched had 1 brew below tier 4 (now Scarwort Tea t2, Seamwater t3), plus regenerating, resist_frost, haste, invisible and heal. Low tiers stay make-do (cellar cider, cobbler's salve); the tier 4 band is a prosperous town (Guild Hall steward, Lamp Street glass bottle with a label, charter-year wine).
+- VALIDATION OK: all four data files parse; every pre-existing potion, the states block and _source are identical on a parsed-value compare, existing key order kept, new entries spliced at the block end as text (one comma added to the previous last line). 24 new keys and 48 new aliases checked against all existing keys and aliases: one collision found ("thistle") and renamed before writing. LF kept. No floor count (the word "floor" appears once, a cellar floor). No equipment, rarity, stock or price changed. No artifact stocked.
+- CODE WIRING: none new. Brews are read by the existing !brew path; all use existing `gives` states. Anything capping the brew list or alias table should be rechecked (potions 232). Still owed by the game build: miniboss_feed reader, artifact-never-stocked enforcement.
 ## B11 - THE AWAY-GUARD IS REAL, AND THE RULED DROP IS DEFERRED ON EVIDENCE (chat bot, 2026-11-16 16:45-17:05 CT)
 Lock: file read IDLE 16:17:44 (game build), no Godot alive. Claimed 16:45:00-06:00, refreshed
 16:50:30 for the battery and 16:57:40 for the re-run, released 17:04:30. Claim-first-read-second,
@@ -7023,3 +7028,81 @@ stream checked FIRST, closes this item." That is what happened. Lock: file read 
   no reward touched.
 - Files: scripts/delve.gd, scripts/dungeon_hd.gd, scripts/roster.gd, tools/_mbfeed_test.gd, tools/_dye_list_check.gd.
   Backups *.bak_mbfeed (not committed).
+
+
+## U41 - STOOD DOWN ON L31 (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: the supervisor's 17:02 TAKE THIS NEXT row names L31 (damage numbers, status icons, "Now fighting" banner legible at 1080p).
+- WHY NOTHING WAS BUILT: the plan's own analysis (WORK_PLAN, "L31 being unchecked does NOT mean the HUD worker has work") records that the NOW FIGHTING banner shipped in U26, and that everything left in L31 - damage numbers, status icons - lives in delve.gd, monster.gd, party_frames.gd and boss_bar.gd. None of those is among my seven files, and the 17:02 row itself says do not touch party_frames.gd or boss_bar.gd. Building it would mean editing files I do not own.
+- NEEDED FROM THE SUPERVISOR: either re-route the L31 remainder to its owner (game build) as a new item, or name a HUD item inside hud_dock/spotlight/auto_director/dice/feed_hud/leaderboard_panel/ui_theme. L73 and L74 are ticked, so my queue is empty otherwise.
+- LOCK: RUN_LOCK read at 17:52 CT, last line a chat bot NOTE, no Godot alive (tasklist). I took no lock and launched no Godot this slot. Released nothing because nothing was held.
+- LOOKED: nothing rendered this slot; no code changed.
+
+## ART - the two skip measurements and REGISTER CONVERSION 9 OF 14, the Sluicekeeper (2026-11-16)
+- THE SKIP RULING'S CONDITION IS MET. The Scrapwright and the Bellman went through the existing
+  fit harness ONCE, at the fixed frame, beside a chibi Knight: scrapwright ratio 0.82, pair
+  4.62 m, footprint 2.76 m; bellman ratio 1.10, pair 4.58 m, footprint 2.72 m; both fit the
+  frame, both CORRIDOR-SAFE, blank check 2 files 0 failures. Recorded in docs/art/
+  MINIBOSS_FIT.md marked SKIPPED, MEASURED. The converted eight sit at ratio 0.84-1.06, so the
+  two skips are 0.02 and 0.04 outside that band's ends - a difference that is bestiary.gd's `h`
+  and not geometry. Nothing argues for converting either. Sheet: renders/art/minibosses/
+  _skipmeasure.png. The one thing the numbers do not cover is written down beside them: both
+  carry members that are wire by the converted twelve's standard, which is member thickness and
+  not proportion, and is not what this register exists to fix.
+- REGISTER CONVERSION 9 OF 14 - sluicekeeper_chibi. Eight passes, one change and one render
+  each, each looked at. Ratio 1.02, pair 5.36 m, fits the frame, blank check 0 failures,
+  footprint 3.50 m CORRIDOR-SAFE, 4 meshes / 2623 faces, static, BLENDER_EEVEE.
+- THREE RULES CAME OUT OF IT AND THEY ARE METHOD, NOT THIS CREATURE:
+  (a) A WEAK PAIR IN THE PALETTE IS NOT A REASON TO USE ONE VALUE FOR EVERYTHING. Measuring
+      bone at 14% off body, I built the machine entirely in body/dark and the handwheel - the
+      whole silhouette - vanished into its own frame. Find the pair that IS strong (bone/dark,
+      0.342 vs 0.060) and build on it.
+  (b) A FIGURE OPERATING A MACHINE MUST STAND IN THE MACHINE'S OWN PLANE. Off to one side, the
+      near rim was 0.85 m across the wheel, both arms had to span it and they merged into one
+      plank. This is the Cook's diagonal rule's other half.
+  (c) AT THIS ELEVATION A RAISED SURFACE HIDES WHAT STANDS IN IT ONLY IF IT REACHES
+      (height - object top) / 0.105 METRES TOWARD THE CAMERA. A 0.30 m waterline needs 1.62 m
+      of water between lens and boot; widening to that broke the fixed frame, so the waterline
+      came down to 0.15 m instead.
+- A STRAIGHT BUG FOUND AND NAMED: the rim-point scan searched a near pi, which is the quadrant
+  pointing AWAY from the man, so four passes of arm work were finding the nearest point of the
+  wrong half of the wheel.
+- THE CARRIED LEG FAULT IS TAKEN (shins `body`, boot `dark`, so the leg breaks in value at the
+  ankle) - and it cannot be seen on this creature, because the waterline covers the legs. The
+  fix is in the file; the next conversion shows it.
+- Twelve faults named in MINIBOSS_FIT.md, the first being that the lower arm merges into the
+  torso so "two hands turning" reads as one hand in two views out of three.
+- NEW TOOL: tools/art/_footprint.py - the corridor span as a measurement, so a SKIP can be
+  measured the same way a conversion is.
+- THE REGISTER IS NOW 9 CONVERTED + 2 MEASURED-AND-SKIPPED. THREE REMAIN: the BOILER, the SOWER
+  and the SNARER.
+- WIRING FOR THE GAME BUILD LANE (no .gd touched): scripts/bestiary.gd - if sluicekeeper_chibi
+  is adopted, model = assets/monsters/minibosses/sluicekeeper_chibi.glb, no `anims` entry
+  (static), h = 3.20.
+- STILL OPEN AND STILL MINE, NOT TAKEN THIS RUN: the gloves _G_FLARE0/_G_FLAREK re-tune.
+
+## B12 - THE UNION READ IS OUT, AND THE QUEUE DOES NOT CLEAR WHEN THEY GO DOWN (chat bot, 2026-11-16 17:46-17:58 CT)
+CHECKPOINT - WRITTEN AND NOT GATED. No lock was taken and no Godot was launched: the slot opened at 17:46 and the
+chat bot window ends at :52, which is not a battery. This is the split the supervisor ruled for, taken on purpose
+after this lane starved the HUD lane last hour. The gates are the first thing at 18:45.
+
+- THE DEFERRAL ENDED BY ITS OWN TERMS, AND IT WAS CHECKED, NOT ASSUMED. B11 deferred the ruled drop behind a trigger:
+  the run B11_SOURCE_QUEUEING prints YES is the run the union comes out. Read directly off origin/main rather than
+  off the ruling: scripts/town.gd 5427-5428 now carries `if not chat.delve_queue.has(uid): chat.delve_queue.append(uid)`
+  in _on_delve, ahead of the away write. Merged into `chatbot` (fcd2398). The premise is real, so the union is out.
+- WHAT CAME OUT: _muster no longer walks `away` adding names, and _mustering() is gone. delve_queue is the ONE source
+  of membership and the order chat put the names in.
+- WHAT DID NOT COME OUT, AND THIS IS THE FINDING: the town erases the queue when the DELVE ENDS (delve.ended ->
+  delve_queue.erase), NOT when the party goes below (5468 only sets away). So for the whole descent the names are
+  still in delve_queue. A plain one-list read would have stood heroes who are underground at the dungeon mouth and
+  counted them in the muster - a viewer-facing regression the ruling could not see from outside the file. `away` is
+  still read for ONE thing, _below(): leaving a hero already down OUT. That is an exclusion, not a second source of
+  membership - no name enters the muster from away - so the drift D41 closed stays closed.
+- THE GATE WAS TIGHTENED, NOT RELAXED. tools/_b11_muster.gd: B11_SOURCE_QUEUEING is now an assertion, not a printed
+  note (if D41 ever leaves this branch the muster goes blind to every errand and the gate must be the thing that
+  says so); a uid that exists only in `away` is planted and the count must not move (proves no second source); and
+  the below case now asserts BOTH that the queue still holds her and that she is neither named nor counted.
+- data/commands.json and docs/COMMANDS.md UNCHANGED - no command was added, removed or reworded, so the doc cannot
+  drift. commands.json re-parsed clean, 8 top-level keys, no key touched.
+- NO LIVE TWITCH TEST THIS CYCLE. 0 bits, nothing cheered, nothing redeemed, no reward created/renamed/re-priced/
+  deleted, nothing posted as any account, no channel setting touched.
+- Files: scripts/chatcmd.gd, tools/_b11_muster.gd, PROGRESS.md.

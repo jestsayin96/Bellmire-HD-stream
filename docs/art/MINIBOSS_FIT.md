@@ -822,9 +822,149 @@ is the only `glow`.
 Six creatures still to convert, two of them the recorded skip - the Scrapwright and the
 Bellman, a machine and a shroud, neither with man-proportions.
 
-**SUPERVISOR: I AM ASKING FOR THE SKIP RULING PLAINLY, AS YOU ASKED ME TO.** Please rule on
-whether the Scrapwright and the Bellman are skipped. Four genuine conversions remain either
-way (cook done; boiler, sower, snarer, sluicekeeper left), and the case for the skip is
-unchanged and is in this file above: the Scrapwright is a lopsided mound of plate with no man
-inside it and the Bellman is a shroud with a bell - neither has man-proportions to convert, so
-"chibi" has nothing to act on. If you rule skip, this lane is four conversions from done.
+**THE SKIP RULING CAME BACK GRANTED** (supervisor, 16 Nov 17:02), with one
+condition: a skip is still a CLAIM about how something reads, and every other claim in this
+file has a number behind it, so both go through the fit harness ONCE and are recorded here
+marked SKIPPED, MEASURED. That is done and the two rows are directly below.
+
+================================================================================
+## THE TWO SKIPS, MEASURED - THE SCRAPWRIGHT AND THE BELLMAN
+
+One render run, the existing harness, the fixed frame, beside a chibi Knight at scale 1.0.
+Sheet: `renders/art/minibosses/_skipmeasure.png`, report `_fit_skipmeasure.json`,
+footprints `_footprint.json`. **Blank check: 2 files, 0 failures. BLENDER_EEVEE.**
+
+| key | ratio vs hero | pair span | fits frame | footprint span | meshes / faces | verdict |
+|---|---|---|---|---|---|---|
+| `scrapwright` | **0.82** | 4.62 m | yes | **2.76 m** CORRIDOR-SAFE | 4 / 975 | SKIPPED, MEASURED |
+| `bellman`     | **1.10** | 4.58 m | yes | **2.72 m** CORRIDOR-SAFE | 4 / 842 | SKIPPED, MEASURED |
+
+**THE BAND THE CONVERTED EIGHT SIT IN** is ratio 0.84 - 1.06 and pair span 3.58 - 6.69 m.
+The two skips land at 0.82 and 1.10: **0.02 and 0.04 outside the converted band's ends, and
+well inside the set's own range.** Both differences are `bestiary.gd`'s `h` - one number the
+game build lane types - and not geometry. Nothing in the measurement argues for converting
+either.
+
+**AND THE HONEST HALF, BECAUSE THE RULING ASKED FOR A CLAIM WITH A NUMBER BEHIND IT AND I CAN
+SEE SOMETHING THE NUMBERS DO NOT COVER.** I looked at the sheet. The reasoning for the skip
+holds for the MASSES: the Scrapwright is one lopsided dark mound and the Bellman is one bold
+pale cone, and neither reads as a figure, so "chibi" has nothing to act on - that is exactly
+right and it is why converting them would change nothing a viewer can see. But each carries
+members that ARE wire by the standard the other twelve were converted against: the
+Scrapwright's arm out to the box and its strut down to the tray are two thin struts off a
+heavy body, and the Bellman's three hanging arms are thinner than a hero's limb at the same
+distance. **That is a smaller fault than a pipe-cleaner man and it is NOT what the register
+conversion exists to fix** - it is member thickness, not proportion - so I am not reopening
+the ruling on it. It is recorded here so that if Mr. E ever points at either one on stream
+and says the arms look like wire, the answer is in this file and nobody has to re-derive it.
+
+================================================================================
+## REGISTER CONVERSION 9 OF 14 - THE SLUICEKEEPER (`sluicekeeper_chibi`)
+
+Sheet: `renders/art/minibosses/_sluice_register.png` (original | chibi, a real posed 2.45 m
+KayKit Knight beside each), plus `renders/art/minibosses/sluicekeeper_chibi/hero_front|side|
+back.png`. **Ratio 1.02 · pair span 5.36 m · fits the fixed frame · blank check 2 files, 0
+failures · BLENDER_EEVEE · `sluicekeeper_chibi.glb` 4 meshes, 2623 faces, static, no armature
+· CORRIDOR-SAFE, footprint span 3.50 m (4.48 m at the recommended `h` of 3.20).**
+
+### WHAT THE ORIGINAL ACTUALLY READS AS
+A seven-head pipe-cleaner man with 0.10 m limbs holding a thin wheel on a thin frame, with a
+puddle. Beside a chibi Knight he is from another game, which is the fault this whole register
+exists to close. The IDEA does not change: man, open wheel high on his right, screw, gate
+board, water.
+
+### THE EIGHT PASSES, ONE CHANGE AND ONE RENDER EACH
+1. **Built in register** - stub legs, barrel torso, big head, mitts, a hood set into the crown,
+   the wheel turned 40 degrees in plan so it is open from the front AND the side, the water a
+   lit basin with a proud rim.
+2. **THE MACHINE CAME BACK A TANGLE AND MY OWN VALUE PLAN DID IT.** Measuring `bone` at only
+   14% off `body` at this wear, I put the whole creature in `body` and `dark` - and so the
+   wheel, the posts, the beam and the screw were one value and the handwheel, which IS this
+   creature's silhouette, disappeared into the frame. Frame and beam back to `bone`.
+   **THE LESSON: a weak pair in the palette is not a reason to use ONE value for everything;
+   it is a reason to find which pair IS strong and build on that.** Here it is bone/dark,
+   0.342 against 0.060.
+3. **THE WATER CAME BACK A DISPLAY PLINTH.** A pale circle, flat on the floor, with a dark
+   kerb outside the bright rim, carrying a figure: that is a cake stand. Every cue added for
+   legibility was a cue for furniture. **WATER HAS NO EDGE OF ITS OWN - IT TAKES THE EDGE OF
+   WHAT IT IS IN.** Kerb deleted, outline made irregular on eight unequal lobes, surface
+   raised so it CUTS the legs instead of carrying them.
+4. **HIS BOOTS WERE STILL UNDER A SHEET.** A surface with no side is a sheet, not a flood.
+   The water got a skirt down to the floor and became a volume.
+5. **THE ARMS CAME BACK AS A PLANK, AND THE CAUSE WAS THE LAYOUT.** With the man off to one
+   side of the wheel's plane, the nearest rim was 0.85 m ACROSS the wheel and both arms had to
+   span it, merging into one bar with a ball on the end. **NEW RULE: A FIGURE OPERATING A
+   MACHINE MUST STAND IN THE MACHINE'S OWN PLANE** - you turn a handwheel from its edge. He
+   moved along the machine's axis, which keeps the Cook's diagonal on BOTH axes.
+6. **HE WAS STANDING ON THE WHEEL** at 1.30 m out, so the rim was read through a man; and the
+   basin, still hand-typed, left the OUTER BOOT CORNER STICKING OUT OF THE WATER at 1.11 m
+   against a 0.98 m lobe - found by measuring the dark slot's vertices below the waterline,
+   not by staring. Deriving a CIRCLE to fix it put the pair at 5.77 m against a 5.60 m cell,
+   so the basin became an ELLIPSE on the machine's axis with both semi-axes computed from the
+   boot corners and the posts' feet. It cannot leave a foot dry by construction.
+7. **THE NEAREST-POINT SCAN WAS SEARCHING THE WRONG HALF OF THE WHEEL** - a straight bug.
+   `cos(a)*WR` is the coordinate along the machine's axis, so a near pi is the quadrant
+   pointing AWAY from the man, and four passes of arm work had been faithfully finding the
+   nearest point of the far rim. Upper hand to the near-TOP quadrant, lower to the near-BOTTOM.
+8. **THE WATERLINE, AND I HAD THE ELEVATION ARITHMETIC BACKWARDS.** The front view was right
+   and the back view still showed his boots through the water. An ortho ray at 6 degrees aimed
+   at the top of a 0.13 m boot crosses the surface plane `(BZ - 0.13) / tan(6 deg)` BEFORE it
+   arrives: at BZ 0.30 that is **1.62 m of water that must lie between camera and boot**. From
+   the front the pool is nearly that deep; from the back he stands at the near edge and the
+   camera looks straight under the surface. Widening to 1.6 m of margin broke the frame at
+   5.86 m. The SURFACE CAME DOWN to 0.15 instead, where the required reach is 0.19 m and the
+   0.22 m margin already has it. **THE RULE: at this elevation a raised surface hides what
+   stands in it only if it REACHES `(height - object top) / 0.105` metres toward the camera.**
+
+### THE VALUE PLAN, MEASURED RATHER THAN ASSUMED
+At this wear of 0.95 - the highest in the file, and justified, because this is the one thing
+down there that is never dry - `body` lands at luminance 0.299 and `bone` at 0.342: a **14%
+separation, weaker than the Cook's 19% and the weakest in the file**. So nothing leans on
+body-versus-bone. The man is `body`, every break on him is `dark` (0.060), the machine's wheel
+and screw are `dark` against a `bone` frame, the gate board is the one other `bone` object,
+and the water is the only `glow`.
+
+### THE CARRIED FAULT, TAKEN - AND THE PROOF IS NOT VISIBLE ON THIS CREATURE
+"The legs read as two dark blocks" is the Sexton's fault 9, the Porter's 12, the Tallyman's 10
+and the Cook's 6, carried four times. The cause was that shin and boot were both `dark`, which
+is 0.060 against 0.060. Here the shins are `body` and only the boot is `dark`, so the leg
+breaks in value at the ankle where a real one does. **It is in the file and it is right, and
+you cannot see it, because pass 8's waterline covers his legs to the ankle.** The next
+conversion inherits the fix and will show it.
+
+### TWELVE FAULTS I CAN STILL SEE
+1.  **The lower arm is invisible from the front and the side.** It merges into the torso, so
+    "two mitts on one wheel at two points" - the pose the whole conversion was built around -
+    reads as ONE hand on the wheel in two views out of three. It is the fault I would take next.
+2.  **The man is a stack of spheres from the back** - torso, pelvis, two shoulders and a head,
+    five round masses with one dark belt across them. A snowman with a belt.
+3.  **The hood's peak is a party hat** from the front and a cat's ear from the side. It is the
+    one member that did not survive the chibi weight.
+4.  **The eyes read as goggles** - two pale dots on a dark brow band.
+5.  **The gate board, which is what a sluice IS, only reads from the BACK.** The wheel and the
+    screw stand in front of it from the other two azimuths. It sits on the wheel's far side by
+    construction and I did not move it.
+6.  **The water has no ripple and no second lapping line**, so it is one flat pale shape. On
+    black it reads as a flood; the structure that would make it read as moving water is not
+    there, and pass 8's arithmetic forbids fixing it by raising the surface.
+7.  **At 0.15 m it is a shallow sheet, not a rising level.** True to the feed line - "the water
+    is coming up" - but it is less of a mechanic than pass 4's 0.30 m version was.
+8.  **2623 faces - now the heaviest set piece in the file**, past the Cook's 2539. The water's
+    skirt is 40 quads of that.
+9.  **The near frame post crosses the wheel's rim** in the front view.
+10. **Pair span 5.36 m against a 5.60 m frame.** This is the widest converted creature and it
+    has 0.24 m of headroom left; anything added on the man's side breaks the sheet.
+11. **The arms run about 0.78 m on a 2.10 m man** - long for this register. Named in pass 7
+    and kept, because shorter put his body through the rim.
+12. **Ratio 1.02 is the creature, not the man.** The figure inside is about 2.03 m of the 2.50,
+    so a viewer's hero still looks the operator in the eye. Recommended `h` is **3.20 m** -
+    that is `bestiary.gd`'s number, not mine.
+
+### WIRING THE GAME BUILD LANE MUST DO (I touched no `.gd`)
+`scripts/bestiary.gd` - if `sluicekeeper_chibi` is adopted in place of `sluicekeeper`, point
+the Sluicekeeper's `model` at `assets/monsters/minibosses/sluicekeeper_chibi.glb`, **no `anims`
+entry** (it is static), and set `h` to **3.20**.
+
+### THE REGISTER AFTER THIS RUN
+**9 converted + 2 measured-and-skipped, and THREE REMAIN, named so the count stops being
+re-derived: the BOILER, the SOWER and the SNARER.**

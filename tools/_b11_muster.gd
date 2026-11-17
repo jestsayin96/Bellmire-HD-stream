@@ -8,10 +8,12 @@ extends SceneTree
 ##    queues NOTHING, so without the guard a point-redeemed errand hero can !delve into a
 ##    second slot. The guard is checked here in both the queued and the away-only shape.
 ##
-## 2) IS THE !muster UNION READ REDUNDANT? NOT YET. It is redundant only once D41's
-##    source-queueing (town._on_delve appending to chat.delve_queue) is on this branch. This
-##    gate MEASURES that and prints B11_SOURCE_QUEUEING YES/NO. While it reads NO the union
-##    stays and is asserted to work; the run it reads YES is the run the union comes out.
+## 2) IS THE !muster UNION READ REDUNDANT? YES, AND IT IS OUT (B12). D41's source-queueing
+##    reached main at 16:58, this gate read B11_SOURCE_QUEUEING YES, and the union came out
+##    the same run. The gate now holds the drop to its terms: the queue is the ONLY source of
+##    membership (a name that exists only in `away` must NOT appear), the count must not move,
+##    and a hero already below must still drop out - which she does not do by herself, because
+##    the town erases the queue when the DELVE ENDS, not when the party goes down.
 ## Headless. Prints B11_MUSTER OK/FAIL.
 var _t: Node3D
 var _f := 0
@@ -51,14 +53,15 @@ func _process(_dt: float) -> bool:
 	print("  muster: ", m1)
 	_ck(m1.contains("(1)"), "!muster counts the errand hero (1)")
 	_ck(m1.contains("first in line"), "and tells her her place")
-	if queued_at_source:
-		print("  ACTION: D41's source-queueing is on this branch - DROP the union read in")
-		print("          _muster and _mustering, then delete this block from the gate.")
-	else:
-		_ck(not c.delve_queue.has("5101"), "main: _on_delve queues nothing, so the union is load-bearing")
-		_ck(c._mustering("on the road to the scar"), "_mustering counts a hero on the road")
-		_ck(c._mustering("waiting at the mouth of the scar"), "_mustering counts a hero at the mouth")
-		_ck(not c._mustering("below, in the scar"), "_mustering does NOT count a hero already below")
+	# THE DROP RESTS ON THIS AND NOTHING ELSE. If D41 ever leaves this branch the muster goes
+	# blind to every errand, so the premise is an assertion now, not a printed note.
+	_ck(queued_at_source, "D41 queues the errand at the SOURCE - the union has nothing left to add")
+	# the union is OUT: a name that lives only in `away` must not reach the muster
+	c.away["5199"] = "waiting at the mouth of the scar"
+	var mu: String = c._muster("5103")
+	print("  muster (away-only name present): ", mu)
+	_ck(mu.contains("(1)"), "count unmoved - no name enters the muster from away")
+	c.away.erase("5199")
 
 	# ---- the chat path for a second viewer, and the ORDER chat put the names in ----
 	c._last.clear()
@@ -89,10 +92,13 @@ func _process(_dt: float) -> bool:
 	_ck(not r2.contains("sets out"), "a hero below cannot re-enter the queue")
 	_ck(r2.contains("below, in the scar"), "a hero below is told she is below")
 	_ck(not r2.contains("waiting at the dungeon mouth"), "she is NOT told she waits at the mouth")
-	# and she drops out of the muster the moment she is below, by _mustering's own rule
+	# and she drops out of the muster the moment she is below - by the exclusion, which is the
+	# one thing `away` is still read for. Her name is STILL in the queue while she is down.
 	var m4: String = c._muster("5102")
 	print("  muster (one below): ", m4)
+	_ck(c.delve_queue.has("5101"), "the queue still holds her below - it clears at delve END, not descent")
 	_ck(not m4.contains("ErrandFan"), "a hero below is not at the mouth any more")
+	_ck(m4.contains("(1)"), "and she is not counted while she is down")
 
 	# ---- the guard costs a free hero NOTHING: no away-state, no queue entry ----
 	c._last.clear()

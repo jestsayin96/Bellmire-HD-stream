@@ -1282,8 +1282,24 @@ func _epitaph() -> String:
     return String(eps[rng.randi() % eps.size()]) if not eps.is_empty() else ""
 
 ## L19: the forge's word on a tier
-static func forge_flavour(tier: int) -> String:
+## D98: drawn from [forge[tier]] + forge_alt[tier] (content's C-12 pick rule). The live value is ONE
+## STRING per tier and the alt is a LIST, so the string is wrapped and the list joined, then drawn.
+static func forge_pool(tier: int) -> Array:
     var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
     if f == null:
-        return ""
-    return String(((JSON.parse_string(f.get_as_text()) as Dictionary).get("forge", {}) as Dictionary).get(str(tier), ""))
+        return []
+    var d := JSON.parse_string(f.get_as_text()) as Dictionary
+    var pool: Array = []
+    var live := String((d.get("forge", {}) as Dictionary).get(str(tier), ""))
+    if live != "":
+        pool.append(live)
+    var alt = (d.get("forge_alt", {}) as Dictionary).get(str(tier), [])
+    if alt is Array:
+        for a in alt:
+            if String(a) != "":
+                pool.append(String(a))
+    return pool
+
+static func forge_flavour(tier: int) -> String:
+    var pool := forge_pool(tier)
+    return String(pool[randi() % pool.size()]) if not pool.is_empty() else ""

@@ -183,7 +183,7 @@ func _next_floor() -> void:
 		# L29b: the guild knows this lord. It does not know THIS one.
 		if bool(dun.lord.def.get("lord_unique", false)):
 			_say("The guild has put down %s before. Not this one." % String(dun.lord.def.get("lord_title", "its like")))
-		var intro := String((lore().get("unique_intros" if uniq else "lord_intros", {}) as Dictionary).get(String(dun.lord.def.get("id", "")), ""))
+		var intro := intro_line(uniq, String(dun.lord.def.get("id", "")), _rng)
 		if intro != "":
 			_say(intro)
 		_bark_any("lord")
@@ -3367,6 +3367,30 @@ static func lore() -> Dictionary:
 		if f:
 			_lore = JSON.parse_string(f.get_as_text())
 	return _lore
+
+## ---- D98: the lord / unique arrival line, drawn from BOTH pools.
+## The live lord_intros / unique_intros value is ONE STRING per id; the C-8 _alt pool is a LIST
+## for the same id. Content's pick rule (lore_lines "_note"): [live] + alt, then draw - so a second
+## sighting on one stream does not read word for word the first. An id with no alt list still gets
+## its one live line; an id with neither gets "" (the caller already skips an empty intro).
+static func intro_pool(uniq: bool, id: String) -> Array:
+	var base := "unique_intros" if uniq else "lord_intros"
+	var pool: Array = []
+	var live := String((lore().get(base, {}) as Dictionary).get(id, ""))
+	if live != "":
+		pool.append(live)
+	var alt = (lore().get(base + "_alt", {}) as Dictionary).get(id, [])
+	if alt is Array:
+		for a in alt:
+			if String(a) != "":
+				pool.append(String(a))
+	return pool
+
+static func intro_line(uniq: bool, id: String, rng: RandomNumberGenerator = null) -> String:
+	var pool := intro_pool(uniq, id)
+	if pool.is_empty():
+		return ""
+	return String(pool[(rng.randi() if rng else randi()) % pool.size()])
 
 ## ---- miniboss_feed reader (data/lore_lines.json "miniboss_feed".by_key[key][phase]).
 ## Phases: arrive / act / broken / fall. arrive and fall are wired (spawn, death);

@@ -692,3 +692,92 @@ writes three views, so two of the three went into the register unchecked - an
 instrument that can return GREEN over renders it never opened. It now opens all
 three and a missing one fails the run: the count went **1 -> 51 files** for the
 same seventeen keys, 0 failures.
+
+---
+
+## 18. THE HURDLEMAN - *IT CUTS THE ROOM IN TWO*
+`hurdleman` - grassland - h 2.55 - wear **1.00** - 4 meshes, 1,418 faces -
+span 3.10 m, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **1.04** beside the posed 2.45 m Knight, pair_w 4.96, fits_frame true.
+Procedural, no pack geometry (`pack_used` false).
+
+### WHY THIS ONE, MEASURED OFF THE SET AND OFF THE GAME - NOT REMEMBERED
+- **Seventeen ideas existed and NOT ONE DIVIDES THE PARTY.** Parsed out of
+  `minibosses.py` CANON, not recalled: summon, self-armour, drag a hero out,
+  douse the lamps, will-not-stay-down, bar the door, steal gear, heal the pack,
+  raise the water, plant the ground, pre-set the room, scale with the fire,
+  ring from elsewhere, set the floor, come apart in two, arm the room, weigh
+  you down. Party division is a mechanic class the set does not have.
+- **It is NOT the Porter.** Being shut in is not the same fight as being cut in
+  half: the Porter drops a leaf across the DOOR (no retreat, no help from
+  outside), this one plants a panel through the MIDDLE OF YOUR OWN LINE, so the
+  front rank and the healer behind it become two fights until a panel is broken.
+- **Theme, counted off the game's files.** `floorgen.gd` THEMES + BIOMES = 14
+  themes; `dungeon_hd.gd:737-743` weights them. Barracks 2 bodies, workshop 2,
+  mess 2, every other theme 1. Grassland sits at weight 15 with one body (the
+  Sower) and its clusters are overgrowth/stores/collapse - a sunken meadow is
+  the one room where a hurdle needs no explaining, because a hurdle is what you
+  pen a meadow with.
+- **Wear 1.00 EXTENDS the ladder rather than repeating a step.** The .15-.95
+  ladder is full: seventeen creatures, seventeen steps of 0.05, every one
+  checked. Split grey hurdles that have stood out in a wet meadow for years are
+  the most worn thing in the set and should read that way.
+- Height 2.55 was the free gap in a 2.00-2.70 set.
+
+### WHAT THE GAME BUILD MUST DO - NOT MINE, I TOUCHED NO .gd OUTSIDE tools/art/
+1. `assets/monsters/minibosses/hurdleman.glb` - **static, no armature**: a
+   `model` path and **NO `anims` entry**, same as the seventeen before it.
+2. `scripts/delve.gd` `MB_FIT`: add `"hurdleman": 1.04` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json` `pairs.hurdleman.ratio`. Do not
+   re-derive it. Same one-line shape as `"loader": 1.08` and
+   `"quartermaster": 0.96`, both still owed.
+3. No `.glb.import` sibling - the art lane never runs Godot. One import run
+   covers this, `loader.glb` and `quartermaster.glb`; `delve.gd:377` falls back
+   to the base body until then.
+4. Feed line, if one is wanted: *"A hurdle just went down between you."*
+5. **The idea is a BEHAVIOUR.** Shipped as a reskin with more hit points it is
+   wasted: the whole of it is that the party stops being one party.
+
+### THE FIT PROOF - SIX PASSES, ONE CHANGE EACH, EVERY ONE DRIVEN BY A PICTURE
+1. **The harness went RED on its own author, and it was right.** Pass 1
+   measured a **4.89 m footprint - the widest of the eighteen by 1.2 m** (the
+   Gaoler's chain coil is 3.72) and the pair blew the fixed 5.60 m fit frame at
+   6.75. The composition was spread, not the idea.
+2. Pass 2 trimmed and still missed at 5.64 against 5.60. **A 40 mm miss is a
+   miss**, and the measurement corrected me on WHERE: the left edge was the
+   spare fan, not the stakes I had just pulled in. 3.10 m now.
+3. **The spares read as one solid grey billboard** - the biggest mass in the
+   silhouette, reading as a door or a shield, which is the exact opposite of
+   what a hurdle is. Rebuilt as OPEN LATTICES, like the one already standing.
+4. **The side view had no creature in it.** At the body's own depth the hurdle
+   eclipsed the man entirely at 90 degrees - and a 34 degree yaw is no help,
+   because 34 off the front camera is 56 off the side one. The hurdle went a
+   metre FORWARD: it now stands between the camera and the creature, which is
+   the mechanic drawn rather than a compromise.
+5. **The beetle head read as a barrel lying on the floor** - a 10-sided cone
+   inside the hurdle's own plane with the haft lost behind the lattice. A
+   squared block, in front of the panel where the haft can be seen reaching it.
+6. **From behind it read TWO-HEADED**: a pale shoulder sphere sat beside the
+   withy head at the same tone. Smaller, and in the dark slot.
+
+### WHAT IS STILL WRONG WITH IT - I LOOKED, AND THIS IS THE HONEST LIST
+1. **From the back the three spares read as a loose jumble of sticks**, not as
+   panels carried in a fan - the posts splay and cross at odd angles.
+2. **From the back the body is almost entirely behind the spares**: a withy
+   head, one shoulder, and nothing else of the creature.
+3. In the creature's own three-quarter framing **the standing hurdle covers the
+   body from the chest down**. It is a strong image and it is the mechanic, but
+   it is a hurdle with a man behind it, not a man with a hurdle.
+4. **The withy head still reads as a helmet with a visor band** at pair scale -
+   the crossing rings plus two lit eyes. The Loader has the same fault from a
+   different cause and I have not solved it in either.
+5. **The withy coil on the floor reads as a dark tyre**, not a coil of binding.
+6. **The maul is invisible in the back view** and its haft is hidden behind the
+   lattice in the front and three-quarter views; only the side view shows the
+   whole tool.
+7. **The stakes on the floor read as flat planks**, not sharpened stakes - at
+   hero scale the points are gone.
+8. **Everything is one tone.** At wear 1.00 the body, the hurdle and the spares
+   sit within a narrow grey-green band, so the man does not separate from his
+   own fences except by silhouette. It is honest for weathered wood and it is
+   still the thing I would change next.

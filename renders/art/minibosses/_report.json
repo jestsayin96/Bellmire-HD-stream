@@ -899,11 +899,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "hurdleman": {
+   "title": "The Hurdleman",
+   "theme": "grassland",
+   "idea": "IT CUTS THE ROOM IN TWO - it plants a hurdle through your line and you fight it two and two",
+   "wear": 1.0,
+   "feed_line": "A hurdle just went down between you.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1418,
+   "size": [
+    3.1,
+    2.95,
+    2.55
+   ],
+   "footprint_span": 3.1,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.4912739337895013,
+    "ortho": 4.544711589813232,
+    "clip": [
+     9.0894775390625,
+     23.606523513793945
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 51,
+  "files": 54,
   "failures": []
  }
 }

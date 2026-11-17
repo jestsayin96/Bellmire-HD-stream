@@ -246,3 +246,129 @@ Give the four cheap cuts mass in the ONE direction the front view can see -
 outboard of the hip line - WITHOUT widening the mouth. The candidate is an
 asymmetric cuff: a longer outboard lip and a shorter inboard one, so the
 silhouette gains on the side the body is not occluding. One change, one render.
+
+================================================================================
+
+# 17 NOV - DIRECTIONAL FLARE. THE `_G_FLARE` RE-TUNE, AND IT IS A RE-TUNE IN
+# DIRECTION, NOT IN SIZE.
+
+The plan's ART row named this: *"the gloves' `_G_FLARE0/_G_FLAREK` re-tune.
+D94e ported your derivation into gear.gd bit for bit, so the game's glove IS
+your proof row, and your re-shot row - SAME METHOD - is the ONLY number that
+can move the gloves off PARTLY TOO SMALL 3 of 15."*
+
+## WHAT I CHECKED BEFORE CHANGING ANYTHING, AND IT IS THE REASON THIS WORKED
+
+The previous pass closed with a named next step - *"an asymmetric cuff: a
+longer outboard lip and a shorter inboard one, so the silhouette gains on the
+side the body is not occluding."* That named a DIRECTION, and a direction can
+be wrong, so I measured it instead of taking it:
+
+`e3pogen.pose_at_post` turns each upper arm about the ARMATURE'S OWN Y, by
++1.26 on the left and -1.20 on the right. A rotation about Y carries a rest +Z
+direction to `(sin a, 0, cos a)`: **(0.952, 0, 0.306) on the left and
+(-0.932, 0, 0.362) on the right.** The left arm lives at +X and the right at
+-X, so **REST +Z IS OUTBOARD ON BOTH HANDS** - the single direction a hanging
+arm does not bury in the tabard, and the one the d94g3 sheet showed as the only
+part of a cuff that survives at the hip. The guess was right and now it is a
+number.
+
+The sign does not survive into the cone's own space, and that is the trap.
+`aim()` builds its rotation with `to_track_quat('Z','Y')`, so for the cuff axis
+`(-sgn,0,0)` the cone's LOCAL +X lands on rest-world **+Z when sgn=+1 and -Z
+when sgn=-1**. So a cone's skew carries `sgn` and a ring written straight into
+rest-world coordinates (the lip, the lames) does not. Getting that backwards
+puts one glove's lip through the hip and would have looked like a clip.
+
+## THE ONE CHANGE
+
+`lordlib.scone` - a cone whose rings are off-circle, `r(th) = r (1 + s cos th)`.
+**cos has mean zero over a turn, so the mean radius is exactly r.** The skew
+adds NO GIRTH ON AVERAGE; it moves girth from the inboard side to the outboard
+side. That is why this is not the 2.0-3.3x bell mouth that was tried in D94 and
+backed out as dinner plates: THE MOUTH IS THE SAME SIZE, it is just no longer
+round. `_G_FLARE0/_G_FLAREK` are untouched in VALUE - they are re-tuned in
+SHAPE, by a new per-cut skew table that rides cost and the item's key like
+every other dial:
+
+    #            cut:  gauntlet  mitt  studded  vambrace  wrap
+    _G_SKEW0   = (0.14, 0.30, 0.46, 0.34, 0.58)
+    _G_SKEWK   = (0.06, 0.10, 0.12, 0.26, 0.08)
+
+The four SMALL cuts carry the big numbers, because all three failing pairs were
+pairs of small cuts. The gauntlet barely moves - it did not need it.
+The hub icon takes the same dial, because the glove in the satchel must be the
+glove on the hero.
+
+## THE NUMBER MOVED, SAME METHOD, SAME SIX CELLS
+
+| view | d94g3 (before) | d94g5 (now) | median |
+|---|---|---|---|
+| front | PARTLY TOO SMALL 3/15, worst 0.16% | **PARTLY TOO SMALL 1/15, worst 0.25%** | 1.08 -> **2.25** |
+| side  | TELLS APART, worst 0.40% | **TELLS APART, worst 0.42%** | 1.37 -> **2.96** |
+| back  | PARTLY TOO SMALL 3/15, worst 0.18% | **PARTLY TOO SMALL 1/15, worst 0.18%** | 0.95 -> **1.99** |
+
+Sheets `renders/art/d94g5_{front,side,back}/_row_gloves.png`. Blank check 12
+files per view, **0 failures**, three views, errors `[]`. Engine
+`BLENDER_EEVEE`. **Two of the three failing pairs are gone** - both the ones
+that involved Forgemaster's Grips. THE ONE THAT REMAINS IS
+**CARDER'S GLOVES | BELLRINGER'S WRAPS**, 0.25% front and 0.18% back, and it
+passes on the side. It is the cheapest vambrace against the wrap: both are
+small, both are cloth-toned, and from the front the wrap's tie hangs behind the
+arm where the camera cannot see it.
+
+## I LOOKED, AND LOOKING CAUGHT A FAULT I HAD JUST MADE
+
+The first shot (`d94g4`) scored the same verdicts but the item-alone framing
+showed the lames **standing clear of the outboard wall like a coiled spring**.
+Cause: the lame radius was a straight lerp `hw -> mouth` in `f`, which stopped
+lying on the cone the moment the cone stopped being round - two different
+parameterisations of the same surface. The bands now read BOTH their radius and
+their skew off the cuff's own profile at their own x (`prof()` in
+`acc_gloves`), piecewise for a stepped cuff. That moved the median again,
+front 2.05 -> 2.25, side 2.51 -> 2.96, back 1.70 -> 1.99.
+
+## NINE FAULTS I CAN STILL SEE
+
+1. **THE SPRING IS REDUCED, NOT GONE.** On the glove whose outboard side faces
+   the camera the outer lames still stand proud of the wall and read as open
+   loops. `prof()` matches the cone analytically, so the remainder is either
+   the tube's own radius (0.075 of the local radius, added perpendicular to a
+   path that is now strongly curved) or the 14-gon's inscribed-vs-true radius.
+   NEXT MEASUREMENT, not a guess: cast each lame vertex at the cuff mesh and
+   print the signed distance. I have not run it and I am not claiming which.
+2. **PENETRATION GOT DEEPER ON FIVE OF SIX.** carder 0.054 -> 0.060, quarreller
+   0.048 -> 0.054, forge 0.047 -> **0.072**, baker 0.057 -> 0.075, raidbreaker
+   0.040 -> 0.052. The outboard rim now reaches further and the posed forearm
+   leans, so the rim drives into the arm. This is the price of the change and
+   it is a real one. The wrap's 0.087 is unchanged and pre-existing.
+3. Carder's and Bellringer's **still show nothing at all from the front** on
+   the body - they are the pair that still fails, said in pixels.
+4. Baker's Mitts are **invisible from the front** on the body at any size.
+5. The cuff still reads as **a tub with a small hand box under it** at
+   item-alone framing; the skew makes it a LEANING tub.
+6. The **icon's lip and lame rings are still round** inside a skewed cuff, so
+   on the icon they cross the wall. I did not fix it this pass: one change at a
+   time, and the acceptance number is the worn row.
+7. **AND I FOUND THE CAUSE OF A FAULT THAT HAS BEEN LISTED SINCE D94G3.**
+   "Left and right fuse in the middle of the frame" on the icon is not a
+   composition problem: `build_gloves` draws the lip and the lames with
+   `ring_pts(r, n, z)`, which builds a ring **centred on the origin**, while
+   the hands are at `x = +-0.36`. Both hands' rings are drawn as ONE ring
+   through the middle of the icon. It is a one-line fix and it is NOT in this
+   pass, because this pass is one change.
+8. The hand shell is still a box; the fingers are still swallowed from the
+   front.
+9. `worst_peak_pct` is 56% on the failing pair - the two ARE different where
+   they differ, there is just too little of it at 1/3 scale.
+
+## STILL FOR THE GAME BUILD LANE, NOT ME
+
+`scripts/gear.gd`, the glove branch (D94e ported the derivation bit for bit, so
+it is now behind): add `_G_SKEW0/_G_SKEWK` and the directional mouth. The two
+things that will go wrong if it is ported by eye:
+  - the local skew carries the SIDE'S SIGN when the cuff is an aimed cone, and
+    does NOT when a ring is written in rest-world coordinates. Measured above.
+  - anything wrapped round the cuff must read its radius off the cuff's own
+    profile at its own x, or it leaves the wall. That is fault 1 above and it
+    cost me a render to find.

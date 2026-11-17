@@ -787,6 +787,18 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         cuff = forearm * F['cuff']                 # up the forearm: 0.04 -> 0.24
         mouth = ar * F['flare']                    # the lip, CLEAR of the arm
         hw = fist * 0.5 * F['shell']               # ALWAYS > the fist
+        # DIRECTIONAL FLARE (17 Nov) - THE ONE CHANGE THIS PASS.
+        # aim() builds its rotation with to_track_quat('Z','Y'), so for the
+        # cuff's own axis (-sgn,0,0) the cone's LOCAL +X lands on rest-world
+        # +Z when sgn=+1 and on rest-world -Z when sgn=-1. Rest +Z is OUTBOARD
+        # on both hands once pose_at_post has turned the arms (measured: the
+        # left lands 0.952 of it on +X, the right 0.932 on -X). So the local
+        # skew carries the sign of the side; a ring written straight into rest
+        # world coords (the lip and the lames below) does not, because for
+        # those +Z IS the outboard axis already.
+        skew = F['skew']
+        lskew = skew * sgn
+        mid = mouth * 0.62 + hw * 0.38       # the stepped cuff's shoulder
         # 1. THE CUFF - the readable mass. IT STAYS ON THE HAND BONE. Moving
         #    it to lowerarm.<side> was tried and is wrong: merge_parts carries
         #    each part rigidly on its own bone, so the cuff and the hand shell
@@ -806,20 +818,47 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         if F['stepped']:
             # a straight sleeve with ONE shoulder in it - a different outline
             # from the bell, which is the point: same price, different glove.
-            mid = mouth * 0.62 + hw * 0.38
-            p.raw(aim(L.cone(hw * 0.99, mid, cuff * 0.55 + handlen * 0.30, 14),
-                      base, axis), 'metal' if F['metal'] else 'leather')
-            p.raw(aim(L.cone(mid * 1.04, mouth, cuff * 0.45, 14),
+            p.raw(aim(L.scone(hw * 0.99, mid, cuff * 0.55 + handlen * 0.30, 14,
+                              0.0, lskew * 0.55), base, axis),
+                  'metal' if F['metal'] else 'leather')
+            p.raw(aim(L.scone(mid * 1.04, mouth, cuff * 0.45, 14,
+                              lskew * 0.55, lskew),
                       (w.x - sgn * cuff * 0.55, w.y, w.z), axis),
                   'metal' if F['metal'] else 'leather')
         else:
-            p.raw(aim(L.cone(hw * 0.99, mouth, cuff + handlen * 0.30, 14),
-                      base, axis), 'metal' if F['metal'] else 'leather')
+            p.raw(aim(L.scone(hw * 0.99, mouth, cuff + handlen * 0.30, 14,
+                              0.0, lskew), base, axis),
+                  'metal' if F['metal'] else 'leather')
+        # THE CUFF'S OWN PROFILE, SO EVERYTHING WRAPPED ROUND IT HUGS IT.
+        # LOOKED AT AND CAUGHT: with the mouth skewed, the old lame radius -
+        # a straight lerp hw -> mouth in f - no longer lay on the cone, and
+        # the sheet showed four bands standing CLEAR of the outboard wall like
+        # a coiled spring. The bands now read their radius AND their skew off
+        # the cone at their own x, which is the only way a band can hug a
+        # surface it does not share a parameterisation with.
+        Lc = cuff + handlen * 0.30
+        xb = w.x + sgn * handlen * 0.30
+
+        def prof(px):
+            t = max(0.0, min(1.0, (sgn * (xb - px)) / max(1e-6, Lc)))
+            if F['stepped']:
+                tA = (cuff * 0.55 + handlen * 0.30) / max(1e-6, Lc)
+                if t <= tA:
+                    u = t / max(1e-6, tA)
+                    return (hw * 0.99 + (mid - hw * 0.99) * u, skew * 0.55 * u)
+                u = (t - tA) / max(1e-6, 1.0 - tA)
+                return (mid * 1.04 + (mouth - mid * 1.04) * u,
+                        skew * (0.55 + 0.45 * u))
+            return (hw * 0.99 + (mouth - hw * 0.99) * t, skew * t)
+
         if F['lip']:                               # a hard flared rim
             lipx = w.x - sgn * cuff
-            ring = [Vector((lipx, mouth * 1.02 * math.cos(TAU * k / 16.0),
-                            w.z + mouth * 1.02 * math.sin(TAU * k / 16.0)))
-                    for k in range(17)]
+            ring = []
+            for k in range(17):
+                th = TAU * k / 16.0
+                rr = mouth * 1.02 * (1.0 + skew * math.sin(th))
+                ring.append(Vector((lipx, rr * math.cos(th),
+                                    w.z + rr * math.sin(th))))
             p.raw(L.tube(ring, mouth * 0.13, 7, caps=False),
                   'metal' if F['metal'] else 'dark')
         # 1b. LAMES - the segmentation. These are what tell two vambraces of
@@ -829,18 +868,21 @@ def acc_gloves(name, key, cost, ctx, anchors, S):
         for k in range(F['lames']):
             f = (k + 0.7) / (F['lames'] + 0.4)
             sx = w.x - sgn * (cuff * f)
-            rr = hw * 0.96 + (mouth - hw * 0.96) * f
-            ring = [Vector((sx, rr * 1.025 * math.cos(TAU * j / 14.0),
-                            w.z + rr * 1.025 * math.sin(TAU * j / 14.0)))
-                    for j in range(15)]
+            rr, ee = prof(sx)
+            ring = []
+            for jj in range(15):
+                th = TAU * jj / 14.0
+                r2 = rr * 1.025 * (1.0 + ee * math.sin(th))
+                ring.append(Vector((sx, r2 * math.cos(th),
+                                    w.z + r2 * math.sin(th))))
             p.raw(L.tube(ring, max(0.004, rr * (0.075 if F['metal'] else 0.095)), 6,
                          caps=False), 'metal' if F['metal'] else 'dark')
         # 1c. THE COP at the elbow end - a long reach without it reads as a
         #     tube; with it the piece reads as a FOREARM piece.
         if F['cop']:
             cx = w.x - sgn * cuff * 0.98
-            p.raw(aim(L.cone(mouth * 1.0, mouth * 1.16, cuff * 0.16, 14),
-                      (cx, w.y, w.z), axis),
+            p.raw(aim(L.scone(mouth * 1.0, mouth * 1.16, cuff * 0.16, 14,
+                              lskew, lskew), (cx, w.y, w.z), axis),
                   'metal' if F['metal'] else 'leather')
         # 2. THE HAND SHELL - wider than the hand it covers
         p.add(L.box(handlen * 0.62, hw * 1.42, hw * 1.26), 'cloth',

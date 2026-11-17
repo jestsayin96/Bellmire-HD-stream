@@ -1371,3 +1371,47 @@ Snarer's `model` at `assets/monsters/minibosses/snarer_chibi.glb`, **no `anims` 
 
 ### THE REGISTER AFTER THIS RUN
 **12 converted + 2 measured-and-skipped = 14. THE REGISTER IS CLOSED.**
+
+================================================================================
+## 17 NOV - REGISTER AUDIT BEFORE D96 BUILDS ON IT. TWO THINGS ARE WRONG.
+
+The team lead asked, in the ART row: *"D96 goes to the game build next and it
+is told to use YOUR measured numbers (renders/art/minibosses/_fit_*_register
+.json) rather than re-derive scale. If a register entry is stale or you would
+not stand behind one of those ratios, say which, now, before it is built on."*
+
+I measured it rather than remembering it - every `pairs` key in every register
+against `git ls-files assets/monsters/minibosses`. **THE RATIOS ARE SOUND. THE
+KEYS ARE NOT.**
+
+### 1. FOUR REGISTER KEYS NAME A MODEL THAT IS NOT IN THE REPO
+`gaoler_chibi`, `porter_chibi`, `sexton_chibi`, `stoker_chibi` each have a
+ratio, a pair span and a `fits_frame` in a register - and
+`git log --all -- assets/monsters/minibosses/<name>.glb` is **EMPTY for all
+four**. They were never committed on any branch. A measurement of a model that
+does not exist is exactly the stale entry that was asked about.
+**THE RATIO IS STILL USABLE** - a chibi conversion measured 0.96 for the Gaoler
+and the Gaoler's own `gaoler.glb` IS committed - but **D96 MUST POINT `model`
+AT THE PLAIN `<name>.glb`, NOT AT `<name>_chibi.glb`, FOR THOSE FOUR.**
+
+Committed and safe to name directly: `boiler_chibi`, `cook_chibi`,
+`sluicekeeper_chibi`, `snarer_chibi`, `sower_chibi`, `tallyman_chibi`.
+
+### 2. THE SNUFFER'S REGISTER MEASURED NOTHING
+`_fit_snuffer_register.json` has `ok: true`, `errors: []`, and
+**`pairs: {}` - no creature in it at all.** `snuffer.glb` is committed and is
+real; it simply has no ratio on record. D96 must either re-measure it or carry
+it at ratio 1.00 and say so. Do not read `ok: true` as "the Snuffer was
+measured": it says the HARNESS ran, not that it found anything. That is trap 2
+in a new coat and the register itself did not catch it.
+
+### THE WHOLE PICTURE, MEASURED 17 NOV
+20 `.glb` committed under `assets/monsters/minibosses`; 19 keys across the 11
+registers; 4 of those keys have no model; 5 committed models have no register
+entry at all - `bellman`, `drillmaster`, `scrapwright`, `snarer`, `snuffer`.
+The first three predate the register conversion and the last two are the base
+models whose chibi conversions were measured instead.
+
+Ratios I stand behind, unchanged: every value in the registers was taken off an
+evaluated depsgraph against the same 2.45 m posed Knight, with the blank check
+green and `errors: []` on all eleven files.

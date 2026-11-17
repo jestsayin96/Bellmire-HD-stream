@@ -1,0 +1,221 @@
+
+==== VIEW front ====
+create Mesh node Knight_ArmRight
+21:43:21 | INFO: Blender create Mesh node Knight_Body
+21:43:21 | INFO: Blender create Mesh node Knight_Cape
+21:43:21 | INFO: Blender create Mesh node Knight_Head
+21:43:21 | INFO: Blender create Mesh node Knight_Helmet
+21:43:21 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:21 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:21 | INFO: Blender create Mesh node Knight_LegRight
+21:43:21 | INFO: glTF import finished in 0.03s
+00:02.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\carder_gloves.png'
+00:02.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\carder_gloves_detail.png'
+21:43:22 | INFO: Data are loaded, start creating Blender stuff
+21:43:22 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:22 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:22 | INFO: Blender create Mesh node Knight_Body
+21:43:22 | INFO: Blender create Mesh node Knight_Cape
+21:43:22 | INFO: Blender create Mesh node Knight_Head
+21:43:22 | INFO: Blender create Mesh node Knight_Helmet
+21:43:22 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:22 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:22 | INFO: Blender create Mesh node Knight_LegRight
+21:43:22 | INFO: glTF import finished in 0.03s
+00:03.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\bellrope_wraps.png'
+00:03.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\bellrope_wraps_detail.png'
+21:43:22 | INFO: Data are loaded, start creating Blender stuff
+21:43:22 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:22 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:22 | INFO: Blender create Mesh node Knight_Body
+21:43:22 | INFO: Blender create Mesh node Knight_Cape
+21:43:22 | INFO: Blender create Mesh node Knight_Head
+21:43:22 | INFO: Blender create Mesh node Knight_Helmet
+21:43:22 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:22 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:22 | INFO: Blender create Mesh node Knight_LegRight
+21:43:22 | INFO: glTF import finished in 0.03s
+00:03.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\quarreller_gloves.png'
+00:03.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\quarreller_gloves_detail.png'
+21:43:22 | INFO: Data are loaded, start creating Blender stuff
+21:43:22 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:23 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:23 | INFO: Blender create Mesh node Knight_Body
+21:43:23 | INFO: Blender create Mesh node Knight_Cape
+21:43:23 | INFO: Blender create Mesh node Knight_Head
+21:43:23 | INFO: Blender create Mesh node Knight_Helmet
+21:43:23 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:23 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:23 | INFO: Blender create Mesh node Knight_LegRight
+21:43:23 | INFO: glTF import finished in 0.03s
+00:03.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\forge_grips.png'
+00:03.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\forge_grips_detail.png'
+21:43:23 | INFO: Data are loaded, start creating Blender stuff
+21:43:23 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:23 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:23 | INFO: Blender create Mesh node Knight_Body
+21:43:23 | INFO: Blender create Mesh node Knight_Cape
+21:43:23 | INFO: Blender create Mesh node Knight_Head
+21:43:23 | INFO: Blender create Mesh node Knight_Helmet
+21:43:23 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:23 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:23 | INFO: Blender create Mesh node Knight_LegRight
+21:43:23 | INFO: glTF import finished in 0.03s
+00:04.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\raidbreaker_gloves.png'
+00:04.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_front\gloves\raidbreaker_gloves_detail.png'
+D94PROOF {"ok": true, "rows": 1, "errors": [], "blank": [], "verdict": ["gloves  PARTLY TOO SMALL 1/15 worst  0.25% median  2.25% of hero px   "], "faults": ["carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.060 m deep, 73% of it inside", "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.060 m deep, 72% of it inside", "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside", "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside", "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 68% of it inside", "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.072 m deep, 63% of it inside"]}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+RC=0
+
+==== VIEW side ====
+O: Blender create Mesh node Knight_ArmRight
+21:43:27 | INFO: Blender create Mesh node Knight_Body
+21:43:27 | INFO: Blender create Mesh node Knight_Cape
+21:43:27 | INFO: Blender create Mesh node Knight_Head
+21:43:27 | INFO: Blender create Mesh node Knight_Helmet
+21:43:27 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:27 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:27 | INFO: Blender create Mesh node Knight_LegRight
+21:43:27 | INFO: glTF import finished in 0.03s
+00:02.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\carder_gloves.png'
+00:02.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\carder_gloves_detail.png'
+21:43:27 | INFO: Data are loaded, start creating Blender stuff
+21:43:27 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:27 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:27 | INFO: Blender create Mesh node Knight_Body
+21:43:27 | INFO: Blender create Mesh node Knight_Cape
+21:43:27 | INFO: Blender create Mesh node Knight_Head
+21:43:27 | INFO: Blender create Mesh node Knight_Helmet
+21:43:27 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:27 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:27 | INFO: Blender create Mesh node Knight_LegRight
+21:43:27 | INFO: glTF import finished in 0.03s
+00:02.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\bellrope_wraps.png'
+00:03.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\bellrope_wraps_detail.png'
+21:43:27 | INFO: Data are loaded, start creating Blender stuff
+21:43:27 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:27 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:27 | INFO: Blender create Mesh node Knight_Body
+21:43:27 | INFO: Blender create Mesh node Knight_Cape
+21:43:27 | INFO: Blender create Mesh node Knight_Head
+21:43:27 | INFO: Blender create Mesh node Knight_Helmet
+21:43:27 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:27 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:27 | INFO: Blender create Mesh node Knight_LegRight
+21:43:27 | INFO: glTF import finished in 0.03s
+00:03.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\quarreller_gloves.png'
+00:03.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\quarreller_gloves_detail.png'
+21:43:28 | INFO: Data are loaded, start creating Blender stuff
+21:43:28 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:28 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:28 | INFO: Blender create Mesh node Knight_Body
+21:43:28 | INFO: Blender create Mesh node Knight_Cape
+21:43:28 | INFO: Blender create Mesh node Knight_Head
+21:43:28 | INFO: Blender create Mesh node Knight_Helmet
+21:43:28 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:28 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:28 | INFO: Blender create Mesh node Knight_LegRight
+21:43:28 | INFO: glTF import finished in 0.03s
+00:03.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\forge_grips.png'
+00:03.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\forge_grips_detail.png'
+21:43:28 | INFO: Data are loaded, start creating Blender stuff
+21:43:28 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:28 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:28 | INFO: Blender create Mesh node Knight_Body
+21:43:28 | INFO: Blender create Mesh node Knight_Cape
+21:43:28 | INFO: Blender create Mesh node Knight_Head
+21:43:28 | INFO: Blender create Mesh node Knight_Helmet
+21:43:28 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:28 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:28 | INFO: Blender create Mesh node Knight_LegRight
+21:43:28 | INFO: glTF import finished in 0.03s
+00:04.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\raidbreaker_gloves.png'
+00:04.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_side\gloves\raidbreaker_gloves_detail.png'
+D94PROOF {"ok": true, "rows": 1, "errors": [], "blank": [], "verdict": ["gloves  TELLS APART          worst  0.42% median  2.96% of hero px   "], "faults": ["carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.060 m deep, 73% of it inside", "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.060 m deep, 72% of it inside", "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside", "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside", "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 68% of it inside", "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.072 m deep, 63% of it inside"]}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+RC=0
+
+==== VIEW back ====
+: Blender create Mesh node Knight_ArmRight
+21:43:32 | INFO: Blender create Mesh node Knight_Body
+21:43:32 | INFO: Blender create Mesh node Knight_Cape
+21:43:32 | INFO: Blender create Mesh node Knight_Head
+21:43:32 | INFO: Blender create Mesh node Knight_Helmet
+21:43:32 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:32 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:32 | INFO: Blender create Mesh node Knight_LegRight
+21:43:32 | INFO: glTF import finished in 0.03s
+00:02.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\carder_gloves.png'
+00:02.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\carder_gloves_detail.png'
+21:43:32 | INFO: Data are loaded, start creating Blender stuff
+21:43:32 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:32 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:32 | INFO: Blender create Mesh node Knight_Body
+21:43:32 | INFO: Blender create Mesh node Knight_Cape
+21:43:32 | INFO: Blender create Mesh node Knight_Head
+21:43:32 | INFO: Blender create Mesh node Knight_Helmet
+21:43:32 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:32 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:32 | INFO: Blender create Mesh node Knight_LegRight
+21:43:32 | INFO: glTF import finished in 0.03s
+00:03.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\bellrope_wraps.png'
+00:03.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\bellrope_wraps_detail.png'
+21:43:33 | INFO: Data are loaded, start creating Blender stuff
+21:43:33 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:33 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:33 | INFO: Blender create Mesh node Knight_Body
+21:43:33 | INFO: Blender create Mesh node Knight_Cape
+21:43:33 | INFO: Blender create Mesh node Knight_Head
+21:43:33 | INFO: Blender create Mesh node Knight_Helmet
+21:43:33 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:33 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:33 | INFO: Blender create Mesh node Knight_LegRight
+21:43:33 | INFO: glTF import finished in 0.03s
+00:03.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\quarreller_gloves.png'
+00:03.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\quarreller_gloves_detail.png'
+21:43:33 | INFO: Data are loaded, start creating Blender stuff
+21:43:33 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:33 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:33 | INFO: Blender create Mesh node Knight_Body
+21:43:33 | INFO: Blender create Mesh node Knight_Cape
+21:43:33 | INFO: Blender create Mesh node Knight_Head
+21:43:33 | INFO: Blender create Mesh node Knight_Helmet
+21:43:33 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:33 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:33 | INFO: Blender create Mesh node Knight_LegRight
+21:43:33 | INFO: glTF import finished in 0.03s
+00:03.718  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\forge_grips.png'
+00:03.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\forge_grips_detail.png'
+21:43:33 | INFO: Data are loaded, start creating Blender stuff
+21:43:33 | INFO: Blender create Mesh node Knight_ArmLeft
+21:43:33 | INFO: Blender create Mesh node Knight_ArmRight
+21:43:33 | INFO: Blender create Mesh node Knight_Body
+21:43:33 | INFO: Blender create Mesh node Knight_Cape
+21:43:33 | INFO: Blender create Mesh node Knight_Head
+21:43:33 | INFO: Blender create Mesh node Knight_Helmet
+21:43:33 | INFO: Blender create Mesh node Knight_HelmetVisor
+21:43:33 | INFO: Blender create Mesh node Knight_LegLeft
+21:43:33 | INFO: Blender create Mesh node Knight_LegRight
+21:43:33 | INFO: glTF import finished in 0.03s
+00:04.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\raidbreaker_gloves.png'
+00:04.218  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\d94g5_back\gloves\raidbreaker_gloves_detail.png'
+D94PROOF {"ok": true, "rows": 1, "errors": [], "blank": [], "verdict": ["gloves  PARTLY TOO SMALL 1/15 worst  0.18% median  1.99% of hero px   "], "faults": ["carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.060 m deep, 73% of it inside", "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.060 m deep, 72% of it inside", "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside", "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside", "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 68% of it inside", "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.072 m deep, 63% of it inside"]}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+RC=0
+
+ALLDONE

@@ -1,0 +1,436 @@
+{
+ "ok": true,
+ "errors": [],
+ "rows": [
+  {
+   "slot": "gloves",
+   "view": "side",
+   "cells": [
+    {
+     "key": "baker_mitts",
+     "name": "Baker's Mitts",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "saves",
+     "variant": 1,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 314,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.294,
+      "clip": [
+       7.16,
+       10.344
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      0.0,
+      0.544
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 188,
+       "inside_pct": 47.3,
+       "penetration_m": 0.0747,
+       "gap_m": 0.001,
+       "min_z": 0.4195
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Baker's Mitts",
+       "slot": "gloves",
+       "verts": 188,
+       "inside_pct": 56.9,
+       "penetration_m": 0.0697,
+       "gap_m": 0.0008,
+       "min_z": 0.4244
+      }
+     ],
+     "faults": []
+    },
+    {
+     "key": "carder_gloves",
+     "name": "Carder's Gloves",
+     "slot": "gloves",
+     "cost": 200,
+     "stat": "hp",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 854,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.223,
+      "clip": [
+       7.157,
+       10.361
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.015,
+      0.644
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 482,
+       "inside_pct": 72.2,
+       "penetration_m": 0.0577,
+       "gap_m": 0.0002,
+       "min_z": 0.4749
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Carder's Gloves",
+       "slot": "gloves",
+       "verts": 482,
+       "inside_pct": 71.0,
+       "penetration_m": 0.0577,
+       "gap_m": 0.0002,
+       "min_z": 0.4797
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Carder's Gloves): CLIPS the body - 0.058 m deep, 72% of it inside",
+      "Acc_GloveR (Carder's Gloves): CLIPS the body - 0.058 m deep, 71% of it inside"
+     ]
+    },
+    {
+     "key": "bellrope_wraps",
+     "name": "Bellringer's Wraps",
+     "slot": "gloves",
+     "cost": 240,
+     "stat": "hit",
+     "variant": 4,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 830,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.186,
+      "clip": [
+       7.18,
+       10.333
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.004,
+      0.577
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Bellringer's Wraps",
+       "slot": "gloves",
+       "verts": 415,
+       "inside_pct": 78.8,
+       "penetration_m": 0.0867,
+       "gap_m": 0.0003,
+       "min_z": 0.4748
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Bellringer's Wraps",
+       "slot": "gloves",
+       "verts": 415,
+       "inside_pct": 80.5,
+       "penetration_m": 0.0815,
+       "gap_m": 0.0001,
+       "min_z": 0.4796
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside",
+      "Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside"
+     ]
+    },
+    {
+     "key": "quarreller_gloves",
+     "name": "Quarreller's Tabs",
+     "slot": "gloves",
+     "cost": 280,
+     "stat": "hit",
+     "variant": 3,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 4,
+     "tris": 1134,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.289,
+      "clip": [
+       7.116,
+       10.376
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.024,
+      0.662
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Quarreller's Tabs",
+       "slot": "gloves",
+       "verts": 368,
+       "inside_pct": 71.5,
+       "penetration_m": 0.0541,
+       "gap_m": 0.0001,
+       "min_z": 0.4745
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Quarreller's Tabs",
+       "slot": "gloves",
+       "verts": 368,
+       "inside_pct": 61.4,
+       "penetration_m": 0.0559,
+       "gap_m": 0.0008,
+       "min_z": 0.4793
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 72% of it inside"
+     ]
+    },
+    {
+     "key": "forge_grips",
+     "name": "Forgemaster's Grips",
+     "slot": "gloves",
+     "cost": 300,
+     "stat": "dmg",
+     "variant": 2,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 1166,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.303,
+      "clip": [
+       7.143,
+       10.366
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.007,
+      -0.02,
+      0.619
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Forgemaster's Grips",
+       "slot": "gloves",
+       "verts": 630,
+       "inside_pct": 66.0,
+       "penetration_m": 0.0699,
+       "gap_m": 0.0,
+       "min_z": 0.4746
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Forgemaster's Grips",
+       "slot": "gloves",
+       "verts": 630,
+       "inside_pct": 50.8,
+       "penetration_m": 0.0696,
+       "gap_m": 0.0002,
+       "min_z": 0.4794
+      }
+     ],
+     "faults": [
+      "Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.070 m deep, 66% of it inside"
+     ]
+    },
+    {
+     "key": "raidbreaker_gloves",
+     "name": "Raidbreaker's Gauntlets",
+     "slot": "gloves",
+     "cost": 380,
+     "stat": "dmg",
+     "variant": 0,
+     "tier": null,
+     "cut": null,
+     "family": null,
+     "pieces": 6,
+     "tris": 1470,
+     "hidden": [
+      "Knight_Cape",
+      "Knight_Helmet",
+      "Knight_HelmetVisor"
+     ],
+     "cam": {
+      "ortho": 3.3,
+      "outside": 0,
+      "clip": [
+       6.457,
+       12.543
+      ]
+     },
+     "detail_cam": {
+      "ortho": 1.364,
+      "clip": [
+       7.083,
+       10.416
+      ],
+      "item_only": true
+     },
+     "focus": [
+      -0.006,
+      -0.016,
+      0.635
+     ],
+     "fit": [
+      {
+       "part": "Acc_GloveL",
+       "item": "Raidbreaker's Gauntlets",
+       "slot": "gloves",
+       "verts": 492,
+       "inside_pct": 44.3,
+       "penetration_m": 0.0519,
+       "gap_m": 0.0,
+       "min_z": 0.4321
+      },
+      {
+       "part": "Acc_GloveR",
+       "item": "Raidbreaker's Gauntlets",
+       "slot": "gloves",
+       "verts": 492,
+       "inside_pct": 36.4,
+       "penetration_m": 0.0275,
+       "gap_m": 0.0002,
+       "min_z": 0.4369
+      }
+     ],
+     "faults": []
+    }
+   ],
+   "faults": [
+    "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.058 m deep, 72% of it inside",
+    "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.058 m deep, 71% of it inside",
+    "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside",
+    "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside",
+    "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 72% of it inside",
+    "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.070 m deep, 66% of it inside"
+   ],
+   "verdict": "TELLS APART",
+   "stream_difference": {
+    "metric": "percent of the hero's own stream pixels that change",
+    "pairs": 15,
+    "worst": 0.418,
+    "worst_pair": [
+     "Carder's Gloves",
+     "Bellringer's Wraps"
+    ],
+    "worst_peak_pct": 23.9,
+    "best": 5.773,
+    "best_pair": [
+     "Baker's Mitts",
+     "Raidbreaker's Gauntlets"
+    ],
+    "median": 2.51,
+    "duplicate_pairs": [],
+    "too_small_pairs": []
+   }
+  }
+ ],
+ "blank": {
+  "files": 12,
+  "failures": []
+ },
+ "verdict": [
+  "gloves  TELLS APART          worst  0.42% median  2.51% of hero px   "
+ ],
+ "fit_faults": [
+  "carder_gloves: Acc_GloveL (Carder's Gloves): CLIPS the body - 0.058 m deep, 72% of it inside",
+  "carder_gloves: Acc_GloveR (Carder's Gloves): CLIPS the body - 0.058 m deep, 71% of it inside",
+  "bellrope_wraps: Acc_GloveL (Bellringer's Wraps): CLIPS the body - 0.087 m deep, 79% of it inside",
+  "bellrope_wraps: Acc_GloveR (Bellringer's Wraps): CLIPS the body - 0.081 m deep, 80% of it inside",
+  "quarreller_gloves: Acc_GloveL (Quarreller's Tabs): CLIPS the body - 0.054 m deep, 72% of it inside",
+  "forge_grips: Acc_GloveL (Forgemaster's Grips): CLIPS the body - 0.070 m deep, 66% of it inside"
+ ]
+}

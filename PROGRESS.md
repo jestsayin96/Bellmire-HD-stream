@@ -7693,3 +7693,45 @@ created, renamed, re-priced or deleted, nothing posted as any account, no channe
 - NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
   created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## D-cycle D98 - THE SEVEN LORE POOLS: THREE READ, FOUR DECLARED IN WRITING (game build, 2026-11-17 00:51-01:15 CT)
+- ITEM GIVEN: TAKE THIS NEXT (team lead 01:05 CT) GAME BUILD row: "D98. THE SEVEN DEAD LORE POOLS ARE READ OR
+  DECLARED DEAD IN WRITING", content's C-77 feed read first, as the row asked. Wiring only, no new feature.
+  Not ticked by me.
+- THE FACT C-77 NAMED WAS TRUE AND WAS THE WHOLE JOB: lord_intros / unique_intros / forge are ONE STRING per key,
+  their _alt pools a LIST per key. So the pick content wrote down ([live] + alt, then draw) was built, not flipped.
+- READ (3 pools, 236 lines, the most-seen line in a delve first):
+  1. lord_intros_alt (8 lords x 12 = 96) and 2. unique_intros_alt (5 x 12 = 60): delve.gd, one reader for both -
+     new static Delve.intro_pool(uniq, id) / intro_line(uniq, id, rng). The rising line at _next_floor now draws
+     from 13 lines a lord instead of 1. An id with no alt still gets its one live line; an unknown id gets "",
+     which the caller already skipped.
+  3. forge_alt (5 tiers x 16 = 80): roster.gd - Roster.forge_pool(tier); forge_flavour (the only reader, the
+     "takes up" line of !forge) now draws from 17 lines a tier instead of 1.
+- DECLARED IN WRITING, AND CONTENT IS TOLD HERE (it said it writes no more into any of these either way):
+  4. townsfolk - DEAD UNTIL D36. Not a swap: it needs a person-binding step (names, trades by from_tier) and event
+     hooks for react/remember. That is a feature, and the 20:40 ruling is wiring-only. The pool is NOT wrong and
+     NOT deleted; it is the words half of D36 waiting for its build half. CONTENT: do not extend it.
+  5. phase2_words and 6. phase2_words_alt - DEAD UNTIL EACH MECHANIC IS BUILT, per group. Measured: no ascent,
+     vault, carry-weight or teleport-stone code exists (D77/D79/D80/D81 unbuilt), so those groups have no speaker.
+     The two groups whose mechanic DOES exist - `errand` (D78, speaks from its own lines) and `upgrade_poll` (live in
+     economy/hud_dock/floorgen/notables, never opens this file) - are the first to wire, and wiring them is a
+     re-voicing of a live system, i.e. NOT this item; named for whoever owns that next. CONTENT: stop writing.
+  7. town_levels_for_the_desktop - DEAD FOR GOOD. Seven levels for a town that now has twelve; growth_tiers.tiers
+     (12 entries) is the live crier pool and is read. A second source for the same line would conflict. Deleting
+     the key is Mr. E's call (additive-only rule); it is marked dead here and should not be extended.
+- NEW GATE tools/_d98_test.gd - D98_TEST OK 106 checks, headless: every key's pool size counted OFF THE FILE equals
+  live + alt; 600 draws per key stay inside the pool and reach the live line and the alt lines (16 of 16 forge alts
+  seen per tier); and the REAL path - six risings of hollow_king through Delve._next_floor each put a line from its
+  pool in the Chronicle, FIVE different lines across six risings, not one. Alt lines now reachable:
+  lord_intros_alt 96, unique_intros_alt 60, forge_alt 80.
+- GATES, ONE BATTERY 01:05:15-01:09:43 CT: parse rc=0 0 SCRIPT ERROR / 0 Parse Error; D98_TEST OK 106;
+  OFFFLOOR 0 of 2074; TWITCH_PARSE OK; TOWNWALK in_solid 0/17385 PASS; _delve_test 0 SCRIPT ERROR. Logs in
+  renders/cycles/d98/. LOOKED AT: this item is words, not a body - the "picture" is the Chronicle line, and the
+  gate reads the real feed array a real rising wrote; there is no mesh to render.
+- LOCK: claimed RUNNING 01:05:15-06:00, released IDLE after the battery. Ran at 01:05, two minutes before my :07
+  slot, on Mr. E's live say-so (he chose "wait for :07" for the battery itself; it was claimed at 01:05 so the 01:07
+  firing of this lane would find a live Godot and stand down instead of colliding with uncommitted work).
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward touched, nothing posted as any account.
+  The parse run joins #jestsayin96 as bellmirebro and says nothing.
+- NEXT: D99 (stock_by_tier, price_ladders, classes.json `healing`, act/broken calls, "epic" -> "very rare",
+  artifact-never-stocked). NEEDED FROM MR. E: whether to delete town_levels_for_the_desktop outright (optional).

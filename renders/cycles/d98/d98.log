@@ -1,0 +1,155 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D98 A+B: the intro pools
+  ok   lord_intros hollow_king: has an alt list in the file (12)
+  ok   lord_intros hollow_king: pool is live + alt = 13 (13)
+  ok   lord_intros hollow_king: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros hollow_king: the live line is still drawn
+  ok   lord_intros hollow_king: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros grubmother: has an alt list in the file (12)
+  ok   lord_intros grubmother: pool is live + alt = 13 (13)
+  ok   lord_intros grubmother: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros grubmother: the live line is still drawn
+  ok   lord_intros grubmother: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros rattling_host: has an alt list in the file (12)
+  ok   lord_intros rattling_host: pool is live + alt = 13 (13)
+  ok   lord_intros rattling_host: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros rattling_host: the live line is still drawn
+  ok   lord_intros rattling_host: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros nightwing: has an alt list in the file (12)
+  ok   lord_intros nightwing: pool is live + alt = 13 (13)
+  ok   lord_intros nightwing: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros nightwing: the live line is still drawn
+  ok   lord_intros nightwing: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros gravewyrm: has an alt list in the file (12)
+  ok   lord_intros gravewyrm: pool is live + alt = 13 (13)
+  ok   lord_intros gravewyrm: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros gravewyrm: the live line is still drawn
+  ok   lord_intros gravewyrm: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros ossuary_lord: has an alt list in the file (12)
+  ok   lord_intros ossuary_lord: pool is live + alt = 13 (13)
+  ok   lord_intros ossuary_lord: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros ossuary_lord: the live line is still drawn
+  ok   lord_intros ossuary_lord: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros pale_duchess: has an alt list in the file (12)
+  ok   lord_intros pale_duchess: pool is live + alt = 13 (13)
+  ok   lord_intros pale_duchess: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros pale_duchess: the live line is still drawn
+  ok   lord_intros pale_duchess: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros mourncoil: has an alt list in the file (12)
+  ok   lord_intros mourncoil: pool is live + alt = 13 (13)
+  ok   lord_intros mourncoil: 600 draws, none outside the pool (0 outside)
+  ok   lord_intros mourncoil: the live line is still drawn
+  ok   lord_intros mourncoil: the alt lines are drawn (12 of 12 seen)
+  ok   lord_intros_alt hollow_king: keys a lord the live pool knows
+  ok   lord_intros_alt grubmother: keys a lord the live pool knows
+  ok   lord_intros_alt rattling_host: keys a lord the live pool knows
+  ok   lord_intros_alt nightwing: keys a lord the live pool knows
+  ok   lord_intros_alt gravewyrm: keys a lord the live pool knows
+  ok   lord_intros_alt ossuary_lord: keys a lord the live pool knows
+  ok   lord_intros_alt pale_duchess: keys a lord the live pool knows
+  ok   lord_intros_alt mourncoil: keys a lord the live pool knows
+  ok   unique_intros gnawbone: has an alt list in the file (12)
+  ok   unique_intros gnawbone: pool is live + alt = 13 (13)
+  ok   unique_intros gnawbone: 600 draws, none outside the pool (0 outside)
+  ok   unique_intros gnawbone: the live line is still drawn
+  ok   unique_intros gnawbone: the alt lines are drawn (12 of 12 seen)
+  ok   unique_intros mother_silk: has an alt list in the file (12)
+  ok   unique_intros mother_silk: pool is live + alt = 13 (13)
+  ok   unique_intros mother_silk: 600 draws, none outside the pool (0 outside)
+  ok   unique_intros mother_silk: the live line is still drawn
+  ok   unique_intros mother_silk: the alt lines are drawn (12 of 12 seen)
+  ok   unique_intros weeping_bowman: has an alt list in the file (12)
+  ok   unique_intros weeping_bowman: pool is live + alt = 13 (13)
+  ok   unique_intros weeping_bowman: 600 draws, none outside the pool (0 outside)
+  ok   unique_intros weeping_bowman: the live line is still drawn
+  ok   unique_intros weeping_bowman: the alt lines are drawn (12 of 12 seen)
+  ok   unique_intros cinderjack: has an alt list in the file (12)
+  ok   unique_intros cinderjack: pool is live + alt = 13 (13)
+  ok   unique_intros cinderjack: 600 draws, none outside the pool (0 outside)
+  ok   unique_intros cinderjack: the live line is still drawn
+  ok   unique_intros cinderjack: the alt lines are drawn (12 of 12 seen)
+  ok   unique_intros kept: has an alt list in the file (12)
+  ok   unique_intros kept: pool is live + alt = 13 (13)
+  ok   unique_intros kept: 600 draws, none outside the pool (0 outside)
+  ok   unique_intros kept: the live line is still drawn
+  ok   unique_intros kept: the alt lines are drawn (12 of 12 seen)
+  ok   unique_intros_alt gnawbone: keys a lord the live pool knows
+  ok   unique_intros_alt mother_silk: keys a lord the live pool knows
+  ok   unique_intros_alt weeping_bowman: keys a lord the live pool knows
+  ok   unique_intros_alt cinderjack: keys a lord the live pool knows
+  ok   unique_intros_alt kept: keys a lord the live pool knows
+  ok   an unknown id gets "" (the caller skips it)
+D98 C: the REAL rising
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton mage, 1 hollowed skeleton warrior, 3 skeleton warriors.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The hall is colder at the far end than at the door.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 0: hollow_king rose and the Chronicle spoke a line from its pool
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone bowman, 1 bone sentinel, 1 skeleton mage, 1 hollowed bone bowman, 1 risen bones.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED A crown's worth of blue light, and nothing wearing it yet.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 1: hollow_king rose and the Chronicle spoke a line from its pool
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 2 skeleton warriors, 1 drowned cave spider, 1 hollowed cave spider.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The far brazier lights itself, and lights blue.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 2: hollow_king rose and the Chronicle spoke a line from its pool
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 bone bowman, 1 bone sentinel, 1 drowned bone sentinel.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The hall is colder at the far end than at the door.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 3: hollow_king rose and the Chronicle spoke a line from its pool
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton warrior, 1 bone sentinel, 1 risen bones, 1 skeleton warrior, 1 bone bowman.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The fires burn and give nothing back.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 4: hollow_king rose and the Chronicle spoke a line from its pool
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone bowman, 1 bone bowman, 1 drowned bone sentinel, 1 drowned risen bones, 1 hollowed bone sentinel.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The ash on the floor stands up at the edges.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rising 5: hollow_king rose and the Chronicle spoke a line from its pool
+  ok   six risings of hollow_king spoke 5 different lines, not one
+D98 D: the forge
+  ok   forge tier 1: pool is live + alt = 17 (17)
+  ok   forge tier 1: 600 draws, none outside the pool (0 outside)
+  ok   forge tier 1: the live line is still drawn
+  ok   forge tier 1: the alt lines are drawn (16 of 16 seen)
+  ok   forge tier 2: pool is live + alt = 17 (17)
+  ok   forge tier 2: 600 draws, none outside the pool (0 outside)
+  ok   forge tier 2: the live line is still drawn
+  ok   forge tier 2: the alt lines are drawn (16 of 16 seen)
+  ok   forge tier 3: pool is live + alt = 17 (17)
+  ok   forge tier 3: 600 draws, none outside the pool (0 outside)
+  ok   forge tier 3: the live line is still drawn
+  ok   forge tier 3: the alt lines are drawn (16 of 16 seen)
+  ok   forge tier 4: pool is live + alt = 17 (17)
+  ok   forge tier 4: 600 draws, none outside the pool (0 outside)
+  ok   forge tier 4: the live line is still drawn
+  ok   forge tier 4: the alt lines are drawn (16 of 16 seen)
+  ok   forge tier 5: pool is live + alt = 17 (17)
+  ok   forge tier 5: 600 draws, none outside the pool (0 outside)
+  ok   forge tier 5: the live line is still drawn
+  ok   forge tier 5: the alt lines are drawn (16 of 16 seen)
+D98 alt lines now reachable: { "lord_intros_alt": 96, "unique_intros_alt": 60, "forge_alt": 80 }
+D98_TEST OK 106 checks

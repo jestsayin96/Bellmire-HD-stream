@@ -432,3 +432,45 @@ but rule 2 applies to them identically.
 WHY THIS SITS IN THE CONTRACT AND NOT JUST IN ONE LANE'S PROGRESS.md: the lock protocol, the tick
 protocol and every "gates green" line in this project rest on gate output being trustworthy. An
 instrument that can report silence as success invalidates all three.
+
+## 16. THE ROLE IS NAMED TEAM LEAD (Mr. E, 2026-11-16 20:50 CT)
+Verbatim: "this is your new title  Bellmire HD Team Lead"
+
+THE ROLE THAT MERGES, TICKS, RULES, KEEPS THE PLAN HONEST AND FEEDS THE SIX LANES IS NOW THE
+**BELLMIRE HD TEAM LEAD**. Everything about the job is unchanged - the duties, the freeze, the lock
+protocol, the tick authority, the dead-data audit - only the name.
+
+HOW IT APPLIES, so nobody wastes a slot on a rename:
+  - FORWARD ONLY. New entries, rulings and TAKE THIS NEXT blocks are signed "team lead". Every
+    historical line in WORK_PLAN.md, PROGRESS.md and this file stays exactly as it was written -
+    the record is not rewritten to flatter a title change.
+  - NO LANE RENAMES ANYTHING. Do not sweep "supervisor" out of old entries, docs, comments or
+    commit messages. That is not work, and it would destroy the audit trail the ledger depends on.
+  - THIS FILE WINS OVER A BRIEF (see the header). The hourly stored prompt still opens "You are the
+    SUPERVISOR"; it means the Team Lead, and this line is the authority for that until Mr. E has
+    that prompt changed. A worker reading either word is reading about the same role.
+  - "The supervisor ticks it" in any existing item still binds, and still means this role.
+
+## 17. A STALE SCRATCH FILE IN /tmp NEARLY REPLACED THE PLAN WITH AN OLD VERSION - EVERY LANE THAT
+##     USES device_bash IS EXPOSED TO THIS (team lead ruling, 2026-11-16 21:10 CT)
+WHAT HAPPENED, SAID PLAINLY BECAUSE IT WAS MINE: I wrote this hour's TAKE THIS NEXT block to
+/tmp/ttn.txt and then read it back into docs/WORK_PLAN.md. The write FAILED - "Permission denied" -
+because a file of that name was already there, left by the 18:02 CT session and owned by another
+user, and THIS BRIDGE CANNOT DELETE OR TRUNCATE SUCH A FILE. The read then succeeded and returned
+the 18:02 CONTENT. For about four minutes the plan carried a three-hour-old TAKE THIS NEXT with
+three hours of ticks missing. Nothing was committed and nothing was pushed; `git checkout --` put
+it back exactly.
+WHY IT WAS CAUGHT: because the write-then-verify step read the file back and the header said 18:02.
+It was not caught by the shell, which reported the failure on a different line of output than the
+success, and it would not have been caught by anything else.
+THE RULES, FOR EVERY LANE:
+  1. DO NOT WRITE SCRATCH FILES TO /tmp WITH A GENERIC NAME. /tmp is shared across sessions on this
+     bridge and you cannot clear what another session left. Use $HOME (the session home, outside
+     mnt/) or a name carrying the hour: $HOME/<lane>_<date>_<hhmm>.txt.
+  2. A FAILED WRITE FOLLOWED BY A SUCCESSFUL READ IS THE DANGEROUS SHAPE. If you write a file and
+     read it back in the same command, CHECK THE CONTENT, not just that the read worked - a line
+     count and the first line are enough.
+  3. VERIFY EVERY GENERATED EDIT AGAINST SOMETHING THAT WOULD HAVE CHANGED. I now assert on the
+     block's own timestamp line and its length before splicing it in.
+  4. THE SAME CAUTION APPLIES TO ANY WRITE UNDER A CONNECTED FOLDER that you expect to overwrite:
+     this bridge cannot delete, so an existing file is not always replaceable.

@@ -5132,3 +5132,288 @@ def hurdleman():
 
 
 BUILDERS.update({"hurdleman": hurdleman})
+
+
+# ============================================================ 19 THE TANNER
+# WHY THIS ONE, MEASURED OFF minibosses.py AND OFF THE GAME - NOT REMEMBERED.
+#   - EIGHTEEN IDEAS EXIST AND NOT ONE OF THEM CLOSES A DOOR ON A WEAPON.
+#     Parsed out of CANON, not recalled: summon, self-armour, drag a hero out,
+#     douse the lamps, will-not-stay-down, bar the door, steal gear, heal the
+#     pack, raise the water, plant the ground, pre-set the room, scale with the
+#     fire, ring from elsewhere, set the floor, come apart in two, arm the
+#     room, weigh you down, cut the room in two. ADAPTIVE RESISTANCE - the same
+#     blow stops working - is a mechanic class the set does not have.
+#     IT IS NOT THE SCRAPWRIGHT. The Scrapwright replaces what you knocked off
+#     and the fight is unchanged: hit it again, harder. The Tanner never heals
+#     a point; it takes one of your answers away and leaves the rest. The party
+#     that brought one weapon is in trouble and the party that brought three
+#     is not, which is a DECISION, not a damage sponge.
+#   - THEME: `flooded`, measured off dungeon_hd.gd:737-743. The miniboss roll
+#     is 35 on barracks and workshop, 10 on shrine and crypt, 15 on prison and
+#     every unlisted theme - and `flooded` is unlisted, so it rolls at 15 with
+#     exactly ONE body behind it (the Sluicekeeper). Every miniboss a flooded
+#     floor has ever shown is the same creature. Same reasoning the Loader used
+#     for the mess hall. A tan-pit is standing water that nobody wants to be
+#     near, so the room explains the trade without a word of lore.
+#   - WEAR 0.10, AND IT EXTENDS THE BOTTOM OF THE LADDER. I checked all
+#     eighteen: 0.15 to 1.00 in steps of 0.05 is FULL (the Hurdleman took 1.00
+#     to extend the top). 0.10 is the honest value rather than a repeat,
+#     because FRESHNESS IS THIS CREATURE'S MECHANIC. It is the one thing down
+#     there that is never allowed to get old - it is wearing skins it dressed
+#     this hour. Mr. E's rule 2: condition is the receipt, and here the receipt
+#     reads "newly covered".
+#   - HEIGHT 2.75 likewise extends a full ladder (2.00-2.70 in 0.05s, all
+#     taken). It is the FRAME that is 2.75 and not the man: he is stooped over
+#     a beam at chest height and reads SHORTER than the Bellman he is taller
+#     than, which is the point of measuring the body rather than the creature.
+CANON.update({
+    "tanner": ("The Tanner", 2.75, (0.78, 0.72, 0.56), (1.00, 0.95, 0.72),
+               "flooded",
+               "IT WILL NOT TAKE THE SAME BLOW TWICE - what hurts it once it pegs a fresh "
+               "hide over; change your answer or stop hurting it",
+               0.10, "It is pegging up a fresh hide."),
+})
+ORDER = ORDER + ["tanner"]
+
+
+def _hide(P, cx, cy, cz, yaw, w=0.46, h=0.62, bow=0.10, slot='bone', laced=True):
+    """ONE SKIN STRETCHED IN A BAY - NOT HUNG OFF A RAIL.
+
+    *** PASS 2, AND THIS IS THE FAULT THAT KILLED PASS 1. *** Pass 1 hung three
+    tapered panels UNDER the rails with rigid triangular leg-flaps at the top
+    corners. On the render they came back as three PAPER SACKS, or buckets, or
+    lampshades - a hard funnel outline, hanging, swinging free - and with a
+    post-and-lintel frame behind them the whole creature read as a GIBBET WITH
+    THREE BAGS ON IT. Gothic flourish is exactly what Bellmire's register does
+    not want, and it was not even the right trade: a tenter does not hang a
+    skin, it STRETCHES one, edge to edge, until the bay is full and the hide is
+    drum-tight. So this is built the way the thing actually works - nearly the
+    full width of the bay, pegged on all four edges, laced to the uprights, and
+    bowed TOWARD the viewer so the light reads it as a taut surface. The taper
+    is now slight and the bottom edge is ragged, which is what says SKIN
+    instead of CANVAS.
+    """
+    c, s = math.cos(yaw), math.sin(yaw)
+
+    def world(u, v, n):
+        return (cx + u * c + n * s, cy + u * s - n * c, cz + v)
+
+    rows = (0.47, 0.50, 0.49, 0.45, 0.38)        # taut, barely tapered
+    ragged = (0.0, 0.0, 0.0, 0.0, -0.055)        # the untrimmed tail edge
+    ny, nx = len(rows), 5
+    grid = []
+    for i, hw in enumerate(rows):
+        v = h * (0.5 - i / float(ny - 1))
+        row = []
+        for j in range(nx):
+            t = j / (nx - 1.0)
+            u = (-1.0 + 2.0 * t) * hw * w * 2.0
+            n = bow * math.sin(math.pi * t) * math.sin(math.pi * (0.18 + 0.82 * i / (ny - 1.0)))
+            row.append(Vector(world(u, v + ragged[i] * math.sin(math.pi * t * 2.0), n)))
+        grid.append(row)
+    P.raw(surf(grid, 0.020), slot)
+    for sgn in (-1, 1):                           # pegs at the four corners
+        for vt in (0.50, -0.50):
+            P.add(L.sphere(0.032, 0.032, 0.028, 7, 5), 'dark',
+                  loc=world(sgn * w * 0.98, h * vt, bow * 0.25))
+        if laced:                                 # the lacing out to the upright
+            for vt in (0.26, -0.26):
+                limb(P, [world(sgn * w * 0.96, h * vt, 0.0),
+                         world(sgn * w * 1.26, h * vt, -0.02)], 0.013, 0.013, 'dark', ring=5)
+
+
+def _tenter(P, ox, oy, yaw, w=1.04, h=2.75):
+    """THE TENTER FRAME, AND THE TOP RAIL IS GONE ON PURPOSE.
+
+    PASS 1 PUT A LINTEL ACROSS THE TOP OF TWO POSTS, which is the outline of a
+    gallows and nothing else - the three hanging panels did the rest. Here the
+    uprights run PAST the top rail as bare poles and there is no crossbar at
+    the crown, so the silhouette tops out in two separate points instead of one
+    closed gate. Three bays, and only two of them carry a skin: the empty bay
+    is daylight through the middle of the creature (the Hurdleman's argument
+    for an open lattice) and it is also the mechanic standing there in the
+    geometry - one answer still open.
+    """
+    c, s = math.cos(yaw), math.sin(yaw)
+
+    def place(vf, lx, lz, slot):
+        P.add(vf, slot, loc=(ox + lx * c, oy + lx * s, lz), rot=(0.0, 0.0, yaw))
+
+    half = w / 2.0
+    for sgn in (-1, 1):
+        place(L.box(0.110, 0.120, h), sgn * half, h / 2.0, 'body')
+        place(L.box(0.30, 0.30, 0.060), sgn * half, 0.030, 'dark')
+    for t in (0.17, 0.44, 0.71):                 # three rails, no crown rail
+        place(L.box(w + 0.14, 0.074, 0.070), 0.0, h * t, 'body')
+    # one raking brace, on the far side only, so the frame leans into the room
+    limb(P, [(ox + half * c, oy + half * s, h * 0.70),
+             (ox + (half + 0.52) * c, oy + (half + 0.52) * s + 0.34, 0.04)],
+         0.050, 0.038, 'body')
+
+
+def tanner():
+    """IT WILL NOT TAKE THE SAME BLOW TWICE. Hit it with fire and the next fire
+    does less; hit it with a blade and the blade stops biting. It does not heal
+    and it does not grow - it CLOSES DOORS. The party that brought one answer
+    runs out of answers; the party that brought three does not. That is the
+    fight, and it is a decision rather than a longer health bar.
+
+    Silhouette intent - A RACK WITH TWO BAYS FILLED AND ONE OPEN, A LOW BEAM,
+    AND A MAN BENT OVER IT:
+      - the RACK is the read, right of him and yawed 31 degrees so it is
+        edge-on in no view. Skins STRETCHED across the bays, not hung off them,
+        and no crown rail - two bare poles at the top, not a gate;
+      - the BEAM is the second mass and it is LOW AND HORIZONTAL, which no
+        other creature in this set has. PASS 1 MADE IT ENORMOUS and it ate the
+        man: 0.175 m of radius and 1.46 m of log laid across his chest read as
+        a cannon on a cradle with a torso stuck behind it. It is now 0.112 and
+        1.04, set at hip height and off to his left, so the MAN is the mass in
+        the middle and the beam is the thing he is working on;
+      - he is STOOPED - head below shoulder height, both hands down and IN on a
+        two-handled knife. No hero stands like that, and the stoop is what
+        keeps a biped out of hero territory;
+      - a heavy APRON chest to shin - invisible in pass 1 behind the beam, and
+        the whole front of him now that the beam is out of the way.
+
+    Front is -Y, the same as the eighteen before it.
+    """
+    P = Parts("tanner")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = -0.40
+    _i_frame = len(P.items)
+
+    # PASS 5, ONE NUMBER, AND THE SIDE VIEW IS WHY. At 31 degrees the rack is
+    # 31 off square to the front camera and 59 off to the side one, and the
+    # side shot came back with the two skins squeezed into narrow strips - the
+    # rack, which is the whole read, nearly disappears in one of the three
+    # views the register demands. 45 is the only yaw that treats front and
+    # side the SAME: 45 off square in both, so no view ever gets the thin edge
+    # and none gets the flat face either.
+    FY = 45.0 * math.pi / 180.0
+    FX, FYc = 0.86, 0.22
+    _tenter(P, FX, FYc, FY, w=1.04, h=2.75)
+    # TWO bays filled, the TOP one left open. Top-open matters: an empty bay at
+    # eye height is daylight where a solid field would otherwise be, and the
+    # two filled bays sit low where they overlap the man's own height and read
+    # against him rather than above him.
+    # PASS 3: bow 0.105/0.095 came back as two matched PILLOWS - identical
+    # bolsters stacked in a ladder. A tenter pulls a skin FLAT; the bulge was
+    # me over-selling the curve. Halved, and the two bays are now different
+    # sizes, because two identical rectangles stacked read as furniture.
+    _hide(P, FX, FYc, 2.75 * 0.580, FY + 0.00, w=0.44, h=0.62, bow=0.052)
+    _hide(P, FX, FYc, 2.75 * 0.300, FY + 0.00, w=0.37, h=0.56, bow=0.044)
+    _span("rack", _i_frame)
+    _i_beam = len(P.items)
+
+    # ---- THE BEAM, small and low, on a single short trestle. Pass 1 gave it
+    # two long splayed legs and the left one read as a loose plank leaning in
+    # mid-air with nothing under it.
+    # PASS 3, TWO FAULTS IN ONE PART. (a) At 0.74 the beam crossed him at the
+    # hip and the whole creature read as A MAN SEATED ON A STOOL HUGGING A
+    # PLANK - not a stoop, a sit. A beam is worked at waist-to-chest height, so
+    # it goes UP to 0.96 and he leans OVER it. (b) The legs splayed outward and
+    # the left one came back as a LOOSE POST STANDING IN MID-AIR beside him,
+    # with daylight between it and the log it was supposed to hold. They are
+    # now short and VERTICAL, directly under the two ends, where a trestle is.
+    # PASS 4, ONE CHANGE ONLY, AND IT IS THE LAST THING OBVIOUSLY WRONG IN THE
+    # PICTURE. The beam's LEFT end was buried behind the man's apron, so from
+    # the front and the three-quarter all you saw of that half was its trestle
+    # leg: A PALE POST STANDING BY ITSELF WITH DAYLIGHT ROUND IT, holding up
+    # nothing. Pass 3 made the legs vertical, which was right, and did not fix
+    # this, which is a different fault - the LOG was in the wrong place, not
+    # the leg. Shifted 0.30 m to his right and shortened 1.06 -> 0.94 so BOTH
+    # ends stand clear of the body and each leg is visibly under its own end.
+    BC = (MX + 0.04, -0.54, 0.96)
+    BD = (1.0, 0.10, -0.05)
+    P.raw(aim(L.cone(0.108, 0.094, 0.94, 12), BC, BD), 'body')
+    for t in (-0.42, 0.42):
+        ex, ey = BC[0] + t * 1.0 * BD[0], BC[1] + t * BD[1]
+        ez = BC[2] + t * BD[2]
+        limb(P, [(ex, ey, ez - 0.07), (ex, ey - 0.02, 0.04)], 0.052, 0.044, 'body')
+    _span("beam", _i_beam)
+    _i_man = len(P.items)
+
+    _legs(P, MX, hip=0.84, stance=0.23, r0=0.100, r1=0.082, boot=(0.27, 0.44, 0.11))
+    # PASS 3: the back ran 0.46 m forward over 0.54 m of rise and read as
+    # UPRIGHT once the beam was in front of it. It now runs 0.62 forward over
+    # 0.48 of rise, with the shoulders AHEAD of the hips rather than above
+    # them - a back that is visibly a curve from every side.
+    limb(P, [(MX, 0.16, 0.78), (MX + 0.05, -0.12, 1.06), (MX + 0.12, -0.46, 1.26)],
+         0.205, 0.166, 'body')
+    SL = (MX - 0.18, -0.46, 1.250)
+    SR = (MX + 0.40, -0.44, 1.232)
+    # PASS 2: the shoulders were 0.110 spheres and on the render they were the
+    # two darkest, roundest things on the body - they read as KNOBS on the ends
+    # of two raised stubs. Smaller, and tucked inboard of the arm line.
+    for sh in (SL, SR):
+        P.add(L.sphere(0.086, 0.082, 0.076, 9, 6), 'dark', loc=sh)
+
+    _span("man_lower", _i_man)
+    _i_head = len(P.items)
+
+    HD = (MX + 0.17, -0.70, 1.37)
+    limb(P, [(MX + 0.12, -0.49, 1.27), HD], 0.072, 0.060, 'body')
+    P.add(L.sphere(0.168, 0.172, 0.158, 12, 8), 'bone', loc=HD)
+    # the crop of hair sits ABOVE the equator, where a visor cannot be - no
+    # horizontal dark band anywhere on this face (the Hurdleman's two passes).
+    P.add(L.sphere(0.170, 0.150, 0.082, 12, 6), 'dark', loc=(HD[0], HD[1] + 0.028, HD[2] + 0.098))
+    # eyes BREAK the bone surface (0.158 forward at this height), pass 11's
+    # finding applied before the fact: a light inside its own skull measures
+    # bright and renders as nothing.
+    eyes(P, (HD[0], HD[1], HD[2] - 0.040), 0.050, 0.029, -0.150)
+    _span("head", _i_head)
+    _i_work = len(P.items)
+
+    ap = []
+    for i in range(5):
+        v = i / 4.0
+        z = 1.12 - 0.72 * v
+        hw = 0.27 + 0.08 * v
+        yb = -0.42 - 0.13 * v - 0.055 * math.sin(math.pi * v)
+        ap.append([Vector((MX + 0.06 + u * hw, yb, z)) for u in (-1.0, -0.5, 0.0, 0.5, 1.0)])
+    P.raw(surf(ap, 0.026), 'dark')
+
+    # ---- BOTH ARMS DOWN AND IN. Pass 1 ran them down and OUT to grips 0.78 m
+    # apart, and with the shoulder knobs on the outside the pair read as raised
+    # forelimbs. The grips come in to 0.52 m and drop to 0.86, below the elbow,
+    # so the forearms slope DOWNWARD toward the middle - the line of a man
+    # bearing down on a knife.
+    # PASS 3, AND THIS IS THE FAULT I FAILED TO FIX AT PASS 2. Twice now the
+    # arms have come back as RAISED STUBS in the front view, and the cause was
+    # never the height - the grips were already 0.46 m below the shoulders. It
+    # is that the forearms ran TOWARD THE CAMERA (y -0.34 to -0.70) and a limb
+    # pointing at the lens is foreshortened to nothing: all the front view ever
+    # showed was the upper arm splaying outward from a dark shoulder knob, and
+    # an inverted V peaking at the shoulders is a raised arm whatever the
+    # numbers say. The Hurdleman's beetle works because its diagonal lies IN
+    # THE PLANE OF THE VIEW. So the hands now sit at nearly the shoulders' own
+    # depth and the arms fall almost straight DOWN the picture to the beam.
+    GL = (MX - 0.22, -0.56, 1.02)
+    GR = (MX + 0.28, -0.54, 1.02)
+    limb(P, [SL, (MX - 0.21, -0.52, 1.14), GL], 0.080, 0.056, 'body')
+    limb(P, [SR, (MX + 0.35, -0.50, 1.14), GR], 0.080, 0.056, 'body')
+
+    # ---- THE FLESHING KNIFE. Pass 1 made it a thin TUBE and it came back as a
+    # bent wire floating in front of the beam. A knife is a FLAT TAPERED PLATE,
+    # so it is built as one - a bowed strip with width, which catches the light
+    # down its length and reads as an edge.
+    kb = arc(GL, GR, 0.040, 7)
+    kb = [Vector((p.x, p.y - 0.085, p.z - 0.040)) for p in kb]
+    kgrid = [[Vector((p.x, p.y, p.z + dz)) for p in kb] for dz in (0.052, -0.052)]
+    P.raw(surf(kgrid, 0.026), 'bone')
+    for g in (GL, GR):
+        P.add(L.cone(0.040, 0.036, 0.155, 8), 'dark',
+              loc=(g[0], g[1] - 0.085, g[2] - 0.040), rot=(math.pi / 2.0, 0.0, 0.0))
+
+    # ---- THE NEXT SKIN, over his left shoulder, same shape as the two on the
+    # rack so the man and his rack are obviously the same trade at a glance.
+    _hide(P, MX - 0.26, -0.34, 1.06, 0.40, w=0.15, h=0.38, bow=0.060, laced=False)
+    _span("work", _i_work)
+    return P
+
+
+BUILDERS.update({"tanner": tanner})

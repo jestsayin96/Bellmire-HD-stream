@@ -1422,7 +1422,15 @@
       "Count the exits. Two. Good.",
       "Stone's sweating. Go slow.",
       "Rope on the floor. Cut, not frayed.",
-      "Cobweb's whole. Nobody's come through."
+      "Cobweb's whole. Nobody's come through.",
+      "Chalk the wall. Easy way back.",
+      "Wick's trimmed. Go.",
+      "Count heads. All here.",
+      "Boots laced? Then down.",
+      "Cold air. Stairs are close.",
+      "Straps tight. Packs tight.",
+      "Nobody sings down here.",
+      "Slow on the first steps."
     ],
     "lord": [
       "Hold together!",
@@ -1641,7 +1649,14 @@
       "Steady. It wants us to rush.",
       "Hold the door behind us.",
       "Count its swings. Three. Then in.",
-      "Mind the floor near its feet."
+      "Mind the floor near its feet.",
+      "Look at the feet, not the face.",
+      "Shields up. Let it swing itself out.",
+      "Take the flank. Quietly.",
+      "Don't both stand in one place.",
+      "Wait for the breath. Then go.",
+      "Keep your back to the wall.",
+      "It's big. It still bleeds."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1862,7 +1877,15 @@
       "Smell of tar. Stop.",
       "Grit falling from above. Hold still.",
       "Spike holes in the floor. Count them.",
-      "Lever's too clean. Leave it."
+      "Lever's too clean. Leave it.",
+      "Dust's disturbed. Somebody was careless.",
+      "Wire at the ankle. Step over.",
+      "Tile sits low. Skip it.",
+      "Hear that click? Back up.",
+      "Floor rings hollow. Test it.",
+      "Fresh oil on the hinge. Not ours.",
+      "Pole first. Then feet.",
+      "Arrow slits. Both sides. Down."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2077,7 +2100,15 @@
       "Left hand's numb. It'll come back.",
       "Tie it tight. Move.",
       "Don't look at it. Walk.",
-      "Hit the wall. Got up. Fine."
+      "Hit the wall. Got up. Fine.",
+      "Bleeding's slow. Good.",
+      "Cloth and a knot. Done.",
+      "Ribs ache. Breathe shallow.",
+      "It's a scratch. A deep one.",
+      "Sit a breath. Then up.",
+      "Tooth's loose. Still here.",
+      "Wrap it. Don't poke it.",
+      "Arm works. That's enough."
     ],
     "drink": [
       "Bottoms up.",
@@ -2286,7 +2317,15 @@
       "Two swallows. Hold the rest.",
       "Bitter. It works.",
       "Clean taste. Clean head.",
-      "Stoppered again. Save the dregs."
+      "Stoppered again. Save the dregs.",
+      "Warm going down. Steady.",
+      "Cork back in. Next one's for later.",
+      "Tastes of roots. Fine.",
+      "Sip, don't gulp.",
+      "That one's sharp. Feels right.",
+      "Pass the flask. Only a mouthful.",
+      "Head's clear. Hands too.",
+      "Saved the last drop."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2501,7 +2540,15 @@
       "Spoke it flat. It knew.",
       "Nothing but a smell of smoke.",
       "Too tired. Next one's better.",
-      "Dropped the thread. Pick it up."
+      "Dropped the thread. Pick it up.",
+      "Wrong word. Wrong breath.",
+      "Fizzled. Try the line again.",
+      "Hands shook. Next time.",
+      "Lost my place in it.",
+      "It stuttered. Nothing else.",
+      "Spent too soon. Rest a moment.",
+      "Cold fingers. Cold spell.",
+      "Said it right. It didn't take."
     ]
   },
   "misfire": [
@@ -11457,5 +11504,6 @@
   },
   "_note_c70": "C-70: backlog item 2 - descend, cleared, epitaphs and barks widened, additive. Placeholders as the existing lines: descend lines starting '%s %s' take hero and verb, 'Floor %d' takes the floor stood on only, never a total.",
   "_note_c87": "C-87: barks deepened an eighth time (enter, lord, trap, hurt, drink, misfire). Plain register, no floor counts. Additive only.",
-  "_note_c88": "C-88: barks deepened a ninth time. Appended only; plain register; no floor counts."
+  "_note_c88": "C-88: barks deepened a ninth time. Appended only; plain register; no floor counts.",
+  "_note_c89": "C-89: barks deepened a tenth time. Plain register, no floor counts. Pickers size off len()."
 }

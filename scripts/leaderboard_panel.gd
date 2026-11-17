@@ -190,11 +190,16 @@ class Satchel extends PanelContainer:
         return lb
 
     ## a piece on the left, what it gives on the right, signed and coloured
-    func _piece(what: String, gives: String, col: Color) -> void:
+    func _piece(what: String, gives: String, col: Color, rarity := "") -> void:
         var h := HBoxContainer.new()
         h.add_theme_constant_override("separation", UiTheme.px(10))
         h.custom_minimum_size = Vector2(UiTheme.px(W - 36), 0)
-        var a := UiTheme.label(what, 22, INK)
+        var pip := UiTheme.rarity_pip(rarity)         # U55: the icon's own hue, bare rungs get none
+        if pip == null:                               # a bare rung keeps the gem's column so names line up
+            pip = Control.new()
+            pip.custom_minimum_size = Vector2(UiTheme.px(14), 0)
+        h.add_child(pip)
+        var a := UiTheme.label(what, 22, UiTheme.rarity_ink(rarity, INK))
         a.clip_text = true
         a.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         h.add_child(a)
@@ -249,11 +254,13 @@ class Satchel extends PanelContainer:
         var w: Dictionary = Roster.WEAPONS[wt]
         var wd: Array = w.get("dice", [1, 4])
         _piece(r.weapon_name(h), "+%d atk · %dd%d" % [int(w.get("atk", 0)), int(wd[0]), int(wd[1])],
-            GOOD if int(w.get("atk", 0)) > 0 else SOFT)
+            GOOD if int(w.get("atk", 0)) > 0 else SOFT,
+            String(Gear.weapon_piece(r.weapon_piece_id(h)).get("rarity", "")))
         var at := clampi(int(h.get("armour", 0)), 0, Roster.ARMOUR.size() - 1)
         var a: Dictionary = Roster.ARMOUR[at]
         _piece(String(a.get("name", "rags")), "+%d AC · +%d HP" % [int(a.get("ac", 0)), int(a.get("hp", 0))],
-            GOOD if int(a.get("ac", 0)) > 0 else SOFT)
+            GOOD if int(a.get("ac", 0)) > 0 else SOFT,
+            String(Gear.armour_piece(Gear.armour_id(h)).get("rarity", "")))
         var worn: Array = []
         for slot in (h.get("acc", {}) as Dictionary):
             var key := String(h["acc"][slot])

@@ -2020,3 +2020,59 @@ end, rendered in a hero's hand at 1080p. Done for blade/sword. Systems 3/4 and P
 - NEXT (System 2, second half): the other families - dagger/axe(+axeDouble)/hammer->mace/staff/
   crossbow from the same pack, and decide whether tint_piece should spare the blade. No live Twitch
   test. Not ticked - the team lead ticks.
+
+## D-cycle - S17 System 2, second half (part 1): dungeon-pack axes and hammers in a barbarian's hand, 2026-11-17T11:19:00-06:00 (game build)
+TAKE THIS NEXT is still the 09:58 block (no 10:58 plan update on main); its game-build row is System 2.
+S16 did the first half; this is the second half's first part - two more families end to end. Systems
+3/4 and Phase 2 NOT touched.
+- WIRED: assets/gear/dungeon/axe_{common,uncommon,rare}.glb and hammer_{common,uncommon,rare}.glb,
+  copied unchanged from _packs/kaykit_dungeon_pack_CC0 (CC0, same LICENSE file already beside them,
+  row added to docs/art/ASSET_SOURCES.md). gear.gd KINDS["axe"] and KINDS["mace"] tiers 1-3 take them;
+  tiers 4-5 keep their old kit. Same 0.8 hand_scale (measured off the .glb accessors: axe 0.89/0.95/
+  0.95 m and hammer 0.86/0.87/0.90 m long, origin in the grip, y-up like the swords). No new table.
+- tools/_s17_heft.gd (new, windowed, cloned from _s16_sword.gd): BARBARIANS, not knights - a knight's
+  family is blade, so axe pieces never reach its hand (the first run went red on exactly that, 6/6,
+  which is the gate refusing to pass on nothing, as it should). Axe row tiers 1-3 holding NAMED axes
+  through the real path; mace row with wkind "mace" (the !forge mace path).
+- A FINDING, NOT A FAULT I HID: NO NAMED PIECE REACHES THE MACE MESH AT TIERS 1-2. Every tier-1/2
+  axe-family weapon in items.json carries an axe word (Hatchet, Axe, Cleaver, Greataxe), so piece_kind
+  sends it to "axe" even on a mace-kind hero. The hammers reach the screen at tier 3 (Emberhaft has no
+  kind word) and on an unnamed hero. The gate prints that as NOTE lines and checks the MAP
+  (Gear.kind_path("mace", t) == hammer_*) instead, failing if the map is wrong. CONTENT: a named
+  tier-1/2 mace in equipment.weapons (family axe, "mace" in the name) would close it with no code.
+- WHAT THE PICTURES SHOW (looked at: s17_front, s17_side; closes beside them in renders/cycles/s17/):
+  each haft is in the fist, axe heads out past the knuckles, nothing through the forearm; Hewer's Axe
+  0.70 m, Bearded Greataxe 0.76 m, Emberhaft 0.86 m - tier reads in size; the tier-3 hammer reads as a
+  heavy maul in the fist. FAULTS, named: (1) the Emberhaft _stuff tint goes orange over the whole
+  mesh, axe and hammer both - the same tint_piece behaviour S16 named on the Falchion, still not
+  fixed. (2) s17_front is framed too close (labels cut at the top); the side shot carries the fit.
+- Battery (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; S17_HEFT OK (6 shots, 0 failures)
+  with 2 NOTE lines (above); OFFFLOOR_VERDICT OK 0 of 2083 samples off the floor (home); TWITCH_PARSE OK
+  (8 checks); TOWNWALK in_solid=0/17207 (0.000%) raid_in_solid=0/5736 (0.000%) PASS; DELVE_TEST OK ran
+  9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR; S16_SWORD OK (5 shots, 0 failures) re-run so
+  the sword half is not broken by this change.
+- NEXT (System 2, rest): dagger (pack daggers are 0.9-1.15 m - want their own hand_scale, ~0.5),
+  staff (1.1-1.2 m, origin mid-shaft), crossbow (built along +Z, not +Y - needs a held rotation), and
+  whether tint_piece should spare blade/head. No live Twitch test. Not ticked - the team lead ticks.
+- ADDENDUM 11:25 CT, after the 10:58 plan landed mid-run (merged at push): its game-build row is this
+  same work, plus two things owed, BOTH DONE IN A DECLARED RELAUNCH:
+  (1) THE REFRAME. s16_front now (0,1.4,-8.0), side (7.5,1.3,0); s17 front/side widened the same way.
+  All three knights are in frame. THE THIRD SWORD IS NOT MISSING: Ford Cutlass is held (S16_SWORD's
+  held-node and mesh checks pass for tier 1, sword_common.glb, 1.02 m) but in the idle pose its blade
+  points AWAY from the camera, so from the front only the guard at the fist shows. Named, not framed
+  round: a front-on camera cannot show it; s16_side and s16_t1_close do.
+  (2) THE TINT DECISION - MINE, TAKEN: tint_piece NOW SPARES THE EDGE. gear.gd EDGE_MATS = Metal,
+  Stone, StoneDark, White - the dungeon pack's blade/head materials by name; their albedo is left
+  alone, every other surface (haft, grip, guard, trim) still takes the material word's tint, and the
+  GLOW still reaches the edge. WHY: the tint carries the piece's material ("bell" bronze, "ember",
+  "ash"...) and that reads better on the furniture than as a wash - a whole-mesh lerp turned
+  Bellwright's Falchion into a wooden practice sword. Looked at after: the Falchion's blade is steel
+  with a bronze guard; Emberline's blade is pale with the ember glow and an orange guard; Emberhaft's
+  axe edge is pale on an orange haft. KNOWN LIMIT: the atlas-textured kits (KayKit adventurers/
+  weapons/skeletons) have one material, match none of the names, and keep the old whole-mesh wash;
+  hammer_rare's head is "Gold" so it still takes the tint (a gold head reading ember-orange is fine).
+  hero_body.gd:32 is tint_piece's only caller, so nothing but held weapons changes.
+  Battery after the change (verdict lines): parse 0 errors; S16_SWORD OK (5 shots, 0 failures);
+  S17_HEFT OK (6 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1876 samples
+  off the floor (home); TOWNWALK in_solid=0/17320 (0.000%) raid_in_solid=0/7618 (0.000%) PASS;
+  DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR.

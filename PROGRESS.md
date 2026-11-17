@@ -8868,6 +8868,66 @@ NOT CHASED: the B25 unread-pipe hang. The row said leave it.
 NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
 bellmirebro or by anyone, no reward or channel setting touched. Logs (_b28) deleted. Godot closed.
 NEEDED FROM MR. E: nothing.
+## C-89 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (10:58 block): barks deepened a tenth time (lore_lines.json only)
+- TAKE THIS NEXT (10:58 CT team-lead block) gave CONTENT: "unchanged and unthrottled - carry on", keep producing in `barks`, write only into pools already read. Nothing written into townsfolk, phase2_words, phase2_words_alt or town_levels_for_the_desktop. The System 2 weapon-flavour opening was NOT taken: no already-read pool exists for it, and a new top-level key would be dead data.
+- data/lore_lines.json `barks`: +47 lines (one lord line dropped as a case-insensitive duplicate). enter 236, lord 224, trap 227, hurt 221, drink 215, misfire 221. Top-level `_note_c89` added beside `_note_c88`. Plain register, no floor counts.
+- VALIDATION OK: all four owned files parse; every other top-level key equal on parsed compare; every existing bark list is an unchanged prefix; file round-tripped byte-identical before edit. Four bark lists carry 1-2 case-insensitive duplicates that are already in HEAD; left alone (additive-only).
+- CODE WIRING: none. Pickers must size off len().
 
 ## H32 hub standing check (2026-11-17 11:45 CT) - nothing new to build
 Merged origin/main (663ef6e) and origin/hub (678e63d) clean; web/ and docs/HUB_SECURITY.md byte-unchanged since the looked-at build. Passes 1-5 in, H32 ticked, hub published by the supervisor - queue empty. node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta unchanged. MEASURED: web/icons 2,434,146 bytes (WebP) vs 6 MB cap; source assets/icons/items still 520 PNGs, last changed 4ab066d (01:02 CT), so no thumbnail drift. Live dot red --live #e5484d. No new screenshot (web/ unchanged). Scratch (_h32_shot_*.png, web_look*.tar, _plan_tmp.txt) still untracked: delete refused on this machine. Not published by me.
+
+## U55 - System 2 HUD half: the rarity hue ladder, 2026-11-17T11:57:18-06:00
+TAKE THIS NEXT / team lead + supervisor (11:40): the HUD rarity hue IS the HUD half of System 2. Source of truth = art's icons.RARITY_HUE (8 rungs, 5 hued, common/junk/starting BARE, no cost-quartile fallback).
+CHANGED (my files only): ui_theme.gd - RARITY_HUE (art's exact colours), RARITY_INK (4 darkened text colours for parchment), rarity_hue()/rarity_ink()/rarity_pip(); leaderboard_panel.gd Satchel._piece takes a rarity and draws a gem in the icon's hue + ink-tinted name; weapon and armour rows read Gear.weapon_piece/armour_piece(...).rarity. Bare rows keep the gem column so names line up.
+UNCOMMON (white): answered by construction while art's reply is pending - the GEM carries white (dark rim), the NAME stays ink. Pure white cannot be text on cream. If art ships a parchment-safe rung, change one constant.
+HARNESS tools/_u55_hue.gd: one REAL named piece per rung from items.json; gem == art hue, bare rungs have no gem, hued ink >= 4.5:1. It went RED on my first legendary ink (3.83:1) - darkened to 5.26:1. My first shots were a blank grey frame (sheet hides itself with no hero) - fixed, then looked at 100/125/150 in renders/cycles/u55/. Parse 0 errors; U55_HUE OK (windowed).
+*** THE FINDING MR. E MUST SEE: the Satchel is DORMANT since L63 (COORDINATION 13: on-stream surface = six things; a viewer's sheet is the hub's, H11). No file of mine puts a named weapon on the stream, so this hue reaches NO screen yet. Options: (a) hub draws it (hub lane, RARITY_HUE is the table), (b) feed_hud tints known piece names in Chronicle lines (HUD-owned, needs your yes - it is a new on-stream behaviour), (c) leave it ready. I did NOT pick (b).
+Lock: RUNNING 11:54/11:55/11:56 claims, each under 4 min; released IDLE 11:57:18. NEEDED FROM MR. E: pick (a)/(b)/(c).
+
+## B-cycle B29 - THE SECOND B28 RESIDUAL IS CLOSED: BOTH PUBLISHED COOLDOWNS NOW HAVE A GUARD (chat bot, 2026-11-17 11:46-11:51 CT)
+TAKE THIS NEXT, CHAT BOT row (newest on main): stand down, re-prove only if main moves materially,
+do not chase the B25 hang, do not take another lane's gate - and "the two residuals you named this
+hour are yours to close IF you judge them real". MAIN MOVED 60fbbdf -> 325babc (game build S16/S17
+dungeon-pack swords, axes, hammers; art's probe renders), so the re-prove was earned. chatbot
+fast-forwarded onto it; no conflict, no cycle renumbered.
+
+RESIDUAL 1 (the game build's file) IS STILL THEIRS AND STILL NOT TAKEN: twitch_chat.gd:10's
+`_cooldown_ms` is a MEMBER INITIALIZER, read once at construction, while ChatCmd.cooldown() re-reads
+the data on every call. After B18's loud loader reloads the file, the local chat box honours a
+changed cooldown and live Twitch chat does not until the scene is rebuilt. Named for the tenth
+cycle, not taken.
+
+RESIDUAL 2 IS MINE AND IT IS CLOSED. I judged it real. Neither published cooldown had anything
+vouching for it: `cooldown_s` is read by my cooldown() with a silent fallback to COOLDOWN, and
+`twitch_cooldown_s` is read by twitch_chat.gd with a silent fallback to its own constant. Delete
+either key, or give it a wrong TYPE (a string "1.5" reads as 0.0 and falls back), and every gate in
+the house stays green while the bot enforces a DIFFERENT wait from the one docs/COMMANDS.md promises
+a viewer. That is the drift L14 refuses, one key over. The sixth COMMANDS_DATA guard is in
+scripts/chatcmd.gd's loader in the shape of the five before it - loud, not fatal, carries on.
+
+BOTH RED PATHS PROVEN ON PURPOSE AND RESTORED, not asserted:
+  break A  `cooldown_s` removed        -> COMMANDS_DATA COOLDOWN MISSING, rc 0, carried on
+  break B  `twitch_cooldown_s` = "3.0" -> COMMANDS_DATA COOLDOWN UNUSABLE, rc 0, carried on
+  data/commands.json restored BYTE-IDENTICAL, md5 68b9b33a709022a135d0c6c03916091f before and after.
+
+THE BATTERY - ONE RUN AFTER AN ASSET IMPORT, ALL STDOUT REDIRECTED TO FILES (B25's house rule),
+nothing queued after it:
+  import            - rc 0. The FIRST parse of the hour went red with 12 SCRIPT ERRORs on
+                      assets/gear/dungeon/sword_*.glb - main's S16/S17 swords had never been
+                      imported in THIS worktree. A worktree import fault, not a code defect, and
+                      the same one B5 hit in June of this file's life. Named so no one reads the
+                      first log as a game verdict.
+  parse 300 frames  - rc 0, 0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA lines
+  L14_TEST OK       - 22 checks, missing [], unanswered []
+  TWITCH_PARSE OK   - 8 checks
+  D704_ECHO OK      - 356 checks
+  B11_MUSTER OK     - bad=0, 22 checks, run WITHOUT --quit; B11_SOURCE_QUEUEING still YES
+  COMMANDS_DOC OK   - wrote 27 commands, docs/COMMANDS.md BYTE-IDENTICAL (fc67173cfaa05ab7b522ef7305531f23)
+The new guard adds NO command and NO data key, so the doc does not move and COMMANDS.md is not
+regenerated into a change - the count stays 27.
+
+NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat line posted by
+bellmirebro or anyone, no reward, no channel setting touched.
+Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
+

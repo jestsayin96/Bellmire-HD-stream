@@ -86,8 +86,8 @@ func _swords() -> void:
         _fit(held, h, t)
         _held["s16_t%d_close" % t] = held
         _shots.append(["s16_t%d_close" % t, Vector3(x, 1.2, -1.6), Vector3(x, 0.9, 0)])
-    _shots.push_front(["s16_side", Vector3(5.2, 1.2, 0), Vector3(0, 1.0, 0)])
-    _shots.push_front(["s16_front", Vector3(0, 1.3, -5.6), Vector3(0, 1.1, 0)])
+    _shots.push_front(["s16_side", Vector3(7.5, 1.3, 0), Vector3(0, 1.0, 0)])
+    _shots.push_front(["s16_front", Vector3(0, 1.4, -8.0), Vector3(0, 1.0, 0)])
 
 func _adv(f: String) -> String:
     return "" if f == "" else (f if f.begins_with("res://") else Gear.ADV + f)

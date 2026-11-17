@@ -476,3 +476,136 @@ What the game build needs to do, when its own queue allows:
 3. The workshop set piece can now pick between the Scrapwright and the Jointer.
 4. The idea is a BEHAVIOUR. Shipped as a reskin with 2x hp it is wasted: the
    split body is a promise to the viewer that this thing becomes two things.
+
+---
+
+# 16. THE QUARTERMASTER - the second BARRACKS set piece, 17 Nov 2026
+
+| key | title | h | theme | THE IDEA | wear |
+|---|---|---|---|---|---|
+| `quartermaster` | The Quartermaster | 2.35 | barracks | **IT ARMS THE ROOM** - everything else in here takes a weapon off its sheaf | 0.50 |
+
+`assets/monsters/minibosses/quartermaster.glb` - 4 meshes, **2,804 faces**,
+static, no armature. Register row in `renders/art/minibosses/_fit_report.json`.
+
+## WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+
+1. **The plan, not this list.** `origin/main:docs/WORK_PLAN.md`, the 05:58 CT
+   TAKE THIS NEXT block: the art lane is dry, D94 gloves is TICKED (do not
+   re-shoot, do not touch `tools/art/icons.py` - I did not), the Jointer is
+   verified, and the row is "a sixteenth is welcome on the same terms".
+2. **What already exists**, counted off the tree: `assets/monsters/minibosses/`
+   holds 26 `.glb` (15 bodies + 11 chibi conversions) and
+   `assets/monsters/creatures/` holds 12. I built nothing that was already
+   there. The gap I picked is the one the Jointer's own comment names and does
+   not close: **the miniboss roll is weight 35 on BARRACKS and WORKSHOP**;
+   workshop got its second body last hour, barracks still had exactly one.
+3. **The packs, before modelling a single shaft.** `C:\hd adventure\_packs\`
+   listed by directory this run: **56 entries**, the Ultimate Monsters,
+   Bestiary Dungeon Monsters Kit, KayKit and Quaternius sets among them. And
+   closer to hand, `assets/gear/` - 30 CC0 KayKit dungeon-bit models already in
+   this repo and already logged in ASSET_SOURCES.md.
+
+## IT USES THE PACK, AND THAT IS THE POINT OF THE CREATURE
+
+**The spears and shields on this body are REAL `assets/gear/` geometry**
+(`spear_A.gltf`, `shield_A.gltf`), not procedural cones - the same models
+`gearmodels.py` hands to the heroes for D95. A quartermaster that issues the
+exact weapons the party carries is the one case where "use what is on disk"
+pays twice: it is cheaper AND it is the fiction.
+
+- `minibosses._gear_mesh()` imports the glTF, harvests the evaluated mesh,
+  normalises it to unit length about the grip and **deletes the imported
+  objects**. Nothing is re-exported as an asset; the geometry rides inside our
+  own glb, which the CC0 licence permits.
+- **It falls back to procedural geometry if the file will not load, and SAYS
+  SO**: `_report.json` carries `pack_used`. A silent fallback is the same fault
+  class as a lying gate. This run: `pack_used: true`.
+- **A DECIMATE ON IMPORT, because pass 1 cost 12,470 faces** against a set that
+  runs 842-2,623. Collapse to ~120 faces per pack part brought it to **2,804**
+  with the silhouette intact. The number is in the report, not asserted here.
+
+## THE IDEA, AND WHY IT IS NOT A SIXTEENTH COAT OF AN EXISTING ONE
+
+It does not fight you well and it calls nobody in. It **hands out what is
+already in the room**: every ordinary creature on the floor takes a spear or a
+shield off its sheaf and fights better until the sheaf is empty. Empty the
+sheaf or kill the issuer - leave it alone and the trash stops being trash.
+
+Checked against all fifteen: the Drillmaster **summons** bodies that were not
+there, the Tallyman **takes your** gear and withdraws, the Scrapwright armours
+**itself**, the Cook **heals**. This one upgrades what is already standing and
+arms nothing of its own.
+
+Silhouette collisions checked and avoided: no disc (Drillmaster's gong), the
+offered spear is a **diagonal and never level** (Porter's drawbar), every shaft
+is **dead straight** (the Snarer owns the only curves in the file), and nothing
+hangs off a crossbar (Tallyman).
+
+**WEAR 0.50 - the one unused value left in the set.** Used across the other
+fifteen: .15 .20 .25 .30 .35 .40 .45 .55 .60 .65 .70 .80 .85 .90 .95. Right for
+a barracks store in daily use: issued steel kept bright, canvas and timber not.
+
+## THE FIT PROOF - ON A BODY, AND EVERY FAULT I CAN SEE
+
+`renders/art/minibosses/quartermaster/hero_front|side|back.png`, each beside the
+real posed KayKit `Knight.glb` at scale 1.0 (measured 2.45 m), one ortho scale
+and one ground line shared with the other fifteen. **I looked at all three.**
+
+Register: **verdict GREEN, errors [], asked 16 measured 16, blank_check 16
+files 0 failures.** `pairs.quartermaster`: creature_h 2.35, hero_h 2.45,
+**ratio 0.96**, pair_w 4.83, fits_frame true. Footprint span **2.97 m against
+the 11.0 m three-cell clear span - CORRIDOR-SAFE**, not room-locked.
+
+THREE PASSES, and each pass fixed a named fault rather than several at once:
+- **Pass 1** read as a FEATHER CROWN on a robot: the spear heads were most of
+  each spear, the shield stack was taller than the torso and lay on the floor
+  like a dropped kite, the two spare shafts ran THROUGH the shields, and the
+  offered spear sat **behind the legs** - the one thing the body is for, hidden.
+- **Pass 2** lengthened and re-rooted the sheaf, shrank the shields, put a hand
+  (fist + thumb) on each arm instead of a blunt ball, and swung the offering arm
+  forward onto a measured midpoint. The shafts STILL cut the shields.
+- **Pass 3** mirrored the offering arm to **-X, the near side of the
+  three_quarter camera** - pass 2's mechanic was behind its own torso in the
+  very cell that goes on the contact sheet - swapped the ground store to +X and
+  moved the shafts a measured 0.76 m clear of the nearest shield face.
+
+**WHAT IS STILL WRONG, and it is nine things:**
+1. **The head still reads as a FACE.** The hatch, brim and two close-set lamps
+   come out as a letterbox with eyes. The brief said no head; it has one.
+2. **The body is a SLAB from the side** - thin front-to-back, the Sexton's
+   known fault repeated. The side view earns less than the front.
+3. **The sheaf collapses to two or three shafts from the side** and loses the
+   fan entirely; the fan only exists front and back.
+4. **The shield stack foreshortens into an unreadable grey lump** on the hero
+   front shot, and on the back shot it reads as one blob with a shaft in it.
+5. **The offering arm is a dead-straight thin diagonal with no elbow mass** -
+   it reads mechanical, closer to a crane jib than an arm.
+6. **The tally brand reads as a floating pearl** beside the head from the front
+   and the side; its shaft is hidden behind the hatch, so it is not visibly
+   rooted in the quiver it grows out of.
+7. **The two spare shafts on the floor read as clutter**, not as stock.
+8. **The spear heads are still large for the body** - normalising the whole
+   thing to 2.35 m means the sheaf, not the torso, sets the scale.
+9. **The lamp eyes are a few px on the hero frame** and will not read on stream
+   - the same fault the Jointer carries, and it is a set-wide one.
+
+## For the game build lane - the art lane does NOT wire this
+
+Nothing here touches `bestiary.gd`, `delve.gd`, `dungeon_hd.gd` or any `.gd`
+outside `tools/art/`. What the game build needs, when its own queue allows:
+
+1. `assets/monsters/minibosses/quartermaster.glb` - static, no armature, so a
+   `model` path and **NO `anims` entry**, same as the other fifteen.
+2. `scripts/delve.gd` `MB_FIT`: add `"quartermaster": 0.96` - **MEASURED**,
+   from `renders/art/minibosses/_fit_report.json` `pairs.quartermaster.ratio`.
+   Do not re-derive it. (This is the same shape as the `"jointer": 0.92` and
+   `"snarer_chibi": 1.00` rows already owed on that lane's row.)
+3. The barracks set piece can now pick between the Drillmaster and the
+   Quartermaster, which is the whole reason it was built.
+4. **The idea is a BEHAVIOUR.** Shipped as a reskin with 2x hp it is wasted:
+   the sheaf is a promise that killing this thing stops the room getting worse.
+5. Feed line, if one is wanted: *"Something is handing out arms."*
+6. As with every other body in this directory, there is **no `.glb.import`
+   sibling** - the art lane never runs Godot. An import run writes it, and
+   `delve.gd:377` already falls back safely until then.

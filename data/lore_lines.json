@@ -1322,7 +1322,17 @@
       "Smells like old money.",
       "I've got a good feeling. Don't ask why.",
       "Rope's tied. Door's behind us.",
-      "Quick and careful. In that order."
+      "Quick and careful. In that order.",
+      "Boots laced, lamps trimmed.",
+      "Bread eaten? Good. Go.",
+      "Same stair as yesterday.",
+      "Slow and level.",
+      "Mind your elbows in the narrows.",
+      "Wet stone. Short steps.",
+      "Somebody count us in.",
+      "Chalk ready. Lamp ready.",
+      "We are expected home by dark.",
+      "Door's shut behind. Eyes forward."
     ],
     "lord": [
       "Hold together!",
@@ -1451,7 +1461,17 @@
       "Make it count. We won't get two.",
       "Stay off the thing's left side!",
       "Hit it together!",
-      "For the guild, and the grain!"
+      "For the guild, and the grain!",
+      "Shields up. Nobody runs.",
+      "That is the big one. Mind it.",
+      "Keep it off the lamp.",
+      "Feet, not face. Feet, not face.",
+      "One at a time, and all together.",
+      "Hold the line. Hold it.",
+      "Watch its shoulder. It moves first.",
+      "It's slow. Do not be.",
+      "Spread out. Do not bunch.",
+      "Hit it and step back."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1581,7 +1601,17 @@
       "Hinge is oiled. Who oils a hinge in here?",
       "Spikes. Of course it's spikes.",
       "Don't breathe the green.",
-      "Somebody sneeze and I'll leave."
+      "Somebody sneeze and I'll leave.",
+      "Floor sounds hollow here.",
+      "Stop. Dust is wrong.",
+      "A plate. Step round it.",
+      "Wire at ankle height.",
+      "Mind the lintel.",
+      "That stone has been moved.",
+      "Something clicked. Nobody move.",
+      "Fresh oil on a rusted hinge.",
+      "Pass me the chalk. Mark that tile.",
+      "Draught from the wrong side."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -1710,7 +1740,17 @@
       "I've had worse. Not lately.",
       "Take the front. I need a minute.",
       "Blood's mostly mine. Fine.",
-      "Keep swinging. I'll catch up."
+      "Keep swinging. I'll catch up.",
+      "That one will bruise.",
+      "Still on my feet. Just.",
+      "Patch me when you can.",
+      "My arm's gone quiet. Not good.",
+      "Fine. I'm fine. Keep going.",
+      "Somebody has the bandages?",
+      "Cut's shallow. Pride's deep.",
+      "I'll live. Ask me later.",
+      "Cover my left.",
+      "Hold on, I'm breathing."
     ],
     "drink": [
       "Bottoms up.",
@@ -1835,7 +1875,16 @@
       "Smells of mint and bad decisions.",
       "Another one gone. Counting.",
       "Strong. Stronger than it looks.",
-      "To the town, and the tab."
+      "To the town, and the tab.",
+      "Tastes like a barn.",
+      "Warm, and that helps.",
+      "That's better. A little.",
+      "Bitter. It's working.",
+      "Half a flask gone. Count it.",
+      "Cork back in. Eyes up.",
+      "One down. Mind the rest.",
+      "Honest brew. Honest burn.",
+      "Good. Now I can stand."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -1963,7 +2012,17 @@
       "Hold on, I'll find it.",
       "The words came out wrong.",
       "Nothing. Absolutely nothing.",
-      "Cheap magic, rich failure."
+      "Cheap magic, rich failure.",
+      "That was meant to work.",
+      "The spell sat down on me.",
+      "Nothing came. Nobody laugh.",
+      "Wrong word. Again.",
+      "The words slipped. Mine.",
+      "Dry as a bone. The magic, not me.",
+      "A spark. Just the one.",
+      "Gone. Like a coin in a ford.",
+      "Ask me again in a moment.",
+      "I lost my place."
     ]
   },
   "misfire": [

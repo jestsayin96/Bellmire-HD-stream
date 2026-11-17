@@ -7946,3 +7946,11 @@ parse gate has not seen this file.
 
 ## U47 (2026-11-17 01:53 CT) - HUD stand-down, queue empty (file-only)
 Fetched and merged origin/main into hud-ui, no conflicts. L73 and L74 both read [x] in WORK_PLAN; L31's open remainder is the game build's (delve/monster/party_frames/boss_bar), L66 is the hub's H31. No new HUD item raised. RUN_LOCK IDLE (last: game build D98, 01:12), no Godot alive; none launched, lock untouched. None of my seven files edited.
+
+## C-80 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT: stop writing dead pools; barks widened (lore_lines.json only)
+- TAKE THIS NEXT gave CONTENT: (1) stop writing into townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop; (2) C-73 remainder, with the 29 refused shape lines staying refused. Nothing was written into the four dead pools. C-55 is long done.
+- FINDING ON THE FOUR DEAD POOLS (a finding, not an item): nothing in them needs rescuing. town_levels_for_the_desktop (7 crier lines) duplicates the voice of growth_tiers, which is read. townsfolk is DEAD-UNTIL-D36 and keeps that reading. phase2_words and phase2_words_alt are the ascent/errand/stone/vault words for D77-D81 and are waiting on those wirings, not lost. If any line is wanted sooner it should be copied into a READ pool at that time.
+- C-73 remainder: no new mechanics raised; the 29 refused shape lines are left refused.
+- data/lore_lines.json `barks` is read (delve.gd _bark). +10 lines on each of enter, lord, trap, hurt, drink, misfire = 59 lines (one candidate dropped as an exact duplicate of an existing drink line). Plain register, no floor counts.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; same string-list shape. Counts now enter 138, lord 137, trap 138, hurt 137, drink 132, misfire 136.
+- CODE WIRING: none. Existing `barks` reader picks the new lines up.

@@ -7354,3 +7354,33 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
 - LOCK: RUN_LOCK read at 20:52 CT - last line IDLE 20:49:26 (chat bot B15, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
+## B15 - STOOD DOWN AS ORDERED, AND RE-PROVED THE SIX GATES ON THE NEW MAIN (chat bot, 2026-11-16 20:45-20:52 CT)
+- THE ITEM WAS A STAND-DOWN AND IT IS DELIVERED. The 19:58 TAKE THIS NEXT row reads "STAND DOWN AND
+  WRITE THE LINE", and the 20:45 plan (main b9bd5cd, Mr. E's 20:40 ruling) does not change it: D96-D99
+  are the GAME BUILD's wiring queue, art and content keep producing, and the CHAT BOT row is unchanged.
+  NOTHING INVENTED. No WORK_PLAN item ticked, none written. D67/D69/D70 live in twitch_eventsub.gd and
+  belong to the game build; tools/ is not mine.
+- WHY A BATTERY RAN ANYWAY, AND IT IS NOT NEW WORK. THE BASE MOVED UNDER ME. 39847b3 fast-forwarded to
+  main b9bd5cd: 33 files, including scripts/economy.gd, scripts/town.gd and scripts/snapshot_pub.gd.
+  A parse gate covers the whole project, so a green verdict from 19:50 says nothing about this tree.
+  Re-running the SAME six gates on the new base is a re-measurement, not an invention.
+- SIX OF SIX GREEN ON b9bd5cd. parse rc=0 with 0 SCRIPT ERROR and 0 Parse Error; L14_TEST OK;
+  TWITCH_PARSE OK; D704_ECHO OK (356 checks); COMMANDS_DOC wrote 27 commands and left docs/COMMANDS.md
+  BYTE-IDENTICAL (md5 fc67173cfaa05ab7b522ef7305531f23 before and after - the generator stays a proven
+  no-op); B11_MUSTER OK bad=0.
+- THE NEW RULE WAS OBEYED. tools/_b11_muster.gd ran WITHOUT `--quit` and printed its verdict. The four
+  gates that finish before frame 1 kept `--quit`. No gate in this battery returned rc=0 with no verdict.
+- NO DEFECT FOUND IN MY THREE FILES, AND I LOOKED BEFORE SAYING SO. data/commands.json parses; order is
+  the same SET as commands (27 either side); drift checked BOTH directions - no entry without a code
+  path, no code path without an entry - and the real verdict is L14_TEST OK. chatcmd.gd opens
+  data/commands.json and nothing else.
+- THE DEAD-DATA AUDIT TOUCHES NOTHING OF MINE, SAID PLAINLY SO NOBODY WAITS ON ME. The seven unread
+  lore_lines.json keys, bosses.json lesser/uniques, items.json stock_by_tier/price_ladders and
+  classes.json healing are all read (or not) by game-build scripts. chatcmd.gd reads none of them and
+  never did, so D96-D99 are queued on nobody in this lane.
+- LOCK: read IDLE 2026-11-16T20:30:26-06:00 (game build), tasklist showed NO Godot process alive,
+  machine clock read directly at 20:47:26 CT. Claimed 20:47:26 with a named finish of 20:52, one
+  battery, nothing queued after it; released inside the window. The HUD lane's :52-:07 is untouched.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced
+  or deleted, nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

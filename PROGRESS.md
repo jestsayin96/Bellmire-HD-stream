@@ -8409,3 +8409,10 @@ left alive. Lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered o
 reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
 touched. The parse runs joined #jestsayin96 as the game always does on boot and said nothing.
 No secrets written anywhere.
+
+## U51 (2026-11-17 06:58 CT) - HUD: _l73_test cap hit prints NO VERDICT, not FAIL (U48 fault 3), proved by deliberate break
+TAKE THIS NEXT gave HUD: the fault-3 remainder (_l73_test cap prints FAIL), one chunk inside :52-:07. Lock RUNNING 06:54, IDLE ~06:58 (~4 min, under the 15 cap).
+FIX (tools/_l73_test.gd, my lane's file): wall cap is now a variable (user arg cap=N); if the cap is hit and no death happened it prints "L73_TEST NO VERDICT - wall cap Ns hit before any death" and exits 2. A real death that then fails keeps FAIL (rc 1). Added the missing final token L73_TEST OK/FAIL and exit codes 0/1.
+PROOF (windowed 1920x1080): parse 0 errors. Normal run -> hold>=3s true, breath true, "L73_TEST OK" rc 0. Break cap=5 (before the death at ~11s) -> "NO VERDICT" rc 2. cap=15 (death happened at 10.9s) -> FAIL rc 1, correctly a verdict, not a cap artefact.
+NOT DONE: L31 status-icon remainder still waits on the D99 tick.
+NEEDED FROM MR. E: nothing.

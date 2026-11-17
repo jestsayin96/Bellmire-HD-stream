@@ -8436,3 +8436,9 @@ FIX (tools/_l73_test.gd, my lane's file): wall cap is now a variable (user arg c
 PROOF (windowed 1920x1080): parse 0 errors. Normal run -> hold>=3s true, breath true, "L73_TEST OK" rc 0. Break cap=5 (before the death at ~11s) -> "NO VERDICT" rc 2. cap=15 (death happened at 10.9s) -> FAIL rc 1, correctly a verdict, not a cap artefact.
 NOT DONE: L31 status-icon remainder still waits on the D99 tick.
 NEEDED FROM MR. E: nothing.
+
+## C-85 (2026-11-17 CT, clock ~07:2x) - TAKE THIS NEXT row for CONTENT: barks deepened a sixth time (lore_lines.json only)
+- TAKE THIS NEXT (06:58 CT block) gave CONTENT: keep going in `barks` for depth (read at delve.gd:3432 by kind). Dead pools, the 29 trick-only shape lines and act/broken left alone.
+- data/lore_lines.json `barks`: +65 lines. enter +11, lord +11, trap +11, hurt +11, drink +11, misfire +10. Counts now enter 197, lord 190, trap 193, hurt 191, drink 186, misfire 189. Plain register, no floor counts. Case-insensitive duplicates dropped.
+- VALIDATION OK: file parses; every other top-level key equal on a parsed compare; every existing bark list is an unchanged prefix of its new list; all entries strings.
+- CODE WIRING: none. The existing `barks` reader picks the new lines up.

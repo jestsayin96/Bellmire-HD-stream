@@ -564,9 +564,33 @@ static func boss_def(b: Dictionary, floor_no := 0) -> Dictionary:
         out["off"] = b.get("off", "")
         out["wscale"] = b.get("wscale", 1.0)
         out["wglow"] = b.get("glow", 0.0)
+    # D97: the lord stands up in ITS OWN BODY (assets/monsters/lords/, art lane). Art built each
+    # one at its canon height (renders/art/lords/_report.json size z == BOSS_DEFS h, all eight),
+    # so h above is already art's number - nothing re-derived. Static meshes: no armature, no
+    # KayKit props, art's own paint. A lord with no model on disk is NAMED, not silently swapped.
+    var lp := lord_model(String(b.get("id", "")))
+    if lp != "":
+        out["path"] = lp
+        out["anims"] = {}
+        out["hand"] = ""
+        out["off"] = ""
+        out["lift"] = 0.0
+        out["tint"] = Color(1, 1, 1)
+        out["glow"] = Color(0, 0, 0)
+        out["particle"] = ""
+        out["lord_model"] = true
+    elif String(b.get("id", "")) != "" and not lord_no_model.has(String(b.get("id", ""))):
+        lord_no_model.append(String(b.get("id", "")))
+    # D97: the lord's numbers come OUT OF data/bosses.json (lesser / greater) where the writer
+    # gave one; BOSS_DEFS is only the fallback for a stat the file does not carry.
+    var fr := lord_file_row(String(b.get("id", "")))
+    if fr.has("shape"):
+        out["shape"] = String(fr["shape"])
+    if fr.has("speed"):
+        out["spd"] = float(fr["speed"])
     # L45: hp, damage and the mechanics all take the depth curve
-    out["boss_hp"] = float(b["hp"]) * lord_hp_mult(floor_no)
-    out["boss_atk"] = float(b["atk"]) * lord_atk_mult(floor_no)
+    out["boss_hp"] = lord_canon(b, "hp") * lord_hp_mult(floor_no)
+    out["boss_atk"] = lord_canon(b, "atk") * lord_atk_mult(floor_no)
     out["id"] = b.get("id", "")
     out["depth_step"] = depth_step(floor_no)
     out["ways"] = scale_ways((LORD_WAYS.get(String(b.get("id", "")), {}) as Dictionary).duplicate(true), floor_no)
@@ -594,6 +618,57 @@ static var only_lord_unique := ""
 static var _last_uniq := ""
 static var _uniq_by_lord: Dictionary = {}
 static var _uniq_orphans: Array = []
+
+## ---- D97: the lords' own rows in data/bosses.json (lesser / greater), and their bodies.
+const LORD_DIR := "res://assets/monsters/lords/"
+static var lord_no_model: Array = []
+static var _bosses_raw: Dictionary = {}
+static var _lord_rows: Dictionary = {}
+static var lord_row_orphans: Array = []
+static func bosses_raw() -> Dictionary:
+    if not _bosses_raw.is_empty():
+        return _bosses_raw
+    var f := FileAccess.open(BOSSES_JSON, FileAccess.READ)
+    if f == null:
+        return _bosses_raw
+    var raw = JSON.parse_string(f.get_as_text())
+    f.close()
+    if typeof(raw) == TYPE_DICTIONARY:
+        _bosses_raw = raw
+    return _bosses_raw
+static func lord_model(lord_id: String) -> String:
+    if lord_id == "":
+        return ""
+    var p := LORD_DIR + lord_id + ".glb"
+    return p if ResourceLoader.exists(p) else ""
+## the writer's row for a lord, matched on its canon title with or without "The "
+static func lord_file_row(lord_id: String) -> Dictionary:
+    if _lord_rows.is_empty():
+        for k in ["lesser", "greater"]:
+            for v in (bosses_raw().get(k, []) as Array):
+                if typeof(v) != TYPE_DICTIONARY:
+                    continue
+                var nm := String((v as Dictionary).get("name", ""))
+                var hit := ""
+                for lk in BOSS_DEFS:
+                    var t := String((BOSS_DEFS[lk] as Dictionary)["title"])
+                    if t == nm or t.trim_prefix("The ") == nm:
+                        hit = String(lk)
+                        break
+                if hit == "":
+                    lord_row_orphans.append(nm)
+                    continue
+                var row: Dictionary = (v as Dictionary).duplicate()
+                row["bag"] = k
+                _lord_rows[hit] = row
+    return (_lord_rows.get(lord_id, {}) as Dictionary)
+## a lord's canon stat: the file's number when the writer gave one, else BOSS_DEFS
+static func lord_canon(b: Dictionary, stat: String) -> float:
+    var fr := lord_file_row(String(b.get("id", "")))
+    var fk: String = {"hp": "hp", "atk": "attack", "spd": "speed"}.get(stat, stat)
+    if fr.has(fk):
+        return float(fr[fk])
+    return float(b.get(stat, 0.0))
 
 ## every written variant, filed under the lord it modifies. Loaded once. A variant is matched to
 ## its lord by that lord's own canon title, which is how the writer names them ("The Hollow King,
@@ -668,7 +743,7 @@ static func apply_lord_unique(out: Dictionary, b: Dictionary, uq: Dictionary, fl
     out["rare"] = true                  # boss_bar ALREADY reads this - no UI file is touched
     out["lord_unique"] = true
     out["lord_title"] = String(b.get("title", ""))
-    var canon_hp := maxf(1.0, float(b.get("hp", 1.0)))
+    var canon_hp := maxf(1.0, lord_canon(b, "hp"))
     var ratio := 1.0
     if uq.has("hp"):
         ratio = float(uq["hp"]) / canon_hp

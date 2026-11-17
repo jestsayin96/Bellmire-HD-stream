@@ -7529,3 +7529,58 @@ hub's lazy-loading set as a property rather than an attribute.
 
 NO LIVE TWITCH TEST ON ANY LANE THIS HOUR: 0 bits, nothing cheered, nothing redeemed, no reward
 created, renamed, re-priced or deleted, nothing posted as any account, no channel setting touched.
+
+## D97 - THE LORDS RISE IN THEIR OWN BODIES, THEIR NUMBERS OUT OF THE FILE; THE FORTY SHAPE LINES ANSWERED IN WRITING (game build, 2026-11-16 22:07-22:40 CT)
+- ITEM: TAKE THIS NEXT gave GAME BUILD D97 (D96 ticked 22:08). Lock claimed 22:07:59 before reading; no Godot alive on arrival.
+- MEASURED FIRST, AND HALF OF D97 WAS ALREADY TRUE: L29b (bestiary.gd lord_uniques / apply_lord_unique) has read
+  `lesser_uniques` and `greater_uniques` since 15 Nov - all 390 load, 0 orphaned, an 18% roll raises one, hp / attack /
+  speed come from the writer's row, and delve.gd names it ("<variant> rises. <its shape line>." then "The guild has put
+  down <lord> before. Not this one."). The baseline's "nothing spawns any of them" was keyed on `uniques`, which is a
+  PROSE STRING describing the lists, not the lists. `rule` and `boss_floors` are prose too ("every 5th floor" is what
+  is_boss_floor already does). What was really dead, and is now wired:
+  1. THE LORDS' OWN BODIES (the widening the supervisor named). assets/monsters/lords/<id>.glb, all 8, now the lord's
+     body in Bestiary.boss_def. ART'S NUMBER IS USED, NOT RE-DERIVED: renders/art/lords/_report.json size z equals
+     BOSS_DEFS h for all eight (4.2 / 4.5 / 4.4 / 3.2 / 9.0 / 7.0 / 4.6 / 10.0), so the lord stands at art's height x the
+     existing LORD_SCALE 1.2 (x the unique's existing size skew). Static: no anims, no KayKit props, art's paint (tint
+     white; a rare one still takes the L29b scar-light lerp, so the visible modifier survives). No-model lords: NONE.
+  2. `lesser` / `greater` - THE LORDS' OWN ROWS. Now read (Bestiary.lord_file_row / lord_canon). All 8 rows match a canon
+     lord, each in the bag the code draws it from, 0 orphans. The FILE's hp / attack / speed win wherever the writer gave
+     one (Grubmother hp 230 spd 1.8, Nightwing hp 110 spd 6.6, Pale Duchess atk 27); BOSS_DEFS is only the fallback.
+     The unique's skew ratio now divides by the file's canon hp too. `shape` is carried on the def (out["shape"]).
+     HONEST: the other five rows carry a NAME ONLY, so their numbers still come from BOSS_DEFS - the reader is in and
+     will take the writer's number the moment one appears. Content can close that gap; code does not need to change.
+- TEST tools/_d97_lords.gd (new, windowed): for each lord, plain and pinned to one of its own written variants, the bag
+  is set and the REAL Delve._next_floor builds the boss floor and raises it. D97_LORDS OK 139 checks, 16 risings:
+  own model loaded, height within 3% of art's z x 1.2 x size (e.g. Mourncoil 12.00 m, Deep Freeze 12.27 m), file
+  hp/atk/speed applied, Chronicle "X rises." for every one, variant name + guild line for every unique.
+  LOOKED AT: renders/cycles/d97/_sheet2.png (and the 16 shots beside it) - all eight stand on their floor in their own
+  bodies beside a knight. First run shot at 10 frames and showed EMPTY RINGS: Monster.entrance() raises a lord out of
+  the floor over 2.2 s; the gate now shoots at 2.8 s. Noted, not fixed (art's call): the Grubmother is 8.3 m wide.
+- REGRESSION: tools/_l29b_test.gd's "keeps its lord's BODY" compares plain vs variant path - both now take the lord model,
+  so it still holds.
+- C-73'S FORTY SHAPE LINES - THE WRITTEN ANSWER. What every one of them DOES get today: its name, its shape line
+  printed in the Chronicle and on the card as it rises, the writer's hp/speed/attack skew, its lord's own LORD_WAYS
+  mechanic and the depth curve. Beyond that:
+  HONOURED IN FULL by what exists (3): Rush-Light (speed skew is the whole idea), Frost-Walking (fast, silent - speed),
+    Fledgling-Fat (dives at the weakest = Nightwing's existing swoop onto the weakest).
+  HONOURED IN PART - the stat skew or the lord's own way carries the gist, the specific trigger is NOT built (8):
+    Lace-Thin, Vigil-Sat, Brine-Frozen, Ball-Gowned, Winter-Hungry (skews only); Loft-Slung and Tithe-Barn (the
+    Grubmother's brood summon exists; dropping it on the back rank / per blow does not); Chime-Cold (Mourncoil's
+    slowing nova exists; slowing on being HIT does not).
+  REFUSED - each is a NEW MECHANIC, and Mr. E's 20:40 ruling is wiring-only (29): Latch-Fired (timed frontal burn),
+    Vestry-Kept (strikable weak point), Tax-Collecting (warmth-drain debuff), Widow-Wicked (burn over time),
+    Salt-Barren (herding), Barn-Wide (path blocker), Lamp-Shy (light-driven retreat), Fallen-Out (flank returners),
+    Spade-Armed (blind on hit), Kettle-Drummed (killable sub-target), Sutler-Led (weapon swap), Gable-Cling
+    (untargetable wall phase), Bell-Mouthed (party shield rattle), Pitch-Winged (glancing blows + oil trail),
+    Rook-Led (mob the last striker), Lantern-Digesting (hot breath), Ditch-Silted (turn-window weakness),
+    Charter-Sworn (strike ring), Cobbled-Over (burrow), Parish-Ledgered (first-struck fixation), Bone-Cartwright
+    (ramming cart), Lamp-Oiled (friendly-fire pile burn), Shroud-Folded (stripping armour), Fan-Cut (line cut),
+    Teacup-Poured (telegraphed wait), Chaperoned (blow-absorbing attendants), Well-Chained (tether), Ice-Hungry
+    (escalating freeze), Hearth-Fooled (brazier decoy).
+  CONTENT, PLEASE NOTE: the 29 are not dead - their names, shape lines and skews ARE spoken and fought. What will not
+  happen until a feature item is written for them is the specific trick. Do not write more trick-only shape lines
+  expecting them to be built; skew-and-flavour lines are fully honoured.
+- NOT TOUCHED: assets/monsters/creatures/ (12 bodies) is still unreferenced in scripts/ - the supervisor named it in
+  the same widening; it is next in line with art's creature numbers, not this hour.
+- Files: scripts/bestiary.gd (backup bestiary.gd.bak_d97, not staged), tools/_d97_lords.gd, renders/cycles/d97/*.png.
+- NO LIVE TWITCH TEST. 0 bits, nothing redeemed or cheered, nothing posted, no reward or setting touched.

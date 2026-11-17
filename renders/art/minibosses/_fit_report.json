@@ -198,11 +198,85 @@
     "hero_side.png",
     "hero_back.png"
    ]
+  },
+  "snuffer_chibi": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.21,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  },
+  "tallyman_chibi": {
+   "creature_h": 2.15,
+   "hero_h": 2.45,
+   "ratio": 0.88,
+   "pair_w": 3.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
+  },
+  "jointer": {
+   "creature_h": 2.25,
+   "hero_h": 2.45,
+   "ratio": 0.92,
+   "pair_w": 4.04,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ]
   }
  },
  "errors": [],
+ "measured": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer"
+ ],
+ "asked": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer"
+ ],
  "blank_check": {
-  "files": 14,
+  "files": 15,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

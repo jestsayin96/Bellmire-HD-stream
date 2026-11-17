@@ -357,3 +357,122 @@ set piece in the game today is still an ordinary creature with 2x hp.
 
 Original geometry, generated from raw vertex maths in `tools/art/`. No
 third-party asset is read by any of it.
+
+---
+
+# FIFTEENTH, 17 Nov 2026 - THE JOINTER (workshop, the second one)
+
+Taken because the team lead's 04:58 CT row says the art lane is dry and names
+art as the one lane the freeze lets invent. Nothing else in this run was built.
+
+## Why a second workshop miniboss and not a fifteenth theme
+
+MEASURED THIS RUN, not remembered. `floorgen.gd` THEMES holds **14 keys** and
+the set already has **14 minibosses, one per theme** - so there is no theme
+without a body and the "missing theme" framing is wrong. What IS missing is a
+second creature on the themes that actually fire the slot. From
+`dungeon_hd.gd:737-743`:
+
+| theme | miniboss weight | minibosses it can pick |
+|---|---|---|
+| barracks, workshop | **35** | one each |
+| normal floor | 15 | one |
+| prison | 15 | one |
+| shrine, crypt | 10 | one |
+
+The two themes that roll a miniboss **more than twice as often as any other**
+are the two that have always shown the viewer the same creature. The Jointer is
+the workshop's second.
+
+| key | title | h | theme | THE IDEA | wear |
+|---|---|---|---|---|---|
+| `jointer` | The Jointer | 2.25 | workshop | **IT COMES APART AND BOTH HALVES KEEP WORKING** - one pin holds two half-bodies; drive it or break it and there are two | 0.35 |
+
+Not a normal monster with more hit points, and **the idea is visible before the
+fight starts** (the Scrapwright lesson): real air down the middle, the pin
+standing 0.30 m proud either side, two lamps at two different heights, and one
+leg each on its own trestle block. Three arms - mallet, saw, and a spare hung
+on a peg - because an odd arm count is the cheapest way to stop a silhouette
+reading as a man. Wear 0.35 was the unused value in the set's 0.15-0.95 spread
+and is justified by what it is: a workshop thing in daily use, bright worked
+steel on timber gone dark with grease.
+
+Feed line: *"It is pinned together."*
+
+## Six passes, and what each one bought
+
+Changed ONE thing at a time, rendered, looked, measured. The instrument is
+`tools/art/_j_gap.py` - it windows on the seam, asserts the border, and **goes
+RED on an empty band**, because a metric over zero rows reads green and means
+nothing.
+
+| pass | change | front open_frac | 3/4 open_frac |
+|---|---|---|---|
+| 1 | first build | 0.767 | - |
+| 2 | rope turns wrap each half instead of crossing the seam | **0.885** | - |
+| 3 | the halves lean apart (V, not a parallel slot) | 0.885 | - |
+| 4 | clamp -> saw, spare arm moved outboard, warmer timber | 0.887 | 0.316 |
+| 5 | teeth bedded on the blade, arm hung on a modelled peg, seam light tied to the pin | 0.896 | - |
+| 6 | whole body yawed 20 deg into the sheet's view | 0.858 | **0.895** |
+
+**THE INSTRUMENT WAS WRONG FIRST AND THE PICTURE CAUGHT IT.** Its first version
+took the widest transparent run on each row and scored **0.90 open on a seam I
+could see was shut** - the widest gap on those rows is between the hanging
+mallet and the body, not the seam. It was rewritten to window on the figure's
+own centre of mass before any pass-2 number was believed. Had I trusted it, the
+rope fix would have looked unnecessary and the creature would have shipped with
+its one idea closed up.
+
+**TWO THINGS THAT DID NOT MOVE, SAID PLAINLY.** Pass 3's lean is clearly in the
+picture and is NOT in the number (0.8853 -> 0.8853): the hole is pinched at the
+plank corners beside the pin, so widening it above there does not move a mean
+of per-row maxima. And pass 4's warmer tint moved hue but not luminance spread
+(0.3328 -> 0.3331) - `bone` and `body` land within about 0.05 luminance under
+`minibossgen.build_miniboss`'s shared material maths, which I did NOT change
+because fourteen shipped bodies use it.
+
+**THE SIDE VIEW CANNOT TEST THIS CREATURE AT ALL** - `open_frac` 0.000 from the
+side is one half hiding the other, not a shut seam. That is a blindness, same
+shape as the gloves' side column, and no conclusion rests on it.
+
+## Fit - rendered on a body and looked at
+
+`renders/art/minibosses/jointer/hero_front.png`, `hero_side.png`, `hero_back.png`:
+the Jointer beside the **posed KayKit Knight at scale 1.0**, one ortho scale and
+one ground line. **Ratio 0.92 of the hero's 2.45 m**, pair width 4.04 m, frame
+fits. In `renders/art/minibosses/_fit_report.json` under `pairs.jointer`.
+
+Measured: 4 meshes, 1005 faces, 2.18 m footprint span - **CORRIDOR-SAFE**
+against the 11.0 m three-cell clear span. Blank check 15 files, 0 failures;
+border check 0 opaque px in the outer ring on every view.
+
+## THE FAULT LIST - nine, and the first two matter
+
+1. **It reads THIN beside the hero.** The KayKit chibi body is heavy and this
+   creature's timber columns are narrow against it; at pane distance it can
+   read as a trestle frame rather than a creature. The biggest remaining fault.
+2. **The lamp eyes are 2-3 px on the hero frame** and will not read on stream.
+3. From the **side** it is a stick with a mallet and a toothed comb - it is thin
+   front-to-back and the seam is invisible from there.
+4. The near half's cap block **overhangs its torso** to the left like a brim.
+5. The two lamps **do not match in brightness** front-on - the near pair reads
+   as dim diamonds, the far pair as bright circles. A facing artefact.
+6. **The pin is not materially separated from the timber** (see above - shared
+   material maths, deliberately not changed).
+7. The far half's upper arm **crosses in front of its own lamp block**.
+8. The two trestle feet **nearly touch at centre bottom**, which slightly
+   undercuts "two feet wide apart".
+9. The mallet head reads as a **plain dark drum** at small size.
+
+## For the game build lane - the art lane does NOT wire this
+
+Nothing here touches `bestiary.gd`, `delve.gd` or any `.gd` outside `tools/art/`.
+What the game build needs to do, when its own queue allows:
+
+1. `assets/monsters/minibosses/jointer.glb` - static, no armature, so a `model`
+   path and NO `anims` entry, same as the other fourteen.
+2. `scripts/delve.gd` `MB_FIT`: add `"jointer": 0.92` - MEASURED, from
+   `_fit_report.json`, not re-derived.
+3. The workshop set piece can now pick between the Scrapwright and the Jointer.
+4. The idea is a BEHAVIOUR. Shipped as a reskin with 2x hp it is wasted: the
+   split body is a promise to the viewer that this thing becomes two things.

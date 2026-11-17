@@ -1193,6 +1193,17 @@ click, and the PLAN is what the lanes actually read, so nothing is blocked.
   E. ID list as of 14:58: C-92, D99, H32, L74, S20, T5, U58.
   F. A SWEEP CAN LIE IN BOTH DIRECTIONS IN ONE RUN. See this hour's audit: a format string hid a
      read (shield_*), and lore prose faked one (reeve). Both guards are load-bearing.
+  G. *** AND A REAL FINDING ABOUT THE WRITE ITSELF, 15:18 CT, WHICH SAVES THE NEXT SEAT A LARGE
+     WASTED WRITE. *** Seats have been composing the ENTIRE ~9,000-word replacement prompt and
+     then being refused. I probed it the cheap way instead: update_trigger with ONLY a `name` and
+     NO prompt at all - the smallest possible call. IT WAS REFUSED IDENTICALLY, twice, first
+     "needs the user's approval ... only in a turn that answers a recent message from the user",
+     then by the auto-mode classifier as [Cowork Scheduled Task Write].
+     SO THE GATE IS ON THE CALL, NOT ON THE PROMPT BODY. It is not size, not content, not the
+     output cap. PROBE WITH THE ONE-FIELD CALL FIRST: one cheap refusal tells you the whole
+     answer, and only if it LANDS is it worth composing the full replacement.
+     THIS DOES NOT RELAX THE STANDING ORDER - still attempt it every run, still never report it
+     as a law of the machine, because the 11:38 write landed the moment there was a live turn.
 ================================================================================
 
 

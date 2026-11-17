@@ -3365,6 +3365,78 @@
         ],
         "flavour": "Violet at the knot, quiet everywhere else. Do not look into the knot."
       },
+      "w_arcane_vestry_mace": {
+        "name": "Vestry Mace",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Lives behind the vestry door. Carried out for funerals and for arguments about funerals."
+      },
+      "w_arcane_almoners_mace": {
+        "name": "Almoner's Mace",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Hands out the blessing and the bruise from the same end. The ledger counts both."
+      },
+      "w_arcane_bellfounder_mace": {
+        "name": "Bell-Founder's Mace",
+        "family": "arcane",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Poured from bell-metal off-cuts. Strikes once and rings once, which is enough."
+      },
+      "w_arcane_lamp_chased_mace": {
+        "name": "Lamp-Chased Mace",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Prayers chased into the head by the lampwright, a line at a time. Clean work, paid for."
+      },
+      "w_arcane_rune_banded_mace": {
+        "name": "Rune-Banded Mace",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Three bands on the head, each in a different hand. Nobody has agreed on the third."
+      },
+      "w_arcane_dragontooth_mace": {
+        "name": "Dragontooth Mace",
+        "family": "arcane",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "rarity": "legendary",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "A drake's molar sets the head. The priest who blessed it asked not to be named."
+      },
       "w_ranged_hunters_crossbow": {
         "name": "Hunter's Crossbow",
         "family": "ranged",
@@ -6891,5 +6963,6 @@
   "_note_c91": "C-91 (TAKE THIS NEXT 12:58, CONTENT row; game build S18 finding): nine NAMED blade-family daggers at tiers 1-3, three per tier, in equipment.weapons. Every tier 1-3 blade was a sword word, so the dagger meshes wired at S18 (gear.gd KINDS dagger, dagger_common/uncommon/rare) were reached only by the unnamed !forge path. gear.gd D94_KIND_WORDS reads a piece's kind from its NAME ('shortknife', 'knife', 'dagger' -> dagger), so each new name carries one of those words and no earlier-listed word. Same shape as every other piece: name, family, tier, tier_name, rarity (tier read straight across: 1 uncommon, 2 rare, 3 very rare), routes, flavour. No costs here. None is tier 4 or 5 and none is an artifact. Condition tracks tier: tier 1 is a working tool, tier 3 is paid-for and new-made. Tier 4+ daggers are not added because the dagger kit reuses ADV dagger.gltf there."
 ,
   "_note_c92": "C-92 (TAKE THIS NEXT 13:58, CONTENT row): count of NAMED tier 1-3 staff and crossbow pieces, read the way gear.gd piece_kind reads them (D94_KIND_WORDS, first word that is also a kind of the family). Before: staff 1/2/2 and crossbow 3/3/4 at tiers 1/2/3. Crossbow is not thin, no change. Staff tier 1 was one piece (Hedge-Witch's Staff, which reaches staff only because 'hedge' would read as sword and arcane has no sword kind), so two named tier 1 staves are added: Shepherd's Staff, Lamplighter's Staff. Neither name carries mace, wand, rod or stick, so both resolve to staff. Rarity uncommon. No artifact, no caravan. Same piece shape as the rest.",
-  "_note_c93": "C-93 (TAKE THIS NEXT 14:58, CONTENT row): count of NAMED greataxe pieces by tier, read the way gear.gd piece_kind reads them (D94_KIND_WORDS in order, first word that is also a kind of the family; axe family has kind greataxe from S20, and the word greataxe sits ahead of maul). Before: tier 1 = 0, tier 2 = 1 (Bearded Greataxe), tier 3 = 0, tier 4 = 1 (Ash-Maul Greataxe). The pack mesh axeDouble covers tiers 1-3, so tiers 1 and 3 reached it only through the unnamed forge path. Added two named pieces at each: Woodyard Greataxe, Charcoal-Burner's Greataxe (tier 1, uncommon); Lamp-Etched Greataxe, Bell-Yard Greataxe (tier 3, very rare). Every name carries the word greataxe so each resolves to kind greataxe. Tier 3 routes are shop/forged and forged/looted, never caravan-only, never artifact. Same piece shape as the rest. Tier 2 now 1 and tier 4 1 are untouched."
+  "_note_c93": "C-93 (TAKE THIS NEXT 14:58, CONTENT row): count of NAMED greataxe pieces by tier, read the way gear.gd piece_kind reads them (D94_KIND_WORDS in order, first word that is also a kind of the family; axe family has kind greataxe from S20, and the word greataxe sits ahead of maul). Before: tier 1 = 0, tier 2 = 1 (Bearded Greataxe), tier 3 = 0, tier 4 = 1 (Ash-Maul Greataxe). The pack mesh axeDouble covers tiers 1-3, so tiers 1 and 3 reached it only through the unnamed forge path. Added two named pieces at each: Woodyard Greataxe, Charcoal-Burner's Greataxe (tier 1, uncommon); Lamp-Etched Greataxe, Bell-Yard Greataxe (tier 3, very rare). Every name carries the word greataxe so each resolves to kind greataxe. Tier 3 routes are shop/forged and forged/looted, never caravan-only, never artifact. Same piece shape as the rest. Tier 2 now 1 and tier 4 1 are untouched.",
+  "_note_c94": "C-94 (TAKE THIS NEXT 15:58, CONTENT row): count of NAMED sceptre pieces by tier, read the way gear.gd piece_kind reads them. FINDING: kind `sceptre` is reachable. The word list has no 'sceptre' entry; the only word that reaches it is 'mace', and it reaches it because the first ['mace','mace'] row is skipped by the family gate (mace is an axe-family kind, not arcane), so ['mace','sceptre'] is the first match for an arcane name. 'mace' sits ahead of wand, rod, stick and staff, so an arcane name containing mace is a sceptre whatever else it says. The trap runs the other way for axe-family names: there 'mace' stays `mace`. Before: named arcane sceptres at tiers 1-5 were 0 / 0 / 0 / 0 / 0 (only the tier-0 starting kit, Parish Iron Mace, w_kit_cleric). The sceptre kit meshes cover every tier (hammer_A t1-2, hammer_B t3-5). Added six, every name carrying the word Mace: Vestry Mace, Almoner's Mace (tier 1, uncommon); Bell-Founder's Mace (tier 2, rare); Lamp-Chased Mace, Rune-Banded Mace (tier 3, very rare); Dragontooth Mace (tier 4, legendary). Result 2 / 1 / 2 / 1 / 0. Tier 5 is artifact-only and none was added. No artifact, no caravan-only; routes are shop/forged/looted. Same piece shape as the rest."
 }

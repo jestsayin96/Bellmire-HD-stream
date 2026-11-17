@@ -833,11 +833,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "quartermaster": {
+   "title": "The Quartermaster",
+   "theme": "barracks",
+   "idea": "IT ARMS THE ROOM - everything else in here takes a weapon off its sheaf",
+   "wear": 0.5,
+   "feed_line": "Something is handing out arms.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2804,
+   "size": [
+    2.97,
+    2.01,
+    2.35
+   ],
+   "footprint_span": 2.97,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1422533121162424,
+    "ortho": 3.0921225547790527,
+    "clip": [
+     8.197546005249023,
+     21.25319480895996
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 45,
+  "files": 48,
   "failures": []
  }
 }

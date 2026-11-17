@@ -1219,3 +1219,199 @@ three-cell corridor: **CORRIDOR-SAFE, not room-locked.**
 
 ### THE REGISTER AFTER THIS RUN
 **11 converted + 2 measured-and-skipped, and ONE REMAINS: the SNARER.**
+
+## REGISTER CONVERSION 12 OF 14 - THE SNARER (`snarer_chibi`). THE LAST ONE.
+
+**Ratio 1.00 of a 2.45 m hero** - pair span **4.51 m** inside the 5.60 m fixed frame -
+footprint **3.73 m, CORRIDOR-SAFE** (4.26 m at the recommended `h` 2.80, against an
+11.0 m three-cell corridor) - **4 meshes / 2523 faces**, static, no armature -
+**blank check 42 files 0 failures** (gen) and **2 files 0 failures** (fit) - BLENDER_EEVEE.
+Sheet: `renders/art/minibosses/snarer_register.png` (original beside conversion, one ortho
+scale, one ground line). Per-view: `renders/art/minibosses/snarer_chibi/`.
+
+### WHAT THE ORIGINAL ACTUALLY READS AS - looked at first, before anything was changed
+* **FRONT** - a pipe-cleaner man under **three fishing rods**. 0.052 poles 2.0 m tall are
+  rods, and a 0.20 ring hanging in clear air off a 0.013 cord is a croquet hoop. Nothing
+  on the floor at all, on the one creature in the file whose whole idea is the floor.
+* **SIDE** - **THE MECHANIC IS GONE, and it is the Sower's pass 2 exactly.** The three roots
+  sit at x -1.34 / +1.12 / +1.62 with 0.66 m of total y between them, so at azimuth 90 the
+  poles stack into a bundle of straws and **all three nooses go edge-on and vanish** - a
+  ring is a PLANE, and a plane seen along itself is a line. What is left is a man in a tepee.
+* **BACK** - the rings read and the man does not: every member, both poles and the floor
+  props land in one value.
+The one thing that works in all three is **the bent pole**, the only curve in the fourteen.
+
+### THE VALUE PLAN, MEASURED FIRST
+At tint (0.50, 0.42, 0.32) and wear 0.55 `body` lands at luminance **0.339** and `bone` at
+**0.404**: a **19% separation, the widest pair in the file** (the Boiler's was 13.5%, the
+Sower's 10%), with `dark` 5.1x below `body`. 19% carries a whole pale MASS, not just an
+edge - so for once the pale thing is the STRUCTURE and the man is the hole in it:
+* the **poles are `bone`** and they are the silhouette;
+* the **man is `body`** with every break `dark` (boots, belt, cowl) and **no pale object at
+  all** - he is the dark middle of a pale cage, which nothing else in the fourteen does;
+* the **glow is the set line and nothing else**: the coil at his hip, the cord out of it,
+  three nooses, three trip lines and three taut cords back up to the pole tips. One
+  material, one continuous network, drawn across the whole footprint.
+
+### THREE REGISTER DECISIONS, ALL DROPS, ALL SAID OUT LOUD
+1. **THE NOOSES COME OUT OF THE AIR AND ARE SET OPEN ON THE GROUND.** A ring in the XZ plane
+   is invisible at azimuth 90 and a ring on a string is the Cook's lollipop with a hole in
+   it. A noose lying open on the run, staked, under a cord to a bent pole, is also **what a
+   spring snare actually is** - the fix and the truth are the same move.
+2. **THE LOOSE PEGS AND THE FLOOR COIL ARE DROPPED.** Crumbs at cell size that said nothing
+   the snares do not. The peg becomes each snare's own trigger - one prop, three sites - and
+   the coil moves to his hip, where it is the end of the lit network.
+3. **NO HAT.** The file carries the Snuffer's cone, the Sower's brim, the Cook's cap and the
+   Boiler's brow rag; a fifth crown is a repeat. He gets a **cowl pushed back**, so the mass
+   is at the shoulders, where nothing else in the fourteen puts one.
+
+### THE ONE NEW IDEA: THE ROOM IS DRAWN BEFORE THE FIGHT STARTS
+The original said SNARES; it never said ALREADY SET. Three lit trip lines now run stake to
+stake and close a triangle round him a hand's height off the floor, and **he is standing
+inside it**. A viewer who sees it once knows where they are not allowed to walk, which is
+the whole fight. A line at 0.12 m is a line from every azimuth; a figure painted on the
+floor would be a smear at 6 degrees of elevation.
+
+### THE LAYOUT IS SOLVED, NOT EYEBALLED, AND IT NAMED ITS OWN TEST BEFORE THE RUN
+Sites at plan bearings **80 / 192 / 302** at radii 1.05 / 0.75 / 1.25, roots 0.55 further
+out - the arrangement maximising the **minimum projected gap between any two sites and any
+two roots over azimuths 0, 38, 90 and 180**. That minimum is **0.70 m**. The test, stated
+in advance: *three separate snares must be countable in all four views, the side included.*
+**Result: they are, but only by their cords - at azimuth 90 just two of the three pole arcs
+clear the man.** Half a pass, honestly.
+
+### SIX PASSES, AND WHAT EACH ONE BOUGHT
+1. **Pass 2 - A SNARE ON A CAMERA'S DEPTH AXIS LANDS ON THE CREATURE, AND NO PLAN LAYOUT CAN
+   AVOID IT.** At azimuth 38 bearing 308 is exactly 38 - 90, so the tallest pole's root AND
+   tip projected to **x = 0.000** and a 0.105 pale pole ran vertically down through his head,
+   his chest and between his feet. The layout had been solved snare-against-snare and never
+   snare-against-MAN - and it **cannot** be solved for both: three snares ringed round a
+   figure give 6 points x 4 cameras = 24 projected positions, and the best rotation of the
+   whole 360 still leaves one of them 0.131 m off his centre line. **THE RULE: when a
+   constraint cannot be met in plan, move the member OUT OF PLAN.** Rotate -6 degrees (0.000
+   -> 0.131 m, and a rotation cannot touch the snare-against-snare gap), then **bow each pole
+   0.30 m sideways at mid-height**, sign computed per pole to carry it away from the centre
+   line at the acceptance camera. A loaded sapling bows sideways as well as over.
+2. **Pass 2 - THE EMPTY HOOD WAS A SECOND HEAD.** A 0.30 dark ellipsoid behind the shoulder
+   at 1.455, against a 0.300 skull at 1.74, is not read as cloth: front and back, it is a
+   hump the size of his own head and the eye counts two. A pushed-back hood is a collar with
+   nothing in it, so the collar is now the whole of it.
+3. **Pass 3 - THE CORD WAS OUTSHOUTING THE THING IT IS TIED TO.** At 0.028 and emission 3.2
+   the three cords stood up as blown-white **strip lights**, the boldest objects in every
+   view, one of them straight down his chest - and a cord is the least interesting part of a
+   snare. Halved to 0.015. The weight of the lit network belongs to the nooses and the lines.
+4. **Pass 3 - FROM THE BACK HE WAS A STACK OF PLATES.** Pelvis, belt and cowl were three
+   flat discs at 0.345, 0.445 and 0.395 across, each wider than deep, each at its own height.
+   **THE RULE: widths up a figure must STEP, not alternate** - narrow, wide, narrow is read
+   as objects stacked; narrowing all the way up is read as one body. The cowl is now
+   narrower than his own shoulders and deeper.
+5. **Pass 4 - HE WAS A SEGMENTED ABDOMEN, AND THE CAUSE IS ARITHMETIC.** A barrel's
+   half-width falls to zero at its own bottom pole, so a barrel 0.395 tall centred at 0.97
+   ENDS at 0.575 while the pelvis topped out at 0.695: the two met at a **pinch** with the
+   belt sitting in it. **Two stacked ellipsoids read as one body only where the upper one
+   reaches PAST the lower one's equator.** Barrel to 0.455 tall, dropped to 0.95. The belt
+   became a band INSIDE the silhouette (0.352 against the barrel's own 0.372 at that height)
+   instead of a 0.028-proud flange.
+6. **Pass 4 - 0.30 of bow was a tangent, not a clearance.** It put the crossing pole's waist
+   0.470 from the centre line against 0.45 of shoulder: 20 mm. 0.42 of bow puts it at 0.588.
+7. **Pass 5 - PAYING A FAULT THE WHOLE FILE CARRIES.** The Boiler's own fault 10 is "his
+   mitts do not read as gripping - balls on the ends of tubes", and every chibi here has the
+   same ball. **A fist round a shaft is not a sphere, it is a short cylinder whose axis is
+   the shaft's.** The hands are aimed along the beating pole, so every azimuth sees a band
+   wrapped ACROSS the staff instead of a bead threaded ON it.
+8. **Pass 6 - ON THE DARK CELL THE LIT NET WAS A WHITE SLAB.** Everything pale reads on a
+   white fit sheet; the contact sheet is the dark one, and at emission 3.2 the rings at 0.036
+   and the lines at 0.030 bloomed into one bright platform he was standing on - three nooses
+   and three lines counted as one puddle. **THE RULE: a lit member's radius must be judged on
+   the DARK field, because emission blooms outward and a pale field hides the bloom.** Ring
+   0.027, line 0.021: the same drawing with a finer pen.
+
+### CARRIED FORWARD, AND ONE FAULT PARTLY PAID
+* **Shins `body`, boot `dark`** - the leg breaks in value at the ankle (Sower, Boiler).
+* **The belt is a flattened ELLIPSOID, not the file's box** (the Sower's fault 5, paid on the
+  Boiler and kept): a ring at the waist has no corner to show from any azimuth.
+* **THE SPARE STAKES ON HIS BACK** - three short pale stakes under a dark strap. This is a
+  first instalment on a fault the Sluicekeeper (2), the Sower (4) and the Boiler (8) all
+  carry unpaid: *the back is a featureless barrel and both arms disappear round the front.*
+  It also says he is not finished. It is an instalment, not a payment - see fault 6 below.
+
+### TWELVE FAULTS I CAN STILL SEE
+1.  **At azimuth 90 only two of the three pole arcs clear the man.** The third merges with
+    his silhouette and the three snares are countable there only by their lit cords. This is
+    the test I set in advance and it is half-failed, by construction, not by oversight.
+2.  **The bowed pole clears his shoulders and not his shins.** The bow is zero at root and
+    tip and maximal at mid-height, so at azimuth 38 the pole still crosses his lower legs.
+3.  **The fist reads as a BLOCK.** A 10-sided cylinder on a staff is a prism - a collar with
+    no thumb and no taper. Better than the ball it replaced and still not a hand.
+4.  **The nooses are rings of even thickness.** A real noose has a running knot and a free
+    tail; nothing here says the loop can close, which is the one thing it has to say.
+5.  **Nine stakes read as black teeth** round the floor at cell size - a picket fence, not
+    evidence of a man having staked ground.
+6.  **The spare stakes read from the back and the side only** - two views out of four, for a
+    prop costing four members. The arms still have no silhouette behind him.
+7.  **The beating pole's striking end is a plain knob.** Nothing on it says beating; it could
+    be a walking staff with a bad foot.
+8.  **At wear 0.55 nothing reads half-worn.** The poles are fresh-cut and the man is clean.
+    The number says woodsman's kit used hard and kept; the model says new.
+9.  **The head is a bare ball** - two eyes and a collar, and no structure in between. It is
+    the plainest head in the file, and plain is the voice, but this is close to blank.
+10. **The trip-line triangle passes 0.49 m from his own centre**, so from every azimuth one
+    lit line crosses his boots. He is inside his lines, which is the read, and it also means
+    the net never has clear air round the figure.
+11. **A trip line and a noose both sit at 0.10-0.155 m**, so where they meet, line, ring and
+    stake fuse into one lit blob at the stake - three of those, one per corner.
+12. **2523 faces, second heaviest in the file** behind the Sluicekeeper's 2623 - most of it
+    in three 18-segment noose rings and nine stakes.
+
+### WIRING THE GAME BUILD LANE MUST DO (I touched no `.gd`)
+`scripts/bestiary.gd` - if `snarer_chibi` is adopted in place of `snarer`, point the
+Snarer's `model` at `assets/monsters/minibosses/snarer_chibi.glb`, **no `anims` entry**
+(static, no armature), and set `h` to **2.80**. Footprint at that `h` is 4.26 m against an
+11.0 m three-cell corridor: **CORRIDOR-SAFE, not room-locked.**
+
+### THE REGISTER AFTER THIS RUN
+**12 converted + 2 measured-and-skipped = 14. THE REGISTER IS CLOSED.**
+
+================================================================================
+## 17 NOV - REGISTER AUDIT BEFORE D96 BUILDS ON IT. TWO THINGS ARE WRONG.
+
+The team lead asked, in the ART row: *"D96 goes to the game build next and it
+is told to use YOUR measured numbers (renders/art/minibosses/_fit_*_register
+.json) rather than re-derive scale. If a register entry is stale or you would
+not stand behind one of those ratios, say which, now, before it is built on."*
+
+I measured it rather than remembering it - every `pairs` key in every register
+against `git ls-files assets/monsters/minibosses`. **THE RATIOS ARE SOUND. THE
+KEYS ARE NOT.**
+
+### 1. FOUR REGISTER KEYS NAME A MODEL THAT IS NOT IN THE REPO
+`gaoler_chibi`, `porter_chibi`, `sexton_chibi`, `stoker_chibi` each have a
+ratio, a pair span and a `fits_frame` in a register - and
+`git log --all -- assets/monsters/minibosses/<name>.glb` is **EMPTY for all
+four**. They were never committed on any branch. A measurement of a model that
+does not exist is exactly the stale entry that was asked about.
+**THE RATIO IS STILL USABLE** - a chibi conversion measured 0.96 for the Gaoler
+and the Gaoler's own `gaoler.glb` IS committed - but **D96 MUST POINT `model`
+AT THE PLAIN `<name>.glb`, NOT AT `<name>_chibi.glb`, FOR THOSE FOUR.**
+
+Committed and safe to name directly: `boiler_chibi`, `cook_chibi`,
+`sluicekeeper_chibi`, `snarer_chibi`, `sower_chibi`, `tallyman_chibi`.
+
+### 2. THE SNUFFER'S REGISTER MEASURED NOTHING
+`_fit_snuffer_register.json` has `ok: true`, `errors: []`, and
+**`pairs: {}` - no creature in it at all.** `snuffer.glb` is committed and is
+real; it simply has no ratio on record. D96 must either re-measure it or carry
+it at ratio 1.00 and say so. Do not read `ok: true` as "the Snuffer was
+measured": it says the HARNESS ran, not that it found anything. That is trap 2
+in a new coat and the register itself did not catch it.
+
+### THE WHOLE PICTURE, MEASURED 17 NOV
+20 `.glb` committed under `assets/monsters/minibosses`; 19 keys across the 11
+registers; 4 of those keys have no model; 5 committed models have no register
+entry at all - `bellman`, `drillmaster`, `scrapwright`, `snarer`, `snuffer`.
+The first three predate the register conversion and the last two are the base
+models whose chibi conversions were measured instead.
+
+Ratios I stand behind, unchanged: every value in the registers was taken off an
+evaluated depsgraph against the same 2.45 m posed Knight, with the blank check
+green and `errors: []` on all eleven files.

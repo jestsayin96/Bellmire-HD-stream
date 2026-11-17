@@ -609,6 +609,38 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "snarer_chibi": {
+   "title": "The Snarer (chibi)",
+   "theme": "wood",
+   "idea": "IT HAS ALREADY SET THE ROOM - rebuilt in the game's own register",
+   "wear": 0.55,
+   "feed_line": "The lines were here before you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2523,
+   "size": [
+    2.65,
+    3.73,
+    2.45
+   ],
+   "footprint_span": 3.73,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.595877177285081,
+    "ortho": 5.745333194732666,
+    "clip": [
+     9.898907661437988,
+     24.100637435913086
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],

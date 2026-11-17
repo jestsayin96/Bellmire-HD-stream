@@ -3628,3 +3628,364 @@ def boiler_chibi():
 
 
 BUILDERS.update({"boiler_chibi": boiler_chibi})
+
+
+# ===========================================================================
+# REGISTER CONVERSION 12 OF 14 - THE SNARER, 17 Nov. THE LAST ONE.
+#
+# Same read, same props, same idea, rebuilt in the game's own register; see
+# the block above drillmaster_chibi for the measured Knight proportions and
+# the one above snuffer_chibi for the rule that register is MASS AND COUNT.
+#
+# WHAT THE ORIGINAL ACTUALLY READS AS, looked at before anything was changed
+# (renders/art/minibosses/snarer/hero_front|side|back.png):
+#   FRONT - A PIPE-CLEANER MAN UNDER THREE FISHING RODS. 0.052 poles 2.0 m
+#           tall are rods, and a 0.20 ring hanging in clear air off a 0.013
+#           cord is a croquet hoop, not a noose. Nothing on the floor.
+#   SIDE  - THE MECHANIC IS GONE, AND IT IS THE SOWER'S PASS 2 EXACTLY. The
+#           three roots sit at x -1.34 / +1.12 / +1.62 with 0.66 m of total y
+#           between them, so at azimuth 90 the poles stack into a bundle of
+#           straws and ALL THREE NOOSES GO EDGE-ON AND VANISH - a ring is a
+#           PLANE, and a plane seen along itself is a line. What is left is a
+#           man inside a tepee of sticks.
+#   BACK  - the rings read, and the man is a featureless tan mannequin: every
+#           member, both poles and the floor props land in one value.
+# The one thing that works in all three is THE BENT POLE ITSELF - the only
+# curve in the fourteen - so the conversion keeps the curve and throws away
+# everything that hid what hangs off it.
+#
+# THE VALUE PLAN, MEASURED FIRST. At tint (0.50, 0.42, 0.32) and wear 0.55 the
+# generator's `body` lands at luminance 0.339 and its `bone` at 0.404: a 19%
+# separation, THE WIDEST PAIR IN THE FILE (the Boiler's was 13.5%, the Sower's
+# 10%), and `dark` sits 5.1x below `body`. 19% will carry a whole pale MASS
+# against the man, not just one pale edge - so:
+#   the POLES are `bone` and they are the silhouette,
+#   the man is `body`, every break on him is `dark` (boots, belt, cowl), and
+#       he needs no pale object at all - he is the dark middle of a pale cage,
+#   the GLOW IS THE SET LINE AND NOTHING ELSE: the coil at his hip, the cord
+#       out of it, the three nooses, the three trip lines between them and the
+#       three taut cords climbing back to the pole tips. ONE material, ONE
+#       continuous network, drawn across the whole footprint.
+#
+# THREE REGISTER DECISIONS, ALL SAID OUT LOUD:
+#  1. THE NOOSES COME OUT OF THE AIR AND ARE SET OPEN ON THE GROUND. A ring
+#     standing in the XZ plane is invisible at azimuth 90 and a ring on a
+#     string is the Cook's lollipop with a hole in it. A noose LYING OPEN ON
+#     THE RUN, held by stakes, under a cord to a bent pole, is also what a
+#     spring snare actually is - so the fix and the truth are the same move.
+#  2. THE LOOSE PEGS AND THE COIL ON THE FLOOR ARE DROPPED. Two 0.030 cones
+#     and a 0.21 ring lying in the dirt were crumbs at cell size and said
+#     nothing the snares do not say. The peg becomes each snare's OWN trigger
+#     - one prop, three sites - and the coil moves onto his hip, where it is
+#     the end of the lit network and ties the man to his own lines.
+#  3. NO HAT. The file already carries the Snuffer's cone, the Sower's brim,
+#     the Cook's cap and the Boiler's brow rag; a fifth crown is a repeat, not
+#     a character. He gets a COWL PUSHED BACK off his head - the silhouette
+#     gain is at the shoulders, where nothing else in the fourteen puts one.
+#
+# THE CONVERSION'S ONE NEW IDEA: THE ROOM IS DRAWN BEFORE THE FIGHT STARTS.
+# The original said SNARES; it never said ALREADY SET. Here three lit trip
+# lines run stake to stake between the three snares and close a triangle round
+# him, a hand's height off the floor, and HE IS STANDING INSIDE IT. A viewer
+# who sees this once knows where they are not allowed to walk, which is the
+# whole fight - and a line at 0.12 m is a line from every azimuth, where a
+# figure painted on the floor would be a smear at 6 degrees of elevation.
+#
+# THE PLAN LAYOUT IS SOLVED, NOT EYEBALLED, AND IT NAMES ITS OWN TEST.
+# The original failed at azimuth 90 because its three snares differ almost
+# only in x. So the three sites sit at plan bearings 86 / 198 / 308 at radii
+# 1.05 / 0.75 / 1.25, and the roots 0.55 further out on the same bearings -
+# the arrangement that MAXIMISES THE MINIMUM PROJECTED GAP between any two
+# sites and any two roots over every camera this piece is shot from (azimuths
+# 0, 38, 90 and 180). That minimum is 0.70 m. THE TEST, NAMED BEFORE THE RUN:
+# three separate snares must be countable in all four views, the side view
+# included. If two of them touch anywhere, the layout failed, not the eye.
+#
+# AND IT PAYS A FAULT OF THE BOILER'S THAT THE BOILER DID NOT KNOW IT HAD.
+# Pass 6 there derived the right rule - a plan diagonal is a NUMBER, pick the
+# one that maximises the minimum angle to every camera - and then took 64
+# degrees, reporting a worst case of 26. 64 IS NOT THE MAXIMIN. A member is
+# foreshortened by the camera's DEPTH axis, which lies at azimuth - 90, so the
+# bad bearings for azimuths 0 / 38 / 90 / 180 are 90, 128 and 0 modulo 180,
+# and the bearing furthest from all three is 45 DEGREES, worst case 45 - not
+# 26. The beating pole, and the man's whole axis with it, is on 45.
+# ===========================================================================
+CANON.update({
+    "snarer_chibi": ("The Snarer (chibi)", 2.45, (0.50, 0.42, 0.32),
+                     (0.80, 0.90, 0.40), "wood",
+                     "IT HAS ALREADY SET THE ROOM - rebuilt in the game's own register",
+                     0.55, "The lines were here before you."),
+})
+
+
+def snarer_chibi():
+    """The Snarer in the game's register. Same read - A HUNCHED MAN STANDING
+    INSIDE HIS OWN LINES WITH THREE LOADED POLES BENT OVER HIM AND A BEATING
+    POLE DRIVING DOWN TO THE FLOOR - with the wire man taken to a chibi
+    weight, the hanging rings set open on the ground where a snare belongs,
+    the loose floor props folded into the snares themselves, and the lit cord
+    run right through from his hip to the three pole tips.
+
+    HE IS THE DARK MIDDLE OF A PALE CAGE. 19% is the widest body/bone pair in
+    the file, so for once the pale thing can be the whole structure and the
+    man can be the hole in it. Nothing else in the fourteen is read that way
+    round."""
+    P = Parts("snarer_chibi")
+    MX, MY = 0.0, 0.0
+    HIP = 0.44                                   # lower than the Sower: he works bent
+    # HIS AXIS IS THE MAXIMIN DIAGONAL, 45 degrees in plan - see the header for
+    # why 45 and not the Boiler's 64. F is where he faces and where the beating
+    # pole drives; S is across him.
+    FX, FY = -0.7071, -0.7071
+    SX, SY = 0.7071, -0.7071
+    bang = math.atan2(FY, FX) + math.pi / 2.0
+
+    # --- LEGS. Stubs, planted wide across S with the lead foot carried out
+    # along F. SHINS ARE `body` AND ONLY THE BOOT IS `dark` (carried forward
+    # from the Sower and the Boiler - the leg breaks in value at the ankle).
+    for s in (-1, 1):
+        st = 0.14 if s > 0 else -0.16            # the stride, along his line
+        hx, hy = SX * s * 0.21, SY * s * 0.21
+        fx, fy = SX * s * 0.235 + FX * st, SY * s * 0.235 + FY * st
+        limb(P, [(MX + hx, MY + hy, HIP),
+                 (MX + (hx + fx) * 0.5, MY + (hy + fy) * 0.5, 0.21),
+                 (MX + fx, MY + fy, 0.11)], 0.150, 0.135, 'body')
+        P.add(L.box(0.30, 0.41, 0.13), 'dark',
+              loc=(MX + fx + FX * 0.05, MY + fy + FY * 0.05, 0.065),
+              rot=(0.0, 0.0, bang))
+
+    # --- TORSO. Pelvis bridging the hips (the Cook proved the back view is two
+    # stumps under a floating ball without one) and a barrel LEANING FORWARD
+    # along F, because this is a man who works bent over.
+    # PASS 4 - HE WAS A SEGMENTED ABDOMEN, AND THE CAUSE IS ARITHMETIC, NOT
+    # TASTE. The barrel's half-width falls to zero at its own bottom pole, so
+    # a barrel 0.395 tall centred at 0.97 ENDS at 0.575 while the pelvis ball
+    # topped out at 0.695 - the two met at a PINCH, with the belt disc sitting
+    # in the pinch, and from every azimuth that is three stacked segments, not
+    # a man. THE RULE: two stacked ellipsoids read as ONE BODY only where they
+    # overlap at a width worth seeing - make the upper one reach PAST the
+    # lower one's equator. The barrel is now 0.455 tall and dropped to 0.95,
+    # so it reaches 0.495 and swallows the pelvis equator at 0.53.
+    P.add(L.sphere(0.345, 0.295, 0.185, 14, 9), 'body', loc=(MX, MY, 0.53))
+    P.add(L.sphere(0.425, 0.355, 0.455, 16, 10), 'body',
+          loc=(MX + FX * 0.10, MY + FY * 0.10, 0.95))
+    # THE BELT IS AN ELLIPSOID, NOT THE FILE'S BOX - the Sower's fault 5, paid
+    # on the Boiler and kept: a ring at the waist has no corner to show at
+    # three-quarter.
+    # and the belt is a BAND INSIDE HIS OWN SILHOUETTE, not a flange on it: at
+    # z 0.715 the barrel's own half-width is 0.372, so 0.400 of belt stood
+    # 0.028 proud all the way round and read as a plate. 0.352 wide and 0.088
+    # deep is a strap round a body.
+    P.add(L.sphere(0.352, 0.312, 0.088, 14, 6), 'dark',
+          loc=(MX + FX * 0.05, MY + FY * 0.05, 0.715))
+    # the rear shoulder rides HIGH (the Sluicekeeper's device: the arm doing
+    # the work explains the posture) and the lead shoulder drops into the drive
+    SHB = (MX - FX * 0.10 + SX * 0.33, MY - FY * 0.10 + SY * 0.33, 1.30)
+    SHA = (MX + FX * 0.10 - SX * 0.33, MY + FY * 0.10 - SY * 0.33, 1.19)
+    for sh in (SHA, SHB):
+        P.add(L.sphere(0.198, 0.190, 0.180, 11, 7), 'body', loc=sh)
+
+    # --- HEAD, carried forward of the shoulders on the hunch, and NO HAT. The
+    # cowl is pushed back off it onto the shoulders, which is the one place in
+    # the fourteen nothing else puts a mass.
+    P.add(aim(L.cone(0.145, 0.178, 0.17, 10), (MX + FX * 0.16, MY + FY * 0.16, 1.36),
+              (0.0, 0.0, 1.0)), 'body')
+    SK = (MX + FX * 0.21, MY + FY * 0.21, 1.74)
+    P.add(L.sphere(0.300, 0.288, 0.290, 15, 10), 'body', loc=SK)
+    for s in (-1, 1):
+        ex, ey = SX * s * 0.108, SY * s * 0.108
+        P.add(L.sphere(0.058, 0.058, 0.058, 8, 6), 'bone',
+              loc=(SK[0] + ex + FX * 0.262, SK[1] + ey + FY * 0.262, 1.715))
+        P.add(L.sphere(0.029, 0.029, 0.029, 8, 6), 'dark',
+              loc=(SK[0] + ex + FX * 0.292, SK[1] + ey + FY * 0.292, 1.721))
+    # PASS 3 - FROM THE BACK HE WAS A STACK OF PLATES. Pelvis, belt and cowl
+    # were three flat discs at 0.345, 0.445 and 0.395 across, each wider than
+    # it was deep and each at its own height, so the back view read as a pile
+    # of saucers with a ball on top. THE RULE: widths up a figure must STEP,
+    # not alternate - a run of discs that go narrow, wide, narrow is read as
+    # separate objects stacked, and a run that narrows all the way up is read
+    # as one body. The cowl is now narrower than his own shoulders (0.330
+    # against 0.396 of shoulder span) and deeper, so it is a collar round the
+    # neck rather than a fourth plate.
+    P.add(L.sphere(0.330, 0.310, 0.185, 14, 8), 'dark',          # the cowl, down
+          loc=(MX - FX * 0.07, MY - FY * 0.07, 1.335))
+    # PASS 2 - THE EMPTY HOOD WAS A SECOND HEAD. A 0.30 x 0.27 x 0.195 dark
+    # ellipsoid sitting behind and above the shoulder at 1.455, against a skull
+    # of 0.300 at 1.74, is not read as cloth: from the front and the back it is
+    # a HUMP THE SIZE OF HIS OWN HEAD on one shoulder, and the eye counts two.
+    # A pushed-back hood is a collar with nothing in it, so the collar is now
+    # the whole of it - the mass at the shoulders stays and the second skull
+    # goes.
+
+    # --- THE THREE SNARES. Bearing, site radius, pole height, noose radius.
+    # The bearings and radii are the solved layout from the header - do not
+    # nudge them by eye, the 0.70 m worst-case gap is what they are for.
+    REACH = 0.55
+    # PASS 2 - A SNARE SITTING ON A CAMERA'S DEPTH AXIS LANDS ON THE CREATURE
+    # ITSELF, AND NO PLAN LAYOUT CAN AVOID IT. At azimuth 38 - the file's own
+    # acceptance view - bearing 308 is exactly 38 - 90, so BOTH the tallest
+    # pole's root and its tip projected to x = 0.000 and a 0.105 pale pole ran
+    # vertically down through his head, his chest and between his feet. The
+    # layout was solved for snare-against-snare and never for snare-against-
+    # MAN. It cannot be solved for both: three snares ringed round a figure
+    # give 6 points x 4 cameras = 24 projected positions, and the best rotation
+    # of this layout still leaves one of them 0.13 m off his centre line (the
+    # whole 360 was scanned). SO THE FIX IS NOT IN PLAN, AND THIS IS THE RULE
+    # WORTH KEEPING: when a constraint cannot be met in plan, move the member
+    # OUT OF PLAN. Two changes, both measured:
+    #   (a) rotate the solved layout -6 degrees, to the rotation that MAXIMISES
+    #       the minimum distance from the creature's own centre line over all
+    #       four cameras - 0.000 m to 0.131 m - while the 0.70 m snare-against-
+    #       snare gap the layout was solved for is unchanged by a rotation.
+    #   (b) BOW EACH POLE SIDEWAYS 0.30 m at mid-height, across its own
+    #       bearing, with the sign chosen per pole to carry it AWAY from the
+    #       centre line in the three-quarter view. A loaded sapling bows
+    #       sideways as well as over, so this is truth before it is a fix. The
+    #       crossing pole's waist goes from 0.171 m off his centre to 0.470,
+    #       which is past the 0.45 m half-width of his own shoulders: the pole
+    #       now passes BESIDE him and reads as depth instead of bisecting him.
+    SNARES = ((80.0, 1.05, 1.95, 0.30), (192.0, 0.75, 1.55, 0.26),
+              (302.0, 1.25, 2.15, 0.34))
+    sites = []
+    for th, rr, ph, nr in SNARES:
+        a = math.radians(th)
+        ux, uy = math.cos(a), math.sin(a)
+        sx, sy = MX + ux * rr, MY + uy * rr
+        sites.append((sx, sy, nr))
+        # THE POLE: a loaded sapling, THICK at the root and whippy at the tip,
+        # rooted REACH further out and arcing inward over its own snare so the
+        # tip stands directly above the noose. Seven points on a quarter bend,
+        # because a loaded sapling is a CURVE - the only curves in the file.
+        rootx, rooty = MX + ux * (rr + REACH), MY + uy * (rr + REACH)
+        # the lateral bow and its sign - see pass 2 above. tx,ty is across the
+        # pole's own bearing; the sign is whichever carries its waist further
+        # from x = 0 in the 38-degree view, computed, not picked.
+        tx, ty = -math.sin(a), math.cos(a)
+        xm = (rr + 0.707 * REACH) * math.cos(a - math.radians(38.0))
+        tp = math.sin(math.radians(38.0) - a)
+        # PASS 4 - 0.30 of bow put the crossing pole's waist 0.470 from the
+        # centre line against 0.45 of shoulder: it cleared him by 20 mm, which
+        # is not clearance, it is a tangent. 0.42 puts it at 0.588 - a clear
+        # gap of air between the pole and his arm - and a sapling under enough
+        # load to hold a snare bows further than a tenth of its height anyway.
+        bow = 0.42 * (1.0 if xm * tp > 0.0 else -1.0)
+        arcpts = []
+        for t in (0.0, 0.22, 0.44, 0.63, 0.79, 0.92, 1.0):
+            b = (math.pi / 2.0) * t
+            sw = bow * math.sin(math.pi * t)          # 0 at root, 0 at tip
+            arcpts.append((rootx - ux * REACH * (1.0 - math.cos(b)) + tx * sw,
+                           rooty - uy * REACH * (1.0 - math.cos(b)) + ty * sw,
+                           ph * math.sin(b)))
+        limb(P, arcpts, 0.105, 0.032, 'bone')
+        # the whipping at the tip, where the cord is tied on. A pale member
+        # needs a `dark` BOUNDARY to end on - the Boiler's pass 4, kept.
+        P.add(L.sphere(0.072, 0.072, 0.052, 9, 6), 'dark', loc=(sx, sy, ph - 0.015))
+        # THE CORD, taut and vertical from tip to trigger. A vertical line is
+        # a line from every azimuth there is, and that is what makes the three
+        # snares COUNTABLE at azimuth 90, where only two of the three pole
+        # arcs ever clear the man.
+        # PASS 3 - THE CORD WAS OUTSHOUTING THE THING IT IS TIED TO. At 0.028
+        # of radius and emission 3.2 three of them stood up as blown-white
+        # STRIP LIGHTS, the boldest objects in every view, with one of them
+        # straight down the middle of his chest - and a cord is the least
+        # interesting part of a snare. Halved to 0.015: still a continuous lit
+        # line from every azimuth, no longer the loudest. The weight of the
+        # lit network belongs to the NOOSES AND THE LINES ON THE GROUND, which
+        # are the thing a player has to read and not walk into.
+        limb(P, [(sx, sy, ph - 0.03), (sx, sy, 0.30)], 0.015, 0.015, 'glow')
+        # the trigger peg it is holding down
+        P.raw(aim(L.cone(0.052, 0.034, 0.32, 8), (sx, sy, 0.0), (0.0, 0.0, 1.0)), 'dark')
+        # THE NOOSE, SET OPEN ON THE RUN a hand above the floor, held by three
+        # stakes. The stakes are what keep an on-floor ring from reading as a
+        # lit smear at 6 degrees: they are vertical ticks at its own radius.
+        # PASS 6 - ON THE DARK CELL THE LIT NET WAS A WHITE SLAB. Everything
+        # pale reads on a white fit sheet; the contact sheet is the dark one,
+        # and at emission 3.2 the ring at 0.036 and the lines at 0.030 fused
+        # with their own stakes into one bright PLATFORM he was standing on -
+        # three nooses and three lines, which is the whole mechanic, counted
+        # as one puddle. THE RULE: a lit member's radius has to be judged on
+        # the DARK field, not the pale one, because emission blooms outward
+        # and a pale field hides the bloom. Ring 0.036 -> 0.027 and line
+        # 0.030 -> 0.021: the same drawing, drawn with a finer pen.
+        _ring(P, (sx, sy, 0.115), nr, 'z', 'glow', 0.027, 18)
+        for k in range(3):
+            c = TAU * k / 3.0 + a
+            P.raw(aim(L.cone(0.042, 0.026, 0.26, 7),
+                      (sx + nr * math.cos(c), sy + nr * math.sin(c), 0.0),
+                      (0.0, 0.0, 1.0)), 'dark')
+
+    # --- THE LINES THEMSELVES, stake to stake, closing a triangle round him.
+    # This is the thing the original never said: ALREADY SET. He is inside it.
+    for i in range(3):
+        ax, ay, _ = sites[i]
+        bx, by, _ = sites[(i + 1) % 3]
+        limb(P, [(ax, ay, 0.155), ((ax + bx) * 0.5, (ay + by) * 0.5, 0.100),
+                 (bx, by, 0.155)], 0.021, 0.021, 'glow')
+
+    # --- THE BEATING POLE. One long clear diagonal on the 45-degree maximin,
+    # butt high behind his shoulder and the striking end driven into the floor
+    # ahead of him. `dark` against `bone` poles is a 6x pair, so it crosses the
+    # cage and is never lost in it.
+    BUTT = (MX - FX * 0.78 + SX * 0.12, MY - FY * 0.78 + SY * 0.12, 1.60)
+    H2 = (MX - FX * 0.52 + SX * 0.09, MY - FY * 0.52 + SY * 0.09, 1.45)
+    H1 = (MX + FX * 0.62 - SX * 0.02, MY + FY * 0.62 - SY * 0.02, 1.00)
+    TIPE = (MX + FX * 1.30 - SX * 0.05, MY + FY * 1.30 - SY * 0.05, 0.11)
+    PD = (TIPE[0] - BUTT[0], TIPE[1] - BUTT[1], TIPE[2] - BUTT[2])
+    limb(P, [BUTT, H2, H1, TIPE], 0.055, 0.046, 'dark')
+    P.add(L.sphere(0.090, 0.090, 0.090, 10, 7), 'dark', loc=BUTT)
+    P.add(L.sphere(0.105, 0.105, 0.085, 10, 7), 'dark',
+          loc=(TIPE[0], TIPE[1], TIPE[2] - 0.02))
+
+    # --- THE ARMS. TWO HANDS ON THE POLE, FAR APART AND AT TWO HEIGHTS - a
+    # long diagonal of two arms, which is deliberately NOT the Boiler's pair
+    # converging on one handle two cells away. Short upper arms, the elbow as
+    # the silhouette, hands well clear of the barrel (the Boiler's pass 3:
+    # a chibi arm that stays near the torso is swallowed by it).
+    for sh, hd in ((SHB, H2), (SHA, H1)):
+        el = ((sh[0] + hd[0]) * 0.5 + FX * 0.05, (sh[1] + hd[1]) * 0.5 + FY * 0.05,
+              (sh[2] + hd[2]) * 0.5 - 0.07)
+        limb(P, [sh, el, hd], 0.148, 0.118, 'body')
+        P.add(L.sphere(0.150, 0.150, 0.058, 10, 6), 'dark',   # the wrist boundary
+              loc=(hd[0] - (hd[0] - el[0]) * 0.20, hd[1] - (hd[1] - el[1]) * 0.20,
+                   hd[2] - (hd[2] - el[2]) * 0.20))
+        # PASS 5 - PAYING A FAULT THE WHOLE FILE CARRIES UNPAID. The Boiler's
+        # own fault 10 is "his mitts do not read as gripping - they are balls
+        # on the ends of tubes", and every chibi in the file has the same ball.
+        # A fist round a shaft is not a sphere, it is a SHORT CYLINDER WHOSE
+        # AXIS IS THE SHAFT'S - so the hand is aimed along the beating pole,
+        # and from every azimuth you see a band wrapped across the staff
+        # instead of a bead threaded on it. It costs nothing and it is the
+        # difference between holding the pole and touching it.
+        P.raw(aim(L.cone(0.168, 0.168, 0.175, 10), (hd[0], hd[1], hd[2]), PD), 'body')
+
+    # --- THE SPARE STAKES ON HIS BACK. Three short pale stakes under a dark
+    # strap, tips clearing the far shoulder. This pays a fault the Sluicekeeper
+    # (2), the Sower (4) and the Boiler (8) all carried unpaid: THE BACK IS A
+    # FEATURELESS BARREL AND BOTH ARMS DISAPPEAR ROUND THE FRONT. It is also
+    # the only thing on him that says HE IS NOT FINISHED - there are more
+    # snares to set than the three already standing - and it costs one small
+    # mass seen from a view where he currently has nothing at all.
+    BK = (MX - FX * 0.30, MY - FY * 0.30, 1.06)
+    for k in (-1, 0, 1):
+        ox, oy = SX * k * 0.085, SY * k * 0.085
+        limb(P, [(BK[0] + ox - FX * 0.04, BK[1] + oy - FY * 0.04, 0.70),
+                 (BK[0] + ox, BK[1] + oy, 1.52)], 0.042, 0.030, 'bone')
+    P.raw(L.tube([Vector((BK[0] - SX * 0.30, BK[1] - SY * 0.30, 1.14)),
+                  Vector((BK[0], BK[1], 1.08)),
+                  Vector((BK[0] + SX * 0.30, BK[1] + SY * 0.30, 1.14))],
+                 [0.046, 0.046, 0.046], 7), 'dark')
+
+    # --- THE COIL AT HIS HIP, and the lit tail that runs out of it to the
+    # nearest trigger. This is the end of the network: the man is physically
+    # tied to his own lines, which is the sentence the whole creature is.
+    CO = (MX - SX * 0.42 + FX * 0.04, MY - SY * 0.42 + FY * 0.04, 0.70)
+    P.add(L.sphere(0.200, 0.195, 0.080, 12, 7), 'bone', loc=CO)
+    _ring(P, (CO[0], CO[1], CO[2]), 0.145, 'z', 'glow', 0.030, 14)
+    nx, ny, _ = sites[1]
+    limb(P, [(CO[0], CO[1], CO[2] - 0.05),
+             ((CO[0] + nx) * 0.5, (CO[1] + ny) * 0.5, 0.34),
+             (nx, ny, 0.28)], 0.027, 0.027, 'glow')
+    return P
+
+
+BUILDERS.update({"snarer_chibi": snarer_chibi})

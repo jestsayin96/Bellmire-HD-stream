@@ -2272,3 +2272,31 @@ landed at S20 (14:21, ada04de). Left on the row: the staff comparison (mine vs a
       The shield frame and MB_FIT "reeve": 0.80 are NOT done and are next hour's first work.
   (b) The 15:08:02 claim declared a finish of 15:36 - over the 25-minute cap (15:33:02). A declaration fault; the
       lock was released IDLE at 15:27:37 and no Godot of mine was alive after 15:27:10.
+
+## D-cycle - S22 System 2 engine half: the shield settled by one frame - KIT AND PACK BOTH READ EDGE-ON, SO S20's NO-ROTATION CALL STANDS; MB_FIT reeve 0.80. 2026-11-17T16:15:50-06:00 (game build)
+TAKE THIS NEXT (lead's 14:58 row, still the GAME BUILD row after the 15:47 merge) gave: the shield picture FIRST (a
+tier-1/2 pack shield beside a class shield_square/round bearer, same camera, same pose), the staff comparison (done at
+S21), and MB_FIT "reeve": 0.80. Systems 3/4 and Phase 2 NOT touched.
+- NEW tools/_s22_shield.gd (windowed). Five bearers on the REAL path (Roster.offhand_mesh/offhand_bone -> Gear.equip at
+  Gear.offhand_scale), all Idle, one camera: knight armour 0 (kit shield_square), knight 1 (pack shield_common), knight
+  2 (pack shield_uncommon), cleric 0 (kit shield_round), cleric 2 (pack shield_uncommon). The FACE is MEASURED, not taken
+  from S20's comment: the thinnest axis of each held shield's own local bounds is its face normal, carried to the world.
+- THE ANSWER: ALL FIVE IDENTICAL. Thin axis Z on every mesh (kit square 0.88x1.19x0.30, kit round 0.88x0.88x0.33, pack
+  common 0.69x0.69x0.13, pack uncommon 0.76x0.84x0.20); world normal (-0.96, 0.01, 0.26) on every one, |n.z| 0.26 =
+  EDGE-ON to the front camera, kit and pack alike. COMPARE: kit mean 0.26 over 2, pack mean 0.26 over 3 -> SAME READ.
+  s22_front_all.png and s22_front_3q.png show it: every shield, kit or pack, stands at the left hip with its face
+  turned out to the hero's left. That is how KayKit's own carry holds the kit shields, so it is the game's look and NOT
+  a System 2 fault; rotating only the pack ones would make the party inconsistent. S20's no-rotation call is RIGHT, and
+  this entry is the written close the lead asked for. (Whether the WHOLE game should turn its shields face-forward is a
+  separate design call across every shield, not System 2's - not raised as work, only named.)
+- MB_FIT: "reeve": 0.80 added to scripts/delve.gd, copied from art's renders/art/minibosses/_fit_report.json
+  (reeve.ratio 0.8, creature_h 1.95 / hero_h 2.45). NOTE: nothing SPAWNS the reeve yet - lore_lines.json has no "reeve"
+  miniboss lines and no theme maps to it, so miniboss_model("reeve") is not reached; the ratio is ready for the day it is.
+- Battery (verdict lines, 16:09-16:15 on this tree): parse 0 SCRIPT ERROR / 0 Parse Error; S22_SHIELD OK (5 shields, 5
+  faces, 8 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2010 samples off the floor (home);
+  TOWNWALK in_solid=0/19044 (0.000%) raid_in_solid=0/4968 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2
+  (capped), 0 SCRIPT ERROR. Pictures: renders/cycles/s22/ (front_all, side_all, front_3q, close_0..4).
+- Merge note: origin/main into laptop conflicted in docs/WORK_PLAN.md (4 hunks, all lead text); took main's 15:47 side,
+  which already carries the older laptop rows inside it. No row of the lead's was dropped.
+- Lock: claimed 16:08:30, first declared 16:36 (over the 25-min cap again) and corrected in the lock line to 16:33 at
+  16:10, before any Godot ran. No live Twitch test. Not ticked - the team lead ticks.

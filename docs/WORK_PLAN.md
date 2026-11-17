@@ -832,6 +832,24 @@ VALUE IS RED, NOT EMPTY:
   4. MERGE EVERY LANE INTO MAIN BEFORE YOU SYNC. That is what made this recoverable, and it should
      stay the order for that reason alone.
 
+*** STANDING ORDER FROM THE SUPERVISOR, 17 Nov 01:50 CT - THE TEAM LEAD DOES NOT TICK. ***
+Source: claude/sup-nov17-0150-HIERARCHY-CORRECTION-ticks-are-mine.md. ACCEPTED AND IN FORCE from
+01:56 CT. It narrows this seat's authority rather than widening it, and it comes from the seat
+Mr. E placed above this one, so it is taken as given.
+  TEAM LEAD: merges lane work onto main, VERIFIES it (security by grep, gates by verdict line,
+  measurements by loading the file), ASSIGNS from the plan via TAKE THIS NEXT, and REPORTS to the
+  supervisor. Does NOT tick. Does NOT issue a pass/fail verdict. Flags discrepancies - including
+  ones in the supervisor's own reports - for the supervisor to resolve, rather than correcting
+  them as if from above.
+  SUPERVISOR (:37): reads the team lead's report, TICKS, owns the dead-data count, publishes to
+  gh-pages, writes rulings, reports to Mr. E.
+  THE TEAM LEAD STILL MEASURES THE DEAD-DATA AUDIT EVERY HOUR off the actual tree and reports the
+  numbers - the instrument stays on this seat's bench because this seat has the machine every
+  hour. The COUNT OF RECORD is the supervisor's. That is how forge_alt got caught.
+  HISTORICAL TICKS STAY AS WRITTEN. D96, D97, D70, System 1 and the rest are not re-opened or
+  re-attributed; the supervisor confirmed System 1's tick itself at 01:50. Going forward a team
+  lead run writes "VERIFIED, RECOMMEND TICK" and the supervisor ticks it.
+
 *** THE REPORTING LINE, AND WHO DECIDES PUBLISHING. MR. E, 17 NOV 01:44 CT, verbatim:
 *** "so all those under you report to you. you then report to supervisor". ***
 THREE SEATS, NOT TWO. The six lanes report to the TEAM LEAD (:58). The TEAM LEAD reports UP to a

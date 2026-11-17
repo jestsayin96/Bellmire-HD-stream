@@ -100,6 +100,34 @@ def cone(r1, r2, h, seg=14, cap=True):
     return verts, faces
 
 
+def scone(r1, r2, h, seg=14, s1=0.0, s2=0.0, cap=True):
+    """A cone whose rings are OFF-CIRCLE: radius r(th) = r * (1 + s*cos th).
+
+    cos has mean zero over a full turn, so THE MEAN RADIUS IS EXACTLY r AND
+    THE SKEW ADDS NO GIRTH ON AVERAGE - it only moves girth from the -X side
+    of the ring to the +X side. That is the whole point: D94's "dinner plates"
+    failure came from a bigger mouth, and this is a bigger mouth on ONE SIDE
+    only, paid for on the other.
+    """
+    verts, faces = [], []
+    for j in range(seg):
+        th = TAU * j / seg
+        rr = r1 * (1.0 + s1 * math.cos(th))
+        verts.append(Vector((rr * math.cos(th), rr * math.sin(th), 0.0)))
+    top0 = len(verts)
+    for j in range(seg):
+        th = TAU * j / seg
+        rr = r2 * (1.0 + s2 * math.cos(th))
+        verts.append(Vector((rr * math.cos(th), rr * math.sin(th), h)))
+    for j in range(seg):
+        j2 = (j + 1) % seg
+        faces.append((j, j2, top0 + j2, top0 + j))
+    if cap:
+        faces.append(tuple(range(top0, top0 + seg))[::-1])
+        faces.append(tuple(range(seg)))
+    return verts, faces
+
+
 # ----------------------------------------------------------------- swept tube
 def _frames(pts):
     n = len(pts)

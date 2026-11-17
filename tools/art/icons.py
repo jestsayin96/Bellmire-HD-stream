@@ -273,6 +273,21 @@ _G_LAMES   = ((2, 5), (0, 2), (1, 4), (3, 7), (1, 3))
 _G_KNK     = ((2, 3, 1), (0, 1), (4, 3), (2, 0, 1), (0, 4))
 # how many finger segments carry plate
 _G_FPLATE  = ((2, 4), (0, 0), (1, 2), (0, 2), (0, 0))
+# DIRECTIONAL FLARE (17 Nov). The mouth is no longer a circle. MEASURED, not
+# guessed: pose_at_post turns each upper arm about the armature's OWN Y, so a
+# rest +Z direction lands at (sin a, 0, cos a) - a = 1.26 on the left gives
+# (0.952, 0, 0.306) and a = -1.20 on the right gives (-0.932, 0, 0.362). BOTH
+# ARE OUTBOARD, AWAY FROM THE TORSO. So REST +Z IS THE OUTBOARD DIRECTION ON
+# BOTH HANDS, and outboard is the one direction the front camera sees clear of
+# the tabard - which is exactly the direction the d94g3 sheet showed as the
+# only part of a cuff that is not swallowed at the hip.
+# The skew moves girth from the inboard side to the outboard side at CONSTANT
+# MEAN RADIUS (lordlib.scone), so this is a re-tune of the flare dial in
+# DIRECTION and not in SIZE: the dinner-plate mouth that was backed out stays
+# backed out. Per cut, because the three failing pairs are all small cuts:
+#            cut:  gauntlet  mitt  studded  vambrace  wrap
+_G_SKEW0   = (0.14, 0.30, 0.46, 0.34, 0.58)
+_G_SKEWK   = (0.06, 0.10, 0.12, 0.26, 0.08)
 
 
 def glove_form(variant, orn, D=None):
@@ -328,6 +343,9 @@ def glove_form(variant, orn, D=None):
         tail=((0.34 + 0.62 * (D.u(11) if D is not None else 0.5)) if v == 4 else 0.0),
         # a long reach gets a wider band at the elbow end - that is what makes
         # a forearm piece read as a forearm piece and not as a long tube.
+        # how far the mouth leans OUTBOARD. Rides the cut, the cost and the
+        # key, like every other dial here.
+        skew=max(0.0, min(0.72, (_G_SKEW0[v] + _G_SKEWK[v] * o) * j(4, 0.82, 1.18))),
         cop=(reach > 0.56),
         lip=(_G_FLARE0[v] + _G_FLAREK[v] * o) > 1.85)
 
@@ -353,15 +371,21 @@ def build_gloves(P, c):
         x = 0.36 * s
         top = -0.18
         # the cuff first and deepest: a tall cone running down off the wrist
+        # DIRECTIONAL FLARE - the icon takes the SAME dial as the worn piece,
+        # because the glove in the satchel must be the glove on the hero. The
+        # cuff here is aimed straight up, so aim() is the identity and the
+        # cone's local +X is the icon's +X; outboard is +x on the right hand
+        # and -x on the left, which is s.
+        isk = F['skew'] * s
         if F['stepped']:                      # a sleeve with one shoulder
             mid = flare * 0.62 + hw * 0.38
-            P.raw(aim(L.cone(flare, hw * 0.92, cuff * 0.55, 14),
+            P.raw(aim(L.scone(flare, hw * 0.92, cuff * 0.55, 14, isk, 0.0),
                       (x, 0, top - cuff * 0.55), (0, 0, 1)), mat)
-            P.raw(aim(L.cone(mid * 1.04, mid, cuff * 0.45, 14),
-                      (x, 0, top - cuff), (0, 0, 1)), mat)
+            P.raw(aim(L.scone(mid * 1.04, mid, cuff * 0.45, 14,
+                              isk * 0.55, isk), (x, 0, top - cuff), (0, 0, 1)), mat)
         else:
-            P.raw(aim(L.cone(flare, hw * 0.92, cuff, 14), (x, 0, top - cuff),
-                      (0, 0, 1)), mat)
+            P.raw(aim(L.scone(flare, hw * 0.92, cuff, 14, isk, 0.0),
+                      (x, 0, top - cuff), (0, 0, 1)), mat)
         if F['lip']:                          # a hard flared lip at the mouth
             P.raw(L.tube(ring_pts(flare * 1.02, 20, top - cuff), 0.055, 8), mat)
         # LAMES - the segmentation, the dial that tells two same-price gloves
@@ -371,8 +395,8 @@ def build_gloves(P, c):
             rr = hw * 0.96 + (flare - hw * 0.96) * f
             P.raw(L.tube(ring_pts(rr * 1.025, 18, top - cuff * f), 0.026, 7), mat)
         if F['cop']:                          # the elbow end of a long reach
-            P.raw(aim(L.cone(flare * 1.16, flare, cuff * 0.16,
-                             14), (x, 0, top - cuff * 1.14), (0, 0, 1)), mat)
+            P.raw(aim(L.scone(flare * 1.16, flare, cuff * 0.16, 14, isk, isk),
+                      (x, 0, top - cuff * 1.14), (0, 0, 1)), mat)
         # the hand shell, always wider than the hand under it
         P.add(L.box(hw * 2.0, 0.17, 0.42), 'cloth', loc=(x, 0, -0.04))
         if F['fingers'] == 0:                 # a mitt: one pocket for four

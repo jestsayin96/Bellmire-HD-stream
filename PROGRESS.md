@@ -7427,3 +7427,30 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
 - LOCK: RUN_LOCK read at 21:53 CT - last line IDLE 21:49:16 (chat bot B16, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
+
+## D-cycle D94f (ART) - DIRECTIONAL FLARE: the gloves' _G_FLARE re-tune (2026-11-17)
+- THE ITEM: the ART row's "still open and still yours after the Snarer" - the only number that can
+  move the gloves off PARTLY TOO SMALL 3/15. Same harness, same six cells, same framing, same light.
+- CHECKED FIRST, MEASURED NOT REMEMBERED: pose_at_post turns each upper arm about the armature's own
+  Y (+1.26 left, -1.20 right), so a REST +Z direction lands at (0.952,0,0.306) and (-0.932,0,0.362).
+  REST +Z IS OUTBOARD ON BOTH HANDS - the one direction a hanging arm does not bury in the tabard.
+- THE ONE CHANGE: lordlib.scone - rings at r(th) = r(1 + s cos th). cos has mean zero over a turn, so
+  THE MEAN MOUTH IS UNCHANGED; the skew only moves girth inboard -> outboard. The dinner-plate mouth
+  that D94 tried and backed out stays backed out. New per-cut _G_SKEW0/_G_SKEWK, riding cost and key.
+  The hub icon takes the same dial.
+- NUMBERS (d94g3 -> d94g5, three views): front PARTLY TOO SMALL 3/15 -> 1/15, median 1.08 -> 2.25;
+  side TELLS APART -> TELLS APART, median 1.37 -> 2.96; back 3/15 -> 1/15, median 0.95 -> 1.99.
+  Blank check 12 files per view, 0 failures, three views, errors []. BLENDER_EEVEE.
+  The one pair left is Carder's Gloves | Bellringer's Wraps, 0.25% front / 0.18% back, passes on side.
+- LOOKED AND CAUGHT MY OWN FAULT: the first shot (d94g4) had the lames standing clear of the outboard
+  wall like a coiled spring - a straight hw->mouth lerp stops lying on a cone that is no longer round.
+  They now read radius AND skew off the cuff's own profile at their own x. That moved the median again.
+- HONEST COST, NAMED: penetration got DEEPER on five of six (forge 0.047 -> 0.072 worst). Nine faults
+  listed in docs/art/D94_GLOVES.md, including the root cause of a fault listed since d94g3 - the icon's
+  lip and lame rings use ring_pts() centred on the ORIGIN while the hands sit at x = +-0.36, which is
+  why left and right "fuse in the middle". One-line fix, NOT taken this pass: one change at a time.
+- REGISTER AUDIT before D96 builds on it (docs/art/MINIBOSS_FIT.md): the ratios are sound, four KEYS
+  are not. gaoler_chibi / porter_chibi / sexton_chibi / stoker_chibi have register entries and no
+  committed .glb on any branch, and _fit_snuffer_register.json is ok:true with pairs:{} - it measured
+  nothing. Detail and what D96 must do instead is in the doc.
+- No .gd touched outside tools/art/. Nothing in the game wired by this lane.

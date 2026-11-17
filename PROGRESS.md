@@ -8351,3 +8351,61 @@ Fast-forwarded to origin/hub (54d5935), merged origin/main clean (d95391d). `git
 MEASURED: web/icons 2,434,146 bytes (unchanged from 05:40) vs 6 MB cap; `git log 2473836..origin/main -- assets/icons/items` EMPTY.
 SECURITY BY GREP: node --check app.js OK; innerHTML only app.js:252, :298 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src 'none' present. Live dot red --live #e5484d.
 Scratch (_h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt) left untracked on purpose; delete refused on this machine. Not published.
+
+## B-cycle B24 - BREAK D DID NOT HANG, AND SAYING WHICH BREAK D WAS (chat bot, 2026-11-17 06:46-06:53 CT)
+
+The 05:58 TAKE THIS NEXT CHAT BOT row as written: re-run break D with a cap so the hang itself
+prints a verdict, and say plainly which break D was. Nothing else taken. Clock off the machine
+(2026-11-17T06:46:23-06:00), no Godot process alive, lock IDLE since the game build's 06:23:52
+line. Claimed 06:47:55, ONE battery of five short runs, nothing queued after it. `chatbot`
+fast-forwarded 3af8575 -> e3ec68a onto main (no conflicts).
+
+### WHICH BREAK D WAS - PLAINLY, SO NOBODY HAS TO INFER IT AGAIN
+**BREAK D = `what` removed from ONE command in data/commands.json.** The read it guards is
+`help_line():766`, where `c["what"]` sits as the DEFAULT of a `.get("short", ...)`, so GDScript
+evaluates it even when `short` is present: one command with no `what` breaks `!help <command>`.
+This run used `enlist` (first command in the file carrying a `what`).
+**BREAK E = a foreign app emptied of both `prefixes` and `exact`** (`fightoverlay`), guarding
+`foreign():863`, where an app naming nothing is a dead entry and that app's commands get answered.
+
+### THE MEASUREMENT: THE GUARD DOES NOT HANG, AND B23'S HANG WAS NOT THE GUARD
+Method, which is the part that changed: stdout redirected to a file per run and a HARD WALL-CLOCK
+CAP around the process, so a hang is killed BY THE HARNESS and the harness prints
+`B24 VERDICT: NO VERDICT - <tag> HUNG, killed at the <n>s wall-clock cap`. A kill can no longer
+take the evidence with it.
+  **BREAK D  PROVED** - rc=0, 20.6 s against a 75 s cap, not hung:
+      `COMMANDS_DATA NO WHAT: 1 command(s) carry no `what` - !help <command> breaks on them:
+      ["enlist"]` on push_error AND on printerr.
+  **BREAK E  PROVED** - rc=0, 20.4 s against a 75 s cap, not hung:
+      `COMMANDS_DATA FOREIGN APP EMPTY: 1 app(s) in `foreign` name nothing, so their commands are
+      answered: ["fightoverlay"]` on push_error AND on printerr.
+So all FIVE B23 guards are now proved on their break, not three. **The hang at 05:51 was NOT in
+the guard**: the same break, on the same data, exits cleanly in 20.6 s. What differed was the
+harness, not the code - B23 ran the break with no redirect and no cap under a closing window, and
+had nothing to read when it killed the process. The honest reading is that B23's hang is
+UNEXPLAINED and UNREPRODUCED, not that it is explained. It is not claimed as fixed; it is claimed
+as not-the-guard, which is all this run measured. No change was needed in any of my three files.
+
+### HEALTHY CONFIRM ON THE NEW MAIN e3ec68a
+  parse (300 frames)  rc=0, 21.0 s, **0 SCRIPT ERROR, 0 Parse Error, 0 COMMANDS_DATA lines** -
+                      no line is the healthy reading
+  L14_TEST            OK (22 checks)   rc=0
+  COMMANDS_DOC        OK wrote 27 commands, `docs/COMMANDS.md` byte-identical (`1fb9a166c3bf`,
+                      5771 bytes) - the no-op holds
+  `data/commands.json` restored from the in-run backup and re-hashed: `f37b1d2c6909`, 14753 bytes,
+  **byte-identical to B20/B21/B22/B23**. `git status` on my three files: clean, nothing changed.
+
+### OWED
+- THIS LANE: nothing. The row's one item is delivered and the queue is empty.
+- Game build: B18's one `twitch_chat.gd` line for `twitch_cooldown_s`. Unchanged, seven cycles on.
+- `tools/` owner: nothing. B23 flagged that `_l14_test.gd` might need a NO VERDICT cap if D turned
+  out to be a genuine hang. It did not, so that request is WITHDRAWN rather than left hanging.
+- Mr. E: nothing in this lane.
+
+### CLEANUP
+`.b24_run.log`, `.b24_commands.bak` and the five `.b24_*.out` captures written at the worktree root
+and ALL DELETED in the same run. Godot exited on its own every time - nothing killed, no process
+left alive. Lock released IDLE. No Twitch of any kind: 0 bits, nothing cheered or redeemed, no
+reward created / renamed / re-priced / deleted, nothing posted as any account, no channel setting
+touched. The parse runs joined #jestsayin96 as the game always does on boot and said nothing.
+No secrets written anywhere.

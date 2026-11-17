@@ -7384,3 +7384,37 @@ TAKE THIS NEXT gave game build "FIRST: THE PUBLISHER FIELDS (H29 point 6)". Done
 - NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed, re-priced
   or deleted, nothing posted as any account, no channel setting touched.
 - NEEDS MR. E: nothing.
+
+## B16 - STOOD DOWN AGAIN, RE-PROVED THE SIX GATES ON THE NEW MAIN, AND THE MUSTER GATE FLIPPED (chat bot, 2026-11-16 21:46-21:49 CT)
+- THE ITEM WAS A STAND-DOWN AND IT IS DELIVERED, SAME ITEM, UNCHANGED. The 20:58 TAKE THIS NEXT row
+  reads "STAND DOWN AGAIN AND WRITE THE LINE AGAIN", and names re-proving the battery on a changed
+  main as a legitimate use of the slot. NOTHING INVENTED. No WORK_PLAN item ticked, none written.
+  D67/D69/D70 live in twitch_eventsub.gd and are the GAME BUILD's; tools/ is not mine.
+- THE BASE MOVED AGAIN. chatbot was 2 commits ahead and 39 BEHIND origin/main (b9bd5cd -> 831ad36:
+  D96 minibosses, D61.1, H32 passes 4+5, C-75, U44, COORDINATION 17). A green verdict from 20:49 says
+  nothing about this tree, so the SAME six gates ran again. Re-measurement, not invention.
+- MERGE: one conflict, docs/COORDINATION.md, and it was PURELY ADDITIVE - my side of the hunk was
+  EMPTY and main's side was the whole of COORDINATION 17. Both sides kept, only the three marker
+  lines stripped, 0 markers left, 510 lines. Not my file and not a word of it changed. Merge 2508871.
+- SIX OF SIX GREEN ON 831ad36. parse rc=0 with 0 SCRIPT ERROR and 0 Parse Error (only the known
+  MI_Brick.tres invalid-UID warnings out of town.gd:820); L14_TEST OK; TWITCH_PARSE OK; D704_ECHO OK
+  (356 checks); B11_MUSTER OK bad=0 run WITHOUT `--quit`; COMMANDS_DOC wrote 27 commands and left
+  docs/COMMANDS.md BYTE-IDENTICAL (md5 fc67173cfaa05ab7b522ef7305531f23 before and after - the
+  generator stays a proven no-op at 27). No gate returned rc=0 with no verdict.
+- *** THE FINDING, AND IT IS A MEASUREMENT, NOT AN OPINION: B11_SOURCE_QUEUEING FLIPPED NO -> YES. ***
+  At 16:57 the gate PROVED D41's source-queueing was not on main, which is the only reason B11
+  restored the !muster union read against the supervisor's ruled DROP and deferred the drop WITH
+  EVIDENCE rather than skipping it. On 831ad36 the gate now prints B11_SOURCE_QUEUEING YES and
+  asserts, in its own words, "D41 queues the errand at the SOURCE - the union has nothing left to
+  add". THE PRECONDITION THE DEFERRAL WAS WAITING ON IS MET. The drop is a RULED item, not new work,
+  and it is file-only in chatcmd.gd plus one gate run - but it needs an engine slot to prove and my
+  window was over, so it is NOT taken here and NOT half-done in the worktree. Team lead: this is the
+  real next item for this lane, and the deferral's reason has expired.
+- LOCK: last line read IDLE 2026-11-16T21:25:59-06:00 (game build D96); tasklist showed NO Godot
+  process alive on either image name; machine clock read directly off the machine at 21:46:11 CT.
+  Claimed 21:47:24 with a named finish of 21:54, ONE battery, nothing queued after it; it finished
+  21:48:28 and the IDLE line was written inside the :45-:52 window. The HUD lane's :52-:07 is
+  untouched and nothing of mine is still running.
+- NO LIVE TWITCH TEST: 0 bits, nothing cheered, nothing redeemed, no reward created, renamed,
+  re-priced or deleted, nothing posted as any account, no channel setting touched.
+- NEEDS MR. E: nothing.

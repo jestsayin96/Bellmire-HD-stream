@@ -9139,3 +9139,8 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or by anyone, no reward created, deleted or re-priced, no channel setting touched.
 The parse run JOINs #jestsayin96 as bellmirebro - the standing B18 gate - and it is silent.
 NEEDED FROM MR. E: nothing. NEEDED FROM THE GAME BUILD LANE: nothing.
+
+## C-93 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (14:58 block): four named greataxes at tiers 1 and 3 (items.json only)
+Counted first, through gear.gd D94_KIND_WORDS in order with the family gate: named greataxe by tier was 0 / 1 / 0 / 1 at tiers 1 / 2 / 3 / 4 (Bearded Greataxe t2, Ash-Maul Greataxe t4). The pack mesh axeDouble serves tiers 1-3, so tiers 1 and 3 were reached only through the unnamed forge path.
+Added to equipment.weapons: w_axe_woodyard_greataxe, w_axe_charcoal_greataxe (tier 1, uncommon, plain); w_axe_lamp_etched_greataxe, w_axe_bellyard_greataxe (tier 3, very rare, runed, paid-for condition). Every name carries the word greataxe so each resolves to kind greataxe. No artifact, no caravan-only. New top-level key: `_note_c93` only (a note, like c92).
+VALIDATION OK: items.json parses; only `equipment` and `_note_c93` differ from main; all 97 prior weapon entries identical; the four new entries have the exact key order of existing pieces. Code wiring: none.

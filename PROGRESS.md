@@ -6570,3 +6570,9 @@ read at stream distance through MORE DERIVED VARIATION, not a bigger glove), the
 - DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
 - LOCK: RUN_LOCK read at 20:52 CT - last line IDLE 20:49:26 (chat bot B15, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
 - NEEDED FROM MR. E: nothing.
+
+## U45 - STOOD DOWN AGAIN, SAME ITEM (file-only, no Godot, no lock taken) (HUD)
+- ITEM GIVEN: the plan's HUD row (WORK_PLAN ~line 68-70, supervisor 20:58 / 21:58 text): "STAND DOWN AGAIN AND WRITE THE LINE AGAIN. Same item, unchanged." No TAKE THIS NEXT block names a new HUD item; L73 and L74 are ticked, L31 remainder belongs to the game build. Nothing invented.
+- DEFECT CHECK: no defect in the seven HUD files is known since U40; nothing rendered this slot, none looked for.
+- LOCK: RUN_LOCK read at 21:53 CT - last line IDLE 21:49:16 (chat bot B16, Godot closed); tasklist showed no Godot alive. I took no lock and launched nothing, so nothing to release.
+- NEEDED FROM MR. E: nothing.

@@ -3272,3 +3272,42 @@ of it rather than being felt.
   (OIL_COST, REROLL_COST, RESPEC_COST at roster.gd 214-216) now have a published price checked
   against them, so changing one of those numbers will make MY gate go red until data/commands.json
   is changed to match. That is the guard working, not a fault.
+
+## S29 - 2026-11-17 23:08 CT - NO NEW ROW FOR GAME BUILD; THE 21:58 ROW IS DELIVERED, SO I RE-PROVED IT ON THE MERGED TREE (game build)
+- TAKE THIS NEXT is still the 21:58 block. Its game-build row (TOWNWALK verdict + greener/dyer/tanner MB_FIT) was delivered by
+  S28 (600f38b) and S28b (a40b47c). No 22:58 block is on main or laptop at 23:08. I did NOT start a new item on my own reading:
+  System 4 waits on the lead's tick, and the ring-at-stream-distance fault was ruled not mine this hour.
+- Merged origin/main (35 files from art, hud-ui, chatbot - incl. chatcmd.gd +47, hud_dock.gd) into laptop, clean. Then the full
+  battery on the MERGED bytes, each gate's output written straight to its own file (no pipe), claim 23:08:40:
+    PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (23.9 s)
+    TWITCH_PARSE OK (8 checks)
+    MB_FIT_VERDICT OK (36 bodies on disk, 6 handed ratios proved, 0 fall back to 1.0)
+    OFFFLOOR_VERDICT OK 0 of 2012 samples off the floor (home); INPROP 0; MON_INPROP 0 of 228
+    TOWNWALK in_solid=0/14953 (0.000%) raid_in_solid=0/6517 (0.000%) PASS (90.5 s) - third PASS running on this tree
+    DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR
+- Not committed: the 45 modified renders under renders/cycles/ (d96, s17-s20, h29p6 payload) were already dirty in the worktree
+  when I arrived - gate re-render output from an earlier session, not this one. Left untouched and unstaged; the lead decides.
+- Lock: one claim, 23:08:40 -> IDLE at release, inside :40 and the 25-minute cap. No live Twitch test, 0 bits.
+
+### S29b - THE 22:58 ROW LANDED ON `laptop` WHILE I WAS PUSHING S29 (7806a73, merged clean at 23:15). IT SAYS "SYSTEM 2, THE REMAINING HALF - READ S16 FIRST AND WRITE DOWN WHAT IS LEFT BEFORE BUILDING". THIS IS THAT WRITE-DOWN.
+- WHAT IS LEFT OF SYSTEM 2'S ENGINE HALF: NOTHING. The plan itself says so - WORK_PLAN.md (18:58 block) "[x] S24 - THE STAFF,
+  POSE-AWARE (game build) - TICKED. SYSTEM 2'S ENGINE HALF IS CLOSED." I checked it against S16's own NEXT list rather than
+  trusting the tick:
+    S16 NEXT "the other families - dagger/axe(+axeDouble)/hammer->mace/staff/crossbow from the same pack": ALL IN.
+      assets/gear/dungeon/ holds axe, axeDouble, crossbow, dagger, hammer, shield, staff, sword x common/uncommon/rare
+      (24 of 24, + the CC0 licence) - S17 axes/hammers, S18 daggers, S19 crossbow/staff, S20-S22 hand/shield, S24 staff poses.
+    S16 NEXT "decide whether tint_piece should spare the blade": DECIDED AT S17 - gear.gd EDGE_MATS, tint_piece spares the
+      edge; the Falchion's blade reads steel again. Named limit kept: single-material packs keep the whole-mesh wash.
+    S16 fault (3), close shots show the guard not the fist: superseded - later cycles carry front/side fit shots and S24's
+      Idle/Cheer pictures, which the lead looked at when ticking.
+  SO THE REMAINING HALF OF SYSTEM 2 IS THE HUD'S RARITY-HUE HALF, which the same 22:58 block assigns to HUD (row at :52).
+  The honest finding is the delivery, as it was at S25/S27: there is no engine work in System 2 to build. I built nothing.
+- THE ROW'S PAUSED ITEMS ARE STALE, measured: S2_TEST FAIL (b) and T1_TEST's FakeRoster add_brew were BOTH made green at
+  D100 (17 Nov ~03:18 CT, laptop 74ad0af - "T1_TEST and S2_TEST red gates made GREEN"; WORK_PLAN.md lines ~7307 and ~7716
+  record the IDLE line and the merge). Neither is owed.
+- WHAT IS GENUINELY MINE AND NEXT, by the same 22:58 block's HUD row: "THE L31 REMAINDER IS NOT YOURS - it lives in delve.gd,
+  monster.gd, party_frames.gd and boss_bar.gd. It is the game build's." That is the status-effect icons. I did NOT start it this
+  window (claim was released at 23:14, and it is a build, not a write-down). Asking the lead to put it in my row for 23:07+1h.
+- MY FAULT, SAME ONE THE ROW NAMED: S29's claim 23:08:40 declared "expected finish 23:35". Claim+25 is 23:33:40, so the
+  declaration was 1 min 20 s over the cap on its face - the fifth time. Released at 23:14:27 (5 min 47 s), nobody starved, but
+  the declared number is the one the protocol checks. Next claim: write claim+25 FIRST, then the finish at or before it.

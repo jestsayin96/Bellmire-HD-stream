@@ -3311,3 +3311,32 @@ of it rather than being felt.
 - MY FAULT, SAME ONE THE ROW NAMED: S29's claim 23:08:40 declared "expected finish 23:35". Claim+25 is 23:33:40, so the
   declaration was 1 min 20 s over the cap on its face - the fifth time. Released at 23:14:27 (5 min 47 s), nobody starved, but
   the declared number is the one the protocol checks. Next claim: write claim+25 FIRST, then the finish at or before it.
+
+## D-cycle - S31 SYSTEM 5: POTION VISUALS - A BREW IS NOW A BOTTLE YOU CAN SEE, IN THE HAND WHEN DRUNK AND ON THE FLOOR WHEN FOUND, COLOURED OFF ITS OWN ROW. 2026-11-18T03:16:22-06:00 (game build)
+Row (02:58 TAKE THIS NEXT): take System 5, the lowest open system. Claim 03:08:34-06:00, cap 03:33.
+- scripts/delve.gd: new `_show_vial(m, key, on_floor)` + static `vial_kind / vial_colour / vial_model`.
+  Called from `drink()` (bottle at the mouth for ~1.2 s, rising, while Use_Item plays) and from the
+  L12 search find (bottle on the stones at the seeker's feet, a slow turn, then lifted into the hero).
+  Bottles are the Fantasy Props MegaKit Potion_1/2/4 already in assets/props/ with their LICENSE -
+  no new asset, no new licence. Tinted by material_overlay (alpha 0.55 + emission 1.6) so the
+  pack's own trim texture still reads through. VIAL_SCALE 2.6: a 14-26 cm bottle does not read at
+  stream distance.
+- MR. E'S KEY, AND WHERE IT DOES NOT FIT: red = health, blue = mana, green = speed. RED = any
+  potion with `heal` (45 of 232), GREEN = `gives: haste` (17), BLUE = the other 170. THIS GAME HAS
+  NO MANA, so blue is carrying every ward/state brew. Named, not hidden: if Mr. E wants more hues
+  (e.g. fire-resist amber) it is one match arm in vial_colour.
+- tools/_s31_vial.gd (new gate, WINDOWED, quits itself): every potion maps to a kind and an existing
+  model, all three kinds non-empty, >=50 potions read, then calls the REAL Delve._show_vial on three
+  stand-in bodies (mending/sawyers_dram in hand, gatewater on the floor), counts the live Vial_*
+  nodes and saves renders/s31_vials.png. First run read FAIL "live path made []" - _initialize runs
+  before the root enters the tree, so _show_vial's is_inside_tree guard returned; the calls moved to
+  frame 2. The guard is correct for the game; the harness was wrong.
+- LOOKED AT renders/s31_vials.png: red squat bottle and green tall bottle at mouth height, blue
+  round bottle on the floor in front of its body. Three hues distinct.
+- NOT YET SEEN ON A REAL HERO IN A REAL DELVE: the 9001-frame _delve_test run had no drink and no
+  vial find (0 "drinks"/"finds a vial" lines), so the in-delve path is exercised only by the gate.
+  The HUD half of System 5 (bottles on the HUD) is the HUD lane's file, not mine - routed.
+GATES (verdict lines): PARSE 0 errors (rc 0); S31_VIAL OK (counts heal 45 / speed 17 / ward 170 of
+232; live vials [Vial_heal, Vial_speed, Vial_ward]); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0
+of 2175 samples off the floor; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/17732
+raid_in_solid=0/5055 PASS. No live Twitch test, nothing spent. Backup scripts/delve.gd.bak_s31 (untracked).

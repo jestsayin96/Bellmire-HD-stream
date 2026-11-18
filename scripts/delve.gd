@@ -2096,6 +2096,7 @@ func _loot(alive: Array) -> void:
 		if not pool.is_empty():
 			var pk: String = pool[_rng.randi() % pool.size()]
 			roster.add_brew(seeker["h"], pk, 1)
+			_show_vial(seeker, pk, true)       # S31 System 5: the find lands on the floor first
 			_say("%s finds a vial of %s." % [seeker["h"]["name"], ps[pk]["name"]])
 	# clearing a floor is the unit of progress: everyone standing learns from it
 	for m in alive:
@@ -3108,6 +3109,84 @@ func _trap_swarm(tr: Dictionary) -> void:
 	_say("The grate pops - %s comes up through it." % ", ".join(parts))
 	Sfx.play("roar", -5.0)
 
+## ---- S31 SYSTEM 5: POTION VISUALS. A brew is a bottle you can see - in the hand when it is
+## drunk, on the floor when a search turns one up. Fantasy Props MegaKit bottles (CC0, already in
+## assets/props/ with its LICENSE). Mr. E's colour key: RED = mending (any potion with "heal"),
+## GREEN = speed (gives haste), BLUE = everything else - this game has no mana, so blue is the
+## ward/state brews. The colour and the bottle shape both come off the potion's own row.
+const VIAL_PROPS := "res://assets/props/"
+const VIAL_SCALE := 2.6        # a 14-26 cm bottle is invisible at stream distance; read, not real
+const VIAL_RED := Color(0.92, 0.12, 0.10)
+const VIAL_GREEN := Color(0.25, 0.90, 0.20)
+const VIAL_BLUE := Color(0.20, 0.45, 1.00)
+var _vial_scn := {}
+
+static func vial_kind(p: Dictionary) -> String:
+	if p.has("heal"):
+		return "heal"
+	if String(p.get("gives", "")) == "haste":
+		return "speed"
+	return "ward"
+
+static func vial_colour(kind: String) -> Color:
+	match kind:
+		"heal":
+			return VIAL_RED
+		"speed":
+			return VIAL_GREEN
+	return VIAL_BLUE
+
+static func vial_model(kind: String) -> String:
+	match kind:
+		"heal":
+			return VIAL_PROPS + "Potion_1.gltf"
+		"speed":
+			return VIAL_PROPS + "Potion_2.gltf"
+	return VIAL_PROPS + "Potion_4.gltf"
+
+func _tint_vial(n: Node, col: Color) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(col.r, col.g, col.b, 0.55)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 1.6
+	for c in n.find_children("*", "MeshInstance3D", true, false):
+		(c as MeshInstance3D).material_overlay = mat
+
+func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
+	var b = m.get("body")
+	if not (b is Node3D) or not is_instance_valid(b) or not (b as Node3D).is_inside_tree():
+		return
+	var kind := vial_kind(Roster.potion(key))
+	var path := vial_model(kind)
+	if not ResourceLoader.exists(path):
+		return
+	if not _vial_scn.has(path):
+		_vial_scn[path] = load(path)
+	var v: Node3D = (_vial_scn[path] as PackedScene).instantiate()
+	v.name = "Vial_" + kind
+	v.top_level = true
+	v.scale = Vector3.ONE * VIAL_SCALE
+	_tint_vial(v, vial_colour(kind))
+	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
+	host.add_child(v)
+	var bn := b as Node3D
+	var fwd := -bn.global_transform.basis.z.normalized()
+	var tw := v.create_tween()
+	if on_floor:
+		# the find: on the stones at the seeker's feet, a slow turn, then picked up
+		v.global_position = bn.global_position + fwd * 0.6 + Vector3(0, 0.02, 0)
+		tw.tween_property(v, "rotation:y", TAU, 3.0)
+		tw.tween_property(v, "global_position", bn.global_position + Vector3(0, 1.2, 0), 0.5).set_ease(Tween.EASE_IN)
+		tw.tween_property(v, "scale", Vector3.ONE * 0.01, 0.25)
+	else:
+		# the drink: up at the mouth for as long as Use_Item reads, then gone
+		v.global_position = bn.global_position + fwd * 0.35 + Vector3(0, 1.25, 0)
+		tw.tween_property(v, "global_position", bn.global_position + fwd * 0.25 + Vector3(0, 1.55, 0), 0.9)
+		tw.tween_property(v, "scale", Vector3.ONE * 0.01, 0.3)
+	tw.tween_callback(v.queue_free)
+
 ## a number or word floating up off a delver's head
 func _float_text(m: Dictionary, text: String, col: Color, size := 84, lift := 2.4) -> void:
 	var b: Node3D = m["body"]
@@ -3283,6 +3362,7 @@ func drink(m: Dictionary, key: String) -> void:
 	var b = m["body"]
 	if b is HeroBody and is_instance_valid(b):
 		Rig.play((b as HeroBody)._anim, "Use_Item")
+	_show_vial(m, key, false)          # S31 System 5: the bottle is seen, not just the float
 	if p.has("heal"):
 		var hd: Array = p["heal"]
 		var amt := float(_dice(int(hd[0]), int(hd[1])) + int(hd[2]))

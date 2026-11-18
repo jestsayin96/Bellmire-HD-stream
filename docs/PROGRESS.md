@@ -3411,3 +3411,6 @@ S32_FENMAN OK (8 checks); S31_FIT OK (drink HELD on handslot.r, base 0.09 m); MB
 TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1958 samples off the floor;
 DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16162 raid_in_solid=0/7925 PASS. No live Twitch test,
 nothing spent. Backups *.bak_s32 (untracked). Logs build/s32_run1.log, build/s32/*.log.
+
+## C-cycle - C-111 miniboss feed lines for the Leech (32nd), 2026-11-18 (content)
+TAKE THIS NEXT gave content no engine row; the 08:0x block names the Leech's feed lines as the obvious next. Added miniboss_feed.by_key.leech: 9 arrive, 8 fall (17 lines), plus _note_c111. by_key now 32 keys. Written against art's MINIBOSSES.md entry 32 (nothing mends while it stands; healing drawn into the basin; tip the basin to get it back). Plain register, {name} not used. Only data/lore_lines.json touched; json.load OK, every pre-existing key unchanged. CODE WIRING: none new - delve.gd _miniboss_say already reads by_key[key] arrive/fall; needs a leech row in the spawn table. act/broken omitted on purpose, as C-86 onward.

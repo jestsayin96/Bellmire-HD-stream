@@ -380,7 +380,12 @@ const MB_FIT := {
 	"strickler": 1.04,   # S25: art's _fit_report.json pairs.strickler.ratio on origin/art (lead's 18:58 row), copied not re-derived; inert until the body merges
 	"greener": 1.02,   # S28: art's _fit_greener_register.json pairs.greener.ratio (lead's 21:05 addendum), copied not re-derived
 	"dyer": 1.06,   # S28: art's _fit_dyer_register.json pairs.dyer.ratio (lead's 21:58 row), copied not re-derived
-	"tanner": 1.12}   # S28: art's _fit_report.json pairs.tanner.ratio (lead's 21:58 row), copied not re-derived
+	"tanner": 1.12,   # S28: art's _fit_report.json pairs.tanner.ratio (lead's 21:58 row), copied not re-derived
+	"moulder": 1.18,   # S32: art's _fit_moulder_register.json pairs.moulder.ratio, copied not re-derived
+	"ratcatcher": 1.07,   # S32: art's _fit_ratcatcher_register.json pairs.ratcatcher.ratio, copied not re-derived
+	"drover": 1.00,   # S32: art's _fit_report.json pairs.drover.ratio, copied not re-derived
+	"paviser": 1.09,   # S32: art's _fit_report.json pairs.paviser.ratio (MINIBOSSES.md 29), copied not re-derived
+	"fenman": 1.03}   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
 	for nm: String in [key + "_chibi", key]:

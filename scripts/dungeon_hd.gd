@@ -102,6 +102,23 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
     "shrine": "snuffer", "crypt": "sexton", "keep": "porter", "treasury": "tallyman", "mess": "cook",
     "flooded": "sluicekeeper", "grassland": "sower", "wood": "snarer", "firepit": "stoker",
     "fogbound": "bellman", "confection": "boiler"}
+## S32: more art-lane bodies for a theme. A candidate only enters the draw once it has BOTH a
+## loadable body (Delve.miniboss_model) AND content's arrive lines (Delve.miniboss_lines) - without
+## lines delve drops the key and spawns a nameless theme creature, so an unwritten candidate must
+## never displace the one that works. The base THEME_MINIBOSS key always stays in the draw.
+## The draw is hashed off the floor number, NOT _rng, so adding a candidate does not shift the
+## floor's own random stream (layout, purses, decals stay as they were).
+const THEME_MINIBOSS_MORE := {"fogbound": ["fenman"]}
+static func miniboss_for(theme: String, n: int) -> String:
+    var base := String(THEME_MINIBOSS.get(theme, ""))
+    if base == "":
+        return ""
+    var pool: Array = [base]
+    for k in THEME_MINIBOSS_MORE.get(theme, []):
+        var key := String(k)
+        if Delve.miniboss_model(key) != "" and not Delve.miniboss_lines(key, "arrive").is_empty():
+            pool.append(key)
+    return String(pool[absi(hash("mb:%s:%d" % [theme, n])) % pool.size()])
 const THEME_DECAL := {"wood": "moss", "grassland": "moss", "flooded": "moss",
     "firepit": "soot", "workshop": "soot", "prison": "blood", "barracks": "blood", "crypt": "blood"}
 const SCAR_VEIN := Color(0.62, 0.32, 1.0)
@@ -794,7 +811,7 @@ func _set_pieces() -> void:
             var purse: int = 40 + floor_no * 12 + _rng.randi() % 25
             # the miniboss_feed reader: which of the art lane's fourteen this
             # chamber holds, by theme (MINIBOSSES.md) - delve reads the feed lines by it
-            var mb_key := String(THEME_MINIBOSS.get(theme, ""))
+            var mb_key := miniboss_for(theme, floor_no)
             (info["set_pieces"] as Array).append({
                 "kind": "miniboss", "pos": at, "r": SETPIECE_TRIGGER_R, "resolved": false,
                 "def": def, "purse": purse, "mb_key": mb_key,

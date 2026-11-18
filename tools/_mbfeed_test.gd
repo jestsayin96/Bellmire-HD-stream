@@ -56,7 +56,7 @@ func _process(_dt: float) -> bool:
 		return _finish()
 	var key := String(sp.get("mb_key", ""))
 	var theme := String(dh.info.get("theme", ""))
-	_ok(key == String(DungeonHD.THEME_MINIBOSS.get(theme, "?")), "set piece carries its theme's key (%s on %s)" % [key, theme])
+	_ok(key == DungeonHD.miniboss_for(theme, fn), "set piece carries its theme's key (%s on %s)" % [key, theme])   # S32: the theme's draw, which is THEME_MINIBOSS until a second candidate has lines
 	var fake := GDScript.new()
 	fake.source_code = "extends Node3D\nvar feed := []\n"
 	fake.reload()

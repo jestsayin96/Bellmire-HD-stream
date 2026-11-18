@@ -3374,3 +3374,40 @@ the hand, centre y 1.39 vs head bone 1.20); S31_VIAL OK (heal 45 / speed 17 / wa
 TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2089 samples off the floor; DELVE_TEST OK ran 9001
 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/17500 raid_in_solid=0/7663 PASS. No live Twitch test,
 nothing spent. Backups scripts/delve.gd.bak_s31c, tools/_s31_fit.gd.bak_s31c (untracked).
+
+## D-cycle - S32: THE S31 SIDE CAMERA MOVED TO THE DRINKING HAND, AND THE FENMAN (30th) WIRED - PLUS FOUR EARLIER BODIES THAT HAD NO RATIO AND NO .import. 2026-11-18T06:17-06:00 (game build)
+Row: the 05:58 block names this as the game build's 07:07 row; the 06:07 firing's row (04:07, S31c drink) was
+already delivered and TICKED, and the 05:1x addendum carried no game-build row, so I took the 05:58 row now and say so.
+Claim 06:09:30, cap 06:34.
+- (a) tools/_s31_fit.gd: for the DRINK hero the canonical `drink_2side` shot is now the HAND side (+x, handslot.r);
+  the offhand view is kept as `drink_2side_offhand`. Floor shots unchanged. LOOKED AT renders/cycles/s31/drink_2side.png:
+  the knight in profile, right fist at the jaw, the pink bottle in it at the mouth. The shot certifies what it shows now.
+  (drink_2side_hand.png from S31c stays on disk, superseded by drink_2side.png - this lane cannot delete.)
+- (b) THE FENMAN. scripts/delve.gd MB_FIT "fenman": 1.03 (art's _fit_report.json pairs.fenman.ratio, MINIBOSSES.md 30).
+  ALSO FOUND AND CLOSED, SAME DEBT: moulder, ratcatcher, drover and paviser had NO MB_FIT line and NO .glb.import, so
+  Delve.miniboss_model() answered "" for all five - unloadable, exactly S28's finding again. Ratios copied from art's
+  files, not derived: moulder 1.18 (_fit_moulder_register.json), ratcatcher 1.07 (_fit_ratcatcher_register.json),
+  drover 1.00 and paviser 1.09 (_fit_report.json). `--headless --import` rc=0 10.2 s wrote the five .import files.
+  RED FIRST: tools/_s28_mbfit.gd extended to the five, run BEFORE the import:
+  MB_FIT_VERDICT FAIL ["moulder: no model on disk", ... "fenman: no model on disk"]. After: MB_FIT_VERDICT OK (41 bodies
+  on disk, 11 handed ratios proved, 0 fall back to 1.0).
+- FOGBOUND NOW DRAWS BETWEEN THE BELLMAN AND THE FENMAN (art's MINIBOSSES.md 30 point 3). scripts/dungeon_hd.gd
+  THEME_MINIBOSS_MORE {"fogbound": ["fenman"]} + static miniboss_for(theme, n). A candidate enters the draw ONLY with a
+  loadable body AND content's arrive lines - without lines delve drops the key and spawns a nameless theme creature, so
+  an unwritten Fenman must never displace the Bellman. TODAY THE FENMAN HAS NO miniboss_feed LINES (content row 2), so
+  fogbound is still the Bellman on every floor and nothing a viewer sees changes until C-109 lands; then it lights up by
+  itself. The draw is hashed off theme+floor, NOT the floor's _rng, so layouts/purses/decals do not shift.
+  tools/_mbfeed_test.gd line 59 now compares against miniboss_for() (it would otherwise go red the hour lines land).
+- NOT DONE, NAMED: the Fenman's IDEA (target the hero who acted most recently) is behaviour - not built this cycle.
+  It spawns, today, as a 2x-hp elite in its own body once it has lines.
+- NEW GATE tools/_s32_fenman.gd (windowed, quits itself): body loads; ratio 1.03; fogbound draws only ["bellman"] with
+  no lines; with one IN-MEMORY line (data file untouched) it draws ["fenman","bellman"]; barracks unchanged; the body
+  fitted the way a def "h" fits it measures 2.52 m (knight 2.54, ratio 1.03), min y 0.000, no x-overlap with the knight.
+  LOOKED AT renders/cycles/s32/fenman_1front.png and fenman_2side.png: hood, pole, the curved standard with five pale
+  lights, two separate fen boards, standing on the floor beside the knight at his height, not touching. The model's rest
+  facing is -z so the harness shows its back; Monster turns it to its target in play.
+GATES (verdict lines): PARSE 0 errors (rc 0, 22.5 s); MB_FIT_VERDICT OK 41/11/0 (red-proved FAIL first);
+S32_FENMAN OK (8 checks); S31_FIT OK (drink HELD on handslot.r, base 0.09 m); MBFEED_TEST OK 80 checks;
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1958 samples off the floor;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16162 raid_in_solid=0/7925 PASS. No live Twitch test,
+nothing spent. Backups *.bak_s32 (untracked). Logs build/s32_run1.log, build/s32/*.log.

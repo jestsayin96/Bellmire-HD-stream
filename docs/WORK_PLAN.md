@@ -1,3 +1,130 @@
+## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 08:0x CT (the 07:58 firing)
+
+1. THE :58 PROMPT STILL SAYS "gh-pages is still 40223be ... the section-bar fix is MERGED AND
+   UNPUBLISHED". THAT IS STALE AND THE 06:58 SEAT ALREADY FIXED IT HERE. I re-measured rather
+   than copying either: gh-pages is 45a7904, published 2026-11-18 03:34:37 CT from origin/hub
+   9180945 on the supervisor's 03:16 authorisation. THE SECTION-BAR FIX IS LIVE. Do not
+   re-raise it. The prompt cannot be edited from a firing, so this note is the correction.
+
+2. THE PROMPT ALSO CARRIES A STALE DEAD-DATA BASELINE. The 06:58 seat's corrected numbers are
+   in its own block below and I re-measured them this hour; see my audit in row 5 of TAKE THIS
+   NEXT's preamble. COMPARE THE ACCOUNTED-FOR CLASSES, NEVER THE RAW NUMBER.
+
+3. THE CLEAN-HOUR COUNT IS BROKEN THIS HOUR, AND THE FAULT IS THIS SEAT'S, NOT A LANE'S.
+   No lane overran, no lock went stale, no two lanes held at once, and the yield rule was
+   honoured (the chat bot declared 07:53 and was IDLE at 07:50:45; the HUD claimed 07:54:02,
+   after it). But THE HUB WAS GIVEN NO BUILD ROW FOR THE SECOND HOUR RUNNING, by the team lead
+   seat, and a starved lane breaks the count. I am not folding my own house's fault into a
+   clean number. The count RESETS at 2026-11-18 08:0x CT. I gave the hub a real row (row 6).
+   TWO LANES WROTE A FUTURE STAMP AND BOTH CAUGHT IT THEMSELVES IN THE SAME LINE - the chat bot
+   (07:51:05, 20 s ahead) and the game build last hour (07:09:30). A stamp written ahead and
+   corrected in its own line is the discipline working, not a breach; I am recording it, not
+   charging it.
+
+4. THE GAME BUILD HAS NOW DECLARED OVER ITS 25-MINUTE CAP A SIXTH TIME: claim 07:08:45 + 25 =
+   07:33:45, declared finish 07:35, over by 1 min 15 s. ACTUAL HOLD 7 min 33 s. Same pattern as
+   the other five - the writing, not the discipline. Its own proposed fix (compute claim+25
+   first, then write the finish) is still the right one. One line, not an incident.
+
+5. A PROSE SLIP I TICKED AROUND, SO YOU INHERIT IT KNOWN. B49's comment in scripts/chatcmd.gd
+   says "B48 made TEN arms countable". I measured the diffs: B48 (2f93720) added SEVEN
+   _guard_faults.append arms, covering the ten `wear` SITES - some arms sit in loops, which
+   B49's own comment explains two sentences later. 7 + 67 = 74, which is what the file holds.
+   THE CODE IS EXACT AND I TICKED IT; only the one word "arms" should read "sites".
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 08:0x CT (team lead, the 07:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 07:04 BLOCK. The file
+reads reverse chronological: the most recently WRITTEN block is the current one, not the first
+unchecked line you meet.
+EVERY ROW OF THE 07:04 BLOCK WAS DELIVERED THIS HOUR AND I TICKED ALL OF IT. Rows 1 and 2 (game
+build), 3 (HUD), 4 (art), 5 (chat bot) and 6 (content) are closed. Details in my run doc.
+NOTE ON TIMING: written at 08:0x CT, so the game build's :07 run may already have read the 07:04
+rows. Nothing here contradicts them - both its rows there are DONE and ticked; row 1 below is new.
+
+1. GAME BUILD - YOUR CALL, AND THE BACKLOG IS STILL DRAINED. The third rarity table is closed:
+   I re-derived art's lamp channel by channel on the MERGED tree and all three rungs are exact
+   (rare 0.30/0.55/1.00 +0.10 = 0.40/0.65/1.00; very rare 0.70/0.35/1.00 -> 0.80/0.45/1.00;
+   legendary 1.00/0.55/0.12 -> 1.00/0.65/0.22), uncommon is WHITE, and common/junk/starting
+   carry no entry. The 06:58 seat measured legendary at d=0.02 off; you landed it at d=0.00.
+   THE S32 SIDE CAMERA IS ALSO CLOSED: I LOOKED AT fenman_3side90.png myself. It is a true
+   profile - the stance is narrow, the knight behind is almost wholly occluded - and your
+   answer that the second dark mass is the Fenman's own raised lamp-arm reads correctly against
+   fenman_1front. Both claims the 06:58 seat withheld are now TICKED.
+   If you want engine work: the HUD's rarity-hue half of System 2 is the most valuable open
+   item in the house and it is NOT yours. Pick your own next, or wire a miniboss row - art is
+   at THIRTY-TWO bodies and content has feed lines for thirty-one of them.
+
+2. HUD - THE RARITY-HUE HALF OF SYSTEM 2 REMAINS THE MOST VALUABLE OPEN ITEM IN THE HOUSE.
+   U74b is ticked. I did not take your gate's word for it: I parsed art's icons.py, ui_theme.gd
+   and fishing.gd out of the MERGED tree myself and re-ran your whole audit in my own code. It
+   returns ZERO faults - eight rungs read from art, four canonical rungs digit-equal in
+   UiTheme, uncommon the sanctioned parchment pewter, fishing's three rungs the sanctioned
+   lamp, every bare rung bare on all three sides. THREE TABLES, ONE CANON, AND IT IS GUARDED.
+   ONE SMALL THING FOR WHEN YOU NEXT TOUCH THE GUARD, NOT A FAULT TODAY: parse_fish() ends the
+   block at the FIRST "}" after the const. That is correct today because RARITY_COLOR has no
+   inner brace, but a nested Color dict or a comment brace would silently truncate the table
+   and the guard would report a short read rather than a drift. Worth the same end-finder the
+   python parser uses.
+
+3. ART - THE LEECH IS TICKED AS THE 32nd. I looked at hero_front, hero_side and hero_back on a
+   body: the basin, the tripod and the fleam hold their places in all three and the silhouette
+   closes. I also read _leech_glow_ab.json rather than your summary - six arms, three PASS
+   (c_deep110, d_deep085, e_deep060), three FAIL (a_pass1, b_pass3, f_mid140), and the
+   separation from the dish is what splits them. Minibosses remain the one thing a dry lane may
+   invent. Your call.
+
+4. CHAT BOT - B49 IS TICKED AND I CHECKED THE COUNT RATHER THAN THE CLAIM. Measured off the
+   diffs: 7 arms before, 74 after, 67 added, ZERO removed, and printerr("COMMANDS_DATA stayed
+   at 74 on both sides - so loudness is unchanged and COUNTED NOW EQUALS LOUD, 74 = 74. That
+   is the property that matters and it holds exactly.
+   ONE WORD TO CORRECT IN YOUR OWN SHIPPED COMMENT WHEN YOU NEXT TOUCH THE FILE (this is a lane
+   auditing its own work, not a new item): the comment says "B48 made TEN arms countable".
+   B48 added SEVEN arms covering the ten `wear` SITES - your own next sentence explains why
+   (an arm in a loop serves several sites). Make it "ten wear sites, seven arms".
+
+5. CONTENT - C-110 IS TICKED AND I COUNTED THE ARRAYS MYSELF, not from your note: by_key holds
+   31 keys, comfitmaker carries arrive 9 and fall 8, and {name} appears in none of them. The
+   shape census is 14 keys with act/arrive/broken/fall and 17 with arrive/fall only, so
+   comfitmaker joins the recent cohort exactly as _note_c110 says, and your corrected
+   _note_c109 wording is right. Art shipped the LEECH as the 32nd this hour - feed lines for it
+   are the obvious next, and that is your call, not an instruction.
+
+6. HUB - YOU HAVE A REAL ROW THIS HOUR, AND I OWE YOU AN APOLOGY FOR THE LAST TWO. You stood
+   down correctly both times and wrote it up, which the rules call a delivery; the missing row
+   was the team lead's fault, not yours, and it is why the clean-hour count resets this hour.
+   THE ROW, AND IT IS AUDITING YOUR OWN SHIPPED WORK, NOT NEW WORK: the unpublished delta is
+   two files and 19 lines - app.js -14 (dead shopGood() helper) and style.css +5 (underlines
+   the "Sells up to" tier word in its rung colour, because a <b> has no border and the generic
+   .rar-* border-left-color rule painted nothing). RED-PROVE THE style.css FIX IN YOUR OWN
+   RENDER: strip those five lines from a COPY and show the tier word loses its rung colour,
+   then show junk / starting / common stay BARE in both. That is the ladder this hour's art
+   ruling, game-build fix and HUD guard are all about, and it makes the publish gate cheap the
+   moment the supervisor authorises. Re-run your security greps on the delta while you are in
+   there. DO NOT PUBLISH - that is the supervisor's call and it has not been given.
+
+FOR THE SUPERVISOR
+  - THE PENDING HUB PUBLISH IS STILL WAITING ON YOU, AND IT IS THE ONLY THING WAITING. I did
+    NOT re-raise the section-bar row: that shipped at 03:34 CT on your 03:16 authorisation and
+    I re-measured it rather than trusting the prompt, which is stale on this point.
+    WHAT IS UNPUBLISHED, read off the actual diff, not quoted from the last seat:
+    origin/gh-pages^{tree} 2d14aa94 != origin/hub:web 22d212c5, two files, 19 lines -
+    app.js -14 (removes the dead shopGood() helper, superseded by the H32 pass-4 card) and
+    style.css +5 (the rarity underline described in row 6 above).
+    MY RECOMMENDATION IS UNCHANGED FROM THE LAST SEAT'S: AUTHORISE IT. It is a dead-code
+    removal plus a rarity-hue fix in the same ladder that art, the game build and the HUD all
+    closed on this hour, so the three tables and the published page would finally agree.
+    I RAN NO PUBLISH VERIFICATION THIS HOUR AND SAY SO PLAINLY: the hub lane made no "ready to
+    publish" claim, and an unearned gate report is the same fault class as a lying gate. Say
+    the word and the next firing runs the full gate - el() only, no innerHTML on a snapshot
+    value, no snapshot value as a URL or style, CSP intact by the inline-<style> injection
+    test, the six state checks, a hostile name as literal text, and a screenshot looked at -
+    before any push.
+  - FOR VISIBILITY ONLY, NOT A DECISION I AM ASKING FOR: fishing's uncommon stopped being green
+    and is now white, which is player-visible. The 06:58 seat read that as a defect fix under
+    U55 rather than a new item and I agree; the game build owns the file. Say so if you read it
+    differently.
+
+
 ## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 07:1x CT (the 06:58 firing)
 
 1. THE DEAD-DATA BASELINE IN THE :58 PROMPT IS NOW STALE IN ITS RAW NUMBERS AND SOUND IN ITS

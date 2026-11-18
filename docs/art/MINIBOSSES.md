@@ -3251,3 +3251,201 @@ I touched no `.gd` outside `tools/art/`. What this needs, named exactly:
 Entirely original procedural geometry (bmesh/numpy, raw vertex maths via
 `lordlib`). No third-party asset is read by this builder. Nothing to add to
 `docs/art/ASSET_SOURCES.md`.
+
+---
+
+## 33. THE BEADLE - *IT CALLS THE ORDER* (2026-11-18, art lane)
+
+`beadle` | shrine | h **2.95** | wear **0.18** | span **1.86 m** | 4 meshes, 666 faces,
+static, no armature, feet on z=0 | **CORRIDOR-SAFE** against the 11.0 m clear span.
+
+> **IT CALLS THE ORDER** - while it stands the party does not choose who acts. The
+> Beadle calls, and it calls the same hero again and again while the rest hold their
+> ground and watch; the four brass pegs on the board it holds overhead are the calls
+> it has left and you can count them from the door. Knock the board off its arm and
+> the order comes back to you.
+
+Feed line: *"It says who speaks, and it is not you."*
+
+### WHY THIS ONE - MEASURED THIS RUN, NOT REMEMBERED
+
+**THIRTY-TWO IDEAS EXIST AND NOT ONE OF THEM TOUCHES WHO ACTS.** I parsed the hooks
+out of `CANON` rather than recalling them - 32 bodies, 32 distinct hooks - and
+grepped every hook for the words that would mean a turn:
+
+| word | hits | what they were |
+|---|---|---|
+| turn, order, act, acts, initiative, wait, first, last, speak, call, who, queue, haste | **0 each** | - |
+| slow | 1 | the **Loader**: *it loads you, and you fight slower until you drop it* |
+| time | 2 | the **Snuffer** (*one at a time*) and the **Sluicekeeper** (*a step at a time*) - both the creature's own pacing, not the party's |
+
+Every one of the thirty-two is answered by deciding **what** to do - damage, healing,
+gear, gold, stores, light, ground, position, facing, movement. This one takes the
+decision itself away from everyone but one hero. That is a mechanic class the set
+does not have at all.
+
+**THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:**
+
+- the **LOADER** is the closest and it is a **stat**. Slower is a number on a hero
+  that still takes its own turn. The Beadle changes nothing's speed; it changes
+  whose turn it is.
+- the **DYER** *marks one of you and hunts only the mark* - same shape of sentence,
+  opposite direction. The Dyer chooses **its** target. The Beadle chooses **your**
+  action.
+- the **DROVER** *yokes one of you* and the **HURDLEMAN** *cuts the room in two* -
+  both take the party's **formation**. Nobody loses a turn to either.
+
+**WEAR 0.18 IS A FREE RUNG, MEASURED OFF THE REGISTER.** The thirty-two hold 0.05,
+0.08, 0.10, 0.12, 0.15, 0.20, 0.22, 0.25, 0.26, 0.30 ... 1.00. 0.18 is the one gap in
+that low cluster. It is also the honest number for the thing: the staff and the board
+**are** the office, so a beadle keeps them - but the coat is parish issue and has been
+to every moot for years. **HEIGHT 2.95** extends a full 1.95-2.90 ladder by one step,
+and it is the right read: a beadle out-tops the people he is calling.
+
+### NINE PASSES, ONE CHANGE EACH, AND EVERY ONE DRIVEN BY A PICTURE
+
+**PASS 2 - THE HAT WAS WEARING ANOTHER BODY'S SILHOUETTE.** Pass 1's brim was 0.700
+against a 0.385 crown, wider than the shoulders, and `side.png` read the whole
+creature as **a lamp**: shade on top, bell-shaped base under it. That is the
+**Snuffer's** own claimed outline ("a lamp-stand that walks"). Brim to 0.465.
+
+**PASS 3 - THE BOARD WAS EDGE-ON AND THE HAND WAS NOT ON IT.** Two faults, measured in
+two different views. *Side:* the board sat square across x, the side camera threw x
+away, and the four pegs read as **the teeth of a saw blade**. A yaw of 0.38 rad gives
+that camera 0.37 of the board's own length - the Paviser's camber argument, applied to
+yaw. *Front:* the forearm went up **behind** the hat and ended in a stub, so the board
+**floated** over a bent pipe. Elbow forward to y -0.42, mitt onto the board's
+underside. The board also went from 1.34x0.085 to 1.06x0.14 because it read as an
+**aluminium tray**, and the dark under-rail came off because it made it a **scaffold
+plank on a trestle**.
+
+**PASS 4 - I MADE THE DYER'S MISTAKE AFTER QUOTING IT IN THE COMMENT ABOVE IT.** I
+wrote *"strength 1.35 and not higher: the Dyer's pass 3 measured an emissive at 2.30
+coming back CREAM"* directly above a value that still clips: 1.35 x (1.000, 0.735,
+0.255) is (1.35, 0.99, 0.34), so **red and green both reach 1.0**. The pegs rendered
+cream - the exact colour of the oak board behind them - and a gauge the same value as
+its own backing is a gauge you cannot read. 1.10 x (1.000, 0.600, 0.075) clips red
+only, so what reaches the film is amber. The staff finial was also a **candle flame**
+(a tall lit cone on a dark stick is a candle in every view) and is now a knob.
+
+**PASS 5 - FIVE THINGS MOVED AND THEY ARE ONE CHANGE: THE HEAD STOPPED BEING A
+MACHINE.** A dark drum for a skull with a pale rectangle pasted on the front, two round
+lit eyes in it and a slot under them read as **a television** from the front and **a
+robot** from three-quarter - the one thing Bellmire's register cannot carry. `side.png`
+had the other half of the same fault: a dark skull under a dark crown of nearly the
+same width with a pale band between is **a bucket with a lid**, the Comfitmaker's
+pass-6 fault arrived at from the other direction. Both are the same mistake - drawing
+**features on** a head instead of making the head itself the readable object. The skull
+becomes the pale mass, the hat the dark one, the plate is deleted, and the eyes go dark,
+which leaves the amber to the gauge and the staff alone.
+
+**PASS 6 - A FIX THAT STOPPED BEING A FIX WHEN THE THING AROUND IT CHANGED.** The
+tippet was put on pale to keep a **dark** head off a **dark** torso. Pass 5 inverted the
+head and I left the tippet alone, so a pale collar sat directly under a pale skull of
+almost the same width (0.455 jaw against 0.470 tippet): `front.png` read head and tippet
+as one pale trapezoid and `side.png` as a single pale cone - **a wimple, not a man in a
+coat**. The honest move was to delete its colour, not to invent a third value.
+
+**PASS 7 - THE FIT RENDER FOUND BOTH OF THESE, WHICH IS WHY THE FIT RENDER EXISTS.**
+Standing the body beside a posed KayKit knight said two things my own three views had
+not. *One:* the head was **a bell** - 0.455 at the jaw against 0.370 at the crown is a
+23% taper and `hero_side.png` read it as a lampshade next to the knight's near-round
+helm. I had the Comfitmaker's *"a head tapers up"* in hand and **overshot it**; the
+lesson was that a head must not flare out at the **crown**, not that it should flare at
+the **jaw**. 0.420 to 0.395 is 6%. *Two:* at r 0.046 the eyes **vanished at hero
+scale** - `hero_front.png` read the face as a pale blank with a smudge on it. And one
+thing I measured rather than eyeballed: the chin bar sat at y -0.405 where the skull's
+own radius at that height is **0.414**, so it was **inside the head and could never
+have rendered at all**.
+
+**PASS 8 - THE HAND WAS A PEARL, AND THE WHOLE IDEA DEPENDS ON THE BOARD BEING HELD.**
+`hero_front.png` showed a white **ball** sitting under the plank's edge. A ball near a
+thing is not a hand on a thing - and *"knock the board off its arm"* is the party's
+answer to this creature, so the one join that had to be legible was exactly the one
+left as a sphere. A grip is **two** objects: a palm wrapping under and a thumb across
+the top edge. Both are now placed off the board's own axes, like the pegs, because
+pass 7's mitt had been typed in world coordinates while the board had been yawed and
+raised under it twice.
+
+**PASS 9 - THE SILHOUETTE SHEET CONDEMNED WHAT COLOUR HAD BEEN HIDING.** With value
+thrown away the front cell read as **one lump with a comb on top**: the elbow sat at
+x -0.520 against a brim of radius 0.545, so the whole upper arm lay **inside the hat's
+own outline**. The dark sleeve against the dark brim was legible only because they are
+different darks, and the silhouette test exists precisely to take that crutch away.
+Elbow out to -0.720, clear of the brim by 0.175.
+
+### THE FIT PROOF - ON A BODY, AND I LOOKED AT IT
+
+`minibossfit --only beadle` against the real `Knight.glb` at scale 1.0, posed:
+**verdict GREEN**, `blind_views []`, **3 of 3 views proving** (front / side / back),
+each view showing both subjects at `seen 1.000`. Hero measured **2.45 m**, creature
+**2.95 m**, **ratio 1.20**, `pair_w` **3.73 m**, `fits_frame true`.
+
+**THE INSTRUMENT IS PROVED ABLE TO GO RED.** The same gate run with `--prove-red`
+(hero stood **on** the creature) returns **RED** - *"only 0 of 3 views show BOTH
+subjects"*, creature `seen 0.000 vis 0` in all three - while the blank check and the
+border check **pass it**. A gate that has never been seen to fail is not known to be
+able to. Recorded in `renders/art/minibosses/_fit_beadle_red.json`.
+
+**AND A TRAP THE RED PATH SETS FOR WHOEVER RUNS IT NEXT:** `--prove-red` with the same
+`--only` **overwrites the register's shipped hero renders** with its creature-less
+cell. I looked at `hero_front.png` straight after the red run, saw a knight alone in an
+empty frame, and very nearly wrote that the creature had failed to render. It had not -
+I was looking at the proof's own output. The green pass must be re-run after any red
+proof, and it was.
+
+**BLANK AND BORDER: 99 files checked across the whole register, 0 failures.** Border
+alpha measured on all six of this body's PNGs (`front`, `three_quarter`, `side`,
+`hero_front`, `hero_side`, `hero_back`): **max border alpha 0.0000 on every one, no
+frame clip.** minibossgen's own check is opaque-pixel only and cannot see a clipped
+creature, so this was measured separately - a clipped icon is not a blank one.
+
+### WHAT IS STILL WRONG WITH IT - I LOOKED, AND THIS IS THE HONEST LIST
+
+1. **The staff does not exist in the side silhouette.** With colour thrown away it
+   lies entirely inside the body mass. The front and three-quarter cells carry it;
+   the side cell does not.
+2. **The side silhouette merges the raised arm into the hat.** Pass 9 opened daylight
+   in front and three-quarter, where the brim was the obstruction. From the side the
+   arm passes behind the crown and there is no gap to open without moving the board.
+3. **The two spent sockets are not countable at fit scale.** They read at 700x980 in
+   `front.png` and `three_quarter.png` as two dark discs; at hero scale only the four
+   pegs survive. The honest claim is split: **the four pegs are countable from the
+   door, the sockets are not.**
+4. **The grip says "held" but not "hand".** The palm and thumb read as a pale wedge
+   on the plank's edge; there are no fingers at this budget.
+5. **The staff hand is still a pearl.** I fixed the board hand at pass 8 and left the
+   staff hand a sphere on a shaft. It is the same fault, uncorrected, and I am naming
+   it rather than hoping nobody looks.
+6. **The head is a pale cylinder with a straight dark brow** - stern and readable, but
+   it has no crown shape and no ears. At hero scale it is a canister with eyes.
+7. **The coat is a featureless dark trapezoid** and nothing on it shows wear 0.18. The
+   condition argument is carried entirely by the brightness of the brass.
+8. **The board's near end touches the forearm** in the front cell, and the hat overlaps
+   the board's near end in the three-quarter cell.
+9. **The elbow is a hard angular corner** in every view - a tube bent at a point, not a
+   joint.
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT, AND I TOUCHED NO .gd OUTSIDE tools/art/
+
+1. **`scripts/bestiary.gd`** - add a row for the Beadle with `model` =
+   `res://assets/monsters/minibosses/beadle.glb` and **NO `anims` entry**: this body is
+   **static**, four meshes merged by material, no armature. `h` = **2.95** - that is the
+   authored height the fit sheet was measured at and the `ratio 1.20` above is the
+   argument for it.
+2. **`scripts/dungeon_hd.gd`** - the miniboss set-piece roll on theme `shrine`. The
+   Beadle is the **third** shrine piece (with the Snuffer and the Leech); it is not
+   room-locked, so no spawn gate is needed - footprint span **1.86 m** against the
+   11.0 m clear span of a D91 three-cell corridor.
+3. **The mechanic itself is the game build's**, not mine: turn order is held by the
+   creature while it stands, the four pegs are a destructible gauge, and breaking the
+   board returns the order to the party. The art carries the gauge; the rules do not
+   exist yet anywhere.
+
+### LICENCE
+
+**100% procedural.** Raw vertex maths only (`lordlib` primitives, `creatures.limb`,
+`creatures.eyes`) - no pack geometry is read by this body and `pack_used` is null. The
+only third-party asset in any render here is the CC0 KayKit adventurer `Knight.glb`
+used as the measuring stick in the fit sheet, already logged in
+`docs/art/ASSET_SOURCES.md`.

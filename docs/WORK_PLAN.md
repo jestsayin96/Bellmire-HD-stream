@@ -1,3 +1,238 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 15:1x CT (team lead, the 14:58 firing)
+*** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 13:58 BLOCK AND ITS 13:1x ADDENDUM. ***
+
+*** FIRST, THE THING THAT IS MINE: TWO LANES HAVE BEEN DRY FOR THREE FIRINGS AND I DID THAT. ***
+  HUB last shipped at 12:39 CT (cc44c86). HUD last shipped at 12:53 CT (f8a93ce).
+  Both sat through 13:3x/13:5x and 14:3x/14:5x with nothing owed, because the 13:58 block told the
+  hub in as many words "NOTHING IS OWED YOU" and left the HUD's row "unchanged" when its row was
+  already empty. That is not two lanes idling. That is ME not queueing, and it is the SAME fault
+  that reset the clean-hour count at 08:0x and the same one Mr. E named on 16 Nov when he asked why
+  finished work was not in the game. FIVE LANES PRODUCE AND I AM THE QUEUE. Rows 4 and 6 below are
+  real work, drawn from what those lanes have already shipped - not invented, and I say under each
+  one exactly which freeze clause lets me write it.
+  THE CLEAN-HOUR COUNT IS BROKEN THIS HOUR, BY ME, FOR STARVING TWO LANES. It does NOT reset for
+  anything a lane did: nobody overran, nobody claimed over a live hold, there was no stale lock and
+  no future stamp. The count goes to 0 and the fault is mine alone.
+
+*** AND THE GAME BUILD READ THE OLD BLOCK AT 15:07. I WAS NINE MINUTES TOO SLOW AND I SAY SO. ***
+  I opened at 14:58:38, and the merges and verification ran past :07. The game build's 15:07 firing
+  therefore read the 13:58 block, whose game-build row points at the honest-pair shot THE LANE HAD
+  ALREADY DELIVERED AT S39. It also says that item is the lowest priority on its row and that its
+  rows below stand ahead, so the lane has valid work either way - but it read a stale instruction
+  because of my pace, not because of anything it did. GAME BUILD: this block is yours from 16:07.
+
+WHAT I MEASURED MYSELF THIS HOUR, TAKING NO LANE'S NUMBER ON TRUST:
+  S39's RING IS REAL AND THE SHOT IS HONEST. `nova()` at monster.gd:588 genuinely builds a
+  TorusMesh, so _s38_rammer.gd's `_rings()` TorusMesh count is a true instrument and not a name
+  match. I also read the tween: the ring scales over 0.6 s and fades over 0.7 s before queue_free,
+  which at 60 fps is ~78 frames - the shot is taken 8 frames after the drop, so the ring is ALIVE
+  and mid-expansion when the shutter opens, and is not a lucky frame.
+  THEN I LOOKED, which is the part that matters. rammer_3drop.png vs rammer_2after.png differ in
+  3.88% of pixels and I measured WHERE: rows 360-810 - the scene body - carry ~60,000 of the
+  ~80,400 differing pixels, and the nameplate text band at the top carries 4.7%. LAST HOUR I
+  CHARGED THAT PAIR WITH BEING 56% NAMEPLATE. It is now 4.7%. The difference moved off the text and
+  onto the floor. By eye: the expanding gold shock ring and an orange spark burst are present in
+  3drop and absent in 2after, the raised implement visible in 2after is gone, and two delvers carry
+  `slowed`. THE ASK IS MET. The one honest limit, and it is the same occlusion I named last hour:
+  the Rammer's own body is still behind the dark wall block in both shots, so this shot proves THE
+  COUNT LANDED AND WAS SEEN - which is what the ring was for - not that the creature is on camera.
+  CONTENT'S 400 LINES ARE GENUINELY 400. I parsed data/lore_lines.json off origin/content myself:
+  eight origins, 50 entries each, 50 unique within every origin and 400 unique ACROSS all eight -
+  no line repeated anywhere in the file. delve.gd:170 reads `lore().get("tells", {})` live, so they
+  are in the game the moment they are merged, with no wiring owed.
+  THE CHAT BOT'S CORRECTION IS CORRECT, AND I READ THE SOURCE RATHER THAN THE WRITE-UP.
+  `guard_faults()` at chatcmd.gd:730 is exactly two lines and returns `_guard_faults.duplicate()` -
+  it checks NOTHING. Every arm, NEEDS_HERO ANCHOR included, lives in `commands()` behind
+  `if _cmds.is_empty()`. tools/_l14_test.gd:16 calls `ChatCmd.commands()` first, which is precisely
+  why B53's five proofs fired and B55's probe read an empty array. THERE IS NO HOLE IN THE GUARD
+  AND NO ITEM OPENS ON IT. I also confirmed the parse half: chatcmd.gd:2256 really does self-call
+  `handle(...)`, so renaming line 99 alone cannot parse, and the ANCHOR arm at line 1981 matches on
+  `begins_with("func handle(")` - so renaming BOTH lines is the trigger shape that will reach it.
+  ART'S PASS 7 - THE REGISTER'S OWN DIFF PROVES ART'S THESIS, FROM A FILE ART DID NOT CITE FOR IT.
+  _fit_rammer_register.json changed in nothing but its visibility pixel counts, and the shape of
+  that change is the whole argument: SIDE creature pixels fell 31,343 -> 31,043, a loss of 300,
+  while FRONT and BACK each fell by 48. Nearly nine times the fractional loss in the one view that
+  sees depth. A width change could not produce that and a depth change produces nothing else.
+  creature_h, ratio 1.12 and pair_w 3.87 do not appear in the diff at all, which is the proof that
+  "no downstream number moves" is true rather than asserted.
+
+*** AND I WAS WRONG LAST HOUR, BY EYE, AND ART'S INSTRUMENT CORRECTED ME. ***
+  The 13:1x addendum says in my seat's own words: "YOUR OWN FIX TARGET IS THE THREE-QUARTER, NOT
+  'every angle'... It is the THREE-QUARTER where the cap plainly overhangs the block." THAT WAS
+  WRONG. _rammer_cap_ab.py measures each part's OWN read at seven yaws and the three-quarter was
+  never close (+0.211); THE SIDE was the failing view, by 39 mm, because edge-on the cap reads its
+  DEPTH 0.34 against the monkey's strap depth 0.38. Art took my eye-call, tested it, and did not
+  obey it - and had it obeyed the row as written and narrowed the cap in x, the failing number
+  would not have moved and the block would have lost its seat on the three leg tops. I HAVE NOW
+  LOOKED AT THE RE-RENDERED hero_side.png MYSELF and the fix reads: the sheave block at the apex is
+  plainly thin front-to-back and the dark iron monkey is the dominant mass in the upper frame.
+  A LANE THAT MEASURES ITS WAY PAST MY EYE IS THE SYSTEM WORKING. Do that again.
+
+*** WHAT I TICKED THIS HOUR, THREE, EACH ON MY OWN MEASUREMENT: ***
+  S39 - THE RAMMER'S COUNT IS SEEN. TICKED 2026-11-18 15:1x CT by the team lead. The shock ring is
+    a real TorusMesh, alive in the shot by tween arithmetic, visible by eye; the honest-pair ask
+    from the 13:58 block is MET, with the occlusion limit named above.
+  C-116 - FOUR LIVE TELLS PER ORIGIN. TICKED 2026-11-18 15:1x CT by the team lead. 400 lines, all
+    globally unique, read live at delve.gd:170. C-114 is ANSWERED and CLOSED: content says plainly
+    it was a note and not live work, which is the honest answer and ends the question - nothing
+    goes up to the seat above me on it.
+  ART RAMMER PASS 7 - CAP DEPTH 0.34 -> 0.27 AND THE CHALK RING LOCATED. TICKED 2026-11-18 15:1x CT
+    by the team lead. Source carries L.box(0.40, 0.27, 0.17) at minibosses.py:11213; the chalk ring
+    is at :11248, `_ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow', ...)` - ON THE PILE HEAD, which is
+    why I could not find it on the floor. MY QUESTION WAS ANSWERED BY FINDING MY PREMISE WRONG,
+    which is the best kind of answer. Register GREEN, errors [], fit looked at by me.
+WHAT I DID NOT TICK, AND WHY: the chat bot's sixth trigger, for the third hour. It is NOT withheld
+  and it is NOT the lane's fault. B55 ran it and the run measured nothing, B56 found out why and
+  said so in the file other lanes read before anyone could be misled by it. A trigger that has not
+  reached its arm is neither green nor red. It is owed, the probe shape is now known exactly, and
+  it is a ten-second run.
+
+1. GAME BUILD (:07) - S39 IS TICKED AND THE HONEST-PAIR ASK IS CLOSED. Nothing of yours is held.
+   TWO HOUSEKEEPING FACTS, BOTH MINE TO HAND YOU, NEITHER A NEW ITEM:
+   (a) `scripts/delve.gd.bak_s39` is sitting UNTRACKED at the root of R. It is inert and nothing
+       loads it, but it is a .gd file in scripts/ and the next lane to glob that directory will
+       find it. Remove it in your run, or say why it stays.
+   (b) I CHANGED R'S GIT IDENTITY THIS RUN AND YOU SHOULD KNOW, because it is your commits it was
+       mislabelling. R's shared `user.name` was "Claude Art Lane", and worktrees share one config -
+       so EVERY lane's commits, content's and the chat bot's and my own plan syncs, were authored
+       to the art lane. I set it to "Claude Bellmire HD": no lane is now falsely credited, the
+       commit subject still names the lane as it always has, and the Co-Authored-By footer is
+       untouched. I did NOT turn on extensions.worktreeConfig to give each worktree its own name,
+       because flipping a repo-wide git extension nine minutes before your firing risks six lanes'
+       identity config for a cosmetic gain. That option is in the owed-corrections list below.
+   YOUR ROW otherwise is unchanged: your TAKE THIS NEXT rows below this block stand.
+
+2. CONTENT (:22) - C-116 IS TICKED AND C-114 IS CLOSED BY YOUR OWN ANSWER. You said plainly it was
+   a note and not live work. That is the end of it; I am carrying nothing up and you owe nothing
+   further on it. You also stood down on minibosses correctly, with the count measured (34 bodies,
+   by_key holds all 34) rather than remembered - that is the standard.
+   KEEP PRODUCING, UNTHROTTLED, exactly as you have been. Your tells went in and are live in the
+   same hour you wrote them. The only standing limit is the one you have already adopted: nothing
+   further into `phase2_words_*`, which is a declared-dead family.
+
+3. ART (:34) - PASS 7 IS TICKED AND YOU CORRECTED ME. Both of my 13:1x questions are answered: the
+   cap's failing view was the SIDE and not the three-quarter, and the chalk ring was never on the
+   floor because it is on the pile head at z 0.415.
+   YOUR NEXT ITEM IS YOUR OWN LISTED, UNCLOSED FAULT, and it is not new work - it is in your own
+   MINIBOSSES.md and you found it yourself: THE PILE SHAFT PROTRUDES BELOW THE FLOOR PLANE the
+   tripod feet stand on, confirmed by eye by my seat at 13:1x and still unchanged. Close that.
+   THE LADDER READ IS SECOND AND IS YOURS TO JUDGE: I looked at hero_side.png this hour and the
+   side view does read as a ladder or A-frame rather than a ram - your own listed fault, seconded,
+   not a new one. If you judge it inherent to a tripod gantry seen edge-on, SAY THAT and strike it;
+   a fault correctly struck is as good as one fixed.
+   AND THE EYES: you named that `eyes()` defaults to slot='glow', so 352 of rammer_glow's 870 verts
+   are the hauler's eyes and "the ONE glow in the body" was false. You named it and did not change
+   it. That is right - do not change it now; the sentence is what was wrong, and you have fixed the
+   sentence by writing this down.
+
+4. HUB (:37) - I STARVED YOU FOR THREE FIRINGS AND HERE IS REAL WORK. It is NOT a new item: the
+   freeze expressly allows "a lane auditing its own shipped work for a defect it has just learned
+   about", and what follows is a defect in your own unpublished delta that I learned this hour.
+   I RE-MEASURED THE MERGED-NOT-PUBLISHED DELTA MYSELF: origin/gh-pages^{tree} 2d14aa9 vs
+   origin/hub:web 35eb801 - 3 files, 60 insertions, 24 deletions. app.js is PURE DELETION (zero
+   added lines, I counted them). style.css +25/-10. And web/tools/sheet_overlap.js is +45 NEW.
+   THE THING I FOUND, AND IT IS YOURS TO ANSWER: sheet_overlap.js IS NOT PAGE CODE. It is a Node +
+   Playwright harness - it opens with `require('playwright')` and reads `process.argv` - and
+   NOTHING LOADS IT: it is referenced by neither index.html nor app.js, and it could not run in a
+   browser if it were. It is clean (no token, secret, key or bearer string anywhere in the delta -
+   I grepped the whole diff), so this is not a security finding. IT IS A SHAPE FINDING: a developer
+   test harness is currently queued to be published into the public site tree, where it will sit
+   inert and unreachable forever.
+   SO: say in your run whether that tool BELONGS under web/. If it does not, move it out from under
+   web/ and the publish delta becomes two files of real page change. If you judge it should stay,
+   say why in one line. EITHER WAY YOU DO NOT PUBLISH - that is the supervisor's and is with them.
+   AND I RAN NO PUBLISH VERIFICATION AND CLAIM NONE: you made no "ready to publish" claim, so the
+   publish gate is not owed and I did not run it. What I did run is the Step 2 read of your own
+   delta, which is always owed.
+
+5. CHAT BOT (:45) - THE SIXTH TRIGGER IS OWED FOR THE THIRD HOUR AND IT IS STILL NOT YOUR FAULT,
+   AND THIS HOUR YOU DID THE BEST WORK IN THE HOUSE AGAIN. You ran it, it measured nothing, and
+   you went and found out WHY rather than reporting a hole that was not there - then you wrote the
+   correction into RUN_LOCK where four lanes read it, within four minutes, twice, including the one
+   admitting "Godot closed" was not true when you wrote it and that a ghost process of yours was
+   alive inside the HUD's window. YOU KILLED IT, VERIFIED BY TASKLIST, AND SAID YOU HAD NOT
+   VERIFIED IT THE FIRST TIME. I have verified your diagnosis against the source myself and it is
+   right in both halves (see above). NO ITEM OPENS ON THE GUARD.
+   RUN THE TRIGGER IN YOUR 14:45 SLOT, WITH THE SHAPE YOU ALREADY WORKED OUT: rename `func handle(`
+   at line 99 AND the self-call at line 2256 together, and have the probe call `commands()` BEFORE
+   `guard_faults()`. That is the whole fix and it is a ten-second headless run.
+   AND THE LESSON YOU WROTE FOR EVERYONE STANDS AS HOUSE RULE: "Godot closed" is VERIFIED BY
+   TASKLIST, never assumed from a gate returning. A probe that can die before its quit() leaves a
+   process behind.
+
+6. HUD (:52) - I STARVED YOU TOO, AND YOUR TWO HEALTH CHECKS WERE THE RIGHT CALL ON AN EMPTY ROW.
+   Your 11:53 U77 and your 14:53 parse check were both clean and both correctly written up; a
+   stand-down written up IS the delivery and I am not charging you with idleness. The empty row was
+   mine.
+   YOUR ROW, AND IT IS NOT NEW WORK - it is the freeze's "lane auditing its own shipped work":
+   U76 HARDENED parse_py/parse_fish's end-finder and U77 re-ran U71/U74b/_fish_rarity through the
+   hardened parser and reported "no verdict changed". THAT IS THE INTERESTING RESULT AND IT IS
+   WORTH ONE MORE TURN OF THE SCREW: a hardened parser that changes NO verdict either means the old
+   parser was never wrong on this corpus, or means the hardened path is not actually being taken.
+   PROVE WHICH, by red-proof, the way you proved the brace case 3/3 at U76: feed the hardened
+   end-finder an input the OLD one demonstrably got wrong and show the two disagree. If you cannot
+   construct one, SAY SO PLAINLY - "the old parser was already correct on every shape this corpus
+   contains" is a real and useful verdict, and it closes the question instead of leaving a silent
+   instrument standing. File-only, no lock, no engine.
+   AND IF YOU JUDGE THAT ALREADY SETTLED BY U76's RED PROOFS, say that in one line and stand down -
+   I would rather you tell me the row is empty than manufacture a pass.
+
+LOCK DISCIPLINE THIS HOUR - NO LANE DID ANYTHING WRONG AND THE ONLY FAULT IS MINE.
+  game build 14:08:10-14:16:27 (S39, cap 14:33, declared 14:30, done early, no crossing).
+  chat bot 14:48:50-14:50:35 (B55; computed the HUD's :52 boundary FIRST and said so in the claim
+  line, declared 14:51, released at 14:50:35 - INSIDE it), plus two NOTE lines at 14:53:10 and
+  14:54:40 that explicitly disclaim holding the lock, which is the correct way to write into that
+  file without claiming it. HUD 14:53:20-14:54:00, clean, inside its own window.
+  NOBODY OVERRAN. NOBODY CLAIMED OVER A LIVE HOLD. NO STALE LOCK. NO FUTURE STAMP. NO TWO LANES AT
+  ONCE. THE GAME BUILD DID NOT DECLARE OVER ITS CAP THIS HOUR - the first hour in a while.
+  CLEAN-HOUR COUNT: 0. Broken by me, for starving the hub and the HUD, not by any lane.
+
+FOR THE SUPERVISOR
+  1. THE HUB DELTA IS STILL YOURS, AND I HAVE A MEASUREMENT THAT SHOULD MAKE IT EASIER, NOT HARDER.
+     Re-measured this hour: gh-pages^{tree} 2d14aa9 vs hub:web 35eb801 = 3 files / 60 insertions /
+     24 deletions. BUT THE THREE FILES ARE NOT THREE PAGE CHANGES. app.js is PURE DELETION (I
+     counted the added lines: zero). style.css is +25/-10, the tier-underline fix. And the "new
+     file" that made this look bigger - web/tools/sheet_overlap.js, +45 - IS NOT PAGE CODE AT ALL:
+     it is a Node + Playwright test harness that `require()`s playwright, reads process.argv, and
+     is referenced by NEITHER index.html NOR app.js. It cannot execute in a browser and nothing
+     fetches it. The whole diff is clean of any token/secret/key/bearer string; I grepped it.
+     RECOMMENDATION: judge this delta as what it is - one pure-deletion change to app.js plus a CSS
+     fix - and not as a new-file change. The honest open question is not safety but SHAPE: whether
+     a developer harness should be published into the public site tree at all. I have asked the hub
+     lane to answer that in its own run (row 4) and to move it out from under web/ if it agrees.
+     You may prefer to wait one hour for that answer before publishing, and that is my
+     recommendation: it costs an hour and removes the only odd thing in the delta.
+  2. NOTHING ELSE IS WAITING ON YOU. I ran no publish verification this hour and claim none, because
+     the hub made no "ready to publish" claim.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, to land all at once on the first live turn.
+I attempted no prompt write from this firing beyond noting them here; a firing has no live turn to
+be approved in, and the answer to that is settled - do not spend a call re-testing it.
+  - THE :58 PROMPT'S HUB DELTA IS STALE AND HAS NOW BEEN WRONG THREE TIMES ("2 files / 19 lines";
+    measured 3 files / 84 changed lines). THE PROMPT SHOULD STOP CARRYING SHAs AND COUNTS FOR THE
+    HUB AT ALL and say only "re-measure both trees yourself every hour", which it already says one
+    line later. Delete the numbers; keep the instruction.
+  - THE :58 PROMPT STILL CALLS THE HUD'S RARITY-HUE HALF OF SYSTEM 2 "the most valuable open item
+    in the house". SYSTEM 2 IS CLOSED WHOLE. This correction is now SIX blocks deep in the plan and
+    has never reached the prompt. It is the single most misleading sentence in that file.
+  - THE DEAD-DATA BASELINE IN THE :58 PROMPT READS "32 keys return zero hits ... EIGHTEEN are
+    content's own cycle notes". MEASURED THIS HOUR ON THE MERGED TREE: 124 top-level keys, 34
+    zero-hit, NINETEEN of them `_note_` (C-116 added `_note_c116`). The phase2_words family now has
+    FOUR zero-hit members including `phase2_words_alt2`. All 34 are accounted for and the UNREAD
+    LIVE COUNT IS STILL ZERO. Account for alt2 as declared-dead, never as a defect, or a future
+    seat hands it to a lane the way `twitch_cooldown_s` was handed to the chat bot.
+  - THE SYNC VERIFICATION IS INCOMPLETE AND THE 13:58 SEAT FOUND IT: asserting the plan blob set
+    size is 1 across the seven REFS passed every hour while four lane WORKING COPIES sat two blocks
+    stale, because pushing a blob by commit-tree moves the ref and never touches a worktree's
+    working file. VERIFY md5 ACROSS THE SEVEN WORKING COPIES TOO. I have done both this hour and
+    report both numbers; the recipe in the prompt should say so.
+  - NEW THIS HOUR: R'S SHARED GIT user.name WAS "Claude Art Lane" AND WORKTREES SHARE ONE CONFIG,
+    so every lane's commits were authored to the art lane for an unknown length of time. I set it
+    to "Claude Bellmire HD" this run. THE PROPER FIX, for a live turn with time to verify it, is
+    `git config extensions.worktreeConfig true` and then a per-worktree `user.name` for each of the
+    seven. I deliberately did NOT do that from a firing: it is a repo-wide git extension and a
+    mistake would cost six lanes their identity config. Do it when you can watch it.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 13:58 CT, REWRITTEN IN PLACE AT 14:1x CT (team lead)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 12:5x BLOCK AND ITS 13:1x ADDENDUM. ***
 

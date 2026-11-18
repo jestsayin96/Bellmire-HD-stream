@@ -11364,11 +11364,35 @@
           "The Pressman is down. The collars lie empty.",
           "A last clink, and the chains stop."
         ]
+      },
+      "strickler": {
+        "arrive": [
+          "Something in here is taking the heap off.",
+          "A man with a scale and a straight stick. He means to level you.",
+          "He draws the stick across the rim. Whatever stood proud is gone.",
+          "A bushel is a bushel. He sees to it.",
+          "The beam hangs from a post at his side. He is waiting for the pans to settle.",
+          "He does not weigh anyone. He sets them to the measure of the worst.",
+          "The strongest in the file will feel it first.",
+          "A market officer's stick, and a market officer's patience.",
+          "He was the treasury's measure. He kept the habit."
+        ],
+        "fall": [
+          "The Strickler is down. The stick slips out of his hand.",
+          "The beam swings and settles. Nobody is being measured.",
+          "Whatever he took off the top, you have again.",
+          "The Strickler is down. Stand up to your full height.",
+          "The strickle lies flat on the floor. Straight, and still.",
+          "The pans hang level, for once.",
+          "The measure tips. Grain goes everywhere.",
+          "A last sway of the beam, and it stops."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
     "_note_c87": "C-87: hurdleman (eighteenth miniboss, art lane) gets arrive and fall lines, eight each. act and broken omitted on purpose, same reason as C-86: the party-splitting panel is a mechanic not built. Key is the art lane's own: hurdleman.",
-    "_note_c96": "C-96: jointer, tanner, reeve, tapster and pressman (eighteenth-to-twenty-second art-lane minibosses, bodies that landed after D96 ticked) get arrive and fall lines: 9 arrive and 8 fall each (85 lines). act and broken omitted on purpose, same reason as C-86/C-87: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own. Four of the arrive lines are the art lane's own feed lines, kept word for word (It is pinned together / pegging up a fresh hide / here for the lord's share / Something in here is drinking). {name} not used. Nothing spawns these five bodies yet; that is engine work and is not changed here."
+    "_note_c96": "C-96: jointer, tanner, reeve, tapster and pressman (eighteenth-to-twenty-second art-lane minibosses, bodies that landed after D96 ticked) get arrive and fall lines: 9 arrive and 8 fall each (85 lines). act and broken omitted on purpose, same reason as C-86/C-87: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own. Four of the arrive lines are the art lane's own feed lines, kept word for word (It is pinned together / pegging up a fresh hide / here for the lord's share / Something in here is drinking). {name} not used. Nothing spawns these five bodies yet; that is engine work and is not changed here.",
+    "_note_c97": "C-97: the strickler (twenty-third art-lane miniboss, treasury, a market officer's measure) gets 9 arrive and 8 fall lines, the same counts as the other twenty-two. Its trade is weights and measures: it levels the party down to the weakest hero, so the lines are about the stick, the beam and the measure, never about fairness. One arrive line is the art lane's own feed line, kept word for word (Something in here is taking the heap off). act and broken omitted on purpose, same reason as C-86/C-87/C-96. {name} not used. Nothing spawns this body yet; that is engine work and is not changed here."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

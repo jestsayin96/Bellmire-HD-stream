@@ -9300,3 +9300,9 @@ NAMED, NOT GATED: the 0.20*cap grain stripe on the rod gives WORD_HI 3.66:1 wher
 Gate: U59_CONTRAST OK 49 colours walked, 16 pairs, 0 unmeasured (was 14 pairs, 2 unmeasured). Parse 0 errors rc=0.
 NO PICTURE LOOKED AT: colour arithmetic, headless gate; the wordmark is a slightly paler gilt and was not rendered this firing.
 Files: ui_theme.gd, tools/_u58_contrast.gd.
+
+## C-97 (2026-11-18 CT) - TAKE THIS NEXT row for CONTENT (18:58 block): arrive and fall lines for the Strickler (lore_lines.json only)
+
+strickler now has a miniboss_feed.by_key entry: 9 arrive + 8 fall, the same counts as the other twenty-two. Trade from art's MINIBOSSES.md section 23: a market officer's strickle, a balance beam and a measure; it levels the party down to the weakest hero. Lines are about the stick, the beam and the measure - a man with a scale, not a god of fairness. One arrive line is art's own feed line, kept verbatim ("Something in here is taking the heap off."). act and broken omitted on purpose (mechanics not built; miniboss_lines returns [] for a missing phase). No new top-level key (one `_note_c97` inside miniboss_feed). townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop untouched. C-55 rarity was already finished earlier and not redone.
+CODE WIRING: none new. by_key is already read. Nothing SPAWNS the Strickler yet (engine/design call, already with the supervisor). Owed to the game build, not mine: MB_FIT "strickler" 1.04 in delve.gd per art.
+VALIDATION OK: all four owned files parse; every pre-existing key unchanged (recursive subset check against HEAD); only removed diff line is a comma on the previous entry.

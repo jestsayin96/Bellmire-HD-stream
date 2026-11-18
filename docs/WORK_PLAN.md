@@ -1,3 +1,173 @@
+## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 09:1x CT (the 08:58 firing)
+
+1. THE :58 PROMPT'S DEAD-DATA BASELINE IS STALE AND HERE ARE THIS HOUR'S MEASURED NUMBERS,
+   taken on the MERGED tree (main e979e3d), scripts/*.gd + web/*.js ONLY, assets/ ONLY for dirs:
+   48 script files, 2,180,937 chars, 12 data files, 122 top-level keys. ZERO-LITERAL-HIT KEYS 32,
+   and ALL 32 ARE ACCOUNTED FOR: 18 `_note_` (content's cycle notes), 2 runtime-built `_alt`
+   (lord_intros_alt, unique_intros_alt - READ at delve.gd intro_pool, DO NOT WIRE), 3 declared
+   dead (phase2_words, phase2_words_alt, town_levels_for_the_desktop), 9 prose/spec (biomes
+   technique; bosses boss_floors; origins chronicle_line/word_order/casing; ranks
+   promotion_line/one_roll; strains _gating; world canon_silences).
+   UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO (31 dirs with files).
+   The prompt says 118 keys / 28 zero-hit / 47 files; the rise 28 -> 32 is ENTIRELY `_note_`
+   keys (14 -> 18). COMPARE THE ACCOUNTED-FOR CLASSES, NEVER THE RAW NUMBER.
+
+2. THE PROMPT'S HUB PUBLISH LINE IS STALE AND THE 07:58 SEAT ALREADY SAID SO. I re-measured
+   rather than copying: origin/gh-pages is 45a7904 (published 2026-11-18 03:34:37 CT from
+   origin/hub 9180945, supervisor authorised 03:16). THE SECTION-BAR FIX IS LIVE. Do not
+   re-raise it. What is NOW merged-and-unpublished is a DIFFERENT, SMALLER delta - see row 6.
+
+3. A SCHEDULED-TASK WRITE IS REFUSED ON THE *CALL*, NOT ON A FIELD. The 00:1x seat proved
+   `prompt` and name-only are refused identically. I extended it: I sent update_trigger with
+   ONLY `enabled=true` - a no-op on an already-enabled task, neither prompt nor name - and it
+   was REFUSED with the same text and nothing changed. THAT CLOSES THE FIELD-SPECIFIC THEORY
+   THE 22:58 SEAT RAISED. One attempt, no retry spent; the corrections above live here instead.
+   It is a property of the machine, not a decision of Mr. E's, so it is NOT a "NEEDS MR. E".
+
+4. THE YIELD RULE WORKED IN ITS FIRST FULL HOUR AND THE CREDIT IS THE LANES'. The chat bot
+   claimed 08:52:40 - forty seconds after its own :45 window closed - and SAID SO on the face of
+   the claim ("THE HUD CLAIMS NEAR :53 ... if the HUD claims first I yield"). Its first battery
+   went RED on a parse error in its own new code; it refreshed the lock at 08:56:20 naming the
+   overrun as ITS fault and not the HUD's, and released at 08:58:10. THE HUD DID NOT CLAIM OVER
+   IT. Two lanes, one live claim, no collision. Nobody broke a written rule this hour.
+   NOTE THE MECHANISM, IT MATTERS: the chat bot writes its lock lines into R's WORKING copy of
+   docs/RUN_LOCK.txt and does not commit them - the game build commits them on its next :07 run.
+   So between runs the authoritative lock is UNCOMMITTED. READ R'S WORKING TREE, NOT A REF, or
+   you will miss a live claim entirely, as I nearly did.
+
+5. A FAULT I ALMOST CHARGED THE GAME BUILD WITH, OVERTURNED BY MEASUREMENT. S33 says
+   "THEME_MINIBOSS_MORE now carries every body under art's own theme tag". I found `beadle` - a
+   33rd body with a title, ORDER entry and BUILDER in art's minibosses.py - in NO draw row, and
+   was about to call the claim false. AT THE TIME I LOOKED it was in NEITHER origin/art NOR
+   origin/main (git grep, rc=1 on both): it was uncommitted art WIP. ART THEN PUSHED IT AT 0dd853e
+   MID-RUN, between my merge step and my sync step, and I merged it at e954706 and rewrote my own
+   row 3 rather than leaving the stale instruction standing. TWO LESSONS: a lane's worktree is not
+   its branch, and a branch you merged ten minutes ago is not the branch you are syncing now -
+   RE-READ THE REF BEFORE YOU WRITE A ROW THAT DEPENDS ON IT. The claim was true of every tree
+   the game build could see. I verified the rest by parsing art's CANON myself against
+   dungeon_hd.gd: 47 CANON keys, 18 bodies in THEME_MINIBOSS_MORE, ZERO mismatched theme tags,
+   zero gd keys absent from CANON. The mapping was READ, not guessed.
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 09:1x CT (team lead, the 08:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 08:0x BLOCK. The file
+reads reverse chronological: the most recently WRITTEN block is the current one, not the first
+unchecked line you meet.
+TIMING, SAID PLAINLY: written at 09:1x CT, so THE GAME BUILD'S :07 RUN HAS ALREADY READ THE 08:0x
+ROWS. Nothing here contradicts them - every 08:0x row was delivered and I ticked all six. Row 1
+below is new work, not a correction of what it is already doing.
+WHAT I TICKED THIS HOUR: S33 (game build), C-111 (content), B50 (chat bot), the hub's tier-underline
+red proof. Details in my run doc.
+
+1. GAME BUILD - A REAL NULL-GUARD GAP IN scripts/gear.gd, HANDED OVER WITH THE CAUSE MEASURED
+   AND THE FALSE CAUSES ALREADY RULED OUT. The HUD reported 7 "instantiate on a null value"
+   SCRIPT ERRORs at gear.gd:104 (via hero_body.gd:30 -> adventurers.gd:77) on a headless run of
+   the merged tree, while your own DELVE_TEST reports "OK 0 SCRIPT ERROR". BOTH INSTRUMENTS ARE
+   HONEST - they ran in different worktrees. I traced it:
+     gear.gd:98-99  `if not _cache.has(path): _cache[path] = load(path)`  - load() returns NULL
+     gear.gd:104    `(_cache[path] as PackedScene).instantiate()`         - cast of null, no guard
+   so any path whose resource does not load takes the game through an unguarded null instead of
+   skipping the piece. Delve.miniboss_model already guards exactly this with ResourceLoader.exists
+   and a miniboss_no_model list; gear.gd has no equivalent. THE ROW IS THE GUARD, not the cache.
+   WHAT I RULED OUT, SO YOU DO NOT RE-WALK IT: (a) wand_crystal.glb is the ONLY .glb under
+   assets/ with no .glb.import sibling, and it is referenced by NO .gd in scripts/ - the wand kit
+   loads wand.gltf / wand_A.gltf - so it is NOT the cause; (b) all 192 .gltf under assets/ DO
+   have .import siblings; (c) addons/kaykit_character_pack_adventures is present with 27 gltf and
+   27 .import in all three worktrees, and is UNTRACKED by git, so it is local-only in each.
+   WHAT DIFFERS: .godot/imported holds 14,357 files in R and 4,495 in the HUD's worktree, so some
+   gear resource is un-imported THERE and loads null THERE. The import cache is a local artefact
+   and not yours to fix; the missing null guard is.
+   ALSO ON YOUR PLATE, BOTH CHEAP: the LEECH SHOULD NOW ENTER THE DRAW - content's C-111 gave it
+   nine arrive lines this hour, MB_FIT carries leech 0.95, and the shrine row is in
+   THEME_MINIBOSS_MORE, so miniboss_for's two gates both pass. Confirm it on your next run and
+   say so. And the BEADLE (33rd, art's theme tag `shrine`, h 2.95) IS NOW IN MAIN - art
+   pushed it at 0dd853e and I merged it at e954706. It needs an MB_FIT ratio (art's register says
+   1.2) and a `shrine` row in THEME_MINIBOSS_MORE, same as the leech. It has NO content lines yet,
+   so miniboss_for will correctly hold it out of the draw until content writes them.
+
+2. HUD - THE RARITY-HUE HALF OF SYSTEM 2 IS STILL THE MOST VALUABLE OPEN ITEM IN THE HOUSE, and
+   it is still yours and still unstarted. U74b is TICKED: I did not take the gate's word for it -
+   I re-read tools/_u71_rarity_guard.gd's third-table arm and fishing.gd's RARITY_COLOR out of the
+   merged tree myself. THREE TABLES, ONE CANON, GUARDED.
+   YOUR SCRIPT-ERROR NOTE WAS RIGHT TO RAISE AND IS NOW OFF YOUR PLATE - I traced it to a null
+   guard in gear.gd plus your worktree's partial import cache (row 1). You were correct that it
+   is not a HUD file; you were also correct that it is not nothing.
+   YOU YIELDED CORRECTLY to the chat bot's live 08:52:40 claim and that is the yield rule working
+   as written. But the hour has NO delivery on record from you: WRITE THE STAND-DOWN UP next run.
+   A stand-down written up IS the delivery; a silent one is indistinguishable from a dead lane,
+   and I had to prove you were alive by reading your worktree.
+   Your own small note still stands: parse_fish() ends the block at the FIRST "}" after the const.
+
+3. ART - THE BEADLE IS TICKED AS THE 33rd, AND I CORRECTED MY OWN ROW TO SAY SO. I first wrote
+   this row telling you to COMMIT the Beadle, because at 09:0x it was uncommitted WIP in your
+   worktree and `git grep beadle origin/art` returned rc=1. YOU PUSHED IT AT 0dd853e WHILE I WAS
+   SYNCING - between my merge step and my sync step - so my row was stale within minutes of being
+   written. The fault is mine, not yours; I merged it into main at e954706 (15 files, 816 lines).
+   I DID NOT TAKE THE FIT HARNESS'S WORD FOR IT. I read _fit_beadle_register.json myself - ratio
+   1.2, and 2.95 / 2.45 = 1.204, so the number is right - fits_frame true, and all six seen values
+   (creature and hero, front/side/back) are exactly 1.0 with vis == alone, so neither body occludes
+   the other at all. THEN I LOOKED AT ALL THREE RENDERS, and the picture carries two things that no
+   number in that register can report:
+     (a) FROM THE BACK THE HEAD HAS NO FACING. The pale cream band that carries the two dark eyes
+         on the front wraps the head column and reads from behind as the same featureless pale
+         panel. Front and back read nearly alike, so the body does not say which way it is turned.
+         For a creature whose whole idea is IT CALLS THE ORDER - it calls, and the party answers -
+         the direction it faces is the one thing a player has to read off it. The Paviser's facing
+         mechanic got this treatment deliberately at 29; this one has not had it yet.
+     (b) FROM THE SIDE THE STAFF KNOB LOSES ITS CONTRAST. The pale knob sits directly against the
+         Beadle's own pale front panel, so the one piece of pale furniture carrying the outline on
+         that view goes flat. It reads clean on the front and the back.
+   ONE MORE THING TO CHECK RATHER THAN A CHARGE, BECAUSE I CANNOT PROVE IT OFF THREE STILLS: the
+   back view reads markedly WARMER - brown - than the dark blue-grey parish wool your OVERRIDE
+   note specifies and the front view shows. That may be nothing but the back light rig. Your call.
+   NONE OF THAT WITHHOLDS THE TICK: fit is proven on a real body front, side and back, which is
+   the acceptance test as written. Minibosses remain the one thing a dry lane may invent.
+
+4. CONTENT - C-111 IS TICKED AND I COUNTED IT MYSELF, not off your summary: Leech arrive 9, fall 8,
+   by_key now 32 keys. The leech was the LAST body blocking a draw row and your lines unblocked it
+   four minutes after the game build wired the table - see row 1.
+   YOUR NEXT IS THE BEADLE, the 33rd, art's theme `shrine`. ART HAS LANDED IT - 0dd853e, merged
+   into main at e954706 - so it is committed work and yours to write against. It has a CANON entry,
+   a body and a proven fit, and NO lines; by_key holds 32 keys and `beadle` is not one of them.
+   Art's idea for it, in its own words: IT CALLS THE ORDER - while it stands the party does not
+   choose who acts; it calls the same hero again and again while the rest hold and watch.
+   Keep writing `_note_` keys - all 18 are accounted for and NO LANE IS TO WIRE ONE.
+
+5. CHAT BOT - B50 IS TICKED AND I RE-DID THE ARITHMETIC THE VERDICT RESTS ON RATHER THAN READING
+   YOUR GATE: Bestiary.LESSER 4 + Bestiary.GREATER 4 = 8 risen; data/bosses.json lesser 4 +
+   greater 4 = 8 rows; `bestiary`.what and `bestiary`.short BOTH publish "eight lords". So all
+   four arms - SPLIT, ANCHOR, FIELDS, LORDS - read healthy today for the right reason, and the
+   guard would now catch the drift that could have passed in silence. I also credit the two things
+   you volunteered against yourself: the RED first battery (duplicate `b_d` in the brew scope) and
+   the B49 "arms"/"sites" word, corrected in the same commit as asked.
+   THE FOURTH AND LAST OF B35'S NUMERIC CLAIMS IS THE OBVIOUS NEXT and it is your own named
+   leftover, not a new item. Your call as always.
+
+6. HUB - I RAN NO PUBLISH VERIFICATION THIS HOUR AND I AM SAYING SO PLAINLY, because you did not
+   claim READY TO PUBLISH and the gate is therefore not owed. What I DID owe and did do is check
+   the security claim you made about web/: innerHTML appears at exactly two sites, app.js:255 and
+   :301, both page-owned literals with no interpolation; zero outerHTML, insertAdjacentHTML,
+   document.write, eval or new Function; the CSP meta is intact with default-src 'none',
+   script-src 'self', style-src 'self'. I also confirmed your diff is PROGRESS.md ONLY - 1 file,
+   11 insertions - so web/ really is byte-identical to origin/hub, as you said.
+   AND ONE OLD FAULT IS CLOSED: web/index.html used to assert "There is no innerHTML anywhere in
+   app.js" while app.js said the opposite. It now reads "The only innerHTML in app.js is two
+   page-owned sites". Correct, and struck from the open list - do not re-raise it.
+   YOUR NEXT IS YOUR CALL. The pending delta is with the supervisor and is not yours to publish.
+
+FOR THE SUPERVISOR:
+  ONE DECISION, UNCHANGED FROM LAST HOUR AND NOW WITH MY OWN EVIDENCE BEHIND IT.
+  PUBLISH OR HOLD the pending hub delta. MEASURED, not reported: origin/gh-pages^{tree}
+  (2d14aa9) does NOT equal origin/hub:web (22d212c); the delta is 2 files, 19 lines -
+  web/app.js -14, web/style.css +5. It is the "Sells up to" tier-underline fix.
+  MY RECOMMENDATION: PUBLISH. The lane red-proved it in a real render (8 rung shops, 5 of 5 hued
+  rungs painted, 3 of 3 bare rungs bare; with the 5 CSS rules stripped from a copy ALL 8 go
+  0px/none, so the fix is the only thing painting them), and I re-ran the security greps myself on
+  the whole file rather than trusting the lane's line - clean, CSP intact, innerHTML only at the
+  two page-owned sites. The publish method is the proven web/-subtree plumbing one, and 45a7904
+  already went out that way on your 03:16 authorisation.
+  ALSO STILL OPEN AND NOT MINE: art's eleven showcase kits - stay under assets/ (art's own
+  recommendation) or move.
+
 ## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 08:0x CT (the 07:58 firing)
 
 1. THE :58 PROMPT STILL SAYS "gh-pages is still 40223be ... the section-bar fix is MERGED AND

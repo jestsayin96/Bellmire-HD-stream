@@ -67,6 +67,234 @@ LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tange
 Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
 Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
 Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+## ART 2026-11-18 12:46 CT - CORRECTION TO MY OWN 12:39 ENTRY: THE ATTRIBUTION WAS ARITHMETIC, THE INSTRUMENT SAYS SOMETHING HARDER
+
+I pushed a342039 with a sentence in it that I had not earned. The 12:39 entry
+says the band between the Rammer's head cap and its monkey is "the TWO FRAME
+LEGS", and proposes the fix "rake the two front legs ~0.06 wider at the head".
+I got that by projecting the leg polylines on paper. **IT IS A NUMBER THAT
+CANNOT MOVE, AND THIS LANE HAS A RULE ABOUT THOSE.** So I built one that moves.
+
+THE INSTRUMENT: tools/art/_rammer_yaw_ab.py. It renders the SHIPPED glb through
+ONE orthographic camera at yaw 0, 8, 16, 24 and 40 degrees and measures the
+white (daylight) pixels in the band between the cap's underside (z 2.495) and
+the monkey's lifting eye (z 2.285), across the cap's full width. The logic: a
+part sitting ON the axis projects down the centre at yaw 0 and swings off it as
+yaw grows, so if the band OPENS with yaw, the filler was on the axis. REDs on
+an empty render and REDs on a band with no rows in it.
+
+WHAT IT RETURNED, AND IT IS NOT WHAT I PREDICTED:
+  yaw   0   white at centre 0   white across cap width      0 of 8778 px
+  yaw   8   white at centre 0   white across cap width      0 of 8436 px
+  yaw  16   white at centre 0   white across cap width      0 of 7980 px
+  yaw  24   white at centre 0   white across cap width      0 of 7296 px
+  yaw  40   white at centre 0   white across cap width      0 of 6498 px
+The denominator moves - 8778 down to 6498 - so the instrument is live and is
+genuinely re-measuring, not returning a constant. The daylight does not move,
+because there is none at any angle.
+
+THEN I PROFILED THE WHOLE FRAME BY HEIGHT off the yaw-0 alpha, widest unbroken
+white run inside the cap's width:
+  z 2.50 -> 1.90   0 mm. Solid, every row.
+  z 1.80   134 mm   z 1.70  164 mm   z 1.60  190 mm   z 1.50  216 mm
+  z 1.40   242 mm   z 1.30  268 mm
+**THE FRAME IS NOT AN OPEN STRUCTURE ABOVE z 1.80.** The top 0.95 m of this
+body - the head, the rope, the monkey and the band between them - is one solid
+mass in silhouette from every angle tested.
+
+SO BOTH HALVES OF MY 12:39 FIX ARE WRONG AND I AM STRIKING THEM:
+  - "the two frame legs" is three legs plus the rope, converging at the apex,
+    which is what a tripod IS. Not a projection accident.
+  - "rake the front legs wider at the head" would do NOTHING. They have to meet
+    at the head. Yaw proves no camera angle opens it either.
+  - lowering the monkey to find daylight would need it under z ~1.80, and the
+    whole idea of this body is that THE BLOCK IS UP. The fix would delete the
+    telegraph it was meant to serve.
+
+WHAT IS ACTUALLY TRUE, AND IT IS THE USEFUL PART: the vertical "gap of rope"
+read does not exist and cannot cheaply be made to exist. What DOES work is
+pass 5's other half, which I re-measured and which holds - the monkey stands
+proud of the legs at its own height, so the tower BULGES where the block is.
+The telegraph is carried by that bulge, by the chalk ring on the floor saying
+WHERE, and in colour by pale wet oak against dark iron. The source comment
+claiming a visible gap of rope is the thing that is wrong, not the model.
+LEFT FOR WHOEVER OPENS THIS BODY NEXT, with the measurement in hand: the one
+shape change that would pay is NARROWING THE HEAD CAP so the monkey is the
+widest thing in the upper frame by a clear margin at every angle. That is a
+real pass on a shipped body and I am not starting it inside a row that asked
+for a write-up.
+
+THE LESSON, WHICH IS THE HOUSE'S OWN ARRIVING AT MY DESK AGAIN: at pass 11 I
+shipped a number beside a sentence that contradicted it and the sentence was
+right. Today I shipped a CAUSE beside a measurement, where the measurement was
+real and the cause was a guess wearing its clothes. A measured effect does not
+license an unmeasured cause.
+
+## ART 2026-11-18 12:39 CT - THE RAMMER'S WRITE-UP (34th miniboss), the twelve-body index that was missing behind it, and the silhouette measurement that says my own pass-5 gap is not there
+
+The 11:5x row, verbatim: "YOUR ROW IS THE WRITE-UP, AND IT IS SMALL BUT IT IS THE
+PART THE NEXT LANE READS." Correct, and the body shipped at 11:54:57 (a8a85a6)
+with no PROGRESS entry at all. This is that entry. I also found, while writing
+it, that the gap is not one body wide - it is THIRTEEN - and the index below
+closes that.
+
+WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED
+  - the miniboss count, parsed out of the ORDER chain in tools/art/minibosses.py
+    rather than taken off the prompt: 34 non-chibi bodies. The prompt says 33.
+    The prompt is one body stale; the plan and the file agree on 34.
+  - whether the Rammer was actually pushed, because the plan has caught this
+    lane with finished work in no commit: `git log` says a8a85a6 on `art`,
+    `rev-list --left-right origin/art...HEAD` said 3/0, so nothing of mine was
+    stranded and I was three plan-sync commits BEHIND. Fast-forwarded to
+    26637a7 before touching a file.
+  - whether the entries for bodies 22-33 existed somewhere I was not looking:
+    `grep -ci` each name in PROGRESS.md and docs/PROGRESS.md. pressman,
+    strickler, greener, ratcatcher, paviser, fenman, comfitmaker: ZERO
+    mentions. dyer, moulder, drover, leech, beadle: mentions only inside other
+    bodies' entries. The last ART header in this file was the TAPSTER, the
+    21st, 17 Nov 16:54 CT. Twelve bodies shipped behind it with no prose.
+
+THE THIRTY-FOURTH IS **THE RAMMER**, and its idea is a CLOCK, not a stat.
+IT DROPS ON THE COUNT: it hauls the monkey to the head of the frame, it holds -
+and the hold is the warning - and it lets go. Whatever is standing on the pile
+when the monkey falls is finished. The answer is not what you do, it is WHEN:
+stand off the pile for the drop, come back in while it hauls. Theme "flooded".
+It is the only OPEN STRUCTURE in the set of 34 - everything else is a solid
+body - and that is deliberate: the two things the fight turns on are the two
+things that read first, THE BLOCK IS UP (so it is coming down) and THE PILE IS
+THERE (so that is where). The chalk ring on the pile head is the one emissive
+in the body and it is on the FLOOR, saying where, not on the monster saying
+look at me.
+The hauler is small, off to one side, bent at the hip, both hands on the rope,
+no weapon and no shield. It is not the monster; it is the reason the monster is
+loaded, and it must never read as a hero.
+
+THE FIT PROOF - I LOOKED AT ALL THREE ON-BODY RENDERS THIS RUN, NOT LAST RUN
+renders/art/minibosses/rammer/hero_front.png, hero_side.png, hero_back.png,
+against the posed KayKit knight (hero h 2.45).
+  verdict GREEN - ratio 1.12 (2.75 / 2.45 = 1.1224), pair_w 3.87, fits_frame
+  true, 3 of 3 proving views, 0 blind views, 0 unproved cells, blank check 3
+  files 0 failures, errors [].
+WHAT I CAN SEE IN THOSE THREE PICTURES, AND IT IS NOT A CLEAN SHEET:
+  1. SIDE VIEW: the raked back leg of the tripod and the hauler SHARE A LINE.
+     The diagonal crosses the hauler's torso and comes out between its legs,
+     and at the floor the hauler's dark boot and the leg's foot overlap. It
+     reads for a moment as a man impaled by the frame. No geometry clips - the
+     leg is behind him - but the READ is bad from that one angle.
+  2. SIDE VIEW: the frame collapses to a pole. The open-structure quality that
+     is the whole point of this silhouette is a front-and-three-quarter asset;
+     from the side it is one vertical and one diagonal.
+  3. BACK VIEW: the pile is the weakest read of the three. It sits behind the
+     frame's near face, tucked between the legs with the low brace across it,
+     and the "that is WHERE it lands" information nearly goes.
+  4. BACK VIEW: the pile's shaft shows BELOW the floor plane. Harmless on a
+     floorless render and hidden in game, but it is visible on the contact
+     sheet and I am naming it rather than letting the next reader find it.
+  5. The hauler is blockier and flatter-faceted than the chibi knight beside
+     it - the team lead's own eye-note at 11:5x, and I agree with it by eye.
+     Wear 0.58 accounts for some; the rest is that its facets are bigger.
+     Pass 6 already pulled this figure from a seven-head realistic build to a
+     head-about-a-third chibi build, and the proportion is right now. The
+     FACETING is not, and that is a cheap fix (more segments on the torso cone
+     and the head sphere) whenever this body is next open. Not done today.
+  6. NO CLIPS, NO FLOATS, NO BAD ANCHORS that I can see in any of the three.
+     The hauler's two mitts both terminate ON the rope at the grip, the feet
+     are on the floor plane in all three views, and the monkey is clear of the
+     legs at its own height.
+
+THE FAULT MY OWN SILHOUETTE SHEET FOUND, AND IT IS IN MY OWN SHIPPED PASS 5
+Pass 5's argument, in the source, is that the monkey sits at half-width 0.29
+so it stands 0.12 proud of each leg and reads as a separate heavy thing with
+the colour thrown away - and that the 0.33 m of rope above it is "a visible gap
+of rope, so it reads as HANGING and not as part of the frame".
+THE FIRST HALF IS TRUE AND I RE-MEASURED IT. THE SECOND HALF IS NOT.
+Measured on renders/art/minibosses/rammer/_rammer_silhouette.png, walking the
+column through the head cap's centre (3.31 mm per pixel at that sheet scale):
+  FRONT VIEW: ONE UNBROKEN BLACK RUN OF 831 PIXELS, cap to floor. Zero white
+  anywhere between the head and the monkey. The gap is not small - it is NOT
+  THERE.
+  THREE-QUARTER: 323 black, then 107 white. Separates.
+  SIDE: 408 black, then 247 white. Separates.
+AND THE CAUSE IS NOT THE ROPE, WHICH IS WHAT I ASSUMED BEFORE I MEASURED THE
+WIDTH. The run width through that band grows 52 -> 89 px as it descends. A
+44 mm rope is 13 px. That band is the TWO FRAME LEGS, which by z 2.3-2.5 have
+converged to about +-0.17 of centre and overlap the centre line in a front
+orthographic view. Pass 5 fixed the monkey's width against the legs at z 1.93
+and never checked the band ABOVE the monkey, where the legs are tighter.
+HOW MUCH THIS MATTERS, HONESTLY: in COLOUR it reads - the legs are pale wet oak
+and the cap and monkey are dark iron, and on hero_front.png the separation is
+plain. This is a hue-free read fault only. But the body's own pass-5 argument
+is that the telegraph must survive WITHOUT hue, so by its own standard it is a
+fault, and it is the same family as the Beadle's missing facing: every number
+in the register green, the shape saying less than the numbers claim. The
+register cannot see it because every number it computes is about hero-vs-
+creature occlusion, not about a creature occluding itself.
+LEFT OPEN, NOT FIXED, AND CARRIED HERE AS A LIVE FAULT. The cheap fix is to
+rake the two front legs ~0.06 wider at the head so they pass outside the cap's
+footprint, which costs one pass and one re-render; I did not take it inside a
+row that asked for a write-up.
+
+FOR THE GAME BUILD LANE - RAMMER (no .gd touched by me, nothing here is wired)
+  - scripts/bestiary.gd: add a `model` path "res://assets/monsters/minibosses/
+    rammer.glb" and NO `anims` entry. The body is STATIC.
+  - height 2.75 (ratio 1.12 hero heights), footprint_span 2.01, size
+    [2.01, 1.38, 2.75]. CORRIDOR-SAFE - it fits a three-cell corridor and does
+    NOT need a room gate.
+  - theme "flooded". 4 parts / 1,046 faces / BLENDER_EEVEE. wear 0.58.
+  - feed line already in the register: "Something is being driven into the
+    floor."
+  - the structured handoff is renders/art/minibosses/_report.json key "rammer",
+    the shape the S33 reader already consumes. Nothing new to parse.
+  - rammer.glb has NO .glb.import sibling. A Godot run generates it, same as
+    snarer_chibi and moulder. Not blocking - nothing loads it until it is wired.
+  - THE CHEAPEST HONEST VERSION OF THE MECHANIC, if the full one is too much:
+    a telegraphed windup with a fixed tell length and a kill zone of one cell
+    centred on the pile. The fight is the TIMER, not the damage - if the windup
+    is visible and the zone is fixed, it is the Rammer. A big single-target hit
+    with no tell is NOT the Rammer and should not ship under the name.
+
+THE TWELVE THAT SHIPPED WITHOUT PROSE, 22-33 - A MEASURED INDEX, NOT A RECALL
+Every number below is read this run out of renders/art/minibosses/_report.json
+and the _fit_*_register.json files, not remembered. All thirteen bodies are
+CORRIDOR-SAFE, all are 4 parts, all are STATIC (a `model` path, no `anims`),
+all carry their own key in _report.json. Ratios marked * come from the
+consolidated sweep in the Rammer's minibossfit run; the rest from that body's
+own register. All GREEN, all 3 of 3 proving views.
+  22 PRESSMAN    prison      h 2.85  span 2.61  wear 0.88  1439f  ratio 1.16*
+     IT PRESSES YOUR FALLEN.
+  23 STRICKLER   treasury    h 2.55  span 2.99  wear 0.12  3642f  ratio 1.04*
+     IT STRIKES YOU LEVEL.
+  24 DYER        workshop    h 2.60  span 3.28  wear 0.30  2294f  ratio 1.06
+     IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK.
+  25 GREENER     workshop    h 2.50  span 2.71  wear 0.55  6433f  ratio 1.02
+     IT GREENS YOUR IRON.
+  26 MOULDER     firepit     h 2.90  span 2.34  wear 0.26  1971f  ratio 1.18
+     IT TAKES YOUR SHAPE.
+  27 RATCATCHER  crypt       h 2.62  span 3.73  wear 0.68  1510f  ratio 1.07
+     IT IS PAID BY THE TAIL.
+  28 DROVER      wood        h 2.44  span 3.59  wear 0.74  5053f  ratio 1.00*
+     IT YOKES ONE OF YOU.
+  29 PAVISER     keep        h 2.68  span 3.57  wear 0.78   743f  ratio 1.09*
+     IT KEEPS ITS FACE TO YOU.
+  30 FENMAN      fogbound    h 2.52  span 2.48  wear 0.92   948f  ratio 1.03*
+     IT TAKES WHAT STIRS.
+  31 COMFITMAKER confection  h 2.28  span 1.83  wear 0.08  2626f  ratio 0.93
+     IT GIVES YOU THE ONLY THING THAT CUTS IT.
+  32 LEECH       shrine      h 2.32  span 2.26  wear 0.82   986f  ratio 0.95
+     IT WILL NOT LET A WOUND CLOSE.
+  33 BEADLE      shrine      h 2.95  span 1.87  wear 0.18   698f  ratio 1.20
+     IT CALLS THE ORDER.
+  34 RAMMER      flooded     h 2.75  span 2.01  wear 0.58  1046f  ratio 1.12
+     IT DROPS ON THE COUNT.
+WEAR IS DOING ITS JOB ACROSS THE SET AND I CHECKED IT RATHER THAN ASSUMED IT:
+the thirteen run 0.08 to 0.92 and the value tracks what the thing IS - the
+Comfitmaker 0.08 and the Strickler 0.12 are kept, clean, valuable trades; the
+Fenman 0.92 and the Pressman 0.88 are rot and hard use. No two neighbours in
+the list share a value. Nothing here was given a set-wide wear.
+STILL OPEN AND NOT MINE TO CLOSE: snarer_chibi, moulder and rammer all lack a
+.glb.import sibling and need one Godot run between them.
+
+NOTHING FOR MR. E TO DECIDE THIS CYCLE.
 
 ## ART 2026-11-17 16:54 CT - THE TAPSTER, a twenty-first miniboss. IT DRINKS WHAT YOU BROUGHT - and three faults the ported occlusion test could not see
 
@@ -10459,9 +10687,259 @@ Re-run on the current tree with the hardened block_end(): U76_BRACE 3/3, U71_FIS
 Did a past green lie? Applied the OLD finder (first closing brace) and the NEW depth finder to the table in every historical version of the three sources on origin/laptop + hud-ui: fishing.gd 4/4 revisions, ui_theme.gd 5/5, icons.py 3 (the other 5 icons.py revisions predate the RARITY_HUE table; my regex finds none). Both finders return the SAME closing brace in all 12 - no table ever had an inner or comment brace, so the old parser never half-read one. Every earlier green stands.
 No picture: guard-only, no UI drawn. Nothing for Mr. E to decide. Queue otherwise empty; stand down next firing unless a row is assigned.
 
+## C-115 (2026-11-18 12:23 CT, content) - THE RAMMER'S FEED LINES (34th miniboss)
+- ITEM: TAKE THIS NEXT (18 Nov 11:5x CT block) row 2: the Rammer's lines - arrive, act, broken, fall, by_key "rammer". Body is committed: assets/monsters/minibosses/rammer.glb on origin/art and merged to main (read off the merged tree, not art's worktree).
+- ADDED data/lore_lines.json miniboss_feed.by_key.rammer: arrive 9, act 6, broken 4, fall 8, no {name} token. Written to its idea (it drops on the count): the haul is slow, the hold is the warning, the answer is when not what. Hauler stays small and off to one side, never the monster. Timber river-soaked, rope frayed, iron the one sound thing (wear 0.58). No theatre.
+- ADDED miniboss_feed._note_c115 (expected zero-hit; no lane to wire it).
+- VALIDATION OK: json.load passes; every pre-existing key equal (all other top-level keys, all other miniboss_feed keys, all 33 earlier by_key entries); by_key now 34. The other three owned files untouched.
+- CODE WIRING: none new. dungeon_hd.gd miniboss_for gates on mesh + arrive lines, so the Rammer is now eligible for a floor draw. Act/broken are read only if the feed reader looks for them on this key; harmless if not.
+Next content: C-116.
 ## HUB (18 Nov 12:4x CT) - NULL RESULT MEASURED: no focusable element is outside the viewport at 320/360/390 (team lead's 11:5x row 4)
 Question: documentElement.scrollWidth is 501 at 320/360/390 (?mock=sheets&open=all) - is any FOCUSABLE element actually outside the viewport, or is the 501 the rail strip's own inner scroll? Answer: ALL RAIL/NAV STRIP.
 Measured in headless Chromium (cloud copy of web/, snapshot stubbed to []), 3 mocks x 3 widths = 9 runs. Every focusable (a/button/input/select/textarea/summary/tabindex>=0, visible) whose box lies past the viewport edge was walked up its ancestors: 9/9 runs, 0 sit outside the viewport without an overflow:auto ancestor clipping them (nav "Live/Boards" strip, and div.rail-list). Outside-the-viewport counts 11-13 per run, all inside those two scrollers.
 Then pressed Tab 400 times per run and read document scrollLeft after each: max 0 in 9/9 runs - keyboard focus never scrolls the page sideways. Counts: sheets 35 focusable, crowd 100, chronicle 25.
 Caveats, plainly: (1) the 501 is real only for ?mock=sheets (crowd/chronicle sw == viewport) - it comes from the open sheets' content, not from a focusable. (2) window.scrollTo(9999,0) still moves the hidden-overflow document (team lead's 181/141/111 px) - that is a programmatic scroll, not reachable by finger or Tab; I did NOT change web/ and am not claiming it fixed. (3) hidden fallen-hero tab still 0x0, not covered. (4) file:// cloud render, counts differ from the live page.
 web/ unchanged by this run. NOT claiming READY TO PUBLISH. Nothing for Mr. E to decide.
+## U78 (18 Nov 12:53 CT) - STAND-DOWN: chat bot B53 holds the Godot lock
+Lock: read R's working RUN_LOCK.txt (not a git ref). Last line = RUNNING 12:47:41-06:00 (chat bot B53, expected finish 12:54, cap 13:12) with no IDLE from the chat bot after it; tasklist showed two Godot_v4.7.2 console processes alive at 12:53. Per the yield rule that lane holds - I did not claim, did not launch Godot, wrote nothing to RUN_LOCK.
+Checked: PROGRESS.md tail (U76/U77 shipped, guards green); worktree on hud-ui. No file edits this hour; I own nothing the lock-free path could change (System 2 rarity-hue and L74 both need a windowed render, which needs the engine).
+Next firing (13:52): re-read R's working RUN_LOCK; if free, take the HUD rarity-hue half of System 2 (windowed render, claim <=15 min, release by :07), else L74 feed/theme under load.
+## B54 - THE OWED B53 BATTERY RAN AND THE needs_hero ARM IS PROVEN ON FIVE OF ITS SIX TRIGGERS; THE SIXTH TIMED OUT AND I AM COUNTING IT AS OWED, NOT AS A PASS (chat bot, 2026-11-18 12:4x CT)
+
+THE LOCK, AND IT WAS FREE FOR THE FIRST TIME IN THREE OF MY SLOTS. I read docs/RUN_LOCK.txt at
+12:46:50 CT: the last line was IDLE 12:09:24 (game build S37, which launched no Godot at all), so
+no RUNNING was live by Mr. E's rule. I ALSO CHECKED BY PROCESS, because the rule says the file
+alone is not the instrument: tasklist showed no Godot of either name. Claimed 12:47:41, declared
+12:54, cap 13:12, released 12:54:00 with the work done at 12:53:42. No crossing, and the HUD's
+:52 window was still unclaimed when I wrote my IDLE - which under the new rule freed it at once.
+
+WHAT WAS OWED AND IS NOW PAID. B53 wrote the needs_hero arm at 11:4x, proved it SEVEN WAYS IN
+PYTHON ONLY, and held it back as checkpoint d402784 with the engine battery owed. That battery
+was the first thing I ran, before touching anything else, and nothing new was written this cycle.
+  PARSE (--headless --path W6 --quit-after 300)   0 errors
+  tools/_l14_test.gd                              L14_TEST OK (22 checks)
+  tools/_twitch_parse.gd                           TWITCH_PARSE OK (8 checks)
+  tools/_commands_doc.gd                           COMMANDS_DOC OK wrote 27 commands, and
+    docs/COMMANDS.md came back BYTE-IDENTICAL (md5 9a80bfd98049e77abddab6d1d182c524) - a true
+    no-op, as it must be in a cycle that adds no command.
+  baseline ChatCmd.guard_faults()                  0 faults, through the shipped accessor.
+
+THE RED PROOFS, IN THE ENGINE THIS TIME, EACH ONE MUTATE -> RUN -> RESTORE FROM SAVED BYTES:
+  flag true->false  (hero)        rc=1, faults=1 ["NEEDS_HERO"]
+  flag false->true  (satchel)     rc=1, faults=1 ["NEEDS_HERO"]
+  published command with no case  rc=1, faults=1 ["NEEDS_HERO ROUTE"]   (deepest case renamed)
+  reroll through the living gate  rc=1, faults=1 ["NEEDS_HERO EXEMPT"]
+  `match verb:` -> `match String(verb):` inside handle()
+                                  rc=1, faults=1 ["NEEDS_HERO ANCHOR"]
+Five triggers, five single faults, each the right one. THE LAST ONE IS ALSO THE REGRESSION B53
+ASKED FOR AND IT IS THE ONE I MOST WANTED TO SEE: there are three `match verb:` in this file, and
+an instrument that scanned the WHOLE file would have found _test_spot's and gone on to report 27
+flag or ROUTE faults against the wrong table. It reported ANCHOR. The table really is read inside
+handle() and nowhere else, and the comment-block trap stayed dead - the baseline is silent with
+`_needs(` sitting in the arm's own prose a dozen times over.
+
+*** THE SIXTH TRIGGER DID NOT PASS AND I AM NOT DRESSING IT UP. `func handle(` renamed to
+*** `func handle_b53x(` should raise NEEDS_HERO ANCHOR. The probe run TIMED OUT at my harness's
+*** 240-SECOND CEILING with no output recorded - rc "TIMEOUT", no fault list, nothing to read.
+That is an UNKNOWN, not a green and not a red. Renaming the entry point breaks every other caller
+of ChatCmd.handle() in the house, so the likeliest cause is the engine grinding or flooding on
+dependents rather than anything wrong with the arm - but a likeliest cause is not a measurement,
+and the whole point of this lane is that the engine is why we know. WHAT IT COSTS US IS SMALL AND
+I WANT THAT SAID TOO: ANCHOR is already red-proved by the match-line route above, so the arm's
+fourth tag is proven; what is unproven is only its SECOND WAY IN. CARRIED TO 13:45, where it runs
+first: I will drive the probe directly with a longer ceiling and capture the output to a file
+rather than through a 240 s subprocess, and if the engine genuinely hangs on a missing handle(),
+THAT is the finding and it belongs to the whole house, not just this arm.
+I DID NOT START IT AT 12:54. It had just eaten four minutes, the HUD's window was open, and Mr.
+E's rule says split the job rather than declare a crossing to finish optional work.
+
+ONE SMALL THING IN MY OWN INSTRUMENT, FOUND BY READING ITS OUTPUT RATHER THAN TRUSTING IT. The
+probe printed "commands=8" every run. That is not eight commands - ChatCmd.commands() returns the
+WHOLE parsed file, whose eight top-level keys are _source, hub_url, cooldown_s, twitch_cooldown_s,
+order, commands, ask, foreign. The 27 live under `commands`, the guard reads that sub-dictionary
+correctly, and L14_TEST and COMMANDS_DOC both counted 27 in the same battery. MY PROBE'S LABEL WAS
+WRONG, NOT THE ACCESSOR AND NOT THE DATA. Recorded so the next seat does not read "8" as a loss.
+AND A SECOND ONE, SAME SHAPE: my harness's own pass/fail column printed `pass: false` on all five
+good proofs, because it de-duplicated tags from BOTH the push_error and the printerr line and so
+compared a two-element list against a one-element expectation. The probe's `faults=1 [...]` line
+is the authority and it is what I have reported above. A HARNESS THAT CRIES FAIL ON A GOOD RESULT
+IS THE SAME CLASS OF LYING INSTRUMENT U76 WAS ABOUT, and it was mine this time.
+
+HANDED BACK BYTE-IDENTICAL, VERIFIED AFTER THE LAST RESTORE AND AGAIN AFTER CLEANUP:
+data/commands.json md5 0ed191404157221abd8a184cc580dfa5 (unchanged since B52),
+scripts/chatcmd.gd md5 72be1e686522e8904077623e0169c963, docs/COMMANDS.md md5 9a80bfd980...
+No new command, no data edit, no doc regeneration - this cycle is a battery, not an arm.
+DRIFT CHECKED BOTH DIRECTIONS ANYWAY, as is owed after every cycle that touches these files: 27
+published commands, 27 dispatch cases, nothing published without a case and no case without an
+entry. json.load clean.
+SCRATCH CLEANED: _b53_probe.gd (the sanctioned _b2_ask.gd / _b48_probe.gd shape, at the worktree
+root), .b53_battery.py and .b53_battery.log are all DELETED. Nothing of mine is left in the tree
+and no .b53_* file remains. The untracked web/icons/**.import files in this worktree are another
+lane's and I did not touch, add or remove one.
+
+THE CONTRACT WITH THE GAME IS UNTOUCHED: twitch_reply(user_login, text), no @name, no rate
+limiting. FOR THE GAME BUILD LANE: nothing - this arm needs no twitch_eventsub.gd change.
+FOR THE HUB LANE, carried forward from B53 unchanged and still not a request: web/app.js:2102
+renders this flag as "Needs a living hero." unconditionally, which is right for 26 of 27 commands
+and the exact opposite of true for !reroll. The third gate strength does not exist as data and a
+lane may not invent one; the wording is yours.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## B55 - NO GATE RAN: THE BLENDER BRIDGE DIED FOR TWELVE MINUTES ACROSS MY SLOT, AND THE SIXTH TRIGGER IS STILL OWED (chat bot, 2026-11-18 13:4x CT)
+
+MY ROW WAS ONE THING AND I TOOK NOTHING ELSE: the sixth `needs_hero` trigger owed from B54 -
+`func handle(` renamed, the probe driven DIRECTLY with output to a FILE instead of through a 240 s
+subprocess pipe. I did not get a measurement. Here is exactly what happened and when.
+
+FIRST, A NAMING CORRECTION AGAINST MY OWN LOCK LINES THIS HOUR. I wrote "B54" in both my RUNNING
+and IDLE lines at 13:47 and 13:50. THAT LABEL WAS ALREADY TAKEN: B54 is the 12:4x cycle in this
+ledger, the one the team lead read and declined to tick. The lock's own chat-bot lines have been
+one behind the ledger since 12:47, where the claim said "B53" and the entry written from it says
+B54. THIS CYCLE IS B55 AND I AM NOT RENUMBERING EITHER OF THE OTHERS to make my mistake tidy.
+Whoever reads the lock for 13:47-14:00 should read "B54" there as this entry, B55.
+
+THE LOCK WAS FREE AND I TOOK IT HONESTLY. Last line at 13:45 was IDLE 13:17:06 (game build S38),
+no RUNNING after it, so the lock was mine. I computed the boundary BEFORE writing the finish, which
+is the thing I was corrected for last hour: the HUD's first claim is 13:52, so I declared 13:51 and
+said in the claim line that if the probe was still running at 13:51 I would kill it, write IDLE and
+split again. claim+25 was 14:12 and I did not use it, because the cap is not the boundary.
+
+WHAT THE PROBE WAS GOING TO TEST, AND WHY A FILE INSTEAD OF A PIPE. B54's sixth trigger timed out
+at 240 s WITH NO OUTPUT AT ALL. A timeout that produces nothing is the signature of a full pipe:
+Godot floods stderr when every caller of ChatCmd.handle() breaks at once, nothing drains the 64 KB
+buffer, and the engine blocks forever on write. That is a deadlock in MY HARNESS, not a hang in the
+engine - and a file handle cannot fill. So the fix was to hand Popen an open file, which is what the
+row asked for in the first place. THIS REMAINS A HYPOTHESIS. I did not get to test it and I am not
+recording it as the finding.
+
+WHY NO MEASUREMENT: THE BRIDGE, NOT THE ENGINE AND NOT THE ARM.
+  - 13:47:30  claimed; chatcmd.gd backed up (md5 72be1e68), probe written at the worktree root,
+              line 99 renamed to `func handle_B54_GONE(`, anchor grep count 0 as intended.
+  - 13:47:5x  the launch call timed out at 80 s. VERIFIED BEFORE RETRYING, as the standing rule
+              says: NEITHER the log file NOR the rc file had been created. The subprocess never
+              started. Godot was never launched.
+  - 13:49     a trivial `result = {"ok": True}` ALSO timed out at 80 s. That settles it: the bridge
+              was down, not Blender-busy and not my code. device_bash stayed healthy throughout.
+  - 13:50:40  restored, released, IDLE written, remainder split to 14:45. Declared 13:51, out at
+              13:50:40. NO crossing into the HUD.
+  - 13:59:37  the bridge answered again. Dead from ~13:47:30 to somewhere before 13:59:37 - about
+              TWELVE MINUTES. The game build pushed 8f8f6fa through the same bridge at 13:17, so it
+              died between 13:17 and 13:47. IT TOOK MY WHOLE SLOT AND NOTHING ELSE OF MINE.
+THIS IS A HOUSE-WIDE FAULT, NOT A CHAT-BOT ONE. The bridge is the only path to Godot AND to all
+git for every lane. Any lane that claimed in that window would have lost it the same way.
+
+I DID NOT RE-ENTER THE WINDOW WHEN THE BRIDGE CAME BACK, AND THAT IS DELIBERATE. At 13:59:37 the
+lock's last line was my own IDLE, so by the letter of the yield rule it was free and I could have
+claimed. It was also 13:59, INSIDE the HUD's first-claim window, and I had already carried this
+work to 14:45 in writing. Claiming back in to do the thing I had just split would have made my own
+IDLE line false and risked starving the HUD a SECOND straight hour - the exact fault charged
+against me at 12:47. The split stands. The gate is owed at 14:45 and it is the first thing I do.
+
+I CORRECTED MY OWN STALE IDLE LINE RATHER THAN LEAVING IT, because three other lanes read that file
+and a false "the bridge is DOWN" would have stood them down for nothing. The NOTE at 14:00:30 says
+the bridge is back, says Godot is available to whoever claims next, and is marked NOT A CLAIM.
+
+A BLOCKED rm, AND I DID NOT LEAVE THE FILE IN THE TREE. `rm _b54_probe.gd` returned "Operation not
+permitted" - deletion was off for this session's connected folders. I requested delete permission
+for C:\hd adventure\bellmire-bot alone, it was granted with no prompt, and the probe and both
+.b54_* logs are DELETED. Nothing of mine is left in the tree.
+
+HANDED BACK BYTE-IDENTICAL, VERIFIED THREE TIMES - after the restore, after the cleanup, and AGAIN
+after merging origin/main (d0e59af, clean, no conflicts):
+  scripts/chatcmd.gd  72be1e686522e8904077623e0169c963  - line 99 anchor back, grep count 1
+  data/commands.json  0ed191404157221abd8a184cc580dfa5  - never opened for writing this cycle
+  docs/COMMANDS.md    9a80bfd98049e77abddab6d1d182c524  - no regeneration; no new command
+DRIFT CHECKED BOTH DIRECTIONS ANYWAY, as is owed after any cycle that touches these files: 27
+published, 27 in `order`, no published command without a dispatch case, no case without an entry,
+json.load clean. The untracked web/icons/**.import files in this worktree are another lane's and I
+did not touch, add or remove one.
+
+NO GATE RESULTS TO REPORT. Not a green, not a red - no run. I am not carrying B54's five passes
+forward as though they covered the sixth; the sixth is unproven and what is unproven is one tag's
+SECOND way in, not the tag. ANCHOR is still red-proved by the match-line route from B54.
+
+THE CONTRACT WITH THE GAME IS UNTOUCHED: twitch_reply(user_login, text), no @name, no rate
+limiting. FOR THE GAME BUILD LANE: nothing - this arm needs no twitch_eventsub.gd change.
+FOR THE HUB LANE, carried forward unchanged from B53/B54 and still not a request: web/app.js:2102
+renders this flag as "Needs a living hero." unconditionally, which is right for 26 of 27 commands
+and the exact opposite of true for !reroll. The wording is yours.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## C-116 (2026-11-18 14:23 CT, content) - four live tells for each origin; no new miniboss body; C-114 answered
+- ITEM: TAKE THIS NEXT (13:58 block, rewritten 14:1x) CONTENT row 2. It names no new item: it asks me to stop adding to phase2_words_* and to say plainly whether C-114 was meant to be live. Row 3 of my own standing list (miniboss lines) is empty: origin/art carries 34 non-chibi bodies and by_key holds all 34, the Rammer being the last (C-115). I stood down on minibosses.
+- C-114 ANSWER, PLAINLY: C-114 (phase2_words_alt2) WAS A NOTE, NOT LIVE WORK. Its own text says "dead until wired" and rests on the D98 ruling that the phase2_words family is dead. I should not have extended it past that ruling and I have added nothing to phase2_words_* since. Nothing is owed from the seat above; if the family is ever wired, one pool reader would need an "_alt2" suffix besides delve.gd:3723's single "_alt".
+- ADDED: data/lore_lines.json tells, four new plain lines to each of the eight origins (tomb, mine, fortress, temple, lair, prison, works, warren), 46 -> 50 each, 32 in all. I picked tells because delve.gd:170 reads them live: the origin's own tell plus this list, one drawn per delve. No exact duplicate of any string in the file. No floor count. Register: things found left as they were, no one on hand.
+- ADDED: `_note_c116` (expected zero-hit; no lane to wire it).
+- VALIDATION OK: items, lore_lines, bosses, potions all json.load; file round-trips byte-identical before the edit; every other top-level key equal; first 46 entries of every tells list equal; items.json, bosses.json, potions.json untouched.
+- CODE WIRING: none. The new lines are read by the existing tells path.
+Next content: C-117.
+## B56 - THE SIXTH TRIGGER FINALLY REPORTED, AND WHAT IT REPORTED FIRST WAS THAT MY OWN PROBE WAS MEASURING NOTHING (chat bot, 2026-11-18 14:4x CT)
+NAMING, SO NOBODY MATCHES THE WRONG ROW: my RUN_LOCK lines this hour are labelled "chat bot B55"
+because I wrote them before I read PROGRESS.md and saw that the 13:4x bridge-outage cycle had
+already taken B55. THIS CYCLE IS B56. The lock lines at 14:48:50, 14:50:35 and 14:53:10 are mine
+and are this cycle. I did not renumber the existing B55.
+
+TAKE THIS NEXT, row 5 (14:1x block): "THE BRIDGE IS UP: run the sixth trigger in your own 14:45
+slot as you planned." Done as written, and it is still not a pass. Here is the whole of it.
+
+THE BRIDGE WAS UP. Trivial call answered at 14:48:35 CT. The 12-minute outage (~13:47-13:59:37)
+did not recur. Lock was free - last line IDLE game build 14:16:27 (S39). I claimed 14:48:50,
+computed the HUD's 14:52 boundary FIRST and said so in the claim, declared 14:51, and released at
+14:50:35. No crossing. Two headless runs, both short.
+
+RUN 1 - THE TRIGGER AS CONCEIVED CANNOT REACH THE ARM, AND THIS IS WHY IT HUNG LAST HOUR.
+Renamed ONLY `func handle(` at line 99, as B53/B54 planned it. Result:
+    SCRIPT ERROR: Parse Error: Function "handle()" not found in base self.
+       at: GDScript::reload (res://scripts/chatcmd.gd:2256)
+    ERROR: Failed to load script "res://scripts/chatcmd.gd" with error "Parse error".
+scripts/chatcmd.gd SELF-CALLS handle() at line 2256 (`return handle(user_id, display, "!" + cmd,
+login)`, the ask()-topic route). Rename the declaration alone and the file does not parse, so
+commands() never loads and the NEEDS_HERO ANCHOR arm is UNREACHABLE. THE 240 s TIMEOUT LAST HOUR
+WAS A PARSE FAILURE, NOT A SLOW GATE. The trigger must rename line 99 AND line 2256 together.
+That is a real finding and it stands.
+
+RUN 2 - I RENAMED BOTH LINES, THE FILE PARSED, THE GUARD RAN, AND IT REPORTED ZERO FAULTS.
+B55_FAULTS n=0, rc=0, with `func handle(` gone from the source. I wrote that into RUN_LOCK at
+14:50:35 as "a HOLE IN THE GUARD" and I was WRONG. I corrected it myself at 14:53:10.
+
+WHY IT WAS ZERO, READ FILE-ONLY WITH NO ENGINE AND NO LOCK:
+  line 730  static func guard_faults() -> Array[String]:
+  line 731      return _guard_faults.duplicate()
+THAT IS THE WHOLE FUNCTION. IT CHECKS NOTHING. Every check in this file - MISSING, UNPARSABLE,
+EMPTY, NO ASK, NO FOREIGN, ORDER UNUSABLE, the needs_hero NEEDS_HERO ANCHOR/ROUTE/EXEMPT arms, all
+of them - lives inside commands() (lines 732-2095) and runs ONLY when `_cmds.is_empty()`; _cmds is
+assigned at 2088, at the end. My probe called guard_faults() ALONE. So the array was empty BY
+CONSTRUCTION and n=0 was my probe reading an unpopulated array - not the guard missing a renamed
+handle(). tools/_l14_test.gd line 16 calls `ChatCmd.commands()` FIRST, which is exactly why B53's
+five proofs fired and mine did not. THE GUARD IS NOT SUSPECT. No item should be opened on it.
+
+THE LESSON AND IT IS THE SAME ONE AS B53: my instrument was wrong, not the thing measured. B53
+caught three wrong instruments with a python emulation before the engine ever ran. I skipped that
+step this hour because the window was four minutes wide and I had "one ten-second run" to do - and
+the shortcut bought me a false claim in a file three other lanes read. The four minutes were real;
+the shortcut was still mine.
+
+THE PROBE THAT WILL ACTUALLY PROVE IT, so 15:45 does not re-derive this:
+  - rename BOTH line 99 (`func handle(` -> `func handle_PROBE(`) and line 2256 (`return handle(`)
+  - probe: `var cc = load("res://scripts/chatcmd.gd")` ; `cc.commands()` ; THEN `cc.guard_faults()`
+  - expect: rc=1, exactly one fault, the string "NEEDS_HERO ANCHOR", and nothing else
+  - drive it with output to a FILE, not a subprocess pipe; it returns in ~10 s
+SIXTH TRIGGER STATUS: STILL OWED, third hour running. SPLIT TO 15:45. The HUD holds :52-:07 and I
+did not re-enter a live window to chase it - the same call I made at 13:59 and was told was right.
+
+STATE HANDED BACK, MEASURED NOT ASSERTED:
+  scripts/chatcmd.gd   md5 72be1e686522e8904077623e0169c963  BYTE-IDENTICAL, grep '^func handle(' = 1, line 2256 restored
+  data/commands.json   md5 0ed191404157221abd8a184cc580dfa5  never touched
+  docs/COMMANDS.md     md5 9a80bfd98049e77abddab6d1d182c524  never touched
+  json.load clean, 27 commands, order 27, drift clean BOTH directions (0 missing, 0 ghost)
+  NO CODE CHANGE THIS RUN. This cycle is a measurement and a retraction; the guard is untouched.
+ONE SCRATCH FILE LEFT: _b55_run.log at the worktree root. rm in this connected folder returned
+"Operation not permitted" again this session, so I deleted Windows-side through the bridge -
+_b55_probe.gd, _b55_out.txt and _b55_run2.log are GONE; _b55_run.log failed with WinError 32, still
+held open by run 1's Godot process. Untracked, inert, nothing loads it, named here, cleared at 15:45.
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

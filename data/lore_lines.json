@@ -47,7 +47,11 @@
       "Footprints cross the dust, and every pair is bare.",
       "A funeral bell hangs mute, its clapper wrapped in cloth.",
       "The sarcophagus lid sits a thumb's width ajar, and the gap is warm.",
-      "Candle stubs by the dozen, burned down in a single night."
+      "Candle stubs by the dozen, burned down in a single night.",
+      "The wreaths are fresh. The mourners are not here.",
+      "A coin on every lid, and every coin has been turned face down.",
+      "The incense is still burning. Nobody has been down to light it.",
+      "Names are cut low on these stones, where a kneeling hand could reach."
     ],
     "mine": [
       "Someone dug here for something, and stopped all at once.",
@@ -95,7 +99,11 @@
       "Ore carts stand loaded, bound for a surface that no longer exists.",
       "Fresh chalk marks on the wall point deeper, in a hand we know.",
       "The lamp-oil is full, and every lamp has burned itself dry.",
-      "A shift whistle blows once below, and no shift answers."
+      "A shift whistle blows once below, and no shift answers.",
+      "A cart sits on the rails, loaded, and the rails run on past it.",
+      "The props are new timber. Somebody was shoring this up and stopped.",
+      "Pick-handles stacked by the shaft head, one short of the shift.",
+      "The tally board by the lift has every peg in, and none are ours."
     ],
     "fortress": [
       "Arrow-slits face inward. Whoever held this was keeping something in.",
@@ -143,7 +151,11 @@
       "Watchwords scratched in the stone, changing every few paces.",
       "The portcullis teeth are bright with fresh grease.",
       "A garrison roll hangs by the gate, and tonight's name is ours.",
-      "Boot-prints in the mud inside the wall, and none outside it."
+      "Boot-prints in the mud inside the wall, and none outside it.",
+      "The watch-fire is warm and the watch is gone.",
+      "Spears racked by the stair, each tagged with a name. One tag is blank.",
+      "The gate-bar is down on this side. Somebody wanted to be sure of us.",
+      "Mess bowls on the long table, set out for a full company."
     ],
     "temple": [
       "The altar is clean. Nobody down here cleans.",
@@ -191,7 +203,11 @@
       "The altar cloth is fresh-laundered, and damp.",
       "Every candle leans toward the same dark door.",
       "The collection box has been emptied into the font.",
-      "Kneeling-stones worn to bowls, and a knee-print still pressing."
+      "Kneeling-stones worn to bowls, and a knee-print still pressing.",
+      "The bell-rope is cut short, just out of a child's reach.",
+      "Hymn-boards hang in order, and tonight's number is chalked over twice.",
+      "The water in the font is still. It was not still a moment ago.",
+      "Every pew faces the door we came in by."
     ],
     "lair": [
       "The floor is worn smooth by something heavy that came and went.",
@@ -239,7 +255,11 @@
       "Fresh scales in the doorway, still damp.",
       "Claw-marks on the stone, higher than a mounted knight could reach.",
       "The nest is lined with banners. Ours.",
-      "Something large sleeps nearby, and it snores in time with the torch."
+      "Something large sleeps nearby, and it snores in time with the torch.",
+      "The bones by the entrance are tidy. Something here has manners.",
+      "Fresh drag-marks, wide as a cart, and they go in.",
+      "The warm air comes from below and smells of wet iron.",
+      "Scratches on the lintel, counted off in fives. Too many fives."
     ],
     "prison": [
       "The cells lock from the outside, and some are still locked.",
@@ -287,7 +307,11 @@
       "Scratched in the wall: a tally of days, and then a tally of us.",
       "The meal-trays are laid out for tonight, one per cell, full.",
       "The gaoler's chair still rocks.",
-      "Chains drag somewhere ahead, patient, unhurried."
+      "Chains drag somewhere ahead, patient, unhurried.",
+      "A lamp left burning in every cell, and every cell empty but one.",
+      "The key-board by the door has one hook bare.",
+      "Scratched tallies on the wall, and the last mark is still pale.",
+      "The cell doors are all open. The hinges are all oiled."
     ],
     "works": [
       "Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.",
@@ -335,7 +359,11 @@
       "Gears turn slowly, grinding something that is not grain.",
       "The overseer's whistle echoes, and the line of benches stands.",
       "Quenching water steams in a trough, and the water is red.",
-      "Every tool hangs in its place, outlined in soot, except one."
+      "Every tool hangs in its place, outlined in soot, except one.",
+      "The forge is banked, not cold. Someone meant to come back to it.",
+      "A half-finished helm on the bench, the file still on the rim.",
+      "The belts are still moving, and nothing rides them.",
+      "Whistle-cord, oiled and coiled. The shift has not been called off."
     ],
     "warren": [
       "Doorways, chimneys, a street sign - a whole town, swallowed.",
@@ -383,7 +411,11 @@
       "Chalk arrows at knee height point in a dozen directions.",
       "A game of dice lies half-played on a barrel-head.",
       "The smell of stew, and no kitchen in sight.",
-      "A child's laugh somewhere down the lane, and it is not a child."
+      "A child's laugh somewhere down the lane, and it is not a child.",
+      "Washing hangs on a line, and it is dry, and nobody is hanging it.",
+      "Small boots by a door, pointed the way we are going.",
+      "The tunnel is swept to a neat curve. Somebody lives here and minds it.",
+      "A pot on a ledge, still lukewarm, a spoon standing in it."
     ]
   },
   "descend": [
@@ -11632,6 +11664,43 @@
           "Brass pegs on the stone. Somebody counts them out of habit.",
           "The coat is creased where the board rode. He held it a long time."
         ]
+      },
+      "rammer": {
+        "arrive": [
+          "Three timber legs and a frame between them. Something is being driven into the floor.",
+          "A bruised pile stands out of the stone. Over it, an iron monkey hangs under the head.",
+          "A hauler leans back on the fall-rope, off to one side. He is not the danger. He is the reason it is loaded.",
+          "Hear the haul. Slow, a rope paying through a block. Each pull is a step nearer the top.",
+          "Then the hold. That is the whole warning. Nothing moves and everything waits.",
+          "Stand off the pile for the drop. Come back in while it hauls.",
+          "Whatever is on the pile when the monkey falls is finished.",
+          "The timber is river-soaked and bruised. The rope is frayed. The iron is the one sound thing here.",
+          "A working man keeps his monkey. He keeps it better than himself."
+        ],
+        "act": [
+          "The haul. Slow. The rope runs.",
+          "Pull, and pull. The iron climbs.",
+          "It hangs at the top. Nobody breathes.",
+          "The hold. Get off the pile.",
+          "The rope lets go.",
+          "It comes down on the count."
+        ],
+        "broken": [
+          "The rope parts. The monkey stays where it fell.",
+          "A leg splits and the frame sits down crooked. It cannot haul.",
+          "The head block cracks. The iron has nowhere to go up.",
+          "The hauler lets the rope run through his hands and does not take it up again."
+        ],
+        "fall": [
+          "The Rammer is down. The monkey lies on the pile and does not rise.",
+          "The rope goes slack and falls in a heap.",
+          "Nothing is hauling now. Nothing is held. Walk the floor.",
+          "It dropped on the count to the last.",
+          "The frame leans on one leg and holds no weight.",
+          "The Rammer is down. The pile is a stump with a dent in its head.",
+          "The hauler sits on the wet stone and looks at his hands. Nobody asks him anything.",
+          "The iron is sound. The timber round it is not."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -11646,7 +11715,8 @@
     "_note_c110": "C-110: comfitmaker (thirty-first miniboss, art lane) gets arrive and fall lines, 9 and 8. by_key now holds 31 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 31: a sugar-hard shell nothing the party carries can mark, so it hands out comfits and a comfit is the one thing that cuts it, at the price of a gummed hand that swings slower while it holds the sweet. Two arrive lines state the mechanic plainly and the fall lines answer it. No mechanic is built from these lines. Nothing spawns this body unless the game build has a comfitmaker row; that is engine work.",
     "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work.",
     "_note_c112": "C-112: beadle (thirty-third miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 33 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 33: while it stands the party does not choose who acts, it calls the same hero again and again while the rest hold and watch, the four brass pegs on its board are the calls it has left, and knocking the board off its arm gives the order back. One arrive line is art's own feed line. Three arrive lines state the mechanic plainly (same hero again, pegs are the calls, knock the board off) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a beadle row; that is engine work.",
-    "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way."
+    "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way.",
+    "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
@@ -12121,5 +12191,6 @@
         "{name} cannot walk it while they are down. It waits."
       ]
     }
-  }
+  },
+  "_note_c116": "C-116: +32 live tells, four to each origin in the tells table (tomb, mine, fortress, temple, lair, prison, works, warren). Read at delve.gd:170, appended to the origin's own tell and drawn once per delve. Same shape: plain strings. Additive; no floor count. Expected zero-hit key; no lane is to wire it."
 }

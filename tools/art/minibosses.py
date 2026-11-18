@@ -11187,7 +11187,30 @@ def rammer():
     limb(P, [(0.66, 0.04, 0.0), (0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
     limb(P, [(0.0, 0.94, 0.0), (0.0, 0.52, 1.32), (HX, HY + 0.04, HZ)], 0.082, 0.058, 'bone')
     # the head: a squat capping block with the sheave pin through it
-    P.add(L.box(0.40, 0.34, 0.17), 'bone', loc=(HX, HY + 0.02, HZ + 0.06))
+    # PASS 7, ONE CHANGE, AND IT IS THE DEPTH - NOT THE WIDTH I SAID IT WAS.
+    # My own 12:39 row read "narrow the head cap so the monkey is the widest
+    # thing in the upper frame by a clear margin at EVERY angle", and the team
+    # lead then looked by eye and said the three-quarter is the view that fails.
+    # _rammer_cap_ab.py renders the shipped glb through one camera at seven
+    # yaws and measures each part's OWN read - what MOVES when that part is
+    # taken away - and it says we were both wrong about which view:
+    #   yaw  0  cap 0.403  monkey 0.624   margin +0.221
+    #   yaw 30  cap 0.518  monkey 0.729   margin +0.211   <- the 3/4 is FINE
+    #   yaw 90  cap 0.341  monkey 0.381   margin +0.039   <- THE SIDE is the
+    #                                                        one that fails
+    # and the reason is arithmetic once you see it: in pure side view the cap
+    # reads its DEPTH, 0.34, against the monkey's strap depth of 0.38. Four
+    # centimetres. Nothing in x was ever wrong - the block is 0.58 against the
+    # cap's 0.40 and front-on it wins by a mile. So narrowing the cap in x,
+    # which is what "narrow the cap" plainly means and what I would have done,
+    # would have cost the capping block its seat on the leg tops and moved the
+    # failing number NOT AT ALL.
+    # 0.34 -> 0.27 puts the side margin at 0.38 - 0.27 = 0.11, over the 0.09
+    # bar, and the three legs still seat: their tops occupy y -0.162..0.002 and
+    # the block now spans -0.215..0.055. A sheave block IS thin front-to-back -
+    # it only has to carry a pin - so plainness and the read want the same
+    # shape here, same as the monkey at pass 5.
+    P.add(L.box(0.40, 0.27, 0.17), 'bone', loc=(HX, HY + 0.02, HZ + 0.06))
     _ring(P, (HX, HY + 0.02, HZ + 0.06), 0.115, 'y', 'dark', 0.028, 14)
     # braces. Two, at different heights, and NOT a symmetrical pair - the lower
     # one carries the hauler's side only, which is how a working frame is
@@ -11205,9 +11228,23 @@ def rammer():
         P.add(L.box(0.055, 0.055, 0.13), 'bone',
               loc=(HX + 0.165 * math.cos(a), HY + 0.165 * math.sin(a), 0.40),
               rot=(0.22 * math.sin(a), -0.22 * math.cos(a), 0.0))
-    # the chalk ring the crew marks on the pile head - the ONE glow in the
-    # body, and it is on the floor saying WHERE, which is the information the
-    # fight is about. Kept well inside the frame, nowhere near the border.
+    # the chalk ring the crew marks on the pile head. It says WHERE, which is
+    # the information the fight is about. Kept well inside the frame, nowhere
+    # near the border.
+    # TWO CORRECTIONS TO THIS COMMENT, 18 Nov, BOTH MINE AND BOTH FOUND BY
+    # SOMEBODY LOOKING FOR THE THING IT DESCRIBED AND NOT FINDING IT:
+    #  1. IT IS NOT ON THE FLOOR. The old comment said "on the pile head" and
+    #     "it is on the floor" in the same sentence, and so did my write-up,
+    #     which sent the team lead hunting a floor marking in two renders that
+    #     could never have had one. It is a horizontal annulus, r 0.20, laid on
+    #     the broomed head of the pile at z 0.415 - 0.4 above the floor plane.
+    #  2. IT IS NOT "THE ONE GLOW IN THE BODY". eyes() at the bottom of this
+    #     builder defaults to slot='glow', so the hauler's two eye pinpoints
+    #     are in this material too - which is why rammer_glow spans y up to
+    #     1.335 in the exported glb when this ring alone would stop at 0.431.
+    #     Strength 1.55 was reasoned for a chalk mark on wet oak and it is
+    #     also driving a face. Not changed here - one change per pass, and the
+    #     eyes read correctly at 1.55 - but it is named instead of hidden.
     _ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow', 0.016, 18)
     # ------------------------------------------------------- THE MONKEY, UP
     # Hauled nearly to the head. Its top at ~2.19 against the head at 2.52 -

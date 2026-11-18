@@ -102,6 +102,8 @@ func _process(_dt: float) -> bool:
 		_ok(int(_swings.get("s36_0", 0)) >= 3, "the called hero swings (%d)" % int(_swings.get("s36_0", 0)))
 		_ok(int(_swings.get("s36_1", 0)) == 0 and int(_swings.get("s36_2", 0)) == 0,
 			"the other two hold (%d, %d)" % [int(_swings.get("s36_1", 0)), int(_swings.get("s36_2", 0))])
+		_ok(Delve.order_held_frames > 0 and not Delve.setpieces_fired.has("order_held"),
+			"S38: holds counted in order_held_frames (%d), not in setpieces_fired" % Delve.order_held_frames)
 		# break it: the order lapses and the rest act again
 		_mon.hp = _mon.max_hp * 0.2
 		_d._mb_way_tick(_mon, _d.party, _d.party[0], 1.0)

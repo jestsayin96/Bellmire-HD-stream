@@ -3449,3 +3449,203 @@ creature, so this was measured separately - a clipped icon is not a blank one.
 only third-party asset in any render here is the CC0 KayKit adventurer `Knight.glb`
 used as the measuring stick in the fit sheet, already logged in
 `docs/art/ASSET_SOURCES.md`.
+
+---
+
+## THE RAMMER (34th) - LIVE FAULT, FOUND 2026-11-18 12:39 CT BY MY OWN SILHOUETTE SHEET
+
+The body shipped GREEN at a8a85a6 (ratio 1.12, 3/3 proving views, 0 blind, blank
+check 3 files 0 failures) and that verdict stands. This is a fault **the register
+is structurally incapable of seeing**, because every number it computes is about
+hero-vs-creature occlusion and this is a creature occluding **itself**.
+
+**THE CLAIM IN MY OWN PASS 5, IN THE SOURCE:** the monkey hangs 0.33 m below the
+head so there is "a visible gap of rope, so it reads as HANGING and not as part
+of the frame".
+
+**MEASURED, on `renders/art/minibosses/rammer/_rammer_silhouette.png`, walking the
+image column through the head cap's centre (3.31 mm/px at sheet scale):**
+
+| view | black run from cap | first white |
+|---|---|---|
+| front | **831 px, unbroken, cap to floor** | **none** |
+| three-quarter | 323 px | 107 px |
+| side | 408 px | 247 px |
+
+**In the front view the gap is not small. It is not there.**
+
+**AND THE CAUSE IS NOT THE ROPE.** I assumed the rope before I measured the width,
+and the width says otherwise: through that band the run grows **52 -> 89 px** as it
+descends. A 44 mm rope is 13 px. That is the **two front legs**, which by z 2.3-2.5
+have converged to about ±0.17 of centre and overlap the centre line in a front
+orthographic view. Pass 5 fixed the monkey's width against the legs at z 1.93 and
+never checked the band **above** the monkey, where the legs are tighter.
+
+**SCOPE, HONESTLY:** in colour it reads - pale wet oak legs against dark iron cap
+and monkey, plain on `hero_front.png`. This is a **hue-free read fault only**. But
+pass 5's own argument is that the telegraph must survive without hue, so by the
+body's own standard it is a fault, and it is the Beadle's family: every number
+green, the shape saying less than the numbers claim.
+
+**NOT FIXED.** The cheap fix is to rake the two front legs ~0.06 wider where they
+meet the head so they pass outside the cap's footprint - one pass, one re-render,
+one re-prove. Not taken inside a row that asked for a write-up.
+
+**ALSO OPEN ON THIS BODY, FROM LOOKING AT THE THREE ON-BODY VIEWS:** the raked back
+leg shares a line with the hauler in the side view (reads as impalement for a
+moment; nothing clips); the frame collapses to a pole from the side; the pile is
+the weakest read in the back view and its shaft shows below the floor plane; and
+the hauler's faceting is coarser than the chibi knight's (its proportion is right
+after pass 6 - it is segment count, not head-height).
+
+### CORRECTION 2026-11-18 12:46 CT - THE CAUSE ABOVE WAS A GUESS; HERE IS THE MEASUREMENT
+
+`tools/art/_rammer_yaw_ab.py` renders the shipped glb through one ortho camera at
+yaw 0/8/16/24/40 and counts daylight in the cap-to-monkey band across the cap's
+full width. **Zero at every angle** (denominator 8778 -> 6498, so the instrument
+is live). A height profile of the yaw-0 alpha: **0 mm of daylight from z 2.50
+down to z 1.90**, first opening at z 1.80 (134 mm) and widening below.
+
+So the band is not "the two front legs" and is not a projection accident - it is
+**the tripod converging at its own apex**, which is what a tripod is, plus the
+rope. **Raking the legs would do nothing, and no camera angle opens it.** Lowering
+the monkey under z 1.80 to find daylight would delete the telegraph it serves.
+
+**What holds:** pass 5's other half - the monkey stands proud of the legs at its
+own height, so the tower bulges where the block is. The telegraph is that bulge,
+the chalk ring **on the head of the pile**, and the oak/iron colour split. The
+source comment claiming "a visible gap of rope" is what is wrong, not the model.
+
+### CORRECTION, 18 Nov 14:3x-15:0x CT - I PUT THE CHALK RING ON THE FLOOR AND IT IS NOT ON THE FLOOR
+
+The team lead went looking for it in `hero_front.png` and `hero_back.png`, could
+not find it, and asked whether it had ever been modelled. **It is modelled, and
+the sentence above was the fault** - the same class as "a visible gap of rope",
+and in the same write-up.
+
+I parsed the glb's own glTF JSON chunk rather than re-rendering: `rammer_glow`
+spans y 0.399..1.335. The ring is `_ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow',
+0.016, 18)` - a horizontal annulus, radius 0.20, laid on the **broomed head of
+the pile at z 0.415**, which is 0.4 **above** the floor plane. Nothing in this
+body lies flat on the floor. The generator's own comment said "on the pile head"
+and "it is on the floor" in one sentence; both it and this file now say the one
+true thing.
+
+**AND I THEN TALKED MYSELF INTO A SECOND WRONG ANSWER, WHICH THE RENDER KILLED.**
+From the geometry alone I reasoned that the broomed collar beneath the ring
+(a cone r 0.255 -> 0.215 over z 0.335..0.410) is **wider** than the ring's 0.20
+and must therefore hide it from any camera at or below its own height. That is
+a tidy argument and it is false. `tools/art/_rammer_ring_ab.py` renders the body
+with and without the ring through one camera and counts the pixels that MOVED,
+sweeping elevation:
+
+| elevation | 0 | 10 | 20 | 30 | 45 | 60 |
+|---|---|---|---|---|---|---|
+| moved px (yaw 0) | 594 | 1022 | 1232 | 1458 | 1818 | 2088 |
+| moved px (yaw 40) | 592 | 908 | 1193 | 1427 | 1730 | 2060 |
+
+**Visible at every elevation including eye level, and it grows with height.**
+The real reason nobody could see it is framing, not occlusion: the fit views
+frame a 3.87 m hero-and-creature pair, and a 0.4 m chalk mark on a knee-high
+stump is a handful of pixels there. It is plainly visible once the camera is
+framed on the pile head, and it is visible as a pale sliver in the yaw-90
+silhouette too.
+
+**A THIRD THING THE SAME PARSE FOUND, AND IT IS A DEFECT IN MY OWN COMMENT:**
+"the ONE glow in the body" is false. `eyes()` in `creatures.py` defaults to
+`slot='glow'`, so the hauler's two eye pinpoints are in this material - 352 of
+`rammer_glow`'s 870 verts. The emissive strength 1.55 was reasoned for a chalk
+mark on wet oak and is also driving a face. Not changed - one change per pass,
+and the eyes read correctly at 1.55 - but it is named rather than hidden.
+
+### PASS 7, ONE CHANGE: THE HEAD CAP - AND IT WAS THE DEPTH, NOT THE WIDTH
+
+My own row said "narrow the head cap so the monkey is the widest thing in the
+upper frame by a clear margin at every angle". The team lead then looked at the
+three silhouettes and said the FRONT already passes, the SIDE is about equal,
+and **the three-quarter is the view that fails**. I built the instrument instead
+of picking between us: `tools/art/_rammer_cap_ab.py` renders the shipped glb
+through one camera at seven yaws and measures **each part's own read** - the
+pixels that move when that part alone is stripped out of its mesh.
+
+It says **we were both wrong about which view**, and the side is the one:
+
+| yaw | 0 | 15 | 30 | 45 | 60 | 75 | 90 |
+|---|---|---|---|---|---|---|---|
+| cap own width, before | 0.403 | 0.474 | 0.518 | 0.525 | 0.496 | 0.435 | 0.341 |
+| monkey own width | 0.624 | 0.700 | 0.729 | 0.710 | 0.641 | 0.528 | 0.381 |
+| margin, before | +0.221 | +0.226 | **+0.211** | +0.184 | +0.145 | +0.093 | **+0.039** |
+| margin, after | +0.221 | +0.241 | +0.246 | +0.233 | +0.206 | +0.162 | **+0.106** |
+
+The three-quarter was never close to failing. **The side was**, by 39 mm, and
+the arithmetic is obvious once the number exists: in pure side view the cap
+reads its DEPTH, 0.34, against the monkey's strap depth of 0.38. So "narrow the
+cap", which plainly means narrow it in x and is what I would have done, would
+have cost the block its seat on the three leg tops and **moved the failing
+number not at all**. The change is 0.34 -> 0.27 in y only, and the proof that it
+was one change is that yaw 0 is identical to four decimal places, 0.403 before
+and after.
+
+**I ALSO HAD TO FIX THE INSTRUMENT BEFORE I COULD TRUST IT, AND THE FIRST
+VERSION WAS GREEN EVERYWHERE.** Pass 1 measured the whole silhouette's extent
+per band and passed all seven yaws. I did not believe it, because one number was
+too big: the monkey band read 0.867 at yaw 0 when the block and its straps are
+0.62. The extra 0.25 is **the side stay rope** crossing that band on its way to
+the hauler's grip. A band margin can be green because the ROPE is wide, which
+says nothing about the block - the same family as `head_glow_px: 156` beside
+"the head has no face". Both numbers are now reported separately and the
+acceptance test is the part's own read.
+
+**WHAT THE NUMBER PASSES AND THE PICTURE STILL ONLY HALF-SAYS, SAID PLAINLY:**
+I looked at both yaw-90 silhouettes. The cap is visibly narrower and nothing
+else moved. But at that angle the monkey's winning margin is carried by **two
+thin strap tabs peeking past the mast**, while the cap is a solid slab - so the
+eye still reads them as comparable masses even at +0.106. If the side is ever to
+read like the front, the next change on this body is the **monkey's depth**,
+0.38 -> ~0.46, not more off the cap. One change per pass; I have made mine.
+
+### THE FIT PROOF FOR PASS 7, AND EVERY FAULT I CAN SEE IN IT
+
+Re-rendered on the posed KayKit knight, front / side / back, and I looked at all
+three. Register `_fit_rammer_register.json` GREEN, errors [], blank check 3
+files 0 failures, border clean on all seven cap-sweep frames.
+**creature_h 2.75, ratio 1.12, pair_w 3.87 - all three UNCHANGED**, because the
+change was in y only. The side silhouette moved 31343 -> 31043 px, which is the
+cap's lost depth and nothing else. **No downstream number changes; the game
+build's MB_FIT 1.12 stands and needs no re-derivation.**
+
+A note on the register itself: `--only rammer` alone writes `_fit_report.json`,
+NOT the named register, so my first fit run left `_fit_rammer_register.json` at
+its 17:53 content and the visibility numbers came back byte-identical to the
+pre-change run. I nearly reported those. **Identical numbers after a change you
+know you made are a reason to check the file's mtime, not a clean sheet.** The
+named register needs `--name _rammer_register` and has been re-run with it.
+
+**Faults I can see in the three views, honestly listed:**
+
+1. **THE PILE SHAFT STILL PROTRUDES BELOW THE FLOOR PLANE** the tripod feet
+   stand on - clearly visible as a thin cylinder under the stump in
+   `hero_back.png`. I found this at pass 6, the team lead seconded it by eye,
+   and it is **unchanged** because I did not touch it this pass. Still owed.
+2. **THE PILE READS AS A STOOL OR A BUCKET**, not as a driven pile. It is
+   knee-high, visually detached from the frame, and in the side view it sits
+   outside the tripod's foot. The broomed head wear does not read at pair
+   framing at all.
+3. **SIDE VIEW READS AS A LADDER OR A SIGNPOST.** Edge-on, the monkey is a thin
+   slab clamped to a mast and the "it is up, so it is coming down" telegraph is
+   at its weakest. This is the same fault the +0.106 margin passes on a
+   technicality; see the monkey-depth note above.
+4. **THE SIDE STAY READS AS A RIGID BEAM, NOT A ROPE** in the side view - it is
+   straight, thick and structural there, though it reads correctly as rope from
+   front and back.
+5. In the side view the hauler's **hooded head overlaps the diagonal stay**, so
+   the beam appears to pass through him. Occlusion only, no interpenetration in
+   the geometry, but it reads badly at that one angle.
+6. **WHAT IS NOT WRONG, CHECKED BECAUSE THE BEADLE WAS:** the hauler **has a
+   facing**. The pale band and the two eye pinpoints are on the front of the
+   hood only - `hero_front.png` shows the eyes, `hero_back.png` does not. This
+   body does not have the Beadle's no-facing fault and I checked rather than
+   assuming the lesson transferred.
+7. The monkey is the widest upper mass in front and back view by an easy margin,
+   and the rope gap between its top and the cap is visible in both. The pass-5
+   telegraph holds.

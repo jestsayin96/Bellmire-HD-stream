@@ -10966,3 +10966,23 @@ screenshot this hour because web/ did not change, so the hostile-name test is no
 No new claim of READY TO PUBLISH; the publish decision is the supervisor's.
 Hygiene: WORK_PLAN.md working copy was byte-identical to origin/hub c04887f (empty diff) and blocked the
 fast-forward; stashed (stash@{0}) rather than discarded, then ff-merged. Stash is inert and can be dropped.
+
+U78 (2026-11-18 13:52 CST, STAND-DOWN - bridge down, UNCOMMITTED): Blender MCP (localhost:9876) refused connections twice, so I could not read R's working RUN_LOCK.txt, check Godot by process, launch Godot, or run git (device_bash git is broken for this worktree and leaves .lock files). Did not claim the lock, did not launch Godot, no .gd edits. Item stays: rarity-hue half of System 2 (windowed render needed), then L74. Next firing (14:52): if Blender bridge is back, read R's working lock, claim <=15 min, release by :07, take System 2 rarity-hue. This line is uncommitted on hud-ui - commit it first thing when git is reachable.
+
+## U79 (18 Nov 14:53 CT) - NO HUD ITEM OPEN; headless parse health check of hud-ui after the merge (dee982b)
+- Item from TAKE THIS NEXT: the 14:1x block's HUD row is "your window is yours, row below unchanged" - no item. Queue is empty (System 2 closed whole, L72-L74 ticked, L66 to hub H31). Stand-down on items, not on the lock.
+- Lock: read R's working RUN_LOCK.txt. Last real line IDLE 14:50:35 (chat bot B55); its later NOTE disclaims holding. Two chat-bot probe Godots (PIDs 6472/21112, worktree bellmire-bot, started 14:48:56) were still alive - its leftover hung probe, not a hold per its IDLE. Claimed 14:53:20-06:00 (expected 15:00, cap 15:07), released 2026-11-18T14:54:00-06:00.
+- Ran: godot --headless --path W2 --quit-after 300. Parse Error count 0; SCRIPT ERROR count 7, all the known gear.gd:104 null-instantiate from this worktree's thin .godot/imported cache (team lead traced it 18 Nov; not HUD, not chased). HUD-file mentions in log: 0. No picture taken, no game file edited.
+- Not ticked by me. 13:52 U78 stand-down line (bridge down) is committed with this entry.
+
+## U80 (18 Nov 15:5x CT) - U77's null result closed: the old and hardened end-finders DISAGREE on every U76 shape, and agree on the shipped corpus
+Lock: file-only row, no claim, no Godot launched (R's working RUN_LOCK last line chat bot B57 IDLE 15:50:40, tasklist clean).
+Row (team lead 6, "prove which"): a hardened parser changing no verdict means either the old one was never wrong on the corpus, or the hardened path is not taken. Both checked.
+(1) Path is taken: block_end() is called at both table readers in tools/_u71_rarity_guard.gd (parse_fish, parse_py); no find("}") / find("\n}") remains in either.
+(2) Side-by-side on the REAL scripts/fishing.gd text, the old first-"}" finder vs the depth finder, rungs read from RARITY_COLOR (python model of both, same inputs as the U76_BRACE mutations):
+  clean file: old 4, new 4 (agree)
+  "# note }" comment + nested dict: old 1, new 4 (old truncated)
+  nested dict on the open line after "{ # {open}": old 0, new 5 (old read nothing)
+  unterminated "{{": old 4 (SILENT GREEN), new -1 -> 0 rungs, FAILS loud
+(3) Verdict: the old parser was already correct on every shape the shipped corpus contains (U77, 12 historical revisions), and wrong on every shape U76 constructed. So the null result is real and the hardened path is live; no silent instrument. The unterminated case is the one that mattered - old went green, new fails.
+Limit stated: (2) is a python port of both finders; the in-engine proof of the new one is U76_BRACE 3/3 (rerun U77). I did not rerun Godot this hour. Nothing for Mr. E to decide. Row closed; queue empty again.

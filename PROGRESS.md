@@ -9051,3 +9051,11 @@ HONEST LIMIT: it fires only in the "full" passes (the grid passes did not trip i
 LOOKED AT: renders/cycles/u68/l40_full_100.png (Chronicle bottom-left, chat box bottom-right, clock top-right, no overlap; the HUD re-lays the panel after the audit read, so the picture shows the normal size).
 NOT DONE: the L654 collapsed-element (<=2 px / offscreen) audit - did not fit the window.
 Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me.
+
+## U69 (HUD, 18 Nov 04:5x CT) - the 20% in-pane child bound in tools/_l40_test.gd, red-proved
+- ITEM: the TAKE THIS NEXT row said "System 2 rarity hue" but that half shipped at U55/U56 and the plan itself ticked SYSTEM 2 closed whole (01:5x CT, main 08f7fe4); the row is stale. I took the child-bound red proof the row parks behind it.
+- BLIND SPOT: _l40_test skipped any child of a Pane_ box at/above 20% of the screen as an assumed backdrop (the SubViewport). A BossCard/Chronicle/Feed grown past 20% INSIDE a pane was never audited - same class as U67's 35% skip.
+- FIX: _audit now prints FAIL for a pane child named Chronicle/BossCard/Feed at >=20% of the screen. Parse 0 errors.
+- RED PROOF tools/_u69_redproof.gd (copy of the gate + an oversize 1500x800 BossCard injected into the visible Pane_director): FAIL x2 (100% and 150% grid), U69_REDPROOF FAIL. Honest limit: the injected card is synthetic - no real in-pane BossCard grows that big today; this proves the check fires, not that the real card is large.
+- REAL GATE after the fix (windowed 1920x1080): L40_TEST OK. LOOKED AT renders/cycles/l40/l40_grid_100.png: four panes with lane chips, Chronicle parchment centred, chat box bottom right, no overlaps.
+- No owned .gd file changed. Lock held 04:53-~05:00, released well before :07. Not ticked by me.

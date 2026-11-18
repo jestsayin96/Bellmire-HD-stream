@@ -427,3 +427,11 @@ IDLE 2026-11-18T06:54:24-06:00 - HUD U71: rarity one-table guard tools/_u71_rari
 
 RUNNING 2026-11-18T07:08:45-06:00 (game build - TAKE THIS NEXT 07:04 row 1, fishing RARITY_COLOR; expected finish 07:35; release by :40. Stamp corrected from 07:09:30, which was ahead of the machine clock)
 IDLE 2026-11-18T07:16:18-06:00 - game build: TAKE THIS NEXT rows 1+2 - fishing RARITY_COLOR = art's lamp, common/junk bare, FISH_RARITY OK (32 checks, 3/3 red proofs); S32 true-90 side shot added. All gates green. Godot closed (game build)
+RUNNING 2026-11-18T07:49:20-06:00 (chat bot B49 - the rest of the count: 67 guard arms made countable, four gates plus engine red proofs that a mutation MOVES guard_faults(). Expected finish 07:53; inside my :45 window by declaration, releasing the moment it is done)
+IDLE 2026-11-18T07:50:45-06:00 - chat bot B49: the remaining 67 guard arms are now COUNTED; PARSE 0, L14_TEST OK 22, TWITCH_PARSE OK 8, COMMANDS_DOC OK 27, seven engine red proofs all moved guard_faults() and all returned rc=1, data/commands.json handed back byte-identical. Declared 07:53, finished early. Stamp corrected from 07:51:05, which was 20 s ahead of the machine clock. Godot closed (chat bot)
+
+RUNNING 2026-11-18T07:54:02-06:00 (HUD U74b - extend U71 rarity guard to fishing.gd RARITY_COLOR, headless, expected finish ~07:58; inside my :52-:07 window, cap claim+15)
+IDLE 2026-11-18T07:55:04-06:00 - HUD U74b: U71 rarity guard extended to fishing.gd RARITY_COLOR, U71_GUARD OK, 11/11 third-table red proofs, commit 54a0371 on hud-ui. Godot closed (HUD)
+
+RUNNING 2026-11-18T08:08:30-06:00 (game build - TAKE THIS NEXT item; expected finish 08:35; release by :40)
+IDLE 2026-11-18T08:19:46-06:00 - game build S33: sixteen art miniboss bodies were in no draw; THEME_MINIBOSS_MORE now carries every body under art's own theme tag, MB_FIT += comfitmaker/leech. S33_DRAW OK 121 (red 3/125), MBFEED_TEST OK 80, TWITCH_PARSE OK 8, OFFFLOOR OK 0/2313, DELVE_TEST OK 0 SCRIPT ERROR, TOWNWALK PASS 0/17275. Godot closed (game build)

@@ -9974,3 +9974,39 @@ prompt itself instructs.
 NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched; twitch_reply(user_login, text)
 unchanged, still no @name and no rate limiting. NO live Twitch test this cycle: nothing was
 redeemed, nothing was cheered, bellmirebro posted nothing, no channel state was read or written.
+
+## S33 - sixteen miniboss bodies were in NO draw; every art body now has its theme's row (game build, 2026-11-18 08:2x CT)
+TAKE THIS NEXT 08:0x CT row 1 said "your call ... or wire a miniboss row". Measured before acting:
+32 art bodies on disk (non-_chibi), 31 keys with content's lines, but `DungeonHD.THEME_MINIBOSS_MORE`
+held ONE extra key (fogbound -> fenman). Sixteen bodies that had art's fit ratio in `Delve.MB_FIT`
+AND content's arrive lines - quartermaster, jointer, greener, dyer, pressman, ratcatcher, reeve,
+paviser, strickler, loader, tanner, hurdleman, drover, moulder, tapster, comfitmaker - were in no
+theme's draw, so none of them could ever stand on a floor. Their S-cycle fits were inert.
+- `scripts/dungeon_hd.gd` THEME_MINIBOSS_MORE now lists every non-base art body under its theme.
+  THEME IS ART'S OWN TAG, read off field 5 of each tuple in tools/art/minibosses.py, not guessed:
+  barracks quartermaster; workshop jointer/greener/dyer; prison pressman; shrine leech; crypt
+  ratcatcher; keep reeve/paviser; treasury strickler; mess loader; flooded tanner; grassland
+  hurdleman; wood drover; firepit moulder/tapster; fogbound fenman; confection comfitmaker.
+  The existing gate in miniboss_for (body AND arrive lines) still decides - `leech` is listed and
+  is drawn on ZERO floors until content writes its lines. The draw stays hashed off the floor
+  number, so floor layout/purses are untouched; which miniboss a given floor gets DOES change.
+- `scripts/delve.gd` MB_FIT += comfitmaker 0.93 (_fit_comfitmaker_register.json) and leech 0.95
+  (_fit_leech_register.json), copied not re-derived.
+- NEW GATE tools/_s33_draw.gd (headless): per listed key - art tag == table theme, loadable body,
+  MB_FIT == art's pairs.<key>.ratio to 0.005, drawn on >=1 of 400 floors iff it has arrive lines;
+  plus every body on disk is in some draw. S33_RED=1 injects a bodiless key.
+  IT CAUGHT A REAL FAULT ON ITS FIRST RUN: comfitmaker.glb and leech.glb had never been imported, so
+  miniboss_model() answered "" and the Comfitmaker would have been silently dropped
+  (S33_DRAW FAIL 3 of 121). After --headless --import: S33_DRAW OK 121 checks.
+  Red proof: S33_RED=1 -> S33_DRAW FAIL 3 of 125 (tag, body, ratio all caught), rc=1.
+- NEW LOOK tools/_s33_look.gd (windowed, S33_KEY): body beside the posed knight, fitted to
+  MB_HERO_H*MB_FIT. comfitmaker S33_LOOK OK (5 checks) h=2.28 ratio 0.93; leech S33_LOOK OK (5)
+  h=2.33 ratio 0.95. LOOKED AT comfitmaker_1front, comfitmaker_3side90, leech_1front in
+  renders/cycles/s33/: both stand on the floor clear of the knight; the comfit stand and the
+  Leech's basin-on-tripod read at the hero's scale.
+GATES: parse 0 SCRIPT ERROR; MBFEED_TEST OK 80 checks; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2313; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR;
+TOWNWALK in_solid=0/17275 raid_in_solid=0/7003 PASS.
+NOT DONE, NAMED: the ONE IDEA per miniboss (summon, re-plate, hook-drag...) is still not delve-side
+behaviour for these sixteen - they now stand up named, with their lines and their rally, which is
+what the fenman got at S32. Content: the leech needs arrive/fall lines to enter the shrine draw.

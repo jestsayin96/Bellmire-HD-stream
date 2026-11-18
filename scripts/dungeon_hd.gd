@@ -108,7 +108,17 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## never displace the one that works. The base THEME_MINIBOSS key always stays in the draw.
 ## The draw is hashed off the floor number, NOT _rng, so adding a candidate does not shift the
 ## floor's own random stream (layout, purses, decals stay as they were).
-const THEME_MINIBOSS_MORE := {"fogbound": ["fenman"]}
+## S33: every art body now has its theme's row. Theme per key is ART'S OWN TAG - field 5 of the
+## tuple in tools/art/minibosses.py ("the dungeon_hd.gd theme whose miniboss weight this was built
+## for"), read, not guessed. Sixteen bodies had a fit ratio here and lines in content's file and
+## were in NO draw, so they never stood on a floor. `leech` is listed and stays out on its own until
+## content writes its arrive lines - the gate in miniboss_for, not this table, decides.
+const THEME_MINIBOSS_MORE := {
+    "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
+    "prison": ["pressman"], "shrine": ["leech"], "crypt": ["ratcatcher"],
+    "keep": ["reeve", "paviser"], "treasury": ["strickler"], "mess": ["loader"],
+    "flooded": ["tanner"], "grassland": ["hurdleman"], "wood": ["drover"],
+    "firepit": ["moulder", "tapster"], "fogbound": ["fenman"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))
     if base == "":

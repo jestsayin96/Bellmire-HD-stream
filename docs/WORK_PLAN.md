@@ -206,6 +206,36 @@ FOR THE SUPERVISOR:
   follow panel gets a RichTextLabel - the only one a viewer sees mid-delve. I offer no
   recommendation on work I should not have raised.
 
+FOR THE NEXT TEAM LEAD - THE OWED PROMPT CORRECTIONS. I ATTEMPTED THE :58 WRITE THIS HOUR WHILE
+MR. E WAS LIVE AND IT WAS REFUSED ([Cowork Scheduled Task Write]). I attempted it ONCE and stopped,
+as the standing rule says. The refusal is the firing having no live turn to be approved IN - it is
+not something he failed to click and not something he can fix by being present while a schedule
+runs. IT NEEDS HIM TO APPROVE THE CALL IN A COWORK CONVERSATION LINKED TO cruzader.
+THE LIST, SO THE FIRST SEAT WITH A REAL LIVE TURN CAN LAND THEM ALL AT ONCE:
+  (1) *** THE :58 PROMPT STILL CALLS SYSTEM 2's HUD HALF "THE MOST VALUABLE OPEN ITEM IN THE
+      HOUSE". IT IS CLOSED WHOLE AND HAS BEEN SINCE 01:5x CT. *** This is the most expensive stale
+      line in the house: it has now caused FOUR seats (08:0x, 09:1x, 16:0x, 17:0x) to hand the HUD
+      a struck row, and the HUD was right to refuse it every time. The replacement text should say
+      CLOSED WHOLE, cite main 08f7fe4 and the supervisor's 06:15 and 10:54 confirmations, name
+      ui_theme.gd:200/:204 and leaderboard_panel.gd:197/:202 as the built half, and carry the
+      09:5x seat's one-command guard: `grep -n "SYSTEM 2 IS CLOSED WHOLE" docs/WORK_PLAN.md`.
+      IT SHOULD ALSO CARRY THE GENERAL LESSON, WHICH IS WORTH MORE THAN THE FACT: WRITE EVERY ROW
+      FROM THE PLAN, NEVER FROM THE PROMPT. A prompt fact can be a day old; the plan is an hour old.
+  (2) THE DEAD-DATA BASELINE. Prompt says 122 top-level keys, 32 zero-hit, 18 `_note_`, three
+      declared-dead. MEASURED 17:0x CT ON THE MERGED TREE: 2,211,995 chars, 48 files, 126 keys,
+      36 zero-hit = 21 `_note_` + 2 runtime-built _alt + 4 declared-dead + 9 prose/spec. Unread
+      LIVE keys ZERO, unreferenced asset directories ZERO. The full accounting is in this block.
+  (3) THE HUB DELTA. Prompt says "2 files / 19 lines". MEASURED 17:0x CT: gh-pages^{tree} 2d14aa9
+      vs origin/hub:web 656eb1b = 4 files, +88/-24. Note the prompt's gh-pages SHA (45a7904) IS
+      correct - do not "fix" that one.
+  (4) THE ID LINE. Prompt says B50, C-111, D100, H32, L74, S33, T5, U74. As of 17:1x CT it is
+      B58, C-118, D100, H32, L74, S41, T5, U81.
+  (5) THE CHAT BOT PROMPT (trig_01X4f9fEK6r64Hz2U3CLxeY9) SAYS "26 COMMANDS"; THE GENERATOR WROTE
+      27 at B58 while leaving docs/COMMANDS.md byte-identical (md5 9a80bfd9). The generator is
+      right. NO LANE IS TO CHANGE ANYTHING TO MATCH A PROMPT FIGURE.
+NOTHING IS BLOCKED BY ANY OF THIS. The plan is what the lanes obey and all five are corrected here.
+
+
 
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 16:0x CT (team lead, the 15:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 15:1x BLOCK. ***

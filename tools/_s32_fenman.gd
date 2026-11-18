@@ -11,7 +11,11 @@ var _fails: Array = []
 var _checks := 0
 var _f := 0
 var _cam: Camera3D
-var _shots := [["fenman_1front", Vector3(1.2, 1.6, 7.5), Vector3(1.2, 1.2, 0)], ["fenman_2side", Vector3(7.5, 1.6, 5.5), Vector3(1.2, 1.2, 0)]]
+var _shots := [["fenman_1front", Vector3(1.2, 1.6, 7.5), Vector3(1.2, 1.2, 0)], ["fenman_2side", Vector3(7.5, 1.6, 5.5), Vector3(1.2, 1.2, 0)],
+	## 18 Nov: fenman_2side is a 48.9-degree three-quarter (camera horizontal (6.3, 5.5) off the
+	## front axis), not a side - which is why its feet span matched the front. This is the TRUE 90:
+	## on the +X axis through the Fenman itself, so the azimuth is exactly 90 from fenman_1front.
+	["fenman_3side90", Vector3(9.9, 1.6, 0.0), Vector3(2.4, 1.2, 0.0)]]
 var _si := 0
 const OUT := "res://renders/cycles/s32/"
 

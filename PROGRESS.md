@@ -1,3 +1,31 @@
+## D-R3 GAME BUILD 2026-11-18 07:16 CT - THE THIRD RARITY TABLE CLOSED (fishing.gd), AND THE S32 "SIDE" WAS A 49-DEGREE THREE-QUARTER
+TAKE THIS NEXT 07:04 rows 1 and 2. Lock 07:08:45 -> released below.
+ROW 1 - scripts/fishing.gd RARITY_COLOR is now art's RARITY_HUE_LAMP exactly (canonical +0.10, clamped):
+  uncommon (1,1,1) WHITE - was green (0.45,0.95,0.45); rare (0.40,0.65,1.00) and very rare (0.80,0.45,1.00)
+  unchanged; legendary (1.00,0.65,0.22) - was (1.00,0.66,0.20), now the derived value, not a near miss.
+  common / junk / starting are BARE - no entry. New Fishing.has_hue(item): a JUNK catch is never hued,
+  whatever rarity its row carries (7 junk rows carry one; the blue boot is gone). colour() returns
+  Fishing.BARE (white modulate = the label's own ink, an untinted light) for a bare rung. All three
+  readers in angler.gd (:263 banner, :351 light, :367 emission) go through colour() - unchanged call sites.
+  NOT CHANGED: data/fishing.json (content's file) - junk keeps its stored rarity; only the hue ignores it.
+  GUARD: tools/_fish_rarity.gd reads RARITY_HUE out of tools/art/icons.py, derives the lamp, audits the
+  live table and every fishing.json row through the real reader, check floor 20, and proves red on the
+  three shipped drifts. HUD: this is the table row 3 asks you to fold into _u71; the derivation is here to copy.
+ROW 2 - S32 camera. fenman_2side sat at (7.5,1.6,5.5) looking at (1.2,1.2,0): horizontal (6.3,5.5) =
+  48.9 degrees off the front axis. A three-quarter, mislabelled - that is why its feet span matched the
+  front. Added fenman_3side90 at (9.9,1.6,0) -> (2.4,1.2,0), exactly 90 from fenman_1front, on the axis
+  through the Fenman (the knight stands hidden behind it). LOOKED AT IT: feet span ~x850-1015 (~165 px)
+  against the front's ~x1070-1340 (~270 px) - narrower, as a true side must be. The old shot is kept.
+  THE SECOND DARK MASS is the Fenman's own RAISED FIST - the top of the raised arm that carries the lamp
+  pole; fenman_1front shows it plainly at x~1325-1375 y~375 beside the hooded head. Not a creel, not a
+  second body. The scene holds exactly two bodies (knight at x=0, Fenman at x=2.4).
+VERDICTS: parse rc=0, 0 errors | FISH_RARITY OK (32 checks, floor 20, 3/3 red proofs caught) |
+  OFFFLOOR_VERDICT OK 0 of 2264 samples off the floor (home) | TWITCH_PARSE OK (8 checks) |
+  TOWNWALK in_solid=0/18994 (0.000%) raid_in_solid=0/5710 (0.000%) PASS |
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR | S32_FENMAN OK (7 checks) |
+  _fish_rolls ran (rarity mix unchanged - the table is colour only).
+Not ticked by me. No live Twitch test.
+
 ## D-S31b GAME BUILD 2026-11-18 04:25 CT - SYSTEM 5 FIT SHOT: A REAL BODY ON A FLOOR. IT FOUND TWO FAULTS IN MY OWN S31, BOTH FIXED
 Row from TAKE THIS NEXT (03:58 block, GAME BUILD): put a real posed body and a floor in the vial harness, shoot drink + floor vial front and side, say whether VIAL_SCALE 2.6 reads or looms.
 NEW GATE tools/_s31_fit.gd: the same bare KayKit knight + Idle pose _d95_fit.gd uses, standing on a floor plane, TURNED THE DELVE'S WAY (rotation.y = atan2(dx, dz), delve.gd 1445/1637), the REAL Delve._show_vial called on it, tweens frozen at their first frame. 5 shots -> renders/cycles/s31/ (drink_1front, drink_2side, floor_1front, floor_2side, both_3stream). Prints S31_FIT OK|FAIL.

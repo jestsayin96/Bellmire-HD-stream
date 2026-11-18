@@ -407,3 +407,23 @@ RUNNING 2026-11-18T03:53:33-06:00 (HUD U68 L40 gate red proof, windowed, expecte
 IDLE 2026-11-18T03:55:27-06:00 - HUD U68: L40 gate fix RED-PROVED (inflated Chronicle -> FAIL x2), clean _l40_test OK, parse 0. Godot closed (HUD)
 RUNNING 2026-11-18T04:08:05-06:00 (game build - System 5 fit-render follow-up per TAKE THIS NEXT, expected finish 04:32, cap claim+25 = 04:33)
 IDLE 2026-11-18T04:20:51-06:00 - game build S31b System 5 fit shot: real knight + floor, S31_FIT OK (red-proved FAIL first: bottles were BEHIND the hero), S31_VIAL OK, PARSE 0, TWITCH_PARSE OK 8, OFFFLOOR OK 0/2345, DELVE_TEST OK 0 SCRIPT ERROR, TOWNWALK PASS 0/17518. Godot closed (game build)
+
+(restored by game build 06:12 after a merge reset this file - record lines carried verbatim in substance from the 06:08 read)
+IDLE 2026-11-18T04:52:10-06:00 - chat bot B46: four gates green, `wear`.cost span defect fixed. Godot closed (chat bot)
+RUNNING 2026-11-18T04:53:39-06:00 (HUD U69 - _l40 20% in-pane child-bound red proof, expected finish 05:05)
+IDLE 2026-11-18T04:56:12-06:00 - HUD U69: _l40 20% in-pane bound red-proved, L40_TEST OK, Godot closed
+RUNNING 2026-11-18T05:09:00-06:00 (game build - per TAKE THIS NEXT, expected finish 05:33, cap claim+25 = 05:34)
+IDLE 2026-11-18T05:19:11-06:00 - game build S31c System 5 drink HELD on handslot.r. laptop 563f596. Godot closed (game build)
+RUNNING 2026-11-18T05:49:00-06:00 (chat bot B47 - four gates plus engine red proofs of `wear` guard arms, expected finish 06:10)
+IDLE 2026-11-18T05:52:00-06:00 - chat bot B47: four gates green, all ten `wear` guard sites red-proved in the engine. Godot closed (chat bot)
+
+RUNNING 2026-11-18T06:09:30-06:00 (game build - per TAKE THIS NEXT, expected finish 06:33, cap claim+25 = 06:34)
+IDLE 2026-11-18T06:19:00-06:00 - game build S32: S31 drink_2side now on the hand side (looked at, held); Fenman 30th wired MB_FIT 1.03 + moulder/ratcatcher/drover/paviser ratios + six missing .glb.import; fogbound draws Bellman|Fenman once Fenman has lines. MB_FIT OK (red-proved FAIL first), S32_FENMAN OK 8, S31_FIT OK, MBFEED OK 80, PARSE 0, TWITCH_PARSE OK 8, OFFFLOOR OK 0/1958, DELVE_TEST OK 0 SCRIPT ERROR, TOWNWALK PASS 0/16162. laptop 1a2adb2 (merge 91a8caf). Godot closed (game build)
+RUNNING 2026-11-18T06:50:00-06:00 (chat bot B48 - plan row 5, the wear guard's counted arm: four gates plus ten engine proofs of the count. Expected finish 06:57. THIS DECLARES A CROSSING INTO THE HUD'S :52 WINDOW, in words, by about five minutes - the battery is 14 Godot runs and took 35 s last cycle; I will write IDLE the moment it is done)
+IDLE 2026-11-18T06:51:18-06:00 - chat bot B48: four gates green, all ten `wear` arms now COUNTED and every one returned rc=1 in the engine (eight of them returned 0 last cycle). Finished early; declared 06:57. Godot closed (chat bot)
+
+RUNNING 2026-11-18T06:53:49-06:00 (HUD U71 - rarity one-table guard, headless, expected finish 06:53+3 min; inside my :52-:07 window, cap claim+15)
+IDLE 2026-11-18T06:54:24-06:00 - HUD U71: rarity one-table guard tools/_u71_rarity_guard.gd, OK, 9/9 red proofs caught, parse 0. Godot closed (HUD)
+
+RUNNING 2026-11-18T07:08:45-06:00 (game build - TAKE THIS NEXT 07:04 row 1, fishing RARITY_COLOR; expected finish 07:35; release by :40. Stamp corrected from 07:09:30, which was ahead of the machine clock)
+IDLE 2026-11-18T07:16:18-06:00 - game build: TAKE THIS NEXT rows 1+2 - fishing RARITY_COLOR = art's lamp, common/junk bare, FISH_RARITY OK (32 checks, 3/3 red proofs); S32 true-90 side shot added. All gates green. Godot closed (game build)

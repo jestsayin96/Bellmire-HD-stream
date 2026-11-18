@@ -135,21 +135,14 @@ def _mats(key):
     return M.apply_overrides(key, mats)
 
 
-def _objs(key, items, mats, suffix):
-    groups = {}
-    for verts, faces, slot in items:
-        gv, gf = groups.setdefault(slot, ([], []))
-        off = len(gv)
-        gv.extend(verts)
-        gf.extend([tuple(i + off for i in f) for f in faces])
-    out = []
-    for slot in ('body', 'dark', 'bone', 'glow'):
-        if slot not in groups:
-            continue
-        gv, gf = groups[slot]
-        out.append(L.make("%s_%s_%s" % (key, slot, suffix), gv, gf,
-                          mats.get(slot, mats['body'])))
-    return out
+def _objs(key, items, mats, suffix, vcols=None):
+    """Delegates to minibosses.merge_objs - THE one merge the shipping generator
+    uses. This file used to carry its own identical copy, and so did two other
+    readers; measuring a body through a different merge than the one that ships
+    is the same fault class as measuring it through a different material table.
+    `vcols` must be passed through from the builder or a vertex-painted slot is
+    measured UNPAINTED, which would read as a fix that is not there."""
+    return M.merge_objs(key, items, mats, suffix=suffix, vcols=vcols)
 
 
 def _clear():
@@ -249,6 +242,26 @@ def _desat(lum, sat, mask):
     if dk.sum() < 50 or br.sum() < 50:
         return None
     return float(s_[dk].mean() - s_[br].mean())
+
+
+def _body_sat(sat, lum, mask):
+    """Median saturation of the surface's MID-TONES - the 25th-75th luminance
+    band, so neither the baked highlight nor the deepest shadow can move it.
+    This is the axis hilite_desat does not cover: whether the BODY of the
+    surface still carries the material's colour at all."""
+    l, s_ = lum[mask], sat[mask]
+    if l.size < 400:
+        return None
+    lo, hi = np.percentile(l, 25.0), np.percentile(l, 75.0)
+    band = (l >= lo) & (l <= hi)
+    if band.sum() < 50:
+        return None
+    return float(np.median(s_[band]))
+
+
+def _authored_sat(rgb):
+    mx, mn = max(rgb), min(rgb)
+    return float((mx - mn) / mx) if mx > 1e-6 else 0.0
 
 
 def _lum(a):
@@ -400,8 +413,14 @@ def main():
         print("METALREAD " + json.dumps(rep))
         return
 
+    # the colour the span's slot was AUTHORED with, for the hue-retention
+    # diagnostic. Taken from the override row when there is one, because that
+    # is what apply_overrides actually puts on the mesh.
+    SPAN_RGB = M.SLOT_RGB.get((key, slot)) or (1.0, 1.0, 1.0)
+    rep["span_authored_rgb"] = list(SPAN_RGB)
+
     height = M.CANON[key][1]
-    probe = _objs(key, P.items, mats, "probe")
+    probe = _objs(key, P.items, mats, "probe", getattr(P, "vcols", None))
     mn, mx, _ = G.world_bounds(probe)
     cur = mx.z - mn.z
     k = height / cur if cur > 1e-6 else 1.0
@@ -409,7 +428,7 @@ def main():
         bpy.data.objects.remove(ob, do_unlink=True)
 
     def _scaled(items, sfx, mm):
-        obs = _objs(key, items, mm, sfx)
+        obs = _objs(key, items, mm, sfx, getattr(P, "vcols", None))
         for ob in obs:
             ob.scale = (k, k, k)
             ob.location = (ob.location.x * k, ob.location.y * k, ob.location.z * k)
@@ -417,6 +436,27 @@ def main():
         return obs
 
     full = _scaled(P.items, "full", mats)
+    # *** THE PAINT IS PROVED APPLIED BEFORE ANY NUMBER IS BELIEVED. ***
+    # If the span's slot is vertex-driven, the merge records how many items
+    # carried declared colours. A wrong key paints everything the fill colour
+    # and the render comes back looking like the OLD body - which reads as
+    # "the change did nothing" when the truth is "the change never happened".
+    # This lane has already shipped one number that answered a different
+    # question than the sentence beside it; this is the cheap guard against
+    # doing it again.
+    if slot in M.VCOL_SLOTS.get(key, set()):
+        got = next((int(ob.get("vcol_items", 0)) for ob in full
+                    if ob.name.endswith("_%s_full" % slot)), 0)
+        rep["vcol_items_painted"] = got
+        if got != len(tgt):
+            rep["errors"].append(
+                "%s: slot '%s' is vertex-driven but %d of %d items in the span "
+                "carried declared colours - the paint did NOT reach the mesh, so "
+                "every number below would be measuring the UNPAINTED body"
+                % (key, slot, got, len(tgt)))
+            rep["ok"] = False
+            print("METALREAD " + json.dumps(rep))
+            return
     mn, mx, _ = G.world_bounds(full)
     camob, ctr, d, lights = _rig(mn, mx)
     for ob in list(bpy.data.objects):
@@ -478,8 +518,25 @@ def main():
                         "median_lum": round(med, 4),
                         "mobility": round(mob, 4),
                         "speckle": _speckle(_lum(a0), vis),
-                        "hilite_desat": _desat(_lum(a0), _sat(a0), vis)}
+                        "hilite_desat": _desat(_lum(a0), _sat(a0), vis),
+                        "body_sat": _body_sat(_sat(a0), _lum(a0), vis)}
         cell = {"raw": raw, "scores": {}, "verdict": "FAIL"}
+        # HUE RETENTION: how much of the colour the material was AUTHORED with
+        # is still on screen. Added 18 Nov because the whole fault history of
+        # this span turns out to sit downstream of the material: the register
+        # renders under the AgX view transform (never set by its own rig - it
+        # is Blender's default and lordgen.set_engine touches only the engine),
+        # and AgX removes over half the saturation of a bright warm colour. A
+        # flat patch of the shipped copper measures, through this rig's own two
+        # suns: authored sat 0.765 -> Raw 0.744, Standard 0.463, AgX 0.335.
+        # Shading keeps the hue; the DISPLAY TRANSFORM takes it. That is why
+        # nine passes of hue/roughness/metallic could not move the read - every
+        # dial they turned was upstream of the thing removing the evidence.
+        if "shipped" in raw and raw["shipped"].get("body_sat") is not None:
+            cell["authored_sat"] = round(_authored_sat(SPAN_RGB), 4)
+            if cell["authored_sat"] > 1e-6:
+                cell["hue_retention"] = round(
+                    raw["shipped"]["body_sat"] / cell["authored_sat"], 4)
         if "shipped" in raw and "ctrl_timber" in raw:
             # THE AXIS IS hilite_desat AND THE OTHER THREE ARE DIAGNOSTICS ONLY.
             # spec_peak, spec_range, mobility and speckle were all tried as the
@@ -512,6 +569,32 @@ def main():
                 ok_all = sc >= args.bar
                 cell["verdict"] = "READS AS METAL" if ok_all else "READS AS TIMBER"
                 if not ok_all:
+                    rep["ok"] = False
+                # *** THE HARNESS GOES RED ON ITS AUTHOR, THE FOURTH TIME FOR
+                # *** THIS LANE, AND THIS ONE IS THE MOST IMPORTANT. ***
+                # hilite_desat asks "is the bright end whiter than the body".
+                # On the CC0 reference metals that is a fair question, because
+                # their near-white bands are painted into a texture and that IS
+                # how the thing reads as metal. But it means the metric can be
+                # satisfied by PAINTING A WHITE STRIPE - and pass 10 did
+                # exactly that, as a vertex-colour ramp, and took the score
+                # from 0.159/0.203/0.035 to 0.971/0.528/0.962 while the picture
+                # still plainly showed tan sheets and not copper. I looked at
+                # the render and the render disagreed with my own number.
+                # So: when the span's slot is VERTEX-PAINTED, this metric is
+                # measuring a band someone chose, not reflection behaviour, and
+                # the instrument says so instead of banking the pass. The score
+                # is still reported - it is a real measurement of a real change
+                # - but it cannot close the fault on its own.
+                if ok_all and slot in M.VCOL_SLOTS.get(key, set()):
+                    cell["verdict"] = "PAINTED - NOT EARNED AS REFLECTION"
+                    rep["errors"].append(
+                        "%s/%s: %s scores %.3f but the span's slot is "
+                        "VERTEX-PAINTED, so this metric is reading a band that "
+                        "was authored into the mesh rather than reflection "
+                        "behaviour. A painted stripe satisfies 'the bright end "
+                        "runs whiter than the body' by construction. NOT a pass."
+                        % (key, vname, MET, sc))
                     rep["ok"] = False
         else:
             rep["ok"] = False

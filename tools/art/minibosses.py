@@ -56,7 +56,7 @@ TWO LINES OF THIS DOCSTRING WERE STALE AND ARE CORRECTED HERE, 17 Nov 2026:
 import math
 import os
 
-from mathutils import Vector
+from mathutils import Vector, Matrix
 
 import lordlib as L
 from lords import Parts, aim
@@ -6822,6 +6822,74 @@ OVERRIDE = {
 }
 
 
+VCOL_SLOTS = {}          # key -> set of slots whose material is vertex-driven
+
+
+def merge_objs(key, items, mats, suffix=None, vcols=None):
+    """THE ONE MERGE. minibossgen, _metal_read, _trade_read and _colour_read all
+    called a private copy of this, four identical functions in four files, and a
+    colour measured through a different merge than the one that ships is a
+    number about nothing - the same reason apply_overrides is shared. Added
+    18 Nov when vertex colours gave the four copies something to disagree about.
+
+    Built part-by-part a miniboss runs to 60-200 objects; merged by material it
+    is at most four meshes, which is the bar the lords and the creatures hold.
+
+    WITH NO VERTEX COLOURS ANYWHERE THIS IS THE OLD CODE PATH EXACTLY, down to
+    make() being called with vcol=None, so the 24 shipped bodies are byte-
+    identical by construction and not by hope. Proven anyway: see
+    renders/art/minibosses/_vcol_regression.json.
+
+    An item in a vertex-driven slot that declares NO colours is painted the
+    slot's own declared rgb, so geometry that merely shares the slot renders
+    exactly as it did before the slot went vertex-driven.
+    """
+    vcols = vcols or {}
+    vslots = VCOL_SLOTS.get(key, set())
+    groups, painted = {}, {}
+    for i, item in enumerate(items):
+        verts, faces, slot = item
+        gv, gf, gc = groups.setdefault(slot, ([], [], []))
+        off = len(gv)
+        gv.extend(verts)
+        gf.extend([tuple(idx + off for idx in f) for f in faces])
+        if slot in vslots:
+            c = vcols.get(id(item))
+            if c is None:
+                # geometry that merely SHARES a vertex-driven slot and declares
+                # no colours of its own: painted the slot's declared rgb, which
+                # is what it rendered as before the slot went vertex-driven.
+                fill = SLOT_RGB.get((key, slot), (1.0, 1.0, 1.0))
+                c = [fill] * len(verts)
+            else:
+                painted[slot] = painted.get(slot, 0) + 1
+                if len(c) != len(verts):
+                    raise ValueError("%s item %d: %d vertex colours for %d verts"
+                                     % (key, i, len(c), len(verts)))
+            gc.extend(c)
+    out = []
+    for slot in ('body', 'dark', 'bone', 'glow'):
+        if slot not in groups:
+            continue
+        gv, gf, gc = groups[slot]
+        nm = "%s_%s" % (key, slot) if suffix is None else "%s_%s_%s" % (key, slot, suffix)
+        ob = L.make(nm, gv, gf, mats.get(slot, mats['body']),
+                    vcol=(gc if slot in vslots else None))
+        # HOW MANY ITEMS ACTUALLY CARRIED DECLARED COLOURS, recorded on the
+        # object so a caller can ASSERT it. The failure this guards is quiet:
+        # a vcols dict keyed wrongly paints every item the fill colour, the
+        # render comes back looking like the old body, and the honest reading
+        # of that picture is "the change did nothing" when the truth is "the
+        # change was never applied". A number that can be asserted turns that
+        # into a red line instead of a wrong conclusion.
+        ob["vcol_items"] = painted.get(slot, 0)
+        out.append(ob)
+    return out
+
+
+SLOT_RGB = {}            # (key, slot) -> the slot's declared rgb, for the fill
+
+
 def apply_overrides(key, mats):
     """Replace tint-derived materials with a key's declared ones. Called by
     minibossgen, _trade_read and _colour_read so all three agree - a colour
@@ -6840,8 +6908,19 @@ def apply_overrides(key, mats):
             # three-element row is untouched and renders exactly as it always
             # has, so no other body in the register moves.
             sp = spec[3] if len(spec) > 3 else None
-            mats[slot] = L.mat_solid(key + "_" + slot + "_ov", tuple(rgb), rough,
-                                     metal, sp)
+            # an optional FIFTH element, True, means THE COLOUR COMES OFF THE
+            # MESH: the slot's material reads the vertex colour and the rgb above
+            # becomes the FILL for any geometry in the slot that declares none,
+            # so such geometry renders exactly as it did. Added 18 Nov for the
+            # Greener's copper leaves; nothing else in the register sets it.
+            SLOT_RGB[(key, slot)] = tuple(rgb)
+            if len(spec) > 4 and spec[4]:
+                VCOL_SLOTS.setdefault(key, set()).add(slot)
+                mats[slot] = L.mat_vattr(key + "_" + slot + "_ov", rough, metal, sp)
+            else:
+                VCOL_SLOTS.get(key, set()).discard(slot)
+                mats[slot] = L.mat_solid(key + "_" + slot + "_ov", tuple(rgb), rough,
+                                         metal, sp)
     return mats
 
 
@@ -7284,7 +7363,11 @@ OVERRIDE.update({
         # white sheen to catch an edge. MEASURED SEPARATELY ANYWAY - form alone
         # scored -0.132/-0.082/-0.172 (material unchanged, correctly), material
         # alone scored +0.158/+0.040/+0.008 on the old form.
-        'bone': ((1.000, 0.520, 0.235), 0.44, 0.06, 0.92),
+        # PASS 10: the row gains a FIFTH element. The colour now comes off the
+        # MESH (see _leaf / _leaf_vcol), and the rgb below is the FILL for the
+        # one other piece of 'bone' geometry on this body - the scraper's
+        # collar - which is painted exactly this and so renders unchanged.
+        'bone': ((1.000, 0.520, 0.235), 0.44, 0.06, 0.92, True),
         # the man, his apron, the crock staves, the scraper's iron. NOT
         # derived from the body colour or the whole figure would read green
         # and the crust would stop being a mark on him.
@@ -7356,10 +7439,157 @@ def _crust(P, pts, r0, r1, n=9, slot='body', seed=0.0):
               loc=(c.x + off.x, c.y + off.y, c.z), rot=(0.0, 0.0, th))
 
 
+# ---------------------------------------------------------------- THE BAKED SHEEN
+# The two SUN lamps the register renders under, as lordgen.render_views and
+# _metal_read._rig build them: rotation_euler (55 deg, 0, ang), energy e. A sun
+# emits along its own -Z, so the vector TO the light is -(Rz(ang) Rx(55) (0,0,-1)).
+# DERIVED HERE FROM THOSE THREE NUMBERS rather than written down as a direction,
+# so if the rig's lights ever move this follows them instead of lying.
+_SUNS = ((55.0, 40.0, 3.4), (55.0, -120.0, 1.5))
+
+
+def _sun_dirs():
+    out = []
+    for el, az, e in _SUNS:
+        t, a = math.radians(el), math.radians(az)
+        # Rx(t) @ (0,0,-1) = (0, sin t, -cos t); then Rz(a).
+        y, z = math.sin(t), -math.cos(t)
+        d = Vector((-y * math.sin(a), y * math.cos(a), z))      # travel
+        out.append(((-d).normalized(), e))                      # toward the light
+    return out
+
+
+# COPPER_BODY is today's shipped leaf colour to three places, unchanged on
+# purpose: the body of the sheet must not move, or this becomes a fourth go at
+# the hue dial wearing a new hat. Only the two ENDS are new - a deep saturated
+# shadow and a warm near-white sheen - which is the ramp the CC0 KayKit
+# reference metals carry baked into their textures.
+COPPER_BODY = (1.000, 0.520, 0.235)
+COPPER_DEEP = (0.300, 0.125, 0.052)
+COPPER_SHEEN = (1.000, 0.880, 0.820)
+# how much of the sheen is allowed at full strength. Keeps the band off pure
+# white: a copper highlight is warm, and a chalk-white streak is a different lie.
+SHEEN_MAX = 0.86
+# *** THE FIRST VERSION OF THIS RAMP WAS WRONG IN A WAY WORTH KEEPING ON THE
+# *** RECORD, BECAUSE IT IS THE SAME MISTAKE CLASS AS THE METALLIC DIAL. ***
+# It drove BOTH ends off `lit` - the surface's response to the two suns - so
+# where a sheet faced away from the light the baked colour went dark. But THE
+# RENDERER ALREADY DOES THAT: it shades every face by n.L itself. Baking a
+# second shadow on top is double-counting, and it measured exactly like one -
+# the back view's leaves went from median luminance 0.366 to 0.285 and its
+# score barely moved (0.035 -> 0.086), because from behind you see the faces
+# that are turned away from the main sun and I had darkened them twice. A rack
+# of new stock going DARKER is also Mr. E's second rule broken: the goods must
+# not read second-hand.
+# SO THE RULE THIS RAMP NOW FOLLOWS: BAKE ONLY WHAT THE RENDERER CANNOT.
+# The renderer can shade by the light angle, so the shadow end is driven by
+# GEOMETRY ALONE - the foot of a sheet standing in a rack and the long edges
+# where its neighbours overlap it, both of which are occlusion the two suns
+# know nothing about. What the renderer cannot do here is a near-white
+# highlight with AREA, because a half-degree sun in a near-black world gives a
+# dielectric lobe no area to spread into - so that, and only that, is what the
+# sheen band carries.
+#
+# AND THE BAND IS DRIVEN BY THE NEAREST SUN, NOT BY THE ENERGY-WEIGHTED SUM.
+# Weighted by energy, the 1.5-energy fill sun can never drive a band, so the
+# BACK of every sheet - which is most of what the back camera sees - could
+# never carry one. max over suns of (n . L) asks "how squarely does this face
+# its own best light", which both sides of a sheet can answer, and it is still
+# a specular placement rather than my taste.
+# calibrated against what this rack achieves on that drive: a near-vertical
+# sheet's best possible (n . L) is the length of a sun's horizontal part,
+# sqrt(0.5265^2 + 0.6275^2) = 0.819, the same for both suns because they share
+# an elevation. Measured over all 300 leaf vertices: see _sheen_drive_dist in
+# the run log. LO/HI sit near the top of that so the band lands on the sheets
+# that face a sun and leaves the rest alone - a sheen on all five at once reads
+# as paint, a sheen on two or three of five is what a rack of stock looks like.
+SHEEN_LO, SHEEN_HI = 0.58, 0.80
+# the geometric occlusion end. SHADE_FLOOR is how far toward COPPER_DEEP the
+# most-occluded point goes; it is deliberately shallow, because this is contact
+# shadow between stacked sheets and not a lighting term.
+SHADE_FLOOR = 0.42
+
+
+def _smooth(x, lo, hi):
+    if hi <= lo:
+        return 0.0 if x < lo else 1.0
+    t = min(1.0, max(0.0, (x - lo) / (hi - lo)))
+    return t * t * (3.0 - 2.0 * t)
+
+
+def _leaf_vcol(nx, nz, w, h, thick, yaw, pitch):
+    """ONE RGB PER VERTEX for a bowed leaf, in the same order _leaf builds them:
+    the whole front grid, then the whole back grid.
+
+    THE BAND IS PLACED BY THE RIG'S LIGHTS, NOT BY ME. For each vertex the
+    analytic surface normal of the bowed sheet is rotated the way the leaf is
+    rotated and taken against the two suns; the sheen rides where the sheet
+    FACES the dominant sun, which is where a texture artist paints it and where
+    a real sheet throws it. That is why this takes yaw and pitch: the five
+    leaves are fanned, so each one's band lands somewhere different, which is
+    the whole reason the rack reads as five sheets and not one painted board.
+
+    It is baked for the LIGHT and not for a camera, deliberately. A band baked
+    for the front camera would be wrong in the side and back views, and the
+    register demands all three.
+    """
+    suns = _sun_dirs()
+    rot = (Matrix.Rotation(yaw, 4, 'Z') @ Matrix.Rotation(pitch, 4, 'X')).to_3x3()
+    out = []
+    for side in (0, 1):          # 0 = front sheet, 1 = the +thick copy
+        for iz in range(nz + 1):
+            tz = iz / float(nz)
+            for ix in range(nx + 1):
+                tx = ix / float(nx)
+                # the sheet is Y = 0.085 sin(pi tx)(0.45 + 0.55 tz); its two
+                # tangents give the normal without a mesh lookup.
+                dtx = Vector((w, 0.085 * math.pi * math.cos(math.pi * tx)
+                              * (0.45 + 0.55 * tz), 0.0))
+                dtz = Vector((0.0, 0.085 * math.sin(math.pi * tx) * 0.55, h))
+                n = dtx.cross(dtz)
+                if n.length < 1e-9:
+                    n = Vector((0.0, -1.0, 0.0))
+                n.normalize()
+                if (n.y > 0.0) != (side == 1):
+                    n = -n                      # front faces -Y, back faces +Y
+                n = (rot @ n).normalized()
+                # how squarely this face meets its OWN best sun. Energy is
+                # deliberately not in it - see the note above SHEEN_LO.
+                drive = max(max(0.0, n.dot(Ld)) for Ld, _e in suns)
+                band = _smooth(drive, SHEEN_LO, SHEEN_HI)
+                # OCCLUSION, GEOMETRY ONLY. The foot of a sheet standing in a
+                # rack is shadowed by its neighbours, and so are its two long
+                # edges where the next sheet overlaps it. Neither is something
+                # the two suns can know, which is why these are baked and the
+                # light-angle shading is left to the renderer.
+                foot = 0.30 + 0.70 * min(1.0, tz / 0.42)
+                edge = 0.55 + 0.45 * math.sin(math.pi * min(1.0, max(0.0, tx)))
+                occ = min(1.0, foot * edge)
+                a = SHADE_FLOOR + (1.0 - SHADE_FLOOR) * occ
+                c = [COPPER_DEEP[k] + (COPPER_BODY[k] - COPPER_DEEP[k]) * a
+                     for k in range(3)]
+                f = band * SHEEN_MAX
+                out.append(tuple(c[k] + (COPPER_SHEEN[k] - c[k]) * f
+                                 for k in range(3)))
+    return out
+
+
 def _leaf(P, cx, cy, cz, yaw, pitch, w=0.52, h=0.68, slot='bone', thick=0.016):
     """One hammered copper sheet, bowed. Flat planes vanish edge-on - the
     Pressman fault, and the Dyer's answer was a bow in the hanging axis. These
-    are bowed in their own normal and FANNED in yaw for the same reason."""
+    are bowed in their own normal and FANNED in yaw for the same reason.
+
+    PASS 10, 18 Nov, AND IT IS THE CHANGE METAL_READ.md NAMED AS CANDIDATE 1.
+    Nine passes said the material cannot get there with dials: a near-black
+    world gives a mirror nothing to reflect and a half-degree sun gives a
+    dielectric lobe no area, so the highlight that names a surface as metal
+    cannot be produced by a BSDF here at all. The reference metals do not
+    produce it either - they CARRY it, painted into the texture. So the sheen is
+    BAKED INTO THE MESH as a vertex-colour ramp, which is local to this one body
+    and re-lights nothing: the alternative, giving the rig something to reflect,
+    moves all 25 bodies and every colour number the register has measured, and
+    that is a team-lead call, not mine.
+    """
     V, F = [], []
     nx, nz = 4, 5
     for iz in range(nz + 1):
@@ -7388,8 +7618,10 @@ def _leaf(P, cx, cy, cz, yaw, pitch, w=0.52, h=0.68, slot='bone', thick=0.016):
         F.append((l0 + k, base + l0 + k, base + l0, l0))
         r0 = iz * k + nx
         F.append((r0, base + r0, base + r0 + k, r0 + k))
+    vc = _leaf_vcol(nx, nz, w, h, thick, yaw, pitch)
+    assert len(vc) == len(V), "leaf vcol %d vs %d verts" % (len(vc), len(V))
     P.add(([Vector(v) for v in V], F), slot, loc=(cx, cy, cz),
-          rot=(pitch, 0.0, yaw))
+          rot=(pitch, 0.0, yaw), vcol=vc)
 
 
 def _crock(P, cx, cy, r, h, bloom=True):

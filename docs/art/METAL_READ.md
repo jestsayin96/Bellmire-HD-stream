@@ -133,3 +133,107 @@ from anything a BSDF can do here. Two candidate fixes, neither taken in this run
    right that it is the loudest line in its own picture and right that nobody
    weighed that cost against the fault it was avoiding. **It should be
    shortened, not re-aimed** - re-aiming it brings the Pressman fault back.
+
+---
+
+# PASS 10, 18 Nov 2026 - THE NAMED CHANGE WAS MADE, IT PASSED, AND I AM NOT
+# TAKING THE PASS. THE CAUSE IS ONE LAYER FURTHER DOWN AND IT IS MEASURED.
+
+## WHAT I DID FIRST, MEASURED RATHER THAN REMEMBERED
+This file's own candidate 1 - "bake the highlight into the leaf as vertex
+colour, which is what the reference metals do and is local to one body". Built
+it, and it works mechanically: the five leaves carry a per-vertex ramp (deep
+copper in occlusion, the shipped copper through the body, a warm near-white
+sheen band), the band is placed by the RIG'S OWN LIGHTS rather than by my
+taste, and the colour goes straight from a Color Attribute into Base Color.
+
+**THE SCORE WENT FROM 0.159 / 0.203 / 0.035 TO 0.971 / 0.528 / 0.962 AGAINST A
+BAR OF 0.50. THE INSTRUMENT SAID READS AS METAL ON ALL THREE VIEWS.**
+
+## THEN I LOOKED AT THE RENDER AND THE RENDER DISAGREED WITH MY OWN NUMBER
+`renders/art/minibosses/_metal_ab_rack_crop.png` - pass 9 on top, pass 10
+below, cropped automatically to the pixels that actually differ between the two
+builds, so the crop cannot flatter the change.
+
+The sheets still read **TAN**. They do not read as copper. What the ramp
+genuinely bought is per-sheet VALUE VARIATION, which helps the pass-8 "five
+sheets, not one board" read and is visible in the picture. What it did not buy
+is the thing the fault names.
+
+**AND THE REASON THE NUMBER MOVED IS THAT I PAINTED THE NUMBER'S ANSWER INTO
+THE MESH.** `hilite_desat` asks "is the bright end whiter than the body of the
+surface". I baked a near-white band into the brightest vertices. A painted
+stripe satisfies that question by construction. On the CC0 reference metals the
+same question is fair, because their near-white bands ARE painted and that IS
+how they read as metal - but it means the metric cannot tell a reflection from a
+decision, and I made the decision.
+
+This is the third time this lane has caught a metric answering a different
+question than the sentence beside it (`head_glow_px: 156`; the glove centre-band
+occupancy). So the harness now goes red on its author: when a span's slot is
+vertex-painted, `_metal_read` reports the score, names it
+**PAINTED - NOT EARNED AS REFLECTION**, and refuses to pass on it.
+
+## THE REAL CAUSE, AND IT IS NOT THE MATERIAL. IT IS THE VIEW TRANSFORM.
+`lordgen.set_engine` sets the ENGINE and never touches `view_settings`, so the
+whole register renders under **Blender's default view transform, AgX**. AgX is a
+display transform that desaturates bright warm colours hard.
+
+A flat patch of the exact shipped copper (1.000, 0.520, 0.235), under this rig's
+own two suns, nothing else in frame:
+
+| pipeline                      | rendered median RGB        | saturation |
+|-------------------------------|----------------------------|-----------|
+| authored                      | 1.000, 0.520, 0.235        | **0.765** |
+| Raw (shading only, no display)| 0.675, 0.357, 0.173        | **0.744** |
+| Standard                      | 0.839, 0.631, 0.451        | 0.463     |
+| Khronos PBR Neutral           | 0.820, 0.600, 0.400        | 0.512     |
+| Filmic                        | 0.745, 0.635, 0.490        | 0.342     |
+| **AgX - what the register uses** | 0.726, 0.592, 0.482     | **0.335** |
+
+**THE SHADING KEEPS THE HUE. THE DISPLAY TRANSFORM TAKES IT - 56% of it.**
+
+That explains the entire fault history at once, which is why I believe it.
+Passes E, J and 5 turned hue, roughness and metallic; passes 6, 7 and 9 turned
+the specular lobe. **Every one of those dials is UPSTREAM of the thing removing
+the evidence.** No material value can survive a transform applied after it. The
+earlier finding that `metallic` is backwards in this rig is still true and still
+register-wide; this sits underneath it.
+
+## THE HONEST BAR, SINCE THE ROW ASKED FOR ONE
+`hilite_desat` tests the HIGHLIGHT and can be satisfied by painting. The axis it
+does not cover is whether the BODY of the surface still carries the colour at
+all, and that one cannot be painted - whitening a band LOWERS it. So
+`_metal_read` now also measures **body saturation**, the median saturation of
+the mid-tones (25th-75th luminance band), and **hue retention** against the
+authored colour. Measured on pass 10:
+
+| view  | shipped body_sat | matte-oak control | hue retention |
+|-------|------------------|-------------------|---------------|
+| front | 0.529            | 0.552             | 0.691         |
+| side  | 0.309            | 0.500             | 0.404         |
+| back  | 0.541            | 0.466             | 0.707         |
+
+**ON SCREEN THE COPPER'S MID-TONES ARE NO MORE SATURATED THAN A MATTE OAK
+PLANK'S, AND IN THE SIDE VIEW THEY ARE LESS.** That is "reads as timber" said as
+a number that no amount of painting can move, and it is the bar I propose the
+fault be judged on: **the leaves close this fault when their body saturation
+separates from the timber control.** They currently do not separate at all.
+
+## WHAT I AM NOT TAKING, AND WHY IT IS NOT MINE
+Fixing this means changing the view transform - Standard or Khronos PBR Neutral
+would return roughly half the lost saturation. **That re-grades all 25 miniboss
+bodies, the 8 lords, the 12 creature bodies and every colour number the register
+has measured**, including `_colour_read`'s hue-band census and the D95 showcase.
+It is the same class as this file's earlier candidate 2 and it is a team-lead or
+Mr. E call, not one for the art lane to take on its own initiative at 23:00.
+
+## WHAT IS SHIPPED, AND THE ONE FAULT I CAN SEE IN IT
+The vertex-colour ramp IS shipped, labelled for what it is: an improvement to
+the five-sheets read, not a closure of fault 1. **The one thing I can see wrong
+with it: in the SIDE view the leaf that faces the main sun goes near-white and
+reads as a cream-painted board among tan ones** - the sheen is doing too much
+on that one sheet. Front and back are better than pass 9; the side is arguable.
+Shown rather than asked about, per Mr. E's third rule.
+
+## FAULT 1 IS STILL NOT CLOSED. SAYING SO LAST AS WELL AS FIRST.

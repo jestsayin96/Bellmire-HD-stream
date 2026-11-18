@@ -1196,11 +1196,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "ratcatcher": {
+   "title": "The Ratcatcher",
+   "theme": "crypt",
+   "idea": "IT IS PAID BY THE TAIL - everything else that dies in this room goes into the cage on its hip and it is stronger for every bay it fills, so the party is not choosing how to kill it but whether to clear the room at all; leave the lesser things standing and you fight the whole floor at once, clear them and you hand this one the fight, and the bays already filled can be cut open to give them back",
+   "wear": 0.68,
+   "feed_line": "It is paid by the tail.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1510,
+   "size": [
+    3.73,
+    1.33,
+    2.62
+   ],
+   "footprint_span": 3.73,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3757776317424626,
+    "ortho": 3.540572166442871,
+    "clip": [
+     8.724635124206543,
+     23.211870193481445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 78,
+  "files": 81,
   "failures": []
  }
 }

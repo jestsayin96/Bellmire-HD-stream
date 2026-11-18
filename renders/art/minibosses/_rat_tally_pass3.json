@@ -1,0 +1,61 @@
+{
+ "ok": true,
+ "tag": "pass3",
+ "min_comp_px": 40,
+ "move_eps": 0.045,
+ "views": {
+  "front": {
+   "moved_px": 10093,
+   "body_px": 92327,
+   "moved_share_of_body": 0.1093,
+   "components": 7,
+   "component_px": [
+    2178,
+    1974,
+    1920,
+    1851,
+    1841,
+    122,
+    89
+   ]
+  },
+  "three_quarter": {
+   "moved_px": 10705,
+   "body_px": 138582,
+   "moved_share_of_body": 0.0772,
+   "components": 9,
+   "component_px": [
+    2574,
+    2141,
+    1918,
+    1681,
+    1344,
+    487,
+    300,
+    98,
+    50
+   ]
+  },
+  "side": {
+   "moved_px": 8690,
+   "body_px": 152244,
+   "moved_share_of_body": 0.0571,
+   "components": 4,
+   "component_px": [
+    4351,
+    2986,
+    1217,
+    71
+   ]
+  }
+ },
+ "errors": [],
+ "cam": {
+  "radius": 2.3757776317424626,
+  "ortho": 3.540572166442871,
+  "clip": [
+   8.724635124206543,
+   23.211870193481445
+  ]
+ }
+}

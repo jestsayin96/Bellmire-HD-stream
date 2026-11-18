@@ -8416,3 +8416,343 @@ def moulder():
 
 
 BUILDERS.update({"moulder": moulder})
+
+
+# ======================================================================= 27 THE
+# ======================================================================= RATCATCHER
+#
+# IT IS PAID BY THE TAIL. Everything ELSE that dies in this room goes into the
+# cage on its hip, and it is stronger for every bay it fills. The party is not
+# choosing how to hurt it; it is choosing whether to clear the room at all.
+# Leave the lesser things alive and you fight the whole floor at once. Kill
+# them and you hand this one the fight.
+#
+# WHY IT IS NOT ONE OF THE TWENTY-SIX - CHECKED BY PARSING `CANON`, NOT BY
+# MEMORY. Two bodies are its real neighbours and both were read before a vertex
+# was written:
+#   THE SCRAPWRIGHT (workshop, 2.00) also GROWS - but off the room's loose
+#   plate, on its own schedule, with no dial the party's hand is on. This one
+#   grows ONLY when the party swings, and it can be starved completely by a
+#   party that leaves the trash standing. The growth is the same word and the
+#   opposite decision.
+#   THE PRESSMAN (prison, 2.85) also USES THE DEAD - but your FALLEN HEROES,
+#   so it punishes losing. This one eats your KILLS, so it punishes winning
+#   fast. Nothing else in the register takes the party's own successes as its
+#   feed.
+# CRYPT was chosen because it is one of the five themes still carrying a single
+# miniboss (confection, crypt, fogbound, shrine, wood - counted off CANON this
+# run, not remembered). The crypt's wired primary is the SEXTON, whose idea is
+# IT WILL NOT STAY DOWN: its own risings, its own graves. This one never rises
+# and never dies twice. They share a room and share no mechanic.
+#
+# WEAR IS A VARIABLE, AND THIS NUMBER IS A STATED CHOICE, NOT A MEASUREMENT.
+# The Moulder's 0.26 was the surface-area-weighted mean of two populations,
+# measured by tools/art/_moulder_wear.py. I did NOT run that here and I am not
+# going to imply I did. Three populations, argued:
+#   the man's leather and the greased iron pole - OLD, handled daily, 0.85
+#   the willow cage - RELASHED AS IT ROTS, so the youngest thing on the body,
+#   0.45; and a cage that is this creature's receipt must not read as refuse
+#   the tally bundles - today's, 0.10
+# 0.68 is taken, toward the man-and-iron end because they carry most of the
+# mass and all of the silhouette's lower half.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"ratcatcher"}
+
+OVERRIDE.update({
+    "ratcatcher": {
+        # THE MAN AND THE IRON. The Moulder's measured lesson, applied and not
+        # rediscovered: put the DARK body against the PALE furniture so the
+        # outline is carried by contrast instead of by a rim light I would
+        # have to invent. The Greener's head vanishing from the side is the
+        # live fault that argument comes from.
+        'body': ((0.078, 0.062, 0.050), 0.86, 0.02),
+        # THE WILLOW. Buff, dry, pale - and it is the BIGGEST object on the
+        # body, so the cage is what a viewer's eye lands on first. That is on
+        # purpose: the cage is the idea.
+        'bone': ((0.690, 0.588, 0.414), 0.78, 0.00),
+        # THE TALLY. Near-black against buff willow is the whole of the count's
+        # legibility, and it is the one thing in this body I will not soften.
+        # NOTE WHAT ELSE IS IN THIS SLOT AND WHAT IS NOT: the cage's own frame
+        # is 'bone', not 'dark', so dark pixels inside the cage region ARE the
+        # count and the instrument below can measure them without separating
+        # ironwork from occupants first.
+        'dark': ((0.038, 0.034, 0.030), 0.70, 0.05),
+        # THE LAMP. A tallow flame, and the strength is the Moulder's measured
+        # curve taken as read rather than re-swept: an emissive pushed up the
+        # view transform's shoulder BUYS BRIGHTNESS BY SPENDING COLOUR, and
+        # white is where every hue ends. The Dyer clipped to cream at 2.30,
+        # the Greener settled 1.45, the Moulder 0.80. A hand lamp is cooler
+        # than a pour, so one step below it. 0.70.
+        'glow': ((1.000, 0.560, 0.140), 0.70),
+    },
+})
+
+CANON.update({
+    "ratcatcher": ("The Ratcatcher", 2.62, (0.70, 0.60, 0.42), (1.00, 0.62, 0.22),
+                   "crypt",
+                   "IT IS PAID BY THE TAIL - everything else that dies in this "
+                   "room goes into the cage on its hip and it is stronger for "
+                   "every bay it fills, so the party is not choosing how to "
+                   "kill it but whether to clear the room at all; leave the "
+                   "lesser things standing and you fight the whole floor at "
+                   "once, clear them and you hand this one the fight, and the "
+                   "bays already filled can be cut open to give them back",
+                   0.68, "It is paid by the tail."),
+})
+ORDER = ORDER + ["ratcatcher"]
+
+
+def ratcatcher():
+    """IT IS PAID BY THE TAIL. A stooped man with a long tongs-pole, and a
+    gridded willow cage slung on his near hip with FIVE OF ITS TWELVE BAYS
+    FULL.
+
+    SILHOUETTE INTENT - A GRID YOU CAN COUNT, AND IT IS HALF EMPTY:
+      - the CAGE is a 3 x 4 LATTICE OF OPEN BAYS. Nothing else in the register
+        is a gridded box, and nothing else in it is COUNTABLE as a number
+        rather than as a pile. A viewer reads "five of twelve" from the
+        doorway, and the SEVEN EMPTY BAYS are half the idea: there is room for
+        more, and the party decides whether it gets it;
+      - THE THREE THINGS ARE SIDE BY SIDE ACROSS THE PICTURE, NOT STACKED IN
+        DEPTH. Cage on the near-left, man centre, pole and tongs sweeping
+        right. The Reeve shipped a side view with one body behind another and
+        both of minibossfit's checks passed it; the Moulder had to drop its
+        flask 0.28 because a chibi head is as deep as it is wide and ate the
+        cast. Depth separation is a thing this lane keeps getting wrong, so
+        this body does not ask for any: all three elements are separated in X,
+        which every camera in the register can see;
+      - a FILLED BAY SAGS AND AN EMPTY HOOK RIDES HIGH, so the cage's bottom
+        edge is a ragged line and the ragged part IS the count. That is the
+        only thing carrying the tally in the side view, where a row across X
+        foreshortens into one object;
+      - the MAN is stooped and his head is SMALL - the Moulder's lesson: make
+        the head you do not want looked at smaller than the thing you do;
+      - ONE BUNDLE IS IN THE TONGS, caught, not yet filed. A still picture
+        cannot show a mechanic working, but it can show which way the stuff is
+        travelling, which is what the Reeve's spill did;
+      - BOTH ARMS RUN ACROSS THE PICTURE PLANE - the Tanner's pass-3 finding,
+        applied first time: a forearm pointing at the lens foreshortens to
+        nothing.
+
+    Front is -Y, the same as the twenty-six before it."""
+    P = Parts("ratcatcher")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    # ---- the three anchors, and they are separated in X on purpose (above)
+    CX, CY = -0.78, 0.06          # the cage
+    MX = 0.34                     # the man
+    CW, CD = 0.92, 0.62           # cage width (x) and depth (y)
+    CZ0, CZ1 = 0.55, 1.95         # cage bottom and top
+    NCOL, NROW = 3, 4
+    FRONT_Y = CY - CD / 2.0
+    BACK_Y = CY + CD / 2.0
+    colw = CW / NCOL
+    rowh = (CZ1 - CZ0) / NROW
+
+    # ------------------------------------------------------------- THE MAN
+    # *** PASS 3, AND IT IS THE WHOLE OF THE MAN. THE FIT RENDER IS THE ONLY
+    # *** REASON IT HAPPENED. *** Passes 1-2 built him at REAL human
+    # proportion - thin limbs, long shins, a head 14% of his own height - and
+    # the three views on their own never showed anything wrong with him,
+    # because there was nothing in frame to compare him to. Put him beside a
+    # posed KayKit Knight in minibossfit and he reads as a stick figure next
+    # to a toy: the hero is a CHIBI, head about 40% of its height, and the
+    # ratio 1.07 the register reports is a HEIGHT ratio that cannot see this
+    # at all. It is the Moulder's pass-5 finding exactly - "the hero is a
+    # chibi and my cast was not" - and shipping it again a day later would be
+    # this lane losing something it had already learned.
+    # So: head to ~29% of his own height, limbs roughly 55% thicker, shins
+    # shortened, shoulders widened. He stays the SECOND thing you look at -
+    # the cage is 0.92 m across against his 0.49 m head - so the silhouette
+    # argument from pass 1 survives, which is the trade I was worried about
+    # and the fit sheet says it holds.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        limb(P, [(MX + 0.19 * s, 0.03, 0.03),
+                 (MX + 0.21 * s, -0.02, 0.33),
+                 (MX + 0.17 * s, -0.07, 0.62)], 0.160, 0.128, 'body')
+        # boots in 'dark' - the one place the man meets the floor, and a dark
+        # foot against a dark floor is a thing this lane has shipped before.
+        # Kept dark anyway: the floor under a crypt miniboss is the game
+        # build's to light, and a pale boot would read as a bandage.
+        P.add(L.box(0.34, 0.46, 0.17), 'dark',
+              loc=(MX + 0.19 * s, -0.13, 0.085))
+    P.add(L.box(0.58, 0.40, 0.26), 'body', loc=(MX, -0.06, 0.70))
+    # the stoop: the torso leans 0.24 forward over 0.46 of rise. A man who
+    # carries a loaded cage on one hip does not stand up straight, and the lean
+    # is what tells the two halves of the silhouette apart at stream distance.
+    limb(P, [(MX, -0.06, 0.68), (MX - 0.02, -0.17, 0.92),
+             (MX - 0.04, -0.26, 1.14)], 0.340, 0.280, 'body')
+    P.add(L.box(0.76, 0.32, 0.19), 'body', loc=(MX - 0.04, -0.26, 1.16))
+    # THE HEAD, and it is now the chibi's size, not a man's.
+    P.add(L.sphere(0.245, 0.255, 0.238, 13, 9), 'body',
+          loc=(MX - 0.05, -0.33, 1.33))
+    P.add(L.box(0.52, 0.46, 0.07), 'dark', loc=(MX - 0.05, -0.35, 1.475))
+    eyes(P, (MX - 0.05, -0.33, 1.345), 0.098, 0.044, -0.195)
+    # ARMS, both across the plane. Far arm high on the pole, near arm low -
+    # two different heights so the pair reads as a grip and not as a bar.
+    limb(P, [(MX + 0.34, -0.25, 1.12), (MX + 0.12, -0.34, 0.95),
+             (MX - 0.12, -0.40, 0.82)], 0.130, 0.098, 'body')
+    limb(P, [(MX - 0.34, -0.25, 1.10), (MX - 0.02, -0.41, 0.84),
+             (MX + 0.18, -0.48, 0.58)], 0.130, 0.098, 'body')
+    _span("man", i0)
+
+    # ------------------------------------------- THE YOKE AND THE SHOULDER BAR
+    i0 = len(P.items)
+    # the cage does not float: a bar off the near shoulder and two straps down
+    # to the cage's top corners. Willow bar, iron straps.
+    P.raw(L.tube([Vector((MX - 0.26, -0.24, 1.22)),
+                  Vector((CX + 0.34, -0.18, 1.98)),
+                  Vector((CX - 0.30, -0.14, 2.06))],
+                 [0.052, 0.046, 0.042], 7), 'bone')
+    for sx in (-1, 1):
+        P.raw(L.tube([Vector((CX + sx * (CW / 2.0 - 0.06), -0.16, 2.02)),
+                      Vector((CX + sx * (CW / 2.0 - 0.03), CY, CZ1 + 0.02))],
+                     [0.030, 0.026], 6), 'dark')
+    _span("yoke", i0)
+
+    # --------------------------------------------------------- THE CAGE FRAME
+    # A 3 x 4 lattice. Open bays, open top - you watch it fill. Members are
+    # 'bone' so that every DARK pixel inside the cage's box is an occupant,
+    # which is what makes the instrument below able to count.
+    i0 = len(P.items)
+    for c in range(NCOL + 1):
+        x = CX - CW / 2.0 + c * colw
+        P.add(L.box(0.046, 0.052, CZ1 - CZ0 + 0.05), 'bone',
+              loc=(x, FRONT_Y, (CZ0 + CZ1) / 2.0))
+        if c in (0, NCOL):                      # corner posts run full depth
+            P.add(L.box(0.052, CD, 0.052), 'bone', loc=(x, CY, CZ0))
+            P.add(L.box(0.052, CD, 0.052), 'bone', loc=(x, CY, CZ1))
+            P.add(L.box(0.046, 0.052, CZ1 - CZ0 + 0.05), 'bone',
+                  loc=(x, BACK_Y, (CZ0 + CZ1) / 2.0))
+    for r in range(NROW + 1):
+        z = CZ0 + r * rowh
+        P.add(L.box(CW + 0.05, 0.052, 0.046), 'bone', loc=(CX, FRONT_Y, z))
+        if r in (0, 2, NROW):
+            P.add(L.box(CW + 0.05, 0.052, 0.046), 'bone', loc=(CX, BACK_Y, z))
+    # the floor of the basket - a woven pan, so the bottom row has something to
+    # sit on and the cage does not read as an empty frame hanging in air
+    for j in range(5):
+        y = CY - CD / 2.0 + CD * j / 4.0
+        P.add(L.box(CW, 0.040, 0.034), 'bone', loc=(CX, y, CZ0 + 0.02))
+    _span("cage", i0)
+
+    # ------------------------------------- THE TALLY: TWELVE BAYS, FIVE FILLED
+    # FILLED FROM THE BOTTOM, which is how a basket fills and is also the only
+    # arrangement a viewer can read as a FRACTION rather than as a scatter.
+    # Row 0 (bottom) all three, row 1 two of three, rows 2 and 3 empty.
+    FILLED = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
+    i0 = len(P.items)
+    for (r, c) in FILLED:
+        bx = CX - CW / 2.0 + (c + 0.5) * colw
+        bz = CZ0 + (r + 0.5) * rowh
+        # A FILLED BAY SAGS. 0.055 down on the willow, which is what makes the
+        # cage's bottom edge ragged and is the only thing carrying the count in
+        # the side view. The sag is also why the bundle bulges THROUGH the
+        # front plane rather than sitting politely inside it.
+        bz -= 0.055
+        # PASS 2, ONE NUMBER, AND IT IS THE INSTRUMENT'S, NOT MY TASTE.
+        # Pass 1 sat all five occupants in ONE plane at y = CY - 0.07, and
+        # _rat_tally measured what that costs: front 5 components of ~2,000 px
+        # each (the count reads), SIDE 1 of 2,692 and 1 of 833 - five bundles
+        # collapsing into two masses, because a row laid across X projects onto
+        # itself in a side camera. The catch was visible there and UNCOUNTABLE,
+        # which for a creature whose whole idea is a fraction is most of the
+        # idea gone in one of three views.
+        # A basket is DEEP. Staggering the columns across the cage's 0.62 m of
+        # depth is what a loaded basket actually looks like and it is the only
+        # thing a side camera can separate them by. 0.24 m of column pitch
+        # against a 0.236 m bundle diameter - deliberately just over touching,
+        # measured rather than chosen, and the rows are offset half a step so
+        # the two rows do not stack either. The FRONT view cannot move: this
+        # is an orthographic +Y camera and nothing's x or z changes.
+        byy = CY + (c - 1) * 0.24 + (r - 0.5) * 0.12
+        P.add(L.sphere(0.112, 0.118, 0.096, 11, 7), 'dark',
+              loc=(bx, byy, bz))
+        # AND THE TAIL OUT THROUGH THE FRAME. The creature is paid by the tail;
+        # a tail hanging out of a bay is the plainest possible way to say so,
+        # and it gives each occupant its own outline instead of five identical
+        # lumps.
+        P.raw(L.tube(arc((bx, byy - 0.09, bz - 0.02),
+                         (bx + (0.13 if c != NCOL - 1 else -0.13),
+                          byy - 0.30, bz - 0.17), 0.03, 6),
+                     L.lerp_list(0.021, 0.011, 6), 5), 'dark')
+    _span("occupants", i0)
+
+    i0 = len(P.items)
+    # the willow under a FILLED bay bows with it - a loaded basket is not
+    # square, and this is the geometry saying the load is real. NOT in the
+    # `occupants` span on purpose: that span is what the with/without
+    # instrument deletes, and a 'bone' member inside it would be counted as
+    # tally pixels that moved. An instrument that measures its own scaffolding
+    # is the fault class this lane keeps finding in its own gates.
+    for c in range(NCOL):
+        bx = CX - CW / 2.0 + (c + 0.5) * colw
+        P.add(L.box(colw * 0.86, 0.046, 0.034), 'bone',
+              loc=(bx, FRONT_Y, CZ0 - 0.022))
+    # the SEVEN EMPTY BAYS get a hook each, riding HIGH on the member above.
+    # An empty bay with nothing in it at all is a hole; an empty bay with an
+    # unused hook is a VACANCY, and the difference is the whole second half of
+    # the idea.
+    for r in range(NROW):
+        for c in range(NCOL):
+            if (r, c) in FILLED:
+                continue
+            bx = CX - CW / 2.0 + (c + 0.5) * colw
+            ztop = CZ0 + (r + 1) * rowh
+            P.raw(L.tube(arc((bx, FRONT_Y - 0.01, ztop - 0.02),
+                             (bx + 0.045, FRONT_Y - 0.03, ztop - 0.115),
+                             -0.02, 5), L.lerp_list(0.016, 0.013, 5), 5), 'dark')
+    _span("vacancy", i0)
+
+    # ------------------------------------------------- THE POLE AND THE TONGS
+    i0 = len(P.items)
+    TX, TZ = MX + 0.96, 0.30                    # where the jaws close
+    limb(P, [(MX - 0.22, -0.39, 0.90), (MX + 0.36, -0.47, 0.62),
+             (TX, -0.56, TZ)], 0.048, 0.038, 'dark')
+    # two jaws, bowed apart, closed on something
+    for s in (-1, 1):
+        P.raw(L.tube(arc((TX - 0.04, -0.56, TZ + 0.01),
+                         (TX + 0.30, -0.60, TZ - 0.17),
+                         0.0, 6, side=s * 0.105),
+                     L.lerp_list(0.028, 0.019, 6), 6), 'dark')
+    # THE ONE IN THE TONGS. Caught, not yet filed - the direction of travel.
+    P.add(L.sphere(0.090, 0.096, 0.078, 10, 7), 'dark',
+          loc=(TX + 0.20, -0.585, TZ - 0.10))
+    P.raw(L.tube(arc((TX + 0.26, -0.60, TZ - 0.13),
+                     (TX + 0.42, -0.64, TZ - 0.27), 0.02, 6),
+                 L.lerp_list(0.019, 0.010, 6), 5), 'dark')
+    # a short iron butt at the near end so the pole reads as a tool with two
+    # ends and not as a stick
+    P.add(L.cone(0.058, 0.042, 0.11, 8), 'dark',
+          loc=(MX - 0.26, -0.38, 0.93))
+    _span("pole", i0)
+
+    # ------------------------------------------------------------- THE LAMP
+    # The ONE lit thing, and it is hung so that what it lights is THE TALLY.
+    # The Moulder's measured limit is stated rather than re-measured: one
+    # emissive cannot be both a hot core and a coloured flame, and the
+    # Pressman's glow ring could not be seen at all because it sat inside its
+    # own housing. So the source is OUTSIDE the hood, below it, facing the
+    # bays, and it is small - light reads as light when it is a thin source
+    # against a dark interior.
+    i0 = len(P.items)
+    LX, LY, LZ = CX + 0.08, -0.34, 1.88
+    P.raw(L.tube([Vector((CX + 0.26, -0.20, 2.02)), Vector((LX, LY, LZ + 0.13))],
+                 [0.020, 0.017], 6), 'dark')
+    P.add(L.cone(0.105, 0.030, 0.10, 10), 'dark', loc=(LX, LY, LZ + 0.08))
+    P.add(L.sphere(0.052, 0.052, 0.058, 10, 7), 'glow', loc=(LX, LY, LZ))
+    # four iron uprights round the flame - a lamp, not a floating bead
+    for i in range(4):
+        a = TAU * i / 4.0 + math.pi / 4.0
+        P.add(L.box(0.016, 0.016, 0.13), 'dark',
+              loc=(LX + math.cos(a) * 0.075, LY + math.sin(a) * 0.075, LZ))
+    P.add(L.cone(0.075, 0.095, 0.035, 10), 'dark', loc=(LX, LY, LZ - 0.075))
+    _span("lamp", i0)
+
+    return P
+
+
+BUILDERS.update({"ratcatcher": ratcatcher})

@@ -378,7 +378,9 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     items = load_items(repo)
     bodydir = os.path.join(repo, "assets", "characters", "kaykit_adv2")
-    gdir = os.path.join(repo, "assets", "characters", "bellmire", "showcase")
+    # 18 Nov: moved out of assets/ - see e3pogen.py. These are D95 evidence,
+    # not content; renders/.gdignore keeps Godot out of them.
+    gdir = os.path.join(repo, "renders", "art", "d95", "kits")
     os.makedirs(gdir, exist_ok=True)
 
     # accessory cost bounds per slot, for the ornateness derivation

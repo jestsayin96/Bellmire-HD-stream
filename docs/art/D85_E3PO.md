@@ -20,7 +20,7 @@ bespoke E3PO mesh would have thrown the walk and the idle away. So the art half 
 geometry authored in the rig's own REST space, one object per attachment point, each with
 its **origin on the bone it hangs from** - parent it and the animation carries it.
 
-    assets/characters/bellmire/e3po_kit.glb      12 objects, 1158 tris
+    renders/art/d85/e3po_kit.glb      12 objects, 1158 tris
     tools/art/e3po.py                            the kit (shape + colour + wear)
     tools/art/e3pogen.py                         headless driver, render + blank-check
 

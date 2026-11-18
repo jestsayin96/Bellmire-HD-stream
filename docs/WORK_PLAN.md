@@ -813,6 +813,7 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+ADDENDUM 2026-11-17 21:05 CT sits ABOVE the 20:58 block and SUPERSEDES ITS ART AND CONTENT ROWS.
 Updated 2026-11-17 20:58 CT by the team lead (clock off the machine: 2026-11-17T20:58:24-06:00).
 The 20:58 block below SUPERSEDES the 20:14 addendum, the 19:58 block and every row under them.
 Updated 2026-11-17 19:58 CT by the team lead (clock off the machine: 2026-11-17T20:06:48-06:00).
@@ -832,6 +833,141 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** ADDENDUM, 2026-11-17 21:05 CT (clock off the machine: 2026-11-17T21:05-06:00).
+*** ART COMMITTED AT 21:02:47 WHILE I WAS MERGING - ITS 20:34 FIRING WAS STILL OPEN
+*** WHEN I WROTE THE BLOCK BELOW. THIS ADDENDUM SUPERSEDES THE ART ROW AND THE
+*** CONTENT ROW BELOW IT, AND ADDS ONE LINE TO THE GAME BUILD ROW. FOUR TICKED, NOT
+*** THREE. EVERYTHING ELSE IN THE 20:58 BLOCK STANDS.
+================================================================================
+
+  [x] THE GREENER (art) - TICKED. 8821a62, MERGED INTO main AT 21:05.
+      IT IS THE BEST ANSWER TO A ROW OF MINE THAT THIS HOUSE HAS PRODUCED, AND THE
+      REASON IS NOT THE BODY. I asked for the trade ON THE BODY rather than on the
+      furniture. THE LANE BUILT IT, LOOKED AT IT, AND WAS ABOUT TO CALL THE ROW
+      DELIVERED - AND THEN ITS OWN INSTRUMENT OVERTURNED ITS PICTURE. _trade_read,
+      which renders with a group and again without it and counts the pixels that
+      MOVED, said at pass 7: crust ON HIM 0.0439, the yard around him 0.44 of the
+      silhouette. FOUR PER CENT ON THE MAN. That is precisely the fault the body
+      existed to fix, invisible to the eye and visible to the number. Pass 8
+      deleted the crocks and grew the crust: crust 0.0439 -> 0.1889, footprint
+      3.75 -> 2.71 m. The fit harness went RED in the same run on pair_w 5.61
+      against a 5.60 m frame - one cause, two instruments, both honest.
+      IT DID NOT CHOOSE THE TRADE BY TASTE EITHER. The hue histogram over the
+      whole register: 0-60 deg FOURTEEN bodies, 60-110 two, 110-190 ZERO, 190-260
+      seven (the dyer's woad), 260-360 ZERO. A beekeeper was the first candidate
+      AND WAS DROPPED BECAUSE HONEY IS 0-60, where fourteen bodies already sit.
+      Verdigris is a working-class trade whose PRODUCT is green. THIS IS THE FIRST
+      BODY IN THE REGISTER TO HOLD 110-190. That is what "what colour is for"
+      looks like answered with a measurement.
+      I VERIFIED THE REGISTER MYSELF, NOT THE PROSE: _fit_greener_register.json
+      ok true, verdict GREEN, creature_h 2.50 / hero_h 2.45, ratio 1.02, pair_w
+      4.57, fits_frame true, THREE proving views at seen 1.000 (front, side and
+      back all 1.0, computed off alone-vs-visible deltas, not asserted),
+      errors [], blind_views [], unproved_cells [], blank check 3 files 0
+      failures. Footprint 2.71 m, CORRIDOR-SAFE against 11.0 m - said without
+      being asked. Four meshes, 5,743 faces, the cap kept.
+      AND IT CAUGHT A FLOAT I COULD NOT HAVE: _colour_read found a 435 px
+      detached component at mid-height in the side view, and the lane did the
+      arithmetic rather than nudging it - a nodule offset 0.72x its run radius
+      sits 0.09 m off the limb axis while the smallest nodules are 0.078 m
+      across, so the thin end of a run could clear the member it grows on.
+      Offset cut to 0.52, component gone. Same instrument, same class of catch,
+      as the dyer's eyes hanging in front of its face.
+      THE STANDING LESSON IT LEFT IS WORTH MORE THAN THE BODY, AND IT IS WHY I AM
+      RECORDING IT HERE RATHER THAN IN ITS ROW: it hid its own emissive FOUR
+      TIMES in one body - under the crocks, as a peach puddle, as eleven salmon
+      balls a viewer names as fruit, and finally behind a pan whose own rim
+      closed over it at a 2-degree camera pitch. "The thing I kept getting wrong
+      was not colour, strength, size or contrast: it was HEIGHT. An eye-level
+      camera cannot see INTO anything lying on the floor plane." NO FLOOR-LEVEL
+      EMISSIVE IN THIS REGISTER CAN BE SEEN, however it is dressed. Every lane
+      that places a light should read that sentence.
+      *** I LOOKED AT renders/art/minibosses/greener/hero_front.png AND
+      hero_side.png AT FULL SIZE, BESIDE THE KAYKIT KNIGHT. *** Both feet on the
+      hero's ground plane, nothing floating, nothing sunk. The green crust runs
+      the arms, chest and legs and IT IS THE FIRST THING YOU SEE ON THE FIGURE -
+      the row is met. The crust is VOLUMETRIC and survives the side view at full
+      strength, which flat planes would not have.
+      TWO FAULTS OF MY OWN TO ADD TO ITS SEVEN, NEITHER A RE-DO:
+        (a) THE SCRAPER POLE IS THE LOUDEST LINE IN ITS OWN PICTURE. It crosses
+            the figure corner to corner in BOTH views and cuts the torso in half
+            at a glance. The lane named only that its blade ends among the
+            brazier's legs; the diagonal itself is the bigger read.
+        (b) FROM THE FRONT, THE TOP OF THE SILHOUETTE IS THE PLATE RACK, NOT THE
+            CREATURE. The head is small, dark and set below and behind the rack,
+            and reads as a lamp with two orange eyes. The lane named the BACK
+            view burying the crust (fault 4); this is the same geometry costing
+            it the head from the front.
+      ITS SEVEN OWN FAULTS STAND AS WRITTEN AND I AM NOT SOFTENING ONE: the
+      copper leaves still read as brown planks ("open fault, not fixed, and it is
+      the weakest thing on the body"), the coals read as bread rolls, the arm
+      crust has overshot toward bubble-wrap, the back view is the stock's view
+      and not the man's, the silhouette is in 3-4 pieces by construction, the
+      apron barely reads as leather. THAT IS THE LIST I WANT FROM EVERY LANE.
+
+  ART      ->  *** NEW ROW. THE GREENER IS TICKED AND THE 20:14 ROW IS SPENT. ***
+               You answered "what colour is for" with a histogram, dropped your
+               own first idea because the colour was taken, and let an instrument
+               overturn a picture you had already accepted. Nothing in this house
+               has been done better this week.
+               TAKE A TWENTY-SIXTH ON THE USUAL TERMS - OR, IF YOU AGREE, SPEND
+               IT ON THE SMALLER THING INSTEAD, WHICH I WOULD RATHER HAVE:
+               YOUR OWN FAULT 1 IS THE OLDEST OPEN FAULT ON YOUR LIST. The copper
+               leaves have had three separate goes (E, J, pass 5) across two
+               bodies and still read as timber. You have called it "the weakest
+               thing on the body" in writing. A MATERIAL THAT READS AS WHAT IT IS
+               serves every future body with copper, brass or iron on it; a
+               twenty-sixth serves one. Your call - you can see the register side
+               by side and I cannot - and EITHER CHOICE TICKS.
+               TWO ONE-LINE ANSWERS IF THEY ARE CHEAP, NEITHER WORTH A FIRING:
+               (1) THE DYER QUESTION IS STILL UNANSWERED and I am asking it once
+               more because the greener answered it for ITSELF and not for the
+               dyer: do the dyer's hung CLOTHS survive the side view, or do flat
+               planes vanish edge-on? (2) Is the greener's scraper pole meant to
+               cross the body, or is it an accident of the rest pose?
+               AND ONE THING NOT TO DO: do not re-dress a floor-level emissive.
+               You proved it cannot be seen. That is closed.
+
+  CONTENT  ->  *** YOUR ROW'S FIRST LEG IS NOW LIVE - THE TWENTY-FIFTH LANDED AT
+               *** 21:02 AND IS ON main. THE GAP IS ONE, NOT ZERO. ***
+               THE GREENER IS ON YOUR BRANCH WHEN YOU FIRE AT 21:22. Write it: 9
+               arrive + 8 fall into miniboss_feed.by_key, the same shape as the
+               twenty-four (19 of them are 9/8), and docs/art/MINIBOSSES.md
+               section 25 is the authority - it is unusually full and gives you
+               the mechanic, the trade and the faults.
+               THE MECHANIC IS WORTH READING BEFORE YOU WRITE: *IT GREENS YOUR
+               IRON* - every blow landed on it eats the weapon a little more, and
+               a bitten weapon bites less; a hero can stop and scrape it clean,
+               which costs them the swings they would have taken. THAT IS A
+               CHOICE THE PARTY MAKES, not a stat, so the lines have something
+               ordinary and awful to be about: a man whose job is that your tools
+               come back worse.
+               SAME STANDING RULE AS THE DYER AND YOU KEPT IT WITHOUT BEING TOLD:
+               the mechanic is FLAVOUR in the lines, never a promise that it is
+               built. IT IS NOT BUILT AND NOTHING HERE BUILDS IT.
+               If MINIBOSSES.md does not give you enough, SAY SO AND NAME WHAT
+               YOU NEED and I will carry it to art. No new top-level key beyond
+               your `_note_`; the four forbidden keys stay untouched.
+
+  GAME BUILD -> ONE LINE ADDED TO YOUR ROW BELOW. System 4 is still the item.
+               A SECOND MB_FIT LINE IS NOW OWED AND IT IS ONE NUMBER: the greener
+               at RATIO 1.02, copied from _fit_greener_register.json and NOT
+               re-derived, the same way you took the pressman 1.16 and the
+               strickler 1.04. greener.glb is on main as of 21:05, so the line is
+               live the moment you merge. The body is CORRIDOR-SAFE at a 2.71 m
+               footprint - art said so without being asked, so no spawn gate is
+               owed on geometry.
+               It is one line in delve.gd and it does not displace System 4.
+
+*** THE MINIBOSS LEDGER MOVES AGAIN: 25 bodies on disk, 24 spoken for, 14
+*** SPAWNABLE. The lines gap is ONE (the greener, content's row above). THE SPAWN
+*** GAP IS ELEVEN and it has grown twice in one hour by lanes doing exactly what
+*** they were asked. It is still above this seat - see FOR THE SUPERVISOR item 2,
+*** and read "ELEVEN" there in place of "TEN".
+
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 20:58 CT. SIX LANES MERGED. THREE TICKED.

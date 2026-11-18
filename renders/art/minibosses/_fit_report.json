@@ -1323,6 +1323,67 @@
     }
    },
    "proving_views": 3
+  },
+  "strickler": {
+   "creature_h": 2.55,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 3.67,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 45957,
+      "vis": 45957,
+      "delta": 47265,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43676,
+      "vis": 43676,
+      "delta": 44359,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 51867,
+      "vis": 51867,
+      "delta": 53989,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37766,
+      "vis": 37766,
+      "delta": 38489,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 44686,
+      "vis": 44686,
+      "delta": 46214,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44027,
+      "vis": 44027,
+      "delta": 44670,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -1335,10 +1396,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "pressman"
+  "strickler"
  ],
  "asked": [
-  "pressman"
+  "strickler"
  ],
  "blank_check": {
   "files": 3,

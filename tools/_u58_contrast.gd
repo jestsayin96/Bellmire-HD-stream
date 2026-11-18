@@ -18,11 +18,17 @@ func _flat(c: Color, under: Color) -> Color:
 # named and counted so the gap stays visible instead of hiding.
 const TEXT := {
 	"INK": ["parch", "cream", "tan"], "INK_SOFT": ["parch"], "INK_RED": ["parch"], "VIEWER": ["parch"],
+	"WORD_HI": ["rod"], "TAG_GOLD": ["tagout"],
 	"GOOD": ["parch"], "BAD": ["parch"], "TEAL_ON_PARCH": ["parch"], "GOLD_ON_PARCH": ["parch"],
 	"ON_DARK": ["plate"], "ON_DARK_SOFT": ["plate"], "TEAL_ON_DARK": ["plate"], "GOLD_ON_DARK": ["plate"],
 }
 const CHIPPED := ["ON_KIND", "WHITE"]
-const UNMEASURED := ["WORD_HI", "TAG_GOLD"]
+# U60: WORD_HI and TAG_GOLD now have a measured surface, so nothing is left on trust.
+#  rod    = SCROLL_WOOD_LT: the wordmark is drawn on the dowel, a WOOD_DK..WOOD_LT gradient whose LIGHTEST point is the centre line
+#           the text is centred on, so WOOD_LT is the worst case the wood can offer.
+#  tagout = the lane tag is a Label3D with outline_size 14 on font_size 48 in TAG_OUTLINE, so the surface a glyph is read
+#           against is its own outline, flattened over WHITE (the worst backdrop), never the live world frame.
+const UNMEASURED := []
 const FILL := ["PARCH", "EDGE", "TEAL", "BAND", "PARCHMENT", "PARCHMENT_SOLID", "PLATE", "PLATE_SOLID", "ON_DARK_SHADOW",
 	"EDGE_ON_DARK", "SHADOW", "SCROLL_CREAM", "SCROLL_TAN", "SCROLL_TAN_DK", "SCROLL_WOOD_LT", "SCROLL_WOOD_DK",
 	"SCROLL_BRASS", "SCROLL_BRASS_DK", "SCROLL_GOLD", "SCROLL_BURN", "SCROLL_GRAIN", "SCROLL_GRAIN_HI",
@@ -34,6 +40,8 @@ func _initialize() -> void:
 		"parch": _flat(UiTheme.PARCHMENT, Color(0, 0, 0)),     # worst case: translucent parchment over black
 		"plate": _flat(UiTheme.PLATE, Color(1, 1, 1)),         # worst case: translucent plate over white
 		"cream": UiTheme.SCROLL_CREAM, "tan": UiTheme.SCROLL_TAN,
+		"rod": UiTheme.SCROLL_WOOD_LT,
+		"tagout": _flat(UiTheme.TAG_OUTLINE, Color(1, 1, 1)),
 	}
 	var consts: Dictionary = (load("res://scripts/ui_theme.gd") as GDScript).get_script_constant_map()
 	var seen := 0
@@ -61,5 +69,8 @@ func _initialize() -> void:
 		if not consts.has(k) or typeof(consts[k]) != TYPE_COLOR:
 			print("U59 %-16s STALE - listed here, not a Color constant in UiTheme" % k)
 			bad += 1
+	# NAMED, NOT GATED: the grain stripe is a 0.20*cap band at cy-0.5*cap on the rod; it only reaches the glyphs when cap is at its
+	# px(8) floor. WORD_HI over it, flattened onto WOOD_LT, is printed so the number is on the record.
+	print("U60 WORD_HI on rod grain stripe %.2f NAMED (geometry-dependent, not gated)" % _cr(UiTheme.WORD_HI, _flat(UiTheme.SCROLL_GRAIN, UiTheme.SCROLL_WOOD_LT)))
 	print("U59_CONTRAST ", ("OK %d colours walked, %d pairs, %d unmeasured" % [seen, checked, UNMEASURED.size()]) if bad == 0 else "FAIL %d" % bad)
 	quit(0 if bad == 0 else 1)

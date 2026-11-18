@@ -249,7 +249,7 @@ const SCROLL_SHEET_SHADOW := Color(0, 0, 0, 0.30)
 const SCROLL_GLINT := Color(0.97, 0.90, 0.64, 0.75)
 const SCROLL_SEAL := Color(0.06, 0.40, 0.40)
 const SCROLL_SEAL_PIP := Color(0.97, 0.85, 0.48)
-const WORD_HI := Color(0.97, 0.88, 0.62)
+const WORD_HI := Color(1.0, 0.96, 0.80)   # U60: was (0.97,0.88,0.62) = 3.87:1 on the rod's lightest wood (SCROLL_WOOD_LT); this is 4.58:1
 const WORD_SHADOW := Color(0.08, 0.04, 0.02, 0.95)
 const AURA_DEFAULT := Color(1, 0.8, 0.4)
 const WHITE := Color(1, 1, 1)

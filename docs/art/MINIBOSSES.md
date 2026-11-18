@@ -1455,3 +1455,162 @@ hidden:**
 - Theme `prison`, feed line "Irons just came off the yoke."
 - **NO ROTATION IS HANDED OVER with this body**, so the frame question does not
   arise here. When one is, it will be named as solved in Blender's bone frame.
+
+================================================================================
+## 23. THE STRICKLER - treasury, h 2.55, wear 0.12 (2026-11-17, art lane)
+### IT STRIKES YOU LEVEL
+
+A strickle is the straight-edged stick a market officer draws across the rim of
+a grain measure so that a bushel sold is a bushel and not a bushel and a
+handful. This one does it to a party: while it stands, the best hero in the
+room is scraped down to the measure of the worst. Your strongest is no answer.
+You get your weakest off the floor, or you break the beam he measures against.
+
+**WHY IT IS NOT ONE OF THE TWENTY-TWO - CHECKED BY PARSING `CANON`, NOT BY
+MEMORY.** 36 entries, 22 distinct bodies. The set summons, re-plates itself,
+drags, douses the lamps, rises from its own graves, bars the door, steals gear,
+heals the room, floods it, sows thorns, pre-sets traps, scales with the fire,
+throws its voice, sets the floor, splits in two, arms the other monsters, loads
+you down, cuts the party in half, learns the blow you used, takes the haul,
+drinks the brews and collars your fallen. **Not one of them touches the heroes
+RELATIVE TO EACH OTHER.** The Loader weighs everyone down; this one flattens
+the DIFFERENCE between them, which inverts who in the party matters. Theme
+`treasury`, which had one creature (the Tallyman) against the Prison's three.
+
+### THE SIDE VIEW IS THE POINT OF THIS ONE, AND IT IS MEASURED, NOT CLAIMED
+The lead's note on the Pressman was the brief: its trade reads from the front
+and collapses to a narrow post from the side. A horizontal element can only be
+read from the camera it is NOT pointing at, so one horizontal can never carry
+both views. This creature carries **TWO, AT RIGHT ANGLES**:
+
+| element | axis | carries |
+|---|---|---|
+| **THE STRICKLE** - 1.48 m straight-edge across the measure's rim, both hands | model **X** | the FRONT |
+| **THE BEAM** - 2.00 m balance on one standard, pan hanging fore, weights aft | model **Y** | the SIDE |
+
+`tools/art/_trade_read.py` (new, this run) answers the viewer's question the
+only way that works: it renders the creature **through one fixed camera** with
+a group present and again with it removed and counts the pixels that MOVED.
+The framing is computed ONCE from the whole creature and never recomputed - a
+re-derived camera would shift the frame and read every pixel as moved. This is
+the same correction that caught the Reeve's `head_glow_px: 156` standing beside
+the sentence "the head has no face at all": `mask_of` renders a group ALONE and
+so answers how BIG it is, never whether it can be SEEN.
+
+**TRADE SHARE OF THE SILHOUETTE, three creatures, same instrument, same run:**
+
+| creature | front | side | **side / front** | back |
+|---|---|---|---|---|
+| **STRICKLER** | 0.603 | **0.675** | **1.12** | 0.381 |
+| TAPSTER | 0.713 | 0.755 | 1.06 | 0.705 |
+| PRESSMAN | 0.415 | 0.332 | **0.80** | 0.485 |
+
+The lead's eye and the instrument agree: the Pressman's side carries a fifth
+less of its trade than its front. The Strickler's side carries **more** than its
+front, which is what the row asked for. Per group, side view: beam 0.369, pan
+0.102, weights 0.090, measure 0.081, strickle 0.033 - the strickle all but
+vanishes from the side and the beam pays for it, exactly as designed.
+
+**WHAT THIS NUMBER CANNOT SEE, SAID BEFORE THE NUMBER IS BELIEVED.** It
+measures how much of the outline the trade geometry OWNS. It does not and
+cannot measure whether a viewer NAMES the shape correctly - a derrick and a
+balance can own the same share. Only the picture answers that, and I looked at
+all six.
+
+**THE INSTRUMENT IS PROVED ABLE TO GO RED**, which is this lane's own standing
+rule after measuring a ratio over zero pairs and calling it green. Run against
+`drillmaster,nosuchthing` it returned `ok: false` with
+`"drillmaster: builder exposes NO spans - nothing to measure"` and
+`"nosuchthing: no builder"`. It also fails on a silhouette under 400 px, on an
+empty span, and reports any trade group that moves nothing in every view.
+
+### THE BARREL LESSON APPLIED, NOT JUST RECORDED
+The measure is `Bucket_Wooden_1` and the weights are three `Pouch_Large`, both
+CC0 Fantasy Props MegaKit meshes already on disk. They go through a NEW
+`_prop_mesh_m`, which reads the **primitive and triangle counts off the .gltf
+JSON before anything is imported** (`Bucket_Wooden_1` 976 tris / 2 prims,
+`Pouch_Large` 730 / 2) and caps by the model and its placed size, refusing any
+budget that would drive a single primitive below `PRIM_FLOOR = 72`. Both
+therefore shipped at full density. That is the whole of the 17:42 finding: the
+Barrel tore because OUR fixed 110-face cap is a 0.1335 collapse on an
+824-triangle two-primitive cask, not because the model was built badly.
+`_prop_mesh_m` is a SEPARATE function and not an edit to `_prop_mesh`, so the
+Tapster's shipped mesh does not move while the rule changes under it.
+
+### THE FIT PROOF - I LOOKED AT ALL SIX RENDERS
+`renders/art/minibosses/strickler/` - `front`, `side`, `three_quarter`,
+`hero_front`, `hero_side`, `hero_back`.
+`MINIBOSSFIT_REPORT` **verdict GREEN**, `ok: true`, ratio **1.04** beside the
+posed 2.45 m KayKit Knight, pair_w **3.67**, `fits_frame: true`, **3 proving
+views**, `errors: []`, `blind_views: []`, blank check **3 files / 0 failures**.
+`MINIBOSSGEN_REPORT` `ok: true`, blanks `[]`, **span 2.99 m CORRIDOR-SAFE**
+against the 11.0 m three-cell clear span, 4 meshes, **3,642 faces**.
+
+### EVERY FAULT I CAN SEE. NINE, AND THE FIRST THREE ARE REAL
+1. **FROM THE FRONT THE BALANCE READS AS A DERRICK, NOT A BALANCE.** The beam
+   foreshortens to a stub and what is left is a post with two trays stacked
+   above each other. It is apparatus; it is not legibly a pair of scales. This
+   is the designed trade-off (the front is the strickle's view) but it is a
+   cost and the instrument cannot see it - only my eyes can.
+2. **THE HEAP IS INVISIBLE FROM THE FRONT.** The handful of grain standing
+   proud of the far rim - the thing about to be struck off, and the clearest
+   statement of the mechanic - sits behind the strickle from the front camera
+   and behind the measure's near wall from the side. It is readable in the
+   three-quarter only. Measure share is 0.096 front / 0.081 side and the heap
+   is a small part of that.
+3. **THE STANDARD STILL READS PART-FREE-STANDING** from the side despite the
+   shoulder strut and the belt collar added in pass 2. Its own foot plate on
+   the floor beside his boots is what does it.
+4. **THE RIGHT ARM IS LARGELY OCCLUDED** from the front by the post and pans.
+5. **THE STRICKLE'S RIGHT THIRD PASSES BEHIND THE POST** - occlusion, not a
+   clip; its end grip re-emerges past the ironwork.
+6. **THE LIT TRUE LINE IS WEAK.** The glow strip along the strickle's underside
+   reads as a pale edge rather than a lit line at any distance.
+7. **THE BACK IS THE WEAK VIEW AND I AM NOT HIDING IT** - trade share 0.381,
+   half of it the beam. The measure is carried in front of the body and owns
+   0.007 of the back silhouette, i.e. nothing.
+8. **THE SEAL AT THE LEFT HIP READS AS A SMALL LADLE** from the front.
+9. **3,642 FACES IS THE HEAVIEST BODY IN THE FILE** (next is the Quartermaster
+   at 2,804), and the cause is my own new cap rule shipping four pack meshes
+   whole rather than tearing them. I would rather carry the faces than the
+   shards, and I am naming the number instead of quietly decimating.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+- `assets/monsters/minibosses/strickler.glb` is committed. **STATIC** - a
+  `model` path and **NO `anims` entry**.
+- **`scripts/delve.gd` MB_FIT: add `"strickler": 1.04`.** Measured, not
+  derived: `renders/art/minibosses/_fit_report.json` `ratios.strickler[0]`,
+  hero = the posed KayKit knight at 2.45 m.
+- **STILL MISSING FROM MB_FIT, re-measured off the same file this run:**
+  `"tanner": 1.12`, `"reeve": 0.80`, `"pressman": 1.16`. `"tapster": 1.14` was
+  wired at S23. `"snuffer_chibi": 1.06` - see the answer below.
+- **FOUR .glb FILES HAVE NO `.glb.import` SIBLING**: `strickler`, `pressman`,
+  `reeve`, `tapster`. They cannot load until a Godot run generates one. The
+  game build's own runs have generated every previous one (snarer_chibi now has
+  its sibling), so this is a note, not a block.
+- **CORRIDOR-SAFE at 2.99 m** against the 11.0 m clear span. No spawn gate.
+- Theme `treasury`, feed line "Something in here is taking the heap off."
+- **FRAMES.** No rotation is handed over with this body. Every number in the
+  builder is in **Blender's world frame as written into the .glb** - front is
+  model **-Y**, the strickle lies along model **X**, the beam along model **Y**,
+  up is **+Z**. That is NOT the engine's slot frame; nothing here should be
+  pasted into a Godot rotation without converting it.
+
+### THE TWO ONE-SENTENCE ANSWERS THE LEAD HAS ASKED FOR FIVE HOURS
+**(1) `snuffer_chibi.glb` - MEANT TO BE WIRED, AND IT ALREADY IS.** I read
+`delve.gd:379` rather than guessing: `miniboss_model()` walks
+`[key + "_chibi", key]` and returns the first that exists, so `snuffer_chibi.glb`
+- which is on disk WITH its `.glb.import` - is already loaded in preference to
+the base body; the only thing missing is an `MB_FIT` entry, and because
+`miniboss_ratio` falls back to `MB_FIT["snuffer"] = 1.06` and art's measured
+`snuffer_chibi` ratio is also 1.06, the number it gets today is right **by
+coincidence rather than by design**, so adding `"snuffer_chibi": 1.06` makes it
+deliberate. Nothing is blocked either way.
+
+**(2) THE TANNER OBSERVATION - THE LEAD IS RIGHT, AND I AM DECLINING THE
+REDESIGN.** The Tanner's body does read as a knight and its trade does live in
+the prop beside it; I accept that as true rather than arguing it. I am not
+re-cutting a shipped, ticked, wired body for silhouette share under the freeze -
+what the observation is worth is the RULE it produced, which is now in force on
+every new body: the trade must OWN the outline rather than stand next to it, and
+that claim is measured per view by `_trade_read.py` before anything ships.

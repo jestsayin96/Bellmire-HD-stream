@@ -2579,3 +2579,133 @@ COMMANDS_DATA guard does by design; the verdict is the grep, not the exit code.
 ### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. The parse gate
 ### boots the real game, so twitch_eventsub.gd connected to #jestsayin96 and subscribed as it does
 ### on every lane's parse run - that is the boot, not a test, and the bot sent no message.
+
+## D-cycle - S24 System 2 engine half: THE STAFF, POSE-AWARE - grip toward the butt, and the inverted fist turns it end for end. ALL SEVEN POSES CLEAR. 2026-11-17T18:16:00-06:00 (game build)
+TAKE THIS NEXT (16:58 block, GAME BUILD row) gave: the staff, pose-aware, built the NARROW way - a grip nearer the
+butt, with the one pose that then inverts (Cheer) handled where staffs are placed and nowhere else; no pose-indexed
+branch in the slot every weapon uses. Tick condition: lowest point incl. butt ribbons clears y 0 in ALL SEVEN poses,
+the harness prints a verdict line, and a picture of Idle and Cheer. Systems 3/4 and Phase 2 NOT touched.
+- scripts/gear.gd (backup gear.gd.bak_s24, not staged): Gear.equip, for res://assets/gear/dungeon/staff_* ONLY,
+  slides the model's own children +STAFF_GRIP_SHIFT (0.25 mesh units, S21's measured shift) along the shaft, sets
+  meta "staff_grip", and parents a staff_grip node beside the staff on the same BoneAttachment3D. deco_piece hangs a
+  staff_grip piece's D94 ribbons under the finial (hi - 0.20 span) instead of off the butt (S21's tried placement).
+  Every other path through equip/deco_piece is byte-for-byte the old behaviour.
+- NEW scripts/staff_grip.gd (no class_name; preloaded by gear.gd): watches the HAND, not the clip. When the slot's +X
+  (world DOWN in Idle, -0.99 measured S19) rises above +0.15 world y the fist has turned over, and the staff's held
+  rotation goes (0,0,90) -> (0,0,-90): end for end, head up. Back below -0.15 it returns. The 0.30 band stops a hand
+  passing level from flickering. It only ever touches those two rotations, so a caller that sets its own (the S21
+  harness's rows B/C) is left alone. No pose names, no per-clip table.
+- THE NUMBERS, tools/_s21_staff.gd unchanged (windowed, 18:10, build/s24_battery.log), row A = what ships now, lowest
+  point of every mesh under the held node INCLUDING the ribbons: Idle 0.097 | Walking_A 0.103 | Hit_A 0.214 |
+  Spellcast_Shoot 0.205 | Use_Item 0.168 | Cheer 0.565 | 1H_Melee_Attack_Chop 0.165. WORST row A: 0.097 m in Idle.
+  (S20 shipped: worst -1.078. S21's shift alone: Cheer -0.484.) AXIS (idle) row A (0.0, 1.0, -0.03) all three
+  tiers - still upright. VERDICT: S21_STAFF OK (9 staves, 7 poses, 0 failures).
+- LOOKED AT: renders/cycles/s21/s21_pose_A_Idle.png - shaft upright beside the body, butt at the boot top above the
+  floor, finial over the hat. s21_pose_A_Cheer.png - arm raised, the staff stands UP out of the fist with the crystal
+  at the top of the frame; nothing hangs head-down. The flip is a one-frame turn as the fist goes over, not animated -
+  named, not hidden: at stream distance in a cheer it reads as the mage twirling the staff up.
+- Battery on this tree (build/s24_battery.log + build/s24_gates.log): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error;
+  S21_STAFF OK above; OFFFLOOR_VERDICT OK 0 of 1714 samples off the floor
+  (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/17565 (0.000%) raid_in_solid=0/6018 (0.000%) PASS;
+  DELVE_TEST OK ran 9001 frames, floor reached 2 (capped); 0 SCRIPT ERROR / 0 Parse Error across both logs.
+- No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team
+  lead ticks. Lock claimed 18:08:37 declaring 18:34.
+## B-cycle - B36 THE SELL-BACK IS GUARDED, AND THE TWO DECLARATIONS ARE NOW MADE TO AGREE WITH EACH OTHER, 2026-11-17T18:50:59-06:00 (chat bot)
+THE ROW: "TAKE THE NEXT SMALLEST whose authority is a NUMBER LIVING IN CODE, in the same shape,
+ANCHOR case included - or, if the walk says the countable ones are now done, SAY THAT WITH THE WALK
+BEHIND IT AND STAND DOWN." And: "DO NOT SILENTLY DROP LOOK FRACTION."
+One is taken: `satchel`.what's "two fifths" against SELL_BACK. Both halves are answered below.
+
+### WHY THIS ONE, AND WHY IT IS BIGGER THAN `look` WAS - WHICH IS THE POINT
+B35 measured the four numeric claims and took `look` because it had ONE authority. `satchel` was
+named there as the obvious next one BECAUSE IT HAS TWO, and that is the whole value of this cycle:
+  leaderboard_panel.gd  class Satchel, line 65   const SELL_BACK := 0.4   (the sell sheet on stream)
+  snapshot_pub.gd       line 40                  const SELL_BACK := 0.4   (the hub's sell prices)
+Those two can disagree with EACH OTHER before either disagrees with my sentence. A viewer then
+reads one number on the hub and is paid the other at the counter, and no `what` string is wrong -
+so a guard that only checked MY string would stay silent through the worst version of this fault.
+So SPLIT is the FIRST path, not an afterthought, and it answers B35's open question - "which of the
+two is authoritative" - by refusing the premise: NEITHER is. They must agree, and when they do not
+there is no published rate to check against, so the guard says that instead of believing one.
+
+### THE GUARD - THREE PATHS (scripts/chatcmd.gd, in commands(), after the B35 LOOK block)
+  SATCHEL SPLIT   - the two declarations of SELL_BACK no longer agree. Names both files, both
+                    numbers, and what it means for a viewer (hub price vs counter payment).
+  SATCHEL ANCHOR  - `satchel`.what no longer says "<fraction> of its shop cost" in words the guard
+                    knows, so no rate can be found. The path that stops this going quietly blind.
+  SATCHEL RATE    - the published fraction differs from the agreed rate. The error carries the
+                    REPAIR: the phrase that would be true ("say \"two fifths\""), or, if no phrase
+                    in the table can state the rate at all, says so - because a rate of 0.37 cannot
+                    be fixed by rewording, it needs a different sentence shape, and the reader of
+                    the error should be told which of those two they are looking at.
+The fraction table is `muster`'s word-to-number table widened to eighteen fraction phrases
+(tenths, fifths, quarters, thirds, halves), matched LONGEST-FIRST off the end of the text before
+" of its shop cost" so "a fifth" cannot shadow "two fifths". Not fatal, the shape every guard above
+it uses: push_error + printerr, the commands still answer, and a battery greps COMMANDS_DATA.
+NO NEW CYCLE: neither leaderboard_panel.gd nor snapshot_pub.gd references ChatCmd, and the parse
+gate reported 0 cyclic references on the merged tree.
+
+### RED PATHS - TWO PROVED, AND THE THIRD'S READS ARE PROVED EVEN THOUGH ITS BRANCH IS NOT
+Injected into data/commands.json, run through tools/_l14_test.gd, verbatim:
+  COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes "a half" (0.5) of shop cost and SELL_BACK
+    pays 0.4 - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; say
+    "two fifths"
+  COMMANDS_DATA SATCHEL ANCHOR: `satchel`.what no longer says "<fraction> of its shop cost" in
+    words this guard knows - the published sell-back rate can no longer be checked against
+    SELL_BACK (0.4)
+SATCHEL SPLIT IS NOT PROVED RED, and I am naming it rather than claiming it. Its trigger is one of
+two constants in ANOTHER LANE'S scripts, so firing it would mean editing a file that is not mine.
+But it is NOT in LOOK FRACTION's position: SPLIT sits at the HEAD of the elif chain, so RATE and
+ANCHOR could only fire BECAUSE SPLIT's condition was evaluated and found false - which means both
+reads, `LeaderboardPanel.Satchel.SELL_BACK` and `SnapshotPublisher.SELL_BACK`, resolved live and
+compared equal in a real run. What is unproven is the inequality message, not the access.
+data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before the first injection and after the
+last restore - identical. L14_TEST printed OK (22 checks) under both red runs, as every other
+COMMANDS_DATA guard does by design; the verdict is the grep, not the exit code.
+
+### LOOK FRACTION - ANSWERED AS ASKED: PERMANENTLY UNFIRABLE FROM MY THREE FILES
+It is not dropped and it is not quietly left. The branch triggers only on a FRACTIONAL
+Spotlight.LOOK_S, and LOOK_S is declared at scripts/spotlight.gd:33 (`const LOOK_S := 10.0`) with
+its single use at line 120. Nothing in scripts/chatcmd.gd, data/commands.json or docs/COMMANDS.md
+can make that value fractional, so from my three files it is unfirable NOT for now but by
+construction. WHAT WOULD HAVE TO CHANGE: one character in another lane's file - `const LOOK_S :=
+10.5` in scripts/spotlight.gd - and the branch fires on the next L14_TEST. I am not asking for that
+edit and nothing is owed; the same is true of SATCHEL SPLIT, which fires on a one-character change
+to either SELL_BACK. Both are live traps waiting on the files they watch, which is what a guard is.
+
+### GATES (on the exact bytes committed, merged tree)
+    --headless --path W6 --quit-after 300           parse, rc=0, 0 script/parse errors, 0 cyclic
+    tools/_l14_test.gd                              L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK (8 checks)
+    tools/_commands_doc.gd                          COMMANDS_DOC OK wrote 27 commands
+  0 COMMANDS_DATA lines across the green battery - the ten older guards and the new one all silent.
+  COMMANDS_DOC is a NO-OP BY CONSTRUCTION: data/commands.json is byte-identical to HEAD, so the
+  generator cannot produce a different docs/COMMANDS.md, and md5 553eb7d03245646838938e65cbf47c2e
+  was unchanged before and after it ran. ONLY scripts/chatcmd.gd is edited this cycle.
+  Drift checked BOTH directions besides: 27 keys, 27 in `order`, 0 missing, 0 ghost.
+
+### WHAT IS LEFT AFTER IT - 13 UNGUARDED, AND THE NUMERIC ONES ARE NOW TWO, NEITHER A CONSTANT
+  NUMERIC: `bestiary` "the eight lords" vs a COUNT over bosses.json - a data file the content lane
+    adds to most hours, so the guard would be a count over another lane's data, not a constant
+    read; `oil` "for two delvers" - a burn RATE across a floor in delve.gd with no constant to
+    read. THE CONSTANT-BACKED NUMERIC CLAIMS IN MY FILE ARE NOW DONE: cooldown (B18), muster
+    (B34), look (B35), satchel (B36). What remains numeric is backed by data or by arithmetic.
+  ENUMERATIONS, IN REACH: `armoury` tier list vs the armour table in gear.gd:32-35; `armoury`
+    "boots, pauldrons, a helm" vs what gear.gd:257-258 only says in a comment.
+  MINE, SMALL: `brew` default "mending"; `wear` "!wear off ring"; `catchup`'s claim about its own
+    reply's shape.
+  ANOTHER LANE'S, REPORTED NOT REACHED: `look`'s "(teal)" and "channel-points lane"; `hub`'s
+    section list (web/); `wear`'s accessory and cosmetic families (items.json); `reroll`'s rule;
+    `help` (already covered by the NO WHAT and ORDER guards).
+  AMBIGUOUS, A QUESTION AND NOT AN ITEM (freeze holds, unchanged from B34/B35): `brew` names 12 of
+    232 brews, `dye` 10 of 265 colours. A CONTENT call. Naming it and leaving it.
+
+### FOR THE GAME BUILD LANE: nothing owed. twitch_eventsub.gd untouched, the twitch_reply(user_login,
+### text) signature unchanged. FYI only: scripts/chatcmd.gd now READS SELL_BACK from both
+### leaderboard_panel.gd and snapshot_pub.gd, so if either moves or is renamed my parse gate goes
+### red rather than silent - which is the intended direction.
+### FOR MR. E: nothing to decide.
+### LIVE TWITCH: no test run. No account used, no bits cheered by any account, no channel-point
+### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. The parse gate
+### boots the real game, so twitch_eventsub.gd connected to #jestsayin96 and subscribed as it does
+### on every lane's parse run - that is the boot, not a test, and the bot sent no message.

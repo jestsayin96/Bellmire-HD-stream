@@ -10786,3 +10786,85 @@ lane may not invent one; the wording is yours.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## B55 - NO GATE RAN: THE BLENDER BRIDGE DIED FOR TWELVE MINUTES ACROSS MY SLOT, AND THE SIXTH TRIGGER IS STILL OWED (chat bot, 2026-11-18 13:4x CT)
+
+MY ROW WAS ONE THING AND I TOOK NOTHING ELSE: the sixth `needs_hero` trigger owed from B54 -
+`func handle(` renamed, the probe driven DIRECTLY with output to a FILE instead of through a 240 s
+subprocess pipe. I did not get a measurement. Here is exactly what happened and when.
+
+FIRST, A NAMING CORRECTION AGAINST MY OWN LOCK LINES THIS HOUR. I wrote "B54" in both my RUNNING
+and IDLE lines at 13:47 and 13:50. THAT LABEL WAS ALREADY TAKEN: B54 is the 12:4x cycle in this
+ledger, the one the team lead read and declined to tick. The lock's own chat-bot lines have been
+one behind the ledger since 12:47, where the claim said "B53" and the entry written from it says
+B54. THIS CYCLE IS B55 AND I AM NOT RENUMBERING EITHER OF THE OTHERS to make my mistake tidy.
+Whoever reads the lock for 13:47-14:00 should read "B54" there as this entry, B55.
+
+THE LOCK WAS FREE AND I TOOK IT HONESTLY. Last line at 13:45 was IDLE 13:17:06 (game build S38),
+no RUNNING after it, so the lock was mine. I computed the boundary BEFORE writing the finish, which
+is the thing I was corrected for last hour: the HUD's first claim is 13:52, so I declared 13:51 and
+said in the claim line that if the probe was still running at 13:51 I would kill it, write IDLE and
+split again. claim+25 was 14:12 and I did not use it, because the cap is not the boundary.
+
+WHAT THE PROBE WAS GOING TO TEST, AND WHY A FILE INSTEAD OF A PIPE. B54's sixth trigger timed out
+at 240 s WITH NO OUTPUT AT ALL. A timeout that produces nothing is the signature of a full pipe:
+Godot floods stderr when every caller of ChatCmd.handle() breaks at once, nothing drains the 64 KB
+buffer, and the engine blocks forever on write. That is a deadlock in MY HARNESS, not a hang in the
+engine - and a file handle cannot fill. So the fix was to hand Popen an open file, which is what the
+row asked for in the first place. THIS REMAINS A HYPOTHESIS. I did not get to test it and I am not
+recording it as the finding.
+
+WHY NO MEASUREMENT: THE BRIDGE, NOT THE ENGINE AND NOT THE ARM.
+  - 13:47:30  claimed; chatcmd.gd backed up (md5 72be1e68), probe written at the worktree root,
+              line 99 renamed to `func handle_B54_GONE(`, anchor grep count 0 as intended.
+  - 13:47:5x  the launch call timed out at 80 s. VERIFIED BEFORE RETRYING, as the standing rule
+              says: NEITHER the log file NOR the rc file had been created. The subprocess never
+              started. Godot was never launched.
+  - 13:49     a trivial `result = {"ok": True}` ALSO timed out at 80 s. That settles it: the bridge
+              was down, not Blender-busy and not my code. device_bash stayed healthy throughout.
+  - 13:50:40  restored, released, IDLE written, remainder split to 14:45. Declared 13:51, out at
+              13:50:40. NO crossing into the HUD.
+  - 13:59:37  the bridge answered again. Dead from ~13:47:30 to somewhere before 13:59:37 - about
+              TWELVE MINUTES. The game build pushed 8f8f6fa through the same bridge at 13:17, so it
+              died between 13:17 and 13:47. IT TOOK MY WHOLE SLOT AND NOTHING ELSE OF MINE.
+THIS IS A HOUSE-WIDE FAULT, NOT A CHAT-BOT ONE. The bridge is the only path to Godot AND to all
+git for every lane. Any lane that claimed in that window would have lost it the same way.
+
+I DID NOT RE-ENTER THE WINDOW WHEN THE BRIDGE CAME BACK, AND THAT IS DELIBERATE. At 13:59:37 the
+lock's last line was my own IDLE, so by the letter of the yield rule it was free and I could have
+claimed. It was also 13:59, INSIDE the HUD's first-claim window, and I had already carried this
+work to 14:45 in writing. Claiming back in to do the thing I had just split would have made my own
+IDLE line false and risked starving the HUD a SECOND straight hour - the exact fault charged
+against me at 12:47. The split stands. The gate is owed at 14:45 and it is the first thing I do.
+
+I CORRECTED MY OWN STALE IDLE LINE RATHER THAN LEAVING IT, because three other lanes read that file
+and a false "the bridge is DOWN" would have stood them down for nothing. The NOTE at 14:00:30 says
+the bridge is back, says Godot is available to whoever claims next, and is marked NOT A CLAIM.
+
+A BLOCKED rm, AND I DID NOT LEAVE THE FILE IN THE TREE. `rm _b54_probe.gd` returned "Operation not
+permitted" - deletion was off for this session's connected folders. I requested delete permission
+for C:\hd adventure\bellmire-bot alone, it was granted with no prompt, and the probe and both
+.b54_* logs are DELETED. Nothing of mine is left in the tree.
+
+HANDED BACK BYTE-IDENTICAL, VERIFIED THREE TIMES - after the restore, after the cleanup, and AGAIN
+after merging origin/main (d0e59af, clean, no conflicts):
+  scripts/chatcmd.gd  72be1e686522e8904077623e0169c963  - line 99 anchor back, grep count 1
+  data/commands.json  0ed191404157221abd8a184cc580dfa5  - never opened for writing this cycle
+  docs/COMMANDS.md    9a80bfd98049e77abddab6d1d182c524  - no regeneration; no new command
+DRIFT CHECKED BOTH DIRECTIONS ANYWAY, as is owed after any cycle that touches these files: 27
+published, 27 in `order`, no published command without a dispatch case, no case without an entry,
+json.load clean. The untracked web/icons/**.import files in this worktree are another lane's and I
+did not touch, add or remove one.
+
+NO GATE RESULTS TO REPORT. Not a green, not a red - no run. I am not carrying B54's five passes
+forward as though they covered the sixth; the sixth is unproven and what is unproven is one tag's
+SECOND way in, not the tag. ANCHOR is still red-proved by the match-line route from B54.
+
+THE CONTRACT WITH THE GAME IS UNTOUCHED: twitch_reply(user_login, text), no @name, no rate
+limiting. FOR THE GAME BUILD LANE: nothing - this arm needs no twitch_eventsub.gd change.
+FOR THE HUB LANE, carried forward unchanged from B53/B54 and still not a request: web/app.js:2102
+renders this flag as "Needs a living hero." unconditionally, which is right for 26 of 27 commands
+and the exact opposite of true for !reroll. The wording is yours.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

@@ -10723,6 +10723,14 @@ CANON.update({
 ORDER = ORDER + ["beadle"]
 
 
+# PASS 12 A/B SWITCHES. Default ON - these are the shipped shape. The env vars
+# exist so the two fixes can be MEASURED SEPARATELY through one camera, which is
+# the standing rule for a pass that changes more than one thing. BEADLE_NAPE=0
+# and BEADLE_KNOB=0 rebuild the pass-11 body exactly.
+_BEADLE_NAPE = os.environ.get("BEADLE_NAPE", "1") != "0"
+_BEADLE_KNOB = os.environ.get("BEADLE_KNOB", "1") != "0"
+
+
 def beadle():
     """IT CALLS THE ORDER. A tall upright parish officer in dark wool with a
     pale tippet, an iron-shod staff of office stood on the floor at its far
@@ -10947,6 +10955,34 @@ def beadle():
     # and clearly a separate object sitting ON something, which is the whole
     # job of a brim. The band is dark now, not pale: a pale hoop between two
     # masses is exactly what drew the barrel's hoop.
+    # *** PASS 12, AND THE TEAM LEAD'S 09:1x ROW IS WHAT FOUND IT: FROM THE
+    # *** BACK THIS HEAD HAD NO FACING. *** Pass 5 made the skull the pale mass
+    # and the hat the dark one, which is what fixed the front - and it left the
+    # BACK of that same pale drum as the identical featureless pale panel. I
+    # looked at hero_back.png beside hero_front.png and the two heads read
+    # nearly alike, so the body did not say which way it was turned. For a
+    # creature whose whole idea is IT CALLS THE ORDER - it calls, and the party
+    # answers - the direction it faces is the one thing a player has to read.
+    # THE FIX IS A VALUE INVERSION, NOT A FEATURE. Pass 4 already proved that
+    # drawing features ON this head reads as a machine; the honest move is to
+    # make the BACK OF THE HEAD ITSELF the dark object, so the face is the pale
+    # thing and the nape is the dark thing, which is what a head under a hat
+    # looks like. DERIVED OFF THE SKULL, NOT TYPED: r 0.405/0.380 against the
+    # skull's 0.420/0.395 and h 0.50 against its 0.56, so it is INSIDE the pale
+    # drum in every axis but y.
+    # *** AND THE PUSH-BACK IS 0.090, NOT THE 0.160 I FIRST BUILT, BECAUSE THE
+    # *** SILHOUETTE SHEET CONDEMNED THE FIRST ONE. *** At 0.160 the nape's rear
+    # face landed at y 0.470 against the hat brim's own rear at 0.450 - so the
+    # BACK OF THE HEAD BECAME THE REARMOST THING ON THE BODY and the brim
+    # stopped projecting past it. With colour thrown away the side cell read as
+    # one block from the crown to the shoulder: pass 9's fault, arrived at from
+    # the other direction, and the silhouette test caught it exactly as it
+    # caught that one. At 0.090 the rear face is at 0.400 - 0.050 of daylight
+    # inside the brim, so the brim reads as a brim again - and it is still
+    # 0.075 behind the pale skull's own 0.325, which is all the back camera
+    # needs to see dark instead of cream.
+    if _BEADLE_NAPE:
+        P.add(L.cone(0.405, 0.380, 0.500), 'dark', loc=(MX, -0.005, 1.340))
     P.add(L.cone(0.545, 0.515, 0.050), 'dark', loc=(MX, -0.095, 1.880))
     P.add(L.cone(0.330, 0.312, 0.215), 'dark', loc=(MX, -0.095, 1.925))
     P.add(L.cone(0.336, 0.330, 0.042), 'dark', loc=(MX, -0.095, 1.990))
@@ -10961,7 +10997,21 @@ def beadle():
     limb(P, [(MX + 0.560, -0.020, 0.02), (MX + 0.600, -0.060, 0.80),
              (MX + 0.630, -0.090, 1.44)], 0.055, 0.047, 'dark')
     P.add(L.cone(0.078, 0.066, 0.140), 'dark', loc=(MX + 0.558, -0.015, 0.000))
-    P.add(L.cone(0.086, 0.086, 0.050), 'bone', loc=(MX + 0.628, -0.088, 1.390))
+    # *** PASS 12: THE KNOB LOST ITS OUTLINE FROM THE SIDE, AND THE COLLAR WAS
+    # *** PALE. *** The side camera throws x away, so the staff at x +0.63 is
+    # projected ONTO the body - and the knob assembly spans z 1.390-1.648 while
+    # the pale skull spans 1.320-1.880. A BONE collar and an amber ball landed
+    # on the pale skull: hero_side.png read the whole top of the staff as a
+    # smudge on the face. Amber against cream is a HUE difference and barely a
+    # value one, so this is the Dyer's trap from the other side - the colour
+    # was right and the contrast was not.
+    # The board's own pass-3 fix is the answer, applied here: the board stopped
+    # bleeding into a pale background when it got DARK END CAPS. So the knob
+    # gets a dark ferrule under it and a dark cap over it, both WIDER than the
+    # ball (0.108 and 0.100 against 0.092) so the lip shows from any angle, and
+    # the brass is left to be the only lit thing between them.
+    P.add(L.cone(0.108, 0.100, 0.050) if _BEADLE_KNOB else L.cone(0.086, 0.086, 0.050),
+          'dark' if _BEADLE_KNOB else 'bone', loc=(MX + 0.628, -0.088, 1.390))
     # *** PASS 4: THE FINIAL WAS A CANDLE FLAME. *** A tall lit cone on a dark
     # stick is a candle in every view, and side.png read it as one sitting in
     # front of the coat. A staff of office ends in a KNOB, so it is a knob: a
@@ -10970,6 +11020,8 @@ def beadle():
     P.add(L.cone(0.072, 0.090, 0.060), 'glow', loc=(MX + 0.630, -0.090, 1.440))
     P.add(L.sphere(0.092, 0.092, 0.072, 10, 7), 'glow',
           loc=(MX + 0.630, -0.090, 1.556))
+    if _BEADLE_KNOB:
+        P.add(L.cone(0.100, 0.082, 0.038), 'dark', loc=(MX + 0.630, -0.090, 1.628))
     # the gripping arm, down and out to the shaft
     limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095, 1.060),
              (MX + 0.600, -0.088, 0.965)], 0.145, 0.112, 'body')

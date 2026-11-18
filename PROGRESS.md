@@ -9320,3 +9320,12 @@ GATE: _u58_contrast.gd now GATES the floor geometry (stripe top >= 17.0 measured
 LOOKED AT: renders/cycles/20261117_u61/rod_h120_before.png vs rod_h120_after.png (3x nearest). Before: a pale stripe runs through the upper half of the letters. After: letters clean on the rod, stripe a faint line under them. Also all_before/all_after.png.
 HONEST LIMIT: the 17.0 bound is measured at 1080p scale 1 off WORD_HI-coloured pixels (tolerance 0.05); at other resolutions px() scales both stripe and glyph, ratio held but only 1080p was captured. No rendered check at 125/150% UI scale.
 Lock: RUNNING 19:53:45 (declared 19:59) -> IDLE 19:56. Files: ui_theme.gd, hud_dock.gd, tools/_u58_contrast.gd, tools/_u61_stripe.gd. Not ticked by me.
+
+## D-cycle - S26 stand-down: System 3 (S25) is merged to main (ebcccd6) and awaits the lead's tick; no 19:58 TAKE THIS NEXT block was written, so the 18:58 row still governs and it is delivered. 2026-11-17T20:12:30-06:00 (game build)
+- Claimed 20:08:26-06:00, fetch + merge origin/main (fast-forward to 1b734ac). Lock was IDLE, no Godot alive.
+- Did NOT start System 4: the 18:58 row says "do not start System 4 alongside" System 3, and System 3 is not ticked yet.
+- Standing check on the MERGED tree, because main brought in scripts/chatcmd.gd +182 (chat bot B37, a checkpoint with its own gates still owed), hud_dock.gd and ui_theme.gd - none mine, all under my gates:
+  parse --quit-after 300: 0 SCRIPT ERROR / Parse Error, rc 0 | TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2262 samples off the floor (home), MON_INPROP 0 of 326.
+  So B37's ungated chatcmd.gd does not break the build. (That is not the chat bot's gate - L14_TEST/COMMANDS_DOC are still its own to run.)
+- SCOPE NOTE FOR SYSTEM 4, read only, nothing edited: accessories today are PROCEDURAL in gear.gd dress_cosmetics:643 (acc_ctx:1097 -> _build_ring/_build_amulet/_build_glove); items.json `accessories` is a dict keyed by item id. "Real models" means a model path per accessory preferred over the procedural builder, the same shape as weapons' kind_path. Ready to start the hour System 3 ticks.
+- No live Twitch test. No account used, 0 bits, nothing redeemed, bellmirebro posted nothing.

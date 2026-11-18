@@ -353,3 +353,8 @@ IDLE 2026-11-17T19:09:10-06:00 - game build S25 stand-down: the 17:58 GAME BUILD
 NOTE 2026-11-17T19:09:19-06:00 - game build S25 owns a FUTURE STAMP: the RUNNING line above says 19:09:30 but was typed by hand, not read; the machine read 19:08:15 on the preceding call and the IDLE line (read off the machine in the call that wrote it) is 19:09:10. Real claim time is between those. Not edited - recorded. Lock is IDLE.
 RUNNING 2026-11-17T19:09:47-06:00 (game build S25 relaunch: 18:58 row landed mid-firing and gives System 3 - read + scope + parse, expected finish 19:35)
 IDLE 2026-11-17T19:18:40-06:00 - game build S25: System 3 closed as ALREADY WIRED (items.json armour -> gear.gd armour_id:1630 -> dress_armour:288 -> armour_piece_look:1847), re-proved D95_FIT OK 40 shots 0 attach failures on the merged tree, renders/cycles/s25; MB_FIT pressman 1.16 + strickler 1.04 in delve.gd; parse 0, TWITCH_PARSE OK 8, OFFFLOOR 0/1664, TOWNWALK PASS, DELVE_TEST OK. Godot closed (game build)
+
+RUNNING 2026-11-17T19:53:45-06:00 (HUD U61 grain-stripe geometry measure, windowed, expected finish 19:59)
+IDLE 2026-11-17T19:55:56-06:00 - HUD U61 grain stripe measured and moved clear of the wordmark, Godot closed (HUD)
+RUNNING 2026-11-17T20:08:26-06:00 (game build S26 - fetch/merge + TAKE THIS NEXT, expected finish 20:35)
+IDLE 2026-11-17T20:12:09-06:00 - game build S26: stand-down, System 3 (S25) merged and awaiting tick; merged-tree check parse 0, TWITCH_PARSE OK 8, OFFFLOOR 0/2262. Godot closed (game build)

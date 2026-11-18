@@ -704,8 +704,24 @@ static var _cmds: Dictionary = {}
 ## writes a header and prints "wrote 0 commands", and a reader skimming a battery sees a count
 ## rather than a failure. That is COORDINATION 15's fault at its source - a pass nothing earned.
 ## It now says so out loud, three ways, so a battery turns RED instead of going blind.
+## B48: THE COUNTED ARM, AND WHY A LOUD GUARD STILL NEEDED ONE. The ten `wear` sites below
+## report through push_error + printerr. tools/_l14_test.gd moves its _fail ONLY in the
+## checked() helper at :11, so a push_error moves NEITHER the exit code NOR the printed
+## verdict: B47 fired all ten off mutated data and the gate still printed "L14_TEST OK" on
+## eight of them - on the exact live defect B46 found, a published price span 100 gold under
+## what the counter charges. push_error CANNOT set an exit status. A COUNT a harness can read
+## can. So every wear site now REGISTERS ITS TAG here as well as going loud, and any gate can
+## ask ChatCmd.guard_faults() and fail on a non-empty answer. The loudness is unchanged and no
+## published word, price or list is restated on this side - only the tag of the arm that fired.
+static var _guard_faults: Array[String] = []
+## The tags of every guard arm that fired on the last load of data/commands.json, in the order
+## they fired. Empty is the healthy reading, the same convention as a battery grepping for zero
+## COMMANDS_DATA lines.
+static func guard_faults() -> Array[String]:
+    return _guard_faults.duplicate()
 static func commands() -> Dictionary:
     if _cmds.is_empty():
+        _guard_faults.clear()
         var f := FileAccess.open("res://data/commands.json", FileAccess.READ)
         if f == null:
             push_error("COMMANDS_DATA MISSING: res://data/commands.json would not open (err %d)" % FileAccess.get_open_error())
@@ -1624,16 +1640,20 @@ static func commands() -> Dictionary:
         if we_acc.is_empty() or we_cos.is_empty():
             # the dead key IS the finding, the same shape as the dye table: there is no span to
             # compare against, and a !wear that sells nothing is the bigger fault.
+            _guard_faults.append("WEAR AUTHORITY")
             push_error("COMMANDS_DATA WEAR AUTHORITY: data/items.json carries %d accessory row(s) and %d cosmetic row(s), so the shop `wear` publishes a %s price span for sells nothing from one of its two tables" % [we_acc.size(), we_cos.size(), we_cost])
             printerr("COMMANDS_DATA WEAR AUTHORITY - accessories %d, cosmetics %d" % [we_acc.size(), we_cos.size()])
         elif we_low < 0:
+            _guard_faults.append("WEAR SPAN ANCHOR")
             push_error("COMMANDS_DATA WEAR SPAN ANCHOR: `wear`.cost no longer carries a \"<low>-<high> gold\" span in words this guard can read - the cheapest and dearest thing the shop sells can no longer be checked against data/items.json, and the span is what a viewer budgets from")
             printerr("COMMANDS_DATA WEAR SPAN ANCHOR - `wear`.cost lost its \"<low>-<high> gold\" span; the published price range is now unchecked")
         else:
             if we_low != we_min:
+                _guard_faults.append("WEAR SPAN LOW")
                 push_error("COMMANDS_DATA WEAR SPAN LOW: `wear`.cost publishes %d gold as the cheapest thing the shop sells and the cheapest row in data/items.json costs %d - docs/COMMANDS.md tells a viewer the floor of the counter and it is the wrong floor" % [we_low, we_min])
                 printerr("COMMANDS_DATA WEAR SPAN LOW - published %d, cheapest row %d" % [we_low, we_min])
             if we_high != we_max:
+                _guard_faults.append("WEAR SPAN HIGH")
                 push_error("COMMANDS_DATA WEAR SPAN HIGH: `wear`.cost publishes %d gold as the dearest thing the shop sells and %d row(s) in data/items.json cost more, up to %d - a viewer who saves the published top and walks to the counter is %d gold short" % [we_high, _wear_over(we_acc, we_cos, we_high), we_max, we_max - we_high])
                 printerr("COMMANDS_DATA WEAR SPAN HIGH - published %d, dearest row %d" % [we_high, we_max])
         # THE SLOTS AND THE KINDS. Two lists, read out of the sentence, each checked BOTH ways.
@@ -1648,6 +1668,7 @@ static func commands() -> Dictionary:
             var we_src: String = String(we_pair2[4])
             var we_said: Array[String] = _wear_list(we_what, we_head)
             if we_said.is_empty():
+                _guard_faults.append("WEAR %s ANCHOR" % we_tag)
                 push_error("COMMANDS_DATA WEAR %s ANCHOR: `wear`.what no longer carries its \"%s...)\" list in words this guard can read - the %ss docs/COMMANDS.md invites a viewer to type can no longer be checked against %s, so a dead one would reach chat silently" % [we_tag, we_head, we_word, we_src])
                 printerr("COMMANDS_DATA WEAR %s ANCHOR - `wear`.what lost its \"%s\" list; those names are now unchecked" % [we_tag, we_head])
                 continue
@@ -1664,9 +1685,11 @@ static func commands() -> Dictionary:
                 if not we_hit.has(we_r):
                     we_miss.append(we_r)
             if not we_ghost.is_empty():
+                _guard_faults.append("WEAR %s GHOST" % we_tag)
                 push_error("COMMANDS_DATA WEAR %s GHOST: `wear`.what publishes %d %s(s) nothing in %s carries, so docs/COMMANDS.md invites a refusal a viewer pays a command to discover - the real ones are %s and none of these is among them: %s" % [we_tag, we_ghost.size(), we_word, we_src, we_real, we_ghost])
                 printerr("COMMANDS_DATA WEAR %s GHOST - %d published %s(s) nothing answers to: %s" % [we_tag, we_ghost.size(), we_word, we_ghost])
             if not we_miss.is_empty():
+                _guard_faults.append("WEAR %s MISSING" % we_tag)
                 push_error("COMMANDS_DATA WEAR %s MISSING: %s carries %d %s(s) `wear`.what never names - %s - so a whole slot of gear is for sale and nothing tells a viewer it exists, and `!wear off <slot>` takes it off a word they were never given" % [we_tag, we_src, we_miss.size(), we_word, we_miss])
                 printerr("COMMANDS_DATA WEAR %s MISSING - %d unpublished %s(s): %s" % [we_tag, we_miss.size(), we_word, we_miss])
         _cmds = parsed

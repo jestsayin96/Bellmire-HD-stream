@@ -1245,6 +1245,53 @@ static func commands() -> Dictionary:
         if not b_ghost.is_empty():
             push_error("COMMANDS_DATA BREW GHOST: `brew`.what names %d brew(s) the apothecary does not accept, so the doc invites a refusal: %s" % [b_ghost.size(), b_ghost])
             printerr("COMMANDS_DATA BREW GHOST - %d unaccepted name(s): %s" % [b_ghost.size(), b_ghost])
+        # B40: THE THREE FLAT PRICES BESIDE THE ONE B39 GUARDED.
+        # B39 closed the brew's price: `brew`.cost publishes a number and Roster.POTION_COST is
+        # what buy_potion actually CHARGES, and the two agreed by coincidence until the guard
+        # made them agree by construction. POTION_COST is roster.gd:210. Lines 214, 215 and 216
+        # of the same file are OIL_COST, REROLL_COST and RESPEC_COST - three more flat prices,
+        # each PUBLISHED BY ME in data/commands.json and each charged from a single constant,
+        # and not one of them was checked. I found them by measurement, not by feel: I walked
+        # every number any `what` or `cost` string in my own file states and asked what reads it.
+        # These three are the only ones left whose authority is ONE exact integer in code.
+        # WHY IT MATTERS AND WHY IT IS SILENT: a viewer reads "200 gold" in docs/COMMANDS.md,
+        # types !respec, and is charged RESPEC_COST whatever my doc says. Nothing in the house
+        # compares the two. The cost strings are MINE, so the lie would be mine to publish, and
+        # the number that gets taken off a hero is the one a viewer can count in their purse.
+        # WHAT I AM NOT CLAIMING: `dye`.cost publishes 25 and the dyer charges
+        # items().get("dye_cost", 25) - items.json (content's) with a roster.gd fallback, so its
+        # authority is a DATA key and not one constant. All three readings are 25 today. It is a
+        # different shape and I am leaving it named rather than guarded, the way B34 left the
+        # claims whose authority it could not compare exactly. `wear`.cost publishes a RANGE
+        # (30-420) and `forge`/`armoury` publish tier LISTS that already carry their own guards.
+        for pr in [["oil", Roster.OIL_COST, "Roster.OIL_COST", "a flask of lamp oil (buy_oil)"],
+                   ["reroll", Roster.REROLL_COST, "Roster.REROLL_COST", "a living hero's re-throw (reroll)"],
+                   ["respec", Roster.RESPEC_COST, "Roster.RESPEC_COST", "a change of calling (respec)"]]:
+            var p_key: String = String(pr[0])
+            var p_real: int = int(pr[1])
+            var p_name: String = String(pr[2])
+            var p_what: String = String(pr[3])
+            var p_cost: String = String(((cmd_d.get(p_key, {}) as Dictionary)).get("cost", ""))
+            # the number this file PUBLISHES: the digits that stand immediately before "gold".
+            # `reroll` prices two cases in one string ("free when dead; 120 gold alive") and the
+            # guarded one is the paid case, which is the one carrying the number.
+            var p_said: int = -1
+            var p_dig := ""
+            for p_i in p_cost.length():
+                var p_c := p_cost[p_i]
+                if p_c >= "0" and p_c <= "9":
+                    p_dig += p_c
+                else:
+                    if p_dig != "" and p_cost.substr(p_i).begins_with(" gold"):
+                        p_said = int(p_dig)
+                        break
+                    p_dig = ""
+            if p_said < 0:
+                push_error("COMMANDS_DATA PRICE ANCHOR: `%s`.cost no longer carries a number before \"gold\" - the published price of %s can no longer be checked against %s (%d)" % [p_key, p_what, p_name, p_real])
+                printerr("COMMANDS_DATA PRICE ANCHOR - `%s`.cost lost its gold number; that price is now unchecked" % p_key)
+            elif p_said != p_real:
+                push_error("COMMANDS_DATA PRICE: `%s`.cost publishes %d gold for %s and %s charges %d - docs/COMMANDS.md prices it at money the town does not take, and the viewer finds out by paying" % [p_key, p_said, p_what, p_name, p_real])
+                printerr("COMMANDS_DATA PRICE - `%s` published %d, charged %d" % [p_key, p_said, p_real])
         _cmds = parsed
     return _cmds
 

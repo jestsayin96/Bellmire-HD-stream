@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-18 00:58 CT by the team lead (clock off the machine: 2026-11-18T01:2x-06:00).
+The 00:58 block immediately below SUPERSEDES the 23:58 block and every row under it.
 Updated 2026-11-17 23:58 CT by the team lead (clock off the machine: 2026-11-18T00:02:52-06:00 -
 THE DATE ROLLED OVER MID-RUN. The firing is the 23:58 CT one; the clock now reads 18 Nov).
 The 23:58 block immediately below SUPERSEDES the 22:58 block and every row under it.
@@ -840,6 +842,412 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-18 00:58 CT. SIX LANES MERGED. FIVE TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE
+*** 23:58 BLOCK, THE 22:58 BLOCK AND THE 21:05 ADDENDUM.
+***
+*** MR. E WAS LIVE DURING THIS RUN (~01:00 CT) and asked whether the yield rule
+*** should now go into the six lane prompts. I SAID NOT YET AND GAVE THE REASON:
+*** the rule was never tested this hour - nobody claimed over a live claim - so
+*** the signal I named last hour did not arrive. I DID find a hole in the rule,
+*** it is mine, and it is fixed below. The prompts were NOT touched.
+================================================================================
+
+*** MERGED: six merges into main (main 756697c), no force, nothing rewritten, no
+*** branch deleted. THREE CONFLICTS, all in root PROGRESS.md (content, hub,
+*** chatbot - three lanes appending at the same end-of-file). Resolved by state
+*** machine, BOTH SIDES KEPT, no cycle renumbered. RESIDUAL MARKERS IN THE FILE
+*** THAT CONFLICTED (root PROGRESS.md, not docs/PROGRESS.md): ZERO, counted.
+*** AND I PROVED NOTHING WAS DROPPED RATHER THAN EYEBALLING IT: every non-blank
+*** line of PROGRESS.md on origin/chatbot, origin/hub and origin/content is
+*** present in main's copy - set difference, 0 missing on all three.
+
+*** MY OWN FAULT FIRST, AND A LANE CAUGHT ME ***
+
+  AT 23:58 I WROTE THAT app.js:252 AND :298 ARE "both template literals with NO
+  interpolation at all". THAT IS FALSE AND THE HUB LANE CORRECTED IT THIS HOUR.
+  The status line (app.js:255) DOES interpolate - `${esc(lastError)}` and
+  `${esc(age)}` - and only renderNothing (app.js:301) is pure literals. I read
+  the code myself this hour instead of re-reading my own sentence: esc() at
+  app.js:96 escapes & < > " and ', and lastError is assigned only page-authored
+  strings (app.js:275, :289), never snapshot data. SO THE CONCLUSION I DREW WAS
+  RIGHT AND THE REASON I GAVE FOR IT WAS WRONG, which is the more dangerous of
+  the two because the next seat inherits the reason. The lane's new comment is
+  more accurate than mine was. This is the second hour running that a lane has
+  corrected this seat by measurement, and both times the lane was right.
+
+*** WHAT I TICKED, AND WHAT I MEASURED MYSELF RATHER THAN TAKING ***
+
+  [x] GAME BUILD - THE L31 REMAINDER IS CLOSED. TICKED 2026-11-18 01:1x CT
+      (laptop 23c9951, main 756697c). L31 IS NOW WHOLE: D61.1 landed the damage
+      numbers, this lands the status-effect icons.
+      I DID NOT TAKE THE VERDICT LINE. I opened renders/cycles/l31/l31_icons_crop.png
+      and COUNTED: fifteen badges across three heroes, five to a row - poisoned,
+      burning, slowed, blinded, frightened / emberward, hearthwarm, hasted,
+      ogre-strong, unseen / heroic, owl-eyed, warded, mending, scar-touched.
+      Fifteen DISTINCT glyphs, and the RED RIM is on exactly the five bad states
+      in row one. That is the lane's claim and it is what the picture shows.
+      THE LANE'S HONEST LIMIT IS REAL AND I CONFIRMED IT BY EYE: row two runs to
+      within ~15 px of the frame edge. The clip it warns about is one state-word
+      away. That is its next row - see below.
+      new scripts/status_icon.gd takes the state's colour from data/potions.json
+      `states` and restates nothing; an unknown key still draws a badge plus its
+      first letter rather than a blank. delve.gd statuses() widened to
+      [word, colour, key, bad] with [0]/[1] callers unchanged.
+      GATES: parse 0 errors, OFFFLOOR OK 0/2193, TWITCH_PARSE OK 8, TOWNWALK
+      PASS 0/16137, DELVE_TEST OK 9001 frames 0 SCRIPT ERROR.
+      THE INSTRUMENT FAULT IT FOUND IN ITSELF IS WORTH THE LINE: its first run
+      read icons=0 because the director's four-up hides the party frames. It
+      mounted the REAL PartyFrames._row on its own layer rather than trusting a
+      zero. A lane that distrusts its own zero is doing the job.
+
+  [x] CHAT BOT - THE FLOAT/INT AUDIT, AND TWO MORE NUMBERS GUARDED. TICKED
+      (chatbot d7bf2f6). THE ROW ASKED FOR AN AUDIT AND THE AUDIT CAME BACK
+      "NOTHING IS BROKEN" - WHICH IS THE ANSWER I WANTED AND THE ONE THAT IS
+      HARDEST TO BE HONEST ABOUT.
+      All SEVEN JSON-number reads in chatcmd.gd are coerced through int()/float()
+      and none compares a raw Variant by identity, so the trap B41 found bites no
+      shipped guard. I CHECKED THE PREMISE RATHER THAN THE CONCLUSION: ask_d is a
+      real dictionary read at chatcmd.gd:689, and ask_topic() really does use
+      `int(a.get("max_len", 140))` at :1464 and
+      `int(float(ask().get("gap_s", 45.0)) * 1000.0)` at :1492 - exactly the two
+      silent fallbacks the new guard names. data/commands.json carries gap_s 45.0
+      and max_len 140, so both arms sit on live numbers.
+      THE TYPE ARM IS WRITTEN FOR GODOT'S JSON AND THE LANE SAID SO: the parser
+      hands back a FLOAT for a plain 140, so accepting TYPE_FLOAT is correct and
+      an int-only check would have been the defect. The MAX_LEN FRACTION arm is
+      the one I would not have thought of - 140.9 silently enforces 140.
+      GATES GREEN IN 24.2 s: parse rc=0, L14_TEST OK 22, TWITCH_PARSE OK 8,
+      COMMANDS_DOC OK 27 no-op with COMMANDS.md md5 unchanged, 0 COMMANDS_DATA on
+      real data. ALL THREE ARMS RED-PROVED plus a NEGATIVE proof (max_len 140.0
+      stays silent - a guard that fires on a correct value is worse than none),
+      data restored byte-identical 0908b4db after every one.
+
+  [x] HUB - THE FALSE SECURITY SENTENCE IS CORRECTED. TICKED (hub 3532c60).
+      I FOUND THIS CLAIM AT 23:58 AND THE LANE FIXED IT THIS HOUR, AND IN FIXING
+      IT, IT CORRECTED ME TOO. See MY OWN FAULT above.
+      THE DIFF IS COMMENTS ONLY and I proved it rather than accepting
+      "code unchanged": the whole web/ diff is 9 comment lines in app.js and 3 in
+      index.html. Not one statement changed. SECURITY RE-GREPPED BY ME because
+      web/ changed and that check is always owed: innerHTML at app.js:255 and
+      :301 only, both page-owned; :255 interpolates lastError and age through
+      esc(); zero outerHTML / insertAdjacentHTML / document.write / eval /
+      new Function in code.
+      WHAT I DID NOT DO: no publish and no publish verification. The lane did not
+      claim READY TO PUBLISH, so that gate is not owed and I did not run it.
+
+  [x] CONTENT - C-102, THE WORN WORDS ON PIECES VIEWERS PAID FOR. TICKED
+      (content b257697). THIRD STAND-DOWN IN A ROW THAT FOUND A REAL DEFECT IN
+      SHIPPED WORDS RATHER THAN PADDING, AND THE SURFACE WAS ONE NOBODY HAD
+      AUDITED.
+      THREE PIECES STATE A SECOND-HAND CONDITION ON A RECEIPT THAT SAYS GOOD:
+      mender_wraps (LEGENDARY) "Stained past washing"; pilgrim_cloak (rare)
+      "patched"; wall_cloak (rare) "Wind-faded".
+      AND THE NEGATIVE HALF IS THE HALF I TRUST IT FOR: every other "worn" in
+      rare-and-up is provenance or wearing-as-use, not condition, and all the
+      cosmetic condition words sit on pieces of 105 gold or less, where make-do
+      is correct. It also re-checked all 254 accessory rarities against the
+      per-slot banding of _note_c61 and found them clean - and restated that a
+      reader applying _note_c58's single cost bands would mislabel 122 pieces.
+      ADDITIVE ONLY, VERIFIED BY ME ON THE DIFF: data/items.json gains exactly
+      one key, `_note_c102`. No rarity, cost, stat or existing line touched.
+      THE SWAPS ARE NOT MINE AND ARE NOT SWAPPED. Routed up with C-100 and C-101.
+
+  [x] ART - THE GREENER'S CREAM BOARD HAS TWO CAUSES AND BOTH ARE FIXED.
+      TICKED (art a50d4bf). THE ROW SAID "the remedy is in the material or the
+      paint, not in the grade - START THERE", AND THAT IS EXACTLY WHERE IT WENT.
+      CAUSE 1, AND IT IS A PHYSICS ERROR, NOT A TASTE ONE: COPPER_SHEEN was
+      (1.000, 0.880, 0.820), authored saturation 0.180 - a DIELECTRIC's
+      highlight, which runs to white. Copper is a conductor; its highlight runs
+      to its own tint. The new value contains NO NUMBER OF THE LANE'S OWN - it is
+      _metal_read.CTRL['copper'], the measured Cu reflectance this repo already
+      uses as its physics control, normalised to peak 1.0.
+      CAUSE 2, AND THE PICTURE FOUND IT WHERE NO NUMBER IN THE TABLE ASKED: the
+      band was still a hard-edged vertical stripe because _leaf's 4x5 grid has
+      only FIVE COLUMNS to carry the whole falloff. 8x10 ships. THE METRIC
+      SATURATES THERE (14x18 buys 0.0004 for 2850 verts against 990) AND THAT
+      SATURATION IS THE EVIDENCE THE CAUSE WAS SAMPLING.
+      THE SILHOUETTE IS ASSERTED UNMOVED, NOT ASSUMED - world bounds identical
+      across all three arms to 1e-6.
+      SIDE VIEW: body_sat 0.3091 -> 0.4930, 83% of the paint's cost recovered
+      against an unpainted ceiling of 0.5276; hue retention 0.404 -> 0.644.
+      TWO INSTRUMENTS BUILT SEPARATELY AGREE TO THE DECIMAL (side 0.4930 both).
+      THE BACK VIEW GIVES BACK 0.0027 OF body_sat AND THE LANE WROTE THAT DOWN
+      RATHER THAN LEAVING IT OUT.
+      *** I LOOKED AT THE SHIPPED BODY MYSELF AND I AGREE WITH ITS REFUSAL. ***
+      renders/art/minibosses/greener/side.png: the rack still reads as pale tan
+      planks, the band's lower boundary is still ragged where the sheets occlude
+      one another, the chest slab is a flat grey plate, the creature reads as a
+      dark L with the head all but lost against the body, and the ember bed is
+      the brightest thing in the frame and pulls the eye straight off the
+      creature. EVERY ONE OF THE LANE'S SEVEN OBSERVATIONS IS WHAT I SEE.
+      SO THE ROW TICKS AND THE FAULT DOES NOT. _metal_read still returns
+      PAINTED - NOT EARNED AS REFLECTION and the lane says plainly "a viewer
+      would still call those sheets timber". A lane that refuses its own pass
+      is worth more than one that claims it. See FOR THE SUPERVISOR 1.
+
+*** WHAT I DELIBERATELY DID NOT TICK ***
+
+  [ ] HUD - NOTHING SHIPPED AND NOTHING WAS WRITTEN UP. origin/hud-ui carries no
+      commit after 82fa111 (U65, last hour) and its worktree has no .gd change.
+      I AM NOT CHARGING THIS TO THE LANE AND I AM NOT CALLING IT A STAND-DOWN
+      EITHER, BECAUSE I CANNOT YET TELL THE TWO APART. See LOCK DISCIPLINE.
+  [ ] SYSTEM 2 AS A WHOLE. Engine half closed and written down; the HUD's
+      rarity-hue half has now been its headline row for THREE hours and has not
+      been started. Mr. E's own item. Not ticked, not re-assigned.
+  [ ] THE GREENER READING AS TIMBER. Two causes found and fixed, measured,
+      red-guarded - and the fault is improved, not cured. The paint route is now
+      EXHAUSTED: grade killed, colour corrected to measured Cu, tessellation
+      taken to saturation. What is left is FORM. FOR THE SUPERVISOR 1.
+  [ ] THE C-100, C-101 AND C-102 SWAPS. Proposed, not swapped, not mine.
+  [ ] THE DYE AUTHORITY ARM. Still unproven; proving it needs content's file.
+  [ ] THE HUB REPUBLISH. Not mine, not Mr. E's. FOR THE SUPERVISOR 4.
+
+*** THE LOCK, AND THE HOLE I PUT IN MY OWN RULE LAST HOUR ***
+
+  WHAT HAPPENED, off docs/RUN_LOCK.txt on `laptop`:
+    RUNNING 00:08:40 game build (L31, cap 00:33:40, declared 00:33) -> IDLE 00:18:56
+    RUNNING 00:50:15 chat bot  (B42, declared finish 01:05, CROSSING DECLARED)
+    IDLE    00:53:06 chat bot released - TWELVE MINUTES EARLY
+    ...and no HUD line at all.
+  NO LANE BROKE A RULE AND THERE WAS NO SECOND COLLISION. The chat bot claimed
+  when the line above it was IDLE, which is legal under the old rule and the new
+  one, and it declared its crossing on its face. Nobody claimed over a live
+  claim. THE YIELD RULE WAS NEVER TESTED, because the situation that tests it did
+  not arise - and I said exactly that to Mr. E when he asked.
+
+  *** BUT I MADE THE DECLARED FINISH LOAD-BEARING AND NEVER SAID AN EARLY
+  *** RELEASE FREES THE WINDOW. THAT IS A HOLE AND IT IS MINE, NOT A LANE'S. ***
+  A lane that declares 01:05 and releases at 00:53:06 leaves twelve minutes in
+  which the lock is FREE but the plan, as I wrote it, still reads as occupied.
+  The HUD's whole window sits inside those twelve minutes.
+
+  THE AMENDMENT, IN FORCE FROM NOW, EVERY LANE - IT ADDS ONE SENTENCE AND
+  REMOVES NOTHING FROM THE 23:58 YIELD RULE:
+    A `RUNNING` LINE IS LIVE ONLY UNTIL THE NEXT `IDLE` LINE FROM THE SAME LANE.
+    AN `IDLE` LINE RELEASES THE WINDOW IMMEDIATELY, WHATEVER FINISH THE `RUNNING`
+    LINE DECLARED. You yield to a live hold, never to a spent declaration.
+    READ THE LAST LINE: if it is `IDLE`, the lock is free and you may claim, even
+    if the `RUNNING` line above it declared a finish an hour from now.
+    THE REST OF THE 23:58 RULE STANDS UNCHANGED: do not claim over a `RUNNING`
+    line whose declared finish has not passed; a `RUNNING` line more than ten
+    minutes past its declared finish is stale and you check for a live Godot
+    process before clearing it; a stand-down written up IS the delivery.
+  AND THE OTHER HALF OF THE FIX IS ON THE LANE THAT HOLDS: DECLARE A FINISH YOU
+  MEAN. The chat bot has now declared 01:05 and released at 00:53, and declared
+  23:59 and released at 23:55:40. Over-declaring is not free any more - it is a
+  reservation against somebody else's window. Declare the finish you expect, not
+  the cap.
+
+  I DID NOT WRITE THIS INTO THE SIX LANE PROMPTS. A firing cannot, and Mr. E was
+  live and left the choice to me; I told him the evidence for the prompt copy had
+  not arrived and that I would fix the hole here instead. THE PLAN IS WHAT THE
+  LANES OBEY. If two lanes collide WITH this amendment carried here, that is the
+  signal, and it should be done then with the evidence in hand.
+
+  CLEAN-HOUR COUNT: ONE. It reset at 00:0x on the double claim; this hour added
+  no overrun (game build 10 min 16 s against 25, chat bot 2 min 51 s), no stale
+  lock cleared, no future stamp, and no two lanes holding at once. I AM NOT
+  COUNTING THE HUD'S SILENT HOUR AS A CLEAN ONE AND I AM NOT COUNTING IT AS A
+  STARVED LANE EITHER, because I have not proved which it was.
+  THE GAME BUILD'S CAP DISCIPLINE IMPROVED AND IT SAID SO ITSELF: it wrote
+  "expected finish 00:35" against a 00:33:40 cap, CAUGHT IT WITHIN A MINUTE, and
+  corrected the line to 00:33 before any run started. That is the sixth over-cap
+  declaration and the first one fixed before it could count. The fix it proposed
+  for itself - compute claim+25 first, then write the finish - is what it did.
+
+*** THE DEAD-DATA AUDIT, MEASURED 2026-11-18 01:1x CT ON THE MERGED TREE, off
+*** 2,134,072 CHARS OF SCRIPT (scripts/*.gd + web/*.js, 48 FILES, 119 TOP-LEVEL
+*** KEYS). UNREAD LIVE DATA KEYS: STILL ZERO. ***
+  - 29 keys return zero literal hits and EVERY ONE IS ACCOUNTED FOR: TWO
+    runtime-built _alt pools (lord_intros_alt, unique_intros_alt - READ via
+    base + "_alt" at delve.gd intro_pool, DO NOT WIRE); THREE declared dead
+    (phase2_words, phase2_words_alt, town_levels_for_the_desktop); NINE
+    prose/spec keys (biomes `technique`; bosses `boss_floors`; origins
+    `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`;
+    strains `_gating`; world `canon_silences`); and FIFTEEN content `_note_`
+    cycle notes. 2+3+9+15 = 29.
+  - THE WHOLE MOVE 28 -> 29, 118 -> 119 KEYS AND 47 -> 48 FILES IS BY DESIGN:
+    `_note_c102` is content's note, and the 48th file is scripts/status_icon.gd,
+    which L31 added this hour. COMPARE THE ACCOUNTED-FOR CLASSES, NOT THE RAW
+    NUMBER. NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP WRITING
+    THEM.
+
+  *** AND THE BASELINE'S "UNREFERENCED ASSET DIRECTORIES: ZERO" IS WRONG. IT HAS
+  *** BEEN WRONG FOR TWO DAYS AND I FOUND IT WITH MY OWN WALK THIS HOUR. ***
+  TWO DIRECTORIES, ELEVEN FILES, ~2.7 MB, referenced by NOTHING in scripts/ or
+  web/:
+    assets/characters/bellmire/           - e3po_kit.glb
+    assets/characters/bellmire/showcase/  - ten class kits (barbarian, cleric,
+      duelist, knight, mage, paladin, ranger, rogue, sage, warden)
+  I APPLIED BOTH GUARDS BEFORE SAYING SO, because this instrument has been wrong
+  in both directions and I am the seat it bit last time:
+    GUARD 1 - I LOOKED AT THE LINES. The only `showcase` hits in scripts/ are
+    FOUR COMMENTS in gear.gd (:1328, :1342, :1346, :1379) about tools/art/
+    showcase.py. Prose, not a read. That is almost certainly what cleared this
+    directory for previous sweeps.
+    GUARD 2 - I SEARCHED FOR THE BEHAVIOUR, NOT THE NAME. Nothing builds that
+    path at runtime. The LIVE hero body path is roster.gd:39
+    ADV2 = "../../../../assets/characters/kaykit_adv2/hero_" - a DIFFERENT
+    directory. The only `res://assets/characters` in the tree is tools/
+    _bake_adv2.gd, which is test code and is not the game.
+  THIS IS A FINDING, NOT AN ITEM, AND NO LANE IS TO PULL IT. The likeliest
+  reading is that these are ART'S OWN showcase working bodies, filed under
+  assets/ where the game looks instead of under renders/ where evidence lives -
+  in which case the answer is a move, not a wiring, and it is art's to confirm.
+  I am not writing an item on a guess during a freeze. ART: one line next time
+  you are in that tree, confirm or deny. If they are working bodies, say so and
+  they stop being reported.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  THE CLIP YOU NAMED IN YOUR OWN HONEST LIMITS, THIS HOUR.
+                   You wrote it yourself: "a five-state row is ~690 px wide and
+                   the frame's W may clip the last word in the live column". I
+                   looked at your crop and row two runs to within ~15 px of the
+                   frame edge - ONE state-word from the fault. Auditing your own
+                   just-shipped work for a defect you have just learned about is
+                   explicitly NOT new work, so this is clean under the freeze.
+                   DONE: a party frame with FIVE states on one hero at 1080p with
+                   no word clipped - wrap, elide to the glyph, or widen; your
+                   call, you own the file. A VERDICT LINE AND A PICTURE, and if
+                   you elide, the glyph must still carry the state (your unknown-
+                   key fallback already proves you think that way).
+                   DO NOT start a Phase 2 system this hour. Systems 3 and 4 are
+                   closed as already-wired and System 2's engine half is closed;
+                   its HUD half is the HUD's and is not yours to take.
+
+  HUD          ->  *** SYSTEM 2'S RARITY-HUE HALF. THIRD HOUR. IT IS THE MOST
+                   *** VALUABLE OPEN ITEM IN THE HOUSE AND IT IS YOURS. ***
+                   Mr. E's own System 2. The engine half is closed and written
+                   down; the supervisor confirmed at 11:40 CT that the rarity-hue
+                   work is the HUD half. Art's canonical hue table is the source
+                   (U55 option (a), Mr. E's 15:47 ruling) - READ IT, do not
+                   invent a ladder and do not restate its numbers.
+                   AND FIRST, ONE LINE I NEED MORE THAN THE WORK: SAY WHAT
+                   HAPPENED AT 00:52. You shipped nothing and wrote nothing, and
+                   I will not guess between "yielded to the chat bot's declared
+                   01:05 and did not write it up" and "did not fire". If you
+                   yielded, the rule now says an IDLE line frees the window
+                   immediately - the lock was free from 00:53:06. If something
+                   else went wrong, say that instead; neither answer is held
+                   against you and a silent hour is the only bad outcome.
+                   A STAND-DOWN WRITTEN UP IS THE DELIVERY. A silent one is not.
+
+  ART          ->  THE GREENER'S FORM, AND ONLY AFTER THE SUPERVISOR CALLS IT.
+                   You have exhausted the paint route honestly and said so, and I
+                   agree with your refusal - I looked at side.png and I see every
+                   one of your seven. Items 3-7 are FORM, and reshaping a body is
+                   a bigger call than a row, so it is routed up (FOR THE
+                   SUPERVISOR 1) and NOT assigned here.
+                   THIS HOUR, TWO SMALL THINGS THAT ARE YOURS WITHOUT A RULING:
+                   (1) ONE LINE ON assets/characters/bellmire/ AND
+                   .../showcase/ - eleven .glb nothing in scripts/ or web/
+                   references (see the audit above). Confirm they are your
+                   showcase working bodies, or say they are not. One line closes
+                   a two-day-stale baseline; I am not writing an item on it.
+                   (2) IF YOU ARE OTHERWISE DRY, A MINIBOSS. You may invent them
+                   - twenty exist and that permission is still live. Do not start
+                   the Greener's reshape before the ruling.
+
+  CHAT BOT     ->  YOU ARE AT THE END OF THE NUMBERS AND THAT IS A GOOD PLACE TO
+                   SAY SO. B40 walked every number your 27 commands publish, B41
+                   took the dye price, B42 took the two nobody vouched for and
+                   proved the float/int trap bites nothing shipped.
+                   DONE: either name the NEXT class of thing in your own surface
+                   that nothing vouches for - not a number this time: a NAME, a
+                   LIST or a STATE your commands publish and nothing compares to
+                   what the game does - or declare the guard surface COMPLETE in
+                   writing, with the sweep that justifies it. EITHER CLOSES IT.
+                   A written "there is nothing left here" backed by a sweep is
+                   worth more than a guard invented to have shipped one.
+                   AND ONE DISCIPLINE LINE, NOT A REPRIMAND: you have now
+                   declared a finish and released 4 and 12 minutes early on
+                   consecutive runs. Under the amendment above an over-declared
+                   finish reserves somebody else's window. Declare what you
+                   expect, not the cap.
+
+  CONTENT      ->  STAND DOWN IN WRITING AGAIN - IT HAS WORKED THREE TIMES.
+                   C-100, C-101 and C-102 are all held awaiting approval and I am
+                   not giving you a fourth proposal set to stack on them.
+                   DONE: ONE defect in shipped words on a surface you have NOT
+                   yet audited, found the way you found the last three, proposed
+                   additively in a `_note_` key, nothing swapped. If every
+                   surface really is audited, SAY THAT and list what you checked -
+                   a written "there is nothing left to find" is a real delivery
+                   and this lane has earned the right to make one.
+                   DO NOT swap C-100, C-101 or C-102 in. Not yours, not mine.
+
+  HUB          ->  CLEAN UP WHAT YOU COMMITTED THIS HOUR. You obeyed the 08:58
+                   ruling ("commit them to `hub` or discard them") and committed
+                   the stray worktree files - but that put ~9 MB of evidence
+                   archives and a 6,546-line STALE COPY OF THE PLAN into the
+                   repo root: _plan_tmp.txt, web_look.tar, web_look2.tar,
+                   _hub_web_run.tgz, and nine .png shots.
+                   _plan_tmp.txt IS THE DANGEROUS ONE AND IT IS WHY THIS IS A ROW
+                   AND NOT A NOTE. A file at repo root that looks like the plan
+                   and is not has already broken the plan for two seats this
+                   week. A stale copy of it committed where the next seat can
+                   grep it is that trap with a bow on it.
+                   DONE: _plan_tmp.txt GONE from `hub`. The .tar/.tgz archives
+                   gone or moved under renders/ with the shots. Keep the shots if
+                   they are the evidence behind H32 - they are small and they are
+                   proof. NO web/ CHANGE IN THIS COMMIT, so no security gate is
+                   owed and I will not run one.
+                   STILL NOT YOURS: publishing. The section-bar fix Mr. E asked
+                   for is merged, ticked and NOT on the live page.
+
+*** FOR THE SUPERVISOR ***
+
+  1. THE GREENER'S COPPER: THE PAINT ROUTE IS EXHAUSTED AND THE REMAINDER IS
+     FORM. Grade killed by A/B (ticked 23:58), colour corrected to measured Cu
+     and tessellation taken to metric saturation (ticked this hour). Side-view
+     saturation recovered 83% of the paint's cost - AND THE LANE AND I BOTH SAY A
+     VIEWER WOULD STILL CALL IT TIMBER. What is left is items 3-7 of the lane's
+     own list: a castellated leaf edge, a dead flat chest slab, a head that
+     vanishes from the side, a rack that hides it from the back, and an ember bed
+     that out-shines the creature in every view.
+     MY RECOMMENDATION: CALL IT. Either (a) authorise art to RESHAPE the Greener
+     - that is a new body, not a repaint, and it is beyond a row; or (b) accept
+     the Greener as it stands and close the fault as improved-not-cured. I lean
+     (a) on the ember bed and the chest slab alone, which are cheap, but the
+     head-vanishing-from-the-side is the one a viewer will notice and it is not
+     cheap. I am not choosing between a reshape and an acceptance on my own.
+
+  2. THE HUD HAS NOT STARTED SYSTEM 2'S RARITY-HUE HALF IN THREE HOURS, AND THIS
+     HOUR IT SHIPPED NOTHING AT ALL AND WROTE NOTHING. I have asked it, in its
+     row, to say what happened at 00:52 before anything else. I am not escalating
+     it as a failing lane on one silent hour - its last three deliveries (U63,
+     U64, U65) were real, and U65 was a lane retracting its OWN wrong sentence,
+     which is the behaviour this house runs on. BUT THE MOST VALUABLE OPEN ITEM
+     IN THE HOUSE HAS SAT UNSTARTED FOR THREE HOURS AND YOU SHOULD KNOW THAT.
+
+  3. THE SWAPS ARE NOW THREE SETS DEEP AND NOBODY HAS APPROVED ANY OF THEM.
+     C-100, C-101 (six exact duplicates in the pools that fire most) and C-102
+     (three worn words on rare-and-legendary pieces). All proposed additively in
+     `_note_` keys, all verified parse-clean and non-destructive, none swapped
+     in. MY RECOMMENDATION: approve C-101 and C-102 and let content swap them -
+     C-101 is a measured draw-weight defect on the lines that fire most often and
+     C-102 is three strings on pieces a viewer paid for. The longer this queue
+     sits the more content is auditing surfaces instead of fixing what it found.
+
+  4. THE HUB IS STILL UNPUBLISHED AND THE GAP IS NOW TWO TICKED FIXES DEEP.
+     gh-pages is 40223be and origin/gh-pages^{tree} does NOT equal origin/hub:web.
+     THE SECTION-BAR FIX MR. E HIMSELF ASKED FOR IS MERGED, TICKED AND NOT ON THE
+     LIVE PAGE. I verified it myself at 23:58 by rendering the page and red-
+     proving the fix, and the security re-grep is clean again this hour.
+     MY RECOMMENDATION: PUBLISH. Say the word and I will do the push by the
+     proven web/-subtree method with the four assertions and the fast-forward
+     check. I will not decide it.
+
+*** NEEDS MR. E: nothing. ***
+  He was live during this run and I put the one live-window question to him
+  directly (the yield rule in the lane prompts) rather than parking it here.
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 23:58 CT. SIX LANES MERGED. SIX TICKED.

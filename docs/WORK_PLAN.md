@@ -813,6 +813,9 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 23:58 CT by the team lead (clock off the machine: 2026-11-18T00:02:52-06:00 -
+THE DATE ROLLED OVER MID-RUN. The firing is the 23:58 CT one; the clock now reads 18 Nov).
+The 23:58 block immediately below SUPERSEDES the 22:58 block and every row under it.
 Updated 2026-11-17 22:58 CT by the team lead (clock off the machine: 2026-11-17T23:06:21-06:00).
 The 22:58 block immediately below SUPERSEDES the 21:58 block, the 21:05 addendum and every row under them.
 Updated 2026-11-17 21:58 CT by the team lead (clock off the machine: 2026-11-17T21:59:04-06:00).
@@ -837,6 +840,342 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 23:58 CT. SIX LANES MERGED. SIX TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 22:58
+*** BLOCK, THE 21:58 BLOCK AND THE 21:05 ADDENDUM.
+***
+*** THE DATE ROLLED OVER WHILE I WORKED. The firing is 23:58 CT on 17 Nov; the
+*** machine read 2026-11-18T00:02:52-06:00 when I started writing. Both are true
+*** and neither is a future stamp. Written here because this is the exact trap
+*** that has now bitten five seats, and it is worse at midnight, not better.
+================================================================================
+
+*** MERGED: six merges into main, no force, nothing rewritten, no branch deleted.
+*** THREE CONFLICTS, all in root PROGRESS.md (hub, hud-ui, chatbot - three lanes
+*** appending at the same end-of-file). Resolved by state machine, BOTH SIDES
+*** KEPT, no cycle renumbered. RESIDUAL MARKERS IN THE FILE THAT CONFLICTED
+*** (root PROGRESS.md, not docs/PROGRESS.md): ZERO, counted after the last merge.
+
+*** WHAT I TICKED, AND WHAT I MEASURED MYSELF RATHER THAN TAKING ***
+
+  [x] HUB - MR. E'S CLIPPED SECTION BAR IS FIXED. TICKED 2026-11-18 00:0x CT
+      (hub 1662edc, main 543287a). THE FAULT HE SAW IS GONE.
+      I DID NOT TAKE THE LANE'S NUMBER. I rendered web/index.html myself in a
+      headless Chromium at 1500 and at 1280 and counted the tabs by geometry:
+      15 of 15 tabs, ZERO cut off at both widths, flex-wrap:wrap live,
+      overflow-x visible. Nav height 85 px at 1500 (two rows) and 123 px at 1280
+      (three rows) - a 38 px cost per extra row, which is the lane's own number.
+      AND I RED-PROVED IT: with the new 21 lines of CSS stripped out of my copy,
+      the same page at the same widths cuts 5 tabs at 1500 and 8 at 1280.
+      MY CUT COUNTS ARE NOT THE LANE'S 3 AND 6 AND I AM NOT PRETENDING THEY ARE:
+      my file:// render has no snapshot data, so the stage column is narrower and
+      the tablist clientW reads 910/690 where the lane measured 1096/876. The
+      fault reproduces, the direction is identical and the fixed count is zero at
+      both. That is what the tick rests on.
+      I LOOKED AT THE PICTURE, not just the numbers: all fifteen pills on two
+      rows, ink/parchment with the teal accent on the live tab, restrained gold,
+      no Twitch purple, nothing clipped and nothing overlapping.
+      SECURITY, re-grepped BY ME because web/ changed: six innerHTML hits in
+      app.js and two are real sites (app.js:252, 298) - both template literals
+      with NO interpolation at all, page-owned strings, pre-existing and
+      unchanged by this diff. Zero outerHTML / insertAdjacentHTML / document.write
+      / eval / new Function (the one grep hit is a comment). One setAttribute
+      href and it is a fixed "#ic-" literal. Every `onerror` hit in app.js is a
+      HOSTILE-NAME TEST FIXTURE ("<img src=x onerror=alert(1)>" as a payload
+      string), which is the right shape. STRICT CSP IS INTACT AND I PROVED IT BY
+      ACCIDENT: the browser REFUSED my attempt to inject an inline style for the
+      red proof, citing style-src 'self'. I had to strip the CSS from a copy of
+      the file instead. A page that will not let me inject a style is a page
+      whose CSP is doing its job.
+      THE DIFF IS CSS-ONLY: web/style.css +21 lines, no markup, no roles, no tab
+      order, no app.js, no data, no CSP.
+      I RAN NO PUBLISH AND NO PUBLISH VERIFICATION. The lane did not claim READY
+      TO PUBLISH, so that gate is not owed and I did not run it. See FOR THE
+      SUPERVISOR 4 - the fix is merged and NOT on the live page.
+
+  [x] ART - THE VIEW-TRANSFORM A/B. TICKED (art c5acf79). THE CANDIDATE IS DEAD
+      AND THE LANE KILLED IT WITH NUMBERS, WHICH IS THE BEST OUTCOME THE 22:58
+      ROW NAMED ("if the separation does not appear under either transform, that
+      is the most valuable thing you could report").
+      I RE-DID ITS ARITHMETIC ON ITS OWN TABLE RATHER THAN READING THE VERDICT:
+      flat-minus-oak AgX front 0.5652-0.5517=+0.0135; Standard front
+      0.4844-0.4595=+0.0249; Khronos PBR Neutral front 0.9091-0.9643=-0.0552.
+      All nine rows check. PBR NEUTRAL IS NEGATIVE IN ALL THREE VIEWS - it lifts
+      the oak control (+0.413) harder than the copper (+0.344), so the copper
+      goes from marginally above oak to below it. Standard is real and tiny.
+      THE LANE FOUND A FAULT IN ITS OWN FIRST TABLE AND SAID SO: it was comparing
+      a vertex-PAINTED surface against two UNPAINTED controls, so pass 10's baked
+      near-white band was dragging body_sat down on a metric about saturation.
+      It added `ctrl_flat` - the shipped material with the paint taken off - to
+      separate what the TRANSFORM does from what the PAINT does. That is the
+      fourth time this lane has caught its own metric answering a different
+      question from the sentence beside it.
+      NO DEFAULT WAS CHANGED. lordgen.set_engine untouched; the transform is an
+      argument of tools/art/_metal_read.py and of nothing else, proved by readback
+      before a pixel is read, and a transform that will not apply is an ERROR.
+      DRIFT CONTROL CLEAN: the shipped AgX read reproduces pass 10 to every
+      decimal (0.5287/0.3091/0.5405 against controls 0.5517/0.5000/0.4658).
+      WHAT THIS DOES NOT CLOSE: the Greener's copper still reads as timber. The
+      A/B says the remedy is not a view transform. See FOR THE SUPERVISOR 1.
+
+  [x] HUD - THE U62 h=96 LIMIT IS CLOSED BY CORRECTION. TICKED (hud-ui 82fa111).
+      The 22:58 row said "fix it or declare it unfixable in writing - either
+      outcome closes it". The lane came back with a THIRD answer and it is the
+      right one: THE CLAIM WAS FALSE AND IT WAS THE LANE'S OWN. tools/_u62_scales.gd
+      has no 1 px floor; the test is stripe_top >= ink_bot - 0.05, and at h=96/100%
+      stripe_top - ink_bot is +0.72, so clear=TRUE. U64's "HONEST LIMIT" line was
+      written from a remembered threshold that is not in the file. Re-measured
+      windowed at 1920x1080 on unchanged bytes: U62_SCALES OK bad=0, 0.72 px at
+      100% (all four heights), 0.82 at 125%, 0.24 at 150%; 0 SCRIPT ERROR.
+      LOOKED AT: rod_u65_s100_h96.png, a 3x crop - wordmark above the stripe, no
+      ink on the stripe rows. A LANE THAT RETRACTS ITS OWN WRONG SENTENCE IS DOING
+      THE JOB; a limit left standing is a lying instrument the next seat trusts.
+      THIS DOES NOT TICK SYSTEM 2'S HUD HALF. See the HUD row.
+
+  [x] CHAT BOT - THE `dye` PRICE IS GUARDED. TICKED (chatbot 12f017e).
+      ONE PRICE, THREE DECLARATIONS, THREE LANES: commands.json `dye`.cost
+      publishes "25 gold" (the bot's), roster.gd:1258 charges
+      items().get("dye_cost", 25) - so the base comes from CONTENT's items.json
+      and the fallback literal lives in the GAME BUILD's roster.gd. All three read
+      25 today by coincidence and nothing in the house compared any pair.
+      THE GUARD READS THROUGH Roster.items(), THE SAME STATIC ACCESSOR THE DYER
+      CALLS, and deliberately does NOT restate the 25 - a fourth copy of a price
+      is the defect, not the guard. That is the right instinct and it is the one
+      the house keeps having to learn.
+      GATES GREEN ON THE SHIPPED BYTES: parse rc=0 0 errors, L14_TEST OK 22,
+      TWITCH_PARSE OK 8, COMMANDS_DOC OK 27 as a NO-OP with COMMANDS.md md5
+      unchanged, 0 COMMANDS_DATA lines on the real data, drift checked BOTH ways.
+      TWO OF THREE ARMS RED-PROVED from its own commands.json with the data
+      restored byte-identical (0908b4db) after each.
+      THE THIRD ARM IS UNPROVEN AND THE TICK SAYS SO IN THE TICK LINE. DYE
+      AUTHORITY cannot fire without making items.json lack `dye_cost`, and that is
+      content's file. The lane refused to edit it even transiently and ROUTED IT
+      UP instead of quietly claiming the arm. See FOR THE SUPERVISOR 3.
+      WORTH ONE LINE AND THE LANE FOUND IT: Godot's JSON reads `dye_cost` as a
+      FLOAT, so the red proof printed 25.0, not 25. int() makes it right here, but
+      any guard comparing a JSON number by identity would read a false mismatch.
+      That is the chat bot's next row.
+
+  [x] GAME BUILD - SYSTEM 2'S WRITE-DOWN. TICKED (laptop f423f86). THE ROW ASKED
+      FOR A WRITE-DOWN BEFORE ANY BUILDING AND IT GOT ONE, AND THE HONEST FINDING
+      IS THE DELIVERY FOR THE THIRD TIME RUNNING (S25, S27, now S29b).
+      WHAT IS LEFT OF SYSTEM 2'S ENGINE HALF: NOTHING. The lane checked the tick
+      against S16's OWN NEXT LIST instead of trusting it, and I checked the lane:
+      assets/gear/dungeon/ holds 24 .glb - axe, axeDouble, crossbow, dagger,
+      hammer, shield, staff, sword, three rarities each - plus the KayKit CC0
+      licence, which I counted off the tree myself. gear.gd:1815 EDGE_MATS exists,
+      so "should tint_piece spare the blade" really was decided at S17.
+      THE PAUSED ITEMS IN MY OWN 22:58 ROW WERE STALE AND THE LANE CORRECTED ME:
+      S2_TEST FAIL (b) and T1_TEST's FakeRoster add_brew were BOTH made green at
+      D100 (laptop 74ad0af, ~03:18 CT). NEITHER IS OWED. I had carried them in the
+      row from the prompt's paused list without re-measuring. MY FAULT, NOT THE
+      LANE'S, and it is the second time this seat has handed a lane a closed item
+      (the first was twitch_cooldown_s at 09:58).
+      SYSTEM 2 ITSELF IS NOT TICKED. The HUD half has not started. See below.
+
+  [x] CONTENT - C-101, THE REPEAT-POOL DUPLICATES. TICKED (content ceeb72e).
+      A STAND-DOWN WRITTEN UP IS THE DELIVERY, and this is the second one in a row
+      that found a real defect in shipped words rather than padding.
+      SIX EXACT DUPLICATES in the pools that fire most: descend[10]/[67],
+      barks.enter[15]/[43], barks.trap[15]/[42], barks.hurt[11]/[49],
+      barks.hurt[19]/[48], barks.misfire[20]/[47]. Each doubles that line's draw
+      weight, which is why it matters on a stream rather than on paper.
+      ADDITIVE ONLY: six replacements proposed in `_note_c101`, nothing swapped
+      in, all four files parse, every pre-existing key equal, one new key.
+      AND IT FIXED THE THING I NAMED LAST HOUR WITHOUT BEING ASKED TWICE: the
+      C-101 entry is headed 2026-11-17 23:23 CT, read off the machine, in CT.
+
+*** WHAT I DELIBERATELY DID NOT TICK ***
+
+  [ ] SYSTEM 2 AS A WHOLE. Its engine half is closed and written down; its HUD
+      half - the rarity-hue work - has not been started in the two hours it has
+      been the HUD's headline row. Mr. E's own item. Not ticked, not re-assigned.
+  [ ] THE GREENER'S COPPER READING AS TIMBER. The A/B is ticked; the FAULT is not
+      fixed and the transform route is now dead. FOR THE SUPERVISOR 1.
+  [ ] THE C-100 AND C-101 SWAPS. Proposed, not swapped, not mine. Routed up.
+  [ ] THE DYE AUTHORITY ARM. Written, parses, never seen to fire. Named in the
+      tick, not counted as proved.
+  [ ] THE HUB REPUBLISH. Not mine, not Mr. E's. FOR THE SUPERVISOR 4.
+
+*** THE DEAD-DATA AUDIT, MEASURED 2026-11-18 00:0x CT ON THE MERGED TREE, off
+*** 2,125,447 CHARS OF SCRIPT (scripts/*.gd + web/*.js, 47 FILES, 118 TOP-LEVEL
+*** KEYS). THE UNREAD COUNT DID NOT MOVE. IT IS STILL ZERO. ***
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, measured off assets/ ONLY (renders/ is
+    evidence output, not data the game loads - the 22:58 seat's finding, kept).
+  - UNREAD LIVE DATA KEYS: ZERO.
+  - 28 keys return zero literal hits and EVERY ONE IS ACCOUNTED FOR: TWO
+    runtime-built _alt pools (READ via base + "_alt" at delve.gd intro_pool - DO
+    NOT WIRE); THREE declared dead showing zero (phase2_words, phase2_words_alt,
+    town_levels_for_the_desktop - the fourth, townsfolk, returns prose hits and is
+    not among the 28); NINE prose/spec keys (biomes `technique`; bosses
+    `boss_floors`; origins `chronicle_line`, `word_order`, `casing`; ranks
+    `promotion_line`, `one_roll`; strains `_gating`; world `canon_silences`); and
+    FOURTEEN content `_note_` cycle notes.
+  - THE RAW TOTAL MOVED 27 -> 28 AND KEYS 117 -> 118. THE WHOLE MOVE IS
+    `_note_c101`, written by design. COMPARE THE ACCOUNTED-FOR CLASSES, NOT THE
+    RAW NUMBER. NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP
+    WRITING THEM.
+
+*** THE SIX ROWS. ONE ITEM EACH. ***
+
+  GAME BUILD (:07) - THE L31 REMAINDER: THE STATUS-EFFECT ICONS. You asked for it
+      yourself and you are right to. Systems 2 (engine), 3 and 4 are all closed,
+      the two gates I listed as paused were already green at D100, so L31 is the
+      genuine open item on your branch and it is an EXISTING item, not a new one.
+      It lives in delve.gd, monster.gd, party_frames.gd and boss_bar.gd - your
+      files, confirmed, and the HUD was right that it is not hers.
+      READ L31 IN FULL BEFORE BUILDING. D61.1 already landed the damage numbers;
+      what remains is the icons. Do not re-derive MB_FIT ratios - art's, ticked.
+      PROTOCOL, AND IT IS THE FIFTH TIME: S29's 23:08:40 claim declared a 23:35
+      finish against a cap of 23:33:40. Every one of the five has had a short
+      actual hold and nobody has been starved, so this is a WRITING fault, not a
+      discipline one - but it is the declared number the protocol checks, and five
+      is a pattern rather than a slip. DO WHAT YOU PROPOSED: compute claim+25
+      FIRST, write that, then put the expected finish at or before it.
+
+  CONTENT (:22) - THE STAND-DOWN STANDS AND IT IS WORKING. Gap zero, no new
+      bodies. C-100 and C-101 are BOTH routed up; do not wait on either and do not
+      swap anything in. HOLD both sets of replacements where they are.
+      SPEND THE FIRING THE SAME WAY: one defect in shipped WORDS on a surface you
+      have NOT audited yet. You have now done the lord shape lines (C-100) and the
+      repeat pools (C-101); the choice of the next surface is yours, because you
+      know which ones you have never read end to end and I do not.
+      YOUR CT STAMP WAS RIGHT THIS TIME. Keep reading it off the machine - and be
+      careful tonight specifically, because the date rolls over inside your window
+      and 00:22 CT is 18 Nov, not 17.
+
+  ART (:34) - THE A/B IS TICKED AND THE CANDIDATE IS DEAD; DO NOT SPEND ANOTHER
+      FIRING ON VIEW TRANSFORMS. What is still yours and still open is the FORM
+      fault you named yourself: THE SIDE-VIEW LEAF THAT GOES NEAR-WHITE AND READS
+      AS A CREAM-PAINTED BOARD. That is the same body and very likely the same
+      cause as the copper-reads-as-timber fault, and the A/B has just told you the
+      remedy is in the material or the paint, not in the grade. Your side-view
+      shipped body_sat is 0.3091 against 0.5652 unpainted - the paint is costing
+      you 0.26 of saturation on that view alone, which is the largest single
+      number in your own table. START THERE.
+      IF YOU ARE GENUINELY DRY, you are the one lane that may invent a miniboss.
+      ONE MECHANICAL NOTE, ONE LINE: VIEW_TRANSFORM_AB.md says the sheen band has
+      been on the leaf "since 18 Nov". You wrote that at 23:35 CT on 17 NOV, so it
+      was a future stamp at the moment of writing. It is harmless and I have NOT
+      edited your document - your record is yours. Read the clock for the next one.
+
+  HUB (:37) - A FALSE SENTENCE IN YOUR OWN SHIPPED FILE, AND IT IS THE SENTENCE A
+      FUTURE READER WILL TRUST. web/index.html line 49 says "There is no innerHTML
+      anywhere in app.js." THAT IS NOT TRUE. app.js has two live innerHTML sites,
+      at :252 and :298, and app.js's OWN comment at :90 says so plainly ("the two
+      legacy innerHTML sites that remain"). THE CODE IS FINE - I read both; they
+      are template literals with no interpolation at all, page-owned strings, and
+      no snapshot value goes near them. THE DOCUMENTATION IS WRONG. Fix the
+      sentence in index.html (and the matching claim at app.js:7-8) to say what is
+      actually true: snapshot data reaches the DOM only through el(), and the two
+      remaining innerHTML sites take page-owned literals. CHANGE NO CODE.
+      This is a defect in shipped H32 work, not a new item.
+      HOUSEKEEPING, NOW THREE HOURS OWED, AND HALF OF IT IS AVAILABLE TO YOU: your
+      worktree still carries _tabs_a/b/c.png, _h32_shot_a..f.png, _hub_web_run.tgz,
+      web_look*.tar and _plan_tmp.txt. You have reported deletion as refused on
+      this machine and that is TRUE - device_bash cannot delete here. SO TAKE THE
+      OTHER HALF OF THE INSTRUCTION AND COMMIT THEM TO `hub`. "Commit them or
+      discard them" has always been an either/or; one branch of it is open.
+      YOU DO NOT PUBLISH. Ever. Your fix is merged and ticked and is NOT on the
+      live page; that is the supervisor's call and it is routed up.
+
+  HUD (:52) - SYSTEM 2'S HUD HALF: THE RARITY-HUE WORK. START IT THIS FIRING.
+      THE STRIPE WORK IS FINISHED. U64 ticked it, U65 closed the last thing owed
+      on U62 by retracting a wrong sentence, and there is nothing left to harden.
+      Four firings (U62-U65) have now gone to the wordmark and the stripe while
+      the item that is MR. E'S OWN has not been started. That is not a complaint
+      about the work - U65 in particular was exactly right - it is a statement
+      about where the next hour goes.
+      TAKE ART'S CANONICAL RARITY TABLE, DO NOT INVENT A SECOND ONE. Mr. E ruled
+      at 11:47 CT on 17 Nov that the hub draws its rarity hue from art's canonical
+      table; the same table is yours. System 1 (art, rarity hue ladder, 520 icons)
+      is ticked and is the source.
+      THE L31 REMAINDER IS NOT YOURS - it is the game build's and it is in its row
+      this hour. You were right about that twice; it is settled.
+
+  CHAT BOT (:45) - THE FLOAT/INT IDENTITY TRAP, IN YOUR OWN SHIPPED GUARDS. You
+      found it incidentally at B41 and wrote it down: Godot's JSON reads a number
+      key as a FLOAT, so `dye_cost` came back 25.0 and not 25. You went through
+      int() so B41 is correct - BUT GO AND CHECK THE OTHERS. B39's brew guard and
+      B40's three flat-price guards were written before you knew this. Any one of
+      them that compares a JSON number by identity, or formats it into a message,
+      will read or print a false mismatch the day someone writes 25.0 in a data
+      file. MEASURE IT, DO NOT ASSUME IT: find every place your guards take a
+      number out of a JSON file, say which go through int() and which do not, and
+      red-prove at least one of the unsafe ones by writing 25.0 into YOUR OWN
+      commands.json and restoring it to the byte. This is a defect audit of your
+      own shipped work and it is not a new item.
+      DO NOT TAKE THE DYE AUTHORITY ARM. You were right to refuse to touch
+      content's items.json and right to route it up. It is sitting with the
+      supervisor; leave it there.
+      PROTOCOL: B41 declared its window crossing on the lock line's face. That is
+      exactly what the rule asks for. Keep doing it.
+
+*** FOR THE SUPERVISOR ***
+
+  1. THE VIEW-TRANSFORM DECISION NOW HAS ITS NUMBER, AND MY RECOMMENDATION IS TO
+     KILL THE CANDIDATE OUTRIGHT. Art delivered the bounded A/B asked for at
+     22:58: one body, three transforms, three views, arithmetic re-checked by me.
+     Khronos PBR Neutral makes the fault WORSE in all three views (it lifts the
+     oak control +0.413 against the copper's +0.344, so the copper falls BELOW
+     oak). Standard moves the right way but buys +0.011 of separation on the front
+     view, against re-grading 25 miniboss bodies, 8 lords, 12 creature bodies, the
+     D95 showcase and every colour number three lanes have already had ticked.
+     RECOMMENDATION: reject both. Declare the view transform dead as a route and
+     leave AgX shipped. THE UNDERLYING FAULT STAYS OPEN - the Greener's copper
+     still reads as timber - and art's own table points at the remedy: the baked
+     paint costs 0.26 of body_sat on the side view. I have put that in art's row.
+
+  2. CONTENT HAS TWO SETS OF PROPOSED WORD SWAPS WAITING, NOT ONE. C-100 (eleven
+     lord shape lines that state a mechanic the game does not have) carried from
+     22:58, and now C-101 (six EXACT DUPLICATE lines in the pools that fire most
+     on stream, each doubling its own draw weight).
+     RECOMMENDATION: approve C-101's six outright and without the hesitation C-100
+     deserves. They are pure duplicates; the pools keep their length, no line
+     makes a claim it did not make before, and no player-visible promise changes -
+     it is a weighting bug in shipped words, not a rewrite. C-100's eleven stand
+     as recommended at 22:58: approve the eleven false-hard-rule lines, leave the
+     six instructional ones. If you read either as a plain defect fix, say so and
+     I hand it straight to content.
+
+  3. A PERMISSION QUESTION THE CHAT BOT RAISED CORRECTLY RATHER THAN TAKING. Its
+     third dye arm (DYE AUTHORITY - items.json carries no `dye_cost`, so the dyer
+     is on roster.gd's fallback literal) cannot be seen to fire without transiently
+     removing that key from data/items.json, which is CONTENT's file. The lane
+     refused to touch it even for a moment and routed it up.
+     RECOMMENDATION: allow a transient, restored-to-the-byte edit of ANOTHER
+     lane's DATA file solely for a red proof, on three conditions - the md5 is
+     printed before and after, the restore is proved identical, and the lane's own
+     gates are re-run green on the restored bytes. This lane has done exactly that
+     on its own data six times across B39-B41 and restored byte-identical every
+     time. THE ALTERNATIVE, if you would rather not open that door, is to have
+     content run the one proof in its own firing; say which and I will write it
+     into the row. UNTIL YOU RULE, THE ARM STAYS NAMED AS UNPROVEN.
+
+  4. THE HUB REPUBLISH. THE FIX FOR THE FAULT MR. E HIMSELF SAW IS MERGED, TICKED
+     AND NOT ON THE LIVE PAGE. gh-pages still serves the 09:40 CT publish, which
+     clips three tabs at 1500 px and six at 1280. The hub lane has NOT said READY
+     TO PUBLISH, so the publish gate was not owed and I RAN NO PUBLISH
+     VERIFICATION AND NO PUBLISH. I did run the security grep set, because the
+     lane made security claims about a web/ change and checking a claim is not the
+     same as running an unearned gate - it is clean (details in the tick).
+     RECOMMENDATION: you may want to call this before the lane asks. It is the one
+     open fault on this list that Mr. E has personally looked at and reported. Say
+     the word and I run the full publish gate and bring you the result; I will not
+     move without it.
+
+  5. CARRIED FROM 21:58 AND 22:58, STILL OPEN AND STILL HELD: the game build fires
+     at :07 and is the only lane whose plan read can beat this seat's write. The
+     mitigation - sync `laptop` FIRST, every hour - held again this hour. Moving
+     the lane's firing time would fix it at the source and is not mine to take.
+
+*** NEEDS MR. E ***
+  nothing. His section-bar report is fixed, verified by my own render and red
+  proof, and ticked. The only thing it still needs is a publish, and he has said
+  twice that publishing is not his.
+================================================================================
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 22:58 CT. SIX LANES MERGED. FIVE TICKED.

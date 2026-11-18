@@ -960,6 +960,91 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
   itself says, and expect 58 under a strict test with no class unaccounted.
 
 ================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 04:58 CT ***
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. READ THIS ONE. ***
+================================================================================
+
+*** ONE TICKED THIS HOUR. ONE REFUSED ON A PICTURE, AND THE PICTURE IS THE WHOLE POINT. ***
+
+  [x] CHAT BOT - B46, THE `wear` PRICE SPAN WAS WRONG, NOT MERELY UNANCHORED. TICKED.
+      (origin/chatbot d953e59.) I DID THE ARITHMETIC MYSELF OFF data/items.json AND IT AGREES TO
+      THE ROW: the wearable tables are cosmetics + accessories, 810 priced rows, MINIMUM 30
+      (/cosmetics/straw_hat) and MAXIMUM 520 (/accessories/crater_ring), with EXACTLY 28 rows
+      above 420. The lane published "30-420 gold" while the shop charged up to 520. That is a
+      LIVE DEFECT in a published number, not a tidy-up, and the shipped file now reads
+      "30-520 gold, once". Both ends of the span are right - I checked the 30 as well as the 520,
+      because a lane that fixes one end of a span is exactly where the other end hides.
+      WHAT I DID NOT TICK, AND IT IS NOT A FAULT: the eight guard arms ship with a PYTHON
+      EMULATION red proof and the ENGINE red proofs CARRIED to the lane's 05:45 firing. That is
+      the 04:07 crossing fix working as written - the lane split rather than cross the HUD
+      :52-:07 window. The guard is HALF PROVEN and the row below carries the other half.
+
+  [ ] GAME BUILD - S31 SYSTEM 5 POTION VISUALS IS **HALF DELIVERED**. NOT TICKED. THE DRINK POSE
+      PUTS THE VIAL IN MID-AIR WITH NO HAND ON IT.
+      I LOOKED AT renders/cycles/s31/drink_1front.png AND drink_2side.png MYSELF. The side view
+      is unambiguous: the bottle hangs in front of the visor with BOTH ARMS HANGING AT THE SIDES.
+      Nothing is holding it. A viewer sees a floating potion, not a knight drinking.
+      THE FLOOR HALF IS GOOD AND I AM NOT RE-OPENING IT - floor_1front.png shows the vial standing
+      on the floor in front of the hero, sensibly scaled and clearly visible. That half is done.
+      THE GATE IS NOT LYING AND THE LANE IS NOT AT FAULT FOR TRUSTING IT. I read tools/_s31_fit.gd:
+      S31_FIT measures hero top, head bone, vial height, centre y, min y, "ahead of face" and the
+      vial/hero ratio. EVERY ONE OF THOSE IS A CLEARANCE. Not one of them asks whether a BONE IS
+      HOLDING THE BOTTLE, so S31_FIT OK is a true statement about the wrong question. The lane's
+      own red proof (bottles were BEHIND the hero at -z) was real and the +z fix did land.
+      THIS IS THE SAME FAULT CLASS AS THE 10:58 KNIGHT WITH NO VISIBLE BLADE, AND IT IS WHY FIT IS
+      THE ACCEPTANCE TEST AND WHY SOMEBODY HAS TO LOOK.
+      DO THIS: parent the vial to the hand bone in the drink pose (the skeleton is already found -
+      _s31_fit.gd:112 does find_bone("head"), so find_bone for the hand is the same call), raise
+      the arm or use the existing drink animation if one exists, re-render BOTH drink views, and
+      ADD ONE ASSERTION TO S31_FIT that the vial's parent is a hand bone and not the scene root.
+      A clearance gate that cannot tell a held bottle from a floating one is the instrument to fix.
+
+  [ ] HUD - THE RARITY-HUE HALF OF SYSTEM 2. IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE AND IT
+      HAS NOT BEEN STARTED. The engine half of System 2 is closed and written down; this is the
+      half the supervisor confirmed at 11:40 on 17 Nov is yours. U67/U68/U69 have all been L40
+      gate work - that work is good and U69 closed the 20% in-pane child bound that U68 named as
+      its own limit, so the gate can now read red in BOTH shapes. THE GATE IS FINISHED. TAKE THE
+      RARITY HUE. Art's canonical table is the source (Mr. E's 15:47 ruling on 17 Nov, U55 option
+      (a) closed); do not invent a second table and do not copy the hub's CSS values.
+
+  [ ] HUB - shopGood() IS DEAD CODE IN web/app.js AND IT IS YOURS TO CLOSE. I GREPPED IT MYSELF:
+      exactly ONE occurrence in the whole of web/, the definition at app.js:3764. Nothing calls it.
+      It is a 20-line function that builds a rarity-framed shop row, which is precisely the thing
+      your 04:5x measurement was about, so this is you auditing your own shipped work and NOT a new
+      item. Either wire it where shop rows are built or delete it, and say which and why.
+      YOUR 04:5x MEASUREMENT IS CONFIRMED ON BOTH OTHER CLAIMS, by my own reading, not your word:
+      "Sells up to" at app.js:3829 does apply rarityClass() to a <b>, and style.css:1375-1377 gives
+      .rar-* ONLY border-left-color - a <b> has no border, so it paints NOTHING. You are right.
+      NO web/ CHANGE SHIPPED THIS HOUR, so no publish gate was owed and I RAN NONE.
+
+  [ ] CONTENT - C-108, YOUR OWN CYCLE. C-107 IS IN (lore_lines.json miniboss_feed now carries
+      Moulder, Ratcatcher and Drover - I checked all three names are present in the key, not just
+      in prose). KEEP WRITING `_note_` KEYS; they are accounted for in the audit and no lane is to
+      wire them. The three swap sets still pending on items.json are the reason the chat bot's
+      DYE AUTHORITY arm exists - when you rename a key in items.json, say so in your row.
+
+  [ ] ART - THE 29th MINIBOSS. The Drover was ticked at 04:07 and your working tree is already
+      mid-build. You are the one lane permitted to invent minibosses when dry, so you are not
+      blocked. NOTHING NEW WAS PUSHED BETWEEN 04:07 AND 04:58 and that is fine - a build in
+      progress is not a missed hour.
+      ONE HOUSEKEEPING LINE, AND IT IS NOT A FAULT: your worktree carries ~50 untracked scratch
+      files at the repo root (_pav_*.log, _plan_*.md, _probe_*.py, _commitmsg*.txt). They are
+      yours and they are not in any commit. If any of them is a log you still want, keep it; if
+      not, they are noise in every `git status` you run. Your call, not mine.
+
+*** FOR THE SUPERVISOR ***
+  1. THE HUB'S SECTION-BAR FIX IS STILL MERGED AND UNPUBLISHED - the one Mr. E asked for himself.
+     gh-pages is still 40223be and origin/gh-pages^{tree} does NOT equal origin/hub:web. The hub
+     lane shipped NO web/ change this hour, so nothing new is waiting behind it. RECOMMENDATION:
+     call the publish. The push method is proven and the verification list is in my prompt; I will
+     run the full security and state-check gate before any push, as I did at 09:40 on 17 Nov.
+  2. YOUR 03:16 CROSS-LANE SCRATCH-AND-RESTORE EXCEPTION IS WORKING AND I RECOMMEND LEAVING IT
+     STANDING. It cleared three arms that had been stuck for two cycles (B45), and B46 used it
+     again. Both borrowed files were restored byte-identical and md5-proved. No commit anywhere
+     carries a modified copy - I checked the merged tree.
+  3. NO DECISION IS BLOCKED ON YOU OTHERWISE.
+
+================================================================================
 *** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 04:07 CT ***
 ================================================================================
 

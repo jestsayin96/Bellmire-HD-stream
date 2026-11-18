@@ -139,13 +139,22 @@ WHAT I DID NOT TICK, AND WHY: the hub's merged-not-published delta - still the s
    its own gate. If you can say in writing what your wrapper would have to do differently when a
    gate legitimately leaves a process running, write that; otherwise STAND DOWN AND SAY SO.
 
-6. HUD (:52) - U81 IS TICKED. You answered the row exactly as asked and stated your own limits.
-   YOUR NEXT ITEM IS YOUR OWN L74, WHICH YOU DEFERRED YOURSELF FOR THE RIGHT REASON: feed/theme
+6. HUD (:52) - U81 IS TICKED, AND I OWE YOU AN APOLOGY THAT COSTS YOU NOTHING TO READ AND COST
+   YOU A CYCLE TO EARN. THE SYSTEM 2 ROW SHOULD NEVER HAVE BEEN ON YOUR SHEET AND I PUT IT THERE.
+   SYSTEM 2 IS CLOSED WHOLE - ticked 2026-11-18 01:5x CT (main 08f7fe4), confirmed by the
+   supervisor at 06:15 and again at 10:54 ("row struck for good"), and the correction is now SEVEN
+   blocks deep in this file. The 09:5x seat left a one-command guard for exactly this
+   (`grep -n "SYSTEM 2 IS CLOSED WHOLE" docs/WORK_PLAN.md`). THE 16:0x BLOCK DID NOT RUN IT AND
+   NEITHER DID I UNTIL AFTER I HAD WRITTEN YOUR ROW. You have now been handed this struck row FOUR
+   times and you have been right every single time.
+   I AM NOT ASKING YOU TO DO ANYTHING WITH SYSTEM 2 AND THERE IS NOTHING TO WAIT ON. The (a)/(b)/(c)
+   pick is withdrawn from your row - it is not a live question, because the item it belongs to is
+   closed. What you MEASURED in U81 stands and is valuable, and I have put it in front of the
+   supervisor as an observation about a CLOSED system, not as a row for you.
+   YOUR NEXT ITEM IS YOUR OWN L74, which you deferred yourself for the right reason: feed/theme
    under load needs a windowed render and a 15-minute claim, and you had ~13 minutes. It is yours
    at 17:52. Claim the lock, split it if it runs long, and carry the remainder forward.
-   THE (a)/(b)/(c) PICK IS NOT YOURS AND NOT MINE - I HAVE ROUTED IT UP THIS HOUR rather than let
-   it sit another night, and the block below says what I recommend and why. DO NOT WAIT ON IT and
-   do not start any of the three until it comes back. Your U81 answer is what made it decidable.
+   AND IF I EVER HAND YOU SYSTEM 2 AGAIN, REFUSE IT A FIFTH TIME AND CITE THIS PARAGRAPH.
 
 FOR THE SUPERVISOR:
   TWO THINGS, AND THE FIRST IS A CHANGE FROM MY LAST RECOMMENDATION.
@@ -165,23 +174,38 @@ FOR THE SUPERVISOR:
   verification and will not pretend otherwise. I have asked the hub to claim it or to say why not.
   THE HOUR IT CLAIMS, I RUN THE FULL GATE AND BRING YOU A RECOMMENDATION TO PUSH. If you would
   rather I gate it now on your word instead of the lane's, say so and I will.
-  (2) A DECISION I AM ROUTING UP RATHER THAN LETTING IT ROT: THE SYSTEM 2 HUD HALF NEEDS A PICK.
-  You confirmed at 11:40 that the rarity-hue half of Mr. E's System 2 is the HUD's. The HUD has now
-  MEASURED the ground, and I verified every site in source: the hue is BUILT AND GUARDED
-  (leaderboard_panel.gd:202 draws rarity_ink) BUT IT REACHES NO ON-STREAM SURFACE - that sheet has
-  been dormant since L63. Every place a player actually reads a weapon name today is plain text:
-  rts_camera.gd:597 (the follow panel), town.gd:5382 (shop orders into the crier feed), the hub's
-  snapshot_pub strings, and chat. The three options, open since U55 and none of them startable
-  without a pick: (a) the HUB draws the hue from RARITY_HUE - cheapest, one lane, its own files,
-  but it lands on the companion page and not on the stream; (b) feed_hud tints a Chronicle piece
-  name ONLY if town.gd tags the line with the piece id - needs the game build to change town.gd
-  first, and the U55 rule rightly FORBIDS name-guessing; (c) the rts_camera follow panel gets a
-  RichTextLabel - the game build exposes rarity per hero, the HUD exposes UiTheme.rarity_ink.
-  MY RECOMMENDATION IS (c), WITH (a) AS A CHEAP PARALLEL. (c) is the only one that puts Mr. E's
-  rarity hue where a viewer actually sees it during a delve, and it is a clean two-lane seam with
-  no name-guessing; (a) costs one lane almost nothing and can run alongside. (b) I would hold - it
-  is the most invasive and buys the least. I am NOT starting any of them and the HUD has L74 in
-  front of it, so nothing is idle while you decide.
+  (2) MY OWN FAULT, REPORTED FIRST, AND THEN ONE MEASUREMENT THAT IS GENUINELY NEW.
+  I RE-OPENED A SYSTEM YOU STRUCK, AND I WROTE IT INTO THE PLAN BEFORE I CHECKED. System 2 is
+  CLOSED WHOLE - ticked 01:5x CT on main 08f7fe4, confirmed by you at 06:15 and again at 10:54.
+  My :58 prompt still calls its HUD half "THE MOST VALUABLE OPEN ITEM IN THE HOUSE"; the 16:0x
+  block wrote the HUD's row from that prompt instead of from this file, and I REPEATED THE ERROR
+  an hour later and then compounded it by routing you a decision about a closed item. The 09:5x
+  seat had left a one-command guard against precisely this and I ran it only after the damage.
+  THE COST, NAMED: the HUD has now been handed this struck row FOUR times and refused or corrected
+  it every time. This hour it did the work instead of refusing, so the cost is one cycle of a lane
+  that has done nothing wrong. I have withdrawn the row, apologised on its sheet, and the HUD is
+  back on its own L74. NOTHING IS BLOCKED AND NOTHING NEEDS YOUR DECISION TO UNBLOCK IT.
+  NOW THE PART THAT IS NOT JUST MY ERROR, AND IT IS YOURS TO JUDGE, NOT MINE. Your closed-whole
+  ruling rests on the finding that the rarity-hue half WAS ALREADY BUILT at U55/U56 - which is
+  true, and I have re-read the code. U81 adds something nobody had measured when that ruling was
+  made: THE HUE IS BUILT AND GUARDED BUT IT REACHES NO ON-STREAM SURFACE. leaderboard_panel.gd:202
+  draws rarity_ink, and that sheet has been DORMANT SINCE L63. Every place a viewer actually reads
+  a weapon name during a delve is plain one-colour text - rts_camera.gd:597 (the follow panel),
+  town.gd:5382 (shop orders into the crier feed), the hub's snapshot_pub strings, and chat. I
+  verified all four sites in source myself.
+  I AM NOT ASKING YOU TO RE-OPEN IT AND I HAVE WRITTEN NO ROW FOR IT. Putting the hue on an
+  on-stream surface would be NEW WORK on a closed system, and under the freeze a new item is
+  written only if MR. E raises it - so it is not mine to start and not, I think, yours to assign
+  without him. What I am doing is making sure the measurement reaches you, because "built" and
+  "visible to a viewer" turned out not to be the same thing and the ruling was made on the first.
+  IF YOU JUDGE THAT CLOSED-WHOLE STILL STANDS, SAY SO AND I WILL PUT THIS TO BED PERMANENTLY and
+  stop it resurfacing. If you judge Mr. E would want to know, it is one sentence to him and I will
+  carry whatever he says. For the record, the options U81 names are (a) the hub draws the hue -
+  cheapest, one lane, lands off-stream; (b) feed_hud tints a Chronicle name only if town.gd tags
+  the line with a piece id - most invasive, and the U55 rule rightly forbids name-guessing; (c) the
+  follow panel gets a RichTextLabel - the only one a viewer sees mid-delve. I offer no
+  recommendation on work I should not have raised.
+
 
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 16:0x CT (team lead, the 15:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 15:1x BLOCK. ***

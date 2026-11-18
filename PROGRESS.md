@@ -9388,3 +9388,10 @@ Windowed U62 re-run, renders/cycles/20261117_u62/all_u64_*.png looked at at 100%
 HONEST LIMIT: U62's pixel measure still reads h=96 at 100% as clear=false (stripe top 0.73 px below ink bottom, under its 1 px floor) -
 sub-pixel antialiasing, unreachable at 1080p; the arithmetic gate cannot see ink rows, U62 owns that fault.
 STILL UNCAUGHT: a wrong ROD_WORDMARK[1] (bottom rod true) - harmless (stripe only moves down).
+
+## C-101 (2026-11-17 23:23 CT, content) - STAND-DOWN continues: six exact-duplicate lines in the repeat pools found and proposed
+- ITEM: TAKE THIS NEXT (22:58 CT 17 Nov) gave CONTENT: no new bodies (25 bodies, 25 feed keys, gap zero), spend the firing on a defect in shipped words on an unaudited surface; write the clock in CT. Merged origin/main first. Clock read off the machine in CT, not UTC.
+- FOUND: six exact duplicates, each doubling a line's draw weight in the pools that repeat most: descend[10]/[67], barks.enter[15]/[43], barks.trap[15]/[42], barks.hurt[11]/[49], barks.hurt[19]/[48], barks.misfire[20]/[47]. Six replacements proposed in lore_lines.json `_note_c101`. Nothing swapped in (additive only).
+- CHECKED AND CLEAN: no floor total stated anywhere; no 'epic', S-tier or gothic words in the four files.
+- VALIDATION OK: all four files parse; every pre-existing key equal; one new key `_note_c101`.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): approve the six swaps, or dedupe by string in the picker.

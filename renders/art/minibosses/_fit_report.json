@@ -1689,6 +1689,67 @@
     }
    },
    "proving_views": 3
+  },
+  "beadle": {
+   "creature_h": 2.95,
+   "hero_h": 2.45,
+   "ratio": 1.2,
+   "pair_w": 3.74,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 58523,
+      "vis": 58523,
+      "delta": 60107,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43669,
+      "vis": 43669,
+      "delta": 56324,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 42205,
+      "vis": 42205,
+      "delta": 43117,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37788,
+      "vis": 37788,
+      "delta": 38907,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 58488,
+      "vis": 58488,
+      "delta": 60081,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 46263,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -1701,10 +1762,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "leech"
+  "beadle"
  ],
  "asked": [
-  "leech"
+  "beadle"
  ],
  "blank_check": {
   "files": 3,

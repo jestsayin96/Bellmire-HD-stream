@@ -1,0 +1,136 @@
+{
+ "res": [
+  560,
+  784
+ ],
+ "errors": [],
+ "checks": {
+  "c_warm_back": {
+   "coat_rgb_with_aura_rim": [
+    0.2435,
+    0.216,
+    0.1557
+   ],
+   "coat_rgb_with_neutral_rim": [
+    0.2444,
+    0.258,
+    0.2809
+   ],
+   "px": [
+    16025,
+    16025
+   ],
+   "r_minus_b_aura": 0.0878,
+   "r_minus_b_neutral": -0.0365,
+   "material_body_is_blue_grey": true
+  },
+  "a_nape": {
+   "back_moved_px": 26525,
+   "back_opaque_px": 155571,
+   "back_moved_frac": 0.1705,
+   "front_moved_px": 4,
+   "front_opaque_px": 155890,
+   "front_moved_frac": 0.0,
+   "red_on_empty": false
+  },
+  "instrument_notes": {
+   "b_window": "TOO COARSE TO BE EVIDENCE - window 16375 px against 2801 moved px; it locates the knob, it does not measure it. The picture and _beadle_knobgap.py carry this fault."
+  },
+  "b_knob": {
+   "side_moved_px": 2801,
+   "side_opaque_px": 114249,
+   "side_moved_frac": 0.0245,
+   "window_derived_from_moved_mask": [
+    0.4260204081632653,
+    0.5931122448979592,
+    0.44107142857142856,
+    0.6642857142857143
+   ],
+   "window_base": {
+    "lum_min": 0.0202,
+    "lum_max": 0.6991,
+    "lum_range": 0.6789,
+    "lum_p05": 0.1232,
+    "lum_p95": 0.6951,
+    "px": 16375
+   },
+   "window_knob": {
+    "lum_min": 0.0202,
+    "lum_max": 0.6991,
+    "lum_range": 0.6789,
+    "lum_p05": 0.1201,
+    "lum_p95": 0.6951,
+    "px": 16375
+   },
+   "red_on_empty": false,
+   "red_on_blind": false
+  },
+  "renders": {
+   "base_back": {
+    "opaque": 155571,
+    "border_alpha": 0.0
+   },
+   "base_front": {
+    "opaque": 155890,
+    "border_alpha": 0.0
+   },
+   "base_side": {
+    "opaque": 114249,
+    "border_alpha": 0.0
+   },
+   "both_back": {
+    "opaque": 156366,
+    "border_alpha": 0.0
+   },
+   "both_front": {
+    "opaque": 156705,
+    "border_alpha": 0.0
+   },
+   "both_side": {
+    "opaque": 116529,
+    "border_alpha": 0.0
+   },
+   "knob_back": {
+    "opaque": 156366,
+    "border_alpha": 0.0
+   },
+   "knob_front": {
+    "opaque": 156705,
+    "border_alpha": 0.0
+   },
+   "knob_side": {
+    "opaque": 114249,
+    "border_alpha": 0.0
+   },
+   "nape_back": {
+    "opaque": 155571,
+    "border_alpha": 0.0
+   },
+   "nape_front": {
+    "opaque": 155890,
+    "border_alpha": 0.0
+   },
+   "nape_side": {
+    "opaque": 116529,
+    "border_alpha": 0.0
+   },
+   "neutralrim_back": {
+    "opaque": 155571,
+    "border_alpha": 0.0
+   }
+  }
+ },
+ "camera": {
+  "center": [
+   -0.13169416785240173,
+   -0.11336164176464081,
+   1.475000023841858
+  ],
+  "radius": 1.8432,
+  "ortho": 3.481,
+  "locked": true
+ },
+ "blanks": [],
+ "frame_clips": [],
+ "verdict": "GREEN"
+}

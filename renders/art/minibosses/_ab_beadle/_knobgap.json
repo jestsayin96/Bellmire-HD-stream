@@ -1,0 +1,56 @@
+{
+ "moved_px": 2801,
+ "bbox_yxyx": [
+  334,
+  466,
+  247,
+  373
+ ],
+ "bbox_frac": [
+  0.426,
+  0.594,
+  0.441,
+  0.666
+ ],
+ "base": {
+  "label": "base",
+  "core_px": 9699,
+  "ring_px": 862,
+  "core_lum_mean": 0.5259,
+  "ring_lum_mean": 0.3194,
+  "gap": 0.2065,
+  "ring_lum_max": 0.6484,
+  "worst_local_gap": 0.1225
+ },
+ "knob": {
+  "label": "knob",
+  "core_px": 9657,
+  "ring_px": 926,
+  "core_lum_mean": 0.5068,
+  "ring_lum_mean": 0.2399,
+  "gap": 0.2669,
+  "ring_lum_max": 0.6285,
+  "worst_local_gap": 0.1217
+ },
+ "front_base": {
+  "label": "front_base",
+  "core_px": 1912,
+  "ring_px": 86,
+  "core_lum_mean": 0.6955,
+  "ring_lum_mean": 0.5866,
+  "gap": 0.1089,
+  "ring_lum_max": 0.6523,
+  "worst_local_gap": 0.0431
+ },
+ "front_knob": {
+  "label": "front_knob",
+  "core_px": 2136,
+  "ring_px": 251,
+  "core_lum_mean": 0.6345,
+  "ring_lum_mean": 0.2129,
+  "gap": 0.4216,
+  "ring_lum_max": 0.2714,
+  "worst_local_gap": 0.3631
+ },
+ "front_moved_px": 1904
+}

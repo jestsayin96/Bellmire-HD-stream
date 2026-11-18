@@ -4,9 +4,12 @@
 //
 // SECURITY (docs/HUB_SECURITY.md): every string from the snapshot is viewer-
 // controlled and hostile until proven otherwise. It reaches the DOM ONLY through
-// createElement + textContent, via the el() helper below. There is no innerHTML,
-// insertAdjacentHTML, document.write, eval or new Function anywhere in this file,
-// and no snapshot field is ever used as a URL, src or href. The strict CSP is the
+// createElement + textContent, via the el() helper below. The only innerHTML in
+// this file is two page-owned sites (the status line, renderNothing); no snapshot
+// string reaches either one - the status line also interpolates the age text and
+// the fetch error, each through esc(). There is no insertAdjacentHTML,
+// document.write, eval or new Function anywhere in this file, and no snapshot
+// field is ever used as a URL, src or href. The strict CSP is the
 // second wall. The <colour> canary in !dye must render its angle brackets.
 //
 // The look is argued for in web/NOTES.md (not served).

@@ -9708,3 +9708,10 @@ FOR THE GAME BUILD LANE - I TOUCHED NO .gd OUTSIDE tools/art/:
 
 NEEDED FROM MR. E: nothing. FOR THE SUPERVISOR: one call only - whether the eleven
 showcase kits stay under assets/ (my recommendation) or move.
+
+## HUB 2026-11-18 03:39 CT - Satchel rarity frames MEASURED IN A REAL BROWSER, fixed page vs. stripped copy (02:58 HUB row). NO web/ CHANGE, so no security gate owed; I do NOT claim READY TO PUBLISH (the publish is already authorised by the supervisor's 03:16 doc and is the team lead's push).
+- Row taken: HUB in the 02:58 TAKE THIS NEXT block ("finish the measurement on the fixed page; red-prove it from a copy"). Clock off the machine 03:39 CST (UTC-6).
+- Method: Chromium+Playwright 1440x900 @2x, file:// copy of web/, snapshot fetch routed to a minimal v5 payload so ?mock=satchel renders its rows (a bare file:// has no snapshot, hence no rows - the team lead hit the same wall). Read getComputedStyle(.sat-item).borderLeftColor.
+- THE NUMBER: FIXED page 5 of 5 hued rungs framed - uncommon rgb(255,255,255), rare rgb(77,140,255), very rare rgb(179,89,255), legendary rgb(255,140,31), artifact rgb(255,33,26) (art's table to the digit). STRIPPED copy (style.css lines 1398-1400, the five .sat-item.rar-* rules, removed) 0 of 5 framed - the fault returns. junk / starting / common: rgba(0,0,0,0) in both = bare by design. 17 rows, 0 pageerrors, 0 dialogs, 0 injected img[src=x], no horizontal scroll, both pages.
+- LOOKED AT: renders/hub/_sat_rungs_fixed_1440.png. WHAT I SEE WRONG: the uncommon frame is WHITE on a PARCHMENT card (Longsword row) - it reads as a pale sliver, much weaker than the blue/purple/orange/red. The 15:47 ruling chose canonical white because the hub surface is deep ink; the satchel card is parchment, which is exactly the case art's note says pewter exists for. Not changed (ruling stands); NAMED for the team lead: should satchel/parchment cards take RARITY_HUE_PARCHMENT for uncommon?
+- Live-dot colour: unchanged this run (no web/ edit).

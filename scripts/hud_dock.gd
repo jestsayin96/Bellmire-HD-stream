@@ -446,7 +446,7 @@ class ChronicleScroll extends Control:
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		draw_rect(Rect2(x0, cy - cap * 0.5, wdt, maxf(1.0, cap * 0.20)), UiTheme.SCROLL_GRAIN)
+		draw_rect(Rect2(x0, cy + cap * UiTheme.SCROLL_GRAIN_OFF, wdt, maxf(1.0, cap * 0.20)), UiTheme.SCROLL_GRAIN)
 		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
 		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
 		_finial(Vector2(x0 + cap, cy), cap)

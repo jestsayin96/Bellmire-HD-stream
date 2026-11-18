@@ -69,8 +69,16 @@ func _initialize() -> void:
 		if not consts.has(k) or typeof(consts[k]) != TYPE_COLOR:
 			print("U59 %-16s STALE - listed here, not a Color constant in UiTheme" % k)
 			bad += 1
-	# NAMED, NOT GATED: the grain stripe is a 0.20*cap band at cy-0.5*cap on the rod; it only reaches the glyphs when cap is at its
-	# px(8) floor. WORD_HI over it, flattened onto WOOD_LT, is printed so the number is on the record.
-	print("U60 WORD_HI on rod grain stripe %.2f NAMED (geometry-dependent, not gated)" % _cr(UiTheme.WORD_HI, _flat(UiTheme.SCROLL_GRAIN, UiTheme.SCROLL_WOOD_LT)))
+	# U61: the grain stripe was a geometry limit (stripe at cy-0.5*cap crossed the wordmark at the px(8) cap floor, 3.66:1).
+	# It now sits at cy + SCROLL_GRAIN_OFF*cap. GATED on the floor numbers MEASURED off pixels (tools/_u61_stripe.gd, 1080p scale 1):
+	# cap 8, top_cy 11, glyph ink rows 4..16 -> ink bottom edge y=17. The stripe's top edge must be >= that.
+	var f_cap := 8.0
+	var f_cy := f_cap * 1.25 + 1.0
+	var stripe_top := f_cy + f_cap * UiTheme.SCROLL_GRAIN_OFF
+	var stripe_bot := stripe_top + maxf(1.0, f_cap * 0.20)
+	var clear := stripe_top >= 17.0 and stripe_bot <= f_cy + f_cap
+	print("U61 stripe at cap floor [%.2f,%.2f] vs ink bottom 17.00, rod bottom %.2f: %s" % [stripe_top, stripe_bot, f_cy + f_cap, "CLEAR" if clear else "CROSSES"])
+	if not clear:
+		bad += 1
 	print("U59_CONTRAST ", ("OK %d colours walked, %d pairs, %d unmeasured" % [seen, checked, UNMEASURED.size()]) if bad == 0 else "FAIL %d" % bad)
 	quit(0 if bad == 0 else 1)

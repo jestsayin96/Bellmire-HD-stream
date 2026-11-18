@@ -2579,3 +2579,34 @@ COMMANDS_DATA guard does by design; the verdict is the grep, not the exit code.
 ### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. The parse gate
 ### boots the real game, so twitch_eventsub.gd connected to #jestsayin96 and subscribed as it does
 ### on every lane's parse run - that is the boot, not a test, and the bot sent no message.
+
+## D-cycle - S24 System 2 engine half: THE STAFF, POSE-AWARE - grip toward the butt, and the inverted fist turns it end for end. ALL SEVEN POSES CLEAR. 2026-11-17T18:16:00-06:00 (game build)
+TAKE THIS NEXT (16:58 block, GAME BUILD row) gave: the staff, pose-aware, built the NARROW way - a grip nearer the
+butt, with the one pose that then inverts (Cheer) handled where staffs are placed and nowhere else; no pose-indexed
+branch in the slot every weapon uses. Tick condition: lowest point incl. butt ribbons clears y 0 in ALL SEVEN poses,
+the harness prints a verdict line, and a picture of Idle and Cheer. Systems 3/4 and Phase 2 NOT touched.
+- scripts/gear.gd (backup gear.gd.bak_s24, not staged): Gear.equip, for res://assets/gear/dungeon/staff_* ONLY,
+  slides the model's own children +STAFF_GRIP_SHIFT (0.25 mesh units, S21's measured shift) along the shaft, sets
+  meta "staff_grip", and parents a staff_grip node beside the staff on the same BoneAttachment3D. deco_piece hangs a
+  staff_grip piece's D94 ribbons under the finial (hi - 0.20 span) instead of off the butt (S21's tried placement).
+  Every other path through equip/deco_piece is byte-for-byte the old behaviour.
+- NEW scripts/staff_grip.gd (no class_name; preloaded by gear.gd): watches the HAND, not the clip. When the slot's +X
+  (world DOWN in Idle, -0.99 measured S19) rises above +0.15 world y the fist has turned over, and the staff's held
+  rotation goes (0,0,90) -> (0,0,-90): end for end, head up. Back below -0.15 it returns. The 0.30 band stops a hand
+  passing level from flickering. It only ever touches those two rotations, so a caller that sets its own (the S21
+  harness's rows B/C) is left alone. No pose names, no per-clip table.
+- THE NUMBERS, tools/_s21_staff.gd unchanged (windowed, 18:10, build/s24_battery.log), row A = what ships now, lowest
+  point of every mesh under the held node INCLUDING the ribbons: Idle 0.097 | Walking_A 0.103 | Hit_A 0.214 |
+  Spellcast_Shoot 0.205 | Use_Item 0.168 | Cheer 0.565 | 1H_Melee_Attack_Chop 0.165. WORST row A: 0.097 m in Idle.
+  (S20 shipped: worst -1.078. S21's shift alone: Cheer -0.484.) AXIS (idle) row A (0.0, 1.0, -0.03) all three
+  tiers - still upright. VERDICT: S21_STAFF OK (9 staves, 7 poses, 0 failures).
+- LOOKED AT: renders/cycles/s21/s21_pose_A_Idle.png - shaft upright beside the body, butt at the boot top above the
+  floor, finial over the hat. s21_pose_A_Cheer.png - arm raised, the staff stands UP out of the fist with the crystal
+  at the top of the frame; nothing hangs head-down. The flip is a one-frame turn as the fist goes over, not animated -
+  named, not hidden: at stream distance in a cheer it reads as the mage twirling the staff up.
+- Battery on this tree (build/s24_battery.log + build/s24_gates.log): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error;
+  S21_STAFF OK above; OFFFLOOR_VERDICT OK 0 of 1714 samples off the floor
+  (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/17565 (0.000%) raid_in_solid=0/6018 (0.000%) PASS;
+  DELVE_TEST OK ran 9001 frames, floor reached 2 (capped); 0 SCRIPT ERROR / 0 Parse Error across both logs.
+- No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team
+  lead ticks. Lock claimed 18:08:37 declaring 18:34.

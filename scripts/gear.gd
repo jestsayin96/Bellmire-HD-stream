@@ -80,6 +80,11 @@ static func skeleton(n: Node) -> Skeleton3D:
 
 ## Attach a mesh (full res:// path) to a bone. `slot` names it so re-equipping
 ## replaces rather than stacks.
+## S24: how far (mesh units, before scale) the pack staff's grip slides toward its butt. S21 measured +0.25:
+## shaft clear of the floor in Idle 0.10-0.15 m on a mage; the Cheer inversion it causes is staff_grip.gd's job.
+const STAFF_GRIP_SHIFT := 0.25
+const STAFF_GRIP := preload("res://scripts/staff_grip.gd")
+
 static func equip(model_root: Node, path: String, bone := "handslot.r", slot := "weapon",
                   scale := 1.0, glow := 0.0) -> Node3D:
     var sk := skeleton(model_root)
@@ -100,6 +105,17 @@ static func equip(model_root: Node, path: String, bone := "handslot.r", slot := 
     m.scale = Vector3.ONE * scale
     m.rotation_degrees = held_rot(path)
     att.add_child(m)
+    if path.begins_with(DUN + "staff_"):
+        ## S24: the pack staff's grip slides toward the butt, and the inverted fist turns it end for end.
+        ## The model's own children move, so deco_piece measures the moved bounds and the wrap stays in the fist.
+        for c in m.get_children():
+            if c is Node3D:
+                (c as Node3D).position.y += STAFF_GRIP_SHIFT
+        m.set_meta("staff_grip", true)
+        var g: Node = STAFF_GRIP.new()
+        g.name = "staff_grip"
+        g.set("held", m)
+        att.add_child(g)
     if glow > 0.0:
         ignite(m, glow)
     return m
@@ -1773,7 +1789,9 @@ static func deco_piece(n: Node3D, look: Dictionary) -> void:
         pi = (pi + 1) % D94_PENNON.size()
     if f == 1 or f == 4:
         for k in [-1.0, 1.0]:
-            var rib := _part(n, _box(0.07, 0.045, 0.02), _m_cloth(D94_PENNON[pi], 0.7), dir * (lo - span * 0.14) + Vector3(0.05 * k, 0, 0.05 * k) * (Vector3.ONE - dir), rot)
+            # S24: a pack staff's ribbons hang under the finial, not off the butt (the butt is near the floor)
+            var rat := (hi - span * 0.20) if n.has_meta("staff_grip") else (lo - span * 0.14)
+            var rib := _part(n, _box(0.07, 0.045, 0.02), _m_cloth(D94_PENNON[pi], 0.7), dir * rat + Vector3(0.05 * k, 0, 0.05 * k) * (Vector3.ONE - dir), rot)
             rib.scale = Vector3(1, maxf(2.0, span * 0.30 / 0.045), 1)
             rib.name = "d94_ribbon"
     if f == 2 or f == 4:

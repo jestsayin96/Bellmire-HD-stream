@@ -10111,3 +10111,10 @@ in this file, class_name Bestiary, no cycle - bestiary.gd has zero ChatCmd refer
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## C-112 (2026-11-18 CT, content) - feed lines for the 33rd miniboss: the Beadle
+- ITEM: TAKE THIS NEXT (09:1x CT 18 Nov, team lead 08:58 block) row 4 named the Beadle, art's 33rd (theme `shrine`), committed at 0dd853e and merged at e954706, with no lines. C-55 is long done; C-111 (Leech) is the last cycle.
+- ADDED: lore_lines.json miniboss_feed.by_key.beadle, 9 arrive and 8 fall (17 lines), plus `_note_c112`. Written against art's MINIBOSSES.md entry 33: it calls the same hero again and again while the rest hold and watch; the four brass pegs on its board are the calls it has left; knock the board off its arm and the order comes back. One arrive line is art's own feed line. No {name}. No floor count. Zero exact duplicates against every other string in the file.
+- CHANGED: nothing pre-existing.
+- VALIDATION OK: all four files parse; every pre-existing key equal (all 32 earlier by_key entries compared whole, all other top-level keys equal); new keys only by_key.beadle and `_note_c112`; key order unchanged; items.json, bosses.json, potions.json untouched.
+- CODE WIRING: none new. by_key is read by key, so miniboss_for will release the beadle once the game build has a beadle MB_FIT ratio (art's register says 1.2) and a `shrine` row in THEME_MINIBOSS_MORE. arrive and fall only; act and broken stay unwired.

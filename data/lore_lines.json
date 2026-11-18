@@ -11594,6 +11594,29 @@
           "The coif is spotted dark. None of it is his.",
           "The horns swing on their cord and are still."
         ]
+      },
+      "beadle": {
+        "arrive": [
+          "A tall man in a parish coat, a staff in one hand and a board held up over his head.",
+          "It says who speaks, and it is not you.",
+          "Four brass pegs on the board. Each is a call he has left.",
+          "He names one of you. Then he names the same one again.",
+          "The rest hold and watch. You do not choose who acts.",
+          "Count the pegs from the door. When they are gone, he is spent.",
+          "Knock the board off his arm and the order is yours again.",
+          "The coat has been to every moot for years. The staff and the board are his office, and he keeps them.",
+          "He stands a head above the people he calls. He has never been argued with."
+        ],
+        "fall": [
+          "The Beadle is down. The board hits the floor and the pegs scatter.",
+          "The staff rolls clear. Nobody is calling now.",
+          "The order comes back to you. Act as you like.",
+          "He kept the call to the last peg.",
+          "The board lies face down. It has nothing left to say.",
+          "The Beadle is down. Whoever stood watching can move.",
+          "Brass pegs on the stone. Somebody counts them out of habit.",
+          "The coat is creased where the board rode. He held it a long time."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -11606,7 +11629,8 @@
     "_note_c108": "C-108: feed lines for the 29th art-lane miniboss, the Paviser (9 arrive and 8 fall, 17 lines). by_key now holds 29 keys. Same shape as the other 28; arrive and fall only, {name} not used. One arrive line says the facing mechanic plainly (the board swings to whoever is hurting it most) and one says the answer (go round); the rest are scene. No mechanic is built from these lines; they describe what art drew. Nothing spawns this body unless the game build has a paviser row; that is engine work and is not changed here.",
     "_note_c109": "C-109: feed lines for the 30th art-lane miniboss, the Fenman (9 arrive and 8 fall, 17 lines). by_key now holds 30 keys. Matches the 16 recent keys that carry arrive and fall only (14 older keys also carry act and broken); not the other 14, {name} not used. One arrive line is the art lane's own feed line, kept word for word (Something out there is listening.). Two arrive lines say the mechanic plainly (it comes for whoever moved last; a hero who stands still is not there to it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines; they describe what art drew. Nothing spawns this body unless the game build has a fenman row; that is engine work and is not changed here.",
     "_note_c110": "C-110: comfitmaker (thirty-first miniboss, art lane) gets arrive and fall lines, 9 and 8. by_key now holds 31 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 31: a sugar-hard shell nothing the party carries can mark, so it hands out comfits and a comfit is the one thing that cuts it, at the price of a gummed hand that swings slower while it holds the sweet. Two arrive lines state the mechanic plainly and the fall lines answer it. No mechanic is built from these lines. Nothing spawns this body unless the game build has a comfitmaker row; that is engine work.",
-    "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work."
+    "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work.",
+    "_note_c112": "C-112: beadle (thirty-third miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 33 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 33: while it stands the party does not choose who acts, it calls the same hero again and again while the rest hold and watch, the four brass pegs on its board are the calls it has left, and knocking the board off its arm gives the order back. One arrive line is art's own feed line. Three arrive lines state the mechanic plainly (same hero again, pegs are the calls, knock the board off) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a beadle row; that is engine work."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

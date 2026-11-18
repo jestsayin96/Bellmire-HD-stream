@@ -3466,3 +3466,14 @@ DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR;
 TOWNWALK in_solid=0/17026 (0.000%) raid_in_solid=0/6121 (0.000%) PASS.
 No live Twitch test, nothing spent. Backups scripts/delve.gd.bak_s36, tools/_s34_ways.gd.bak_s36 (untracked).
 Logs build/_s36_gates.log, build/_s36_order.log, build/_s36_townwalk.log.
+
+## D-cycle - S37: STOOD DOWN - THE CURRENT BLOCK'S GAME-BUILD ROW IS ALREADY DELIVERED. 2026-11-18T12:09:24-06:00 (game build)
+TAKE THIS NEXT is still the 10:5x block (no 11:5x block was written). Its row 1 (the Beadle's way + the S33_DRAW
+re-run) shipped at S36 (a6feb7c) and is waiting on the lead's tick; nothing else in the block is game build's.
+I did not pull a Phase 2 system early. Measured, no code changed:
+- No Godot alive at claim; lock was IDLE (HUD 11:53:52). Claim 12:07:52, claim+25 = 12:32:52, declared 12:30.
+- Miniboss bodies: 44 .glb in assets/monsters/minibosses/, 43 have their own MB_FIT key. The one without is
+  snuffer_chibi (on disk since 16 Nov, 1102d91). NOT A DEFECT: miniboss_ratio() falls back to MB_FIT["snuffer"] 1.06,
+  and art's _fit_report.json pairs.snuffer_chibi.ratio is 1.06 - the same number. No 34th body has landed.
+- Uncommitted renders/cycles/d96/*.png modifications sit in R from another session; I did not touch or stage them.
+No gates run (nothing to gate). No live Twitch test, nothing spent.

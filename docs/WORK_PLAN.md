@@ -1070,12 +1070,42 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
   why I read 46 where the prompt's baseline says 28 and the 04:07 seat predicted 58 under a strict
   test. THE THREE NUMBERS ARE THREE MATCHERS, NOT THREE ANSWERS. The answer is the class table.
 
+*** FOR THE NEXT TEAM LEAD - TWO CORRECTIONS TO THE PROMPT ITSELF, WRITTEN AFTER :05 ***
+  WRITTEN AT 05:1x CT, AFTER THE :05 CUT. BY THE STANDING RULE THESE ARE THE NEXT FIRING'S ROWS
+  AND I AM SAYING SO ON THEIR FACE. They are corrections, not assignments - act on them at once.
+  1. THE PROMPT'S HUB BASELINE IS STALE AND WILL MISLEAD YOU. It says "As of 18 Nov 00:0x CT
+     gh-pages is still 40223be and origin/gh-pages^{tree} does NOT equal origin/hub:web" and tells
+     you to keep that in FOR THE SUPERVISOR until it is called. IT WAS CALLED AND DONE AT 03:34 CT
+     on 18 Nov. gh-pages is 45a7904 and the trees are EQUAL (2d14aa94). DO NOT RE-RAISE THE
+     PUBLISH. Measure gh-pages yourself every hour rather than quoting the prompt's number - that
+     is the whole lesson here, and it is the second time a quoted baseline in that block has gone
+     stale under a seat that trusted it.
+  2. A FIRING STILL CANNOT WRITE A SCHEDULED TASK, AND I TESTED IT AGAIN RATHER THAN ASSUMING.
+     I attempted a NAME-ONLY update_trigger on this seat's own task at 05:1x CT - the cheapest
+     possible write, no prompt payload. REFUSED: "Permission for this action was denied by the
+     Claude Code auto mode classifier. Reason: [Cowork Scheduled Task Write]". That is the same
+     result as the 00:1x measurement, in the same direction, so the finding holds: a firing has no
+     live turn to be approved in. ONE ATTEMPT, NO RETRY, correction placed here in the plan.
+     I did NOT spend a full 70,000-character prompt replace to re-prove it a third time in one
+     night. If you disagree, the cheap name-only probe above is the test to run - it costs almost
+     nothing and it exercises the same approval path.
+
 *** FOR THE SUPERVISOR ***
-  1. THE HUB'S SECTION-BAR FIX IS STILL MERGED AND UNPUBLISHED - the one Mr. E asked for himself.
-     gh-pages is still 40223be and origin/gh-pages^{tree} does NOT equal origin/hub:web. The hub
-     lane shipped NO web/ change this hour, so nothing new is waiting behind it. RECOMMENDATION:
-     call the publish. The push method is proven and the verification list is in my prompt; I will
-     run the full security and state-check gate before any push, as I did at 09:40 on 17 Nov.
+  1. *** WITHDRAWN BY MY OWN MEASUREMENT, IN THE SAME RUN, BEFORE ANYONE ACTED ON IT. THE HUB IS
+     PUBLISHED AND CURRENT. NOTHING IS WAITING ON YOU HERE. ***
+     I first wrote this item recommending you call the publish, on my prompt's baseline that
+     gh-pages was still 40223be with a tree that did not match origin/hub:web. I THEN COMPUTED IT
+     INSTEAD OF QUOTING IT, AND THE BASELINE IS TWO HOURS STALE.
+     MEASURED NOW: origin/gh-pages is 45a7904, "publish hub web/ subtree to gh-pages (team lead,
+     supervisor authorised 2026-11-18 03:16 CT) from origin/hub 9180945", dated 2026-11-18
+     03:34:37 -0600. It is a FAST-FORWARD from 40223be (merge-base --is-ancestor returns true),
+     and origin/gh-pages^{tree} EQUALS origin/hub:web - both 2d14aa94. index.html sits at the ROOT
+     of gh-pages, which is the correct subtree shape and not the broken web/index.html form.
+     SO THE SECTION-BAR FIX MR. E ASKED FOR IS LIVE. The hub lane shipped no web/ change this
+     hour, so the published tree is still the current one. NO PUBLISH IS OWED AND I RAN NO PUBLISH
+     VERIFICATION GATE, because the lane claimed no "ready to publish" this hour.
+     THE PUBLISH WAS CORRECTLY AUTHORISED AND CORRECTLY DONE - your 03:16 approval, the proven
+     plumbing method, a fast-forward, trees equal. I am recording it, not re-opening it.
   2. YOUR 03:16 CROSS-LANE SCRATCH-AND-RESTORE EXCEPTION IS WORKING AND I RECOMMEND LEAVING IT
      STANDING. It cleared three arms that had been stuck for two cycles (B45), and B46 used it
      again. Both borrowed files were restored byte-identical and md5-proved. No commit anywhere

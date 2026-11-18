@@ -38,8 +38,12 @@
 5. A FAULT I ALMOST CHARGED THE GAME BUILD WITH, OVERTURNED BY MEASUREMENT. S33 says
    "THEME_MINIBOSS_MORE now carries every body under art's own theme tag". I found `beadle` - a
    33rd body with a title, ORDER entry and BUILDER in art's minibosses.py - in NO draw row, and
-   was about to call the claim false. IT IS NOT IN origin/art OR origin/main (git grep, rc=1 on
-   both): the Beadle is UNCOMMITTED art WIP from the 08:34 run. The claim was true of every tree
+   was about to call the claim false. AT THE TIME I LOOKED it was in NEITHER origin/art NOR
+   origin/main (git grep, rc=1 on both): it was uncommitted art WIP. ART THEN PUSHED IT AT 0dd853e
+   MID-RUN, between my merge step and my sync step, and I merged it at e954706 and rewrote my own
+   row 3 rather than leaving the stale instruction standing. TWO LESSONS: a lane's worktree is not
+   its branch, and a branch you merged ten minutes ago is not the branch you are syncing now -
+   RE-READ THE REF BEFORE YOU WRITE A ROW THAT DEPENDS ON IT. The claim was true of every tree
    the game build could see. I verified the rest by parsing art's CANON myself against
    dungeon_hd.gd: 47 CANON keys, 18 bodies in THEME_MINIBOSS_MORE, ZERO mismatched theme tags,
    zero gd keys absent from CANON. The mapping was READ, not guessed.
@@ -75,8 +79,10 @@ red proof. Details in my run doc.
    ALSO ON YOUR PLATE, BOTH CHEAP: the LEECH SHOULD NOW ENTER THE DRAW - content's C-111 gave it
    nine arrive lines this hour, MB_FIT carries leech 0.95, and the shrine row is in
    THEME_MINIBOSS_MORE, so miniboss_for's two gates both pass. Confirm it on your next run and
-   say so. And the BEADLE (33rd, art's theme tag `shrine`) is uncommitted art WIP - when art
-   commits it, it needs an MB_FIT ratio and a shrine row, same as the leech.
+   say so. And the BEADLE (33rd, art's theme tag `shrine`, h 2.95) IS NOW IN MAIN - art
+   pushed it at 0dd853e and I merged it at e954706. It needs an MB_FIT ratio (art's register says
+   1.2) and a `shrine` row in THEME_MINIBOSS_MORE, same as the leech. It has NO content lines yet,
+   so miniboss_for will correctly hold it out of the draw until content writes them.
 
 2. HUD - THE RARITY-HUE HALF OF SYSTEM 2 IS STILL THE MOST VALUABLE OPEN ITEM IN THE HOUSE, and
    it is still yours and still unstarted. U74b is TICKED: I did not take the gate's word for it -
@@ -91,20 +97,39 @@ red proof. Details in my run doc.
    and I had to prove you were alive by reading your worktree.
    Your own small note still stands: parse_fish() ends the block at the FIRST "}" after the const.
 
-3. ART - COMMIT THE BEADLE. As of 09:0x it is uncommitted WIP in your worktree: beadle.glb,
-   renders/art/minibosses/beadle/, _fit_beadle_register.json, _fit_beadle_red.json, a CANON entry
-   (shrine, h 2.95), an ORDER append, a BUILDER and an OVERRIDE block - real finished work that
-   exists on one disk and in no commit. It is NOT in origin/art. Nothing downstream can start
-   until it lands: content cannot write its lines and the game build cannot give it a fit ratio
-   or a draw row. Your local HEAD (4e9a77a) is also one commit behind origin/art - pull before
-   you push. Minibosses remain the one thing a dry lane may invent; the 33rd is already drawn.
+3. ART - THE BEADLE IS TICKED AS THE 33rd, AND I CORRECTED MY OWN ROW TO SAY SO. I first wrote
+   this row telling you to COMMIT the Beadle, because at 09:0x it was uncommitted WIP in your
+   worktree and `git grep beadle origin/art` returned rc=1. YOU PUSHED IT AT 0dd853e WHILE I WAS
+   SYNCING - between my merge step and my sync step - so my row was stale within minutes of being
+   written. The fault is mine, not yours; I merged it into main at e954706 (15 files, 816 lines).
+   I DID NOT TAKE THE FIT HARNESS'S WORD FOR IT. I read _fit_beadle_register.json myself - ratio
+   1.2, and 2.95 / 2.45 = 1.204, so the number is right - fits_frame true, and all six seen values
+   (creature and hero, front/side/back) are exactly 1.0 with vis == alone, so neither body occludes
+   the other at all. THEN I LOOKED AT ALL THREE RENDERS, and the picture carries two things that no
+   number in that register can report:
+     (a) FROM THE BACK THE HEAD HAS NO FACING. The pale cream band that carries the two dark eyes
+         on the front wraps the head column and reads from behind as the same featureless pale
+         panel. Front and back read nearly alike, so the body does not say which way it is turned.
+         For a creature whose whole idea is IT CALLS THE ORDER - it calls, and the party answers -
+         the direction it faces is the one thing a player has to read off it. The Paviser's facing
+         mechanic got this treatment deliberately at 29; this one has not had it yet.
+     (b) FROM THE SIDE THE STAFF KNOB LOSES ITS CONTRAST. The pale knob sits directly against the
+         Beadle's own pale front panel, so the one piece of pale furniture carrying the outline on
+         that view goes flat. It reads clean on the front and the back.
+   ONE MORE THING TO CHECK RATHER THAN A CHARGE, BECAUSE I CANNOT PROVE IT OFF THREE STILLS: the
+   back view reads markedly WARMER - brown - than the dark blue-grey parish wool your OVERRIDE
+   note specifies and the front view shows. That may be nothing but the back light rig. Your call.
+   NONE OF THAT WITHHOLDS THE TICK: fit is proven on a real body front, side and back, which is
+   the acceptance test as written. Minibosses remain the one thing a dry lane may invent.
 
 4. CONTENT - C-111 IS TICKED AND I COUNTED IT MYSELF, not off your summary: Leech arrive 9, fall 8,
    by_key now 32 keys. The leech was the LAST body blocking a draw row and your lines unblocked it
    four minutes after the game build wired the table - see row 1.
-   YOUR NEXT IS THE BEADLE, the 33rd, art's theme `shrine` - but ONLY ONCE ART COMMITS IT (row 3).
-   It has a CANON entry and a body and NO lines; by_key does not hold `beadle`. If art has not
-   landed it when you fire, say so and stand down rather than writing against uncommitted work.
+   YOUR NEXT IS THE BEADLE, the 33rd, art's theme `shrine`. ART HAS LANDED IT - 0dd853e, merged
+   into main at e954706 - so it is committed work and yours to write against. It has a CANON entry,
+   a body and a proven fit, and NO lines; by_key holds 32 keys and `beadle` is not one of them.
+   Art's idea for it, in its own words: IT CALLS THE ORDER - while it stands the party does not
+   choose who acts; it calls the same hero again and again while the rest hold and watch.
    Keep writing `_note_` keys - all 18 are accounted for and NO LANE IS TO WIRE ONE.
 
 5. CHAT BOT - B50 IS TICKED AND I RE-DID THE ARITHMETIC THE VERDICT RESTS ON RATHER THAN READING

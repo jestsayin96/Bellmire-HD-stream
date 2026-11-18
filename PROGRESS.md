@@ -9903,3 +9903,13 @@ clamps to 1.0, so the edit changed nothing) - fixed by moving the green channel 
 still OK (32 checks). Not touched: L74 feed/theme-under-load (needs windowed capture; next firing).
 Note for the owner of gear.gd/hero_body.gd: headless --quit-after 300 on the merged tree prints 7 'instantiate on a null value'
 SCRIPT ERRORs at gear.gd:104 (hero_body.gd:30 -> adventurers.gd:77); not a HUD file, likely un-imported glb in this worktree.
+
+
+## U75 (HUD, 2026-11-18T09:55-06:00) - stand-down WRITTEN UP: no HUD item is open; row 2 of the 09:1x block is stale (file-only; no lock taken, no Godot launched)
+- WHAT I READ: origin/laptop docs/WORK_PLAN.md (fetched this firing). The 09:1x TAKE THIS NEXT block's HUD row 2 still says "THE RARITY-HUE HALF OF SYSTEM 2 ... STILL UNSTARTED". The same file says otherwise twice: the 03:xx/04:xx block struck it as DONE (built U55/U56, UiTheme.rarity_pip/rarity_ink read live at leaderboard_panel.gd:197/:202) and "[x] SYSTEM 2 IS CLOSED WHOLE" was ticked 18 Nov 01:5x CT (main 08f7fe4). U71 (one-table guard) and U74b (third table, fishing.gd) are ticked.
+- L74 (feed + theme under load) is ALSO DONE: U36, 16 Nov, tools/_l74_test.gd, ticked ([x] L74 in the plan). L73 ticked 16 Nov 09:58. L66 closed to the hub as H31. Nothing is left in my queue that is in my seven files.
+- THE 08:52 SLOT: the chat bot held the lock on a live claim (B50, 08:52:40 -> 08:58:10) and I did not launch - correct yield. This entry is the delivery the 09:1x block asked for, so the hour is not silent.
+- Lock: read at 09:52 CT - last line IDLE (game build S34, 09:17:39), no Godot process. I took none and ran nothing windowed or headless.
+- Looked at: no picture, nothing changed in a game file. Only PROGRESS.md.
+- Standing note for the owner of fishing.gd parse_fish(): it ends the block at the FIRST "}" after the const (U74b observation, unchanged).
+- Not ticked by me.

@@ -11184,3 +11184,9 @@ Row (team lead 6, "prove which"): a hardened parser changing no verdict means ei
   unterminated "{{": old 4 (SILENT GREEN), new -1 -> 0 rungs, FAILS loud
 (3) Verdict: the old parser was already correct on every shape the shipped corpus contains (U77, 12 historical revisions), and wrong on every shape U76 constructed. So the null result is real and the hardened path is live; no silent instrument. The unterminated case is the one that mattered - old went green, new fails.
 Limit stated: (2) is a python port of both finders; the in-engine proof of the new one is U76_BRACE 3/3 (rerun U77). I did not rerun Godot this hour. Nothing for Mr. E to decide. Row closed; queue empty again.
+
+## hub 18 Nov 2026 16:4x CT - row 4: the 14 deleted app.js lines documented; NOT READY TO PUBLISH (no new claim)
+TAKE THIS NEXT row: HUB (:37) row 4 of the 16:0x block. NUMBER: shopGood() = 14 lines deleted, 0 added; callers
+of shopGood in web/ = 0 (grep); replaced by shopCard() called at 2 sites; .shop-good CSS still used by 2 order-row sites.
+Recorded in web/NOTES.md. Only NOTES.md and PROGRESS.md changed; web/app.js and style.css untouched; no screenshot
+(no render change). node --check OK; innerHTML at :255/:301 only. Live-dot colour: unchanged.

@@ -938,3 +938,21 @@ strings in web/ are the two page constants in app.js: publishable key + Twitch c
 docs/ and tools/ at the repo root are not hub-owned, so moving it out would mean writing to files
 this lane may not touch. Measured publish delta, gh-pages^{tree} 2d14aa9 vs HEAD:web 35eb801:
 3 files, +60/-24 = app.js -14, style.css +25/-10, tools/sheet_overlap.js +45 (new, inert).
+
+## What the 14 deleted lines of app.js carried, and what carries it now (hub run, 18 Nov 2026 16:4x CT)
+Asked by the team lead (16:0x block, row 4) so the person authorising a push knows what leaves the page.
+THE DELETION: `function shopGood(g, passing)` - the old one-line-per-item shop stock row (a `li.shop-good`
+with name, "xN" quantity, rarity label and a coin price). 14 lines removed, zero added.
+WHAT IT DID: drew a stock/cargo item as a flat list row; passing-caravan rows got the `passing` class and
+a rarity class frame.
+WHAT CARRIES IT NOW: `shopCard(g, passing, shopName)` (app.js ~3768, H32 pass 4), called at the shelf
+(~3823) and the caravan cargo (~3843). Same inputs and same fields - name (control chars stripped, 60 cap,
+"(unnamed)" fallback), rarity (rarityClass frame + 16-char pill), cost (coin icon, "-" fallback), qty (now
+shown in the hover/focus preview as "N on the shelf"), and `passing` (class + "Passing through with the
+caravan" line). Every string still goes through el()/textContent; the picture is the itemPic() whitelist.
+WHY IT IS SAFE TO LEAVE: `grep -n shopGood web/app.js` now returns nothing - the function had ZERO callers
+after pass 4, so no behaviour leaves the page. The `.shop-good` CSS is NOT dead: the order rows
+(app.js ~3858 and ~4133) still use the class, so style.css keeps those rules.
+CHECKS (measured): node --check app.js OK; innerHTML at app.js:255 and :301 only, both page-owned;
+zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. No browser run: this
+run changed only NOTES.md, so the hostile-name test is not owed. Not claiming READY TO PUBLISH.

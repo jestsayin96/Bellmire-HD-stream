@@ -810,6 +810,42 @@ static func commands() -> Dictionary:
             if not (typeof(cv) == TYPE_FLOAT or typeof(cv) == TYPE_INT) or float(cv) <= 0.0:
                 push_error("COMMANDS_DATA COOLDOWN UNUSABLE: data/commands.json `%s` is not a positive number (%s) - the read falls back and the published wait lies" % [ck, str(cv)])
                 printerr("COMMANDS_DATA COOLDOWN UNUSABLE - `%s` is not a positive number (%s)" % [ck, str(cv)])
+        # B42: THE TWO NUMBERS IN MY OWN DATA FILE NOTHING VOUCHED FOR. The B29 comment above
+        # says the COOLDOWN keys are the only PUBLISHED numbers nothing vouched for, and that is
+        # still true - but `ask.gap_s` and `ask.max_len` are numbers nothing vouched for either,
+        # and they are read with the same silent fallback to a literal in this file:
+        # ask_topic() uses `int(float(ask().get("gap_s", 45.0)) * 1000.0)` for the shared-answer
+        # gap and `int(a.get("max_len", 140))` for the length a question may reach. Delete either
+        # key, or give it a wrong type, and every gate in the house stays green while the bot
+        # enforces a DIFFERENT number a viewer feels: a question one character over the cap gets
+        # SILENCE, which is the one failure L69 exists to end, and a wrong gap either repeats a
+        # shared answer on stream or swallows it. Neither is published, so there is no doc to
+        # drift - the fault is the silent fallback itself, which is why these two were missed when
+        # the published pair were guarded.
+        # THE TYPE ARM IS WRITTEN FOR GODOT'S JSON, NOT AGAINST IT: the parser hands back a
+        # FLOAT for a plain `140`, so TYPE_FLOAT is CORRECT here and an int-only check would be
+        # the defect. A STRING "140" is the fault - it reads as 0 through int() and the cap
+        # becomes "every question is too long".
+        # max_len gets one arm the gap does not: a cap must be a WHOLE number of characters.
+        # 140.9 silently enforces 140 through int(), the same shape as LOOK FRACTION below.
+        if typeof(ask_d) == TYPE_DICTIONARY:
+            for ak: Array in [["gap_s", "the shared-answer gap"], ["max_len", "the length a question may reach"]]:
+                var akey := String(ak[0])
+                var awhat := String(ak[1])
+                if not (ask_d as Dictionary).has(akey):
+                    push_error("COMMANDS_DATA ASK NUMBER MISSING: `ask` carries no `%s` - %s silently falls back to the literal inside chatcmd.gd and nothing in the house says the data stopped deciding it" % [akey, awhat])
+                    printerr("COMMANDS_DATA ASK NUMBER MISSING - no `ask.%s`; %s is on the fallback literal" % [akey, awhat])
+                    continue
+                var av: Variant = (ask_d as Dictionary)[akey]
+                if not (typeof(av) == TYPE_FLOAT or typeof(av) == TYPE_INT) or float(av) <= 0.0:
+                    # the TYPE is named beside the value on purpose: str("140") and str(140) read
+                    # the same in a log, and a lane reading this line has to be able to tell a
+                    # wrong type from a wrong number without opening the data file.
+                    push_error("COMMANDS_DATA ASK NUMBER UNUSABLE: `ask.%s` is not a positive number (%s, type %s) - the read falls back and %s is not what the data says" % [akey, str(av), type_string(typeof(av)), awhat])
+                    printerr("COMMANDS_DATA ASK NUMBER UNUSABLE - `ask.%s` is not a positive number (%s, type %s)" % [akey, str(av), type_string(typeof(av))])
+                elif akey == "max_len" and float(av) != float(int(float(av))):
+                    push_error("COMMANDS_DATA ASK MAX_LEN FRACTION: `ask.max_len` is %s, and a cap on a question is a whole number of characters - the read truncates it to %d, so the enforced cap is not the one the data states" % [str(av), int(float(av))])
+                    printerr("COMMANDS_DATA ASK MAX_LEN FRACTION - max_len %s enforced as %d" % [str(av), int(float(av))])
         # B33: THE FORGE KIND LIST WAS RECITED, NOT ENUMERATED. `forge`.what names the kinds a
         # viewer may ask the smith for, and NOTHING compared that sentence to Gear.KINDS, which is
         # what roster.gd actually accepts (it refuses on `Gear.KINDS.has(kind)` and lists

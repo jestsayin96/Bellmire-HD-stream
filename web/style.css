@@ -1796,3 +1796,8 @@ html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }
   html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar { display: block; height: 5px; }
   html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar-thumb { background: rgba(233,214,168,.4); border-radius: 5px; }
 }
+/* "Sells up to" tier word: it is a <b>, which has no border, so the generic .rar-* rule (border-left-color only) painted nothing - measured 18 Nov. Underline it in the rung colour (frame, not text colour, so the white rung still reads on parchment). junk/starting/common stay bare. */
+.shop-sells b[class*="rar-"] { border-bottom: 2px solid transparent; padding-bottom: 1px; }
+.shop-sells b.rar-uncommon { border-bottom-color: var(--rar-uncommon); box-shadow: 0 1px 0 rgba(42,28,16,.6); } .shop-sells b.rar-rare { border-bottom-color: var(--rar-rare); }
+.shop-sells b.rar-very-rare, .shop-sells b.rar-epic { border-bottom-color: var(--rar-very-rare); } .shop-sells b.rar-legendary { border-bottom-color: var(--rar-legendary); }
+.shop-sells b.rar-artifact { border-bottom-color: var(--rar-artifact); }

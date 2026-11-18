@@ -6433,3 +6433,331 @@ def pressman():
 
 
 BUILDERS.update({"pressman": pressman})
+
+
+# ------------------------------- 23 THE STRICKLER: a beam, a measure and a line
+CANON.update({
+    "strickler": ("The Strickler", 2.55, (0.70, 0.66, 0.52), (0.86, 0.92, 1.00),
+                  "treasury",
+                  "IT STRIKES YOU LEVEL - while it stands, your best hero is scraped "
+                  "down to the measure of your worst; your strongest is no answer, so "
+                  "lift the lowest or break the beam",
+                  0.12, "Something in here is taking the heap off."),
+})
+ORDER = ORDER + ["strickler"]
+
+
+def _gltf_counts(stem):
+    """Read the PRIMITIVE and TRIANGLE counts straight off the .gltf's JSON,
+    before anything is imported.
+
+    THIS EXISTS BECAUSE OF A FAULT I REPORTED AGAINST MYSELF. The Barrel in
+    the Tapster's pass 2 tore into shards and I blamed the MODEL - two
+    material slots at a coincident radius. The 17:42 audit (94 files, 44
+    multi-slot objects, 52 measurable pairs, docs/art/PROPS_SLOT_AUDIT.md)
+    found ZERO coincident pairs within 1 mm, the Barrel included, and three
+    renders of the same file settled the cause: OUR OWN FIXED CAP of 110 faces,
+    which on an 824-triangle cask is a collapse ratio of 0.1335 across a
+    two-primitive mesh. The cap was the cause and the cap is the cure.
+
+    So the cap is now read off the model. Returns (prims, tris, per_prim_min).
+    """
+    import json
+    root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        os.pardir, os.pardir))
+    path = os.path.join(root, "assets", "props", stem + ".gltf")
+    if not os.path.isfile(path):
+        return (0, 0, 0)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            d = json.load(fh)
+    except Exception:
+        return (0, 0, 0)
+    acc = d.get("accessors", [])
+    prims, tris, smallest = 0, 0, None
+    for me in d.get("meshes", []):
+        for pr in me.get("primitives", []):
+            prims += 1
+            ix = pr.get("indices")
+            n = (acc[ix]["count"] // 3) if (ix is not None and ix < len(acc)) else 0
+            tris += n
+            smallest = n if smallest is None else min(smallest, n)
+    return (prims, tris, smallest or 0)
+
+
+# A primitive collapsed below this many triangles stops being the shape it was
+# modelled as. It is the floor the Barrel went through at 110/824.
+PRIM_FLOOR = 72
+
+
+def _prop_mesh_m(stem, placed_m, keep_slots=None, px_per_m=900.0):
+    """_prop_mesh, with the cap DERIVED FROM THE MODEL AND ITS PLACED SIZE
+    instead of a constant.
+
+    `placed_m` is the largest dimension this part will actually occupy in the
+    finished creature. A fist-sized weight bag gets a fist-sized budget; a
+    cask the size of a man does not get the same 110 faces as the bag. And the
+    budget is REFUSED outright when it would drive any single primitive below
+    PRIM_FLOOR - in that case the model ships at full density, because 730
+    honest triangles cost less than one torn one.
+
+    It is a SEPARATE function and not an edit to _prop_mesh on purpose: the
+    Tapster shipped through _prop_mesh and its mesh must not move under it
+    while I am changing the rule. One thing at a time.
+    """
+    prims, tris, per_prim = _gltf_counts(stem)
+    budget = int(max(96.0, placed_m * px_per_m))
+    cap = tris                                    # the model's own density
+    if tris and budget < tris:
+        ratio = float(budget) / float(tris)
+        if per_prim and per_prim * ratio >= PRIM_FLOOR:
+            cap = budget
+    _PROP_CAPS[stem] = {"prims": prims, "tris": tris, "smallest_prim": per_prim,
+                        "placed_m": round(placed_m, 3), "budget": budget,
+                        "cap_used": cap, "decimated": bool(cap < tris)}
+    return _prop_mesh(stem, max_faces=cap, keep_slots=keep_slots)
+
+
+_PROP_CAPS = {}
+
+
+def strickler():
+    """IT STRIKES YOU LEVEL. A strickle is the straight-edged stick a market
+    officer draws across the rim of a grain measure to scrape the heap off, so
+    that a bushel sold is a bushel and not a bushel and a handful. This one
+    does it to a party. While it stands, the best hero in the room is struck
+    down to the measure of the worst - so the fight is not won by your strongest
+    swinging harder, it is won by getting your weakest off the floor, or by
+    breaking the beam he measures against.
+
+    WHY IT IS NOT ONE OF THE TWENTY-TWO, checked by PARSING CANON rather than
+    by remembering it (36 entries, 22 distinct bodies). The set summons,
+    re-plates itself, drags, douses the lamps, rises from its own graves, bars
+    the door, steals gear, heals the room, floods it, sows thorns, pre-sets
+    traps, scales with the fire, throws its voice, sets the floor, splits in
+    two, arms the other monsters, loads you down, cuts the party in half,
+    learns the blow you used, takes the haul, drinks the brews, and collars
+    your fallen. NOT ONE OF THEM TOUCHES THE HEROES RELATIVE TO EACH OTHER.
+    The Loader weighs EVERYONE down; this one flattens the DIFFERENCE between
+    them, which inverts who in the party matters and is a decision rather than
+    a damage race.
+
+    THE SIDE VIEW IS THE POINT OF THIS ONE, AND IT IS THE LEAD'S NOTE ON THE
+    PRESSMAN TAKEN AS A BRIEF. The Pressman's trade reads from the front (a
+    1.72 m yoke across the picture, four collars hanging) and collapses to a
+    narrow post from the side. A horizontal element can only be read from the
+    camera it is NOT pointing at, so one horizontal can never carry both views.
+    This creature therefore carries TWO, AT RIGHT ANGLES:
+
+      THE STRICKLE  a 1.48 m straight-edge along model X, laid across the rim
+                    of the measure and held in both hands. Reads from the
+                    FRONT; foreshortens to a stub from the side.
+      THE BEAM      a 2.00 m balance beam along model Y, on one standard
+                    behind the shoulders, a shallow pan hanging fore and the
+                    weights hanging aft. Reads from the SIDE; foreshortens to
+                    a stub from the front.
+
+    Each covers the other's blind camera BY CONSTRUCTION, and that claim is
+    MEASURED, not asserted - tools/art/_trade_read.py renders the creature with
+    and without each group through one camera and counts the pixels that MOVED,
+    the same viewer's question that caught the Reeve's head glow. The numbers,
+    and the two older creatures measured the same way for a baseline, are in
+    docs/art/MINIBOSSES.md.
+
+    WEAR 0.12, the second-lowest in the file after the Reeve's 0.05, and the
+    tool justifies it: a strickle that is not straight does not measure, and an
+    officer whose beam is out of true is an officer nobody obeys. Mr. E's rule
+    2 - condition is the receipt, and this receipt reads KEPT TRUE ON PURPOSE.
+    The coat under it is working cloth and is pulled toward the dark; the iron
+    of the beam is the brightest thing on the body.
+
+    THE PACK GEOMETRY HERE IS THE BARREL LESSON APPLIED. The measure and the
+    weights are real CC0 Fantasy Props MegaKit meshes, and every one of them
+    goes through _prop_mesh_m, which reads the primitive and triangle counts off
+    the .gltf FIRST and caps by the model and its placed size. Bucket_Wooden_1
+    is 976 triangles over 2 primitives; Pouch_Large is 730 over 2. The chosen
+    cap per model is in the gen report, so a future run can see which were
+    decimated and which shipped whole.
+
+    FRAMES, because the lead has asked three times: every number in this
+    builder is in BLENDER'S WORLD FRAME as it is written into the .glb - front
+    is model -Y, the strickle lies along model X, the beam along model Y, up is
+    +Z. That is NOT the engine's slot frame and nothing here should be pasted
+    into a Godot rotation without converting it.
+
+    Static: a `model` path and no `anims` entry.
+    """
+    P = Parts("strickler")
+    P.spans = {}
+    P.used_pack = False
+    P.pack_caps = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    HIP, SH, HEAD = 0.92, 1.50, 1.78
+    # PASS 2, FAULT 1 OF 6, AND THE ONE THAT MATTERED FROM THE FRONT. The
+    # standard stood at x = MX, directly behind the man - so from the front
+    # camera the beam, the pivot and the fore pan all stacked ON HIS HEAD and
+    # the pan's three cords drew a triangle across his face. There was no face
+    # in the front view at all. Offset in X costs the SIDE view nothing (it is
+    # the side camera's depth axis) and clears the head completely.
+    PX = 0.47                              # the balance, off his shoulder in X
+    POST_Y, POST_TOP = 0.40, 2.20          # the standard, behind the shoulders
+    BEAM_Z = 2.10
+    BEAM_F, BEAM_A = -0.96, 1.00           # fore and aft ends of the beam
+    STR_Z, STR_HALF = 1.12, 0.74           # the strickle: 1.48 m along X
+    MEAS = (MX - 0.02, -0.32, 0.68)        # the measure's base centre
+    # PASS 2, FAULT 4: at 0.34 m tall the bucket's own hoops squashed into
+    # THREE STACKED BOWLS from the side. A bushel is wide and shallow, not
+    # flattened - 0.40 keeps the hoops reading as hoops and puts the rim
+    # exactly under the strickle.
+    # PASS 3, SAME ELEMENT, AND 0.40 WAS STILL A SQUASH. From both cameras it
+    # was a stack of tubs, because the fault was never the height alone: a
+    # banded vessel squashed along its bands turns every band into a separate
+    # rim. Carried at its own proportions it is one vessel with hoops on it,
+    # and the rim lands exactly under the strickle either way.
+    MEAS_S = (0.50, 0.50, 0.44)
+
+    # ---- THE MAN. Planted, leaning back a little under the beam behind him.
+    _i_man = len(P.items)
+    _legs(P, MX, y=0.06, hip=HIP, stance=0.21)
+    limb(P, [(MX, 0.12, HIP - 0.06), (MX, 0.06, 1.20), (MX - 0.02, 0.00, SH)], 0.230, 0.250)
+    P.add(L.box(0.54, 0.30, 0.090), 'dark', loc=(MX, 0.04, 1.06))             # belt
+    # a flared coat to mid-shin: the Pressman's pass-5 lesson taken as read,
+    # not re-learned. Cloth hangs and FLARES; a vessel tapers inward.
+    P.add(aim(L.cone(0.265, 0.350, 0.62, 12), (MX, 0.04, 1.04), (0.0, 0.0, -1.0)), 'body')
+    for s in (-1, 1):
+        P.add(L.sphere(0.162, 0.152, 0.132, 12, 8), 'body', loc=(MX - 0.02 + s * 0.27, 0.00, SH))
+    P.add(L.sphere(0.150, 0.166, 0.170, 14, 9), 'bone', loc=(MX - 0.02, -0.18, HEAD))
+    # the officer's flat cap, brim level - a level brim over a level beam
+    P.add(aim(L.cone(0.232, 0.222, 0.050, 14), (MX - 0.02, -0.18, HEAD + 0.145),
+              (0.0, 0.0, 1.0)), 'dark')
+    eyes(P, (MX - 0.02, -0.08, HEAD - 0.01), 0.055, 0.028, -0.26)
+    _span("man", _i_man)
+
+    # ---- THE STANDARD AND THE BEAM. The SIDE reader, and the whole argument
+    # for this creature's shape. One upright, one long horizontal in Y.
+    _i_beam = len(P.items)
+    BX = MX - 0.02 + PX
+    limb(P, [(BX, POST_Y, 0.10), (BX, POST_Y + 0.02, 1.20),
+             (BX, POST_Y, POST_TOP)], 0.090, 0.068, 'dark')
+    P.add(L.box(0.30, 0.30, 0.085), 'dark', loc=(BX, POST_Y, 0.055))          # the foot plate
+    # the beam itself, dead level: a balance IN balance is what the thing is for
+    P.add(L.box(0.115, (BEAM_A - BEAM_F), 0.105), 'dark',
+          loc=(BX, (BEAM_F + BEAM_A) / 2.0, BEAM_Z))
+    P.add(L.box(0.175, 0.175, 0.175), 'dark', loc=(BX, POST_Y, BEAM_Z))       # the pivot box
+    for yy in (BEAM_F, BEAM_A):                       # squared ends, as forged
+        P.add(L.box(0.155, 0.085, 0.155), 'dark', loc=(BX, yy, BEAM_Z))
+    # PASS 2, FAULT 2, AND IT IS THE PRESSMAN'S OWN PASS-1 LESSON ARRIVING IN
+    # REVERSE. In the side view the balance stood on its own foot behind the
+    # man and touched him nowhere: the picture read as A MAN STANDING NEXT TO
+    # A SET OF SCALES, two objects, not one creature. The same fault the
+    # Pressman had when its arm went straight up to the bar. So the standard
+    # is now BRACED TO HIM - a strut from the shoulder and an iron collar at
+    # the belt - and the beam is his to carry.
+    limb(P, [(MX + 0.20, 0.02, SH - 0.02), (BX - 0.03, POST_Y - 0.06, SH + 0.22)],
+         0.052, 0.044, 'dark')
+    limb(P, [(MX + 0.16, 0.06, 1.06), (BX - 0.04, POST_Y - 0.04, 1.02)], 0.044, 0.038, 'dark')
+    P.add(L.box(0.085, 0.175, 0.175), 'dark', loc=(BX - 0.02, POST_Y - 0.02, 1.02))
+    _span("beam", _i_beam)
+
+    # ---- THE PAN, hanging FORE. Shallow, empty, and level with the weights.
+    _i_pan = len(P.items)
+    PAN_Z = 1.52
+    for a in (0.0, TAU / 3.0, 2.0 * TAU / 3.0):
+        limb(P, [(BX + 0.30 * math.cos(a), BEAM_F + 0.30 * math.sin(a), PAN_Z + 0.04),
+                 (BX, BEAM_F, BEAM_Z - 0.07)], 0.019, 0.017, 'dark')
+    P.add(aim(L.cone(0.345, 0.300, 0.075, 20), (BX, BEAM_F, PAN_Z), (0.0, 0.0, 1.0)),
+          'dark')
+    _span("pan", _i_pan)
+
+    # ---- THE WEIGHTS, hanging AFT. Real pack geometry, capped by the model.
+    _i_wt = len(P.items)
+    WT_Z = 1.54
+    for a in (0.0, TAU / 3.0, 2.0 * TAU / 3.0):
+        limb(P, [(BX + 0.24 * math.cos(a), BEAM_A + 0.24 * math.sin(a), WT_Z + 0.16),
+                 (BX, BEAM_A, BEAM_Z - 0.07)], 0.019, 0.017, 'dark')
+    P.add(aim(L.cone(0.280, 0.250, 0.055, 18), (BX, BEAM_A, WT_Z), (0.0, 0.0, 1.0)),
+          'dark')
+    pouch = _prop_mesh_m("Pouch_Large", 0.26)
+    if pouch is not None:
+        P.used_pack = True
+        _place_unit(P, pouch, 'body', BX - 0.11, BEAM_A - 0.07, WT_Z + 0.05, 0.26, 0.26, 0.22,
+                    yaw=0.4)
+        _place_unit(P, pouch, 'body', BX + 0.12, BEAM_A + 0.08, WT_Z + 0.05, 0.24, 0.24, 0.20,
+                    yaw=-0.9)
+        _place_unit(P, pouch, 'body', BX + 0.01, BEAM_A + 0.01, WT_Z + 0.24, 0.22, 0.22, 0.19,
+                    yaw=2.1)
+    else:
+        for dx, dy, dz, r in ((-0.12, -0.06, 0.06, 0.115), (0.10, 0.07, 0.06, 0.105),
+                              (0.00, 0.00, 0.24, 0.100)):
+            P.add(L.sphere(r, r, r * 0.82, 10, 7), 'body',
+                  loc=(BX + dx, BEAM_A + dy, WT_Z + dz))
+    _span("weights", _i_wt)
+
+    # ---- THE MEASURE AND THE HEAP. The FRONT reader, half of it: a wide
+    # shallow vessel at the belly on a strap, with the heap still standing on
+    # one side of the rim - the handful that is about to be struck off.
+    _i_meas = len(P.items)
+    bucket = _prop_mesh_m("Bucket_Wooden_1", 0.58)
+    if bucket is not None:
+        P.used_pack = True
+        _place_unit(P, bucket, 'body', MEAS[0], MEAS[1], MEAS[2], *MEAS_S)
+    else:
+        P.add(aim(L.cone(0.290, 0.250, MEAS_S[2], 20), (MEAS[0], MEAS[1], MEAS[2]),
+                  (0.0, 0.0, 1.0)), 'body')
+    # PASS 3: the mouth. A vessel being struck level has to read as OPEN, and
+    # a closed-looking tub with a bar over it is a bench, not a measure. One
+    # dark disc set just inside the rim is the whole cue and it costs 20 faces.
+    P.add(aim(L.cone(0.218, 0.218, 0.014, 20), (MEAS[0], MEAS[1], MEAS[2] + MEAS_S[2] - 0.055),
+              (0.0, 0.0, 1.0)), 'dark')
+    for s in (-1, 1):                                   # the strap over the shoulders
+        limb(P, [(MX - 0.02 + s * 0.22, -0.02, SH + 0.02),
+                 (MEAS[0] + s * 0.24, MEAS[1] + 0.12, MEAS[2] + MEAS_S[2] * 0.70)],
+             0.026, 0.024, 'dark')
+    # the heap: a low mound standing proud of the rim on the far side only.
+    # PASS 2, FAULT 3: at 0.175 x 0.150 x 0.105 this was HEAD-SIZED, and from
+    # the side the picture had two round heads in it - one of them a pile of
+    # grain. A heap is a handful above a rim, not a dome: a third of the width
+    # and under half the height, pushed out to the far rim.
+    P.add(L.sphere(0.105, 0.092, 0.044, 12, 8), 'bone',
+          loc=(MEAS[0] + 0.16, MEAS[1] + 0.02, MEAS[2] + MEAS_S[2] - 0.010))
+    _span("measure", _i_meas)
+
+    # ---- THE STRICKLE. The other half of the FRONT reader: one straight edge
+    # across the whole picture in X, with the true line lit along its underside.
+    _i_str = len(P.items)
+    P.add(L.box(STR_HALF * 2.0, 0.062, 0.088), 'bone', loc=(MX - 0.02, MEAS[1] - 0.02, STR_Z))
+    P.add(L.box(STR_HALF * 2.0 - 0.06, 0.020, 0.016), 'glow',
+          loc=(MX - 0.02, MEAS[1] - 0.052, STR_Z - 0.048))
+    for s in (-1, 1):                                   # turned grips at both ends
+        P.add(L.box(0.075, 0.105, 0.125), 'dark',
+              loc=(MX - 0.02 + s * (STR_HALF - 0.03), MEAS[1] - 0.02, STR_Z))
+    _span("strickle", _i_str)
+
+    # ---- THE ARMS. Both forward and down onto the ends of the strickle, which
+    # is what makes man and bar one creature rather than a man holding a prop.
+    _i_arms = len(P.items)
+    for s in (-1, 1):
+        limb(P, [(MX - 0.02 + s * 0.26, -0.02, SH - 0.05),
+                 (MX - 0.02 + s * 0.52, -0.16, 1.34),
+                 (MX - 0.02 + s * (STR_HALF - 0.05), MEAS[1] - 0.04, STR_Z + 0.07)],
+             0.086, 0.068)
+    _span("arms", _i_arms)
+
+    # ---- THE SEAL. One ornament, the lawful-looking part, as the Reeve's seal
+    # and the Pressman's tally board were: a stamped disc on a cord at the hip,
+    # the mark an officer strikes into a measure he has passed.
+    _i_seal = len(P.items)
+    limb(P, [(MX - 0.30, -0.06, 1.06), (MX - 0.37, -0.16, 0.92)], 0.014, 0.013, 'dark')
+    P.add(aim(L.cone(0.098, 0.098, 0.030, 14), (MX - 0.37, -0.17, 0.86), (0.0, 0.0, 1.0)), 'bone')
+    P.add(aim(L.cone(0.052, 0.052, 0.040, 12), (MX - 0.37, -0.19, 0.87), (0.0, -1.0, 0.0)), 'dark')
+    _span("seal", _i_seal)
+
+    P.pack_caps = dict(_PROP_CAPS)
+    return P
+
+
+BUILDERS.update({"strickler": strickler})

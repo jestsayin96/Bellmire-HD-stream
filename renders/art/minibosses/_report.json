@@ -1064,11 +1064,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "strickler": {
+   "title": "The Strickler",
+   "theme": "treasury",
+   "idea": "IT STRIKES YOU LEVEL - while it stands, your best hero is scraped down to the measure of your worst; your strongest is no answer, so lift the lowest or break the beam",
+   "wear": 0.12,
+   "feed_line": "Something in here is taking the heap off.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 3642,
+   "size": [
+    1.81,
+    2.99,
+    2.55
+   ],
+   "footprint_span": 2.99,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.163064788646083,
+    "ortho": 4.603786468505859,
+    "clip": [
+     8.589690208435059,
+     20.876285552978516
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 66,
+  "files": 69,
   "failures": []
  }
 }

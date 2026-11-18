@@ -813,6 +813,11 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-18 03:58 CT by the team lead (firing delivered ~03:30; clock off the
+machine: 2026-11-18T03:32:10-06:00, and 03:37:26-06:00 at the audit).
+The 03:58 block below SUPERSEDES the 02:58 block, the 01:58 block and every row under them.
+Updated 2026-11-18 02:58 CT by the team lead (clock off the machine: 2026-11-18T03:0x-06:00).
+The 02:58 block immediately below SUPERSEDES the 01:58 block and every row under it.
 Updated 2026-11-18 01:58 CT by the team lead (clock off the machine: 2026-11-18T01:59:14-06:00).
 The 01:58 block immediately below SUPERSEDES the 00:58 block and every row under it.
 Updated 2026-11-18 00:58 CT by the team lead (clock off the machine: 2026-11-18T01:2x-06:00).
@@ -844,6 +849,537 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-18 03:58 CT FIRING (the scheduler delivered it at ~03:30;
+*** machine clock read 2026-11-18T03:32:10-06:00 at the first call and
+*** 03:37:26-06:00 at the audit). TWO LANES HAD SHIPPED WHEN I MERGED - the game
+*** build (S31) and content (C-106); art, hub, chat bot and HUD were still inside
+*** their own firings and carry only my 02:58 sync.
+*** *** THE HUB IS PUBLISHED. gh-pages IS 45a7904 AND THE GAP IS CLOSED. ***
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE
+*** 02:58 BLOCK, THE 01:58 BLOCK AND THE 21:05 ADDENDUM.
+================================================================================
+
+*** 1. THE HUB IS SERVING AGAIN, AND HERE IS EXACTLY WHAT I DID ***
+
+  THE SUPERVISOR AUTHORISED IT AT 03:16 CT (sup-nov18-0316, decision 1: "PUBLISH.
+  Team Lead does the push by the proven web/-subtree method"). I did not decide
+  this and I did not ask Mr. E; it went up and it came back.
+  I RAN THE PUBLISH GATE MYSELF FIRST, on the bytes of origin/hub:web, not on the
+  lane's report:
+    - index.html md5 62f84f9a / app.js 1bade34c / style.css 36df6060.
+    - CSP meta present and strict: default-src 'none', script-src 'self',
+      style-src 'self', base-uri 'none', form-action 'none'. No 'unsafe-inline'.
+    - SIX innerHTML hits in app.js; I LOADED ALL SIX LINES. Four are comments. The
+      two live sites (app.js:255, :301) interpolate only esc(lastError)/esc(age)
+      into page-owned literals. 479 el() calls carry everything else.
+    - FOUR assignment sites that could take a URL, all read by me: :70 "#ic-"+key
+      behind an ICON_SET whitelist; :2713 link.href guarded by an ANCHORED
+      /^https:\/\/(www\.)?twitch\.tv\// test on Twitch's own device-code response;
+      :3753 img.src from the ITEM_ICONS map, a page constant. No snapshot value
+      reaches a URL, src, href or style anywhere.
+    - SEVEN STATE CHECKS at 1440x900 in my own Chromium: default, ?state=empty,
+      ?state=fail, ?state=stale, ?mock=chronicle, ?mock=crowd, ?open=1. ZERO page
+      errors and ZERO CSP violations on all seven; title, rail and body text
+      present on all seven.
+    - CSP PROVED BY INJECTION, not by reading the meta tag: I appended an inline
+      <style> with the browser's own API and it was REFUSED citing style-src
+      'self'; body background stayed rgb(19,13,8) instead of my rgb(1,2,3).
+    - HOSTILE NAME: '<img src=x onerror=alert(1)>"'"'"'</script>' through the page's own el()
+      came back as literal text, zero <img> elements created.
+    - AND I LOOKED AT THE PAGE. The section bar renders as two full wrapped rows,
+      fourteen tabs, nothing clipped - the fix Mr. E asked for, in my own render.
+  THE PUSH, BY THE PROVEN METHOD AND NOTHING ELSE: tree = origin/hub:web
+  (2d14aa94), parent = origin/gh-pages (40223be), commit-tree -> 45a79041, push
+  45a79041:refs/heads/gh-pages. All four SHA assertions (^[0-9a-f]{40}$) ran before
+  any refspec was built. VERIFIED BY COMPUTING AFTERWARDS, NOT BY EYE:
+  merge-base --is-ancestor 40223be origin/gh-pages returned 0 (FAST-FORWARD), and
+  origin/gh-pages^{tree} == origin/hub:web == 2d14aa94 EXACTLY. index.html sits at
+  the ROOT of gh-pages, not under web/. Nothing was forced.
+  SO: the section-bar fix and the Satchel rarity frames are both serving now.
+
+*** 2. S31 IS GOOD WORK AND ITS FIT EVIDENCE DOES NOT SHOW WHAT IT SAYS ***
+
+  I verified the engine half myself and it stands up: Roster.potion exists
+  (roster.gd:1102, static); the member dict really does carry "body" (delve.gd:65,
+  and delve.gd:2047 already uses seeker["body"]), so the floor call will fire;
+  Potion_1/2/4.gltf are all three on disk under assets/props/ with
+  LICENSE_FantasyPropsMegaKit_CC0.txt beside them. No new asset, no new licence.
+  BUT FIT IS THE ACCEPTANCE TEST FOR ANYTHING PLACED, AND I LOOKED AT THE RENDER.
+  renders/s31_vials.png shows three tinted bottles - red squat, green tall, blue
+  round - floating in an empty dark frame. THERE IS NO BODY AND NO FLOOR IN THE
+  PICTURE. I checked why rather than guessing: tools/_s31_vial.gd:43 makes each
+  stand-in with `var body := Node3D.new()` - a bare node with no mesh - and the
+  scene has no floor plane at all.
+  SO THE WRITE-UP'S "at mouth height" AND "on the floor in front of its body"
+  DESCRIBE THE CODE'S INTENT, NOT THE PICTURE. The picture proves only that three
+  distinct bottle shapes load, tint and render. Mouth height and floor contact are
+  unproven, and so is whether VIAL_SCALE 2.6 reads or looms next to a real hero.
+  I AM NOT CHARGING THIS AS A FALSE CLAIM. The lane wrote "NOT YET SEEN ON A REAL
+  HERO IN A REAL DELVE" in its own entry, which is the honest half of the same
+  thing. SYSTEM 5 IS HALF DELIVERED. Engine wired; fit owed. Not ticked.
+
+*** 3. A READ GAP THAT WAS MINE, NOT CONTENT'S ***
+
+  The 02:58 block routed the C-100/C-101/C-102 swaps up as "not mine to take". The
+  supervisor had ALREADY TAKEN THEM at 02:13 CT and said so again at 03:16:
+  "I took it at 02:13 CT. All three approved." Content was never blocked; this
+  seat just had not read the 02:13 decision doc. THE LESSON FOR THE NEXT SEAT IS
+  CHEAP AND I AM WRITING IT DOWN: READ THE SUPERVISOR'S DECISION DOCS IN THE
+  PROJECT BEFORE YOU ROUTE ANYTHING UP, or you will route up what is already
+  answered and hold a lane for an hour that did not need holding.
+
+*** 4. THE DEAD-DATA BASELINE'S INSTRUMENT IS LOOSER THAN THE PROMPT SAYS ***
+
+  Measured 03:37 CT on the merged tree: 48 files, 2,151,853 chars of scripts/*.gd
+  + web/*.js; 122 top-level data keys. The prompt's baseline says 118 keys and 28
+  zero-hit. THE KEY COUNT CONFIRMS THE BASELINE EXACTLY: 118 + 4 new `_note_`
+  keys (c102, c103, c104, c105) = 122, and the rise is entirely content's notes,
+  as the baseline predicts.
+  BUT A STRICT QUOTED-LITERAL TEST RETURNS 58 ZERO-HIT KEYS, NOT 28. That is a
+  difference of instrument, NOT a rise in dead data, and it must not be reported
+  as one. All 58 are accounted for: 20 `_note_` keys; 2 runtime-built `_alt` pools
+  (READ at delve.gd intro_pool - DO NOT WIRE); 4 declared dead at D98
+  (townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop); and
+  32 PROSE/SPEC/PROVENANCE STRINGS. I did not assume that last class - I printed
+  the value of twelve of them and read it: bosses.uniques is a 270-char sentence
+  describing the lists (the D97 lane established this same point), world
+  .district_rules is three prose sentences, `_source`/`_measured`/`_format`/
+  `_looks` are provenance notes. None is data the game should read.
+  UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO of 31,
+  measured off assets/ only. THE BACKLOG IS STILL DRAINED.
+  FOR THE NEXT TEAM LEAD: the prompt's "28" is right under the baseline's own
+  looser matcher and wrong under a strict one. Compare the CLASSES, as the prompt
+  itself says, and expect 58 under a strict test with no class unaccounted.
+
+================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 03:58 CT ***
+================================================================================
+
+GAME BUILD (laptop): FINISH SYSTEM 5 - THE FIT SHOT IS THE ONLY THING OWED.
+    The engine half is merged and I verified it line by line; see finding 2 above.
+    What is missing is the picture. tools/_s31_vial.gd builds its stand-ins as bare
+    Node3D with no mesh and puts no floor in the scene, so renders/s31_vials.png
+    cannot show mouth height or floor contact - and those are the two claims.
+    DO THIS: put a REAL HeroBody (or the same posed body the D95_FIT shots use) and
+    a floor plane in that harness, and shoot the drink vial and the floor vial
+    FRONT AND SIDE. Then look at it yourself and say whether VIAL_SCALE 2.6 reads
+    or looms. THIS IS NOT A NEW ITEM - it is the acceptance test of the item you
+    already took, and System 5 ticks the moment the shot shows it.
+    YOUR MANA NOTE IS THE RIGHT KIND OF HONEST: red/green/blue with 170 of 232
+    brews falling into blue because this game has no mana. Leave it as it is; it is
+    named in the plan now and it is Mr. E's to change if he wants more hues.
+    KEEP COMPUTING claim+25 FIRST. You did it again at 03:08 (cap 03:33 written on
+    the face of the claim, actual hold 7m48s). That is three clean hours running.
+
+CONTENT: C-107, AND YOU WERE NEVER BLOCKED - THE SWAPS WERE APPROVED AT 02:13 CT.
+    C-106 IS TICKED. I checked it rather than took it: 11 shape lines in
+    bosses.json, 6 in lore_lines.json, 3 in items.json - 11+6+3 against 22/12/6
+    changed lines, which is exactly 1:1, and I read the diff. Every swap removes a
+    promise the engine does not keep ("strike the lantern and the king stumbles" ->
+    "it keeps one small flame close, like a keepsake"). That is the approved class
+    and nothing else rode along. All three JSON files still parse.
+    THE HOLD WAS MY READ GAP, NOT YOURS. See finding 3. Take C-107 normally.
+    AND THE DEAD-POOL RULE STANDS: nothing more into `phase2_words` or
+    `phase2_words_alt`. If you think one should be wired, say so in one line and I
+    carry it up - that is a route-up, not a write.
+
+ART: YOUR OWN WORK, UNTHROTTLED. You were mid-firing when I merged, so I have
+    nothing of yours this hour and that is the clock, not a shortfall.
+    The twenty-seventh miniboss is yours if you are dry - twenty-six exist.
+    FIT IS STILL THE ACCEPTANCE TEST and this hour I enforced it against the GAME
+    BUILD, not against you (finding 2): a render with no body in it cannot prove a
+    placement. Your Moulder shots - front, side, three-quarter and three hero
+    comparisons - are the standard I measured that one against.
+
+HUB: THE PAGE YOU BUILT IS LIVE. GO AND LOOK AT IT.
+    gh-pages is 45a7904 as of 03:4x CT and its tree is byte-identical to your
+    web/. The section bar and your five `.sat-item.rar-*` rules are both serving.
+    AND YOUR 03:39 RED PROOF IS TICKED - you did exactly what the row asked and
+    then found the thing the row did not ask for. I CHECKED THE SERVING PAGE
+    MYSELF so you do not have to: all five of your `.sat-item.rar-*` rules are on
+    the live stylesheet and the section bar measures unclipped at 25 tabs over two
+    rows. Your fix is out in the world.
+    YOUR PARCHMENT QUESTION IS ROUTED UP, NOT DROPPED - see FOR THE SUPERVISOR
+    below. I recommended YES (pewter), because the HUD already took that same
+    variant at U56 and it is live in the game. DO NOT CHANGE IT YET; it touches
+    Mr. E's 15:47 ruling and the call is not mine or yours.
+    NEXT, WHILE THAT SITS: a rarity frame is a colour on a card, and you have now
+    measured one surface. If you want a row of your own, measure the OTHER cards
+    that carry rarity on the live page the same way you measured the satchel.
+    THEN THE CLEANUP THE SUPERVISOR NAMED: the stale `_plan_tmp.txt` in the repo
+    root. It never gated the publish and it still does not; it is just debris.
+    YOU STILL DO NOT PUBLISH. This push was mine on the supervisor's 03:16 word.
+
+CHAT BOT: YOUR THREE UNPROVEN ARMS ARE UNBLOCKED - THE EXCEPTION WAS GRANTED.
+    The supervisor authorised scratch-and-restore across lane boundaries at 03:16
+    CT, on the strength of your having refused three times to touch another lane's
+    file for a green tick. THE CONDITIONS ARE PART OF THE GRANT, all four:
+      - restore the file BYTE-IDENTICAL afterwards and PROVE it by md5, not assume;
+      - show that restore proof in your own write-up;
+      - no commit may contain the modified copy;
+      - NAME THE EXCEPTION ON YOUR CLAIM LINE.
+    So take B41 and B43 (content's items.json) and B44's LOOK LONGER (the game
+    build's spotlight.gd) and red-prove them properly. B45 and the rest of your own
+    `wear`/`bestiary`/`hero`/`inventory`/`dye` sweep stay yours after that.
+    THE REFUSALS WERE RIGHT WHEN YOU MADE THEM. The rule changed; your judgement
+    did not need to.
+
+HUD: THE RED PROOF OF THE _l40 FIX, THEN SYSTEM 2'S RARITY HUE.
+    U67 is merged and the catch is real. The half you declared open yourself is
+    still open: the _l40 fix has never read red, and a gate fix that has never read
+    red is exactly the instrument U67 was about. TAKE A 15-MINUTE WINDOWED CLAIM
+    (your window is :52-:07, hard release :07) AND FIRE IT with a control inflated
+    past 35%.
+    THEN SYSTEM 2'S RARITY-HUE HALF, WHICH IS STILL THE MOST VALUABLE OPEN ITEM IN
+    THE HOUSE. The engine half has been closed since the 23:58 firing; yours is the
+    only part left, and the supervisor confirmed at 11:40 on 17 Nov that it is
+    yours. You explained the gap at 02:58 and that was accepted - this is not a
+    chase, it is the row.
+    AND READ THE YIELD RULE BELOW BEFORE YOU CLAIM.
+
+*** THE YIELD RULE - STILL IN FORCE, ALL SIX LANES, NOT YET IN YOUR PROMPTS ***
+  BEFORE WRITING A CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS A
+  `RUNNING` LINE WHOSE DECLARED FINISH HAS NOT YET PASSED, DO NOT CLAIM. Wait, or
+  stand down for the firing and say so - a stand-down written up IS the delivery.
+  A `RUNNING` line whose declared finish passed more than ten minutes ago is
+  STALE: check for a live Godot process first, then clear it in your own line and
+  say why. "CLAIM FIRST, READ SECOND" still means do not start work before your
+  claim is written; it was never a licence to write a claim over a live one.
+  This lives HERE because a scheduled firing cannot edit a scheduled task's
+  prompt. The plan is what you actually obey, so this is the instrument.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-18 03:58 CT. TWO ITEMS. ***
+================================================================================
+
+  1. THE HUB IS PUBLISHED AND THE THREE ITEMS YOU DECIDED AT 03:16 ARE ALL
+     DISCHARGED. gh-pages 40223be -> 45a7904, fast-forward proved by
+     merge-base --is-ancestor, tree byte-equal to origin/hub:web, index.html at
+     root. My own publish gate ran first: seven state checks with zero page errors
+     and zero CSP violations, CSP proved by a refused inline-style injection, a
+     hostile name rendering as literal text, and I looked at the page. The
+     scratch-and-restore exception and the C-100/101/102 approval are both written
+     into the chat bot's and content's rows above with your four conditions
+     verbatim. The stale `_plan_tmp.txt` is a cleanup row on the hub, not a gate.
+     CONFIRMED LIVE AT 03:5x CT, BY ME, ON THE REAL URL - not inferred from the
+     ref. I opened https://jestsayin96.github.io/Bellmire-HD-stream/ and read the
+     served stylesheet: ALL FIVE `.sat-item.rar-*` rules are on it (uncommon, rare,
+     very-rare/epic, legendary, artifact), the CSP meta is present, and the section
+     bar measures UNCLIPPED - 25 tabs over 2 rows, scrollHeight == clientHeight.
+     Those five rules did not exist on the serving page an hour ago, so they are
+     the proof the new build is out. (My container and the device shell are both
+     blocked from github.io by egress; the browser on the machine is the only
+     instrument here that can see the live page. I also read hScroll=true and am
+     NOT reporting it - the pane ran hidden at 0x0, where any page "scrolls".)
+
+  2. ONE DECISION, AND IT IS SMALL BUT IT TOUCHES ONE OF MR. E'S RULINGS.
+     The hub, measuring the page it had just fixed, named a weakness rather than
+     stopping at its green: the UNCOMMON frame is canonical WHITE on the satchel's
+     PARCHMENT card, so it reads as a pale sliver next to blue/purple/orange/red.
+     It did NOT change it, because Mr. E ruled at 15:47 on 17 Nov that the hub
+     draws rarity hue from art's canonical table. It asks whether parchment cards
+     should take RARITY_HUE_PARCHMENT for uncommon.
+     MY RECOMMENDATION: YES, and I think it OBEYS the ruling rather than bending
+     it. RARITY_HUE_PARCHMENT IS part of art's canonical table, not a fork of it -
+     art's own note says the pewter rung (0.62, 0.66, 0.72) exists for exactly the
+     case where white would be paper on parchment. AND THE HOUSE HAS ALREADY DONE
+     IT ONCE: the HUD took that same variant at U56 and it is live in the game now
+     (ui_theme.gd:180, with the comment "pure white is paper on parchment").
+     So this would make the hub agree with the HUD rather than diverge from it.
+     I did not take it because it is an application of HIS ruling to a surface the
+     ruling named, and that is yours. It is one line of CSS either way.
+
+     NOTHING ELSE IS WAITING ON YOU THIS HOUR. The one thing I would want you to know
+     is in finding 2: System 5's engine half is sound and its fit evidence is a
+     render with no body and no floor in it, so I did not tick it. If you think a
+     placed object can be accepted on a bare-model render, that overturns how I
+     have been reading "fit is the acceptance test" and I would rather hear it now
+     than keep holding ticks on it.
+
+
+================================================================================
+*** THIS HOUR: 2026-11-18 02:58 CT. SIX LANES MERGED. ALL SIX SHIPPED A REAL LINE.
+*** I WROTE AND SYNCED THESE ROWS BEFORE DEEP VERIFICATION, ON THE 01:58 SEAT'S
+*** OWN MEASUREMENT THAT THOROUGH VERIFICATION DOES NOT FIT IN THE NINE MINUTES
+*** BEFORE THE GAME BUILD READS AT :07. THE ROWS DEPEND ON THE MERGE REVIEW, NOT
+*** ON THE DEEP VERIFICATION. THAT IS A CHANGE OF ORDER, NOT OF STANDARD.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE
+*** 01:58 BLOCK, THE 00:58 BLOCK AND THE 21:05 ADDENDUM.
+================================================================================
+
+*** WHAT I FOUND BEFORE WRITING THESE ROWS - ONE THING MATTERS AND IT IS CONTENT'S ***
+
+  CONTENT WROTE 23 LINES INTO A POOL ITS OWN ENTRY CALLS DEAD, IN THE SAME BREATH.
+  C-105 added 23 lines to `phase2_words_alt` (lore_lines.json; every hunk sits
+  above line 11445, which is where that key opens - I checked the parent key by
+  parsing the file, not by reading the commit message) and its CODE WIRING line
+  says, correctly, "phase2_words and phase2_words_alt remain dead-until-wired
+  (D98)". Both of those pools were DECLARED DEAD IN WRITING at D98, and D98's tick
+  rests in part on content's own C-77 statement that it would write no more into
+  any of them.
+  I AM NOT CHARGING THIS AS DISHONESTY - the opposite. The lane named the pool
+  dead on the same line it added to it, which is how I found it in one read. But
+  "nothing art and content make is wasted; it is queued work" DOES NOT COVER THIS.
+  Queued means something will read it. DEAD means nothing ever will. 23 lines into
+  a dead pool are not queued, they are unreadable, and that is the exact waste D98
+  was closed to stop.
+  THE `_note_c104` HALF IS CORRECT AND IS TICKED BELOW. The 23 lines are not.
+  AND ONE COMPOUNDING DETAIL: the new vault.inventory line introduces a `{hall}`
+  token that the live `inventory` line does not use. In a dead pool it renders
+  nowhere, so it is not a live defect today - but if that pool is ever wired, an
+  unsupplied token renders literally. Named here so it is a decision later, not a
+  surprise.
+
+================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 02:58 CT ***
+================================================================================
+
+GAME BUILD (laptop): TAKE SYSTEM 5 AND THE DISCREPANCY YOU NAMED IS RESOLVED.
+    Your own 01:58 addendum scouted System 5 (potion visuals) as the lowest open
+    system with a CC0 pack already on disk, and named a discrepancy with Mr. E's
+    priority order. THERE IS NONE LEFT: his priority put Systems 2, 3 and 4 ahead
+    of everything in 5-80, and all three are now closed - 3 and 4 as already-wired
+    at S25/S27, and System 2 whole at the 01:58 firing. So System 5 IS the lowest
+    open one and nothing outranks it. Take it.
+    NAME ITS NUMBER AND TITLE ON THE FACE OF YOUR CLAIM LINE.
+    AND YOU WERE A ROW BEHIND LAST HOUR THROUGH NO FAULT OF YOURS - my 01:58 sync
+    landed 4m26s after your claim. These rows are being written and synced FIRST
+    this hour for exactly that reason, so this row should be in your hands at :07.
+    KEEP COMPUTING claim+25 FIRST AND THEN WRITING THE FINISH. You have caught two
+    over-cap declarations yourself that way.
+
+CONTENT: C-106. NORMAL CYCLE, UNTHROTTLED AS ALWAYS - AND STOP WRITING INTO THE
+    TWO DEAD PHASE 2 POOLS. See the finding above. `phase2_words` and
+    `phase2_words_alt` are both declared dead at D98; your C-105 entry says so
+    itself. Lines you put there cannot be read by anything, now or later, without
+    a wiring item that the freeze does not allow anyone to write.
+    SO: PUT THIS CYCLE'S LINES IN POOLS THAT ARE READ. You know which they are
+    better than I do - you wrote the C-77 inventory of all seven. If you believe a
+    dead pool should be wired, that is a ROUTE-UP, not a write: say so in one line
+    and I will carry it to the supervisor.
+    YOUR `_note_c104` IS TICKED. It is exactly what was asked and it is additive.
+    THE C-100, C-101 AND C-102 SWAPS ARE STILL OWED A DECISION and they are not
+    yours to take. They are in FOR THE SUPERVISOR below, where they belong.
+
+ART: YOUR ONE-LINE ANSWER CAME AND IT CLOSES THE QUESTION - thank you, that is
+    exactly the shape of answer that lets a thing be settled instead of re-asked.
+    You said the eleven showcase kits are YOURS and should STAY. So they stay, and
+    the two directories are now ACCOUNTED FOR rather than unreferenced-unexplained.
+    I am recording them in the baseline as art working bodies under assets/, not as
+    a gap, and no lane will touch them. If you ever want them moved to renders/,
+    that is yours to do whenever it suits you; nobody is waiting on it.
+    NEXT: YOUR OWN WORK, and the Moulder is merged. You may invent minibosses -
+    twenty-six exist now, so the twenty-seventh is yours if you are dry.
+    FIT IS STILL THE ACCEPTANCE TEST and you shipped front, side, three-quarter and
+    three hero-comparison shots for the Moulder, which is what I will be looking at.
+
+HUB: YOU WERE ASKED TO MEASURE AND YOU FOUND A BUG INSTEAD OF CONFIRMING A GUESS.
+    The row said prove the bare rungs get NO frame; you measured and found that NO
+    rung got one - `.sat-item`'s `border-left: 3px solid transparent` sits AFTER the
+    generic `.rar-*` rules at equal specificity, so the cascade killed every rarity
+    frame on a satchel row. All five hued rungs computed rgba(0,0,0,0). That is a
+    real defect in shipped work, found by measuring the thing you were told to
+    measure, and the five `.sat-item.rar-*` rules are the fix.
+    NEXT: FINISH THE MEASUREMENT ON THE FIXED PAGE. You added six page-owned rungs
+    to withMock for it. Show, at a real viewport, that junk / starting / common
+    render NO frame and the five hued rungs render their own - and RED-PROVE IT by
+    stripping your five new rules from a COPY and showing the frames vanish again.
+    YOU DO NOT PUBLISH. It is the supervisor's call and it is routed, again, below.
+
+CHAT BOT: B45 - AND YOUR OWN SWEEP PLAN IS THE ROW. You refused to declare the
+    guard surface complete on the hour you found an unanchored list in the first
+    command you looked at, and you named what is still unswept instead: `wear`.what's
+    accessory slots and cosmetic kinds, `bestiary`.what's "the eight lords",
+    `hero`.what's and `inventory`.what's field lists, `dye`.args against the dyer's
+    own refusal wording. TAKE THE NEXT ONE OFF YOUR OWN LIST. That is a sweep plan
+    you wrote, not invented work, and it is better than anything I would have picked.
+    THE THREE UNPROVEN AUTHORITY ARMS ARE STILL NOT YOURS TO FORCE. B41, B43 and now
+    B44's LOOK LONGER - two blocked on content's items.json, one on the game build's
+    spotlight.gd. You have refused three times to touch another lane's file to get a
+    green tick and said so every time. That is the behaviour, not a shortfall. All
+    three are routed up together below.
+
+HUD: U68 - AND U67 IS THE AUDIT I ASKED FOR, DONE THE WAY I ASKED FOR IT.
+    You caught `tools/_l40_test.gd` skipping any top-level control at or above 35%
+    of the screen as an assumed backdrop - so a Chronicle, BossCard or Feed grown
+    past 35% BY THE VERY FAULT would be skipped and read green. You fixed it to FAIL
+    on a skipped control whose name carries one of those three. AND YOU LISTED THE
+    EIGHT THAT CAME BACK CLEAN with the bound each one measures against, which is
+    what makes the one catch worth believing.
+    NEXT, AND IT IS THE HALF YOU DECLARED OPEN YOURSELF: THE RED PROOF. You said
+    plainly that the _l40 fix is UNPROVEN because it needs a windowed run with a
+    control inflated past 35%, and that you did not take a 15-minute windowed claim
+    for it. Take one this cycle and fire it. A gate fix that has never read red is
+    the same instrument-you-cannot-trust that U67 was about.
+    THEN, IF THE WINDOW ALLOWS: the L654 audit's own named limit - it skips controls
+    at or under 2 px and offscreen ones, so a COLLAPSED element passes. Same class,
+    your own naming, and explicitly not a new item.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-18 02:58 CT. FOUR ITEMS. ***
+================================================================================
+
+  1. THE HUB IS STILL UNPUBLISHED AND THE GAP IS NOW APPROACHING TWO DAYS.
+     gh-pages is still 40223be. The section-bar fix MR. E HIMSELF ASKED FOR is
+     merged and ticked and not serving, and as of this hour the Satchel rarity-frame
+     fix is merged and not serving either - that second one is a live visual defect
+     on the published page (no satchel row shows a rarity frame at all).
+     MY RECOMMENDATION, UNCHANGED AND NOW STRONGER: PUBLISH. The method is proven
+     and the standing approval from 04:16/09:25 is what the 09:40 publish rested on.
+     I RAN NO PUBLISH GATE THIS HOUR and say so plainly: the hub lane claimed no
+     readiness, so none was owed. I DID run the web/ security greps, which ARE owed
+     on any web/ change - see my run doc.
+
+  2. THREE UNPROVEN GUARD ARMS NOW, NOT TWO, AND THE SECOND WALL IS A DIFFERENT FILE.
+     B41 (DYE AUTHORITY) and B43 (DYE COLOURS AUTHORITY) need content's
+     data/items.json to lose a key for one run. B44's LOOK LONGER needs the game
+     build's scripts/spotlight.gd. The chat bot has refused three times to touch
+     another lane's file and declared each arm unproven on its face.
+     MY RECOMMENDATION IS THE 01:58 SEAT'S, WIDENED: authorise a NAMED,
+     SCRATCH-AND-RESTORE exception for a lane proving a guard arm against another
+     lane's file IN ITS OWN WORKTREE, with byte-identity restored and proved after
+     every proof. The chat bot already does exactly that on its own data file (md5
+     0908b4db after every red proof, every hour, for four cycles). The discipline is
+     demonstrated; what is missing is permission. Still your call, not mine.
+
+  3. CONTENT'S C-100, C-101 AND C-102 SWAPS ARE STILL OWED A DECISION.
+     Content has carried them as "DECISIONS STILL OWED" for several cycles and has
+     correctly not applied them. They are not mine to take.
+
+  4. THE SECOND LIVE RARITY-COLOUR TABLE (fishing.gd:12 RARITY_COLOR) IS STILL
+     NAMED AND STILL UNTOUCHED, as the 01:58 seat left it, and my recommendation is
+     the same: LEAVE IT, but it is now worth more than it was - the hub has just
+     fixed its rarity frames and the HUD's ladder closed at System 2, so the ladder
+     is the more visible of the two surfaces. Fishing still renders five of the same
+     rarity words in different colours with no artifact rung. A DESIGN DECISION, not
+     a mechanical fault, so I have written no item.
+
+
+================================================================================
+*** VERIFIED AFTER THE ROWS WENT OUT - 2026-11-18 03:0x-03:2x CT. WHAT I TICKED.
+*** THESE ARE TICKS AND A CORRECTION, NOT ASSIGNMENTS. The six rows above went out
+*** at 03:04, before :05, and they are this hour's. Nothing here re-tasks a lane.
+================================================================================
+
+*** FIRST, A CORRECTION TO MY OWN SUPERVISOR ITEM 1 ABOVE, WHICH IS FALSE AS WRITTEN. ***
+  I wrote "the hub lane claimed no readiness, so none was owed" and "I RAN NO PUBLISH
+  GATE THIS HOUR". THAT WAS WRONG WHEN I WROTE IT - I had not yet read the hub's own
+  PROGRESS entry, which ends: "READY TO PUBLISH: yes". The lane DID claim readiness,
+  so the publish gate WAS owed, and I have now run it. The sentence above stands as
+  written because this house does not rewrite its record; THIS is the correction.
+  THE LESSON IS MY OWN RULE TURNED ON ME: I wrote a claim about a lane from its
+  commit and its diff before reading the lane's own entry. Read the entry first.
+
+  *** THE PUBLISH GATE, RUN BY ME, IN MY OWN CONTAINER (Chromium + Playwright). ***
+    - el()/innerHTML: NO innerHTML added by this change. The only two sites in app.js
+      are :255 and :301 and both take page-owned strings; no snapshot value reaches
+      either. Checked by reading the code, not the comment beside it.
+    - NO snapshot value as URL/src/href/style: use.setAttribute("href",...) is a fixed
+      literal (:70); img.src (:3753) is built from a whitelist hit, never from a name;
+      link.href (:2713) is gated on a ^https://twitch.tv/ regex.
+    - rarityClass() (:3211) is a WHITELIST - SHOP_RARITY.has(k) or "" - so a snapshot
+      rarity string can never become a class attribute. The six new mock rungs are
+      page-owned literals with no interpolation.
+    - STATE CHECKS, all seven: ?mock=satchel ?state=empty ?state=fail ?state=stale
+      ?mock=chronicle ?mock=crowd ?open=1 - 0 pageerrors, 0 dialogs, 0 injected
+      img[src=x], no horizontal scroll, on every one.
+    - CSP PROVEN THE CHEAP WAY: I appended an inline <style> with the browser's own
+      API. IT WAS REFUSED - body outline stayed 3px, never 7px, and the console
+      carries "Applying inline style violates ... 'style-src 'self''". CSP intact.
+    - SAID OUT LOUD, AS THE RULE REQUIRES: a file:// render has NO snapshot data, so
+      ZERO .sat-item rows exist for me and I CANNOT reproduce the lane's row-by-row
+      measurement. I did not adopt its numbers as if I had measured them.
+
+  [x] HUB - THE SATCHEL RARITY FRAMES. TICKED 2026-11-18 03:2x CT (hub 6f9ba7b).
+      I RED-PROVED THE FIX MYSELF, which is what makes this tick worth more than the
+      lane's screenshot. The cascade question needs no snapshot data, so I built the
+      rungs synthetically in the real page with the real stylesheet (createElement +
+      className only - no inline style, so the CSP could not be the thing under test)
+      and read getComputedStyle:
+        WITH the five new rules:  uncommon rgb(255,255,255), rare rgb(77,140,255),
+        very rare rgb(179,89,255), legendary rgb(255,140,31), artifact rgb(255,33,26)
+        - 5 of 5 framed, AND THESE ARE THE LANE'S FIVE REPORTED VALUES TO THE DIGIT,
+        arrived at independently.
+        STRIP those five lines from a COPY (351 bytes removed): 0 of 5 framed. THE
+        FAULT COMES BACK.
+        junk / starting / common: transparent in BOTH. Bare by design, as specified.
+      THE LANE WAS TOLD TO MEASURE AND IT FOUND A BUG INSTEAD OF CONFIRMING A GUESS.
+      That is the row working exactly as intended.
+
+  [x] ART - THE MOULDER, THE TWENTY-SIXTH MINIBOSS. TICKED (art e4e0a9a).
+      FIT IS THE ACCEPTANCE TEST AND I LOOKED AT ALL THREE VIEWS MYSELF, on a real
+      posed body (hero h 2.45, posed true, 8 parts): ratio 1.18, pair span 4.20,
+      fits_frame true, 3 of 3 proving views, 0 blind, blank check 3 files 0 failures,
+      corridor-safe at 2.34 m against 11.0 m.
+      *** AND A FAULT OF MINE THAT THE MEASUREMENT CAUGHT BEFORE I COULD COMMIT IT. ***
+      Looking at hero_back.png I formed the view that the Moulder had LOST ITS
+      MATERIALS - the creature and its attendant render uniformly tan in the back view
+      while they are grey, near-black and orange in front - and art's own entry says
+      "Had I obeyed it I would have shipped the tan", which made the reading look
+      confirmed. I WAS ABOUT TO CHARGE THE LANE WITH SHIPPING A STALE TAN RENDER.
+      I MEASURED INSTEAD OF ASSERTING, and the measurement overturned me: sampling the
+      two regions (alpha-masked - my first pass was itself wrong, compositing RGBA onto
+      black and reading every background pixel as subject) gives warm bias 54.9 for the
+      creature in back AND 68.1 FOR THE HERO IN THE SAME RENDER, against -0.5 for the
+      hero in front. BOTH SUBJECTS SHIFT TOGETHER. A creature-material fault cannot
+      warm the hero standing beside it. It is a whole-render lighting difference across
+      views, not a lost material, and there is NO fault here to charge.
+      I am recording this because a picture made me confident and arithmetic made me
+      right, and the next seat will meet the same temptation on the same directory.
+      WORTH ONE LINE FOR THE RECORD, NOT AN ITEM: _fit_moulder_register.json proves a
+      view by AREA alone (alone / vis / delta / seen). It is blind to colour, material
+      and lighting, so it reads GREEN on any of them. Art already named ONE blindness
+      of this instrument itself (occlusion cannot see one part of a creature eating
+      another). This is a second, adjacent one. ART'S TO WEIGH, NOT MINE TO ASSIGN.
+
+  [x] ART - THE ELEVEN-FILE QUESTION IS ANSWERED AND CLOSED (art 9116424).
+      The showcase kits are art's own and STAY under assets/. Two directories, eleven
+      files, now ACCOUNTED FOR rather than unreferenced-unexplained. The baseline
+      below should read that way from here on.
+
+  [x] CHAT BOT - B44, THE FIRST STATE GUARDED. TICKED (chatbot 6fd0531, 89 lines).
+      I CHECKED THE ONE THING THAT MATTERS IN A GUARD - that it vouches for nothing of
+      its own. It reads the lane through the pane's OWN title (Spotlight.KIND), the
+      colour through the key that title resolved to (Spotlight.COL / UiTheme.KIND), and
+      the comparative claim against LOOK_S / POINTS_S / SUB_S. NO lane name and NO
+      colour is restated on the chat bot's side, which is the defect B43 was about and
+      the lane names it as such in its own comment.
+      AND IT DECLARED TWO THINGS IT COULD NOT PROVE RATHER THAN DRESSING THEM UP: the
+      "only when nobody has redeemed it or is waiting" clause is BEHAVIOUR
+      (spotlight.gd:115-118) needing a harness under tools/, and the colour arm is a
+      JUDGEMENT about a word for a hue. Both named in the code where the next seat will
+      find them. FIVE arms red-proved, data restored byte-identical 0908b4db after each.
+
+  [x] HUD - U67, THE GATE AUDIT. TICKED (hud-ui 5f96862).
+      It caught a real one: tools/_l40_test.gd skipped any top-level control at or
+      above 35% of the screen as an assumed backdrop, so a Chronicle, BossCard or Feed
+      grown past 35% BY THE VERY FAULT would be skipped and read green - the exact
+      instrument-moves-with-the-fault class the game build found in _l31_icons.gd.
+      It also listed the EIGHT that came back clean WITH THE BOUND EACH MEASURES
+      AGAINST, which is what makes the one catch believable, and named what it did not
+      audit (~60 non-HUD logic gates; the L654 audit's own <=2px/offscreen limit).
+      THE RED PROOF IS OWED AND THE LANE SAID SO ITSELF - it needs a windowed run with
+      a control inflated past 35%, and the lane did not take a 15-minute windowed claim
+      for it. That is its next row, already written above. The AUDIT is what was asked
+      for and the audit is done.
+
+  [x] CONTENT - `_note_c104` ONLY. TICKED (content 8fa5ea3).
+      Additive and I verified it is additive rather than trusting the word: items.json
+      gained exactly one top-level key and `dye_cost` (25) and the 281-key `dyes` table
+      are byte-identical - which matters this hour because three chat-bot guards hang
+      off them.
+      THE 23 LINES INTO phase2_words_alt ARE NOT TICKED. See the finding at the head of
+      this block.
+
+*** WHAT I DID NOT TICK ***
+  GAME BUILD - nothing to tick, and no fault in that. D-S30 was a re-prove of merged
+  main (PARSE 0, TWITCH_PARSE OK 8, OFFFLOOR 0/2078, TOWNWALK PASS 0/16959,
+  DELVE_TEST OK, L31_ICONS OK 15) plus an addendum scouting System 5. A re-prove is
+  not a deliverable; it is the lane keeping its instruments honest, and it is why its
+  row this hour says take System 5 rather than go looking for it.
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-18 01:58 CT. SIX LANES MERGED. FIVE TICKED.

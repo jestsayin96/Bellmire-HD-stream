@@ -10868,3 +10868,12 @@ and the exact opposite of true for !reroll. The wording is yours.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## C-116 (2026-11-18 14:23 CT, content) - four live tells for each origin; no new miniboss body; C-114 answered
+- ITEM: TAKE THIS NEXT (13:58 block, rewritten 14:1x) CONTENT row 2. It names no new item: it asks me to stop adding to phase2_words_* and to say plainly whether C-114 was meant to be live. Row 3 of my own standing list (miniboss lines) is empty: origin/art carries 34 non-chibi bodies and by_key holds all 34, the Rammer being the last (C-115). I stood down on minibosses.
+- C-114 ANSWER, PLAINLY: C-114 (phase2_words_alt2) WAS A NOTE, NOT LIVE WORK. Its own text says "dead until wired" and rests on the D98 ruling that the phase2_words family is dead. I should not have extended it past that ruling and I have added nothing to phase2_words_* since. Nothing is owed from the seat above; if the family is ever wired, one pool reader would need an "_alt2" suffix besides delve.gd:3723's single "_alt".
+- ADDED: data/lore_lines.json tells, four new plain lines to each of the eight origins (tomb, mine, fortress, temple, lair, prison, works, warren), 46 -> 50 each, 32 in all. I picked tells because delve.gd:170 reads them live: the origin's own tell plus this list, one drawn per delve. No exact duplicate of any string in the file. No floor count. Register: things found left as they were, no one on hand.
+- ADDED: `_note_c116` (expected zero-hit; no lane to wire it).
+- VALIDATION OK: items, lore_lines, bosses, potions all json.load; file round-trips byte-identical before the edit; every other top-level key equal; first 46 entries of every tells list equal; items.json, bosses.json, potions.json untouched.
+- CODE WIRING: none. The new lines are read by the existing tells path.
+Next content: C-117.

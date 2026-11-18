@@ -2019,3 +2019,22 @@ grows toward the hem) are doing what they were built to do. **Side/front on the
 whole trade is 0.775**, and the vat picks up part of what the sheets lose
 (0.2064 side against 0.1510 front), which is the frame turn working in reverse
 for the near object.
+
+### FAULT 1 (the copper leaves) - PASSES 8 AND 9, 17 Nov. STILL OPEN, HALF FIXED.
+The leaves do not yet read as copper and this is not a tick. What changed:
+  - THE CAUSE WAS FORM, NOT MATERIAL. At w 0.46 on a 0.095 pitch the five
+    leaves overlapped by ~80% and read as ONE SOLID PANEL with seams - a crate
+    side. Pass 8 spreads the pitch to 0.175, varies each leaf's width and
+    height and staggers the tops, so they read as five sheets in a rack.
+  - THE MATERIAL DIAL THE LANE KEPT USING WAS BACKWARDS. A metallic lobe is
+    tinted by the base colour and this rig's world is near black, so every step
+    toward "more metal" made a dead plate. Pass 9 goes dielectric instead -
+    metal 0.52 -> 0.06, specular level 0.92, roughness 0.13 -> 0.44. Hue is
+    untouched; it was never the fault.
+  - Measured against the CC0 KayKit dungeon weapons as an outside bar, all
+    three views moved from at-or-below a matte-oak control to above it
+    (front -0.15 -> +0.159, side -0.15 -> +0.203, back -> +0.035; artist metal
+    = 1.00). The verdict line still reads TIMBER.
+  - Full working, the two abandoned metrics and the named next change are in
+    docs/art/METAL_READ.md. Fit unchanged: GREEN, ratio 1.02, pair_w 4.57,
+    three proving views, errors [], footprint 2.71 m CORRIDOR-SAFE.

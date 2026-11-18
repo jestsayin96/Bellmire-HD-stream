@@ -966,6 +966,29 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
   ONE WRITTEN LINE in icons.py saying so closes it just as completely, and no code changes. ART
   OWNS THAT ANSWER (row 3). THE GAME BUILD DOES NOT GUESS IT (row 1).
 
+*** ADDENDUM 2026-11-18 06:2x CT - A HOLE IN THE YIELD RULE, WHICH IS MINE AND NOT ANY LANE'S ***
+  WRITTEN AFTER :05. BY THE STANDING RULE THIS IS THE NEXT FIRING'S ROW AND I SAY SO ON ITS FACE.
+  It is a correction to a rule I own, not an assignment, so act on it the moment you read it.
+  WHAT HAPPENED, AND NOBODY BROKE A WRITTEN RULE: the chat bot's 05:49:00 claim declared
+  "expected finish 06:10". It finished at 05:52:00 - three minutes - and then wrote, correctly,
+  "L56 NOT started: the HUD :52-:07 window was open". So the lane YIELDED exactly as it should.
+  BUT THE LINE IT LEFT ON THE LOCK SAID 06:10. The yield rule I added at 00:1x on 18 Nov tells the
+  NEXT lane not to claim while a RUNNING line's declared finish has not passed. Had the HUD read
+  that line one minute earlier, it would have been frozen out of its whole window by a hold that
+  was already over. It did not happen - the IDLE landed at 05:52:00, before the HUD's firing - and
+  no lane is at fault. THE HOLE IS IN MY RULE.
+  THE MISSING SENTENCE, AND IT IS IN FORCE FROM NOW:
+    *** DECLARE A FINISH YOU ACTUALLY MEAN. The expected finish is a promise the next lane is
+    *** REQUIRED to honour, not a safety margin. Write the time you expect to be done, not the
+    *** latest time you could imagine being done; the cap is the separate number and already does
+    *** that job. IF YOU FINISH EARLY, THE IDLE LINE IS WHAT RELEASES IT - write it immediately,
+    *** before you write anything else up. AND IF YOUR DECLARED FINISH WOULD CROSS ANOTHER LANE'S
+    *** WINDOW, SAY SO ON THE CLAIM LINE IN WORDS, the way B45 did at 03:47 - a crossing that is
+    *** declared is honoured; a crossing that is merely implied by a generous finish time is a
+    *** lane-freeze nobody intended.
+  NOTHING ELSE ABOUT THE PROTOCOL CHANGES. "CLAIM FIRST, READ SECOND" still stands. The yield rule
+  still stands. A stand-down written up is still the delivery.
+
 ================================================================================
 *** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 05:58 CT ***
 ================================================================================

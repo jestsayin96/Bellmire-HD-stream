@@ -67,6 +67,144 @@ LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tange
 Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
 Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
 Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+## ART 2026-11-18 13:53 CT - THE CREW FIGURE MEASURED AGAINST THE HERO AND AGAINST ITS OWN FAMILY, AND THE BLENDER BRIDGE IS DOWN SO NOTHING HERE IS COMMITTED
+
+WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED. The 11:5x block's ART row
+asked for the Rammer's write-up. IT IS ALREADY DELIVERED - by this lane's own
+12:39 entry and the 12:46 correction above it - so I did not write it twice. I
+counted the set rather than trusting the row: assets/monsters/minibosses holds
+45 .glb, 34 of them non-chibi, rammer.glb among them; renders/art/minibosses/
+_report.json carries 45 entries, ok true, errors [], blank check 102 files and
+0 failures. I could not read origin/main this run (see the bridge fault at the
+bottom), so the newest plan block I have is the 11:5x one in this worktree.
+
+SO I TOOK THE ONE THING THAT ROW LEFT OPEN AND CALLED AN EYE JUDGEMENT. The
+team lead wrote: the operator "is blockier and flatter-faceted than the chibi
+knight - its helmet is roughly a quarter of its height against the knight's
+near-two-fifths", said plainly it was not a charge, and left the decision to me.
+An eye judgement is not a number and this lane has a rule about numbers that
+cannot move, so I built one that moves: tools/art/_crew_prop.py.
+
+THE INSTRUMENT, AND THE THREE TIMES IT CAUGHT ME BEFORE IT AGREED WITH ANYONE.
+  1. My first head rule took the narrowest row in the upper half as the neck. It
+     found the CROWN TAPER instead, and returned 0.048 for BOTH figures - the
+     identical number is what gave it away, and the knight control band caught
+     it. A dome narrows at the top; the neck is the pinch BELOW the head's
+     widest row, not above it.
+  2. Rewritten, the rule then refused to apply to the operator at all: its
+     widest row and its head's widest row were the same row, because THE ARM IS
+     RAISED TO THE ROPE and fuses with the head in silhouette. That refusal was
+     the instrument being honest. I restricted the body-widest search to the
+     lower 55% and CONTROLLED the change - the knight's number must not move,
+     and it did not (0.483 before and after). But the operator's 0.361 from that
+     path is NOT a head fraction: the "neck" it finds is the waist. It is in the
+     JSON labelled as not-a-head, and I am not shipping it as one.
+  3. So the answering reading is a DEPTH-BUFFERED one: rasterise the figure
+     through one orthographic camera with a z-buffer, record which material won
+     each pixel, and ask how far down the head material is still VISIBLE. That
+     is the viewer's question and it lets the renderer do the occlusion - a bbox
+     cannot know that the knight's head mesh runs down inside its own collar.
+     Its first run went RED too: the operator's BOOTS are the same dark material
+     as its helmet, so the "head" reached the floor and the guard said so. The
+     group now keeps only the top cluster of that column and REFUSES if there is
+     no real vertical gap.
+  4. The cross-check between the two methods failed on the knight at a 0.06
+     tolerance, and THAT FAILURE WAS MINE. The neck rule finds a PINCH; the
+     visible-head rule finds the LOWEST VISIBLE HEAD PIXEL, which on a helmed
+     figure is the throat piece below the pinch. Different landmarks. The check
+     now asks only that the visible head reach at or below the pinch and not by
+     more than 0.12, and says so in the file.
+
+RED PROOF, because a green that cannot go red is not a pass. Two deliberate
+perturbations, both of which MUST fail, run every time: an empty head column
+(x_split pushed past the model) and the knight's BODY labelled as its head. Both
+come back RED. If either ever comes back green the run is RED on that alone.
+
+WHAT IT RETURNS - renders/art/minibosses/rammer/_crew_prop.json, verdict GREEN,
+errors []:
+  visible head, chibi knight    0.550 of its own height
+  visible head, crew operator   0.261 of its own height      ratio 2.11
+  neck pinch, chibi knight      0.483  (second method, agrees within 0.067)
+  faces per unit of height      knight 1876.3   operator 609.1     3.08x
+  mean face area                knight 0.00333  operator 0.00507   1.52x
+THE TEAM LEAD'S EYE WAS RIGHT IN DIRECTION AND HIS QUARTER WAS EXACT. The
+operator reads at 0.26, a quarter. The knight is nearer A HALF than two-fifths -
+0.55 by the visible read, 0.48 by the pinch - so the gap he saw is if anything
+WIDER than he said. "Flatter-faceted" is also real and is now a number: three
+times fewer faces per unit of height, facets half again as large.
+
+AND THEN THE QUESTION THAT ACTUALLY DECIDES IT, WHICH IS NOT THE KNIGHT. The
+operator is not a hero and was never meant to be one. The question is whether it
+is an OUTLIER IN ITS OWN FAMILY, so the instrument surveys all 45 bodies on the
+same measure, with no per-body heuristic that could pick favourites:
+  median faces per unit of height, all 45 bodies   1289.0
+  the whole Rammer                                  793.8, rank 5 of 45
+  below it: loader 582.1, beadle 646.5, bellman 701.3, stoker 710.6
+IT IS AT THE SPARSE END AND IT IS NOT ALONE THERE. The four bodies below it are
+the other big structural pieces. A machine with a tripod and a block has fewer
+faces per metre than a figure, and that is the geometry of the thing, not a
+slip. CAVEAT I OWE: that survey number is the WHOLE body, frame included, so it
+is not a like-for-like reading of the crew figure alone. The crew figure alone,
+at 609.1, is the sparsest humanoid I have ever stood beside a hero.
+
+MY DECISION: THE CREW FIGURE DOES NOT WANT A PROPORTION PASS. Bellmire's first
+art rule is that things look like what they are FOR, and this one is for hauling
+a block up a frame and letting it go. An adult rigger at adult proportions beside
+a chibi hero reads as a person doing a job; giving it a hero's head would make
+the party's own language say "this is one of us" about a thing that is not. The
+head fraction is a true difference between a hero and a crew figure, not a fault
+in the crew figure. I am recording the numbers so the next seat can overrule me
+on evidence rather than on memory.
+
+THE FACING, BECAUSE THE BEADLE TAUGHT THIS HOUSE TO ASK. tools/art/_crew_face.py
+counts the near-white goggle pixels the viewer actually sees inside the
+operator's head box in the shipped renders: FRONT 153 px of 5,811 opaque, BACK
+28 px of 5,280. Delta 125, reads_as_facing true, verdict GREEN. AND I LOOKED: the
+front shows two pale lenses over a dark mask band, the back shows a plain dome
+and a pale collar. The 28 on the back is that collar catching light, not a face.
+The Beadle fault does not repeat on the crew figure.
+
+THE FIT PROOF - I LOOKED AT ALL THREE ON-BODY VIEWS PLUS TWO CROPS, AND HERE IS
+EVERY FAULT I CAN SEE. No new render was possible this run, so these are the
+shipped hero_front.png, hero_side.png and hero_back.png at
+renders/art/minibosses/rammer/, which is the same body that is on origin/art.
+  - SIDE VIEW, the worst of them: the raised fist sits ON the helmet's
+    silhouette edge. Hand and head read as one mass at stream distance.
+  - SIDE VIEW: one goggle lens lands exactly on the head's outline, so it reads
+    as a notch bitten out of the dome rather than as a lens.
+  - FRONT: the rope ends AT the fist with no tail below the grip - it reads as
+    welded to the hand rather than gripped and running on.
+  - FRONT: the tripod's right leg crosses the operator's left shin. It is an
+    overlap, not a clip - the shading separates them - but at small size the
+    figure's near leg is cut.
+  - No float, no gap, no bad anchor: both boots meet the floor plane, the fist
+    meets the rope, the frame's three feet and the block at its foot all sit.
+BLANK AND BORDER: no new render, so there is no new blank-or-border check to
+report, and I am not carrying the old verdict forward as if it were one. The
+register's standing numbers for this body are 3 of 3 proving views, 0 blind,
+blank check 3 files 0 failures.
+
+NOTHING FOR THE GAME BUILD LANE IS NEW THIS RUN. No .gd was touched and nothing
+here needs wiring. The one standing item is unchanged and is not mine to close:
+rammer.glb, moulder.glb and snarer_chibi.glb have no .glb.import sibling, and a
+Godot run generates them.
+
+*** THE FAULT OF THIS RUN, AND IT IS NOT A CODE FAULT: THE BLENDER BRIDGE IS
+*** DOWN, SO NOTHING ABOVE IS COMMITTED OR PUSHED.
+Three calls timed out at 80 s, including a no-op that only returned a constant,
+and the fourth returned "Cannot connect to Blender at localhost:9876". That
+bridge is the only path this lane has to git, to push, to Blender and to Godot,
+so this run could not commit, could not read origin/main, and could not render.
+EVERYTHING THIS ENTRY DESCRIBES IS IN THE WORKTREE AND IN NO COMMIT:
+  tools/art/_crew_prop.py, tools/art/_crew_face.py,
+  renders/art/minibosses/rammer/_crew_prop.json, and this entry.
+The house rule is that a lane's worktree is not its branch, and I am breaking it
+by force rather than by choice. NOTHING IS BLOCKED BY IT - no other lane is
+waiting on an instrument - but the next art firing should commit these four
+files before it starts anything new. MR. E: Blender is not running on cruzader,
+or its MCP addon server is stopped. Starting it restores git and rendering for
+this lane.
+
 ## ART 2026-11-18 12:46 CT - CORRECTION TO MY OWN 12:39 ENTRY: THE ATTRIBUTION WAS ARITHMETIC, THE INSTRUMENT SAYS SOMETHING HARDER
 
 I pushed a342039 with a sentence in it that I had not earned. The 12:39 entry
@@ -10877,6 +11015,74 @@ nothing, no channel state was read or written, and no bits left anyone's pocket.
 - VALIDATION OK: items, lore_lines, bosses, potions all json.load; file round-trips byte-identical before the edit; every other top-level key equal; first 46 entries of every tells list equal; items.json, bosses.json, potions.json untouched.
 - CODE WIRING: none. The new lines are read by the existing tells path.
 Next content: C-117.
+
+C-117 (2026-11-18 15:24 CT, content) - 84 live bark lines, 14 on each of the six kinds; no new miniboss body
+- ITEM: TAKE THIS NEXT (15:1x block) CONTENT row 2: keep producing, nothing into phase2_words_*. Minibosses: still 34 bodies, by_key holds 34, stood down. Went to standing backlog 3 (barks - they repeat most on stream).
+- ADDED: data/lore_lines.json barks enter/lord/trap/hurt/drink/misfire +14 each (enter 250, lord 238, trap 241, hurt 235, drink 229, misfire 235). Every line unique across the whole barks block (4 near-dupes caught and rewritten before writing). Plain strings, no tokens, no floor count. New zero-hit key _note_c117, expected.
+- VALIDATION OK: lore_lines.json json.load clean; every pre-existing key and every pre-existing bark identical in order; items, bosses, potions parse and untouched.
+- CODE WIRING: none. Read live at delve.gd:3781 by kind.
+Next content: C-118.
+## B57 - THE SIXTH TRIGGER IS PROVEN. ALL SIX GUARD TRIGGERS IN chatcmd.gd ARE NOW RED-PROVED ON THE ENGINE (chat bot, 2026-11-18 15:4x CT)
+This closes a claim that has been owed for three hours (B54 timed it out, B55 lost the slot to the
+bridge outage, B56 ran it with a probe that was measuring nothing and said so). Nothing else was
+touched this hour. No new work was invented.
+
+WHAT I DID, EXACTLY ONCE, IN ONE HEADLESS RUN OF ABOUT TWELVE SECONDS.
+B56 ended by naming precisely what the trigger needed, and that is what I built:
+  (1) rename `func handle(` at line 99 AND the self-call at line 2256 TOGETHER, so the file parses
+      (renaming line 99 alone is a parse error at 2256 - that was B56's real finding and it stands);
+  (2) have the probe call `ChatCmd.commands()` BEFORE `ChatCmd.guard_faults()`, because
+      guard_faults() is two lines long and checks nothing - every arm lives inside commands().
+Result, written to a file by the probe and echoed to stdout:
+    B57 PROBE START
+    CMDS=27
+    B57_FAULTS n=1 :: NEEDS_HERO ANCHOR
+    ANCHOR_FIRED=true
+rc 0. stderr carried the arm's full push_error text: "the `match verb:` dispatch table inside
+handle() is gone from scripts/chatcmd.gd ... all 27 flags go unchecked, and both docs/COMMANDS.md's
+\"(no hero needed)\" and the hub's \"Needs a living hero.\" badge are published against nothing",
+with the GDScript backtrace at chatcmd.gd:1996 under commands(), called from the probe.
+
+WHAT THAT MEASURES, AND WHAT IT DOES NOT.
+n=1 is the number that matters as much as the name: the anchor arm fired AND NO OTHER ARM FIRED.
+The trigger is specific. It is not a blanket failure that would light up on any edit. CMDS=27 says
+the data loaded clean while the source anchor was gone - the arm is reading the SOURCE, not the
+data, which is exactly its design. THE SIXTH TRIGGER IS A PASS.
+ALL SIX needs_hero/guard triggers are now red-proven on the engine: five by B54, this one by B57.
+
+I AM CORRECTING MY OWN RECORD ONE LAST TIME AND THEN LEAVING IT ALONE.
+B55's 14:50:35 lock line called n=0 "a HOLE IN THE GUARD". It was not. It was my instrument. B56
+corrected it in words; B57 corrects it with a measurement that fires. The guard was never suspect.
+Nobody should open an item on it, and nobody should carry forward the sentence I wrote at 14:50.
+
+HYGIENE, VERIFIED RATHER THAN ASSUMED - THE B56 LESSON APPLIED TO MYSELF.
+  scripts/chatcmd.gd restored BYTE-IDENTICAL: md5 72be1e686522e8904077623e0169c963,
+    `grep -c '^func handle('` = 1, line 2256 back verbatim, `grep -c RENAMED_B57` = 0.
+  data/commands.json 0ed191404157221abd8a184cc580dfa5 - not touched. No edit, so no json.load
+    re-audit was owed this hour and none is claimed.
+  docs/COMMANDS.md 9a80bfd98049e77abddab6d1d182c524 - not touched, no drift possible.
+  Scratch gone Windows-side: _b57_probe.gd, _b57_out.txt, _b57_run.log all deleted, `*b57*` at the
+    worktree root returns nothing.
+  GODOT CLOSED, CONFIRMED BY TASKLIST AND NOT BY THE GATE RETURNING. B56 left a ghost process alive
+    under my name inside the HUD's window because it assumed. I ran tasklist after the run: no
+    Godot process of any lane. The probe's quit(0) was reached and rc was 0.
+
+THE LOCK.
+Engine verified free by tasklist at 15:46 before I wrote a word; last lane line was game build IDLE
+15:10:08. Claimed 15:47:30, cap 16:12, and I computed the HUD's 15:52 boundary FIRST and declared
+15:51 inside it. IDLE at 15:50:40. NO crossing, and nothing was left running past my own IDLE.
+
+ONE THING I FOUND IN MY OWN WORKTREE THAT WAS NOT MINE, REPORTED BECAUSE IT BLOCKED A MERGE.
+`git merge origin/main` aborted on a local uncommitted modification to docs/WORK_PLAN.md in W6 -
+235 inserted lines, the team lead's 15:1x block. I did not write it and that file is not mine. I
+compared the worktree copy against `origin/main:docs/WORK_PLAN.md` BEFORE touching it: byte-for-byte
+identical, 1631601 bytes both. So the modification carried no information that main did not already
+have, and I stashed it, merged to 11741c9, and dropped the stash. Nothing was lost. Saying it out
+loud anyway: an uncommitted plan edit appearing in another lane's worktree is worth somebody's eye.
+
+OWED TO NO LANE. Nothing for the GAME BUILD lane in twitch_eventsub.gd this hour. No live Twitch
+test was run and no bits were spent on any account.
+
 ## B56 - THE SIXTH TRIGGER FINALLY REPORTED, AND WHAT IT REPORTED FIRST WAS THAT MY OWN PROBE WAS MEASURING NOTHING (chat bot, 2026-11-18 14:4x CT)
 NAMING, SO NOBODY MATCHES THE WRONG ROW: my RUN_LOCK lines this hour are labelled "chat bot B55"
 because I wrote them before I read PROGRESS.md and saw that the 13:4x bridge-outage cycle had
@@ -10958,3 +11164,23 @@ screenshot this hour because web/ did not change, so the hostile-name test is no
 No new claim of READY TO PUBLISH; the publish decision is the supervisor's.
 Hygiene: WORK_PLAN.md working copy was byte-identical to origin/hub c04887f (empty diff) and blocked the
 fast-forward; stashed (stash@{0}) rather than discarded, then ff-merged. Stash is inert and can be dropped.
+
+U78 (2026-11-18 13:52 CST, STAND-DOWN - bridge down, UNCOMMITTED): Blender MCP (localhost:9876) refused connections twice, so I could not read R's working RUN_LOCK.txt, check Godot by process, launch Godot, or run git (device_bash git is broken for this worktree and leaves .lock files). Did not claim the lock, did not launch Godot, no .gd edits. Item stays: rarity-hue half of System 2 (windowed render needed), then L74. Next firing (14:52): if Blender bridge is back, read R's working lock, claim <=15 min, release by :07, take System 2 rarity-hue. This line is uncommitted on hud-ui - commit it first thing when git is reachable.
+
+## U79 (18 Nov 14:53 CT) - NO HUD ITEM OPEN; headless parse health check of hud-ui after the merge (dee982b)
+- Item from TAKE THIS NEXT: the 14:1x block's HUD row is "your window is yours, row below unchanged" - no item. Queue is empty (System 2 closed whole, L72-L74 ticked, L66 to hub H31). Stand-down on items, not on the lock.
+- Lock: read R's working RUN_LOCK.txt. Last real line IDLE 14:50:35 (chat bot B55); its later NOTE disclaims holding. Two chat-bot probe Godots (PIDs 6472/21112, worktree bellmire-bot, started 14:48:56) were still alive - its leftover hung probe, not a hold per its IDLE. Claimed 14:53:20-06:00 (expected 15:00, cap 15:07), released 2026-11-18T14:54:00-06:00.
+- Ran: godot --headless --path W2 --quit-after 300. Parse Error count 0; SCRIPT ERROR count 7, all the known gear.gd:104 null-instantiate from this worktree's thin .godot/imported cache (team lead traced it 18 Nov; not HUD, not chased). HUD-file mentions in log: 0. No picture taken, no game file edited.
+- Not ticked by me. 13:52 U78 stand-down line (bridge down) is committed with this entry.
+
+## U80 (18 Nov 15:5x CT) - U77's null result closed: the old and hardened end-finders DISAGREE on every U76 shape, and agree on the shipped corpus
+Lock: file-only row, no claim, no Godot launched (R's working RUN_LOCK last line chat bot B57 IDLE 15:50:40, tasklist clean).
+Row (team lead 6, "prove which"): a hardened parser changing no verdict means either the old one was never wrong on the corpus, or the hardened path is not taken. Both checked.
+(1) Path is taken: block_end() is called at both table readers in tools/_u71_rarity_guard.gd (parse_fish, parse_py); no find("}") / find("\n}") remains in either.
+(2) Side-by-side on the REAL scripts/fishing.gd text, the old first-"}" finder vs the depth finder, rungs read from RARITY_COLOR (python model of both, same inputs as the U76_BRACE mutations):
+  clean file: old 4, new 4 (agree)
+  "# note }" comment + nested dict: old 1, new 4 (old truncated)
+  nested dict on the open line after "{ # {open}": old 0, new 5 (old read nothing)
+  unterminated "{{": old 4 (SILENT GREEN), new -1 -> 0 rungs, FAILS loud
+(3) Verdict: the old parser was already correct on every shape the shipped corpus contains (U77, 12 historical revisions), and wrong on every shape U76 constructed. So the null result is real and the hardened path is live; no silent instrument. The unterminated case is the one that mattered - old went green, new fails.
+Limit stated: (2) is a python port of both finders; the in-engine proof of the new one is U76_BRACE 3/3 (rerun U77). I did not rerun Godot this hour. Nothing for Mr. E to decide. Row closed; queue empty again.

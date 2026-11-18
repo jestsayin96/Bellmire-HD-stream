@@ -11183,9 +11183,25 @@ def rammer():
     HX, HY, HZ = 0.0, -0.10, 2.52
     # two front legs splayed in x, one raked back in +y: a tripod stands on any
     # floor, and a tripod is also why this reads as built rather than grown.
-    limb(P, [(-0.66, 0.04, 0.0), (-0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
-    limb(P, [(0.66, 0.04, 0.0), (0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
-    limb(P, [(0.0, 0.94, 0.0), (0.0, 0.52, 1.32), (HX, HY + 0.04, HZ)], 0.082, 0.058, 'bone')
+    # PASS 8, ONE CHANGE: SEAT THE THREE FEET ON ONE PLANE. The three legs and
+    # the pile all declared z=0.0 and I read that as "they all stand on the
+    # floor". THEY DO NOT, AND A TUBE IS WHY. limb() sweeps a ring that is
+    # PERPENDICULAR TO THE POLYLINE, so a raked leg's bottom ring is TILTED and
+    # its lowest vertex sits r*sin(tilt) BELOW the point I declared:
+    #     front legs  tilt 13.73 deg  r 0.088  ->  dip 20.9 mm
+    #     back  leg   tilt 17.65 deg  r 0.082  ->  dip 24.9 mm
+    # minibossgen grounds the merged body on its GLOBAL minimum z
+    # (minibossgen.py, `ob.location.z - mn.z`), so that 24.9 mm became THE
+    # FLOOR and everything else rose off it: the two front feet ended 4 mm
+    # clear and the pile, whose cone base is honestly at z=0.0, ended 24.9 mm
+    # IN THE AIR. A driven pile floating off the ground is the one thing this
+    # creature must not do - the pile is the WHERE of the whole fight.
+    # Raising each start by its own dip puts every foot's lowest vertex and the
+    # pile's base on z=0 exactly, so the grounding shift is zero and the plane
+    # the eye reads off the three planted feet IS the plane the pile meets.
+    limb(P, [(-0.66, 0.04, 0.0209), (-0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.66, 0.04, 0.0209), (0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.0, 0.94, 0.0249), (0.0, 0.52, 1.32), (HX, HY + 0.04, HZ)], 0.082, 0.058, 'bone')
     # the head: a squat capping block with the sheave pin through it
     # PASS 7, ONE CHANGE, AND IT IS THE DEPTH - NOT THE WIDTH I SAID IT WAS.
     # My own 12:39 row read "narrow the head cap so the monkey is the widest

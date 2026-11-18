@@ -1426,6 +1426,95 @@ static func commands() -> Dictionary:
             if dy_ex_col != "" and not dy_dyes.has(dy_ex_col):
                 push_error("COMMANDS_DATA DYE EXAMPLE GHOST: `dye`.example is \"%s\" and the dyer does not accept `%s` - the example is the one string a viewer copies verbatim out of docs/COMMANDS.md, so this hands out a pre-typed refusal" % [dy_ex, dy_ex_col])
                 printerr("COMMANDS_DATA DYE EXAMPLE GHOST - example colour `%s` is not in the dyer's table" % dy_ex_col)
+        # ---- B44: THE FIRST STATE GUARDED. WHERE THE FREE LOOK GOES AND HOW IT RANKS. ------
+        # The row asked for a STATE: a condition or mode my commands publish as true of the game
+        # that nothing compares against what the game actually does. B40-B42 took the numbers,
+        # B43 took the first list. `look`.what is the densest state sentence on my surface - it
+        # publishes FOUR separate claims about the free look and B35 guarded only the first:
+        #   1. "a 10-second pane"              -> Spotlight.LOOK_S. GUARDED ALREADY (B35 above).
+        #   2. "in the channel-points lane"    -> the pane a viewer actually sees it in, whose
+        #      title in words is Spotlight.KIND - the pane's OWN label (spotlight.gd:32, L62,
+        #      Mr. E's own ask that every pane say what it is FOR). UNGUARDED until now.
+        #   3. "(teal)"                        -> that lane's colour, Spotlight.COL, which IS
+        #      UiTheme.KIND - the table the frame is drawn from. UNGUARDED until now.
+        #   4. "Cheers, subs and redeems get their own longer panes" -> a COMPARATIVE state:
+        #      every paid pane outlasts the free one. UNGUARDED until now, and the one most
+        #      likely to go quietly false, because LOOK_S, POINTS_S and SUB_S sit on three
+        #      CONSECUTIVE LINES (spotlight.gd:33-35) and a re-tune touches one of them.
+        #      The smallest cheer is the test, not the biggest: bits_seconds(1) is the floor a
+        #      viewer gets for the cheapest cheer there is, so that is what must still beat free.
+        # I READ THE LANE THROUGH ITS TITLE AND THE COLOUR THROUGH THE KEY THE TITLE RESOLVED TO.
+        # There is no lane name and no colour restated on my side - if I wrote "points" in here
+        # the guard would be vouching for its own copy, which is the defect B43 was about.
+        # ONE CLAUSE IN THAT SENTENCE I CANNOT CHECK AND I WILL NOT PRETEND TO: "only when nobody
+        # has redeemed it or is waiting". That gate is BEHAVIOUR - spotlight.gd:115-118 turns the
+        # free look away when the points lane has a current pane OR a non-empty queue - and no
+        # constant states it. Proving it needs a behavioural harness under tools/, which is not
+        # my file. It is named here so the next seat finds it as a known gap, not a discovery.
+        # THE COLOUR ARM IS A JUDGEMENT AND IS DECLARED AS ONE. Every other arm I have shipped
+        # compares a published token against a stored token. "teal" is a WORD FOR A HUE, so this
+        # arm asks of the real Color only what the word cannot be wrong about: red is the
+        # smallest channel, green and blue are both strong, and they are close to each other.
+        # That catches the swap that matters (the lane re-coloured orange, purple or grey while
+        # docs/COMMANDS.md still says teal) and it will NOT catch a teal drifting to a cyan.
+        # A battery greps COMMANDS_DATA; no line is the healthy reading.
+        var lk_what: String = String(((cmd_d.get("look", {}) as Dictionary)).get("what", ""))
+        var lk_lane_said := ""
+        var lk_col_said := ""
+        var lk_mark := " lane ("
+        var lk_at := lk_what.find(lk_mark)
+        if lk_at > 0:
+            var lk_head := lk_what.substr(0, lk_at)
+            var lk_the := lk_head.rfind("the ")
+            if lk_the >= 0:
+                lk_lane_said = lk_head.substr(lk_the + 4).strip_edges().to_lower().replace("-", " ")
+            var lk_rest := lk_what.substr(lk_at + lk_mark.length())
+            var lk_close := lk_rest.find(")")
+            if lk_close > 0:
+                lk_col_said = lk_rest.substr(0, lk_close).strip_edges().to_lower()
+        var lk_key := ""
+        var lk_titles: Array[String] = []
+        for lk_l in Spotlight.LANES:
+            var lk_t := String(Spotlight.KIND.get(lk_l, "")).strip_edges().to_lower().replace("-", " ")
+            lk_titles.append("%s=\"%s\"" % [String(lk_l), lk_t])
+            if lk_t != "" and lk_t == lk_lane_said and lk_key == "":
+                lk_key = String(lk_l)
+        if lk_lane_said == "" or lk_col_said == "":
+            push_error("COMMANDS_DATA LOOK LANE ANCHOR: `look`.what no longer says \"in the <lane> lane (<colour>)\" - the pane the free look lands in, and the colour a viewer is told to watch for, can no longer be checked against Spotlight.KIND and Spotlight.COL")
+            printerr("COMMANDS_DATA LOOK LANE ANCHOR - `look`.what lost its \"<lane> lane (<colour>)\" phrase; the lane and its colour are now unchecked")
+        elif lk_key == "":
+            push_error("COMMANDS_DATA LOOK LANE GHOST: `look`.what sends a viewer to the \"%s\" lane and no spotlight lane carries that title - the pane titles are %s, so docs/COMMANDS.md points at a pane that is not on screen" % [lk_lane_said, lk_titles])
+            printerr("COMMANDS_DATA LOOK LANE GHOST - published lane \"%s\" matches no pane title: %s" % [lk_lane_said, lk_titles])
+        else:
+            var lk_c_raw: Variant = Spotlight.COL.get(lk_key, null)
+            if not (lk_c_raw is Color):
+                push_error("COMMANDS_DATA LOOK COLOUR AUTHORITY: the `%s` lane has no colour in Spotlight.COL (raw `%s`), so the frame a viewer is told is %s is drawn from nothing" % [lk_key, str(lk_c_raw), lk_col_said])
+                printerr("COMMANDS_DATA LOOK COLOUR AUTHORITY - lane `%s` has no Color; published \"%s\"" % [lk_key, lk_col_said])
+            elif lk_col_said != "teal":
+                push_error("COMMANDS_DATA LOOK COLOUR WORD: `look`.what publishes the colour \"%s\" and this guard knows only \"teal\" - the `%s` lane is drawn %s and nothing here can say whether that word is true of it" % [lk_col_said, lk_key, str(Spotlight.COL.get(lk_key))])
+                printerr("COMMANDS_DATA LOOK COLOUR WORD - published \"%s\" is outside this guard's vocabulary" % lk_col_said)
+            else:
+                var lk_c: Color = lk_c_raw as Color
+                var lk_teal: bool = lk_c.r < lk_c.g and lk_c.r < lk_c.b and lk_c.g >= 0.4 and lk_c.b >= 0.4 and absf(lk_c.g - lk_c.b) <= 0.2
+                if not lk_teal:
+                    push_error("COMMANDS_DATA LOOK COLOUR: `look`.what tells a viewer to watch the %s pane for a teal frame and the `%s` lane is drawn (%.2f, %.2f, %.2f) - a viewer looking for teal is looking at the wrong pane" % [lk_lane_said, lk_key, lk_c.r, lk_c.g, lk_c.b])
+                    printerr("COMMANDS_DATA LOOK COLOUR - lane `%s` is (%.2f, %.2f, %.2f), which is not teal" % [lk_key, lk_c.r, lk_c.g, lk_c.b])
+        var lk_low := lk_what.to_lower()
+        var lk_free: float = float(Spotlight.LOOK_S)
+        var lk_paid := {"the smallest cheer there is": float(Spotlight.bits_seconds(1)),
+                        "a subscription": float(Spotlight.SUB_S),
+                        "a point redeem": float(Spotlight.POINTS_S)}
+        if not (lk_low.contains("longer pane") and lk_low.contains("cheer") and lk_low.contains("sub") and lk_low.contains("redeem")):
+            push_error("COMMANDS_DATA LOOK LONGER ANCHOR: `look`.what no longer claims that cheers, subs and redeems get \"longer panes\" - the free look's rank against the three paid lanes (%s) is now unchecked, and the free pane could outlast a paid one with nothing going red" % str(lk_paid))
+            printerr("COMMANDS_DATA LOOK LONGER ANCHOR - `look`.what lost its \"longer pane\" claim; the paid lanes are now unranked")
+        else:
+            var lk_short: Array[String] = []
+            for lk_n in lk_paid:
+                if float(lk_paid[lk_n]) <= lk_free:
+                    lk_short.append("%s holds %ss" % [String(lk_n), str(float(lk_paid[lk_n]))])
+            if not lk_short.is_empty():
+                push_error("COMMANDS_DATA LOOK LONGER: `look`.what promises cheers, subs and redeems LONGER panes than the free look, and %d of them do not outlast it - the free look holds %ss and %s - so docs/COMMANDS.md tells a viewer that paying buys more screen time than asking, and it does not" % [lk_short.size(), str(lk_free), lk_short])
+                printerr("COMMANDS_DATA LOOK LONGER - free look %ss, not outlasted by: %s" % [str(lk_free), lk_short])
         _cmds = parsed
     return _cmds
 

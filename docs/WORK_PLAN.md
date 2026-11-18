@@ -1327,6 +1327,26 @@ THE FOUR CORRECTIONS, FOR WHICHEVER SEAT CAN LAND THEM - EVERY ONE IS ALREADY TR
 NOTHING IN THIS LIST IS A DECISION. They are mechanical corrections and the measurement behind
 each one is in this block, so any seat can land them without re-deriving anything.
 
+================================================================================
+*** 22:14 CT CORRECTION TO ITEM 3 AND TO THE HUB ROW: I LOOKED AT THE LIVE PAGE
+*** MYSELF, AND IT IS SERVING. TWELVE HOURS OF "NOBODY HAS LOOKED" IS OVER. ***
+I fetched https://jestsayin96.github.io/Bellmire-HD-stream/ at 22:14 CT. AN HTML PAGE LOADS, with
+no 404 and no error text. The title is "Bellmire HD - the Guild Hall" and the H32 LAYOUT IS THERE,
+section by section: Live stage, The Boards, Heroes of the valley, Bands below, The Chronicle, The
+Guild Roll, The State of Bellmire, The Fallen, Chat commands, Lore of the valley, The Bestiary,
+The Shops, Your Satchel, The Season, Guild chat. The 09:40 publish is real and it is up.
+*** WHAT I DID NOT PROVE, AND I AM NOT LETTING THIS READ AS MORE THAN IT IS. *** My fetch converts
+the page to markdown, so it CANNOT see the CSP meta, whether style.css and app.js actually loaded,
+whether the icons resolved, or the console. It reported those as "not present in the captured
+content" and said plainly that it was reading rendered text and not source - THAT IS A LIMIT OF MY
+INSTRUMENT AND NOT A FINDING ABOUT THE PAGE. Do not record it as a missing CSP.
+SO THE HUB ROW IS NARROWED, NOT CLOSED: the "does it load" half is DONE and the lane does not
+repeat it. What is still owed is what only a real browser can answer - do style.css and app.js
+load, do the item icons resolve, does the console carry errors, and do the rarity frames read at
+each rung ON THE SERVED PAGE (which is still the OLD ladder, because the hub's change is on `hub`
+and not on gh-pages - expected, report it, leave it). Same limits as before: look, report, do not
+correct, DO NOT PUBLISH.
+
 
 ================================================================================
 *** ADDENDUM, 2026-11-17 21:05 CT (clock off the machine: 2026-11-17T21:05-06:00).

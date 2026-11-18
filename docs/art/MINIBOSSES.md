@@ -3497,3 +3497,25 @@ moment; nothing clips); the frame collapses to a pole from the side; the pile is
 the weakest read in the back view and its shaft shows below the floor plane; and
 the hauler's faceting is coarser than the chibi knight's (its proportion is right
 after pass 6 - it is segment count, not head-height).
+
+### CORRECTION 2026-11-18 12:46 CT - THE CAUSE ABOVE WAS A GUESS; HERE IS THE MEASUREMENT
+
+`tools/art/_rammer_yaw_ab.py` renders the shipped glb through one ortho camera at
+yaw 0/8/16/24/40 and counts daylight in the cap-to-monkey band across the cap's
+full width. **Zero at every angle** (denominator 8778 -> 6498, so the instrument
+is live). A height profile of the yaw-0 alpha: **0 mm of daylight from z 2.50
+down to z 1.90**, first opening at z 1.80 (134 mm) and widening below.
+
+So the band is not "the two front legs" and is not a projection accident - it is
+**the tripod converging at its own apex**, which is what a tripod is, plus the
+rope. **Raking the legs would do nothing, and no camera angle opens it.** Lowering
+the monkey under z 1.80 to find daylight would delete the telegraph it serves.
+
+**What holds:** pass 5's other half - the monkey stands proud of the legs at its
+own height, so the tower bulges where the block is. The telegraph is that bulge,
+the chalk ring on the floor, and the oak/iron colour split. The source comment
+claiming "a visible gap of rope" is what is wrong, not the model.
+
+**The one shape change that would pay, left for the next pass on this body:**
+narrow the head cap so the monkey is the widest thing in the upper frame by a
+clear margin at every angle.

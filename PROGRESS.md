@@ -1,3 +1,66 @@
+## ART 2026-11-18 12:46 CT - CORRECTION TO MY OWN 12:39 ENTRY: THE ATTRIBUTION WAS ARITHMETIC, THE INSTRUMENT SAYS SOMETHING HARDER
+
+I pushed a342039 with a sentence in it that I had not earned. The 12:39 entry
+says the band between the Rammer's head cap and its monkey is "the TWO FRAME
+LEGS", and proposes the fix "rake the two front legs ~0.06 wider at the head".
+I got that by projecting the leg polylines on paper. **IT IS A NUMBER THAT
+CANNOT MOVE, AND THIS LANE HAS A RULE ABOUT THOSE.** So I built one that moves.
+
+THE INSTRUMENT: tools/art/_rammer_yaw_ab.py. It renders the SHIPPED glb through
+ONE orthographic camera at yaw 0, 8, 16, 24 and 40 degrees and measures the
+white (daylight) pixels in the band between the cap's underside (z 2.495) and
+the monkey's lifting eye (z 2.285), across the cap's full width. The logic: a
+part sitting ON the axis projects down the centre at yaw 0 and swings off it as
+yaw grows, so if the band OPENS with yaw, the filler was on the axis. REDs on
+an empty render and REDs on a band with no rows in it.
+
+WHAT IT RETURNED, AND IT IS NOT WHAT I PREDICTED:
+  yaw   0   white at centre 0   white across cap width      0 of 8778 px
+  yaw   8   white at centre 0   white across cap width      0 of 8436 px
+  yaw  16   white at centre 0   white across cap width      0 of 7980 px
+  yaw  24   white at centre 0   white across cap width      0 of 7296 px
+  yaw  40   white at centre 0   white across cap width      0 of 6498 px
+The denominator moves - 8778 down to 6498 - so the instrument is live and is
+genuinely re-measuring, not returning a constant. The daylight does not move,
+because there is none at any angle.
+
+THEN I PROFILED THE WHOLE FRAME BY HEIGHT off the yaw-0 alpha, widest unbroken
+white run inside the cap's width:
+  z 2.50 -> 1.90   0 mm. Solid, every row.
+  z 1.80   134 mm   z 1.70  164 mm   z 1.60  190 mm   z 1.50  216 mm
+  z 1.40   242 mm   z 1.30  268 mm
+**THE FRAME IS NOT AN OPEN STRUCTURE ABOVE z 1.80.** The top 0.95 m of this
+body - the head, the rope, the monkey and the band between them - is one solid
+mass in silhouette from every angle tested.
+
+SO BOTH HALVES OF MY 12:39 FIX ARE WRONG AND I AM STRIKING THEM:
+  - "the two frame legs" is three legs plus the rope, converging at the apex,
+    which is what a tripod IS. Not a projection accident.
+  - "rake the front legs wider at the head" would do NOTHING. They have to meet
+    at the head. Yaw proves no camera angle opens it either.
+  - lowering the monkey to find daylight would need it under z ~1.80, and the
+    whole idea of this body is that THE BLOCK IS UP. The fix would delete the
+    telegraph it was meant to serve.
+
+WHAT IS ACTUALLY TRUE, AND IT IS THE USEFUL PART: the vertical "gap of rope"
+read does not exist and cannot cheaply be made to exist. What DOES work is
+pass 5's other half, which I re-measured and which holds - the monkey stands
+proud of the legs at its own height, so the tower BULGES where the block is.
+The telegraph is carried by that bulge, by the chalk ring on the floor saying
+WHERE, and in colour by pale wet oak against dark iron. The source comment
+claiming a visible gap of rope is the thing that is wrong, not the model.
+LEFT FOR WHOEVER OPENS THIS BODY NEXT, with the measurement in hand: the one
+shape change that would pay is NARROWING THE HEAD CAP so the monkey is the
+widest thing in the upper frame by a clear margin at every angle. That is a
+real pass on a shipped body and I am not starting it inside a row that asked
+for a write-up.
+
+THE LESSON, WHICH IS THE HOUSE'S OWN ARRIVING AT MY DESK AGAIN: at pass 11 I
+shipped a number beside a sentence that contradicted it and the sentence was
+right. Today I shipped a CAUSE beside a measurement, where the measurement was
+real and the cause was a guess wearing its clothes. A measured effect does not
+license an unmeasured cause.
+
 ## ART 2026-11-18 12:39 CT - THE RAMMER'S WRITE-UP (34th miniboss), the twelve-body index that was missing behind it, and the silhouette measurement that says my own pass-5 gap is not there
 
 The 11:5x row, verbatim: "YOUR ROW IS THE WRITE-UP, AND IT IS SMALL BUT IT IS THE

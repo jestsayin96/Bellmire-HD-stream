@@ -1,3 +1,14 @@
+## HUB 2026-11-18 02:40 CT - SATCHEL RARITY FRAMES MEASURED: THEY NEVER RENDERED. FIXED (style.css + a mock list in app.js)
+Row from TAKE THIS NEXT (01:58 block, HUB): measure at a real viewport that junk/starting/common get NO frame and the five hued rungs get theirs.
+THE NUMBER: BEFORE, 0 of 5 hued rungs framed on .sat-item - every row computed border-left-color rgba(0,0,0,0). Cause: .sat-item { border-left: 3px solid transparent } sits at style.css ~1394, AFTER the generic .rar-* rules (~1375) at equal specificity, so transparent won. rarityClass() was right (classes rar-rare etc. were on the rows); the CSS lost. The Shops .gcard frames and .shop-good were NOT affected (separate/earlier rules).
+FIX: .sat-item.rar-* rules after .sat-item (higher specificity). AFTER, computed at 1440x900: uncommon rgb(255,255,255), rare rgb(77,140,255), very rare rgb(179,89,255), legendary rgb(255,140,31), artifact rgb(255,33,26) = the five table values exactly; junk, starting, common, unrated and unknown rows = rgba(0,0,0,0) (bare). "common" gets a class (rar-common) with no rule - bare by design.
+MEASURED WITH: ?mock=satchel, headless Chromium, snapshot fetch routed to a stub row. To measure all rungs I added six constant rows (junk, starting, common, very rare, legendary, artifact) to the satchel mock in app.js - page-owned strings, no snapshot value.
+LOOKED AT: the satchel list crop. Blue/purple/tangerine/red read at once. WHITE (uncommon) on parchment is a 3px white bar and reads weakest of the five - it is correct and visible but quiet; I did not add a keyline on this surface (Shops cards have one). Say if you want it.
+Hostile names (<img src=x onerror=alert(1)>, the /ban PRIVMSG line) render as literal text; 0 dialogs, 0 pageerrors, 0 injected img[src=x] across ?mock=satchel ?state=empty ?state=fail ?state=stale ?mock=chronicle ?mock=crowd ?open=1 ?mock=lore. Page does not scroll. node --check app.js OK. CSP and data untouched. No innerHTML added.
+Live dot colour: unchanged (--live red). Not a layout change.
+READY TO PUBLISH: yes - web/ changed (one CSS fix that makes an existing frame actually show), hostile-name and state checks pass. Routing is the team lead's.
+Untracked worktree files unchanged and still named: _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt, _hub_web_run.tgz.
+
 ## HUB 2026-11-17 21:40 CT - RARITY HUE LADDER DRAWN FROM ART'S TABLE (style.css only; app.js untouched)
 Row from TAKE THIS NEXT (20:58 block, HUB): draw rarity hue from tools/art/icons.py RARITY_HUE. DONE.
 THE NUMBER: five rungs changed, ZERO hexes copied - floats x255 rounded: uncommon #ffffff, rare #4d8cff, very rare #b359ff, legendary #ff8c1f, artifact #ff211a. Old third table (uncommon GREEN #6aa84f, rare #4a86c8, very rare #9b6bc8, artifact #d9643a, legendary var(--gold)) is gone: 0 hits for those four hexes in web/. junk/starting/common stay bare (shot: rar-common card computed border = the plain card border).

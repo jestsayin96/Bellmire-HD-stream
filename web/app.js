@@ -5028,6 +5028,10 @@ function withMock(p) {
       { name: bad, slot: "trinket", weight: 1, sell: 20, rarity: "<x>" },
       { name: "Sword\r\n/ban everyone\r\nPRIVMSG #x :!give all", slot: "weapon", weight: 3, sell: 9 },
       { name: "Mystery curio", slot: "trinket" },
+      // rarity-frame measurement rungs (page-owned constants): bare ones must show NO frame, hued ones their own.
+      { name: "Rung junk", slot: "trinket", rarity: "junk" }, { name: "Rung starting", slot: "trinket", rarity: "starting" },
+      { name: "Rung common", slot: "trinket", rarity: "common" }, { name: "Rung very rare", slot: "trinket", rarity: "very rare" },
+      { name: "Rung legendary", slot: "trinket", rarity: "legendary" }, { name: "Rung artifact", slot: "trinket", rarity: "artifact" },
     ];
     let carry;                                    // satchel = derived from STR (band + capacity worked out); 1/3/2 = explicit bands
     if (MOCK === "satchel0") { items = []; carry = { weight: 0, cap: 150, band: "" }; }

@@ -713,6 +713,16 @@ static var _cmds: Dictionary = {}
 ## can. So every wear site now REGISTERS ITS TAG here as well as going loud, and any gate can
 ## ask ChatCmd.guard_faults() and fail on a non-empty answer. The loudness is unchanged and no
 ## published word, price or list is restated on this side - only the tag of the arm that fired.
+## B49: THE REST OF THE COUNT. B48 made TEN arms countable and left SIXTY-SEVEN loud but
+## uncounted, and that is worse than none of them being counted: guard_faults() is the reading
+## a gate trusts, so an empty array read as "clean" while any of the other sixty-seven arms was
+## firing. A harness asking the count would have passed the live defect class B46 found - a
+## published price a hundred gold under what the counter charges - as long as the drift was in
+## any command but `wear`. Every COMMANDS_DATA arm in this loader now registers its tag, so the
+## count and the loudness say the same thing. The tag is the arm's own tag out of its message,
+## unchanged; where an arm sits in a loop (the enlist pair, the three flat prices) the same tag
+## can appear more than once, and the loud line beside it names which row fired. Nothing here
+## restates a published word, price or list - only the tag.
 static var _guard_faults: Array[String] = []
 ## The tags of every guard arm that fired on the last load of data/commands.json, in the order
 ## they fired. Empty is the healthy reading, the same convention as a battery grepping for zero
@@ -724,15 +734,18 @@ static func commands() -> Dictionary:
         _guard_faults.clear()
         var f := FileAccess.open("res://data/commands.json", FileAccess.READ)
         if f == null:
+            _guard_faults.append("MISSING")
             push_error("COMMANDS_DATA MISSING: res://data/commands.json would not open (err %d)" % FileAccess.get_open_error())
             printerr("COMMANDS_DATA MISSING - res://data/commands.json would not open")
             return {}
         var parsed: Variant = JSON.parse_string(f.get_as_text())
         if typeof(parsed) != TYPE_DICTIONARY:
+            _guard_faults.append("UNPARSABLE")
             push_error("COMMANDS_DATA UNPARSABLE: data/commands.json is not a JSON object")
             printerr("COMMANDS_DATA UNPARSABLE - data/commands.json is not a JSON object")
             return {}
         if not (parsed as Dictionary).has("commands") or (parsed["commands"] as Dictionary).is_empty():
+            _guard_faults.append("EMPTY")
             push_error("COMMANDS_DATA EMPTY: data/commands.json carries no `commands`")
             printerr("COMMANDS_DATA EMPTY - data/commands.json carries no `commands`")
             return {}
@@ -747,10 +760,12 @@ static func commands() -> Dictionary:
         # loud and carry on. A battery greps COMMANDS_DATA; no line is the healthy reading.
         var ask_d: Variant = (parsed as Dictionary).get("ask", {})
         if typeof(ask_d) != TYPE_DICTIONARY or (ask_d as Dictionary).is_empty():
+            _guard_faults.append("NO ASK")
             push_error("COMMANDS_DATA NO ASK: data/commands.json carries no usable `ask` - a plain question gets no answer")
             printerr("COMMANDS_DATA NO ASK - data/commands.json carries no usable `ask`")
         var for_d: Variant = (parsed as Dictionary).get("foreign", {})
         if typeof(for_d) != TYPE_DICTIONARY or (for_d as Dictionary).is_empty():
+            _guard_faults.append("NO FOREIGN")
             push_error("COMMANDS_DATA NO FOREIGN: data/commands.json carries no usable `foreign` - another app's commands would be answered")
             printerr("COMMANDS_DATA NO FOREIGN - data/commands.json carries no usable `foreign`")
         # B22 (B21 Fault 2): `order` is the key the doc generator actually walks, and this loader
@@ -762,6 +777,7 @@ static func commands() -> Dictionary:
         var ord_v: Variant = (parsed as Dictionary).get("order", [])
         var cmd_d: Dictionary = parsed["commands"] as Dictionary
         if typeof(ord_v) != TYPE_ARRAY:
+            _guard_faults.append("ORDER UNUSABLE")
             push_error("COMMANDS_DATA ORDER UNUSABLE: data/commands.json `order` is not an array")
             printerr("COMMANDS_DATA ORDER UNUSABLE - `order` is not an array")
         elif not (ord_v as Array).is_empty():
@@ -775,9 +791,11 @@ static func commands() -> Dictionary:
                 if not cmd_d.has(k):
                     ghost.append(k)
             if not miss.is_empty():
+                _guard_faults.append("ORDER SHORT")
                 push_error("COMMANDS_DATA ORDER SHORT: %d command(s) absent from `order` would be dropped from docs/COMMANDS.md: %s" % [miss.size(), miss])
                 printerr("COMMANDS_DATA ORDER SHORT - %d command(s) absent from `order`: %s" % [miss.size(), miss])
             if not ghost.is_empty():
+                _guard_faults.append("ORDER GHOST")
                 push_error("COMMANDS_DATA ORDER GHOST: `order` names %d key(s) no command answers: %s" % [ghost.size(), ghost])
                 printerr("COMMANDS_DATA ORDER GHOST - `order` names %d dead key(s): %s" % [ghost.size(), ghost])
         # B23: the earnability pass run over my own files. Every guard above stops at the key
@@ -795,12 +813,14 @@ static func commands() -> Dictionary:
             var ask_k: Dictionary = ask_d as Dictionary
             var tps_v: Variant = ask_k.get("topics", {})
             if typeof(tps_v) != TYPE_DICTIONARY or (tps_v as Dictionary).is_empty():
+                _guard_faults.append("ASK NO TOPICS")
                 push_error("COMMANDS_DATA ASK NO TOPICS: `ask` carries no usable `topics` - every plain question gets silence")
                 printerr("COMMANDS_DATA ASK NO TOPICS - `ask` carries no usable `topics`")
             else:
                 var tps: Dictionary = tps_v as Dictionary
                 var ao_v: Variant = ask_k.get("order", [])
                 if typeof(ao_v) != TYPE_ARRAY:
+                    _guard_faults.append("ASK ORDER UNUSABLE")
                     push_error("COMMANDS_DATA ASK ORDER UNUSABLE: `ask.order` is not an array")
                     printerr("COMMANDS_DATA ASK ORDER UNUSABLE - `ask.order` is not an array")
                 elif not (ao_v as Array).is_empty():
@@ -814,9 +834,11 @@ static func commands() -> Dictionary:
                         if not tps.has(k):
                             t_ghost.append(k)
                     if not t_miss.is_empty():
+                        _guard_faults.append("ASK ORDER SHORT")
                         push_error("COMMANDS_DATA ASK ORDER SHORT: %d topic(s) absent from `ask.order` can never be matched: %s" % [t_miss.size(), t_miss])
                         printerr("COMMANDS_DATA ASK ORDER SHORT - %d topic(s) unreachable: %s" % [t_miss.size(), t_miss])
                     if not t_ghost.is_empty():
+                        _guard_faults.append("ASK ORDER GHOST")
                         push_error("COMMANDS_DATA ASK ORDER GHOST: `ask.order` names %d topic(s) that do not exist: %s" % [t_ghost.size(), t_ghost])
                         printerr("COMMANDS_DATA ASK ORDER GHOST - `ask.order` names %d dead topic(s): %s" % [t_ghost.size(), t_ghost])
                 var mute: Array = []
@@ -828,9 +850,11 @@ static func commands() -> Dictionary:
                     if String(t.get("cmd", "")) == "" and String(t.get("reply", "")) == "":
                         mute.append(k)
                 if not nophr.is_empty():
+                    _guard_faults.append("ASK TOPIC NO PHRASES")
                     push_error("COMMANDS_DATA ASK TOPIC NO PHRASES: %d topic(s) nothing can match: %s" % [nophr.size(), nophr])
                     printerr("COMMANDS_DATA ASK TOPIC NO PHRASES - %d topic(s) nothing can match: %s" % [nophr.size(), nophr])
                 if not mute.is_empty():
+                    _guard_faults.append("ASK TOPIC MUTE")
                     push_error("COMMANDS_DATA ASK TOPIC MUTE: %d topic(s) match a question and answer with nothing: %s" % [mute.size(), mute])
                     printerr("COMMANDS_DATA ASK TOPIC MUTE - %d topic(s) answer with nothing: %s" % [mute.size(), mute])
         var no_what: Array = []
@@ -838,6 +862,7 @@ static func commands() -> Dictionary:
             if not (cmd_d[k] is Dictionary) or String((cmd_d[k] as Dictionary).get("what", "")) == "":
                 no_what.append(k)
         if not no_what.is_empty():
+            _guard_faults.append("NO WHAT")
             push_error("COMMANDS_DATA NO WHAT: %d command(s) carry no `what` - !help <command> breaks on them: %s" % [no_what.size(), no_what])
             printerr("COMMANDS_DATA NO WHAT - %d command(s) carry no `what`: %s" % [no_what.size(), no_what])
         if typeof(for_d) == TYPE_DICTIONARY:
@@ -849,6 +874,7 @@ static func commands() -> Dictionary:
                 if (fa.get("prefixes", []) as Array).is_empty() and (fa.get("exact", []) as Array).is_empty():
                     dead_app.append(app)
             if not dead_app.is_empty():
+                _guard_faults.append("FOREIGN APP EMPTY")
                 push_error("COMMANDS_DATA FOREIGN APP EMPTY: %d app(s) in `foreign` name nothing, so their commands are answered: %s" % [dead_app.size(), dead_app])
                 printerr("COMMANDS_DATA FOREIGN APP EMPTY - %d app(s) name nothing: %s" % [dead_app.size(), dead_app])
         # B29 (B28 residual 2, closed): the two COOLDOWN keys are the only published numbers in
@@ -862,11 +888,13 @@ static func commands() -> Dictionary:
         # above uses. A battery greps COMMANDS_DATA; no line is the healthy reading.
         for ck in ["cooldown_s", "twitch_cooldown_s"]:
             if not (parsed as Dictionary).has(ck):
+                _guard_faults.append("COOLDOWN MISSING")
                 push_error("COMMANDS_DATA COOLDOWN MISSING: data/commands.json carries no `%s` - the enforced wait silently falls back and docs/COMMANDS.md still promises the old number" % ck)
                 printerr("COMMANDS_DATA COOLDOWN MISSING - no `%s`; the published wait and the enforced wait can now differ" % ck)
                 continue
             var cv: Variant = (parsed as Dictionary)[ck]
             if not (typeof(cv) == TYPE_FLOAT or typeof(cv) == TYPE_INT) or float(cv) <= 0.0:
+                _guard_faults.append("COOLDOWN UNUSABLE")
                 push_error("COMMANDS_DATA COOLDOWN UNUSABLE: data/commands.json `%s` is not a positive number (%s) - the read falls back and the published wait lies" % [ck, str(cv)])
                 printerr("COMMANDS_DATA COOLDOWN UNUSABLE - `%s` is not a positive number (%s)" % [ck, str(cv)])
         # B42: THE TWO NUMBERS IN MY OWN DATA FILE NOTHING VOUCHED FOR. The B29 comment above
@@ -892,6 +920,7 @@ static func commands() -> Dictionary:
                 var akey := String(ak[0])
                 var awhat := String(ak[1])
                 if not (ask_d as Dictionary).has(akey):
+                    _guard_faults.append("ASK NUMBER MISSING")
                     push_error("COMMANDS_DATA ASK NUMBER MISSING: `ask` carries no `%s` - %s silently falls back to the literal inside chatcmd.gd and nothing in the house says the data stopped deciding it" % [akey, awhat])
                     printerr("COMMANDS_DATA ASK NUMBER MISSING - no `ask.%s`; %s is on the fallback literal" % [akey, awhat])
                     continue
@@ -900,9 +929,11 @@ static func commands() -> Dictionary:
                     # the TYPE is named beside the value on purpose: str("140") and str(140) read
                     # the same in a log, and a lane reading this line has to be able to tell a
                     # wrong type from a wrong number without opening the data file.
+                    _guard_faults.append("ASK NUMBER UNUSABLE")
                     push_error("COMMANDS_DATA ASK NUMBER UNUSABLE: `ask.%s` is not a positive number (%s, type %s) - the read falls back and %s is not what the data says" % [akey, str(av), type_string(typeof(av)), awhat])
                     printerr("COMMANDS_DATA ASK NUMBER UNUSABLE - `ask.%s` is not a positive number (%s, type %s)" % [akey, str(av), type_string(typeof(av))])
                 elif akey == "max_len" and float(av) != float(int(float(av))):
+                    _guard_faults.append("ASK MAX_LEN FRACTION")
                     push_error("COMMANDS_DATA ASK MAX_LEN FRACTION: `ask.max_len` is %s, and a cap on a question is a whole number of characters - the read truncates it to %d, so the enforced cap is not the one the data states" % [str(av), int(float(av))])
                     printerr("COMMANDS_DATA ASK MAX_LEN FRACTION - max_len %s enforced as %d" % [str(av), int(float(av))])
         # B33: THE FORGE KIND LIST WAS RECITED, NOT ENUMERATED. `forge`.what names the kinds a
@@ -919,6 +950,7 @@ static func commands() -> Dictionary:
         var fw: String = String(((cmd_d.get("forge", {}) as Dictionary)).get("what", ""))
         var kparts: PackedStringArray = fw.split("kinds: ", false)
         if kparts.size() < 2:
+            _guard_faults.append("FORGE ANCHOR")
             push_error("COMMANDS_DATA FORGE ANCHOR: `forge`.what no longer carries \"kinds: \" - the published kind list can no longer be checked against Gear.KINDS")
             printerr("COMMANDS_DATA FORGE ANCHOR - `forge`.what lost its \"kinds: \" anchor; the kind list is now unchecked")
         else:
@@ -932,9 +964,11 @@ static func commands() -> Dictionary:
             var unsaid: Array = real.filter(func(k): return not said.has(k))
             var ghost_k: Array = said.filter(func(k): return not real.has(k))
             if not unsaid.is_empty():
+                _guard_faults.append("FORGE DRIFT")
                 push_error("COMMANDS_DATA FORGE DRIFT: %d forge kind(s) Gear.KINDS accepts are absent from `forge`.what, so docs/COMMANDS.md does not tell a viewer they can type them: %s" % [unsaid.size(), unsaid])
                 printerr("COMMANDS_DATA FORGE DRIFT - %d accepted kind(s) unpublished: %s" % [unsaid.size(), unsaid])
             if not ghost_k.is_empty():
+                _guard_faults.append("FORGE GHOST")
                 push_error("COMMANDS_DATA FORGE GHOST: `forge`.what names %d kind(s) Gear.KINDS does not accept, so the doc invites a refusal: %s" % [ghost_k.size(), ghost_k])
                 printerr("COMMANDS_DATA FORGE GHOST - %d published kind(s) the smith refuses: %s" % [ghost_k.size(), ghost_k])
         # B34: THE FORGE KIND LIST WAS THE FIRST RECITED FIELD ANYONE CHECKED, NOT THE ONLY ONE.
@@ -959,6 +993,7 @@ static func commands() -> Dictionary:
             var e_tag: String = String(pair[2])
             var e_parts: PackedStringArray = ew.split(e_anchor, false)
             if e_parts.size() < 2:
+                _guard_faults.append("ENLIST ANCHOR")
                 push_error("COMMANDS_DATA ENLIST ANCHOR: `enlist`.what no longer carries \"%s\" - the published %s list can no longer be checked against the code that accepts it" % [e_anchor, e_tag.to_lower()])
                 printerr("COMMANDS_DATA ENLIST ANCHOR - `enlist`.what lost its \"%s\" anchor; that list is now unchecked" % e_anchor)
                 continue
@@ -970,9 +1005,11 @@ static func commands() -> Dictionary:
             var e_unsaid: Array = e_real.filter(func(k): return not e_said.has(String(k)))
             var e_ghost: Array = e_said.filter(func(k): return not e_real.has(k))
             if not e_unsaid.is_empty():
+                _guard_faults.append("ENLIST %s DRIFT" % e_tag)
                 push_error("COMMANDS_DATA ENLIST %s DRIFT: %d %s(s) !enlist accepts are absent from `enlist`.what, so docs/COMMANDS.md does not tell a viewer they can type them: %s" % [e_tag, e_unsaid.size(), e_tag.to_lower(), e_unsaid])
                 printerr("COMMANDS_DATA ENLIST %s DRIFT - %d accepted %s(s) unpublished: %s" % [e_tag, e_unsaid.size(), e_tag.to_lower(), e_unsaid])
             if not e_ghost.is_empty():
+                _guard_faults.append("ENLIST %s GHOST" % e_tag)
                 push_error("COMMANDS_DATA ENLIST %s GHOST: `enlist`.what names %d %s(s) that do not exist, so the doc invites a refusal (%s): %s" % [e_tag, e_ghost.size(), e_tag.to_lower(), String(pair[3]), e_ghost])
                 printerr("COMMANDS_DATA ENLIST %s GHOST - %d published %s(s) nothing accepts: %s" % [e_tag, e_ghost.size(), e_tag.to_lower(), e_ghost])
         var mw: String = String(((cmd_d.get("muster", {}) as Dictionary)).get("what", ""))
@@ -984,9 +1021,11 @@ static func commands() -> Dictionary:
                 m_said = int(m_words[w])
                 break
         if m_said < 0:
+            _guard_faults.append("MUSTER ANCHOR")
             push_error("COMMANDS_DATA MUSTER ANCHOR: `muster`.what no longer says \"takes <number> from chat\" - the published size of the chat queue can no longer be checked against QUEUE_MAX (%d)" % QUEUE_MAX)
             printerr("COMMANDS_DATA MUSTER ANCHOR - `muster`.what lost its \"takes <number> from chat\" phrase; the queue size is now unchecked")
         elif m_said != QUEUE_MAX:
+            _guard_faults.append("MUSTER COUNT")
             push_error("COMMANDS_DATA MUSTER COUNT: `muster`.what publishes a chat queue of %d and QUEUE_MAX turns the viewer away at %d - docs/COMMANDS.md promises a place the muster does not have" % [m_said, QUEUE_MAX])
             printerr("COMMANDS_DATA MUSTER COUNT - published %d, enforced %d" % [m_said, QUEUE_MAX])
         # B35: THE SMALLEST CLAIM LEFT WHOSE AUTHORITY IS A NUMBER LIVING IN CODE.
@@ -1023,12 +1062,15 @@ static func commands() -> Dictionary:
                 l_said = int(lw.substr(l_i, l_at - l_i))
         var l_real: float = float(Spotlight.LOOK_S)
         if l_said < 0:
+            _guard_faults.append("LOOK ANCHOR")
             push_error("COMMANDS_DATA LOOK ANCHOR: `look`.what no longer says \"<number>-second pane\" - the published length of the free look can no longer be checked against Spotlight.LOOK_S (%s)" % str(l_real))
             printerr("COMMANDS_DATA LOOK ANCHOR - `look`.what lost its \"<number>-second pane\" phrase; the pane length is now unchecked")
         elif l_real != floorf(l_real):
+            _guard_faults.append("LOOK FRACTION")
             push_error("COMMANDS_DATA LOOK FRACTION: Spotlight.LOOK_S is %s, which no whole-second sentence can state - `look`.what publishes %d-second and the pane is neither" % [str(l_real), l_said])
             printerr("COMMANDS_DATA LOOK FRACTION - LOOK_S %s is not whole seconds; published %d" % [str(l_real), l_said])
         elif float(l_said) != l_real:
+            _guard_faults.append("LOOK SECONDS")
             push_error("COMMANDS_DATA LOOK SECONDS: `look`.what publishes a %d-second pane and Spotlight.LOOK_S holds it for %s - docs/COMMANDS.md promises a look the spotlight does not give" % [l_said, str(l_real)])
             printerr("COMMANDS_DATA LOOK SECONDS - published %d, enforced %s" % [l_said, str(l_real)])
         # B36: THE NEXT NUMERIC CLAIM, AND THE FIRST ONE WITH TWO AUTHORITIES.
@@ -1070,9 +1112,11 @@ static func commands() -> Dictionary:
         var s_panel: float = float(LeaderboardPanel.Satchel.SELL_BACK)
         var s_pub: float = float(SnapshotPublisher.SELL_BACK)
         if absf(s_panel - s_pub) > 0.0005:
+            _guard_faults.append("SATCHEL SPLIT")
             push_error("COMMANDS_DATA SATCHEL SPLIT: the sell-back rate is declared TWICE and the two no longer agree - leaderboard_panel.gd Satchel.SELL_BACK is %s and snapshot_pub.gd SELL_BACK is %s, so the counter on stream and the sell prices on the hub pay different money and `satchel`.what cannot be true of both" % [str(s_panel), str(s_pub)])
             printerr("COMMANDS_DATA SATCHEL SPLIT - Satchel.SELL_BACK %s vs SnapshotPublisher.SELL_BACK %s; no single published rate exists" % [str(s_panel), str(s_pub)])
         elif s_said < 0.0:
+            _guard_faults.append("SATCHEL ANCHOR")
             push_error("COMMANDS_DATA SATCHEL ANCHOR: `satchel`.what no longer says \"<fraction> of its shop cost\" in words this guard knows - the published sell-back rate can no longer be checked against SELL_BACK (%s)" % str(s_panel))
             printerr("COMMANDS_DATA SATCHEL ANCHOR - `satchel`.what lost its \"<fraction> of its shop cost\" phrase; the sell-back rate is now unchecked")
         elif absf(s_said - s_panel) > 0.0005:
@@ -1082,6 +1126,7 @@ static func commands() -> Dictionary:
                     s_can = String(w)
                     break
             var s_tip: String = "say \"%s\"" % s_can if s_can != "" else "NO fraction phrase this guard knows can state %s - the sentence needs a different shape, not a different word" % str(s_panel)
+            _guard_faults.append("SATCHEL RATE")
             push_error("COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes \"%s\" (%s) of shop cost and SELL_BACK pays %s - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; %s" % [s_phrase, str(s_said), str(s_panel), s_tip])
             printerr("COMMANDS_DATA SATCHEL RATE - published \"%s\" (%s), enforced %s" % [s_phrase, str(s_said), str(s_panel)])
         # B37: THE ARMOURY - CHOSEN ON SHAPE, AND THE ONLY CLAIM LEFT WHERE *MY OWN FILE*
@@ -1186,31 +1231,37 @@ static func commands() -> Dictionary:
                 if typeof(a_lk[a_k]) == TYPE_BOOL and bool(a_lk[a_k]) and not a_real_pc.has(String(a_k)):
                     a_real_pc.append(String(a_k))
         if a_said.is_empty():
+            _guard_faults.append("ARMOURY ANCHOR")
             push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Gear.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
             printerr("COMMANDS_DATA ARMOURY ANCHOR - `armoury`.what lost its \"%s\" anchor; the ladder and the prices are now unchecked" % a_anchor)
         else:
             if a_said_short != a_said:
                 var a_sp_tip: String = "`armoury`.short no longer carries the ladder at all" if a_said_short.is_empty() else "short says %s" % str(a_said_short)
+                _guard_faults.append("ARMOURY SPLIT")
                 push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Gear.ARMOUR" % [str(a_said), a_sp_tip])
                 printerr("COMMANDS_DATA ARMOURY SPLIT - what %s vs short %s; no single published ladder" % [str(a_said), str(a_said_short)])
             if a_said != a_real:
                 var a_unsaid: Array = a_real.filter(func(n): return not a_said.has(n))
                 var a_ghost2: Array = a_said.filter(func(n): return not a_real.has(n))
                 var a_tip: String = "same names, WRONG ORDER - a ladder's order is the claim" if (a_unsaid.is_empty() and a_ghost2.is_empty()) else "unpublished: %s; invented: %s" % [str(a_unsaid), str(a_ghost2)]
+                _guard_faults.append("ARMOURY LADDER")
                 push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Gear.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
                 printerr("COMMANDS_DATA ARMOURY LADDER - published %s, sold %s; %s" % [str(a_said), str(a_real), a_tip])
             if a_said_cost != a_real_cost:
                 var a_ctip: String = "`armoury`.cost no longer states a slash-separated price ladder" if a_said_cost.is_empty() else "published %d price(s) against %d tier(s)" % [a_said_cost.size(), a_real_cost.size()]
+                _guard_faults.append("ARMOURY COST")
                 push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Gear.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
                 printerr("COMMANDS_DATA ARMOURY COST - published %s, charged %s" % [str(a_said_cost), str(a_real_cost)])
             if a_said_pc != a_real_pc:
                 var a_ptip: String = "`armoury`.what no longer carries \"It shows: \"" if a_said_pc.is_empty() else "published %s" % str(a_said_pc)
+                _guard_faults.append("ARMOURY PIECES")
                 push_error("COMMANDS_DATA ARMOURY PIECES: `armoury`.what says the armour shows %s and Gear.ARMOUR_LOOK turns on %s across the buyable tiers - the doc tells a viewer what they will see on the body and the body shows something else; %s" % [str(a_said_pc), str(a_real_pc), a_ptip])
                 printerr("COMMANDS_DATA ARMOURY PIECES - published %s, dressed %s" % [str(a_said_pc), str(a_real_pc)])
             var a_sold_found: Array = a_found.filter(func(n): return a_said.has(n))
             var a_mute_found: Array = a_found.filter(func(n): return not a_what.to_lower().contains(String(n)))
             if not a_sold_found.is_empty() or not a_mute_found.is_empty():
                 var a_ftip: String = "named in the buy ladder though it cannot be bought: %s" % str(a_sold_found) if not a_sold_found.is_empty() else "found-only armour `armoury`.what never mentions: %s" % str(a_mute_found)
+                _guard_faults.append("ARMOURY FOUND")
                 push_error("COMMANDS_DATA ARMOURY FOUND: Gear.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
                 printerr("COMMANDS_DATA ARMOURY FOUND - found-only %s; %s" % [str(a_found), a_ftip])
         # B38: THE BREW - CHOSEN ON SHAPE AGAIN, AND ITS AUTHORITIES SIT IN TWO FILES I DO NOT
@@ -1298,20 +1349,25 @@ static func commands() -> Dictionary:
             if b_dig != "":
                 b_said_cost = int(b_dig)
         if b_ph_what == "":
+            _guard_faults.append("BREW ANCHOR")
             push_error("COMMANDS_DATA BREW ANCHOR: `brew`.what no longer says \"%s<brew>.\" - the published no-name default can no longer be checked against BREW_DEFAULT (%s)" % [b_anchor, BREW_DEFAULT])
             printerr("COMMANDS_DATA BREW ANCHOR - `brew`.what lost its \"%s\" phrase; the default is now unchecked" % b_anchor)
         else:
             if b_key_what != b_key_short:
                 var b_sp_tip: String = "`brew`.short no longer publishes the default at all" if b_ph_short == "" else "short says \"%s\" (%s)" % [b_ph_short, "no such brew" if b_key_short == "" else b_key_short]
+                _guard_faults.append("BREW SPLIT")
                 push_error("COMMANDS_DATA BREW SPLIT: the no-name default is declared TWICE in data/commands.json and the two no longer name the same brew - `brew`.what says \"%s\" (%s) and %s, so !brew's reply and docs/COMMANDS.md promise different brews and no single published default exists to check against BREW_DEFAULT (%s)" % [b_ph_what, "no such brew" if b_key_what == "" else b_key_what, b_sp_tip, BREW_DEFAULT])
                 printerr("COMMANDS_DATA BREW SPLIT - what \"%s\" vs short \"%s\"; no single published default" % [b_ph_what, b_ph_short])
             if b_key_what == "":
+                _guard_faults.append("BREW DEFAULT")
                 push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\" as the no-name buy and the apothecary makes no such brew - data/potions.json has no row the sentence can resolve to, so docs/COMMANDS.md names a brew a viewer cannot get" % b_ph_what)
                 printerr("COMMANDS_DATA BREW DEFAULT - published \"%s\" resolves to no brew" % b_ph_what)
             elif b_key_what != BREW_DEFAULT:
+                _guard_faults.append("BREW DEFAULT")
                 push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\", which is the brew `%s`, and !brew with no name buys `%s` - the doc promises one brew and the command buys another" % [b_ph_what, b_key_what, BREW_DEFAULT])
                 printerr("COMMANDS_DATA BREW DEFAULT - published `%s`, bought `%s`" % [b_key_what, BREW_DEFAULT])
         if b_row.is_empty():
+            _guard_faults.append("BREW KEY")
             push_error("COMMANDS_DATA BREW KEY: BREW_DEFAULT is `%s` and data/potions.json carries no such row - !brew with no name charges and counts a brew the apothecary no longer makes, and the name both of my sentences publish has no authority left" % BREW_DEFAULT)
             printerr("COMMANDS_DATA BREW KEY - potions.json has no `%s` row" % BREW_DEFAULT)
         else:
@@ -1325,19 +1381,24 @@ static func commands() -> Dictionary:
                     b_rn_words.append(b_t2)
             var b_real_name := " ".join(b_rn_words)
             if b_ph_what != "" and b_real_name != "" and not b_ph_what.contains(b_real_name):
+                _guard_faults.append("BREW NAME")
                 push_error("COMMANDS_DATA BREW NAME: `brew`.what calls the no-name buy \"%s\" and data/potions.json calls that row \"%s\" - docs/COMMANDS.md and !brew's own reply publish a name the apothecary does not use (plurals allowed, this is a rename)" % [b_ph_what, String(b_row.get("name", ""))])
                 printerr("COMMANDS_DATA BREW NAME - published \"%s\", row is \"%s\"" % [b_ph_what, String(b_row.get("name", ""))])
             var b_row_cost := int(b_row.get("cost", -1))
             if b_row_cost >= 0 and b_row_cost != Roster.POTION_COST:
+                _guard_faults.append("BREW PRICE SPLIT")
                 push_error("COMMANDS_DATA BREW PRICE SPLIT: the default brew's price is declared TWICE and the two no longer agree - Roster.POTION_COST is %d and is what the no-name path CHARGES (buy_potion), and the potions.json `%s` row says %d, which buy_potion never reads. A viewer pays %d whatever the data says" % [Roster.POTION_COST, BREW_DEFAULT, b_row_cost, Roster.POTION_COST])
                 printerr("COMMANDS_DATA BREW PRICE SPLIT - POTION_COST %d charged, potions.json row %d dead" % [Roster.POTION_COST, b_row_cost])
         if b_said_cost < 0:
+            _guard_faults.append("BREW COST ANCHOR")
             push_error("COMMANDS_DATA BREW COST ANCHOR: `brew`.cost no longer carries a number beside \"%s\" - the published price of the no-name buy can no longer be checked against Roster.POTION_COST (%d)" % [BREW_DEFAULT, Roster.POTION_COST])
             printerr("COMMANDS_DATA BREW COST ANCHOR - `brew`.cost lost its %s number" % BREW_DEFAULT)
         elif b_said_cost != Roster.POTION_COST:
+            _guard_faults.append("BREW COST")
             push_error("COMMANDS_DATA BREW COST: `brew`.cost publishes %d gold for the no-name buy and Roster.POTION_COST charges %d - docs/COMMANDS.md prices a brew at money the apothecary does not take" % [b_said_cost, Roster.POTION_COST])
             printerr("COMMANDS_DATA BREW COST - published %d, charged %d" % [b_said_cost, Roster.POTION_COST])
         if not b_ghost.is_empty():
+            _guard_faults.append("BREW GHOST")
             push_error("COMMANDS_DATA BREW GHOST: `brew`.what names %d brew(s) the apothecary does not accept, so the doc invites a refusal: %s" % [b_ghost.size(), b_ghost])
             printerr("COMMANDS_DATA BREW GHOST - %d unaccepted name(s): %s" % [b_ghost.size(), b_ghost])
         # B40: THE THREE FLAT PRICES BESIDE THE ONE B39 GUARDED.
@@ -1380,9 +1441,11 @@ static func commands() -> Dictionary:
                         break
                     p_dig = ""
             if p_said < 0:
+                _guard_faults.append("PRICE ANCHOR")
                 push_error("COMMANDS_DATA PRICE ANCHOR: `%s`.cost no longer carries a number before \"gold\" - the published price of %s can no longer be checked against %s (%d)" % [p_key, p_what, p_name, p_real])
                 printerr("COMMANDS_DATA PRICE ANCHOR - `%s`.cost lost its gold number; that price is now unchecked" % p_key)
             elif p_said != p_real:
+                _guard_faults.append("PRICE")
                 push_error("COMMANDS_DATA PRICE: `%s`.cost publishes %d gold for %s and %s charges %d - docs/COMMANDS.md prices it at money the town does not take, and the viewer finds out by paying" % [p_key, p_said, p_what, p_name, p_real])
                 printerr("COMMANDS_DATA PRICE - `%s` published %d, charged %d" % [p_key, p_said, p_real])
         # B41: THE `dye` PRICE - THE ONE B40 NAMED AND REFUSED TO CLAIM.
@@ -1414,6 +1477,7 @@ static func commands() -> Dictionary:
                 dy_dig = ""
         var dy_items: Dictionary = Roster.items()
         if dy_said < 0:
+            _guard_faults.append("DYE ANCHOR")
             push_error("COMMANDS_DATA DYE ANCHOR: `dye`.cost no longer carries a number before \"gold\" - the published price of a dyeing can no longer be checked against data/items.json `dye_cost`, which is the number the dyer charges")
             printerr("COMMANDS_DATA DYE ANCHOR - `dye`.cost lost its gold number; the dyer's price is now unchecked")
         # RED-PROVED AT B45 under the supervisor's 03:16 cross-lane scratch-and-restore
@@ -1421,12 +1485,14 @@ static func commands() -> Dictionary:
         # byte-identical (md5 4f2e8b57...) and L14_TEST green on the restored bytes. It was written
         # at B41 and shipped unproven for two cycles because the file is the CONTENT lane's.
         elif not dy_items.has("dye_cost"):
+            _guard_faults.append("DYE AUTHORITY")
             push_error("COMMANDS_DATA DYE AUTHORITY: data/items.json carries no `dye_cost` key, so the dyer is charging the fallback literal inside roster.gd's `items().get(\"dye_cost\", ...)` and the data key that is supposed to own this price is DEAD - the dyer can no longer be re-priced from the data file at all, and `dye`.cost publishes %d gold against nothing" % dy_said)
             printerr("COMMANDS_DATA DYE AUTHORITY - items.json lost `dye_cost`; the dyer is on roster.gd's fallback and my published %d is unanchored" % dy_said)
         else:
             var dy_raw: Variant = dy_items.get("dye_cost")
             var dy_real: int = int(dy_raw)
             if dy_real != dy_said:
+                _guard_faults.append("DYE COST")
                 push_error("COMMANDS_DATA DYE COST: `dye`.cost publishes %d gold for a dyeing and the dyer charges %d, read from data/items.json `dye_cost` (raw value `%s`) - docs/COMMANDS.md prices the dyer at money the town does not take, and a viewer finds out by paying" % [dy_said, dy_real, str(dy_raw)])
                 printerr("COMMANDS_DATA DYE COST - published %d, charged %d (items.json `dye_cost` = %s)" % [dy_said, dy_real, str(dy_raw)])
 
@@ -1472,12 +1538,14 @@ static func commands() -> Dictionary:
             dy_ex_col = String(dy_ex_parts[1]).strip_edges().to_lower()
         var dy_dyes_raw: Variant = dy_items.get("dyes", null)
         if dy_said_cols.is_empty():
+            _guard_faults.append("DYE COLOURS ANCHOR")
             push_error("COMMANDS_DATA DYE COLOURS ANCHOR: `dye`.what no longer carries its \"%s\" colour list in words this guard can read - the colour names docs/COMMANDS.md invites a viewer to type can no longer be checked against the dyer's table, so a dead name would reach chat silently" % dy_col_anchor.strip_edges())
             printerr("COMMANDS_DATA DYE COLOURS ANCHOR - `dye`.what lost its \"%s\" colour list; the published names are now unchecked" % dy_col_anchor.strip_edges())
         # RED-PROVED AT B45 under the same 03:16 exception: `dyes` lifted out of data/items.json,
         # this arm fired naming all 10 published colours, file restored byte-identical and proved
         # by md5. Written at B43, unproven until then.
         elif not (dy_dyes_raw is Dictionary) or (dy_dyes_raw as Dictionary).is_empty():
+            _guard_faults.append("DYE COLOURS AUTHORITY")
             push_error("COMMANDS_DATA DYE COLOURS AUTHORITY: data/items.json carries no usable `dyes` table (raw `%s`), so Roster.dye refuses EVERY name and answers with a count of nothing - all %d colours `dye`.what publishes are unanchored at once, and the command is dead rather than mispriced" % [str(dy_dyes_raw), dy_said_cols.size()])
             printerr("COMMANDS_DATA DYE COLOURS AUTHORITY - items.json has no usable `dyes`; all %d published colours are dead" % dy_said_cols.size())
         else:
@@ -1487,9 +1555,11 @@ static func commands() -> Dictionary:
                 if not dy_dyes.has(dy_n):
                     dy_ghost.append(dy_n)
             if not dy_ghost.is_empty():
+                _guard_faults.append("DYE COLOURS GHOST")
                 push_error("COMMANDS_DATA DYE COLOURS GHOST: `dye`.what publishes %d colour(s) the dyer does not accept, so docs/COMMANDS.md invites a refusal a viewer pays a command to discover - the dyer's `dyes` table holds %d name(s) and none of these is among them: %s" % [dy_ghost.size(), dy_dyes.size(), dy_ghost])
                 printerr("COMMANDS_DATA DYE COLOURS GHOST - %d published colour(s) the dyer refuses: %s" % [dy_ghost.size(), dy_ghost])
             if dy_ex_col != "" and not dy_dyes.has(dy_ex_col):
+                _guard_faults.append("DYE EXAMPLE GHOST")
                 push_error("COMMANDS_DATA DYE EXAMPLE GHOST: `dye`.example is \"%s\" and the dyer does not accept `%s` - the example is the one string a viewer copies verbatim out of docs/COMMANDS.md, so this hands out a pre-typed refusal" % [dy_ex, dy_ex_col])
                 printerr("COMMANDS_DATA DYE EXAMPLE GHOST - example colour `%s` is not in the dyer's table" % dy_ex_col)
         # ---- B44: THE FIRST STATE GUARDED. WHERE THE FREE LOOK GOES AND HOW IT RANKS. ------
@@ -1546,23 +1616,28 @@ static func commands() -> Dictionary:
             if lk_t != "" and lk_t == lk_lane_said and lk_key == "":
                 lk_key = String(lk_l)
         if lk_lane_said == "" or lk_col_said == "":
+            _guard_faults.append("LOOK LANE ANCHOR")
             push_error("COMMANDS_DATA LOOK LANE ANCHOR: `look`.what no longer says \"in the <lane> lane (<colour>)\" - the pane the free look lands in, and the colour a viewer is told to watch for, can no longer be checked against Spotlight.KIND and Spotlight.COL")
             printerr("COMMANDS_DATA LOOK LANE ANCHOR - `look`.what lost its \"<lane> lane (<colour>)\" phrase; the lane and its colour are now unchecked")
         elif lk_key == "":
+            _guard_faults.append("LOOK LANE GHOST")
             push_error("COMMANDS_DATA LOOK LANE GHOST: `look`.what sends a viewer to the \"%s\" lane and no spotlight lane carries that title - the pane titles are %s, so docs/COMMANDS.md points at a pane that is not on screen" % [lk_lane_said, lk_titles])
             printerr("COMMANDS_DATA LOOK LANE GHOST - published lane \"%s\" matches no pane title: %s" % [lk_lane_said, lk_titles])
         else:
             var lk_c_raw: Variant = Spotlight.COL.get(lk_key, null)
             if not (lk_c_raw is Color):
+                _guard_faults.append("LOOK COLOUR AUTHORITY")
                 push_error("COMMANDS_DATA LOOK COLOUR AUTHORITY: the `%s` lane has no colour in Spotlight.COL (raw `%s`), so the frame a viewer is told is %s is drawn from nothing" % [lk_key, str(lk_c_raw), lk_col_said])
                 printerr("COMMANDS_DATA LOOK COLOUR AUTHORITY - lane `%s` has no Color; published \"%s\"" % [lk_key, lk_col_said])
             elif lk_col_said != "teal":
+                _guard_faults.append("LOOK COLOUR WORD")
                 push_error("COMMANDS_DATA LOOK COLOUR WORD: `look`.what publishes the colour \"%s\" and this guard knows only \"teal\" - the `%s` lane is drawn %s and nothing here can say whether that word is true of it" % [lk_col_said, lk_key, str(Spotlight.COL.get(lk_key))])
                 printerr("COMMANDS_DATA LOOK COLOUR WORD - published \"%s\" is outside this guard's vocabulary" % lk_col_said)
             else:
                 var lk_c: Color = lk_c_raw as Color
                 var lk_teal: bool = lk_c.r < lk_c.g and lk_c.r < lk_c.b and lk_c.g >= 0.4 and lk_c.b >= 0.4 and absf(lk_c.g - lk_c.b) <= 0.2
                 if not lk_teal:
+                    _guard_faults.append("LOOK COLOUR")
                     push_error("COMMANDS_DATA LOOK COLOUR: `look`.what tells a viewer to watch the %s pane for a teal frame and the `%s` lane is drawn (%.2f, %.2f, %.2f) - a viewer looking for teal is looking at the wrong pane" % [lk_lane_said, lk_key, lk_c.r, lk_c.g, lk_c.b])
                     printerr("COMMANDS_DATA LOOK COLOUR - lane `%s` is (%.2f, %.2f, %.2f), which is not teal" % [lk_key, lk_c.r, lk_c.g, lk_c.b])
         var lk_low := lk_what.to_lower()
@@ -1571,6 +1646,7 @@ static func commands() -> Dictionary:
                         "a subscription": float(Spotlight.SUB_S),
                         "a point redeem": float(Spotlight.POINTS_S)}
         if not (lk_low.contains("longer pane") and lk_low.contains("cheer") and lk_low.contains("sub") and lk_low.contains("redeem")):
+            _guard_faults.append("LOOK LONGER ANCHOR")
             push_error("COMMANDS_DATA LOOK LONGER ANCHOR: `look`.what no longer claims that cheers, subs and redeems get \"longer panes\" - the free look's rank against the three paid lanes (%s) is now unchecked, and the free pane could outlast a paid one with nothing going red" % str(lk_paid))
             printerr("COMMANDS_DATA LOOK LONGER ANCHOR - `look`.what lost its \"longer pane\" claim; the paid lanes are now unranked")
         else:
@@ -1582,6 +1658,7 @@ static func commands() -> Dictionary:
             # scripts/spotlight.gd (the GAME BUILD lane's file), this arm fired on the point
             # redeem, file restored byte-identical (md5 24c2ec76...) and proved. Written at B44.
             if not lk_short.is_empty():
+                _guard_faults.append("LOOK LONGER")
                 push_error("COMMANDS_DATA LOOK LONGER: `look`.what promises cheers, subs and redeems LONGER panes than the free look, and %d of them do not outlast it - the free look holds %ss and %s - so docs/COMMANDS.md tells a viewer that paying buys more screen time than asking, and it does not" % [lk_short.size(), str(lk_free), lk_short])
                 printerr("COMMANDS_DATA LOOK LONGER - free look %ss, not outlasted by: %s" % [str(lk_free), lk_short])
         # B46: `wear` - THE PRICE SPAN B40 NAMED AND REFUSED TO CLAIM, AND THE TWO LISTS BESIDE IT.

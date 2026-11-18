@@ -10355,3 +10355,10 @@ nothing, no channel state was read or written, and no bits left anyone's pocket.
 - CODE WIRING: game draws phase2_words[...], phase2_words_alt[...] and phase2_words_alt2[...] together. Dead until wired.
 - VALIDATION OK: json.load passes; every pre-existing top-level key equal to before; file prefix byte-identical.
 Next content: C-115.
+
+
+## U77 (18 Nov 11:53 CT) - NULL RESULT MEASURED: the hardened parser changes NO previous verdict (team lead's 10:5x row 2)
+Lock: read R's working RUN_LOCK, last line game build S36 IDLE 11:17:49, no Godot alive; claimed 11:53, released 11:53 (headless only, far inside the 15-min cap and :07).
+Re-run on the current tree with the hardened block_end(): U76_BRACE 3/3, U71_FISH rungs_fish=4 red proofs 11/11, U71_GUARD OK rungs_py=8 ui_rungs=5 9/9 fails=0, game build's tools/_fish_rarity.gd OK (32 checks, 3/3 red proofs).
+Did a past green lie? Applied the OLD finder (first closing brace) and the NEW depth finder to the table in every historical version of the three sources on origin/laptop + hud-ui: fishing.gd 4/4 revisions, ui_theme.gd 5/5, icons.py 3 (the other 5 icons.py revisions predate the RARITY_HUE table; my regex finds none). Both finders return the SAME closing brace in all 12 - no table ever had an inner or comment brace, so the old parser never half-read one. Every earlier green stands.
+No picture: guard-only, no UI drawn. Nothing for Mr. E to decide. Queue otherwise empty; stand down next firing unless a row is assigned.

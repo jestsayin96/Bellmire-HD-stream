@@ -1370,9 +1370,11 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .shop-good .gcost .ic { width: 13px; height: 13px; vertical-align: -2px; color: var(--gold, #c9a54a); }
 .shop-good.passing { background: rgba(201,165,74,.08); }
 .shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
-.rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
-.rar-very-rare, .rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
-.rar-artifact { border-left-color: #d9643a; }
+/* RARITY HUE LADDER (17 Nov, Mr. E "yes i think so"): mirrored from tools/art/icons.py RARITY_HUE, sRGB floats x255. A rarity frame is DATA, not chrome. junk/starting/common stay BARE. */
+:root { --rar-uncommon: #ffffff; --rar-rare: #4d8cff; --rar-very-rare: #b359ff; --rar-legendary: #ff8c1f; --rar-artifact: #ff211a; }
+.rar-uncommon { border-left-color: var(--rar-uncommon); } .rar-rare { border-left-color: var(--rar-rare); }
+.rar-very-rare, .rar-epic { border-left-color: var(--rar-very-rare); } .rar-legendary { border-left-color: var(--rar-legendary); }
+.rar-artifact { border-left-color: var(--rar-artifact); }
 
 /* ===== H30: the Satchel tab (reuses .shop-card / .hpbar / .chip; the bar width is a CSSOM number) ===== */
 .sat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 10px; }
@@ -1392,6 +1394,10 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
   padding: 5px 0 5px 8px; border-left: 3px solid transparent; border-bottom: 1px solid rgba(128,128,128,.2); font-size: .85rem; }
 .sat-item .ic { width: 16px; height: 16px; }
 .sat-item.worn { background: rgba(58,166,160,.07); }
+/* Rarity frames on a satchel row. .sat-item sets border-left transparent AFTER the generic .rar-* rules (equal specificity, later wins), so the frame never showed - measured 18 Nov: all five hued rungs computed rgba(0,0,0,0). junk/starting/common stay bare. */
+.sat-item.rar-uncommon { border-left-color: var(--rar-uncommon); } .sat-item.rar-rare { border-left-color: var(--rar-rare); }
+.sat-item.rar-very-rare, .sat-item.rar-epic { border-left-color: var(--rar-very-rare); } .sat-item.rar-legendary { border-left-color: var(--rar-legendary); }
+.sat-item.rar-artifact { border-left-color: var(--rar-artifact); }
 .sat-name { overflow-wrap: anywhere; }
 .sat-qty, .sat-tag { font-size: .72rem; opacity: .8; }
 .sat-tag.drop { color: #8a2a1a; font-weight: 700; opacity: 1; }
@@ -1703,9 +1709,10 @@ html:not(.overlay):not(.watch) .app[data-chat="min"] .chat-toggle svg { transfor
 .good-grid { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 .gcard { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 5px; min-height: 148px; padding: 8px 8px 7px;
   background: #f2e2bd; color: var(--ink); border: 2px solid var(--edge-2); border-radius: 9px; cursor: default; }
-.gcard.rar-uncommon { border-color: #6aa84f; } .gcard.rar-rare { border-color: #4a86c8; }
-.gcard.rar-very-rare { border-color: #9b6bc8; } .gcard.rar-legendary { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(198,146,47,.5); }
-.gcard.rar-artifact { border-color: #d9643a; box-shadow: 0 0 0 1px rgba(217,100,58,.5); }
+.gcard.rar-uncommon { border-color: var(--rar-uncommon); } .gcard.rar-rare { border-color: var(--rar-rare); }
+.gcard.rar-very-rare, .gcard.rar-epic { border-color: var(--rar-very-rare); } .gcard.rar-legendary { border-color: var(--rar-legendary); }
+.gcard.rar-artifact { border-color: var(--rar-artifact); }
+.gcard.rar-uncommon, .gcard.rar-rare, .gcard.rar-very-rare, .gcard.rar-epic, .gcard.rar-legendary, .gcard.rar-artifact { box-shadow: 0 0 0 1px rgba(42,28,16,.6); } /* dark keyline so the white rung reads on parchment */
 .gcard.passing { background: #f0dca8; }
 .gc-name { font-size: .82rem; font-weight: 650; line-height: 1.2; text-align: center; overflow-wrap: anywhere; min-height: 2.4em;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -1768,3 +1775,24 @@ html:not(.overlay):not(.watch) .stage-top nav {
 .skip-link:focus { top: 8px; }
 html:not(.overlay):not(.watch) .stage-scroll:focus-visible { outline: none; }
 html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }
+
+/* ===========================================================================
+   H32 follow-up (Mr. E, 17 Nov ~23:00 CT: "if you go all the way down its cut off after shops").
+   Measured: the section bar is 1346 px wide and fixed, so at 1500 px Satchel/Season/Commands were
+   cut off and at 1280 px six tabs were - behind a 2 px scrollbar and a fade that made the bar look
+   finished. FIX: the bar WRAPS onto a second row from 561 px up, so every one of the fifteen tabs
+   is on screen with no scrolling at all. Below 561 px a wrap would eat the stage, so it stays a
+   swipe strip but now shows a real (thin) scrollbar and keeps the fade. Layout only: no markup,
+   no roles, no tab order, no data, no CSP change.
+   =========================================================================== */
+@media (min-width: 561px) {
+  html:not(.overlay):not(.watch) .stage-top nav {
+    flex-wrap: wrap; overflow: visible; row-gap: 6px;
+    -webkit-mask-image: none; mask-image: none;
+  }
+}
+@media (max-width: 560px) {
+  html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: thin; scrollbar-color: rgba(233,214,168,.4) transparent; padding-bottom: 9px; }
+  html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar { display: block; height: 5px; }
+  html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar-thumb { background: rgba(233,214,168,.4); border-radius: 5px; }
+}

@@ -4,9 +4,12 @@
 //
 // SECURITY (docs/HUB_SECURITY.md): every string from the snapshot is viewer-
 // controlled and hostile until proven otherwise. It reaches the DOM ONLY through
-// createElement + textContent, via the el() helper below. There is no innerHTML,
-// insertAdjacentHTML, document.write, eval or new Function anywhere in this file,
-// and no snapshot field is ever used as a URL, src or href. The strict CSP is the
+// createElement + textContent, via the el() helper below. The only innerHTML in
+// this file is two page-owned sites (the status line, renderNothing); no snapshot
+// string reaches either one - the status line also interpolates the age text and
+// the fetch error, each through esc(). There is no insertAdjacentHTML,
+// document.write, eval or new Function anywhere in this file, and no snapshot
+// field is ever used as a URL, src or href. The strict CSP is the
 // second wall. The <colour> canary in !dye must render its angle brackets.
 //
 // The look is argued for in web/NOTES.md (not served).
@@ -5025,6 +5028,10 @@ function withMock(p) {
       { name: bad, slot: "trinket", weight: 1, sell: 20, rarity: "<x>" },
       { name: "Sword\r\n/ban everyone\r\nPRIVMSG #x :!give all", slot: "weapon", weight: 3, sell: 9 },
       { name: "Mystery curio", slot: "trinket" },
+      // rarity-frame measurement rungs (page-owned constants): bare ones must show NO frame, hued ones their own.
+      { name: "Rung junk", slot: "trinket", rarity: "junk" }, { name: "Rung starting", slot: "trinket", rarity: "starting" },
+      { name: "Rung common", slot: "trinket", rarity: "common" }, { name: "Rung very rare", slot: "trinket", rarity: "very rare" },
+      { name: "Rung legendary", slot: "trinket", rarity: "legendary" }, { name: "Rung artifact", slot: "trinket", rarity: "artifact" },
     ];
     let carry;                                    // satchel = derived from STR (band + capacity worked out); 1/3/2 = explicit bands
     if (MOCK === "satchel0") { items = []; carry = { weight: 0, cap: 150, band: "" }; }

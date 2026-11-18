@@ -1915,8 +1915,230 @@ static func commands() -> Dictionary:
                 _guard_faults.append("INVENTORY GHOST")
                 push_error("COMMANDS_DATA INVENTORY GHOST: `inventory`.what publishes %d field(s) inventory() never puts on the line - %s - so docs/COMMANDS.md promises a viewer something !inventory does not answer with" % [i_ghost.size(), i_ghost])
                 printerr("COMMANDS_DATA INVENTORY GHOST - %d published field(s) nothing prints: %s" % [i_ghost.size(), i_ghost])
+        # ---- B53: THE PUBLISHED needs_hero FLAG. A BOOLEAN, NOT A NUMBER OR A LIST. -----
+        # Every flat price I publish is guarded now (B39 brew, B40 oil/reroll/respec, B41 dye,
+        # B46 the wear span) and so is every published LIST (forge and armoury tiers, dye
+        # colours, bestiary fields, B51/B52's inventory fields). So I went looking for the next
+        # CLASS of claim on my own surface rather than the next instance of one I had done, and
+        # found one nothing in the house has ever checked: `needs_hero`, declared 27 times in
+        # data/commands.json and PUBLISHED TO VIEWERS TWICE - tools/_commands_doc.gd writes
+        # " (no hero needed)" into docs/COMMANDS.md when it is false, and the hub prints
+        # "Needs a living hero." when it is true (web/app.js:2102, the HUB LANE'S FILE - I read
+        # it, I did not touch it). A wrong flag is not a cosmetic slip: it tells a viewer whether
+        # a command is worth typing at all.
+        # THE AUTHORITY IS THE DISPATCH TABLE IN THIS FILE AND I READ IT RATHER THAN COPYING IT.
+        # B41's lesson was that a second copy of the answer is the defect, not the guard, so this
+        # arm PARSES the dispatch table out of my own source and asks, per command, whether its
+        # route reaches the living-hero gate - either in the case body or inside the one handler
+        # the case calls. That is the house's own method, not a new one: the HUD's
+        # tools/_u71_rarity_guard.gd guards a table by walking GDScript source, and the team lead
+        # read that parser at 10:5x.
+        # AN UNREADABLE SOURCE IS NOT A FAULT. In an exported build res://scripts/*.gd need not be
+        # present as text. No source means there is nothing to compare against, so the arm stays
+        # silent - a guard that cries fault when its own instrument is missing is a lying
+        # instrument, which is exactly what the HUD spent U76 proving about a half-read table.
+        #
+        # *** MY FIRST VERSION OF THIS ARM WAS WRONG TWICE AND A PYTHON EMULATION CAUGHT BOTH
+        # *** BEFORE THE ENGINE DID. I am writing them down because the second one is funny and
+        # *** the house keeps relearning it.
+        # (1) It ended a handler's body at the next "\nfunc ", which does not match "static func",
+        #     so the slice for _catchup ran 1,482 LINES past the end of _catchup. A half-read
+        #     body is U76's fault in a different file. _func_body() below ends a body at the
+        #     first non-blank line in column 0, so every top-level form closes it.
+        # (2) The `_needs(` it then found was INSIDE THIS COMMENT BLOCK. My own prose about the
+        #     guard scored as evidence for the guard, and the arm reported !catchup as a flag
+        #     disagreement that does not exist. That is the team lead's `district_rules`-in-a-
+        #     comment trap at 09:5x and U76's skip-the-strings lesson, arriving a third time.
+        #     _code_only() below strips comments and string literals before anything is tested.
+        # NOTHING IS GUARDED BY PROSE. The arm now reads code, and the corrected emulation puts
+        # 26 of 27 flags in exact agreement with their route, with !reroll the one carve-out.
+        #
+        # THE ONE COMMAND THE FLAG CANNOT DESCRIBE, AND I AM NOT PAPERING OVER IT.
+        # !reroll declares needs_hero true and does NOT gate on a living hero: _reroll admits a
+        # DEAD hero on purpose, erases it and raises a new one. BOTH VALUES OF THE FLAG ARE FALSE
+        # STATEMENTS ABOUT IT - `true` has the hub tell a dead viewer that the one command which
+        # revives them needs a living hero, and `false` would have docs/COMMANDS.md say "no hero
+        # needed" when a viewer with no hero at all is sent to !enlist. SO I DID NOT FLIP IT.
+        # A boolean cannot carry three gate strengths, and inventing a third data key is work the
+        # freeze forbids a lane to invent. It is carved out BY NAME with its reason, and THE
+        # CARVE-OUT IS ITSELF GUARDED: if !reroll ever starts routing through the living-hero
+        # gate, revival is broken for every dead viewer and the EXEMPT arm below says so.
+        var nh_exempt := {"reroll": "admits a DEAD hero on purpose - it erases the fallen one and raises a new hero, so its gate is a hero EXISTING, not a hero living"}
+        var nh_f := FileAccess.open("res://scripts/chatcmd.gd", FileAccess.READ)
+        if nh_f != null:
+            var nh_src: String = nh_f.get_as_text()
+            var nh_lines: PackedStringArray = nh_src.split("\n")
+            # THE DISPATCH TABLE IS THE ONE INSIDE handle(), NOT "the first `match verb:` in the
+            # file". THERE ARE THREE IN HERE: handle() dispatches the commands, _test_spot()
+            # matches the local test verbs, and ui_kinds() maps a verb to sound kinds. My first
+            # instrument took the first one it met and was RIGHT BY COINCIDENCE, because handle()
+            # happens to come first - and a coincidence standing in for a construction is the one
+            # thing this lane exists to replace. So the anchor is handle() itself, the search
+            # stops at the end of handle() body, and a missing handle() is the ANCHOR fault.
+            var nh_start: int = -1
+            var nh_hs: int = -1
+            for nh_i in nh_lines.size():
+                if nh_lines[nh_i].begins_with("func handle("):
+                    nh_hs = nh_i
+                    break
+            if nh_hs >= 0:
+                var nh_s2: int = nh_hs + 1
+                while nh_s2 < nh_lines.size():
+                    var nh_sl: String = nh_lines[nh_s2]
+                    if nh_sl.strip_edges() != "" and not nh_sl.begins_with(" ") and not nh_sl.begins_with("\t"):
+                        break
+                    if nh_sl.strip_edges() == "match verb:":
+                        nh_start = nh_s2
+                        break
+                    nh_s2 += 1
+            if nh_start < 0:
+                _guard_faults.append("NEEDS_HERO ANCHOR")
+                push_error("COMMANDS_DATA NEEDS_HERO ANCHOR: the `match verb:` dispatch table inside handle() is gone from scripts/chatcmd.gd, so the sole authority for every published `needs_hero` flag can no longer be read - all %d flags go unchecked, and both docs/COMMANDS.md's \"(no hero needed)\" and the hub's \"Needs a living hero.\" badge are published against nothing" % cmd_d.size())
+                printerr("COMMANDS_DATA NEEDS_HERO ANCHOR - no handle() dispatch table in source; every needs_hero flag is now unchecked")
+            else:
+                # which commands the dispatch table actually gates on a LIVING hero
+                var nh_gate := {}
+                var nh_j: int = nh_start + 1
+                while nh_j < nh_lines.size():
+                    var nh_ln: String = nh_lines[nh_j]
+                    if nh_ln.strip_edges() == "":
+                        nh_j += 1
+                        continue
+                    var nh_ind: int = nh_ln.length() - nh_ln.lstrip(" ").length()
+                    if nh_ind <= 4:
+                        break
+                    if nh_ind != 8 or not nh_ln.lstrip(" ").begins_with("\""):
+                        nh_j += 1
+                        continue
+                    # the case head: the quoted keys standing before the colon that closes it
+                    var nh_h: String = nh_ln.lstrip(" ")
+                    var nh_keys: Array[String] = []
+                    var nh_body := ""
+                    var nh_q := false
+                    var nh_cur := ""
+                    for nh_k in nh_h.length():
+                        var nh_c: String = nh_h[nh_k]
+                        if nh_q:
+                            if nh_c == "\"":
+                                nh_keys.append(nh_cur)
+                                nh_cur = ""
+                                nh_q = false
+                            else:
+                                nh_cur += nh_c
+                        elif nh_c == "\"":
+                            nh_q = true
+                        elif nh_c == ":":
+                            nh_body = nh_h.substr(nh_k + 1)
+                            break
+                    # the rest of the case: every following line indented past the case head
+                    var nh_m: int = nh_j + 1
+                    while nh_m < nh_lines.size():
+                        var nh_l2: String = nh_lines[nh_m]
+                        if nh_l2.strip_edges() == "":
+                            nh_m += 1
+                            continue
+                        if nh_l2.length() - nh_l2.lstrip(" ").length() <= 8:
+                            break
+                        nh_body += "\n" + nh_l2
+                        nh_m += 1
+                    var nh_gated: bool = _code_only(nh_body).contains("_needs(")
+                    if not nh_gated:
+                        # the case hands off to one of this file's own handlers; does IT gate?
+                        var nh_code: String = _code_only(nh_body)
+                        var nh_hn := ""
+                        var nh_oi: int = nh_code.find("out = ")
+                        if nh_oi >= 0:
+                            var nh_rest: String = nh_code.substr(nh_oi + 6)
+                            var nh_pi: int = nh_rest.find("(")
+                            if nh_pi > 0:
+                                nh_hn = nh_rest.substr(0, nh_pi).strip_edges()
+                        if nh_hn != "":
+                            nh_gated = _code_only(_func_body(nh_src, nh_hn)).contains("_needs(")
+                    for nh_key in nh_keys:
+                        nh_gate[nh_key] = nh_gated
+                    nh_j = nh_m
+                # the published flag against the route it actually takes, command by command
+                var nh_bad: Array[String] = []
+                var nh_route: Array[String] = []
+                var nh_broke: Array[String] = []
+                for nh_key2 in cmd_d:
+                    if not nh_gate.has(nh_key2):
+                        nh_route.append(String(nh_key2))
+                        continue
+                    var nh_real: bool = bool(nh_gate[nh_key2])
+                    if nh_exempt.has(nh_key2):
+                        if nh_real:
+                            nh_broke.append(String(nh_key2))
+                        continue
+                    var nh_said: bool = bool((cmd_d[nh_key2] as Dictionary).get("needs_hero", true))
+                    if nh_said != nh_real:
+                        nh_bad.append("%s publishes needs_hero %s and routes %s" % [String(nh_key2), str(nh_said), "through the living-hero gate" if nh_real else "with no hero gate"])
+                if not nh_route.is_empty():
+                    _guard_faults.append("NEEDS_HERO ROUTE")
+                    push_error("COMMANDS_DATA NEEDS_HERO ROUTE: %d published command(s) have no case in the dispatch table - %s - so docs/COMMANDS.md and the hub list a command nothing dispatches, and a viewer who types it gets the near-miss nudge instead of an answer" % [nh_route.size(), nh_route])
+                    printerr("COMMANDS_DATA NEEDS_HERO ROUTE - %d published command(s) nothing dispatches: %s" % [nh_route.size(), nh_route])
+                if not nh_bad.is_empty():
+                    _guard_faults.append("NEEDS_HERO")
+                    push_error("COMMANDS_DATA NEEDS_HERO: %d published `needs_hero` flag(s) disagree with the dispatch table - %s - so the hub shows \"Needs a living hero.\" on a command that needs none, or docs/COMMANDS.md says \"(no hero needed)\" on one that turns a viewer away" % [nh_bad.size(), nh_bad])
+                    printerr("COMMANDS_DATA NEEDS_HERO - %d flag(s) disagree with the route: %s" % [nh_bad.size(), nh_bad])
+                if not nh_broke.is_empty():
+                    _guard_faults.append("NEEDS_HERO EXEMPT")
+                    push_error("COMMANDS_DATA NEEDS_HERO EXEMPT: %s now route(s) through the living-hero gate, and it was carved out of this guard precisely because it must not - a dead viewer can no longer raise a new hero, which is the one thing that command exists to do" % [nh_broke])
+                    printerr("COMMANDS_DATA NEEDS_HERO EXEMPT - %s now gates on a LIVING hero; revival is broken for every dead viewer" % [nh_broke])
         _cmds = parsed
     return _cmds
+
+## B53: THE GATE TEST READS CODE, NEVER PROSE. The first emulation of the needs_hero arm found
+## the text `_needs(` inside the arm's OWN COMMENT BLOCK and scored it as a hero gate on
+## !catchup - a disagreement that did not exist. The team lead hit the same trap at 09:5x on a
+## `district_rules` mention in a comment, and U76 closed it for the HUD by skipping strings.
+## So comments and string literals come out of a body before anything is tested against it.
+static func _code_only(s: String) -> String:
+    var out := ""
+    for ln in s.split("\n"):
+        var line: String = ln
+        var q := false
+        var keep := ""
+        var i := 0
+        while i < line.length():
+            var c: String = line[i]
+            if q and c == "\\":
+                i += 2
+                continue
+            if c == "\"":
+                q = not q
+                i += 1
+                continue
+            if c == "#" and not q:
+                break
+            if not q:
+                keep += c
+            i += 1
+        out += keep + "\n"
+    return out
+
+## B53: a function's body, ending where the next top-level form begins. The first version ended
+## it at the next "\nfunc ", which does not match "static func" - the _catchup slice overran by
+## 1,482 lines. Column 0 is the only honest boundary, because every top-level form starts there.
+static func _func_body(src: String, fname: String) -> String:
+    var lines: PackedStringArray = src.split("\n")
+    var st: int = -1
+    for i in lines.size():
+        var l: String = lines[i]
+        if l.begins_with("func %s(" % fname) or l.begins_with("static func %s(" % fname):
+            st = i
+            break
+    if st < 0:
+        return ""
+    var out := ""
+    var j: int = st + 1
+    while j < lines.size():
+        var l2: String = lines[j]
+        if l2.strip_edges() != "" and not l2.begins_with(" ") and not l2.begins_with("\t"):
+            break
+        out += l2 + "\n"
+        j += 1
+    return out
 
 ## B18: the published cooldown is now the ENFORCED one. data/commands.json carries `cooldown_s`
 ## (1.5) and tools/_commands_doc.gd prints it into docs/COMMANDS.md as a promise to viewers -

@@ -10281,6 +10281,102 @@ Change (tools/_u71_rarity_guard.gd): new block_end() finds the matching brace by
 Red proofs added: U76_BRACE 3/3 - a "}" in a comment plus a nested dict inside RARITY_COLOR, a nested dict value at the top, and an unterminated block; the old finder would read 1 rung on the first. Result: U71_FISH 11/11, U71_GUARD OK 9/9 fails=0.
 Headless parse: no Parse Error. The 'instantiate on null' SCRIPT ERRORs are the known gear.gd / thin .godot import cache issue (game build fixed it in S35), not HUD.
 No picture: guard-only change, no UI drawn. Next firing: L74-style under-load check only if the team lead assigns; otherwise stand down.
+## B53 - A NEW CLASS OF CLAIM: THE PUBLISHED needs_hero FLAG. WRITTEN, EMULATED, RED-PROVED SEVEN WAYS IN PYTHON, AND HELD BACK UNPROVEN - MY FIRST INSTRUMENT WAS WRONG THREE TIMES AND THE EMULATION CAUGHT ALL THREE (chat bot, 2026-11-18 11:4x CT)
+
+NO LOCK CLAIM THIS CYCLE, AND IT IS THE NEW YIELD RULE WORKING RATHER THAN A LANE BEING STARVED.
+I read the lock at 11:48:46 CT: last line IDLE 11:17:49 (game build S36), so the lock was FREE and
+mine to take. I did not take it. The HUD's window opens at :52, writing and correcting this arm
+took me past it, and a battery started at :55 would have run inside the HUD's claim. Mr. E's rule
+as of today says a declared crossing to finish optional work is no longer the correct behaviour -
+SPLIT THE JOB - so the arm is a CHECKPOINT and the battery is the first thing I do at 12:45.
+WHAT IS OWED AND I AM NOT PRETENDING OTHERWISE: --headless parse, L14_TEST, TWITCH_PARSE,
+COMMANDS_DOC no-op, the baseline guard_faults() reading, and all seven red proofs IN THE ENGINE.
+Everything below is a PYTHON EMULATION AWAITING THE REAL GATE. The engine is why we will know.
+
+THE CLASS, NOT THE NEXT INSTANCE. Every flat price I publish is guarded (B39 brew, B40
+oil/reroll/respec, B41 dye, B46 the wear span) and so is every published list (forge and armoury
+tiers, dye colours, bestiary fields, B51/B52's inventory fields). Rather than find a fifth list I
+walked my own surface for a KIND of claim nothing checks, and found `needs_hero`: a BOOLEAN,
+declared 27 times in data/commands.json, PUBLISHED TO VIEWERS TWICE - tools/_commands_doc.gd
+writes " (no hero needed)" into docs/COMMANDS.md when it is false, and the hub prints "Needs a
+living hero." when it is true (web/app.js:2102, THE HUB LANE'S FILE - I read it, I did not touch
+it). Nothing in the house has ever compared a single one of those 27 flags to what the dispatcher
+actually does. A wrong flag tells a viewer whether a command is worth typing at all.
+
+THE AUTHORITY IS THE DISPATCH TABLE AND I READ IT RATHER THAN KEEPING A COPY. B41's lesson was
+that a second copy of the answer is the defect, not the guard, so the arm parses handle()'s
+`match verb:` out of my own source and asks, per command, whether its route reaches `_needs(` -
+in the case body or inside the one handler the case calls. Source-walking is the house's method,
+not a new one: the HUD's tools/_u71_rarity_guard.gd guards a table the same way and the team lead
+read that parser at 10:5x. AN UNREADABLE SOURCE IS NOT A FAULT - in an exported build
+res://scripts/*.gd need not be there as text, so no source means the arm stays silent. A guard
+that cries fault when its own instrument is missing is the lying instrument U76 was about.
+
+*** MY INSTRUMENT WAS WRONG THREE TIMES. I AM WRITING ALL THREE DOWN BECAUSE I FOUND THEM BY
+*** MEASURING MY OWN WORK, AND BECAUSE THE SECOND ONE IS THE HOUSE'S OLDEST TRAP.
+(1) IT ENDED A HANDLER BODY AT THE NEXT "\nfunc ", WHICH DOES NOT MATCH "static func". The slice
+    for _catchup ran 1,482 LINES past the end of _catchup. A half-read body is U76's fault in a
+    different file. _func_body() now ends a body at the first non-blank line in column 0, because
+    column 0 is the only honest boundary - every top-level form starts there.
+(2) THE `_needs(` IT THEN FOUND WAS INSIDE THIS ARM'S OWN COMMENT BLOCK. My prose about the guard
+    scored as evidence for the guard, and the first emulation reported !catchup as a flag
+    disagreement THAT DOES NOT EXIST. That is the team lead's `district_rules`-in-a-comment trap
+    from 09:5x and U76's skip-the-strings lesson arriving a third time, in a third lane, inside a
+    week. _code_only() now strips comments and string literals before anything is tested.
+    I NEARLY REPORTED A FAULT IN MY OWN SHIPPED DATA THAT WAS A FAULT IN MY READER.
+(3) IT ANCHORED ON "THE FIRST `match verb:` IN THE FILE" AND WAS RIGHT BY COINCIDENCE. THERE ARE
+    THREE: handle():128 dispatches the commands, _test_spot():283 matches the local test verbs,
+    ui_kinds():2327 maps a verb to sound kinds. handle() happens to come first, so the baseline
+    was correct for the wrong reason - and a coincidence standing in for a construction is the
+    one thing this lane exists to replace. The anchor is handle() itself now, the search stops at
+    the end of handle()'s body, and a missing handle() is the ANCHOR fault.
+
+THE ONE COMMAND THE FLAG CANNOT DESCRIBE, AND I DID NOT PAPER OVER IT OR FLIP IT.
+!reroll declares needs_hero true and does NOT gate on a living hero: _reroll admits a DEAD hero on
+purpose, erases it and raises a new one. BOTH VALUES OF THE FLAG ARE FALSE STATEMENTS ABOUT IT.
+`true` has the hub tell a dead viewer that the one command which revives them "needs a living
+hero" - the worst command in the set to be wrong about, because the viewer it turns away is
+exactly the viewer it exists for. `false` would have docs/COMMANDS.md say "no hero needed" when a
+viewer with no hero at all is sent to !enlist. A boolean cannot carry three gate strengths (none /
+hero must exist / hero must be alive), and inventing a third data key is work the freeze forbids a
+lane to invent. SO I CARVED IT OUT BY NAME WITH ITS REASON AND GUARDED THE CARVE-OUT: if !reroll
+ever starts routing through the living-hero gate, revival breaks for every dead viewer and the
+EXEMPT arm says so. I checked the claim itself rather than assuming it: `reroll`.cost publishes
+"free when dead; 120 gold alive" and that is TRUE - _reroll handles the dead case in chatcmd.gd
+with no charge, and only calls roster.reroll() (cost_for(h, REROLL_COST)) when the hero is alive.
+
+FOUR ARMS, AND THE 85 GUARD SITES ARE NOW 85 WITH THESE FOUR IN:
+  NEEDS_HERO ANCHOR  - handle()'s dispatch table is gone; all 27 flags unanchored.
+  NEEDS_HERO ROUTE   - a published command with no case; the hub lists what nothing dispatches.
+  NEEDS_HERO         - a published flag disagrees with the route it actually takes.
+  NEEDS_HERO EXEMPT  - !reroll now gates on a LIVING hero; revival is broken.
+
+THE EMULATED READING, ALL OF IT AWAITING THE ENGINE:
+  baseline SILENT (healthy), and 26 of 26 non-exempt flags agree with their route by construction.
+  RED flag true->false (hero)      -> NEEDS_HERO only
+  RED flag false->true (satchel)   -> NEEDS_HERO only
+  RED published command, no case   -> NEEDS_HERO ROUTE only
+  RED reroll routed through _needs -> NEEDS_HERO EXEMPT only
+  RED handle() renamed             -> NEEDS_HERO ANCHOR only
+  RED dispatch table renamed       -> NEEDS_HERO ANCHOR only
+  REGRESSION the comment trap stays dead; _test_spot and ui_kinds are not read as the table.
+  Each proof named EXACTLY ONE fault. data/commands.json handed back byte-identical, md5
+  0ed191404157221abd8a184cc580dfa5 - the same md5 B52 recorded, because THE DATA FILE DID NOT
+  CHANGE THIS CYCLE. No new command, so docs/COMMANDS.md is untouched and COMMANDS_DOC is a no-op.
+
+DRIFT CHECKED BOTH DIRECTIONS, AS IS OWED AFTER EVERY EDIT: 27 published commands, 27 dispatch
+cases, no published command without a case and no case without an entry. Five published aliases
+(commands, sheet, spotlight, stats, watch) have no case of their own and ARE answered - handle()
+resolves every alias through canonical() BEFORE the match, which I read rather than assumed. The
+alias cases that do appear in the match ("inv", "bag", "items") are redundant, not required.
+
+FOR THE HUB LANE, NOT A CHARGE AND NOT A REQUEST: web/app.js:2102 renders this flag
+unconditionally as "Needs a living hero." For 26 of 27 commands that is exactly right. For
+!reroll it is the opposite of true, and the flag I publish cannot tell you so. The wording is
+yours and the third gate strength does not exist as data; I am telling you it is there so the
+choice is made by somebody who owns the file.
+FOR THE GAME BUILD LANE: nothing. No twitch_eventsub.gd change is needed by this arm.
+
 ## B52 - THE OWED BATTERY RAN AND B51'S GUARD IS PROVEN; MY OWN PYTHON EMULATION WAS RIGHT AND THE ENGINE IS WHY WE KNOW (chat bot, 2026-11-18 10:4x CT)
 
 NO NEW ARM THIS CYCLE, BY THE PLAN'S OWN INSTRUCTION. The 09:5x TAKE THIS NEXT row 5 reads "RUN

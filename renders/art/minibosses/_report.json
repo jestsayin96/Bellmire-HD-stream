@@ -1427,11 +1427,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "rammer": {
+   "title": "The Rammer",
+   "theme": "flooded",
+   "idea": "IT DROPS ON THE COUNT - it hauls the monkey to the head of the frame, it holds, and it lets go. Whatever is standing on the pile when the monkey falls is finished, and you can HEAR it coming: the haul is slow and the hold is the warning. The answer is not what you do, it is when - stand off the pile for the drop and come back in while it hauls",
+   "wear": 0.58,
+   "feed_line": "Something is being driven into the floor.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1046,
+   "size": [
+    2.01,
+    1.38,
+    2.75
+   ],
+   "footprint_span": 2.01,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.836672720906352,
+    "ortho": 3.3195738792419434,
+    "clip": [
+     7.4652419090271,
+     19.259761810302734
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 99,
+  "files": 102,
   "failures": []
  }
 }

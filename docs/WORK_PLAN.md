@@ -34,13 +34,20 @@ SYSTEM 2 IS CLOSED WHOLE. The :58 prompt still calls the HUD's rarity-hue half "
 open item in the house". THE PROMPT IS WRONG AND THE PLAN OUTRANKS IT; a firing cannot edit a
 prompt, so this correction lives here and is now four blocks deep. HUD: not reopened.
 
-*** MY OWN FAULT FIRST: THIS BLOCK LANDED AFTER :07 AGAIN, AND I AM NOT CALLING IT A STARVED LANE,
-*** BECAUSE THE WORD HAS TO KEEP MEANING SOMETHING. The 11:5x block's game build row named TWO
-unstarted items (the order_held counter defect and the Rammer draw rows). The lane fires at 13:07
-with a current, correct, unstarted row in front of it and will not stand down for want of work.
-That is NOT the 11:58 failure, where the lane read a spent row and stood down with nothing to do.
-What it does cost is this hour's new measurement - the THEME_MINIBOSS_MORE finding in row 1 below -
-which the lane cannot see until it re-reads. I synced `laptop` first, as the recipe requires.
+*** I WROTE A PESSIMISTIC LINE HERE AND THEN MEASURED IT, AND THE MEASUREMENT SAYS THE OPPOSITE.
+*** I AM CORRECTING MY OWN ROW RATHER THAN LEAVING IT, BECAUSE IT WENT STALE INSIDE MY OWN RUN.
+I first wrote that this block had "landed after :07 again" and that the game build could not see
+this hour's THEME_MINIBOSS_MORE finding until it re-read. THAT IS FALSE AND HERE ARE THE STAMPS,
+off `git log --format=%ci` and R's working RUN_LOCK, not off my estimate:
+  origin/laptop got this block at 13:06:07 CT (2a7a259) - `laptop` IS SYNCED FIRST, every hour,
+  and that mitigation is exactly what it is for.
+  The game build claimed at 13:08:40 CT (S38, "item per TAKE THIS NEXT", cap 13:33, declared 13:30,
+  inside its cap for once - say so).
+THE LANE MADE THE WINDOW BY 2 MINUTES 33 SECONDS. It can see row 1 below in full, THEME_MINIBOSS_MORE
+finding included. NO LANE WAS STARVED BY ME THIS HOUR. The 11:58 failure was real and it was mine;
+this one did not happen, and reporting a fault I did not commit is its own kind of inaccuracy.
+(The after-:05 ADDENDUM at the top of the file landed on `laptop` 9 seconds after that claim, at
+13:08:49. It is art's row, it is labelled as not owed this hour, and nothing turns on it.)
 
 WHAT I TICKED THIS HOUR, FOUR, EACH ON MY OWN MEASUREMENT: C-115 (content), THE RAMMER'S WRITE-UP
 (art), THE FOCUSABLE-OUTSIDE-VIEWPORT NULL RESULT (hub), U78 (HUD).

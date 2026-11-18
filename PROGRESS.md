@@ -9271,3 +9271,11 @@ RED PATH PROVEN BY ACCIDENT, THEN KEPT: the first run failed on `PARCH` (an alia
 RESULT: U59_CONTRAST OK 49 colours walked, 14 pairs, 2 unmeasured. Parse 0 errors. No ui_theme.gd change this cycle.
 STILL ON TRUST / NAMED: WORD_HI (Chronicle word on the scroll) and TAG_GOLD (a modulate tint) are text whose surface is not a theme colour - printed as UNMEASURED, not passed. Alpha panels over a live world frame still only get the two extremes. NO PICTURE LOOKED AT: this is pure colour arithmetic and no pixel changed.
 Lock: RUNNING 16:54:20 -> IDLE 16:54:56, well inside :07. Not ticked by me.
+
+## C-95 (2026-11-17 CT) - TAKE THIS NEXT row for CONTENT (16:58 block): every named weapon run through piece_kind; no name lands on an unintended kind (items.json only)
+Ran all 107 named weapons through gear.gd piece_kind as it reads: D94_KIND_WORDS in order, first word whose kind is also in the family. FINDING: none lands where its writer did not intend. 105 resolve to the kind their last word names; 2 resolve to nothing and take the calling's fallback kind (Tooth of the Ash Drake, blade t4; Emberhaft, axe t3). Counts: sword 19, dagger 11, axe 14, greataxe 6, wand 12, staff 10, sceptre 7, crossbow 12, bow 4, quarterstaff 6, wraps 4, unresolved 2.
+Only two groups match more than one kind and both are saved by list order: the six greataxes (greataxe ahead of axe; Ash-Maul Greataxe also hits maul and still lands on greataxe) and the six crossbows (crossbow ahead of bow). Family gating stops every cross-family leak. Kind `spear` has no word and no name: unreachable by name.
+Latent traps, none live: wand before staff (a 'Wanderer's Staff' would be a wand); rod and edge as bare substrings; mace ahead of wand/rod/stick/staff makes any arcane name with mace a sceptre; fang sends any blade name to sword. A dagger needs knife or dagger in the name.
+No rename, no reorder, no new weapon. New top-level key: `_note_c95` only.
+VALIDATION OK: all four data files parse; only `_note_c95` differs from main in items.json; every pre-existing key identical. lore_lines, bosses, potions untouched.
+Code wiring: none required. Optional for the game build (gear.gd): a 'spear' word row if a spear is ever named; move wand after staff only if a staff name ever needs it.

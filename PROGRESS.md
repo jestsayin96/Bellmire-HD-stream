@@ -9370,3 +9370,21 @@ VERDICT LINES: GREEN  U63_STRIPE OK 12 cells / U59_CONTRAST OK 49 colours walked
 PIXELS, WINDOWED, 1920x1080 (U62, re-run on the new bytes): U62_SCALES OK bad=0 - stripe_top-ink_bot 0.72 / 0.82 / 0.24 px at 100/125/150%, same as U62.
 Parse 0 errors. Files: scripts/hud_dock.gd, tools/_u58_contrast.gd, PROGRESS.md. Not ticked by me.
 HONEST LIMITS: the gate's red proof moves the stripe in _grain_span; it does NOT catch _dowel being edited to stop passing ink_bot (U62 measures pixels and would). The gate runs headless at res_k 0.6, so its absolute pixel values differ from U62's windowed ones; the relation it asserts does not.
+
+## C-100 (2026-11-18 CT, content) - STAND-DOWN: gap zero at 25; the 29 trick-only lord lines audited
+- ITEM: TAKE THIS NEXT (21:58 CT 17 Nov) gave CONTENT: stand down in writing, spend the firing on a defect in shipped words; candidate the 29 trick-only lines. Merged origin/main first. NO TWENTY-SIXTH BODY has landed; miniboss_feed.by_key stays 25, lines gap zero.
+- FOUND: all 29 shape lines state a mechanic as fact that is not built. Six tell the viewer what to do (Vestry-Kept, Kettle-Drummed, Ditch-Silted, Lamp-Shy, Hearth-Fooled, Lamp-Oiled); five state a false hard rule (Gable-Cling, Charter-Sworn, Well-Chained, Barn-Wide, Chaperoned). Eleven flavour-only replacements proposed in lore_lines.json `_note_c100`. NO shipped line reworded (additive only).
+- NO new top-level key beyond the `_note_`. townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop untouched.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): swap the 11 shape strings in bosses.json, or build the tricks.
+
+## U64 - the stripe gate now goes through the draw's own path (HUD, 2026-11-17 22:5x CT)
+Row: close the hole U63 named - editing _dowel to stop passing ink_bot left the gate green.
+Change: scripts/hud_dock.gd - _dowel(cy, cap, has_wordmark) no longer takes an ink_bot argument; new _dowel_grain(cy, cap, has_wordmark)
+resolves _wm_baseline itself and is what _dowel draws from; new const ROD_WORDMARK [true,false] read by both draw calls.
+tools/_u58_contrast.gd gates through _dowel_grain + ROD_WORDMARK[0] (and fails if the top rod stops carrying the wordmark).
+Verdicts: parse 0 errors; U63_STRIPE OK 12 cells; U59_CONTRAST OK 49/16. RED PROVED TWICE, file restored md5-identical each time:
+(1) _dowel_grain ignoring the baseline -> U63_STRIPE FAIL CROSSES, rc=1; (2) ROD_WORDMARK[0]=false -> U64 FAIL, rc=1. Re-run green.
+Windowed U62 re-run, renders/cycles/20261117_u62/all_u64_*.png looked at at 100% and 150%: wordmark clear of the stripe.
+HONEST LIMIT: U62's pixel measure still reads h=96 at 100% as clear=false (stripe top 0.73 px below ink bottom, under its 1 px floor) -
+sub-pixel antialiasing, unreachable at 1080p; the arithmetic gate cannot see ink rows, U62 owns that fault.
+STILL UNCAUGHT: a wrong ROD_WORDMARK[1] (bottom rod true) - harmless (stripe only moves down).

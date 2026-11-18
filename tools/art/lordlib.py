@@ -13,15 +13,44 @@ from mathutils import Vector, Matrix
 
 TAU = math.pi * 2.0
 
+# the one name the vertex-colour attribute goes by, so make() and mat_vattr()
+# cannot drift apart and silently render an unpainted mesh.
+VCOL_NAME = "Col"
+
 
 # ---------------------------------------------------------------- object make
-def make(name, verts, faces, mat=None, coll=None):
+def make(name, verts, faces, mat=None, coll=None, vcol=None):
+    """vcol, when given, is ONE RGB PER VERTEX written as a POINT/FLOAT_COLOR
+    attribute named VCOL_NAME. Left None nothing is created and the mesh is
+    byte-identical to every mesh this module has ever made - that default is
+    load-bearing, because 24 shipped bodies go through this function.
+
+    WHY A POINT COLOUR AND NOT A SHADER NETWORK. Added 18 Nov for the Greener's
+    copper (see tools/art/_metal_read.py and docs/art/METAL_READ.md): the thing
+    that makes the CC0 KayKit reference metals read as metal is a near-white
+    highlight BAND PAINTED INTO THE SURFACE, which is not something a BSDF can
+    do under two half-degree suns in a near-black world. A baked band is the
+    reference's own mechanism. It is a POINT attribute feeding Base Color
+    DIRECTLY - no multiply node - because that is the one pattern the glTF
+    exporter recognises and carries out as COLOR_0. THAT CLAIM IS PROVEN BY
+    EXPORT-AND-REIMPORT, not asserted: see _metal_read.py --gltf-roundtrip.
+    """
     me = bpy.data.meshes.new(name)
     me.from_pydata([tuple(v) for v in verts], [], faces)
     me.validate(verbose=False)
     me.update()
     if mat is not None:
         me.materials.append(mat)
+    if vcol is not None:
+        if len(vcol) != len(me.vertices):
+            raise ValueError("%s: %d vertex colours for %d vertices - a vertex "
+                             "colour list that does not match the mesh is a "
+                             "silent mis-paint, so it is an error"
+                             % (name, len(vcol), len(me.vertices)))
+        at = me.color_attributes.new(name=VCOL_NAME, type='FLOAT_COLOR',
+                                     domain='POINT')
+        for i, c in enumerate(vcol):
+            at.data[i].color = (c[0], c[1], c[2], 1.0)
     ob = bpy.data.objects.new(name, me)
     (coll or bpy.context.collection).objects.link(ob)
     return ob
@@ -260,6 +289,37 @@ def mat_solid(name, rgb, rough=0.55, metal=0.08, spec=None):
     if spec is not None:
         _set_input(bsdf, ['Specular IOR Level', 'Specular'], spec)
     m.diffuse_color = (rgb[0], rgb[1], rgb[2], 1.0)
+    return m
+
+
+def mat_vattr(name, rough=0.55, metal=0.08, spec=None):
+    """A Principled whose BASE COLOUR IS THE MESH'S OWN VERTEX COLOUR - the
+    Attribute node goes straight into Base Color with nothing in between.
+
+    There is deliberately no tint argument. A tint would mean a multiply node,
+    a multiply node is not the pattern the glTF exporter carries out, and a
+    material that renders here and exports flat is the worst of the three
+    outcomes because only the renders would show the fix. The colour lives in
+    the mesh; this material only agrees to show it.
+    """
+    m = bpy.data.materials.new(name)
+    m.use_nodes = True
+    nt = m.node_tree
+    bsdf = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if bsdf is None:
+        bsdf = nt.nodes.new('ShaderNodeBsdfPrincipled')
+        out = next((n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL'),
+                   nt.nodes.new('ShaderNodeOutputMaterial'))
+        nt.links.new(bsdf.outputs[0], out.inputs[0])
+    at = nt.nodes.new('ShaderNodeAttribute')
+    at.attribute_type = 'GEOMETRY'
+    at.attribute_name = VCOL_NAME
+    nt.links.new(at.outputs['Color'], bsdf.inputs['Base Color'])
+    _set_input(bsdf, ['Roughness'], rough)
+    _set_input(bsdf, ['Metallic'], metal)
+    if spec is not None:
+        _set_input(bsdf, ['Specular IOR Level', 'Specular'], spec)
+    m.diffuse_color = (1.0, 1.0, 1.0, 1.0)
     return m
 
 

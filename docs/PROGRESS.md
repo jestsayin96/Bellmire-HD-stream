@@ -3146,3 +3146,129 @@ carries nothing of mine that is not committed.
 ### subscription of any kind. bellmirebro posted no message in any chat, and no channel setting was
 ### read or changed. The only Godot launched was the headless battery above, which opens no
 ### EventSub connection of its own.
+
+## D-cycle - S28: TOWNWALK BACK TO GREEN (S27's red was my launcher, not the town); THE GREENER'S MB_FIT LINE AT 1.02; AND SIX MINIBOSS BODIES THAT HAD NO .import FILE AND SO COULD NOT LOAD. 2026-11-17T22:16-06:00 (game build)
+TAKE THIS NEXT (20:58 block GAME BUILD row + the 21:05 addendum's one line) gave: System 4 (closed in writing at S27, awaiting the
+lead) and ONE owed line - the greener's MB_FIT ratio. S27 left TOWNWALK red with a named next step; that went first.
+- TOWNWALK, FIRST, AS S27 SAID: re-run headless on the merged tree (d6ba432 + my one line) with Godot's stdout going STRAIGHT TO
+  THE LOG FILE (Popen stdout=file), not buffered through a pipe. It streamed T= lines every 10 s and finished on its own in 88 s:
+    TOWNWALK in_solid=0/18249 (0.000%) raid_in_solid=0/6302 (0.000%) PASS   (STUCK_ON_ROUTE_TOTAL 3 over 120 s)
+  So S27's two "no verdict" runs were MY INSTRUMENT (a captured pipe), not the town. Nothing to bisect. build/s28/townwalk.log.
+- THE OWED LINE: delve.gd MB_FIT "greener": 1.02, copied from renders/art/minibosses/_fit_greener_register.json
+  pairs.greener.ratio (creature_h 2.5), NOT re-derived. Backup scripts/delve.gd.bak_s28 (not committed).
+- *** FINDING, AND IT IS BIGGER THAN THE LINE: SIX MINIBOSS .glb HAD NO .import FILE - dyer, greener, pressman, reeve, strickler,
+  tapster. *** Without one, ResourceLoader.exists() is false, Delve.miniboss_model() returns "" and the body silently falls back to
+  the theme creature (miniboss_no_model). REEVE (wired S22), TAPSTER (S23) and PRESSMAN (S25) have therefore never been loadable
+  from a clean checkout - every MB_FIT line I added for them was inert. Found because my new gate went RED on exactly this before
+  the import. Fixed by `--headless --import` (rc=0, 12.3 s, 0 ERROR lines); the six .import files are committed with this cycle
+  (29 were tracked, now 35 + the 36th glb's - all 36 bodies have one). ART: when you ship a .glb, either commit the .import
+  Godot makes or say so - the engine lane will import it, but nobody was.
+- NEW GATE tools/_s28_mbfit.gd (headless --script, quits itself). Asserts Delve.miniboss_ratio() for the real model path of
+  greener 1.02 / strickler 1.04 / pressman 1.16 / tapster 1.14, a model on disk for each, and a floor of 30 bodies walked:
+    MB_FIT_VERDICT OK (36 bodies on disk, 4 handed ratios proved, 2 fall back to 1.0)
+  PROVED RED TWICE: before the import, FAIL ["greener: no model on disk", "strickler...", "pressman...", "tapster..."];
+  and with S28_EXPECT_GREENER=1.03, FAIL ["greener: ratio 1.02 != 1.03"].
+  THE TWO THAT FALL BACK TO 1.0: dyer and tanner - no ratio has been handed to me for either. Not invented; when the lead hands
+  the register numbers they are one line each.
+- LOOKED AT IT: tools/_s28_greener_look.gd (windowed, quits itself) loads greener.glb through Delve.miniboss_model, scales it the
+  way delve.gd does (MB_HERO_H x ratio), stands it by a 2.45 m hero-height post:
+    S28_GREENER model=greener.glb want=2.499 measured=2.499 ratio=1.020 ; S28_GREENER_VERDICT OK (2 shots)
+  renders/cycles/s28/greener_front.png, greener_side.png. Both feet on the floor, crust reads green on arms/chest/legs, the body is
+  hero height. The lead's two faults are visible as named: the scraper pole crosses the figure corner to corner, and from the front
+  the rack is the top of the silhouette. Nothing of mine to add.
+- NOT DONE AND SAID: the greener is still NOT SPAWNABLE - it is not in DungeonHD.THEME_MINIBOSS (the spawn gap, above this seat),
+  so the line is live for the moment it is given a theme, not before. No in-floor render is possible until then.
+- Battery on this tree: PARSE rc=0 0 SCRIPT ERROR / 0 Parse Error (23.9 s; re-run after import, 0 again); TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2066 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2 (capped); TOWNWALK PASS.
+  No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team lead ticks.
+### S28b - THE 21:58 ROW LANDED ON `laptop` WHILE I WAS PUSHING (merged at 22:16, clean). IT ASKED FOR THREE MB_FIT LINES, NOT ONE.
+  dyer 1.06 (renders/art/minibosses/_fit_dyer_register.json pairs.dyer.ratio) and tanner 1.12 (_fit_report.json pairs.tanner.ratio)
+  added to delve.gd MB_FIT, copied off the files, not re-derived; greener 1.02 confirmed in _fit_report.json too. The gate now
+  proves six handed ratios. Relaunched battery (claim 22:17:30, lock refreshed on its own line):
+    MB_FIT_VERDICT OK (36 bodies on disk, 6 handed ratios proved, 0 fall back to 1.0)     red with S28_EXPECT_GREENER=1.03: FAIL
+    PARSE rc=0 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/15731 raid 0/8980 PASS (87 s,
+    streamed again); OFFFLOOR_VERDICT OK 0 of 2138; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped).
+  TOWNWALK has now printed PASS twice on this tree, so the row's condition for System 4 is met. Not ticked - the lead ticks.
+## B40 - 2026-11-17 22:45 CT - THE THREE FLAT PRICES BESIDE THE ONE B39 GUARDED: FOUND BY WALKING
+## EVERY NUMBER MY OWN FILES PUBLISH, GUARDED, AND FOUR PATHS PROVED RED (chat bot)
+The 21:58 row asked for THE SMALLEST THING IN MY THREE FILES THAT CAN STILL LIE, found by
+measurement - a constant declared in one place and asserted in another, or a number a `what`
+string states that nothing reads. I did the measurement before I chose, and the choice fell out
+of it rather than being felt.
+
+- THE MEASUREMENT (no engine needed, so it cost the window nothing): I walked EVERY `what` and
+  `cost` string in data/commands.json - all 27 commands - and pulled every digit and every
+  number-word out of them. Sixteen strings carry a number. For each one I asked the only question
+  that matters: WHAT READS IT? The answers sort into four kinds, and only one kind was unguarded:
+    already guarded          `muster` six (QUEUE_MAX), `look` 10, `satchel` two fifths,
+                             `brew` 35/40/480, `forge` + `armoury` tier lists, cooldown 1.5
+    authority is a LIST      `dye`'s ten colours, `wear`'s slot names - not a number
+    authority is NOT one     `wear`.cost is a RANGE (30-420); `bestiary`'s "eight lords" counts
+    exact integer in code    rows in another lane's data; `oil`.what "one flask / two delvers"
+                             is a rule, not a price
+    *** ONE EXACT INTEGER    `oil` 12, `reroll` 120, `respec` 200 ***
+    IN CODE, NO GUARD ***
+  Those last three are roster.gd lines 214, 215 and 216. POTION_COST, the one B39 guarded, is
+  line 210 of the same file. The brew's price was guarded and its three siblings four lines below
+  it were not - that is the whole find, and it is a measurement, not a hunch.
+
+- WHY IT IS WORTH A GUARD AND WHY IT WAS SILENT: the cost strings are MINE. A viewer reads
+  "200 gold" in docs/COMMANDS.md, types !respec, and is charged Roster.RESPEC_COST whatever my doc
+  says. Nothing in the house compared the published number with the charged one. The lie would be
+  mine to publish and the money is the one thing a viewer can count for themselves.
+
+- THE GUARD (scripts/chatcmd.gd, in commands(), the shape BREW COST already proved): one table of
+  three rows, published-vs-charged, with the published number taken as the digits standing
+  immediately before "gold". Two verdicts:
+    COMMANDS_DATA PRICE          published number != the constant that charges
+    COMMANDS_DATA PRICE ANCHOR   the string no longer carries a number before "gold", so the
+                                 price has stopped being checkable and says so instead of passing
+  `reroll` prices two cases in one string ("free when dead; 120 gold alive") and the digits-before-
+  gold rule picks the paid case, which is the one with the number. ZERO COMMANDS_DATA LINES ON THE
+  REAL DATA: all three agree today, which is the point - they agreed by coincidence and now agree
+  by construction.
+
+- WHAT I AM NOT CLAIMING, NAMED RATHER THAN SWEPT UP: `dye`.cost publishes 25 and the dyer charges
+  items().get("dye_cost", 25) - items.json (CONTENT's file) with a roster.gd fallback. Its
+  authority is a DATA KEY plus a fallback, not one constant, so it is a different shape and I left
+  it named in the code comment instead of guarding it. All three of its readings are 25 today. I
+  measured it; I did not claim it. Same standing limit I used on LOOK FRACTION at B35.
+
+- FOUR PATHS PROVED RED FROM MY OWN data/commands.json, the row asked for two:
+    oil    "12 gold a flask" -> 13   PRICE        published 13, charged 12
+    reroll "120 gold alive"  -> 121  PRICE        published 121, charged 120
+    respec "200 gold"        -> 201  PRICE        published 201, charged 200
+    respec "200 gold"        -> free PRICE ANCHOR the price stopped being checkable, and said so
+  Both verdicts proved, and every one of the three rows proved on its own. After EVERY proof the
+  data was restored and re-measured: md5 0908b4db3323d980b23a53ec0461f53a, 14772 bytes,
+  byte-identical four times out of four, and L14_TEST re-run GREEN on the restored bytes.
+
+- GATE BATTERY, ALL FOUR GREEN ON THE BYTES THAT SHIP, ONE RUN, 28.3 s (22:50-22:51):
+    parse  --headless --path W6 --quit-after 300   rc=0, 0 SCRIPT ERROR, 0 Parse Error, 25.5 s
+    tools/_l14_test.gd                            L14_TEST OK (22 checks)
+    tools/_twitch_parse.gd                        TWITCH_PARSE OK (8 checks)
+    tools/_commands_doc.gd                        COMMANDS_DOC OK wrote 27 commands
+  COMMANDS_DOC WAS A TRUE NO-OP AND I PROVED IT BY BYTES, NOT BY ITS WORD: docs/COMMANDS.md md5
+  553eb7d03245646838938e65cbf47c2e before the generator and 553eb7d03245646838938e65cbf47c2e
+  after. data/commands.json md5 unchanged too. This cycle is CODE ONLY - the published strings did
+  not move, so the generated doc had nothing to regenerate, and the generator agreeing to the byte
+  is the evidence that it had nothing to do.
+
+- SCOPE: scripts/chatcmd.gd and docs/PROGRESS.md only. data/commands.json and docs/COMMANDS.md are
+  byte-identical to what B39 shipped. Nothing outside my three files was edited; roster.gd and
+  items.json were READ.
+
+- LOCK: claimed RUNNING 2026-11-17T22:49:58-06:00 with the finish declared at 23:03 (14 min, inside
+  the 25-minute cap), released IDLE the same slot. Checked BY PROCESS first, not by the file: no
+  Godot_v4.7.2 console or windowed process alive, and the file's last line was HUD's IDLE 22:22.
+  No second Godot ran beside another lane's. Harness logs tools/.b40_gates.log and tools/.b40_red.log
+  deleted before the commit.
+
+- NO LIVE TWITCH TEST THIS CYCLE: this is a doc-vs-code arithmetic guard. Nothing was redeemed,
+  nothing was cheered, bellmirebro posted nothing, and no channel state was touched.
+
+- FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and the twitch_reply signature
+  is unchanged. One thing worth knowing rather than doing: the three constants this guard reads
+  (OIL_COST, REROLL_COST, RESPEC_COST at roster.gd 214-216) now have a published price checked
+  against them, so changing one of those numbers will make MY gate go red until data/commands.json
+  is changed to match. That is the guard working, not a fault.

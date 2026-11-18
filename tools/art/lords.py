@@ -48,18 +48,46 @@ def aim(vf, loc, direction, scale=(1, 1, 1)):
 
 
 class Parts(object):
+    """items stays a list of (verts, faces, slot) THREE-TUPLES. Vertex colours
+    live in a PARALLEL dict keyed by item index (self.vcols) rather than as a
+    fourth element, so every consumer that unpacks three - minibossgen,
+    _metal_read, _trade_read, _colour_read, lordgen and every builder - keeps
+    working untouched. A fourth element would have been tidier and would have
+    broken all of them at once."""
+
     def __init__(self, key):
         self.key = key
         self.items = []
+        self.vcols = {}
         self.rng = random.Random(key)
 
-    def add(self, vf, slot='body', loc=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1)):
-        v, f = vf
-        self.items.append((L.xform(v, loc, rot, scale), f, slot))
+    # vcols is keyed by the ITEM TUPLE'S IDENTITY, not by its index, and that is
+    # not an aesthetic choice. _metal_read and _trade_read measure a span by
+    # REBUILDING THE BODY WITH THAT SPAN FILTERED OUT, so the item at index 7 of
+    # a cut list is not the item at index 7 of the full one. An index key would
+    # paint the wrong items and, worse, paint them the FILL colour - a silent
+    # mis-paint that reads as "the fix is not there" rather than as an error.
+    # Identity is sound here because self.items holds every tuple for the whole
+    # build, so no id is ever reused underneath us.
+    def _vc(self, item, vcol, n):
+        if vcol is None:
+            return item
+        if len(vcol) != n:
+            raise ValueError("%s: %d vertex colours for %d verts"
+                             % (self.key, len(vcol), n))
+        self.vcols[id(item)] = [tuple(c) for c in vcol]
+        return item
 
-    def raw(self, vf, slot='body'):
+    def add(self, vf, slot='body', loc=(0, 0, 0), rot=(0, 0, 0), scale=(1, 1, 1),
+            vcol=None):
         v, f = vf
-        self.items.append(([Vector(x) for x in v], f, slot))
+        item = (L.xform(v, loc, rot, scale), f, slot)
+        self.items.append(self._vc(item, vcol, len(v)))
+
+    def raw(self, vf, slot='body', vcol=None):
+        v, f = vf
+        item = ([Vector(x) for x in v], f, slot)
+        self.items.append(self._vc(item, vcol, len(v)))
 
     def j(self, a):
         return self.rng.uniform(-a, a)

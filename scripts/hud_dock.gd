@@ -457,14 +457,23 @@ class ChronicleScroll extends Control:
 			gh = clampf(cy + cap - gy, 0.0, gh)
 		return Vector2(gy, gh)
 
-	func _dowel(cy: float, cap: float, ink_bot: float = -1.0) -> void:
+	## U64: which rod carries the wordmark. [top, bottom]. The draw reads it at its two _dowel calls and the
+	## gate reads it too, so flipping it for the top rod is a red gate, not a silent overlap.
+	const ROD_WORDMARK := [true, false]
+
+	## U64: the stripe span of a rod AS DRAWN - resolves the wordmark baseline itself, so there is no
+	## ink_bot argument at a call site to forget. _dowel draws from this; tools/_u58_contrast.gd gates it.
+	func _dowel_grain(cy: float, cap: float, has_wordmark: bool) -> Vector2:
+		return _grain_span(cy, cap, _wm_baseline(cy) if has_wordmark else -1.0)
+
+	func _dowel(cy: float, cap: float, has_wordmark: bool = false) -> void:
 		var s := size
 		var x0 := _p(1.0)
 		var x1 := s.x - _p(1.0)
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		var gs := _grain_span(cy, cap, ink_bot)
+		var gs := _dowel_grain(cy, cap, has_wordmark)
 		draw_rect(Rect2(x0, gs.x, wdt, gs.y), UiTheme.SCROLL_GRAIN)
 		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
 		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
@@ -532,8 +541,8 @@ class ChronicleScroll extends Control:
 		var edge := _sheet_poly(g, 0.0, 0.0)
 		draw_polyline(edge, Color(TAN_DK.r, TAN_DK.g, TAN_DK.b, 0.6), maxf(1.0, _p(1.2)))
 		# the two spindles overhang the sheet; their finials cap the rod ends
-		_dowel(g.top_cy, cap, _wm_baseline(g.top_cy))
-		_dowel(g.bot_cy, cap)
+		_dowel(g.top_cy, cap, ROD_WORDMARK[0])
+		_dowel(g.bot_cy, cap, ROD_WORDMARK[1])
 		_header(g)
 
 ## ---------------------------------------------------------------- L31 the fight banner

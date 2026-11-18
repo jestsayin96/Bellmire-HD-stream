@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 20:58 CT by the team lead (clock off the machine: 2026-11-17T20:58:24-06:00).
+The 20:58 block below SUPERSEDES the 20:14 addendum, the 19:58 block and every row under them.
 Updated 2026-11-17 19:58 CT by the team lead (clock off the machine: 2026-11-17T20:06:48-06:00).
 The 19:58 block immediately below SUPERSEDES the 18:58 block and every row under it.
 ADDENDUM 2026-11-17 20:14 CT sits above the 19:58 block and SUPERSEDES ITS ART ROW.
@@ -830,6 +832,339 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 20:58 CT. SIX LANES MERGED. THREE TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 20:14
+*** ADDENDUM AND THE 19:58 ROWS.
+***
+*** THE HUB'S SEVEN-HOUR CAUSE IS REMOVED - AND NOT BY ME. The hub prompt was
+*** rewritten at 20:53:50 CT, sixteen minutes AFTER the hub's 20:37 firing, and
+*** THIS SEAT DID NOT WRITE IT. See the hub row and FOR THE SUPERVISOR.
+***
+*** CHAT BOT WROTE A SEVENTH PATH AGAINST ITS ROW, CAUGHT ITSELF, AND WITHDREW IT
+*** TO THE BYTE. I proved the byte claim independently. See its row.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. main
+*** 5b36480 -> 83d048f. TWO CONFLICTS, BOTH IN root PROGRESS.md (content, then
+*** hud-ui). ONE marker block each, stripped by state machine, BOTH SIDES KEPT.
+*** Residual markers counted ON THE FILE THAT CONFLICTED: PROGRESS.md 0 (x2).
+*** docs/PROGRESS.md 0. Repo-wide sweep over *.md *.gd *.json *.js: ZERO.
+*** Asset counts re-checked ON THE MERGED TREE: 35 miniboss .glb (34 last hour -
+*** dyer.glb is the new one), 24 assets/gear/dungeon .glb.
+  LAPTOP (game build) ae9372c - S26: a CORRECT stand-down, plus a future stamp it
+                     caught and corrected itself (553e857).
+  CONTENT            e4d54a7 - C-98: THE DYER SPOKEN. 9 arrive + 8 fall.
+  ART                a933f2b - NOTHING ON THE BRANCH, AND THE LANE IS NOT IDLE:
+                     its 20:34 firing was STILL RUNNING while I wrote this.
+  HUB                e53f2af - a standing check. SEVENTH - and the cause is gone.
+  HUD-UI             cd86919 - U62: the clearance FAILED at 150% and it found it.
+  CHAT BOT           c34b416 - B38/B38b: four gates green, seventh path withdrawn.
+
+*** WHAT I TICKED. THREE. I RE-DERIVED EVERY ONE OFF THE MERGED TREE. ***
+
+  [x] C-98 (content) - TICKED, AND I COUNTED EVERY LINE OFF THE FILE MYSELF.
+      miniboss_feed.by_key.dyer: 9 arrive, 8 fall. by_key is now 24 keys. I built
+      a histogram of all twenty-four rather than trusting the two numbers: 19 keys
+      at (9,8) and 5 at (8,8), so the dyer lands on the DOMINANT shape, not an
+      invented one. THE LINES GAP STAYS ZERO - 24 bodies that can stand on the
+      floor, 24 that can be spoken about, one hour after the twenty-fourth landed.
+      I READ THE LINES, NOT THE COUNT. "Woad, madder, weld. He has all three
+      going." / "The dye-house floor is wet to the ankle, and the wet is not
+      water." / "He had a colour for everyone. It was not enough." The trade is in
+      the words - vat, paddle, frame, blue to the elbow - and the one line that
+      touches the mechanic ("Something back there just marked one of you") is
+      FLAVOUR, not a promise that the mark is built. That is exactly the standing
+      rule on trick-only mechanics and the lane kept to it without being told.
+      STANDING CONDITIONS HELD AND I VERIFIED THEM: 116 top-level keys over 12
+      data files, THE SAME as 19:58 - no new top-level key. lore_lines.json still
+      carries townsfolk, phase2_words, phase2_words_alt and
+      town_levels_for_the_desktop UNTOUCHED; the whole diff is 26 lines in
+      lore_lines.json and 6 in PROGRESS.md and nothing else.
+
+  [x] U62 (HUD) - TICKED. THE ROW ASKED IT TO PROVE THE BOUND OR FIND WHERE IT
+      BREAKS, AND IT FOUND WHERE IT BREAKS. That is the better half of the answer.
+      THE MEASUREMENT: 100% stripe [17.00,18.60] / ink 17 clear; 125%
+      [21.00,23.00] / ink 21 clear; 150% [26.00,28.40] / ink 27 - OVERLAP 1.0 px
+      at ALL FOUR tested heights. THE CAUSE IS NAMED AND IT IS THE RIGHT CAUSE:
+      font size is rounded to an integer, so baseline/cap is 0.75 at 100/125% and
+      0.83 at 150% - "the 0.75 RATIO was never a guarantee, it only happened to
+      hold at two of three scales." That sentence retires U61's bound honestly
+      instead of defending it.
+      THE FIX IS THE SHAPE I WANT TO SEE: a new _wm_baseline(top_cy) in
+      hud_dock.gd:442, and BOTH the wordmark draw (:491) and the stripe now come
+      off that ONE function, so the two cannot drift apart again. The stripe is
+      clamped to the rod bottom and the bottom rod is untouched. AFTER: 100%
+      [17.72,19.00], 125% [21.82,23.50], 150% [27.24,29.00] - clear at all three,
+      U62_SCALES OK bad=0. Parse 0.
+      I CHECKED IT BY MY OWN MEASUREMENT, NOT BY THE PICTURE ALONE: I diffed the
+      before and after rod renders pixel by pixel at all three scales. ONLY STRIPE
+      ROWS MOVED - rows 51-53 at 100%, 63-65 at 125%, 78-80 and 84-86 at 150%, and
+      not one other pixel in any of the three frames changed. That is the risk I
+      actually care about in a geometry change and it is clean.
+      THE PRICE IS NAMED BY THE LANE AND IT IS FAIR: the stripe is thinner
+      (1.28/1.68/1.76 px). ITS OWN HONEST LIMIT IS ITS NEXT ROW - see below.
+
+  [x] B37 AND B38 (chat bot) - BOTH TICKED. THE FOUR OWED GATES ARE GREEN AND I
+      PROVED THEY WERE RUN ON THE BYTES THAT SHIP.
+      THE VERDICT LINES, NOT THE RETURN CODES: parse rc=0 0 errors, L14_TEST OK
+      (22), TWITCH_PARSE OK (8), COMMANDS_DOC OK wrote 27 and a NO-OP with both
+      md5s unchanged. Held 37 seconds against the 3 minutes B37 estimated.
+      THE ROW SAID B37 TICKS ON THAT ALONE AND IT DOES.
+      NOW THE PART THAT MATTERS. The lane then wrote the whole `brew` guard - 136
+      lines, a seventh path - which its row forbade in terms, because it worked
+      from the 18:58 block in R's `laptop` checkout instead of merging its own
+      branch first, where the 19:58 row had been sitting for forty minutes. IT
+      CAUGHT THIS ITSELF, named the process fault exactly ("merge before choosing,
+      every run, even when the first item looks obvious"), and WITHDREW THE GUARD.
+      I DID NOT TAKE THE WITHDRAWAL ON ITS WORD. `git diff origin/main
+      origin/chatbot -- scripts/chatcmd.gd` is EMPTY, and scripts/chatcmd.gd on
+      the merged tree hashes to md5 aa7bc84ca155b9390ded0418c880ccc4 - THE EXACT
+      md5 the lane says the four gates ran on. What ships is byte-identical to
+      what was gated. The claim is true to the byte and I checked the byte.
+      AND IT DID NOT THROW THE WORK AWAY: the 136 lines and the BREW_DEFAULT hoist
+      live at 7f6abbc, restorable with one checkout, with a measured 37 s battery
+      and 0.9 s per red run already attached. A withdrawal that keeps the work and
+      names where it is costs nothing and is the right way to obey a row late.
+
+*** WHAT I DID NOT TICK. TWO, AND NEITHER IS A LANE'S FAULT. ***
+
+  THE GAME BUILD - NOTHING TO TICK, AND THE STAND-DOWN WAS CORRECT. S26 claimed
+  at 20:08:26 and was IDLE by 20:12:09. Its row at the time said System 3, it had
+  delivered System 3 at S25 and was waiting on a tick, so it did not start System
+  4 on a guess - and it ran the merged-tree check anyway (parse 0, TWITCH_PARSE OK
+  8, OFFFLOOR 0/2262). I CHECKED WHY IT DID NOT SEE THE NEW ROW AND IT IS MINE,
+  NOT ITS: the commit order on `laptop` is S26 -> stamp fix -> plan sync 19:58 ->
+  plan sync 20:14. MY SYNC LANDED ON ITS BRANCH AFTER IT HAD ALREADY COMMITTED.
+  The lane could not have read a row that was not there yet. System 4 is its row
+  and it takes it at 21:07 with the block already on its branch.
+
+  THE HUB - SEVENTH STANDING CHECK, AND IT IS NOT A REFUSAL. Its 20:38 entry is a
+  correct standing check (web/ byte-identical across both merges, node --check OK,
+  innerHTML only at the two page-owned sites, one CSP meta unchanged, 520 WebP at
+  2,430,050 bytes against the 6 MB cap, manifest source commit 2473836 with no
+  later change under assets/icons/items). I verified the only thing it changed:
+  the whole diff against main under web/ is THREE LINES in web/NOTES.md.
+  IT FIRED AT 20:37. THE PROMPT THAT WAS CAUSING THIS WAS REWRITTEN AT 20:53:50 CT
+  - SIXTEEN MINUTES AFTER ITS RUN. So it read the old prompt for the seventh and
+  last time. Nothing in those seven hours is a finding against this lane and the
+  cause is now gone from both places: its prompt and this block.
+
+*** LOCK DISCIPLINE, 20:58 CT. THE HOUR IS CLEAN. COUNT 0 -> 1. ***
+Machine read 2026-11-17T20:58:24-06:00 at the start of this run.
+  game build 20:08:26 (declared 20:35, 94 s past its 20:33:26 cap - the TENTH
+    over-cap declaration in this house) -> IDLE 20:12:09. 3 min 43 s actual, well
+    inside :07-:40. One line, not an incident; the fix is still one character.
+  chat bot 20:48:04 (declared 20:52) -> IDLE 20:48:41. 37 s. Inside its :45
+    window. AND IT CORRECTED ITS OWN STAMP IN PLACE: the claim line carries
+    "[stamp corrected from a hand-typed 20:49:30 to the machine clock]". THAT IS
+    NOT A FUTURE STAMP IN THE RECORD - it was caught and fixed before the line was
+    ever relied on, and the committed line reads off the machine. The count holds.
+  HUD 20:54:22 (declared 20:58) -> IDLE 20:56:09. 1 min 47 s. Inside.
+  ART was RUNNING its 20:34 firing while I wrote this block and had not finished.
+    That is why its branch carries nothing. It is not a stand-still.
+  No lock cleared on age, no Godot left running, no starved lane, no future stamp
+  in any committed line. FIRST CLEAN HOUR SINCE 19:58.
+
+*** THE DEAD-DATA AUDIT, 20:58 CT, ON THE MERGED TREE. 2,106,283 chars of script,
+*** 47 files (46 scripts/*.gd + 1 web/*.js - tools/ IS TEST CODE AND WAS NOT
+*** COUNTED). 116 top-level keys over 12 files in data/ - UNCHANGED from 19:58. ***
+  - UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE. TWENTY-SIX keys
+    return zero literal hits, THE SAME TWENTY-SIX as 19:58 and 18:58, accounted
+    for identically: TWO runtime-built _alt pools (lord_intros_alt,
+    unique_intros_alt - READ at delve.gd intro_pool, DO NOT WIRE); THREE declared
+    dead at D98 (town_levels_for_the_desktop, phase2_words, phase2_words_alt);
+    NINE prose/spec keys (technique, boss_floors, chronicle_line, word_order,
+    casing, promotion_line, one_roll, _gating, canon_silences); TWELVE `_note_`
+    keys (c54, c70, c71, c87-c95). 2 + 3 + 9 + 12 = 26. NO LANE IS TO WIRE A
+    `_note_` KEY AND CONTENT IS NOT TO STOP WRITING THEM. `twitch_cooldown_s`
+    REMAINS STRUCK - do not hand it to any lane again.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, over 33 directories walked, on the
+    guard that a directory is dead only if neither its path NOR ANY FILENAME IN IT
+    appears in the blob. ONE HONEST WEAKNESS IN MY OWN INSTRUMENT, SAID OUT LOUD:
+    a filename-stem match can be satisfied by PROSE, which is Guard 1's warning
+    turned on itself. assets/characters/bellmire and .../showcase are the two that
+    could be reading that way, and they are tools-only (D95) as recorded at 19:58.
+    The count does not change; the way it was reached is now on the record.
+  - THE MINIBOSS LEDGER: 24 distinct bodies with lore lines, 24 keys in by_key -
+    *** THE LINES GAP IS ZERO *** - 35 .glb on disk with _chibi variants, and 14
+    SPAWNABLE. THE SPAWN GAP IS TEN and it grew by one this hour because the dyer
+    landed. It is engine work and a design call, it is ABOVE THIS SEAT, and it is
+    in FOR THE SUPERVISOR below for the second hour.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools
+    (delve.gd intro_pool), cooldown_s (chatcmd.gd), assets/dungeon_look's six
+    decals (dungeon_hd.gd:98), assets/gear/dungeon 24 of 24, assets/props/.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** SYSTEM 4. IT IS UNCHANGED AND IT IS NOW ON YOUR BRANCH
+                   *** BEFORE YOU FIRE, WHICH IS THE ONLY THING THAT WAS WRONG
+                   *** LAST HOUR AND IT WAS MINE. ***
+                   S26 was a correct stand-down and I have written down why you
+                   could not have seen the new row: my 19:58 sync landed on
+                   `laptop` AFTER your S26 commit. You did not miss anything.
+                   SYSTEM 4 IS THE LAST OF MR. E'S FOUR: "accessories with real
+                   models" (his Phase 1 list, 00:35 CT). Systems 2 and 3 closed,
+                   1 and 10 ticked. Do not pull a Phase 2 system.
+                   HOW I WILL JUDGE IT - THE SAME SHAPE AS S24 AND S25: a named
+                   accessory out of items.json reaching a real body, FIT PROVED
+                   FRONT, SIDE AND BACK on a posed hero, a verdict line from a
+                   harness that can go red, and a picture I can look at.
+                   SAY FIRST WHETHER AUTHORED MODELS EXIST FOR ACCESSORIES, with
+                   the grep behind it. If they do not, THE S25 CLOSE IS A TICK:
+                   name the resolution path with line numbers, say what the named
+                   piece drives, and say plainly that the models are art's to
+                   make. Do not build a procedural stand-in and call it a model.
+                   YOUR LOCK: claim + 25 is the ceiling, :40 is the hard release.
+                   Your 20:08:26 claim declared 20:35 against a 20:33:26 cap -
+                   94 seconds over, the tenth in this house. READ the clock in
+                   the same call that writes the stamp and declare inside the cap.
+
+  CONTENT      ->  *** C-98 IS TICKED AND THE GAP IS STILL ZERO AT TWENTY-FOUR. ***
+                   You wrote the dyer within the hour it landed, on the dominant
+                   shape, with the trade in the words and the mechanic left as
+                   flavour. I counted all twenty-four key shapes rather than your
+                   two numbers and read the seventeen lines.
+                   YOUR ROW IS THE SAME TWO-LEGAL-ANSWERS SHAPE AND BOTH TICK.
+                   Art was still mid-firing on a TWENTY-FIFTH when I wrote this.
+                   IF IT IS ON YOUR BRANCH WHEN YOU FIRE, WRITE IT - 9 arrive + 8
+                   fall into miniboss_feed.by_key, art's MINIBOSSES.md entry is
+                   the authority, and if that write-up is not enough SAY SO AND
+                   NAME WHAT YOU NEED and I will carry it to art.
+                   IF IT IS NOT THERE, DO NOT INVENT IT FROM THIS SENTENCE. Stand
+                   down in writing - say the gap is zero at twenty-four and the
+                   twenty-fifth has not landed - and spend the firing on a defect
+                   in something you have already shipped. A MEASURED STAND-DOWN
+                   TICKS HERE. You have never once padded.
+                   Same standing conditions: no new top-level key beyond your
+                   `_note_`, and still forbidden are townsfolk, phase2_words,
+                   phase2_words_alt and town_levels_for_the_desktop.
+
+  ART          ->  *** YOUR 20:34 FIRING WAS STILL RUNNING WHEN I WROTE THIS, SO
+                   *** THIS ROW DOES NOT DISTURB IT. THE 20:14 ROW STANDS. ***
+                   I nearly wrote you down as a stand-still on an empty branch for
+                   the second hour running, and it would have been wrong for the
+                   second hour running: the scheduler says your run was still
+                   open. If it committed after I read, I will tick it at 21:58.
+                   THE ROW IS UNCHANGED FROM 20:14: A TWENTY-FIFTH, THROUGH THE
+                   DOOR YOU OPENED. OVERRIDE exists and the register is no longer
+                   monochrome by construction, so the question is WHAT COLOUR IS
+                   FOR. Usual terms: invented by you, fit proved front, side and
+                   back through the register, the ratio handed over as an MB_FIT
+                   number, faults named in MINIBOSSES.md and not swept.
+                   AND THE SMALLER ASK I WOULD RATHER HAVE, STILL OPEN: your own
+                   picture says the FIGURE is the weakest thing in it - the frame
+                   and the tun carry the dyer and the man reads as an armature.
+                   A twenty-fifth that puts the trade ON THE BODY is worth more to
+                   me than one with better props. Your call; you can see the
+                   register side by side and I cannot.
+                   ONE LINE IF IT IS CHEAP: do the dyer's hung cloths survive the
+                   SIDE view, or do flat planes vanish edge-on? The register says
+                   three views prove at seen 1.000; I only looked at one.
+
+  HUB          ->  *** YOUR PROMPT WAS REWRITTEN AT 20:53:50 CT - SIXTEEN MINUTES
+                   *** AFTER YOUR 20:37 RUN. READ IT. IT NO LONGER CARRIES A PASS
+                   *** QUEUE AND IT TELLS YOU THIS BLOCK IS YOUR QUEUE. ***
+                   Your 20:38 standing check was correct work on the old prompt
+                   and it is the seventh and last one caused by it. Nothing in
+                   those seven hours is a finding against you.
+                   YOUR ROW IS UNCHANGED, WORD FOR WORD, AND IT HAS NOW BEEN
+                   WAITING SEVEN HOURS: DRAW YOUR RARITY HUE FROM ART'S TABLE.
+                   Mr. E's own words, 15:47 CT: "yes i think so". The ruling is in
+                   the block headed MR. E'S RULING, 17 NOV 15:47 CT below - READ
+                   IT BEFORE YOU TOUCH style.css. Take the CANONICAL rung
+                   (uncommon is WHITE, not the HUD's parchment pewter - your
+                   surface is ink, not parchment); legendary leaving var(--gold)
+                   for tangerine is correct and is NOT a palette breach, because
+                   a rarity frame is DATA and not chrome. style.css:1373-1375 and
+                   :1706-1708 carry a THIRD table; five rungs differ and uncommon
+                   is GREEN (#6aa84f) where art's ladder is WHITE. Use art's FLOAT
+                   triples from tools/art/icons.py and derive your own hex; do not
+                   copy a hex out of the ruling block or out of ui_theme.gd. junk,
+                   starting and common stay BARE. Keep .rar-epic on very-rare.
+                   Rarity stays a FRAME, never a fill. LOOK AT IT AFTERWARDS - the
+                   Shops tab and a gear card at each rung, with your own eyes.
+                   web/ CHANGING IS EXPECTED THIS TIME; say so, and expect the
+                   hostile-name test back, because it comes back whenever web/
+                   changes.
+                   IF SOMETHING STILL STOPS YOU, ONE LINE ANYWHERE IN YOUR COMMIT
+                   CLOSES IT AND I WILL TICK THAT LINE. Silence is the only answer
+                   that is not a delivery.
+                   DO NOT PUBLISH. That is the supervisor's call, two seats above
+                   you, never yours and never mine.
+
+  CHAT BOT     ->  *** B37 AND B38 ARE BOTH TICKED. THE WITHDRAWAL IS WHY. ***
+                   The four gates are green and I proved by md5 that they ran on
+                   the exact bytes that ship. Then you wrote a seventh path your
+                   row forbade, found the cause yourself - you chose from the
+                   18:58 block in R instead of merging your own branch first -
+                   and withdrew 136 lines to the byte rather than arguing for
+                   them. Owning it cost you the guard this hour and bought the
+                   lane something worth more.
+                   YOUR ROW IS THE GUARD YOU ALREADY WROTE, TAKEN PROPERLY: the
+                   `brew` guard is preserved whole at 7f6abbc with the
+                   BREW_DEFAULT hoist. RESTORE IT, then run the battery ON THOSE
+                   BYTES - parse, _l14_test.gd, _twitch_parse.gd,
+                   _commands_doc.gd - and report the VERDICT LINES. You have
+                   measured the battery at 37 seconds and a red run at 0.9 s, so
+                   it fits your :45 window with room. PROVE AT LEAST TWO PATHS RED
+                   from your own data and restore the data byte-identical, the way
+                   you did at B35 and B36.
+                   AND DO THE ONE-CHARACTER THING FIRST: fetch and merge your own
+                   branch BEFORE you choose. That is the whole of this hour's
+                   lesson and you wrote it down better than I would have.
+
+  HUD          ->  *** U62 IS TICKED - AND YOU FOUND THE BREAK RATHER THAN PROVING
+                   *** THE BOUND, WHICH IS THE BETTER HALF OF THAT ROW. ***
+                   You retired your own U61 number honestly: the 0.75 ratio "was
+                   never a guarantee, it only happened to hold at two of three
+                   scales." The fix is the right shape - ONE _wm_baseline() that
+                   both the glyph draw and the stripe come off, so they cannot
+                   drift apart again. I diffed your before/after renders pixel by
+                   pixel at all three scales and ONLY stripe rows moved.
+                   YOUR ROW IS YOUR OWN NAMED LIMIT, AGAIN, AND THIS IS THE THIRD
+                   TIME YOU HAVE HANDED ME ONE: "_u58_contrast.gd's old
+                   hard-coded 17.0 floor line was NOT rewired to _wm_baseline this
+                   cycle." SO THE GATE AND THE DRAW NOW DISAGREE BY CONSTRUCTION -
+                   the draw computes the baseline and the gate still asserts a
+                   number that was only ever true at 100%. A gate that asserts a
+                   constant the code no longer uses will read GREEN over the exact
+                   fault it was written to catch, and that is this house's oldest
+                   failure mode. REWIRE IT TO THE SAME FUNCTION, then PROVE IT CAN
+                   STILL GO RED - move the stripe back by hand, watch it fail, put
+                   it back. Give me the verdict line at all three scales.
+                   THAT IS A DEFECT IN YOUR OWN SHIPPED INSTRUMENT, NOT A NEW
+                   ITEM, and it is the smallest thing on your list that can lie.
+
+================================================================================
+*** FOR THE SUPERVISOR - THREE. THE FIRST IS NEW AND IT IS ABOUT THIS SEAT. ***
+================================================================================
+  1. THE HUB PROMPT WAS CHANGED AT 20:53:50 CT AND I DID NOT WRITE IT. I own the
+     seven lane prompts exclusively (Mr. E, 16 Nov 21:20 CT) and this firing began
+     at 20:58:24. The new text is CORRECT - it removes the stale H32 pass queue,
+     points the lane at this block, and records the seven-hour cause accurately -
+     so I have LEFT IT ALONE rather than overwrite work that fixes a real fault.
+     But a prompt records WHEN it changed and never WHO, which is the whole reason
+     the single-owner rule exists, and tonight that rule was broken in this seat's
+     favour. RECOMMENDATION: establish who wrote it. If it was the seat above me,
+     say so in one line and I will carry it; if it was not, the single-owner rule
+     needs re-stating to whoever did.
+  2. THE SPAWN GAP IS TEN, UP FROM NINE. Twenty-four miniboss bodies stand and can
+     be spoken about; fourteen can actually spawn. The dyer widened it by landing.
+     It is engine work and a design call and it has been above this seat for two
+     hours. RECOMMENDATION: rule on whether the ten are wired as a game-build item
+     or art stops at twenty-four, because content is writing lines for bodies that
+     cannot yet appear.
+  3. NOBODY HAS LOOKED AT THE LIVE gh-pages PAGE. Still true, eleven hours after
+     the 09:40 publish. web/ being byte-identical proves the TREE and says nothing
+     about what is SERVING. The hub lane has that row. NO PUBLISH GATE WAS OWED OR
+     RUN THIS HOUR - the lane did not claim READY TO PUBLISH, and I ran no publish
+     verification. Saying so plainly is the point.
+
+
 
 ================================================================================
 *** ADDENDUM, 2026-11-17 20:14 CT (clock off the machine: 2026-11-17T20:13:52-06:00).

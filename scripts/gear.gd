@@ -97,11 +97,20 @@ static func equip(model_root: Node, path: String, bone := "handslot.r", slot := 
         return null
     if not _cache.has(path):
         _cache[path] = load(path)
+    ## S35: ResourceLoader.exists() is true for an un-imported asset whose load() still returns
+    ## null (a worktree with a partial .godot/imported). Skip the piece, never instantiate a null.
+    var ps := _cache[path] as PackedScene
+    if ps == null:
+        _cache.erase(path)
+        return null
     var att := BoneAttachment3D.new()
     att.name = "eq_" + slot
     att.bone_name = bone
     sk.add_child(att)
-    var m: Node3D = (_cache[path] as PackedScene).instantiate()
+    var m := ps.instantiate() as Node3D
+    if m == null:
+        att.free()
+        return null
     m.scale = Vector3.ONE * scale
     m.rotation_degrees = held_rot(path)
     att.add_child(m)

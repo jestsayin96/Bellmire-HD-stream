@@ -113,9 +113,10 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## for"), read, not guessed. Sixteen bodies had a fit ratio here and lines in content's file and
 ## were in NO draw, so they never stood on a floor. `leech` is listed and stays out on its own until
 ## content writes its arrive lines - the gate in miniboss_for, not this table, decides.
+## S35: `beadle` (33rd, art's tag shrine) is listed the same way and is held out until content writes it.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman"], "shrine": ["leech"], "crypt": ["ratcatcher"],
+    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
     "keep": ["reeve", "paviser"], "treasury": ["strickler"], "mess": ["loader"],
     "flooded": ["tanner"], "grassland": ["hurdleman"], "wood": ["drover"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman"], "confection": ["comfitmaker"]}

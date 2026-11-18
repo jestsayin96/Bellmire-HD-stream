@@ -3414,3 +3414,27 @@ nothing spent. Backups *.bak_s32 (untracked). Logs build/s32_run1.log, build/s32
 
 ## C-cycle - C-111 miniboss feed lines for the Leech (32nd), 2026-11-18 (content)
 TAKE THIS NEXT gave content no engine row; the 08:0x block names the Leech's feed lines as the obvious next. Added miniboss_feed.by_key.leech: 9 arrive, 8 fall (17 lines), plus _note_c111. by_key now 32 keys. Written against art's MINIBOSSES.md entry 32 (nothing mends while it stands; healing drawn into the basin; tip the basin to get it back). Plain register, {name} not used. Only data/lore_lines.json touched; json.load OK, every pre-existing key unchanged. CODE WIRING: none new - delve.gd _miniboss_say already reads by_key[key] arrive/fall; needs a leech row in the spawn table. act/broken omitted on purpose, as C-86 onward.
+
+## D-cycle - S35: gear.gd NEVER INSTANTIATES A NULL; THE LEECH IS IN THE SHRINE DRAW; THE BEADLE (33rd) HAS ITS RATIO AND ITS ROW. 2026-11-18T10:20-06:00 (game build)
+TAKE THIS NEXT (09:1x block) row 1, all three parts.
+- THE NULL GUARD. scripts/gear.gd equip(): `ResourceLoader.exists()` is true for an un-imported asset whose load() still
+  returns null (the HUD's worktree has a partial .godot/imported). The cast `(_cache[path] as PackedScene).instantiate()`
+  ran on that null at :104. Now: cast once to `ps`; if null, drop the cached null and return null BEFORE the
+  BoneAttachment3D is made (no orphan eq_<slot> node); if instantiate() is not a Node3D, free the attachment, return null.
+  Callers already treat a null return as "no piece" (the path=="" / missing-bone branch returns null the same way).
+  Not reproduced by an un-imported gltf in R (all import here); reproduced with a resource that EXISTS but is not a scene.
+- NEW GATE tools/_s35_gearnull.gd: equip(res://icon.svg) returns null, leaves no eq_weapon, caches no null; a real
+  assets/gear scene still attaches. S35_GEARNULL OK 8 checks. RED: S35_RED=1 replays the pre-S35 unguarded cast ->
+  S35_GEARNULL FAIL 1 of 6, rc=1.
+- THE LEECH IS IN THE DRAW - CONFIRMED, NOT ASSUMED. S33_DRAW: `leech shrine ratio 0.95 lines true drawn 200/400`.
+- THE BEADLE. delve.gd MB_FIT "beadle": 1.2 (art's _fit_beadle_register.json pairs.beadle.ratio, copied not re-derived);
+  dungeon_hd.gd THEME_MINIBOSS_MORE "shrine": ["leech", "beadle"] (art's tag). It had NO .glb.import, so it was
+  UNLOADABLE - S33_DRAW went red on it first: `S33_DRAW FAIL 1 of 126: ["beadle: loadable body"]`. `--headless --import`
+  rc=0 7.3 s wrote beadle.glb.import; after: `beadle shrine ratio 1.20 lines false drawn 0/400` - correctly held out
+  until content writes its arrive lines. Its IDEA (it calls the order) is NOT built this cycle; and art's two render
+  notes (no facing from the back; side-view knob contrast) are art's, not mine.
+- NOT LOOKED AT IN PLAY: nothing a viewer sees changes this cycle (the guard skips a piece; the Beadle draws on 0 floors).
+GATES (verdict lines): PARSE rc=0 21.4 s, 0 SCRIPT ERROR / Parse Error; S35_GEARNULL OK 8 (red FAIL rc=1);
+S33_DRAW OK 126 (red-first on beadle); MBFEED_TEST OK 80; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2046; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/15317 raid_in_solid=0/9321 PASS.
+No live Twitch test, nothing spent. Backup scripts/gear.gd.bak_s35 (untracked). Logs build/_s35_battery*.log.

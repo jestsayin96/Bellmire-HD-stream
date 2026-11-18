@@ -984,6 +984,135 @@ static func commands() -> Dictionary:
             var s_tip: String = "say \"%s\"" % s_can if s_can != "" else "NO fraction phrase this guard knows can state %s - the sentence needs a different shape, not a different word" % str(s_panel)
             push_error("COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes \"%s\" (%s) of shop cost and SELL_BACK pays %s - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; %s" % [s_phrase, str(s_said), str(s_panel), s_tip])
             printerr("COMMANDS_DATA SATCHEL RATE - published \"%s\" (%s), enforced %s" % [s_phrase, str(s_said), str(s_panel)])
+        # B37: THE ARMOURY - CHOSEN ON SHAPE, AND THE ONLY CLAIM LEFT WHERE *MY OWN FILE*
+        # DECLARES THE SAME LADDER TWICE. The row let me pick on shape over size. This one wins
+        # on all three of the shapes the row named, which is why it beat the two smaller ones:
+        #   TWO DECLARATIONS, BOTH MINE - `armoury`.short AND `armoury`.what each recite
+        #   "leather, chainmail, plate, warded plate". Those two can disagree with EACH OTHER
+        #   before either disagrees with the game, and then !armoury's one-line reply promises one
+        #   ladder and docs/COMMANDS.md's long line promises another. That is B36's SPLIT shape
+        #   turning up INSIDE my own three files instead of across two of another lane's, so SPLIT
+        #   is the first path again and for the same reason: if the two disagree there is no
+        #   published ladder to check, and the guard says so rather than believing one of them.
+        #   A DERIVED NUMBER LIST - `armoury`.cost publishes "50 / 150 / 400 / 1000 gold by tier".
+        #   Four numbers whose authority is the `cost` field of the very same Gear.ARMOUR rows, and
+        #   nothing in the house compared them. So one guard covers the NAMES and THE MONEY.
+        #   AN AUTHORITY IN A FILE I DO NOT OWN - scripts/gear.gd is the GAME BUILD's, and it holds
+        #   TWO tables, not one: Gear.ARMOUR (names, costs, the found-only flag) and
+        #   Gear.ARMOUR_LOOK (which pieces actually show, per tier). A tier added there is exactly
+        #   how `greataxe` (S20) and `sceptre` (D94b) reached the smithy unpublished.
+        # AND IT CORRECTS MY OWN LANE'S RECORD. B36's leftovers list said this claim's authority
+        # was "what gear.gd:257-258 only says in a comment". THAT WAS WRONG, and it is why the
+        # claim looked smaller than it is. The comment restates the code; the AUTHORITY is
+        # Gear.ARMOUR_LOOK, which carries real `boots` / `pauldrons` / `helm` booleans per tier.
+        # It is exactly checkable, and it is checked below - read as "every key whose value is a
+        # true bool", NOT as a hand-written list of three, so a piece the game build adds
+        # tomorrow goes red here instead of silently making my sentence short.
+        # SIX PATHS. ANCHOR and SPLIT are the two that stop this going quietly wrong; LADDER, COST,
+        # PIECES and FOUND are the four mismatches themselves, and they are INDEPENDENT - the
+        # names can be right while the money is wrong, so they do not share an elif. Not fatal,
+        # the shape every guard above uses: push_error + printerr, the commands still answer, and
+        # a battery greps COMMANDS_DATA. No line is the healthy reading.
+        var a_d: Dictionary = (cmd_d.get("armoury", {}) as Dictionary)
+        var a_what: String = String(a_d.get("what", ""))
+        var a_anchor := "armour tier: "
+        # the published ladder, read the same way out of BOTH declarations: everything between the
+        # anchor and the first full stop, split on commas. Order is kept - a ladder's order is
+        # itself a claim, so leather before plate is checked, not just membership.
+        var a_ladders: Array = []
+        for a_src in [a_what, String(a_d.get("short", ""))]:
+            var a_s := String(a_src)
+            var a_out: Array = []
+            var a_at: int = a_s.find(a_anchor)
+            if a_at >= 0:
+                var a_tail: String = a_s.substr(a_at + a_anchor.length())
+                var a_stop: int = a_tail.find(".")
+                if a_stop >= 0:
+                    a_tail = a_tail.substr(0, a_stop)
+                for a_w in a_tail.split(",", false):
+                    var a_tok := String(a_w).strip_edges().to_lower()
+                    if a_tok != "":
+                        a_out.append(a_tok)
+            a_ladders.append(a_out)
+        var a_said: Array = a_ladders[0]
+        var a_said_short: Array = a_ladders[1]
+        # what the game actually sells, and what it only ever drops. `rags` is neither: cost 0 and
+        # no `found`, because it is the state a hero starts in, not a tier anyone buys.
+        var a_real: Array = []
+        var a_real_cost: Array = []
+        var a_found: Array = []
+        for a_row in Gear.ARMOUR:
+            var a_r: Dictionary = a_row
+            var a_nm := String(a_r.get("name", "")).to_lower()
+            if a_nm == "":
+                continue
+            if bool(a_r.get("found", false)):
+                a_found.append(a_nm)
+            elif float(a_r.get("cost", 0)) > 0.0:
+                a_real.append(a_nm)
+                a_real_cost.append(int(a_r.get("cost", 0)))
+        # the published price ladder, leading digits of each slash-separated piece
+        var a_said_cost: Array = []
+        for a_w2 in String(a_d.get("cost", "")).split("/", false):
+            var a_dig := ""
+            var a_piece := String(a_w2).strip_edges()
+            for a_i in a_piece.length():
+                var a_ch := a_piece[a_i]
+                if a_ch >= "0" and a_ch <= "9":
+                    a_dig += a_ch
+                elif a_dig != "":
+                    break
+            if a_dig != "":
+                a_said_cost.append(int(a_dig))
+        # the published pieces, and the pieces ARMOUR_LOOK really turns on across the buyable tiers
+        var a_said_pc: Array = []
+        var a_pat: int = a_what.find("It shows: ")
+        if a_pat >= 0:
+            var a_ptail: String = a_what.substr(a_pat + 10)
+            var a_pstop: int = a_ptail.find(".")
+            if a_pstop >= 0:
+                a_ptail = a_ptail.substr(0, a_pstop)
+            for a_w3 in a_ptail.split(",", false):
+                var a_pc := String(a_w3).strip_edges().to_lower()
+                for a_lead in ["a ", "an ", "the "]:
+                    if a_pc.begins_with(a_lead):
+                        a_pc = a_pc.substr(String(a_lead).length())
+                if a_pc != "":
+                    a_said_pc.append(a_pc)
+        var a_real_pc: Array = []
+        for a_i2 in range(1, mini(a_real.size() + 1, Gear.ARMOUR_LOOK.size())):
+            var a_lk: Dictionary = Gear.ARMOUR_LOOK[a_i2]
+            for a_k in a_lk:
+                if typeof(a_lk[a_k]) == TYPE_BOOL and bool(a_lk[a_k]) and not a_real_pc.has(String(a_k)):
+                    a_real_pc.append(String(a_k))
+        if a_said.is_empty():
+            push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Gear.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
+            printerr("COMMANDS_DATA ARMOURY ANCHOR - `armoury`.what lost its \"%s\" anchor; the ladder and the prices are now unchecked" % a_anchor)
+        else:
+            if a_said_short != a_said:
+                var a_sp_tip: String = "`armoury`.short no longer carries the ladder at all" if a_said_short.is_empty() else "short says %s" % str(a_said_short)
+                push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Gear.ARMOUR" % [str(a_said), a_sp_tip])
+                printerr("COMMANDS_DATA ARMOURY SPLIT - what %s vs short %s; no single published ladder" % [str(a_said), str(a_said_short)])
+            if a_said != a_real:
+                var a_unsaid: Array = a_real.filter(func(n): return not a_said.has(n))
+                var a_ghost2: Array = a_said.filter(func(n): return not a_real.has(n))
+                var a_tip: String = "same names, WRONG ORDER - a ladder's order is the claim" if (a_unsaid.is_empty() and a_ghost2.is_empty()) else "unpublished: %s; invented: %s" % [str(a_unsaid), str(a_ghost2)]
+                push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Gear.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
+                printerr("COMMANDS_DATA ARMOURY LADDER - published %s, sold %s; %s" % [str(a_said), str(a_real), a_tip])
+            if a_said_cost != a_real_cost:
+                var a_ctip: String = "`armoury`.cost no longer states a slash-separated price ladder" if a_said_cost.is_empty() else "published %d price(s) against %d tier(s)" % [a_said_cost.size(), a_real_cost.size()]
+                push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Gear.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
+                printerr("COMMANDS_DATA ARMOURY COST - published %s, charged %s" % [str(a_said_cost), str(a_real_cost)])
+            if a_said_pc != a_real_pc:
+                var a_ptip: String = "`armoury`.what no longer carries \"It shows: \"" if a_said_pc.is_empty() else "published %s" % str(a_said_pc)
+                push_error("COMMANDS_DATA ARMOURY PIECES: `armoury`.what says the armour shows %s and Gear.ARMOUR_LOOK turns on %s across the buyable tiers - the doc tells a viewer what they will see on the body and the body shows something else; %s" % [str(a_said_pc), str(a_real_pc), a_ptip])
+                printerr("COMMANDS_DATA ARMOURY PIECES - published %s, dressed %s" % [str(a_said_pc), str(a_real_pc)])
+            var a_sold_found: Array = a_found.filter(func(n): return a_said.has(n))
+            var a_mute_found: Array = a_found.filter(func(n): return not a_what.to_lower().contains(String(n)))
+            if not a_sold_found.is_empty() or not a_mute_found.is_empty():
+                var a_ftip: String = "named in the buy ladder though it cannot be bought: %s" % str(a_sold_found) if not a_sold_found.is_empty() else "found-only armour `armoury`.what never mentions: %s" % str(a_mute_found)
+                push_error("COMMANDS_DATA ARMOURY FOUND: Gear.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
+                printerr("COMMANDS_DATA ARMOURY FOUND - found-only %s; %s" % [str(a_found), a_ftip])
         _cmds = parsed
     return _cmds
 

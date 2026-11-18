@@ -1018,6 +1018,111 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
     RAW NUMBER. NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP
     WRITING THEM.
 
+*** LOCK DISCIPLINE - I FOUND A DOUBLE CLAIM, AND THE PROTOCOL AS WRITTEN LET TWO
+*** COMPLIANT LANES COLLIDE. THE FAULT IS THE RULE'S, WHICH MAKES IT MINE. ***
+
+  THE FACT, off docs/RUN_LOCK.txt on `laptop`, lines 382-386:
+    RUNNING 23:51:10 (chat bot B41, declared finish 23:59, CROSSING DECLARED)
+    IDLE    23:55:40 (chat bot B41 released)
+    RUNNING 23:53:34 (HUD U65, declared finish 00:03)
+    IDLE    23:54:40 (HUD U65 released, Godot closed)
+  THE HUD CLAIMED AT 23:53:34 WHILE THE CHAT BOT'S CLAIM WAS LIVE. Two lanes held
+  the lock together for 1 min 6 s, and the HUD ran a WINDOWED GODOT inside it.
+  Nothing broke - every gate on both sides came back green - but the instrument
+  that exists to prevent exactly this did not hold, and a lock that can be held
+  twice is a lying instrument whether or not it cost anything this time.
+
+  NEITHER LANE BROKE A RULE, AND THAT IS THE POINT.
+    The chat bot's window is :45. It claimed inside it, crossed into :52-:07, and
+    DECLARED THE CROSSING ON THE LOCK LINE'S FACE - which the protocol calls
+    correct behaviour, and it is.
+    The HUD's window is :52-:07. It claimed inside it, CLAIM FIRST READ SECOND,
+    which is also what the protocol says.
+  SO THE HOLE IS IN THE RULE: the protocol tells a lane it may cross with a
+  declaration, and tells the next lane to claim first - and never tells the next
+  lane that a live claim is something it must yield to. Two lanes obeying their
+  own instructions produced a collision. That is a broken instrument, not a
+  broken lane, and no line of this goes against either worker.
+
+  THE FIX, IN FORCE FROM NOW, EVERY LANE:
+    BEFORE YOU WRITE YOUR CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS
+    A `RUNNING` LINE WHOSE DECLARED FINISH HAS NOT YET PASSED, YOU DO NOT CLAIM.
+    Wait for it, or stand down for the firing and SAY SO - a stand-down written up
+    is the delivery. A `RUNNING` line whose declared finish HAS passed by more than
+    ten minutes is stale: check for a live Godot process first (the process is
+    ground truth), then say in your line that you cleared it and why.
+    "CLAIM FIRST, READ SECOND" STILL STANDS AND IS UNCHANGED - it is about not
+    doing your work before you have written your claim. It was never a licence to
+    write a claim on top of somebody else's live one. This paragraph is the
+    sentence that was missing.
+    A LANE THAT CROSSES AND DECLARES IS STILL BEHAVING CORRECTLY. The declaration
+    is now worth something: the next lane honours it.
+
+  THE CLEAN-HOUR COUNT RESETS TO ZERO AT 2026-11-18 00:0x CT, on the double claim.
+  It last reset at 10:58 CT on 17 Nov. I am not folding this into a clean count and
+  I am not charging it to either lane: the rule let them do it.
+
+  EVERYTHING ELSE THIS HOUR WAS CLEAN. No stale lock was cleared. No lane was
+  starved. No future stamp in any lock line. HUD held 1 min 6 s against a 15-minute
+  cap; the chat bot held 4 min 30 s against its short protected window; the game
+  build held 5 min 47 s (S29) against 25. ART took no lock (its A/B is Blender-side,
+  not Godot), and the HUB and CONTENT never need one.
+  THE GAME BUILD'S DECLARED FINISH WENT OVER ITS CAP FOR THE FIFTH TIME (claim
+  23:08:40, declared 23:35, cap 23:33:40 - 1 min 20 s over on its face). The lane
+  found it and wrote it down itself. One line, in its row, not an incident.
+
+*** FOR THE NEXT TEAM LEAD: THE PROMPT WRITE IS NOT FIELD-SPECIFIC AND THE OLD
+*** DIAGNOSIS IN YOUR PROMPT IS WRONG. I CORRECTED IT BY MEASUREMENT. ***
+
+  THE 22:58 SEAT CONCLUDED "the refusal is FIELD-SPECIFIC to `prompt` and the
+  trigger is not locked", because a name-only write had landed in the same minute.
+  I TESTED THAT DIRECTLY AT 00:1x CT ON 18 NOV AND IT IS NOT TRUE ANY MORE.
+    Attempt 1 - full prompt replace on trig_01AiNVX4tT9xupV9p8b928fB: REFUSED.
+    Attempt 2 - NAME ONLY, nothing else: REFUSED IDENTICALLY.
+  The refusal text is not a classifier verdict and not something Mr. E can click
+  through from inside a run. It says, in substance: a scheduled task's RUN cannot
+  create, change or delete a scheduled task, because approval is only ever asked
+  for in a turn that answers a recent message from the user, and a scheduled
+  firing is not such a turn. NOTHING WAS CHANGED, on either attempt.
+  SO: ATTEMPT IT ANYWAY - the standing order is right and the belief that it is
+  impossible has cost this project nine hours before - BUT IF YOU GET THIS TEXT,
+  STOP AFTER ONE RETRY AND PUT THE CORRECTION HERE. The plan is what the lanes
+  obey, and it is the only instrument this seat can actually write from a firing.
+  A PROMPT CHANGE NOW NEEDS MR. E TO MAKE IT, OR TO ASK FOR IT IN A LIVE MESSAGE
+  IN THE CONVERSATION. That is a fact about the machine, not a decision of his,
+  so it does NOT go in NEEDS MR. E.
+
+  WHAT I WOULD HAVE WRITTEN INTO THE TEAM LEAD PROMPT, HELD HERE INSTEAD. Every
+  one of these is a MECHANICAL fault in that prompt, measured this hour:
+   1. THE DEAD-DATA BASELINE IS THREE REVISIONS STALE. It still reads 2,066,116
+      chars / 46 files / 109 keys / 19 zero-hit / 5 content notes from 10:58 CT on
+      17 Nov. THE LIVE NUMBERS ARE IN THIS BLOCK ABOVE: 2,125,447 chars, 47 files,
+      118 top-level keys, 28 zero-hit (2 _alt READ, 3 declared dead, 9 prose/spec,
+      14 `_note_`), unread live keys ZERO, unreferenced asset dirs ZERO.
+   2. IT STILL LISTS S2_TEST FAIL (b) AND T1_TEST's FakeRoster add_brew AS PAUSED
+      WORK OWED BY THE GAME BUILD. BOTH WERE GREEN AT D100 (laptop 74ad0af, ~03:18
+      CT 17 Nov). The lane corrected this seat at S29b. DO NOT RE-ISSUE THEM.
+   3. IT SAYS THE GAME BUILD HAS DECLARED OVER ITS 25-MINUTE CAP "three times
+      (09:08, 10:08, 11:08)". IT IS FIVE: add 22:09 and 23:08. The lane has caught
+      and written up the last two itself.
+   4. IT SAYS "STILL OPEN AS OF 11:45: NOBODY HAS LOOKED AT THE LIVE PAGE." THAT
+      IS CLOSED. The 22:58 seat opened the published page at a real emulated
+      viewport and reported what it serves. Do not re-raise it as open.
+   5. THE ID LIST IS STALE. It reads C-88, D99, H32, L74, S17, T5, U54. AS OF
+      18 NOV 00:1x CT IT IS: B41, C-101, D100, H32, L74, S29, T5, U65.
+   6. IT SAYS ART HAS EIGHTEEN MINIBOSSES. IT IS TWENTY.
+   7. THE LOCK PROTOCOL IS MISSING THE YIELD RULE. It is written out in full in
+      the LOCK DISCIPLINE block above. Put it in every lane prompt when a live
+      turn makes that possible - until then, this plan is where it lives and the
+      lanes read this.
+   8. IT DOES NOT MENTION THAT THIS SEAT HAS CHROMIUM AND PLAYWRIGHT IN ITS OWN
+      CONTAINER. Stage web/index.html, app.js and style.css and render the hub
+      yourself; it is how the section-bar tick was earned this hour, and it is the
+      difference between checking a layout claim and repeating it.
+   9. IT DOES NOT WARN ABOUT THE MIDNIGHT ROLLOVER. The :58 firing routinely
+      finishes after 00:00, so the run is "the 23:58 CT firing" while the clock
+      reads the next day. Both true. Write both.
+
 *** THE SIX ROWS. ONE ITEM EACH. ***
 
   GAME BUILD (:07) - THE L31 REMAINDER: THE STATUS-EFFECT ICONS. You asked for it

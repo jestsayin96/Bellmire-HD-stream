@@ -9544,3 +9544,389 @@ def paviser():
 
 
 BUILDERS.update({"paviser": paviser})
+
+
+# =====================================================================
+# 30. THE FENMAN - IT TAKES WHAT STIRS. fogbound, the second one.
+#
+# WEAR 0.92, AND IT IS A COMPOSITE, NOT A MOOD. I measured the ladder off
+# CANON this run rather than remembering it: every 0.05 step from 0.05 to 1.00
+# is occupied, so this takes a gap between steps the way the Drover took 0.74,
+# the Ratcatcher 0.68 and the Paviser 0.78. The parts, each justified:
+#   the hood and waders  wet to the thigh every working hour of their life,
+#                        and leather that never dries rots.          1.00
+#   the lines            fouled with weed, replaced when they part.  0.85
+#   the quant pole       cut fresh; a pole that snaps drowns you.    0.30
+#   the lead weights     lead does not rot. Dulled, not ruined.      0.40
+# 0.92 is taken well toward the hood and the waders because they are the dark
+# mass and about half the silhouette. 0.90 (snuffer) and 0.95 (sluicekeeper)
+# are taken; 0.92 is free and nothing shares it.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"fenman"}
+
+OVERRIDE.update({
+    "fenman": {
+        # THE MAN IS DARK AND HIS INSTRUMENT IS PALE - the Moulder's measured
+        # contrast rule, applied for the fifth body running. Here the torso is
+        # the LIGHTER dark and the hood, waders and lines are the darker, so
+        # the body has internal structure instead of being one blob - which is
+        # the Paviser's fault 2 and the Drover's fault 3, both of which were
+        # "the man is a flat dark mass". I am trying to not pay for that again.
+        'body': ((0.126, 0.132, 0.122), 0.88, 0.04),
+        # THE POLE AND THE SPARE WITHIES. Fresh-cut ash, the one young thing on
+        # the body, and the only pale object - so the eye lands on the
+        # instrument, not the man. Warm, because it must not read as bone.
+        'bone': ((0.742, 0.700, 0.572), 0.74, 0.00),
+        # THE HOOD, THE WADERS, THE OUTRIGGER AND THE FIVE LINES. Wet leather
+        # and tarred cord. Nearly black: the lines must read as the thinnest
+        # thing in the picture and a mid-grey line dissolves at pane distance.
+        'dark': ((0.030, 0.032, 0.029), 0.72, 0.05),
+        # *** THE ONE DELIBERATE BREAK WITH THE REGISTER, AND I AM NAMING IT
+        # *** SO THE PICTURE CAN JUDGE IT INSTEAD OF MY TASTE. ***
+        # Every man in this file has two glow eye pinpoints, because
+        # creatures.eyes() defaults to slot='glow'. THIS ONE HAS NO EYES AT
+        # ALL - the hood is drawn over and the face is a void - and the glow
+        # has moved to THE FIVE WEIGHTS ON THE LINES. That is not decoration:
+        # the creature does not look for you, it listens for you, so the lit
+        # things on the body are its senses and they are hanging in the air
+        # beside it where a viewer can count them.
+        # THE RISK IS REAL AND IT IS THE PASS-11 FAULT IN A NEW COAT: a head
+        # with no face read as broken once already. The difference I am
+        # claiming is that a HOOD is a thing, where a bare blank head is an
+        # absence. The render decides, not this comment.
+        'glow': ((0.72, 0.84, 1.00), 2.6),
+    },
+})
+
+CANON.update({
+    "fenman": ("The Fenman", 2.52, (0.30, 0.33, 0.30), (0.72, 0.84, 1.00),
+               "fogbound",
+               "IT TAKES WHAT STIRS - it is hooded blind and it hunts by "
+               "disturbance, so it comes for whoever moved last: swing, step, "
+               "drink, and you are the one it wants. A hero who stands "
+               "perfectly still is not there as far as it is concerned - and a "
+               "hero who stands perfectly still is also doing nothing. So the "
+               "party cannot all fight and cannot all hide; somebody has to "
+               "stir, and the fight is the argument about who and when",
+               0.92, "Something out there is listening."),
+})
+ORDER = ORDER + ["fenman"]
+
+
+def fenman():
+    """IT TAKES WHAT STIRS. A stooped hooded man in thigh waders on flat
+    pattens, one hand on a planted quant pole, the other open and waiting, and
+    a slender outrigger off his far hip carrying FIVE slack lines, each ending
+    in a lit lead weight.
+
+    THE IDEA, AND WHY IT IS NOT A 30TH COAT OF ONE OF THE TWENTY-NINE.
+    I parsed the ideas out of CANON this run rather than recalling them - 43
+    entries, 29 distinct bodies. The classes present are: summon, self-armour,
+    drag a hero out, douse the lamps, will-not-stay-down, bar the door, steal
+    gear, heal the pack, raise the water, plant the ground, pre-set the room,
+    scale with the fire, ring from elsewhere, pour-and-set, come apart in two,
+    arm the room, weigh you down, cut the room in two, adapt to the damage
+    type, take the haul, drink the brews, use your fallen, strike you level,
+    mark one of you, green your iron, take your shape, be paid by the tail,
+    yoke one of you, keep its face to you.
+    NOT ONE OF THEM IS TRIGGERED BY THE PARTY'S OWN ACTING. Every one of the
+    twenty-nine is answered by deciding WHAT to do, WHERE to stand, or WHAT to
+    spend. This one is answered by deciding WHETHER TO ACT AT ALL this beat,
+    and by whom. That is a mechanic class the set does not have.
+
+    IT IS NOT THE DYER AND IT IS NOT THE BELLMAN, and neither difference is a
+    quibble:
+      - the DYER marks one of you and hunts the mark. THE CREATURE CHOOSES, and
+        once it has chosen the party can only react. Here the PARTY chooses the
+        target, every beat, by moving - and it can hand the target to somebody
+        else on purpose. The decision has changed hands.
+      - the BELLMAN mislocates the SOUND - it lies to your ears about where IT
+        is. This one is honest and blind: it tells you nothing and it reads
+        where YOU are. One deceives your senses; one reads yours.
+      - the GAOLER and the DROVER both TAKE a hero (hook, yoke). Nothing is
+        taken here. The party keeps every hero and loses the freedom to all
+        swing at once.
+
+    WHY FOGBOUND, MEASURED OFF CANON AND OFF THE GAME, NOT REMEMBERED.
+    Bodies per theme from this run's parse: barracks 5, workshop 4, keep 4,
+    firepit 4, prison 3, crypt 3, treasury 3, mess 3, flooded 3, grassland 3,
+    wood 3, shrine 2, confection 2 - and FOGBOUND 1. It is the thinnest theme
+    in the register by a clear margin and has carried exactly one body (the
+    Bellman) since the first fourteen. `dungeon_hd.gd` rolls the miniboss slot
+    at 15 on every unlisted theme, fogbound among them, so that slot fires with
+    one candidate and no choice at all.
+    AND THE BELLMAN IS THE WRONG SHAPE TO SHARE A THEME WITH ANYTHING: it is a
+    PALE SHROUD CONE reaching the floor (minibosses.py:1078), cool grey-blue,
+    wear 0.65. A dark stooped man with one pale instrument and five cold lights
+    cannot be mistaken for it in any view, which is exactly the test a second
+    body on a theme has to pass.
+
+    SILHOUETTE INTENT - THREE ZONES ACROSS X, AND THE COUNT IS IN CLEAR AIR:
+      - FAR LEFT, A PALE POLE, PLANTED AND STEEP. Nothing else in the register
+        is a lone pale near-vertical standing clear of the body: the Snuffer's
+        vertical is a lamp-stand CARRYING LAMPS, the Hurdleman's is a lattice
+        PANEL, the Paviser's is a solid slab, the Drover's bar is HORIZONTAL.
+        This one is bare at the top and shod at the floor, which is also what
+        tells the eye where the floor is in a render that has no floor in it.
+      - CENTRE, A DARK HOODED MASS with the torso a lighter dark than the hood
+        and the waders, so the man has internal structure. He is built at CHIBI
+        proportion, not human - head ~28% of his own height, thick limbs, short
+        shins - because the Ratcatcher shipped a real human at pass 2 and read
+        as a stick figure beside a KayKit hero, and only the fit render caught
+        it. I am not paying for that twice either.
+      - FAR RIGHT, A DIAGONAL OF FIVE LIT WEIGHTS. Five is countable from a
+        doorway and the count IS the creature: five lines listening to the
+        room. THEY HANG IN CLEAR AIR, outboard of the torso in x, which is the
+        Drover's pass-4 lesson taken as read.
+
+    AND THE SIDE VIEW, WHICH HAS KILLED THREE BODIES IN THIS FILE, IS ANSWERED
+    BY CONSTRUCTION RATHER THAN BY HOPE. A ring of weights would have been the
+    obvious build and it is the wrong one: in a side camera the front and back
+    of a ring project onto each other and five becomes three. So the five hang
+    from a DIAGONAL OUTRIGGER at FIVE DIFFERENT HEIGHTS (0.34, 0.46, 0.76,
+    1.02, 1.16 authored, deliberately not a ramp), which means the side camera
+    - which throws x away - still reads FIVE SEPARATE DOTS stacked in z. The
+    count survives the loss of a whole axis. That is the one thing I designed
+    before I built anything.
+
+    Front is -Y, the same as the twenty-nine before it."""
+    P = Parts("fenman")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # the pole: foot forward-left on the floor, head up and slightly back.
+    PA = (-0.86, -0.20, 0.03)
+    PB = (-0.46, 0.08, 1.92)
+    # the outrigger off his far hip, up and out
+    OA = (0.26, 0.02, 0.92)
+    OB = (0.95, -0.10, 1.70)
+    # *** PASS 2. THE INSTRUMENT I DESIGNED AGAINST THE SIDE VIEW DID NOT
+    # *** SURVIVE THE SIDE VIEW, AND THE PICTURE IS WHAT TOLD ME. ***
+    # Pass 1's hangs were (0.70, 0.42, 0.86, 0.30, 0.58) - deliberately not a
+    # ramp, on the theory that a scattered set of heights is harder to confuse
+    # than an ordered one. side.png says otherwise: that scatter put two pairs
+    # of weights 0.12 and 0.14 apart in z against a weight that is 0.148 tall,
+    # so the bottom two FUSED INTO A FIGURE-8 and the top two touched. I count
+    # four blobs in that render, not five, and the count IS the creature.
+    # THE FIX IS THE OPPOSITE OF MY FIRST INSTINCT and I am writing that down:
+    # an EVEN RAMP at 0.26 of z per step. Ordered is not the risk; CLOSE is the
+    # risk. Every pair is now 0.26 apart against a 0.132-tall weight, so there
+    # is 0.128 of clear background between any two of them in a camera that
+    # throws x away entirely. The front view loses nothing - it reads five on a
+    # diagonal either way.
+    # These hangs are DERIVED from the anchor heights rather than typed, so the
+    # five target heights 0.34/0.60/0.86/1.12/1.38 are what the file states and
+    # a later edit to the outrigger cannot silently bunch them again.
+    TS = (0.15, 0.33, 0.51, 0.69, 0.87)
+    WZ = (0.34, 0.60, 0.86, 1.12, 1.38)
+
+    def _lerp(a, b, t):
+        return tuple(a[i] + (b[i] - a[i]) * t for i in range(3))
+
+    # ------------------------------------------------- THE PATTENS AND LEGS
+    # A fenman walks on boards so he does not go through. A WIDE FLAT BASE is
+    # also the cheapest way to make a stooped figure read as PLANTED rather
+    # than as falling over, which is what the whole set is built to do.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        # *** PASS 3: THEY WERE ONE SLAB AND IT READ AS A PLINTH. *** At 0.46
+        # across on centres 0.40 apart the two boards met in the middle, so
+        # front.png shows a single rectangle under the creature - a museum base
+        # under a statue, which is the one thing a set piece must not look
+        # like. Narrower boards, further apart, with 0.14 of daylight between
+        # them: two things a man is standing on, which is what a patten is.
+        P.add(L.box(0.40, 0.60, 0.068), 'dark', loc=(MX + 0.27 * s, -0.10, 0.034))
+        # the waders: thigh-high wet leather, so the legs are DARK and the
+        # torso is not. The join is the one place this body has a waistline.
+        limb(P, [(MX + 0.190 * s, 0.03, 0.08),
+                 (MX + 0.205 * s, -0.02, 0.34),
+                 (MX + 0.170 * s, -0.07, 0.64)], 0.152, 0.124, 'dark')
+    _span("base", i0)
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    P.add(L.box(0.56, 0.38, 0.14), 'dark', loc=(MX, -0.06, 0.655))
+    # the stoop: a man reading the floor through a pole leans over it. 0.12
+    # forward over 0.46 of rise, and the shoulders stay square.
+    limb(P, [(MX, -0.06, 0.64), (MX - 0.01, -0.12, 0.88),
+             (MX - 0.02, -0.18, 1.10)], 0.338, 0.288, 'body')
+    # *** PASS 5: THE TOP OF THE BODY WAS A PLANK. *** 0.74 across by 0.18
+    # tall at the exact height of a dead-horizontal arm made shoulders, arm and
+    # mantle read as ONE BAR with a cone standing on it - the same silhouette
+    # fault pass 4 half-fixed, with the plate removed and the shoulders still
+    # doing its job. Narrower than the hood's base (0.63) so the hood reads as
+    # the widest thing up there, and lower, so the arms leave from under it.
+    P.add(L.box(0.60, 0.30, 0.145), 'body', loc=(MX - 0.02, -0.18, 1.105))
+    # *** PASS 3. THE HEAD WAS THE WORST THING IN THE FRONT VIEW AND IT WAS
+    # *** NOT A HOOD. *** Pass 1 and 2 built it as a SPHERE inside a bigger
+    # SPHERE with a flat brim box across the face and a third sphere for a
+    # cape. front.png is unambiguous: three stacked domes, a horizontal dark
+    # bar where a face should be, and the whole thing reading as a bell or a
+    # lampshade. A dome is the most occupied head shape in this register and I
+    # had built a fourth one by reflex.
+    # A HOOD IS NOT A DOME. It is a CONE that falls BACKWARD off the crown and
+    # an OPENING at the front, and those two shapes are what a viewer reads.
+    # So: a cone leaning back (apex up and +y, which is behind), and the face
+    # a sunk near-black void in the lighter cowl rather than a bar across it.
+    # THE CONTRAST IS LOAD-BEARING AND IT IS ALSO THE FIX FOR "THE MAN IS A
+    # FLAT DARK MASS", which is the fault the Paviser and the Drover both
+    # shipped. The cowl is 'body' (the LIGHTER dark) and the opening is 'dark'
+    # (near-black), so the head now has two values in it instead of one.
+    # *** PASS 4, AND IT IS PASS 3'S FIX HALF-DONE RATHER THAN A NEW FAULT. ***
+    # The cone was right and I built it too SMALL, and then put a 0.70-wide
+    # flat mantle plate under it at the same height as the arms. front.png
+    # after pass 3: the upper body is a HORIZONTAL BAR - plate, shoulders and
+    # near arm all one mass - with a little cone sitting on it like a hat on a
+    # shelf, and the face void nowhere to be seen because the plate ate it.
+    # I traded one bad read (a stack of domes) for another (a hat on a table).
+    # THE CONE HAS TO BE THE HEAD *AND* THE SHOULDERS, which is what a drawn-up
+    # hood actually is. So it starts at the shoulder line and runs to 1.62, it
+    # is 0.63 across at the base - wider than the shoulders box, so it covers
+    # them rather than sitting on them - and the mantle plate is gone entirely.
+    # The small inner head sphere went with it: inside a closed cone it was
+    # geometry nobody could ever see, which is the opposite of the lesson I was
+    # given at pass 11 and is worth saying plainly - a thing that cannot be
+    # seen is not a thing, whichever direction the mistake runs.
+    P.raw(aim(L.cone(0.315, 0.030, 0.62, 13),
+              (MX - 0.03, -0.09, 1.00), (0.0, 0.42, 1.0)), 'body')
+    # THE FACE: a void, not a feature, and its position is DERIVED rather than
+    # guessed. The cone's axis leans back at atan(0.42) = 22.8 deg, so at
+    # z 1.30 it has run 0.325 along its own axis: radius there is
+    # 0.315 + (0.030 - 0.315) * 0.325 / 0.62 = 0.166, and the axis has moved
+    # back to y 0.036. The cowl's front surface at that height is therefore
+    # y = -0.130, and the void is centred just in front of it so it reads as a
+    # dark opening in the cowl and not as a snout hanging off it.
+    # NO eyes() call on this body - see the palette note above; the glow is on
+    # the lines, which is the whole idea.
+    # *** PASS 6 WAS A FIX THAT MADE THINGS WORSE AND IT IS REVERTED, NOT
+    # *** SHIPPED. I am writing it down instead of deleting it so the next run
+    # *** does not spend a pass rediscovering it. ***
+    # THE COMPLAINT WAS REAL: on hero_front.png at pass 5 the face had gone and
+    # the head was a plain grey cone, which is the 17 Nov pass-11 fault in a
+    # new coat. MY FIX WAS WRONG IN THE WAY FIXES USUALLY ARE - it treated the
+    # symptom's size. I widened the void from 0.152 to 0.225 against a cowl
+    # only 0.33 across at that height and added a brow ridge over it. The
+    # render: the void swallowed the whole front of the cone, the head became a
+    # dark BLOCK with two small horns where the brow tube ended, and THE
+    # POINTED HOOD - the one thing pass 4 bought and the only reason this head
+    # is not a fourth dome - was gone. Worse than what it replaced.
+    # WHAT I ACTUALLY LEARNED, AND IT IS NOT A GEOMETRY FINDING: a near-black
+    # void on a dark-grey cowl has almost no VALUE contrast, so at pane
+    # distance it does not darken anything - it just removes shape. Making it
+    # bigger removes more shape. The answer is a palette answer (the cowl has
+    # to be LIGHTER so the opening has something to be dark against) and I am
+    # not taking it in the same pass I found it. IT IS CARRIED AS A LIVE FAULT
+    # in docs/art/MINIBOSSES.md, not as a done job.
+    P.add(L.sphere(0.152, 0.100, 0.168, 11, 8), 'dark',
+          loc=(MX - 0.03, -0.138, 1.300))
+    _span("man", i0)
+
+    # ---------------------------------------------------------- THE ARMS
+    # BOTH ARMS RUN ACROSS THE PICTURE PLANE - the Tanner's pass-3 finding.
+    # NEAR arm out to the pole; FAR arm raised and OPEN, which is the pose the
+    # mechanic asks for: he is not reaching for you, he is waiting for you to
+    # move. The open hand is also the only part of him above the shoulder line.
+    i0 = len(P.items)
+    # *** PASS 5: THE NEAR ARM WAS DEAD HORIZONTAL and it was half of the
+    # plank. It now DROPS to the pole instead of reaching across to it, which
+    # is also the truer gesture - a man leans his weight down a planted pole,
+    # he does not hold it out at shoulder height. The grip height is DERIVED
+    # off the pole's own line, not typed: at z 0.848 the pole is 43% of the way
+    # from PA to PB, so the hand sits at x -0.688, y -0.079.
+    limb(P, [(MX - 0.31, -0.19, 1.05), (MX - 0.52, -0.15, 0.96),
+             (MX - 0.665, -0.085, 0.862)], 0.122, 0.094, 'body')
+    P.add(L.sphere(0.098, 0.090, 0.092, 10, 7), 'dark',
+          loc=(MX - 0.688, -0.079, 0.848))
+    limb(P, [(MX + 0.33, -0.19, 1.09), (MX + 0.46, -0.21, 1.30),
+             (MX + 0.50, -0.26, 1.48)], 0.122, 0.092, 'body')
+    P.add(L.sphere(0.100, 0.094, 0.086, 10, 7), 'dark',
+          loc=(MX + 0.505, -0.275, 1.525))
+    _span("arms", i0)
+
+    # ------------------------------------------------------- THE QUANT POLE
+    # 'bone' - the one pale object and the one young thing on the body.
+    i0 = len(P.items)
+    P.raw(L.tube([Vector(PA), Vector(_lerp(PA, PB, 0.5)), Vector(PB)],
+                 [0.042, 0.036, 0.030], 8), 'bone')
+    # the iron shoe. A quant pole has one or the mud eats it.
+    P.add(L.cone(0.072, 0.040, 0.11, 8), 'dark', loc=(PA[0], PA[1], 0.052))
+    # two cord whippings up the shaft - plainness: a working pole is bound
+    # where it is gripped, and they also break up a long pale line.
+    for t in (0.44, 0.58):
+        c = _lerp(PA, PB, t)
+        P.add(L.sphere(0.050, 0.050, 0.030, 9, 6), 'dark', loc=c)
+    _span("pole", i0)
+
+    # ------------------------------------- THE SPARE WITHIES ACROSS HIS BACK
+    # The Paviser's fault 1 was a DEAD BLANK BACK and it shipped that way. The
+    # back view needs a pale object once the front's instrument is hidden, and
+    # it must not be a slab (that is the Paviser) or a coil (that is the
+    # Drover). Five thin pale rods strapped on a slant is neither, and a man
+    # who sets lines in a fen carries spare withies because they snap.
+    i0 = len(P.items)
+    # *** PASS 2: THEY WERE SPIKING THROUGH HIS SHOULDERS. *** front.png shows
+    # pass 1's bundle as five grey sticks jabbing out HORIZONTALLY on both
+    # sides at shoulder height - they read as broken arrows through the man,
+    # which is a different creature and a worse one. Two numbers were wrong:
+    # they spanned x -0.52..0.48 against a torso only +/-0.37 across, so they
+    # could not help but show in front; and they sat at y 0.10..0.17 when the
+    # torso's own back face is already near y +0.11, so they grazed him rather
+    # than lying behind him. Now x -0.27..0.26 (INSIDE his own outline, so the
+    # front view cannot see them at all, which is the correct answer for a
+    # thing on a man's back) and y 0.16..0.21, clear behind. Steeper too: a
+    # bundle is strapped up the spine, not slung across it.
+    for i in range(5):
+        o = -0.17 + 0.085 * i
+        # *** PASS 5b: THE TIPS WERE STILL SHOWING OVER HIS SHOULDER. *** Pass
+        # 2 took them out of the front view's MIDDLE and left them crossing its
+        # TOP: at z 1.42 they stand clear of the hood cone, which at that
+        # height is only ~0.12 across, so three pale stubs appeared beside his
+        # head in every front render from pass 2 to pass 5. Topped out at 1.26,
+        # under the hood's widest part, they are a thing on his back again.
+        P.raw(L.tube([Vector((MX + o - 0.09, 0.16, 0.76)),
+                      Vector((MX + o + 0.08, 0.21, 1.26))],
+                     [0.020, 0.016], 6), 'bone')
+    P.add(L.box(0.44, 0.09, 0.050), 'dark', loc=(MX - 0.02, 0.185, 1.02))
+    _span("withies", i0)
+
+    # ------------------------------------------- THE TELL-LINES: FIVE OF FIVE
+    # The mechanic, drawn, and the only countable thing on the body. The
+    # outrigger is DARK and thin so the five lit weights are what the eye gets;
+    # a pale arm here would have competed with the pole for the one pale read.
+    i0 = len(P.items)
+    # *** PASS 5: IT READ AS A STAIR BANISTER. *** A dead-straight arm with
+    # five evenly spaced things hanging off it at even spacing is, in a
+    # picture, a handrail - and pass 2 made the spacing even on purpose to save
+    # the count, so the count fix and the banister read came in together. The
+    # count stays; the STRAIGHTNESS goes. The arm now SAGS 0.09 at its middle,
+    # which is what a laden rod does and what no handrail does, and the lines
+    # are given three different thicknesses so the set reads as cord rather
+    # than as balusters.
+    P.raw(L.tube([Vector(OA),
+                  Vector((_lerp(OA, OB, 0.55)[0], _lerp(OA, OB, 0.55)[1],
+                          _lerp(OA, OB, 0.55)[2] - 0.090)),
+                  Vector(OB)],
+                 [0.036, 0.028, 0.022], 7), 'dark')
+    # the strap that ties it to his hip, so the arm is not growing out of him
+    P.raw(L.tube([Vector((MX + 0.14, 0.00, 1.00)),
+                  Vector((MX + 0.27, 0.02, 0.94))], [0.026, 0.022], 6), 'dark')
+    for t, wz in zip(TS, WZ):
+        c = _lerp(OA, OB, t)
+        # follow the sag, so a line does not start in mid-air off the arm
+        c = (c[0], c[1], c[2] - 0.090 * (1.0 - (2.0 * t - 1.0) ** 2))
+        # the weight's CENTRE is the stated height; the line stops at its top.
+        bot = (c[0], c[1], wz + 0.066)
+        assert bot[2] < c[2] - 0.08, "fenman: tell line %.2f has no slack" % t
+        r = (0.015, 0.011, 0.014, 0.010, 0.013)[TS.index(t)]
+        P.raw(L.tube([Vector(c), Vector(bot)], [r, r * 0.85], 5), 'dark')
+        # the lead weight: a plumb bob, taller than wide, so it reads as HUNG
+        P.add(L.sphere(0.052, 0.052, 0.066, 10, 7), 'glow',
+              loc=(bot[0], bot[1], wz))
+    _span("tells", i0)
+
+    return P
+
+
+BUILDERS.update({"fenman": fenman})

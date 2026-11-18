@@ -1,3 +1,107 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 10:5x CT (team lead, the 10:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 09:5x BLOCK. The file reads
+reverse chronological: the most recently WRITTEN block is the current one.
+I RAN THE 09:5x BLOCK'S OWN GUARD BEFORE WRITING THE HUD ROW: `grep -c "SYSTEM 2 IS CLOSED WHOLE"
+docs/WORK_PLAN.md` returns 5. SYSTEM 2 IS CLOSED WHOLE AND THERE IS NO SYSTEM 2 ROW BELOW. The :58
+prompt still calls it "the most valuable open item in the house"; THE PROMPT IS WRONG AND THE PLAN
+OUTRANKS IT. A firing cannot edit the prompt, so the correction stays here. HUD: you were right
+three times and you are not being sent back.
+WHAT I TICKED THIS HOUR, ALL SIX, EACH ON MY OWN MEASUREMENT: S35 (game build), C-113 (content),
+the Beadle knob pass 13 (art), the hero-sigil badge fix (hub), U76 (HUD), B52 (chat bot).
+WHAT I DID NOT TICK: nothing was withheld this hour.
+
+1. GAME BUILD - GIVE THE BEADLE A WAY. S34 ships each miniboss's ONE IDEA delve-side, and content
+   landed the Beadle's `act` and `broken` lines at 10:23 (C-113). I COUNTED THEM MYSELF on merged
+   main: miniboss_feed.by_key.beadle carries arrive 9, act 7, broken 4, fall 8, and by_key is 33
+   keys. CONTENT'S OWN NOTE NAMES THE REMAINING GATE AND IT IS YOURS: "S34 reads act and broken
+   only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build
+   adds a beadle way." Art's idea for it, in art's words: IT CALLS THE ORDER - while it stands the
+   party does not choose who acts; it calls the same hero again and again while the rest hold.
+   SECOND, AND IT IS FREE: your S35 line says "beadle 0/400 until content writes lines". Content
+   wrote them SIX MINUTES AFTER you measured that. Re-run S33_DRAW and say what the beadle draws
+   now - the 0/400 in your own PROGRESS entry is already stale through no fault of yours.
+
+2. HUD - U76 IS TICKED AND I READ THE CODE, NOT THE SUMMARY: the end-finder at
+   tools/_u71_rarity_guard.gd:17-44 walks BRACE DEPTH and skips strings, and the three red proofs
+   at :246-264 are real (nested brace must not truncate; unterminated block must read as empty).
+   YOUR ROW IS THE OTHER HALF OF YOUR OWN FIX, AND IT IS THE PART THAT ACTUALLY MATTERS:
+   RE-RUN U71/U74b WITH THE HARDENED PARSER AND SAY WHETHER ANY PREVIOUSLY-GREEN VERDICT CHANGES.
+   You diagnosed the old parser as able to go quietly GREEN on a table it only half read. If that
+   ever happened, some past green was a lying instrument and we need to know which. If every
+   verdict is unchanged, SAY SO IN ONE LINE and that closes it - a null result measured is a
+   delivery. This is auditing your own shipped work, which the freeze explicitly allows.
+
+3. ART - PASS 13 IS TICKED AND IT ANSWERED MY QUESTION PROPERLY. I asked last hour whether the side
+   worst_local_gap not moving was the instrument or the knob; you said the instrument, three ways,
+   and I RE-DID THE ARITHMETIC OFF _knobgap.json RATHER THAN OFF YOUR MESSAGE: side base signed_gap
+   0.0255 -> knob -0.3112 (delta -0.3367, matches); indistinguishable 431/505 = 0.8535 -> 33/505 =
+   0.0653 (delta -0.7882, matches); collateral 886+112+213 = 1211 = collateral_px, 1211/2801 =
+   0.4323, matches. Splitting the 50-px-away robe patch out as collateral instead of averaging it
+   in is the right call and only looking found it.
+   ONE SMALL THING, NOT A CHARGE: your five side components sum to 2,795 px against moved_px 2,801
+   - six pixels land in no component. Almost certainly a size floor. Say which, in one line.
+   YOUR ROW IS THE RESIDUAL YOUR OWN INSTRUMENT NOW NAMES: THE SIDE BULB HAS NO EDGE. 2,414 px at
+   lum 0.6712 against ground 0.6122, gap +0.059, 100% of its ground within 0.10 of it. The knob
+   reads by its two dark bands and the pale bulb between them reads as nothing. No A/B instrument
+   was looking at it until this pass. A 34th miniboss remains the standing alternative - minibosses
+   are the one thing a dry lane may invent - but the bulb is a defect in a body you have shipped.
+   Say which you took.
+   ADDED 11:07 CT, AFTER I LOOKED AT both_side.png MYSELF - this reaches you at :34, it is not a
+   row I am claiming was owed at :58. YOUR MEASUREMENT IS HONEST AND I WOULD STILL RANK THE BULB
+   BELOW A 34TH BODY. The ground left of the bulb really is as pale as the bulb; your 100%
+   indistinguishable is correct. But the knob is LEGIBLE anyway, because the two dark bands above
+   and below it ARE its silhouette - which is exactly what your own write-up says. So this is a
+   real residual, not an urgent one. I am not choosing for you; I am telling you what the eye
+   says so the choice is made on more than the number.
+
+4. CONTENT - C-113 IS TICKED AND I COUNTED IT, NOT READ IT: act 7, broken 4, five act lines carry
+   {name}, by_key still 33 keys. The house shape, on the hour the game build needed it. Your note
+   naming the remaining MB_WAYS gate as the game build's is exactly the half-delivery discipline
+   this house runs on, and I put it in their row verbatim.
+   THE BEADLE IS NOW COMPLETE FROM YOUR SIDE - arrive, act, broken, fall. YOUR NEXT IS YOUR CALL:
+   you are the one lane that is never throttled and nothing you write is wasted. If art ships a
+   34th body this hour, its arrive/fall is the obvious row. Keep writing `_note_` keys; all of
+   them are accounted for in the audit and NO LANE IS TO WIRE ONE.
+
+5. HUB - THE HERO-SIGIL BADGE FIX IS TICKED AND I RED-PROVED IT MYSELF RATHER THAN TAKING YOUR
+   SCREENSHOT. I rendered web/ in my own container at 1280x1400 with the snapshot stubbed empty
+   and ?mock=crowd: 60 sigils render, 60 of 60 carry two initials, and the initials-box against
+   badge-box overlap is 0 px^2 on all 60. I then stripped YOUR THREE CSS LINES out of a copy and
+   re-rendered: 60 of 60 overlap, 64.7-72.7 px^2. The fault and the fix both reproduce.
+   SAY PLAINLY THAT MY NUMBERS ARE NOT YOURS: a file:// render has no snapshot data, so my crowd
+   is not your crowd and my 64.7-72.7 is not your measured 49-107. Same fault, different sample.
+   I DO NOT ADOPT YOUR COUNTS AS IF I HAD MEASURED THEM.
+   YOUR ROW: RUN THAT SAME OVERLAP METHOD ACROSS THE REST OF THE HERO SHEET AT PHONE WIDTH. The
+   method just found a real fault at desktop width; the hero sheet has tier pips, class chips, the
+   AC/HP pair and the rank line sharing tight rows, and nobody has measured any of them below
+   ~900px. Report boxes that overlap or clip, with the px^2, and fix what you find in style.css.
+   ONE HOUSEKEEPING LINE, NOT A FAULT IN THE WORK: commit 523d4d6 is authored "Claude Art Lane".
+   The hub worktree's git author is set to the art lane's. Set it to the hub's when convenient.
+
+6. CHAT BOT - B52 IS TICKED. You ran the owed battery FIRST as the 09:5x row asked, before any new
+   arm, and the three arms are red-proved in the ENGINE rather than in your python emulation -
+   ANCHOR, GHOST and SOURCE each naming exactly one fault, baseline guard_faults() 0 both sides,
+   data/commands.json handed back byte-identical. Your own line - "B51's python emulation predicted
+   this baseline and warned the gate would win if they disagreed; they agreed, and the engine is
+   still why we know it" - is the right relationship between a model and an instrument.
+   YOUR LOCK LINE WAS THE CLEANEST OF THE DAY: claimed 10:48:01, declared 10:51, released 10:49:10,
+   and you said in the claim itself that you would not cross into the HUD's :52. Under Mr. E's new
+   yield rule that early IDLE freed the window at once, and the HUD claimed at 10:54. That is the
+   new rule working on its first full hour.
+   YOUR NEXT ARM IS YOUR CALL, under the usual discipline: no new arm until its battery is green,
+   and hold it back as a CHECKPOINT rather than letting it be mistaken for a proven arm.
+
+FOR THE SUPERVISOR
+  THE HUB PUBLISH DELTA GREW THIS HOUR AND I RECOMMEND PUBLISHING. gh-pages is 45a7904 (pushed
+  18 Nov 03:34:37 CT); origin/gh-pages^{tree} is 2d14aa9 and origin/hub:web is f40a933 - I
+  re-measured both myself this hour rather than copying last hour's SHAs. The delta is 2 files:
+  web/app.js -14 lines and web/style.css +25/-10, which is the "Sells up to" tier-underline fix
+  (already with you) PLUS the hero-sigil badge fix I red-proved above. Both are layout-only;
+  app.js is untouched by this hour's commit. I HAVE NOT RUN THE PUBLISH GATE: the hub lane did not
+  claim "ready to publish" this hour, so that gate is not owed and I did not run it. If you
+  authorise, I will run the full publish verification first and push by the subtree-plumbing
+  method, not before.
+
 ## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 09:5x CT (the 09:58 firing)
 
 1. *** THE BIGGEST THING IN THIS FILE: SYSTEM 2 IS CLOSED WHOLE, AND THIS PLAN HAS NOW RE-OPENED

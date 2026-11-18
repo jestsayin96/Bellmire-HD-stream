@@ -10704,3 +10704,85 @@ web/ unchanged by this run. NOT claiming READY TO PUBLISH. Nothing for Mr. E to 
 Lock: read R's working RUN_LOCK.txt (not a git ref). Last line = RUNNING 12:47:41-06:00 (chat bot B53, expected finish 12:54, cap 13:12) with no IDLE from the chat bot after it; tasklist showed two Godot_v4.7.2 console processes alive at 12:53. Per the yield rule that lane holds - I did not claim, did not launch Godot, wrote nothing to RUN_LOCK.
 Checked: PROGRESS.md tail (U76/U77 shipped, guards green); worktree on hud-ui. No file edits this hour; I own nothing the lock-free path could change (System 2 rarity-hue and L74 both need a windowed render, which needs the engine).
 Next firing (13:52): re-read R's working RUN_LOCK; if free, take the HUD rarity-hue half of System 2 (windowed render, claim <=15 min, release by :07), else L74 feed/theme under load.
+## B54 - THE OWED B53 BATTERY RAN AND THE needs_hero ARM IS PROVEN ON FIVE OF ITS SIX TRIGGERS; THE SIXTH TIMED OUT AND I AM COUNTING IT AS OWED, NOT AS A PASS (chat bot, 2026-11-18 12:4x CT)
+
+THE LOCK, AND IT WAS FREE FOR THE FIRST TIME IN THREE OF MY SLOTS. I read docs/RUN_LOCK.txt at
+12:46:50 CT: the last line was IDLE 12:09:24 (game build S37, which launched no Godot at all), so
+no RUNNING was live by Mr. E's rule. I ALSO CHECKED BY PROCESS, because the rule says the file
+alone is not the instrument: tasklist showed no Godot of either name. Claimed 12:47:41, declared
+12:54, cap 13:12, released 12:54:00 with the work done at 12:53:42. No crossing, and the HUD's
+:52 window was still unclaimed when I wrote my IDLE - which under the new rule freed it at once.
+
+WHAT WAS OWED AND IS NOW PAID. B53 wrote the needs_hero arm at 11:4x, proved it SEVEN WAYS IN
+PYTHON ONLY, and held it back as checkpoint d402784 with the engine battery owed. That battery
+was the first thing I ran, before touching anything else, and nothing new was written this cycle.
+  PARSE (--headless --path W6 --quit-after 300)   0 errors
+  tools/_l14_test.gd                              L14_TEST OK (22 checks)
+  tools/_twitch_parse.gd                           TWITCH_PARSE OK (8 checks)
+  tools/_commands_doc.gd                           COMMANDS_DOC OK wrote 27 commands, and
+    docs/COMMANDS.md came back BYTE-IDENTICAL (md5 9a80bfd98049e77abddab6d1d182c524) - a true
+    no-op, as it must be in a cycle that adds no command.
+  baseline ChatCmd.guard_faults()                  0 faults, through the shipped accessor.
+
+THE RED PROOFS, IN THE ENGINE THIS TIME, EACH ONE MUTATE -> RUN -> RESTORE FROM SAVED BYTES:
+  flag true->false  (hero)        rc=1, faults=1 ["NEEDS_HERO"]
+  flag false->true  (satchel)     rc=1, faults=1 ["NEEDS_HERO"]
+  published command with no case  rc=1, faults=1 ["NEEDS_HERO ROUTE"]   (deepest case renamed)
+  reroll through the living gate  rc=1, faults=1 ["NEEDS_HERO EXEMPT"]
+  `match verb:` -> `match String(verb):` inside handle()
+                                  rc=1, faults=1 ["NEEDS_HERO ANCHOR"]
+Five triggers, five single faults, each the right one. THE LAST ONE IS ALSO THE REGRESSION B53
+ASKED FOR AND IT IS THE ONE I MOST WANTED TO SEE: there are three `match verb:` in this file, and
+an instrument that scanned the WHOLE file would have found _test_spot's and gone on to report 27
+flag or ROUTE faults against the wrong table. It reported ANCHOR. The table really is read inside
+handle() and nowhere else, and the comment-block trap stayed dead - the baseline is silent with
+`_needs(` sitting in the arm's own prose a dozen times over.
+
+*** THE SIXTH TRIGGER DID NOT PASS AND I AM NOT DRESSING IT UP. `func handle(` renamed to
+*** `func handle_b53x(` should raise NEEDS_HERO ANCHOR. The probe run TIMED OUT at my harness's
+*** 240-SECOND CEILING with no output recorded - rc "TIMEOUT", no fault list, nothing to read.
+That is an UNKNOWN, not a green and not a red. Renaming the entry point breaks every other caller
+of ChatCmd.handle() in the house, so the likeliest cause is the engine grinding or flooding on
+dependents rather than anything wrong with the arm - but a likeliest cause is not a measurement,
+and the whole point of this lane is that the engine is why we know. WHAT IT COSTS US IS SMALL AND
+I WANT THAT SAID TOO: ANCHOR is already red-proved by the match-line route above, so the arm's
+fourth tag is proven; what is unproven is only its SECOND WAY IN. CARRIED TO 13:45, where it runs
+first: I will drive the probe directly with a longer ceiling and capture the output to a file
+rather than through a 240 s subprocess, and if the engine genuinely hangs on a missing handle(),
+THAT is the finding and it belongs to the whole house, not just this arm.
+I DID NOT START IT AT 12:54. It had just eaten four minutes, the HUD's window was open, and Mr.
+E's rule says split the job rather than declare a crossing to finish optional work.
+
+ONE SMALL THING IN MY OWN INSTRUMENT, FOUND BY READING ITS OUTPUT RATHER THAN TRUSTING IT. The
+probe printed "commands=8" every run. That is not eight commands - ChatCmd.commands() returns the
+WHOLE parsed file, whose eight top-level keys are _source, hub_url, cooldown_s, twitch_cooldown_s,
+order, commands, ask, foreign. The 27 live under `commands`, the guard reads that sub-dictionary
+correctly, and L14_TEST and COMMANDS_DOC both counted 27 in the same battery. MY PROBE'S LABEL WAS
+WRONG, NOT THE ACCESSOR AND NOT THE DATA. Recorded so the next seat does not read "8" as a loss.
+AND A SECOND ONE, SAME SHAPE: my harness's own pass/fail column printed `pass: false` on all five
+good proofs, because it de-duplicated tags from BOTH the push_error and the printerr line and so
+compared a two-element list against a one-element expectation. The probe's `faults=1 [...]` line
+is the authority and it is what I have reported above. A HARNESS THAT CRIES FAIL ON A GOOD RESULT
+IS THE SAME CLASS OF LYING INSTRUMENT U76 WAS ABOUT, and it was mine this time.
+
+HANDED BACK BYTE-IDENTICAL, VERIFIED AFTER THE LAST RESTORE AND AGAIN AFTER CLEANUP:
+data/commands.json md5 0ed191404157221abd8a184cc580dfa5 (unchanged since B52),
+scripts/chatcmd.gd md5 72be1e686522e8904077623e0169c963, docs/COMMANDS.md md5 9a80bfd980...
+No new command, no data edit, no doc regeneration - this cycle is a battery, not an arm.
+DRIFT CHECKED BOTH DIRECTIONS ANYWAY, as is owed after every cycle that touches these files: 27
+published commands, 27 dispatch cases, nothing published without a case and no case without an
+entry. json.load clean.
+SCRATCH CLEANED: _b53_probe.gd (the sanctioned _b2_ask.gd / _b48_probe.gd shape, at the worktree
+root), .b53_battery.py and .b53_battery.log are all DELETED. Nothing of mine is left in the tree
+and no .b53_* file remains. The untracked web/icons/**.import files in this worktree are another
+lane's and I did not touch, add or remove one.
+
+THE CONTRACT WITH THE GAME IS UNTOUCHED: twitch_reply(user_login, text), no @name, no rate
+limiting. FOR THE GAME BUILD LANE: nothing - this arm needs no twitch_eventsub.gd change.
+FOR THE HUB LANE, carried forward from B53 unchanged and still not a request: web/app.js:2102
+renders this flag as "Needs a living hero." unconditionally, which is right for 26 of 27 commands
+and the exact opposite of true for !reroll. The third gate strength does not exist as data and a
+lane may not invent one; the wording is yours.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

@@ -1,3 +1,427 @@
+## *** URGENT, ALL SIX LANES - READ THIS BEFORE YOUR NEXT GODOT CLAIM. WRITTEN 17:3x CT 18 Nov. ***
+
+*** DO NOT RUN THE HEADLESS PARSE GATE WHILE MR. E MAY BE LIVE. THIS IS IN FORCE FROM NOW. ***
+IT IS NOT A STYLE NOTE AND IT IS NOT ABOUT TOKENS LEAKING. The parse gate starts the REAL GAME and
+can TAKE ACTIONS IN MR. E'S REAL CHANNEL. The game build audited its own gate at S42 this hour,
+from SOURCE and without launching it (because launching it to measure it would itself connect the
+bot again - that is the right instinct and I am ticking it for that as much as for the finding).
+
+WHAT IT ACTUALLY IS: the parse gate is `--headless --path . --quit-after 300` with NO `--script`,
+so it runs the MAIN SCENE. town.gd:342 starts the live wiring whenever `--script` is absent -
+TwitchChat (JOIN #jestsayin96), TwitchEventSub (validates BOTH tokens, ensure_rewards, websocket +
+7 subscriptions) and SnapshotPublisher. NOTHING CHECKS HEADLESS. Harnesses that pass `--script`
+are already excluded; the parse gate is the one gate that is not.
+
+WHAT IT CAN DO IN ITS ~20 SECONDS, ON INCOMING TRAFFIC:
+  (b) IS THE WORST AND IT IS THE REASON THIS IS URGENT: the gate's EventSub session receives the
+      SAME channel-point redemptions as the live game and calls _settle (PATCH FULFILLED/CANCELED).
+      A GATE CAN SETTLE A REAL VIEWER'S REDEMPTION, RACING THE LIVE GAME.
+  (a) a viewer's !command can be answered by the gate as bellmirebro - dry_run_chat is false
+      outside harnesses - so a viewer gets TWO answers if the real game is also up.
+  (c) first-timer / hero_moment replies use the REAL viewers file, so a welcome the gate sends is
+      marked spent for the live game.
+  (e) SnapshotPublisher's first beat is at 20 s of process time; whether 300 headless frames reach
+      it is UNMEASURED, and if they do the gate publishes a 300-frame town to the LIVE HUB.
+  (d) ensure_rewards only GETs in steady state - safe today, but would CREATE rewards on a machine
+      whose saved reward file is missing. (f) a 401 makes it rewrite the token file.
+
+EVERY OTHER GATE IS CLEAN AND THE GAME BUILD CHECKED THEM ONE BY ONE: _d702/_d70/_t1_test/
+_t1_shot/_t3/_t5_roll set offline + dry_run_chat; _d63_clip/_fest/_shot never call setup();
+_twitch_parse disables TwitchChat; _townwalk/_delve_test/_offfloor run under `--script`. NONE CAN
+POST. ONE EXCEPTION TO KNOW ABOUT: `_t1_live.gd` is live by design - dry_run_chat, but it opens a
+real EventSub session and so SHARES HAZARD (b), and it forces a refresh of both tokens. It is not
+in the commit battery and nobody should add it to one.
+
+WHAT EVERY LANE DOES UNTIL THE GUARD EXISTS:
+  - DO NOT run the bare parse gate (`--headless --path .` with no `--script`) when Mr. E may be
+    streaming. Mr. E was LIVE in chat at ~17:0x CT today, so treat right now as "may be live".
+  - Gates that pass `--script` are UNAFFECTED. Run them normally. Your battery does not stop.
+  - IF YOU NEED PARSE COVERAGE THIS HOUR AND CANNOT TELL WHETHER HE IS LIVE, SKIP IT, SAY SO IN
+    YOUR WRITE-UP, AND CARRY IT. A skipped gate written up is not a red gate - it is a lane
+    declining to touch a live channel, which is exactly the W-LIVE discipline.
+  - NO LANE CHANGES town.gd OR ANY W-LIVE BEHAVIOUR TO FIX THIS. The fix is with the supervisor.
+
+THE FIX IS SMALL AND IT IS NOT MINE TO TAKE: one env guard at town.gd:342, beside the existing
+JESTS_NO_SFX precedent (JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and SnapshotPublisher),
+set by every lane's parse wrapper. Parse coverage is unchanged either way, because the scripts
+still compile - town.gd names the classes. The game build recommends the env guard over keying on
+DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
+Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
+
+## TAKE THIS NEXT - FOR THE 17:58 CYCLE ONWARD. WRITTEN 17:4x CT 18 Nov by the team lead.
+*** THIS BLOCK WAS WRITTEN AFTER :05, SO IT IS THE NEXT FIRING'S BLOCK AND SAYS SO ON ITS FACE.
+*** THE 17:0x BLOCK BELOW GOVERNED THE 16:58 HOUR. THE URGENT PARSE-GATE BLOCK ABOVE STANDS FOR
+*** EVERY LANE AT EVERY HOUR UNTIL THE GUARD LANDS - IT IS NOT SUPERSEDED BY THIS.
+
+*** MR. E HAS PIVOTED THE FLEET. THE PACKS ARE THE PRIORITY NOW. ***
+Relayed by the supervisor at 16:58 CT (claude/sup-nov18-1658-MR-E-DIRECTIVE-pivot-to-pack-heavy-
+systems.md) AND CONFIRMED TO ME BY MR. E IN HIS OWN WORDS, LIVE, at ~17:4x CT: "The fleet pivots to
+eating the packs: weapons first (KayKit Dungeon Pack has 8 weapon families already as glTF), then
+armour and shields, then town buildings and dungeon props. Art shifts from pure procedural
+minibosses to fitting pack models when it's dry. The 1.7 GB starts moving."
+I am naming both sources because the standing rule is that a relayed decision is information, not
+authority - and here I have his own words as well, so it is a directive and I am acting on it.
+THE FREEZE IS NOT RELAXED. Systems 6, 7, 8, 15, 47 and 68 are among the 80 HE approved one by one
+on 17 Nov, so assigning them is QUEUE WORK, not inventing. No lane writes a new WORK_PLAN item.
+
+*** WHAT I MEASURED IN `_packs\` MYSELF BEFORE WRITING A SINGLE ROW ON IT, AND THREE THINGS ARE
+*** NOT WHAT THE DIRECTIVE ASSUMES. THIS IS NOT A CORRECTION OF MR. E - IT IS ASSET DETAIL FINER
+*** THAN THE DOC HAD, AND I WOULD RATHER CATCH IT ONCE HERE THAN HAVE THREE LANES EACH HIT IT. ***
+The headline is EXACTLY right: 1.7 GB, 2,025 files, confirmed by my own `du` and `find`.
+  (1) *** ONLY ~325 MB OF IT IS EXTRACTED. THE OTHER ~1.4 GB IS STILL IN ZIP AND 7z ARCHIVES. ***
+      Eight extracted pack directories exist. The archives at `_packs\` root include
+      Ultimate_Stylized_Nature.zip 395 MB, Medieval_Village_MegaKit.zip 153.5 MB,
+      Fantasy_Props_MegaKit.zip 143.3 MB, Castle.zip 71.8 MB, rocks.7z 74.1 MB, and 37 more.
+      SO THE "NEXT WAVE" IS NOT READY TO WIRE: Systems 15 (village + castle), 47 (fantasy props)
+      and 68 (nature) ALL name packs that are still archives. Each needs EXTRACT -> READ THE REAL
+      LICENCE -> fit-proof, before any wiring row is honest. I AM NOT ASSIGNING EXTRACTION YET and
+      no lane should extract 400 MB on its own initiative - I will assign it to the ONE lane that
+      needs it first, when the immediate wave is done, so three lanes do not each unpack the same
+      archive into a connected folder.
+  (2) *** A FOLDER NAMED `_CC0` IS NOT A LICENCE. *** Only FOUR of the eight extracted packs carry
+      an actual licence file: kaykit_dungeon_pack_CC0, kaykit_character_animations_CC0,
+      quaternius_rpg_characters_CC0 and quaternius_ultimate_rpg_items_CC0 (all License.txt).
+      `quaternius_medieval_weapons_2018_CC0` HAS NO LICENCE FILE, and the directive names it for
+      BOTH System 6 (weapons) and System 8 (shields) - the immediate wave.
+      THIS IS NOT A BLOCKER AND NOBODY IS TO RE-BAN IT: Mr. E's standing ruling is that ALL
+      QUATERNIUS PACKS ARE LICENSED FOR COMMERCIAL USE, and that ruling was made on the real
+      licence page. What is missing is our own NOTE, not the permission. Whoever uses that pack
+      first writes the attribution line into docs/art/ASSET_SOURCES.md and drops a LICENSE note
+      beside the imported files, exactly as assets/gear/dungeon/LICENSE_KayKit_Dungeon_CC0.txt
+      already does. That is five minutes and it is part of the import, not a separate item.
+  (3) *** SYSTEM 6'S MAIN BODY IS ALREADY DONE AND NOBODY SHOULD RE-IMPORT IT. *** I counted the
+      files: assets/gear/dungeon/ holds 24 .glb = 8 families (axe, axeDouble, crossbow, dagger,
+      hammer, shield, staff, sword) x 3 tiers (common, uncommon, rare), each with its .import, plus
+      LICENSE_KayKit_Dungeon_CC0.txt. That is System 2's engine half, wired at S16/S24 and ticked.
+      THERE IS NO ARTIFACT TIER - zero files match it. SO THE OPEN PART OF SYSTEM 6 IS THE ARTIFACT
+      TIER AND THE VARIETY BEYOND THESE EIGHT FAMILIES, NOT THE EIGHT FAMILIES THEMSELVES.
+      Re-importing the 24 would be the MODEL_BY mistake again: a second copy of a live asset set is
+      dead data. MEASURE WHAT IS WIRED BEFORE YOU IMPORT ANYTHING.
+
+1. GAME BUILD (:07) - S42 IS TICKED AND IT IS THE BEST AUDIT I HAVE READ FROM YOUR LANE. You read
+   the gate from SOURCE and refused to launch it on the grounds that launching it to measure it
+   would connect the bot again. That instinct is why I trust the finding.
+   THE ENV GUARD IS NOT YOURS TO TAKE YET - it is W-LIVE behaviour and it is with the supervisor
+   this hour with my recommendation to authorise. DO NOT WRITE IT UNTIL THAT COMES BACK. Until it
+   does, the urgent block above binds you too: no bare parse gate while Mr. E may be live.
+   YOUR NEW ITEM IS SYSTEM 6, AND IT IS SMALLER THAN THE DIRECTIVE MAKES IT SOUND: the eight
+   families in common/uncommon/rare are ALREADY on disk and wired (I counted all 24 myself, see
+   above). START BY CONFIRMING THAT YOURSELF, then find where the ARTIFACT tier actually lives -
+   quaternius_medieval_weapons_2018_CC0 is extracted (97 files, 24 MB) and is the likeliest source,
+   and KayKit's own pack has 1,079 files you have only taken 24 from. SAY IN WRITING WHAT YOU FOUND
+   BEFORE YOU IMPORT ANYTHING. Then: licence note, import, FIT-PROOF ON A REAL BODY front/side/back,
+   wire - the same path you took for System 5's vials. FIT IS STILL THE ACCEPTANCE TEST and a
+   bare-model render with no body is still not a fit proof (the 04:00 ruling).
+
+2. CONTENT (:22) - C-118 IS TICKED, counted line by line. KEEP PRODUCING, UNTHROTTLED.
+   THE DIRECTIVE GIVES YOU A STANDING ADDITION, NOT A REPLACEMENT: write lines for pack-sourced
+   items as they land, the same way you already do for minibosses. Nothing lands this hour, so
+   nothing is owed yet - keep doing what you are doing and pick the weapon lines up when the game
+   build's System 6 import appears. Your `_note_` keys are 21 of the 36 zero-hit keys and that is
+   correct and wanted; do not stop writing them.
+
+3. ART (:34) - THE QUARTERMASTER IS TICKED AND IT IS THE BEST WORK I HAVE MERGED THIS WEEK.
+   YOUR STANDING ITEM IS UNCHANGED AND IT COMES FIRST: ten bodies remain over the 5 mm foot-plane
+   bar and THE REEVE IS THE WORST AT 170.0 mm, more than double the next. Point `_fp_locate.py` at
+   it and let the instrument name the source line before you touch geometry, exactly as you did on
+   the Quartermaster. A fault correctly STRUCK with the geometry shown is worth as much as a fix.
+   THE DIRECTIVE CHANGES WHAT YOU DO WHEN DRY, NOT WHAT YOU DO NOW: when you have no miniboss and
+   no defect in front of you, Mr. E wants you FITTING PACK MODELS TO THE KAYKIT HERO BODY rather
+   than inventing new procedural geometry. You keep the standing permission to invent minibosses -
+   he said so again - but the packs come first when the choice is yours.
+
+4. HUB (:37) - YOUR ROW IS TICKED AND MY CONTENT OBJECTION TO THE PUBLISH IS WITHDRAWN. I proved
+   the `shopGood` deletion on BOTH trees myself: once in the published app.js with zero callers,
+   zero in the merged one, shopCard three in both. No behaviour leaves the page.
+   YOUR NEXT ITEM IS ONE SENTENCE AND IT IS YOURS TO REFUSE: IF YOU BELIEVE THE DELTA IS FIT TO
+   PUBLISH, CLAIM "READY TO PUBLISH" IN YOUR PROGRESS ENTRY. I ran NO publish gate this hour and I
+   say so plainly - you did not claim it, and an unearned gate report is the same fault class as a
+   lying gate. The hour you claim it, I run the whole gate and carry it up. IF YOU JUDGE IT NOT
+   READY, SAY THAT AND SAY WHY - that answer is worth as much. YOU STILL NEVER PUBLISH.
+
+5. CHAT BOT (:45) - B58 IS TICKED. You turned a lesson into a mechanism and then tried to break it
+   on purpose, which is the right order. AND YOUR W-LIVE OBSERVATION WAS THE SEED OF THE BIGGEST
+   FINDING OF THE DAY - the game build's S42 audit started from your B58 note, and it turns out the
+   gate can do considerably more than join. That is what naming your own side effects buys.
+   THE URGENT BLOCK ABOVE BINDS YOUR BATTERY: your PARSE gate is the bare one. Gates you run under
+   `--script` are unaffected. If you need parse coverage and cannot tell whether he is live, SKIP
+   IT AND WRITE THAT DOWN - a skipped gate written up is not a red gate.
+   YOUR QUEUE IS OTHERWISE EMPTY AND I AM NOT INVENTING ONE. Your prompt's "26 commands" is stale;
+   the generator's 27 is right. DO NOT CHANGE ANYTHING TO MATCH A PROMPT FIGURE.
+
+6. HUD (:52) - U81 IS TICKED AND THE APOLOGY IN THE 17:0x BLOCK STANDS: SYSTEM 2 IS CLOSED WHOLE,
+   I put a struck row on your sheet for the fourth time, and if anyone hands it to you a fifth time
+   you refuse it and cite that paragraph. There is nothing for you to wait on.
+   YOUR NEXT ITEM IS YOUR OWN L74, which you deferred for the right reason: feed/theme under load
+   needs a windowed render and a 15-minute claim and you had ~13 minutes. It is yours at 17:52.
+   Claim the lock, split it if it runs long, carry the remainder forward.
+   NOTHING IN THE PACK PIVOT LANDS ON YOU THIS HOUR - the directive points the game build, content,
+   hub and art at the packs first. You will get pack-sourced items to theme once they are wired.
+
+FOR THE SUPERVISOR:
+  1. THE PARSE-GATE ENV GUARD - I RECOMMEND AUTHORISING IT. One guard at town.gd:342 beside the
+     existing JESTS_NO_SFX precedent (JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and
+     SnapshotPublisher), set by every lane's parse wrapper. Parse coverage is unchanged because the
+     scripts still compile - town.gd names the classes. I agree with the game build's preference
+     for the env guard over keying on headless, which would silently disable Twitch for any future
+     headless live use. I HAVE TAKEN ONLY THE OPERATIONAL HALF (no lane runs the bare gate while he
+     may be live); the code change is W-LIVE behaviour and is not mine.
+  2. THE HUB PUBLISH - content objection withdrawn, but I am not asking you to authorise yet and
+     the reason is now PROCESS, not content: the hub has not claimed READY TO PUBLISH and the
+     standing rule forbids running a gate the lane did not claim. I have asked it to claim or
+     explain. The hour it claims, I gate it and bring you a recommendation. Say the word and I will
+     gate it on yours instead.
+  3. THE PACK PIVOT - TAKEN AND ROWED, with three asset facts corrected above (1.4 GB still
+     archived; one named pack has no licence FILE though the Quaternius ruling covers it; System 6's
+     eight families are already wired). NO DECISION NEEDED FROM YOU - I am telling you what I did.
+     THE ONE THING I WILL WANT LATER: when the immediate wave is done, somebody must extract ~764 MB
+     of archives into connected folders. I will assign it to ONE lane rather than three, and I will
+     name it to you before it happens.
+  4. SYSTEM 2 - does closed-whole still stand? My error re-opened it and that part is fixed. U81
+     measured that the hue is BUILT BUT REACHES NO ON-STREAM SURFACE, which nobody had when you
+     closed it. Putting it on one would be new work on a closed system and only MR. E can raise it,
+     so I have written no row and offer no recommendation on work I should not have raised.
+
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 17:0x CT (team lead, the 16:58 firing)
+*** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 16:0x BLOCK. ***
+
+ALL SIX LANES SHIPPED THIS HOUR AND ALL SIX ROWS OF THE 16:0x BLOCK WERE ANSWERED. That has not
+happened before on my watch. Nobody was starved and nobody overran.
+
+WHAT I MEASURED MYSELF THIS HOUR, TAKING NO LANE'S NUMBER ON TRUST:
+  CONTENT'S C-118 COUNTS ARE EXACT. I parsed data/lore_lines.json on both sides of the merge and
+  counted the lists myself: epitaphs 477 -> 507 (+30), descend 299 -> 315 (+16), cleared 299 -> 315
+  (+16). Claimed 30/16/16; measured 30/16/16.
+  I LOOKED AT THE QUARTERMASTER AND ART'S WRITE-UP IS TRUE IN THE PICTURE, INCLUDING ITS OWN BAD
+  NEWS. In hero_side.png the boot blocks land on the hero's own floor line; the three shields STAND
+  against the near leg and read as a stack rather than the sunken blob they were; the two floor
+  spares lie clear with daylight between them; the fist closes near the MIDDLE of the offered shaft.
+  In three_quarter.png the sheaf is a six-spoke fan behind the head and does NOT read as a crown
+  from there - which is exactly what art wrote down about its own body without being asked. The
+  numbers moved with the picture: footprint_span 2.97 -> 2.62 CORRIDOR-SAFE, pair_w 4.83 -> 4.48,
+  all three views still seen 1.0 and proves true.
+  THE HUB'S 14 DELETED LINES ARE A DEAD FUNCTION AND I PROVED IT ON BOTH TREES, NOT FROM ITS NOTE.
+  In the PUBLISHED app.js (origin/gh-pages) `shopGood` appears exactly ONCE - its own definition,
+  with zero callers - and `shopCard` appears three times. In the merged app.js `shopGood` appears
+  ZERO times and `shopCard` still three (defined ~3768, called ~3823 shelf and ~3843 cargo). So the
+  deletion removes no behaviour from the page. THE QUESTION I PUT ON THAT ROW AT 16:0x IS CLOSED.
+  AND I CHECKED THE LINE OF ITS NOTE I DOUBTED. The note says innerHTML lives at app.js:255 and
+  :301 only; the string occurs SIX times in the file. I grepped with line numbers and looked: 255
+  and 301 are the only ASSIGNMENTS, both page-owned, and lines 7, 93, 5092 and 5133 are comments
+  describing the rule. The claim is true; a raw count would have made it look false. CSP meta in
+  index.html is intact (default-src 'none', script-src 'self', style-src 'self').
+  THE HUD'S U81 GREPS ARE TRUE IN THE SOURCE. I read all three sites myself: leaderboard_panel.gd
+  :202 does call UiTheme.rarity_ink (the hue exists and is guarded); rts_camera.gd:597 puts
+  r.weapon_name(h) into _f_body.text, a plain one-colour Label; town.gd:5382 passes
+  roster.weapon_name(h) as a plain shop_orders string. HUD's answer is correct: THE HUE IS BUILT
+  AND REACHES NO ON-STREAM SURFACE TODAY.
+
+*** THE DEAD-DATA AUDIT, MEASURED ON THE MERGED TREE AT 17:0x CT - AND MY PROMPT'S BASELINE IS NOW
+*** THREE NUMBERS STALE. I CANNOT EDIT THE PROMPT FROM A FIRING, SO THE CORRECTION LIVES HERE. ***
+  Measured off scripts/*.gd + web/*.js ONLY (48 files, 2,211,995 chars), 12 data files, and asset
+  directories off assets/ ONLY:
+    UNREFERENCED ASSET DIRECTORIES: ZERO (31 directories with files).
+    UNREAD LIVE DATA KEYS: ZERO. THE BACKLOG STAYS DRAINED.
+    TOP-LEVEL KEYS: 126 (prompt says 122). ZERO-HIT KEYS: 36 (prompt says 32).
+  ALL 36 ARE ACCOUNTED FOR, and the classes are what moved, not the discipline:
+    21 are content's own `_note_` cycle notes (prompt says 18) - ten in items.json, eleven in
+       lore_lines.json, now through _note_c118. NO LANE IS TO WIRE ONE AND CONTENT IS NOT TO STOP.
+     2 are the runtime-built _alt pools, READ at delve.gd:3725 via `lore().get(base + "_alt", {})`.
+       I confirmed that line is the ONLY concatenation of its kind in the tree. DO NOT RE-WIRE.
+     4 are the declared-dead family: phase2_words, phase2_words_alt, phase2_words_alt2,
+       town_levels_for_the_desktop. The prompt counts THREE here because it predates
+       `phase2_words_alt2`, which the 15:58 seat found and which I reproduced independently this
+       hour: zero hits for "phase2_words" and zero for "alt2" anywhere in scripts/ or web/.
+     9 are prose/spec keys and are not items (biomes `technique`; bosses `boss_floors`; origins
+       `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+       `_gating`; world `canon_silences`).
+  21 + 2 + 4 + 9 = 36. COMPARE THE CLASSES, NEVER THE RAW TOTAL - the whole rise is `_note_` keys.
+
+*** WHAT I TICKED THIS HOUR - SIX, ONE PER LANE, EACH ON MY OWN MEASUREMENT: ***
+  ART - THE QUARTERMASTER, 317.2 mm TO 2.5 mm. TICKED 2026-11-18 17:0x CT by the team lead.
+    This is the best piece of work I have merged. Art did not hand-tune four numbers; it built an
+    instrument (`tools/art/_fp_locate.py`, which goes RED ON EMPTY and red when it resolves no
+    caller) to make the audit name a SOURCE LINE instead of an anonymous index, found one loader
+    bug in `_gear_mesh` wearing four separate faults, measured the blast radius before touching it
+    (`_lay` and `_gear_mesh` are called only by `quartermaster()`), fixed the one line, and
+    corrected two docstrings that had been asserting something the code did not do. THREE OF THE
+    FOUR FAULTS WERE INVISIBLE TO EVERY NUMBER IN THE REGISTER - the sunken crown, the fist at the
+    wrong end of the spear, and the spares running through the shield stack were all `seen: 1.0`.
+    The over-bar set goes 12 to 11, seated 19 to 20.
+  CONTENT C-118 - 30 EPITAPHS, 16 DESCEND, 16 CLEARED. TICKED 17:0x CT, counted by me above.
+  HUB - THE app.js DELETION IS DOCUMENTED AND THE ANSWER IS RIGHT. TICKED 17:0x CT. It answered
+    the exact question asked, named the replacement and its call sites, said which CSS is NOT dead
+    and why, listed its checks, and explicitly did NOT claim READY TO PUBLISH. That last line is
+    the lane declining to buy itself a gate it had not earned, and it is the correct instinct.
+  HUD U81 - WHERE A WEAPON NAME IS READ AND WHETHER A HUE REACHES IT. TICKED 17:0x CT. The row
+    asked for a file-only written answer and that is exactly what came back, with its own limit
+    stated (no engine, no picture, L74 deferred to its next firing) and no lock claimed because
+    none was needed.
+  CHAT BOT B58 - THE B56 LESSON IS NOW A MECHANISM. TICKED 17:0x CT. It took the offer on row 5,
+    wrote a probe wrapper that refuses to report "Godot closed" until tasklist agrees, demonstrated
+    it on a real four-gate battery (all green, 33 s), and then RED-PROVED THE KILL PATH on a
+    deliberate ghost rather than trusting an untriggered guard - a probe that never calls quit(),
+    found by tasklist as PID 11308, killed, residual empty. That is the 14:5x fault caught by
+    instrument instead of by hindsight.
+  GAME BUILD S41 - FULL GATE BATTERY GREEN ON MERGED main 8c172a9. TICKED 17:0x CT: parse 0 errors,
+    TWITCH_PARSE OK, OFFFLOOR OK 0/1942, DELVE_TEST OK, townwalk 0 SCRIPT ERROR, Godot verified
+    closed by tasklist.
+WHAT I DID NOT TICK, AND WHY: the hub's merged-not-published delta - still the supervisor's call,
+  in the block at the end of this section. Nothing else was withheld from any lane this hour.
+
+1. GAME BUILD (:07) - THIS ROW IS YOURS FROM 17:07. S41 IS TICKED; your battery was green and you
+   released 19 minutes inside your own cap. Nothing of yours is held.
+   YOUR NEXT ITEM COMES FROM A MEASUREMENT THE CHAT BOT HANDED YOU, NOT FROM ME, AND IT TOUCHES
+   W-LIVE. B58 reports that the headless PARSE gate brings twitch_eventsub.gd FULLY LIVE: bot token
+   valid as bellmirebro, JOINED #jestsayin96, subscribed 7 of 7. Join only - it posted nothing,
+   cheered nothing and changed no account state, and it named this itself rather than letting a
+   later seat discover it. BUT IT MEANS EVERY LANE THAT RUNS YOUR PARSE GATE CONNECTS THE REAL BOT
+   TO MR. E'S REAL CHANNEL, including while he may be live.
+   WHAT I WANT IS THE HONEST STATE IN WRITING, NOT A CHANGE YET: say whether that connection is
+   intended behaviour of the gate, what it would cost to make the gate parse WITHOUT joining (an
+   env guard, a headless flag, or nothing clean), and whether any gate anywhere could post rather
+   than merely join. THIS IS AN AUDIT OF YOUR OWN SHIPPED GATE FOR A DEFECT YOU HAVE JUST LEARNED
+   ABOUT, WHICH THE FREEZE EXPRESSLY ALLOWS - it is not a new item and I have written no plan row
+   for it beyond this one. DO NOT change W-LIVE behaviour on your own; report and I route it up.
+
+2. CONTENT (:22) - C-118 IS TICKED, counted line by line. KEEP PRODUCING, UNTHROTTLED.
+   Your `_note_` keys are now 21 of the 36 zero-hit keys and that is CORRECT AND WANTED. I have
+   written the accounting above so that no future seat reads the rising total as rot. Nothing on
+   your row changes; the declared-dead family stays four and you go nowhere near it.
+
+3. ART (:34) - THE QUARTERMASTER IS TICKED AND IT IS THE BEST WORK I HAVE MERGED THIS WEEK.
+   YOUR NEXT ITEM IS THE SAME LIST, NEXT BODY: ten remain over the 5 mm bar and THE REEVE IS NOW
+   THE WORST AT 170.0 mm - more than double the next one. One body at a time, each with its own
+   look, exactly as you have been doing.
+   AND CARRY YOUR OWN INSTRUMENT FORWARD: `_fp_locate.py` named the Quartermaster's part in ONE run
+   after the audit had only ever said "how far". Point it at the Reeve first and let it name the
+   source line before you touch geometry. IF THE REEVE'S LOW PART IS A PROP PLACED ON PURPOSE,
+   STRIKE IT WITH THE GEOMETRY SHOWN - you have proved twice now that a correct strike is worth as
+   much to me as a fix, and once more that your eye beats mine.
+
+4. HUB (:37) - YOUR ROW IS TICKED AND THE HOLD I PUT ON THE PUBLISH LAST HOUR IS LIFTED ON THE
+   MERITS. I verified your deletion on both trees myself, not from your note.
+   YOUR NEXT ITEM IS ONE SENTENCE AND IT IS YOURS TO REFUSE: IF YOU BELIEVE THE DELTA IS FIT TO
+   PUBLISH, CLAIM "READY TO PUBLISH" IN YOUR PROGRESS ENTRY. I did not run the publish gate this
+   hour and I say so plainly - you did not claim it, and an unearned gate report is the same fault
+   class as a lying gate. The moment you claim it I run the whole gate myself (el() only, no
+   innerHTML on snapshot values, no snapshot value as URL/src/href/style, CSP intact, the six state
+   checks, a hostile name rendering as literal text, and I LOOK at a screenshot) and carry it up
+   with a recommendation. IF YOU JUDGE IT NOT READY, SAY THAT INSTEAD AND SAY WHY - that answer is
+   worth as much and costs the project nothing. YOU STILL NEVER PUBLISH; the push is not yours and
+   it is not mine either.
+
+5. CHAT BOT (:45) - B58 IS TICKED AND THE WRAPPER IS THE RIGHT KIND OF FIX: you turned a lesson
+   into a mechanism and then tried to break it on purpose. Your queue is empty and I am not
+   inventing one.
+   ONE THING YOU FOUND THAT I AM RECORDING FOR YOU, BECAUSE I CANNOT EDIT YOUR PROMPT FROM A
+   FIRING: YOUR PROMPT'S "26 COMMANDS" IS STALE - the generator wrote 27 and docs/COMMANDS.md came
+   back byte-identical (md5 9a80bfd9) while doing it, so the generator is right and the prompt is
+   wrong. It is written here where you will read it, and it goes in the owed-prompt-corrections
+   list for the first seat that gets a live turn. DO NOT CHANGE ANYTHING TO MATCH THE PROMPT.
+   IF YOU WANT A ROW: your W-LIVE observation in B58 is now on the GAME BUILD's row as an audit of
+   its own gate. If you can say in writing what your wrapper would have to do differently when a
+   gate legitimately leaves a process running, write that; otherwise STAND DOWN AND SAY SO.
+
+6. HUD (:52) - U81 IS TICKED, AND I OWE YOU AN APOLOGY THAT COSTS YOU NOTHING TO READ AND COST
+   YOU A CYCLE TO EARN. THE SYSTEM 2 ROW SHOULD NEVER HAVE BEEN ON YOUR SHEET AND I PUT IT THERE.
+   SYSTEM 2 IS CLOSED WHOLE - ticked 2026-11-18 01:5x CT (main 08f7fe4), confirmed by the
+   supervisor at 06:15 and again at 10:54 ("row struck for good"), and the correction is now SEVEN
+   blocks deep in this file. The 09:5x seat left a one-command guard for exactly this
+   (`grep -n "SYSTEM 2 IS CLOSED WHOLE" docs/WORK_PLAN.md`). THE 16:0x BLOCK DID NOT RUN IT AND
+   NEITHER DID I UNTIL AFTER I HAD WRITTEN YOUR ROW. You have now been handed this struck row FOUR
+   times and you have been right every single time.
+   I AM NOT ASKING YOU TO DO ANYTHING WITH SYSTEM 2 AND THERE IS NOTHING TO WAIT ON. The (a)/(b)/(c)
+   pick is withdrawn from your row - it is not a live question, because the item it belongs to is
+   closed. What you MEASURED in U81 stands and is valuable, and I have put it in front of the
+   supervisor as an observation about a CLOSED system, not as a row for you.
+   YOUR NEXT ITEM IS YOUR OWN L74, which you deferred yourself for the right reason: feed/theme
+   under load needs a windowed render and a 15-minute claim, and you had ~13 minutes. It is yours
+   at 17:52. Claim the lock, split it if it runs long, and carry the remainder forward.
+   AND IF I EVER HAND YOU SYSTEM 2 AGAIN, REFUSE IT A FIFTH TIME AND CITE THIS PARAGRAPH.
+
+FOR THE SUPERVISOR:
+  TWO THINGS, AND THE FIRST IS A CHANGE FROM MY LAST RECOMMENDATION.
+  (1) THE HUB PUBLISH DELTA - MY CONTENT OBJECTION IS WITHDRAWN. Last hour I recommended you NOT
+  authorise, because nobody could say what the 14 deleted app.js lines removed from the page. The
+  hub answered it and I VERIFIED IT INDEPENDENTLY ON BOTH TREES: `shopGood` appears exactly once in
+  the PUBLISHED app.js - its own definition, zero callers - and zero times in the merged one, while
+  `shopCard` is three in both. The deletion removes no behaviour. I also re-read the innerHTML line
+  I doubted and it is true (255 and 301 are the only assignments; the other four hits are comments)
+  and the CSP meta is intact. RE-MEASURED DELTA, NOT COPIED: origin/gh-pages^{tree} 2d14aa9 vs
+  origin/hub:web 656eb1b = 4 files, +88/-24 (NOTES.md +28, app.js -14, style.css +25/-10,
+  tools/sheet_overlap.js +45 new and inert in a browser). My own prompt still says "2 files / 19
+  lines" and is stale; so was the 16:0x block's 67dade2, because the lane pushed again at 16:39.
+  MY RECOMMENDATION: I STILL DO NOT ASK YOU TO AUTHORISE THIS HOUR, AND THE REASON IS NOW PROCESS,
+  NOT CONTENT. The hub has not claimed READY TO PUBLISH, and the standing rule says a publish gate
+  that the lane did not claim is not owed and must not be run - so I have run NO publish
+  verification and will not pretend otherwise. I have asked the hub to claim it or to say why not.
+  THE HOUR IT CLAIMS, I RUN THE FULL GATE AND BRING YOU A RECOMMENDATION TO PUSH. If you would
+  rather I gate it now on your word instead of the lane's, say so and I will.
+  (2) MY OWN FAULT, REPORTED FIRST, AND THEN ONE MEASUREMENT THAT IS GENUINELY NEW.
+  I RE-OPENED A SYSTEM YOU STRUCK, AND I WROTE IT INTO THE PLAN BEFORE I CHECKED. System 2 is
+  CLOSED WHOLE - ticked 01:5x CT on main 08f7fe4, confirmed by you at 06:15 and again at 10:54.
+  My :58 prompt still calls its HUD half "THE MOST VALUABLE OPEN ITEM IN THE HOUSE"; the 16:0x
+  block wrote the HUD's row from that prompt instead of from this file, and I REPEATED THE ERROR
+  an hour later and then compounded it by routing you a decision about a closed item. The 09:5x
+  seat had left a one-command guard against precisely this and I ran it only after the damage.
+  THE COST, NAMED: the HUD has now been handed this struck row FOUR times and refused or corrected
+  it every time. This hour it did the work instead of refusing, so the cost is one cycle of a lane
+  that has done nothing wrong. I have withdrawn the row, apologised on its sheet, and the HUD is
+  back on its own L74. NOTHING IS BLOCKED AND NOTHING NEEDS YOUR DECISION TO UNBLOCK IT.
+  NOW THE PART THAT IS NOT JUST MY ERROR, AND IT IS YOURS TO JUDGE, NOT MINE. Your closed-whole
+  ruling rests on the finding that the rarity-hue half WAS ALREADY BUILT at U55/U56 - which is
+  true, and I have re-read the code. U81 adds something nobody had measured when that ruling was
+  made: THE HUE IS BUILT AND GUARDED BUT IT REACHES NO ON-STREAM SURFACE. leaderboard_panel.gd:202
+  draws rarity_ink, and that sheet has been DORMANT SINCE L63. Every place a viewer actually reads
+  a weapon name during a delve is plain one-colour text - rts_camera.gd:597 (the follow panel),
+  town.gd:5382 (shop orders into the crier feed), the hub's snapshot_pub strings, and chat. I
+  verified all four sites in source myself.
+  I AM NOT ASKING YOU TO RE-OPEN IT AND I HAVE WRITTEN NO ROW FOR IT. Putting the hue on an
+  on-stream surface would be NEW WORK on a closed system, and under the freeze a new item is
+  written only if MR. E raises it - so it is not mine to start and not, I think, yours to assign
+  without him. What I am doing is making sure the measurement reaches you, because "built" and
+  "visible to a viewer" turned out not to be the same thing and the ruling was made on the first.
+  IF YOU JUDGE THAT CLOSED-WHOLE STILL STANDS, SAY SO AND I WILL PUT THIS TO BED PERMANENTLY and
+  stop it resurfacing. If you judge Mr. E would want to know, it is one sentence to him and I will
+  carry whatever he says. For the record, the options U81 names are (a) the hub draws the hue -
+  cheapest, one lane, lands off-stream; (b) feed_hud tints a Chronicle name only if town.gd tags
+  the line with a piece id - most invasive, and the U55 rule rightly forbids name-guessing; (c) the
+  follow panel gets a RichTextLabel - the only one a viewer sees mid-delve. I offer no
+  recommendation on work I should not have raised.
+
+FOR THE NEXT TEAM LEAD - THE OWED PROMPT CORRECTIONS. I ATTEMPTED THE :58 WRITE THIS HOUR WHILE
+MR. E WAS LIVE AND IT WAS REFUSED ([Cowork Scheduled Task Write]). I attempted it ONCE and stopped,
+as the standing rule says. The refusal is the firing having no live turn to be approved IN - it is
+not something he failed to click and not something he can fix by being present while a schedule
+runs. IT NEEDS HIM TO APPROVE THE CALL IN A COWORK CONVERSATION LINKED TO cruzader.
+THE LIST, SO THE FIRST SEAT WITH A REAL LIVE TURN CAN LAND THEM ALL AT ONCE:
+  (1) *** THE :58 PROMPT STILL CALLS SYSTEM 2's HUD HALF "THE MOST VALUABLE OPEN ITEM IN THE
+      HOUSE". IT IS CLOSED WHOLE AND HAS BEEN SINCE 01:5x CT. *** This is the most expensive stale
+      line in the house: it has now caused FOUR seats (08:0x, 09:1x, 16:0x, 17:0x) to hand the HUD
+      a struck row, and the HUD was right to refuse it every time. The replacement text should say
+      CLOSED WHOLE, cite main 08f7fe4 and the supervisor's 06:15 and 10:54 confirmations, name
+      ui_theme.gd:200/:204 and leaderboard_panel.gd:197/:202 as the built half, and carry the
+      09:5x seat's one-command guard: `grep -n "SYSTEM 2 IS CLOSED WHOLE" docs/WORK_PLAN.md`.
+      IT SHOULD ALSO CARRY THE GENERAL LESSON, WHICH IS WORTH MORE THAN THE FACT: WRITE EVERY ROW
+      FROM THE PLAN, NEVER FROM THE PROMPT. A prompt fact can be a day old; the plan is an hour old.
+  (2) THE DEAD-DATA BASELINE. Prompt says 122 top-level keys, 32 zero-hit, 18 `_note_`, three
+      declared-dead. MEASURED 17:0x CT ON THE MERGED TREE: 2,211,995 chars, 48 files, 126 keys,
+      36 zero-hit = 21 `_note_` + 2 runtime-built _alt + 4 declared-dead + 9 prose/spec. Unread
+      LIVE keys ZERO, unreferenced asset directories ZERO. The full accounting is in this block.
+  (3) THE HUB DELTA. Prompt says "2 files / 19 lines". MEASURED 17:0x CT: gh-pages^{tree} 2d14aa9
+      vs origin/hub:web 656eb1b = 4 files, +88/-24. Note the prompt's gh-pages SHA (45a7904) IS
+      correct - do not "fix" that one.
+  (4) THE ID LINE. Prompt says B50, C-111, D100, H32, L74, S33, T5, U74. As of 17:1x CT it is
+      B58, C-118, D100, H32, L74, S41, T5, U81.
+  (5) THE CHAT BOT PROMPT (trig_01X4f9fEK6r64Hz2U3CLxeY9) SAYS "26 COMMANDS"; THE GENERATOR WROTE
+      27 at B58 while leaving docs/COMMANDS.md byte-identical (md5 9a80bfd9). The generator is
+      right. NO LANE IS TO CHANGE ANYTHING TO MATCH A PROMPT FIGURE.
+NOTHING IS BLOCKED BY ANY OF THIS. The plan is what the lanes obey and all five are corrected here.
+
+
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 16:0x CT (team lead, the 15:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 15:1x BLOCK. ***
 

@@ -7198,3 +7198,496 @@ def dyer():
 
 
 BUILDERS.update({"dyer": dyer})
+
+
+# ===========================================================================
+# *** 25 THE GREENER, 17 Nov 2026. THE TRADE IS ON THE BODY, NOT ON THE
+# *** FURNITURE AROUND IT - the team lead's 20:14 ask, in his words: "If a
+# *** twenty-fifth can put the trade ON THE BODY rather than on the furniture
+# *** around it, that is worth more to me than a twenty-fifth with better
+# *** props." His own picture of the Dyer is the evidence: the frame and the
+# *** tun carried that trade and the man beside them read as an armature.
+# ===========================================================================
+# AND IT ALSO ANSWERS A MEASURED GAP, WHICH IS WHY THIS TRADE AND NOT A
+# PRETTIER ONE. _colour_read's own hue histogram over the register: 0-60 deg
+# 14 bodies | 60-110 2 | 110-190 ZERO | 190-260 7 | 260-360 ZERO. The Dyer
+# filled 190-260 with woad. NOTHING IN THIS FILE IS GREEN. A beekeeper was the
+# first candidate and was dropped for exactly that reason - honey amber is the
+# 0-60 band where fourteen bodies already sit, so it would have been a new body
+# in an old colour. Verdigris is the one working-class trade whose PRODUCT is
+# green: copper hung over vinegar, scraped off as pigment, and a man who has
+# done it for twenty years is green to the elbow.
+OVERRIDE_ALLOWED = {"dyer", "greener"}
+
+OVERRIDE.update({
+    "greener": {
+        # verdigris. The product, and it is on HIM: the crust up both forearms,
+        # the scabs across the chest and shoulders, the bloom on the crocks,
+        # and the two weapons on the floor it has already eaten.
+        'body': ((0.075, 0.470, 0.355), 0.62, 0.00),
+        # BRIGHT NEW COPPER. The leaves on his back are the one thing in the
+        # yard that is fresh - they are the stock he bought this week, and
+        # Mr. E's second rule read as he wrote it: the goods must not look
+        # second-hand even when the man does.
+        # PASS 2, CHANGE E: at (0.735, 0.355, 0.135) rough 0.34 metal 0.62 the
+        # leaves came back BROWN - a metal that dark under these two suns
+        # reads as timber, and a stack of timber is not stock, it is a fence.
+        # Brighter and less metallic so the diffuse term carries the hue.
+        # PASS 4, CHANGE J: still read as PLYWOOD at (0.905, 0.470, 0.205)
+        # rough 0.30. A hammered copper leaf is bright and it is SPECULAR -
+        # the brown came from a diffuse-dominant surface, not from the hue.
+        # Rough down and the hue carried further toward new copper.
+        # PASS 5: one more step toward new copper, measured separately from
+        # change K by _colour_read's band shares and not by impression.
+        'bone': ((1.000, 0.520, 0.235), 0.13, 0.52),
+        # the man, his apron, the crock staves, the scraper's iron. NOT
+        # derived from the body colour or the whole figure would read green
+        # and the crust would stop being a mark on him.
+        'dark': ((0.062, 0.058, 0.052), 0.84, 0.03),
+        # the charcoal bed under the crocks. A vinegar house is WARMED - that
+        # is the only honest emissive on this body, and it is kept small and
+        # low so the green stays the creature's colour and the ember stays a
+        # reason for the green to be visible at all.
+        # PASS 3, CHANGE F, judged on its own: at (1.000, 0.455, 0.105)
+        # strength 1.15 the charcoal bed came back BEIGE - it read as spilt
+        # SAND around the crocks, which is worse than invisible because a
+        # viewer names it wrongly instead of not at all. Deeper red and hotter.
+        # Not pushed past 2.0: the Dyer's weld clipped to CREAM at 2.30 and a
+        # white hole is not a hue either.
+        # PASS 5: back to 1.45 now that the coals have a dark pan round them.
+        # Strength was never the problem - see change K.
+        'glow': ((1.000, 0.265, 0.035), 1.45),
+    },
+})
+
+CANON.update({
+    "greener": ("The Greener", 2.50, (0.12, 0.54, 0.40), (0.20, 0.92, 0.64),
+                "workshop",
+                "IT GREENS YOUR IRON - every blow landed on it leaves the "
+                "weapon a little more eaten, and a bitten weapon bites less; "
+                "a hero can stop and scrape it clean, which costs them the "
+                "time they would have spent swinging, so the party is not "
+                "choosing how to kill it but how long each of them can afford "
+                "to keep hitting it",
+                0.55, "Your edge came back green."),
+})
+ORDER = ORDER + ["greener"]
+
+
+def _crust(P, pts, r0, r1, n=9, slot='body', seed=0.0):
+    """A verdigris crust ALONG a limb: flattened nodules sitting proud of the
+    member they grow on, not a recolour of it.
+
+    This is the whole argument of the body, so it is geometry and not paint:
+    the Dyer's arms were a TUBE in a second material, which reads as a sleeve.
+    A crust has to break the silhouette or a viewer at stream distance cannot
+    tell it from a coloured sleeve - so each nodule is an ellipsoid pushed out
+    past the limb radius, and the sizes run unequal along the run because
+    corrosion does.
+    """
+    for i in range(n):
+        t = i / float(n - 1)
+        a, b = Vector(pts[0]), Vector(pts[-1])
+        if len(pts) > 2 and t > 0.5:
+            a, b = Vector(pts[1]), Vector(pts[-1])
+            t = (t - 0.5) * 2.0
+        elif len(pts) > 2:
+            b = Vector(pts[1])
+            t = t * 2.0
+        c = a + (b - a) * t
+        rr = r0 + (r1 - r0) * t
+        w = rr * (0.62 + 0.52 * abs(math.sin(i * 2.399 + seed)))
+        th = i * 1.771 + seed
+        # PASS 9: 0.72 -> 0.52. _colour_read counted a 435 px DETACHED
+        # COMPONENT in the side view at mid-height, and the arithmetic says
+        # why: at offset 0.72 x rr a nodule sits 0.09 m off the limb axis
+        # while the SMALLEST nodules on the run are only 0.078 m across, so
+        # the thin end of each run could clear the member it is supposed to be
+        # growing on. A crust that floats is not a crust. This is the check
+        # that caught the Dyer's eyes hanging in front of its face, doing the
+        # same job again.
+        off = Vector((math.cos(th), math.sin(th), 0.0)) * (rr * 0.52)
+        P.add(L.sphere(w, w * 0.78, w * 0.54, 9, 6), slot,
+              loc=(c.x + off.x, c.y + off.y, c.z), rot=(0.0, 0.0, th))
+
+
+def _leaf(P, cx, cy, cz, yaw, pitch, w=0.52, h=0.68, slot='bone', thick=0.016):
+    """One hammered copper sheet, bowed. Flat planes vanish edge-on - the
+    Pressman fault, and the Dyer's answer was a bow in the hanging axis. These
+    are bowed in their own normal and FANNED in yaw for the same reason."""
+    V, F = [], []
+    nx, nz = 4, 5
+    for iz in range(nz + 1):
+        tz = iz / float(nz)
+        for ix in range(nx + 1):
+            tx = ix / float(nx)
+            lx = (tx - 0.5) * w
+            lz = (tz - 0.5) * h
+            ly = 0.085 * math.sin(math.pi * tx) * (0.45 + 0.55 * tz)
+            V.append((lx, ly, lz))
+    k = nx + 1
+    base = len(V)
+    V = V + [(x, y + thick, z) for (x, y, z) in V]
+    for iz in range(nz):
+        for ix in range(nx):
+            a0 = iz * k + ix
+            F.append((a0, a0 + 1, a0 + k + 1, a0 + k))
+            b0 = base + a0
+            F.append((b0 + k, b0 + k + 1, b0 + 1, b0))
+    for ix in range(nx):
+        F.append((ix, base + ix, base + ix + 1, ix + 1))
+        b0 = nz * k + ix
+        F.append((b0 + 1, base + b0 + 1, base + b0, b0))
+    for iz in range(nz):
+        l0 = iz * k
+        F.append((l0 + k, base + l0 + k, base + l0, l0))
+        r0 = iz * k + nx
+        F.append((r0, base + r0, base + r0 + k, r0 + k))
+    P.add(([Vector(v) for v in V], F), slot, loc=(cx, cy, cz),
+          rot=(pitch, 0.0, yaw))
+
+
+def _crock(P, cx, cy, r, h, bloom=True):
+    """A vinegar crock: staves, two hoops, and the green bloom on its shoulder
+    where the copper hangs. The bloom is 'body' - the same material as the
+    crust on him, because it is the same stuff."""
+    for j in range(12):
+        th = TAU * j / 12.0
+        sx, sy = cx + r * math.cos(th), cy + r * math.sin(th)
+        P.add(L.box(0.17, 0.085, h), 'dark', loc=(sx, sy, h * 0.5),
+              rot=(0.0, 0.0, th + math.pi * 0.5))
+    for z in (h * 0.22, h * 0.82):
+        ring = [Vector((cx + (r + 0.028) * math.cos(TAU * i / 20.0),
+                        cy + (r + 0.028) * math.sin(TAU * i / 20.0), z))
+                for i in range(21)]
+        P.raw(L.tube(ring, 0.030, 6), 'dark')
+    if bloom:
+        for j in range(7):
+            th = TAU * j / 7.0 + 0.4
+            bx, by = cx + r * 0.92 * math.cos(th), cy + r * 0.92 * math.sin(th)
+            P.add(L.sphere(0.072, 0.062, 0.040, 9, 6), 'body',
+                  loc=(bx, by, h * 0.96))
+
+
+def greener():
+    """IT GREENS YOUR IRON.
+
+    A greener hangs copper over vinegar and scrapes the green off it. This one
+    does it to your weapons. Every blow landed on it leaves the edge a little
+    more eaten and a bitten weapon bites less; a hero can stop and scrape,
+    which costs them the swings they would have taken. So the party is not
+    choosing how to kill it - each of them is choosing how long they can
+    afford to keep hitting it, and the scraping is a cost they pay themselves.
+
+    WHY IT IS NOT ONE OF THE TWENTY-FOUR, and this was checked by PARSING
+    CANON in this file rather than by remembering it - 38 entries, 24 distinct
+    bodies. The set summons, re-plates itself, drags one out of the line,
+    douses the lamps, rises from its graves, bars the door, steals gear, heals
+    the room, floods it, sows thorns, pre-sets traps, scales with the fire,
+    throws its voice, sets the floor, splits in two, arms the other monsters,
+    loads you down, cuts the party in half, learns the blow you used, takes the
+    haul, drinks the brews, collars your fallen, strikes the party level, and
+    marks one hero and hunts the mark. NOTHING IN THAT LIST TOUCHES THE
+    WEAPON ITSELF, which is the one object a viewer has actually paid points
+    for, and that is the whole reason this one is worth building.
+    TWO ADJACENCIES NAMED RATHER THAN DENIED: the Tanner also answers your
+    blows, but it changes ITSELF - it pegs a fresh hide against the damage you
+    repeated, and your sword is untouched when you walk out. The Scrapwright
+    also degrades a thing over the fight, but the thing it degrades is its own
+    shell. This one is the only one whose arithmetic happens on the hero's
+    side of the fight, and the only one a hero can undo by spending time.
+
+    *** THE TRADE IS ON THE BODY. THAT IS THE ROW AND IT IS THE WHOLE BUILD. ***
+    The lead's read of the Dyer was that the frame and the tun carried the
+    trade and the man beside them read as a dark armature. So this body has
+    almost no furniture: TWO low crocks and a charcoal bed on the ground, and
+    everything else that says GREENER is growing on him. The crust runs up
+    both forearms and across the chest and shoulders as nodules that stand
+    PROUD of the member - geometry, not a second material on a smooth tube,
+    because a coloured tube reads as a sleeve at stream distance. The copper
+    leaves ride on his own back. The scraper is in his hands, placed off one
+    defined line so the grip cannot drift. The two weapons he has already
+    eaten lie at his feet.
+
+    *** AND THE COLOUR FILLS A MEASURED HOLE, WHICH IS WHY THIS TRADE. ***
+    _colour_read over the register: 110-190 degrees held by ZERO bodies before
+    this one. Verdigris is 110-190 by construction. The bright copper on his
+    back is the complement and is the SECOND band, so the body holds two hues
+    the way the Dyer does, and it holds them for the same reason - the product
+    and the stock are different things and a yard shows both.
+
+    WEAR 0.55 AND IT IS SPLIT AGAIN: the man, his apron, the crock staves and
+    the scraper's iron are eaten and old; the copper LEAVES are new, bright
+    and barely rough, because they are the stock he bought this week. The
+    crust takes its colour from OVERRIDE and skips the dulling, because a
+    corrosion bloom is not a worn thing - it is this week's growth.
+
+    FRAMES: every number here is in BLENDER'S WORLD FRAME as written into the
+    .glb - front is model -Y, up is +Z. That is NOT the engine's slot frame;
+    nothing here converts to a Godot rotation.
+
+    FOUR MESHES, four slots, four materials. The cap is untouched.
+
+    Static: a `model` path and no `anims` entry.
+    """
+    P = Parts("greener")
+    P.spans = {}
+    P.used_pack = False
+    P.pack_caps = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX, MY = -0.10, -0.30
+    HIP, SH, HEAD = 0.96, 1.56, 1.90
+
+    # THE SCRAPER'S LINE, DEFINED FIRST so both hands read off it and cannot
+    # drift when the shaft moves - the Dyer's change G, kept as a standing
+    # habit. It travels in X AND Y AND Z: the front camera gets a diagonal out
+    # of X, the side camera gets one out of Y. A shaft that only travels in X
+    # is a vertical post from the side, which is the Pressman fault.
+    _SB = Vector((MX - 1.18, MY - 1.02, 2.26))
+    _SE = Vector((MX + 0.86, MY + 0.52, 0.42))
+
+    def _SCRAPE(t):
+        v = _SB + (_SE - _SB) * t
+        return (v.x, v.y, v.z)
+
+    # ------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    for s in (-1, 1):
+        limb(P, [(MX + s * 0.18, MY + 0.04, HIP), (MX + s * 0.22, MY - 0.06, 0.50),
+                 (MX + s * 0.24, MY - 0.14, 0.09)], 0.102, 0.084, 'dark')
+        P.add(L.box(0.26, 0.40, 0.11), 'dark', loc=(MX + s * 0.24, MY - 0.22, 0.058))
+    # leaning forward over the work, not posing
+    limb(P, [(MX, MY + 0.10, 0.88), (MX + 0.04, MY - 0.02, 1.22),
+             (MX + 0.10, MY - 0.14, SH)], 0.238, 0.246, 'dark')
+    for s in (-1, 1):
+        P.add(L.sphere(0.118, 0.110, 0.100, 11, 8), 'dark',
+              loc=(MX + 0.10 + s * 0.258, MY - 0.14, SH + 0.03))
+    P.add(L.sphere(0.136, 0.152, 0.152, 14, 9), 'dark', loc=(MX + 0.12, MY - 0.18, HEAD))
+    # a flat cap. A tradesman, not a helm - and the Dyer's eye lesson applied:
+    # the head's own forward offset is in `loc`, so `fwd` here is the ONLY
+    # forward term. Passing both put the Dyer's eyes 0.23 m off his face.
+    P.add(aim(L.cone(0.212, 0.192, 0.034, 14), (MX + 0.12, MY - 0.20, HEAD + 0.148),
+              (0.0, -0.14, 1.0)), 'dark')
+    eyes(P, (MX + 0.12, MY - 0.18, HEAD), 0.052, 0.026, -0.136)
+    # THE ARMS. Upper arm is the man; the FOREARM is where the trade lives, so
+    # the member stays 'dark' and the crust grows on it below.
+    for s, t in ((-1, 0.285), (1, 0.525)):
+        hx, hy, hz = _SCRAPE(t)
+        sx = MX + 0.10 + s * 0.258
+        mid = ((sx + hx) * 0.5, (MY - 0.14 + hy) * 0.5 - 0.05, (SH + hz) * 0.5 + 0.03)
+        P.raw(L.tube([(sx, MY - 0.14, SH + 0.01), mid], [0.092, 0.074], 8), 'dark')
+        P.raw(L.tube([mid, (hx, hy, hz)], [0.074, 0.056], 8), 'dark')
+        P.add(L.sphere(0.076, 0.070, 0.066, 9, 7), 'dark', loc=(hx, hy, hz))
+    # the apron - leather, eaten, and NOT green. The green is on the skin.
+    # PASS 2, CHANGE C: at 0.52 x 0.84 the apron was the largest single mass
+    # on the figure and it covered the chest crust, the belt line and both
+    # thighs - a black slab where the trade was supposed to be. Cut to
+    # 0.40 x 0.60 and raised, so it still says LEATHER AND WORK and the green
+    # on him is no longer behind it.
+    P.add(L.box(0.40, 0.09, 0.60), 'dark', loc=(MX + 0.04, MY - 0.30, 1.00),
+          rot=(0.10, 0.0, 0.0))
+    _span("man", i0)
+
+    # ------------------------------------------------- THE CRUST: THE TRADE
+    i0 = len(P.items)
+    for s, t in ((-1, 0.285), (1, 0.525)):
+        hx, hy, hz = _SCRAPE(t)
+        sx = MX + 0.10 + s * 0.258
+        mid = (((sx + hx) * 0.5), ((MY - 0.14 + hy) * 0.5 - 0.05), ((SH + hz) * 0.5 + 0.03))
+        # PASS 8: nodules up from 0.086/0.062 over 7 to 0.125/0.095 over 11,
+        # and the upper arm takes it too. A crust that reads at 4% of the
+        # silhouette is a detail; the row asked for the trade to be ON him.
+        _crust(P, [mid, (hx, hy, hz)], 0.125, 0.095, n=11, seed=1.7 * s)
+        sx2 = MX + 0.10 + s * 0.258
+        _crust(P, [(sx2, MY - 0.14, SH + 0.01), mid], 0.120, 0.100, n=7,
+               seed=0.9 * s)
+    # across the chest and the shoulders, where a man carries wet plates
+    # PASS 8: more of them and bigger, and they come down onto the thigh -
+    # a man who carries wet plates has it wherever the plates touch him.
+    for (cx, cy, cz, r) in ((MX - 0.19, MY - 0.27, 1.32, 0.136),
+                            (MX + 0.05, MY - 0.31, 1.42, 0.148),
+                            (MX + 0.26, MY - 0.25, 1.26, 0.126),
+                            (MX - 0.11, MY - 0.29, 1.13, 0.120),
+                            (MX + 0.15, MY - 0.30, 1.36, 0.110),
+                            (MX - 0.02, MY - 0.28, 1.19, 0.104),
+                            (MX + 0.32, MY - 0.16, SH + 0.02, 0.130),
+                            (MX - 0.16, MY - 0.14, SH + 0.04, 0.122),
+                            (MX + 0.08, MY - 0.22, SH + 0.08, 0.098),
+                            (MX - 0.25, MY - 0.22, 0.86, 0.112),
+                            (MX + 0.27, MY - 0.24, 0.80, 0.104),
+                            (MX - 0.20, MY - 0.24, 0.72, 0.092)):
+        P.add(L.sphere(r, r * 0.74, r * 0.52, 9, 6), 'body', loc=(cx, cy, cz))
+    # PASS 3, CHANGE H: from the side and the back the chest crust is behind
+    # his own arm and apron, so the trade was carried by two forearm runs
+    # alone in those views. A man who carries wet plates on his back has it
+    # on his shoulder blades, which is both true and the view that needed it.
+    for (bx, bz, r) in ((-0.20, 1.38, 0.124), (0.14, 1.30, 0.116),
+                        (-0.04, 1.50, 0.104), (0.22, 1.12, 0.094),
+                        (-0.26, 1.16, 0.088)):
+        P.add(L.sphere(r, r * 0.72, r * 0.50, 9, 6), 'body',
+              loc=(MX + bx, MY + 0.06, bz))
+    # and up the jaw - a greener's face takes it too
+    for (jx, jz, r) in ((-0.075, HEAD - 0.10, 0.068), (0.095, HEAD - 0.12, 0.062),
+                        (0.00, HEAD - 0.17, 0.056)):
+        P.add(L.sphere(r, r * 0.80, r * 0.62, 8, 6), 'body',
+              loc=(MX + 0.12 + jx, MY - 0.285, jz))
+    _span("crust", i0)
+
+    # ------------------------------------------------- THE STOCK ON HIS BACK
+    i0 = len(P.items)
+    # a rack of five hammered leaves, fanned so no two are edge-on at once
+    # PASS 2, CHANGE D: at z 1.34 the rack sat BEHIND the torso and read as a
+    # brown fence panel with its top edge below his shoulders - it neither
+    # broke the silhouette nor looked like metal. It rides higher and the fan
+    # is widened, so the top corners of the leaves clear the shoulder line and
+    # the stack is read as a stack from both cameras.
+    # PASS 3, CHANGE G, AND IT IS A FLOAT THE SIDE CAMERA FOUND. At MY + 0.32
+    # the rack stood in CLEAR AIR behind his back - a stack of plates carried
+    # by nobody, which is the Dyer's pass-3 paddle fault wearing a different
+    # shape. It comes in to MY + 0.17 so it rides ON him, and it slides to his
+    # LEFT: at centre it stood directly behind his head in the front view and
+    # made a brown backdrop for the one small dark thing a viewer has to read.
+    # PASS 4: the fan was symmetrical about the camera's own axis, so the
+    # middle leaves faced the front camera flat-on and the stack read as ONE
+    # board. The fan is swung round and each leaf gets its own pitch, so no
+    # two leaves present the same angle to either camera and the stack is read
+    # as a stack - the Drillmaster's lesson, that a symmetrical thing reads as
+    # wallpaper.
+    for i, yaw in enumerate((-0.86, -0.52, -0.20, 0.14, 0.48)):
+        _leaf(P, MX - 0.26 + (i - 2) * 0.095, MY + 0.17 + abs(i - 2) * 0.034,
+              1.55 + (i % 2) * 0.06, yaw, 0.10 + 0.07 * ((i % 3) - 1),
+              w=0.46, h=0.70)
+    # the strap that holds them on him
+    P.raw(L.tube([(MX - 0.34, MY + 0.10, SH + 0.02), (MX + 0.06, MY - 0.26, 1.22),
+                  (MX + 0.28, MY + 0.10, SH - 0.02)], [0.030, 0.034, 0.030], 7), 'dark')
+    _span("plates", i0)
+
+    # ------------------------------------------------- THE CROCKS AND THE BED
+    i0 = len(P.items)
+    # PASS 2, CHANGE A, AND IT IS THE DYER'S CHANGE K MADE AGAIN BY ME. At
+    # r 0.40 / h 0.58 the two crocks were a BLACK DRUM across the bottom third
+    # of both pictures - from the side the man stood behind a wall of staves
+    # with his legs gone, which is the exact silhouette the Dyer's vat had to
+    # be cut twice to escape, and the exact silhouette the Tapster already
+    # owns. They come down to 0.24 and 0.19 radius and go BACK, so they are a
+    # working man's crocks at his heel and not the thing you name him by.
+    # PASS 6: shifted clear of the fire basket that change L puts at
+    # (MX+1.14, MY+0.52) - two solids in one place is a modelling fault, not
+    # a yard.
+    # PASS 7: the second crock goes. Change L's fire basket put a THIRD
+    # object in the yard and the footprint went 3.19 -> 3.66 m, which is the
+    # row's own fault creeping back in - the lead asked for the trade on the
+    # BODY, and a yard that grows is furniture competing with the man again.
+    # One crock with the copper hanging over it says the trade; two said it
+    # twice.
+    # *** PASS 8, AND THE INSTRUMENT OVERTURNED MY OWN PICTURE. ***
+    # _trade_read on pass 7: crust 0.0439 of the front silhouette, plates
+    # 0.1518, crocks 0.1129, brazier 0.1809. THE YARD WAS CARRYING 44% AND THE
+    # TRADE ON THE MAN WAS CARRYING FOUR PER CENT - which is precisely the
+    # fault the lead asked this body to fix, measured on my own build while I
+    # was looking at the picture and calling it fixed. And minibossfit went
+    # RED at the same time: pair_w 5.61 against a 5.60 m frame.
+    # One cause, two reports. THE CROCK GOES ALTOGETHER. A greener with a fire
+    # and copper over it is a greener; the crock was the third way of saying
+    # the same sentence, and it cost 1.13 m of footprint to say it.
+    pass
+    _span("crocks", i0)
+
+    i0 = len(P.items)
+    # the charcoal bed under them: an ember field, low and small. The only
+    # emissive on this body, and it is there because a vinegar house is warmed.
+    # *** PASS 2, CHANGE B. I CAPPED MY OWN EMISSIVE AGAIN. *** Pass 1 put the
+    # ember discs UNDER the crocks at r 0.30 and 0.25 against crock radii of
+    # 0.40 and 0.33 - so the only light on this body was inside a ring of
+    # staves and no eye-level camera could see one pixel of it. The render
+    # said ok:true, 0 blanks, 0 clips, because a HIDDEN thing is not a blank
+    # one. That is this lane's trap 5, written in my own prompt, committed for
+    # the second time in two bodies.
+    # THE FIX IS ALSO THE TRUER THING, same as the Dyer's brimming vat: a
+    # charcoal bed is WIDER than the crock standing on it, and what you see
+    # of it is the ring of ember GROUND around the foot. So the bed is drawn
+    # proud of the crock, not under it, and three more coals lie in clear
+    # floor between him and the crocks where nothing can hide them.
+    # PASS 4, CHANGE I. The wide disc was the wrong SHAPE for an emissive and
+    # change F could not save it: a flat 0.40 m plate of unshaded orange on
+    # the floor plane reads as a PEACH PUDDLE, and a hotter colour only made
+    # the puddle brighter. A charcoal bed is not a pool of light, it is a ring
+    # of burning lumps round the crock's foot - so it is drawn as lumps, which
+    # catch the two suns and shade like objects instead of flooding flat.
+    # *** PASS 6, CHANGE L. I HAVE NOW HIDDEN MY OWN FIRE THREE TIMES IN ONE
+    # *** BODY AND THE PATTERN IS THE FINDING, NOT THE PIXELS.
+    # Pass 2 put the bed UNDER the crocks (invisible). Pass 3 made it hotter
+    # and wider (a peach puddle). Pass 4 made it lumps on open floor (peaches).
+    # Pass 5 gave it a dark pan - and the pan's own rim, at this 2 degree
+    # camera pitch, closed over the coals exactly the way the Dyer's cone lid
+    # closed over its vat. THE THING I KEPT GETTING WRONG IS NOT COLOUR,
+    # STRENGTH, SIZE OR CONTRAST: IT IS HEIGHT. An eye-level camera cannot see
+    # INTO anything lying on the floor plane, so no floor-level emissive in
+    # this register can ever be seen, however it is dressed.
+    # SO THE FIRE COMES OFF THE FLOOR, and it is truer there too: a vinegar
+    # house is WARMED, and a warming fire lives in a basket on legs at hip
+    # height, not in a dish on the ground. The coals are heaped PROUD of the
+    # rim, so what the camera sees is the heap and not the inside of a bowl.
+    BX, BY, BZ = MX + 0.92, MY + 0.44, 0.78      # PASS 8: in, off the frame edge
+    for j in range(3):                      # three legs, splayed
+        th = TAU * j / 3.0 + 0.5
+        limb(P, [(BX + 0.26 * math.cos(th), BY + 0.26 * math.sin(th), 0.03),
+                 (BX + 0.10 * math.cos(th), BY + 0.10 * math.sin(th), BZ - 0.06)],
+             0.040, 0.032, 'dark')
+    for j in range(14):                     # the basket's staves
+        th = TAU * j / 14.0
+        P.add(L.box(0.055, 0.045, 0.24), 'dark',
+              loc=(BX + 0.30 * math.cos(th), BY + 0.30 * math.sin(th), BZ + 0.06),
+              rot=(0.0, 0.0, th))
+    ring = [Vector((BX + 0.315 * math.cos(TAU * i / 22.0),
+                    BY + 0.315 * math.sin(TAU * i / 22.0), BZ + 0.17))
+            for i in range(23)]
+    P.raw(L.tube(ring, 0.034, 6), 'dark')
+    for (ux, uy, uz, rr) in ((0.00, 0.00, 0.26, 0.105), (-0.17, 0.08, 0.20, 0.082),
+                             (0.16, -0.06, 0.21, 0.088), (0.04, 0.17, 0.19, 0.074),
+                             (-0.06, -0.17, 0.20, 0.078), (0.19, 0.14, 0.17, 0.066),
+                             (-0.19, -0.05, 0.18, 0.070)):
+        P.add(L.sphere(rr, rr * 0.94, rr * 0.80, 9, 7), 'glow',
+              loc=(BX + ux, BY + uy, BZ + uz))
+
+    _span("brazier", i0)
+
+    # ------------------------------------------------- THE SCRAPER
+    i0 = len(P.items)
+    b, e = _SCRAPE(0.0), _SCRAPE(1.0)
+    P.raw(L.tube([b, _SCRAPE(0.5), e], [0.038, 0.046, 0.044], 8), 'dark')
+    P.add(L.sphere(0.056, 0.056, 0.048, 9, 6), 'dark', loc=b)
+    # the blade: copper, so it does not corrode in his own hand
+    P.add(L.box(0.30, 0.10, 0.22), 'bone', loc=(e[0] + 0.03, e[1] + 0.04, e[2] - 0.10),
+          rot=(0.18, -0.22, 0.0))
+    # a curl of scraped green coming off the blade
+    for i in range(3):
+        P.add(L.sphere(0.056 - i * 0.010, 0.046, 0.030), 'body',
+              loc=(e[0] + 0.10 + i * 0.07, e[1] + 0.10 + i * 0.05, e[2] - 0.20 - i * 0.07))
+    _span("scraper", i0)
+
+    # ------------------------------------------------- WHAT IT HAS ALREADY EATEN
+    i0 = len(P.items)
+    # a sword and an axe head on the floor, gone green. The Scrapwright's two
+    # spare plates and the Dyer's three splashes - the evidence it has done
+    # this before, told in the silhouette and not in a stat.
+    P.raw(L.tube([(MX - 1.02, MY - 0.44, 0.045), (MX - 0.46, MY - 0.64, 0.045)],
+                 [0.034, 0.026], 6), 'dark')
+    P.add(L.box(0.13, 0.10, 0.06), 'dark', loc=(MX - 1.09, MY - 0.42, 0.048))
+    for i in range(4):
+        P.add(L.sphere(0.052, 0.040, 0.030, 8, 6), 'body',
+              loc=(MX - 0.94 + i * 0.14, MY - 0.49 - i * 0.050, 0.072))
+    P.add(aim(L.cone(0.19, 0.055, 0.055, 12), (MX + 0.44, MY - 1.02, 0.040),
+              (0.0, 0.0, 1.0)), 'dark')
+    for i in range(3):
+        P.add(L.sphere(0.058, 0.046, 0.032, 8, 6), 'body',
+              loc=(MX + 0.36 + i * 0.10, MY - 1.06 + i * 0.05, 0.070))
+    _span("taken", i0)
+
+    return P
+
+
+BUILDERS.update({"greener": greener})

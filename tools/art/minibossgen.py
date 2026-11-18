@@ -72,7 +72,12 @@ def build_miniboss(key):
     # bands). That was a defect in this generator, not a taste problem.
     # The override list is asserted EMPTY for every pre-existing key, so the
     # twenty-three render byte-for-byte as before.
-    _LEGACY = set(M.ORDER) - {"dyer"}
+    # 17 Nov, THE GREENER: the permitted set is DECLARED IN minibosses.py
+    # (OVERRIDE_ALLOWED) instead of hard-coded here, because this assertion
+    # exists to stop an override being pointed at an ALREADY-SHIPPED body and
+    # a literal in this file would have made every new key trip it. Falls back
+    # to {"dyer"} so an older minibosses.py still asserts.
+    _LEGACY = set(M.ORDER) - getattr(M, "OVERRIDE_ALLOWED", {"dyer"})
     assert not (set(M.OVERRIDE) & _LEGACY), \
         "OVERRIDE must not touch an already-shipped key: %s" % sorted(set(M.OVERRIDE) & _LEGACY)
     mats = M.apply_overrides(key, mats)

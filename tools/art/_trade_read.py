@@ -53,6 +53,15 @@ TRADE = {
     # on it is a drying rack; the cloth, the vat, the paddle, the skeins and
     # the splashes are the job.
     "dyer": ("sheets", "vat", "paddle", "skeins", "splashes"),
+    # THE GREENER: the crust is ON THE MAN, which is the point of the body, so
+    # it is measured as a trade span of its own - a number for "does the trade
+    # read off the body" and not off the yard. The man himself stays out.
+    # PASS 8 removed the crock from the build (the yard was carrying 44% of
+    # the silhouette and the trade on the man 4%), so 'crocks' comes out of
+    # this list too. IT WENT RED ON EMPTY FIRST, which is exactly what it was
+    # built to do - the list is a declaration and a stale declaration is a
+    # lie, not a 0.000 share.
+    "greener": ("crust", "plates", "scraper", "taken", "brazier"),
 }
 BODY_SPANS = ("man", "body", "arms", "legs", "head")
 

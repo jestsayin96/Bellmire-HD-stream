@@ -1130,11 +1130,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "greener": {
+   "title": "The Greener",
+   "theme": "workshop",
+   "idea": "IT GREENS YOUR IRON - every blow landed on it leaves the weapon a little more eaten, and a bitten weapon bites less; a hero can stop and scrape it clean, which costs them the time they would have spent swinging, so the party is not choosing how to kill it but how long each of them can afford to keep hitting it",
+   "wear": 0.55,
+   "feed_line": "Your edge came back green.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 5743,
+   "size": [
+    2.71,
+    2.16,
+    2.5
+   ],
+   "footprint_span": 2.71,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1385595283437486,
+    "ortho": 3.332960605621338,
+    "clip": [
+     8.195965766906738,
+     21.31563949584961
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 72,
+  "files": 75,
   "failures": []
  }
 }

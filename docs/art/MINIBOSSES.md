@@ -2875,3 +2875,169 @@ Footprint 2.48 m against the 11.0 m three-cell clear span: **CORRIDOR-SAFE**,
 
 ### LICENCE
 Procedural. Original generated geometry, no pack asset loaded.
+
+---
+
+## 31. THE COMFITMAKER - *IT GIVES YOU THE ONLY THING THAT CUTS IT* (2026-11-18, art lane)
+
+| key | title | h | theme | THE IDEA | wear | span |
+| --- | --- | --- | --- | --- | --- | --- |
+| `comfitmaker` | The Comfitmaker | 2.28 | confection | **IT GIVES YOU THE ONLY THING THAT CUTS IT** - its shell is sugar-hard and nothing the party carries marks it, but it hands out comfits as it fights and a comfit is the one thing that does. Take one and you can hurt it; the sugar also gums the hand that took it, so that hero swings slower for as long as they hold it | 0.08 | 1.83 |
+
+`comfitmaker` - confection - h **2.28** - wear **0.08** - 4 meshes, **2,626 faces** -
+footprint span **1.83 m** against an 11.0 m three-cell corridor: **CORRIDOR-SAFE**,
+and the second-narrowest body in the register after the Drillmaster.
+
+### WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+
+1. **Thirty bodies, counted off the committed `.glb` files, not off CANON.**
+   CANON holds 44 rows; 12 are `_chibi` and three more are Drillmaster probe
+   variants (`drillmaster_tall`, `drillmaster_chibi`, `drillmaster_chibi_tall`)
+   that are not bodies. Counting rows inflates barracks from 2 to 4.
+2. **Which theme is actually thinnest.** Bodies per theme off those files:
+   workshop 4, keep 3, firepit 3, barracks 2, crypt 2, flooded 2, fogbound 2,
+   grassland 2, mess 2, prison 2, treasury 2, wood 2 - and **confection 1** and
+   **shrine 1**. `dungeon_hd.gd:737-743` rolls the miniboss slot at 35 on
+   barracks/workshop, 10 on shrine/crypt, 15 on prison and every unlisted
+   theme. Confection is unlisted, so it fires at **15 with one candidate**;
+   shrine fires at 10 with one. Confection is the thinner by how often the slot
+   actually fires - half again as often - so that is where the body goes.
+3. **I am correcting the Fenman's note, not contradicting it.** Section 30 says
+   "confection 2"; that parse counted CANON rows and `boiler_chibi` is a row.
+   Counted as committed bodies, confection has only ever had the Boiler.
+4. **The thirty existing ideas, parsed out of CANON.** Every one of them either
+   TAKES something from the party or DOES something to the room. Not one of
+   them GIVES the party anything. That is the gap this creature fills.
+5. **The packs, listed rather than recalled.** `C:\hd adventure\_packs` now
+   holds **56 entries**, up from the 40 the standing brief claims. Nothing in
+   them is a tiered sweetmeat stand or a pair of comfit nippers, and both are
+   trivially procedural, so this body is bmesh throughout. No pack geometry.
+
+### WHY IT IS NOT A 31ST COAT OF ONE OF THE THIRTY
+
+- the **TAPSTER** drinks what you brought - consumables flow party -> creature.
+  Here they flow the other way, which is the whole point.
+- the **QUARTERMASTER** arms the room; it hands weapons to ITS side. This one
+  hands them to YOURS, and that is why it is dangerous.
+- the **GREENER** eats your weapon as you land blows, so your damage decays.
+  Here your weapon never works at all and a borrowed one does.
+
+### AND THE BOILER IS THE SHAPE I HAD TO BUILD AWAY FROM
+
+The Boiler is the other confection body: a **round pan** carried high with a
+**pour** off it, h 2.10, wear 0.25. My first design was a **panning bowl** -
+comfits really are made by rotating a core in a pan - and that is the same
+object on the same theme. **It was dropped before a vertex was written.** What
+replaced it is a tall narrow **tiered stand**: vertical where the pan is round,
+stepped where the pour is continuous, and the instrument is the pale thing
+rather than the hot one.
+
+### SIX PASSES, AND WHAT EACH ONE BOUGHT
+
+1. Built: man, nippers, three-tier stand, 4+3+2 lit shells.
+2. **THE SIDE VIEW CAUGHT ME MAKING THE MISTAKE I WROTE A PARAGRAPH ABOUT.**
+   Pass 1 put the stand outboard **in x only**. The side camera throws x away,
+   so post and all three tiers landed on top of the torso and the creature read
+   as **one column - a hat on a stack of plates, no man in it**. The stand also
+   comes forward 0.60 in y. *A thing that must stand clear has to be clear in
+   BOTH horizontal axes, because each camera discards one of them.*
+3. Tried to make the nine shells read by making them **brighter** (glow 2.4 ->
+   7.0). The render barely moved.
+4. **SO I MEASURED THE RENDER INSTEAD OF GUESSING A THIRD TIME, AND PASS 3 WAS
+   THE WRONG FIX FOR THE RIGHT FAULT.** In front.png a shell sampled
+   (245.6, 232.2, 213.0) and the plate under it (238.8, 225.9, 207.1) - **four
+   levels apart out of 255**. The eye, the same glow material, sampled
+   (245.8, 232.2, 213.0), identical, so the material was applied and uniform:
+   **the emitter is clamped at display white.** 2.4 and 7.0 land on the same
+   pixels; 70 would have too. The dish had to get darker because the sweet
+   could not get brighter - `bone` dropped from (0.880, 0.840, 0.720) to
+   (0.300, 0.268, 0.206). *Brightness has a ceiling and contrast does not.*
+5. **THE FIT RENDER FOUND THE REAL FAULT, WHICH IS WHY IT EXISTS.** Beside the
+   posed KayKit knight the creature read as a **thin stick figure** - the
+   Ratcatcher's pass-2 fault, which I quoted in my own docstring while shipping
+   it. **My prose was the unchecked number**: the docstring claimed "head ~0.27
+   of his own height" and the geometry gave it 0.14. I measured the knight off
+   the fit render rather than guessing a target - alpha width as a fraction of
+   each figure's own height from the top:
+
+   | from top | 0.05 | 0.12 | 0.20 | 0.30 | 0.40 | 0.55 |
+   | --- | --- | --- | --- | --- | --- | --- |
+   | KNIGHT | 113 | 129 | **139** | **146** | **147** | 125 |
+   | PASS 4 | 86 | 65 | **62** | 125 | 152 | 117 |
+
+   The knight is **widest at the top** and stays wide through 0.40 - its head
+   is the whole upper third. Pass 4 narrowed toward the top. Rebuilt to those
+   numbers: head half-width 0.46 (0.40 of body height across, against the
+   knight's 0.44), head on the top 0.35, legs cut to 0.28 and thickened.
+6. The head was then a **straight drum wider at the crown than at the jaw**, so
+   it read as a barrel with a lid and the cap became the lid. Flipping the two
+   radii (0.470 jaw, 0.385 crown) was the whole fix. Size untouched.
+
+### FIT - RENDERED ON A BODY AND LOOKED AT
+
+`renders/art/minibosses/_fit_comfitmaker_register.json`, verdict **GREEN**:
+ratio **0.93**, pair_w **3.69**, `fits_frame` true, hero measured and posed
+(h 2.45, the KayKit knight, 8 parts), errors **[]**, blind_views **[]**,
+blank 3 files / 0 failures. Contact views: 0 blanks, 0 frame clips.
+I looked at `hero_front.png`, `hero_side.png`, `hero_back.png`, `front.png`
+and `side.png`.
+
+### THE HONEST FAULT LIST - ELEVEN, AND THE FIRST THREE MATTER
+
+1. **THE NIPPERS DO NOT READ AS NIPPERS.** From the front the two open legs
+   plus the two handles above the pivot make a **tripod** - a surveyor's easel
+   or a walking stick. This is the weakest object on the body and I did not
+   fix it; six passes went on the stand, the shells and the proportions. It is
+   the first thing I would take another pass at.
+2. **THE WHOLE CREATURE IS MONOCHROME GREY-TAUPE.** Confection does not read
+   as a theme from the colour, and **wear 0.08 does not read at all** - a
+   "fresh, scoured, prosperous" body looks like every other grey one in the
+   register. The warm values are in `OVERRIDE` and the view transform eats
+   them; this lane measured AgX taking 56% of a copper on 17 Nov. The receipt
+   Mr. E asks for is not being paid by this body's colour.
+3. **THE EYES ARE THE SAME GLOW MATERIAL AS THE COMFITS**, so his eyes are
+   exactly the colour of the gift - measured identical, (245.8, 232.2, 213.0)
+   against (245.6, 232.2, 213.0). That dilutes the one claim the creature
+   makes, which is that the lit things are what it hands you. I kept the eyes
+   on purpose (the Fenman shipped a faceless hood and its own list calls it a
+   no-face read at pane distance) but the dilution is real and is mine.
+4. **The count is a FRONT-VIEW read only.** The side camera throws x away, so
+   a tier cannot be counted from the side; what survives is the three-tier
+   structure, 0.44 apart in z against a 0.15-tall shell. Stated rather than
+   claimed away - this is a narrower claim than the Fenman's five weights.
+5. **The left arm reads as a flat slab**, not an arm, in the front view.
+6. **The right forearm crosses in front of the middle tier** and partly hides
+   one shell in the front view.
+7. **The apron and the legs are both near-black and merge** into one mass
+   below the waist. The apron does not read as an apron.
+8. **From the side the head overhangs the torso backward** and the figure
+   reads slightly top-heavy.
+9. **The head is still the plainest in the set** - a tapered drum with two
+   dots, no mouth or brow. It is a head, not a bucket, which is pass 6's win,
+   but it is not better than that.
+10. **Ratio 0.93 - it is SHORTER than the hero.** For a miniboss that is small;
+    the stand, not the man, is what gives it presence. Deliberate (a short
+    broad tradesman) but worth Mr. E's eye.
+11. **The bottom tier's shells slightly overlap the plate rim** in the front.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+
+I touched no `.gd` outside `tools/art/`. To put it in the game:
+
+- **`scripts/bestiary.gd`** - add a row keyed `comfitmaker` with
+  `model` = `res://assets/monsters/minibosses/comfitmaker.glb` and
+  **`h` = 2.28**, which is art's measured number - do not re-derive it.
+  **IT IS STATIC - there is no armature - so it takes NO `anims` entry.**
+- **It ships with no `.glb.import` sibling**, because this lane never runs
+  Godot. One Godot run generates it. Same state the Fenman shipped in.
+- **`dungeon_hd.gd`'s `THEME_MINIBOSS`** maps one key per theme and
+  `confection` currently maps to `boiler`. A second-per-theme pick is the game
+  build's call, not mine; until one exists this body will not spawn, exactly
+  as the Greener and the Dyer sat on `workshop`.
+- **CORRIDOR-SAFE at 1.83 m** against the 11.0 m three-cell clear span. It is
+  not room-locked and needs no spawn gate.
+
+### LICENCE
+
+Procedural bmesh + numpy, original to this repo. No pack geometry, no imported
+mesh, nothing to record in `docs/art/ASSET_SOURCES.md`.

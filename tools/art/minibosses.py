@@ -7301,7 +7301,7 @@ BUILDERS.update({"dyer": dyer})
 # in an old colour. Verdigris is the one working-class trade whose PRODUCT is
 # green: copper hung over vinegar, scraped off as pigment, and a man who has
 # done it for twenty years is green to the elbow.
-OVERRIDE_ALLOWED = {"dyer", "greener"}
+OVERRIDE_ALLOWED = {"dyer", "greener", "rammer"}
 
 OVERRIDE.update({
     "greener": {
@@ -11102,3 +11102,232 @@ def beadle():
 
 
 BUILDERS.update({"beadle": beadle})
+
+
+# ============================================================ 34 THE RAMMER
+# A pile-driver: an A-frame, an iron monkey hauled to the head, a hunched
+# hauler on the fall-rope, and the pile already standing in the floor under it.
+#
+# WHY THIS IS NOT A 34th COAT OF ONE OF THE THIRTY-THREE. I parsed the ideas
+# out of CANON this run rather than recalling them - 47 rows, 33 distinct base
+# keys - and grepped every one for the vocabulary of TIMING:
+#   rhythm, tempo, cadence, timing, telegraph, warn, hear, pause,
+#   "every other", turn:          ZERO HITS, every one of them.
+#   beat:   4 hits, all DRILLMASTER rows - "beats the muster", a drum that
+#           SUMMONS. The beat is what the thing plays, not something the party
+#           has to read.
+#   count:  3 hits - the TALLYMAN ("Something is counting what you carry") and
+#           the BEADLE's four brass pegs. Both count THINGS, not time.
+#   coming: 2 hits, the SLUICEKEEPER - "The water is coming up". This is the
+#           nearest row in the set and I am not going to pretend otherwise: it
+#           escalates over time, a step at a time. But it escalates in ONE
+#           direction and the answer is to shut the sluice. There is no moment
+#           in it that is safe and no moment that is not.
+#   sound:  1 hit, the BELLMAN - misdirection in SPACE, not in time.
+# So nothing in the thirty-three is answered by WHEN. Every one of them is
+# answered by deciding WHAT to do - damage, healing, gear, gold, stores,
+# light, ground, position, facing, movement, who acts. This one is answered by
+# standing somewhere else for two beats and then stepping back in, and the
+# telegraph is built into the silhouette: THE MONKEY IS UP. A viewer who has
+# never seen it before can read "that is about to fall" from the door, and can
+# read WHERE from the pile stub on the floor under it.
+#
+# THE TWO IT IS NEAREST TO, and the differences are not quibbles:
+#   - the SNARER has already set the room and drives you onto its lines. That
+#     is a place you must not be, fixed for the whole fight. This is a place
+#     you must not be ON A COUNT - the same square is safe and lethal by turns.
+#   - the PRESSMAN presses your fallen. Also a crushing thing, also vertical,
+#     but it is a punishment for having already lost someone. The Rammer kills
+#     nobody who reads it.
+#
+# ROOM-LOCK: the frame is TALL, not wide - the footprint span is reported by
+# minibossgen against CORRIDOR_CLEAR and recorded in the register.
+#
+# WEAR 0.58, and it is not one wear. Pile gear lives in wet ground: the timber
+# is river-soaked and bruised, the rope is frayed. THE MONKEY IS THE
+# INSTRUMENT AND A WORKING MAN KEEPS HIS INSTRUMENT - the iron is the one
+# thing here that is not rotten, same argument as the Drillmaster's gong.
+CANON.update({
+    "rammer": ("The Rammer", 2.75, (0.54, 0.47, 0.37), (0.95, 0.92, 0.70),
+               "flooded",
+               "IT DROPS ON THE COUNT - it hauls the monkey to the head of the "
+               "frame, it holds, and it lets go. Whatever is standing on the "
+               "pile when the monkey falls is finished, and you can HEAR it "
+               "coming: the haul is slow and the hold is the warning. The "
+               "answer is not what you do, it is when - stand off the pile for "
+               "the drop and come back in while it hauls",
+               0.58, "Something is being driven into the floor."),
+})
+ORDER = ORDER + ["rammer"]
+
+
+def rammer():
+    """IT DROPS ON THE COUNT. A three-legged pile-driving frame with an iron
+    monkey hauled high under the head, a bruised pile standing out of the floor
+    beneath it, and a hunched hauler leaning back on the fall-rope at its near
+    side.
+
+    THE SILHOUETTE IS THE TELEGRAPH. The frame is the only frame in the set -
+    nothing else here is an open structure you can see through, and the two
+    things the fight turns on are the two things that read first: the BLOCK IS
+    UP (so it is going to come down) and the PILE IS THERE (so that is where).
+    The hauler is deliberately small and off to one side; it is not the
+    monster, it is the reason the monster is loaded, and it must never read as
+    a hero - no weapon, no shield, bent at the hip, both hands on a rope.
+
+    Plainness is the voice: this is a thing for driving posts into wet ground
+    and it looks like one."""
+    P = Parts("rammer")
+    # ---------------------------------------------------------- THE FRAME
+    # Head over the pile at y -0.10, so the block hangs where the pile is.
+    HX, HY, HZ = 0.0, -0.10, 2.52
+    # two front legs splayed in x, one raked back in +y: a tripod stands on any
+    # floor, and a tripod is also why this reads as built rather than grown.
+    limb(P, [(-0.66, 0.04, 0.0), (-0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.66, 0.04, 0.0), (0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.0, 0.94, 0.0), (0.0, 0.52, 1.32), (HX, HY + 0.04, HZ)], 0.082, 0.058, 'bone')
+    # the head: a squat capping block with the sheave pin through it
+    P.add(L.box(0.40, 0.34, 0.17), 'bone', loc=(HX, HY + 0.02, HZ + 0.06))
+    _ring(P, (HX, HY + 0.02, HZ + 0.06), 0.115, 'y', 'dark', 0.028, 14)
+    # braces. Two, at different heights, and NOT a symmetrical pair - the lower
+    # one carries the hauler's side only, which is how a working frame is
+    # actually braced and keeps the silhouette from reading as a letter A.
+    P.add(L.box(1.06, 0.11, 0.095), 'bone', loc=(0.0, 0.10, 1.12))
+    P.add(L.box(0.62, 0.10, 0.085), 'bone', loc=(0.30, 0.34, 0.52), rot=(0.0, 0.0, -0.22))
+    # ------------------------------------------------- THE PILE IN THE FLOOR
+    # Driven, not fresh: the head is BROOMED - mushroomed and split from being
+    # hit. This is the one piece of wear that has to read, because it is the
+    # evidence that the thing works.
+    P.raw(aim(L.cone(0.205, 0.185, 0.36, 14), (HX, HY, 0.0), (0.0, 0.0, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.255, 0.215, 0.075, 16), (HX, HY, 0.335), (0.0, 0.0, 1.0)), 'bone')
+    for i in range(5):
+        a = TAU * (i / 5.0) + 0.3
+        P.add(L.box(0.055, 0.055, 0.13), 'bone',
+              loc=(HX + 0.165 * math.cos(a), HY + 0.165 * math.sin(a), 0.40),
+              rot=(0.22 * math.sin(a), -0.22 * math.cos(a), 0.0))
+    # the chalk ring the crew marks on the pile head - the ONE glow in the
+    # body, and it is on the floor saying WHERE, which is the information the
+    # fight is about. Kept well inside the frame, nowhere near the border.
+    _ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow', 0.016, 18)
+    # ------------------------------------------------------- THE MONKEY, UP
+    # Hauled nearly to the head. Its top at ~2.19 against the head at 2.52 -
+    # a visible gap of rope, so it reads as HANGING and not as part of the
+    # frame. Iron: the kept thing.
+    # PASS 5, ONE CHANGE, AND THE SILHOUETTE SHEET IS THE ONLY THING THAT
+    # FOUND IT. Passes 1-4 put the monkey at half-width 0.165. The frame legs
+    # pass through x +-0.167 at that height - I worked it off the leg polyline
+    # rather than off the picture: the leg runs (0.66,0.04,0) -> (0.34,0,1.32)
+    # -> (0,-0.10,2.52), so at z 1.93 it sits at 0.34 - 0.508*0.34 = 0.167.
+    # THE BLOCK AND THE LEGS WERE FLUSH TO TWO MILLIMETRES. In colour that was
+    # fine - dark iron against pale oak - but with the colour thrown away the
+    # block VANISHED into the frame in two of three views, one solid mass, no
+    # outline of its own. The telegraph this whole creature is built on - THE
+    # MONKEY IS UP, SO IT IS COMING DOWN - was being carried by hue alone, and
+    # hue is the one thing a silhouette test takes away. Same family as the
+    # Beadle's facing: every number green, the shape saying nothing.
+    # The fix is not more contrast, it is more OUTLINE. At half-width 0.29 the
+    # block stands 0.12 proud of each leg and reads as a separate heavy thing
+    # at any distance, in any colour - which is also what a real monkey looks
+    # like, so plainness and legibility want the same shape here.
+    # The bands are BOXES, not rings: a ring at this width would have to be
+    # bigger than the block to wrap it, and would read as a hoop floating
+    # around nothing. Straps span the face and break the outline too.
+    MZ = 1.93
+    P.add(L.box(0.58, 0.34, 0.52), 'dark', loc=(HX, HY, MZ))
+    P.add(L.box(0.62, 0.38, 0.062), 'dark', loc=(HX, HY, MZ + 0.195))
+    P.add(L.box(0.62, 0.38, 0.062), 'dark', loc=(HX, HY, MZ - 0.195))
+    # the lifting eye
+    _ring(P, (HX, HY, MZ + 0.30), 0.055, 'y', 'dark', 0.022, 12)
+    # ------------------------------------------------------------ THE ROPE
+    # monkey -> head -> down and back to the hauler's grip. Frayed: thin.
+    limb(P, [(HX, HY, MZ + 0.33), (HX, HY, HZ + 0.02)], 0.022, 0.020, 'dark')
+    limb(P, [(HX + 0.10, HY + 0.04, HZ + 0.05), (HX + 0.38, HY + 0.18, 2.00),
+             (0.62, 0.26, 1.40)], 0.021, 0.018, 'dark')
+    # ----------------------------------------------------------- THE HAULER
+    # PASS 2. Pass 1 shipped a figure I looked at and would not have accepted
+    # from anyone else: a flared cowl wider than its own shoulders that read as
+    # a LAMPSHADE, two arm stubs buried in a cape, and a fall-rope that ended
+    # in mid-air beside its face instead of in its hands. On the side view it
+    # also leaned FORWARD over the frame, which is the opposite of hauling.
+    # Four faults, one cause - I built the man as decoration on the machine
+    # instead of building the action. This block builds the ACTION: feet
+    # planted toward the frame, hips and shoulders tipped BACK off the rope,
+    # both arms reaching up and forward, and the rope terminating AT THE GRIP.
+    # PASS 6, ONE CHANGE: THE HAULER'S PROPORTIONS, AND ONLY THE FIT RENDER
+    # ON AN ACTUAL BODY COULD HAVE FOUND IT. minibossfit came back GREEN -
+    # verdict GREEN, 3 views proving, 0 blank, 0 blind, ratio 1.12 hero heights
+    # - and then I looked at hero_front.png. Beside the KayKit knight my hauler
+    # was a REALISTIC SEVEN-HEAD FIGURE: small head, long thin shins, long
+    # forearms. The knight is chibi - the head is about a third of him. Two
+    # different games standing next to each other, and not one number in that
+    # register is capable of saying so, because every number it computes is
+    # about SIZE and this is about PROPORTION.
+    # The set has hit this before and the register still carries the scars -
+    # ten bodies whose idea text ends "rebuilt in the game's own proportions"
+    # or "in the game's own register", plus a whole family of _chibi variants
+    # that exist for this one reason. The cheap answer is to ship this and
+    # queue a rammer_chibi. I am not doing that: the body has not shipped yet,
+    # so the fix costs one pass now instead of a second body forever.
+    # THE FRAME IS NOT TOUCHED. A pile-driver is a machine and machines are
+    # not chibi; it is the MAN who has to belong to the knight's world.
+    # Head ~0.46 across against a ~1.55 figure - a shade under a third, which
+    # is where the KayKit bodies sit. Limbs short and thick, neck gone.
+    GPX, GPY, GPZ = 0.62, 0.26, 1.40          # the grip - where the rope ends
+    for _s in (-1, 1):
+        limb(P, [(0.90 + _s * 0.14, 0.52, 0.64),
+                 (0.90 + _s * 0.18, 0.46, 0.34),
+                 (0.90 + _s * 0.21, 0.38, 0.085)], 0.125, 0.105, 'body')
+        P.add(L.box(0.215, 0.33, 0.085), 'dark',
+              loc=(0.90 + _s * 0.21, 0.30, 0.0425))
+    # a short barrel torso - broad for its height, which is the whole chibi read
+    limb(P, [(0.94, 0.52, 0.60), (0.97, 0.53, 0.84), (0.98, 0.52, 1.06)], 0.255, 0.225, 'body')
+    P.raw(aim(L.cone(0.280, 0.205, 0.17, 16), (0.98, 0.52, 1.00), (0.05, 0.02, 1.0)), 'body')
+    # THE HEAD. No neck: it sits straight on the shoulders, same as the knight.
+    P.add(L.sphere(0.225, 0.235, 0.240, 16, 11), 'dark', loc=(1.00, 0.50, 1.30))
+    P.raw(aim(L.cone(0.252, 0.088, 0.24, 16), (1.00, 0.51, 1.26), (-0.10, -0.06, 1.0)), 'body')
+    eyes(P, (0.97, 0.44, 1.30), 0.072, 0.035, -0.19)
+    # ARMS: short, thick, both up on the rope. Mitts, not hands - the bodies
+    # this stands beside have mitts.
+    limb(P, [(0.88, 0.44, 1.08), (0.76, 0.36, 1.26), (GPX + 0.04, GPY - 0.01, GPZ - 0.02)],
+         0.105, 0.080, 'body')
+    limb(P, [(1.06, 0.60, 1.04), (0.88, 0.48, 1.18), (GPX + 0.11, GPY + 0.07, GPZ - 0.12)],
+         0.100, 0.076, 'body')
+    P.add(L.sphere(0.092, 0.092, 0.082, 10, 7), 'body', loc=(GPX + 0.04, GPY - 0.01, GPZ - 0.02))
+    P.add(L.sphere(0.088, 0.088, 0.078, 10, 7), 'body', loc=(GPX + 0.11, GPY + 0.07, GPZ - 0.12))
+    return P
+
+
+
+# PASS 3, AND IT IS ONE CHANGE: COLOUR. Passes 1-2 rendered the whole body in
+# one grey. That is the monochrome-by-construction fault the Dyer found in the
+# generator - every material derived from ONE tint - and on THIS body it is not
+# a taste problem, it is a legibility problem and it breaks two of Mr. E's
+# three rules at once. Rule 1, things look like what they are FOR: a timber
+# pile-frame that renders the same value as its own iron block reads as
+# GALVANISED STEEL, which is not a thing a medieval crew drives piles with.
+# Rule 2, wear is a variable, not a style: the whole argument of this body is
+# that the frame is river-rotten and THE MONKEY IS KEPT, and one grey cannot
+# say that. I measured it off the pass-2 render rather than deciding it by eye:
+# the frame and the monkey differed only in value, never in hue.
+#   bone  WET OAK, bruised. Warm and dark: it has stood in water.
+#   dark  THE IRON, and it is the brightest-faced material here on purpose -
+#         a working man keeps his instrument (the Drillmaster's gong argument).
+#         The hauler's hood is also in this slot, so it picks up a little
+#         sheen; on a hood that reads as oiled leather, which is honest, but
+#         it IS a shared slot and I am naming it rather than hiding it.
+#   body  the hauler's wool, pulled to a river green-grey so the man SEPARATES
+#         from the timber he is standing against instead of merging into it.
+#   glow  the crew's chalk ring on the pile head. Strength 1.55, not 3.2: the
+#         Dyer's lesson is that an emissive pushed until it is bright clips to
+#         a white hole, and this mark has to stay a CHALK RING - it is the
+#         "where it lands" read and a white disc says nothing.
+OVERRIDE.update({
+    "rammer": {
+        'body': ((0.235, 0.250, 0.205), 0.80, 0.00),
+        'bone': ((0.330, 0.238, 0.148), 0.78, 0.00),
+        'dark': ((0.155, 0.160, 0.172), 0.42, 0.50),
+        'glow': ((1.000, 0.965, 0.840), 1.55),
+    },
+})
+
+BUILDERS.update({"rammer": rammer})

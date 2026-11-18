@@ -2038,3 +2038,160 @@ The leaves do not yet read as copper and this is not a tick. What changed:
   - Full working, the two abandoned metrics and the named next change are in
     docs/art/METAL_READ.md. Fit unchanged: GREEN, ratio 1.02, pair_w 4.57,
     three proving views, errors [], footprint 2.71 m CORRIDOR-SAFE.
+
+## 26. THE MOULDER - *IT TAKES YOUR SHAPE* (2026-11-18, art lane)
+
+| key | title | h | theme | the one idea | wear |
+|---|---|---|---|---|---|
+| `moulder` | The Moulder | 2.90 | firepit | **IT TAKES YOUR SHAPE** - it presses one of your heroes into its sand bed and pours, and what stands up out of the box fights with that hero's reach and that hero's swing | 0.26 |
+
+Feed line: *"It took a copy of one of you."*
+
+### WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+The plan's 00:58 CT row says twenty minibosses exist. **It is twenty-five**, counted
+off the tree: `assets/monsters/minibosses/` holds 25 base `.glb` (plus 11 `_chibi`).
+I parsed all 25 idea strings out of `CANON` rather than trusting a list, and grepped
+this file for *reflect / returns the blow / takes your shape / copy*: **zero hits**.
+The spent mechanic classes are summoning, self-defence, positioning, your gear,
+perception, scaling, targeting, the fallen, splitting itself, and healing the room.
+
+**NOTHING IN THE SET MAKES THE PARTY FIGHT ITSELF.** That is the empty class and it is
+the one where the threat is AUTHORED BY THE PLAYERS: bring your heavy hitter and you
+will be fighting your heavy hitter. It is **not** the Drillmaster or the Quartermaster
+- those call or arm the room's own monsters and the party has no say in what turns up.
+It is **not** the Jointer - the Jointer halves *itself*, and neither half is anybody's
+hero. The counter is to decide who it is allowed to read, and to break the mould before
+the metal sets.
+
+### SEVEN PASSES, ONE CHANGE EACH, EVERY ONE DRIVEN BY A PICTURE
+1. **Build.** 4 meshes, span 1.95 m, CORRIDOR-SAFE, 0 blanks. Looked at it: every
+   emissive element - pour, seam, crucible mouth, the man's eyes - read as **pale tan
+   sticks**. Wood, not metal at heat.
+2. **Glow material.** See the A/B below. (1.000, 0.425, 0.105) @1.60 -> (1.000, 0.120,
+   0.012) @0.80.
+3. **Five form changes**, measured only as a group and labelled as such: the blade's
+   thin axis swapped (the side camera looks along X and was getting the blade's broad
+   face - a pale slab hiding the cast); the parting seam moved from the chest centre,
+   where it read as a strap, to the two side edges where a cope-and-drag flask actually
+   splits; the man's eyes from r 0.030 to 0.048 with a brow, because he had no face at
+   all - the Greener's fault, shipped a third time; the hung castings put on real pegs
+   (they read as keyholes); the floor sprue broken in two (it read as a spoon).
+4. **THE CAST REBUILT TO THE HERO'S OWN PROPORTIONS.** Only the on-body render could
+   find this: `_moulder_register.png` put the cast beside a posed KayKit adventurer and
+   **the hero is a chibi and my cast was not**. A creature whose one idea is IT TAKES
+   YOUR SHAPE had taken a shape that is not yours. Every gate passed it.
+   `tools/art/_moulder_chibi_probe.py` measures the body through
+   `minibossfit.import_hero`: head block **55.3%** of h, body 37.4%, legs 21.3%, widest
+   head 1.14, arm span 1.32. Every z and width in the cast is now that table mapped
+   through `z = FEET + (z_hero/2.45)*HC`.
+5. **The copy made hero-sized.** At pass 4 its head broke the dashed hero rule - the
+   copy was taller than the hero it copies. `HC` is now the hero's measured 2.45 m
+   exactly; its feet sit at 0.45, buried, which is why it still rides higher on the
+   sheet. FEET + HC = 2.90, so the idea sets this body's height and the blade no longer
+   does.
+6. **The flask dropped 0.28.** A chibi head is as deep as it is wide (1.14 x 1.017), so
+   from the side, with only 0.32 m of shoulder clearing the bed, the cast read as a
+   **giant pale egg**. The bed is lower; the cast did not move.
+7. **The pour arm brought down, and the sword arm brought forward 0.30.** At pass 5 the
+   crucible sat at z 2.02 against a head centred at 2.22 and from the side the shank ran
+   *into* the head - two objects on the same screen line are one object, and the side
+   camera looks down the only axis that separated them. The sword arm now comes forward
+   as well as out so the elbow and blade break the ovoid.
+
+### THE GLOW A/B - AN AUTHORED sat 0.895 WAS RENDERING AT 0.349
+`tools/art/_moulder_glow_ab.py`, measured on the pour's own pixels:
+
+| strength | authored rgb | measured sat | kept |
+|---|---|---|---|
+| 1.60 | (1.000, 0.425, 0.105) | 0.349 | 39% |
+| 1.45 | (1.000, 0.265, 0.035) | 0.510 | 53% |
+| 1.30 | (1.000, 0.210, 0.025) | 0.577 | 59% |
+| 1.10 | (1.000, 0.180, 0.020) | 0.648 | 66% |
+| **0.80** | **(1.000, 0.120, 0.012)** | **0.792** | **80%** |
+
+Saturation is monotone in strength: **an emissive pushed up the view transform's
+shoulder buys brightness by spending colour**, because white is where every hue ends.
+That is the Dyer's cream weld and the Greener's beige coals said as a curve. 0.80 is
+taken, and I looked at the 1.10 and 0.80 renders before choosing. Shipped body now
+measures **sat 0.798 / 0.791 / 0.787** at hue 19 across front, side and three-quarter,
+against pass 1's 0.349 at hue 28.
+
+**THE GUARD I WROTE WAS THE WRONG GUARD, AND I AM RECORDING IT RATHER THAN THE NUMBER
+IT GAVE.** `share_in_frame_top1pct` asks whether the pour is the brightest thing by
+LUMINANCE, which is weighted 0.72 toward green, so a deep red-orange scores near zero
+against pale sand however hot it looks. It fell 0.92 -> 0.00 between 1.60 and 1.45
+while `val` went *up*, 0.851 -> 0.861. A guard that moves opposite to the quantity it
+guards is not a guard. Had I obeyed it I would have shipped the tan.
+
+### TWO INSTRUMENT FAULTS I FOUND IN MY OWN HARNESS THIS RUN
+Both were caught by the number being impossible, not by the code looking wrong.
+1. **`_moulder_read` v1 measured what the pour LIGHTS, not the pour.** It counted every
+   pixel that moved at all between the lit and unlit arms: 181,928 px of 686,000 - a
+   quarter of the frame - for four tubes about 2 cm across, and reported sat 0.0775,
+   the colour of a dimly warmed dark body. The two are now separated: `lit_px` is the
+   illuminated footprint, `moved_px` is the emissive surface above a 0.25 threshold,
+   and only the surface is asked what colour it is.
+2. **The A/B's first version differenced a SIDE view against a FRONT view.**
+   `render_views` leaves the camera on the last view it shot, and the B arm was rendered
+   straight after it. All six arms came back identical to three decimals -
+   **a sweep in which the independent variable changes nothing is not a flat result, it
+   is an instrument measuring something else**, and that is the only reason it was
+   caught.
+
+### WEAR 0.26 IS DERIVED, NOT CHOSEN
+This is a split body: the man is old (burnt leather, soot, iron handled daily - 0.80),
+and the mould furniture and the castings are remade for every cast, so they are nearly
+new (0.10) - Mr. E's second rule, the goods must not read second-hand even when the man
+does. `tools/art/_moulder_wear.py` sums polygon area per material off the merged mesh
+that ships: man 7.73, new 26.88, area-weighted mean **0.2564 -> 0.26**. Nobody picked it.
+
+### THE FIT PROOF - ON A BODY, AND EVERY FAULT I CAN SEE
+`renders/art/minibosses/_moulder_register.png`, against a real posed `Knight.glb` at
+scale 1.0 (hero h **2.45 m**, measured, not assumed). **VERDICT GREEN**: ratio 1.18,
+pair span 4.20, fits_frame true, **3 of 3 proving views**, 0 blind views, 0 unproved
+cells, blank check 3 files 0 failures. Generator: 4 meshes, 1,971 faces, span **2.34 m**
+against the 11.0 m three-cell corridor - **CORRIDOR-SAFE**, not room-locked. Border
+check clean, 0 frame clips.
+
+**WHAT IS STILL WRONG - ten, and the first one is the real one:**
+1. **The side view is the weakest of the three and the egg is not cured.** At 55% head
+   the cast is head-dominated from a camera that cannot see either arm's spread. Pass 7
+   broke the outline with the forward arm; it did not fix the proportion, and nothing
+   short of giving the cast a cape or a crest will. The front and three-quarter views
+   carry the idea; the side carries it weakly.
+2. **The copy's head rides above the dashed hero rule.** True and explained - its feet
+   are buried at 0.45 - but a viewer at a glance may read the copy as *bigger* than the
+   hero rather than *standing in a box*.
+3. **The pour is nearly invisible from the side**: 1,336 moved px against 3,611 at the
+   front. Only the seams carry the heat in that view.
+4. **The forearm reads as a pale wedge across the cast's chest** from the side - pass
+   7 bought the outline break at that cost.
+5. **The sword is a plain grey paddle** at register distance, not a blade.
+6. **The hung castings read as a row of white teeth** along the box face.
+7. **The rammer is lost** against the dark box edge in every view.
+8. **The crucible reads as a banded pail**; its orange rim reads as paint, not contents.
+9. **The sand bed's lumps read as potatoes.**
+10. **The box is the largest and brightest mass** in the frame and competes with the
+    cast for the eye.
+
+**AND ONE THING NO INSTRUMENT HERE COULD HAVE CAUGHT.** The occlusion test passed all
+three views at pass 5 while the crucible was visually welded to the cast's head, because
+it asks whether the hero can see the creature and the creature the hero - never whether
+one PART of a creature has eaten another. The picture caught it. The number could not.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+- `assets/monsters/minibosses/moulder.glb` - **static**, so `bestiary.gd` needs a
+  `model` path and **no `anims` entry**. Height **2.90** (`BOSS_DEFS`/bestiary `h`);
+  art's measured number, do not re-derive it - `renders/art/minibosses/_report.json`
+  and `_fit_moulder_register.json` carry span, ratio and face count.
+- Theme **firepit** for the set-piece roll (joins the Stoker and the Tapster).
+- **CORRIDOR-SAFE at 2.34 m** - no spawn gate needed.
+- The mechanic, at its cheapest honest version, needs **no hero-clone**: on spawn, mark
+  the hero that lands the first blow; after a fixed pour, spawn one minion that carries
+  that hero's weapon reach and damage, with the Moulder's own hp. Breaking the flask
+  before the pour completes cancels it. The art carries the read either way.
+
+### LICENCE
+All geometry is original vertex maths through `lordlib`. No pack asset is used in this
+body and nothing is re-exported. The KayKit adventurer is loaded read-only by the fit
+harness as the measuring stick, as it is for every other creature in this register.

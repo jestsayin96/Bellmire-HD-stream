@@ -8025,3 +8025,394 @@ def greener():
 
 
 BUILDERS.update({"greener": greener})
+
+
+# ===========================================================================
+# 26. THE MOULDER - *IT TAKES YOUR SHAPE*
+# ===========================================================================
+# WHY THIS IDEA AND NOT A TWENTY-SIXTH COAT OF AN OLD ONE - PARSED, NOT
+# REMEMBERED. CANON carries 25 idea strings. I read all 25 out of the file and
+# grepped the register's own doc: "reflect", "returns the blow", "takes your
+# shape", "copy" - ZERO hits. The mechanic CLASSES already spent are:
+#   summoning (drillmaster: the garrison | quartermaster: arms the room)
+#   self-defence (scrapwright re-plates | tanner adapts | sexton re-rises)
+#   positioning (porter bars | hurdleman splits the room | snarer pre-sets it |
+#               boiler sets the floor | sluicekeeper floods it | sower thorns it)
+#   your gear (tallyman takes it | greener eats it | loader weighs it |
+#               reeve takes the haul | tapster drinks your brews)
+#   perception (snuffer dark | bellman misdirection)
+#   scaling (stoker fire-bound | strickler levels your best down)
+#   targeting (dyer marks one | gaoler drags one)
+#   the fallen (pressman stands them up on its side)
+#   itself (jointer comes apart)
+#   the room's health (cook heals it)
+# NOTHING IN THE SET MAKES THE PARTY FIGHT ITSELF, and that is the one empty
+# class: the threat is AUTHORED BY THE PLAYERS. It is NOT the Drillmaster or the
+# Quartermaster - those call or arm the room's OWN monsters, and the party has
+# no say in what turns up. Here the party decides what it is fighting the
+# moment it decides who swings first. It is not the Jointer either: the Jointer
+# halves ITSELF, and neither half is anybody's hero.
+#
+# THE TRADE IS PLAIN AND IT IS REAL WORK: a sand-caster. A founder rams a bed,
+# presses a pattern into it, pours, and what comes out is the pattern again in
+# metal. The creature does that to a HERO. Bellmire's register is working-class
+# stoicism and nothing here is theatrical: a box of sand, a rammer, a crucible
+# on a shank, a pour, and the thing standing up in the box.
+#
+# WEAR IS A VARIABLE AND THIS ONE IS DERIVED, NOT CHOSEN. The man is old
+# (0.80 - burnt leather, soot, iron handled daily); the mould furniture is
+# REMADE FOR EVERY CAST, so it is almost new (0.10), and Mr. E's second rule
+# says the goods must not read second-hand. The CANON scalar below is the
+# SURFACE-AREA-WEIGHTED MEAN of those two, measured off the merged mesh by
+# tools/art/_moulder_wear.py - see docs/art/MINIBOSSES.md. It is not a taste
+# number and I did not pick it.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"moulder"}
+
+OVERRIDE.update({
+    "moulder": {
+        # THE MAN. Burnt leather and soot - the darkest body in the register on
+        # purpose, because every silhouette problem this lane has shipped was a
+        # dark creature against its own dark furniture (the Greener's head
+        # vanishing from the side is the live one). Here the man is DARK and
+        # the thing behind him is PALE, so his outline is carried by contrast
+        # and not by a rim light I would have to invent.
+        'body': ((0.072, 0.056, 0.046), 0.88, 0.02),
+        # THE CAST, AND THE CASTINGS ALREADY HUNG UP. The one bright thing on
+        # the body, and it is the thing the party is about to be hit by.
+        # THE GREENER'S MEASURED LESSON IS APPLIED HERE RATHER THAN
+        # REDISCOVERED: in this rig metallic is a dial that SPENDS a metal look
+        # (a metallic lobe is tinted by base colour and can never run white,
+        # and a near-black world leaves a mirror nothing to reflect). So this
+        # is a lacquered DIELECTRIC - metal low, specular level 0.86, roughness
+        # off the floor so the sun's ~0.5 deg disc makes a sheen with AREA
+        # instead of a glint smaller than a pixel. _metal_read is the judge.
+        'bone': ((0.780, 0.762, 0.720), 0.30, 0.06, 0.86),
+        # THE SAND AND THE FLASK. The slot is named 'dark' and the colour is
+        # PALE, which looks wrong in a diff and is the whole point: rammed
+        # foundry sand is grey-buff, it is new every cast, and it is the
+        # background the man has to read against.
+        'dark': ((0.262, 0.238, 0.206), 0.92, 0.00),
+        # THE POUR. The only honest emissive here - metal at pouring heat.
+        # Kept at 1.6: the Dyer's weld clipped to CREAM at 2.30 and a white
+        # hole is not a hue, and the Greener settled at 1.45 for the same
+        # reason. A pour is hotter than a charcoal bed, so one step above it.
+        # PASS 2, AND IT IS THE A/B's NUMBER, NOT MY TASTE.
+        # tools/art/_moulder_glow_ab.py swept strength against hue and measured
+        # the pour's own pixels (the with/without diff, source stratum only).
+        # SATURATION IS MONOTONE IN STRENGTH AND THE LOSS IS LARGE:
+        #   1.60 (0.425,0.105) -> sat 0.349   KEPT 39% of the authored 0.895
+        #   1.45 (0.265,0.035) -> sat 0.510   kept 53%
+        #   1.30 (0.210,0.025) -> sat 0.577   kept 59%
+        #   1.10 (0.180,0.020) -> sat 0.648   kept 66%
+        #   0.80 (0.120,0.012) -> sat 0.792   kept 80%
+        # which is the Dyer's cream weld and the Greener's beige coals said as
+        # a curve: an emissive pushed up the view transform's shoulder BUYS
+        # BRIGHTNESS BY SPENDING COLOUR, and white is where every hue ends.
+        # 0.80 is taken. I LOOKED AT THE 1.10 AND THE 0.80 RENDERS BEFORE
+        # CHOOSING and the picture agrees with the number: at 1.60 a viewer
+        # names the pour as a pale stick, at 0.80 as something hot.
+        # THE GUARD I WROTE WAS THE WRONG GUARD AND I AM RECORDING THAT RATHER
+        # THAN THE NUMBER IT GAVE: `share_in_frame_top1pct` asks whether the
+        # pour is the brightest thing by LUMINANCE, and luminance is weighted
+        # 0.72 toward green, so a deep red-orange scores near zero against pale
+        # sand however hot it looks. It fell 0.92 -> 0.00 between 1.60 and 1.45
+        # while `val` went UP, 0.851 -> 0.861. A guard that moves opposite to
+        # the quantity it is guarding is not a guard; had I obeyed it I would
+        # have shipped the tan. Both numbers stay in the report, with this
+        # sentence beside them.
+        # THE HONEST LIMIT: at 0.80 the stream reads as FLAT ORANGE, not as
+        # metal with a white-hot core. One emissive material cannot carry both,
+        # and a second is a change I am not making in the same pass as five
+        # others.
+        'glow': ((1.000, 0.120, 0.012), 0.80),
+    },
+})
+
+CANON.update({
+    "moulder": ("The Moulder", 2.90, (0.62, 0.58, 0.52), (1.00, 0.56, 0.20),
+                "firepit",
+                "IT TAKES YOUR SHAPE - it presses one of your heroes into its "
+                "sand bed and pours, and what stands up out of the box fights "
+                "with that hero's reach and that hero's swing; the party is "
+                "not choosing how to kill it but which of them it is allowed "
+                "to read, so the hero who leads is the hero they will have to "
+                "fight, and the mould can be broken before the metal sets",
+                0.26, "It took a copy of one of you."),
+})
+ORDER = ORDER + ["moulder"]
+
+
+def moulder():
+    """IT TAKES YOUR SHAPE. A stooped founder at the front, a box of sand
+    behind him, and a hero-shaped casting standing up out of the box.
+
+    SILHOUETTE INTENT - TWO HEADS AT TWO HEIGHTS, AND ONE OF THEM IS YOURS:
+      - the outline carries a HERO SHAPE in it. Nothing else in the register
+        does, and that single fact is the idea readable at stream distance:
+        a viewer sees what the fight is about before a line fires;
+      - the man is LOW and stooped at the front (-Y), the flask is TALL behind
+        him (+Y), so the two are separated IN DEPTH. The side view is the
+        camera this creature is built for - the Reeve shipped a side view with
+        one body behind another and both checks in minibossfit passed it, so
+        depth separation here is by construction and the occlusion test is the
+        instrument that keeps it;
+      - the cast is CUT OFF at the sand line: legs still buried, a sprue stub
+        where an arm has not run, a parting seam up the middle. A finished
+        statue would read as a statue. An unfinished one reads as a thing
+        being made;
+      - five small castings hung on the flask's near board - it has done this
+        before, said in the silhouette and not in a stat;
+      - an ODD arm count on the man (rammer down, crucible out, no third) and
+        a head small enough that the cast's head is the one you look at.
+
+    Front is -Y, same as the other twenty-five."""
+    P = Parts("moulder")
+    # Section spans, the same record every body since the Hurdleman keeps, so
+    # _metal_read / _trade_read / _colour_read can measure ONE part of this
+    # body without rebuilding it by hand. It changes no geometry.
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    # the two anchors everything hangs off. MX/MY: the flask. HX/HY: the man.
+    FX, FY = 0.26, 0.46
+    HX, HY = -0.46, -0.52
+    # PASS 5, ONE NUMBER, AND THE SIDE RENDER IS THE WHOLE REASON. At pass 4
+    # the bed stood at 1.34 and the cast cleared it by only 0.32 - its
+    # shoulders and nothing else. A chibi head is as DEEP as it is wide (the
+    # measured hero: 1.14 across, 1.017 front to back), so from the side, with
+    # no shoulder line showing under it, the cast read as A GIANT PALE EGG and
+    # the hero shape - the entire idea - disappeared in one of the three views.
+    # NOTE WHAT DID NOT CATCH THIS: the occlusion test passed all three views,
+    # because it asks whether the hero can see the creature and the creature
+    # the hero, not whether one PART of the creature has eaten another. The
+    # picture caught it; no number in this lane could have.
+    # The flask drops 0.28 so the chest and shoulders clear the bed. The cast
+    # does not move, so it is still exactly the hero's measured 2.45 m.
+    BOX_DROP = 0.28
+    SAND_Z = 1.34 - BOX_DROP           # the top of the rammed bed
+
+    # ------------------------------------------------- THE FLASK (box of sand)
+    i0 = len(P.items)
+    # the stand it sits on - trestle, not a plinth. Furniture that says so.
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            limb(P, [(FX + sx * 0.52, FY + sy * 0.26, 0.00),
+                     (FX + sx * 0.44, FY + sy * 0.22, 0.52 - BOX_DROP)], 0.062, 0.052, 'dark')
+    P.add(L.box(1.22, 0.70, 0.075), 'dark', loc=(FX, FY, 0.56 - BOX_DROP))
+    # the box itself: four boards and the bed inside. Open at the top.
+    for sx in (-1, 1):
+        P.add(L.box(0.060, 0.68, 0.74), 'dark', loc=(FX + sx * 0.58, FY, 0.97 - BOX_DROP))
+    for sy in (-1, 1):
+        P.add(L.box(1.20, 0.058, 0.74), 'dark', loc=(FX, FY + sy * 0.34, 0.97 - BOX_DROP))
+    # the bed: rammed sand, proud of the boards and uneven because it is sand
+    P.add(L.box(1.14, 0.62, 0.70), 'dark', loc=(FX, FY, 0.96 - BOX_DROP))
+    for i in range(7):
+        t = (i / 6.0) - 0.5
+        P.add(L.sphere(0.150, 0.115, 0.055, 9, 6), 'dark',
+              loc=(FX + t * 0.92, FY - 0.03 + 0.10 * math.sin(i * 1.7),
+                   SAND_Z - 0.03 + 0.012 * math.cos(i * 2.3)))
+    # the iron bands and the cope pins - a flask is a BANDED thing, and the
+    # pins are what lets the two halves come apart, which is how it is broken
+    for sy in (-1, 1):
+        P.add(L.box(1.26, 0.050, 0.060), 'body', loc=(FX, FY + sy * 0.355, 1.20 - BOX_DROP))
+        P.add(L.box(1.26, 0.050, 0.060), 'body', loc=(FX, FY + sy * 0.355, 0.74 - BOX_DROP))
+    for sx in (-1, 1):
+        limb(P, [(FX + sx * 0.60, FY - 0.30, 0.66 - BOX_DROP),
+                 (FX + sx * 0.60, FY - 0.30, 1.46 - BOX_DROP)],
+             0.030, 0.026, 'body')
+    _span("flask", i0)
+
+    # ------------------------------------------------- THE CAST - YOUR HERO
+    # *** PASS 3, AND ONLY THE ON-BODY RENDER COULD HAVE FOUND THIS. ***
+    # Pass 2 put the cast beside a real posed KayKit adventurer in
+    # _moulder_register.png and the whole idea fell over in one glance: THE
+    # HERO IS A CHIBI AND MY CAST WAS NOT. The hero is a big-headed, short-
+    # limbed body; the cast was a slim realistic figure. A creature whose one
+    # idea is IT TAKES YOUR SHAPE had taken a shape that is not yours, and
+    # neither the blank check, the border check nor the occlusion test can see
+    # that - every one of them passed pass 2. Fit is the acceptance test and
+    # this is what it is for.
+    #
+    # THE PROPORTIONS BELOW ARE MEASURED OFF THE BODY, NOT CHOSEN.
+    # tools/art/_moulder_chibi_probe.py imports Knight.glb through
+    # minibossfit.import_hero (posed, scale 1.0, h 2.45 m) and reports:
+    #     head block (Head + Helmet)  z 1.095 - 2.450   1.355 = 55.3% of h
+    #     body                        z 0.360 - 1.277   0.917 = 37.4%
+    #     arms                        z 0.548 - 1.251
+    #     legs                        z 0.000 - 0.521   0.521 = 21.3%
+    #     widest head 1.14, body 0.811, body+arms 1.32
+    # Every z below is that table mapped through z = FEET + (z_hero/2.45)*HC,
+    # and every width is the table's width times HC/2.45. So the cast is the
+    # hero's own proportions at the hero's own ratios, and nothing here is my
+    # taste about what a hero looks like.
+    i0 = len(P.items)
+    CX, CY = FX - 0.04, FY - 0.02
+    # PASS 4, ONE NUMBER, AND THE REGISTER SHEET IS WHY. At pass 3 the cast
+    # was 1.92 m of chibi and its head broke the dashed hero rule on
+    # _moulder_register.png: the copy was TALLER THAN THE HERO IT COPIES, which
+    # is the one thing a copy must not be. HC is now the hero's own measured
+    # height, 2.45 m, so the thing in the box is the size of the thing it was
+    # read from and the claim is checkable against the dashed rule rather than
+    # asserted. Its feet sit at 0.45 - buried, which is why it still rides
+    # higher than the hero on the sheet: it is standing in a box of sand, not
+    # on the floor. FEET + HC = 2.90 = the creature's whole height, so THE
+    # IDEA sets the height of this body and the blade no longer does.
+    FEET, HC = 0.45, 2.45
+    K = HC / 2.45
+
+    def _z(zh):
+        return FEET + (zh / 2.45) * HC
+
+    HEAD_C = (_z(1.095) + _z(2.450)) * 0.5
+    # the torso: buried to the sand line, square-shouldered, CHUNKY. Built as a
+    # box over a tube so it keeps a shoulder line instead of tapering away.
+    limb(P, [(CX, CY + 0.01, _z(0.36)), (CX, CY + 0.005, _z(0.95)),
+             (CX - 0.01, CY, _z(1.277))], 0.811 * K * 0.46, 0.811 * K * 0.40, 'bone')
+    P.add(L.box(0.811 * K * 0.86, 0.749 * K * 0.80, _z(1.277) - _z(0.50)), 'bone',
+          loc=(CX, CY + 0.005, (_z(1.277) + _z(0.50)) * 0.5))
+    # shoulders carried out to the measured arm span (1.32 across, both arms)
+    limb(P, [(CX - 1.32 * K * 0.40, CY, _z(1.20)), (CX + 1.32 * K * 0.40, CY, _z(1.21))],
+         0.606 * K * 0.30, 0.606 * K * 0.30, 'bone')
+    # THE HEAD. 55% of the body, and it is the whole argument: at register
+    # distance this is the thing a viewer recognises as one of their own.
+    P.add(L.sphere(1.14 * K * 0.47, 1.017 * K * 0.46, 1.355 * K * 0.46, 15, 10),
+          'bone', loc=(CX, CY - 0.01, HEAD_C))
+    # the brow band - a cast head has no face, and a blank ball has no front.
+    # This gives it one without giving it features it should not have.
+    P.add(L.box(1.14 * K * 0.80, 1.017 * K * 0.30, 1.355 * K * 0.11), 'body',
+          loc=(CX, CY - 1.017 * K * 0.34, HEAD_C + 1.355 * K * 0.04))
+    # ARM ONE: run, raised, holding a blade. The reach is the hero's reach, so
+    # it has to be IN the outline - but CHUNKY and SHORT now, like the pack's
+    # own weapons, not the long slim plank of passes 1-2.
+    # PASS 7, AND IT IS THE HEADLINE FAULT OF THE SIDE VIEW. A chibi head is
+    # 55% of the body and as deep as it is wide, so from the side - where both
+    # arms are hidden behind the torso, because arms spread along X and X is
+    # the axis that camera looks down - the cast read as A GIANT PALE EGG with
+    # a slab under it. The arm comes FORWARD 0.30 in Y as well as out in X, so
+    # the elbow and the blade break the ovoid's outline from the side while
+    # the front view is unchanged (the man is at x -0.46, the blade at +0.9;
+    # they do not meet in either frame). This does not cure the side read, and
+    # the fault list says so.
+    FWD = 0.30
+    limb(P, [(CX + 1.32 * K * 0.38, CY + 0.01, _z(1.19)),
+             (CX + 1.32 * K * 0.50, CY - 0.04 - FWD * 0.6, _z(1.33)),
+             (CX + 1.32 * K * 0.54, CY - 0.07 - FWD, _z(1.52))],
+         0.606 * K * 0.26, 0.606 * K * 0.20, 'bone')
+    GX = CX + 1.32 * K * 0.54
+    GZ = _z(1.52)
+    P.add(L.box(0.090, 0.090, 0.11), 'body', loc=(GX, CY - 0.07 - FWD, GZ))
+    P.add(L.box(0.19, 0.060, 0.62), 'bone',
+          loc=(GX + 0.11, CY - 0.075 - FWD, GZ + 0.36), rot=(0.0, 0.30, 0.0))
+    # ARM TWO: THE METAL DID NOT RUN. A sprue stub and nothing past the elbow -
+    # the half-made story, told on the side the crucible does not cover.
+    limb(P, [(CX - 1.32 * K * 0.38, CY + 0.01, _z(1.19)),
+             (CX - 1.32 * K * 0.52, CY - 0.02, _z(1.03))],
+         0.606 * K * 0.25, 0.606 * K * 0.16, 'bone')
+    P.add(L.sphere(0.070, 0.064, 0.050, 9, 7), 'bone',
+          loc=(CX - 1.32 * K * 0.55, CY - 0.03, _z(1.00)))
+    # the parting seams, on the SIDES where a cope-and-drag flask splits - see
+    # pass 2. Re-sat on the new silhouette rather than left where they were.
+    for sx in (-1, 1):
+        limb(P, [(CX + sx * 0.811 * K * 0.44, CY + 0.01, SAND_Z - 0.06),
+                 (CX + sx * 0.811 * K * 0.46, CY + 0.01, _z(1.21)),
+                 (CX + sx * 1.14 * K * 0.44, CY + 0.00, HEAD_C - 0.06)],
+             0.020, 0.015, 'glow')
+    # still hot where it has just left the sand
+    for i in range(4):
+        P.add(L.sphere(0.030, 0.022, 0.016, 8, 6), 'glow',
+              loc=(CX - 0.14 + i * 0.095, CY - 0.20, SAND_Z + 0.02 + 0.03 * (i % 2)))
+    _span("cast", i0)
+
+    # ------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    # stooped over the bed: hips low, spine forward into -Y, head LOW and well
+    # clear of the cast's head so the two never read as one mass.
+    limb(P, [(HX - 0.14, HY + 0.04, 0.00), (HX - 0.17, HY - 0.02, 0.42),
+             (HX - 0.12, HY + 0.02, 0.86)], 0.126, 0.105, 'body')
+    limb(P, [(HX + 0.16, HY + 0.06, 0.00), (HX + 0.20, HY - 0.04, 0.44),
+             (HX + 0.13, HY + 0.03, 0.88)], 0.126, 0.105, 'body')
+    for sx in (-1, 1):
+        P.add(L.box(0.30, 0.34, 0.095), 'body', loc=(HX + sx * 0.15, HY - 0.08, 0.048))
+    limb(P, [(HX, HY + 0.02, 0.88), (HX + 0.02, HY - 0.14, 1.26),
+             (HX + 0.04, HY - 0.30, 1.52)], 0.205, 0.150, 'body')
+    # the apron: a slab on the front, and the one straight edge on him
+    P.add(L.box(0.42, 0.075, 0.74), 'body', loc=(HX + 0.02, HY - 0.26, 1.12),
+          rot=(0.22, 0.0, 0.0))
+    # the head, and the eyes are the only light ON him
+    P.add(L.sphere(0.165, 0.185, 0.175, 13, 9), 'body', loc=(HX + 0.05, HY - 0.38, 1.64))
+    P.add(L.box(0.33, 0.30, 0.055), 'body', loc=(HX + 0.05, HY - 0.40, 1.76))
+    # PASS 2, FORM CHANGE 3. At pass 1 these were r 0.030 on a 2.90 m body -
+    # about ten pixels at register framing - and on both renders the man had no
+    # face at all. That is the Greener's fault repeated ("the head all but lost
+    # against the body") and the Pressman's before it, and the register has now
+    # shipped it three times. Bigger, set at the head's front surface, with a
+    # dark brow over them so the eye reads a face and not two dots.
+    P.add(L.box(0.30, 0.10, 0.060), 'dark', loc=(HX + 0.05, HY - 0.49, 1.70))
+    eyes(P, (HX + 0.05, 0.0, 1.62), 0.070, 0.048, HY - 0.50)
+    # ARM ONE: down into the bed with the rammer. The long diagonal.
+    limb(P, [(HX + 0.19, HY - 0.26, 1.42), (HX + 0.46, HY - 0.16, 1.22),
+             (HX + 0.62, HY + 0.04, 1.08)], 0.082, 0.062, 'body')
+    limb(P, [(HX + 0.64, HY + 0.06, 1.06), (HX + 0.78, HY + 0.30, SAND_Z - 0.02)],
+         0.034, 0.030, 'body')
+    P.raw(aim(L.cone(0.105, 0.105, 0.22, 11), (HX + 0.80, HY + 0.34, SAND_Z - 0.06),
+              (0.16, 0.30, 1.0)), 'dark')
+    # ARM TWO: out and up with the crucible on its shank, and THE POUR.
+    # PASS 6, AND IT IS THE SIDE RENDER AGAIN. At pass 5 the crucible sat at
+    # z 2.02 - the same height as the cast's head, whose centre is 2.22 - and
+    # from the side the shank ran INTO the head and the crucible read as a pot
+    # stuck to the side of it. Two objects at the same height on the same
+    # screen line become one object, however far apart they are in X, and the
+    # side camera looks along X so X is exactly the axis it cannot use.
+    # The arm comes DOWN and the crucible now tips over the bed's near corner
+    # at 1.50, below the head and in front of the torso. The pour gets shorter
+    # and more vertical, which is also what a pour looks like.
+    limb(P, [(HX - 0.20, HY - 0.22, 1.40), (HX - 0.46, HY - 0.26, 1.42),
+             (HX - 0.60, HY - 0.24, 1.48)], 0.082, 0.060, 'body')
+    SHK = [(HX - 0.60, HY - 0.24, 1.46), (HX - 0.16, HY + 0.18, 1.48),
+           (HX + 0.22, HY + 0.62, 1.50)]
+    limb(P, SHK, 0.030, 0.026, 'body')
+    CRU = (HX + 0.27, HY + 0.73, 1.50)
+    P.raw(aim(L.cone(0.165, 0.120, 0.30, 12), CRU, (0.10, 0.34, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.150, 0.150, 0.045, 12), (CRU[0] + 0.02, CRU[1] + 0.05, CRU[2] + 0.15),
+              (0.10, 0.34, 1.0)), 'glow')
+    # the stream: crucible mouth -> the pour cup on the flask's top board.
+    POUR = [(CRU[0] + 0.04, CRU[1] + 0.08, CRU[2] + 0.11),
+            (CRU[0] + 0.02, CRU[1] + 0.12, SAND_Z + 0.22),
+            (FX - 0.44, FY - 0.14, SAND_Z + 0.06)]
+    P.raw(L.tube([Vector(p) for p in POUR], [0.034, 0.028, 0.022], 7), 'glow')
+    P.add(L.sphere(0.090, 0.082, 0.030, 10, 7), 'dark', loc=(FX - 0.44, FY - 0.14, SAND_Z))
+    P.add(L.sphere(0.055, 0.050, 0.018, 9, 6), 'glow', loc=(FX - 0.44, FY - 0.14, SAND_Z + 0.03))
+    _span("man", i0)
+
+    # ------------------------------------------------- IT HAS DONE THIS BEFORE
+    i0 = len(P.items)
+    # five finished castings hung on the near board, smallest to largest, and a
+    # spill of sand and sprue at the foot of the stand.
+    # PASS 2, FORM CHANGE 4 (cosmetic, and recorded as cosmetic). At pass 1
+    # these sat flush on the board and read as KEYHOLES cut in it - bright
+    # slots, not objects. Stood off the board on real pegs so they hang.
+    for i in range(5):
+        h = 0.085 + i * 0.016
+        x = FX - 0.40 + i * 0.20
+        P.raw(L.tube([Vector((x, FY - 0.36, 1.00 - BOX_DROP)),
+                     Vector((x, FY - 0.46, 1.00 - BOX_DROP))],
+                     [0.016, 0.014], 6), 'body')
+        P.add(L.box(0.055, 0.042, h), 'bone',
+              loc=(x, FY - 0.47, 0.95 - BOX_DROP - h * 0.5 + 0.015 * (i % 2)))
+    for i in range(6):
+        P.add(L.sphere(0.105, 0.085, 0.034, 9, 6), 'dark',
+              loc=(FX - 0.50 + i * 0.22, FY - 0.52 - 0.06 * (i % 3), 0.026))
+    # PASS 2, FORM CHANGE 5 (cosmetic). One long pale stick on the floor read
+    # as a SPOON on both renders. Two short broken sprues instead - what is
+    # actually left when a casting is knocked off its runner.
+    for a, b in (((FX + 0.58, FY - 0.70, 0.034), (FX + 0.74, FY - 0.64, 0.034)),
+                 ((FX + 0.84, FY - 0.58, 0.034), (FX + 0.96, FY - 0.47, 0.034))):
+        P.raw(L.tube([Vector(a), Vector(b)], [0.026, 0.021], 6), 'bone')
+    _span("already", i0)
+
+    return P
+
+
+BUILDERS.update({"moulder": moulder})

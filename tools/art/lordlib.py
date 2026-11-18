@@ -238,7 +238,14 @@ def _set_input(node, names, value):
     return False
 
 
-def mat_solid(name, rgb, rough=0.55, metal=0.08):
+def mat_solid(name, rgb, rough=0.55, metal=0.08, spec=None):
+    """spec, when given, sets the Principled SPECULAR IOR LEVEL - the strength of
+    the DIELECTRIC lobe, which is white by construction because a dielectric's
+    specular reflection carries the LIGHT's colour and not the surface's. Left
+    None it is not touched at all, so every existing caller and every other body
+    renders byte-identically. Added 17 Nov for the Greener's copper: see
+    tools/art/_metal_read.py for why a tinted METALLIC lobe cannot produce a
+    white highlight and so cannot read as polished metal under bare suns."""
     m = bpy.data.materials.new(name)
     m.use_nodes = True
     nt = m.node_tree
@@ -250,6 +257,8 @@ def mat_solid(name, rgb, rough=0.55, metal=0.08):
     _set_input(bsdf, ['Base Color'], (rgb[0], rgb[1], rgb[2], 1.0))
     _set_input(bsdf, ['Roughness'], rough)
     _set_input(bsdf, ['Metallic'], metal)
+    if spec is not None:
+        _set_input(bsdf, ['Specular IOR Level', 'Specular'], spec)
     m.diffuse_color = (rgb[0], rgb[1], rgb[2], 1.0)
     return m
 

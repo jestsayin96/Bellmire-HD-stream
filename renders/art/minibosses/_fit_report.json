@@ -1400,45 +1400,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 43966,
-      "vis": 43966,
-      "delta": 46033,
+      "alone": 45783,
+      "vis": 45783,
+      "delta": 47844,
       "seen": 1.0
      },
      "hero": {
       "alone": 43682,
       "vis": 43682,
-      "delta": 45802,
+      "delta": 45784,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 35270,
-      "vis": 35270,
-      "delta": 36949,
+      "alone": 34464,
+      "vis": 34464,
+      "delta": 36125,
       "seen": 1.0
      },
      "hero": {
       "alone": 37764,
       "vis": 37764,
-      "delta": 38549,
+      "delta": 38548,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 42990,
-      "vis": 42990,
-      "delta": 45008,
+      "alone": 45045,
+      "vis": 45045,
+      "delta": 47059,
       "seen": 1.0
      },
      "hero": {
       "alone": 44037,
       "vis": 44037,
-      "delta": 44705,
+      "delta": 44704,
       "seen": 1.0
      },
      "proves": true

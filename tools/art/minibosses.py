@@ -6835,8 +6835,13 @@ def apply_overrides(key, mats):
             rgb, strength = spec
             mats[slot] = L.mat_glow(key + "_glow_ov", tuple(rgb), strength)
         else:
-            rgb, rough, metal = spec
-            mats[slot] = L.mat_solid(key + "_" + slot + "_ov", tuple(rgb), rough, metal)
+            rgb, rough, metal = spec[0], spec[1], spec[2]
+            # an optional FOURTH element is the dielectric specular level. A
+            # three-element row is untouched and renders exactly as it always
+            # has, so no other body in the register moves.
+            sp = spec[3] if len(spec) > 3 else None
+            mats[slot] = L.mat_solid(key + "_" + slot + "_ov", tuple(rgb), rough,
+                                     metal, sp)
     return mats
 
 
@@ -7239,7 +7244,47 @@ OVERRIDE.update({
         # Rough down and the hue carried further toward new copper.
         # PASS 5: one more step toward new copper, measured separately from
         # change K by _colour_read's band shares and not by impression.
-        'bone': ((1.000, 0.520, 0.235), 0.13, 0.52),
+        # PASS 6, AND IT IS NOT A FOURTH GO AT THE SAME THREE DIALS. Passes E,
+        # J and 5 all pushed hue/rough/metal and all three came back timber.
+        # tools/art/_metal_read.py measured WHY, against the CC0 KayKit dungeon
+        # weapons as an outside bar: what makes a surface read as polished metal
+        # here is a HIGHLIGHT THAT RUNS TO WHITE, and the four artist metals
+        # measure 0.305-0.574 on that while these leaves measured 0.174 front /
+        # 0.080 side - BELOW the matte-oak control at 0.209/0.133. Their bright
+        # end was more pigmented than a plank's, which is "painted timber" said
+        # as a number.
+        # AND THE DIAL THE LANE KEPT REACHING FOR WAS BACKWARDS. In Principled a
+        # METALLIC lobe is tinted by the base colour - a metal reflects its own
+        # colour - so at metal 0.52 the highlight was half-orange and could never
+        # run white, and the harder the lane pushed metallic the worse it got. A
+        # near-black world (0.045,0.05,0.065) leaves a mirror nothing to reflect,
+        # so the physically-correct copper control measured DARKER AND FLATTER
+        # THAN OAK. Metallic is not a dial that buys a metal look in this rig; it
+        # is one that spends it.
+        # So: metallic DOWN to a lacquered-copper dielectric, the specular level
+        # UP to 0.86 (white by construction), and roughness up off 0.13 so the
+        # sun's ~0.5 deg disc makes a sheen with area instead of a glint smaller
+        # than a pixel. Hue is NOT touched - it was never the fault.
+        # PASS 7, measured separately from pass 6 and it is the SAME mechanism
+        # taken one step further, not a new idea. Pass 6 moved the front read
+        # from BELOW the oak control to above it (0.174 -> 0.230 against oak
+        # 0.209) and left the side flat (0.080 -> 0.131 against oak 0.133). The
+        # cause of the weakness is AREA: a SUN lamp is a ~0.5 degree disc, so at
+        # roughness 0.26 the dielectric lobe is a glint a few pixels across on a
+        # gently bowed sheet, and on the side view it mostly misses the leaves
+        # altogether. A highlight that lands on nothing is not a highlight.
+        # Roughness up spreads that lobe into a satin sheen with area - which is
+        # also how the KayKit reference metals read, as broad painted highlight
+        # bands rather than points. Hue still untouched across both passes.
+        # PASS 9. The specular change of passes 6-7 is re-applied ON TOP OF the
+        # pass-8 form, and re-applied only because the form change gives a real
+        # reason to re-test it rather than a hope: on the flush panel every
+        # sheet presented one angle, so one lobe either landed or did not; with
+        # air between five sheets at five angles there are five chances for a
+        # white sheen to catch an edge. MEASURED SEPARATELY ANYWAY - form alone
+        # scored -0.132/-0.082/-0.172 (material unchanged, correctly), material
+        # alone scored +0.158/+0.040/+0.008 on the old form.
+        'bone': ((1.000, 0.520, 0.235), 0.44, 0.06, 0.92),
         # the man, his apron, the crock staves, the scraper's iron. NOT
         # derived from the body colour or the whole figure would read green
         # and the crust would stop being a mark on him.
@@ -7556,10 +7601,29 @@ def greener():
     # two leaves present the same angle to either camera and the stack is read
     # as a stack - the Drillmaster's lesson, that a symmetrical thing reads as
     # wallpaper.
-    for i, yaw in enumerate((-0.86, -0.52, -0.20, 0.14, 0.48)):
-        _leaf(P, MX - 0.26 + (i - 2) * 0.095, MY + 0.17 + abs(i - 2) * 0.034,
-              1.55 + (i % 2) * 0.06, yaw, 0.10 + 0.07 * ((i % 3) - 1),
-              w=0.46, h=0.70)
+    # PASS 8, AND IT IS THE FIRST PASS ON THIS FAULT THAT IS NOT ABOUT THE
+    # MATERIAL. Three goes at hue/rough/metal (E, J, 5) and two more at the
+    # specular lobe all failed, and the A/B render is why I stopped: the best
+    # the material could do was trade a stained plank for raw cardboard.
+    # LOOKING AT THE TWO SHEETS SIDE BY SIDE NAMED THE REAL CAUSE, which no
+    # number had: at w 0.46 on a 0.095 pitch these five leaves OVERLAP BY
+    # ABOUT 80%. They do not read as five sheets, they read as ONE SOLID
+    # PANEL whose only internal detail is the seams between them - and a flat
+    # rectangle with evenly spaced vertical grooves is a crate side. That is
+    # what a viewer was naming. It was never the colour.
+    # Pass 4 already tried to break this with YAW, and yaw cannot help when
+    # the sheets are flush: it rotates boards that still have no air between
+    # them. So the pitch goes out to 0.175 - each leaf now shows a strip of
+    # itself and a gap of shadow beside it - the widths and heights VARY per
+    # leaf, and the tops are staggered in Z so the rack's top edge is ragged
+    # rather than one straight board line. Narrower sheets with air between
+    # them read as stock leaning in a rack; a flush stack reads as a pallet.
+    for i, (yaw, wi, hi, dz) in enumerate(
+            ((-0.86, 0.34, 0.76, 0.00), (-0.52, 0.29, 0.62, 0.09),
+             (-0.20, 0.36, 0.82, -0.05), (0.14, 0.28, 0.58, 0.12),
+             (0.48, 0.33, 0.70, 0.02))):
+        _leaf(P, MX - 0.26 + (i - 2) * 0.175, MY + 0.17 + abs(i - 2) * 0.034,
+              1.55 + dz, yaw, 0.10 + 0.07 * ((i % 3) - 1), w=wi, h=hi)
     # the strap that holds them on him
     P.raw(L.tube([(MX - 0.34, MY + 0.10, SH + 0.02), (MX + 0.06, MY - 0.26, 1.22),
                   (MX + 0.28, MY + 0.10, SH - 0.02)], [0.030, 0.034, 0.030], 7), 'dark')

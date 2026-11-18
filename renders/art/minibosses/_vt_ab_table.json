@@ -1,0 +1,86 @@
+{
+ "verdict": "Khronos PBR Neutral KILLED (margin negative in all three views); Standard real but not worth the re-grade (+0.011 front)",
+ "rows": [
+  {
+   "transform": "AgX",
+   "view": "front",
+   "shipped": 0.5287356376647949,
+   "flat_unpainted": 0.5652173757553101,
+   "ctrl_timber": 0.5517241358757019,
+   "ctrl_copper": 0.29310348629951477,
+   "flat_minus_timber": 0.0135
+  },
+  {
+   "transform": "AgX",
+   "view": "side",
+   "shipped": 0.3090909421443939,
+   "flat_unpainted": 0.53125,
+   "ctrl_timber": 0.5,
+   "ctrl_copper": 0.285714328289032,
+   "flat_minus_timber": 0.0312
+  },
+  {
+   "transform": "AgX",
+   "view": "back",
+   "shipped": 0.5405405163764954,
+   "flat_unpainted": 0.5284552574157715,
+   "ctrl_timber": 0.465753436088562,
+   "ctrl_copper": 0.2982456386089325,
+   "flat_minus_timber": 0.0627
+  },
+  {
+   "transform": "Standard",
+   "view": "front",
+   "shipped": 0.4725274443626404,
+   "flat_unpainted": 0.484375,
+   "ctrl_timber": 0.45945945382118225,
+   "ctrl_copper": 0.25806453824043274,
+   "flat_minus_timber": 0.0249
+  },
+  {
+   "transform": "Standard",
+   "view": "side",
+   "shipped": 0.26229509711265564,
+   "flat_unpainted": 0.484375,
+   "ctrl_timber": 0.4313725531101227,
+   "ctrl_copper": 0.25806453824043274,
+   "flat_minus_timber": 0.053
+  },
+  {
+   "transform": "Standard",
+   "view": "back",
+   "shipped": 0.4878048896789551,
+   "flat_unpainted": 0.4838709831237793,
+   "ctrl_timber": 0.41025641560554504,
+   "ctrl_copper": 0.25806453824043274,
+   "flat_minus_timber": 0.0736
+  },
+  {
+   "transform": "Khronos PBR Neutral",
+   "view": "front",
+   "shipped": 0.8730158805847168,
+   "flat_unpainted": 0.9090909361839294,
+   "ctrl_timber": 0.9642857313156128,
+   "ctrl_copper": 0.6666666269302368,
+   "flat_minus_timber": -0.0552
+  },
+  {
+   "transform": "Khronos PBR Neutral",
+   "view": "side",
+   "shipped": 0.7692307829856873,
+   "flat_unpainted": 0.8644068241119385,
+   "ctrl_timber": 0.9285714626312256,
+   "ctrl_copper": 0.6666666269302368,
+   "flat_minus_timber": -0.0642
+  },
+  {
+   "transform": "Khronos PBR Neutral",
+   "view": "back",
+   "shipped": 0.723809540271759,
+   "flat_unpainted": 0.695652186870575,
+   "ctrl_timber": 0.7727273106575012,
+   "ctrl_copper": 0.6666666269302368,
+   "flat_minus_timber": -0.0771
+  }
+ ]
+}

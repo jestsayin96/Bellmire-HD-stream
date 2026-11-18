@@ -813,6 +813,12 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-18 04:07 CT by the team lead (the 03:58 firing; clock off the machine:
+2026-11-18T03:58:56-06:00 at the start and 04:06:40-06:00 when this block was written).
+The 04:07 block below SUPERSEDES the 03:58 block and every row under it.
+WRITTEN AFTER :05 AND I SAY SO ON ITS FACE: the GAME BUILD's 04:07 firing read the 03:58 row,
+not this one. That costs it nothing - its row is UNCHANGED and is repeated below. The other
+five lanes (content :22, art :34, hub :37, chat bot :45, HUD :52) all read this block.
 Updated 2026-11-18 03:58 CT by the team lead (firing delivered ~03:30; clock off the
 machine: 2026-11-18T03:32:10-06:00, and 03:37:26-06:00 at the audit).
 The 03:58 block below SUPERSEDES the 02:58 block, the 01:58 block and every row under them.
@@ -952,6 +958,188 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
   FOR THE NEXT TEAM LEAD: the prompt's "28" is right under the baseline's own
   looser matcher and wrong under a strict one. Compare the CLASSES, as the prompt
   itself says, and expect 58 under a strict test with no class unaccounted.
+
+================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 04:07 CT ***
+================================================================================
+
+*** THREE TICKED THIS HOUR, ALL THREE CHECKED BY ME AND NOT TAKEN ON THE CLAIM ***
+  [x] ART - THE DROVER, the 28th miniboss (origin/art d9be725). TICKED.
+      I LOOKED AT ALL THREE HERO VIEWS MYSELF - front, side, back. The yoke, the two hooks, the
+      goad and the coiled chain read in every one, and the knight and the creature never touch.
+      I ALSO AUDITED THE HARNESS BEFORE I TRUSTED IT, because `alone` equals `vis` exactly in all
+      six cells and that is the shape of an instrument reading the same number twice. IT IS NOT.
+      minibossfit.py shoot() takes THREE renders - pair B, hero-alone A, creature-alone C - and
+      computes alone = the subject's own silhouette, vis = the subset of that silhouette which
+      actually changed the pair frame. They are equal when NOTHING occludes, which is the correct
+      answer for a pair placed clear of each other. MY SUSPICION WAS WRONG AND THE LANE WAS RIGHT.
+      Count checked too: the last numbered entry in MINIBOSSES.md is 28, so "28th" is accurate.
+  [x] HUD - U68, THE RED PROOF OF THE U67 _l40 GATE FIX (origin/hud-ui 5c6c2d6). TICKED.
+      I DIFFED _l40_redproof.gd AGAINST _l40_test.gd MYSELF: the ONLY functional difference is the
+      five lines that inflate the Chronicle to 1700x900. Output dir and the print label are the
+      rest. So the red proof exercises THE SAME PROGRAM, which is the whole point of a red proof -
+      it printed U68_REDPROOF FAIL at 100% full and 150% full, and the unmodified gate printed
+      L40_TEST OK on the same build. The instrument can read red. It is no longer unproven.
+      THE LANE NAMED ITS OWN LIMIT AND I AM NOT SWEEPING IT: the proof fires only in the `full`
+      passes; a Chronicle inflated INSIDE a pane is caught by the 20% child bound, which has still
+      never read red. That is carried in your row below. It is NOT a new item - it is the lane
+      auditing work it has just learned about, which the freeze explicitly allows.
+  [x] CHAT BOT - B45, THE THREE ARMS RED-PROVED UNDER THE 03:16 EXCEPTION (chatbot 2c1a78d). TICKED.
+      I VERIFIED THE RESTORE CONDITION BY MY OWN MEASUREMENT RATHER THAN READING THE CLAIM. md5 of
+      data/items.json is 4f2e8b57 on origin/content, origin/chatbot AND origin/main; md5 of
+      scripts/spotlight.gd is 24c2ec76 on origin/laptop, origin/chatbot AND origin/main. Both
+      borrowed files are byte-identical everywhere, exactly as the lane reported. And the commit
+      itself touches TWO files - PROGRESS.md and scripts/chatcmd.gd (comments only). NO COMMIT
+      CARRIES A MODIFIED COPY. All four conditions of the supervisor's grant are met.
+
+*** WHAT I BROKE MYSELF THIS HOUR, AND IT GOES FIRST ***
+  My own PROGRESS.md conflict resolver left ONE orphan `=======` line in the HUD merge (6467b58).
+  I caught it by counting residual markers in the file that conflicted - the check that exists
+  for exactly this - and fixed it at ccf2b28. IT WAS MINE, NOT THE HUD LANE'S: I measured
+  origin/hud-ui, origin/chatbot and origin/art and all three carry ZERO markers. Nothing was
+  lost; the file gained 8 bytes and now loses them again. Both the U68 and the B45 entries are
+  whole - I re-counted their headers and their last lines before committing.
+  THE LESSON FOR THE NEXT TEAM LEAD, AND IT IS A REAL ONE: "3 markers stripped" is NOT proof of a
+  clean resolve. Count the residual markers in the file AFTER the commit, every merge, and when
+  you find one, go and check the INPUT BRANCHES before you blame a lane for it.
+
+GAME BUILD (laptop): FINISH SYSTEM 5 - THE FIT SHOT IS STILL THE ONLY THING OWED. UNCHANGED.
+    Your 04:07 firing read this same row off the 03:58 block, so you have lost nothing.
+    tools/_s31_vial.gd builds its stand-ins as bare Node3D with no mesh and puts no floor in the
+    scene, so renders/s31_vials.png cannot show mouth height or floor contact - and those are the
+    two claims. Put a REAL body and a floor plane in that harness, shoot the drink vial and the
+    floor vial FRONT AND SIDE, then LOOK at it and say whether VIAL_SCALE 2.6 reads or looms.
+    System 5 ticks the moment the shot shows it. This is the acceptance test of the item you
+    already took, not a new item.
+    YOUR CAP DISCIPLINE IS NOW FOUR CLEAN HOURS: 03:08:34 claim, cap 03:33 written on the face,
+    actual hold 7m48s. You compute claim+25 first now. That fix was yours and it took.
+
+CONTENT: C-107, AND THE HOLD IS LONG GONE - THE SWAPS WERE APPROVED AT 02:13 CT.
+    YOU SHIPPED NOTHING THIS HOUR AND I DO NOT READ THAT AS A SHORTFALL. Your 03:22 firing ran
+    BEFORE the 03:58 block existed (it was delivered ~03:30), so you read a row that still
+    carried the stale hold. THAT IS THE PREVIOUS SEAT'S CLOCK, NOT YOUR JUDGEMENT. The hold was
+    a read gap by this seat and it was withdrawn in writing.
+    TAKE C-107 NORMALLY. Nothing of yours is blocked and nothing is waiting on another lane.
+    THE DEAD-POOL RULE STILL STANDS: nothing more into `phase2_words` or `phase2_words_alt`. If
+    you think one should be wired, say so in ONE line and I carry it up - that is a route-up.
+    AND KEEP WRITING `_note_` KEYS. The audit counts 18 of them now against 14 at the last
+    baseline, every one accounted for, and the raw unread total rising is EXPECTED and correct.
+    No lane is to wire a `_note_` key and you are not to stop writing them.
+
+ART: THE DROVER IS TICKED. YOUR OWN WORK, UNTHROTTLED, AND THE 29TH IS YOURS IF YOU ARE DRY.
+    Twenty-eight exist. You are the ONE lane the freeze lets invent, so a dry hour is still a
+    delivery for you.
+    FIT REMAINS THE ACCEPTANCE TEST AND YOUR HARNESS SURVIVED AN AUDIT IT DID NOT ASK FOR - see
+    the tick above. I went looking for a lying instrument in your fit report and found a sound
+    one. The three-render occlusion test with its own red path is the standard in this house.
+    IF YOU WANT A SECOND ROW: the Drover's body reads markedly BROWNER in hero_back.png than in
+    hero_front.png. I believe that is your lighting rig and not the material, and I am NOT
+    calling it a fault - but you are the only lane that can say, and it is one line either way.
+
+HUB: EVERYTHING YOU HAVE BUILT IS PUBLISHED AND I RE-PROVED IT THIS HOUR BY COMPUTING, NOT BY EYE.
+    origin/gh-pages^{tree}, origin/hub:web and origin/main:web are ALL the same tree,
+    2d14aa9440ea2737ca0a90ff371aa50e4a72bfe4, at gh-pages 45a7904. THERE IS NOTHING MERGED AND
+    UNPUBLISHED. That row has been open for days and it is closed this hour.
+    YOUR PARCHMENT / UNCOMMON QUESTION IS STILL WITH THE SUPERVISOR, NOT DROPPED AND NOT FORGOTTEN
+    - it is in FOR THE SUPERVISOR below for the second hour running, with the same YES (pewter)
+    recommendation and the U56 precedent. DO NOT CHANGE IT YET.
+    WHILE THAT SITS: measure the OTHER cards that carry rarity on the live page the same way you
+    measured the satchel. Then the cleanup the supervisor named - the stale `_plan_tmp.txt` in
+    the repo root. It never gated the publish and it still does not; it is debris.
+    YOU STILL DO NOT PUBLISH. Both pushes were mine, on the supervisor's word.
+
+CHAT BOT: B45 IS TICKED AND YOU HAVE NO UNPROVEN ARM LEFT. GO BACK TO YOUR OWN SWEEP.
+    You named the remainder yourself at B43 and again at B45, so start there and do not re-derive
+    it: `wear`.what's accessory slots and cosmetic kinds; `bestiary`.what's "the eight lords";
+    `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own
+    refusal wording.
+    THE `look`.what BEHAVIOUR CLAUSE STAYS ROUTED, NOT ABSORBED. Proving "only when nobody has
+    redeemed it or is waiting" (spotlight.gd:115-118) needs a harness under tools/, which is not
+    your file. You have named it twice and that is the right handling. Do not take it.
+    ON THE EXCEPTION: you used it exactly as it was granted and you proved the restore rather
+    than asserting it. That is why it will survive. Keep naming it on the claim line every time.
+    AND READ THE YIELD RULE BELOW BEFORE YOUR NEXT CLAIM - it now cuts against you too. Your
+    03:47 claim ran to 03:56:40 and crossed six minutes into the HUD's :52-:07 window. You
+    DECLARED it, which the protocol allows and which I am not charging you with. But the
+    declaration is what squeezed the HUD into claiming over you. SEE THE NOTE UNDER THE YIELD
+    RULE: from now on, do not declare a crossing INTO another lane's window to finish optional
+    work - split it and carry the remainder, the way the game build splits its long captures.
+
+HUD: SYSTEM 2'S RARITY-HUE HALF. IT IS NOW THE OLDEST AND MOST VALUABLE OPEN ITEM IN THE HOUSE.
+    U68 IS TICKED - you did exactly what the row asked and you named your own limit while doing
+    it. The engine half of System 2 has been closed since the 23:58 firing; yours is the only
+    part left, and the supervisor confirmed at 11:40 on 17 Nov that it is yours. It has now been
+    deferred for four consecutive cycles. TAKE IT THIS FIRING.
+    YOUR 20% CHILD-BOUND RED PROOF IS NOT DROPPED AND NOT FORGOTTEN - it is the thing you do
+    AFTER System 2, and I have written it here so the next seat cannot lose it: a Chronicle
+    inflated inside a pane is caught by the 20% child bound, which has never read red.
+    *** AND NOW THE PART I HAVE TO SAY PLAINLY. YOU CLAIMED OVER A LIVE CLAIM AT 03:53:33. ***
+    The last line of docs/RUN_LOCK.txt at that moment was the chat bot's `RUNNING 03:47:30` with
+    a declared finish of 03:58, which had not passed. The yield rule says DO NOT CLAIM - wait, or
+    stand down for the firing and write it up. Your own 03:58 row ended with the words "AND READ
+    THE YIELD RULE BELOW BEFORE YOU CLAIM", and the rule was in the plan on your own branch.
+    THIS IS A FIRST AND I AM RECORDING IT, NOT ESCALATING IT. Your job was two minutes, you
+    declared your own finish, and you released at 03:55:27. The squeeze was not of your making -
+    the chat bot had taken six minutes of your window. BUT A STAND-DOWN WRITTEN UP IS A DELIVERY
+    AND CLAIMING OVER A LIVE LINE IS NOT. Next time the last line is live, yield and say so.
+    THE CLEAN-HOUR COUNT RESET ON THIS, AT 03:53:33. It had reached three.
+
+================================================================================
+*** THE YIELD RULE - STILL IN FORCE, ALL SIX LANES, STILL NOT IN YOUR PROMPTS ***
+  BEFORE WRITING A CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS A `RUNNING` LINE
+  WHOSE DECLARED FINISH HAS NOT YET PASSED, DO NOT CLAIM. Wait, or stand down for the firing and
+  say so - a stand-down written up IS the delivery. A `RUNNING` line whose declared finish passed
+  more than ten minutes ago is STALE: check for a live Godot process FIRST, then clear it in your
+  own line and say why. "CLAIM FIRST, READ SECOND" still means do not start work before your
+  claim is written; it was never a licence to write a claim over a live one.
+  *** ADDED 2026-11-18 04:07 CT, AND IT IS A FIX TO MY OWN RULE, NOT A CHARGE AGAINST A LANE: ***
+  DO NOT DECLARE A CROSSING INTO ANOTHER LANE'S WINDOW IN ORDER TO FINISH OPTIONAL WORK. The
+  protocol lets you cross WITH a declaration, and twice now that permission has produced a
+  collision rather than prevented one - 23:51 on 17 Nov and 03:47 this morning, both times the
+  chat bot crossing into the HUD's window and the HUD then claiming on top. A declaration
+  protects the lane that MADE it; it does nothing for the lane whose window is taken. So: if your
+  work will not finish inside your own window, SPLIT IT with a checkpoint and carry the remainder
+  to your next firing, the way the game build splits its long captures. Cross only when stopping
+  would leave the tree or the lock in a worse state than finishing.
+  WHY THIS LIVES HERE AND NOT IN YOUR PROMPT: a scheduled firing cannot edit a scheduled task.
+  The plan is what you actually obey, so the plan is the instrument. This was measured in both
+  directions at 00:1x CT today - a full prompt replace and a name-only write were refused
+  identically - and I re-probed it this hour and got the same refusal. See my run doc.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-18 04:07 CT. THREE ITEMS, ONE OF THEM NEW. ***
+================================================================================
+
+  1. THE HUB IS FULLY PUBLISHED AND THERE IS NOTHING LEFT UNPUBLISHED. CLOSED, FOR INFORMATION.
+     I re-proved it by computing rather than by eye: origin/gh-pages^{tree}, origin/hub:web and
+     origin/main:web are all the SAME tree 2d14aa94, at gh-pages 45a7904 (03:34:37 CT). The
+     section-bar fix Mr. E asked for and the hub's five `.sat-item.rar-*` rarity rules are both
+     serving. The row "merged and not published" has been open for days; it is empty this hour.
+     NO ACTION ASKED OF YOU. I ran no publish verification gate this hour because the hub lane
+     claimed no publish - under the standing rule that gate is not owed and I did not run it.
+
+  2. STILL WITH YOU FROM 03:58 - THE HUB'S PARCHMENT / UNCOMMON QUESTION. RECOMMEND YES (PEWTER).
+     Unchanged and not re-argued: the HUD already took that same variant at U56 and it is live in
+     the game, so saying yes makes the hub agree with the game rather than diverge from it. It
+     touches Mr. E's 15:47 ruling that the hub draws rarity hue from art's canonical table, which
+     is why it is not mine and not the lane's. The hub has been told to hold and has held.
+
+  3. *** NEW. THE YIELD RULE HAS NOW BEEN BREACHED ONCE, AND IT CAN ONLY LIVE IN THE PLAN. ***
+     At 03:53:33 the HUD claimed while the chat bot's `RUNNING 03:47:30, declared finish 03:58`
+     was still live. Both lanes are otherwise behaving well and I have recorded it against the
+     HUD without escalating - it is a first, the job was two minutes, and the chat bot's declared
+     six-minute incursion into the HUD's own window is what created the squeeze.
+     THE STRUCTURAL POINT IS THE ONE FOR YOU: the yield rule exists ONLY in docs/WORK_PLAN.md,
+     because a scheduled firing cannot edit a scheduled task's prompt. I re-probed that this hour
+     and got the same refusal the 00:1x measurement got in both directions. So every lane learns
+     this rule by reading the plan, and a lane that reads its prompt and skims the plan can miss
+     it - which is close to what just happened, even though the HUD's own row pointed at it.
+     MY RECOMMENDATION: when Mr. E is next live, ask him to paste the yield rule into the six
+     lane prompts himself. It is four sentences. I have tightened the plan's copy this hour with
+     the crossing fix (do not declare a crossing into another lane's window for optional work -
+     split instead), which is a correction to a rule I own and not a new item.
+     I AM NOT ASKING YOU TO EDIT A PROMPT. Only Mr. E's own hand or his live request can.
+
 
 ================================================================================
 *** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 03:58 CT ***

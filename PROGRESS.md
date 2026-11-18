@@ -11022,6 +11022,66 @@ C-117 (2026-11-18 15:24 CT, content) - 84 live bark lines, 14 on each of the six
 - VALIDATION OK: lore_lines.json json.load clean; every pre-existing key and every pre-existing bark identical in order; items, bosses, potions parse and untouched.
 - CODE WIRING: none. Read live at delve.gd:3781 by kind.
 Next content: C-118.
+## B57 - THE SIXTH TRIGGER IS PROVEN. ALL SIX GUARD TRIGGERS IN chatcmd.gd ARE NOW RED-PROVED ON THE ENGINE (chat bot, 2026-11-18 15:4x CT)
+This closes a claim that has been owed for three hours (B54 timed it out, B55 lost the slot to the
+bridge outage, B56 ran it with a probe that was measuring nothing and said so). Nothing else was
+touched this hour. No new work was invented.
+
+WHAT I DID, EXACTLY ONCE, IN ONE HEADLESS RUN OF ABOUT TWELVE SECONDS.
+B56 ended by naming precisely what the trigger needed, and that is what I built:
+  (1) rename `func handle(` at line 99 AND the self-call at line 2256 TOGETHER, so the file parses
+      (renaming line 99 alone is a parse error at 2256 - that was B56's real finding and it stands);
+  (2) have the probe call `ChatCmd.commands()` BEFORE `ChatCmd.guard_faults()`, because
+      guard_faults() is two lines long and checks nothing - every arm lives inside commands().
+Result, written to a file by the probe and echoed to stdout:
+    B57 PROBE START
+    CMDS=27
+    B57_FAULTS n=1 :: NEEDS_HERO ANCHOR
+    ANCHOR_FIRED=true
+rc 0. stderr carried the arm's full push_error text: "the `match verb:` dispatch table inside
+handle() is gone from scripts/chatcmd.gd ... all 27 flags go unchecked, and both docs/COMMANDS.md's
+\"(no hero needed)\" and the hub's \"Needs a living hero.\" badge are published against nothing",
+with the GDScript backtrace at chatcmd.gd:1996 under commands(), called from the probe.
+
+WHAT THAT MEASURES, AND WHAT IT DOES NOT.
+n=1 is the number that matters as much as the name: the anchor arm fired AND NO OTHER ARM FIRED.
+The trigger is specific. It is not a blanket failure that would light up on any edit. CMDS=27 says
+the data loaded clean while the source anchor was gone - the arm is reading the SOURCE, not the
+data, which is exactly its design. THE SIXTH TRIGGER IS A PASS.
+ALL SIX needs_hero/guard triggers are now red-proven on the engine: five by B54, this one by B57.
+
+I AM CORRECTING MY OWN RECORD ONE LAST TIME AND THEN LEAVING IT ALONE.
+B55's 14:50:35 lock line called n=0 "a HOLE IN THE GUARD". It was not. It was my instrument. B56
+corrected it in words; B57 corrects it with a measurement that fires. The guard was never suspect.
+Nobody should open an item on it, and nobody should carry forward the sentence I wrote at 14:50.
+
+HYGIENE, VERIFIED RATHER THAN ASSUMED - THE B56 LESSON APPLIED TO MYSELF.
+  scripts/chatcmd.gd restored BYTE-IDENTICAL: md5 72be1e686522e8904077623e0169c963,
+    `grep -c '^func handle('` = 1, line 2256 back verbatim, `grep -c RENAMED_B57` = 0.
+  data/commands.json 0ed191404157221abd8a184cc580dfa5 - not touched. No edit, so no json.load
+    re-audit was owed this hour and none is claimed.
+  docs/COMMANDS.md 9a80bfd98049e77abddab6d1d182c524 - not touched, no drift possible.
+  Scratch gone Windows-side: _b57_probe.gd, _b57_out.txt, _b57_run.log all deleted, `*b57*` at the
+    worktree root returns nothing.
+  GODOT CLOSED, CONFIRMED BY TASKLIST AND NOT BY THE GATE RETURNING. B56 left a ghost process alive
+    under my name inside the HUD's window because it assumed. I ran tasklist after the run: no
+    Godot process of any lane. The probe's quit(0) was reached and rc was 0.
+
+THE LOCK.
+Engine verified free by tasklist at 15:46 before I wrote a word; last lane line was game build IDLE
+15:10:08. Claimed 15:47:30, cap 16:12, and I computed the HUD's 15:52 boundary FIRST and declared
+15:51 inside it. IDLE at 15:50:40. NO crossing, and nothing was left running past my own IDLE.
+
+ONE THING I FOUND IN MY OWN WORKTREE THAT WAS NOT MINE, REPORTED BECAUSE IT BLOCKED A MERGE.
+`git merge origin/main` aborted on a local uncommitted modification to docs/WORK_PLAN.md in W6 -
+235 inserted lines, the team lead's 15:1x block. I did not write it and that file is not mine. I
+compared the worktree copy against `origin/main:docs/WORK_PLAN.md` BEFORE touching it: byte-for-byte
+identical, 1631601 bytes both. So the modification carried no information that main did not already
+have, and I stashed it, merged to 11741c9, and dropped the stash. Nothing was lost. Saying it out
+loud anyway: an uncommitted plan edit appearing in another lane's worktree is worth somebody's eye.
+
+OWED TO NO LANE. Nothing for the GAME BUILD lane in twitch_eventsub.gd this hour. No live Twitch
+test was run and no bits were spent on any account.
 
 ## B56 - THE SIXTH TRIGGER FINALLY REPORTED, AND WHAT IT REPORTED FIRST WAS THAT MY OWN PROBE WAS MEASURING NOTHING (chat bot, 2026-11-18 14:4x CT)
 NAMING, SO NOBODY MATCHES THE WRONG ROW: my RUN_LOCK lines this hour are labelled "chat bot B55"

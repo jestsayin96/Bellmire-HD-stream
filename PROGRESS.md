@@ -9388,3 +9388,11 @@ Windowed U62 re-run, renders/cycles/20261117_u62/all_u64_*.png looked at at 100%
 HONEST LIMIT: U62's pixel measure still reads h=96 at 100% as clear=false (stripe top 0.73 px below ink bottom, under its 1 px floor) -
 sub-pixel antialiasing, unreachable at 1080p; the arithmetic gate cannot see ink rows, U62 owns that fault.
 STILL UNCAUGHT: a wrong ROD_WORDMARK[1] (bottom rod true) - harmless (stripe only moves down).
+
+## HUB - 2026-11-17 23:39 CT - section bar no longer clips (Mr. E's "cut off after Shops")
+TAKE THIS NEXT row taken: the 22:58 HUB row (clipped section bar). Cause as measured by the team lead: tablist scrollW 1346 px fixed, so 3 tabs lost at 1500 px and 6 at 1280 px behind a 2 px scrollbar.
+Change: web/style.css only (+21 lines). From 561 px up the bar WRAPS (flex-wrap, mask removed) so all 15 tabs are on screen, no scrolling. Under 561 px it stays a swipe strip with a visible 5 px scrollbar and the fade. No markup, roles, tab order, app.js, data or CSP change (git diff on app.js and index.html is empty).
+LOOKED AT (headless Edge screenshots, mock=crowd): 1500 px - 2 rows, Live..Commands all visible (was: Satchel/Season/Commands cut). 1280 px - 3 rows, all 15 visible (was: 6 cut). The 420 px shot is a swipe strip showing a 5 px scrollbar; headless Edge will not go below ~500 px so that frame is not a true 420 px width - not verified at 420.
+NUMBER: tabs cut off 3 -> 0 at 1500 px; 6 -> 0 at 1280 px; tab row height 1 -> 2 rows (1500) / 3 rows (1280). Cost: ~38 px of stage height per extra row.
+CHECKS: ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 all render (15 tab buttons present; 25 where the page also builds the board/lore chips); 0 img elements carrying onerror; the <colour> canary still shows literal &lt; text. Live-dot colour unchanged.
+Untracked in worktree and still refused-delete: _tabs_a/b/c.png (this run), plus _h32_shot_a..f.png, _hub_web_run.tgz, web_look*.tar, _plan_tmp.txt.

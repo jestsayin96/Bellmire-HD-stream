@@ -1771,3 +1771,24 @@ html:not(.overlay):not(.watch) .stage-top nav {
 .skip-link:focus { top: 8px; }
 html:not(.overlay):not(.watch) .stage-scroll:focus-visible { outline: none; }
 html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }
+
+/* ===========================================================================
+   H32 follow-up (Mr. E, 17 Nov ~23:00 CT: "if you go all the way down its cut off after shops").
+   Measured: the section bar is 1346 px wide and fixed, so at 1500 px Satchel/Season/Commands were
+   cut off and at 1280 px six tabs were - behind a 2 px scrollbar and a fade that made the bar look
+   finished. FIX: the bar WRAPS onto a second row from 561 px up, so every one of the fifteen tabs
+   is on screen with no scrolling at all. Below 561 px a wrap would eat the stage, so it stays a
+   swipe strip but now shows a real (thin) scrollbar and keeps the fade. Layout only: no markup,
+   no roles, no tab order, no data, no CSP change.
+   =========================================================================== */
+@media (min-width: 561px) {
+  html:not(.overlay):not(.watch) .stage-top nav {
+    flex-wrap: wrap; overflow: visible; row-gap: 6px;
+    -webkit-mask-image: none; mask-image: none;
+  }
+}
+@media (max-width: 560px) {
+  html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: thin; scrollbar-color: rgba(233,214,168,.4) transparent; padding-bottom: 9px; }
+  html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar { display: block; height: 5px; }
+  html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar-thumb { background: rgba(233,214,168,.4); border-radius: 5px; }
+}

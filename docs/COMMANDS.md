@@ -17,7 +17,7 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!armoury` | !armory |  | 50 / 150 / 400 / 1000 gold by tier | Buy the next armour tier: leather, chainmail, plate, warded plate. It shows: boots, pauldrons, a helm. Scarwoven mail is only found below. | `!armoury` |
 | `!brew` |  | [potion] [n] | Mending 35; others 40-480 gold | Buy brews at the apothecary. No name buys Draughts of Mending. Names: mending, greater, superior, supreme, antidote, emberward, hearthwarm, quickwater (haste), ogre (strength), shadow (unseen), bravecup (heroism), owl (darkvision). Heroes drink them below when they need to. | `!brew quickwater 2` |
 | `!oil` | !lamp, !torch | [n] | 12 gold a flask | Buy lamp oil: one flask lights a floor for two delvers. | `!oil 3` |
-| `!wear` |  | <item> / off <slot> | 30-420 gold, once | Buy and wear an accessory (rings, amulets, cloaks, boots, gloves - small bonuses) or a cosmetic (hats, banners, a pet, a title). Owned things are worn again for nothing. !wear off ring takes one off. | `!wear corgi` |
+| `!wear` |  | <item> / off <slot> | 30-520 gold, once | Buy and wear an accessory (rings, amulets, cloaks, boots, gloves - small bonuses) or a cosmetic (hats, banners, a pet, a title). Owned things are worn again for nothing. !wear off ring takes one off. | `!wear corgi` |
 | `!dye` |  | <colour> | 25 gold | Dye your armour and cloak: black, white, red, blue, green, gold, purple, teal, brown, grey. | `!dye teal` |
 | `!reroll` |  |  | free when dead; 120 gold alive | Dead: raise a new hero. Alive: throw your ability scores again (a worse throw keeps the old ones). | `!reroll` |
 | `!respec` |  | <class> | 200 gold | Take up another calling, keeping your hero. | `!respec cleric` |

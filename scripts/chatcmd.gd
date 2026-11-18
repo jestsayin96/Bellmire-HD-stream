@@ -559,6 +559,49 @@ static func _has_word(flat: String, word: String) -> bool:
         return false
     return (" " + flat + " ").contains(" " + word + " ")
 
+## B46: the words inside the parenthesis that follows `head` in `wear`.what, cut at the first
+## " - " (the accessory parenthesis carries a gloss after a dash), lower case, "a "/"the " gone.
+## The published lists are PROSE, so this reads them the way a viewer does rather than asking
+## the data file to carry a machine copy of a sentence.
+static func _wear_list(what: String, head: String) -> Array[String]:
+    var at := what.to_lower().find(head)
+    if at < 0:
+        return []
+    var rest := what.to_lower().substr(at + head.length())
+    var close := rest.find(")")
+    if close < 0:
+        return []
+    var inner := rest.substr(0, close)
+    var dash := inner.find(" - ")
+    if dash >= 0:
+        inner = inner.substr(0, dash)
+    var out: Array[String] = []
+    for part in inner.replace(" and ", ",").split(",", false):
+        var w := String(part).strip_edges().trim_prefix("a ").trim_prefix("the ").strip_edges()
+        if w != "" and not out.has(w):
+            out.append(w)
+    return out
+
+## B46: a published plural matched to the one slot or kind it names ("rings" -> "ring",
+## "boots" -> "boots", "a pet" -> "pet"): the word itself, or the word with one trailing "s"
+## taken off. "" when nothing in the table answers to it, which is the GHOST finding.
+static func _wear_one(word: String, real: Array[String]) -> String:
+    if real.has(word):
+        return word
+    var cut := word.trim_suffix("s")
+    return cut if real.has(cut) else ""
+
+## B46: how many rows the shop sells above a published top price. Used only to say HOW BAD a
+## wrong span is in the error line; the finding itself is the top price, not this count.
+static func _wear_over(acc: Dictionary, cos: Dictionary, top: int) -> int:
+    var n := 0
+    for tab in [acc, cos]:
+        for k in (tab as Dictionary):
+            var row: Dictionary = (tab as Dictionary)[k] as Dictionary
+            if row.has("cost") and int(row["cost"]) > top:
+                n += 1
+    return n
+
 static func _weight(row: Variant) -> int:
     return int(CATCHUP_WEIGHT.get(String((row as Dictionary).get("kind", "")), 1))
 
@@ -1525,6 +1568,107 @@ static func commands() -> Dictionary:
             if not lk_short.is_empty():
                 push_error("COMMANDS_DATA LOOK LONGER: `look`.what promises cheers, subs and redeems LONGER panes than the free look, and %d of them do not outlast it - the free look holds %ss and %s - so docs/COMMANDS.md tells a viewer that paying buys more screen time than asking, and it does not" % [lk_short.size(), str(lk_free), lk_short])
                 printerr("COMMANDS_DATA LOOK LONGER - free look %ss, not outlasted by: %s" % [str(lk_free), lk_short])
+        # B46: `wear` - THE PRICE SPAN B40 NAMED AND REFUSED TO CLAIM, AND THE TWO LISTS BESIDE IT.
+        # B40 guarded three flat prices and wrote, in the comment above, "WHAT I AM STILL NOT
+        # CLAIMING: `wear`.cost publishes a RANGE (30-420)". This is that row, and reading it
+        # found a LIVE DEFECT rather than an unanchored claim: the dearest thing !wear sells
+        # costs 520 gold (crater_ring), 28 rows sit above 420, and my own file published the
+        # span as "30-420 gold". A viewer counted 420 into their purse for the best ring in
+        # Bellmire and was 100 gold short at the counter. The low end was right. The top was
+        # not. THE NUMBER IS CORRECTED IN data/commands.json IN THIS SAME COMMIT - the fix is
+        # the delivery and the guard is what stops it drifting back, because content owns
+        # items.json and every ring they add or re-price moves this span under my sentence.
+        # THE AUTHORITY: `Roster.wear` charges `int(it["cost"])` for ANY key in
+        # items.json `accessories` or `cosmetics` (haggle and rank move what is taken, the same
+        # way they move every other price, so the published span is the LIST span - the same
+        # convention `forge` and `armoury` publish under). I read it through Roster.items(), the
+        # accessor the shop itself calls, so the guard compares against the table in play.
+        # AND THE TWO LISTS: `wear`.what publishes FIVE accessory slots and FOUR cosmetic kinds,
+        # and both are the COMPLETE set today - which is why these carry a MISSING arm as well as
+        # a GHOST one, unlike the dye colours (ten names out of a 281-key table, where naming a
+        # handful IS the design). A ghost slot hands a viewer a pre-typed refusal; a missing one
+        # hides a whole slot of gear nobody is told they can buy.
+        var we_d: Dictionary = cmd_d.get("wear", {}) as Dictionary
+        var we_items: Dictionary = Roster.items()
+        var we_acc: Dictionary = we_items.get("accessories", {}) as Dictionary
+        var we_cos: Dictionary = we_items.get("cosmetics", {}) as Dictionary
+        var we_min: int = -1
+        var we_max: int = -1
+        var we_slots: Array[String] = []
+        var we_kinds: Array[String] = []
+        for we_t in [we_acc, we_cos]:
+            var we_tab: Dictionary = we_t as Dictionary
+            for we_k in we_tab:
+                var we_row: Dictionary = we_tab[we_k] as Dictionary
+                if we_row.has("cost"):
+                    var we_c: int = int(we_row["cost"])
+                    if we_min < 0 or we_c < we_min:
+                        we_min = we_c
+                    if we_c > we_max:
+                        we_max = we_c
+                if we_row.has("slot") and not we_slots.has(String(we_row["slot"])):
+                    we_slots.append(String(we_row["slot"]))
+                if we_row.has("kind") and not we_kinds.has(String(we_row["kind"])):
+                    we_kinds.append(String(we_row["kind"]))
+        # the span this file PUBLISHES: "<low>-<high> gold". Read in one place, because a span
+        # read two different ways is two numbers again.
+        var we_cost: String = String(we_d.get("cost", ""))
+        var we_low: int = -1
+        var we_high: int = -1
+        var we_gold: int = we_cost.find(" gold")
+        if we_gold > 0:
+            var we_pair: PackedStringArray = we_cost.substr(0, we_gold).split("-", false)
+            if we_pair.size() == 2 and we_pair[0].strip_edges().is_valid_int() and we_pair[1].strip_edges().is_valid_int():
+                we_low = int(we_pair[0].strip_edges())
+                we_high = int(we_pair[1].strip_edges())
+        if we_acc.is_empty() or we_cos.is_empty():
+            # the dead key IS the finding, the same shape as the dye table: there is no span to
+            # compare against, and a !wear that sells nothing is the bigger fault.
+            push_error("COMMANDS_DATA WEAR AUTHORITY: data/items.json carries %d accessory row(s) and %d cosmetic row(s), so the shop `wear` publishes a %s price span for sells nothing from one of its two tables" % [we_acc.size(), we_cos.size(), we_cost])
+            printerr("COMMANDS_DATA WEAR AUTHORITY - accessories %d, cosmetics %d" % [we_acc.size(), we_cos.size()])
+        elif we_low < 0:
+            push_error("COMMANDS_DATA WEAR SPAN ANCHOR: `wear`.cost no longer carries a \"<low>-<high> gold\" span in words this guard can read - the cheapest and dearest thing the shop sells can no longer be checked against data/items.json, and the span is what a viewer budgets from")
+            printerr("COMMANDS_DATA WEAR SPAN ANCHOR - `wear`.cost lost its \"<low>-<high> gold\" span; the published price range is now unchecked")
+        else:
+            if we_low != we_min:
+                push_error("COMMANDS_DATA WEAR SPAN LOW: `wear`.cost publishes %d gold as the cheapest thing the shop sells and the cheapest row in data/items.json costs %d - docs/COMMANDS.md tells a viewer the floor of the counter and it is the wrong floor" % [we_low, we_min])
+                printerr("COMMANDS_DATA WEAR SPAN LOW - published %d, cheapest row %d" % [we_low, we_min])
+            if we_high != we_max:
+                push_error("COMMANDS_DATA WEAR SPAN HIGH: `wear`.cost publishes %d gold as the dearest thing the shop sells and %d row(s) in data/items.json cost more, up to %d - a viewer who saves the published top and walks to the counter is %d gold short" % [we_high, _wear_over(we_acc, we_cos, we_high), we_max, we_max - we_high])
+                printerr("COMMANDS_DATA WEAR SPAN HIGH - published %d, dearest row %d" % [we_high, we_max])
+        # THE SLOTS AND THE KINDS. Two lists, read out of the sentence, each checked BOTH ways.
+        var we_what: String = String(we_d.get("what", ""))
+        for we_pair2 in [["accessory (", we_slots, "SLOT", "accessory slot", "data/items.json `accessories`"],
+                         ["cosmetic (", we_kinds, "KIND", "cosmetic kind", "data/items.json `cosmetics`"]]:
+            var we_head: String = String(we_pair2[0])
+            var we_real: Array[String] = []
+            we_real.assign(we_pair2[1])
+            var we_tag: String = String(we_pair2[2])
+            var we_word: String = String(we_pair2[3])
+            var we_src: String = String(we_pair2[4])
+            var we_said: Array[String] = _wear_list(we_what, we_head)
+            if we_said.is_empty():
+                push_error("COMMANDS_DATA WEAR %s ANCHOR: `wear`.what no longer carries its \"%s...)\" list in words this guard can read - the %ss docs/COMMANDS.md invites a viewer to type can no longer be checked against %s, so a dead one would reach chat silently" % [we_tag, we_head, we_word, we_src])
+                printerr("COMMANDS_DATA WEAR %s ANCHOR - `wear`.what lost its \"%s\" list; those names are now unchecked" % [we_tag, we_head])
+                continue
+            var we_ghost: Array[String] = []
+            var we_hit: Array[String] = []
+            for we_w in we_said:
+                var we_m: String = _wear_one(String(we_w), we_real)
+                if we_m == "":
+                    we_ghost.append(we_w)
+                elif not we_hit.has(we_m):
+                    we_hit.append(we_m)
+            var we_miss: Array[String] = []
+            for we_r in we_real:
+                if not we_hit.has(we_r):
+                    we_miss.append(we_r)
+            if not we_ghost.is_empty():
+                push_error("COMMANDS_DATA WEAR %s GHOST: `wear`.what publishes %d %s(s) nothing in %s carries, so docs/COMMANDS.md invites a refusal a viewer pays a command to discover - the real ones are %s and none of these is among them: %s" % [we_tag, we_ghost.size(), we_word, we_src, we_real, we_ghost])
+                printerr("COMMANDS_DATA WEAR %s GHOST - %d published %s(s) nothing answers to: %s" % [we_tag, we_ghost.size(), we_word, we_ghost])
+            if not we_miss.is_empty():
+                push_error("COMMANDS_DATA WEAR %s MISSING: %s carries %d %s(s) `wear`.what never names - %s - so a whole slot of gear is for sale and nothing tells a viewer it exists, and `!wear off <slot>` takes it off a word they were never given" % [we_tag, we_src, we_miss.size(), we_word, we_miss])
+                printerr("COMMANDS_DATA WEAR %s MISSING - %d unpublished %s(s): %s" % [we_tag, we_miss.size(), we_word, we_miss])
         _cmds = parsed
     return _cmds
 

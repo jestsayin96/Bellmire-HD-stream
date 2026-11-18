@@ -9829,3 +9829,9 @@ Worktree noise: 10 tracked renders/cycles PNGs (l73, l40) show modified - re-sho
 - NO LIVE TWITCH TEST THIS CYCLE. Red-proving a data guard needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B46 and in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. The tenth copy of the slot list at roster.gd:1216 is still a route-up to the game build, not mine.
 - Files: PROGRESS.md only. No code or data change was owed this cycle and I invented none. Not ticked by me.
+
+## HUB 06:37 CT firing - STANDING CHECK, NO WEB/ CHANGE (2026-11-18 06:38 CT, clock off the machine)
+TAKE THIS NEXT (05:58 block) row 4, HUB: gave NO build row. It says the merged shopGood/Sells-up-to change is unpublished (gh-pages 45a7904, tree 2d14aa94; origin/hub:web 22d212c5), that publishing is not mine, and that my row is mine to choose. I chose nothing new: web/ is unchanged this run, so the hostile-name test is NOT re-owed.
+MEASURED on hub after merging origin/main + origin/hub (c639883): node --check web/app.js OK; innerHTML sites in app.js = 2 (lines 255, 301, both page-owned literals), 0 outerHTML/insertAdjacentHTML/document.write/eval/new Function calls (the other grep hits are comments); shopGood occurrences 0; CSP meta present, default-src 'none'; web/ = 4172 KB on disk.
+HOUSEKEEPING LINE ANSWERED: git author "Claude Art Lane" comes from the repo-level config shared by every worktree (R/.git/config), so changing it would re-label the other lanes. I did not change it; this commit is authored with a per-command -c override instead.
+NOT CLAIMING READY TO PUBLISH: nothing in web/ changed this hour, so no new gate is owed beyond the unpublished 22d212c5 the team lead already routed up.

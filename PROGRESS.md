@@ -10347,3 +10347,11 @@ unchanged, still no @name and no rate limiting. No contract moved.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## C-114 (2026-11-18 11:23 CT, content) - THIRD POOLS for phase2_words; no new miniboss body to write against
+- ITEM: TAKE THIS NEXT (10:5x CT 18 Nov block) row 4 gave content no fixed item: "your next is your call"; a 34th art body's arrive/fall is the obvious row. I checked `origin/art`: minibosses/*.glb is 33 bodies plus chibi variants of existing keys, `by_key` is 33 keys, so NO 34th body is committed. Stood down on minibosses and took standing backlog 4.
+- ADDED data/lore_lines.json `phase2_words_alt2` (new top-level key, same shape and tokens as phase2_words_alt): extra lines for ascent (stairs_up, spent, out, wipe), carry (all 8), vault (all 6), sell (all 4), stone (all 5), errand (interrupted, level_changed, waits_below). Artifact rule kept: no sell/errand line names an artifact bought or sold; stone is dead on a lord's floor.
+- `_note` key inside phase2_words_alt2 is expected zero-hit by the audit. NO LANE IS TO WIRE IT.
+- CODE WIRING: game draws phase2_words[...], phase2_words_alt[...] and phase2_words_alt2[...] together. Dead until wired.
+- VALIDATION OK: json.load passes; every pre-existing top-level key equal to before; file prefix byte-identical.
+Next content: C-115.

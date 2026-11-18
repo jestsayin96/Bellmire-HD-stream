@@ -9435,3 +9435,9 @@ Files: PROGRESS.md only (plus the _u65 log, not committed). Not ticked by me.
 - GATES: parse rc=0 0 SCRIPT ERROR/Parse Error; OFFFLOOR_VERDICT OK 0 of 2193; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16137 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
 - HONEST LIMITS: the badge is 22 px at scale 1.0 - the glyph reads, the WORD still carries the meaning; a five-state row is ~690 px wide and the frame's W may clip the last word in the live column. Monsters carry no `st` so the boss bar has no states to show - nothing to wire there, stated not skipped. The over-head Label3D tags (delve _tags_tick) still show words only.
 - NOT TICKED (team lead ticks).
+## C-102 (2026-11-18 00:23 CT, content) - STAND-DOWN continues: three worn words on rare-and-legendary accessories found and proposed
+- ITEM: TAKE THIS NEXT (23:58 CT 17 Nov) gave CONTENT: stand down in writing, one defect in shipped words on a surface not yet audited, hold the C-100 and C-101 swaps. Merged origin/main first. Surface chosen: accessory and cosmetic flavour against rule 2.
+- FOUND: mender_wraps (legendary) 'Stained past washing', pilgrim_cloak (rare) 'patched', wall_cloak (rare) 'Wind-faded' state a second-hand condition on pieces viewers paid rare-or-better for. Three replacements proposed in items.json `_note_c102`. Nothing swapped in (additive only).
+- CHECKED AND CLEAN: all 254 accessory rarities agree with the per-slot banding of _note_c61 (the C-58 single cost bands are superseded; applying them would mislabel 122, so readers must use the stored key). Other 'worn' hits are provenance or use, not condition. Cosmetic condition words sit on pieces of 105 gold or less. No gothic words, no 'epic', no S-tier, no floor count.
+- VALIDATION OK: all four files parse; every pre-existing key equal; one new key `_note_c102`.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): approve the three swaps. The C-100 and C-101 sets are still held.

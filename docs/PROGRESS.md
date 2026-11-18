@@ -3492,3 +3492,37 @@ I did not pull a Phase 2 system early. Measured, no code changed:
   and art's _fit_report.json pairs.snuffer_chibi.ratio is 1.06 - the same number. No 34th body has landed.
 - Uncommitted renders/cycles/d96/*.png modifications sit in R from another session; I did not touch or stage them.
 No gates run (nothing to gate). No live Twitch test, nothing spent.
+
+## D-cycle - S38: THE RAMMER DROPS ON THE COUNT, AND order_held LEAVES setpieces_fired. 2026-11-18T13:08-06:00 (game build)
+Row: the 12:5x TAKE THIS NEXT block, game build row 1, both halves (a) and (b). Not ticked - the lead ticks.
+(a) THE order_held COUNTER DEFECT - fixed in my own code. delve.gd no longer writes `order_held` into
+`Delve.setpieces_fired` (it was once per held hero PER FRAME, and _l29c_test C sums that dict). It is
+now its own `static var order_held_frames`. Nothing else read the key (grep tools/ scripts/: the one
+write was the only hit). S36_ORDER gains a 5th check proving it: holds counted 240 in order_held_frames,
+key absent from setpieces_fired. S36_ORDER OK (5 checks).
+(b) THE RAMMER, all three parts of the interlock:
+  - MB_FIT "rammer": 1.12 - art's _fit_rammer_register.json pairs.rammer.ratio, copied not re-derived.
+  - dungeon_hd.gd THEME_MINIBOSS_MORE["flooded"] = ["tanner", "rammer"] under art's own tag (field 5 of
+    minibosses.py's tuple read: "flooded"). The lead was right: without the row the gate never saw it.
+    MEASURED: miniboss_for("flooded", n) returns rammer for 150 of n in 0..399 (pool of three).
+    It FAILED 0/400 on my first run - rammer.glb had no .import, so ResourceLoader.exists said no.
+    One --headless --import generated rammer.glb.import; committed, as every other body's .glb.import is tracked.
+  - MB_WAYS "rammer": "drop" - a TIMING way, built from art's idea verbatim. The act is the haul: the
+    iron goes up and HOLDS MB_DROP_HOLD 2.0 s (no hit at the haul). On the count, everyone within
+    MB_DROP_R 2.6 m of the frame is struck for atk x2.5 (soaked) and slowed 1.5 s, unless a DEX save
+    (12 + floor/4, the nova's DC) says they read the hold and stepped off. Ranged delvers stand off at
+    9 m and are never on the pile. Broken (30% hp) = the rope parts: an iron that is up never comes down.
+    Content's 6 act and 4 broken lines are now live; they were the only by_key act lines with no way.
+TEST tools/_s38_rammer.gd (new, windowed, quits itself), on a real built floor, through _mb_way_tick:
+  S38_RAMMER OK (18 checks) - draw 150/400, MB_FIT 1.12, hold set at the haul, NOTHING lands in 1.5 s
+  of the 2.0 s hold, it lands on the count, the off-pile delver untouched across 8 drops, DROPS 8
+  STRUCK 6 READ 10 (struck+read = 2 x drops exactly), broken mid-hold clears it and 6 s later no drop.
+  RED: S38_RED=1 (clears the hold after the haul) -> S38_RAMMER FAIL naming three checks. Proven both ways.
+  LOOKED at renders/cycles/s38/rammer_2after.png: the Rammer stands on the floor at ratio 1.12, frame
+  and monkey readable, two delvers on the pile, the third off it out of frame-centre.
+GATES: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2173; TWITCH_PARSE OK (8 checks);
+TOWNWALK in_solid=0/14385 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+HONEST LIMIT: the Rammer is a STATIC body (no anims), so the haul and the drop are told in the feed and
+the hit, not shown as the monkey rising; the delvers do not yet move off the pile on their own - the DEX
+save stands in for reading the hold. Building a hero "step off" behaviour is a next row, not this one.
+BEADLE: unchanged from S35/S36 (MB_FIT 1.2, shrine row, "order" way). LEECH: not re-measured this hour.

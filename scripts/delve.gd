@@ -212,6 +212,11 @@ func _next_floor() -> void:
 ## up for free. The data is laid by dungeon_hd._set_pieces; this is the ONLY code
 ## that resolves it, so the test can count resolutions straight off setpieces_fired.
 static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd)
+## S38: the Beadle's holds are counted per held hero PER FRAME, so they live here and NOT in
+## setpieces_fired - _l29c_test C sums that dict and could otherwise pass on holds alone.
+static var order_held_frames := 0
+static var rammer_struck := 0                # S38: delvers caught on the pile at the count
+static var rammer_read := 0                  # S38: delvers on the pile who read the hold and stepped off
 const _AMBUSH_LINE := [
 	"Shadows peel off the walls - an ambush! %s surges in.",
 	"A grate shifts, and %s is already upon them.",
@@ -388,6 +393,7 @@ const MB_FIT := {
 	"fenman": 1.03,   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
 	"comfitmaker": 0.93,   # S33: art's _fit_comfitmaker_register.json pairs.comfitmaker.ratio, copied not re-derived
 	"leech": 0.95,   # S33: art's _fit_leech_register.json pairs.leech.ratio (MINIBOSSES.md 32), copied not re-derived
+	"rammer": 1.12,   # S38: art's _fit_rammer_register.json pairs.rammer.ratio (MINIBOSSES.md 34), copied not re-derived
 	"beadle": 1.2}   # S35: art's _fit_beadle_register.json beadle.ratio (MINIBOSSES.md 33), copied not re-derived
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
@@ -1644,7 +1650,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			continue
 		b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
 		if _order_holds(m):
-			Delve.setpieces_fired["order_held"] = int(Delve.setpieces_fired.get("order_held", 0)) + 1
+			Delve.order_held_frames += 1          # S38: NOT a set piece - see order_held_frames
 			continue                                  # S36: not your name - you hold
 		m["swing"] = float(m["swing"]) - delta * _pace(m)
 		if float(m["swing"]) > 0.0:
@@ -1927,8 +1933,17 @@ const MB_WAYS := {
 	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
-	"beadle": "order",
+	"beadle": "order", "rammer": "drop",
 }
+## S38: the Rammer DROPS ON THE COUNT (art's idea: "the answer is not what you do, it is when").
+## Its act is the haul: the iron goes up and HOLDS for MB_DROP_HOLD seconds, then comes down on the
+## pile - everyone within MB_DROP_R of the frame at that moment. A delver on the pile makes a DEX
+## save to have read the hold and stepped off; ranged delvers standing off are never on it. A
+## TIMING way: no hit at the haul, the whole blow lands on the count. Broken = the rope parts and
+## an iron that is up never comes down.
+const MB_DROP_HOLD := 2.0
+const MB_DROP_R := 2.6
+const MB_DROP_MULT := 2.5
 ## S36: the Beadle CALLS THE ORDER (art's idea, verbatim: "while it stands the party does not choose
 ## who acts; it calls the same hero again and again while the rest hold"). _order_uid is the hero it
 ## has called; while the Beadle stands unbroken and that hero lives, every OTHER hero holds their
@@ -1963,12 +1978,22 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			mon.scale = Vector3.ONE                       # the fire is going: back to its own size
 		if way == "order" and _order_mon == mon:
 			_order_uid = ""                               # the roll is dropped: everyone acts again
+		if mon.has_meta("mb_drop_t"):
+			mon.remove_meta("mb_drop_t")                  # S38: the rope parts - the iron never comes down
 		if mon.has_meta("mb_base_atk"):
 			var d0: Dictionary = mon.def.duplicate()
 			d0["atk"] = float(mon.get_meta("mb_base_atk"))
 			mon.def = d0
 		_say(_miniboss_say(key, "broken"))
 		Delve.setpieces_fired["miniboss_broken"] = int(Delve.setpieces_fired.get("miniboss_broken", 0)) + 1
+		return
+	if mon.has_meta("mb_drop_t"):                     # S38: the Rammer's iron is up - wait for the count
+		var dt := float(mon.get_meta("mb_drop_t")) - delta
+		if dt > 0.0:
+			mon.set_meta("mb_drop_t", dt)
+			return
+		mon.remove_meta("mb_drop_t")
+		_rammer_drop(mon, alive)
 		return
 	var t := float(mon.get_meta("mb_way_t", MB_WAY_EVERY * 0.5)) - delta
 	mon.set_meta("mb_way_t", t)
@@ -2039,6 +2064,8 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			mon.swoop(land, true)
 		"set":
 			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
+		"drop":
+			mon.set_meta("mb_drop_t", MB_DROP_HOLD)        # S38: the haul - up, and it holds
 		"order":
 			# the same name again while it still stands; a new one only when the called hero is down
 			var called: Dictionary = {}
@@ -2055,6 +2082,24 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 		_say(line)
 	Delve.setpieces_fired["miniboss_act"] = int(Delve.setpieces_fired.get("miniboss_act", 0)) + 1
 	Delve.setpieces_fired["miniboss_act_" + way] = int(Delve.setpieces_fired.get("miniboss_act_" + way, 0)) + 1
+
+## S38: the count. The iron comes down on the pile; whoever is on it and did not read the hold is struck.
+func _rammer_drop(mon: Monster, alive: Array) -> void:
+	var base := float(mon.def.get("atk", 4.0)) * MB_DROP_MULT
+	for o in alive:
+		if float(o["hp"]) <= 0.0:
+			continue
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) >= MB_DROP_R:
+			continue                                  # off the pile: the count passes them by
+		if _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex") >= 12 + floor_no / 4:
+			Delve.rammer_read += 1                    # read the hold and stepped off in time
+			continue
+		o["hp"] = float(o["hp"]) - _soak(o, base)
+		_give(o, "slowed", 1.5)                       # the ground jumps under them
+		_hero_hit(o)
+		Delve.rammer_struck += 1
+	Sfx.at("hit", mon.global_position)
+	Delve.setpieces_fired["miniboss_drop"] = int(Delve.setpieces_fired.get("miniboss_drop", 0)) + 1
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:

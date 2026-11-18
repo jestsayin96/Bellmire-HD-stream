@@ -43,7 +43,7 @@ func _initialize() -> void:
 		var body := Node3D.new()
 		root.add_child(body)
 		body.position = Vector3(x, 0, 0)
-		body.rotation.y = PI          # -z (the body's forward) toward the camera
+		body.rotation.y = 0.0         # +z (the body's forward, the delve's atan2(dx, dz) turn) toward the camera
 		x += 1.0
 		_calls.append([{"body": body}, String(pair[0]), bool(pair[1])])
 	var cam := Camera3D.new()

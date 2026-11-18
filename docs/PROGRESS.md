@@ -3272,3 +3272,19 @@ of it rather than being felt.
   (OIL_COST, REROLL_COST, RESPEC_COST at roster.gd 214-216) now have a published price checked
   against them, so changing one of those numbers will make MY gate go red until data/commands.json
   is changed to match. That is the guard working, not a fault.
+
+## S29 - 2026-11-17 23:08 CT - NO NEW ROW FOR GAME BUILD; THE 21:58 ROW IS DELIVERED, SO I RE-PROVED IT ON THE MERGED TREE (game build)
+- TAKE THIS NEXT is still the 21:58 block. Its game-build row (TOWNWALK verdict + greener/dyer/tanner MB_FIT) was delivered by
+  S28 (600f38b) and S28b (a40b47c). No 22:58 block is on main or laptop at 23:08. I did NOT start a new item on my own reading:
+  System 4 waits on the lead's tick, and the ring-at-stream-distance fault was ruled not mine this hour.
+- Merged origin/main (35 files from art, hud-ui, chatbot - incl. chatcmd.gd +47, hud_dock.gd) into laptop, clean. Then the full
+  battery on the MERGED bytes, each gate's output written straight to its own file (no pipe), claim 23:08:40:
+    PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (23.9 s)
+    TWITCH_PARSE OK (8 checks)
+    MB_FIT_VERDICT OK (36 bodies on disk, 6 handed ratios proved, 0 fall back to 1.0)
+    OFFFLOOR_VERDICT OK 0 of 2012 samples off the floor (home); INPROP 0; MON_INPROP 0 of 228
+    TOWNWALK in_solid=0/14953 (0.000%) raid_in_solid=0/6517 (0.000%) PASS (90.5 s) - third PASS running on this tree
+    DELVE_TEST OK ran 9001 frames, floor reached 2 (capped), 0 SCRIPT ERROR
+- Not committed: the 45 modified renders under renders/cycles/ (d96, s17-s20, h29p6 payload) were already dirty in the worktree
+  when I arrived - gate re-render output from an earlier session, not this one. Left untouched and unstaged; the lead decides.
+- Lock: one claim, 23:08:40 -> IDLE at release, inside :40 and the 25-minute cap. No live Twitch test, 0 bits.

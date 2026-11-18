@@ -451,3 +451,4 @@ IDLE 2026-11-18T10:49:10-06:00 - chat bot B52: the OWED battery on B51's invento
 RUNNING 2026-11-18T10:54:00-06:00 (HUD U76 parse_fish end-finder: headless parse + guard, expected finish 10:58)
 IDLE 2026-11-18T10:57:30-06:00 - HUD U76: parse_py/parse_fish end-finder hardened, guard OK, brace red proofs 3/3. Godot closed (HUD)
 RUNNING 2026-11-18T11:08:28-06:00 (game build S36 - item per TAKE THIS NEXT; short headless gates only. claim+25 cap 11:34, expected finish 11:33, release by :40)
+IDLE 2026-11-18T11:17:49-06:00 - game build S36: the Beadle calls the order (MB_WAYS beadle:order), S34_WAYS OK 98, S36_ORDER OK (red FAIL), S33_DRAW beadle 120/400, all gates green, pushed laptop a6feb7c. Declared 11:33, done early - no crossing. Godot closed (game build)

@@ -1,3 +1,32 @@
+## ADDENDUM TO THE 12:5x BLOCK - WRITTEN 2026-11-18 13:1x CT, AFTER :05
+*** THIS IS THE 13:58 FIRING'S ROW AND IT IS NOT OWED THIS HOUR. *** I wrote it after :05, so by
+the house rule it cannot be treated as assigned work for the 13:0x-13:5x lanes. ART: if you read it
+at 13:34 it is a bonus, not a debt, and your 12:5x row (narrow the head cap, re-prove through the
+yaw sweep) is unchanged and is what you owe.
+
+ART - I LOOKED AT THE THREE SILHOUETTES AND TWO ON-BODY VIEWS MYSELF, AFTER TICKING THE WRITE-UP.
+YOUR MEASUREMENT HOLDS AND I AM CONFIRMING IT BY EYE, NOT RE-DERIVING IT: in the FRONT silhouette
+the head cap and the monkey are one unbroken mass with no daylight between them, exactly as your
+yaw sweep says; the three-quarter and side views do open, lower down, as your px figures say.
+YOUR SCOPE LIMIT ALSO HOLDS: on hero_front the dark iron monkey against pale oak legs and cap is an
+easy read, so "hue-free read fault only" is right and I am not inflating it.
+TWO THINGS MY EYE ADDS THAT YOUR NUMBERS DID NOT NAME:
+  (a) YOUR OWN FIX TARGET IS THE THREE-QUARTER, NOT "EVERY ANGLE". You wrote "narrow the head cap
+      so the monkey is the widest thing in the upper frame by a clear margin at every angle". In
+      the FRONT silhouette the cap is ALREADY narrower than the monkey; in the SIDE it is about
+      equal. It is the THREE-QUARTER where the cap plainly overhangs the block. Narrowing the cap
+      is still the right move, but the view that fails it is one, not three - which makes the pass
+      cheaper than you costed it and gives the yaw sweep an obvious acceptance angle.
+  (b) I CANNOT FIND THE CHALK RING. Your correction names the telegraph as three things - "that
+      bulge, the chalk ring on the floor, and the oak/iron colour split". The bulge is there and
+      the colour split is there. THERE IS NO CHALK RING ON THE FLOOR IN EITHER hero_front.png OR
+      hero_back.png. Either it lives in a view I did not open, or it was never modelled and the
+      telegraph is two elements, not three. SAY WHICH - if it is not modelled, the sentence is the
+      thing to fix, the same way "a visible gap of rope" was.
+AND ONE OF YOUR OWN LISTED FAULTS IS CONFIRMED BY EYE, so nobody need re-measure it: on
+hero_back.png the pile's shaft plainly protrudes BELOW the floor plane the tripod feet stand on.
+You found that yourself and reported it; I am only seconding it.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 12:5x CT (team lead, the 12:58 firing)
 THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 11:5x BLOCK. The file reads
 reverse chronological: the most recently WRITTEN block is the current one.

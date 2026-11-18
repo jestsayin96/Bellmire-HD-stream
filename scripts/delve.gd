@@ -1643,6 +1643,9 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			Rig.play(b._anim, "Running_A")
 			continue
 		b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
+		if _order_holds(m):
+			Delve.setpieces_fired["order_held"] = int(Delve.setpieces_fired.get("order_held", 0)) + 1
+			continue                                  # S36: not your name - you hold
 		m["swing"] = float(m["swing"]) - delta * _pace(m)
 		if float(m["swing"]) > 0.0:
 			continue
@@ -1924,7 +1927,28 @@ const MB_WAYS := {
 	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
+	"beadle": "order",
 }
+## S36: the Beadle CALLS THE ORDER (art's idea, verbatim: "while it stands the party does not choose
+## who acts; it calls the same hero again and again while the rest hold"). _order_uid is the hero it
+## has called; while the Beadle stands unbroken and that hero lives, every OTHER hero holds their
+## swing (they still take their places). It keeps calling the same hero until that one falls.
+var _order_uid := ""
+var _order_mon: Monster = null
+
+## true while a standing, unbroken Beadle has called someone other than this hero
+func _order_holds(m: Dictionary) -> bool:
+	if _order_uid == "" or not is_instance_valid(_order_mon):
+		return false
+	if _order_mon.state == Monster.S.DEAD or bool(_order_mon.get_meta("mb_broken", false)):
+		_order_uid = ""
+		return false
+	if String(m.get("uid", "")) == _order_uid:
+		return false
+	for o in party:
+		if String(o.get("uid", "")) == _order_uid:
+			return float(o["hp"]) > 0.0              # the called one is down: the order lapses
+	return false
 ## what each caller brings: the drill's garrison, the sexton's dead (they RISE), the sower's thorn
 const MB_CALLS := {"drillmaster": "warrior", "sexton": "bones", "sower": "adder"}
 
@@ -1937,6 +1961,8 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 		mon.set_meta("mb_broken", true)
 		if way == "grow":
 			mon.scale = Vector3.ONE                       # the fire is going: back to its own size
+		if way == "order" and _order_mon == mon:
+			_order_uid = ""                               # the roll is dropped: everyone acts again
 		if mon.has_meta("mb_base_atk"):
 			var d0: Dictionary = mon.def.duplicate()
 			d0["atk"] = float(mon.get_meta("mb_base_atk"))
@@ -2013,6 +2039,17 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			mon.swoop(land, true)
 		"set":
 			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
+		"order":
+			# the same name again while it still stands; a new one only when the called hero is down
+			var called: Dictionary = {}
+			for o in live_heroes:
+				if _order_mon == mon and String(o.get("uid", "")) == _order_uid:
+					called = o
+			if called.is_empty():
+				called = near
+			_order_uid = String(called.get("uid", ""))
+			_order_mon = mon
+			near = called                             # the act line names the hero it called
 	var line := _miniboss_say_for(key, "act", near)
 	if line != "":
 		_say(line)

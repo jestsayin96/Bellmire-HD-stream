@@ -40,7 +40,7 @@ func _process(_dt: float) -> bool:
 	if fn < 0:
 		return _finish()
 	var keys: Array = Delve.MB_WAYS.keys()
-	_ok(keys.size() == 14, "fourteen ways (%d)" % keys.size())
+	_ok(keys.size() == 15, "fifteen ways (%d)" % keys.size())
 	var red := OS.get_environment("S34_RED") == "1"
 	var seen_ways := {}
 	for k0 in keys:
@@ -111,6 +111,15 @@ func _process(_dt: float) -> bool:
 				_ok(d.has_st(d.party[0], "slowed"), "%s: held (slowed)" % k)
 			"blink":
 				_ok(true, "%s: blinked (swoop issued)" % k)
+			"order":
+				# S36: it called this hero; anyone else holds, the called one does not
+				_ok(d._order_uid == "s34" + k, "%s: called the hero (%s)" % [k, d._order_uid])
+				_ok(not d._order_holds(d.party[0]), "%s: the called hero acts" % k)
+				_ok(d._order_holds({"uid": "someone_else"}), "%s: the rest hold" % k)
+				d._mb_way_tick(mon, d.party, d.party[0], 9.0)
+				_ok(d._order_uid == "s34" + k, "%s: the SAME hero called again" % k)
+				Delve.setpieces_fired["miniboss_act"] = 1
+				Delve.setpieces_fired["miniboss_act_order"] = 1
 		# broken: once, then never again
 		mon.hp = mon.max_hp * 0.2
 		var n1 := feed.size()
@@ -119,6 +128,8 @@ func _process(_dt: float) -> bool:
 		_ok(feed.size() == n1 + 1 and br.has(feed.back()), "%s: a broken line from its pool" % k)
 		if way == "grow":
 			_ok(is_equal_approx(mon.scale.x, 1.0), "%s: back to its own size" % k)
+		if way == "order":
+			_ok(not d._order_holds({"uid": "someone_else"}), "%s: broken - nobody holds" % k)
 		d._mb_way_tick(mon, d.party, d.party[0], 9.0)
 		d._mb_way_tick(mon, d.party, d.party[0], 9.0)
 		_ok(int(Delve.setpieces_fired.get("miniboss_broken", 0)) == 1 and int(Delve.setpieces_fired.get("miniboss_act", 0)) == 1, "%s: broken once, no act after" % k)
@@ -127,7 +138,7 @@ func _process(_dt: float) -> bool:
 		mon.queue_free()
 		d.queue_free()
 		town.queue_free()
-	_ok(seen_ways.size() == 12, "twelve distinct ways (%d)" % seen_ways.size())
+	_ok(seen_ways.size() == 13, "thirteen distinct ways (%d)" % seen_ways.size())
 	return _finish()
 
 func _finish() -> bool:

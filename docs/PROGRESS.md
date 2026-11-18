@@ -3438,3 +3438,31 @@ GATES (verdict lines): PARSE rc=0 21.4 s, 0 SCRIPT ERROR / Parse Error; S35_GEAR
 S33_DRAW OK 126 (red-first on beadle); MBFEED_TEST OK 80; TWITCH_PARSE OK (8 checks);
 OFFFLOOR_VERDICT OK 0 of 2046; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/15317 raid_in_solid=0/9321 PASS.
 No live Twitch test, nothing spent. Backup scripts/gear.gd.bak_s35 (untracked). Logs build/_s35_battery*.log.
+
+## D-cycle - S36: THE BEADLE CALLS THE ORDER. 2026-11-18T11:08-06:00 (game build)
+TAKE THIS NEXT (10:5x block) row 1, both parts.
+- THE WAY. delve.gd MB_WAYS "beadle": "order" (fifteenth key, thirteenth distinct way). Art's idea, built as written:
+  each act tick the Beadle calls a hero (the nearest the first time) and keeps calling THE SAME ONE while that hero
+  lives; `_order_holds(m)` is true for every OTHER hero while the Beadle stands unbroken and the called one is up, and
+  _fight_body skips that hero's swing (they still take their places, they just do not act). At MB_BROKEN_FRAC the order
+  is dropped and everyone acts again. The act line names the called hero. HONEST LIMITS: it holds the SWING only - a
+  potion (_quaff) or a healer's mend still happens, and "broken" is the S34 hp threshold, not knocking the board off.
+- S34_WAYS extended: fifteen keys, thirteen ways, plus four order checks (called, called acts, rest hold, SAME hero
+  called again) and "broken - nobody holds". S34_WAYS OK 98 checks. Red: S34_RED=1 -> S34_WAYS FAIL 4 of 98, rc=1.
+- NEW GATE tools/_s36_order.gd, MEASURED THROUGH THE REAL FIGHT LOOP (Delve._fight_body, 120 ticks of 0.1 s, three
+  delvers at its side on a real built floor, windowed 1920x1080): SWINGS {s36_0: 9} - the other two 0 and 0; after it
+  breaks {s36_1: 5, s36_2: 4, s36_0: 3}. The Beadle re-acted on its own inside the loop and called the same hero
+  ("Called, once more. The rest hold."). S36_ORDER OK (4 checks). Red: S36_RED=1 clears the call each tick ->
+  SWINGS {8, 8, 9}, S36_ORDER FAIL (4 checks) ["the other two hold (8, 9)"].
+- LOOKED AT: renders/cycles/s36/beadle_2order.png - the three named delvers at the Beadle, "miss" floaters over
+  Called only; Holdfast and Waiting stand with nothing over them. The Beadle's own body is mostly hidden behind the
+  knight at this camera and reads very pale; that is a framing note, not a fault I am charging art with.
+- SECOND PART, THE FREE ONE: S33_DRAW now says `beadle shrine ratio 1.20 lines true drawn 120/400` (it was 0/400 at
+  S35, six minutes before content's lines landed). `leech shrine ... drawn 120/400` (200/400 at S35 - the shrine draw is
+  now shared three ways, as it should be).
+GATES (verdict lines): PARSE rc=0, 0 SCRIPT ERROR / Parse Error; S34_WAYS OK 98 (red FAIL rc=1); S36_ORDER OK (4)
+(red FAIL); S33_DRAW OK 126 checks; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2067 samples off the floor;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR;
+TOWNWALK in_solid=0/17026 (0.000%) raid_in_solid=0/6121 (0.000%) PASS.
+No live Twitch test, nothing spent. Backups scripts/delve.gd.bak_s36, tools/_s34_ways.gd.bak_s36 (untracked).
+Logs build/_s36_gates.log, build/_s36_order.log, build/_s36_townwalk.log.

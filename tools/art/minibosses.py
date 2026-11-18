@@ -6761,3 +6761,440 @@ def strickler():
 
 
 BUILDERS.update({"strickler": strickler})
+
+
+# ===========================================================================
+# 24. THE DYER - 17 Nov 2026, art lane.
+#
+# THE LEAD'S 18:58 NOTE, TAKEN AS THE BRIEF: "the strickler is the most MUTED
+# thing in the twenty-three ... if a twenty-fourth can carry its trade in
+# COLOUR as well as silhouette, that is worth more to me than a twenty-fifth."
+#
+# I MEASURED THE CLAIM OFF THE PICTURES BEFORE AGREEING WITH IT, because the
+# tint table is not the register's colour and this lane has shipped a number
+# that answered a different question than the sentence beside it. Over the 23
+# distinct bodies' own front.png, HSV saturation of every opaque pixel with
+# value > 0.10, chroma-weighted hue:
+#   median satMean 0.087 | max 0.207 (the DRILLMASTER, the first one ever made)
+#   the STRICKLER is 0.052 - RANK 1 OF 23, the least saturated. He is right,
+#   and he is right by the measurement and not by impression.
+#   hue bands: 0-60 deg 14 bodies | 60-110 2 | 110-190 ZERO | 190-260 7 |
+#   260-360 ZERO. HALF THE WHEEL IS EMPTY ACROSS TWENTY-THREE BODIES.
+# AND THE TINT TABLE DISAGREES WITH THE PICTURES, WHICH IS THE REAL FINDING:
+# CANON gives the Tallyman HSV sat 0.66 and the render reads 0.136. Anyone who
+# judges this register's colour off CANON is judging the wrong number.
+#
+# *** THE STRUCTURAL CAUSE, AND IT IS A DEFECT IN MY OWN SHIPPED GENERATOR. ***
+# minibossgen.build_miniboss derives ALL FOUR materials from ONE tint: body is
+# the tint mixed with the aura, dark is 0.16 x body, bone is the tint pushed
+# toward white, glow is the aura normalised. SO EVERY BODY IN THIS FILE IS
+# MONOCHROME BY CONSTRUCTION. No builder in 23 could have had two hues on it
+# even if it wanted them. That is why the register drifted grey, and it is not
+# a taste problem - it is a pipeline problem with my name on it. OVERRIDE below
+# lets a key declare its own per-slot materials. It is EMPTY for all 23
+# existing keys, so their output is unchanged, and the four-mesh cap is
+# untouched: four slots, four materials, four meshes.
+# ===========================================================================
+
+# key -> {slot: (rgb, rough, metal)} for a solid, or {slot: (rgb, strength)}
+# for 'glow'. A slot absent here keeps the tint-derived material.
+# EMPTY FOR EVERY ONE OF THE FIRST TWENTY-THREE - checked, not assumed, by the
+# assertion in minibossgen.
+OVERRIDE = {
+    "dyer": {
+        # woad. The big areas: two of the three sheets, the apron's lining,
+        # the wash down the vat, one skein, one floor splash.
+        'body': ((0.055, 0.205, 0.600), 0.54, 0.00),
+        # madder. The accent: the middle sheet, his arms to the elbow, the
+        # paddle shaft, one skein, one splash.
+        'bone': ((0.620, 0.105, 0.080), 0.58, 0.00),
+        # wet timber and iron - the frame, the vat staves, the man himself.
+        # NOT derived from the body colour, or the frame would read blue.
+        'dark': ((0.070, 0.062, 0.056), 0.82, 0.03),
+        # weld. The open vat, hot, lit from the fire under it. The one thing
+        # in a dye-house that genuinely gives off light, so emissive is the
+        # honest material and not a cheat to get a third hue.
+        # PASS 3, CHANGE A, judged on its own: at strength 2.30 the weld came
+        # back CREAM. An emissive that clips to white is not a third hue, it is
+        # a white hole, and the whole argument for this body is three hues.
+        'glow': ((1.000, 0.690, 0.075), 1.05),
+    },
+}
+
+
+def apply_overrides(key, mats):
+    """Replace tint-derived materials with a key's declared ones. Called by
+    minibossgen, _trade_read and _colour_read so all three agree - a colour
+    measured through a different material table than the one that ships is a
+    number about nothing."""
+    ov = OVERRIDE.get(key)
+    if not ov:
+        return mats
+    for slot, spec in ov.items():
+        if slot == 'glow':
+            rgb, strength = spec
+            mats[slot] = L.mat_glow(key + "_glow_ov", tuple(rgb), strength)
+        else:
+            rgb, rough, metal = spec
+            mats[slot] = L.mat_solid(key + "_" + slot + "_ov", tuple(rgb), rough, metal)
+    return mats
+
+
+CANON.update({
+    "dyer": ("The Dyer", 2.60, (0.16, 0.32, 0.72), (0.26, 0.46, 1.00),
+             "workshop",
+             "IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK - it slings the vat, "
+             "and while the stain is wet it will walk past everyone else to reach "
+             "the one wearing it; the stain can be passed hero to hero, so the "
+             "party chooses who carries it and for how long",
+             0.30, "Something back there just marked one of you."),
+})
+ORDER = ORDER + ["dyer"]
+
+
+def _rz(x, y, a):
+    """Rotate a local point about Z. The whole tenter frame is turned so that
+    NEITHER camera sees the sheets edge-on - see the docstring."""
+    ca, sa = math.cos(a), math.sin(a)
+    return (x * ca - y * sa, x * sa + y * ca)
+
+
+def _cloth(P, slot, x0, x1, ztop, zbot, ybase, phase, a, nx=7, nz=6,
+           bow=0.26, thick=0.035):
+    """A hanging sheet as a thickened quad grid with a real billow in Y.
+
+    NOT a flat membrane, and the reason is the Pressman fault stated plainly:
+    a flat panel in one plane is a LINE from the camera that plane points at.
+    Each row's Y is bowed by sin across the width and the bow GROWS downward,
+    because a wet sheet hangs heavy and swings out at the hem. That gives the
+    side camera a surface to see instead of an edge."""
+    V, F = [], []
+    for iz in range(nz + 1):
+        tz = iz / float(nz)
+        z = ztop + (zbot - ztop) * tz
+        for ix in range(nx + 1):
+            tx = ix / float(nx)
+            x = x0 + (x1 - x0) * tx
+            y = ybase + bow * (0.30 + 0.70 * tz) * math.sin(math.pi * tx + phase)
+            rx, ry = _rz(x, y, a)
+            V.append(Vector((rx, ry, z)))
+    k = nx + 1
+    base = len(V)
+    # back face: pushed along the sheet's own local normal, approximated by Y
+    for iz in range(nz + 1):
+        for ix in range(nx + 1):
+            v = V[iz * k + ix]
+            nxv, nyv = _rz(0.0, 1.0, a)
+            V.append(Vector((v.x + nxv * thick, v.y + nyv * thick, v.z)))
+    for iz in range(nz):
+        for ix in range(nx):
+            a0 = iz * k + ix
+            F.append((a0, a0 + 1, a0 + k + 1, a0 + k))
+            b0 = base + a0
+            F.append((b0 + k, b0 + k + 1, b0 + 1, b0))
+    for ix in range(nx):            # hem and head edges, closed
+        t0 = ix
+        F.append((t0, base + t0, base + t0 + 1, t0 + 1))
+        b0 = nz * k + ix
+        F.append((b0 + 1, base + b0 + 1, base + b0, b0))
+    for iz in range(nz):            # the two selvedges
+        l0 = iz * k
+        F.append((l0 + k, base + l0 + k, base + l0, l0))
+        r0 = iz * k + nx
+        F.append((r0, base + r0, base + r0 + k, r0 + k))
+    P.raw((V, F), slot)
+
+
+def dyer():
+    """IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK.
+
+    A dyer stands at a vat and puts colour into cloth. This one puts it into a
+    hero. While the stain is wet it will walk past the tank, past the healer
+    and past whoever is hitting it hardest to reach the one wearing the mark -
+    and the stain can be HANDED ON by touch. So the party is not choosing how
+    to kill it, it is choosing who carries the mark, and for how long, and who
+    is standing close enough to take it next.
+
+    WHY IT IS NOT ONE OF THE TWENTY-THREE, checked by PARSING CANON rather than
+    by remembering it - 38 entries, 23 distinct bodies. The set summons, re-
+    plates itself, drags one out of the line, douses the lamps, rises from its
+    graves, bars the door, steals gear, heals the room, floods it, sows thorns,
+    pre-sets traps, scales with the fire, throws its voice, sets the floor,
+    splits in two, arms the other monsters, loads you down, cuts the party in
+    half, learns the blow you used, takes the haul, drinks the brews, collars
+    your fallen, and strikes the party level. TWO OF THEM TOUCH TARGETING AND
+    NEITHER OF THEM IS THIS. The Gaoler takes a choice away - it hooks who IT
+    picks. The Hurdleman divides the room by geometry. This one hands the
+    choice TO the party and then makes them keep choosing, which is the only
+    mechanic in the file the players themselves operate.
+
+    *** AND THE COLOUR IS THE TRADE, WHICH IS THE WHOLE POINT OF THE BODY. ***
+    The lead asked for a body that carries its trade in colour as well as in
+    silhouette. A dyer is the one working man in a town whose JOB is colour -
+    so nothing here is decorated. Woad is blue, madder is red, weld is yellow;
+    they are on the frame because that is what a dye-house hangs out to dry,
+    they are on his arms because that is what the work does to a man to the
+    elbow, and the vat glows because an open vat of hot dye over a fire does.
+    If this creature were grey it would be a man standing next to a trade
+    instead of wearing it - the rule the Tanner observation produced.
+    THREE HUES ON ONE BODY IS NEW IN THIS FILE and it needed the OVERRIDE hook
+    above, because the generator derived all four materials from one tint.
+    FOUR MESHES STILL - body, bone, dark, glow. The cap is not touched.
+
+    THE READ: A MAN AT A VAT UNDER THREE HANGING SHEETS. Nothing in the other
+    twenty-three has a broad hanging plane in it at all.
+
+    THE FRAME IS TURNED 28 DEGREES ABOUT Z ON PURPOSE, and that is the
+    Strickler's right-angle lesson applied to a different problem. The
+    Strickler needed two horizontals at right angles because one horizontal can
+    only be read from the camera it is not pointing at. A SHEET HAS THE SAME
+    FAULT AND WORSE - a flat plane is a LINE from one side. Rather than hang
+    six sheets, the frame is rotated so neither the front nor the side camera
+    is normal or tangent to it, and each sheet is BOWED in Y with the bow
+    growing toward the hem. Measured per view by _trade_read.py, not asserted.
+
+    WEAR 0.30, and it is SPLIT, which the register has not done before. The
+    frame, the vat staves and the man are worked and wet - that is what 0.30
+    buys through the roughness and metal terms. THE CLOTH IS NOT WORN AT ALL:
+    the sheets, the apron and the skeins take their colour from OVERRIDE and so
+    skip the dulling entirely. That is Mr. E's second rule read as he wrote it -
+    a dyer's goods are the one thing in his yard that must look NEW, because
+    they are what he is selling. Condition is the receipt, and here the receipt
+    and the man disagree, which is true of every tradesman who ever lived.
+
+    THE THREE SKEINS AT HIS BELT AND THE THREE SPLASHES ON THE FLOOR are the
+    fight told in the silhouette, the way the Scrapwright's two spare plates
+    are: the thing he throws, and the evidence that he has thrown it before.
+
+    FRAMES, because the lead has asked four times: every number in this builder
+    is in BLENDER'S WORLD FRAME as written into the .glb - front is model -Y,
+    up is +Z, the crossbar lies along the frame's own rotated X. That is NOT
+    the engine's slot frame; nothing here should be pasted into a Godot
+    rotation without converting it.
+
+    Static: a `model` path and no `anims` entry.
+    """
+    P = Parts("dyer")
+    P.spans = {}
+    P.used_pack = False
+    P.pack_caps = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    A = math.radians(28.0)          # the frame's turn
+
+    # ------------------------------------------------- THE TENTER FRAME
+    i0 = len(P.items)
+    for s in (-1, 1):
+        bx, by = _rz(s * 1.12, 0.46, A)
+        limb(P, [(bx, by, 0.05), (bx, by, 1.30), (bx * 0.97, by, 2.52)],
+             0.085, 0.062, 'dark')
+        P.add(L.box(0.34, 0.34, 0.10), 'dark', loc=(bx, by, 0.05))
+        # PASS 4 CHANGE F raked the braces backward; PASS 5 CHANGE J goes
+        # further and takes the NEAR one out altogether. Backward or forward,
+        # a brace on the man's side draws a long black diagonal straight across
+        # the one part of the picture the eye has to read, and it fought the
+        # paddle for the same line. One brace on the far post and a low sill
+        # between the feet still say BUILT, and the asymmetry is the
+        # Drillmaster's lesson: a frame does not have to be symmetrical to
+        # read as a frame, and a symmetrical one reads as wallpaper.
+        if s > 0:
+            gx, gy = _rz(s * 1.46, 1.16, A)
+            limb(P, [(bx, by, 1.74), (gx, gy, 0.06)], 0.050, 0.040, 'dark')
+    cl, cr = _rz(-1.12, 0.46, A), _rz(1.12, 0.46, A)
+    P.raw(L.tube([(cl[0], cl[1], 2.50), (0.0, _rz(0.0, 0.46, A)[1], 2.56),
+                  (cr[0], cr[1], 2.50)], 0.070, 8), 'dark')
+    sl, sr = _rz(-1.12, 0.52, A), _rz(1.12, 0.52, A)
+    P.raw(L.tube([(sl[0], sl[1], 0.26), (sr[0], sr[1], 0.26)], 0.048, 6), 'dark')
+    for u in (-0.72, -0.02, 0.70):   # tenter hooks the cloth hangs from
+        hx, hy = _rz(u, 0.46, A)
+        P.add(L.box(0.055, 0.055, 0.14), 'dark', loc=(hx, hy, 2.44))
+    _span("frame", i0)
+
+    # ------------------------------------------------- THE THREE SHEETS
+    # Hem heights deliberately unequal - a straight hem across three sheets
+    # would read as one banner, and a dye-house hangs what is ready.
+    i0 = len(P.items)
+    _cloth(P, 'body', -1.04, -0.42, 2.44, 0.98, 0.46, 0.00, A, bow=0.28)
+    _cloth(P, 'bone', -0.34, 0.32, 2.44, 1.28, 0.42, 1.05, A, bow=0.24)
+    _cloth(P, 'body', 0.40, 1.04, 2.44, 0.70, 0.49, 2.10, A, bow=0.30)
+    _span("sheets", i0)
+
+    # ------------------------------------------------- THE VAT
+    i0 = len(P.items)
+    # PASS 3, CHANGE B: the vat moved right and forward and came down from
+    # 0.60 to 0.52 radius. At 0.60 it was a black drum across the bottom third
+    # and the man was inside its outline - a cask, which is the Tapster's
+    # silhouette, not a dye vat with a man working it.
+    # PASS 5, CHANGE K: down again, 0.52 -> 0.45 and 0.74 -> 0.66. The side
+    # picture showed it standing in front of the man to MID-CHEST - the
+    # creature's whole lower half was a black drum with a head above it.
+    VX, VY, VR, VH = 0.30, -0.46, 0.45, 0.66
+    for j in range(16):             # staves
+        th = TAU * j / 16.0
+        sx, sy = VX + VR * math.cos(th), VY + VR * math.sin(th)
+        P.add(L.box(0.20, 0.09, VH), 'dark', loc=(sx, sy, VH * 0.5),
+              rot=(0.0, 0.0, th + math.pi * 0.5))
+    for z in (0.13, 0.55):          # hoops
+        ring = [Vector((VX + (VR + 0.035) * math.cos(TAU * i / 26.0),
+                        VY + (VR + 0.035) * math.sin(TAU * i / 26.0), z))
+                for i in range(27)]
+        P.raw(L.tube(ring, 0.035, 6), 'dark')
+    # *** PASS 2. THE VAT IS THE ONLY EMISSIVE THING ON THE BODY AND PASS 1
+    # COULD NOT SEE IT - I HAD CAPPED MY OWN VAT. A 0.555 x 0.075 'dark' cone
+    # sat as a LID over a 'glow' disc at z 0.760, and at the 2 degree camera
+    # pitch these views use, a flat surface sunk inside a 0.80 m rim is not
+    # visible from ANY eye-level camera even without the lid. The render said
+    # ok:true, 0 blanks, 0 clips - because a hidden thing is not a blank one.
+    # That is this lane's own trap 5, written in my prompt, committed again.
+    # THE FIX IS ALSO THE TRUER THING: a working vat BRIMS. The dye stands
+    # proud of the rim and goes over the side, so the weld is seen from eye
+    # level because it is where it would actually be, not because the camera
+    # was moved to find it.
+    P.add(aim(L.cone(0.435, 0.405, 0.066, 26), (VX, VY, 0.660), (0.0, 0.0, 1.0)), 'glow')
+    P.add(aim(L.cone(0.390, 0.225, 0.056, 24), (VX, VY, 0.693), (0.0, 0.0, 1.0)), 'glow')
+    rim = [Vector((VX + (VR + 0.030) * math.cos(TAU * i / 26.0),
+                   VY + (VR + 0.030) * math.sin(TAU * i / 26.0), 0.648))
+           for i in range(27)]
+    P.raw(L.tube(rim, 0.040, 6), 'dark')              # a ring, NOT a disc
+    # three runs of weld going over the lip, and the older woad wash beside
+    # them - the vat has held more than one colour, which is what a vat does
+    for u, slot, z0 in ((-0.26, 'glow', 0.66), (0.08, 'glow', 0.66),
+                        (-0.06, 'body', 0.60), (0.22, 'body', 0.60)):
+        wx = VX + u
+        P.raw(L.tube([(wx, VY - VR - 0.01, z0), (wx, VY - VR - 0.04, 0.40),
+                      (wx + 0.03, VY - VR - 0.03, 0.06)],
+                     [0.060, 0.046, 0.032], 6), slot)
+    _span("vat", i0)
+
+    # THE PADDLE'S LINE, DEFINED ONCE AND BEFORE ANYTHING THAT TOUCHES IT.
+    # Butt high and behind his left shoulder, blade down in the vat. The hands
+    # and the shaft both read off this, so they cannot disagree - see change G.
+    # PASS 5, CHANGE H - A REGRESSION I PUT IN MYSELF AT PASS 4 AND THE SIDE
+    # PICTURE CAUGHT IT. Rewriting the shaft as two fixed points, I gave it
+    # 1.86 m of X travel and SIX CENTIMETRES of Y - so from the side camera the
+    # one long diagonal on this creature was a vertical post, which is the
+    # exact Pressman fault the Strickler was built to answer. The butt moves
+    # 0.78 m forward: the shaft now travels in all three axes, so the front
+    # camera gets its diagonal out of X and the side camera gets one out of Y.
+    _PB = Vector((-1.62, -1.30, 2.06))
+    _PE = Vector((VX - 0.02, VY - 0.08, 0.52))
+
+    def _PADDLE(t):
+        v = _PB + (_PE - _PB) * t
+        return (v.x, v.y, v.z)
+
+    # ------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    # PASS 3, CHANGE C, AND IT IS THE ONE THE PICTURE DEMANDED. In pass 1 and
+    # 2 the man stood INSIDE the sheets' outline at MX -0.74, MY -0.26: a dark
+    # figure against dark-ish cloth, with a 0.155 shoulder sphere low enough
+    # and big enough that the thing read as TWO HEADS. He is now pulled left
+    # and well FORWARD of the frame, so his whole silhouette falls against the
+    # background, and the shoulders are cut to 0.115 so there is one head on
+    # this creature.
+    # PASS 6, CHANGE L, AND IT IS A FAULT ONLY THE SIDE CAMERA COULD SHOW.
+    # At MY -0.72 he stood 0.26 m in front of the vat, which is nothing in the
+    # side view's screen axis - the drum covered him to the chest and his
+    # apron, belt, skeins and legs were all behind it. He steps 0.40 m
+    # forward. The front view barely changes; the side view gets a whole man.
+    MX, MY = -1.06, -1.12
+    HIP, SH, HEAD = 0.90, 1.46, 1.78
+    for s in (-1, 1):
+        limb(P, [(MX + s * 0.17, MY + 0.04, HIP), (MX + s * 0.21, MY - 0.04, 0.48),
+                 (MX + s * 0.23, MY - 0.12, 0.08)], 0.100, 0.082, 'dark')
+        P.add(L.box(0.26, 0.40, 0.11), 'dark', loc=(MX + s * 0.23, MY - 0.20, 0.055))
+    # torso leaning out toward the vat, so he is WORKING and not posing
+    limb(P, [(MX, MY + 0.08, 0.84), (MX + 0.06, MY - 0.02, 1.16),
+             (MX + 0.14, MY - 0.12, SH)], 0.235, 0.245, 'dark')
+    for s in (-1, 1):
+        P.add(L.sphere(0.115, 0.108, 0.098, 11, 8), 'dark',
+              loc=(MX + 0.14 + s * 0.255, MY - 0.12, SH + 0.03))
+    P.add(L.sphere(0.135, 0.150, 0.150, 14, 9), 'dark', loc=(MX + 0.16, MY - 0.16, HEAD))
+    # a flat cap, not a helm. He is a tradesman.
+    P.add(aim(L.cone(0.215, 0.195, 0.035, 14), (MX + 0.16, MY - 0.18, HEAD + 0.145),
+              (0.0, -0.14, 1.0)), 'dark')
+    P.add(aim(L.cone(0.145, 0.120, 0.075, 14), (MX + 0.16, MY - 0.17, HEAD + 0.115),
+              (0.0, -0.10, 1.0)), 'dark')
+    # *** PASS 7. THE EYES WERE FLOATING 0.23 m IN FRONT OF HIS FACE AND THE
+    # FRONT CAMERA HID IT BY PROJECTION. *** I passed the head's own forward
+    # offset in `loc` AND passed `fwd` on top of it, so the two glow spheres
+    # sat at y -1.66 against a face whose front surface is at y -1.43. From
+    # the front they land on the face and look perfect. From the side they are
+    # a gold dot hanging in clear air, and that is what the picture showed.
+    # NEITHER EXISTING CHECK COULD SEE IT: a detached piece is not a blank
+    # frame and it is not a clipped border, so ok:true, 0 blanks, 0 clips was
+    # a true report of the wrong things. _colour_read now counts DETACHED
+    # SILHOUETTE COMPONENTS, which is the check that would have caught it.
+    eyes(P, (MX + 0.16, MY - 0.16, HEAD), 0.052, 0.026, -0.135)
+    # ARMS. Upper arm is the man; FROM THE ELBOW DOWN HE IS THE DYE - that is
+    # what the work does, and it is the cheapest true thing on the body.
+    #
+    # PASS 4, CHANGE G, AND IT IS A FLOAT I SHIPPED INTO THE PASS 3 PICTURE.
+    # In pass 3 the paddle started in CLEAR AIR 0.38 m to the right of his head
+    # and ran down into the vat while both his arms hung at his sides. He was
+    # not holding it. A creature whose whole trade is the thing in its hands
+    # cannot have the thing float. The shaft line is now defined FIRST, by two
+    # fixed end points, and BOTH HANDS ARE PLACED ON IT by parameter - so the
+    # grip cannot drift when the shaft moves again.
+    for s, t in ((-1, 0.215), (1, 0.425)):
+        hx, hy, hz = _PADDLE(t)
+        sx = MX + 0.14 + s * 0.255
+        P.raw(L.tube([(sx, MY - 0.12, SH + 0.01),
+                      ((sx + hx) * 0.5, (MY - 0.12 + hy) * 0.5 - 0.06,
+                       (SH + hz) * 0.5 + 0.02)], [0.090, 0.072], 8), 'dark')
+        P.raw(L.tube([((sx + hx) * 0.5, (MY - 0.12 + hy) * 0.5 - 0.06,
+                       (SH + hz) * 0.5 + 0.02), (hx, hy, hz)], [0.072, 0.054], 8), 'bone')
+        P.add(L.sphere(0.074, 0.068, 0.064, 9, 7), 'bone', loc=(hx, hy, hz))
+    # THE APRON - woad lining, bowed forward off the chest to the knee
+    _cloth(P, 'body', MX - 0.27, MX + 0.29, 1.34, 0.50, MY - 0.30, 0.0, 0.0,
+           nx=5, nz=5, bow=0.17, thick=0.030)
+    _span("man", i0)
+
+    # ------------------------------------------------- THE PADDLE
+    # One long clear diagonal, upper-left to lower-right, and it travels in Y
+    # as well as X so the SIDE camera gets a diagonal too and not a post.
+    i0 = len(P.items)
+    # PASS 3, CHANGE D: in passes 1 and 2 the shaft ran from behind his left
+    # shoulder STRAIGHT ACROSS HIS FACE. It now starts clear to his right at
+    # MX+0.52 - 0.38 m off a 0.135 m head - and still travels 0.86 m in Y, so
+    # the side camera keeps its diagonal.
+    b = _PADDLE(0.0)
+    e = _PADDLE(1.0)
+    P.raw(L.tube([b, _PADDLE(0.5), e], [0.040, 0.048, 0.046], 8), 'bone')
+    P.add(L.sphere(0.058, 0.058, 0.050, 9, 6), 'bone', loc=b)      # the butt knob
+    P.add(L.box(0.27, 0.12, 0.38), 'bone', loc=(e[0] + 0.02, e[1] + 0.02, e[2] - 0.12),
+          rot=(0.16, -0.20, 0.0))
+    _span("paddle", i0)
+
+    # ------------------------------------------------- THE SKEINS IT THROWS
+    i0 = len(P.items)
+    # PASS 3, CHANGE E: the three skeins were clustered at shoulder height and
+    # were half of what made the upper body unreadable. They hang at the HIP
+    # now, spread in X, below the apron's hem line.
+    # PASS 5, CHANGE I: in passes 3 and 4 the three skeins hung OUTSIDE his
+    # body on cords that began in open air - from the side they were three
+    # beads floating beside a man. There is a belt now and they hang off it,
+    # across his front where the apron's woad is behind them.
+    P.add(L.box(0.50, 0.30, 0.085), 'dark', loc=(MX + 0.08, MY - 0.14, 1.07))
+    P.add(L.box(0.13, 0.09, 0.115), 'bone', loc=(MX + 0.02, MY - 0.30, 1.07))
+    for (sx, sy, sz, r, slot) in ((MX - 0.17, MY - 0.33, 0.83, 0.108, 'body'),
+                                  (MX + 0.05, MY - 0.36, 0.74, 0.096, 'bone'),
+                                  (MX + 0.26, MY - 0.31, 0.86, 0.090, 'glow')):
+        limb(P, [(sx, sy - 0.02, 1.05), (sx, sy, sz + r)], 0.018, 0.016, 'dark')
+        P.add(L.sphere(r, r * 0.92, r * 0.88, 11, 8), slot, loc=(sx, sy, sz))
+    _span("skeins", i0)
+
+    # ------------------------------------------------- WHAT IT HAS ALREADY MARKED
+    i0 = len(P.items)
+    for (fx, fy, r, slot) in ((0.52, -1.16, 0.27, 'body'),
+                              (-1.34, -0.74, 0.21, 'bone'),
+                              (1.02, -0.30, 0.17, 'glow')):
+        P.add(aim(L.cone(r, r * 0.96, 0.022, 20), (fx, fy, 0.014), (0.0, 0.0, 1.0)), slot)
+    _span("splashes", i0)
+
+    return P
+
+
+BUILDERS.update({"dyer": dyer})

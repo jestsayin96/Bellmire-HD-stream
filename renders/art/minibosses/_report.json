@@ -1097,11 +1097,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "dyer": {
+   "title": "The Dyer",
+   "theme": "workshop",
+   "idea": "IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK - it slings the vat, and while the stain is wet it will walk past everyone else to reach the one wearing it; the stain can be passed hero to hero, so the party chooses who carries it and for how long",
+   "wear": 0.3,
+   "feed_line": "Something back there just marked one of you.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2294,
+   "size": [
+    2.83,
+    3.28,
+    2.6
+   ],
+   "footprint_span": 3.28,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.525294113970275,
+    "ortho": 5.044339656829834,
+    "clip": [
+     9.588174819946289,
+     23.6662540435791
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 69,
+  "files": 72,
   "failures": []
  }
 }

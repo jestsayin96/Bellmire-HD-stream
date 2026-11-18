@@ -1628,6 +1628,67 @@
     }
    },
    "proving_views": 3
+  },
+  "leech": {
+   "creature_h": 2.32,
+   "hero_h": 2.45,
+   "ratio": 0.95,
+   "pair_w": 4.12,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 60531,
+      "vis": 60531,
+      "delta": 61912,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43670,
+      "vis": 43670,
+      "delta": 54436,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 45095,
+      "vis": 45095,
+      "delta": 45997,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 39312,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 62068,
+      "vis": 62068,
+      "delta": 63540,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44035,
+      "vis": 44035,
+      "delta": 45412,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -1640,10 +1701,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "fenman"
+  "leech"
  ],
  "asked": [
-  "fenman"
+  "leech"
  ],
  "blank_check": {
   "files": 3,

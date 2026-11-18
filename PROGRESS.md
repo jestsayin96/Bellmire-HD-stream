@@ -9863,3 +9863,10 @@ NOT CLAIMING READY TO PUBLISH: nothing in web/ changed this hour, so no new gate
 - NO LIVE TWITCH TEST THIS CYCLE. Counting a data guard's own arms needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B46/B47 and in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. The tenth copy of the slot list at roster.gd:1216 is still a route-up to the game build. AND THE COUNTED ARM NOW WANTS SPREADING: the other 66 push_error sites in this loader are still uncounted, and that is the same fault in the same file - I name it and do not take it, because this row was the ten.
 - Files: scripts/chatcmd.gd, PROGRESS.md. Not ticked by me.
+
+## HUB standing check - 2026-11-18 07:4x CT (hub lane)
+- TAKE THIS NEXT gave the HUB lane NO build row (item 7 of the 06:58 team-lead block: "no build row again this hour"). Standing check, web/ unchanged: `git diff --stat fce3dfe HEAD -- web/` is empty after merging origin/main and origin/hub.
+- MEASURED: node --check web/app.js passes; one CSP meta in index.html; the only innerHTML sites are the two page-owned-string ones (app.js:255 status line, :301 fetch-error box); no insertAdjacentHTML/document.write/eval/new Function code. Hostile-name canaries (<img src=x onerror=alert(1)>) and the <colour> canary still present at app.js:2096/2647/3077/4839.
+- No screenshot taken: web/ did not change. Live-dot colour unchanged (no pass this run).
+- NOT claiming READY TO PUBLISH. gh-pages is 45a7904; the 19-line unpublished delta (dead shopGood() removal + "Sells up to" tier underline) is the supervisor's call, via the team lead.
+- Files: PROGRESS.md only.

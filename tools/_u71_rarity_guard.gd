@@ -14,13 +14,47 @@ const BARE := ["junk", "starting", "common"]
 const FISH_GD := "res://scripts/fishing.gd"
 const LAMP_RUNGS := ["rare", "very rare", "legendary"]
 
+## U76: the end of a {...} block that opens at `open_idx`, by BRACE DEPTH, skipping "strings" and
+## # comments. Returns -1 when the block never closes, so a half-read table fails LOUD (0 rungs)
+## instead of going quietly green. Replaces find("}") / find("\n}"), which stopped at the first
+## inner brace (nested dict, lambda, comment).
+static func block_end(txt: String, open_idx: int) -> int:
+	var depth := 0
+	var i := open_idx
+	var n := txt.length()
+	while i < n:
+		var c := txt[i]
+		if c == "#":
+			while i < n and txt[i] != "\n":
+				i += 1
+			continue
+		if c == "\"" or c == "'":
+			var q := c
+			i += 1
+			while i < n and txt[i] != q:
+				if txt[i] == "\\":
+					i += 1
+				i += 1
+			i += 1
+			continue
+		if c == "{":
+			depth += 1
+		elif c == "}":
+			depth -= 1
+			if depth == 0:
+				return i
+		i += 1
+	return -1
+
 ## the RARITY_HUE block of icons.py as {rung: Color or null}
 static func parse_py(txt: String) -> Dictionary:
 	var out := {}
 	var a := txt.find("\nRARITY_HUE = {")
 	if a < 0:
 		return out
-	var b := txt.find("\n}", a)
+	var b := block_end(txt, txt.find("{", a))
+	if b < 0:
+		return out
 	var re := RegEx.new()
 	re.compile("\"([a-z ]+)\":\\s*(None|\\(\\s*([0-9.]+),\\s*([0-9.]+),\\s*([0-9.]+)\\s*\\))")
 	for m in re.search_all(txt.substr(a, b - a)):
@@ -78,7 +112,9 @@ static func parse_fish(txt: String) -> Dictionary:
 	var a := txt.find("const RARITY_COLOR := {")
 	if a < 0:
 		return out
-	var b := txt.find("}", a)
+	var b := block_end(txt, txt.find("{", a))
+	if b < 0:
+		return out
 	var re := RegEx.new()
 	re.compile("\"([a-z ]+)\":\\s*Color\\(\\s*([0-9.]+),\\s*([0-9.]+),\\s*([0-9.]+)\\s*\\)")
 	for m in re.search_all(txt.substr(a, b - a)):
@@ -207,6 +243,25 @@ func _initialize() -> void:
 		bad += 1
 	else:
 		fproofs += 1
+	## U76 END-FINDER RED PROOFS: a brace inside the table must not truncate the read
+	var bproofs := 0
+	var nest := ftxt.replace("\"uncommon\": Color(1.00, 1.00, 1.00),", "\"uncommon\": Color(1.00, 1.00, 1.00), # note } here\n\t\"x_nested\": {\"a\": 1},")
+	var nest2 := ftxt.replace("const RARITY_COLOR := {", "const RARITY_COLOR := { # {open}\n\t\"zz\": {\"k\": Color(1, 1, 1)},")
+	for t in [nest, nest2]:
+		if t == ftxt:
+			print("FAIL REDPROOF brace: anchor not found to mutate")
+			bad += 1
+		elif parse_fish(t).size() < 4 or not parse_fish(t).has("legendary"):
+			print("FAIL REDPROOF brace: nested brace TRUNCATED the table (read %d)" % parse_fish(t).size())
+			bad += 1
+		else:
+			bproofs += 1
+	if parse_fish(ftxt.replace("const RARITY_COLOR := {", "const RARITY_COLOR := {{")).size() != 0:
+		print("FAIL REDPROOF brace: unterminated block did not read as empty")
+		bad += 1
+	else:
+		bproofs += 1
+	print("U76_BRACE redproofs_caught=", bproofs, "/3")
 	print("U71_FISH rungs_fish=", fish.size(), " redproofs_caught=", fproofs, "/", fmuts.size() + 2)
 	print("U71_GUARD ", "OK" if bad == 0 else "FAIL", " rungs_py=", py.size(), " ui_rungs=", hue.size(), " redproofs_caught=", proofs, "/", muts.size() + 1, " fails=", bad)
 	quit(0 if bad == 0 else 1)

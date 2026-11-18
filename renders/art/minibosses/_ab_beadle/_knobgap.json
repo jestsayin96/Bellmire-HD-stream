@@ -1,56 +1,481 @@
 {
- "moved_px": 2801,
- "bbox_yxyx": [
-  334,
-  466,
-  247,
-  373
- ],
- "bbox_frac": [
-  0.426,
-  0.594,
-  0.441,
-  0.666
- ],
- "base": {
-  "label": "base",
-  "core_px": 9699,
-  "ring_px": 862,
-  "core_lum_mean": 0.5259,
-  "ring_lum_mean": 0.3194,
-  "gap": 0.2065,
-  "ring_lum_max": 0.6484,
-  "worst_local_gap": 0.1225
- },
- "knob": {
-  "label": "knob",
-  "core_px": 9657,
-  "ring_px": 926,
-  "core_lum_mean": 0.5068,
-  "ring_lum_mean": 0.2399,
-  "gap": 0.2669,
-  "ring_lum_max": 0.6285,
-  "worst_local_gap": 0.1217
- },
- "front_base": {
-  "label": "front_base",
-  "core_px": 1912,
-  "ring_px": 86,
-  "core_lum_mean": 0.6955,
-  "ring_lum_mean": 0.5866,
-  "gap": 0.1089,
-  "ring_lum_max": 0.6523,
-  "worst_local_gap": 0.0431
- },
- "front_knob": {
-  "label": "front_knob",
-  "core_px": 2136,
-  "ring_px": 251,
-  "core_lum_mean": 0.6345,
-  "ring_lum_mean": 0.2129,
-  "gap": 0.4216,
-  "ring_lum_max": 0.2714,
-  "worst_local_gap": 0.3631
- },
- "front_moved_px": 1904
+ "instrument": "pass13-derived-core",
+ "note": "core derived from the A/B's own acted-on components; ground is unmoved pixels only; gap is SIGNED",
+ "views": {
+  "side": {
+   "view": "side",
+   "moved_px": 2801,
+   "components": [
+    {
+     "px": 764,
+     "bbox_yyxx": [
+      344,
+      361,
+      259,
+      307
+     ],
+     "lum_base": 0.6233,
+     "lum_knob": 0.282,
+     "dlum": -0.3413,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": true,
+     "acted_by": "lum"
+    },
+    {
+     "px": 886,
+     "bbox_yyxx": [
+      377,
+      413,
+      313,
+      362
+     ],
+     "lum_base": 0.5849,
+     "lum_knob": 0.5254,
+     "dlum": -0.0595,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 820,
+     "bbox_yyxx": [
+      399,
+      420,
+      257,
+      309
+     ],
+     "lum_base": 0.584,
+     "lum_knob": 0.2511,
+     "dlum": -0.3329,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": true,
+     "acted_by": "lum"
+    },
+    {
+     "px": 112,
+     "bbox_yyxx": [
+      421,
+      430,
+      272,
+      295
+     ],
+     "lum_base": 0.165,
+     "lum_knob": 0.0896,
+     "dlum": -0.0754,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 213,
+     "bbox_yyxx": [
+      422,
+      447,
+      296,
+      316
+     ],
+     "lum_base": 0.2624,
+     "lum_knob": 0.1819,
+     "dlum": -0.0805,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "acted_on_px": 1584,
+   "collateral_px": 1211,
+   "collateral": [
+    {
+     "px": 886,
+     "bbox_yyxx": [
+      377,
+      413,
+      313,
+      362
+     ],
+     "lum_base": 0.5849,
+     "lum_knob": 0.5254,
+     "dlum": -0.0595,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 112,
+     "bbox_yyxx": [
+      421,
+      430,
+      272,
+      295
+     ],
+     "lum_base": 0.165,
+     "lum_knob": 0.0896,
+     "dlum": -0.0754,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 213,
+     "bbox_yyxx": [
+      422,
+      447,
+      296,
+      316
+     ],
+     "lum_base": 0.2624,
+     "lum_knob": 0.1819,
+     "dlum": -0.0805,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "collateral_frac_of_moved": 0.4323,
+   "assembly_px": 1584,
+   "ground_px": 505,
+   "base": {
+    "knob_lum_mean": 0.603,
+    "knob_p05": 0.5468,
+    "knob_p95": 0.6951,
+    "ground_lum_mean": 0.5774,
+    "ground_p05": 0.1537,
+    "ground_p95": 0.698,
+    "signed_gap": 0.0255,
+    "indistinguishable_px": 431,
+    "indistinguishable_frac": 0.8535,
+    "ground_brighter_frac": 0.5703
+   },
+   "knob": {
+    "knob_lum_mean": 0.266,
+    "knob_p05": 0.1826,
+    "knob_p95": 0.5457,
+    "ground_lum_mean": 0.5772,
+    "ground_p05": 0.1446,
+    "ground_p95": 0.698,
+    "signed_gap": -0.3112,
+    "indistinguishable_px": 33,
+    "indistinguishable_frac": 0.0653,
+    "ground_brighter_frac": 0.8851
+   },
+   "delta_signed_gap": -0.3367,
+   "delta_indistinguishable_frac": -0.7882,
+   "bulb": {
+    "bulb_px": 2414,
+    "ground_px": 338,
+    "bulb_lum_mean": 0.6712,
+    "ground_lum_mean": 0.6122,
+    "signed_gap": 0.059,
+    "indistinguishable_frac": 1.0
+   },
+   "WARN_COLLATERAL": "43% of the moved pixels are NOT the knob - a surface beside it responded. They are excluded here and listed under 'collateral'; any instrument that treats the moved mask as the knob is wrong on this view by that much."
+  },
+  "front": {
+   "view": "front",
+   "moved_px": 1904,
+   "components": [
+    {
+     "px": 883,
+     "bbox_yyxx": [
+      307,
+      326,
+      440,
+      491
+     ],
+     "lum_base": 0.1358,
+     "lum_knob": 0.278,
+     "dlum": 0.1422,
+     "alpha_base": 0.1392,
+     "alpha_knob": 0.8589,
+     "dalpha": 0.7197,
+     "acted": true,
+     "acted_by": "alpha"
+    },
+    {
+     "px": 928,
+     "bbox_yyxx": [
+      363,
+      384,
+      437,
+      493
+     ],
+     "lum_base": 0.439,
+     "lum_knob": 0.2302,
+     "dlum": -0.2088,
+     "alpha_base": 0.6832,
+     "alpha_knob": 0.8799,
+     "dalpha": 0.1967,
+     "acted": true,
+     "acted_by": "lum"
+    },
+    {
+     "px": 93,
+     "bbox_yyxx": [
+      386,
+      394,
+      456,
+      477
+     ],
+     "lum_base": 0.1688,
+     "lum_knob": 0.0736,
+     "dlum": -0.0952,
+     "alpha_base": 0.9441,
+     "alpha_knob": 0.9441,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "acted_on_px": 1811,
+   "collateral_px": 93,
+   "collateral": [
+    {
+     "px": 93,
+     "bbox_yyxx": [
+      386,
+      394,
+      456,
+      477
+     ],
+     "lum_base": 0.1688,
+     "lum_knob": 0.0736,
+     "dlum": -0.0952,
+     "alpha_base": 0.9441,
+     "alpha_knob": 0.9441,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "collateral_frac_of_moved": 0.0488,
+   "assembly_px": 1574,
+   "ground_px": 179,
+   "base": {
+    "knob_lum_mean": 0.3317,
+    "knob_p05": 0.0,
+    "knob_p95": 0.6951,
+    "ground_lum_mean": 0.5946,
+    "ground_p05": 0.0975,
+    "ground_p95": 0.6988,
+    "signed_gap": -0.2629,
+    "indistinguishable_px": 0,
+    "indistinguishable_frac": 0.0,
+    "ground_brighter_frac": 0.8324
+   },
+   "knob": {
+    "knob_lum_mean": 0.2554,
+    "knob_p05": 0.126,
+    "knob_p95": 0.4557,
+    "ground_lum_mean": 0.5945,
+    "ground_p05": 0.0971,
+    "ground_p95": 0.6988,
+    "signed_gap": -0.3391,
+    "indistinguishable_px": 0,
+    "indistinguishable_frac": 0.0,
+    "ground_brighter_frac": 0.8324
+   },
+   "delta_signed_gap": -0.0762,
+   "delta_indistinguishable_frac": 0.0,
+   "bulb": {
+    "EMPTY_NO_GROUND": 0,
+    "why": "the bulb is wholly enclosed by the collars and the cloak on this view - there is no boundary to read"
+   }
+  },
+  "back": {
+   "view": "back",
+   "moved_px": 2596,
+   "components": [
+    {
+     "px": 864,
+     "bbox_yyxx": [
+      308,
+      327,
+      68,
+      119
+     ],
+     "lum_base": 0.1306,
+     "lum_knob": 0.2562,
+     "dlum": 0.1256,
+     "alpha_base": 0.1278,
+     "alpha_knob": 0.8503,
+     "dalpha": 0.7225,
+     "acted": true,
+     "acted_by": "alpha"
+    },
+    {
+     "px": 609,
+     "bbox_yyxx": [
+      362,
+      410,
+      155,
+      185
+     ],
+     "lum_base": 0.5756,
+     "lum_knob": 0.5374,
+     "dlum": -0.0382,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 904,
+     "bbox_yyxx": [
+      364,
+      385,
+      66,
+      122
+     ],
+     "lum_base": 0.4367,
+     "lum_knob": 0.2116,
+     "dlum": -0.2251,
+     "alpha_base": 0.6861,
+     "alpha_knob": 0.8818,
+     "dalpha": 0.1957,
+     "acted": true,
+     "acted_by": "lum"
+    },
+    {
+     "px": 45,
+     "bbox_yyxx": [
+      387,
+      390,
+      86,
+      102
+     ],
+     "lum_base": 0.1726,
+     "lum_knob": 0.1468,
+     "dlum": -0.0258,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 122,
+     "bbox_yyxx": [
+      405,
+      423,
+      129,
+      145
+     ],
+     "lum_base": 0.3111,
+     "lum_knob": 0.2166,
+     "dlum": -0.0945,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "acted_on_px": 1768,
+   "collateral_px": 776,
+   "collateral": [
+    {
+     "px": 609,
+     "bbox_yyxx": [
+      362,
+      410,
+      155,
+      185
+     ],
+     "lum_base": 0.5756,
+     "lum_knob": 0.5374,
+     "dlum": -0.0382,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 45,
+     "bbox_yyxx": [
+      387,
+      390,
+      86,
+      102
+     ],
+     "lum_base": 0.1726,
+     "lum_knob": 0.1468,
+     "dlum": -0.0258,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    },
+    {
+     "px": 122,
+     "bbox_yyxx": [
+      405,
+      423,
+      129,
+      145
+     ],
+     "lum_base": 0.3111,
+     "lum_knob": 0.2166,
+     "dlum": -0.0945,
+     "alpha_base": 1.0,
+     "alpha_knob": 1.0,
+     "dalpha": 0.0,
+     "acted": false,
+     "acted_by": ""
+    }
+   ],
+   "collateral_frac_of_moved": 0.2989,
+   "assembly_px": 1532,
+   "ground_px": 177,
+   "base": {
+    "knob_lum_mean": 0.3264,
+    "knob_p05": 0.0,
+    "knob_p95": 0.6951,
+    "ground_lum_mean": 0.5992,
+    "ground_p05": 0.1514,
+    "ground_p95": 0.6988,
+    "signed_gap": -0.2728,
+    "indistinguishable_px": 0,
+    "indistinguishable_frac": 0.0,
+    "ground_brighter_frac": 0.8249
+   },
+   "knob": {
+    "knob_lum_mean": 0.2323,
+    "knob_p05": 0.1672,
+    "knob_p95": 0.3859,
+    "ground_lum_mean": 0.5976,
+    "ground_p05": 0.1422,
+    "ground_p95": 0.6988,
+    "signed_gap": -0.3654,
+    "indistinguishable_px": 25,
+    "indistinguishable_frac": 0.1412,
+    "ground_brighter_frac": 0.8249
+   },
+   "delta_signed_gap": -0.0926,
+   "delta_indistinguishable_frac": 0.1412,
+   "bulb": {
+    "EMPTY_NO_GROUND": 0,
+    "why": "the bulb is wholly enclosed by the collars and the cloak on this view - there is no boundary to read"
+   },
+   "WARN_COLLATERAL": "30% of the moved pixels are NOT the knob - a surface beside it responded. They are excluded here and listed under 'collateral'; any instrument that treats the moved mask as the knob is wrong on this view by that much."
+  }
+ }
 }

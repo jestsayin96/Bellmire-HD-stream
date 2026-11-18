@@ -928,3 +928,13 @@ Mr. E, verbatim, looking at the published page: "if you go all the way down its 
 - WHAT HE SEES: the section bar (Live, Boards, Town, Heroes, Bands, Chronicle, The die, Guild Roll, The Fallen, Lore, Bestiary, Shops ...) is clipped at the right edge after "Shops". The tabs that follow (Your Satchel, The Season, and anything after) are cut off; only a sliver of the next tab shows. My own 22:50 look saw the same: "Satchel" half-visible at the right edge.
 - WHAT IT IS, AS FAR AS I CAN TELL: the bar scrolls horizontally inside its own region (H32 pass 5 added a right-edge fade and scrolls the active tab into view as the "more this way" hint). At Mr. E's width that hint is not reading - he took it as the end of the list, so the last tabs look missing, i.e. unreachable.
 - STATUS: REPORTED, NOT FIXED. I changed no code this run and have not tested a fix. It is a layout fault on the served page, and any change to web/ would bring the hostile-name and ?state/?mock checks back. If the team lead wants it taken, it is a hub row: make the clipped tabs obviously reachable (visible scroll arrows or a wrap/overflow menu) without breaking H13 no-scroll or the tablist roles.
+
+## web/tools/sheet_overlap.js - does it belong under web/? (hub run, 18 Nov 2026 15:39 CT)
+Answer: YES, it stays. It is a Node + Playwright harness, not page code: index.html and app.js
+never reference it and a browser cannot run it. But web/tools/ is already the hub's tools dir and
+gh-pages already carries three other dev tools from it (gen_d20.py, make_item_icons.py, og.html), so
+publishing it adds no new KIND of file. Grepped clean of any token/secret/key (the only "Bearer"
+strings in web/ are the two page constants in app.js: publishable key + Twitch client id).
+docs/ and tools/ at the repo root are not hub-owned, so moving it out would mean writing to files
+this lane may not touch. Measured publish delta, gh-pages^{tree} 2d14aa9 vs HEAD:web 35eb801:
+3 files, +60/-24 = app.js -14, style.css +25/-10, tools/sheet_overlap.js +45 (new, inert).

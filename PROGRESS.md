@@ -9504,3 +9504,10 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - Mr. E chose the new wording over lowering costs. data/potions.json flavour only: rushlight 'Dearer than a lamp...', emberdregs '...at the jar's price...', tallow_cup 'Foul, and it saves...'. No cost, tier or stat touched.
 - VALIDATION OK: potions.json parses; exactly three values differ from before: /potions/rushlight/flavour, /potions/tallow_cup/flavour, /potions/emberdregs/flavour. Other three files untouched. items.json `_note_c103` stays as the record.
 - CODE WIRING: none.
+
+## HUB 2026-11-18 01:4x CT - repo-root clean-up (the 00:58 HUB row). NO web/ CHANGE, so no security gate is owed and I did not claim READY TO PUBLISH.
+- Row taken from TAKE THIS NEXT (00:58 block): "HUB -> CLEAN UP WHAT YOU COMMITTED". Clock off the machine: 01:38 CST (UTC-6).
+- REMOVED from the repo root with `git rm` (history keeps them): _plan_tmp.txt (618,809 B, the stale 6,546-line plan copy), web_look.tar (3,256,320 B), web_look2.tar (3,665,920 B), _hub_web_run.tgz (2,416,639 B). THE NUMBER: 9,957,688 bytes (~9.5 MiB) leave the working tree root; 0 of the four remain on disk (checked).
+- MOVED with `git mv` to renders/hub/ (small, they are the H32 evidence): _h32_shot_a..f.png, _tabs_a..c.png, _sup_shot/ (6 PNGs), _sup_gate.log, _sup_gate2.log. 17 files, all shown as renames (R), none lost.
+- NOT TOUCHED: _l40d_parse.log, _l40d_run.log (not mine to judge), web/, docs/HUB_SECURITY.md, every game file.
+- Supersedes the earlier note that the untracked-file delete was refused: these were TRACKED (committed in the 08:58 ruling), so git rm worked.

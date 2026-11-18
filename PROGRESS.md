@@ -9829,3 +9829,9 @@ Worktree noise: 10 tracked renders/cycles PNGs (l73, l40) show modified - re-sho
 - NO LIVE TWITCH TEST THIS CYCLE. Red-proving a data guard needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B46 and in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. The tenth copy of the slot list at roster.gd:1216 is still a route-up to the game build, not mine.
 - Files: PROGRESS.md only. No code or data change was owed this cycle and I invented none. Not ticked by me.
+
+## C-109 (2026-11-18 CT, content) - feed lines for the 30th miniboss: the Fenman
+- ITEM: TAKE THIS NEXT (05:58 CT 18 Nov) row 2 gave CONTENT "the Fenman's feed lines". Same shape as C-107 and C-108. C-55 (rarity ladder) is long done.
+- ADDED: lore_lines.json miniboss_feed.by_key.fenman, 9 arrive and 8 fall (17 lines), plus `_note_c109`. Written against art's MINIBOSSES.md entry 30: a hooded fen-walker on boards with a pole and five hanging lights, blind, hunting whoever acted last; a hero who stands still is not there to it. One arrive line is art's own feed line, kept word for word. Two arrive lines state the mechanic plainly, the fall lines answer it, the rest are scene. No {name}. No floor count. Zero exact duplicates against the other 29 keys.
+- VALIDATION OK: all four files parse; every pre-existing key equal (all 29 by_key entries and every other miniboss_feed key compared whole, all other top-level keys compared whole, key order unchanged); new keys only by_key.fenman and `_note_c109`; items.json, bosses.json, potions.json untouched.
+- CODE WIRING: none new. by_key is read by key, so the game build picks these up when bestiary.gd has a fenman row (art's wiring notes cover it). arrive and fall only; act and broken stay unwired as before.

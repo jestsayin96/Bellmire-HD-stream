@@ -9898,3 +9898,9 @@ NOT CLAIMING READY TO PUBLISH: nothing in web/ changed this hour, so no new gate
 - CHANGED: only the wording of `_note_c109`.
 - VALIDATION OK: all four files parse; every pre-existing key equal except _note_c109 (wording) with the 30 earlier by_key entries compared whole; new keys only by_key.comfitmaker and `_note_c110`; key order unchanged; items.json, bosses.json, potions.json untouched.
 - CODE WIRING: none new. by_key is read by key, so the game build picks these up when bestiary.gd has a comfitmaker row. arrive and fall only; act and broken stay unwired.
+## HUB standing check - 2026-11-18 07:4x CT (hub lane)
+- TAKE THIS NEXT gave the HUB lane NO build row (item 7 of the 06:58 team-lead block: "no build row again this hour"). Standing check, web/ unchanged: `git diff --stat fce3dfe HEAD -- web/` is empty after merging origin/main and origin/hub.
+- MEASURED: node --check web/app.js passes; one CSP meta in index.html; the only innerHTML sites are the two page-owned-string ones (app.js:255 status line, :301 fetch-error box); no insertAdjacentHTML/document.write/eval/new Function code. Hostile-name canaries (<img src=x onerror=alert(1)>) and the <colour> canary still present at app.js:2096/2647/3077/4839.
+- No screenshot taken: web/ did not change. Live-dot colour unchanged (no pass this run).
+- NOT claiming READY TO PUBLISH. gh-pages is 45a7904; the 19-line unpublished delta (dead shopGood() removal + "Sells up to" tier underline) is the supervisor's call, via the team lead.
+- Files: PROGRESS.md only.

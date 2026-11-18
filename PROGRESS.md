@@ -9492,3 +9492,15 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - GREEN: L31_FIT chips_past_bar=0 / L31_ICONS party=8 states_wanted=15 icons=15 keyed_and_sized=15 / L31_ICONS OK 15. LOOKED AT renders/cycles/l31/l31_icons_1080.png: each delver's five chips wrap onto two lines inside the bar width, every word whole, red rims on the bad states.
 - COST, STATED: a delver with 4+ states now takes a second chip line (~25 px at 1080p), so a full party with many states is taller; MAX_ROWS is unchanged.
 - STILL OPEN, UNCHANGED FROM D-L31b: the over-head Label3D tags show words only; monsters carry no states, so the boss bar has none to show.
+
+## C-103 (2026-11-18 CT, content) - STAND-DOWN continues: a price word that contradicts its own price, found in potions.json
+- ITEM: TAKE THIS NEXT (00:58 CT 18 Nov) gave CONTENT: stand down in writing, ONE defect in shipped words on a surface not yet audited, proposed in a `_note_` key, nothing swapped; do not swap C-100/C-101/C-102. Merged origin/main first (ddc9716, fast-forward).
+- FOUND: rushlight (tier 2, cost 120) says 'Cheaper than a lamp'; the shop's lamps cost 22, 24, 75 and 85, so it is dearer than all of them. Same class: emberdregs 'sold cheap' at 70 (the full emberward costs 70) and tallow_cup 'Cheap' at 55 (tier-1 median 40). Three flavour replacements proposed in items.json `_note_c103`. Nothing swapped in.
+- CHECKED AND CLEAN: all other price words in potions; exclamation marks and gothic-looking words in all four files; epic / S-tier / floor-count; none of the 11 artifacts in any stock list; rare-and-up equipment flavour free of condition words.
+- VALIDATION OK: all four files parse; every pre-existing key equal; one new key `_note_c103` in items.json.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): approve the three swaps, or choose to lower the costs instead. C-100, C-101, C-102 swaps still held.
+
+## C-104 (2026-11-18 CT, content) - Mr. E approved option 1 on C-103: three potion flavour lines swapped
+- Mr. E chose the new wording over lowering costs. data/potions.json flavour only: rushlight 'Dearer than a lamp...', emberdregs '...at the jar's price...', tallow_cup 'Foul, and it saves...'. No cost, tier or stat touched.
+- VALIDATION OK: potions.json parses; exactly three values differ from before: /potions/rushlight/flavour, /potions/tallow_cup/flavour, /potions/emberdregs/flavour. Other three files untouched. items.json `_note_c103` stays as the record.
+- CODE WIRING: none.

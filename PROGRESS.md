@@ -9484,3 +9484,10 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - I DID NOT TAKE THE DYE AUTHORITY ARM. The row told me to leave it with the supervisor and I left it; data/items.json was not touched, transiently or otherwise.
 - PROTOCOL: claimed 00:50:15-06:00 with no Godot alive and the previous lock line IDLE, and DECLARED THE CROSSING of the HUD's :52-:07 window on the lock line's face per the 22:58 ruling. Red-proof scratch and gate logs were written to the Windows TEMP directory, never into the worktree.
 - Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.
+
+## C-103 (2026-11-18 CT, content) - STAND-DOWN continues: a price word that contradicts its own price, found in potions.json
+- ITEM: TAKE THIS NEXT (00:58 CT 18 Nov) gave CONTENT: stand down in writing, ONE defect in shipped words on a surface not yet audited, proposed in a `_note_` key, nothing swapped; do not swap C-100/C-101/C-102. Merged origin/main first (ddc9716, fast-forward).
+- FOUND: rushlight (tier 2, cost 120) says 'Cheaper than a lamp'; the shop's lamps cost 22, 24, 75 and 85, so it is dearer than all of them. Same class: emberdregs 'sold cheap' at 70 (the full emberward costs 70) and tallow_cup 'Cheap' at 55 (tier-1 median 40). Three flavour replacements proposed in items.json `_note_c103`. Nothing swapped in.
+- CHECKED AND CLEAN: all other price words in potions; exclamation marks and gothic-looking words in all four files; epic / S-tier / floor-count; none of the 11 artifacts in any stock list; rare-and-up equipment flavour free of condition words.
+- VALIDATION OK: all four files parse; every pre-existing key equal; one new key `_note_c103` in items.json.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): approve the three swaps, or choose to lower the costs instead. C-100, C-101, C-102 swaps still held.

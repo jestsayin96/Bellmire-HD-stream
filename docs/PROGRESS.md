@@ -3561,3 +3561,20 @@ So the LEECH now passes both gates of miniboss_for, and the BEADLE's "no lines y
 R's working docs/WORK_PLAN.md was byte-identical to origin/main's (blob 62d3afc2), so I checked it out and
 fast-forwarded laptop to 11741c9 - no text lost.
 No code changed, so no gate run was owed and none is claimed. No Godot launched. No live Twitch test, nothing spent.
+
+## D-cycle - S41: NO BUILD ITEM OWED - FULL GATE BATTERY ON THE MERGED 15:58 TREE, NOTHING ELSE. 2026-11-18T16:08-06:00 (game build)
+Row: the lead's 15:1x block (mine from 16:07) gives game build NO new item - S39 ticked, honest-pair ask closed, its two
+housekeeping facts were both handled at S40 (delve.gd.bak_s39 removed; identity change noted). "Rows below stand": the
+13:58 row's only game-build item was the honest-pair shot, delivered at S39 and ticked. No Phase 2 system is rowed to
+me, so none was pulled early. Nothing invented.
+STALE IN MY OWN PROMPT, said so: (1) the gear.gd:98-104 null-guard defect is ALREADY CLOSED - S35 put
+`var ps := _cache[path] as PackedScene; if ps == null: _cache.erase(path); return null` at gear.gd:102-105, plus an
+instantiate()==null guard; read on the line this run. (2) the BEADLE does have content lines (4 in by_key, confirmed S40).
+WHAT I DID WITH THE WINDOW: ff laptop to main 8c172a9 (the lead's 15:58 merges of content/hub/hud/art/chatbot) and ran
+the full commit battery against it, because five lanes' code landed and nobody had run my gates over the union:
+  PARSE (--quit-after 300): rc 0, zero lines matching "error".
+  TWITCH_PARSE OK (8 checks)
+  OFFFLOOR_VERDICT OK 0 of 1942 samples off the floor (home)
+  DELVE_TEST OK ran 9001 frames, floor reached 2, state search; 0 SCRIPT ERROR in its section.
+  TOWNWALK ran to T=90s, in_solid=0/11314, 0 SCRIPT ERROR (only MI_Cobble invalid-UID WARNINGs, pre-existing).
+No code changed. No live Twitch test, nothing redeemed, 0 bits. Scratch log removed; tasklist: no Godot of any lane.

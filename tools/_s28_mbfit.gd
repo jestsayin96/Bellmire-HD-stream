@@ -5,7 +5,7 @@ extends SceneTree
 ## disk that falls back to 1.0 because no ratio was handed for it.
 ## S28_EXPECT_GREENER overrides the expected greener ratio (used only to prove the gate goes red).
 func _initialize() -> void:
-	var want := {"greener": 1.02, "strickler": 1.04, "pressman": 1.16, "tapster": 1.14}
+	var want := {"greener": 1.02, "dyer": 1.06, "tanner": 1.12, "strickler": 1.04, "pressman": 1.16, "tapster": 1.14}
 	var ov := OS.get_environment("S28_EXPECT_GREENER")
 	if ov != "":
 		want["greener"] = float(ov)

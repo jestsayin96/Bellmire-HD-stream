@@ -3181,3 +3181,11 @@ lead) and ONE owed line - the greener's MB_FIT ratio. S27 left TOWNWALK red with
 - Battery on this tree: PARSE rc=0 0 SCRIPT ERROR / 0 Parse Error (23.9 s; re-run after import, 0 again); TWITCH_PARSE OK (8 checks);
   OFFFLOOR_VERDICT OK 0 of 2066 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2 (capped); TOWNWALK PASS.
   No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team lead ticks.
+### S28b - THE 21:58 ROW LANDED ON `laptop` WHILE I WAS PUSHING (merged at 22:16, clean). IT ASKED FOR THREE MB_FIT LINES, NOT ONE.
+  dyer 1.06 (renders/art/minibosses/_fit_dyer_register.json pairs.dyer.ratio) and tanner 1.12 (_fit_report.json pairs.tanner.ratio)
+  added to delve.gd MB_FIT, copied off the files, not re-derived; greener 1.02 confirmed in _fit_report.json too. The gate now
+  proves six handed ratios. Relaunched battery (claim 22:17:30, lock refreshed on its own line):
+    MB_FIT_VERDICT OK (36 bodies on disk, 6 handed ratios proved, 0 fall back to 1.0)     red with S28_EXPECT_GREENER=1.03: FAIL
+    PARSE rc=0 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/15731 raid 0/8980 PASS (87 s,
+    streamed again); OFFFLOOR_VERDICT OK 0 of 2138; DELVE_TEST OK ran 9001 frames, floor reached 2 (capped).
+  TOWNWALK has now printed PASS twice on this tree, so the row's condition for System 4 is met. Not ticked - the lead ticks.

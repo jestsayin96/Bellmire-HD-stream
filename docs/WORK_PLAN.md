@@ -1,3 +1,229 @@
+## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 09:5x CT (the 09:58 firing)
+
+1. *** THE BIGGEST THING IN THIS FILE: SYSTEM 2 IS CLOSED WHOLE, AND THIS PLAN HAS NOW RE-OPENED
+   IT TWICE AFTER IT WAS STRUCK. STOP DOING THIS. ***
+   The HUD refused the row for the THIRD time this hour (U75) and it was right for the third time.
+   I did not take its word and I did not take the prompt's. I MEASURED, on the merged tree:
+     - the plan's own ledger, line ~2477: "[x] SYSTEM 2 IS CLOSED WHOLE. TICKED 2026-11-18 01:5x
+       CT (main 08f7fe4)";
+     - the 05:58 seat verified art's ladder digit-for-digit and wrote "THE RARITY-HUE HALF OF
+       SYSTEM 2 IS DONE. The row that said otherwise is struck" (line ~1476);
+     - THE CODE: UiTheme.rarity_pip and UiTheme.rarity_ink are DEFINED at ui_theme.gd:200 and :204
+       and CALLED LIVE at leaderboard_panel.gd:197 and :202. I read all four lines myself.
+   SO WHY DID IT COME BACK? Because the :58 PROMPT still calls it "THE MOST VALUABLE OPEN ITEM IN
+   THE HOUSE", a firing cannot edit the prompt, and two seats (08:0x and 09:1x) wrote the HUD row
+   from the PROMPT instead of from the PLAN. The correction was sitting in this file both times.
+   THE MECHANICAL FIX, AND IT IS CHEAP: BEFORE YOU WRITE A HUD ROW, RUN
+       grep -n "SYSTEM 2 IS CLOSED WHOLE" docs/WORK_PLAN.md
+   If it returns a line, System 2 is DONE and does not go in a row. The plan outranks the prompt on
+   any fact the plan has measured more recently - that is what this block is for.
+   AND THE LANE PAID FOR IT: the HUD has now spent three firings writing refusals instead of work.
+   That is a cost my seat caused, not the HUD's.
+
+2. THE DEAD-DATA RAW NUMBER JUMPED 32 -> 58 AND NOTHING IS WRONG. IT IS MY TEST, NOT THE TREE.
+   I used a STRICTER literal test than the recent baselines: a key counts as read only if '"key"'
+   or "'key'" appears in scripts/*.gd + web/*.js. That catches 23 keys earlier baselines never
+   listed - twelve `_source` provenance strings (one per data file), plus `_format`, `_measured`,
+   `_looks`, `measured`, `draw`, `uniques`, `rule` x2, `causality`, `budget`, `district_rules`.
+   I CHECKED ALL 23 BY HAND RATHER THAN CLASSIFYING THEM BY NAME, and every one is a PROSE
+   sentence or a provenance note - e.g. bosses.json `rule` is "Bosses are deliberately different
+   SHAPES, not bigger numbers"; world.json `canon_silences` is the no-floor-count canon.
+   ONE TRAP I FELL INTO AND CLIMBED OUT OF: town.gd:33 contains the text "world.json
+   district_rules" - IN A COMMENT. A name search would have scored that a read. It is prose.
+   THE CLASSES, ALL 58 ACCOUNTED FOR: 20 `_note_`; 2 runtime-built `_alt` that ARE READ
+   (lord_intros_alt, unique_intros_alt at delve.gd intro_pool - DO NOT WIRE); 4 declared dead
+   (townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop); 17 prose/spec;
+   15 provenance/meta.
+   *** UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO (31 dirs holding files,
+   measured off assets/ only). *** 48 script files, 2,192,556 chars, 12 data files, 122 top-level
+   keys, on merged main. COMPARE THE CLASSES, NEVER THE RAW NUMBER - and say which test you ran.
+
+3. THE GAME BUILD HAS NOW DECLARED OVER ITS 25-MINUTE CAP EIGHT TIMES, NOT SEVEN. The 08:58 seat
+   recorded none this hour and MISSED ONE: claim 08:08:30 + 25 = 08:33:30, declared 08:35 (over by
+   1 min 30 s) - that was the seventh. This hour: claim 09:08:40 + 25 = 09:33:40, declared 09:35,
+   over by 1 min 20 s - the eighth. ACTUAL HOLD BOTH TIMES WAS WELL INSIDE: 11 min 16 s and 9 min
+   0 s. It is the WRITING, not the discipline, exactly as the lane itself diagnosed. Its own fix
+   (compute claim+25 FIRST, then write the finish) is still right and still unapplied. One line in
+   the report, not an incident - but COUNT IT, because a pattern nobody counts stops being one.
+
+4. I RESET THE CLEAN-HOUR COUNT AND THE FAULT IS THIS SEAT'S HOUSE, NOT A LANE'S. No lane overran,
+   no lock went stale, no two lanes held at once, no future stamp was written, and the yield rule
+   held. But THE HUB WAS GIVEN NO BUILD ROW FOR THE THIRD HOUR RUNNING: the 09:1x row 6 said "YOUR
+   NEXT IS YOUR CALL", which is what the 07:58 seat itself called a starved lane when it reset the
+   count for the same reason. I am holding my predecessor to the standard that seat set for
+   itself. The hub went and found a REAL layout fault anyway (row 6 below) - that is the lane
+   covering for the seat, which is not a reason to stop counting it. I gave the hub a named row.
+
+6. *** THE YIELD RULE CHANGED TODAY AND THE PLAN NOW CARRIES MR. E'S WORDING, NOT MINE. ***
+   He gave it to me live during this firing and I VERIFIED IT AGAINST A LIVE PROMPT before
+   touching the plan - the chat bot's scheduled task, updated 09:57:56 CT, carries it verbatim and
+   says it "OVERRIDES ANY EARLIER YIELD WORDING ANYWHERE". I replaced the superseded 00:1x/04:07
+   block further down this file; go read it there in full before you judge any lock collision.
+   THE TWO CHANGES IN ONE LINE EACH: a RUNNING line is live until the next IDLE FROM THE SAME LANE,
+   not until its declared finish - so AN EARLY IDLE FREES THE WINDOW AT ONCE; and a declared
+   crossing is NO LONGER correct behaviour - SPLIT THE JOB instead.
+   IT APPLIES FORWARD ONLY. The 08:52 chat bot crossing and the HUD's yield were both correct
+   under the rule then in force and are NOT charged. Do not re-judge an old hour by the new rule.
+   ALSO SETTLED FOR GOOD: the scheduled-task write gate is on the CALL, not the field - a bare
+   `enabled=true` no-op was refused identically at 09:07. Stop re-testing it.
+
+5. A FREE CSP PROOF FELL OUT OF MY OWN TOOLING AND IT IS WORTH KNOWING. Rendering the hub in my
+   container, Playwright's addStyleTag was REFUSED by the page: "Applying inline style violates the
+   following Content Security Policy directive 'style-src 'self''". That is the cheap CSP check the
+   prompt describes, confirmed without my having to write it: the policy is live and enforcing on
+   the merged web/. I then did the red-proof with a same-origin stylesheet instead.
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 09:5x CT (team lead, the 09:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 09:1x BLOCK. The file reads
+reverse chronological: the most recently WRITTEN block is the current one, not the first unchecked
+line you meet.
+TIMING, CORRECTED BY ME AGAINST THE MACHINE CLOCK RATHER THAN LEFT AS I FIRST WROTE IT. I first
+wrote "the game build's :07 run has NOT yet read it". THAT WAS FALSE AND I AM NOT LEAVING IT
+STANDING: I pushed main at 10:10:17 CT, and the game build had ALREADY CLAIMED THE LOCK AT
+10:08:41 ("expected finish 10:35"), so it read the 09:1x rows, NOT these. This block reaches it at
+:07 NEXT hour. Every other lane reads it this hour.
+WHAT THAT MEANS FOR THE GAME BUILD, SAID PLAINLY SO NOBODY IS WHIPSAWED: it is right now working
+the 09:1x row 1, whose wording I correct in row 1(a) below. If it goes looking for a gear.gd with
+"no equivalent guard" it will FIND one at gear.gd:96 and may reasonably conclude the row is already
+closed. IT IS NOT - the guard there checks the path's existence, not load()'s result. Row 1(a) is
+the same work, more exactly stated, and nothing it does this hour is wasted.
+WHAT I TICKED THIS HOUR: S34 (game build), C-112 (content), the Beadle pass 12 (art), the hero-grid
+layout fix (hub), U75 (HUD stand-down), and the `oil` closure half of B51 (chat bot).
+WHAT I DID NOT TICK: B51's inventory field-list guard - the lane itself says it is UNPROVEN and the
+gates are owed. Details in my run doc.
+
+1. GAME BUILD - TWO ROWS, AND I RE-MEASURED BOTH RATHER THAN RE-ISSUING LAST HOUR'S TEXT.
+   (a) THE gear.gd NULL GUARD IS STILL OPEN AND THE 09:1x ROW WAS RIGHT, BUT ITS WORDING WOULD
+       MISLEAD YOU, SO HERE IS THE CORRECTION. That row said "gear.gd has no equivalent" of
+       Delve.miniboss_model's ResourceLoader.exists guard. IT DOES HAVE ONE - gear.gd:96 reads
+       `if path == "" or sk.find_bone(bone) < 0 or not ResourceLoader.exists(path): return null`.
+       THAT GUARD IS NOT THE SAME THING AND DOES NOT CLOSE THE ROW: ResourceLoader.exists() asks
+       whether the PATH is there, and load() can still hand back null for a resource that exists
+       but is not imported in that worktree - which is precisely the HUD's case (4,495 imported
+       files against R's 14,357). The unguarded cast is still at gear.gd:104,
+       `var m: Node3D = (_cache[path] as PackedScene).instantiate()`, on a `_cache[path]` filled by
+       an unchecked load() at :99. I read all three lines on merged main this hour.
+       THE ROW IS: check the load() RESULT, not the path's existence, and skip the piece when it
+       comes back null - the way miniboss_no_model does.
+   (b) WIRE THE BEADLE INTO THE DRAW. IT IS NOW ONE RATIO AND ONE LIST ENTRY AWAY AND I CHECKED
+       EVERY GATE MYSELF: `beadle` is in NEITHER delve.gd MB_FIT NOR dungeon_hd.gd
+       THEME_MINIBOSS_MORE (zero hits in both files), art's register gives ratio 1.2, art's theme
+       tag is `shrine`, and CONTENT LANDED ITS LINES THIS HOUR (C-112: arrive 9, fall 8, by_key now
+       33 keys - I counted them). So both of miniboss_for's gates will pass the moment you add
+       `"beadle": 1.2` to MB_FIT and extend the shrine row to ["leech", "beadle"].
+   (c) THE LEECH IS ALREADY FULLY WIRED AND I CONFIRMED IT SO YOU DO NOT HAVE TO: MB_FIT carries
+       "leech": 0.95 (delve.gd:390), THEME_MINIBOSS_MORE carries "shrine": ["leech"]
+       (dungeon_hd.gd:118), and content's lines are in. The 09:1x row asked you to confirm it on
+       your next run; consider it confirmed from this side. Just say so when it stands on a floor.
+
+2. HUD - YOUR SYSTEM 2 ROW IS STRUCK, YOU WERE RIGHT THREE TIMES, AND I AM NOT SENDING YOU BACK TO
+   IT. See row 1 of the block above: I verified System 2 closed whole against the plan's ledger AND
+   against ui_theme.gd:200/:204 and leaderboard_panel.gd:197/:202 myself. L74 is likewise done
+   (U36, 16 Nov). Your queue really is empty, and saying so three times was the correct behaviour,
+   not a dry lane failing to deliver. U75 IS TICKED as this hour's delivery.
+   YOUR ROW, AND IT IS A DEFECT IN YOUR OWN SHIPPED WORK, WHICH THE FREEZE EXPLICITLY ALLOWS:
+   HARDEN parse_fish() IN YOUR U71/U74b RARITY GUARD. You raised it yourself and have now carried
+   it as a standing note for two cycles: it ends the const block at the FIRST "}" after the const,
+   so a nested brace - a dictionary value, an inline lambda, a comment containing "}" - truncates
+   the table your guard is checking, and the guard goes quietly GREEN on a table it only half read.
+   A guard that can under-read its own input is the lying-instrument class, and it is yours.
+   If you judge that a new item rather than a defect fix, STAND DOWN AND SAY SO IN ONE LINE - you
+   have earned the benefit of the doubt on that call three times over.
+
+3. ART - THE BEADLE PASS 12 IS TICKED AND ALL THREE OF LAST HOUR'S FINDINGS ARE ANSWERED. I did not
+   take the harness's word: I read _ab.json and _knobgap.json AND I LOOKED AT ALL THREE RENDERS.
+   (a) THE FACING IS FIXED AND IT IS VISIBLE. From behind, the head is now a dark drum with no pale
+       eye-panel; front and back no longer read alike. a_nape measures it honestly: back_moved_frac
+       0.1705, front_moved_frac 0.0 (4 px) - the change lands on the back ONLY.
+   (b) THE WARM BACK WAS THE RIG, AND YOU PROVED IT PROPERLY WITH A CONTROL RENDER. c_warm_back:
+       with the aura rim r-b = +0.0878 (brown), with a NEUTRAL rim r-b = -0.0365 (blue-grey),
+       material_body_is_blue_grey true. The wool is the specified dark blue-grey; the back light
+       warms it. That is exactly the question last hour asked and you answered it by measurement
+       instead of by assertion. I can see it too: the front render reads blue-grey, the back brown,
+       same material.
+   (c) YOU FLAGGED YOUR OWN INSTRUMENT AS TOO COARSE TO BE EVIDENCE - instrument_notes.b_window,
+       "window 16375 px against 2801 moved px; it locates the knob, it does not measure it" - and
+       window_base and window_knob do indeed carry IDENTICAL lum_min/max/range/p95, so the metric
+       detects nothing. A lane auditing its own instrument is the single most valuable habit in
+       this house. Credited, not charged.
+   ONE THING I FOUND THAT NO LINE IN YOUR WRITE-UP NAMES, AND IT IS NOT A WITHHOLD. The outline
+   helped the FRONT far more than the SIDE, and the side is the view that was complained about:
+   front gap 0.1089 -> 0.4216 and worst_local_gap 0.0431 -> 0.3631, but on the side the global gap
+   moved only 0.2065 -> 0.2669 and THE WORST LOCAL GAP DID NOT MOVE AT ALL (0.1225 -> 0.1217,
+   fractionally worse). To my eye the knob now reads clean in the side render, so I ticked it -
+   but the number says the worst spot on that view is untouched. YOUR CALL whether that is the
+   instrument or the knob.
+   YOUR NEXT IS YOURS: minibosses remain the one thing a dry lane may invent, so a 34th is open to
+   you; the side knob above is the alternative. Say which you took.
+
+4. CONTENT - C-112 IS TICKED AND I COUNTED IT MYSELF RATHER THAN READING YOUR SUMMARY: by_key is
+   now 33 keys, beadle arrive 9 / fall 8. It landed in the same hour the game build built the
+   behaviour that will use it, which is the best kind of timing in this house.
+   YOUR NEXT, AND IT IS THE HIGHEST-VALUE CONTENT ROW ON THE BOARD: WRITE THE BEADLE'S `act` AND
+   `broken` LINES. The game build shipped S34 this hour - each miniboss's ONE IDEA as delve-side
+   behaviour - and I verified the mapping exactly: MB_WAYS holds 14 keys over 12 distinct ways, and
+   the 14 keys carrying `act` lines in your file are PRECISELY those 14, with no orphan in either
+   direction and none missing `broken`. The Beadle is the 33rd body, it has arrive/fall from you
+   and a proven fit from art, but NO act/broken - so S34 will correctly stay silent for it.
+   Art's idea for it, in art's own words: IT CALLS THE ORDER - while it stands the party does not
+   choose who acts; it calls the same hero again and again while the rest hold and watch.
+   Seven `act` and four `broken` is the house shape (every one of the 14 carries 7/4, bar porter's
+   6). Keep writing `_note_` keys - all 20 are accounted for and NO LANE IS TO WIRE ONE.
+
+5. CHAT BOT - HALF TICKED, HALF NOT, AND YOU CALLED IT CORRECTLY YOURSELF.
+   TICKED: the `oil` closure. I re-derived it rather than reading your summary - delve.gd:161 is
+   `oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))`, the comment at :159
+   says "a floor costs one flask per two bodies", and I listed every const on Delve (DELVE_Y, REACH,
+   SHRINE_*, MB_*, MINIBOSS_*, BOSS_TELL_EVERY, LAMP_REACH, FILE_*, DECIDE_EVERY, FLEE_AT,
+   REGROUP_M): THERE IS NO OIL CONSTANT. Your reasoning about exported .gd shipping as binary
+   tokens is right, and "a guard that goes red on export and stays silent on a retuned burn rate is
+   theatre" is the correct call. Closing a claim with a measured reason IS a delivery.
+   NOT TICKED, BY YOUR OWN WORDS: the `inventory` field-list guard. It has not parsed, PARSE /
+   L14_TEST / TWITCH_PARSE / COMMANDS_DOC / the baseline guard_faults() reading and three red proofs
+   are all owed, and you held it back as a CHECKPOINT precisely so it could not be mistaken for a
+   proven arm. That is exactly right and it is why this is a half-tick and not a charge.
+   YOUR ROW: RUN THE OWED BATTERY FIRST AT :45, before any new arm. And note you did NOT take the
+   lock at :49 when the engine was free because your work ran past into the HUD's window - that is
+   the yield rule working, and it cost you a cycle honestly rather than cheaply.
+
+6. HUB - TICKED, AND YOU WERE RIGHT TO REPORT THAT MY BLOCK NAMED NOTHING FOR YOU. It did, for the
+   third hour running; I reset the clean-hour count on my own house for it (row 4 above) and you
+   have a named row at the end of this one.
+   WHAT I TICKED AND HOW, BECAUSE I DID NOT TAKE YOUR SCREENSHOT FOR IT: I rendered the merged web/
+   myself in headless Chromium and RED-PROVED the fix - I rebuilt your four deleted/changed rules
+   as a same-origin red.css and brought the fault back. FIXED: 1100 -> 1 col / 526 px, 1440 -> 2 /
+   383, 1920 -> 4 / 307 - IDENTICAL to the three widths you reported, which is a real agreement
+   because this geometry is pure CSS and does not need snapshot data. RED: 3 columns at every
+   width, 252 px cards at 1440, and .hwhat COLLAPSING TO 0 px at 1100 - the zero-width class line
+   you described. I looked at both pictures: RED stacks "Dwarf / Fighter, / level 7 · / Shield / of
+   the / Ward" down the card, FIXED reads clean on one or two lines with the AC/HP pair holding its
+   column. SAID PLAINLY: my cards are synthetic ones I built to app.js:919-940's markup, not your
+   snapshot, so I reproduced the COLLAPSE rather than a literal overprint - the fault and the fix
+   reproduce, the exact pixel counts of your overlap do not transfer.
+   YOUR ROW - THE ONE YOU NAMED AND LEFT: THE CLASS-ICON BADGE ON THE INITIALS SIGIL, which clips
+   the second initial so "PI" reads "PL". You found it, called it pre-existing and cosmetic, and
+   left it for a row. This is that row. It is a defect in shipped hub work, not a new item.
+   AND KEEP NOT PUBLISHING: the pending delta is the supervisor's, not yours. You were right not to
+   claim READY TO PUBLISH on a web/ change.
+
+FOR THE SUPERVISOR:
+  ONE DECISION, AND THE DELTA HAS GROWN SINCE YOU LAST SAW IT, SO HERE IS A FRESH MEASUREMENT.
+  PUBLISH OR HOLD the pending hub delta. MEASURED THIS HOUR, NOT COPIED: origin/gh-pages is
+  45a7904 with tree 2d14aa94; origin/hub:web is f692df6c; they DIFFER. The delta is 2 files,
+  11 insertions / 21 deletions - web/app.js and web/style.css. It now carries TWO fixes, not one:
+  last hour's "Sells up to" tier-underline fix AND this hour's hero-grid fix.
+  MY RECOMMENDATION: PUBLISH, and I have my own evidence for the new half rather than the lane's.
+  I rendered the merged web/ in headless Chromium, red-proved the hero-grid fix by restoring the
+  old rules in a same-origin stylesheet (the fault returns: 3 columns at every width, 252 px cards
+  at 1440, the class line collapsing to 0 px at 1100), and LOOKED at both pictures. The CSP proved
+  itself to me unasked - the page REFUSED an inline style injection citing style-src 'self'. The
+  security greps are clean on the merged file: innerHTML at exactly two page-owned literal sites
+  (app.js:255, :301), zero outerHTML / insertAdjacentHTML / document.write / eval / new Function.
+  The change is CSS-and-JS-only with no data path touched. The publish method is the proven
+  web/-subtree plumbing one; 45a7904 went out that way on your 03:16 authorisation.
+  ALSO STILL OPEN AND NOT MINE: art's eleven showcase kits - stay under assets/ (art's own
+  recommendation) or move.
+
 ## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 09:1x CT (the 08:58 firing)
 
 1. THE :58 PROMPT'S DEAD-DATA BASELINE IS STALE AND HERE ARE THIS HOUR'S MEASURED NUMBERS,
@@ -1939,26 +2165,40 @@ HUD: SYSTEM 2'S RARITY-HUE HALF. IT IS NOW THE OLDEST AND MOST VALUABLE OPEN ITE
     THE CLEAN-HOUR COUNT RESET ON THIS, AT 03:53:33. It had reached three.
 
 ================================================================================
-*** THE YIELD RULE - STILL IN FORCE, ALL SIX LANES, STILL NOT IN YOUR PROMPTS ***
-  BEFORE WRITING A CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS A `RUNNING` LINE
-  WHOSE DECLARED FINISH HAS NOT YET PASSED, DO NOT CLAIM. Wait, or stand down for the firing and
-  say so - a stand-down written up IS the delivery. A `RUNNING` line whose declared finish passed
-  more than ten minutes ago is STALE: check for a live Godot process FIRST, then clear it in your
-  own line and say why. "CLAIM FIRST, READ SECOND" still means do not start work before your
-  claim is written; it was never a licence to write a claim over a live one.
-  *** ADDED 2026-11-18 04:07 CT, AND IT IS A FIX TO MY OWN RULE, NOT A CHARGE AGAINST A LANE: ***
-  DO NOT DECLARE A CROSSING INTO ANOTHER LANE'S WINDOW IN ORDER TO FINISH OPTIONAL WORK. The
-  protocol lets you cross WITH a declaration, and twice now that permission has produced a
-  collision rather than prevented one - 23:51 on 17 Nov and 03:47 this morning, both times the
-  chat bot crossing into the HUD's window and the HUD then claiming on top. A declaration
-  protects the lane that MADE it; it does nothing for the lane whose window is taken. So: if your
-  work will not finish inside your own window, SPLIT IT with a checkpoint and carry the remainder
-  to your next firing, the way the game build splits its long captures. Cross only when stopping
-  would leave the tree or the lock in a worse state than finishing.
-  WHY THIS LIVES HERE AND NOT IN YOUR PROMPT: a scheduled firing cannot edit a scheduled task.
-  The plan is what you actually obey, so the plan is the instrument. This was measured in both
-  directions at 00:1x CT today - a full prompt replace and a name-only write were refused
-  identically - and I re-probed it this hour and got the same refusal. See my run doc.
+*** THE YIELD RULE - SUPERSEDED HERE 2026-11-18 10:1x CT. THE WORDING BELOW IS NOW THE ONE IN
+*** ALL SEVEN PROMPTS, IN MR. E'S OWN WORDS, AND IT REPLACES THE 00:1x/04:07 WORDING THIS BLOCK
+*** USED TO CARRY. ***
+  I DID NOT TAKE THIS ON A RELAY. Mr. E passed it to me live during the 09:58 firing, and I then
+  READ THE LIVE PROMPT MYSELF before changing a word here: the chat bot's scheduled task
+  (trig_01X4f9fEK6r64Hz2U3CLxeY9, updated_at 2026-11-18T15:57:56Z = 09:57:56 CT) carries the text
+  below verbatim, under the heading "THE YIELD RULE - BINDING ON ALL SIX LANES. MR. E'S OWN WORDS,
+  18 NOV 2026 ... IT OVERRIDES ANY EARLIER YIELD WORDING ANYWHERE."
+  THE RULE, AS THE PROMPTS NOW STATE IT:
+    Before claiming the Godot lock, read the last line of docs/RUN_LOCK.txt. If it says RUNNING and
+    no IDLE from the same lane follows it, that lane holds the lock - wait or stand down. A RUNNING
+    line is live only until the next IDLE line from the same lane; AN IDLE RELEASES THE WINDOW
+    IMMEDIATELY, WHATEVER FINISH THE RUNNING DECLARED. Do not declare a crossing into another
+    lane's window to finish optional work - SPLIT THE JOB and carry the remainder to your next
+    firing. Declare a finish you actually mean; the cap (claim+25) is the separate number. Write
+    your IDLE line first when you finish early, then say the crossing in words.
+    A LANE THAT CLAIMED OVER A LIVE HOLD RESETS THE CLEAN-HOUR COUNT. The team lead enforces this
+    when ticking.
+  WHAT CHANGED FROM THE WORDING THAT STOOD HERE UNTIL NOW, SAID AS A CHANGE AND NOT SWAPPED IN
+  QUIETLY, BECAUSE TWO LANES BEHAVED CORRECTLY UNDER THE OLD ONE:
+    (1) LIVENESS. The old rule made a claim live until its DECLARED FINISH passed. The new rule
+        makes it live until the IDLE. An early IDLE now frees the window at once, instead of
+        fencing it off until a time that has already been beaten.
+    (2) CROSSINGS. The old rule called a DECLARED crossing correct behaviour. The new rule does
+        not: SPLIT THE JOB. A stand-down written up is still a delivery.
+  *** IT APPLIES FORWARD ONLY, AND I AM SAYING SO IN WRITING. *** At 08:52 on 18 Nov the chat bot
+  declared a crossing and the HUD did not claim over it. BOTH LANES WERE CORRECT UNDER THE RULE IN
+  FORCE AT THAT MOMENT, and the same is true of the 23:51 and 03:47 collisions earlier. NOBODY IS
+  RETROACTIVELY CHARGED. Applying a new rule backwards would punish lanes for obeying the old one,
+  which is the fastest way to teach six lanes to stop trusting this file.
+  AND THE OLD "WHY THIS LIVES HERE AND NOT IN YOUR PROMPT" NOTE IS NOW SPENT: it IS in the prompts.
+  A firing still cannot edit a scheduled task - that was measured in both directions at 00:1x CT
+  and again at 09:07 with an `enabled=true` no-op, all refused identically, which kills the
+  field-specific theory for good. Mr. E wrote all seven prompts himself in a live turn.
 
 ================================================================================
 *** FOR THE SUPERVISOR - 2026-11-18 04:07 CT. THREE ITEMS, ONE OF THEM NEW. ***

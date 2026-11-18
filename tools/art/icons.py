@@ -692,6 +692,56 @@ RARITY_HUE_PARCHMENT = dict(RARITY_HUE)
 RARITY_HUE_PARCHMENT["uncommon"] = (0.62, 0.66, 0.72)   # cool pewter, not paper
 
 
+# ---------------------------------------------------------------------------
+# THE THIRD TABLE. Asked by the team lead, 18 Nov 05:58 CT: scripts/fishing.gd
+# carries its own RARITY_COLOR, live in angler.gd. Sanctioned variant, or drift?
+#
+# IT IS BOTH, AND MEASUREMENT SPLITS IT RUNG BY RUNG. I compared the two tables
+# channel by channel instead of arguing about it (18 Nov 06:40 CT):
+#
+#   rung        RARITY_HUE           +0.10 lift        fishing RARITY_COLOR   max|d|
+#   uncommon    1.00 1.00 1.00       1.00 1.00 1.00    0.45 0.95 0.45         0.55
+#   rare        0.30 0.55 1.00       0.40 0.65 1.00    0.40 0.65 1.00         0.00
+#   very rare   0.70 0.35 1.00       0.80 0.45 1.00    0.80 0.45 1.00         0.00
+#   legendary   1.00 0.55 0.12       1.00 0.65 0.22    1.00 0.66 0.20         0.02
+#   artifact    1.00 0.13 0.10       1.00 0.23 0.20    not in the table        -
+#   common      None (bare)          None              0.92 0.92 0.90         painted
+#
+# THREE RUNGS ARE A SANCTIONED VARIANT AND THEY ARE NOT EVEN APPROXIMATELY SO -
+# rare and very rare are the canonical hue plus a uniform +0.10 on every channel,
+# EXACT TO FOUR PLACES, and legendary is the same lift within 0.02. That is not a
+# coincidence and it is not a second opinion about colour: fishing's table was
+# DERIVED from this one and three rungs still agree with it. The lift has a reason
+# on fishing's own ground, the same shape of reason parchment had: Fishing.colour()
+# is used twice in angler.gd - as the catch banner's text colour AND as an
+# OmniLight3D light_color on a scar-touched catch - and a light wants the lighter,
+# less saturated value or it tints the water it falls on. SANCTIONED. The variant
+# is RARITY_HUE_LAMP below, so it is DERIVED and cannot drift again.
+#
+# TWO RUNGS ARE DRIFT AND THEY ARE THE TWO A VIEWER MEETS FIRST.
+#   `uncommon` is GREEN. That is the MMO convention, not Bellmire's. 520 equipment
+#   icons and the hub ladder teach a viewer that white means uncommon; the river
+#   then says green. Same word, two claims, and the hue is a CLAIM about what a
+#   viewer is holding. Not a legibility variant - a different family. DRIFT.
+#   `common` is PAINTED, 0.92 0.92 0.90, where this ladder leaves it bare on
+#   purpose. Worse than it looks: it lands 0.10 from canonical white, so fishing's
+#   COMMON reads as the ladder's UNCOMMON. The baseline must stay bare - a hue on
+#   it spends the rung above it. DRIFT.
+#
+# AND ONE BY INHERITANCE, WHICH NOBODY ASKED ABOUT: data/fishing.json gives JUNK
+# rows a rarity - 5 common, 1 uncommon, 1 rare - so a boot comes up blue. `junk`
+# is None here because fishing trash has not earned a hue. Measured, not assumed.
+#
+# NOT A DEFECT, SO I AM NOT CALLING ONE: `artifact` is missing from fishing's
+# table, but data/fishing.json `rarities` stops at legendary and the scar-touched
+# bump clamps to the last rung, so artifact is unreachable there. No hole.
+#
+# WHAT I AM NOT DOING: scripts/fishing.gd IS NOT MY FILE. The change is named for
+# the game build lane in my summary. This block is the ruling it asked for.
+RARITY_HUE_LAMP = {k: (None if v is None else tuple(round(min(1.0, c + 0.10), 4) for c in v))
+                   for k, v in RARITY_HUE.items()}
+
+
 def rarity_hue(rarity):
     """The hue for one item, or None for no hue.
 

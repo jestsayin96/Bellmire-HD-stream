@@ -2529,3 +2529,181 @@ time rather than rediscovered. The honest list:
    hero, and a cuttable chain that ends it. The art promises a **count of two**
    and an **openable second bow** - if only one hero can ever be yoked, the open
    bow is a promise the fight does not keep.
+
+---
+
+## 29. THE PAVISER - *IT KEEPS ITS FACE TO YOU* (2026-11-18, art lane)
+`paviser` - **keep** - h **2.68** - wear **0.78** - 4 meshes, **743 faces** -
+span **3.57 m**, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **1.09** beside the posed 2.45 m Knight, pair_w **5.43**, fits_frame
+true. **Procedural, no pack geometry** (`pack_used` false - see below, I looked
+first).
+
+Feed line: *"A board came round to face you."*
+
+### WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+1. **The plan, not a list in my prompt.** `origin/main:docs/WORK_PLAN.md`, the
+   04:07 CT TAKE THIS NEXT block. My row: the Drover is ticked, twenty-eight
+   exist, and the 29th is mine if I am dry. Plus one second row - the Drover's
+   browner back - which is answered separately below.
+2. **What already exists, counted off the tree, not recalled.** The last
+   numbered heading in this file is 28, `assets/monsters/minibosses/` holds 69
+   files, and I parsed all 42 CANON entries out of `minibosses.py` with their
+   heights, wears and ideas rather than trusting any of the three lists in my
+   prompt.
+3. **THE PACKS, BEFORE A VERTEX WAS WRITTEN.** `C:\hd adventure\_packs\`
+   listed from the directory itself: 56 entries. I searched every pack for
+   `pavis`, `mantlet`, `screen`, `barricade`, `board`, `plank`, `wheel` and
+   `cart` - **zero hits on all eight**. There ARE six shields (KayKit dungeon
+   common/uncommon/rare, Quaternius heater/round/celtic) and they are the wrong
+   object: hand shields 0.5 m across, and the Quartermaster already carries
+   that exact geometry. A 1.3 m standing board is not on this disk, so this one
+   is generated. That is the rule working, not the rule skipped.
+4. **The wear ladder.** 0.15-1.00 in 0.05 steps is **FULL** - 26 distinct
+   values occupied. 0.78 is free, between the Loader's 0.75 and the Gaoler's
+   0.80. Height 2.68 is free between the Loader's 2.65 and the Bellman's 2.70.
+
+### THE IDEA, AND WHY IT IS NOT A 29TH COAT OF ONE OF THE TWENTY-EIGHT
+**NOT ONE OF THE TWENTY-EIGHT IDEAS IS POSITIONAL.** Parsed out of CANON, not
+recalled: summon, self-armour, drag a hero out, douse the lamps,
+will-not-stay-down, bar the door, steal gear, heal the pack, raise the water,
+plant the ground, pre-set the room, scale with the fire, ring from elsewhere,
+set the floor, come apart in two, arm the room, weigh you down, cut the party
+in two, adapt to the damage type, take the haul, drink your stores, use your
+fallen, mark one of you, trade on the body, copy your shape, be paid by the
+tail, yoke one of you. Every one of them is answered by deciding **what to
+do**. This one is answered only by deciding **where to stand**.
+
+It carries a pavise on a hinge post and swings it onto whoever is hurting it
+most. A blow into the board does nothing at all. So the party cannot win this
+by standing still and hitting harder: one of you has to get round the post
+while another holds its attention, and the moment you two swap sides the board
+comes back round.
+
+**IT IS NOT THE PORTER AND IT IS NOT THE HURDLEMAN**, and the difference is not
+a quibble:
+- the **Porter** drops a leaf across the chamber MOUTH. It is a wall, it does
+  not move, and what it takes from you is retreat.
+- the **Hurdleman** plants a panel through the middle of YOUR OWN LINE. Also
+  static, and what it takes from you is each other.
+- this one's board is **on the creature and it tracks**. Nothing is taken from
+  you. What changes is that the creature now has a front and a back, and your
+  damage depends on which one you are standing at.
+
+**THE SOLID BILLBOARD WAS A FREE SILHOUETTE AND THE HURDLEMAN IS WHY.** Its
+pass 3 found that its spare panels "read as one solid grey billboard - the
+biggest mass in the silhouette, reading as a door or a shield" and rebuilt them
+as open lattices, because a hurdle is not solid. So that outline was vacated by
+the one body that could not use it. A pavise **is** a door-sized shield, so the
+read the Hurdleman had to throw away is the exact read this body needs.
+
+### KEEP, AND THE THEME WAS COUNTED
+`dungeon_hd.gd` rolls `miniboss` at 35 on barracks and workshop (2 bodies
+each), 15 on keep, treasury and mess, 10 on shrine and crypt. **Keep had
+exactly one body - the Porter.** A pavise is a siege object and a keep is where
+one lives, so the weight-15 theme with the thinnest bench gets the body that
+belongs there anyway.
+
+### THE FIT PROOF - SEVEN PASSES, AND SIX OF THEM CAME OFF A PICTURE
+Rendered on a real posed KayKit Knight, front AND side AND back, and I looked
+at every one. `renders/art/minibosses/paviser/hero_*.png`.
+
+1. **Pass 1 was a fence.** Nine separate plank boxes on the arc; the arched
+   tops opened notches between them and `front.png` read as a **palisade** -
+   the one thing a shield must not be.
+2. **And the side view was worse, in the exact way my own docstring said it
+   would not be.** I had written that the deep camber would make the board read
+   as an ARC edge-on instead of a stick. `side.png`: nine boxes spread over
+   0.20 m of depth came apart into **six detached pale sticks**. The camber did
+   not save the side view - it supplied the spread that destroyed it.
+3. **Pass 2 made the board ONE CLOSED CURVED SHELL.** Continuous front, back
+   and ends; the plank seams drawn ON the face so they can never touch the
+   outline. The side view was fixed by this and has stayed fixed.
+4. **Pass 2 then read as a CASK ON END.** 0.92 wide by 1.18 tall, arched top,
+   deep belly, two iron hoops. Worse than the fence, because a fence at least
+   had an edge. **Pass 3** moved five numbers toward tall-and-flat (1.65:1 from
+   1.28:1) and **deleted the centre rib**, which was my own fault and the
+   nastiest one: the rib was the same dark tube at the same weight as the hinge
+   post, so the front view had two identical verticals and the board sat in a
+   frame between them - **a gate**, which is precisely the read the docstring
+   said this body must not have, written by the line that caused it.
+5. **Pass 3 then swallowed its own creature.** The taller, narrower board was
+   the right board and `front.png` showed a board, a fist and **one eye**.
+   **Pass 4**: top edge to the chin, board 0.08 further out. Head, helm, both
+   eyes, shoulder and arm all back against background.
+6. **Pass 5 killed the barrel for good, and it was the hoops, not the
+   proportions.** Each band had run the full width and round onto the ends, so
+   the dark line met the pale outline on both sides and closed behind it. A
+   hoop is a cask and no change of proportion was ever going to beat two of
+   them. They stop at 0.30 now, ends against the pale field, and the board's
+   outline is unbroken pale top to bottom.
+7. **The six bolt stubs were spiking the side silhouette.** At 0.135 long they
+   became a row of horizontal spines down the left edge and the creature read
+   as a **spiked post**, a different animal. The border check cannot see this -
+   nothing is clipped and no frame is blank, so it is green while the body is
+   wrong. Shortened to 0.055 and sunk, all inboard of |u| 0.28.
+8. **PASS 6 WAS A FIX THAT MADE THINGS WORSE AND IT IS REVERTED, NOT SHIPPED.**
+   See the live fault list below.
+
+### THE HONEST FAULT LIST - EVERY ONE OF THESE IS VISIBLE ON THE SHEETS
+1. **The back of the board is a dead blank pale rectangle.** `hero_back.png`
+   carries half this creature's idea - the board is gone, you are looking at
+   the man, which is the party's answer drawn - and there is not one mark on
+   it. Pass 6 put two iron battens across the back, which is how a boarded
+   pavise is actually braced. The result: **the man occludes the entire back of
+   the board**, so all that appeared were the two batten ENDS poking past his
+   torso, reading as two loose pegs. Worse than the blank. Reverted. **The
+   cause is the man, not the board** - anything placed on that back face is
+   behind him by construction - so the next pass must put the detail on HIS
+   back. Written down so the next run does not spend a pass rediscovering it.
+2. **The man's back is a featureless dark block.** Same view, same problem,
+   and it is the other half of fault 1.
+3. **The board's grey is the same value as the Knight's armour.** On
+   `hero_front.png` the creature's largest mass and the hero's plate sit at
+   nearly the same lightness. The limewash is meant to be warm; it is reading
+   as slate.
+4. **The strikes and seams dissolve at pane distance.** On the hero sheet they
+   are faint marks. The "six countable hits" claim is TRUE at render distance
+   and FALSE on stream, and I am not going to pretend otherwise.
+5. **The strikes and the three splits are not distinguishable from each other**
+   even up close - two kinds of damage reading as one kind of speckle.
+6. **The near arm is invisible from the front** (behind the board). Only the
+   far arm and fist read, so he looks one-armed.
+7. **From the side the fist and forearm cross his own helm and take one eye.**
+8. **The man's torso and legs merge into one dark mass** from the side - no
+   separation at the hip.
+9. **The board floats** - its bottom edge is 0.24 m off the floor, where a
+   standing pavise rests on the ground.
+10. **pair_w 5.43 against a 5.60 frame is 0.17 m of headroom.** It passes, and
+    it is the second-widest pair in the register. The prop leg is what spends
+    it.
+11. **The prop and the post read as two unrelated verticals** from the back -
+    their join at the top is hidden behind the post.
+
+### THE BLANK AND BORDER CHECK
+`minibossgen` 0 blanks across the batch, errors `[]`. `minibossfit` verdict
+**GREEN**, errors `[]`, blank 3 files 0 failures, `blind_views` empty. The
+three-render occlusion test proves on all three cells (`proving: 3`); `seen`
+is 1.0 for both bodies in all three views, which is the correct answer for a
+pair placed clear of each other and NOT an instrument reading the same number
+twice - the team lead audited exactly that shape on the Drover at 04:07 and
+found it sound.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+1. `assets/monsters/minibosses/paviser.glb` - **static, no armature**: a
+   `model` path and **NO `anims` entry**, same as the twenty-eight before it.
+2. `scripts/delve.gd` `MB_FIT`: add `"paviser": 1.09` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json` `pairs.paviser.ratio`. Do not
+   re-derive it.
+3. The **keep** set piece can now pick between the Porter and the Paviser.
+4. **The idea is a BEHAVIOUR and this one is worth more than most as a
+   behaviour**, because the body is cheap (743 faces, the lowest in the
+   register) and the whole of it is a facing rule. Shipped as a reskin with 2x
+   hp it is nothing at all; shipped with "blows into the board do nothing, the
+   board turns to the biggest threat" it is the only fight in the set that is
+   about where people stand.
+5. No `.glb.import` sibling - the art lane never runs Godot.
+
+### LICENCE
+Entirely procedural. No third-party geometry, no texture, nothing to record in
+`docs/art/ASSET_SOURCES.md`. The packs were searched first and had no pavise.

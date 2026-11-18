@@ -1262,11 +1262,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "paviser": {
+   "title": "The Paviser",
+   "theme": "keep",
+   "idea": "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge post and swings it onto whoever is hurting it most, and a blow into the board does nothing at all; so the party cannot win this by standing still and hitting harder - one of you has to get round the post while another holds its attention, and the moment you two swap sides the board swings back",
+   "wear": 0.78,
+   "feed_line": "A board came round to face you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 743,
+   "size": [
+    3.57,
+    2.26,
+    2.68
+   ],
+   "footprint_span": 3.57,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5013586167329933,
+    "ortho": 3.5184850692749023,
+    "clip": [
+     8.862750053405762,
+     23.999229431152344
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 84,
+  "files": 87,
   "failures": []
  }
 }

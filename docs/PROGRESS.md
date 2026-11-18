@@ -3526,3 +3526,22 @@ HONEST LIMIT: the Rammer is a STATIC body (no anims), so the haul and the drop a
 the hit, not shown as the monkey rising; the delvers do not yet move off the pile on their own - the DEX
 save stands in for reading the hold. Building a hero "step off" behaviour is a next row, not this one.
 BEADLE: unchanged from S35/S36 (MB_FIT 1.2, shrine row, "order" way). LEECH: not re-measured this hour.
+
+## D-cycle - S39: THE RAMMER'S COUNT IS SEEN - a shock ring on the drop, and one shot taken AFTER a drop resolves. 2026-11-18T14:08-06:00 (game build)
+Row: the 13:58 TAKE THIS NEXT block. Its premise (bridge down) was STALE by my claim - the bridge answered at 14:08 (the
+chat bot's 14:00:30 NOTE said so), so I took the one game-build item the block named for "when the bridge is back":
+a Rammer shot taken AFTER a drop resolves. Not ticked - the lead ticks. S38 is still owed its tick/merge.
+WHY CODE AND NOT JUST A SHOT: the Rammer is a static body, so the iron cannot be shown "down" - nothing on screen
+ever said a count landed. delve.gd _rammer_drop now calls mon.nova(MB_DROP_R): a ring exactly the pile's 2.6 m,
+visual only (nova() deals no damage; the drop's damage path is unchanged). Struck delvers already play Hit_A and
+carry "slowed".
+TEST tools/_s38_rammer.gd gains 3 checks + a third shot rammer_3drop.png (drops repeat until the count strikes):
+  S38_RAMMER OK (21 checks). RED: scripts/delve.gd swapped back to the pre-S39 copy -> S38_RAMMER FAIL (21 checks)
+  ["S39: the count is seen - a shock ring spawned (0)"] - exactly one fault named. delve.gd restored, md5 checked.
+LOOKED at rammer_3drop.png: the gold ring is down around the pile, BOTH on-pile delvers carry "slowed", Alsopile
+is mid-hit, Standsoff (off the pile) is clean. HONEST LIMIT: on this run's floor a wall block sits between the
+camera and the Rammer + Onpile - the frame proves the count landed, but it does not show the creature. The fixed
++6,+8,+6 camera offset in the tool is the cause; a camera that picks an open side is a next small row.
+GATES: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2182; TWITCH_PARSE OK (8 checks);
+TOWNWALK in_solid=0/18237 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+No live Twitch test, nothing spent. docs/WORK_PLAN.md in R carries the lead's hand-written 13:58 block - NOT staged by me.

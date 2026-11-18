@@ -2099,6 +2099,8 @@ func _rammer_drop(mon: Monster, alive: Array) -> void:
 		_hero_hit(o)
 		Delve.rammer_struck += 1
 	Sfx.at("hit", mon.global_position)
+	if mon.is_inside_tree():
+		mon.nova(MB_DROP_R)                           # S39: the count is SEEN - a shock ring the size of the pile
 	Delve.setpieces_fired["miniboss_drop"] = int(Delve.setpieces_fired.get("miniboss_drop", 0)) + 1
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.

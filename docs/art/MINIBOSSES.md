@@ -3767,6 +3767,21 @@ below it?** Only then does the declared contact float.
   OVER THE BAR : 12 of 31 judged     seated : 19     not judged : 3
 ```
 
+**AS OF 18 Nov 17:1x CT the Quartermaster is out of this list** - 317.2 mm ->
+2.5 mm, under the bar. The run below says how. The table above is kept as it
+stood so the fix has something to be measured against; the live table is:
+
+```
+  bodies 34   declare a contact at z=0: 31   bar 5 mm
+    reeve          -0.1700 -> 170.0 mm      pressman      -0.0256 ->  25.6 mm
+    stoker         -0.0836 ->  83.6 mm      scrapwright   -0.0205 ->  20.5 mm
+    sexton         -0.0720 ->  72.0 mm      sluicekeeper  -0.0130 ->  13.0 mm
+    sower          -0.0374 ->  37.4 mm      boiler        -0.0120 ->  12.0 mm
+    moulder        -0.0300 ->  30.0 mm      snarer        -0.0083 ->   8.3 mm
+                                            hurdleman     -0.0060 ->   6.0 mm
+  OVER THE BAR : 11 of 31 judged     seated : 20     not judged : 3
+```
+
 **MY FIRST VERSION OF THIS AUDIT WAS WRONG AND I REWROTE IT BEFORE TRUSTING
 IT.** It reported "lowest vertex below z=0" and called that the float, which
 flagged the Quartermaster at 317 mm purely because it loads real pack geometry
@@ -3788,3 +3803,93 @@ at a time, each needs its own look, and in several the low part may be a prop
 whose placement is deliberate even if its plane is not. This is a defect in
 already-shipped work that I learned about this hour, which the freeze expressly
 allows me to fix - it is not a new item and I have written no plan row for it.
+
+### THE QUARTERMASTER, 18 Nov 17:1x CT - 317.2 mm TO 2.5 mm, AND IT WAS ONE BUG WEARING FOUR FAULTS
+
+**WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED.** I re-ran the audit in my
+own `--background --factory-startup` Blender and reproduced the table above
+exactly - 34 bodies, 31 judged, 12 over the bar, the Quartermaster worst at
+317.2 mm. Then, because *an audit says how far and never says what*, I wrote
+`tools/art/_fp_locate.py`: it wraps every `Parts.add`/`Parts.raw` and records
+the line of `minibosses.py` that made each item, so the report names source
+lines instead of anonymous indices. It goes **red on empty** and red when it
+resolves no caller at all - a probe that attributes nothing must not read clean.
+
+It named the part in one run:
+
+```
+  quartermaster - 35 items, global min z -0.3172
+    zmin -0.3172  zmax +0.3109  bone 195v  minibosses.py:4338   x3   <- the three shields
+    zmin -0.1912  zmax +1.2995  bone 460v  minibosses.py:4338        <- the offered spear
+  ITEMS DECLARING CONTACT: 2   (both boot blocks, at exactly 0.0000)
+```
+
+Line 4338 is `_lay`, which carries pack geometry. So I measured the pack parts
+in their own unit space, and there it was:
+
+```
+  spear_A    z  min -0.3289  max +0.6711      shield_A   z  min -0.5713  max +0.4287
+```
+
+**`_gear_mesh` scaled to unit length and never re-origined.** Its docstring
+claimed "about the grip" and `_lay`'s claimed "carry a unit-length part to
+`butt`", and **neither was true**: `_lay` was putting the pack's arbitrary
+mid-mesh origin on the point every call site had named as the butt. Each part
+was therefore sunk 0.33-0.57 of its own length backwards along its own
+direction. That single error was producing four separate faults, three of which
+no number in any register could see:
+
+1. **the floor.** The three ground shields were buried past their centres,
+   dragging the global minimum to -0.3172 and lifting the body's two declared
+   boot blocks 317.2 mm into the air - the worst float in the set;
+2. **the feather crown.** Two thirds of each sheaf shaft sat inside the torso,
+   so only the heads showed. That is *the exact fault pass 2 was written to
+   fix*, and pass 2's note says it was fixed. It never was - the fix was
+   correct and the loader undid it;
+3. **the offered spear.** Pass 2 computed the shaft's midpoint to three
+   decimals and put the hand there. The arithmetic was right and the geometry
+   it described was 0.66 m away, so the fist closed near the butt end;
+4. **the two floor spares.** Pass 3 measured them clear of the shield faces,
+   "a clear 0.76 m of floor". They still ran through the stack.
+
+**THE FIX IS ONE LINE IN THE LOADER, NOT FOUR HAND-TUNED NUMBERS.** `_gear_mesh`
+now subtracts the scaled minimum z, so a pack part's butt is at its own origin
+and `_lay`'s documented contract is true. Both docstrings are corrected to say
+what the code does. Blast radius measured before touching it: `_lay` and
+`_gear_mesh` are called **only** by `quartermaster()` - four call sites, one
+body. The procedural fallback `_spear_proc` already produced butt-at-zero
+geometry, which is further evidence of which convention was intended.
+
+**AFTER:** global min -0.0025, float 2.5 mm, under the 5 mm bar. The set goes
+12 over the bar to **11**, seated 19 to **20**. `minibossgen` GREEN, 45 bodies,
+0 errors, 0 blanks, quartermaster span 2.62 CORRIDOR-SAFE; `minibossfit` GREEN,
+0 blanks, 3 views proved, hero ratio 0.96.
+
+**I LOOKED AT ALL THREE VIEWS AND HERE IS EVERYTHING I CAN SEE, GOOD AND BAD.**
+Fixed in the picture and not just in the number: the boots now land on the
+hero's own floor line in `hero_front.png` and `hero_side.png`; the three
+shields **stand** against the near leg and read as a stack of shields instead
+of the sunken grey blob they were; the two spares lie on open floor in front of
+them with daylight between; and the fist closes on the **middle** of the
+offered shaft, so the body finally does on screen the one thing it is for.
+
+Still wrong, named and not hidden:
+
+- **the sheaf reads as a crown from dead-on front, and only from there.** With
+  the shafts finally out of the torso the fan is now a symmetric six-spoke
+  splay centred behind the head. In `three_quarter.png` and `hero_side.png` it
+  reads correctly - spears standing in a quiver, raking up and back. **This is
+  a one-view read and I did not chase it this run**: every change that would
+  break the symmetry head-on also moves the two views where the sheaf is
+  already right, and that is its own pass with its own look.
+- **the quiver root is hidden.** The shafts appear to come from behind the head
+  rather than out of a block, because the quiver sits inside the torso outline.
+- **the tally brand's pale knob** crosses the sheaf shafts in 3/4 - the same
+  family as the Beadle's pale-knob-on-pale-panel, though here it still reads.
+- **the hatch with two lit dots still reads as a letterbox face** at pane
+  distance, which is what pass 2 set out to kill and did not fully.
+- the near boot clips the bottom corner of the nearest shield by a few mm.
+
+**WHAT THIS COSTS THE OTHER TEN.** Nothing - the bug was in a loader only this
+body uses. The other ten floats have other causes and still need their own
+looks, one at a time.

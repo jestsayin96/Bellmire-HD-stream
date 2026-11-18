@@ -10868,3 +10868,70 @@ and the exact opposite of true for !reroll. The wording is yours.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## B56 - THE SIXTH TRIGGER FINALLY REPORTED, AND WHAT IT REPORTED FIRST WAS THAT MY OWN PROBE WAS MEASURING NOTHING (chat bot, 2026-11-18 14:4x CT)
+NAMING, SO NOBODY MATCHES THE WRONG ROW: my RUN_LOCK lines this hour are labelled "chat bot B55"
+because I wrote them before I read PROGRESS.md and saw that the 13:4x bridge-outage cycle had
+already taken B55. THIS CYCLE IS B56. The lock lines at 14:48:50, 14:50:35 and 14:53:10 are mine
+and are this cycle. I did not renumber the existing B55.
+
+TAKE THIS NEXT, row 5 (14:1x block): "THE BRIDGE IS UP: run the sixth trigger in your own 14:45
+slot as you planned." Done as written, and it is still not a pass. Here is the whole of it.
+
+THE BRIDGE WAS UP. Trivial call answered at 14:48:35 CT. The 12-minute outage (~13:47-13:59:37)
+did not recur. Lock was free - last line IDLE game build 14:16:27 (S39). I claimed 14:48:50,
+computed the HUD's 14:52 boundary FIRST and said so in the claim, declared 14:51, and released at
+14:50:35. No crossing. Two headless runs, both short.
+
+RUN 1 - THE TRIGGER AS CONCEIVED CANNOT REACH THE ARM, AND THIS IS WHY IT HUNG LAST HOUR.
+Renamed ONLY `func handle(` at line 99, as B53/B54 planned it. Result:
+    SCRIPT ERROR: Parse Error: Function "handle()" not found in base self.
+       at: GDScript::reload (res://scripts/chatcmd.gd:2256)
+    ERROR: Failed to load script "res://scripts/chatcmd.gd" with error "Parse error".
+scripts/chatcmd.gd SELF-CALLS handle() at line 2256 (`return handle(user_id, display, "!" + cmd,
+login)`, the ask()-topic route). Rename the declaration alone and the file does not parse, so
+commands() never loads and the NEEDS_HERO ANCHOR arm is UNREACHABLE. THE 240 s TIMEOUT LAST HOUR
+WAS A PARSE FAILURE, NOT A SLOW GATE. The trigger must rename line 99 AND line 2256 together.
+That is a real finding and it stands.
+
+RUN 2 - I RENAMED BOTH LINES, THE FILE PARSED, THE GUARD RAN, AND IT REPORTED ZERO FAULTS.
+B55_FAULTS n=0, rc=0, with `func handle(` gone from the source. I wrote that into RUN_LOCK at
+14:50:35 as "a HOLE IN THE GUARD" and I was WRONG. I corrected it myself at 14:53:10.
+
+WHY IT WAS ZERO, READ FILE-ONLY WITH NO ENGINE AND NO LOCK:
+  line 730  static func guard_faults() -> Array[String]:
+  line 731      return _guard_faults.duplicate()
+THAT IS THE WHOLE FUNCTION. IT CHECKS NOTHING. Every check in this file - MISSING, UNPARSABLE,
+EMPTY, NO ASK, NO FOREIGN, ORDER UNUSABLE, the needs_hero NEEDS_HERO ANCHOR/ROUTE/EXEMPT arms, all
+of them - lives inside commands() (lines 732-2095) and runs ONLY when `_cmds.is_empty()`; _cmds is
+assigned at 2088, at the end. My probe called guard_faults() ALONE. So the array was empty BY
+CONSTRUCTION and n=0 was my probe reading an unpopulated array - not the guard missing a renamed
+handle(). tools/_l14_test.gd line 16 calls `ChatCmd.commands()` FIRST, which is exactly why B53's
+five proofs fired and mine did not. THE GUARD IS NOT SUSPECT. No item should be opened on it.
+
+THE LESSON AND IT IS THE SAME ONE AS B53: my instrument was wrong, not the thing measured. B53
+caught three wrong instruments with a python emulation before the engine ever ran. I skipped that
+step this hour because the window was four minutes wide and I had "one ten-second run" to do - and
+the shortcut bought me a false claim in a file three other lanes read. The four minutes were real;
+the shortcut was still mine.
+
+THE PROBE THAT WILL ACTUALLY PROVE IT, so 15:45 does not re-derive this:
+  - rename BOTH line 99 (`func handle(` -> `func handle_PROBE(`) and line 2256 (`return handle(`)
+  - probe: `var cc = load("res://scripts/chatcmd.gd")` ; `cc.commands()` ; THEN `cc.guard_faults()`
+  - expect: rc=1, exactly one fault, the string "NEEDS_HERO ANCHOR", and nothing else
+  - drive it with output to a FILE, not a subprocess pipe; it returns in ~10 s
+SIXTH TRIGGER STATUS: STILL OWED, third hour running. SPLIT TO 15:45. The HUD holds :52-:07 and I
+did not re-enter a live window to chase it - the same call I made at 13:59 and was told was right.
+
+STATE HANDED BACK, MEASURED NOT ASSERTED:
+  scripts/chatcmd.gd   md5 72be1e686522e8904077623e0169c963  BYTE-IDENTICAL, grep '^func handle(' = 1, line 2256 restored
+  data/commands.json   md5 0ed191404157221abd8a184cc580dfa5  never touched
+  docs/COMMANDS.md     md5 9a80bfd98049e77abddab6d1d182c524  never touched
+  json.load clean, 27 commands, order 27, drift clean BOTH directions (0 missing, 0 ghost)
+  NO CODE CHANGE THIS RUN. This cycle is a measurement and a retraction; the guard is untouched.
+ONE SCRATCH FILE LEFT: _b55_run.log at the worktree root. rm in this connected folder returned
+"Operation not permitted" again this session, so I deleted Windows-side through the bridge -
+_b55_probe.gd, _b55_out.txt and _b55_run2.log are GONE; _b55_run.log failed with WinError 32, still
+held open by run 1's Godot process. Untracked, inert, nothing loads it, named here, cleared at 15:45.
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

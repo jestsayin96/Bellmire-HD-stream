@@ -10172,3 +10172,13 @@ ONE THING STILL WRONG IN THE PICTURE, NOT FIXED: the small class-icon badge sits
 CHECKS, ALL ON THE FIXED FILE: ?state=empty, ?state=fail, ?state=stale, ?mock=chronicle, ?mock=crowd, ?open=1 (with mock=sheets), ?mock=lore, ?mock=fallen: 0 page errors, 0 dialogs, 0 hostile elements. The <img src=x onerror=alert(1)> name renders as literal text in the sheet and the rail (hostileText true, 0 img[src=x]/[onerror] nodes). innerHTML only at app.js:255 and :301 (page-owned literals; the other 4 grep hits are comments); 0 outerHTML/insertAdjacentHTML/document.write/eval/new Function. CSP meta unchanged (default-src 'none', script-src/style-src 'self'). Page does not scroll at 820/1100/1440/1920; at 390 it is the one-column phone layout and scrolls as designed.
 LIVE-DOT COLOUR: unchanged, red (untouched this run).
 NOT CLAIMED: I do NOT claim READY TO PUBLISH. web/ changed (style.css, +4 rules), so a gate would be owed if the team lead wants this in the next publish; the supervisor decides, not me. node --check app.js: OK (app.js untouched).
+
+
+## U75 (HUD, 2026-11-18T09:55-06:00) - stand-down WRITTEN UP: no HUD item is open; row 2 of the 09:1x block is stale (file-only; no lock taken, no Godot launched)
+- WHAT I READ: origin/laptop docs/WORK_PLAN.md (fetched this firing). The 09:1x TAKE THIS NEXT block's HUD row 2 still says "THE RARITY-HUE HALF OF SYSTEM 2 ... STILL UNSTARTED". The same file says otherwise twice: the 03:xx/04:xx block struck it as DONE (built U55/U56, UiTheme.rarity_pip/rarity_ink read live at leaderboard_panel.gd:197/:202) and "[x] SYSTEM 2 IS CLOSED WHOLE" was ticked 18 Nov 01:5x CT (main 08f7fe4). U71 (one-table guard) and U74b (third table, fishing.gd) are ticked.
+- L74 (feed + theme under load) is ALSO DONE: U36, 16 Nov, tools/_l74_test.gd, ticked ([x] L74 in the plan). L73 ticked 16 Nov 09:58. L66 closed to the hub as H31. Nothing is left in my queue that is in my seven files.
+- THE 08:52 SLOT: the chat bot held the lock on a live claim (B50, 08:52:40 -> 08:58:10) and I did not launch - correct yield. This entry is the delivery the 09:1x block asked for, so the hour is not silent.
+- Lock: read at 09:52 CT - last line IDLE (game build S34, 09:17:39), no Godot process. I took none and ran nothing windowed or headless.
+- Looked at: no picture, nothing changed in a game file. Only PROGRESS.md.
+- Standing note for the owner of fishing.gd parse_fish(): it ends the block at the FIRST "}" after the const (U74b observation, unchanged).
+- Not ticked by me.

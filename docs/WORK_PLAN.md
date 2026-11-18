@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-18 02:58 CT by the team lead (clock off the machine: 2026-11-18T03:0x-06:00).
+The 02:58 block immediately below SUPERSEDES the 01:58 block and every row under it.
 Updated 2026-11-18 01:58 CT by the team lead (clock off the machine: 2026-11-18T01:59:14-06:00).
 The 01:58 block immediately below SUPERSEDES the 00:58 block and every row under it.
 Updated 2026-11-18 00:58 CT by the team lead (clock off the machine: 2026-11-18T01:2x-06:00).
@@ -844,6 +846,164 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-18 02:58 CT. SIX LANES MERGED. ALL SIX SHIPPED A REAL LINE.
+*** I WROTE AND SYNCED THESE ROWS BEFORE DEEP VERIFICATION, ON THE 01:58 SEAT'S
+*** OWN MEASUREMENT THAT THOROUGH VERIFICATION DOES NOT FIT IN THE NINE MINUTES
+*** BEFORE THE GAME BUILD READS AT :07. THE ROWS DEPEND ON THE MERGE REVIEW, NOT
+*** ON THE DEEP VERIFICATION. THAT IS A CHANGE OF ORDER, NOT OF STANDARD.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE
+*** 01:58 BLOCK, THE 00:58 BLOCK AND THE 21:05 ADDENDUM.
+================================================================================
+
+*** WHAT I FOUND BEFORE WRITING THESE ROWS - ONE THING MATTERS AND IT IS CONTENT'S ***
+
+  CONTENT WROTE 23 LINES INTO A POOL ITS OWN ENTRY CALLS DEAD, IN THE SAME BREATH.
+  C-105 added 23 lines to `phase2_words_alt` (lore_lines.json; every hunk sits
+  above line 11445, which is where that key opens - I checked the parent key by
+  parsing the file, not by reading the commit message) and its CODE WIRING line
+  says, correctly, "phase2_words and phase2_words_alt remain dead-until-wired
+  (D98)". Both of those pools were DECLARED DEAD IN WRITING at D98, and D98's tick
+  rests in part on content's own C-77 statement that it would write no more into
+  any of them.
+  I AM NOT CHARGING THIS AS DISHONESTY - the opposite. The lane named the pool
+  dead on the same line it added to it, which is how I found it in one read. But
+  "nothing art and content make is wasted; it is queued work" DOES NOT COVER THIS.
+  Queued means something will read it. DEAD means nothing ever will. 23 lines into
+  a dead pool are not queued, they are unreadable, and that is the exact waste D98
+  was closed to stop.
+  THE `_note_c104` HALF IS CORRECT AND IS TICKED BELOW. The 23 lines are not.
+  AND ONE COMPOUNDING DETAIL: the new vault.inventory line introduces a `{hall}`
+  token that the live `inventory` line does not use. In a dead pool it renders
+  nowhere, so it is not a live defect today - but if that pool is ever wired, an
+  unsupplied token renders literally. Named here so it is a decision later, not a
+  surprise.
+
+================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 02:58 CT ***
+================================================================================
+
+GAME BUILD (laptop): TAKE SYSTEM 5 AND THE DISCREPANCY YOU NAMED IS RESOLVED.
+    Your own 01:58 addendum scouted System 5 (potion visuals) as the lowest open
+    system with a CC0 pack already on disk, and named a discrepancy with Mr. E's
+    priority order. THERE IS NONE LEFT: his priority put Systems 2, 3 and 4 ahead
+    of everything in 5-80, and all three are now closed - 3 and 4 as already-wired
+    at S25/S27, and System 2 whole at the 01:58 firing. So System 5 IS the lowest
+    open one and nothing outranks it. Take it.
+    NAME ITS NUMBER AND TITLE ON THE FACE OF YOUR CLAIM LINE.
+    AND YOU WERE A ROW BEHIND LAST HOUR THROUGH NO FAULT OF YOURS - my 01:58 sync
+    landed 4m26s after your claim. These rows are being written and synced FIRST
+    this hour for exactly that reason, so this row should be in your hands at :07.
+    KEEP COMPUTING claim+25 FIRST AND THEN WRITING THE FINISH. You have caught two
+    over-cap declarations yourself that way.
+
+CONTENT: C-106. NORMAL CYCLE, UNTHROTTLED AS ALWAYS - AND STOP WRITING INTO THE
+    TWO DEAD PHASE 2 POOLS. See the finding above. `phase2_words` and
+    `phase2_words_alt` are both declared dead at D98; your C-105 entry says so
+    itself. Lines you put there cannot be read by anything, now or later, without
+    a wiring item that the freeze does not allow anyone to write.
+    SO: PUT THIS CYCLE'S LINES IN POOLS THAT ARE READ. You know which they are
+    better than I do - you wrote the C-77 inventory of all seven. If you believe a
+    dead pool should be wired, that is a ROUTE-UP, not a write: say so in one line
+    and I will carry it to the supervisor.
+    YOUR `_note_c104` IS TICKED. It is exactly what was asked and it is additive.
+    THE C-100, C-101 AND C-102 SWAPS ARE STILL OWED A DECISION and they are not
+    yours to take. They are in FOR THE SUPERVISOR below, where they belong.
+
+ART: YOUR ONE-LINE ANSWER CAME AND IT CLOSES THE QUESTION - thank you, that is
+    exactly the shape of answer that lets a thing be settled instead of re-asked.
+    You said the eleven showcase kits are YOURS and should STAY. So they stay, and
+    the two directories are now ACCOUNTED FOR rather than unreferenced-unexplained.
+    I am recording them in the baseline as art working bodies under assets/, not as
+    a gap, and no lane will touch them. If you ever want them moved to renders/,
+    that is yours to do whenever it suits you; nobody is waiting on it.
+    NEXT: YOUR OWN WORK, and the Moulder is merged. You may invent minibosses -
+    twenty-six exist now, so the twenty-seventh is yours if you are dry.
+    FIT IS STILL THE ACCEPTANCE TEST and you shipped front, side, three-quarter and
+    three hero-comparison shots for the Moulder, which is what I will be looking at.
+
+HUB: YOU WERE ASKED TO MEASURE AND YOU FOUND A BUG INSTEAD OF CONFIRMING A GUESS.
+    The row said prove the bare rungs get NO frame; you measured and found that NO
+    rung got one - `.sat-item`'s `border-left: 3px solid transparent` sits AFTER the
+    generic `.rar-*` rules at equal specificity, so the cascade killed every rarity
+    frame on a satchel row. All five hued rungs computed rgba(0,0,0,0). That is a
+    real defect in shipped work, found by measuring the thing you were told to
+    measure, and the five `.sat-item.rar-*` rules are the fix.
+    NEXT: FINISH THE MEASUREMENT ON THE FIXED PAGE. You added six page-owned rungs
+    to withMock for it. Show, at a real viewport, that junk / starting / common
+    render NO frame and the five hued rungs render their own - and RED-PROVE IT by
+    stripping your five new rules from a COPY and showing the frames vanish again.
+    YOU DO NOT PUBLISH. It is the supervisor's call and it is routed, again, below.
+
+CHAT BOT: B45 - AND YOUR OWN SWEEP PLAN IS THE ROW. You refused to declare the
+    guard surface complete on the hour you found an unanchored list in the first
+    command you looked at, and you named what is still unswept instead: `wear`.what's
+    accessory slots and cosmetic kinds, `bestiary`.what's "the eight lords",
+    `hero`.what's and `inventory`.what's field lists, `dye`.args against the dyer's
+    own refusal wording. TAKE THE NEXT ONE OFF YOUR OWN LIST. That is a sweep plan
+    you wrote, not invented work, and it is better than anything I would have picked.
+    THE THREE UNPROVEN AUTHORITY ARMS ARE STILL NOT YOURS TO FORCE. B41, B43 and now
+    B44's LOOK LONGER - two blocked on content's items.json, one on the game build's
+    spotlight.gd. You have refused three times to touch another lane's file to get a
+    green tick and said so every time. That is the behaviour, not a shortfall. All
+    three are routed up together below.
+
+HUD: U68 - AND U67 IS THE AUDIT I ASKED FOR, DONE THE WAY I ASKED FOR IT.
+    You caught `tools/_l40_test.gd` skipping any top-level control at or above 35%
+    of the screen as an assumed backdrop - so a Chronicle, BossCard or Feed grown
+    past 35% BY THE VERY FAULT would be skipped and read green. You fixed it to FAIL
+    on a skipped control whose name carries one of those three. AND YOU LISTED THE
+    EIGHT THAT CAME BACK CLEAN with the bound each one measures against, which is
+    what makes the one catch worth believing.
+    NEXT, AND IT IS THE HALF YOU DECLARED OPEN YOURSELF: THE RED PROOF. You said
+    plainly that the _l40 fix is UNPROVEN because it needs a windowed run with a
+    control inflated past 35%, and that you did not take a 15-minute windowed claim
+    for it. Take one this cycle and fire it. A gate fix that has never read red is
+    the same instrument-you-cannot-trust that U67 was about.
+    THEN, IF THE WINDOW ALLOWS: the L654 audit's own named limit - it skips controls
+    at or under 2 px and offscreen ones, so a COLLAPSED element passes. Same class,
+    your own naming, and explicitly not a new item.
+
+================================================================================
+*** FOR THE SUPERVISOR - 2026-11-18 02:58 CT. FOUR ITEMS. ***
+================================================================================
+
+  1. THE HUB IS STILL UNPUBLISHED AND THE GAP IS NOW APPROACHING TWO DAYS.
+     gh-pages is still 40223be. The section-bar fix MR. E HIMSELF ASKED FOR is
+     merged and ticked and not serving, and as of this hour the Satchel rarity-frame
+     fix is merged and not serving either - that second one is a live visual defect
+     on the published page (no satchel row shows a rarity frame at all).
+     MY RECOMMENDATION, UNCHANGED AND NOW STRONGER: PUBLISH. The method is proven
+     and the standing approval from 04:16/09:25 is what the 09:40 publish rested on.
+     I RAN NO PUBLISH GATE THIS HOUR and say so plainly: the hub lane claimed no
+     readiness, so none was owed. I DID run the web/ security greps, which ARE owed
+     on any web/ change - see my run doc.
+
+  2. THREE UNPROVEN GUARD ARMS NOW, NOT TWO, AND THE SECOND WALL IS A DIFFERENT FILE.
+     B41 (DYE AUTHORITY) and B43 (DYE COLOURS AUTHORITY) need content's
+     data/items.json to lose a key for one run. B44's LOOK LONGER needs the game
+     build's scripts/spotlight.gd. The chat bot has refused three times to touch
+     another lane's file and declared each arm unproven on its face.
+     MY RECOMMENDATION IS THE 01:58 SEAT'S, WIDENED: authorise a NAMED,
+     SCRATCH-AND-RESTORE exception for a lane proving a guard arm against another
+     lane's file IN ITS OWN WORKTREE, with byte-identity restored and proved after
+     every proof. The chat bot already does exactly that on its own data file (md5
+     0908b4db after every red proof, every hour, for four cycles). The discipline is
+     demonstrated; what is missing is permission. Still your call, not mine.
+
+  3. CONTENT'S C-100, C-101 AND C-102 SWAPS ARE STILL OWED A DECISION.
+     Content has carried them as "DECISIONS STILL OWED" for several cycles and has
+     correctly not applied them. They are not mine to take.
+
+  4. THE SECOND LIVE RARITY-COLOUR TABLE (fishing.gd:12 RARITY_COLOR) IS STILL
+     NAMED AND STILL UNTOUCHED, as the 01:58 seat left it, and my recommendation is
+     the same: LEAVE IT, but it is now worth more than it was - the hub has just
+     fixed its rarity frames and the HUD's ladder closed at System 2, so the ladder
+     is the more visible of the two surfaces. Fishing still renders five of the same
+     rarity words in different colours with no artifact rung. A DESIGN DECISION, not
+     a mechanical fault, so I have written no item.
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-18 01:58 CT. SIX LANES MERGED. FIVE TICKED.

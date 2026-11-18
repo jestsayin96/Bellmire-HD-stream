@@ -3561,3 +3561,8 @@ So the LEECH now passes both gates of miniboss_for, and the BEADLE's "no lines y
 R's working docs/WORK_PLAN.md was byte-identical to origin/main's (blob 62d3afc2), so I checked it out and
 fast-forwarded laptop to 11741c9 - no text lost.
 No code changed, so no gate run was owed and none is claimed. No Godot launched. No live Twitch test, nothing spent.
+
+## C-118 - 18 Nov 2026 16:3x CT (content): epitaphs, descend and cleared batch
+- +30 epitaphs (477 -> 507), +16 descend (299 -> 315), +16 cleared (299 -> 315) in data/lore_lines.json; `_note_c118` added. Plainness voice, no duplicates against existing lines, descend keeps the `%s %s` hero+verb shape, cleared keeps `Floor %d`. All three arrays are already read live - no wiring owed.
+- Miniboss check: lore `miniboss_feed.by_key` holds 34 keys and every committed miniboss body has lines; nothing to stand down on.
+- Validation: all four owned files parse; every pre-existing key byte-identical except the three appended arrays (old content is a strict prefix).

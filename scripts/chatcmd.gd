@@ -713,7 +713,7 @@ static var _cmds: Dictionary = {}
 ## can. So every wear site now REGISTERS ITS TAG here as well as going loud, and any gate can
 ## ask ChatCmd.guard_faults() and fail on a non-empty answer. The loudness is unchanged and no
 ## published word, price or list is restated on this side - only the tag of the arm that fired.
-## B49: THE REST OF THE COUNT. B48 made TEN arms countable and left SIXTY-SEVEN loud but
+## B49: THE REST OF THE COUNT. B48 covered TEN `wear` SITES WITH SEVEN ARMS and left SIXTY-SEVEN loud but
 ## uncounted, and that is worse than none of them being counted: guard_faults() is the reading
 ## a gate trusts, so an empty array read as "clean" while any of the other sixty-seven arms was
 ## firing. A harness asking the count would have passed the live defect class B46 found - a
@@ -1769,6 +1769,74 @@ static func commands() -> Dictionary:
                 _guard_faults.append("WEAR %s MISSING" % we_tag)
                 push_error("COMMANDS_DATA WEAR %s MISSING: %s carries %d %s(s) `wear`.what never names - %s - so a whole slot of gear is for sale and nothing tells a viewer it exists, and `!wear off <slot>` takes it off a word they were never given" % [we_tag, we_src, we_miss.size(), we_word, we_miss])
                 printerr("COMMANDS_DATA WEAR %s MISSING - %d unpublished %s(s): %s" % [we_tag, we_miss.size(), we_word, we_miss])
+        # ---- B50: "THE EIGHT LORDS" - THE THIRD OF THE FOUR NUMERIC CLAIMS MY OWN LANE NAMED.
+        # B35 listed the four `what` claims whose authority is a number living in code and ranked
+        # them. `look` (B35) and `satchel` (B36) are done; this is the third, and B35's own note
+        # on it was INCOMPLETE rather than wrong. It called this "a COUNT over bosses.json, a
+        # data file, not a const". THERE ARE TWO CONSTS, AND THE DATA FILE AS WELL:
+        #   Bestiary.LESSER and Bestiary.GREATER (bestiary.gd:299-300) are the lords the game
+        #   actually RISES - four and four.
+        #   data/bosses.json `lesser` / `greater` are the CONTENT writer's rows for the same
+        #   lords, read here through Bestiary.bosses_raw() - the accessor the bestiary itself
+        #   uses, so the guard reads the authority in play instead of re-parsing a copy of it.
+        # So this is B36's SPLIT shape again and now across TWO OTHER LANES' files: the game
+        # build's consts and the content writer's rows can disagree with EACH OTHER before either
+        # disagrees with my sentence, and a row the writer adds with no const beside it is a lord
+        # the Bestiary will never rise. When they disagree there is no count to publish at all,
+        # and the guard says so rather than believing one of them. A bosses.json that cannot be
+        # read reads as ZERO rows here, which is a disagreement and is reported as the row count
+        # it is - not hidden behind the consts.
+        # AND THE CLAIM SITS IN MY OWN FILE TWICE. `bestiary`.what and `bestiary`.short both say
+        # "the eight lords", so those two can disagree with each other the way the armoury ladder
+        # could at B37 - !bestiary's one-line reply promising one number and docs/COMMANDS.md's
+        # long line another. That is the FIELDS path.
+        # IT IS A WORD, NOT A DIGIT, AND THAT IS WHY IT COULD DRIFT IN SILENCE. "eight" needs the
+        # number table `muster` needed; the digit reader B40 wrote for the flat prices finds
+        # nothing in this sentence and would report healthy on a ninth lord.
+        # FOUR PATHS. SPLIT is INDEPENDENT of the rest and does not share their elif - the two
+        # authorities disagreeing matters whatever my sentence says. ANCHOR stops the guard going
+        # blind; FIELDS and LORDS are the mismatches. Not fatal, the shape every guard above uses:
+        # push_error + printerr, the commands still answer, and a battery greps COMMANDS_DATA. No
+        # line here is the healthy reading.
+        var bl_d: Dictionary = (cmd_d.get("bestiary", {}) as Dictionary)
+        var bl_words: Dictionary = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                                   "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+                                   "eleven": 11, "twelve": 12}
+        var bl_anchor := " lords"
+        var bl_fields: Array[String] = ["what", "short"]
+        var bl_seen: Array[String] = []
+        var bl_said: Array[int] = []
+        for bl_f in bl_fields:
+            var bl_s: String = String(bl_d.get(bl_f, "")).to_lower()
+            if not bl_s.contains(bl_anchor):
+                continue
+            bl_seen.append(bl_f)
+            var bl_n: int = -1
+            for bl_w in bl_words:
+                if bl_s.contains("%s%s" % [String(bl_w), bl_anchor]):
+                    bl_n = int(bl_words[bl_w])
+                    break
+            bl_said.append(bl_n)
+        var bl_code: int = Bestiary.LESSER.size() + Bestiary.GREATER.size()
+        var bl_raw: Dictionary = Bestiary.bosses_raw()
+        var bl_rows: int = (bl_raw.get("lesser", []) as Array).size() \
+                        + (bl_raw.get("greater", []) as Array).size()
+        if bl_code != bl_rows:
+            _guard_faults.append("BESTIARY SPLIT")
+            push_error("COMMANDS_DATA BESTIARY SPLIT: the lords are declared TWICE and the two no longer agree - Bestiary.LESSER + Bestiary.GREATER rise %d lords and data/bosses.json `lesser` + `greater` carry %d rows, so a row and a const disagree about how many lords the deep holds and `bestiary` cannot be true of both" % [bl_code, bl_rows])
+            printerr("COMMANDS_DATA BESTIARY SPLIT - %d lords in code, %d rows in data/bosses.json; no single count exists to publish" % [bl_code, bl_rows])
+        if bl_seen.is_empty() or bl_said.has(-1):
+            _guard_faults.append("BESTIARY ANCHOR")
+            push_error("COMMANDS_DATA BESTIARY ANCHOR: `bestiary` no longer says \"<number> lords\" in words this guard knows (fields carrying the phrase: %s) - the published count of the lords that hold the deep can no longer be checked against Bestiary.LESSER + Bestiary.GREATER (%d)" % [bl_seen, bl_code])
+            printerr("COMMANDS_DATA BESTIARY ANCHOR - `bestiary` lost its \"<number> lords\" phrase; the lord count is now unchecked")
+        elif bl_said.size() == 2 and bl_said[0] != bl_said[1]:
+            _guard_faults.append("BESTIARY FIELDS")
+            push_error("COMMANDS_DATA BESTIARY FIELDS: `bestiary`.what publishes %d lords and `bestiary`.short publishes %d - my own two declarations disagree, so !bestiary answers one number and docs/COMMANDS.md prints the other" % [bl_said[0], bl_said[1]])
+            printerr("COMMANDS_DATA BESTIARY FIELDS - what %d, short %d" % [bl_said[0], bl_said[1]])
+        elif bl_said[0] != bl_code:
+            _guard_faults.append("BESTIARY LORDS")
+            push_error("COMMANDS_DATA BESTIARY LORDS: `bestiary` publishes %d lords and the game rises %d, read from Bestiary.LESSER + Bestiary.GREATER - docs/COMMANDS.md counts the deep's lords wrong and a viewer finds out by reaching the one that is not there" % [bl_said[0], bl_code])
+            printerr("COMMANDS_DATA BESTIARY LORDS - published %d, risen %d" % [bl_said[0], bl_code])
         _cmds = parsed
     return _cmds
 

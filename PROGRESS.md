@@ -8984,3 +8984,17 @@ GATE: _u58_contrast.gd now GATES the floor geometry (stripe top >= 17.0 measured
 LOOKED AT: renders/cycles/20261117_u61/rod_h120_before.png vs rod_h120_after.png (3x nearest). Before: a pale stripe runs through the upper half of the letters. After: letters clean on the rod, stripe a faint line under them. Also all_before/all_after.png.
 HONEST LIMIT: the 17.0 bound is measured at 1080p scale 1 off WORD_HI-coloured pixels (tolerance 0.05); at other resolutions px() scales both stripe and glyph, ratio held but only 1080p was captured. No rendered check at 125/150% UI scale.
 Lock: RUNNING 19:53:45 (declared 19:59) -> IDLE 19:56. Files: ui_theme.gd, hud_dock.gd, tools/_u58_contrast.gd, tools/_u61_stripe.gd. Not ticked by me.
+
+
+## U62 - the stripe clearance did NOT hold at 150%; anchored to the wordmark baseline (hud-ui)
+Row: the 19:58 HUD row - prove the U61 grain-stripe clearance at 100/125/150% UI scale, or find where it breaks.
+MEASURED (tools/_u62_scales.gd, windowed 1080p, ChronicleScroll on the cap floor at each scale, ink rows read off WORD_HI pixels):
+ 100%: cap 8  top_cy 11   stripe [17.00,18.60] ink bottom edge 17 -> clear
+ 125%: cap 10 top_cy 13.5 stripe [21.00,23.00] ink bottom edge 21 -> clear
+ 150%: cap 12 top_cy 17   stripe [26.00,28.40] ink bottom edge 27 -> OVERLAP 1.0 px (all four heights)
+CAUSE: ink bottom is the baseline = top_cy + 0.32*string_height(font_size px(17)); font size is rounded to an integer, so baseline/cap is 0.75 at 100/125% and 0.83 at 150%. The 0.75*cap RATIO was never a guarantee, it only happened to hold at two of three scales.
+CHANGED (hud_dock.gd only): new _wm_baseline(top_cy), used by BOTH the wordmark draw and _dowel; the top rod's stripe now starts at max(cy+0.75cap, baseline) and its height is clamped to the rod bottom (>=1px). Bottom rod unchanged. Answer to the question: yes, the bound had to become COMPUTED - and now it is, off the same function that places the glyphs.
+AFTER: 100% [17.72,19.00]/ink 17, 125% [21.82,23.50]/ink 21, 150% [27.24,29.00]/ink 27 - clear at all three, U62_SCALES OK bad=0. Stripe is slightly thinner (1.28/1.68/1.76 px) as the price.
+LOOKED AT: renders/cycles/20261117_u62/rod_s150_h150.png (before, files without 'after' in the name) vs rod_after_s150_h150.png. Differences is one pixel row; letters clean in both at this zoom; the numbers carry the proof, the picture confirms nothing else moved.
+HONEST LIMITS: stripe rows in the script are computed from the same formula the draw uses, only the ink is read off pixels. _u58_contrast.gd's old hard-coded 17.0 floor line was NOT rewired to _wm_baseline this cycle.
+Parse 0 errors. Files: hud_dock.gd, tools/_u62_scales.gd. Not ticked by me.

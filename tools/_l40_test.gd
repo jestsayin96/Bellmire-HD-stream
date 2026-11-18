@@ -80,6 +80,9 @@ func _audit(pct: int, full: bool) -> void:
 							items.append([str(k.name) + "/" + str(pc.name) + ":" + pc.get_class(), pr])
 				continue
 			var r := (k as Control).get_global_rect()
+			if r.size.x * r.size.y >= 0.35 * scr.x * scr.y and (str(k.name).contains("Chronicle") or str(k.name).contains("BossCard") or str(k.name).contains("Feed")):
+				# U67: the 35% skip is for backdrops; a NAMED HUD element that has grown past it is the fault, not a backdrop
+				print("FAIL named HUD element inflated past the backdrop skip @", tag, ": ", k.name, " ", r); _bad += 1
 			if r.size.x < 4.0 or r.size.y < 4.0 or r.size.x * r.size.y >= 0.35 * scr.x * scr.y:
 				continue
 			items.append([str(k.name) + ":" + k.get_class(), r])

@@ -11433,6 +11433,75 @@
           "The vinegar is cooling. The plates stay as they are.",
           "He made his living from what rust and copper do. Now it is done."
         ]
+      },
+      "moulder": {
+        "arrive": [
+          "It took a copy of one of you.",
+          "A flask of sand on the floor, and a crucible hung over it.",
+          "The sand is pressed into the shape of somebody. Somebody in here.",
+          "He pours without looking up. He has poured a good many.",
+          "The pour is red, and it is the only light in the room.",
+          "A row of castings hangs on pegs along the box. None of them are finished.",
+          "The mould is warm. Someone has been using it all morning.",
+          "He taps the box with a rammer, twice, the way you check a loaf.",
+          "Whatever he makes, he makes to order. Today's order is you."
+        ],
+        "fall": [
+          "The Moulder is down. The pour runs out across the sand.",
+          "The crucible tips and empties. The sand drinks it.",
+          "The copy stands a moment longer than he does. Then it does not.",
+          "The box cracks along its seam. Nothing comes out of it.",
+          "The rammer drops. Nobody is making your likeness now.",
+          "A cast, half set, on the floor. It has your reach. It does not move.",
+          "The Moulder is down. The room cools by degrees.",
+          "The last pour went on the floor."
+        ]
+      },
+      "ratcatcher": {
+        "arrive": [
+          "Paid by the tail.",
+          "A willow cage on his hip. Five tails hang in it already.",
+          "He counts what is in the cage before he looks at you.",
+          "A long pole with an iron butt, and a lamp held over the tally.",
+          "Whatever else dies in here goes in his cage. He keeps count.",
+          "He is not here for you. He is here for what you leave behind.",
+          "The cage has twelve bays. He is in no hurry to fill them.",
+          "Rats, mostly. It has been a good season.",
+          "Leave the small ones standing. He goes hungry in an empty room."
+        ],
+        "fall": [
+          "The Ratcatcher is down. The cage hits the floor.",
+          "The tally lamp gutters. Nobody is counting now.",
+          "The pole rolls off across the flags.",
+          "The willow splits at the lashings. Out it all comes.",
+          "He kept a good tally. It is over.",
+          "The Ratcatcher is down. The room is quiet for the first time.",
+          "One more tail for the cage, and nobody left to be paid for it.",
+          "Paid up. The lamp goes out last."
+        ]
+      },
+      "drover": {
+        "arrive": [
+          "He puts a yoke on one of you.",
+          "An ash beam across his shoulders, and two iron bows hanging off it.",
+          "One bow hangs open. That is not an accident.",
+          "He talks to nobody. He drives.",
+          "A chain coiled at his feet, link through link.",
+          "A goad in his fist, cut this week. Everything else on him is old.",
+          "The collar clicks shut on one of you. The chain goes tight.",
+          "He has driven oxen forty years. You are not the first team.",
+          "Hit him, and the one in the collar pays half."
+        ],
+        "fall": [
+          "The Drover is down. The chain goes slack.",
+          "The collar falls open and rings on the floor.",
+          "He drops the goad. He does not look at it.",
+          "The yoke comes off the beam, and it is only iron.",
+          "Cut the chain and the yoke comes free. Now nobody wears it.",
+          "The ash beam rolls off his shoulders and lies still.",
+          "The Drover is down. The team is your own again.",
+          "Both bows hang empty."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -11440,7 +11509,8 @@
     "_note_c96": "C-96: jointer, tanner, reeve, tapster and pressman (eighteenth-to-twenty-second art-lane minibosses, bodies that landed after D96 ticked) get arrive and fall lines: 9 arrive and 8 fall each (85 lines). act and broken omitted on purpose, same reason as C-86/C-87: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own. Four of the arrive lines are the art lane's own feed lines, kept word for word (It is pinned together / pegging up a fresh hide / here for the lord's share / Something in here is drinking). {name} not used. Nothing spawns these five bodies yet; that is engine work and is not changed here.",
     "_note_c97": "C-97: the strickler (twenty-third art-lane miniboss, treasury, a market officer's measure) gets 9 arrive and 8 fall lines, the same counts as the other twenty-two. Its trade is weights and measures: it levels the party down to the weakest hero, so the lines are about the stick, the beam and the measure, never about fairness. One arrive line is the art lane's own feed line, kept word for word (Something in here is taking the heap off). act and broken omitted on purpose, same reason as C-86/C-87/C-96. {name} not used. Nothing spawns this body yet; that is engine work and is not changed here.",
     "_note_c98": "C-98: the dyer (twenty-fourth art-lane miniboss, workshop, the first body chosen for colour) gets 9 arrive and 8 fall lines, the same counts as the other twenty-three. Its trade is the dye-vat: woad, madder, weld, a paddle, cloths hung to dry. The lines are about the vat, the cloths and the stain, never about the mark as a mechanic. One arrive line is the art lane's own feed line, kept word for word (Something back there just marked one of you). act and broken omitted on purpose, same reason as C-86/C-87/C-96/C-97. {name} not used. Nothing spawns this body yet; that is engine work and is not changed here.",
-    "_note_c99": "C-99: the greener (twenty-fifth art-lane miniboss, workshop, the first body to hold the green hues, with the trade on the body) gets 9 arrive and 8 fall lines, the same counts as the other nineteen bodies on that shape. Its trade is verdigris: copper plates over vinegar, a scraper, a brazier, a man green to the elbow. The mechanic (every blow eats the weapon a little, a hero can stop and scrape it clean) is flavour in the lines only; it is NOT built and nothing here builds it. One arrive line is the art lane's own feed line, kept word for word (Your edge came back green.). act and broken omitted on purpose, same reason as C-86/C-87/C-96/C-97/C-98. {name} not used. Nothing spawns this body yet; that is engine work and is not changed here."
+    "_note_c99": "C-99: the greener (twenty-fifth art-lane miniboss, workshop, the first body to hold the green hues, with the trade on the body) gets 9 arrive and 8 fall lines, the same counts as the other nineteen bodies on that shape. Its trade is verdigris: copper plates over vinegar, a scraper, a brazier, a man green to the elbow. The mechanic (every blow eats the weapon a little, a hero can stop and scrape it clean) is flavour in the lines only; it is NOT built and nothing here builds it. One arrive line is the art lane's own feed line, kept word for word (Your edge came back green.). act and broken omitted on purpose, same reason as C-86/C-87/C-96/C-97/C-98. {name} not used. Nothing spawns this body yet; that is engine work and is not changed here.",
+    "_note_c107": "C-107: feed lines for the three newest art-lane minibosses, Moulder, Ratcatcher and Drover (9 arrive and 8 fall each, 51 lines). by_key now holds 28 keys. Same shape as the other 25; arrive and fall only, {name} not used. Each arrive pool carries one line that says the mechanic plainly and the rest are scene. No mechanic is built from these lines; they describe what art drew."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

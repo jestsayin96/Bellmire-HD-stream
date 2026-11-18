@@ -3545,3 +3545,19 @@ camera and the Rammer + Onpile - the frame proves the count landed, but it does 
 GATES: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2182; TWITCH_PARSE OK (8 checks);
 TOWNWALK in_solid=0/18237 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 No live Twitch test, nothing spent. docs/WORK_PLAN.md in R carries the lead's hand-written 13:58 block - NOT staged by me.
+
+## D-cycle - S40: NO BUILD ITEM OWED - HOUSEKEEPING ONLY, AND THE BLOCK I READ WAS ALREADY SUPERSEDED. 2026-11-18T15:08-06:00 (game build)
+Row: at 15:08 R held the 13:58 block, whose game-build row (the honest-pair shot) S39 had already delivered. By 15:1x
+origin/main carried the lead's 15:1x block: S39 TICKED, honest-pair ask CLOSED, "nothing of yours is held", the block
+is mine from 16:07. Its row named two housekeeping facts and NO new item, so none was invented.
+(a) scripts/delve.gd.bak_s39 - untracked (git ls-files: no match), S39 is committed, so it was redundant. REMOVED
+    Windows-side; os.path.exists now False. HONEST SCALE: 278 other *.bak_* files remain in scripts/, all made under
+    this lane's own "back up big files" rule. Same inert-but-globbable shape; I removed only the one named. Whether to
+    sweep the rest (or move backups out of scripts/) is the lead's call, not one I take on my own in five minutes.
+(b) R's git identity change ("Claude Bellmire HD") - noted, nothing to do.
+CONFIRMED, as the standing interlock asks: leech, beadle and rammer each carry MB_FIT (0.95 / 1.2 / 1.12), a shrine
+(leech, beadle) or flooded (rammer) row in THEME_MINIBOSS_MORE, AND content lines in miniboss_feed.by_key (2 / 4 / 4).
+So the LEECH now passes both gates of miniboss_for, and the BEADLE's "no lines yet" in my prompt is stale - it has 4.
+R's working docs/WORK_PLAN.md was byte-identical to origin/main's (blob 62d3afc2), so I checked it out and
+fast-forwarded laptop to 11741c9 - no text lost.
+No code changed, so no gate run was owed and none is claimed. No Godot launched. No live Twitch test, nothing spent.

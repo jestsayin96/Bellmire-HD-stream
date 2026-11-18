@@ -9913,3 +9913,10 @@ SCRIPT ERRORs at gear.gd:104 (hero_body.gd:30 -> adventurers.gd:77); not a HUD f
 - Looked at: no picture, nothing changed in a game file. Only PROGRESS.md.
 - Standing note for the owner of fishing.gd parse_fish(): it ends the block at the FIRST "}" after the const (U74b observation, unchanged).
 - Not ticked by me.
+
+## U76 (18 Nov 10:52 CT) - parse_fish / parse_py END-FINDER HARDENED (team lead's row 2, a defect in my own U71/U74b guard)
+Lock: read R's working RUN_LOCK, last line was chat bot B52 IDLE 10:49:10, no Godot alive; claimed 10:54, released 10:57:30 (cap 15 min, well inside :07).
+Change (tools/_u71_rarity_guard.gd): new block_end() finds the matching brace by DEPTH, skipping "strings" and # comments, returns -1 if never closed; parse_fish and parse_py both use it (the old find("}") / find("\n}") stopped at the first inner brace). An unclosed table now reads as 0 rungs and FAILS loud via the size check instead of going quietly green.
+Red proofs added: U76_BRACE 3/3 - a "}" in a comment plus a nested dict inside RARITY_COLOR, a nested dict value at the top, and an unterminated block; the old finder would read 1 rung on the first. Result: U71_FISH 11/11, U71_GUARD OK 9/9 fails=0.
+Headless parse: no Parse Error. The 'instantiate on null' SCRIPT ERRORs are the known gear.gd / thin .godot import cache issue (game build fixed it in S35), not HUD.
+No picture: guard-only change, no UI drawn. Next firing: L74-style under-load check only if the team lead assigns; otherwise stand down.

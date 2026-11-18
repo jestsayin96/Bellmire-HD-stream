@@ -1,0 +1,66 @@
+{
+ "ok": true,
+ "key": "moulder",
+ "views": {
+  "front": {
+   "moved_px": 3620,
+   "lit_px": 284638,
+   "frame_px": 686000,
+   "src_threshold": 0.25,
+   "mean_rgb": [
+    0.7918,
+    0.3621,
+    0.1599
+   ],
+   "hue_deg": 19.2,
+   "sat": 0.7981,
+   "val": 0.7918,
+   "sat_median": 0.8088,
+   "share_in_frame_top1pct": 0.0,
+   "reads_as": "MOLTEN"
+  },
+  "side": {
+   "moved_px": 1468,
+   "lit_px": 225819,
+   "frame_px": 686000,
+   "src_threshold": 0.25,
+   "mean_rgb": [
+    0.7869,
+    0.3619,
+    0.164
+   ],
+   "hue_deg": 19.1,
+   "sat": 0.7916,
+   "val": 0.7869,
+   "sat_median": 0.8088,
+   "share_in_frame_top1pct": 0.0,
+   "reads_as": "MOLTEN"
+  },
+  "three_quarter": {
+   "moved_px": 1431,
+   "lit_px": 225967,
+   "frame_px": 686000,
+   "src_threshold": 0.25,
+   "mean_rgb": [
+    0.7845,
+    0.3616,
+    0.1656
+   ],
+   "hue_deg": 19.0,
+   "sat": 0.7889,
+   "val": 0.7845,
+   "sat_median": 0.8088,
+   "share_in_frame_top1pct": 0.0,
+   "reads_as": "MOLTEN"
+  }
+ },
+ "errors": [],
+ "eps": 0.02,
+ "src": 0.25,
+ "emission_nodes_zeroed": [
+  "moulder_glow/Emission/Strength",
+  "moulder_glow/Emission/Color",
+  "moulder_glow_ov/Emission/Strength",
+  "moulder_glow_ov/Emission/Color"
+ ]
+}

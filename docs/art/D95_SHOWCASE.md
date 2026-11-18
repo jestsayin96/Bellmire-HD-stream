@@ -8,7 +8,7 @@ to waste money on slop."*
 Sheets: `renders/art/d95/_overview.png` (all ten, front) and `_sheet_<key>.png` (four
 views each). Raw views in `renders/art/d95/<key>/{front,side,back,top}.png`.
 Machine-readable: `renders/art/d95/_report.json`. Kits in
-`assets/characters/bellmire/showcase/<key>_kit.glb`.
+`renders/art/d95/kits/<key>_kit.glb`.
 
 ## This is also D94's art half
 `gear.gd dress_cosmetics()` renders an accessory from the SLOT alone, so all 55 rings are
@@ -128,7 +128,7 @@ view is zoomed to flatter a piece - one ortho height (3.30 m), one camera centre
 and one lighting rig for all ten.
 
 ## Handed to the GAME BUILD worker
-1. `assets/characters/bellmire/showcase/<key>_kit.glb` - rest-space kits, one object per
+1. `renders/art/d95/kits/<key>_kit.glb` - rest-space kits, one object per
    material per part, **origin on the bone it hangs from**, same contract as `e3po_kit.glb`.
 2. The carried weapon and shield are NOT in those kits. `_report.json` -> `models` gives
    the path of the model already in the repo, per hero. Parent it to `handslot.r` /
@@ -144,3 +144,35 @@ All generated gear geometry is original vertex maths through `lordlib`. The bodi
 KayKit Adventurers 2.0 and the weapons/shields are KayKit Adventurers 1.0 and the KayKit
 dungeon weapon bits - all CC0, all already committed in this repo with their own
 `LICENSE.txt`, read and rendered but never re-exported. No Quaternius Bestiary / QAL.
+
+---
+
+## 2026-11-18 - THE ELEVEN UNREFERENCED FILES: ANSWERED, AND MOVED
+
+The supervisor asked the art lane twice (00:58 and 01:58 CT) whether
+`assets/characters/bellmire/e3po_kit.glb` and
+`assets/characters/bellmire/showcase/` (ten class kits) - **eleven files that
+nothing in `scripts/`, `web/` or `data/` references** - are art's, and whether
+the answer is a move rather than a wiring.
+
+**YES, THEY ARE MINE, AND YES, A MOVE.** They are rest-space ART WORKING
+BODIES: the kit halves `showcasegen.py` and `e3pogen.py` export so the fit
+renders can be rebuilt. They were never game content and nothing should ever
+load them at runtime - the game build's D95 half stood its own ten up in Godot
+from `addons/` without them. They were filed under `assets/`, where Godot
+imports everything it finds, which is why they also carried eleven `.import`
+siblings nobody wanted.
+
+DONE THIS RUN:
+
+- `assets/characters/bellmire/showcase/*_kit.glb` -> **`renders/art/d95/kits/`**
+- `assets/characters/bellmire/e3po_kit.glb` -> **`renders/art/d85/`**
+- the eleven `.glb.import` siblings deleted; `renders/` carries a `.gdignore`,
+  so Godot will not regenerate them there
+- `tools/art/showcasegen.py` and `tools/art/e3pogen.py` now export to the new
+  paths, so the next run does not recreate the problem
+- `assets/characters/bellmire/` removed; `assets/characters/` now holds only
+  `kaykit_adv2`
+
+**NOTHING IN ANOTHER LANE'S FILES CHANGED AND NO WIRING IS OWED.** The
+dead-asset audit should drop from eleven unreferenced files here to zero.

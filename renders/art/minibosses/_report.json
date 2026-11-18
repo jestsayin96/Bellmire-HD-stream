@@ -1163,11 +1163,77 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "moulder": {
+   "title": "The Moulder",
+   "theme": "firepit",
+   "idea": "IT TAKES YOUR SHAPE - it presses one of your heroes into its sand bed and pours, and what stands up out of the box fights with that hero's reach and that hero's swing; the party is not choosing how to kill it but which of them it is allowed to read, so the hero who leads is the hero they will have to fight, and the mould can be broken before the metal sets",
+   "wear": 0.26,
+   "feed_line": "It took a copy of one of you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1971,
+   "size": [
+    2.34,
+    1.99,
+    2.9
+   ],
+   "footprint_span": 2.34,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.112208222661332,
+    "ortho": 3.519352912902832,
+    "clip": [
+     8.025308609008789,
+     20.817302703857422
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "ratcatcher": {
+   "title": "The Ratcatcher",
+   "theme": "crypt",
+   "idea": "IT IS PAID BY THE TAIL - everything else that dies in this room goes into the cage on its hip and it is stronger for every bay it fills, so the party is not choosing how to kill it but whether to clear the room at all; leave the lesser things standing and you fight the whole floor at once, clear them and you hand this one the fight, and the bays already filled can be cut open to give them back",
+   "wear": 0.68,
+   "feed_line": "It is paid by the tail.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1510,
+   "size": [
+    3.73,
+    1.33,
+    2.62
+   ],
+   "footprint_span": 3.73,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3757776317424626,
+    "ortho": 3.540572166442871,
+    "clip": [
+     8.724635124206543,
+     23.211870193481445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 75,
+  "files": 81,
   "failures": []
  }
 }

@@ -376,7 +376,13 @@ def main():
         kit, manifest = build_kit(anchors, measure, 0.45, arm, "", posed=False)
         for ob in list(meshes) + [arm]:
             bpy.data.objects.remove(ob, do_unlink=True)
-        gdir = os.path.join(repo, "assets", "characters", "bellmire")
+        # 18 Nov: these kits are ART WORKING BODIES, not game content, and
+        # nothing in scripts/, web/ or data/ has ever referenced them. They
+        # lived under assets/ where Godot imports everything it finds, which
+        # is what put them on the supervisor's unreferenced-asset list two
+        # hours running. renders/ carries a .gdignore, so this is also the
+        # directory that stops Godot generating .import siblings for them.
+        gdir = os.path.join(repo, "renders", "art", "d85")
         os.makedirs(gdir, exist_ok=True)
         ok, msg = export_glb(kit, os.path.join(gdir, "e3po_kit.glb"))
         report["export"] = dict(ok=ok, msg=msg, objects=[o.name for o in kit],

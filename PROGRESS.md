@@ -11150,6 +11150,97 @@ held open by run 1's Godot process. Untracked, inert, nothing loads it, named he
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
 
+## B58 - THE B56 LESSON IS NOW A MECHANISM, AND I RED-PROVED THE MECHANISM INSTEAD OF TRUSTING IT (chat bot, 2026-11-18 16:4x CT)
+
+No item was owed me: the team lead ticked B57 at 16:0x, said my queue was empty and offered row 5 -
+take my own B56 lesson and make it mechanical. I took it.
+
+THE DEFECT, IN MY OWN WORDS FROM B56: a probe that dies before its quit() leaves a Godot process
+behind, and "Godot closed" must be VERIFIED BY TASKLIST, not assumed from the gate returning. At
+14:5x my PID 6472 sat alive into the HUD's window, which the check-by-process rule reads as
+"someone is working". I was not working. No other lane should ever stand down on a ghost of mine.
+
+THE MECHANISM. A probe WRAPPER that cannot report a gate from the gate alone. For every run, on
+BOTH paths - the pipe returning and the pipe timing out - it:
+  1. records the set of Godot PIDs present BEFORE launch,
+  2. runs the gate,
+  3. diffs tasklist against that set,
+  4. taskkills every new PID,
+  5. re-checks tasklist, and
+  6. sets closed_verified_by_tasklist ONLY when the residual set is empty.
+The verification is unconditional. There is no path through the wrapper that writes a closed claim
+without a tasklist read taken after the gate. The exact code is reproduced at the end of this cycle
+so a future firing of this lane copies it rather than re-deriving it - I own three files and none of
+them is a harness, so PROGRESS.md is where the mechanism can honestly live.
+
+DEMONSTRATED ON REAL WORK, FOUR GATES, 33 s, ALL GREEN:
+  PARSE         rc 0, 23.3 s, 0 parse errors
+  L14_TEST      L14_TEST OK (22 checks)
+  TWITCH_PARSE  TWITCH_PARSE OK (8 checks)
+  COMMANDS_DOC  COMMANDS_DOC OK wrote 27 commands - a TRUE no-op: docs/COMMANDS.md md5 9a80bfd9
+                before and after, the generator rewrote its own bytes exactly.
+  Ghosts on all four: zero. closed_verified_by_tasklist: true on all four.
+
+A CORRECTION TO MY OWN PROMPT, WHICH I CANNOT EDIT: it says the generator prints "wrote 26
+commands". IT PRINTS 27. The data carries 27 commands now. The generator wins, as the prompt itself
+instructs; the stale figure is the prompt's, and I am writing it down rather than filing an item.
+
+AND THE PART THAT MATTERS MORE THAN THE FOUR PASSES: AN UNTRIGGERED GUARD IS NOT A PROVEN GUARD.
+Zero ghosts in four gates exercises the mechanism and proves nothing about its kill path. So I made
+a ghost on purpose: a scratch probe that deliberately never calls quit(). The gate hung, the pipe
+timed out, and the wrapper found Godot PID 11308 BY TASKLIST, taskkilled it (SUCCESS), re-checked,
+and the residual set was empty. That is the same shape as 6472 - caught by instrument this time
+instead of by hindsight twenty minutes later. This is the third time this lane has learned that the
+instrument needs red-proving before the result does: B53's emulation caught three wrong probes,
+B55's probe read an unpopulated array, and now this.
+
+A SMALL OPERATIONAL FACT FOR EVERY LANE THAT CLEANS UP SCRATCH: `rm` is BLOCKED from the Linux
+device bridge inside the connected folders ("Operation not permitted"). Scratch removal has to go
+through the Windows side. My first cleanup attempt failed for exactly that reason and I checked
+rather than reporting it gone.
+
+FOR THE GAME BUILD LANE - AN OBSERVATION, NOT A FAULT AND NOT A REQUEST: the headless PARSE gate
+brings twitch_eventsub.gd fully live. Its output this run: bot token valid (bellmirebro), joined
+#jestsayin96, EventSub subscribed 7 of 7, subs pane seeded. Join only - no text posted, no bits, no
+channel or account state changed. I name it because any lane running the parse gate is connecting
+the bot to Mr. E's real chat, and that should be a known property of the gate rather than a
+surprise.
+
+OWNED FILES: UNTOUCHED THIS CYCLE AND VERIFIED BYTE-IDENTICAL.
+  scripts/chatcmd.gd    72be1e686522e8904077623e0169c963 (grep '^func handle(' = 1)
+  data/commands.json    0ed191404157221abd8a184cc580dfa5
+  docs/COMMANDS.md      9a80bfd98049e77abddab6d1d182c524
+Scratch gone Windows-side (_b58_hang.gd, temp log); `*b58*` in the worktree returns nothing. Godot
+VERIFIED closed by tasklist, no process of any lane. Claim 16:46:40, cap 17:11, declared 16:51,
+IDLE 16:49:30 - no crossing into the HUD's :52.
+
+THE WRAPPER, VERBATIM, FOR THE NEXT FIRING OF THIS LANE:
+
+    def tasklist_godot():
+        out = subprocess.run('tasklist /FO CSV /NH /FI '
+                             '"IMAGENAME eq Godot_v4.7.2-stable_win64_console.exe"',
+                             shell=True, capture_output=True, text=True).stdout
+        return re.findall(r'^"[^"]+","(\d+)"', out, re.M)
+
+    def run_gate(name, args, timeout):
+        before = set(tasklist_godot())
+        p = subprocess.Popen([GODOT] + args, cwd=W6, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, text=True, errors="replace")
+        try:
+            out = p.communicate(timeout=timeout)[0]; timed_out = False
+        except subprocess.TimeoutExpired:
+            p.kill(); out = (p.communicate()[0] or ""); timed_out = True
+        time.sleep(1.0)
+        ghosts = sorted(set(tasklist_godot()) - before)
+        for g in ghosts:
+            subprocess.run("taskkill /F /PID %s" % g, shell=True, capture_output=True, text=True)
+        time.sleep(1.0)
+        final = sorted(set(tasklist_godot()) - before)
+        return {"gate": name, "rc": p.returncode, "timed_out": timed_out,
+                "ghost_pids_after_exit": ghosts, "residual_after_kill": final,
+                "closed_verified_by_tasklist": final == [], "tail": out[-1400:]}
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
 ## hub 18 Nov 2026 15:39 CT - row 4 answered: sheet_overlap.js STAYS under web/; web/ unchanged; NOT READY TO PUBLISH
 TAKE THIS NEXT row: HUB (:37) row 4 of the 15:1x block (does web/tools/sheet_overlap.js belong under web/).
 ANSWER: it stays - web/tools/ already ships gen_d20.py, make_item_icons.py, og.html to gh-pages, so it is

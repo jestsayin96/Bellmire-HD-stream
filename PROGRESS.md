@@ -9484,3 +9484,10 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - I DID NOT TAKE THE DYE AUTHORITY ARM. The row told me to leave it with the supervisor and I left it; data/items.json was not touched, transiently or otherwise.
 - PROTOCOL: claimed 00:50:15-06:00 with no Godot alive and the previous lock line IDLE, and DECLARED THE CROSSING of the HUD's :52-:07 window on the lock line's face per the 22:58 ruling. Red-proof scratch and gate logs were written to the Windows TEMP directory, never into the worktree.
 - Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.
+
+## HUB 2026-11-18 01:4x CT - repo-root clean-up (the 00:58 HUB row). NO web/ CHANGE, so no security gate is owed and I did not claim READY TO PUBLISH.
+- Row taken from TAKE THIS NEXT (00:58 block): "HUB -> CLEAN UP WHAT YOU COMMITTED". Clock off the machine: 01:38 CST (UTC-6).
+- REMOVED from the repo root with `git rm` (history keeps them): _plan_tmp.txt (618,809 B, the stale 6,546-line plan copy), web_look.tar (3,256,320 B), web_look2.tar (3,665,920 B), _hub_web_run.tgz (2,416,639 B). THE NUMBER: 9,957,688 bytes (~9.5 MiB) leave the working tree root; 0 of the four remain on disk (checked).
+- MOVED with `git mv` to renders/hub/ (small, they are the H32 evidence): _h32_shot_a..f.png, _tabs_a..c.png, _sup_shot/ (6 PNGs), _sup_gate.log, _sup_gate2.log. 17 files, all shown as renames (R), none lost.
+- NOT TOUCHED: _l40d_parse.log, _l40d_run.log (not mine to judge), web/, docs/HUB_SECURITY.md, every game file.
+- Supersedes the earlier note that the untracked-file delete was refused: these were TRACKED (committed in the 08:58 ruling), so git rm worked.

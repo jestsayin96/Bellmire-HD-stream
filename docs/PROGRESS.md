@@ -3582,3 +3582,36 @@ No code changed. No live Twitch test, nothing redeemed, 0 bits. Scratch log remo
 - +30 epitaphs (477 -> 507), +16 descend (299 -> 315), +16 cleared (299 -> 315) in data/lore_lines.json; `_note_c118` added. Plainness voice, no duplicates against existing lines, descend keeps the `%s %s` hero+verb shape, cleared keeps `Floor %d`. All three arrays are already read live - no wiring owed.
 - Miniboss check: lore `miniboss_feed.by_key` holds 34 keys and every committed miniboss body has lines; nothing to stand down on.
 - Validation: all four owned files parse; every pre-existing key byte-identical except the three appended arrays (old content is a strict prefix).
+
+## D-cycle - S42: AUDIT OF MY OWN PARSE GATE - IT RUNS THE LIVE GAME, AND YES, IT COULD POST. NO CODE CHANGED. 2026-11-18T17:08-06:00 (game build)
+Row 1 of the 17:0x block (B58's W-LIVE observation). Read from source on merged laptop (origin/main bc10836); no Godot launched - the
+answer is in the code, and launching the gate to "measure" it would itself connect the bot again.
+WHY IT CONNECTS: the parse gate is `--headless --path . --quit-after 300` with NO `--script`, so it runs the MAIN SCENE. town.gd:342 starts
+the live wiring whenever `--script` is absent - TwitchChat (anonymous justinfan IRC, read-only JOIN #jestsayin96), TwitchEventSub
+(validate both tokens, ensure_rewards, EventSub websocket + 7 subs, _fetch_subs) and SnapshotPublisher. Nothing checks headless. So:
+NOT INTENDED as a gate property - it is the game's normal start, and the gate inherits it because it is the cheapest way to compile
+every script. Harnesses (`--script`) are already excluded; the parse gate is the one gate that is not.
+COULD IT POST? YES - NOT BY ITSELF, BUT ON ANY INCOMING TRAFFIC DURING ITS ~20 s:
+  (a) CHAT: a viewer's !command read by TwitchChat -> chatcmd -> twitch_reply -> _tick_chat -> _send_chat POSTs /chat/messages as
+      bellmirebro. dry_run_chat is false outside harnesses. If the real game is also up, the viewer gets TWO answers.
+  (b) REDEMPTIONS: the gate's EventSub session receives the same channel-point events as the live game's and calls _settle (PATCH
+      FULFILLED/CANCELED) on them - a gate instance can settle a REAL viewer's redemption, racing the live game. This is the worst one.
+  (c) FIRST-TIMER / hero_moment replies use the REAL viewers file (only `--script` redirects viewers_path), so a welcome sent by the
+      gate is also marked spent for the live game.
+  (d) REWARDS: ensure_rewards POSTs new rewards only when bootstrapping (no saved reward ids, or rewards_resync=true). Steady state
+      it only GETs. Safe today; would CREATE rewards on a machine whose user:// reward file is missing.
+  (e) HUB: SnapshotPublisher's first beat is FIRST=20 s of process time; whether 300 headless frames reach it is UNMEASURED. If they do,
+      the gate publishes a snapshot of a 300-frame town to the live hub.
+  (f) a 401 on validate makes the gate refresh and REWRITE the token file - disk state, not chat.
+  Any OTHER gate: every tool that builds TwitchEventSub/TwitchChat checked by file. _d702/_d70/_t1_test/_t1_shot/_t3/_t5_roll set
+  offline+dry_run_chat; _d63_clip/_fest/_shot never call setup(), so no token loads and _send_hold_reason holds "no bot token";
+  _twitch_parse sets TwitchChat.enabled=false. NONE CAN POST. ONE IS LIVE BY DESIGN: _t1_live.gd (dry_run_chat, but it opens a real
+  EventSub session - so it shares hazard (b) - and FORCES a refresh of both tokens). It is not in the commit battery.
+  _townwalk.gd/_delve_test.gd/_offfloor.gd run under --script, so town.gd never starts the live nodes.
+COST OF PARSING WITHOUT JOINING: CLEAN AND SMALL. One env guard in town.gd:342 beside the existing JESTS_NO_SFX precedent
+(e.g. JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and SnapshotPublisher), set by every lane's parse wrapper. Or key it on
+DisplayServer.get_name()=="headless" - the live game is never headless - which needs no wrapper change but also silently disables
+Twitch for any future headless live use. Parse coverage is unchanged either way: the scripts still compile because town.gd names
+the classes. NOT DONE - the row says report, and W-LIVE behaviour is not mine to change unasked. My recommendation is the env guard.
+UNTIL THEN: do not run the parse gate while Mr. E is live.
+Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). Lock claim 17:08:35, cap 17:33, released early.

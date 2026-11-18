@@ -9033,3 +9033,113 @@ NO LIVE TWITCH TEST THIS RUN: nothing redeemed, nothing cheered, 0 bits, no chat
 bellmirebro or anyone, no reward, no channel setting touched.
 Logs (_b29, _b29b) deleted. Godot closed. NEEDED FROM MR. E: nothing.
 
+
+================================================================================
+ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
+ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
+================================================================================
+
+*** 1. THE ELEVEN FILES. THEY ARE MINE, AND THE ANSWER IS NOT A MOVE. ***
+
+assets/characters/bellmire/e3po_kit.glb and assets/characters/bellmire/showcase/
+(ten class kits) are NOT working bodies left loose under assets/. They are
+DELIVERABLES THE ART LANE DELIBERATELY EXPORTED FOR THE GAME BUILD TO WIRE, and
+both the generator and the hand-off doc say so in writing:
+
+  - tools/art/showcasegen.py:381 writes exactly that directory, :636 exports each
+    <key>_kit.glb into it. tools/art/e3pogen.py:379-381 does the same for e3po_kit.
+  - docs/art/D95_SHOWCASE.md, section "Handed to the GAME BUILD worker", item 1:
+    "assets/characters/bellmire/showcase/<key>_kit.glb - rest-space kits, one
+    object per material per part, origin on the bone it hangs from, SAME CONTRACT
+    AS e3po_kit.glb." docs/art/D85_E3PO.md:23 names e3po_kit.glb the same way.
+
+SO THEY ARE UNREFERENCED FOR A REASON THAT IS NEITHER A STRAY NOR A GAP IN THEM:
+the wiring was never assigned. D95's game-build half stood its own ten up from the
+LIVE hero path (roster.gd:39 ADV2 = assets/characters/kaykit_adv2/hero_) and never
+consumed the kits. The supervisor's GUARD 1 last hour found the only `showcase`
+hits in scripts/ are four COMMENTS in gear.gd (:1328, :1342, :1346, :1379) about
+tools/art/showcase.py - that reading is right, and the conclusion drawn from it
+("the likeliest reading is a move") is the part I am correcting.
+
+MY RECOMMENDATION: LEAVE THEM WHERE THEY ARE. assets/ is where a kit the game is
+meant to load belongs; renders/ is for evidence, and these are not evidence. They
+should stop being reported as dead assets and be carried as WIRING OWED instead -
+the same shape as the minibosses before D96. If the supervisor would rather see
+them under renders/ until a wiring item exists, say so and I will move them in one
+pass; I am not moving eleven committed files on my own reading of a baseline.
+NOTE FOR WHOEVER WIRES THEM: all eleven now have .glb.import siblings in this
+worktree (untracked, Godot-generated), so they load.
+
+*** 2. THE MOULDER - IT TAKES YOUR SHAPE. 26th miniboss. ***
+
+IT PRESSES ONE OF YOUR HEROES INTO ITS SAND BED AND POURS, and what stands up out
+of the box fights with that hero's reach and that hero's swing. The party is not
+choosing how to kill it but which of them it is allowed to read.
+
+WHAT I CHECKED FIRST, MEASURED NOT REMEMBERED: the plan says twenty minibosses
+exist. IT IS TWENTY-FIVE - counted off assets/monsters/minibosses/ (25 base .glb
+plus 11 _chibi). I parsed all 25 idea strings out of CANON and grepped the register
+doc for reflect/return/copy: ZERO. The spent classes are summoning, self-defence,
+positioning, your gear, perception, scaling, targeting, the fallen, splitting
+itself and healing the room. NOTHING MAKES THE PARTY FIGHT ITSELF - that is the
+empty class, and it is the one where the threat is authored by the players.
+
+SEVEN PASSES, ONE CHANGE EACH, EVERY ONE DRIVEN BY A PICTURE. The one that mattered
+came from the ON-BODY render and nothing else could have found it: THE HERO IS A
+CHIBI AND MY CAST WAS NOT. A creature whose whole idea is IT TAKES YOUR SHAPE had
+taken a shape that is not the player's. The blank check, the border check and the
+occlusion test all passed it. The cast is now the hero's own measured proportions
+(head block 55.3% of height, tools/art/_moulder_chibi_probe.py off the posed
+Knight.glb) at the hero's own measured height, 2.45 m.
+
+THE POUR: authored saturation 0.895 was rendering at 0.349 - tan, in all three
+views. The A/B shows saturation is MONOTONE IN EMISSION STRENGTH (1.60 -> 0.349,
+1.45 -> 0.510, 1.30 -> 0.577, 1.10 -> 0.648, 0.80 -> 0.792): an emissive pushed up
+the view transform's shoulder buys brightness by spending colour. 0.80 ships and
+measures 0.787-0.798 at hue 19 across all three views.
+
+TWO INSTRUMENT FAULTS IN MY OWN HARNESS, BOTH CAUGHT BECAUSE THE NUMBER WAS
+IMPOSSIBLE, NOT BECAUSE THE CODE LOOKED WRONG:
+  (a) the read measured what the pour LIGHTS rather than the pour - 181,928 px of
+      686,000 for four 2 cm tubes. Split into lit_px and moved_px.
+  (b) the A/B differenced a SIDE view against a FRONT view, because render_views
+      leaves the camera on its last view. All six arms came back identical to three
+      decimals. A SWEEP IN WHICH THE INDEPENDENT VARIABLE CHANGES NOTHING IS NOT A
+      FLAT RESULT, IT IS AN INSTRUMENT MEASURING SOMETHING ELSE.
+AND A GUARD I WROTE WAS THE WRONG GUARD: share_in_frame_top1pct asks whether the
+pour is brightest by LUMINANCE, which is weighted 0.72 toward green, so a deep
+red-orange scores zero against pale sand however hot it is. It fell 0.92 -> 0.00
+while val went UP. Had I obeyed it I would have shipped the tan. Both numbers stay
+in the report with that sentence beside them.
+
+WEAR 0.26 IS DERIVED, NOT CHOSEN: the area-weighted mean of the old man (0.80) and
+the remade mould furniture and castings (0.10), summed off the merged mesh that
+ships - man 7.73, new 26.88 -> 0.2564.
+
+FIT, ON A REAL POSED BODY: VERDICT GREEN. ratio 1.18, pair span 4.20, fits_frame
+true, 3 of 3 proving views, 0 blind views, 0 unproved cells, blank check 3 files 0
+failures, 0 frame clips. Generator 4 meshes, 1,971 faces, span 2.34 m against the
+11.0 m three-cell corridor - CORRIDOR-SAFE, not room-locked.
+
+TEN FAULTS LISTED IN docs/art/MINIBOSSES.md AND THE FIRST IS REAL: the side view is
+the weakest of the three and the egg is not cured - at 55% head, from a camera that
+cannot see either arm's spread, the cast is head-dominated. Pass 7 broke the outline
+with a forward arm; it did not fix the proportion. AND ONE THING NO INSTRUMENT HERE
+COULD CATCH: the occlusion test passed all three views at pass 5 while the crucible
+was visually welded to the cast's head, because it asks whether the HERO can see the
+CREATURE, never whether one part of a creature has eaten another.
+
+FOR THE GAME BUILD LANE - I TOUCHED NO .gd OUTSIDE tools/art/:
+  - bestiary.gd: assets/monsters/minibosses/moulder.glb, STATIC - a `model` path and
+    NO `anims` entry. h = 2.90, art's measured number, do not re-derive it.
+  - theme `firepit` for the set-piece roll (joins the Stoker and the Tapster).
+  - CORRIDOR-SAFE at 2.34 m, no spawn gate needed.
+  - The mechanic needs NO hero-clone at its cheapest honest version: mark the hero
+    that lands the first blow; after a fixed pour, spawn ONE minion carrying that
+    hero's weapon reach and damage with the Moulder's own hp; breaking the flask
+    before the pour completes cancels it. The art carries the read either way.
+  - STILL OWED, UNCHANGED: moulder.glb has no .glb.import sibling, same as
+    snarer_chibi.glb - a Godot run generates it. Not blocking.
+
+NEEDED FROM MR. E: nothing. FOR THE SUPERVISOR: one call only - whether the eleven
+showcase kits stay under assets/ (my recommendation) or move.

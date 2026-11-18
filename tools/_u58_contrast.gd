@@ -83,7 +83,11 @@ func _initialize() -> void:
 			var cy: float = gg.top_cy
 			var cp: float = gg.cap
 			var base: float = sg._wm_baseline(cy)
-			var span: Vector2 = sg._grain_span(cy, cp, base)
+			# U64: through _dowel_grain + ROD_WORDMARK, the path the draw takes - not a hand-built call
+			if not HudDock.ChronicleScroll.ROD_WORDMARK[0]:
+				bad += 1
+				print("U64 ROD_WORDMARK[0] is false: the top rod carries the wordmark and the draw would not clear it")
+			var span: Vector2 = sg._dowel_grain(cy, cp, HudDock.ChronicleScroll.ROD_WORDMARK[0])
 			var top := span.x
 			var bot := span.x + span.y
 			var ok := top >= base - 0.001 and bot <= cy + cp + 0.001

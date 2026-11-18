@@ -9008,3 +9008,16 @@ VERDICT LINES: GREEN  U63_STRIPE OK 12 cells / U59_CONTRAST OK 49 colours walked
 PIXELS, WINDOWED, 1920x1080 (U62, re-run on the new bytes): U62_SCALES OK bad=0 - stripe_top-ink_bot 0.72 / 0.82 / 0.24 px at 100/125/150%, same as U62.
 Parse 0 errors. Files: scripts/hud_dock.gd, tools/_u58_contrast.gd, PROGRESS.md. Not ticked by me.
 HONEST LIMITS: the gate's red proof moves the stripe in _grain_span; it does NOT catch _dowel being edited to stop passing ink_bot (U62 measures pixels and would). The gate runs headless at res_k 0.6, so its absolute pixel values differ from U62's windowed ones; the relation it asserts does not.
+
+
+## U64 - the stripe gate now goes through the draw's own path (HUD, 2026-11-17 22:5x CT)
+Row: close the hole U63 named - editing _dowel to stop passing ink_bot left the gate green.
+Change: scripts/hud_dock.gd - _dowel(cy, cap, has_wordmark) no longer takes an ink_bot argument; new _dowel_grain(cy, cap, has_wordmark)
+resolves _wm_baseline itself and is what _dowel draws from; new const ROD_WORDMARK [true,false] read by both draw calls.
+tools/_u58_contrast.gd gates through _dowel_grain + ROD_WORDMARK[0] (and fails if the top rod stops carrying the wordmark).
+Verdicts: parse 0 errors; U63_STRIPE OK 12 cells; U59_CONTRAST OK 49/16. RED PROVED TWICE, file restored md5-identical each time:
+(1) _dowel_grain ignoring the baseline -> U63_STRIPE FAIL CROSSES, rc=1; (2) ROD_WORDMARK[0]=false -> U64 FAIL, rc=1. Re-run green.
+Windowed U62 re-run, renders/cycles/20261117_u62/all_u64_*.png looked at at 100% and 150%: wordmark clear of the stripe.
+HONEST LIMIT: U62's pixel measure still reads h=96 at 100% as clear=false (stripe top 0.73 px below ink bottom, under its 1 px floor) -
+sub-pixel antialiasing, unreachable at 1080p; the arithmetic gate cannot see ink rows, U62 owns that fault.
+STILL UNCAUGHT: a wrong ROD_WORDMARK[1] (bottom rod true) - harmless (stripe only moves down).

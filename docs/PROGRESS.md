@@ -3466,3 +3466,18 @@ DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR;
 TOWNWALK in_solid=0/17026 (0.000%) raid_in_solid=0/6121 (0.000%) PASS.
 No live Twitch test, nothing spent. Backups scripts/delve.gd.bak_s36, tools/_s34_ways.gd.bak_s36 (untracked).
 Logs build/_s36_gates.log, build/_s36_order.log, build/_s36_townwalk.log.
+## HUB 18 Nov 2026 11:5x CT - hero-sheet overlap sweep at phone width (TAKE THIS NEXT row 5): ZERO overlaps, ZERO clips, web/ unchanged
+Row taken: the 10:58 block's HUB row - run the sigil-badge overlap method across the rest of the hero sheet below ~900 px.
+Method: web/tools/sheet_overlap.js (new). Headless Chromium, snapshot stubbed to [], ?mock=sheets and ?mock=crowd with ?open=all,
+every leaf box inside each .charsheet compared pairwise by LINE BOXES (getClientRects) at 320/360/390/600/768/900 px.
+NUMBER: ?mock=sheets 4 sheets x 6 widths = 0 overlapping pairs, 0 clipped; ?mock=crowd 7 sheets x 6 widths = 0 pairs, 0 clipped.
+RED PROOF: appended three rules to a COPY of style.css (negative margin on .sname, .stats children, .satchelfoot flex): the same
+instrument went to 126 overlapping pairs at 320-600 px and 156 at 768-900 px, max 906 px^2 (crest vs name). It is not blind.
+A FALSE POSITIVE I CAUGHT IN MY OWN FIRST RUN: using getBoundingClientRect reported 12 pairs (max 2253 px^2) in .satchelfoot - the
+wrapped inline spans "Counter would pay / 525 / gold for the priced items". Line boxes show they do not overlap; the first
+version of the method was wrong, not the page. Switched to getClientRects.
+CAVEATS, NAMED: item icons (web/icons, 530 files) were not staged, so <img> icons are missing in my render - their sizes come
+from CSS, but icon-specific overlap is unmeasured. The fallen-hero sheet (4th in ?mock=sheets) sits in a hidden tab and measured
+0 x 0, so it is NOT covered. Document-level scrollWidth is 501 at 320-390 px because the rail strip scrolls sideways inside
+itself; html/body are overflow:hidden and body.scrollWidth equals the viewport - not a page scroll.
+No CSS change was warranted, so none was made. Not claiming READY TO PUBLISH. Git author on this worktree is still "Claude Art Lane" (set in the shared repo config).

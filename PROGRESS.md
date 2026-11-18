@@ -1,3 +1,141 @@
+## ART 2026-11-18 13:53 CT - THE CREW FIGURE MEASURED AGAINST THE HERO AND AGAINST ITS OWN FAMILY, AND THE BLENDER BRIDGE IS DOWN SO NOTHING HERE IS COMMITTED
+
+WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED. The 11:5x block's ART row
+asked for the Rammer's write-up. IT IS ALREADY DELIVERED - by this lane's own
+12:39 entry and the 12:46 correction above it - so I did not write it twice. I
+counted the set rather than trusting the row: assets/monsters/minibosses holds
+45 .glb, 34 of them non-chibi, rammer.glb among them; renders/art/minibosses/
+_report.json carries 45 entries, ok true, errors [], blank check 102 files and
+0 failures. I could not read origin/main this run (see the bridge fault at the
+bottom), so the newest plan block I have is the 11:5x one in this worktree.
+
+SO I TOOK THE ONE THING THAT ROW LEFT OPEN AND CALLED AN EYE JUDGEMENT. The
+team lead wrote: the operator "is blockier and flatter-faceted than the chibi
+knight - its helmet is roughly a quarter of its height against the knight's
+near-two-fifths", said plainly it was not a charge, and left the decision to me.
+An eye judgement is not a number and this lane has a rule about numbers that
+cannot move, so I built one that moves: tools/art/_crew_prop.py.
+
+THE INSTRUMENT, AND THE THREE TIMES IT CAUGHT ME BEFORE IT AGREED WITH ANYONE.
+  1. My first head rule took the narrowest row in the upper half as the neck. It
+     found the CROWN TAPER instead, and returned 0.048 for BOTH figures - the
+     identical number is what gave it away, and the knight control band caught
+     it. A dome narrows at the top; the neck is the pinch BELOW the head's
+     widest row, not above it.
+  2. Rewritten, the rule then refused to apply to the operator at all: its
+     widest row and its head's widest row were the same row, because THE ARM IS
+     RAISED TO THE ROPE and fuses with the head in silhouette. That refusal was
+     the instrument being honest. I restricted the body-widest search to the
+     lower 55% and CONTROLLED the change - the knight's number must not move,
+     and it did not (0.483 before and after). But the operator's 0.361 from that
+     path is NOT a head fraction: the "neck" it finds is the waist. It is in the
+     JSON labelled as not-a-head, and I am not shipping it as one.
+  3. So the answering reading is a DEPTH-BUFFERED one: rasterise the figure
+     through one orthographic camera with a z-buffer, record which material won
+     each pixel, and ask how far down the head material is still VISIBLE. That
+     is the viewer's question and it lets the renderer do the occlusion - a bbox
+     cannot know that the knight's head mesh runs down inside its own collar.
+     Its first run went RED too: the operator's BOOTS are the same dark material
+     as its helmet, so the "head" reached the floor and the guard said so. The
+     group now keeps only the top cluster of that column and REFUSES if there is
+     no real vertical gap.
+  4. The cross-check between the two methods failed on the knight at a 0.06
+     tolerance, and THAT FAILURE WAS MINE. The neck rule finds a PINCH; the
+     visible-head rule finds the LOWEST VISIBLE HEAD PIXEL, which on a helmed
+     figure is the throat piece below the pinch. Different landmarks. The check
+     now asks only that the visible head reach at or below the pinch and not by
+     more than 0.12, and says so in the file.
+
+RED PROOF, because a green that cannot go red is not a pass. Two deliberate
+perturbations, both of which MUST fail, run every time: an empty head column
+(x_split pushed past the model) and the knight's BODY labelled as its head. Both
+come back RED. If either ever comes back green the run is RED on that alone.
+
+WHAT IT RETURNS - renders/art/minibosses/rammer/_crew_prop.json, verdict GREEN,
+errors []:
+  visible head, chibi knight    0.550 of its own height
+  visible head, crew operator   0.261 of its own height      ratio 2.11
+  neck pinch, chibi knight      0.483  (second method, agrees within 0.067)
+  faces per unit of height      knight 1876.3   operator 609.1     3.08x
+  mean face area                knight 0.00333  operator 0.00507   1.52x
+THE TEAM LEAD'S EYE WAS RIGHT IN DIRECTION AND HIS QUARTER WAS EXACT. The
+operator reads at 0.26, a quarter. The knight is nearer A HALF than two-fifths -
+0.55 by the visible read, 0.48 by the pinch - so the gap he saw is if anything
+WIDER than he said. "Flatter-faceted" is also real and is now a number: three
+times fewer faces per unit of height, facets half again as large.
+
+AND THEN THE QUESTION THAT ACTUALLY DECIDES IT, WHICH IS NOT THE KNIGHT. The
+operator is not a hero and was never meant to be one. The question is whether it
+is an OUTLIER IN ITS OWN FAMILY, so the instrument surveys all 45 bodies on the
+same measure, with no per-body heuristic that could pick favourites:
+  median faces per unit of height, all 45 bodies   1289.0
+  the whole Rammer                                  793.8, rank 5 of 45
+  below it: loader 582.1, beadle 646.5, bellman 701.3, stoker 710.6
+IT IS AT THE SPARSE END AND IT IS NOT ALONE THERE. The four bodies below it are
+the other big structural pieces. A machine with a tripod and a block has fewer
+faces per metre than a figure, and that is the geometry of the thing, not a
+slip. CAVEAT I OWE: that survey number is the WHOLE body, frame included, so it
+is not a like-for-like reading of the crew figure alone. The crew figure alone,
+at 609.1, is the sparsest humanoid I have ever stood beside a hero.
+
+MY DECISION: THE CREW FIGURE DOES NOT WANT A PROPORTION PASS. Bellmire's first
+art rule is that things look like what they are FOR, and this one is for hauling
+a block up a frame and letting it go. An adult rigger at adult proportions beside
+a chibi hero reads as a person doing a job; giving it a hero's head would make
+the party's own language say "this is one of us" about a thing that is not. The
+head fraction is a true difference between a hero and a crew figure, not a fault
+in the crew figure. I am recording the numbers so the next seat can overrule me
+on evidence rather than on memory.
+
+THE FACING, BECAUSE THE BEADLE TAUGHT THIS HOUSE TO ASK. tools/art/_crew_face.py
+counts the near-white goggle pixels the viewer actually sees inside the
+operator's head box in the shipped renders: FRONT 153 px of 5,811 opaque, BACK
+28 px of 5,280. Delta 125, reads_as_facing true, verdict GREEN. AND I LOOKED: the
+front shows two pale lenses over a dark mask band, the back shows a plain dome
+and a pale collar. The 28 on the back is that collar catching light, not a face.
+The Beadle fault does not repeat on the crew figure.
+
+THE FIT PROOF - I LOOKED AT ALL THREE ON-BODY VIEWS PLUS TWO CROPS, AND HERE IS
+EVERY FAULT I CAN SEE. No new render was possible this run, so these are the
+shipped hero_front.png, hero_side.png and hero_back.png at
+renders/art/minibosses/rammer/, which is the same body that is on origin/art.
+  - SIDE VIEW, the worst of them: the raised fist sits ON the helmet's
+    silhouette edge. Hand and head read as one mass at stream distance.
+  - SIDE VIEW: one goggle lens lands exactly on the head's outline, so it reads
+    as a notch bitten out of the dome rather than as a lens.
+  - FRONT: the rope ends AT the fist with no tail below the grip - it reads as
+    welded to the hand rather than gripped and running on.
+  - FRONT: the tripod's right leg crosses the operator's left shin. It is an
+    overlap, not a clip - the shading separates them - but at small size the
+    figure's near leg is cut.
+  - No float, no gap, no bad anchor: both boots meet the floor plane, the fist
+    meets the rope, the frame's three feet and the block at its foot all sit.
+BLANK AND BORDER: no new render, so there is no new blank-or-border check to
+report, and I am not carrying the old verdict forward as if it were one. The
+register's standing numbers for this body are 3 of 3 proving views, 0 blind,
+blank check 3 files 0 failures.
+
+NOTHING FOR THE GAME BUILD LANE IS NEW THIS RUN. No .gd was touched and nothing
+here needs wiring. The one standing item is unchanged and is not mine to close:
+rammer.glb, moulder.glb and snarer_chibi.glb have no .glb.import sibling, and a
+Godot run generates them.
+
+*** THE FAULT OF THIS RUN, AND IT IS NOT A CODE FAULT: THE BLENDER BRIDGE IS
+*** DOWN, SO NOTHING ABOVE IS COMMITTED OR PUSHED.
+Three calls timed out at 80 s, including a no-op that only returned a constant,
+and the fourth returned "Cannot connect to Blender at localhost:9876". That
+bridge is the only path this lane has to git, to push, to Blender and to Godot,
+so this run could not commit, could not read origin/main, and could not render.
+EVERYTHING THIS ENTRY DESCRIBES IS IN THE WORKTREE AND IN NO COMMIT:
+  tools/art/_crew_prop.py, tools/art/_crew_face.py,
+  renders/art/minibosses/rammer/_crew_prop.json, and this entry.
+The house rule is that a lane's worktree is not its branch, and I am breaking it
+by force rather than by choice. NOTHING IS BLOCKED BY IT - no other lane is
+waiting on an instrument - but the next art firing should commit these four
+files before it starts anything new. MR. E: Blender is not running on cruzader,
+or its MCP addon server is stopped. Starting it restores git and rendering for
+this lane.
+
 ## ART 2026-11-18 12:46 CT - CORRECTION TO MY OWN 12:39 ENTRY: THE ATTRIBUTION WAS ARITHMETIC, THE INSTRUMENT SAYS SOMETHING HARDER
 
 I pushed a342039 with a sentence in it that I had not earned. The 12:39 entry

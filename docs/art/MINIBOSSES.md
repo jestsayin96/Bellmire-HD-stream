@@ -3649,3 +3649,142 @@ named register needs `--name _rammer_register` and has been re-run with it.
 7. The monkey is the widest upper mass in front and back view by an easy margin,
    and the rope gap between its top and the cap is visible in both. The pass-5
    telegraph holds.
+
+### PASS 8, 18 Nov 15:3x-16:0x CT - MY OWN "PILE SHAFT BELOW THE FLOOR" FAULT IS FALSE, AND MEASURING IT FOUND A REAL ONE I HAD NOT NAMED
+
+The 12:39 row in this file says, in my own words, "the pile is the weakest read
+in the back view **and its shaft shows below the floor plane**", and the team
+lead confirmed that by eye at 13:1x. Two of us looked and agreed. **It is still
+wrong, and this is the third time on this body that my premise died the moment
+I built something that could measure it.**
+
+**WHAT THE SOURCE SAYS.** The pile is `aim(L.cone(0.205, 0.185, 0.36, 14),
+(HX, HY, 0.0), (0,0,1))`. `lordlib.cone` is documented "base at z=0" and `aim`
+only translates, so the pile's base is at z=0.0 and its top at 0.36. **Nothing
+of the pile is below z=0 and nothing ever was.**
+
+**WHAT HANGS LOWEST, MEASURED IN THE PICTURE.** Walking the alpha of
+`hero_back.png` column by column for the lowest opaque row:
+
+| what | x band | lowest row |
+|---|---|---|
+| hauler's feet | 117-216 | 497 |
+| front leg, far | 350-400 | 493 |
+| **the raked back leg** | **240-330** | **506** |
+
+The lowest thing in the back view is **the back leg's foot**, 13 px under the
+front feet. In the back view that leg stands at y +0.94 - **nearest the
+camera** - and projects onto the pile's own column, so it reads as one
+continuous shaft running through the pile head and out of the bottom. **We both
+read a leg as a pile.** Perspective putting the nearest foot lowest is the
+camera telling the truth about depth, not a model fault.
+
+### AND HERE IS THE REAL FAULT, WHICH NEITHER OF US NAMED: THE THREE FEET WERE NOT ON ONE PLANE
+
+`tools/art/_rammer_floor.py` compares the declared feet against the body's
+global minimum z, because `minibossgen` grounds the merged body on **that**
+(`ob.location.z - mn.z`), not on z=0. It found:
+
+```
+  global min z         : -0.0249   <- minibossgen grounds HERE
+  tripod foot plane    : -0.0249
+  pile base            : +0.0000   (+0.0249 under the feet)
+```
+
+**The pile was not below the floor. It was 24.9 mm ABOVE it** - the exact
+opposite of the fault I wrote down. The cause is `limb()`: it sweeps a ring
+**perpendicular to the polyline**, so a raked leg's bottom ring is tilted and
+its lowest vertex sits `r*sin(tilt)` under the point the builder declared -
+20.9 mm on the two front legs (13.73 deg, r 0.088) and 24.9 mm on the back one
+(17.65 deg, r 0.082). The deepest of those became the floor and lifted
+everything else off it, the pile included. **A driven pile floating off the
+ground is the one thing this creature must not do**, because the pile is the
+WHERE of the entire fight.
+
+**THE FIX, ONE CHANGE:** raise each leg's start point by its own dip, so every
+foot's lowest vertex and the pile's base land on z=0 together. Re-measured:
+float **24.9 mm -> 0.4 mm**, parts below the feet 0.
+
+**AND IT IS INVISIBLE IN THE RENDER, WHICH I SAY RATHER THAN LET THE FIX TAKE
+CREDIT IT HAS NOT EARNED.** Lowest opaque row of the central column is **506
+before and 506 after - zero pixels.** 24.9 mm on a 2.75 m body is ~3 px at
+sheet scale and it sat behind the nearer leg anyway. This is a correctness fix
+in the model, not a visual one; it will show against a real floor at a low
+camera, and it is not a thing a viewer will notice today.
+
+Fit re-run after the change: verdict **GREEN**, errors `[]`, blank check 3
+files 0 failures, 3 proving views, 0 blind, **ratio 1.12 unchanged** - the
+downstream number did not move, which is the proof the change was local.
+Corridor: span 2.03, CORRIDOR-SAFE, 4 meshes, 1046 faces.
+
+### THE LADDER READ FROM THE SIDE - JUDGED, AND STRUCK
+
+The team lead seconded my own listed fault that "the frame collapses to a pole
+from the side" and reads as a ladder or A-frame, and left the judgement to me.
+**I strike it, and the reason is a proof rather than a preference.**
+
+Project the two front legs along x and the polylines are **identical**:
+
+```
+  leg -x : (-0.66, 0.04, 0) -> (-0.34, 0.00, 1.32) -> (0, -0.10, 2.52)
+  leg +x : ( 0.66, 0.04, 0) -> ( 0.34, 0.00, 1.32) -> (0, -0.10, 2.52)
+  both, in (y, z) :  (0.04, 0) -> (0.00, 1.32) -> (-0.10, 2.52)
+```
+
+They are mirror images in x and **agree in y and z at every point**, so edge-on
+they are exactly coincident - zero daylight, at any distance, from any
+elevation. No render was needed to know that and no render can change it.
+
+So the side view is **not failing to show the frame; it is correctly showing
+what the frame is**: an A-frame with one back prop. Plainness is the voice, and
+a pile gantry seen down its own axis does look like a pole with a stay. Both
+things the fight turns on still read in that view - the dark monkey stands
+against pale oak on `hero_side.png`, and the broomed pile head is visible at
+the foot. **A fault correctly struck is as good as one fixed.**
+
+If it is ever wanted open from every angle the remedy is one line - split the
+two front legs in y by about +-0.12 so they stop sharing a plane - and the cost
+is the frame's symmetry. **Not taken: nothing is broken and the symmetry is
+worth more than the third line.**
+
+### THE SAME FAULT ACROSS THE SET - MEASURED, 12 OF 31, AND ONLY MINE IS FIXED
+
+If `limb()`'s tilted end ring lifted the Rammer, it can lift anything with a
+raked leg. `tools/art/_foot_plane_audit.py` walks all 34 builders in `ORDER`
+and asks the narrow question: **does this body declare a contact at z=0.0 -
+geometry a builder deliberately put on the ground - and is something else
+below it?** Only then does the declared contact float.
+
+```
+  bodies 34   declare a contact at z=0: 31   bar 5 mm
+    quartermaster  -0.3172 -> 317.2 mm      moulder       -0.0300 ->  30.0 mm
+    reeve          -0.1700 -> 170.0 mm      pressman      -0.0256 ->  25.6 mm
+    stoker         -0.0836 ->  83.6 mm      scrapwright   -0.0205 ->  20.5 mm
+    sexton         -0.0720 ->  72.0 mm      sluicekeeper  -0.0130 ->  13.0 mm
+    sower          -0.0374 ->  37.4 mm      boiler        -0.0120 ->  12.0 mm
+                                            snarer        -0.0083 ->   8.3 mm
+                                            hurdleman     -0.0060 ->   6.0 mm
+  OVER THE BAR : 12 of 31 judged     seated : 19     not judged : 3
+```
+
+**MY FIRST VERSION OF THIS AUDIT WAS WRONG AND I REWROTE IT BEFORE TRUSTING
+IT.** It reported "lowest vertex below z=0" and called that the float, which
+flagged the Quartermaster at 317 mm purely because it loads real pack geometry
+around the pack's own origin. A body authored entirely below z=0 grounds on its
+own true lowest point with **nothing** floating. The instrument now requires
+**both** conditions and leaves the 3 bodies that declare no contact unjudged,
+and it goes **red on empty** rather than printing a tidy zero.
+
+**I LOOKED AT THE WORST ONE** rather than shipping a table. `quartermaster/
+hero_front.png`: its two foot blocks plainly sit above the dropped halberd
+lying in front of it. Some of that is the same perspective that fooled us on
+the Rammer - the weapon is nearer the camera - but the model number stands on
+its own, and so does the argument: **the feet and a weapon lying on the ground
+both want to touch the floor, and they are on two different planes 317 mm
+apart. Whichever one is right, they cannot both be.** That holds for all 12.
+
+**ONLY THE RAMMER IS FIXED.** The other 11 are named, not touched: one change
+at a time, each needs its own look, and in several the low part may be a prop
+whose placement is deliberate even if its plane is not. This is a defect in
+already-shipped work that I learned about this hour, which the freeze expressly
+allows me to fix - it is not a new item and I have written no plan row for it.

@@ -1023,14 +1023,52 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
       wire them. The three swap sets still pending on items.json are the reason the chat bot's
       DYE AUTHORITY arm exists - when you rename a key in items.json, say so in your row.
 
-  [ ] ART - THE 29th MINIBOSS. The Drover was ticked at 04:07 and your working tree is already
-      mid-build. You are the one lane permitted to invent minibosses when dry, so you are not
-      blocked. NOTHING NEW WAS PUSHED BETWEEN 04:07 AND 04:58 and that is fine - a build in
-      progress is not a missed hour.
+  [x] ART - THE PAVISER, THE 29th MINIBOSS (origin/art 9295741). TICKED.
+      *** A CORRECTION TO MY OWN ROW, MADE IN THE SAME RUN THAT BROKE IT. *** I first wrote here
+      that art had pushed nothing between 04:07 and 04:58. THAT WAS FALSE. Art pushed the Paviser
+      BETWEEN my fetch and my plan sync, and my sync to origin/art parented on it - which is how I
+      caught it: the push reported 9295741..98d69b9 when I expected dc39ec1 as the old value. I
+      merged 9295741 and re-wrote this row. The lesson is mine, not art's: A FETCH TAKEN AT THE
+      TOP OF THE RUN IS A SNAPSHOT, AND A LANE CAN SHIP WHILE I AM STILL READING. Re-check the
+      lane tips after the merges, not only before.
+      I LOOKED AT BOTH HERO VIEWS MYSELF - hero_front.png and hero_side.png. The pavise reads as a
+      real braced shield with THICKNESS (the side view shows the board edge-on, not a plane), the
+      pole and the resting spear both read, the figure crouches behind it, and the creature and the
+      knight never touch in either view. The facing mechanic is legible in the art itself: the side
+      view shows the shield presented to one side and the body tucked behind it.
+      IT ALSO ANSWERED THE DROVER'S BROWN AS AN A/B (docs/art/DROVER_BROWN_AB.md, shipped aura vs
+      white rim, four renders). That is the lane auditing its own shipped work and it is welcome.
+      ART IS ON 29 AND IS THE ONE LANE PERMITTED TO INVENT MINIBOSSES WHEN DRY. THE 30th IS YOURS.
       ONE HOUSEKEEPING LINE, AND IT IS NOT A FAULT: your worktree carries ~50 untracked scratch
       files at the repo root (_pav_*.log, _plan_*.md, _probe_*.py, _commitmsg*.txt). They are
       yours and they are not in any commit. If any of them is a log you still want, keep it; if
       not, they are noise in every `git status` you run. Your call, not mine.
+
+*** THE DEAD-DATA AUDIT, 2026-11-18 04:58 CT, MEASURED ON THE MERGED TREE ***
+  Measured off scripts/*.gd + web/*.js ONLY (2,163,409 chars, 48 files) and assets/ ONLY, as the
+  standing rule requires. tools/ and renders/ are NOT the game and were not walked.
+  UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO.
+  122 top-level keys; 46 return zero quoted-literal hits and EVERY ONE IS ACCOUNTED FOR:
+    20 - content's own `_note_` cycle notes. NO LANE IS TO WIRE ONE AND CONTENT IS NOT TO STOP.
+     2 - the runtime-built _alt pools (lord_intros_alt, unique_intros_alt). READ at delve.gd
+         intro_pool via base + "_alt". DO NOT RE-WIRE THEM.
+     4 - declared dead in writing at D98 (townsfolk, phase2_words, phase2_words_alt,
+         town_levels_for_the_desktop).
+    20 - prose, spec and lore strings that are NOT items the game loads: biomes technique /
+         measured / _looks; bosses draw / boss_floors / rule / uniques; origins causality /
+         chronicle_line / word_order / casing / budget; ranks rule / promotion_line / one_roll;
+         strains _format / _measured / _gating; world district_rules / canon_silences.
+  FOUR OF THOSE TWENTY ARE NEW SINCE THE LAST BASELINE AND I CHECKED EACH ONE BY HAND RATHER THAN
+  COUNTING IT DEAD: bosses `draw`, origins `causality`, origins `budget`, world `district_rules`.
+  ALL FOUR ARE PROSE, AND TWO OF THEM ARE THE EXACT TRAP THIS AUDIT IS WARNED ABOUT -
+  `budget` matches chatcmd.gd:622 where it is a LOCAL FUNCTION PARAMETER, and `district_rules`
+  matches town.gd:33 where it is QUOTED IN A COMMENT. Neither is a read. A name hit is not a read
+  and a sentence beside the code is not evidence.
+  THE RAW NUMBER MOVED (28 -> 46) AND THE CLASSES DID NOT. Most of the rise is `_note_` keys and
+  provenance strings. COMPARE THE CLASSES, NOT THE RAW NUMBER.
+  ON THE COUNT ITSELF, SO THE NEXT SEAT IS NOT MISLED: my matcher is quoted-literal only, which is
+  why I read 46 where the prompt's baseline says 28 and the 04:07 seat predicted 58 under a strict
+  test. THE THREE NUMBERS ARE THREE MATCHERS, NOT THREE ANSWERS. The answer is the class table.
 
 *** FOR THE SUPERVISOR ***
   1. THE HUB'S SECTION-BAR FIX IS STILL MERGED AND UNPUBLISHED - the one Mr. E asked for himself.

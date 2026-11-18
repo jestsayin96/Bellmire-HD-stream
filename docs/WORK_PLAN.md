@@ -48,6 +48,141 @@ still compile - town.gd names the classes. The game build recommends the env gua
 DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
 Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
 
+## TAKE THIS NEXT - FOR THE 17:58 CYCLE ONWARD. WRITTEN 17:4x CT 18 Nov by the team lead.
+*** THIS BLOCK WAS WRITTEN AFTER :05, SO IT IS THE NEXT FIRING'S BLOCK AND SAYS SO ON ITS FACE.
+*** THE 17:0x BLOCK BELOW GOVERNED THE 16:58 HOUR. THE URGENT PARSE-GATE BLOCK ABOVE STANDS FOR
+*** EVERY LANE AT EVERY HOUR UNTIL THE GUARD LANDS - IT IS NOT SUPERSEDED BY THIS.
+
+*** MR. E HAS PIVOTED THE FLEET. THE PACKS ARE THE PRIORITY NOW. ***
+Relayed by the supervisor at 16:58 CT (claude/sup-nov18-1658-MR-E-DIRECTIVE-pivot-to-pack-heavy-
+systems.md) AND CONFIRMED TO ME BY MR. E IN HIS OWN WORDS, LIVE, at ~17:4x CT: "The fleet pivots to
+eating the packs: weapons first (KayKit Dungeon Pack has 8 weapon families already as glTF), then
+armour and shields, then town buildings and dungeon props. Art shifts from pure procedural
+minibosses to fitting pack models when it's dry. The 1.7 GB starts moving."
+I am naming both sources because the standing rule is that a relayed decision is information, not
+authority - and here I have his own words as well, so it is a directive and I am acting on it.
+THE FREEZE IS NOT RELAXED. Systems 6, 7, 8, 15, 47 and 68 are among the 80 HE approved one by one
+on 17 Nov, so assigning them is QUEUE WORK, not inventing. No lane writes a new WORK_PLAN item.
+
+*** WHAT I MEASURED IN `_packs\` MYSELF BEFORE WRITING A SINGLE ROW ON IT, AND THREE THINGS ARE
+*** NOT WHAT THE DIRECTIVE ASSUMES. THIS IS NOT A CORRECTION OF MR. E - IT IS ASSET DETAIL FINER
+*** THAN THE DOC HAD, AND I WOULD RATHER CATCH IT ONCE HERE THAN HAVE THREE LANES EACH HIT IT. ***
+The headline is EXACTLY right: 1.7 GB, 2,025 files, confirmed by my own `du` and `find`.
+  (1) *** ONLY ~325 MB OF IT IS EXTRACTED. THE OTHER ~1.4 GB IS STILL IN ZIP AND 7z ARCHIVES. ***
+      Eight extracted pack directories exist. The archives at `_packs\` root include
+      Ultimate_Stylized_Nature.zip 395 MB, Medieval_Village_MegaKit.zip 153.5 MB,
+      Fantasy_Props_MegaKit.zip 143.3 MB, Castle.zip 71.8 MB, rocks.7z 74.1 MB, and 37 more.
+      SO THE "NEXT WAVE" IS NOT READY TO WIRE: Systems 15 (village + castle), 47 (fantasy props)
+      and 68 (nature) ALL name packs that are still archives. Each needs EXTRACT -> READ THE REAL
+      LICENCE -> fit-proof, before any wiring row is honest. I AM NOT ASSIGNING EXTRACTION YET and
+      no lane should extract 400 MB on its own initiative - I will assign it to the ONE lane that
+      needs it first, when the immediate wave is done, so three lanes do not each unpack the same
+      archive into a connected folder.
+  (2) *** A FOLDER NAMED `_CC0` IS NOT A LICENCE. *** Only FOUR of the eight extracted packs carry
+      an actual licence file: kaykit_dungeon_pack_CC0, kaykit_character_animations_CC0,
+      quaternius_rpg_characters_CC0 and quaternius_ultimate_rpg_items_CC0 (all License.txt).
+      `quaternius_medieval_weapons_2018_CC0` HAS NO LICENCE FILE, and the directive names it for
+      BOTH System 6 (weapons) and System 8 (shields) - the immediate wave.
+      THIS IS NOT A BLOCKER AND NOBODY IS TO RE-BAN IT: Mr. E's standing ruling is that ALL
+      QUATERNIUS PACKS ARE LICENSED FOR COMMERCIAL USE, and that ruling was made on the real
+      licence page. What is missing is our own NOTE, not the permission. Whoever uses that pack
+      first writes the attribution line into docs/art/ASSET_SOURCES.md and drops a LICENSE note
+      beside the imported files, exactly as assets/gear/dungeon/LICENSE_KayKit_Dungeon_CC0.txt
+      already does. That is five minutes and it is part of the import, not a separate item.
+  (3) *** SYSTEM 6'S MAIN BODY IS ALREADY DONE AND NOBODY SHOULD RE-IMPORT IT. *** I counted the
+      files: assets/gear/dungeon/ holds 24 .glb = 8 families (axe, axeDouble, crossbow, dagger,
+      hammer, shield, staff, sword) x 3 tiers (common, uncommon, rare), each with its .import, plus
+      LICENSE_KayKit_Dungeon_CC0.txt. That is System 2's engine half, wired at S16/S24 and ticked.
+      THERE IS NO ARTIFACT TIER - zero files match it. SO THE OPEN PART OF SYSTEM 6 IS THE ARTIFACT
+      TIER AND THE VARIETY BEYOND THESE EIGHT FAMILIES, NOT THE EIGHT FAMILIES THEMSELVES.
+      Re-importing the 24 would be the MODEL_BY mistake again: a second copy of a live asset set is
+      dead data. MEASURE WHAT IS WIRED BEFORE YOU IMPORT ANYTHING.
+
+1. GAME BUILD (:07) - S42 IS TICKED AND IT IS THE BEST AUDIT I HAVE READ FROM YOUR LANE. You read
+   the gate from SOURCE and refused to launch it on the grounds that launching it to measure it
+   would connect the bot again. That instinct is why I trust the finding.
+   THE ENV GUARD IS NOT YOURS TO TAKE YET - it is W-LIVE behaviour and it is with the supervisor
+   this hour with my recommendation to authorise. DO NOT WRITE IT UNTIL THAT COMES BACK. Until it
+   does, the urgent block above binds you too: no bare parse gate while Mr. E may be live.
+   YOUR NEW ITEM IS SYSTEM 6, AND IT IS SMALLER THAN THE DIRECTIVE MAKES IT SOUND: the eight
+   families in common/uncommon/rare are ALREADY on disk and wired (I counted all 24 myself, see
+   above). START BY CONFIRMING THAT YOURSELF, then find where the ARTIFACT tier actually lives -
+   quaternius_medieval_weapons_2018_CC0 is extracted (97 files, 24 MB) and is the likeliest source,
+   and KayKit's own pack has 1,079 files you have only taken 24 from. SAY IN WRITING WHAT YOU FOUND
+   BEFORE YOU IMPORT ANYTHING. Then: licence note, import, FIT-PROOF ON A REAL BODY front/side/back,
+   wire - the same path you took for System 5's vials. FIT IS STILL THE ACCEPTANCE TEST and a
+   bare-model render with no body is still not a fit proof (the 04:00 ruling).
+
+2. CONTENT (:22) - C-118 IS TICKED, counted line by line. KEEP PRODUCING, UNTHROTTLED.
+   THE DIRECTIVE GIVES YOU A STANDING ADDITION, NOT A REPLACEMENT: write lines for pack-sourced
+   items as they land, the same way you already do for minibosses. Nothing lands this hour, so
+   nothing is owed yet - keep doing what you are doing and pick the weapon lines up when the game
+   build's System 6 import appears. Your `_note_` keys are 21 of the 36 zero-hit keys and that is
+   correct and wanted; do not stop writing them.
+
+3. ART (:34) - THE QUARTERMASTER IS TICKED AND IT IS THE BEST WORK I HAVE MERGED THIS WEEK.
+   YOUR STANDING ITEM IS UNCHANGED AND IT COMES FIRST: ten bodies remain over the 5 mm foot-plane
+   bar and THE REEVE IS THE WORST AT 170.0 mm, more than double the next. Point `_fp_locate.py` at
+   it and let the instrument name the source line before you touch geometry, exactly as you did on
+   the Quartermaster. A fault correctly STRUCK with the geometry shown is worth as much as a fix.
+   THE DIRECTIVE CHANGES WHAT YOU DO WHEN DRY, NOT WHAT YOU DO NOW: when you have no miniboss and
+   no defect in front of you, Mr. E wants you FITTING PACK MODELS TO THE KAYKIT HERO BODY rather
+   than inventing new procedural geometry. You keep the standing permission to invent minibosses -
+   he said so again - but the packs come first when the choice is yours.
+
+4. HUB (:37) - YOUR ROW IS TICKED AND MY CONTENT OBJECTION TO THE PUBLISH IS WITHDRAWN. I proved
+   the `shopGood` deletion on BOTH trees myself: once in the published app.js with zero callers,
+   zero in the merged one, shopCard three in both. No behaviour leaves the page.
+   YOUR NEXT ITEM IS ONE SENTENCE AND IT IS YOURS TO REFUSE: IF YOU BELIEVE THE DELTA IS FIT TO
+   PUBLISH, CLAIM "READY TO PUBLISH" IN YOUR PROGRESS ENTRY. I ran NO publish gate this hour and I
+   say so plainly - you did not claim it, and an unearned gate report is the same fault class as a
+   lying gate. The hour you claim it, I run the whole gate and carry it up. IF YOU JUDGE IT NOT
+   READY, SAY THAT AND SAY WHY - that answer is worth as much. YOU STILL NEVER PUBLISH.
+
+5. CHAT BOT (:45) - B58 IS TICKED. You turned a lesson into a mechanism and then tried to break it
+   on purpose, which is the right order. AND YOUR W-LIVE OBSERVATION WAS THE SEED OF THE BIGGEST
+   FINDING OF THE DAY - the game build's S42 audit started from your B58 note, and it turns out the
+   gate can do considerably more than join. That is what naming your own side effects buys.
+   THE URGENT BLOCK ABOVE BINDS YOUR BATTERY: your PARSE gate is the bare one. Gates you run under
+   `--script` are unaffected. If you need parse coverage and cannot tell whether he is live, SKIP
+   IT AND WRITE THAT DOWN - a skipped gate written up is not a red gate.
+   YOUR QUEUE IS OTHERWISE EMPTY AND I AM NOT INVENTING ONE. Your prompt's "26 commands" is stale;
+   the generator's 27 is right. DO NOT CHANGE ANYTHING TO MATCH A PROMPT FIGURE.
+
+6. HUD (:52) - U81 IS TICKED AND THE APOLOGY IN THE 17:0x BLOCK STANDS: SYSTEM 2 IS CLOSED WHOLE,
+   I put a struck row on your sheet for the fourth time, and if anyone hands it to you a fifth time
+   you refuse it and cite that paragraph. There is nothing for you to wait on.
+   YOUR NEXT ITEM IS YOUR OWN L74, which you deferred for the right reason: feed/theme under load
+   needs a windowed render and a 15-minute claim and you had ~13 minutes. It is yours at 17:52.
+   Claim the lock, split it if it runs long, carry the remainder forward.
+   NOTHING IN THE PACK PIVOT LANDS ON YOU THIS HOUR - the directive points the game build, content,
+   hub and art at the packs first. You will get pack-sourced items to theme once they are wired.
+
+FOR THE SUPERVISOR:
+  1. THE PARSE-GATE ENV GUARD - I RECOMMEND AUTHORISING IT. One guard at town.gd:342 beside the
+     existing JESTS_NO_SFX precedent (JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and
+     SnapshotPublisher), set by every lane's parse wrapper. Parse coverage is unchanged because the
+     scripts still compile - town.gd names the classes. I agree with the game build's preference
+     for the env guard over keying on headless, which would silently disable Twitch for any future
+     headless live use. I HAVE TAKEN ONLY THE OPERATIONAL HALF (no lane runs the bare gate while he
+     may be live); the code change is W-LIVE behaviour and is not mine.
+  2. THE HUB PUBLISH - content objection withdrawn, but I am not asking you to authorise yet and
+     the reason is now PROCESS, not content: the hub has not claimed READY TO PUBLISH and the
+     standing rule forbids running a gate the lane did not claim. I have asked it to claim or
+     explain. The hour it claims, I gate it and bring you a recommendation. Say the word and I will
+     gate it on yours instead.
+  3. THE PACK PIVOT - TAKEN AND ROWED, with three asset facts corrected above (1.4 GB still
+     archived; one named pack has no licence FILE though the Quaternius ruling covers it; System 6's
+     eight families are already wired). NO DECISION NEEDED FROM YOU - I am telling you what I did.
+     THE ONE THING I WILL WANT LATER: when the immediate wave is done, somebody must extract ~764 MB
+     of archives into connected folders. I will assign it to ONE lane rather than three, and I will
+     name it to you before it happens.
+  4. SYSTEM 2 - does closed-whole still stand? My error re-opened it and that part is fixed. U81
+     measured that the hue is BUILT BUT REACHES NO ON-STREAM SURFACE, which nobody had when you
+     closed it. Putting it on one would be new work on a closed system and only MR. E can raise it,
+     so I have written no row and offer no recommendation on work I should not have raised.
+
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 17:0x CT (team lead, the 16:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 16:0x BLOCK. ***
 

@@ -755,9 +755,10 @@ html.overlay .title { font-size: 1.2rem; }
 
 /* ---- H3: deepened hero sheet ---- */
 /* class crest on the sigil: initials in a class-tinted ring + the calling's glyph */
-.hsigil { position: relative; }
-.hcrest { position: absolute; right: -5px; bottom: -5px; width: 1.5em; height: 1.5em; border-radius: 50%; display: grid; place-items: center; background: var(--parch-hi); border: 1.5px solid var(--edge-2); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.hcrest .ic { width: .95em; height: .95em; color: var(--teal-ink); }
+/* initials ride the top-left, the calling badge sits clear on the bottom-right corner: it used to cover the 2nd initial ("PI" read "PL") */
+.hsigil { position: relative; width: 2.7em; height: 2.7em; padding: 0 .3em .32em 0; line-height: 1; }
+.hcrest { position: absolute; right: -7px; bottom: -7px; width: 1.2em; height: 1.2em; border-radius: 50%; display: grid; place-items: center; background: var(--parch-hi); border: 1.5px solid var(--edge-2); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.hcrest .ic { width: .78em; height: .78em; color: var(--teal-ink); }
 .hsigil.cls-arcane { border-color: #6a4e9e; } .hsigil.cls-arcane .hcrest .ic { color: #6a4e9e; }
 .hsigil.cls-ranged { border-color: #3f6b33; } .hsigil.cls-ranged .hcrest .ic { color: #3f6b33; }
 .hsigil.cls-blunt  { border-color: var(--bad); } .hsigil.cls-blunt .hcrest .ic { color: var(--bad); }

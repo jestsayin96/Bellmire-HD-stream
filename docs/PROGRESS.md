@@ -3021,3 +3021,54 @@ Your call entirely - I am not writing an item for it and I have not touched rost
 ### nothing and spent nothing - no channel-point reward redeemed, created, deleted or re-priced, and
 ### bellmirebro posted no message in any chat. The only Godot launched was the headless battery
 ### above, which opens no EventSub connection.
+
+## D-cycle - S27 System 4: ACCESSORIES ARE ALREADY WIRED LIVE FROM items.json; THERE ARE NO AUTHORED ACCESSORY MODELS - closed in the S25 shape, with line numbers, a re-proof on the merged tree and the faults named. 2026-11-17T21:14:17-06:00 (game build)
+TAKE THIS NEXT (20:58 block, GAME BUILD row) gave: System 4, "accessories with real models". Nothing in the path was changed.
+- FIRST, AS THE ROW ASKED: DO AUTHORED ACCESSORY MODELS EXIST? NO. `find assets -iregex '.*\(ring\|amulet\|glove\|gauntlet\|
+  necklace\|pendant\|charm\|trinket\|accessor\|brooch\|belt\|cloak\|wand\).*\.\(glb\|gltf\|obj\|fbx\|tscn\|blend\)'` returns only
+  assets/gear/bow_A_withString.gltf, wand_A.gltf, wand_crystal.glb - all weapons. assets/icons/items/{ring,amulet,gloves,boots,
+  cloak} are hub icons, not meshes. So "real models" for the 254 accessories (55 ring, 51 amulet, 51 gloves, 49 cloak, 48 boots)
+  ARE ART'S TO MAKE. I did NOT build a procedural stand-in and call it a model; the parts below are the existing D94 builds.
+- THE PATH, items.json `accessories` (a dict keyed by item id) to a worn body, every link a read of the file:
+    roster.gd:1169 items() / :1176 item(key)   data/items.json, accessories then cosmetics
+    roster.gd:1184 item_key(words)             "!wear night watch" -> the key (key, full name, or a unique word)
+    roster.gd:1205 wear() -> :1233             h.acc[it.slot] = key (bought at cost_for/haggle off the file's `cost`)
+    gear.gd:600  rank_trim -> :607 dress_cosmetics(model_root, h)
+    gear.gd:643  dress_cosmetics               ring :673 (hand the camera can see, not behind a held shield/book),
+                                               amulet :683 chest, gloves :688 both hands, boots :697-712 (bought boots
+                                               replace the armour's set boots), cloak :713 chest + the cape's own cloth
+    gear.gd:1097 acc_ctx(key) / :1103 _acc_base  THE ITEM'S OWN LOOK: ornament from its cost inside its slot's span,
+                                               metal/tone/gem hashed from the key, variant from key+name, form :1080
+    gear.gd:1235 _build_ring  :1275 _build_amulet  :1382 _build_glove  :1448 _build_boot  :1486 _build_cloak
+- WHAT THE NAMED PIECE DRIVES (roster.gd acc_bonus :1199, summing the file's numbers over h.acc):
+    ac :340, hit :345, saves :351, hp :364, speed :373, dmg delve.gd:2543. The name the game shows is the file's `name` (:1272).
+- RE-PROOF ON THE MERGED TREE (bcbe0e3), tools/_d95_fit.gd UNCHANGED, real KayKit bodies through the real Roster -> Gear path:
+    D95_OUT=renders/cycles/s27            ten heroes x three named accessories each, front/side/back/top
+      VERDICT: D95_FIT OK (40 shots, 0 attach failures)
+    D95_MODE=slots D95_OUT=renders/cycles/s27/slots   six different named items per slot on six bodies, stream distance
+      VERDICT: D95_FIT OK (14 shots, 0 attach failures)
+  Every accessory printed is an items.json name (e.g. Bridgeward's Ring, Clapperless Bell Amulet, Armourer's Gauntlets,
+  Long Count Boots, Commander's Field Mantle). The harness goes red on any worn slot whose node did not attach
+  (tools/_d95_fit.gd:198 D95_FAIL). It does NOT measure float/clip - that is my eye, below.
+- LOOKED AT: renders/cycles/s27/_s27_sheet.png (cleric, warden, paladin, monk; front/side/back) and
+  renders/cycles/s27/_s27_slots_close.png + slots/d94_row_0_ring.png + slots/d94_row_3_boots.png.
+  Amulets sit on the chest under the chin (warden's bead chain and pendant read clearly); gloves on both hands; bought
+  boots on the feet and visibly different per item (pale, sage, tan); cloaks hang from the shoulders, the monk's
+  Commander's Field Mantle sits as a shoulder cape front, side and back; nothing floats or sinks through the floor.
+  NAMED, NOT HIDDEN:
+    (1) RINGS DO NOT READ AT STREAM DISTANCE. In the ring row six different rings are attached (0 failures) and I cannot
+        see one of them - the band is RING_R 0.078 + 0.009..0.016 on a fist that holds the sword grip. Same lesson as
+        the gloves ruling (more derived variation / a reading silhouette, not a bigger ring), not attempted - the row did
+        not ask for it, and it is an art-and-gear question together.
+    (2) The cleric's Fog-run Cloak reads from the back as a flat pale panel - attached and hanging, but plain.
+    (3) The slot-row labels print weapon + armour, not the accessory; the accessory name is in the D94_ROW log line.
+- Battery (build/s27_battery.log, build/s27_townwalk.log): PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2275 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2 (capped).
+  *** TOWNWALK IS RED - NO VERDICT LINE, TWICE. *** Headless: killed at my 240 s timeout (21:12:15-21:16:16). Windowed (the
+  way S25 ran it, PASS at T=120s): the window went "Not Responding" at 6 min CPU and was killed at 480 s (21:19:16-21:27:17);
+  my launcher buffers stdout to the end, so NEITHER RUN LEFT A LINE TO DIAGNOSE FROM - that is my instrument's fault, not
+  evidence about the town. No code was changed this run (gear.gd/roster.gd untouched), so this is not a regression of mine,
+  but the gate is red and I cannot say why. Next game-build firing: rerun _townwalk.gd FIRST with output streamed to the
+  log line by line, and if it hangs on the merged tree, bisect against S25's 4baef90 where it passed.
+  BECAUSE A GATE IS RED THIS IS A CHECKPOINT COMMIT (renders + this entry + the lock), not a delivery the gates cleared. No live Twitch test - no account used, no bits,
+  nothing redeemed, bellmirebro posted nothing. Phase 2 not touched. Not ticked - the team lead ticks.

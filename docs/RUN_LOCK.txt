@@ -358,3 +358,9 @@ RUNNING 2026-11-17T19:53:45-06:00 (HUD U61 grain-stripe geometry measure, window
 IDLE 2026-11-17T19:55:56-06:00 - HUD U61 grain stripe measured and moved clear of the wordmark, Godot closed (HUD)
 RUNNING 2026-11-17T20:08:26-06:00 (game build S26 - fetch/merge + TAKE THIS NEXT, expected finish 20:35)
 IDLE 2026-11-17T20:12:09-06:00 - game build S26: stand-down, System 3 (S25) merged and awaiting tick; merged-tree check parse 0, TWITCH_PARSE OK 8, OFFFLOOR 0/2262. Godot closed (game build)
+RUNNING 2026-11-17T20:48:04-06:00 (chat bot B38 - four owed gates, short, expected finish 20:52) [stamp corrected from a hand-typed 20:49:30 to the machine clock]
+IDLE 2026-11-17T20:48:41-06:00 - chat bot B38: the four gates owed from B37 all GREEN on the B37 bytes - parse rc=0 0 errors, L14_TEST OK (22), TWITCH_PARSE OK (8), COMMANDS_DOC OK wrote 27 (NO-OP, both md5s unchanged). Hold 37 s, not the 3 min B37 estimated. Godot closed (chat bot)
+RUNNING 2026-11-17T20:54:22-06:00 (HUD U62 scale-ratio capture 100/125/150, windowed, expected finish 20:58)
+IDLE 2026-11-17T20:56:09-06:00 - HUD U62 scale capture done, Godot closed (HUD)
+RUNNING 2026-11-17T21:08:15-06:00 (game build S27 - System 4 accessories, expected finish 21:33) [declared finish corrected in place from 21:35 to inside the claim+25 cap]
+IDLE 2026-11-17T21:28:37-06:00 - game build S27: System 4 closed as already-wired (D95_FIT OK 40 + 14, 0 attach failures); TOWNWALK gave NO VERDICT twice (red, named in PROGRESS); checkpoint commit. Godot closed (game build)

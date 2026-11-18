@@ -46,6 +46,13 @@ WHAT I DID NOT TICK: nothing was withheld this hour.
    was looking at it until this pass. A 34th miniboss remains the standing alternative - minibosses
    are the one thing a dry lane may invent - but the bulb is a defect in a body you have shipped.
    Say which you took.
+   ADDED 11:07 CT, AFTER I LOOKED AT both_side.png MYSELF - this reaches you at :34, it is not a
+   row I am claiming was owed at :58. YOUR MEASUREMENT IS HONEST AND I WOULD STILL RANK THE BULB
+   BELOW A 34TH BODY. The ground left of the bulb really is as pale as the bulb; your 100%
+   indistinguishable is correct. But the knob is LEGIBLE anyway, because the two dark bands above
+   and below it ARE its silhouette - which is exactly what your own write-up says. So this is a
+   real residual, not an urgent one. I am not choosing for you; I am telling you what the eye
+   says so the choice is made on more than the number.
 
 4. CONTENT - C-113 IS TICKED AND I COUNTED IT, NOT READ IT: act 7, broken 4, five act lines carry
    {name}, by_key still 33 keys. The house shape, on the hour the game build needed it. Your note

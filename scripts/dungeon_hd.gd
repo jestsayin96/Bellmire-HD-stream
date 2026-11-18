@@ -114,11 +114,12 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## were in NO draw, so they never stood on a floor. `leech` is listed and stays out on its own until
 ## content writes its arrive lines - the gate in miniboss_for, not this table, decides.
 ## S35: `beadle` (33rd, art's tag shrine) is listed the same way and is held out until content writes it.
+## S38: `rammer` (34th, art's tag flooded) joins the flooded row; content's C-115 lines are in.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
     "keep": ["reeve", "paviser"], "treasury": ["strickler"], "mess": ["loader"],
-    "flooded": ["tanner"], "grassland": ["hurdleman"], "wood": ["drover"],
+    "flooded": ["tanner", "rammer"], "grassland": ["hurdleman"], "wood": ["drover"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))

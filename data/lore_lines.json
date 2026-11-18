@@ -1508,7 +1508,20 @@
       "Rations counted. Go.",
       "Hear that? No? Good.",
       "Dark's no worse than last time.",
-      "Pace it. We're here a while."
+      "Pace it. We're here a while.",
+      "Boots dry. Won't last.",
+      "Door shut behind us. Good.",
+      "Lamp trimmed. Go slow.",
+      "Same stairs as before. Different dark.",
+      "Last chance to turn round. Nobody takes it.",
+      "Keep the rope close.",
+      "Quiet. I don't like quiet.",
+      "Count heads. Then go.",
+      "Stone's cold. Keep moving.",
+      "Mind the first step.",
+      "We've paid for this. Go.",
+      "Eyes up. Lamp low.",
+      "Not far. Not yet."
     ],
     "lord": [
       "Hold together!",
@@ -1748,7 +1761,22 @@
       "Stay behind the shield.",
       "Make it reach for us.",
       "Hit and step back. Hit and step back.",
-      "Nobody ever won by running first."
+      "Nobody ever won by running first.",
+      "Don't look at its hands. Look at its feet.",
+      "It's slow. Don't trust slow.",
+      "Shields up. Nobody talks.",
+      "One of us it will not forget.",
+      "Back to the wall. Let it come.",
+      "Count its swings. Eight, then step in.",
+      "Whatever happens, keep the line.",
+      "That's the one the town fears.",
+      "Steady. We've bled for less.",
+      "Hold. Hold. Now.",
+      "It wants us to run. Don't.",
+      "Take the left. I'll take the weight.",
+      "Stand your ground. Stand it.",
+      "All of it for this one.",
+      "Keep the flasks for after."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1991,7 +2019,21 @@
       "Something scraped here. Fresh.",
       "Dart holes. Low and level.",
       "Hold the lamp out. Look first.",
-      "Skip the third step."
+      "Skip the third step.",
+      "Wire. Across the ankle.",
+      "Dust's disturbed. Someone was careful.",
+      "Plate's loose. Walk round.",
+      "Hear the click? Stop.",
+      "Old oil on the hinge. Not so old.",
+      "The floor sounds hollow.",
+      "Stones too clean here.",
+      "Pitch on the wall. Fire trap, likely.",
+      "Throw something first.",
+      "Slow. The draught's wrong.",
+      "Someone set this to be found.",
+      "Check the lintel.",
+      "Floor's been swept. Why sweep?",
+      "Rope's new. The rest isn't."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2228,7 +2270,21 @@
       "Mouth tastes of copper.",
       "Held. It'll hold.",
       "Not dead. Mark that.",
-      "Pull the strap tighter."
+      "Pull the strap tighter.",
+      "Bad. Not the worst.",
+      "Hand's slick. Not mine to lose.",
+      "Ribs. Breathe shallow.",
+      "Cut deep. Keep walking.",
+      "Ears ringing. Talk louder.",
+      "Knee's gone soft. Hold the line.",
+      "Blood in the boot. Great.",
+      "It stung. It'll bruise.",
+      "Lucky it was the shield arm.",
+      "Wrap it. Don't look.",
+      "Still standing. Count that.",
+      "Teeth shut. Walk on.",
+      "Next time I'm quicker.",
+      "Tell the baker I'll be late."
     ],
     "drink": [
       "Bottoms up.",
@@ -2459,7 +2515,20 @@
       "Rinse, spit, drink. Habit.",
       "Feeling comes back to the fingers.",
       "Last of the batch. Make it count.",
-      "Grim stuff. Steady hands after."
+      "Grim stuff. Steady hands after.",
+      "Warm all the way to the knees.",
+      "Wipe the neck. Go on.",
+      "Worth the coin.",
+      "Stings first. Helps after.",
+      "One swallow, no faces.",
+      "Cork back in. Don't waste the smell.",
+      "Thin stuff, but it works.",
+      "Settles the shaking.",
+      "Brewer's right again.",
+      "Taste of a hard winter.",
+      "Another empty. Mind the glass.",
+      "Hands steady now. Move.",
+      "That's the good batch."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2696,7 +2765,23 @@
       "Not me. The scar. Blame the scar.",
       "Smoke and no flame. Typical.",
       "Breath ran out first.",
-      "Once more. Slow."
+      "Once more. Slow.",
+      "Hold on. That's not the word.",
+      "The scar's loud tonight.",
+      "Wrong hand. Wrong breath. Again.",
+      "Nothing. It heard me and said nothing.",
+      "That went somewhere. Not where I sent it.",
+      "Steady. Let the scar settle.",
+      "Thought of the wrong thing. Don't think.",
+      "It answered. Not me, though.",
+      "Spark, then a cough of smoke.",
+      "Left a burn on the rope. Sorry.",
+      "The old words slipped.",
+      "It's pulling. Hold on.",
+      "Tastes of ash. That's not mine.",
+      "Again. Say it slower.",
+      "Not a fizzle. Worse than a fizzle.",
+      "The ground felt that."
     ]
   },
   "misfire": [
@@ -2779,7 +2864,19 @@
     "%s's %s flickers, thinks better of it, and quits (%d vs DC %d).",
     "%s mutters %s, and the rune mutters back something else (%d vs DC %d).",
     "%s's %s goes sideways and takes a candle with it (%d vs DC %d).",
-    "%s starts %s, loses the thread, and finishes it badly (%d vs DC %d)."
+    "%s starts %s, loses the thread, and finishes it badly (%d vs DC %d).",
+    "%s's %s catches on the scar and goes nowhere (%d vs DC %d).",
+    "%s starts %s and the scar takes the last word (%d vs DC %d).",
+    "%s's %s lands a pace to the left - wild magic (%d vs DC %d).",
+    "%s calls up %s and gets a cold draught for it (%d vs DC %d).",
+    "%s's %s fizzles in a cough of ash (%d vs DC %d).",
+    "%s reaches for %s and the scar flinches first (%d vs DC %d).",
+    "%s says %s right, and it still comes out wrong (%d vs DC %d).",
+    "%s's %s unravels half-spoken - the scar answers (%d vs DC %d).",
+    "%s shapes %s and the stone hums back, off-key (%d vs DC %d).",
+    "%s's %s burns the air and leaves nothing (%d vs DC %d).",
+    "%s tries %s with a shaking hand and the scar stirs (%d vs DC %d).",
+    "%s's %s sputters, and a candle goes out (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -12340,5 +12437,6 @@
   },
   "_note_c116": "C-116: +32 live tells, four to each origin in the tells table (tomb, mine, fortress, temple, lair, prison, works, warren). Read at delve.gd:170, appended to the origin's own tell and drawn once per delve. Same shape: plain strings. Additive; no floor count. Expected zero-hit key; no lane is to wire it.",
   "_note_c117": "C-117 (18 Nov 2026): +14 live bark lines on each of the six kinds (enter, lord, trap, hurt, drink, misfire), 84 in all, plain strings in the existing shape. Read at delve.gd:3781 by kind, so they are in the game the moment they merge. Every line is unique across the whole barks block. Plain declaratives, no name tokens, no floor count. Expected zero-hit key; no lane is to wire it.",
-  "_note_c118": "C-118: +30 epitaphs, +16 descend, +16 cleared lines. Same shapes (descend keeps %s %s hero+verb; cleared keeps Floor %d). Read live by the existing arrays - no wiring owed. Additive."
+  "_note_c118": "C-118: +30 epitaphs, +16 descend, +16 cleared lines. Same shapes (descend keeps %s %s hero+verb; cleared keeps Floor %d). Read live by the existing arrays - no wiring owed. Additive.",
+  "_note_c119": "C-119: 85 bark lines (enter/lord/trap/hurt/drink/misfire) and 12 misfire log lines (%s %s %d %d, same shape as the rest). Additive only; the existing lists are read as-is, no wiring needed. Expected zero-hit key."
 }

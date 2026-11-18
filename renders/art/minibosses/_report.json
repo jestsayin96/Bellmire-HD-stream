@@ -1328,11 +1328,77 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "comfitmaker": {
+   "title": "The Comfitmaker",
+   "theme": "confection",
+   "idea": "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is sugar-hard and nothing the party carries marks it, but it hands out comfits as it fights and a comfit is the one thing that does. Take one and you can hurt it; the sugar also gums the hand that took it, so that hero swings slower for as long as they hold it. The party cannot hurt it without accepting something from it, and the stand says how many are left",
+   "wear": 0.08,
+   "feed_line": "Everything in here is sweet and none of it is kind.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2626,
+   "size": [
+    1.83,
+    1.41,
+    2.28
+   ],
+   "footprint_span": 1.83,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6229717177561043,
+    "ortho": 2.6771152019500732,
+    "clip": [
+     6.813544750213623,
+     17.82897186279297
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "leech": {
+   "title": "The Leech",
+   "theme": "shrine",
+   "idea": "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this room mends. Every point of healing the party spends is drawn off into the basin at its side, and the Leech spends what the basin holds on itself, so the level in that basin is the mending you paid for. Tip the basin and it has nothing to mend with and your own healing comes back; leave it standing and your healer is carrying water in a sieve",
+   "wear": 0.82,
+   "feed_line": "It will have the bad blood out of you, and keep it.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 986,
+   "size": [
+    2.26,
+    1.59,
+    2.32
+   ],
+   "footprint_span": 2.26,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8040959433186958,
+    "ortho": 2.8286893367767334,
+    "clip": [
+     7.272996425628662,
+     19.072269439697266
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 90,
+  "files": 96,
   "failures": []
  }
 }

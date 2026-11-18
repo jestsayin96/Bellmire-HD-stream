@@ -10260,3 +10260,409 @@ def comfitmaker():
 
 
 BUILDERS.update({"comfitmaker": comfitmaker})
+
+
+# ===========================================================================
+# 32. THE LEECH - shrine, the second body on the theme that fires rarest.
+# ===========================================================================
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"leech"}
+
+OVERRIDE.update({
+    "leech": {
+        # THE MOULDER'S CONTRAST RULE, SEVENTH BODY RUNNING: the gown is the
+        # LIGHTER dark, the apron/boots/irons are the darker, so the man has
+        # internal structure instead of being one blob (the Paviser's fault 2
+        # and the Drover's fault 3).
+        # AND IT IS GREY, NOT BROWN, ON PURPOSE. Six of the last seven bodies
+        # are warm brown-greys; a leech's gown is undyed wool and going cool
+        # here costs nothing and separates him from the cohort at pane
+        # distance, where hue survives and detail does not.
+        'body': ((0.318, 0.312, 0.302), 0.52, 0.04),
+        # APRON, BOOTS, LEGS, THE TRIPOD IRON AND THE FLEAM. Near-black: the
+        # fleam has to read as the thinnest thing in the picture and a mid-grey
+        # rod dissolves at pane distance (the Fenman's line lesson).
+        'dark': ((0.040, 0.038, 0.040), 0.56, 0.06),
+        # THE BRASS: the basin, its rim, the coif band and the five horns.
+        # *** THE COMFITMAKER'S PASS-4 LESSON APPLIED BEFORE THE FIRST RENDER
+        # *** INSTEAD OF AFTER THE THIRD. *** An emitter is clamped at display
+        # white, so brightness has a ceiling and contrast does not: the way to
+        # make the basin read is to keep everything around it DARK, not to turn
+        # the basin up. So the brass is a mid-dark brass with a little metal in
+        # it - well below the fill in value, and in a different hue from it, so
+        # the two cannot be confused even in a grey read.
+        'bone': ((0.400, 0.330, 0.185), 0.44, 0.22),
+        # WHAT IT HAS TAKEN. The fill in the basin is the mechanic sitting in
+        # the open where a viewer can read its LEVEL - the same reason the
+        # Comfitmaker's shells are countable. Deep red at strength 7.0: this
+        # lane measured AgX taking 56% of a copper on 17 Nov, so a warm colour
+        # that must survive the view transform starts saturated and lit, not
+        # dark and diffuse.
+        # EYES KEPT IN THE DEFAULT SLOT, same reasoning as the Comfitmaker: the
+        # Fenman shipped a hood with a void where a face should be and the
+        # fault list says it read as no face at pane distance. One body learning
+        # that lesson is enough.
+        # *** PASS 3, AND IT IS THE COMFITMAKER'S LESSON RUNNING BACKWARDS. ***
+        # Pass 1 shipped (1.00,0.17,0.11) AT STRENGTH 7.0 because the
+        # Comfitmaker needed 7.0 to separate amber from cream. front.png came
+        # back with a SALMON-PINK disc and PINK eyes - no red anywhere in the
+        # picture. The cause is the same clamp, read from the other side: an
+        # emitter driven far past display white does not get brighter, it gets
+        # WHITER, because the view transform desaturates as it rolls off. The
+        # Comfitmaker's problem was an emitter too dim to separate from a pale
+        # neighbour and 7.0 was the right answer THERE. Here the neighbour is
+        # already dark brass, so all 7.0 bought was the hue burned out of the
+        # one object that carries the mechanic.
+        # THE RULE, AND I WANT IT ON THE RECORD NEXT TO THE OTHER ONE:
+        # BRIGHTNESS BUYS SEPARATION AND COSTS SATURATION. Raise it when a lit
+        # thing must beat a pale neighbour; lower it when the lit thing's
+        # COLOUR is the information. Here the level in the basin has to read as
+        # blood and not as paint, so it comes down to 1.9 and stays saturated.
+        # *** PASS 5 - CHOSEN OFF THE SWEEP, NOT OFF MY EYE. ***
+        # `_leech_glow_ab.py` renders the front lit, zeroes the emission,
+        # renders the SAME camera again and measures the pixels that MOVED,
+        # against the mean colour of the dish immediately around them. Six
+        # arms, and the numbers are in renders/art/minibosses/_leech_glow_ab.json:
+        #   arm            fill rgb255        sat    dish sat  gap     verdict
+        #   a 7.00 (pass1) (250.8,205.9,197.9) 0.211  0.260   -0.049   FAIL
+        #   b 1.90 (pass3) (230.6,145.2,129.2) 0.440  0.272    0.168   FAIL
+        #   c 1.10         (217.2, 98.2, 74.9) 0.655  0.277    0.378   PASS
+        #   d 0.85         (207.8, 72.1, 45.7) 0.780  0.284    0.496   PASS
+        #   e 0.60         (190.0, 45.7,  8.5) 0.955  0.287    0.668   PASS
+        # READ ARM a AGAIN: AT PASS 1'S SETTING THE FILL WAS LESS SATURATED
+        # THAN THE BRASS BOWL IT SITS IN. I would have shipped a basin whose
+        # contents read as a paler brass, and called the mechanic visible.
+        # Arm e is taken: deepest colour, and its value 0.745 is still well
+        # above the dish's 0.534, so it remains the brightest thing in its own
+        # zone - which is the guard against winning saturation by turning the
+        # light off.
+        'glow': ((1.000, 0.030, 0.012), 0.60),
+    },
+})
+
+CANON.update({
+    "leech": ("The Leech", 2.32, (0.62, 0.60, 0.58), (1.00, 0.22, 0.14),
+              "shrine",
+              "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this "
+              "room mends. Every point of healing the party spends is drawn off "
+              "into the basin at its side, and the Leech spends what the basin "
+              "holds on itself, so the level in that basin is the mending you "
+              "paid for. Tip the basin and it has nothing to mend with and your "
+              "own healing comes back; leave it standing and your healer is "
+              "carrying water in a sieve",
+              0.82, "It will have the bad blood out of you, and keep it."),
+})
+ORDER = ORDER + ["leech"]
+
+
+def leech():
+    """IT WILL NOT LET A WOUND CLOSE. A stooped man in an undyed wool gown and
+    a bound linen coif, bent over a BRASS BASIN on a three-leg stand at his
+    left, a fleam in his left hand over the rim, and a fanned roll of five
+    cupping horns at his right hip.
+
+    THE IDEA, AND WHY IT IS NOT A 32ND COAT OF ONE OF THE THIRTY-ONE.
+    I parsed the ideas out of CANON this run rather than recalling them (31
+    rows, 31 distinct hooks) and I grepped the whole file for heal/mend/cure.
+    THE SET HAS EXACTLY ONE CREATURE THAT TOUCHES HEALING AND IT POINTS THE
+    OTHER WAY: the Cook KEEPS THE PACK ALIVE - its pot heals ITS side, and the
+    counter-play is to spill the pot. Nothing in the thirty-one touches the
+    PARTY'S healing at all. A room where no wound closes is a mechanic class
+    the set does not have, and it is the one class that makes a whole hero -
+    the healer - into a passenger until the party does something about it.
+
+    THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:
+      - the REEVE: `while it stands the floor pays its box and not you`. Same
+        grammar, different resource, and that matters because loot is settled
+        AFTER the fight and mending is spent DURING it. Denying the haul
+        changes what you get; denying the mending changes how you fight.
+      - the RATCATCHER is `paid by the tail` - a visible gauge that grows. So
+        is this basin, and I am saying so plainly rather than pretending the
+        shapes are unrelated. The difference is WHOSE the gauge is: the
+        Ratcatcher's tally is fed by other monsters dying and the party cannot
+        touch it, while this basin is filled with the party's OWN spent healing
+        and emptying it is the counter-play. A gauge you can empty is a
+        different fight from a gauge you can only outrun.
+      - the GREENER `greens your iron` - it degrades the thing you brought.
+        This does not touch your kit at all; it makes one ACTION worthless.
+    AND IT IS NOT THE SNUFFER, the shrine's other body, which TAKES THE LIGHT.
+    That one removes a thing the ROOM provides; this one removes a thing the
+    PARTY provides. The two can stand on the same floor without reading as a
+    pair, which is the point of putting a second body on a one-body theme.
+
+    WHY SHRINE, MEASURED OFF THE TREE AND OFF THE GAME, NOT REMEMBERED.
+    Bodies per theme counted off `assets/monsters/minibosses/*.glb` this run,
+    excluding `_chibi` and counting committed files rather than CANON rows
+    (CANON carries three Drillmaster probe variants that are not bodies):
+    workshop 4, keep 3, firepit 3, barracks 2, confection 2, crypt 2, flooded
+    2, fogbound 2, grassland 2, mess 2, prison 2, treasury 2, wood 2 - and
+    SHRINE 1. Shrine is now the ONLY theme left with a single candidate, the
+    Comfitmaker having closed confection an hour ago. `dungeon_hd.gd` rolls the
+    slot at 35 on barracks/workshop, 10 on shrine/crypt and 15 elsewhere, so
+    shrine is also the theme that fires RAREST - which is the argument for the
+    second body, not against it: when it does fire, a viewer has until now seen
+    the same creature every time.
+
+    WEAR 0.82 - A FREE RUNG, AND THE LADDER IS NOW FULL FROM 0.80 TO 0.85.
+    Parsed this run: 31 wear values from 0.05 (Reeve) to 1.00 (Hurdleman), and
+    0.82 sits between the Gaoler's 0.80 and the Sexton's 0.85. The receipt it
+    reads as: an old trade practised a long time in a wet place. Verdigrised
+    brass, a gown washed grey, a strop black with use - but the FLEAM is the
+    one bright thing, because a blade that will not cut is no use to anybody
+    and the man who owns it knows that better than he knows anything.
+
+    HEIGHT 2.32, AND THE FIT RENDER OVERTURNED MY OWN ARGUMENT FOR 1.90.
+    I argued 1.90 off the LADDER: the 0.05 rungs 1.95-2.90 are all occupied
+    (measured this run), so the only free space was below the Reeve's 1.95, and
+    1.90 reads as honest for the one creature in the set that STOOPS - a bent
+    height, not a standing one. The argument is sound and the number was wrong,
+    and the only thing that could tell me so was hero_front.png.
+    THE HERO IS 2.45 TALL. That is the raw KayKit glb at scale 1.0, measured by
+    minibossfit, because townsfolk.gd leaves hero bodies alone. So 1.90 is
+    RATIO 0.78 - the creature stood beside the knight as a SQUAT STUMP, visibly
+    shorter than the hero it is meant to be a set piece against, where the rest
+    of the set sits near or above the hero (the Comfitmaker, last hour, 0.96).
+    A miniboss a viewer reads as smaller than their own man is not a miniboss.
+    2.32 is off-rung, as the Comfitmaker's 2.28 and the Fenman's 2.52 are, and
+    it puts the creature at about 0.95 of the hero WHILE BENT - which also
+    makes the thing I wanted to say true in the picture rather than in the
+    prose: standing up straight this one would be the tallest thing in the set.
+    THE LADDER IS BOOKKEEPING. FIT IS THE ACCEPTANCE TEST, and when they
+    disagree the render wins.
+
+    SILHOUETTE INTENT - THREE ZONES ACROSS X, CLEAR IN BOTH HORIZONTAL AXES.
+    *** THE COMFITMAKER'S PASS-2 LESSON, TAKEN BEFORE A VERTEX WAS WRITTEN.
+    *** A thing that must stand clear of the body has to be clear in X AND Y,
+    *** because each camera throws one of those axes away. The basin is
+    *** outboard in x AND forward in y for exactly that reason.
+      - FAR LEFT AND FORWARD, A BASIN ON THREE LEGS: a dark brass bowl at hip
+        height with a LIT LEVEL in it. The level is the creature. The stand is
+        three thin splayed legs, so it reads as standing furniture and not as
+        part of the man.
+      - CENTRE, A MAN BENT OVER IT. THE STOOP IS THE SILHOUETTE and nothing in
+        the thirty-one has it: the register's postures are upright, hinged
+        (Paviser), split (Jointer), skirted (Bellman) and leaning (Hurdleman
+        pass 3). A back whose crest is the highest point of the creature and a
+        head BELOW that crest is a shape the set does not own.
+      - FAR RIGHT, A SHALLOW FAN OF FIVE HORNS at the hip, pointing down and
+        out. The register's other far-side objects are a thin dark V
+        (Comfitmaker), a pale vertical pole (Fenman), a lattice panel
+        (Hurdleman), a solid slab (Paviser) and a horizontal bar (Drover). A
+        fan of five short cones is none of those, and five is countable.
+
+    WHAT THE SIDE VIEW CAN AND CANNOT TEST, STATED BEFORE I RENDER IT.
+    A side camera throws x away, so the fan of horns loses its spread and the
+    basin loses its separation from the man in that axis - which is why the
+    basin also comes FORWARD 0.52 in y, where the side camera can still see
+    daylight between it and the gown. What the side view carries BETTER than
+    the front is the stoop itself: the whole point of the posture is a
+    displacement in y, and y is the axis the side camera keeps.
+
+    Front is -Y, the same as the thirty-one before it."""
+    P = Parts("leech")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # THE BASIN, DERIVED NOT TYPED, so a later edit to the stand cannot leave
+    # the bowl floating or the fill below the rim.
+    BAS_X = MX - 0.62
+    BAS_Y = -0.52
+    BAS_Z = 0.74          # rim height - a basin a bent man can reach into
+    BAS_R = 0.300         # outer rim radius
+    FILL_R = BAS_R * 0.84
+    # *** PASS 4, AND THE A/B INSTRUMENT IS THE ONLY REASON I KNOW. ***
+    # Pass 1-3 put the fill at BAS_Z - 0.030, i.e. INSIDE the bowl and below
+    # its rim, which is where a liquid belongs in a bowl that is a SHELL. This
+    # bowl is `L.cone(..., cap=True)` - a SOLID - so the fill was buried in
+    # brass and could not be seen from any camera. I looked at front.png three
+    # times and read the bowl's own lit interior AS the fill, and I would have
+    # shipped a colour sweep tuned on a surface that was never in the frame.
+    # The with/without instrument said `fill_px: 0` on all six arms while the
+    # EYES moved 1,215 px, which is what a thing that cannot be seen looks like
+    # when you ask the viewer's question instead of asking how big it is. That
+    # is the pass-11 fault of 17 Nov in a new coat, caught this time by the
+    # instrument that fault bought.
+    # The fill now sits ON the solid's top face (z = BAS_Z), inside the rolled
+    # rim, which occludes it from a low angle and shows it from above.
+    FILL_Z = BAS_Z - 0.004
+
+    # ------------------------------------------------------- BOOTS AND LEGS
+    # Two separate soles with daylight between them - the Fenman's pass-3
+    # lesson: one slab under a creature reads as a plinth. Legs short and
+    # thick, knees pushed forward under the stoop so the weight reads as being
+    # carried by the back and not by the hips.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        P.add(L.box(0.34, 0.50, 0.075), 'dark', loc=(MX + 0.235 * s, -0.10, 0.038))
+        limb(P, [(MX + 0.195 * s, -0.04, 0.07),
+                 (MX + 0.205 * s, -0.11, 0.33),
+                 (MX + 0.180 * s, -0.04, 0.60)], 0.175, 0.150, 'dark')
+    _span("base", i0)
+
+    # ----------------------------------------------------------- THE APRON
+    # Hip to shin and hanging FORWARD of the legs, because the man is bent
+    # forward and an apron hangs plumb. It is the darkest mass on the body and
+    # it makes the waistline the gown above it needs.
+    i0 = len(P.items)
+    P.add(L.box(0.56, 0.30, 0.42), 'dark', loc=(MX, -0.20, 0.74))
+    P.add(L.box(0.46, 0.26, 0.10), 'dark', loc=(MX, -0.22, 0.51))
+    _span("apron", i0)
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    # THE STOOP. The torso runs from the hips UP AND FORWARD, so the top of the
+    # creature is the crest of its own back and not its head. Chibi build, to
+    # the knight profile the Comfitmaker's pass 5 measured off the fit render
+    # (widest at the top, thick limbs, short shins) - not to a mannequin.
+    limb(P, [(MX, -0.06, 0.84), (MX, -0.20, 1.12),
+             (MX, -0.40, 1.34)], 0.390, 0.330, 'body')
+    # THE CREST OF THE BACK, the highest point of the whole creature: a broad
+    # shallow hump sitting over the shoulders at the top of the lean.
+    # *** PASS 2: THE CREST WAS A CANOPY. *** At (0.420,0.330,0.210) it sat
+    # level with the head and the two merged into ONE pale mass - front.png
+    # read as a barrel with a lid, which is the Comfitmaker's pass-6 fault, and
+    # side.png read as a mushroom. A crest is a hump on a BACK: it has to be
+    # smaller than the head, behind it, and below the top of the lean.
+    P.add(L.sphere(0.330, 0.280, 0.150), 'body', loc=(MX, -0.22, 1.420))
+    # shoulders, pitched forward with the lean and narrower than the head, so
+    # the head still reads as the widest thing at its own level.
+    P.add(L.box(0.74, 0.32, 0.140), 'body', loc=(MX, -0.42, 1.345))
+    # a short neck running DOWN and FORWARD out of the shoulders - this is what
+    # puts the head below the crest.
+    limb(P, [(MX, -0.42, 1.32), (MX, -0.50, 1.26)], 0.150, 0.135, 'body')
+    # THE HEAD: a short cylinder TAPERING UP, never a sphere - a dome is the
+    # most occupied head shape in this register, and the Comfitmaker's pass 6
+    # proved a crown WIDER than the jaw reads as a bucket with a lid.
+    # Bowed only ~15 degrees, not fully face-down: a head that looks straight
+    # into the bowl shows the front camera nothing but a crown, and a face the
+    # front view cannot see is the Fenman's fault in a new coat.
+    # *** PASS 2, AND THE PICTURE IS THE EVIDENCE. *** Pass 1's head was 0.84
+    # across on a creature 1.70 tall as authored - HALF ITS OWN WIDTH and the
+    # top 40% of it. I wrote "a dome is the most occupied head shape and
+    # reaching for one is a reflex" and then shipped a drum the size of a
+    # cask. Measured off front.png rather than guessed: the head spanned
+    # x 215..500 of a 700-wide frame against a body span of 237..520 - the head
+    # was AS WIDE AS THE WHOLE MAN. Cut to 0.60 across and the top quarter.
+    # The lean is pulled back with it: at y -0.60 the skull overhung the far
+    # rim of its own basin in side.png, so the man was not bent over the bowl,
+    # he was lying on it.
+    P.add(L.cone(0.300, 0.245, 0.400), 'body', loc=(MX, -0.50, 1.215))
+    # THE BOUND COIF - a band round the brow, NOT a brim and NOT a flat cap:
+    # the Comfitmaker shipped the flat linen cap an hour ago and a brim across
+    # the eyes is the D94 hood fault. A band is the one head-covering in the
+    # set that adds no silhouette and still says the head is bound.
+    # *** PASS 2: THE BAND WAS A BRIM, WHICH IS THE ONE THING I SAID IT MUST
+    # *** NOT BE. *** It sat ON THE CROWN and wider than the skull, so it read
+    # as the lid of the bucket. A coif band goes round the BROW, inside the
+    # skull's own width, where it cannot add a single pixel to the silhouette.
+    P.add(L.cone(0.292, 0.292, 0.062), 'bone', loc=(MX, -0.50, 1.330))
+    P.add(L.cone(0.248, 0.210, 0.055), 'body', loc=(MX, -0.50, 1.605))
+    # the face, on the front (-Y), set low on the skull because the head is
+    # bowed. Eyes kept in the glow slot - see the note above.
+    eyes(P, (MX, -0.50, 1.270), 0.132, 0.040, -0.285)
+    _span("man", i0)
+
+    # ------------------------------------------------------------- THE ARMS
+    i0 = len(P.items)
+    # LEFT ARM (-x) reaching DOWN AND OUT to the basin rim: this is the hand
+    # that is working, and it ties the man to the instrument so the basin reads
+    # as his and not as scenery that happens to be beside him.
+    limb(P, [(MX - 0.330, -0.44, 1.28), (MX - 0.520, -0.52, 1.04),
+             (BAS_X + 0.090, BAS_Y + 0.040, BAS_Z + 0.110)], 0.155, 0.120, 'body')
+    # RIGHT ARM (+x) hanging at the horn roll.
+    limb(P, [(MX + 0.330, -0.42, 1.28), (MX + 0.430, -0.40, 1.08),
+             (MX + 0.470, -0.34, 0.96)], 0.155, 0.120, 'body')
+    _span("arms", i0)
+
+    # ------------------------------------------------- THE FLEAM, OVER THE RIM
+    # The blade, held in the working hand above the basin. THIN is the point -
+    # it must read as the finest thing in the picture - so a near-black 0.026
+    # rod with a short flat edge, and it is the one object on this body that is
+    # NOT worn: see the wear note in the docstring.
+    i0 = len(P.items)
+    HAND = (BAS_X + 0.090, BAS_Y + 0.040, BAS_Z + 0.110)
+    limb(P, [HAND, (BAS_X + 0.040, BAS_Y + 0.010, BAS_Z + 0.030)], 0.026, 0.019, 'dark')
+    P.add(L.box(0.030, 0.085, 0.012), 'dark',
+          loc=(BAS_X + 0.030, BAS_Y, BAS_Z + 0.018))
+    _span("fleam", i0)
+
+    # --------------------------------- THE BASIN ON THREE LEGS, FAR LEFT
+    i0 = len(P.items)
+    # three splayed legs, converging under the bowl. Three, not four: three
+    # legs read as a stand from every azimuth and never as a box.
+    for k in range(3):
+        a = TAU * (k / 3.0) + 0.52
+        fx = BAS_X + 0.260 * math.cos(a)
+        fy = BAS_Y + 0.260 * math.sin(a)
+        limb(P, [(fx, fy, 0.02),
+                 (BAS_X + 0.130 * math.cos(a), BAS_Y + 0.130 * math.sin(a),
+                  BAS_Z - 0.300),
+                 (BAS_X + 0.055 * math.cos(a), BAS_Y + 0.055 * math.sin(a),
+                  BAS_Z - 0.080)], 0.036, 0.028, 'dark')
+        P.add(L.cone(0.052, 0.040, 0.026), 'dark', loc=(fx, fy, 0.013))
+    # a hoop the bowl sits in, so the bowl is CARRIED and not balanced
+    _ring(P, (BAS_X, BAS_Y, BAS_Z - 0.095), BAS_R * 0.78, axis='z',
+          slot='dark', rad=0.028, n=18)
+    # THE BOWL: a shallow brass basin, wider at the rim than at the foot.
+    P.add(L.cone(BAS_R * 0.62, BAS_R, 0.185), 'bone',
+          loc=(BAS_X, BAS_Y, BAS_Z - 0.185))
+    # a rolled rim, so the bowl reads as a bowl and not as a disc, and so the
+    # lit fill inside it has a dark edge to sit against from every angle.
+    _ring(P, (BAS_X, BAS_Y, BAS_Z), BAS_R, axis='z', slot='bone',
+          rad=0.034, n=22)
+    # WHAT IT HAS TAKEN: the fill, a lit surface sitting BELOW the rim so the
+    # rim occludes it from a low angle and it can never read as a floating
+    # disc. The Sluicekeeper's fault was a lit pool ON THE FLOOR reading as a
+    # spotlight; this one is held at hip height inside a dark ring, which is
+    # the structural difference.
+    P.add(L.cone(FILL_R, FILL_R * 0.995, 0.026), 'glow',
+          loc=(BAS_X, BAS_Y, FILL_Z))
+    _span("basin", i0)
+
+    # ------------------------------- THE FIVE HORNS, FAR RIGHT, FANNED
+    i0 = len(P.items)
+    # a leather roll at the hip, and five cupping horns fanned out of it,
+    # pointing down and away. Five is countable from a doorway; the fan spreads
+    # in x AND pitches in y so the side camera still reads several of them.
+    # *** PASS 6: THEY WERE A HAND, NOT A ROLL, AND THE FRONT RENDER SAID SO
+    # *** IN THE PLAINEST WAY AVAILABLE. *** Pass 1-5 hung the five horns at
+    # z 0.98 with their bases at x +0.52..+0.74 - which is exactly where the
+    # right arm ENDS. Five pale tapered cones radiating from the end of an arm
+    # is a HAND OF CLAWS, and that is what front.png showed: the creature had a
+    # bare left arm and a talon on the right. The idea - a tradesman's roll of
+    # horns, countable, hung at the hip - was not in the picture at all.
+    # THE FIX IS SEPARATION, NOT SIZE: the roll drops to the hip and BEHIND the
+    # hand (z 0.80, y +0.02 against the hand's -0.36), and the horns hang
+    # DOWN from it rather than radiating out of it, so the hand is above them
+    # with daylight between. A thing that hangs cannot be read as a thing that
+    # grasps.
+    # *** PASS 7, AND PASS 6 WAS THE RIGHT DIAGNOSIS WITH TOO SMALL A MOVE. ***
+    # Pass 6 dropped the roll to z 0.80 and pushed it back in y, and front.png
+    # STILL read a black mitten with five pale claws coming out of it, because
+    # the hand ends at z 0.96 and the horns began at 0.775 - 0.18 of gap, which
+    # the front camera cannot see as a gap at all once the arm is in front of
+    # the roll. The honest fix is vertical daylight, so the roll goes to the
+    # THIGH: bases at 0.60, a clear 0.36 below the hand, with the horns hanging
+    # to 0.36. The creature now has a hand at hip height and a bundle on its
+    # thigh, which is two objects instead of one claw.
+    ROLL_Y = 0.02
+    P.add(L.box(0.330, 0.150, 0.100), 'dark', loc=(MX + 0.430, ROLL_Y, 0.620))
+    P.add(L.box(0.065, 0.165, 0.300), 'dark', loc=(MX + 0.385, ROLL_Y, 0.690))
+    for k in range(5):
+        t = k / 4.0
+        a = -0.30 + 0.60 * t                      # a shallow fan, hanging
+        bx = MX + 0.310 + 0.066 * k
+        bz = 0.600
+        tipx = bx + 0.250 * math.sin(a)
+        tipz = bz - 0.250 * math.cos(a)
+        # staggered in y as well as x: the side camera throws x away, so a fan
+        # that spreads only across x reads as ONE horn from the side.
+        dy = ROLL_Y - 0.075 + 0.037 * k
+        limb(P, [(bx, dy, bz), (tipx, dy, tipz)], 0.058, 0.014, 'bone')
+    _span("horns", i0)
+    return P
+
+
+BUILDERS.update({"leech": leech})

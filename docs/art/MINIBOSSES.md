@@ -3041,3 +3041,213 @@ I touched no `.gd` outside `tools/art/`. To put it in the game:
 
 Procedural bmesh + numpy, original to this repo. No pack geometry, no imported
 mesh, nothing to record in `docs/art/ASSET_SOURCES.md`.
+
+## 32. THE LEECH - *IT WILL NOT LET A WOUND CLOSE* (2026-11-18, art lane)
+
+A stooped man in an undyed wool gown and a bound linen coif, bent over a brass
+basin on a three-leg stand, a fleam in the working hand over the rim, and a
+roll of five cupping horns hanging at the thigh. `shrine`, h 2.32, wear 0.82,
+4 meshes, 986 faces, footprint 2.26 m - CORRIDOR-SAFE against the 11.0 m clear
+span of a three-cell corridor.
+
+**THE IDEA.** While it stands, nothing in this room mends. Every point of
+healing the party spends is drawn off into the basin at its side, and the Leech
+spends what the basin holds on itself - so the level in that basin is the
+mending you paid for. Tip the basin and it has nothing to mend with and your
+own healing comes back; leave it standing and your healer is carrying water in
+a sieve.
+
+### WHY IT IS NOT A 32ND COAT OF ONE OF THE THIRTY-ONE - PARSED, NOT RECALLED
+I parsed the hooks out of `CANON` this run: 31 rows, 31 distinct ideas. Then I
+grepped the whole file for heal/mend/cure. **The set has exactly one creature
+that touches healing and it points the other way**: the Cook KEEPS THE PACK
+ALIVE - its pot heals ITS side and you spill the pot. *Nothing in the
+thirty-one touches the party's healing at all.* A room where no wound closes is
+a class the set does not have, and it is the one class that turns a whole hero
+- the healer - into a passenger until the party does something about it.
+
+The three it stands nearest, and none of the differences is a quibble:
+
+- **The REEVE**: `while it stands the floor pays its box and not you`. Same
+  grammar, different resource - and that matters, because loot is settled
+  AFTER the fight and mending is spent DURING it. One changes what you get;
+  this one changes how you fight.
+- **The RATCATCHER** is `paid by the tail` - a visible gauge that grows, and so
+  is this basin. I am saying so plainly rather than pretending the shapes are
+  unrelated. The difference is whose the gauge is: the Ratcatcher's tally is
+  fed by other monsters dying and the party cannot touch it, while this basin
+  is filled with the party's OWN spent healing and emptying it is the
+  counter-play. A gauge you can empty is a different fight from one you can
+  only outrun.
+- **The GREENER** `greens your iron` - it degrades the thing you brought. This
+  touches your kit not at all; it makes one ACTION worthless.
+
+And it is not the **SNUFFER**, shrine's other body, which TAKES THE LIGHT: that
+removes something the ROOM provides, this removes something the PARTY provides.
+
+### WHY SHRINE - COUNTED OFF THE TREE, NOT REMEMBERED
+Bodies per theme counted off `assets/monsters/minibosses/*.glb`, excluding
+`_chibi` and counting committed files rather than `CANON` rows: workshop 4,
+keep 3, firepit 3, barracks 2, confection 2, crypt 2, flooded 2, fogbound 2,
+grassland 2, mess 2, prison 2, treasury 2, wood 2 - and **shrine 1**. With the
+Comfitmaker closing confection an hour ago, shrine was the last one-candidate
+theme. `dungeon_hd.gd` rolls the slot at 10 on shrine, the rarest weight in the
+table, which is the argument FOR the second body and not against it: when it
+does fire, a viewer has until now seen the same creature every time.
+
+### WEAR 0.82 - A FREE RUNG, AND NOW THE LADDER IS FULL 0.80-0.85
+All 31 wear values parsed this run, 0.05 (Reeve) to 1.00 (Hurdleman). 0.82 sits
+between the Gaoler's 0.80 and the Sexton's 0.85. The receipt it reads as: an
+old trade practised a long time in a wet place - verdigrised brass, a gown
+washed grey, a strop black with use. **The fleam is the one thing on him that
+is not worn**, because a blade that will not cut is no use to anybody and the
+man who owns it knows that better than he knows anything.
+
+### EIGHT PASSES, EACH ONE THING, EVERY ONE DRIVEN BY A PICTURE OR A NUMBER
+1. **Built.** 4 meshes, 980 faces, 0 blanks.
+2. **The head was the whole creature.** Measured off front.png rather than
+   guessed: the head spanned x 215..500 of a 700-wide frame against a body span
+   of 237..520 - *it was as wide as the whole man*, and the crest sat level
+   with it so the two merged into one pale mass. front.png read as a barrel
+   with a lid (the Comfitmaker's pass-6 fault); side.png read as a mushroom.
+   Head cut to 0.60 across and the top quarter, crest dropped behind and below
+   it, lean pulled back - at y -0.60 the skull overhung the far rim of its own
+   basin, so the man was not bent over the bowl, he was lying on it.
+3. **The coif band was a brim**, which is the one thing I had written that it
+   must not be: it sat ON the crown and wider than the skull. Moved to the brow
+   and inside the skull's width, where it adds nothing to the silhouette.
+4. **The glow came down 7.0 -> 1.9** on the theory that the fill was clipping.
+5. **THE FILL WAS NOT IN THE FRAME AT ALL, AND ONLY THE A/B INSTRUMENT KNEW.**
+   See below. This is the run's real finding.
+6. **The colour was chosen off the sweep**, not off my eye.
+7. **The five horns were a claw.** Hung at z 0.98 with their bases where the
+   right arm ENDS, five pale tapered cones radiating off an arm is a HAND OF
+   CLAWS, and that is what the render showed - the creature had a bare left arm
+   and a talon on the right. Pass 6's move (down to 0.80 and back in y) was the
+   right diagnosis and too small: 0.18 of gap is not a gap once the arm is in
+   front of the roll. Pass 7 put the roll on the THIGH, 0.36 below the hand.
+8. **The height was wrong and the fit render overturned my own argument.**
+
+### THE FINDING: `fill_px: 0` - I HAD BEEN LOOKING AT THE BOWL, NOT THE BLOOD
+Passes 1-3 tuned the basin's colour by eye off front.png. Sampled off that
+render, the fill read (193,126,105) and the brass around it (168,132,110) -
+twenty-five levels apart in red and five in blue, which is the Comfitmaker's
+pass-3 fault in a new coat, and I had written that body's lesson into this
+one's override and then broken it by choosing BRASS, the same hue as blood.
+
+So I built `tools/art/_leech_glow_ab.py` - the lane's proven with/without
+instrument (render lit, zero the emission, render the SAME camera again, count
+the pixels that MOVED) because `mask_of` renders a group alone and answers how
+BIG a thing is, never whether it can be SEEN. **All six arms came back
+`fill_px: 0` while the eyes moved 1,215 px.** The lit surface was not in the
+frame: `L.cone(..., cap=True)` is a SOLID, so a fill placed inside the bowl and
+below its rim was buried in brass. The salmon disc I had looked at three times
+and twice tried to colour-correct was *the bowl's own lit interior*.
+
+That is the pass-11 fault of 17 Nov exactly - a number beside a picture that
+disagreed with it - caught this time by the instrument that fault bought.
+Worth saying precisely: the harness did not go green on nothing. It reported
+RED on empty, by construction, which is the only reason the zero was a finding
+rather than a silence.
+
+With the fill moved onto the solid's top face, inside the rolled rim, the sweep
+could finally see (`renders/art/minibosses/_leech_glow_ab.json`):
+
+| arm | strength | fill rgb255 | sat | dish sat | gap | verdict |
+|---|---|---|---|---|---|---|
+| a (pass 1) | 7.00 | 250.8, 205.9, 197.9 | 0.211 | 0.260 | **-0.049** | FAIL |
+| b (pass 3) | 1.90 | 230.6, 145.2, 129.2 | 0.440 | 0.272 | 0.168 | FAIL |
+| c | 1.10 | 217.2, 98.2, 74.9 | 0.655 | 0.277 | 0.378 | PASS |
+| d | 0.85 | 207.8, 72.1, 45.7 | 0.780 | 0.284 | 0.496 | PASS |
+| **e (shipped)** | **0.60** | **190.0, 45.7, 8.5** | **0.955** | 0.287 | **0.668** | PASS |
+
+**Read arm a again: at pass 1's setting the fill was LESS SATURATED THAN THE
+BRASS BOWL IT SITS IN.** I would have shipped a basin whose contents read as a
+paler brass and called the mechanic visible. Arm e's value is 0.745 against the
+dish's 0.534, so it is still the brightest thing in its zone - the guard
+against winning saturation by turning the light off.
+
+**THE RULE I WANT ON THE RECORD BESIDE THE COMFITMAKER'S.** That body needed
+strength 7.0 to separate amber from cream; this one needed 0.60. Both are
+right. *Brightness buys separation and costs saturation*: raise it when a lit
+thing must beat a pale neighbour, lower it when the lit thing's COLOUR is the
+information.
+
+### THE FIT PROOF - ON A BODY, AND THE RENDER OVERTURNED THE HEIGHT
+`minibossfit`, verdict **GREEN**: ratio **0.95**, pair_w 4.12 m, fits_frame
+true, 3 of 3 proving views, blind_views [], blank failures []. Hero measured at
+h 2.45 (raw KayKit glb at scale 1.0 - `townsfolk.gd` leaves hero bodies alone).
+Numbers in `renders/art/minibosses/_fit_leech_register.json`, written from the
+harness's own report rather than retyped.
+
+I first authored this at **h 1.90**, argued off the ladder: the 0.05 rungs
+1.95-2.90 are all occupied, so the only free space was below the Reeve's 1.95,
+and a bent height reads honest for the one creature in the set that stoops. The
+argument was sound and the number was wrong. `hero_front.png` put it beside the
+knight at **ratio 0.78** and it read as a squat stump - visibly shorter than the
+hero it is supposed to be a set piece against, where the rest of the set sits
+near or above (the Comfitmaker, last hour, 0.96). **A miniboss a viewer reads as
+smaller than their own man is not a miniboss.** 2.32 is off-rung, as the
+Comfitmaker's 2.28 and the Fenman's 2.52 are, and it also makes the claim true
+in the picture instead of in the prose: standing up straight this one would be
+the tallest thing in the set. *The ladder is bookkeeping. Fit is the acceptance
+test, and when they disagree the render wins.*
+
+**BLANK AND BORDER.** 0 blanks across all six views; border alpha asserted this
+run - **0 opaque pixels touching any frame edge** on front, side, three_quarter,
+hero_front, hero_side, hero_back (opaque counts 256,152 / 293,895 / 220,775 /
+104,201 / 82,869 / 106,103).
+
+**THE SILHOUETTE**, colour thrown away, reads: a hunched figure bent over a
+stand with a bowl, one arm down into it, a fan hanging at the hip. It does not
+read as a hero, and the stoop - a back crest that is the high point with the
+head BELOW it - is a shape no other body in the file has.
+
+### THE FAULT LIST - EVERY ONE OF THESE IS VISIBLE IN THE SHIPPED RENDERS
+1. **In pure silhouette from three-quarter the head cannot be found.** It
+   merges with the back crest, so the creature reads as a hunched mass with no
+   head at all. The front and side silhouettes are fine. This is the one fault
+   I would fix next.
+2. **The gown is not as cool as the override claims.** I wrote "it is grey, not
+   brown, on purpose" and the lit side renders a warm salmon under the key
+   light. The claim is half delivered; the shadow side is grey.
+3. **Below the waist is one black mass from both front and side** - apron,
+   legs, horn roll and boots merge. Only the boot soles break it.
+4. **The fleam is nearly invisible at hero distance.** At pane distance it is a
+   dark nub over the rim. It reads at full size and not at the size the viewer
+   will see.
+5. **The left arm merges into the torso silhouette from the side**, so the
+   gesture of reaching into the bowl is a front/three-quarter read only.
+6. **The head is a plain drum with a band and two dots** - the least
+   characterful head in the set. It is not wrong, it is empty.
+7. **The basin's front tripod leg crosses the creature's left boot** in the
+   front view - a tangency, not an intersection.
+8. **The dark horn roll merges with the dark apron** from the front; only the
+   five pale horns separate.
+9. **The crest reads as a second pale hat from the front** at small size.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+I touched no `.gd` outside `tools/art/`. What this needs, named exactly:
+
+1. `scripts/bestiary.gd` - add a `leech` entry with
+   `model = "res://assets/monsters/minibosses/leech.glb"` and **NO `anims`
+   entry**: this body is STATIC, like the twelve creatures of System 10.
+   Use `h = 2.32` and the ratio 0.95 from
+   `renders/art/minibosses/_fit_leech_register.json` - **do not re-derive the
+   scale**, it is measured off the posed hero.
+2. The miniboss slot in `dungeon_hd.gd` can now prefer `leech` on the `shrine`
+   theme, which until this commit had the Snuffer as its only candidate.
+3. The mechanic, if and when it is implemented, is a room-scoped healing
+   redirect plus a breakable prop: while the Leech lives, healing applied in
+   the room is zeroed and added to a counter; the Leech spends that counter to
+   heal itself; the basin is a destructible that empties the counter. **None of
+   that is mine and none of it is implied to be queued** - the body stands up
+   and reads without it.
+4. `assets/monsters/minibosses/leech.glb` is committed **with no `.glb.import`
+   sibling**, like `snarer_chibi.glb` before it: a Godot run must generate one
+   before the body can load.
+
+### LICENCE
+Entirely original procedural geometry (bmesh/numpy, raw vertex maths via
+`lordlib`). No third-party asset is read by this builder. Nothing to add to
+`docs/art/ASSET_SOURCES.md`.

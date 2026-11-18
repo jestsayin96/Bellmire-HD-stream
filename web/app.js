@@ -3761,20 +3761,6 @@ function itemPic(name, cls) {
   return box;
 }
 let lastShopP = null;
-function shopGood(g, passing) {
-  const row = el("li", "shop-good" + (passing ? " passing" : ""));
-  const rc = rarityClass(g && g.rarity);
-  if (rc) row.classList.add(rc);
-  const nm = g && g.name != null && String(g.name).trim() ? ctrlStrip(g.name).slice(0, 60) : "(unnamed)";
-  row.append(el("span", "gname", nm));
-  if (g && g.qty != null && Number.isFinite(+g.qty)) row.append(el("span", "gqty", "x" + num(g.qty)));
-  if (g && g.rarity && !rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
-  else if (rc) row.append(el("span", "grar", ctrlStrip(g.rarity).slice(0, 16)));
-  const price = el("span", "gcost");
-  price.append(icon("coin"), document.createTextNode(" " + (g && Number.isFinite(+g.cost) ? num(g.cost) : "-")));
-  row.append(price);
-  return row;
-}
 // H32 pass 4: a stock item as a CARD (picture, name, category pill, price) with a hover/focus PREVIEW that
 // reveals more without a click - the way Twitch previews a stream. The preview is an overlay INSIDE the card's
 // fixed box, so nothing reflows. Every string goes through el()/textContent; the picture is itemPic() (a

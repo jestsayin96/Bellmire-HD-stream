@@ -7466,7 +7466,25 @@ def _sun_dirs():
 # reference metals carry baked into their textures.
 COPPER_BODY = (1.000, 0.520, 0.235)
 COPPER_DEEP = (0.300, 0.125, 0.052)
-COPPER_SHEEN = (1.000, 0.880, 0.820)
+# *** CHANGED 18 Nov 00:5x CT, ON THE _sheen_ab TABLE. WAS (1.000, 0.880, 0.820). ***
+# The old value was a DIELECTRIC's highlight - authored saturation 0.180, very
+# nearly a chalk wash - and SHEEN_MAX drives 86% of the way from the leaf body's
+# 0.765 saturation to it. But copper is a CONDUCTOR: its highlight carries the
+# light's colour times its OWN reflectance, not the light's colour alone. A
+# dielectric's highlight runs to white; a metal's runs to its own tint. Painting
+# a conductor with a dielectric's highlight is the same class of error as the
+# metallic dial - a number borrowed from the wrong physics - and it is what made
+# the side view read as a cream-painted board.
+# THE NEW VALUE IS NOT A TASTE STEP AND HAS NO NUMBER OF MINE IN IT: it is
+# _metal_read.CTRL['copper'], (0.955, 0.637, 0.538) - the measured reflectance
+# of Cu this repo already uses as its physics control - normalised so its
+# brightest channel is 1.0. Authored saturation 0.437.
+# MEASURED, three views, against the unpainted shipped material and a matte oak,
+# in renders/art/minibosses/_sheen_ab.json: side body_sat 0.3091 -> 0.4308,
+# cream_share 0.4206 -> 0.2920, and hilite_desat 0.3086 -> 0.2783 which is still
+# ABOVE both controls (oak 0.1603, unpainted 0.2173) - so the band still does the
+# job it was baked for. Nothing regressed in any view.
+COPPER_SHEEN = (1.000, 0.6670, 0.5634)
 # how much of the sheen is allowed at full strength. Keeps the band off pure
 # white: a copper highlight is warm, and a chalk-white streak is a different lie.
 SHEEN_MAX = 0.86
@@ -7504,6 +7522,20 @@ SHEEN_MAX = 0.86
 # that face a sun and leaves the rest alone - a sheen on all five at once reads
 # as paint, a sheen on two or three of five is what a rack of stock looks like.
 SHEEN_LO, SHEEN_HI = 0.58, 0.80
+# THE BOWED SHEET'S TESSELLATION. SEE _leaf. WAS 4,5 UNTIL 18 Nov 01:0x CT.
+# THE PICTURE FOUND THIS, NOT A NUMBER. With the band's colour fixed, a 4x crop
+# of the side view still showed a HARD-EDGED STRIPE: a sheen with square corners
+# is not a sheen, it is a drip of paint, and no hue fixes that. The cause is
+# arithmetic - vertex colours are interpolated across faces, so on a 4x5 grid the
+# whole falloff has to be carried by FIVE COLUMNS. `_smooth` was being sampled
+# too coarsely to be seen; the ramp's maths was never the problem.
+# 8,10 AND NOT MORE, BECAUSE THE METRIC SATURATES THERE AND THAT IS THE EVIDENCE
+# THE CAUSE WAS SAMPLING: side body_sat 0.4308 (4x5) -> 0.4930 (8x10) -> 0.4926
+# (14x18), i.e. 14x18 buys nothing for 2850 verts against 990.
+# THE SILHOUETTE DOES NOT MOVE AND THAT IS ASSERTED, NOT ASSUMED: every vertex
+# still lies on the same analytic bowed surface, and the body's world bounds are
+# identical across all three arms to 1e-6 (renders/art/minibosses/_sheen_grid_ab.json).
+LEAF_NX, LEAF_NZ = 8, 10
 # the geometric occlusion end. SHADE_FLOOR is how far toward COPPER_DEEP the
 # most-occluded point goes; it is deliberately shallow, because this is contact
 # shadow between stacked sheets and not a lighting term.
@@ -7591,7 +7623,13 @@ def _leaf(P, cx, cy, cz, yaw, pitch, w=0.52, h=0.68, slot='bone', thick=0.016):
     that is a team-lead call, not mine.
     """
     V, F = [], []
-    nx, nz = 4, 5
+    # THE LEAF'S GRID, LIFTED TO A MODULE CONSTANT 18 Nov SO IT CAN BE SWEPT.
+    # The DEFAULT IS THE SHIPPED 4,5 EXACTLY, so every body built without
+    # touching it is byte-identical to yesterday's. It is a constant and not an
+    # argument because the sweep that needs it patches the module, and an
+    # argument would have had to be threaded through five call sites in
+    # greener() where a typo would silently re-tessellate one leaf of five.
+    nx, nz = LEAF_NX, LEAF_NZ
     for iz in range(nz + 1):
         tz = iz / float(nz)
         for ix in range(nx + 1):

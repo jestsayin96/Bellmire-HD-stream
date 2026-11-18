@@ -1,0 +1,361 @@
+{
+ "ok": true,
+ "errors": [],
+ "key": "greener",
+ "span": "plates",
+ "slot": "bone",
+ "shipped_sheen": [
+  1.0,
+  0.88,
+  0.82
+ ],
+ "fixed": {
+  "SHEEN_MAX": 0.86,
+  "SHEEN_LO": 0.58,
+  "SHEEN_HI": 0.8,
+  "SHADE_FLOOR": 0.42,
+  "COPPER_BODY": [
+   1.0,
+   0.52,
+   0.235
+  ],
+  "COPPER_DEEP": [
+   0.3,
+   0.125,
+   0.052
+  ]
+ },
+ "arms": {
+  "ship": {
+   "sheen_rgb": [
+    1.0,
+    0.88,
+    0.82
+   ],
+   "sheen_authored_sat": 0.18,
+   "by_view": {
+    "front": {
+     "mask_px": 16359,
+     "median_lum": 0.1856,
+     "body_sat": 0.5287,
+     "hilite_desat": 0.4345,
+     "cream_share": 0.2388,
+     "hue_retention": 0.6911
+    },
+    "side": {
+     "mask_px": 9328,
+     "median_lum": 0.2042,
+     "body_sat": 0.3091,
+     "hilite_desat": 0.3086,
+     "cream_share": 0.4206,
+     "hue_retention": 0.4041
+    },
+    "back": {
+     "mask_px": 33989,
+     "median_lum": 0.3341,
+     "body_sat": 0.5405,
+     "hilite_desat": 0.4278,
+     "cream_share": 0.2595,
+     "hue_retention": 0.7065
+    }
+   },
+   "painted_items": 5,
+   "painted_verts": 300,
+   "vcol_mean_rgb": [
+    0.877,
+    0.5197,
+    0.3152
+   ],
+   "vcol_mean_sat": 0.7665
+  },
+  "pale": {
+   "sheen_rgb": [
+    1.0,
+    0.8,
+    0.715
+   ],
+   "sheen_authored_sat": 0.285,
+   "by_view": {
+    "front": {
+     "mask_px": 16359,
+     "median_lum": 0.1808,
+     "body_sat": 0.5294,
+     "hilite_desat": 0.4099,
+     "cream_share": 0.1949,
+     "hue_retention": 0.692
+    },
+    "side": {
+     "mask_px": 9328,
+     "median_lum": 0.1977,
+     "body_sat": 0.3478,
+     "hilite_desat": 0.2951,
+     "cream_share": 0.3695,
+     "hue_retention": 0.4546
+    },
+    "back": {
+     "mask_px": 33999,
+     "median_lum": 0.3341,
+     "body_sat": 0.5405,
+     "hilite_desat": 0.3873,
+     "cream_share": 0.2209,
+     "hue_retention": 0.7065
+    }
+   },
+   "painted_items": 5,
+   "painted_verts": 300,
+   "vcol_mean_rgb": [
+    0.877,
+    0.5044,
+    0.2951
+   ],
+   "vcol_mean_sat": 0.7665
+  },
+  "warm": {
+   "sheen_rgb": [
+    1.0,
+    0.735,
+    0.64
+   ],
+   "sheen_authored_sat": 0.36,
+   "by_view": {
+    "front": {
+     "mask_px": 16359,
+     "median_lum": 0.1775,
+     "body_sat": 0.5299,
+     "hilite_desat": 0.3893,
+     "cream_share": 0.1728,
+     "hue_retention": 0.6927
+    },
+    "side": {
+     "mask_px": 9328,
+     "median_lum": 0.1915,
+     "body_sat": 0.3889,
+     "hilite_desat": 0.2862,
+     "cream_share": 0.3234,
+     "hue_retention": 0.5084
+    },
+    "back": {
+     "mask_px": 34057,
+     "median_lum": 0.3333,
+     "body_sat": 0.5405,
+     "hilite_desat": 0.3518,
+     "cream_share": 0.1896,
+     "hue_retention": 0.7065
+    }
+   },
+   "painted_items": 5,
+   "painted_verts": 300,
+   "vcol_mean_rgb": [
+    0.877,
+    0.4919,
+    0.2806
+   ],
+   "vcol_mean_sat": 0.7665
+  },
+  "cu": {
+   "sheen_rgb": [
+    1.0,
+    0.667,
+    0.5634
+   ],
+   "sheen_authored_sat": 0.4366,
+   "by_view": {
+    "front": {
+     "mask_px": 16359,
+     "median_lum": 0.1738,
+     "body_sat": 0.5323,
+     "hilite_desat": 0.3641,
+     "cream_share": 0.1566,
+     "hue_retention": 0.6958
+    },
+    "side": {
+     "mask_px": 9328,
+     "median_lum": 0.1851,
+     "body_sat": 0.4308,
+     "hilite_desat": 0.2783,
+     "cream_share": 0.292,
+     "hue_retention": 0.5631
+    },
+    "back": {
+     "mask_px": 34068,
+     "median_lum": 0.3333,
+     "body_sat": 0.5405,
+     "hilite_desat": 0.3132,
+     "cream_share": 0.1445,
+     "hue_retention": 0.7065
+    }
+   },
+   "painted_items": 5,
+   "painted_verts": 300,
+   "vcol_mean_rgb": [
+    0.877,
+    0.4788,
+    0.2659
+   ],
+   "vcol_mean_sat": 0.7665
+  }
+ },
+ "controls": {
+  "timber": {
+   "front": {
+    "mask_px": 16340,
+    "median_lum": 0.0946,
+    "body_sat": 0.5517,
+    "hilite_desat": 0.214,
+    "cream_share": 0.0278
+   },
+   "side": {
+    "mask_px": 9321,
+    "median_lum": 0.1148,
+    "body_sat": 0.5,
+    "hilite_desat": 0.1603,
+    "cream_share": 0.0075
+   },
+   "back": {
+    "mask_px": 34053,
+    "median_lum": 0.225,
+    "body_sat": 0.4658,
+    "hilite_desat": 0.0952,
+    "cream_share": 0.0005
+   }
+  },
+  "flat": {
+   "front": {
+    "mask_px": 16361,
+    "median_lum": 0.1715,
+    "body_sat": 0.5652,
+    "hilite_desat": 0.2501,
+    "cream_share": 0.0195
+   },
+   "side": {
+    "mask_px": 9328,
+    "median_lum": 0.1914,
+    "body_sat": 0.5312,
+    "hilite_desat": 0.2173,
+    "cream_share": 0.0028
+   },
+   "back": {
+    "mask_px": 34084,
+    "median_lum": 0.3658,
+    "body_sat": 0.5285,
+    "hilite_desat": 0.1071,
+    "cream_share": 0.0002
+   }
+  }
+ },
+ "vcol_hash": {
+  "ship": "18e712b17b8efbc9",
+  "pale": "cbfca9d85bf36b62",
+  "warm": "e49f3f2eaef4974e",
+  "cu": "30f03209ec45e1ca"
+ },
+ "look": {
+  "ship/front": {
+   "opaque_px": 46265,
+   "border_alpha": 0.0
+  },
+  "ship/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "ship/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  },
+  "pale/front": {
+   "opaque_px": 46265,
+   "border_alpha": 0.0
+  },
+  "pale/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "pale/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  },
+  "warm/front": {
+   "opaque_px": 46265,
+   "border_alpha": 0.0
+  },
+  "warm/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "warm/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  },
+  "cu/front": {
+   "opaque_px": 46265,
+   "border_alpha": 0.0
+  },
+  "cu/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "cu/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  }
+ },
+ "span_authored_rgb": [
+  1.0,
+  0.52,
+  0.235
+ ],
+ "authored_sat": 0.765,
+ "vcol_items_painted": 5,
+ "ctrl_flat_paint_blind": {
+  "front": {
+   "on_ship_arm": {
+    "mask_px": 16361,
+    "median_lum": 0.1715,
+    "body_sat": 0.5652,
+    "hilite_desat": 0.2501,
+    "cream_share": 0.0195
+   },
+   "on_cu_arm": {
+    "mask_px": 16361,
+    "median_lum": 0.1715,
+    "body_sat": 0.5652,
+    "hilite_desat": 0.2501,
+    "cream_share": 0.0195
+   }
+  },
+  "side": {
+   "on_ship_arm": {
+    "mask_px": 9328,
+    "median_lum": 0.1914,
+    "body_sat": 0.5312,
+    "hilite_desat": 0.2173,
+    "cream_share": 0.0028
+   },
+   "on_cu_arm": {
+    "mask_px": 9328,
+    "median_lum": 0.1914,
+    "body_sat": 0.5312,
+    "hilite_desat": 0.2173,
+    "cream_share": 0.0028
+   }
+  },
+  "back": {
+   "on_ship_arm": {
+    "mask_px": 34084,
+    "median_lum": 0.3658,
+    "body_sat": 0.5285,
+    "hilite_desat": 0.1071,
+    "cream_share": 0.0002
+   },
+   "on_cu_arm": {
+    "mask_px": 34084,
+    "median_lum": 0.3658,
+    "body_sat": 0.5285,
+    "hilite_desat": 0.1071,
+    "cream_share": 0.0002
+   }
+  }
+ },
+ "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_sheen_ab_sheet.png",
+ "sheet_layout": "rows top->bottom: ship, pale, warm, cu ; cols left->right: front, side, back"
+}

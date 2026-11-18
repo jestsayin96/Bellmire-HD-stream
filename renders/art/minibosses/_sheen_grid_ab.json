@@ -1,0 +1,175 @@
+{
+ "ok": true,
+ "errors": [],
+ "key": "greener",
+ "held_sheen": [
+  1.0,
+  0.667,
+  0.5634
+ ],
+ "shipped_grid": [
+  4,
+  5
+ ],
+ "arms": {
+  "g4x5": {
+   "grid": [
+    4,
+    5
+   ],
+   "leaf_verts": 300,
+   "verts_per_leaf": 60,
+   "by_view": {
+    "front": {
+     "mask_px": 16359,
+     "median_lum": 0.1738,
+     "body_sat": 0.5323,
+     "hilite_desat": 0.3641,
+     "cream_share": 0.1566
+    },
+    "side": {
+     "mask_px": 9328,
+     "median_lum": 0.1851,
+     "body_sat": 0.4308,
+     "hilite_desat": 0.2783,
+     "cream_share": 0.292
+    },
+    "back": {
+     "mask_px": 34068,
+     "median_lum": 0.3333,
+     "body_sat": 0.5405,
+     "hilite_desat": 0.3132,
+     "cream_share": 0.1445
+    }
+   }
+  },
+  "g8x10": {
+   "grid": [
+    8,
+    10
+   ],
+   "leaf_verts": 990,
+   "verts_per_leaf": 198,
+   "by_view": {
+    "front": {
+     "mask_px": 16367,
+     "median_lum": 0.1713,
+     "body_sat": 0.5345,
+     "hilite_desat": 0.378,
+     "cream_share": 0.1633
+    },
+    "side": {
+     "mask_px": 9329,
+     "median_lum": 0.1883,
+     "body_sat": 0.493,
+     "hilite_desat": 0.2754,
+     "cream_share": 0.2835
+    },
+    "back": {
+     "mask_px": 34077,
+     "median_lum": 0.3417,
+     "body_sat": 0.5378,
+     "hilite_desat": 0.3301,
+     "cream_share": 0.1603
+    }
+   }
+  },
+  "g14x18": {
+   "grid": [
+    14,
+    18
+   ],
+   "leaf_verts": 2850,
+   "verts_per_leaf": 570,
+   "by_view": {
+    "front": {
+     "mask_px": 16369,
+     "median_lum": 0.171,
+     "body_sat": 0.5357,
+     "hilite_desat": 0.3787,
+     "cream_share": 0.1615
+    },
+    "side": {
+     "mask_px": 9334,
+     "median_lum": 0.189,
+     "body_sat": 0.4926,
+     "hilite_desat": 0.2759,
+     "cream_share": 0.2845
+    },
+    "back": {
+     "mask_px": 34079,
+     "median_lum": 0.3409,
+     "body_sat": 0.5378,
+     "hilite_desat": 0.3329,
+     "cream_share": 0.1657
+    }
+   }
+  }
+ },
+ "look": {
+  "g4x5/front": {
+   "opaque_px": 46265,
+   "border_alpha": 0.0
+  },
+  "g4x5/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "g4x5/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  },
+  "g8x10/front": {
+   "opaque_px": 46267,
+   "border_alpha": 0.0
+  },
+  "g8x10/side": {
+   "opaque_px": 33812,
+   "border_alpha": 0.0
+  },
+  "g8x10/back": {
+   "opaque_px": 46045,
+   "border_alpha": 0.0
+  },
+  "g14x18/front": {
+   "opaque_px": 46269,
+   "border_alpha": 0.0
+  },
+  "g14x18/side": {
+   "opaque_px": 33813,
+   "border_alpha": 0.0
+  },
+  "g14x18/back": {
+   "opaque_px": 46044,
+   "border_alpha": 0.0
+  }
+ },
+ "bounds": {
+  "g4x5": [
+   -1.445361,
+   -1.637744,
+   0.003254,
+   1.267521,
+   0.526516,
+   2.503254
+  ],
+  "g8x10": [
+   -1.445361,
+   -1.637744,
+   0.003254,
+   1.267521,
+   0.526516,
+   2.503254
+  ],
+  "g14x18": [
+   -1.445361,
+   -1.637744,
+   0.003254,
+   1.267521,
+   0.526516,
+   2.503254
+  ]
+ },
+ "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_sheen_grid_sheet.png",
+ "sheet_layout": "rows top->bottom: g4x5, g8x10, g14x18 ; cols left->right: front, side, back"
+}

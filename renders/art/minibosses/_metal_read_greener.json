@@ -1,1 +1,198 @@
-{"ok": false, "errors": ["greener/front: hilite_desat scores 0.971 but the span's slot is VERTEX-PAINTED, so this metric is reading a band that was authored into the mesh rather than reflection behaviour. A painted stripe satisfies 'the bright end runs whiter than the body' by construction. NOT a pass.", "greener/side: hilite_desat scores 0.528 but the span's slot is VERTEX-PAINTED, so this metric is reading a band that was authored into the mesh rather than reflection behaviour. A painted stripe satisfies 'the bright end runs whiter than the body' by construction. NOT a pass.", "greener/back: hilite_desat scores 0.962 but the span's slot is VERTEX-PAINTED, so this metric is reading a band that was authored into the mesh rather than reflection behaviour. A painted stripe satisfies 'the bright end runs whiter than the body' by construction. NOT a pass."], "blind": [], "key": "greener", "span": "plates", "bar": 0.5, "light_delta": 28.0, "tag": "pass10-baked-sheen-PAINTED-NOT-EARNED", "by_view": {"front": {"raw": {"shipped": {"mask_px": 16359, "spec_peak": 0.7243, "spec_range": 0.5386, "median_lum": 0.1856, "mobility": 0.5639, "speckle": 0.07836664832813742, "hilite_desat": 0.43448472023010254, "body_sat": 0.5287356376647949}, "ctrl_timber": {"mask_px": 16340, "spec_peak": 0.5126, "spec_range": 0.418, "median_lum": 0.0946, "mobility": 0.5406, "speckle": 0.07472460220318237, "hilite_desat": 0.21399396657943726, "body_sat": 0.5517241358757019}, "ctrl_copper": {"mask_px": 16342, "spec_peak": 0.4936, "spec_range": 0.3121, "median_lum": 0.1814, "mobility": 0.0085, "speckle": 0.014808468975645576, "hilite_desat": 0.0417991578578949, "body_sat": 0.29310348629951477}}, "scores": {"hilite_desat": 0.971}, "verdict": "PAINTED - NOT EARNED AS REFLECTION", "authored_sat": 0.765, "hue_retention": 0.6912}, "side": {"raw": {"shipped": {"mask_px": 9328, "spec_peak": 0.719, "spec_range": 0.5148, "median_lum": 0.2042, "mobility": 0.6735, "speckle": 0.09701972555746141, "hilite_desat": 0.30860334634780884, "body_sat": 0.3090909421443939}, "ctrl_timber": {"mask_px": 9321, "spec_peak": 0.4975, "spec_range": 0.3827, "median_lum": 0.1148, "mobility": 0.668, "speckle": 0.08808067803883704, "hilite_desat": 0.1602555513381958, "body_sat": 0.5}, "ctrl_copper": {"mask_px": 9327, "spec_peak": 0.2075, "spec_range": 0.0253, "median_lum": 0.1823, "mobility": 0.0066, "speckle": 0.003966977591937386, "hilite_desat": 0.08994120359420776, "body_sat": 0.285714328289032}}, "scores": {"hilite_desat": 0.528}, "verdict": "PAINTED - NOT EARNED AS REFLECTION", "authored_sat": 0.765, "hue_retention": 0.404}, "back": {"raw": {"shipped": {"mask_px": 33989, "spec_peak": 0.5938, "spec_range": 0.2596, "median_lum": 0.3341, "mobility": 0.7279, "speckle": 0.018476565947806643, "hilite_desat": 0.42776235938072205, "body_sat": 0.5405405163764954}, "ctrl_timber": {"mask_px": 34053, "spec_peak": 0.3502, "spec_range": 0.1252, "median_lum": 0.225, "mobility": 0.6961, "speckle": 0.015240947934102722, "hilite_desat": 0.0951617956161499, "body_sat": 0.465753436088562}, "ctrl_copper": {"mask_px": 33945, "spec_peak": 0.2016, "spec_range": 0.0193, "median_lum": 0.1823, "mobility": 0.0023, "speckle": 0.0026513477684489617, "hilite_desat": 0.0037501156330108643, "body_sat": 0.2982456386089325}}, "scores": {"hilite_desat": 0.962}, "verdict": "PAINTED - NOT EARNED AS REFLECTION", "authored_sat": 0.765, "hue_retention": 0.7066}}, "reference": {"per_file": {"sword_rare.glb": {"mask_px": 33434, "bright_px": 16651, "speckle": 0.0177, "hilite_desat": 0.3174}, "axe_rare.glb": {"mask_px": 62464, "bright_px": 30570, "speckle": 0.0107, "hilite_desat": 0.5646}, "hammer_rare.glb": {"mask_px": 129214, "bright_px": 64523, "speckle": 0.0062, "hilite_desat": 0.5742}, "dagger_rare.glb": {"mask_px": 29606, "bright_px": 14605, "speckle": 0.0188, "hilite_desat": 0.3051}}, "speckle": 0.0142, "hilite_desat": 0.441, "n": 4}, "span_slots": ["bone", "dark"], "measured_items": 5, "span_authored_rgb": [1.0, 0.52, 0.235], "vcol_items_painted": 5}
+{
+ "ok": false,
+ "errors": [
+  "greener/front: hilite_desat scores 0.705 but the span's slot is VERTEX-PAINTED, so this metric is reading a band that was authored into the mesh rather than reflection behaviour. A painted stripe satisfies 'the bright end runs whiter than the body' by construction. NOT a pass.",
+  "greener/back: hilite_desat scores 0.672 but the span's slot is VERTEX-PAINTED, so this metric is reading a band that was authored into the mesh rather than reflection behaviour. A painted stripe satisfies 'the bright end runs whiter than the body' by construction. NOT a pass."
+ ],
+ "blind": [],
+ "key": "greener",
+ "span": "plates",
+ "bar": 0.5,
+ "light_delta": 28.0,
+ "tag": "post-sheen-colour-and-grid-18Nov-STILL-PAINTED-NOT-EARNED",
+ "by_view": {
+  "front": {
+   "raw": {
+    "shipped": {
+     "mask_px": 16367,
+     "spec_peak": 0.6987,
+     "spec_range": 0.5275,
+     "median_lum": 0.1713,
+     "mobility": 0.5621,
+     "speckle": 0.0781450479623633,
+     "hilite_desat": 0.3780292868614197,
+     "body_sat": 0.5344827771186829
+    },
+    "ctrl_timber": {
+     "mask_px": 16350,
+     "spec_peak": 0.5126,
+     "spec_range": 0.422,
+     "median_lum": 0.0907,
+     "mobility": 0.531,
+     "speckle": 0.07119266055045871,
+     "hilite_desat": 0.21571874618530273,
+     "body_sat": 0.5517241358757019
+    },
+    "ctrl_copper": {
+     "mask_px": 16351,
+     "spec_peak": 0.4937,
+     "spec_range": 0.3123,
+     "median_lum": 0.1814,
+     "mobility": 0.0085,
+     "speckle": 0.0144333679897254,
+     "hilite_desat": 0.041477352380752563,
+     "body_sat": 0.29310348629951477
+    },
+    "ctrl_flat": {
+     "mask_px": 16368,
+     "spec_peak": 0.6627,
+     "spec_range": 0.4948,
+     "median_lum": 0.1679,
+     "mobility": 0.569,
+     "speckle": 0.07966764418377321,
+     "hilite_desat": 0.25333431363105774,
+     "body_sat": 0.568965494632721
+    }
+   },
+   "scores": {
+    "hilite_desat": 0.705
+   },
+   "verdict": "PAINTED - NOT EARNED AS REFLECTION",
+   "authored_sat": 0.765,
+   "hue_retention": 0.6987
+  },
+  "side": {
+   "raw": {
+    "shipped": {
+     "mask_px": 9329,
+     "spec_peak": 0.6873,
+     "spec_range": 0.4989,
+     "median_lum": 0.1883,
+     "mobility": 0.6765,
+     "speckle": 0.0782506163575946,
+     "hilite_desat": 0.2754110097885132,
+     "body_sat": 0.49295774102211
+    },
+    "ctrl_timber": {
+     "mask_px": 9322,
+     "spec_peak": 0.4939,
+     "spec_range": 0.3715,
+     "median_lum": 0.1223,
+     "mobility": 0.6868,
+     "speckle": 0.07069298433812486,
+     "hilite_desat": 0.15680044889450073,
+     "body_sat": 0.4933333396911621
+    },
+    "ctrl_copper": {
+     "mask_px": 9328,
+     "spec_peak": 0.2075,
+     "spec_range": 0.0253,
+     "median_lum": 0.1823,
+     "mobility": 0.007,
+     "speckle": 0.003966552315608919,
+     "hilite_desat": 0.08674643933773041,
+     "body_sat": 0.285714328289032
+    },
+    "ctrl_flat": {
+     "mask_px": 9329,
+     "spec_peak": 0.6515,
+     "spec_range": 0.4517,
+     "median_lum": 0.1998,
+     "mobility": 0.6901,
+     "speckle": 0.07428448922714118,
+     "hilite_desat": 0.21540549397468567,
+     "body_sat": 0.5275590419769287
+    }
+   },
+   "scores": {
+    "hilite_desat": 0.41
+   },
+   "verdict": "READS AS TIMBER",
+   "authored_sat": 0.765,
+   "hue_retention": 0.6444
+  },
+  "back": {
+   "raw": {
+    "shipped": {
+     "mask_px": 34077,
+     "spec_peak": 0.5567,
+     "spec_range": 0.215,
+     "median_lum": 0.3417,
+     "mobility": 0.7367,
+     "speckle": 0.01737242128121607,
+     "hilite_desat": 0.33013319969177246,
+     "body_sat": 0.5378150939941406
+    },
+    "ctrl_timber": {
+     "mask_px": 34063,
+     "spec_peak": 0.3502,
+     "spec_range": 0.1204,
+     "median_lum": 0.2298,
+     "mobility": 0.6766,
+     "speckle": 0.014355752576108974,
+     "hilite_desat": 0.09341111779212952,
+     "body_sat": 0.4615384638309479
+    },
+    "ctrl_copper": {
+     "mask_px": 33958,
+     "spec_peak": 0.2055,
+     "spec_range": 0.0232,
+     "median_lum": 0.1823,
+     "mobility": 0.0023,
+     "speckle": 0.0027092290476470934,
+     "hilite_desat": 0.0010500550270080566,
+     "body_sat": 0.2982456386089325
+    },
+    "ctrl_flat": {
+     "mask_px": 34100,
+     "spec_peak": 0.5156,
+     "spec_range": 0.1423,
+     "median_lum": 0.3733,
+     "mobility": 0.7429,
+     "speckle": 0.018152492668621702,
+     "hilite_desat": 0.10730716586112976,
+     "body_sat": 0.524193525314331
+    }
+   },
+   "scores": {
+    "hilite_desat": 0.672
+   },
+   "verdict": "PAINTED - NOT EARNED AS REFLECTION",
+   "authored_sat": 0.765,
+   "hue_retention": 0.703
+  }
+ },
+ "view_transform_default": "AgX",
+ "view_transform_requested": null,
+ "view_transform_active": "AgX",
+ "reference": {
+  "per_file": {
+   "sword_rare.glb": {
+    "mask_px": 33434,
+    "bright_px": 16651,
+    "speckle": 0.0177,
+    "hilite_desat": 0.3174
+   },
+   "hammer_rare.glb": {
+    "mask_px": 129214,
+    "bright_px": 64523,
+    "speckle": 0.0062,
+    "hilite_desat": 0.5742
+   }
+  },
+  "speckle": 0.012,
+  "hilite_desat": 0.4458,
+  "n": 2
+ },
+ "span_slots": [
+  "bone",
+  "dark"
+ ],
+ "measured_items": 5,
+ "span_authored_rgb": [
+  1.0,
+  0.52,
+  0.235
+ ],
+ "vcol_items_painted": 5
+}

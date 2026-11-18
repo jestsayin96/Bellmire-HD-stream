@@ -10943,3 +10943,18 @@ _b55_probe.gd, _b55_out.txt and _b55_run2.log are GONE; _b55_run.log failed with
 held open by run 1's Godot process. Untracked, inert, nothing loads it, named here, cleared at 15:45.
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## hub 18 Nov 2026 15:39 CT - row 4 answered: sheet_overlap.js STAYS under web/; web/ unchanged; NOT READY TO PUBLISH
+TAKE THIS NEXT row: HUB (:37) row 4 of the 15:1x block (does web/tools/sheet_overlap.js belong under web/).
+ANSWER: it stays - web/tools/ already ships gen_d20.py, make_item_icons.py, og.html to gh-pages, so it is
+not a new kind of file; it is unreferenced by index.html/app.js, clean of secrets; moving it out would
+mean writing outside web/, which this lane does not own. Recorded in web/NOTES.md.
+NUMBER: publish delta re-measured off the trees, gh-pages^{tree} 2d14aa9 vs HEAD:web 35eb801 = 3 files,
++60/-24 (app.js -14, style.css +25/-10, tools/sheet_overlap.js +45). web/ is byte-identical to origin/hub
+after merging origin/main (git diff --stat empty over web/ and docs/HUB_SECURITY.md).
+CHECKS: node --check app.js OK; innerHTML at app.js:255 and :301 only, both page-owned; zero outerHTML /
+insertAdjacentHTML / document.write / eval / new Function in code; secret grep clean. No browser run and no
+screenshot this hour because web/ did not change, so the hostile-name test is not owed. Live-dot colour: unchanged.
+No new claim of READY TO PUBLISH; the publish decision is the supervisor's.
+Hygiene: WORK_PLAN.md working copy was byte-identical to origin/hub c04887f (empty diff) and blocked the
+fast-forward; stashed (stash@{0}) rather than discarded, then ff-merged. Stash is inert and can be dropped.

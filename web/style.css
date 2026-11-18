@@ -1394,6 +1394,10 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
   padding: 5px 0 5px 8px; border-left: 3px solid transparent; border-bottom: 1px solid rgba(128,128,128,.2); font-size: .85rem; }
 .sat-item .ic { width: 16px; height: 16px; }
 .sat-item.worn { background: rgba(58,166,160,.07); }
+/* Rarity frames on a satchel row. .sat-item sets border-left transparent AFTER the generic .rar-* rules (equal specificity, later wins), so the frame never showed - measured 18 Nov: all five hued rungs computed rgba(0,0,0,0). junk/starting/common stay bare. */
+.sat-item.rar-uncommon { border-left-color: var(--rar-uncommon); } .sat-item.rar-rare { border-left-color: var(--rar-rare); }
+.sat-item.rar-very-rare, .sat-item.rar-epic { border-left-color: var(--rar-very-rare); } .sat-item.rar-legendary { border-left-color: var(--rar-legendary); }
+.sat-item.rar-artifact { border-left-color: var(--rar-artifact); }
 .sat-name { overflow-wrap: anywhere; }
 .sat-qty, .sat-tag { font-size: .72rem; opacity: .8; }
 .sat-tag.drop { color: #8a2a1a; font-weight: 700; opacity: 1; }

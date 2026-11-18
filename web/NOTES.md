@@ -912,3 +912,13 @@ No code changed; H32 passes 1-5 are all in (ticked whole at ddee675) and the thu
 
 ## H32 standing check (hub, 2026-11-17 ~20:38 CT, after merging origin/main and origin/hub)
 No code changed. `git diff HEAD origin/main -- web/ docs/HUB_SECURITY.md` is empty; the icon manifest source commit (2473836) has no later change under assets/icons/items, so the 520 thumbnails are not stale. Measured: `node --check app.js` OK; innerHTML only at the two page-owned sites (status line, failed-fetch box), no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP unchanged (img-src 'self' data:, no new origin); web/icons/items = 520 WebP, 2,430,050 bytes (budget 6 MB). No screenshot this hour - nothing visual changed since the 02:00 look. Not re-run headless: state tests (?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1, hostile name) - web/ is byte-identical to the build they last passed on. Live dot: red (--live). Loose untracked files (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) stay untracked: delete refused on this machine, 6 MB binary not worth keeping in git.
+
+## H32 LIVE-PAGE LOOK (hub, 2026-11-17 ~22:50 CT, after merging origin/main)
+Row from the team lead's 21:58 block: look at the PUBLISHED page in a real browser. No code changed. Real browser = Claude's built-in browser pane (the cloud sandbox cannot reach github.io: ERR_TUNNEL_CONNECTION_FAILED, so no screenshot file was kept; the pane screenshot was viewed).
+- LOADS: https://jestsayin96.github.io/Bellmire-HD-stream/ title "Bellmire HD - the Guild Hall"; CSP meta present.
+- style.css and app.js: both 200; style.css parsed 1009 CSS rules; Gloock woff2 200; Supabase snapshot fetch 200. --live resolves to #e5484d (red live dot).
+- CONSOLE: 0 messages (no errors, no warnings).
+- ICONS: the live snapshot carries no shop data ("Bellmire has not reported its shops yet", game last ran 2 days ago), so the Shops tab has no item pictures to render (0 images in DOM, 0 broken). Resolved by direct probe instead: icons/items/amulet/bell_amulet.webp and barracks_key.webp each load, 160 px wide.
+- RARITY FRAMES per rung: NOT checkable on the live page - no items are served, and the served style.css is the old ladder (hub's change is unpublished, as expected). Left alone.
+- LOOKED AT: rail, stage, welcome card, stale banner ("Last word from the town 2 days ago") and right chat column all render and read correctly in the pane. Pane was ~800x600 and reported innerWidth 0, so scrollHeight-innerHeight=55 from that run is NOT a valid H13 measurement; not recorded as a finding.
+- Served build is at least the H32 layout; I did not diff it against gh-pages 40223be (no access to that branch from here by design).

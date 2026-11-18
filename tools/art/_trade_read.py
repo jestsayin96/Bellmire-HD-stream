@@ -49,6 +49,10 @@ TRADE = {
     "strickler": ("beam", "pan", "weights", "measure", "strickle"),
     "pressman": ("yoke", "collars", "taken"),
     "tapster": None,          # filled from the builder's own spans minus body
+    # THE DYER: the frame is structure, not trade. A tenter frame with nothing
+    # on it is a drying rack; the cloth, the vat, the paddle, the skeins and
+    # the splashes are the job.
+    "dyer": ("sheets", "vat", "paddle", "skeins", "splashes"),
 }
 BODY_SPANS = ("man", "body", "arms", "legs", "head")
 
@@ -60,13 +64,16 @@ def _mats(key):
     body = tuple(c * dull + 0.010 * wear for c in body)
     rough = 0.34 + 0.40 * wear
     metal = 0.55 * (1.0 - wear) ** 1.4
-    return {
+    mats = {
         'body': L.mat_solid(key + "_tb", body, rough, metal),
         'dark': L.mat_solid(key + "_td", tuple(c * 0.16 + 0.012 for c in body), 0.74, 0.04),
         'bone': L.mat_solid(key + "_tn", tuple((0.30 + c * 0.55) * dull for c in tint),
                             rough * 0.9, 0.02),
         'glow': L.mat_glow(key + "_tg", tuple(min(1.0, c / max(aura)) for c in aura), 3.2),
     }
+    # the SHIPPING materials, or this harness measures a creature that does not
+    # exist. Added with the Dyer, 17 Nov; a no-op for all twenty-three.
+    return M.apply_overrides(key, mats)
 
 
 def _objs(key, items, mats, suffix):

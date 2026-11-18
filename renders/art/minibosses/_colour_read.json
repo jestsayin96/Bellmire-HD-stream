@@ -1,0 +1,346 @@
+{
+ "bar_bands": 2,
+ "bar_sat_mean": 0.207,
+ "creatures": {
+  "drillmaster": {
+   "by_view": {
+    "back": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 79288,
+     "detached": {
+      "components": 1,
+      "main_px": 83548,
+      "stray": []
+     },
+     "lit_px": 80953,
+     "mean_hue": 41.9,
+     "n_bands_held": 1,
+     "sat_mean": 0.3524,
+     "sat_p90": 0.4118,
+     "sil_px": 84911
+    },
+    "front": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 79086,
+     "detached": {
+      "components": 2,
+      "main_px": 82848,
+      "stray": [
+       {
+        "bbox": [
+         95,
+         467,
+         111,
+         549
+        ],
+        "px": 808
+       }
+      ]
+     },
+     "lit_px": 82108,
+     "mean_hue": 41.8,
+     "n_bands_held": 1,
+     "sat_mean": 0.2456,
+     "sat_p90": 0.3684,
+     "sil_px": 85216
+    },
+    "side": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 36680,
+     "detached": {
+      "components": 2,
+      "main_px": 40087,
+      "stray": [
+       {
+        "bbox": [
+         200,
+         460,
+         216,
+         542
+        ],
+        "px": 806
+       }
+      ]
+     },
+     "lit_px": 38675,
+     "mean_hue": 41.5,
+     "n_bands_held": 1,
+     "sat_mean": 0.2476,
+     "sat_p90": 0.375,
+     "sil_px": 42207
+    }
+   },
+   "override": false
+  },
+  "dyer": {
+   "by_view": {
+    "back": {
+     "bands": {
+      "blue": 0.7213,
+      "green_teal": 0.0,
+      "red_orange": 0.2773,
+      "violet_magenta": 0.0014,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "blue",
+      "red_orange"
+     ],
+     "chroma_px": 72740,
+     "detached": {
+      "components": 1,
+      "main_px": 121090,
+      "stray": []
+     },
+     "lit_px": 107098,
+     "mean_hue": 222.2,
+     "n_bands_held": 2,
+     "sat_mean": 0.5224,
+     "sat_p90": 0.8272,
+     "sil_px": 123379
+    },
+    "front": {
+     "bands": {
+      "blue": 0.6242,
+      "green_teal": 0.0,
+      "red_orange": 0.3741,
+      "violet_magenta": 0.0017,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "blue",
+      "red_orange"
+     ],
+     "chroma_px": 82190,
+     "detached": {
+      "components": 1,
+      "main_px": 123379,
+      "stray": []
+     },
+     "lit_px": 115049,
+     "mean_hue": 231.5,
+     "n_bands_held": 2,
+     "sat_mean": 0.4576,
+     "sat_p90": 0.7343,
+     "sil_px": 125666
+    },
+    "side": {
+     "bands": {
+      "blue": 0.7067,
+      "green_teal": 0.0,
+      "red_orange": 0.2926,
+      "violet_magenta": 0.0006,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "blue",
+      "red_orange"
+     ],
+     "chroma_px": 35840,
+     "detached": {
+      "components": 1,
+      "main_px": 91485,
+      "stray": []
+     },
+     "lit_px": 79049,
+     "mean_hue": 219.5,
+     "n_bands_held": 2,
+     "sat_mean": 0.3216,
+     "sat_p90": 0.6622,
+     "sil_px": 94773
+    }
+   },
+   "override": true
+  },
+  "strickler": {
+   "by_view": {
+    "back": {
+     "error": "BLIND - zero chroma pixels; this body has no colour at all"
+    },
+    "front": {
+     "error": "BLIND - zero chroma pixels; this body has no colour at all"
+    },
+    "side": {
+     "error": "BLIND - zero chroma pixels; this body has no colour at all"
+    }
+   },
+   "override": false
+  },
+  "tanner": {
+   "by_view": {
+    "back": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 37203,
+     "detached": {
+      "components": 2,
+      "main_px": 107614,
+      "stray": [
+       {
+        "bbox": [
+         211,
+         500,
+         221,
+         510
+        ],
+        "px": 96
+       }
+      ]
+     },
+     "lit_px": 104142,
+     "mean_hue": 43.2,
+     "n_bands_held": 1,
+     "sat_mean": 0.1256,
+     "sat_p90": 0.1818,
+     "sil_px": 111887
+    },
+    "front": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 63239,
+     "detached": {
+      "components": 2,
+      "main_px": 107179,
+      "stray": [
+       {
+        "bbox": [
+         298,
+         504,
+         308,
+         514
+        ],
+        "px": 96
+       }
+      ]
+     },
+     "lit_px": 103488,
+     "mean_hue": 43.4,
+     "n_bands_held": 1,
+     "sat_mean": 0.1051,
+     "sat_p90": 0.1667,
+     "sil_px": 111294
+    },
+    "side": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.0,
+      "red_orange": 1.0,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0
+     },
+     "bands_held": [
+      "red_orange"
+     ],
+     "chroma_px": 37510,
+     "detached": {
+      "components": 2,
+      "main_px": 86851,
+      "stray": [
+       {
+        "bbox": [
+         300,
+         507,
+         311,
+         517
+        ],
+        "px": 102
+       }
+      ]
+     },
+     "lit_px": 83937,
+     "mean_hue": 43.3,
+     "n_bands_held": 1,
+     "sat_mean": 0.1061,
+     "sat_p90": 0.1778,
+     "sil_px": 89407
+    }
+   },
+   "override": false
+  }
+ },
+ "errors": [
+  "strickler/front: BLIND - zero chroma pixels; this body has no colour at all",
+  "strickler/side: BLIND - zero chroma pixels; this body has no colour at all",
+  "strickler/back: BLIND - zero chroma pixels; this body has no colour at all",
+  "drillmaster/front: silhouette is in 2 pieces - 808 px at [95, 467, 111, 549] floats off the body",
+  "drillmaster/side: silhouette is in 2 pieces - 806 px at [200, 460, 216, 542] floats off the body",
+  "tanner/front: silhouette is in 2 pieces - 96 px at [298, 504, 308, 514] floats off the body",
+  "tanner/side: silhouette is in 2 pieces - 102 px at [300, 507, 311, 517] floats off the body",
+  "tanner/back: silhouette is in 2 pieces - 96 px at [211, 500, 221, 510] floats off the body"
+ ],
+ "judged": [
+  "dyer"
+ ],
+ "ok": false,
+ "verdict": {
+  "drillmaster": {
+   "judged": false,
+   "n_bands_held": 1,
+   "pass": false,
+   "sat_mean": 0.2456,
+   "why": "sat 0.2456 > bar 0.207; bands 1 < 2"
+  },
+  "dyer": {
+   "judged": true,
+   "n_bands_held": 2,
+   "pass": true,
+   "sat_mean": 0.4576,
+   "why": "sat 0.4576 > bar 0.207; bands 2 >= 2"
+  },
+  "strickler": {
+   "judged": false,
+   "pass": false,
+   "why": "front view did not measure"
+  },
+  "tanner": {
+   "judged": false,
+   "n_bands_held": 1,
+   "pass": false,
+   "sat_mean": 0.1051,
+   "why": "sat 0.1051 <= bar 0.207; bands 1 < 2"
+  }
+ }
+}

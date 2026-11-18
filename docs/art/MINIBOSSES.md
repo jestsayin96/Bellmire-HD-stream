@@ -1614,3 +1614,266 @@ re-cutting a shipped, ticked, wired body for silhouette share under the freeze -
 what the observation is worth is the RULE it produced, which is now in force on
 every new body: the trade must OWN the outline rather than stand next to it, and
 that claim is measured per view by `_trade_read.py` before anything ships.
+
+---
+
+## 24. THE DYER - *IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK*
+*17 Nov 2026, art lane. Seven passes. Theme `workshop`, height 2.60 m, wear 0.30
+(split - see below). `assets/monsters/minibosses/dyer.glb`, 4 meshes, 2,294 faces.*
+
+### THE BRIEF, AND I MEASURED IT BEFORE I AGREED WITH IT
+The team lead, 18:58 CT: *"the strickler is the most MUTED thing in the
+twenty-three ... if a twenty-fourth can carry its trade in COLOUR as well as
+silhouette, that is worth more to me than a twenty-fifth."*
+
+A tint table cannot answer that, so I did not use one. **HSV saturation of every
+opaque lit pixel of each of the 23 distinct bodies' own shipped `front.png`,
+chroma-weighted hue:**
+
+| | |
+|---|---|
+| median satMean | **0.087** |
+| maximum | **0.207 - the DRILLMASTER, the first one ever made** |
+| the STRICKLER | **0.052 - RANK 1 OF 23, the least saturated body in the file** |
+| hue 0-60 deg | 14 bodies |
+| hue 60-110 | 2 |
+| hue 110-190 | **ZERO** |
+| hue 190-260 | 7 |
+| hue 260-360 | **ZERO** |
+
+He is right, and right by the measurement rather than by impression. Half the
+hue wheel is empty across twenty-three bodies, and the register's colour has
+been going DOWN, not up: of the nine most recent bodies not one exceeds 0.36 in
+the tint table or 0.151 in the render.
+
+**AND THE TINT TABLE DISAGREES WITH THE PICTURES, WHICH IS THE REAL FINDING.**
+`CANON` gives the Tallyman HSV saturation **0.66**; its shipped render measures
+**0.136**. Anyone judging this register's colour off `CANON` is judging the
+wrong number.
+
+### THE STRUCTURAL CAUSE IS A DEFECT IN MY OWN GENERATOR
+`minibossgen.build_miniboss` derived **all four materials from one tint**: body
+is the tint mixed with the aura, `dark` is 0.16 x body, `bone` is the tint pushed
+toward white, `glow` is the aura normalised. **Every body in this file was
+monochrome BY CONSTRUCTION.** No builder in twenty-three could have carried two
+hues even if it had wanted to. That is not a taste problem, it is a pipeline
+problem with my name on it.
+
+`minibosses.OVERRIDE` + `apply_overrides()` let a key declare its own per-slot
+materials. It is **asserted empty for every pre-existing key** (the assertion is
+in `build_miniboss`, so the run fails loudly if anyone ever points it at a
+shipped body), so the twenty-three render exactly as before. The four-mesh cap
+is untouched: four slots, four materials, four meshes. `_trade_read.py` and
+`_colour_read.py` both call it, so all three harnesses measure the materials
+that actually ship.
+
+### THE IDEA, AND WHY IT IS NOT ONE OF THE TWENTY-THREE
+**IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK.** It slings the vat. While the
+stain is wet it walks past the tank, past the healer and past whoever is hitting
+it hardest to reach the one wearing the mark - and the stain is **passed hero to
+hero by touch.** The party is not choosing how to kill it; it is choosing who
+carries the mark, for how long, and who is standing close enough to take it next.
+
+Checked by **parsing `CANON`**, not by remembering it: 38 entries, 23 distinct
+bodies. They summon, re-plate, drag one out of the line, douse the lamps, rise
+from their graves, bar the door, steal gear, heal the room, flood it, sow
+thorns, pre-set traps, scale with the fire, throw a voice, set the floor, split
+in two, arm the other monsters, load you down, cut the party in half, learn the
+blow you used, take the haul, drink the brews, collar your fallen and strike the
+party level. **Two touch targeting and neither is this.** The Gaoler takes a
+choice away - it hooks who *it* picks. The Hurdleman divides the room by
+geometry. This one hands the choice **to** the party and makes them keep making
+it. It is the only mechanic in the file the players themselves operate.
+
+### THE COLOUR IS THE TRADE - NOTHING HERE IS DECORATED
+A dyer is the one working man in a town whose **job** is colour. Woad is blue,
+madder is red, weld is yellow. They are on the frame because that is what a
+dye-house hangs out to dry; on his arms because that is what the work does to a
+man to the elbow; and the vat is emissive because an open vat of hot dye over a
+fire genuinely gives off light. If this creature were grey it would be a man
+standing **next to** a trade instead of wearing it - which is the rule the
+Tanner observation produced.
+
+### THE READ: **A MAN AT A VAT UNDER THREE HANGING SHEETS**
+Nothing in the other twenty-three has a broad hanging plane in it at all.
+
+The frame is **turned 28 degrees about Z on purpose**, and that is the
+Strickler's right-angle lesson applied to a worse case. A horizontal can only be
+read from the camera it is not pointing at; **a flat sheet is a LINE from one
+side.** Rather than hang six sheets, the frame is rotated so neither camera is
+normal or tangent to it, and each sheet is **bowed in Y with the bow growing
+toward the hem**, because a wet sheet hangs heavy and swings out. Measured, not
+asserted.
+
+### WEAR 0.30, AND IT IS SPLIT - THE REGISTER HAS NOT DONE THAT BEFORE
+The frame, the vat staves and the man are worked and wet; that is what 0.30 buys
+through the roughness and metal terms. **The cloth is not worn at all** - the
+sheets, the apron and the skeins take their colour from `OVERRIDE` and skip the
+dulling entirely. Mr. E's second rule read as he wrote it: a dyer's goods are the
+one thing in his yard that must look **new**, because they are what he is
+selling. The receipt and the man disagree, which is true of every tradesman who
+ever lived.
+
+### THE SEVEN PASSES, AND WHAT EACH ONE BOUGHT
+| pass | change | what the picture showed |
+|---|---|---|
+| 1 | first build | **I had capped my own vat** - a `dark` disc lid over the `glow` surface, and at 2 deg camera pitch a surface sunk inside a 0.80 m rim is invisible from any eye-level camera anyway. `ok:true, 0 blanks, 0 clips` - a hidden thing is not a blank one. **This lane's own trap 5, committed again.** |
+| 2 | the vat brims | Fixed by making it **true** rather than by moving the camera: a working vat stands proud of the rim and goes over the side. |
+| 3 | A weld hue; B vat 0.60->0.52; C man out of the sheets, shoulders 0.155->0.115; D paddle off his face; E skeins to the hip | A: at emissive strength 2.30 the weld came back **cream** - an emissive that clips to white is a white hole, not a third hue. C: he had read as **two heads**. |
+| 4 | F braces rake back; G both hands put ON the shaft | **G was a float I shipped into the pass-3 picture** - the paddle started in clear air 0.38 m from his head while both arms hung at his sides. The shaft is now one line defined by two points and the hands are placed **on it by parameter**, so the grip cannot drift again. |
+| 5 | H paddle Y travel restored; I belt; J near brace deleted; K vat 0.52->0.45 | **H was a regression I introduced at pass 4** - rewriting the shaft gave it 1.86 m of X travel and **six centimetres of Y**, so from the side the one long diagonal was a vertical post: the exact Pressman fault. |
+| 6 | L man steps 0.40 m forward | Only the side camera could show it: the drum covered him **to the chest**. |
+| 7 | **the eyes** | See below. |
+
+### *** PASS 7: A FAULT THAT GOT PAST EVERY CHECK THIS LANE HAS ***
+Two `glow` spheres sat at y -1.66 against a face whose front surface is at
+y -1.43 - **the eyes were floating 23 cm in front of his head.** I had passed the
+head's own forward offset in `loc` *and* passed `fwd` on top of it.
+
+- the **front** camera put them on the face by projection and they looked perfect
+- the **blank** check saw opaque pixels and passed
+- the **border** check saw nothing at the frame edge and passed
+
+**A FLOATING PIECE IS NEITHER BLANK NOR CLIPPED**, so no instrument this lane
+owns could ever have caught it. It was found by connected-component analysis of
+the side silhouette: one stray 52-px component, mean RGB (0.79, 0.70, 0.46).
+I then tested it against the removal of **every** trade span - it survived all
+five, so it was not the skein I had assumed - and only then named it.
+
+`_colour_read.detached()` now counts silhouette components on every view and goes
+RED on any stray over 12 px. Intentional detachment (a thrown thing, a chain
+link) is allowed but must be **named**, because the whole fault was that nobody
+was told. The Dyer is now **1 component in all three views.**
+
+**AND IT IMMEDIATELY FOUND TWO FAULTS IN SHIPPED, TICKED BODIES** (controls in
+the same run, not sought out):
+
+- **THE DRILLMASTER** - `808 px` detached, front and side. **I looked at the
+  render: it is the baton in his left hand, hanging in clear air below the
+  fist.** This is the first miniboss ever made, it is wired and in the game
+  (D96), and nobody has ever reported it.
+- **THE TANNER** - `96-102 px` detached in all three views; from the bounding
+  box it is a rivet off the rack frame. Small, but the same class.
+
+**I HAVE NOT RE-CUT EITHER.** Both are shipped, ticked and wired, and the
+Strickler precedent holds: I do not re-cut a ticked body under the freeze on my
+own say-so. Both are one-line fixes and I will take them the moment the lead
+says so. **Neither is a reason to re-open D96.**
+
+### THE COLOUR PROOF - `tools/art/_colour_read.py`
+Renders through the **shipping materials** and measures pixels; nothing in it
+reads `CANON` for a colour. It goes RED on a silhouette under 400 px, on zero
+chroma pixels (BLIND), on a band computed over an empty population, and on any
+detached component. **The bar is the register's own measured maximum**, so the
+test is "more colourful than anything we have", not "has a colour". It also
+fails the whole run if **every control passes**, because a bar that
+discriminates nothing makes no PASS in that run evidence.
+
+```
+COLOUR_READ   bar sat_mean > 0.207, bands_held >= 2
+  dyer          PASS   sat 0.4576 > 0.207 ; bands 2 >= 2      (judged)
+  drillmaster   FAIL   sat 0.2456 > 0.207 ; bands 1 < 2       (control)
+  tanner        FAIL   sat 0.1051 <= 0.207; bands 1 < 2       (control)
+  strickler     FAIL   BLIND - zero chroma pixels, all 3 views (control)
+```
+
+| view | sat_mean | sat_p90 | blue | red_orange | components |
+|---|---|---|---|---|---|
+| front | **0.4576** | 0.734 | 0.624 | 0.374 | 1 |
+| side | 0.3216 | 0.662 | 0.707 | 0.293 | 1 |
+| back | 0.5224 | 0.827 | 0.721 | 0.277 | 1 |
+
+**5.3x the median of the twenty-three, and 2.2x the most colourful body in the
+file** - and the Strickler, the body the lead called the most muted, does not
+merely score low, it **cannot be measured**: its maximum chroma over the whole
+silhouette is 0.0353, under the 0.04 threshold at which a pixel counts as
+coloured at all. That reading was checked against an **independent reader** (PIL
+on the Linux side, sRGB bytes) before it was believed, because it disagreed with
+my own earlier census - the two agree to four decimal places.
+
+**ONE HONEST QUALIFICATION.** The body carries three hues *by eye* - woad,
+madder, weld - but the instrument's 60-degree band cut puts **madder (~8 deg)
+and weld (~40 deg) in the same band**. So it is **two bands, three hues**, and
+the `bands >= 2` pass is the weaker of the two claims. The `blue` band at 0.62 is
+the one that is new: before this body, seven bodies held hue 190-260 and every
+one of them was a desaturated grey-blue.
+
+### THE TRADE PROOF - `tools/art/_trade_read.py`
+Does the trade own the outline, per view, measured by rendering with and without
+each group through one fixed camera and counting the pixels that **moved**.
+`ok: true, errors [], blind []`.
+
+| | front | side | back |
+|---|---|---|---|
+| **dyer** trade share | **0.748** | **0.580** | 0.724 |
+| strickler | 0.603 | 0.675 | 0.381 |
+| pressman | 0.415 | 0.332 | 0.485 |
+
+The Dyer's trade owns **three quarters of the front silhouette** - the highest
+of the three in the front and the back, and its *side* share alone is higher
+than the Pressman's *front*. **It does NOT beat the Strickler on side-to-front
+balance** (0.775 vs 1.12) and I am not going to claim it does; the Strickler is
+still the body that reads most equally from both sides. This one wins on
+absolute share in every view, which is a different thing.
+
+Per-group front shares: sheets 0.494, vat 0.151, skeins 0.050, paddle 0.043,
+splashes 0.011. No group is blind in any view.
+
+### THE FIT PROOF - ON A REAL BODY, AND EVERY FAULT I CAN SEE
+`minibossfit.py`, posed **KayKit Knight.glb at scale 1.0**, `_fit_dyer_register.json`:
+
+```
+MINIBOSSFIT verdict GREEN, ok true, errors [], blind_views []
+  ratio 1.06   (creature 2.60 m / hero 2.45 m)   pair_w 4.69 m   fits_frame true
+  proving views 3 of 3   front/side/back, each: creature seen 1.000, hero seen 1.000
+  blank check: 3 files, 0 failures
+  footprint 3.39 m against the 11.0 m three-cell clear span - CORRIDOR-SAFE
+```
+
+**I LOOKED AT ALL THREE.** `renders/art/minibosses/dyer/hero_front.png`,
+`hero_side.png`, `hero_back.png`. The faults I can see, and there are eight:
+
+1. From the side the creature reads as **two groups with a metre of air between
+   them** - man-and-vat, then the frame. It is depth and it is physically right,
+   but it reads as a gap and I am naming it rather than explaining it away.
+2. His dark torso **merges with the dark vat** where they overlap at his knee.
+3. Only **two of the three skeins read** at hero scale - the woad one sits on
+   the woad apron and disappears into it.
+4. The paddle **blade is inside the vat** and is never visible. Intended - a
+   paddle in use has its blade in the dye - but it means the paddle reads as a
+   pole, not as a paddle.
+5. The red floor splash sits **partly under his boots** in the front view.
+6. From the **back** the man is almost entirely behind the sheets; the back view
+   is the frame's view, not his.
+7. The single far-side brace **extends the side footprint** to 3.39 m. Safe
+   against 11.0 m, but it is the widest thing on the body and it carries no
+   meaning.
+8. At hero scale his **head is a few pixels**; the cap and one glow eye carry
+   the whole figure. It works, but there is no margin in it.
+
+### FRAMES
+Every number in the builder is in **Blender's world frame as written into the
+.glb** - front is model **-Y**, up is **+Z**, the crossbar lies along the frame's
+own rotated X, the paddle runs from (-1.62, -1.30, 2.06) to the vat. **That is
+not the engine's slot frame** and nothing here should be pasted into a Godot
+rotation without converting it.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+1. `assets/monsters/minibosses/dyer.glb` is committed **with no `.glb.import`
+   sibling** - it cannot load until a Godot run generates one. The same is true
+   of `pressman.glb`, `reeve.glb`, `strickler.glb` and `tapster.glb`: **five
+   bodies, measured this run, not remembered.**
+2. `scripts/delve.gd`, `MB_FIT`: add `"dyer": 1.06`. Measured by art
+   (`_fit_dyer_register.json` -> `pairs.dyer.ratio`), **copy it, do not
+   re-derive it.** Still outstanding from previous hours and re-issued here:
+   `"pressman": 1.16` and `"strickler": 1.04`.
+3. `scripts/bestiary.gd`: **static** - a `model` path and **no `anims` entry.**
+4. Theme `workshop`, the third body on that theme. **It cannot spawn today** -
+   the `THEME_MINIBOSS` gate in `dungeon_hd.gd` has all fourteen themes taken.
+   That is engine work and a design call, it sits with the supervisor, and this
+   body is queued work like the other nine.
+5. Feed line for content: *"Something back there just marked one of you."*
+
+### LICENCE
+100% original procedural geometry (`bmesh`-free raw vertex maths via `lordlib`).
+No pack asset is read by this body. `used_pack: false`.

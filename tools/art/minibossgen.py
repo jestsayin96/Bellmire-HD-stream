@@ -65,6 +65,17 @@ def build_miniboss(key):
                             rough * 0.9, 0.02),
         'glow': L.mat_glow(key + "_glow", tuple(min(1.0, c / max(aura)) for c in aura), 3.2),
     }
+    # 17 Nov, THE DYER: a key may declare its own per-slot materials. Without
+    # this every material in this file was derived from ONE tint, so every body
+    # was monochrome BY CONSTRUCTION - measured off the register's own renders
+    # (median satMean 0.087, max 0.207, and ZERO bodies in two of five hue
+    # bands). That was a defect in this generator, not a taste problem.
+    # The override list is asserted EMPTY for every pre-existing key, so the
+    # twenty-three render byte-for-byte as before.
+    _LEGACY = set(M.ORDER) - {"dyer"}
+    assert not (set(M.OVERRIDE) & _LEGACY), \
+        "OVERRIDE must not touch an already-shipped key: %s" % sorted(set(M.OVERRIDE) & _LEGACY)
+    mats = M.apply_overrides(key, mats)
     P = M.BUILDERS[key]()
     # 17 Nov: the Quartermaster loads real pack geometry out of assets/gear and
     # falls back to procedural if it cannot. A silent fallback would be the same

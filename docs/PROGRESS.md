@@ -3578,3 +3578,7 @@ the full commit battery against it, because five lanes' code landed and nobody h
   DELVE_TEST OK ran 9001 frames, floor reached 2, state search; 0 SCRIPT ERROR in its section.
   TOWNWALK ran to T=90s, in_solid=0/11314, 0 SCRIPT ERROR (only MI_Cobble invalid-UID WARNINGs, pre-existing).
 No code changed. No live Twitch test, nothing redeemed, 0 bits. Scratch log removed; tasklist: no Godot of any lane.
+## C-118 - 18 Nov 2026 16:3x CT (content): epitaphs, descend and cleared batch
+- +30 epitaphs (477 -> 507), +16 descend (299 -> 315), +16 cleared (299 -> 315) in data/lore_lines.json; `_note_c118` added. Plainness voice, no duplicates against existing lines, descend keeps the `%s %s` hero+verb shape, cleared keeps `Floor %d`. All three arrays are already read live - no wiring owed.
+- Miniboss check: lore `miniboss_feed.by_key` holds 34 keys and every committed miniboss body has lines; nothing to stand down on.
+- Validation: all four owned files parse; every pre-existing key byte-identical except the three appended arrays (old content is a strict prefix).

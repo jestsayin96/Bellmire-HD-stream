@@ -1394,11 +1394,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "beadle": {
+   "title": "The Beadle",
+   "theme": "shrine",
+   "idea": "IT CALLS THE ORDER - while it stands the party does not choose who acts. The Beadle calls, and it calls the same hero again and again while the rest hold their ground and watch; the four brass pegs on the board it holds overhead are the calls it has left and you can count them from the door. Knock the board off its arm and the order comes back to you",
+   "wear": 0.18,
+   "feed_line": "It says who speaks, and it is not you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 666,
+   "size": [
+    1.86,
+    1.19,
+    2.95
+   ],
+   "footprint_span": 1.86,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.843247167264582,
+    "ortho": 3.5346481800079346,
+    "clip": [
+     7.495304584503174,
+     18.78250503540039
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 96,
+  "files": 99,
   "failures": []
  }
 }

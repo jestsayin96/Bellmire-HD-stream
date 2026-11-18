@@ -10666,3 +10666,387 @@ def leech():
 
 
 BUILDERS.update({"leech": leech})
+
+
+# =====================================================================
+# 33. THE BEADLE - IT CALLS THE ORDER
+# =====================================================================
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"beadle"}
+
+OVERRIDE.update({
+    "beadle": {
+        # THE MAN. Dark blue-grey parish wool - the Moulder's and Ratcatcher's
+        # MEASURED lesson applied rather than rediscovered: put the DARK body
+        # against the PALE furniture so the outline is carried by contrast and
+        # not by a rim light I would have to invent. The thing a viewer has to
+        # read on this body is ABOVE the head, so the head and coat are the
+        # dark ground it is read against.
+        'body': ((0.082, 0.092, 0.118), 0.84, 0.02),
+        # LIMEWASHED OAK AND LINEN: the order board held overhead, the tippet
+        # across the shoulders, the face, the two mitts and the staff collar.
+        # The board is the biggest object on the body and it is the palest, so
+        # it is what the eye lands on first. That is on purpose - it is the
+        # thing the party has to break.
+        'bone': ((0.775, 0.730, 0.615), 0.50, 0.01),
+        # IRON AND FELT: boots, staff shaft, hat, the spent sockets.
+        'dark': ((0.052, 0.050, 0.048), 0.72, 0.06),
+        # BRASS, AND IT IS A GAUGE, NOT A DECORATION. The four pegs are the
+        # calls it has left and a viewer must be able to count them from the
+        # door, which is the same argument as the Sexton's lit niches and the
+        # Comfitmaker's comfits.
+        # *** PASS 4, AND I MADE THE DYER'S MISTAKE AFTER QUOTING IT. *** I
+        # wrote "strength 1.35 and not higher" directly above a value that
+        # still clips: 1.35 x (1.000, 0.735, 0.255) is (1.35, 0.99, 0.34), so
+        # red AND green both reach 1.0 and the pegs rendered CREAM - the exact
+        # colour of the oak board behind them. front.png showed four pale
+        # dowels on a pale plank, which is a gauge you cannot read, and I had
+        # the Dyer's own sentence in the comment while shipping it.
+        # The fix is the Dyer's fix: lower the strength until the HUE survives
+        # instead of pushing it until it is bright. 1.10 x (1.000, 0.600,
+        # 0.075) is (1.10, 0.66, 0.08) - only red clips, so what reaches the
+        # film is amber and not white.
+        'glow': ((1.000, 0.600, 0.075), 1.10),
+    },
+})
+
+CANON.update({
+    "beadle": ("The Beadle", 2.95, (0.26, 0.28, 0.34), (1.00, 0.74, 0.26),
+               "shrine",
+               "IT CALLS THE ORDER - while it stands the party does not choose "
+               "who acts. The Beadle calls, and it calls the same hero again "
+               "and again while the rest hold their ground and watch; the four "
+               "brass pegs on the board it holds overhead are the calls it has "
+               "left and you can count them from the door. Knock the board off "
+               "its arm and the order comes back to you",
+               0.18, "It says who speaks, and it is not you."),
+})
+ORDER = ORDER + ["beadle"]
+
+
+def beadle():
+    """IT CALLS THE ORDER. A tall upright parish officer in dark wool with a
+    pale tippet, an iron-shod staff of office stood on the floor at its far
+    side, and an OAK ORDER BOARD HELD OVERHEAD on its raised near arm with
+    four brass pegs standing out of it and two empty sockets beside them.
+
+    THE IDEA, AND WHY IT IS NOT A 33rd COAT OF ONE OF THE THIRTY-TWO.
+    I PARSED THE IDEAS OUT OF CANON THIS RUN RATHER THAN RECALLING THEM - 32
+    rows, 32 distinct hooks - and then grepped every one of them for the words
+    turn, order, act, acts, initiative, wait, first, last, speak, call, who,
+    queue, haste and time. THE RESULT, MEASURED:
+      - turn, order, act/acts, initiative, wait, first, last, speak, call,
+        who, queue, haste:  ZERO HITS, every one of them.
+      - slow: ONE hit, the LOADER - `it loads you, and you fight slower until
+        you drop it`.
+      - time: TWO hits, and both are the creature's own pacing and not the
+        party's - the Snuffer puts the lamps out `one at a time`, the
+        Sluicekeeper winds the sluice `a step at a time`.
+    SO NOTHING IN THE THIRTY-TWO TOUCHES WHO ACTS, OR WHEN. Every one of the
+    thirty-two is answered by deciding WHAT to do (damage, healing, gear,
+    gold, stores, light, ground, position, facing, movement). This one takes
+    away the decision itself for everyone but one hero, which is a mechanic
+    class the set does not have at all.
+
+    THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:
+      - the LOADER is the closest and it is a STAT: it loads you and you fight
+        slower. Slower is a number on a hero that still takes its own turn.
+        This one does not change anybody's speed; it changes whose turn it is.
+      - the DYER `marks one of you and hunts only the mark`. Same shape of
+        sentence, opposite direction: the Dyer decides who IT goes for, which
+        is the creature choosing its own target. The Beadle decides who YOU
+        go with, which is the creature choosing your action.
+      - the DROVER `yokes one of you` and the HURDLEMAN `cuts the room in
+        two`. Both take the party's FORMATION away - where people can stand
+        and reach. Nobody loses a turn to either of them.
+
+    WEAR 0.18, AND IT IS A FREE RUNG MEASURED OFF THE REGISTER, NOT GUESSED.
+    The thirty-two hold 0.05, 0.08, 0.10, 0.12, 0.15, 0.20, 0.22, 0.25, 0.26,
+    0.30 ... 1.00; 0.18 sits in the one gap in that low cluster and repeats
+    nothing. It is also the honest number for the thing: a staff of office and
+    a board of pegs ARE the office, so a beadle keeps them - but the coat is
+    parish issue and has been worn to every moot for years. Mr. E's second
+    rule, driven by what the object IS.
+
+    HEIGHT 2.95 EXTENDS THE LADDER BY ONE STEP. The register runs 1.95 to 2.90
+    and 2.95 is free. It is also the right read: a beadle out-tops the people
+    he is calling, and the board is held ABOVE that again.
+
+    SILHOUETTE INTENT - AND THE ONE CLAIM IS THE THING OVER ITS HEAD:
+      - A WIDE PALE BAR ACROSS THE TOP OF THE FRAME WITH FOUR TEETH STANDING
+        OUT OF IT, carried on one thin raised arm. I checked the register's
+        claimed outlines before drawing it: a pale vertical pole (Fenman), an
+        open lattice panel (Hurdleman), a solid pale slab down the front
+        (Paviser), a horizontal bar at the floor (Drover), a narrow open V at
+        the floor (Ratcatcher), a disc on the back (Drillmaster), a lopsided
+        mound (Scrapwright), a full skirt (Bellman, and it is the only one).
+        NOTHING IN THE SET HOLDS ANYTHING ABOVE ITS OWN HEAD. That outline was
+        vacant, and it is the one that makes the pegs countable.
+      - THE PEGS ARE ABOVE THE WHOLE BODY, WHICH IS WHY THEY CAN BE COUNTED.
+        The Comfitmaker's pass-2 lesson was that a thing which must stand clear
+        of the body has to be clear in BOTH horizontal axes, because each
+        camera discards one of them. Overhead is clear in all three: nothing
+        of this creature is behind the pegs in any view.
+      - NO FULL SKIRT (the Bellman owns that) and NO DOME HEAD (the most
+        occupied head shape in this file). The coat hem stops above the knee so
+        two legs read under it, and the head is a tapered drum, wider at the
+        jaw than at the crown - the Comfitmaker's pass-6 fix, which is that a
+        head tapers UP and a drum that flares out to meet its hat becomes a
+        bucket with a lid.
+      - THE FACE IS PALE ON A DARK HEAD, not glow on dark. Pass 11 of the
+        Hurdleman is the reason: a face measured by `mask_of` reported 156 px
+        beside my own sentence that the head had no face at all. A bone plate
+        inset in the front of the skull is visible because it is a different
+        VALUE from the skull, which is a thing a single camera can see.
+
+    THE SIDE VIEW, WHICH HAS KILLED THREE BODIES IN THIS FILE, AND THE HONEST
+    LIMIT OF WHAT IT CARRIES. A side camera throws x away, so four pegs set in
+    a line across the board would collapse to ONE peg. They are therefore
+    staggered through 0.15 of the board's 0.30 depth as well, so the side view
+    reads four separate tips. What the side view CANNOT do is tell you which
+    sockets are empty - the sockets are a dark disc in a pale face and they
+    need the face. THE HONEST CLAIM IS THEREFORE SPLIT: the front and
+    three-quarter views carry the COUNT, the side view carries the BOARD and
+    the tips. I would rather write that down than claim four from every angle
+    and be caught by a render.
+
+    Front is -Y, the same as the thirty-two before it."""
+    P = Parts("beadle")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # THE BOARD, DERIVED NOT TYPED, so a later edit to the arm cannot leave the
+    # pegs floating off it. Everything about the pegs comes off BOARD_C, TILT
+    # and the board's own thickness.
+    # *** PASS 3: THE BOARD IS YAWED, AND THE SIDE RENDER IS WHY. *** Pass 2's
+    # board sat square across x, so the side camera - which throws x away - got
+    # it EDGE-ON and read the four pegs as the teeth of A SAW BLADE. That is
+    # the fault the Paviser answered with camber and the Comfitmaker answered
+    # by coming forward in y: an object that must be read has to have width in
+    # BOTH horizontal cameras. A yaw of 0.38 rad gives the side view 0.37 of
+    # the board's own length, so it reads as a plank at an angle with four
+    # separate pegs on it instead of a serrated edge.
+    # It is also NARROWER AND THICKER (1.34x0.085 -> 1.06x0.14): pass 2's board
+    # read as an ALUMINIUM TRAY, and a tray is thin, wide and rail-edged. An
+    # oak order board is a plank.
+    BOARD_C = (-0.40, -0.26, 2.34)
+    BOARD_W, BOARD_D, BOARD_T = 1.06, 0.30, 0.140
+    TILT = 0.45                    # tipped forward so the FACE turns to -Y
+    YAW = 0.38                     # and turned, so the side camera has width
+    _BR = (Matrix.Rotation(YAW, 4, 'Z') @ Matrix.Rotation(TILT, 4, 'X'))
+    LENV = tuple(_BR @ Vector((1.0, 0.0, 0.0)))
+    DEPV = tuple(_BR @ Vector((0.0, 1.0, 0.0)))
+    UPV = tuple(_BR @ Vector((0.0, 0.0, 1.0)))
+
+    # DERIVED, NOT TYPED, and hoisted here at pass 8 so the HAND is placed off
+    # the board's own axes exactly as the pegs are. Pass 7's mitt was typed in
+    # world coordinates and the board had been yawed and raised under it twice
+    # since - which is how a hand ends up NEAR a plank instead of ON one.
+    def _on_board(dx, dy, lift=0.5):
+        return tuple(BOARD_C[i] + LENV[i] * dx + DEPV[i] * dy
+                     + UPV[i] * (BOARD_T * lift) for i in range(3))
+
+    # --------------------------------------------------- BOOTS AND LEGS
+    # Two separate soles with daylight between them - the Fenman's pass-3
+    # lesson: one slab under a creature reads as a plinth, not as feet.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        P.add(L.box(0.36, 0.52, 0.080), 'dark', loc=(MX + 0.235 * s, -0.04, 0.040))
+        limb(P, [(MX + 0.200 * s, 0.00, 0.08),
+                 (MX + 0.210 * s, -0.02, 0.30),
+                 (MX + 0.190 * s, -0.04, 0.58)], 0.185, 0.158, 'dark')
+    _span("base", i0)
+
+    # ------------------------------------------------------- THE COAT
+    # Hip to above the knee, flaring DOWN, and stopping at 0.58 so the two legs
+    # read under it. A coat, not a skirt: the Bellman is the only full-skirted
+    # silhouette in this file and it stays that way.
+    i0 = len(P.items)
+    P.add(L.cone(0.455, 0.400, 0.50), 'body', loc=(MX, -0.08, 0.58))
+    P.add(L.box(0.74, 0.30, 0.070), 'dark', loc=(MX, -0.08, 0.60))   # the hem line
+    _span("coat", i0)
+
+    # -------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    limb(P, [(MX, -0.08, 1.04), (MX, -0.085, 1.16),
+             (MX, -0.090, 1.28)], 0.400, 0.360, 'body')
+    # shoulders NARROWER than the head above them, so the HEAD is the widest
+    # thing up there - the one structural fact the knight profile gave the
+    # Comfitmaker, and the thing its pass 4 had backwards.
+    P.add(L.box(0.80, 0.34, 0.150), 'body', loc=(MX, -0.090, 1.265))
+    # *** PASS 6: THE TIPPET IS DARK NOW, AND PASS 5 IS WHAT TOOK ITS JOB AWAY.
+    # *** It was put here pale to keep a DARK head off a DARK torso. Pass 5
+    # inverted the head to pale and I left the tippet alone, so the one pale
+    # band under the head became a pale collar DIRECTLY BELOW A PALE SKULL of
+    # almost the same width (0.455 jaw against 0.470 tippet). front.png read
+    # head and tippet as one pale trapezoid and side.png read them as a single
+    # pale cone - a wimple, not a man in a coat. A fix that stops being a fix
+    # when the thing around it changes is not a fix any more, and the honest
+    # move is to delete its colour rather than add a third value to separate
+    # the two things that were only pale because of each other.
+    P.add(L.cone(0.470, 0.420, 0.150), 'dark', loc=(MX, -0.090, 1.165))
+    P.add(L.cone(0.150, 0.170, 0.070), 'body', loc=(MX, -0.090, 1.300))
+    _span("man", i0)
+
+    # ------------------------------------------------------- THE HEAD
+    i0 = len(P.items)
+    # a tapered drum, WIDER AT THE JAW than at the crown (Comfitmaker pass 6),
+    # 0.94 across on a figure whose shoulders are 0.80.
+    # *** PASS 5 MOVED FIVE THINGS AND THEY ARE ONE CHANGE, NOT FIVE: THE HEAD
+    # *** STOPPED BEING A MACHINE. *** Pass 4 had a DARK drum for a skull with a
+    # PALE RECTANGLE pasted on the front of it, two round lit eyes in the
+    # rectangle and a slot under them. front.png read that as a television, and
+    # three_quarter.png read it as a robot - which is the one thing Bellmire's
+    # register cannot carry. side.png added the second half of the fault: a dark
+    # skull under a dark crown of nearly the same width, with a pale band
+    # between them, is A BUCKET WITH A LID - the Comfitmaker's pass-6 fault,
+    # arrived at from the other direction.
+    # BOTH ARE THE SAME MISTAKE: I was drawing FEATURES ON a head instead of
+    # making the head itself the readable object. So the skull becomes the pale
+    # mass and the hat becomes the dark one. A pale face under a dark brim is
+    # what a face is, the plate is deleted because there is nothing left for it
+    # to do, and the eyes go DARK - which also leaves the amber for the gauge
+    # and the staff alone, so the only lit things on this body are the office.
+    # *** PASS 7, AND THE FIT RENDER IS WHAT FOUND BOTH OF THESE - WHICH IS WHY
+    # *** THE FIT RENDER EXISTS. *** Standing this body beside a posed KayKit
+    # knight said two things my own three views had not:
+    #   1. THE HEAD WAS A BELL. 0.455 at the jaw against 0.370 at the crown is
+    #      a 23% taper, and hero_side.png read it as a LAMPSHADE next to the
+    #      knight's near-round helm. I had the Comfitmaker's "a head tapers UP"
+    #      in hand and overshot it - the lesson was that a head must not FLARE
+    #      OUT at the crown, not that it should flare out at the jaw. 0.420 to
+    #      0.395 is a 6% taper: still up, no longer a bell.
+    #   2. THE EYES VANISHED AT HERO SCALE. At r 0.046 they were two dots and
+    #      hero_front.png read the face as a pale blank with a smudge on it,
+    #      against a knight whose eyes carry its whole expression. They go to
+    #      0.068 and further out in y.
+    # AND ONE THING I MEASURED RATHER THAN EYEBALLED: the chin bar sat at
+    # y -0.405 where the skull's own radius at that height is 0.414, so it was
+    # INSIDE the head and could never have rendered. It is out at -0.425.
+    P.add(L.cone(0.420, 0.395, 0.560), 'bone', loc=(MX, -0.095, 1.320))
+    # the brow and jaw, cut from the dark slot so the pale skull has structure
+    # and does not read as an egg.
+    P.add(L.box(0.430, 0.090, 0.055), 'dark', loc=(MX, -0.405, 1.705))
+    P.add(L.box(0.230, 0.070, 0.045), 'dark', loc=(MX, -0.425, 1.455))
+    eyes(P, (MX, -0.095, 1.620), 0.150, 0.068, -0.360, 'dark')
+    # THE HAT: flat and low-crowned with a pale band. Not a dome, not a brim
+    # across the eyes (the D94 hood fault) - the brim sits at 1.88, clear
+    # above the plate's top at 1.71.
+    # *** PASS 2, AND THE SIDE VIEW IS WHAT CONDEMNED IT. *** Pass 1's brim was
+    # 0.700 against a 0.385 crown - 1.82 times the head and wider than the
+    # shoulders - and side.png read the whole creature as A LAMP: shade on top,
+    # bell-shaped base under it. THAT IS THE SNUFFER'S OWN CLAIMED SILHOUETTE
+    # ("a lamp-stand that walks"), so pass 1 was not merely ugly from the side,
+    # it was wearing another body's outline. The brim comes in to 0.465, which
+    # is 1.21 times the crown - a hat on a man. Nothing else moves this pass.
+    # PASS 5, the same change seen from the hat's side: a crown as wide as the
+    # skull is what made the barrel. It comes in to 0.330 and goes UP to 0.215,
+    # and the brim goes out to 0.545 - so the hat is 1.65 times its own crown
+    # and clearly a separate object sitting ON something, which is the whole
+    # job of a brim. The band is dark now, not pale: a pale hoop between two
+    # masses is exactly what drew the barrel's hoop.
+    P.add(L.cone(0.545, 0.515, 0.050), 'dark', loc=(MX, -0.095, 1.880))
+    P.add(L.cone(0.330, 0.312, 0.215), 'dark', loc=(MX, -0.095, 1.925))
+    P.add(L.cone(0.336, 0.330, 0.042), 'dark', loc=(MX, -0.095, 1.990))
+    _span("head", i0)
+
+    # ------------------------------- THE STAFF OF OFFICE, FAR SIDE (+X)
+    # Short, DARK and brass-topped on purpose: the Fenman's far-side object is
+    # a PALE VERTICAL POLE, and two bodies must not share one outline. This one
+    # stops at chest height with a lit finial, so it reads as a knob on a stick
+    # and not as a mast.
+    i0 = len(P.items)
+    limb(P, [(MX + 0.560, -0.020, 0.02), (MX + 0.600, -0.060, 0.80),
+             (MX + 0.630, -0.090, 1.44)], 0.055, 0.047, 'dark')
+    P.add(L.cone(0.078, 0.066, 0.140), 'dark', loc=(MX + 0.558, -0.015, 0.000))
+    P.add(L.cone(0.086, 0.086, 0.050), 'bone', loc=(MX + 0.628, -0.088, 1.390))
+    # *** PASS 4: THE FINIAL WAS A CANDLE FLAME. *** A tall lit cone on a dark
+    # stick is a candle in every view, and side.png read it as one sitting in
+    # front of the coat. A staff of office ends in a KNOB, so it is a knob: a
+    # squat cap and a ball, 0.14 tall where the cone was 0.20, and no taper to
+    # a point for the eye to read as a flame.
+    P.add(L.cone(0.072, 0.090, 0.060), 'glow', loc=(MX + 0.630, -0.090, 1.440))
+    P.add(L.sphere(0.092, 0.092, 0.072, 10, 7), 'glow',
+          loc=(MX + 0.630, -0.090, 1.556))
+    # the gripping arm, down and out to the shaft
+    limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095, 1.060),
+             (MX + 0.600, -0.088, 0.965)], 0.145, 0.112, 'body')
+    P.add(L.sphere(0.115, 0.105, 0.105, 10, 7), 'bone',
+          loc=(MX + 0.615, -0.086, 0.945))
+    _span("staff", i0)
+
+    # ------------------------- THE RAISED ARM AND THE ORDER BOARD (-X)
+    # The near side in the three-quarter view, which is the Quartermaster's
+    # pass-3 lesson: the thing the party must read goes on the camera's side of
+    # the body, not behind it.
+    i0 = len(P.items)
+    # *** PASS 3: THE ARM NOW REACHES THE BOARD, AND PASS 2 DID NOT. *** The
+    # forearm went up BEHIND the hat and ended in a stub, so front.png showed a
+    # board FLOATING over a bent pipe - nothing in the picture was carrying
+    # anything. The elbow therefore swings FORWARD to y -0.42, clear of the
+    # brim, and the mitt closes on the board's UNDERSIDE at its near end. A
+    # thing that is held reads as held because you can see the hand under it.
+    # *** PASS 8: THE HAND WAS A PEARL, AND THE WHOLE IDEA DEPENDS ON THE BOARD
+    # *** BEING HELD. *** hero_front.png showed a white BALL sitting under the
+    # plank's edge. A ball near a thing is not a hand on a thing, and "knock
+    # the board off its arm" is the party's answer to this creature - so the
+    # one join that has to be legible is exactly the one I had left as a
+    # sphere. A grip is TWO objects, because that is what makes it read as
+    # closed: a palm wrapping UNDER the board and a thumb lying ACROSS its
+    # top edge, both placed off the board's own axes so a later yaw cannot
+    # part them from it.
+    GRIP = _on_board(0.060, -0.120, -0.55)
+    # *** PASS 9, AND THE SILHOUETTE SHEET IS WHAT CONDEMNED IT - the one test
+    # *** that throws the colour away. *** With value gone, the front cell read
+    # as ONE LUMP WITH A COMB ON TOP: the elbow sat at x -0.520 against a brim
+    # of radius 0.545, so the whole upper arm lay inside the hat's own outline
+    # and the two merged into a single mass. Colour had been hiding it - the
+    # dark sleeve against the dark brim is legible only because they are
+    # different darks, and the silhouette test exists precisely to take that
+    # crutch away. The elbow goes out to -0.720, clear of the brim by 0.175,
+    # so the arm is an arm from the outside in every view.
+    limb(P, [(MX - 0.350, -0.090, 1.215), (MX - 0.720, -0.300, 1.610),
+             (GRIP[0] + 0.030, GRIP[1] + 0.040, GRIP[2] - 0.090)],
+         0.150, 0.108, 'body')
+    P.raw(aim(L.box(0.230, 0.185, 0.090), GRIP, UPV), 'bone')
+    P.raw(aim(L.box(0.075, 0.150, 0.070),
+              _on_board(0.060, -0.185, 0.92), UPV), 'bone')
+    _span("arm", i0)
+
+    i0 = len(P.items)
+    P.add(L.box(BOARD_W, BOARD_D, BOARD_T), 'bone', loc=BOARD_C,
+          rot=(TILT, 0.0, YAW))
+    # PASS 3: the dark UNDER-RAIL is gone. It ran the full length beneath the
+    # plank and that is exactly what made pass 2 read as a scaffold board on a
+    # trestle. Two dark END CAPS instead - they give the plank its line without
+    # putting a beam under it, and they stop the pale board bleeding into the
+    # pale background at its tips.
+    for s_ in (-1, 1):
+        P.add(L.box(0.055, BOARD_D + 0.02, BOARD_T + 0.03), 'dark',
+              loc=tuple(BOARD_C[i] + LENV[i] * (BOARD_W * 0.5 - 0.02)
+                        * s_ for i in range(3)),
+              rot=(TILT, 0.0, YAW))
+    _span("board", i0)
+
+    # ------------------------------------- THE GAUGE: FOUR PEGS, TWO SOCKETS
+    # Four brass pegs standing out of the board's face, and two empty sockets
+    # beside them. THE PEGS ARE THE CALLS IT HAS LEFT. They are staggered
+    # through the board's DEPTH as well as its length, because a side camera
+    # throws x away and four pegs in a line would collapse to one.
+    i0 = len(P.items)
+    # the board's own axes, so a peg placed 'dy along the board' stays ON the
+    # board when TILT changes. A raw y offset would have left them hanging off
+    # a tipped plane, which is the trap the derived-not-typed rule exists for.
+    for k in range(4):
+        P.raw(aim(L.cone(0.058, 0.042, 0.250),
+                  _on_board(-0.400 + 0.200 * k, -0.080 + 0.052 * k), UPV), 'glow')
+    for k in range(2):
+        P.raw(aim(L.cone(0.054, 0.054, 0.032),
+                  _on_board(0.330 + 0.150 * k, -0.020 + 0.040 * k, 0.40), UPV), 'dark')
+    _span("pegs", i0)
+    return P
+
+
+BUILDERS.update({"beadle": beadle})

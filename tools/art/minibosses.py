@@ -9158,3 +9158,389 @@ def drover():
 
 
 BUILDERS.update({"drover": drover})
+
+
+# =====================================================================
+# 29. THE PAVISER - keep, the second one. IT KEEPS ITS FACE TO YOU.
+# =====================================================================
+# WEAR 0.78, AND IT IS A COMPOSITE, NOT A MOOD. The 0.05 ladder from 0.15 to
+# 1.00 is FULL - I measured it off CANON this run rather than remembering it,
+# all 26 distinct values occupied - so this takes a gap between steps the way
+# the Drover took 0.74 and the Ratcatcher 0.68. The parts, each justified:
+#   the board           it is the thing every blow lands on. Split, limewash
+#                       gone grey, bolt stubs still in it.          0.90
+#   the hinge post and  greased daily, because a hinge that seizes is a dead
+#   its two collars     paviser.                                    0.45
+#   the prop            cut to replace the last one that snapped.   0.20
+#   the man             the whole point of his job is that he is not hit. 0.35
+# 0.78 is taken, well toward the board, because the board is 60% of the
+# silhouette and the first and last thing an eye lands on. 0.75 (loader) and
+# 0.80 (gaoler) are taken; 0.78 is free and nothing shares it.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"paviser"}
+
+OVERRIDE.update({
+    "paviser": {
+        # THE MAN IS DARK AND THE BOARD IS PALE - the Moulder's measured
+        # contrast rule, applied for the fourth body running. Here it is not
+        # only a legibility trick, it IS the creature: the front view must read
+        # as a PALE BOARD with a dark head over it, and the back view as a DARK
+        # MAN with the pale board's edge beyond him. Two different creatures
+        # from two sides is the mechanic drawn.
+        'body': ((0.062, 0.064, 0.070), 0.85, 0.06),
+        # THE BOARD AND THE PROP. Limewash gone grey - a pavise was whitened so
+        # the men behind the line could see each other, and this one has stood
+        # in a keep long enough for that to be a memory of white rather than
+        # white. Warm-neutral, not blue: it must not read as stone.
+        'bone': ((0.738, 0.712, 0.636), 0.86, 0.00),
+        # THE IRON, and this slot again holds ONLY the mechanic plus the boots:
+        # the hinge post, its two collars, the two bands, the centre rib, the
+        # bolt stubs and the prop's shoe. A dark mark on the pale field IS
+        # either the hinge or a hit, which is the whole story of the body.
+        'dark': ((0.036, 0.034, 0.032), 0.70, 0.06),
+        # NO LAMP AND NO FLAME. Rule 1 is plainness and a man behind a board
+        # carries neither. The ONLY emissive is the pair of eye pinpoints that
+        # every man in this register has, because creatures.eyes() defaults to
+        # slot='glow' - I read the signature rather than assume it, which is
+        # the correction the Drover's palette comment had to make.
+    },
+})
+
+CANON.update({
+    "paviser": ("The Paviser", 2.68, (0.74, 0.71, 0.63), (0.82, 0.84, 0.88),
+                "keep",
+                "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge "
+                "post and swings it onto whoever is hurting it most, and a "
+                "blow into the board does nothing at all; so the party cannot "
+                "win this by standing still and hitting harder - one of you "
+                "has to get round the post while another holds its attention, "
+                "and the moment you two swap sides the board swings back",
+                0.78, "A board came round to face you."),
+})
+ORDER = ORDER + ["paviser"]
+
+
+def paviser():
+    """IT KEEPS ITS FACE TO YOU. A man behind a curved limewashed pavise hung
+    on a hinge post at its inboard edge, with a prop leg braced back to the
+    floor behind him.
+
+    THE IDEA, AND WHY IT IS NOT A 29TH COAT OF ONE OF THE TWENTY-EIGHT.
+    I parsed the ideas out of CANON this run rather than recalling them. The
+    classes present are: summon, self-armour, drag a hero out, douse the lamps,
+    will-not-stay-down, bar the door, steal gear, heal the pack, raise the
+    water, plant the ground, pre-set the room, scale with the fire, ring from
+    elsewhere, set the floor, come apart in two, arm the room, weigh you down,
+    cut the party in two, adapt to the damage type, take the haul, drink your
+    stores, use your fallen, mark one of you, trade on the body, copy your
+    shape, be paid by the tail, yoke one of you.
+    NOT ONE OF THEM IS POSITIONAL. Every one is answered by deciding WHAT to
+    do; this one is answered only by deciding WHERE TO STAND. That is a
+    mechanic class the set does not have, and it is the reason this body is
+    worth four meshes.
+
+    IT IS NOT THE PORTER AND IT IS NOT THE HURDLEMAN, and the difference is
+    not a quibble:
+      - the PORTER drops a leaf across the chamber MOUTH. It is a wall, it does
+        not move, and what it takes from you is retreat.
+      - the HURDLEMAN plants a panel through the middle of YOUR LINE. Also
+        static, and what it takes from you is each other.
+      - this one's board is ON THE CREATURE AND IT TRACKS. Nothing is taken
+        from you. What changes is that the creature now has a front and a back,
+        and your damage depends on which one you are standing at.
+
+    THE SOLID BILLBOARD IS A FREE SILHOUETTE AND THE HURDLEMAN IS WHY. Its pass
+    3 found that its spare panels "read as one solid grey billboard - the
+    biggest mass in the silhouette, reading as a door or a shield", and it
+    rebuilt them as open lattices because a hurdle is not solid. So that
+    outline was vacated by the one body that could not use it. A pavise IS a
+    door-sized shield, so the read the Hurdleman had to throw away is the exact
+    read this body needs, and no two bodies end up sharing it.
+
+    SILHOUETTE INTENT - A FRONT AND A BACK THAT ARE NOT THE SAME CREATURE:
+      - FROM THE FRONT: a tall PALE SOLID BOARD with an arched top, a dark
+        centre rib, two dark bands and a scatter of dark bolt stubs, and a dark
+        head over the top edge with a far shoulder and arm showing past the
+        right side. No other body in the register is a solid pale slab.
+      - FROM THE BACK: the board is gone and you are looking at a MAN, with the
+        hinge post and its two collars on his left and the prop leg running
+        away from him to the floor. That is the party's answer drawn: get here.
+      - FROM THE SIDE the board is nearly edge-on, which is the view that has
+        killed three bodies in this file. Two things answer it rather than one,
+        and I have separated them on purpose: the board is deeply CAMBERED
+        (0.20 of authored depth over a 0.46 half-width), so edge-on it is an
+        ARC with real width and not a stick; and the MAN IS OFFSET 0.14 TOWARD
+        the side camera, so he stands in front of his own board there instead
+        of behind it.
+
+    Front is -Y, the same as the twenty-eight before it."""
+    P = Parts("paviser")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.14                      # the man, pushed toward the side camera
+    # PASS 4: BX -0.10 -> -0.18. The man had gone. Pass 3's taller, narrower
+    # board was the right board and it swallowed its own creature: front.png
+    # showed a board, a fist and ONE EYE. 0.08 further out puts his right
+    # shoulder, arm and the whole helm back against background without moving
+    # the board's own outline a millimetre in the side or back cameras.
+    BX, BY = -0.18, -0.56          # the board's centre, forward of the chest
+    BYAW = 0.34                    # the board is turned - he is bringing it round
+    # *** PASS 3 MOVED ALL FOUR OF THESE AND THEY ARE ONE CHANGE, NOT FOUR:
+    # *** THE BOARD STOPPED BEING A BARREL. *** Pass 2's shell was solid, which
+    # was the fix it was for, and front.png then read as A CASK ON END - 0.92
+    # across by 1.18 tall, an arched top, a deep belly and two iron hoops is a
+    # barrel in any language, and it is a worse answer than pass 1's fence
+    # because a barrel is a PROP and a fence at least had an edge to it.
+    # Every number below moves toward TALL AND FLAT, which is what a pavise is:
+    #   HALF  0.46 -> 0.40   narrower
+    #   ZB    0.22 -> 0.14   it reaches the floor, the way a standing shield does
+    #   ZT    1.40 -> 1.46   and up to his chin, leaving the helm clear by 0.15
+    #   CAMB  0.20 -> 0.12   a curve, not a belly
+    #   ARCH  0.10 -> 0.04   a top edge that is nearly straight
+    # 1.32 tall by 0.80 wide is 1.65:1. Pass 2 was 1.28:1, which is a cask.
+    HALF = 0.40                    # board half-width in its own u
+    # PASS 5: 0.12 -> 0.075. Still a cask after pass 4, and the belly is half
+    # the reason. 0.075 over a 0.40 half-width is a shield's curve; 0.12 was a
+    # stave's. The side view was re-checked after this and the board is still
+    # an ARC there, not a stick - which was the whole job the camber was given.
+    CAMB = 0.075                   # how far the centre of the face bulges forward
+    # PASS 4: ZT 1.46 -> 1.34. At 1.46 the top edge crossed his FACE and took
+    # one of the two eyes with it. The head over the top edge is half of what
+    # tells a viewer there is a man here at all, so the board now stops at the
+    # chin and the whole head and helm stand clear above it - which is also
+    # what a pavise is for: it covers the body, you look over it.
+    ZB, ZT = 0.14, 1.34            # board bottom, and its top at the centre
+    ARCH = 0.04                    # how much lower the top edge is at the ends
+    cb, sb = math.cos(BYAW), math.sin(BYAW)
+
+    def W(u, dy, z):
+        """board-local (across, behind-the-face, height) -> world.
+
+        EVERY PART OF THE BOARD GOES THROUGH THIS. The Drover's pass 4 and
+        pass 6 were both the same fault - a number typed in world space for a
+        thing that lives in a turned frame - and the only fix that holds is to
+        stop typing world numbers at all."""
+        return (BX + u * cb - dy * sb, BY + u * sb + dy * cb, z)
+
+    def face_dy(u):
+        """the cambered front face at u. Negative is toward the viewer."""
+        return -CAMB * (1.0 - (u / HALF) ** 2)
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    for s in (-1, 1):
+        limb(P, [(MX + 0.185 * s, 0.03, 0.03),
+                 (MX + 0.205 * s, -0.02, 0.32),
+                 (MX + 0.165 * s, -0.06, 0.60)], 0.158, 0.126, 'body')
+        P.add(L.box(0.33, 0.45, 0.17), 'dark',
+              loc=(MX + 0.185 * s, -0.12, 0.085))
+    P.add(L.box(0.57, 0.39, 0.26), 'body', loc=(MX, -0.05, 0.68))
+    # THE LEAN, and here it is the job: a man holding a board against a push
+    # leans INTO it. 0.19 forward over 0.44 of rise - more than the Drover's
+    # 0.14, because the Drover was carrying a weight down and this one is
+    # pushing a weight away.
+    limb(P, [(MX, -0.05, 0.66), (MX - 0.01, -0.14, 0.90),
+             (MX - 0.02, -0.24, 1.10)], 0.345, 0.300, 'body')
+    P.add(L.box(0.80, 0.34, 0.20), 'body', loc=(MX - 0.02, -0.24, 1.13))
+    P.add(L.sphere(0.235, 0.245, 0.228, 13, 9), 'body',
+          loc=(MX - 0.02, -0.30, 1.38))
+    # the helm: a flat brim, the same shape every man in this register wears,
+    # and it is what clears the board's top edge in the front view.
+    P.add(L.box(0.50, 0.44, 0.07), 'dark', loc=(MX - 0.02, -0.32, 1.515))
+    eyes(P, (MX - 0.02, -0.30, 1.395), 0.094, 0.042, -0.190)
+    # TWO ARMS ONTO THE BACK OF THE BOARD AT TWO DIFFERENT HEIGHTS - one low
+    # and one high, which is how a thing on a hinge is actually swung, and
+    # which stops the pair reading as a single bar the way the Drover's did.
+    limb(P, [(MX - 0.36, -0.26, 1.12), (MX - 0.44, -0.38, 0.99),
+             (MX - 0.44, -0.50, 0.88)], 0.128, 0.098, 'body')
+    limb(P, [(MX + 0.36, -0.26, 1.10), (MX + 0.42, -0.38, 1.22),
+             (MX + 0.36, -0.50, 1.30)], 0.128, 0.098, 'body')
+    _span("man", i0)
+
+    # ----------------------------------------------------------- THE BOARD
+    # NINE VERTICAL PLANKS ON AN ARC, not one slab. A pavise is planked, and
+    # the seams are also the only thing that will tell a viewer at stream
+    # distance that this pale mass is BOARD and not stone or a door.
+    # The top is ARCHED - 0.10 lower at the edges than at the centre - for the
+    # same reason the Hurdleman squared its beetle head: a dead-flat top edge
+    # at this size reads as architecture, not as a thing a man is holding.
+    # *** PASS 2, AND THE PICTURE IS THE WHOLE REASON. *** Pass 1 built the
+    # board as NINE SEPARATE PLANK BOXES on the arc. front.png: the arched tops
+    # opened notches between them and it read as a PALISADE - a fence, the one
+    # thing a shield must not be. side.png was worse and it was the failure the
+    # docstring claimed the camber had answered: nine boxes spread over 0.20 of
+    # depth, seen edge-on, came apart into SIX DETACHED PALE STICKS. The camber
+    # did not save the side view, it supplied the spread that destroyed it.
+    # So the board is now ONE CLOSED CURVED SHELL - a single swept solid with
+    # a continuous front face, a continuous back and real ends. A pavise is
+    # solid; nothing else is honest. The seams are drawn ON it below rather
+    # than cut THROUGH it, so the planking survives in the face and never
+    # touches the outline.
+    i0 = len(P.items)
+    NC = 13
+    TH = 0.062
+    verts, faces = [], []
+    for i in range(NC):
+        u = -HALF + (2.0 * HALF) * i / float(NC - 1)
+        zt = ZT - ARCH * (u / HALF) ** 2
+        fy = face_dy(u)
+        for dy, z in ((fy, ZB), (fy, zt), (fy + TH, zt), (fy + TH, ZB)):
+            verts.append(Vector(W(u, dy, z)))
+    def q(a, b, c, d):
+        faces.append([a, b, c, d])
+    for i in range(NC - 1):
+        a, b = i * 4, (i + 1) * 4
+        q(a + 0, b + 0, b + 1, a + 1)          # front
+        q(b + 3, a + 3, a + 2, b + 2)          # back
+        q(a + 1, b + 1, b + 2, a + 2)          # top
+        q(b + 0, a + 0, a + 3, b + 3)          # bottom
+    q(0, 1, 2, 3)                              # the two ends
+    e = (NC - 1) * 4
+    q(e + 3, e + 2, e + 1, e + 0)
+    P.raw((verts, faces), 'bone')
+    _span("board", i0)
+
+    # THE SEAMS, drawn on the face. Four shallow dark lines where the planks
+    # would meet. They buy back the "this is boarded timber" read that the
+    # single shell gave up, and because they are ON the face and inboard of the
+    # ends they cannot reach the silhouette from any of the three cameras -
+    # which is the exact property the nine plank boxes did not have.
+    i0 = len(P.items)
+    for u in (-0.14, 0.14):
+        zt = ZT - ARCH * (u / HALF) ** 2
+        x, y, _ = W(u, face_dy(u) - 0.010, 0.0)
+        P.add(L.box(0.011, 0.020, zt - ZB - 0.05), 'dark',
+              loc=(x, y, ZB + (zt - ZB) * 0.5),
+              rot=(0.0, 0.0, BYAW - (u / HALF) * 0.36))
+    _span("seams", i0)
+
+    # ------------------------------------------- THE RIB, BANDS AND STRIKES
+    # THE CENTRE RIB. A real pavise has a vertical gutter down the middle; this
+    # is its outside. Dark, so the pale field has a spine and the front view
+    # has a vertical to read against the two horizontals.
+    # *** PASS 3 DELETED THE CENTRE RIB AND THE DELETION IS THE FIX. ***
+    # Pass 1 put a dark tube down the middle of the face "so the pale field has
+    # a spine". front.png: it came out the SAME WEIGHT AND THE SAME COLOUR AS
+    # THE HINGE POST, so the front view had two identical dark verticals and
+    # the board sat in a frame between them - a GATE, which is precisely the
+    # read my own docstring said this body must not have, and I had written the
+    # thing that caused it. With the rib gone the hinge post is the ONLY dark
+    # vertical on the body, which is correct: the post is the mechanic and
+    # nothing else should compete with it for that shape.
+    i0 = len(P.items)
+    # TWO IRON BANDS across the face, following the camber. These are what
+    # holds nine planks together, and they are also the two horizontals that
+    # stop the board reading as a blank.
+    # *** PASS 5: THEY ARE STRAPS NOW, NOT HOOPS, AND THAT IS THE BARREL. ***
+    # Passes 2-4 ran each band the FULL width and round onto the ends, so the
+    # dark line met the pale outline on both sides and closed behind it. That
+    # is a hoop, a hoop is a cask, and no amount of changing the board's
+    # proportions was ever going to beat two hoops. They now stop at |u| 0.30
+    # with their ends against the pale field, 0.10 inboard of the outline, so
+    # they read as iron laid ON a board - which is what they are - and the
+    # outline of the board is unbroken pale from top to bottom.
+    STRAP = 0.30
+    for zb in (0.40, 1.15):
+        pts = []
+        for t in range(7):
+            u = -STRAP + 2.0 * STRAP * t / 6.0
+            x, y, _ = W(u, face_dy(u) - 0.020, zb)
+            pts.append(Vector((x, y, zb)))
+        P.raw(L.tube(pts, [0.028] * 7, 6), 'dark')
+    _span("bands", i0)
+
+    # THE STRIKES - EIGHT BOLT STUBS STILL IN THE FACE, AND THEY ARE THE
+    # RECEIPT. Mr. E's rule 2: wear is a variable and it must be EARNED by what
+    # the thing is for. This board's entire purpose is to be hit, so the hits
+    # are on it and they are COUNTABLE from the doorway, the way the Sexton's
+    # four lit niches and the Drover's two bows are. Scattered, not patterned:
+    # a pattern would read as decoration, which is the flourish the register
+    # bans.
+    i0 = len(P.items)
+    # PASS 3: EIGHT BECAME SIX, 0.135 LONG BECAME 0.075, AND NONE IS OUTSIDE
+    # |u| 0.28. side.png is why, and it is fault class 2 from my own prompt -
+    # an element that reaches the outline in a view I was not thinking about.
+    # Edge-on, eight 0.135 stubs became a ROW OF HORIZONTAL SPINES down the
+    # left silhouette and the creature read as a spiked post. The border check
+    # cannot see this: the stubs are not clipped and the frame is not blank, so
+    # it is green while the body is a different animal. Six is also countable
+    # at a glance where eight is not, which is the reason the Sexton has four
+    # niches and the Drover two bows.
+    STRIKES = ((-0.26, 0.58), (-0.11, 1.08), (0.04, 0.34),
+               (0.17, 0.82), (0.26, 1.24), (-0.20, 0.92))
+    for u, z in STRIKES:
+        x, y, _ = W(u, face_dy(u) - 0.016, z)
+        P.add(L.cone(0.026, 0.009, 0.055, 6), 'dark',
+              loc=(x, y, z), rot=(math.pi / 2.0, 0.0, 0.0))
+    # THREE SPLITS, one of them long. Thin dark slots let into the face.
+    for u, z0, h in ((-0.22, 0.62, 0.62), (0.10, 0.30, 0.46), (0.29, 0.86, 0.40)):
+        x, y, _ = W(u, face_dy(u) - 0.012, 0.0)
+        P.add(L.box(0.013, 0.026, h), 'dark',
+              loc=(x, y, z0 + h * 0.5), rot=(0.0, 0.0, BYAW - (u / HALF) * 0.36))
+    _span("strikes", i0)
+
+    # ------------------------------------------------------- THE HINGE POST
+    # IT HANGS ON ONE EDGE, NOT ON ITS CENTRE, AND THAT IS THE WHOLE REASON THE
+    # IDEA IS VISIBLE BEFORE THE FIGHT STARTS. A board on a centre spindle is a
+    # board. A board on a POST AT ITS EDGE, with two collars and a prop, is a
+    # thing that obviously SWINGS - a viewer who has ever opened a gate knows
+    # it at a glance, and no one has to be told.
+    # It also solves a geometry problem honestly rather than by fudging: a
+    # centre post would have had to pass through the man's chest.
+    i0 = len(P.items)
+    PU, PDY = -0.56, 0.07
+    px, py, _ = W(PU, PDY, 0.0)
+    P.raw(L.tube([Vector((px, py, 0.0)), Vector((px, py, 0.76)),
+                  Vector((px, py, 1.50))], [0.086, 0.078, 0.070], 9), 'dark')
+    # the two collars, and the two short straps out to the board. Closed rings
+    # in the HORIZONTAL plane (axis 'z'): a hinge band wraps the post, it does
+    # not hang off it, so this is not the Drover's bow and must not look like
+    # one.
+    for zc in (0.40, 1.20):
+        _open_ring(P, (px, py, zc), 0.135, slot='dark', rad=0.036, n=14,
+                   gap=0.0, axis='z')
+        sx, sy, _ = W(PU + 0.24, face_dy(PU + 0.24) + 0.03, zc)
+        P.raw(L.tube([Vector((px, py, zc)), Vector((sx, sy, zc))],
+                     [0.034, 0.028], 6), 'dark')
+    _span("post", i0)
+
+    # ------------------------------ THE BACK OF THE BOARD IS STILL BLANK,
+    # AND PASS 6 TRIED TO FIX IT AND IS REVERTED HERE RATHER THAN SHIPPED.
+    # hero_back.png carries half this creature's idea - the board is gone and
+    # you are looking at the man, which is the party's answer drawn - and the
+    # board's back is a dead pale rectangle. Pass 6 put two iron battens across
+    # it, which is how a boarded pavise is actually braced. hero_back.png after
+    # that change: THE MAN OCCLUDES THE WHOLE BACK OF THE BOARD, so all that
+    # appeared were the two batten ENDS poking out past his torso, reading as
+    # two loose pegs. That is worse than the blank it replaced.
+    # THE CAUSE IS NOT THE BOARD, IT IS THE MAN, and that is why the revert is
+    # the honest move rather than a third placement: anything put on the back
+    # of this board is behind him by construction, so the back view will stay
+    # thin until the MAN'S back carries something. That is pass 7's item and it
+    # is carried in docs/art/MINIBOSSES.md as a live fault, not as a done job.
+    # I am writing the failed attempt down instead of deleting it so the next
+    # run does not spend a pass rediscovering that the board's back is hidden.
+
+    # --------------------------------------------------------- THE PROP LEG
+    # Back and out to the floor behind him. PALE, because it is the one young
+    # thing on the body - a prop is what snaps and gets replaced - and because
+    # the back view needs a second pale object once the board has gone.
+    # It is taken well OUTBOARD in u so it crosses nothing: the man spans
+    # roughly x -0.26..0.54 and every point of this leg is left of x -0.6.
+    i0 = len(P.items)
+    f = W(PU - 0.26, 1.35, 0.0)
+    P.raw(L.tube([Vector(W(PU, PDY + 0.02, 1.42)),
+                  Vector(W(PU - 0.14, 0.70, 0.74)),
+                  Vector((f[0], f[1], 0.06))],
+                 [0.058, 0.050, 0.044], 7), 'bone')
+    # the iron shoe. A prop with no shoe skids, and a cone on the ground also
+    # tells the eye where the floor is in a render with no floor in it.
+    P.add(L.cone(0.070, 0.038, 0.10, 8), 'dark', loc=(f[0], f[1], 0.05))
+    _span("prop", i0)
+
+    return P
+
+
+BUILDERS.update({"paviser": paviser})

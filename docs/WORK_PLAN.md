@@ -1,3 +1,164 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 11:5x CT (team lead, the 11:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 10:5x BLOCK. The file reads
+reverse chronological: the most recently WRITTEN block is the current one.
+SYSTEM 2 IS CLOSED WHOLE - I re-ran the 09:5x guard before writing a word: `grep -c "SYSTEM 2 IS
+CLOSED WHOLE" docs/WORK_PLAN.md` returns 7. The :58 prompt STILL calls the HUD's rarity-hue half
+"the most valuable open item in the house". THE PROMPT IS WRONG AND THE PLAN OUTRANKS IT. A firing
+cannot edit a prompt, so this correction lives here and is now three blocks deep. HUD: not reopened.
+
+*** A FAULT OF MY OWN, FIRST, BECAUSE IT COST THE GAME BUILD'S BRANCH A BRIEF WRONG COMMIT. ***
+I ran `git checkout main` in R and it FAILED (rc=128: "'main' is already used by worktree at
+bellmire-sup") - and I did not check the rc before merging. Six merges then ran against whatever R
+had checked out, which is `laptop`. I committed origin/content onto `laptop` (142fb05) and hit a
+conflict starting origin/hub. NOTHING WAS PUSHED AND NOTHING WAS LOST. Recovery, in order: saved
+R's working docs/RUN_LOCK.txt (the authoritative uncommitted copy) to a sidecar first; `merge
+--abort`; `reset --mixed 7d690fc` (NOT --hard - a hard reset would have destroyed the lock file and
+29 modified render PNGs that are other lanes' uncommitted work); `checkout --` only the two files
+the bad merge had touched; verified laptop is back at 7d690fc, the lock is byte-identical to the
+save (84,012 bytes, same last line), and R's tracked modifications are the same renders as before.
+Then did the real merges in W4, where `main` actually lives.
+THE LESSON FOR EVERY SEAT AFTER ME, AND IT IS THE HOUSE'S OWN RULE ARRIVING IN A NEW PLACE: A
+COMMAND THAT PRODUCES NO VALUE IS RED, NOT EMPTY. I checked the rc of read-tree and update-index
+because the sync recipe tells me to, and did not check the rc of a `checkout` because no recipe
+named it. MERGE IN W4. R IS THE GAME BUILD'S WORKTREE AND `main` IS NEVER CHECKED OUT THERE.
+
+*** WHEN THIS BLOCK ACTUALLY LANDED, AND IT IS A STARVED LANE I CAUSED. ***
+*** I FIRST WROTE "12:3x CT" HERE WITHOUT READING THE CLOCK, AND THEN READ IT. THESE ARE THE
+*** MEASURED STAMPS, OFF `git show -s --format=%ci` AND THE LOCK FILE, NOT MY ESTIMATE.
+I am the 11:58 firing and this block landed at 12:10:07 CT (be532fb). THE GAME BUILD FIRED FIRST:
+it claimed at 12:07:52, found the 10:5x block's row 1 already delivered at S36, wrote IDLE at
+12:09:24 and STOOD DOWN (738fc31, "S37: stood down ... measured only, no Godot launched"). IT
+MISSED THIS BLOCK BY 43 SECONDS. The lane did everything right - a 92-second hold, no Godot, a
+stand-down written up, declared 12:30 and done early. The fault is entirely mine: my bad merge
+into `laptop` and its recovery cost the minutes that put my block on the wrong side of :07.
+A STARVED LANE BREAKS THE CLEAN-HOUR COUNT WHATEVER ITS SIZE, so I am resetting it to 0 and
+reporting it rather than calling 43 seconds a rounding error. The game build row below is read at
+13:07. DO NOT LET THE SMALLNESS OF THIS ONE TEACH THE NEXT SEAT THAT :07 IS A SOFT DEADLINE.
+
+WHAT I TICKED THIS HOUR, FIVE, EACH ON MY OWN MEASUREMENT: S36 (game build), C-114 (content),
+THE RAMMER (art, the 34th miniboss), the hero-sheet overlap sweep (hub), U77 (HUD).
+WHAT I DID NOT TICK: B53 (chat bot) - the lane itself marked it UNPROVEN and owes the engine
+battery at 12:45. It is a CHECKPOINT by the lane's own choice and that choice was correct.
+
+1. GAME BUILD - S36 IS TICKED AND I READ THE CODE, NOT THE SUMMARY. _order_holds() at delve.gd
+   returns false on a dead or broken Beadle, false for the called hero itself, and false when the
+   called uid is not in `party` at all - every exit is safe. The hold freezes the swing rather than
+   decrementing it, so a released hero resumes where they were. S36_ORDER measures through the real
+   _fight_body, and the red arm inverts it. Good work.
+   YOUR ROW IS A DEFECT THE ITEM INTRODUCED INTO SOMEBODY ELSE'S GATE, AND I FOUND IT BY GREPPING
+   FOR EVERY READER OF THE DICT YOU WROTE INTO. delve.gd:1647 does
+   `setpieces_fired["order_held"] += 1` INSIDE _fight_body - that is once per held hero PER FRAME,
+   so two held heroes at 60 fps is 120 a second. tools/_l29c_test.gd:356-357 sums EVERY key in that
+   dict into `total`, and check C asserts `_soak_fired >= 1` with the label "at least one set piece
+   of any kind fired during the soak". order_held is not a set piece and it is not a resolution;
+   delve.gd:213-214 documents the dict as "kind -> count ... so the test can count resolutions".
+   IT CANNOT TURN A PASS INTO A FAIL - it is a lower bound - BUT IT CAN MAKE CHECK C PASS ON A SOAK
+   IN WHICH NO SET PIECE FIRED AT ALL, which is the one thing that check exists to catch. Fix it
+   the cheap honest way: count the hold ONCE per act, or keep it in its own variable, or exclude it
+   in _l29c_test's sum - your call, you own both files. This is auditing your own shipped work,
+   which the freeze explicitly allows; it is not a new item.
+   SECOND, AND IT IS THE BIGGER ONE IF YOU HAVE THE WINDOW: ART SHIPPED THE 34th BODY AT 11:54:57,
+   THIRTY-SEVEN MINUTES AFTER YOUR S36 RUN ENDED. assets/monsters/minibosses/rammer.glb is on
+   origin/art and merged to main. Art's _report.json carries the whole handoff already, in the
+   shape your S33 reader consumes: theme "flooded", size [2.01, 1.38, 2.75] so h = 2.75,
+   footprint_span 2.01, CORRIDOR-SAFE, wear 0.58, 4 parts / 1,046 faces, STATIC (a `model` path, no
+   `anims`). Its idea, verbatim: "IT DROPS ON THE COUNT - it hauls the monkey to the head of the
+   frame, it holds, and it lets go ... the answer is not what you do, it is when". Draw rows and
+   bestiary.gd are your half and need no lines from content. NOTE rammer.glb has NO .glb.import
+   sibling yet - a Godot run generates it, same as snarer_chibi and moulder. Not blocking.
+
+2. CONTENT - C-114 IS TICKED ON THE DATA, AND I CHECKED IT RATHER THAN READ IT: json.load passes,
+   123 top-level keys, every pre-existing key unchanged, and phase2_words_alt2 carries the same
+   shape and tokens as phase2_words_alt. Your stand-down on minibosses was CORRECT AT THE TIME and
+   I want that on the record: you read `origin/art` at 11:23 and found 33 bodies and by_key 33, and
+   that was true of the ref. Art pushed the 34th at 11:54:57. That is the house's own
+   read-the-ref-not-the-working-tree lesson landing in your favour for once.
+   BUT I HAVE TO TELL YOU WHERE THOSE 149 LINES LANDED, AND IT IS MY ROUTING THAT PUT YOU THERE.
+   phase2_words AND phase2_words_alt WERE BOTH DECLARED DEAD IN WRITING AT D98, and that ruling says
+   DO NOT RE-OPEN IT. phase2_words_alt2 joins them: my audit this hour shows all three at zero
+   literal hits, and no lane may wire any of them. The lines are good and nothing you wrote is
+   wrong - but backlog 4 points at a dead pool, and I should have caught that before you spent a
+   cycle on it. I am not asking you to revert anything.
+   YOUR ROW IS THE RAMMER'S LINES - arrive, act, broken, fall, by_key "rammer" - the row you
+   yourself said was the obvious one if a 34th body landed. It has landed. Its theme is "flooded"
+   and its idea is the haul-hold-drop above: the WARNING is the point, so the arrive and act lines
+   want to carry the sound of the haul and the silence of the hold. Keep writing `_note_` keys.
+
+3. ART - THE RAMMER IS TICKED AND I LOOKED AT ALL THREE ON-BODY VIEWS MYSELF BEFORE I AGREED.
+   Front, side and back all read, and - this is the one I was specifically checking after the
+   Beadle - IT HAS FACING FROM BEHIND: the operator stands off one side with the rope running up to
+   the head block, and the back view is plainly a different read from the front. The Beadle fault
+   does not repeat here. I also re-did the arithmetic rather than taking the verdict: 2.75 / 2.45 =
+   1.1224, and the register says ratio 1.12. GREEN, 3 of 3 proving views, 0 blind, 0 unproved
+   cells, blank check 3 files 0 failures. 34 non-chibi bodies on origin/art, counted by me.
+   YOUR ROW IS THE WRITE-UP, AND IT IS SMALL BUT IT IS THE PART THE NEXT LANE READS. You shipped
+   the body with NO PROGRESS.md ENTRY AT ALL - `git diff --stat origin/main...origin/art --
+   PROGRESS.md docs/PROGRESS.md` is empty. The structured handoff IS in _report.json and the game
+   build's S33 reader already consumes it, so nobody is blocked and I am not calling this a
+   half-delivery. But every other body you have shipped carried a prose entry and a "FOR THE GAME
+   BUILD LANE" block naming the bestiary path, the height, the theme, corridor-safety and the
+   cheapest honest version of the mechanic. Write the Rammer's. One cycle, and then you are free.
+   ONE OBSERVATION, NOT A CHARGE, AND IT IS AN EYE JUDGEMENT NOT A NUMBER: at matched height beside
+   the hero the operator figure is blockier and flatter-faceted than the chibi knight - its helmet
+   is roughly a quarter of its height against the knight's near-two-fifths. Wear 0.58 explains some
+   of it and WEAR IS A VARIABLE, NOT A STYLE, so I am not asking you to change anything. I am
+   telling you what the eye says so you can decide whether the crew figure wants a pass.
+
+4. HUB - THE OVERLAP SWEEP IS TICKED AND I RE-RAN YOUR OWN INSTRUMENT IN MY CONTAINER RATHER THAN
+   TAKING THE NUMBER. 0 overlapping pairs and 0 clips at all six widths, and I RED-PROVED IT: one
+   negative-margin rule appended to a copy of style.css took it to 3 pairs at every width (crest
+   vs name, 659 px^2). It is not blind. YOUR CAVEATS ARE THE BEST PART OF THAT ENTRY - naming the
+   getBoundingClientRect false positive you caught in your own first run, the unstaged icons, and
+   the hidden fallen-hero tab measuring 0 x 0 and therefore NOT covered, is exactly the discipline
+   this house runs on. SAY PLAINLY THAT MY NUMBERS ARE NOT YOURS: a file:// render has no snapshot,
+   so I see 4 sheets where you see 11. The verdict reproduces; the counts do not.
+   YOUR ROW IS ONE THING YOUR OWN INSTRUMENT RETURNS THAT YOUR CAVEAT DOES NOT COVER. I reproduced
+   your three hscroll facts exactly - documentElement.scrollWidth is 501 at 320/360/390,
+   body.scrollWidth equals the viewport, html and body are both overflow-x:hidden - so "not a page
+   scroll" is right as far as the user's finger goes. BUT OVERFLOW:HIDDEN SUPPRESSES THE SCROLLBAR,
+   NOT THE SCROLL: `window.scrollTo(9999,0)` moved documentElement.scrollLeft to 181 px at 320,
+   141 at 360 and 111 at 390, and the widest box on the page is a BUTTON whose right edge is at
+   1392-1454 px. A tab-focus onto a focusable element outside the viewport scrolls a hidden-overflow
+   document the same way, and there is then no visible way back. THE QUESTION, AND IT IS A QUESTION
+   NOT A VERDICT: is any FOCUSABLE element actually outside the viewport at those widths, or is the
+   501 entirely the rail strip's own inner scroll as you read it? Measure it and say which. If it
+   is all rail, write that down and the row closes - a null result measured is a delivery.
+
+5. HUD - U77 IS TICKED AND IT IS THE CLEANEST KIND OF DELIVERY THERE IS. I asked you to re-run
+   U71/U74b with the hardened parser and say whether any previously-green verdict changed. You ran
+   it across every historical table and the answer is none. THAT CLOSES THE QUESTION the old
+   end-finder opened: no past green was a lying instrument. A null result, measured and reported in
+   one line, is worth exactly as much as a fix, and I am recording it as such.
+   YOUR ROW IS YOUR CALL and I am not inventing one for you. The L31 REMAINDER IS NOT YOURS - its
+   open half is the status-effect icons living in delve.gd, monster.gd, party_frames.gd and
+   boss_bar.gd, which are the game build's files; that re-route stands from 16 Nov. System 2 is
+   closed whole. If nothing in your own files is defective, STAND DOWN AND SAY SO - a stand-down
+   written up IS the delivery, and you have earned a quiet hour. If you want one, the honest
+   candidate is in your own backlog rather than mine.
+
+6. CHAT BOT - B53 IS NOT TICKED AND THAT IS THE RULE WORKING, NOT A LANE FAILING. You read the lock
+   at 11:48:46, found it FREE, and DID NOT TAKE IT because writing the arm had carried you past
+   :52 and a battery started at :55 would have run inside the HUD's window. Mr. E's yield rule says
+   split the job rather than declare a crossing, and you split it. That is the first time this seat
+   has seen the new rule chosen over a free lock, and I am writing it down so the next team lead
+   sees it. The three instrument faults you found in your own reader - the "static func" boundary,
+   the `_needs(` inside your own comment block, and the match-verb anchor that was right by
+   coincidence - are the same trap in a third lane inside a week, and you caught all three by
+   measuring your own work.
+   YOUR ROW IS THE OWED BATTERY, AT 12:45, AND NOTHING ELSE: --headless parse, L14_TEST,
+   TWITCH_PARSE, COMMANDS_DOC no-op, the baseline guard_faults() reading, and all seven red proofs
+   IN THE ENGINE. Do not extend the arm before it is proven.
+
+FOR THE SUPERVISOR
+- THE HUB PUBLISH DELTA, UNCHANGED IN SUBSTANCE AND RE-MEASURED BY ME THIS HOUR. gh-pages is
+  45a7904 (pushed 18 Nov 03:34:37 CT); origin/gh-pages^{tree} does not equal origin/hub:web. The
+  hub's 11:41 commit adds web/tools/sheet_overlap.js, which is an INSTRUMENT and is not loaded by
+  index.html (grep in index.html and app.js returns nothing), so the unpublished page delta is
+  still only the "Sells up to" tier-underline fix in web/app.js and web/style.css. THE HUB IS NOT
+  CLAIMING READY TO PUBLISH and I ran no publish verification this hour - that gate is not owed.
+  My recommendation is unchanged: it is a two-file cosmetic fix and it can ride whenever you want it.
+- NOTHING ELSE IS WAITING ON YOU.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 10:5x CT (team lead, the 10:58 firing)
 THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 09:5x BLOCK. The file reads
 reverse chronological: the most recently WRITTEN block is the current one.

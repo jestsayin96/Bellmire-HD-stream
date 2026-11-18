@@ -9708,3 +9708,9 @@ FOR THE GAME BUILD LANE - I TOUCHED NO .gd OUTSIDE tools/art/:
 
 NEEDED FROM MR. E: nothing. FOR THE SUPERVISOR: one call only - whether the eleven
 showcase kits stay under assets/ (my recommendation) or move.
+
+## C-106 (2026-11-18 CT, content) - the three approved swap sets applied: 11 lord shapes, 6 duplicate lines, 3 accessory flavours
+- ITEM: no new TAKE THIS NEXT row for content; supervisor decision 03:16 CT 18 Nov confirmed the C-100, C-101 and C-102 swaps (approved 02:13). Merged origin/main first. This cycle applies them.
+- SWAPPED: bosses.json 11 `shape` strings (lesser_uniques 179,185,186,190,193; greater_uniques 173,174,180,185,187,191) to the flavour-only C-100 lines; name, hp, speed, attack untouched. lore_lines.json descend[67], barks.enter[43], barks.trap[42], barks.hurt[49], barks.hurt[48], barks.misfire[47] to the C-101 lines (hurt[48] is 'Hurt. Not stopped.' because the proposed 'Still on my feet.' already sat at hurt[109]). items.json mender_wraps, pilgrim_cloak, wall_cloak flavour to the C-102 lines. No rarity, cost or stat changed; the `_note_c100/101/102` records stay as the record.
+- VALIDATION OK: all four files parse; the diff against HEAD is exactly 20 string values at the paths above, no key added or removed, potions.json untouched; zero exact duplicates left in descend, barks.enter, trap, hurt, misfire.
+- CODE WIRING: none. The 11 tricks are still unbuilt; the shapes no longer promise them.

@@ -9599,7 +9599,6 @@ CAUGHT (1): tools/_l40_test.gd. Its overlap sweep SKIPS any top-level control >=
 CLEAN, by reading the assertion against its bound: _l71/_l74 (box.size.y vs sheet_rect(): box is a VBox that grows with overflow, bound is the designed sheet from _geo(); can go red), _l39 (box size vs fractions of the screen; spill vs HudDock.centre(), a pure function of viewport), _l57 (label vs spotlight pane_rect and centre()), _l36 (Chronicle vs chat box - another file's rect, independent), _l21 (controls vs pane overlay rects), _u58/_u62/_u63/_u64 (stripe vs _wm_baseline, already walked U63-U65).
 NOT AUDITED: ~60 non-HUD logic gates (delve/gear/monster tests); the L654 audit skips <=2 px and offscreen controls (a collapsed element passes - same class, left for a windowed cycle). 
 Files: tools/_l40_test.gd, PROGRESS.md. Not ticked by me.
-================================================================================
 ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
 ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
 ================================================================================
@@ -9720,6 +9719,14 @@ showcase kits stay under assets/ (my recommendation) or move.
 - THE NUMBER: FIXED page 5 of 5 hued rungs framed - uncommon rgb(255,255,255), rare rgb(77,140,255), very rare rgb(179,89,255), legendary rgb(255,140,31), artifact rgb(255,33,26) (art's table to the digit). STRIPPED copy (style.css lines 1398-1400, the five .sat-item.rar-* rules, removed) 0 of 5 framed - the fault returns. junk / starting / common: rgba(0,0,0,0) in both = bare by design. 17 rows, 0 pageerrors, 0 dialogs, 0 injected img[src=x], no horizontal scroll, both pages.
 - LOOKED AT: renders/hub/_sat_rungs_fixed_1440.png. WHAT I SEE WRONG: the uncommon frame is WHITE on a PARCHMENT card (Longsword row) - it reads as a pale sliver, much weaker than the blue/purple/orange/red. The 15:47 ruling chose canonical white because the hub surface is deep ink; the satchel card is parchment, which is exactly the case art's note says pewter exists for. Not changed (ruling stands); NAMED for the team lead: should satchel/parchment cards take RARITY_HUE_PARCHMENT for uncommon?
 - Live-dot colour: unchanged this run (no web/ edit).
+
+## U68 - 2026-11-18T03:55-06:00 - RED PROOF of the U67 _l40_test.gd fix (windowed 1920x1080, one 2-min claim 03:53-03:55)
+ROW: 02:58 TAKE THIS NEXT, HUD - take one windowed claim and fire the red proof of the U67 gate fix.
+DONE: tools/_l40_redproof.gd = _l40_test.gd with ONE change: the Chronicle PanelContainer is forced to 1700x900 (>35% of 1080p) just before the audit. RESULT: it printed "FAIL named HUD element inflated past the backdrop skip" at 100% full AND 150% full (Chronicle S:(1700,900)), U68_REDPROOF FAIL, exit by assertion. The unmodified _l40_test.gd on the same build: L40_TEST OK. So the U67 fix CAN read red and reads green on the real HUD. It is no longer an unproven instrument.
+HONEST LIMIT: it fires only in the "full" passes (the grid passes did not trip it - the Chronicle sits in a pane there, audited as a child of Pane_*, whose size the 35% skip does not apply to). A Chronicle inflated inside a pane is caught by the 20% child bound instead, which I did NOT red-prove this cycle.
+LOOKED AT: renders/cycles/u68/l40_full_100.png (Chronicle bottom-left, chat box bottom-right, clock top-right, no overlap; the HUD re-lays the panel after the audit read, so the picture shows the normal size).
+NOT DONE: the L654 collapsed-element (<=2 px / offscreen) audit - did not fit the window.
+Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me.
 
 ## B45 - the three unproven arms, red-proved at last: two of content's keys and one of the game build's constants, every file handed back byte-identical (chat bot, 2026-11-18 03:4x CT)
 - THE ROW, verbatim: "YOUR THREE UNPROVEN ARMS ARE UNBLOCKED - THE EXCEPTION WAS GRANTED... take B41 and B43 (content's items.json) and B44's LOOK LONGER (the game build's spotlight.gd) and red-prove them properly." Merged origin/main first (3d7b52a, fast-forward, clean).

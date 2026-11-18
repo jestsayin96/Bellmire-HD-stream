@@ -8756,3 +8756,405 @@ def ratcatcher():
 
 
 BUILDERS.update({"ratcatcher": ratcatcher})
+
+
+# ======================================================================= 28
+# THE DROVER - wood, the second one. 2026-11-18, the art lane.
+#
+# WHAT I CHECKED FOR FIRST, MEASURED THIS RUN AND NOT REMEMBERED:
+#   I parsed CANON out of this file and listed every mechanic phrase in it -
+#   41 strings, 27 distinct bodies, and the register's occupied classes are:
+#   summon, self-armour, drag-a-hero, douse the lamps, will-not-stay-down,
+#   bar the door, take-and-wear, heal-the-pack, raise the water, plant thorn,
+#   pre-set the room, fire-scaled, mislocated sound, pour-and-set, come apart
+#   in two, arm the room, encumber, bisect the room, adaptive resistance,
+#   take the haul, drink the brews, press the fallen, strike you level, mark
+#   one and hunt only it, green your iron, take your shape, paid by the tail.
+#   NOTHING IN THE REGISTER SHARES HARM WITH THE PARTY. That is this one.
+#   I also counted bodies per theme off the same parse: wood carries ONE
+#   (the Snarer) and is one of the four thinnest themes alongside fogbound,
+#   shrine and confection. The Snarer's idea is IT HAS ALREADY SET THE ROOM -
+#   lines laid before you arrived. This one lays nothing and sets nothing;
+#   it joins itself to you. Same room, no shared mechanic.
+#
+# AND I CHECKED THE PACKS BEFORE WRITING A VERTEX. There is no yoke, no ox-bow
+# and no chain coil in the forty packs - I grepped the directory for yoke /
+# ox / bow / chain / collar / coil (the run log is in the summary). The two
+# things that DO exist and that I am not rebuilding are a man's body shape and
+# a staff, and this file's own `limb` and `tube` already serve both better than
+# an import would, because the stoop has to be authored to the load.
+#
+# WEAR IS A VARIABLE AND THIS NUMBER IS AN ARGUED CHOICE, NOT A MEASUREMENT.
+# I did not run _moulder_wear.py here and will not imply I did. Four
+# populations:
+#   the ash beam - handled every day of a working life, smooth and old, 0.85
+#   the chain and the two collars - greased iron, older than the man, 0.90
+#   the leather - daily, 0.80
+#   the goad - cut this week, and it is the only young thing on the body, 0.15
+# 0.74 is taken, toward the beam-and-iron end because they carry the mass and
+# the whole upper silhouette. 0.74 is free in the register (0.70 and 0.75 are
+# taken; nothing shares a value).
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"drover"}
+
+OVERRIDE.update({
+    "drover": {
+        # THE MAN IS DARK AND THE FURNITURE IS PALE. The Moulder measured this
+        # and the Ratcatcher applied it: contrast carries the outline, so I do
+        # not have to invent a rim light. The Greener's head vanishing from the
+        # side is the live fault the argument comes from.
+        'body': ((0.070, 0.058, 0.048), 0.88, 0.02),
+        # THE ASH. The beam is the biggest object on the body and the first
+        # thing an eye lands on, which is on purpose: the beam IS the idea.
+        # Ash kept warm rather than grey - a working yoke is oiled by hands.
+        'bone': ((0.722, 0.612, 0.408), 0.80, 0.00),
+        # THE IRON. Near-black, and this slot holds ONLY the mechanic - the two
+        # bows, the collar, the chain, the coil, the goad's point and the boots.
+        # So a dark pixel anywhere above the man's knee IS the mechanic, and an
+        # instrument can measure the chain without separating it from ironmongery
+        # that is not the chain. The boots are the one exception and they live
+        # below z 0.2, which is why the span below is measured, not the slot.
+        'dark': ((0.034, 0.031, 0.029), 0.72, 0.05),
+        # NO LAMP, AND THAT IS A DECISION - BUT NOT "NO GLOW", WHICH IS WHAT
+        # THIS COMMENT SAID BEFORE I CHECKED MY OWN CALL. A drover carries no
+        # lamp: rule 1 is plainness, and the register already has a
+        # lamp-carrier (the Snuffer), a pour (the Moulder) and a hand lamp (the
+        # Ratcatcher). Inventing light for a man who drives beasts down a wood
+        # road would be the flourish the register bans. So there is no flame,
+        # no hood and no pour on this body. THE ONE EMISSIVE IS THE PAIR OF
+        # EYE PINPOINTS, because creatures.eyes() defaults to slot='glow' and
+        # every man in this register has them. Total emissive area is two
+        # spheres of r 0.042. Named exactly, because "no glow" would have been
+        # a false sentence sitting next to a call that makes glow.
+    },
+})
+
+CANON.update({
+    "drover": ("The Drover", 2.44, (0.72, 0.61, 0.41), (0.86, 0.78, 0.62),
+               "wood",
+               "IT YOKES ONE OF YOU - it closes a bow of its own yoke on a "
+               "hero and after that the harm you do it travels the chain: "
+               "while the collar holds, every blow landed on the Drover is "
+               "paid half by the one wearing it, so the party is not choosing "
+               "how hard to hit but whether to hit at all; cut the chain and "
+               "the yoke comes free to take the next, and the second bow "
+               "hangs open to tell you it can",
+               0.74, "It yokes one of you."),
+})
+ORDER = ORDER + ["drover"]
+
+
+def _chainlink(P, pts, n, slot='dark', r=0.072, rad=0.020, flat=False,
+               lie=False):
+    """A chain, as INTERLOCKING RINGS on a path.
+
+    *** PASS 2, AND THE PICTURE IS THE ONLY REASON IT HAPPENED. *** Pass 1
+    drew the chain as separate alternating BOXES spaced evenly along the run.
+    The front render shows exactly what that is: a scatter of loose cubes
+    climbing through empty air, and the coil a pile of gravel on the floor.
+    Not a chain - debris. And the creature's whole idea is that harm TRAVELS
+    the chain, so a chain that does not read as one connected thing is the
+    mechanic gone, not a finish problem.
+    The fault was spacing, not shape: links that do not touch are not a chain,
+    they are a dotted line. Rings now sit at 1.10 * r, i.e. OVERLAPPING, and
+    consecutive rings are turned 90 degrees to each other so the run reads as
+    links passing through links. That is also what makes it read as CUTTABLE,
+    which is the party's way out of the mechanic and therefore worth the
+    faces."""
+    nseg = len(pts) - 1
+    # step along the polyline by arc length so a long slack span does not get
+    # sparser links than a tight one - a chain has ONE link size everywhere.
+    for i in range(n):
+        t = i / float(max(1, n - 1))
+        seg = t * nseg
+        k = min(nseg - 1, int(seg))
+        f = seg - k
+        a, b = pts[k], pts[k + 1]
+        c = (a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f,
+             a[2] + (b[2] - a[2]) * f)
+        if lie:
+            # lying on the floor: every link flat, seen from above
+            _open_ring(P, c, r, slot=slot, rad=rad, n=8, gap=0.02,
+                       axis='z', tilt=0.0)
+        elif flat:
+            # lying on the floor: alternate a flat ring and an upright one
+            _open_ring(P, c, r, slot=slot, rad=rad, n=8, gap=0.02,
+                       axis='z', tilt=0.0 if i % 2 else math.pi / 2.0)
+        else:
+            _open_ring(P, c, r, slot=slot, rad=rad, n=8, gap=0.02,
+                       axis='y', yaw=0.0 if i % 2 else math.pi / 2.0)
+
+
+def drover():
+    """IT YOKES ONE OF YOU. A stooped man under an ash ox-yoke with TWO BOWS
+    hanging from it: the near one SHUT, with a collar and a chain running off
+    the body to a coil of slack on the floor, and the far one HANGING OPEN.
+
+    SILHOUETTE INTENT - A PAIR, AND ONE OF THEM IS ALREADY TAKEN:
+      - the YOKE BEAM is a long pale bar across the top of the body. Nothing
+        else in the register is a HORIZONTAL BAR at head height - the Hurdleman
+        plants a vertical hurdle, the Reeve carries a box, the Ratcatcher a
+        gridded cage - so this body is told apart from all twenty-seven at the
+        outline, before any detail resolves;
+      - TWO BOWS, ONE SHUT AND ONE OPEN. The count is two, which is the
+        smallest countable fraction there is and the easiest to read from a
+        doorway: one of us is in it, and there is a place for another. The
+        Ratcatcher's five-of-twelve needed a staggered basket to stay countable
+        in three views; two needs nothing but to be apart in X;
+      - THE CHAIN LEAVES THE BODY. It runs from the shut collar down and OUT
+        to a coil on the floor, clear of the man's own outline in X, because a
+        dark chain crossing a dark torso is a line that does not exist at pane
+        distance. It is links, not a tube, so it reads as something that can be
+        cut - and cutting it is the party's out;
+      - THE COIL IS THE SLACK, and slack is a threat: there is more chain than
+        is being used, so the thing is not at the end of its reach;
+      - THE GOAD is the only young thing on the body and the only pale thing
+        below the beam, and it sweeps the other way from the chain so the lower
+        half of the picture has one object on each side of the man;
+      - the MAN is stooped and his head is SMALL - the Moulder's lesson, taken
+        as read: make the head you do not want looked at smaller than the thing
+        you do. He is built at CHIBI proportion, not human: head ~29% of his
+        own height, limbs thick, shins short. The Ratcatcher shipped a real
+        human at pass 2 and read as a stick figure beside a KayKit hero, and
+        only the fit render caught it. I am not paying for that twice.
+      - BOTH ARMS RUN ACROSS THE PICTURE PLANE - the Tanner's pass-3 finding.
+
+    AND ONE THING DELIBERATELY AGAINST THE RATCATCHER'S RULE, NAMED HERE SO
+    THE RENDER CAN JUDGE IT RATHER THAN MY TASTE. That body separated all three
+    of its elements in X because a side camera cannot see depth separation. A
+    BEAM ACROSS X IS EXACTLY THE SHAPE THAT RULE CANNOT SAVE: in a side view it
+    foreshortens to a stub and the two bows project onto one another, which
+    would be the whole mechanic gone in one of three views. So the beam is
+    CAMBERED FORWARD and the two bows hang at DIFFERENT Y - the near one
+    forward of the shoulder, the far one behind it - which is also what a real
+    ox-yoke does. The side view is the one I expect to be worst and it is the
+    first thing I will look at.
+
+    Front is -Y, the same as the twenty-seven before it."""
+    P = Parts("drover")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.08                      # the man
+    BZ = 1.52                      # the beam's underside at the shoulders
+    BHW = 0.95                     # beam half-width in x
+    # *** PASS 4, AND IT IS THE SAME FAULT AS PASS 3 WITH A DIFFERENT
+    # *** OCCLUDER. *** Pass 3 dropped the bows clear of the beam and they
+    # still both rendered as C's, because at x -0.60 / +0.62 they hang
+    # straight through the MAN: his torso is 0.82 across at the shoulders and
+    # his arms reach further, so the inboard arc of each ring was eaten by his
+    # own silhouette. Moving them to +/-0.84 - just inboard of the beam's ends
+    # at 0.95 - puts the WHOLE circle of each ring against background in the
+    # front and three-quarter cameras. That is the only way an O and a C can
+    # be told apart, and telling them apart IS the creature.
+    # I have now spent two passes learning one thing: THE COUNT MUST HANG IN
+    # CLEAR AIR. Writing it down because the Ratcatcher's cage learned the
+    # same lesson about depth and this lane keeps paying for it twice.
+    # *** PASS 6, AND IT IS THE FAULT I PREDICTED IN THIS DOCSTRING BEFORE
+    # *** PASS 1 RENDERED. *** hero_side.png: only ONE bow is visible. The
+    # other is directly behind the man, so the side camera shows one C and the
+    # count - the whole creature - is gone in that view. 0.30 of authored Y
+    # between them was not depth separation, it was a rounding error.
+    # They now sit 0.80 apart in Y (1.2 m once the body is scaled): the taken
+    # one well FORWARD of his chest, the empty one well BEHIND his back. The
+    # front and three-quarter cameras are orthographic along Y and the rings'
+    # x and z do not move, so NOTHING those two views read can change - only
+    # the depth order, and the rings do not overlap the man in x any more.
+    # This is also what a real ox-yoke does: the bows straddle the neck fore
+    # and aft, they do not hang in one plane.
+    SHUT_X, SHUT_Y = -0.84, -0.46  # the taken bow: well forward of the chest
+    OPEN_X, OPEN_Y = 0.84, 0.34    # the empty bow: well behind the back
+    # *** PASS 5. MINIBOSSFIT WENT RED ON THIS CREATURE AND IT WAS RIGHT. ***
+    # Pass 4 measured 4.26 m of footprint and the hero+creature pair came to
+    # 6.12 m, which does not fit the harness's fixed cell frame - the widest
+    # body in the whole register before this one is the Gaoler at 3.72. The
+    # error was "drover: pair does not fit the fixed frame".
+    # I COULD HAVE WIDENED THE FRAME. I did not, and I want that on the record:
+    # the frame is shared by twenty-six bodies that all fit it, so a frame
+    # changed to admit mine would be an instrument edited to pass its author's
+    # work - the exact fault class this lane keeps catching in its own gates.
+    # The creature is what was wrong. And the two widest things on it are the
+    # two LEAST load-bearing: the coil's sprawl and the goad's reach. The
+    # hanging chain already says there is slack; the coil does not have to say
+    # it across another metre of floor. Coil pulled in 0.28 and tightened 0.07,
+    # goad shortened 0.12 to just inside the beam's own end - so the BEAM is
+    # now what sets the width, which is correct, because the beam is the idea.
+    COIL_X, COIL_Y = -0.90, -0.30  # the slack on the floor
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    for s in (-1, 1):
+        limb(P, [(MX + 0.185 * s, 0.03, 0.03),
+                 (MX + 0.205 * s, -0.02, 0.32),
+                 (MX + 0.165 * s, -0.06, 0.60)], 0.158, 0.126, 'body')
+        P.add(L.box(0.33, 0.45, 0.17), 'dark',
+              loc=(MX + 0.185 * s, -0.12, 0.085))
+    P.add(L.box(0.57, 0.39, 0.26), 'body', loc=(MX, -0.05, 0.68))
+    # THE STOOP, and here it is load-bearing in the literal sense: a man under
+    # a yoke beam is bent UNDER it, not leaning out from it, so the lean is
+    # smaller than the Ratcatcher's and the shoulders sit square to the beam.
+    # 0.14 forward over 0.44 of rise.
+    limb(P, [(MX, -0.05, 0.66), (MX - 0.01, -0.12, 0.90),
+             (MX - 0.02, -0.19, 1.10)], 0.345, 0.300, 'body')
+    # the shoulders - wide, and they are the thing the beam rests on, so they
+    # are a plate rather than a taper
+    P.add(L.box(0.82, 0.34, 0.20), 'body', loc=(MX - 0.02, -0.19, 1.13))
+    # a leather pad between shoulder and beam. Plainness: a yoke chafes, so a
+    # working man puts a folded hide under it. It also stops the beam reading
+    # as if it floats.
+    P.add(L.box(0.52, 0.30, 0.09), 'body', loc=(MX - 0.02, -0.14, 1.255))
+    # THE HEAD, chibi-sized, and it sits FORWARD of the beam so the beam does
+    # not cut it in the front view.
+    P.add(L.sphere(0.235, 0.245, 0.228, 13, 9), 'body',
+          loc=(MX - 0.03, -0.30, 1.40))
+    P.add(L.box(0.50, 0.44, 0.07), 'dark', loc=(MX - 0.03, -0.32, 1.535))
+    # eyes() DEFAULTS TO slot='glow' - I read the signature in creatures.py
+    # rather than assume, because my own palette comment below claims what is
+    # and is not emissive on this body and a default would have made it a lie.
+    # The two pinpoints stay (every man in this register has them); the comment
+    # is the thing that got corrected.
+    eyes(P, (MX - 0.03, -0.30, 1.415), 0.094, 0.042, -0.190)
+    # ARMS, both across the plane, at two different heights so the pair reads
+    # as two grips and not as a bar. FAR arm up on the beam (he steadies it),
+    # NEAR arm down and out to the goad.
+    limb(P, [(MX + 0.36, -0.20, 1.16), (MX + 0.56, -0.16, 1.34),
+             (MX + 0.74, -0.13, 1.44)], 0.128, 0.098, 'body')
+    limb(P, [(MX - 0.36, -0.22, 1.12), (MX - 0.14, -0.34, 0.92),
+             (MX + 0.16, -0.42, 0.74)], 0.128, 0.098, 'body')
+    _span("man", i0)
+
+    # ------------------------------------------------------------ THE BEAM
+    # Cambered forward: the ends come toward the viewer, which is both what an
+    # ox-yoke looks like and the only reason a side camera sees an ARC here
+    # instead of a stub. 'bone' - the pale mass, the first thing seen.
+    i0 = len(P.items)
+    P.raw(L.tube([Vector((MX - BHW, -0.02, BZ - 0.04)),
+                  Vector((MX - BHW * 0.52, -0.14, BZ + 0.01)),
+                  Vector((MX, -0.17, BZ + 0.02)),
+                  Vector((MX + BHW * 0.52, -0.12, BZ + 0.01)),
+                  Vector((MX + BHW, 0.01, BZ - 0.04))],
+                 [0.072, 0.086, 0.092, 0.086, 0.072], 9), 'bone')
+    # the two end knobs, so the beam has ends and does not read as cut off by
+    # the frame. THE BORDER CHECK CANNOT SEE A BEAM THAT IS TOO LONG - it can
+    # only see alpha at the edge - so the knobs are also how I will know by eye
+    # whether the camera has the whole beam.
+    for sx, yy in ((-1, -0.02), (1, 0.01)):
+        P.add(L.sphere(0.098, 0.090, 0.086, 10, 7), 'bone',
+              loc=(MX + sx * (BHW + 0.03), yy, BZ - 0.045))
+    # the bed strap: iron over the beam, down onto the shoulder pad, one each
+    # side of the neck. The beam is TIED ON.
+    for sx in (-1, 1):
+        P.raw(L.tube([Vector((MX + sx * 0.20, -0.17, BZ + 0.08)),
+                      Vector((MX + sx * 0.23, -0.14, 1.30)),
+                      Vector((MX + sx * 0.21, -0.11, 1.22))],
+                     [0.026, 0.024, 0.022], 6), 'dark')
+    _span("beam", i0)
+
+    # ------------------------------------------------- THE TWO BOWS: 1 OF 2
+    # The SHUT one is a closed ring - the collar is on and there is no way out
+    # of it but the chain. The OPEN one is a U with a visible GAP at the
+    # bottom, and the gap is the whole of the second half of the idea: there is
+    # a place for another of you. A closed ring and an open U differ at the
+    # outline, which is the only place a viewer is reading.
+    i0 = len(P.items)
+    # --- SHUT: full ring, 0.30 radius, hanging under the beam at SHUT_X
+    # *** PASS 3, AND IT IS THE WHOLE IDEA, FOUND BY LOOKING AT front.png. ***
+    # Passes 1-2 hung both bows DIRECTLY UNDER THE BEAM at BZ - 0.36, and the
+    # beam - 0.09 thick and cambered forward over them - COVERED THE TOP ARC OF
+    # BOTH. A shut bow is an O and an open one is a C: that is the entire
+    # count, and an occluder across the top turns an O into a C too. Both
+    # rendered as C's. The creature's one idea is "one of two is taken" and a
+    # viewer could not have read it from any of the three cameras.
+    # The fix is clear air, not a bigger ring: the bows drop to BZ - 0.62 and
+    # hang on visible straps, so the whole circle of each is against
+    # background. Nothing else moved.
+    # yaw 0.78: _open_ring's OWN docstring says a yaw-0 ring is edge-on from
+    # the side and the Pressman shipped four collars that became four sticks
+    # there. I read that before rendering rather than discovering it again.
+    for _sx, _sy in ((SHUT_X, SHUT_Y), (OPEN_X, OPEN_Y)):
+        P.raw(L.tube([Vector((MX + _sx, _sy, BZ - 0.02)),
+                      Vector((MX + _sx, _sy, BZ - 0.30))],
+                     [0.026, 0.024], 6), 'dark')
+    _open_ring(P, (MX + SHUT_X, SHUT_Y, BZ - 0.62), 0.30, slot='dark',
+               rad=0.038, n=18, gap=0.015, axis='y', yaw=0.78)
+    # the collar itself: a heavier band at the bottom of the shut bow, which is
+    # where a neck would be. Thicker than the bow so the EYE lands on the thing
+    # that is doing the holding.
+    # PASS 3b: the collar used to sit INSIDE the bow and the two rings read as
+    # one knot rather than as a bow with something in it. It now hangs CLEAR
+    # BELOW the bow's bottom arc, joined by a link, so the outline is
+    # ring-over-ring - which is what "this one is wearing it" looks like.
+    _open_ring(P, (MX + SHUT_X, SHUT_Y, BZ - 1.03), 0.150, slot='dark',
+               rad=0.054, n=14, gap=0.015, axis='y', yaw=0.78)
+    _span("bow_shut", i0)
+
+    i0 = len(P.items)
+    # --- OPEN: the same bow with a 0.34 gap at the bottom. Nothing in it.
+    # the gap is turned to phase 4.2 rad so the opening faces DOWN-AND-OUT,
+    # i.e. the C opens away from the beam. A gap at the top is hidden by the
+    # beam it hangs from and the count would read two-shut.
+    _open_ring(P, (MX + OPEN_X, OPEN_Y, BZ - 0.62), 0.30, slot='dark',
+               rad=0.038, n=18, gap=0.34, axis='y', yaw=0.78, phase=4.20)
+    _span("bow_open", i0)
+
+    # ------------------------------------------------------------ THE CHAIN
+    # Out of the collar, down and AWAY from the body in x, to the coil. Three
+    # points so it has a hanging curve rather than a straight run, and it
+    # crosses no part of the man at any of the three cameras: the man's
+    # outline ends near x = MX - 0.50 and the chain's first link is at
+    # MX - 0.60 and only goes further out.
+    i0 = len(P.items)
+    _chainlink(P, [(MX + SHUT_X, SHUT_Y, BZ - 1.17),
+                   (MX + SHUT_X - 0.22, SHUT_Y - 0.09, 0.86),
+                   (MX + COIL_X + 0.26, COIL_Y + 0.04, 0.30),
+                   (MX + COIL_X + 0.08, COIL_Y, 0.10)], 34)
+    _span("chain", i0)
+
+    # ------------------------------------------------------------- THE COIL
+    # Flat spiral on the floor. Low, wide and unmistakably SLACK. It is also
+    # the only thing in the body below the man's knee on that side, so it does
+    # not fight anything for the bottom-left of the frame.
+    i0 = len(P.items)
+    for turn in range(3):
+        r = 0.33 - turn * 0.088
+        pts = []
+        for i in range(19):
+            a = TAU * i / 18.0 + turn * 0.7
+            pts.append((MX + COIL_X + math.cos(a) * r,
+                        COIL_Y + math.sin(a) * r * 0.74,
+                        0.055 + turn * 0.045))
+        # PASS 3c: pass 2's coil alternated a FLAT ring with an UPRIGHT one,
+        # the same trick that makes the hanging run read as links - and on the
+        # floor it read as a bed of spiked cartwheels, because an upright ring
+        # seen from above is a spoke. A coil of chain lying down is seen from
+        # ABOVE in every one of these cameras, so it is flat rings only, and
+        # the links read by overlapping their neighbours instead.
+        _chainlink(P, pts, 22, flat=False, lie=True)
+    _span("coil", i0)
+
+    # ------------------------------------------------------------- THE GOAD
+    # Pale shaft, iron point, sweeping down and right out of the near hand.
+    # The one young thing on the body, and the only pale object below the beam.
+    i0 = len(P.items)
+    GX, GZ = MX + 1.00, 0.16
+    P.raw(L.tube([Vector((MX - 0.06, -0.40, 0.98)),
+                  Vector((MX + 0.52, -0.47, 0.58)),
+                  Vector((GX, -0.52, GZ))],
+                 [0.046, 0.040, 0.032], 7), 'bone')
+    # THE POINT IS ON THE SHAFT, which it was not: side.png shows the pass-1
+    # cone hanging in clear air below the ferrule. A rotation about Y swung it
+    # off the shaft's own line. The shaft's last leg runs (0.52,-0.47,0.58) ->
+    # (GX,-0.52,GZ), so the point is placed ALONG that direction and rotated to
+    # match it rather than by a number I liked the look of.
+    P.add(L.cone(0.034, 0.004, 0.17, 8), 'dark',
+          loc=(GX + 0.016, -0.523, GZ - 0.095), rot=(0.0, 0.28, 0.0))
+    # an iron ferrule where point meets shaft, so the goad has a joint and does
+    # not read as one tapering stick
+    P.add(L.cone(0.042, 0.038, 0.055, 8), 'dark', loc=(GX, -0.52, GZ - 0.01))
+    _span("goad", i0)
+
+    return P
+
+
+BUILDERS.update({"drover": drover})

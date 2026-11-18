@@ -1366,6 +1366,66 @@ static func commands() -> Dictionary:
             if dy_real != dy_said:
                 push_error("COMMANDS_DATA DYE COST: `dye`.cost publishes %d gold for a dyeing and the dyer charges %d, read from data/items.json `dye_cost` (raw value `%s`) - docs/COMMANDS.md prices the dyer at money the town does not take, and a viewer finds out by paying" % [dy_said, dy_real, str(dy_raw)])
                 printerr("COMMANDS_DATA DYE COST - published %d, charged %d (items.json `dye_cost` = %s)" % [dy_said, dy_real, str(dy_raw)])
+
+        # ---- B43: THE PUBLISHED DYE COLOURS. A LIST, NOT A NUMBER. ----------------------
+        # The team lead's row asked for the NEXT CLASS of thing on my surface that nothing
+        # vouches for - "a NAME, a LIST or a STATE your commands publish and nothing compares to
+        # what the game does". B40, B41 and B42 took the numbers; this is the first LIST.
+        # `dye`.what publishes TEN colour names and the viewer types one of them straight back at
+        # the bot. The dyer's authority is `items().get("dyes", {})` at roster.gd:1252 - and C-71
+        # put TWO HUNDRED AND EIGHTY-ONE dyes in that table. Nothing in the house has ever
+        # compared my ten names against it. All ten are accepted TODAY, which is exactly why this
+        # is worth guarding and not worth celebrating: content owns items.json, has three swap
+        # sets pending on it right now, and a rename of one key turns one of my published names
+        # into a refusal with nothing anywhere going red.
+        # THE ASYMMETRY IS THE WHOLE POINT, AND IT IS WHY THIS GUARD HAS NO DRIFT ARM.
+        # A colour I PUBLISH that the dyer REFUSES is a defect: the doc invites a viewer to spend
+        # a command on a name that cannot work. A colour the dyer ACCEPTS that I DO NOT PUBLISH
+        # is BY DESIGN - roster.gd's own comment records that the full list ran ~2800 chars and
+        # chat cut it at 480 mid-word, so naming a handful is the deliberate shape. A drift arm
+        # here would go red on 271 names on the first run and would be deleted by the next seat.
+        # I ALSO CHECK `dye`.example. It is not decoration - it is the one string a viewer copies
+        # verbatim, so a dead name there is a refusal handed out pre-typed.
+        # I DO NOT RESTATE THE TEN NAMES ON MY SIDE. They are read out of the sentence that
+        # publishes them; a second copy inside the guard would be the defect, not the guard.
+        # A battery greps COMMANDS_DATA; no line is the healthy reading.
+        var dy_what: String = String(((cmd_d.get("dye", {}) as Dictionary)).get("what", ""))
+        var dy_ex: String = String(((cmd_d.get("dye", {}) as Dictionary)).get("example", ""))
+        var dy_col_anchor := " cloak: "
+        var dy_said_cols: Array[String] = []
+        var dy_ci := dy_what.find(dy_col_anchor)
+        if dy_ci >= 0:
+            var dy_tail := dy_what.substr(dy_ci + dy_col_anchor.length()).strip_edges()
+            if dy_tail.ends_with("."):
+                dy_tail = dy_tail.substr(0, dy_tail.length() - 1)
+            for dy_part in dy_tail.split(","):
+                var dy_n := String(dy_part).strip_edges().to_lower()
+                if dy_n != "" and not dy_said_cols.has(dy_n):
+                    dy_said_cols.append(dy_n)
+        # the example's argument is a published name too: "!dye teal" -> "teal"
+        var dy_ex_col := ""
+        var dy_ex_parts := dy_ex.strip_edges().split(" ", false)
+        if dy_ex_parts.size() >= 2 and String(dy_ex_parts[0]).to_lower().begins_with("!dye"):
+            dy_ex_col = String(dy_ex_parts[1]).strip_edges().to_lower()
+        var dy_dyes_raw: Variant = dy_items.get("dyes", null)
+        if dy_said_cols.is_empty():
+            push_error("COMMANDS_DATA DYE COLOURS ANCHOR: `dye`.what no longer carries its \"%s\" colour list in words this guard can read - the colour names docs/COMMANDS.md invites a viewer to type can no longer be checked against the dyer's table, so a dead name would reach chat silently" % dy_col_anchor.strip_edges())
+            printerr("COMMANDS_DATA DYE COLOURS ANCHOR - `dye`.what lost its \"%s\" colour list; the published names are now unchecked" % dy_col_anchor.strip_edges())
+        elif not (dy_dyes_raw is Dictionary) or (dy_dyes_raw as Dictionary).is_empty():
+            push_error("COMMANDS_DATA DYE COLOURS AUTHORITY: data/items.json carries no usable `dyes` table (raw `%s`), so Roster.dye refuses EVERY name and answers with a count of nothing - all %d colours `dye`.what publishes are unanchored at once, and the command is dead rather than mispriced" % [str(dy_dyes_raw), dy_said_cols.size()])
+            printerr("COMMANDS_DATA DYE COLOURS AUTHORITY - items.json has no usable `dyes`; all %d published colours are dead" % dy_said_cols.size())
+        else:
+            var dy_dyes: Dictionary = dy_dyes_raw as Dictionary
+            var dy_ghost: Array[String] = []
+            for dy_n in dy_said_cols:
+                if not dy_dyes.has(dy_n):
+                    dy_ghost.append(dy_n)
+            if not dy_ghost.is_empty():
+                push_error("COMMANDS_DATA DYE COLOURS GHOST: `dye`.what publishes %d colour(s) the dyer does not accept, so docs/COMMANDS.md invites a refusal a viewer pays a command to discover - the dyer's `dyes` table holds %d name(s) and none of these is among them: %s" % [dy_ghost.size(), dy_dyes.size(), dy_ghost])
+                printerr("COMMANDS_DATA DYE COLOURS GHOST - %d published colour(s) the dyer refuses: %s" % [dy_ghost.size(), dy_ghost])
+            if dy_ex_col != "" and not dy_dyes.has(dy_ex_col):
+                push_error("COMMANDS_DATA DYE EXAMPLE GHOST: `dye`.example is \"%s\" and the dyer does not accept `%s` - the example is the one string a viewer copies verbatim out of docs/COMMANDS.md, so this hands out a pre-typed refusal" % [dy_ex, dy_ex_col])
+                printerr("COMMANDS_DATA DYE EXAMPLE GHOST - example colour `%s` is not in the dyer's table" % dy_ex_col)
         _cmds = parsed
     return _cmds
 

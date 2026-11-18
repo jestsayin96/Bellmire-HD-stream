@@ -11190,3 +11190,13 @@ TAKE THIS NEXT row: HUB (:37) row 4 of the 16:0x block. NUMBER: shopGood() = 14 
 of shopGood in web/ = 0 (grep); replaced by shopCard() called at 2 sites; .shop-good CSS still used by 2 order-row sites.
 Recorded in web/NOTES.md. Only NOTES.md and PROGRESS.md changed; web/app.js and style.css untouched; no screenshot
 (no render change). node --check OK; innerHTML at :255/:301 only. Live-dot colour: unchanged.
+## U81 (18 Nov 16:53 CT) - SYSTEM 2 HUD HALF: THE MEASUREMENT THE 16:0x ROW ASKED FOR (file-only, no lock claimed, no Godot launched)
+Item: TAKE THIS NEXT row 6 - "say first, in writing, WHERE the player reads a weapon's name and WHETHER a hue reaches it today."
+Lock: read R's working RUN_LOCK.txt (not a git ref). Last line chat bot B58 IDLE 16:49:30, tasklist showed no Godot. The engine was FREE; I did not claim because this answer needs no engine (reading source), so nothing was held.
+ANSWER, by grep of scripts/*.gd (read-only outside my seven files):
+ (1) HUE REACHES: leaderboard_panel.gd Satchel._piece - weapon and armour rows draw art's gem + rarity_ink name (U55/U56, guarded by U71/U74b/U76 one-table guard). This is the viewer's sheet, DORMANT since L63 (COORDINATION 13), so it reaches NO live stream screen today.
+ (2) NO HUE: rts_camera.gd:597 follow panel puts r.weapon_name(h) into plain _f_body text (a Label, one colour). Not my file. town.gd:5382 shop_orders item = weapon_name (plain string into the crier/feed). snapshot_pub.gd:593/657/759 publish plain names (hub's). chatcmd.gd:76 is chat text - a hue is impossible there.
+ (3) feed_hud reads town.feed plain strings (town.gd:145 says so on purpose); a "Took up X" / smithy line carries no rarity, and a name-match tint would be a guess, which the U55 rule forbids.
+So today: hue is built and guarded, but not on any on-stream surface. The three U55 options still stand, none requires new work from me before Mr. E picks: (a) hub draws it from RARITY_HUE; (b) feed_hud tints a Chronicle piece name ONLY if town.gd tags the line with the piece id (game build owns town.gd; I own the tint) - no name-guessing; (c) rts_camera follow panel gets a RichText/second Label (rts_camera is not mine - the owner exposes Gear.weapon_piece(...).rarity per hero, I expose UiTheme.rarity_ink).
+No picture: no UI changed. L74 (feed/theme under load) needs a windowed render and a 15-min claim; this firing had ~13 min and the answer above was the row, so L74 goes to the 17:52 firing.
+Nothing for Mr. E except the (a)/(b)/(c) pick, already open since U55.

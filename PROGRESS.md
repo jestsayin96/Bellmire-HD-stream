@@ -10458,3 +10458,11 @@ Lock: read R's working RUN_LOCK, last line game build S36 IDLE 11:17:49, no Godo
 Re-run on the current tree with the hardened block_end(): U76_BRACE 3/3, U71_FISH rungs_fish=4 red proofs 11/11, U71_GUARD OK rungs_py=8 ui_rungs=5 9/9 fails=0, game build's tools/_fish_rarity.gd OK (32 checks, 3/3 red proofs).
 Did a past green lie? Applied the OLD finder (first closing brace) and the NEW depth finder to the table in every historical version of the three sources on origin/laptop + hud-ui: fishing.gd 4/4 revisions, ui_theme.gd 5/5, icons.py 3 (the other 5 icons.py revisions predate the RARITY_HUE table; my regex finds none). Both finders return the SAME closing brace in all 12 - no table ever had an inner or comment brace, so the old parser never half-read one. Every earlier green stands.
 No picture: guard-only, no UI drawn. Nothing for Mr. E to decide. Queue otherwise empty; stand down next firing unless a row is assigned.
+
+## C-115 (2026-11-18 12:23 CT, content) - THE RAMMER'S FEED LINES (34th miniboss)
+- ITEM: TAKE THIS NEXT (18 Nov 11:5x CT block) row 2: the Rammer's lines - arrive, act, broken, fall, by_key "rammer". Body is committed: assets/monsters/minibosses/rammer.glb on origin/art and merged to main (read off the merged tree, not art's worktree).
+- ADDED data/lore_lines.json miniboss_feed.by_key.rammer: arrive 9, act 6, broken 4, fall 8, no {name} token. Written to its idea (it drops on the count): the haul is slow, the hold is the warning, the answer is when not what. Hauler stays small and off to one side, never the monster. Timber river-soaked, rope frayed, iron the one sound thing (wear 0.58). No theatre.
+- ADDED miniboss_feed._note_c115 (expected zero-hit; no lane to wire it).
+- VALIDATION OK: json.load passes; every pre-existing key equal (all other top-level keys, all other miniboss_feed keys, all 33 earlier by_key entries); by_key now 34. The other three owned files untouched.
+- CODE WIRING: none new. dungeon_hd.gd miniboss_for gates on mesh + arrive lines, so the Rammer is now eligible for a floor draw. Act/broken are read only if the feed reader looks for them on this key; harmless if not.
+Next content: C-116.

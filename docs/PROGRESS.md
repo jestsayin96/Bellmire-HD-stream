@@ -2709,3 +2709,46 @@ to either SELL_BACK. Both are live traps waiting on the files they watch, which 
 ### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. The parse gate
 ### boots the real game, so twitch_eventsub.gd connected to #jestsayin96 and subscribed as it does
 ### on every lane's parse run - that is the boot, not a test, and the bot sent no message.
+
+## D-cycle - S25 System 3: NAMED ARMOUR IS ALREADY WIRED LIVE FROM items.json - closed as already-wired, with line numbers, a re-proof on the merged tree, and the two MB_FIT lines. 2026-11-17T19:18:00-06:00 (game build)
+TAKE THIS NEXT (18:58 block, GAME BUILD row; it landed mid-firing - this run first stood down on the 17:58 row,
+then merged 9fa65b7 and relaunched, both lock lines below) gave: System 3, "named armour wired live from items.json".
+The row said: if the resolution path already exists the way KINDS + kind_path did for weapons, SAY SO WITH THE LINE
+NUMBERS and close it as already-wired. IT DOES. Nothing in the path was changed this run.
+- THE PATH, items.json equipment.armour (33 pieces) to a worn body, every link a read of the file:
+    gear.gd:1580 armour_piece(id)      equipment().armour[id]
+    gear.gd:1630 armour_id(h)          the stamped `aname` if its tier still matches, else the tier's pieces of the
+                                       calling's cut (D94_CUT :1626) hashed by hero name; tier 0 = starting_kits.armour
+    gear.gd:1658 stamp(h)              writes h.aname so a later data edit never swaps a bought piece
+                                       (called from roster.gd:928 _stamp at :465 :488 :549 :982)
+    gear.gd:602  equip -> dress_armour(model_root, tier, armour_id(_dressing))
+    gear.gd:288  dress_armour          the named piece's look replaces the tier look (:297-300)
+    gear.gd:1847 armour_piece_look     cut (robe/light/heavy) decides which parts are worn; the piece's NAME picks
+                                       the stuff colour; the KEY hashes hue/value and trim (plain/riveted/banded)
+    roster.gd:922 armour_name(h)       the name the game shows is the file's `name`
+- RE-PROOF ON THE MERGED TREE, tools/_d95_fit.gd unchanged, D95_OUT=renders/cycles/s25 (40 shots, front/side/back/
+  top on ten real KayKit bodies through the REAL Roster -> Gear.equip path). Every armour name printed is an
+  items.json name: Patched Gambeson, Dark Wool Cloak and Tunic, Ford Leathers, Reed-Cloth Robe, Studded Brigandine,
+  Guild Vestments, Ferryman's Plate, Rune-Hemmed Vestment, Dragontooth Hauberk, Wyrmhide Coat.
+  VERDICT: D95_FIT OK (40 shots, 0 attach failures). It goes red on any slot that fails to attach (tools/_d95_fit.gd:198).
+- LOOKED AT: renders/cycles/s25/_s25_sheet.png (barbarian Ford Leathers, mage Reed-Cloth Robe, warden Ferryman's
+  Plate, paladin Dragontooth Hauberk; front, side, back). Boots on the feet, pauldrons on the shoulders, helms on
+  heads, robe skirt at the waist; nothing floats, nothing sinks through the floor, nothing clips out of the back.
+  NAMED, NOT HIDDEN: (1) the two tier 3-4 heavy pieces (Ferryman's Plate, Dragontooth Hauberk) read as near-twins at
+  this distance - the key-hashed hue/value nudge is small on silver plate. The same "more derived variation" lesson
+  as the gloves ruling; not attempted here because the row did not ask for it. (2) "A real mesh" here means the
+  in-engine parts dress_armour builds on the real bones - there are NO committed armour models in assets/ (searched
+  for armour/armor/pauldron/helm: only hub icons). If Mr. E's System 3 means authored armour MODELS, that is art's
+  to make first and this path is where they would be wired.
+- TWO LINES OWED, delve.gd MB_FIT (backup delve.gd.bak_s25, not staged), copied not re-derived:
+    "pressman": 1.16 - renders/art/minibosses/_fit_report.json pairs.pressman.ratio on this tree.
+    "strickler": 1.04 - pairs.strickler.ratio read off origin/art's _fit_report.json; the body is NOT on main yet,
+    so the line is inert (MB_FIT is a lookup only, delve.gd:389) until art's merge lands.
+- Battery (build/s25_battery.log + build/s25_gates.log), parse re-run AFTER the last edit: PARSE rc=0, 0 SCRIPT ERROR /
+  0 Parse Error across both logs; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1664 samples off the floor
+  (home); TOWNWALK in_solid=0/19653 (0.000%) raid_in_solid=0/5513 (0.000%) PASS; DELVE_TEST OK ran 9001 frames,
+  floor reached 2 (capped).
+- LOCK: this firing wrote a FUTURE STAMP on its first claim (RUNNING 19:09:30 typed by hand; the machine read
+  19:08:15 and the IDLE written off the machine says 19:09:10). Recorded in RUN_LOCK.txt in a NOTE line, not edited.
+- No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Systems 4 and Phase 2
+  not touched. Not ticked - the team lead ticks.

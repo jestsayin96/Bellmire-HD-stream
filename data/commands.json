@@ -39,7 +39,7 @@
     "oil":       {"aliases": ["lamp", "torch"], "args": "[n]", "cost": "12 gold a flask", "needs_hero": true,
                   "what": "Buy lamp oil: one flask lights a floor for two delvers.",
                   "example": "!oil 3"},
-    "wear":      {"aliases": [], "args": "<item> | off <slot>", "short": "Buy and wear an accessory or a cosmetic (a hat, a banner, a pet, a title).", "cost": "30-420 gold, once", "needs_hero": true,
+    "wear":      {"aliases": [], "args": "<item> | off <slot>", "short": "Buy and wear an accessory or a cosmetic (a hat, a banner, a pet, a title).", "cost": "30-520 gold, once", "needs_hero": true,
                   "what": "Buy and wear an accessory (rings, amulets, cloaks, boots, gloves - small bonuses) or a cosmetic (hats, banners, a pet, a title). Owned things are worn again for nothing. !wear off ring takes one off.",
                   "example": "!wear corgi"},
     "dye":       {"aliases": [], "args": "<colour>", "cost": "25 gold", "needs_hero": true,

@@ -1357,6 +1357,10 @@ static func commands() -> Dictionary:
         if dy_said < 0:
             push_error("COMMANDS_DATA DYE ANCHOR: `dye`.cost no longer carries a number before \"gold\" - the published price of a dyeing can no longer be checked against data/items.json `dye_cost`, which is the number the dyer charges")
             printerr("COMMANDS_DATA DYE ANCHOR - `dye`.cost lost its gold number; the dyer's price is now unchecked")
+        # RED-PROVED AT B45 under the supervisor's 03:16 cross-lane scratch-and-restore
+        # exception: `dye_cost` lifted out of data/items.json, this arm fired, items.json restored
+        # byte-identical (md5 4f2e8b57...) and L14_TEST green on the restored bytes. It was written
+        # at B41 and shipped unproven for two cycles because the file is the CONTENT lane's.
         elif not dy_items.has("dye_cost"):
             push_error("COMMANDS_DATA DYE AUTHORITY: data/items.json carries no `dye_cost` key, so the dyer is charging the fallback literal inside roster.gd's `items().get(\"dye_cost\", ...)` and the data key that is supposed to own this price is DEAD - the dyer can no longer be re-priced from the data file at all, and `dye`.cost publishes %d gold against nothing" % dy_said)
             printerr("COMMANDS_DATA DYE AUTHORITY - items.json lost `dye_cost`; the dyer is on roster.gd's fallback and my published %d is unanchored" % dy_said)
@@ -1411,6 +1415,9 @@ static func commands() -> Dictionary:
         if dy_said_cols.is_empty():
             push_error("COMMANDS_DATA DYE COLOURS ANCHOR: `dye`.what no longer carries its \"%s\" colour list in words this guard can read - the colour names docs/COMMANDS.md invites a viewer to type can no longer be checked against the dyer's table, so a dead name would reach chat silently" % dy_col_anchor.strip_edges())
             printerr("COMMANDS_DATA DYE COLOURS ANCHOR - `dye`.what lost its \"%s\" colour list; the published names are now unchecked" % dy_col_anchor.strip_edges())
+        # RED-PROVED AT B45 under the same 03:16 exception: `dyes` lifted out of data/items.json,
+        # this arm fired naming all 10 published colours, file restored byte-identical and proved
+        # by md5. Written at B43, unproven until then.
         elif not (dy_dyes_raw is Dictionary) or (dy_dyes_raw as Dictionary).is_empty():
             push_error("COMMANDS_DATA DYE COLOURS AUTHORITY: data/items.json carries no usable `dyes` table (raw `%s`), so Roster.dye refuses EVERY name and answers with a count of nothing - all %d colours `dye`.what publishes are unanchored at once, and the command is dead rather than mispriced" % [str(dy_dyes_raw), dy_said_cols.size()])
             printerr("COMMANDS_DATA DYE COLOURS AUTHORITY - items.json has no usable `dyes`; all %d published colours are dead" % dy_said_cols.size())
@@ -1512,6 +1519,9 @@ static func commands() -> Dictionary:
             for lk_n in lk_paid:
                 if float(lk_paid[lk_n]) <= lk_free:
                     lk_short.append("%s holds %ss" % [String(lk_n), str(float(lk_paid[lk_n]))])
+            # RED-PROVED AT B45 under the same 03:16 exception: POINTS_S 15.0 -> 5.0 in
+            # scripts/spotlight.gd (the GAME BUILD lane's file), this arm fired on the point
+            # redeem, file restored byte-identical (md5 24c2ec76...) and proved. Written at B44.
             if not lk_short.is_empty():
                 push_error("COMMANDS_DATA LOOK LONGER: `look`.what promises cheers, subs and redeems LONGER panes than the free look, and %d of them do not outlast it - the free look holds %ss and %s - so docs/COMMANDS.md tells a viewer that paying buys more screen time than asking, and it does not" % [lk_short.size(), str(lk_free), lk_short])
                 printerr("COMMANDS_DATA LOOK LONGER - free look %ss, not outlasted by: %s" % [str(lk_free), lk_short])

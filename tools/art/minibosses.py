@@ -1042,16 +1042,34 @@ def stoker():
     P.add(L.sphere(0.115, 0.115, 0.045, 12, 6), 'glow', loc=(FX - 0.07, 0.24, 2.23))
     limb(P, [(FX + 0.14, 0.18, 1.40), (FX + 0.02, 0.22, 1.32)], 0.050, 0.040, 'bone')
     # THE RAKE - 1.9 m of haft running down into the floor on his right
+    # *** FOOT-PLANE PASS, ONE THING: THE RAKE RIDES UP TO THE FLOOR. ***
+    # The teeth are aimed (0.42,-0.10,-1.0), unit z -0.9181, 0.20 long from a
+    # base at z=0.10 - so each tip reached 83.6 mm BELOW z=0 and the head's low
+    # corner another 9.7 mm under. "Biting the floor" was 42% of each tooth
+    # BURIED, and because minibossgen grounds the merged body on its global
+    # minimum, that buried depth became the floor and lifted the only two
+    # things this builder declares at 0.0 - the man's two boots - 83.6 mm into
+    # the air. RAKE_Z lifts the whole assembly together (haft end, head, teeth)
+    # so the tips land AT z=0 and the rake still bites: one lift, not three
+    # independent nudges, so the haft, head and teeth cannot drift apart.
+    RAKE_Z = 0.0836
     haft = [Vector((X + 0.36, -0.20, 1.52)), Vector((X + 0.92, -0.42, 0.98)),
-            Vector((X + 1.48, -0.64, 0.42)), Vector((X + 1.78, -0.76, 0.12))]
+            Vector((X + 1.48, -0.64, 0.42)), Vector((X + 1.78, -0.76, 0.12 + RAKE_Z))]
     P.raw(L.tube(haft, [0.046, 0.040, 0.036, 0.034], 8), 'bone')
-    P.add(L.box(0.52, 0.10, 0.07), 'dark', loc=(X + 1.80, -0.78, 0.11), rot=(0.0, -0.34, 0.0))
+    P.add(L.box(0.52, 0.10, 0.07), 'dark', loc=(X + 1.80, -0.78, 0.11 + RAKE_Z),
+          rot=(0.0, -0.34, 0.0))
     for k in range(4):                        # four short teeth, biting the floor
-        P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X + 1.64 + k * 0.14, -0.78, 0.10),
+        P.raw(aim(L.cone(0.030, 0.0, 0.20, 6),
+                  (X + 1.64 + k * 0.14, -0.78, 0.10 + RAKE_Z),
                   (0.42, -0.10, -1.0)), 'dark')
     limb(P, [(X + 0.26, -0.10, 1.46), (X + 0.40, -0.22, 1.50)], 0.074, 0.054)
     # the fuel basket at his heels - the thing the party has to get to
-    P.raw(aim(L.cone(0.34, 0.40, 0.42, 14, cap=False), (X - 0.30, 0.52, 0.0),
+    # SECOND CAUSE ON THIS BODY, MEASURED SEPARATELY FROM THE RAKE: the basket
+    # is deliberately LEANING (0.0, 0.08, 1.0), and a tilted base circle does
+    # not sit on its own z - its low edge dropped 26.4 mm under the floor. Keep
+    # the lean, which is the make-do read; seat the low edge ON the floor.
+    BASKET_Z = 0.0264
+    P.raw(aim(L.cone(0.34, 0.40, 0.42, 14, cap=False), (X - 0.30, 0.52, BASKET_Z),
               (0.0, 0.08, 1.0)), 'bone')
     for k in range(3):
         P.add(L.box(0.10, 0.10, 0.34), 'dark', loc=(X - 0.34 + k * 0.10, 0.54, 0.46),

@@ -692,7 +692,7 @@
    "creature_h": 2.4,
    "hero_h": 2.45,
    "ratio": 0.98,
-   "pair_w": 4.86,
+   "pair_w": 4.97,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -703,45 +703,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 33247,
-      "vis": 33247,
-      "delta": 34782,
+      "alone": 35580,
+      "vis": 35580,
+      "delta": 37097,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43682,
-      "vis": 43682,
-      "delta": 47693,
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 47720,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 27826,
-      "vis": 27826,
-      "delta": 28903,
+      "alone": 29595,
+      "vis": 29595,
+      "delta": 30837,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37783,
-      "vis": 37783,
-      "delta": 38597,
+      "alone": 37755,
+      "vis": 37755,
+      "delta": 38598,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 34118,
-      "vis": 34118,
-      "delta": 35607,
+      "alone": 36394,
+      "vis": 36394,
+      "delta": 37873,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44019,
-      "vis": 44019,
-      "delta": 44972,
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 44923,
       "seen": 1.0
      },
      "proves": true
@@ -1823,10 +1823,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "reeve"
+  "stoker"
  ],
  "asked": [
-  "reeve"
+  "stoker"
  ],
  "blank_check": {
   "files": 3,

@@ -3967,3 +3967,51 @@ intact. Front/side/back at `renders/art/minibosses/reeve/`.
 
 **WHAT THIS COSTS THE OTHER TEN.** Nothing. This bug was one call site. The
 Stoker is next at 83.6 mm and needs its own look.
+
+### THE STOKER, 18 Nov 17:5x CT - 83.6 mm TO 0.0 mm, AND IT WAS TWO CAUSES, MEASURED ONE AT A TIME
+
+Second body of this pass. `_fp_locate.py -- stoker` before any geometry moved:
+37 items, and the floor was being set by the RAKE -
+
+    zmin -0.0836  zmax +0.1103  dark  7v x4  minibosses.py:1050
+      P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X+1.64+k*0.14, -0.78, 0.10),
+                (0.42, -0.10, -1.0)), 'dark')
+
+four teeth, 0.20 long, aimed with unit z -0.9181 from a base at z=0.10. The
+comment says **"four short teeth, biting the floor"** and the intent is right -
+but the arithmetic made it **42% of every tooth BURIED**, the head's low corner
+9.7 mm under with it, and the only two items this builder declares at 0.0 - the
+man's two boots - lifted **83.6 mm** off the rendered floor. A tooth that passes
+through the floor is not biting, and in game nothing below z=0 is ever seen, so
+there was nothing to weigh against the boots. **FIXED, NOT STRUCK.**
+
+**CHANGE 1, MEASURED ALONE: `RAKE_Z = 0.0836`** lifts haft end, head and teeth
+TOGETHER, so the tips land exactly at z=0 and the three cannot drift apart.
+Result on its own: **83.6 mm -> 26.4 mm**, teeth `zmin -0.0000`.
+
+**CHANGE 2, MEASURED ALONE AFTER IT: `BASKET_Z = 0.0264`.** The lift exposed a
+SECOND cause the first number was hiding - the fuel basket at `:1054` is
+deliberately LEANING, `aim(..., (0.0, 0.08, 1.0))`, and a tilted base circle
+does not sit on its own z: its low edge hung 26.4 mm under. The lean is the
+make-do read and I kept it; the low edge now rests ON the floor. Result:
+**26.4 mm -> 0.0 mm**, global min `-0.0000`, seven items declaring contact.
+
+I report both numbers separately because one render pass carried both changes.
+**THE SET IS NOW 9 OF 31 OVER THE BAR, 22 SEATED** (was 11 at the top of this
+run, 12 in the 16:0x plan block).
+
+**THE FIT PROOF - LOOKED AT, WITH THE BEFORE.** `minibossfit --only stoker`,
+Knight at 1.0, verdict GREEN, blank check 3 files 0 failures, 3 of 3 proving
+views. Before: boots a clear band above the knight's soles, rake head and teeth
+hanging below everything. After: boots, basket and rake teeth all land on the
+knight's sole line, front/side/back. No new clip, no new gap.
+
+**FAULTS I CAN STILL SEE, AND THE HARNESS CANNOT.**
+- **THE SIDE VIEW LOSES THE FIRE.** The grate is on the chest facing front, so
+  at azimuth 90 the Stoker reads as "a figure with a pipe and a rake" and the
+  one thing it is named for is not in the picture. Same family as the Beadle's
+  no-facing fault, inverted: facing is TOO strong here, carried by one panel.
+  Not touched this pass - it is a shape question and this pass was a plane one.
+- the rake head box is edge-on to the front camera, so the teeth look like they
+  grow straight off the haft; the rake reads as a fork rather than a rake.
+- the legs are thin against a KayKit body, as the Reeve's officer is.

@@ -76,6 +76,9 @@ func _audit(pct: int, full: bool) -> void:
 				for pc in (k as Node).get_children():
 					if pc is Control and (pc as Control).is_visible_in_tree():
 						var pr := (pc as Control).get_global_rect()
+						if pr.size.x * pr.size.y >= 0.20 * scr.x * scr.y and (str(pc.name).contains("Chronicle") or str(pc.name).contains("BossCard") or str(pc.name).contains("Feed")):
+							# U69: the 20% in-pane skip is for backdrops; a NAMED HUD element grown past it is the fault
+							print("FAIL named HUD element inflated past the in-pane skip @", tag, ": ", k.name, "/", pc.name, " ", pr); _bad += 1
 						if pr.size.x >= 4.0 and pr.size.y >= 4.0 and pr.size.x * pr.size.y < 0.20 * scr.x * scr.y:
 							items.append([str(k.name) + "/" + str(pc.name) + ":" + pc.get_class(), pr])
 				continue

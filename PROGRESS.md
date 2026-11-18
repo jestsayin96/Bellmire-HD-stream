@@ -9768,3 +9768,10 @@ Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me
 - FINDING 2 (dead code): shopGood() (app.js ~3764) has ZERO call sites - 0 .shop-good elements rendered. Left alone.
 - LOOKED AT: renders/hub/_shop_rungs_1440.png. WHAT I SEE WRONG: the uncommon card's WHITE frame on the parchment card is the weakest of the five hued rungs (reads as a pale rim, only the dark keyline holds it) - the same case as the satchel. Parchment/pewter held per the 04:07 row. NOTE: the supervisor's 04:00 doc (project: sup-nov18-0400-TWO-DECISIONS...) says APPROVED, "the hub takes it on its next row" - not yet in the team lead's block, so I did not act on it; team lead please write the row.
 - _plan_tmp.txt: absent from the worktree and untracked on origin/main and origin/hub - nothing to clean.
+## U69 (HUD, 18 Nov 04:5x CT) - the 20% in-pane child bound in tools/_l40_test.gd, red-proved
+- ITEM: the TAKE THIS NEXT row said "System 2 rarity hue" but that half shipped at U55/U56 and the plan itself ticked SYSTEM 2 closed whole (01:5x CT, main 08f7fe4); the row is stale. I took the child-bound red proof the row parks behind it.
+- BLIND SPOT: _l40_test skipped any child of a Pane_ box at/above 20% of the screen as an assumed backdrop (the SubViewport). A BossCard/Chronicle/Feed grown past 20% INSIDE a pane was never audited - same class as U67's 35% skip.
+- FIX: _audit now prints FAIL for a pane child named Chronicle/BossCard/Feed at >=20% of the screen. Parse 0 errors.
+- RED PROOF tools/_u69_redproof.gd (copy of the gate + an oversize 1500x800 BossCard injected into the visible Pane_director): FAIL x2 (100% and 150% grid), U69_REDPROOF FAIL. Honest limit: the injected card is synthetic - no real in-pane BossCard grows that big today; this proves the check fires, not that the real card is large.
+- REAL GATE after the fix (windowed 1920x1080): L40_TEST OK. LOOKED AT renders/cycles/l40/l40_grid_100.png: four panes with lane chips, Chronicle parchment centred, chat box bottom right, no overlaps.
+- No owned .gd file changed. Lock held 04:53-~05:00, released well before :07. Not ticked by me.

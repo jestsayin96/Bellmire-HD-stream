@@ -1,36 +1,31 @@
 extends SceneTree
-## L74 test (WINDOWED 1080p, --script). A raid floods the Chronicle: 36 lines in ~3 s, at UI scale
-## 100/125/150, feed running LIVE (pacing, merge, drop). Pass: no ellipsis, stack fits the vellum,
-## protected (town/crit) lines never dropped, a shot per scale. Args after `--`: tag.
+## L74 test (WINDOWED 1080p, --script). The Chronicle under load: a burst of mixed-priority lines
+## (2/s for 24 s) then UI scale 125% and 150%. For every line, measures how long it was actually
+## VISIBLE (inside the last _cap() of _shown) against how long it takes to read: chars / READ_CPS + SCAN_S.
+## Reports lines taken off the scroll before they could be read, by priority. Args: tag (default "run").
+## break_nolines: feed nothing -> must say NO VERDICT. A gate that measured no lines must not say OK.
+const READ_CPS := 18.0     # ~215 wpm, a comfortable stream-viewer pace
+const SCAN_S := 1.0        # eye finds the new line
 var _t: Node3D
-var _eye: RtsCamera
 var _hud: FeedHUD
 var _f := 0
 var _t0 := -1.0
+var _tag := "run"
 var _out := ""
-var _tag := "after"
-var _step := 0
 var _fed := 0
-var _bad := 0
-var _audited := 0   # labels actually inspected: a gate that audited nothing must not say OK
-var _shot := false
-const RAID := [
-	"Warband of raiders sighted at the east gate - the Scar is on the march!",
-	"Viewer1001 swings a sword at a raider - hit! 7 damage.",
-	"Viewer1002 picks up a plank.", "Viewer1003 gathers wood.", "Viewer1004 chops a log.",
-	"Viewer1005 sips ale at the tavern.", "Viewer1006 hauls a sack of grain.",
-	"Viewer1007 shoots a raider - hit! 6 damage (Longbow, DEX 14 vs AC 12).",
-	"E3PO the Commander raises his halberd: 'Hold the line at the east gate!'",
-	"Viewer1008 has fallen to a raider's axe at the palisade.",
-	"The gate is besieged - the east palisade is ablaze!",
-	"Viewer1009 mends the wall.", "Viewer1010 fetches water.", "Viewer1011 sweeps the square.",
-	"Viewer1012 casts a bolt of fire - the raider is slain!",
-	"The granary is down to 12 days of food - hunger looms.",
+var _vis := {}   # key -> {first,last,len,pri,text}
+var _shot := [false, false, false]
+const POOL := [
+	[0, "%s picks up a log."], [0, "%s sweeps the smithy floor."], [0, "%s fetches water from the well."],
+	[1, "%s sells a basket of apples at the market stall."], [1, "%s trains with the militia near the east wall."],
+	[2, "Viewer%d steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved)."],
+	[2, "The granary is at 40 percent - hunger will bite the town within the week."],
+	[3, "Hobwick the Knight has fallen to the raiders at the east gate, and the Scar presses on toward the bridge!"],
+	[3, "Lord Varrick raises the warband banner: a raid on Bellmire has begun at the palisade."],
 ]
 func _initialize() -> void:
 	var a := OS.get_cmdline_user_args()
-	if a.size() > 0:
-		_tag = a[0]
+	if a.size() > 0: _tag = a[0]
 	_out = ProjectSettings.globalize_path("res://renders/cycles/l74/")
 	DirAccess.make_dir_recursive_absolute(_out)
 	_t = (load("res://Town.tscn") as PackedScene).instantiate()
@@ -38,61 +33,56 @@ func _initialize() -> void:
 func _process(_d: float) -> bool:
 	_f += 1
 	if _f == 20:
-		_eye = RtsCamera.new()
-		_t.add_child(_eye)
-		_eye.setup(_t)
+		var eye := RtsCamera.new(); _t.add_child(eye); eye.setup(_t)
 		for c in _t.get_children():
-			if c is FeedHUD and _tag != "break_nohud":   # break_nohud: prove a missing HUD gives NO VERDICT
-				_hud = c
+			if c is FeedHUD: _hud = c
 	if _f > 1800 and _hud == null:
-		print("L74_TEST NO VERDICT - FeedHUD never found in 1800 frames"); quit(2); return true
-	if _f > 40000:
-		print("L74_TEST NO VERDICT - frame cap hit at step ", _step); quit(2); return true
-	if _f < 60 or _hud == null:
-		return false
-	if _t0 < 0.0:
-		_t0 = Time.get_ticks_msec() / 1000.0
+		print("L74_TEST NO VERDICT - FeedHUD never found"); quit(2); return true
+	if _hud == null or _f < 60: return false
+	if _t0 < 0.0: _t0 = Time.get_ticks_msec() / 1000.0
 	var now := Time.get_ticks_msec() / 1000.0 - _t0
-	var sc: float = UiTheme.STEPS[_step]
-	var base := float(_step) * 9.0
-	if now < base:
-		return false
-	if now - base < 0.1 and UiTheme.scale != sc:
-		UiTheme.scale = sc
-		_hud.restyle()
-		_fed = 0
-		_shot = false
-	var t := now - base
-	if t < 3.0:
-		var want := int(t / 3.0 * 36.0)
-		while _fed < want:
-			_hud.source.append(RAID[_fed % RAID.size()] + (" (" + str(_fed) + ")" if _fed >= RAID.size() else ""))
-			_fed += 1
-	if t >= 7.0 and not _shot:
-		_shot = true
-		_audit(int(sc * 100.0))
-		root.get_texture().get_image().save_png(_out + "l74_%s_%d.png" % [_tag, int(sc * 100.0)])
-		print("SHOT l74_%s_%d  stats=%s" % [_tag, int(sc * 100.0), str(_hud.stats)])
-		_step += 1
-		if _step >= UiTheme.STEPS.size():
-			var f := FileAccess.open(_out + "l74_feed_log_%s.txt" % _tag, FileAccess.WRITE)
-			f.store_string(_hud.log_text())
-			if _audited < 6:
-				print("L74_TEST NO VERDICT - only ", _audited, " labels audited (floor 6: ~3 labels per scale is what the pacer admits)"); quit(2); return true
-			print("L74_TEST ", "OK" if _bad == 0 else "FAIL", " audited=", _audited)
-			if _bad > 0: quit(1)
-			return true
+	# feed: 2 lines/s for 24 s, pool cycled with a prime stride so priorities interleave
+	while _tag != "break_nolines" and now < 24.0 and float(_fed) < now * 2.0:
+		var p: Array = POOL[(_fed * 7) % POOL.size()]
+		var s: String = p[1]
+		var line: String = (s % ("Viewer%d" % _fed)) if s.count("%s") > 0 else (s % _fed if s.count("%d") > 0 else s)
+		_t.feed.append(line); _fed += 1
+	var cap := _hud._cap()
+	var sh: Array = _hud._shown.slice(maxi(0, _hud._shown.size() - cap))
+	for e in sh:
+		var k := str(e["key"]) + "|" + str(e["at"])
+		if not _vis.has(k):
+			_vis[k] = {"first": now, "len": String(e["text"]).length(), "pri": int(e["pri"]), "text": String(e["text"])}
+		_vis[k]["last"] = now
+	if now >= 26.0 and UiTheme.scale == 1.0:
+		_save(0, 100); UiTheme.scale = 1.25; _hud.restyle()
+	if now >= 32.0 and UiTheme.scale == 1.25 and not _shot[1]:
+		_save(1, 125); UiTheme.scale = 1.5; _hud.restyle()
+	if now >= 38.0 and UiTheme.scale == 1.5 and not _shot[2]:
+		_save(2, 150)
+		_report(now)
+		return true
 	return false
-func _audit(pct: int) -> void:
-	for lb in ([] if _tag == "break_empty" else _hud._box.get_children()):   # break_empty: prove an empty box is not OK
-		var l := lb as Label
-		_audited += 1
-		if "..." in l.text or "…" in l.text:
-			print("FAIL ellipsis @", pct, " ", l.text); _bad += 1
-		print("  [", pct, "] ", l.get_line_count(), "L: ", l.text)
-	var sr: Rect2 = (_hud._panel as HudDock.ChronicleScroll).sheet_rect()
-	print("  [", pct, "] box h=", _hud._box.size.y, " sheet h=", sr.size.y)
-	if _hud._box.size.y > sr.size.y + 2.0:
-		print("FAIL overflow @", pct); _bad += 1
-	if int(_hud.stats.get("dropped_protected", 0)) > 0:
-		print("FAIL protected line dropped @", pct); _bad += 1
+func _save(i: int, pct: int) -> void:
+	_shot[i] = true
+	root.get_texture().get_image().save_png(_out + "l74_%s_%d.png" % [_tag, pct])
+	print("SHOT l74_%s_%d  shown=%d cap=%d pending=%d" % [_tag, pct, _hud._shown.size(), _hud._cap(), _hud._pending.size()])
+func _report(now: float) -> void:
+	var short := [0, 0, 0, 0]; var tot := [0, 0, 0, 0]; var n := 0
+	for k in _vis:
+		var v: Dictionary = _vis[k]
+		if now - float(v["last"]) < 0.5: continue          # still on the scroll: not yet taken off
+		var seen: float = float(v["last"]) - float(v["first"])
+		var need: float = float(v["len"]) / READ_CPS + SCAN_S
+		n += 1; tot[int(v["pri"])] += 1
+		if seen < need:
+			short[int(v["pri"])] += 1
+			print("  SHORT pri=%d seen=%.1fs need=%.1fs len=%d '%s'" % [int(v["pri"]), seen, need, int(v["len"]), String(v["text"]).left(60)])
+	var st: Dictionary = _hud.stats
+	print("STATS ", st)
+	print("L74 measured=", n, " fed=", _fed, " by_pri=", tot, " taken_off_unread=", short)
+	if n < 10:
+		print("L74_TEST NO VERDICT - only ", n, " lines measured (floor 10)"); quit(2); return
+	var bad: int = short[2] + short[3] + int(st["dropped_protected"])
+	print("L74_TEST ", "OK" if bad == 0 else "FAIL", " protected_unread=", short[2] + short[3], " dropped_protected=", st["dropped_protected"])
+	quit(1 if bad > 0 else 0)

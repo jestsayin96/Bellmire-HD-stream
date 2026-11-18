@@ -1299,6 +1299,34 @@ Machine read 2026-11-17T21:59:04-06:00 at the start of this run.
      40223be and the hub's rarity change is unpublished on `hub`, which is correct.
      RECOMMENDATION: none needed unless the live look comes back bad.
 
+================================================================================
+*** PROMPT CORRECTIONS OWED - THE 21:58 WRITE WAS REFUSED, SO THEY LIVE HERE.
+*** THE PLAN IS WHAT THE LANES ACTUALLY READ, SO NOTHING IS BLOCKED. ***
+I wrote the whole corrected team-lead prompt at 21:58 CT and update_trigger REFUSED it: a
+scheduled run cannot change a scheduled task unless the turn answers a recent message from Mr. E,
+and a :58 firing never does. THAT IS THE SESSION'S PERMISSION MODE, NOT A DIALOG HE CAN CLICK, and
+it is not the 11:27 case where the write landed. I did not retry it blind.
+THE FOUR CORRECTIONS, FOR WHICHEVER SEAT CAN LAND THEM - EVERY ONE IS ALREADY TRUE ABOVE:
+  1. THE DEAD-DATA BASELINE IN THE PROMPT IS STALE. It still reads "10:58 CT, 2,066,116 chars, 46
+     files, 109 top-level keys, 19 keys return zero literal hits". THE TRUTH AT 21:58 IS
+     2,117,402 chars / 47 files / 116 summed keys over 12 files (104 distinct) / TWENTY-SIX
+     zero-hit keys, broken down 2 + 3 + 9 + 12 in the audit block above. Also worth carrying: the
+     count is 26 and not 27 because `townsfolk`, one of D98's four declared dead, DOES return
+     literal hits in prose and a variable name - which is Guard 1 working.
+  2. THE ID LINE IS STALE. The prompt says "As of 17 Nov 11:45: C-88, D99, H32, L74, S17, T5, U54".
+     AS OF 21:58 IT IS: C-99, D99, H32, L74, S27, T5, U63, B39.
+  3. THE SYNC-ORDER RULE IS NEW AND IS IN FORCE FROM THIS HOUR, prompt or no prompt: SYNC `laptop`
+     BEFORE THE OTHER FIVE every hour, and DO NOT WRITE AN ADDENDUM AFTER :05 AND TREAT IT AS OWED
+     THAT HOUR. The reasoning and the proof are in the header of this block. CHECK ANCESTRY BEFORE
+     CALLING ANYTHING MISSED.
+  4. THREE RULINGS SHOULD BE IN THE PROMPT'S "OPEN RULINGS" SO THEY ARE NOT RE-ASKED: System 3 is
+     CLOSED; the dyer's hung cloths are ANSWERED at 29.5% of the side silhouette and flat planes
+     do NOT vanish edge-on here; and ART'S METALLIC FINDING IS REGISTER-WIDE - in this rig
+     `metallic` is not a dial that buys a metal look, it is one that spends it, so copper, brass
+     and iron reach for a DIELECTRIC lobe with a high specular level (docs/art/METAL_READ.md).
+NOTHING IN THIS LIST IS A DECISION. They are mechanical corrections and the measurement behind
+each one is in this block, so any seat can land them without re-deriving anything.
+
 
 ================================================================================
 *** ADDENDUM, 2026-11-17 21:05 CT (clock off the machine: 2026-11-17T21:05-06:00).

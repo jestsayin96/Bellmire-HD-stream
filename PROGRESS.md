@@ -8973,3 +8973,14 @@ NAMED, NOT GATED: the 0.20*cap grain stripe on the rod gives WORD_HI 3.66:1 wher
 Gate: U59_CONTRAST OK 49 colours walked, 16 pairs, 0 unmeasured (was 14 pairs, 2 unmeasured). Parse 0 errors rc=0.
 NO PICTURE LOOKED AT: colour arithmetic, headless gate; the wordmark is a slightly paler gilt and was not rendered this firing.
 Files: ui_theme.gd, tools/_u58_contrast.gd.
+
+
+## U61 - the grain stripe was measured, and geometry cleared it (hud-ui)
+Row: the 18:58 HUD row - measure where the 0.20*cap grain stripe crosses the CHRONICLE wordmark at the px(8) cap floor and find the smallest change that clears the glyphs.
+MEASURED (tools/_u61_stripe.gd, windowed 1080p, ChronicleScroll at h=96/120/150/159, all on the cap floor): cap 8, top_cy 11, stripe rows [7.00, 8.60], glyph ink rows 4..16 (ink bottom edge y=17). The stripe crossed 1.6 px of a 13 px glyph, overlap=true at every floor height. At h=180 (cap 9) it still overlapped (stripe [7.75,9.55] vs ink 5..17) - so it was not only the floor.
+ANSWER: it clears WITHOUT moving the dowel art. The rod is two gradients with the centre line at cy; the stripe was in the upper half at cy-0.5*cap, exactly where the glyphs are. Moving it to the lower half at cy+0.75*cap gives [17.00, 18.60]: top edge == ink bottom edge, bottom edge 0.40 under the rod's lower rule (cy+cap = 19). Upper bound: any offset above 0.75 clears, anything past 0.95 (stripe bottom reaches cy+cap) hits the lower rule, so 0.75 is the smallest clearing offset and the margin to the rule is 0.4 px at the floor. Going up instead cannot work: it would need y<=2.4, outside the rod (top edge y=3).
+CHANGED: ui_theme.gd SCROLL_GRAIN_OFF = 0.75 (new const); hud_dock.gd _dowel uses it. Nothing else moved.
+GATE: _u58_contrast.gd now GATES the floor geometry (stripe top >= 17.0 measured ink bottom, stripe bottom <= rod bottom): "U61 stripe at cap floor [17.00,18.60] ... CLEAR"; U59_CONTRAST OK 49 colours, 16 pairs, 0 unmeasured. The old NAMED 3.66:1 line is retired because the overlap no longer exists. Re-run of _u61_stripe: overlap=false at all five heights. Parse 0 errors.
+LOOKED AT: renders/cycles/20261117_u61/rod_h120_before.png vs rod_h120_after.png (3x nearest). Before: a pale stripe runs through the upper half of the letters. After: letters clean on the rod, stripe a faint line under them. Also all_before/all_after.png.
+HONEST LIMIT: the 17.0 bound is measured at 1080p scale 1 off WORD_HI-coloured pixels (tolerance 0.05); at other resolutions px() scales both stripe and glyph, ratio held but only 1080p was captured. No rendered check at 125/150% UI scale.
+Lock: RUNNING 19:53:45 (declared 19:59) -> IDLE 19:56. Files: ui_theme.gd, hud_dock.gd, tools/_u58_contrast.gd, tools/_u61_stripe.gd. Not ticked by me.

@@ -3021,3 +3021,78 @@ Your call entirely - I am not writing an item for it and I have not touched rost
 ### nothing and spent nothing - no channel-point reward redeemed, created, deleted or re-priced, and
 ### bellmirebro posted no message in any chat. The only Godot launched was the headless battery
 ### above, which opens no EventSub connection.
+
+## B39 - 2026-11-17 21:45 CT - THE WITHDRAWN GUARD TAKEN PROPERLY: RESTORED TO THE BYTE, GATED, AND
+## FOUR OF ITS PATHS PROVED RED FROM MY OWN DATA
+The 20:58 row gave this hour back the guard B38 withdrew, on the condition it be taken the right way
+round: merge first, restore the preserved bytes, run the battery ON THOSE BYTES, and prove the paths
+can fail. That is the whole of this cycle and nothing else was written.
+
+### THE ONE-CHARACTER THING, DONE FIRST
+`git fetch origin` then `git merge origin/main` in W6 BEFORE choosing anything - the fault B38 named
+and the reason it lost the guard. The merge brought main 83d048f -> a120cfe (the 21:05 addendum,
+THE GREENER ticked). I re-read the row off the MERGED tree, not off R's `laptop` checkout, and
+checked the 21:05 addendum: it supersedes the ART and CONTENT rows only, so the 20:58 CHAT BOT row
+stands and it is what I did.
+
+### THE RESTORE IS A RESTORE, NOT A REWRITE - PROVED BY md5 BEFORE I TOUCHED IT
+    scripts/chatcmd.gd in W6 before      aa7bc84ca155b9390ded0418c880ccc4   81017 bytes
+    7f6abbc~1:scripts/chatcmd.gd         aa7bc84ca155b9390ded0418c880ccc4   81017 bytes   IDENTICAL
+    7f6abbc:scripts/chatcmd.gd           37d44b6311c64f70c6794faa6c610e44   91729 bytes
+    scripts/chatcmd.gd in W6 after       37d44b6311c64f70c6794faa6c610e44   91729 bytes
+So the working file WAS the checkpoint's parent to the byte, and `git checkout 7f6abbc --
+scripts/chatcmd.gd` put back exactly the 136 lines that were withdrawn and not one line more. No
+line was retyped, rewritten or improved on the way back in. `git diff origin/main HEAD` over my
+three files was EMPTY before the restore, so nothing of mine was carrying anything else.
+
+### THE BATTERY, ON THOSE BYTES. FOUR GATES, ALL GREEN. LOCK HELD 2 MIN 20 S.
+    --headless --path W6 --quit-after 300    rc=0, 0 SCRIPT ERROR, 0 Parse Error      34.3 s
+    tools/_l14_test.gd                       L14_TEST OK (22 checks)                   1.8 s
+    tools/_twitch_parse.gd                   TWITCH_PARSE OK (8 checks)                1.9 s
+    tools/_commands_doc.gd                   COMMANDS_DOC OK wrote 27 commands         2.1 s
+  0 COMMANDS_DATA lines across the whole green battery - all twelve guards silent on the real data,
+  which is the healthy read and the only one that lets a red run mean anything.
+  COMMANDS_DOC WAS A NO-OP AND IT IS PROVED, NOT ARGUED: data/commands.json
+  0908b4db3323d980b23a53ec0461f53a and docs/COMMANDS.md 553eb7d03245646838938e65cbf47c2e, taken
+  BEFORE and AFTER the generator ran, unchanged on both sides. The generator's bytes stand.
+  The parse was 34.3 s this run against B38's 21.5 s - same machine, same flags, 13 s of ordinary
+  boot variance. I am recording it so the 37-second figure is read as a measurement with spread and
+  not as a constant.
+
+### FOUR PATHS PROVED RED, EACH FROM MY OWN FILE, EACH RESTORED BYTE-IDENTICAL
+Every mutation below was one edit to data/commands.json - MY file - and nothing else was touched.
+After each run the file was written back from the bytes held in memory and re-hashed.
+    SPLIT   short's default -> "Antidote"      RED: what "draught of mending" (mending) vs short
+                                               "antidote" (antidote); no single published default
+    COST    cost "Mending 35" -> "Mending 36"   RED: published 36, charged 35 (Roster.POTION_COST)
+    GHOST   Names: + "moonwater"                RED: 1 unaccepted name ["moonwater"]
+    ANCHOR  "No name buys ... Mending." removed RED: `brew`.what lost its "no name buys " phrase,
+                                               so the default can no longer be checked at all
+  Each red run exited rc=0 with exactly 2 COMMANDS_DATA lines - the push_error and its printerr -
+  and each took 1.4-1.6 s. The guard fires on the path it was written for and says WHY in the
+  sentence, not just that something is wrong.
+  THE DATA IS WHERE IT WAS: data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before the
+  first mutation, after every single restore, and at the end of the cycle. 14772 bytes throughout.
+  Then L14_TEST re-run on the restored bytes: OK (22 checks), 0 COMMANDS_DATA lines. So the green
+  verdict above is the verdict for the bytes that ship, re-earned after the red work rather than
+  assumed to have survived it.
+
+### WHAT I DID NOT DO
+No new path, no new command, no new WORK_PLAN item, nothing ticked. The twelve-of-232 name list in
+`brew`.what is still a CONTENT call and is still not checked; B34-B38 each named it and left it and
+so does this. The temporary logs I wrote (_b39_gates.log, _b39_red.log) are deleted - the worktree
+carries nothing of mine that is not committed.
+### FOR THE GAME BUILD LANE: nothing owed. twitch_eventsub.gd untouched, twitch_reply(user_login,
+### text) unchanged. The B38 finding still stands and is still yours to take or leave: buy_potion
+### charges the const POTION_COST for the no-name brew and never reads the `mending` row's cost, so
+### that row's 35 is a dead number agreeing with the const by coincidence. My guard now goes red if
+### they diverge. I have not touched roster.gd.
+### FOR THE CONTENT LANE: unchanged from B38 - chatcmd.gd reads the `mending` row's name and cost
+### out of data/potions.json. Renaming, re-pricing or dropping that row turns my gate red instead
+### of leaving docs/COMMANDS.md quietly wrong. Adding brews is free.
+### FOR MR. E: nothing to decide.
+### LIVE TWITCH: no test run. No account used. No bits cheered by any account - bellmirebro cheered
+### nothing and spent nothing. No channel-point reward redeemed, created, deleted or re-priced. No
+### subscription of any kind. bellmirebro posted no message in any chat, and no channel setting was
+### read or changed. The only Godot launched was the headless battery above, which opens no
+### EventSub connection of its own.

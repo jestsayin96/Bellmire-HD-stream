@@ -402,10 +402,15 @@ func _oil(user_id: String, arg: String) -> String:
         n = clampi(int(arg), 1, 10)
     return _needs(user_id, func(): return roster.buy_oil(user_id, n))
 
+## B38: the no-name default was the bare literal "mending" inside _brew, and BOTH `brew`.short
+## and `brew`.what publish it as a promise. A promise with no constant behind it cannot be
+## checked, so it is a constant now and the BREW guard below reads it.
+const BREW_DEFAULT := "mending"
+
 func _brew(user_id: String, arg: String, arg2 := "") -> String:
     # L12: !brew [n] buys Mending as before; !brew <potion> [n] any brew the apothecary makes
     var n := 1
-    var key := "mending"
+    var key := BREW_DEFAULT
     if arg != "" and arg.is_valid_int():
         n = clampi(int(arg), 1, 10)
     elif arg != "":
@@ -414,7 +419,7 @@ func _brew(user_id: String, arg: String, arg2 := "") -> String:
             n = clampi(int(arg2), 1, 10)
         if key == "":
             return _needs(user_id, func(): return roster.buy_brew(user_id, arg, n))
-    if key == "mending":
+    if key == BREW_DEFAULT:
         return _needs(user_id, func(): return roster.buy_potion(user_id, n))
     return _needs(user_id, func(): return roster.buy_brew(user_id, key, n))
 
@@ -1113,6 +1118,133 @@ static func commands() -> Dictionary:
                 var a_ftip: String = "named in the buy ladder though it cannot be bought: %s" % str(a_sold_found) if not a_sold_found.is_empty() else "found-only armour `armoury`.what never mentions: %s" % str(a_mute_found)
                 push_error("COMMANDS_DATA ARMOURY FOUND: Gear.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
                 printerr("COMMANDS_DATA ARMOURY FOUND - found-only %s; %s" % [str(a_found), a_ftip])
+        # B38: THE BREW - CHOSEN ON SHAPE AGAIN, AND ITS AUTHORITIES SIT IN TWO FILES I DO NOT
+        # OWN. The row let me choose on shape over size; `brew` beat the three small ones that
+        # were left in my own file on four counts:
+        #   TWO DECLARATIONS, BOTH MINE - `brew`.short and `brew`.what EACH publish the no-name
+        #   default. They can disagree with each other before either disagrees with the game, and
+        #   then !brew's reply and docs/COMMANDS.md promise different brews. That is B36's SPLIT
+        #   shape inside my own file, so SPLIT is the first path again and for the same reason:
+        #   if the two disagree there is no published default to check, and the guard says so
+        #   rather than believing one of them. They are NOT compared as strings - "Draughts of
+        #   Mending" and "Mending" are the same promise - each is RESOLVED to a brew key and the
+        #   keys are compared.
+        #   THE DEFAULT WAS A BARE STRING INTO ANOTHER LANE'S DATA - data/potions.json is the
+        #   CONTENT writer's, it holds 232 brews and it grows most hours. Rename or drop the row
+        #   both my sentences name and !brew with no name stops buying what they promise. The
+        #   literal is BREW_DEFAULT now, so there is something to check against.
+        #   A NAME OWNED BY CONTENT - the row's own `name` is the display name a viewer is shown.
+        #   The guard SINGULARISES word by word, so the sentence may pluralise, which the English
+        #   wants, while a real rename still fires.
+        #   A PRICE DECLARED TWICE AND ONE OF THE TWO IS DEAD - `brew`.cost publishes a number for
+        #   the default; Roster.POTION_COST is what the no-name path actually CHARGES (buy_potion,
+        #   not buy_brew); and the potions.json row ALSO carries a cost that buy_potion never
+        #   reads. The two agree by coincidence today, not by construction.
+        #   NOT CHECKED, DELIBERATELY: the twelve names `what` lists against the 232 brews the
+        #   apothecary makes. Which brews a one-second chat line should name is a CONTENT call and
+        #   not a drift. B34, B35, B36 and B37 each named it and left it; so does this.
+        var b_d: Dictionary = (cmd_d.get("brew", {}) as Dictionary)
+        var b_what: String = String(b_d.get("what", ""))
+        var b_anchor := "no name buys "
+        # the published default, read the same way out of BOTH declarations: the words between the
+        # anchor and the first full stop, singularised, then resolved to a brew key
+        var b_said: Array = []
+        for b_src in [b_what, String(b_d.get("short", ""))]:
+            var b_s := String(b_src).to_lower()
+            var b_at: int = b_s.find(b_anchor)
+            var b_phrase := ""
+            if b_at >= 0:
+                b_phrase = b_s.substr(b_at + b_anchor.length())
+                var b_stop: int = b_phrase.find(".")
+                if b_stop >= 0:
+                    b_phrase = b_phrase.substr(0, b_stop)
+                var b_words: Array = []
+                for b_w in b_phrase.strip_edges().split(" ", false):
+                    var b_t := String(b_w).strip_edges()
+                    if b_t.length() > 3 and b_t.ends_with("s"):
+                        b_t = b_t.substr(0, b_t.length() - 1)
+                    if b_t != "":
+                        b_words.append(b_t)
+                b_phrase = " ".join(b_words)
+            b_said.append(b_phrase)
+        var b_ph_what := String(b_said[0])
+        var b_ph_short := String(b_said[1])
+        var b_key_what := Roster.potion_key(b_ph_what) if b_ph_what != "" else ""
+        var b_key_short := Roster.potion_key(b_ph_short) if b_ph_short != "" else ""
+        var b_rows: Dictionary = (Roster.potions().get("potions", {}) as Dictionary)
+        var b_row: Dictionary = (b_rows.get(BREW_DEFAULT, {}) as Dictionary)
+        # the twelve names the sentence lists, kept to the GHOST direction only
+        var b_ghost: Array = []
+        var b_nat: int = b_what.find("Names: ")
+        if b_nat >= 0:
+            var b_ntail: String = b_what.substr(b_nat + 7)
+            var b_nstop: int = b_ntail.find(".")
+            if b_nstop >= 0:
+                b_ntail = b_ntail.substr(0, b_nstop)
+            for b_n in b_ntail.split(",", false):
+                var b_name := String(b_n).strip_edges().to_lower()
+                var b_par: int = b_name.find("(")
+                if b_par >= 0:
+                    b_name = b_name.substr(0, b_par).strip_edges()
+                if b_name != "" and Roster.potion_key(b_name) == "":
+                    b_ghost.append(b_name)
+        # the published price of the default, and the two numbers behind it
+        var b_cost_s: String = String(b_d.get("cost", "")).to_lower()
+        var b_said_cost := -1
+        var b_cat: int = b_cost_s.find(BREW_DEFAULT)
+        if b_cat >= 0:
+            var b_dig := ""
+            for b_i in range(b_cat, b_cost_s.length()):
+                var b_ch := b_cost_s[b_i]
+                if b_ch >= "0" and b_ch <= "9":
+                    b_dig += b_ch
+                elif b_dig != "":
+                    break
+            if b_dig != "":
+                b_said_cost = int(b_dig)
+        if b_ph_what == "":
+            push_error("COMMANDS_DATA BREW ANCHOR: `brew`.what no longer says \"%s<brew>.\" - the published no-name default can no longer be checked against BREW_DEFAULT (%s)" % [b_anchor, BREW_DEFAULT])
+            printerr("COMMANDS_DATA BREW ANCHOR - `brew`.what lost its \"%s\" phrase; the default is now unchecked" % b_anchor)
+        else:
+            if b_key_what != b_key_short:
+                var b_sp_tip: String = "`brew`.short no longer publishes the default at all" if b_ph_short == "" else "short says \"%s\" (%s)" % [b_ph_short, "no such brew" if b_key_short == "" else b_key_short]
+                push_error("COMMANDS_DATA BREW SPLIT: the no-name default is declared TWICE in data/commands.json and the two no longer name the same brew - `brew`.what says \"%s\" (%s) and %s, so !brew's reply and docs/COMMANDS.md promise different brews and no single published default exists to check against BREW_DEFAULT (%s)" % [b_ph_what, "no such brew" if b_key_what == "" else b_key_what, b_sp_tip, BREW_DEFAULT])
+                printerr("COMMANDS_DATA BREW SPLIT - what \"%s\" vs short \"%s\"; no single published default" % [b_ph_what, b_ph_short])
+            if b_key_what == "":
+                push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\" as the no-name buy and the apothecary makes no such brew - data/potions.json has no row the sentence can resolve to, so docs/COMMANDS.md names a brew a viewer cannot get" % b_ph_what)
+                printerr("COMMANDS_DATA BREW DEFAULT - published \"%s\" resolves to no brew" % b_ph_what)
+            elif b_key_what != BREW_DEFAULT:
+                push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\", which is the brew `%s`, and !brew with no name buys `%s` - the doc promises one brew and the command buys another" % [b_ph_what, b_key_what, BREW_DEFAULT])
+                printerr("COMMANDS_DATA BREW DEFAULT - published `%s`, bought `%s`" % [b_key_what, BREW_DEFAULT])
+        if b_row.is_empty():
+            push_error("COMMANDS_DATA BREW KEY: BREW_DEFAULT is `%s` and data/potions.json carries no such row - !brew with no name charges and counts a brew the apothecary no longer makes, and the name both of my sentences publish has no authority left" % BREW_DEFAULT)
+            printerr("COMMANDS_DATA BREW KEY - potions.json has no `%s` row" % BREW_DEFAULT)
+        else:
+            # the display name content owns, singularised the same way the sentence was
+            var b_rn_words: Array = []
+            for b_w2 in String(b_row.get("name", "")).to_lower().split(" ", false):
+                var b_t2 := String(b_w2).strip_edges()
+                if b_t2.length() > 3 and b_t2.ends_with("s"):
+                    b_t2 = b_t2.substr(0, b_t2.length() - 1)
+                if b_t2 != "":
+                    b_rn_words.append(b_t2)
+            var b_real_name := " ".join(b_rn_words)
+            if b_ph_what != "" and b_real_name != "" and not b_ph_what.contains(b_real_name):
+                push_error("COMMANDS_DATA BREW NAME: `brew`.what calls the no-name buy \"%s\" and data/potions.json calls that row \"%s\" - docs/COMMANDS.md and !brew's own reply publish a name the apothecary does not use (plurals allowed, this is a rename)" % [b_ph_what, String(b_row.get("name", ""))])
+                printerr("COMMANDS_DATA BREW NAME - published \"%s\", row is \"%s\"" % [b_ph_what, String(b_row.get("name", ""))])
+            var b_row_cost := int(b_row.get("cost", -1))
+            if b_row_cost >= 0 and b_row_cost != Roster.POTION_COST:
+                push_error("COMMANDS_DATA BREW PRICE SPLIT: the default brew's price is declared TWICE and the two no longer agree - Roster.POTION_COST is %d and is what the no-name path CHARGES (buy_potion), and the potions.json `%s` row says %d, which buy_potion never reads. A viewer pays %d whatever the data says" % [Roster.POTION_COST, BREW_DEFAULT, b_row_cost, Roster.POTION_COST])
+                printerr("COMMANDS_DATA BREW PRICE SPLIT - POTION_COST %d charged, potions.json row %d dead" % [Roster.POTION_COST, b_row_cost])
+        if b_said_cost < 0:
+            push_error("COMMANDS_DATA BREW COST ANCHOR: `brew`.cost no longer carries a number beside \"%s\" - the published price of the no-name buy can no longer be checked against Roster.POTION_COST (%d)" % [BREW_DEFAULT, Roster.POTION_COST])
+            printerr("COMMANDS_DATA BREW COST ANCHOR - `brew`.cost lost its %s number" % BREW_DEFAULT)
+        elif b_said_cost != Roster.POTION_COST:
+            push_error("COMMANDS_DATA BREW COST: `brew`.cost publishes %d gold for the no-name buy and Roster.POTION_COST charges %d - docs/COMMANDS.md prices a brew at money the apothecary does not take" % [b_said_cost, Roster.POTION_COST])
+            printerr("COMMANDS_DATA BREW COST - published %d, charged %d" % [b_said_cost, Roster.POTION_COST])
+        if not b_ghost.is_empty():
+            push_error("COMMANDS_DATA BREW GHOST: `brew`.what names %d brew(s) the apothecary does not accept, so the doc invites a refusal: %s" % [b_ghost.size(), b_ghost])
+            printerr("COMMANDS_DATA BREW GHOST - %d unaccepted name(s): %s" % [b_ghost.size(), b_ghost])
         _cmds = parsed
     return _cmds
 

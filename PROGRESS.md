@@ -9904,3 +9904,14 @@ NOT CLAIMING READY TO PUBLISH: nothing in web/ changed this hour, so no new gate
 - No screenshot taken: web/ did not change. Live-dot colour unchanged (no pass this run).
 - NOT claiming READY TO PUBLISH. gh-pages is 45a7904; the 19-line unpublished delta (dead shopGood() removal + "Sells up to" tier underline) is the supervisor's call, via the team lead.
 - Files: PROGRESS.md only.
+
+## U74b - the third rarity table joins the one-table guard (HUD, 2026-11-18 ~08:03 CT)
+TAKE THIS NEXT 07:04 row 3. tools/_u71_rarity_guard.gd now also reads scripts/fishing.gd RARITY_COLOR and asserts:
+rare / very rare / legendary = art's RARITY_HUE + 0.10 per channel (clamped); uncommon = white; common / junk / starting
+BARE; no other rung. 11 red proofs on the third table (shipped green uncommon, painted common, old legendary 1.00/0.66/0.20,
+nudged/lost/unlifted rare, invented epic, painted junk, fishing.gd text reverted, art editing rare) - all caught; the U71 nine
+still caught. Headless run: U71_GUARD OK, U71_FISH redproofs 11/11. One red proof of mine was itself wrong first (0.90 blue +0.10
+clamps to 1.0, so the edit changed nothing) - fixed by moving the green channel instead. Game build's own tools/_fish_rarity.gd
+still OK (32 checks). Not touched: L74 feed/theme-under-load (needs windowed capture; next firing).
+Note for the owner of gear.gd/hero_body.gd: headless --quit-after 300 on the merged tree prints 7 'instantiate on a null value'
+SCRIPT ERRORs at gear.gd:104 (hero_body.gd:30 -> adventurers.gd:77); not a HUD file, likely un-imported glb in this worktree.

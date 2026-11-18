@@ -9300,3 +9300,8 @@ NAMED, NOT GATED: the 0.20*cap grain stripe on the rod gives WORD_HI 3.66:1 wher
 Gate: U59_CONTRAST OK 49 colours walked, 16 pairs, 0 unmeasured (was 14 pairs, 2 unmeasured). Parse 0 errors rc=0.
 NO PICTURE LOOKED AT: colour arithmetic, headless gate; the wordmark is a slightly paler gilt and was not rendered this firing.
 Files: ui_theme.gd, tools/_u58_contrast.gd.
+
+## hub standing check 19:40 CT, 17 Nov (no code change)
+- Fast-forwarded to origin/hub (41c1fce) and merged origin/main (034be6b). `git diff` of web/, docs/HUB_SECURITY.md and assets/icons/items across both merges is EMPTY (source icons last changed 4ab066d, 01:02 CT), so web/ is byte-identical to the looked-at build and the 520-thumb set is current. H32 passes 1-5 in, ticked whole; hub already published by the supervisor - queue empty. The prompt's "next is pass 4" is stale.
+- node --check app.js OK; innerHTML only app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. MEASURED: web/icons 2,434,146 bytes vs 6 MB cap. No new screenshot (unchanged build). Live dot red --live #e5484d.
+- Scratch (_h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt) still untracked, named here: delete refused on this machine. Not published by me.

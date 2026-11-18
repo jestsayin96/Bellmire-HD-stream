@@ -1,0 +1,1246 @@
+{
+ "by_key": {
+  "drillmaster": {
+   "hash": "be24353df63c9bc18869f9daccff558c890d2929922c75748d3729f2ca8191ce",
+   "objs": [
+    {
+     "faces": 412,
+     "mats": [
+      {
+       "base": [
+        0.701248,
+        0.576666,
+        0.291694,
+        1.0
+       ],
+       "metal": 0.438076,
+       "name": "drillmaster_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.4,
+       "spec": 0.5
+      }
+     ],
+     "obj": "drillmaster_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 430
+    },
+    {
+     "faces": 608,
+     "mats": [
+      {
+       "base": [
+        0.1242,
+        0.104267,
+        0.058671,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "drillmaster_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "drillmaster_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 690
+    },
+    {
+     "faces": 250,
+     "mats": [
+      {
+       "base": [
+        0.720823,
+        0.64902,
+        0.474642,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "drillmaster_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.36,
+       "spec": 0.5
+      }
+     ],
+     "obj": "drillmaster_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 290
+    },
+    {
+     "faces": 96,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.78,
+        0.34,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "drillmaster_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "drillmaster_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 84
+    }
+   ]
+  },
+  "dyer": {
+   "hash": "07dc2c24ff7171875bfd9fb98fd881d8e0fb5391e7bb4d2e82ef4182c398d07f",
+   "objs": [
+    {
+     "faces": 428,
+     "mats": [
+      {
+       "base": [
+        0.055,
+        0.205,
+        0.6,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "dyer_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.54,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 451
+    },
+    {
+     "faces": 1128,
+     "mats": [
+      {
+       "base": [
+        0.07,
+        0.062,
+        0.056,
+        1.0
+       ],
+       "metal": 0.03,
+       "name": "dyer_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.82,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1258
+    },
+    {
+     "faces": 450,
+     "mats": [
+      {
+       "base": [
+        0.62,
+        0.105,
+        0.08,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "dyer_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.58,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 462
+    },
+    {
+     "faces": 288,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.69,
+        0.075,
+        1.0
+       ],
+       "emit_str": 1.05,
+       "name": "dyer_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "dyer_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 339
+    }
+   ]
+  },
+  "gaoler": {
+   "hash": "e797e1c5adcf84a767c191fb79b05a299993c974378182f4e8d5d62e967c3681",
+   "objs": [
+    {
+     "faces": 8,
+     "mats": [
+      {
+       "base": [
+        0.342592,
+        0.28704,
+        0.222016,
+        1.0
+       ],
+       "metal": 0.057784,
+       "name": "gaoler_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.66,
+       "spec": 0.5
+      }
+     ],
+     "obj": "gaoler_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 12
+    },
+    {
+     "faces": 1420,
+     "mats": [
+      {
+       "base": [
+        0.066815,
+        0.057926,
+        0.047523,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "gaoler_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "gaoler_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1333
+    },
+    {
+     "faces": 292,
+     "mats": [
+      {
+       "base": [
+        0.37504,
+        0.368,
+        0.35392,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "gaoler_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.594,
+       "spec": 0.5
+      }
+     ],
+     "obj": "gaoler_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 340
+    },
+    {
+     "faces": 96,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.610526,
+        0.210526,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "gaoler_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "gaoler_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 84
+    }
+   ]
+  },
+  "greener": {
+   "hash": "b2266d361a15a76e9672989b70568eacc87632ee778a5b1f7b8737ab75eff2ec",
+   "objs": [
+    {
+     "faces": 3990,
+     "mats": [
+      {
+       "base": [
+        0.075,
+        0.47,
+        0.355,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "greener_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.62,
+       "spec": 0.5
+      }
+     ],
+     "obj": "greener_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 3511
+    },
+    {
+     "faces": 920,
+     "mats": [
+      {
+       "base": [
+        0.062,
+        0.058,
+        0.052,
+        1.0
+       ],
+       "metal": 0.03,
+       "name": "greener_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.84,
+       "spec": 0.5
+      }
+     ],
+     "obj": "greener_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1006
+    },
+    {
+     "faces": 296,
+     "mats": [
+      {
+       "base": [
+        0.8,
+        0.8,
+        0.8,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "greener_bone_ov",
+       "nodes": [
+        "ATTRIBUTE",
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.44,
+       "spec": 0.92
+      }
+     ],
+     "obj": "greener_bone",
+     "vcol_attrs": [
+      "Col"
+     ],
+     "vcol_items": 5,
+     "verts": 308
+    },
+    {
+     "faces": 537,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.265,
+        0.035,
+        1.0
+       ],
+       "emit_str": 1.45,
+       "name": "greener_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "greener_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 476
+    }
+   ]
+  },
+  "hurdleman": {
+   "hash": "36c6300e32821be7eb47d0558b50cd1984145ee845a19633867aae7d871f2f9c",
+   "objs": [
+    {
+     "faces": 108,
+     "mats": [
+      {
+       "base": [
+        0.29336,
+        0.3202,
+        0.2608,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "hurdleman_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "hurdleman_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 144
+    },
+    {
+     "faces": 1204,
+     "mats": [
+      {
+       "base": [
+        0.058938,
+        0.063232,
+        0.053728,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "hurdleman_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "hurdleman_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1231
+    },
+    {
+     "faces": 382,
+     "mats": [
+      {
+       "base": [
+        0.34045,
+        0.3465,
+        0.31625,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "hurdleman_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.666,
+       "spec": 0.5
+      }
+     ],
+     "obj": "hurdleman_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 478
+    },
+    {
+     "faces": 96,
+     "mats": [
+      {
+       "emit": [
+        0.8,
+        1.0,
+        0.755556,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "hurdleman_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "hurdleman_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 84
+    }
+   ]
+  },
+  "jointer": {
+   "hash": "0171c5696c17110ca98504b228b0f8b17fe87ec2e46dabd0696ddcd85acfd3c5",
+   "objs": [
+    {
+     "faces": 138,
+     "mats": [
+      {
+       "base": [
+        0.49552,
+        0.395768,
+        0.275796,
+        1.0
+       ],
+       "metal": 0.300913,
+       "name": "jointer_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.48,
+       "spec": 0.5
+      }
+     ],
+     "obj": "jointer_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 184
+    },
+    {
+     "faces": 398,
+     "mats": [
+      {
+       "base": [
+        0.091283,
+        0.075323,
+        0.056127,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "jointer_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "jointer_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 416
+    },
+    {
+     "faces": 249,
+     "mats": [
+      {
+       "base": [
+        0.530775,
+        0.456635,
+        0.382495,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "jointer_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.432,
+       "spec": 0.5
+      }
+     ],
+     "obj": "jointer_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 326
+    },
+    {
+     "faces": 220,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.92,
+        0.72,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "jointer_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "jointer_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 208
+    }
+   ]
+  },
+  "loader": {
+   "hash": "9837b1b588e07df507d9dd0636c48647b14a640b2c9676cc9138eb60cbb7b55f",
+   "objs": [
+    {
+     "faces": 156,
+     "mats": [
+      {
+       "base": [
+        0.36737,
+        0.35253,
+        0.26243,
+        1.0
+       ],
+       "metal": 0.078973,
+       "name": "loader_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.64,
+       "spec": 0.5
+      }
+     ],
+     "obj": "loader_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 166
+    },
+    {
+     "faces": 371,
+     "mats": [
+      {
+       "base": [
+        0.070779,
+        0.068405,
+        0.053989,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "loader_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "loader_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 459
+    },
+    {
+     "faces": 518,
+     "mats": [
+      {
+       "base": [
+        0.410087,
+        0.388225,
+        0.351788,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "loader_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.576,
+       "spec": 0.5
+      }
+     ],
+     "obj": "loader_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1444
+    },
+    {
+     "faces": 176,
+     "mats": [
+      {
+       "emit": [
+        0.914894,
+        1.0,
+        0.617021,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "loader_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "loader_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 162
+    }
+   ]
+  },
+  "quartermaster": {
+   "hash": "202c63846e23d8d366c43e091e8dc7f4ee502d661a8575f02dfddd678d6558a5",
+   "objs": [
+    {
+     "faces": 60,
+     "mats": [
+      {
+       "base": [
+        0.46504,
+        0.42288,
+        0.30446,
+        1.0
+       ],
+       "metal": 0.208411,
+       "name": "quartermaster_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.54,
+       "spec": 0.5
+      }
+     ],
+     "obj": "quartermaster_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 80
+    },
+    {
+     "faces": 636,
+     "mats": [
+      {
+       "base": [
+        0.086406,
+        0.079661,
+        0.060714,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "quartermaster_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "quartermaster_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1124
+    },
+    {
+     "faces": 1932,
+     "mats": [
+      {
+       "base": [
+        0.5053,
+        0.479725,
+        0.428575,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "quartermaster_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.486,
+       "spec": 0.5
+      }
+     ],
+     "obj": "quartermaster_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 3869
+    },
+    {
+     "faces": 176,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.913043,
+        0.5,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "quartermaster_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "quartermaster_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 162
+    }
+   ]
+  },
+  "reeve": {
+   "hash": "e148a53a4d0ddcff3b39cd46faa340fe51dd07ac243ab175dc1cc079cc965c9c",
+   "objs": [
+    {
+     "faces": 128,
+     "mats": [
+      {
+       "base": [
+        0.658944,
+        0.60264,
+        0.441548,
+        1.0
+       ],
+       "metal": 0.511889,
+       "name": "reeve_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.36,
+       "spec": 0.5
+      }
+     ],
+     "obj": "reeve_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 158
+    },
+    {
+     "faces": 493,
+     "mats": [
+      {
+       "base": [
+        0.117431,
+        0.108422,
+        0.082648,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "reeve_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "reeve_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 542
+    },
+    {
+     "faces": 546,
+     "mats": [
+      {
+       "base": [
+        0.691092,
+        0.669587,
+        0.605072,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "reeve_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.324,
+       "spec": 0.5
+      }
+     ],
+     "obj": "reeve_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 541
+    },
+    {
+     "faces": 253,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.84,
+        0.4,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "reeve_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "reeve_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 252
+    }
+   ]
+  },
+  "scrapwright": {
+   "hash": "b8c8cb405bd3a41c49e0cf05e1c04458bf34aa9fec437c160c874d8094dde88f",
+   "objs": [
+    {
+     "faces": 66,
+     "mats": [
+      {
+       "base": [
+        0.52546,
+        0.561444,
+        0.607808,
+        1.0
+       ],
+       "metal": 0.33381,
+       "name": "scrapwright_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.46,
+       "spec": 0.5
+      }
+     ],
+     "obj": "scrapwright_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 88
+    },
+    {
+     "faces": 874,
+     "mats": [
+      {
+       "base": [
+        0.096074,
+        0.101831,
+        0.109249,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "scrapwright_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "scrapwright_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 852
+    },
+    {
+     "faces": 29,
+     "mats": [
+      {
+       "base": [
+        0.592525,
+        0.611555,
+        0.630585,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "scrapwright_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.414,
+       "spec": 0.5
+      }
+     ],
+     "obj": "scrapwright_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 36
+    },
+    {
+     "faces": 6,
+     "mats": [
+      {
+       "emit": [
+        0.78,
+        0.86,
+        1.0,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "scrapwright_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "scrapwright_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 8
+    }
+   ]
+  },
+  "snuffer": {
+   "hash": "b1a78dd6ebe98bf96398d41894087fcfe4feb3937b81a41941c86e044e93d5ba",
+   "objs": [
+    {
+     "faces": 44,
+     "mats": [
+      {
+       "base": [
+        0.348864,
+        0.33982,
+        0.322208,
+        1.0
+       ],
+       "metal": 0.021896,
+       "name": "snuffer_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.7,
+       "spec": 0.5
+      }
+     ],
+     "obj": "snuffer_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 80
+    },
+    {
+     "faces": 781,
+     "mats": [
+      {
+       "base": [
+        0.067818,
+        0.066371,
+        0.063553,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "snuffer_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "snuffer_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 860
+    },
+    {
+     "faces": 219,
+     "mats": [
+      {
+       "base": [
+        0.368305,
+        0.37485,
+        0.394485,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "snuffer_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.63,
+       "spec": 0.5
+      }
+     ],
+     "obj": "snuffer_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 328
+    },
+    {
+     "faces": 63,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.86,
+        0.52,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "snuffer_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "snuffer_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 56
+    }
+   ]
+  },
+  "tanner": {
+   "hash": "e0a1ca8b821b57a17726cbb6aefb448085b8e7bdd6f74917d62877560955e2d9",
+   "objs": [
+    {
+     "faces": 138,
+     "mats": [
+      {
+       "base": [
+        0.668736,
+        0.622514,
+        0.480792,
+        1.0
+       ],
+       "metal": 0.474572,
+       "name": "tanner_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.38,
+       "spec": 0.5
+      }
+     ],
+     "obj": "tanner_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 200
+    },
+    {
+     "faces": 748,
+     "mats": [
+      {
+       "base": [
+        0.118998,
+        0.111602,
+        0.088927,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "tanner_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "tanner_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 710
+    },
+    {
+     "faces": 302,
+     "mats": [
+      {
+       "base": [
+        0.696195,
+        0.66468,
+        0.58064,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "tanner_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.342,
+       "spec": 0.5
+      }
+     ],
+     "obj": "tanner_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 312
+    },
+    {
+     "faces": 96,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.95,
+        0.72,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "tanner_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "tanner_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 84
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "tag": "after"
+}

@@ -85,20 +85,14 @@ def _mats(key):
     return M.apply_overrides(key, mats)
 
 
-def _objs(key, items, mats, suffix):
-    groups = {}
-    for verts, faces, slot in items:
-        gv, gf = groups.setdefault(slot, ([], []))
-        off = len(gv)
-        gv.extend(verts)
-        gf.extend([tuple(i + off for i in f) for f in faces])
-    out = []
-    for slot in ('body', 'dark', 'bone', 'glow'):
-        if slot not in groups:
-            continue
-        gv, gf = groups[slot]
-        out.append(L.make("%s_%s_%s" % (key, slot, suffix), gv, gf, mats.get(slot, mats['body'])))
-    return out
+def _objs(key, items, mats, suffix, vcols=None):
+    """Delegates to minibosses.merge_objs - THE one merge the shipping generator
+    uses. This file used to carry its own identical copy, and so did two other
+    readers; measuring a body through a different merge than the one that ships
+    is the same fault class as measuring it through a different material table.
+    `vcols` must be passed through from the builder or a vertex-painted slot is
+    measured UNPAINTED, which would read as a fix that is not there."""
+    return M.merge_objs(key, items, mats, suffix=suffix, vcols=vcols)
 
 
 def _clear():
@@ -185,13 +179,13 @@ def main():
             continue
 
         height = M.CANON[key][1]
-        full = _objs(key, P.items, mats, "full")
+        full = _objs(key, P.items, mats, "full", getattr(P, "vcols", None))
         mn, mx, _ = G.world_bounds(full)
         cur = mx.z - mn.z
         k = height / cur if cur > 1e-6 else 1.0
 
         def _scaled(items, sfx):
-            obs = _objs(key, items, mats, sfx)
+            obs = _objs(key, items, mats, sfx, getattr(P, "vcols", None))
             for ob in obs:
                 ob.scale = (k, k, k)
                 ob.location = (ob.location.x * k, ob.location.y * k, ob.location.z * k)

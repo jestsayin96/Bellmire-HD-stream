@@ -89,18 +89,11 @@ def build_miniboss(key):
     # merge by material before making objects: built part-by-part these run to
     # 60-200 objects, i.e. that many draw calls for one set piece. Merged, each
     # is at most four meshes - the same bar the lords and the creatures hold to.
-    groups = {}
-    for verts, faces, slot in P.items:
-        gv, gf = groups.setdefault(slot, ([], []))
-        off = len(gv)
-        gv.extend(verts)
-        gf.extend([tuple(i + off for i in f) for f in faces])
-    objs = []
-    for slot in ('body', 'dark', 'bone', 'glow'):
-        if slot not in groups:
-            continue
-        gv, gf = groups[slot]
-        objs.append(L.make("%s_%s" % (key, slot), gv, gf, mats.get(slot, mats['body'])))
+    # ONE merge, shared with _metal_read / _trade_read / _colour_read - see
+    # minibosses.merge_objs. Four private copies of this loop is four things to
+    # disagree about, and a colour measured through a different merge than the
+    # one that ships is a number about nothing.
+    objs = M.merge_objs(key, P.items, mats, vcols=getattr(P, "vcols", None))
     # author at the intended height with feet on z=0 - Monster normalises on top
     mn, mx, _ = G.world_bounds(objs)
     cur = mx.z - mn.z

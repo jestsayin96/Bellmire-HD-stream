@@ -3172,7 +3172,9 @@ func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
 	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
 	host.add_child(v)
 	var bn := b as Node3D
-	var fwd := -bn.global_transform.basis.z.normalized()
+	# S31 fit: a body LOOKS down +z (KayKit faces +z; the delve turns it by rotation.y = atan2(dx, dz)),
+	# so +basis.z is in front of the face. The first cut used -z and every bottle sat behind the head.
+	var fwd := bn.global_transform.basis.z.normalized()
 	var tw := v.create_tween()
 	if on_floor:
 		# the find: on the stones at the seeker's feet, a slow turn, then picked up
@@ -3182,8 +3184,9 @@ func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
 		tw.tween_property(v, "scale", Vector3.ONE * 0.01, 0.25)
 	else:
 		# the drink: up at the mouth for as long as Use_Item reads, then gone
-		v.global_position = bn.global_position + fwd * 0.35 + Vector3(0, 1.25, 0)
-		tw.tween_property(v, "global_position", bn.global_position + fwd * 0.25 + Vector3(0, 1.55, 0), 0.9)
+		# S31 fit: 0.75 m out - a chibi helmet reaches ~0.6 m past the root, so 0.35 hid the bottle in the visor
+		v.global_position = bn.global_position + fwd * 0.75 + Vector3(0, 1.25, 0)
+		tw.tween_property(v, "global_position", bn.global_position + fwd * 0.65 + Vector3(0, 1.55, 0), 0.9)
 		tw.tween_property(v, "scale", Vector3.ONE * 0.01, 0.3)
 	tw.tween_callback(v.queue_free)
 

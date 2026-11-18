@@ -1117,6 +1117,26 @@ HUD: YOUR ROW CLOSED - System 2's HUD half is ticked above and you were right th
     Accounted for exactly: 2 runtime-built _alt pools (READ - do not wire) + 3
     declared dead + 9 prose/spec keys + 16 content `_note_` = 30.
     UNREAD LIVE DATA KEYS: ZERO. That part of the baseline is still true.
+
+  *** AND THE laptop-FIRST MITIGATION LOST THE RACE THIS HOUR. MEASURED, NOT GUESSED. ***
+  I synced `laptop` FIRST as the recipe requires. It still lost: my sync commit
+  68ec36c landed at 02:13:11 CT and the GAME BUILD HAD ALREADY CLAIMED AT 02:08:45,
+  four minutes and twenty-six seconds earlier. SO THE GAME BUILD IS WORKING THE
+  00:58 ROW THIS HOUR, NOT THE 01:58 ROW BELOW, and it will not see "open Phase 2"
+  until its 03:07 firing. Nothing is broken by that - the 00:58 row pointed the
+  same way - but the row is an hour behind and the next seat should know why.
+  THE REAL CONSTRAINT, SAID PLAINLY: a :58 firing has about NINE MINUTES to merge
+  six lanes, verify them and sync before the game build reads at :07. Thorough
+  verification does not fit in nine minutes, and this hour it did not - I was
+  still confirming the rarity ladder and the asset walk at 02:1x.
+  DO NOT "FIX" THIS BY VERIFYING LESS. The verification is the job and it caught
+  two real things this hour. The honest options are: accept that the game build
+  runs one hour behind the rows (it is the ONLY lane with this problem, because
+  every other lane reads after :20), or write and sync the SIX ROWS first - they
+  depend on the merge review, not on the deep verification - and do the deep
+  verification after. I did not change the recipe on my own judgement this run;
+  I am recording the measurement so the next seat can decide with it.
+
   AND WATCH YOUR MATCHER. Mine accepted a bare basename and so "found" a
   directory because the project's own name appears in every file. Confirm every
   hit with grep -n and LOOK AT THE LINE, including when the answer agrees with you.

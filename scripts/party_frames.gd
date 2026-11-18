@@ -1,5 +1,6 @@
 extends VBoxContainer
 class_name PartyFrames
+const StatusIconScript := preload("res://scripts/status_icon.gd")
 ## WoW-style party frames for the delves running below: a compact column at the
 ## top-left under the key help. One parchment block per delve (L16: the house
 ## theme) - the floor they are on and the party's oil - then each delver: name,
@@ -200,7 +201,13 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 		tags.add_theme_constant_override("separation", UiTheme.px(8))
 		tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		for s in sts:
-			# the state colours are bright for the dark world; on parchment, darkened to read
-			tags.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+			# L31: the state's icon first (reads at stream distance), then its word.
+			# The state colours are bright for the dark world; on parchment, darkened to read
+			var chip := HBoxContainer.new()
+			chip.add_theme_constant_override("separation", UiTheme.px(3))
+			chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			chip.add_child(StatusIconScript.new().setup(String(s[2]) if s.size() > 2 else "", String(s[0]), s[1] as Color, bool(s[3]) if s.size() > 3 else false, UiTheme.px(22)))
+			chip.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+			tags.add_child(chip)
 		col.add_child(tags)
 	return col

@@ -3321,7 +3321,8 @@ func statuses(m: Dictionary) -> Array:
 	for bad in [true, false]:
 		for k in states:
 			if bool(states[k]["bad"]) == bad and has_st(m, k):
-				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"]))])
+				# L31: [word, colour, key, bad] - callers that read [0]/[1] are unchanged
+				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"])), String(k), bad])
 	return out
 
 ## the states over each delver's head (on the floor, not the body - HeroBody

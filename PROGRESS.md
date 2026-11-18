@@ -10111,3 +10111,45 @@ in this file, class_name Bestiary, no cycle - bestiary.gd has zero ChatCmd refer
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## S34 - the ONE IDEA per miniboss is delve-side behaviour now: fourteen minibosses ACT and BREAK (game build, 2026-11-18 09:08-09:3x CT)
+TAKE THIS NEXT 08:0x CT row 1 for game build said "your call". S33 named this as NOT DONE in its own
+words ("the ONE IDEA per miniboss ... is still not delve-side behaviour"), and the standing prompt
+says shipping minibosses as reskins with 2x hp wastes them. Measured first: content's miniboss_feed
+has `act` and `broken` lines for 14 keys, and delve.gd's own reader said "act and broken belong to
+each miniboss's own mechanic, which is not built yet". Nothing ever said an act or broken line.
+- `scripts/delve.gd` NEW `_mb_way_tick` (called beside `_lord_tick` for any monster carrying mb_key,
+  party within 16 m) + `MB_WAYS` / `MB_CALLS`. Every 8 s the idea fires and an ACT line from that
+  key's own pool is said, naming the delver it actually landed on (new `_miniboss_say_for`). At 30%
+  hp the idea BREAKS for good: a BROKEN line once, anything it built undone, no act after.
+  The twelve ways, each off the act line content wrote:
+    call  drillmaster (garrison: skeleton warrior), sexton (bones that RISE), sower (adder as thorn) - two at most
+    plate scrapwright +6% hp a plate      grow  stoker x1.08 size+atk per log, capped 1.24, reset on broken
+    mend  cook heals every creature within 10 m 10%      snuff snuffer blinds the party 2.5 s
+    hook  gaoler reels the FARTHEST delver to 1.6 m (only onto a floor cell)
+    strip tallyman frightens its mark      bar porter +1 guard (AC), cap 4
+    flood sluicekeeper slows the party     snare snarer / set boiler slow the mark
+    blink bellman swoops to land BEHIND the farthest delver (floor cell checked, as Nightwing's swoop)
+  Counters: setpieces_fired miniboss_act, miniboss_act_<way>, miniboss_broken.
+- NEW GATE tools/_s34_ways.gd (headless): for all 14 keys a real miniboss set piece is stood up,
+  the way fires, the feed gets an act line from ITS pool with the hero's name filled, the way's own
+  effect is measured (called count, hp up, scale up, blinded/frightened/slowed state, distance after
+  the hook, guard), then at 20% hp exactly one broken line and no further act.
+HONEST LIMITS, NAMED: (1) "broken" is an hp threshold, not each idea's own weakness (crack the gong,
+cut the lines) - that needs a targetable prop per miniboss and is not built. (2) sower's thorn is a
+bestiary adder, the closest creature we have. (3) bellman's blink is checked as ISSUED (swoop is a
+tween), not by position. (4) The sixteen S33 bodies + leech have arrive/fall only, so they get no way:
+content has not written their idea, and I did not invent one. (5) The grow cap test is "< 1.24 then
+grow", so three logs land at x1.26 - stated as measured, not as the cap.
+- NEW LOOK tools/_s34_look.gd (windowed, 1920x1080, on a REAL built floor via _setpiece_miniboss):
+  S34_LOOK OK (2 checks) - stoker x1.26 after three logs; gaoler hook 6.0 m -> 1.6 m.
+  LOOKED AT renders/cycles/s34/stoker_1before + stoker_2after3logs: the Stoker is visibly bigger
+  beside the knight. gaoler_1before + gaoler_2hooked: Hookbait goes from across the room to the
+  Gaoler's shoulder, on the floor. My FIRST look run shot a wall: I set camera transforms in
+  _initialize before the stage was in the tree (!is_inside_tree errors). Fixed by standing the
+  stage in _process; the second and third runs are clean of that error.
+GATES: parse 0 SCRIPT ERROR / 0 Parse Error; S34_WAYS OK 88 checks; red S34_RED=1 -> S34_WAYS FAIL 4
+of 88, rc=1 (bellman pointed at a wayless key: no act, no count, no broken - all caught);
+TWITCH_PARSE OK (8 checks); MBFEED_TEST OK 80 checks; S33_DRAW OK 121 checks;
+OFFFLOOR_VERDICT OK 0 of 2184; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR;
+TOWNWALK in_solid=0/16743 raid_in_solid=0/7240 PASS.

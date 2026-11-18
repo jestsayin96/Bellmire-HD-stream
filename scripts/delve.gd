@@ -1716,6 +1716,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			_raise_tick(mon, int(ways["raise"]), delta)
 		if nearest < 16.0:
 			_lord_tick(mon, ways, alive, near, delta)
+		if nearest < 16.0 and mon.has_meta("mb_key"):
+			_mb_way_tick(mon, alive, near, delta)     # S34: the miniboss's ONE idea
 		if nd > r:
 			# a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
 			if mon.busy():
@@ -1905,6 +1907,116 @@ func _call_one(mon: Monster, spec: Dictionary, at: Vector3) -> Monster:
 	if bool(spec.get("rise", false)):
 		m.call_deferred("rise")
 	return m
+
+## S34: each miniboss's ONE IDEA as delve-side behaviour, voiced from content's own
+## miniboss_feed act/broken lines (data/lore_lines.json). Every MB_WAY_EVERY seconds while the
+## party is within 16 m the idea fires and an `act` line is said; at MB_BROKEN_FRAC of its hp the
+## idea is BROKEN for good (a `broken` line, and anything it built is undone). The fourteen keys
+## that carry act/broken lines each get a way below; a key with no act lines gets none, silently
+## by design (the sixteen S33 bodies stand up named, but content has not written their idea).
+## HONEST LIMIT: "broken" is an hp threshold, not each idea's own weakness (cracking the gong,
+## cutting the lines) - that needs a targetable prop per miniboss and is not built.
+const MB_WAY_EVERY := 8.0
+const MB_BROKEN_FRAC := 0.30
+const MB_WAYS := {
+	"drillmaster": "call", "sexton": "call", "sower": "call",
+	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
+	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
+	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
+}
+## what each caller brings: the drill's garrison, the sexton's dead (they RISE), the sower's thorn
+const MB_CALLS := {"drillmaster": "warrior", "sexton": "bones", "sower": "adder"}
+
+func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) -> void:
+	var key := String(mon.get_meta("mb_key"))
+	var way := String(MB_WAYS.get(key, ""))
+	if way == "" or bool(mon.get_meta("mb_broken", false)) or miniboss_lines(key, "act").is_empty():
+		return
+	if mon.hp / maxf(1.0, mon.max_hp) <= MB_BROKEN_FRAC:
+		mon.set_meta("mb_broken", true)
+		if way == "grow":
+			mon.scale = Vector3.ONE                       # the fire is going: back to its own size
+		if mon.has_meta("mb_base_atk"):
+			var d0: Dictionary = mon.def.duplicate()
+			d0["atk"] = float(mon.get_meta("mb_base_atk"))
+			mon.def = d0
+		_say(_miniboss_say(key, "broken"))
+		Delve.setpieces_fired["miniboss_broken"] = int(Delve.setpieces_fired.get("miniboss_broken", 0)) + 1
+		return
+	var t := float(mon.get_meta("mb_way_t", MB_WAY_EVERY * 0.5)) - delta
+	mon.set_meta("mb_way_t", t)
+	if t > 0.0:
+		return
+	mon.set_meta("mb_way_t", MB_WAY_EVERY)
+	var live_heroes := alive.filter(func(o): return float(o["hp"]) > 0.0)
+	if live_heroes.is_empty():
+		return
+	var far: Dictionary = near
+	for o in live_heroes:
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) > _flat((far["body"] as Node3D).global_position, mon.global_position):
+			far = o
+	match way:
+		"call":
+			if _live_called(mon).size() >= 2:
+				return                                    # it has its two; no act line, nothing happened
+			var a := _rng.randf() * TAU
+			var m := _call_one(mon, {"type": String(MB_CALLS.get(key, "bones")), "rise": key == "sexton"},
+				mon.global_position + Vector3(cos(a), 0, sin(a)) * (1.6 + mon._height() * 0.2))
+			var live := _live_called(mon)
+			live.append(m)
+			mon.set_meta("risen", live)
+		"plate":
+			mon.hp = minf(mon.max_hp, mon.hp + mon.max_hp * 0.06)   # a plate off the floor
+		"grow":
+			if mon.scale.x >= 1.24:
+				return
+			if not mon.has_meta("mb_base_atk"):
+				mon.set_meta("mb_base_atk", float(mon.def.get("atk", 4.0)))
+			mon.scale *= 1.08
+			var d1: Dictionary = mon.def.duplicate()
+			d1["atk"] = float(d1.get("atk", 4.0)) * 1.08
+			mon.def = d1
+		"mend":
+			for mv in dun.monsters:
+				if is_instance_valid(mv) and (mv as Monster).state != Monster.S.DEAD and _flat((mv as Monster).global_position, mon.global_position) < 10.0:
+					(mv as Monster).hp = minf((mv as Monster).max_hp, (mv as Monster).hp + (mv as Monster).max_hp * 0.10)
+		"snuff":
+			for o in live_heroes:
+				_give(o, "blinded", 2.5)                  # another lamp out
+		"hook":
+			# the hook reels the FARTHEST delver in to stand beside it
+			var hb := far["body"] as Node3D
+			var to := mon.global_position + (hb.global_position - mon.global_position).normalized() * 1.6
+			if (dun.info["cells"] as Dictionary).has(_cell_of(to)):
+				hb.global_position = Vector3(to.x, hb.global_position.y, to.z)
+			near = far
+		"strip":
+			_give(near, "frightened", 4.0)            # kit on the frame: the hero fights unhanded
+		"bar":
+			mon.set_meta("mb_guard", int(mon.get_meta("mb_guard", 0)) + 1)
+			var dw: Dictionary = mon.def.duplicate()
+			var wy: Dictionary = (dw.get("ways", {}) as Dictionary).duplicate()
+			wy["guard"] = mini(4, int(wy.get("guard", 0)) + 1)   # the drawbar: harder to hit
+			dw["ways"] = wy
+			mon.def = dw
+		"flood":
+			for o in live_heroes:
+				_give(o, "slowed", 3.0)                   # water to the ankle
+		"snare":
+			_give(near, "slowed", 4.0)
+		"blink":
+			var wp: Vector3 = (far["body"] as Node3D).global_position
+			var land := wp + (wp - mon.global_position).normalized() * 1.4   # it is behind you
+			if not (dun.info["cells"] as Dictionary).has(_cell_of(land)):
+				land = wp
+			mon.swoop(land, true)
+		"set":
+			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
+	var line := _miniboss_say_for(key, "act", near)
+	if line != "":
+		_say(line)
+	Delve.setpieces_fired["miniboss_act"] = int(Delve.setpieces_fired.get("miniboss_act", 0)) + 1
+	Delve.setpieces_fired["miniboss_act_" + way] = int(Delve.setpieces_fired.get("miniboss_act_" + way, 0)) + 1
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:
@@ -3549,6 +3661,16 @@ static func miniboss_lines(key: String, phase: String) -> Array:
 
 ## one line for the event, {name} filled with an alive delver (lines that need a
 ## hero and have none are skipped in favour of ones that do not)
+## S34: an act line names the delver the idea actually landed on ("The hook takes {name}")
+func _miniboss_say_for(key: String, phase: String, who: Dictionary) -> String:
+	var opts: Array = miniboss_lines(key, phase)
+	if opts.is_empty():
+		return ""
+	var line := String(opts[_rng.randi() % opts.size()])
+	if line.contains("{name}"):
+		line = line.replace("{name}", String((who.get("h", {}) as Dictionary).get("name", "a delver")))
+	return line
+
 func _miniboss_say(key: String, phase: String) -> String:
 	var opts: Array = miniboss_lines(key, phase)
 	var al := _alive()

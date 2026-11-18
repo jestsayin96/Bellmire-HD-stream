@@ -9402,3 +9402,11 @@ LOOKED AT (headless Edge screenshots, mock=crowd): 1500 px - 2 rows, Live..Comma
 NUMBER: tabs cut off 3 -> 0 at 1500 px; 6 -> 0 at 1280 px; tab row height 1 -> 2 rows (1500) / 3 rows (1280). Cost: ~38 px of stage height per extra row.
 CHECKS: ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd, ?open=1 all render (15 tab buttons present; 25 where the page also builds the board/lore chips); 0 img elements carrying onerror; the <colour> canary still shows literal &lt; text. Live-dot colour unchanged.
 Untracked in worktree and still refused-delete: _tabs_a/b/c.png (this run), plus _h32_shot_a..f.png, _hub_web_run.tgz, web_look*.tar, _plan_tmp.txt.
+
+## U65 - 2026-11-17 23:5x CT - the "h=96 reads clear=false" limit was a MISSTATEMENT in U64; the instrument never read false (HUD)
+Row: WORK_PLAN 22:58 HUD row - U62's h=96 at 100% "reads clear=false by 0.73 px": fix it or declare it unfixable in writing.
+FINDING: neither. The claim is wrong, and it was mine (U64's HONEST LIMIT). tools/_u62_scales.gd has no 1 px floor: ok = stripe_top >= ink_bot - 0.05 and stripe_bottom <= rod_bot + 0.05. At h=96/100% stripe_top - ink_bot = +0.72, so clear=true. Checked in U62's, U63's and today's logs: every h=96 line after U62's fix says clear=true; the only 0.00 line is the pre-fix 'before' run. I wrote "clear=false" from a remembered 1 px threshold that is not in the file.
+RE-MEASURED, WINDOWED 1920x1080, current bytes (no .gd changed): U62_SCALES OK bad=0. stripe_top-ink_bot 0.72 (100%, all four heights incl. h=96) / 0.82 (125%) / 0.24 (150%). 0 SCRIPT ERROR / Parse Error in the run log. Log _u65_run.log.
+LOOKED AT: renders/cycles/20261117_u62/rod_u65_s100_h96.png (3x crop of the top rod, h=96, 100%): CHRONICLE wordmark sits above the grain stripe, no ink on the stripe rows, stripe a thin pale-brown band under the letters.
+SO THE OWED ITEM CLOSES BY CORRECTION, not by a code change: no lying instrument exists here, there is nothing to fix and nothing unfixable. The only true residual is that the clearance margin at 150% is 0.24 px (stripe clear of ink by under a quarter pixel); it is positive, computed from _wm_baseline, and gated by U63/U64, so I leave it.
+Files: PROGRESS.md only (plus the _u65 log, not committed). Not ticked by me.

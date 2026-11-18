@@ -122,6 +122,22 @@ func _process(_dt: float) -> bool:
 	if _f == 40:
 		_shot("rammer_2after")
 		print("  FEED: ", " | ".join(PackedStringArray((_d.town.get("feed") as Array).map(func(x): return String(x)))))
+		# S39: one drop that RESOLVES ON CAMERA - repeat until the count strikes someone, then shoot it
+		var s0 := Delve.rammer_struck
+		var r0 := _rings()
+		for k in 12:
+			for m in _d.party:
+				m["hp"] = 100.0
+			_haul()
+			_d._mb_way_tick(_mon, _d.party, _d.party[0], 2.1)
+			if Delve.rammer_struck > s0:
+				break
+		_ok(Delve.rammer_struck > s0, "S39: a drop on camera struck someone on the pile")
+		_ok(_rings() > r0, "S39: the count is seen - a shock ring spawned (%d)" % (_rings() - r0))
+		_ok(_hps().any(func(x): return x < 100.0), "S39: a delver is hurt in the drop shot")
+	if _f == 48:
+		_shot("rammer_3drop")
+	if _f == 49:
 		# broken mid-hold: the rope parts and the iron never comes down
 		_haul()
 		var d1 := _drops()
@@ -134,6 +150,13 @@ func _process(_dt: float) -> bool:
 		_ok(not Delve.setpieces_fired.has("order_held"), "order_held is not in setpieces_fired")
 		return _finish()
 	return false
+
+func _rings() -> int:
+	var n := 0
+	for c in root.find_children("*", "MeshInstance3D", true, false):
+		if (c as MeshInstance3D).mesh is TorusMesh:
+			n += 1
+	return n
 
 func _finish() -> bool:
 	if _fails.is_empty() and _checks >= 10:

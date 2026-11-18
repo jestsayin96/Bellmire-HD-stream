@@ -1,3 +1,63 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 07:04 CT (team lead, the 06:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT. The file reads reverse chronological:
+the most recently WRITTEN block is the current one, not the first unchecked line you meet.
+NOTE ON TIMING: written at 07:04 CT, so the game build's :07 run may already have read the
+06:2x rows. Nothing below contradicts them; row 1 is new work for the lane.
+
+1. GAME BUILD - THE THIRD RARITY TABLE, scripts/fishing.gd RARITY_COLOR (line 12).
+   Art ruled on it at 06:40 CT in tools/art/icons.py (the block above RARITY_HUE_LAMP) because
+   this seat asked at 05:58. I RE-DID ITS ARITHMETIC CHANNEL BY CHANNEL AND IT IS EXACT:
+     rare       canonical (0.30,0.55,1.00) +0.10 = (0.40,0.65,1.00) = fishing's row. d=0.00
+     very rare  canonical (0.70,0.35,1.00) +0.10 = (0.80,0.45,1.00) = fishing's row. d=0.00
+     legendary  canonical (1.00,0.55,0.12) +0.10 = (1.00,0.65,0.22) vs (1.00,0.66,0.20). d=0.02
+   THOSE THREE ARE A SANCTIONED VARIANT (a light_color and an emission want the lifted value).
+   TWO ARE DRIFT AND THEY ARE THE TWO A VIEWER MEETS FIRST:
+     uncommon is GREEN (0.45,0.95,0.45) where the 520-icon ladder and the hub say WHITE. d=0.55
+     common is PAINTED (0.92,0.92,0.90) where the ladder leaves it BARE, and it lands 0.10 from
+       canonical white, so fishing's COMMON reads as the ladder's UNCOMMON.
+   ALSO MEASURED BY ME, AND ART HAD IT RIGHT: data/fishing.json junk rows carry a rarity -
+   5 common, 1 uncommon, 1 rare - so a boot comes up blue. And `artifact` is genuinely
+   unreachable there (rarities stops at legendary), so its absence is NOT a hole.
+   ONE CORRECTION TO ART'S BLOCK: it says Fishing.colour() is used TWICE in angler.gd. It is
+   used THREE times - :263 banner text, :351 OmniLight3D light_color, :367 d.emission. The
+   third use has the same reason as the light, so the ruling stands; only the count was short.
+   THIS IS NOT A NEW ITEM AND I SAY SO OUT LOUD: U55 made art's table canonical, so a third
+   table drifting from it is a defect in shipped work, and the file is yours, not art's.
+2. GAME BUILD, SECOND AND SMALLER - THE S32 SIDE CAMERA. I measured your own renders:
+   fenman_1front feet span x1071-1341 (270 px); fenman_2side feet span x971-1244 (274 px).
+   A true 90-degree side view should show the stance NARROWER than the front, not the same.
+   That is the shape of the fault art closed at FAULT 4 (side camera on the offhand side).
+   Say what the azimuth actually is, and say what the SECOND dark mass at head height in
+   fenman_2side is (blobs at x1063-1112 and x1142-1198 at y~360) - creel, or a second body.
+   I did not tick that one claim; I ticked the rest of S32. See below.
+3. HUD - THE RARITY-HUE HALF OF SYSTEM 2 IS STILL THE MOST VALUABLE OPEN ITEM IN THE HOUSE.
+   U71's one-table guard is merged and ticked. It guards UiTheme vs art's icons.py. It does
+   NOT guard the third table. Once the game build lands row 1, extend _u71_rarity_guard.gd to
+   read scripts/fishing.gd RARITY_COLOR and assert the three sanctioned rungs equal art's
+   RARITY_HUE_LAMP and that common/junk stay bare. Until then, carry on with System 2's hue.
+4. ART - the Comfitmaker (31st) is ticked, with the fullest fit set any miniboss has shipped
+   (front, side, three_quarter, hero_front, hero_side, hero_back). Minibosses remain the one
+   thing a dry lane may invent. Your call.
+5. CHAT BOT - B48's counted arm is ticked. ChatCmd.guard_faults() is the right shape: a count
+   a harness can read, where push_error could never move an exit code. Your call next.
+6. CONTENT - C-109 is ticked; I counted the arrays myself (fenman arrive 9, fall 8, 17 lines,
+   by_key now 30 keys). ONE WORDING FIX, NOT A DATA CHANGE: _note_c109 says "same shape as the
+   other 29". It is not - 14 keys carry act/broken/arrive/fall and 16 carry arrive/fall only.
+   Fenman matches the 16, which is the recent cohort. Correct the note when you next touch it.
+7. HUB - no build row again this hour; web/ is unchanged and I ran NO publish verification,
+   because you made no "ready to publish" claim and an unearned gate report is the same fault
+   class as a lying gate. The section-bar fix Mr. E asked for stays merged and UNPUBLISHED.
+
+FOR THE SUPERVISOR
+  - THE HUB IS STILL UNPUBLISHED AND THE GAP IS NOW A DAY OLD. gh-pages is 40223be and
+    origin/gh-pages^{tree} does NOT equal origin/hub:web. The section-bar fix Mr. E himself
+    asked for is merged and ticked and is not what the live page serves. Publishing is yours.
+    MY RECOMMENDATION: authorise the push. I have not run the publish gate this hour (no lane
+    claim to earn it); say the word and the next firing runs the full gate before pushing.
+  - FOR VISIBILITY, NOT A DECISION I AM ASKING YOU TO TAKE: row 1 changes a player-visible
+    colour (fishing's uncommon stops being green). I read it as a defect fix under U55 rather
+    than a new item, and the game build owns the file. Say so if you read it differently.
+
 # WORK PLAN - Bellmire HD
 
 ================================================================================

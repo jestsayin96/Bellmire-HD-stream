@@ -1462,7 +1462,21 @@
       "Cold air. Stairs are close.",
       "Straps tight. Packs tight.",
       "Nobody sings down here.",
-      "Slow on the first steps."
+      "Slow on the first steps.",
+      "Lamp lit. Door shut behind us.",
+      "First step's always the loud one.",
+      "Two torches. One spare.",
+      "Stairs are dry. Good sign.",
+      "Hands off the walls.",
+      "Water in the bottle. Water in the boots. Go.",
+      "Quiet. Keep it quiet.",
+      "Anyone forget anything? Too late.",
+      "Draught from below. Something's open.",
+      "Mark the turn. Every turn.",
+      "Rations counted. Go.",
+      "Hear that? No? Good.",
+      "Dark's no worse than last time.",
+      "Pace it. We're here a while."
     ],
     "lord": [
       "Hold together!",
@@ -1688,7 +1702,21 @@
       "Don't both stand in one place.",
       "Wait for the breath. Then go.",
       "Keep your back to the wall.",
-      "It's big. It still bleeds."
+      "It's big. It still bleeds.",
+      "It turns slowly. Use that.",
+      "Don't answer its roar.",
+      "Watch the hands, not the horns.",
+      "Spread out. It can't hit three.",
+      "One at a time on the left.",
+      "Let it tire. We won't.",
+      "Mend the line. Hold the line.",
+      "It's favouring the one leg.",
+      "Eyes up. It's winding.",
+      "Back off when it breathes in.",
+      "Stay behind the shield.",
+      "Make it reach for us.",
+      "Hit and step back. Hit and step back.",
+      "Nobody ever won by running first."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -1917,7 +1945,21 @@
       "Floor rings hollow. Test it.",
       "Fresh oil on the hinge. Not ours.",
       "Pole first. Then feet.",
-      "Arrow slits. Both sides. Down."
+      "Arrow slits. Both sides. Down.",
+      "Wall's scratched at knee height. Mind it.",
+      "Floor's polished here. Wrong kind of polished.",
+      "Dry bones in a pile. Something put them there.",
+      "Stone's warm. Stop.",
+      "Drip where there's no roof.",
+      "Rope across the way. Too tidy.",
+      "Smells of oil and old iron.",
+      "Plate by the door. Step round.",
+      "Dust on everything but this one tile.",
+      "Slow down. Floor's lying.",
+      "Something scraped here. Fresh.",
+      "Dart holes. Low and level.",
+      "Hold the lamp out. Look first.",
+      "Skip the third step."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2140,7 +2182,21 @@
       "Sit a breath. Then up.",
       "Tooth's loose. Still here.",
       "Wrap it. Don't poke it.",
-      "Arm works. That's enough."
+      "Arm works. That's enough.",
+      "Got me good. Still standing.",
+      "Leg's wet. Wrap it.",
+      "Ears ringing. Give me a moment.",
+      "Cut's clean. That's something.",
+      "Lost a bit of skin. Keep going.",
+      "Bruise by morning. Moving anyway.",
+      "Shoulder's out of true. Walk it off.",
+      "Blood in the boot. Annoying.",
+      "Don't fuss. Keep your eyes up.",
+      "Stung worse than it looks.",
+      "Mouth tastes of copper.",
+      "Held. It'll hold.",
+      "Not dead. Mark that.",
+      "Pull the strap tighter."
     ],
     "drink": [
       "Bottoms up.",
@@ -2357,7 +2413,21 @@
       "That one's sharp. Feels right.",
       "Pass the flask. Only a mouthful.",
       "Head's clear. Hands too.",
-      "Saved the last drop."
+      "Saved the last drop.",
+      "Down in one. Don't taste it.",
+      "Tastes worse than it smells.",
+      "Warm in the chest. Good.",
+      "Thin stuff. Better than nothing.",
+      "Cold as well water.",
+      "Wipe the neck first.",
+      "Copper and mint.",
+      "One gulp. Leave the rest.",
+      "It stings. It's working.",
+      "Salt and honey. Odd mix.",
+      "Rinse, spit, drink. Habit.",
+      "Feeling comes back to the fingers.",
+      "Last of the batch. Make it count.",
+      "Grim stuff. Steady hands after."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2580,7 +2650,21 @@
       "It stuttered. Nothing else.",
       "Spent too soon. Rest a moment.",
       "Cold fingers. Cold spell.",
-      "Said it right. It didn't take."
+      "Said it right. It didn't take.",
+      "Scar flickered. So did I.",
+      "Meant fire. Got a spark.",
+      "Said the words. Wrong order.",
+      "The scar's laughing at me.",
+      "Hot hands. Nothing to show.",
+      "Lost the end of it.",
+      "It went sideways. Nobody hurt.",
+      "Knuckles itch. Spell's gone off.",
+      "Mouthed it. Nothing came.",
+      "It took the wrong thing.",
+      "Not me. The scar. Blame the scar.",
+      "Smoke and no flame. Typical.",
+      "Breath ran out first.",
+      "Once more. Slow."
     ]
   },
   "misfire": [
@@ -12192,5 +12276,6 @@
       ]
     }
   },
-  "_note_c116": "C-116: +32 live tells, four to each origin in the tells table (tomb, mine, fortress, temple, lair, prison, works, warren). Read at delve.gd:170, appended to the origin's own tell and drawn once per delve. Same shape: plain strings. Additive; no floor count. Expected zero-hit key; no lane is to wire it."
+  "_note_c116": "C-116: +32 live tells, four to each origin in the tells table (tomb, mine, fortress, temple, lair, prison, works, warren). Read at delve.gd:170, appended to the origin's own tell and drawn once per delve. Same shape: plain strings. Additive; no floor count. Expected zero-hit key; no lane is to wire it.",
+  "_note_c117": "C-117 (18 Nov 2026): +14 live bark lines on each of the six kinds (enter, lord, trap, hurt, drink, misfire), 84 in all, plain strings in the existing shape. Read at delve.gd:3781 by kind, so they are in the game the moment they merge. Every line is unique across the whole barks block. Plain declaratives, no name tokens, no floor count. Expected zero-hit key; no lane is to wire it."
 }

@@ -16,6 +16,7 @@ var _r: Roster
 var _heroes: Array = []      # [host, model, key, on_floor]
 var _shots: Array = []
 var errs: Array = []
+const DRINK_T := 0.7
 
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
@@ -72,6 +73,9 @@ func _initialize() -> void:
 		var n := "floor" if pair[1] else "drink"
 		_shots.append([n + "_1front", Vector3(x, 1.1, -4.2), Vector3(x, 0.9, 0)])
 		_shots.append([n + "_2side", Vector3(x - 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
+		if not pair[1]:
+			# S31c: the drinking hand's side - from the far side the chibi head hides the held bottle
+			_shots.append([n + "_2side_hand", Vector3(x + 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
 		x += 6.0
 	_shots.append(["both_3stream", Vector3(3.0, 9.0, -14.0), Vector3(3.0, 0.8, 0)])
 
@@ -89,14 +93,24 @@ func _process(_d: float) -> bool:
 	_f += 1
 	if _f == 30:
 		for h in _heroes:
+			var ap := Rig.find(h[1])
+			if not h[3] and ap:
+				Rig.play(ap, "Use_Item")     # S31c: what Delve.drink() plays before it shows the bottle
 			_dl._show_vial({"body": h[0]}, h[2], h[3])
+			if not h[3] and ap:
+				ap.play("Use_Item", 0.0)     # no blend: a paused blend would hold the shot mostly in Idle
+				ap.seek(DRINK_T, true)      # the sip: Use_Item's hand is highest at 0.7 s (_s31c_probe)
+				ap.pause()
 		for t in get_processed_tweens():
 			t.pause()        # freeze each bottle where it STARTS
+	if _f == 33:
+		for t in get_processed_tweens():
+			t.custom_step(0.001)   # S31c: one zero step so the held bottle follows the hand to the seeked sip pose
 	if _f == 34:
 		var vials: Array = []
-		for c in _dl.get_children():
-			if String(c.name).begins_with("Vial_"):
-				vials.append(c)
+		for c in root.find_children("Vial_*", "", true, false):
+			vials.append(c)
+		vials.sort_custom(func(a, b): return (a as Node3D).global_position.x < (b as Node3D).global_position.x)
 		if vials.size() != 2:
 			errs.append("expected 2 vials, live path made %d" % vials.size())
 		for i in range(mini(vials.size(), _heroes.size())):
@@ -134,6 +148,19 @@ func _process(_d: float) -> bool:
 			else:
 				if head_y > 0.0 and absf(vb.get_center().y - head_y) > 0.45:
 					errs.append("drink bottle %.2f m off the head" % (vb.get_center().y - head_y))
+				# S31c: A CLEARANCE CANNOT TELL A HELD BOTTLE FROM A FLOATING ONE. Ask who holds it.
+				var par := v.get_parent()
+				var held := par is BoneAttachment3D and String((par as BoneAttachment3D).bone_name).begins_with("hand")
+				print("S31_FIT HELD %s: parent %s bone %s -> %s" % [v.name, par.get_class() if par else "none",
+					String((par as BoneAttachment3D).bone_name) if par is BoneAttachment3D else "-", "HELD" if held else "NOT HELD"])
+				if not held:
+					errs.append("drink bottle is NOT held - parent %s, not a hand bone" % (par.name if par else "none"))
+				else:
+					# and it must be AT the hand, not merely parented there and drawn somewhere else (top_level)
+					var grip := (par as Node3D).global_position.distance_to(Vector3(vb.get_center().x, vb.position.y, vb.get_center().z))
+					print("S31_FIT HELD %s: bottle base %.2f m from the hand bone" % [v.name, grip])
+					if grip > 0.30:
+						errs.append("drink bottle base %.2f m from the hand that holds it" % grip)
 	if _f < 40:
 		return false
 	if (_f - 40) % 10 == 0:

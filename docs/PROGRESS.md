@@ -3340,3 +3340,37 @@ GATES (verdict lines): PARSE 0 errors (rc 0); S31_VIAL OK (counts heal 45 / spee
 232; live vials [Vial_heal, Vial_speed, Vial_ward]); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0
 of 2175 samples off the floor; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/17732
 raid_in_solid=0/5055 PASS. No live Twitch test, nothing spent. Backup scripts/delve.gd.bak_s31 (untracked).
+
+## D-cycle - S31c SYSTEM 5: THE DRINK IS HELD. THE BOTTLE RIDES THE HAND BONE, THE HAND COMES UP TO THE MOUTH, AND THE GATE NOW ASKS WHO HOLDS IT. 2026-11-18T05:19:02-06:00 (game build)
+Row (04:58 TAKE THIS NEXT, game build): S31 half delivered - the drink pose put the vial in mid-air with
+both arms hanging. Claim 05:09-06:00, cap 05:34.
+- MEASURED FIRST (tools/_s31c_probe.gd, new, headless): on the knight, Use_Item (what Delve.drink()
+  already plays) lifts the RIGHT hand: handslot.r 0.64 -> 1.10 m at t 0.7 s, ~0.3 m ahead; the left hand
+  never moves (0.59-0.64). So the hand is handslot.r.
+- scripts/delve.gd _show_vial, DRINK PATH ONLY: a BoneAttachment3D "eq_vial" on handslot.r of the body's
+  skeleton holds the bottle. It is top_level so it keeps the world's up (the hand's own roll laid it on
+  its side inside the chibi fist in my first render - looked at, rejected), follows the hand's POSITION
+  every frame for the 1.6 s clip, stands VIAL_LIFT 0.12 m out of the fist and leans VIAL_TIP 20 deg back
+  toward the mouth. The weapon in that hand (eq_weapon) is hidden for the sip and restored when the
+  bottle goes. No skeleton -> the old floating path, unchanged. The FLOOR half is untouched.
+- tools/_s31_fit.gd: the drink hero now plays Use_Item and is seeked (no blend - a paused 0.15 blend held
+  the first shot in Idle, arm down; caught on the picture) to t 0.7. NEW ASSERTIONS, the instrument the
+  row asked for: the drink bottle's parent must be a BoneAttachment3D on a hand* bone, AND its base must
+  be within 0.30 m of that bone (so a top_level bottle parented to the hand but drawn elsewhere is red).
+  One new shot, drink_2side_hand: from the far side the chibi head hides the held bottle.
+- RED PROOF: the new S31_FIT against the OLD delve.gd (.bak_s31c, swapped in and restored, md5 622f7d50
+  back): "S31_FIT HELD Vial_heal: parent Node3D -> NOT HELD", S31_FIT FAIL ["drink bottle is NOT held -
+  parent @Node3D@9, not a hand bone"]. Every clearance check passed on that floating bottle - the row's
+  point exactly. The grip-distance arm also read red once on my own intermediate code (base 0.60 m from
+  the hand when the follow tween had not stepped) before I fixed the harness step.
+- LOOKED AT: drink_1front.png - the right fist raised to the chin, red bottle standing in it, neck at the
+  mouth. drink_2side_hand.png - the arm bent, fist at the jaw, bottle in it, neck at the lips. A knight
+  drinking, not a floating potion. both_3stream.png - the red bottle reads at the raised hand at stream
+  distance, the blue find on the floor beside the other knight.
+- STILL NOT SEEN IN A LIVE DELVE: the 9001-frame _delve_test had no drink again (0 "drinks" lines), so
+  the in-delve path is exercised by S31_FIT on a real KayKit body through the real _show_vial.
+GATES (verdict lines): PARSE 0 errors (rc 0); S31_FIT OK (drink: HELD on handslot.r, base 0.09 m from
+the hand, centre y 1.39 vs head bone 1.20); S31_VIAL OK (heal 45 / speed 17 / ward 170 of 232);
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2089 samples off the floor; DELVE_TEST OK ran 9001
+frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/17500 raid_in_solid=0/7663 PASS. No live Twitch test,
+nothing spent. Backups scripts/delve.gd.bak_s31c, tools/_s31_fit.gd.bak_s31c (untracked).

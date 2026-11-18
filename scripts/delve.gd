@@ -3119,6 +3119,9 @@ const VIAL_SCALE := 2.6        # a 14-26 cm bottle is invisible at stream distan
 const VIAL_RED := Color(0.92, 0.12, 0.10)
 const VIAL_GREEN := Color(0.25, 0.90, 0.20)
 const VIAL_BLUE := Color(0.20, 0.45, 1.00)
+const VIAL_HAND := "handslot.r"   # S31c: the hand Use_Item lifts to the mouth
+const VIAL_LIFT := 0.12            # S31c: the bottle stands this far up out of the fist
+const VIAL_TIP := 20.0             # S31c: degrees the neck leans back toward the mouth
 var _vial_scn := {}
 
 static func vial_kind(p: Dictionary) -> String:
@@ -3166,12 +3169,52 @@ func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
 		_vial_scn[path] = load(path)
 	var v: Node3D = (_vial_scn[path] as PackedScene).instantiate()
 	v.name = "Vial_" + kind
+	_tint_vial(v, vial_colour(kind))
+	var bn := b as Node3D
+	# S31c: THE DRINK IS HELD. The 04:58 render showed the bottle hanging before the visor with both arms
+	# down - nothing held it. Use_Item (drink() plays it) lifts the RIGHT hand to the mouth: measured on the
+	# knight by tools/_s31c_probe.gd, handslot.r rises 0.64 -> 1.10 m at t 0.7 s, 0.3 m ahead, head bone 1.20.
+	# So the bottle rides handslot.r, and the weapon in that hand is lowered out of sight for the sip.
+	var sk: Skeleton3D = null if on_floor else Rig.skeleton(bn)
+	if sk != null and sk.find_bone(VIAL_HAND) >= 0:
+		var old := sk.get_node_or_null(NodePath("eq_vial"))
+		if old:
+			old.free()
+		var att := BoneAttachment3D.new()
+		att.name = "eq_vial"
+		att.bone_name = VIAL_HAND
+		sk.add_child(att)
+		att.add_child(v)
+		# held UPRIGHT and lifted out of the fist: the hand's own roll laid the bottle on its side inside a
+		# chibi fist in the first S31c render, so it follows the hand's POSITION but keeps the world's up
+		v.top_level = true
+		# top_level keeps the global transform it had under the hand, roll and all, so set the basis outright:
+		# upright, the neck tipped back toward the mouth - a sip, not a bottle pointed at the viewer
+		var fw := bn.global_transform.basis.z
+		fw = Vector3(fw.x, 0, fw.z).normalized() if Vector3(fw.x, 0, fw.z).length() > 0.01 else Vector3.BACK
+		v.global_transform = Transform3D(Basis(fw.cross(Vector3.UP).normalized(), deg_to_rad(VIAL_TIP)).scaled(Vector3.ONE * VIAL_SCALE),
+			att.global_position + Vector3(0, VIAL_LIFT, 0))
+		var follow := func(_x: float) -> void:
+			if is_instance_valid(v) and is_instance_valid(att):
+				v.global_position = att.global_position + Vector3(0, VIAL_LIFT, 0)
+		v.create_tween().tween_method(follow, 0.0, 1.0, 1.6)
+		var wpn := sk.get_node_or_null(NodePath("eq_weapon")) as Node3D
+		var wv := wpn != null and wpn.visible
+		if wv:
+			wpn.visible = false
+		var th := v.create_tween()
+		th.tween_interval(1.3)
+		th.tween_property(v, "scale", Vector3.ONE * VIAL_SCALE * 0.01, 0.3)
+		th.tween_callback(func():
+			if wv and is_instance_valid(wpn):
+				wpn.visible = true
+			if is_instance_valid(att):
+				att.queue_free())
+		return
 	v.top_level = true
 	v.scale = Vector3.ONE * VIAL_SCALE
-	_tint_vial(v, vial_colour(kind))
 	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
 	host.add_child(v)
-	var bn := b as Node3D
 	# S31 fit: a body LOOKS down +z (KayKit faces +z; the delve turns it by rotation.y = atan2(dx, dz)),
 	# so +basis.z is in front of the face. The first cut used -z and every bottle sat behind the head.
 	var fwd := bn.global_transform.basis.z.normalized()

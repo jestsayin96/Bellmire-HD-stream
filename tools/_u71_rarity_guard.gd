@@ -4,10 +4,15 @@ extends SceneTree
 ## UiTheme.RARITY_HUE must equal it digit-for-digit on rare / very rare / legendary / artifact,
 ## junk / starting / common must stay BARE on both sides, uncommon must be art's sanctioned
 ## parchment value (not a re-choice), and the ink ladder must not grow a rung the hue ladder lacks.
+## U74b (18 Nov, TAKE THIS NEXT 07:04 row 3) adds the THIRD table: scripts/fishing.gd RARITY_COLOR.
+## Art ruled it a SANCTIONED LAMP VARIANT: rare / very rare / legendary = canonical +0.10 per channel
+## (clamped), uncommon = white (the ladder's claim, not the MMO green), common / junk / starting BARE.
 ## Run: <console> --headless --path W2 --script res://tools/_u71_rarity_guard.gd
 const PY := "res://tools/art/icons.py"
 const CANON4 := ["rare", "very rare", "legendary", "artifact"]
 const BARE := ["junk", "starting", "common"]
+const FISH_GD := "res://scripts/fishing.gd"
+const LAMP_RUNGS := ["rare", "very rare", "legendary"]
 
 ## the RARITY_HUE block of icons.py as {rung: Color or null}
 static func parse_py(txt: String) -> Dictionary:
@@ -67,6 +72,46 @@ static func audit(ui_hue: Dictionary, ui_ink: Dictionary, py: Dictionary, parch)
 			f.append("INK %s: ink rung with no hue rung" % k)
 	return f
 
+## the RARITY_COLOR block of fishing.gd as {rung: Color}
+static func parse_fish(txt: String) -> Dictionary:
+	var out := {}
+	var a := txt.find("const RARITY_COLOR := {")
+	if a < 0:
+		return out
+	var b := txt.find("}", a)
+	var re := RegEx.new()
+	re.compile("\"([a-z ]+)\":\\s*Color\\(\\s*([0-9.]+),\\s*([0-9.]+),\\s*([0-9.]+)\\s*\\)")
+	for m in re.search_all(txt.substr(a, b - a)):
+		out[m.get_string(1)] = Color(float(m.get_string(2)), float(m.get_string(3)), float(m.get_string(4)))
+	return out
+
+static func lamp(c: Color) -> Color:
+	return Color(minf(c.r + 0.10, 1.0), minf(c.g + 0.10, 1.0), minf(c.b + 0.10, 1.0))
+
+## the third table against art's canon: three lamp rungs, white uncommon, bare baseline
+static func audit_fish(fish: Dictionary, py: Dictionary) -> Array:
+	var f := []
+	if fish.size() != 4:
+		f.append("FISH TABLE: read %d rungs from fishing.gd RARITY_COLOR, expected 4 (parser or table changed)" % fish.size())
+	for r in LAMP_RUNGS:
+		if not py.has(r) or py[r] == null:
+			f.append("FISH %s: art has no hue to lift" % r)
+		elif not fish.has(r):
+			f.append("FISH %s: fishing.gd lacks the lamp rung" % r)
+		elif not same(fish[r], lamp(py[r])):
+			f.append("FISH DRIFT %s: fishing %s vs art lamp %s" % [r, fish[r], lamp(py[r])])
+	if not fish.has("uncommon"):
+		f.append("FISH uncommon: missing")
+	elif not same(fish["uncommon"], Color(1, 1, 1)):
+		f.append("FISH UNCOMMON: %s is not the ladder's white (green is the MMO convention)" % fish["uncommon"])
+	for r in BARE:
+		if fish.has(r):
+			f.append("FISH %s: bare rung carries a hue in fishing.gd (reads as the rung above it)" % r)
+	for k in fish.keys():
+		if k != "uncommon" and not LAMP_RUNGS.has(k):
+			f.append("FISH %s: a rung the fishing ladder cannot reach or art does not lift" % k)
+	return f
+
 func _initialize() -> void:
 	var ui = load("res://scripts/ui_theme.gd")
 	var hue: Dictionary = ui.RARITY_HUE
@@ -82,7 +127,13 @@ func _initialize() -> void:
 	var real := audit(hue, ink, py, parch)
 	for l in real:
 		print("FAIL ", l)
-	var bad := real.size()
+	var ff := FileAccess.open(FISH_GD, FileAccess.READ)
+	var ftxt := "" if ff == null else ff.get_as_text()
+	var fish := parse_fish(ftxt)
+	var real_fish := audit_fish(fish, py)
+	for l in real_fish:
+		print("FAIL ", l)
+	var bad := real.size() + real_fish.size()
 	## RED PROOFS: each mutation of the UI table MUST be caught; the clean table must not be.
 	var muts := {
 		"rare nudged": func(h, _i): h["rare"] = Color(0.30, 0.55, 0.99),
@@ -115,5 +166,47 @@ func _initialize() -> void:
 		bad += 1
 	else:
 		proofs += 1
+	## THIRD-TABLE RED PROOFS: each shape of drift that shipped or could ship must be caught
+	var fmuts := {
+		"fish uncommon green (shipped)": func(h): h["uncommon"] = Color(0.45, 0.95, 0.45),
+		"fish common painted (shipped)": func(h): h["common"] = Color(0.92, 0.92, 0.90),
+		"fish junk painted": func(h): h["junk"] = Color(0.5, 0.5, 0.5),
+		"fish legendary old (1.00,0.66,0.20)": func(h): h["legendary"] = Color(1.00, 0.66, 0.20),
+		"fish rare nudged": func(h): h["rare"] = Color(0.40, 0.65, 0.99),
+		"fish rare lost": func(h): h.erase("rare"),
+		"fish uncommon lost": func(h): h.erase("uncommon"),
+		"fish epic invented": func(h): h["epic"] = Color(0.8, 0.45, 1.0),
+		"fish rare unlifted (canonical)": func(h): h["rare"] = Color(0.30, 0.55, 1.00),
+	}
+	var fproofs := 0
+	for name in fmuts.keys():
+		var h3: Dictionary = fish.duplicate(true)
+		fmuts[name].call(h3)
+		if audit_fish(h3, py).is_empty():
+			print("FAIL REDPROOF '%s' was NOT caught" % name)
+			bad += 1
+		else:
+			fproofs += 1
+	## text-side: edit fishing.gd's own uncommon back to the old green -> parse must see it and fail
+	var fedit := ftxt.replace("\"uncommon\": Color(1.00, 1.00, 1.00)", "\"uncommon\": Color(0.45, 0.95, 0.45)")
+	if fedit == ftxt:
+		print("FAIL REDPROOF fish text-edit: uncommon line not found to mutate")
+		bad += 1
+	elif audit_fish(parse_fish(fedit), py).is_empty():
+		print("FAIL REDPROOF 'fishing.gd text reverted to green' NOT caught")
+		bad += 1
+	else:
+		fproofs += 1
+	## and art-side: art edits the lamp's source rung -> the lifted expectation moves, fishing must now fail
+	var art2 := txt.replace("\"rare\":      (0.30, 0.55, 1.00)", "\"rare\":      (0.30, 0.50, 1.00)")
+	if art2 == txt:
+		print("FAIL REDPROOF art-edit rare: line not found to mutate")
+		bad += 1
+	elif audit_fish(fish, parse_py(art2)).is_empty():
+		print("FAIL REDPROOF 'art edits rare, fishing silent' NOT caught")
+		bad += 1
+	else:
+		fproofs += 1
+	print("U71_FISH rungs_fish=", fish.size(), " redproofs_caught=", fproofs, "/", fmuts.size() + 2)
 	print("U71_GUARD ", "OK" if bad == 0 else "FAIL", " rungs_py=", py.size(), " ui_rungs=", hue.size(), " redproofs_caught=", proofs, "/", muts.size() + 1, " fails=", bad)
 	quit(0 if bad == 0 else 1)

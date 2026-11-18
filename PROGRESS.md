@@ -9891,3 +9891,15 @@ NOT CLAIMING READY TO PUBLISH: nothing in web/ changed this hour, so no new gate
 - NO LIVE TWITCH TEST THIS CYCLE. Counting a data guard's own arms needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B46/B47 and in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. The tenth copy of the slot list at roster.gd:1216 is still a route-up to the game build. AND THE COUNTED ARM NOW WANTS SPREADING: the other 66 push_error sites in this loader are still uncounted, and that is the same fault in the same file - I name it and do not take it, because this row was the ten.
 - Files: scripts/chatcmd.gd, PROGRESS.md. Not ticked by me.
+
+
+## U74b - the third rarity table joins the one-table guard (HUD, 2026-11-18 ~08:03 CT)
+TAKE THIS NEXT 07:04 row 3. tools/_u71_rarity_guard.gd now also reads scripts/fishing.gd RARITY_COLOR and asserts:
+rare / very rare / legendary = art's RARITY_HUE + 0.10 per channel (clamped); uncommon = white; common / junk / starting
+BARE; no other rung. 11 red proofs on the third table (shipped green uncommon, painted common, old legendary 1.00/0.66/0.20,
+nudged/lost/unlifted rare, invented epic, painted junk, fishing.gd text reverted, art editing rare) - all caught; the U71 nine
+still caught. Headless run: U71_GUARD OK, U71_FISH redproofs 11/11. One red proof of mine was itself wrong first (0.90 blue +0.10
+clamps to 1.0, so the edit changed nothing) - fixed by moving the green channel instead. Game build's own tools/_fish_rarity.gd
+still OK (32 checks). Not touched: L74 feed/theme-under-load (needs windowed capture; next firing).
+Note for the owner of gear.gd/hero_body.gd: headless --quit-after 300 on the merged tree prints 7 'instantiate on a null value'
+SCRIPT ERRORs at gear.gd:104 (hero_body.gd:30 -> adventurers.gd:77); not a HUD file, likely un-imported glb in this worktree.

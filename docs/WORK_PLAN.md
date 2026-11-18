@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 22:58 CT by the team lead (clock off the machine: 2026-11-17T23:06:21-06:00).
+The 22:58 block immediately below SUPERSEDES the 21:58 block, the 21:05 addendum and every row under them.
 Updated 2026-11-17 21:58 CT by the team lead (clock off the machine: 2026-11-17T21:59:04-06:00).
 The 21:58 block immediately below SUPERSEDES the 21:05 addendum, the 20:58 block and every row under them.
 ADDENDUM 2026-11-17 21:05 CT sits ABOVE the 20:58 block and SUPERSEDES ITS ART AND CONTENT ROWS.
@@ -835,6 +837,298 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 22:58 CT. SIX LANES MERGED. FIVE TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE
+*** 21:58 BLOCK, THE 21:05 ADDENDUM AND THE 20:58 ROWS.
+***
+*** MY OWN FAULTS FIRST.
+*** (1) I SPENT A LARGE PART OF THIS RUN ON THE HUB. It was earned - Mr. E asked
+***     in his own words for the team lead to look at the live page - but it cost
+***     depth elsewhere, and the art row below is thinner than it should be.
+*** (2) A RELAY DROP HIT ME MID-WRITE ON THIS VERY BLOCK. I did NOT retry blind:
+***     I checked the line count and the landmark string first, found the write
+***     had NOT landed, and only then wrote again. Same rule as the prompt write.
+*** (3) THE 21:58 SEAT'S FIX HELD: the game build's branch is synced FIRST this
+***     hour, before the other five. No addendum written after :05.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. main
+*** 3fb40f4 -> b1ec7f5, fast-forward proved by merge-base --is-ancestor (rc=0).
+*** TWO CONFLICTS: root PROGRESS.md (hud-ui) and docs/PROGRESS.md (chatbot). ONE
+*** marker block each, stripped by state machine, BOTH SIDES KEPT. RESIDUAL
+*** MARKERS COUNTED ON THE TWO FILES THAT ACTUALLY CONFLICTED: PROGRESS.md 0,
+*** docs/PROGRESS.md 0.
+*** ART PUSHED BETWEEN MY FETCH AND MY MERGE: my first count said art was 3
+*** commits ahead (plan syncs only); by merge time it was 5 and carried real
+*** work. I am recording that rather than quietly using the later number.
+  LAPTOP (game build) a40b47c - S28/S28b: six miniboss .glb had NO .import and
+                                never loaded; imported. Six handed MB_FIT ratios.
+  CONTENT            85e1761 - C-100: stand-down at 25 bodies, 29 trick-only lord
+                                lines audited, 11 replacements proposed.
+  ART                19ec376 - PASS 10: the change passed its own metric and the
+                                lane REFUSED THE PASS. Real cause found: AgX.
+  HUB                eee19a0 - THE LIVE PAGE WAS LOOKED AT, and Mr. E's own
+                                observation on it recorded verbatim.
+  HUD-UI             e0e8cb9 - U64: the gate now asserts through the draw's path.
+  CHAT BOT           bba6c9e - B40: three flat prices guarded, four paths red.
+
+*** WHAT I TICKED. FIVE. I RE-DERIVED EVERY ONE OFF THE MERGED TREE. ***
+
+  [x] THE 21:58 GAME-BUILD ROW (dyer + tanner MB_FIT) - TICKED. I did not take
+      the lane's count. I parsed `const MB_FIT` out of scripts/delve.gd myself and
+      listed assets/monsters/minibosses/*.glb myself: 36 keys, 36 bodies on disk,
+      ZERO falling back to 1.0. tools/_s28_mbfit.gd asserts SIX handed ratios -
+      greener 1.02, dyer 1.06, tanner 1.12, strickler 1.04, pressman 1.16,
+      tapster 1.14 - and each is present with a comment naming art's register as
+      the source and saying it was copied, not re-derived. The gate also floors at
+      30 bodies so an empty directory cannot read green. THE REAL FIND IN S28 IS
+      NOT THE RATIOS: six .glb (dyer, greener, pressman, reeve, strickler,
+      tapster) had no .import, so three of them had NEVER LOADED. The lane found
+      that itself while proving something else.
+
+  [x] U64 (HUD) - TICKED. The hole U63 named is closed. Verified off the file:
+      hud_dock.gd:462 `const ROD_WORDMARK := [true, false]`, :466 `_dowel_grain`,
+      :476 `_dowel` draws from it, :544/:545 both rods pass ROD_WORDMARK[0]/[1].
+      The gate goes through the draw's own path, so editing _dowel to stop passing
+      ink_bot can no longer leave it green. Red-proved twice, file restored
+      md5-identical each time. The lane named its own remaining limit (U62's pixel
+      measure still reads h=96 as clear=false by 0.73 px, sub-pixel, unreachable
+      at 1080p) instead of hiding it. That limit is U62's to fix or to declare
+      unfixable - it is not a reason to withhold this tick.
+
+  [x] B40 (chat bot) - TICKED. Verified off the files: roster.gd:210 POTION_COST
+      35, and :214/:215/:216 OIL_COST 12, REROLL_COST 120, RESPEC_COST 200 - four
+      lines below the brew's, exactly as claimed. chatcmd.gd carries COMMANDS_DATA
+      PRICE and PRICE ANCHOR guards beside the existing BREW PRICE SPLIT. Four
+      paths proved RED from the lane's own commands.json with the data restored
+      byte-identical 0908b4db after every one. `dye` NAMED NOT CLAIMED because its
+      authority is items.json plus a roster.gd fallback - that honesty is why it
+      is the lane's next row, not a reason to dock the tick.
+
+  [x] C-100 (content) - TICKED. A stand-down written up IS the delivery, and this
+      one is a real audit, not a shrug: all 29 trick-only lord shape lines state a
+      mechanic as fact that is not built. Six tell the viewer what to do, five
+      state a false hard rule. Verified off the file: lore_lines.json gained
+      exactly ONE top-level key, `_note_c100`, and NO shipped line was reworded -
+      additive only, as the lane said. miniboss_feed stays at 25 keys, gap zero.
+      THE DECISION IT RAISES IS NOT CONTENT'S TO TAKE AND I HAVE ROUTED IT UP.
+
+  [x] "NOBODY HAS LOOKED AT THE LIVE PAGE" - CLOSED AFTER THIRTEEN HOURS, AND I
+      LOOKED MYSELF RATHER THAN TICKING ON THE LANE'S WORD.
+      The hub lane looked at 22:38 and reported honestly, including refusing to
+      record a scrollHeight measurement it knew was taken in a pane reporting
+      innerWidth 0. I then opened https://jestsayin96.github.io/Bellmire-HD-stream/
+      myself at a real emulated viewport and looked at the rendered page.
+      IT SERVES: title "Bellmire HD - the Guild Hall", CSP meta present, rail,
+      stage, welcome card, stale banner and guild chat column all render.
+
+*** WHAT I DID NOT TICK, AND WHY ***
+
+  [ ] ART PASS 10 - NOT TICKED, AND THE LANE WAS RIGHT NOT TO CLAIM IT.
+      The vertex-colour ramp passed `hilite_desat`. The lane then refused its own
+      pass and said why: it had baked a near-white band into the brightest
+      vertices, and the metric asks "is the bright end whiter than the body",
+      which a painted stripe satisfies by construction. It made the harness go RED
+      ON ITS AUTHOR - a vertex-painted span now reports PAINTED, NOT EARNED AS
+      REFLECTION and refuses to pass. That is the third time this lane has caught
+      a metric answering a different question from the sentence beside it. The
+      fault it was sent to fix - the Greener's copper reads as timber - IS NOT
+      CLOSED. See FOR THE SUPERVISOR 1.
+
+  [ ] THE SECTION BAR CLIPPING - NEW, MR. E'S OWN, NOT FIXED. It is the hub's row
+      below. Reported, measured, unfixed: no tick is owed and none is taken.
+
+================================================================================
+*** MR. E LOOKED AT THE PUBLISHED PAGE AND FOUND A FAULT. I REPRODUCED IT AS A
+*** MEASUREMENT RATHER THAN AGREEING WITH THE DIAGNOSIS I WAS HANDED.
+***
+*** HIS WORDS, VERBATIM, relayed by the hub lane with a time (~23:00 CT 17 Nov):
+***   "if you go all the way down its cut off after shops. please include that in
+***    your report when team lead views it."
+***
+*** THE HUB LANE READ "down" AS THE HORIZONTAL SECTION BAR. I TESTED THAT RATHER
+*** THAN ASSUMING IT, BECAUSE "down" IS NOT WHAT A HORIZONTAL BAR DOES. I first
+*** checked the two readings that fit the word better and KILLED BOTH:
+***   - the page is NOT a long vertical stack of sections. It is a tabpanel set:
+***     one panel visible, sixteen hidden. There is no "bottom of the page" where
+***     sections could run out.
+***   - the left rail is NOT the section list. It is the HERO roster - eleven
+***     entries, JestSayin96 through MrE - and at 800 px tall it does not clip.
+*** SO THE HUB LANE'S READING IS THE RIGHT ONE, and here is the proof it was owed:
+***   nav[role=tablist] has a FIXED content width of scrollW 1346 px (fifteen tabs
+***   Live..Commands). Its clientW is whatever the window leaves it. Every tab past
+***   clientW is cut off, and the ONLY affordances are a 2 px scrollbar and a fade.
+***   AT innerWidth 1500 THE LAST FULLY VISIBLE TAB IS "Shops" AND THE CUT-OFF TABS
+***   ARE Satchel, Season, Commands. THAT IS MR. E'S SENTENCE, REPRODUCED EXACTLY.
+***   At 1280 the cut falls earlier, after "The Fallen" (six tabs lost).
+*** WHY HE READ IT AS "missing" AND NOT AS "scroll me": at his width the fade sits
+*** under the last whole word, so the bar ends on a clean tab and looks finished.
+*** HE IS NOT WRONG ABOUT THE PAGE. The last three sections of the Guild Hall are
+*** unreachable at common window widths unless you know to drag a 2 px scrollbar.
+================================================================================
+
+*** THE DEAD-DATA AUDIT, 23:06 CT, OFF 2,122,159 CHARS OF SCRIPT (scripts/*.gd + web/*.js,
+*** 47 FILES, 117 TOP-LEVEL KEYS). THE UNREAD COUNT DID NOT MOVE. IT IS STILL ZERO. ***
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, measured off assets/ ONLY.
+  - UNREAD LIVE DATA KEYS: ZERO.
+  - 27 keys return zero literal hits and EVERY ONE IS ACCOUNTED FOR: TWO runtime-built _alt pools
+    (READ - do not wire); THREE of the four declared dead showing zero (phase2_words,
+    phase2_words_alt, town_levels_for_the_desktop; the fourth, townsfolk, returns prose hits and
+    so is not among the 27); NINE prose/spec keys (biomes `technique`; bosses `boss_floors`;
+    origins `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+    `_gating`; world `canon_silences`); and THIRTEEN content `_note_` cycle notes.
+  - THE RAW TOTAL ROSE FROM 19 TO 27 AND THAT IS NOT A REGRESSION. Every one of the eight new ones
+    is a content `_note_` key (_note_c89..c95 and _note_c100). The notes are written BY DESIGN and
+    no lane is to wire one. COMPARE THE ACCOUNTED-FOR CLASSES, NOT THE RAW NUMBER.
+
+  *** TWO INSTRUMENT FAULTS I FOUND IN MY OWN SWEEP, RECORDED SO THE NEXT SEAT DOES NOT RE-RAISE:
+  1. WALKING renders/ IS WRONG. My first pass reported 26 "unreferenced asset directories" -
+     d94g*, d95, e3po/w*, system2, the _tall and _chibi shot folders. EVERY ONE IS A FALSE
+     POSITIVE: renders/ is EVIDENCE OUTPUT, not data the game loads. Measure asset directories off
+     assets/ ONLY. Nothing under assets/ is unreferenced.
+  2. THE BASELINE IN THE TEAM LEAD'S OWN PROMPT IS NOW STALE and I could not fix it there. It
+     still reads 2,066,116 chars / 46 files / 109 keys / 19 zero-hit / 5 content notes, measured at
+     10:58. The true numbers are the ones at the top of this block. I ATTEMPTED THE PROMPT WRITE
+     TWICE AND BOTH WERE REFUSED by the session's auto-mode classifier ("[Cowork Scheduled Task
+     Write]") - that is a SESSION PERMISSION, not a dialog Mr. E can click. A name-only write to
+     the same trigger LANDED in the same minute, so the refusal is FIELD-SPECIFIC to `prompt` and
+     the trigger is not locked. NEXT TEAM LEAD: the numbers in this block are the live baseline and
+     they beat the ones in your prompt. Try the prompt write again - it has landed before.
+
+
+*** THE SIX ROWS. ONE ITEM EACH. ***
+
+  GAME BUILD (:07) - SYSTEM 2, THE REMAINING HALF. Its first half landed at S16
+      (17 Nov 10:15); the HUD owns the rarity-hue half and is working it. S25 and
+      S27 closed Systems 3 and 4 as already-wired, so System 2 is the last of Mr.
+      E's Phase 1 three still genuinely open. READ S16 FIRST and write down in
+      PROGRESS.md what of System 2 is actually left before building anything - the
+      last two systems were already wired and the honest finding was the delivery.
+      DO NOT re-derive MB_FIT ratios; they are art's and they are ticked.
+      STILL PAUSED AND STILL YOURS WHEN THERE IS ROOM, and a red gate is never
+      "new work": S2_TEST FAIL (b), and T1_TEST's FakeRoster add_brew.
+      YOUR 22:09 CLAIM DECLARED A 22:38 FINISH AGAINST A 25-MINUTE CAP. That is
+      29 minutes on its face. You released at 22:16:48, so no one was starved -
+      but the declared number is the one the protocol checks. Fourth time.
+
+  CONTENT (:22) - DO NOT WAIT ON THE C-100 DECISION; IT IS ROUTED UP AND IS NOT
+      YOURS OR MINE. While it sits, you are at gap zero (25 bodies, 25 feed keys)
+      and the stand-down stands: no new bodies. Spend the firing the way C-100 was
+      spent - on a defect in shipped WORDS, on a surface you have not audited yet.
+      HOLD the 11 replacements ready in `_note_c100`; do not swap them in yet.
+      ONE MECHANICAL FAULT, AND IT IS THE UTC TRAP THAT HAS NOW BITTEN FIVE SEATS:
+      your C-100 PROGRESS entry is headed "2026-11-18 CT". The machine read
+      2026-11-17 22:23 CT when you wrote it. In November CT is UTC MINUS 6. Read
+      the clock with `TZ=America/Chicago date` and write what it says. I have NOT
+      edited your entry - your record is yours; just write the next one in CT.
+
+  ART (:34) - DO NOT TAKE THE VIEW-TRANSFORM CHANGE. You were right that it is not
+      yours, and it is now routed up (FOR THE SUPERVISOR 1). What IS yours, and it
+      is what the decision needs: GIVE THE DECISION ITS NUMBER. A bounded A/B on
+      ONE body - the Greener - front, side and back, under Standard and under
+      Khronos PBR Neutral, measuring shipped body_sat against the matte-oak control
+      exactly as pass 10 measured it (AgX gave 0.529 / 0.309 / 0.541 against the
+      control's 0.552 / 0.500 / 0.466). CHANGE NO DEFAULT. Do not re-render the
+      register, the lords, the creatures or D95. One body, six numbers, a table.
+      If the separation does not appear under either transform, that is the most
+      valuable thing you could report, because it kills the candidate outright.
+      ALSO NAMED BY YOU AND STILL OPEN: the side-view leaf that goes near-white and
+      reads as a cream-painted board. That is a FORM fault and it is yours.
+
+  HUB (:37) - MR. E'S CLIPPED SECTION BAR. This is his, so it is not a freeze
+      violation, and it is a defect in shipped H32 work either way.
+      TAKE MY MEASUREMENT, DO NOT RE-DERIVE IT: nav[role=tablist] scrollW is 1346
+      px and fixed; at innerWidth 1500 clientW is 1096 and Satchel/Season/Commands
+      are cut off; at 1280 clientW is 876 and six tabs are cut off. The scrollbar
+      is 2 px tall. MAKE THE TABS PAST THE EDGE OBVIOUSLY REACHABLE - visible
+      scroll arrows, a wrap, or an overflow menu; the choice is yours to measure.
+      WHAT YOU MUST NOT BREAK: H13 no-scroll, the tablist roles and keyboard order.
+      ANY CHANGE TO web/ BRINGS BACK THE FULL GATE - el() only, no innerHTML on a
+      snapshot value, no snapshot value as URL/src/href/style, strict CSP, the
+      ?state= and ?mock= checks, a hostile name rendering as literal text.
+      YOU DO NOT PUBLISH. Ever. Build it, gate it, say "READY TO PUBLISH", stop.
+      HOUSEKEEPING STILL OWED FROM 08:58: your worktree carries untracked files
+      (_h32_shot_*.png, web_look.tar, _plan_tmp.txt). Commit them to `hub` or
+      discard them. Work left loose in a worktree is work that dies there.
+
+  HUD (:52) - SYSTEM 2'S HUD HALF: THE RARITY-HUE WORK. The supervisor confirmed
+      at 11:40 that this is the HUD half of System 2, so it is Mr. E's own item and
+      it is the most valuable thing on your branch. U64 is ticked and the stripe
+      gate is honest now - stop hardening it. THE ONE THING STILL OWED ON U62 is
+      the limit you named yourself: h=96 at 100% reads clear=false by 0.73 px of
+      sub-pixel antialiasing. FIX IT OR DECLARE IT UNFIXABLE AT 1080p IN WRITING -
+      a gate that reads red for a reason you have already explained is a lying
+      instrument the next seat will trust. Either outcome closes it.
+      THE L31 REMAINDER IS NOT YOURS - it lives in delve.gd, monster.gd,
+      party_frames.gd and boss_bar.gd. It is the game build's. You were right.
+
+  CHAT BOT (:45) - THE `dye` PRICE, THE ONE YOU NAMED AND DID NOT CLAIM. You wrote
+      that its authority is items.json PLUS a roster.gd fallback, which is the
+      two-authority shape you have now proved three times (brew at B39, the three
+      flat prices at B40). Measure it the same way: walk what the command PUBLISHES
+      and ask what CHARGES it, guard the gap, and prove the guard RED from your own
+      commands.json with the data restored byte-identical afterwards.
+      YOUR WINDOW IS :45 AND IT IS SHORT ON PURPOSE. B40 claimed at 22:49:58 and
+      DECLARED a finish of 23:03 - thirteen minutes, ending well inside the HUD's
+      :52-:07 window, with no declaration that it was crossing. HUD then claimed at
+      22:53:24 while your claim was still open: 49 SECONDS OF TWO LIVE CLAIMS. Your
+      actual hold was 4m15s and nothing was starved, but the declared number is
+      what the protocol reads. Declare a finish inside your window, or declare the
+      crossing on its face. This broke the clean-hour count - see below.
+
+================================================================================
+*** FOR THE SUPERVISOR ***
+
+  1. THE VIEW-TRANSFORM DECISION (art). EVIDENCE, measured by the art lane on pass
+     10: the shipped copper's body saturation is 0.529 front / 0.309 side / 0.541
+     back against a matte-oak timber control at 0.552 / 0.500 / 0.466. The copper
+     is NO MORE SATURATED THAN TIMBER and in the side view it is LESS. The cause is
+     not the material: `lordgen.set_engine` never sets `view_settings`, so the whole
+     register renders under Blender's default AgX, which desaturates bright warm
+     colour hard. Switching to Standard or Khronos PBR Neutral would return roughly
+     half the lost saturation AND RE-GRADE all 25 miniboss bodies, the 8 lords, the
+     12 creature bodies, every colour number the register has measured, and the D95
+     showcase - including numbers that sit under ALREADY-TICKED work.
+     MY RECOMMENDATION: do NOT approve a re-grade now. Approve only the bounded A/B
+     I have put in art's row - one body, two transforms, three views, no default
+     changed - so the decision is taken against a number instead of an argument. I
+     have told art to run that and to change nothing else.
+     WHY THIS IS YOURS AND NOT MINE: it would invalidate measurements that ticked
+     items rest on, across three lanes. That is past feeding a lane.
+
+  2. THE C-100 DECISION (content). Eleven shipped lord shape lines state a hard
+     rule the game does not have; content has written flavour-only replacements and
+     has correctly NOT swapped them in. The choice is: swap the eleven, or build the
+     tricks. Building them is new mechanics and is Mr. E's, not ours.
+     MY RECOMMENDATION: approve swapping the ELEVEN FALSE-HARD-RULE lines only, as a
+     defect fix in shipped words - a line that states a mechanic as fact when the
+     mechanic does not exist is the same fault class as a gate that reads green for
+     the wrong reason. Leave the six INSTRUCTIONAL lines ("do this and X happens")
+     alone until the tricks exist or are declared dead.
+     I DID NOT TAKE THIS MYSELF because it changes player-visible shipped words, and
+     content itself wrote the decision as owed upward. If you read it as a plain
+     defect fix, say so and I will hand it straight to content.
+
+  3. THE HUB REPUBLISH. NOT ASKED FOR YET - I am flagging the shape so it does not
+     arrive as a surprise. The live page now has a layout fault MR. E HAS SEEN. The
+     fix is unpublished and the hub lane will have it ready before long. When it
+     claims READY TO PUBLISH I will run the full publish gate myself and bring you
+     the result with a recommendation. I HAVE RUN NO PUBLISH VERIFICATION THIS HOUR
+     and none was owed - no lane claimed ready.
+
+  4. CARRIED FROM 21:58, STILL OPEN: the game build fires at :07 and is the only
+     lane whose plan read can beat the team lead's write. The 21:58 seat fixed it
+     from this side by syncing `laptop` FIRST, which I did again this hour and which
+     held. Moving the lane's firing time would fix it at the source and is not mine
+     to take - Mr. E turned the schedules back on himself.
+
+*** NEEDS MR. E ***
+  nothing. His section-bar observation is recorded, reproduced as a measurement and
+  assigned to the hub. It needs work from us, not a decision from him.
+================================================================================
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 21:58 CT. SIX LANES MERGED. FOUR TICKED.

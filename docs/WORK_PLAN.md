@@ -1,3 +1,53 @@
+## *** URGENT, ALL SIX LANES - READ THIS BEFORE YOUR NEXT GODOT CLAIM. WRITTEN 17:3x CT 18 Nov. ***
+
+*** DO NOT RUN THE HEADLESS PARSE GATE WHILE MR. E MAY BE LIVE. THIS IS IN FORCE FROM NOW. ***
+IT IS NOT A STYLE NOTE AND IT IS NOT ABOUT TOKENS LEAKING. The parse gate starts the REAL GAME and
+can TAKE ACTIONS IN MR. E'S REAL CHANNEL. The game build audited its own gate at S42 this hour,
+from SOURCE and without launching it (because launching it to measure it would itself connect the
+bot again - that is the right instinct and I am ticking it for that as much as for the finding).
+
+WHAT IT ACTUALLY IS: the parse gate is `--headless --path . --quit-after 300` with NO `--script`,
+so it runs the MAIN SCENE. town.gd:342 starts the live wiring whenever `--script` is absent -
+TwitchChat (JOIN #jestsayin96), TwitchEventSub (validates BOTH tokens, ensure_rewards, websocket +
+7 subscriptions) and SnapshotPublisher. NOTHING CHECKS HEADLESS. Harnesses that pass `--script`
+are already excluded; the parse gate is the one gate that is not.
+
+WHAT IT CAN DO IN ITS ~20 SECONDS, ON INCOMING TRAFFIC:
+  (b) IS THE WORST AND IT IS THE REASON THIS IS URGENT: the gate's EventSub session receives the
+      SAME channel-point redemptions as the live game and calls _settle (PATCH FULFILLED/CANCELED).
+      A GATE CAN SETTLE A REAL VIEWER'S REDEMPTION, RACING THE LIVE GAME.
+  (a) a viewer's !command can be answered by the gate as bellmirebro - dry_run_chat is false
+      outside harnesses - so a viewer gets TWO answers if the real game is also up.
+  (c) first-timer / hero_moment replies use the REAL viewers file, so a welcome the gate sends is
+      marked spent for the live game.
+  (e) SnapshotPublisher's first beat is at 20 s of process time; whether 300 headless frames reach
+      it is UNMEASURED, and if they do the gate publishes a 300-frame town to the LIVE HUB.
+  (d) ensure_rewards only GETs in steady state - safe today, but would CREATE rewards on a machine
+      whose saved reward file is missing. (f) a 401 makes it rewrite the token file.
+
+EVERY OTHER GATE IS CLEAN AND THE GAME BUILD CHECKED THEM ONE BY ONE: _d702/_d70/_t1_test/
+_t1_shot/_t3/_t5_roll set offline + dry_run_chat; _d63_clip/_fest/_shot never call setup();
+_twitch_parse disables TwitchChat; _townwalk/_delve_test/_offfloor run under `--script`. NONE CAN
+POST. ONE EXCEPTION TO KNOW ABOUT: `_t1_live.gd` is live by design - dry_run_chat, but it opens a
+real EventSub session and so SHARES HAZARD (b), and it forces a refresh of both tokens. It is not
+in the commit battery and nobody should add it to one.
+
+WHAT EVERY LANE DOES UNTIL THE GUARD EXISTS:
+  - DO NOT run the bare parse gate (`--headless --path .` with no `--script`) when Mr. E may be
+    streaming. Mr. E was LIVE in chat at ~17:0x CT today, so treat right now as "may be live".
+  - Gates that pass `--script` are UNAFFECTED. Run them normally. Your battery does not stop.
+  - IF YOU NEED PARSE COVERAGE THIS HOUR AND CANNOT TELL WHETHER HE IS LIVE, SKIP IT, SAY SO IN
+    YOUR WRITE-UP, AND CARRY IT. A skipped gate written up is not a red gate - it is a lane
+    declining to touch a live channel, which is exactly the W-LIVE discipline.
+  - NO LANE CHANGES town.gd OR ANY W-LIVE BEHAVIOUR TO FIX THIS. The fix is with the supervisor.
+
+THE FIX IS SMALL AND IT IS NOT MINE TO TAKE: one env guard at town.gd:342, beside the existing
+JESTS_NO_SFX precedent (JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and SnapshotPublisher),
+set by every lane's parse wrapper. Parse coverage is unchanged either way, because the scripts
+still compile - town.gd names the classes. The game build recommends the env guard over keying on
+DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
+Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 17:0x CT (team lead, the 16:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 16:0x BLOCK. ***
 

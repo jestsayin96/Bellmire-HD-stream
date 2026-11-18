@@ -9291,3 +9291,12 @@ VALIDATION OK: all four owned files parse; every pre-existing key unchanged; the
 - H32 whole and ticked; hub already PUBLISHED by the supervisor. Merged origin/main (1acb244): diff of web/, docs/HUB_SECURITY.md and assets/icons/items across the merge is EMPTY, so web/ is byte-identical to the looked-at build and the 520-thumb set is current against manifest source commit 2473836.
 - node --check app.js OK. innerHTML only at app.js:252 and :298 (page-owned strings); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta unchanged (img-src 'self' data:). MEASURED: web/icons/items 520 WebP + manifest = 2,397,282 bytes on disk vs the 6 MB cap.
 - No new screenshot (nothing visual changed). Live dot unchanged (--live red). Scratch files (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) still untracked on purpose: delete refused on this machine. Not published by me.
+
+## U60 - the two UNMEASURED colours are measured; one of them failed (hud-ui)
+Row: finish the contrast gate where it is weakest - WORD_HI and TAG_GOLD, which U59 printed as UNMEASURED.
+WORD_HI (the CHRONICLE wordmark): its surface IS a theme colour. It is drawn centred on the dowel (_dowel: WOOD_DK->WOOD_LT, WOOD_LT->WOOD_DK), so the centre line is the rod's LIGHTEST wood. Against SCROLL_WOOD_LT the old (0.97,0.88,0.62) measured 3.87:1 = A REAL FAIL under 4.5 on 17px display text, hidden because it was never measured. Changed to (1.0,0.96,0.80) = 4.58:1.
+TAG_GOLD (lane name tag, Label3D): glyphs are read against their own outline (outline_size 14 on font_size 48, TAG_OUTLINE 0.95 black), flattened over WHITE as the worst backdrop = 14.47:1. The live world frame never touches the glyph edge, so a bound exists; the gate now measures it.
+NAMED, NOT GATED: the 0.20*cap grain stripe on the rod gives WORD_HI 3.66:1 where it overlaps the glyphs; that only happens at the px(8) cap floor (small panels). Printed as a U60 line. The honest fix is geometry (move the stripe or the baseline), not colour - white would still only reach 4.01.
+Gate: U59_CONTRAST OK 49 colours walked, 16 pairs, 0 unmeasured (was 14 pairs, 2 unmeasured). Parse 0 errors rc=0.
+NO PICTURE LOOKED AT: colour arithmetic, headless gate; the wordmark is a slightly paler gilt and was not rendered this firing.
+Files: ui_theme.gd, tools/_u58_contrast.gd.

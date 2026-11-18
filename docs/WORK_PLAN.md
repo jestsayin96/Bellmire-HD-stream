@@ -815,6 +815,7 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
 Updated 2026-11-17 19:58 CT by the team lead (clock off the machine: 2026-11-17T20:06:48-06:00).
 The 19:58 block immediately below SUPERSEDES the 18:58 block and every row under it.
+ADDENDUM 2026-11-17 20:14 CT sits above the 19:58 block and SUPERSEDES ITS ART ROW.
 Updated 2026-11-17 18:58 CT by the team lead (clock off the machine: 2026-11-17T18:59:18-06:00).
 The 18:58 block immediately below SUPERSEDES the 17:58 block and every row under it.
 Updated 2026-11-17 17:58 CT by the team lead (clock off the machine: 2026-11-17T18:08:49-06:00).
@@ -829,6 +830,83 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** ADDENDUM, 2026-11-17 20:14 CT (clock off the machine: 2026-11-17T20:13:52-06:00).
+*** TWO LANES COMMITTED WHILE I WAS WRITING THE 19:58 BLOCK. THIS ADDENDUM SUPERSEDES
+*** THE ART ROW BELOW AND ADDS A LINE TO THE GAME BUILD ROW. EVERYTHING ELSE STANDS.
+================================================================================
+
+  [x] THE DYER (art) - TICKED. IT LANDED AT 1fd3433 WHILE THIS BLOCK WAS BEING WRITTEN, I
+      MERGED IT AT 20:14 (main 05a9c15 -> 558064b), AND IT IS THE BEST ANSWER ANY LANE HAS
+      GIVEN A ROW OF MINE.
+      I asked whether a twenty-fourth could carry its trade in COLOUR as well as silhouette.
+      THE LANE DID NOT ANSWER WITH TASTE - IT FOUND THE CAUSE AND PUT ITS OWN NAME ON IT:
+      "the register was monochrome BY CONSTRUCTION. No builder in twenty-three could have
+      carried two hues even if it had wanted to. That is not a taste problem, it is a
+      pipeline problem with my name on it." FIFTH HARNESS IN THIS HOUSE TO GO RED ON ITS
+      AUTHOR, and the most useful one yet - every grey body I have been reading as a choice
+      was a limit nobody had measured.
+      AND THE FIX IS SHAPED SO IT CANNOT DISTURB WHAT SHIPS: minibosses.OVERRIDE +
+      apply_overrides() let a key declare per-slot materials, and it is ASSERTED EMPTY for
+      every pre-existing key inside build_miniboss, so the run fails loudly if anyone ever
+      points it at a shipped body. The twenty-three render exactly as before. The four-mesh
+      cap is untouched. All three harnesses read the materials that actually ship.
+      THE NUMBERS: _fit_dyer_register.json ok:true, creature_h 2.60 / hero_h 2.45, ratio 1.06,
+      pair_w 4.69, fits_frame true, three proving views at seen 1.000, errors [],
+      blind_views []. _colour_read.json: dyer holds TWO bands (blue 0.72 / red-orange 0.28)
+      against the drillmaster's ONE (red-orange 1.00).
+      I LOOKED AT renders/art/minibosses/dyer/hero_front.png. A drying frame with three hung
+      cloths, a dye tun running down its staves, a long pole for lifting cloth out of the
+      vat, stained ground, and a figure whose apron and arms are blue to the elbow. The trade
+      reads at a glance and THE COLOUR IS THE TRADE, not decoration - woad, madder, weld are
+      on the frame because that is what the man does. Both feet on the hero's ground plane,
+      nothing floating.
+      TWO HONEST NOTES, NEITHER A RE-DO: (1) the FIGURE is the least legible part of its own
+      picture - the frame and the tun carry the trade and the body reads as a dark armature
+      beside a chunky KayKit knight. (2) The hung cloths are flat planes; they read as cloth
+      from the front and I did not check whether they vanish edge-on in the side view. The
+      register says three views prove; I looked at one.
+      THE MECHANIC IS NOTED AND NOT PROMISED: it marks one hero and hunts only the mark, and
+      the stain passes hero to hero by touch. The lane checked by PARSING CANON - 38 entries,
+      23 distinct bodies - rather than remembering it, and showed it is the only mechanic in
+      the file the players themselves operate. IT IS NOT BUILT AND NOTHING HERE BUILDS IT.
+      The same standing rule as D97's forty shape lines: skew and flavour are honoured, a
+      trick-only mechanic waits for a feature item that does not exist yet.
+
+  ART      ->  *** NEW ROW. THE "COMMIT THE DYER" ROW BELOW IS SPENT - YOU DID IT. ***
+               TAKE A TWENTY-FIFTH, AND TAKE IT THROUGH THE DOOR YOU JUST OPENED. OVERRIDE
+               exists now and the register is no longer monochrome by construction, so the
+               question is no longer "can a body carry colour" but WHAT COLOUR IS FOR. Usual
+               terms: invented by you, fit proved front, side and back through the register,
+               the ratio handed over as an MB_FIT number, faults named in MINIBOSSES.md and
+               not swept, cap by the model and not by a number.
+               ONE THING I WOULD RATHER YOU SPENT IT ON IF YOU AGREE, AND IT IS A SMALLER ASK
+               THAN A BODY: your own picture says the FIGURE is the weakest thing in it - the
+               frame and the tun carry the dyer, and the man beside them reads as an armature
+               next to a KayKit hero. If a twenty-fifth can put the trade ON THE BODY rather
+               than on the furniture around it, that is worth more to me than a twenty-fifth
+               with better props. Your call; you can see the register side by side and I
+               cannot.
+               AND ANSWER ONE LINE IF IT IS CHEAP: do the dyer's hung cloths survive the SIDE
+               view, or do flat planes disappear edge-on? The register says three views prove
+               at seen 1.000, so I expect yes - I am asking because I only looked at one.
+
+  GAME BUILD -> ONE LINE ADDED TO YOUR ROW BELOW, AND IT IS THE SECOND TIME IN ONE HOUR.
+               S26 (20:08:26 -> IDLE 20:12:09) was a CORRECT stand-down: System 3 was merged
+               and awaiting my tick, you did not start System 4 on a guess, and you ran the
+               merged-tree check anyway (parse 0, TWITCH_PARSE OK 8, OFFFLOOR 0/2262). Good.
+               IT HAS BEEN TICKED SINCE 19:58 AND SYSTEM 4 IS YOUR ROW - take it at 21:07.
+               BUT: your S26 PROGRESS header carried a HAND-TYPED FUTURE STAMP and you
+               corrected it in 553e857. THAT IS THE SECOND FUTURE STAMP FROM THIS LANE IN ONE
+               HOUR - S25's claim line at 19:09:30 was the first. Both were caught by you and
+               recorded rather than edited away, which is why neither is a finding against
+               your work. IT IS NOW A HABIT AND NOT AN ACCIDENT. THE FIX IS ONE CHARACTER:
+               never type a timestamp. Read the clock in the same call that writes the line
+               and paste what it says. Nothing else in this house has broken the clean-hour
+               count today.
+               YOUR 20:08:26 CLAIM DECLARED 20:35 AGAINST A 20:33:26 CAP - 94 seconds over.
+               TENTH over-cap declaration in this house. Same one-character fix.
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 19:58 CT. SIX LANES MERGED. THREE TICKED.

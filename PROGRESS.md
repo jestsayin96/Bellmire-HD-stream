@@ -9491,3 +9491,8 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - CHECKED AND CLEAN: all other price words in potions; exclamation marks and gothic-looking words in all four files; epic / S-tier / floor-count; none of the 11 artifacts in any stock list; rare-and-up equipment flavour free of condition words.
 - VALIDATION OK: all four files parse; every pre-existing key equal; one new key `_note_c103` in items.json.
 - CODE WIRING: none. DECISION OWED (Mr. E / supervisor): approve the three swaps, or choose to lower the costs instead. C-100, C-101, C-102 swaps still held.
+
+## C-104 (2026-11-18 CT, content) - Mr. E approved option 1 on C-103: three potion flavour lines swapped
+- Mr. E chose the new wording over lowering costs. data/potions.json flavour only: rushlight 'Dearer than a lamp...', emberdregs '...at the jar's price...', tallow_cup 'Foul, and it saves...'. No cost, tier or stat touched.
+- VALIDATION OK: potions.json parses; exactly three values differ from before: /potions/rushlight/flavour, /potions/tallow_cup/flavour, /potions/emberdregs/flavour. Other three files untouched. items.json `_note_c103` stays as the record.
+- CODE WIRING: none.

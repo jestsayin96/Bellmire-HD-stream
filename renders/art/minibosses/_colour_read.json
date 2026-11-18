@@ -179,141 +179,161 @@
    },
    "override": true
   },
-  "strickler": {
-   "by_view": {
-    "back": {
-     "error": "BLIND - zero chroma pixels; this body has no colour at all"
-    },
-    "front": {
-     "error": "BLIND - zero chroma pixels; this body has no colour at all"
-    },
-    "side": {
-     "error": "BLIND - zero chroma pixels; this body has no colour at all"
-    }
-   },
-   "override": false
-  },
-  "tanner": {
+  "greener": {
    "by_view": {
     "back": {
      "bands": {
       "blue": 0.0,
-      "green_teal": 0.0,
-      "red_orange": 1.0,
+      "green_teal": 0.0948,
+      "red_orange": 0.9051,
       "violet_magenta": 0.0,
-      "yellow_green": 0.0
+      "yellow_green": 0.0001
      },
      "bands_held": [
+      "green_teal",
       "red_orange"
      ],
-     "chroma_px": 37203,
+     "chroma_px": 33986,
      "detached": {
-      "components": 2,
-      "main_px": 107614,
+      "components": 3,
+      "main_px": 79260,
       "stray": [
        {
         "bbox": [
-         211,
-         500,
-         221,
-         510
-        ],
-        "px": 96
-       }
-      ]
-     },
-     "lit_px": 104142,
-     "mean_hue": 43.2,
-     "n_bands_held": 1,
-     "sat_mean": 0.1256,
-     "sat_p90": 0.1818,
-     "sil_px": 111887
-    },
-    "front": {
-     "bands": {
-      "blue": 0.0,
-      "green_teal": 0.0,
-      "red_orange": 1.0,
-      "violet_magenta": 0.0,
-      "yellow_green": 0.0
-     },
-     "bands_held": [
-      "red_orange"
-     ],
-     "chroma_px": 63239,
-     "detached": {
-      "components": 2,
-      "main_px": 107179,
-      "stray": [
-       {
-        "bbox": [
-         298,
+         358,
+         567,
          504,
-         308,
-         514
+         586
         ],
-        "px": 96
+        "px": 2183
+       },
+       {
+        "bbox": [
+         39,
+         560,
+         57,
+         572
+        ],
+        "px": 198
        }
       ]
      },
-     "lit_px": 103488,
-     "mean_hue": 43.4,
-     "n_bands_held": 1,
-     "sat_mean": 0.1051,
-     "sat_p90": 0.1667,
-     "sil_px": 111294
+     "lit_px": 57586,
+     "mean_hue": 32.0,
+     "n_bands_held": 2,
+     "sat_mean": 0.367,
+     "sat_p90": 0.614,
+     "sil_px": 84710
+    },
+    "front": {
+     "bands": {
+      "blue": 0.0,
+      "green_teal": 0.4445,
+      "red_orange": 0.5553,
+      "violet_magenta": 0.0,
+      "yellow_green": 0.0002
+     },
+     "bands_held": [
+      "green_teal",
+      "red_orange"
+     ],
+     "chroma_px": 30570,
+     "detached": {
+      "components": 3,
+      "main_px": 79894,
+      "stray": [
+       {
+        "bbox": [
+         15,
+         572,
+         161,
+         589
+        ],
+        "px": 2172
+       },
+       {
+        "bbox": [
+         462,
+         547,
+         480,
+         559
+        ],
+        "px": 198
+       }
+      ]
+     },
+     "lit_px": 69307,
+     "mean_hue": 80.3,
+     "n_bands_held": 2,
+     "sat_mean": 0.2708,
+     "sat_p90": 0.614,
+     "sil_px": 85364
     },
     "side": {
      "bands": {
       "blue": 0.0,
-      "green_teal": 0.0,
-      "red_orange": 1.0,
+      "green_teal": 0.4021,
+      "red_orange": 0.5979,
       "violet_magenta": 0.0,
       "yellow_green": 0.0
      },
      "bands_held": [
+      "green_teal",
       "red_orange"
      ],
-     "chroma_px": 37510,
+     "chroma_px": 21433,
      "detached": {
-      "components": 2,
-      "main_px": 86851,
+      "components": 4,
+      "main_px": 62772,
       "stray": [
        {
         "bbox": [
-         300,
-         507,
-         311,
-         517
+         52,
+         572,
+         129,
+         587
         ],
-        "px": 102
+        "px": 739
+       },
+       {
+        "bbox": [
+         445,
+         576,
+         463,
+         588
+        ],
+        "px": 197
+       },
+       {
+        "bbox": [
+         435,
+         561,
+         453,
+         573
+        ],
+        "px": 197
        }
       ]
      },
-     "lit_px": 83937,
-     "mean_hue": 43.3,
-     "n_bands_held": 1,
-     "sat_mean": 0.1061,
-     "sat_p90": 0.1778,
-     "sil_px": 89407
+     "lit_px": 49242,
+     "mean_hue": 68.1,
+     "n_bands_held": 2,
+     "sat_mean": 0.2663,
+     "sat_p90": 0.614,
+     "sil_px": 66423
     }
    },
-   "override": false
+   "override": true
   }
  },
  "errors": [
-  "strickler/front: BLIND - zero chroma pixels; this body has no colour at all",
-  "strickler/side: BLIND - zero chroma pixels; this body has no colour at all",
-  "strickler/back: BLIND - zero chroma pixels; this body has no colour at all",
+  "greener/front: silhouette is in 3 pieces - 2172 px at [15, 572, 161, 589], 198 px at [462, 547, 480, 559] floats off the body",
+  "greener/side: silhouette is in 4 pieces - 739 px at [52, 572, 129, 587], 197 px at [445, 576, 463, 588], 197 px at [435, 561, 453, 573] floats off the body",
+  "greener/back: silhouette is in 3 pieces - 2183 px at [358, 567, 504, 586], 198 px at [39, 560, 57, 572] floats off the body",
   "drillmaster/front: silhouette is in 2 pieces - 808 px at [95, 467, 111, 549] floats off the body",
-  "drillmaster/side: silhouette is in 2 pieces - 806 px at [200, 460, 216, 542] floats off the body",
-  "tanner/front: silhouette is in 2 pieces - 96 px at [298, 504, 308, 514] floats off the body",
-  "tanner/side: silhouette is in 2 pieces - 102 px at [300, 507, 311, 517] floats off the body",
-  "tanner/back: silhouette is in 2 pieces - 96 px at [211, 500, 221, 510] floats off the body"
+  "drillmaster/side: silhouette is in 2 pieces - 806 px at [200, 460, 216, 542] floats off the body"
  ],
- "judged": [
-  "dyer"
- ],
+ "judged": [],
  "ok": false,
  "verdict": {
   "drillmaster": {
@@ -324,23 +344,18 @@
    "why": "sat 0.2456 > bar 0.207; bands 1 < 2"
   },
   "dyer": {
-   "judged": true,
+   "judged": false,
    "n_bands_held": 2,
    "pass": true,
    "sat_mean": 0.4576,
    "why": "sat 0.4576 > bar 0.207; bands 2 >= 2"
   },
-  "strickler": {
+  "greener": {
    "judged": false,
-   "pass": false,
-   "why": "front view did not measure"
-  },
-  "tanner": {
-   "judged": false,
-   "n_bands_held": 1,
-   "pass": false,
-   "sat_mean": 0.1051,
-   "why": "sat 0.1051 <= bar 0.207; bands 1 < 2"
+   "n_bands_held": 2,
+   "pass": true,
+   "sat_mean": 0.2708,
+   "why": "sat 0.2708 > bar 0.207; bands 2 >= 2"
   }
  }
 }

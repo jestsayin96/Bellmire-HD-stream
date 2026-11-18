@@ -1877,3 +1877,145 @@ rotation without converting it.
 ### LICENCE
 100% original procedural geometry (`bmesh`-free raw vertex maths via `lordlib`).
 No pack asset is read by this body. `used_pack: false`.
+
+---
+
+## 25. THE GREENER - the twenty-fifth, and the trade is ON THE BODY
+*Built 17 Nov 2026, 20:35-21:05 CT, on the team lead's 20:14 row.*
+
+| key | title | h | theme | THE IDEA | wear |
+|---|---|---|---|---|---|
+| `greener` | The Greener | 2.50 | workshop | **IT GREENS YOUR IRON** - every blow landed on it eats the weapon a little more, and a bitten weapon bites less; a hero can stop and scrape it clean, which costs them the swings they would have taken | 0.55 |
+
+**THE ROW, in his words:** *"If a twenty-fifth can put the trade ON THE BODY
+rather than on the furniture around it, that is worth more to me than a
+twenty-fifth with better props."* His read of the Dyer was that the frame and
+the tun carried the trade and the man beside them was a dark armature.
+
+**WHY A GREENER AND NOT A PRETTIER TRADE.** `_colour_read`'s own hue histogram
+over the register: 0-60 deg **14 bodies**, 60-110 **2**, 110-190 **ZERO**,
+190-260 **7** (the Dyer's woad), 260-360 **ZERO**. A beekeeper was the first
+candidate and was dropped *because honey is 0-60*, where fourteen bodies already
+sit - a new body in an old colour. Verdigris is the one working-class trade
+whose **product** is green: copper hung over vinegar and scraped off as pigment,
+and a man who has done it twenty years is green to the elbow. **This is the
+first body in the register to hold 110-190.**
+
+### THE NUMBERS, AND ONE OF THEM OVERTURNED MY OWN PICTURE
+`_trade_read` renders the body through one fixed camera with a group present and
+again with it removed, and counts the pixels that **moved**.
+
+| pass | crust (ON HIM) | plates | brazier | scraper | taken | front total |
+|---|---|---|---|---|---|---|
+| 7 | **0.0439** | 0.1518 | 0.1809 | 0.1316 | 0.0455 | 0.6666 |
+| 9 (shipped) | **0.1889** | 0.1526 | 0.2003 | 0.1290 | 0.0426 | 0.7134 |
+
+At pass 7 I was looking at the picture and calling the row delivered. **The
+instrument said the yard was carrying 44% of the silhouette and the trade on the
+man was carrying four per cent** - exactly the fault this body exists to fix.
+`minibossfit` went RED in the same run (`pair_w` 5.61 against a 5.60 m frame):
+one cause, two reports. Pass 8 **deleted the crocks**, pulled the fire in, and
+grew the crust; crust 0.0439 -> 0.1889, footprint 3.75 -> 2.71 m, fit GREEN.
+
+**SHIPPED:** `_fit_greener_register.json` ok true, verdict **GREEN**, creature_h
+2.50 / hero_h 2.45, **ratio 1.02**, pair_w 4.57, fits_frame true, three proving
+views at seen 1.000, errors [], blind_views [], blank check 3 files 0 failures.
+Footprint **2.71 m, CORRIDOR-SAFE** against 11.0 m. **Four meshes, 5,743 faces** -
+the heaviest body in the file, and the crust is why.
+`_colour_read`: **green_teal 0.464 / red_orange 0.535** front, two bands held in
+all three views, sat_mean 0.271 against the 0.207 bar.
+
+### WHAT I GOT WRONG, IN ORDER, BECAUSE THE PATTERN IS THE FINDING
+**I hid my own emissive FOUR TIMES in one body.** Pass 2 put the charcoal bed
+*under* the crocks - invisible. Pass 3 made it hotter and wider - a peach
+puddle. Pass 4 made it lumps on open floor - eleven salmon balls a viewer names
+as fruit. Pass 5 gave it a dark pan and **the pan's own rim closed over it** at
+this 2-degree camera pitch, which is the Dyer's cone lid wearing a new shape.
+**The thing I kept getting wrong was not colour, strength, size or contrast: it
+was HEIGHT.** An eye-level camera cannot see *into* anything lying on the floor
+plane, so no floor-level emissive in this register can be seen however it is
+dressed. Pass 6 put the fire in a basket on legs at hip height and it read at
+once. That is a standing lesson for the next body, not a note about this one.
+
+**And `_colour_read` caught a float I could not see:** a 435 px detached
+component at mid-height in the side view. The arithmetic said why - a crust
+nodule offset 0.72 x its run radius sits 0.09 m off the limb axis while the
+smallest nodules are 0.078 m across, so the thin end of a run could clear the
+member it is supposed to be growing on. Offset cut to 0.52; the component is
+gone. Same check that caught the Dyer's eyes hanging in front of its face.
+
+### THE FIT PROOF - I LOOKED, AND HERE IS EVERY FAULT I CAN SEE
+`renders/art/minibosses/greener/{front,side,three_quarter}.png` and the register
+pair in `renders/art/minibosses/_pair_greener.png`.
+1. **The copper leaves still read as brown planks**, not metal. Three separate
+   changes at it (E, J, pass 5) and the hue, roughness and metalness all moved;
+   the stack still reads as timber or cardboard at a glance. **Open fault, not
+   fixed, and it is the weakest thing on the body.**
+2. **The coals read as bread rolls.** They read as *hot* and they are clearly
+   fire in an iron basket, but the lumps are too round and too pale to be
+   unmistakably charcoal.
+3. **The crust is clumpy on the arms** after pass 8 - both forearms read as one
+   continuous green mass that merges into the chest. It carries the trade, which
+   was the row, but it has overshot toward bubble-wrap.
+4. **From the BACK the trade nearly vanishes**: crust 0.0609 against plates
+   0.3293 - the rack of leaves covers the shoulder-blade crust I added at pass 3
+   for exactly that view. The back view is the stock's view, not the man's.
+5. **The silhouette is in 3-4 pieces** in every view. These are the floor pieces
+   by construction - the greened sword (2,172 px), the axe head, and the two
+   curls of scraped green off the blade (197 px each). Named, not swept; the
+   shipped Drillmaster fails the same check for the same reason.
+6. The apron is **mostly behind the crust** now and barely reads as leather.
+7. The scraper's blade ends **among the brazier's legs** in the front view.
+
+### FRAMES
+Blender's world frame as written into the .glb - front is model **-Y**, up is
+**+Z**; the scraper runs (MX-1.18, MY-1.02, 2.26) to (MX+0.86, MY+0.52, 0.42).
+**Not the engine's slot frame.**
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+1. `assets/monsters/minibosses/greener.glb` is committed **with no `.glb.import`
+   sibling** - it cannot load until a Godot run generates one. Same as
+   `dyer.glb`, `pressman.glb`, `reeve.glb`, `strickler.glb`, `tapster.glb`.
+2. `scripts/delve.gd`, `MB_FIT`: add `"greener": 1.02`. Measured by art
+   (`_fit_greener_register.json` -> `pairs.greener.ratio`) - **copy it, do not
+   re-derive it.** Still outstanding and re-issued: `"dyer": 1.06`,
+   `"pressman": 1.16`, `"strickler": 1.04`.
+3. `scripts/bestiary.gd`: **static** - a `model` path and **no `anims` entry.**
+4. Theme `workshop`, the fourth body on that theme. **It cannot spawn today** -
+   `dungeon_hd.gd`'s `THEME_MINIBOSS` gate has all fourteen themes taken. Engine
+   work plus a design call; this body is queued work like the others.
+5. Feed line for content: *"Your edge came back green."*
+6. **THE MECHANIC IS NOT BUILT AND NOTHING HERE BUILDS IT.** Weapon wear plus a
+   scrape action is a new mechanic, and the standing rule from D97's forty shape
+   lines holds: skew and flavour are honoured, a trick waits for a feature item
+   that does not exist. Two adjacencies named rather than denied - the **Tanner**
+   also answers your blows but changes *itself*, and the **Scrapwright** degrades
+   its *own* shell. This is the only one whose arithmetic lands on the hero's
+   side of the fight, and the only one a hero can undo by spending time.
+
+### LICENCE
+100% original procedural geometry via `lordlib` raw vertex maths. No pack asset
+is read by this body. `used_pack: false`.
+
+---
+
+## THE DYER'S SIDE VIEW - the one line the team lead asked for at 20:14
+*"do the dyer's hung cloths survive the SIDE view, or do flat planes disappear
+edge-on? The register says three views prove at seen 1.000, so I expect yes - I
+am asking because I only looked at one."*
+
+**THEY SURVIVE, AT 60% OF THEIR FRONT STRENGTH.** Measured, not expected -
+`_trade_read` on `dyer`, which had never been run on it:
+
+| view | sheets | vat | paddle | skeins | splashes | trade total |
+|---|---|---|---|---|---|---|
+| front | **0.4942** | 0.1510 | 0.0426 | 0.0499 | 0.0105 | 0.7482 |
+| side | **0.2947** | 0.2064 | 0.0357 | 0.0316 | 0.0116 | 0.5800 |
+| back | **0.5761** | 0.1123 | 0.0285 | 0.0025 | 0.0044 | 0.7238 |
+
+The sheets move **29.5% of the side silhouette** - not a line, not a sliver, and
+not a collapse. The 28-degree turn on the frame and the Y bow in `_cloth` (which
+grows toward the hem) are doing what they were built to do. **Side/front on the
+whole trade is 0.775**, and the vat picks up part of what the sheets lose
+(0.2064 side against 0.1510 front), which is the frame turn working in reverse
+for the near object.

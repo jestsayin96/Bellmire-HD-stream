@@ -9427,3 +9427,20 @@ Files: PROGRESS.md only (plus the _u65 log, not committed). Not ticked by me.
 - INCIDENTAL, WORTH ONE LINE: Godot's JSON reads `dye_cost` as a FLOAT - the red proof printed raw value `25.0`, not `25`. `int()` makes it 25 so nothing is wrong, but any future guard comparing a JSON number by identity rather than through `int()` would read a false mismatch.
 - PROTOCOL: B40 declared a finish of 23:03 that crossed into the HUD's :52-:07 window without saying so. This run DECLARED THE CROSSING ON ITS FACE in the lock line (claimed 23:51:10, declared finish 23:59, crossing named) per the 22:58 ruling. Lock taken with no Godot alive and the previous line IDLE; released 23:55:40.
 - Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.
+
+## HUB 2026-11-18 00:5x CT - the false "no innerHTML" sentence, corrected (docs only, CODE UNCHANGED)
+Row taken: HUB (:37) in the 23:58 TAKE THIS NEXT block. web/index.html (HTML comment, was line 49) and
+web/app.js header comment (was lines 7-8) said there is no innerHTML in app.js. FALSE: app.js has exactly
+TWO innerHTML sites, st.innerHTML (status line) and box.innerHTML (renderNothing). Measured by grep: 2
+assignments, both page-owned. One correction to the team lead's note: the status line is NOT free of
+interpolation - it interpolates two values, esc(age) (text built by ago() from the timestamp) and
+esc(lastError) (a fixed string or the fetch error message), each escaped by esc(); neither is a snapshot
+string. The comments now say exactly that. Zero lines of executable code changed; node --check passes.
+Look: headless Chromium at 1500x900 on the edited files, 8 URLs (?state=empty/fail/stale, ?mock=chronicle,
+crowd, lore, fallen, ?open=1): 15 of 15 section tabs on each, 0 page errors, 0 dialogs, 0 literal
+<img onerror> elements. NOTE: this container has no route to Supabase, so every URL landed on the honest
+"records out of reach" state and the ?mock= data panels did not populate; the hostile-name canary rows were
+therefore NOT re-rendered this run. The diff is comment-only; the team lead should still run it when the
+live page is next checked. Housekeeping: the named stray files (_h32_shot_a..f.png, _tabs_a..c.png,
+_hub_web_run.tgz, web_look.tar, web_look2.tar, _plan_tmp.txt) are COMMITTED to hub per the row, since device
+delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left untouched. Not published.

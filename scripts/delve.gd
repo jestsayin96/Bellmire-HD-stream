@@ -385,7 +385,9 @@ const MB_FIT := {
 	"ratcatcher": 1.07,   # S32: art's _fit_ratcatcher_register.json pairs.ratcatcher.ratio, copied not re-derived
 	"drover": 1.00,   # S32: art's _fit_report.json pairs.drover.ratio, copied not re-derived
 	"paviser": 1.09,   # S32: art's _fit_report.json pairs.paviser.ratio (MINIBOSSES.md 29), copied not re-derived
-	"fenman": 1.03}   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
+	"fenman": 1.03,   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
+	"comfitmaker": 0.93,   # S33: art's _fit_comfitmaker_register.json pairs.comfitmaker.ratio, copied not re-derived
+	"leech": 0.95}   # S33: art's _fit_leech_register.json pairs.leech.ratio (MINIBOSSES.md 32), copied not re-derived
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
 	for nm: String in [key + "_chibi", key]:

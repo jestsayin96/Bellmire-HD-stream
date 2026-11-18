@@ -11571,6 +11571,29 @@
           "Sugar crunches underfoot, and the smell of honey goes thin.",
           "The tray is empty. It gave you all it had."
         ]
+      },
+      "leech": {
+        "arrive": [
+          "A stooped man in a linen coif, bent over a brass basin.",
+          "He holds a fleam over the rim. He is in no hurry.",
+          "Five cupping horns hang at his thigh, worn smooth.",
+          "Nobody mends in here. What you spend, the basin takes.",
+          "Whatever you heal goes into the basin. He drinks from it.",
+          "The level in the basin is the mending you paid for.",
+          "Tip the basin and your own healing comes back.",
+          "His gown is undyed wool, washed grey. An old trade, long practised.",
+          "He has seen a great many wounds. He keeps them open."
+        ],
+        "fall": [
+          "The Leech is down. The basin goes over and runs across the floor.",
+          "The fleam drops. It rings once on the stone.",
+          "Mending comes back. Wounds close as they should.",
+          "He bent over the bowl to the last.",
+          "The basin is empty. It held more than he took from you.",
+          "The Leech is down. Heal what you like.",
+          "The coif is spotted dark. None of it is his.",
+          "The horns swing on their cord and are still."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -11582,7 +11605,8 @@
     "_note_c107": "C-107: feed lines for the three newest art-lane minibosses, Moulder, Ratcatcher and Drover (9 arrive and 8 fall each, 51 lines). by_key now holds 28 keys. Same shape as the other 25; arrive and fall only, {name} not used. Each arrive pool carries one line that says the mechanic plainly and the rest are scene. No mechanic is built from these lines; they describe what art drew.",
     "_note_c108": "C-108: feed lines for the 29th art-lane miniboss, the Paviser (9 arrive and 8 fall, 17 lines). by_key now holds 29 keys. Same shape as the other 28; arrive and fall only, {name} not used. One arrive line says the facing mechanic plainly (the board swings to whoever is hurting it most) and one says the answer (go round); the rest are scene. No mechanic is built from these lines; they describe what art drew. Nothing spawns this body unless the game build has a paviser row; that is engine work and is not changed here.",
     "_note_c109": "C-109: feed lines for the 30th art-lane miniboss, the Fenman (9 arrive and 8 fall, 17 lines). by_key now holds 30 keys. Matches the 16 recent keys that carry arrive and fall only (14 older keys also carry act and broken); not the other 14, {name} not used. One arrive line is the art lane's own feed line, kept word for word (Something out there is listening.). Two arrive lines say the mechanic plainly (it comes for whoever moved last; a hero who stands still is not there to it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines; they describe what art drew. Nothing spawns this body unless the game build has a fenman row; that is engine work and is not changed here.",
-    "_note_c110": "C-110: comfitmaker (thirty-first miniboss, art lane) gets arrive and fall lines, 9 and 8. by_key now holds 31 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 31: a sugar-hard shell nothing the party carries can mark, so it hands out comfits and a comfit is the one thing that cuts it, at the price of a gummed hand that swings slower while it holds the sweet. Two arrive lines state the mechanic plainly and the fall lines answer it. No mechanic is built from these lines. Nothing spawns this body unless the game build has a comfitmaker row; that is engine work."
+    "_note_c110": "C-110: comfitmaker (thirty-first miniboss, art lane) gets arrive and fall lines, 9 and 8. by_key now holds 31 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 31: a sugar-hard shell nothing the party carries can mark, so it hands out comfits and a comfit is the one thing that cuts it, at the price of a gummed hand that swings slower while it holds the sweet. Two arrive lines state the mechanic plainly and the fall lines answer it. No mechanic is built from these lines. Nothing spawns this body unless the game build has a comfitmaker row; that is engine work.",
+    "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

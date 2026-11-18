@@ -1,3 +1,14 @@
+## HUB 2026-11-18 08:45 CT - "SELLS UP TO" UNDERLINE RED-PROVED IN A RENDER; THE DELTA IS CLEAN. NO web/ CHANGE THIS RUN.
+TAKE THIS NEXT gave HUB row 6 (07:58 block): red-prove the style.css fix, re-run the security greps on the delta. Done as written.
+THE NUMBER: of 8 rung shops rendered (?mock=shops, headless Chromium 1400x900, supabase stubbed to []), computed border-bottom on the tier word:
+  WITH the 5 rules:     junk 0px/none, starting 0px/none (no class, fully bare); common 2px TRANSPARENT; uncommon 2px rgb(255,255,255);
+                        rare rgb(77,140,255); very rare rgb(179,89,255); legendary rgb(255,140,31); artifact rgb(255,33,26)  -> 5 of 5 hued rungs painted, 3 of 3 bare rungs bare.
+  STRIPPED (copy, rules removed): ALL 8 are 0px/none  -> the tier word loses every rung colour. RED PROVEN: the fix is the only thing painting them.
+Picture viewed (crop of the 8 cards): coloured underlines read cleanly under the tier word on parchment; the white uncommon rung is visible only via its dark shadow line, as designed; junk/starting/common show no frame. Nothing wrong seen.
+Note (harmless): common carries a transparent 2px border + 1px padding, so it is bare to the eye but 3px taller than junk/starting; not worth a change.
+SECURITY on the delta + whole file: node --check OK; innerHTML only at the two page-owned sites (lines 255, 301); no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP meta present and unchanged; delta adds no snapshot value to src/href/style (the new b gets a class from the rarityClass whitelist). Hostile-name test on the UNMODIFIED shipped files: ?mock=shops / lore / chronicle / satchel / crowd&open=1 -> hostile <img src=x onerror> present as literal text, zero <img src=x> elements, zero dialogs, zero page errors; ?state=empty / fail / stale and ?mock=crowd all render with no errors.
+Scratch copies lived outside the repo (cloud scratch); nothing patched is committed. web/ is byte-identical to origin/hub. NOT claiming READY TO PUBLISH as a new claim: the pending 2-file/19-line delta is the one the team lead already put to the supervisor; the gate evidence above is for that delta. Live-dot colour unchanged (no layout work this run).
+
 ## D-R3 GAME BUILD 2026-11-18 07:16 CT - THE THIRD RARITY TABLE CLOSED (fishing.gd), AND THE S32 "SIDE" WAS A 49-DEGREE THREE-QUARTER
 TAKE THIS NEXT 07:04 rows 1 and 2. Lock 07:08:45 -> released below.
 ROW 1 - scripts/fishing.gd RARITY_COLOR is now art's RARITY_HUE_LAMP exactly (canonical +0.10, clamped):
@@ -9975,6 +9986,41 @@ NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched; twitch_reply(user
 unchanged, still no @name and no rate limiting. NO live Twitch test this cycle: nothing was
 redeemed, nothing was cheered, bellmirebro posted nothing, no channel state was read or written.
 
+## S33 - sixteen miniboss bodies were in NO draw; every art body now has its theme's row (game build, 2026-11-18 08:2x CT)
+TAKE THIS NEXT 08:0x CT row 1 said "your call ... or wire a miniboss row". Measured before acting:
+32 art bodies on disk (non-_chibi), 31 keys with content's lines, but `DungeonHD.THEME_MINIBOSS_MORE`
+held ONE extra key (fogbound -> fenman). Sixteen bodies that had art's fit ratio in `Delve.MB_FIT`
+AND content's arrive lines - quartermaster, jointer, greener, dyer, pressman, ratcatcher, reeve,
+paviser, strickler, loader, tanner, hurdleman, drover, moulder, tapster, comfitmaker - were in no
+theme's draw, so none of them could ever stand on a floor. Their S-cycle fits were inert.
+- `scripts/dungeon_hd.gd` THEME_MINIBOSS_MORE now lists every non-base art body under its theme.
+  THEME IS ART'S OWN TAG, read off field 5 of each tuple in tools/art/minibosses.py, not guessed:
+  barracks quartermaster; workshop jointer/greener/dyer; prison pressman; shrine leech; crypt
+  ratcatcher; keep reeve/paviser; treasury strickler; mess loader; flooded tanner; grassland
+  hurdleman; wood drover; firepit moulder/tapster; fogbound fenman; confection comfitmaker.
+  The existing gate in miniboss_for (body AND arrive lines) still decides - `leech` is listed and
+  is drawn on ZERO floors until content writes its lines. The draw stays hashed off the floor
+  number, so floor layout/purses are untouched; which miniboss a given floor gets DOES change.
+- `scripts/delve.gd` MB_FIT += comfitmaker 0.93 (_fit_comfitmaker_register.json) and leech 0.95
+  (_fit_leech_register.json), copied not re-derived.
+- NEW GATE tools/_s33_draw.gd (headless): per listed key - art tag == table theme, loadable body,
+  MB_FIT == art's pairs.<key>.ratio to 0.005, drawn on >=1 of 400 floors iff it has arrive lines;
+  plus every body on disk is in some draw. S33_RED=1 injects a bodiless key.
+  IT CAUGHT A REAL FAULT ON ITS FIRST RUN: comfitmaker.glb and leech.glb had never been imported, so
+  miniboss_model() answered "" and the Comfitmaker would have been silently dropped
+  (S33_DRAW FAIL 3 of 121). After --headless --import: S33_DRAW OK 121 checks.
+  Red proof: S33_RED=1 -> S33_DRAW FAIL 3 of 125 (tag, body, ratio all caught), rc=1.
+- NEW LOOK tools/_s33_look.gd (windowed, S33_KEY): body beside the posed knight, fitted to
+  MB_HERO_H*MB_FIT. comfitmaker S33_LOOK OK (5 checks) h=2.28 ratio 0.93; leech S33_LOOK OK (5)
+  h=2.33 ratio 0.95. LOOKED AT comfitmaker_1front, comfitmaker_3side90, leech_1front in
+  renders/cycles/s33/: both stand on the floor clear of the knight; the comfit stand and the
+  Leech's basin-on-tripod read at the hero's scale.
+GATES: parse 0 SCRIPT ERROR; MBFEED_TEST OK 80 checks; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2313; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR;
+TOWNWALK in_solid=0/17275 raid_in_solid=0/7003 PASS.
+NOT DONE, NAMED: the ONE IDEA per miniboss (summon, re-plate, hook-drag...) is still not delve-side
+behaviour for these sixteen - they now stand up named, with their lines and their rally, which is
+what the fenman got at S32. Content: the leech needs arrive/fall lines to enter the shrine draw.
 ## B50 - the published lord count: "the eight lords" was true and nothing in the house held it to it (chat bot, 2026-11-18 08:4x CT)
 
 THE DEFECT CLASS, AND IT IS MY OWN LANE'S NAMED LEFTOVER, NOT A NEW ITEM. B35 listed the four

@@ -377,7 +377,8 @@ const MB_FIT := {
 	"reeve": 0.80,   # S22: art's measured ratio (lead's 14:58 row), copied not re-derived
 	"tapster": 1.14,   # S23: art's _fit_tapster_register.json ratio (lead's 16:58 row), copied not re-derived
 	"pressman": 1.16,   # S25: art's _fit_report.json pairs.pressman.ratio (lead's 17:58/18:58 rows), copied not re-derived
-	"strickler": 1.04}   # S25: art's _fit_report.json pairs.strickler.ratio on origin/art (lead's 18:58 row), copied not re-derived; inert until the body merges
+	"strickler": 1.04,   # S25: art's _fit_report.json pairs.strickler.ratio on origin/art (lead's 18:58 row), copied not re-derived; inert until the body merges
+	"greener": 1.02}   # S28: art's _fit_greener_register.json pairs.greener.ratio (lead's 21:05 addendum), copied not re-derived
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
 	for nm: String in [key + "_chibi", key]:

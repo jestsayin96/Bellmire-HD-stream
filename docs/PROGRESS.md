@@ -3146,3 +3146,38 @@ carries nothing of mine that is not committed.
 ### subscription of any kind. bellmirebro posted no message in any chat, and no channel setting was
 ### read or changed. The only Godot launched was the headless battery above, which opens no
 ### EventSub connection of its own.
+
+## D-cycle - S28: TOWNWALK BACK TO GREEN (S27's red was my launcher, not the town); THE GREENER'S MB_FIT LINE AT 1.02; AND SIX MINIBOSS BODIES THAT HAD NO .import FILE AND SO COULD NOT LOAD. 2026-11-17T22:16-06:00 (game build)
+TAKE THIS NEXT (20:58 block GAME BUILD row + the 21:05 addendum's one line) gave: System 4 (closed in writing at S27, awaiting the
+lead) and ONE owed line - the greener's MB_FIT ratio. S27 left TOWNWALK red with a named next step; that went first.
+- TOWNWALK, FIRST, AS S27 SAID: re-run headless on the merged tree (d6ba432 + my one line) with Godot's stdout going STRAIGHT TO
+  THE LOG FILE (Popen stdout=file), not buffered through a pipe. It streamed T= lines every 10 s and finished on its own in 88 s:
+    TOWNWALK in_solid=0/18249 (0.000%) raid_in_solid=0/6302 (0.000%) PASS   (STUCK_ON_ROUTE_TOTAL 3 over 120 s)
+  So S27's two "no verdict" runs were MY INSTRUMENT (a captured pipe), not the town. Nothing to bisect. build/s28/townwalk.log.
+- THE OWED LINE: delve.gd MB_FIT "greener": 1.02, copied from renders/art/minibosses/_fit_greener_register.json
+  pairs.greener.ratio (creature_h 2.5), NOT re-derived. Backup scripts/delve.gd.bak_s28 (not committed).
+- *** FINDING, AND IT IS BIGGER THAN THE LINE: SIX MINIBOSS .glb HAD NO .import FILE - dyer, greener, pressman, reeve, strickler,
+  tapster. *** Without one, ResourceLoader.exists() is false, Delve.miniboss_model() returns "" and the body silently falls back to
+  the theme creature (miniboss_no_model). REEVE (wired S22), TAPSTER (S23) and PRESSMAN (S25) have therefore never been loadable
+  from a clean checkout - every MB_FIT line I added for them was inert. Found because my new gate went RED on exactly this before
+  the import. Fixed by `--headless --import` (rc=0, 12.3 s, 0 ERROR lines); the six .import files are committed with this cycle
+  (29 were tracked, now 35 + the 36th glb's - all 36 bodies have one). ART: when you ship a .glb, either commit the .import
+  Godot makes or say so - the engine lane will import it, but nobody was.
+- NEW GATE tools/_s28_mbfit.gd (headless --script, quits itself). Asserts Delve.miniboss_ratio() for the real model path of
+  greener 1.02 / strickler 1.04 / pressman 1.16 / tapster 1.14, a model on disk for each, and a floor of 30 bodies walked:
+    MB_FIT_VERDICT OK (36 bodies on disk, 4 handed ratios proved, 2 fall back to 1.0)
+  PROVED RED TWICE: before the import, FAIL ["greener: no model on disk", "strickler...", "pressman...", "tapster..."];
+  and with S28_EXPECT_GREENER=1.03, FAIL ["greener: ratio 1.02 != 1.03"].
+  THE TWO THAT FALL BACK TO 1.0: dyer and tanner - no ratio has been handed to me for either. Not invented; when the lead hands
+  the register numbers they are one line each.
+- LOOKED AT IT: tools/_s28_greener_look.gd (windowed, quits itself) loads greener.glb through Delve.miniboss_model, scales it the
+  way delve.gd does (MB_HERO_H x ratio), stands it by a 2.45 m hero-height post:
+    S28_GREENER model=greener.glb want=2.499 measured=2.499 ratio=1.020 ; S28_GREENER_VERDICT OK (2 shots)
+  renders/cycles/s28/greener_front.png, greener_side.png. Both feet on the floor, crust reads green on arms/chest/legs, the body is
+  hero height. The lead's two faults are visible as named: the scraper pole crosses the figure corner to corner, and from the front
+  the rack is the top of the silhouette. Nothing of mine to add.
+- NOT DONE AND SAID: the greener is still NOT SPAWNABLE - it is not in DungeonHD.THEME_MINIBOSS (the spawn gap, above this seat),
+  so the line is live for the moment it is given a theme, not before. No in-floor render is possible until then.
+- Battery on this tree: PARSE rc=0 0 SCRIPT ERROR / 0 Parse Error (23.9 s; re-run after import, 0 again); TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2066 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2 (capped); TOWNWALK PASS.
+  No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team lead ticks.

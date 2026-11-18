@@ -3449,3 +3449,73 @@ creature, so this was measured separately - a clipped icon is not a blank one.
 only third-party asset in any render here is the CC0 KayKit adventurer `Knight.glb`
 used as the measuring stick in the fit sheet, already logged in
 `docs/art/ASSET_SOURCES.md`.
+
+---
+
+## THE RAMMER (34th) - LIVE FAULT, FOUND 2026-11-18 12:39 CT BY MY OWN SILHOUETTE SHEET
+
+The body shipped GREEN at a8a85a6 (ratio 1.12, 3/3 proving views, 0 blind, blank
+check 3 files 0 failures) and that verdict stands. This is a fault **the register
+is structurally incapable of seeing**, because every number it computes is about
+hero-vs-creature occlusion and this is a creature occluding **itself**.
+
+**THE CLAIM IN MY OWN PASS 5, IN THE SOURCE:** the monkey hangs 0.33 m below the
+head so there is "a visible gap of rope, so it reads as HANGING and not as part
+of the frame".
+
+**MEASURED, on `renders/art/minibosses/rammer/_rammer_silhouette.png`, walking the
+image column through the head cap's centre (3.31 mm/px at sheet scale):**
+
+| view | black run from cap | first white |
+|---|---|---|
+| front | **831 px, unbroken, cap to floor** | **none** |
+| three-quarter | 323 px | 107 px |
+| side | 408 px | 247 px |
+
+**In the front view the gap is not small. It is not there.**
+
+**AND THE CAUSE IS NOT THE ROPE.** I assumed the rope before I measured the width,
+and the width says otherwise: through that band the run grows **52 -> 89 px** as it
+descends. A 44 mm rope is 13 px. That is the **two front legs**, which by z 2.3-2.5
+have converged to about ±0.17 of centre and overlap the centre line in a front
+orthographic view. Pass 5 fixed the monkey's width against the legs at z 1.93 and
+never checked the band **above** the monkey, where the legs are tighter.
+
+**SCOPE, HONESTLY:** in colour it reads - pale wet oak legs against dark iron cap
+and monkey, plain on `hero_front.png`. This is a **hue-free read fault only**. But
+pass 5's own argument is that the telegraph must survive without hue, so by the
+body's own standard it is a fault, and it is the Beadle's family: every number
+green, the shape saying less than the numbers claim.
+
+**NOT FIXED.** The cheap fix is to rake the two front legs ~0.06 wider where they
+meet the head so they pass outside the cap's footprint - one pass, one re-render,
+one re-prove. Not taken inside a row that asked for a write-up.
+
+**ALSO OPEN ON THIS BODY, FROM LOOKING AT THE THREE ON-BODY VIEWS:** the raked back
+leg shares a line with the hauler in the side view (reads as impalement for a
+moment; nothing clips); the frame collapses to a pole from the side; the pile is
+the weakest read in the back view and its shaft shows below the floor plane; and
+the hauler's faceting is coarser than the chibi knight's (its proportion is right
+after pass 6 - it is segment count, not head-height).
+
+### CORRECTION 2026-11-18 12:46 CT - THE CAUSE ABOVE WAS A GUESS; HERE IS THE MEASUREMENT
+
+`tools/art/_rammer_yaw_ab.py` renders the shipped glb through one ortho camera at
+yaw 0/8/16/24/40 and counts daylight in the cap-to-monkey band across the cap's
+full width. **Zero at every angle** (denominator 8778 -> 6498, so the instrument
+is live). A height profile of the yaw-0 alpha: **0 mm of daylight from z 2.50
+down to z 1.90**, first opening at z 1.80 (134 mm) and widening below.
+
+So the band is not "the two front legs" and is not a projection accident - it is
+**the tripod converging at its own apex**, which is what a tripod is, plus the
+rope. **Raking the legs would do nothing, and no camera angle opens it.** Lowering
+the monkey under z 1.80 to find daylight would delete the telegraph it serves.
+
+**What holds:** pass 5's other half - the monkey stands proud of the legs at its
+own height, so the tower bulges where the block is. The telegraph is that bulge,
+the chalk ring on the floor, and the oak/iron colour split. The source comment
+claiming "a visible gap of rope" is what is wrong, not the model.
+
+**The one shape change that would pay, left for the next pass on this body:**
+narrow the head cap so the monkey is the widest thing in the upper frame by a
+clear margin at every angle.

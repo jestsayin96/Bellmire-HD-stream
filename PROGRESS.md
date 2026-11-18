@@ -9347,3 +9347,8 @@ AFTER: 100% [17.72,19.00]/ink 17, 125% [21.82,23.50]/ink 21, 150% [27.24,29.00]/
 LOOKED AT: renders/cycles/20261117_u62/rod_s150_h150.png (before, files without 'after' in the name) vs rod_after_s150_h150.png. Differences is one pixel row; letters clean in both at this zoom; the numbers carry the proof, the picture confirms nothing else moved.
 HONEST LIMITS: stripe rows in the script are computed from the same formula the draw uses, only the ink is read off pixels. _u58_contrast.gd's old hard-coded 17.0 floor line was NOT rewired to _wm_baseline this cycle.
 Parse 0 errors. Files: hud_dock.gd, tools/_u62_scales.gd. Not ticked by me.
+
+## C-99 (2026-11-18 CT) - TAKE THIS NEXT row for CONTENT (21:05 addendum): arrive and fall lines for the Greener (lore_lines.json only)
+
+Took the 21:05 addendum's CONTENT row. Added miniboss_feed.by_key.greener: 9 arrive + 8 fall (the dominant 9/8 shape), plus _note_c99 inside miniboss_feed. Trade is verdigris (copper over vinegar, scraper, brazier, green to the elbow); one arrive line is art's feed line verbatim. The weapon-greening mechanic is flavour only and is NOT built. No new top-level key. VALIDATION OK: lore_lines.json parses, by_key is 25 keys, every pre-existing key unchanged (diff removes only the trailing comma on _note_c98).
+CODE WIRING: none. Greener spawn remains blocked on the THEME_MINIBOSS gate (engine work); MB_FIT greener 1.02 is the game build's line.

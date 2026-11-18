@@ -73,12 +73,26 @@ func _process(_d: float) -> bool:
 		var icons: Array = []
 		_count(_holder, icons)
 		var keyed := 0
+		var over := 0
 		for ic in icons:
 			if String(ic.key) != "" and ic.size.x > 4.0:
 				keyed += 1
+		# L31c: every chip must END inside its own row's bar width (W-24 at 1080p).
+		# Each row's first child is the bar box; any chip whose right edge passes the
+		# box's right edge is a word cut off in the live frame.
+		for row in _holder.get_child(0).get_child(0).get_children():
+			var bar: Control = row.get_child(0)
+			# the bar's DESIGNED width, not its laid-out one: a VBox widens the bar to
+			# its widest child, so size.x would grow with the overflow and never read red
+			var lim := bar.global_position.x + bar.custom_minimum_size.x + 0.5
+			if row.get_child_count() > 1:
+				for chip in row.get_child(1).get_children():
+					if (chip as Control).global_position.x + (chip as Control).size.x > lim:
+						over += 1
+		print("L31_FIT chips_past_bar=%d" % over)
 		root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + "/l31_icons_1080.png"))
 		print("L31_ICONS party=%d states_wanted=%d icons=%d keyed_and_sized=%d" % [d.party.size(), want, icons.size(), keyed])
-		print("L31_ICONS %s %d" % ["OK" if want > 0 and keyed == want else "FAIL", keyed])
+		print("L31_ICONS %s %d" % ["OK" if want > 0 and keyed == want and over == 0 else "FAIL", keyed])
 		return true
 	if _f > 9000:
 		print("L31_ICONS FAIL timeout")

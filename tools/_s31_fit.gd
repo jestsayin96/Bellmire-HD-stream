@@ -72,10 +72,14 @@ func _initialize() -> void:
 		_heroes.append([host, m, String(pair[0]), bool(pair[1])])
 		var n := "floor" if pair[1] else "drink"
 		_shots.append([n + "_1front", Vector3(x, 1.1, -4.2), Vector3(x, 0.9, 0)])
-		_shots.append([n + "_2side", Vector3(x - 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
-		if not pair[1]:
-			# S31c: the drinking hand's side - from the far side the chibi head hides the held bottle
-			_shots.append([n + "_2side_hand", Vector3(x + 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
+		if pair[1]:
+			_shots.append([n + "_2side", Vector3(x - 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
+		else:
+			# S32: THE CANONICAL drink side shot is the DRINKING HAND's side (+x, handslot.r). From
+			# the offhand side the chibi head hides the held bottle - the lead's 05:58 finding, the
+			# same blindness as art's FAULT 4. The offhand view is kept, named as such.
+			_shots.append([n + "_2side", Vector3(x + 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
+			_shots.append([n + "_2side_offhand", Vector3(x - 3.5, 1.1, 0), Vector3(x, 0.9, 0)])
 		x += 6.0
 	_shots.append(["both_3stream", Vector3(3.0, 9.0, -14.0), Vector3(3.0, 0.8, 0)])
 

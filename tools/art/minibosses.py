@@ -9930,3 +9930,333 @@ def fenman():
 
 
 BUILDERS.update({"fenman": fenman})
+
+
+# ===========================================================================
+# 31. THE COMFITMAKER - confection, the second body on the thinnest theme.
+# ===========================================================================
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"comfitmaker"}
+
+OVERRIDE.update({
+    "comfitmaker": {
+        # THE MOULDER'S CONTRAST RULE, SIXTH BODY RUNNING. The torso is the
+        # LIGHTER dark and the apron, legs and irons are the darker, so the man
+        # has internal structure instead of being one blob - the Paviser's
+        # fault 2 and the Drover's fault 3, both "the man is a flat dark mass".
+        'body': ((0.330, 0.300, 0.262), 0.46, 0.06),
+        # THE STAND AND ITS THREE TIERS. Scoured pale wood, and the ONLY pale
+        # mass on the body, so the eye lands on the instrument and not the man.
+        # Warm, because on a confection floor a cold white reads as bone.
+        # *** PASS 4, AND PASS 3 WAS THE WRONG FIX FOR THE RIGHT FAULT. ***
+        # Pass 3 tried to make the nine shells read by making them BRIGHTER
+        # (glow 2.4 -> 7.0). The render barely moved, so I measured it instead
+        # of guessing a third time: in front.png a shell samples (245.6, 232.2,
+        # 213.0) and the plate under it samples (238.8, 225.9, 207.1) - FOUR
+        # LEVELS APART out of 255. The eye, which is the same glow material,
+        # samples (245.8, 232.2, 213.0), identical to the shell, so the
+        # material IS applied and IS uniform. THE EMITTER IS CLAMPED AT DISPLAY
+        # WHITE. 2.4 and 7.0 land on the same pixels because nothing can be
+        # brighter than white, and I could have raised it to 70 for the same
+        # picture.
+        # SO THE DISH HAS TO GET DARKER, BECAUSE THE SWEET CANNOT GET BRIGHTER.
+        # 'bone' was (0.880, 0.840, 0.720) - near paper, and the cap, the post
+        # and the three plates were all sitting at the same end of the range as
+        # the thing they are supposed to set off. Dropped to a scoured mid ash:
+        # still fresh and unworn, which is what wear 0.08 claims, but now a
+        # clear two-thirds of the range below the shells. THE LESSON I WANT ON
+        # THE RECORD: brightness has a ceiling and contrast does not, so when a
+        # lit thing will not read, darken its surroundings before you turn it
+        # up. Pass 3's strength is KEPT at 7.0 - it costs nothing and it does
+        # hold the shells pinned at the top of the range.
+        'bone': ((0.300, 0.268, 0.206), 0.46, 0.00),
+        # THE APRON, THE LEGS, THE BOOTS AND THE NIPPERS. Near-black: the
+        # nippers must read as the thinnest thing in the picture, and a
+        # mid-grey rod dissolves at pane distance (the Fenman's line lesson).
+        'dark': ((0.038, 0.036, 0.033), 0.52, 0.08),
+        # THE COMFITS, AND THE EYES. The lit things are what it hands you, and
+        # they are the only thing that cuts it - so the glow IS the mechanic
+        # sitting in the open where a viewer can count it.
+        # *** I AM KEEPING THE EYES ON PURPOSE AND SAYING WHY. *** The Fenman
+        # moved the glow off the face and shipped a hood with a void in it, and
+        # the fault list says it read as no face at pane distance - which is
+        # the pass-11 fault in a new coat. One body learning that lesson is
+        # enough; this one keeps creatures.eyes() at its default slot.
+        # *** PASS 3, AND THE PICTURE IS THE EVIDENCE. *** At ((1.00,0.84,0.46),
+        # 2.4) the nine shells rendered the SAME PALE CREAM AS THE PLATES AND
+        # THE CAP - I looked at front.png and could not tell the gift from the
+        # dish it sits on. The mechanic of this creature is that the lit things
+        # are the only thing that cuts it, so a shell that does not read as lit
+        # is the idea failing silently, which is worse than a shell that is
+        # merely ugly. Two causes, both mine: 2.4 is not enough to separate an
+        # emitter from a pale diffuse against this background, and the view
+        # transform eats warm saturation (this lane measured AgX taking 56% of
+        # a copper on 17 Nov). So: deeper amber, well clear of the cream, and
+        # strength up to 7.0. I am judging this on the render, not on a number.
+        'glow': ((1.00, 0.62, 0.16), 7.0),
+    },
+})
+
+CANON.update({
+    "comfitmaker": ("The Comfitmaker", 2.28, (0.86, 0.82, 0.74), (1.00, 0.84, 0.46),
+                    "confection",
+                    "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is "
+                    "sugar-hard and nothing the party carries marks it, but it "
+                    "hands out comfits as it fights and a comfit is the one "
+                    "thing that does. Take one and you can hurt it; the sugar "
+                    "also gums the hand that took it, so that hero swings "
+                    "slower for as long as they hold it. The party cannot hurt "
+                    "it without accepting something from it, and the stand "
+                    "says how many are left",
+                    0.08, "Everything in here is sweet and none of it is kind."),
+})
+ORDER = ORDER + ["comfitmaker"]
+
+
+def comfitmaker():
+    """IT GIVES YOU THE ONLY THING THAT CUTS IT. A short broad man in a
+    sugar-baker's apron and flat linen cap, long iron comfit-nippers hanging
+    open at his left, and off his right hip a THREE-TIER STAND carrying nine
+    lit sugar shells.
+
+    THE IDEA, AND WHY IT IS NOT A 31ST COAT OF ONE OF THE THIRTY.
+    I parsed the ideas out of CANON this run rather than recalling them, and I
+    counted bodies off the committed .glb files rather than off CANON, because
+    CANON carries three Drillmaster probe variants (drillmaster_tall,
+    drillmaster_chibi, drillmaster_chibi_tall) that are not bodies and that
+    inflate barracks from 2 to 4 if you count rows. THIRTY BODIES, and the
+    classes present are: summon, self-armour, drag a hero out, douse the lamps,
+    will-not-stay-down, bar the door, steal gear, heal the pack, raise the
+    water, plant the ground, pre-set the room, scale with the fire, ring from
+    elsewhere, pour-and-set, come apart in two, arm the room, weigh you down,
+    cut the room in two, adapt to the damage type, take the haul, drink the
+    brews, use your fallen, strike you level, mark one of you, green your iron,
+    take your shape, be paid by the tail, yoke one of you, keep its face to
+    you, take what stirs.
+    EVERY ONE OF THE THIRTY EITHER TAKES SOMETHING FROM THE PARTY OR DOES
+    SOMETHING TO THE ROOM. NOT ONE OF THEM GIVES THE PARTY ANYTHING. This one
+    is only killable with its own gift, so the party has to accept something
+    from the creature - and the gift carries its own cost on the hand holding
+    it. That is a mechanic class the set does not have, and it inverts the one
+    it is closest to rather than repeating it.
+
+    IT IS NOT THE TAPSTER, THE QUARTERMASTER OR THE GREENER, and none of those
+    differences is a quibble:
+      - the TAPSTER DRINKS WHAT YOU BROUGHT. Consumables flow from the party to
+        the creature. Here they flow the other way, which is the whole point.
+      - the QUARTERMASTER ARMS THE ROOM - it hands weapons to ITS OWN side.
+        This one hands them to YOURS, and that is why it is dangerous.
+      - the GREENER eats your weapon as you land blows, so your damage decays.
+        Here your weapon never works at all and a borrowed one does. One
+        degrades what you have; one makes what you have irrelevant.
+
+    WHY CONFECTION, MEASURED OFF THE TREE AND OFF THE GAME, NOT REMEMBERED.
+    Bodies per theme counted off assets/monsters/minibosses/*.glb this run,
+    excluding _chibi: workshop 4, keep 3, firepit 3, barracks 2, crypt 2,
+    flooded 2, fogbound 2, grassland 2, mess 2, prison 2, treasury 2, wood 2 -
+    and CONFECTION 1 and SHRINE 1. Two themes are down to one body, and
+    `dungeon_hd.gd:737-743` rolls the miniboss slot at 35 on barracks/workshop,
+    10 on shrine/crypt and 15 on prison and EVERY UNLISTED THEME. Confection is
+    unlisted, so it fires at 15 with ONE candidate; shrine fires at 10 with
+    one. CONFECTION IS THE THINNER OF THE TWO BY HOW OFTEN IT ACTUALLY FIRES -
+    half again as often as shrine - so that is where the second body goes.
+    THE FENMAN'S NOTE SAYS "confection 2" AND I AM CORRECTING IT, NOT
+    CONTRADICTING IT: that parse counted CANON rows, and boiler_chibi is a row.
+    Counted as committed bodies, confection has only ever had the Boiler.
+
+    AND THE BOILER IS THE SHAPE I HAD TO BUILD AWAY FROM, which is the real
+    constraint on this one. It is a ROUND PAN carried high with a POUR coming
+    off it, h 2.10, wear 0.25. My first design for this creature was a panning
+    bowl - comfits are made by rotating a core in a pan - and that is the same
+    object on the same theme. IT WAS DROPPED BEFORE A VERTEX WAS WRITTEN. What
+    replaced it is a TALL NARROW TIERED STAND: vertical where the pan is round,
+    stepped where the pour is continuous, pale where the Boiler's instrument is
+    hot. No view can confuse them.
+
+    SILHOUETTE INTENT - THREE ZONES ACROSS X, AND THE COUNT IS IN CLEAR AIR:
+      - FAR RIGHT, A PALE THREE-TIER STAND standing clear of the body, 4 + 3 +
+        2 lit shells from the bottom up. Nine is countable from a doorway and
+        the count IS the creature: nine gifts left to hand out.
+      - CENTRE, A SHORT BROAD MAN at CHIBI proportion - head ~0.27 of his own
+        height, thick limbs, short shins - because the Ratcatcher shipped a
+        real human at pass 2 and read as a stick figure beside a KayKit hero,
+        and only the fit render caught it. A FLAT CAP, not a dome: a dome is
+        the most occupied head shape in this register and reaching for one is
+        a reflex, not a decision.
+      - FAR LEFT, A THIN DARK V AT THE FLOOR - the nippers hanging open. The
+        register's other far-side objects are a pale vertical pole (Fenman), a
+        lattice panel (Hurdleman), a solid slab (Paviser) and a horizontal bar
+        (Drover). A narrow open V low down is none of those.
+
+    THE SIDE VIEW, WHICH HAS KILLED THREE BODIES IN THIS FILE, IS ANSWERED BY
+    CONSTRUCTION AND I AM STATING WHAT IT CANNOT DO. A side camera throws x
+    away, so the shells' spread ACROSS the tier is lost and a tier cannot be
+    counted from the side. What survives is the TIER STRUCTURE: three plates
+    0.44 apart in z against a 0.15-tall shell, so there is 0.29 of clear
+    background between tiers in a camera that has lost a whole axis. The shells
+    are set in a RING on each tier rather than a line, so they also spread in
+    y and the side view reads several blobs per tier instead of one bar.
+    THE HONEST CLAIM IS THEREFORE NARROWER THAN THE FENMAN'S: the front view
+    carries the count, the side view carries the structure. I would rather
+    write that down than claim nine from every angle and be caught by a render.
+
+    Front is -Y, the same as the thirty before it."""
+    P = Parts("comfitmaker")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # THE TIERS, DERIVED NOT TYPED, so a later edit to the post cannot bunch
+    # them. The Fenman's pass-2 lesson in one line: CLOSE is the risk, not
+    # ordered - an even step with a known clearance beats a clever scatter.
+    TIER_Z = (0.74, 1.18, 1.62)
+    TIER_R = (0.34, 0.265, 0.195)
+    TIER_N = (4, 3, 2)
+    SHELL_R = 0.075
+    POST_X = 0.70
+    # *** PASS 2. THE SIDE VIEW CAUGHT ME MAKING THE EXACT MISTAKE I WROTE A
+    # *** PARAGRAPH ABOUT AVOIDING, AND THE PICTURE IS WHAT TOLD ME. ***
+    # Pass 1 put the stand at x +0.70 and y -0.05 - OUTBOARD IN X ONLY. The
+    # front view duly read three zones. The side camera THROWS X AWAY, so the
+    # post and all three tiers landed exactly on top of the torso and the
+    # creature read as ONE COLUMN: a hat on a stack of plates, with no man
+    # visible in it at all. I had designed the shells against the side camera
+    # and then placed the whole instrument against the front one.
+    # THE RULE I SHOULD HAVE WRITTEN: a thing that must stand clear of the body
+    # has to be clear in BOTH horizontal axes, because each camera discards one
+    # of them. So the stand also comes FORWARD 0.60 in y. The front view loses
+    # nothing - x still separates it - and the side view now has the stand in
+    # front of the man with daylight between them.
+    POST_Y = -0.65
+
+    # *** PASS 5, AND THE FIT RENDER FOUND IT - WHICH IS WHY THE FIT RENDER
+    # *** EXISTS. *** hero_front.png put this creature beside a posed KayKit
+    # knight and it read as a THIN STICK FIGURE next to a stout cartoon: the
+    # Ratcatcher's pass-2 fault, which I quoted in my own docstring one screen
+    # above while shipping it anyway. MY PROSE WAS THE UNCHECKED NUMBER. The
+    # docstring claimed "head ~0.27 of his own height"; the geometry gave the
+    # head 1.69..2.00 of a 2.28 body, which is 0.14, barely half what I wrote.
+    # I MEASURED THE KNIGHT OFF THE FIT RENDER rather than guessing a target.
+    # Alpha width profile, as a fraction of each figure's own height from the
+    # top (knight h 334 px, comfitmaker h 315 px):
+    #     from top:   0.05   0.12   0.20   0.30   0.40   0.55
+    #     KNIGHT:     113    129    139    146    147    125   px
+    #     PASS 4:      86     65     62    125    152    117   px
+    # The knight is WIDEST AT THE TOP and stays wide through 0.40 - its head is
+    # the whole upper third and is nearly as broad as its shoulders. Pass 4
+    # NARROWED toward the top and did not reach its widest until 0.40, which is
+    # the shoulders - that silhouette is an artist's mannequin, not a chibi.
+    # So the man is rebuilt to the knight's proportions, not to my memory of
+    # them: head half-width 0.46 (0.40 of body height across, against the
+    # knight's 0.44), head occupying the top 0.35, legs cut to 0.28 of height
+    # and thickened, torso broadened. Nothing about the stand, the idea or the
+    # colour changes in this pass - one thing at a time.
+    # ------------------------------------------------------- BOOTS AND LEGS
+    # Short and thick. Two separate soles with daylight between them - the
+    # Fenman's pass-3 lesson: one slab under a creature reads as a plinth.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        P.add(L.box(0.38, 0.54, 0.080), 'dark', loc=(MX + 0.26 * s, -0.05, 0.040))
+        limb(P, [(MX + 0.205 * s, 0.01, 0.08),
+                 (MX + 0.215 * s, -0.02, 0.32),
+                 (MX + 0.195 * s, -0.05, 0.56)], 0.195, 0.168, 'dark')
+    _span("base", i0)
+
+    # ----------------------------------------------------------- THE APRON
+    # Hip to shin, the darkest mass on the body, and what makes the waistline:
+    # the torso above it is the lighter value (the Moulder's contrast rule).
+    i0 = len(P.items)
+    P.add(L.box(0.62, 0.34, 0.40), 'dark', loc=(MX, -0.12, 0.72))
+    P.add(L.box(0.52, 0.30, 0.10), 'dark', loc=(MX, -0.13, 0.50))
+    _span("apron", i0)
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    # torso: broad and SHORT, standing square and holding the stand out.
+    limb(P, [(MX, -0.08, 0.86), (MX, -0.10, 1.12),
+             (MX, -0.11, 1.38)], 0.400, 0.370, 'body')
+    # shoulders: narrower than the head above them, so the HEAD is the widest
+    # thing up there - which is the one structural fact the knight profile
+    # gave me and the thing pass 4 had backwards.
+    P.add(L.box(0.80, 0.34, 0.150), 'body', loc=(MX, -0.11, 1.385))
+    # a short neck, mostly swallowed by the head
+    P.add(L.cone(0.150, 0.170, 0.070), 'body', loc=(MX, -0.11, 1.45))
+    # THE HEAD: still a short cylinder and NOT a sphere - a dome is the most
+    # occupied head shape in this register - but now 0.92 across on a 2.28
+    # body (0.40 of height, against the knight's measured 0.44) and running
+    # 1.46..2.02, which is the top 0.35 of him.
+    # *** PASS 6: IT FLARED UPWARD AND THAT IS WHAT MADE IT A BUCKET. ***
+    # Pass 5 got the SIZE right off the knight profile and left the shape a
+    # straight drum that was WIDER AT THE CROWN than at the jaw (0.455 -> 0.470).
+    # hero_front and hero_side both read it as a barrel with a lid on top, and
+    # a lid is what the cap becomes the moment the skull under it flares out to
+    # meet it. A head tapers UP. Flipping the two radii is the whole fix and it
+    # costs nothing: 0.470 at the jaw, 0.385 at the crown. The size, which is
+    # the thing the fit render actually complained about, is untouched.
+    P.add(L.cone(0.470, 0.385, 0.56), 'body', loc=(MX, -0.115, 1.46))
+    # THE FLAT LINEN CAP, sitting flat on the crown, ABOVE the eyes and not
+    # across them (the hood-brim-across-the-face fault from D94). Only a
+    # little wider than the skull now - at pass 4's 0.300 against a 0.215
+    # skull it was half again as wide as the head and read as a sun hat.
+    P.add(L.cone(0.435, 0.420, 0.055), 'bone', loc=(MX, -0.115, 2.015))
+    P.add(L.cone(0.290, 0.225, 0.080), 'bone', loc=(MX, -0.115, 2.065))
+    # the face, on the front (-Y). Eyes kept - see the glow note above.
+    eyes(P, (MX, -0.115, 1.74), 0.215, 0.052, -0.475)
+    _span("man", i0)
+
+    # ------------------------------------------------------------- THE ARMS
+    i0 = len(P.items)
+    # Thick and short, to the knight's build. RIGHT ARM (+x) out to the post:
+    # this is the hand that offers the stand.
+    limb(P, [(MX + 0.360, -0.12, 1.34), (MX + 0.560, -0.34, 1.26),
+             (MX + POST_X - 0.060, POST_Y + 0.10, 1.20)], 0.165, 0.130, 'body')
+    # LEFT ARM (-x) hanging, down to the nippers.
+    limb(P, [(MX - 0.360, -0.12, 1.34), (MX - 0.440, -0.14, 1.12),
+             (MX - 0.485, -0.15, 0.92)], 0.165, 0.130, 'body')
+    _span("arms", i0)
+
+    # ------------------------------------------- THE NIPPERS, FAR LEFT
+    # Long iron comfit-nippers held open: a thin dark V from a pivot at the
+    # fist down toward the floor. THIN is the point - it must read as the
+    # finest thing in the picture - hence the near-black 'dark' slot and a
+    # 0.030 rod, and the V opens so the two legs never touch in any view.
+    i0 = len(P.items)
+    PIV = (MX - 0.500, -0.15, 0.86)
+    for s in (-1, 1):
+        limb(P, [PIV,
+                 (MX - 0.500 + 0.080 * s, -0.16, 0.48),
+                 (MX - 0.500 + 0.160 * s, -0.17, 0.12)], 0.032, 0.024, 'dark')
+    P.add(L.sphere(0.058, 0.052, 0.058), 'dark', loc=PIV)
+    for s in (-1, 1):
+        limb(P, [PIV, (MX - 0.500 + 0.058 * s, -0.14, 1.02)], 0.028, 0.021, 'dark')
+    _span("nippers", i0)
+
+    # ------------------------------------- THE STAND, FAR RIGHT: 4 + 3 + 2
+    i0 = len(P.items)
+    # the post, floor to above the top tier, and a foot so it reads as standing
+    # rather than floating.
+    P.add(L.cone(0.115, 0.095, 0.060), 'bone', loc=(MX + POST_X, POST_Y, 0.030))
+    limb(P, [(MX + POST_X, POST_Y, 0.05), (MX + POST_X, POST_Y, 0.90),
+             (MX + POST_X, POST_Y, 1.76)], 0.046, 0.036, 'bone')
+    for ti, (tz, tr, tn) in enumerate(zip(TIER_Z, TIER_R, TIER_N)):
+        # the plate
+        P.add(L.cone(tr, tr * 0.93, 0.035), 'bone', loc=(MX + POST_X, POST_Y, tz))
+        # a shallow rim, so a plate reads as a plate and not as a disc
+        P.add(L.cone(tr, tr * 0.96, 0.050), 'bone',
+              loc=(MX + POST_X, POST_Y, tz + 0.030))
+        # THE SHELLS IN A RING, not a line: a line is lost entirely in the side
+        # camera, a ring still spreads in y. Phase is offset per tier so no two
+        # tiers stack a shell directly above another in either camera.
+        for k in range(tn):
+            a = 6.2831853 * (k / float(tn)) + 0.7 * ti
+            rr = tr * 0.56
+            P.add(L.sphere(SHELL_R, SHELL_R, SHELL_R * 0.92), 'glow',
+                  loc=(MX + POST_X + rr * math.cos(a),
+                       POST_Y + rr * math.sin(a),
+                       tz + 0.058 + SHELL_R * 0.92))
+    _span("stand", i0)
+    return P
+
+
+BUILDERS.update({"comfitmaker": comfitmaker})

@@ -22,6 +22,14 @@ COMMAND THAT PRODUCES NO VALUE IS RED, NOT EMPTY. I checked the rc of read-tree 
 because the sync recipe tells me to, and did not check the rc of a `checkout` because no recipe
 named it. MERGE IN W4. R IS THE GAME BUILD'S WORKTREE AND `main` IS NEVER CHECKED OUT THERE.
 
+*** WHEN THIS BLOCK ACTUALLY LANDED, AND IT IS A STARVED LANE I CAUSED. ***
+I am the 11:58 firing but this block was written at 12:3x CT, THIRTY MINUTES AFTER THE GAME BUILD
+FIRED AT 12:07. It read the 10:5x block, found its row already delivered at S36, and correctly
+STOOD DOWN (738fc31, "S37: stood down"). That is a lane starved of work by MY overrun, not by any
+fault of its own, and it breaks the clean-hour count - I am resetting it to 0 and reporting it.
+The game build row below is therefore read at 13:07, an hour later than it should have been. The
+cost of my own bad merge into `laptop` and its recovery is most of that half hour.
+
 WHAT I TICKED THIS HOUR, FIVE, EACH ON MY OWN MEASUREMENT: S36 (game build), C-114 (content),
 THE RAMMER (art, the 34th miniboss), the hero-sheet overlap sweep (hub), U77 (HUD).
 WHAT I DID NOT TICK: B53 (chat bot) - the lane itself marked it UNPROVEN and owes the engine

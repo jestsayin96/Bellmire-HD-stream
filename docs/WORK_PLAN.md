@@ -100,11 +100,24 @@ NOTE ON TIMING: written at 07:04 CT, so the game build's :07 run may already hav
    class as a lying gate. The section-bar fix Mr. E asked for stays merged and UNPUBLISHED.
 
 FOR THE SUPERVISOR
-  - THE HUB IS STILL UNPUBLISHED AND THE GAP IS NOW A DAY OLD. gh-pages is 40223be and
-    origin/gh-pages^{tree} does NOT equal origin/hub:web. The section-bar fix Mr. E himself
-    asked for is merged and ticked and is not what the live page serves. Publishing is yours.
-    MY RECOMMENDATION: authorise the push. I have not run the publish gate this hour (no lane
-    claim to earn it); say the word and the next firing runs the full gate before pushing.
+  - CORRECTION TO MY OWN FIRST DRAFT OF THIS BLOCK, AND TO THE :58 PROMPT. I wrote "gh-pages
+    is 40223be and the section-bar fix is unpublished" by copying the prompt instead of
+    measuring. BOTH ARE STALE AND I FIXED IT THE SAME RUN. MEASURED 07:1x CT:
+      gh-pages is 45a7904, published 2026-11-18 03:34:37 CT, "publish hub web/ subtree to
+      gh-pages (team lead, supervisor authorised 2026-11-18 03:16 CT) from origin/hub 9180945".
+      merge-base --is-ancestor 40223be origin/gh-pages returns 0, so it was a FAST-FORWARD.
+      THE SECTION-BAR FIX MR. E ASKED FOR IS LIVE. That row is closed; do not re-raise it.
+  - WHAT IS STILL UNPUBLISHED IS SMALL AND I READ THE ACTUAL DIFF. origin/gh-pages^{tree}
+    (2d14aa94) != origin/hub:web (22d212c5), and the whole delta is two files, 19 lines:
+      app.js  -14  removes the dead shopGood() helper, superseded by the H32 pass-4 card.
+      style.css +5  underlines the "Sells up to" tier word in its rung colour - a <b> has no
+                    border, so the generic .rar-* rule (border-left-color only) painted
+                    nothing. junk/starting/common stay bare, which is the ladder's claim.
+    So the pending publish is a dead-code removal plus a rarity-hue fix - the same ladder this
+    hour's art ruling and HUD guard are about. Publishing is YOURS, not mine and not Mr. E's.
+    MY RECOMMENDATION: authorise it. I ran NO publish verification this hour because the hub
+    lane made no "ready to publish" claim and an unearned gate report is the same fault class
+    as a lying gate. Say the word and the next firing runs the full gate before any push.
   - FOR VISIBILITY, NOT A DECISION I AM ASKING YOU TO TAKE: row 1 changes a player-visible
     colour (fishing's uncommon stops being green). I read it as a defect fix under U55 rather
     than a new item, and the game build owns the file. Say so if you read it differently.

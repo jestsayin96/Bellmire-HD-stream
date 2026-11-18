@@ -1018,6 +1018,59 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
     RAW NUMBER. NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP
     WRITING THEM.
 
+*** LOCK DISCIPLINE - I FOUND A DOUBLE CLAIM, AND THE PROTOCOL AS WRITTEN LET TWO
+*** COMPLIANT LANES COLLIDE. THE FAULT IS THE RULE'S, WHICH MAKES IT MINE. ***
+
+  THE FACT, off docs/RUN_LOCK.txt on `laptop`, lines 382-386:
+    RUNNING 23:51:10 (chat bot B41, declared finish 23:59, CROSSING DECLARED)
+    IDLE    23:55:40 (chat bot B41 released)
+    RUNNING 23:53:34 (HUD U65, declared finish 00:03)
+    IDLE    23:54:40 (HUD U65 released, Godot closed)
+  THE HUD CLAIMED AT 23:53:34 WHILE THE CHAT BOT'S CLAIM WAS LIVE. Two lanes held
+  the lock together for 1 min 6 s, and the HUD ran a WINDOWED GODOT inside it.
+  Nothing broke - every gate on both sides came back green - but the instrument
+  that exists to prevent exactly this did not hold, and a lock that can be held
+  twice is a lying instrument whether or not it cost anything this time.
+
+  NEITHER LANE BROKE A RULE, AND THAT IS THE POINT.
+    The chat bot's window is :45. It claimed inside it, crossed into :52-:07, and
+    DECLARED THE CROSSING ON THE LOCK LINE'S FACE - which the protocol calls
+    correct behaviour, and it is.
+    The HUD's window is :52-:07. It claimed inside it, CLAIM FIRST READ SECOND,
+    which is also what the protocol says.
+  SO THE HOLE IS IN THE RULE: the protocol tells a lane it may cross with a
+  declaration, and tells the next lane to claim first - and never tells the next
+  lane that a live claim is something it must yield to. Two lanes obeying their
+  own instructions produced a collision. That is a broken instrument, not a
+  broken lane, and no line of this goes against either worker.
+
+  THE FIX, IN FORCE FROM NOW, EVERY LANE:
+    BEFORE YOU WRITE YOUR CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS
+    A `RUNNING` LINE WHOSE DECLARED FINISH HAS NOT YET PASSED, YOU DO NOT CLAIM.
+    Wait for it, or stand down for the firing and SAY SO - a stand-down written up
+    is the delivery. A `RUNNING` line whose declared finish HAS passed by more than
+    ten minutes is stale: check for a live Godot process first (the process is
+    ground truth), then say in your line that you cleared it and why.
+    "CLAIM FIRST, READ SECOND" STILL STANDS AND IS UNCHANGED - it is about not
+    doing your work before you have written your claim. It was never a licence to
+    write a claim on top of somebody else's live one. This paragraph is the
+    sentence that was missing.
+    A LANE THAT CROSSES AND DECLARES IS STILL BEHAVING CORRECTLY. The declaration
+    is now worth something: the next lane honours it.
+
+  THE CLEAN-HOUR COUNT RESETS TO ZERO AT 2026-11-18 00:0x CT, on the double claim.
+  It last reset at 10:58 CT on 17 Nov. I am not folding this into a clean count and
+  I am not charging it to either lane: the rule let them do it.
+
+  EVERYTHING ELSE THIS HOUR WAS CLEAN. No stale lock was cleared. No lane was
+  starved. No future stamp in any lock line. HUD held 1 min 6 s against a 15-minute
+  cap; the chat bot held 4 min 30 s against its short protected window; the game
+  build held 5 min 47 s (S29) against 25. ART took no lock (its A/B is Blender-side,
+  not Godot), and the HUB and CONTENT never need one.
+  THE GAME BUILD'S DECLARED FINISH WENT OVER ITS CAP FOR THE FIFTH TIME (claim
+  23:08:40, declared 23:35, cap 23:33:40 - 1 min 20 s over on its face). The lane
+  found it and wrote it down itself. One line, in its row, not an incident.
+
 *** THE SIX ROWS. ONE ITEM EACH. ***
 
   GAME BUILD (:07) - THE L31 REMAINDER: THE STATUS-EFFECT ICONS. You asked for it

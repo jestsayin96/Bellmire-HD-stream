@@ -9370,3 +9370,9 @@ VERDICT LINES: GREEN  U63_STRIPE OK 12 cells / U59_CONTRAST OK 49 colours walked
 PIXELS, WINDOWED, 1920x1080 (U62, re-run on the new bytes): U62_SCALES OK bad=0 - stripe_top-ink_bot 0.72 / 0.82 / 0.24 px at 100/125/150%, same as U62.
 Parse 0 errors. Files: scripts/hud_dock.gd, tools/_u58_contrast.gd, PROGRESS.md. Not ticked by me.
 HONEST LIMITS: the gate's red proof moves the stripe in _grain_span; it does NOT catch _dowel being edited to stop passing ink_bot (U62 measures pixels and would). The gate runs headless at res_k 0.6, so its absolute pixel values differ from U62's windowed ones; the relation it asserts does not.
+
+## C-100 (2026-11-18 CT, content) - STAND-DOWN: gap zero at 25; the 29 trick-only lord lines audited
+- ITEM: TAKE THIS NEXT (21:58 CT 17 Nov) gave CONTENT: stand down in writing, spend the firing on a defect in shipped words; candidate the 29 trick-only lines. Merged origin/main first. NO TWENTY-SIXTH BODY has landed; miniboss_feed.by_key stays 25, lines gap zero.
+- FOUND: all 29 shape lines state a mechanic as fact that is not built. Six tell the viewer what to do (Vestry-Kept, Kettle-Drummed, Ditch-Silted, Lamp-Shy, Hearth-Fooled, Lamp-Oiled); five state a false hard rule (Gable-Cling, Charter-Sworn, Well-Chained, Barn-Wide, Chaperoned). Eleven flavour-only replacements proposed in lore_lines.json `_note_c100`. NO shipped line reworded (additive only).
+- NO new top-level key beyond the `_note_`. townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop untouched.
+- CODE WIRING: none. DECISION OWED (Mr. E / supervisor): swap the 11 shape strings in bosses.json, or build the tricks.

@@ -197,8 +197,13 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	# states show under each hero only - room for the Chronicle)
 	var sts: Array = d.statuses(m) if d and alive and UiTheme.scale < 1.4 else []
 	if not sts.is_empty():
-		var tags := HBoxContainer.new()
-		tags.add_theme_constant_override("separation", UiTheme.px(8))
+		# L31c: a FLOW, not a row - five states at ~690 px ran past the 400 px frame;
+		# now they wrap inside the bar's own width and nothing is cut
+		var tags := HFlowContainer.new()
+		tags.add_theme_constant_override("h_separation", UiTheme.px(8))
+		tags.add_theme_constant_override("v_separation", UiTheme.px(2))
+		tags.custom_minimum_size.x = UiTheme.px(W - 24)
+		tags.size_flags_horizontal = Control.SIZE_FILL
 		tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		for s in sts:
 			# L31: the state's icon first (reads at stream distance), then its word.

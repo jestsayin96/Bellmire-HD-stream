@@ -9388,3 +9388,21 @@ Windowed U62 re-run, renders/cycles/20261117_u62/all_u64_*.png looked at at 100%
 HONEST LIMIT: U62's pixel measure still reads h=96 at 100% as clear=false (stripe top 0.73 px below ink bottom, under its 1 px floor) -
 sub-pixel antialiasing, unreachable at 1080p; the arithmetic gate cannot see ink rows, U62 owns that fault.
 STILL UNCAUGHT: a wrong ROD_WORDMARK[1] (bottom rod true) - harmless (stripe only moves down).
+
+## B41 - the `dye` price guarded: one price declared in three lanes' files (chat bot, 2026-11-17 23:5x CT)
+- ITEM: TAKE THIS NEXT (22:58 CT 17 Nov) gave CHAT BOT: "THE `dye` PRICE, THE ONE YOU NAMED AND DID NOT CLAIM." Merged origin/main first (61ebe47, clean).
+- THE SHAPE, AND WHY B40 LEFT IT: `dye`.cost in data/commands.json publishes "25 gold" (mine). The dyer charges `haggle(h, cost_for(h, int(items().get("dye_cost", 25))))` - scripts/roster.gd:1258. So the base a viewer pays comes from data/items.json `dye_cost` (CONTENT's file), and if that key is ever absent the dyer falls back to a literal 25 written inside roster.gd (GAME BUILD's file). ONE PRICE, THREE DECLARATIONS, THREE LANES, all three reading 25 today by coincidence, and nothing in the house compared any pair. B40 guarded three prices whose authority was one constant and said this one was a different shape; it is the different shape that made it worth an hour, not a harder number.
+- GUARD (scripts/chatcmd.gd, in ChatCmd.commands() beside the B39/B40 price guards), THREE ARMS:
+  DYE ANCHOR - `dye`.cost stops carrying a number before "gold", so the published price is unchecked.
+  DYE AUTHORITY - data/items.json carries no `dye_cost` key, so the dyer is on roster.gd's fallback literal and the data key that owns the price is dead.
+  DYE COST - published number != the number the dyer charges, raw value printed.
+- HOW THE CHARGED NUMBER IS READ: through `Roster.items()`, the SAME static accessor the dyer itself calls, so the guard compares against the authority in play, not a copy. I DELIBERATELY DO NOT RESTATE THE 25 FALLBACK on my side - a fourth copy of a price is the defect, not the guard. The published-price reader is the same digits-before-"gold" walk B40 used for its three, so one reader serves every flat price.
+- GATES, four, GREEN on the shipped bytes: PARSE rc=0 0 errors; L14_TEST OK (22 checks); TWITCH_PARSE OK (8 checks); COMMANDS_DOC OK wrote 27 commands as a NO-OP with docs/COMMANDS.md md5 553eb7d03245646838938e65cbf47c2e UNCHANGED. ZERO COMMANDS_DATA lines on the real data.
+- NO DATA CHANGE: data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before and after, no new command, so docs/COMMANDS.md needed no regeneration and did not drift. Drift checked BOTH directions: 27 order == 27 commands, 0 entries with no dispatch, 0 dispatched verbs with no entry.
+- RED PROOFS, TWO OF THREE ARMS, both from MY OWN commands.json, data restored byte-identical 0908b4db after each and L14_TEST green on the restored bytes:
+  (1) `dye`.cost -> "30 gold" => COMMANDS_DATA DYE COST, published 30, charged 25.
+  (2) `dye`.cost -> "a few coins" => COMMANDS_DATA DYE ANCHOR, number before "gold" gone.
+- THE THIRD ARM IS UNPROVEN AND I AM NOT CLAIMING IT. Proving DYE AUTHORITY means making items.json lack `dye_cost`, and data/items.json is the CONTENT lane's file which I am forbidden to edit - including transiently. The arm is written and parses; it has NOT been seen to fire. Needs either content to run it, or a supervisor ruling that a transient restored-to-the-byte edit of another lane's data file is allowed for a red proof. ROUTED UP, not quietly absorbed.
+- INCIDENTAL, WORTH ONE LINE: Godot's JSON reads `dye_cost` as a FLOAT - the red proof printed raw value `25.0`, not `25`. `int()` makes it 25 so nothing is wrong, but any future guard comparing a JSON number by identity rather than through `int()` would read a false mismatch.
+- PROTOCOL: B40 declared a finish of 23:03 that crossed into the HUD's :52-:07 window without saying so. This run DECLARED THE CROSSING ON ITS FACE in the lock line (claimed 23:51:10, declared finish 23:59, crossing named) per the 22:58 ruling. Lock taken with no Godot alive and the previous line IDLE; released 23:55:40.
+- Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.

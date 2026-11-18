@@ -1258,11 +1258,9 @@ static func commands() -> Dictionary:
         # types !respec, and is charged RESPEC_COST whatever my doc says. Nothing in the house
         # compares the two. The cost strings are MINE, so the lie would be mine to publish, and
         # the number that gets taken off a hero is the one a viewer can count in their purse.
-        # WHAT I AM NOT CLAIMING: `dye`.cost publishes 25 and the dyer charges
-        # items().get("dye_cost", 25) - items.json (content's) with a roster.gd fallback, so its
-        # authority is a DATA key and not one constant. All three readings are 25 today. It is a
-        # different shape and I am leaving it named rather than guarded, the way B34 left the
-        # claims whose authority it could not compare exactly. `wear`.cost publishes a RANGE
+        # `dye` WAS NAMED HERE AND IS NOW GUARDED BELOW (B41): its authority is a DATA key in
+        # items.json plus a roster.gd fallback, not one constant, which is why it waited an hour.
+        # WHAT I AM STILL NOT CLAIMING: `wear`.cost publishes a RANGE
         # (30-420) and `forge`/`armoury` publish tier LISTS that already carry their own guards.
         for pr in [["oil", Roster.OIL_COST, "Roster.OIL_COST", "a flask of lamp oil (buy_oil)"],
                    ["reroll", Roster.REROLL_COST, "Roster.REROLL_COST", "a living hero's re-throw (reroll)"],
@@ -1292,6 +1290,46 @@ static func commands() -> Dictionary:
             elif p_said != p_real:
                 push_error("COMMANDS_DATA PRICE: `%s`.cost publishes %d gold for %s and %s charges %d - docs/COMMANDS.md prices it at money the town does not take, and the viewer finds out by paying" % [p_key, p_said, p_what, p_name, p_real])
                 printerr("COMMANDS_DATA PRICE - `%s` published %d, charged %d" % [p_key, p_said, p_real])
+        # B41: THE `dye` PRICE - THE ONE B40 NAMED AND REFUSED TO CLAIM.
+        # B40 guarded three flat prices whose authority was ONE integer constant in roster.gd and
+        # said plainly that `dye` was a different shape: `dye`.cost publishes 25 and the dyer
+        # charges `int(items().get("dye_cost", 25))` at roster.gd:1258. So the number a viewer
+        # actually pays comes out of data/items.json, which is the CONTENT lane's file, and if
+        # that key is ever absent the dyer falls back to a literal written inside roster.gd, which
+        # is the GAME BUILD lane's file. ONE PRICE DECLARED IN THREE LANES' FILES, all three
+        # reading 25 today by coincidence, and nothing in the house compared any pair of them.
+        # HOW I READ THE CHARGED NUMBER: through `Roster.items()`, the same static accessor the
+        # dyer itself calls, so the guard compares against the authority actually in play instead
+        # of against a copy of it. I DO NOT RESTATE THE 25 FALLBACK ON MY SIDE - a fourth copy of
+        # a price would be the defect, not the guard. When the key is gone there is no number to
+        # compare and the dead key IS the finding, so that arm reports the key, not a mismatch.
+        var dy_cost: String = String(((cmd_d.get("dye", {}) as Dictionary)).get("cost", ""))
+        # the number this file PUBLISHES: the digits standing immediately before "gold", read the
+        # same way B40 read its three, so one published-price reader is used for every flat price.
+        var dy_said: int = -1
+        var dy_dig := ""
+        for dy_i in dy_cost.length():
+            var dy_c := dy_cost[dy_i]
+            if dy_c >= "0" and dy_c <= "9":
+                dy_dig += dy_c
+            else:
+                if dy_dig != "" and dy_cost.substr(dy_i).begins_with(" gold"):
+                    dy_said = int(dy_dig)
+                    break
+                dy_dig = ""
+        var dy_items: Dictionary = Roster.items()
+        if dy_said < 0:
+            push_error("COMMANDS_DATA DYE ANCHOR: `dye`.cost no longer carries a number before \"gold\" - the published price of a dyeing can no longer be checked against data/items.json `dye_cost`, which is the number the dyer charges")
+            printerr("COMMANDS_DATA DYE ANCHOR - `dye`.cost lost its gold number; the dyer's price is now unchecked")
+        elif not dy_items.has("dye_cost"):
+            push_error("COMMANDS_DATA DYE AUTHORITY: data/items.json carries no `dye_cost` key, so the dyer is charging the fallback literal inside roster.gd's `items().get(\"dye_cost\", ...)` and the data key that is supposed to own this price is DEAD - the dyer can no longer be re-priced from the data file at all, and `dye`.cost publishes %d gold against nothing" % dy_said)
+            printerr("COMMANDS_DATA DYE AUTHORITY - items.json lost `dye_cost`; the dyer is on roster.gd's fallback and my published %d is unanchored" % dy_said)
+        else:
+            var dy_raw: Variant = dy_items.get("dye_cost")
+            var dy_real: int = int(dy_raw)
+            if dy_real != dy_said:
+                push_error("COMMANDS_DATA DYE COST: `dye`.cost publishes %d gold for a dyeing and the dyer charges %d, read from data/items.json `dye_cost` (raw value `%s`) - docs/COMMANDS.md prices the dyer at money the town does not take, and a viewer finds out by paying" % [dy_said, dy_real, str(dy_raw)])
+                printerr("COMMANDS_DATA DYE COST - published %d, charged %d (items.json `dye_cost` = %s)" % [dy_said, dy_real, str(dy_raw)])
         _cmds = parsed
     return _cmds
 

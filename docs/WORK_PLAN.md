@@ -1,3 +1,155 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 16:0x CT (team lead, the 15:58 firing)
+*** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 15:1x BLOCK. ***
+
+*** THE GAME BUILD'S 16:07 READ WAS THE 15:1x BLOCK AND THAT WAS CORRECT, NOT A STARVE. ***
+  The 15:1x block says in as many words "GAME BUILD: this block is yours from 16:07", so the row it
+  read one minute into my run was written FOR that firing by the seat before me. THIS block is the
+  game build's from 17:07. I opened at 15:58:46 and reached the plan at 16:0x; that is the standing
+  shape of the :58 seat and I am naming it rather than letting it look like silence.
+
+WHAT I MEASURED MYSELF THIS HOUR, TAKING NO LANE'S NUMBER ON TRUST:
+  I RE-RAN ART'S FOOT-PLANE AUDIT AND REPRODUCED ITS TABLE EXACTLY. Not read - RUN, in a
+  `--background --factory-startup` Blender subprocess so Mr. E's open scene was never touched.
+  bodies 34, declare a contact at z=0: 31, OVER THE BAR 12, seated 19, not judged 3, and all twelve
+  names and millimetre figures identical to art's. THE RAMMER IS NOT IN THE OVER-BAR LIST - that is
+  the pass-8 fix, measured by me and not by art's say-so.
+  I LOOKED AT hero_front.png AND hero_side.png. The three legs land on the hero's own floor line,
+  the broomed pile head sits at the foot, and the side view reads exactly as art says it does: a
+  post with one raking stay, because the two front legs are coincident edge-on. THE DARK MONKEY
+  READS AGAINST PALE OAK IN BOTH. Art's "pile below the floor" fault - which MY SEAT SECONDED BY
+  EYE AT 13:1x - is struck, and art struck it with geometry rather than obeying me. SECOND TIME
+  THIS BODY HAS CORRECTED MY EYE. The lane is right to keep doing that.
+  CONTENT'S 84 ARE GENUINELY 84 AND GENUINELY NEW. I diffed data/lore_lines.json from pre-merge
+  main to HEAD myself: enter/lord/trap/hurt/drink/misfire +14 EACH, 84 total, every one of the 84
+  absent from the old set, ZERO duplicates within any kind, and the six totals land on 250/238/241/
+  235/229/235 exactly as claimed. Read live at delve.gd:3781 via `lore().get("barks", {})` by kind -
+  in the game the hour it merged, no wiring owed.
+  THE CHAT BOT'S SIXTH TRIGGER IS PROVEN BY CONSTRUCTION, NOT BY ITS LOG. I read the arm in source:
+  chatcmd.gd scans for a line beginning `func handle(`, and if it never finds `match verb:` inside
+  that body `nh_start` stays -1 and line 1995 appends exactly "NEEDS_HERO ANCHOR". With handle()
+  renamed the loop cannot match, so n=1 naming that arm is the ONLY result this source can give -
+  B57's reading is what the code must produce. I also md5'd the three files it touched: chatcmd.gd
+  72be1e68, commands.json 0ed19140, COMMANDS.md 9a80bfd9, `^func handle(` count 1, zero RENAMED_B57,
+  line 2256 restored, `*b57*` returns nothing. Handed back byte-identical, verified by me.
+  THE HUD'S U80 CLAIM (1) IS TRUE IN THE CODE AND NOT JUST IN ITS COMMENT. block_end() is defined
+  at _u71_rarity_guard.gd:21 and called at :55 and :115 - the two table readers - and the only
+  `find("}")` text left in that file is line 19, which is the comment SAYING it was replaced. I
+  checked the code, not the sentence beside it.
+  THE HUB'S SECURITY CLAIM IS MINE TO CHECK AND I CHECKED IT. web/tools/sheet_overlap.js is headed
+  for a published tree, so this was owed: zero hits for token/secret/key/bearer/oauth/password/
+  client_id/api_key, zero innerHTML. The only "Bearer" strings anywhere in web/ are the two page
+  constants in app.js:269 and :2749, exactly as the lane said.
+  THE GAME BUILD'S S40 HOUSEKEEPING IS DONE: `scripts/delve.gd.bak_s39` is gone from R.
+
+*** A CORRECTION TO MY OWN PROMPT'S BASELINE, WHICH I CANNOT EDIT FROM A FIRING, SO IT LIVES HERE. ***
+  THE TEAM LEAD PROMPT'S DEAD-DATA BASELINE IS ONE KEY SHORT. It accounts for FOUR declared-dead
+  lore_lines keys (townsfolk, phase2_words, phase2_words_alt, town_levels_for_the_desktop). THERE IS
+  A FIFTH: `phase2_words_alt2`. I grepped scripts/*.gd and web/*.js for "phase2_words" and for
+  "alt2" separately - prefix and suffix, per the runtime-concatenation guard - and got ZERO hits of
+  any kind, not even prose. It is a fourth member of a family D98 declared dead.
+  IT IS NOT AN UNREAD LIVE KEY AND NO LANE IS TO WIRE IT. D98 is closed and stays closed. The only
+  thing wrong was the baseline's arithmetic, and the corrected accounting is in the audit below.
+
+*** WHAT I TICKED THIS HOUR - SEVEN, EACH ON MY OWN MEASUREMENT: ***
+  ART RAMMER PASS 8 - THE FEET ARE SEATED AND THE FAULT I SECONDED IS STRUCK. TICKED 2026-11-18
+    16:0x CT by the team lead. I reproduced the audit table exactly in my own Blender subprocess and
+    the rammer is absent from the over-bar list; I looked at all three hero views.
+  ART tanner.glb.import - TICKED 16:0x CT. On the MERGED tree it is 45 .glb and 45 .glb.import,
+    nothing missing either way. I first measured this in art's worktree and got "15 missing", which
+    was art's BRANCH being behind main on files it never had - not a gap. A WORKTREE IS NOT A
+    BRANCH and I nearly charged a lane on it for the second time in two days.
+  ART'S FOOT-PLANE AUDIT ITSELF - TICKED 16:0x CT as a sound instrument. It goes RED ON EMPTY, it
+    requires BOTH a declared contact at z=0 and something below it, and art rewrote it after its
+    first version flagged the Quartermaster on a proxy that lies. That rewrite is why I trust it.
+  CONTENT C-117 - 84 LIVE BARK LINES. TICKED 16:0x CT. Counts, uniqueness and live read all
+    verified above by my own diff.
+  CHAT BOT B57 - THE SIXTH TRIGGER. TICKED 16:0x CT. Owed for three hours, withheld by me for three
+    hours, and now proven by the source itself. B54 timed it out, B55 ran a probe that measured
+    nothing, B56 found out why and SAID SO IN THE LOCK FILE before any lane could be misled. That
+    is the sequence working, not three wasted hours.
+  HUD U80 - U77's NULL RESULT CLOSED. TICKED 16:0x CT. The hardened path is live, the old finder
+    was right on the shipped corpus and wrong on every constructed shape, and the lane stated its
+    own limit (python port, no engine rerun) without being asked.
+  GAME BUILD S40 - HOUSEKEEPING. TICKED 16:0x CT. bak_s39 removed as asked.
+WHAT I DID NOT TICK, AND WHY: the hub's merged-not-published delta. Not withheld and not the lane's
+  fault - publishing is the supervisor's call and it is in the block at the end of this section.
+
+1. GAME BUILD (:07) - THIS ROW IS YOURS FROM 17:07; your 16:07 read was the 15:1x block, as that
+   block intended. Nothing of yours is held and S40 is ticked.
+   ONE THING I FOUND WHILE CHECKING YOUR bak_s39 REMOVAL, AND IT IS NOT A NEW ITEM AND NOT A FAULT:
+   `scripts/` in R holds roughly 270 `*.gd.bak_*` files going back to c15. I am NOT asking anyone to
+   remove them - they are the lanes' own safety copies, deleting in connected folders is blocked by
+   default, and they cost nothing. I am writing the number down for one reason only: SO NO FUTURE
+   SEAT "DISCOVERS" THEM AND OPENS AN ITEM. I also confirmed they do not touch the dead-data audit:
+   the glob is `scripts/*.gd`, which does not match `*.gd.bak_s38`, and the audit reads 48 files.
+   YOUR ROWS BELOW THIS BLOCK STAND.
+
+2. CONTENT (:22) - C-117 IS TICKED, verified line by line. KEEP PRODUCING, UNTHROTTLED.
+   One addition to the limit you already keep: the declared-dead family is FIVE keys, not four -
+   `phase2_words_alt2` is a member and I found it this hour. Nothing further into any of them, and
+   nothing to do about the ones already there. Everything else on your row is unchanged.
+
+3. ART (:34) - PASS 8 IS TICKED AND YOU STRUCK A FAULT MY SEAT PUT ON YOUR ROW TWICE.
+   YOUR NEXT ITEM IS THE ONE YOU NAMED YOURSELF AND DID NOT TAKE: the eleven other bodies over the
+   foot-plane bar. START WITH THE QUARTERMASTER AT 317.2 mm - it is the worst by a factor of two
+   and you have already looked at it. ONE BODY AT A TIME, each with its own look, exactly as you
+   said. This is NOT a new item: it is a defect in already-shipped work that you learned about this
+   hour, which the freeze expressly allows, and you were right to write no plan row for it.
+   AND YOU MAY STRIKE ANY OF THE ELEVEN RATHER THAN FIX IT. You said yourself that in several the
+   low part may be a prop whose placement is deliberate. A fault correctly struck, with the geometry
+   shown, is worth exactly as much to me as one fixed - you have now proved that twice on the Rammer.
+
+4. HUB (:37) - ROW 4 IS ANSWERED AND TICKED, and your answer was the right shape: you measured the
+   delta, you grepped the file, and you said plainly that moving it would mean writing to files your
+   lane may not touch. I re-ran your security grep myself and it holds.
+   YOUR NEXT ITEM, AND IT IS NOT NEW WORK: the publish delta has GROWN SINCE ANYONE LAST LOOKED AT
+   IT, and the number in my own prompt is stale. I measured it this hour: origin/gh-pages^{tree}
+   2d14aa9 vs origin/hub:web 67dade2 is now FOUR files, +70/-24 - NOTES.md +10, app.js -14,
+   style.css +25/-10, tools/sheet_overlap.js +45 new. My prompt still says "2 files / 19 lines".
+   WHAT I WANT FROM YOU IS THE HONEST STATE OF THE app.js DELETION: 14 lines removed and none
+   added. Say in NOTES.md which behaviour those 14 lines carried and what now carries it, so that
+   when the seat above me authorises a push, the person approving knows what leaves the page. That
+   is documenting your own shipped change, not new work. DO NOT RUN THE PUBLISH GATE and do not
+   claim READY TO PUBLISH on my account - I ran no publish verification this hour because you did
+   not claim it, and an unearned gate report is the same fault class as a lying gate.
+
+5. CHAT BOT (:45) - B57 IS TICKED. All six guard triggers in chatcmd.gd are red-proven and the
+   three-hour item is closed. Your queue is empty and I am not inventing one for you.
+   IF YOU WANT A ROW, TAKE YOUR OWN B56 LESSON AND MAKE IT MECHANICAL: you wrote that "Godot closed"
+   must be VERIFIED BY TASKLIST and not assumed, after a probe died before its quit() and left PID
+   6472 alive into the HUD's window. That is a real defect in your own harness, not a new item -
+   make the probe wrapper check tasklist before it writes its IDLE line, so the next lane never
+   stands down on a ghost of yours. If you judge that better left alone, STAND DOWN AND SAY SO.
+   A stand-down written up is the delivery, and you have earned the right to call that.
+
+6. HUD (:52) - U80 IS TICKED AND YOUR QUEUE IS EMPTY AGAIN, SO HERE IS THE BIGGEST OPEN THING IN
+   THE HOUSE AND IT HAS BEEN YOURS SINCE 11:40: THE RARITY-HUE HALF OF SYSTEM 2.
+   System 2 is Mr. E's own item. Its ENGINE half is closed and written down (24 of 24 .glb, the
+   pose-aware staff at S24, EDGE_MATS at S17). THE HUD HALF - named weapons carrying their rarity
+   hue where the player reads them - is the only part still open, the supervisor confirmed at 11:40
+   that it is the HUD's, and it was still unstarted at 09:2x. IT IS THE MOST VALUABLE OPEN ITEM I
+   HAVE. I am saying out loud that I read this as the second half of one of HIS systems assigned to
+   the lane that owns those files - that is the judgement the 10:58 seat made and the supervisor
+   confirmed, and it is not me inventing work.
+   START SMALL AND START MEASURED: say first, in writing, WHERE the player reads a weapon's name
+   and WHETHER a hue reaches it today. One file-only run that answers that is a full delivery.
+   System 1's hue ladder (art, 520 icons, ticked 17 Nov 01:18) is the reference for what the hues
+   ARE - do not re-derive them.
+
+FOR THE SUPERVISOR:
+  THE HUB PUBLISH DELTA HAS GROWN AND IS STILL WITH YOU. Re-measured by me this hour, not copied:
+  origin/gh-pages^{tree} 2d14aa9 vs origin/hub:web 67dade2 = 4 files, +70/-24 (NOTES.md +10,
+  app.js -14 pure deletion, style.css +25/-10, web/tools/sheet_overlap.js +45 NEW). gh-pages is
+  45a7904, pushed 18 Nov 03:34:37 CT on your 03:16 authorisation; the section-bar fix is live.
+  MY RECOMMENDATION: DO NOT AUTHORISE YET, and this is a change from the standing picture. The
+  delta now contains a NEW FILE - a Node + Playwright harness, inert in a browser - and 14 deleted
+  lines of app.js that nobody has yet described in writing. I have grepped sheet_overlap.js clean
+  of any token, secret or key myself and found zero innerHTML in it, so I see no security reason to
+  hold; the reason to hold is that nobody can currently say what the app.js deletion removes from
+  the page. I have put exactly that question on the hub's row this hour. ASK ME AGAIN NEXT HOUR -
+  if the hub answers it, I will recommend the push, and I will run the full publish gate first.
+  NOTHING ELSE IS WAITING ON YOU.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 15:1x CT (team lead, the 14:58 firing)
 *** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 13:58 BLOCK AND ITS 13:1x ADDENDUM. ***
 

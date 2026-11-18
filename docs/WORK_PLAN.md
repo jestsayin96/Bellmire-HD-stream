@@ -1006,6 +1006,130 @@ HUD: U68 - AND U67 IS THE AUDIT I ASKED FOR, DONE THE WAY I ASKED FOR IT.
 
 
 ================================================================================
+*** VERIFIED AFTER THE ROWS WENT OUT - 2026-11-18 03:0x-03:2x CT. WHAT I TICKED.
+*** THESE ARE TICKS AND A CORRECTION, NOT ASSIGNMENTS. The six rows above went out
+*** at 03:04, before :05, and they are this hour's. Nothing here re-tasks a lane.
+================================================================================
+
+*** FIRST, A CORRECTION TO MY OWN SUPERVISOR ITEM 1 ABOVE, WHICH IS FALSE AS WRITTEN. ***
+  I wrote "the hub lane claimed no readiness, so none was owed" and "I RAN NO PUBLISH
+  GATE THIS HOUR". THAT WAS WRONG WHEN I WROTE IT - I had not yet read the hub's own
+  PROGRESS entry, which ends: "READY TO PUBLISH: yes". The lane DID claim readiness,
+  so the publish gate WAS owed, and I have now run it. The sentence above stands as
+  written because this house does not rewrite its record; THIS is the correction.
+  THE LESSON IS MY OWN RULE TURNED ON ME: I wrote a claim about a lane from its
+  commit and its diff before reading the lane's own entry. Read the entry first.
+
+  *** THE PUBLISH GATE, RUN BY ME, IN MY OWN CONTAINER (Chromium + Playwright). ***
+    - el()/innerHTML: NO innerHTML added by this change. The only two sites in app.js
+      are :255 and :301 and both take page-owned strings; no snapshot value reaches
+      either. Checked by reading the code, not the comment beside it.
+    - NO snapshot value as URL/src/href/style: use.setAttribute("href",...) is a fixed
+      literal (:70); img.src (:3753) is built from a whitelist hit, never from a name;
+      link.href (:2713) is gated on a ^https://twitch.tv/ regex.
+    - rarityClass() (:3211) is a WHITELIST - SHOP_RARITY.has(k) or "" - so a snapshot
+      rarity string can never become a class attribute. The six new mock rungs are
+      page-owned literals with no interpolation.
+    - STATE CHECKS, all seven: ?mock=satchel ?state=empty ?state=fail ?state=stale
+      ?mock=chronicle ?mock=crowd ?open=1 - 0 pageerrors, 0 dialogs, 0 injected
+      img[src=x], no horizontal scroll, on every one.
+    - CSP PROVEN THE CHEAP WAY: I appended an inline <style> with the browser's own
+      API. IT WAS REFUSED - body outline stayed 3px, never 7px, and the console
+      carries "Applying inline style violates ... 'style-src 'self''". CSP intact.
+    - SAID OUT LOUD, AS THE RULE REQUIRES: a file:// render has NO snapshot data, so
+      ZERO .sat-item rows exist for me and I CANNOT reproduce the lane's row-by-row
+      measurement. I did not adopt its numbers as if I had measured them.
+
+  [x] HUB - THE SATCHEL RARITY FRAMES. TICKED 2026-11-18 03:2x CT (hub 6f9ba7b).
+      I RED-PROVED THE FIX MYSELF, which is what makes this tick worth more than the
+      lane's screenshot. The cascade question needs no snapshot data, so I built the
+      rungs synthetically in the real page with the real stylesheet (createElement +
+      className only - no inline style, so the CSP could not be the thing under test)
+      and read getComputedStyle:
+        WITH the five new rules:  uncommon rgb(255,255,255), rare rgb(77,140,255),
+        very rare rgb(179,89,255), legendary rgb(255,140,31), artifact rgb(255,33,26)
+        - 5 of 5 framed, AND THESE ARE THE LANE'S FIVE REPORTED VALUES TO THE DIGIT,
+        arrived at independently.
+        STRIP those five lines from a COPY (351 bytes removed): 0 of 5 framed. THE
+        FAULT COMES BACK.
+        junk / starting / common: transparent in BOTH. Bare by design, as specified.
+      THE LANE WAS TOLD TO MEASURE AND IT FOUND A BUG INSTEAD OF CONFIRMING A GUESS.
+      That is the row working exactly as intended.
+
+  [x] ART - THE MOULDER, THE TWENTY-SIXTH MINIBOSS. TICKED (art e4e0a9a).
+      FIT IS THE ACCEPTANCE TEST AND I LOOKED AT ALL THREE VIEWS MYSELF, on a real
+      posed body (hero h 2.45, posed true, 8 parts): ratio 1.18, pair span 4.20,
+      fits_frame true, 3 of 3 proving views, 0 blind, blank check 3 files 0 failures,
+      corridor-safe at 2.34 m against 11.0 m.
+      *** AND A FAULT OF MINE THAT THE MEASUREMENT CAUGHT BEFORE I COULD COMMIT IT. ***
+      Looking at hero_back.png I formed the view that the Moulder had LOST ITS
+      MATERIALS - the creature and its attendant render uniformly tan in the back view
+      while they are grey, near-black and orange in front - and art's own entry says
+      "Had I obeyed it I would have shipped the tan", which made the reading look
+      confirmed. I WAS ABOUT TO CHARGE THE LANE WITH SHIPPING A STALE TAN RENDER.
+      I MEASURED INSTEAD OF ASSERTING, and the measurement overturned me: sampling the
+      two regions (alpha-masked - my first pass was itself wrong, compositing RGBA onto
+      black and reading every background pixel as subject) gives warm bias 54.9 for the
+      creature in back AND 68.1 FOR THE HERO IN THE SAME RENDER, against -0.5 for the
+      hero in front. BOTH SUBJECTS SHIFT TOGETHER. A creature-material fault cannot
+      warm the hero standing beside it. It is a whole-render lighting difference across
+      views, not a lost material, and there is NO fault here to charge.
+      I am recording this because a picture made me confident and arithmetic made me
+      right, and the next seat will meet the same temptation on the same directory.
+      WORTH ONE LINE FOR THE RECORD, NOT AN ITEM: _fit_moulder_register.json proves a
+      view by AREA alone (alone / vis / delta / seen). It is blind to colour, material
+      and lighting, so it reads GREEN on any of them. Art already named ONE blindness
+      of this instrument itself (occlusion cannot see one part of a creature eating
+      another). This is a second, adjacent one. ART'S TO WEIGH, NOT MINE TO ASSIGN.
+
+  [x] ART - THE ELEVEN-FILE QUESTION IS ANSWERED AND CLOSED (art 9116424).
+      The showcase kits are art's own and STAY under assets/. Two directories, eleven
+      files, now ACCOUNTED FOR rather than unreferenced-unexplained. The baseline
+      below should read that way from here on.
+
+  [x] CHAT BOT - B44, THE FIRST STATE GUARDED. TICKED (chatbot 6fd0531, 89 lines).
+      I CHECKED THE ONE THING THAT MATTERS IN A GUARD - that it vouches for nothing of
+      its own. It reads the lane through the pane's OWN title (Spotlight.KIND), the
+      colour through the key that title resolved to (Spotlight.COL / UiTheme.KIND), and
+      the comparative claim against LOOK_S / POINTS_S / SUB_S. NO lane name and NO
+      colour is restated on the chat bot's side, which is the defect B43 was about and
+      the lane names it as such in its own comment.
+      AND IT DECLARED TWO THINGS IT COULD NOT PROVE RATHER THAN DRESSING THEM UP: the
+      "only when nobody has redeemed it or is waiting" clause is BEHAVIOUR
+      (spotlight.gd:115-118) needing a harness under tools/, and the colour arm is a
+      JUDGEMENT about a word for a hue. Both named in the code where the next seat will
+      find them. FIVE arms red-proved, data restored byte-identical 0908b4db after each.
+
+  [x] HUD - U67, THE GATE AUDIT. TICKED (hud-ui 5f96862).
+      It caught a real one: tools/_l40_test.gd skipped any top-level control at or
+      above 35% of the screen as an assumed backdrop, so a Chronicle, BossCard or Feed
+      grown past 35% BY THE VERY FAULT would be skipped and read green - the exact
+      instrument-moves-with-the-fault class the game build found in _l31_icons.gd.
+      It also listed the EIGHT that came back clean WITH THE BOUND EACH MEASURES
+      AGAINST, which is what makes the one catch believable, and named what it did not
+      audit (~60 non-HUD logic gates; the L654 audit's own <=2px/offscreen limit).
+      THE RED PROOF IS OWED AND THE LANE SAID SO ITSELF - it needs a windowed run with
+      a control inflated past 35%, and the lane did not take a 15-minute windowed claim
+      for it. That is its next row, already written above. The AUDIT is what was asked
+      for and the audit is done.
+
+  [x] CONTENT - `_note_c104` ONLY. TICKED (content 8fa5ea3).
+      Additive and I verified it is additive rather than trusting the word: items.json
+      gained exactly one top-level key and `dye_cost` (25) and the 281-key `dyes` table
+      are byte-identical - which matters this hour because three chat-bot guards hang
+      off them.
+      THE 23 LINES INTO phase2_words_alt ARE NOT TICKED. See the finding at the head of
+      this block.
+
+*** WHAT I DID NOT TICK ***
+  GAME BUILD - nothing to tick, and no fault in that. D-S30 was a re-prove of merged
+  main (PARSE 0, TWITCH_PARSE OK 8, OFFFLOOR 0/2078, TOWNWALK PASS 0/16959,
+  DELVE_TEST OK, L31_ICONS OK 15) plus an addendum scouting System 5. A re-prove is
+  not a deliverable; it is the lane keeping its instruments honest, and it is why its
+  row this hour says take System 5 rather than go looking for it.
+
+
+================================================================================
 *** THIS HOUR: 2026-11-18 01:58 CT. SIX LANES MERGED. FIVE TICKED.
 *** SYSTEM 2 IS CLOSED WHOLE - ITS HUD HALF WAS ALREADY DONE AND MY OWN ROW
 *** WAS STALE. THE HUD LANE CAUGHT ME AND IT WAS RIGHT.

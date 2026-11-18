@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 19:58 CT by the team lead (clock off the machine: 2026-11-17T20:06:48-06:00).
+The 19:58 block immediately below SUPERSEDES the 18:58 block and every row under it.
 Updated 2026-11-17 18:58 CT by the team lead (clock off the machine: 2026-11-17T18:59:18-06:00).
 The 18:58 block immediately below SUPERSEDES the 17:58 block and every row under it.
 Updated 2026-11-17 17:58 CT by the team lead (clock off the machine: 2026-11-17T18:08:49-06:00).
@@ -827,6 +829,419 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 19:58 CT. SIX LANES MERGED. THREE TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 18:58 ROWS.
+***
+*** SYSTEM 3 IS CLOSED AS ALREADY-WIRED, WITH LINE NUMBERS AND A PICTURE I LOOKED AT.
+*** THE MINIBOSS LINES GAP IS ZERO FOR THE FIRST TIME - 23 BODIES, 23 SPOKEN.
+***
+*** AND THE HUB IS DIAGNOSED. SIX HOURS OF SILENCE HAD A CAUSE AND THE LANE PRINTED IT
+*** ITSELF: ITS PROMPT, NOT THIS BLOCK, IS WHERE IT LOOKS FOR ITS QUEUE. SEE ITS ROW.
+***
+*** AND I BROKE THE PLAN MYSELF AN HOUR INTO THIS RUN, THE SAME WAY THE 16:58 SEAT DID.
+*** MY OWN FAULT IS THE FIRST THING IN THIS BLOCK, BELOW THE MERGE LINE.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. main 8fa6647 ->
+*** 1b734ac. FOUR CONFLICTS IN TWO FILES - root PROGRESS.md (hub, then hud-ui) and
+*** docs/PROGRESS.md (laptop, then chat bot). ONE marker block each, stripped by state
+*** machine, BOTH SIDES KEPT. Residual markers counted ON EACH FILE THAT CONFLICTED,
+*** separately: docs/PROGRESS.md 0 (x2), PROGRESS.md 0 (x2). Repo-wide sweep over
+*** *.md *.gd *.json *.js: zero. Asset counts re-checked ON THE MERGED TREE so no merge
+*** quietly dropped a body: 34 miniboss .glb, 24 assets/gear/dungeon .glb, strickler.glb
+*** present on main.
+  LAPTOP (game build) 4baef90 - S25: SYSTEM 3 CLOSED AS ALREADY-WIRED, plus both MB_FIT lines.
+  CONTENT            becc661 - C-97: the Strickler spoken. The lines gap reaches ZERO.
+  ART                bbcb5a4 - NOTHING NEW ON THE BRANCH. But the lane is NOT idle - see below.
+  HUB                de5a8b5 - a standing check. SIXTH HOUR - and this time it named the cause.
+  HUD-UI             62f049b - U61: the grain stripe measured and cleared by geometry.
+  CHAT BOT           93e7fa7 - B37 CHECKPOINT: the armoury guard written, GATES OWED. Half.
+
+*** MY OWN FAULT, FIRST, BECAUSE IT IS THE RULE OF THIS SEAT AND BECAUSE IT IS THE SECOND
+*** TIME THIS HOUSE HAS MADE IT TODAY. A STALE TMP FILE WENT INTO THE CANONICAL PLAN. ***
+I wrote this block to /tmp/blk.txt on the Linux bridge and then had python read it back and
+splice it in. THE WRITE FAILED - "bash: /tmp/blk.txt: Permission denied" - AND THE READ
+SUCCEEDED ANYWAY, because a /tmp/blk.txt from 14:03 was already sitting there. The script
+printed "ok" and I had just inserted SOMEBODY ELSE'S 07:58 BLOCK, 360 lines of it, into
+docs/WORK_PLAN.md under a 19:58 header. The 16:58 seat broke the plan with a stale tmp file
+and I read that entry at the start of this run; it did not save me.
+WHAT IT COST: nothing downstream. The damage was in W4's worktree only, it was never
+committed, never pushed and never synced to a lane, I caught it on the very next read, and
+`git checkout -- docs/WORK_PLAN.md` restored the file to 1b734ac exactly. Total cost, three
+calls.
+THE RULE I AM LEAVING BEHIND, AND IT IS BETTER THAN "DON'T USE /tmp": A COMMAND THAT PRODUCES
+NO VALUE IS RED, NOT EMPTY - that is already in this house's prompt for empty SHAs in a
+refspec, and A STALE FILE IS THE SAME SHAPE WEARING A FILENAME. So: WRITE TO A UNIQUE PATH,
+PUT A SENTINEL ON THE FIRST LINE, AND ASSERT THE SENTINEL BEFORE YOU USE THE CONTENT. This
+block was re-written to $HOME/blk_1958_v2.txt with the first line SENTINEL-1958-TEAMLEAD-V2
+and the splice refused to run until it matched. Do that and the fault cannot recur.
+
+*** WHAT I TICKED. THREE. I RE-DERIVED EVERY ONE AND I LOOKED AT TWO PICTURES. ***
+
+  [x] S25 - SYSTEM 3, NAMED ARMOUR (game build) - TICKED AS ALREADY-WIRED, WHICH THE ROW
+      SAID IN TERMS WOULD BE A TICK AND NOT A SHORTFALL.
+      I WALKED THE PATH MYSELF AND EVERY LINE NUMBER IS RIGHT: gear.gd:1630 armour_id
+      (the stamped `aname` if its tier still holds, else the tier's pieces of the calling's
+      cut from D94_CUT:1626, hashed by hero name; tier 0 from starting_kits), gear.gd:602
+      dress_armour(model_root, tier, armour_id(_dressing)), gear.gd:288 dress_armour where
+      :297-300 lets the named piece's look replace the tier look, gear.gd:1847
+      armour_piece_look where the piece's NAME picks the stuff colour and the KEY hashes
+      hue, value, trim and helm variant. It is items.json reaching a worn body, live.
+      VERDICT: D95_FIT OK, 40 shots, 0 attach failures, red at tools/_d95_fit.gd:198.
+      I LOOKED AT renders/cycles/s25/_s25_sheet.png AND AT 03_mage_3back.png FULL SIZE.
+      Ford Leathers, Reed-Cloth Robe, Ferryman's Plate, Dragontooth Hauberk, front/side/back:
+      boots on feet, pauldrons on shoulders, helms on heads, the robe cut wearing neither;
+      nothing floats, nothing sinks, nothing clips through the back. The CUT RULE out of
+      armour_piece_look is visible in the picture, which is the part that matters - the mage
+      has no helm and no pauldrons and the plate wearers have both.
+      THE LANE NAMED THE LIMIT BEFORE I COULD, AND IT IS THE RIGHT LIMIT: "a real mesh" here
+      means the parts dress_armour builds on the real bones. THERE ARE NO AUTHORED ARMOUR
+      MODELS IN assets/. If Mr. E's System 3 meant authored armour MODELS, art makes them
+      first and THIS IS THE PATH THEY WOULD BE WIRED INTO - the wiring is not what is
+      missing. I am ticking the system as his list words it and recording that reading in the
+      open so it can be overturned by one sentence from him.
+      TWO LINES OWED AND BOTH LANDED, delve.gd:379-380: "pressman" 1.16, "strickler" 1.04,
+      copied from art's _fit_report.json and not re-derived.
+      ONE MECHANICAL CORRECTION TO THE LANE, COSTING NOTHING: your entry says the strickler
+      body "is NOT on main yet, so the line is inert". IT IS ON MAIN - I counted both trees:
+      origin/main and origin/art each carry 34 .glb and strickler.glb is in both; it merged
+      at bbcb5a4 last hour. It is not on YOUR tree yet, which is a different sentence, and
+      your next merge of main makes the line live. No action owed.
+      ONE OBSERVATION, NOT A FAULT AND NOT YOURS THIS ROW: in every back view a bright
+      magenta PACK sits on the hero's back - plainly a pack with a tan flap and a strap, not
+      armour. It is the loudest thing in a sheet whose voice is otherwise plain. Nobody is to
+      spend a firing on it; it is recorded so the next person who sees it knows it was seen.
+
+  [x] C-97 (content) - TICKED, AND I COUNTED THE LINES OFF THE FILE MYSELF.
+      miniboss_feed.by_key.strickler: 9 arrive, 8 fall - the same counts as the other
+      twenty-two, which I also counted rather than trusting. 23 keys in by_key.
+      *** THE LINES GAP IS NOW ZERO. I MEASURED BOTH SETS AND DIFFED THEM: 23 distinct
+      bodies on disk, 23 with lines, nothing missing in either direction. *** That gap was
+      five two hours ago. It is the first time in this register that every body that can
+      stand on the floor can also be spoken about, and content closed it without being chased.
+      I READ THE LINES, NOT THE COUNT. "He does not weigh anyone. He sets them to the measure
+      of the worst." / "A bushel is a bushel. He sees to it." / "The pans hang level, for
+      once." The trade is in the words - strickle, beam, pans, bushel, market officer - and
+      there is not one theatrical sentence in seventeen. A man with a scale, not a god of
+      fairness, exactly as the row asked.
+      STANDING CONDITIONS HELD AND I VERIFIED THEM: my own audit counts 116 top-level keys
+      over 12 data files, THE SAME as 18:58 - no new top-level key. townsfolk, phase2_words,
+      phase2_words_alt and town_levels_for_the_desktop are untouched. The whole diff is 26
+      lines in data/lore_lines.json and 6 in PROGRESS.md, and nothing else.
+
+  [x] U61 (HUD) - TICKED. A NUMBER, A BOUND, A GATE AND A PICTURE - all four.
+      THE MEASUREMENT: at the px(8) cap floor the 0.20*cap stripe sat at rows [7.00, 8.60]
+      against glyph ink rows 4..16, crossing 1.6 px of a 13 px glyph, and it overlapped at
+      EVERY tested height including cap 9 - so the lane proved it was not only a floor case
+      before it fixed it. THE ANSWER: SCROLL_GRAIN_OFF 0.75 caps BELOW centre gives
+      [17.00, 18.60] - top edge exactly on the measured ink bottom. THE BOUND, which is the
+      part I asked for: anything above 0.75 clears, anything past 0.95 reaches the rod's
+      lower rule, and going UP cannot work at all because it needs y<=2.4 on a rod that
+      starts at 3. That is a closed interval, not a number that happened to work.
+      I CHECKED THE WIRING BY LINE: ui_theme.gd:244 declares the const, hud_dock.gd:449 is
+      the only draw that uses it, tools/_u58_contrast.gd:73-77 now GATES the geometry off the
+      measured ink bottom instead of merely naming it. The old NAMED 3.66:1 line is retired
+      because the overlap it described no longer exists - A NAMED LIMIT CLOSED, which is the
+      best way for one to end.
+      U59_CONTRAST OK, 49 colours, 16 pairs, 0 unmeasured. Parse 0.
+      THE HONEST LIMIT IS THE LANE'S OWN AND IT IS THE ROW BELOW: the 17.0 bound was measured
+      at 1080p scale 1 only. Nothing was rendered at 125% or 150% UI scale.
+
+*** WHAT I DID NOT TICK. THREE, AND ONLY ONE OF THEM IS A PROBLEM. ***
+
+  B37 (chat bot) - HALF DELIVERED, STILL OPEN, AND THE LANE IS NOT AT FAULT FOR IT.
+  The armoury guard is written in scripts/chatcmd.gd on six paths - ANCHOR, SPLIT, LADDER,
+  COST, PIECES, FOUND - and the lane chose it on SHAPE exactly as its row allowed: it is the
+  only claim left carrying all three of two declarations, a derived number list, and an
+  authority in a file it does not own. It corrected its own lane's record in the open (B36
+  had called that authority "a comment"; it is const ARMOUR_LOOK at gear.gd:262-269, real
+  booleans, and the guard reads it as "every key whose value is a true bool" so a piece the
+  game build adds tomorrow goes RED instead of quietly shortening the sentence).
+  BUT THERE ARE NO GATE RESULTS, and a guard that has never been parsed is not delivered. A
+  python rehearsal of one's own logic is not a verdict and the lane said so itself.
+  THE REASON IS CORRECT BEHAVIOUR AND I WANT IT ON THE RECORD AS SUCH: at 19:50:43 the lane
+  had about 75 seconds of its :45 window left, knew its own battery takes 3 min 13 s, and so
+  DID NOT CLAIM THE LOCK AT ALL - no RUNNING line, no Godot, RUN_LOCK untouched, HUD's :52
+  left completely clear. It wrote a checkpoint commit and named the four exact bytes owed.
+  That is the rule working, not a lane falling short. The item stays open; see its row.
+
+  THE HUB - SIXTH HOUR, AND THIS HOUR IT PRINTED ITS OWN DIAGNOSIS. Its 19:40 entry is a
+  correct standing check (web/ byte-identical across both merges, node --check OK, innerHTML
+  only at app.js:252/:298 on page-owned strings, one CSP meta, 2,434,146 bytes against the
+  6 MB cap) and then this sentence: "H32 passes 1-5 in, ticked whole; hub already published
+  by the supervisor - QUEUE EMPTY. The prompt's 'next is pass 4' is stale."
+  THAT IS THE ANSWER THREE SEATS COULD NOT GET. The lane is not refusing its row and it is
+  not failing to read; IT IS READING ITS PROMPT'S H32 PASS LIST AS ITS QUEUE, finding that
+  list finished, and correctly concluding there is nothing to do. The rarity-hue row has been
+  sitting in a block the lane does not treat as its work list.
+  THE PROMPT IS MINE AND I CANNOT WRITE IT THIS RUN - measured, not assumed, by the no-op
+  probe my 18:58 predecessor invented: update_trigger with no prompt field came back "needs
+  the user's approval... only in a turn that answers a recent message from the user". One
+  call, no risk, same cause as the last three attempts. So I did NOT spend this run's budget
+  paging the trigger list to reach a prompt I had just proved I cannot change, and I am
+  naming that choice rather than implying I looked. I have put the fix where the lane WILL
+  see it - its row below opens with the one sentence that resolves this.
+
+  ART - NOT A STAND-STILL, AND I ALMOST RECORDED IT AS ONE. origin/art's tip is my own 18:58
+  addendum, so BY THE BRANCH the lane shipped nothing. I LOOKED AT THE WORKTREE BEFORE
+  WRITING THAT DOWN and it is not true: renders/art/minibosses/dyer/ holds six fresh views
+  (19:59), _fit_dyer_register.json is ok:true with ratio 1.06, pair_w 4.69, three proving
+  views at seen 1.000, errors [] and blind_views [], and there is a NEW INSTRUMENT,
+  _colour_read.json (20:00), measuring hue bands per view across the whole register.
+  THE LANE TOOK THE COLOUR QUESTION I PUT TO IT AND ANSWERED IT WITH A MEASUREMENT instead of
+  a claim, and the answer is legible: the dyer holds TWO bands (blue 0.72 / red-orange 0.28)
+  where the drillmaster holds ONE (red-orange 1.00). That is a twenty-fourth earning its
+  place on the exact axis I asked about.
+  IT IS UNCOMMITTED. Work that is not on the branch cannot be merged, cannot be ticked, and
+  content cannot write lines for a body it cannot see. That is the whole of its row.
+
+*** LOCK DISCIPLINE, 19:58 CT. THE HOUR IS NOT CLEAN. COUNT 1 -> 0. ***
+Machine read 2026-11-17T20:06:48-06:00 while writing this.
+  A FUTURE STAMP, AND THE LANE CAUGHT IT ITSELF. The game build's S25 claim line reads
+  RUNNING 19:09:30; the machine had read 19:08:15 on the preceding call and the IDLE line
+  written off the machine says 19:09:10. The lane typed the claim by hand instead of reading
+  it, NOTICED, and wrote a NOTE line nine seconds later naming the fault, the two bracketing
+  reads, and the fact that it had not edited the line. THE COUNT STILL RESETS TO 0, for the
+  reason it has reset before: a count that survives the thing it is defined to catch is a
+  lying instrument. The lane did everything right AFTER the mistake and nothing it shipped is
+  in doubt.
+  game build 19:09:47 (declared 19:35) -> IDLE 19:18:40. 8 min 53 s actual, well inside
+    :07-:40. The DECLARATION is 13 seconds past the 19:34:47 cap. NINTH over-cap declaration
+    in this house, by thirteen seconds. One line, not an incident - but the fix is one
+    character and it has now been named four hours running.
+  chat bot NO CLAIM AT ALL, deliberately, and said why. Correct. See above.
+  HUD 19:53:45 (declared 19:59) -> IDLE 19:55:56. 2 min 11 s. Inside.
+  No lock cleared on age, no Godot left running, no starved lane. Five of six lanes committed;
+  art produced and did not commit.
+
+*** THE DEAD-DATA AUDIT, 19:58 CT, ON THE MERGED TREE. 2,105,634 chars of script, 47 files
+*** (46 scripts/*.gd + 1 web/*.js - tools/ is test code and was NOT counted). 116 top-level
+*** keys over 12 files in data/ - UNCHANGED from 18:58. ***
+  - UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE. TWENTY-SIX keys return zero
+    literal hits, THE SAME TWENTY-SIX as 18:58 and accounted for identically: TWO runtime-
+    built _alt pools (lord_intros_alt, unique_intros_alt - READ at delve.gd intro_pool, DO
+    NOT WIRE); THREE declared dead at D98 (town_levels_for_the_desktop, phase2_words,
+    phase2_words_alt); NINE prose/spec keys (technique, boss_floors, chronicle_line,
+    word_order, casing, promotion_line, one_roll, _gating, canon_silences); TWELVE `_note_`
+    keys (c54, c70, c71, c87-c95). 2 + 3 + 9 + 12 = 26. `twitch_cooldown_s` REMAINS STRUCK.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, on the fourth guard (a directory is dead only if
+    neither its path NOR ANY FILENAME IN IT appears in the blob). Exactly two show -
+    assets/characters/bellmire and .../showcase - and both are read by tools/ only (D95),
+    named and not counted under Guard 3.
+  - THE MINIBOSS LEDGER: 23 distinct bodies on disk (34 .glb with _chibi variants), 23 WITH
+    LORE LINES - *** THE LINES GAP IS ZERO *** - and 14 SPAWNABLE. The spawn gap is NINE and
+    is above this seat, unchanged. A twenty-fourth (the dyer) exists on disk but not on any
+    branch, so it is in none of these numbers yet.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools (delve.gd
+    intro_pool), cooldown_s (chatcmd.gd), assets/dungeon_look's six decals (dungeon_hd.gd:98),
+    assets/gear/dungeon 24 of 24, assets/props/.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** S25 IS TICKED AND SYSTEM 3 IS CLOSED. TAKE SYSTEM 4. ***
+                   You did the harder half of an already-wired finding: you proved it with
+                   line numbers, re-ran the fit on the merged tree, and named what "a real
+                   mesh" does and does not mean here before anyone could ask. That is how an
+                   already-wired close is supposed to read.
+                   SYSTEM 4 IS YOURS AND IT IS THE LAST OF MR. E'S FOUR: "accessories with
+                   real models" (his Phase 1 list, 00:35 CT). Systems 2 and 3 are closed;
+                   System 1 and System 10 are ticked. SYSTEM 4 IS THE ONLY THING LEFT BETWEEN
+                   THIS HOUSE AND PHASE 2 PROPER. Do not pull a Phase 2 system.
+                   HOW I WILL JUDGE IT, AND IT IS THE SAME SHAPE AS S24 AND S25: a named
+                   accessory out of items.json reaching a real body, FIT PROVED FRONT, SIDE
+                   AND BACK on a posed hero, a verdict line from a harness that can go red,
+                   and a picture I can look at. AND BECAUSE S25 JUST TAUGHT US THE QUESTION:
+                   SAY FIRST WHETHER AUTHORED MODELS EXIST FOR ACCESSORIES, with the grep
+                   behind it. If they do not, the honest close is the S25 close - name the
+                   resolution path with line numbers, say what the named piece drives, and
+                   say plainly that the models are art's to make. THAT IS A TICK. Do not build
+                   a procedural stand-in and call it a model; S25 was clean because it refused
+                   to do exactly that.
+                   NOTHING ELSE IS OWED TO ME. Both MB_FIT lines landed. Your next merge of
+                   main makes the strickler line live - the body is on main already.
+                   YOUR LOCK: claim + 25 is the ceiling, :40 is the hard release. READ the
+                   clock off the machine in the same call that writes the stamp, and declare a
+                   finish INSIDE the cap - yours was thirteen seconds over.
+
+  CONTENT      ->  *** C-97 IS TICKED AND YOU CLOSED THE LINES GAP TO ZERO. ***
+                   Twenty-three bodies on the floor, twenty-three that can be spoken about. I
+                   diffed both sets myself; nothing is missing in either direction. Two hours
+                   ago that gap was five. Nobody chased you for any of it.
+                   THE TWENTY-FOURTH EXISTS AND IT IS NOT YOURS YET: art has built a DYER and
+                   has NOT committed it. It is the first body in the register chosen for
+                   COLOUR rather than silhouette.
+                   YOUR ROW HAS TWO LEGAL ANSWERS AND BOTH TICK. If the dyer is on your branch
+                   when you fire, write it - 9 arrive + 8 fall into miniboss_feed.by_key, same
+                   shape as the other twenty-three, art's MINIBOSSES.md entry is the
+                   authority, and if that write-up does not give you enough, SAY SO AND NAME
+                   WHAT YOU NEED and I will carry it to art. IF THE BODY IS NOT THERE, DO NOT
+                   INVENT IT FROM THIS SENTENCE. Stand down in writing - say the gap is zero
+                   and the twenty-fourth has not landed - and spend the firing on a defect in
+                   something you have already shipped. A MEASURED STAND-DOWN TICKS HERE. You
+                   have never once padded and I am not asking you to start.
+                   Same standing conditions: no new top-level key beyond your `_note_`, and
+                   still forbidden are townsfolk, phase2_words, phase2_words_alt and
+                   town_levels_for_the_desktop.
+
+  ART          ->  *** COMMIT THE DYER. THAT IS THE WHOLE ROW. ***
+                   You are not idle and I nearly recorded you as idle, because origin/art's
+                   tip is my own plan addendum. The dyer is on disk - six views at 19:59,
+                   _fit_dyer_register.json ok:true, ratio 1.06, pair_w 4.69, three proving
+                   views at seen 1.000, errors [] and blind_views [] - and _colour_read.json
+                   at 20:00 is a NEW INSTRUMENT measuring hue bands per view across the whole
+                   register. YOU ANSWERED THE COLOUR QUESTION WITH A MEASUREMENT instead of a
+                   claim, and the answer is legible at a glance: the dyer holds two bands
+                   (blue 0.72 / red-orange 0.28) where the drillmaster holds one
+                   (red-orange 1.00). That is more than the row asked for.
+                   NONE OF IT IS ON THE BRANCH. Uncommitted work cannot be merged, cannot be
+                   ticked, and content cannot write lines for a body it cannot see - its row
+                   this hour literally depends on your commit. Commit on the usual terms, with
+                   the faults named in MINIBOSSES.md and not swept, and hand the ratio over as
+                   the MB_FIT number. IF THE RUN WAS CUT OFF MID-WAY, COMMIT WHAT IS FINISHED
+                   AND SAY WHAT IS NOT - a checkpoint commit always beats a worktree nobody
+                   else can reach.
+                   TELL ME ONE THING IN THAT COMMIT: does _colour_read.json read the register
+                   as TOO GREY ON THE WHOLE, or was the strickler simply the outlier? You now
+                   have a number for the question I could only ask in words.
+                   THE TWO ONE-SENTENCE ANSWERS ARE RECORDED AS ABANDONED AND I HAVE STOPPED
+                   CARRYING THEM, as the 18:58 row said I would: snuffer_chibi.glb, and the
+                   tanner observation. Reopen either in one line any time; it is not a
+                   reprimand and never was.
+                   NOT YOURS: nine of your bodies cannot spawn. It is engine work and a design
+                   call and it is with the supervisor. Keep producing.
+
+  HUB          ->  *** READ THIS FIRST, BECAUSE IT RESOLVES SIX HOURS: YOUR PROMPT'S H32 PASS
+                   *** LIST IS NOT YOUR QUEUE. THIS BLOCK IS. ***
+                   You wrote at 19:40 that "the prompt's 'next is pass 4' is stale" and that
+                   your queue is empty. YOU ARE RIGHT ON BOTH COUNTS and neither is a
+                   complaint against you - H32 IS TICKED WHOLE, passes 1-5 are in, the hub is
+                   published, and your prompt is out of date. I own that prompt and I could
+                   not write it this hour; the reason is recorded above and it is not yours to
+                   carry. SO, PLAINLY: EVERY FIRING, READ "TAKE THIS NEXT" AT THE TOP OF
+                   docs/WORK_PLAN.md ON YOUR OWN BRANCH AND TAKE THE ROW HEADED HUB. That
+                   block, not your prompt, is where your work has been sitting for six hours.
+                   YOUR ROW HAS BEEN WAITING THERE AND IT IS UNCHANGED, WORD FOR WORD:
+                   DRAW YOUR RARITY HUE FROM ART'S TABLE. Mr. E's own words, 15:47 CT: "yes i
+                   think so". The ruling is in the block headed MR. E'S RULING, 17 NOV 15:47
+                   CT below - READ IT BEFORE YOU TOUCH style.css. Take the CANONICAL rung
+                   (uncommon is WHITE, not the HUD's parchment pewter - your surface is ink,
+                   not parchment); legendary leaving var(--gold) for tangerine is correct and
+                   is NOT a palette breach, because a rarity frame is DATA and not chrome.
+                   style.css:1373-1375 and :1706-1708 carry a THIRD table; five rungs differ
+                   and uncommon is GREEN (#6aa84f) where art's ladder is WHITE. Use art's
+                   FLOAT triples from tools/art/icons.py and derive your own hex; do not copy
+                   a hex out of the ruling block or out of ui_theme.gd. junk, starting and
+                   common stay BARE. Keep .rar-epic on very-rare. Rarity stays a FRAME, never
+                   a fill. LOOK AT IT AFTERWARDS - the Shops tab and a gear card at each rung,
+                   with your own eyes. web/ CHANGING IS EXPECTED THIS TIME; say so, and expect
+                   the hostile-name test back, because it comes back whenever web/ changes.
+                   IF SOMETHING STILL STOPS YOU, ONE LINE ANYWHERE IN YOUR COMMIT CLOSES IT
+                   AND I WILL TICK THAT LINE: "the hue table is not mine to touch", or
+                   "style.css is not reachable this run". Either is a delivery.
+                   YOUR STANDING CHECKS ARE GOOD WORK AND NO SEAT HAS EVER SAID OTHERWISE.
+                   They are simply not a row.
+                   DO NOT PUBLISH. That is the supervisor's call, never yours.
+
+  CHAT BOT     ->  *** B37 IS NOT TICKED AND YOU DID NOTHING WRONG. RUN THE GATES FIRST. ***
+                   You had 75 seconds of window and a three-minute battery, so you did not
+                   claim the lock at all, left HUD's :52 completely clear, wrote a checkpoint
+                   and named the exact four bytes owed. That is the rule working as written,
+                   and I am ticking nothing only because a guard that has never been parsed is
+                   not delivered.
+                   YOUR ROW IS THE FOUR BYTES YOU NAMED, IN THAT ORDER, BEFORE ANYTHING ELSE:
+                   parse (--headless --quit-after 300, 0 script/parse errors), _l14_test.gd,
+                   _twitch_parse.gd, _commands_doc.gd. REPORT THE VERDICT LINES, NOT THE
+                   RETURN CODES. COMMANDS_DOC should be a no-op by construction and you have
+                   already proved commands.json byte-identical - prove it again from the gate.
+                   IF IT PARSES CLEAN AND THE FOUR ARE GREEN, B37 TICKS ON THAT ALONE. Do not
+                   add a seventh path and do not take a new claim this firing. FINISHING IS
+                   THE ITEM.
+                   AND THE LESSON THAT IS WORTH MORE THAN THE GUARD: you spent the window
+                   reading and choosing and then had nothing left to gate with. CLAIM AND
+                   START THE BATTERY FIRST - "claim first, read second" is in the protocol for
+                   exactly this case. You named that cost yourself and did not dress it up,
+                   which is why it is a note here and not a finding.
+                   Your correction of your own lane's record - the authority is const
+                   ARMOUR_LOOK at gear.gd:262-269, not a comment - is the kind of thing most
+                   lanes never do, and it is what made this claim worth choosing.
+
+  HUD          ->  *** U61 IS TICKED - A NUMBER, A BOUND, A GATE AND A PICTURE, ALL FOUR. ***
+                   You closed a named limit instead of carrying it, and the bound is a closed
+                   interval: 0.75 is the smallest clearing offset, past 0.95 hits the lower
+                   rule, and upward is impossible at all because it needs y<=2.4 on a rod that
+                   starts at 3. The gate now measures the geometry off the ink bottom rather
+                   than naming it.
+                   THE ROW IS YOUR OWN HONEST LIMIT, AND FINISHING A GATE WHERE IT IS WEAKEST
+                   IS THE SAME WORK YOU HAVE NOW DONE TWICE: the 17.0 bound was measured at
+                   1080p scale 1 and NOTHING WAS RENDERED AT 125% OR 150% UI SCALE. px()
+                   scales both the stripe and the glyph, so the ratio SHOULD hold - prove it,
+                   or find where it does not. Give me the stripe interval and the ink bottom
+                   at each of the three scales, and say whether the gate's 17.0 constant needs
+                   to become a COMPUTED bound. IF THE RATIO HOLDS EXACTLY, SAY SO WITH THE
+                   NUMBERS AND THE LIMIT CLOSES - that ticks as readily as a fix would.
+                   A PICTURE IS OWED AGAIN, for the same reason as last time: the question is
+                   geometry, not arithmetic. One capture at whichever scale behaves worst,
+                   looked at by you; if all three are identical, one capture and a sentence
+                   saying so is enough.
+                   THE L31 REMAINDER IS STILL NOT YOURS - delve.gd, monster.gd,
+                   party_frames.gd, boss_bar.gd are the game build's files.
+
+*** FOR THE SUPERVISOR ***
+  1. THE HUB IS DIAGNOSED, AND WHAT IS LEFT NEEDS A LIVE TURN, NOT A DECISION. The lane
+     printed the cause itself at 19:40: it treats its PROMPT'S H32 pass list as its queue,
+     that list is finished, so it reports "queue empty" and does a standing check. It has not
+     been ignoring its row; it has not been looking where its row lives. I own that prompt and
+     the write is REFUSED in an unattended run - measured this hour by the no-op probe
+     (update_trigger, enabled only, no prompt field): "needs the user's approval... only in a
+     turn that answers a recent message from the user". I did NOT page the trigger list to
+     reach a prompt I had just proved I cannot write, and I am naming that choice rather than
+     implying I looked.
+     WHAT I DID INSTEAD: the hub row above now OPENS with the sentence that resolves it - read
+     TAKE THIS NEXT every firing, that block is your queue, not your prompt. The plan is what
+     the lane actually merges, so this should land without any prompt change at all.
+     THE EXACT WORDING FOR WHOEVER GETS A LIVE TURN, one line into the hub prompt, replacing
+     any H32 pass queue: "EVERY FIRING, READ 'TAKE THIS NEXT' AT THE TOP OF docs/WORK_PLAN.md
+     ON YOUR BRANCH AND TAKE THE ROW HEADED HUB. H32 IS TICKED WHOLE; there is no pass queue."
+     MY RECOMMENDATION: do not spend one of your cycles on this unless next hour's hub commit
+     still shows no row. The plan reaches the lane; the prompt change is belt-and-braces.
+  2. THE SPAWN GAP IS UNCHANGED AND STILL QUEUED BEHIND MR. E'S OWN ORDER. Nine bodies cannot
+     spawn; the gate is dungeon_hd.gd:101 THEME_MINIBOSS and all fourteen themes are taken.
+     Content has now closed the lines half COMPLETELY - 23 of 23 - so the cheap half is fully
+     paid for, and what remains is the engine change plus the design call nobody has made: do
+     two minibosses share a theme, or do the nine want their own? System 4 is now the game
+     build's row and it is the last of Mr. E's four. MY RECOMMENDATION STANDS: queue the
+     list-valued THEME_MINIBOSS plus a roll, sized at one firing, AFTER System 4.
+  3. NOTHING ELSE. No publish is claimed and NO PUBLISH VERIFICATION WAS RUN - the hub made no
+     "ready to publish" claim, so the gate was not owed and I did not run it. web/ is
+     byte-identical to the build that was looked at at 17:58.
+
+*** NEEDS MR. E: nothing. ***
+
+*** NOTES FOR THE NEXT :58 SEAT, WRITTEN 19:58 CT. ***
+  a. THE SENTINEL RULE, AND IT IS MINE THE HARD WAY. Never read back a file you just wrote
+     without proving it is the one you wrote: unique path, sentinel first line, assert before
+     use. A failed write plus a stale file reads as success all the way to the commit. This is
+     the second time today a stale tmp file reached docs/WORK_PLAN.md.
+  b. THE PROMPT WRITE IS STILL REFUSED. Fourth measurement, same cause, and the NO-OP PROBE IS
+     THE RIGHT WAY TO TEST IT - one call, nothing changed, no transcription risk. Do not
+     reconstruct a prompt to find out, and do not page the trigger list for a prompt you have
+     just proved you cannot write.
+  c. STALE FACTS IN THE :58 PROMPT: "all 86 named weapons" is WRONG, it is 107. The audit
+     baseline dated 10:58 is now THREE generations stale - the 19:58 measurement is
+     2,105,634 chars, 47 files, 116 top-level keys over 12 data files, 26 zero-hit keys
+     (2 runtime _alt + 3 declared dead + 9 prose/spec + 12 `_note_`). The freeze section says
+     art may invent minibosses "(eighteen exist)" - TWENTY-THREE exist on the branch and a
+     twenty-fourth is on disk.
+  d. ID HIGH-WATER MARKS as of 19:58: C-97, D99, H32, L74, S25, T5, U61.
+  e. OVER-CAP DECLARATION COUNT IS NINE. CLEAN-HOUR COUNT IS 0 - reset this hour on the game
+     build's future stamp, which the lane caught and recorded itself.
+  f. CHECK THE WORKTREE BEFORE YOU CALL A LANE IDLE. Art's branch tip was my own commit and
+     its worktree held a finished twenty-fourth miniboss and a new instrument. A branch tip is
+     not a measurement of a lane.
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 18:58 CT. SIX LANES MERGED. FIVE SHIPPED AND I TICKED
@@ -7295,6 +7710,11 @@ PHASE 1 fits under the 20:40 wiring-only ruling and is what every row below serv
   System 1  rarity hue ladder on all 454 equipment icons          -> ART
   System 2  named weapons wired live from items.json              -> GAME BUILD, after D98/D99
   System 3  named armour wired live from items.json               -> GAME BUILD, after D98/D99
+            *** CLOSED AS ALREADY-WIRED AND TICKED BY THE TEAM LEAD 2026-11-17 19:58 CT (laptop
+            4baef90, S25). gear.gd:1630 armour_id -> :602 -> dress_armour:288 -> armour_piece_look:1847.
+            D95_FIT OK 40 shots, 0 attach failures; picture looked at by the lead. NO AUTHORED ARMOUR
+            MODELS EXIST - the wiring is not what is missing; the models are art's to make and this is
+            the path they would be wired into. ***
   System 4  accessories with real models                          -> GAME BUILD, after D98/D99
   System 10 12 shared creature meshes get their own body          -> ART makes, GAME BUILD wires
   D98 and D99 close out                                           -> GAME BUILD, FIRST

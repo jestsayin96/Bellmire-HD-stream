@@ -1229,11 +1229,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "drover": {
+   "title": "The Drover",
+   "theme": "wood",
+   "idea": "IT YOKES ONE OF YOU - it closes a bow of its own yoke on a hero and after that the harm you do it travels the chain: while the collar holds, every blow landed on the Drover is paid half by the one wearing it, so the party is not choosing how hard to hit but whether to hit at all; cut the chain and the yoke comes free to take the next, and the second bow hangs open to tell you it can",
+   "wear": 0.74,
+   "feed_line": "It yokes one of you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 5053,
+   "size": [
+    3.59,
+    1.94,
+    2.44
+   ],
+   "footprint_span": 3.59,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3780359514685427,
+    "ortho": 3.1846964359283447,
+    "clip": [
+     8.383544921875,
+     23.248226165771484
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 81,
+  "files": 84,
   "failures": []
  }
 }

@@ -2371,3 +2371,161 @@ call, not art's. Feed line: *"It is paid by the tail."*
 100% original procedural geometry (`bmesh`-free raw vertex maths via
 `lordlib`). No pack asset is read by this body. Nothing to log in
 `ASSET_SOURCES.md`.
+
+## 28 - THE DROVER. IT YOKES ONE OF YOU. wood, the second one.
+2026-11-18, 03:35-04:20 CT, the art lane.
+
+### WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+I parsed `CANON` out of `tools/art/minibosses.py` rather than recalling the set:
+**41 mechanic strings, 27 distinct bodies.** The occupied classes are summon,
+self-armour, drag-a-hero, douse the lamps, will-not-stay-down, bar the door,
+take-and-wear, heal-the-pack, raise the water, plant thorn, pre-set the room,
+fire-scaled, mislocated sound, pour-and-set, come-apart-in-two, arm the room,
+encumber, bisect the room, adaptive resistance, take the haul, drink the brews,
+press the fallen, strike you level, mark-and-hunt, green your iron, take your
+shape, paid by the tail.
+
+**NOTHING IN THE REGISTER SHARES HARM WITH THE PARTY.** That is this one.
+
+Bodies per theme, from the same parse: `wood` carried ONE (the Snarer) and was
+one of the four thinnest themes with fogbound, shrine and confection. The
+Snarer's idea is IT HAS ALREADY SET THE ROOM - lines laid before you arrive.
+This one lays nothing: it joins itself to you. Same room, no shared mechanic.
+
+### THE PACKS WERE CHECKED BEFORE A VERTEX WAS WRITTEN, AND THE NUMBER IS MEASURED
+I walked `C:\hd adventure\_packs` and grepped every filename for
+yoke / oxbow / ox_bow / collar / chain / coil / shackle / goad / harness / cart
+/ plough / plow. **2,025 files walked. ZERO hits on all twelve terms.**
+(The walk log is `_drover_packgrep.log` at the worktree root, which
+`.gitignore` excludes - so the counts above are the record, not the file.) Nothing on disk serves a yoke, a chain, a collar
+or a goad, so procedural is the right call and not a preference.
+
+ONE CORRECTION TO A NUMBER THIS LANE HAS BEEN REPEATING: the walk found
+**8 top-level pack directories** holding those 2,025 files, not 40. The file
+count matches what was measured on 17 Nov; the "40 packs" figure does not match
+the top level of that tree. Named so the next run measures rather than inherits.
+
+### THE IDEA, AND WHY IT IS NOT A 28TH COAT OF AN EXISTING ONE
+IT YOKES ONE OF YOU. It closes a bow of its own yoke on a hero, and after that
+the harm you do it travels the chain: while the collar holds, every blow landed
+on the Drover is paid half by the one wearing it. The party is not choosing how
+hard to hit but **whether to hit at all**. Cut the chain and the yoke comes free
+to take the next - and the second bow hangs open to tell you it can.
+
+Checked against all 27: the Gaoler *moves* a hero (drag), the Dyer *marks* one
+(targeting), the Tanner *resists* what hurt it once, the Greener *copies* a
+hero's shape, the Ratcatcher *feeds* on other deaths. None of them makes your
+own damage the party's problem. This is a harm-routing mechanic and it is new.
+
+### WEAR 0.74 - AN ARGUED CHOICE, AND I DID NOT MEASURE IT
+I did not run `_moulder_wear.py` and I am not implying I did. Four populations:
+the ash beam, handled every day of a working life, 0.85; the chain and collars,
+greased iron older than the man, 0.90; the leather, daily, 0.80; **the goad, cut
+this week - the only young thing on the body, 0.15**. 0.74 is taken toward the
+beam-and-iron end because they carry the mass and the whole upper silhouette.
+0.74 is free in the register: 0.70 and 0.75 are taken, nothing shares a value.
+
+### SIX PASSES, ONE NAMED FAULT EACH, EVERY ONE DRIVEN BY A PICTURE
+**Two faults were caught by READING a helper before rendering, not after:**
+- `_open_ring`'s own docstring says a yaw-0 ring is **edge-on from the side**,
+  and the Pressman shipped four collars that became four sticks that way. All
+  three rings were turned to yaw 0.78 before pass 1 ever rendered.
+- `creatures.eyes()` **defaults to `slot='glow'`**. My palette comment claimed
+  "no geometry in the glow slot" while calling it. The comment was the thing
+  that was wrong and the comment is what got corrected - the body has no lamp,
+  no flame and no pour, and exactly two emissive eye pinpoints of r 0.042.
+
+**Pass 2 - THE CHAIN WAS NOT A CHAIN.** Pass 1 drew it as separate boxes spaced
+along the run. front.png shows what that actually is: a scatter of loose cubes
+climbing through empty air, and the coil a pile of gravel. The creature's idea
+is that harm *travels the chain*, so a chain that does not read as one connected
+thing is the mechanic gone. Links now overlap at 1.10 * r and alternate 90
+degrees - links passing through links, and visibly cuttable, which is the
+party's way out. *(Same pass, a defect not a judgement: the goad's iron point
+had detached from its shaft - side.png shows daylight between them - because a
+rotation about Y swung it off the shaft's own line. Placed along the shaft's
+last leg instead.)*
+
+**Pass 3 - THE BEAM ATE THE TOP OF BOTH BOWS.** A shut bow is an **O** and an
+open one is a **C**: that is the entire count. The beam, 0.09 thick and cambered
+forward over them, covered the top arc of both, so both rendered as C's and a
+viewer could not have read the idea from any camera. Bows dropped to clear air
+on visible straps. *(3b: the collar sat inside the bow and the pair read as one
+knot - it now hangs clear below it. 3c: the floor coil alternated flat and
+upright rings and read as a bed of spiked cartwheels; a coil lying down is seen
+from above by every one of these cameras, so it is flat rings only.)*
+
+**Pass 4 - THE SAME FAULT WITH A DIFFERENT OCCLUDER.** Clear of the beam, both
+bows still rendered as C's: at x -0.60 / +0.62 they hang straight through the
+MAN, whose shoulders are 0.82 across. Moved outboard to +/-0.84, just inside the
+beam's ends, so the whole circle of each is against background. **I spent two
+passes learning one thing: THE COUNT MUST HANG IN CLEAR AIR.** Writing it down
+because the Ratcatcher's cage learned the same lesson about depth and this lane
+keeps paying for it twice.
+
+**Pass 5 - MINIBOSSFIT WENT RED ON MY OWN CREATURE AND IT WAS RIGHT.**
+`"drover: pair does not fit the fixed frame"`, pair width 6.12 m against a
+register whose widest body before this was the Gaoler at 3.72. **I could have
+widened the frame. I did not, and I want that on the record:** the frame is
+shared by 26 bodies that all fit it, so a frame edited to admit mine would be an
+instrument edited to pass its author's work - the exact fault class this lane
+keeps catching in its own gates. The creature was what was wrong. The two widest
+things on it were the two least load-bearing - the coil's sprawl and the goad's
+reach - so the coil came in 0.28 and tightened 0.07 and the goad shortened 0.12
+to just inside the beam's own end. **The BEAM now sets the width, which is
+correct, because the beam is the idea.** Footprint 4.26 -> 3.59 m.
+
+**Pass 6 - THE SIDE VIEW LOST THE COUNT, AND I HAD NAMED THE RISK IN THE
+DOCSTRING BEFORE PASS 1 RENDERED.** A beam across X is exactly the shape the
+"separate everything in X" rule cannot save. hero_side.png showed ONE bow: the
+other sat directly behind the man. 0.30 of authored Y between them was not depth
+separation, it was a rounding error. They now sit 0.80 apart in Y - the taken
+one well forward of the chest, the empty one well behind the back, which is also
+what a real ox-yoke does. The front and three-quarter cameras are orthographic
+along Y and no x or z moved, so nothing those views read could change.
+
+### THE NUMBERS
+| | |
+|---|---|
+| height | 2.44 m (hero 2.45 m, ratio 1.00) |
+| footprint | **3.59 m — CORRIDOR-SAFE** (three-cell clear span is 11.0 m) |
+| meshes | 4 (body / bone / dark / glow), 5,053 faces |
+| minibossgen | `ok: true`, errors `[]`, **blanks `[]`**, border/frame clean |
+| minibossfit | **verdict GREEN**, errors `[]`, `blind_views: []`, pair 5.45 m |
+| visibility | `proving: 3` — all three views proved by the moved-pixel test |
+
+### THE FIT PROOF - I LOOKED AT IT ON A POSED KNIGHT, AND HERE IS EVERY FAULT I SEE
+Rendered on the real KayKit Knight in the idle pose, front / side / back, and I
+looked at all three. The scale is right and **the man does NOT read as a stick
+figure beside the chibi hero** - the Ratcatcher's pass-3 lesson applied first
+time rather than rediscovered. The honest list:
+
+1. **The goad reads as a crutch, not a goad.** It meets the floor at a shallow
+   angle with its point ON the ground, so it reads as a prop holding him up. A
+   goad is carried. This is the worst remaining fault and it is a pose problem.
+2. **The collar and the chain's top links make a knot** on the left side. Noted
+   at pass 3, improved, not solved.
+3. **The man is a flat dark mass.** At hero-comparison size his torso, arms and
+   legs merge into one shadow against the Knight's readable plates. This is the
+   price of the dark-body / pale-furniture choice and it is higher than I
+   expected when I took it.
+4. **The beam foreshortens to a pale lump in the side view** - it reads as a
+   sack on his shoulders. The camber bought less than I hoped. The count
+   survives there (pass 6) but the *beam* does not.
+5. The head sits very low between the shoulders, with almost no neck, and the
+   beam passes close behind it in value.
+6. The far arm reads as a stub raised toward the beam; the hand does not
+   clearly grip anything.
+7. The beam's right end passes behind the open C and slightly muddles its top.
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT, AND I TOUCHED NO .gd OUTSIDE tools/art/
+1. `scripts/bestiary.gd` - add a `drover` entry with
+   `model = "res://assets/monsters/minibosses/drover.glb"` and **NO `anims`
+   entry**: this body is STATIC, like the twelve creatures of System 10.
+2. `scripts/dungeon_hd.gd` - the `miniboss` set-piece slot can prefer it on the
+   **`wood`** theme, which until now had only the Snarer.
+3. The mechanic itself is a damage-routing rule and it is the game build's: a
+   collar on one hero, a share of the damage dealt to the Drover paid by that
+   hero, and a cuttable chain that ends it. The art promises a **count of two**
+   and an **openable second bow** - if only one hero can ever be yoked, the open
+   bow is a promise the fight does not keep.

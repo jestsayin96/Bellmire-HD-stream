@@ -11632,6 +11632,43 @@
           "Brass pegs on the stone. Somebody counts them out of habit.",
           "The coat is creased where the board rode. He held it a long time."
         ]
+      },
+      "rammer": {
+        "arrive": [
+          "Three timber legs and a frame between them. Something is being driven into the floor.",
+          "A bruised pile stands out of the stone. Over it, an iron monkey hangs under the head.",
+          "A hauler leans back on the fall-rope, off to one side. He is not the danger. He is the reason it is loaded.",
+          "Hear the haul. Slow, a rope paying through a block. Each pull is a step nearer the top.",
+          "Then the hold. That is the whole warning. Nothing moves and everything waits.",
+          "Stand off the pile for the drop. Come back in while it hauls.",
+          "Whatever is on the pile when the monkey falls is finished.",
+          "The timber is river-soaked and bruised. The rope is frayed. The iron is the one sound thing here.",
+          "A working man keeps his monkey. He keeps it better than himself."
+        ],
+        "act": [
+          "The haul. Slow. The rope runs.",
+          "Pull, and pull. The iron climbs.",
+          "It hangs at the top. Nobody breathes.",
+          "The hold. Get off the pile.",
+          "The rope lets go.",
+          "It comes down on the count."
+        ],
+        "broken": [
+          "The rope parts. The monkey stays where it fell.",
+          "A leg splits and the frame sits down crooked. It cannot haul.",
+          "The head block cracks. The iron has nowhere to go up.",
+          "The hauler lets the rope run through his hands and does not take it up again."
+        ],
+        "fall": [
+          "The Rammer is down. The monkey lies on the pile and does not rise.",
+          "The rope goes slack and falls in a heap.",
+          "Nothing is hauling now. Nothing is held. Walk the floor.",
+          "It dropped on the count to the last.",
+          "The frame leans on one leg and holds no weight.",
+          "The Rammer is down. The pile is a stump with a dent in its head.",
+          "The hauler sits on the wet stone and looks at his hands. Nobody asks him anything.",
+          "The iron is sound. The timber round it is not."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -11646,7 +11683,8 @@
     "_note_c110": "C-110: comfitmaker (thirty-first miniboss, art lane) gets arrive and fall lines, 9 and 8. by_key now holds 31 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 31: a sugar-hard shell nothing the party carries can mark, so it hands out comfits and a comfit is the one thing that cuts it, at the price of a gummed hand that swings slower while it holds the sweet. Two arrive lines state the mechanic plainly and the fall lines answer it. No mechanic is built from these lines. Nothing spawns this body unless the game build has a comfitmaker row; that is engine work.",
     "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work.",
     "_note_c112": "C-112: beadle (thirty-third miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 33 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 33: while it stands the party does not choose who acts, it calls the same hero again and again while the rest hold and watch, the four brass pegs on its board are the calls it has left, and knocking the board off its arm gives the order back. One arrive line is art's own feed line. Three arrive lines state the mechanic plainly (same hero again, pegs are the calls, knock the board off) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a beadle row; that is engine work.",
-    "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way."
+    "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way.",
+    "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

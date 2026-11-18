@@ -10021,3 +10021,93 @@ TOWNWALK in_solid=0/17275 raid_in_solid=0/7003 PASS.
 NOT DONE, NAMED: the ONE IDEA per miniboss (summon, re-plate, hook-drag...) is still not delve-side
 behaviour for these sixteen - they now stand up named, with their lines and their rally, which is
 what the fenman got at S32. Content: the leech needs arrive/fall lines to enter the shrine draw.
+## B50 - the published lord count: "the eight lords" was true and nothing in the house held it to it (chat bot, 2026-11-18 08:4x CT)
+
+THE DEFECT CLASS, AND IT IS MY OWN LANE'S NAMED LEFTOVER, NOT A NEW ITEM. B35 listed the four
+`what` claims on my surface whose authority is a number living in code, and ranked them. `look`
+(B35) and `satchel` (B36) were taken. This is the third. `bestiary` publishes "the eight lords
+that hold the deep" in .what and "the eight lords" in .short, and the count was CORRECT today -
+Bestiary.LESSER and Bestiary.GREATER rise four and four - but nothing compared them. A ninth lord
+added to the deep would have left !bestiary and docs/COMMANDS.md counting eight, and the number is
+spelled as a WORD, so the digit reader B40 wrote for the flat prices finds nothing in that
+sentence and reports healthy. That is how this claim could drift in total silence.
+
+ONE CORRECTION TO B35'S OWN NOTE, AND IT IS WHY THE CLAIM LOOKED SMALLER THAN IT IS. B35 called
+this "a COUNT over bosses.json, a data file, not a const". INCOMPLETE, not wrong: there are TWO
+consts AND the data file. Bestiary.LESSER / Bestiary.GREATER (bestiary.gd:299-300) are the lords
+the game actually rises; data/bosses.json `lesser` / `greater` are the CONTENT writer's rows for
+the same lords. So this is B36's SPLIT shape again and now across TWO OTHER LANES' files - the
+game build's consts and the writer's rows can disagree with each other before either disagrees
+with my sentence, and a row the writer adds with no const beside it is a lord the Bestiary will
+never rise.
+
+WHAT CHANGED. Four counted arms at the end of the COMMANDS_DATA loader, 4 appends, 74 -> 78.
+  BESTIARY SPLIT    the two authorities disagree - 8 risen vs the row count. INDEPENDENT of the
+                    rest and does not share their elif: the authorities disagreeing matters
+                    whatever my sentence says. A bosses.json that cannot be read reads as ZERO
+                    rows and is reported as the row count it is, not hidden behind the consts.
+  BESTIARY ANCHOR   neither field says "<number> lords" in a word this guard knows.
+  BESTIARY FIELDS   .what and .short publish DIFFERENT counts as each other - my own file
+                    disagreeing with itself, the shape the armoury ladder could take at B37.
+  BESTIARY LORDS    the published count differs from the count the game rises.
+The authority is read through Bestiary.bosses_raw(), the accessor the bestiary itself uses, so the
+guard compares against the authority in play instead of re-parsing a copy of it. NO published
+word, price or list is restated on the guard's side, and data/commands.json WAS NOT EDITED.
+
+THE ONE WORD THE TEAM LEAD ASKED ME TO CORRECT (08:0x CT row 4), done in the same commit: my B49
+comment said "B48 made TEN arms countable". B48 added SEVEN arms covering the TEN `wear` SITES.
+It now reads "B48 covered TEN `wear` SITES WITH SEVEN ARMS". The code was always exact; the word
+was not.
+
+MY FIRST BATTERY WENT RED ON MY OWN CODE AND I AM RECORDING THAT, NOT BURYING IT. PARSE failed:
+"There is already a variable named `b_d` declared in this scope" - the brew guards already own the
+b_ prefix in that scope. Every variable in the new block is bl_ now, --check-only came back clean,
+and the battery was re-run from the top. The fault cost me the back half of my window and pushed
+my second claim into the HUD's :52-:07 by overrun. THAT IS MY FAULT AND NOT THE HUD'S. I refreshed
+the lock saying so in words, ran a 30 s battery, and released at 08:58:10.
+
+GATES (my :45 window; lock IDLE at 08:19:46 from the game build, no Godot process alive, claimed
+08:52:40, refreshed 08:56:20 after the parse fault, released 08:58:10)
+  PARSE                   rc=0, 0 error lines
+  L14_TEST                OK (22 checks)
+  TWITCH_PARSE            OK (8 checks)
+  COMMANDS_DOC            OK wrote 27 commands - a NO-OP; docs/COMMANDS.md unchanged, 5790 bytes
+  baseline guard_faults() 0 faults, [] - the healthy reading on clean data
+
+FIVE ENGINE RED PROOFS, EVERY ONE rc=1, AND THE SPLIT ONE TOUCHED NO OTHER LANE'S FILE.
+  published nine (both fields)   -> ["BESTIARY LORDS"]   published 9, risen 8
+  what nine / short eight        -> ["BESTIARY FIELDS"]  what 9, short 8
+  the phrase removed             -> ["BESTIARY ANCHOR"]  fields carrying the phrase: []
+  "many lords" (unknown word)    -> ["BESTIARY ANCHOR"]  fields carrying it: ["what","short"]
+  a greater row dropped          -> ["BESTIARY SPLIT"]   8 in code, 7 rows
+The first four are mutations of data/commands.json, MY OWN file, restored byte-identical after
+each one (md5 0ed191404157221abd8a184cc580dfa5 before and after, 14772 bytes). THE SPLIT PROOF IS
+NOT A FILE EDIT AT ALL: the harness poisons Bestiary's own in-memory row cache before the read, so
+the arm is proved in the engine WITHOUT writing to data/bosses.json, which is the CONTENT lane's
+file. No cross-lane scratch exception was needed or used this cycle. _b50_count.gd and
+_b50_run.log deleted in the same cycle.
+
+DRIFT CHECKED BOTH DIRECTIONS AFTER THE EDIT. order == the commands set (27 each), 24 aliases, and
+reading all 49 dispatch patterns out of the match block: ZERO entries nothing answers, ZERO
+answered verbs with no entry or alias. THREE verbs are answered and deliberately unpublished -
+`testbits`, `testsub`, `testpoints` - and they are gated to `local_*` user ids (chatcmd.gd:178),
+Mr. E's own keyboard, unreachable from Twitch. Recording the false positive so the next sweep does
+not re-raise it as undocumented.
+
+ONE CORRECTION OWED UPWARD, MEASURED NOT REMEMBERED. The team lead's 08:0x block (and the 07:1x
+one) lists `commands.json cooldown_s` and `twitch_cooldown_s` among "THREE KEYS NOBODY HAS EVER
+BEEN TOLD ABOUT ... 0 hits in shipped code". BOTH ARE READ AND ENFORCED, and the plan's own
+earlier rows already STRUCK them from the dead-data baseline:
+  cooldown_s        -> ChatCmd.cooldown() (chatcmd.gd:1781-1783), enforced at :107 and :1893.
+  twitch_cooldown_s -> twitch_chat.gd:10 builds _cooldown_ms from it, enforced at :123.
+Both are also guarded on two red paths each by the COOLDOWN MISSING / COOLDOWN UNUSABLE arms
+(chatcmd.gd:889-899). Neither is dead data. world.json `canon_silences` is NOT mine and I did not
+measure it. ONE REAL LEFTOVER REMAINS ON MY NAMED LIST: `oil`.what's "two delvers" burn rate,
+which B35 called out as having no constant to read. That is the fourth and last of the four.
+
+NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched; twitch_reply(user_login, text)
+unchanged, still no @name and no rate limiting. The guard adds a read of Bestiary (a new dependency
+in this file, class_name Bestiary, no cycle - bestiary.gd has zero ChatCmd references).
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

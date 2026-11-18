@@ -2707,3 +2707,171 @@ found it sound.
 ### LICENCE
 Entirely procedural. No third-party geometry, no texture, nothing to record in
 `docs/art/ASSET_SOURCES.md`. The packs were searched first and had no pavise.
+
+## 30. THE FENMAN - *IT TAKES WHAT STIRS* (2026-11-18, art lane)
+`fenman` - **fogbound** - h **2.52** - wear **0.92** - 4 meshes, **948 faces** -
+span **2.48 m**, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **1.03** beside the posed 2.45 m KayKit Knight, pair_w **4.35**,
+fits_frame true, three proving views, 0 blind views. **Procedural, no pack
+geometry** - see below, I looked first and the packs do not carry this.
+
+Feed line: *"Something out there is listening."*
+
+### WHAT I CHECKED FOR FIRST - MEASURED THIS RUN, NOT REMEMBERED
+1. **The plan, not the list in my prompt.** `origin/main:docs/WORK_PLAN.md`,
+   the **04:58 CT block** (which supersedes the 04:07 one my prompt's row
+   numbers came from). The ART row: the Paviser is ticked, *"ART IS ON 29 AND
+   IS THE ONE LANE PERMITTED TO INVENT MINIBOSSES WHEN DRY. THE 30th IS
+   YOURS."* That is this.
+2. **What already exists, parsed not recalled.** `CANON` out of
+   `tools/art/minibosses.py` by literal-eval: **43 entries, 29 distinct
+   bodies**, and the 29 `.glb` on disk agree with it one for one. The occupied
+   mechanic classes are listed in the builder docstring.
+3. **THE PACKS, BEFORE A VERTEX WAS WRITTEN, AND THE PROMPT'S NUMBER IS
+   LOOSER THAN IT SOUNDS.** `C:\hd adventure\_packs` is **1,716.7 MB** across
+   **55 top-level entries** - which is where "40 packs, 1.7 GB" comes from -
+   but only **8 of those are EXTRACTED DIRECTORIES** (2,025 files). The other
+   **42 are still .zip** plus a few .7z and a loose .blend. I did not take that
+   as "nothing there": I read the **namelists of all 42 zips without extracting
+   them** (10,246 names) against 35 keywords for a marsh/fen worker - hood,
+   cloak, net, pole, reed, swamp, marsh, fog, wader, basket, punt, lantern and
+   the rest. **NOTHING SERVES THIS BODY.** The nearest hits are three KayKit
+   `staff_*` (a wizard's staff with a head on it, not a quant pole), a
+   Quaternius `Monk`, and architectural `poles.fbx`/`structure-pole` from the
+   Kenney kits. So this one is procedural, and it is procedural *because it was
+   looked for and is not there*, not by default.
+4. **The wear ladder.** Every 0.05 step from 0.05 to 1.00 is occupied, measured
+   off CANON. 0.92 is free; the split that argues it is in the palette comment.
+5. **Which theme is thinnest.** Bodies per theme from the same parse: barracks
+   5, workshop 4, keep 4, firepit 4, prison/crypt/treasury/mess/flooded/
+   grassland/wood 3, shrine 2, confection 2, **fogbound 1**. `dungeon_hd.gd`
+   rolls the miniboss slot at 15 on every unlisted theme, fogbound among them,
+   so that slot has been firing with one candidate and no choice.
+
+### THE IDEA, AND WHY IT IS NOT A 30TH COAT OF ONE OF THE TWENTY-NINE
+It is hooded blind and it hunts by disturbance, so it comes for **whoever moved
+last**. Swing, step, drink - you are the one it wants. A hero who stands
+perfectly still is not there as far as it is concerned, and a hero who stands
+perfectly still is also doing nothing. The party cannot all fight and cannot
+all hide.
+
+**NOT ONE OF THE TWENTY-NINE IS TRIGGERED BY THE PARTY'S OWN ACTING.** Every
+one of them is answered by deciding WHAT to do, WHERE to stand, or WHAT to
+spend. This is answered by deciding **whether to act at all this beat, and by
+whom**. The three nearest and why they are not it:
+- the **DYER** marks one of you and hunts the mark - but THE CREATURE CHOOSES
+  and the party can only react. Here the party chooses the target every beat,
+  by moving, and can hand it to somebody else on purpose. The decision has
+  changed hands.
+- the **BELLMAN** (the other fogbound body) mislocates the SOUND: it lies to
+  your ears about where IT is. This one is honest and blind and reads where YOU
+  are. One deceives your senses, one reads yours. And it cannot be confused
+  with the Bellman in any view: that is a PALE SHROUD CONE reaching the floor,
+  cool grey-blue, wear 0.65; this is a dark stooped man with one pale
+  instrument and five cold lights.
+- the **GAOLER** and the **DROVER** both TAKE a hero. Nothing is taken here.
+  The party keeps every hero and loses the freedom to all swing at once.
+
+### SEVEN PASSES, AND SIX OF THEM CAME OFF A PICTURE
+1. **Pass 1's count did not survive the side view - the exact thing I designed
+   it to survive.** I hung the five weights at deliberately scattered heights
+   on the theory that a scatter is harder to confuse than a ramp. `side.png`
+   put two pairs 0.12 and 0.14 apart in z against a weight 0.148 tall: the
+   bottom two FUSED INTO A FIGURE-8 and I counted four blobs, not five. **The
+   fix was the opposite of my instinct** - an EVEN RAMP at 0.26 per step.
+   Ordered was never the risk; CLOSE was the risk.
+2. **The spare withies were spiking through his shoulders.** Pass 1 ran them
+   x -0.52..0.48 against a torso only +/-0.37 across, at a y that grazed his
+   back - so they read as five broken arrows through the man. Now inside his
+   own outline in x and clear behind in y: invisible from the front, which is
+   the correct answer for a thing on a man's back.
+3. **The head was three stacked domes with a bar across the face.** A dome is
+   the most occupied head shape in this register and I had built a fourth by
+   reflex. A hood is a CONE falling backward plus an OPENING.
+4. **Pass 3's cone was too small and I put a 0.70-wide mantle plate under it.**
+   The upper body became a HORIZONTAL BAR with a little cone on it like a hat
+   on a shelf, and the plate ate the face. Traded one bad read for another.
+   Pass 4 made the cone the head AND the shoulders - 0.63 across at the base,
+   wider than the shoulders box - and deleted the plate and the inner head
+   sphere, which inside a closed cone was geometry nobody could ever see.
+5. **The top of the body was still a plank, and the tell-arm read as a stair
+   banister.** A dead-straight arm with five evenly spaced things on it is a
+   handrail - and pass 2's count fix is what made the spacing even, so the fix
+   and the new fault arrived together. The count stayed; the straightness went
+   (the arm sags 0.09 at its middle, which is what a laden rod does), the
+   shoulders narrowed under the hood, the near arm dropped to a diagonal, and
+   the lines took three different thicknesses.
+6. **The withy tips were still crossing the top of the front view.** Pass 2
+   took them out of the middle and left them beside his head for four passes.
+7. **PASS 6 WAS A FIX THAT MADE THINGS WORSE AND IT IS REVERTED, NOT SHIPPED.**
+   The complaint was real - at hero scale the face had gone. My fix treated the
+   symptom's size: void from 0.152 to 0.225 wide against a cowl 0.33 across,
+   plus a brow ridge. The render: the void swallowed the front of the cone, the
+   head became a dark BLOCK with two horns, and the pointed hood - the one
+   thing pass 4 bought - was gone. **What I actually learned is not a geometry
+   finding:** a near-black void on a dark-grey cowl has almost no VALUE
+   contrast, so at distance it does not darken anything, it removes shape, and
+   making it bigger removes more. The answer is a palette answer and I am not
+   taking it in the same pass I found it. It is fault 1 below.
+
+### THE FIT PROOF - ON A POSED KNIGHT, AND EVERY FAULT I CAN SEE
+`hero_front.png`, `hero_side.png`, `hero_back.png`, all three looked at.
+MINIBOSSFIT verdict **GREEN**, errors [], blind_views [], ratio 1.03,
+pair_w 4.35, fits_frame true, blank check 3 files / 0 failures.
+
+1. **NO FACE AT PANE DISTANCE, AND IT IS THE FAULT I WAS WARNED ABOUT.** On
+   `hero_front.png` the head is a plain grey cone with a faint dark band. At
+   creature scale the hood opening reads; at the size a viewer meets this thing
+   beside a Knight it does not. This is the 17 Nov pass-11 finding in a new
+   coat, found by looking rather than by a number, and pass 6's attempt at it
+   is written up above as a failure. **LIVE, NOT DONE.** The next pass is a
+   palette pass: lighten the cowl so the opening has something to be dark
+   against.
+2. **THE SIDE VIEW DOES NOT READ AS A CREATURE.** `hero_side.png` is an
+   abstract pile of grey plates with five white dots down the middle - no man,
+   no hood point, no pole, no silhouette. The arms, the outrigger and the
+   mantle all project to plates in that camera. **This is the worst view and
+   the worst fault on the body.** The one thing that does survive it is the
+   count, which is what I designed for and the only part I will defend.
+3. **The five weights do not read as LIT.** They are pale grey ovals, not
+   lights, in every view. `glow` at 2.6 is not carrying through the view
+   transform at this value.
+4. **The man is still mostly a flat dark mass** below the hood - the Paviser's
+   fault 2 and the Drover's fault 3, reduced by the body/dark split but not
+   closed. Two values where three are wanted.
+5. **The outrigger still reads as a handrail**, less than at pass 4 but it is
+   still the most architectural thing on a creature in this register.
+6. **The legs disappear from the front.** Black waders against a dark torso
+   with two grey boards under them: he reads as a figure standing on blocks.
+7. **The far hand is a dark knob**, not the open waiting hand the pose is for.
+   At hero scale it reads as a stump or a cannon.
+8. **The near hand's grip on the pole is marginal at hero scale** - derived
+   correctly off the pole's own line (x -0.688 at z 0.848) and it reads at
+   creature scale, but at hero scale the arm is a thick tube ending near a
+   stick rather than holding it.
+9. **The withies read a little like a ribcage** from the back. I am calling
+   this the least of the nine; the back carries, which is the view the Paviser
+   shipped blank.
+
+### THE BLANK AND BORDER CHECK
+MINIBOSSGEN: `ok: true`, **errors [] , blank []**, 41 keys, every PNG re-opened
+and its opaque pixel count asserted. MINIBOSSFIT: blank 3 files, 0 failures,
+and `blind_views` empty - no view of this creature is occluded to nothing.
+Footprint 2.48 m against the 11.0 m three-cell clear span: **CORRIDOR-SAFE**,
+**not room-locked**, so the game build does not have to gate its spawn.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+1. `assets/monsters/minibosses/fenman.glb` - **static, no armature**: a
+   `bestiary.gd` entry wants a `model` path and **NO `anims` entry**.
+2. `scripts/delve.gd` `MB_FIT`: add `"fenman": 1.03` - **MEASURED**, from
+   `renders/art/minibosses/_fit_report.json`, not re-derived.
+3. The **fogbound** set piece can now pick between the Bellman and the Fenman.
+   It is the thinnest theme in the register and it had one candidate.
+4. **The idea is a BEHAVIOUR and it is the game build's, not art's**: target
+   the hero who acted most recently; a hero who takes no action this beat is
+   not a valid target. If that is too expensive, the cheap version is "target
+   the last hero to deal damage" and it keeps most of the fight.
+5. No `.glb.import` sibling - the art lane never runs Godot.
+
+### LICENCE
+Procedural. Original generated geometry, no pack asset loaded.

@@ -1295,11 +1295,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "fenman": {
+   "title": "The Fenman",
+   "theme": "fogbound",
+   "idea": "IT TAKES WHAT STIRS - it is hooded blind and it hunts by disturbance, so it comes for whoever moved last: swing, step, drink, and you are the one it wants. A hero who stands perfectly still is not there as far as it is concerned - and a hero who stands perfectly still is also doing nothing. So the party cannot all fight and cannot all hide; somebody has to stir, and the fight is the argument about who and when",
+   "wear": 0.92,
+   "feed_line": "Something out there is listening.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 948,
+   "size": [
+    2.48,
+    0.94,
+    2.52
+   ],
+   "footprint_span": 2.48,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8302842413941942,
+    "ortho": 2.9964725971221924,
+    "clip": [
+     7.006217956542969,
+     19.428373336791992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 87,
+  "files": 90,
   "failures": []
  }
 }

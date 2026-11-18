@@ -813,6 +813,13 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-18 05:58 CT by the team lead (the 05:58 firing; clock off the machine:
+2026-11-18T05:59:06-06:00 at the first call, 2026-11-18T06:03:11-06:00 mid-run).
+The 05:58 block below SUPERSEDES the 04:07 block, the 05:1x addendum and every row under them.
+WRITTEN AFTER :05 AND I SAY SO ON ITS FACE: the GAME BUILD's 06:07 firing read the 05:1x addendum,
+not this block, and that addendum was correct - its row cost it nothing. The game build's row here
+is its 07:07 row. The other five lanes (content :22, art :34, hub :37, chat bot :45, HUD :52) all
+read this block this hour.
 Updated 2026-11-18 04:07 CT by the team lead (the 03:58 firing; clock off the machine:
 2026-11-18T03:58:56-06:00 at the start and 04:06:40-06:00 when this block was written).
 The 04:07 block below SUPERSEDES the 03:58 block and every row under it.
@@ -855,6 +862,256 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-18 05:58 CT FIRING. ALL SIX LANES SHIPPED AND ALL SIX ARE
+*** MERGED (main f9816f4). FIVE TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 04:07
+*** BLOCK AND THE 05:1x ADDENDUM.
+*** TWO THINGS THE NEXT SEAT MUST NOT GET WRONG, BOTH MEASURED BY ME THIS HOUR:
+***   (1) THE HUD's RARITY-HUE HALF OF SYSTEM 2 IS **DONE**, NOT OPEN. The prompt
+***       and four plan blocks have called it "the most valuable open item in the
+***       house". IT IS NOT. IT WAS BUILT AT U55/U56 ON 17 NOV. STRUCK - see row 6.
+***   (2) THE HUB HAS AN UNPUBLISHED web/ CHANGE AGAIN. gh-pages tree 2d14aa94 no
+***       longer equals origin/hub:web 22d212c5. That is the supervisor's call and
+***       it is in FOR THE SUPERVISOR below. DO NOT PUBLISH ON YOUR OWN.
+================================================================================
+
+*** FIVE TICKED THIS HOUR. EVERY ONE CHECKED BY MY OWN MEASUREMENT, NOT BY THE LANE'S WORD. ***
+
+  [x] GAME BUILD - S31c. SYSTEM 5, THE DRINK, IS HELD. TICKED (laptop 563f596).
+      I REFUSED THIS AN HOUR AGO AND THE REFUSAL IS ANSWERED. At 04:58 the side shot showed the
+      vial hanging in front of the visor with both arms at the hero's sides, and I said so.
+      I LOOKED AGAIN, AT THREE SHOTS: renders/cycles/s31/drink_1front.png shows the knight's right
+      arm bent, the hand closed round the pink vial at mouth height; drink_2side_hand.png shows the
+      same from the hand side - forearm raised, hand under the bottle, bottle at the mouth. It is
+      held, and it reads as drinking.
+      AND THE GATE WAS FIXED IN THE RIGHT PLACE. I read tools/_s31_fit.gd:151-163 myself. The new
+      arm does not measure another clearance: it takes the vial's PARENT, requires it to be a
+      BoneAttachment3D whose bone_name begins with "hand", and then requires the bottle base to be
+      within a short distance of that bone - "parented there and drawn somewhere else" is caught
+      too. delve.gd:3122 names the bone (VIAL_HAND := "handslot.r") and 3176-3177 records the probe
+      that chose it. The lane red-proved NOT HELD against the old code. That is a real held test.
+  [x] ART - THE FENMAN, the 30th miniboss (art 0510ad9). TICKED.
+      I LOOKED AT front.png, hero_front.png AND hero_side.png MYSELF. The conical hood, the long
+      pole resting its butt on the ground, and the curved standard with five pale lights hanging on
+      cords all read in every view, and the knight and the creature NEVER TOUCH in either hero shot.
+      I CHECKED THE ONE THING THAT WOULD HAVE BEEN A FIT FAULT AND IT IS NOT ONE: the two dark
+      slabs under the feet are not a plinth. They are SEPARATE, one under each foot, each longer
+      than the foot fore and aft - fen boards, the thing a man wears to cross a marsh. A plinth
+      would be one block under both. The creature stands on the ground plane.
+      ART NAMED ITS OWN TWO LIMITS RATHER THAN LETTING THE NEXT LANE FIND THEM: the .glb is STATIC
+      with no armature, and there is no .glb.import sibling because the art lane never runs Godot.
+      It also handed the game build a MEASURED number instead of a guess - MB_FIT "fenman": 1.03.
+      docs/art/MINIBOSSES.md section 30 carries it; the count is right, 30 is the last numbered entry.
+  [x] CONTENT - C-108, the Paviser feed lines (content 15467ec). TICKED.
+      CHECKED IN THE KEY, NOT IN PROSE: I loaded data/lore_lines.json and searched the miniboss_feed
+      VALUE - "paviser" is in it, as are moulder, drover and ratcatcher from C-107. Nine arrive
+      lines and eight fall lines. `_note_c108` is a cycle note: NO LANE IS TO WIRE IT.
+  [x] HUB - the dead shopGood() deleted and the "Sells up to" tier word actually painted (hub 1718014).
+      TICKED, AND I RE-RAN THE SECURITY CHECKS MYSELF BECAUSE IT IS A web/ CHANGE.
+      - shopGood: ZERO occurrences left in the whole of web/. It is gone, not orphaned again.
+      - The painting is right and the reason is right. rarityClass() (app.js:3211) maps through
+        SHOP_RARITY, a page-owned Map, so the class is a page constant and never snapshot text. The
+        old .rar-* rule (style.css:1375-1377) sets border-left-color ONLY, and a <b> has no border,
+        so it painted nothing - the lane's diagnosis is correct. The new rules underline the word in
+        the rung colour. I checked the rungs against the CANONICAL ladder: uncommon / rare / very
+        rare+epic / legendary / artifact are hued, and `common` falls through to the bare generic
+        rule - which is what art's table says common must be. No rung is missed.
+      - SECURITY: no innerHTML introduced; the two legacy innerHTML sites (app.js:255, :301) are
+        untouched page-owned literals; the new CSS carries no url(), no expression(), no javascript:;
+        the CSP meta is intact and strict (default-src 'none', script-src 'self', style-src 'self').
+      - AND THE LANE CLOSED A FAULT I RAISED AT 23:58: web/index.html no longer claims "There is no
+        innerHTML anywhere in app.js". It now says the true thing - two page-owned sites. Good.
+  [x] CHAT BOT - B47, the carried half of the `wear` guard (chatbot 57b657b). TICKED.
+      The split was correct behaviour, not a shortfall: B46 refused to cross the HUD :52-:07 window
+      and carried the engine proofs to 05:45. They arrived. Ten red proofs, ten fired, each off a
+      mutation of the real data, fourteen Godot runs in 35.3 s.
+      I VERIFIED THE MECHANISM OF ITS OWN FINDING RATHER THAN QUOTING IT. tools/_l14_test.gd:107
+      ends `quit(0 if _fail == 0 else 1)`, and _fail is only moved by the checked() helper at :11.
+      A guard site that reports through push_error alone therefore moves NEITHER the exit code NOR
+      the printed verdict - L14_TEST prints OK while the guard is firing. The lane is right, and it
+      is worse than an exit-code problem: THE VERDICT LINE LIES TOO. That is this lane's next row.
+
+*** NOT TICKED, AND WHY ***
+  THE S31 SIDE CAMERA IS ON THE OFFHAND SIDE, AND THE CANONICAL SIDE SHOT IS BLIND BECAUSE OF IT.
+  renders/cycles/s31/drink_2side.png - the shot the harness names as THE side view - shows a knight
+  with no bottle anywhere in frame. The hold is only visible in drink_1front.png and in the extra
+  drink_2side_hand.png the lane added. The engine is fine; THE INSTRUMENT CANNOT SEE THE THING IT
+  IS CERTIFYING. This is the same blindness art found and closed in its own harness on 17 Nov
+  (FAULT 4, "the side camera was on the offhand side", renders 81339). It is an instrument fix in
+  the game build's own file, so it is NOT new work - it is row 1 below. System 5 stays ticked:
+  I have looked at the hold in two views and the gate now asserts it.
+
+*** A THIRD RARITY TABLE IS LIVE IN THE GAME AND IT DISAGREES WITH THE CANONICAL ONE. MINE, FOUND
+*** THIS HOUR, MEASURED, NOT INFERRED. ***
+  art's tools/art/icons.py:659 says in its own words that RARITY_HUE "IS THE SOURCE OF TRUTH AND IT
+  IS MIRRORED, NOT COPIED ... the moment three lanes keep three tables the icon and the frame
+  disagree". The HUD mirrors it correctly (row 6). THERE IS A THIRD TABLE.
+  scripts/fishing.gd:12 `RARITY_COLOR`, read by Fishing.colour() at :79, and that function is LIVE
+  at angler.gd:263 (the catch text), :351 (the light colour) and :367 (the emission). Against the
+  canonical ladder:
+      uncommon   fishing (0.45,0.95,0.45) GREEN   vs canonical white / HUD pewter
+      rare       fishing (0.40,0.65,1.00)         vs canonical (0.30,0.55,1.00)
+      very rare  fishing (0.80,0.45,1.00)         vs canonical (0.70,0.35,1.00)
+      legendary  fishing (1.00,0.66,0.20)         vs canonical (1.00,0.55,0.12)
+      common     fishing (0.92,0.92,0.90) PAINTED vs canonical BARE ON PURPOSE
+      artifact   MISSING -> falls back to Color.WHITE, where canonical is bright red
+  SO A SCAR-TOUCHED ARTIFACT CATCH GLOWS WHITE, AND AN UNCOMMON ONE GLOWS GREEN. A viewer sees two
+  different ladders in one game.
+  HOW I READ IT UNDER THE FREEZE, SAID OUT LOUD: this is a DEFECT IN SHIPPED WORK measured against
+  an already-ticked system (System 1's canonical ladder and art's own written one-table rule), not
+  a new feature. Reconciling it is allowed. SO IS CLOSING IT THE OTHER WAY: if the fishing ladder is
+  a deliberate variant - the way RARITY_HUE_PARCHMENT is a sanctioned variant of ONE rung - then
+  ONE WRITTEN LINE in icons.py saying so closes it just as completely, and no code changes. ART
+  OWNS THAT ANSWER (row 3). THE GAME BUILD DOES NOT GUESS IT (row 1).
+
+================================================================================
+*** TAKE THIS NEXT - THE SIX ROWS, 2026-11-18 05:58 CT ***
+================================================================================
+
+1. GAME BUILD (`laptop`) - PUT THE S31 FIT CAMERA ON THE HAND SIDE, THEN WIRE THE FENMAN.
+   (a) renders/cycles/s31/drink_2side.png is shot from the offhand side and shows no bottle at all.
+       Move it to the hand side (or shoot both and keep both). Art closed this exact fault in its
+       own harness on 17 Nov - FAULT 4. YOUR OWN GATE IS NOW HONEST; the picture beside it is not.
+       This is an instrument fix in your own file. It is not new work and it is not a re-opening of
+       System 5, which is TICKED.
+   (b) THE FENMAN, art 0510ad9, assets/monsters/minibosses/fenman.glb. Art has already measured it
+       for you: MB_FIT "fenman": 1.03, h 2.52, wear 0.92, fogbound. IT IS STATIC - no armature - and
+       art says so on its own face; it also ships with no .glb.import sibling because art never runs
+       Godot. Use art's number, do not re-derive it.
+   (c) THEN the fishing ladder above, but ONLY after art answers row 3. Do not guess which table wins.
+   DO NOT re-open S31's drink, S31's floor, Systems 3 or 4, twitch_cooldown_s, or the _alt pools.
+
+2. CONTENT (`content`) - THE FENMAN'S FEED LINES.
+   The 30th miniboss landed this hour (art 0510ad9, docs/art/MINIBOSSES.md section 30: *IT TAKES
+   WHAT STIRS*, a fen-walker on boards with a pole and five hanging lights). Every other miniboss
+   has arrive and fall lines in `miniboss_feed`; this one has none - I checked the key, not the
+   prose. Same shape as C-107 and C-108. Keep writing `_note_` keys; they are not dead data and no
+   lane is to wire one.
+
+3. ART (`art`) - ONE LINE FIRST, THEN THE 31st.
+   (a) THE ONE LINE, AND IT UNBLOCKS ANOTHER LANE, SO IT COMES FIRST: you declared RARITY_HUE the
+       single source of truth and warned in writing about three lanes keeping three tables. There IS
+       a third - scripts/fishing.gd RARITY_COLOR, live in angler.gd (see above). Is it a sanctioned
+       variant, like RARITY_HUE_PARCHMENT is for uncommon, or is it drift? ANSWER IT IN icons.py
+       WHERE THE TABLE LIVES, in a sentence or two. That is your file and your call, not mine and
+       not the game build's.
+   (b) THEN THE 31st MINIBOSS. You are the one lane permitted to invent minibosses when dry, and
+       the Fenman was the 30th. Same standard: hero front, side and back, and the two never touch.
+
+4. HUB (`hub`) - YOUR web/ CHANGE IS MERGED AND NOT PUBLISHED, AND THAT IS NOT YOURS TO FIX.
+   gh-pages is still 45a7904 (tree 2d14aa94) and origin/hub:web is now 22d212c5. The shopGood
+   deletion and the Sells-up-to underline are live on `hub` and NOT on the site. I have put the
+   publish decision to the supervisor below. THE HUB LANE NEVER PUBLISHES - do not push gh-pages,
+   and do not wait on it either.
+   WHAT TO DO MEANWHILE: your row is yours to choose from your own queue, and if you want the fix
+   live, say "READY TO PUBLISH" in your run and I will run the full publish gate on your bytes.
+   ONE HOUSEKEEPING LINE, NOT A FAULT: commit 1718014 on `hub` is authored "Claude Art Lane". The
+   work is plainly yours and nothing is wrong with it; the author line just makes attribution read
+   false later. Worth a look at your git config.
+
+5. CHAT BOT (`chatbot`) - MAKE THE `wear` GUARD VISIBLE TO ITS OWN GATE.
+   You found it and you are right: ten sites report through push_error, so _l14_test.gd's checked()
+   never sees them, _fail never moves, and the gate prints L14_TEST OK with the guard firing. The
+   exit code is the smaller half of it - THE VERDICT LINE LIES TOO, and this house's standing rule
+   is that the verdict line is what a battery reports. Put the ten sites behind checked() (or give
+   them their own counted arm) so a fired guard prints FAIL and returns 1. Then RE-RUN THE SAME TEN
+   RED PROOFS and show the gate reading red. Fixing a lying instrument in your own harness is
+   explicitly not new work.
+   The 03:16 cross-lane scratch-and-restore exception still stands; keep md5-proving every restore.
+
+6. HUD (`hud-ui`) - YOUR STAND-DOWN WAS RIGHT AND THE ROW IS STRUCK. HERE IS A REAL ONE.
+   *** U70 IS ACCEPTED AND I VERIFIED IT MYSELF RATHER THAN TAKING IT. *** scripts/ui_theme.gd:179
+   RARITY_HUE against tools/art/icons.py:659: rare (0.30,0.55,1.00), very rare (0.70,0.35,1.00),
+   legendary (1.00,0.55,0.12), artifact (1.00,0.13,0.10) are IDENTICAL TO THE DIGIT; junk, starting
+   and common are bare on both sides; there is no cost-quartile fallback on either side; and the one
+   difference, uncommon (0.62,0.66,0.72), is art's OWN RARITY_HUE_PARCHMENT value from icons.py:692,
+   put there by art for exactly this use. The ladder is READ, not merely declared - UiTheme.rarity_pip
+   and rarity_ink are called live at leaderboard_panel.gd:197 and :202.
+   SO: THE RARITY-HUE HALF OF SYSTEM 2 IS DONE. The row that said otherwise is struck, and I have
+   corrected the prompt's claim in FOR THE NEXT TEAM LEAD below. You were right and four blocks of
+   mine were wrong. You took no lock and launched no Godot for a file-only check, which is correct.
+   YOUR ROW: GUARD THE ONE-TABLE RULE, in your own file, so the next drift is caught by a gate
+   instead of by a team lead reading greps. A small headless check that asserts UiTheme.RARITY_HUE
+   equals art's icons.py table digit-for-digit on the four canonical rungs, that junk/starting/common
+   stay bare, and that the uncommon variant is art's sanctioned parchment value and not a re-choice.
+   I READ THIS AS GUARDING SHIPPED WORK ON AN ALREADY-TICKED SYSTEM AND I SAY SO OUT LOUD - art
+   wrote the one-table rule down in icons.py itself. IF YOU READ IT AS NEW WORK, STAND DOWN AND SAY
+   SO IN ONE LINE; a stand-down written up is the delivery and this hour proves it.
+
+*** THE DEAD-DATA AUDIT, 2026-11-18 05:58 CT, MEASURED ON THE MERGED TREE ***
+  scripts/*.gd + web/*.js ONLY - 2,164,994 chars, 48 files - and assets/ ONLY. tools/ and renders/
+  are not the game and were not walked.
+  UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO.
+  122 top-level keys; 58 return zero quoted-literal hits and EVERY ONE IS ACCOUNTED FOR:
+    20 - content's `_note_` cycle notes. Not dead. No lane wires one.
+     2 - the runtime-built _alt pools (lord_intros_alt, unique_intros_alt), READ at delve.gd
+         intro_pool via base + "_alt". DO NOT RE-WIRE.
+     4 - declared dead in writing at D98 (townsfolk, phase2_words, phase2_words_alt,
+         town_levels_for_the_desktop). phase2_words_alt is both _alt-suffixed and declared dead;
+         it is counted ONCE, here.
+    12 - `_source` provenance stamps, one per data file ("Ported from the old project's NOTES.md.
+         Canon, not invented."). NOT items the game loads.
+    20 - prose / spec / lore strings: biomes technique, measured, _looks; bosses draw, boss_floors,
+         rule, uniques; origins causality, chronicle_line, word_order, casing, budget; ranks rule,
+         promotion_line, one_roll; strains _format, _measured, _gating; world district_rules,
+         canon_silences.
+  ON THE COUNT, AND IT IS A CORRECTION TO THE 04:58 CLASS TABLE, NOT A DISAGREEMENT ABOUT FACTS:
+  I read 58 where 04:58 read 46. THE DIFFERENCE IS EXACTLY TWELVE AND IT IS EXACTLY THE `_source`
+  CLASS, which the 04:58 table did not name. Those keys are OLD, not new - world.json:2 carries the
+  same sentence it has carried all along. 20+2+4+12+20 = 58 and the classes are unchanged. The next
+  seat should carry FIVE classes, not four.
+  ELEVEN ASSET DIRECTORIES LOOK UNREFERENCED TO A LITERAL MATCHER AND NOT ONE OF THEM IS. I checked
+  each by the suffix/prefix guard rather than counting it dead: assets/audio/{amb,music,rpg,sfx} are
+  reached from sfx.gd:28 `const DIR := "res://assets/audio/"` plus a name built at runtime, and the
+  seven assets/icons/items/<slot>/ directories are the HUB's source for web/icons/items (app.js:3745
+  builds "icons/items/" + slot + "/" + key + ".webp"). A BUILT PATH IS A READ.
+
+*** FOR THE NEXT TEAM LEAD - WHAT I FIXED AND WHAT I COULD NOT ***
+  1. THE PROMPT SAYS THE HUD's RARITY-HUE HALF OF SYSTEM 2 IS "THE MOST VALUABLE OPEN ITEM IN THE
+     HOUSE" AND HAS NOT BEEN STARTED. THAT IS FALSE AND IT HAS BEEN FALSE SINCE 17 NOV. It was built
+     at U55/U56 and I verified it digit-for-digit this hour (row 6). The HUD lane had to correct four
+     blocks of mine to get it struck. DO NOT HAND IT TO THE HUD AGAIN. I could not write the prompt
+     itself - see point 3 - so this line is the correction.
+  2. THE PROMPT'S HUB BASELINE IS STALE IN THE OTHER DIRECTION NOW. It says gh-pages is 40223be with
+     a non-matching tree. gh-pages has been 45a7904 since 03:34 CT. But DO NOT replace one quoted
+     number with another: MEASURE `origin/gh-pages^{tree}` against `origin/hub:web` EVERY HOUR. This
+     hour they differ again, because the hub shipped a web/ change at 05:39. That is the third time
+     a quoted baseline in that block has gone stale under a seat. Quote nothing; compute it.
+  3. A FIRING STILL CANNOT WRITE A SCHEDULED TASK. I attempted it, got the same refusal, retried
+     once, stopped. See my run doc. The corrections live here because the plan is the instrument a
+     firing can actually write.
+  4. RE-CHECK LANE TIPS AFTER YOUR MERGES, NOT ONLY BEFORE. The 04:58 seat was bitten by this and so
+     was I: art pushed the Fenman BETWEEN my fetch and my merge. My merge picked it up, and I then
+     fetched a second time and confirmed all six tips are contained in main before syncing.
+
+*** FOR THE SUPERVISOR ***
+  1. *** THE HUB HAS A MERGED, UNPUBLISHED web/ CHANGE. I RECOMMEND YOU CALL THE PUBLISH. ***
+     MEASURED, NOT QUOTED: origin/gh-pages is 45a7904, tree 2d14aa94, published 03:34 CT on your
+     03:16 authorisation. origin/hub:web is now 22d212c5. THEY DIFFER, so the site is one change
+     behind `hub`.
+     WHAT IS IN THAT CHANGE (hub 1718014, merged into main and checked by me): a dead function
+     (shopGood) deleted, with zero occurrences left anywhere in web/; and the "Sells up to" tier word
+     actually painted in its rung colour, where the old rule set border-left-color on a <b>, which
+     has no border, and so painted nothing. No innerHTML introduced, CSP untouched, no url() in the
+     new CSS, class names are page constants from a page-owned Map.
+     I HAVE NOT RUN THE PUBLISH GATE AND I SAY SO PLAINLY: the lane did not claim "READY TO PUBLISH"
+     this hour, and an unearned gate report is the same fault class as a lying gate. If you call it,
+     I will run the full gate on origin/hub:web's bytes first - the seven state checks, the CSP
+     injection proof, the hostile-name render and a look at the page - and only then push by the
+     proven web/-subtree plumbing method, as a fast-forward, with the trees asserted equal after.
+  2. YOUR 03:16 CROSS-LANE SCRATCH-AND-RESTORE EXCEPTION KEEPS EARNING ITS KEEP. B47 used it once
+     more this hour for ten engine red proofs on content's items.json, restored byte-identical,
+     md5 4f2e8b57 after every proof. I checked the merged tree: no commit carries a modified copy.
+  3. FOR YOUR AWARENESS, NO DECISION NEEDED: I found a third live rarity-colour table in the game
+     (scripts/fishing.gd, painting catches through angler.gd) that disagrees with art's canonical
+     ladder on five rungs and has no artifact rung at all. I have NOT assigned a code change on my
+     own authority; I have asked ART to say in its own file whether that table is sanctioned or
+     drift, and told the game build not to guess. If you would rather that went to you first, say so
+     and I will hold it.
+  4. NOTHING ELSE IS BLOCKED ON YOU.
+
 
 ================================================================================
 *** THIS HOUR: 2026-11-18 03:58 CT FIRING (the scheduler delivered it at ~03:30;

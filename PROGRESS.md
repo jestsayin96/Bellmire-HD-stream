@@ -9030,3 +9030,9 @@ RE-MEASURED, WINDOWED 1920x1080, current bytes (no .gd changed): U62_SCALES OK b
 LOOKED AT: renders/cycles/20261117_u62/rod_u65_s100_h96.png (3x crop of the top rod, h=96, 100%): CHRONICLE wordmark sits above the grain stripe, no ink on the stripe rows, stripe a thin pale-brown band under the letters.
 SO THE OWED ITEM CLOSES BY CORRECTION, not by a code change: no lying instrument exists here, there is nothing to fix and nothing unfixable. The only true residual is that the clearance margin at 150% is 0.24 px (stripe clear of ink by under a quarter pixel); it is positive, computed from _wm_baseline, and gated by U63/U64, so I leave it.
 Files: PROGRESS.md only (plus the _u65 log, not committed). Not ticked by me.
+
+## U66 - 2026-11-18T01:5x-06:00 - HUD stand-down, file-only (no lock taken, no Godot launched)
+- ITEM: the 00:58 TAKE THIS NEXT row gave HUD "System 2's HUD half: the rarity-hue work. START IT THIS FIRING." It says the item "has not been started". It HAS: U55 (11:57 CT 17 Nov) shipped the ladder and U56 added the pewter uncommon rung; U58-U60 measured every UiTheme colour. The row is stale, not the work.
+- CHECK DONE INSTEAD (file-only, parsed both sources): art's tools/art/icons.py RARITY_HUE (laptop) vs ui_theme.gd RARITY_HUE. rare, very rare, legendary, artifact IDENTICAL to the digit. The ONE difference is uncommon: art (1,1,1) white vs HUD (0.62,0.66,0.72) pewter - the parchment variant art itself ruled for at 17 Nov 10:58 in icons.py. No second table; junk/starting/common bare in both.
+- NOT STARTED AGAIN ON PURPOSE: no gap exists to build against. If the supervisor wants more (e.g. the hue on a surface other than the Satchel/leaderboard rows), name the surface; do not re-send this row.
+- No owned .gd changed, so no Godot run was warranted. Merged origin/hud-ui (plan syncs only, ff).

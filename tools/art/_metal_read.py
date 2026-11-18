@@ -106,7 +106,25 @@ RES = (520, 700)
 CTRL = {
     "timber": ((0.330, 0.200, 0.105), 0.72, 0.00),
     "copper": ((0.955, 0.637, 0.538), 0.18, 1.00),
+    # *** THE THIRD CONTROL IS NOT A PHYSICS CONTROL. IT IS THE SHIPPED
+    # *** MATERIAL WITH THE PASS-10 VERTEX PAINT TAKEN OFF - i.e. the pass-9
+    # *** state - AND IT IS HERE BECAUSE WITHOUT IT THE VIEW-TRANSFORM A/B
+    # *** COMPARES A PAINTED SURFACE AGAINST TWO UNPAINTED ONES.
+    # The two controls above are built with mat_solid, so they carry no vertex
+    # colour; the shipped leaf does. Pass 10's paint lays a near-white sheen
+    # band into the brightest vertices, which DRAGS body_sat DOWN, so every
+    # "shipped vs timber" saturation gap is measured with the shipped side
+    # handicapped by an amount nobody has quantified. On a metric about
+    # saturation that is not a detail. This row is the shipped override
+    # (1.000, 0.520, 0.235) rough 0.44 metal 0.06 spec 0.92 read off
+    # minibosses.OVERRIDE['greener']['bone'], minus the fifth element - so it
+    # isolates WHAT THE TRANSFORM DOES TO THE MATERIAL from what the paint does.
+    "flat": ((1.000, 0.520, 0.235), 0.44, 0.06),
 }
+# the dielectric specular level for the "flat" control only, so it is the
+# shipped material and not a lookalike. None for the two physics controls,
+# which must stay exactly as they were measured on every earlier pass.
+CTRL_SPEC = {"flat": 0.92}
 # how far the light rig is swung for the mobility read. Small enough that the
 # geometry presents the same faces, large enough that a specular lobe leaves
 # the pixel it was in.
@@ -115,6 +133,20 @@ LIGHT_DELTA = 28.0
 # separation is smaller than the quantisation and shading noise of the render.
 SEPARATION_FLOOR = {"spec_peak": 0.04, "spec_range": 0.04, "mobility": 0.02,
                     "speckle": 0.05, "hilite_desat": 0.08}
+
+# *** THE VIEW TRANSFORM IS AN ARGUMENT OF THIS INSTRUMENT AND NOTHING ELSE. ***
+# The team lead's 22:58 row asked for a bounded A/B and said CHANGE NO DEFAULT.
+# So this is deliberately NOT a change to lordgen.set_engine: that function is
+# left exactly as it is, the register keeps rendering under Blender's default
+# AgX, and the only thing that can select another transform is this flag on this
+# reader. Nothing else in the tree reads VIEW_TRANSFORM.
+# IT IS RECORDED IN THE REPORT AND VERIFIED BY READBACK. A number measured under
+# a transform that silently failed to apply, labelled as that transform, is the
+# exact fault class this lane has shipped twice (a group rendered alone labelled
+# as visibility, a painted band labelled as reflection). So the requested name
+# is asserted against what the scene actually holds afterwards, and a mismatch
+# is an ERROR, never a fallback to the default with the label kept.
+VIEW_TRANSFORM = None
 
 
 def _mats(key):
@@ -155,6 +187,8 @@ def _rig(mn, mx):
     objects too, because swinging them is the measurement."""
     scene = bpy.context.scene
     G.set_engine(scene)
+    if VIEW_TRANSFORM:
+        scene.view_settings.view_transform = VIEW_TRANSFORM
     scene.render.resolution_x, scene.render.resolution_y = RES
     scene.render.resolution_percentage = 100
     scene.render.film_transparent = True
@@ -283,18 +317,58 @@ def main():
     ap.add_argument("--views", default="front,side")
     ap.add_argument("--bar", type=float, default=0.50)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--view_transform", default="",
+                    help="OCIO view transform for THIS READ ONLY (e.g. Standard, "
+                         "'Khronos PBR Neutral'). Empty = whatever set_engine "
+                         "leaves, i.e. Blender's default AgX. Changes no default.")
     ap.add_argument("--refs", default="",
                     help="comma-separated .glb paths, relative to --repo, whose "
                          "metal sets the bar. CC0 KayKit dungeon weapons.")
     args = ap.parse_args(argv)
 
+    global VIEW_TRANSFORM
     key, span = args.key, args.span
     views = [v.strip() for v in args.views.split(",") if v.strip()]
+    # THE TRANSFORM GOES IN THE EVIDENCE PATH. The first view-transform sweep
+    # wrote all three runs to the same filenames, so by the time I went to LOOK
+    # at the pictures the AgX and Standard frames had been overwritten by the
+    # last run and only the numbers survived. A reader that keeps the number and
+    # destroys the picture is the wrong way round on this lane - the picture is
+    # the evidence and the number is the suspect.
     tmp = os.path.join(args.repo, "renders", "art", "minibosses", "_metal_tmp")
+    if args.view_transform:
+        tmp = os.path.join(tmp, args.view_transform.replace(" ", "_"))
     os.makedirs(tmp, exist_ok=True)
     rep = {"ok": True, "errors": [], "blind": [], "key": key, "span": span,
            "bar": args.bar, "light_delta": LIGHT_DELTA, "tag": args.tag,
            "by_view": {}}
+
+    # THE TRANSFORM IS PROVED TO HAVE APPLIED BEFORE A SINGLE PIXEL IS READ.
+    sc = bpy.context.scene
+    rep["view_transform_default"] = sc.view_settings.view_transform
+    rep["view_transform_requested"] = args.view_transform or None
+    if args.view_transform:
+        try:
+            sc.view_settings.view_transform = args.view_transform
+        except Exception as e:
+            rep["ok"] = False
+            rep["errors"].append(
+                "view transform %r is not offered by this build's OCIO config "
+                "(%s). RED, not a silent fall back to the default - a number "
+                "measured under AgX and labelled Standard is worse than no "
+                "number." % (args.view_transform, e))
+            print("METALREAD " + json.dumps(rep))
+            return
+        got = sc.view_settings.view_transform
+        if got != args.view_transform:
+            rep["ok"] = False
+            rep["errors"].append(
+                "view transform asked for %r, scene reports %r after assignment "
+                "- RED." % (args.view_transform, got))
+            print("METALREAD " + json.dumps(rep))
+            return
+        VIEW_TRANSFORM = args.view_transform
+    rep["view_transform_active"] = sc.view_settings.view_transform
 
     # ------------------------------------------------------------------
     # THE EXTERNAL BAR, MEASURED FIRST. Each reference .glb is imported alone
@@ -483,7 +557,8 @@ def main():
             mm = dict(mats)
             if spec is not None:
                 rgb, rough, metal = spec
-                mm[slot] = L.mat_solid("%s_ctrl_%s" % (key, var), rgb, rough, metal)
+                mm[slot] = L.mat_solid("%s_ctrl_%s" % (key, var), rgb, rough, metal,
+                                       CTRL_SPEC.get(var.replace("ctrl_", "")))
             per_light = []
             for di, delta in enumerate((0.0, LIGHT_DELTA)):
                 _swing(lights, delta)

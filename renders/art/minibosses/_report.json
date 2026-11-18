@@ -1031,11 +1031,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "pressman": {
+   "title": "The Pressman",
+   "theme": "prison",
+   "idea": "IT PRESSES YOUR FALLEN - a hero that goes down in this room is collared and stood back up on ITS side; get them up, or break the yoke, before the collar shuts",
+   "wear": 0.88,
+   "feed_line": "Irons just came off the yoke.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1439,
+   "size": [
+    2.61,
+    1.18,
+    2.85
+   ],
+   "footprint_span": 2.61,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.0189563663457206,
+    "ortho": 3.621675968170166,
+    "clip": [
+     7.735034942626953,
+     20.237581253051758
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 63,
+  "files": 66,
   "failures": []
  }
 }

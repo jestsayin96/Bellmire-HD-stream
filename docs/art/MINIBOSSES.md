@@ -1336,3 +1336,122 @@ plainly visible. **Three faults, three passes, found only by looking.**
    wasted: the whole promise is a party that cannot heal through it and whose
    own flee rule then takes the floor away from them.
 5. Feed line, if one is wanted: *"Something in here is drinking."*
+
+## 22. THE PRESSMAN - *IT PRESSES YOUR FALLEN*
+`pressman` - prison - h 2.85 - wear **0.88** - 4 meshes, 1,439 faces -
+span **2.61 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **1.16** beside the posed 2.45 m Knight, pair_w 4.47, fits_frame true,
+three proving views, every `seen` 1.000. Procedural, no pack geometry
+(`pack_used` false). Five passes, 17 Nov 2026, 17:35-19:00 CT.
+
+### WHY THIS ONE, MEASURED THIS RUN - NOT REMEMBERED
+- **TWENTY-ONE IDEAS EXIST AND NOT ONE CHANGES WHO IS ON WHICH SIDE.** Parsed
+  out of `minibosses.py` CANON by regex, not recalled: summon, self-armour,
+  drag a hero out, douse the lamps, will-not-stay-down, bar the door, steal
+  gear, heal the pack, raise the water, plant the ground, pre-set the room,
+  scale with the fire, ring from elsewhere, set the floor, come apart in two,
+  arm the room, weigh you down, cut the room in two, refuse the same blow
+  twice, take the haul, drink what you brought. **Conversion - a casualty of
+  yours becoming a body of theirs - is a mechanic class the set does not
+  have.** The fight gets harder at exactly the rate you are losing it, and the
+  counter is a decision (get them up, or break the yoke) rather than more
+  damage.
+- **THE THREE NEAR NEIGHBOURS, NAMED RATHER THAN WAVED AT.** The DRILLMASTER
+  summons, but what arrives is ITS garrison - reinforcement from outside the
+  fight. The GAOLER drags a STANDING hero across the floor: a position change,
+  and the hero stays yours. The SEXTON will not stay down - that is its own
+  body, not yours.
+- **THEME `prison`,** off `dungeon_hd.gd:737-743`: the miniboss roll is 35 on
+  barracks/workshop, 10 on shrine/crypt, **15 on prison** and every unlisted
+  theme. Prison has **exactly ONE body** behind it (the Gaoler), so every
+  miniboss a prison floor has ever shown is the same creature. Same argument
+  the Loader used for the mess hall and the Tanner for the flooded floor.
+- **HEIGHT 2.85 EXTENDS THE TOP OF A FULL LADDER** (1.95-2.80 was taken, in
+  0.05s). It is the FRAME that is 2.85 and not the man: the mass is the yoke
+  riding above his head, and the man under it is ordinary.
+- **WEAR 0.88** sits between the Snuffer's 0.90 and the Gaoler's 0.80, and it
+  is the IRONS that justify it, not the coat - the oldest fixed kit on the
+  floor and never once out of service. Mr. E's rule 2: condition is the
+  receipt, and this one reads USED, CONSTANTLY, BY SOMEBODY ELSE.
+
+### THE FIVE PASSES. EVERY FAULT BELOW WAS FOUND BY LOOKING, NOT BY A NUMBER
+The generator reported `ok: true`, 4 meshes, 0 blanks and CORRIDOR-SAFE on
+**every one of the five passes, including pass 1**, which was the worst body
+this lane has built. The register was never wrong and never useful here: it
+measures scale, blanks, frame, corridor and occlusion, and not one of those was
+ever the fault.
+1. **PASS 1 NAMED ITSELF WRONG.** The far arm ran straight up to a long bar
+   with squared ends held overhead, and the creature read as **A MAN PRESSING
+   A BARBELL**. For a thing called the Pressman that is not a near miss. The
+   arm now comes down onto the chain of the one it has already collared, which
+   ties man to yoke the same way and says the mechanic as well.
+2. **THE FACE WAS IN A CAGE.** The two yoke uprights stood either side of the
+   head with one crossing the chin - a man looking out through bars, which is
+   the wrong creature's idea entirely. Outboard to 0.40 and back to y +0.17.
+3. **FOUR COLLARS BECAME FOUR STICKS FROM THE SIDE.** I had applied the
+   Reeve's pass-2 lesson to the wrong half of the problem: staggering the
+   collars 0.14 m in Y separates them *from each other* side-on, but every
+   ring was still hung in the front plane, so each one was **edge-on** at
+   azimuth 90. A ring is only a ring from a camera that can see into it.
+   `_open_ring` now takes a **yaw**, and each collar is turned 38-58 degrees
+   off the front plane: an ellipse from both cameras rather than a circle from
+   one and a line from the other.
+4. **THE SAME FAULT IN TWO COSTUMES - A RING AT THE END OF A LINE IS A TOOL.**
+   The already-taken collar was laid flat with a lit plate inside it and read
+   as **a frying pan**; stood on edge at the end of a taut chain it became **a
+   wheel on a stick - a scooter**. Both times the geometry was an O joined to
+   a line. It is now lying on the floor, half behind the boot, with the chain
+   falling to the ground first and running along it.
+5. **THE COAT TOOK THREE PASSES BECAUSE I KEPT ASKING HOW BIG INSTEAD OF
+   WHY.** A 0.40 m cone read as a tub at his hips; narrowed to 0.285 it still
+   read as a churn; shortened it still read as a bucket. The fault was never
+   the size - **a cone that tapers INWARD with a flat bottom is the shape of a
+   vessel**, and cloth does the opposite. Flared (0.270 to 0.355) and falling
+   to mid-shin, it is a coat. Pass 3's shortening also fixed a real clip the
+   side view had shown: the near shin coming through the coat's front panel at
+   the knee.
+
+### THE FIT PROOF - ON A BODY, AND EVERY FAULT I CAN STILL SEE
+`renders/art/minibosses/pressman/hero_front.png`, `hero_side.png`,
+`hero_back.png`, beside the posed KayKit Knight at 2.45 m. I looked at all
+three. He stands a head and a half over the knight, the yoke rides clear above
+both, and front and back both count collars. **Eight faults, none of them
+hidden:**
+1. **THE FLOOR IRON IS NEARLY INVISIBLE FROM THE FRONT** at pair distance - a
+   small dark hook shape at the boot. Fixing the scooter read cost it its
+   legibility, and that trade is not yet paid for. It reads correctly from
+   behind, which is where it is least needed.
+2. **THE ONE LIT THING ON THE BODY CANNOT BE SEEN.** The glow ring inside that
+   iron is sub-pixel on the pair shot. A body with a glow slot that nobody can
+   see has, in practice, no glow.
+3. **ONLY THREE OF THE FOUR HANGING COLLARS ARE COUNTABLE FROM THE FRONT** -
+   the fourth sits behind the head and the bar.
+4. **THE TALLY BOARD IS A BLANK WHITE CARD** at pair distance; its four struck
+   lines do not survive. It also reads brighter than anything else on him.
+5. **HE IS GREY NEXT TO A GREY KNIGHT.** At wear 0.88 the tint is pulled
+   almost neutral, so the body carries no colour of its own against hero
+   armour. The Tanner and the Tapster both keep a tint at lower wear; this is
+   the cost of the top of the ladder and I am naming it rather than quietly
+   lowering the wear.
+6. **THE CHAIN HAND IS LOST** against the coat from the front - the hand that
+   holds the chain is legible only from the side.
+7. **THE LEFTMOST COLLAR OVERLAPS THE BAR'S END BRACKET**, so from the front
+   its top arc merges into the ironwork.
+8. **THE CAP READS AS A DISC** - a flat lid on a small head, and the head is
+   small for the shoulders.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+- `assets/monsters/minibosses/pressman.glb` is committed. **STATIC** - a
+  `model` path and **NO `anims` entry**.
+- **`scripts/delve.gd` MB_FIT: add `"pressman": 1.16`.** Measured, not
+  derived: `renders/art/minibosses/_fit_report.json` pairs.pressman.ratio,
+  hero = the posed KayKit knight at 2.45 m. Verdict GREEN, 3 proving views,
+  errors [], blind_views [], blank check 3 files 0 failures.
+- **MB_FIT is missing three bodies that already shipped**, measured against the
+  same file this run: `"tanner": 1.12`, `"reeve": 0.80`, `"tapster": 1.14`.
+  `snuffer_chibi` (1.06) is also absent while its sibling chibis are present.
+- **CORRIDOR-SAFE at 2.61 m** against the 11.0 m three-cell clear span. No
+  spawn gate needed.
+- Theme `prison`, feed line "Irons just came off the yoke."
+- **NO ROTATION IS HANDED OVER with this body**, so the frame question does not
+  arise here. When one is, it will be named as solved in Blender's bone frame.

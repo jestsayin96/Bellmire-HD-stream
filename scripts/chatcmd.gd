@@ -889,6 +889,48 @@ static func commands() -> Dictionary:
         elif m_said != QUEUE_MAX:
             push_error("COMMANDS_DATA MUSTER COUNT: `muster`.what publishes a chat queue of %d and QUEUE_MAX turns the viewer away at %d - docs/COMMANDS.md promises a place the muster does not have" % [m_said, QUEUE_MAX])
             printerr("COMMANDS_DATA MUSTER COUNT - published %d, enforced %d" % [m_said, QUEUE_MAX])
+        # B35: THE SMALLEST CLAIM LEFT WHOSE AUTHORITY IS A NUMBER LIVING IN CODE.
+        # B34 named fifteen unguarded `what` claims. Four of them carry a number rather than a
+        # list; of those four this is the SMALLEST by measurement, not by feel:
+        #   `look`.what "a 10-second pane"  -> Spotlight.LOOK_S, ONE declaration (spotlight.gd:33)
+        #     with ONE use site (line 120), a LITERAL DIGIT in the sentence, and the constant is
+        #     ALREADY referenced twice in this file (SUB_S, POINTS_S at lines 290-292) - so the
+        #     guard adds no dependency and needs no word-to-number table.
+        #   `satchel`.what "two fifths"      -> SELL_BACK 0.4, declared TWICE (leaderboard_panel.gd
+        #     Satchel:65 and snapshot_pub.gd:40) with ~10 use sites, and a fraction in WORDS.
+        #     Bigger on every count: two authorities that can disagree with each OTHER before
+        #     either disagrees with me. It is the obvious next one and it is NOT done here.
+        #   `bestiary`.what "eight lords"    -> a COUNT over bosses.json, a data file, not a const.
+        #   `oil`.what "two delvers"         -> a burn RATE in delve.gd, no constant to read.
+        # WHY IT IS WORTH A GUARD AT ALL: a viewer reads "10-second" in docs/COMMANDS.md and the
+        # pane is whatever LOOK_S says. Nothing in the house compares them. The free `look` is the
+        # one pane a viewer gets WITHOUT paying, so its length is the promise most likely to be
+        # quietly tuned - POINTS_S and SUB_S sit on the two lines above it in spotlight.gd.
+        # THREE PATHS, the muster shape plus one: the published number differs from the enforced
+        # one; the sentence is reworded so no number can be found (ANCHOR, which is what stops the
+        # guard going blind); and LOOK_S becomes FRACTIONAL, where a whole-second sentence cannot
+        # state it truthfully and an int compare would pass 10.5 as 10. Not fatal - a battery greps
+        # COMMANDS_DATA; no line is the healthy reading.
+        var lw: String = String(((cmd_d.get("look", {}) as Dictionary)).get("what", ""))
+        var l_anchor := "-second pane"
+        var l_at: int = lw.find(l_anchor)
+        var l_said: int = -1
+        if l_at > 0:
+            var l_i: int = l_at
+            while l_i > 0 and "0123456789".contains(lw.substr(l_i - 1, 1)):
+                l_i -= 1
+            if l_i < l_at:
+                l_said = int(lw.substr(l_i, l_at - l_i))
+        var l_real: float = float(Spotlight.LOOK_S)
+        if l_said < 0:
+            push_error("COMMANDS_DATA LOOK ANCHOR: `look`.what no longer says \"<number>-second pane\" - the published length of the free look can no longer be checked against Spotlight.LOOK_S (%s)" % str(l_real))
+            printerr("COMMANDS_DATA LOOK ANCHOR - `look`.what lost its \"<number>-second pane\" phrase; the pane length is now unchecked")
+        elif l_real != floorf(l_real):
+            push_error("COMMANDS_DATA LOOK FRACTION: Spotlight.LOOK_S is %s, which no whole-second sentence can state - `look`.what publishes %d-second and the pane is neither" % [str(l_real), l_said])
+            printerr("COMMANDS_DATA LOOK FRACTION - LOOK_S %s is not whole seconds; published %d" % [str(l_real), l_said])
+        elif float(l_said) != l_real:
+            push_error("COMMANDS_DATA LOOK SECONDS: `look`.what publishes a %d-second pane and Spotlight.LOOK_S holds it for %s - docs/COMMANDS.md promises a look the spotlight does not give" % [l_said, str(l_real)])
+            printerr("COMMANDS_DATA LOOK SECONDS - published %d, enforced %s" % [l_said, str(l_real)])
         _cmds = parsed
     return _cmds
 

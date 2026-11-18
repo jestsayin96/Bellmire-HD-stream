@@ -134,7 +134,7 @@ than worked around.
 
 | Pack | Author | Licence | Licence text on disk | Contents used |
 |---|---|---|---|---|
-| Fantasy Props MegaKit (FREE version) | Quaternius | **CC0 1.0 Universal** | `assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt` | `Barrel` (cask, slot 0 only), `SmallBottle` (the hung flasks), `Mug` (the jack) |
+| Fantasy Props MegaKit (FREE version) | Quaternius | **CC0 1.0 Universal** | `assets/props/LICENSE_FantasyPropsMegaKit_CC0.txt` | `Barrel` (cask, slot 0 only), `SmallBottle` (the hung flasks), `Mug` (the jack), `Bucket_Wooden_1` (the Strickler's measure), `Pouch_Large` x3 (the Strickler's weights) |
 
 **THE LICENCE WAS READ OFF THE FILE ON DISK, NOT OFF A SEARCH SNIPPET** - the
 standing rule, and the exact habit that produced the wrong Quaternius ban on
@@ -152,3 +152,16 @@ is one object with TWO material slots at the same radius to within 1 mm - slot
 both and they Z-FIGHT; the barrel renders as torn shards with holes in it and
 every opacity check still reads green. Take one slot. Other models in this pack
 may be built the same way.
+
+### 17 Nov 2026 - THE STRICKLER (miniboss 23): two more props, and a new cap rule
+`Bucket_Wooden_1.gltf` (the measure) and `Pouch_Large.gltf` x3 (the weights
+hanging off the balance beam) come from the same CC0 Fantasy Props MegaKit
+already logged above - same pack, same licence file, no new source and no new
+attribution obligation. The files in `assets/props/` are untouched; they are
+read, normalised into the unit cube and placed by `tools/art/minibosses.py`.
+
+NEW THIS RUN, AND IT IS A LICENCE-NEUTRAL BUT IMPORTANT NOTE: these two go
+through `_prop_mesh_m`, which reads the primitive and triangle counts off the
+.gltf JSON before import and caps by the model rather than by a constant. Both
+shipped at full density (976 and 730 triangles). See docs/art/PROPS_SLOT_AUDIT.md
+for why the old fixed cap was the real cause of the torn Barrel.

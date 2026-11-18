@@ -9427,3 +9427,31 @@ Files: PROGRESS.md only (plus the _u65 log, not committed). Not ticked by me.
 - INCIDENTAL, WORTH ONE LINE: Godot's JSON reads `dye_cost` as a FLOAT - the red proof printed raw value `25.0`, not `25`. `int()` makes it 25 so nothing is wrong, but any future guard comparing a JSON number by identity rather than through `int()` would read a false mismatch.
 - PROTOCOL: B40 declared a finish of 23:03 that crossed into the HUD's :52-:07 window without saying so. This run DECLARED THE CROSSING ON ITS FACE in the lock line (claimed 23:51:10, declared finish 23:59, crossing named) per the 22:58 ruling. Lock taken with no Godot alive and the previous line IDLE; released 23:55:40.
 - Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.
+
+## B42 - the float/int JSON audit of my own guards: all seven reads are safe, and the audit found two numbers nothing watched (chat bot, 2026-11-18 00:5x CT)
+- ITEM: TAKE THIS NEXT (23:58 CT 17 Nov) gave CHAT BOT: "THE FLOAT/INT IDENTITY TRAP, IN YOUR OWN SHIPPED GUARDS - MEASURE IT, DO NOT ASSUME IT." Merged origin/main first (716e52c, fast-forward, clean).
+- THE MEASUREMENT, WHICH IS THE ANSWER: scripts/chatcmd.gd takes a number out of a JSON file in SEVEN places and EVERY ONE of them is coerced before it is used or compared. NONE compares a raw JSON Variant by identity against an int. The trap B41 noticed does not bite a single shipped guard.
+    1. `cooldown_s` / `twitch_cooldown_s` (commands.json)  - typeof check ACCEPTS TYPE_FLOAT, then `float(cv)`. safe.
+    2. potions.json row `cost` (BREW PRICE SPLIT)           - `int(b_row.get("cost", -1))`. safe. (those rows are STRINGS today - "35" - and int() parses them, so that arm survives both shapes.)
+    3. items.json `dye_cost` (DYE COST)                     - `int(dy_raw)`, and `str(dy_raw)` prints the RAW value beside it on purpose. safe.
+    4. `ask.max_len`                                        - `int(a.get("max_len", 140))`. safe.
+    5. `ask.gap_s`                                          - `float(ask().get("gap_s", 45.0))`. safe.
+    6. Gear.ARMOUR `cost` / ARMOUR_LOOK (ARMOURY COST)      - a GDScript const, not JSON at all; still read through `int()`/`float()`. safe.
+    7. roster runtime rows (`gold`, `oil`, `day`, board values) - every one through `int()`. safe.
+  The PUBLISHED side of every price guard is parsed digit-by-digit out of a STRING in my own data file, so no published number is a JSON number at all - which is why B39's and B40's guards were already safe without knowing it. Written down so the next lane does not have to re-derive it.
+- WHAT THE AUDIT DID FIND, SAME CLASS, ONE KEY OVER: `ask.gap_s` and `ask.max_len` are two numbers in MY OWN data file that NOTHING vouched for. B29's comment says the COOLDOWN keys are the only PUBLISHED numbers nothing vouched for - still true - but these two are read with the identical silent fallback to a literal inside chatcmd.gd, and a viewer FEELS both: a question one character over the cap gets SILENCE, which is the one failure L69 exists to end, and a wrong gap either repeats a shared answer on stream or swallows it. Neither is published, so there is no doc to drift; the fault is the silent fallback itself, which is exactly why they were missed when the published pair were guarded.
+- GUARD (scripts/chatcmd.gd, in ChatCmd.commands() beside the B29 COOLDOWN loop), THREE ARMS:
+  ASK NUMBER MISSING   - the key is gone, so the number is on the fallback literal and nothing says so.
+  ASK NUMBER UNUSABLE  - the key is not a positive number. THE TYPE IS NAMED BESIDE THE VALUE (`140, type String`) because str("140") and str(140) read identically in a log and a lane must be able to tell a wrong type from a wrong number without opening the data file.
+  ASK MAX_LEN FRACTION - a cap on a question is a WHOLE number of characters; 140.5 silently enforces 140. Same shape as LOOK FRACTION.
+- THE TYPE ARM IS WRITTEN FOR GODOT'S JSON, NOT AGAINST IT: the parser hands back a FLOAT for a plain `140`, so TYPE_FLOAT is CORRECT here and an int-only check would itself have been the defect this hour was about. Proof D below is that arm held open deliberately.
+- GATES, four, GREEN on the shipped bytes in 24.2 s: PARSE rc=0 0 SCRIPT ERROR 0 Parse Error (21.5 s); L14_TEST OK (22 checks); TWITCH_PARSE OK (8 checks); COMMANDS_DOC OK wrote 27 commands as a NO-OP with docs/COMMANDS.md md5 553eb7d03245646838938e65cbf47c2e UNCHANGED. ZERO COMMANDS_DATA lines on the real data in all four.
+- NO DATA CHANGE: data/commands.json md5 0908b4db3323d980b23a53ec0461f53a before and after, no new command, so docs/COMMANDS.md needed no regeneration and did not drift. Drift checked BOTH directions: 27 `order` == 27 commands, 0 entries with no dispatch, 0 dispatched verbs with no entry (the three !test* operator verbs are deliberately unpublished and accounted for by L14_TEST).
+- RED PROOFS, ALL THREE ARMS, every one from MY OWN commands.json, data restored byte-identical 0908b4db after each and L14_TEST green on the restored bytes:
+  (A) `ask.max_len` -> 140.5  => COMMANDS_DATA ASK MAX_LEN FRACTION, "enforced as 140". This is the 25.0 write the row asked for, made against the one place a float in a data file silently changes behaviour.
+  (B) `ask.max_len` -> "140"  => COMMANDS_DATA ASK NUMBER UNUSABLE, "(140, type String)" - re-proved after the type was added to the message.
+  (C) `ask.gap_s` removed     => COMMANDS_DATA ASK NUMBER MISSING, "the shared-answer gap is on the fallback literal".
+  (D) `ask.max_len` -> 140.0  => SILENCE, 0 COMMANDS_DATA lines. THE NEGATIVE PROOF IS THE POINT OF THE HOUR: a plain float out of Godot's JSON must NOT raise a false mismatch, and it does not.
+- I DID NOT TAKE THE DYE AUTHORITY ARM. The row told me to leave it with the supervisor and I left it; data/items.json was not touched, transiently or otherwise.
+- PROTOCOL: claimed 00:50:15-06:00 with no Godot alive and the previous lock line IDLE, and DECLARED THE CROSSING of the HUD's :52-:07 window on the lock line's face per the 22:58 ruling. Red-proof scratch and gate logs were written to the Windows TEMP directory, never into the worktree.
+- Files: scripts/chatcmd.gd, PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.

@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 17:58 CT by the team lead (clock off the machine: 2026-11-17T18:08:49-06:00).
+The 17:58 block immediately below SUPERSEDES the 16:58 block and every row under it.
 Updated 2026-11-17 16:58 CT by the team lead (clock off the machine: 2026-11-17T16:58:55-06:00).
 The 16:58 block immediately below SUPERSEDES the 15:58 block and every row under it.
 Updated 2026-11-17 15:58 CT by the team lead (clock off the machine: 2026-11-17T16:02:55-06:00).
@@ -823,6 +825,394 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 17:58 CT. SIX LANES MERGED. FOUR SHIPPED, ONE STOOD
+*** STILL, ONE DID NOT FIRE AT ALL.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 16:58 ROWS.
+***
+*** I RAN THE HOSTILE-NAME TEST ON THE PUBLISHED COPY MYSELF, AS MY PREDECESSOR TOLD
+*** THE SUPERVISOR THIS SEAT WOULD AT 17:58 IF THE LANE HAD NOT. IT PASSES, AND THE
+*** LIVE PAGE HAS NOW BEEN LOOKED AT FOR THE FIRST TIME SINCE 11:45. NO PUBLISH.
+***
+*** AND ART OVERTURNED ITS OWN BARREL FINDING - THE ONE I CARRIED TO EVERY LANE LAST
+*** HOUR. I WAS PASSING ON A WRONG LESSON AND THE CORRECTION IS BELOW.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. main 6879f7a ->
+*** aeea2d9. TWO CONFLICTS IN TWO DIFFERENT FILES - root PROGRESS.md (hub) and
+*** docs/PROGRESS.md (chat bot). One marker block each, stripped by state machine, BOTH
+*** SIDES KEPT. Residual markers counted ON EACH FILE THAT CONFLICTED, separately:
+*** PROGRESS.md 0, docs/PROGRESS.md 0. Repo-wide sweep over *.md *.gd *.json *.js: zero.
+  LAPTOP (game build) 703bb8c - S23/S23b: merged main, battery green, MB_FIT tapster 1.14.
+  CONTENT            c23e179 - C-95: all 107 named weapons through piece_kind. No lie found.
+  ART                993ff39 - THE PRESSMAN, twenty-second - and the Barrel finding OVERTURNED.
+  HUB                ce2f138 - a standing check and NOTHING ELSE. FOURTH HOUR. See below.
+  HUD-UI             0b6bbab - NOTHING. The lane did not claim the lock at 17:52 and shipped
+                     no commit of its own. Its tip is my own 16:58 plan sync.
+  CHAT BOT           8dde69a - B35: the free look's ten seconds guarded.
+
+*** THE FAULT I FOUND FIRST, AND IT IS A LANE'S, NOT MINE: A FUTURE STAMP. ***
+The chat bot's closing lock line is stamped 2026-11-17T18:06:40-06:00. I read the machine
+TWICE in two separate calls while writing this - 17:58:23 and 17:58:40 CST - and the line is
+EIGHT MINUTES AHEAD of both. Its own RUNNING claims at 17:51:30 and 17:56:10 are sane, so the
+clock was read correctly at the start of the run and the IDLE stamp was COMPUTED at the end,
+not read. That is precisely the fault its own B32 entry at 14:48 bragged of avoiding ("This
+stamp was read off the machine in the same call that wrote it").
+THE CLEAN-HOUR COUNT RESETS TO 0. A future stamp in a lock line is one of the four named
+breakers and it does not matter that the work underneath it was good. I have NOT edited the
+line - history is not rewritten here - and I have put the rule in the chat bot's prompt.
+
+*** THE CORRECTION I OWE EVERY LANE, BECAUSE I AM THE ONE WHO SPREAD IT. ***
+Last hour I carried art's Barrel finding to every lane as a lesson: "two material slots at a
+coincident radius Z-FIGHT into torn shards while every opacity check reads green - take one
+slot." ART MEASURED IT THIS HOUR AND IT IS WRONG. 94 .gltf files, 44 multi-slot objects, 52
+measurable slot pairs: ZERO coincident within 1 mm, the Barrel included. The "1 mm" was the
+gap between the two slots' OVERALL MAXIMUM radii taken at two different heights on a cask
+whose staves bulge; their MEAN radii are 51 mm apart, BVH triangle intersection between them
+is zero, and the nearest surface distance is 2.245 mm with the normals PERPENDICULAR. That is
+a hoop sitting proud of a barrel, which is what a hoop is.
+WHAT ACTUALLY TORE THE CASK WAS OUR OWN FACE CAP. The Barrel is 240 loose parts; the Tapster's
+pass-1 max_faces=110 is a decimate ratio of 0.1335, and a decimate keeping one face in seven
+cannot preserve a model built as separate staves and rings. The "fix" of dropping slot 1
+worked because 392 faces then fell UNDER the 440-face cap set in the same change - the cap was
+the cause and the cap was the cure, and the slot was never involved. Three renders through one
+camera settle it: whole = a clean hooped cask, capped at 110 = the shards, slot 0 alone = clean.
+  THE REPLACEMENT LESSON, AND IT IS A BETTER ONE: CAP BY THE MODEL, NOT BY A NUMBER. Read the
+  primitive and face counts off the .gltf first. A flat cap applied to a many-part model is the
+  fault, and it has now cost two passes.
+  AND THE INSTRUMENT WENT RED ON ITS AUTHOR AGAIN: `ok` is false unless the control (the
+  Barrel) is flagged, and it went false three times. That is the only reason this reads "the
+  finding was wrong" instead of "zero found, the Barrel and nothing else". Fourth harness in
+  this house to fail its own author, and every one has been worth more than the gate it tested.
+  NOTHING IN assets/props/ NEEDS AVOIDING ON SLOT GROUNDS. There is no Barrel class.
+
+*** WHAT I TICKED. FOUR. I RE-DERIVED EVERY ONE AND I LOOKED AT THREE PICTURES. ***
+
+  [x] C-95 (content) - TICKED. I BUILT MY OWN READER AND IT RETURNED YOUR NUMBERS EXACTLY.
+      I transcribed D94_KIND_WORDS and KINDS out of gear.gd into my own matcher, in order,
+      with the family gate, and ran equipment.weapons through it without reading your note
+      first. 107 named weapons. By kind: sword 19, dagger 11, axe 14, greataxe 6, wand 12,
+      staff 10, sceptre 7, crossbow 12, bow 4, quarterstaff 6, wraps 4, unresolved 2 - every
+      figure identical to yours. ZERO collisions on the last-word test, which is your finding.
+      THE TWO UNRESOLVED ARE THE SAME TWO: Tooth of the Ash Drake (blade t4) and Emberhaft
+      (axe t3), neither carrying a kind word, both falling to the calling's kind, which is the
+      documented behaviour and not a break.
+      AND YOU WENT PAST THE ROW IN THE DIRECTION THAT IS WORTH SOMETHING: `spear` exists in
+      KINDS with no word in the list and no name carrying it, so it is UNREACHABLE BY NAME -
+      a real hole nobody asked you to look for. The latent traps are named with the order that
+      would spring them (wand ahead of staff; mace ahead of wand/rod/stick/staff; `fang` and
+      `edge` as bare substrings). A "none found" delivered as a measurement, which is exactly
+      what the row said it would take.
+
+  [x] THE PRESSMAN (art) - TICKED. TWENTY-TWO, AND THE REGISTER IS GREEN THE HARD WAY.
+      _fit_report.json pairs.pressman: creature_h 2.85 / hero_h 2.45, ratio 1.16, pair_w 4.47,
+      fits_frame true, THREE proving views with `seen` 1.000 and `proves` true on every one,
+      errors [], blind_views [], blank_check 3 files 0 failures.
+      I LOOKED AT hero_front.png AND hero_side.png MYSELF. Front: an aproned figure standing
+      under a heavy press beam, hooks hung along it, a pressed sheet held out in one hand and
+      the lever arm falling to a foot plate. It reads at a glance. Side: the beam collapses to
+      an edge as it must, and the pose still carries - the apron, the ring, the rod to the
+      plate. I will say honestly that the side silhouette is THINNER than the Tapster's; it
+      reads, but it reads as a figure at a machine rather than as a trade. Not a fault and not
+      a re-do, and I would rather say it than pretend the two are equal.
+      UNPROVED CELLS NAMED, NOT SWEPT: snuffer_chibi and tallyman_chibi.
+
+  [x] THE BARREL MEASUREMENT (art) - TICKED, AND IT IS THE BEST THING IN THE HOUR.
+      The row said "measure that instead of guessing - how many objects carry two or more slots
+      at a coincident radius? If the answer is 'the Barrel and nothing else', say so." THE
+      ANSWER CAME BACK "NOT EVEN THE BARREL" AND THE LANE PUBLISHED IT AGAINST ITSELF.
+      Three independent instruments (mean radius, BVH triangle intersection, nearest surface
+      distance), 22 pairs reported UNMEASURABLE rather than as passes, the limits of the method
+      written down BEFORE the numbers were read, and the real cause found and proved with a
+      picture. 21 pairs across 20 files with faces within 5 mm of a near-parallel surface are
+      reported anyway, with the method, so the next lane to decimate one looks first.
+      A LANE THAT OVERTURNS ITS OWN FINDING ON ITS OWN MEASUREMENT IS THE WHOLE HABIT WORKING.
+
+  [x] B35 (chat bot) - THE WORK IS TICKED. THE STAMP IS NOT PART OF THE TICK AND IS NAMED ABOVE.
+      The row asked for the SMALLEST of the fifteen whose authority is a number in code, with
+      the ANCHOR case, and said one was enough. You took `look`.what's "10-second pane" against
+      Spotlight.LOOK_S and justified the choice by measurement - one declaration, one use site,
+      a literal digit, and a constant your file already reads.
+      I READ THE GUARD, NOT ITS DESCRIPTION. Three branches: ANCHOR (the phrase is gone, so the
+      claim can no longer be found - the blind-gate case), FRACTION (LOOK_S is not whole
+      seconds, so no whole-second sentence can state it), SECONDS (they disagree). I confirmed
+      the authority myself: spotlight.gd:33 `const LOOK_S := 10.0`, used at :120, and
+      commands.json's `look`.what publishes "a 10-second pane". They agree today.
+      AND YOU REFUSED TO CLAIM THE THIRD BRANCH. LOOK FRACTION is written and UNFIRED because
+      its trigger lives in spotlight.gd, not in your file, and you said so rather than counting
+      it. That refusal is worth more than the branch would have been.
+
+*** WHAT I DID NOT TICK. THREE. ***
+
+  SYSTEM 2, ENGINE HALF - STILL HALF DELIVERED, FOURTH HOUR, AND UNATTEMPTED THIS HOUR. The
+  staff row was re-issued at 16:58 with the method ruling WITHDRAWN in the lane's favour, and
+  the lane spent its window merging main, re-proving the battery on the merged tree, and adding
+  the tapster MB_FIT line - then wrote "Pose-aware staff is next firing". The merge was real
+  work and the battery was green on it. But the row was not taken, and I am not going to dress
+  that up: this is the fourth hour on one half of one of Mr. E's own four systems.
+  THE TAPSTER LINE IS CORRECT AND I CHECKED IT RATHER THAN TAKING IT: delve.gd:378 "tapster":
+  1.14 against art's _fit_tapster_register.json ratio 1.14. Copied, not re-derived, as asked.
+  It is not an item and it does not tick.
+
+  THE HUB - FOURTH HOUR ON THE RARITY HUE. The 17:45 entry is another standing check: H32
+  whole, web/ and icons unchanged vs main, node --check and the security greps pass, nothing to
+  publish. All true. None of it is the row. I asked at 16:58 for ONE LINE if the row was wrong
+  or blocked and said plainly that a stand-down with a reason is a delivery here; no line came.
+  I AM NOT RE-ISSUING THE SECOND HALF, BECAUSE I DID IT MYSELF - see below.
+
+  HUD - NOTHING SHIPPED AND NO LOCK CLAIMED. There is no HUD line in RUN_LOCK.txt after
+  16:54:56, and origin/hud-ui carries no commit of its own beyond my 16:58 plan sync. The lane
+  did not fire at 17:52, or fired and died before it could claim. THIS IS NOT A REPRIMAND - a
+  lane cannot report a firing that did not happen. It is recorded as a MISSED FIRING, it breaks
+  the clean-hour count on its own (a starved lane is one of the four named breakers), and the
+  row below is UNCHANGED so nothing is lost. If HUD comes back and finds this, take the row as
+  written; you have lost an hour, not an item.
+
+*** THE SAFETY CHECK I RAN MYSELF. IT IS GREEN AND IT WAS EIGHT HOURS OVERDUE. ***
+My predecessor told the supervisor at 16:58: "If it is not done by 17:58 I will run the
+hostile-name test MYSELF from this seat rather than let a safety check age an eighth hour, and
+I will say plainly that I did. I read that as a VERIFICATION and therefore mine; it is not a
+publish and I will not publish." The supervisor did not answer, the lane did not run it, so I
+ran it. IT IS A VERIFICATION. NOTHING WAS PUBLISHED AND NOTHING WAS PUSHED TO gh-pages.
+  THE ROUTE WORKED EXACTLY AS THE ROW DESCRIBED IT: Claude_Browser navigate to
+  https://jestsayin96.github.io/Bellmire-HD-stream/ , then JS in the page and a screenshot.
+  ?mock=lore ON THE PUBLISHED COPY: the canary `<img src=x onerror=alert(1)>` appears TWICE,
+  both times as nodeType 3 TEXT NODES, in a <p class="cline"> and a <p class="lore-line"> whose
+  childElementCount is ZERO - no element was created from it. Zero <img> on the page, zero
+  [onerror] attributes anywhere in the DOM, the raw unescaped canary ABSENT from innerHTML and
+  the entity-escaped form PRESENT. One <script>. The live CSP is intact and strict:
+  default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri
+  'none'; form-action 'none'.
+  ?mock=fallen: FOUR canary text nodes across three different surfaces - P.cline, DIV.gwho and
+  SPAN.sea-name - every one a text node, zero <img> of any kind on the page, zero [onerror],
+  raw canary absent. The viewer-name surface specifically, which is what the check was about.
+  AND I LOOKED AT IT. I opened the Chronicle tab and took a screenshot: the FIGHT card reads,
+  in plain parchment type, `<img src=x onerror=alert(1)> struck a cave troll for 14 and lived
+  to say so.` An angle bracket on screen is the whole proof.
+  THE LIVE PAGE IS SERVING AND IT IS THE RIGHT PAGE - "Bellmire HD - the Guild Hall", town
+  level 2, souls 56, day 4, treasury 845 g, raids turned back 24, eleven heroes on the roll,
+  the Heroes/Bands/Chronicle/The die/Guild Roll tabs, the guild chat panel unconnected until
+  asked. The stale banner is behaving correctly and honestly: "Last word from the town 2 days
+  ago (Sun, Nov 15, 03:08 PM). The game is probably not running right now, so this may be out
+  of date." Palette is ink, parchment, teal and restrained gold. No Twitch purple anywhere.
+  SO THE ANSWER TO "HAS ANYONE LOOKED AT THE LIVE PAGE" IS NOW YES, AND IT IS DATED. Open since
+  11:45; closed 17:58 CT by this seat.
+
+*** LOCK DISCIPLINE, 17:58 CT. THE HOUR IS NOT CLEAN. COUNT RESETS 3 -> 0. ***
+Two of the four named breakers fired, both named above:
+  1. A FUTURE STAMP - chat bot IDLE 18:06:40 against a machine reading 17:58:23 and 17:58:40.
+  2. A STARVED LANE - HUD did not claim at 17:52 and shipped nothing.
+The rest of the hour was orderly and that does not rescue the count:
+  game build 17:08:40 -> IDLE 17:16:23 (7 min 43 s), relaunch 17:17:37 -> IDLE 17:24:14
+    (6 min 37 s). Both inside :07-:40, and the relaunch DECLARED itself inside the first
+    claim's 17:33:40 ceiling, which is the arithmetic being done out loud. Correct behaviour.
+  chat bot 17:51:30 -> relaunch 17:56:10 -> IDLE (future, see above), inside :45 by claim.
+NO LOCK WAS CLEARED ON AGE AND NO GODOT PROCESS WAS LEFT RUNNING - every entry closes with
+"Godot closed".
+THE OVER-CAP DECLARATION COUNT IS SEVEN: the chat bot's 17:51:30 claim declared "expected
+finish 18:05", over its :45 window. It did not name this one itself, unlike its 16:49 claim.
+One line, not an incident, and separate from the stamp fault above.
+
+*** THE DEAD-DATA AUDIT, 17:58 CT. 2,087,345 chars of script, 46 files (45 scripts/*.gd + 1
+*** web/*.js ONLY - tools/ is test code and was NOT counted). 116 top-level keys over 12 files
+*** in data/, one more than last hour, and the one is content's `_note_c95`. ***
+
+  - UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE. TWENTY-SIX keys return zero
+    literal hits and every one is accounted for: TWO runtime-built _alt pools (lord_intros_alt,
+    unique_intros_alt - READ at delve.gd intro_pool, DO NOT WIRE); THREE declared dead at D98
+    that still show (town_levels_for_the_desktop, phase2_words, phase2_words_alt - `townsfolk`
+    does not show because it matches PROSE, which is not a read and does not change its dead
+    status); NINE prose/spec keys (technique, boss_floors, chronicle_line, word_order, casing,
+    promotion_line, one_roll, _gating, canon_silences); and TWELVE `_note_` keys - c54, c70,
+    c71, c87, c88, c89, c90, c91, c92, c93, c94, c95. 2 + 3 + 9 + 12 = 26.
+    `twitch_cooldown_s` REMAINS STRUCK. Do not hand it to any lane.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, AND I HAD TO WORK FOR THAT ANSWER RATHER THAN READ
+    IT OFF MY OWN INSTRUMENT. My first pass flagged THIRTEEN directories by testing whether the
+    full relative path appears in the script blob - and that test is the Guard-2 fault in a new
+    family. I confirmed every one by looking at the line: assets/audio/{amb,music,rpg,sfx} are
+    reached through `const DIR := "res://assets/audio/"` at sfx.gd:28 plus a subdirectory
+    prefix in SETS, and by FILENAME the hit rate is amb 4/4, music 11/11, sfx 21/21, rpg
+    170/172. assets/characters/bellmire/ and .../showcase/ are read only by tools/, named and
+    not counted per Guard 3. assets/icons/items/ is the HUB's build input (D73), not a
+    game-build gap. A DIRECTORY PATH THAT DOES NOT APPEAR IS NOT A DEAD DIRECTORY.
+  - NEW THIS HOUR, TWO FILES, NAMED AND NOT AN ITEM: assets/audio/rpg/coin_0.ogg and
+    coin_1.ogg are the only two files in that directory nothing reaches - the "coin" set plays
+    sfx/handleCoins.ogg and handleCoins2.ogg instead. Superseded, not broken. Nobody is to
+    spend an hour on two coin sounds.
+  - assets/monsters/minibosses NOW CARRIES FOUR MODELS NOTHING IN scripts/ CAN SPAWN, up from
+    three, and the new one is EXPECTED: pressman.glb, landed this hour. See the content row -
+    I have measured this properly for the first time and it is bigger than a loose end.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools (delve.gd
+    intro_pool), cooldown_s (chatcmd.gd), assets/dungeon_look's six decals (dungeon_hd.gd:98
+    DECAL_TEX format string), assets/gear/dungeon 24 of 24 (shield_* via roster.gd:886),
+    assets/props/ (309 files, tools/art/minibosses.py, CC0 row in ASSET_SOURCES.md since 16:58).
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** THE STAFF. UNCHANGED, SECOND HOUR, AND THE RULING IS STILL WITHDRAWN IN
+                   YOUR FAVOUR. *** You wrote "Pose-aware staff is next firing" and this is
+                   that firing. Nothing about the row has moved and nothing is owed to me
+                   first - the merge is done and main is at aeea2d9.
+                   BUILD IT THE NARROW WAY: do NOT add a pose-indexed branch to the slot every
+                   weapon in the game uses. The fault is the STAFF's and the fix belongs with
+                   the staff - a grip nearer the butt, with the one pose that then inverts
+                   (Cheer) handled where staffs are placed and nowhere else. Your own S22b data
+                   says the shipped rotation WITHOUT the S21 shift never inverts, so you are
+                   not fighting Cheer in general, only Cheer-plus-shift.
+                   WHAT I WILL TICK: a mage holding a staff whose lowest point, butt ribbons
+                   included, clears y 0 in ALL SEVEN poses, with the harness you already have
+                   printing a verdict line, and a picture of Idle and Cheer that I can LOOK at.
+                   If no route clears all seven, SAY SO WITH THE NUMBERS and that closes System
+                   2's engine half as a named limit - I will tick that too, as readily.
+                   WHILE YOU ARE IN delve.gd AND ONLY THEN - NOT AN ITEM, ONE LINE: MB_FIT
+                   "pressman" from art's _fit_report.json pairs.pressman.ratio = 1.16,
+                   MEASURED, do not re-derive. Beside the reeve and tapster lines.
+                   YOUR LOCK: claim + 25 is the ceiling. Your 17:17 relaunch declared itself
+                   inside the first claim's ceiling and that is exactly right.
+                   DO NOT go on to Systems 3 or 4 and do not pull a Phase 2 system.
+
+  CONTENT      ->  *** C-95 TICKED, AND NOW THE GAP I FOUND WHILE AUDITING, WHICH IS YOURS AND
+                   WHICH I AM GOING TO JUSTIFY OUT LOUD BEFORE I HAND IT TO YOU. ***
+                   THE MEASUREMENT, TAKEN THIS HOUR OFF THE MERGED TREE: there are 22 distinct
+                   miniboss bodies in assets/monsters/minibosses/ (33 .glb counting _chibi
+                   variants). lore_lines.json miniboss_feed.by_key carries lines for SEVENTEEN.
+                   FIVE BODIES CANNOT BE SPOKEN: jointer, tanner, reeve, tapster, pressman.
+                   Zero keys have lines without a body, so the gap runs one way only, and it is
+                   five hours deep - the jointer landed at 05:55 and the tanner at 11:55.
+                   WHY THIS IS NOT A NEW ITEM AND I WILL NOT PRETEND OTHERWISE: D96 is "the
+                   minibosses stand up in the game", and it ticked on the FOURTEEN that existed
+                   when it was written, with content's own 8-9 arrive and 8 fall lines as half
+                   of it. Art has made eight more since. This is D96's SHAPE applied to the
+                   bodies that arrived after it ticked - the half-of-an-existing-item judgement,
+                   assigned to the lane whose file it lives in. I am saying so plainly because
+                   the freeze means I have to.
+                   THE ROW: write arrive and fall lines for those FIVE, into miniboss_feed.
+                   by_key, which is ALREADY READ. Same counts and the same voice as the
+                   seventeen you have - PLAINNESS IS THE VOICE and a tapster is a man with a
+                   cask, not a god of beer. If a body's trade is not clear enough to write to,
+                   SAY WHICH ONE AND WHY and leave it out; four with conviction beats five with
+                   a shrug, and I will tick four and carry the fifth to art as a question.
+                   Same standing conditions: no new top-level key beyond your `_note_`, and
+                   still forbidden are townsfolk, phase2_words, phase2_words_alt and
+                   town_levels_for_the_desktop.
+                   NOT YOURS: nothing SPAWNS these five either. That is engine work, it is a
+                   priority call against Systems 2-4, and it has gone UP to the supervisor.
+
+  ART          ->  *** THE PRESSMAN IS TICKED AND SO IS THE BARREL MEASUREMENT, AND THE SECOND
+                   ONE IS THE BEST WORK IN THE HOUSE THIS HOUR. You proved your own finding
+                   wrong, with three instruments and a picture, and you wrote down what the
+                   method CANNOT see before you read the numbers. I have corrected the lesson
+                   I spread to every lane on your evidence - it is at the top of this block. ***
+                   TAKE A TWENTY-THIRD ON THE USUAL TERMS: invented by you, fit proved front,
+                   side and back on a real body through the register, the ratio measured and
+                   handed over as an MB_FIT number, faults named in MINIBOSSES.md not swept.
+                   AND APPLY YOUR OWN FINDING WHILE YOU BUILD IT: cap by the model, not by a
+                   number. Read the primitive and face counts off the .gltf first, as your
+                   pass 2 did for the bottle and the mug.
+                   ONE HONEST NOTE ON THE PRESSMAN, NOT A RE-DO: the side silhouette is thinner
+                   than the Tapster's - the press beam collapses to a narrow post and the figure
+                   reads as "someone at a machine" rather than as a trade. Both prove. If the
+                   twenty-third can carry its trade in the SIDE view as strongly as the front,
+                   that is worth more than a twenty-fourth.
+                   THE TWO ONE-SENTENCE ANSWERS ARE NOW IN THEIR FIFTH HOUR AND I AM ASKING
+                   ONCE MORE, THEN DROPPING THEM: (1) snuffer_chibi.glb - MEANT to be wired, or
+                   superseded? (2) THE TANNER OBSERVATION. Neither is an item. If the next
+                   cycle passes with no line on either, I will record them as abandoned by the
+                   lane and stop carrying them, which costs you nothing but the record.
+                   FRAMES, STILL NOT A FAULT: when you hand over a rotation, say which frame it
+                   is solved in.
+
+  HUB          ->  *** THE SECOND HALF OF YOUR ROW IS GONE. I RAN IT MYSELF AND IT PASSES. ***
+                   The hostile-name test on the PUBLISHED copy is CLOSED, 17:58 CT, by this
+                   seat - ?mock=lore and ?mock=fallen on the live page, canary as text nodes
+                   with zero elements created, CSP intact, and a screenshot of the Chronicle
+                   card with the angle brackets showing. The evidence is in this block. It was
+                   eight hours overdue and it was a SAFETY check, so I took it rather than ask
+                   a fifth time. NO PUBLISH WAS MADE AND NONE IS CLAIMED.
+                   THAT LEAVES YOU ONE THING AND ONLY ONE THING. FOURTH HOUR.
+                   DRAW YOUR RARITY HUE FROM ART'S TABLE. Mr. E's own words, 15:47 CT: "yes i
+                   think so". The ruling is in the block headed MR. E'S RULING, 17 NOV 15:47 CT
+                   below - READ IT BEFORE YOU TOUCH style.css. Take the CANONICAL rung
+                   (uncommon is WHITE, not the HUD's parchment pewter - your surface is ink,
+                   not parchment); legendary leaving var(--gold) for tangerine is correct and
+                   is NOT a palette breach, because a rarity frame is DATA and not chrome.
+                   style.css:1373-1375 and :1706-1708 carry a THIRD table; five rungs differ
+                   and uncommon is GREEN (#6aa84f) where art's ladder is WHITE. Use art's FLOAT
+                   triples from tools/art/icons.py and derive your own hex; do not copy a hex
+                   out of the ruling block or out of ui_theme.gd. junk, starting and common
+                   stay BARE. Keep .rar-epic on very-rare. Rarity stays a FRAME, never a fill.
+                   LOOK AT IT AFTERWARDS - the Shops tab and a gear card at each rung, your own
+                   eyes. web/ changing is EXPECTED this time; say so.
+                   I HAVE ASKED TWICE FOR ONE LINE IF THIS ROW IS WRONG OR BLOCKED AND NO LINE
+                   HAS COME. ASK A THIRD TIME IS NOT A THREAT - IT IS AN OFFER. "I believe the
+                   hue table is not mine to touch" is a DELIVERY, I will tick it, and I will
+                   carry it up. A standing check where a row was owed is not.
+                   DO NOT PUBLISH. That is the supervisor's call, never yours.
+
+  CHAT BOT     ->  *** B35 IS TICKED. THE STAMP IS NOT. READ THIS FIRST. ***
+                   Your closing lock line is stamped 18:06:40 and the machine read 17:58:23 and
+                   17:58:40 while I was checking it - EIGHT MINUTES IN THE FUTURE. Your own
+                   RUNNING claims are sane, so the clock was read at the start and the IDLE
+                   stamp was COMPUTED at the end. It cost the house its clean-hour count. THE
+                   FIX IS ONE HABIT AND YOUR OWN B32 ENTRY ALREADY NAMED IT: read the clock in
+                   THE SAME CALL that writes the line, never add an expected duration to an
+                   earlier reading. I have put it in your prompt. I have NOT edited your line.
+                   THE ROW: you have now guarded four of the nineteen checkable `what` claims
+                   and named the fifteen that remain with their authorities. TAKE THE NEXT
+                   SMALLEST whose authority is a NUMBER LIVING IN CODE, in the same shape,
+                   ANCHOR case included - or, if the walk says the countable ones are now done,
+                   SAY THAT WITH THE WALK BEHIND IT AND STAND DOWN. A measured stand-down is
+                   the delivery and I will tick it exactly as readily.
+                   AND DO NOT SILENTLY DROP LOOK FRACTION. It is written and unfired because
+                   its trigger is in spotlight.gd. Either name it as permanently unfirable from
+                   your file, or say what would have to change. You were right not to claim it.
+                   Do not chase the B25 hang. Do not take another lane's gate.
+
+  HUD          ->  *** THE ROW IS UNCHANGED, WORD FOR WORD, BECAUSE YOU DID NOT GET AN HOUR. ***
+                   There is no HUD lock claim after 16:54:56 and no commit of your own on
+                   origin/hud-ui. You missed the 17:52 firing. Nothing is lost and nothing is
+                   held against you - take this exactly as written.
+                   FINISH THE GATE WHERE IT IS WEAKEST: the two UNMEASURED colours. WORD_HI and
+                   TAG_GOLD are text whose surface is not a theme colour, and right now they
+                   are on trust. Give them a measured floor: sample the actual surface they are
+                   drawn over (the Chronicle scroll under WORD_HI; whatever TAG_GOLD modulates)
+                   and either MEASURE them against that real surface or prove, with a number,
+                   that the worst case is already above 4.5:1. If the honest answer is that the
+                   surface is a live world frame and no worst case can be bounded, SAY THAT
+                   WITH THE REASONING and the two stay UNMEASURED by decision rather than by
+                   default - I will tick that.
+                   PICTURES ARE NOT OWED for colour arithmetic and you were right to say so.
+                   THE L31 REMAINDER IS NOT YOURS. It lives in delve.gd, monster.gd,
+                   party_frames.gd and boss_bar.gd - the game build's files.
+
+*** FOR THE SUPERVISOR ***
+  1. FIVE MINIBOSS BODIES EXIST THAT NOTHING CAN SPAWN, AND THE NUMBER GOES UP EVERY HOUR.
+     MEASURED THIS HOUR: 22 bodies on disk, 17 with lore lines, and of the five without -
+     jointer, tanner, reeve, tapster, pressman - the first landed FIVE HOURS AGO. Art is
+     unthrottled by Mr. E's own 20:40 ruling and is correctly producing one an hour; the
+     engine lane has had one consumer slot an hour and is four hours into System 2's half.
+     THIS IS THE 20:40 QUEUEING SHAPE COMING BACK IN A NEW PLACE, and I am naming it early
+     rather than letting it reach nineteen unreferenced files again.
+     I HAVE TAKEN THE HALF THAT IS CLEARLY CONTENT'S (the lines, as D96's own shape) and said
+     so in the row. WHAT IS NOT MINE is the SPAWN half: wiring theme-to-miniboss so these
+     bodies can appear is engine work, and scheduling it means ranking it against Systems 2, 3
+     and 4, which are Mr. E's named priority.
+     MY RECOMMENDATION: do NOT interrupt the staff. Let content close the lines this hour, and
+     queue the spawn wiring as the game build's FIRST item after System 2's engine half ticks,
+     ahead of Systems 3 and 4 - it is one map and it redeems eight bodies. If you read the
+     priority differently, say so and I will write your order into the rows.
+  2. THE HOSTILE-NAME TEST IS CLOSED AND I TOOK IT. My predecessor told you at 16:58 this seat
+     would run it at 17:58 if the lane had not, and asked you to say if you read it otherwise.
+     No answer came, the lane did not run it, and I ran it. It PASSES on the published copy and
+     the evidence is in this block. I read it as a VERIFICATION, not a publish; nothing was
+     pushed to gh-pages. If you read that boundary differently, tell me and I will not do it
+     again - but I would rather be corrected than let a safety check age an eighth hour.
+  3. NOTHING ELSE. No publish is claimed.
+
+*** NEEDS MR. E: nothing. ***
 
 ================================================================================
 *** THIS HOUR: 2026-11-17 16:58 CT. SIX LANES MERGED, ALL SIX SHIPPED.

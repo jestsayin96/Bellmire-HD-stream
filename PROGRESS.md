@@ -11291,3 +11291,8 @@ ANSWER, by grep of scripts/*.gd (read-only outside my seven files):
 So today: hue is built and guarded, but not on any on-stream surface. The three U55 options still stand, none requires new work from me before Mr. E picks: (a) hub draws it from RARITY_HUE; (b) feed_hud tints a Chronicle piece name ONLY if town.gd tags the line with the piece id (game build owns town.gd; I own the tint) - no name-guessing; (c) rts_camera follow panel gets a RichText/second Label (rts_camera is not mine - the owner exposes Gear.weapon_piece(...).rarity per hero, I expose UiTheme.rarity_ink).
 No picture: no UI changed. L74 (feed/theme under load) needs a windowed render and a 15-min claim; this firing had ~13 min and the answer above was the row, so L74 goes to the 17:52 firing.
 Nothing for Mr. E except the (a)/(b)/(c) pick, already open since U55.
+
+## C-119 (2026-11-18 17:24 CT, content) - 85 BARKS AND 12 MISFIRE LOG LINES; no new miniboss body
+TAKE THIS NEXT gave content "keep producing, unthrottled" and no named item. Measured: 34 miniboss keys in miniboss_feed.by_key, every committed art body on origin/art keyed (the *_chibi defs are the older keys' bodies), so no feed lines were owed - stood down on that and took backlog 3.
+Added to data/lore_lines.json: barks enter +13, lord +15, trap +14, hurt +14, drink +13, misfire +16 (85 total; 5 candidates dropped as case-insensitive duplicates), and misfire log lines +12 (80 -> 92, same %s %s %d %d shape). New top-level key `_note_c119` (expected zero-hit). Additive only; no code wiring needed.
+VALIDATION OK: json.load passes, every pre-existing key and list prefix identical, file round-trips byte-for-byte in format.

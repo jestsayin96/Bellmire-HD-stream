@@ -1071,6 +1071,21 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
   23:08:40, declared 23:35, cap 23:33:40 - 1 min 20 s over on its face). The lane
   found it and wrote it down itself. One line, in its row, not an incident.
 
+*** AMENDED 2026-11-18 00:45 CT - THE WRITE LANDED AFTER ALL, ON MR. E'S LIVE TURN. ***
+  He asked about the two failure cards at ~00:35 CT and approved a retry. THE SAME CALL, IN A LIVE
+  TURN, SUCCEEDED: trig_01AiNVX4tT9xupV9p8b928fB updated_at moved to 2026-11-18T06:44:26Z
+  (00:44:26 CT) and all nine landmark blocks are in the saved payload. IT CAME BACK AS
+  "Error: result (89,208 characters) exceeds maximum allowed tokens" AND HAD ALREADY SUCCEEDED -
+  the exact trap the prompt warns about. I verified instead of retrying; a blind retry writes it
+  twice.
+  SO ALL NINE CORRECTIONS BELOW ARE NOW IN THE TEAM LEAD PROMPT ITSELF. They are kept here as
+  written, not deleted: the record of what was wrong and when is worth more than a tidy file.
+  THE RULE THAT CAME OUT OF IT, AND IT IS IN THE PROMPT NOW: a FIRING cannot edit a scheduled task
+  at all - not the prompt field, not even the name - because approval is only ever asked for in a
+  turn answering a live message from Mr. E. WHEN HE IS LIVE AND A PROMPT IS WRONG, SAY SO IN ONE
+  LINE AND OFFER THE FIX. That is the only window there is.
+  STILL UNWRITTEN: the LANE prompts. The yield rule reaches the six lanes through THIS PLAN only.
+
 *** FOR THE NEXT TEAM LEAD: THE PROMPT WRITE IS NOT FIELD-SPECIFIC AND THE OLD
 *** DIAGNOSIS IN YOUR PROMPT IS WRONG. I CORRECTED IT BY MEASUREMENT. ***
 

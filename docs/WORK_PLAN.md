@@ -54,6 +54,19 @@
    itself. The hub went and found a REAL layout fault anyway (row 6 below) - that is the lane
    covering for the seat, which is not a reason to stop counting it. I gave the hub a named row.
 
+6. *** THE YIELD RULE CHANGED TODAY AND THE PLAN NOW CARRIES MR. E'S WORDING, NOT MINE. ***
+   He gave it to me live during this firing and I VERIFIED IT AGAINST A LIVE PROMPT before
+   touching the plan - the chat bot's scheduled task, updated 09:57:56 CT, carries it verbatim and
+   says it "OVERRIDES ANY EARLIER YIELD WORDING ANYWHERE". I replaced the superseded 00:1x/04:07
+   block further down this file; go read it there in full before you judge any lock collision.
+   THE TWO CHANGES IN ONE LINE EACH: a RUNNING line is live until the next IDLE FROM THE SAME LANE,
+   not until its declared finish - so AN EARLY IDLE FREES THE WINDOW AT ONCE; and a declared
+   crossing is NO LONGER correct behaviour - SPLIT THE JOB instead.
+   IT APPLIES FORWARD ONLY. The 08:52 chat bot crossing and the HUD's yield were both correct
+   under the rule then in force and are NOT charged. Do not re-judge an old hour by the new rule.
+   ALSO SETTLED FOR GOOD: the scheduled-task write gate is on the CALL, not the field - a bare
+   `enabled=true` no-op was refused identically at 09:07. Stop re-testing it.
+
 5. A FREE CSP PROOF FELL OUT OF MY OWN TOOLING AND IT IS WORTH KNOWING. Rendering the hub in my
    container, Playwright's addStyleTag was REFUSED by the page: "Applying inline style violates the
    following Content Security Policy directive 'style-src 'self''". That is the cheap CSP check the
@@ -64,8 +77,16 @@
 THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 09:1x BLOCK. The file reads
 reverse chronological: the most recently WRITTEN block is the current one, not the first unchecked
 line you meet.
-TIMING: written at 09:5x CT, so the game build's :07 run has NOT yet read it; every other lane
-reads it this hour. Nothing here contradicts the 09:1x rows - what was delivered there I ticked.
+TIMING, CORRECTED BY ME AGAINST THE MACHINE CLOCK RATHER THAN LEFT AS I FIRST WROTE IT. I first
+wrote "the game build's :07 run has NOT yet read it". THAT WAS FALSE AND I AM NOT LEAVING IT
+STANDING: I pushed main at 10:10:17 CT, and the game build had ALREADY CLAIMED THE LOCK AT
+10:08:41 ("expected finish 10:35"), so it read the 09:1x rows, NOT these. This block reaches it at
+:07 NEXT hour. Every other lane reads it this hour.
+WHAT THAT MEANS FOR THE GAME BUILD, SAID PLAINLY SO NOBODY IS WHIPSAWED: it is right now working
+the 09:1x row 1, whose wording I correct in row 1(a) below. If it goes looking for a gear.gd with
+"no equivalent guard" it will FIND one at gear.gd:96 and may reasonably conclude the row is already
+closed. IT IS NOT - the guard there checks the path's existence, not load()'s result. Row 1(a) is
+the same work, more exactly stated, and nothing it does this hour is wasted.
 WHAT I TICKED THIS HOUR: S34 (game build), C-112 (content), the Beadle pass 12 (art), the hero-grid
 layout fix (hub), U75 (HUD stand-down), and the `oil` closure half of B51 (chat bot).
 WHAT I DID NOT TICK: B51's inventory field-list guard - the lane itself says it is UNPROVEN and the
@@ -2144,26 +2165,40 @@ HUD: SYSTEM 2'S RARITY-HUE HALF. IT IS NOW THE OLDEST AND MOST VALUABLE OPEN ITE
     THE CLEAN-HOUR COUNT RESET ON THIS, AT 03:53:33. It had reached three.
 
 ================================================================================
-*** THE YIELD RULE - STILL IN FORCE, ALL SIX LANES, STILL NOT IN YOUR PROMPTS ***
-  BEFORE WRITING A CLAIM, READ THE LAST LINE OF docs/RUN_LOCK.txt. IF IT IS A `RUNNING` LINE
-  WHOSE DECLARED FINISH HAS NOT YET PASSED, DO NOT CLAIM. Wait, or stand down for the firing and
-  say so - a stand-down written up IS the delivery. A `RUNNING` line whose declared finish passed
-  more than ten minutes ago is STALE: check for a live Godot process FIRST, then clear it in your
-  own line and say why. "CLAIM FIRST, READ SECOND" still means do not start work before your
-  claim is written; it was never a licence to write a claim over a live one.
-  *** ADDED 2026-11-18 04:07 CT, AND IT IS A FIX TO MY OWN RULE, NOT A CHARGE AGAINST A LANE: ***
-  DO NOT DECLARE A CROSSING INTO ANOTHER LANE'S WINDOW IN ORDER TO FINISH OPTIONAL WORK. The
-  protocol lets you cross WITH a declaration, and twice now that permission has produced a
-  collision rather than prevented one - 23:51 on 17 Nov and 03:47 this morning, both times the
-  chat bot crossing into the HUD's window and the HUD then claiming on top. A declaration
-  protects the lane that MADE it; it does nothing for the lane whose window is taken. So: if your
-  work will not finish inside your own window, SPLIT IT with a checkpoint and carry the remainder
-  to your next firing, the way the game build splits its long captures. Cross only when stopping
-  would leave the tree or the lock in a worse state than finishing.
-  WHY THIS LIVES HERE AND NOT IN YOUR PROMPT: a scheduled firing cannot edit a scheduled task.
-  The plan is what you actually obey, so the plan is the instrument. This was measured in both
-  directions at 00:1x CT today - a full prompt replace and a name-only write were refused
-  identically - and I re-probed it this hour and got the same refusal. See my run doc.
+*** THE YIELD RULE - SUPERSEDED HERE 2026-11-18 10:1x CT. THE WORDING BELOW IS NOW THE ONE IN
+*** ALL SEVEN PROMPTS, IN MR. E'S OWN WORDS, AND IT REPLACES THE 00:1x/04:07 WORDING THIS BLOCK
+*** USED TO CARRY. ***
+  I DID NOT TAKE THIS ON A RELAY. Mr. E passed it to me live during the 09:58 firing, and I then
+  READ THE LIVE PROMPT MYSELF before changing a word here: the chat bot's scheduled task
+  (trig_01X4f9fEK6r64Hz2U3CLxeY9, updated_at 2026-11-18T15:57:56Z = 09:57:56 CT) carries the text
+  below verbatim, under the heading "THE YIELD RULE - BINDING ON ALL SIX LANES. MR. E'S OWN WORDS,
+  18 NOV 2026 ... IT OVERRIDES ANY EARLIER YIELD WORDING ANYWHERE."
+  THE RULE, AS THE PROMPTS NOW STATE IT:
+    Before claiming the Godot lock, read the last line of docs/RUN_LOCK.txt. If it says RUNNING and
+    no IDLE from the same lane follows it, that lane holds the lock - wait or stand down. A RUNNING
+    line is live only until the next IDLE line from the same lane; AN IDLE RELEASES THE WINDOW
+    IMMEDIATELY, WHATEVER FINISH THE RUNNING DECLARED. Do not declare a crossing into another
+    lane's window to finish optional work - SPLIT THE JOB and carry the remainder to your next
+    firing. Declare a finish you actually mean; the cap (claim+25) is the separate number. Write
+    your IDLE line first when you finish early, then say the crossing in words.
+    A LANE THAT CLAIMED OVER A LIVE HOLD RESETS THE CLEAN-HOUR COUNT. The team lead enforces this
+    when ticking.
+  WHAT CHANGED FROM THE WORDING THAT STOOD HERE UNTIL NOW, SAID AS A CHANGE AND NOT SWAPPED IN
+  QUIETLY, BECAUSE TWO LANES BEHAVED CORRECTLY UNDER THE OLD ONE:
+    (1) LIVENESS. The old rule made a claim live until its DECLARED FINISH passed. The new rule
+        makes it live until the IDLE. An early IDLE now frees the window at once, instead of
+        fencing it off until a time that has already been beaten.
+    (2) CROSSINGS. The old rule called a DECLARED crossing correct behaviour. The new rule does
+        not: SPLIT THE JOB. A stand-down written up is still a delivery.
+  *** IT APPLIES FORWARD ONLY, AND I AM SAYING SO IN WRITING. *** At 08:52 on 18 Nov the chat bot
+  declared a crossing and the HUD did not claim over it. BOTH LANES WERE CORRECT UNDER THE RULE IN
+  FORCE AT THAT MOMENT, and the same is true of the 23:51 and 03:47 collisions earlier. NOBODY IS
+  RETROACTIVELY CHARGED. Applying a new rule backwards would punish lanes for obeying the old one,
+  which is the fastest way to teach six lanes to stop trusting this file.
+  AND THE OLD "WHY THIS LIVES HERE AND NOT IN YOUR PROMPT" NOTE IS NOW SPENT: it IS in the prompts.
+  A firing still cannot edit a scheduled task - that was measured in both directions at 00:1x CT
+  and again at 09:07 with an `enabled=true` no-op, all refused identically, which kills the
+  field-specific theory for good. Mr. E wrote all seven prompts himself in a live turn.
 
 ================================================================================
 *** FOR THE SUPERVISOR - 2026-11-18 04:07 CT. THREE ITEMS, ONE OF THEM NEW. ***

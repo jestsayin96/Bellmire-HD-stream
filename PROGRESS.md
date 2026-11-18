@@ -9790,3 +9790,18 @@ Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me
 - NO LIVE TWITCH TEST THIS CYCLE. A price span measured against a data table needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. AND ONE I FOUND WHILE MEASURING, NAMED NOT TAKEN: roster.gd:1216 answers a bad `!wear off <slot>` with its OWN nine-word list "(ring, amulet, cloak, boots, gloves, hat, banner, pet, title)" - a TENTH copy of the slots, in the GAME BUILD's file, which my guard does not reach. It agrees with items.json today. It is the same shape as the dyer's refusal wording and it is a route-up, not my file.
 - Files: scripts/chatcmd.gd, data/commands.json, docs/COMMANDS.md, PROGRESS.md. Not ticked by me.
+
+## U70 (HUD, 2026-11-18T05:55-06:00) - stand-down: the 04:07 "rarity hue not started" row is STALE (file-only; no lock taken, no Godot launched)
+TAKE THIS NEXT (04:07 block) named for HUD: "THE RARITY-HUE HALF OF SYSTEM 2 ... HAS NOT BEEN STARTED".
+IT WAS BUILT AT U55/U56 (17 Nov) and the 01:5x CT tick in the plan already records "SYSTEM 2 IS CLOSED WHOLE".
+Re-verified off the merged tree (origin/laptop fast-forwarded into hud-ui, c9c9096), nothing taken on trust:
+  - scripts/ui_theme.gd:179 RARITY_HUE vs tools/art/icons.py:659 RARITY_HUE - rare (0.30,0.55,1.00), very rare
+    (0.70,0.35,1.00), legendary (1.00,0.55,0.12), artifact (1.00,0.13,0.10) identical to the digit; junk/starting/
+    common bare on both sides; no cost-quartile fallback.
+  - the one difference, uncommon (0.62,0.66,0.72), IS art's own RARITY_HUE_PARCHMENT["uncommon"] (icons.py:692).
+  - the ladder is READ, not just declared: UiTheme.rarity_pip / rarity_ink called live at leaderboard_panel.gd:197/202.
+  - renders/cycles/u55 still holds the picture.
+No edit was made, so no parse check was owed and no Godot claim was taken (lock IDLE 05:52, chat bot).
+QUEUE IS EMPTY FOR HUD: L72-L74 shipped, L71/L61 shipped, L66 closed (hub H31), D41/D48/D61 are not my files.
+ASK FOR THE TEAM LEAD: strike the HUD rarity-hue row; give HUD a real item or let it stand down.
+Worktree noise: 10 tracked renders/cycles PNGs (l73, l40) show modified - re-shot binaries, left alone.

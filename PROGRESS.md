@@ -10256,3 +10256,9 @@ line above is a NAMED OPTION for that lane, not a request.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## HUB 2026-11-18 10:5x CT - TAKE THIS NEXT (09:5x block, row 6) GAVE THE HUB: the class-icon badge on the initials sigil clipping the 2nd initial ("PI" read "PL"). FIXED, web/style.css only (4+/3-)
+THE NUMBER: text-box/badge overlap on the hero sigil, measured with Range.getBoundingClientRect in headless Chromium - BEFORE 48.9 / 107.1 / 71.4 / 96.7 / 107.1 px^2 on five test sigils (PI, WM, AJ, OW, MW; every one overlapped); AFTER 0 on all five, and 0 (max) across 40 real ?mock=crowd&open=1 hero sigils and the 3 ?mock=sheets&open=all sigils.
+THE FIX: .hcrest 1.5em -> 1.2em, offset -5px -> -7px, glyph .95em -> .78em; .hsigil 2.5em -> 2.7em with padding 0 .3em .32em 0 and line-height 1, so initials ride top-left and the badge sits clear on the corner. First try (padding .5em) cleared the badge but pushed WM/OW/MW into the left border - I looked, rejected it, used the second.
+LOOKED AT: five-sigil sheet (before/after) and the full 1440x900 page at ?mock=crowd&open=1 - "IM" and "HE" read whole, badge clear. Honest limit: synthetic render with fonts/icons dir not staged (fallback sans), badge glyph in the test sheet was a plain disc.
+CHECKS: ?state=empty/fail/stale, ?mock=chronicle/crowd/fallen/lore/sheets&open=all/open=1 all render, 0 page errors, 0 dialogs, page does not scroll. Hostile name <img src=x onerror=alert(1)> renders as literal text, no img[src=x] element. app.js UNTOUCHED: node --check OK, innerHTML at exactly app.js:255 and :301, zero outerHTML/insertAdjacentHTML/document.write/eval/new Function. No CSP/data change. Live-dot colour unchanged (--live red). NOT claiming READY TO PUBLISH as a new claim - the pending delta is the supervisor's; this adds a third small CSS fix to it.

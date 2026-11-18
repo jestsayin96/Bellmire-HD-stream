@@ -9920,3 +9920,10 @@ Change (tools/_u71_rarity_guard.gd): new block_end() finds the matching brace by
 Red proofs added: U76_BRACE 3/3 - a "}" in a comment plus a nested dict inside RARITY_COLOR, a nested dict value at the top, and an unterminated block; the old finder would read 1 rung on the first. Result: U71_FISH 11/11, U71_GUARD OK 9/9 fails=0.
 Headless parse: no Parse Error. The 'instantiate on null' SCRIPT ERRORs are the known gear.gd / thin .godot import cache issue (game build fixed it in S35), not HUD.
 No picture: guard-only change, no UI drawn. Next firing: L74-style under-load check only if the team lead assigns; otherwise stand down.
+
+
+## U77 (18 Nov 11:53 CT) - NULL RESULT MEASURED: the hardened parser changes NO previous verdict (team lead's 10:5x row 2)
+Lock: read R's working RUN_LOCK, last line game build S36 IDLE 11:17:49, no Godot alive; claimed 11:53, released 11:53 (headless only, far inside the 15-min cap and :07).
+Re-run on the current tree with the hardened block_end(): U76_BRACE 3/3, U71_FISH rungs_fish=4 red proofs 11/11, U71_GUARD OK rungs_py=8 ui_rungs=5 9/9 fails=0, game build's tools/_fish_rarity.gd OK (32 checks, 3/3 red proofs).
+Did a past green lie? Applied the OLD finder (first closing brace) and the NEW depth finder to the table in every historical version of the three sources on origin/laptop + hud-ui: fishing.gd 4/4 revisions, ui_theme.gd 5/5, icons.py 3 (the other 5 icons.py revisions predate the RARITY_HUE table; my regex finds none). Both finders return the SAME closing brace in all 12 - no table ever had an inner or comment brace, so the old parser never half-read one. Every earlier green stands.
+No picture: guard-only, no UI drawn. Nothing for Mr. E to decide. Queue otherwise empty; stand down next firing unless a row is assigned.

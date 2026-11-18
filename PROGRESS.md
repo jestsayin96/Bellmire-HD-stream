@@ -10182,3 +10182,77 @@ NOT CLAIMED: I do NOT claim READY TO PUBLISH. web/ changed (style.css, +4 rules)
 - Looked at: no picture, nothing changed in a game file. Only PROGRESS.md.
 - Standing note for the owner of fishing.gd parse_fish(): it ends the block at the FIRST "}" after the const (U74b observation, unchanged).
 - Not ticked by me.
+## B51 - `oil` IS CLOSED AS UNGUARDABLE FROM THIS LANE, AND THE FIRST FIELD-LIST GUARD IS WRITTEN BUT UNPROVEN (chat bot, 2026-11-18 09:4x CT)
+
+THE GATES ARE OWED. I did not run a single Godot process this cycle and I am not claiming one.
+The lock was IDLE from 09:17:39 CT (game build S34) with no Godot process alive when I checked at
+09:49:43 CT, so the engine was genuinely free and the window was mine. I spent it reading and
+measuring instead, and by the time the guard below was written the HUD's :52-:07 window was open.
+A battery started at :55 would have been running inside another lane's claim, so I did not start
+one. THE NEW CODE HAS NOT PARSED. B50's first battery went red on a duplicate `b_d` in my own new
+scope; this block is held back as a CHECKPOINT on `chatbot` exactly so that cannot be mistaken for
+a proven arm. PARSE, L14_TEST, TWITCH_PARSE, COMMANDS_DOC, the baseline guard_faults() reading and
+three red proofs are all owed, and they are the first thing my 10:45 slot does.
+
+THE FOURTH AND LAST OF B35'S NUMERIC CLAIMS IS CLOSED WITH A REASON, NOT A GUARD.
+The team lead's 09:5x row called `oil`.what's "two delvers" the obvious next and my own named
+leftover. It is not guardable from this lane, and that is a measurement, not a preference:
+  THE AUTHORITY IS AN INLINE LITERAL. delve.gd:161 burns
+      oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
+  so a floor costs max(1, ceil(bodies / 2)) flasks. One flask covers two bodies and three bodies
+  cost two, which is exactly what the sentence publishes. THE `0.5` HAS NO CONSTANT BESIDE IT -
+  delve.gd declares DELVE_Y and REACH and nothing for the burn - so there is no `Delve.X` for a
+  guard to reference the way `look` references Spotlight.LOOK_S.
+  READING THE FILE'S TEXT AT RUNTIME WOULD BE WORSE THAN NO GUARD. FileAccess on
+  res://scripts/delve.gd works from source but Godot 4 exports scripts as binary tokens, so in a
+  shipped build the read fails, the ANCHOR arm fires, and the guard reports a fault WHERE THERE IS
+  NO DRIFT. A guard that goes red on export and stays silent on a retuned burn rate is theatre. I
+  am not shipping one and I am not shipping a mirror constant in my own file either, which would
+  compare my sentence against my own copy and catch nothing.
+  THE CLAIM READS TRUE TODAY, FOR THE RIGHT REASON. Three statements agree: the sentence, the
+  comment at delve.gd:25-28 ("one flask per two bodies a floor"), and the arithmetic at :161.
+  WHAT THE GAME BUILD LANE WOULD HAVE TO EXPOSE: one line - `const OIL_PER_BODY := 0.5` on Delve,
+  used at :161 in place of the literal. Then this lane can bind to it in a single cycle. It is
+  their file and their call; I am not asking for the change to be made, only naming the one thing
+  that would make the claim guardable.
+
+A SUSPECTED VIEWER-FACING FAULT IN MY OWN FILE, OVERTURNED BY MEASUREMENT.
+`inventory`.what publishes `dye` and inventory()'s format string (chatcmd.gd:75-76) has no dye in
+it. I nearly wrote it up as a promise the line does not keep. IT IS NOT A FAULT: roster.gd:1276-77
+appends "dyed <colour>" from `cos.dye` inside worn_line(), so dye reaches the line through the same
+call as accessories. Recorded so the next sweep does not re-raise it, the way B50 recorded the
+three `local_*` verbs.
+
+WHAT IS WRITTEN AND UNPROVEN: THE `inventory` FIELD LIST, THREE ARMS.
+Of B34's fifteen unguarded `what` claims, the four numeric ones are now all closed. ELEVEN REMAIN
+AND THEY CARRY LISTS. This is the one whose line is built in THIS FILE rather than another lane's
+printer, so the sentence and the code that must honour it are both mine. The drift that could pass
+in silence here is not a wrong number - it is a field promised and never printed.
+  The guard maps each of the nine published fields to what delivers it: six to a Roster call
+  (title_of, weapon_name, armour_name, worn_line for both accessories AND dye, brews_line) and
+  three to what inventory() prints itself (the `oil` and `gold` hero keys, and the fish block).
+  It then asks the authority whether the call still EXISTS - Roster's own script method list, read
+  off the class with no instance made.
+  INVENTORY ANCHOR - the sentence lost its "carries: " lead-in; the field list is unchecked.
+  INVENTORY GHOST  - a published field nothing delivers (my sentence grew).
+  INVENTORY SOURCE - a mapped Roster call is gone (the roster lane renamed or dropped it).
+  GHOST and SOURCE are INDEPENDENT and do not share an elif: one edit can add a field and drop a
+  printer. This is NOT circular - GHOST watches my own sentence, SOURCE watches another lane's
+  code, and neither compares my file to a copy of itself.
+  PREDICTED BASELINE, AS AN EMULATION AWAITING THE REAL GATE: all nine fields resolve, GHOST [],
+  SOURCE [], no arm fires. I emulated the parse and the method lookup in python off roster.gd's
+  own `func` lines. THE ENGINE HAS NOT CONFIRMED IT. If the real gate disagrees, THE GATE WINS.
+  THE THREE RED PROOFS OWED, all inside my own two files: strip "carries: " from the sentence
+  (ANCHOR), add a field no printer answers (GHOST), and point one map entry at a method name
+  Roster does not have (SOURCE) - that last one mutates my own guard code, not another lane's
+  file, and is restored byte-identical. data/commands.json is UNCHANGED this cycle
+  (md5 0ed191404157221abd8a184cc580dfa5) and docs/COMMANDS.md is untouched, so no regeneration was
+  owed and none was done.
+
+NOTHING FOR THE GAME BUILD LANE TO DO. twitch_eventsub.gd untouched; twitch_reply(user_login, text)
+unchanged, still no @name and no rate limiting. The guard adds a read of Roster's method list - a
+class this file already holds an instance of, so no new dependency and no cycle. The `OIL_PER_BODY`
+line above is a NAMED OPTION for that lane, not a request.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

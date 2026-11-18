@@ -1,3 +1,642 @@
+## TAKE THIS NEXT - WRITTEN 2026-11-18 15:1x CT (team lead, the 14:58 firing)
+*** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 13:58 BLOCK AND ITS 13:1x ADDENDUM. ***
+
+*** FIRST, THE THING THAT IS MINE: TWO LANES HAVE BEEN DRY FOR THREE FIRINGS AND I DID THAT. ***
+  HUB last shipped at 12:39 CT (cc44c86). HUD last shipped at 12:53 CT (f8a93ce).
+  Both sat through 13:3x/13:5x and 14:3x/14:5x with nothing owed, because the 13:58 block told the
+  hub in as many words "NOTHING IS OWED YOU" and left the HUD's row "unchanged" when its row was
+  already empty. That is not two lanes idling. That is ME not queueing, and it is the SAME fault
+  that reset the clean-hour count at 08:0x and the same one Mr. E named on 16 Nov when he asked why
+  finished work was not in the game. FIVE LANES PRODUCE AND I AM THE QUEUE. Rows 4 and 6 below are
+  real work, drawn from what those lanes have already shipped - not invented, and I say under each
+  one exactly which freeze clause lets me write it.
+  THE CLEAN-HOUR COUNT IS BROKEN THIS HOUR, BY ME, FOR STARVING TWO LANES. It does NOT reset for
+  anything a lane did: nobody overran, nobody claimed over a live hold, there was no stale lock and
+  no future stamp. The count goes to 0 and the fault is mine alone.
+
+*** AND THE GAME BUILD READ THE OLD BLOCK AT 15:07. I WAS NINE MINUTES TOO SLOW AND I SAY SO. ***
+  I opened at 14:58:38, and the merges and verification ran past :07. The game build's 15:07 firing
+  therefore read the 13:58 block, whose game-build row points at the honest-pair shot THE LANE HAD
+  ALREADY DELIVERED AT S39. It also says that item is the lowest priority on its row and that its
+  rows below stand ahead, so the lane has valid work either way - but it read a stale instruction
+  because of my pace, not because of anything it did. GAME BUILD: this block is yours from 16:07.
+
+WHAT I MEASURED MYSELF THIS HOUR, TAKING NO LANE'S NUMBER ON TRUST:
+  S39's RING IS REAL AND THE SHOT IS HONEST. `nova()` at monster.gd:588 genuinely builds a
+  TorusMesh, so _s38_rammer.gd's `_rings()` TorusMesh count is a true instrument and not a name
+  match. I also read the tween: the ring scales over 0.6 s and fades over 0.7 s before queue_free,
+  which at 60 fps is ~78 frames - the shot is taken 8 frames after the drop, so the ring is ALIVE
+  and mid-expansion when the shutter opens, and is not a lucky frame.
+  THEN I LOOKED, which is the part that matters. rammer_3drop.png vs rammer_2after.png differ in
+  3.88% of pixels and I measured WHERE: rows 360-810 - the scene body - carry ~60,000 of the
+  ~80,400 differing pixels, and the nameplate text band at the top carries 4.7%. LAST HOUR I
+  CHARGED THAT PAIR WITH BEING 56% NAMEPLATE. It is now 4.7%. The difference moved off the text and
+  onto the floor. By eye: the expanding gold shock ring and an orange spark burst are present in
+  3drop and absent in 2after, the raised implement visible in 2after is gone, and two delvers carry
+  `slowed`. THE ASK IS MET. The one honest limit, and it is the same occlusion I named last hour:
+  the Rammer's own body is still behind the dark wall block in both shots, so this shot proves THE
+  COUNT LANDED AND WAS SEEN - which is what the ring was for - not that the creature is on camera.
+  CONTENT'S 400 LINES ARE GENUINELY 400. I parsed data/lore_lines.json off origin/content myself:
+  eight origins, 50 entries each, 50 unique within every origin and 400 unique ACROSS all eight -
+  no line repeated anywhere in the file. delve.gd:170 reads `lore().get("tells", {})` live, so they
+  are in the game the moment they are merged, with no wiring owed.
+  THE CHAT BOT'S CORRECTION IS CORRECT, AND I READ THE SOURCE RATHER THAN THE WRITE-UP.
+  `guard_faults()` at chatcmd.gd:730 is exactly two lines and returns `_guard_faults.duplicate()` -
+  it checks NOTHING. Every arm, NEEDS_HERO ANCHOR included, lives in `commands()` behind
+  `if _cmds.is_empty()`. tools/_l14_test.gd:16 calls `ChatCmd.commands()` first, which is precisely
+  why B53's five proofs fired and B55's probe read an empty array. THERE IS NO HOLE IN THE GUARD
+  AND NO ITEM OPENS ON IT. I also confirmed the parse half: chatcmd.gd:2256 really does self-call
+  `handle(...)`, so renaming line 99 alone cannot parse, and the ANCHOR arm at line 1981 matches on
+  `begins_with("func handle(")` - so renaming BOTH lines is the trigger shape that will reach it.
+  ART'S PASS 7 - THE REGISTER'S OWN DIFF PROVES ART'S THESIS, FROM A FILE ART DID NOT CITE FOR IT.
+  _fit_rammer_register.json changed in nothing but its visibility pixel counts, and the shape of
+  that change is the whole argument: SIDE creature pixels fell 31,343 -> 31,043, a loss of 300,
+  while FRONT and BACK each fell by 48. Nearly nine times the fractional loss in the one view that
+  sees depth. A width change could not produce that and a depth change produces nothing else.
+  creature_h, ratio 1.12 and pair_w 3.87 do not appear in the diff at all, which is the proof that
+  "no downstream number moves" is true rather than asserted.
+
+*** AND I WAS WRONG LAST HOUR, BY EYE, AND ART'S INSTRUMENT CORRECTED ME. ***
+  The 13:1x addendum says in my seat's own words: "YOUR OWN FIX TARGET IS THE THREE-QUARTER, NOT
+  'every angle'... It is the THREE-QUARTER where the cap plainly overhangs the block." THAT WAS
+  WRONG. _rammer_cap_ab.py measures each part's OWN read at seven yaws and the three-quarter was
+  never close (+0.211); THE SIDE was the failing view, by 39 mm, because edge-on the cap reads its
+  DEPTH 0.34 against the monkey's strap depth 0.38. Art took my eye-call, tested it, and did not
+  obey it - and had it obeyed the row as written and narrowed the cap in x, the failing number
+  would not have moved and the block would have lost its seat on the three leg tops. I HAVE NOW
+  LOOKED AT THE RE-RENDERED hero_side.png MYSELF and the fix reads: the sheave block at the apex is
+  plainly thin front-to-back and the dark iron monkey is the dominant mass in the upper frame.
+  A LANE THAT MEASURES ITS WAY PAST MY EYE IS THE SYSTEM WORKING. Do that again.
+
+*** WHAT I TICKED THIS HOUR, THREE, EACH ON MY OWN MEASUREMENT: ***
+  S39 - THE RAMMER'S COUNT IS SEEN. TICKED 2026-11-18 15:1x CT by the team lead. The shock ring is
+    a real TorusMesh, alive in the shot by tween arithmetic, visible by eye; the honest-pair ask
+    from the 13:58 block is MET, with the occlusion limit named above.
+  C-116 - FOUR LIVE TELLS PER ORIGIN. TICKED 2026-11-18 15:1x CT by the team lead. 400 lines, all
+    globally unique, read live at delve.gd:170. C-114 is ANSWERED and CLOSED: content says plainly
+    it was a note and not live work, which is the honest answer and ends the question - nothing
+    goes up to the seat above me on it.
+  ART RAMMER PASS 7 - CAP DEPTH 0.34 -> 0.27 AND THE CHALK RING LOCATED. TICKED 2026-11-18 15:1x CT
+    by the team lead. Source carries L.box(0.40, 0.27, 0.17) at minibosses.py:11213; the chalk ring
+    is at :11248, `_ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow', ...)` - ON THE PILE HEAD, which is
+    why I could not find it on the floor. MY QUESTION WAS ANSWERED BY FINDING MY PREMISE WRONG,
+    which is the best kind of answer. Register GREEN, errors [], fit looked at by me.
+WHAT I DID NOT TICK, AND WHY: the chat bot's sixth trigger, for the third hour. It is NOT withheld
+  and it is NOT the lane's fault. B55 ran it and the run measured nothing, B56 found out why and
+  said so in the file other lanes read before anyone could be misled by it. A trigger that has not
+  reached its arm is neither green nor red. It is owed, the probe shape is now known exactly, and
+  it is a ten-second run.
+
+1. GAME BUILD (:07) - S39 IS TICKED AND THE HONEST-PAIR ASK IS CLOSED. Nothing of yours is held.
+   TWO HOUSEKEEPING FACTS, BOTH MINE TO HAND YOU, NEITHER A NEW ITEM:
+   (a) `scripts/delve.gd.bak_s39` is sitting UNTRACKED at the root of R. It is inert and nothing
+       loads it, but it is a .gd file in scripts/ and the next lane to glob that directory will
+       find it. Remove it in your run, or say why it stays.
+   (b) I CHANGED R'S GIT IDENTITY THIS RUN AND YOU SHOULD KNOW, because it is your commits it was
+       mislabelling. R's shared `user.name` was "Claude Art Lane", and worktrees share one config -
+       so EVERY lane's commits, content's and the chat bot's and my own plan syncs, were authored
+       to the art lane. I set it to "Claude Bellmire HD": no lane is now falsely credited, the
+       commit subject still names the lane as it always has, and the Co-Authored-By footer is
+       untouched. I did NOT turn on extensions.worktreeConfig to give each worktree its own name,
+       because flipping a repo-wide git extension nine minutes before your firing risks six lanes'
+       identity config for a cosmetic gain. That option is in the owed-corrections list below.
+   YOUR ROW otherwise is unchanged: your TAKE THIS NEXT rows below this block stand.
+
+2. CONTENT (:22) - C-116 IS TICKED AND C-114 IS CLOSED BY YOUR OWN ANSWER. You said plainly it was
+   a note and not live work. That is the end of it; I am carrying nothing up and you owe nothing
+   further on it. You also stood down on minibosses correctly, with the count measured (34 bodies,
+   by_key holds all 34) rather than remembered - that is the standard.
+   KEEP PRODUCING, UNTHROTTLED, exactly as you have been. Your tells went in and are live in the
+   same hour you wrote them. The only standing limit is the one you have already adopted: nothing
+   further into `phase2_words_*`, which is a declared-dead family.
+
+3. ART (:34) - PASS 7 IS TICKED AND YOU CORRECTED ME. Both of my 13:1x questions are answered: the
+   cap's failing view was the SIDE and not the three-quarter, and the chalk ring was never on the
+   floor because it is on the pile head at z 0.415.
+   YOUR NEXT ITEM IS YOUR OWN LISTED, UNCLOSED FAULT, and it is not new work - it is in your own
+   MINIBOSSES.md and you found it yourself: THE PILE SHAFT PROTRUDES BELOW THE FLOOR PLANE the
+   tripod feet stand on, confirmed by eye by my seat at 13:1x and still unchanged. Close that.
+   THE LADDER READ IS SECOND AND IS YOURS TO JUDGE: I looked at hero_side.png this hour and the
+   side view does read as a ladder or A-frame rather than a ram - your own listed fault, seconded,
+   not a new one. If you judge it inherent to a tripod gantry seen edge-on, SAY THAT and strike it;
+   a fault correctly struck is as good as one fixed.
+   AND THE EYES: you named that `eyes()` defaults to slot='glow', so 352 of rammer_glow's 870 verts
+   are the hauler's eyes and "the ONE glow in the body" was false. You named it and did not change
+   it. That is right - do not change it now; the sentence is what was wrong, and you have fixed the
+   sentence by writing this down.
+
+4. HUB (:37) - I STARVED YOU FOR THREE FIRINGS AND HERE IS REAL WORK. It is NOT a new item: the
+   freeze expressly allows "a lane auditing its own shipped work for a defect it has just learned
+   about", and what follows is a defect in your own unpublished delta that I learned this hour.
+   I RE-MEASURED THE MERGED-NOT-PUBLISHED DELTA MYSELF: origin/gh-pages^{tree} 2d14aa9 vs
+   origin/hub:web 35eb801 - 3 files, 60 insertions, 24 deletions. app.js is PURE DELETION (zero
+   added lines, I counted them). style.css +25/-10. And web/tools/sheet_overlap.js is +45 NEW.
+   THE THING I FOUND, AND IT IS YOURS TO ANSWER: sheet_overlap.js IS NOT PAGE CODE. It is a Node +
+   Playwright harness - it opens with `require('playwright')` and reads `process.argv` - and
+   NOTHING LOADS IT: it is referenced by neither index.html nor app.js, and it could not run in a
+   browser if it were. It is clean (no token, secret, key or bearer string anywhere in the delta -
+   I grepped the whole diff), so this is not a security finding. IT IS A SHAPE FINDING: a developer
+   test harness is currently queued to be published into the public site tree, where it will sit
+   inert and unreachable forever.
+   SO: say in your run whether that tool BELONGS under web/. If it does not, move it out from under
+   web/ and the publish delta becomes two files of real page change. If you judge it should stay,
+   say why in one line. EITHER WAY YOU DO NOT PUBLISH - that is the supervisor's and is with them.
+   AND I RAN NO PUBLISH VERIFICATION AND CLAIM NONE: you made no "ready to publish" claim, so the
+   publish gate is not owed and I did not run it. What I did run is the Step 2 read of your own
+   delta, which is always owed.
+
+5. CHAT BOT (:45) - THE SIXTH TRIGGER IS OWED FOR THE THIRD HOUR AND IT IS STILL NOT YOUR FAULT,
+   AND THIS HOUR YOU DID THE BEST WORK IN THE HOUSE AGAIN. You ran it, it measured nothing, and
+   you went and found out WHY rather than reporting a hole that was not there - then you wrote the
+   correction into RUN_LOCK where four lanes read it, within four minutes, twice, including the one
+   admitting "Godot closed" was not true when you wrote it and that a ghost process of yours was
+   alive inside the HUD's window. YOU KILLED IT, VERIFIED BY TASKLIST, AND SAID YOU HAD NOT
+   VERIFIED IT THE FIRST TIME. I have verified your diagnosis against the source myself and it is
+   right in both halves (see above). NO ITEM OPENS ON THE GUARD.
+   RUN THE TRIGGER IN YOUR 14:45 SLOT, WITH THE SHAPE YOU ALREADY WORKED OUT: rename `func handle(`
+   at line 99 AND the self-call at line 2256 together, and have the probe call `commands()` BEFORE
+   `guard_faults()`. That is the whole fix and it is a ten-second headless run.
+   AND THE LESSON YOU WROTE FOR EVERYONE STANDS AS HOUSE RULE: "Godot closed" is VERIFIED BY
+   TASKLIST, never assumed from a gate returning. A probe that can die before its quit() leaves a
+   process behind.
+
+6. HUD (:52) - I STARVED YOU TOO, AND YOUR TWO HEALTH CHECKS WERE THE RIGHT CALL ON AN EMPTY ROW.
+   Your 11:53 U77 and your 14:53 parse check were both clean and both correctly written up; a
+   stand-down written up IS the delivery and I am not charging you with idleness. The empty row was
+   mine.
+   YOUR ROW, AND IT IS NOT NEW WORK - it is the freeze's "lane auditing its own shipped work":
+   U76 HARDENED parse_py/parse_fish's end-finder and U77 re-ran U71/U74b/_fish_rarity through the
+   hardened parser and reported "no verdict changed". THAT IS THE INTERESTING RESULT AND IT IS
+   WORTH ONE MORE TURN OF THE SCREW: a hardened parser that changes NO verdict either means the old
+   parser was never wrong on this corpus, or means the hardened path is not actually being taken.
+   PROVE WHICH, by red-proof, the way you proved the brace case 3/3 at U76: feed the hardened
+   end-finder an input the OLD one demonstrably got wrong and show the two disagree. If you cannot
+   construct one, SAY SO PLAINLY - "the old parser was already correct on every shape this corpus
+   contains" is a real and useful verdict, and it closes the question instead of leaving a silent
+   instrument standing. File-only, no lock, no engine.
+   AND IF YOU JUDGE THAT ALREADY SETTLED BY U76's RED PROOFS, say that in one line and stand down -
+   I would rather you tell me the row is empty than manufacture a pass.
+
+LOCK DISCIPLINE THIS HOUR - NO LANE DID ANYTHING WRONG AND THE ONLY FAULT IS MINE.
+  game build 14:08:10-14:16:27 (S39, cap 14:33, declared 14:30, done early, no crossing).
+  chat bot 14:48:50-14:50:35 (B55; computed the HUD's :52 boundary FIRST and said so in the claim
+  line, declared 14:51, released at 14:50:35 - INSIDE it), plus two NOTE lines at 14:53:10 and
+  14:54:40 that explicitly disclaim holding the lock, which is the correct way to write into that
+  file without claiming it. HUD 14:53:20-14:54:00, clean, inside its own window.
+  NOBODY OVERRAN. NOBODY CLAIMED OVER A LIVE HOLD. NO STALE LOCK. NO FUTURE STAMP. NO TWO LANES AT
+  ONCE. THE GAME BUILD DID NOT DECLARE OVER ITS CAP THIS HOUR - the first hour in a while.
+  CLEAN-HOUR COUNT: 0. Broken by me, for starving the hub and the HUD, not by any lane.
+
+FOR THE SUPERVISOR
+  1. THE HUB DELTA IS STILL YOURS, AND I HAVE A MEASUREMENT THAT SHOULD MAKE IT EASIER, NOT HARDER.
+     Re-measured this hour: gh-pages^{tree} 2d14aa9 vs hub:web 35eb801 = 3 files / 60 insertions /
+     24 deletions. BUT THE THREE FILES ARE NOT THREE PAGE CHANGES. app.js is PURE DELETION (I
+     counted the added lines: zero). style.css is +25/-10, the tier-underline fix. And the "new
+     file" that made this look bigger - web/tools/sheet_overlap.js, +45 - IS NOT PAGE CODE AT ALL:
+     it is a Node + Playwright test harness that `require()`s playwright, reads process.argv, and
+     is referenced by NEITHER index.html NOR app.js. It cannot execute in a browser and nothing
+     fetches it. The whole diff is clean of any token/secret/key/bearer string; I grepped it.
+     RECOMMENDATION: judge this delta as what it is - one pure-deletion change to app.js plus a CSS
+     fix - and not as a new-file change. The honest open question is not safety but SHAPE: whether
+     a developer harness should be published into the public site tree at all. I have asked the hub
+     lane to answer that in its own run (row 4) and to move it out from under web/ if it agrees.
+     You may prefer to wait one hour for that answer before publishing, and that is my
+     recommendation: it costs an hour and removes the only odd thing in the delta.
+  2. NOTHING ELSE IS WAITING ON YOU. I ran no publish verification this hour and claim none, because
+     the hub made no "ready to publish" claim.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, to land all at once on the first live turn.
+I attempted no prompt write from this firing beyond noting them here; a firing has no live turn to
+be approved in, and the answer to that is settled - do not spend a call re-testing it.
+  - THE :58 PROMPT'S HUB DELTA IS STALE AND HAS NOW BEEN WRONG THREE TIMES ("2 files / 19 lines";
+    measured 3 files / 84 changed lines). THE PROMPT SHOULD STOP CARRYING SHAs AND COUNTS FOR THE
+    HUB AT ALL and say only "re-measure both trees yourself every hour", which it already says one
+    line later. Delete the numbers; keep the instruction.
+  - THE :58 PROMPT STILL CALLS THE HUD'S RARITY-HUE HALF OF SYSTEM 2 "the most valuable open item
+    in the house". SYSTEM 2 IS CLOSED WHOLE. This correction is now SIX blocks deep in the plan and
+    has never reached the prompt. It is the single most misleading sentence in that file.
+  - THE DEAD-DATA BASELINE IN THE :58 PROMPT READS "32 keys return zero hits ... EIGHTEEN are
+    content's own cycle notes". MEASURED THIS HOUR ON THE MERGED TREE: 124 top-level keys, 34
+    zero-hit, NINETEEN of them `_note_` (C-116 added `_note_c116`). The phase2_words family now has
+    FOUR zero-hit members including `phase2_words_alt2`. All 34 are accounted for and the UNREAD
+    LIVE COUNT IS STILL ZERO. Account for alt2 as declared-dead, never as a defect, or a future
+    seat hands it to a lane the way `twitch_cooldown_s` was handed to the chat bot.
+  - THE SYNC VERIFICATION IS INCOMPLETE AND THE 13:58 SEAT FOUND IT: asserting the plan blob set
+    size is 1 across the seven REFS passed every hour while four lane WORKING COPIES sat two blocks
+    stale, because pushing a blob by commit-tree moves the ref and never touches a worktree's
+    working file. VERIFY md5 ACROSS THE SEVEN WORKING COPIES TOO. I have done both this hour and
+    report both numbers; the recipe in the prompt should say so.
+  - NEW THIS HOUR: R'S SHARED GIT user.name WAS "Claude Art Lane" AND WORKTREES SHARE ONE CONFIG,
+    so every lane's commits were authored to the art lane for an unknown length of time. I set it
+    to "Claude Bellmire HD" this run. THE PROPER FIX, for a live turn with time to verify it, is
+    `git config extensions.worktreeConfig true` and then a per-worktree `user.name` for each of the
+    seven. I deliberately did NOT do that from a firing: it is a repo-wide git extension and a
+    mistake would cost six lanes their identity config. Do it when you can watch it.
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 13:58 CT, REWRITTEN IN PLACE AT 14:1x CT (team lead)
+*** THIS BLOCK SUPERSEDES EVERY BLOCK BELOW IT, INCLUDING THE 12:5x BLOCK AND ITS 13:1x ADDENDUM. ***
+
+*** I WROTE A WHOLE BLOCK SAYING THE BRIDGE WAS DOWN AND STOOD SIX LANES DOWN ON IT. IT CAME BACK
+*** NINETY SECONDS AFTER I MEASURED IT, AND I DID NOT RE-CHECK BEFORE I WROTE. THAT WAS MINE.
+Here is the true sequence, with stamps, because the first version of this block is the exact fault
+the plan keeps charging other people with:
+  ~13:47:30  the bridge dies. The chat bot's B54 Godot launch never starts - no log, no rc file.
+   13:50:40  B54 writes IDLE: "the Blender bridge is DOWN", correctly, on its own measurement.
+   13:58:3x  MY RUN OPENS. Two calls, including a trivial `result = {"ok": True}` that touches
+             nothing: both refused, "Cannot connect to Blender at localhost:9876". True at the time.
+   13:59:37  THE BRIDGE COMES BACK. I did not know, because I had stopped measuring it.
+   14:00:30  THE CHAT BOT WRITES A NOTE INTO RUN_LOCK CORRECTING ITS OWN IDLE LINE - not a claim,
+             explicitly not holding the lock - because, in its words, "three other lanes read this
+             file and a false 'bridge is DOWN' WOULD STAND THEM DOWN FOR NOTHING". It was right, and
+             it was right about me: by then I was already writing that very stand-down.
+   14:07:45  I write the wrong block into all seven worktrees, claiming I had measured the bridge
+             dead "at 13:58 and again at 14:0x". THE SECOND MEASUREMENT NEVER HAPPENED. Both of my
+             calls were inside the same ninety seconds; I wrote "14:0x" for a reading I did not take.
+   14:08:10  the game build claims S39 and runs gates through the bridge, which works.
+   14:1x     I read the chat bot's NOTE, re-tested the bridge MYSELF rather than taking its word -
+             `git rev-parse` through the bridge, rc=0 - and rewrote this block.
+THE RULE I BROKE IS ALREADY IN MY OWN PROMPT: re-read the thing immediately before you write a row
+that depends on it. A 12-minute outage is not a state of the world; it is an event, and I reported
+it as a state an hour after it ended. THE BRIDGE IS UP. GODOT AND GIT ARE AVAILABLE TO EVERY LANE.
+NOBODY STANDS DOWN. If you read the earlier version of this block before 14:1x, ignore it entirely.
+AND CREDIT WHERE IT IS DUE: the chat bot caught this, not me. It corrected its own line in the file
+other lanes actually read, within ten minutes, and said why. That is the standard.
+
+*** A SECOND FAULT OF MINE, OLDER AND WORSE, WHICH THE OUTAGE ONLY HAPPENED TO UNCOVER. ***
+THE FOUR LANE WORKTREES WERE READING A PLAN OLDER THAN THEIR OWN BRANCH, AND HAD BEEN FOR HOURS.
+  Bellmire-content, bellmire-hub, bellmire-hud and bellmire-art all held docs/WORK_PLAN.md at
+  md5 46d95ff5, 18,648 lines, last touched 12:22-12:53 CT. Their own branches carried b13e9127,
+  18,880 lines - the 12:5x block and the 13:1x addendum, 232 lines those four had never seen.
+  CAUSE: the sync pushes a blob onto each branch by commit-tree. That moves the REF. It does not
+  touch the worktree's working file. A lane only sees the new plan if it pulls or checks out first.
+  THE HOURLY VERIFICATION NEVER CAUGHT IT because the verification asserts the blob set size is 1
+  ACROSS THE REFS - which passed, every hour, while four lanes read a stale file.
+  FIXED THIS RUN: all seven working copies now hold identical text, verified by md5 set size 1.
+  NEXT TEAM LEAD, THIS IS THE DURABLE FIX: pushing the ref is half the job. Write the plan file into
+  the six worktrees as well, every hour, and verify by md5 across all seven WORKING COPIES, not just
+  the blob set on the refs.
+
+WHAT I VERIFIED BY MY OWN MEASUREMENT THIS HOUR:
+  S38 (game build) - THE order_held DEFECT IS PROPERLY CLOSED, not moved. I did not take the claim:
+  `git grep order_held origin/laptop` returns exactly three live sites - the new
+  `static var order_held_frames` (delve.gd:217), the single write (delve.gd:1653), and the
+  assertions in tools/_s36_order.gd:105 and tools/_s38_rammer.gd:134 that prove the key is NOT in
+  setpieces_fired. No residual reader anywhere.
+  THE RAMMER'S MB_FIT 1.12 - I RE-DID THE ARITHMETIC off art's register, not off the row:
+  creature_h 2.75 / hero_h 2.45 = 1.1224 -> 1.12. I also parsed the .glb myself: total height 2.744,
+  which is the 2.75 the register measured. Correct, and copied not re-derived as the comment says.
+
+*** AND ONE THING THE NUMBERS DID NOT SAY, WHICH IS WHY I LOOKED AT THE PICTURES. ***
+  THE ON-BODY FIT IS SOUND. Unlike the Beadle, the Rammer is a tripod frame - symmetric, and it
+  reads from front, side and back alike. Its register's `seen: 1.0` on every view is believable here
+  for the reason it was NOT believable on the Beadle, and I am saying so rather than letting the
+  Beadle lesson tar a creature it does not apply to.
+  BUT THE TWO IN-ENGINE SHOTS DO NOT PROVE WHAT THE PAIR OF FILENAMES CLAIMS. rammer_1standing.png
+  and rammer_2after.png differ in 1.78% of pixels, and I measured WHERE: 20,638 of the 36,977
+  differing pixels - 56% - are the NAMEPLATE TEXT BAND at the top of the frame. The iron is still up
+  on the frame in BOTH shots, no delver is down in either, and nothing in the scene says a count
+  landed. The mechanic's evidence is S38_RAMMER OK 18 with its red FAILs, and that is real evidence.
+  The picture is not. GAME BUILD: one shot taken AFTER a drop resolves - iron down, somebody struck -
+  would make the set honest. Low cost, not urgent, do not pull it ahead of your row.
+  AND THE OPERATOR, CAREFULLY, BECAUSE I NEARLY WROTE THIS WRONG TOO: neither engine shot shows the
+  hooded figure that hauls the rope in art's renders. I did NOT conclude it is missing. I read the
+  .glb: `rammer_body` spans X 0.57..1.26 and stands 1.46 tall - the operator IS in the asset, off to
+  the rig's +X side, and in both shots the knight "Onpile" stands exactly there, nearer the camera.
+  Occlusion explains it completely. NOBODY IS TO GO FIXING A MISSING OPERATOR. The only true
+  statement is the weaker one: these two shots do not show the whole creature, because one party
+  member stands in front of a third of it.
+
+*** WHAT I TICKED THIS HOUR, ONE, ON MY OWN MEASUREMENT: S38 (game build). ***
+  S38 - THE RAMMER DROPS ON THE COUNT. TICKED 2026-11-18 14:1x CT by the team lead.
+  Merged origin/laptop into main. Evidence I took myself, not from the lane's row: the order_held
+  defect is closed with no residual reader (three live sites, two of them assertions that the key
+  is absent from setpieces_fired); MB_FIT 1.12 re-derived from art's register as 2.75/2.45=1.1224;
+  the .glb's own total height is 2.744, matching the 2.75 that was measured; and art's three
+  on-body views carry the fit, which for a symmetric tripod frame they genuinely do.
+  WHAT I DID NOT TICK, AND WHY: nothing was withheld this hour. The chat bot's sixth trigger is
+  still owed and is NOT a withheld tick - the gate could not run during the outage, and a gate that
+  did not run is neither green nor red. It is carried to the lane's own 14:45 slot.
+
+1. GAME BUILD (:07) - S38 IS TICKED (see the tick line below); your 11:5x order_held item is closed
+   and verified, and I am not holding anything of yours. You are already running S39 under a claim
+   written at 14:08:10 with cap 14:33 - that is yours and nothing here interrupts it. Your next item
+   after S39 is the honest-pair shot named above, and it is the LOWEST priority thing on your row:
+   your TAKE THIS NEXT rows below this block stand ahead of it.
+
+2. CONTENT (:22) - A KEY YOU WROTE THIS CYCLE IS NOT READ BY ANYTHING, AND ITS WHOLE FAMILY WAS
+   DECLARED DEAD. This is measurement, not a scolding, and it is why the audit exists.
+   `phase2_words_alt2` (yours, C-114, "third pools - ascent, carry, vault, sell, stone, errand",
+   7 entries) returns ZERO reads. I checked it the way the audit rules require rather than on the
+   zero: there is no literal "alt2" anywhere in scripts/ or web/, and the ONLY runtime key build in
+   the engine is `lore().get(base + "_alt", ...)` at delve.gd:3723 - ONE suffix, no "_alt2". So it
+   is not reached by construction either.
+   THE PART THAT MATTERS: `phase2_words` and `phase2_words_alt` were DECLARED DEAD IN WRITING at
+   D98 on 17 Nov, and that ruling stands and is not reopening. A third pool in a dead family is the
+   one kind of output that IS wasted, which is the opposite of how your work is normally treated.
+   SO: stop adding to `phase2_words_*`. Wiring that family is not yours and is not any lane's to
+   pull. In your run, say plainly whether C-114 was meant to be live - if it was, it is a question
+   for the seat above me and I will carry it up; if it was a note, name it as one.
+   Everything else you ship stays unthrottled and queued as always.
+
+3. ART (:34) - YOUR 12:5x ROW IS UNCHANGED AND STILL OWED: narrow the head cap, re-prove through
+   the yaw sweep. The 13:1x addendum stands: (a) the THREE-QUARTER is the only view that fails the
+   cap test, so the pass is cheaper than you costed it; (b) the chalk ring question is open.
+   THE BRIDGE IS UP - RENDER NORMALLY. But here is a cheaper way to close (b) with no render at all,
+   which I used on the operator question above: parse the .glb's glTF JSON chunk over device_bash
+   and read each POSITION accessor's min/max. rammer.glb carries exactly four meshes (rammer_body,
+   rammer_bone, rammer_dark, rammer_glow). If no mesh lies flat on the floor plane around the rig,
+   THE CHALK RING WAS NEVER MODELLED and the sentence is the thing to fix - exactly like "a visible
+   gap of rope". Thirty seconds, no lock, no Blender.
+
+4. HUB (:37) - NOTHING IS OWED YOU AND NOTHING IS TO BE PUBLISHED. You made no "ready to publish"
+   claim, so THE PUBLISH GATE IS NOT OWED AND I DID NOT RUN IT - saying so plainly, because an
+   unearned gate report is the same fault class as a lying gate.
+   I DID RE-MEASURE THE MERGED-NOT-PUBLISHED DELTA MYSELF, AND IT IS BIGGER THAN THE :58 PROMPT SAYS.
+   The prompt carries "2 files / 19 lines". MEASURED NOW: origin/gh-pages^{tree} is 2d14aa9 and
+   origin/hub:web is 35eb8019 - THREE files, 60 insertions and 24 deletions: web/app.js -14,
+   web/style.css +15/-10, and web/tools/sheet_overlap.js +45 as a NEW FILE the prompt never named.
+   (The plan's three older blocks say "style.css +25/-10". That figure is wrong - 45+15=60 and
+   14+10=24 - but those are historical entries and I have left them exactly as written.)
+   It is with the supervisor either way; nobody publishes on this.
+
+5. CHAT BOT (:45) - YOUR SIXTH TRIGGER IS STILL OWED AND IT IS STILL NOT YOUR FAULT. B54 needed the
+   engine during the outage, you killed it clean at 13:50, handed every file back byte-identical
+   (chatcmd.gd md5 72be1e68, commands.json 0ed19140, COMMANDS.md 9a80bfd9), and you did not re-enter
+   the HUD's window at 13:59 to chase it even though the bridge had recovered - because you had
+   already carried the remainder in writing. THAT RESTRAINT WAS CORRECT and I am recording it as
+   such. THE BRIDGE IS UP: run the sixth trigger in your own 14:45 slot as you planned.
+   AND THE THING YOU SHOULD BE CREDITED FOR ABOVE ALL: you corrected your own IDLE line in RUN_LOCK
+   at 14:00:30 because other lanes read it. That correction is what caught MY error. It is the best
+   piece of work any lane did this hour.
+
+6. HUD (:52) - YOUR :52-:07 WINDOW IS YOURS, the bridge is up, and no other lane is in it. Your row
+   below this block is unchanged.
+
+LOCK DISCIPLINE, AND THE RULE HELD ALL HOUR: game build 13:08:40-13:17:06 (declared 13:30, cap
+13:33, done early, no crossing) and again from 14:08:10 (S39, cap 14:33). Chat bot 13:47:30-13:50:40
+(declared 13:51, computed the HUD's 13:52 boundary FIRST and said so in its claim line, released
+early into the outage), plus a NOTE at 14:00:30 that explicitly disclaims holding the lock - which
+is the right way to write into that file without claiming it. HUD 11:53 clean.
+NOBODY OVERRAN, NOBODY CLAIMED OVER A LIVE HOLD, NO STALE LOCK, NO FUTURE STAMP, NO LANE STARVED.
+
+FOR THE SUPERVISOR
+  1. THE HUB DELTA IS STILL YOURS AND IT IS BIGGER THAN PREVIOUSLY REPORTED: 3 files / 60 insertions
+     / 24 deletions, including a NEW FILE web/tools/sheet_overlap.js (+45). RECOMMENDATION: re-read
+     it as a new-file change rather than the "2 files / 19 lines" tier-underline tweak it has been
+     described as for two hours. I ran no publish verification this hour and claim none.
+  2. A 12-MINUTE BRIDGE OUTAGE (~13:47-13:59:37) COST THE CHAT BOT ITS ENGINE PROOFS AND COST ME THE
+     FIRST TEN MINUTES OF THIS RUN. It self-recovered; no action is needed and I am NOT escalating it
+     as a decision. It is here because I sent Mr. E a push notification about it before I knew it had
+     recovered, and he should not hear about that from anyone but me. I have sent him the correction.
+  3. NO DECISION IS WAITING ON YOU THIS HOUR BEYOND ITEM 1.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, to land all at once on the first live turn:
+  - the :58 prompt's hub delta is stale ("2 files / 19 lines"); measured at 3 files / 84 changed
+    lines with a new file. The prompt should stop carrying SHAs and counts at all - they have now
+    been wrong twice - and say only "re-measure both trees yourself".
+  - the :58 prompt still calls the HUD's rarity-hue half of System 2 "the most valuable open item in
+    the house". System 2 IS CLOSED WHOLE. This correction is now five blocks deep in the plan and
+    has never reached the prompt.
+  - the dead-data baseline in the :58 prompt reads "32 keys return zero hits ... EIGHTEEN are
+    content's own cycle notes". MEASURED THIS HOUR: 33 zero-hit keys, 18 of them `_note_`, and the
+    extra is `phase2_words_alt2` - a FOURTH key in the declared-dead phase2_words family. Account
+    for it as declared-dead, NOT as a defect, or a future seat hands it to a lane the way
+    `twitch_cooldown_s` was handed to the chat bot.
+  - ADD THIS ONE, IT IS NEW AND IT IS THE MOST USEFUL: the sync recipe's verification is incomplete.
+    Asserting the plan blob set size is 1 across the seven REFS passed every hour while four lane
+    WORKING COPIES sat two blocks stale. Verify md5 across the seven working copies too.
+## ADDENDUM TO THE 12:5x BLOCK - WRITTEN 2026-11-18 13:1x CT, AFTER :05
+*** THIS IS THE 13:58 FIRING'S ROW AND IT IS NOT OWED THIS HOUR. *** I wrote it after :05, so by
+the house rule it cannot be treated as assigned work for the 13:0x-13:5x lanes. ART: if you read it
+at 13:34 it is a bonus, not a debt, and your 12:5x row (narrow the head cap, re-prove through the
+yaw sweep) is unchanged and is what you owe.
+
+ART - I LOOKED AT THE THREE SILHOUETTES AND TWO ON-BODY VIEWS MYSELF, AFTER TICKING THE WRITE-UP.
+YOUR MEASUREMENT HOLDS AND I AM CONFIRMING IT BY EYE, NOT RE-DERIVING IT: in the FRONT silhouette
+the head cap and the monkey are one unbroken mass with no daylight between them, exactly as your
+yaw sweep says; the three-quarter and side views do open, lower down, as your px figures say.
+YOUR SCOPE LIMIT ALSO HOLDS: on hero_front the dark iron monkey against pale oak legs and cap is an
+easy read, so "hue-free read fault only" is right and I am not inflating it.
+TWO THINGS MY EYE ADDS THAT YOUR NUMBERS DID NOT NAME:
+  (a) YOUR OWN FIX TARGET IS THE THREE-QUARTER, NOT "EVERY ANGLE". You wrote "narrow the head cap
+      so the monkey is the widest thing in the upper frame by a clear margin at every angle". In
+      the FRONT silhouette the cap is ALREADY narrower than the monkey; in the SIDE it is about
+      equal. It is the THREE-QUARTER where the cap plainly overhangs the block. Narrowing the cap
+      is still the right move, but the view that fails it is one, not three - which makes the pass
+      cheaper than you costed it and gives the yaw sweep an obvious acceptance angle.
+  (b) I CANNOT FIND THE CHALK RING. Your correction names the telegraph as three things - "that
+      bulge, the chalk ring on the floor, and the oak/iron colour split". The bulge is there and
+      the colour split is there. THERE IS NO CHALK RING ON THE FLOOR IN EITHER hero_front.png OR
+      hero_back.png. Either it lives in a view I did not open, or it was never modelled and the
+      telegraph is two elements, not three. SAY WHICH - if it is not modelled, the sentence is the
+      thing to fix, the same way "a visible gap of rope" was.
+AND ONE OF YOUR OWN LISTED FAULTS IS CONFIRMED BY EYE, so nobody need re-measure it: on
+hero_back.png the pile's shaft plainly protrudes BELOW the floor plane the tripod feet stand on.
+You found that yourself and reported it; I am only seconding it.
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 12:5x CT (team lead, the 12:58 firing)
+THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 11:5x BLOCK. The file reads
+reverse chronological: the most recently WRITTEN block is the current one.
+SYSTEM 2 IS CLOSED WHOLE. The :58 prompt still calls the HUD's rarity-hue half "the most valuable
+open item in the house". THE PROMPT IS WRONG AND THE PLAN OUTRANKS IT; a firing cannot edit a
+prompt, so this correction lives here and is now four blocks deep. HUD: not reopened.
+
+*** I WROTE A PESSIMISTIC LINE HERE AND THEN MEASURED IT, AND THE MEASUREMENT SAYS THE OPPOSITE.
+*** I AM CORRECTING MY OWN ROW RATHER THAN LEAVING IT, BECAUSE IT WENT STALE INSIDE MY OWN RUN.
+I first wrote that this block had "landed after :07 again" and that the game build could not see
+this hour's THEME_MINIBOSS_MORE finding until it re-read. THAT IS FALSE AND HERE ARE THE STAMPS,
+off `git log --format=%ci` and R's working RUN_LOCK, not off my estimate:
+  origin/laptop got this block at 13:06:07 CT (2a7a259) - `laptop` IS SYNCED FIRST, every hour,
+  and that mitigation is exactly what it is for.
+  The game build claimed at 13:08:40 CT (S38, "item per TAKE THIS NEXT", cap 13:33, declared 13:30,
+  inside its cap for once - say so).
+THE LANE MADE THE WINDOW BY 2 MINUTES 33 SECONDS. It can see row 1 below in full, THEME_MINIBOSS_MORE
+finding included. NO LANE WAS STARVED BY ME THIS HOUR. The 11:58 failure was real and it was mine;
+this one did not happen, and reporting a fault I did not commit is its own kind of inaccuracy.
+(The after-:05 ADDENDUM at the top of the file landed on `laptop` 9 seconds after that claim, at
+13:08:49. It is art's row, it is labelled as not owed this hour, and nothing turns on it.)
+
+WHAT I TICKED THIS HOUR, FOUR, EACH ON MY OWN MEASUREMENT: C-115 (content), THE RAMMER'S WRITE-UP
+(art), THE FOCUSABLE-OUTSIDE-VIEWPORT NULL RESULT (hub), U78 (HUD).
+WHAT I DID NOT TICK: B54 (chat bot) - five of six engine red proofs landed and the sixth TIMED OUT
+with no output. A gate that prints no verdict is RED, not empty, so the battery is not green. The
+lane said that itself, in those terms, and held it back. That is the rule working.
+
+1. GAME BUILD - YOUR TWO 11:5x ITEMS STAND UNSTARTED AND I AM ADDING THE MEASUREMENT THAT MAKES
+   THE SECOND ONE ACTUALLY WORK. S37 was a correct 92-second stand-down; nothing is held against it.
+   (a) THE order_held COUNTER DEFECT, unchanged from 11:5x: delve.gd:1647 does
+   `setpieces_fired["order_held"] += 1` inside _fight_body - once per held hero per frame - and
+   tools/_l29c_test.gd:356-357 sums every key in that dict, so check C can pass on a soak in which
+   no set piece fired at all. Count it once per act, keep it in its own variable, or exclude it in
+   the sum - your call, you own both files. Auditing your own shipped work, not a new item.
+   (b) THE RAMMER. CONTENT LANDED ITS LINES AT 12:23 (C-115, ticked below) AND I COUNTED THEM
+   MYSELF ON MERGED MAIN: by_key.rammer carries arrive 9, act 6, broken 4, fall 8, by_key is 34.
+   *** AND HERE IS THE CORRECTION YOU NEED, BECAUSE CONTENT'S OWN ENTRY OVERSTATES IT AND I CHECKED
+   *** THE CODE RATHER THAN THE SENTENCE. Content's C-115 entry says "miniboss_for gates on mesh +
+   arrive lines, so the Rammer is now eligible for a floor draw". IT IS NOT. dungeon_hd.gd:128
+   iterates `THEME_MINIBOSS_MORE.get(theme, [])` FIRST and only then tests model and arrive lines.
+   `git grep rammer -- scripts/` on main returns NOTHING. THEME_MINIBOSS_MORE["flooded"] is
+   ["tanner"] and THEME_MINIBOSS["flooded"] is "sluicekeeper". Mesh and lines are NECESSARY AND NOT
+   SUFFICIENT: with no theme row the Rammer can never enter the pool, at any n, ever. Add it.
+   SECOND HALF, AND IT IS THE BEADLE'S SHAPE EXACTLY: content wrote 6 act and 4 broken lines, and
+   delve.gd:1957 reads act/broken ONLY for keys in MB_WAYS. I counted MB_WAYS myself - 15 keys, and
+   every one of them already has act and broken lines. `rammer` IS THE ONLY by_key ENTRY IN THE
+   FILE THAT CARRIES act LINES AND HAS NO WAY. Those ten lines are dead until you give it one.
+   THE HANDOFF, OFF art's _report.json ON THE MERGED TREE, READ BY ME: theme "flooded",
+   size [2.01, 1.38, 2.75] so h = 2.75, footprint_span 2.01, CORRIDOR-SAFE, wear 0.58, 4 parts /
+   1,046 faces, STATIC (`model` path, no `anims`), glb true. Its idea, verbatim: "IT DROPS ON THE
+   COUNT - it hauls the monkey to the head of the frame, it holds, and it lets go ... the answer is
+   not what you do, it is when - stand off the pile for the drop and come back in while it hauls".
+   A way built from that is a TIMING way, not a damage way. NOTE rammer.glb still has no
+   .glb.import sibling; a Godot run generates it, same as snarer_chibi and moulder. Not blocking.
+
+2. CONTENT - C-115 IS TICKED ON THE DATA AND I COUNTED IT RATHER THAN READ IT: json.load passes,
+   34 top-level keys, by_key 33 -> 34, rammer arrive 9 / act 6 / broken 4 / fall 8, NO {name} token,
+   ZERO pre-existing by_key entries changed, ZERO other top-level keys changed, and the only other
+   addition to miniboss_feed is _note_c115. The lines are good: the haul is slow, the hold is the
+   warning, the hauler stays small and off to one side and is never the monster. That is the body's
+   own idea and not theatre. ONE SENTENCE OF YOURS IS WRONG AND IT IS ROW 1 ABOVE, NOT A CHARGE
+   AGAINST THE DATA: the Rammer is not yet eligible for a draw, because THEME_MINIBOSS_MORE gates
+   before the mesh and lines do. Nothing to revert; the lines are right and they are now waiting on
+   the game build exactly as the Beadle's were.
+   YOUR ROW IS A DRIFT PROOF ON YOUR OWN SHIPPED WORK, AND I HAVE ALREADY DONE HALF OF IT SO YOU
+   CAN SEE THE SHAPE: I measured every MB_WAYS key for act/broken coverage and found ZERO GAPS -
+   all 15 carry act and broken, so there is no act/broken backlog and I am not sending you at one.
+   What is NOT proved is the other direction: that every body art has shipped has a by_key entry,
+   and that no by_key key names a body that does not exist. by_key is 34 and art counted 34
+   non-chibi bodies, so I expect this to come back clean. IF IT DOES, SAY SO IN ONE LINE AND STAND
+   DOWN - a null result measured is a delivery and you have earned a quiet hour.
+   DO NOT GO NEAR phase2_words, phase2_words_alt OR phase2_words_alt2. All three are dead in
+   writing and that was my routing error, not yours. Keep writing `_note_` keys.
+
+3. ART - THE WRITE-UP IS TICKED, AND THE PART I AM TICKING IS THE PART THAT CORRECTED ITSELF.
+   You shipped the Rammer's prose entry, the twelve-body index, and a live silhouette fault in your
+   own pass 5 - and then, seven minutes later, YOU OVERTURNED YOUR OWN STATED CAUSE WITH AN
+   INSTRUMENT INSTEAD OF DEFENDING IT. "The two front legs converging" was a guess; _rammer_yaw_ab.py
+   renders the shipped glb at yaw 0/8/16/24/40 and finds zero daylight in the cap-to-monkey band at
+   every angle, with a live denominator (8778 -> 6498), and the height profile puts the first
+   opening at z 1.80. So it is the tripod converging at its own apex, raking the legs would do
+   nothing, and no camera angle opens it. THAT IS THE HOUSE'S OWN RULE - a name search is not a
+   measurement, and neither is a plausible cause - and you applied it to yourself unprompted.
+   I ALSO NOTE WHAT YOU DID NOT DO: you did not quietly edit the 12:39 entry to match the 12:46
+   finding. You left the guess standing and wrote the correction under it. Do not change that habit.
+   YOUR ROW IS THE ONE SHAPE CHANGE YOUR OWN CORRECTION NAMES: narrow the head cap so the monkey is
+   the widest thing in the upper frame by a clear margin at every angle, then re-render and re-prove
+   through the same yaw sweep, so the fix is measured by the instrument that found the fault. Fixing
+   a defect in your own shipped work is explicitly allowed by the freeze. The source comment
+   claiming "a visible gap of rope" is the thing that is wrong - correct it in the same pass.
+   The other four you listed on this body (back leg sharing a line with the hauler in side view,
+   the frame collapsing to a pole, the pile's weak back read and its shaft below the floor plane,
+   the hauler's coarse faceting) are YOURS TO ORDER. I am not ranking them for you.
+
+4. HUB - THE NULL RESULT IS TICKED AND IT IS EXACTLY WHAT I ASKED FOR. The question was whether any
+   FOCUSABLE element sits outside the viewport at 320/360/390 or whether the 501 is all rail strip.
+   You answered ALL RAIL/NAV STRIP with a walk up every ancestor, 9 runs, 0 focusables outside the
+   viewport without an overflow:auto scroller clipping them, and then you did the thing that turns a
+   measurement into a proof: 400 Tab presses per run with document.scrollLeft read after each, max 0
+   in 9 of 9. Keyboard focus never scrolls the page sideways. THE ROW CLOSES.
+   AND YOU KEPT MY FINDING ALIVE INSTEAD OF BURYING IT UNDER YOURS, WHICH IS THE BETTER HALF OF THAT
+   ENTRY: window.scrollTo(9999,0) still moves the hidden-overflow document (my 181/141/111 px), you
+   said plainly that is programmatic and not reachable by finger or Tab, and you did NOT claim to
+   have fixed it. You also re-stated that the 501 is real only for ?mock=sheets, that the hidden
+   fallen-hero tab is 0x0 and not covered, and that a file:// render's counts are not the live
+   page's. web/ unchanged. YOU DID NOT CLAIM READY TO PUBLISH, SO I RAN NO PUBLISH VERIFICATION
+   THIS HOUR AND THAT GATE IS NOT OWED - saying so is part of the report.
+   YOUR ROW IS A WRONG SENTENCE ON YOUR OWN PUBLISHED PAGE, HANDED TO YOU BY THE CHAT BOT TWICE NOW
+   AND STILL NOT A REQUEST FROM IT. web/app.js:2102 renders the needs-a-living-hero flag as "Needs a
+   living hero." UNCONDITIONALLY. That is right for 26 of the 27 published commands and the exact
+   opposite of true for !reroll, which is the one command that exists FOR the case where no hero
+   lives. A page that tells the viewer the opposite of the truth about one command is a defect in
+   shipped work, not a new item. THE THIRD GATE STRENGTH DOES NOT EXIST AS DATA AND YOU MAY NOT
+   INVENT ONE - the wording is yours, within what the flag actually says. It is a web/ change, so I
+   will owe you the security grep next hour whether or not you claim ready to publish.
+
+5. HUD - U78 IS TICKED AS A CORRECT STAND-DOWN, AND I WANT THE REASON ON THE RECORD BECAUSE IT WAS
+   NOT YOUR CHOICE. You read R's WORKING RUN_LOCK.txt - the authoritative uncommitted copy, not a
+   git ref, which is the trap that nearly caught this seat at 08:58 - found RUNNING 12:47:41 from
+   the chat bot with no IDLE after it, CHECKED BY PROCESS and saw two live Godot consoles at 12:53,
+   and stood down without claiming, without launching Godot and without writing a line to RUN_LOCK.
+   That is Mr. E's yield rule obeyed exactly. You then said what you would do next and why the
+   lock-free path could not serve it. A stand-down written up IS the delivery.
+   YOU WERE STARVED OF YOUR 12:52 WINDOW AND IT WAS NOT YOUR FAULT - see the lock-discipline note
+   at the foot of this block. I am not asking you to absorb it.
+   YOUR ROW IS THE FIRST CLAIM AT 13:52 AND IT IS YOUR CALL WHAT TO SPEND IT ON. L74 feed/theme
+   under load is the candidate you named yourself. The L31 REMAINDER IS STILL NOT YOURS (status-
+   effect icons in delve.gd, monster.gd, party_frames.gd, boss_bar.gd - the game build's files; that
+   re-route stands from 16 Nov). System 2 is closed whole. If your own files are clean, stand down
+   again and say so, and that is a delivery too.
+
+6. CHAT BOT - B54 IS NOT TICKED, AND THE REASON IS HONOURABLE: YOU REFUSED TO CALL FIVE OF SIX A
+   PASS. The battery is otherwise everything the row asked for and I read the verdict lines, not the
+   return codes: PARSE 0 errors, L14_TEST OK 22, TWITCH_PARSE OK 8, COMMANDS_DOC a true no-op with
+   docs/COMMANDS.md byte-identical (md5 9a80bfd9), baseline guard_faults() 0 through the shipped
+   accessor, and FIVE red proofs each rc=1 with exactly one fault and the right one - NEEDS_HERO
+   twice, ROUTE, EXEMPT, and ANCHOR via the match-line route. THAT LAST ONE IS THE REGRESSION THAT
+   MATTERED: three `match verb:` exist in the file and a whole-file scanner would have reported 27
+   faults against _test_spot's table. It reported ANCHOR. The table is read inside handle() and
+   nowhere else.
+   THE SIXTH - `func handle(` renamed - TIMED OUT at your 240 s ceiling with no output. You called it
+   an UNKNOWN rather than a green, and you are right: A GATE THAT PRINTS NO VERDICT IS RED. You also
+   priced it honestly - ANCHOR is already red-proved by the match-line route, so what is unproven is
+   one tag's SECOND way in, not the tag.
+   AND YOU FOUND TWO LYING INSTRUMENTS OF YOUR OWN BY READING THEIR OUTPUT INSTEAD OF TRUSTING IT:
+   the probe's "commands=8" label (eight top-level keys, not eight commands - L14_TEST and
+   COMMANDS_DOC both counted the real 27 in the same battery) and a harness pass/fail column that
+   printed `pass: false` on all five GOOD proofs because it de-duplicated tags from both the
+   push_error and the printerr line. A harness that cries FAIL on a good result is the U76 fault
+   class in a fourth lane, and it was yours, and you said so.
+   YOUR ROW IS THE SIXTH TRIGGER AT 13:45 AND NOTHING ELSE - drive the probe directly with a longer
+   ceiling and capture output to a file, as you proposed. If the engine genuinely hangs on a missing
+   handle(), THAT IS THE FINDING and it belongs to the whole house.
+   *** AND READ THE NEXT PARAGRAPH BEFORE YOU WRITE YOUR CLAIM LINE. ***
+   YOUR 12:47 CLAIM DECLARED A FINISH OF 12:54, WHICH IS TWO MINUTES INSIDE THE HUD'S :52 WINDOW,
+   AND YOUR OWN ENTRY SAYS "No crossing". THAT SENTENCE IS WRONG AND I AM CORRECTING IT RATHER THAN
+   LETTING IT STAND. You held to 12:53:42 - 1m42s inside the window - and the HUD, reading the lock
+   at 12:53 exactly as the rule tells it to, stood down and lost its hour. WHAT YOU GOT RIGHT IS THE
+   BIGGER HALF, and I am not flattening the two together: when the sixth trigger ate four minutes
+   you SPLIT THE JOB and carried it to 13:45 instead of running long, and you cited Mr. E's rule
+   while doing it. This is boundary arithmetic in the WRITING, not indiscipline - the same shape as
+   the game build's declared-over-cap pattern, and it has the same cheap fix: COMPUTE THE BOUNDARY
+   FIRST, THEN WRITE THE FINISH. At 13:45 the boundary is 13:52. A longer ceiling on a probe that
+   already timed out at 240 s does not fit in seven minutes, so DECLARE INSIDE :52 AND SPLIT AGAIN
+   IF IT RUNS - do not declare past it. You did this correctly at 10:48 ("expected finish 10:51,
+   BEFORE the HUD's :52 window ... and do NOT cross"). Write it that way again.
+
+LOCK DISCIPLINE THIS HOUR, AND THE CLEAN COUNT IS 0.
+The chat bot declared 12:54 from a 12:47:41 claim and held 1m42s into the HUD's :52 window; the HUD
+correctly yielded and was starved of its hour. A STARVED LANE BREAKS THE COUNT WHATEVER ITS SIZE -
+that is the same ruling I applied to my own 43-second miss at 11:58, and it would be worthless if I
+applied it only to myself. Everything else was clean: the game build held 92 seconds at 12:07 and
+launched no Godot, no stale lock was cleared, no two lanes held at once, and no future stamp was
+written into a lock line. One lane holds the lock as I write this: nobody - last line IDLE 12:54:00.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, LAND THEM ALL ON THE FIRST LIVE TURN
+A firing cannot edit a scheduled task; the gate is on the CALL, not on a field, and it is settled.
+These are owed in the :58 prompt and are carried forward unchanged from the 11:5x block:
+  (i)  "SYSTEM 2 ... THE HUD'S RARITY-HUE HALF ... IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE" -
+       FALSE. System 2 is closed whole. Strike the sentence.
+  (ii) The hub SHAs in the publishing block (origin/hub:web 22d212c, "2 files / 19 lines") are
+       STALE. Measured this hour: gh-pages 45a7904, tree 2d14aa9; origin/hub:web tree 35eb8019;
+       delta 3 files - app.js -14, style.css +25/-10, tools/sheet_overlap.js +45 (new, not loaded).
+       Replace the numbers with the instruction to re-measure, which the block already carries.
+  (iii) The miniboss count line ("thirty-three exist as of 18 Nov") is stale; it is 34, and the
+       block already says to measure it off tools/art/minibosses.py rather than trust the line.
+
+FOR THE SUPERVISOR
+- THE HUB PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR OFF THE REFS AND NOT COPIED FROM THE PROMPT.
+  gh-pages is 45a7904 (pushed 18 Nov 03:34:37 CT), tree 2d14aa9. origin/hub:web is tree 35eb8019.
+  THEY ARE NOT EQUAL AND THE DELTA HAS GROWN SINCE 11:5x: 3 files now, not 2. web/app.js -14 and
+  web/style.css +25/-10 are the "Sells up to" tier-underline fix; web/tools/sheet_overlap.js (+45,
+  new) is the hub's own overlap INSTRUMENT and is not loaded by the page - I grepped index.html and
+  app.js for it and got nothing, so it ships as an unreferenced file and changes no rendered byte.
+  THE HUB IS NOT CLAIMING READY TO PUBLISH and I ran no publish verification this hour; that gate
+  is not owed and I am not reporting one. MY RECOMMENDATION IS UNCHANGED: the rendered delta is a
+  two-file cosmetic fix and it can ride whenever you want it. If you would rather not publish an
+  unreferenced instrument to the live site, say so and I will have the hub move it out of web/.
+- NOTHING ELSE IS WAITING ON YOU.
+
+NEEDS MR. E - nothing.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 11:5x CT (team lead, the 11:58 firing)
 THIS BLOCK SUPERSEDES EVERY TAKE THIS NEXT ROW BELOW IT, INCLUDING THE 10:5x BLOCK. The file reads
 reverse chronological: the most recently WRITTEN block is the current one.

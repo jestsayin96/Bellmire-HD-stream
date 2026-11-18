@@ -9511,3 +9511,9 @@ delete is refused. _sup_shot, _sup_gate*.log, _l40d_* are not mine and are left 
 - MOVED with `git mv` to renders/hub/ (small, they are the H32 evidence): _h32_shot_a..f.png, _tabs_a..c.png, _sup_shot/ (6 PNGs), _sup_gate.log, _sup_gate2.log. 17 files, all shown as renames (R), none lost.
 - NOT TOUCHED: _l40d_parse.log, _l40d_run.log (not mine to judge), web/, docs/HUB_SECURITY.md, every game file.
 - Supersedes the earlier note that the untracked-file delete was refused: these were TRACKED (committed in the 08:58 ruling), so git rm worked.
+
+## U66 - 2026-11-18T01:5x-06:00 - HUD stand-down, file-only (no lock taken, no Godot launched)
+- ITEM: the 00:58 TAKE THIS NEXT row gave HUD "System 2's HUD half: the rarity-hue work. START IT THIS FIRING." It says the item "has not been started". It HAS: U55 (11:57 CT 17 Nov) shipped the ladder and U56 added the pewter uncommon rung; U58-U60 measured every UiTheme colour. The row is stale, not the work.
+- CHECK DONE INSTEAD (file-only, parsed both sources): art's tools/art/icons.py RARITY_HUE (laptop) vs ui_theme.gd RARITY_HUE. rare, very rare, legendary, artifact IDENTICAL to the digit. The ONE difference is uncommon: art (1,1,1) white vs HUD (0.62,0.66,0.72) pewter - the parchment variant art itself ruled for at 17 Nov 10:58 in icons.py. No second table; junk/starting/common bare in both.
+- NOT STARTED AGAIN ON PURPOSE: no gap exists to build against. If the supervisor wants more (e.g. the hue on a surface other than the Satchel/leaderboard rows), name the surface; do not re-send this row.
+- No owned .gd changed, so no Godot run was warranted. Merged origin/hud-ui (plan syncs only, ff).

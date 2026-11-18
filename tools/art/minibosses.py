@@ -4268,10 +4268,31 @@ def _gear_mesh(stem):
     logs - so the spears this thing hands out are the same spears the heroes
     carry, which is the point of a quartermaster.
 
-    Returns (verts, faces) normalised to UNIT LENGTH about the grip, shaft
-    along +Z, or None when the file or the importer refuses. A missing pack
-    must never take a body out of the sheet - the caller falls back to
-    procedural geometry and says so in the report.
+    Returns (verts, faces) normalised to UNIT LENGTH AND RE-ORIGINED SO THE
+    BUTT IS AT z=0, shaft along +Z, or None when the file or the importer
+    refuses. A missing pack must never take a body out of the sheet - the
+    caller falls back to procedural geometry and says so in the report.
+
+    PASS 4, AND IT IS THE CAUSE OF FOUR SEPARATE FAULTS, NOT ONE. This used to
+    scale to unit length and STOP, keeping the pack's own origin - measured:
+    spear_A sat at z -0.3289 .. +0.6711 of its own length, shield_A at -0.5713
+    .. +0.4287. The docstring said "about the grip" and _lay's says "carry a
+    unit-length part to `butt`", and NEITHER WAS TRUE: _lay was putting the
+    pack's arbitrary mid-mesh origin at the point every call site had named as
+    the butt. So each part was sunk 0.33-0.57 of its own length back along its
+    own direction. That one error produced all of these:
+      - the three ground shields were buried to past their centres, dragging
+        the global minimum to -0.3172 and lifting the body's declared feet
+        317.2 mm off the floor - the worst float in the set;
+      - the sheaf read as a FEATHER CROWN of heads again, the exact fault pass
+        2 was written to fix: two thirds of each shaft was inside the torso;
+      - the offered spear's hand was NOT at the shaft's midpoint, though pass 2
+        computed that midpoint to three decimals - the arithmetic was right and
+        the geometry it described was 0.66 m away;
+      - the two floor spares ran through the shield stack after pass 3 moved
+        them clear of it on paper.
+    Re-origining to the butt is what the call sites always meant. It is one
+    change and it is in the loader, not in four hand-tuned numbers.
     """
     if stem in _PACK_CACHE:
         return _PACK_CACHE[stem]
@@ -4316,7 +4337,9 @@ def _gear_mesh(stem):
                 span = max(zs) - min(zs)
                 if span > 1e-6:
                     k = 1.0 / span
-                    out = ([Vector((v.x * k, v.y * k, v.z * k)) for v in verts], faces)
+                    z0 = min(zs) * k
+                    out = ([Vector((v.x * k, v.y * k, v.z * k - z0))
+                            for v in verts], faces)
     except Exception:
         out = None
     _PACK_CACHE[stem] = out

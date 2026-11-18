@@ -69,16 +69,30 @@ func _initialize() -> void:
 		if not consts.has(k) or typeof(consts[k]) != TYPE_COLOR:
 			print("U59 %-16s STALE - listed here, not a Color constant in UiTheme" % k)
 			bad += 1
-	# U61: the grain stripe was a geometry limit (stripe at cy-0.5*cap crossed the wordmark at the px(8) cap floor, 3.66:1).
-	# It now sits at cy + SCROLL_GRAIN_OFF*cap. GATED on the floor numbers MEASURED off pixels (tools/_u61_stripe.gd, 1080p scale 1):
-	# cap 8, top_cy 11, glyph ink rows 4..16 -> ink bottom edge y=17. The stripe's top edge must be >= that.
-	var f_cap := 8.0
-	var f_cy := f_cap * 1.25 + 1.0
-	var stripe_top := f_cy + f_cap * UiTheme.SCROLL_GRAIN_OFF
-	var stripe_bot := stripe_top + maxf(1.0, f_cap * 0.20)
-	var clear := stripe_top >= 17.0 and stripe_bot <= f_cy + f_cap
-	print("U61 stripe at cap floor [%.2f,%.2f] vs ink bottom 17.00, rod bottom %.2f: %s" % [stripe_top, stripe_bot, f_cy + f_cap, "CLEAR" if clear else "CROSSES"])
-	if not clear:
-		bad += 1
+	# U63: the stripe gate is read off the SAME functions the draw uses (ChronicleScroll._wm_baseline and ._grain_span),
+	# at 100/125/150% UI scale and at the px(8) cap floor plus taller sheets. The old hard-coded 17.0 floor was only
+	# ever true at 100%. Ink bottom measured off pixels is U62's windowed job (tools/_u62_scales.gd); this gate holds
+	# that the stripe never starts above the baseline the wordmark is drawn on, nor ends below the rod.
+	var gate_n := 0
+	for sc in [1.0, 1.25, 1.5]:
+		UiTheme.set_scale(sc)
+		for h in [96, 120, 150, 159]:
+			var sg := HudDock.ChronicleScroll.new()
+			sg.size = Vector2(440.0, float(h) * sc)
+			var gg: Dictionary = sg._geo()
+			var cy: float = gg.top_cy
+			var cp: float = gg.cap
+			var base: float = sg._wm_baseline(cy)
+			var span: Vector2 = sg._grain_span(cy, cp, base)
+			var top := span.x
+			var bot := span.x + span.y
+			var ok := top >= base - 0.001 and bot <= cy + cp + 0.001
+			gate_n += 1
+			if not ok:
+				bad += 1
+			print("U63 scale=%.2f h=%d cap=%.2f baseline=%.2f stripe=[%.2f,%.2f] rod_bot=%.2f %s" % [sc, int(h * sc), cp, base, top, bot, cy + cp, "CLEAR" if ok else "CROSSES"])
+			sg.free()
+	UiTheme.set_scale(1.0)
+	print("U63_STRIPE %s %d cells" % ["OK" if bad == 0 else "FAIL", gate_n])
 	print("U59_CONTRAST ", ("OK %d colours walked, %d pairs, %d unmeasured" % [seen, checked, UNMEASURED.size()]) if bad == 0 else "FAIL %d" % bad)
 	quit(0 if bad == 0 else 1)

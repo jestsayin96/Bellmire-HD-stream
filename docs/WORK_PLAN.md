@@ -1188,6 +1188,37 @@ One line, not an incident, and separate from the stamp fault above.
                    THE L31 REMAINDER IS NOT YOURS. It lives in delve.gd, monster.gd,
                    party_frames.gd and boss_bar.gd - the game build's files.
 
+*** NOTES FOR THE NEXT :58 SEAT - FACTS IN YOUR OWN PROMPT THAT ARE NOW WRONG. I MEASURED EVERY
+*** ONE OF THESE AND I COULD NOT WRITE THEM INTO THE PROMPT. READ THIS BEFORE YOU ACT ON IT. ***
+I attempted the prompt write at 18:12 CT and it was refused twice. The SECOND refusal names the
+cause exactly, and it is not the auto-mode classifier this time: "in a scheduled task's run, a call
+that creates, changes or deletes a scheduled task needs the user's approval. That approval is asked
+for only in a turn that answers a recent message from the user". SO: IN AN UNATTENDED SCHEDULED RUN
+THE PROMPT WRITE CANNOT LAND AT ALL. It is not the classifier, not a dialog Mr. E can click, and
+not something retrying fixes. The 11:27 ART write that "landed" did so in a turn where Mr. E was
+present and had just spoken. DO NOT SPEND A CYCLE ON IT UNLESS HE IS TALKING TO YOU - attempt it
+then, and until then put corrections HERE, which is what the prompt itself tells you to do.
+  1. "all 86 named weapons" - WRONG, IT IS 107. Measured twice this hour, independently, by
+     content (C-95) and by my own transcribed reader. 107 in equipment.weapons.
+  2. THE AUDIT BASELINE dated 10:58 (2,066,116 chars, 109 keys, 19 zero-hit keys) IS STALE. The
+     17:58 measurement is 2,087,345 chars, 46 files (45 .gd + 1 .js), 116 top-level keys over 12
+     data files, 26 zero-hit keys = 2 runtime _alt + 3 declared dead + 9 prose/spec + 12 `_note_`
+     (c54, c70, c71, c87-c95). UNREAD LIVE KEYS STILL ZERO.
+  3. "STILL OPEN AS OF 11:45: NOBODY HAS LOOKED AT THE LIVE PAGE" - CLOSED. I looked at 17:58 and
+     ran the hostile-name test on the published copy. Evidence is in this block. Do not re-raise
+     it and do not hand it to the hub as an owed check; re-run it only when web/ CHANGES.
+  4. "Chat bot and art are on page one" of list_triggers - WRONG as of 18:12. Page one is the
+     supervisor check, the morning brief and the heartbeat. Page until you SEE the prompt you want,
+     and weigh the cost: each page carries whole prompts.
+  5. ID HIGH-WATER MARKS as of 18:12: C-95, D99, H32, L74, S24, T5, U59.
+  6. THE OVER-CAP DECLARATION COUNT IS SEVEN and the CLEAN-HOUR COUNT IS 0, reset this hour.
+  7. A FOURTH AUDIT GUARD IS NEEDED AND IS NOT IN THE PROMPT: a directory is not dead because its
+     path string is absent. assets/audio/{amb,music,rpg,sfx} are reached via
+     `const DIR := "res://assets/audio/"` (sfx.gd:28) plus a subdirectory prefix. Confirm by
+     FILENAME or by reading the line that builds the path.
+  8. device_bash CANNOT RUN GIT IN A WORKTREE - the .git there is a file holding a Windows path and
+     `git -C` fails with "fatal: not a git repository". Blender bridge for all git. One wasted call.
+
 *** FOR THE SUPERVISOR ***
   1. FIVE MINIBOSS BODIES EXIST THAT NOTHING CAN SPAWN, AND THE NUMBER GOES UP EVERY HOUR.
      MEASURED THIS HOUR: 22 bodies on disk, 17 with lore lines, and of the five without -

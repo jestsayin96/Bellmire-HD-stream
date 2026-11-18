@@ -931,6 +931,59 @@ static func commands() -> Dictionary:
         elif float(l_said) != l_real:
             push_error("COMMANDS_DATA LOOK SECONDS: `look`.what publishes a %d-second pane and Spotlight.LOOK_S holds it for %s - docs/COMMANDS.md promises a look the spotlight does not give" % [l_said, str(l_real)])
             printerr("COMMANDS_DATA LOOK SECONDS - published %d, enforced %s" % [l_said, str(l_real)])
+        # B36: THE NEXT NUMERIC CLAIM, AND THE FIRST ONE WITH TWO AUTHORITIES.
+        # B35 took `look` because it had ONE declaration and named `satchel` as the obvious next
+        # one BECAUSE IT HAS TWO: SELL_BACK is declared in leaderboard_panel.gd (class Satchel,
+        # line 65) AND in snapshot_pub.gd (line 40), both 0.4 today, with ~10 use sites between
+        # them - the sell sheet on stream and the hub's published sell prices. So those two can
+        # disagree with EACH OTHER before either disagrees with my sentence, and the viewer then
+        # reads one number on the hub and is paid the other at the counter. THAT is the piece
+        # worth more than checking my own string, so it is the FIRST path here, not an afterthought:
+        # if the two authorities differ there IS no published rate to check against and the guard
+        # says so instead of silently believing one of them.
+        # `satchel`.what says "two fifths" IN WORDS, not as a digit, so this needs the word table
+        # `muster` needed, widened to fractions. The table is the guard's vocabulary, and a rate
+        # it cannot say is reported as such in the RATE line rather than hidden - a 0.37 cannot be
+        # fixed by rewording the sentence, it needs a different sentence shape, and the reader of
+        # the error should be told which of those two they are looking at.
+        # THREE PATHS. SPLIT and ANCHOR are the two that stop this going quietly wrong; RATE is
+        # the mismatch itself. Not fatal, the shape every guard above uses: push_error + printerr,
+        # the commands still answer, and a battery greps COMMANDS_DATA. No line is healthy output.
+        var sw: String = String(((cmd_d.get("satchel", {}) as Dictionary)).get("what", ""))
+        var s_tail := " of its shop cost"
+        var s_words := {"a tenth": 0.1, "one tenth": 0.1, "a fifth": 0.2, "one fifth": 0.2,
+                        "a quarter": 0.25, "one quarter": 0.25, "three tenths": 0.3,
+                        "a third": 1.0 / 3.0, "one third": 1.0 / 3.0, "two fifths": 0.4,
+                        "a half": 0.5, "one half": 0.5, "three fifths": 0.6,
+                        "two thirds": 2.0 / 3.0, "seven tenths": 0.7, "three quarters": 0.75,
+                        "four fifths": 0.8, "nine tenths": 0.9}
+        var s_said: float = -1.0
+        var s_phrase := ""
+        var s_at: int = sw.find(s_tail)
+        if s_at > 0:
+            var s_head: String = sw.substr(0, s_at).to_lower()
+            for w in s_words:
+                var ws := String(w)
+                if s_head.ends_with(ws) and ws.length() > s_phrase.length():
+                    s_phrase = ws
+                    s_said = float(s_words[w])
+        var s_panel: float = float(LeaderboardPanel.Satchel.SELL_BACK)
+        var s_pub: float = float(SnapshotPublisher.SELL_BACK)
+        if absf(s_panel - s_pub) > 0.0005:
+            push_error("COMMANDS_DATA SATCHEL SPLIT: the sell-back rate is declared TWICE and the two no longer agree - leaderboard_panel.gd Satchel.SELL_BACK is %s and snapshot_pub.gd SELL_BACK is %s, so the counter on stream and the sell prices on the hub pay different money and `satchel`.what cannot be true of both" % [str(s_panel), str(s_pub)])
+            printerr("COMMANDS_DATA SATCHEL SPLIT - Satchel.SELL_BACK %s vs SnapshotPublisher.SELL_BACK %s; no single published rate exists" % [str(s_panel), str(s_pub)])
+        elif s_said < 0.0:
+            push_error("COMMANDS_DATA SATCHEL ANCHOR: `satchel`.what no longer says \"<fraction> of its shop cost\" in words this guard knows - the published sell-back rate can no longer be checked against SELL_BACK (%s)" % str(s_panel))
+            printerr("COMMANDS_DATA SATCHEL ANCHOR - `satchel`.what lost its \"<fraction> of its shop cost\" phrase; the sell-back rate is now unchecked")
+        elif absf(s_said - s_panel) > 0.0005:
+            var s_can := ""
+            for w in s_words:
+                if absf(float(s_words[w]) - s_panel) <= 0.0005:
+                    s_can = String(w)
+                    break
+            var s_tip: String = "say \"%s\"" % s_can if s_can != "" else "NO fraction phrase this guard knows can state %s - the sentence needs a different shape, not a different word" % str(s_panel)
+            push_error("COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes \"%s\" (%s) of shop cost and SELL_BACK pays %s - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; %s" % [s_phrase, str(s_said), str(s_panel), s_tip])
+            printerr("COMMANDS_DATA SATCHEL RATE - published \"%s\" (%s), enforced %s" % [s_phrase, str(s_said), str(s_panel)])
         _cmds = parsed
     return _cmds
 

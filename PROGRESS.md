@@ -9755,3 +9755,9 @@ Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me
 - NO LIVE TWITCH TEST THIS CYCLE. Three text-against-constant proofs need no chat, no redemption and no cheer; no account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B43 so the next seat starts there: `wear`.what's accessory slots and cosmetic kinds; `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording.
 - Files: scripts/chatcmd.gd (comments only), PROGRESS.md. data/commands.json and docs/COMMANDS.md deliberately untouched. Not ticked by me.
+
+## C-107 (2026-11-18 CT, content) - feed lines for the three newest minibosses: Moulder, Ratcatcher, Drover
+- ITEM: TAKE THIS NEXT (04:07 CT 18 Nov) gave CONTENT "C-107, take it normally". Plan named no item, so standing backlog 5 (miniboss feed lines). Merged origin/main first. Art has drawn 28 minibosses; by_key held 25, so the Moulder (26), Ratcatcher (27) and Drover (28) had no feed lines.
+- ADDED: lore_lines.json miniboss_feed.by_key.moulder, .ratcatcher, .drover, 9 arrive and 8 fall each (51 lines), plus `_note_c107`. Written against art's MINIBOSSES.md entries: the Moulder takes a hero's shape, the Ratcatcher is paid by the tail (cage grows with the room's kills), the Drover yokes a hero and damage travels the chain. Arrive pools carry one plain statement of the mechanic and scene lines otherwise. No {name}. No floor count. Zero exact duplicates against the other 25 keys.
+- VALIDATION OK: all four files parse; every pre-existing key equal; new keys only the three by_key entries and `_note_c107`; items.json, bosses.json, potions.json untouched.
+- CODE WIRING: none new. by_key is read by key, so the game build picks these up when bestiary.gd has moulder, ratcatcher and drover rows (art's wiring notes cover them). arrive and fall only; act and broken stay unwired as before.

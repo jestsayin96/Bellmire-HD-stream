@@ -8998,3 +8998,13 @@ AFTER: 100% [17.72,19.00]/ink 17, 125% [21.82,23.50]/ink 21, 150% [27.24,29.00]/
 LOOKED AT: renders/cycles/20261117_u62/rod_s150_h150.png (before, files without 'after' in the name) vs rod_after_s150_h150.png. Differences is one pixel row; letters clean in both at this zoom; the numbers carry the proof, the picture confirms nothing else moved.
 HONEST LIMITS: stripe rows in the script are computed from the same formula the draw uses, only the ink is read off pixels. _u58_contrast.gd's old hard-coded 17.0 floor line was NOT rewired to _wm_baseline this cycle.
 Parse 0 errors. Files: hud_dock.gd, tools/_u62_scales.gd. Not ticked by me.
+
+## U63 - 2026-11-17 22:0x CT - the stripe GATE rewired to the draw's own functions (defect in my own instrument, named in U62)
+ROW: WORK_PLAN HUD row after U62 - rewire _u58_contrast.gd's hard-coded 17.0 floor, prove it can go red, verdict at three scales.
+CHANGED: hud_dock.gd - new ChronicleScroll._grain_span(cy, cap, ink_bot): the ONE definition of the stripe [top,height], read by _dowel's draw AND by the gate. tools/_u58_contrast.gd - the U61 constant-17.0 block replaced by U63: at 100/125/150% x 4 sheet heights it builds a ChronicleScroll and asserts stripe_top >= _wm_baseline and stripe_bottom <= rod bottom, off the same functions.
+THE NEW GATE FOUND A REAL FAULT ON ITS FIRST RUN: at cap < ~5.6 px (a window under ~700p: headless root is 648p, res_k 0.6, cap 4.8) the old ">=1 px" clamp pushed the stripe 0.36 px BELOW the rod (stripe [11.16,12.16] vs rod 11.80). Not reachable at 1080p (cap floor 8) but real on small windows. Fixed: the clamp's floor is 0, so the stripe shrinks to the rod instead of crossing it ([11.16,11.80]).
+RED PROOF (by hand): changed `gy = maxf(gy, ink_bot)` to `gy = gy` -> U63_STRIPE FAIL, CROSSES at h=96, U59_CONTRAST FAIL 1, rc=1. File restored byte-identical (checked), gate re-run green.
+VERDICT LINES: GREEN  U63_STRIPE OK 12 cells / U59_CONTRAST OK 49 colours walked, 16 pairs. Per scale, baseline vs stripe top: 100% 12.66..15.10 vs 13.00..16.90; 125% 12.98..17.90 vs 13.00..20.88; 150% 15.12..21.03 vs 15.40..24.85 - all CLEAR.
+PIXELS, WINDOWED, 1920x1080 (U62, re-run on the new bytes): U62_SCALES OK bad=0 - stripe_top-ink_bot 0.72 / 0.82 / 0.24 px at 100/125/150%, same as U62.
+Parse 0 errors. Files: scripts/hud_dock.gd, tools/_u58_contrast.gd, PROGRESS.md. Not ticked by me.
+HONEST LIMITS: the gate's red proof moves the stripe in _grain_span; it does NOT catch _dowel being edited to stop passing ink_bot (U62 measures pixels and would). The gate runs headless at res_k 0.6, so its absolute pixel values differ from U62's windowed ones; the relation it asserts does not.

@@ -446,6 +446,17 @@ class ChronicleScroll extends Control:
 		var fs := maxi(10, UiTheme.px(17))
 		return top_cy + _wordmark_font().get_string_size("CHRONICLE", HORIZONTAL_ALIGNMENT_LEFT, -1, fs).y * 0.32
 
+	## U63: the grain stripe's [top, height] on a rod. ONE definition, read by _dowel's draw AND by
+	## tools/_u58_contrast.gd's gate, so the gate asserts what the draw does and not a constant that was
+	## only ever true at 100% (the old hard-coded 17.0 floor).
+	func _grain_span(cy: float, cap: float, ink_bot: float = -1.0) -> Vector2:
+		var gy := cy + cap * UiTheme.SCROLL_GRAIN_OFF
+		var gh := maxf(1.0, cap * 0.20)
+		if ink_bot >= 0.0:
+			gy = maxf(gy, ink_bot)
+			gh = clampf(cy + cap - gy, 0.0, gh)
+		return Vector2(gy, gh)
+
 	func _dowel(cy: float, cap: float, ink_bot: float = -1.0) -> void:
 		var s := size
 		var x0 := _p(1.0)
@@ -453,12 +464,8 @@ class ChronicleScroll extends Control:
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		var gy := cy + cap * UiTheme.SCROLL_GRAIN_OFF
-		var gh := maxf(1.0, cap * 0.20)
-		if ink_bot >= 0.0:
-			gy = maxf(gy, ink_bot)
-			gh = clampf(cy + cap - gy, 1.0, gh)
-		draw_rect(Rect2(x0, gy, wdt, gh), UiTheme.SCROLL_GRAIN)
+		var gs := _grain_span(cy, cap, ink_bot)
+		draw_rect(Rect2(x0, gs.x, wdt, gs.y), UiTheme.SCROLL_GRAIN)
 		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
 		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
 		_finial(Vector2(x0 + cap, cy), cap)

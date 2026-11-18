@@ -9820,3 +9820,63 @@ Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me
 - NO LIVE TWITCH TEST THIS CYCLE. Counting a data guard's own arms needs no chat, no redemption and no cheer. No account was used and nothing was spent.
 - STILL UNSWEPT, unchanged from B46/B47 and in the order I would take them: `bestiary`.what's "the eight lords"; `hero`.what's and `inventory`.what's field lists; `dye`.args "<colour>" against the dyer's own refusal wording. The tenth copy of the slot list at roster.gd:1216 is still a route-up to the game build. AND THE COUNTED ARM NOW WANTS SPREADING: the other 66 push_error sites in this loader are still uncounted, and that is the same fault in the same file - I name it and do not take it, because this row was the ten.
 - Files: scripts/chatcmd.gd, PROGRESS.md. Not ticked by me.
+
+## B49 - the rest of the count: sixty-seven loud guard arms were invisible to the reading a gate trusts (chat bot, 2026-11-18 07:4x CT)
+
+THE DEFECT. B48 made the ten `wear` arms countable through ChatCmd.guard_faults() and said in its
+own comment that a count is what a harness can fail on. It left the other arms alone. Measured
+this cycle: scripts/chatcmd.gd carries 74 COMMANDS_DATA guard arms and exactly 7 append lines, all
+of them `wear`. So guard_faults() returned an EMPTY ARRAY - the healthy reading - while any of 67
+arms was firing: a missing `ask`, a dead cooldown key, a drifted forge kind list, a dyeing priced
+at money the dyer does not take. A gate that trusts the count would have passed the live defect
+class B46 found, a published price span 100 gold under the counter, as long as the drift sat in any
+command but `wear`. A partial measure that reads as a complete one is the COORDINATION 15 fault.
+
+WHAT CHANGED. 67 `_guard_faults.append(<tag>)` lines, one beside each previously-uncounted arm,
+inserted immediately before its push_error at the same indentation. The tag is the arm's own tag
+taken out of its own message, unchanged; the two enlist arms that carry %s in their tag take the
+loop's e_tag, the shape the `wear` arms already used. NO push_error or printerr text was touched,
+no published word, price or list is restated, and data/commands.json was not edited. Appends now
+74, guard arms 74, adjacent pairs 74, indentation mismatches 0.
+
+GATES (my :45 window; lock IDLE at 07:16:18 from the game build, no Godot process alive, claimed
+07:49:20, declared 07:53, released 07:50:45)
+  PARSE                   rc=0, 0 error lines
+  L14_TEST                OK (22 checks)
+  TWITCH_PARSE            OK (8 checks)
+  COMMANDS_DOC            OK wrote 27 commands - a NO-OP; docs/COMMANDS.md unchanged
+  baseline guard_faults() 0 faults, [] - the healthy reading on clean data
+
+HONEST LIMIT ON THOSE GATES. They ran on the 67-append code change. The ten-line `##` B49 comment
+block above guard_faults() was written AFTERWARDS, at 07:53, and was NOT re-parsed by a gate: by
+then the HUD's :52-:07 window had opened and I had already written IDLE, and launching a three-
+second headless run inside another lane's window without a claim is the exact breach class that
+reset the clean-hour count at 03:53:33. A `##` comment block cannot change behaviour, but I did
+not prove it this cycle and I am not going to say I did. Re-prove it with the next PARSE.
+
+SEVEN ENGINE RED PROOFS, each a mutation of data/commands.json, each run through a temporary
+_b49_count.gd at the worktree root that prints guard_faults() and exits non-zero on a non-empty
+count. EVERY ONE MOVED THE COUNT AND RETURNED rc=1. Before this cycle every one of them returned 0.
+  order minus `dye`        -> 1  ["ORDER SHORT"]
+  `ask` removed            -> 3  ["NO ASK", "ASK NUMBER MISSING", "ASK NUMBER MISSING"]
+  dye cost 9999            -> 1  ["DYE COST"]
+  oil cost 77              -> 1  ["PRICE"]
+  forge "kinds: " renamed  -> 1  ["FORGE ANCHOR"]
+  cooldown_s removed       -> 1  ["COOLDOWN MISSING"]
+  enlist "Callings: "      -> 1  ["ENLIST ANCHOR"]
+data/commands.json handed back BYTE-IDENTICAL after every mutation (verified against the bytes read
+before the first one). _b49_count.gd and its log deleted in the same cycle.
+
+WHAT THE `ask` PROOF SHOWS, AND IT IS NOT A NEW DEFECT. Removing `ask` fires THREE arms, not one:
+the sibling guard plus two ASK NUMBER MISSING arms for the numbers that live under it. That is the
+loader working as written - a dead parent takes its children with it - and the count now says so
+where before it said nothing at all.
+
+ONE CORRECTION TO THE PROMPT, MEASURED NOT REMEMBERED. The :45 prompt owes
+"COMMANDS_DOC wrote 26 commands". The real generator printed 27 this cycle and left
+docs/COMMANDS.md unchanged, so 27 is the live number and 26 is stale. The generator wins, as the
+prompt itself instructs.
+
+NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched; twitch_reply(user_login, text)
+unchanged, still no @name and no rate limiting. NO live Twitch test this cycle: nothing was
+redeemed, nothing was cheered, bellmirebro posted nothing, no channel state was read or written.

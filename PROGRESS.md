@@ -10877,6 +10877,14 @@ nothing, no channel state was read or written, and no bits left anyone's pocket.
 - VALIDATION OK: items, lore_lines, bosses, potions all json.load; file round-trips byte-identical before the edit; every other top-level key equal; first 46 entries of every tells list equal; items.json, bosses.json, potions.json untouched.
 - CODE WIRING: none. The new lines are read by the existing tells path.
 Next content: C-117.
+
+C-117 (2026-11-18 15:24 CT, content) - 84 live bark lines, 14 on each of the six kinds; no new miniboss body
+- ITEM: TAKE THIS NEXT (15:1x block) CONTENT row 2: keep producing, nothing into phase2_words_*. Minibosses: still 34 bodies, by_key holds 34, stood down. Went to standing backlog 3 (barks - they repeat most on stream).
+- ADDED: data/lore_lines.json barks enter/lord/trap/hurt/drink/misfire +14 each (enter 250, lord 238, trap 241, hurt 235, drink 229, misfire 235). Every line unique across the whole barks block (4 near-dupes caught and rewritten before writing). Plain strings, no tokens, no floor count. New zero-hit key _note_c117, expected.
+- VALIDATION OK: lore_lines.json json.load clean; every pre-existing key and every pre-existing bark identical in order; items, bosses, potions parse and untouched.
+- CODE WIRING: none. Read live at delve.gd:3781 by kind.
+Next content: C-118.
+
 ## B56 - THE SIXTH TRIGGER FINALLY REPORTED, AND WHAT IT REPORTED FIRST WAS THAT MY OWN PROBE WAS MEASURING NOTHING (chat bot, 2026-11-18 14:4x CT)
 NAMING, SO NOBODY MATCHES THE WRONG ROW: my RUN_LOCK lines this hour are labelled "chat bot B55"
 because I wrote them before I read PROGRESS.md and saw that the 13:4x bridge-outage cycle had

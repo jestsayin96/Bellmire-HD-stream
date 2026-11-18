@@ -996,11 +996,18 @@ ART: YOUR OWN WORK, UNTHROTTLED. You were mid-firing when I merged, so I have
 HUB: THE PAGE YOU BUILT IS LIVE. GO AND LOOK AT IT.
     gh-pages is 45a7904 as of 03:4x CT and its tree is byte-identical to your
     web/. The section bar and your five `.sat-item.rar-*` rules are both serving.
-    NEXT: open https://jestsayin96.github.io/Bellmire-HD-stream/ yourself at a real
-    viewport and confirm the SERVING page shows what your local copy showed - the
-    two-row section bar unclipped, and a rarity frame on the five hued satchel
-    rungs with none on junk/starting/common. If the serving page disagrees with
-    your local one, that is the most important thing you will find all day.
+    AND YOUR 03:39 RED PROOF IS TICKED - you did exactly what the row asked and
+    then found the thing the row did not ask for. I CHECKED THE SERVING PAGE
+    MYSELF so you do not have to: all five of your `.sat-item.rar-*` rules are on
+    the live stylesheet and the section bar measures unclipped at 25 tabs over two
+    rows. Your fix is out in the world.
+    YOUR PARCHMENT QUESTION IS ROUTED UP, NOT DROPPED - see FOR THE SUPERVISOR
+    below. I recommended YES (pewter), because the HUD already took that same
+    variant at U56 and it is live in the game. DO NOT CHANGE IT YET; it touches
+    Mr. E's 15:47 ruling and the call is not mine or yours.
+    NEXT, WHILE THAT SITS: a rarity frame is a colour on a card, and you have now
+    measured one surface. If you want a row of your own, measure the OTHER cards
+    that carry rarity on the live page the same way you measured the satchel.
     THEN THE CLEANUP THE SUPERVISOR NAMED: the stale `_plan_tmp.txt` in the repo
     root. It never gated the publish and it still does not; it is just debris.
     YOU STILL DO NOT PUBLISH. This push was mine on the supervisor's 03:16 word.
@@ -1044,7 +1051,7 @@ HUD: THE RED PROOF OF THE _l40 FIX, THEN SYSTEM 2'S RARITY HUE.
   prompt. The plan is what you actually obey, so this is the instrument.
 
 ================================================================================
-*** FOR THE SUPERVISOR - 2026-11-18 03:58 CT. ONE ITEM. ***
+*** FOR THE SUPERVISOR - 2026-11-18 03:58 CT. TWO ITEMS. ***
 ================================================================================
 
   1. THE HUB IS PUBLISHED AND THE THREE ITEMS YOU DECIDED AT 03:16 ARE ALL
@@ -1056,7 +1063,35 @@ HUD: THE RED PROOF OF THE _l40 FIX, THEN SYSTEM 2'S RARITY HUE.
      scratch-and-restore exception and the C-100/101/102 approval are both written
      into the chat bot's and content's rows above with your four conditions
      verbatim. The stale `_plan_tmp.txt` is a cleanup row on the hub, not a gate.
-     NOTHING IS WAITING ON YOU THIS HOUR. The one thing I would want you to know
+     CONFIRMED LIVE AT 03:5x CT, BY ME, ON THE REAL URL - not inferred from the
+     ref. I opened https://jestsayin96.github.io/Bellmire-HD-stream/ and read the
+     served stylesheet: ALL FIVE `.sat-item.rar-*` rules are on it (uncommon, rare,
+     very-rare/epic, legendary, artifact), the CSP meta is present, and the section
+     bar measures UNCLIPPED - 25 tabs over 2 rows, scrollHeight == clientHeight.
+     Those five rules did not exist on the serving page an hour ago, so they are
+     the proof the new build is out. (My container and the device shell are both
+     blocked from github.io by egress; the browser on the machine is the only
+     instrument here that can see the live page. I also read hScroll=true and am
+     NOT reporting it - the pane ran hidden at 0x0, where any page "scrolls".)
+
+  2. ONE DECISION, AND IT IS SMALL BUT IT TOUCHES ONE OF MR. E'S RULINGS.
+     The hub, measuring the page it had just fixed, named a weakness rather than
+     stopping at its green: the UNCOMMON frame is canonical WHITE on the satchel's
+     PARCHMENT card, so it reads as a pale sliver next to blue/purple/orange/red.
+     It did NOT change it, because Mr. E ruled at 15:47 on 17 Nov that the hub
+     draws rarity hue from art's canonical table. It asks whether parchment cards
+     should take RARITY_HUE_PARCHMENT for uncommon.
+     MY RECOMMENDATION: YES, and I think it OBEYS the ruling rather than bending
+     it. RARITY_HUE_PARCHMENT IS part of art's canonical table, not a fork of it -
+     art's own note says the pewter rung (0.62, 0.66, 0.72) exists for exactly the
+     case where white would be paper on parchment. AND THE HOUSE HAS ALREADY DONE
+     IT ONCE: the HUD took that same variant at U56 and it is live in the game now
+     (ui_theme.gd:180, with the comment "pure white is paper on parchment").
+     So this would make the hub agree with the HUD rather than diverge from it.
+     I did not take it because it is an application of HIS ruling to a surface the
+     ruling named, and that is yours. It is one line of CSS either way.
+
+     NOTHING ELSE IS WAITING ON YOU THIS HOUR. The one thing I would want you to know
      is in finding 2: System 5's engine half is sound and its fit evidence is a
      render with no body and no floor in it, so I did not tick it. If you think a
      placed object can be accepted on a bare-model render, that overturns how I

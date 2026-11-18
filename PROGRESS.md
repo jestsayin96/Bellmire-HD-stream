@@ -1,3 +1,12 @@
+## HUB 2026-11-17 21:40 CT - RARITY HUE LADDER DRAWN FROM ART'S TABLE (style.css only; app.js untouched)
+Row from TAKE THIS NEXT (20:58 block, HUB): draw rarity hue from tools/art/icons.py RARITY_HUE. DONE.
+THE NUMBER: five rungs changed, ZERO hexes copied - floats x255 rounded: uncommon #ffffff, rare #4d8cff, very rare #b359ff, legendary #ff8c1f, artifact #ff211a. Old third table (uncommon GREEN #6aa84f, rare #4a86c8, very rare #9b6bc8, artifact #d9643a, legendary var(--gold)) is gone: 0 hits for those four hexes in web/. junk/starting/common stay bare (shot: rar-common card computed border = the plain card border).
+Now ONE table: :root --rar-* vars (style.css ~1373), used by .rar-* left border and .gcard frame. .rar-epic stays on very-rare. Frame only, never a fill. Gold is no longer a rarity colour; legendary is tangerine (data, not chrome).
+LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tangerine/red frames all read; WHITE needed a 1px dark keyline (box-shadow rgba(42,28,16,.6)) because the gear card is PARCHMENT - added on all rarity cards. Mock only carries uncommon/rare/very rare; legendary and artifact were checked on cloned cards with the class forced. Computed colours read back: uncommon rgb(255,255,255), rare rgb(77,140,255), very rare rgb(179,89,255).
+Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
+Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
+Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+
 ## ART 2026-11-17 16:54 CT - THE TAPSTER, a twenty-first miniboss. IT DRINKS WHAT YOU BROUGHT - and three faults the ported occlusion test could not see
 
 The 15:58 row: the occlusion port is ticked, the instruments have had three

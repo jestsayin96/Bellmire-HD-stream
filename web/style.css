@@ -1370,9 +1370,11 @@ html.watch .welcome, html.watch #welcomeBtn { display: none !important; }
 .shop-good .gcost .ic { width: 13px; height: 13px; vertical-align: -2px; color: var(--gold, #c9a54a); }
 .shop-good.passing { background: rgba(201,165,74,.08); }
 .shop-good.mine { border-left-color: var(--accent, #3aa6a0); }
-.rar-uncommon { border-left-color: #6aa84f; } .rar-rare { border-left-color: #4a86c8; }
-.rar-very-rare, .rar-epic { border-left-color: #9b6bc8; } .rar-legendary { border-left-color: var(--gold, #c9a54a); }
-.rar-artifact { border-left-color: #d9643a; }
+/* RARITY HUE LADDER (17 Nov, Mr. E "yes i think so"): mirrored from tools/art/icons.py RARITY_HUE, sRGB floats x255. A rarity frame is DATA, not chrome. junk/starting/common stay BARE. */
+:root { --rar-uncommon: #ffffff; --rar-rare: #4d8cff; --rar-very-rare: #b359ff; --rar-legendary: #ff8c1f; --rar-artifact: #ff211a; }
+.rar-uncommon { border-left-color: var(--rar-uncommon); } .rar-rare { border-left-color: var(--rar-rare); }
+.rar-very-rare, .rar-epic { border-left-color: var(--rar-very-rare); } .rar-legendary { border-left-color: var(--rar-legendary); }
+.rar-artifact { border-left-color: var(--rar-artifact); }
 
 /* ===== H30: the Satchel tab (reuses .shop-card / .hpbar / .chip; the bar width is a CSSOM number) ===== */
 .sat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 0 10px; }
@@ -1703,9 +1705,10 @@ html:not(.overlay):not(.watch) .app[data-chat="min"] .chat-toggle svg { transfor
 .good-grid { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 .gcard { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 5px; min-height: 148px; padding: 8px 8px 7px;
   background: #f2e2bd; color: var(--ink); border: 2px solid var(--edge-2); border-radius: 9px; cursor: default; }
-.gcard.rar-uncommon { border-color: #6aa84f; } .gcard.rar-rare { border-color: #4a86c8; }
-.gcard.rar-very-rare { border-color: #9b6bc8; } .gcard.rar-legendary { border-color: var(--gold); box-shadow: 0 0 0 1px rgba(198,146,47,.5); }
-.gcard.rar-artifact { border-color: #d9643a; box-shadow: 0 0 0 1px rgba(217,100,58,.5); }
+.gcard.rar-uncommon { border-color: var(--rar-uncommon); } .gcard.rar-rare { border-color: var(--rar-rare); }
+.gcard.rar-very-rare, .gcard.rar-epic { border-color: var(--rar-very-rare); } .gcard.rar-legendary { border-color: var(--rar-legendary); }
+.gcard.rar-artifact { border-color: var(--rar-artifact); }
+.gcard.rar-uncommon, .gcard.rar-rare, .gcard.rar-very-rare, .gcard.rar-epic, .gcard.rar-legendary, .gcard.rar-artifact { box-shadow: 0 0 0 1px rgba(42,28,16,.6); } /* dark keyline so the white rung reads on parchment */
 .gcard.passing { background: #f0dca8; }
 .gc-name { font-size: .82rem; font-weight: 650; line-height: 1.2; text-align: center; overflow-wrap: anywhere; min-height: 2.4em;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }

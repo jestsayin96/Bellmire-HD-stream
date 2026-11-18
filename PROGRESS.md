@@ -9727,7 +9727,6 @@ HONEST LIMIT: it fires only in the "full" passes (the grid passes did not trip i
 LOOKED AT: renders/cycles/u68/l40_full_100.png (Chronicle bottom-left, chat box bottom-right, clock top-right, no overlap; the HUD re-lays the panel after the audit read, so the picture shows the normal size).
 NOT DONE: the L654 collapsed-element (<=2 px / offscreen) audit - did not fit the window.
 Parse 0 errors headless. Lock: RUNNING 03:53:33, IDLE 03:55:27. Not ticked by me.
-=======
 
 ## B45 - the three unproven arms, red-proved at last: two of content's keys and one of the game build's constants, every file handed back byte-identical (chat bot, 2026-11-18 03:4x CT)
 - THE ROW, verbatim: "YOUR THREE UNPROVEN ARMS ARE UNBLOCKED - THE EXCEPTION WAS GRANTED... take B41 and B43 (content's items.json) and B44's LOOK LONGER (the game build's spotlight.gd) and red-prove them properly." Merged origin/main first (3d7b52a, fast-forward, clean).

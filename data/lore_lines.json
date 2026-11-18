@@ -11249,10 +11249,126 @@
           "The Hurdleman is down. Nobody is penned.",
           "Rotten wattle, split through."
         ]
+      },
+      "jointer": {
+        "arrive": [
+          "It is pinned together.",
+          "One pin holds it. Both halves are working.",
+          "A mallet on one side, a saw on the other. One body.",
+          "You can see through the middle of it.",
+          "Two lamps at two heights, and one pin between them.",
+          "It stands on two blocks and works with three arms.",
+          "The spare arm hangs on its peg. The other two are busy.",
+          "Sawdust on the floor, and a pin as thick as a wrist.",
+          "It is a joint that learned to walk."
+        ],
+        "fall": [
+          "The pin is out. Both halves lie where they stood.",
+          "The Jointer is down. It does not come apart again.",
+          "Two halves, and neither one is moving.",
+          "The mallet rolls one way and the saw the other.",
+          "The Jointer is down. The pin is still in it.",
+          "Split down the seam. Someone will sell the timber.",
+          "It held together as long as the pin did.",
+          "The trestles are empty. The Jointer is done for the day."
+        ]
+      },
+      "tanner": {
+        "arrive": [
+          "It is pegging up a fresh hide.",
+          "Wet hides on every line. It is wearing the newest.",
+          "The pit smells of lime and old water. Something is working in it.",
+          "A stooped frame, and a skin still dripping.",
+          "It looks you over the way it looks over a hide.",
+          "Nothing down here is allowed to get old. It sees to that.",
+          "The tan-pit is occupied.",
+          "It has been soaking something for a week. It is done waiting.",
+          "It has dressed worse than you."
+        ],
+        "fall": [
+          "The Tanner goes down in its own pit.",
+          "The hides come off the lines and into the water.",
+          "The Tanner is down. The pit stops smelling of work.",
+          "A last hide, half pegged. Nobody finishes it.",
+          "It had an answer for every blow but the last.",
+          "Down. The lime water takes the apron.",
+          "The Tanner is down. Its hands are still the colour of the pit.",
+          "The pegs are bare. The Tanner is done."
+        ]
+      },
+      "reeve": {
+        "arrive": [
+          "It is here for the lord's share.",
+          "A small man, a big box, and a chain between them.",
+          "It is counting what you have not carried yet.",
+          "It sits by the box with the ledger open.",
+          "The chain does not let it leave. It does not need to.",
+          "Everything on this floor is owed to somebody. It keeps the book.",
+          "A toll, and it has a face.",
+          "It has been here since the floor was laid. The rent is due.",
+          "The box is open. The count has started."
+        ],
+        "fall": [
+          "The Reeve is down. The box is yours.",
+          "The chain hangs loose. Nothing is pulling it.",
+          "The ledger is shut. The share stays where it is.",
+          "The Reeve is down. Nobody is taking a cut today.",
+          "Quiet at the box. The count is whatever you say it is.",
+          "Down, still tied to the box it guarded.",
+          "The Reeve is down. The lord's share is not coming for you.",
+          "The last tally is half written. Nobody finishes it."
+        ]
+      },
+      "tapster": {
+        "arrive": [
+          "Something in here is drinking.",
+          "A tun with the tap open, and a man standing over it.",
+          "It smells of the cellar. It is not offering.",
+          "The tap keeps running. Whatever you brought goes down it.",
+          "It has the look of a man who has never paid for a round.",
+          "A cask the size of a cart, and a tapster who has not moved.",
+          "Whatever you brought, it has a mug for.",
+          "Keep your brews corked.",
+          "The tap is open and it is not for you."
+        ],
+        "fall": [
+          "The Tapster is down. The tun runs dry.",
+          "The tap drips, then stops.",
+          "Down. The cask rings empty.",
+          "The Tapster is down. What is left is yours.",
+          "It poured the last one for itself.",
+          "The Tapster goes over with the tap still open.",
+          "A last drip off the spigot. Then quiet.",
+          "The Tapster is down. Nobody is serving."
+        ]
+      },
+      "pressman": {
+        "arrive": [
+          "It has a yoke, and it is looking for something to put in it.",
+          "Chains on the floor, collars on the chains. One is still warm.",
+          "It waits for the first one to fall.",
+          "The press stands open. It is hoping for company.",
+          "A flared coat and a yoke at the shoulder. It has done this before.",
+          "It does not hurry. Someone always goes down.",
+          "Four collars hang off it. They are not ornaments.",
+          "It was the prison's press. It kept the habit.",
+          "It collects the ones who fall. It is patient about it."
+        ],
+        "fall": [
+          "The Pressman is down. The yoke comes off whoever it held.",
+          "Every collar drops open at once.",
+          "The chains go slack all down the floor.",
+          "The Pressman is down. Get your people up.",
+          "The yoke lies on the floor. Nobody is in it.",
+          "It could not hold them once it was down.",
+          "The Pressman is down. The collars lie empty.",
+          "A last clink, and the chains stop."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
-    "_note_c87": "C-87: hurdleman (eighteenth miniboss, art lane) gets arrive and fall lines, eight each. act and broken omitted on purpose, same reason as C-86: the party-splitting panel is a mechanic not built. Key is the art lane's own: hurdleman."
+    "_note_c87": "C-87: hurdleman (eighteenth miniboss, art lane) gets arrive and fall lines, eight each. act and broken omitted on purpose, same reason as C-86: the party-splitting panel is a mechanic not built. Key is the art lane's own: hurdleman.",
+    "_note_c96": "C-96: jointer, tanner, reeve, tapster and pressman (eighteenth-to-twenty-second art-lane minibosses, bodies that landed after D96 ticked) get arrive and fall lines: 9 arrive and 8 fall each (45 lines). act and broken omitted on purpose, same reason as C-86/C-87: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own. Four of the arrive lines are the art lane's own feed lines, kept word for word (It is pinned together / pegging up a fresh hide / here for the lord's share / Something in here is drinking). {name} not used. Nothing spawns these five bodies yet; that is engine work and is not changed here."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

@@ -1837,6 +1837,84 @@ static func commands() -> Dictionary:
             _guard_faults.append("BESTIARY LORDS")
             push_error("COMMANDS_DATA BESTIARY LORDS: `bestiary` publishes %d lords and the game rises %d, read from Bestiary.LESSER + Bestiary.GREATER - docs/COMMANDS.md counts the deep's lords wrong and a viewer finds out by reaching the one that is not there" % [bl_said[0], bl_code])
             printerr("COMMANDS_DATA BESTIARY LORDS - published %d, risen %d" % [bl_said[0], bl_code])
+        # ---- B51: THE `inventory` FIELD LIST - THE FIRST CLAIM IN THIS FILE GUARDED BY WHETHER
+        # THE THING THAT DELIVERS IT STILL EXISTS, RATHER THAN BY WHAT A NUMBER SAYS.
+        # B34 named fifteen unguarded `what` claims. FOUR carried a number and all four are now
+        # closed: `look` (B35), `satchel` (B36), `bestiary` (B50) and `oil` - which is closed as
+        # NOT GUARDABLE FROM THIS LANE, measured this cycle and written up in PROGRESS.md: the
+        # authority for "two delvers" is an inline `* 0.5` at delve.gd:161 with no constant beside
+        # it, and reading that file's TEXT at runtime would go blind in an exported build (Godot 4
+        # ships .gd as binary tokens), so the guard would fire on export rather than on drift.
+        # ELEVEN REMAIN AND THEY CARRY LISTS, NOT NUMBERS. This is one of them, and it is the one
+        # whose line is built in THIS FILE - inventory() above, not another lane's printer. So the
+        # sentence and the code that has to honour it are both mine, and the drift that could pass
+        # in silence is not a wrong number but a FIELD THAT IS PROMISED AND NEVER PRINTED.
+        # I SUSPECTED ONE TODAY AND MEASUREMENT OVERTURNED IT: `inventory`.what publishes `dye`
+        # and inventory()'s format string has no dye in it. It is NOT a fault - roster.gd:1276-77
+        # appends "dyed <colour>" inside worn_line(), so dye reaches the line through the same
+        # call as accessories. Recorded so the next sweep does not re-raise it.
+        # WHAT THIS GUARD IS BOUND TO. Each published field maps to the call in inventory() that
+        # puts it on the line, and the guard asks the authority whether that call still EXISTS -
+        # Roster's own script method list, read off the class without instancing it. That is not
+        # circular: GHOST catches my sentence growing a field nothing delivers, and SOURCE catches
+        # the roster lane renaming or dropping the call while my sentence still promises it. Two
+        # directions, the drift check this lane runs on every edit, made into an engine arm.
+        # THREE PATHS. ANCHOR stops the guard going blind if the sentence loses its "carries:"
+        # lead-in; GHOST and SOURCE are the two mismatches and are INDEPENDENT of each other -
+        # a sentence can grow a field and lose a printer in the same edit. Not fatal, the shape
+        # every guard above uses: push_error + printerr, the commands still answer, and a battery
+        # greps COMMANDS_DATA. No line here is the healthy reading.
+        var iw: String = String(((cmd_d.get("inventory", {}) as Dictionary)).get("what", ""))
+        var i_anchor := "carries: "
+        var i_fields: Array[String] = []
+        var i_at: int = iw.find(i_anchor)
+        if i_at >= 0:
+            var i_rest := iw.substr(i_at + i_anchor.length())
+            var i_stop: int = i_rest.find(".")
+            if i_stop > 0:
+                i_rest = i_rest.substr(0, i_stop)
+            for i_part in i_rest.split(","):
+                var i_p := String(i_part).strip_edges()
+                if i_p.begins_with("and "):
+                    i_p = i_p.substr(4).strip_edges()
+                if i_p != "":
+                    i_fields.append(i_p)
+        # every published field -> the Roster call in inventory() that puts it on the line
+        var i_src := {
+            "title": "title_of",
+            "weapon": "weapon_name",
+            "armour": "armour_name",
+            "accessories": "worn_line",
+            "dye": "worn_line",
+            "brews": "brews_line",
+        }
+        # the three inventory() prints itself: two hero keys read in this file, and the fish block
+        var i_own: Array[String] = ["oil", "gold", "the best fish caught"]
+        var i_have := {}
+        for i_m in (Roster as Script).get_script_method_list():
+            i_have[String((i_m as Dictionary).get("name", ""))] = true
+        if i_fields.is_empty():
+            _guard_faults.append("INVENTORY ANCHOR")
+            push_error("COMMANDS_DATA INVENTORY ANCHOR: `inventory`.what no longer says \"carries: <fields>\" - the fields !inventory promises can no longer be checked against the calls that print them, and a promised field could go missing in silence")
+            printerr("COMMANDS_DATA INVENTORY ANCHOR - `inventory`.what lost its \"carries: \" lead-in; the published field list is now unchecked")
+        else:
+            var i_ghost: Array[String] = []
+            var i_dead: Array[String] = []
+            for i_f in i_fields:
+                if i_src.has(i_f):
+                    var i_fn := String(i_src[i_f])
+                    if not i_have.has(i_fn):
+                        i_dead.append("%s -> Roster.%s" % [i_f, i_fn])
+                elif not i_own.has(i_f):
+                    i_ghost.append(i_f)
+            if not i_dead.is_empty():
+                _guard_faults.append("INVENTORY SOURCE")
+                push_error("COMMANDS_DATA INVENTORY SOURCE: `inventory`.what promises %d field(s) whose printer is gone from Roster - %s - so !inventory answers without them while docs/COMMANDS.md still says a viewer will see them" % [i_dead.size(), i_dead])
+                printerr("COMMANDS_DATA INVENTORY SOURCE - %d published field(s) with no printer left: %s" % [i_dead.size(), i_dead])
+            if not i_ghost.is_empty():
+                _guard_faults.append("INVENTORY GHOST")
+                push_error("COMMANDS_DATA INVENTORY GHOST: `inventory`.what publishes %d field(s) inventory() never puts on the line - %s - so docs/COMMANDS.md promises a viewer something !inventory does not answer with" % [i_ghost.size(), i_ghost])
+                printerr("COMMANDS_DATA INVENTORY GHOST - %d published field(s) nothing prints: %s" % [i_ghost.size(), i_ghost])
         _cmds = parsed
     return _cmds
 

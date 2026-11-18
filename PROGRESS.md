@@ -9805,3 +9805,11 @@ No edit was made, so no parse check was owed and no Godot claim was taken (lock 
 QUEUE IS EMPTY FOR HUD: L72-L74 shipped, L71/L61 shipped, L66 closed (hub H31), D41/D48/D61 are not my files.
 ASK FOR THE TEAM LEAD: strike the HUD rarity-hue row; give HUD a real item or let it stand down.
 Worktree noise: 10 tracked renders/cycles PNGs (l73, l40) show modified - re-shot binaries, left alone.
+## U71 (HUD, 2026-11-18T06:54-06:00) - the one-table rarity guard, tools/_u71_rarity_guard.gd (headless, red-proved)
+- ITEM: TAKE THIS NEXT 05:58 row 6 - "GUARD THE ONE-TABLE RULE" (read as guarding shipped work on a ticked System 2, not new work). No owned .gd file changed.
+- WHAT IT DOES: parses icons.py RARITY_HUE (8 rungs) and RARITY_HUE_PARCHMENT["uncommon"] and asserts UiTheme.RARITY_HUE equals it digit-for-digit on rare / very rare / legendary / artifact, that junk / starting / common stay bare on both sides, that uncommon is art's sanctioned parchment pewter (not a re-choice), that no invented rung exists, and that RARITY_INK has no rung without a hue.
+- REAL RUN (headless, no UI drawn): U71_GUARD OK rungs_py=8 ui_rungs=5 redproofs_caught=9/9 fails=0. Parse after edit: 0 errors.
+- RED PROOFS (9, all caught, in the same run): rare nudged .01, artifact lost, common painted, uncommon -> white, uncommon -> fishing green, junk painted, "epic" invented, a rung erased, and art's own table edited (legendary 0.55 -> 0.60) so drift on EITHER side fires.
+- HONEST LIMIT: it guards UiTheme and icons.py only. It does NOT reach scripts/fishing.gd RARITY_COLOR (the third table; game build / art own that answer, row 3) or the hub's JS table - it reads art's file as text, so a restructure of the RARITY_HUE block makes it fail loudly (rungs_py != 8) rather than pass silently.
+- LOOKED AT: nothing to render - a table check has no picture; the evidence is the printed verdict line above.
+- Lock held 06:53:49 - released at the IDLE line below. Not ticked by me.

@@ -10281,3 +10281,69 @@ Change (tools/_u71_rarity_guard.gd): new block_end() finds the matching brace by
 Red proofs added: U76_BRACE 3/3 - a "}" in a comment plus a nested dict inside RARITY_COLOR, a nested dict value at the top, and an unterminated block; the old finder would read 1 rung on the first. Result: U71_FISH 11/11, U71_GUARD OK 9/9 fails=0.
 Headless parse: no Parse Error. The 'instantiate on null' SCRIPT ERRORs are the known gear.gd / thin .godot import cache issue (game build fixed it in S35), not HUD.
 No picture: guard-only change, no UI drawn. Next firing: L74-style under-load check only if the team lead assigns; otherwise stand down.
+## B52 - THE OWED BATTERY RAN AND B51'S GUARD IS PROVEN; MY OWN PYTHON EMULATION WAS RIGHT AND THE ENGINE IS WHY WE KNOW (chat bot, 2026-11-18 10:4x CT)
+
+NO NEW ARM THIS CYCLE, BY THE PLAN'S OWN INSTRUCTION. The 09:5x TAKE THIS NEXT row 5 reads "RUN
+THE OWED BATTERY FIRST AT :45, before any new arm". B51 wrote the `inventory` field-list guard and
+held it back as a checkpoint (54940d9) precisely because PARSE / L14_TEST / TWITCH_PARSE /
+COMMANDS_DOC / the baseline guard_faults() reading and three red proofs were all owed. They are
+paid. The team lead had already merged the checkpoint into main (16dedd0), so the code under test
+this cycle is the merged code, not a local copy of it.
+
+THE BATTERY, EIGHT HEADLESS RUNS IN 31 SECONDS (claimed 10:48:01, done 10:48:32, IDLE 10:49:10):
+  PARSE          --quit-after 300, rc 0, ZERO error lines. (Two pre-existing WARNINGs only, both
+                 another lane's: an invalid UID on MI_Cobble.tres via town.gd:820.)
+  L14_TEST       OK (22 checks)
+  TWITCH_PARSE   OK (8 checks)
+  COMMANDS_DOC   OK wrote 27 commands, and it was a TRUE NO-OP - docs/COMMANDS.md came out
+                 byte-identical, md5 9a80bfd98049e77abddab6d1d182c524 before and after.
+  BASELINE       guard_faults() 0. Every one of the nine published fields resolves.
+  RED ANCHOR     rc=1, faults ["INVENTORY ANCHOR"] - sentence rewritten without "carries: ".
+  RED GHOST      rc=1, faults ["INVENTORY GHOST"] - published "lantern oil tithe", which nothing
+                 prints; the message names that field and no other.
+  RED SOURCE     rc=1, faults ["INVENTORY SOURCE"] - one map entry pointed at Roster.brews_line_GONE;
+                 the message reads "brews -> Roster.brews_line_GONE".
+  BASELINE AFTER guard_faults() 0 again, so each mutation was undone and nothing leaked between runs.
+EACH RED PROOF NAMED EXACTLY ONE FAULT. That matters more than the rc: three paths that fire
+together would not tell a reader which drift happened, and ANCHOR firing alongside GHOST would have
+meant the field parse was feeding the field check its own failure. It does not.
+
+MY PYTHON EMULATION FROM B51 WAS CORRECT AND I AM SAYING SO THE RIGHT WAY ROUND. B51 predicted
+"all nine fields resolve, GHOST [], SOURCE [], no arm fires" and warned that if the real gate
+disagreed, THE GATE WINS. The gate agreed. The prediction was not the proof - the engine was - and
+an emulation that happens to be right is still an emulation until the engine says so.
+
+FILES HANDED BACK UNCHANGED, MEASURED NOT ASSUMED. data/commands.json md5
+0ed191404157221abd8a184cc580dfa5 before and after (the same md5 B50 reported), docs/COMMANDS.md
+md5 9a80bfd98049e77abddab6d1d182c524, and `git status` on all three owned files is EMPTY after the
+two mutations were reverted. The scratch probe _b52_guard.gd and its log were deleted.
+
+THE DRIFT CHECK, BOTH DIRECTIONS, AND IT TURNED UP ONE THING WORTH RECORDING SO NOBODY RE-RAISES IT.
+  Direction A - a data entry no command answers: NONE. All 27 keys reach an arm, `order` holds all
+  27 with nothing missing and nothing unknown.
+  Direction B - a dispatch arm with no data entry: THREE, and they are correct. `testbits`,
+  `testsub` and `testpoints` are undocumented ON PURPOSE and I read the gate rather than assuming
+  it: chatcmd.gd:178 is `if not user_id.begins_with("local_"): return ""`, so only Mr. E's own
+  local chat box reaches them and no Twitch viewer ever can. A command no viewer can type does not
+  belong in a file whose only job is to tell viewers what they can type. NOT A FAULT, NOT A GAP IN
+  docs/COMMANDS.md.
+  A THIRD DIRECTION I CHECKED AND THEN THREW AWAY AS MEANINGLESS: five declared aliases (commands,
+  sheet, spotlight, stats, watch) have no dispatch arm of their own. That is how the file is built -
+  canonical() resolves an alias to its command at chatcmd.gd:112, BEFORE the match - so an alias
+  never needs an arm, and the twenty-two arms that do name an alias are redundant rather than
+  required. I am recording the non-finding because I spent two passes on a bad regex to get it, and
+  the next sweep should not spend them again.
+
+WHAT IS STILL OPEN IN THIS LINE OF WORK: B34 named fifteen unguarded `what` claims. Four carried a
+number and all four are closed (`look` B35, `satchel` B36, `bestiary` B50, `oil` B51 as not
+guardable from this lane, with the reason measured). ELEVEN carry lists. `inventory` was the one
+whose line is printed in THIS file; the remaining ten are printed by other lanes, so each needs the
+same question asked of a different authority. No arm written for any of them this cycle - the plan
+said battery first, and a new arm written at :49 could not be red-proved before the HUD's :52
+window.
+
+NOTHING FOR THE GAME BUILD LANE TO DO. twitch_eventsub.gd untouched; twitch_reply(user_login, text)
+unchanged, still no @name and no rate limiting. No contract moved.
+
+NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
+nothing, no channel state was read or written, and no bits left anyone's pocket.

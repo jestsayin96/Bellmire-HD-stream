@@ -10111,3 +10111,17 @@ in this file, class_name Bestiary, no cycle - bestiary.gd has zero ChatCmd refer
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## HUB 2026-11-18 09:42 CT - the TAKE THIS NEXT block (09:1x, row 6) gave the hub NO build row, "your next is your call"; I did a standing check and FOUND AND FIXED a real layout fault in web/style.css
+
+THE BLOCK: row 6 names no row for the hub ("YOUR NEXT IS YOUR CALL"). Reported so the team lead knows its own block named nothing for this lane.
+
+WHAT I LOOKED AT: headless Chromium, 1440x900, file copy of web/ with the Supabase call stubbed to [] so the ?mock= paths render. ?mock=sheets&open=1 showed the Heroes tab broken in a picture no number had caught:
+ - H32 put a 240px rail and a 330px chat column beside the stage, leaving the stage ~810px at a 1440px viewport, but .heroes still went to repeat(3,1fr) on a VIEWPORT breakpoint (min-width:1040px). Three cards in ~810px = ~245px each.
+ - At that width: the hero name stacked one letter per line in the opened sheet ("P/i/p"), the class line collapsed to a zero-width column so "Dwarf" printed on top of "AC 18" and "Elf" on top of "AC 12", and the Pin / Copy-link buttons sat over the class text.
+THE FIX (web/style.css ONLY, 4 rules, no JS, no CSP, no data): .heroes columns come from the STAGE width (repeat(auto-fill, minmax(min(100%,300px),1fr))) instead of the viewport; both old breakpoint rules deleted; .hmeta wraps and .hwhat gets flex 1 1 9em; .charsheet .sid wraps and .swho gets flex 1 1 9em.
+THE NUMBERS (measured after, same file, 5 widths, ?mock=sheets&open=1): columns / card width px = 390: 1 / 332; 820: 2 / 376; 1100: 1 / 526; 1440: 2 / 383; 1920: 4 / 307. Hero-card AC/HP-vs-class-line overlaps: 0 at all five widths. Before: 3 columns at 1440, ~245px cards, overlap visible in the screenshot. The name no longer stacks; I looked at the after picture (cardrow.png) and Pip / Brum read clean.
+ONE THING STILL WRONG IN THE PICTURE, NOT FIXED: the small class-icon badge sits on the corner of the initials sigil and clips the second initial ("PI" reads "PL"). Pre-existing, cosmetic, left for a row.
+CHECKS, ALL ON THE FIXED FILE: ?state=empty, ?state=fail, ?state=stale, ?mock=chronicle, ?mock=crowd, ?open=1 (with mock=sheets), ?mock=lore, ?mock=fallen: 0 page errors, 0 dialogs, 0 hostile elements. The <img src=x onerror=alert(1)> name renders as literal text in the sheet and the rail (hostileText true, 0 img[src=x]/[onerror] nodes). innerHTML only at app.js:255 and :301 (page-owned literals; the other 4 grep hits are comments); 0 outerHTML/insertAdjacentHTML/document.write/eval/new Function. CSP meta unchanged (default-src 'none', script-src/style-src 'self'). Page does not scroll at 820/1100/1440/1920; at 390 it is the one-column phone layout and scrolls as designed.
+LIVE-DOT COLOUR: unchanged, red (untouched this run).
+NOT CLAIMED: I do NOT claim READY TO PUBLISH. web/ changed (style.css, +4 rules), so a gate would be owed if the team lead wants this in the next publish; the supervisor decides, not me. node --check app.js: OK (app.js untouched).

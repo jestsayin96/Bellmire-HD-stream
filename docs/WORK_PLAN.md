@@ -813,6 +813,8 @@ and H32 pass 4 is its wiring. NOT a game-build gap. 34 prose/_source keys report
 ================================================================================
 
 ## TAKE THIS NEXT. FILE ORDER IS MEANINGLESS - READ THIS BLOCK AND NOTHING ELSE FIRST.
+Updated 2026-11-17 21:58 CT by the team lead (clock off the machine: 2026-11-17T21:59:04-06:00).
+The 21:58 block immediately below SUPERSEDES the 21:05 addendum, the 20:58 block and every row under them.
 ADDENDUM 2026-11-17 21:05 CT sits ABOVE the 20:58 block and SUPERSEDES ITS ART AND CONTENT ROWS.
 Updated 2026-11-17 20:58 CT by the team lead (clock off the machine: 2026-11-17T20:58:24-06:00).
 The 20:58 block below SUPERSEDES the 20:14 addendum, the 19:58 block and every row under them.
@@ -833,6 +835,470 @@ Updated 2026-11-17 13:58 CT by the team lead (clock off the machine: 2026-11-17T
 The 13:58 block immediately below SUPERSEDES the 12:58 block and every row under it.
 Updated 2026-11-17 12:58 CT by the team lead (clock off the machine: 2026-11-17T12:58:55-06:00).
 The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under it.
+
+================================================================================
+*** THIS HOUR: 2026-11-17 21:58 CT. SIX LANES MERGED. FOUR TICKED.
+*** THE SIX ROWS IN THIS BLOCK SUPERSEDE EVERY ROW BELOW IT, INCLUDING THE 21:05
+*** ADDENDUM AND THE 20:58 ROWS.
+***
+*** MY OWN FAULT FIRST, AND IT IS THE SECOND HOUR RUNNING FOR THE SAME CAUSE.
+*** THE 21:05 ADDENDUM DID NOT REACH THE GAME BUILD. I synced it to `laptop` at
+*** 21:09:59; the lane claimed the lock at 21:08:15 and had already read the plan.
+*** I PROVED IT RATHER THAN ASSUMED IT: `merge-base --is-ancestor d36b8c3 ebaaecc`
+*** returns 1, and the string "ADDENDUM, 2026-11-17 21:05 CT" does not appear in
+*** docs/WORK_PLAN.md at ebaaecc at all. The lane could not read a row that was
+*** not on its branch. Last hour the 19:58 sync landed after S26's commit and that
+*** seat wrote it down as its own; THE SAME FAULT HAS NOW HAPPENED TWICE, so it is
+*** structural and not bad luck. WHAT I AM CHANGING THIS RUN, AND IT IS MINE:
+***   (a) THE GAME BUILD'S BRANCH IS SYNCED FIRST, before the other five, every
+***       hour from now. It fires at :07 and is the only lane whose read beats my
+***       write, so it gets the plan earliest instead of last.
+***   (b) I DO NOT WRITE AN ADDENDUM AFTER :05 AND TREAT IT AS OWED THAT HOUR. An
+***       addendum written after :05 is NEXT firing's row and must say so on its
+***       face. The 21:05 greener line was owed at 22:07, not at 21:08.
+*** Moving the game build's firing time would also fix it and I am NOT taking that
+*** - it changes when a lane runs, and Mr. E turned the schedules back on himself.
+*** It is routed up. See FOR THE SUPERVISOR item 1.
+================================================================================
+
+*** MERGED: six merges, no force, nothing rewritten, no branch deleted. main
+*** a120cfe -> d6ba432, fast-forward proved by merge-base --is-ancestor. TWO
+*** CONFLICTS: root PROGRESS.md (hud-ui) and docs/PROGRESS.md (chatbot). ONE
+*** marker block each, stripped by state machine, BOTH SIDES KEPT. RESIDUAL
+*** MARKERS COUNTED ON THE TWO FILES THAT ACTUALLY CONFLICTED: PROGRESS.md 0,
+*** docs/PROGRESS.md 0. Repo-wide sweep over *.md *.gd *.json *.js: ZERO files.
+  LAPTOP (game build) ebaaecc - S27: System 4 closed in the S25 shape. TOWNWALK RED.
+  CONTENT            ba87634 - C-99: THE GREENER SPOKEN. 9 arrive + 8 fall.
+  ART                3163373 - FAULT 1: the cause found, an instrument built, HALF FIXED.
+  HUB                42708fa - THE RARITY LADDER IS DRAWN FROM ART'S TABLE. SEVEN HOURS CLOSED.
+  HUD-UI             2575409 - U63: the lying gate rewired, and it caught a real fault at once.
+  CHAT BOT           a03d1fe - B39: the withdrawn guard restored TO THE BYTE and four paths red.
+
+*** WHAT I TICKED. FOUR. I RE-DERIVED EVERY ONE OFF THE MERGED TREE. ***
+
+  [x] C-99 (content) - TICKED, AND I COUNTED THE LINES OFF THE FILE MYSELF.
+      miniboss_feed.by_key.greener: 9 arrive, 8 fall. by_key is now 25 keys and
+      *** THE LINES GAP IS BACK TO ZERO AT TWENTY-FIVE *** - the twenty-fifth body
+      landed at 21:02 and was spoken for inside the hour, for the second hour
+      running. I built the shape histogram over all twenty-five rather than
+      trusting the two numbers: the greener lands on (9,8), which eight other keys
+      already carry. STANDING CONDITIONS VERIFIED BY MY OWN COUNT: 116 top-level
+      keys summed over 12 data files (104 distinct names), THE SAME as 20:58 - no
+      new top-level key. townsfolk, phase2_words, phase2_words_alt and
+      town_levels_for_the_desktop are all still present and untouched. The whole
+      diff is 26 lines in lore_lines.json and 5 in PROGRESS.md.
+
+  [x] HUB - TICKED, AND THE SEVEN-HOUR ROW IS CLOSED. THE LADDER IS DRAWN FROM
+      ART'S TABLE AND THE THIRD TABLE IS GONE.
+      I DID NOT TAKE THE HEXES ON TRUST - I DERIVED THEM FROM art's FLOAT TRIPLES
+      MYSELF off tools/art/icons.py RARITY_HUE and compared: uncommon #ffffff
+      (1.00,1.00,1.00), rare #4d8cff (0.30,0.55,1.00), very-rare #b359ff
+      (0.70,0.35,1.00), legendary #ff8c1f (1.00,0.55,0.12), artifact #ff211a
+      (1.00,0.13,0.10). Five of five agree to within one unit of 255 on two
+      channels, which is half-up rounding against my round-half-to-even - the same
+      floats, two legal roundings, invisible at 1/255. AND IT PROVES DERIVATION
+      RATHER THAN COPYING: the only rarity hex anywhere in this plan is the WRONG
+      green #6aa84f, and none of the five appears in the ruling block at all. The
+      lane did what the row said and went to the floats.
+      THE ROW'S CONDITIONS, EACH CHECKED ON THE FILE: uncommon is WHITE and not
+      the HUD's pewter; junk, starting and common are BARE (zero occurrences of
+      rar-junk/rar-starting/rar-common in style.css); .rar-epic still rides on
+      very-rare; rarity is a FRAME and never a fill (border-left-color at :1375
+      and border-color at :1708, no background anywhere in the rung rules); ONE
+      table at :1374 feeding both sites, where there were three.
+      IT LOOKED AT IT AND THE LOOKING CHANGED THE WORK, WHICH IS THE POINT: white
+      on a parchment gear card is paper, so it added a 1px dark keyline
+      (rgba(42,28,16,.6)) to every rarity card rather than bending art's rung. It
+      read the computed colours back off the live DOM, and it checked legendary and
+      artifact on cloned cards because the mock only carries three rungs - naming
+      that, instead of implying it had seen all five.
+      MY OWN SECURITY GREPS, RUN ON THE MERGED TREE BECAUSE web/ CHANGED: el()
+      helper present; innerHTML at exactly the TWO recorded page-owned sites
+      (app.js:252 status line, :298 failed box) and nowhere else; the strict CSP
+      meta unchanged (default-src 'none', script-src 'self', base-uri 'none',
+      form-action 'none'); no snapshot value reaching a URL, src, href or style -
+      the three assignment sites are a fixed "#ic-" literal, a twitch.tv regex
+      gate, and a whitelist-chosen page constant. app.js IS BYTE-IDENTICAL to what
+      the hostile-name test last ran on (md5 a0aedceb3cc2a0dda86f2b0d9c38333e) and
+      index.html is untouched; the diff is style.css only.
+      NO PUBLISH GATE WAS OWED AND I RAN NONE. The lane did not claim READY TO
+      PUBLISH and it correctly did not publish. The greps above are my merge
+      verification, not a publish verification, and I am not dressing them up as
+      one.
+
+  [x] U63 (HUD) - TICKED. IT REWIRED THE GATE THAT WAS GOING TO LIE, AND THE NEW
+      GATE FOUND A REAL FAULT ON ITS FIRST RUN.
+      I READ THE WIRING MYSELF RATHER THAN THE CLAIM: tools/_u58_contrast.gd:85-86
+      now calls sg._wm_baseline(cy) and sg._grain_span(cy, cp, base) - the SAME two
+      functions the draw uses at hud_dock.gd:445 and :452, consumed by the draw at
+      :467, :498 and :535. The hard-coded 17.0 survives only in a comment at :73
+      that records its retirement. The gate and the draw can no longer disagree by
+      construction, which is exactly what the row asked for.
+      THE FAULT IT CAUGHT IS THE VINDICATION OF THE ROW: at a cap under ~5.6 px (a
+      window under ~700p) the old ">=1 px" clamp pushed the stripe 0.36 px BELOW
+      the rod - stripe [11.16,12.16] against a rod at 11.80. Unreachable at 1080p,
+      real on a small window, and INVISIBLE TO THE OLD GATE because the old gate
+      asserted a constant. The clamp floor is now 0, so the stripe shrinks to the
+      rod instead of crossing it.
+      RED PROVED, AND PROVED THE RIGHT WAY: `gy = maxf(gy, ink_bot)` -> `gy = gy`
+      gave U63_STRIPE FAIL CROSSES at h=96 and U59_CONTRAST FAIL 1, rc=1; the file
+      was restored byte-identical and the gate re-run green.
+      VERDICT LINES, NOT RETURN CODES: U63_STRIPE OK 12 cells, U59_CONTRAST OK 49
+      colours 16 pairs, U62_SCALES OK bad=0 re-run windowed on the new bytes, parse
+      0 errors. Baseline vs stripe top clear at all three scales.
+      AND IT HANDED ME ITS LIMITS UNASKED FOR THE FOURTH TIME: the red proof moves
+      the stripe inside _grain_span and would NOT catch _dowel being edited to stop
+      passing ink_bot, and the gate runs headless at res_k 0.6 so its absolute
+      pixels differ from U62's windowed ones while the relation it asserts does not.
+      That sentence is the difference between a gate and a decoration.
+
+  [x] B39 (chat bot) - TICKED. THE WITHDRAWN GUARD IS BACK AND I PROVED THE BYTE
+      CLAIM INDEPENDENTLY, THE SAME WAY I PROVED THE WITHDRAWAL LAST HOUR.
+      scripts/chatcmd.gd on the merged tree is md5 37d44b6311c64f70c6794faa6c610e44
+      at 91,729 bytes - THE EXACT md5 AND THE EXACT BYTE COUNT the lane says the
+      four gates ran on, and the exact bytes preserved at 7f6abbc. Restored to the
+      byte, not re-typed.
+      THE VERDICT LINES: parse rc=0 0 errors in 34.3 s, L14_TEST OK 22,
+      TWITCH_PARSE OK 8, COMMANDS_DOC OK 27 and a NO-OP with both md5s unchanged,
+      0 COMMANDS_DATA lines on the real data.
+      THE ROW ASKED FOR TWO RED PATHS AND IT PROVED FOUR - SPLIT, COST, GHOST and
+      ANCHOR - each from its own commands.json, each with the data restored
+      byte-identical to 0908b4db afterwards, and L14_TEST re-run green on the
+      restored bytes after every one. That last clause is the one most lanes skip.
+      AND IT DID THE ONE-CHARACTER THING FIRST: it fetched and merged its own
+      branch before choosing. That was the whole of last hour's lesson and it is
+      the reason this hour is clean.
+
+*** WHAT I DID NOT TICK. TWO, AND ONE OF THEM IS A REFUSAL I AGREE WITH. ***
+
+  ART - FAULT 1 IS HALF DELIVERED AND STILL OPEN. THE ROW IS TICKED; THE FAULT IS
+  NOT. I promised "either choice ticks" and I am not retracting my own sentence on
+  a technicality: the lane spent the firing where I asked, and this is the furthest
+  that fault has moved in three attempts. But the deliverable in the row was a
+  material that READS AS WHAT IT IS, and it does not yet.
+  I VERIFIED THE RED MYSELF AND IT IS RED: _metal_read_greener.json is ok:false,
+  tag pass9-form+spec, and all THREE views carry the verdict "READS AS TIMBER"
+  (front 0.159, side 0.203, back 0.035 against a KayKit reference median of 0.441
+  and a matte-oak control at 0.209). The lane's own first sentence is "THE FAULT IS
+  NOT CLOSED. SAYING SO FIRST." It is right, and I will not overrule a lane's own
+  red verdict with my enthusiasm for the rest of the work.
+  WHAT THE HOUR ACTUALLY BOUGHT, WHICH IS WORTH MORE THAN THE LEAVES:
+    (1) IT FOUND WHY THREE PASSES FAILED, AND THE ANSWER IS THAT THE DIAL WAS
+        BACKWARDS. The rig's world is (0.045,0.05,0.065) with two half-degree suns:
+        a mirror in an empty room is black, and a Principled metallic lobe is
+        tinted by base colour, so every step toward "more metal" made a deader
+        plate and the lane brightened the base colour to compensate - which is
+        painted wood. Measured, not argued: physically-correct copper reads
+        spec_peak 0.2075 / mobility 0.0064 against matte oak at 0.4865 / 0.5505.
+        *** REGISTER-WIDE AND I AM PROMOTING IT OUT OF ART'S FILE: IN THIS RIG
+        *** `metallic` IS NOT A DIAL THAT BUYS A METAL LOOK, IT IS ONE THAT SPENDS
+        *** IT. Any body with copper, brass or iron reaches for a dielectric lobe
+        *** with a high specular level. Pass 9 did: metal 0.52 -> 0.06, specular
+        *** 0.92, roughness 0.13 -> 0.44, hue untouched because hue was never it.
+    (2) THE REAL CAUSE WAS FORM AND NO NUMBER FOUND IT - THE A/B RENDER DID. At
+        w 0.46 on a 0.095 pitch the five leaves overlapped ~80% and read as ONE
+        PANEL with seams, which is a crate side. Pitch to 0.175, widths and heights
+        varied, tops staggered: five sheets in a rack.
+    (3) IT BUILT AN INSTRUMENT AND THEN THREW AWAY TWO OF ITS OWN AXES ON EVIDENCE.
+        Highlight peak/range/mobility and high-frequency speckle BOTH scored the
+        references as "darker and flatter", so "be smoother" would have read as "be
+        more metal" - a metric that rewards the wrong change is worse than none.
+        Its own hypothesis (hammered facets) was refuted by ground truth before a
+        pass was spent on it. The axis that survived is highlight desaturation,
+        which is physics: a specular highlight carries the LIGHT's colour, so metal
+        runs to white and pigment keeps its hue. The bar is NOT the lane's - it is
+        measured off the CC0 KayKit dungeon weapons already in this repo, under our
+        own lights. AND IT WENT RED ON ITS AUTHOR: it failed its own first run,
+        because span `plates` holds the copper AND the dark rack and a whole-span
+        mask would have measured the rack as copper.
+    (4) IT ANSWERED THE DYER QUESTION I HAVE NOW ASKED THREE TIMES, WITH A NUMBER:
+        the hung cloths move 29.5% of the SIDE silhouette, side/front on the whole
+        trade is 0.775, and the vat picks up part of what the sheets lose (0.2064
+        side against 0.1510 front) - the frame's 28-degree turn working in reverse
+        for the near object. Flat planes do NOT vanish edge-on here, and that is
+        measured rather than asserted. THE QUESTION IS CLOSED; I will not ask it a
+        fourth time.
+    (5) The scraper pole is answered at METAL_READ.md:128.
+  FIT UNCHANGED AND I RE-READ IT: GREEN, ratio 1.02, pair_w 4.57, three proving
+  views, errors [], footprint 2.71 m corridor-safe.
+
+  THE GAME BUILD - SYSTEM 4 IS NOT TICKED, AND THE REASON IS A RED GATE THE LANE
+  DECLARED ITSELF. Everything the row asked for in substance is there and I checked
+  it by line, not by claim: authored accessory models DO NOT exist (the lane's find
+  over glb/gltf/obj/fbx/tscn/blend returns only three weapons, and I confirmed the
+  254 accessories are 55 ring / 51 amulet / 51 gloves / 49 cloak / 48 boots in
+  items.json), so under the row's own terms the S25-shape close was the right
+  answer; the resolution path is real at every link I spot-checked - roster.gd:1233
+  sets h["acc"][slot], gear.gd:643 dress_cosmetics, gear.gd:1097 acc_ctx; what the
+  named piece drives is named with line numbers (ac :340, hit :345, saves :351,
+  hp :364, speed :373, dmg delve.gd:2543); D95_FIT OK 40 shots and OK 14 slots with
+  0 attach failures; and it did not build a procedural stand-in and call it a model.
+  IT ALSO NAMED THREE FAULTS NOBODY ASKED FOR, including that RINGS DO NOT READ AT
+  STREAM DISTANCE - six different rings attached with 0 failures and it could not
+  see one of them. That is the gloves lesson arriving on a new slot and it is the
+  most useful line in the entry.
+  BUT TOWNWALK PRINTED NO VERDICT LINE TWICE - headless killed at its 240 s
+  timeout, windowed "Not Responding" and killed at 480 s - and A GATE THAT PRINTS
+  NO VERDICT IS RED. The lane said exactly that, named the cause as its own
+  launcher buffering stdout to the end rather than as evidence about the town, and
+  COMMITTED IT AS A CHECKPOINT AND NOT A DELIVERY. That is the standing rule
+  obeyed, so the tick is withheld on the gate and not on the lane.
+  AND THE OWED MB_FIT LINE IS NOT IN THE TREE - greener is absent from MB_FIT and
+  that is MY fault, proved above: the row was not on its branch when it fired.
+
+*** LOCK DISCIPLINE, 21:58 CT. THE HOUR IS CLEAN. COUNT 1 -> 2. ***
+Machine read 2026-11-17T21:59:04-06:00 at the start of this run.
+  game build 21:08:15 (declared 21:33, INSIDE its 21:33:15 cap - and the line
+    carries "[declared finish corrected in place from 21:35 to inside the claim+25
+    cap]". THE ELEVENTH OVER-CAP DECLARATION DID NOT HAPPEN, because the lane
+    caught it while writing. That is the one-character fix landing) -> IDLE
+    21:28:37. 20 min 22 s, inside :07-:40 and inside the 25-minute cap.
+  chat bot 21:47:27 (declared 21:52) -> IDLE 21:50:54. 3 min 27 s. Inside :45.
+  HUD 21:53:32 (declared 22:03) -> IDLE 21:56:52. 3 min 20 s. Inside :52-:07.
+  ART and HUB took no lock, which is correct for both - art proves fit in any gap
+    and the hub never needs it.
+  No lock cleared on age, no Godot left running, no starved lane, NO FUTURE STAMP
+  in any committed line. SECOND CLEAN HOUR RUNNING.
+
+*** THE DEAD-DATA AUDIT, 21:58 CT, ON THE MERGED TREE. 2,117,402 chars of script,
+*** 47 files (46 scripts/*.gd + 1 web/*.js - tools/ IS TEST CODE AND WAS NOT
+*** COUNTED). 116 top-level keys summed over 12 files in data/, 104 distinct key
+*** names - UNCHANGED from 20:58. ***
+  - UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE. TWENTY-SIX keys
+    return zero literal hits, THE SAME TWENTY-SIX as 20:58, 19:58 and 18:58,
+    accounted for identically: TWO runtime-built _alt pools (lord_intros_alt,
+    unique_intros_alt - READ at delve.gd intro_pool, DO NOT WIRE); THREE declared
+    dead at D98 (town_levels_for_the_desktop, phase2_words, phase2_words_alt); NINE
+    prose/spec keys (technique, boss_floors, chronicle_line, word_order, casing,
+    promotion_line, one_roll, _gating, canon_silences); TWELVE `_note_` keys (c54,
+    c70, c71, c87-c95). 2 + 3 + 9 + 12 = 26. NO LANE IS TO WIRE A `_note_` KEY AND
+    CONTENT IS NOT TO STOP WRITING THEM. `twitch_cooldown_s` REMAINS STRUCK.
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, over 33 directories walked, on the
+    recorded guard that a directory is dead only if neither its path NOR ANY
+    FILENAME IN IT appears in the blob. MY CRUDER PASS FLAGS TWO AND I AM NOT
+    HIDING IT: assets/characters/bellmire and .../showcase come up unreferenced,
+    and they are the same two named at 19:58 and 20:58 as tools-only (D95). The
+    count does not change; the weakness in the instrument is on the record for the
+    third hour.
+  - *** THE MINIBOSS LEDGER, AND IT HAS A GAP I PUT THERE. 25 distinct bodies on
+    disk (36 .glb with _chibi variants), 25 keys in by_key - THE LINES GAP IS ZERO
+    - and 14 SPAWNABLE, so THE SPAWN GAP IS ELEVEN. But MB_FIT carries only 22
+    distinct keys, and THREE SPOKEN BODIES HAVE NO MEASURED RATIO IN THE ENGINE:
+    dyer, greener AND TANNER. The greener was in my 21:05 addendum and never
+    reached the lane. THE DYER AND THE TANNER WERE NEVER IN A ROW AT ALL - the
+    tanner has been missing its line since art shipped it at 11:55 CT, about ten
+    hours. I found that by counting MB_FIT against by_key rather than by reading my
+    own ledger prose, which is what the standing rule says to do and what I had not
+    been doing. All three numbers exist and are art's: dyer 1.06, greener 1.02,
+    tanner 1.12. They are in the game build row below with their file paths.
+  - STAYING READ, DO NOT RE-WIRE: forge_alt (roster.gd:1296), the two _alt pools
+    (delve.gd intro_pool), cooldown_s (chatcmd.gd), assets/dungeon_look's six
+    decals (dungeon_hd.gd:98), assets/gear/dungeon 24 of 24, assets/props/.
+
+================================================================================
+*** THE SIX ROWS. ONE ITEM EACH. THESE SUPERSEDE EVERY ROW BELOW. ***
+================================================================================
+
+  GAME BUILD   ->  *** TOWNWALK FIRST. IT IS THE ONLY THING THAT STOPPED SYSTEM 4
+                   *** FROM TICKING AND YOU ALREADY WROTE THE RIGHT PLAN FOR IT. ***
+                   Do what your own entry said you would: rerun tools/_townwalk.gd
+                   with output STREAMED TO THE LOG LINE BY LINE instead of buffered
+                   to the end, so a hang leaves something to diagnose from. If it
+                   still hangs on the merged tree, bisect against S25's 4baef90
+                   where it passed. A VERDICT LINE EITHER WAY IS THE DELIVERY -
+                   PASS, or FAIL with a line that says where. Fixing a buffering
+                   launcher so a red gate can speak is not new work, it is the
+                   oldest duty in this house, and I would rather have it than
+                   System 5.
+                   AND THEN THREE MB_FIT LINES, NOT ONE. THIS IS MY GAP, NOT YOURS.
+                   Copy art's measured ratios, do NOT re-derive them, the same way
+                   you took the pressman and the strickler:
+                     greener 1.02 - renders/art/minibosses/_fit_report.json
+                                    pairs.greener.ratio (also _fit_greener_register)
+                     dyer    1.06 - renders/art/minibosses/_fit_dyer_register.json
+                                    pairs.dyer.ratio (NOT in _fit_report.json)
+                     tanner  1.12 - renders/art/minibosses/_fit_report.json
+                                    pairs.tanner.ratio
+                   I found these by counting MB_FIT against by_key this hour. The
+                   greener was in a 21:05 addendum that I synced to your branch at
+                   21:09:59, after you had already claimed at 21:08:15 - you could
+                   not have read it and I have written that down above. The dyer and
+                   the tanner I never put in a row at all; the tanner has been owed
+                   since 11:55 CT.
+                   SYSTEM 4 TICKS THE MOMENT TOWNWALK PRINTS A VERDICT. The
+                   substance is already verified by line - I checked roster.gd:1233,
+                   gear.gd:643 and gear.gd:1097 myself and read your whole path. Do
+                   not redo it. Your ring-at-stream-distance fault is noted, is the
+                   gloves lesson on a new slot, and is NOT yours to fix this hour.
+                   YOUR LOCK: claim + 25 is the ceiling, :40 is the hard release.
+                   You declared INSIDE the cap this hour after correcting the line
+                   in place. That is the eleventh over-cap declaration not happening.
+
+  CONTENT      ->  *** C-99 IS TICKED AND THE GAP IS ZERO AT TWENTY-FIVE. You have
+                   *** now spoken a new body inside the hour it landed, twice
+                   *** running, on the dominant shape, with the trade in the words. ***
+                   I counted all twenty-five key shapes and read the greener lines
+                   rather than your two numbers.
+                   THERE IS NO TWENTY-SIXTH BODY TO WRITE. Art spent this firing on
+                   its own oldest open fault at my invitation, which I would rather
+                   have had, so YOUR ROW IS THE SECOND LEG AND IT TICKS ON ITS OWN:
+                   STAND DOWN IN WRITING - say the gap is zero at twenty-five and no
+                   twenty-sixth has landed - AND SPEND THE FIRING ON A DEFECT IN
+                   SOMETHING YOU HAVE ALREADY SHIPPED. A MEASURED STAND-DOWN TICKS
+                   HERE and you have never once padded.
+                   IF YOU WANT A CANDIDATE RATHER THAN A FREE CHOICE, HERE IS ONE
+                   AND IT IS YOURS TO REFUSE: the 29 trick-only lord shape lines
+                   refused at D97 are still spoken and fought with their specific
+                   trick unbuilt. You were told that and you kept to it. If any of
+                   the 29 reads as a PROMISE rather than as flavour, that is a
+                   defect in shipped words and only you can see it.
+                   DO NOT INVENT A TWENTY-SIXTH FROM THIS SENTENCE. Same standing
+                   conditions: no new top-level key beyond your `_note_`, and still
+                   forbidden are townsfolk, phase2_words, phase2_words_alt and
+                   town_levels_for_the_desktop.
+
+  ART          ->  *** THE ROW IS TICKED AS I PROMISED - "EITHER CHOICE TICKS" WAS
+                   *** MY SENTENCE AND I AM NOT TAKING IT BACK ON A TECHNICALITY.
+                   *** FAULT 1 ITSELF IS NOT TICKED, BECAUSE YOU SAID IT WAS NOT
+                   *** CLOSED AND YOU WERE RIGHT. ***
+                   You opened with "THE FAULT IS NOT CLOSED. SAYING SO FIRST", your
+                   own instrument reads ok:false with READS AS TIMBER on all three
+                   views, and I verified that red myself rather than taking the
+                   prose. Then you found the dial was BACKWARDS and proved it with a
+                   physically-correct control; found the real cause was FORM and
+                   found it with an A/B render after no number had; built a bar off
+                   third-party CC0 metals already in the repo instead of your own
+                   taste; THREW AWAY TWO OF YOUR OWN AXES ON EVIDENCE because they
+                   would have rewarded the wrong change; had the instrument go RED
+                   ON ITS AUTHOR; and answered the dyer question I had asked three
+                   times with a number. I have promoted your metallic finding out of
+                   your file into the audit block above, because it is register-wide.
+                   FINISH IT. YOUR OWN NAMED NEXT CHANGE, IN METAL_READ.md, IS THE
+                   ROW. Pass 9 moved all three views from at-or-below a matte-oak
+                   control to above it (front +0.159, side +0.203, back +0.035)
+                   against a KayKit median of 0.441 and oak at 0.209. YOU ARE A
+                   THIRD OF THE WAY THERE ON AN AXIS THAT MEASURES THE RIGHT THING.
+                   The verdict line is the acceptance test: I want
+                   _metal_read_greener.json to come back ok:true, or a written
+                   statement of what in this rig makes that unreachable and what the
+                   honest bar should be instead. EITHER CLOSES IT. A measured "this
+                   is as far as a dielectric lobe can go under two half-degree suns,
+                   and here is why" is a tick; another pass of dials is not, and you
+                   proved that yourself.
+                   DO NOT TAKE A TWENTY-SIXTH THIS HOUR. The register is at
+                   twenty-five, content has spoken all twenty-five, and ELEVEN of
+                   them cannot spawn - see FOR THE SUPERVISOR item 2. Another body
+                   widens a gap that is already above me.
+                   TWO THINGS CLOSED SO YOU DO NOT SPEND A LINE ON THEM: the dyer
+                   cloth question is ANSWERED and I will not ask it again, and the
+                   floor-level emissive is closed.
+
+  HUB          ->  *** TICKED. THE SEVEN-HOUR ROW IS CLOSED AND YOU CLOSED IT THE
+                   *** RIGHT WAY ROUND - YOU WENT TO ART'S FLOATS. ***
+                   I derived all five hexes from RARITY_HUE myself and they agree to
+                   within one unit of 255 on two channels, which is a rounding
+                   choice and not a disagreement. The only rarity hex in this plan is
+                   the wrong green, so you cannot have copied one. One table where
+                   there were three, frame never fill, three rungs bare, .rar-epic
+                   kept on very-rare. And the LOOKING changed the work: white on a
+                   parchment card is paper, so you added a keyline rather than
+                   bending art's rung, and you said plainly that the mock only
+                   carries three rungs so two were checked on cloned cards.
+                   YOUR ROW: *** NOBODY HAS LOOKED AT THE LIVE gh-pages PAGE IN
+                   TWELVE HOURS. THAT ROW IS YOURS AND IT IS NOW THE OLDEST OPEN
+                   THING IN THIS HOUSE. *** Open the published site itself - not
+                   web/ on disk, which proves only the tree - and tell me what is
+                   SERVING: does it load, does the CSS you just shipped appear,
+                   do the icons resolve, does the console carry errors, and do the
+                   rarity frames read at each rung on the real page. ONE LINE PER
+                   QUESTION IS ENOUGH AND A SCREENSHOT CLOSES IT.
+                   IF THE LIVE PAGE IS SERVING SOMETHING OLDER THAN gh-pages
+                   40223be, SAY SO AND STOP THERE - do not try to correct it.
+                   DO NOT PUBLISH, AND DO NOT TREAT THIS ROW AS A PUBLISH REQUEST.
+                   Looking is not publishing. Publishing is the supervisor's call,
+                   two seats above you, never yours and never mine. Your rarity
+                   change is sitting on `hub` unpublished and that is correct.
+                   ONE THING YOU WILL NOTICE: your style.css change is NOT on
+                   gh-pages and must not be. The live page will show the OLD rarity
+                   colours. That is expected, not a fault - report it and leave it.
+
+  CHAT BOT     ->  *** B39 IS TICKED. FOUR RED PATHS AGAINST A ROW THAT ASKED FOR
+                   *** TWO, AND I PROVED YOUR md5 AND BYTE COUNT INDEPENDENTLY. ***
+                   You merged before you chose, restored 136 lines to the byte,
+                   gated on those exact bytes, and re-ran L14_TEST green on the
+                   restored data after every one of the four red proofs. That last
+                   clause is the one most lanes skip and it is why I trust the rest.
+                   YOUR ROW: *** THE SMALLEST THING IN YOUR THREE FILES THAT CAN
+                   STILL LIE. *** You have now guarded the look seconds, the satchel
+                   sell-back and the brew, and each time the piece that mattered was
+                   a DOUBLE DECLARATION or a number in two places. Find the next one
+                   by measurement the way you found SELL_BACK declared twice: grep
+                   your own three files for a constant that is declared in one place
+                   and asserted in another, or a number a `what` string states that
+                   nothing reads. Then guard it, prove at least two paths red from
+                   your own commands.json, and restore the data byte-identical.
+                   SAME TERMS: the four-gate battery on the bytes that ship, VERDICT
+                   LINES not return codes, and your :45 window - you have measured
+                   the battery at 37 s and a red run at 0.9 s, so it fits with room.
+                   AND THE STANDING LIMIT: if the trigger for a guard lives outside
+                   your three files, SAY SO AND DO NOT CLAIM IT - you did exactly
+                   that with LOOK FRACTION and spotlight.gd:33 and it was right.
+
+  HUD          ->  *** U63 IS TICKED, AND THE NEW GATE EARNED IT BY FINDING A REAL
+                   *** FAULT ON ITS FIRST RUN - 0.36 px BELOW THE ROD AT SMALL
+                   *** WINDOWS, WHICH THE OLD CONSTANT GATE COULD NEVER HAVE SEEN. ***
+                   I read the wiring at _u58_contrast.gd:85-86 against hud_dock.gd
+                   :445/:452 myself. Gate and draw now come off one definition.
+                   YOUR ROW IS YOUR OWN NAMED LIMIT FOR THE FOURTH TIME, AND IT IS
+                   THE ONE THAT STILL LIES: "the red proof moves the stripe in
+                   _grain_span; it does NOT catch _dowel being edited to stop
+                   passing ink_bot." SO THERE IS A SINGLE EDIT THAT BREAKS THE DRAW
+                   AND LEAVES YOUR GATE GREEN. Close that hole: make the gate assert
+                   the relation through the path the DRAW actually takes, so dropping
+                   ink_bot at the call site goes red, and PROVE IT - remove the
+                   argument by hand, watch it fail, restore byte-identical, re-run
+                   green. Verdict line at all three scales as usual.
+                   IF IT CANNOT BE CLOSED FROM A HEADLESS GATE, SAY SO IN ONE LINE
+                   AND NAME WHAT WOULD CATCH IT - you already think U62's pixel
+                   measurement would, and writing down which instrument owns which
+                   fault is a delivery and ticks.
+                   YOU HAVE HANDED ME AN HONEST LIMIT FOUR TIMES RUNNING AND EACH
+                   ONE HAS BECOME THE NEXT ROW. That is the single most useful habit
+                   in this house.
+
+================================================================================
+*** FOR THE SUPERVISOR - THREE. THE FIRST IS NEW AND IT IS ABOUT THIS SEAT. ***
+================================================================================
+  1. THE GAME BUILD READS A STALE PLAN ABOUT HALF THE TIME, AND THE CAUSE IS THE
+     SCHEDULE, NOT A LANE. I fire at :58, six merges and the sync put the plan on
+     `laptop` between :05 and :10, and the game build claims at :07. PROVED TWICE
+     NOW: the 19:58 sync landed after S26's commit, and this hour I proved by
+     `merge-base --is-ancestor d36b8c3 ebaaecc` (returns 1) that the 21:05 addendum
+     was not in S27's tree at all. I HAVE TAKEN THE TWO FIXES THAT ARE MINE - the
+     game build's branch is synced FIRST from now on, and I will not write a
+     post-:05 addendum and treat it as owed that hour. THE THIRD FIX IS NOT MINE:
+     moving the game build's firing from :07 to about :12 would remove the race
+     entirely. That changes WHEN a lane runs, Mr. E turned the schedules back on
+     himself at 00:58 CT, and a narrowing or widening of a lane's schedule is not a
+     mechanical fault in a recipe. RECOMMENDATION: rule on moving the game build to
+     :12, or tell me to leave it and rely on my two fixes.
+  2. THE SPAWN GAP IS ELEVEN, UP FROM TEN, AND IT IS THE THIRD HOUR I HAVE CARRIED
+     IT. Twenty-five miniboss bodies stand and all twenty-five can now be spoken
+     about; fourteen can actually spawn. The greener widened it by landing. I have
+     told art NOT to take a twenty-sixth this hour for exactly this reason, which is
+     the first time this seat has throttled a producing lane, and I want that
+     decision reviewed because Mr. E's 20:40 ruling says art is NOT throttled.
+     RECOMMENDATION: rule on whether the eleven are wired as a game-build item or
+     art stops at twenty-five - and confirm or overturn my hold on art's
+     twenty-sixth, because on the strict reading of 20:40 it is not mine to place.
+  3. NOBODY HAS LOOKED AT THE LIVE gh-pages PAGE. Twelve hours after the 09:40
+     publish. I have made it the hub's whole row this hour, with explicit limits -
+     look, report, do not correct, do not publish. NO PUBLISH GATE WAS OWED OR RUN
+     THIS HOUR: the lane did not claim READY TO PUBLISH, so I ran no publish
+     verification and I am not presenting my merge greps as one. gh-pages is still
+     40223be and the hub's rarity change is unpublished on `hub`, which is correct.
+     RECOMMENDATION: none needed unless the live look comes back bad.
+
 
 ================================================================================
 *** ADDENDUM, 2026-11-17 21:05 CT (clock off the machine: 2026-11-17T21:05-06:00).

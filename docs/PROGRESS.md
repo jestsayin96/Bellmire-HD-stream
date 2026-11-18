@@ -2752,3 +2752,115 @@ NUMBERS and close it as already-wired. IT DOES. Nothing in the path was changed 
   19:08:15 and the IDLE written off the machine says 19:09:10). Recorded in RUN_LOCK.txt in a NOTE line, not edited.
 - No live Twitch test - no account used, no bits, nothing redeemed, bellmirebro posted nothing. Systems 4 and Phase 2
   not touched. Not ticked - the team lead ticks.
+## B-cycle - B37 THE ARMOURY GUARDED ON FOUR CLAIMS AND TWO AUTHORITIES; THE GATES DO NOT FIT MY WINDOW AND ARE OWED, 2026-11-17T19:52:00-06:00 (chat bot)
+
+### WHY THIS CLAIM, CHOSEN ON SHAPE AS THE ROW ALLOWED
+The 18:58 row let me choose on shape rather than size, and said to PREFER a claim with two
+declarations, a derived number, or an authority in a file I do not own, and to say why. `armoury`
+is the only claim left that has ALL THREE, which is why it beat the two smaller ones I had listed:
+  TWO DECLARATIONS, AND BOTH ARE MINE. `armoury`.short and `armoury`.what each recite "leather,
+  chainmail, plate, warded plate". They can disagree with EACH OTHER before either disagrees with
+  the game, and then !armoury's one-line reply promises one ladder and docs/COMMANDS.md's long
+  line promises another. That is B36's SPLIT shape appearing INSIDE my own three files instead of
+  across two of another lane's, so SPLIT is the first path again and for B36's reason: if the two
+  disagree there IS no published ladder to check, and the guard says that rather than picking one.
+  A DERIVED NUMBER LIST. `armoury`.cost publishes "50 / 150 / 400 / 1000 gold by tier" - four
+  numbers whose authority is the `cost` field of the very same Gear.ARMOUR rows. Nothing in the
+  house compared them. So one guard covers the NAMES and THE MONEY, which no previous one did.
+  AN AUTHORITY IN A FILE I DO NOT OWN, AND IT IS TWO TABLES. scripts/gear.gd is the GAME BUILD's:
+  Gear.ARMOUR (names, costs, the found-only flag) and Gear.ARMOUR_LOOK (which pieces show, per
+  tier). A tier added there is exactly how `greataxe` (S20) and `sceptre` (D94b) reached the
+  smithy unpublished.
+
+### I AM CORRECTING MY OWN LANE'S RECORD FIRST
+B36's leftovers list said this claim's authority was "what gear.gd:257-258 only says in a comment",
+and that is WHY it looked smaller than it is. IT WAS WRONG. The comment restates the code; the
+authority is `const ARMOUR_LOOK` at gear.gd:262-269, which carries real `boots` / `pauldrons` /
+`helm` booleans per tier. It is exactly checkable, and it is checked here. The guard reads it as
+"every key whose value is a true bool across the buyable tiers", NOT as a hand-written list of
+three, so a piece the game build adds tomorrow goes RED instead of quietly making my sentence
+short. That read is proved below by case F.
+
+### THE GUARD - SIX PATHS (scripts/chatcmd.gd, in commands(), after the B36 SATCHEL block)
+ANCHOR and SPLIT are the two that stop this going quietly wrong. LADDER, COST, PIECES and FOUND
+are the four mismatches, and they are INDEPENDENT - the names can be right while the money is
+wrong - so they do not share an elif, unlike B35/B36 where the paths excluded each other.
+LADDER is ORDER-SENSITIVE on purpose: a ladder's order is itself the claim, so leather-before-plate
+is checked and not just membership. `rags` is counted as neither bought nor found (cost 0, no
+`found`) because it is the state a hero starts in, not a tier anyone buys.
+
+### LOGIC REHEARSED IN PYTHON - AND THIS IS NOT THE GATE, THE GATE IS OWED
+I could not run Godot this firing (see below), so rather than ship the edit blind I re-implemented
+the six comparisons in python against the REAL data/commands.json strings and the REAL tables
+parsed out of scripts/gear.gd, and ran a green baseline plus eight injected reds. SAID PLAINLY:
+THIS IS A REHEARSAL OF MY OWN LOGIC, NOT A VERDICT. It does not prove the GDScript parses, and
+nothing here substitutes for the battery. No file was modified by it; the injections were made on
+in-memory copies only, and data/commands.json md5 0908b4db3323d980b23a53ec0461f53a is unchanged
+from HEAD before and after.
+  GREEN BASELINE: all six silent, and every one of the six on an EXACT match, not a vacuous pass -
+    real ['leather','chainmail','plate','warded plate'] == said; real_cost [50,150,400,1000] ==
+    said_cost; real_pc ['boots','pauldrons','helm'] == said_pc; found ['scarwoven mail'] named.
+  A ANCHOR  .what loses "armour tier: "               -> ANCHOR
+  B SPLIT   short drops "warded plate"                -> SPLIT
+  C LADDER  gear.gd adds a 5th buyable tier           -> LADDER + COST
+  D LADDER  same four names, wrong order              -> LADDER
+  E COST    gear.gd re-prices plate 400 -> 450        -> COST
+  F PIECES  gear.gd adds "greaves": true at plate     -> PIECES
+  G LADDER  scarwoven mail becomes buyable            -> LADDER + COST
+  H FOUND   .what drops the found-only sentence       -> FOUND
+C and G firing TWO paths is correct and not a double-report: unlocking or adding a tier changes
+the name list and the price list, and both sentences are then wrong.
+
+### WHY THERE ARE NO GATE RESULTS, AND I AM NOT DRESSING THIS UP
+The windows table (plan line 612) gives CHAT BOT :45 and HUD :52-:07, and says in terms: "no lane
+STARTS one it cannot finish inside its own window", and "a job too long for its window is SPLIT
+ACROSS RUNS with a checkpoint commit. It is NEVER run over." I read the plan, chose the claim on
+shape and wrote the guard, and the machine clock was 19:50:43 when I checked it - about 75 seconds
+of window left. B36's own battery took 3 min 13 s. It does not fit. So I DID NOT CLAIM THE LOCK AT
+ALL: no RUNNING line was written, no Godot was launched, and docs/RUN_LOCK.txt was not touched in
+either direction, which leaves HUD's :52 claim completely clear.
+THIS IS THE HONEST COST OF MY OWN CHOICE, NOT A STARVED SLOT. The lock was IDLE from 19:18:40 and
+no Godot process was alive on either of my two checks (19:46:40 and 19:50:43). The window was mine
+and I spent it reading and choosing instead of gating. Last hour the team lead told me to declare
+INSIDE my window; the same arithmetic says do not start outside it either, and the rule it names
+is a checkpoint commit, which is what this is.
+  OWED AT B38, FIRST THING, ON THESE EXACT BYTES:
+    --headless --path W6 --quit-after 300           parse, 0 script/parse errors
+    tools/_l14_test.gd                              L14_TEST OK
+    tools/_twitch_parse.gd                          TWITCH_PARSE OK
+    tools/_commands_doc.gd                          COMMANDS_DOC, expected NO-OP wrote 27 commands
+  COMMANDS_DOC is a NO-OP BY CONSTRUCTION this cycle: data/commands.json is byte-identical to HEAD
+  (md5 0908b4db3323d980b23a53ec0461f53a) so the generator cannot produce a different
+  docs/COMMANDS.md, and docs/COMMANDS.md md5 553eb7d03245646838938e65cbf47c2e is unchanged.
+  ONLY scripts/chatcmd.gd is edited this cycle, exactly as in B36.
+  Drift checked BOTH directions besides, on the data file as committed: 27 keys, 27 in `order`,
+  0 missing, 0 ghost.
+
+### WHAT IS LEFT AFTER IT - SIX GUARDED OF NINETEEN, 12 UNGUARDED
+  NUMERIC, UNCHANGED FROM B36 AND STILL NOT CONSTANTS: `bestiary` "the eight lords" vs a COUNT over
+    bosses.json, a data file the content lane adds to most hours; `oil` "for two delvers", a burn
+    RATE across a floor in delve.gd with no constant to read.
+  ENUMERATIONS, IN REACH, AND NOW ONE FEWER: `armoury`'s tier list and its pieces are both taken
+    this cycle. What is left in reach is small and in my own file.
+  MINE, SMALL: `brew` default "mending"; `wear` "!wear off ring"; `catchup`'s claim about its own
+    reply's shape.
+  ANOTHER LANE'S, REPORTED NOT REACHED: `look`'s "(teal)" and "channel-points lane"; `hub`'s
+    section list (web/); `wear`'s accessory and cosmetic families (items.json); `reroll`'s rule;
+    `help` (already covered by the NO WHAT and ORDER guards).
+  AMBIGUOUS, A QUESTION AND NOT AN ITEM (freeze holds, unchanged from B34/B35/B36): `brew` names 12
+    of 232 brews, `dye` 10 of 265 colours. A CONTENT call. Naming it and leaving it.
+  I AM NOT CALLING THE WALK FINISHED. The row offered a measured stand-down and I am not taking it:
+  the three small ones in my own file are real and reachable, and `bestiary` is reachable if a count
+  over another lane's growing data file is acceptable to the supervisor - that is a question, not an
+  item, and I am not inventing it as work.
+
+### FOR THE GAME BUILD LANE: nothing owed and nothing asked. twitch_eventsub.gd untouched, the
+### twitch_reply(user_login, text) signature unchanged. FYI only, and it is the intended direction:
+### scripts/chatcmd.gd now READS Gear.ARMOUR and Gear.ARMOUR_LOOK, so renaming either table, or
+### changing a tier's name, cost or piece flags, turns my parse gate or a COMMANDS_DATA line red
+### rather than leaving docs/COMMANDS.md quietly wrong. Case F is the one worth knowing: a new
+### per-tier bool in ARMOUR_LOOK (a `greaves`, say) will go red here until `armoury`.what names it.
+### FOR MR. E: nothing to decide.
+### LIVE TWITCH: no test run. No account used, no bits cheered by any account, no channel-point
+### reward redeemed, created, deleted or re-priced, and bellmirebro posted nothing. No Godot was
+### launched this cycle at all, so not even a parse-run EventSub connection happened.

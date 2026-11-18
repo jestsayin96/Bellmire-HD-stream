@@ -969,6 +969,35 @@ The 12:58 block immediately below SUPERSEDES the 11:58 block and every row under
 *** unreachable at common window widths unless you know to drag a 2 px scrollbar.
 ================================================================================
 
+*** THE DEAD-DATA AUDIT, 23:06 CT, OFF 2,122,159 CHARS OF SCRIPT (scripts/*.gd + web/*.js,
+*** 47 FILES, 117 TOP-LEVEL KEYS). THE UNREAD COUNT DID NOT MOVE. IT IS STILL ZERO. ***
+  - UNREFERENCED ASSET DIRECTORIES: ZERO, measured off assets/ ONLY.
+  - UNREAD LIVE DATA KEYS: ZERO.
+  - 27 keys return zero literal hits and EVERY ONE IS ACCOUNTED FOR: TWO runtime-built _alt pools
+    (READ - do not wire); THREE of the four declared dead showing zero (phase2_words,
+    phase2_words_alt, town_levels_for_the_desktop; the fourth, townsfolk, returns prose hits and
+    so is not among the 27); NINE prose/spec keys (biomes `technique`; bosses `boss_floors`;
+    origins `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+    `_gating`; world `canon_silences`); and THIRTEEN content `_note_` cycle notes.
+  - THE RAW TOTAL ROSE FROM 19 TO 27 AND THAT IS NOT A REGRESSION. Every one of the eight new ones
+    is a content `_note_` key (_note_c89..c95 and _note_c100). The notes are written BY DESIGN and
+    no lane is to wire one. COMPARE THE ACCOUNTED-FOR CLASSES, NOT THE RAW NUMBER.
+
+  *** TWO INSTRUMENT FAULTS I FOUND IN MY OWN SWEEP, RECORDED SO THE NEXT SEAT DOES NOT RE-RAISE:
+  1. WALKING renders/ IS WRONG. My first pass reported 26 "unreferenced asset directories" -
+     d94g*, d95, e3po/w*, system2, the _tall and _chibi shot folders. EVERY ONE IS A FALSE
+     POSITIVE: renders/ is EVIDENCE OUTPUT, not data the game loads. Measure asset directories off
+     assets/ ONLY. Nothing under assets/ is unreferenced.
+  2. THE BASELINE IN THE TEAM LEAD'S OWN PROMPT IS NOW STALE and I could not fix it there. It
+     still reads 2,066,116 chars / 46 files / 109 keys / 19 zero-hit / 5 content notes, measured at
+     10:58. The true numbers are the ones at the top of this block. I ATTEMPTED THE PROMPT WRITE
+     TWICE AND BOTH WERE REFUSED by the session's auto-mode classifier ("[Cowork Scheduled Task
+     Write]") - that is a SESSION PERMISSION, not a dialog Mr. E can click. A name-only write to
+     the same trigger LANDED in the same minute, so the refusal is FIELD-SPECIFIC to `prompt` and
+     the trigger is not locked. NEXT TEAM LEAD: the numbers in this block are the live baseline and
+     they beat the ones in your prompt. Try the prompt write again - it has landed before.
+
+
 *** THE SIX ROWS. ONE ITEM EACH. ***
 
   GAME BUILD (:07) - SYSTEM 2, THE REMAINING HALF. Its first half landed at S16

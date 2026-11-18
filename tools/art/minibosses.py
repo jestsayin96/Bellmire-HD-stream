@@ -5639,7 +5639,16 @@ def reeve():
     _ring(P, (BX + 0.70, BY + 0.10, 0.52), 0.11, axis='x', slot='dark', rad=0.030, n=12)
     ch = arc((BX + 0.78, BY + 0.10, 0.50), (BX + 0.96, BY + 0.42, 0.10), -0.13, 7)
     P.raw(L.tube(ch, [0.034] * len(ch), 7), 'dark')
-    P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX + 0.96, BY + 0.42, 0.17),
+    # *** PASS 9, ONE THING: THE ANCHOR SPIKE STOPS AT THE FLOOR. ***
+    # cone() bases at z=0 and tips at +h; rot=pi about X flips it point-DOWN,
+    # so loc z had to be the FULL height, not half of it. At 0.17 the point
+    # reached 170 mm BELOW z=0 - and minibossgen grounds the merged body on its
+    # global minimum, so that one 9-vertex spike became the floor and lifted
+    # everything this builder honestly placed at 0.0 - the strongbox's four
+    # feet and the man's two boots - 170 mm INTO THE AIR. Worst of the eleven
+    # the foot-plane audit found, by more than double. A stake driven flush
+    # reads the same from every camera above the floor and costs nothing.
+    P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX + 0.96, BY + 0.42, 0.34),
           rot=(math.pi, 0.0, 0.0))
     _span("chain", _i_chain)
 

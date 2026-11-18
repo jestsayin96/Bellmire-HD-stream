@@ -439,14 +439,26 @@ class ChronicleScroll extends Control:
 		draw_circle(c, r * 0.30, BRASS_DK)
 		draw_circle(c - Vector2(r * 0.26, r * 0.30), r * 0.15, UiTheme.SCROLL_GLINT)
 
-	func _dowel(cy: float, cap: float) -> void:
+	## U62: where the CHRONICLE baseline (the glyph ink bottom - capitals, no descenders) sits on the top rod.
+	## One definition, used by the wordmark AND the grain stripe, so the stripe can never be placed
+	## by a ratio that font-size rounding breaks (at 150% the ratio 0.75*cap fell 1 px short).
+	func _wm_baseline(top_cy: float) -> float:
+		var fs := maxi(10, UiTheme.px(17))
+		return top_cy + _wordmark_font().get_string_size("CHRONICLE", HORIZONTAL_ALIGNMENT_LEFT, -1, fs).y * 0.32
+
+	func _dowel(cy: float, cap: float, ink_bot: float = -1.0) -> void:
 		var s := size
 		var x0 := _p(1.0)
 		var x1 := s.x - _p(1.0)
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		draw_rect(Rect2(x0, cy + cap * UiTheme.SCROLL_GRAIN_OFF, wdt, maxf(1.0, cap * 0.20)), UiTheme.SCROLL_GRAIN)
+		var gy := cy + cap * UiTheme.SCROLL_GRAIN_OFF
+		var gh := maxf(1.0, cap * 0.20)
+		if ink_bot >= 0.0:
+			gy = maxf(gy, ink_bot)
+			gh = clampf(cy + cap - gy, 1.0, gh)
+		draw_rect(Rect2(x0, gy, wdt, gh), UiTheme.SCROLL_GRAIN)
 		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
 		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
 		_finial(Vector2(x0 + cap, cy), cap)
@@ -476,7 +488,7 @@ class ChronicleScroll extends Control:
 		var word := "CHRONICLE"
 		var wsz := font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 		var wx := (s.x - wsz.x) * 0.5
-		var wy := top_cy + wsz.y * 0.32
+		var wy := _wm_baseline(top_cy)
 		# L61: gilt on the dark wood (the burn-brown wordmark vanished into the spindle at 1080p)
 		draw_string(font, Vector2(wx + 1.0, wy + 1.5), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_SHADOW)
 		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_HI)
@@ -513,7 +525,7 @@ class ChronicleScroll extends Control:
 		var edge := _sheet_poly(g, 0.0, 0.0)
 		draw_polyline(edge, Color(TAN_DK.r, TAN_DK.g, TAN_DK.b, 0.6), maxf(1.0, _p(1.2)))
 		# the two spindles overhang the sheet; their finials cap the rod ends
-		_dowel(g.top_cy, cap)
+		_dowel(g.top_cy, cap, _wm_baseline(g.top_cy))
 		_dowel(g.bot_cy, cap)
 		_header(g)
 

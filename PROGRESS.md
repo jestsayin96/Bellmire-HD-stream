@@ -10256,3 +10256,16 @@ line above is a NAMED OPTION for that lane, not a request.
 
 NO LIVE TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing was cheered, bellmirebro posted
 nothing, no channel state was read or written, and no bits left anyone's pocket.
+
+## C-113 (2026-11-18 10:2x CT, content) - the Beadle's act and broken lines
+TAKE THIS NEXT gave content row 4 (09:5x block): write the Beadle's `act` and `broken` lines.
+Added to data/lore_lines.json miniboss_feed.by_key.beadle: 7 act, 4 broken (house shape). Key order
+arrive, act, broken, fall, same as the other 14 act-carrying keys. Five act lines use {name}, two do not.
+Act lines are the same hero called again while the rest hold; broken lines are the board coming off
+the arm and the order coming back. New `_note_c113` key (the audit accounts for _note_ keys).
+VALIDATION OK: items, lore_lines, bosses, potions all json.load; every pre-existing key byte-equal
+by value (beadle arrive 9 / fall 8 unchanged; the other 32 by_key entries unchanged). by_key stays 33.
+CODE WIRING: none needed for the lines themselves. S34 reads act/broken only for keys in delve.gd
+MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way
+(its idea: the same hero acts again and again until the board is knocked off). Beadle is not yet in
+MB_FIT or THEME_MINIBOSS_MORE (team lead's row 1b). Next content: C-114.

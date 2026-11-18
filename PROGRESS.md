@@ -1,3 +1,169 @@
+## ART 2026-11-18 12:39 CT - THE RAMMER'S WRITE-UP (34th miniboss), the twelve-body index that was missing behind it, and the silhouette measurement that says my own pass-5 gap is not there
+
+The 11:5x row, verbatim: "YOUR ROW IS THE WRITE-UP, AND IT IS SMALL BUT IT IS THE
+PART THE NEXT LANE READS." Correct, and the body shipped at 11:54:57 (a8a85a6)
+with no PROGRESS entry at all. This is that entry. I also found, while writing
+it, that the gap is not one body wide - it is THIRTEEN - and the index below
+closes that.
+
+WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED
+  - the miniboss count, parsed out of the ORDER chain in tools/art/minibosses.py
+    rather than taken off the prompt: 34 non-chibi bodies. The prompt says 33.
+    The prompt is one body stale; the plan and the file agree on 34.
+  - whether the Rammer was actually pushed, because the plan has caught this
+    lane with finished work in no commit: `git log` says a8a85a6 on `art`,
+    `rev-list --left-right origin/art...HEAD` said 3/0, so nothing of mine was
+    stranded and I was three plan-sync commits BEHIND. Fast-forwarded to
+    26637a7 before touching a file.
+  - whether the entries for bodies 22-33 existed somewhere I was not looking:
+    `grep -ci` each name in PROGRESS.md and docs/PROGRESS.md. pressman,
+    strickler, greener, ratcatcher, paviser, fenman, comfitmaker: ZERO
+    mentions. dyer, moulder, drover, leech, beadle: mentions only inside other
+    bodies' entries. The last ART header in this file was the TAPSTER, the
+    21st, 17 Nov 16:54 CT. Twelve bodies shipped behind it with no prose.
+
+THE THIRTY-FOURTH IS **THE RAMMER**, and its idea is a CLOCK, not a stat.
+IT DROPS ON THE COUNT: it hauls the monkey to the head of the frame, it holds -
+and the hold is the warning - and it lets go. Whatever is standing on the pile
+when the monkey falls is finished. The answer is not what you do, it is WHEN:
+stand off the pile for the drop, come back in while it hauls. Theme "flooded".
+It is the only OPEN STRUCTURE in the set of 34 - everything else is a solid
+body - and that is deliberate: the two things the fight turns on are the two
+things that read first, THE BLOCK IS UP (so it is coming down) and THE PILE IS
+THERE (so that is where). The chalk ring on the pile head is the one emissive
+in the body and it is on the FLOOR, saying where, not on the monster saying
+look at me.
+The hauler is small, off to one side, bent at the hip, both hands on the rope,
+no weapon and no shield. It is not the monster; it is the reason the monster is
+loaded, and it must never read as a hero.
+
+THE FIT PROOF - I LOOKED AT ALL THREE ON-BODY RENDERS THIS RUN, NOT LAST RUN
+renders/art/minibosses/rammer/hero_front.png, hero_side.png, hero_back.png,
+against the posed KayKit knight (hero h 2.45).
+  verdict GREEN - ratio 1.12 (2.75 / 2.45 = 1.1224), pair_w 3.87, fits_frame
+  true, 3 of 3 proving views, 0 blind views, 0 unproved cells, blank check 3
+  files 0 failures, errors [].
+WHAT I CAN SEE IN THOSE THREE PICTURES, AND IT IS NOT A CLEAN SHEET:
+  1. SIDE VIEW: the raked back leg of the tripod and the hauler SHARE A LINE.
+     The diagonal crosses the hauler's torso and comes out between its legs,
+     and at the floor the hauler's dark boot and the leg's foot overlap. It
+     reads for a moment as a man impaled by the frame. No geometry clips - the
+     leg is behind him - but the READ is bad from that one angle.
+  2. SIDE VIEW: the frame collapses to a pole. The open-structure quality that
+     is the whole point of this silhouette is a front-and-three-quarter asset;
+     from the side it is one vertical and one diagonal.
+  3. BACK VIEW: the pile is the weakest read of the three. It sits behind the
+     frame's near face, tucked between the legs with the low brace across it,
+     and the "that is WHERE it lands" information nearly goes.
+  4. BACK VIEW: the pile's shaft shows BELOW the floor plane. Harmless on a
+     floorless render and hidden in game, but it is visible on the contact
+     sheet and I am naming it rather than letting the next reader find it.
+  5. The hauler is blockier and flatter-faceted than the chibi knight beside
+     it - the team lead's own eye-note at 11:5x, and I agree with it by eye.
+     Wear 0.58 accounts for some; the rest is that its facets are bigger.
+     Pass 6 already pulled this figure from a seven-head realistic build to a
+     head-about-a-third chibi build, and the proportion is right now. The
+     FACETING is not, and that is a cheap fix (more segments on the torso cone
+     and the head sphere) whenever this body is next open. Not done today.
+  6. NO CLIPS, NO FLOATS, NO BAD ANCHORS that I can see in any of the three.
+     The hauler's two mitts both terminate ON the rope at the grip, the feet
+     are on the floor plane in all three views, and the monkey is clear of the
+     legs at its own height.
+
+THE FAULT MY OWN SILHOUETTE SHEET FOUND, AND IT IS IN MY OWN SHIPPED PASS 5
+Pass 5's argument, in the source, is that the monkey sits at half-width 0.29
+so it stands 0.12 proud of each leg and reads as a separate heavy thing with
+the colour thrown away - and that the 0.33 m of rope above it is "a visible gap
+of rope, so it reads as HANGING and not as part of the frame".
+THE FIRST HALF IS TRUE AND I RE-MEASURED IT. THE SECOND HALF IS NOT.
+Measured on renders/art/minibosses/rammer/_rammer_silhouette.png, walking the
+column through the head cap's centre (3.31 mm per pixel at that sheet scale):
+  FRONT VIEW: ONE UNBROKEN BLACK RUN OF 831 PIXELS, cap to floor. Zero white
+  anywhere between the head and the monkey. The gap is not small - it is NOT
+  THERE.
+  THREE-QUARTER: 323 black, then 107 white. Separates.
+  SIDE: 408 black, then 247 white. Separates.
+AND THE CAUSE IS NOT THE ROPE, WHICH IS WHAT I ASSUMED BEFORE I MEASURED THE
+WIDTH. The run width through that band grows 52 -> 89 px as it descends. A
+44 mm rope is 13 px. That band is the TWO FRAME LEGS, which by z 2.3-2.5 have
+converged to about +-0.17 of centre and overlap the centre line in a front
+orthographic view. Pass 5 fixed the monkey's width against the legs at z 1.93
+and never checked the band ABOVE the monkey, where the legs are tighter.
+HOW MUCH THIS MATTERS, HONESTLY: in COLOUR it reads - the legs are pale wet oak
+and the cap and monkey are dark iron, and on hero_front.png the separation is
+plain. This is a hue-free read fault only. But the body's own pass-5 argument
+is that the telegraph must survive WITHOUT hue, so by its own standard it is a
+fault, and it is the same family as the Beadle's missing facing: every number
+in the register green, the shape saying less than the numbers claim. The
+register cannot see it because every number it computes is about hero-vs-
+creature occlusion, not about a creature occluding itself.
+LEFT OPEN, NOT FIXED, AND CARRIED HERE AS A LIVE FAULT. The cheap fix is to
+rake the two front legs ~0.06 wider at the head so they pass outside the cap's
+footprint, which costs one pass and one re-render; I did not take it inside a
+row that asked for a write-up.
+
+FOR THE GAME BUILD LANE - RAMMER (no .gd touched by me, nothing here is wired)
+  - scripts/bestiary.gd: add a `model` path "res://assets/monsters/minibosses/
+    rammer.glb" and NO `anims` entry. The body is STATIC.
+  - height 2.75 (ratio 1.12 hero heights), footprint_span 2.01, size
+    [2.01, 1.38, 2.75]. CORRIDOR-SAFE - it fits a three-cell corridor and does
+    NOT need a room gate.
+  - theme "flooded". 4 parts / 1,046 faces / BLENDER_EEVEE. wear 0.58.
+  - feed line already in the register: "Something is being driven into the
+    floor."
+  - the structured handoff is renders/art/minibosses/_report.json key "rammer",
+    the shape the S33 reader already consumes. Nothing new to parse.
+  - rammer.glb has NO .glb.import sibling. A Godot run generates it, same as
+    snarer_chibi and moulder. Not blocking - nothing loads it until it is wired.
+  - THE CHEAPEST HONEST VERSION OF THE MECHANIC, if the full one is too much:
+    a telegraphed windup with a fixed tell length and a kill zone of one cell
+    centred on the pile. The fight is the TIMER, not the damage - if the windup
+    is visible and the zone is fixed, it is the Rammer. A big single-target hit
+    with no tell is NOT the Rammer and should not ship under the name.
+
+THE TWELVE THAT SHIPPED WITHOUT PROSE, 22-33 - A MEASURED INDEX, NOT A RECALL
+Every number below is read this run out of renders/art/minibosses/_report.json
+and the _fit_*_register.json files, not remembered. All thirteen bodies are
+CORRIDOR-SAFE, all are 4 parts, all are STATIC (a `model` path, no `anims`),
+all carry their own key in _report.json. Ratios marked * come from the
+consolidated sweep in the Rammer's minibossfit run; the rest from that body's
+own register. All GREEN, all 3 of 3 proving views.
+  22 PRESSMAN    prison      h 2.85  span 2.61  wear 0.88  1439f  ratio 1.16*
+     IT PRESSES YOUR FALLEN.
+  23 STRICKLER   treasury    h 2.55  span 2.99  wear 0.12  3642f  ratio 1.04*
+     IT STRIKES YOU LEVEL.
+  24 DYER        workshop    h 2.60  span 3.28  wear 0.30  2294f  ratio 1.06
+     IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK.
+  25 GREENER     workshop    h 2.50  span 2.71  wear 0.55  6433f  ratio 1.02
+     IT GREENS YOUR IRON.
+  26 MOULDER     firepit     h 2.90  span 2.34  wear 0.26  1971f  ratio 1.18
+     IT TAKES YOUR SHAPE.
+  27 RATCATCHER  crypt       h 2.62  span 3.73  wear 0.68  1510f  ratio 1.07
+     IT IS PAID BY THE TAIL.
+  28 DROVER      wood        h 2.44  span 3.59  wear 0.74  5053f  ratio 1.00*
+     IT YOKES ONE OF YOU.
+  29 PAVISER     keep        h 2.68  span 3.57  wear 0.78   743f  ratio 1.09*
+     IT KEEPS ITS FACE TO YOU.
+  30 FENMAN      fogbound    h 2.52  span 2.48  wear 0.92   948f  ratio 1.03*
+     IT TAKES WHAT STIRS.
+  31 COMFITMAKER confection  h 2.28  span 1.83  wear 0.08  2626f  ratio 0.93
+     IT GIVES YOU THE ONLY THING THAT CUTS IT.
+  32 LEECH       shrine      h 2.32  span 2.26  wear 0.82   986f  ratio 0.95
+     IT WILL NOT LET A WOUND CLOSE.
+  33 BEADLE      shrine      h 2.95  span 1.87  wear 0.18   698f  ratio 1.20
+     IT CALLS THE ORDER.
+  34 RAMMER      flooded     h 2.75  span 2.01  wear 0.58  1046f  ratio 1.12
+     IT DROPS ON THE COUNT.
+WEAR IS DOING ITS JOB ACROSS THE SET AND I CHECKED IT RATHER THAN ASSUMED IT:
+the thirteen run 0.08 to 0.92 and the value tracks what the thing IS - the
+Comfitmaker 0.08 and the Strickler 0.12 are kept, clean, valuable trades; the
+Fenman 0.92 and the Pressman 0.88 are rot and hard use. No two neighbours in
+the list share a value. Nothing here was given a set-wide wear.
+STILL OPEN AND NOT MINE TO CLOSE: snarer_chibi, moulder and rammer all lack a
+.glb.import sibling and need one Godot run between them.
+
+NOTHING FOR MR. E TO DECIDE THIS CYCLE.
+
 ## ART 2026-11-17 16:54 CT - THE TAPSTER, a twenty-first miniboss. IT DRINKS WHAT YOU BROUGHT - and three faults the ported occlusion test could not see
 
 The 15:58 row: the occlusion port is ticked, the instruments have had three

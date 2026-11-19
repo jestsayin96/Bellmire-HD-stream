@@ -60,9 +60,27 @@ func _process(_d: float) -> bool:
 		_save(1, 125); UiTheme.scale = 1.5; _hud.restyle()
 	if now >= 38.0 and UiTheme.scale == 1.5 and not _shot[2]:
 		_save(2, 150)
+		_crit_ok = _crit_survives_trim()
 		_report(now)
 		return true
 	return false
+var _crit_ok := true
+## U84: the oldest line on the scroll is a P_CRIT one and the box must shrink to the 150% cap - the
+## line that goes must NOT be it. Runs the REAL _trim_index on a copy of _shown; break_oldest
+## swaps in "drop index 0" (the pre-U83 behaviour) and this must then go red.
+func _crit_survives_trim() -> bool:
+	var ents: Array = _hud._shown.duplicate()
+	ents.push_front({"text": "SENTINEL crit", "key": "u84_crit", "pri": 3, "t": 0.0, "at": -1.0, "n": 1})
+	var cap: int = _hud._cap()
+	if ents.size() <= cap:
+		print("U84 NO VERDICT - shown ", ents.size(), " <= cap ", cap, " so nothing was trimmed"); return false
+	while ents.size() > cap:
+		ents.remove_at(0 if _tag == "break_oldest" else _hud._trim_index(ents))
+	var kept := false
+	for e in ents:
+		if str(e["key"]) == "u84_crit": kept = true
+	print("U84 crit_kept=", kept, " cap=", cap, " tag=", _tag)
+	return kept
 func _save(i: int, pct: int) -> void:
 	_shot[i] = true
 	root.get_texture().get_image().save_png(_out + "l74_%s_%d.png" % [_tag, pct])
@@ -83,6 +101,6 @@ func _report(now: float) -> void:
 	print("L74 measured=", n, " fed=", _fed, " by_pri=", tot, " taken_off_unread=", short)
 	if n < 10:
 		print("L74_TEST NO VERDICT - only ", n, " lines measured (floor 10)"); quit(2); return
-	var bad: int = short[2] + short[3] + int(st["dropped_protected"])
+	var bad: int = short[2] + short[3] + int(st["dropped_protected"]) + (0 if _crit_ok else 1)
 	print("L74_TEST ", "OK" if bad == 0 else "FAIL", " protected_unread=", short[2] + short[3], " dropped_protected=", st["dropped_protected"])
 	quit(1 if bad > 0 else 0)

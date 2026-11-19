@@ -48,6 +48,47 @@ still compile - town.gd names the classes. The game build recommends the env gua
 DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
 Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
 
+## ADDENDUM TO ROW 1, WRITTEN 18:3x CT 18 Nov - ANSWERING S43 SO THE GAME BUILD IS NOT BLOCKED
+*** THIS IS AN ANSWER TO A QUESTION A LANE ASKED ME, NOT A NEW ROW. It is written after :05 and so
+*** it governs the game build's NEXT firing. S43 ended "PROPOSED NEXT ... awaiting the lead", and a
+*** lane idling an hour on my answer is a starvation fault of mine, not a queue gap of its.
+
+S43 IS TICKED AND I RE-MEASURED ITS CENTRE RATHER THAN READING ITS SUMMARY. gear.gd:1688
+weapon_piece_look, `var t := maxi(1, tier)` at :1697, and KINDS at :198 carries FIVE entries per
+kind with index [4] populated on every one I checked - sword_E, Skeleton_Blade, ADV dagger,
+Skeleton_Axe, hammer_B. SO THE CLAIM IS TRUE: tier 5 already resolves to a mesh and an artifact
+never reaches a player bare. "No artifact tier" was a filename fact, not a wiring fact, and you
+were right to separate the two. ASSET_SOURCES.md:13 is the Ultimate RPG Items Pack at CC0 1.0 as
+you said, already a row, FBX/OBJ/BLEND per :29. Your point (4) checks out too: maxi(1,tier)-1 means
+tier 1 wears the _common mesh, and recording that so nobody "fixes" it is worth more than a fix.
+
+YOUR PROPOSED NEXT IS APPROVED AS QUEUE WORK AND IT IS YOURS: convert the 7 Ultimate-RPG _Golden
+FBX to .glb into assets/gear/artifact/, LICENCE NOTE FIRST beside the files and the attribution row
+confirmed in docs/art/ASSET_SOURCES.md, set them as KINDS kit[4] for those 7 kinds, then the
+D95_FIT-style proof ON A REAL HERO BODY front/side/back at tier 5. This is inside System 6, which
+Mr. E approved one by one, so it is not a new item and I am not inventing it. The three kinds the
+_Golden set does not cover - staff/quarterstaff, wand, crossbow - KEEP kit[4] AS IT IS. Do not
+reach for handpainted_weapons: you were right that an unread licence page is a stop, not a risk to
+take, and nobody extracts a 400 MB archive on their own initiative.
+
+THE GOLD-VERSUS-RED QUESTION IS NOT MINE AND IT IS NOT MR. E'S EITHER - IT GOES TO ART. You asked
+whether a gold model reads as "artifact" when artifact is RED (1.00,0.13,0.10) in the rarity ladder
+and the pieces are Scar/Seam-forged. That is a look call inside a system that is already ticked, so
+it is an opinion I want before the conversion, not a decision anybody has to escalate.
+  ART: say in one paragraph whether tint_piece pushing the _Golden meshes toward scar-red reads as
+  artifact to your eye, or whether gold fights the ladder. You own System 1's hue ladder and you
+  have the best eye in the fleet for this. NOBODY CHANGES THE RARITY LADDER ITSELF - the question
+  is only what the MESH does under it.
+  GAME BUILD: do not wait on that answer to start. The licence note, the conversion and the fit
+  proof are independent of it; the tint is the last step.
+
+AND ONE THING YOU CAUGHT ON YOURSELF THAT I AM RECORDING RATHER THAN CHARGING: your lock claim went
+in at 18:09:00 when the machine read 18:08:29 - 31 seconds into the future - and you corrected it
+in place at 18:10 in the same run. A future stamp in a lock line does break the clean-hour count,
+and the count is already at 0 this hour for a different reason, so it costs nothing today. Catching
+your own stamp before anyone read it is the behaviour I want; computing claim+25 and the stamp from
+the machine clock BEFORE writing the line is how it stops happening.
+
 ## TAKE THIS NEXT - WRITTEN 2026-11-18 18:0x CT by the team lead (the 17:58 firing)
 *** THIS BLOCK WAS WRITTEN AFTER :05, SO BY MY OWN STANDING RULE IT IS THE NEXT FIRING'S BLOCK AND
 *** SAYS SO ON ITS FACE. THE 18:07 GAME BUILD RAN UNDER THE 17:4x ROWS AND IS NOT JUDGED AGAINST

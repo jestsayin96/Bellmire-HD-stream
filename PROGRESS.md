@@ -11662,3 +11662,90 @@ LOCK: claim 20:46:57, cap 21:11, declared finish 20:51, IDLE 20:48. No crossing 
 20:52.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## B63 - 2026-11-19 17:0x CT - NO GATE RAN: THE BLENDER BRIDGE IS DOWN, AND THE DRIFT AUDIT CAUGHT MY OWN INSTRUMENT TWICE BEFORE IT CAUGHT ANYTHING ELSE
+
+ITEM: the team lead's 21:0x CHAT BOT row - "yours to choose; a second bare gate on a tree that has
+moved is worth more than a new feature". I could not run it, so I measured exactly what a second
+gate would cover and audited the three owned files instead. No code changed this cycle.
+
+THE BRIDGE IS DOWN AND THAT IS THE HEADLINE. `execute_blender_code` returned
+"Cannot connect to Blender at localhost:9876" on both attempts (23:02 and 23:04 UTC). The Blender
+MCP bridge is the ONLY way this lane launches Godot or runs git on the Windows side, so:
+NO parse gate, NO battery, NO Godot launched at all this hour. `get_device_info` reports Blender
+state "announced" - the server is registered and not answering, i.e. Blender itself is not up with
+the addon serving. This is the same failure mode as B55 (18 Nov, bridge died 12 minutes across my
+slot), except it is covering the whole slot this time.
+
+THE MOUNT PATH HAS CHANGED AND THE PROMPT'S PATH IS NOW WRONG. `$HOME/mnt/hd adventure/...` exits 1.
+The two folders are mounted SEPARATELY now: `$HOME/mnt/bellmire-bot` and
+`$HOME/mnt/jests-hd-medieval-adventure`. I did NOT ask for folder access - I listed `$HOME/mnt/`
+and found them. Every lane whose prompt hard-codes the old joined path will exit 1 on its first
+read; worth a line to the other five.
+
+GIT WORKS FROM THE LINUX SIDE AFTER ALL, AND THAT IS NEW. device_bash cannot `git -C W6` because the
+worktree's .git file holds a WINDOWS gitdir path. But overriding it works:
+    GIT_DIR=.../jests-hd-medieval-adventure/.git/worktrees/bellmire-bot GIT_WORK_TREE=.../bellmire-bot git ...
+status, log, diff and fetch all run. The main repo R needs no override (it is a real repo, not a
+worktree). This cycle's commit went through that override, not the Blender bridge. It does NOT
+replace the bridge: it still cannot launch a Windows exe.
+
+THE LOCK: I claimed NOTHING and launched nothing, so there is no RUNNING line and no IDLE line from
+me this hour. Last lane line anywhere is game build IDLE 2026-11-18T21:19:38-06:00 - on
+origin/laptop as well as in the working tree, so no lane holds the lock and no lane has touched it
+for ~20 hours. Latest commit on any branch is origin/hub 2026-11-18 21:37:51. The team has been
+dormant since last night; I am reporting that, not explaining it.
+
+WHAT A SECOND BARE GATE WOULD ACTUALLY COVER - MEASURED, SO THE NEXT RUN CAN JUDGE IT:
+merge-base(origin/chatbot, origin/main) = 7ec329d. main is 25 commits ahead, chatbot 1 ahead (the
+plan sync). 80 files differ. Of those, exactly THREE are parse-relevant:
+    M  scripts/gear.gd      (+26 -8, the S46b _Golden baseColorFactor work)
+    A  tools/_s45_artifact.gd
+    A  tools/_theme_sweep.gd
+So the delta is ONE changed .gd that the engine actually parses at startup, plus two new tool
+scripts a bare gate never loads. The S44 guard is still on main at town.gd:346/348/368 (read, not
+reported). A second gate is cheap and still worth running - gear.gd is in the startup path - but it
+is a narrow re-validation, not a broad one. Nobody should expect it to find much.
+
+OWNED FILES UNCHANGED AND PROVEN SO: chatcmd.gd 72be1e68, commands.json 0ed19140,
+COMMANDS.md 9a80bfd9 - md5 identical to what B62 published and the lead independently verified.
+Nothing drifted overnight. W6 has ZERO tracked modifications (`status --untracked-files=no` empty),
+so nothing was left in the worktree; the untracked noise is import artifacts and _sup_shot/ from
+other lanes' engine runs, none of it mine and none of it staged.
+
+THE DRIFT AUDIT, BOTH DIRECTIONS - AND MY INSTRUMENT WAS WRONG TWICE FIRST. THAT IS THE B56 LESSON
+AND IT APPLIES TO ME AGAIN:
+  Attempt 1 scanned chatcmd.gd for `"!word"` literals. It found 4 and reported 26 of 27 published
+  commands "missing". A result that says almost everything is broken is an instrument fault, not a
+  finding - the dispatch matches the verb with the `!` ALREADY STRIPPED (msg.substr(1)), so there
+  are no "!x" literals to find. Thrown away.
+  Attempt 2 walked the `match verb:` table by indentation and returned 0 groups, then 15 wrong ones.
+  Two bugs: the file indents with FOUR SPACES (labels at match+4, not match+1), and a label whose
+  body sits on the SAME line - `"enlist":   out = _enlist(...)` - does not end in a colon, so an
+  endswith(':') test drops it. That silently ate the first two commands. Thrown away.
+  Attempt 3 is the one I trust: regex on the label form, indent match+4, anchored at the table
+  inside handle() (line 128) and NOT at the two decoy `match verb:` tables - line 283 (_test_spot)
+  and line 2345 (the UI-intent mapper). chatcmd.gd's own guard at :1971 warns about exactly this
+  confusion; I walked into it anyway and only the count saved me.
+  RESULT: 29 groups, 28 dispatched primaries, 21 aliases.
+    DRIFT A (dispatched, no json entry): `testbits` ONLY.
+    DRIFT B (published entry not dispatched, not even as an alias): NONE. All 27 published commands
+      reach a handler.
+    No alias collides with a published command name. `order` carries all 27 keys, no duplicates,
+      set-equal to `commands` (its sequence differs from dispatch order by design - it is the
+      PUBLISHED order). All 27 appear in docs/COMMANDS.md.
+  So there is no real drift in either direction, and the one asymmetry is deliberate.
+
+`testbits` IS CORRECTLY FENCED AND IT MATTERS FOR THE BITS RULE, SO I READ IT RATHER THAN ASSUMING:
+chatcmd.gd:175-180. The trio `testbits`/`testsub`/`testpoints` is guarded by
+`if not user_id.begins_with("local_"): return ""` - a Twitch viewer's id never begins with
+`local_`, so no viewer can reach it; only Mr. E's local chat box can. And it FAKES the event
+(_test_spot calls bits_tier_fn and Spotlight.bits_seconds with a number) - it spends nothing and
+touches no Twitch API. That is why it is dispatched and unpublished, and it is the right shape: the
+sub path in this lane is a synthetic local event, never a purchase.
+
+NO TWITCH ANYTHING: no connection, no message posted, no redemption, no cheer, zero bits, no
+account used. Nothing was launched that could have reached a channel.
+
+OWED, UNCHANGED, AND STILL OWED: the second bare parse gate on the merged tree (its delta is
+measured above). It needs the bridge back.

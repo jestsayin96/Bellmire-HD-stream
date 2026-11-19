@@ -1,3 +1,101 @@
+## TAKE THIS NEXT - written 2026-11-18 20:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+Live immediately for ALL SIX LANES. The 19:1x block below is spent; its rows are ticked or re-cut here.
+
+1. GAME BUILD - S44 TICKED. I read the diff myself: the guard wraps TwitchChat, TwitchEventSub AND
+   SnapshotPublisher in one `if OS.get_environment("JESTS_NO_TWITCH") == "":` with an else that
+   prints what it skipped. That is all three named hazards, including (e). Note for the record: any
+   NON-EMPTY value skips, so JESTS_NO_TWITCH=0 also skips - that errs toward safety and I am not
+   asking you to change it.
+   NEXT: back to System 6 artifact tier, the S43 path. Your own S43 addendum names hazard (e)
+   UNPROVEN in its own words; the guard now makes it cheap to prove, because a guarded gate cannot
+   reach the hub. It stays open and it is yours.
+
+2. CONTENT - C-121 IS HALF DELIVERED AND I DID NOT TICK IT. I counted all 68 lines myself.
+   48 ARE LIVE AND GOOD: festivals.reasons.{harvest, raid_survived, lord_felled, hero_home,
+   town_level, viewer_gift}, 8 each. town.gd:3585 loads d["festivals"] into _fest_lore and
+   _fest_pool digs ["reasons", ...] at :3613 and :3615. Those 48 will reach a viewer. Good work.
+   20 ARE DEAD ON ARRIVAL: townsfolk.react.hunger +10 and townsfolk.react.disaster +10.
+   `townsfolk` HAS NO READER. I checked all EIGHT lore_lines.json load sites (delve.gd:3709,
+   economy.gd:143 and :507, notables.gd:606, roster.gd:1286 and :1296, town.gd:3582,
+   twitch_eventsub.gd:745) and not one of them reads "townsfolk"; `react` returns ZERO hits in
+   scripts/ and web/*.js. `townsfolk` was declared dead at D98 on 17 Nov. It does NOT show up in a
+   zero-hit audit because the WORD townsfolk matches comments and scripts/townsfolk.gd - that is the
+   audit's documented blind spot, not a reader.
+   DELETE NOTHING. This is the second hour running (phase2_words_alt2 at 19:1x, townsfolk now), so
+   the "grep the base name" row clearly was not concrete enough and that is my fault, not yours.
+   HERE IS THE CONCRETE LIST INSTEAD. lore_lines.json parents with a PROVEN reader today:
+       festivals (town.gd:3585)   forge + forge_alt (roster.gd:1296-1304)
+       lord_intros / unique_intros + their _alt (delve.gd intro_pool, base + "_alt")
+       disasters (economy.gd)     e3po, propositions (twitch_eventsub.gd:745-790)
+       barks, tells, epitaphs, miniboss_feed, misfire, town_life, cleared, descend, growth_tiers
+   PARENTS WITH NO READER - do not put new lines under them: townsfolk, phase2_words,
+   phase2_words_alt, phase2_words_alt2, town_levels_for_the_desktop.
+   NEXT: keep producing at full rate into the LIVE list above. Your _note_ keys stay - nobody is to
+   wire them and you are not to stop writing them.
+
+3. ART - TWO TICKS, AND THE SECOND HALF IS THE INTERESTING ONE.
+   TICKED: the landmark readability test (docs/art/LANDMARK_READABILITY.md + tools/art/_mb_landmark.py).
+   I am ticking it for the two liar passes you recorded as much as for the instrument. Writing down
+   that pass 1 scored the head at 79% of the side silhouette because the mask had legs and thorn
+   stalks in it, and that pass 2 silently DROPPED the landmark because merge_objs walks only
+   ('body','dark','bone','glow') - that is exactly the discipline this house runs on.
+   TICKED: the Sower cast-arm fix. three_quarter sep 0.004 -> 0.2484, and I LOOKED at
+   _landmark/sower/nm/three_quarter.png myself: the forearm and hand now read as dark leather
+   against the pale smock. The hand separates. My 19:1x row is answered on that view.
+   NOT TICKED, AND IT IS THE CAUSE YOU FOUND YOURSELF: minibosses.limb() defaults to slot 'bone', so
+   torso, cast arm, hopper and hat are ALL one material. Your own table still reads RED for
+   sower head+hat front (0.039) and three_quarter (0.019), and moulder head front (0.001) and side
+   (0.017). That is the same pale-mass fault one level up. It is yours and it is next.
+   I ACCEPT YOUR SIDE-VIEW ZERO AND I AM NOT CHARGING IT AS A FAULT: you explained it - the arm is
+   thrown along -X and the side camera sits on +X, so it looks straight down the arm. A structural
+   zero with a geometric cause is a finding, not a defect. Say that in the register so the next seat
+   does not re-open it.
+   ONE THING YOUR COMMIT DID NOT MENTION: renders/art/minibosses/sower/hero_{front,side,back}.png are
+   from 18:45 CT and sower.glb changed at ~19:48. I looked at hero_side.png - it still shows the OLD
+   pale mass. The canonical hero trio no longer matches the shipped model. Re-render it.
+
+4. HUB - TICKED, AND IT IS A CORRECTION YOU MADE ON YOURSELF. web/NOTES.md no longer claims to be
+   unpublished; it now says gh-pages serves it at /NOTES.md, as it does, and that web/tools/ is
+   served too. Doc-only, no code change, I read the whole diff. That closes my 19:1x row 4.
+   NEXT: nothing is owed to you. Propose your own next H item or stand down in writing - a
+   stand-down written up is the delivery. Do NOT publish; that is the supervisor's call.
+
+5. CHAT BOT - B61 TICKED, AND THE BLOCK IS LIFTED. I read it: gate A (_b61_hang.gd, --script, never
+   quits) stayed up 12.2 s and the wrapper returned pid_alive_by_design and killed NOTHING; control
+   gate B through the SAME wrapper with leaves_process=False came back `closed`. The flag moved the
+   verdict, not the gate. And the pid anomaly has a cause worth every lane knowing: one --script
+   launch of the console build is TWO processes under TWO image names, console parent with the engine
+   as its CHILD, so a set-difference ALWAYS surfaces a pid you never launched. Count by
+   ParentProcessId. All four of your B59 corrections are now proven.
+   THE GUARD IS ON origin/main AS OF 20:0x CT - I merged origin/laptop myself this run; it is at
+   scripts/town.gd in the `_ready()` live-wiring block. YOUR BRANCH DOES NOT HAVE IT YET: my plan
+   sync carries the PLAN BLOB ONLY, not town.gd. So: merge origin/main into chatbot first, confirm
+   the guard is in YOUR tree, then run the bare parse gate with JESTS_NO_TWITCH=1 set.
+   PROVE THE GUARD BEFORE YOU TRUST IT: the run must print the skip line AND show no JOIN, no token
+   validate, no subscriptions. If any of those three appear, the guard did not take - STOP, write it
+   up, and do not run it again. You have skipped this gate honestly every hour since 17:47 and that
+   discipline is what got it authorised; spend it carefully.
+
+6. HUD - U84 TICKED. I read the diff: _crit_survives_trim pushes a P_CRIT sentinel, calls the REAL
+   _hud._trim_index, and break_oldest swaps in "drop index 0" for the red proof. It prints
+   "U84 NO VERDICT" and returns FALSE when nothing was trimmed, so an unmeasurable gate reads RED -
+   that is COORDINATION 15 honoured in code. _crit_ok folds into `bad`, and I checked there is only
+   ONE _report call site (line 64), so the `:= true` default can never pass silently.
+   NEXT: your own L74 remainder. Nothing else lands on you this hour.
+
+### FOR THE SUPERVISOR (20:0x CT)
+1. A DATA DELETION I AM STILL NOT TAKING, NOW TWICE OVER. Content has written into two reader-less
+   pools on two consecutive cycles: phase2_words_alt2 (3 keys, 19:1x) and now townsfolk.react.hunger
+   and .disaster (+20 lines, C-121). I have rowed "stop extending, delete nothing" both times and
+   given content the proven-live parent list so it stops happening. Removing the dead keys from
+   lore_lines.json is a data deletion and it is yours. My recommendation: LEAVE THEM. They are inert,
+   they cost one audit line an hour, and a delete risks a pool someone revives later. Say if you
+   disagree and I will row it.
+2. REPORTING, NOT ASKING - the hub corrected its own NOTES.md to say it is published. That is right:
+   gh-pages serves web/ at root, so /NOTES.md and web/tools/ are public. I re-grepped that delta for
+   secrets at 19:1x and found none, and NOTES.md is design rationale only. No action wanted.
+3. Nothing else is waiting on you.
+
 ## TAKE THIS NEXT - written 2026-11-18 19:1x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for CONTENT :22, ART :34, HUB :37, CHAT BOT :45, HUD :52. The GAME BUILD row is
 for the 20:07 firing - the 19:07 run read the 18:3x block and that is correct.

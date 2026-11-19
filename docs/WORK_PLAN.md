@@ -1,3 +1,64 @@
+## CORRECTION TO MY OWN 17:4x BLOCK ABOVE - written 2026-11-19 18:0x CT by the Team Lead.
+THIS IS NOT A NEW HOUR'S ROW. It corrects row 4, which went stale INSIDE MY OWN RUN: the hub
+pushed 3ce4b7f7 while I was writing the block that called its item "still open". My sync re-read
+the ref and caught the move (that is what the re-read is for), and I am fixing the row rather than
+leaving a lane a wasted cycle.
+
+*** 4. HUB - THE LORE_FROZEN REFRESH IS DELIVERED. IT IS **NOT TICKED**, AND HERE IS EXACTLY WHY. ***
+WHAT YOU SHIPPED (3ce4b7f7): web/tools/refresh_lore.py (+149), app.js pin 1669c1b/2026-11-14 ->
+9f38b9c8/2026-11-18, HUB_SECURITY.md:429 rewritten so it no longer names an extractor that does
+not exist. Strings on the page 845 -> 1215.
+
+YOU CLAIMED READY TO PUBLISH, SO THE PUBLISH GATE WAS OWED AND I RAN IT MYSELF. WHAT I PROVED:
+  - innerHTML appears as CODE at exactly :255 and :301, both page-owned literals. Every other hit
+    is a comment. outerHTML, eval(, document.write, new Function, insertAdjacentHTML: ZERO as code.
+  - NO SNAPSHOT VALUE REACHES A URL OR A STYLE. The only .href assign (:2713) is behind a
+    ^https://twitch.tv/ regex test; the only .src assign (:3753) is a page-constant from the
+    whitelist; the one setAttribute("href") (:70) is a fixed "#ic-" literal. Zero .style= assigns.
+  - THE CSP IS INTACT AND ENFORCING, AND I RED-PROVED IT. I injected an inline <style> with the
+    browser's own API: on the hub the rule did NOT apply, the style element got NO SHEET, and the
+    browser cited style-src 'self'. On a control page with no CSP the SAME injection applied
+    (letter-spacing normal -> 37px, 1 cssRule, 0 violations). CSP: default-src 'none', script-src
+    'self', style-src 'self', base-uri 'none', form-action 'none' - no new origin.
+  - LORE_FROZEN BUNDLE HYGIENE, STRUCTURALLY VERIFIED: 7 sections, 1215 strings, ZERO `_`-prefixed
+    keys, ZERO *_alt keys, ZERO non-string leaves, ZERO non-ASCII. Your whitelist does what you say.
+  - refresh_lore.py IS INERT AND OFFLINE: imports argparse/json/os/re/sys and nothing else; no
+    network, no subprocess, no eval/exec; the only write is app.js. node --check on app.js OK.
+  - I LOOKED AT THE PAGE at 1440x1000: rail, the TWO-ROW section bar with every chip legible and
+    unclipped, welcome card, stale banner, parchment "records out of reach" card, guild chat
+    column. Palette right, no Twitch purple.
+
+WHAT I COULD **NOT** PROVE, AND I AM NOT ADOPTING YOUR NUMBERS FOR IT: every chapter BODY on this
+page is gated behind the Supabase snapshot, and my container has no route to Supabase. So over
+both file:// and a local http server the body stayed at 1724 chars, the "frozen from the game's own
+words" stamp never rendered, and clicking Lore changed nothing. YOUR hostile-canary and
+per-chapter checks may well be right - I simply did not reproduce them, and a gate I did not run is
+not a gate I passed. 0 page errors, 0 img, 0 onerror, 0 iframe/object/embed and no `_note`/`_alt`
+leak in everything that DID render.
+
+*** AND THE REAL REASON I AM NOT TICKING IT: THE PIN WAS ALREADY STALE WHEN YOU PUSHED IT. ***
+You pinned 9f38b9c8 / 2026-11-18 - the last commit on data/lore_lines.json AS YOUR BRANCH SAW IT.
+But content landed C-125 at 17:24 CT TODAY and it touches that very file: epitaphs +29, descend
++20, cleared +20, misfire +14, barks +35. It is merged on main now. So the refresh shipped one
+cycle behind the data, and your own `--check` should say CURRENT -> stale against main.
+THIS IS NOT A DEFECT IN YOUR TOOL - it is the tool working, and it is the first time this house has
+been able to notice the gap at all. Before today the pin sat four days stale and nothing could tell.
+NEXT, AND IT IS SHORT: re-run refresh_lore.py against MAIN (which now carries C-124 and C-125),
+re-pin, run --check until it says CURRENT, and say the new string count. Then it is one publish
+instead of two, which is the whole reason I am holding it.
+
+FOR THE SUPERVISOR - THE PUBLISH DECISION, WITH MY RECOMMENDATION:
+  THE DELTA IS NOW VIEWER-VISIBLE for the first time in days: origin/hub:web vs gh-pages^{tree} is
+  app.js (+370 strings of real town text), refresh_lore.py and NOTES.md - not the NOTES.md-only
+  delta I reported an hour ago. The security half of the gate PASSES on my own measurement and the
+  CSP is red-proved.
+  MY RECOMMENDATION IS **HOLD ONE MORE CYCLE, THEN PUBLISH** - and the reason is not doubt about
+  the hub's work, which is good. It is that the pin is already one content cycle behind, so
+  publishing now spends a publish on text that is stale on arrival and guarantees a second publish
+  immediately after. One re-run of the lane's own new tool closes it. If you would rather ship the
+  370 lines now and re-pin later, that is a defensible call and the security evidence supports it -
+  it is yours either way, not mine and not the lane's.
+
 ## TAKE THIS NEXT - written 2026-11-19 17:4x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS AN EXTRA FIRING, NOT THE :58 ONE. The scheduler delivered it at 17:35 CT, seven minutes
 after the 16:58 recovery run finished at 17:28 - the usage-limit backlog is still draining. The

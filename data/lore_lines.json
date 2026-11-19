@@ -51,7 +51,15 @@
       "The wreaths are fresh. The mourners are not here.",
       "A coin on every lid, and every coin has been turned face down.",
       "The incense is still burning. Nobody has been down to light it.",
-      "Names are cut low on these stones, where a kneeling hand could reach."
+      "Names are cut low on these stones, where a kneeling hand could reach.",
+      "A lamp-niche at every turn, and every lamp-niche scraped clean of soot.",
+      "The lids were set from inside, and the dust says it was a long time ago.",
+      "Grave-goods lie in neat heaps by the door. Nobody wanted them.",
+      "Somebody swept this floor, once, and left the broom.",
+      "The older rows are laid east to west. The newer rows are laid every which way.",
+      "A bench by the far wall, for the family that sat out the burying.",
+      "Wreaths of dried flax on the lids, and one lid with none.",
+      "The count is carved above the arch. The count is wrong by one."
     ],
     "mine": [
       "Someone dug here for something, and stopped all at once.",
@@ -103,7 +111,15 @@
       "A cart sits on the rails, loaded, and the rails run on past it.",
       "The props are new timber. Somebody was shoring this up and stopped.",
       "Pick-handles stacked by the shaft head, one short of the shift.",
-      "The tally board by the lift has every peg in, and none are ours."
+      "The tally board by the lift has every peg in, and none are ours.",
+      "The props were set by someone who knew the work, and the roof still came down.",
+      "A lunch-pail on a ledge, the bread inside gone to stone.",
+      "Chalk numbers on the timbers, counting down to something.",
+      "The ore-cart sits on the rails, loaded, facing out.",
+      "Water drips here in threes. It has dripped in threes a long time.",
+      "Lamp-black on the ceiling in a line, and the line stops at a blank wall.",
+      "A pick lies where it was dropped, handle worn pale by two hands.",
+      "The shift-board by the shaft still has names on it. None were struck off."
     ],
     "fortress": [
       "Arrow-slits face inward. Whoever held this was keeping something in.",
@@ -155,7 +171,15 @@
       "The watch-fire is warm and the watch is gone.",
       "Spears racked by the stair, each tagged with a name. One tag is blank.",
       "The gate-bar is down on this side. Somebody wanted to be sure of us.",
-      "Mess bowls on the long table, set out for a full company."
+      "Mess bowls on the long table, set out for a full company.",
+      "Every stair turns the same way, so the right hand is the sword hand.",
+      "The well in the yard is capped with iron and bolted.",
+      "Beds for forty in the barracks, and the sheets still tucked.",
+      "The beacon is laid, and it was never lit.",
+      "Scorch-marks climb the wall from the outside, and stop short of the top.",
+      "A ledger on the quartermaster's desk, balanced to the last farthing.",
+      "Someone cut the drawbridge chains from within.",
+      "The banners hang in rags, but they hang straight. They were taken down once and put back."
     ],
     "temple": [
       "The altar is clean. Nobody down here cleans.",
@@ -207,7 +231,15 @@
       "The bell-rope is cut short, just out of a child's reach.",
       "Hymn-boards hang in order, and tonight's number is chalked over twice.",
       "The water in the font is still. It was not still a moment ago.",
-      "Every pew faces the door we came in by."
+      "Every pew faces the door we came in by.",
+      "The offering-bowls are full, and the offerings are fresh.",
+      "Someone has swept the steps, and the broom is still warm to the hand.",
+      "Hymn-numbers on a slate. The last one is chalked over.",
+      "The pews face the door, not the altar.",
+      "A single sandal by the font, and no foot to match.",
+      "The bell-rope was cut, and tied again with a different knot.",
+      "Votive wax runs down the wall, and the colour of it changes with the floor.",
+      "The prayer-book is open. The page is wet."
     ],
     "lair": [
       "The floor is worn smooth by something heavy that came and went.",
@@ -259,7 +291,15 @@
       "The bones by the entrance are tidy. Something here has manners.",
       "Fresh drag-marks, wide as a cart, and they go in.",
       "The warm air comes from below and smells of wet iron.",
-      "Scratches on the lintel, counted off in fives. Too many fives."
+      "Scratches on the lintel, counted off in fives. Too many fives.",
+      "Claw-marks climb the pillar, and halfway up they turn to fingermarks.",
+      "The straw is fresh. The beast is out, or it is watching.",
+      "Boots and bits of boots, heaped by size.",
+      "The ground is warm in a long shape, and the shape is the length of a cart.",
+      "A skull set neatly on a ledge, and every tooth is gone but one.",
+      "Drag-marks lead in. None lead out.",
+      "Bones here are gnawed clean, and the gnawing was patient.",
+      "Every sound comes back a little later than it should."
     ],
     "prison": [
       "The cells lock from the outside, and some are still locked.",
@@ -311,7 +351,15 @@
       "A lamp left burning in every cell, and every cell empty but one.",
       "The key-board by the door has one hook bare.",
       "Scratched tallies on the wall, and the last mark is still pale.",
-      "The cell doors are all open. The hinges are all oiled."
+      "The cell doors are all open. The hinges are all oiled.",
+      "The keys hang on the wall where a prisoner can see them, and not reach them.",
+      "Bowls by every door, and each one licked clean.",
+      "A name is scratched into the stone and then scratched into again, deeper.",
+      "The warder's chair faces the cells, and the warder's cup is still full.",
+      "Manacles hang open on the wall. The wall is not where manacles belong.",
+      "Whoever kept this place fed the prisoners well, and kept them a long time.",
+      "A cell with its door standing wide and the straw still pressed in the shape of someone.",
+      "The roll-book lists two hundred names, and the last page was torn out."
     ],
     "works": [
       "Benches, tools, a half-made thing nobody finished. Don't touch the architect's toys.",
@@ -363,7 +411,15 @@
       "The forge is banked, not cold. Someone meant to come back to it.",
       "A half-finished helm on the bench, the file still on the rim.",
       "The belts are still moving, and nothing rides them.",
-      "Whistle-cord, oiled and coiled. The shift has not been called off."
+      "Whistle-cord, oiled and coiled. The shift has not been called off.",
+      "A bench set for work with the apron laid out, and the apron is the wrong size for any man.",
+      "The gears on the floor are sorted by size, and sorted again by something else.",
+      "A plan is pinned to the wall. It shows this room, and the next room, and one more.",
+      "Tool-marks on the wall too fine for any tool you own.",
+      "The furnace is cold. The slag in front of it is not.",
+      "A half-built thing on a trestle has your shape, roughly.",
+      "The ledger lists materials in, and not one out.",
+      "Oil on the floor in a trail, and the trail walks."
     ],
     "warren": [
       "Doorways, chimneys, a street sign - a whole town, swallowed.",
@@ -415,7 +471,15 @@
       "Washing hangs on a line, and it is dry, and nobody is hanging it.",
       "Small boots by a door, pointed the way we are going.",
       "The tunnel is swept to a neat curve. Somebody lives here and minds it.",
-      "A pot on a ledge, still lukewarm, a spoon standing in it."
+      "A pot on a ledge, still lukewarm, a spoon standing in it.",
+      "A child's chalk game on the flagstones, half-played.",
+      "Somebody's washing hangs on a line that runs from a wall to nowhere.",
+      "The shopfront has a price-board. The prices are in a coin nobody minted.",
+      "A chimney, and a hearth under it, and the hearth is lit.",
+      "The street turns, and turns again, and you are back at the same door.",
+      "A cradle in a doorway, rocking in no draught.",
+      "The signboards are all painted, and none of the names match the doors.",
+      "The bakery smell is real. There is no bakery."
     ]
   },
   "descend": [
@@ -1521,7 +1585,15 @@
       "Mind the first step.",
       "We've paid for this. Go.",
       "Eyes up. Lamp low.",
-      "Not far. Not yet."
+      "Not far. Not yet.",
+      "Eyes up. Feet down.",
+      "One foot, then the next.",
+      "Torch lit. Count the doors.",
+      "Back to the wall until we see.",
+      "Whatever is down here, it knows we came.",
+      "Slow. Quiet. Home by dark.",
+      "Same as last time, and last time was fine.",
+      "Mind the stair, it is a long one."
     ],
     "lord": [
       "Hold together!",
@@ -1776,7 +1848,13 @@
       "Take the left. I'll take the weight.",
       "Stand your ground. Stand it.",
       "All of it for this one.",
-      "Keep the flasks for after."
+      "Keep the flasks for after.",
+      "That is a big one.",
+      "Spread out, he cannot hit us all.",
+      "I have seen this one on the board.",
+      "Keep him off the healer.",
+      "Not running, not this time.",
+      "Lord or no lord, he bleeds."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2033,7 +2111,15 @@
       "Someone set this to be found.",
       "Check the lintel.",
       "Floor's been swept. Why sweep?",
-      "Rope's new. The rest isn't."
+      "Rope's new. The rest isn't.",
+      "Plate under my foot. Do not breathe.",
+      "Wire. Across the door. Stay low.",
+      "Stone is hollow here.",
+      "Dust on the floor, a clean patch in the dust. Do not step.",
+      "Someone put that there on purpose.",
+      "I heard a click. Everyone freeze.",
+      "Careful, the draught smells of oil.",
+      "Not the third tile. Never the third tile."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2284,7 +2370,15 @@
       "Still standing. Count that.",
       "Teeth shut. Walk on.",
       "Next time I'm quicker.",
-      "Tell the baker I'll be late."
+      "Tell the baker I'll be late.",
+      "That one stung.",
+      "Leg's gone. I will manage.",
+      "Keep going, I am fine, I am fine.",
+      "Somebody has a rag?",
+      "It broke the skin.",
+      "Counting my ribs. All there.",
+      "I have had worse. Not much worse.",
+      "The arm. Not the sword arm, thank the gods."
     ],
     "drink": [
       "Bottoms up.",
@@ -2528,7 +2622,13 @@
       "Taste of a hard winter.",
       "Another empty. Mind the glass.",
       "Hands steady now. Move.",
-      "That's the good batch."
+      "That's the good batch.",
+      "Not as bad as the last one.",
+      "Warm in the belly.",
+      "One more and I will think about it.",
+      "Cork and swallow.",
+      "That one is mostly honey.",
+      "Well, I am still standing."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2781,7 +2881,15 @@
       "Tastes of ash. That's not mine.",
       "Again. Say it slower.",
       "Not a fizzle. Worse than a fizzle.",
-      "The ground felt that."
+      "The ground felt that.",
+      "That was supposed to be a different thing.",
+      "The scar has opinions again.",
+      "Somebody had better not have seen that.",
+      "It went sideways. I do not know why it went sideways.",
+      "I said fire. I did not say that.",
+      "The old words came out wrong.",
+      "Do not tell the guild.",
+      "That was worse than a miss."
     ]
   },
   "misfire": [
@@ -5189,7 +5297,17 @@
       "Ferry at the ford till dusk! The boatman is sober; the river is not!",
       "A feast is promised and a fool is wanted for the middle of it! Apply at the chapel!",
       "Every hero in Bellmire has a name here! Give yours at the post and be remembered!",
-      "Dark by the sixth bell and the lamps are lit! Walk in pairs, and let the lamps be yours!"
+      "Dark by the sixth bell and the lamps are lit! Walk in pairs, and let the lamps be yours!",
+      "Wall-work resumes at first light. Bring a trowel or bring a cart.",
+      "The mill turned a full day, and the flour was weighed honest.",
+      "A hero came home last night with all ten fingers. Bellmire counts that a good night.",
+      "Lamps lit at dusk along the whole market row, and nobody asked who paid.",
+      "Roof-tile and rope at the quay, the long barge in. Fair price for fair coin.",
+      "The bell rang for a wedding. Only the one this week, and it was a loud one.",
+      "Hearths banked, doors barred, children counted. Bellmire sleeps.",
+      "The well-wardens report the water sweet. Drink freely.",
+      "A fortnight without a funeral. Do not say it too loudly.",
+      "The guild post is open late. Bring a name, and bring a lantern."
     ],
     "market": [
       "Two coppers the carp, and the carp is grinning.",
@@ -5239,7 +5357,17 @@
       "Rope, hemp, forty feet, and a knot the guild swears by.",
       "Fresh bread, warm, and I will not discuss the price until you have had a bite.",
       "Charms against the scar, two coppers. They do nothing. They comfort a great deal.",
-      "Hats, hoods, and a fine plain cap. Be visible, be remembered, be dry."
+      "Hats, hoods, and a fine plain cap. Be visible, be remembered, be dry.",
+      "Cheese from the high farms, still sharp. Ask for the rind.",
+      "Honest weights, honest scales. The scales are the town's, so check them yourself.",
+      "Linen by the yard, dyed in the new guild blue. Sells slow, wears long.",
+      "Hot pies at the corner, and the corner is crowded.",
+      "Rope, nails and good iron. The smith is in and the smith is short-tempered.",
+      "Fresh bread, and day-old bread at half. The day-old is the better bread.",
+      "Tallow, wicks, and a lamp-oil that does not stink.",
+      "Wool by the fleece, spun by the skein, and the spinner will tell you the price twice.",
+      "Apples from the east terrace. The last of the season, so take the lot.",
+      "Silver wire and plain rings, no scarglass. Honest work for the weddings."
     ],
     "growth": [
       "The masons raised a new course on the wall today.",
@@ -5289,7 +5417,17 @@
       "The chapel bell was rehung, and for the first time it rings on the hour.",
       "Carts roll in from the west road with more timber, more nails, and more rumour.",
       "Someone planted flowers at the guild post. They survived. This is a good sign.",
-      "A new family came down the road and took the empty house. It is no longer empty."
+      "A new family came down the road and took the empty house. It is no longer empty.",
+      "New thatch on the east row, and the old thatch carted off for the cattle.",
+      "The mason's boy has his own chisel now, and his own corner.",
+      "A second market day has been added, and the stalls have filled it already.",
+      "They paved the lane to the guild post. The mud has to go somewhere else.",
+      "Another smithy has opened by the ford. The first smithy is not pleased.",
+      "A bell has been hung where the old wall stood. The wall moved out a bowshot.",
+      "Stone houses along the river now, where there were reed huts last year.",
+      "The ferry has a roof, and the ferryman a bench.",
+      "The granary has a lock, and the lock has a second key.",
+      "A school on the green. It has two benches and an excellent door."
     ]
   },
   "propositions": {
@@ -12638,5 +12776,6 @@
   "_note_c118": "C-118: +30 epitaphs, +16 descend, +16 cleared lines. Same shapes (descend keeps %s %s hero+verb; cleared keeps Floor %d). Read live by the existing arrays - no wiring owed. Additive.",
   "_note_c119": "C-119: 85 bark lines (enter/lord/trap/hurt/drink/misfire) and 12 misfire log lines (%s %s %d %d, same shape as the rest). Additive only; the existing lists are read as-is, no wiring needed. Expected zero-hit key.",
   "_note_c120": "C-120: e3po.tier_up_alt2 (48 lines, 4 per growth tier) and festivals.viewer_paid stalls_alt / notables_alt (10 each). Additive only; every pre-existing key is unchanged. Expected zero-hit keys until a picker reads them.",
-  "_note_c121": "C-121: appended to LIVE base pools only (festivals.reasons.* read by town.gd, townsfolk.react.hunger/disaster). No new _alt family; nothing here waits on a picker. Expected zero-hit key."
+  "_note_c121": "C-121: appended to LIVE base pools only (festivals.reasons.* read by town.gd, townsfolk.react.hunger/disaster). No new _alt family; nothing here waits on a picker. Expected zero-hit key.",
+  "_note_c123": "C-123: +8 tells per biome (64), +10 town_life per list (30), +6 to +8 barks per kind (44, two duplicates dropped). All into pools with a proven reader. Plain register; barks and tells are short and carry no mechanics. Additive. Expected zero-hit key."
 }

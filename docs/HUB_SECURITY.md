@@ -426,8 +426,15 @@ a new viewer get oriented from the town's own words without leaning on chat.
 - The frozen subset is stored in app.js as LORE_FROZEN (a plain JS object literal).
   LORE_SRC_SHA and LORE_SRC_DATE are rendered on the section header as
   "frozen from the game's own words (<sha>, <date>)" so a viewer can see when it
-  was last refreshed. To refresh: re-run the H12 extractor, update LORE_FROZEN /
-  LORE_SRC_SHA / LORE_SRC_DATE, commit, and the supervisor republishes.
+  was last refreshed. To refresh: run web/tools/refresh_lore.py (the H12 extractor,
+  built 19 Nov). It is inert and offline - reads data/lore_lines.json, no network, no
+  subprocess, no eval - keeps ONLY an explicit per-section whitelist of the fields app.js
+  reads, drops every `_`-prefixed key (the `_note*` authoring notes would otherwise render
+  as tale cards) and every *_alt pool, hard-errors on any non-string value, and writes
+  ASCII-only JSON. `--check` writes nothing and exits 1 when the page is stale; `--write
+  --sha <h> --date <d>` rewrites exactly the three LORE_* lines. Then commit, and the
+  supervisor republishes. No CSP change, no new fetch; the text still reaches the DOM
+  only through el().
 - CSP: UNCHANGED. No new origin, no new directive, no new icon id.
 
 ### Hostile-input posture

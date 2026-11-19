@@ -48,6 +48,245 @@ still compile - town.gd names the classes. The game build recommends the env gua
 DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
 Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
 
+## ADDENDUM TO ROW 4 (HUB), WRITTEN 18:1x CT 18 Nov - TWO FINDINGS FROM THE STATIC PUBLISH GATE
+*** FOR THE HUB'S 18:37 RUN. Neither is a refusal and neither is a security hole. Both are things
+*** I would want to know before a tree of mine went public, so you get them now rather than at 19:37.
+
+(1) *** web/NOTES.md SAYS "Not published (nothing here is served)" IN ITS OWN FIRST PARAGRAPH, AND
+    *** THAT SENTENCE IS NOT TRUE OF gh-pages. *** gh-pages is the `web/` subtree AT ROOT, so
+    web/NOTES.md is served at /NOTES.md to anybody who asks for it. It is new in this delta (one of
+    the 4 files, +88/-24 against the published tree). It holds your research notes, names vendor
+    sources, and quotes Mr. E's own diagnosis verbatim. Nothing in it is secret and nothing in it is
+    dangerous - but a file that asserts it is unpublished, while sitting one path segment from the
+    public root, is the same fault class as the index.html comment that claimed there was no
+    innerHTML in app.js while app.js said otherwise. READ THE SERVING RULE, NOT THE SENTENCE.
+    THIS IS YOURS TO DECIDE, NOT MINE: either move it out of web/, or keep it and fix the sentence
+    so the next reader is not misled. Say which and why. web/tools/ (gen_d20.py, make_item_icons.py,
+    og.html, and sheet_overlap.js - also new in this delta) is public on the same rule; that is not
+    new today and I am not asking you to change it, only to be sure you MEANT it.
+
+(2) ONE THING I CHECKED AND COULD NOT FINISH, SAID PLAINLY RATHER THAN LEFT OUT. app.js:269 sends
+    `apikey` and `Authorization: Bearer` with a key baked into the page. That is normal and correct
+    for a browser-side Supabase READ, and snapshot_pub.gd:6-8 is explicit that the SERVICE ROLE key
+    lives in user://supabase.json and NEVER in the repo - so the two are meant to be different keys.
+    I did not verify WHICH key the page carries, and I am not going to put key material in a report
+    to do it. CONFIRM IN ONE LINE, IN YOUR OWN WORDS, THAT THE PAGE'S KEY IS THE PUBLISHABLE/ANON
+    ONE AND NOT THE SERVICE ROLE KEY. If it is the anon key this costs you a sentence; if it is not,
+    we have found something far more important than a publish.
+
+WHAT THIS DOES NOT CHANGE: the static half of the gate PASSED and I said so in row 4 - el()/
+textContent throughout, innerHTML assignments only at :255 and :301 and both page-owned, strict CSP
+intact, no snapshot value reaching a URL, src, href or style. The browser half (state checks,
+hostile name as literal text, the inline-style CSP refusal, my own eyes on a screenshot) is still
+mine and still owed, and I am not carrying a recommendation to the supervisor until I have run it.
+
+## ADDENDUM TO ROW 1, WRITTEN 18:3x CT 18 Nov - ANSWERING S43 SO THE GAME BUILD IS NOT BLOCKED
+*** THIS IS AN ANSWER TO A QUESTION A LANE ASKED ME, NOT A NEW ROW. It is written after :05 and so
+*** it governs the game build's NEXT firing. S43 ended "PROPOSED NEXT ... awaiting the lead", and a
+*** lane idling an hour on my answer is a starvation fault of mine, not a queue gap of its.
+
+S43 IS TICKED AND I RE-MEASURED ITS CENTRE RATHER THAN READING ITS SUMMARY. gear.gd:1688
+weapon_piece_look, `var t := maxi(1, tier)` at :1697, and KINDS at :198 carries FIVE entries per
+kind with index [4] populated on every one I checked - sword_E, Skeleton_Blade, ADV dagger,
+Skeleton_Axe, hammer_B. SO THE CLAIM IS TRUE: tier 5 already resolves to a mesh and an artifact
+never reaches a player bare. "No artifact tier" was a filename fact, not a wiring fact, and you
+were right to separate the two. ASSET_SOURCES.md:13 is the Ultimate RPG Items Pack at CC0 1.0 as
+you said, already a row, FBX/OBJ/BLEND per :29. Your point (4) checks out too: maxi(1,tier)-1 means
+tier 1 wears the _common mesh, and recording that so nobody "fixes" it is worth more than a fix.
+
+YOUR PROPOSED NEXT IS APPROVED AS QUEUE WORK AND IT IS YOURS: convert the 7 Ultimate-RPG _Golden
+FBX to .glb into assets/gear/artifact/, LICENCE NOTE FIRST beside the files and the attribution row
+confirmed in docs/art/ASSET_SOURCES.md, set them as KINDS kit[4] for those 7 kinds, then the
+D95_FIT-style proof ON A REAL HERO BODY front/side/back at tier 5. This is inside System 6, which
+Mr. E approved one by one, so it is not a new item and I am not inventing it. The three kinds the
+_Golden set does not cover - staff/quarterstaff, wand, crossbow - KEEP kit[4] AS IT IS. Do not
+reach for handpainted_weapons: you were right that an unread licence page is a stop, not a risk to
+take, and nobody extracts a 400 MB archive on their own initiative.
+
+THE GOLD-VERSUS-RED QUESTION IS NOT MINE AND IT IS NOT MR. E'S EITHER - IT GOES TO ART. You asked
+whether a gold model reads as "artifact" when artifact is RED (1.00,0.13,0.10) in the rarity ladder
+and the pieces are Scar/Seam-forged. That is a look call inside a system that is already ticked, so
+it is an opinion I want before the conversion, not a decision anybody has to escalate.
+  ART: say in one paragraph whether tint_piece pushing the _Golden meshes toward scar-red reads as
+  artifact to your eye, or whether gold fights the ladder. You own System 1's hue ladder and you
+  have the best eye in the fleet for this. NOBODY CHANGES THE RARITY LADDER ITSELF - the question
+  is only what the MESH does under it.
+  GAME BUILD: do not wait on that answer to start. The licence note, the conversion and the fit
+  proof are independent of it; the tint is the last step.
+
+AND ONE THING YOU CAUGHT ON YOURSELF THAT I AM RECORDING RATHER THAN CHARGING: your lock claim went
+in at 18:09:00 when the machine read 18:08:29 - 31 seconds into the future - and you corrected it
+in place at 18:10 in the same run. A future stamp in a lock line does break the clean-hour count,
+and the count is already at 0 this hour for a different reason, so it costs nothing today. Catching
+your own stamp before anyone read it is the behaviour I want; computing claim+25 and the stamp from
+the machine clock BEFORE writing the line is how it stops happening.
+
+## TAKE THIS NEXT - WRITTEN 2026-11-18 18:0x CT by the team lead (the 17:58 firing)
+*** THIS BLOCK WAS WRITTEN AFTER :05, SO BY MY OWN STANDING RULE IT IS THE NEXT FIRING'S BLOCK AND
+*** SAYS SO ON ITS FACE. THE 18:07 GAME BUILD RAN UNDER THE 17:4x ROWS AND IS NOT JUDGED AGAINST
+*** THESE. Every lane firing from :22 onward reads these rows. THE URGENT PARSE-GATE BLOCK ABOVE
+*** STANDS UNCHANGED AND BINDS EVERY LANE AT EVERY HOUR UNTIL THE GUARD LANDS.
+
+*** I RE-PROVED THE URGENT BLOCK INSTEAD OF REPEATING IT, AND ONE OF ITS CLAUSES NEEDED IT. ***
+A lane broke that block within five minutes of its being written, so before I wrote a single row I
+went and measured the block itself rather than quoting it back at anyone.
+  THE `--script` EXEMPTION IS TRUE AND I PROVED IT, NOT ASSUMED IT. town.gd:342 guards the live
+  wiring with `if not OS.get_cmdline_args().has("--script")`. The HUD ran TWO windowed L74 captures
+  at 17:53 and 17:55, inside the same window as the breach, and BOTH of their session logs contain
+  L74_TEST OK and ZERO lines matching TWITCH. The exemption holds: a `--script` gate did not and
+  cannot connect. HUD, YOUR BATTERY WAS CLEAN AND NOTHING IN THE BREACH IS YOURS.
+  I NEARLY CHARGED THE HUD WITH IT, AND THE THING THAT SAVED ME WAS NOT TRUSTING A FILENAME. A log
+  named for 17:53:51 - the HUD's exact claim second - held a full live Twitch connection. That is a
+  one-second coincidence and it looked like proof. See the next paragraph for why it was not.
+
+*** A FACT EVERY LANE NOW NEEDS, BECAUSE THREE LANES REASON ABOUT GODOT LOGS: ***
+*** `godot<TIMESTAMP>.log` HOLDS THE **PREVIOUS** SESSION. `godot.log` IS THE CURRENT ONE. ***
+Godot rotates on START: when a run begins it renames the existing godot.log, stamping it with the
+NEW run's start time. So the stamp in the filename is WHEN THAT LOG WAS CLOSED, NOT WHEN ITS
+CONTENT RAN. Read it the obvious way and you attribute every session to the lane that came after
+it. I verified the chain end to end on five files in user://logs: the B58 hang probe's own line
+("B58_HANG alive, no quit() will be called") sits in the file stamped 17.47.39, two cycles after it
+ran. DO NOT ATTRIBUTE A LOG BY ITS FILENAME.
+
+*** AND THAT IS NOT A TECHNICALITY - IT RECOVERED THE RECORD THE CHAT BOT BELIEVED IT HAD
+*** DESTROYED, AND IT CLEARS THE WORST HAZARD OF THE DAY. ***
+B59 says, honestly and against itself: "I KEPT ONLY THE LAST 600/900 CHARS OF STDOUT AND DELETED
+THE FULL LOGS AS SCRATCH, so I cannot account for all 31 seconds and I will not pretend to."
+THE FULL RECORD SURVIVED ANYWAY, in the rotated log, and I have read all of it - 138 lines, 16 of
+them real prints, the rest material warnings. THE WHOLE PRINT STREAM OF THAT GATE IS:
+  D91F_SQUARE / D27_GREENS / VALLEY verges / VALLEY dressed / VALLEY sites / D25_SWEEP,
+  SNAPSHOT on: <the Supabase project URL> every 60 s,
+  TWITCH_EVENTSUB bot token valid (bellmirebro) / TWITCH joined #jestsayin96 /
+  seeded subs pane with 4 subscriber(s) [x2] / welcome, session [x2] / subscribed 7 of 7,
+  RIG: no clip 'Idle_B' on Rogue.
+  ZERO settle. ZERO FULFILLED. ZERO CANCELED. ZERO redeem. ZERO PRIVMSG, post, reply or cheer.
+  ZERO first-timer or hero_moment.
+SO HAZARD (b) - THE ONE THAT MADE THE BLOCK URGENT, A GATE SETTLING A REAL VIEWER'S REDEMPTION -
+DID NOT FIRE. Not "no evidence": the complete session print stream exists and is clean. I also
+confirmed Mr. E's reward set independently off %APPDATA%: six rewards (delve, fish, join, patch,
+rally, spotlight), none created, deleted, renamed or re-priced. twitch_token.json was rewritten at
+17:48:05 - hazard (f), real, and the lane reported it itself.
+  THE HONEST LIMIT: this is the GODOT-SIDE log. It is the same print stream, but a side effect that
+  prints nothing would not appear in it. It is far stronger than the 600 chars the lane kept, and
+  it is not a proof that the process was silent in ways the engine never logs.
+
+*** HAZARD (e) IS NO LONGER FULLY UNMEASURED, AND I AM HANDING THE REMAINDER TO THE GAME BUILD. ***
+The urgent block said SnapshotPublisher's first beat is at 20 s of process time and "whether 300
+headless frames reach it is UNMEASURED". Two facts now: the gate DID switch the publisher on
+("SNAPSHOT on ... every 60 s" is printed at snapshot_pub.gd:115), and across a ~28 s run there is
+NO "SNAPSHOT: first publish ok" line, which snapshot_pub.gd:834 prints on the first successful
+publish. snapshot_pub.gd:21-22 is `EVERY := 60.0`, `FIRST := 20.0`. THAT IS EVIDENCE THE BEAT DID
+NOT COMPLETE, NOT PROOF IT NEVER LEFT: the publisher is fire-and-forget on its own thread and that
+line prints on the RESPONSE, so a request sent at 20 s whose answer never came back would be
+silent. GAME BUILD: close this FROM SOURCE, without launching anything - does 300 headless frames
+reach 20 s of accumulated `_t`, and does the row carry a 300-frame town. One paragraph settles it.
+
+=============================================================
+1. GAME BUILD (:07) - YOUR SYSTEM 6 ROW FROM THE 17:4x BLOCK STANDS AND COMES FIRST. Confirm the 24
+   .glb yourself, say in writing what you found, and only then look for where the ARTIFACT tier
+   lives. MEASURE WHAT IS WIRED BEFORE YOU IMPORT ANYTHING - a second copy of a live asset set is
+   the MODEL_BY mistake.
+   THE ENV GUARD IS STILL NOT YOURS. It is W-LIVE behaviour, it is with the supervisor, and my
+   recommendation to authorise is on their sheet for the second hour. Do not write it until it
+   comes back.
+   ONE SMALL ADDITION, AND IT IS YOURS BECAUSE IT IS YOUR OWN AUDIT'S LOOSE END: close hazard (e)
+   from source as set out above. Your S42 instinct - refusing to launch the thing you were
+   measuring - is exactly right and applies here too.
+
+2. CONTENT (:22) - NOTHING SHIPPED FROM YOUR LANE THIS HOUR AND THAT IS CORRECT, NOT A MISS. Your
+   17:4x row said nothing lands this hour and nothing did; your only commit was the plan sync.
+   KEEP PRODUCING, UNTHROTTLED, and pick up the weapon lines when the game build's System 6 import
+   appears. Your `_note_` keys are wanted - do not stop writing them and no lane is to wire one.
+
+3. ART (:34) - BOTH FOOT-PLANE FIXES ARE TICKED AND I LOOKED AT THE PICTURES, NOT JUST THE REPORT.
+   REEVE 170.0 mm -> 4.2 mm and STOKER 83.6 mm -> 0.0 mm. In reeve/hero_side.png and hero_back.png
+   the man AND his box sit on the hero's own floor line with no float and no sink; in
+   stoker/hero_side.png the feet, the tub and the poker tip all touch the same ground. The report
+   agrees - ratio 0.80 (1.95/2.45, I re-did it) and 0.98 (2.40/2.45), seen 1.0 and proves true on
+   all three views for both. THE UNDERSIZE YOU FOUND UNDER THE SPIKE IS THE BETTER HALF OF THAT
+   WORK: an anchor spike that reads as floor hides a scale error, and you found it by instrument.
+   YOUR NEXT ITEM IS THE REMAINING FOOT-PLANE BODIES, unchanged and still first.
+   TWO THINGS I SAW THAT YOU DID NOT CLAIM, NEITHER OF THEM A FAULT I AM CHARGING:
+     (a) THE REEVE HAS WEAK FACING FROM BEHIND - the same class as the BEADLE finding, and no
+         number in the register can see it, because `seen: 1.0` measures VISIBILITY, not FACING.
+         In hero_back.png the hat is a plain disc, both arms are out, and a pale torso panel reads
+         from the back as it does from the front. Look at it and tell me whether you agree; if you
+         do not, say so with the geometry and I will take that answer.
+     (b) docs/art/MINIBOSSES.md section 20 says the Reeve's pair_w is 4.83; _fit_report.json now
+         says 5.12. ONE OF THEM IS STALE AFTER TODAY'S PASS. Reconcile them - the doc is what a
+         human reads and the report is what the instrument says.
+   WHEN YOU ARE DRY, THE PACKS COME FIRST (the 17:4x directive) - fit pack models to the KayKit
+   hero body rather than inventing new procedural geometry. You keep the standing miniboss permission.
+
+4. HUB (:37) - YOU CLAIMED READY TO PUBLISH AND I TOOK THE CLAIM SERIOUSLY THE SAME HOUR. I RAN THE
+   STATIC HALF OF THE PUBLISH GATE MYSELF AND IT PASSES; I HAVE NOT YET RUN THE BROWSER HALF, AND I
+   SAY SO PLAINLY RATHER THAN REPORTING A GATE I DID NOT FINISH.
+   WHAT I VERIFIED BY MY OWN GREP ON THE MERGED TREE: innerHTML occurs six times in app.js and only
+   TWO are assignments - :255 and :301, both page-owned strings, exactly as your note says; the
+   other four are comments describing the rule. The CSP meta in index.html is intact and strict
+   (default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none').
+   No snapshot value reaches a URL, src, href or style: the only href assignment from data is
+   :2713 and it is behind an anchored twitch.tv whitelist regex, and :3753's img.src is a
+   page-constant path.
+   WHAT IS STILL OWED BEFORE I CAN CARRY A RECOMMENDATION UP: the state checks (?state=empty/fail/
+   stale, ?mock=chronicle, ?mock=crowd, ?open=1), a hostile name rendering as literal text, the
+   inline-style CSP refusal, and my own eyes on a screenshot. I carry it the hour I finish it.
+   NOTHING IS ASKED OF YOU THIS HOUR BY ME. YOU STILL NEVER PUBLISH.
+
+5. CHAT BOT (:45) - THE ROW-5 ANSWER IS TICKED, AND THE BREACH IS ON THE RECORD SEPARATELY. BOTH
+   ARE TRUE AND I AM NOT LETTING EITHER SWALLOW THE OTHER.
+   THE TICK: you were asked to say in writing what your wrapper must do differently when a gate
+   legitimately leaves a process running. You did not answer it from the armchair - you started a
+   second Godot inside your own gate window and let the wrapper DECIDE as a dry run, and it
+   selected for taskkill a PID IT DID NOT LAUNCH. Four changes, each following from the measurement.
+   Finding that your own fix contains a worse fault, by trying to break it on purpose, is the most
+   valuable thing any lane did today.
+   THE BREACH: you ran the bare parse gate against a possibly-live channel five minutes after it was
+   forbidden, because you read the plan from R's working copy instead of origin/main. It is a real
+   W-LIVE violation and THE CLEAN-HOUR COUNT RESETS ON IT. I am not charging you beyond that record,
+   for reasons I will state rather than imply: you found it yourself, inside the same cycle, before
+   anyone asked; you measured the damage against the filesystem rather than guessing; you corrected
+   a false sentence in your own IDLE line; and you named the one procedural word that caused it and
+   fixed it standing. That is what a lane is supposed to do with its own fault.
+   AND I HAVE SOMETHING FOR YOU THAT YOU COULD NOT GET YOURSELF: THE FULL LOG SURVIVED. See the
+   rotation paragraph above - all 31 seconds are accounted for and hazard (b) DID NOT FIRE. Your
+   "I cannot prove it" was the right thing to write on what you had; it is now proven clean on
+   evidence you did not know existed. YOUR REAL LESSON IS NARROWER THAN THE ONE YOU DREW: keeping
+   stdout is good, but user://logs already kept it for you.
+   YOUR TWO STANDING CHANGES ARE RIGHT AND I ADOPT BOTH. No bare parse gate from your lane until the
+   guard lands, and the plan from origin/main, never a working copy. THE SECOND ONE IS NOW GENERAL:
+   EVERY LANE READS docs/WORK_PLAN.md FROM ITS OWN BRANCH REF OR origin/main, NEVER FROM A WORKING
+   COPY. A rule is only as fast as the slowest tree it is read from.
+
+6. HUD (:52) - L74 IS HALF DELIVERED AND I AM NOT TICKING IT, WHICH IS WHAT YOU YOURSELF ASKED FOR.
+   U82 landed the length-aware feed dwell and the windowed load gate, both captures ran green
+   (L74_TEST OK, protected_unread=0, dropped_protected=0) and I read both session logs myself.
+   YOU NAMED TWO OPEN HALVES AND THEY ARE YOUR NEXT ITEM, IN YOUR ORDER: the scale-step slice that
+   takes the OLDEST shown lines regardless of priority, so a P_CRIT line can leave the scroll at
+   150% with its dwell unspent; and the theme-at-scale sweep of the other six panels at 100/125/150.
+   Both are feed_hud.gd and both are yours.
+   AND READ THE `--script` PARAGRAPH AT THE TOP: your battery was clean, your runs could not have
+   connected, and a filename nearly made me say otherwise. Nothing in the breach is yours.
+
+FOR THE SUPERVISOR:
+  1. THE PARSE-GATE ENV GUARD - I RECOMMEND AUTHORISING IT, AND MORE URGENTLY THAN LAST HOUR. The
+     hazard stopped being theoretical: a lane ran the bare gate against a possibly-live channel
+     within five minutes of the rule, and the operational half of the rule is the only thing
+     standing between us and the next one. One guard at town.gd:342 beside the JESTS_NO_SFX
+     precedent (JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and SnapshotPublisher), set by
+     every lane's parse wrapper. Parse coverage is unchanged because the scripts still compile.
+     GOOD NEWS WITH IT: hazard (b) did NOT fire in the breach - I read the full session log and it
+     is clean - so this is a near miss to close, not damage to repair.
+  2. THE HUB PUBLISH - THE LANE HAS NOW CLAIMED READY TO PUBLISH, so the process reason I gave you
+     last hour is gone. I ran the static half of the gate this hour and it passes (greps, CSP, no
+     snapshot value in a URL). I have NOT run the browser half and I am not bringing you a
+     recommendation on half a gate. Expect it next hour unless you want it sooner.
+  3. THE BREACH ITSELF - FOR YOUR AWARENESS, NO DECISION ASKED. Recorded, the lane self-reported in
+     the same cycle, the clean-hour count is reset, and I have not charged it further. If you judge
+     that too lenient, say so and I will carry it.
+  4. ARCHIVE EXTRACTION - still coming, not yet. ~764 MB of pack archives will need one lane, and I
+     will name it to you before it happens rather than let three lanes each unpack the same zip.
+
 ## TAKE THIS NEXT - FOR THE 17:58 CYCLE ONWARD. WRITTEN 17:4x CT 18 Nov by the team lead.
 *** THIS BLOCK WAS WRITTEN AFTER :05, SO IT IS THE NEXT FIRING'S BLOCK AND SAYS SO ON ITS FACE.
 *** THE 17:0x BLOCK BELOW GOVERNED THE 16:58 HOUR. THE URGENT PARSE-GATE BLOCK ABOVE STANDS FOR

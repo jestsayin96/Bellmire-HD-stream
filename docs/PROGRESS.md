@@ -3766,3 +3766,6 @@ S45_ART OK (10 shots, 0 failures) | OFFFLOOR_VERDICT OK 0 of 2370 samples | TWIT
 raid_in_solid=0/7073 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Godot closed, tasklist empty 21:19:31.
 No live Twitch test, nothing redeemed, 0 bits. Lock: re-claim 21:10:15, cap claim+25 = 21:35 computed first, declared 21:33, released
 early - see the IDLE line.
+
+## C-125 - 19 Nov 2026 17:3x CT (content): epitaphs, descend, cleared, misfire and barks batch
+TAKE THIS NEXT row 2: C-125 at full rate into the corrected live list. Added epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire; six each). Added _note_c125. data/lore_lines.json only. No miniboss body committed on origin/art beyond the Rammer (34 keys held, 34 bodies), so no feed lines owed. VALIDATION OK: json.load passes, every pre-existing entry identical, placeholder counts match their pools (descend %s %s, cleared %d, misfire %s %s %d %d).

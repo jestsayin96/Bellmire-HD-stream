@@ -10017,7 +10017,6 @@ NOT AUDITED: ~60 non-HUD logic gates (delve/gear/monster tests); the L654 audit 
 Files: tools/_l40_test.gd, PROGRESS.md. Not ticked by me.
 ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
 ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
-================================================================================
 
 *** 1. THE ELEVEN FILES. THEY ARE MINE, AND THE ANSWER IS NOT A MOVE. ***
 
@@ -11610,6 +11609,29 @@ LOCK: claim 19:48:27, cap 20:12, declared finish 19:51, IDLE 19:49:5x. No crossi
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
 
+## C-123 (2026-11-18 20:3x CT, content) - 138 lines into pools with a proven reader: tells, town_life, barks
+- ITEM: TAKE THIS NEXT (20:0x CT) CONTENT row 2 - keep producing at full rate into the LIVE list. No lines under townsfolk or phase2_words*.
+- Miniboss lines: origin/art bodies all already in miniboss_feed.by_key (34 of 34; only _chibi variants and register PNGs are unkeyed). Stood down on that.
+- ADDED (data/lore_lines.json only): tells +8 per biome (64), town_life crier/market/growth +10 each (30), barks +44 (enter 8, lord 6, trap 8, hurt 8, drink 6, misfire 8; 2 duplicates skipped), plus `_note_c123` (expected zero-hit).
+- VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips.
+- CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
+Next content: C-124.
+## HUB 18 Nov 20:38 CT - stand-down, written (TAKE THIS NEXT 20:0x block, row 4: "nothing is owed")
+ROW: the block gave me row 4, which is TICKED with nothing owed; no new H item proposed. A written stand-down is the delivery.
+web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ empty); this run changed no web/ file. Hostile-name test therefore not owed.
+Static checks re-run on whole app.js: node --check OK; innerHTML at app.js:255 and :301 only, both page-owned literals (matches index.html comment); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; no service_role / sb_secret string in app.js or index.html.
+KEY (the 18:1x addendum point 2, in one line): the page carries an sb_publishable_ key, not the service-role key.
+STALE IN MY PROMPT: it names gh-pages 45a7904 and a 2-file delta; the plan measures gh-pages ae1a483 (tree 656eb1b) with only web/NOTES.md unpublished. NOT claiming READY TO PUBLISH; no publish gate owed.
+No screenshot taken (no web/ change). Live-dot colour unchanged from shipped. Number: 0 web/ files changed vs origin/hub.
+Untracked worktree files unchanged and named: _hub_ready_shot.png, _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt (delete refused on this machine).
+
+## U85 (18 Nov 20:5x CT) - L74 theme-at-scale sweep: gate built, ran at 100/125/150, NOT red-proven (windowed --script, claim 20:53:47, IDLE 20:55:13, cap 21:08, no crossing)
+Item: TAKE THIS NEXT row 6 (HUD :52) - my own L74 remainder, the theme sweep of the other panels. Lock: read R's working RUN_LOCK.txt, last line chat bot B62 IDLE 20:48:46, tasklist clean -> free. No bare parse gate (chat bot ran one at 20:47); parse coverage = the --script harness loading the panels.
+NEW tools/_theme_sweep.gd: for UiTheme scale 1.0/1.25/1.5, every PanelContainer/Panel under every UiTheme._watch node must lie inside the 1920x1080 viewport; top-level overlaps are printed (informational). Floor: <12 panel checks = NO VERDICT. Arg break_shift nudges FeedHUD panels 5000px right.
+RESULT x1: panels=12 bad=0 THEME_SWEEP OK.
+HONEST LIMIT / DEFECT IN MY GATE: break_shift ALSO printed OK (bad=0). So the gate did not move with the defect: either FeedHUD's frame is not a PanelContainer/Panel (it draws its own scroll nodes) or it is not in _watch. The OK above proves only the 12 panels it counted fit on screen. NOT claimed as a pass. Next firing: print which node classes each watched layer contributes, make FeedHUD countable, re-run break_shift until it is red.
+RENDER LOOKED AT (renders/cycles/u85/u85_x1_150.png): the 4 spotlight chips and "Now watching" tags sit inside their quads at 150%. Two things the gate cannot see: (1) the Chronicle scroll sits in the screen centre and straddles the quad seams; (2) the 1x/Day/clock box at bottom right is flush with the bottom edge, no margin. Seen, not fixed, not asserted.
+Nothing for Mr. E to decide.
 ## B62 - 2026-11-18 20:46 CT - THE BARE PARSE GATE RAN. FIRST TIME IN THIS LANE, AND THE GUARD HELD.
 
 ITEM: the team lead's 20:0x CHAT BOT row. Merge origin/main into `chatbot`, confirm the S44 guard is
@@ -11749,3 +11771,19 @@ account used. Nothing was launched that could have reached a channel.
 
 OWED, UNCHANGED, AND STILL OWED: the second bare parse gate on the merged tree (its delta is
 measured above). It needs the bridge back.
+## C-124 (2026-11-18 21:23 CT, content) - descend +20, cleared +20, epitaphs +30, misfire +12
+ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the proven-live list. 82 lines into pools with readers (delve.gd _pick_line descend/cleared; epitaph and misfire readers).
+MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.
+VALIDATION OK: all four data files parse; every pre-existing entry identical; only _note_c124 added. CODE WIRING IMPLIED: none.
+Next content: C-125.
+## HUB 18 Nov 21:4x CT - standing check, NO ROW OWED (plan row 4: "nothing is owed to you; stand-down written up is the delivery")
+TAKE THIS NEXT (20:0x block) row 4 HUB gave no work. web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ = empty). node --check app.js OK.
+Greps on whole app.js: innerHTML at :255 and :301 only (page-owned literals, matches index.html comment); outerHTML 0; eval( 0; insertAdjacentHTML/document.write/new Function appear only inside the comment at app.js:10-11 saying they are absent. CSP meta intact. gh-pages still ae1a483.
+No screenshot (no web/ change). Live-dot colour unchanged. Number: 0 web/ files changed vs origin/hub. NOT claiming READY TO PUBLISH. Untracked worktree files unchanged (delete refused on this machine).
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+## HUB 19 Nov 17:5x CT - ROW 4 TAKEN: THE LORE_FROZEN REFRESH (built, applied, looked at)
+TAKE THIS NEXT (19 Nov 17:2x block) row 4 HUB gave me the LORE_FROZEN refresh. NEW web/tools/refresh_lore.py: inert, offline, per-section whitelist of exactly the fields app.js reads, drops `_` keys and *_alt pools, hard-errors on non-strings, ASCII-only output, --check exits 1 when stale. Applied to app.js: pin 1669c1b/2026-11-14 -> 9f38b9c8/2026-11-18 (last commit on data/lore_lines.json). NUMBER: strings on the page 845 -> 1215 (town_life 97->175, e3po 148->232, disasters 351->559; growth_tiers 36, lord_intros 8, unique_intros 5, events 200 unchanged). --check on the result: CURRENT. app.js 375669 bytes.
+CHECKS: node --check OK. Greps on whole app.js: innerHTML at :255 and :301 only (index.html comment still true, LORE lines are at 2791-2793 so no line moved); outerHTML/insertAdjacentHTML/document.write/new Function/eval 0 as code. ?mock=lore hostile canary renders as literal text in town + lords chapters, 0 img/onerror in any of the 5 chapters, no `_note`/`_alt` text leaked in any chapter. ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd&open=1: 0 page errors, 0 dialogs, 0 injected nodes. CSP untouched, no new fetch.
+LOOKED AT: headless Chromium, Lore > Tales screenshot - stamp reads "(9f38b9c8, 2026-11-18)", Disasters cards carry the new longer During text. WRONG WITH THE PICTURE: my own test overlay was translucent so the page shows through behind it; that is the harness, not the page. The headless run also cannot reach Supabase (egress proxy 403), so live-data panels were not exercised - only the bundled lore path, which needs no fetch. Live-dot colour unchanged (not touched). Untracked worktree files unchanged (delete refused).
+READY TO PUBLISH: viewer-visible web/ change (app.js lore text) with all checks above passing; the team lead verifies by its own grep and routes it up. Publishing is not mine.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

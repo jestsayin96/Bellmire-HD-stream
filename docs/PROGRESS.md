@@ -3716,3 +3716,53 @@ Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (both
 OFFFLOOR_VERDICT OK 0 of 1876 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15362 raid_in_solid=0/6809 PASS |
 DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 20:08:23, cap 20:33 computed first, declared 20:30, released early - see the IDLE line.
+
+## D-cycle - S46: STAND-DOWN IN WRITING - THE 20:0x GAME-BUILD ROW IS ALREADY DELIVERED BY S45; SHRINE DRAW CONFIRMED. 2026-11-18T21:09:46-06:00 (game build)
+TAKE THIS NEXT (20:0x block, row 1): "back to System 6 artifact tier, the S43 path". S45 (c62ff5b, 20:08) delivered it and it is
+ALREADY ON origin/main (git log origin/main --grep=S45 = c62ff5b); no newer lead block exists on main as of this merge (b34662d).
+Hazard (e) is closed by the S44 guard, not re-measured unguarded (that would be the live connection). Nothing is owed until the lead
+ticks S45 or writes a new row, so I did NOT self-select new engine work and launched no Godot.
+OPEN FROM S45, NOT MINE: (i) the tier-5 smoulder washes the _Golden meshes pale lilac - art's plain-vs-seam A/B decides it;
+(ii) staff, quarterstaff, wand, crossbow have no _Golden source in either Quaternius pack and keep their kit[4] meshes.
+MINIBOSS INTERLOCK, MEASURED FROM FILES (no launch): every body under assets/monsters/minibosses/ (34 keys + chibi variants) has an
+MB_FIT entry and a THEME_MINIBOSS_MORE row. LEECH and BEADLE both now pass miniboss_for's gate - mesh on disk AND
+lore_lines.miniboss_feed.by_key arrive lines (leech 9 arrive/8 fall, beadle 9/7 act/4 broken/8 fall) - so BOTH ARE IN THE SHRINE DRAW.
+Beadle's idea is live (MB_WAYS "order"). THE LEECH STANDS UP NAMED BUT DOES NOTHING: _mb_way_tick returns early for a key with no
+act lines, by S34's accepted design. 18 bodies are in that state: comfitmaker drover dyer fenman greener hurdleman jointer leech loader
+moulder paviser pressman quartermaster ratcatcher reeve strickler tanner tapster. Their ideas need content's act/broken lines first,
+then a way here; recorded so the lead can cut content rows in an order. Leech's idea (no healing in the room) touches 6 heal sites
+in delve.gd (1523, 1547, 2435, 2645, 2649, 3619) - a one-run item once its lines exist.
+WORKTREE NOTE: R carries ~50 MODIFIED tracked renders (renders/cycles/d96, s17-s20, s36, l31, h29p6/payload.json, s31_vials.png) that
+are not from this session. NOT staged, NOT touched; this commit stages only docs/PROGRESS.md and docs/RUN_LOCK.txt.
+Gates: none run - docs-only cycle. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 21:08:32, cap claim+25 = 21:33 computed first, declared 21:30, released early - see the IDLE line.
+S46b - THE LEAD'S 21:0x ROW 1 (landed on laptop mid-run at 21:0x, after the stand-down above was committed; I re-claimed the idle lock
+and took it): "the seven _Golden render white - the export dropped the colour".
+MEASURED, AGREED, AND ONE CORRECTION TO THE ROW: all seven .glb had materials with NO pbrMetallicRoughness at all (so glTF defaults:
+base WHITE, metallic 1.0), POSITION+NORMAL only, 0 images. BUT THE PACK HAS NO UVs AND NO TEXTURE TO LOSE: Sword_Golden.blend's mesh has
+0 uv_layers, and every material in all seven .blends is a flat Principled Base Color (unlinked) - Golden (0.467,0.337,0.059), LightGold
+(0.787,0.677,0.190), DarkSteel (0.266,0.266,0.223, rough 0), DarkWood, LightWood, White (bow string 0.8). The weapons_bits atlas belongs
+to the KayKit kit, not this pack. So "re-export with UVs and the pack texture" has nothing to carry; the fix is the row's own
+alternative, baseColorFactor per material. The exporter dropped it because each material holds THREE Material Output nodes
+(Principled + two Diffuse), a 2019-pack layout the 5.2 glTF exporter does not walk.
+THE FIX: the JSON chunk of each .glb rewritten in place with pbrMetallicRoughness {baseColorFactor from the .blend, metallicFactor 0,
+roughnessFactor from the .blend}; BIN chunk byte-identical (tail compared), lengths re-padded and asserted. Originals kept outside the
+repo. --headless --import rc 0. LICENSE note corrected: the "Geometry and materials unchanged" line is now "Geometry unchanged" plus a
+CORRECTION paragraph saying what S45 lost and what S46 wrote. EDGE_MATS left as it is - per the row, it is right now the gold is in.
+PROOF: tools/_s46_gold.gd (windowed, the seven files with NO game tint and NO smoulder) reads every surface's imported material:
+Golden albedo (0.71,0.62,0.27) sRGB on all seven, LightGold (0.90,0.84,0.47), DarkSteel (0.55,0.55,0.51), metallic 0 everywhere,
+ZERO default-white surfaces. S46_GOLD OK (7 files, 0 failures). LOOKED at renders/cycles/s46/s46_gold_plain.png: seven gold weapons,
+dark wood grips, steel guards, the bow's pale string - the colour is IN THE MESH.
+WHAT THE IN-HAND PICTURE STILL SAYS, NOT HIDDEN: re-ran tools/_s45_artifact.gd (S45_ART OK 10 shots, 0 failures, same held lengths and
+hand-in-grip true for all 7) and LOOKED at s45_front and s45_sword_close: in a hero's hand they still read PALE LILAC. That is the tier-5
+smoulder on top of now-gold albedo: Gear.ignite() turns emission on for every surface, and tint_piece lays the violet glow_col. ONE
+REAL CODE FAULT FOUND THERE, REPORTED NOT CHANGED: gear.gd:146-149 - the scarforged branch sets emission_energy_multiplier = 0.16
+("a smoulder not a lamp") and line 149 IMMEDIATELY overwrites it with amount*0.30 = 0.39 for tier 5. The 0.16 is dead code; the intended
+smoulder is less than half what ships. Fixing it changes every tier-5 piece's look, so it goes to art's plain-vs-seam A/B (art's doc
+already owns that call) and the lead - one line, an `else:` - not changed off one picture by me.
+Hazard (e): closed by the S44 guard; every Godot this run had JESTS_NO_TWITCH=1 and the parse run printed only the skip line.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (skip line printed) | S46_GOLD OK (7 files, 0 failures) |
+S45_ART OK (10 shots, 0 failures) | OFFFLOOR_VERDICT OK 0 of 2370 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15804
+raid_in_solid=0/7073 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Godot closed, tasklist empty 21:19:31.
+No live Twitch test, nothing redeemed, 0 bits. Lock: re-claim 21:10:15, cap claim+25 = 21:35 computed first, declared 21:33, released
+early - see the IDLE line.

@@ -530,3 +530,18 @@ IDLE 2026-11-18T19:55:46-06:00 - HUD U84: two short windowed --script runs (x1 g
 
 RUNNING 2026-11-18T20:08:23-06:00 (game build - item from TAKE THIS NEXT; claim+25 cap 20:33 computed first, declared finish 20:30; engine free by tasklist, last line HUD IDLE 19:55:46)
 IDLE 2026-11-18T20:19:43-06:00 - game build S45 System 6 artifact tier: 7 Quaternius _Golden .glb in assets/gear/artifact as KINDS kit[4] for 7 kinds, S45_ART OK fit proof, battery green (all JESTS_NO_TWITCH=1), tasklist clean. Claim 20:08:23, cap 20:33, declared 20:30. Released early, no crossing.
+
+RUNNING 2026-11-18T20:46:57-06:00 (chat bot B62 - the authorised BARE parse gate, first time this lane has run one: origin/main merged into chatbot and the S44 guard verified in MY tree at scripts/town.gd:346/348/368. JESTS_NO_TWITCH=1 set, --headless --quit-after 300, NO --script. Engine verified free by tasklist on BOTH image names at 2026-11-18T20:46:57-06:00; last lane line game build IDLE 20:19:43. claim+25 cap computed first, BUT THE BOUNDARY IS THE HUD AT :52 AND I COMPUTED IT FIRST: declared finish 20:51, INSIDE :52. If the guard does not take I STOP, write it up and do not re-run. I kill only my own console parent; any remainder splits to 21:45)
+IDLE 2026-11-18T20:48:46-06:00 - chat bot B62: THE BARE PARSE GATE RAN AND THE S44 GUARD HELD. origin/main merged into chatbot (80 files, head 7d81483), guard verified IN MY OWN TREE by findstr at town.gd:346/348/368 and read in full - it wraps TwitchChat, TwitchEventSub AND SnapshotPublisher, and it sits inside the `not --script` block, which is exactly why a --script gate never needed it and a bare one did. GATE: --headless --quit-after 300, no --script, JESTS_NO_TWITCH=1, rc 0, 26.8 s, 130 lines, 0 ERROR, 24 pre-existing invalid-UID material WARNINGs. THE THREE PROOFS THE ROW DEMANDED, MEASURED: (a) skip line printed and it is the THIRD line of the run; (b) JOIN/PASS/oauth/irc.chat/tmi.twitch ZERO hits; (c) token|validate ZERO hits, subscri|eventsub|websocket ONE hit and it is the skip line itself - same for snapshot|supabase, so S43 hazard (e) is covered on this path too. Nothing to stop for. BATTERY RE-RUN ON THE MERGED TREE because 52 commits landed: TWITCH_PARSE OK (8), L14_TEST OK (22, Godot's own '2 resources still in use at exit' note reported not hidden), COMMANDS_DOC OK wrote 27 as a true no-op (COMMANDS.md md5 9a80bfd9 before and after). Owned files byte-identical: chatcmd 72be1e68, commands.json 0ed19140, COMMANDS.md 9a80bfd9 - no code changed this cycle, the slot went on the owed gate. No scratch in the worktree (log in %TEMP%). No Twitch connection, nothing posted, no bits. Godot EMPTY on both image names at 20:47:56. Claim 20:46:57, cap 21:11, declared 20:51, IDLE now - NO crossing into the HUD 20:52 (chat bot)
+
+RUNNING 2026-11-18T20:53:47-06:00 (HUD U85 theme-at-scale sweep, windowed --script, expected finish 20:58, hard release before 21:07, cap claim+15)
+
+IDLE 2026-11-18T20:55:13-06:00 - HUD U85 theme sweep ran twice windowed, tasklist clean, no crossing. Gate NOT red-proven (break_shift stayed OK), carried.
+
+RUNNING 2026-11-18T21:08:32-06:00 (game build, take-this-next item, expected finish 21:30, cap claim+25 = 21:33)
+
+IDLE 2026-11-18T21:09:46-06:00 - game build S46: docs-only stand-down (20:0x row already delivered by S45 on main), shrine draw confirmed by file, no Godot launched, tasklist empty
+
+RUNNING 2026-11-18T21:10:15-06:00 (game build S46b: re-export the seven _Golden with colour, lead 21:0x row 1, expected finish 21:33, cap claim+25 = 21:35)
+
+IDLE 2026-11-18T21:19:38-06:00 - game build S46b: seven _Golden .glb now carry their colour (baseColorFactor), all gates green, Godot closed, no crossing

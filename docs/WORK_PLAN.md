@@ -1,3 +1,72 @@
+## TAKE THIS NEXT - written 2026-11-18 19:1x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+Live immediately for CONTENT :22, ART :34, HUB :37, CHAT BOT :45, HUD :52. The GAME BUILD row is
+for the 20:07 firing - the 19:07 run read the 18:3x block and that is correct.
+
+1. GAME BUILD - TWO THINGS, IN THIS ORDER.
+   (a) THE PARSE-GATE ENV GUARD IS AUTHORISED. The supervisor authorised it at 18:52 CT and gave
+       it to you because town.gd is yours. One line at town.gd:342: read
+       OS.get_environment("JESTS_NO_TWITCH") and skip the Twitch connection path when it is set.
+       DO IT FIRST - the chat bot has been skipping its bare parse gate every hour since 17:47 and
+       this is the only thing that unblocks it.
+   (b) Then back to System 6 artifact tier, the S43 path. Your S43 addendum names hazard (e)
+       UNPROVEN in its own words, so I did not tick it; it stays open and it is yours.
+
+2. CONTENT - C-120 TICKED (I counted it myself, below). ONE CORRECTION, THEN KEEP PRODUCING.
+   STOP EXTENDING phase2_words. `phase2_words_alt2` (6 pools) is now in lore_lines.json and the
+   engine reads NO member of that family: `grep -rn phase2_words scripts/ web/*.js` returns ZERO
+   hits, and the only runtime suffix build in the whole tree is `base + "_alt"` at delve.gd:3725,
+   which serves the INTRO pools. There is no `_alt2` construction anywhere - zero literal hits.
+   D98 declared phase2_words and phase2_words_alt dead in writing on 17 Nov.
+   THIS IS NOT THE SAME AS YOUR OTHER _alt2 WORK AND I AM NOT ASKING YOU TO STOP THAT.
+   e3po.tier_up_alt2 and festivals.stalls_alt/notables_alt sit under LIVE, READ parents, and your
+   own _note_c120 says they wait on a picker - that is fine and wanted. phase2_words is different:
+   the PARENT has no reader. DELETE NOTHING. Just grep the base name before you write the next
+   generation of a pool, and put this cycle's lines where a reader can reach them.
+
+3. ART - FOOT PLANE 3 OF 3 TICKED. Next: the thing your own harness could not see.
+   I looked at renders/art/minibosses/sower/hero_side.png myself. The foot plane IS seated - the
+   foot block sits on the line beside the hero, and the fit register agrees (ok true, errors [],
+   blind_views []). But from the side the Sower's forearm, hand and seed-bag read as ONE PALE MASS
+   against the pale smock; the hand does not separate. No number in _fit_report.json says that,
+   exactly as you wrote. Run your silhouette sheet on sower, sexton and moulder.
+   When dry: fit pack models to the KayKit hero body rather than inventing procedural geometry.
+
+4. HUB - READY TO PUBLISH CLAIMED, AND I PUBLISHED IT. gh-pages 45a7904 -> ae1a483 at 19:0x CT,
+   fast-forward proven, tree now EQUALS origin/hub:web (656eb1b). Supervisor authorised 10:54.
+   ONE CORRECTION YOU OWN: your readiness claim named 2 changed files. The real publish delta was
+   FOUR - app.js -14 and style.css +15/-10 as you said, PLUS NOTES.md +28 and the NEW file
+   web/tools/sheet_overlap.js (45 lines). Nothing harmful went out: NOTES.md was already on
+   gh-pages, sheet_overlap.js is the inert Playwright harness you cleared in writing at 15:39, and
+   I re-grepped the whole delta for secrets myself and found none. But measure the WHOLE web/ tree
+   against gh-pages^{tree} next time you claim readiness, not the three page files.
+   Next: nothing is owed to you. Propose your own next H item or stand down in writing.
+
+5. CHAT BOT - B60 TICKED for the three red-proven corrections. The env guard is AUTHORISED and
+   assigned to the GAME BUILD (row 1a), not to you. Until it is on origin/laptop, keep skipping the
+   bare parse gate and keep saying so - that discipline is why it got authorised.
+   Your row is the one you split yourself: correction (3), the alive-by-design path, carried to
+   19:45. I did not tick it and it is not owed anywhere else.
+
+6. HUD - U83 / L74 MERGED AND TICKED. I read the diff: _trim_index excludes the newest line,
+   takes lowest `pri` and the earliest index within a tie, and the height-fit loop removes the same
+   index from `lines` and `ents` so the two stay aligned. The x-suffix binds with U+00A0. Correct.
+   Next: your own L74 remainder. Nothing in the pack pivot lands on you this hour.
+
+### FOR THE SUPERVISOR (19:1x CT)
+1. HUB IS PUBLISHED - gh-pages ae1a483, on your 10:54 authorisation plus the lane's 18:4x
+   readiness claim. Reporting, not asking. The delta was 4 files, not the 2 the lane claimed; the
+   extra two were NOTES.md (already published) and an inert harness. Gate run by me: innerHTML at
+   app.js:255/:301 only and both page-owned, zero outerHTML/insertAdjacentHTML/document.write/
+   eval/new Function in code, CSP intact and RED-PROVEN (an inline <style> injection was refused
+   citing style-src 'self'), 7 state/mock routes clean with 0 page errors and 0 dialogs, hostile
+   name rendered as literal text with 0 injected <img>, and I LOOKED at a 1600x900 shot.
+   HONEST LIMIT: a file:// render has no snapshot, so the shop shelf never drew - the
+   "Sells up to" tier-underline fix itself is NOT visually proven by me, only its code delta.
+2. phase2_words_alt2 - content has written a third generation into a pool declared dead at D98. I
+   rowed "stop extending", NOT "delete". Removing the three keys from lore_lines.json is a data
+   deletion and I did not take it. Say if you want it.
+3. System 2 - ANSWERED by your 18:52 doc (CLOSED WHOLE, confirmed). Striking it from my open list.
+
 ## *** URGENT, ALL SIX LANES - READ THIS BEFORE YOUR NEXT GODOT CLAIM. WRITTEN 17:3x CT 18 Nov. ***
 
 *** DO NOT RUN THE HEADLESS PARSE GATE WHILE MR. E MAY BE LIVE. THIS IS IN FORCE FROM NOW. ***

@@ -3681,3 +3681,88 @@ Gates (all run with JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error (bo
 TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/20183 raid_in_solid=0/4008 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2,
 0 SCRIPT ERROR. Godot closed, tasklist empty on both image names. No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 19:08:36, cap 19:33 computed first, declared 19:29, released early - see the IDLE line.
+
+## D-cycle - S45: SYSTEM 6 ARTIFACT TIER - THE SEVEN _Golden MESHES ARE IN THE HAND AT TIER 5, FIT-PROVED ON REAL BODIES. 2026-11-18T20:08-06:00 (game build)
+Row 1 of the lead's 20:0x block ("back to System 6 artifact tier, the S43 path"), as approved in the 18:3x block: licence note
+first, convert the 7 Ultimate-RPG _Golden, set them as KINDS kit[4] for those 7 kinds, fit proof on a real hero body front/side/back.
+HAZARD (e): CLOSED BY S44'S GUARD, NOT RE-MEASURED UNGUARDED. Every Godot process this run had JESTS_NO_TWITCH=1 and both parse runs
+printed only "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started" - zero SNAPSHOT/publish lines. Proving
+whether the beat WOULD fire needs an unguarded gate = the live connection; I will not run that, and the guard makes the question moot.
+(1) CONVERSION: Blender 5.2 BACKGROUND subprocess (the open scene untouched) opened each pack .blend and exported .glb (Y-up,
+    transforms applied) into assets/gear/artifact/: sword_golden, sword_big_golden, dagger_golden, axe_small_golden, axe_double_golden,
+    hammer_double_golden, bow_golden + LICENSE_Quaternius_UltimateRPG_CC0.txt (pack License.txt read: CC0 1.0). ASSET_SOURCES.md:13
+    already carries the pack row. Materials checked in the .blend: Golden (0.47,0.34,0.06), LightGold, DarkSteel, DarkWood, LightWood,
+    base colours unlinked - they export. Bounds (m): sword 2.30, big sword 2.74, dagger 1.39, axe 1.58, double axe 2.15, hammer 2.53,
+    bow 2.17; all built along +Y with the origin in the grip. --headless --import rc 0, 7 .import siblings written.
+(2) WIRING, gear.gd only (bak_s45): const ART; kit[4] -> ART for sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
+    quarterstaff, wand, crossbow, spear, sceptre UNCHANGED. hand_scale ART dagger 0.5, hammer 0.4, rest 0.6. held_rot ART bow (0,0,90):
+    the FIRST render showed the bow lying FLAT along the forearm; the staff's +90 about Z stands the limbs up, string to the archer -
+    LOOKED AT s45_side.png both runs. EDGE_MATS += Golden, LightGold, DarkSteel, so tint_piece no longer washes the metal with the
+    name's stuff word (art's ARTIFACT_GOLD_VS_SCARRED.md: keep the gold, no red tint); the wood grip still takes it.
+(3) FIT PROOF, tools/_s45_artifact.gd (windowed 1080p, from _s16_sword): one hero per kind (knight blades, barbarian axes, ranger bow),
+    weapon tier 5, through the REAL Roster.weapon_mesh -> Gear.equip path. Named tier-5 pieces resolve for sword (Scarfang), axe
+    (Seamsplitter), bow (Seamstring); greatsword, dagger, greataxe and mace have NO named tier-5 piece, so they are proved via wkind
+    (the !forge <kind> path) and the tool says so per kind. Held lengths: sword 1.89, greatsword 2.13, dagger 0.90, axe 1.59, greataxe
+    1.68, mace 1.31, bow 2.30 (string to limb tip); hand-in-grip TRUE for all 7. Shots: renders/cycles/s45/ front, side, back + 7 closes.
+(4) WHAT THE PICTURE SAYS AND I WILL NOT HIDE: THE GOLD DOES NOT READ. All seven render PALE LILAC, not gold. Cause, from source:
+    tier 5 is "scarforged" glow 1.3 -> Gear.ignite() sets emission on EVERY surface (cold-white end of its lerp), then tint_piece
+    lays the scar/seam glow_col (violet, gear.gd:1556-1557) on every surface too. That is the EXISTING tier-5 smoulder - the old kit[4]
+    meshes wore it the same way - not a conversion fault (materials verified in the .blend). Art's own doc says the red belongs in the
+    GLOW slot and the body must stay a bright metal, and that ART shoots the plain-vs-seam A/B the run after the meshes land. So the
+    emission-over-the-whole-body question is ART'S A/B, and the meshes it needs are now on disk and in the hand. I did not change the
+    smoulder: it is a look call across all tier-5 gear, not mine to make off one picture.
+Gates (all JESTS_NO_TWITCH=1): see the gate line appended below.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (both runs) | S45_ART OK (10 shots, 0 failures) |
+OFFFLOOR_VERDICT OK 0 of 1876 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15362 raid_in_solid=0/6809 PASS |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 20:08:23, cap 20:33 computed first, declared 20:30, released early - see the IDLE line.
+
+## D-cycle - S46: STAND-DOWN IN WRITING - THE 20:0x GAME-BUILD ROW IS ALREADY DELIVERED BY S45; SHRINE DRAW CONFIRMED. 2026-11-18T21:09:46-06:00 (game build)
+TAKE THIS NEXT (20:0x block, row 1): "back to System 6 artifact tier, the S43 path". S45 (c62ff5b, 20:08) delivered it and it is
+ALREADY ON origin/main (git log origin/main --grep=S45 = c62ff5b); no newer lead block exists on main as of this merge (b34662d).
+Hazard (e) is closed by the S44 guard, not re-measured unguarded (that would be the live connection). Nothing is owed until the lead
+ticks S45 or writes a new row, so I did NOT self-select new engine work and launched no Godot.
+OPEN FROM S45, NOT MINE: (i) the tier-5 smoulder washes the _Golden meshes pale lilac - art's plain-vs-seam A/B decides it;
+(ii) staff, quarterstaff, wand, crossbow have no _Golden source in either Quaternius pack and keep their kit[4] meshes.
+MINIBOSS INTERLOCK, MEASURED FROM FILES (no launch): every body under assets/monsters/minibosses/ (34 keys + chibi variants) has an
+MB_FIT entry and a THEME_MINIBOSS_MORE row. LEECH and BEADLE both now pass miniboss_for's gate - mesh on disk AND
+lore_lines.miniboss_feed.by_key arrive lines (leech 9 arrive/8 fall, beadle 9/7 act/4 broken/8 fall) - so BOTH ARE IN THE SHRINE DRAW.
+Beadle's idea is live (MB_WAYS "order"). THE LEECH STANDS UP NAMED BUT DOES NOTHING: _mb_way_tick returns early for a key with no
+act lines, by S34's accepted design. 18 bodies are in that state: comfitmaker drover dyer fenman greener hurdleman jointer leech loader
+moulder paviser pressman quartermaster ratcatcher reeve strickler tanner tapster. Their ideas need content's act/broken lines first,
+then a way here; recorded so the lead can cut content rows in an order. Leech's idea (no healing in the room) touches 6 heal sites
+in delve.gd (1523, 1547, 2435, 2645, 2649, 3619) - a one-run item once its lines exist.
+WORKTREE NOTE: R carries ~50 MODIFIED tracked renders (renders/cycles/d96, s17-s20, s36, l31, h29p6/payload.json, s31_vials.png) that
+are not from this session. NOT staged, NOT touched; this commit stages only docs/PROGRESS.md and docs/RUN_LOCK.txt.
+Gates: none run - docs-only cycle. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 21:08:32, cap claim+25 = 21:33 computed first, declared 21:30, released early - see the IDLE line.
+S46b - THE LEAD'S 21:0x ROW 1 (landed on laptop mid-run at 21:0x, after the stand-down above was committed; I re-claimed the idle lock
+and took it): "the seven _Golden render white - the export dropped the colour".
+MEASURED, AGREED, AND ONE CORRECTION TO THE ROW: all seven .glb had materials with NO pbrMetallicRoughness at all (so glTF defaults:
+base WHITE, metallic 1.0), POSITION+NORMAL only, 0 images. BUT THE PACK HAS NO UVs AND NO TEXTURE TO LOSE: Sword_Golden.blend's mesh has
+0 uv_layers, and every material in all seven .blends is a flat Principled Base Color (unlinked) - Golden (0.467,0.337,0.059), LightGold
+(0.787,0.677,0.190), DarkSteel (0.266,0.266,0.223, rough 0), DarkWood, LightWood, White (bow string 0.8). The weapons_bits atlas belongs
+to the KayKit kit, not this pack. So "re-export with UVs and the pack texture" has nothing to carry; the fix is the row's own
+alternative, baseColorFactor per material. The exporter dropped it because each material holds THREE Material Output nodes
+(Principled + two Diffuse), a 2019-pack layout the 5.2 glTF exporter does not walk.
+THE FIX: the JSON chunk of each .glb rewritten in place with pbrMetallicRoughness {baseColorFactor from the .blend, metallicFactor 0,
+roughnessFactor from the .blend}; BIN chunk byte-identical (tail compared), lengths re-padded and asserted. Originals kept outside the
+repo. --headless --import rc 0. LICENSE note corrected: the "Geometry and materials unchanged" line is now "Geometry unchanged" plus a
+CORRECTION paragraph saying what S45 lost and what S46 wrote. EDGE_MATS left as it is - per the row, it is right now the gold is in.
+PROOF: tools/_s46_gold.gd (windowed, the seven files with NO game tint and NO smoulder) reads every surface's imported material:
+Golden albedo (0.71,0.62,0.27) sRGB on all seven, LightGold (0.90,0.84,0.47), DarkSteel (0.55,0.55,0.51), metallic 0 everywhere,
+ZERO default-white surfaces. S46_GOLD OK (7 files, 0 failures). LOOKED at renders/cycles/s46/s46_gold_plain.png: seven gold weapons,
+dark wood grips, steel guards, the bow's pale string - the colour is IN THE MESH.
+WHAT THE IN-HAND PICTURE STILL SAYS, NOT HIDDEN: re-ran tools/_s45_artifact.gd (S45_ART OK 10 shots, 0 failures, same held lengths and
+hand-in-grip true for all 7) and LOOKED at s45_front and s45_sword_close: in a hero's hand they still read PALE LILAC. That is the tier-5
+smoulder on top of now-gold albedo: Gear.ignite() turns emission on for every surface, and tint_piece lays the violet glow_col. ONE
+REAL CODE FAULT FOUND THERE, REPORTED NOT CHANGED: gear.gd:146-149 - the scarforged branch sets emission_energy_multiplier = 0.16
+("a smoulder not a lamp") and line 149 IMMEDIATELY overwrites it with amount*0.30 = 0.39 for tier 5. The 0.16 is dead code; the intended
+smoulder is less than half what ships. Fixing it changes every tier-5 piece's look, so it goes to art's plain-vs-seam A/B (art's doc
+already owns that call) and the lead - one line, an `else:` - not changed off one picture by me.
+Hazard (e): closed by the S44 guard; every Godot this run had JESTS_NO_TWITCH=1 and the parse run printed only the skip line.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (skip line printed) | S46_GOLD OK (7 files, 0 failures) |
+S45_ART OK (10 shots, 0 failures) | OFFFLOOR_VERDICT OK 0 of 2370 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15804
+raid_in_solid=0/7073 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Godot closed, tasklist empty 21:19:31.
+No live Twitch test, nothing redeemed, 0 bits. Lock: re-claim 21:10:15, cap claim+25 = 21:35 computed first, declared 21:33, released
+early - see the IDLE line.

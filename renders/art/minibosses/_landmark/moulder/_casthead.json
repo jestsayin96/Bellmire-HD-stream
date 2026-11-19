@@ -1,0 +1,47 @@
+{
+  "key": "moulder",
+  "landmark": "casthead",
+  "at": [
+    0.22,
+    0.44,
+    2.2225
+  ],
+  "r": 0.4,
+  "parts_selected": 2,
+  "views": {
+    "front": {
+      "vis_px": 74151,
+      "body_px": 280949,
+      "vis_frac": 0.2639,
+      "sep": 0.0711,
+      "pairs": 263,
+      "sep_local": 0.1244,
+      "frac_flat": 0.1472,
+      "touch": 265,
+      "red": false
+    },
+    "three_quarter": {
+      "vis_px": 48118,
+      "body_px": 221577,
+      "vis_frac": 0.2172,
+      "sep": 0.0548,
+      "pairs": 351,
+      "sep_local": 0.07,
+      "frac_flat": 0.3629,
+      "touch": 350,
+      "red": false
+    },
+    "side": {
+      "vis_px": 60963,
+      "body_px": 223505,
+      "vis_frac": 0.2728,
+      "sep": 0.055,
+      "pairs": 552,
+      "sep_local": 0.1024,
+      "frac_flat": 0.2645,
+      "touch": 552,
+      "red": false
+    }
+  },
+  "red": []
+}

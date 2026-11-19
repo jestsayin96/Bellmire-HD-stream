@@ -11610,6 +11610,13 @@ LOCK: claim 19:48:27, cap 20:12, declared finish 19:51, IDLE 19:49:5x. No crossi
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
 
+## C-123 (2026-11-18 20:3x CT, content) - 138 lines into pools with a proven reader: tells, town_life, barks
+- ITEM: TAKE THIS NEXT (20:0x CT) CONTENT row 2 - keep producing at full rate into the LIVE list. No lines under townsfolk or phase2_words*.
+- Miniboss lines: origin/art bodies all already in miniboss_feed.by_key (34 of 34; only _chibi variants and register PNGs are unkeyed). Stood down on that.
+- ADDED (data/lore_lines.json only): tells +8 per biome (64), town_life crier/market/growth +10 each (30), barks +44 (enter 8, lord 6, trap 8, hurt 8, drink 6, misfire 8; 2 duplicates skipped), plus `_note_c123` (expected zero-hit).
+- VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips.
+- CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
+Next content: C-124.
 ## HUB 18 Nov 20:38 CT - stand-down, written (TAKE THIS NEXT 20:0x block, row 4: "nothing is owed")
 ROW: the block gave me row 4, which is TICKED with nothing owed; no new H item proposed. A written stand-down is the delivery.
 web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ empty); this run changed no web/ file. Hostile-name test therefore not owed.
@@ -11619,6 +11626,71 @@ STALE IN MY PROMPT: it names gh-pages 45a7904 and a 2-file delta; the plan measu
 No screenshot taken (no web/ change). Live-dot colour unchanged from shipped. Number: 0 web/ files changed vs origin/hub.
 Untracked worktree files unchanged and named: _hub_ready_shot.png, _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt (delete refused on this machine).
 
+## U85 (18 Nov 20:5x CT) - L74 theme-at-scale sweep: gate built, ran at 100/125/150, NOT red-proven (windowed --script, claim 20:53:47, IDLE 20:55:13, cap 21:08, no crossing)
+Item: TAKE THIS NEXT row 6 (HUD :52) - my own L74 remainder, the theme sweep of the other panels. Lock: read R's working RUN_LOCK.txt, last line chat bot B62 IDLE 20:48:46, tasklist clean -> free. No bare parse gate (chat bot ran one at 20:47); parse coverage = the --script harness loading the panels.
+NEW tools/_theme_sweep.gd: for UiTheme scale 1.0/1.25/1.5, every PanelContainer/Panel under every UiTheme._watch node must lie inside the 1920x1080 viewport; top-level overlaps are printed (informational). Floor: <12 panel checks = NO VERDICT. Arg break_shift nudges FeedHUD panels 5000px right.
+RESULT x1: panels=12 bad=0 THEME_SWEEP OK.
+HONEST LIMIT / DEFECT IN MY GATE: break_shift ALSO printed OK (bad=0). So the gate did not move with the defect: either FeedHUD's frame is not a PanelContainer/Panel (it draws its own scroll nodes) or it is not in _watch. The OK above proves only the 12 panels it counted fit on screen. NOT claimed as a pass. Next firing: print which node classes each watched layer contributes, make FeedHUD countable, re-run break_shift until it is red.
+RENDER LOOKED AT (renders/cycles/u85/u85_x1_150.png): the 4 spotlight chips and "Now watching" tags sit inside their quads at 150%. Two things the gate cannot see: (1) the Chronicle scroll sits in the screen centre and straddles the quad seams; (2) the 1x/Day/clock box at bottom right is flush with the bottom edge, no margin. Seen, not fixed, not asserted.
+Nothing for Mr. E to decide.
+## B62 - 2026-11-18 20:46 CT - THE BARE PARSE GATE RAN. FIRST TIME IN THIS LANE, AND THE GUARD HELD.
+
+ITEM: the team lead's 20:0x CHAT BOT row. Merge origin/main into `chatbot`, confirm the S44 guard is
+in MY tree, then run the bare parse gate with JESTS_NO_TWITCH=1 and PROVE the guard before trusting
+it. This is the gate this lane had skipped honestly every hour since 17:47.
+
+MERGE: `git merge origin/main` into chatbot, fast-forward material, 80 files / +1564 -147, head
+7d81483. Guard confirmed IN MY TREE by findstr, not by report: scripts/town.gd:346 (comment), :348
+(`if OS.get_environment("JESTS_NO_TWITCH") == "":`), :368 (the else print). I read the whole block:
+it wraps TwitchChat, TwitchEventSub AND SnapshotPublisher, and it sits INSIDE
+`if not OS.get_cmdline_args().has("--script")` - which is exactly why it was needed. A `--script`
+gate never reached that code; a BARE `--headless --quit-after` gate does, and until this guard
+existed there was nothing between my gate and Mr. E's channel.
+
+THE GATE: `--headless --path W6 --quit-after 300`, NO --script, JESTS_NO_TWITCH=1. rc 0, 26.8 s.
+130 lines of output, 0 ERROR, 0 SCRIPT ERROR, 24 WARNING (all pre-existing `invalid UID` material
+warnings out of _load_materials at town.gd:826 - not mine, not new).
+
+THE PROOF, THE THREE THINGS THE ROW DEMANDED, EACH MEASURED ON THE LOG AND NOT ASSUMED:
+  (a) THE SKIP LINE PRINTED, and it is the THIRD line of the whole run, ahead of everything:
+      "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started".
+  (b) NO JOIN. Case-insensitive sweep for JOIN / PASS / oauth / irc.chat / tmi.twitch: ZERO hits.
+  (c) NO TOKEN VALIDATE: `token|validate` ZERO hits. NO SUBSCRIPTIONS: `subscri|eventsub|websocket`
+      matched ONE line and it is the skip line itself. Same for `TwitchChat|SnapshotPublisher|
+      snapshot|supabase` - one hit, the skip line. The hub snapshot did not fire either, so S43
+      hazard (e) is covered on this path too.
+  So the guard took. If any of the three had appeared I was to stop and not re-run; none did.
+
+BATTERY RE-RUN ON THE MERGED TREE, because 52 commits landed in my tree and a green gate from
+before a merge proves nothing after it. All `--script`, all with JESTS_NO_TWITCH=1:
+  TWITCH_PARSE OK (8 checks)       rc 0
+  L14_TEST OK (22 checks)          rc 0  - prints Godot's own "2 resources still in use at exit"
+                                          note at shutdown; the gate's own verdict is OK and no
+                                          ERROR/SCRIPT ERROR line appears. Reporting it, not hiding
+                                          it, and not claiming it is nothing.
+  COMMANDS_DOC OK wrote 27 commands rc 0  - a TRUE NO-OP: docs/COMMANDS.md md5 9a80bfd9 before AND
+                                          after. 27, not the prompt's 26. The generator is right.
+OWNED FILES BYTE-IDENTICAL ACROSS THE WHOLE RUN: chatcmd.gd 72be1e68, commands.json 0ed19140,
+COMMANDS.md 9a80bfd9. This cycle changed no code - it spent its slot on the gate it owed.
+
+SCRATCH: none in the worktree. The one log lives in %TEMP%\_b62_parse.log, off the repo.
+
+W-LIVE: NOTHING, and this is the run where that sentence had teeth. The bare gate boots the live
+wiring path; the guard is the only reason nothing happened. No Twitch connection, no text posted,
+no bits, no cheer, no redemption read or settled, no account or channel state touched.
+
+ENGINE: free on BOTH image names by tasklist at claim 20:46:57 and EMPTY on both at 20:47:56 after
+the last gate. Last lane line before mine was game build IDLE 20:19:43.
+LOCK: claim 20:46:57, cap 21:11, declared finish 20:51, IDLE 20:48. No crossing into the HUD at
+20:52.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-124 (2026-11-18 21:23 CT, content) - descend +20, cleared +20, epitaphs +30, misfire +12
+ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the proven-live list. 82 lines into pools with readers (delve.gd _pick_line descend/cleared; epitaph and misfire readers).
+MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.
+VALIDATION OK: all four data files parse; every pre-existing entry identical; only _note_c124 added. CODE WIRING IMPLIED: none.
+Next content: C-125.
 ## HUB 18 Nov 21:4x CT - standing check, NO ROW OWED (plan row 4: "nothing is owed to you; stand-down written up is the delivery")
 TAKE THIS NEXT (20:0x block) row 4 HUB gave no work. web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ = empty). node --check app.js OK.
 Greps on whole app.js: innerHTML at :255 and :301 only (page-owned literals, matches index.html comment); outerHTML 0; eval( 0; insertAdjacentHTML/document.write/new Function appear only inside the comment at app.js:10-11 saying they are absent. CSP meta intact. gh-pages still ae1a483.

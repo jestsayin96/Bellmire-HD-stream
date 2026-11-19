@@ -3893,3 +3893,125 @@ Still wrong, named and not hidden:
 **WHAT THIS COSTS THE OTHER TEN.** Nothing - the bug was in a loader only this
 body uses. The other ten floats have other causes and still need their own
 looks, one at a time.
+
+### THE REEVE, 18 Nov 17:4x CT - 170.0 mm TO 4.2 mm, AND THE FLOAT WAS HIDING A 10% UNDERSIZE
+
+**WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED.** I re-ran
+`_foot_plane_audit.py` in my own `--background --factory-startup` Blender
+before touching anything: 34 bodies, 31 declare a contact at z=0, **ELEVEN over
+the 5 mm bar**, not the twelve the 16:0x plan block carries and not the ten the
+17:4x block carries - the Quartermaster's fix had already dropped it out of the
+list and nobody had re-run it since. **THE QUARTERMASTER IS NOT IN THE OVER-BAR
+LIST AND THE 317.2 mm FIGURE ON MY ROW IS DEAD.** I did not start where the row
+pointed me; I started at the top of the table I measured, which is the Reeve at
+170.0 mm - more than double the next (Stoker, 83.6 mm).
+
+**THE INSTRUMENT NAMED THE LINE BEFORE I TOUCHED GEOMETRY.** `_fp_locate.py
+-- reeve`: 60 items, and exactly ONE reaches below the floor by more than a
+millimetre -
+
+    zmin -0.1700  zmax +0.1700  dark  9v  minibosses.py:5642
+      P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX+0.96, BY+0.42, 0.17),
+            rot=(math.pi, 0.0, 0.0))
+
+the chain's floor anchor. `L.cone` **bases at z=0 and tips at +h**; `rot=pi`
+about X flips it point-DOWN about the item's own origin, so the correct `loc.z`
+is the FULL height, not half of it. At 0.17 the point reached **170 mm below
+z=0** - and `minibossgen` grounds the merged body on its GLOBAL minimum, so one
+nine-vertex spike became the floor.
+
+**WHAT IT LIFTED.** Six items declare contact at exactly 0.0 and every one of
+them was in the air: the strongbox's four feet (`minibosses.py:5513`) and the
+man's two boots (`:809`). The box and the officer both hovered 17 cm.
+
+**THE FIX IS ONE NUMBER.** `loc.z` 0.17 -> 0.34, so the point lands AT z=0 and
+the head sits 0.34 above it: a stake driven flush. Nothing else moved. After:
+global min **-0.0042** (the spill lumps, which are spheres seated at `r*0.60`
+and are MEANT to settle into the floor plane), the Reeve is off the over-bar
+list, and the set is **10 of 31 over the bar, 21 seated**.
+
+**THE FLOAT WAS WEARING A SECOND FAULT NOBODY HAD NAMED.** `minibossgen`
+normalises each body to its CANON height, and the old z-span included 170 mm of
+buried spike - so the part a viewer can actually see was being scaled down to
+fit a height that was 170 mm of nothing. Fixing the anchor made the creature
+**10% bigger on the floor**: `_report.json` footprint 2.96 m -> **3.26 m**, size
+2.96x1.71x1.95 -> **3.26x1.88x1.95**. Still **CORRIDOR-SAFE** (three-cell clear
+span 11.0 m), so no spawn gate changes - but any lane holding 2.96 should hold
+3.26 now.
+
+**THE FIT PROOF - I LOOKED AT ALL THREE, AND AT THE BEFORE.** `minibossfit
+--only reeve`, KayKit Knight at scale 1.0, ratio 0.80, pair width 5.12 m,
+verdict GREEN, blank check 3 files 0 failures, 3 of 3 proving views, border
+intact. Front/side/back at `renders/art/minibosses/reeve/`.
+- **BEFORE** (`hero_front.png` at 42b9156): the box feet, the boots and the
+  spill all sit a clear band ABOVE the knight's soles and the spike is the only
+  thing touching the floor line. The float is visible by eye, not just by
+  number - about 23 px at this frame.
+- **AFTER**: feet, boots and spill all land on the knight's sole line in all
+  three views. Nothing clipped, nothing floating, no new gap.
+
+**FAULTS I CAN STILL SEE, AND THE HARNESS CANNOT.**
+- **the anchor does not read as a stake.** At stream distance it is a dark
+  comma from the front and a thin triangle from the side - "the chain ends in a
+  mark on the floor" rather than "driven in". It is correct geometry and poor
+  reading. NOT fixed this pass: one thing at a time, and it is a shape question,
+  not a plane question.
+- the spill lumps are pale on pale and only just carry; they read in all three
+  views but they are the first thing that would be lost to a dark floor tile.
+- back and front are close in mass - the strongbox, hopper and man all mirror.
+  The facing cues are real but small: the lock plate and the man's two pale eyes
+  are front-only. Less dangerous than the Beadle's no-facing fault, but the same
+  family, and I am writing it down rather than calling the body clean.
+- the chain ring on the box's side reads as a handle or a keyhole in the side
+  view, not as a ring the chain passes through.
+
+**WHAT THIS COSTS THE OTHER TEN.** Nothing. This bug was one call site. The
+Stoker is next at 83.6 mm and needs its own look.
+
+### THE STOKER, 18 Nov 17:5x CT - 83.6 mm TO 0.0 mm, AND IT WAS TWO CAUSES, MEASURED ONE AT A TIME
+
+Second body of this pass. `_fp_locate.py -- stoker` before any geometry moved:
+37 items, and the floor was being set by the RAKE -
+
+    zmin -0.0836  zmax +0.1103  dark  7v x4  minibosses.py:1050
+      P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X+1.64+k*0.14, -0.78, 0.10),
+                (0.42, -0.10, -1.0)), 'dark')
+
+four teeth, 0.20 long, aimed with unit z -0.9181 from a base at z=0.10. The
+comment says **"four short teeth, biting the floor"** and the intent is right -
+but the arithmetic made it **42% of every tooth BURIED**, the head's low corner
+9.7 mm under with it, and the only two items this builder declares at 0.0 - the
+man's two boots - lifted **83.6 mm** off the rendered floor. A tooth that passes
+through the floor is not biting, and in game nothing below z=0 is ever seen, so
+there was nothing to weigh against the boots. **FIXED, NOT STRUCK.**
+
+**CHANGE 1, MEASURED ALONE: `RAKE_Z = 0.0836`** lifts haft end, head and teeth
+TOGETHER, so the tips land exactly at z=0 and the three cannot drift apart.
+Result on its own: **83.6 mm -> 26.4 mm**, teeth `zmin -0.0000`.
+
+**CHANGE 2, MEASURED ALONE AFTER IT: `BASKET_Z = 0.0264`.** The lift exposed a
+SECOND cause the first number was hiding - the fuel basket at `:1054` is
+deliberately LEANING, `aim(..., (0.0, 0.08, 1.0))`, and a tilted base circle
+does not sit on its own z: its low edge hung 26.4 mm under. The lean is the
+make-do read and I kept it; the low edge now rests ON the floor. Result:
+**26.4 mm -> 0.0 mm**, global min `-0.0000`, seven items declaring contact.
+
+I report both numbers separately because one render pass carried both changes.
+**THE SET IS NOW 9 OF 31 OVER THE BAR, 22 SEATED** (was 11 at the top of this
+run, 12 in the 16:0x plan block).
+
+**THE FIT PROOF - LOOKED AT, WITH THE BEFORE.** `minibossfit --only stoker`,
+Knight at 1.0, verdict GREEN, blank check 3 files 0 failures, 3 of 3 proving
+views. Before: boots a clear band above the knight's soles, rake head and teeth
+hanging below everything. After: boots, basket and rake teeth all land on the
+knight's sole line, front/side/back. No new clip, no new gap.
+
+**FAULTS I CAN STILL SEE, AND THE HARNESS CANNOT.**
+- **THE SIDE VIEW LOSES THE FIRE.** The grate is on the chest facing front, so
+  at azimuth 90 the Stoker reads as "a figure with a pipe and a rake" and the
+  one thing it is named for is not in the picture. Same family as the Beadle's
+  no-facing fault, inverted: facing is TOO strong here, carried by one panel.
+  Not touched this pass - it is a shape question and this pass was a plane one.
+- the rake head box is edge-on to the front camera, so the teeth look like they
+  grow straight off the haft; the rake reads as a fork rather than a rake.
+- the legs are thin against a KayKit body, as the Reeve's officer is.

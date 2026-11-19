@@ -360,24 +360,25 @@
    "idea": "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
    "wear": 0.7,
    "feed_line": "The pit has been fed.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 864,
    "size": [
-    3.0,
-    1.8,
+    3.11,
+    1.87,
     2.4
    ],
-   "footprint_span": 3.0,
+   "footprint_span": 3.11,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.122195553057247,
-    "ortho": 3.221266508102417,
+    "radius": 2.1755388491262613,
+    "ortho": 3.2443673610687256,
     "clip": [
-     8.183976173400879,
-     21.247154235839844
+     8.316568374633789,
+     21.62593650817871
     ]
    },
    "views": [
@@ -977,20 +978,20 @@
    "engine": "BLENDER_EEVEE",
    "faces": 1420,
    "size": [
-    2.96,
-    1.71,
+    3.26,
+    1.88,
     1.95
    ],
-   "footprint_span": 2.96,
+   "footprint_span": 3.26,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.9686456077388914,
-    "ortho": 2.696118116378784,
+    "radius": 2.119644302069713,
+    "ortho": 2.893660545349121,
     "clip": [
-     7.551932334899902,
-     20.22943878173828
+     7.9263129234313965,
+     21.296560287475586
     ]
    },
    "views": [

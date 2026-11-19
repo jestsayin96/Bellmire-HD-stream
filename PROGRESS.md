@@ -11617,3 +11617,11 @@ NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
 - VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips.
 - CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
 Next content: C-124.
+## HUB 18 Nov 20:38 CT - stand-down, written (TAKE THIS NEXT 20:0x block, row 4: "nothing is owed")
+ROW: the block gave me row 4, which is TICKED with nothing owed; no new H item proposed. A written stand-down is the delivery.
+web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ empty); this run changed no web/ file. Hostile-name test therefore not owed.
+Static checks re-run on whole app.js: node --check OK; innerHTML at app.js:255 and :301 only, both page-owned literals (matches index.html comment); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; no service_role / sb_secret string in app.js or index.html.
+KEY (the 18:1x addendum point 2, in one line): the page carries an sb_publishable_ key, not the service-role key.
+STALE IN MY PROMPT: it names gh-pages 45a7904 and a 2-file delta; the plan measures gh-pages ae1a483 (tree 656eb1b) with only web/NOTES.md unpublished. NOT claiming READY TO PUBLISH; no publish gate owed.
+No screenshot taken (no web/ change). Live-dot colour unchanged from shipped. Number: 0 web/ files changed vs origin/hub.
+Untracked worktree files unchanged and named: _hub_ready_shot.png, _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt (delete refused on this machine).

@@ -3716,3 +3716,23 @@ Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (both
 OFFFLOOR_VERDICT OK 0 of 1876 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15362 raid_in_solid=0/6809 PASS |
 DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 20:08:23, cap 20:33 computed first, declared 20:30, released early - see the IDLE line.
+
+## D-cycle - S46: STAND-DOWN IN WRITING - THE 20:0x GAME-BUILD ROW IS ALREADY DELIVERED BY S45; SHRINE DRAW CONFIRMED. 2026-11-18T21:09:46-06:00 (game build)
+TAKE THIS NEXT (20:0x block, row 1): "back to System 6 artifact tier, the S43 path". S45 (c62ff5b, 20:08) delivered it and it is
+ALREADY ON origin/main (git log origin/main --grep=S45 = c62ff5b); no newer lead block exists on main as of this merge (b34662d).
+Hazard (e) is closed by the S44 guard, not re-measured unguarded (that would be the live connection). Nothing is owed until the lead
+ticks S45 or writes a new row, so I did NOT self-select new engine work and launched no Godot.
+OPEN FROM S45, NOT MINE: (i) the tier-5 smoulder washes the _Golden meshes pale lilac - art's plain-vs-seam A/B decides it;
+(ii) staff, quarterstaff, wand, crossbow have no _Golden source in either Quaternius pack and keep their kit[4] meshes.
+MINIBOSS INTERLOCK, MEASURED FROM FILES (no launch): every body under assets/monsters/minibosses/ (34 keys + chibi variants) has an
+MB_FIT entry and a THEME_MINIBOSS_MORE row. LEECH and BEADLE both now pass miniboss_for's gate - mesh on disk AND
+lore_lines.miniboss_feed.by_key arrive lines (leech 9 arrive/8 fall, beadle 9/7 act/4 broken/8 fall) - so BOTH ARE IN THE SHRINE DRAW.
+Beadle's idea is live (MB_WAYS "order"). THE LEECH STANDS UP NAMED BUT DOES NOTHING: _mb_way_tick returns early for a key with no
+act lines, by S34's accepted design. 18 bodies are in that state: comfitmaker drover dyer fenman greener hurdleman jointer leech loader
+moulder paviser pressman quartermaster ratcatcher reeve strickler tanner tapster. Their ideas need content's act/broken lines first,
+then a way here; recorded so the lead can cut content rows in an order. Leech's idea (no healing in the room) touches 6 heal sites
+in delve.gd (1523, 1547, 2435, 2645, 2649, 3619) - a one-run item once its lines exist.
+WORKTREE NOTE: R carries ~50 MODIFIED tracked renders (renders/cycles/d96, s17-s20, s36, l31, h29p6/payload.json, s31_vials.png) that
+are not from this session. NOT staged, NOT touched; this commit stages only docs/PROGRESS.md and docs/RUN_LOCK.txt.
+Gates: none run - docs-only cycle. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 21:08:32, cap claim+25 = 21:33 computed first, declared 21:30, released early - see the IDLE line.

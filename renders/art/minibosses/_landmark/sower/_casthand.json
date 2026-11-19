@@ -13,7 +13,7 @@
       "vis_px": 5656,
       "body_px": 76198,
       "vis_frac": 0.0742,
-      "sep": 0.1167,
+      "sep": 0.0801,
       "pairs": 72,
       "red": false
     },
@@ -21,9 +21,9 @@
       "vis_px": 3633,
       "body_px": 77401,
       "vis_frac": 0.0469,
-      "sep": 0.0036,
+      "sep": 0.2484,
       "pairs": 64,
-      "red": true
+      "red": false
     },
     "side": {
       "vis_px": 0,
@@ -34,7 +34,6 @@
     }
   },
   "red": [
-    "three_quarter: casthand is visible (3633 px) but does NOT SEPARATE - median luminance step across its boundary is 0.004",
     "side: casthand is NOT VISIBLE - zero pixels moved"
   ]
 }

@@ -510,7 +510,8 @@ func _evict_index(pri: int) -> int:
         var e: Dictionary = _shown[i]
         var age := _clock - float(e["at"])
         var epri := int(e["pri"])
-        var ok: bool = age >= float(DWELL[epri]) or (pri > epri and age >= DWELL_FLOOR)
+        var rd := _read_s(e)             # L74: a long line is held long enough to READ, whatever its class
+        var ok: bool = age >= maxf(float(DWELL[epri]), rd) or (pri > epri and age >= maxf(DWELL_FLOOR, rd))
         if not ok:
             continue
         if w < 0:
@@ -520,6 +521,13 @@ func _evict_index(pri: int) -> int:
         if epri < int(b["pri"]) or (epri == int(b["pri"]) and float(e["at"]) < float(b["at"])):
             w = i
     return w
+
+## L74: seconds to read a line at READ_CPS plus the eye finding it; capped so one huge line cannot pin the scroll
+const READ_CPS := 18.0
+const SCAN_S := 1.0
+const READ_CAP_S := 10.0
+func _read_s(e: Dictionary) -> float:
+    return minf(float(_text_of(e).length()) / READ_CPS + SCAN_S, READ_CAP_S)
 
 func _admit(e: Dictionary) -> void:
     e["at"] = _clock

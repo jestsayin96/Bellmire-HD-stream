@@ -9431,7 +9431,17 @@
         "Cover the well! Cover the well and save the sweet water!",
         "The old folk said it would come. The old folk say everything.",
         "If the sky wants war, the sky can have a queue.",
-        "We'll rebuild. We always rebuild. It's the Bellmire way, and the Bellmire curse."
+        "We'll rebuild. We always rebuild. It's the Bellmire way, and the Bellmire curse.",
+        "Bar the shutters. Then bar them again.",
+        "Water in the cellar. Water in the loft. Water in the soup.",
+        "Roof's off the byre. The cow's in the kitchen.",
+        "Keep the lamps low and the children close.",
+        "It'll pass. They always pass. Hold the rope.",
+        "The reed-cutters say it's the worst in years. They say that every year.",
+        "Mud to the doorstep. I'll sweep it Tuesday.",
+        "Hands to the sandbags. Gossip after.",
+        "The bell's cracked. Nobody heard it anyway.",
+        "We lost the fence. We kept the pig."
       ],
       "festival": [
         "Ale's on the house! Well - on the brewer, but he agreed!",
@@ -9519,7 +9529,17 @@
         "Pull the belts tight and the neighbours tighter.",
         "We'll eat. We always eat. Eventually.",
         "My daughter asked for cake. I told her the cake was on holiday.",
-        "The scar's greedy. So is winter."
+        "The scar's greedy. So is winter.",
+        "Half a loaf. Cut it thin.",
+        "The pot's on. Nothing's in it. It's warm, though.",
+        "Ask the baker. The baker's asking the miller.",
+        "We counted the sacks twice. They did not grow.",
+        "Eat slow. Talk less.",
+        "The child's quiet. That worries me more than the crying.",
+        "Last of the cheese went to the guards.",
+        "The well's fine. The larder's not.",
+        "I'd cross the marsh for an onion.",
+        "Soup again. Thinner soup."
       ],
       "hero_falls": [
         "Another hero down. The chapel keeper's already sweeping.",
@@ -10196,7 +10216,15 @@
         "The mill ran dry of corn to grind. Time to eat what it ground.",
         "The last sheaf is bound with a ribbon. The feast begins.",
         "Even the crows are fat. Bellmire holds its Harvest Feast.",
-        "Bring a bowl and a stool - the harvest was kind this year."
+        "Bring a bowl and a stool - the harvest was kind this year.",
+        "Last sheaf in. The crier names a Harvest Feast.",
+        "The barns are full and the tally agrees. Tables out.",
+        "Straw on the road, grain in the loft. Feast tonight.",
+        "The millers ran late and finished. Harvest Feast.",
+        "A good year on the long field. Bring your own bowl.",
+        "Nobody was short at the count. That earns a feast.",
+        "The reed-cutters are home dry. Harvest Feast at dusk.",
+        "Cart after cart till dark. The crier calls the feast."
       ],
       "raid_survived": [
         "The walls held. Bellmire feasts the night it lived.",
@@ -10210,7 +10238,15 @@
         "Survived is a fine reason. The crier declares a feast.",
         "The guard held the line. The town returns the favour in ale.",
         "Not a door lost, not a soul lost. Mark it: Gate-Holding Day.",
-        "The raid broke on the wall like surf. Now the tables go up."
+        "The raid broke on the wall like surf. Now the tables go up.",
+        "The wall stood. The town eats on it.",
+        "Raiders gone by dawn. Pour for the watch.",
+        "Gate barred, count taken, nobody missing. Feast.",
+        "They came at night. We kept the door. Feast.",
+        "The wall-walkers are hoarse and whole. Feast tonight.",
+        "Carts hauled the broken ladders off. Light the fires.",
+        "The count came out right. That is worth a feast.",
+        "Bellmire held, and Bellmire is hungry."
       ],
       "lord_felled": [
         "A dungeon lord is dead. Bellmire hangs the banners.",
@@ -10224,7 +10260,15 @@
         "A lord's crown on the guild table. Come see, come eat.",
         "They said it could not be felled. Bellmire raises a cup to the liars.",
         "The ground will not forget, but tonight it can be quiet. Feast.",
-        "Tell the children: a lord died. Then let them have cake."
+        "Tell the children: a lord died. Then let them have cake.",
+        "A lord is dead. The guild bell rings it twice.",
+        "The scar is lighter by one. Felling Feast.",
+        "Word came up from the dark: it is done. Feast.",
+        "A lord fell below. Hang the banners.",
+        "Something old stopped breathing today. Bellmire pours.",
+        "The crier read the name and then the date. Feast.",
+        "One less under the town. Tables out.",
+        "The lord is down. The hero is up. Feast."
       ],
       "hero_home": [
         "A hero walks in from the scar. The town turns out.",
@@ -10238,7 +10282,15 @@
         "The scar gave one back. Bellmire says thank you loudly.",
         "Home again. The innkeeper has already set a place.",
         "Another one comes up the stairs breathing. Celebrate it.",
-        "The road in is lined with townsfolk. A hero is home."
+        "The road in is lined with townsfolk. A hero is home.",
+        "The hero is up out of the dark. Open the gate.",
+        "Lamp still lit, boots still on. Home feast.",
+        "They counted heads at the gate. One more than feared.",
+        "Back from the scar and walking. Fetch the bread.",
+        "The gate-keeper saw the lamp first. The town followed.",
+        "A hero came home. That is the whole reason.",
+        "Mud to the knee and smiling. Feast.",
+        "Up the stair and out. The crier calls a feast."
       ],
       "town_level": [
         "Bellmire has grown a stage. The crier declares a Raising Day.",
@@ -10252,7 +10304,15 @@
         "Bellmire is more than it was this morning. Mark the day.",
         "The mason's stone is set. Come eat beneath it.",
         "A new stage, a new banner. The crier is hoarse already.",
-        "The town stands taller. Let the music stand taller still."
+        "The town stands taller. Let the music stand taller still.",
+        "New timber on the hill. Raising Day.",
+        "Bellmire is a bigger town since morning. Feast.",
+        "The mason signed the last wall. Raising Day.",
+        "More roofs than last week. The crier counts them aloud.",
+        "The road is paved a stage further. Tables out.",
+        "A grown town owes itself a meal. Raising Day.",
+        "The new stage is up and holding. Light the lamps.",
+        "Stone where there was timber. Feast."
       ],
       "viewer_gift": [
         "A gift has come to Bellmire. The crier names a feast.",
@@ -10266,7 +10326,15 @@
         "The guild treasurer weeps, then orders a barrel.",
         "A gift, and no ask attached. Bellmire does not forget that.",
         "Someone remembered Bellmire. Bellmire remembers back.",
-        "A gift for the town. The innkeeper tallies it in ale."
+        "A gift for the town. The innkeeper tallies it in ale.",
+        "Someone paid for a feast. The crier says thanks.",
+        "A gift from afar. Bellmire sets the tables.",
+        "The watchers sent kindness. We send it back as bread.",
+        "Coin came in with a kind word. Feast tonight.",
+        "Somebody far off remembered us. Light the lanterns.",
+        "The crier read the gift out. Nobody said no.",
+        "A kindness arrived at the gate. Tables out.",
+        "Paid for by a stranger. Eaten by everyone."
       ]
     },
     "crowd": [
@@ -12569,5 +12637,6 @@
   "_note_c117": "C-117 (18 Nov 2026): +14 live bark lines on each of the six kinds (enter, lord, trap, hurt, drink, misfire), 84 in all, plain strings in the existing shape. Read at delve.gd:3781 by kind, so they are in the game the moment they merge. Every line is unique across the whole barks block. Plain declaratives, no name tokens, no floor count. Expected zero-hit key; no lane is to wire it.",
   "_note_c118": "C-118: +30 epitaphs, +16 descend, +16 cleared lines. Same shapes (descend keeps %s %s hero+verb; cleared keeps Floor %d). Read live by the existing arrays - no wiring owed. Additive.",
   "_note_c119": "C-119: 85 bark lines (enter/lord/trap/hurt/drink/misfire) and 12 misfire log lines (%s %s %d %d, same shape as the rest). Additive only; the existing lists are read as-is, no wiring needed. Expected zero-hit key.",
-  "_note_c120": "C-120: e3po.tier_up_alt2 (48 lines, 4 per growth tier) and festivals.viewer_paid stalls_alt / notables_alt (10 each). Additive only; every pre-existing key is unchanged. Expected zero-hit keys until a picker reads them."
+  "_note_c120": "C-120: e3po.tier_up_alt2 (48 lines, 4 per growth tier) and festivals.viewer_paid stalls_alt / notables_alt (10 each). Additive only; every pre-existing key is unchanged. Expected zero-hit keys until a picker reads them.",
+  "_note_c121": "C-121: appended to LIVE base pools only (festivals.reasons.* read by town.gd, townsfolk.react.hunger/disaster). No new _alt family; nothing here waits on a picker. Expected zero-hit key."
 }

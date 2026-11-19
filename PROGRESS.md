@@ -11519,3 +11519,11 @@ LOCK: claim 18:48:30, cap 19:13, declared finish 18:51, IDLE 18:50:50. No crossi
 IDLE 18:10:53.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-121 (2026-11-18 19:5x CT, content) - 68 lines in LIVE pools: festival reasons, townsfolk hunger and disaster
+- ITEM: TAKE THIS NEXT (19:1x CT block) CONTENT row 2 - stop extending phase2_words, keep producing, put lines where a reader can reach them. Grepped first: festivals.reasons is read by town.gd (FEST_REASON_KEY, ~:3613). No new _alt family written.
+- Miniboss lines: origin/art has 34 non-chibi bodies, by_key holds all 34. Stood down on that.
+- ADDED (data/lore_lines.json only): festivals.reasons harvest/raid_survived/lord_felled/hero_home/town_level/viewer_gift +8 each (48), townsfolk.react.hunger +10, townsfolk.react.disaster +10, plus `_note_c121` (expected zero-hit). Plain register, nothing theatrical.
+- VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips (indent 2).
+- CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
+Next content: C-122.

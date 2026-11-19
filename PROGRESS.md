@@ -11691,3 +11691,8 @@ ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the prove
 MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.
 VALIDATION OK: all four data files parse; every pre-existing entry identical; only _note_c124 added. CODE WIRING IMPLIED: none.
 Next content: C-125.
+## HUB 18 Nov 21:4x CT - standing check, NO ROW OWED (plan row 4: "nothing is owed to you; stand-down written up is the delivery")
+TAKE THIS NEXT (20:0x block) row 4 HUB gave no work. web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ = empty). node --check app.js OK.
+Greps on whole app.js: innerHTML at :255 and :301 only (page-owned literals, matches index.html comment); outerHTML 0; eval( 0; insertAdjacentHTML/document.write/new Function appear only inside the comment at app.js:10-11 saying they are absent. CSP meta intact. gh-pages still ae1a483.
+No screenshot (no web/ change). Live-dot colour unchanged. Number: 0 web/ files changed vs origin/hub. NOT claiming READY TO PUBLISH. Untracked worktree files unchanged (delete refused on this machine).
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

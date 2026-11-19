@@ -817,7 +817,27 @@
     "%s %s, and the cold smell of old stone takes them.",
     "%s %s the stair one step at a time. That is how it is done.",
     "%s %s. The watch marks the hour and the party, and nothing else.",
-    "%s %s, as ordinary as a shift change and as dear."
+    "%s %s, as ordinary as a shift change and as dear.",
+    "%s %s down the stair, one hand on the wall.",
+    "%s %s below. The rope is checked twice and tied once.",
+    "%s %s into the cold, boots dry for the last time.",
+    "%s %s down past the lamp-boy, who does not look up.",
+    "%s %s the guild stair. Somebody left a loaf on the rail.",
+    "%s %s below, and the door settles shut.",
+    "%s %s down with the flasks counted and the plan plain.",
+    "%s %s into the scar, steady as a tradesman.",
+    "%s %s the stair. The hour is noted on the board.",
+    "%s %s down, and the draught from below smells of wet stone.",
+    "%s %s below with the guild's lamp and the guild's luck.",
+    "%s %s down the long steps without a word.",
+    "%s %s into the dark below the cellars, and the town goes quiet above.",
+    "%s %s the stair at a working pace.",
+    "%s %s down. The keeper tallies them in and tallies them out.",
+    "%s %s below, and the first step is the worst.",
+    "%s %s the scar's mouth. The lamp-oil is topped up.",
+    "%s %s down by lamplight, rope coiled, bread in the pack.",
+    "%s %s down to the work. It is only work.",
+    "%s %s below. Behind them, the kettle goes on."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1154,7 +1174,27 @@
     "Floor %d is clear, and the work was plain work.",
     "Floor %d is cleared. Water, bread, then the stair.",
     "Floor %d is taken back from the dark. It is not much, and it is theirs.",
-    "Floor %d lets out its breath. So do they."
+    "Floor %d lets out its breath. So do they.",
+    "Floor %d is clear. The lamps are trimmed and the stair is kept.",
+    "Floor %d is done. Count the flasks, then count the dead, then go home.",
+    "Floor %d is held. It will want holding again.",
+    "Floor %d stands empty. The echo is theirs.",
+    "Floor %d is cleared, and nobody sang about it.",
+    "Floor %d is clear. Wash the hands, mend the strap.",
+    "Floor %d is ours for the hour. An hour is plenty.",
+    "Floor %d is taken. The work will be wanted again by morning.",
+    "Floor %d goes quiet. A drip, and nothing after.",
+    "Floor %d is clear. Chalk the door and move on.",
+    "Floor %d is swept clean of trouble. Not of dust.",
+    "Floor %d is finished. Fair work, fairly done.",
+    "Floor %d is clear and the supper is not far off.",
+    "Floor %d gives up the last of its noise.",
+    "Floor %d is cleared. The stair above is a comfort.",
+    "Floor %d is clear. Bind the cuts first.",
+    "Floor %d is done and dry. Small mercies.",
+    "Floor %d is cleared by plain effort.",
+    "Floor %d is quiet. The party sit a moment on the cold stone.",
+    "Floor %d is closed out. The tally is entered."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -1633,7 +1673,13 @@
       "Whatever is down here, it knows we came.",
       "Slow. Quiet. Home by dark.",
       "Same as last time, and last time was fine.",
-      "Mind the stair, it is a long one."
+      "Mind the stair, it is a long one.",
+      "Boots on the stair. Eyes up.",
+      "Another floor. Another day's wage.",
+      "Lamps lit. Count the doors.",
+      "Easy now. Plenty of time.",
+      "The air is stale. That is normal.",
+      "Stay close and stay quiet."
     ],
     "lord": [
       "Hold together!",
@@ -1894,7 +1940,13 @@
       "I have seen this one on the board.",
       "Keep him off the healer.",
       "Not running, not this time.",
-      "Lord or no lord, he bleeds."
+      "Lord or no lord, he bleeds.",
+      "He is slow. Use that.",
+      "Stand where he is not looking.",
+      "One long breath. Then in.",
+      "I have seen bigger. Not many.",
+      "Hold the door, the rest of you.",
+      "He bleeds like anyone."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2159,7 +2211,13 @@
       "Someone put that there on purpose.",
       "I heard a click. Everyone freeze.",
       "Careful, the draught smells of oil.",
-      "Not the third tile. Never the third tile."
+      "Not the third tile. Never the third tile.",
+      "Mind the floor, it sounds hollow.",
+      "A wire. Thin as a hair.",
+      "Check the sill before the step.",
+      "That slab sits proud. Leave it.",
+      "Dust is wrong here. Someone swept.",
+      "Hold. Something ticks."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2418,7 +2476,13 @@
       "It broke the skin.",
       "Counting my ribs. All there.",
       "I have had worse. Not much worse.",
-      "The arm. Not the sword arm, thank the gods."
+      "The arm. Not the sword arm, thank the gods.",
+      "It stings. It is only a sting.",
+      "Bound it tight. Go on.",
+      "I will sit when I am home.",
+      "Cut, not cracked. Good enough.",
+      "The shoulder will hold.",
+      "Not a word to my mother."
     ],
     "drink": [
       "Bottoms up.",
@@ -2668,7 +2732,12 @@
       "One more and I will think about it.",
       "Cork and swallow.",
       "That one is mostly honey.",
-      "Well, I am still standing."
+      "Well, I am still standing.",
+      "Tastes of the cellar.",
+      "Bitter. That means it works.",
+      "Down in one.",
+      "A mouthful of warm.",
+      "Mostly water, I think."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -2929,7 +2998,13 @@
       "I said fire. I did not say that.",
       "The old words came out wrong.",
       "Do not tell the guild.",
-      "That was worse than a miss."
+      "That was worse than a miss.",
+      "That was not the plan.",
+      "The words are all there. The spell is not.",
+      "My own fault. Again.",
+      "Said it right. It heard it wrong.",
+      "Hold still while I try again.",
+      "Nobody saw that."
     ]
   },
   "misfire": [
@@ -3036,7 +3111,21 @@
     "%s's %s slips like wet rope (%d vs DC %d).",
     "%s shapes %s. A spark, a cough, no more (%d vs DC %d).",
     "%s's %s stalls. The floor hums once, unimpressed (%d vs DC %d).",
-    "%s reaches for %s and finds the shelf bare (%d vs DC %d)."
+    "%s reaches for %s and finds the shelf bare (%d vs DC %d).",
+    "%s's %s sputters like a wet wick (%d vs DC %d).",
+    "%s grips %s and the words slide off (%d vs DC %d).",
+    "%s's %s fizzles. The scar sniffs and looks away (%d vs DC %d).",
+    "%s calls up %s and gets a cold draught (%d vs DC %d).",
+    "%s's %s lands a pace short and sulks there (%d vs DC %d).",
+    "%s fumbles %s. Nothing burns, nothing helps (%d vs DC %d).",
+    "%s's %s turns over once and dies (%d vs DC %d).",
+    "%s reaches for %s and the knot will not hold (%d vs DC %d).",
+    "%s's %s goes thin as watered ale (%d vs DC %d).",
+    "%s shapes %s and the shape sags (%d vs DC %d).",
+    "%s's %s fails, politely, and without effect (%d vs DC %d).",
+    "%s tries %s. The floor is unmoved (%d vs DC %d).",
+    "%s's %s comes apart in the fingers (%d vs DC %d).",
+    "%s's %s hisses and goes out (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -3575,7 +3664,36 @@
     "Answered the horn. Always answered the horn.",
     "Said the hour was fair. It was.",
     "Did the small things right. The large ones followed.",
-    "Their name is on the board. The board is plain wood."
+    "Their name is on the board. The board is plain wood.",
+    "Kept the count. Kept it to the end.",
+    "Paid up. Paid the guild, paid the innkeeper, paid the stair.",
+    "Fixed the hinge the day before. It still opens.",
+    "Sat the late watch so another could sleep.",
+    "No song. The work was the song.",
+    "Good with a rope. The rope was good with them.",
+    "Left the lamp lit on the landing.",
+    "Ate before the stair. Always ate before the stair.",
+    "Never late. Not even for this.",
+    "Their boots are by the door. Someone has oiled them.",
+    "Carried the heavy end without being asked.",
+    "Did not boast. There was nothing to boast about, and much to be proud of.",
+    "Left a debt of one loaf. It has been paid.",
+    "Held the line while the others went up.",
+    "Knew every name on the board. Now they are on it.",
+    "Dry bread, cold water, level head.",
+    "A fair hand with a lantern and a fairer one with a neighbour.",
+    "Went down at first light. The light is still on.",
+    "Mended the shield, then used it.",
+    "Quiet in life, quiet below.",
+    "The stair took the last of the day, and them with it.",
+    "Swept the guild floor on the morning they left.",
+    "Asked for no thanks and got a plain stone.",
+    "Their place at the table is kept.",
+    "Wrote their own name in a steady hand.",
+    "The flask was full. The hand was steady. The floor was not.",
+    "Did the work, left the tools clean.",
+    "Came for the coin. Stayed for the company.",
+    "Honest weight, honest word, honest end."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -12860,5 +12978,6 @@
   "_note_c120": "C-120: e3po.tier_up_alt2 (48 lines, 4 per growth tier) and festivals.viewer_paid stalls_alt / notables_alt (10 each). Additive only; every pre-existing key is unchanged. Expected zero-hit keys until a picker reads them.",
   "_note_c121": "C-121: appended to LIVE base pools only (festivals.reasons.* read by town.gd, townsfolk.react.hunger/disaster). No new _alt family; nothing here waits on a picker. Expected zero-hit key.",
   "_note_c123": "C-123: +8 tells per biome (64), +10 town_life per list (30), +6 to +8 barks per kind (44, two duplicates dropped). All into pools with a proven reader. Plain register; barks and tells are short and carry no mechanics. Additive. Expected zero-hit key.",
-  "_note_c124": "C-124: descend +20, cleared +20, epitaphs +30, misfire +12 - all pools with a proven reader (delve.gd _pick_line, epitaph and misfire readers). Plain register, no mechanics, no floor counts. No miniboss body committed beyond the Rammer, so no feed lines owed. Additive. Expected zero-hit key."
+  "_note_c124": "C-124: descend +20, cleared +20, epitaphs +30, misfire +12 - all pools with a proven reader (delve.gd _pick_line, epitaph and misfire readers). Plain register, no mechanics, no floor counts. No miniboss body committed beyond the Rammer, so no feed lines owed. Additive. Expected zero-hit key.",
+  "_note_c125": "C-125: epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire) - all pools on the corrected proven-live list. Plain register, no mechanics, no floor counts. No new miniboss body committed on origin/art (the Rammer is still the last), so no feed lines owed. Additive. Expected zero-hit key."
 }

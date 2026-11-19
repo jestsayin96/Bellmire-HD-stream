@@ -18,6 +18,13 @@
       "sep_local": 0.1413,
       "frac_flat": 0.2158,
       "touch": 278,
+      "sep_alb": 0.1319,
+      "frac_flat_alb": 0.2014,
+      "sep_chroma": 0.0078,
+      "pass_lit": 218,
+      "frac_borrow": 0.0596,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     },
     "three_quarter": {
@@ -29,6 +36,13 @@
       "sep_local": 0.1367,
       "frac_flat": 0.1576,
       "touch": 165,
+      "sep_alb": 0.0972,
+      "frac_flat_alb": 0.2303,
+      "sep_chroma": 0.0078,
+      "pass_lit": 139,
+      "frac_borrow": 0.0935,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     },
     "side": {
@@ -40,8 +54,18 @@
       "sep_local": 0.0915,
       "frac_flat": 0.237,
       "touch": 135,
+      "sep_alb": 0.107,
+      "frac_flat_alb": 0.1778,
+      "sep_chroma": 0.0078,
+      "pass_lit": 103,
+      "frac_borrow": 0.068,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     }
   },
-  "red": []
+  "red": [],
+  "fragile": [],
+  "warn": [],
+  "albedo_approx_slots": []
 }

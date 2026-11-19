@@ -18,6 +18,13 @@
       "sep_local": 0.1244,
       "frac_flat": 0.1472,
       "touch": 265,
+      "sep_alb": 0.0039,
+      "frac_flat_alb": 0.7887,
+      "sep_chroma": 0.0,
+      "pass_lit": 226,
+      "frac_borrow": 0.792,
+      "albedo_approx_slots": [],
+      "fragile": true,
       "red": false
     },
     "three_quarter": {
@@ -29,6 +36,13 @@
       "sep_local": 0.07,
       "frac_flat": 0.3629,
       "touch": 350,
+      "sep_alb": 0.0036,
+      "frac_flat_alb": 0.9571,
+      "sep_chroma": 0.0,
+      "pass_lit": 223,
+      "frac_borrow": 0.9327,
+      "albedo_approx_slots": [],
+      "fragile": true,
       "red": false
     },
     "side": {
@@ -40,8 +54,26 @@
       "sep_local": 0.1024,
       "frac_flat": 0.2645,
       "touch": 552,
+      "sep_alb": 0.0039,
+      "frac_flat_alb": 0.7518,
+      "sep_chroma": 0.0,
+      "pass_lit": 406,
+      "frac_borrow": 0.67,
+      "albedo_approx_slots": [],
+      "fragile": true,
       "red": false
     }
   },
-  "red": []
+  "red": [],
+  "fragile": [
+    "front",
+    "three_quarter",
+    "side"
+  ],
+  "warn": [
+    "front: casthead PASSES lit (sep_local 0.124) and 79% of its passing boundary is BORROWED FROM THE LIGHT - albedo step 0.004, chroma step 0.000. Not red: one azimuth from the fault.",
+    "three_quarter: casthead PASSES lit (sep_local 0.070) and 93% of its passing boundary is BORROWED FROM THE LIGHT - albedo step 0.004, chroma step 0.000. Not red: one azimuth from the fault.",
+    "side: casthead PASSES lit (sep_local 0.102) and 67% of its passing boundary is BORROWED FROM THE LIGHT - albedo step 0.004, chroma step 0.000. Not red: one azimuth from the fault."
+  ],
+  "albedo_approx_slots": []
 }

@@ -11527,3 +11527,11 @@ NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
 - VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips (indent 2).
 - CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
 Next content: C-122.
+
+## U84 (18 Nov 19:53 CT) - L74: the P_CRIT-stays-at-150pct case is now ASSERTED and RED-PROVEN (two windowed --script runs, claim 19:53:23, IDLE 19:55:46, cap 20:08)
+Item: TAKE THIS NEXT row 6 (HUD :52) - my own L74 remainder: the U83 red-proof it said it owed. tools/_l74_test.gd only (not a HUD runtime file).
+Lock: read R's working RUN_LOCK.txt; last line chat bot B61 IDLE 19:50:44, tasklist empty. No bare parse gate (URGENT block); parse coverage = the --script harness loading feed_hud.gd.
+NEW CHECK _crit_survives_trim(): at the 150pct step a synthetic P_CRIT line is pushed to the OLDEST slot of a copy of _shown, the REAL _trim_index is run down to _cap(), and the gate fails if the P_CRIT line is gone. Floor: if shown<=cap nothing is trimmed -> NO VERDICT.
+RESULT x1: U84 crit_kept=true cap=4, L74 measured=17, L74_TEST OK. RED PROOF break_oldest (drop index 0, the pre-U83 behaviour): crit_kept=false, L74_TEST FAIL. The gate now moves with the defect.
+HONEST LIMIT: it exercises _trim_index on a copy, not the live _rebuild() path end to end; if _rebuild stopped calling _trim_index the check would not notice. gear.gd instantiate SCRIPT ERRORs = known import-cache difference, not mine.
+Still open for L74: the theme-at-scale sweep of the other six panels (100/125/150). Nothing for Mr. E to decide.

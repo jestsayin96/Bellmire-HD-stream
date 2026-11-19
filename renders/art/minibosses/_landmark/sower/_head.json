@@ -1,0 +1,41 @@
+{
+  "key": "sower",
+  "landmark": "head",
+  "at": [
+    -0.16,
+    -0.16,
+    1.7
+  ],
+  "r": 0.55,
+  "parts_selected": 10,
+  "views": {
+    "front": {
+      "vis_px": 15497,
+      "body_px": 76198,
+      "vis_frac": 0.2034,
+      "sep": 0.0386,
+      "pairs": 576,
+      "red": true
+    },
+    "three_quarter": {
+      "vis_px": 16618,
+      "body_px": 77401,
+      "vis_frac": 0.2147,
+      "sep": 0.0191,
+      "pairs": 497,
+      "red": true
+    },
+    "side": {
+      "vis_px": 44511,
+      "body_px": 192559,
+      "vis_frac": 0.2312,
+      "sep": 0.0678,
+      "pairs": 434,
+      "red": false
+    }
+  },
+  "red": [
+    "front: head is visible (15497 px) but does NOT SEPARATE - median luminance step across its boundary is 0.039",
+    "three_quarter: head is visible (16618 px) but does NOT SEPARATE - median luminance step across its boundary is 0.019"
+  ]
+}

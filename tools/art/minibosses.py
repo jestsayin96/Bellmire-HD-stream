@@ -956,10 +956,18 @@ def sower():
     P.add(aim(L.cone(0.27, 0.25, 0.045, 16), (X - 0.14, -0.36, 1.30), (0.22, 0.0, 1.0)), 'glow')
     P.raw(L.membrane([(X + 0.16, -0.24, 1.44), (X + 0.26, -0.18, 1.40),
                       (X - 0.30, -0.44, 0.96), (X - 0.40, -0.48, 1.00)], 0.035), 'dark')
-    # THE CAST: the far arm thrown wide and open, low, palm turned out
+    # THE CAST: the far arm thrown wide and open, low, palm turned out.
+    # 18 Nov - THE ARM IS 'dark' NOW, AND THE CAUSE WAS IN THE DEFAULTS. The
+    # team lead found by eye that from the side the forearm, hand and hopper
+    # read as ONE PALE MASS. minibosses.limb() defaults to slot 'bone', so the
+    # torso, this arm, the hopper and the hat were ALL 'bone' - they could not
+    # separate by tone because they were the same material. Measured, not
+    # guessed: tools/art/_mb_landmark.py put the cast hand's boundary step at
+    # 0.004 on the three_quarter view. A leather sleeve and glove on the
+    # casting arm is also what the job wants - it is the hand in the thorns.
     limb(P, [(X - 0.25, -0.12, 1.40), (X - 0.72, -0.26, 1.18), (X - 1.06, -0.34, 1.02)],
-         0.085, 0.060)
-    P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'body', loc=(X - 1.12, -0.36, 0.98))
+         0.085, 0.060, 'dark')
+    P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'dark', loc=(X - 1.12, -0.36, 0.98))
     for k in range(4):   # four seeds already in the air, clear of the hand
         P.add(L.sphere(0.042, 0.042, 0.042, 7, 5), 'glow',
               loc=(X - 1.30 - k * 0.17, -0.40 - k * 0.04, 0.92 - k * 0.14))

@@ -3661,3 +3661,23 @@ whether the FIRST frame's delta carries the scene-load time (engine timer behavi
 the beat would fire on frame 1 and a response would very likely return inside the run - the lead's ~28 s log shows neither an ok nor a
 fail line, which argues against it. VERDICT: VERY PROBABLY NO BEAT, NOT PROVEN; if one ever fires it POSTs a 300-frame town to the live
 hub AND calls save_mem() (a disk write) first. The env guard (JESTS_NO_TWITCH skipping SnapshotPublisher) closes it either way.
+
+## D-cycle - S44: THE PARSE-GATE ENV GUARD IS IN - JESTS_NO_TWITCH=1 STARTS NO TWITCH NODE AND NO HUB SNAPSHOT. 2026-11-18T19:08-06:00 (game build)
+Row 1(a) of the lead's 19:1x block (supervisor authorised 18:52). The block says its game-build row is "for the 20:07 firing"; it was
+on origin when this run merged at 19:08 and its (a) is the one thing unblocking the chat bot's parse gate, so I took (a) now. (b) waits.
+THE CHANGE, town.gd only (inside the existing `not --script` branch, beside the JESTS_NO_SFX precedent): when JESTS_NO_TWITCH is set,
+TwitchChat, TwitchEventSub AND SnapshotPublisher are not created, and the gate prints one line saying so. The snapshot is under the same
+guard ON PURPOSE - it was in my own S42 recommendation and it closes S43 hazard (e) outright instead of leaving it "very probably no
+beat". Nothing else reads those nodes by path except chatcmd.gd:540 get_node_or_null("SnapshotPublisher"), already null-safe. With the
+variable UNSET the live game is byte-for-byte the old path (same three nodes, same order). RtsCamera and the leaderboard still start.
+PROOF, RED THEN GREEN ON THE SAME GATE: my first edit guarded only the two Twitch nodes, and its parse run (28.5 s) printed
+"SNAPSHOT on: https://...supabase.co every 60 s" - the hub publisher was alive in a gate. After moving SnapshotPublisher under the guard
+the same gate (26 s) prints ONLY "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started": zero SNAPSHOT, TWITCH,
+EventSub, justinfan or publish lines in either run's Twitch half. I did NOT run the gate with the variable unset - that is the live
+connection this exists to prevent. No picture: nothing visible changed.
+FOR EVERY LANE: set JESTS_NO_TWITCH=1 in the parse wrapper's environment (Python: env=dict(os.environ, JESTS_NO_TWITCH='1')). The guard
+is on laptop now and reaches main when the lead merges it - until then a bare gate on main is still the live game.
+Gates (all run with JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error (both runs) | OFFFLOOR_VERDICT OK 0 of 2229 samples |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/20183 raid_in_solid=0/4008 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2,
+0 SCRIPT ERROR. Godot closed, tasklist empty on both image names. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 19:08:36, cap 19:33 computed first, declared 19:29, released early - see the IDLE line.

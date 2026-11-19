@@ -93,6 +93,47 @@ FOR THE SUPERVISOR:
       and already back on the normal grid. I am not resetting the clean-hour count on any lane for
       the 17:0x hour, and I am not advancing it either - there were no windows in it to count.
 
+## FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS. Written 2026-11-19 17:3x CT. RUNNING LIST.
+THE TEAM LEAD PROMPT (trig_01AiNVX4tT9xupV9p8b928fB) IS STALE IN FOUR PLACES AND I COULD NOT FIX IT.
+I had a live turn from Mr. E and I attempted the write ONCE, as the rule says. It was refused - and
+NOT by the usual gate. The refusal this time was "Permission for this action was denied by the
+Claude Code auto mode classifier. Reason: [Cowork Scheduled Task Write]". That is a DIFFERENT
+refusal from the familiar "a firing has no live turn to be approved in", and the difference matters
+to whoever tries next: a live turn was NOT sufficient on 19 Nov at 17:2x. I did not retry, did not
+reword it, and did not attempt the other six prompts after it. Mr. E has been told in one line.
+ADD TO THIS LIST, DO NOT RESET IT. Land it all at once the moment a write is permitted.
+
+  (1) THE PUBLISH SHAs. The prompt says "gh-pages is 45a7904 ... THE SECTION-BAR FIX IS LIVE" and
+      that the unpublished delta is "2 files / 19 lines - web/app.js -14, web/style.css +5".
+      BOTH ARE STALE. Measured 19 Nov 17:2x CT: gh-pages is ae1a483 ("hub publish 4", pushed 18 Nov
+      19:02 CT), and the unpublished delta is origin/hub:web e4ec882 vs origin/gh-pages^{tree}
+      656eb1b = EXACTLY ONE FILE, NOTES.md, +3/-1. Nothing viewer-visible is unpublished.
+  (2) THE DEAD-DATA BASELINE. The prompt says 2,180,937 chars / 122 keys / 32 zero-hit / 18 notes /
+      31 asset dirs. Measured 19 Nov 17:1x CT on the merged tree: 2,215,264 chars (48 files),
+      130 top-level keys, 40 zero-hit of which 25 are `_note_`, and 34 asset directories with
+      files and ZERO unreferenced. Unread live keys still ZERO.
+  (3) THE DECLARED-DEAD SET IS FOUR KEYS, NOT THREE. `phase2_words_alt2` has appeared in
+      data/lore_lines.json beside the D98 three. I did not stop at the zero hit: `alt2` is ZERO
+      across scripts/ and web/, and the only runtime key-builder in the engine is `base + "_alt"`
+      at delve.gd:3725, never `_alt2`. It is a fourth sibling of the dead phase2_words family, not
+      a live key that lost its reader. The four: phase2_words, phase2_words_alt, phase2_words_alt2,
+      town_levels_for_the_desktop. (townsfolk returns prose hits so it never shows in the list.)
+  (4) THE ID LINE. The prompt says "B50, C-111, D100, H32, L74, S33, T5, U74". Measured now:
+      B63, C-124, D100, H32, L74, S46, T5, U85.
+  (5) ALL SEVEN PROMPTS want the dead-bridge rule that is now in the block above: a closed Blender
+      means no Godot AND no git for every lane, device_bash is NOT a substitute for git (red-proved
+      17:07 CT - first commit rc=0 but cannot unlink .git/HEAD.lock, second commit dies with
+      "cannot lock ref 'HEAD' ... File exists"), a stand-down in writing is the delivery, and only
+      Mr. E can reopen Blender. UNTIL THAT LANDS IN THE PROMPTS, THE PLAN IS WHERE THE LANES GET IT,
+      so DO NOT drop that paragraph out of the TAKE THIS NEXT block when you rewrite it.
+  (6) THE FLEET-OUTAGE TELL, worth adding to this prompt so nobody mis-diagnoses it: all seven
+      last_run fired_at inside one or two seconds, with next_run_at already back on the normal grid
+      and ended_reason/suspension_reason both empty, is a HELD QUEUE BEING FLUSHED - on 18-19 Nov
+      it was the account's usage limit, in Mr. E's own words at 17:1x CT: "we ran out of usage
+      yesterday . but we are back now". Charge no lane for the lock log of the hour it comes back.
+  (7) SYSTEM 6 IS NOW CLOSED (S45 wiring and fit + S46b materials, ticked 19 Nov 17:2x). The
+      prompt's Phase 1/2 block does not say so yet.
+
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
 

@@ -11618,3 +11618,9 @@ KEY (the 18:1x addendum point 2, in one line): the page carries an sb_publishabl
 STALE IN MY PROMPT: it names gh-pages 45a7904 and a 2-file delta; the plan measures gh-pages ae1a483 (tree 656eb1b) with only web/NOTES.md unpublished. NOT claiming READY TO PUBLISH; no publish gate owed.
 No screenshot taken (no web/ change). Live-dot colour unchanged from shipped. Number: 0 web/ files changed vs origin/hub.
 Untracked worktree files unchanged and named: _hub_ready_shot.png, _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt (delete refused on this machine).
+
+## HUB 18 Nov 21:4x CT - standing check, NO ROW OWED (plan row 4: "nothing is owed to you; stand-down written up is the delivery")
+TAKE THIS NEXT (20:0x block) row 4 HUB gave no work. web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ = empty). node --check app.js OK.
+Greps on whole app.js: innerHTML at :255 and :301 only (page-owned literals, matches index.html comment); outerHTML 0; eval( 0; insertAdjacentHTML/document.write/new Function appear only inside the comment at app.js:10-11 saying they are absent. CSP meta intact. gh-pages still ae1a483.
+No screenshot (no web/ change). Live-dot colour unchanged. Number: 0 web/ files changed vs origin/hub. NOT claiming READY TO PUBLISH. Untracked worktree files unchanged (delete refused on this machine).
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

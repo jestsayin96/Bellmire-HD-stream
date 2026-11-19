@@ -11535,3 +11535,77 @@ NEW CHECK _crit_survives_trim(): at the 150pct step a synthetic P_CRIT line is p
 RESULT x1: U84 crit_kept=true cap=4, L74 measured=17, L74_TEST OK. RED PROOF break_oldest (drop index 0, the pre-U83 behaviour): crit_kept=false, L74_TEST FAIL. The gate now moves with the defect.
 HONEST LIMIT: it exercises _trim_index on a copy, not the live _rebuild() path end to end; if _rebuild stopped calling _trim_index the check would not notice. gear.gd instantiate SCRIPT ERRORs = known import-cache difference, not mine.
 Still open for L74: the theme-at-scale sweep of the other six panels (100/125/150). Nothing for Mr. E to decide.
+## B61 - THE ALIVE-BY-DESIGN PATH IS PROVEN, AND THE PID ANOMALY THREE CYCLES REPORTED HAS A CAUSE (chat bot, 2026-11-18 19:4x CT)
+
+The 19:1x row gave this lane exactly one thing: correction (3), the alive-by-design path, which B60
+split off itself and refused to call proven while untriggered. It is now triggered and proven, and
+measuring it turned up the mechanism behind an anomaly B59, B60 and this cycle all hit.
+
+CORRECTION (3), RED-PROVEN
+Gate A ran `_b61_hang.gd` under `--script`: it prints a marker and never calls quit(), so the
+process stays up on purpose. The wrapper was told `leaves_process=True`.
+  my_launched_pid 3716, still alive after 12.2 s, rc None.
+  verdict `pid_alive_by_design`. killed_by_wrapper: NOTHING.
+  closure_claim: NONE - "my gate declared it leaves a process alive and it is alive; I do not
+  claim Godot closed". That sentence is the whole point: the wrapper cannot say closed here.
+Gate B, the control, ran `tools/_twitch_parse.gd` through the SAME wrapper with
+`leaves_process=False`: rc 0, 1.5 s, TWITCH_PARSE OK (8 checks), residual EMPTY, verdict `closed`.
+So the flag changes the verdict and not the gate - which is what made it worth a control.
+The kill that did happen was MINE AS OPERATOR, after and apart from the wrapper's refusal:
+taskkill 3716 SUCCESS. A wrapper that will not clean up is not the same as a cycle that does not.
+
+*** THE THING I DID NOT GO LOOKING FOR, AND IT CORRECTS MY OWN TWO PREVIOUS ENTRIES ***
+Gate A reported `foreign_new_pids_untouched: [20144]` - a pid that was neither my gate (3716) nor
+the helper pid I recorded (13600). That is the THIRD cycle to report a pid it could not account
+for, and B60 wrote it up as "a diff cannot tell you what you launched" and left the cause
+unknown. The cause is knowable and I measured it instead of reasoning about it:
+
+  ONE `--script` LAUNCH OF THE CONSOLE BUILD IS **TWO** PROCESSES UNDER **TWO** IMAGE NAMES.
+    ProcessId 37956  ParentProcessId 2728    Godot_v4.7.2-stable_win64_console.exe   <- what Popen returns
+    ProcessId 38056  ParentProcessId 37956   Godot_v4.7.2-stable_win64.exe           <- the real engine, its child
+
+The console exe spawns the windowed exe. So a set-difference over both image names ALWAYS surfaces
+a pid you never launched - even when absolutely nothing foreign is running. Every unexplained pid
+in this lane's record is that child:
+  - B59 read "both image names exist on D:" and concluded B58 had filtered one. The conclusion was
+    right and the reason was wrong: it is not two installs, it is one launch making two processes.
+  - B60's "second indictment" - 8388 was not the pid it recorded for the helper - was the engine
+    child of the console parent it did record. Knowable all along via ParentProcessId.
+  - My own 20144 this cycle was the child of helper 13600, lingering after its parent exited.
+
+AND IT CLEARS CORRECTION (1), WHICH I HAD ONLY ASSUMED WAS SOUND
+"Kill only the pid you launched" could have left the real engine running as an orphan. I tested it
+rather than trusting it: killed ONLY my console parent 37956, waited, re-read the process table -
+EMPTY. The child goes with the parent. Correction (1) is sound, and now it is sound by measurement.
+WHAT EVERY LANE THAT READS TASKLIST SHOULD TAKE: count launches by ParentProcessId, not by pid
+count. Two Godot pids with one of them parented to the other is ONE lane working, not two.
+
+THE PARSE GATE IS STILL SKIPPED, AND THE AUTHORISED UNBLOCK DOES NOT REACH ME
+The 19:1x row 1a told the game build to land the JESTS_NO_TWITCH guard and row 5 told me to keep
+skipping the bare gate "until it is on origin/laptop". The game build landed it (S44, IDLE
+19:16:53) and it IS on origin/laptop - I verified the three lines at origin/laptop:scripts/town.gd
+:346/:348/:368. But my gate runs `--headless --path W6`, W6 is `chatbot` off **origin/main**, and
+`git grep JESTS_NO_TWITCH origin/main -- scripts/town.gd` returns ZERO hits. W6's on-disk town.gd
+has no guard either. So the condition named for my unblock is MET and this lane is STILL BLOCKED,
+because the guard is on the wrong branch for the tree my gate parses. I am not merging origin/
+laptop into chatbot to fix it - town.gd is the game build's file and that is not my merge to make.
+Carried again, said out loud, and named for the supervisor below.
+
+OWNED FILES: UNTOUCHED, VERIFIED BYTE-IDENTICAL BEFORE AND AFTER THE BATTERY.
+  scripts/chatcmd.gd    72be1e686522e8904077623e0169c963
+  data/commands.json    0ed191404157221abd8a184cc580dfa5
+  docs/COMMANDS.md      9a80bfd98049e77abddab6d1d182c524
+SCRATCH: `_b61_hang.gd` lived at the W6 root for 75 seconds and is DELETED - removed from the
+Windows side, because `rm` over the Linux bridge returns "Operation not permitted" and I was not
+going to raise a delete-permission dialog on Mr. E's desktop for one scratch file. Nothing named
+`*b61*` remains under W6. No new harness in tools/; the wrapper lives in this entry.
+
+W-LIVE: NOTHING. Four `--script` processes, no bare gate. No Twitch connection, no text posted, no
+bits, no cheer, no redemption read or settled, no account or channel state touched.
+
+ENGINE: free on BOTH image names at claim (tasklist empty). Final process table read through
+Win32_Process, not tasklist: EMPTY, no Godot of any image name.
+LOCK: claim 19:48:27, cap 20:12, declared finish 19:51, IDLE 19:49:5x. No crossing into the HUD at
+19:52.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.

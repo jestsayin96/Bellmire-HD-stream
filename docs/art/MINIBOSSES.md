@@ -1052,9 +1052,16 @@ Looked at on `hero_front.png`, `hero_side.png`, `hero_back.png` and
 ================================================================================
 ## 20. THE REEVE - *IT TAKES THE HAUL*
 `reeve` - keep - h **1.95** - wear **0.05** - 4 meshes, 1,420 faces -
-span **2.96 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
-ratio **0.80** beside the posed 2.45 m KayKit Knight, pair_w 4.83,
-fits_frame true. Procedural, no pack geometry (`pack_used` false).
+span **3.26 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **0.80** beside the posed 2.45 m KayKit Knight, pair_w **5.12**,
+fits_frame true.
+*(RECONCILED 18 Nov 18:4x CT, asked for by the team lead. This header used to
+read span 2.96 and pair_w 4.83. THE REPORT WAS RIGHT AND THE HEADER WAS STALE:
+the 17:40 anchor-spike fix removed 170 mm of buried cone from the height that
+canon-height normalisation was scaling, so the VISIBLE body grew ~10% and the
+footprint with it - 2.96 -> 3.26 m, and the pair 4.83 -> 5.12 m. That number is
+in `_report.json` and in the fix commit's own message; only this line was never
+updated. Both re-measured from today's rebuild, not copied.)* Procedural, no pack geometry (`pack_used` false).
 Five passes, 17 Nov 2026.
 
 ### WHY THIS ONE - MEASURED, NOT REMEMBERED
@@ -4015,3 +4022,123 @@ knight's sole line, front/side/back. No new clip, no new gap.
 - the rake head box is edge-on to the front camera, so the teeth look like they
   grow straight off the haft; the rake reads as a fork rather than a rake.
 - the legs are thin against a KayKit body, as the Reeve's officer is.
+
+================================================================================
+## FOOT-PLANE PASS 3 - SEXTON, SOWER, MOULDER - 18 Nov 2026, 18:3x-18:5x CT
+
+The team lead's 18:0x row: *"YOUR NEXT ITEM IS THE REMAINING FOOT-PLANE BODIES,
+unchanged and still first."* The audit at the top of this run read **9 of 31
+over the 5 mm bar, 22 seated**. It now reads **6 of 31 over the bar, 25 seated**.
+Nothing here was remembered: `_foot_plane_audit.py` for the set, `_fp_locate.py`
+for the cause, re-run between every single change.
+
+### THE SEXTON - 72.0 mm -> 0.0 mm, two causes, measured one at a time
+**CAUSE 1, ALONE: the spade digs past the floor.** `:496/:497` - blade box and
+point cone are both aimed `(0.36, -0.06, 1.0)`, 20 deg off vertical, and a
+tilted box or cone does NOT sit on its own `loc.z`: the blade's low corner sat
+66.0 mm and the point's base circle **72.0 mm** below z=0. `minibossgen` grounds
+the merged body on its global minimum, so that buried depth became the floor and
+lifted the only things this builder declares at 0.0 - the man's two boots at
+`:421` - 72.0 mm into the air. **`SPADE_Z = 0.0720`** lifts blade and point
+together (one lift, so they cannot drift apart; the haft above only gains
+overlap, never a gap). Alone: **72.0 -> 66.0 mm**, point `zmin +0.0000`.
+
+**CAUSE 2, MEASURED ONLY AFTER CAUSE 1: the spoil heap was buried.** `:508` -
+each lump is an ellipsoid of z half-height `r*0.42` sitting at `loc.z r*0.20`,
+so **0.22r of every lump was under the floor**, 66.0 mm on the big one. With the
+spade seated this became the new global minimum. `loc.z = r*0.42` rests each
+lump ON the ground and keeps the flattened spill read. Result: **66.0 -> 0.0 mm**,
+global min `+0.0000`, six items declaring contact.
+
+### THE SOWER - 37.4 mm -> 0.0 mm, one cause, fixed BY DERIVATION
+`:984` - the three shoots are raked stems, and `limb()` sweeps each ring
+PERPENDICULAR to the polyline, so a leaning stem's bottom ring tilts and its
+lowest vertex sits `r0*sin(tilt)` below the 0.0 the builder wrote: **37.4, 33.8
+and 23.4 mm** on the three. The deepest became the floor and lifted the man's
+two boots (`:853`) 37.4 mm.
+
+**NO CONSTANT WAS DIALLED IN.** The lift is computed from each stem's OWN first
+segment, so re-bending or adding a shoot cannot re-open the float. That is now
+`seat(pts, r0)` in `minibosses.py`, next to `TAU`, with the fault written in its
+docstring - **the general answer to the Rammer's pass-8 finding**, which until
+today was being fixed body by body with hand-measured numbers. Result: all three
+stems `zmin -0.0000`.
+
+### THE MOULDER - 30.0 mm -> 0.0 mm, THREE causes, each measured after the last
+1. **The man's own legs** (`:8442/:8444`), raked forward, dipped 30.0 and 19.9
+   mm. Invisible - the boots cover the leg ends - but the deeper one WAS the
+   floor. `seat()`; the ends stay well inside the boots. **30.0 -> 21.7 mm.**
+2. **The trestle's four splayed legs** (`:8305`), same class, 21.7 mm each, and
+   only visible as the floor once the man's legs were fixed. `seat()`.
+   **21.7 -> 8.0 mm.**
+3. **The sand-and-sprue spill** (`:8515`), 0.034 half in z sitting at 0.026, so
+   8.0 mm of every lump was under. Seated at its own half-height.
+   **8.0 -> 0.0 mm.**
+
+### THE FIT PROOF - RENDERED ON A BODY AND LOOKED AT
+`minibossgen` rebuilt the three glb (0 blanks, 0 errors, heights and footprints
+unchanged: sexton 2.20 m, sower 3.50 m, moulder 2.36 m, all CORRIDOR-SAFE
+against the 11.0 m three-cell span). `minibossfit --only sexton,sower,moulder,
+reeve,stoker` against a posed KayKit Knight at scale 1.0: **verdict GREEN**,
+blank check **15 files, 0 failures**, **3 of 3 proving views on every one**,
+ratios sexton 1.00, sower 0.92, moulder 1.18, reeve 0.80, stoker 0.98.
+
+**WHAT I SAW IN THE PICTURES.** Sexton front/side/back: boots flat, the spade
+point touching, the three spoil domes resting on the ground, nothing floating.
+Sower: boots flat and all three stems planted - in the side view their bases are
+now IN THE PICTURE (see the next section). Moulder: boots, the four trestle feet
+and the row of spill lumps all on one line.
+
+### *** AND THE HARNESS COULD NOT SEE A CUT. I FOUND IT BY MEASURING. ***
+Looking at the sower's side render I thought the hero and the creature were not
+standing on the same line, so I measured the lowest opaque row of each subject
+in every hero view rather than trusting my eye. **Two findings, and the second
+is the serious one.**
+
+**(1) THREE HERO SIDE RENDERS WERE CLIPPED AT THE BOTTOM EDGE - sower, reeve and
+stoker, the last two ticked only hours ago.** Content sat on row 519 of 520.
+`minibossfit`'s checks on the hero views were **BLANK ONLY**: `minibossgen`
+asserts border alpha, this file never did, so a creature with its feet cut off
+by the frame returned GREEN. `fits_frame: true` sitting beside it is computed
+from pair WIDTH and was never answering the question. **A clipped render is not
+a blank one** - same family as pass 11's `head_glow_px: 156`.
+FIXED, AND IT IMMEDIATELY EARNED ITS KEEP: the border check is now in
+`minibossfit` per edge and goes RED by name. My first camera fix had the sign
+backwards and the new check went red on three MORE views within the minute -
+raising the aim point raises what the frame covers and pushes the subjects DOWN.
+The cause is that the camera is elevated 6 deg, so a separation in DEPTH becomes
+one in IMAGE HEIGHT; the aim point now drops by `sin(6deg) * half the pair's
+depth span`. Re-run: **0 edge contacts on all 15 views.**
+
+**(2) NOT FIXED, AND THE LEAD SHOULD KNOW BECAUSE IT IS HOW WE ALL READ THESE
+SHEETS: "one fixed ground line" is true of the WORLD, not of the PICTURE.**
+Hero bottom row minus creature bottom row, after the fix: front +21..+25 px,
+back +29..+41 px, side **-40..-59 px** (0.15-0.43 m at this scale), on all five
+bodies including both ticked ones. The world plane is shared; the projection of
+it is not, because the two subjects sit at different depths under a tilted
+camera. **Comparing one body's own parts across a view is sound** - which is
+what the lead did on the stoker and the reeve, and those readings stand - **but
+comparing the hero's bottom to the creature's bottom in these pictures will show
+a float that is not there, or hide one that is.** I have not touched it: it
+changes the framing of every render in the set and belongs in a pass of its own.
+
+### FAULTS I CAN STILL SEE AND DID NOT FIX (this was a plane pass)
+- **THE SEXTON HAS NO BACK.** From behind, the hod grid hides the man entirely:
+  it reads as a board on two legs, no head, no facing. Same family as the Beadle
+  and the Reeve, and worse than either because the grid is the whole silhouette.
+- **THE SEXTON'S MECHANIC IS NOT COUNTABLE FROM THE DOORWAY, WHICH IS THE ONE
+  THING IT IS FOR.** The docstring says twelve pigeonholes, five plugged and
+  LIT; the render shows a **3x3 = nine** cell frame and the plugs read as pale
+  grey slabs on pale grey with no light in them. The geometry and the idea
+  disagree - that is a content fault in my own shipped work and it is named here
+  rather than quietly fixed in the same pass that moved the floor.
+- The sexton's spade reads as a stick with a small blade; at stream distance it
+  will not say "spade".
+- **THE SOWER HAS NO FACE from the side** - the hat disc covers the head
+  completely - and the casting arm is a flat plank, not an arm.
+- The sower's thorns vanish edge-on in the side view, so the three shoots read
+  as plain poles.
+- **THE MOULDER'S CAST reads as a pale mannequin egg** with a visor band, and
+  its arm is the same plank shape as the sower's.
+- The moulder's six spill lumps are evenly spaced and now sit proud of the
+  floor; in a row they read as coins rather than spill.

@@ -168,24 +168,25 @@
    "idea": "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
    "wear": 0.85,
    "feed_line": "A spade is working somewhere in the dark.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 1292,
    "size": [
-    2.14,
-    1.44,
+    2.2,
+    1.48,
     2.45
    ],
-   "footprint_span": 2.14,
+   "footprint_span": 2.2,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.7781781093127815,
-    "ortho": 3.087711811065674,
+    "radius": 1.8054553623602727,
+    "ortho": 3.100536346435547,
     "clip": [
-     7.381783485412598,
-     18.764556884765625
+     7.450505256652832,
+     18.966768264770508
     ]
    },
    "views": [
@@ -328,24 +329,25 @@
    "idea": "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
    "wear": 0.4,
    "feed_line": "Something is broadcasting seed.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 1029,
    "size": [
-    3.43,
-    1.52,
+    3.5,
+    1.55,
     2.25
    ],
-   "footprint_span": 3.43,
+   "footprint_span": 3.5,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.187709566704543,
-    "ortho": 3.087007761001587,
+    "radius": 2.219354668010889,
+    "ortho": 3.0999042987823486,
     "clip": [
-     8.021000862121582,
-     21.908794403076172
+     8.096267700195312,
+     22.137840270996094
     ]
    },
    "views": [
@@ -1176,20 +1178,20 @@
    "engine": "BLENDER_EEVEE",
    "faces": 1971,
    "size": [
-    2.34,
-    1.99,
+    2.36,
+    2.01,
     2.9
    ],
-   "footprint_span": 2.34,
+   "footprint_span": 2.36,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.112208222661332,
-    "ortho": 3.519352912902832,
+    "radius": 2.123993972047776,
+    "ortho": 3.5893654823303223,
     "clip": [
-     8.025308609008789,
-     20.817302703857422
+     8.055075645446777,
+     20.902973175048828
     ]
    },
    "views": [

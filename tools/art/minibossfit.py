@@ -209,6 +209,7 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
 
     written = []
     vis = {}
+    edge = {}
     creature = list(creature)
     hero_meshes = list(hero_meshes)
     for vname, az in views:
@@ -219,7 +220,28 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
         # the ground sits GROUND_UP above the bottom edge in every single cell
         cx = (mn.x + mx.x) / 2.0 if az < 45.0 else (mn.x + mx.x) / 2.0
         cy = (mn.y + mx.y) / 2.0
-        target = Vector((cx, cy, FRAME_H / 2.0 - GROUND_UP))
+        # *** THE "ONE FIXED GROUND LINE" IS ONLY TRUE AT THE AIM POINT'S DEPTH,
+        # *** AND IN THE SIDE VIEW THAT IS NOT WHERE THE SUBJECTS ARE. ***
+        # Found 18 Nov 18:5x by measuring the renders instead of reading the
+        # register: in hero_side.png the hero's lowest row and the creature's
+        # differ by 40-58 px on every body I checked, INCLUDING the two ticked
+        # this afternoon, and on three of them the creature reached the last
+        # row of the image - content at the frame edge, which is a clip nobody
+        # could see because this file's checks on the hero views are BLANK
+        # ONLY. The cause is geometry, not art: the camera is elevated 6 deg,
+        # so an offset in DEPTH becomes an offset in IMAGE HEIGHT. In front and
+        # back views the pair separates along X (no effect); in the side view
+        # it separates along Y, the camera's depth axis, and the near subject's
+        # ground contact drops sin(6 deg) * half-the-depth-span - about 0.26 m
+        # on a 5 m pair, which is the whole 0.25 m bottom margin.
+        # Lift the aim point by exactly that, so the NEAREST subject's floor
+        # still clears the bottom edge. Zero effect where depth span is small.
+        # SIGN, MEASURED NOT REASONED: my first attempt ADDED this and the new
+        # border check immediately went red on three MORE views - raising the
+        # aim point raises what the frame covers, which pushes the subjects
+        # DOWN the image. The camera has to look LOWER to lift them clear.
+        drop = math.sin(e) * (mx.y - mn.y) / 2.0
+        target = Vector((cx, cy, FRAME_H / 2.0 - GROUND_UP - drop))
         dist = radius * 4.0 + 4.0
         cam.location = target + dirv * dist
         cam.rotation_euler = dirv.to_track_quat('Z', 'Y').to_euler()
@@ -231,6 +253,16 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
         path = os.path.join(outdir, "hero_%s.png" % vname)
         B = _shot(path, hide=creature if PROVE_RED else ())
         written.append(path)
+        # *** BORDER CHECK ON THE HERO VIEWS - THEY NEVER HAD ONE. ***
+        # minibossgen asserts border alpha; THIS file only ever asked whether
+        # the hero views were blank. A clipped render is not a blank one, so a
+        # creature with its feet cut off by the frame returned GREEN with
+        # `fits_frame: true` beside it - and fits_frame is computed from pair
+        # WIDTH, so it was never answering this question at all. Counted here,
+        # per edge, and a non-zero count is RED in the register.
+        ea = B[:, :, 3] > DIFF_EPS
+        edge[vname] = dict(top=int(ea[0].sum()), bottom=int(ea[-1].sum()),
+                           left=int(ea[:, 0].sum()), right=int(ea[:, -1].sum()))
         if creature and hero_meshes and tmpdir:
             A = _shot(os.path.join(tmpdir, "_heroalone_%s.png" % vname), hide=creature)
             C = _shot(os.path.join(tmpdir, "_crealone_%s.png" % vname), hide=hero_meshes)
@@ -248,7 +280,7 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
                 cell["creature"]["seen"] >= SEEN_MIN and cell["creature"]["vis"] >= VIS_MIN
                 and cell["hero"]["seen"] >= SEEN_MIN and cell["hero"]["vis"] >= VIS_MIN)
             vis[vname] = cell
-    return written, eng, vis
+    return written, eng, vis, edge
 
 
 def sheet(repo, keys, hero, name="_hero_scale", cols=3):
@@ -366,7 +398,7 @@ def main():
                 os.makedirs(outdir, exist_ok=True)
                 tmpdir = os.path.join(args.repo, "renders", "art", "minibosses", "_vis_tmp")
                 os.makedirs(tmpdir, exist_ok=True)
-                written, eng, vis = shoot(allo, pts, outdir,
+                written, eng, vis, edge = shoot(allo, pts, outdir,
                                           (("front", 0.0), ("side", 90.0), ("back", 180.0)),
                                           info["aura"], creature=objs, hero_meshes=hmesh,
                                           tmpdir=tmpdir)
@@ -376,7 +408,7 @@ def main():
                     pair_w=round(amx.x - amn.x, 2),
                     fits_frame=bool((amx.x - amn.x) <= FRAME_W and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
                     engine=eng, views=[os.path.basename(p) for p in written],
-                    visibility=vis,
+                    visibility=vis, frame_edge=edge,
                     proving_views=sum(1 for c in vis.values() if c["proves"]))
                 if vis:
                     pv = rep["pairs"][key]["proving_views"]
@@ -402,6 +434,18 @@ def main():
                     rep["errors"].append("%s: no visibility measured for any view - "
                                          "an unmeasured cell is RED, not green" % key)
                     rep["ok"] = False
+                # a view whose content reaches an edge is CUT, and a cut
+                # render cannot prove a foot plane, a silhouette or anything
+                # else about where the body ends. RED, named edge by edge.
+                for vname, e in (edge or {}).items():
+                    hit = {k2: v2 for k2, v2 in e.items() if v2 > 0}
+                    if hit:
+                        rep["errors"].append(
+                            "%s/%s: render reaches the frame edge - %s. The "
+                            "body is CUT and this view proves nothing about "
+                            "where it ends." % (key, vname,
+                                                ", ".join("%s %d px" % kv for kv in sorted(hit.items()))))
+                        rep["ok"] = False
                 if not rep["pairs"][key]["fits_frame"]:
                     rep["errors"].append("%s: pair does not fit the fixed frame" % key)
                     rep["ok"] = False

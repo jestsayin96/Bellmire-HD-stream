@@ -5061,7 +5061,82 @@
       ]
     },
     "_note_c52": "Widened C-cycle 52: 12 thinner pools gain 14 lines each (168 total): rank_up, trader_arrives, dispute, delve_dispatch, lord_cleared, drill, hurt, viewer_cosmetic, recruit, viewer_down, viewer_returns, lord_sighted. Same string shape as before; additive; dead until wired.",
-    "_note_c59": "Added lines (C-cycle 59): E3PO raid, disaster, festival, town_talk +12 each; viewer_roll crit/high/low/fumble +10 each; intro +6; says +8 (102 total). Appended to the existing lists, same string shape and voice. He still cannot die. Additive; dead until wired."
+    "_note_c59": "Added lines (C-cycle 59): E3PO raid, disaster, festival, town_talk +12 each; viewer_roll crit/high/low/fumble +10 each; intro +6; says +8 (102 total). Appended to the existing lists, same string shape and voice. He still cannot die. Additive; dead until wired.",
+    "tier_up_alt2": {
+      "_note": "Added key (C-120): a second set of Commander lines on a growth-tier rise, 4 per tier, keyed by tier NAME exactly as in growth_tiers.tiers (the same keys as tier_up_alt, which is untouched). Pick at random from tier_up, tier_up_alt and this list. Lower tiers are make-do; the later tiers are prosperous (glass, lamps, painted doors). No new mechanics. Additive; dead until wired.",
+      "Crossing": [
+        "'Two planks and a rope. I have defended less and been thanked for it.'",
+        "'A ford is a decision. Somebody made it here. I shall see it kept.'",
+        "'Nothing to take yet. That will not stop anyone trying.'",
+        "'A cookfire and a wet dog. It is a start, and I have started worse.'"
+      ],
+      "Hamlet": [
+        "'A well, a pen, a lean-to. People who build a well mean to drink from it for years.'",
+        "'Smoke at dawn. I like a place that wakes up on purpose.'",
+        "'The children have found the ford. Someone ought to show them where it ends.'",
+        "'A hamlet. I shall learn the dogs by name first. They are the real watch.'"
+      ],
+      "The Guild Post": [
+        "'A stamp on a ledger. It will outlast the first three heroes, I expect.'",
+        "'The door has a bell on it. Good. I want to hear who comes in.'",
+        "'A board for notices, and nobody yet to read them. That changes.'",
+        "'Sign here, bleed there. I shall tell the recruits about the second part.'"
+      ],
+      "Village": [
+        "'A green, a well, a fence line. Something is worth walking round at night now.'",
+        "'Forty chimneys. I counted twice because I did not believe the first.'",
+        "'A village keeps a watch because it has bread worth stealing.'",
+        "'I know the names on every door. That is the thing a wall cannot do.'"
+      ],
+      "Market Day": [
+        "'Scales on every stall. I shall learn which ones lie.'",
+        "'Coin changes hands and so does trouble. I stand where I can see both.'",
+        "'The caravan masters ask for me by name now. I did not ask for that.'",
+        "'Market day. Loud, crowded, and not one cart unguarded. Good.'"
+      ],
+      "The Chapel": [
+        "'The bell has a rope and the rope has a boy. That is a bell with a future.'",
+        "'A roof for the dead and a pew for the tired. Both will be used.'",
+        "'The priest asked for a guard on the door. I said the door was already guarded.'",
+        "'Candles in the window. Somebody will see them from the road and know the way.'"
+      ],
+      "Craft Row": [
+        "'The row smells of hot iron and fresh bread. I would defend either.'",
+        "'A glassblower, a cooper, a smith. Everything a siege needs, and nobody planning one.'",
+        "'Apprentices run between the shops. Quick feet. I will use them.'",
+        "'Honest work, three streets of it. I know what a raider sees.'"
+      ],
+      "The Garrison": [
+        "'Whitewash on the barracks. Somebody was proud of this. Good.'",
+        "'A yard, a rack of spears, a roster. The Watch has a home now and a bad habit of staying in it.'",
+        "'Drill at dawn, stew at noon. A garrison runs on two things and I have both.'",
+        "'Real beds. I shall pretend not to notice who sleeps in them.'"
+      ],
+      "Market Town": [
+        "'Cloth, salt, iron, wine. The road brings all of it and a few things we did not order.'",
+        "'There is a toll house now. Even the thieves complain about the prices.'",
+        "'The inn has a second floor. Somebody has money to spend on sleeping.'",
+        "'Painted shopfronts. A town that paints its doors expects to be around.'"
+      ],
+      "The First Wall": [
+        "'Mortar still wet in the north run. I walked it anyway.'",
+        "'The gate has a name. A town names the things it means to keep.'",
+        "'Masons on the scaffold, bells on the hour. This is what a promise looks like built.'",
+        "'The wall is not high. It is not for height. It is for the people inside knowing where it stops.'"
+      ],
+      "Walled Town": [
+        "'Banners on the towers, lamps on the wall. We have been seen from the road for a mile.'",
+        "'A garrison, a gate, a market, a bell. The pieces fit. I do not say that lightly.'",
+        "'The wall will be tested. That is what it is for. The gate is ready.'",
+        "'Good stone, good timber, good people. I would not trade the set.'"
+      ],
+      "City in all but Charter": [
+        "'Glass in the windows and lamps in the streets. The charter can take its time.'",
+        "'Seven bells now, and every one rung on time. That is a city in my book.'",
+        "'I held the ford when there was no wall. I hold it now with all of this behind me. It is better.'",
+        "'Whatever the clerks call it, the gate is the same gate. The door is kept.'"
+      ]
+    }
   },
   "town_life": {
     "_note": "Ambient Bellmire flavour as the town grows - crier calls, market and guild chatter, building news. For the desktop's town.gd if it wires a ticker; content worker never touches code. Additive; dead until wired.",
@@ -10622,7 +10697,62 @@
         "{buyer} bought the night. Bellmire gives it back in memory.",
         "The ribbons come down. {buyer}'s stays on the maypole.",
         "A sleepy child asks the crier who {buyer} is. 'A friend,' says the crier."
-      ]
+      ],
+      "stalls_alt": [
+        "A pastry stall flies {buyer}'s name on a paper flag, and the flag is eaten by noon.",
+        "Spiced pears, roasted on the coals, a copper each - 'a copper for {buyer}', says the sign.",
+        "The ropewalk braids a ribbon in {buyer}'s colours and sells it by the yard.",
+        "A barrel of plums, free by {buyer}'s hand. The barrel is empty before the toasts.",
+        "The tinker rings a small bell every time somebody says {buyer}'s name. He is tired.",
+        "Hot chestnuts in paper twists: 'For {buyer}, while they last.' They do not last.",
+        "The dyer hangs a cloth in {buyer}'s favourite colour, whatever it was, and nobody checks.",
+        "A pie stall chalks 'BUYER'S SHARE' on the board and gives it away by the slice.",
+        "Warm bread, still steaming, handed over the stall with {buyer}'s name.",
+        "A spit of lamb turns slowly in {buyer}'s honour. The line is the length of the green."
+      ],
+      "notables_alt": [
+        {
+          "who": "Agnes Gatewood",
+          "line": "Agnes: '{buyer} paid for the lamps. The least I can do is light them.'"
+        },
+        {
+          "who": "Tobyn Ironside",
+          "line": "Tobyn strikes a bell on the anvil, once, for {buyer}."
+        },
+        {
+          "who": "Maud Reedwhistle",
+          "line": "Maud: 'A basket of the best, for {buyer}. I picked them out myself.'"
+        },
+        {
+          "who": "Bram Barrelbelly",
+          "line": "Bram: 'Whoever {buyer} is, the cellar is open. Do not tell my wife.'"
+        },
+        {
+          "who": "Nell Candlemas",
+          "line": "Nell ices a loaf with {buyer}'s name and hands it to the first child she sees."
+        },
+        {
+          "who": "Elspeth Hartley",
+          "line": "Elspeth rings the chapel bell once, for {buyer}, and says nothing else."
+        },
+        {
+          "who": "Wat Mudboot",
+          "line": "Wat clears the mud off the green with a broom, for {buyer}. It is not a small job."
+        },
+        {
+          "who": "Sibyl Wickham",
+          "line": "Sibyl: 'To {buyer}. Whatever they spent, the town got more of it.'"
+        },
+        {
+          "who": "Godric Fordbright",
+          "line": "Godric rows the ferry across for nothing, and says it is for {buyer}."
+        },
+        {
+          "who": "Hob Coldfingers",
+          "line": "Hob stacks the cut reeds in a neat bundle at {buyer}'s banner and goes back to work."
+        }
+      ],
+      "_note_c120": "C-120: stalls_alt (10) and notables_alt (10), same shapes and {buyer} placeholder as stalls and notables, which are untouched. Pick from the original plus _alt pool. No guarantee of any other effect. Additive; dead until wired."
     }
   },
   "phase2_words": {
@@ -12438,5 +12568,6 @@
   "_note_c116": "C-116: +32 live tells, four to each origin in the tells table (tomb, mine, fortress, temple, lair, prison, works, warren). Read at delve.gd:170, appended to the origin's own tell and drawn once per delve. Same shape: plain strings. Additive; no floor count. Expected zero-hit key; no lane is to wire it.",
   "_note_c117": "C-117 (18 Nov 2026): +14 live bark lines on each of the six kinds (enter, lord, trap, hurt, drink, misfire), 84 in all, plain strings in the existing shape. Read at delve.gd:3781 by kind, so they are in the game the moment they merge. Every line is unique across the whole barks block. Plain declaratives, no name tokens, no floor count. Expected zero-hit key; no lane is to wire it.",
   "_note_c118": "C-118: +30 epitaphs, +16 descend, +16 cleared lines. Same shapes (descend keeps %s %s hero+verb; cleared keeps Floor %d). Read live by the existing arrays - no wiring owed. Additive.",
-  "_note_c119": "C-119: 85 bark lines (enter/lord/trap/hurt/drink/misfire) and 12 misfire log lines (%s %s %d %d, same shape as the rest). Additive only; the existing lists are read as-is, no wiring needed. Expected zero-hit key."
+  "_note_c119": "C-119: 85 bark lines (enter/lord/trap/hurt/drink/misfire) and 12 misfire log lines (%s %s %d %d, same shape as the rest). Additive only; the existing lists are read as-is, no wiring needed. Expected zero-hit key.",
+  "_note_c120": "C-120: e3po.tier_up_alt2 (48 lines, 4 per growth tier) and festivals.viewer_paid stalls_alt / notables_alt (10 each). Additive only; every pre-existing key is unchanged. Expected zero-hit keys until a picker reads them."
 }

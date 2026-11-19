@@ -46,7 +46,8 @@ func _check(pct: int) -> void:
 		_walk(l, rects)
 		for r in rects:
 			_panels += 1
-			if _tag == "break_shift" and l is FeedHUD: r = Rect2(r.position + Vector2(5000, 0), r.size)
+			# U86: shift every 4th panel rect (watch order/type independent - `l is FeedHUD` and `_watch[0]` both matched nothing: only 4 panels/scale exist, 12 total)
+			if _tag == "break_shift" and _panels % 4 == 1: r = Rect2(r.position + Vector2(5000, 0), r.size)
 			if not vp.grow(1.0).encloses(r):
 				_bad += 1; print("  OFFSCREEN ", pct, "% ", l.name, " ", r, " vp ", vp)
 		if rects.size() > 0: tops.append([l.name, rects[0]])

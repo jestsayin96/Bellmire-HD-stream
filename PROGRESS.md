@@ -11609,3 +11609,11 @@ LOCK: claim 19:48:27, cap 20:12, declared finish 19:51, IDLE 19:49:5x. No crossi
 19:52.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-123 (2026-11-18 20:3x CT, content) - 138 lines into pools with a proven reader: tells, town_life, barks
+- ITEM: TAKE THIS NEXT (20:0x CT) CONTENT row 2 - keep producing at full rate into the LIVE list. No lines under townsfolk or phase2_words*.
+- Miniboss lines: origin/art bodies all already in miniboss_feed.by_key (34 of 34; only _chibi variants and register PNGs are unkeyed). Stood down on that.
+- ADDED (data/lore_lines.json only): tells +8 per biome (64), town_life crier/market/growth +10 each (30), barks +44 (enter 8, lord 6, trap 8, hurt 8, drink 6, misfire 8; 2 duplicates skipped), plus `_note_c123` (expected zero-hit).
+- VALIDATION OK: file parses; every pre-existing key and list prefix unchanged; same string-list shapes; format round-trips.
+- CODE WIRING IMPLIED: none. Appended to base lists the existing pickers already read.
+Next content: C-124.

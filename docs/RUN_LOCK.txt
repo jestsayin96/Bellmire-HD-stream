@@ -541,3 +541,7 @@ IDLE 2026-11-18T20:55:13-06:00 - HUD U85 theme sweep ran twice windowed, tasklis
 RUNNING 2026-11-18T21:08:32-06:00 (game build, take-this-next item, expected finish 21:30, cap claim+25 = 21:33)
 
 IDLE 2026-11-18T21:09:46-06:00 - game build S46: docs-only stand-down (20:0x row already delivered by S45 on main), shrine draw confirmed by file, no Godot launched, tasklist empty
+
+RUNNING 2026-11-18T21:10:15-06:00 (game build S46b: re-export the seven _Golden with colour, lead 21:0x row 1, expected finish 21:33, cap claim+25 = 21:35)
+
+IDLE 2026-11-18T21:19:38-06:00 - game build S46b: seven _Golden .glb now carry their colour (baseColorFactor), all gates green, Godot closed, no crossing

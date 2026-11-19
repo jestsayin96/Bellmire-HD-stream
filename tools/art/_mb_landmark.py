@@ -210,13 +210,73 @@ for a_p, b_p in zip(pa, pb):
     G.write_png(os.path.join(OUT, "_%s_%s_mask.png" % (name, v)), vizm)
     Lm = lum(A)
     sep = float(abs(np.median(Lm[ring_in]) - np.median(Lm[ring_out])))
+    # ---------------------------------------------------------------- PASS 4
+    # `sep` ABOVE IS NOT REPRODUCIBLE ON A MIXED BOUNDARY, AND I FOUND THAT BY
+    # RE-RUNNING IT RATHER THAN BY THINKING ABOUT IT. 18 Nov 20:4x CT, nothing
+    # in the tree changed between the two runs:
+    #     sower head front          0.0386 -> 0.0504   CROSSES THE 0.045 LINE
+    #     sower head three_quarter  0.0191 -> 0.0103
+    #     moulder head front/side   0.0012 / 0.0174    reproduced exactly
+    #     sower casthand all three                     reproduced exactly
+    # The cause is the statistic, not the renderer. `sep` is the difference of
+    # TWO GLOBAL MEDIANS over two separate pixel sets, so when a landmark's
+    # boundary is a MIXTURE - the Sower's head touches shoulders, hat, hopper
+    # rim, strap and two arms - each median sits between two populations and a
+    # few pixels of EEVEE drift (vis_px moved 16 px between the runs) tip it.
+    # A verdict that flips across its own threshold on an unchanged tree is a
+    # coin toss wearing a number, which is this lane's lying-instrument class.
+    #
+    # THE LOCAL NUMBER BELOW DOES NOT HAVE THAT PROPERTY. It asks the question
+    # per pixel: for every landmark edge pixel, the LARGEST luminance step to a
+    # body pixel actually touching it. No global population, so no knife edge.
+    # `sep_local` is the median of those steps and `frac_flat` is the share of
+    # the boundary where the step is under the threshold - which is the number
+    # `sep` cannot express at all: a boundary that separates sharply along the
+    # hat and not at all along the neck has ONE median and TWO truths.
+    # BOTH ARE REPORTED AND NOTHING IS REMOVED, so the ticked table stays
+    # comparable row for row.
+    steps = np.zeros(Lm.shape, dtype=np.float32)
+    touched = np.zeros(Lm.shape, dtype=bool)
+    for ax, sh in ((0, 1), (0, -1), (1, 1), (1, -1)):
+        o_l = np.roll(Lm, sh, axis=ax)
+        o_m = np.roll(ring_out, sh, axis=ax)
+        # a roll wraps, so the wrapped edge row/column is not a neighbour
+        if ax == 0:
+            (o_m.__setitem__((slice(0, 1), slice(None)), False) if sh > 0
+             else o_m.__setitem__((slice(-1, None), slice(None)), False))
+        else:
+            (o_m.__setitem__((slice(None), slice(0, 1)), False) if sh > 0
+             else o_m.__setitem__((slice(None), slice(-1, None)), False))
+        hitm = ring_in & o_m
+        steps = np.where(hitm, np.maximum(steps, np.abs(Lm - o_l)), steps)
+        touched |= hitm
+    n_touch = int(touched.sum())
+    if n_touch == 0:
+        # RED ON EMPTY, same rule as every other count in this file.
+        red.append("%s: %s - ZERO landmark edge pixels touch the body, so the "
+                   "local step is computed over nothing and is not a pass" % (v, name))
+        rep[v] = dict(vis_px=vis, body_px=body_px, sep=round(sep, 4), pairs=pairs,
+                      sep_local=None, frac_flat=None, touch=0, red=True)
+        continue
+    sv = steps[touched]
+    sep_local = float(np.median(sv))
+    frac_flat = float((sv < 0.045).mean())
     rep[v] = dict(vis_px=vis, body_px=body_px,
                   vis_frac=round(vis / float(body_px), 4),
                   sep=round(sep, 4), pairs=pairs,
-                  red=bool(sep < 0.045))
-    if sep < 0.045:
-        red.append("%s: %s is visible (%d px) but does NOT SEPARATE - median "
-                   "luminance step across its boundary is %.3f" % (v, name, vis, sep))
+                  sep_local=round(sep_local, 4),
+                  frac_flat=round(frac_flat, 4), touch=n_touch,
+                  red=bool(sep_local < 0.045))
+    # THE VERDICT IS THE LOCAL NUMBER, because it is the one that reproduces.
+    if sep_local < 0.045:
+        red.append("%s: %s is visible (%d px) but does NOT SEPARATE - the median "
+                   "local step along its boundary is %.3f and %.0f%% of that "
+                   "boundary is flatter than 0.045 (global sep %.3f)"
+                   % (v, name, vis, sep_local, 100.0 * frac_flat, sep))
+    elif frac_flat > 0.50:
+        red.append("%s: %s separates on the median (%.3f) but %.0f%% of its "
+                   "boundary is FLAT - it reads along part of its outline only"
+                   % (v, name, sep_local, 100.0 * frac_flat))
 
 out = dict(key=key, landmark=name, at=[cx, cy, cz], r=rr, parts_selected=hit,
            views=rep, red=red)

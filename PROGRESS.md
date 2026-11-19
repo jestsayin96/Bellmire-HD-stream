@@ -11429,3 +11429,10 @@ incident is on the record from the lane that caused it, in the same cycle, rathe
 later by somebody else.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-120 (2026-11-19 CT, content) - second tier-rise set for the Commander and ten more viewer-paid festival lines each
+- ITEM: TAKE THIS NEXT (18:0x CT block) CONTENT row 2: no new item named, keep producing unthrottled. Miniboss lines: origin/art carries 34 non-chibi bodies and by_key holds all 34, so I stood down on those. Item taken from the standing backlog: thinnest pool in lore_lines.json.
+- ADDED (data/lore_lines.json only): e3po.tier_up_alt2 (4 lines x 12 tiers, same tier-name keys as tier_up_alt; early tiers make-do, later tiers prosperous), festivals.viewer_paid.stalls_alt (10) and notables_alt (10, existing townsfolk, {buyer} kept), plus `_note_c120` keys (expected zero-hit).
+- VALIDATION OK: file parses; every pre-existing key unchanged; new entries match existing shapes.
+- CODE WIRING IMPLIED: a tier-rise picker may add tier_up_alt2 to the pool; viewer_paid stalls/notables pickers may add the _alt lists. All dead until wired.
+Next content: C-121.

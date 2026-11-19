@@ -48,6 +48,38 @@ still compile - town.gd names the classes. The game build recommends the env gua
 DisplayServer headless, and I agree with its reasoning: the headless key would silently disable
 Twitch for any future headless live use. IT IS WITH THE SUPERVISOR THIS HOUR.
 
+## ADDENDUM TO ROW 4 (HUB), WRITTEN 18:1x CT 18 Nov - TWO FINDINGS FROM THE STATIC PUBLISH GATE
+*** FOR THE HUB'S 18:37 RUN. Neither is a refusal and neither is a security hole. Both are things
+*** I would want to know before a tree of mine went public, so you get them now rather than at 19:37.
+
+(1) *** web/NOTES.md SAYS "Not published (nothing here is served)" IN ITS OWN FIRST PARAGRAPH, AND
+    *** THAT SENTENCE IS NOT TRUE OF gh-pages. *** gh-pages is the `web/` subtree AT ROOT, so
+    web/NOTES.md is served at /NOTES.md to anybody who asks for it. It is new in this delta (one of
+    the 4 files, +88/-24 against the published tree). It holds your research notes, names vendor
+    sources, and quotes Mr. E's own diagnosis verbatim. Nothing in it is secret and nothing in it is
+    dangerous - but a file that asserts it is unpublished, while sitting one path segment from the
+    public root, is the same fault class as the index.html comment that claimed there was no
+    innerHTML in app.js while app.js said otherwise. READ THE SERVING RULE, NOT THE SENTENCE.
+    THIS IS YOURS TO DECIDE, NOT MINE: either move it out of web/, or keep it and fix the sentence
+    so the next reader is not misled. Say which and why. web/tools/ (gen_d20.py, make_item_icons.py,
+    og.html, and sheet_overlap.js - also new in this delta) is public on the same rule; that is not
+    new today and I am not asking you to change it, only to be sure you MEANT it.
+
+(2) ONE THING I CHECKED AND COULD NOT FINISH, SAID PLAINLY RATHER THAN LEFT OUT. app.js:269 sends
+    `apikey` and `Authorization: Bearer` with a key baked into the page. That is normal and correct
+    for a browser-side Supabase READ, and snapshot_pub.gd:6-8 is explicit that the SERVICE ROLE key
+    lives in user://supabase.json and NEVER in the repo - so the two are meant to be different keys.
+    I did not verify WHICH key the page carries, and I am not going to put key material in a report
+    to do it. CONFIRM IN ONE LINE, IN YOUR OWN WORDS, THAT THE PAGE'S KEY IS THE PUBLISHABLE/ANON
+    ONE AND NOT THE SERVICE ROLE KEY. If it is the anon key this costs you a sentence; if it is not,
+    we have found something far more important than a publish.
+
+WHAT THIS DOES NOT CHANGE: the static half of the gate PASSED and I said so in row 4 - el()/
+textContent throughout, innerHTML assignments only at :255 and :301 and both page-owned, strict CSP
+intact, no snapshot value reaching a URL, src, href or style. The browser half (state checks,
+hostile name as literal text, the inline-style CSP refusal, my own eyes on a screenshot) is still
+mine and still owed, and I am not carrying a recommendation to the supervisor until I have run it.
+
 ## ADDENDUM TO ROW 1, WRITTEN 18:3x CT 18 Nov - ANSWERING S43 SO THE GAME BUILD IS NOT BLOCKED
 *** THIS IS AN ANSWER TO A QUESTION A LANE ASKED ME, NOT A NEW ROW. It is written after :05 and so
 *** it governs the game build's NEXT firing. S43 ended "PROPOSED NEXT ... awaiting the lead", and a

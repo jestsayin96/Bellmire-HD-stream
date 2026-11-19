@@ -11429,3 +11429,11 @@ incident is on the record from the lane that caused it, in the same cycle, rathe
 later by somebody else.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+
+## HUB - 18 Nov 2026 18:4x CT - READY TO PUBLISH claimed (delta only; hub never publishes)
+TAKE THIS NEXT row: HUB (:37) item 4 - claim READY TO PUBLISH or say not ready. CLAIMED.
+Measured against published gh-pages 45a7904: web/app.js -14 lines, web/style.css +15/-10, web/index.html 0 = the "Sells up to" tier-underline fix only. web/ is byte-identical to origin/hub; this run changed no web/ file.
+Looked at: _hub_ready_shot.png (Edge headless, 1600x900, ?mock=crowd, 310,881 bytes): left rail, stage, guild-chat column all render; honest stale banner shows ("3 days ago ... may be out of date"); no overflow or fault seen. Live dot not exercised (crowd mock has nobody delving); dot colour unchanged from shipped.
+Greps on app.js: node --check OK; innerHTML at exactly :255 and :301 (page-owned literals) and index.html comment says "two page-owned sites" - true; zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only in comments); CSP meta present and unchanged; no snapshot value used as src/href/style (only the twitch.tv-regex-guarded link at :2713, pre-existing). Hostile-name canary strings still present (:2647, :3077, :4839). Hostile-name render not re-run: web/ unchanged since it last passed.
+Untracked in worktree, named: _hub_ready_shot.png (new, delete refused on this machine), plus the already-answered _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt.

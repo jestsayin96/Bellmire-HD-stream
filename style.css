@@ -370,7 +370,8 @@ ol.board { list-style: none; margin: 0; padding: 0; }
 
 /* ======================================================= HEROES */
 #heroes .find { margin-bottom: 11px; }
-.heroes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; align-items: start; }
+/* H32 follow-up: columns come from the STAGE's width, not the viewport's - the rail and chat take ~540px, so a viewport breakpoint squeezed cards to ~245px (name stacked letter by letter, AC overlapping the class line) */
 details.hero { background: #f2e2bd; border: 1px solid var(--edge-2); border-radius: 8px; }
 details.hero[open] { background: var(--parch-hi); border-color: var(--edge); }
 details.hero > summary {
@@ -386,8 +387,8 @@ details.hero > summary::-webkit-details-marker { display: none; }
 .hid { min-width: 0; }
 .hname { display: block; font-weight: 700; font-size: 1.08rem; color: var(--gold-dk); overflow-wrap: break-word; }
 /* the class line and the AC/HP pair sit on one row; the class line wraps, the pair stays put */
-.hmeta { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 1px; }
-.hwhat { color: var(--ink-soft); font-size: .88rem; min-width: 0; }
+.hmeta { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; margin-top: 1px; }
+.hwhat { color: var(--ink-soft); font-size: .88rem; min-width: 0; flex: 1 1 9em; }
 .htitle { display: block; font-style: italic; color: var(--teal-ink); font-size: .86rem; margin-top: 1px; }
 .hquick { flex: none; display: inline-flex; gap: 4px; align-items: baseline; color: var(--ink-soft); font-size: .8rem; white-space: nowrap; }
 .hquick .hq { text-transform: uppercase; letter-spacing: .04em; }
@@ -627,14 +628,12 @@ footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: c
 @media (min-width: 760px) {
   .wrap { padding: 22px 22px 52px; }
   nav { margin: 0 0 16px; border-radius: 999px; border: 1px solid rgba(198,146,47,.14); }
-  .heroes { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .stats { grid-template-columns: repeat(6, 1fr); }
   .duo { grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
   .duo .plain { margin-top: 0; }
   ol.chron { grid-template-columns: 1fr 1fr; }
   .cmds { grid-template-columns: repeat(2, 1fr); align-items: start; }
 }
-@media (min-width: 1040px) { .heroes { grid-template-columns: repeat(3, 1fr); } }
 
 /* a Twitch panel is ~318px: survive 320 without horizontal scroll (web/NOTES.md) */
 @media (max-width: 460px) {
@@ -756,9 +755,10 @@ html.overlay .title { font-size: 1.2rem; }
 
 /* ---- H3: deepened hero sheet ---- */
 /* class crest on the sigil: initials in a class-tinted ring + the calling's glyph */
-.hsigil { position: relative; }
-.hcrest { position: absolute; right: -5px; bottom: -5px; width: 1.5em; height: 1.5em; border-radius: 50%; display: grid; place-items: center; background: var(--parch-hi); border: 1.5px solid var(--edge-2); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.hcrest .ic { width: .95em; height: .95em; color: var(--teal-ink); }
+/* initials ride the top-left, the calling badge sits clear on the bottom-right corner: it used to cover the 2nd initial ("PI" read "PL") */
+.hsigil { position: relative; width: 2.7em; height: 2.7em; padding: 0 .3em .32em 0; line-height: 1; }
+.hcrest { position: absolute; right: -7px; bottom: -7px; width: 1.2em; height: 1.2em; border-radius: 50%; display: grid; place-items: center; background: var(--parch-hi); border: 1.5px solid var(--edge-2); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.hcrest .ic { width: .78em; height: .78em; color: var(--teal-ink); }
 .hsigil.cls-arcane { border-color: #6a4e9e; } .hsigil.cls-arcane .hcrest .ic { color: #6a4e9e; }
 .hsigil.cls-ranged { border-color: #3f6b33; } .hsigil.cls-ranged .hcrest .ic { color: #3f6b33; }
 .hsigil.cls-blunt  { border-color: var(--bad); } .hsigil.cls-blunt .hcrest .ic { color: var(--bad); }
@@ -1101,9 +1101,9 @@ ol.ladder { list-style: none; margin: 0; padding: 0; }
    Parchment and ink; teal for the one accent, gold restrained. A field the town does not
    publish is a dashed, quiet cell - an honest gap, never a zero. */
 .charsheet { gap: 11px; }
-.charsheet .sid { display: flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 2px solid var(--edge-2); }
+.charsheet .sid { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-bottom: 9px; border-bottom: 2px solid var(--edge-2); }
 .charsheet .sid .pinbtn { margin-left: auto; flex: none; }
-.charsheet .swho { min-width: 0; flex: 1 1 auto; }
+.charsheet .swho { min-width: 0; flex: 1 1 9em; }
 .charsheet .sname { font-size: 1.28rem; font-weight: 700; color: var(--ink); line-height: 1.15; overflow-wrap: anywhere; }
 .charsheet .stitle { font-size: .95rem; font-style: italic; color: var(--ink-red); }
 .charsheet .scall { font-size: .9rem; color: var(--ink-soft); }
@@ -1796,3 +1796,8 @@ html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }
   html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar { display: block; height: 5px; }
   html:not(.overlay):not(.watch) .stage-top nav::-webkit-scrollbar-thumb { background: rgba(233,214,168,.4); border-radius: 5px; }
 }
+/* "Sells up to" tier word: it is a <b>, which has no border, so the generic .rar-* rule (border-left-color only) painted nothing - measured 18 Nov. Underline it in the rung colour (frame, not text colour, so the white rung still reads on parchment). junk/starting/common stay bare. */
+.shop-sells b[class*="rar-"] { border-bottom: 2px solid transparent; padding-bottom: 1px; }
+.shop-sells b.rar-uncommon { border-bottom-color: var(--rar-uncommon); box-shadow: 0 1px 0 rgba(42,28,16,.6); } .shop-sells b.rar-rare { border-bottom-color: var(--rar-rare); }
+.shop-sells b.rar-very-rare, .shop-sells b.rar-epic { border-bottom-color: var(--rar-very-rare); } .shop-sells b.rar-legendary { border-bottom-color: var(--rar-legendary); }
+.shop-sells b.rar-artifact { border-bottom-color: var(--rar-artifact); }

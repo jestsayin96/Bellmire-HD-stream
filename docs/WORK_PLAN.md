@@ -1,3 +1,98 @@
+## TAKE THIS NEXT - written 2026-11-19 17:2x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 16:58 CT FIRING OF 19 NOV, DELIVERED LATE AND ON PURPOSE. The whole fleet was out for
+~19.5 hours - Mr. E, live at 17:1x CT, verbatim: "we ran out of usage yesterday . but we are back
+now" - and then all seven tasks were flushed into the SAME SECOND at 17:01:0x CT. On top of that
+the Blender bridge was closed until Mr. E opened it at 17:1x. So: THE :07/:34/:45/:52 WINDOWS DID
+NOT EXIST IN THE 17:0x HOUR AND NO LANE IS CHARGED FOR ANYTHING IN THAT HOUR'S LOCK LOG. The
+17:0x stand-downs by art and the chat bot were CORRECT BEHAVIOUR on a dead bridge and are not
+failures. The bridge is UP as of 17:18 CT - git and Godot both work again.
+A STANDING NOTE FOR ALL SIX LANES, LEARNED THE HARD WAY THIS HOUR: if execute_blender_code answers
+"Cannot connect to Blender at localhost:9876", you have NO GODOT AND NO GIT. Do NOT substitute
+device_bash for git. The Team Lead red-proved it at 17:07 CT in a throwaway repo: the FIRST commit
+returned rc=0 but could not unlink .git/HEAD.lock, and the SECOND died with "cannot lock ref
+'HEAD' ... File exists". One commit and the repo is wedged. Write your work up, leave the tree
+alone, carry the commit to your next firing. A stand-down in writing IS the delivery.
+
+1. GAME BUILD - S46b TICKED, AND I LOOKED AT THE PICTURE BEFORE I TICKED IT.
+   The artifact tier no longer renders white. I did not take the claim: I parsed the glTF JSON
+   chunk of all seven _Golden .glb myself and every one now carries a real baseColorFactor -
+   Golden [0.4672,0.3365,0.0589,1], LightGold [0.7874,0.6773,0.1896,1], plus the wood and steel
+   ramps. THE RED PROOF: the SAME files on the pre-fix ref have pbrMetallicRoughness {} on every
+   material - empty, so glTF's [1,1,1,1] default applied. The fault reproduces on the old file and
+   is gone on the new one, which is what makes this a tick and not a screenshot.
+   THEN I OPENED renders/cycles/s46/s46_gold_plain.png AND LOOKED. All seven stand in a row and all
+   seven are GOLD - sword, greatsword, dagger, small axe, double axe, hammer, bow - with dark wood
+   and red-wrapped grips. Nothing is white. The 21:0x row is answered in full and hazard (a), the
+   false "materials unchanged" provenance line, went with it.
+   ONE THING THE NUMBERS DID NOT SAY AND THE PICTURE DOES, AND IT IS A NOTE, NOT A BLOCK: the bow
+   reads as two bare gold limbs - I cannot see a string in that render. bow_golden is the one file
+   whose third material is literally named "White" at [0.8,0.8,0.8,1], and at that scale against
+   the grey backdrop it may simply be invisible rather than missing. The 21:0x fit row said the
+   string "reads as a line in front of the body" at close range, so I am NOT calling it broken.
+   NEXT: when you next have the lock anyway, one close render of bow_golden to settle whether the
+   string is there. If it is, say so and the row dies. Then the next Phase 2 system in Mr. E's
+   order. Nothing else is owed back on S45/S46.
+
+2. CONTENT - C-124 TICKED, ALL FOUR COUNTS RE-DONE BY ME.
+   I loaded data/lore_lines.json on both refs and diffed the array lengths rather than reading your
+   summary: descend 315->335 (+20), cleared 315->335 (+20), epitaphs 507->537 (+30), misfire 92->104
+   (+12). All four exact. Every one of those four pools is on the CORRECTED proven-live list in the
+   21:0x row, so all 82 lines reach a viewer.
+   Your new _note_c124 is correct and stays. The note keys are now 25 of the 40 zero-hit keys in the
+   whole house and every one of them is accounted for; nobody is to wire them and you are not to
+   stop writing them.
+   NEXT: C-125, full rate, into the corrected live list.
+
+3. ART - NOTHING TO TICK AND THAT IS NOT A FAULT. Your 17:0x firing met a dead bridge and you stood
+   down in writing, which is exactly right. The bridge is up now.
+   NEXT: first, push anything sitting uncommitted in W5 - a body in your worktree is invisible to
+   every other lane and to me, and it has nearly cost a lane a wasted cycle before. Then minibosses
+   at full rate; you need no lock until fit. Measure the count off tools/art/minibosses.py, never
+   off a number written in a prompt or in this plan.
+
+4. HUB - YOUR 17:0x STANDING CHECK IS TICKED. I checked the claim rather than taking it: your two
+   commits touch PROGRESS.md and docs/WORK_PLAN.md and NOTHING under web/, so "web/ identical" is
+   true. You made no READY TO PUBLISH claim, so the publish gate was not owed and I did not run one.
+   MEASURED THIS HOUR, SO NOBODY COPIES A STALE SHA: published is origin/gh-pages ae1a483 (publish 4,
+   18 Nov 19:02 CT - the tier-underline fix IS live). origin/hub:web e4ec882 differs from
+   origin/gh-pages^{tree} 656eb1b by EXACTLY ONE FILE: NOTES.md, +3/-1. Nothing a viewer can see is
+   unpublished. Do not publish; it is not yours.
+   NEXT: THE LORE_FROZEN REFRESH, row 4 of the 21:0x block, is still open and it is still the most
+   useful thing you own. web/app.js pins LORE_FROZEN at LORE_SRC_SHA "1669c1b" / 2026-11-14 and
+   nothing in the repo regenerates it, so content's 30 town_life lines - and everything written
+   since the 14th - stall behind it. HUB_SECURITY.md:429 names an "H12 extractor" that does not
+   exist. Build the refresh, keep it inert and offline, and do not touch the CSP or the el()-only
+   rule doing it.
+
+5. CHAT BOT - NOTHING OWED AND NOTHING TO TICK THIS HOUR. B62 is already ticked: the authorised bare
+   parse gate ran, the S44 guard held at town.gd:346/348/368, and all three proofs the row demanded
+   were measured. Your 17:0x firing met the dead bridge and stood down in writing - correct.
+   NEXT: nothing is queued on you. With the lock free you may re-run your own battery on the merged
+   tree if you want it green on main, or audit your own shipped work for a defect. Do not invent an
+   item and do not pull a Phase 2 system early.
+
+6. HUD - THE RARITY-HUE HALF OF SYSTEM 2. IT IS STILL THE MOST VALUABLE OPEN ITEM IN THE HOUSE AND
+   IT IS STILL UNSTARTED. The engine half of System 2 is closed and written down; the supervisor
+   confirmed on 17 Nov at 11:40 that the hue half is yours. It has now been the lead row for two
+   days and nothing has moved on it. Most of it - the ladder, the tokens, where the hue is applied
+   in the HUD's own files - needs no Godot at all. Split it and land the part that does not need
+   the lock, then gate the part that does inside your :52-:07 window.
+   The L31 remainder (status-effect icons) is NOT yours; it lives in delve.gd, monster.gd,
+   party_frames.gd and boss_bar.gd and stays with the game build.
+
+FOR THE SUPERVISOR:
+  (a) THREE TICKS TAKEN THIS HOUR, all on my own measurement: game build S46b (glTF parsed on both
+      refs + the render looked at), content C-124 (four counts re-done), hub standing check (claim
+      checked against its own diff). main is merged and pushed and the plan is synced to all six
+      lanes; nothing is waiting on you to unblock it.
+  (b) NO PUBLISH IS WORTH AUTHORISING RIGHT NOW. The entire unpublished delta is NOTES.md +3/-1 -
+      no index.html, no app.js, no style.css. MY RECOMMENDATION: let it ride until the hub ships
+      something under web/, which the LORE_FROZEN refresh in row 4 would be.
+  (c) FOR YOUR AWARENESS, NO ACTION NEEDED: the ~19.5-hour gap was Mr. E's usage limit, in his own
+      words at 17:1x CT, not a scheduler fault and not a lane failure. All seven tasks are enabled
+      and already back on the normal grid. I am not resetting the clean-hour count on any lane for
+      the 17:0x hour, and I am not advancing it either - there were no windows in it to count.
+
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
 

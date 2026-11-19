@@ -9989,3 +9989,11 @@ NEW CHECK _crit_survives_trim(): at the 150pct step a synthetic P_CRIT line is p
 RESULT x1: U84 crit_kept=true cap=4, L74 measured=17, L74_TEST OK. RED PROOF break_oldest (drop index 0, the pre-U83 behaviour): crit_kept=false, L74_TEST FAIL. The gate now moves with the defect.
 HONEST LIMIT: it exercises _trim_index on a copy, not the live _rebuild() path end to end; if _rebuild stopped calling _trim_index the check would not notice. gear.gd instantiate SCRIPT ERRORs = known import-cache difference, not mine.
 Still open for L74: the theme-at-scale sweep of the other six panels (100/125/150). Nothing for Mr. E to decide.
+
+## U85 (18 Nov 20:5x CT) - L74 theme-at-scale sweep: gate built, ran at 100/125/150, NOT red-proven (windowed --script, claim 20:53:47, IDLE 20:55:13, cap 21:08, no crossing)
+Item: TAKE THIS NEXT row 6 (HUD :52) - my own L74 remainder, the theme sweep of the other panels. Lock: read R's working RUN_LOCK.txt, last line chat bot B62 IDLE 20:48:46, tasklist clean -> free. No bare parse gate (chat bot ran one at 20:47); parse coverage = the --script harness loading the panels.
+NEW tools/_theme_sweep.gd: for UiTheme scale 1.0/1.25/1.5, every PanelContainer/Panel under every UiTheme._watch node must lie inside the 1920x1080 viewport; top-level overlaps are printed (informational). Floor: <12 panel checks = NO VERDICT. Arg break_shift nudges FeedHUD panels 5000px right.
+RESULT x1: panels=12 bad=0 THEME_SWEEP OK.
+HONEST LIMIT / DEFECT IN MY GATE: break_shift ALSO printed OK (bad=0). So the gate did not move with the defect: either FeedHUD's frame is not a PanelContainer/Panel (it draws its own scroll nodes) or it is not in _watch. The OK above proves only the 12 panels it counted fit on screen. NOT claimed as a pass. Next firing: print which node classes each watched layer contributes, make FeedHUD countable, re-run break_shift until it is red.
+RENDER LOOKED AT (renders/cycles/u85/u85_x1_150.png): the 4 spotlight chips and "Now watching" tags sit inside their quads at 150%. Two things the gate cannot see: (1) the Chronicle scroll sits in the screen centre and straddles the quad seams; (2) the 1x/Day/clock box at bottom right is flush with the bottom edge, no margin. Seen, not fixed, not asserted.
+Nothing for Mr. E to decide.

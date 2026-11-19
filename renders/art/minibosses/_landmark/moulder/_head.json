@@ -1,0 +1,41 @@
+{
+  "key": "moulder",
+  "landmark": "head",
+  "at": [
+    -0.41,
+    -0.9,
+    1.64
+  ],
+  "r": 0.32,
+  "parts_selected": 5,
+  "views": {
+    "front": {
+      "vis_px": 7622,
+      "body_px": 280663,
+      "vis_frac": 0.0272,
+      "sep": 0.0012,
+      "pairs": 213,
+      "red": true
+    },
+    "three_quarter": {
+      "vis_px": 6441,
+      "body_px": 221503,
+      "vis_frac": 0.0291,
+      "sep": 0.0965,
+      "pairs": 115,
+      "red": false
+    },
+    "side": {
+      "vis_px": 8200,
+      "body_px": 222808,
+      "vis_frac": 0.0368,
+      "sep": 0.0174,
+      "pairs": 76,
+      "red": true
+    }
+  },
+  "red": [
+    "front: head is visible (7622 px) but does NOT SEPARATE - median luminance step across its boundary is 0.001",
+    "side: head is visible (8200 px) but does NOT SEPARATE - median luminance step across its boundary is 0.017"
+  ]
+}

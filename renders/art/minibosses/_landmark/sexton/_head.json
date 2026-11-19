@@ -1,0 +1,38 @@
+{
+  "key": "sexton",
+  "landmark": "head",
+  "at": [
+    0.0,
+    -0.42,
+    1.65
+  ],
+  "r": 0.34,
+  "parts_selected": 4,
+  "views": {
+    "front": {
+      "vis_px": 11103,
+      "body_px": 223567,
+      "vis_frac": 0.0497,
+      "sep": 0.0952,
+      "pairs": 341,
+      "red": false
+    },
+    "three_quarter": {
+      "vis_px": 11679,
+      "body_px": 234983,
+      "vis_frac": 0.0497,
+      "sep": 0.0947,
+      "pairs": 285,
+      "red": false
+    },
+    "side": {
+      "vis_px": 10595,
+      "body_px": 151282,
+      "vis_frac": 0.07,
+      "sep": 0.2022,
+      "pairs": 85,
+      "red": false
+    }
+  },
+  "red": []
+}

@@ -1,0 +1,40 @@
+{
+  "key": "sower",
+  "landmark": "casthand",
+  "at": [
+    -1.2,
+    -0.34,
+    1.02
+  ],
+  "r": 0.42,
+  "parts_selected": 3,
+  "views": {
+    "front": {
+      "vis_px": 5656,
+      "body_px": 76198,
+      "vis_frac": 0.0742,
+      "sep": 0.1167,
+      "pairs": 72,
+      "red": false
+    },
+    "three_quarter": {
+      "vis_px": 3633,
+      "body_px": 77401,
+      "vis_frac": 0.0469,
+      "sep": 0.0036,
+      "pairs": 64,
+      "red": true
+    },
+    "side": {
+      "vis_px": 0,
+      "body_px": 192559,
+      "sep": null,
+      "pairs": 0,
+      "red": true
+    }
+  },
+  "red": [
+    "three_quarter: casthand is visible (3633 px) but does NOT SEPARATE - median luminance step across its boundary is 0.004",
+    "side: casthand is NOT VISIBLE - zero pixels moved"
+  ]
+}

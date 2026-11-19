@@ -343,23 +343,29 @@ func _ready() -> void:
         var eye := RtsCamera.new()
         add_child(eye)
         eye.call_deferred("setup", self)
-        # live Twitch chat, read only (user://twitch.cfg: channel, enabled, ignore)
-        var tw := TwitchChat.new()
-        tw.name = "TwitchChat"
-        add_child(tw)
-        tw.call_deferred("setup", self)
-        # Twitch phase 2 (T1): bits, subs, follows, channel points, chat replies as the bot
-        # (tokens in user://; [twitch] eventsub=false in user://twitch.cfg turns it off)
-        var es := TwitchEventSub.new()
-        es.name = "TwitchEventSub"
-        add_child(es)
-        es.call_deferred("setup", self)
-        # W1a: the viewer hub's snapshot - one Supabase row every 60 s (key in
-        # user://supabase.json; no key = off, quietly)
-        var snap := SnapshotPublisher.new()
-        snap.name = "SnapshotPublisher"
-        add_child(snap)
-        snap.call_deferred("setup", self)
+        # S44 parse-gate guard: JESTS_NO_TWITCH=1 skips both Twitch nodes AND the hub snapshot, so a bare
+        # `--headless --quit-after` gate can never read or speak in Mr. E's channel
+        if OS.get_environment("JESTS_NO_TWITCH") == "":
+            # live Twitch chat, read only (user://twitch.cfg: channel, enabled, ignore)
+            var tw := TwitchChat.new()
+            tw.name = "TwitchChat"
+            add_child(tw)
+            tw.call_deferred("setup", self)
+            # Twitch phase 2 (T1): bits, subs, follows, channel points, chat replies as the bot
+            # (tokens in user://; [twitch] eventsub=false in user://twitch.cfg turns it off)
+            var es := TwitchEventSub.new()
+            es.name = "TwitchEventSub"
+            add_child(es)
+            es.call_deferred("setup", self)
+            # W1a: the viewer hub's snapshot - one Supabase row every 60 s (key in
+            # user://supabase.json; no key = off, quietly). Under the same guard (S43 hazard e):
+            # a gate must never post a 300-frame town to the live hub.
+            var snap := SnapshotPublisher.new()
+            snap.name = "SnapshotPublisher"
+            add_child(snap)
+            snap.call_deferred("setup", self)
+        else:
+            print("JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started")
         var board := LeaderboardPanel.new()
         add_child(board)
         board.call_deferred("setup", roster)

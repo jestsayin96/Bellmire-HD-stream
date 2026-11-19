@@ -10,20 +10,26 @@
   "parts_selected": 10,
   "views": {
     "front": {
-      "vis_px": 15497,
+      "vis_px": 15513,
       "body_px": 76198,
-      "vis_frac": 0.2034,
-      "sep": 0.0386,
-      "pairs": 576,
-      "red": true
+      "vis_frac": 0.2036,
+      "sep": 0.0504,
+      "pairs": 575,
+      "sep_local": 0.1503,
+      "frac_flat": 0.1649,
+      "touch": 576,
+      "red": false
     },
     "three_quarter": {
-      "vis_px": 16618,
+      "vis_px": 16632,
       "body_px": 77401,
-      "vis_frac": 0.2147,
-      "sep": 0.0191,
-      "pairs": 497,
-      "red": true
+      "vis_frac": 0.2149,
+      "sep": 0.0103,
+      "pairs": 495,
+      "sep_local": 0.1717,
+      "frac_flat": 0.0852,
+      "touch": 493,
+      "red": false
     },
     "side": {
       "vis_px": 44511,
@@ -31,11 +37,11 @@
       "vis_frac": 0.2312,
       "sep": 0.0678,
       "pairs": 434,
+      "sep_local": 0.1043,
+      "frac_flat": 0.3088,
+      "touch": 434,
       "red": false
     }
   },
-  "red": [
-    "front: head is visible (15497 px) but does NOT SEPARATE - median luminance step across its boundary is 0.039",
-    "three_quarter: head is visible (16618 px) but does NOT SEPARATE - median luminance step across its boundary is 0.019"
-  ]
+  "red": []
 }

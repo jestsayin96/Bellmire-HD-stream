@@ -1,0 +1,47 @@
+{
+  "key": "sower",
+  "landmark": "hopper",
+  "at": [
+    -0.32,
+    -0.34,
+    1.12
+  ],
+  "r": 0.3,
+  "parts_selected": 4,
+  "views": {
+    "front": {
+      "vis_px": 17149,
+      "body_px": 76198,
+      "vis_frac": 0.2251,
+      "sep": 0.043,
+      "pairs": 426,
+      "sep_local": 0.1415,
+      "frac_flat": 0.1948,
+      "touch": 421,
+      "red": false
+    },
+    "three_quarter": {
+      "vis_px": 16899,
+      "body_px": 77401,
+      "vis_frac": 0.2183,
+      "sep": 0.039,
+      "pairs": 423,
+      "sep_local": 0.1513,
+      "frac_flat": 0.1504,
+      "touch": 419,
+      "red": false
+    },
+    "side": {
+      "vis_px": 26273,
+      "body_px": 192559,
+      "vis_frac": 0.1364,
+      "sep": 0.0871,
+      "pairs": 481,
+      "sep_local": 0.1207,
+      "frac_flat": 0.2642,
+      "touch": 477,
+      "red": false
+    }
+  },
+  "red": []
+}

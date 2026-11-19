@@ -8464,6 +8464,22 @@ def moulder():
           rot=(0.22, 0.0, 0.0))
     # the head, and the eyes are the only light ON him
     P.add(L.sphere(0.165, 0.185, 0.175, 13, 9), 'body', loc=(HX + 0.05, HY - 0.38, 1.64))
+    # *** THE NECK CLOTH - 18 Nov 20:5x CT, AND IT IS A MEASURED FAULT, NOT A
+    # *** DECORATION. The landmark test named "moulder head" is aimed at THIS
+    # man's head, not at the cast's pale egg - I checked the mask picture
+    # rather than the row label, and _head_front_mask.png is the little
+    # foundryman. His head, cap and the apron and shoulders under it are ALL
+    # 'body', the darkest material in this register (lum 0.072), so the head
+    # had no lower boundary at all: median local step 0.033 front, 0.036 on
+    # the three_quarter, with 58% and 60% of the outline flatter than the
+    # threshold. In the picture he is a black blob with two orange eyes.
+    # THE STEP GOES WHERE THE BOUNDARY IS. 'dark' on this body is the rammed
+    # sand - grey-buff, lum 0.243 - and a man who has been ramming sand all
+    # shift has it on his neck cloth. It is what the job wants and it is the
+    # only material on him that can carry a step against his own soot.
+    # NOT A HAT: a cap would separate from the SKY, which was never the fault.
+    P.add(aim(L.cone(0.215, 0.145, 0.105, 14), (HX + 0.045, HY - 0.32, 1.46),
+              (0.0, -0.35, 1.0)), 'dark')
     P.add(L.box(0.33, 0.30, 0.055), 'body', loc=(HX + 0.05, HY - 0.40, 1.76))
     # PASS 2, FORM CHANGE 3. At pass 1 these were r 0.030 on a 2.90 m body -
     # about ten pixels at register framing - and on both renders the man had no

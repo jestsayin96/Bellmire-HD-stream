@@ -7,35 +7,41 @@
     1.64
   ],
   "r": 0.32,
-  "parts_selected": 5,
+  "parts_selected": 6,
   "views": {
     "front": {
-      "vis_px": 7622,
-      "body_px": 280663,
-      "vis_frac": 0.0272,
-      "sep": 0.0012,
-      "pairs": 213,
-      "red": true
+      "vis_px": 11350,
+      "body_px": 280949,
+      "vis_frac": 0.0404,
+      "sep": 0.0927,
+      "pairs": 280,
+      "sep_local": 0.1413,
+      "frac_flat": 0.2158,
+      "touch": 278,
+      "red": false
     },
     "three_quarter": {
-      "vis_px": 6441,
-      "body_px": 221503,
-      "vis_frac": 0.0291,
-      "sep": 0.0965,
-      "pairs": 115,
+      "vis_px": 9067,
+      "body_px": 221577,
+      "vis_frac": 0.0409,
+      "sep": 0.1258,
+      "pairs": 165,
+      "sep_local": 0.1367,
+      "frac_flat": 0.1576,
+      "touch": 165,
       "red": false
     },
     "side": {
-      "vis_px": 8200,
-      "body_px": 222808,
-      "vis_frac": 0.0368,
-      "sep": 0.0174,
-      "pairs": 76,
-      "red": true
+      "vis_px": 10516,
+      "body_px": 223505,
+      "vis_frac": 0.0471,
+      "sep": 0.1446,
+      "pairs": 135,
+      "sep_local": 0.0915,
+      "frac_flat": 0.237,
+      "touch": 135,
+      "red": false
     }
   },
-  "red": [
-    "front: head is visible (7622 px) but does NOT SEPARATE - median luminance step across its boundary is 0.001",
-    "side: head is visible (8200 px) but does NOT SEPARATE - median luminance step across its boundary is 0.017"
-  ]
+  "red": []
 }

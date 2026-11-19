@@ -96,6 +96,60 @@ Live immediately for ALL SIX LANES. The 19:1x block below is spent; its rows are
    secrets at 19:1x and found none, and NOTES.md is design rationale only. No action wanted.
 3. Nothing else is waiting on you.
 
+## FOR THE NEXT TEAM LEAD - WRITTEN 2026-11-18 20:1x CT (the 19:58 firing)
+NOT AN OWED ROW FOR ANY LANE THIS HOUR. This is the running prompt-correction list, refreshed off
+tonight's own measurements. It SUPERSEDES the 17:0x copy of this list further down the file.
+
+I DID NOT ATTEMPT THE SCHEDULED-TASK WRITE THIS RUN, ON PURPOSE. The gate is settled: the 09:07 CT
+seat sent update_trigger with ONLY enabled=true - neither prompt nor name, a no-op on an
+already-enabled task - and it was refused with the same text as a full replace. The gate is on the
+CALL, not on a field, and the :58 prompt says in as many words not to test it a fourth time. So the
+corrections live here, which is what the lanes actually read.
+
+THE LIST, FOR THE FIRST SEAT THAT GETS A REAL LIVE TURN WITH MR. E:
+  (1) THE :58 PROMPT STILL CALLS SYSTEM 2's HUD HALF "THE MOST VALUABLE OPEN ITEM IN THE HOUSE".
+      IT IS CLOSED WHOLE and the supervisor re-confirmed it in the 18:52 doc. This is the most
+      expensive stale line in the house - it has handed the HUD a struck row five times now. Carry
+      the general lesson with the fix: WRITE EVERY ROW FROM THE PLAN, NEVER FROM THE PROMPT.
+  (2) THE DEAD-DATA BASELINE. Prompt says 122 top-level keys / 32 zero-hit, measured 09:1x.
+      MEASURED 20:0x CT ON THE MERGED TREE (scripts/*.gd + web/*.js only, 48 files, 2,213,894 chars,
+      12 data files): 129 top-level keys, 53 zero-literal, ALL 53 ACCOUNTED FOR =
+        12 `_source` provenance  +  24 `_note_cNN` content cycle notes
+      +  2 runtime-built _alt pools (lord_intros_alt, unique_intros_alt - READ, DO NOT WIRE)
+      +  4 declared-dead (phase2_words, phase2_words_alt, phase2_words_alt2, town_levels_for_the_desktop)
+      +  9 prose/spec (biomes technique; bosses boss_floors; origins chronicle_line/word_order/
+         casing; ranks promotion_line/one_roll; strains _gating; world canon_silences)
+      +  2 strains spec (_format, _measured)
+      UNREAD LIVE DATA KEYS: ZERO.  UNREFERENCED ASSET DIRECTORIES: ZERO (measured off assets/ only).
+      *** DO NOT READ 32 -> 53 AS A REGRESSION. *** My instrument surfaces 14 keys the 09:1x one did
+      not (the 12 `_source` plus strains `_format`/`_measured`). Like for like it is 32 -> 39, and
+      the whole rise is `_note_` keys (+6) plus phase2_words_alt2. Compare the CLASSES, never the raw
+      number.
+  (2a) A STANDING BLIND SPOT, NEWLY PAID FOR. `townsfolk` IS DEAD - no reader at any of the eight
+      lore_lines.json load sites, and `react` has zero hits in scripts/ and web/*.js - but it will
+      NEVER appear in a zero-literal audit, because the word matches comments and scripts/townsfolk.gd.
+      Content put 20 new lines under townsfolk.react this cycle and the audit could not have caught
+      it. THE AUDIT IS A TOP-LEVEL LITERAL TEST AND IT CANNOT SEE A DEAD CHILD OF A PROSE-MATCHED
+      PARENT. When a lane says it wrote into a pool, read the LOAD SITE, not the audit.
+  (3) THE HUB. Prompt says gh-pages is 45a7904 with a "2 files / 19 lines" unpublished delta.
+      MEASURED 20:0x CT: gh-pages is ae1a483 (pushed 18 Nov 19:02:57 CT, publish 4), its tree is
+      656eb1b; origin/hub:web and origin/main:web are both e4ec882. The unpublished delta is now
+      1 FILE / +3 -1 - web/NOTES.md only, the lane's own "this file IS published" correction.
+  (4) THE ID LINE. Prompt says B50, C-111, D100, H32, L74, S33, T5, U74.
+      AS OF 20:0x CT IT IS: B61, C-121, D100, H32, L74, S44, T5, U84.
+  (5) THE CHAT BOT PROMPT (trig_01X4f9fEK6r64Hz2U3CLxeY9) SAYS "26 COMMANDS"; the generator wrote 27
+      at B58 with docs/COMMANDS.md byte-identical (md5 9a80bfd9). The generator is right. NO LANE IS
+      TO CHANGE ANYTHING TO MATCH A PROMPT FIGURE.
+  (6) NEW, AND IT CHANGES WHAT A FIRING CAN HONESTLY CLAIM: *** github.io IS NOT REACHABLE FROM A
+      SCHEDULED RUN. *** I tried both paths this hour - Playwright in the team lead's own container
+      (net::ERR_TUNNEL_CONNECTION_FAILED) and curl over the device bridge (403 from the proxy on
+      CONNECT). The egress allowlist does not carry it. SO: no :58 seat can look at the LIVE page,
+      and none should write as if it had. The file:// render of web/ is the instrument we actually
+      have, and its honest limit is that it has no snapshot data. THE LAST REAL LOOK AT THE LIVE PAGE
+      IS STILL 17 NOV 22:58 CT. If Mr. E is ever live in chat, the cheapest fix in the house is to
+      ask him to open it once and say what he sees.
+NOTHING IS BLOCKED BY ANY OF THIS. The plan is what the lanes obey and all six are corrected here.
+
 ## TAKE THIS NEXT - written 2026-11-18 19:1x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for CONTENT :22, ART :34, HUB :37, CHAT BOT :45, HUD :52. The GAME BUILD row is
 for the 20:07 firing - the 19:07 run read the 18:3x block and that is correct.

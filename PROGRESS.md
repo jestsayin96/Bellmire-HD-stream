@@ -11609,3 +11609,56 @@ LOCK: claim 19:48:27, cap 20:12, declared finish 19:51, IDLE 19:49:5x. No crossi
 19:52.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## B62 - 2026-11-18 20:46 CT - THE BARE PARSE GATE RAN. FIRST TIME IN THIS LANE, AND THE GUARD HELD.
+
+ITEM: the team lead's 20:0x CHAT BOT row. Merge origin/main into `chatbot`, confirm the S44 guard is
+in MY tree, then run the bare parse gate with JESTS_NO_TWITCH=1 and PROVE the guard before trusting
+it. This is the gate this lane had skipped honestly every hour since 17:47.
+
+MERGE: `git merge origin/main` into chatbot, fast-forward material, 80 files / +1564 -147, head
+7d81483. Guard confirmed IN MY TREE by findstr, not by report: scripts/town.gd:346 (comment), :348
+(`if OS.get_environment("JESTS_NO_TWITCH") == "":`), :368 (the else print). I read the whole block:
+it wraps TwitchChat, TwitchEventSub AND SnapshotPublisher, and it sits INSIDE
+`if not OS.get_cmdline_args().has("--script")` - which is exactly why it was needed. A `--script`
+gate never reached that code; a BARE `--headless --quit-after` gate does, and until this guard
+existed there was nothing between my gate and Mr. E's channel.
+
+THE GATE: `--headless --path W6 --quit-after 300`, NO --script, JESTS_NO_TWITCH=1. rc 0, 26.8 s.
+130 lines of output, 0 ERROR, 0 SCRIPT ERROR, 24 WARNING (all pre-existing `invalid UID` material
+warnings out of _load_materials at town.gd:826 - not mine, not new).
+
+THE PROOF, THE THREE THINGS THE ROW DEMANDED, EACH MEASURED ON THE LOG AND NOT ASSUMED:
+  (a) THE SKIP LINE PRINTED, and it is the THIRD line of the whole run, ahead of everything:
+      "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started".
+  (b) NO JOIN. Case-insensitive sweep for JOIN / PASS / oauth / irc.chat / tmi.twitch: ZERO hits.
+  (c) NO TOKEN VALIDATE: `token|validate` ZERO hits. NO SUBSCRIPTIONS: `subscri|eventsub|websocket`
+      matched ONE line and it is the skip line itself. Same for `TwitchChat|SnapshotPublisher|
+      snapshot|supabase` - one hit, the skip line. The hub snapshot did not fire either, so S43
+      hazard (e) is covered on this path too.
+  So the guard took. If any of the three had appeared I was to stop and not re-run; none did.
+
+BATTERY RE-RUN ON THE MERGED TREE, because 52 commits landed in my tree and a green gate from
+before a merge proves nothing after it. All `--script`, all with JESTS_NO_TWITCH=1:
+  TWITCH_PARSE OK (8 checks)       rc 0
+  L14_TEST OK (22 checks)          rc 0  - prints Godot's own "2 resources still in use at exit"
+                                          note at shutdown; the gate's own verdict is OK and no
+                                          ERROR/SCRIPT ERROR line appears. Reporting it, not hiding
+                                          it, and not claiming it is nothing.
+  COMMANDS_DOC OK wrote 27 commands rc 0  - a TRUE NO-OP: docs/COMMANDS.md md5 9a80bfd9 before AND
+                                          after. 27, not the prompt's 26. The generator is right.
+OWNED FILES BYTE-IDENTICAL ACROSS THE WHOLE RUN: chatcmd.gd 72be1e68, commands.json 0ed19140,
+COMMANDS.md 9a80bfd9. This cycle changed no code - it spent its slot on the gate it owed.
+
+SCRATCH: none in the worktree. The one log lives in %TEMP%\_b62_parse.log, off the repo.
+
+W-LIVE: NOTHING, and this is the run where that sentence had teeth. The bare gate boots the live
+wiring path; the guard is the only reason nothing happened. No Twitch connection, no text posted,
+no bits, no cheer, no redemption read or settled, no account or channel state touched.
+
+ENGINE: free on BOTH image names by tasklist at claim 20:46:57 and EMPTY on both at 20:47:56 after
+the last gate. Last lane line before mine was game build IDLE 20:19:43.
+LOCK: claim 20:46:57, cap 21:11, declared finish 20:51, IDLE 20:48. No crossing into the HUD at
+20:52.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.

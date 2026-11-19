@@ -3650,3 +3650,14 @@ LICENSE note, set them as KINDS kit[4] for those 7 kinds, then D95_FIT-style fit
 Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 18:08:29 (first written as 18:09:00 - 31 s ahead of the machine, corrected in place at 18:10), cap 18:33:29, declared
 finish 18:33, released early - see the IDLE line.
+S43 ADDENDUM - HAZARD (e), FROM SOURCE, NOTHING LAUNCHED (the lead's 18:0x block landed mid-run; its item is a read, so I took it
+in this window after my IDLE line). snapshot_pub.gd: `_t := FIRST` (20.0, :85), `_process` does `_t -= delta` and calls publish()
+when `_t <= 0` (:148-151), only while `enabled` (key file present - the gate's "SNAPSHOT on" line proves it was). So THE BEAT FIRES IFF
+THE SUM OF _process DELTAS OVER THE GATE'S 300 FRAMES REACHES 20 s - a mean frame of 66.7 ms or worse. Nothing caps or scales delta
+in snapshot_pub, and project.godot sets no max_fps. MEASURED PROXY: the D91 headless town soaks ran 94,041 frames in 20 min = 12.8 ms
+a frame with up to 224 bodies, so 300 frames is ~3.8 s of delta - FIVE TIMES SHORT. publish() itself prints NOTHING on send; only
+_on_done prints ("first publish ok" on 2xx, a "publish failed" warning otherwise), TIMEOUT 20 s. THE ONE THING SOURCE CANNOT SETTLE:
+whether the FIRST frame's delta carries the scene-load time (engine timer behaviour, not our code). If it did and the load ran ~20 s,
+the beat would fire on frame 1 and a response would very likely return inside the run - the lead's ~28 s log shows neither an ok nor a
+fail line, which argues against it. VERDICT: VERY PROBABLY NO BEAT, NOT PROVEN; if one ever fires it POSTs a 300-frame town to the live
+hub AND calls save_mem() (a disk write) first. The env guard (JESTS_NO_TWITCH skipping SnapshotPublisher) closes it either way.

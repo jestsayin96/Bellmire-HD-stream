@@ -11771,6 +11771,72 @@ account used. Nothing was launched that could have reached a channel.
 
 OWED, UNCHANGED, AND STILL OWED: the second bare parse gate on the merged tree (its delta is
 measured above). It needs the bridge back.
+
+## B64 - 2026-11-19 17:45 CT - THE BRIDGE IS BACK, THE OWED BATTERY RAN GREEN ON THE MERGED TREE, AND MY DRIFT INSTRUMENT WAS BLIND A THIRD TIME
+
+ITEM: the team lead's 17:4x CHAT BOT row - "nothing is queued on you. With the lock free you may
+re-run your own battery on the merged tree (it now carries C-125's 128 new lines), or audit your
+own shipped work." I took both. No code changed this cycle; the three owned files are
+byte-identical to B62/B63 (chatcmd 72be1e68, commands.json 0ed19140, COMMANDS.md 9a80bfd9).
+
+THE BRIDGE IS UP AGAIN. The 17:10 CT NOTICE in RUN_LOCK.txt (bridge refusing localhost:9876) no
+longer holds: execute_blender_code answered on the first call of this run. The mount is still the
+SEPARATE layout B63 found - $HOME/mnt/bellmire-bot and $HOME/mnt/jests-hd-medieval-adventure, NOT
+the joined "hd adventure" path the prompt still names. I did not ask for folder access.
+
+I PUSHED B63 BEFORE TOUCHING ANYTHING ELSE, BECAUSE THE LEAD COULD NOT SEE IT. The 17:4x row says
+"your only unmerged commits are my plan syncs" and credits B62 as the last thing this lane shipped.
+That was true of origin: B63 (185fc836) was committed on 19 Nov at 17:0x and never pushed, because
+the bridge died before the push. A commit nobody can fetch is not a delivery. Order this run:
+merge origin/chatbot (the lead's 17:4x plan sync, 6909c78e, +411 lines of WORK_PLAN) -> merge
+origin/main -> resolve -> push. HEAD on origin/chatbot is now 7538be7a and it carries B63.
+
+THE MERGE CONFLICT WAS PROGRESS.md AND I KEPT BOTH SIDES. Four marker lines stripped, no content
+dropped, no cycle renumbered - the standing rule, applied exactly.
+
+THE BATTERY, ON THE MERGED TREE, UNDER THE LOCK (all three JESTS_NO_TWITCH=1, --headless --script):
+  - TWITCH_PARSE OK (8 checks), rc 0
+  - L14_TEST OK (22 checks), rc 0. Godot's own "ERROR: 2 resources still in use at exit" note
+    printed again and I am REPORTING it rather than hiding it: it is the engine's exit bookkeeping,
+    not a failed check, and it printed identically in B62.
+  - COMMANDS_DOC OK wrote 27 commands as a TRUE no-op: docs/COMMANDS.md md5 9a80bfd9 BEFORE and
+    9a80bfd9 AFTER. The generator still agrees with the committed bytes over the 27-command data.
+This is the C-125 tree: 128 new content lines landed in it since the last green battery, and the
+parse and the L14 nudge table are unaffected by them.
+
+THE DRIFT AUDIT, BOTH DIRECTIONS - AND THE FINDING IS AGAINST MY OWN INSTRUMENT, NOT THE CODE.
+data/commands.json parses (json.load, dict), 27 published commands, "order" has 27 and matches the
+command keys exactly, 24 aliases, every published name and every alias present in COMMANDS.md.
+My first pass reported FIVE published names with no dispatch arm - "commands", "sheet", "stats",
+"spotlight", "watch" - which would have meant a viewer typing !stats off the published doc got
+silence. IT WAS WRONG, AND I CHECKED BEFORE I WROTE IT UP. chatcmd.gd:112 is
+`var verb := canonical(String(parts[0]).to_lower())`: canonical() at :2154 resolves an alias to its
+command, AND a plural, before the match ever runs. Re-run with canonical() in the instrument:
+ZERO unanswered published names, ZERO dispatch arms that do not resolve to a published command.
+Spot-checked the resolver's own path: stats->hero, sheet->hero, commands->help, spotlight->look,
+watch->look, items->inventory, prices->satchel, heroes->hero, delves->delve, dyes->dye.
+THAT IS THE THIRD TIME IN TWO CYCLES THIS LANE'S DRIFT INSTRUMENT HAS FLAGGED ITSELF (B63 caught it
+twice). The pattern is always the same: a naive scan over quoted tokens cannot see a resolver or a
+dict. The lesson is now written down rather than re-learned: ANY drift claim on this file must run
+through canonical() first, or it is measuring nothing.
+THE ONLY ARMS WITH NO PUBLISHED ENTRY ARE THE THREE L17 TEST HOOKS - "testbits", "testsub",
+"testpoints" - and that is correct BY DESIGN, not drift: chatcmd.gd:178 returns "" unless the id
+begins with "local_", so a Twitch viewer can never reach them and they must not be published.
+
+LOCK, UNDER THE YIELD RULE: last line before mine was game build IDLE 17:08:20. Godot verified
+EMPTY on BOTH image names at 17:46:17 and again at 17:47:43. claim 17:47:15, cap (claim+25) 18:14
+computed first, BUT THE BOUNDARY IS THE HUD AT :52 AND I COMPUTED IT FIRST: declared finish 17:51.
+IDLE written at 17:47:43 - 28 seconds of engine, released early, NO crossing into :52. Nothing
+split, nothing carried.
+
+NO TWITCH ANYTHING: no connection, nothing posted, no redemption, no cheer, zero bits, no account
+used. Nothing launched this cycle could reach a channel.
+
+FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and the twitch_reply contract is
+unchanged.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
 ## C-124 (2026-11-18 21:23 CT, content) - descend +20, cleared +20, epitaphs +30, misfire +12
 ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the proven-live list. 82 lines into pools with readers (delve.gd _pick_line descend/cleared; epitaph and misfire readers).
 MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.

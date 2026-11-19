@@ -3681,3 +3681,38 @@ Gates (all run with JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error (bo
 TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/20183 raid_in_solid=0/4008 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2,
 0 SCRIPT ERROR. Godot closed, tasklist empty on both image names. No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 19:08:36, cap 19:33 computed first, declared 19:29, released early - see the IDLE line.
+
+## D-cycle - S45: SYSTEM 6 ARTIFACT TIER - THE SEVEN _Golden MESHES ARE IN THE HAND AT TIER 5, FIT-PROVED ON REAL BODIES. 2026-11-18T20:08-06:00 (game build)
+Row 1 of the lead's 20:0x block ("back to System 6 artifact tier, the S43 path"), as approved in the 18:3x block: licence note
+first, convert the 7 Ultimate-RPG _Golden, set them as KINDS kit[4] for those 7 kinds, fit proof on a real hero body front/side/back.
+HAZARD (e): CLOSED BY S44'S GUARD, NOT RE-MEASURED UNGUARDED. Every Godot process this run had JESTS_NO_TWITCH=1 and both parse runs
+printed only "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started" - zero SNAPSHOT/publish lines. Proving
+whether the beat WOULD fire needs an unguarded gate = the live connection; I will not run that, and the guard makes the question moot.
+(1) CONVERSION: Blender 5.2 BACKGROUND subprocess (the open scene untouched) opened each pack .blend and exported .glb (Y-up,
+    transforms applied) into assets/gear/artifact/: sword_golden, sword_big_golden, dagger_golden, axe_small_golden, axe_double_golden,
+    hammer_double_golden, bow_golden + LICENSE_Quaternius_UltimateRPG_CC0.txt (pack License.txt read: CC0 1.0). ASSET_SOURCES.md:13
+    already carries the pack row. Materials checked in the .blend: Golden (0.47,0.34,0.06), LightGold, DarkSteel, DarkWood, LightWood,
+    base colours unlinked - they export. Bounds (m): sword 2.30, big sword 2.74, dagger 1.39, axe 1.58, double axe 2.15, hammer 2.53,
+    bow 2.17; all built along +Y with the origin in the grip. --headless --import rc 0, 7 .import siblings written.
+(2) WIRING, gear.gd only (bak_s45): const ART; kit[4] -> ART for sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
+    quarterstaff, wand, crossbow, spear, sceptre UNCHANGED. hand_scale ART dagger 0.5, hammer 0.4, rest 0.6. held_rot ART bow (0,0,90):
+    the FIRST render showed the bow lying FLAT along the forearm; the staff's +90 about Z stands the limbs up, string to the archer -
+    LOOKED AT s45_side.png both runs. EDGE_MATS += Golden, LightGold, DarkSteel, so tint_piece no longer washes the metal with the
+    name's stuff word (art's ARTIFACT_GOLD_VS_SCARRED.md: keep the gold, no red tint); the wood grip still takes it.
+(3) FIT PROOF, tools/_s45_artifact.gd (windowed 1080p, from _s16_sword): one hero per kind (knight blades, barbarian axes, ranger bow),
+    weapon tier 5, through the REAL Roster.weapon_mesh -> Gear.equip path. Named tier-5 pieces resolve for sword (Scarfang), axe
+    (Seamsplitter), bow (Seamstring); greatsword, dagger, greataxe and mace have NO named tier-5 piece, so they are proved via wkind
+    (the !forge <kind> path) and the tool says so per kind. Held lengths: sword 1.89, greatsword 2.13, dagger 0.90, axe 1.59, greataxe
+    1.68, mace 1.31, bow 2.30 (string to limb tip); hand-in-grip TRUE for all 7. Shots: renders/cycles/s45/ front, side, back + 7 closes.
+(4) WHAT THE PICTURE SAYS AND I WILL NOT HIDE: THE GOLD DOES NOT READ. All seven render PALE LILAC, not gold. Cause, from source:
+    tier 5 is "scarforged" glow 1.3 -> Gear.ignite() sets emission on EVERY surface (cold-white end of its lerp), then tint_piece
+    lays the scar/seam glow_col (violet, gear.gd:1556-1557) on every surface too. That is the EXISTING tier-5 smoulder - the old kit[4]
+    meshes wore it the same way - not a conversion fault (materials verified in the .blend). Art's own doc says the red belongs in the
+    GLOW slot and the body must stay a bright metal, and that ART shoots the plain-vs-seam A/B the run after the meshes land. So the
+    emission-over-the-whole-body question is ART'S A/B, and the meshes it needs are now on disk and in the hand. I did not change the
+    smoulder: it is a look call across all tier-5 gear, not mine to make off one picture.
+Gates (all JESTS_NO_TWITCH=1): see the gate line appended below.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (both runs) | S45_ART OK (10 shots, 0 failures) |
+OFFFLOOR_VERDICT OK 0 of 1876 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15362 raid_in_solid=0/6809 PASS |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 20:08:23, cap 20:33 computed first, declared 20:30, released early - see the IDLE line.

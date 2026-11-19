@@ -1,0 +1,11 @@
+The seven .glb models in this directory are from Quaternius's "Ultimate RPG Items Pack" (Aug 2019):
+  sword_golden, sword_big_golden, dagger_golden, axe_small_golden, axe_double_golden,
+  hammer_double_golden, bow_golden
+Converted by the game build lane (S45, 18 Nov 2026) from the pack's own .blend files with Blender 5.2
+(glTF binary export, Y-up, transforms applied). Geometry and materials unchanged.
+
+Source: https://quaternius.com / opengameart.org/node/126979
+Licence (from the pack's License.txt, read at conversion):
+  CC0 1.0 Universal (CC0 1.0) Public Domain Dedication
+  https://creativecommons.org/publicdomain/zero/1.0/
+No attribution required. Recorded in docs/art/ASSET_SOURCES.md (Ultimate RPG Items Pack row).

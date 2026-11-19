@@ -64,6 +64,31 @@ from creatures import surf, limb, arc, eyes, spikes
 
 TAU = math.pi * 2.0
 
+
+def seat(pts, r0):
+    """LIFT A RAKED LIMB SO ITS BOTTOM RING TOUCHES THE FLOOR, NOT DIPS THROUGH IT.
+
+    THE FAULT THIS EXISTS FOR, found on the Rammer at pass 8 and still open on
+    nine bodies at the 18:34 foot-plane audit: limb() sweeps each ring
+    PERPENDICULAR to the polyline, so a limb that leans off vertical has its
+    bottom ring tilted and its lowest vertex r0*sin(tilt) BELOW the z the
+    builder wrote. A builder writing a literal 0.0 is DECLARING "this touches
+    the ground"; minibossgen grounds the merged body on its GLOBAL minimum, so
+    that hidden dip becomes the floor and lifts every honestly-placed foot,
+    base and planted thing that far into the air.
+
+    DERIVED, NOT DIALLED. The lift comes from the limb's own first segment, so
+    re-raking or re-bending a leg cannot re-open the float, and no constant has
+    to be re-measured by hand. Returns a new list; the caller's points are not
+    touched. Pass the SAME r0 you pass to limb().
+    """
+    q = [Vector(p) for p in pts]
+    if len(q) < 2:
+        return q
+    d = (q[1] - q[0]).normalized()
+    lift = r0 * math.sqrt(max(0.0, 1.0 - d.z * d.z))
+    return [v + Vector((0.0, 0.0, lift)) for v in q]
+
 # key: (title, height(m), tint, aura, theme, idea, wear, feed line)
 #   theme - the dungeon_hd.gd theme whose miniboss weight this was built for
 #   idea  - the one thing that makes the fight different. The bar, in a phrase.
@@ -481,12 +506,31 @@ def sexton():
     limb(P, [(0.27, -0.26, 1.44), (0.46, -0.30, 1.14), (0.58, -0.28, 0.86)], 0.072, 0.054)
     limb(P, [(-0.27, -0.26, 1.44), (-0.10, -0.34, 1.10), (0.20, -0.32, 0.86)], 0.072, 0.054)
     limb(P, [(0.66, -0.26, 1.08), (0.94, -0.30, 0.40)], 0.055, 0.048, 'bone')
-    P.raw(aim(L.box(0.40, 0.065, 0.50), (1.04, -0.32, 0.18), (0.36, -0.06, 1.0)), 'bone')
-    P.raw(aim(L.cone(0.21, 0.015, 0.15, 4), (1.11, -0.33, 0.00), (0.36, -0.06, 1.0)), 'bone')
+    # *** FOOT-PLANE PASS, CAUSE ONE OF TWO: THE SPADE DIGS PAST THE FLOOR. ***
+    # Both blade pieces are aimed (0.36,-0.06,1.0) - raked 20 deg off vertical -
+    # and a tilted box/cone does not sit on its own loc.z: the blade's low
+    # corner reached 66.0 mm and the point's base circle 72.0 mm BELOW z=0.
+    # minibossgen grounds the merged body on its global minimum, so that buried
+    # depth became the floor and lifted the only things this builder declares at
+    # 0.0 - the man's two boots at :421 - 72.0 mm into the air. SPADE_Z lifts the
+    # blade AND the point together so the point lands AT z=0 and the spade still
+    # stands in the cut: one lift, not two nudges, so the pieces cannot drift
+    # apart, and the haft above only gains overlap, never a gap.
+    SPADE_Z = 0.0720
+    P.raw(aim(L.box(0.40, 0.065, 0.50), (1.04, -0.32, 0.18 + SPADE_Z),
+              (0.36, -0.06, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.21, 0.015, 0.15, 4), (1.11, -0.33, 0.00 + SPADE_Z),
+              (0.36, -0.06, 1.0)), 'bone')
     # a fresh spoil heap at his feet on the spade side - there is a hole here
+    # CAUSE TWO OF TWO, MEASURED ONLY AFTER CAUSE ONE WAS FIXED: each lump is a
+    # flattened ellipsoid of z half-height r*0.42 sitting at loc.z r*0.20, so
+    # 0.22r of every lump was UNDER the floor - 66.0 mm on the big one - and
+    # with the spade seated the heap became the new global minimum. loc.z r*0.42
+    # rests each lump ON the ground and keeps the flattened spill read (0.42 of
+    # its own radius in z, so it is still a low spread heap, not a ball).
     for k, (dx, dy, r) in enumerate(((1.02, -0.62, 0.30), (1.26, -0.34, 0.22),
                                      (0.86, -0.86, 0.17))):
-        P.add(L.sphere(r, r * 0.86, r * 0.42, 10, 7), 'dark', loc=(dx, dy, r * 0.20))
+        P.add(L.sphere(r, r * 0.86, r * 0.42, 10, 7), 'dark', loc=(dx, dy, r * 0.42))
     return P
 
 
@@ -928,7 +972,17 @@ def sower():
                                             (0.30, 0.56, 1.46, 0.14))):
         base = (X + dx, dy, 0.0)
         tip = (X + dx + bend, dy + 0.10, hh)
-        limb(P, arc(base, tip, 0.0, 6, side=bend * 0.8), 0.075, 0.022, 'bone')
+        # *** FOOT-PLANE PASS: A RAKED STEM'S BOTTOM RING TILTS BELOW ITS BASE. ***
+        # limb() sweeps each ring PERPENDICULAR to the polyline, so a stem that
+        # leans by `bend` has its bottom ring tilted and its lowest vertex
+        # r0*sin(tilt) below the 0.0 the builder declared - 37.4, 33.8 and 23.4
+        # mm on the three shoots. minibossgen grounds on the global minimum, so
+        # the deepest of those became the floor and lifted the man's two boots
+        # (:809, the only declared contacts) 37.4 mm into the air. DERIVED, NOT
+        # DIALLED: each stem is lifted by its OWN first-segment tilt, so adding
+        # or re-bending a shoot cannot re-open this.
+        limb(P, seat(arc(base, tip, 0.0, 6, side=bend * 0.8), 0.075),
+             0.075, 0.022, 'bone')
         for k in range(5):      # thorns, alternating, out of the stem's own line
             t = 0.30 + 0.16 * k
             z = hh * t
@@ -8248,8 +8302,12 @@ def moulder():
     # the stand it sits on - trestle, not a plinth. Furniture that says so.
     for sx in (-1, 1):
         for sy in (-1, 1):
-            limb(P, [(FX + sx * 0.52, FY + sy * 0.26, 0.00),
-                     (FX + sx * 0.44, FY + sy * 0.22, 0.52 - BOX_DROP)], 0.062, 0.052, 'dark')
+            # CAUSE TWO OF THREE, measured only after the legs were seated:
+            # the trestle's four splayed legs are raked too, 21.7 mm under
+            # each - and with the man's legs fixed, THIS became the floor.
+            limb(P, seat([(FX + sx * 0.52, FY + sy * 0.26, 0.00),
+                          (FX + sx * 0.44, FY + sy * 0.22, 0.52 - BOX_DROP)],
+                         0.062), 0.062, 0.052, 'dark')
     P.add(L.box(1.22, 0.70, 0.075), 'dark', loc=(FX, FY, 0.56 - BOX_DROP))
     # the box itself: four boards and the bed inside. Open at the top.
     for sx in (-1, 1):
@@ -8379,10 +8437,16 @@ def moulder():
     i0 = len(P.items)
     # stooped over the bed: hips low, spine forward into -Y, head LOW and well
     # clear of the cast's head so the two never read as one mass.
-    limb(P, [(HX - 0.14, HY + 0.04, 0.00), (HX - 0.17, HY - 0.02, 0.42),
-             (HX - 0.12, HY + 0.02, 0.86)], 0.126, 0.105, 'body')
-    limb(P, [(HX + 0.16, HY + 0.06, 0.00), (HX + 0.20, HY - 0.04, 0.44),
-             (HX + 0.13, HY + 0.03, 0.88)], 0.126, 0.105, 'body')
+    # FOOT-PLANE PASS, CAUSE ONE OF THREE: both legs are raked forward off
+    # vertical, so their bottom rings dipped 30.0 and 19.9 mm under the floor -
+    # invisible, because the boots at :8387 cover the leg ends, but the deeper
+    # of the two became the body's global minimum and lifted those boots (the
+    # only declared contacts) 30.0 mm into the air. seat() derives each lift
+    # from the leg's own first segment; the ends stay well inside the boots.
+    limb(P, seat([(HX - 0.14, HY + 0.04, 0.00), (HX - 0.17, HY - 0.02, 0.42),
+                  (HX - 0.12, HY + 0.02, 0.86)], 0.126), 0.126, 0.105, 'body')
+    limb(P, seat([(HX + 0.16, HY + 0.06, 0.00), (HX + 0.20, HY - 0.04, 0.44),
+                  (HX + 0.13, HY + 0.03, 0.88)], 0.126), 0.126, 0.105, 'body')
     for sx in (-1, 1):
         P.add(L.box(0.30, 0.34, 0.095), 'body', loc=(HX + sx * 0.15, HY - 0.08, 0.048))
     limb(P, [(HX, HY + 0.02, 0.88), (HX + 0.02, HY - 0.14, 1.26),
@@ -8451,9 +8515,13 @@ def moulder():
                      [0.016, 0.014], 6), 'body')
         P.add(L.box(0.055, 0.042, h), 'bone',
               loc=(x, FY - 0.47, 0.95 - BOX_DROP - h * 0.5 + 0.015 * (i % 2)))
+    # CAUSE THREE OF THREE, and the smallest: each spill lump is 0.034 half in
+    # z sitting at 0.026, so 8.0 mm of every one was under the floor. With the
+    # two limb causes fixed this was the last thing holding the body up. Seat
+    # the lumps on the ground at their own half-height.
     for i in range(6):
         P.add(L.sphere(0.105, 0.085, 0.034, 9, 6), 'dark',
-              loc=(FX - 0.50 + i * 0.22, FY - 0.52 - 0.06 * (i % 3), 0.026))
+              loc=(FX - 0.50 + i * 0.22, FY - 0.52 - 0.06 * (i % 3), 0.034))
     # PASS 2, FORM CHANGE 5 (cosmetic). One long pale stick on the floor read
     # as a SPOON on both renders. Two short broken sprues instead - what is
     # actually left when a casting is knocked off its runner.

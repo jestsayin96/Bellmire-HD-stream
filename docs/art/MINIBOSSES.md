@@ -4142,3 +4142,32 @@ changes the framing of every render in the set and belongs in a pass of its own.
   its arm is the same plank shape as the sower's.
 - The moulder's six spill lumps are evenly spaced and now sit proud of the
   floor; in a row they read as coins rather than spill.
+
+================================================================================
+## THE REEVE'S FACING FROM BEHIND - ANSWERING THE TEAM LEAD, 18 Nov 18:5x CT
+
+Asked: *"THE REEVE HAS WEAK FACING FROM BEHIND ... Look at it and tell me
+whether you agree; if you do not, say so with the geometry and I will take that
+answer."*
+
+**I AGREE, AND THE GEOMETRY SAYS WHY.** I looked at `reeve/hero_back.png`
+again, not at the register. Nothing on that body is back-only. The hat is a
+flat disc with no brim asymmetry, so it has the same outline from either side.
+The arms are out roughly symmetrically. The apron slab is applied to a round
+torso, so its edges show from behind as a pale panel and it reads as a front.
+The boots and legs are mirrored. The only asymmetries in the whole figure -
+the hand on the box rim and the slung tally sticks - are SIDE features, not
+back ones, and both are nearly edge-on at azimuth 180.
+
+**AND THE REGISTER CANNOT EVER CATCH THIS.** `seen: 1.0` measures how much of
+the creature a viewer can SEE past the hero. A body with no facing is fully
+visible. The number is right and the question is not in it.
+
+**NOT FIXED THIS RUN, AND I WILL NOT PRETEND IT IS SMALL.** The honest fix is
+one back-only mass that cannot be mistaken for a front - a slung coil, a strap
+across one shoulder, a tally board on the back - plus a brim that is deeper at
+the front than the back, so the hat's outline itself says which way he faces.
+Both change the silhouette, so they want their own pass with a before/after
+pair, not a corner of a foot-plane run. **THE SEXTON IS WORSE AND IS IN THE
+SAME QUEUE** (see the pass-3 faults above: from behind the hod grid hides the
+man completely).

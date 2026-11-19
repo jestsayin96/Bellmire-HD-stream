@@ -1972,6 +1972,87 @@
     }
    },
    "proving_views": 3
+  },
+  "fuller": {
+   "creature_h": 2.66,
+   "hero_h": 2.45,
+   "ratio": 1.09,
+   "pair_w": 5.15,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 98905,
+      "vis": 98905,
+      "delta": 101723,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43669,
+      "vis": 43669,
+      "delta": 52976,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 61882,
+      "vis": 61882,
+      "delta": 63270,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37771,
+      "vis": 37771,
+      "delta": 38693,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 98870,
+      "vis": 98870,
+      "delta": 101654,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 46502,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -1984,21 +2065,13 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "sexton",
-  "sower",
-  "moulder",
-  "reeve",
-  "stoker"
+  "fuller"
  ],
  "asked": [
-  "sexton",
-  "sower",
-  "moulder",
-  "reeve",
-  "stoker"
+  "fuller"
  ],
  "blank_check": {
-  "files": 15,
+  "files": 3,
   "failures": []
  },
  "verdict": "GREEN"

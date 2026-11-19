@@ -11429,3 +11429,72 @@ incident is on the record from the lane that caused it, in the same cycle, rathe
 later by somebody else.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## B60 - THE FOUR CORRECTIONS ARE A WORKING WRAPPER, AND THE RED PROOF LANDED HARDER THAN I AIMED IT (chat bot, 2026-11-18 18:4x CT)
+
+The 18:0x row ticked B59 and named no next item for this lane, so I took the thing B59 itself left
+undone. B59 WROTE four corrections and said in so many words that it was not turning them into a
+tool. A written correction is not a proven one. This cycle I built them and tried to break the
+result the same way I broke B58 - by making the bad case happen on purpose instead of reasoning
+about it.
+
+EVERY PROCESS THIS RUN RAN UNDER `--script`. That is not incidental: it is how a lane with my
+record gets to touch the engine at all this hour. The urgent block exempts `--script` gates, the
+team lead re-proved that exemption from town.gd:342 rather than asserting it, and my own standing
+rule after the breach is no bare parse gate from this lane until the guard lands. I checked the
+guard rather than assuming its absence: `git grep JESTS_NO_TWITCH origin/main -- scripts/ tools/`
+at 756928f returns ZERO hits. So the parse gate is SKIPPED AND CARRIED, said out loud, which the
+urgent block explicitly calls a clean outcome and not a red gate.
+
+THE RED PROOF - AND IT INDICTS B58 TWICE OVER, NOT ONCE
+I started a foreign Godot inside my own gate window (`tools/_l14_test.gd`, `--script`, so it could
+not connect either) and let both wrappers decide on the same measured facts:
+  B58's set-difference selected FOR TASKKILL: 8388 and 31996.
+  MY WRAPPER LAUNCHED NEITHER OF THEM. Its own gate pid was 7144, and 7144 had already exited.
+  B60 killed NOTHING. It reported both as `foreign_new_pids` and left them running.
+THE SECOND INDICTMENT IS THE ONE I DID NOT DESIGN: 8388 is not even the pid I recorded when I
+started the helper (31996). I cannot tell you from a diff which of those two is the helper and
+which is a child it spawned - AND THAT IS EXACTLY THE ARGUMENT. A set-difference does not know
+what you launched; it only knows what appeared. B58 would have destroyed two processes while
+printing SUCCESS twice and calling the gate green.
+AND THE CLAIM DOWNGRADED ITSELF, which is correction (2) working: with a foreign pid resident the
+wrapper refused to say "no Godot of any lane" and said only "my gate left nothing behind". That is
+all it could prove, and it is now the only sentence it is able to write in that state.
+
+THE BATTERY, GREEN, 3.3 s OF ENGINE IN TOTAL
+  TWITCH_PARSE OK (8 checks)                         rc 0, 1.4 s  [this is the gate the foreign
+                                                                   process ran inside]
+  L14_TEST OK (22 checks)                            rc 0, 1.0 s
+  COMMANDS_DOC OK wrote 27 commands                  rc 0, 0.9 s  - a TRUE NO-OP: docs/COMMANDS.md
+    md5 9a80bfd98049e77abddab6d1d182c524 IDENTICAL before and after. The generator rewrote its own
+    bytes exactly. 27, not the 26 my trigger prompt still says - the generator is right and the
+    prompt figure is stale for the second cycle running.
+Verification was unconditional on both paths and read BOTH image names, which is correction (4):
+Godot_v4.7.2-stable_win64_console.exe AND Godot_v4.7.2-stable_win64.exe. Residual after gates 2
+and 3: EMPTY on both. Final tasklist at 18:50:42: EMPTY.
+
+THE SPLIT, NAMED RATHER THAN QUIETLY DROPPED
+Correction (3) - the alive-by-design path, where a gate declares it leaves a process up and the
+wrapper neither kills it nor claims closure - is the one of the four still unproven. It needs a
+process that stays running, which means a scratch harness and a longer window than the seven
+minutes between my claim and the HUD's. The code path exists in the wrapper (`leaves_process=True`
+-> `pid_alive_by_design`, no kill, no closure claim) and it is UNTRIGGERED. I am not calling an
+untriggered guard proven - that was the whole lesson of B58. CARRIED TO 19:45.
+
+OWNED FILES: UNTOUCHED THIS CYCLE, VERIFIED BYTE-IDENTICAL BEFORE AND AFTER THE BATTERY.
+  scripts/chatcmd.gd    72be1e686522e8904077623e0169c963
+  data/commands.json    0ed191404157221abd8a184cc580dfa5
+  docs/COMMANDS.md      9a80bfd98049e77abddab6d1d182c524
+No scratch in the worktree at any point - the run log was written to %TEMP% and nothing named
+`*b60*` exists under W6. No new harness went into tools/; the wrapper lives in this entry, which is
+where the team lead's framing puts it, and the corrected logic above is what the next firing copies.
+
+W-LIVE: NOTHING. No Twitch connection of any kind this cycle. No text posted, no bits, no cheer,
+no redemption read or settled, no account or channel state touched. Three `--script` gates and one
+`--script` helper cannot reach the channel, and I did not run the one gate that can.
+
+LOCK: claim 18:48:30, cap 19:13, declared finish 18:51, IDLE 18:50:50. No crossing into the HUD at
+18:52. Engine verified free on both image names before the claim; last lane line was game build
+IDLE 18:10:53.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.

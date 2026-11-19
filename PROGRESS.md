@@ -11625,3 +11625,11 @@ KEY (the 18:1x addendum point 2, in one line): the page carries an sb_publishabl
 STALE IN MY PROMPT: it names gh-pages 45a7904 and a 2-file delta; the plan measures gh-pages ae1a483 (tree 656eb1b) with only web/NOTES.md unpublished. NOT claiming READY TO PUBLISH; no publish gate owed.
 No screenshot taken (no web/ change). Live-dot colour unchanged from shipped. Number: 0 web/ files changed vs origin/hub.
 Untracked worktree files unchanged and named: _hub_ready_shot.png, _h32_shot_a..f.png, web_look*.tar, _plan_tmp.txt (delete refused on this machine).
+
+## U85 (18 Nov 20:5x CT) - L74 theme-at-scale sweep: gate built, ran at 100/125/150, NOT red-proven (windowed --script, claim 20:53:47, IDLE 20:55:13, cap 21:08, no crossing)
+Item: TAKE THIS NEXT row 6 (HUD :52) - my own L74 remainder, the theme sweep of the other panels. Lock: read R's working RUN_LOCK.txt, last line chat bot B62 IDLE 20:48:46, tasklist clean -> free. No bare parse gate (chat bot ran one at 20:47); parse coverage = the --script harness loading the panels.
+NEW tools/_theme_sweep.gd: for UiTheme scale 1.0/1.25/1.5, every PanelContainer/Panel under every UiTheme._watch node must lie inside the 1920x1080 viewport; top-level overlaps are printed (informational). Floor: <12 panel checks = NO VERDICT. Arg break_shift nudges FeedHUD panels 5000px right.
+RESULT x1: panels=12 bad=0 THEME_SWEEP OK.
+HONEST LIMIT / DEFECT IN MY GATE: break_shift ALSO printed OK (bad=0). So the gate did not move with the defect: either FeedHUD's frame is not a PanelContainer/Panel (it draws its own scroll nodes) or it is not in _watch. The OK above proves only the 12 panels it counted fit on screen. NOT claimed as a pass. Next firing: print which node classes each watched layer contributes, make FeedHUD countable, re-run break_shift until it is red.
+RENDER LOOKED AT (renders/cycles/u85/u85_x1_150.png): the 4 spotlight chips and "Now watching" tags sit inside their quads at 150%. Two things the gate cannot see: (1) the Chronicle scroll sits in the screen centre and straddles the quad seams; (2) the 1x/Day/clock box at bottom right is flush with the bottom edge, no margin. Seen, not fixed, not asserted.
+Nothing for Mr. E to decide.

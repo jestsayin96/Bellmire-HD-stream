@@ -11685,3 +11685,9 @@ LOCK: claim 20:46:57, cap 21:11, declared finish 20:51, IDLE 20:48. No crossing 
 20:52.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-124 (2026-11-18 21:23 CT, content) - descend +20, cleared +20, epitaphs +30, misfire +12
+ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the proven-live list. 82 lines into pools with readers (delve.gd _pick_line descend/cleared; epitaph and misfire readers).
+MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.
+VALIDATION OK: all four data files parse; every pre-existing entry identical; only _note_c124 added. CODE WIRING IMPLIED: none.
+Next content: C-125.

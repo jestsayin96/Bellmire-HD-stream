@@ -3615,3 +3615,38 @@ Twitch for any future headless live use. Parse coverage is unchanged either way:
 the classes. NOT DONE - the row says report, and W-LIVE behaviour is not mine to change unasked. My recommendation is the env guard.
 UNTIL THEN: do not run the parse gate while Mr. E is live.
 Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). Lock claim 17:08:35, cap 17:33, released early.
+
+## D-cycle - S43: SYSTEM 6 SURVEY - THE ARTIFACT TIER ALREADY HAS MESHES, AND THE PACK THAT SHOULD REPLACE THEM IS NAMED. NOTHING IMPORTED. 2026-11-18T18:08-06:00 (game build)
+Row 1 of the lead's 17:4x block (System 6: confirm the 24, find the artifact tier, SAY IN WRITING BEFORE IMPORTING). Read-only cycle,
+no Godot launched. Bare parse gate NOT run (urgent block: Mr. E may be live) - carried; nothing compiled changed, so nothing is owed.
+STALE IN MY PROMPT, said so: the gear.gd:98-104 null-guard defect was closed at S35 (S41 re-read it on the line). Not retaken.
+(1) THE 24 CONFIRMED: assets/gear/dungeon/ = 8 families x common/uncommon/rare .glb + LICENSE_KayKit_Dungeon_CC0.txt, all read by
+    gear.gd KINDS (sword, dagger, axe, mace=hammer, greataxe=axeDouble, staff, crossbow; shield via offhand). KayKit's own dungeon pack
+    holds EXACTLY those 24 weapon .glb plus weaponRack - grep of every .gl* under kaykit_dungeon_pack_CC0 for weapon words. THERE IS NO
+    HIDDEN KAYKIT ARTIFACT TIER TO FIND; its other ~1,050 files are dungeon kit, not weapons.
+(2) "NO ARTIFACT TIER" IS A FILENAME FACT, NOT A WIRING FACT. items.json equipment.weapons tiers 0..5 (C-58: 5 = artifact, found-only;
+    9 pieces: Scarfang, Seam-Edge, Scarcleaver, Seamsplitter, Scarwand, Staff of the Open Seam, Scarbow, Seamstring, Scar-Grown
+    Quarterstaff). gear.gd weapon_piece_look takes kit[maxi(1,tier)-1], so tier 5 reads KINDS kit[4] - ALREADY A MESH FOR EVERY KIND:
+    sword KIT sword_E, greatsword SKA Skeleton_Blade, dagger ADV dagger, axe/greataxe SKA Skeleton_Axe, mace KIT hammer_B, staff and
+    quarterstaff SKA Skeleton_Staff, crossbow SKA Skeleton_Crossbow, bow KIT bow_A_withString, wand KIT wand_A. (The S16 comment calls
+    kit[4] "the skeleton pack's own grave-steel for the found-only tier".) So an artifact never reaches the player bare. The open part
+    of System 6 is that tier-5 meshes are REUSED lower-tier/skeleton kit, not artifact-grade models.
+(3) WHERE A REAL ARTIFACT TIER LIVES - quaternius_ultimate_rpg_items_CC0 (Aug 2019), NOT the 2018 weapons pack the row guessed:
+    it HAS a License.txt (CC0 1.0, read this run) and is ALREADY a row in docs/art/ASSET_SOURCES.md:13, and it carries a matched
+    _Golden variant per family: Sword_Golden, Sword_big_Golden, Dagger_Golden, Axe_small_Golden, Axe_Double_Golden,
+    Hammer_Double_Golden, Bow_Golden (FBX/OBJ/BLEND, no glTF - ASSET_SOURCES:29). That covers sword, greatsword, dagger, axe,
+    greataxe, mace, bow - 7 of the 9 artifact pieces' kinds. NOT covered: staff/quarterstaff, wand, crossbow (keep SKA/KIT kit[4]).
+    quaternius_medieval_weapons_2018_CC0 (24 models, FBX/OBJ/BLEND, NO licence file - covered by Mr. E's Quaternius ruling, note owed on
+    first use) adds Sword_Golden, Bow_Golden, Bow_Evil, Claymore, Scythe, Shield_Celtic_Golden - a second source, and the only golden
+    SHIELD. handpainted_weapons (sword_a..j) has no licence file in the pack - NOT usable until its page is read.
+    OPEN QUESTION FOR THE LEAD/ART, not mine to settle: artifact is RED in ui_theme RARITY (1.00,0.13,0.10) and its pieces are
+    Scar/Seam-forged; _Golden meshes are gold. tint_piece already recolours by the name's stuff word and spares the edge (EDGE_MATS),
+    so gold can be pushed toward scar-red - but whether a gold model reads as "artifact" or as "legendary" is a look call.
+(4) SIDE NOTE, MEASURED, NOT A DEFECT CLAIM: because of maxi(1,tier)-1, data tier 1 (uncommon) wears the pack's _common mesh, tier 2
+    (rare) wears _uncommon, tier 3 (very rare) wears _rare; tiers 0 and 1 share _common. The pack's own file words are one rung under
+    the item's rarity word. S16 chose "tiers 1-3" deliberately; recorded so nobody "fixes" the filenames thinking they mismatch.
+PROPOSED NEXT (one item, ~2 runs, awaiting the lead): convert the 7 Ultimate-RPG _Golden FBX to .glb into assets/gear/artifact/ with a
+LICENSE note, set them as KINDS kit[4] for those 7 kinds, then D95_FIT-style fit proof on a real hero body front/side/back at tier 5.
+Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 18:08:29 (first written as 18:09:00 - 31 s ahead of the machine, corrected in place at 18:10), cap 18:33:29, declared
+finish 18:33, released early - see the IDLE line.

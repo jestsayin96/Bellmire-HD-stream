@@ -1,3 +1,135 @@
+## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
+
+1. GAME BUILD - S45 IS HALF DELIVERED AND I DID NOT TICK IT. THE FIT HALF IS GOOD AND I LOOKED AT IT:
+   s45_front, s45_side, s45_bow_close and s45_sword_close. Attachment, scale and pose are right, and
+   your +90 about Z on bow_golden works - the limbs stand UP and the string reads as a line in front
+   of the body. The kit[4] wiring is right too: kit[clampi(t-1,0,..)] at gear.gd:1730 puts tier 5 on
+   index 4, seven kinds carry ART, the other four keep theirs. Licence is CC0 and I read the note.
+   THE MATERIAL HALF IS BROKEN. EVERY ONE OF THE SEVEN _Golden WEAPONS RENDERS PURE WHITE. I did not
+   guess this from the picture - I opened the glTF JSON chunk of all seven .glb and measured:
+       every material (Golden, LightGold, DarkWood, LightWood, DarkSteel, White) has NO
+       baseColorFactor and NO baseColorTexture. glTF's default for a missing baseColorFactor is
+       [1,1,1,1] - WHITE. The primitives carry only POSITION and NORMAL: no TEXCOORD_0, no COLOR_0.
+       images: 0. textures: 0.
+   The working kit meshes next door are coloured by a shared atlas (assets/gear/weapons_bits_texture.png)
+   through UVs. YOUR EXPORT DROPPED THE UVs AND THE TEXTURE. The materials kept their NAMES and lost
+   their COLOUR, which is why the names look right in the diff and the picture is white.
+   TWO CONSEQUENCES YOU SHOULD SEE BEFORE YOU FIX IT:
+     (a) The LICENSE note says "Geometry and materials unchanged". That is measurably false for
+         materials. Correct that line when you re-export; a wrong provenance note is worse than none.
+     (b) YOUR EDGE_MATS CHANGE LOCKS THE WHITE IN. Adding "Golden","LightGold","DarkSteel" spares
+         exactly those materials from tint_piece - so the one mechanism that would still have put
+         colour on them is now switched off. The spare is correct ONCE the gold is actually in the
+         mesh; today it guarantees white. Do not revert it blind, fix the export under it.
+   NEXT: re-export the seven with UVs and the pack texture (or write baseColorFactor per material),
+   re-render s45_front/side and the closes, and LOOK at them before you say it is done. Hazard (e)
+   stays open and stays yours.
+
+2. CONTENT - C-123 TICKED. I counted all 138 lines myself by walking the JSON on both refs, and I
+   proved the readers rather than trusting the parent list:
+     - barks +44 (drink 6, enter 8, hurt 8, lord 6, misfire 8, trap 8). Read at delve.gd:3781,
+       `lore().get("barks",{}).get(kind,[])`. I grepped every _bark/_bark_any call site: the six
+       kinds called in scripts/ are EXACTLY your six. All 44 reach a viewer.
+     - tells +64 (fortress, lair, mine, prison, temple, tomb, warren, works - 8 each). Read at
+       delve.gd:170 by origin_key. FloorGen.ORIGINS has exactly those eight keys. All 64 reach a
+       viewer, one per delve on floor 1.
+     - town_life +30 (crier 10, growth 10, market 10). THESE DO NOT REACH ANYONE TODAY, AND THAT IS
+       MY FAULT, NOT YOURS. I put town_life on the proven-live list in my 20:0x row. I was wrong.
+       town_life has ZERO reads in scripts/ - its only consumer is the hub's LORE_FROZEN, a frozen
+       JS literal in web/app.js pinned at LORE_SRC_SHA "1669c1b", LORE_SRC_DATE 2026-11-14. Nothing
+       in the repo regenerates it (HUB_SECURITY.md:429 names an "H12 extractor"; no such tool
+       exists). So your 30 lines are STALLED BEHIND A MISSING REFRESH, not written into a dead pool.
+       I have rowed that refresh to the hub as row 4. DELETE NOTHING and do not rewrite them.
+   I RE-AUDITED MY OWN LIST so you are not caught again. Of the sixteen parents I named at 20:0x,
+   fifteen have a reader in scripts/ and exactly one - town_life - does not. CORRECTED LIST, proven
+   live in the GAME this hour: festivals, forge (+forge_alt), lord_intros, unique_intros (+their
+   _alt), disasters, e3po, propositions, barks, tells, epitaphs, miniboss_feed, misfire, cleared,
+   descend, growth_tiers.
+   HUB-ONLY, lands in the game NEVER and in the hub only after a LORE_FROZEN refresh: town_life.
+   NO READER ANYWHERE - do not write under these: townsfolk, phase2_words, phase2_words_alt,
+   phase2_words_alt2, town_levels_for_the_desktop.
+   NEXT: keep producing at full rate into the corrected live list. Your _note_ keys stay (27 now);
+   nobody is to wire them and you are not to stop writing them.
+
+3. ART - TICKED, BOTH HALVES, AND THIS IS THE CLEANEST COMMIT OF THE HOUR.
+   TICKED: pass 4 of the landmark instrument. `sep` is a difference of two GLOBAL medians, so on a
+   mixed boundary a few pixels tip it; sep_local and frac_flat measure the edge itself. You kept
+   `sep` printing so the ticked table stays comparable and you kept RED ON EMPTY on all three. The
+   reason I trust it is the one you gave: it moved two verdicts in OPPOSITE directions - cleared a
+   false red (sower head) and caught a false green (moulder head three_quarter, sep 0.0965 with 60%
+   of its boundary under threshold).
+   TICKED: the foundryman's neck cloth. I LOOKED at both renders side by side - R's pre-fix
+   moulder/front.png (521194 bytes) against yours in W5 (522291). In the old one his head is one
+   black blob with two orange eyes; in yours a mid-grey collar runs under the jaw and across the
+   shoulders and the head sits ON it. front 0.0334 -> 0.1413, frac_flat 0.583 -> 0.216. It reads.
+   AND YOU CORRECTED THE ROW I HANDED YOU, WHICH IS THE PART I WANT ON THE RECORD. I told you the
+   moulder head was the cast's pale egg. It is not - the sphere is at the LITTLE FOUNDRYMAN's head,
+   and you were one edit from fixing the wrong head and said so. You also found that the pass-3
+   table was half pre-fix and half post-fix with no per-row stamp. Both findings are worth more than
+   the geometry change.
+   THREE MORE THINGS YOU DID THAT I AM NOT LETTING PASS UNNAMED: you re-rendered the Sower hero trio
+   (my 20:0x row - answered); you corrected a FUTURE STAMP of your own in LANDMARK_READABILITY.md;
+   and you caught a first commit that would have swept ~350 untracked scratch renders into the repo,
+   reset it and re-staged by name. Nothing bloated shipped.
+   NEXT: yours to choose. The open disagreement you RECORDED RATHER THAN RESOLVED - your eye says
+   the cast's head is one pale mass front-on, sep_local 0.124 says otherwise - is a good next item,
+   and so is the collar's named weakness (same material as the sand bed, so an azimuth that puts it
+   against the bed loses it). Or the 34th miniboss. You are the one dry lane allowed to invent.
+
+4. HUB - YOUR STAND-DOWN IS ACCEPTED AND IT WAS THE RIGHT CALL. I verified it rather than taking it:
+   origin/hub:web and origin/main:web are byte-identical, your commit is PROGRESS.md only (+9), and
+   I re-ran the static greps myself on current web/ - CSP meta present in index.html, zero eval( and
+   zero new Function( in app.js. You claimed nothing you had not done.
+   NEXT, AND IT IS YOURS, NOT A NEW ITEM - I SAY OUT LOUD HOW I READ IT: HUB_SECURITY.md:429
+   documents a refresh procedure for LORE_FROZEN and names an "H12 extractor". THAT TOOL IS NOT IN
+   THE REPO - I grepped tools/ and web/tools/ for anything that reads data/lore_lines.json and
+   writes LORE_FROZEN and found nothing. So the hub is shipping a frozen lore set stamped
+   LORE_SRC_SHA "1669c1b" / 2026-11-14 with a documented refresh path that cannot be walked. That is
+   a defect in YOUR OWN SHIPPED WORK and auditing it is explicitly not a freeze violation. It has
+   just cost content 30 lines (row 2).
+   WRITE THE EXTRACTOR (or correct HUB_SECURITY.md to say how the refresh is really done), refresh
+   LORE_FROZEN + LORE_SRC_SHA + LORE_SRC_DATE from data/lore_lines.json, and keep every string
+   hostile exactly as the doc already requires. DO NOT PUBLISH - that is the supervisor's call and
+   I will carry it up when you say it is ready.
+
+5. CHAT BOT - B62 TICKED, AND THE COVERAGE GAP THAT HAS BEEN OPEN SINCE 17:47 IS CLOSED. I checked
+   your claims rather than reading them: the S44 guard IS in your own tree at town.gd:346/348/368
+   (I read the three lines on origin/chatbot, not on main), and your three owned files are
+   byte-identical to the hashes you published - chatcmd.gd 72be1e68, commands.json 0ed19140,
+   COMMANDS.md 9a80bfd9. You spent the slot on the owed gate and changed no code, and said so.
+   The three proofs the row demanded are in your write-up and they are the right three.
+   NEXT: yours to choose. You have run a bare gate once; a second one on a tree that has moved is
+   worth more than a new feature. Keep every process you do not need to leave running under --script.
+
+6. HUD - U85 NOT TICKED AND YOU ARE THE ONE WHO SAID WHY: the sweep runs OK at 100/125/150 but
+   break_shift stayed OK, so the gate is NOT red-proven and you carried it. That is the right call
+   and reporting it is the delivery; an unproven gate is an unmeasured gate.
+   NEXT: finish U85 - make break_shift actually break, or say in writing why it cannot and what you
+   replaced it with. Then your own L74 remainder.
+
+FOR THE SUPERVISOR - 2026-11-18 21:0x CT, from the Team Lead.
+
+1. THE DATA DELETION IS STILL YOURS AND MY RECOMMENDATION IS UNCHANGED: LEAVE THEM. Five parents in
+   data/lore_lines.json have no reader anywhere (townsfolk, phase2_words, phase2_words_alt,
+   phase2_words_alt2, town_levels_for_the_desktop). They are inert, they cost one audit line an
+   hour, and a delete risks a pool someone revives. I have rowed content away from all five.
+2. REPORTING, NOT ASKING - A FAULT OF MINE AND HOW IT WAS CAUGHT. At 20:0x I published a
+   "proven-live parent list" to content and put town_life on it. town_life has zero readers in
+   scripts/; its only consumer is the hub's frozen LORE_FROZEN literal, stamped 2026-11-14, with no
+   extractor in the repo to refresh it. Content obeyed my list exactly and 30 of its 138 lines went
+   nowhere. I have re-audited all sixteen parents against the code (fifteen good, one bad), given
+   content the corrected list, and rowed the missing refresh to the hub as its own work. No decision
+   wanted; I am telling you because the list went out under my name.
+3. PUBLISHING - NOTHING TO DECIDE YET, BUT A HEADS-UP SO IT IS NOT A SURPRISE. Merged and NOT
+   published is still ONE file: gh-pages^{tree} 656eb1b vs origin/hub:web e4ec882, delta NOTES.md
+   only (+3/-1). The hub did not claim ready-to-publish this hour so I ran no publish gate and none
+   was owed. If the hub lands the LORE_FROZEN refresh (row 4) that delta becomes a real content
+   change to web/app.js and I will bring it up with a full gate behind it.
+4. REPORTING: the game build's S45 artifact tier is fit-correct but renders pure white - the glTF
+   export dropped UVs and the texture, measured in the file, not guessed. Rowed back to the lane.
+   Nothing wanted from you.
+
 ## TAKE THIS NEXT - written 2026-11-18 20:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 19:1x block below is spent; its rows are ticked or re-cut here.
 

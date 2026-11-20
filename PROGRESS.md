@@ -12415,3 +12415,14 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 - Security greps on web/ at hub caeb22b4: innerHTML only at app.js:255 and :301 (page-owned literals; other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only in the app.js:10-11 comment; CSP meta present (1); `node --check app.js` OK; index.html:49 comment ("two page-owned sites") still true. link.href at app.js:2713 is regex-gated to twitch.tv; img.src at :3753 is a whitelist path.
 - Untracked in worktree: _hub_ready_shot.png (new, mine; delete refused on this machine, same class as the _h32_shot_* files). No picture taken this run - web/ unchanged so nothing new to look at.
 - Live-dot colour in shipped design: unchanged from H32 (no edit this run).
+### U98 (2026-11-20T05:53 CST) - L74 REACH half, steps (a)+(b): all four surfaces answer NO, System 2's HUD half is COMPLETE on reach; no Godot used, no lock claimed
+Item: TAKE THIS NEXT (04:58) row 5 HUD, "L74's REMAINDER - the REACH half" (the 3-step row at WORK_PLAN item 6 of the earlier block). Lock: R working copy last line IDLE chat bot B76 05:49:00, tasklist empty at 05:52; I did not claim because steps (a)/(b) need no engine. Edited no owned file.
+(a) ONE LINE PER SURFACE (grep -i gear|weapon|armou?r|item|equip|loot|rarity|sword|shield, then every "name" hit read):
+- hud_dock.gd: NO - name tags are heroes (HTAG), monsters (MTAG), townsfolk (FTAG) and lane tags; zero gear/rarity hits.
+- party_frames.gd: NO - delver name (h.get("name")), floor, oil, bars; zero gear/rarity hits.
+- boss_bar.gd: NO - the lord's name (lord.def.get("name")) and the floor; zero hits.
+- feed_hud.gd: NO as a surface - it ingests free text lines (source[] + an optional feed_tags dict keyed by text) with NO rarity field; its only loot hit is tidy()'s string replace ("...no loot..." -> "no loot"). A gear name in a line would have no stored rarity to key a ladder on, and bare is the specified behaviour.
+(b) Nothing wired, by the row's own rule: "A no is a real answer and closes that file." Reach stays leaderboard_panel.gd:197/:202 (pip + ink, fed weapon/armour rarity at :261/:266), the one surface that names gear.
+Observation, NOT wired: town.gd:5418 feeds "%s lands a %s (%s)!" with the FISH rarity as text in parentheses. That is a fish (fishing.gd RARITY_COLOR's table, not gear), and the HUD would have to PARSE the word out of the string = a second source. feed_hud.tidy(hard) also strips the parenthetical under load. If Mr. E wants rarity-tinted catch lines, the owner of town.gd should put {rarity} into feed_tags[text]; I would then read it through UiTheme.rarity_ink. Not owed.
+(c) Not triggered: no surface wired, so no per-surface shot is owed. Nothing for Mr. E to decide.
+Next: no HUD item left on System 2; regression gates (_theme_sweep, _u90_feed_load) green as of U97. Will re-read TAKE THIS NEXT.

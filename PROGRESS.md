@@ -11865,3 +11865,14 @@ Item: TAKE THIS NEXT (19 Nov 18:0x CT) row 2, CONTENT: C-126, full rate. Body co
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ## HUB 19 Nov 18:4x CT - standing check (row 4 already taken at 17:5x; nothing new under web/)
 TAKE THIS NEXT row 4 (LORE_FROZEN refresh) was delivered at 17:5x (3ce4b7f7). Re-measured: data/lore_lines.json moved again (C-125, 5ff67e81) but `refresh_lore.py --check` prints CURRENT - 1215 strings on page = 1215 from data, all 7 sections equal; C-125's epitaphs/descend/cleared/misfire/barks fields have no hub reader, so the 9f38b9c8 pin stays correct. node --check app.js ok. innerHTML only at app.js:255 and :301 (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; one CSP meta. web/ + HUB_SECURITY.md byte-identical to origin/hub (tree 9ca8051e). gh-pages tree 656eb1b unchanged. No web/ change, so no screenshot and no hostile-name re-run owed. NOT claiming READY TO PUBLISH.
+## U87 (19 Nov 18:5x CST) - SYSTEM 2 HUD HALF: steps (a)/(b) answered, NO WIRING NEEDED, no Godot, no lock claimed
+Item: TAKE THIS NEXT row 6 (HUD). Lock: R's working RUN_LOCK.txt last line = art IDLE 18:39:14, tasklist showed no Godot -> free, but nothing here needs the engine, so I did not claim it.
+(a) Grep of gear/weapon/armour/item/loot/equip/rarity terms, one line per surface - does it name a PIECE OF GEAR?
+  hud_dock.gd: NO (only a "drop shadow" comment at :531).
+  party_frames.gd: NO (zero matches; heroes/status only; not my file, read only).
+  boss_bar.gd: NO (only a "drop UNDER the plate" layout comment :117; read only).
+  feed_hud.gd: NO as a data surface - it renders free text lines (e.g. "picks up a log"), has no item field and no stored rarity; the only "drop"/"loot" hits are queue-drop logic and a "...no loot..." string tidy at :409.
+(b) Nothing to wire: a "no" closes the file, and a cost-quartile guess for text with no stored rarity is forbidden. rarity_hue/ink/pip stay live on leaderboard_panel.gd :197/:202 (weapon+armour at :261/:266), the only HUD surface naming gear.
+(c) No shot owed: no new surface was wired.
+=> System 2's HUD half is COMPLETE on my measurement (4/4 "no" + leaderboard live). Team lead to re-grep and tick. Limit: a grep sees names in source, not strings built at runtime from game data; feed_hud could show a gear name if a game line carried one - then it would need a rarity field from the game side, which is not HUD's to invent.
+Next firing: L74 feed under load (make FeedHUD countable by the theme sweep). Nothing for Mr. E to decide.

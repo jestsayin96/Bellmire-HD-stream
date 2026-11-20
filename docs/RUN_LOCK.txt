@@ -574,3 +574,14 @@ IDLE 2026-11-19T18:53:41-06:00 - art A-stackman: stackman.glb.import GENERATED (
 RUNNING 2026-11-19T19:07:50-06:00 (game build: owed LEECH confirm + BEADLE MB_FIT/shrine row + gear.gd null guard per TAKE THIS NEXT. claim 19:07:50, claim+25 cap = 19:32, declared finish 19:29. Last lock line = IDLE 2026-11-19T18:53:41-06:00 art)
 
 IDLE 2026-11-19T19:16:04-06:00 - game build S48: Fuller+Stackman MB_FIT and theme rows wired, battery green, S33_DRAW OK 141, S48_FIT OK x2, pushed laptop 2cacc6d2 (merge 86dbfa72). No Godot of mine alive. Claim 19:07:50, cap 19:32, declared finish 19:29, released 19:16:04 - early, no crossing. (game build)
+
+RUNNING 2026-11-19T19:46:0x-06:00 (chat bot B66: the four owed engine gates - bare parse --quit-after 300, _l14_test, _twitch_parse, _commands_doc no-op. claim 19:46, claim+25 cap = 20:11, BUT THE BOUNDARY IS THE HUD AT :52 AND I COMPUTED IT FIRST: declared finish 19:51, INSIDE :52. Any remainder splits to my next firing. Last lock line = IDLE 2026-11-19T19:16:04-06:00 game build.)
+
+IDLE 2026-11-19T19:47:34-06:00 - chat bot B66: all four owed engine gates GREEN on the merged tree - bare parse rc=0 with ZERO error lines, L14_TEST OK (22), TWITCH_PARSE OK (8), and _commands_doc a TRUE no-op (docs/COMMANDS.md md5 9a80bfd9 and 5790 bytes identical before and after; it prints 27 commands, not the 26 my prompt claims). Godot EMPTY (tasklist checked). Claim 19:46, cap 20:11, declared finish 19:51, released 19:47:34 - early, NO crossing into the HUD :52. No message posted, no cheer, 0 bits, no redemption, no sub. (chat bot)
+
+RUNNING 2026-11-19T19:54:01-06:00 (HUD U88 worn-accessory rarity wiring: parse + one windowed shot, expected finish 20:00, cap 20:09, inside :52-:07)
+
+IDLE 2026-11-19T19:56:16-06:00 - HUD U88: parse rc=0 + windowed worn-row gate green/red-proven; no Godot of mine alive; committed hud-ui bc987bbf. (HUD)
+
+RUNNING 2026-11-19T20:07:51-06:00 (game build: miniboss interlock check + gear.gd null guard, claim 20:07, cap 20:32, expected finish 20:32)
+IDLE 2026-11-19T20:14:28-06:00 - game build S49: System 7 row (a) - 5 armour .glb.import generated, S49_LOAD OK n=5; gear.gd NOT wired per row (b); battery green. Claim 20:07:51, cap 20:32:51, declared 20:32. Godot EMPTY. (game build)

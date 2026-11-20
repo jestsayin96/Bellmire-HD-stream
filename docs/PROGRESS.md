@@ -3787,3 +3787,11 @@ Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error | S47
 TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2343 samples | TOWNWALK in_solid=0/14819 raid_in_solid=0/7894 PASS |
 DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
 Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, released early - see the IDLE line.
+
+## D-cycle - S49: SYSTEM 7 ENGINE HALF, ROW (a) ONLY - THE FIVE ARMOUR SHELLS NOW HAVE .import SIBLINGS AND LOAD. gear.gd NOT WIRED, PER ROW (b). 2026-11-19T20:14-06:00 (game build)
+- Item: TAKE THIS NEXT 19:58 block, row 1 (a)+(b). Claim 20:07:51, claim+25 = 20:32:51 computed first, declared finish 20:32.
+- Honest note on my own run: I merged origin/laptop at 20:07 one minute BEFORE the 19:58 block's plan sync landed (3521d1a4, 20:09:26), so I read the stale 18:5x block, took System 7 as the next system, and drafted a cut->shell mapping in gear.gd (light->leather, tiers 2-5 metal/metal2/golden/black, robe none). I re-fetched before any gate, read row (b) "DO NOT WIRE THE CUT MAPPING YET", and REVERTED gear.gd with git checkout before running anything. Nothing of it is committed. The mapping is here for whenever art's re-render passes fit.
+- (a) DONE: one `--headless --import` (RC=0) generated assets/gear/armour/{armor_black,armor_golden,armor_leather,armor_metal,armor_metal2}.glb.import. Before: 0 of 5. After: 5 of 5.
+- New gate tools/_s49_armour_load.gd: `S49_LOAD OK n=5` - each loads as PackedScene and instantiates with 1 MeshInstance3D. The directory is still referenced by no script; that is correct until art's fit passes and the team lead releases (b).
+- Battery on the merged tree (JESTS_NO_TWITCH=1): parse rc=0, 0 SCRIPT ERROR / Parse Error lines; OFFFLOOR_VERDICT OK 0 of 2164; TWITCH_PARSE OK (8 checks); _townwalk ran, BAD [] (one transient STUCK_EX on Cort the Younger, pre-existing shape); DELVE_TEST OK ran 9001 frames, floor reached, 0 SCRIPT ERROR.
+- No render: nothing visual changed this run (imports only, nothing wired). No Twitch test, no message, 0 bits.

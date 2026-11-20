@@ -12789,3 +12789,9 @@ the verdict lines were cut - I counted that as NO VERDICT and re-ran both with s
 LOCK: claim 09:08:49 -06:00, cap 09:33 (computed first), declared 09:30, released early, no crossing. No Twitch test, 0 bits.
 NEXT (batch 3): the tabletop smalls want a table-top placement (on Table_Large / Workbench, not a floor cell), and the mount-pivot
 pieces a wall row; art's 09:05 note also hands over KayKit Dungeon Pack (185, all clear) as the following System 47 directory.
+## C-140 (20 Nov 2026 09:3x CST) - small pool top-up (no miniboss owed)
+- ITEM: TAKE THIS NEXT (08:58 block) row 3, CONTENT: keep producing. Minibosses measured: origin/art BUILDERS holds 36 non-chibi keys that matter and by_key holds all 36; the only extras are drillmaster_tall / drillmaster_chibi_tall, variants of an existing body. No new body, stood down on item 1.
+- ADDED: epitaphs +13 (735 -> 748), descend +6 (459 -> 465), cleared +6 (444 -> 450). Uniqueness checked inside each pool. Plain register, no named bodies, no mechanics, no floor counts. New key: _note_c140 (expected zero-hit).
+- VALIDATION OK: json.load passes; every pre-existing key and list entry unchanged (prefix-compared); file round-trips at indent 2.
+- CODE WIRING: none; epitaph/descend/cleared readers exist.
+Next content: C-141.

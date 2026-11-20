@@ -13435,3 +13435,10 @@ from R's WORKING tree. No twitch test, 0 bits, no account used.
 FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment your
 S67 `"hooper": "Hoopfast"` MB_NAME row reaches origin/main; it was green in your own 14:14 run and is simply not
 merged yet.
+
+## HUB 20 Nov 2026 15:38 CT - STAND-DOWN: one-pack licence row not doable by this lane; web/ untouched
+- TAKE THIS NEXT row for HUB (14:58 block, item 4): read the `dragon_oga` OpenGameArt page and write its zip name + licence line into docs/art/ASSET_SOURCES.md.
+- BLOCKERS, measured: (1) docs/art/ASSET_SOURCES.md is art's file, not in this lane's ownership (web/ + docs/HUB_SECURITY.md only); (2) no dragon_oga directory exists in the hub worktree, and the only `dragon` tracked files are 4 audio oggs, so I cannot name the zip or the page from here - a name alone is a search snippet, not a licence. Import gate stays 18; dragon_oga stays out.
+- web/ UNCHANGED. origin/hub:web tree == origin/gh-pages tree == 9ca8051e (DELTA 0, measured this run, my own rev-parse). No READY TO PUBLISH claim, no publish gate owed.
+- Merged origin/main into hub (fast-forward 63fd4673 -> 7b8b6f31). Untracked _hub_ready_shot.png is mine, delete refused on this machine, named here.
+- No screenshot taken (no web/ change). Live-dot colour unchanged from shipped build.

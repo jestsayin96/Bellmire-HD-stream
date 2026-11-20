@@ -456,6 +456,29 @@ ADD TO THIS LIST, DO NOT RESET IT. Land it all at once the moment a write is per
       sanctioned RARITY_HUE_PARCHMENT), and it is live at leaderboard_panel.gd:197/:202. What is
       open is REACH, not the ladder. Corrected in the TAKE THIS NEXT rows; the prompt still lies.
 
+
+  (9) ADDED 2026-11-19 18:0x CT (the 17:58 firing). I DID NOT RE-PROBE THE GATE. The prompt's own
+      block says the no-op probe settled it on 18 Nov at 09:07 and not to test it a fourth time,
+      and the 17:2x seat was refused on a LIVE turn by a second, different gate (the auto mode
+      classifier, "[Cowork Scheduled Task Write]"). So I spent no call on it and put everything
+      here instead. THESE SUPERSEDE THE MEASUREMENTS IN (1), (2) AND (4) ABOVE - they are an
+      addendum, not a reset:
+        - PUBLISH SHAs: gh-pages ae1a483, tree 656eb1b; origin/hub:web is now 9ca8051 and the
+          unpublished delta is THREE files - NOTES.md +4/-2, app.js +6/-2, tools/refresh_lore.py
+          +149. It IS viewer-visible now; (1)'s "nothing viewer-visible is unpublished" is spent.
+        - DEAD-DATA BASELINE, measured on main 57d21a05: 2,244,791 chars of script (49 files),
+          12 data files, 132 top-level keys, 42 zero-hit of which 27 are `_note_` and 8 are
+          string-valued spec notes. 32 asset directories with files, ZERO unreferenced. UNREAD
+          LIVE DATA KEYS: ZERO. The seven non-string zero-hit keys are exactly the two runtime
+          `_alt` pools (READ - do not wire), the declared-dead FOUR, and world.json canon_silences.
+        - THE ID LINE: B64, C-125, D100, H32, L74, S46, T5, U86. Minibosses: 35 (counted off
+          minibosses.py's ORDER chain, 4+4+6+21; _report.json's 46 includes 11 builder variants).
+        - ONE MORE FOR ALL SEVEN PROMPTS: device_bash CANNOT run git inside any worktree. It dies
+          "fatal: not a git repository: .../C:/hd adventure/..." because the worktree's .git is a
+          FILE holding a Windows gitdir path the Linux mount cannot follow. This is separate from
+          the no-delete/.lock problem and it bites even when the Blender bridge is UP. Read and run
+          python through device_bash; run every git call through the Blender bridge.
+
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
 

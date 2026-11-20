@@ -10070,3 +10070,11 @@ Nothing for Mr. E to decide.
 Lock: R working copy last line IDLE chat bot B71 00:50:40, tasklist empty; claim 00:54:03, IDLE 00:55:12 (cap 01:09, no crossing). Ran tools/_theme_sweep.gd WINDOWED at UiTheme 100/125/150: "U85 panels=12 bad=0", THEME_SWEEP OK (12 = exactly the NO-VERDICT floor, so the verdict is thin; FeedHUD still invisible to it - covered by U90/U91). No HUD file edited, no picture taken this cycle (the U90/U91 150% shots are the last looked-at ones). Log: tools output _u93_sweep.log (untracked). Only 'instantiate on null' lines = known thin import cache, not HUD.
 Correction to the paragraph above: "no new HUD item" was written before I had merged the 23:58 plan.
 Next firing: lift the 12-panel floor honestly (count FeedHUD's Control) or take a new item if the plan names one. Nothing for Mr. E to decide.
+
+### U94 (2026-11-20T01:56 CST) - L74 remainder: the 12-panel floor lifted honestly, FeedHUD counted
+Item: TAKE THIS NEXT (00:58) row 6 HUD. Lock: R working copy last line IDLE game build S54 01:17:05, tasklist empty; claim 01:54:06, released 01:56:56 (cap 02:09, no crossing).
+Change (tools/_theme_sweep.gd only, no owned HUD file edited): FeedHUD is a CanvasLayer whose Chronicle is a HudDock.ChronicleScroll Control, not a PanelContainer, so _walk never counted it. _walk now counts ChronicleScroll too and tallies it in _feed; the sweep prints feed_chronicle and returns NO VERDICT (exit 2) unless it is seen at all three scales.
+Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP OK (15 vs the floor of 12; the feed is no longer invisible). Parse check: 0 Parse Error; only the known gear.gd:104 thin-import-cache lines.
+Red proof: arg break_shift -> bad=4 THEME_SWEEP FAIL, and the shifted set includes the FeedHUD Chronicle (@CanvasLayer@42 at x=5350). Logs _u94_*.log untracked.
+Observation, NOT a failure (sweep only prints it): OVERLAP at 100/125/150 between the Chronicle (~350,220 452x169) and Spotlight (0,0 576x304) in the 1152x648 test window. Spotlight is idle in the sweep so this is its default rect, not a visible clash; I did not look at a picture of it this cycle. Worth a look next firing with Spotlight actually showing.
+Next: L74 feed-under-load readability picture, or the Spotlight/Chronicle rect question above. Nothing for Mr. E to decide.

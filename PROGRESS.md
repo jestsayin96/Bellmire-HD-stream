@@ -12374,3 +12374,9 @@ Ran WINDOWED 1920x1080 at UiTheme 100/125/150, no owned HUD file edited: tools/_
 Looked at: renders/cycles/u90/u90_u96_150.png - four panes legible, Chronicle shows two whole entries ("Brother Thistle has fallen to the raiders at the thistle gate x3", "A moss caravan reaches the market square x3") wrapped, no ellipsis, nothing clipped; SUBSCRIBER sub-line ends in an ellipsis ("a townspers...") which is the pane truncating a long name, existing behaviour.
 Only SCRIPT ERROR lines: 3 per log, the known gear.gd instantiate-null (thin worktree import cache), not HUD. Logs _u96_*.log untracked.
 Next: nothing owed; if the plan names no HUD item, lift to a long-roster LeaderboardPanel/hud_dock read at 125/150 only inside claim+15. Nothing for Mr. E to decide.
+
+## HUB lane - 20 Nov 2026 04:4x CT - STAND-DOWN IN WRITING (no web/ change)
+The TAKE THIS NEXT block (01:58 row 4) gave HUB no work, only "stand down in writing or audit web/". Done both:
+- Publish state re-measured: origin/gh-pages 05ac2679; gh-pages^{tree} == origin/hub:web == HEAD:web == 9ca8051e877d77a71faa8de894804e1ede0a5380. Unpublished delta: 0 files, 0 lines.
+- web/ audit: node --check app.js OK; innerHTML only at app.js:255 and :301 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; 1 CSP meta; index.html comment still true. web/ not modified, so no new hostile-name run owed. No READY TO PUBLISH claim.
+- Untracked _hub_ready_shot.png in W is mine (delete refused on this machine).

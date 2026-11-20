@@ -1,3 +1,158 @@
+## TAKE THIS NEXT - written 2026-11-19 23:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 22:58 FIRING. All six lanes ran; four shipped work. main b51e3c41 - six merges, THREE
+conflicts (docs/art/ASSET_SOURCES.md on art, root PROGRESS.md on chatbot and on hud-ui), all three
+resolved KEEPING BOTH SIDES, and I counted the residual markers in each file that conflicted: ZERO,
+ZERO, ZERO. I RE-READ ALL SIX REFS AFTER THE MERGE PASS.
+
+*** THE RENAME LANDED IN THREE LANES AND TWO OF THE THREE ARE WRONG ABOUT A NAME. I FOUND BOTH
+*** WITH ONE CHECK AND NEITHER LANE'S OWN GATE COULD HAVE SEEN IT. ***
+The check: for each of the 36 body keys, does THAT key's own new name appear under THAT key. Not
+"are there 36 names", not "did 138 lines change" - both of those are GREEN on both faults. The
+rename exists to make ONE join (the nameplate the engine draws and the Chronicle line content
+writes must say the same word about the same body), and that join is the only thing worth testing.
+I read the supervisor's directive doc MYSELF for the table rather than any lane's copy of it.
+
+1. GAME BUILD - **S51 IS 35 OF 36 AND IS NOT TICKED. HALF DELIVERED / STILL OPEN.** The engine
+   half is otherwise right: MB_NAME is 36 entries, `miniboss_name()` falls back to the capitalised
+   trade so an unnamed body still stands up, trade keys untouched, and your S51_SHOT reads Ordrik.
+   **THE FAULT: `scripts/delve.gd:412` keys Murkspit on `"drizzler"`, AND THERE IS NO SUCH KEY IN
+   THIS GAME.** I grepped scripts/ data/ tools/: `drizzler` appears in exactly two places, your
+   MB_NAME and your own gate `tools/_s51_names.gd:10`. The live key is `strickler` - it is in
+   delve.gd, dungeon_hd.gd, lore_lines.json miniboss_feed, tools/art/minibosses.py (CANON entry 23,
+   "IT STRIKES YOU LEVEL"), _colour_read.py, _trade_read.py and _s28_mbfit.gd, and
+   assets/monsters/minibosses/strickler.glb has been on disk since 18 Nov.
+   SO TWO THINGS ARE TRUE AT ONCE: `miniboss_name("strickler")` returns **"Strickler"** - the trade
+   word the whole directive exists to remove - and `"drizzler": "Murkspit"` is UNREACHABLE, a dead
+   entry in a live map, which is the exact shape you yourself refused to add at MODEL_BY on 17 Nov.
+   **AND YOUR COMMENT IS WRONG IN THE SAME PLACE AS YOUR CODE:** delve.gd says "strickler has no
+   row in the directive". It has row 23. The directive's old-name column mis-transcribes the trade
+   as "Drizzler" - content caught that in writing (`_note_c130`: "strickler -> Murkspit is the one
+   the directive tables as Drizzler") and art's `_rename_map.json` tables it as `["The Strickler",
+   "Murkspit"]`. You copied the directive's column; the other two lanes read the live key. They are
+   right. A comment beside code is not evidence for the code - that rule caught you here.
+   **AND SAY THIS OUT LOUD WHEN YOU FIX IT: YOUR GATE CANNOT CATCH THIS CLASS AT ALL.**
+   `tools/_s51_names.gd` is a SECOND COPY of the same map; it asserts the map against itself. A
+   gate that can only agree with the thing it is checking is not an instrument. The gate that would
+   have caught it asserts MB_NAME's key set against the keys that actually draw - `miniboss_lines`
+   / the by_key set / the .glb stems - and that one is worth building because the rename has to
+   hold through three more lanes.
+   NEXT: `drizzler` -> `strickler` in delve.gd:412 and in tools/_s51_names.gd:10, then the key-set
+   assertion above. Two characters and one real gate. Do NOT touch tools/art/minibosses.py or
+   lore_lines.json - art's and content's.
+2. CONTENT - **C-130 IS NOT TICKED. HALF DELIVERED / STILL OPEN, AND THE SHAPE OF IT IS PERFECT.**
+   Everything I could count off the file is exactly what you said: 36 by_key keys UNCHANGED, zero
+   pools changed length, EXACTLY 138 lines changed, no line added or removed, 801 lines total, no
+   old trade word survives anywhere in the feed, `_note_c130` nested under miniboss_feed so the
+   top-level count did not move (133 before, 133 after). **AND YOUR DECISION TO LEAVE by_key KEYS
+   ALONE IS RIGHT AND YOUR REASON IS RIGHT** - dungeon_hd.gd miniboss_for only draws a body that
+   has BOTH a mesh AND lines under its own key, so renaming keys before art renames its stems
+   would pull bodies out of the draw. You also caught the Drizzler/Strickler mis-transcription in
+   your own note while two other lanes missed it.
+   **THE FAULT: FOUR BLOCKS CARRY ANOTHER MINIBOSS'S NAME, SHIFTED ONE ROW UP THE DIRECTIVE TABLE.**
+     quartermaster -> you wrote "Halvrek"    (row 15's name; quartermaster is row 16, Wardgrim)
+     loader        -> you wrote "Wardgrim"   (row 16's name; loader is row 17, Millstone)
+     hurdleman     -> you wrote "Millstone"  (row 17's name; hurdleman is row 18, Bramblejaw)
+     jointer       -> you wrote "Bramblejaw" (row 18's name; jointer is row 15, Halvrek)
+   Nineteen lines, four blocks, rows 15-18 rotated. In play the nameplate would read Wardgrim while
+   the Chronicle says "Halvrek is down" about the same body - the one thing the rename is for.
+   **AND YOUR OWN `_note_c130` LISTS ALL FOUR CORRECTLY** ("jointer Halvrek, quartermaster Wardgrim,
+   loader Millstone, hurdleman Bramblejaw"), so the note is right and only the lines are wrong.
+   Anyone checking the note instead of the lines - including me, if I had - passes this.
+   NEXT: fix those 19 lines to the names in your own note, and nothing else. Then the row you were
+   already given at 22:2x and which still stands: stop extending the phase2_words family.
+3. ART - **BOTH HALVES TICKED, AND THE VARIANT IS THE BEST-EVIDENCED FIRST PASS THIS SEAT HAS
+   MERGED.** (a) THE RENAME: I checked all 36 CANON entries against the directive doc itself -
+   36 of 36, zero mismatches, zero keys the directive does not carry, and you read row 23 as
+   `strickler` where the game build read the column. (b) BROODGLUT: licence read ON DISK (QAL v1.0,
+   the row is in ASSET_SOURCES.md), the recolour is the pack author's OWN second skin rather than a
+   tint, 0.134 mean rgb distance with 92.5% of shared pixels past a JND, three proving views, zero
+   blanks, zero frame clips, room_locked false on a T-pose worst case.
+   **I PROVED YOUR ICOSPHERE CLAIM MYSELF OFF THE BINARY AND YOU ARE RIGHT.** I parsed
+   broodglut.glb's JSON chunk: 59 nodes, three meshes (Puglin_Body/Stick/Tusks), scene root node 58
+   = Armature. **NO ICOSPHERE IS IN THE SHIPPED FILE** - your `stray_dropped` record is accurate and
+   the sphere exists only in a Blender scene. I would otherwise have charged you with a stray mesh.
+   **AND I LOOKED AT THE SHEET.** Front, side, back. Your own three disclosures are accurate and I
+   am adding a fourth from my eye that no number in the register can reach: **IN THE FRONT VIEW THE
+   EARS READ AS A SECOND PAIR OF ARMS.** They leave the head at the same angle, the same hue and
+   nearly the same taper as the real arms, so the silhouette is a six-limbed shape. You called the
+   front "unresolved"; it is more specific than that and more fixable. The side view is excellent -
+   a hunched brute with a tusk and a reaching arm, and it is the one that sells the creature.
+   I ALSO CHECKED THE ONE THING THAT COULD HAVE MADE THE SCALE A LIE: broodglut.glb's mesh bounds
+   are IDENTICAL to Puglin.glb's, i.e. THE SCALE-UP IS NOT IN THE MESH. That is CORRECT and not a
+   fault - this project carries miniboss scale in the register and applies it at load
+   (`def["h"] = MB_HERO_H * miniboss_ratio()`), and your 2.60 m / 2.89x is recorded for exactly that.
+   I am saying it because a reader of the glb alone would call it a recolour with no scaling.
+   NEXT: your own call between a second variant and the front silhouette. If you take the
+   silhouette, the ear-as-arm reading above is the specific fault. Do NOT touch delve.gd or
+   lore_lines.json - the two rename faults above are the other lanes' to fix.
+4. HUB - **LEVEL, AND I RE-MEASURED BOTH TREES MYSELF THIS HOUR RATHER THAN COPYING ANY SHA.**
+   See the hashes in my summary. You shipped no web/ change and claimed no readiness, so **I RAN NO
+   PUBLISH GATE AND NONE WAS OWED** - saying so rather than reporting an unearned green.
+   NEXT: nothing is queued for you and the directive touches no file of yours. Stand down in
+   writing, or audit your own web/. A stand-down written up IS the delivery.
+5. CHAT BOT - **B69 IS TICKED AND THE THREE-WAY AGREEMENT IS MINE, NOT YOURS.** `!town` is the
+   second rowed command and it is read-only end to end. I counted all three faces myself:
+   data/commands.json order 30 AND commands 30, docs/COMMANDS.md 30 rows, `!town`/`!bellmire` in
+   both - and last hour's figure was 29 everywhere, so the delta is exactly one in all three.
+   The answer leaves through `_reply`/`safe_line` like every other line, costs nothing and needs no
+   hero. I read `_town_state()` rather than your summary of it: the live path is the roster ->
+   parent -> economy walk and it needs ZERO wiring from the game build, which is the right way to
+   add a command to a game that is mid-flight.
+   **ONE OBSERVATION, NOT A CHARGE:** `town_of` is assigned NOWHERE in scripts/. As a test seam
+   with a working fallback that is fine and I am not calling it dead data - but it is one unread
+   Callable in a live file, and if nothing is ever going to set it, a gate that calls it is worth
+   more than the var. Your call; you own the file.
+   NEXT: bestiary, as rowed. When it reaches the minibosses the names are the NEW ones - and take
+   them from art's `tools/art/minibosses.py` CANON, which I have verified is 36 of 36 against the
+   directive, NOT from delve.gd's MB_NAME, which is wrong at `strickler`, and NOT from
+   lore_lines.json, which is wrong at four.
+6. HUD - **U91 WAS LIVE IN THE GODOT LOCK AS I WROTE THIS AND NOTHING OF YOURS WAS WAITING ON ME.**
+   You pushed only plan syncs this hour; the long-name gate is still in flight.
+   NEXT: your own queue. The directive touches NO file of yours - the rename is delve.gd,
+   minibosses.py and lore_lines.json - so do not pick it up. The L31 remainder is still the GAME
+   BUILD's, not yours.
+
+FOR THE SUPERVISOR:
+  (1) **THE DIRECTIVE'S TABLE HAS A WRONG WORD IN IT AND IT HAS ALREADY COST ONE LANE A DEFECT.**
+      Row 23 reads "Drizzler -> Murkspit". There is no `drizzler` in this game; the body is
+      `strickler` (on disk since 18 Nov, CANON entry 23, "IT STRIKES YOU LEVEL"). Art and content
+      both read through it to the live key; the game build copied the column and shipped an
+      unreachable map entry. I have NOT edited the directive doc - it is yours - and I have rowed
+      the fix to the game build as the live key. RECOMMENDATION: correct row 23 in the doc to
+      "Strickler" so the next lane to read it does not repeat this. The NEW name Murkspit is not in
+      question; only the old-name column.
+  (2) **D98's FOURTH SIBLING IS STILL WITH YOU AND I HAVE NOT TOUCHED IT.** `phase2_words_alt2`
+      remains unread and declared dead-shaped by me; no lane has been told to wire it; content has
+      been told not to add a fifth. The unread-live count is 1 and did not move this hour. My
+      recommendation is unchanged: leave all four dead and tell content once, in writing, that the
+      family is closed.
+  (3) NO PUBLISH DECISION IS WAITING. gh-pages and origin/hub:web are level; hashes in my summary.
+  (4) ON THE NAMES THEMSELVES: the directive says Mr. E has final say and they are proposals.
+      Three lanes have now written them in. I am not asking him and I am not holding the work for
+      him - but the cost of a name changing is now 36 entries in three files plus 138 feed lines,
+      not one table row, and that is worth your knowing before it is five lanes.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST.
+A firing cannot write a scheduled task's prompt; it has no live turn to be approved in. Settled,
+and I did not re-test it this hour either. THE FIRST SEAT WITH A LIVE TURN LANDS ALL OF THESE:
+  (1) THE :58 TEAM LEAD PROMPT, STEP 0 BASELINE. It reads "UNREAD LIVE DATA KEYS: ZERO" and "32
+      keys return zero literal hits". Both stale since 18 Nov 11:23 CT. Correct to: 133 top-level
+      keys, 43 zero literal hits, 28 of them `_note_`, FIFTEEN non-note - nine prose/spec, two
+      runtime _alt, and four declared dead or dead-shaped (townsfolk, phase2_words,
+      phase2_words_alt, phase2_words_alt2, with town_levels_for_the_desktop alongside). Add
+      `phase2_words_alt2` to the do-not-wire list. CONFIRMED AGAIN THIS HOUR BY MEASUREMENT:
+      48 script files, 2,248,318 chars, 12 data files, 133 keys, 43/28/15, 34 asset dirs with
+      files and ZERO unreferenced.
+  (2) SAME PROMPT, the miniboss count line: it says thirty-three exist as of 18 Nov. It is
+      THIRTY-SIX procedural (measure off tools/art/minibosses.py - CANON is 36, ORDER is built in
+      24 appends) PLUS a second class of monster-pack variants, of which ONE now exists
+      (`broodglut`). Leave the measure-it-yourself instruction, correct both numbers.
+  (3) NEW THIS HOUR: the prompt's STEP 2 says to re-do the arithmetic on any table a verdict rests
+      on. Add the join rule that caught both faults tonight: WHEN A RENAME OR A MAPPING LANDS IN
+      MORE THAN ONE LANE, ASSERT EACH KEY'S OWN VALUE UNDER THAT KEY ACROSS EVERY FILE THAT CARRIES
+      IT. Counting the entries, counting the changed lines, and reading the lane's note all pass a
+      shifted table and a mis-keyed entry.
+
 ## TAKE THIS NEXT - written 2026-11-19 22:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 21:58 FIRING. All six lanes ran. main afb35709 - six merges, two PROGRESS.md
 conflicts resolved keeping both sides, ZERO residual markers in the file that conflicted, pushed.

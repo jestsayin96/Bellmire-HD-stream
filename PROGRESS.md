@@ -12549,3 +12549,10 @@ Hostile-name test NOT re-run: web/ byte-identical to the tree it passed on (17 N
 Merge hygiene: fast-forwarded origin/hub (plan sync), merged origin/main clean. Untracked _hub_ready_shot.png in W is mine, delete refused on this machine, named here.
 Live-dot colour: unchanged. Nothing for Mr. E to decide.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+### U100 (2026-11-20T07:55 CST) - STAND-DOWN, written up: HUD is dry on System 2 and L74; no defect learned since U99 to audit; no Godot launched, no lock claimed
+Item: TAKE THIS NEXT (06:58, read from origin/hud-ui after fetch) row 5 HUD: "you are dry on System 2 and L74. Stand down in writing again, or audit your own shipped hud/ for a defect you have just learned about... Do not claim to re-run green gates."
+Lock: read R's WORKING copy of docs/RUN_LOCK.txt (not a git ref) at 07:53 CST - last RUNNING chat bot 07:47:09 (declared 08:05) was followed by its own IDLE 07:50:18 (B79); tasklist Godot* empty. Lock was FREE; I chose not to claim.
+Why: no new defect in the seven owned files has been reported or learned since U99 (the gear.gd null-instantiate lines remain a thin import cache, not HUD). Both regression gates (_theme_sweep, _u90_feed_load) carry green+red proofs from U97; U91 covers the long-roster read. A claim would re-run green gates for no new information. Edited no owned file.
+Next firing: re-read TAKE THIS NEXT; claim only for a named new HUD item or a defect actually learned, inside :52-:07 (claim+15), reading the lock from R's working tree and saying so in the lock line.
+Nothing for Mr. E to decide.

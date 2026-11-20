@@ -1,0 +1,27 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+19:36:48 | INFO: Data are loaded, start creating Blender stuff
+19:36:48 | INFO: Blender create Mesh node Cube.125
+19:36:48 | INFO: Blender create Mesh node Cube.126
+19:36:48 | INFO: Blender create Mesh node PrototypePete_body.020
+19:36:48 | INFO: Blender create Mesh node PrototypePete_head.001
+19:36:48 | INFO: Blender create Mesh node Cube.128
+19:36:48 | INFO: Blender create Mesh node Cube.127
+19:36:48 | INFO: Blender create Mesh node Cube.003
+19:36:48 | INFO: Blender create Mesh node Cylinder.280
+19:36:48 | INFO: Blender create Mesh node Cylinder.005
+19:36:48 | INFO: Blender create Mesh node Cylinder.010
+19:36:48 | INFO: Blender create Mesh node Cylinder.022
+19:36:48 | INFO: Blender create Mesh node Cube.11839
+19:36:48 | INFO: Blender create Mesh node Cube.12993
+19:36:48 | INFO: Blender create Mesh node Cube.124
+19:36:48 | INFO: Blender create Mesh node Plane.004
+19:36:49 | INFO: glTF import finished in 0.51s
+WROTE C:\hd adventure\bellmire-art\renders\art\s7_armour\_measure.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+OBJ import of 'Armor_Black.obj' took 11.60 ms
+OBJ import of 'Armor_Golden.obj' took 7.93 ms
+OBJ import of 'Armor_Leather.obj' took 7.84 ms
+OBJ import of 'Armor_Metal.obj' took 6.50 ms
+OBJ import of 'Armor_Metal2.obj' took 8.02 ms
+
+Blender quit

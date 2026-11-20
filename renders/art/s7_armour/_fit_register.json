@@ -1,0 +1,198 @@
+{
+ "source_pack": "Quaternius Ultimate RPG Items Pack (Aug 2019), CC0 1.0",
+ "licence_file": "License.txt in the pack; recorded in docs/art/ASSET_SOURCES.md",
+ "body": "KayKit adventurers, Knight.glb, Idle frame 1",
+ "origin": "chest bone head (model y 0.97); front = model +Z",
+ "uniform_scale": 1.0,
+ "hero_chest_depth_m": 0.6397,
+ "clearance_m": 0.025,
+ "pieces": {
+  "armor_black": {
+   "glb": "assets/gear/armour/armor_black.glb",
+   "source_obj": "_packs/quaternius_ultimate_rpg_items_CC0/.../OBJ/Armor_Black.obj",
+   "uniform_scale": 1.0,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "dz_before_chest_shift": 0.8123,
+   "collar_z": 0.4227,
+   "baked_origin": "chest bone head",
+   "tris": 1040,
+   "front_first_body_rows_before": 23,
+   "front_first_body_rows_after": 4,
+   "front_first_rows": 40,
+   "blank_check": {
+    "front": 128152,
+    "side": 91910,
+    "back": 122426
+   },
+   "border_alpha": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "glb_import_sibling": false,
+   "bounds_blender_axes_about_chest": {
+    "lo": [
+     -0.7699,
+     -0.4708,
+     -0.804
+    ],
+    "hi": [
+     0.7699,
+     0.2887,
+     0.5696
+    ]
+   }
+  },
+  "armor_golden": {
+   "glb": "assets/gear/armour/armor_golden.glb",
+   "source_obj": "_packs/quaternius_ultimate_rpg_items_CC0/.../OBJ/Armor_Golden.obj",
+   "uniform_scale": 1.0,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "dz_before_chest_shift": 0.8123,
+   "collar_z": 0.4227,
+   "baked_origin": "chest bone head",
+   "tris": 1040,
+   "front_first_body_rows_before": 23,
+   "front_first_body_rows_after": 4,
+   "front_first_rows": 40,
+   "blank_check": {
+    "front": 128152,
+    "side": 91910,
+    "back": 122426
+   },
+   "border_alpha": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "glb_import_sibling": false,
+   "bounds_blender_axes_about_chest": {
+    "lo": [
+     -0.7699,
+     -0.4708,
+     -0.804
+    ],
+    "hi": [
+     0.7699,
+     0.2887,
+     0.5696
+    ]
+   }
+  },
+  "armor_leather": {
+   "glb": "assets/gear/armour/armor_leather.glb",
+   "source_obj": "_packs/quaternius_ultimate_rpg_items_CC0/.../OBJ/Armor_Leather.obj",
+   "uniform_scale": 1.0,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "dz_before_chest_shift": 0.852,
+   "collar_z": 0.383,
+   "baked_origin": "chest bone head",
+   "tris": 288,
+   "front_first_body_rows_before": 37,
+   "front_first_body_rows_after": 14,
+   "front_first_rows": 40,
+   "blank_check": {
+    "front": 110239,
+    "side": 88408,
+    "back": 108227
+   },
+   "border_alpha": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "glb_import_sibling": false,
+   "bounds_blender_axes_about_chest": {
+    "lo": [
+     -0.4877,
+     -0.3817,
+     -0.61
+    ],
+    "hi": [
+     0.4877,
+     0.2887,
+     0.3292
+    ]
+   }
+  },
+  "armor_metal": {
+   "glb": "assets/gear/armour/armor_metal.glb",
+   "source_obj": "_packs/quaternius_ultimate_rpg_items_CC0/.../OBJ/Armor_Metal.obj",
+   "uniform_scale": 1.0,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "dz_before_chest_shift": 0.8123,
+   "collar_z": 0.4227,
+   "baked_origin": "chest bone head",
+   "tris": 584,
+   "front_first_body_rows_before": 31,
+   "front_first_body_rows_after": 9,
+   "front_first_rows": 40,
+   "blank_check": {
+    "front": 120312,
+    "side": 91196,
+    "back": 115558
+   },
+   "border_alpha": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "glb_import_sibling": false,
+   "bounds_blender_axes_about_chest": {
+    "lo": [
+     -0.7156,
+     -0.4708,
+     -0.745
+    ],
+    "hi": [
+     0.7156,
+     0.2887,
+     0.3324
+    ]
+   }
+  },
+  "armor_metal2": {
+   "glb": "assets/gear/armour/armor_metal2.glb",
+   "source_obj": "_packs/quaternius_ultimate_rpg_items_CC0/.../OBJ/Armor_Metal2.obj",
+   "uniform_scale": 1.0,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "dz_before_chest_shift": 0.8123,
+   "collar_z": 0.4227,
+   "baked_origin": "chest bone head",
+   "tris": 704,
+   "front_first_body_rows_before": 27,
+   "front_first_body_rows_after": 9,
+   "front_first_rows": 40,
+   "blank_check": {
+    "front": 120969,
+    "side": 91212,
+    "back": 116199
+   },
+   "border_alpha": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "glb_import_sibling": false,
+   "bounds_blender_axes_about_chest": {
+    "lo": [
+     -0.7699,
+     -0.4708,
+     -0.745
+    ],
+    "hi": [
+     0.7699,
+     0.2887,
+     0.5124
+    ]
+   }
+  }
+ },
+ "axes_note": "bounds below are BLENDER axes about the chest bone (+Z up, FRONT = -Y). The .glb carries the glTF Y-up conversion, so in Godot/model axes the piece is +Y up and FRONT = +Z, which is what scripts/gear.gd assumes.",
+ "instrument": "front_first: in the SIDE render, 40 rows across the chest band z 0.85-1.12; a row counts as body_in_front when its frontmost opaque pixel is UNCHANGED from the bare-body render. It goes RED on zero rows. It is the viewer's question (which surface is in front), not a geometry score - an earlier cell-grid containment test reported 0.56 m of poke on a 0.64 m torso and was discarded as blind."
+}

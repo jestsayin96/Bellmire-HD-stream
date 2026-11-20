@@ -1,0 +1,248 @@
+{
+ "Armor_Black": {
+  "lo": [
+   -0.7699,
+   -0.4243,
+   -0.5632
+  ],
+  "hi": [
+   0.7699,
+   0.3352,
+   0.6386
+  ],
+  "views": {
+   "front_negY": {
+    "opaque": 54146,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "back_posY": {
+    "opaque": 53368,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "side_posX": {
+    "opaque": 33275,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "top_posZ": {
+    "opaque": 34547,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   }
+  }
+ },
+ "Armor_Golden": {
+  "lo": [
+   -0.7699,
+   -0.4243,
+   -0.5632
+  ],
+  "hi": [
+   0.7699,
+   0.3352,
+   0.6386
+  ],
+  "views": {
+   "front_negY": {
+    "opaque": 54146,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "back_posY": {
+    "opaque": 53368,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "side_posX": {
+    "opaque": 33275,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "top_posZ": {
+    "opaque": 34547,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   }
+  }
+ },
+ "Armor_Leather": {
+  "lo": [
+   -0.4877,
+   -0.3352,
+   -0.4281
+  ],
+  "hi": [
+   0.4877,
+   0.3352,
+   0.3935
+  ],
+  "views": {
+   "front_negY": {
+    "opaque": 87552,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "back_posY": {
+    "opaque": 86843,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "side_posX": {
+    "opaque": 51536,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "top_posZ": {
+    "opaque": 62449,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   }
+  }
+ },
+ "Armor_Metal": {
+  "lo": [
+   -0.7156,
+   -0.4243,
+   -0.5115
+  ],
+  "hi": [
+   0.7156,
+   0.3352,
+   0.431
+  ],
+  "views": {
+   "front_negY": {
+    "opaque": 52378,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "back_posY": {
+    "opaque": 52082,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "side_posX": {
+    "opaque": 31592,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "top_posZ": {
+    "opaque": 38977,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   }
+  }
+ },
+ "Armor_Metal2": {
+  "lo": [
+   -0.7699,
+   -0.4243,
+   -0.5115
+  ],
+  "hi": [
+   0.7699,
+   0.3352,
+   0.5885
+  ],
+  "views": {
+   "front_negY": {
+    "opaque": 46306,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "back_posY": {
+    "opaque": 45846,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "side_posX": {
+    "opaque": 31347,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   },
+   "top_posZ": {
+    "opaque": 33140,
+    "border_alpha": 0.0,
+    "size": [
+     420,
+     420
+    ]
+   }
+  }
+ },
+ "_sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\alone\\_sheet_alone.png",
+ "_sheet_cols": [
+  "front_negY",
+  "back_posY",
+  "side_posX",
+  "top_posZ"
+ ],
+ "_sheet_rows": [
+  "Armor_Black",
+  "Armor_Golden",
+  "Armor_Leather",
+  "Armor_Metal",
+  "Armor_Metal2"
+ ],
+ "_blanks": [],
+ "_border_clips": []
+}

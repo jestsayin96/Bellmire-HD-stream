@@ -1,0 +1,32 @@
+00:00.032  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:02.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Black_front_negY.png'
+00:02.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Black_back_posY.png'
+00:02.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Black_side_posX.png'
+00:02.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Black_top_posZ.png'
+00:02.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Golden_front_negY.png'
+00:02.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Golden_back_posY.png'
+00:02.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Golden_side_posX.png'
+00:03.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Golden_top_posZ.png'
+00:03.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Leather_front_negY.png'
+00:03.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Leather_back_posY.png'
+00:03.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Leather_side_posX.png'
+00:03.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Leather_top_posZ.png'
+00:03.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal_front_negY.png'
+00:03.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal_back_posY.png'
+00:03.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal_side_posX.png'
+00:03.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal_top_posZ.png'
+00:04.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal2_front_negY.png'
+00:04.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal2_back_posY.png'
+00:04.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal2_side_posX.png'
+00:04.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\alone\Armor_Metal2_top_posZ.png'
+BLANKS []
+CLIPS []
+DONE
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+OBJ import of 'Armor_Black.obj' took 1.10 ms
+OBJ import of 'Armor_Golden.obj' took 0.91 ms
+OBJ import of 'Armor_Leather.obj' took 0.60 ms
+OBJ import of 'Armor_Metal.obj' took 0.71 ms
+OBJ import of 'Armor_Metal2.obj' took 0.77 ms
+
+Blender quit

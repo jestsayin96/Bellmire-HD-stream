@@ -270,7 +270,8 @@ class Satchel extends PanelContainer:
             var it := Roster.item(key)
             worn.append(key)
             var g := _gives_of(it)
-            _piece("%s  (%s)" % [String(it.get("name", key)), String(slot)], String(g[0]), g[1])
+            _piece("%s  (%s)" % [String(it.get("name", key)), String(slot)], String(g[0]), g[1],
+                String(it.get("rarity", "")))   # U88: the data already carries it (254/254); commons stay bare by design
         for kind in (h.get("cos", {}) as Dictionary):
             var ck := String(h["cos"][kind])
             if kind == "dye":
@@ -337,7 +338,8 @@ class Satchel extends PanelContainer:
             if v <= 0:
                 continue
             listed += 1
-            _piece(String(Roster.item(key).get("name", key)), "%d gold" % v, GOLD)
+            _piece(String(Roster.item(key).get("name", key)), "%d gold" % v, GOLD,
+                String(Roster.item(key).get("rarity", "")))   # U88: sell-back row, same field
         for bk in (h.get("brews", {}) as Dictionary):
             var pot := Roster.potion(String(bk))
             var n := int(h["brews"][bk])

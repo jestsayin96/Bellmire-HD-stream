@@ -67,6 +67,116 @@ LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tange
 Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
 Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
 Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+## ART 2026-11-19 19:5x CT - SYSTEM 7, ARMOUR VARIETY: FIVE PACK SHELLS FITTED TO THE HERO BODY, AND THE FIRST FIT INSTRUMENT I WROTE WAS BLIND
+
+THE ONE LINE THE 18:5x ROW ASKED FOR, FIRST. **This session can read
+`C:\hd adventure\_packs` - through the Blender bridge, not through the Linux
+bridge.** Both halves matter. `get_device_info` lists exactly ONE connected
+folder, `C:\hd adventure\bellmire-art`, so device_bash cannot see the parent
+and the per-session narrow grant the 18:1x addendum described is STILL ON this
+firing. But the Blender bridge runs on the Windows side with the whole disk in
+reach: it listed `_packs` (97 entries), read the licence, copied the pack icons
+into the worktree and ran every render. So the pack row was NOT blocked and I
+did not fall back to a miniboss. I did not call device_request_folder_access.
+
+WHAT I CHECKED FOR FIRST, MEASURED. ASSET_SOURCES.md already carries the
+Quaternius Ultimate RPG Items Pack with the five armour bodies named, so the
+licence row existed; I opened the pack's own `License.txt` anyway and it reads
+"CC0 1.0 Universal ... Public Domain Dedication" verbatim. I grepped for
+existing armour art before modelling anything: `assets/` holds armourer ICONS
+(banner, gloves, visor) and NO armour body, `tools/art/` has no s7 generator and
+`renders/art/` had no armour directory. Nothing existed, so nothing was rebuilt.
+`scripts/gear.gd` (read only) already has an `armour` slot with a `cut` of
+heavy/light/robe - that is what these five have to serve.
+
+THE MEASUREMENT THAT SET THE WHOLE JOB. The hero is KayKit Knight.glb in the
+Idle action, frame 1, body meshes only - the KayKit file parks swords, shields,
+a helmet and a cape in the same scene and my FIRST bounds included them, which
+put the body's top at z 2.30 and would have framed every camera wrong. Blender
+axes: +Z up, and FRONT = -Y, proved off `foot.l` whose tail sits at y -0.096
+(the toe) against gear.gd's model-axes toe at +Z. Posed torso: x +/-0.405,
+y -0.364..+0.385, z 0.363..1.280; chest band depth 0.6397.
+The shells are 1.54 wide x 1.20 tall x 0.76 deep and I nearly concluded they
+were twice too wide. They are not: the 1.54 is PAULDRONS AND HORNS. The barrel
+is hero-sized already, which is why the uniform scale that reads right is 1.00.
+
+THE FAULT, AND IT WAS A PICTURE THAT FOUND IT. A four-step scale sweep
+(0.80/0.90/1.00/1.10, 60 renders) read fine from the FRONT at 1.00. The SIDE
+sheet killed that: the shell hangs off the BACK of the figure and the chest and
+belly stand bare in front of it. Measured cause - at chest height the shell's
+front plane is at y -0.268 while the hero's chest front is at y -0.328, so the
+body protrudes 6 cm THROUGH the plate. The pack's shell is deep at the waist and
+shallow at the chest; it was authored around a different body.
+THE FIX, measured per armour and not a constant: scale y by 1.1431 so the shell
+is the chest's depth plus 2.5 cm of clearance, and shift y by -0.0465 so the
+shell's chest centre sits on the hero's. Uniform scale and the collar-to-neck
+placement were left alone - one change at a time.
+
+AND HERE IS THE PART I GOT WRONG. My first fit instrument was a cell grid that
+asked whether each hero torso vertex lay inside the shell's y-span in its own
+(x,z) cell. It reported the fix made things WORSE: front poke 0.064 m -> 0.562 m
+on a 0.64 m torso, which is not a possible number. The cause is the same family
+as the pass-11 glow fault: a hollow shell's y-span inside one 6 cm cell is just
+the thickness of ONE WALL, so a body vertex behind the front wall reads as
+"outside" no matter where it is. It was measuring the wall, not containment, and
+85% of the hero's chest cells had no shell cell at all. I threw it away rather
+than report it.
+WHAT REPLACED IT ASKS THE VIEWER'S QUESTION. In the SIDE render, 40 rows across
+the chest band: find the frontmost opaque pixel in each row and ask whether it
+is UNCHANGED from the bare-body render. Unchanged means the body is standing in
+front of the plate - the exact thing the eye saw. It goes RED on zero rows, and
+it MOVES: body-in-front rows fell 23->4 (Black, Golden), 31->9 (Metal), 27->9
+(Metal2), 37->14 (Leather). Number and picture now agree.
+
+THE FIT PROOF - I LOOKED AT IT. renders/art/s7_armour/_fit_sheet.png, five rows
+x five columns: bare front, fitted front, fitted side, side WITHOUT the depth
+fix for comparison, and back. Blank-and-border: 0 blanks, 0 frame clips
+(border alpha 0.0000 on all 15 views), moved_px 16k-68k so no view is the bare
+body. An earlier framing at HALF=0.42 clipped the hero's hair crest and the
+border assertion caught it - it did its job twice this run.
+EVERY FAULT I CAN SEE, and there are six:
+  1. THE ARMHOLES ARE TOO BIG FOR THIS BODY. On the side and back views the
+     hero's grey upper arm and mitt sit INSIDE the shell's side opening rather
+     than outside it - clearest on Leather and Metal2, where the grey arm and
+     the red belt read through the gap.
+  2. THE HEM IS TOO LONG. On Black and Golden the shell reaches past the belt to
+     the top of the legs and hangs lower at the back than the front. The hero's
+     own belt is hidden entirely on Golden, Leather and Metal2.
+  3. FLOATING HORNS. Black's lower red horns and Golden's lower gold spurs hang
+     beside the hips with clear air between them and the body. Nothing anchors.
+  4. LEATHER IS AN OPEN-BACKED WRAP, NOT A CUIRASS. The back view shows the
+     hero's own grey back panel and belt plainly inside it. Its 14 residual
+     body-in-front rows are the same fault, not noise.
+  5. METAL2'S PAULDRONS STAND OFF the shoulders with a visible gap from behind.
+  6. The shells' chest-band y extents are IDENTICAL across all five
+     (-0.2682..+0.3352), so one depth correction served all of them. I checked
+     that this is Quaternius reusing a torso cage and not a stale variable - the
+     corrected extents differ (Leather +0.2697 against +0.2887 for the rest) and
+     the collar heights differ (0.383 against 0.4227).
+WHAT IS GOOD: the collar sits under the chin on all five with no strangling and
+no swallowed head; facing is unambiguous front and back; at 1.00 the plate reads
+as worn rather than as a bib, which 0.80 and 0.90 both did.
+
+SHIPPED: assets/gear/armour/{armor_black,armor_golden,armor_leather,armor_metal,
+armor_metal2}.glb - transform baked, origin at the CHEST BONE head (model y
+0.97), front = model +Z after the glTF Y-up convert. 288-1040 tris each.
+Register: renders/art/s7_armour/_fit_register.json.
+
+OWED, AND I AM NAMING IT RATHER THAN LEAVING IT TO BE FOUND: the five .glb have
+NO .glb.import sibling, so they cannot load until a Godot headless run makes
+one - the fuller's fault exactly. I did NOT take the Godot lock for it: the
+RUN_LOCK.txt copy in this worktree is stale (last line 17 Nov 11:25) and I could
+not read the live file, and claiming blind at :53 against a possible live HUD
+:52 window would reset the clean-hour count. It is the first thing I will do
+next firing, or the game build can generate it in a run it is already making.
+
+WIRING FOR THE GAME BUILD (I do not touch scripts/gear.gd): the five bodies want
+an `armour` entry each, instanced on the chest bone with IDENTITY transform -
+the fit is baked, do not re-scale. Suggested cut mapping, Mr. E's rule 2 (wear
+is the receipt): armor_leather -> light, armor_metal and armor_metal2 -> heavy,
+armor_black -> heavy and dark, armor_golden -> the top tier. NO `robe` cut is
+served by this pack - that gap is real and nothing on disk fills it.
+
 ## ART 2026-11-18 13:53 CT - THE CREW FIGURE MEASURED AGAINST THE HERO AND AGAINST ITS OWN FAMILY, AND THE BLENDER BRIDGE IS DOWN SO NOTHING HERE IS COMMITTED
 
 WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED. The 11:5x block's ART row
@@ -11888,6 +11998,62 @@ FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is unt
 NO TWITCH TEST THIS FIRING: no account used, 0 bits, no redemption, no channel state read or written.
 NEXT (19:45): the engine re-confirm I split off - parse --quit-after, _l14_test, _twitch_parse, _commands_doc no-op - in a full window, then back to auditing shipped work.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
+## D-S48 GAME BUILD 2026-11-19 19:1x CT - THE FULLER (35th) AND THE STACKMAN (36th) WIRED INTO THEIR DRAWS; THE FULLER NOW STANDS ON FOGBOUND FLOORS
+
+ITEM: the 18:58 TAKE THIS NEXT row said "the next Phase 2 system in Mr. E's order". Before taking a
+new system I took the STANDING MINIBOSS INTERLOCK, because it was broken by measurement: the lead
+ticked the Fuller at 17:58 and the Stackman at 18:58, content's C-126 Fuller lines are merged, and
+NEITHER body had an MB_FIT entry or a THEME_MINIBOSS_MORE row - so S33_DRAW's "every body on disk is
+in a draw" check would have gone red on both, and the Fuller (lines present) never reached a floor.
+- delve.gd MB_FIT: fuller 1.09, stackman 1.16 - art's _fit_report.json pairs.<key>.ratio, copied not
+  re-derived.
+- dungeon_hd.gd THEME_MINIBOSS_MORE under ART'S OWN TAG (field 5 of the tuple in
+  tools/art/minibosses.py, read): fogbound += fuller, grassland += stackman.
+- The Stackman has NO content lines yet; the gate in miniboss_for correctly holds it out (drawn 0/400).
+CONFIRMED, as the prompt asked: the LEECH and the BEADLE both have arrive lines now and are both in the
+shrine draw - 120/400 each. The gear.gd :98-104 null guard is ALREADY IN (S35, `ps == null` -> erase,
+return null); nothing to do there.
+NEW TOOL tools/_s48_fit.gd (S48_KEY=fuller|stackman): body loads, MB_FIT == art's ratio, fitted height,
+on the floor, clear of the knight; shots to renders/cycles/s48/. The first Fuller run FAILED its
+x-overlap check - a STAGING fault (the trough is ~3.3 m wide, host was at x=2.4); the harness now
+stands a wide body 0.3 m clear of the knight. Not a game defect: the engine never places them so.
+I LOOKED: fuller_1front - figure plus fulling trough stand on the floor beside the knight at ~1.1x
+height, reads plainly. stackman_1front - figure on its three courses of sheaves, fork reaching down,
+on the floor. fuller_3side90 - the trough frame occludes the figure from the side; that is art's known
+note on the Fuller (the lead said so at 18:58), not wiring.
+VERDICT LINES: parse --quit-after 300 rc 0, 0 SCRIPT ERROR, 0 Parse Error (JESTS_NO_TWITCH=1) |
+OFFFLOOR_VERDICT OK 0 of 2172 samples off the floor | TWITCH_PARSE OK (8 checks) | _townwalk ran, 0
+SCRIPT ERROR | DELVE_TEST OK ran 9001 frames | S33_DRAW OK 141 checks (bodies 36, drawn-with-lines 21,
+held-for-lines 1) | S33_RED=1 -> S33_DRAW FAIL 3 of 145 (red-proved) | S48_FIT OK fuller (5 checks) |
+S48_FIT OK stackman (5 checks).
+NOT DONE AND CARRIED: the Fuller's ONE IDEA (soak the blows, wring them back) is not yet delve-side
+behaviour - it currently stands as a 2x-hp miniboss with lines. That is the next miniboss row, and
+the "next Phase 2 system" question stays open: Systems 7 and 8 are on ART's row, so I need the lead to
+name which system number is mine.
+HOUSEKEEPING: origin/main would not merge over three UNTRACKED files art had generated in R
+(fuller.glb.import, stackman.glb, stackman.glb.import). Each was BYTE-IDENTICAL to main's blob
+(git hash-object == rev-parse origin/main:<path>), so I moved them to C:\hd adventure\_gb_moved_1907\
+- nothing lost - and merged. The 49 modified renders/ files in R's worktree are not mine and are NOT
+staged.
+LOCK: claim 19:07:50, claim+25 cap 19:32 computed first, declared finish 19:29.
+## C-127 (20 Nov 2026 CST) - THE STACKMAN feed lines (36th miniboss)
+Item: TAKE THIS NEXT (19 Nov 18:5x CT) row 2, CONTENT: C-127, full rate. Body confirmed committed: tools/art/minibosses.py on origin/main carries CANON, ORDER and OVERRIDE for stackman and assets/monsters/minibosses/stackman.glb is in the tree. Added miniboss_feed.by_key.stackman: arrive 9 / act 6 / broken 4 / fall 8 (no {name}). Words follow art's CANON mechanic: each hit pitches a sheaf and it climbs a course, out of melee reach, pitches down free; answer is cut the bottom course or bring reach. Three courses countable, bottom band broken. Man worn, crop fresh (rule 2). Plus _note_c127 (expected zero-hit key). by_key 35 -> 36. VALIDATION OK: json.load passes, round-trip byte-identical before edit, every pre-existing key equal. CODE WIRING: none new - miniboss_for reads by_key, so the Stackman enters the draw once its mesh loads (stackman.glb.import is on main). Lore entry not needed per Mr. E ruling.
+## HUB standing check - 19 Nov 2026 19:4x CT (hub lane)
+TAKE THIS NEXT (19:58 CT block, row 4 HUB) gave: NOTHING QUEUED - "stand down in writing, or audit your own shipped web/ work". Stood down; audited instead.
+Numbers: web/ vs origin/hub diff = 0 files / 0 lines (byte-identical; docs/HUB_SECURITY.md too). node --check app.js OK. app.js 375669 B, style.css 126190 B, index.html 36889 B. innerHTML in CODE at exactly 2 sites, app.js:255 and :301, both page-owned literals; outerHTML / insertAdjacentHTML / document.write / eval( / new Function = 0 in code (comment mentions only); index.html comment "The only innerHTML in app.js is two page-owned sites" still TRUE; CSP meta count 1.
+No web/ change => hostile-name test and state checks not owed; no screenshot taken (nothing changed); live-dot colour unchanged. NOT claiming READY TO PUBLISH. Only change in this commit: merge of origin/main + origin/hub into hub, and this note.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## U88 (19 Nov 19:56 CST) - SYSTEM 2 HUD HALF CLOSED: worn-accessory row (leaderboard_panel.gd :273) and sell-back row (:340) now pass the item's own rarity
+Item: TAKE THIS NEXT row 6 (HUD, 18:58 block). Lock free (chat bot IDLE 19:47:34, no Godot); claimed 19:54, released at the IDLE line below, well inside the 15-min cap.
+Change: `_piece(..., String(it.get("rarity", "")))` at :273 and `String(Roster.item(key).get("rarity",""))` at :341. Data already carried it (items.json accessories 254/254). Commons stay bare by design; cosmetics (:280) left alone, 7/556 carry rarity.
+Gate: tools/_u88_worn.gd, WINDOWED, the real Satchel._refresh path with a hero wearing scarglass_ring (very rare), mender_wraps (legendary) and a common seal, at 100/125/150. GREEN: U88_WORN OK, 2 pips, common bare. RED-PROVEN: with the argument stripped the same harness -> rc=1 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's Wraps  (gloves) | FAIL fewer than 2 pips, got 0 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's Wraps  (gloves) | FAIL fewer than 2 pips, got 0 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's W. File restored byte-identical: True.
+LOOKED AT (renders/cycles/u88/u88_150.png): purple pip + purple ink on Scarglass Ring, orange pip + ink on Mender's Wraps, Market Seal bare with its name aligned in the pip column, values right-aligned. Weapon/armour rows bare because a fresh hero wears starter gear - correct.
+Parse: bare headless exit 0; the only errors are the known worktree import-cache gap (gear .glb loads / instantiate on null), not HUD.
+Not done: L74 feed under load (FeedHUD still not walked by the theme sweep; floor _panels<12 fragility unchanged). Next firing.
+Nothing for Mr. E to decide.
 ## B66 - 2026-11-19 19:46 CT - THE SPLIT-OFF ENGINE RE-CONFIRM RAN, ALL FOUR GREEN, AND THE GENERATOR SETTLED A NUMBER MY OWN PROMPT GETS WRONG
 ITEM: plan row 5 (CHAT BOT), verbatim - "the engine re-confirm you split off (parse --quit-after, _l14_test, _twitch_parse, _commands_doc no-op) in your own :45 window". That is exactly what B65 carried forward and exactly what ran. I invented no item and pulled no Phase 2 system.
 THE WINDOW, AND I COMPUTED THE BOUNDARY BEFORE I CLAIMED: lock last line at 19:45 was game build IDLE 2026-11-19T19:16:04-06:00, zero Godot processes - free and mine. Claim 19:46, claim+25 cap 20:11, BUT THE HUD IS AT :52, so declared finish 19:51 and I said so in the RUNNING line. The battery finished 19:47:34 and I released early. NO CROSSING of any kind.

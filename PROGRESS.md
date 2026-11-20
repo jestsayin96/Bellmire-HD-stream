@@ -13253,3 +13253,8 @@ LOOKED AT IT: renders/cycles/s65/dauber.png - Wetwall nameplate, hod and plank, 
 HONEST LIMIT: the Dauber's ONE IDEA (lays a wet course per hit, breakable while wet) is NOT built - it has no act/broken lines and no MB_WAYS entry. That is the wall-placement row, still mine and still open. The Sealer (38th) is untouched by design (no feed, no name - lead's case 4).
 Lock: claim 12:08:39, cap 12:33 computed first, declared 12:30. No twitch test, 0 bits.
 NEEDED FROM MR. E: nothing.
+## C-143 (20 Nov 2026 12:3x CST) - THE SEALER'S LINES (38th miniboss, Leadbite)
+- ITEM: TAKE THIS NEXT (11:58 block) row 3, CONTENT: the Sealer is the 38th body, on main (assets/monsters/minibosses/sealer.glb, CANON/BUILDERS rows in tools/art/minibosses.py). by_key held 37 keys, no sealer. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused). Lines say the mechanic plainly: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press. Leadbite is art's CANON name. Plus `_note_c143`.
+- VALIDATION OK: json.load passes, every pre-existing key and entry unchanged (subset-compared against pre-edit copy), round-trips at indent 2, 17 new lines unique against all existing feed lines, ASCII only. by_key 37 -> 38.
+- CODE WIRING: the Sealer will draw once bestiary.gd carries sealer, AND the same join drift as C-142 repeats: Delve.MB_NAME needs a `sealer` row (name Leadbite) and commands.json "The 36 elites" text is already behind (37 feeds, now 38). Chat bot / game build own those; nothing here is wired by content.
+Next content: C-144.

@@ -941,7 +941,13 @@
     "A glove is put on, finger by finger.",
     "The rope is paid out. It does not run short.",
     "They leave the gate open behind them. Someone should.",
-    "A last mouthful of bread. Nobody talks."
+    "A last mouthful of bread. Nobody talks.",
+    "The lamp is lit from another lamp. Nobody wastes a match.",
+    "Straps are tightened. Then tightened again.",
+    "The first step is a long one. They take it.",
+    "A dog follows to the gate and sits down.",
+    "Someone says the count out loud. It matches.",
+    "The rope is tested with a heel. It does not give."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1387,7 +1393,13 @@
     "Someone sits down on the bottom step and stays there.",
     "The blade is wiped on a sleeve. The sleeve is ruined.",
     "A boot is emptied. Water, mostly.",
-    "They look at the count and say nothing. It is the right count."
+    "They look at the count and say nothing. It is the right count.",
+    "The torch is moved to the other hand.",
+    "Somebody finds a dry corner and eats standing up.",
+    "The tally is chalked on the wall. It is short, and it is good.",
+    "They walk out slowly. The stair is the same stair.",
+    "A canteen goes round. It comes back lighter.",
+    "The door stays open behind them. The draught is clean."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4249,7 +4261,20 @@
     "Packed the lunch for two. Came back with one empty hand.",
     "Said the pay was fair. It was.",
     "Knocked before entering. Old habit.",
-    "Sharpened the blade the night before. It was sharp."
+    "Sharpened the blade the night before. It was sharp.",
+    "Counted the stairs going down. Lost count coming up.",
+    "Left the good boots by the door for the next man.",
+    "Mended the strap the morning of. It held.",
+    "Said grace over a cold supper. Meant it.",
+    "Took the long way round to the gate. Looked at the town.",
+    "Kept the change. Spent none of it.",
+    "Folded the map and put it away. Did not need it.",
+    "Paid the ferryman twice, in case.",
+    "Tied the lamp on tight. The lamp is still down there.",
+    "Asked for water, not wine. Drank it slow.",
+    "Whistled the tune the miller whistles. Got it wrong.",
+    "Left a loaf on the sill. The crows ate it.",
+    "Never once complained about the cold."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13616,5 +13641,6 @@
   "_note_c125": "C-125: epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire) - all pools on the corrected proven-live list. Plain register, no mechanics, no floor counts. No new miniboss body committed on origin/art (the Rammer is still the last), so no feed lines owed. Additive. Expected zero-hit key.",
   "_note_c128": "C-128 (19 Nov 2026): no new miniboss body committed on origin/art (36 on disk, 36 keys in by_key; only _chibi variants are unfed, and those are not draw bodies), so no feed lines owed. Repeat-heavy pools extended: epitaphs +24, descend +20 (10 with the '%s %s' verb frame - the code passes descend/descends, so every frame reads as a verb plus object, never 'descend down'), cleared +18, misfire +12 (%s name, %s spell, %d roll, %d DC order kept), barks +26 (enter 4, lord 5, trap 5, hurt 4, drink 4, misfire 4; five candidate lines were exact repeats and were left out). Plain register, no mechanics, no floor counts. Additive. Expected zero-hit key.",
   "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names.",
-  "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it."
+  "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it.",
+  "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it."
 }

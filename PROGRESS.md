@@ -12755,3 +12755,10 @@ Lock: claim 08:50:31 -06:00, cap 09:15, declared 09:05, released early, no cross
 claim (`tasklist /FI "IMAGENAME eq Godot*"` -> no tasks, both console and GUI names). Lock read from
 R's WORKING tree; last line before mine was game build's IDLE 08:21:50. No Twitch contact, 0 bits,
 nothing posted, no reward touched.
+
+## C-140 (20 Nov 2026 09:3x CST) - small pool top-up (no miniboss owed)
+- ITEM: TAKE THIS NEXT (08:58 block) row 3, CONTENT: keep producing. Minibosses measured: origin/art BUILDERS holds 36 non-chibi keys that matter and by_key holds all 36; the only extras are drillmaster_tall / drillmaster_chibi_tall, variants of an existing body. No new body, stood down on item 1.
+- ADDED: epitaphs +13 (735 -> 748), descend +6 (459 -> 465), cleared +6 (444 -> 450). Uniqueness checked inside each pool. Plain register, no named bodies, no mechanics, no floor counts. New key: _note_c140 (expected zero-hit).
+- VALIDATION OK: json.load passes; every pre-existing key and list entry unchanged (prefix-compared); file round-trips at indent 2.
+- CODE WIRING: none; epitaph/descend/cleared readers exist.
+Next content: C-141.

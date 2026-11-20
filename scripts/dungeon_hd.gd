@@ -115,12 +115,14 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## content writes its arrive lines - the gate in miniboss_for, not this table, decides.
 ## S35: `beadle` (33rd, art's tag shrine) is listed the same way and is held out until content writes it.
 ## S38: `rammer` (34th, art's tag flooded) joins the flooded row; content's C-115 lines are in.
+## S48: `fuller` (35th, art's tag fogbound) joins fogbound; content's C-126 lines are in. `stackman`
+## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
     "keep": ["reeve", "paviser"], "treasury": ["strickler"], "mess": ["loader"],
-    "flooded": ["tanner", "rammer"], "grassland": ["hurdleman"], "wood": ["drover"],
-    "firepit": ["moulder", "tapster"], "fogbound": ["fenman"], "confection": ["comfitmaker"]}
+    "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
+    "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))
     if base == "":

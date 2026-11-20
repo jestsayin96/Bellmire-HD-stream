@@ -11888,3 +11888,43 @@ FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is unt
 NO TWITCH TEST THIS FIRING: no account used, 0 bits, no redemption, no channel state read or written.
 NEXT (19:45): the engine re-confirm I split off - parse --quit-after, _l14_test, _twitch_parse, _commands_doc no-op - in a full window, then back to auditing shipped work.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+
+## D-S48 GAME BUILD 2026-11-19 19:1x CT - THE FULLER (35th) AND THE STACKMAN (36th) WIRED INTO THEIR DRAWS; THE FULLER NOW STANDS ON FOGBOUND FLOORS
+
+ITEM: the 18:58 TAKE THIS NEXT row said "the next Phase 2 system in Mr. E's order". Before taking a
+new system I took the STANDING MINIBOSS INTERLOCK, because it was broken by measurement: the lead
+ticked the Fuller at 17:58 and the Stackman at 18:58, content's C-126 Fuller lines are merged, and
+NEITHER body had an MB_FIT entry or a THEME_MINIBOSS_MORE row - so S33_DRAW's "every body on disk is
+in a draw" check would have gone red on both, and the Fuller (lines present) never reached a floor.
+- delve.gd MB_FIT: fuller 1.09, stackman 1.16 - art's _fit_report.json pairs.<key>.ratio, copied not
+  re-derived.
+- dungeon_hd.gd THEME_MINIBOSS_MORE under ART'S OWN TAG (field 5 of the tuple in
+  tools/art/minibosses.py, read): fogbound += fuller, grassland += stackman.
+- The Stackman has NO content lines yet; the gate in miniboss_for correctly holds it out (drawn 0/400).
+CONFIRMED, as the prompt asked: the LEECH and the BEADLE both have arrive lines now and are both in the
+shrine draw - 120/400 each. The gear.gd :98-104 null guard is ALREADY IN (S35, `ps == null` -> erase,
+return null); nothing to do there.
+NEW TOOL tools/_s48_fit.gd (S48_KEY=fuller|stackman): body loads, MB_FIT == art's ratio, fitted height,
+on the floor, clear of the knight; shots to renders/cycles/s48/. The first Fuller run FAILED its
+x-overlap check - a STAGING fault (the trough is ~3.3 m wide, host was at x=2.4); the harness now
+stands a wide body 0.3 m clear of the knight. Not a game defect: the engine never places them so.
+I LOOKED: fuller_1front - figure plus fulling trough stand on the floor beside the knight at ~1.1x
+height, reads plainly. stackman_1front - figure on its three courses of sheaves, fork reaching down,
+on the floor. fuller_3side90 - the trough frame occludes the figure from the side; that is art's known
+note on the Fuller (the lead said so at 18:58), not wiring.
+VERDICT LINES: parse --quit-after 300 rc 0, 0 SCRIPT ERROR, 0 Parse Error (JESTS_NO_TWITCH=1) |
+OFFFLOOR_VERDICT OK 0 of 2172 samples off the floor | TWITCH_PARSE OK (8 checks) | _townwalk ran, 0
+SCRIPT ERROR | DELVE_TEST OK ran 9001 frames | S33_DRAW OK 141 checks (bodies 36, drawn-with-lines 21,
+held-for-lines 1) | S33_RED=1 -> S33_DRAW FAIL 3 of 145 (red-proved) | S48_FIT OK fuller (5 checks) |
+S48_FIT OK stackman (5 checks).
+NOT DONE AND CARRIED: the Fuller's ONE IDEA (soak the blows, wring them back) is not yet delve-side
+behaviour - it currently stands as a 2x-hp miniboss with lines. That is the next miniboss row, and
+the "next Phase 2 system" question stays open: Systems 7 and 8 are on ART's row, so I need the lead to
+name which system number is mine.
+HOUSEKEEPING: origin/main would not merge over three UNTRACKED files art had generated in R
+(fuller.glb.import, stackman.glb, stackman.glb.import). Each was BYTE-IDENTICAL to main's blob
+(git hash-object == rev-parse origin/main:<path>), so I moved them to C:\hd adventure\_gb_moved_1907\
+- nothing lost - and merged. The 49 modified renders/ files in R's worktree are not mine and are NOT
+staged.
+LOCK: claim 19:07:50, claim+25 cap 19:32 computed first, declared finish 19:29.

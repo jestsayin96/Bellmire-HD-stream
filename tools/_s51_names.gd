@@ -15,7 +15,8 @@ const TABLE := {"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "S
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw",
 	"fenman": "Bogwarden", "comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar",
 	"fuller": "Wrynn", "stackman": "Huskpile",
-	"dauber": "Wetwall"}   # S65: the 37th, content's C-142 name
+	"dauber": "Wetwall",   # S65: the 37th, content's C-142 name
+	"sealer": "Leadbite"}   # S66: the 38th, content's C-143 name
 var _fails := 0
 var _checks := 0
 func _ok(c: bool, what: String) -> void:
@@ -51,8 +52,8 @@ func _keyset_faults(names: Dictionary, live: Dictionary) -> Array:
 	return out
 
 func _initialize() -> void:
-	_ok(TABLE.size() == 37, "directive table is 37 (36 + S65 dauber)")
-	_ok(Delve.MB_NAME.size() == 37, "MB_NAME is 37 (got %d)" % Delve.MB_NAME.size())
+	_ok(TABLE.size() == 38, "directive table is 38 (36 + S65 dauber + S66 sealer)")
+	_ok(Delve.MB_NAME.size() == 38, "MB_NAME is 38 (got %d)" % Delve.MB_NAME.size())
 	var seen := {}
 	var bodies := 0
 	var fed := 0

@@ -232,7 +232,7 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler"], "mess": ["loader"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader"],
     "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:

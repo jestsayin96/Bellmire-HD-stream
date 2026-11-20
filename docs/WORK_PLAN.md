@@ -1,3 +1,196 @@
+## TAKE THIS NEXT - THE 13:58 CT FIRING, 20 NOV 2026 (machine clock 13:58-14:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 12:58 BLOCK. ***
+## SIX LANES FIRED, SIX MERGED, FIVE TICKED, ONE HALF DELIVERED, ONE SILENT. main is c3f13ef0.
+## *** A TIMING FAULT OF MINE, SAID FIRST: THIS BLOCK LANDED AFTER 14:07, SO THE GAME BUILD'S 14:07
+## *** RUN READ THE 12:58 BLOCK, WHOSE ROW 1 IT HAD ALREADY SPENT AT S66. Game build: the live row
+## *** for you is row 1 BELOW, and it is `hooper`, not `sealer`. My pacing, not your miss.
+## *** MY OWN SECOND FAULT: I NEARLY WROTE THAT CONTENT'S CITED AUTHORITY DID NOT EXIST. ***
+##   I scanned `lore_lines.json` for top-level `_note_` keys and read `_note_c143` and `_note_c144`
+##   as ABSENT - which would have made the game build's S66 citation a fiction and content's C-144 a
+##   phantom. BOTH EXIST, at lines 13252-13253, NESTED one level under `miniboss_feed`, not at top
+##   level. A raw `grep -rn 'c143\|c144' data/` found them in one call. That is the standing rule
+##   biting the seat that enforces it: A NAME SEARCH THAT FINDS NOTHING IS NOT PROOF THE THING IS
+##   MISSING. I grepped for the behaviour before I wrote the row, and that is the only reason this
+##   paragraph is a confession and not a false charge against two lanes.
+## *** AND A THIRD, CAUGHT BY ASSERTING A LANDMARK: a `/tmp/block.md` I tried to stage this block
+## *** through was REFUSED, and the path already held a STALE block from 04:02 carrying the 19 Nov
+## *** 22:0x header. `wc` reported 86 lines of a file my write never touched. I checked the first
+## *** line before using it. Assert the landmark, every time - that one would have inserted a
+## *** day-old block into the plan and reported success.
+## *** THE MINIBOSS CHAIN IS STILL STAGGERED, ONE STEP FURTHER ON: 40 / 39 / 38 / 38. ***
+##   On the MERGED tree c3f13ef0, counted by me with a brace-balanced parse, not quoted from a lane
+##   (my first regex over-captured MB_NAME at 58 keys with duplicates and swept up `line`, `name`,
+##   `type`, `strain` - I threw it out rather than report it, and re-measured by matching braces):
+##     - art  `renders/art/minibosses/_report.json` = **40** non-chibi bodies (51 total - 11 `_chibi`).
+##       `relief` is new. CANON in `tools/art/minibosses.py:13584` numbers it 40, "Watchturn", barracks.
+##     - content `data/lore_lines.json` `miniboss_feed.by_key` = **39** rows (`hooper` is new, 9/8).
+##     - engine `scripts/delve.gd` `Delve.MB_NAME` = **38** keys (`sealer` landed at S66; no `hooper`).
+##     - chat bot `data/commands.json` `miniboss`.what and .short both publish **"The 38 elites"**.
+##   READ IN THE CODE, NOT TRIGGERED, AND I SAY SO: published 38 != 39 feed rows -> **MINIBOSS COUNT
+##   should fire**; `hooper` draws a feed with no MB_NAME row -> **MINIBOSS UNNAMED should fire on
+##   ["hooper"]**. GHOST stays silent and I proved that one positively: all **38** MB_NAME keys have a
+##   `.glb` on disk, **0 ghosts**. `relief` is the chat bot's case (4) - body only, no feed, no name -
+##   so **nothing fires on the Relief and nothing is owed on it yet.** Do not pull it into the count.
+##   **THE CHAT BOT IS NOT LATE AND I CHECKED THE CLOCK BEFORE SAYING SO.** Content pushed C-144 at
+##   13:23 to `origin/content`; main was still 780175f3 when the chat bot measured at 13:46. Its 38
+##   was RIGHT against the tree it could see. The gap re-opened in MY merge, not in its work.
+## *** AND THE 40th HAS NO BACK. THAT IS WHY ART IS NOT TICKED. SEE ROW 2. ***
+
+1. GAME BUILD - **S66 IS TICKED AND I CHECKED THE ROW AND BOTH ITS SOURCES, NOT THE VERDICT.**
+   `delve.gd:421` `"sealer": "Leadbite"` and `delve.gd:401` `"sealer": 0.99`, each carrying its own
+   citation in the line. I opened both authorities: `_fit_fit_sealer_register.json` `pairs.sealer.ratio`
+   IS **0.99** (creature_h 2.42 / hero_h 2.45), copied and not re-derived exactly as your comment
+   claims; and content's `_note_c143` really does name **Leadbite** - once I looked in the right place.
+   `dungeon_hd.gd` `THEME_MINIBOSS_MORE["treasury"]` = `["strickler","sealer"]`. MB_NAME is **38** keys
+   on my own count. Your RED-FIRST `S51_NAMES FAIL 5 -> OK 160` is the proof that makes the tick worth
+   taking, and **the part I rate highest is that your S66 gate first proved TALLYMAN because you had
+   copied S65** - you caught your own gate testing the wrong body and added an own-body check.
+   **NEXT: THE SAME ROW AGAIN, FOR `hooper`. It closes MINIBOSS UNNAMED and it is one row.**
+   The name is **Hoopfast** - art's CANON title AND content's `_note_c144` agree, so take it from
+   either owning file, not from me. The theme is **mess**, so the keep row is
+   `THEME_MINIBOSS_MORE["mess"]` (it currently holds `["loader"]`). For `MB_FIT`, read the ratio out of
+   art's register the same way S66 did - **I am deliberately NOT naming a key**, because art has not
+   built a hero-pair register for the Hooper and the one you want may not exist yet; if it does not,
+   say so and take the number from `_report.json` instead, naming which you used.
+   **AND ONE THING THAT IS YOURS AND IS NOT A MINIBOSS:** the HUD measured, at 150% UI scale, that the
+   boss card (`boss_bar.gd` - the L31 remainder, YOURS since 16 Nov 18:02) grows to 810x200 and sits on
+   the director pane's "Now watching" strip and over the party-frame numbers. The card should cap its
+   width and height by pane size. That is a defect in shipped work, not a new item.
+
+2. ART - **THE RELIEF IS HALF DELIVERED AND I AM NOT TICKING IT. THE 40th HAS NO BACK VIEW.**
+   What landed is real and I checked it: `assets/monsters/minibosses/relief.glb`, CANON row 40
+   ("Watchturn", barracks, 2.52 m), `ORDER + ["relief"]`, geometry fit CORRIDOR-SAFE / UNDER-LID
+   (span 1.84, margin 9.16, lid_clear 6.98), 4 parts, 1462 faces. **I LOOKED AT ALL THREE PICTURES**:
+   front reads (kettle hat, capstan, the notch plates on the base ring), the side reads and he stands
+   on TWO legs on TWO base plates - the exact thing the Hooper's pass 6 got wrong - and the
+   three-quarter reads. Nothing in those three is wrong.
+   **WHAT IS MISSING IS THE ACCEPTANCE TEST ITSELF.** `renders/art/minibosses/relief/` holds exactly
+   `front.png`, `side.png`, `three_quarter.png`. There is **no `hero_back.png`, no `hero_front.png`,
+   no `hero_side.png`, and no `_fit_relief_register.json`** - I listed the directory and I listed all
+   22 `_fit_*_register.json`. Every other recent body has the hero trio: hooper, sealer, dauber,
+   beadle, tallyman all carry `hero_back.png`. **FIT IS THE ACCEPTANCE TEST: front, side AND BACK, on
+   a real body. Not rendered from behind, not done** - and that is Mr. E's rule, not mine.
+   **AND THE TWO INSTRUMENTS ARE NOT THE SAME INSTRUMENT, WHICH IS HOW THIS SLIPPED.** `_report.json`
+   says `fits: true` for the Relief, and that is the FLOOR-GEOMETRY check - footprint against the
+   corridor, height against the lid. It is not the on-a-body view check, which lives in the hero-pair
+   register. A green from one is not a green from the other. Your `views` list for the Relief is
+   `[front, three_quarter, side]` and it is honest; it just is not the test.
+   **NEXT: THE HERO PAIR FOR `relief` - `hero_front`, `hero_side`, `hero_back` and the register - AND
+   NOTHING ELSE UNTIL IT EXISTS.** The Watchturn's whole read is a gauge at its FOOT (four notches, the
+   dog in the ratchet plate) and a capstan it stands BEHIND; from behind is the angle a party actually
+   comes at a gate winch from. The Beadle is the precedent and it is the reason this row is written.
+   **TWO THINGS TICKED SEPARATELY, BOTH YOURS, BOTH EARNED:**
+   (a) **THE FIT INSTRUMENT IS HONEST AGAIN AND I VERIFIED THE NUMBERS MYSELF.** The 12:58 row told you
+   to merge main before your next fit run. You did (`d6c4f7d6`) and `_report.json` now reads
+   `floorgeom_stale: false`, `lid_y_m 10.0 / lid_underside_m 9.5`, `errors: []`, with a provenance
+   block that is better than what I asked for: `gd_sha256_8 bc3a603f` EQUALS `ref_gd_sha256_8`,
+   `ref_commit 780175f3`, `matches_ref true`, `drift []`. An instrument that proves its own source
+   against a named ref is the kind I will stop re-deriving.
+   (b) **YOU SWEPT 18 `__pycache__` .pyc FILES IN AND TOOK THEM BACK OUT IN THE SAME HOUR** (`74d5ec93`).
+   I checked the tree, not the message: `origin/art` and `origin/main` now carry the SAME six
+   `tools/art/__pycache__` files, which were already tracked before you - so you added 18 and removed
+   18, net zero, and nothing of mine was disturbed. Finding your own mess and clearing it inside the
+   hour is the habit. (The six pre-existing .pyc are not yours and I am not charging them to you; they
+   are noted in FOR THE NEXT TEAM LEAD.)
+
+3. CONTENT - **C-144 IS TICKED AND I COUNTED THE LINES, NOT THE CLAIM.** `miniboss_feed.by_key` is
+   **39** keys on my own `json.load`, `hooper` present, **arrive 9 / fall 8** counted literally, the
+   recent shape (no act, no broken, `{name}` unused). `_note_c144` is present and names Hoopfast as the
+   CANON name in `tools/art/minibosses.py` and says NO CODE LANE IS TO WIRE THIS KEY - which is right,
+   and which is also the line that nearly cost you a false charge from me (see the header).
+   The lines do the job the feed exists for: they say the mechanic in plain words - one hero casked and
+   still swinging blind from inside, no heal or brew or shout reaching them, the hoops on the post as
+   the gauge, break the staves or hit the cooper. PLAINNESS IS THE VOICE and these are plain.
+   **NEXT: C-145 - THE RELIEF'S LINES (40th, "Watchturn", theme `barracks`).** Art's CANON and idea
+   text are in `tools/art/minibosses.py:13584`; its gauge is FOUR NOTCHES in the ratchet plate at its
+   foot and the dog sitting in one of them, and its mechanic is that it rotates the whole party's order
+   a quarter turn - nobody wounded, nobody missing, every reach and heal pointing at the wrong body.
+   Same rule as always: you wire nothing, you write the lines.
+
+4. HUB - **SILENT. ZERO COMMITS OF YOUR OWN, NO WRITTEN STAND-DOWN, AND YOU WERE FED.** Your 12:58 row
+   named the work in terms: finish the other six packs with no licence text, `dragon_oga` first because
+   the name says OpenGameArt. Your branch carries a plan sync and a merge of main and nothing else; your
+   last `web/` commit of your own is `3ce4b7f7`, from before the 19 Nov 20:06 publish. **THIS IS NOT
+   STARVATION AND I AM NOT ABSORBING IT AS ONE** - it is going up to the supervisor, because the same
+   lane went silent three firings running on 18 Nov and that is a pattern, not an hour.
+   **A STAND-DOWN WRITTEN UP IS THE DELIVERY. Silence is not.** If the six packs are genuinely beyond a
+   lookup, say that in `PROGRESS.md` and name which ones and why, and that is a tick.
+   **NO PUBLISH GATE WAS OWED AND I RAN NONE - saying that plainly.** You touched no `web/` file and
+   claimed no readiness. I measured the delta anyway, by computing both trees myself:
+   `origin/gh-pages^{tree}` **9ca8051e** EQUALS `origin/hub:web` **9ca8051e** - **DELTA 0, FULLY
+   PUBLISHED**, last publish 19 Nov 20:06:59 CT (`05ac2679`, publish 5, LORE_FROZEN refresh).
+   **NEXT: UNCHANGED - THE OTHER SIX.** `Castle`, `3d_crystals_new`, `free_mine_assets`,
+   `golem_clean_blend`, `dragon_oga`, `handpainted_weapons`. Evidence, not verdicts; a lead is a lead
+   until a page names the zip AND shows the licence line. Import gate stays 18.
+
+5. CHAT BOT - **B85 IS TICKED, AND IT IS TICKED FOR THE PART THAT WAS NOT ASKED FOR.** Publishing
+   37 -> 38 in ONE write so MINIBOSS FIELDS never got a window to fire is correct and I verified the
+   bytes: both fields read "The 38 elites" on the merged tree, `docs/COMMANDS.md` carries it once and
+   "37 elites" zero times. **BUT THE REASON THIS IS A STRONG TICK IS THAT YOU REFUSED TO ACCEPT A
+   SILENCE.** A guard going quiet means fixed OR dead, and you red-proved both arms rather than
+   assume: published 39 -> COUNT fires; `.short` alone to 40 -> FIELDS fires with COUNT silent because
+   COUNT reads `.what`. You restored `commands.json` byte-identical after each (`e8b7aa2f` both times).
+   **AND THE CORRECTION YOU VOLUNTEERED ON YOUR OWN INSTRUMENT IS WORTH MORE THAN THE FIX**: a clean
+   scene parse does NOT prove the guard family clean, because a parse never calls `ChatCmd.commands()`,
+   so the L14 gate is the authority - you said that about your own cleaner number. That is exactly the
+   standing rule and you applied it against yourself.
+   You also merged rather than forced when the push was rejected, and you said which bridge you used.
+   **NEXT: 38 -> 39, BOTH FIELDS, ONE WRITE, AND NOT BEFORE THE FEED IS ON YOUR TREE.** Content's C-144
+   is on main as of `c3f13ef0`; measure `by_key` yourself on the merged tree rather than taking my 39.
+   Then regenerate the doc from the real `tools/_commands_doc.gd`, as you did this hour.
+   **DO NOT COUNT `relief`.** It is case (4) - body only, no feed, no name. 39 is the number.
+
+6. HUD - **U105 IS TICKED AS THE CAPTURE IT CLAIMED, AND I AM SAYING EXACTLY WHAT IT DOES NOT COVER.**
+   You delivered the 125/150% pass the U104 window ran out on: `tools/_u104_shot.gd` now steps
+   `UiTheme.set_scale`, and you reported rects rather than adjectives - 1.25 plate (609,232) 336x113,
+   1.5 plate (539,208) 403x134, `plates=1 offscreen=0 under_chronicle=0` at both. **YOU LOOKED AT THE
+   125/150% FRAMES AND YOU SAID WHICH ONES**, and when a first run came back `plates=0` you explained
+   it (the casters had fallen; the strip correctly draws nothing then) instead of re-running until green.
+   **WHAT IS NOT TICKED AND STAYS OPEN, BECAUSE YOU SAID IT FIRST: the 150% plate is MEASURED, NOT
+   SEEN.** Your own entry says the rect may be drawn UNDER the boss card and that you have not confirmed
+   it by a picture. I am not calling that done, and I am not charging you for it either - a lane that
+   labels its own evidence weak is doing the thing this house wants.
+   **I DID NOT RUN YOUR GATE. This tick is on the writing and on your committed tool, not on a battery
+   I ran.** Nobody should later read it as a verified capture.
+   **A WRITING SLIP, ONE LINE, NOT AN INCIDENT:** your second claim at 13:54:55 wrote `cap 14:11`. Your
+   cap is claim+**15**, which is 14:09:55. You released at 13:56:05, 70 seconds in, so nothing came of
+   it - but compute the boundary first and then write it, the same fix the chat bot adopted.
+   **NEXT: LOOK AT THE SECOND RUN'S 150% FRAME.** If the plate is hidden behind the boss card, move
+   `ManaStrip` clear of it in `hud_dock.gd` - your file. The boss card's own size cap is the game
+   build's and I have put it in row 1. Then the pair/grid pane pass, then L74.
+
+FOR THE SUPERVISOR - ONE THING, AND IT IS A REPEAT.
+  **THE HUB LANE FIRED AT 13:37 AND SHIPPED NOTHING OF ITS OWN - no commit, no written stand-down -
+  after a 12:58 row that named six specific packs and the cheapest one to start with.** Its last
+  self-authored `web/` commit is `3ce4b7f7`, before the 19 Nov 20:06 publish. The same lane went silent
+  three firings running on 18 Nov and I raised it then. PUBLISHING IS UNAFFECTED AND I MEASURED IT:
+  `origin/gh-pages^{tree}` and `origin/hub:web` are the SAME TREE `9ca8051e` - zero unpublished delta.
+  MY RECOMMENDATION: nothing punitive. Feed it the identical row again - it is a one-lookup task - but
+  you should know a lane has gone quiet twice rather than hear it first as a gap in the catalogue.
+  NOTHING ELSE IS WAITING ON YOU. No publish decision is owed this hour; there is nothing to publish.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land these
+the first time Mr. E is live, all at once):
+  (1) **THE STEP 0 BASELINE IS STALE.** The prompt's 18 Nov 09:1x figures (2,180,937 chars, 122 keys,
+      32 zero-hit of which 18 `_note_`, 31 asset dirs, 3 declared-dead) are superseded. MEASURED ON
+      c3f13ef0 AT 14:0x CT 20 NOV: 48 script files, **2,286,691 chars**, 12 data files, **137
+      top-level keys**, **47 zero-literal-hit**, **34 asset directories with files, 0 unreferenced**.
+      The 47 account for exactly: **32** `_note_` cycle notes, **2** runtime-built `_alt` pools (READ,
+      delve.gd:3819 `base + "_alt"`), **4** declared dead (`phase2_words`, `phase2_words_alt`,
+      `phase2_words_alt2`, `town_levels_for_the_desktop`), **9** prose/spec keys. UNREAD LIVE DATA
+      KEYS: **ZERO**. The prompt's accounted list must gain `phase2_words_alt2` as a FOURTH
+      declared-dead name - it is unreachable and I re-proved it this hour: `grep -rn alt2 scripts/ web/`
+      returns nothing and the only concatenation builds `_alt`, never `_alt2`.
+  (2) **THE HUB PUBLISH FIGURES IN THE PROMPT ARE TWO DAYS STALE AND WRONG.** It says gh-pages is
+      `45a7904` from 18 Nov 03:34 and that a 2-file / 19-line tier-underline delta is merged and
+      unpublished. MEASURED: gh-pages is **05ac2679**, publish 5, **19 Nov 20:06:59 CT**, and
+      `origin/gh-pages^{tree}` **EQUALS** `origin/hub:web` at **9ca8051e** - **DELTA 0**. The
+      tier-underline fix went out in publish 4. Do not re-raise it.
+  (3) **SIX `tools/art/__pycache__/*.pyc` FILES ARE TRACKED ON main** (creatures/lordlib/lords/
+      minibosses .cpython-313, floorgeom/minibosses .cpython-310). They predate art's 20 Nov sweep and
+      are not art's fault this hour. Build artefacts in a tracked tree; worth a one-line gitignore when
+      a live turn allows, and not worth a lane's firing.
+
 ## TAKE THIS NEXT - THE 12:58 CT FIRING, 20 NOV 2026 (machine clock 12:58-13:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 11:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED (ART TWICE), SIX TICKED. main is a0b1bf00.

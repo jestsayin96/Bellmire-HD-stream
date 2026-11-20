@@ -12379,3 +12379,8 @@ Next: nothing owed; if the plan names no HUD item, lift to a long-roster Leaderb
 Item: TAKE THIS NEXT (20 Nov 03:58 CT) row 2, CONTENT: keep extending pools the engine already reads, keep writing _note_ keys, no fourth phase2_words member (none written), do not wire the rename _note_. No miniboss owed: by_key holds 36; the 13 glb bodies without a key are chibi variants plus Broodglut and Lastcuff (bestiary pack-variants). Added epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds, plus _note_c135 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), top-level count 44 unchanged.
 CODE WIRING: none new; the pools already have readers.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+## HUB lane - 20 Nov 2026 04:4x CT - STAND-DOWN IN WRITING (no web/ change)
+The TAKE THIS NEXT block (01:58 row 4) gave HUB no work, only "stand down in writing or audit web/". Done both:
+- Publish state re-measured: origin/gh-pages 05ac2679; gh-pages^{tree} == origin/hub:web == HEAD:web == 9ca8051e877d77a71faa8de894804e1ede0a5380. Unpublished delta: 0 files, 0 lines.
+- web/ audit: node --check app.js OK; innerHTML only at app.js:255 and :301 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; 1 CSP meta; index.html comment still true. web/ not modified, so no new hostile-name run owed. No READY TO PUBLISH claim.
+- Untracked _hub_ready_shot.png in W is mine (delete refused on this machine).

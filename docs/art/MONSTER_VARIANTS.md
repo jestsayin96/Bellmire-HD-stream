@@ -17,7 +17,7 @@ the right instruction for a first pass.
 | base | `assets/monsters/Puglin.glb`, Quaternius *Bestiary — Dungeon Monsters Kit*, QAL v1.0 |
 | regular version | `puglin` in `bestiary.gd`, `h` 0.90, family `fiend` |
 | recolour | the pack author's **own** `T_Puglin_BaseColor_2` (red), swapped for `_1` (olive) |
-| scale | **2.60 m — 2.89× its regular version**, 1.06× a hero |
+| scale | **6.60 m — 7.33× its regular version, 2.69× a hero** (pass 4; was 2.60 m / 1.06×) |
 | theme | `mess` |
 | idea | **IT EATS ITS OWN** — while any lesser puglin in the room still lives it takes one, swallows it and closes its own wounds. The swarm is its health; the big one is not the target. |
 | shipped | `assets/monsters/minibosses/broodglut.glb`, 2.98 MB, 7,528 tris, 55 bones, static (no actions) |
@@ -74,8 +74,9 @@ occlusion test all come free with it, and reuse is the cheaper honesty.
 
 Register: `renders/art/variants/_register.json` — verdict **GREEN**: 0 blanks,
 0 frame clips, 3 of 3 proving views, errors `[]`, `room_locked: false`
-(widest span 4.10 m against an 11.0 m corridor clear — and that span is a
-T-pose, i.e. the worst case, so the verdict errs the safe way).
+(widest span **10.41 m** against an 11.0 m corridor clear at pass 4's scale —
+and that span is a T-pose, i.e. the worst case, so the verdict errs the safe
+way). At pass 3's 2.60 m the span was 4.10 m.
 
 **What the register cannot see, said plainly:**
 
@@ -126,17 +127,128 @@ It is a Blender 5.2 glTF-import artifact for any glb carrying an armature.
 the game build lane to chase** — which is precisely where the old wording would
 have sent someone. The handling passed; the explanation did not.
 
+## Pass 4 — it has to TOWER, and 3x does not fit the corridor
+
+Written 20 Nov 2026, 00:46 CT by the ART lane, clock read off the machine.
+**Supervisor directive 20 Nov 00:10 CT**, carrying Mr. E's own words after he
+looked at pass 3's sheet: *"it looks the same size as the hero knight... a
+miniboss needs to tower over the heroes... minimum 2-3x the hero's height...
+if it doesn't make the viewer go 'oh crap', it's not big enough."*
+The corridor gate stays: *"it has to fit a three-cell corridor."*
+
+**Pass 3 was 2.60 m against a 2.45 m hero — ratio 1.06, and the procedural
+band is no taller.** I first wrote here that all thirty-six sit at 1.06, then
+measured it rather than shipping it: across the **30 miniboss keys that carry a
+`_fit_*_register.json` in this tree (31 pairs)** the ratio runs **0.84 to 1.20**
+— heights 2.05 m to 2.95 m — and only four are at 1.06. **Several are
+SHORTER than a hero.** The flat-1.06 sentence was a remembered number from one
+register; the range is the measured one, and it makes the point harder: the
+whole class is eye-level with the party or below it. No register could say so,
+because every register compares a creature with itself.
+
+### The new height is the top of a measured band, not a taste
+
+The directive asks for 2-3x AND keeps the corridor gate, and **those two
+cannot both be had at 3x.** `minibossgen`'s corridor clear is
+`3 * 4.0 - 2 * 0.5 = 11.0 m`. This body is authored in a **T-pose** whose arm
+span scales with its height at **1.576731 m of span per metre of height**
+(4.0995 / 2.60, measured at pass 3):
+
+| ratio | height | T-pose span | corridor margin | |
+|---|---|---|---|---|
+| 2.00 | 4.90 m | 7.73 m | 3.27 m | safe |
+| 2.69 | **6.60 m** | **10.41 m** | **0.59 m** | **taken** |
+| 2.85 | 6.98 m | 11.00 m | 0.00 m | the hard wall |
+| 3.00 | 7.35 m | 11.59 m | — | **ROOM-LOCKED** |
+
+**6.60 m: 2.69x the hero, 7.33x its own regular puglin**, `room_locked: false`
+on the worst case rather than on the pose the game draws — `bestiary.gd` grafts
+the UAL library on at load, so in play the arms come down and the real
+footprint is narrower than this gate. **The way to a true 3x, if Mr. E wants
+it, is to measure the span in the UAL idle instead of the T-pose, or to
+room-lock the spawn.** Not taken this pass; one thing changed.
+
+### The foot line disagreed with the picture, so it got an instrument
+
+Looking at the new `hero_side.png` the creature's lowest pixel sits **41 px
+below** the hero's. On a sheet whose whole job is *both of these stand on the
+same floor, look how much bigger one is*, a foot line that disagrees would
+make the ratio a lie. `minibossfit`'s own comment blames its 6 deg camera
+elevation — but **an explanation beside a picture is the thing this lane has
+been caught trusting twice**, so it was made into an A/B that can move:
+`tools/art/_bg_ground_ab.py` renders the side view at 6 deg and at 0 deg with
+nothing else changed and measures the delta in each.
+
+`renders/art/variants/_ground/_ground_ab.json`:
+
+- world space, which is the only answer that is not a picture:
+  **creature min z `0.0`, hero min z `0.0`** — both ON the floor;
+  creature max z **`6.6`**, so the authored height is the rendered height.
+- **foot delta 41 px at 6 deg -> -1 px at 0 deg.** It is projection acting on
+  a 3.43 m depth separation, not a float. **Verdict: nothing to fix in the
+  art.**
+- Honest caveat on the arithmetic: centre-to-centre depth predicts only ~21 px
+  of the 41, so the contact points sit further apart in depth than the centres
+  do. **The collapse to -1 px is the evidence; the 21 px model is not.**
+- The probe goes RED ON EMPTY: a delta computed over an empty mask is an
+  error, not a zero.
+
+### What pass 4's sheet shows, and what it still cannot
+
+`renders/art/variants/broodglut/hero_{front,side,back}.png`, re-rendered on the
+real KayKit adventurer at scale 1.0, idle pose. 0 blanks, **0 frame-clip
+pixels on all four edges of all three views**, 3 of 3 proving views, errors
+`[]`. The hero's pixel area falls from ~33,000 to ~8,000 because the frame had
+to widen from 6.44 m to **13.25 m** to hold the pair — that drop IS the tower,
+in pixels.
+
+**I looked at all three. The side view is the one that sells it:** a hunched
+brute leaning down over a knight who reaches its knee. Faults I can see:
+
+- **The front view is still a T-pose and now it is an enormous one** — the arm
+  span is nearly the full 13.25 m frame. **The sheet proves scale and colour;
+  it does not prove stance**, and at this size that caveat costs more than it
+  did at 2.60 m.
+- **The ear turn from pass 3 holds at the new scale** — in front and back the
+  ears leave the skull on a clearly different line from the arms with
+  background between them. The team lead's "second pair of arms" read is gone.
+  That is my eye, and it agrees with pass 3's measurement rather than
+  replacing it.
+- **The held stick now reads.** At 2.60 m this lane recorded it as "nearly
+  invisible"; at 6.60 m it is a distinct pale prop on the creature's arm. It
+  still sits against the forearm rather than in a closed fist — the pack's own
+  rigging, untouched.
+- **The eyes are blank white with no pupil** and at this scale they are the
+  loudest thing on the face. Pack geometry, not a recolour artifact. Worth one
+  pass if Mr. E wants it; not changed here.
+- **The frame width changed again (6.44 m -> 13.25 m), so this sheet cannot be
+  compared with pass 3's by eye.** Both widths are recorded for exactly that
+  reason.
+
+### A defect in this lane's own tool, found by reading the register it wrote
+
+`--fit` without `--export` rebuilt the record from scratch and **silently
+erased `glb` and `glb_bytes`** — the two fields naming the asset that actually
+ships, and the ones the game build lane reads for the path. The register's
+verdict stayed **GREEN** throughout, because no check in that file asks whether
+the record still points at a file. `monstervariants.main` now carries those
+fields across any pass that did not re-export. Re-exported this pass to prove
+it: **3,124,424 bytes, byte-identical to pass 3** — confirming again that the
+scale-up is in the WIRING and not in the mesh.
+
 ### Wiring — the GAME BUILD lane's, not mine
+
 
 `scripts/bestiary.gd`, beside the existing `silkmother` / `spiderling` block:
 
 ```gdscript
 "broodglut": {"name": "Broodglut", "path": MON + "minibosses/broodglut.glb",
-              "anims": A_UAL, "hp": 2.4, "atk": 1.5, "spd": 3.6, "h": 2.60,
+              "anims": A_UAL, "hp": 2.4, "atk": 1.5, "spd": 3.6, "h": 6.60,
               "lift": 0.0, "family": "fiend"},
 ```
 
-- `h` **2.60** is the number this register measured; the glb is exported at
+- `h` **6.60** — **CHANGED AT PASS 4, 20 Nov 00:4x CT, AND THIS IS THE ONE
+  FIELD THE GAME BUILD MUST RE-READ.** It was 2.60. The glb is exported at
   **native** scale on purpose, because `Monster` normalises every body to `h`
   from its own bounds and a pre-scaled mesh would put the size in two places
   that can disagree.

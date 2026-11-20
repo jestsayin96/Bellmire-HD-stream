@@ -263,6 +263,114 @@ def scrapwright():
     return P
 
 
+# --------------------------------------------- THE DRAG-CHAIN'S HEAP (20 Nov)
+# THE FAULT, found by the team lead on the contact sheet and confirmed by me on
+# gaoler_chibi/three_quarter.png before a line was changed: the chain was a
+# FLAT SPIRAL on the ground plane - 2.6 turns rising 0.085 m over a 0.92 m
+# radius - and at the 3/4 camera's 14 degrees of elevation that projects to a
+# thin ellipse. It reads as a wire hoop lying on the floor. The Gaoler's whole
+# idea is IT DRAGS, and a hoop at rest is the one thing a drag is not.
+#
+# WHAT A CHAIN ACTUALLY DOES, which is the plainness rule doing the work: chain
+# hauled in and dropped does not lie out flat, it HEAPS - a cone of links with
+# the working end coming off the top. So the same helix is stood up: fewer
+# metres of floor, half a metre of height, and the run to the hand now starts
+# at the heap's own free end instead of at a literal.
+#
+# THE OLD SHAPE IS KEPT AS DRAG_HEAP_FLAT, not deleted, so the A arm of
+# _gaoler_chain_ab.py is the real pass-1 geometry and not a reconstruction of
+# it. Same reason MBG_RED_LID exists: an arm nobody can re-run is not evidence.
+DRAG_HEAP = dict(turns=3.5, z0=0.06, z1=0.50, r0=0.62, r1=0.30,
+                 steps=96, phase=-3.49)
+DRAG_HEAP_FLAT = dict(turns=2.6, z0=0.055, z1=0.14, r0=0.92, r1=0.26,
+                      steps=84, phase=0.4)
+
+
+def _dragheap(P, cx, cy, tube=0.055, link=(0.072, 0.072, 0.034), every=9):
+    """The heap of chain on the floor. Returns its FREE END in world co-ords so
+    the run to the hand is anchored to the geometry and not to a literal that
+    goes stale the moment the heap is re-shaped.
+
+    Records the item indices it added on P.heap_idx, so _gaoler_chain_ab.py can
+    render the body with and without exactly this group through ONE camera.
+    That is the pass-11 lesson: a mask rendered alone answers how BIG a thing
+    is and never whether it can be SEEN."""
+    h = DRAG_HEAP
+    i0 = len(P.items)
+    coil = L.helix(h["turns"], h["z0"], h["z1"], h["r0"], h["r1"],
+                   steps=h["steps"], phase=h["phase"])
+    coil = [Vector((p.x + cx, p.y + cy, p.z)) for p in coil]
+    P.raw(L.tube(coil, tube, 6), 'dark')
+    # a few links called out so the heap reads as chain, not as rope
+    for i in range(0, len(coil) - 3, every):
+        P.add(L.sphere(link[0], link[1], link[2], 8, 6), 'dark',
+              loc=(coil[i].x, coil[i].y, coil[i].z + 0.016))
+    P.heap_idx = list(range(i0, len(P.items)))
+    return coil[-1]
+
+
+# THE RUN, 20 Nov, and it is the SECOND half of the same fault. With the heap
+# standing up I looked at the new 3/4 and front frames and the line from the
+# heap to the hand is a PLAIN TUBE: at pane distance it reads as a bar, a haft,
+# a bow stave - anything but chain. The heap already called its links out and
+# the run never did. So the run gets links too, and they ALTERNATE a quarter
+# turn the way real chain does, which is the thing an eye reads as chain rather
+# than as rope or as iron rod. The links are measured on their own arm in
+# _gaoler_chain_ab.py: two changes sharing one render pass are still two
+# measurements.
+# `on` IS FALSE AND THAT IS A RESULT, NOT AN OVERSIGHT. The links were built,
+# rendered and measured in the same run and they did not clear the bar written
+# before the numbers were read (_gaoler_chain_ab.py's header). One term moved
+# hard in their favour - the width profile's local maxima went 4 -> 9 along the
+# visible stretch - and one clause of the bar, "cv must beat the plain tube by
+# 1.4x", turned out to be the wrong term: cv is dominated by the line's own
+# foreshortening, not by links, so a plain tube already reads 0.30 there. THE
+# BAR IS NOT MOVED IN THE RUN THAT WROTE IT. The geometry stays off, the arm
+# stays runnable, and the next pass can write a bumps-only bar before it looks.
+RUN_LINKS = dict(step=0.17, rx=0.080, rz=0.028, on=False)
+
+
+def _dragrun(P, pts, tube=0.052):
+    """The chain from the heap to the hand. Returns nothing; records the item
+    indices it added on P.run_idx so the A/B instrument can hide exactly this
+    group. `pts` must already start at the heap's free end - the builders pass
+    _dragheap's return value, never a literal."""
+    i0 = len(P.items)
+    P.raw(L.tube(pts, tube, 6), 'dark')
+    # the path itself, kept for the instrument: measuring a line's width
+    # along a PCA axis makes every bend in it look like a bulge, so the A/B
+    # harness walks THIS polyline instead of guessing an axis from the pixels.
+    P.run_path = [Vector(q) for q in pts]
+    cfg = RUN_LINKS
+    if cfg.get("on"):
+        # densify the polyline, then drop a link every `step` metres of it
+        dense = []
+        for a, b in zip(pts[:-1], pts[1:]):
+            seg = Vector(b) - Vector(a)
+            n = max(1, int(seg.length / 0.02))
+            for i in range(n):
+                dense.append((Vector(a) + seg * (i / float(n)), seg.normalized()))
+        k, acc = 0, 0.0
+        for i, (pt, d) in enumerate(dense):
+            acc += 0.02
+            if acc < cfg["step"]:
+                continue
+            acc = 0.0
+            # the two directions perpendicular to the run. A link's FLAT axis
+            # is one of them and the next link's is the other - that quarter
+            # turn is the whole read.
+            up = Vector((0.0, 0.0, 1.0))
+            p1 = d.cross(up)
+            if p1.length < 1e-4:
+                p1 = d.cross(Vector((1.0, 0.0, 0.0)))
+            p1 = p1.normalized()
+            p2 = d.cross(p1).normalized()
+            P.raw(aim(L.sphere(cfg["rx"], cfg["rx"], cfg["rz"], 8, 6),
+                      (pt.x, pt.y, pt.z), p1 if (k % 2 == 0) else p2), 'dark')
+            k += 1
+    P.run_idx = list(range(i0, len(P.items)))
+
+
 # -------------------------------------------- 3 THE GAOLER: a hook and a coil
 def gaoler():
     """IT DRAGS. A hook on a long chain: it takes one hero out of the file and
@@ -311,16 +419,21 @@ def gaoler():
     P.raw(L.tube(hook, [0.075, 0.072, 0.068, 0.064, 0.060, 0.056,
                         0.050, 0.044, 0.038, 0.028, 0.014], 8), 'bone')
     P.add(L.sphere(0.075, 0.075, 0.075, 9, 6), 'dark', loc=(1.22, -0.58, 1.32))
-    # THE CHAIN: a flat spiral on the floor, then a run up to the hook hand
-    coil = L.helix(2.6, 0.055, 0.14, 0.92, 0.26, steps=84, phase=0.4)
-    coil = [Vector((p.x - 0.86, p.y + 0.52, p.z)) for p in coil]
-    P.raw(L.tube(coil, 0.050, 6), 'dark')
-    run = arc((-0.86 + 0.26, 0.52, 0.14), (0.26, -0.26, 1.70), 0.24, 9)
-    P.raw(L.tube(run, 0.046, 6), 'dark')
-    # a few links called out so the coil reads as chain, not as rope
-    for i in range(0, len(coil) - 3, 9):
-        P.add(L.sphere(0.068, 0.068, 0.032, 8, 6), 'dark',
-              loc=(coil[i].x, coil[i].y, coil[i].z + 0.015))
+    # THE CHAIN: a HEAP on the floor (see _dragheap - the flat spiral read as a
+    # hoop at rest, which is the one thing a drag is not), then a run from the
+    # heap's own free end up to the hook hand.
+    end = _dragheap(P, -0.92, 0.58, tube=0.050, link=(0.068, 0.068, 0.032))
+    # THE RUN, and this routing is a fault my own heap introduced: with the
+    # chain standing up instead of lying flat, the old arc from the coil to the
+    # shoulder passed BEHIND the apron and the instrument measured the loss -
+    # 4757 visible pixels in the 3/4 frame down to 999, a 79% loss of the one
+    # line that joins the heap to the hook. So it is re-routed the way the
+    # chibi's already is: out past the left leg and then across in FRONT of the
+    # apron, which is the Stoker's fault 9 in general form - never put a chain
+    # inside another object's column in the silhouette.
+    run = [end, Vector((-0.62, -0.30, 0.46)), Vector((-0.10, -0.62, 0.52)),
+           Vector((0.60, -0.72, 0.86)), Vector((1.10, -0.66, 1.16))]
+    _dragrun(P, run, tube=0.046)
     return P
 
 
@@ -1721,23 +1834,19 @@ def gaoler_chibi():
     P.raw(L.tube(hook, [0.085, 0.082, 0.078, 0.072, 0.068, 0.062,
                         0.056, 0.050, 0.042, 0.032, 0.016], 8), 'bone')
     P.add(L.sphere(0.085, 0.085, 0.085, 9, 6), 'dark', loc=(1.26, -0.52, 0.93))
-    # THE CHAIN: the flat spiral on the floor is the thing nothing else in the
-    # dungeon has and it is unchanged in idea, moved back and out so the chibi
-    # boots do not stand in it.
-    coil = L.helix(2.6, 0.055, 0.14, 0.92, 0.26, steps=84, phase=0.4)
-    coil = [Vector((p.x - 0.92, p.y + 0.56, p.z)) for p in coil]
-    P.raw(L.tube(coil, 0.055, 6), 'dark')
-    for i in range(0, len(coil) - 3, 9):
-        P.add(L.sphere(0.072, 0.072, 0.034, 8, 6), 'dark',
-              loc=(coil[i].x, coil[i].y, coil[i].z + 0.016))
-    # the run from the coil up to the shank, routed OUTSIDE the left boot and
-    # then across in FRONT of the figure at knee height - the Stoker's fault 9
-    # in general form: never put a limb or a chain inside another object's
-    # column in the front silhouette.
-    run = [Vector((-0.66, 0.54, 0.14)), Vector((-0.52, -0.18, 0.16)),
-           Vector((0.06, -0.60, 0.22)), Vector((0.70, -0.66, 0.50)),
+    # THE CHAIN: a HEAP on the floor, back and out so the chibi boots do not
+    # stand in it. The flat spiral it replaces is kept runnable as
+    # DRAG_HEAP_FLAT; see _dragheap for why it had to go.
+    end = _dragheap(P, -0.98, 0.62, tube=0.055, link=(0.072, 0.072, 0.034))
+    # the run from the heap's free end up to the shank, still routed OUTSIDE
+    # the left boot and then across in FRONT of the figure - the Stoker's fault
+    # 9 in general form: never put a limb or a chain inside another object's
+    # column in the front silhouette. Its first point is the heap's end, not a
+    # literal, so re-shaping the heap can never leave the chain in two pieces.
+    run = [end, Vector((-0.56, -0.10, 0.40)),
+           Vector((0.06, -0.56, 0.34)), Vector((0.70, -0.64, 0.56)),
            Vector((1.12, -0.56, 0.84))]
-    P.raw(L.tube(run, 0.052, 6), 'dark')
+    _dragrun(P, run, tube=0.052)
     # THE KEYS on the right hip - plain working kit, and small on purpose so
     # they do not become a second pale thing competing with the face.
     ring = [Vector((0.40 + 0.10 * math.cos(TAU * i / 14.0), -0.34,

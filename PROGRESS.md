@@ -10024,3 +10024,11 @@ LOOKED AT (renders/cycles/u88/u88_150.png): purple pip + purple ink on Scarglass
 Parse: bare headless exit 0; the only errors are the known worktree import-cache gap (gear .glb loads / instantiate on null), not HUD.
 Not done: L74 feed under load (FeedHUD still not walked by the theme sweep; floor _panels<12 fragility unchanged). Next firing.
 Nothing for Mr. E to decide.
+
+## U89 (19 Nov 20:5x CST) - U88 GREEN CAPTURE RE-TAKEN: the committed shots now show the pips (the 19:56 files were the red-proof overwrite)
+Item: TAKE THIS NEXT row 6 (HUD, 19:58 block) - re-run so the green capture is the last write. Lock free (game build IDLE 20:14, no Godot); claimed 20:53, IDLE 20:54, well inside the cap.
+Run: tools/_u88_worn.gd WINDOWED 1920x1080, no red run this time and no source edit, so nothing can overwrite the shots. U88_WORN OK rc=0; ROWS @1.5 Scarglass Ring true, Mender's Wraps true, Worn Arming Sword / rags / Market Seal false.
+Pixel count (not just the log): purple pixels 1006 / 1679 / 2422 and orange 68 / 112 / 169 at 100 / 125 / 150 (the committed 19:56 files had zero).
+LOOKED AT (renders/cycles/u88/u88_150.png): purple pip + purple ink on Scarglass Ring, orange pip + orange ink on Mender's Wraps, Market Seal, sword and rags bare with names aligned in the pip column, values right-aligned.
+Red proof stays the 19:56 one (argument stripped -> rc=1, 2 FAILs per scale); it is recorded in U88 above and I did not repeat it, to keep the shots intact.
+Next: L74 feed under load (make FeedHUD countable by the theme sweep). Nothing for Mr. E to decide.

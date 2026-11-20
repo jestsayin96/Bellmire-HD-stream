@@ -1,17 +1,31 @@
 {
  "floorgeom": {
   "corridor_clear_m": 11.0,
+  "drift": [],
   "errors": [],
-  "lid_underside_m": 6.5,
-  "lid_y_m": 7.0,
+  "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
+  "gd_sha256_8": "bc3a603f",
+  "lid_underside_m": 9.5,
+  "lid_y_m": 10.0,
+  "matches_ref": true,
+  "provenance_notes": [],
   "read_from": {
    "cell_m": "scripts\\floorgen.gd:21",
    "hall_w": "scripts\\floorgen.gd:848",
    "lid_thick_m": "scripts\\floorgen.gd:1378",
    "lid_y_m": "scripts\\floorgen.gd:1383",
    "wall_in_m": "scripts\\floorgen.gd:1698"
-  }
+  },
+  "read_from_branch": "laptop",
+  "read_from_head": "203b6a93932616028df957a76e793eccb32e4d23",
+  "read_from_tree": "C:\\hd adventure\\jests-hd-medieval-adventure",
+  "ref": "origin/main",
+  "ref_commit": "4cf65e30d70edd7cda3c9e91c09b9e6e8d4297c4",
+  "ref_gd_sha256_8": "bc3a603f",
+  "stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\jests-hd-medieval-adventure (branch laptop) scripts/floorgen.gd sha bc3a603f vs 4cf65e30d70edd7cda3c9e91c09b9e6e8d4297c4 sha bc3a603f",
+  "verified_against_ref": true
  },
+ "floorgeom_stale": false,
  "glb": "assets/monsters/minibosses/leech.glb",
  "key": "leech",
  "measured_h": 2.32,
@@ -32,7 +46,7 @@
   "corridor_margin_m": 8.742,
   "fits": true,
   "lid": "UNDER-LID",
-  "lid_clear_m": 4.18
+  "lid_clear_m": 7.18
  },
  "verdict_errors": [],
  "verts": 4168

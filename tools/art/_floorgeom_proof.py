@@ -32,6 +32,10 @@ A gate that agrees only with itself is not checked.
   G  the harness's own guard    -> a zero-match edit RAISES (this is arm B's bug)
   H  a SECOND lid .position     -> ambiguous, errors, no number (found 06:5x CT - the
                                    windowed read called a lid at 1.50 m "UNDER-LID, 2.90 clear")
+  I  PROVENANCE                  -> the stamp is present, drift MOVES term by term, an
+                                   unverifiable tree is refused, and the flag path flags
+                                   (added 07:5x CT - `_leech_span.json` had published a lid
+                                   of 7.0 out of W5 while origin/main shipped 10.0)
 
 Run:  python3 tools/art/_floorgeom_proof.py <repo>
 """
@@ -170,8 +174,11 @@ def main():
     repo = sys.argv[1] if len(sys.argv) > 1 else "."
     fails = []
 
+    arms = set()
+
     def ck(name, cond, saw):
         print(("  PASS " if cond else "  FAIL ") + name + "   saw: " + str(saw))
+        arms.add(name.strip()[0])
         if not cond:
             fails.append(name)
 
@@ -315,7 +322,65 @@ def main():
        (vb["lid"], vb["lid_clear_m"]))
     shutil.rmtree(d, ignore_errors=True)
 
-    print("\nFLOORGEOM_PROOF " + ("GREEN - 8 arms, all moved" if not fails
+    print("I  PROVENANCE - the stamp, and the drift arm made to move")
+    g = floorgeom.read(repo)
+    p = g["provenance"] or {}
+    print("   " + floorgeom.stamp(g))
+    ck("I the stamp names the tree, the file sha and the lid line verbatim",
+       bool(p.get("repo")) and bool(p.get("gd_sha256_8"))
+       and p.get("gd_lid_line") == ind["line_pos"].strip(),
+       (p.get("repo"), p.get("gd_sha256_8"), p.get("gd_lid_line")))
+    refused = None
+    try:
+        floorgeom.require_current(g)
+    except floorgeom.StaleTreeError as e:
+        refused = str(e)
+    # NOT asserted green-or-red: this arm asserts the two AGREE with each other,
+    # so it is meaningful on a tree that ships AND on one that has drifted.
+    agree = ((p.get("matches_ref") is (not bool(p.get("drift")))) if p.get("verified")
+             else (p.get("matches_ref") is None))
+    agree = agree and ((refused is None) == bool(p.get("verified") and not p.get("drift")))
+    ck("I matches_ref, drift and require_current all tell the SAME story", agree,
+       (p.get("verified"), p.get("matches_ref"), p.get("drift"), bool(refused)))
+
+    d = tree(repo, lambda t: t)                 # a tree with no git at all
+    g2 = floorgeom.read(d)
+    p2 = g2["provenance"] or {}
+    unver = None
+    try:
+        floorgeom.require_current(g2)
+    except floorgeom.StaleTreeError as e:
+        unver = str(e)
+    ck("I an UNVERIFIABLE tree is not a pass - verified False and the write is REFUSED",
+       p2.get("verified") is False and p2.get("matches_ref") is None
+       and isinstance(unver, str) and "UNVERIFIED" in unver and bool(p2.get("notes")),
+       (p2.get("verified"), p2.get("notes")))
+    ck("I the flag path FLAGS instead of raising when asked to",
+       floorgeom.require_current(g2, allow_stale=True) is p2, "returned the block")
+    shutil.rmtree(d, ignore_errors=True)
+
+    # THE DRIFT ARM ITSELF, MADE TO MOVE: same file -> empty; lid moved -> named.
+    y_other = float(ind["lid_y"]) + 3.0
+    d_same = tree(repo, lambda t: t)
+    d_moved = tree(repo, lambda t: must_replace(t, ind["line_pos"],
+                                                moved_pos_line(ind, y_other)))
+    a = floorgeom.read(d_same, _ref_depth=1)
+    b = floorgeom.read(d_moved, _ref_depth=1)
+    same = floorgeom.drift_vs(a, a)
+    moved = floorgeom.drift_vs(a, b)
+    ck("I drift_vs is EMPTY on a tree against itself", same == [], same)
+    ck("I drift_vs NAMES the term that moved, and the term derived from it",
+       any(e.startswith("lid_y_m:") for e in moved)
+       and any(e.startswith("lid_underside_m:") for e in moved)
+       and not any(e.startswith("corridor_clear_m:") for e in moved), moved)
+    ck("I drift_vs GOES RED ON EMPTY - 0 terms compared is not agreement",
+       any("compared 0 terms" in e for e in floorgeom.drift_vs({}, {})),
+       floorgeom.drift_vs({}, {}))
+    shutil.rmtree(d_same, ignore_errors=True)
+    shutil.rmtree(d_moved, ignore_errors=True)
+
+    print("\nFLOORGEOM_PROOF " + (("GREEN - %d arms (%s), all moved"
+                                   % (len(arms), "".join(sorted(arms)))) if not fails
                                   else "RED - " + "; ".join(fails)))
     return 1 if fails else 0
 

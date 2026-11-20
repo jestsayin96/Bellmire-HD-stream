@@ -254,6 +254,17 @@ def main():
                     at=dict(geom["at"], lid_y_m="MBG_RED_LID=%s (red arm)" % red))
     report = {"ok": True, "floor_geom": geom, "red_arm": red or None,
               "minibosses": {}, "errors": []}
+    # PROVENANCE, 07:5x CT 20 Nov. `geom` now carries the tree it was parsed
+    # from and a term-by-term comparison against origin/main's floorgen.gd
+    # (floorgeom._provenance). A report quoting a lid out of a tree that no
+    # longer ships is the fault the team lead found in _leech_span.json, so it
+    # is FLAGGED here in its own field - `ok` is left to the art faults, and a
+    # reader who wants the number has to see which tree it came from.
+    _p = geom.get("provenance") or {}
+    report["floorgeom_stale"] = bool(_p.get("drift")) or not _p.get("verified")
+    report["floorgeom_stamp"] = FG.stamp(geom)
+    if report["floorgeom_stale"]:
+        report["errors"].append("floorgeom provenance: " + FG.stamp(geom))
     # The reader's own complaints are THIS report's errors. An unreadable
     # floorgen.gd is a red gate, not a quiet fallback to 11.0 and 6.50.
     for e in geom["errors"]:

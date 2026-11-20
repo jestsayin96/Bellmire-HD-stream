@@ -131,6 +131,125 @@ LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tange
 Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
 Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
 Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+## ART 2026-11-20 11:3x-11:5x CT - THE SEALER, THE 38th MINIBOSS: IT SEALS WHAT YOU CARRY, AND MY OWN EDIT SCRIPT DUPLICATED THE BODY AND RENDERED THE STALE COPY
+
+THE PLAN'S ART ROW: "THE MINIBOSSES ARE STILL YOURS - and take (a) on the next
+body, it is cheap." Both halves are done. (a) is the team lead's finding on the
+Dauber: the plumb bob - a thin line with a solid cone hanging in clear air -
+READS AS A UI DOWNLOAD ARROW at hero scale.
+
+WHAT I CHECKED FOR FIRST, MEASURED OFF THE TREE AND NOT REMEMBERED. AST walk of
+`tools/art/minibosses.py` on my own worktree: CANON 51 keys, BUILDERS 51, the
+two sets EQUAL, 14 variant keys -> 37 base bodies before this one. Agrees with
+the 10:58 team lead count. I then read every `idea` string in CANON and wrote
+the mechanic space out before designing, so the 38th is not a re-skin: nothing
+in the thirty-seven touches THE PACK. The Tallyman is the nearest and it is a
+different verb - he lifts what you are holding and walks off with it.
+
+THE SEALER (`sealer`, "Leadbite", 2.42 m, treasury, wear 0.22). Every bite of
+its press shuts ONE hero's pack: no flask, no bandage, no scroll. It takes
+nothing and breaks nothing - the gear is still in there and it is not yours
+until the press is broken. The strip of lead blanks is the gauge, so the party
+can count the fight it has left before the first bite.
+
+CORRECTION (a), TAKEN BY CONSTRUCTION RATHER THAN BY EYE. The natural sketch
+for a sealer is lead seals swinging on cords, which is the Dauber's bob four
+times over. So NOTHING ON THIS BODY HANGS: the blanks are seated in a board,
+the screw is short and thick under a crossed tommy bar (a T, which no interface
+draws), and the row is deliberately irregular - one socket empty, one blank
+struck - because five identical discs in a line is its own UI read.
+
+FIVE PASSES, ONE CHANGE JUDGED AT A TIME, EVERY ONE FOUND BY LOOKING:
+  1 -> 2  THE PRESS FACED THE CAMERA. I quoted the Drillmaster's foreshortening
+          lesson in my own docstring and then committed it rotated 90 degrees:
+          jaws opening at the front camera collapsed the whole mechanic into a
+          black slab that read as a stove door. Only the side view worked.
+  2       THE DARK SLOT RENDERED AS BRASS. metal 0.30 / rough 0.42 - my "oiled
+          iron" argument - put a warm wash on every up-facing dark face: cap,
+          press arms, boot tops, strongbox lid. Now 0.10 / 0.62, and KEPT is
+          carried by value instead of by a mirror. This change worked.
+  2 -> 3  BROADSIDE WAS NOT ENOUGH. Worn across the chest the frame's three
+          members read as three planks laid over a man - press and body shared
+          the same pixels so neither had an outline. Moved off his right and
+          down, scaled 0.80, mouth opening into clear air. The punch was
+          DELETED: it never once read as a stamp iron in any view.
+  3 -> 4  THE GAUGE OUT-SHOUTED THE MECHANIC. A bar sticking into clear air
+          with four evenly spaced pale discs read as a row of coins - a UI read
+          by another road - and its blanks were bigger and brighter than the
+          blank in the press jaws. Now a board raked down the thigh, discs
+          smaller than the press blank, uneven spacing.
+  4 -> 5  TWO FAULTS THE PICTURES GAVE ME AND NO NUMBER DID. (i) The empty
+          socket - the half of the gauge that says a pack is already shut - was
+          A DARK RECESS IN A DARK BOARD, invisible by construction in all six
+          frames; it is now a pale rim with a dark plug. (ii) THE BEADLE'S
+          FAULT CAME BACK IN A NEW COSTUME: the strongbox stood only 0.135 m
+          proud of the back, so from behind the only readable thing was a pale
+          VERTICAL patch the same size, value and place as the face panel on
+          the front. Box enlarged to stand 0.24 m proud, and the lead turned
+          into a HORIZONTAL bar across the lid.
+
+*** MY OWN WORST FAULT THIS RUN, AND IT IS THE SAME FAMILY AS THE TEAM LEAD'S
+*** RESOLVER EATING ART'S DIVIDER RULES AT 10:58. ***
+My pass-5 edit script sliced on `    _close("backside")` - a marker THE DAUBER
+ALSO USES, and the Dauber comes first in the file. So `str.index` cut at the
+Dauber's marker, and the write produced TWO COPIES of the whole Sealer block.
+Python binds the LAST definition, so the render that came back was the stale
+copy and pass 5 silently did nothing - while the generator returned rc 0 and
+`verdict GREEN` on it. I found it because the picture did not change when I had
+changed the geometry: a number said green, a picture said nothing moved, and
+the picture was right. Repaired, then verified the way the 10:58 seat verified
+his: diffed the pre-Sealer region against `git show HEAD:` line by line -
+0 lines differing, 0 HEAD lines absent from the file anywhere - and re-rendered
+from the repaired file. THE LESSON IS GENERAL: do not slice a file on a marker
+string that another body in the same file also writes.
+
+FIT PROOF - RENDERED ON THE POSED KayKit KNIGHT AND LOOKED AT.
+`renders/art/minibosses/sealer/{front,side,three_quarter,hero_front,hero_side,
+hero_back}.png`. Register `_fit_fit_sealer_register.json`: verdict GREEN,
+creature 2.42 against hero 2.45, ratio 0.99, 3 of 3 proving views, 0 blind
+views, errors [], frame_edge 0 on all four borders of all three hero views.
+My own blank-and-border assertion over all SIX pngs - run separately, because
+minibossgen's own gate only fires on the --sheet path and reported `files: 0`
+this run: front 246059 opaque px, three_quarter 199646, side 198230,
+hero_front 79442, hero_side 68568, hero_back 79888; border 0 on every one;
+0 blanks, 0 clips, verdict GREEN.
+FOOTPRINT 1.64 m span, 2.42 m tall, 4 merged meshes, 1284 faces. CORRIDOR-SAFE
+(margin 9.364 m) and UNDER-LID (clear 4.08 m). NOT room-locked.
+
+WHAT I CAN STILL SEE WRONG AND NO INSTRUMENT HERE REPORTS:
+  - THE PRESS LOOKS UNSUPPORTED. Its carrying strap is hidden behind the arm in
+    the front and three-quarter views, so the frame appears to hang in air
+    beside him, held only by the hand on the knob.
+  - THE BOARD OVERHANGS THE THIGH. Its two lowest blanks stand off the leg into
+    open air on the three-quarter view.
+  - THE STRONGBOX IS NOT A BOX FROM DIRECTLY BEHIND. It breaks the outline in
+    three-quarter but from square-on behind it still reads as a flat panel with
+    a pale bar on it. Better than pass 4; not finished.
+  - THE PRESS ARM READS AS A PLANK, not an arm - one thick straight tube with a
+    sphere on the end.
+  - A FAINT WARM CAST SURVIVES on the cap top and boot soles even at metal 0.10.
+  - The figure is slimmer than the chunky KayKit hero beside it. That is the
+    whole file's register gap, flagged on 16 Nov in `_proportion.png`, not new
+    here and not fixed here.
+
+STALE INPUT, STATED RATHER THAN HIDDEN: this worktree's `scripts/floorgen.gd`
+still carries lid 7.0 / underside 6.5 against origin/main's 10.0 / 9.5, and the
+report's own provenance arm says so in `errors`. The UNDER-LID verdict was
+therefore taken against the LOWER, STRICTER ceiling - conservative, not wrong.
+
+FOR THE GAME BUILD LANE (art does not wire):
+  - `scripts/bestiary.gd` - add `sealer` with `model` =
+    `assets/monsters/minibosses/sealer.glb` and NO `anims` entry; it is static.
+    Use h 2.42.
+  - `scripts/dungeon_hd.gd` ~655 - the theme -> miniboss map: `treasury`.
+  - `assets/monsters/minibosses/sealer.glb` has no `.glb.import` sibling until
+    a Godot run generates one, the same open item as `snarer_chibi.glb`.
+  - The mechanic itself is a design note, not a request: nothing in the engine
+    reads a pack-seal today.
+
+NO GODOT RUN THIS FIRING, SO NO LOCK WAS CLAIMED OR TOUCHED. Scratch logs in
+`renders/art/minibosses/_to_delete/sealer_nov20/`.
+
 ## ART 2026-11-19 19:5x CT - SYSTEM 7, ARMOUR VARIETY: FIVE PACK SHELLS FITTED TO THE HERO BODY, AND THE FIRST FIT INSTRUMENT I WROTE WAS BLIND
 
 THE ONE LINE THE 18:5x ROW ASKED FOR, FIRST. **This session can read

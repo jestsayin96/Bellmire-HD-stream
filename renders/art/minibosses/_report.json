@@ -24,9 +24,9 @@
    "gd_sha256_8": "e25c31d9",
    "gd_lid_line": "lid.position = Vector3(0, 7.0, 0)",
    "branch": "art",
-   "head": "d91309d47976f8fcdd5e4cfaa6c3ae7007f4c4a0",
+   "head": "946e6b2f9588f331a817d89bbb99ac6a82c5b94c",
    "ref": "origin/main",
-   "ref_commit": "72461bc319b600c6238f1605159cde318575f1ba",
+   "ref_commit": "0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": false,
@@ -2247,7 +2247,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.345,
+   "corridor_margin_m": 9.35,
    "lid": "UNDER-LID",
    "lid_clear_m": 3.92,
    "read_from": {
@@ -2273,15 +2273,62 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "sealer": {
+   "title": "Leadbite",
+   "theme": "treasury",
+   "idea": "IT SEALS WHAT YOU CARRY - every bite of the press shuts ONE hero's pack, and while the Sealer stands that pack stays shut: no flask, no bandage, no scroll, nothing that hero walked in with. It takes nothing and breaks nothing - the gear is still in there and it is simply not yours until the press is broken. The strip of lead blanks on its hip is the gauge: one blank is one more pack it can shut, so the party can count the fight it has left before the first bite",
+   "wear": 0.22,
+   "feed_line": "Someone down there is stamping lead.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1284,
+   "size": [
+    1.64,
+    1.52,
+    2.42
+   ],
+   "footprint_span": 1.64,
+   "height_m": 2.42,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.364,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.08,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.647614042881936,
+    "ortho": 2.8757717609405518,
+    "clip": [
+     7.016813278198242,
+     17.707426071166992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [
-  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 72461bc319b600c6238f1605159cde318575f1ba sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
+  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
  ],
  "floorgeom_stale": true,
- "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 72461bc319b600c6238f1605159cde318575f1ba sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
+ "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
  "blank_check": {
-  "files": 111,
+  "files": 114,
   "failures": []
  }
 }

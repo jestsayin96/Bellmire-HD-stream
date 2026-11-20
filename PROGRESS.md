@@ -12755,3 +12755,37 @@ Lock: claim 08:50:31 -06:00, cap 09:15, declared 09:05, released early, no cross
 claim (`tasklist /FI "IMAGENAME eq Godot*"` -> no tasks, both console and GUI names). Lock read from
 R's WORKING tree; last line before mine was game build's IDLE 08:21:50. No Twitch contact, 0 bits,
 nothing posted, no reward touched.
+
+## D-cycle - S62 System 47 batch 2: sixteen more whole-pack dungeon props, 36 of the 114 now on the floor, 2026-11-20 09:08-09:2x CT (game build)
+TAKE THIS NEXT (07:58 block, still the newest in WORK_PLAN.md) row 1: System 47 batch row, "WIRE THE WHOLE OF assets/props (94) AND
+assets/dungeon (20) AS DUNGEON PROPS. 10-20 THIS CYCLE." S61 did 20; this is the next 16 off the same register.
+DONE (scripts/dungeon_hd.gd, backup dungeon_hd.gd.bak_s62):
+- PROP_BATCH +16, every [base_dz_m, footprint_m] copied by script straight out of renders/art/worldfit/_manifest.json (the copy step
+  asserted CORRIDOR-SAFE + UNDER-LID per row before writing): Pedestal2 (dungeon, +0.0152 - a small floater), Anvil_Log, Barrel_Apples,
+  Barrel_Holder, Bed_Twin1, Bag, Chair_1, Nightstand_Shelf, Shelf_Small_Bottles, Whetstone, Workbench, Vase_2, Vase_4, FarmCrate_Carrot,
+  Bucket_Metal, Pot_1_Lid. All floor-standing; none past the 5 cm line (batch 1 already proves both signs past it). Same one formula,
+  lift = -base_dz_m * scale.
+- THEME_BATCH: every one of the 14 rows (8 themes + 6 biomes) gets 1-2 of them, chosen to the room (beds/barrel rack in barracks, pot
+  and apples in mess, whetstone in workshop, vases/pedestal in crypt, bottles shelf in shrine, workbench in wood...).
+- STILL LEFT OUT ON PURPOSE: wall-mount pivots (banners, Lantern_Wall, Sword_WallMount, Shelf_Arch/Simple, Peg_Rack, Chandelier,
+  Torch_Metal), Chest_Wood (reads as loot), the traps/trapdoors (read as mechanics that are not there), Arch/Arch_Door/Arch_bars
+  (doorways want a wall row), and the tabletop smalls (books, cutlery, coins, potions, candles - under 0.3 m, they want a
+  table-top placement row, not a floor cell). 78 of the 114 remain.
+TEST tools/_s62_props.gd (new, windowed, quits itself): batch size == 36, all 16 batch-2 paths present, every copied number == manifest
+live, every piece in a theme row, all 36 drawn on a holder at y=0 rest within 2 cm, floors 1..24 all place pieces, all 14 rows draw,
+0 off a floor cell, 0 off its base.
+  S62_PROPS OK n=33   (floors 1..24: 90 batch pieces, was 58 at S61)
+  RED ARM S62_RED=1 (single-sign shift): S62_PROPS FAIL [Pedestal2 gap +0.030, Statue_Horse gap +0.030, Workbench_Drawers gap +2.564]
+  - the new small floater is caught too.
+tools/_s61_props.gd: its "batch size in 10..20" line was a batch-1 statement and would now read red for a correct reason; changed to
+">= 20 (S62 added batch 2)". S61_PROPS OK n=32.
+LOOKED AT: renders/cycles/s62/s62_props.png - batch 2 in the front row, batch 1 behind, every piece on the floor line, the bed,
+barrel rack and workbench sitting flat. Framing is wide and small; the numbers carry the 2 cm claim, the picture agrees with them.
+BATTERY: parse rc 0, 0 ERROR lines; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2229 samples off the floor, INPROP 0,
+MON_INPROP 0 of 317, obstacles 36; TOWNWALK / DELVE_TEST see below.
+TOWNWALK in_solid=0/18119 (0.000%) raid_in_solid=0/5921 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 0; DELVE_TEST OK ran 9001 frames, floor
+reached 2, 0 SCRIPT ERROR, 0 Parse Error. (The first TOWNWALK/DELVE pass ran green-rc but my harness kept only the stderr tail, so
+the verdict lines were cut - I counted that as NO VERDICT and re-ran both with stdout captured; the lines above are from the re-run.)
+LOCK: claim 09:08:49 -06:00, cap 09:33 (computed first), declared 09:30, released early, no crossing. No Twitch test, 0 bits.
+NEXT (batch 3): the tabletop smalls want a table-top placement (on Table_Large / Workbench, not a floor cell), and the mount-pivot
+pieces a wall row; art's 09:05 note also hands over KayKit Dungeon Pack (185, all clear) as the following System 47 directory.

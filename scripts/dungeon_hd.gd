@@ -29,6 +29,85 @@ const THEME_PROPS := {
     "mess":     [["Bookcase_2", 1.1], ["CandleStick_Stand", 0.5]],
 }
 
+## S61 / SYSTEM 47 (batch 1 of the 114): whole-pack dungeon props out of assets/props (94) and
+## assets/dungeon (20). Every number below is COPIED from art's measured register,
+## renders/art/worldfit/_manifest.json (dirs.<dir>.rows[file].base_dz_m / footprint_m), and
+## tools/_s61_props.gd asserts the copy against that file live. base_dz_m IS SIGNED: the lowest
+## vertex relative to the pivot - negative sinks (Fence -0.9991), positive floats (Workbench_Drawers
+## +0.8842). The correction is ONE formula for both signs: lift = -base_dz_m * scale. A single-sign
+## shift would fix the sinkers and bury the floaters. Corridor and lid need no gate: art measured all
+## 114 CORRIDOR-SAFE and UNDER-LID. Wall-mounted pieces (banners, wall lantern, wall sword) are
+## left for a wall-placement row - stood on the floor they would hang off nothing.
+const PROP_BATCH := {
+    "res://assets/dungeon/Bag_Coins.glb": [-0.0115, 0.442],   # h 0.1146
+    "res://assets/dungeon/Column2.glb": [0.0083, 1.3041],   # h 4.0723
+    "res://assets/dungeon/Fence_Straight_Modular.glb": [-0.9991, 2.0],   # h 1.2939  (past 5 cm: SINKS)
+    "res://assets/dungeon/Pedestal.glb": [-0.0002, 1.9595],   # h 2.1931
+    "res://assets/dungeon/Spikes.glb": [-0.0056, 1.7645],   # h 1.1755
+    "res://assets/dungeon/Statue_Horse.glb": [0.0152, 3.3784],   # h 5.8548
+    "res://assets/dungeon/Vase.glb": [-0.002, 0.311],   # h 0.3610
+    "res://assets/dungeon/Woodfire.glb": [-0.0532, 0.8266],   # h 0.8281  (past 5 cm: SINKS)
+    "res://assets/props/Anvil.gltf": [0.0027, 1.0816],   # h 0.5560
+    "res://assets/props/Barrel.gltf": [0.0034, 0.698],   # h 0.8980
+    "res://assets/props/Bench.gltf": [-0.0073, 2.7767],   # h 0.5332
+    "res://assets/props/Cabinet.gltf": [0.0002, 1.3618],   # h 0.9974
+    "res://assets/props/Cauldron.gltf": [-0.0028, 0.9891],   # h 0.8155
+    "res://assets/props/Crate_Metal.gltf": [0.0026, 0.8659],   # h 0.8679
+    "res://assets/props/Crate_Wooden.gltf": [-0.0524, 0.9083],   # h 0.9309  (past 5 cm: SINKS)
+    "res://assets/props/Dummy.gltf": [-0.0029, 0.8085],   # h 1.8627
+    "res://assets/props/Stool.gltf": [-0.0064, 0.4746],   # h 0.5887
+    "res://assets/props/Table_Large.gltf": [0.0013, 2.8485],   # h 0.8134
+    "res://assets/props/WeaponStand.gltf": [-0.0034, 1.3862],   # h 1.1093
+    "res://assets/props/Workbench_Drawers.gltf": [0.8842, 0.4231],   # h 0.2423  (past 5 cm: FLOATS)
+}
+const THEME_BATCH := {
+    "prison": ["res://assets/dungeon/Fence_Straight_Modular.glb", "res://assets/dungeon/Spikes.glb"],
+    "crypt": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Pedestal.glb"],
+    "shrine": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Pedestal.glb"],
+    "keep": ["res://assets/props/Cabinet.gltf", "res://assets/props/Bench.gltf", "res://assets/dungeon/Statue_Horse.glb"],
+    "treasury": ["res://assets/dungeon/Bag_Coins.glb", "res://assets/props/Crate_Metal.gltf", "res://assets/props/Barrel.gltf"],
+    "workshop": ["res://assets/props/Anvil.gltf", "res://assets/props/Workbench_Drawers.gltf", "res://assets/props/Crate_Wooden.gltf", "res://assets/props/Cauldron.gltf"],
+    "barracks": ["res://assets/props/WeaponStand.gltf", "res://assets/props/Dummy.gltf", "res://assets/dungeon/Woodfire.glb"],
+    "mess": ["res://assets/props/Table_Large.gltf", "res://assets/props/Stool.gltf", "res://assets/props/Barrel.gltf"],
+    # the six biomes (FloorGen.BIOMES) draw from the same twenty
+    "grassland": ["res://assets/props/Barrel.gltf", "res://assets/props/Crate_Wooden.gltf"],
+    "confection": ["res://assets/props/Cauldron.gltf", "res://assets/props/Barrel.gltf"],
+    "flooded": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Column2.glb"],
+    "firepit": ["res://assets/dungeon/Woodfire.glb", "res://assets/props/Anvil.gltf"],
+    "wood": ["res://assets/props/Crate_Wooden.gltf", "res://assets/props/Stool.gltf"],
+    "fogbound": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Vase.glb"],
+}
+
+## the scale a batch piece stands at: the MegaKit props at MK_SCALE like the rest of them, the
+## Quaternius dungeon pieces at 1.0 as DungeonParts.kit draws them
+static var batch_red_single_sign := false
+static func batch_scale(path: String) -> float:
+    return MK_SCALE if path.begins_with(MKPROPS) else 1.0
+
+## a pack piece set down on its own base: the model sits in a holder lifted by -base_dz * scale, so
+## the holder's origin is the floor and the lowest vertex lands on it, whichever side of the pivot
+## it started. null if the file is gone (never an unguarded instantiate).
+static func batch_piece(path: String) -> Node3D:
+    if not PROP_BATCH.has(path) or not ResourceLoader.exists(path):
+        return null
+    var ps := load(path) as PackedScene
+    if ps == null:
+        return null
+    var s := batch_scale(path)
+    var holder := Node3D.new()
+    holder.name = "Batch_" + path.get_file().get_basename()
+    var n: Node3D = ps.instantiate()
+    n.scale = Vector3.ONE * s
+    var dz := float(PROP_BATCH[path][0])
+    # test hook (S61_RED): the single-sign shift row 1 warned about - lifts every piece by |dz|
+    n.position.y = (absf(dz) if batch_red_single_sign else -dz) * s
+    holder.add_child(n)
+    holder.set_meta("batch_path", path)
+    return holder
+
+## obstacle radius from art's footprint (its widest horizontal extent), at the drawn scale
+static func batch_radius(path: String) -> float:
+    return float(PROP_BATCH[path][1]) * batch_scale(path) * 0.5 + 0.1
 func _mk(nm: String) -> Node3D:
     var path := MKPROPS + nm + ".gltf"
     if not ResourceLoader.exists(path):
@@ -613,6 +692,17 @@ func _dress() -> void:
         var pn := _mk(String(spec[0]))
         if pn:
             _place_solid(pn, c, float(spec[1]), float(_rng.randi() % 4) * PI * 0.5)
+    # S61 / System 47: the batch pieces, each on its own open cell, each set on its own base
+    var batch_n := 0
+    for bp in THEME_BATCH.get(theme, []):
+        var c: Vector2i = take.call()
+        if c.x <= -999:
+            break
+        var bn := batch_piece(String(bp))
+        if bn:
+            _place_solid(bn, c, batch_radius(String(bp)), float(_rng.randi() % 4) * PI * 0.5)
+            batch_n += 1
+    info["batch_props"] = batch_n
     # L28c: standing braziers on the open floor - light where the wall torches cannot reach,
     # each flame feeding the floor's shared ember emitter (DungeonHD._atmos)
     if FloorGen.kit_look:

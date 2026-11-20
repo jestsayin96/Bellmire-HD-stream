@@ -1,3 +1,32 @@
+## D-cycle - S61 System 47 batch 1: twenty whole-pack dungeon props on every theme and biome, set on art's SIGNED base_dz_m, 2026-11-20 08:08-08:3x CT (game build)
+TAKE THIS NEXT (07:58 block) row 1: "SYSTEM 47 ... WIRE THE WHOLE OF assets/props (94) AND assets/dungeon (20) AS DUNGEON PROPS. 10-20 THIS CYCLE."
+DONE (scripts/dungeon_hd.gd, backup dungeon_hd.gd.bak_s61):
+- PROP_BATCH: 20 pieces (12 from assets/props, 8 from assets/dungeon), each [base_dz_m, footprint_m] COPIED from
+  renders/art/worldfit/_manifest.json, not re-derived. Before this only 6 props + Skull of the 114 reached a dungeon floor.
+- THE SIGN: one formula for both directions - the model sits in a holder lifted by -base_dz_m * scale (MK_SCALE 1.45 for
+  assets/props, 1.0 for assets/dungeon as DungeonParts.kit draws them). The batch includes BOTH kinds past the 5 cm line on
+  purpose: three sinkers (Fence_Straight_Modular -0.9991, Woodfire -0.0532, Crate_Wooden -0.0524) and the floater
+  (Workbench_Drawers +0.8842). No size gating written - art measured all 114 CORRIDOR-SAFE and UNDER-LID; the test re-asserts it per row.
+- THEME_BATCH: a row for all 14 FloorGen.all_themes() (the 8 themes AND the 6 biomes - a first draft covered only the 8 and the
+  test caught 10 of 24 floors with zero pieces). Each piece takes its own open cell via the existing take() + _place_solid,
+  obstacle radius = footprint/2 * scale + 0.1, so the walkers route round them like every other prop. info["batch_props"] counts.
+- batch_piece() guards ResourceLoader.exists AND a null load - no unguarded instantiate (the gear.gd:104 shape is not repeated here).
+- LEFT OUT ON PURPOSE: wall-mounted pieces (Banner_*, Lantern_Wall, Sword_WallMount, Shelf_Arch/Simple, Peg_Rack, Chandelier) -
+  their pivot IS the mount, so on the floor they hang off nothing. They want a wall-placement row, not a base offset. Chest_Wood
+  (-1.0) left out too: a decorative chest beside the searchable chests would read as loot. 94 of the 114 remain for next batches.
+TEST tools/_s61_props.gd (windowed, quits itself): (1) every copied number == manifest row live, CORRIDOR-SAFE + UNDER-LID;
+(2) all 20 drawn in the engine on a holder at y=0 - lowest visible vertex within 2 cm (MEASURED: Fence -0.9991 -> +0.0000,
+Woodfire -> +0.0000, Crate_Wooden -> -0.0000, Workbench_Drawers +0.8842 -> -0.0001); (3) floors 1..24 built: every one places
+batch pieces, all 14 rows drew (58 pieces), 0 off a floor cell, 0 resting off its base.
+  S61_PROPS OK n=32
+  RED ARM S61_RED=1 (the single-sign shift, lift by |dz|): S61_PROPS FAIL all 20 pieces rest on the floor within 2 cm
+  ["Statue_Horse.glb gap +0.030", "Workbench_Drawers.gltf gap +2.564"] - the floater leaves the floor, exactly the bite row 1 named.
+LOOKED AT: renders/cycles/s61/s61_props.png - twenty on one floor line, drawers sitting on it at the right end; s61_red.png - the
+same line with the drawers hanging 2.56 m in the air. Picture and numbers agree.
+BATTERY: parse rc 0, 0 ERROR lines; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2391 samples off the floor, INPROP 0, MON_INPROP 0 of 335 (obstacles 35 - the batch pieces are routed round); TOWNWALK in_solid=0/17656 raid_in_solid=0/7515 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+LOCK: claim 08:08:16, cap 08:33 (computed first), declared 08:30, no crossing. No Twitch test, 0 bits.
+NEXT (batch 2): another 10-20 of the 94 left - and a wall-placement row for the mount-pivot pieces (banners, wall lantern, wall sword, shelves) rather than a base lift.
+
 ## D-cycle - S60 the Leech's span: art's MEASURED 2.2581 copied in, the S59 bound struck, 2026-11-20 07:08-07:2x CT (game build)
 TAKE THIS NEXT (06:58 block) row 1: "put `"span": 2.2581` into the leech's def and strike the bound paragraph ... COPY the number."
 DONE: scripts/bestiary.gd leech def now carries `"span": 2.2581` - copied from renders/art/minibosses/_fit_leech_register.json

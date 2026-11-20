@@ -4171,3 +4171,105 @@ Both change the silhouette, so they want their own pass with a before/after
 pair, not a corner of a foot-plane run. **THE SEXTON IS WORSE AND IS IN THE
 SAME QUEUE** (see the pass-3 faults above: from behind the hod grid hides the
 man completely).
+
+## THE DAUBER - "Wetwall", the 37th (20 Nov 2026, 10:3x-11:0x CT)
+
+**MY OWN COUNT, MEASURED OFF `tools/art/minibosses.py` BY AST WALK, NOT QUOTED
+FROM A PROMPT.** `CANON` and `BUILDERS` each carry **50 keys and agree exactly**
+- no builder without a canon row, no canon row without a builder. **14 of those
+are VARIANT BODIES** (`_chibi` x12, `_tall`, `_chibi_tall`), so the distinct
+miniboss count before this one is **THIRTY-SIX**. My prompt says 33, which was
+true on 18 Nov. The Dauber is the **37th**.
+
+| key | title | h | theme | THE IDEA | wear |
+|---|---|---|---|---|---|
+| `dauber` | Wetwall | 2.58 | keep | **IT WALLS YOU IN** - it lays a fresh course every time you hurt it and the floor you have left to fight on gets smaller. The course goes up WET and can be broken by anything; once it sets, nothing the party carries will open it. The choice expires while you argue about it. | 0.42 |
+
+**WHY A WALL.** I read all 36 existing idea lines before designing, because a
+re-skin is the one failure this slot cannot absorb. Nothing in the set TAKES THE
+ROOM AWAY A COURSE AT A TIME: the Hurdleman divides the floor once, the
+Sluicekeeper floods it, neither SHRINKS it and neither puts a **perishable
+window** on the answer. That window is the new verb - wet breaks, set does not.
+
+**MEASURED, GEN PASS 5:** 4 meshes, 1,300 faces, size 1.65 x 1.56 x 2.58 m,
+footprint span **1.65 m** against the 11.0 m three-cell corridor -
+**CORRIDOR-SAFE, margin 9.35 m, NOT room-locked.** **UNDER-LID.** Blank check 3
+files, 0 failures; 0 frame clips.
+**FIT, ON A REAL POSED KayKit Knight (2.45 m, 8 parts):** verdict **GREEN**,
+ratio **1.05**, pair span 3.52, fits_frame true, 3 of 3 proving views, 0 blind
+views, blank 3 files / 0 failures.
+
+### THE FAULTS I CAN SEE, AND THE FIRST ONE IS THE RUN'S BEST FINDING
+
+1. **PASS 2 SHIPPED A FLIGHT OF STAIRS AND EVERY NUMBER WAS GREEN.** Pass 1
+   stepped five blocks up and out along the pole while leaving each block
+   AXIS-ALIGNED. Blanks 0, border 0, span 1.87 m, GREEN fit, five blocks
+   countable - and `front.png` is unmistakably a staircase coming off a mason's
+   shoulder. A stepped run of level slabs IS a staircase; that is what the shape
+   means. Fixed by rotating the blocks onto the pole's own axis.
+2. **AND THEN IT WAS A LADDER - AT ONE SIZE ONLY, WHICH IS WHY NOTHING CAUGHT
+   IT.** At 700 px the hod reads as five mortared blocks on a shaft. **Shrunk to
+   the hero-scale cell - roughly what a viewer gets from across a room, the only
+   distance that matters for a set piece - the stone loses its solidity, the
+   four joints become rungs and the thing is a ladder.** All instruments stayed
+   green through three passes of it. A ladder needs TWO STILES: pass 4 removed
+   one (the second trough board) and the read survived, because the pole's
+   overhang ABOVE the stack and the full-length board were still a pair. Pass 5
+   cut both - the shaft now stops INSIDE the load and the board is a lip under
+   the bottom two courses. **THE LESSON, WRITTEN DOWN: A SILHOUETTE THAT IS
+   CORRECT AT RENDER SIZE CAN BE WRONG AT PANE SIZE, AND NO ASSERTION IN THIS
+   HARNESS LOOKS AT PANE SIZE.** Judge the fit sheet's cell, not the body shot.
+3. **A COLLISION THAT EXISTED ONLY IN PROJECTION.** Pass 1's plumb bob (x +0.46)
+   and the lime bag (x -0.40) are 0.86 m apart and never touch. In `side.png`
+   the camera looks ALONG X, that separation collapses, and the spike is driven
+   clean through the sack. No intersection test would ever have reported it.
+4. **I SHIPPED A MONOCHROME BODY BY AVOIDING A MONOCHROME HUE.** Pass 1 put the
+   smock at (0.112,0.118,0.126) against a dark slot at (0.070,0.068,0.062) -
+   0.04 apart in value. Smock, apron, boots and hod frame read as ONE dark mass.
+   The register's defect arrived from the other direction: one VALUE, not one
+   hue. Lifted to (0.173,0.186,0.208) at pass 2.
+5. **THE SIDE VIEW IS STILL THE WEAKEST OF THE THREE** - same honest verdict the
+   Moulder's write-up gave its own. Edge-on, the four joints show their full
+   faces as a stepped run of dark bars; the stiles are gone so it is no longer a
+   ladder, but it is the least legible of the three cameras.
+6. **THE TROWEL IS MOSTLY HIDDEN BEHIND THE PAIL IN THE FRONT VIEW**, and edge-on
+   in the side view it still reads as a flat paddle rather than a trowel. It is
+   the verb of the whole body and it is the quietest object on it.
+7. **THE LOWEST BLOCK PASSES CLOSE BEHIND THE HEAD.** It does not occlude the
+   eyes or the face panel in any of the three views, but the margin is small and
+   a camera between front and three-quarter could eat the face. The Moulder's
+   crucible welded itself to a head exactly this way and the occlusion test
+   passed, because that test asks whether the HERO can see the CREATURE, never
+   whether one part of a creature has eaten another.
+8. **THE LAID COURSE ON THE FLOOR IS A DETACHED ISLAND IN THE SIDE VIEW** - it
+   sits clear of the body silhouette with daylight around it. Deliberate (it is
+   the wall he has already laid, in front of his own feet) but it is the same
+   shape `_colour_read` flags as a floating fragment on other bodies.
+9. **THE PALE SLOT IS CARRIED ALMOST ENTIRELY BY THE UNLAID STOCK.** The wet
+   daub itself - the bed joint, the pail's dome, the squeeze-out, the smear on
+   the blade - is four small objects. The material pair reads; the WETNESS is
+   argued by roughness 0.44 and by nothing else.
+10. **NOTHING HERE PROVES THE COUNT IS FIVE AT PANE SIZE.** I can count five in
+    the 700 px panes and I believe five in the hero cell, but no assertion
+    measures the joint separations after downscale. That is the instrument this
+    body wants next and it does not exist.
+
+### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
+
+- `scripts/bestiary.gd`: `assets/monsters/minibosses/dauber.glb`, **STATIC** - a
+  `model` path and **NO `anims` entry**. `h = 2.58`, art's measured number; do
+  not re-derive it.
+- theme **`keep`** for the set-piece roll (joins the Porter, the Paviser and the
+  Reeve).
+- **CORRIDOR-SAFE at 1.65 m. No spawn gate needed, not room-locked.**
+- Cheapest honest version of the mechanic: on each Nth point of damage, spawn one
+  wall segment across a random chord of the room with a `wet` timer; while wet it
+  takes damage from anything and breaks; when the timer expires it becomes
+  collision that nothing removes. Five segments total, matched to the five blocks
+  the art shows. The art carries the read whether or not the floor actually
+  shrinks.
+- **A note on provenance, not a blocker:** `minibossgen` ran with
+  `floorgeom_stale: true` - this worktree's `scripts/floorgen.gd` still has
+  `lid_y 7.0 / underside 6.5` where `origin/main` has `10.0 / 9.5`. The verdict
+  is **conservative either way** (clear 3.92 m under the LOWER lid), but the
+  harness is right to go red on a gate it cannot prove current.

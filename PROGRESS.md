@@ -10189,8 +10189,10 @@ CAUGHT (1): tools/_l40_test.gd. Its overlap sweep SKIPS any top-level control >=
 CLEAN, by reading the assertion against its bound: _l71/_l74 (box.size.y vs sheet_rect(): box is a VBox that grows with overflow, bound is the designed sheet from _geo(); can go red), _l39 (box size vs fractions of the screen; spill vs HudDock.centre(), a pure function of viewport), _l57 (label vs spotlight pane_rect and centre()), _l36 (Chronicle vs chat box - another file's rect, independent), _l21 (controls vs pane overlay rects), _u58/_u62/_u63/_u64 (stripe vs _wm_baseline, already walked U63-U65).
 NOT AUDITED: ~60 non-HUD logic gates (delve/gear/monster tests); the L654 audit skips <=2 px and offscreen controls (a collapsed element passes - same class, left for a windowed cycle). 
 Files: tools/_l40_test.gd, PROGRESS.md. Not ticked by me.
+================================================================================
 ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
 ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
+================================================================================
 
 *** 1. THE ELEVEN FILES. THEY ARE MINE, AND THE ANSWER IS NOT A MOVE. ***
 
@@ -12851,6 +12853,16 @@ before mine was game build's **IDLE 09:22:19**, so the window was free; Godot EM
 (`tasklist` -> no process with "odot" in the name). Lock read from R's WORKING tree. No Twitch
 contact, 0 bits, nothing posted, no reward touched.
 
+## C-141 (20 Nov 2026 10:3x CST) - small pool top-up (no miniboss owed)
+- ITEM: TAKE THIS NEXT (09:58 block) row 3, CONTENT: keep producing, unthrottled. Minibosses measured: origin/art holds 36 bodies and miniboss_feed.by_key holds all 36 (Broodglut is a pack variant of an existing body, no new key). No new body, stood down on item 1.
+- ADDED: epitaphs +12 (748 -> 760), descend +6 (465 -> 471), cleared +6 (450 -> 456). Uniqueness checked inside each pool (one candidate collided with an existing epitaph and was replaced). Plain register, no named bodies, no mechanics, no floor counts. New key: _note_c141 (expected zero-hit).
+- VALIDATION OK: json.load passes; every pre-existing key and list entry unchanged (prefix-compared).
+- CODE WIRING: none; epitaph/descend/cleared readers exist.
+Next content: C-142.
+## U103 - 2026-11-20 10:52 CST - STAND-DOWN: chat bot holds the Godot lock. Nothing launched, no owned file edited
+Lock: R's WORKING copy last line is RUNNING 2026-11-20T10:48:17-06:00 (chat bot: claim 10:48:17, cap 11:13, expected finish 11:07; guard-arm audit), no IDLE from the chat bot after it. Machine clock read 10:52:41 CST via VM date. tasklist Godot* was empty at 10:53, but the yield rule says a RUNNING with no IDLE holds the lock and a lane running short batteries looks dead between them - so I did not claim over it.
+Item: unchanged - rarity-hue half of System 2 (then L74). Not started this hour; no engine time available inside my :52-:07 share.
+Next firing (11:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap; start the rarity-hue half, headless parse first, windowed render, look at it.
 ## B82 (20 Nov 10:4x CT) - GUARD-ARM AUDIT: 91 ARMS, 90 CAN BE NAMED, ONE COULD NOT - AND IT CAN NOW
 Item: TAKE THIS NEXT row 6 - "take the clock fix, then stand down in writing or audit your own
 shipped chatcmd.gd guard arms." I took both. Nothing was owed on L14.
@@ -12987,3 +12999,102 @@ first try per the 08:58 ruling. Scratch lived outside the repo and in the VM's o
 _to_delete/ pile this hour.
 NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched, reply contract unchanged.
 No Twitch test this run, 0 bits, no account used.
+================================================================================
+THE 10:34 CT HOUR, 20 NOV 2026 - ART LANE. THE DAUBER (37th miniboss), AND THE
+LICENCE GAP THE TEAM LEAD HANDED BACK.
+================================================================================
+
+THE 09:58 PLAN ROW GAVE ART TWO THINGS: the minibosses "as the standing
+arrangement has it", with the instruction to STATE MY OWN COUNT rather than quote
+the prompt's; and a correction - record grass_07's terms as its readme has them,
+not as CC0. Both are done, and a PROGRESS.md entry is written this hour because
+last hour's was missing and the team lead said so.
+
+WHAT I CHECKED FOR FIRST, MEASURED NOT REMEMBERED. Before designing anything I
+walked tools/art/minibosses.py with ast: CANON and BUILDERS each hold 50 keys and
+AGREE EXACTLY - no builder without a canon row, no canon row without a builder.
+FOURTEEN of those keys are variant bodies (_chibi x12, _tall, _chibi_tall), so
+THE DISTINCT MINIBOSS COUNT WAS THIRTY-SIX, not the 33 my prompt carries (true on
+18 Nov, two bodies stale). Then I read all 36 idea lines, because the one failure
+this slot cannot absorb is a re-skin. Nothing in the set takes the room away a
+course at a time: the Hurdleman divides the floor once, the Sluicekeeper floods
+it, neither SHRINKS it and neither puts a perishable window on the answer.
+
+THE DAUBER - "Wetwall", h 2.58, theme keep, wear 0.42, the 37th. IT WALLS YOU IN:
+it lays a fresh course across the room every time you hurt it and the floor you
+have left gets smaller. The course goes up WET and anything breaks it; once it
+sets nothing the party carries will open it. So the fight is a choice that
+EXPIRES - swing at the Dauber, or spend the same swing on the wall it just laid -
+and the hod on its shoulder says how many courses it still has to give you.
+Five pale blocks, four mortar joints, countable from the doorway.
+
+MEASURED, GEN PASS 5: 4 meshes, 1,300 faces, 1.65 x 1.56 x 2.58 m, footprint span
+1.65 m against the 11.0 m three-cell corridor - CORRIDOR-SAFE, margin 9.35 m, NOT
+room-locked. UNDER-LID, clear 3.92 m. Blank check 3 files 0 failures, 0 frame
+clips, errors [] on the body itself.
+
+FIT, ON A REAL POSED BODY: VERDICT GREEN. Beside the KayKit Knight at 2.45 m and
+8 parts - ratio 1.05, pair span 3.52, fits_frame true, 3 of 3 proving views, 0
+blind views, blank 3 files 0 failures. I LOOKED AT ALL SIX PICTURES.
+
+TEN FAULTS ARE LISTED IN docs/art/MINIBOSSES.md AND TWO OF THEM ARE THE RUN:
+
+  (1) PASS 2 SHIPPED A FLIGHT OF STAIRS WITH EVERY NUMBER GREEN. Five blocks
+      stepped up and out along a pole, each one left axis-aligned. Blanks 0,
+      border 0, span 1.87 m, GREEN fit, five countable - and front.png is
+      unmistakably a staircase coming off a mason's shoulder. A stepped run of
+      level slabs IS a staircase; that is what the shape means, and calling it a
+      hod in a comment does not change what a viewer sees. Fixed by rotating the
+      blocks onto the pole's own axis.
+
+  (2) AND THE THING NO INSTRUMENT HERE CAN SEE - IT WAS A LADDER AT ONE SIZE
+      ONLY. At 700 px the hod reads as five mortared blocks on a shaft. SHRUNK TO
+      THE HERO-SCALE CELL - roughly what a viewer gets from across a room, which
+      is the only distance that matters for a set piece - the stone loses its
+      solidity, the four joints become rungs, and the thing on his shoulder is a
+      ladder. Every assertion stayed green through three passes of it. A ladder
+      needs TWO STILES: pass 4 cut one and the read survived, because the pole's
+      overhang above the stack and the full-length trough board were still a
+      pair. Pass 5 cut both. A SILHOUETTE THAT IS CORRECT AT RENDER SIZE CAN BE
+      WRONG AT PANE SIZE, AND NOTHING IN THIS HARNESS LOOKS AT PANE SIZE.
+
+  Also recorded there: a plumb bob driven through the lime bag in side.png while
+  being 0.86 m clear of it in space (a collision that exists only in projection,
+  which no intersection test can report); a monochrome body I produced by
+  avoiding a monochrome HUE and shipping a single VALUE; the side view being the
+  weakest of the three; and the fact that NOTHING MEASURES WHETHER THE COUNT IS
+  STILL FIVE AFTER DOWNSCALE - the instrument this body wants next, and it does
+  not exist.
+
+THE LICENCE GAP, READ OFF DISK MYSELF THIS RUN AND RECORDED IN
+docs/art/ASSET_SOURCES.md: Stone_coffin/readme.txt and rocks/readme.txt both
+carry the explicit CC0 1.0 Universal paragraph (Nobiax) - CC0 ON FILE, nobody
+need chase their licence pages. grass_07/readme.txt is NOT CC0: "Absolutely free
+to use or to modify in any kind of work (personal, commercial or else)" plus a
+request for a link. The whole file is quoted verbatim in ASSET_SOURCES so no
+later seat re-records it as CC0. Commercial use is granted outright and the link
+is a request, not a condition - there is no "provided that" anywhere in it - so
+it is not an attribution licence, not share-alike and not non-commercial. The
+import gate stays at the hub's 18.
+
+FOR THE GAME BUILD LANE - I TOUCHED NO .gd OUTSIDE tools/art/:
+  - bestiary.gd: assets/monsters/minibosses/dauber.glb, STATIC - a `model` path
+    and NO `anims` entry. h = 2.58, art's measured number, do not re-derive it.
+  - theme `keep` for the set-piece roll (joins the Porter, Paviser and Reeve).
+  - CORRIDOR-SAFE at 1.65 m, no spawn gate needed.
+  - Cheapest honest mechanic: every Nth point of damage, spawn one wall segment
+    across a random chord with a `wet` timer; while wet anything breaks it, when
+    it expires it becomes collision nothing removes. Five segments, matched to
+    the five blocks the art shows.
+  - STILL OWED, UNCHANGED FROM THE MOULDER'S ENTRY: dauber.glb has no
+    .glb.import sibling, same as moulder.glb and snarer_chibi.glb. A Godot run
+    generates it. Not blocking.
+
+FOR THE TEAM LEAD - ONE PROVENANCE FLAG, NOT A BLOCKER: minibossgen ran with
+floorgeom_stale true. This worktree's scripts/floorgen.gd still reads lid_y 7.0 /
+underside 6.5 where origin/main has 10.0 / 9.5, so the gate reports DRIFT and
+goes red on provenance by design. The Dauber's verdict is conservative either way
+- it clears the LOWER lid by 3.92 m - but branch `art` is carrying a floorgen
+older than main and the gate is right to say so. floorgen.gd is not mine to move.
+
+NEEDED FROM MR. E: nothing.

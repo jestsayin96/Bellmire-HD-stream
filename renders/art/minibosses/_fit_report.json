@@ -2134,6 +2134,87 @@
     }
    },
    "proving_views": 3
+  },
+  "dauber": {
+   "creature_h": 2.58,
+   "hero_h": 2.45,
+   "ratio": 1.05,
+   "pair_w": 3.52,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 36291,
+      "vis": 36291,
+      "delta": 37360,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 45488,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27840,
+      "vis": 27840,
+      "delta": 29066,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37780,
+      "vis": 37780,
+      "delta": 38627,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36019,
+      "vis": 36019,
+      "delta": 37113,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44030,
+      "vis": 44030,
+      "delta": 44668,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -2146,10 +2227,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "stackman"
+  "dauber"
  ],
  "asked": [
-  "stackman"
+  "dauber"
  ],
  "blank_check": {
   "files": 3,

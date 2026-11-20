@@ -29,7 +29,7 @@ const THEME_PROPS := {
     "mess":     [["Bookcase_2", 1.1], ["CandleStick_Stand", 0.5]],
 }
 
-## S61 / SYSTEM 47 (batch 1 of the 114; S62 adds batch 2, sixteen more floor-standing pieces): whole-pack dungeon props out of assets/props (94) and
+## S61 / SYSTEM 47 (batch 1 of the 114; S62 adds batch 2 and S63 batch 3, sixteen more floor-standing pieces each): whole-pack dungeon props out of assets/props (94) and
 ## assets/dungeon (20). Every number below is COPIED from art's measured register,
 ## renders/art/worldfit/_manifest.json (dirs.<dir>.rows[file].base_dz_m / footprint_m), and
 ## tools/_s61_props.gd asserts the copy against that file live. base_dz_m IS SIGNED: the lowest
@@ -75,23 +75,39 @@ const PROP_BATCH := {
     "res://assets/props/FarmCrate_Carrot.gltf": [-0.016, 0.7138],   # h 0.4113  S62 batch 2
     "res://assets/props/Bucket_Metal.gltf": [-0.0052, 0.4854],   # h 0.3650  S62 batch 2
     "res://assets/props/Pot_1_Lid.gltf": [-0.0226, 0.5393],   # h 0.2805  S62 batch 2
+    "res://assets/props/Bed_Twin2.gltf": [0.0005, 2.4119],   # h 0.7596  S63 batch 3
+    "res://assets/props/Bookcase_2.gltf": [-0.0174, 1.4612],   # h 2.5449  S63 batch 3
+    "res://assets/props/BookStand.gltf": [-0.0025, 0.5112],   # h 1.4468  S63 batch 3
+    "res://assets/props/Bucket_Wooden_1.gltf": [0.0007, 0.4339],   # h 0.2928  S63 batch 3
+    "res://assets/props/Cage_Small.gltf": [-0.0425, 0.8843],   # h 0.8052  S63 batch 3
+    "res://assets/props/CandleStick_Stand.gltf": [-0.0079, 0.7323],   # h 1.3125  S63 batch 3
+    "res://assets/props/FarmCrate_Apple.gltf": [-0.016, 0.7138],   # h 0.2438  S63 batch 3
+    "res://assets/props/FarmCrate_Empty.gltf": [-0.016, 0.7138],   # h 0.2438  S63 batch 3
+    "res://assets/props/Pot_1.gltf": [-0.0226, 0.5393],   # h 0.2238  S63 batch 3
+    "res://assets/props/Stall_Empty.gltf": [-0.0048, 1.8449],   # h 2.6272  S63 batch 3
+    "res://assets/props/Vase_Rubble_Medium.gltf": [0.0032, 0.7969],   # h 0.1746  S63 batch 3
+    "res://assets/props/Chain_Coil.gltf": [0.0047, 1.0703],   # h 0.0872  S63 batch 3
+    "res://assets/dungeon/Skull.glb": [-0.0318, 0.6006],   # h 0.4610  S63 batch 3
+    "res://assets/props/BookGroup_Medium_1.gltf": [-0.0038, 1.0626],   # h 0.2983  S63 batch 3
+    "res://assets/props/Coin_Pile_2.gltf": [0.0003, 0.2787],   # h 0.0584  S63 batch 3
+    "res://assets/props/Carrot.gltf": [-0.2378, 0.222],   # h 0.5658  (past 5 cm: SINKS)  S63 batch 3
 }
 const THEME_BATCH := {
-    "prison": ["res://assets/dungeon/Fence_Straight_Modular.glb", "res://assets/dungeon/Spikes.glb", "res://assets/props/Bucket_Metal.gltf"],
-    "crypt": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Pedestal.glb", "res://assets/props/Vase_2.gltf", "res://assets/dungeon/Pedestal2.glb"],
-    "shrine": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Pedestal.glb", "res://assets/props/Vase_4.gltf", "res://assets/props/Shelf_Small_Bottles.gltf"],
-    "keep": ["res://assets/props/Cabinet.gltf", "res://assets/props/Bench.gltf", "res://assets/dungeon/Statue_Horse.glb", "res://assets/props/Chair_1.gltf", "res://assets/props/Nightstand_Shelf.gltf"],
-    "treasury": ["res://assets/dungeon/Bag_Coins.glb", "res://assets/props/Crate_Metal.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Bag.gltf"],
-    "workshop": ["res://assets/props/Anvil.gltf", "res://assets/props/Workbench_Drawers.gltf", "res://assets/props/Crate_Wooden.gltf", "res://assets/props/Cauldron.gltf", "res://assets/props/Whetstone.gltf"],
-    "barracks": ["res://assets/props/WeaponStand.gltf", "res://assets/props/Dummy.gltf", "res://assets/dungeon/Woodfire.glb", "res://assets/props/Bed_Twin1.gltf", "res://assets/props/Barrel_Holder.gltf"],
-    "mess": ["res://assets/props/Table_Large.gltf", "res://assets/props/Stool.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Pot_1_Lid.gltf", "res://assets/props/Barrel_Apples.gltf"],
+    "prison": ["res://assets/dungeon/Fence_Straight_Modular.glb", "res://assets/dungeon/Spikes.glb", "res://assets/props/Bucket_Metal.gltf", "res://assets/props/Cage_Small.gltf", "res://assets/props/Chain_Coil.gltf"],
+    "crypt": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Pedestal.glb", "res://assets/props/Vase_2.gltf", "res://assets/dungeon/Pedestal2.glb", "res://assets/props/CandleStick_Stand.gltf"],
+    "shrine": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Pedestal.glb", "res://assets/props/Vase_4.gltf", "res://assets/props/Shelf_Small_Bottles.gltf", "res://assets/props/BookStand.gltf"],
+    "keep": ["res://assets/props/Cabinet.gltf", "res://assets/props/Bench.gltf", "res://assets/dungeon/Statue_Horse.glb", "res://assets/props/Chair_1.gltf", "res://assets/props/Nightstand_Shelf.gltf", "res://assets/props/Bookcase_2.gltf", "res://assets/props/BookGroup_Medium_1.gltf"],
+    "treasury": ["res://assets/dungeon/Bag_Coins.glb", "res://assets/props/Crate_Metal.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Bag.gltf", "res://assets/props/Coin_Pile_2.gltf"],
+    "workshop": ["res://assets/props/Anvil.gltf", "res://assets/props/Workbench_Drawers.gltf", "res://assets/props/Crate_Wooden.gltf", "res://assets/props/Cauldron.gltf", "res://assets/props/Whetstone.gltf", "res://assets/props/FarmCrate_Empty.gltf"],
+    "barracks": ["res://assets/props/WeaponStand.gltf", "res://assets/props/Dummy.gltf", "res://assets/dungeon/Woodfire.glb", "res://assets/props/Bed_Twin1.gltf", "res://assets/props/Barrel_Holder.gltf", "res://assets/props/Bed_Twin2.gltf"],
+    "mess": ["res://assets/props/Table_Large.gltf", "res://assets/props/Stool.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Pot_1_Lid.gltf", "res://assets/props/Barrel_Apples.gltf", "res://assets/props/Pot_1.gltf"],
     # the six biomes (FloorGen.BIOMES) draw from the same twenty
-    "grassland": ["res://assets/props/Barrel.gltf", "res://assets/props/Crate_Wooden.gltf", "res://assets/props/FarmCrate_Carrot.gltf"],
-    "confection": ["res://assets/props/Cauldron.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Barrel_Apples.gltf"],
-    "flooded": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Column2.glb", "res://assets/props/Bucket_Metal.gltf"],
-    "firepit": ["res://assets/dungeon/Woodfire.glb", "res://assets/props/Anvil.gltf", "res://assets/props/Anvil_Log.gltf"],
-    "wood": ["res://assets/props/Crate_Wooden.gltf", "res://assets/props/Stool.gltf", "res://assets/props/Workbench.gltf"],
-    "fogbound": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Vase.glb", "res://assets/props/Vase_2.gltf"],
+    "grassland": ["res://assets/props/Barrel.gltf", "res://assets/props/Crate_Wooden.gltf", "res://assets/props/FarmCrate_Carrot.gltf", "res://assets/props/FarmCrate_Apple.gltf"],
+    "confection": ["res://assets/props/Cauldron.gltf", "res://assets/props/Barrel.gltf", "res://assets/props/Barrel_Apples.gltf", "res://assets/props/Stall_Empty.gltf"],
+    "flooded": ["res://assets/dungeon/Vase.glb", "res://assets/dungeon/Column2.glb", "res://assets/props/Bucket_Metal.gltf", "res://assets/dungeon/Skull.glb"],
+    "firepit": ["res://assets/dungeon/Woodfire.glb", "res://assets/props/Anvil.gltf", "res://assets/props/Anvil_Log.gltf", "res://assets/props/Carrot.gltf"],
+    "wood": ["res://assets/props/Crate_Wooden.gltf", "res://assets/props/Stool.gltf", "res://assets/props/Workbench.gltf", "res://assets/props/Bucket_Wooden_1.gltf"],
+    "fogbound": ["res://assets/dungeon/Column2.glb", "res://assets/dungeon/Vase.glb", "res://assets/props/Vase_2.gltf", "res://assets/props/Vase_Rubble_Medium.gltf"],
 }
 
 ## the scale a batch piece stands at: the MegaKit props at MK_SCALE like the rest of them, the

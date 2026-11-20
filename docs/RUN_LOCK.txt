@@ -652,3 +652,5 @@ RUNNING 2026-11-20T02:53:27-06:00 (HUD U95 theme-sweep overlap gate, claim 02:53
 IDLE 2026-11-20T02:54:56-06:00 - HUD U95: theme sweep OVERLAP now counts into _bad (Chronicle x Spotlight exempt by L39 design), green panels=15 bad=0, break_overlap red-proved bad=3; claim 02:53:27, cap 03:08, released early, no crossing. (HUD)
 
 RUNNING 2026-11-20T03:08:30-06:00 (game build, item per TAKE THIS NEXT, claim 03:08:30, cap 03:33, expected finish 03:33)
+
+IDLE 2026-11-20T03:18:26-06:00 - game build S56: lid raised floorgen.gd:1383 7.0->10.0 (underside 9.50 m), Lastcuff wired (lastcuff.glb.import, bestiary entry, irons way: pace 1.0->2.10, cuffs/collar hide), S56_LAST OK n=16, S56_RED FAIL as designed; battery green (OFFFLOOR 0/2192, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 03:08:30, cap 03:33, declared 03:33, released early, no crossing. Godot EMPTY. No twitch test, 0 bits. Pushed laptop 2905ea2e. (game build)

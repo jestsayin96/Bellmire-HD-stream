@@ -1,3 +1,126 @@
+## TAKE THIS NEXT - THE 12:58 CT FIRING, 20 NOV 2026 (machine clock 12:58-13:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 11:58 BLOCK. ***
+## SIX LANES SHIPPED, SIX MERGED (ART TWICE), SIX TICKED. main is a0b1bf00.
+## *** THE HEADLINE: THE MINIBOSS JOIN IS STILL SHORT BY ONE - BUT IT IS A DIFFERENT ONE. THE
+## *** CHAIN IS NOW STAGGERED ACROSS THREE LANES AND I MEASURED ALL FOUR AUTHORITIES MYSELF. ***
+##   On the MERGED tree a0b1bf00, counted by me, not quoted from any lane:
+##     - art `renders/art/minibosses/_report.json` = **39** non-chibi bodies (`hooper` is new).
+##     - content `data/lore_lines.json` `miniboss_feed.by_key` = **38** rows (`sealer` is new).
+##     - engine `scripts/delve.gd` `Delve.MB_NAME` = **37** keys (`dauber` landed at S65; NO `sealer`).
+##     - chat bot `data/commands.json` `miniboss`.what and .short both publish **"The 37 elites"**.
+##   Read against chatcmd.gd's own arms at :2089 and :2092 - **READ IN THE CODE, NOT TRIGGERED, AND
+##   I SAY SO**: published 37 != 38 feed rows -> **MINIBOSS COUNT should fire**; `sealer` draws a
+##   feed with no MB_NAME row -> **MINIBOSS UNNAMED should fire on ["sealer"]**. GHOST stays silent
+##   and I proved that one positively: all 37 MB_NAME keys have a `.glb` on disk, **0 ghosts**.
+##   `hooper` is the chat bot's case (4) - body only, no feed, no name - so **nothing fires on the
+##   Hooper and nothing is owed on it yet**. Do not pull it into the count this hour.
+##   **I DID NOT RUN L14_TEST AND THE REASON IS MY OWN FAULT, NOT A LANE'S.** I claimed the lock at
+##   13:01 to run it on the merged tree in W4 and the script would not LOAD there: `Identifier
+##   "ChatCmd" not declared`, plus two type-inference parse errors - W4 has no built import cache or
+##   registered autoloads. I released at 13:03, two minutes early, rather than hold into the game
+##   build's :07. The arm states above are READ, not triggered. Whoever runs the real gate: the
+##   prediction to check is COUNT + UNNAMED["sealer"], nothing else.
+##   **THIS IS NOT A NEW ITEM.** Same half-of-an-existing-item judgement as the 11:58 block: it is
+##   the second half of Mr. E's 19 Nov 21:50 CT miniboss/rename directive and of the existing
+##   MINIBOSS guard family, assigned to the lanes that own the files. I say out loud I read it so.
+## *** AND ART'S FIT INSTRUMENT IS READING A LID THAT MAIN NO LONGER HAS. ART CAUGHT THIS ITSELF. ***
+##   `_report.json` carries `floorgeom_stale: true` and one error: art's tree reads `floorgen.gd`
+##   `lid_y_m 7.0 / lid_underside_m 6.5`, main reads **10.0 / 9.5** - the supervisor's 02:12 RAISE
+##   THE LID ruling. **THE DIRECTION IS SAFE AND THAT MATTERS**: a lid measured 3m LOW can only
+##   over-condemn, never pass a body that would not fit. So no verdict already given is wrong, and
+##   the Hooper's `lid_clear_m 4.14` is really 7.14. Art merges main and the instrument is honest
+##   again. Fixing a stale instrument is NOT a new item.
+
+1. GAME BUILD - **S65 IS TICKED AND I CHECKED THE ROW, NOT THE VERDICT.** `Delve.MB_NAME` now
+   carries `"dauber": "Wetwall"` and I walked the literal: **37 keys**. `MB_FIT` carries
+   `dauber: 1.05`. `dungeon_hd.gd:235` `THEME_MINIBOSS_MORE["keep"]` = `["reeve","paviser","dauber"]`.
+   You took the name from content's `_note_c142` and art's CANON title rather than from my row, which
+   is exactly right - my 11:58 row told you to, and taking it from the owning file is the habit that
+   keeps a rename honest. Your RED-FIRST (`S51_NAMES FAIL 2` -> `OK 156`) is the kind of proof that
+   makes a tick worth taking. The one ERROR line in your parse was the chat bot's MINIBOSS COUNT,
+   their half, and you said so instead of swallowing it.
+   **NEXT: THE SAME ROW AGAIN, FOR `sealer`. It closes MINIBOSS UNNAMED and it is one row.**
+   The name is **Leadbite** - art's CANON title AND content's C-143 feed agree, so take it from
+   either owning file, not from me. The theme is **treasury**, so the keep row is
+   `THEME_MINIBOSS_MORE["treasury"]`. For `MB_FIT`, read the ratio out of art's register the same
+   way S65 did - **I am deliberately NOT naming a key here**, because I have not opened the one you
+   used and a key name I guessed is how the dead `MODEL_BY` row got written. THEN batch 4 and the
+   wall-placement row, both still yours.
+
+2. ART - **THE HOOPER IS TICKED AS THE 39th, AND I TICKED PASS 7, NOT PASS 6.** You pushed pass 7
+   (`8262d283`) while I was merging pass 6, so I re-read the ref and merged you a SECOND time before
+   syncing - the row you are reading was rewritten after that. **I LOOKED AT THE PICTURES MYSELF**,
+   which is the acceptance test: front reads, back reads (the spare hoops racked across the back give
+   it a rear silhouette - the exact thing the Beadle lacked), and the side is the one that moved.
+   Pass 6 from the side **stood on a single post**; pass 7 shows two legs on two base plates. You
+   found that in your own work and fixed it in the same hour, and your headline ("a mechanic with no
+   bad angle") is true on my own look, not just on your register.
+   **NEXT: MERGE main INTO `art` BEFORE YOUR NEXT FIT RUN.** Your `_report.json` is already shouting
+   it: `floorgeom_stale: true`, lid 7.0/6.5 in your tree against 10.0/9.5 on main. Your instrument
+   reported its own drift honestly and that is why nothing downstream is wrong - but every ratio you
+   measure until you merge is taken against a lid 3m lower than the game's. Then keep inventing
+   minibosses; you are the one genuinely dry lane that may.
+
+3. CONTENT - **C-143 IS TICKED AND I COUNTED THE ROWS.** `miniboss_feed.by_key` is **38** rows with
+   `sealer` present, arrive **9** / fall **8** - the counts your summary claimed, counted by me off
+   the merged file. You keep writing the lines the directive asks for and the join catches up behind
+   you; that is the right order and nobody is to slow you down for it.
+   **NEXT: THE HOOPER (`hooper`, 39th, "Hoopfast", theme `mess`).** Art's body is in and its feed
+   line seed is "A hoop has just gone on." Same shape as C-143: arrive and fall. Keep writing
+   `_note_` keys - **no lane is to wire one and you are not to stop writing them.**
+
+4. CHAT BOT - **B84 IS TICKED, AND THE ARM YOU COULD NOT TRIGGER AT 11:45 FIRED AT 12:49.** Both
+   published fields moved 36 -> 37 in ONE edit so FIELDS never got a window, and the doc came from
+   the real generator rather than an emulation. I verified `commands.json` myself: `miniboss`.what
+   and .short both say **"The 37 elites"**. Your 11:45 call that the published 36 was RIGHT at the
+   time has held up - the count was never wrong, it was being chased.
+   **NEXT: PUBLISH 38, AND YOU DO NOT HAVE TO WAIT FOR THE GAME BUILD.** COUNT gates
+   published-vs-FEED, and content's feed is **already 38** on main. So 37 -> 38 silences COUNT on its
+   own. UNNAMED will keep firing on `["sealer"]` until the game build lands the MB_NAME row, and that
+   is correct - it is their half, not a failure of yours, and it should stay red until it lands.
+
+5. HUB - **THE PACK LEADS ARE TICKED FOR WHAT THEY ACTUALLY CLAIM, WHICH IS THE POINT.** You wrote
+   leads for the last six unlicensed packs and said plainly, twice, that you opened no page, read no
+   licence line, upgraded nothing, and that **the import gate stays 18**. A lane that labels research
+   as research is doing the harder thing; a "search snippet is not a licence" is Mr. E's own rule and
+   you applied it to yourself unprompted.
+   **NEXT: NOTHING IS OWED AND NO PUBLISH GATE IS OWED EITHER.** You changed no `web/` file and you
+   made no "ready to publish" claim, so I ran no publish verification and I say so. **gh-pages is
+   fully up to date this hour** - `origin/gh-pages^{tree}` and `origin/hub:web` are the SAME tree
+   (`9ca8051e`), zero delta. If you are dry, stand down and write it up, or keep auditing what you
+   have shipped. Do not open licence pages on my say-so: that is art's call on its own packs.
+
+6. HUD - **U104 IS TICKED AND I LOOKED AT THE 1080 SHOT.** The mana strip is drawn, legible and in
+   palette: `DawnCleric 36/48` on a blue bar, clearly distinct from the red HP bar above it, inside
+   the parchment panel. I also read the code rather than trusting the one row in the shot:
+   `hud_dock.gd:554` is **one bar per hero who draws on a pool**, so the single row is the party
+   having one caster, not a strip that only ever draws one. It lands the HUD's half of S64.
+   **NEXT: THE HUD'S RARITY-HUE HALF OF SYSTEM 2. IT IS STILL THE MOST VALUABLE OPEN ITEM IN THE
+   HOUSE** and it is the last piece of Mr. E's own Phase 1. The engine half of System 2 has been
+   closed and written down since 19 Nov; this is what is left of it.
+
+## FOR THE SUPERVISOR - one thing, and it is not urgent.
+##   **NOTHING IS WAITING ON A PUBLISH DECISION THIS HOUR.** gh-pages and `origin/hub:web` are the
+##   same tree (`9ca8051e`), so the "merged and not published" delta that has sat with you for days
+##   is **ZERO**. Nothing to authorise; I am closing that line rather than re-raising it.
+##   The one judgement I would route up: **the miniboss chain is now produced by three lanes at three
+##   different speeds** (art 39, content 38, engine 37), so the guard family goes red for an hour
+##   almost every time art ships. That is the guard working, not breaking, and my recommendation is
+##   to LEAVE IT ALONE and keep letting it fire - a red arm that clears itself within two firings is
+##   cheaper than a join nobody checks. Flagging it only so you are not surprised by a recurring red.
+
+## FOR THE NEXT TEAM LEAD - prompt corrections owed (a firing cannot edit a prompt; land these on a
+## live turn, all at once):
+##   1. THE HUB BASELINE IN THE TEAM LEAD PROMPT IS STALE AND NOW UNDERSTATES THE GOOD NEWS. It says
+##      "gh-pages is 45a7904 ... the difference is 2 files / 19 lines - the 'Sells up to' tier-underline
+##      fix ... It is with the supervisor." MEASURED 20 NOV 13:0x CT: gh-pages is **05ac2679**, and
+##      `origin/gh-pages^{tree}` **EQUALS** `origin/hub:web` at `9ca8051e` - **zero delta, nothing
+##      unpublished**. The tier-underline fix is LIVE. Replace that whole bullet.
+##   2. THE ID FLOOR IS STALE. The prompt says "B50, C-111, D100, H32, L74, S33, T5, U74" as of 18 Nov.
+##      MEASURED on main a0b1bf00 this hour: **B84, C-143, S65, U104**. Update the line.
+##   3. THE MINIBOSS COUNT IN STEP 5 IS STALE. It says "thirty-three exist as of 18 Nov (measure the
+##      count off tools/art/minibosses.py rather than trusting this line)". It is **39** now. The
+##      parenthetical is doing its job - leave the instruction, fix the number.
 ## TAKE THIS NEXT - THE 11:58 CT FIRING, 20 NOV 2026 (machine clock 11:58-12:0x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED, FIVE TICKED, ONE HALF DELIVERED. main is 115d8501.

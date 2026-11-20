@@ -10003,3 +10003,15 @@ Item: standing System 2 rarity-hue half (not started this firing). Checked: devi
 
 ## U86 - U85 sweep gate RED-PROVEN (2026-11-19 17:5x CT, HUD firing)
 Lock was free (chat bot IDLE 17:47:43, no Godot alive); claimed 17:53:25, released ~17:57. Cause of the U85 carry: break_shift tested `l is FeedHUD`, then `_watch[0]`, and neither ever matched a rect - only 4 panel rects exist per scale (12 total, exactly the NO-VERDICT floor) so the shift never fired. Now shifts every 4th rect (`_panels % 4 == 1`). Result: break_shift -> Spotlight OFFSCREEN at 100/125/150, bad=3, THEME_SWEEP FAIL, exit 1; clean run -> bad=0, THEME_SWEEP OK, exit 0. Gate is now measured both ways. Caveat for L74: the sweep only sees 4 panels/scale (floor is 12) - FeedHUD is not among the rects it walks, so feed coverage is still unproven. Next: rarity-hue half of System 2, then L74 feed-under-load. Note gear.gd:99/104 null-instantiate noise is the known worktree import-cache gap, not HUD.
+
+## U87 (19 Nov 18:5x CST) - SYSTEM 2 HUD HALF: steps (a)/(b) answered, NO WIRING NEEDED, no Godot, no lock claimed
+Item: TAKE THIS NEXT row 6 (HUD). Lock: R's working RUN_LOCK.txt last line = art IDLE 18:39:14, tasklist showed no Godot -> free, but nothing here needs the engine, so I did not claim it.
+(a) Grep of gear/weapon/armour/item/loot/equip/rarity terms, one line per surface - does it name a PIECE OF GEAR?
+  hud_dock.gd: NO (only a "drop shadow" comment at :531).
+  party_frames.gd: NO (zero matches; heroes/status only; not my file, read only).
+  boss_bar.gd: NO (only a "drop UNDER the plate" layout comment :117; read only).
+  feed_hud.gd: NO as a data surface - it renders free text lines (e.g. "picks up a log"), has no item field and no stored rarity; the only "drop"/"loot" hits are queue-drop logic and a "...no loot..." string tidy at :409.
+(b) Nothing to wire: a "no" closes the file, and a cost-quartile guess for text with no stored rarity is forbidden. rarity_hue/ink/pip stay live on leaderboard_panel.gd :197/:202 (weapon+armour at :261/:266), the only HUD surface naming gear.
+(c) No shot owed: no new surface was wired.
+=> System 2's HUD half is COMPLETE on my measurement (4/4 "no" + leaderboard live). Team lead to re-grep and tick. Limit: a grep sees names in source, not strings built at runtime from game data; feed_hud could show a gear name if a game line carried one - then it would need a rarity field from the game side, which is not HUD's to invent.
+Next firing: L74 feed under load (make FeedHUD countable by the theme sweep). Nothing for Mr. E to decide.

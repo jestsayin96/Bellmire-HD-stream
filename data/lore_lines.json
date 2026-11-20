@@ -929,7 +929,13 @@
     "Boots on stone. The cold comes up to meet them.",
     "The bell rings once behind them.",
     "Nobody says anything. The rope goes down.",
-    "They tighten their straps and go in."
+    "They tighten their straps and go in.",
+    "The rope is checked twice. Nobody mentions it.",
+    "Someone coughs. The lamp is trimmed.",
+    "The bell does not ring this time. They go in anyway.",
+    "A strap is retied. It was already tied.",
+    "They count heads at the mouth. They count again.",
+    "Boots on the first step. The stair is wet."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1365,7 +1371,12 @@
     "A drip somewhere ahead. Otherwise quiet.",
     "One of them sits down and does not get up for a while.",
     "They stack what is useful and leave the rest.",
-    "The floor is done. The next one is not."
+    "The floor is done. The next one is not.",
+    "The door is propped. Someone finds a seat.",
+    "They wipe the blades and do not talk much.",
+    "One of them laughs once, short, and stops.",
+    "The lamp is relit. The way up is clear.",
+    "What is left is counted. It is enough."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4201,7 +4212,20 @@
     "Stood in the door and held it.",
     "Slept light, and woke the camp twice.",
     "Paid the toll to the ferryman. Went down anyway.",
-    "Was the first to laugh and the last to leave."
+    "Was the first to laugh and the last to leave.",
+    "Mended the net by lamplight. Left it mended.",
+    "Kept the count. The count was right.",
+    "Said grace over a cold supper and ate it.",
+    "Took the short rope so the others got the long.",
+    "Did not complain of the cold. Did not complain.",
+    "Left the lamp lit at the top. It was out when they looked.",
+    "Sharpened the knife twice. Used it once.",
+    "Gave away the good boots the night before.",
+    "Knew the stair by heart. It did not matter.",
+    "Paid the debt in full. Went down with nothing owed.",
+    "Hummed on the way in. The humming stopped.",
+    "Brought bread for the others. Ate none.",
+    "Tied the knot right. Others climbed on it."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13566,5 +13590,6 @@
   "_note_c123": "C-123: +8 tells per biome (64), +10 town_life per list (30), +6 to +8 barks per kind (44, two duplicates dropped). All into pools with a proven reader. Plain register; barks and tells are short and carry no mechanics. Additive. Expected zero-hit key.",
   "_note_c124": "C-124: descend +20, cleared +20, epitaphs +30, misfire +12 - all pools with a proven reader (delve.gd _pick_line, epitaph and misfire readers). Plain register, no mechanics, no floor counts. No miniboss body committed beyond the Rammer, so no feed lines owed. Additive. Expected zero-hit key.",
   "_note_c125": "C-125: epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire) - all pools on the corrected proven-live list. Plain register, no mechanics, no floor counts. No new miniboss body committed on origin/art (the Rammer is still the last), so no feed lines owed. Additive. Expected zero-hit key.",
-  "_note_c128": "C-128 (19 Nov 2026): no new miniboss body committed on origin/art (36 on disk, 36 keys in by_key; only _chibi variants are unfed, and those are not draw bodies), so no feed lines owed. Repeat-heavy pools extended: epitaphs +24, descend +20 (10 with the '%s %s' verb frame - the code passes descend/descends, so every frame reads as a verb plus object, never 'descend down'), cleared +18, misfire +12 (%s name, %s spell, %d roll, %d DC order kept), barks +26 (enter 4, lord 5, trap 5, hurt 4, drink 4, misfire 4; five candidate lines were exact repeats and were left out). Plain register, no mechanics, no floor counts. Additive. Expected zero-hit key."
+  "_note_c128": "C-128 (19 Nov 2026): no new miniboss body committed on origin/art (36 on disk, 36 keys in by_key; only _chibi variants are unfed, and those are not draw bodies), so no feed lines owed. Repeat-heavy pools extended: epitaphs +24, descend +20 (10 with the '%s %s' verb frame - the code passes descend/descends, so every frame reads as a verb plus object, never 'descend down'), cleared +18, misfire +12 (%s name, %s spell, %d roll, %d DC order kept), barks +26 (enter 4, lord 5, trap 5, hurt 4, drink 4, misfire 4; five candidate lines were exact repeats and were left out). Plain register, no mechanics, no floor counts. Additive. Expected zero-hit key.",
+  "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names."
 }

@@ -361,6 +361,12 @@ func _rebuild() -> void:
             ents.remove_at(ti)
         if lines.size() == 1 and _stack_h(lines, font, fs, avail) > budget:
             lines[0] = tidy(String(lines[0]), true)       # last resort: detail goes, outcome stays
+        # U107: at 150% with a lord's card up the vellum is narrow and ONE line still wrapped past
+        # the lower rail ("descend into the scar, and" ran off the scroll). Last, last resort: the
+        # font steps down (never below 70% of the Chronicle size) until the stack fits the vellum.
+        var fs_floor := int(floor(float(fs) * 0.7))
+        while fs > fs_floor and _stack_h(lines, font, fs, avail) > budget:
+            fs -= 1
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])

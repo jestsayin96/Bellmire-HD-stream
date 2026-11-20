@@ -1,0 +1,119 @@
+{
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "hooper": {
+   "creature_h": 2.36,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 3.24,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 36905,
+      "vis": 36905,
+      "delta": 37722,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 51220,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 33644,
+      "vis": 33644,
+      "delta": 34563,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37778,
+      "vis": 37778,
+      "delta": 38718,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36482,
+      "vis": 36482,
+      "delta": 37313,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 44711,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
+  }
+ },
+ "errors": [],
+ "blind_views": [],
+ "seen_min": 0.15,
+ "vis_min": 700,
+ "min_proving": 2,
+ "unproved_cells": [],
+ "measured": [
+  "hooper"
+ ],
+ "asked": [
+  "hooper"
+ ],
+ "blank_check": {
+  "files": 3,
+  "failures": []
+ },
+ "verdict": "GREEN"
+}

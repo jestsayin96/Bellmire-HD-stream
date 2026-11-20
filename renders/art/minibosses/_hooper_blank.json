@@ -2,7 +2,7 @@
  "checked": [
   {
    "view": "front",
-   "opaque_px": 272967,
+   "opaque_px": 267516,
    "border_px": 0,
    "wh": [
     700,
@@ -11,7 +11,7 @@
   },
   {
    "view": "side",
-   "opaque_px": 206089,
+   "opaque_px": 224632,
    "border_px": 0,
    "wh": [
     700,
@@ -20,7 +20,7 @@
   },
   {
    "view": "three_quarter",
-   "opaque_px": 272633,
+   "opaque_px": 286435,
    "border_px": 0,
    "wh": [
     700,
@@ -29,7 +29,7 @@
   },
   {
    "view": "hero_front",
-   "opaque_px": 80467,
+   "opaque_px": 80585,
    "border_px": 0,
    "wh": [
     760,
@@ -38,7 +38,7 @@
   },
   {
    "view": "hero_side",
-   "opaque_px": 68434,
+   "opaque_px": 71422,
    "border_px": 0,
    "wh": [
     760,
@@ -47,7 +47,7 @@
   },
   {
    "view": "hero_back",
-   "opaque_px": 80289,
+   "opaque_px": 80515,
    "border_px": 0,
    "wh": [
     760,

@@ -13345,11 +13345,27 @@ def hooper():
     # A cooper trusses standing over the work with both feet planted; he does
     # not lunge and he does not lean. seat() lifts each limb by its own first
     # segment so a literal 0.0 at the ankle really is the floor.
+    # *** PASS 7, CHANGE G - FROM THE SIDE HE STOOD ON ONE POST. ***
+    # hero_side.png, seen at stream distance, and no number in any register can
+    # reach it: both legs sat at the same y (0.02 -> -0.03), so in a side view
+    # they projected exactly onto each other and the figure stood on a single
+    # column with one boot - a mannequin on a stand. The Knight beside him does
+    # not have this because KayKit stages its feet fore and aft. This is the
+    # Sealer's "square with weight even" stance, which I took from its docstring
+    # without noticing that the Sealer is never SEEN from the side with its own
+    # legs as the silhouette - the press is there instead, and on this body the
+    # cask is on the other side.
+    # The stance stays square in X (a cooper trusses over his work) and is
+    # STAGGERED IN Y: the right foot 0.12 forward, the left 0.10 back. 0.22 m
+    # apart is more than a boot's depth, so the two legs separate in any side
+    # view without the figure reading as mid-stride.
     for s in (-1, 1):
-        limb(P, seat([(s * 0.21, 0.02, HIP), (s * 0.255, 0.00, HIP - 0.58),
-                      (s * 0.265, -0.03, 0.090)], 0.110),
+        yf = 0.12 if s > 0 else -0.10
+        limb(P, seat([(s * 0.21, 0.02 + yf * 0.35, HIP),
+                      (s * 0.255, yf * 0.75, HIP - 0.58),
+                      (s * 0.265, yf, 0.090)], 0.110),
              0.110, 0.088, 'body')
-        P.add(L.box(0.25, 0.40, 0.118), 'dark', loc=(s * 0.265, -0.07, 0.059))
+        P.add(L.box(0.25, 0.40, 0.118), 'dark', loc=(s * 0.265, yf - 0.04, 0.059))
     P.raw(aim(L.cone(0.335, 0.275, 0.76, 12), (0.0, 0.01, HIP), (0.0, 0.02, 1.0)), 'body')
     P.add(L.box(0.52, 0.30, 0.088), 'dark', loc=(0.0, 0.00, HIP + 0.10))      # belt
     for s in (-1, 1):

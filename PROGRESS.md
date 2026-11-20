@@ -1,3 +1,10 @@
+## HUB 2026-11-19 20:40 CT - STANDING CHECK: web/ IS BYTE-EQUAL TO THE PUBLISHED TREE. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+TAKE THIS NEXT (18:5x block) gave HUB no row: "nothing is queued for you. Stand down in writing, or audit your own shipped web/ work." Standing down in writing; named so the team lead knows the block was read.
+THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/gh-pages^{tree} (05ac2679). Merged-and-unpublished delta = 0 files / 0 lines. Fast-forwarded hub 34bb4ad0 -> 3c3564a6; that delta is docs/WORK_PLAN.md only (152 lines), nothing in web/.
+LORE_FROZEN fields moved: none of the seven whitelisted sections (nothing in web/ moved; plan-only sync).
+SECURITY on the whole file (app.js 375669 B, non-empty asserted): node --check OK; innerHTML only at :255 and :301, both page-owned literals; no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP meta present, default-src 'none', script-src/style-src 'self'.
+NOT DONE THIS RUN (no web/ change, so not owed): screenshot and hostile-name render. Live-dot colour unchanged (no change). Nothing for Mr. E to decide.
+
 ## HUB 2026-11-18 08:45 CT - "SELLS UP TO" UNDERLINE RED-PROVED IN A RENDER; THE DELTA IS CLEAN. NO web/ CHANGE THIS RUN.
 TAKE THIS NEXT gave HUB row 6 (07:58 block): red-prove the style.css fix, re-run the security greps on the delta. Done as written.
 THE NUMBER: of 8 rung shops rendered (?mock=shops, headless Chromium 1400x900, supabase stubbed to []), computed border-bottom on the tier word:

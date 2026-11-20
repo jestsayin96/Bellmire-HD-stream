@@ -3844,3 +3844,25 @@ Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, relea
   beadle_1standing.png - the nameplate over the Beadle body reads "Ordrik"; feed "Ordrik holds this chamber alone"; the order mechanic unchanged
   (called hero swings 8, other two hold 0/0).
 - Lock: claim 22:07:50, claim+25 = 22:32:50 computed first, declared 22:32. Staged only the S51 files, PROGRESS, RUN_LOCK.
+
+## D-cycle - S52: THE RENAME'S ROW 23 IS `strickler`, NOT `drizzler` - AND THE S51 GATE NOW READS THE LIVE KEYS INSTEAD OF A COPY OF ITSELF. 2026-11-19T23:08-06:00 (game build)
+- Item: TAKE THIS NEXT 22:58 CT, game build row 1 (S51 half delivered, 35 of 36). The lead was right: there is no `drizzler`
+  key anywhere in this game. The directive's OLD-name column mis-transcribes row 23; I copied the column, art and content read
+  the live key. Murkspit was unreachable and `miniboss_name("strickler")` returned the trade word "Strickler".
+- Fix: scripts/delve.gd MB_NAME `"drizzler"` -> `"strickler"`; the wrong comment ("strickler has no row in the directive") is
+  replaced with what is true. tools/_s51_names.gd TABLE likewise. Nothing in tools/art/minibosses.py or lore_lines.json touched.
+- SAID OUT LOUD: the S51 gate could not catch this class at all - TABLE was a second copy of MB_NAME and asserted the map
+  against itself. It now also asserts MB_NAME's KEY SET against three INDEPENDENT sources: content's miniboss_feed.by_key (36),
+  MB_FIT base keys (36) and the .glb stems under MB_DIR (37 - the 37th is art's broodglut, a variant with no feed lines and no
+  MB_FIT entry, correctly not required). Every MB_NAME key must be in all three; every key with feed lines AND a body must be
+  named. A SELF RED-PROOF plants `drizzler` back in a copy of the map: 4 faults caught (not in feed / fit / glb, and
+  "drawable key strickler has no MB_NAME entry") - the gate fails on exactly the S51 fault.
+- Gates (one battery, 23:09-23:13 CT): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | S51_NAMES OK 152 checks |
+  TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2244 samples off the floor (home) | TOWNWALK in_solid=0/18717 PASS |
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- LOOKED AT IT: tools/_s52_shot.gd (cut of _s51_shot.gd), windowed 1080p, strickler stood on a real built floor:
+  `S52_SHOT OK (4 checks)`. renders/cycles/s52/strickler_murkspit.png - the scale-beam body with the plate "Murkspit" over it;
+  feed line "Murkspit holds this chamber alone - ..." with no "The" and no trade word.
+- DISCLOSED: I ran the battery WITHOUT JESTS_NO_TWITCH=1, so the parse run joined #jestsayin96 as bellmirebro and subscribed
+  EventSub (7 of 7) for ~20 s. Read-only: nothing was posted, redeemed or cheered (0 bits); the log shows no send. Next run sets it.
+- NOT taken: broodglut's MB_NAME / MB_FIT / theme row - it is art's variant class (part 2 of the directive), not rowed to me yet.

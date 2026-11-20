@@ -3,11 +3,15 @@ extends SceneTree
 ## in the directive's table maps to its new name; the names are unique, carry no "The" and no
 ## trade word; every body on disk still resolves and every key with feed lines still reads them
 ## (the key did not move). Prints S51_NAMES OK <n> / S51_NAMES FAIL <n>.
+## S52: TABLE is a second copy of MB_NAME and can only agree with it - it shipped `drizzler`, a key
+## that exists nowhere in this game, and passed. The KEY-SET checks below read three INDEPENDENT
+## sources instead: content's miniboss_feed.by_key, MB_FIT's base keys, and the .glb stems under
+## MB_DIR. A self red-proof plants `drizzler` in a copy of the map and must see it caught.
 const TABLE := {"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "Shacklemaw", "snuffer": "Duskhollow",
 	"sexton": "Gravrik", "porter": "Drudgewall", "tallyman": "Velmok", "cook": "Blisterhand", "sluicekeeper": "Rothenwell",
 	"sower": "Thorncast", "snarer": "Griplash", "stoker": "Cindrak", "bellman": "Tolburn", "boiler": "Scaldmere",
 	"jointer": "Halvrek", "quartermaster": "Wardgrim", "loader": "Millstone", "hurdleman": "Bramblejaw", "tanner": "Flenscar",
-	"reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "drizzler": "Murkspit", "dyer": "Venomshade",
+	"reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "strickler": "Murkspit", "dyer": "Venomshade",
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw",
 	"fenman": "Bogwarden", "comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar",
 	"fuller": "Wrynn", "stackman": "Huskpile"}
@@ -18,6 +22,33 @@ func _ok(c: bool, what: String) -> void:
 	if not c:
 		_fails += 1
 		print("FAIL " + what)
+func _live_keys() -> Dictionary:
+	var feed := {}
+	var mf: Dictionary = Delve.lore().get("miniboss_feed", {})
+	for k: String in mf.get("by_key", {}):
+		feed[k] = true
+	var fit := {}
+	for k: String in Delve.MB_FIT:
+		fit[k.trim_suffix("_chibi")] = true
+	var glb := {}
+	for f: String in DirAccess.get_files_at(Delve.MB_DIR):
+		if f.ends_with(".glb"):
+			glb[f.get_basename().trim_suffix("_chibi")] = true
+	return {"feed": feed, "fit": fit, "glb": glb}
+
+## every MB_NAME key must be a live key in all three sources; every key that has BOTH feed lines
+## and a body (i.e. can reach a floor) must carry a name. Returns the faults as text.
+func _keyset_faults(names: Dictionary, live: Dictionary) -> Array:
+	var out := []
+	for k: String in names:
+		for src: String in ["feed", "fit", "glb"]:
+			if not (live[src] as Dictionary).has(k):
+				out.append("MB_NAME key %s is not in %s" % [k, src])
+	for k: String in live["feed"]:
+		if (live["glb"] as Dictionary).has(k) and not names.has(k):
+			out.append("drawable key %s has no MB_NAME entry" % k)
+	return out
+
 func _initialize() -> void:
 	_ok(TABLE.size() == 36, "directive table is 36")
 	_ok(Delve.MB_NAME.size() == 36, "MB_NAME is 36 (got %d)" % Delve.MB_NAME.size())
@@ -35,7 +66,22 @@ func _initialize() -> void:
 			bodies += 1
 		if not Delve.miniboss_lines(k, "arrive").is_empty():
 			fed += 1
-	_ok(Delve.miniboss_name("strickler") == "Strickler", "an unnamed key falls back to its capitalised word")
+	_ok(Delve.miniboss_name("nosuchtrade") == "Nosuchtrade", "an unnamed key falls back to its capitalised word")
+	_ok(Delve.miniboss_name("strickler") == "Murkspit", "strickler (directive row 23) is Murkspit")
+	# ---- S52 key-set: MB_NAME's keys against what actually draws
+	var live := _live_keys()
+	print("S52 live key sources: by_key %d, MB_FIT base %d, glb stems %d" % [live["feed"].size(), live["fit"].size(), live["glb"].size()])
+	var miss := _keyset_faults(Delve.MB_NAME, live)
+	for f: String in miss:
+		_ok(false, f)
+	_ok(miss.is_empty(), "MB_NAME key set matches the live keys")
+	# self red-proof: the exact S51 fault must be caught by the same function
+	var bad: Dictionary = Delve.MB_NAME.duplicate()
+	bad.erase("strickler")
+	bad["drizzler"] = "Murkspit"
+	var caught := _keyset_faults(bad, live)
+	print("S52 red-proof (drizzler planted): %d faults: %s" % [caught.size(), ", ".join(caught)])
+	_ok(caught.size() >= 2, "red-proof catches the planted drizzler both ways")
 	print("S51 bodies on disk resolving by trade key: %d ; keys with arrive lines: %d" % [bodies, fed])
 	_ok(bodies >= 35, "bodies still resolve (%d)" % bodies)
 	_ok(fed >= 30, "feed still reads by trade key (%d)" % fed)

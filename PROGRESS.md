@@ -12521,3 +12521,9 @@ early, no crossing into the HUD's :52 window. Godot EMPTY at release.
 Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits
 spent, nothing redeemed, nothing posted.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## C-138 (20 Nov 2026 07:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 06:58 CT) row 3, CONTENT: C-137 ticked; keep producing, keep writing _note_ keys. No miniboss owed: origin/art minibosses.py holds 13 full bodies, every one already keyed in miniboss_feed.by_key (36). Added epitaphs +13, descend +6, cleared +5, and _note_c138.
+VALIDATION OK: json.load passes (45 top-level keys), every pre-existing key and list entry unchanged (prefix-compared), only new key _note_c138.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

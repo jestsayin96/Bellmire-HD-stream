@@ -1,0 +1,425 @@
+{
+ "legs_top_z": 0.5237,
+ "torso_y": [
+  -0.3642,
+  0.3847
+ ],
+ "torso_depth": 0.7489,
+ "float_threshold_m": 0.12,
+ "clearance_m": 0.03,
+ "stages": {
+  "J": {
+   "Armor_Black": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "back_faces_added": 232,
+    "tris_after_subdiv": 3024,
+    "conformed_verts": 1160,
+    "taper_core": 0.45,
+    "shell_lo": [
+     -0.6838,
+     -0.4243,
+     0.2492
+    ],
+    "shell_hi": [
+     0.6838,
+     0.4448,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 3142,
+     "floating": 225,
+     "floating_pct": 7.2,
+     "max_d": 0.2444,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 118026,
+      "border_alpha": 0.0,
+      "moved_px": 61015,
+      "skin": {
+       "rows": 40,
+       "body_first": 8,
+       "armour_first": 32,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 1690,
+       "bare_pct": 5.3,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 93438,
+      "border_alpha": 0.0,
+      "moved_px": 39402,
+      "skin": {
+       "rows": 40,
+       "body_first": 3,
+       "armour_first": 37,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 1007,
+       "bare_pct": 5.5,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 116241,
+      "border_alpha": 0.0,
+      "moved_px": 58850,
+      "skin": {
+       "rows": 40,
+       "body_first": 2,
+       "armour_first": 38,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 4050,
+       "bare_pct": 12.6,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Golden": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "back_faces_added": 232,
+    "tris_after_subdiv": 3024,
+    "conformed_verts": 1160,
+    "taper_core": 0.45,
+    "shell_lo": [
+     -0.6838,
+     -0.4243,
+     0.2492
+    ],
+    "shell_hi": [
+     0.6838,
+     0.4448,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 3142,
+     "floating": 225,
+     "floating_pct": 7.2,
+     "max_d": 0.2444,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 118026,
+      "border_alpha": 0.0,
+      "moved_px": 62417,
+      "skin": {
+       "rows": 40,
+       "body_first": 8,
+       "armour_first": 32,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 1183,
+       "bare_pct": 3.7,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 93438,
+      "border_alpha": 0.0,
+      "moved_px": 40187,
+      "skin": {
+       "rows": 40,
+       "body_first": 2,
+       "armour_first": 38,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 803,
+       "bare_pct": 4.4,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 116241,
+      "border_alpha": 0.0,
+      "moved_px": 61573,
+      "skin": {
+       "rows": 40,
+       "body_first": 0,
+       "armour_first": 40,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 1891,
+       "bare_pct": 5.9,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Leather": {
+    "collar_z_raw": 0.383,
+    "dz": 0.852,
+    "back_faces_added": 60,
+    "tris_after_subdiv": 832,
+    "conformed_verts": 449,
+    "taper_core": 0.45,
+    "shell_lo": [
+     -0.6614,
+     -0.3831,
+     0.4239
+    ],
+    "shell_hi": [
+     0.698,
+     0.4117,
+     1.2455
+    ],
+    "hem_above_legs_m": -0.0998,
+    "float": {
+     "n": 818,
+     "floating": 28,
+     "floating_pct": 3.4,
+     "max_d": 0.1699,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 111141,
+      "border_alpha": 0.0,
+      "moved_px": 44566,
+      "skin": {
+       "rows": 40,
+       "body_first": 25,
+       "armour_first": 15,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 3281,
+       "bare_pct": 10.3,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 89222,
+      "border_alpha": 0.0,
+      "moved_px": 25655,
+      "skin": {
+       "rows": 40,
+       "body_first": 2,
+       "armour_first": 38,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 5095,
+       "bare_pct": 27.8,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 109677,
+      "border_alpha": 0.0,
+      "moved_px": 47519,
+      "skin": {
+       "rows": 40,
+       "body_first": 13,
+       "armour_first": 27,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 2421,
+       "bare_pct": 7.5,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "back_faces_added": 120,
+    "tris_after_subdiv": 1664,
+    "conformed_verts": 662,
+    "taper_core": 0.45,
+    "shell_lo": [
+     -0.6614,
+     -0.4243,
+     0.3008
+    ],
+    "shell_hi": [
+     0.6827,
+     0.4448,
+     1.2434
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 1704,
+     "floating": 134,
+     "floating_pct": 7.9,
+     "max_d": 0.2175,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 115488,
+      "border_alpha": 0.0,
+      "moved_px": 56728,
+      "skin": {
+       "rows": 40,
+       "body_first": 15,
+       "armour_first": 25,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 2096,
+       "bare_pct": 6.6,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92119,
+      "border_alpha": 0.0,
+      "moved_px": 33922,
+      "skin": {
+       "rows": 40,
+       "body_first": 1,
+       "armour_first": 39,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 1637,
+       "bare_pct": 8.9,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 113687,
+      "border_alpha": 0.0,
+      "moved_px": 56754,
+      "skin": {
+       "rows": 40,
+       "body_first": 10,
+       "armour_first": 30,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 2448,
+       "bare_pct": 7.6,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal2": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "back_faces_added": 146,
+    "tris_after_subdiv": 2008,
+    "conformed_verts": 731,
+    "taper_core": 0.45,
+    "shell_lo": [
+     -0.6787,
+     -0.4243,
+     0.3008
+    ],
+    "shell_hi": [
+     0.6788,
+     0.4448,
+     1.4008
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 2060,
+     "floating": 185,
+     "floating_pct": 9.0,
+     "max_d": 0.2175,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 116820,
+      "border_alpha": 0.0,
+      "moved_px": 57993,
+      "skin": {
+       "rows": 40,
+       "body_first": 12,
+       "armour_first": 28,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 2577,
+       "bare_pct": 8.1,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92329,
+      "border_alpha": 0.0,
+      "moved_px": 36810,
+      "skin": {
+       "rows": 40,
+       "body_first": 3,
+       "armour_first": 37,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 1775,
+       "bare_pct": 9.7,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 114949,
+      "border_alpha": 0.0,
+      "moved_px": 57618,
+      "skin": {
+       "rows": 40,
+       "body_first": 8,
+       "armour_first": 32,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 3553,
+       "bare_pct": 11.1,
+       "ok": true
+      }
+     }
+    }
+   }
+  }
+ },
+ "errors": []
+}

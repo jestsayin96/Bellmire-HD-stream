@@ -62,6 +62,11 @@ static func install(tree: SceneTree, town: Node) -> void:
 		var fb := FightBanner.new()
 		fb.town = town
 		town.add_child(fb)
+	# U104: the mana strip (S64 pool, supervisor ruling 10:16 item 3)
+	if town.get_node_or_null("ManaStrip") == null:
+		var ms := ManaStrip.new()
+		ms.town = town
+		town.add_child(ms)
 
 static func _on_added(n: Node) -> void:
 	if n is Label3D:
@@ -544,6 +549,137 @@ class ChronicleScroll extends Control:
 		_dowel(g.top_cy, cap, ROD_WORDMARK[0])
 		_dowel(g.bot_cy, cap, ROD_WORDMARK[1])
 		_header(g)
+
+## ---------------------------------------------------------------- U104 the mana strip
+## One blue bar per hero who draws on a pool (Roster S64: h["mana"] / h["mana_max"]). A hero who
+## publishes mana_max 0 gets NO row - never an empty bar - and a party with no caster gets no
+## strip. Lives bottom-right of the pane showing the delve (full screen: bottom-right above the
+## chrome), clear of the party frames' bottom-left. Blue is Mr. E's potion colour key for mana.
+class ManaStrip extends CanvasLayer:
+	const MANA_FILL := Color(0.22, 0.44, 0.92)
+	const MANA_BG := Color(0.08, 0.12, 0.30, 0.92)
+	const W := 300.0
+	var town: Node
+	var _plates := {}           # pane key -> PanelContainer
+	var _poll := 0.0
+
+	func _ready() -> void:
+		name = "ManaStrip"
+		layer = 20
+		UiTheme.watch(self)
+
+	func restyle() -> void:
+		_poll = 0.0
+		_drop()
+
+	func _drop() -> void:
+		for k in _plates:
+			if is_instance_valid(_plates[k]):
+				(_plates[k] as Node).queue_free()
+		_plates.clear()
+
+	## the casters of one delve: [[name, mana, mana_max], ...] in party order
+	static func casters(d: Delve) -> Array:
+		var out: Array = []
+		for m: Dictionary in d.party:
+			var h: Dictionary = m.get("h", {})
+			var mx := float(h.get("mana_max", 0.0))
+			if mx <= 0.0 or float(m.get("hp", 0.0)) <= 0.0:
+				continue
+			out.append([String(h.get("name", "?")), float(h.get("mana", mx)), mx])
+		return out
+
+	func _row(c: Array) -> Control:
+		var box := Control.new()
+		box.custom_minimum_size = Vector2(UiTheme.px(W), UiTheme.px(26))
+		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var b := UiTheme.bar(c[1], c[2], 26)
+		var bg := (b.get_theme_stylebox("background") as StyleBoxFlat).duplicate()
+		bg.bg_color = MANA_BG
+		var fg := (b.get_theme_stylebox("fill") as StyleBoxFlat).duplicate()
+		fg.bg_color = MANA_FILL if c[1] >= Roster.MANA_COST else MANA_FILL.darkened(0.45)
+		b.add_theme_stylebox_override("background", bg)
+		b.add_theme_stylebox_override("fill", fg)
+		b.set_anchors_preset(Control.PRESET_FULL_RECT)
+		box.add_child(b)
+		var nm := UiTheme.label(String(c[0]), 20, Color(0.86, 0.92, 1.0))
+		nm.add_theme_color_override("font_outline_color", UiTheme.INK)
+		nm.add_theme_constant_override("outline_size", UiTheme.px(5))
+		nm.clip_text = true
+		nm.set_anchors_preset(Control.PRESET_FULL_RECT)
+		nm.offset_left = UiTheme.px(8)
+		nm.offset_right = -UiTheme.px(70)
+		nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		box.add_child(nm)
+		var num := UiTheme.label("%d/%d" % [int(floor(c[1])), int(c[2])], UiTheme.SMALL, Color(1, 1, 1))
+		num.add_theme_color_override("font_outline_color", UiTheme.INK)
+		num.add_theme_constant_override("outline_size", UiTheme.px(4))
+		num.set_anchors_preset(Control.PRESET_FULL_RECT)
+		num.offset_right = -UiTheme.px(8)
+		num.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		box.add_child(num)
+		return box
+
+	func _build(rows: Array) -> PanelContainer:
+		var p := PanelContainer.new()
+		var sb := UiTheme.parchment(4)
+		sb.set_content_margin_all(UiTheme.px(8))
+		p.add_theme_stylebox_override("panel", sb)
+		p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var v := VBoxContainer.new()
+		v.add_theme_constant_override("separation", UiTheme.px(3))
+		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		p.add_child(v)
+		v.add_child(UiTheme.label("Mana", UiTheme.SMALL, UiTheme.INK_SOFT))
+		for c in rows:
+			v.add_child(_row(c))
+		return p
+
+	func _process(delta: float) -> void:
+		if town == null:
+			return
+		_poll -= delta / maxf(Engine.time_scale, 0.001)
+		if _poll > 0.0:
+			return
+		_poll = 0.25
+		var groups := {}              # pane key ("full" when not split) -> rows
+		var sp := HudDock.split(town)
+		for c in town.get_children():
+			if not (c is Delve) or (c as Delve).party.is_empty() or (c as Delve).dun == null or not is_instance_valid((c as Delve).dun):
+				continue
+			var k := HudDock.pane_for_delve(town, c) if sp else "full"
+			if k == "":
+				continue
+			var rows := casters(c)
+			if rows.is_empty():
+				continue
+			if not groups.has(k):
+				groups[k] = []
+			(groups[k] as Array).append_array(rows)
+		for k in _plates.keys():
+			if not groups.has(k):
+				if is_instance_valid(_plates[k]):
+					(_plates[k] as Node).queue_free()
+				_plates.erase(k)
+		for k in groups:
+			if _plates.has(k) and is_instance_valid(_plates[k]):
+				(_plates[k] as Node).queue_free()
+			var p := _build((groups[k] as Array).slice(0, 6))
+			add_child(p)
+			_plates[k] = p
+			_place(p, k, sp)
+
+	func _place(p: PanelContainer, k: String, sp: bool) -> void:
+		p.size = p.get_combined_minimum_size()
+		if sp:
+			HudDock.mark(p, k)
+			HudDock.put(p, HudDock.pane(town, k), HudDock.pane_k(town, k), "br")
+		else:
+			HudDock.mark(p, "full")
+			p.scale = Vector2.ONE
+			var sc := HudDock.screen()
+			p.position = Vector2(roundf(sc.x - p.size.x - float(UiTheme.px(12))), roundf(sc.y - p.size.y - float(UiTheme.px(12))))
 
 ## ---------------------------------------------------------------- L31 the fight banner
 ## "NOW FIGHTING / <the lord>": a parchment banner that announces a lord the moment it rises

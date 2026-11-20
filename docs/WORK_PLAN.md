@@ -108,6 +108,47 @@
 ##   verdict is RED, not slow. Either raise the cap enough that they print or report them RED by
 ##   name. l14 / twitch_parse / delve / offfloor OK is a real result and worth committing.
 ##
+## LOCK DISCIPLINE, 16:00-17:0x CT, MEASURED OFF R's WORKING `docs/RUN_LOCK.txt`:
+##   game build 16:08:19 -> IDLE 16:17:01 (cap 16:33, declared 16:33, actual 8m42s, released early).
+##   QA tester 16:42:12 -> IDLE 16:50:15 (cap claim+10 = 16:52, inside it). HUD 16:56:00 -> IDLE
+##   17:01:07 (cap 17:11, declared 17:03, released early). THE CHAT BOT DID NOT CLAIM AT ALL and was
+##   right not to: the QA tester's 16:42-16:52 window covers its whole :45-:52 share, and it checked
+##   by PROCESS (`tasklist`: two live Godot PIDs at 16:47) rather than by the file alone, then SPLIT
+##   THE JOB and carried its battery whole. That is the yield rule working exactly as Mr. E wrote it.
+##   NO OVERRUN, NO CLAIM OVER A LIVE HOLD, NO STALE LOCK CLEARED, NO FUTURE STAMP, NO STARVED LANE.
+## *** THE CLEAN-HOUR COUNT HAS NOT BEEN CARRIED IN WRITING SINCE THE 09:58 BLOCK, AND THAT IS A
+## *** FAULT OF EVERY SEAT SINCE, THIS ONE INCLUDED. I will not quote a number I did not measure.
+##   The last written statement is the 09:58 block: broken by the chat bot's ~12-minute future stamp
+##   in its 10:02 IDLE line. The 10:58 through 15:58 blocks do not restate it. SO I AM RESTARTING AN
+##   EXPLICIT CARRY AND NAMING IT AS A RESTART, NOT A CONTINUATION: **CLEAN HOURS, COUNTED FROM THIS
+##   HOUR: 1.** Next seat: add one if your hour is clean, reset to 0 and say why if it is not, and
+##   write the number in your block every hour so it never goes dark again.
+##
+## THE DEAD-DATA AUDIT, THE 16:58 FIRING - AND MY FIRST INSTRUMENT THIS HOUR WAS WRONG, SAID FIRST:
+##   My first pass tested `key in blob` with NO comment filter and reported 0 unaccounted `_note_`
+##   keys, because names like `_note_c145` appear in delve.gd COMMENTS. That is Guard 1 of my own
+##   standing audit rule - confirm every hit and LOOK at the line - and I broke it. Re-measured with
+##   a per-line reader that drops `#` and `//` lines. **THE BASELINE BELOW REPLACES THE ONE IN THE
+##   TEAM LEAD PROMPT, WHICH IS NOW STALE (it says 122 keys / 2,180,937 chars).**
+##   Measured on merged main, scripts/*.gd + web/*.js ONLY (48 files, 2,289,792 chars), 12 data
+##   files, **137 top-level keys**: 45 with no code hit, and every one accounted for -
+##     - **32** are content's `_note_cNN` cycle notes. NO LANE WIRES ONE; content keeps writing them.
+##     - **4** are the declared-dead phase2 family: `town_levels_for_the_desktop`, `phase2_words`,
+##       `phase2_words_alt`, and **`phase2_words_alt2` - NEW SINCE THE BASELINE.** C-114's own
+##       `_note` calls it a third pool, additive and dead until wired, nothing in scripts/ builds an
+##       `_alt2` suffix, and D98 declared this family dead. IT JOINS THE DECLARED-DEAD LIST; it is
+##       not a gap and no lane is to wire it.
+##     - **9** are prose/spec keys: `technique`, `boss_floors`, `chronicle_line`, `word_order`,
+##       `casing`, `promotion_line`, `one_roll`, `_gating`, `canon_silences`.
+##   PROSE-ONLY (named only inside comments, so not a read): `causality` (origins.json, a sentence
+##   explaining floorgen's inverted shape/origin order) and `district_rules` (world.json, lore prose
+##   quoted at town.gd:33) - **both NEW since the baseline, both spec, neither an item.**
+##   STAYING READ, DO NOT RE-WIRE: `forge_alt`, `lord_intros_alt` and `unique_intros_alt` (built at
+##   runtime), `cooldown_s`. **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO**
+##   (34 directories with files, measured off assets/ only - up from 31, all referenced).
+##   THE RAW ZERO-HIT NUMBER RISES EVERY TIME CONTENT WRITES A NOTE (19 -> 27 -> 28 -> 32 -> 45).
+##   COMPARE THE ACCOUNTED CLASSES, NOT THE RAW NUMBER.
+##
 ## FOR THE SUPERVISOR:
 ##   **ART'S EVEN-LIGHT SWITCH - A 41-BODY RE-RENDER DECISION.** Art has proved that every back
 ##   view in the tree is lit by one coloured lamp (the creature's own aura rim) and has landed the

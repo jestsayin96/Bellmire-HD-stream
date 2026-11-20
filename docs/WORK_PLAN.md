@@ -674,6 +674,36 @@ ADD TO THIS LIST, DO NOT RESET IT. Land it all at once the moment a write is per
           the no-delete/.lock problem and it bites even when the Blender bridge is UP. Read and run
           python through device_bash; run every git call through the Blender bridge.
 
+  (10) ADDED 2026-11-19 18:5x CT (the 18:58 firing). I SPENT NO CALL ON THE GATE EITHER - the
+      prompt's own block and item (9) both settle it, and probing a fifth time would be the fault
+      the block warns about. ADDENDUM TO (9), NOT A RESET:
+        - THE ID LINE MOVES: B65, C-126, D100, H32, L74, S47, T5, U87. **MINIBOSSES ARE 36**,
+          counted off minibosses.py's five ORDER statements in file order (4 + 4 + 6 + 22 single
+          appends, jointer ... rammer, fuller, stackman). THE ART PROMPT SAYS 33 AND IS WRONG BY
+          THREE; the art lane itself caught that this hour and measured rather than trusting it.
+        - THE ART PROMPT'S "only snarer_chibi.glb.import is owed" IS FALSE and has been for days.
+          snarer_chibi.glb.import exists. The real gap was fuller.glb - the 35th body, ticked at
+          17:58 with no import sibling, so it could not have loaded in Godot at all. Art closed it
+          at 18:39. As of main the tree is 47 .glb / 47 .glb.import, PARITY.
+        - DEAD-DATA BASELINE, measured on the merged tree at 18:4x: 2,244,742 chars of script
+          (49 files: 47 .gd + 2 .js), 12 data files, 132 top-level keys, 42 zero-hit of which 27
+          are `_note_` and 8 are string-valued spec notes. 32 asset dirs with files, ZERO
+          unreferenced. UNREAD LIVE DATA KEYS: ZERO, unmoved. Note for whoever reads the raw
+          number next: C-126's `_note_c126` is NESTED under miniboss_feed, not top-level, which is
+          why 132 did not rise this hour.
+        - FOR THE HUD PROMPT AND ANY ROW THAT REPEATS IT: "rarity_hue() has zero call sites" is
+          misleading and should not be written again. It is reached transitively -
+          leaderboard_panel.gd:197 -> UiTheme.rarity_pip -> rarity_hue (ui_theme.gd:205). What is
+          open in System 2's HUD half is ONE ARGUMENT at leaderboard_panel.gd:273, where the worn
+          accessory row drops a rarity that IS stored: all 254 entries of items.json `accessories`
+          carry a `rarity` field, Roster.item() (roster.gd:1176) returns it, and the ladder's
+          vocabulary covers every value with `common` correctly falling through to bare.
+        - FOR THE HUB PROMPT: the LORE_FROZEN pin does NOT go stale every time content writes.
+          Only the seven whitelisted sections in web/tools/refresh_lore.py can stale it, and
+          content's recent cycles (epitaphs, descend, cleared, misfire, barks, miniboss_feed) are
+          all outside them. Verified by deep equality of the page object against a rebuild on the
+          merged tree carrying C-125 and C-126.
+
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
 

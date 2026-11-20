@@ -43,6 +43,11 @@ var catches_of: Callable
 ## Set this to hand chat another source (the tests do); left unset, chat asks the publisher
 ## standing beside it in the town, and says plainly that there is nothing yet if neither is there.
 var chron_of: Callable
+## B69: the town's own standing - {name, level, day, souls, treasury, score, next_at,
+## built, specials}. Set this to hand chat another source (the tests do); left unset, chat
+## reads the economy and the growth standing beside it (Roster is a child of town in live
+## play, town.gd:_start_guild), and says plainly that nothing is standing yet if neither is.
+var town_of: Callable
 ## L17: the spotlight hands chat its put(uid, lane, seconds, reason) -> line (set by Spotlight.setup)
 var spot: Callable
 ## T1: the eventsub hands chat its _do_bits_tier(uid, bits) so !testbits fires town-wide effects
@@ -169,6 +174,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _satchel_line()
         "festival", "feast":
                     out = _festival_line()
+        "town", "bellmire":
+                    out = _town_line()
         "bestiary", "beasts", "monsters":
                     out = _bestiary_line()
         "catchup", "mystory", "since":
@@ -507,6 +514,67 @@ func _satchel_line() -> String:
 ## D63: a festival is an event with a reason. A paid one is named for whoever paid.
 func _festival_line() -> String:
     return "A festival fills the market square - music, stalls, a crowd. A caravan is likelier while it runs. The town levels, or a viewer pays and it carries their name." + _hub_tail()
+
+## B69: what Bellmire is, on one line a viewer reads in a second. The level name IS what has
+## been built - TOWN_LEVELS goes "a hamlet" -> "a walled town" - so the named buildings are the
+## specials growth.stats() reports OPEN, not every plot. READ-ONLY: this command levels nothing,
+## pays nothing and builds nothing; it only reports.
+const TOWN_BUILT := {"market_hall": "the market hall", "stables": "the stables",
+                     "guild": "the guild hall", "bathhouse": "the bathhouse",
+                     "mage_tower": "the mage tower"}
+
+## the town's standing, or {} when nothing is standing. An override wins; otherwise the
+## economy and the growth the Roster's own parent holds.
+func _town_state() -> Dictionary:
+    if town_of.is_valid():
+        var o = town_of.call()
+        return o if o is Dictionary else {}
+    if roster == null:
+        return {}
+    var t := roster.get_parent()
+    if t == null:
+        return {}
+    var e = t.get("economy")
+    if e == null:
+        return {}
+    var out := {"name": String(e.town_name), "level": int(e.town_level), "day": int(e.day),
+                "treasury": int(e.treasury), "souls": int(e.population()),
+                "score": int(e.town_score()), "next_at": int(e.next_level_at())}
+    var g = t.get("growth")
+    if g != null and g.has_method("stats"):
+        var st: Dictionary = g.stats()
+        out["built"] = int(st.get("built", 0))
+        out["specials"] = (st.get("specials", []) as Array)
+    return out
+
+func _town_line() -> String:
+    var s := _town_state()
+    if s.is_empty():
+        return "Bellmire is not standing yet. Nothing has been founded."
+    var bits: Array[String] = []
+    bits.append("Bellmire stands as %s  |  level %d, day %d" % [
+        String(s.get("name", "a crossing")), int(s.get("level", 1)), int(s.get("day", 1))])
+    bits.append("%d souls, %d gold" % [int(s.get("souls", 0)), int(s.get("treasury", 0))])
+    var houses := int(s.get("built", 0))
+    var named: Array[String] = []
+    for k in (s.get("specials", []) as Array):
+        var nm := String(TOWN_BUILT.get(String(k), ""))
+        if nm != "":
+            named.append(nm)
+    if houses > 0 or not named.is_empty():
+        var b := "no houses yet"
+        if houses > 0:
+            b = "%d houses" % houses
+        if not named.is_empty():
+            b += ", " + ", ".join(named)
+        bits.append(b)
+    # the climb is only worth printing while there is one left to make
+    var nxt := int(s.get("next_at", 0))
+    if nxt > 0:
+        bits.append("next at %d, score %d" % [nxt, int(s.get("score", 0))])
+    else:
+        bits.append("nothing left to grow into")
+    return "  |  ".join(bits)
 
 func _bestiary_line() -> String:
     return "What haunts the dark, depth by depth: each beast's size, its habits in a fight, and the eight lords that hold the deep." + _hub_tail()

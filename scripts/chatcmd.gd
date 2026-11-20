@@ -178,6 +178,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _town_line()
         "bestiary", "beasts", "monsters":
                     out = _bestiary_line()
+        "miniboss", "elite", "elites":
+                    out = _miniboss_line(rest)
         "catchup", "mystory", "since":
                     out = _catchup(user_id)
         "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
@@ -578,6 +580,81 @@ func _town_line() -> String:
 
 func _bestiary_line() -> String:
     return "What haunts the dark, depth by depth: each beast's size, its habits in a fight, and the eight lords that hold the deep." + _hub_tail()
+
+## ---- B70: !miniboss - THE THIRD OF THE SUPERVISOR'S THREE (19:28, item 3): "what's on your
+## floor, what you've fought". THE ONE THING THIS COMMAND MUST NOT DO IS CARRY ITS OWN COPY OF
+## THE NAMES. The 19 Nov rename (supervisor sup-nov19-2150) gave every elite a proper name and
+## KEPT THE TRADE AS THE KEY - art's .glb stem, MB_FIT's key, content's miniboss_feed.by_key key.
+## The team lead's 22:58 row charged the game build with shipping a name table whose own gate was
+## a SECOND COPY of that table: tools/_s51_names.gd asserts the map against the map, so it can
+## only ever agree with the thing it is checking. I am answering with the same names, one hour
+## later, in a different file - so the copy was the obvious thing to write and is the one thing
+## that would make this answer rot on its own.
+## SO THERE IS NO TABLE HERE. The key set is content's by_key - the bodies that actually draw a
+## line - and every name comes from Delve.miniboss_name(), the accessor the nameplate itself
+## calls. One authority, read twice, never copied: when the game build corrects a name this
+## answer corrects with it and I change nothing. The same walk is the guard further down, which
+## is why that guard can see a fault neither lane's own gate could.
+## READ-ONLY, no hero needed, nothing owed by the game build: it reports what stands in the deep.
+const MB_ASK := "Ask by name, or by the trade: "
+
+## trade key -> the name a viewer reads, for every elite that content has a feed row for.
+## Empty when either side is missing - the answer says so plainly rather than printing nothing.
+static func miniboss_names() -> Dictionary:
+    var out := {}
+    var mf: Dictionary = (Delve.lore().get("miniboss_feed", {}) as Dictionary)
+    for k in (mf.get("by_key", {}) as Dictionary).keys():
+        out[String(k)] = Delve.miniboss_name(String(k))
+    return out
+
+## the look of the thing: content's first `arrive` line for it. Lines carrying {name} belong to
+## a delver who is not standing here, so they are passed over rather than filled in with a hole.
+static func _miniboss_look(key: String) -> String:
+    for l in Delve.miniboss_lines(key, "arrive"):
+        var s := String(l)
+        if s != "" and not s.contains("{"):
+            return s
+    return ""
+
+## a viewer's word -> the trade key, or "". Exact on the key or the name first, then one
+## unambiguous prefix ("murk" -> murkspit); two matches is no match and the answer asks again.
+static func _miniboss_find(q: String) -> String:
+    var want := q.strip_edges().to_lower()
+    if want == "":
+        return ""
+    var names := miniboss_names()
+    for k: String in names:
+        if want == k or want == String(names[k]).to_lower():
+            return k
+    var hit := ""
+    for k: String in names:
+        if k.begins_with(want) or String(names[k]).to_lower().begins_with(want):
+            if hit != "" and hit != k:
+                return ""
+            hit = k
+    return hit
+
+func _miniboss_line(q: String) -> String:
+    var names := miniboss_names()
+    if names.is_empty():
+        return "Nothing is written down about what holds the chambers." + _hub_tail()
+    var keys := names.keys()
+    keys.sort()
+    if q.strip_edges() == "":
+        # the count is the live one, not a word of mine - chat cannot drift from the data here
+        return "%d hold a chamber alone, one to a chamber. %s!miniboss %s" \
+            % [names.size(), MB_ASK, String(names[keys[0]])] + _hub_tail()
+    var key := _miniboss_find(q)
+    if key == "":
+        return "No such one holds a chamber. %s!miniboss %s" % [MB_ASK, String(names[keys[0]])]
+    var nm := String(names[key])
+    var trade := key.replace("_", " ")
+    # a body the rename has not reached answers to its trade word - said once, not twice
+    var head := nm if nm.to_lower() == trade else "%s, once the %s" % [nm, trade]
+    var look := _miniboss_look(key)
+    if look == "":
+        return "%s holds a chamber alone." % head + _hub_tail()
+    return "%s. %s" % [head, look] + _hub_tail()
 
 func _board(kind: String) -> String:
     var rows := roster.leaderboard(kind, 5)
@@ -1930,6 +2007,72 @@ static func commands() -> Dictionary:
             _guard_faults.append("BESTIARY LORDS")
             push_error("COMMANDS_DATA BESTIARY LORDS: `bestiary` publishes %d lords and the game rises %d, read from Bestiary.LESSER + Bestiary.GREATER - docs/COMMANDS.md counts the deep's lords wrong and a viewer finds out by reaching the one that is not there" % [bl_said[0], bl_code])
             printerr("COMMANDS_DATA BESTIARY LORDS - published %d, risen %d" % [bl_said[0], bl_code])
+        # ---- B70: THE RENAME'S ONE JOIN, ASSERTED FROM A FILE THAT HOLDS NO COPY OF IT.
+        # The team lead's 22:58 check found the same defect in two lanes with one question: for
+        # each body key, does THAT key's own name appear under THAT key. Neither lane's gate could
+        # see it, because each gate was a second copy of the thing it was checking. This guard is
+        # the other shape: it walks content's miniboss_feed.by_key - the bodies that actually draw
+        # a line - and reads Delve.MB_NAME, the table the nameplate draws from. It owns neither.
+        # TWO WAYS THE JOIN BREAKS, AND THEY ARE NOT THE SAME FAULT:
+        #   UNNAMED - a body content writes a feed for with no MB_NAME row. It still stands up
+        #     (miniboss_name falls back to the capitalised trade), so nothing crashes and nothing
+        #     looks wrong in a log - a viewer simply reads the trade word the directive exists to
+        #     remove, and !miniboss answers it too.
+        #   GHOST - an MB_NAME row keyed on a word that is not a body. Unreachable: the name can
+        #     never be drawn, never be asked for here, and the map looks full while being short.
+        # THESE TWO ARE printerr-ONLY AND I AM SAYING WHY RATHER THAN BURYING IT: both have
+        # exactly ONE live instance as I write this (`strickler` unnamed, `drizzler` ghost), they
+        # are the SAME single defect, and it is already corrected on branch `laptop` at a2d6ab2e
+        # and arriving at the next merge of main. A guard that goes red on a fix in flight teaches
+        # a lane to ignore it. The moment main carries that commit these two become push_error
+        # like every other path here - that is owed, and it is in my summary so it can be held.
+        # COUNT / ANCHOR / FIELDS are full faults from the first run: those are MY sentence, and
+        # "36" in data/commands.json is a number in prose with nothing under it until now.
+        var mb_d: Dictionary = (cmd_d.get("miniboss", {}) as Dictionary)
+        var mb_anchor := " elites"
+        var mb_seen: Array[String] = []
+        var mb_said: Array[int] = []
+        for mb_f in ["what", "short"]:
+            var mb_s: String = String(mb_d.get(mb_f, "")).to_lower()
+            var mb_at: int = mb_s.find(mb_anchor)
+            if mb_at < 0:
+                continue
+            mb_seen.append(String(mb_f))
+            var mb_dig := ""
+            var mb_i: int = mb_at - 1
+            while mb_i >= 0 and "0123456789".contains(mb_s.substr(mb_i, 1)):
+                mb_dig = mb_s.substr(mb_i, 1) + mb_dig
+                mb_i -= 1
+            mb_said.append(int(mb_dig) if mb_dig != "" else -1)
+        var mb_live: Dictionary = miniboss_names()
+        var mb_unnamed: Array[String] = []
+        for mb_k: String in mb_live.keys():
+            if not Delve.MB_NAME.has(mb_k):
+                mb_unnamed.append(mb_k)
+        var mb_ghost: Array[String] = []
+        for mb_g in Delve.MB_NAME.keys():
+            if not mb_live.has(String(mb_g)):
+                mb_ghost.append(String(mb_g))
+        if mb_live.is_empty():
+            _guard_faults.append("MINIBOSS FEED")
+            push_error("COMMANDS_DATA MINIBOSS FEED: data/lore_lines.json carries no `miniboss_feed`.by_key rows, so there is no key set to count or to name - `miniboss` publishes a number with nothing under it and !miniboss can only say nothing is written down")
+            printerr("COMMANDS_DATA MINIBOSS FEED - no miniboss_feed.by_key rows; the published count is unchecked")
+        elif mb_seen.is_empty() or mb_said.has(-1):
+            _guard_faults.append("MINIBOSS ANCHOR")
+            push_error("COMMANDS_DATA MINIBOSS ANCHOR: `miniboss` no longer says \"<number> elites\" (fields carrying the phrase: %s) - the published count of the ones that hold a chamber alone can no longer be checked against content's %d feed rows" % [mb_seen, mb_live.size()])
+            printerr("COMMANDS_DATA MINIBOSS ANCHOR - `miniboss` lost its \"<number> elites\" phrase; the count is now unchecked")
+        elif mb_said.size() == 2 and mb_said[0] != mb_said[1]:
+            _guard_faults.append("MINIBOSS FIELDS")
+            push_error("COMMANDS_DATA MINIBOSS FIELDS: `miniboss`.what publishes %d elites and `miniboss`.short publishes %d - my own two declarations disagree, so !miniboss answers one number and docs/COMMANDS.md prints the other" % [mb_said[0], mb_said[1]])
+            printerr("COMMANDS_DATA MINIBOSS FIELDS - what %d, short %d" % [mb_said[0], mb_said[1]])
+        elif mb_said[0] != mb_live.size():
+            _guard_faults.append("MINIBOSS COUNT")
+            push_error("COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes %d elites and content writes feed rows for %d - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there" % [mb_said[0], mb_live.size()])
+            printerr("COMMANDS_DATA MINIBOSS COUNT - published %d, feed rows %d" % [mb_said[0], mb_live.size()])
+        if not mb_unnamed.is_empty():
+            printerr("COMMANDS_DATA MINIBOSS UNNAMED (warning) - %d bodies draw a feed with no MB_NAME row and answer to their trade word instead of a name: %s" % [mb_unnamed.size(), mb_unnamed])
+        if not mb_ghost.is_empty():
+            printerr("COMMANDS_DATA MINIBOSS GHOST (warning) - %d MB_NAME rows keyed on a word no body carries, so the name can never be drawn or asked for: %s" % [mb_ghost.size(), mb_ghost])
         # ---- B51: THE `inventory` FIELD LIST - THE FIRST CLAIM IN THIS FILE GUARDED BY WHETHER
         # THE THING THAT DELIVERS IT STILL EXISTS, RATHER THAN BY WHAT A NUMBER SAYS.
         # B34 named fifteen unguarded `what` claims. FOUR carried a number and all four are now

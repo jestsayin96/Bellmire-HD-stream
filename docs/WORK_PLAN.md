@@ -1,3 +1,194 @@
+## TAKE THIS NEXT - THE 15:58 CT FIRING, 20 NOV 2026 (machine clock 15:58-16:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 BLOCK. ***
+## SIX LANES FIRED, SIX MERGED, FOUR TICKED, ONE STOOD DOWN CORRECTLY. main is 1d6e45c9.
+## *** A ROW OF MINE WENT STALE INSIDE MY OWN RUN AND I AM FIXING IT RATHER THAN LEAVING IT. ***
+##   I wrote "ART - SILENT THIS HOUR" because at my merge art's branch carried only my plan sync.
+##   **ART PUSHED `ad070505` AT 16:02:42 CT - four minutes before my sync - and it is the 41st
+##   miniboss, THE SCRAPER (Scourstone): body, hero trio and register.** My sync picked art's
+##   parent up as `ad070505` rather than `a8939146`, which is the only reason I caught it; I then
+##   merged it into main and re-read the ref. The art row below is REWRITTEN. A lane that pushes
+##   late is not a lane that was silent, and an uncorrected row is a wasted cycle for whoever
+##   reads it.
+## *** THE FLEET IS NINE TASKS NOW, NOT SEVEN. THE SUPERVISOR ADDED TWO LANES AT 15:43 CT. ***
+##   :15 PACK CATALOGUE (trig_01Q9kCPhG7z1smySCzXz8Dau) commits to `hub`, first firing 16:15 CT.
+##   :41 QA TESTER (trig_011T3pbcNKsRy45mBgvhxJ4y) commits to `laptop`, every 2h, first firing 16:41 CT.
+##   Neither had fired when I measured, so neither is late and neither is charged with anything.
+##   THE HUB LANE IS RELIEVED OF PACK CATALOGUE WORK EFFECTIVE NOW - that is the supervisor's, in
+##   writing, and the hub's row below gives it web work instead. The QA tester will claim the Godot
+##   lock at :41 inside the game build's :07-:40 window's tail; it declares a 15-minute cap and the
+##   yield rule binds it exactly as it binds everyone. I merge EIGHT lanes from here on.
+## *** WHAT I FOUND BY LOOKING AT THE PICTURE, WHICH NO NUMBER IN ANY LANE'S REPORT SAID. ***
+##   The HUD shipped U107 as "Chronicle line font steps down to fit the vellum at 150%", and the
+##   font-step mechanism is real and it works - I opened its own 150% recapture and the Chronicle
+##   text sits inside the vellum. **BUT THE REASON IT DID NOT FIT IS STILL THERE, AT BOTH SCALES.**
+##   A dark inspect card reading "The Grubmother / Lord of floor 5. Vast, slow, and ..." is drawn
+##   ON TOP OF the Chronicle vellum - it covers the left HALF at 125% (where the Chronicle text
+##   renders behind it, washed out and half-hidden) and the left TWO THIRDS at 150% (where the text
+##   is squeezed into a column four words wide). The font step-down fits the text into the SLIVER
+##   THE OVERLAP LEAVES FREE. That is fitting text around a fault, not fixing it.
+##   **AND THAT CARD IS NOT THE HUD'S FILE.** Its string is built at `delve.gd:197`
+##   (`"Lord of floor %d. %s"`, the lord announce in the lord's own aura colour) - delve.gd is the
+##   GAME BUILD's. The HUD already knew the neighbouring case and wrote it down itself at
+##   `hud_dock.gd:685`: "the boss card (810x200, **not my file**) covers the plate". So this half
+##   goes to the lane that owns the file. I AM SAYING OUT LOUD THAT I READ IT THAT WAY: assigning
+##   the second half of an open item to the owning lane is not a new item under the freeze.
+##   **AND A SECOND THING THE PICTURE SHOWED: AT 125% THE MANA PLATE IS NOT THERE AT ALL.** At 150%
+##   it renders clear ("Mana / DawnCleric 48/54", left edge). At 125% it is absent from the frame.
+##   U106 LAST HOUR WAS EXACTLY THIS FIX - `hud_dock.gd:685-687` says the plate was docked in "a
+##   spot in the pane that touches neither the boss card nor the Chronicle box". THAT SPOT DOES NOT
+##   HOLD AT 125%. It is a regression in the HUD's own just-shipped work, in the HUD's own file,
+##   and auditing your own shipped work for a defect you have just learned about is NOT a new item.
+## *** A FAULT IN THE CHAT BOT'S REASONING THAT I HAVE TO CORRECT, AND IT COST IT NOTHING. ***
+##   B87 wrote: "the game build's 15:14 IDLE says S68 landed relief/Watchturn, but main 7b8b6f31
+##   delve.gd contains NO relief ... S68 is committed in their tree and NOT pushed". The FIRST half
+##   is true and well-checked - main WAS 7b8b6f31 and it did not have `relief`. **THE SECOND HALF IS
+##   FALSE.** `git reflog origin/laptop` says `6a2baf1a ... update by push` at **15:14:21 CT**, 33
+##   minutes before the chat bot looked, and that commit carries S68. The lane read MAIN and
+##   concluded something about a LANE BRANCH. That is the same class as "a worktree is not a branch",
+##   running the other way: **main being stale is not evidence a lane did not push.** READ THE REF
+##   YOU ARE MAKING THE CLAIM ABOUT. The consequence is good news, not a charge: its `L14_TEST FAIL 1
+##   ["MINIBOSS UNNAMED"] on ["relief"]` was red only because main was stale, and on the merged tree
+##   `delve.gd:425` reads `"relief": "Watchturn"` with `MB_NAME` at **40 keys / 40 distinct**. Its
+##   publish of 40 is correct and ticked. I DID NOT RUN L14 TO SAY SO - the game build owns :07-:40
+##   and I did not take the lock - so I say plainly: I expect that arm to go green on the next run
+##   and I verified its INPUT statically, not the gate.
+## *** THE MINIBOSS CHAIN IS FLUSH AT 40/40/40 FOR THE FIRST TIME. MEASURED BY ME ON d7cae445. ***
+##     - content `miniboss_feed.by_key` = **40** rows, `relief` present.
+##     - engine `Delve.MB_NAME` = **40** keys, **40** distinct, `relief` -> `Watchturn`.
+##     - chat bot `commands.json` = 31 commands, "40 elites" x2, "39 elites" x0.
+##   And C-146's own claim re-derived rather than taken: all **40** rows are at `arrive` 9, the
+##   histogram is `{9: 40}` with nothing left under 9, and **0 rows have a duplicate arrive line**.
+##   **AND THEN ART PUT A 41st BODY DOWN AT 16:02, SO THE CHAIN IS 41 / 40 / 40 AGAIN.** That is
+##   the healthy direction - art leads, the engine and the feed follow - and it is not a fault in
+##   anyone. The flush-at-40 above was true of the three authorities I measured and is still true
+##   of names and feed rows; the body count is now one ahead.
+
+1. GAME BUILD - **S68 IS TICKED, AND THEN TAKE THE CHRONICLE OVERLAP, WHICH IS YOURS.**
+   Verified by me on the merged tree, from the owning file and not from your verdict: `delve.gd:425`
+   `"relief": "Watchturn"`, `MB_NAME` 40 keys / 40 distinct on a brace-balanced parse, MB_FIT 1.03,
+   the barracks row, `_s68_relief.gd` and the relief render all present. The 40th stands up named.
+   **NEXT: the lord announce card at `delve.gd:197` is drawn over the Chronicle vellum.** See the
+   block above - it covers half the vellum at 125% and two thirds at 150%, and the HUD has been
+   working around it by shrinking text. It is your file and the HUD has already written down that
+   it is not theirs. Dock it, offset it, or suppress it while the Chronicle box is up - your call
+   on the mechanism. **FIT IS THE ACCEPTANCE TEST: capture it at 100, 125 AND 150 and look at the
+   frames yourself before you call it done.** This is the L31/announce family, not a new item.
+   **THEN, IF THE WINDOW ALLOWS, THE 41st: art landed `scraper` (Scourstone) at 16:02:42 CT** with
+   `pairs.scraper.ratio` **1.04** and 3/3 proving views in `_fit_scraper_register.json`. That is
+   `MB_NAME` + `MB_FIT` + a `THEME_MINIBOSS_MORE` row, the same shape as S68. **I am naming the
+   Chronicle overlap FIRST on purpose** - it is blocking another lane and the chain is not - but
+   you have shipped a miniboss an hour all day and I would rather say the order than have you guess.
+
+2. CONTENT - **C-146 IS TICKED AND I RE-DID YOUR ARITHMETIC RATHER THAN READING YOUR VERDICT.**
+   drillmaster, scrapwright, quartermaster, loader and hurdleman are each at `arrive` 9; the whole
+   `by_key` histogram is `{9: 40}`; 0 rows under 9; 0 duplicate arrive lines. The five you named
+   were exactly the five that were short. The feed is uniform for the first time.
+   **NEXT, AND IT IS A MEASUREMENT OF MINE, NOT A NEW ITEM:** you have added `phase2_words_alt2`.
+   **THE `phase2_words` FAMILY WAS DECLARED DEAD AT D98** along with `townsfolk` and
+   `town_levels_for_the_desktop` - nothing reads it and nothing is going to. A third member does not
+   make the family live. Do not grow it further, and do not wire it either (D98 stands). Your
+   `_note_` keys are fine and are NOT this - keep writing those; they are 32 of my 45 zero-hit keys
+   and every one is accounted for. Carry on with feed depth: `fall` is the shallow field now.
+   **AND THERE IS A 41st BODY AS OF 16:02 CT: `scraper` (Scourstone).** A feed row for it is
+   ordinary chain work and is the most useful thing you can do after `fall` depth.
+
+3. ART - **THE 41st IS TICKED AND I LOOKED AT IT BEFORE I SAID SO.**
+   `ad070505` at 16:02:42 CT: THE SCRAPER (Scourstone) - body, hero trio, register, `SCRAPER.md`.
+   **I OPENED `hero_back.png` AND `hero_front.png` MYSELF, BECAUSE OF THE BEADLE.** The Beadle
+   passed its register with `seen: 1.0` on every view and still had no facing from behind, so that
+   number has no credit with me on its own. **THE SCRAPER DOES HAVE A REAR FACING** - in the back
+   view the figure is genuinely turned away: hat brim from behind, the pack across its shoulders,
+   no face. The front reads as a tall gaunt figure working a pale inscribed stone. **So this hour
+   the instrument and my eye AGREE, and I am saying that explicitly because last time they did not.**
+   The register: `pairs.scraper.ratio` **1.04** (creature 2.55 / hero 2.45), 3/3 proving views,
+   `frame_edge` 0 on all four sides of all three views, `blind_views` empty, `errors` empty.
+   **I CHECKED THE RATIO AGAINST THE PICTURE RATHER THAN ACCEPTING IT:** my first impression off the
+   front render was that the Scraper stands a third taller than the chibi hero, which would have
+   made 1.04 wrong - but it stands on a LOWER base, and measured off the frame the heights are
+   within about a tenth. **The register is credible and my first eyeball was not.** Note the file is
+   `_fit_scraper_register.json` and it DOES carry a top-level `pairs` - that is what the chat bot's
+   reader was reaching for; `_report.json` is the one that does not have it.
+   **NEXT: keep going - the 42nd is clean work, minibosses are the one thing you may invent.**
+   Or take the Beadle's missing rear facing, which is still open and is still yours.
+
+4. HUB - **YOUR STAND-DOWN WAS CORRECT AND IT IS RECORDED AS A DELIVERY, NOT A MISS.**
+   You stood down at 15:37 because the `dragon_oga` licence row is art's file and no pack dir exists
+   here; web/ unchanged, gh-pages delta 0. You fired BEFORE the supervisor's 15:43 ruling, so you
+   reached the right answer on your own measurement - that is the better way to get there.
+   **YOU ARE NOW RELIEVED OF PACK CATALOGUE WORK PERMANENTLY. The :15 lane owns it.**
+   **NEXT: THE PAGE. It has not been touched since 19 Nov and the game has moved under it** - the
+   mana bar, the dungeon props, and FORTY minibosses where the page still reflects fewer. Reflect
+   the current game on the page. **YOU DO NOT PUBLISH** - that is the supervisor's and I will carry
+   it up when you say ready. I measured the delta myself this hour: `origin/gh-pages^{tree}` and
+   `origin/hub:web` are **both `9ca8051e`** - EQUAL. Nothing is merged-and-unpublished right now.
+
+5. CHAT BOT - **B87 IS TICKED. I RE-READ THE BYTES, NOT YOUR VERDICT.**
+   `commands.json` is 31 commands, "40 elites" x2 and "39 elites" x0; `docs/COMMANDS.md` carries the
+   regenerated text. The one-byte-write discipline (39->40 in both fields in a single write so COUNT
+   never saw a window) is the right instinct and you explained it. **AND YOUR OWN FAULT REPORT IS
+   THE MOST VALUABLE THING IN YOUR ENTRY:** `rep.get("pairs", rep)` returning the TOP dict and you
+   counting its 8 keys as 8 bodies is a silent-fallback fault, and you caught it on PLAUSIBILITY -
+   8 bodies against a 40-row feed is absurd - rather than on an exception. **A `.get(k, default)`
+   whose default is the container itself can never raise; that is the whole danger.** You have now
+   hit an 8-shaped under-count twice in two hours from two different readers. **NEXT: make that
+   structural - stop using silent fallbacks in your art/engine readers. Index the key you mean and
+   let a KeyError be loud.** Then re-run L14; I expect UNNAMED green on the merged tree.
+   **AND READ THE CORRECTION ABOVE about main-vs-origin/laptop before you judge a lane again.**
+
+6. HUD - **U107 IS NOT TICKED AND THE REASON IS IN YOUR FAVOUR. READ THE BLOCK ABOVE.**
+   The font-step mechanism in `feed_hud.gd` is real - `_stack_h` plus a step-down with a 70% floor -
+   and in your own 150% recapture the Chronicle text sits inside the vellum. **I am not ticking it
+   because the item is not finished and because half of what remains is not even yours.**
+   **YOUR HALF: at 125% THE MANA PLATE IS NOT IN THE FRAME AT ALL.** At 150% it renders clear. U106
+   was exactly this fix one hour ago and `hud_dock.gd:685-687` records the spot you chose; that spot
+   does not survive 125%. **Fix the plate at 125% and recapture at all three scales.** This is your
+   own file and your own shipped work, so it is not a new item.
+   **NOT YOUR HALF: the dark "Lord of floor 5" card over the Chronicle vellum is `delve.gd:197` and
+   I have given it to the game build in row 1.** Stop shrinking text to fit around it. When their
+   fix lands you may well be able to put the Chronicle font step BACK - keep the mechanism, it is
+   good, but it should be a safety net and not the load-bearing fix.
+   **YOU FOUND BOTH OF THESE YOURSELF BY CAPTURING AT THREE SCALES AND SAYING WHAT YOU SAW BEFORE
+   YOU HAD A FIX FOR IT.** That is the behaviour, and it is why I could take the picture further.
+
+FOR THE SUPERVISOR:
+  1. **NOTHING IS WAITING ON A PUBLISH DECISION THIS HOUR.** I re-measured both trees myself rather
+     than copying a SHA: `origin/gh-pages^{tree}` == `origin/hub:web` == `9ca8051e`. The delta is
+     ZERO. The "Sells up to" tier-underline delta that my own prompt still carries as pending IS
+     PUBLISHED and that prompt line is stale - I cannot edit a prompt from a firing, so it is
+     recorded here and in the owed-corrections block below. gh-pages is `05ac2679`, 19 Nov 20:06 CT.
+  2. **ACKNOWLEDGING THE TWO NEW LANES.** I have them in the fleet, I will merge eight lanes from
+     next hour, and I have relieved the hub of catalogue work in its row and given it web work, as
+     you directed. Neither new task had fired at my measurement time, so I have nothing to report on
+     their behaviour yet. Your note says their models still need changing in settings and a disabled
+     duplicate needs deleting - **both are live-turn actions on scheduled tasks and a firing cannot
+     do either**, so they sit with you and Mr. E, not with me.
+  3. **A RECOMMENDATION, NOT A DECISION.** The Chronicle overlap has now cost two lanes real work -
+     the HUD built a font-step workaround for a card it does not own, and it did that without
+     knowing whose file it was. If you want a standing rule out of it, the cheap one is: **a lane
+     that finds an overlap measures WHICH FILE DRAWS THE OTHER THING BEFORE IT WORKS AROUND IT.**
+     One grep. I have not written that as a rule anywhere - it is yours to take or leave.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these on the
+first LIVE turn, all at once):
+  a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE AND HAS BEEN FOR A DAY.** It says gh-pages
+     is `45a7904` and that 2 files / 19 lines (`web/app.js` -14, `web/style.css` +5, the "Sells up
+     to" tier-underline fix) are merged-and-unpublished. **MEASURED 20 NOV 16:0x CT: gh-pages is
+     `05ac2679` and its tree EQUALS `origin/hub:web` at `9ca8051e`. THE DELTA IS ZERO.** Replace the
+     whole "WHAT IS MERGED AND NOT PUBLISHED" paragraph with the standing instruction that is
+     already there and is the only durable part: RE-MEASURE BOTH TREES YOURSELF EVERY HOUR.
+  b. **ALL SEVEN PROMPTS - THE FLEET IS NINE TASKS.** The ":07 game build | :22 content | :34 art |
+     :37 hub | :45 chat bot | :52 HUD | :58 you" line is now missing the :15 pack catalogue and the
+     :41 QA tester. Every lane's lock protocol needs the QA tester named, since it can claim at :41.
+  c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** "thirty-three exist as of 18 Nov" is four
+     short of reality twice over; it already says to measure the count rather than trust the line,
+     which is the part that saved it. The chain is 40/40/40 as of 16:0x CT 20 Nov.
+  d. **ALL SEVEN PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and is
+     PER SESSION. Mine returned the full `hd adventure` this hour; the chat bot's returned only two
+     folders and its hardcoded path exited 1 on the first call. Every prompt should say: run
+     `ls $HOME/mnt/` FIRST and use what it prints.
+
+NEEDS MR. E: nothing.
+
 ## TAKE THIS NEXT - THE 14:58 CT FIRING, 20 NOV 2026 (machine clock 14:58-15:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 13:58 BLOCK. ***
 ## SIX LANES FIRED, SIX MERGED, FIVE TICKED, ONE SILENT A SECOND HOUR. main is 59dede7a.

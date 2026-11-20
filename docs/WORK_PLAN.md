@@ -1,3 +1,169 @@
+## TAKE THIS NEXT - THE 06:58 CT FIRING, 20 NOV 2026 (machine clock 06:58-07:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 05:58 BLOCK AND BOTH 04:58 ADDENDA. ***
+## FIVE LANES SHIPPED, SIX MERGED, FIVE TICKED. The hub was SILENT (plan-sync commit only, no write-up).
+## main is d8cfdb0d. THE LEECH'S SPAN LANDED FROM BOTH SIDES IN THE SAME HOUR AND THE TWO HALVES AGREE.
+
+1. GAME BUILD - **S59 IS TICKED, AND THE BOUND YOU WROTE IS NOW BACKED BY A MEASUREMENT.**
+   I re-derived every term off the LIVE table, not the fallback const: `data/strains.json` -> `gorged`
+   **1.35** is the largest of eleven scales (bestiary.gd's `STRAINS_FALLBACK` agrees, but the data file is
+   what `_static_init` loads, so that is the one I read). Corridor **11.0** from `floorgen.gd:21` G 4.0,
+   `:848` HALL_W 3, `:1698` WALL_IN 0.5. 11.0 / 1.35 = **8.1481 m** = **3.5121x** h 2.32 - your 3.51x is
+   arithmetic I re-did. Broodglut 10.4063 / 6.60 = **1.5767x**; your 1.58x is right to two places.
+   **AND ART MEASURED THE SPAN THE SAME HOUR, SO THE "owed by art" LINE IN YOUR COMMENT IS PAID:**
+   `renders/art/minibosses/_fit_leech_register.json` -> `pairs.leech.span_x` = **2.2581** (span_y 1.5929),
+   `span_measured_ct` 06:4x CT, instrument named, 4 meshes / 4168 verts. That is **0.9733x** its own h -
+   **3.6x below your threshold ratio**. Gorged: 2.2581 x 1.35 = 3.0484 m, leaving **7.9516 m** of corridor.
+   **NEXT, AND IT IS THE SAME ITEM FINISHING, NOT A NEW ONE: put `"span": 2.2581` into the leech's def and
+   strike the bound paragraph.** COPY the number, do not re-derive it off the mesh - it is art's, measured
+   with the same instrument as the variants' span_x. Then `_s58_span.gd`'s leech case stops being a bound
+   check and becomes the same check the other two get. **ONE THING TO CARRY ACROSS WITH IT, FROM ART:
+   the span is the PROPS, NOT THE BODY** - per-mesh, `leech_bone` (basin rim, tripod, pale tool) is 2.2581
+   while `leech_body` is only 1.706. The corridor term is 0.552 m wider than the creature. A gate that
+   measured the body would under-report every one of these; say so beside the key.
+
+2. ART - **BOTH HALVES TICKED, AND I RAN YOUR HARNESS MYSELF AND THEN BROKE IT ON PURPOSE.**
+   `tools/art/_floorgeom_proof.py`: I ran it on YOUR worktree (lid 7.0) - **FLOORGEOM_PROOF GREEN, 8 arms,
+   all moved** - and then on a tree carrying **MAIN's floorgen.gd (lid 10.0)**, where it is **ALSO GREEN** and
+   arm G even re-aims its own stale literal to 13.0. That is the test that matters: the harness is now
+   tree-agnostic, which is exactly what last hour's row asked for and more than it asked for.
+   **RED-PROVED BY ME, NOT TAKEN FROM YOU:** I stripped the `raise` out of `must_replace` in a COPY and the
+   verdict flipped to **FLOORGEOM_PROOF RED - G a stale hard-coded lid line is a HARD ERROR (matched 0)**.
+   The guard is load-bearing. Arms C/D/E/F/H withholding a verdict instead of defaulting is the right shape.
+   **AND YOU CAUGHT THE PROVENANCE TRAP BEFORE I DID, SO I AM NOT CHARGING IT - I AM NARROWING IT.**
+   Your worktree's `scripts/floorgen.gd` is still `lid.position = Vector3(0, 7.0, 0)`; main's says 10.0.
+   `_leech_span.json` therefore reports `lid_y_m 7.0 / lid_underside_m 6.5` - true of the tree it read,
+   **false of the dungeon that ships**. The REGISTER does not have that fault: its `floorgeom` block says
+   `read_from_tree: R / origin-main merged (floorgen.gd lid y 10.0 after S56)`, underside 9.5, lid_clear 7.18,
+   and names the discrepancy in its own note. You read both trees and labelled them. Good.
+   **NEXT: make the RAW output carry the same stamp the register does.** `tools/art/_leech_span.py` should
+   write `read_from_tree` (and the lid literal it saw) into `_leech_span.json` too, and say which worktree -
+   and anywhere a floorgeom number is published, refuse or flag when the `floorgen.gd` you read differs from
+   `origin/main`'s. A file that cannot be quoted out of context is worth more than one that is merely right.
+   That is a defect in the provenance of your own shipped instrument, so the freeze does not touch it.
+
+3. CONTENT - **C-137 IS TICKED, MEASURED.** `data/lore_lines.json` parses, **44 top-level keys**, 13,570 lines,
+   and the top-up is real against last hour's counts: epitaphs 696 -> **709**, descend 440 -> **447**,
+   cleared 428 -> **434**, misfire **167** unchanged. **ONE CORRECTION AND IT IS MINE:** `barks` is a
+   **DICT**, not a list - the 05:58 row's "barks 12" counted a dict's keys and called it a pool length.
+   Nothing you shipped caused it.
+   **NEXT: keep producing, unthrottled, and keep writing `_note_` cycle notes** - there are **28** and every
+   one is accounted for. No lane wires one and you do not stop writing them.
+   **FOR YOUR INFORMATION ONLY, NO ACTION:** `phase2_words_alt2` is a third member of the phase2_words family
+   D98 declared dead. It is not a defect and you are not asked to remove it; the BASELINE was wrong, not you.
+
+4. HUB - **YOU WERE SILENT THIS HOUR.** `origin/hub` carries only my plan-sync commit; there is no B-/H-
+   numbered write-up for 06:xx. That is NOT a charge - the supervisor ruled at 05:02 that silent-or-dry hours
+   are not a failing lane - but last hour you wrote the stand-down DOWN, and that was better.
+   **THE HUB IS FULLY PUBLISHED FOR THE SIXTH HOUR, MEASURED BY ME:** `origin/gh-pages^{tree}` and
+   `origin/hub:web` are BOTH `9ca8051e877d77a71faa8de894804e1ede0a5380`; gh-pages tip `05ac2679`. There is no
+   merged-and-unpublished delta. **I RAN NO PUBLISH VERIFICATION AND NONE WAS OWED** - you claimed nothing
+   publishable, and an unearned gate report is the same fault class as a lying gate.
+   **NEXT: write the stand-down DOWN, or audit your own shipped `web/` for a defect you have just learned
+   about. Do NOT run the publish gate.** One line in PROGRESS.md beats silence, because silence cannot be
+   told apart from a lane that failed to fire.
+
+5. HUD - **U99 IS TICKED AS THE DELIVERY, AND I CHECKED THE REASON INSTEAD OF TAKING IT.**
+   You declined a claim and said why: the queue row I wrote names a `LeaderboardPanel` long-roster read that
+   U91/U93 already answer. `tools/_u91_long_names.gd` exists and its own header states the 100/125/150 sweep,
+   the mixed flood with every key distinct, the per-frame viewport and panel-rect checks, `dropped_protected`
+   and the ADMITTED crit lines - the coverage you cited is in the file, not just in your summary. You read the
+   lock from R's WORKING copy at 06:52, found it free, and still did not claim. **Declining a green re-run is
+   the right call and I wrote a stale row; the row was mine.**
+   **NEXT: you are dry on System 2 and L74. Stand down in writing again, or audit your own shipped `hud/` for
+   a defect you have just learned about, inside :52-:07 and claim+15.** Do not claim to re-run green gates.
+   **STANDING: read the lock from R's WORKING TREE ONLY and say in your lock line which copy you read.**
+
+6. CHAT BOT - **B77 IS TICKED, AND IT IS THE MOST VALUABLE THING ANY LANE SHIPPED THIS HOUR.**
+   **FIRST, MY OWN FAULT, BECAUSE YOU CAUGHT IT: THE ROW I WROTE NAMED A COMMAND THAT DOES NOT EXIST.**
+   Row 6 said `beadle` -> `zzz_fake_trade`. I grepped it myself: `data/commands.json` carries **31** commands
+   and **`beadle` is not one of them** - the only `beadle` left in the tree is `web/icons/items/ring/
+   beadle_ring`. I had conflated a MINIBOSS with a chat command. You refused to invent a command to break,
+   renamed `satchel` in both the `commands` key and its `order` entry so `set(order) == set(commands)` stayed
+   exact, and named the substitution in writing. That is exactly right, and the row was wrong, not you.
+   **EVERY NUMBER RE-MEASURED BY ME ON THE MERGED TREE:** `data/commands.json` sha256 **dbeb5517** (byte-for-byte
+   what you had before the edit), `satchel` present, `zzz_fake_trade` **absent**, 31 commands, **91**
+   `_guard_faults.append` arms, and both arms you say fired are literal strings in `scripts/chatcmd.gd`
+   (`SATCHEL ANCHOR`, `NEEDS_HERO ROUTE`). The revert is clean.
+   **AND THE FINDING THAT CHANGES A STANDING BELIEF: THE 91 GUARD ARMS ARE NOT DECORATIVE.** Five hours of
+   plan rows - mine - have called them that. Two of them **fired for real**, to stderr, out of
+   `ChatCmd.commands()` itself. The arms WORK. What is missing is the READER: `grep -rn guard_faults tools/`
+   is **0** by my own grep, and `guard_faults` appears in exactly one script, `chatcmd.gd`. So the correct
+   sentence is **"a live signal with no gate reading it"**, not "decorative", and that is a smaller and more
+   fixable thing. It is also the measured case for the one live-turn item below.
+   **NEXT: ONE WRITING DEFECT IN YOUR LOCK LINE, AND IT IS NOT A NIT.** The last line of
+   `docs/RUN_LOCK.txt` reads literally **`IDLE %s - chat bot B77: ...`** - a Python format placeholder that
+   never got its argument. Liveness is decided BY THE IDLE under Mr. E's yield rule, so an IDLE with no
+   timestamp is an IDLE a seat cannot time. Nobody was hurt (the lane and the window are named, so the
+   release is unambiguous), but fix the writer so a `%s` can never reach that file, and write the next IDLE
+   with a timestamp you read off the machine. Fixing your own writer is not a new item.
+   **DO NOT ATTEMPT THE GUARD-FAULTS PATCH A SIXTH TIME.** It is refused on content grounds from two seats
+   and it needs a live turn. You are not blocked and you are not charged for it.
+   **STANDING: read the lock from R's WORKING TREE ONLY and say so in your lock line** - you did at 06:47.
+
+=== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST (UPDATED 06:58 CT 20 NOV) ===
+A firing cannot edit a scheduled task's prompt - the gate is on the CALL, not on a field, settled three times
+over. **I attempted nothing against it this hour.** The first seat to get a LIVE TURN should land ALL of these
+at once, in the :58 prompt:
+  (1) SYSTEM 2 IS WHOLE. Its HUD rarity-hue half was ticked at U88 (20:58 firing, 19 Nov) and its REACH half at
+      U98 (05:58 firing, 20 Nov). The prompt still calls it unstarted and "THE MOST VALUABLE OPEN ITEM IN THE
+      HOUSE". Strike that whole passage.
+  (2) THE HUB IS FULLY PUBLISHED. gh-pages `05ac2679`; `origin/gh-pages^{tree}` EQUALS `origin/hub:web`
+      (`9ca8051e`). Strike the "2 files / 19 lines, Sells up to, unpublished" delta and the `45a7904` SHA.
+  (3) floorgen's lid is y=10.0, underside 9.50 m (S56). Any prompt text written against a 6.50 m lid is against
+      a dungeon that no longer ships.
+  (4) 49 miniboss bodies; the variants class has three bestiary-carried members - broodglut (h 6.60, span
+      10.4063), lastcuff (h 6.20, span 6.4807), leech (h 2.32, span **2.2581**, measured 20 Nov 06:4x CT).
+      The prompt's "thirty-three exist" is stale.
+  (5) `tools/_commands_doc.gd` writes **31** commands, not 26 - measured by the generator itself.
+  (6) A firing CAN write tracked source files. Proven three ways now: B76 modified `PROGRESS.md` in place,
+      a byte-identical rewrite of `data/commands.json` landed, and at B77 a **byte-CHANGING** in-place edit of
+      `data/commands.json` landed and was reverted in the same run. What was refused - five times, two seats -
+      is **one specific patch on content grounds**. The instruction to a lane is: attempt tracked-file work
+      normally, ONCE; if a refusal names a CONTENT reason, stand down in writing and do not route around it.
+  (7) **THE PROMPT CALLS THE 91 `_guard_faults` ARMS "DECORATIVE". THEY ARE NOT.** B77 fired two of them for
+      real out of `ChatCmd.commands()`. The true statement is that they are a LIVE signal with NO READER:
+      `grep -rn guard_faults tools/` is 0 and `guard_faults` lives in `chatcmd.gd` alone.
+  (8) THE DEAD-DATA BASELINE, measured 06:58 CT 20 Nov on the MERGED tree off **2,266,564** chars of script
+      (`scripts/*.gd` + `web/*.js`, 48 files; tools/ EXCLUDED), 12 data files, **133** top-level keys, asset
+      dirs off `assets/` only: **0 unreferenced asset directories** (34 dirs with files), **0 unread live data
+      keys**, **43** zero-literal-hit keys. **AND THE MEMBERSHIP CORRECTION, WHICH IS MINE:** the 43 are 28
+      `_note_` + 2 runtime-built `_alt` pools (READ at `delve.gd:3801` via `base + "_alt"`) + **9** prose/spec
+      (biomes `technique`; bosses `boss_floors`; origins `chronicle_line`, `word_order`, `casing`; ranks
+      `promotion_line`, `one_roll`; strains `_gating`; world `canon_silences`) + **4 dead-family** keys:
+      `phase2_words`, `phase2_words_alt`, **`phase2_words_alt2`**, `town_levels_for_the_desktop`. Every earlier
+      baseline listed the fourth as `townsfolk`, which returns PROSE hits and so was never in the zero-hit set
+      at all - so `phase2_words_alt2` has been riding in a slot it was never named in. It is dead by D98's
+      ruling on that family (`alt2` appears NOWHERE in `scripts/` or `web/`, and the runtime builder makes only
+      `base + "_alt"`, never `_alt2`), so NO LANE IS TO WIRE IT and content is not to remove it.
+
+=== FOR THE SUPERVISOR (06:58 CT, 20 NOV) ===
+  (a) **FIVE TICKS, EVERY ONE ON A MEASUREMENT OF MY OWN**: game build S59 (strain kmax re-read off the LIVE
+      data table, 11.0/1.35 = 8.1481 m = 3.5121x h re-derived, broodglut 1.5767x re-done), art's floorgeom
+      harness AND leech span (I ran the harness on two different trees and RED-PROVED its guard by stripping
+      the raise), content C-137 (JSON parsed, 44 keys, four pool counts diffed against last hour), HUD U99
+      (the coverage it cited verified inside `_u91_long_names.gd`), chat bot B77 (sha256, command set, 91 arms
+      and both guard-arm strings re-grepped).
+  (b) **THE LEECH CLOSED FROM BOTH ENDS IN ONE HOUR.** Your 01:16 corridor ruling's last loose end was a body
+      with no span term. The game build stated the exemption as a bound at 06:14 and art measured the real span
+      at 06:4x - independently, same hour - and the measurement sits 3.6x inside the bound. Nothing is owed.
+  (c) **NOTHING IS PUBLISHABLE THIS HOUR.** gh-pages and `origin/hub:web` are the same tree for the sixth hour.
+      The hub claimed nothing and I ran no publish gate. No publish decision waits on you.
+  (d) **THE HUB WAS SILENT, NOT DRY.** Six hours without a publishable change is fine by your 05:02 ruling, but
+      this hour it wrote no entry at all. I have asked for one line rather than silence and I am not charging
+      it. If you want silence treated as a miss after N hours, say the N and I will enforce it.
+  (e) **THE CHAT BOT'S BLOCK IS NARROWER AGAIN.** Tracked in-place edits that CHANGE BYTES now land from a
+      firing (B77). One patch is refused on content grounds. The lane has run its red arm and is not blocked.
+
+=== NEEDS MR. E (06:58 CT, 20 NOV) ===
+**ONE, AND IT NOW HAS A MEASURED CASE BEHIND IT.** The chat bot's guard-faults patch - two live lines into
+`tools/_l14_test.gd` at a verified anchor - has been refused five times across two seats, each time with a
+CONTENT reason, never a filesystem one. What changed this hour: B77 proved the 91 `_guard_faults` arms in
+`chatcmd.gd` **actually fire** (two did, to stderr, from `ChatCmd.commands()`), while `grep -rn guard_faults
+tools/` is still **0**. So the patch would turn a signal that is demonstrably live into something a battery can
+fail on - it is not speculative plumbing. It needs **one live turn**: paste the two lines, or tell a seat it may
+land them while you are there. Until then the lane is not blocked and nobody is charged for the patch.
+
+
 ## TAKE THIS NEXT - THE 05:58 CT FIRING, 20 NOV 2026 (machine clock 05:59-06:3x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING BOTH 04:58 ADDENDA. ***
 ## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. The 04:58 addenda are LANDED, not carried: the

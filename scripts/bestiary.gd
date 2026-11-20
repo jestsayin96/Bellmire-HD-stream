@@ -99,6 +99,41 @@ const NEW_TYPES := {
                    "homes": ["wood", "fogbound"]},
     "spiderling": {"name": "spiderling", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 0.3, "atk": 0.5, "spd": 5.2, "h": 0.35, "lift": 0.0,
                    "family": "beast", "homes": []},
+    ## S54: the first PACK-VARIANT miniboss (Mr. E, 19 Nov 21:50 directive part 2). Art's body, recolour
+    ## and fit (docs/art/MONSTER_VARIANTS.md, pass 4): h 6.60 is art's register `height`, the glb is native
+    ## scale because Monster normalises to `h`. THE ONE IDEA: the pack keeps IT alive - it calls puglins,
+    ## and while any it called still stands it takes only `ward` of every blow (the Ossuary Lord's arms,
+    ## Delve._call_tick + Delve._ward). Kill the adds, not the boss. homes [] - it is not a random draw;
+    ## its floor route waits on content's lines and the supervisor's scale ruling.
+    "broodglut": {"name": "Broodglut", "path": MON + "minibosses/broodglut.glb", "anims": A_UAL, "hp": 2.4, "atk": 1.5, "spd": 3.6, "h": 6.60,
+                   "span": 10.4063, "lift": 0.0, "family": "fiend",
+                   "ways": {"summon": {"type": "puglin", "every": 11.0, "most": 3, "line": "Puglins boil out from under Broodglut - and it shrugs off every blow while they stand."}, "ward": 0.5},
+                   "homes": []},
+    ## S56: the SECOND pack-variant miniboss (art's register: h 6.20, theme `cells`, Imp body, palette 3).
+    ## THE ONE IDEA: it is still in irons and every one knocked off makes it faster - `irons` sheds one
+    ## at each hp mark (Delve._lord_tick) and each adds `gain` to its pace; the collar mesh goes at the
+    ## last mark and the cuffs (one mesh, Imp_Chains) at the fourth, so the state is SEEN. homes [] -
+    ## not a random draw until content writes its lines.
+    "lastcuff":  {"name": "Lastcuff", "path": MON + "minibosses/lastcuff.glb", "anims": A_UAL, "hp": 2.2, "atk": 1.4, "spd": 2.6, "h": 6.20,
+                   "span": 6.4807, "lift": 0.0, "family": "fiend",
+                   "ways": {"irons": {"at": [0.85, 0.70, 0.55, 0.40, 0.25], "gain": 0.22, "meshes": {"3": "Imp_Chains", "4": "Imp_SpikedCollar"}}},
+                   "homes": []},
+    ## S57: the THIRD bestiary-carried miniboss, the Leech (Gulworth). h 2.32 is art's CANON height and
+    ## _fit_leech_register.json pairs.leech.creature_h (ratio 0.95), copied not re-derived. THE ONE IDEA,
+    ## art's own: "IT WILL NOT LET A WOUND CLOSE" - while it stands unbroken, every point of healing the
+    ## party spends goes into its BASIN instead (Delve._mend), and it drinks the basin back into itself
+    ## at `rate` hp/s (Delve._lord_tick). At `tip` of its hp the basin is tipped: it empties for good and
+    ## the party's healing lands again. homes [] - not a random draw; the MB_DIR shrine elite is unchanged.
+    ## S60: `span` 2.2581 is ART'S, COPIED NOT RE-DERIVED - _fit_leech_register.json pairs.leech.span_x,
+    ## measured 20 Nov 06:4x CT with the same instrument as the variants' span_x (lordgen.world_bounds,
+    ## glb at creature_h 2.32). IT IS THE PROPS, NOT THE BODY: per-mesh, `leech_bone` (basin rim, tripod,
+    ## pale tool) spans 2.2581 while `leech_body` is only 1.706 - the corridor term is 0.552 m wider than
+    ## the creature, and a gate that measured the body alone would under-report it. Gorged x1.35 draws
+    ## 3.048 m against the 11.0 m clear, so the span term passes it; it now gets the same check as the rest.
+    "leech":     {"name": "The Leech", "path": MON + "minibosses/leech.glb", "anims": A_UAL, "hp": 2.0, "atk": 1.1, "spd": 2.4, "h": 2.32,
+                   "span": 2.2581, "lift": 0.0, "family": "fiend",
+                   "ways": {"basin": {"rate": 4.0, "tip": 0.30, "line": "The Leech's basin goes over - what it drank runs out across the floor."}},
+                   "homes": []},
     "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
                    "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
                    "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},
@@ -487,6 +522,29 @@ static func pool_for(floor_no: int, theme := "") -> Array:
             out.append(k)
     return out
 
+## S58: THE SPAN TERM - the second half of the supervisor's 01:16 corridor ruling. A body that
+## carries `span` (art's T-pose span_x at its bestiary h, copied out of
+## renders/art/variants/_register.json, not re-derived) may not be drawn wider than the corridor
+## clear, which is READ out of FloorGen (G * HALL_W - 2 * WALL_IN = 11.0 m), never a literal. An
+## upscale that would cross it is REFUSED - the body is drawn at its own h - and counted, so a test
+## can see the refusal. Downscales always pass. A body with no span is unchanged.
+static var span_refused := 0
+static var corridor_clear_override := -1.0   # test hook: < 0 reads FloorGen
+
+static func corridor_clear() -> float:
+    if corridor_clear_override >= 0.0:
+        return corridor_clear_override
+    return float(FloorGen.G) * float(FloorGen.HALL_W) - 2.0 * float(FloorGen.WALL_IN)
+
+static func span_scale(d: Dictionary, k: float) -> float:
+    if k <= 1.0 or not d.has("span"):
+        return k
+    if float(d["span"]) * k > corridor_clear():
+        span_refused += 1
+        d["upscale_refused"] = k
+        return 1.0
+    return k
+
 static func make(type_key: String, strain_key := "plain") -> Dictionary:
     var out: Dictionary = def_of(type_key)
     if out.has("paths"):
@@ -501,7 +559,7 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     out["hp"] = float(out["hp"]) * float(st["hp"])
     out["atk"] = float(out["atk"]) * float(st["atk"])
     out["spd"] = float(out["spd"]) * float(st["spd"])
-    out["h"] = float(out["h"]) * float(st["scale"])
+    out["h"] = float(out["h"]) * span_scale(out, float(st["scale"]))
     # a creature with a look of its own keeps it on a plain strain
     if strain_key != "plain" or not out.has("tint"):
         out["tint"] = st["tint"]

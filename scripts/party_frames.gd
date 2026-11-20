@@ -1,5 +1,6 @@
 extends VBoxContainer
 class_name PartyFrames
+const StatusIconScript := preload("res://scripts/status_icon.gd")
 ## WoW-style party frames for the delves running below: a compact column at the
 ## top-left under the key help. One parchment block per delve (L16: the house
 ## theme) - the floor they are on and the party's oil - then each delver: name,
@@ -196,11 +197,22 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 	# states show under each hero only - room for the Chronicle)
 	var sts: Array = d.statuses(m) if d and alive and UiTheme.scale < 1.4 else []
 	if not sts.is_empty():
-		var tags := HBoxContainer.new()
-		tags.add_theme_constant_override("separation", UiTheme.px(8))
+		# L31c: a FLOW, not a row - five states at ~690 px ran past the 400 px frame;
+		# now they wrap inside the bar's own width and nothing is cut
+		var tags := HFlowContainer.new()
+		tags.add_theme_constant_override("h_separation", UiTheme.px(8))
+		tags.add_theme_constant_override("v_separation", UiTheme.px(2))
+		tags.custom_minimum_size.x = UiTheme.px(W - 24)
+		tags.size_flags_horizontal = Control.SIZE_FILL
 		tags.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		for s in sts:
-			# the state colours are bright for the dark world; on parchment, darkened to read
-			tags.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+			# L31: the state's icon first (reads at stream distance), then its word.
+			# The state colours are bright for the dark world; on parchment, darkened to read
+			var chip := HBoxContainer.new()
+			chip.add_theme_constant_override("separation", UiTheme.px(3))
+			chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			chip.add_child(StatusIconScript.new().setup(String(s[2]) if s.size() > 2 else "", String(s[0]), s[1] as Color, bool(s[3]) if s.size() > 3 else false, UiTheme.px(22)))
+			chip.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+			tags.add_child(chip)
 		col.add_child(tags)
 	return col

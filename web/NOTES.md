@@ -1,6 +1,8 @@
 # Research notes for the hub's phase-1 elevation
 
-Not published (nothing here is served). Written before the rebuild, so the
+PUBLIC: gh-pages serves web/ at its root, so this file is served at /NOTES.md
+to anyone who asks (as is web/tools/). Nothing in it is secret; it is kept here
+on purpose, as the reasons behind the design. Written before the rebuild, so the
 choices below have a reason behind them rather than a taste behind them.
 Sources are named inline; where a source is a vendor blog I took the principle,
 not the pitch.
@@ -909,3 +911,50 @@ Art's System 1 (rarity hue ladder + icon origin fix, origin/main 2473836) replac
 
 ## H32 standing check (hub, 2026-11-17 ~02:45 CT, after merging origin/main 463ab1b)
 No code changed; H32 passes 1-5 are all in (ticked whole at ddee675) and the thumbnails are the 520-file set. Re-checked the tree by grep and measurement: `node --check app.js` OK; the only two innerHTML sites are the page-owned status line and failed-fetch box; CSP unchanged (img-src 'self' data:, no new origin); web/icons/items = 520 WebP, 2,430,050 bytes on disk (manifest count 520, budget 6 MB). No new screenshot this hour - nothing visual changed since the 02:00 look. Live dot: red (--live). The nine loose files in the worktree root (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) stay untracked: deleting is refused on this machine and 6 MB of binary is not worth keeping in git.
+
+## H32 standing check (hub, 2026-11-17 ~20:38 CT, after merging origin/main and origin/hub)
+No code changed. `git diff HEAD origin/main -- web/ docs/HUB_SECURITY.md` is empty; the icon manifest source commit (2473836) has no later change under assets/icons/items, so the 520 thumbnails are not stale. Measured: `node --check app.js` OK; innerHTML only at the two page-owned sites (status line, failed-fetch box), no outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP unchanged (img-src 'self' data:, no new origin); web/icons/items = 520 WebP, 2,430,050 bytes (budget 6 MB). No screenshot this hour - nothing visual changed since the 02:00 look. Not re-run headless: state tests (?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1, hostile name) - web/ is byte-identical to the build they last passed on. Live dot: red (--live). Loose untracked files (_h32_shot_a..f.png, _plan_tmp.txt, web_look.tar, web_look2.tar) stay untracked: delete refused on this machine, 6 MB binary not worth keeping in git.
+
+## H32 LIVE-PAGE LOOK (hub, 2026-11-17 ~22:50 CT, after merging origin/main)
+Row from the team lead's 21:58 block: look at the PUBLISHED page in a real browser. No code changed. Real browser = Claude's built-in browser pane (the cloud sandbox cannot reach github.io: ERR_TUNNEL_CONNECTION_FAILED, so no screenshot file was kept; the pane screenshot was viewed).
+- LOADS: https://jestsayin96.github.io/Bellmire-HD-stream/ title "Bellmire HD - the Guild Hall"; CSP meta present.
+- style.css and app.js: both 200; style.css parsed 1009 CSS rules; Gloock woff2 200; Supabase snapshot fetch 200. --live resolves to #e5484d (red live dot).
+- CONSOLE: 0 messages (no errors, no warnings).
+- ICONS: the live snapshot carries no shop data ("Bellmire has not reported its shops yet", game last ran 2 days ago), so the Shops tab has no item pictures to render (0 images in DOM, 0 broken). Resolved by direct probe instead: icons/items/amulet/bell_amulet.webp and barracks_key.webp each load, 160 px wide.
+- RARITY FRAMES per rung: NOT checkable on the live page - no items are served, and the served style.css is the old ladder (hub's change is unpublished, as expected). Left alone.
+- LOOKED AT: rail, stage, welcome card, stale banner ("Last word from the town 2 days ago") and right chat column all render and read correctly in the pane. Pane was ~800x600 and reported innerWidth 0, so scrollHeight-innerHeight=55 from that run is NOT a valid H13 measurement; not recorded as a finding.
+- Served build is at least the H32 layout; I did not diff it against gh-pages 40223be (no access to that branch from here by design).
+
+## MR. E'S OBSERVATION ON THE LIVE PAGE - FOR THE TEAM LEAD (hub, 2026-11-17 ~23:00 CT)
+Mr. E, verbatim, looking at the published page: "if you go all the way down its cut off after shops. please include that in your report when team lead views it."
+- WHAT HE SEES: the section bar (Live, Boards, Town, Heroes, Bands, Chronicle, The die, Guild Roll, The Fallen, Lore, Bestiary, Shops ...) is clipped at the right edge after "Shops". The tabs that follow (Your Satchel, The Season, and anything after) are cut off; only a sliver of the next tab shows. My own 22:50 look saw the same: "Satchel" half-visible at the right edge.
+- WHAT IT IS, AS FAR AS I CAN TELL: the bar scrolls horizontally inside its own region (H32 pass 5 added a right-edge fade and scrolls the active tab into view as the "more this way" hint). At Mr. E's width that hint is not reading - he took it as the end of the list, so the last tabs look missing, i.e. unreachable.
+- STATUS: REPORTED, NOT FIXED. I changed no code this run and have not tested a fix. It is a layout fault on the served page, and any change to web/ would bring the hostile-name and ?state/?mock checks back. If the team lead wants it taken, it is a hub row: make the clipped tabs obviously reachable (visible scroll arrows or a wrap/overflow menu) without breaking H13 no-scroll or the tablist roles.
+
+## web/tools/sheet_overlap.js - does it belong under web/? (hub run, 18 Nov 2026 15:39 CT)
+Answer: YES, it stays. It is a Node + Playwright harness, not page code: index.html and app.js
+never reference it and a browser cannot run it. But web/tools/ is already the hub's tools dir and
+gh-pages already carries three other dev tools from it (gen_d20.py, make_item_icons.py, og.html), so
+publishing it adds no new KIND of file. Grepped clean of any token/secret/key (the only "Bearer"
+strings in web/ are the two page constants in app.js: publishable key + Twitch client id).
+docs/ and tools/ at the repo root are not hub-owned, so moving it out would mean writing to files
+this lane may not touch. Measured publish delta, gh-pages^{tree} 2d14aa9 vs HEAD:web 35eb801:
+3 files, +60/-24 = app.js -14, style.css +25/-10, tools/sheet_overlap.js +45 (new, inert).
+
+## What the 14 deleted lines of app.js carried, and what carries it now (hub run, 18 Nov 2026 16:4x CT)
+Asked by the team lead (16:0x block, row 4) so the person authorising a push knows what leaves the page.
+THE DELETION: `function shopGood(g, passing)` - the old one-line-per-item shop stock row (a `li.shop-good`
+with name, "xN" quantity, rarity label and a coin price). 14 lines removed, zero added.
+WHAT IT DID: drew a stock/cargo item as a flat list row; passing-caravan rows got the `passing` class and
+a rarity class frame.
+WHAT CARRIES IT NOW: `shopCard(g, passing, shopName)` (app.js ~3768, H32 pass 4), called at the shelf
+(~3823) and the caravan cargo (~3843). Same inputs and same fields - name (control chars stripped, 60 cap,
+"(unnamed)" fallback), rarity (rarityClass frame + 16-char pill), cost (coin icon, "-" fallback), qty (now
+shown in the hover/focus preview as "N on the shelf"), and `passing` (class + "Passing through with the
+caravan" line). Every string still goes through el()/textContent; the picture is the itemPic() whitelist.
+WHY IT IS SAFE TO LEAVE: `grep -n shopGood web/app.js` now returns nothing - the function had ZERO callers
+after pass 4, so no behaviour leaves the page. The `.shop-good` CSS is NOT dead: the order rows
+(app.js ~3858 and ~4133) still use the class, so style.css keeps those rules.
+CHECKS (measured): node --check app.js OK; innerHTML at app.js:255 and :301 only, both page-owned;
+zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. No browser run: this
+run changed only NOTES.md, so the hostile-name test is not owed. Not claiming READY TO PUBLISH.

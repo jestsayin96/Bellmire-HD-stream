@@ -64,7 +64,7 @@ const INK_SOFT := Color(0.38, 0.28, 0.19)
 const INK_RED := Color(0.48, 0.20, 0.12)
 const EDGE := Color(0.45, 0.30, 0.16, 0.95)
 const TEAL := Color(0.10, 0.62, 0.62)   # the accent fill (rules, gems)
-const VIEWER := Color(0.55, 0.35, 0.02)      # a viewer's name on parchment (deep gold)
+const VIEWER := Color(0.47, 0.30, 0.02)      # a viewer's name on parchment (deep gold)
 const BAND := Color(0.24, 0.27, 0.34)        # the town's own band (slate)
 const TITLE := 30
 const BODY := 26
@@ -165,25 +165,26 @@ const PLATE_SOLID := Color(0.10, 0.07, 0.06, 1.0)
 const ON_DARK := Color(0.93, 0.86, 0.69)        # parchment-coloured text on PLATE
 const ON_DARK_SOFT := Color(0.74, 0.66, 0.50)
 const ON_DARK_SHADOW := Color(0.0, 0.0, 0.0)
-const GOOD := Color(0.10, 0.40, 0.16)
+const GOOD := Color(0.10, 0.39, 0.16)
 const BAD := Color(0.60, 0.14, 0.10)
 ## TEAL (the one accent) and GOLD, each with an on-parchment and an on-dark value.
-const TEAL_ON_PARCH := Color(0.06, 0.45, 0.45)
+const TEAL_ON_PARCH := Color(0.05, 0.38, 0.38)
 const TEAL_ON_DARK := Color(0.30, 0.78, 0.76)
-const GOLD_ON_PARCH := Color(0.50, 0.32, 0.02)
+const GOLD_ON_PARCH := Color(0.47, 0.30, 0.02)
 const GOLD_ON_DARK := Color(0.78, 0.62, 0.30)
+## ---- U56: uncommon takes art's RARITY_HUE_PARCHMENT pewter (the interface variant; every other rung is canonical).
 ## ---- U55 (System 2, HUD half): the rarity hue ladder. SOURCE OF TRUTH is art's icons.RARITY_HUE
 ## (tools/art/icons.py:659) - never re-chosen here. EIGHT rungs, FIVE carry a hue; junk / starting /
 ## common are BARE on purpose and a piece with no stored rarity gets none (no cost-quartile guess).
 const RARITY_HUE := {
-	"uncommon": Color(1.00, 1.00, 1.00),    # white   - carries an icon halo, NOT a hue on parchment
+	"uncommon": Color(0.62, 0.66, 0.72),    # cool pewter - art's RARITY_HUE_PARCHMENT (icons.py:691); pure white is paper on parchment
 	"rare": Color(0.30, 0.55, 1.00),        # blue
 	"very rare": Color(0.70, 0.35, 1.00),   # purple
 	"legendary": Color(1.00, 0.55, 0.12),   # tangerine
 	"artifact": Color(1.00, 0.13, 0.10),    # bright red
 }
 ## the same four hued rungs darkened until a NAME reads on parchment (>= 4.5:1); uncommon stays ink
-## and is carried by the pip alone, because pure white cannot be text on a cream panel
+## and is carried by the pewter pip alone (pewter is too light to be text on cream)
 const RARITY_INK := {
 	"rare": Color(0.10, 0.28, 0.66),
 	"very rare": Color(0.46, 0.14, 0.70),
@@ -240,6 +241,7 @@ const SCROLL_GOLD := Color(0.840, 0.670, 0.310)
 const SCROLL_BURN := Color(0.190, 0.110, 0.065)
 const SCROLL_GRAIN := Color(0.68, 0.52, 0.31, 0.55)
 const SCROLL_GRAIN_HI := Color(1, 1, 1, 0.04)
+const SCROLL_GRAIN_OFF := 0.75   # U61: rod grain stripe sits this many caps BELOW the rod centre (was -0.5 = through the wordmark at the px(8) cap floor; clears the wordmark ink, measured in tools/_u61_stripe.gd)
 const SCROLL_STAIN := Color(0.55, 0.40, 0.22, 0.05)
 const SCROLL_STAIN_2 := Color(0.48, 0.34, 0.18, 0.05)
 const SCROLL_RULE := Color(0.16, 0.10, 0.05, 0.85)
@@ -248,7 +250,7 @@ const SCROLL_SHEET_SHADOW := Color(0, 0, 0, 0.30)
 const SCROLL_GLINT := Color(0.97, 0.90, 0.64, 0.75)
 const SCROLL_SEAL := Color(0.06, 0.40, 0.40)
 const SCROLL_SEAL_PIP := Color(0.97, 0.85, 0.48)
-const WORD_HI := Color(0.97, 0.88, 0.62)
+const WORD_HI := Color(1.0, 0.96, 0.80)   # U60: was (0.97,0.88,0.62) = 3.87:1 on the rod's lightest wood (SCROLL_WOOD_LT); this is 4.58:1
 const WORD_SHADOW := Color(0.08, 0.04, 0.02, 0.95)
 const AURA_DEFAULT := Color(1, 0.8, 0.4)
 const WHITE := Color(1, 1, 1)

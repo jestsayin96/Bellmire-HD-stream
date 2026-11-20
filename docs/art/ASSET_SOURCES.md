@@ -79,6 +79,20 @@ beside them: `axe_{common,uncommon,rare}.glb` and `hammer_{common,uncommon,rare}
 `assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed
 from `*.gltf.glb`). Wired as gear.gd KINDS axe and mace tiers 1-3.
 
+### 17 Nov 2026 - S18, System 2 second half (part 2): dungeon-pack daggers in the hand (game build)
+Three more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, same licence file already
+beside them: `dagger_{common,uncommon,rare}.glb` in `assets/gear/dungeon/`, copied unchanged from
+`_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from `*.gltf.glb`). Wired as gear.gd KINDS dagger
+tiers 1-3. The pack's staves were copied, rendered, judged wrong in the hand and REMOVED the same hour -
+they are not in the repo.
+
+### 17 Nov 2026 - S19, System 2 second half (part 3): dungeon-pack staves and crossbows in the hand (game build)
+Six more models from the **KayKit Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)**, same licence file already
+beside them: `staff_{common,uncommon,rare}.glb` and `crossbow_{common,uncommon,rare}.glb` in
+`assets/gear/dungeon/`, copied unchanged from `_packs/kaykit_dungeon_pack_CC0/Models/gltf/` (renamed from
+`*.gltf.glb`). Wired as gear.gd KINDS staff and crossbow tiers 1-3. The staves S18 removed are back, now
+with a measured held rotation (gear.gd held_rot) and x1.9 scale.
+
 ## KayKit Dungeon Pack 1.0 - the tiered weapon ladder (S2, art's half of System 2)
 - Pack: KayKit : Dungeon Pack (1.0)
 - Author: Kay Lousberg (www.kaylousberg.com)
@@ -94,6 +108,22 @@ from `*.gltf.glb`). Wired as gear.gd KINDS axe and mace tiers 1-3.
   in common / uncommon / rare. Nothing was re-exported or re-materialled; the files
   are the pack's own .glb renamed from `<fam>_<tier>.gltf.glb` to `<fam>_<tier>.glb`.
 - Where: assets/gear/dungeon/
+
+> TEAM LEAD NOTE, 2026-11-17 12:58 CT, on merging the two rows above. BOTH ARE KEPT AND BOTH
+> WERE TRUE WHEN WRITTEN. They disagree on one fact and this merge is what settles it: the game
+> build removed its own staff copies at S18 after judging them in the hand, and the art lane
+> committed the full fifteen in the same hour. AFTER THIS MERGE staff_*, crossbow_*, axeDouble_*
+> and shield_* ARE in assets/gear/dungeon/ - art's copies - and nothing in scripts/ reads them
+> yet. That is queued work with art's carry numbers attached (docs/art/SYSTEM2_WEAPONS.md), not
+> a stray asset. One licence covers all 24; no new row is owed.
+
+> TEAM LEAD ADDENDUM, 2026-11-17 14:58 CT. The 12:58 note above ends "nothing in scripts/ reads
+> them yet". THAT CLAUSE IS NOW OUT OF DATE and I am correcting it where it sits rather than
+> editing what was true when written. As of S19 and S20 all 24 dungeon-pack models ARE read:
+> sword/axe/hammer at S16-S17, dagger at S18, staff and crossbow at S19, axeDouble and shield at
+> S20 (shield_* via a runtime format string at roster.gd:886, which a literal filename search
+> cannot see - see this hour's dead-data audit). The licence row and the merge note stand
+> unchanged; only the "nothing reads them" clause is superseded.
 
 ### 17 Nov 2026 - THE TAPSTER (miniboss 21): `assets/props/` enters the log
 `assets/monsters/minibosses/tapster.glb` embeds decimated geometry from three
@@ -147,6 +177,13 @@ No attribution is required; the pack is cleared for commercial use and nothing i
 an asset. Source geometry is unmodified - the fit is a transform (uniform scale, a depth scale and
 a depth offset) baked at export. Measurements and the fit proof: `renders/art/s7_armour/`.
 
+## System 8 - shields (game build S50, 19 Nov 2026)
+The five shields of the Quaternius **Medieval Weapons Pack (Sept 2018)** (row above, CC0 1.0) -
+`Shield_Celtic_Golden`, `Shield_Heater`, `Shield_Heater_2`, `Shield_Round`, `Shield_Round_2` - copied
+unmodified as FBX into `assets/gear/shields/` with `LICENSE_Quaternius_MedievalWeapons_CC0.txt` beside
+them (the extracted pack carries no licence file; the note is ours). `_packs/handpainted_weapons/`
+shield_a..d were NOT used: that folder carries no licence file and no source, so its licence is
+unverified and it stays out until one is read.
 ### 19 Nov 2026 - THE BESTIARY KIT ENTERS THE LOG, AND IT WAS ALREADY IN THE REPO
 
 `assets/monsters/Imp.glb`, `Puglin.glb` and their four texture maps each were

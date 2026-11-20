@@ -201,10 +201,13 @@ class Satchel extends PanelContainer:
         h.add_child(pip)
         var a := UiTheme.label(what, 22, UiTheme.rarity_ink(rarity, INK))
         a.clip_text = true
+        a.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS   # U56: a long name ends in an ellipsis, never a bare cut
+        a.tooltip_text = what                         # and the whole name stays one hover away
         a.size_flags_horizontal = Control.SIZE_EXPAND_FILL
         h.add_child(a)
         var b := UiTheme.label(gives, 22, col)
         b.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+        b.size_flags_horizontal = Control.SIZE_SHRINK_END         # U56: the value column keeps its own width; the name gives way, not the numbers
         h.add_child(b)
         _list.add_child(h)
 
@@ -267,7 +270,8 @@ class Satchel extends PanelContainer:
             var it := Roster.item(key)
             worn.append(key)
             var g := _gives_of(it)
-            _piece("%s  (%s)" % [String(it.get("name", key)), String(slot)], String(g[0]), g[1])
+            _piece("%s  (%s)" % [String(it.get("name", key)), String(slot)], String(g[0]), g[1],
+                String(it.get("rarity", "")))   # U88: the data already carries it (254/254); commons stay bare by design
         for kind in (h.get("cos", {}) as Dictionary):
             var ck := String(h["cos"][kind])
             if kind == "dye":
@@ -334,7 +338,8 @@ class Satchel extends PanelContainer:
             if v <= 0:
                 continue
             listed += 1
-            _piece(String(Roster.item(key).get("name", key)), "%d gold" % v, GOLD)
+            _piece(String(Roster.item(key).get("name", key)), "%d gold" % v, GOLD,
+                String(Roster.item(key).get("rarity", "")))   # U88: sell-back row, same field
         for bk in (h.get("brews", {}) as Dictionary):
             var pot := Roster.potion(String(bk))
             var n := int(h["brews"][bk])

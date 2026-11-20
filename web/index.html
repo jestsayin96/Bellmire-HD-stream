@@ -46,7 +46,8 @@
   a failed fetch says so plainly and tries again - never a spinner forever.
 
   Every string from the snapshot reaches the DOM through createElement + textContent only.
-  There is no innerHTML anywhere in app.js. See docs/HUB_SECURITY.md; the reasoning behind
+  The only innerHTML in app.js is two page-owned sites (the status line and the "nothing yet"
+  box); no snapshot string reaches either one. See docs/HUB_SECURITY.md; the reasoning behind
   the look is in web/NOTES.md. Neither is served content.
 
   Test hooks (local checks only, harmless):

@@ -323,11 +323,25 @@ func _cap() -> int:
         show = mini(_chrome_lines(), 5) + (2 if card_showing() else 0)   # L71: fewer, whole entries; height-fit trims further
     return maxi(1, show - 2 if card_showing() else show)
 
+## L74: which shown line the height/cap trim takes - lowest priority, oldest within it, never the newest
+func _trim_index(ents: Array) -> int:
+    var w := 0
+    for i in range(0, maxi(1, ents.size() - 1)):
+        if int(ents[i]["pri"]) < int(ents[w]["pri"]):
+            w = i
+    return w
+
 func _rebuild() -> void:
     for c in _box.get_children():
         c.queue_free()
     var lines: Array = []
-    for e in _shown.slice(maxi(0, _shown.size() - _cap())):
+    # L74: when the box holds fewer lines than are up (a scale step, the card), the line that
+    # goes is the lowest-priority one, oldest first - never simply the oldest. A P_CRIT line keeps
+    # its place; only the newest line is exempt from being the one trimmed.
+    var ents: Array = _shown.duplicate()
+    while ents.size() > _cap():
+        ents.remove_at(_trim_index(ents))
+    for e in ents:
         lines.append(_text_of(e))
     var fs := UiTheme.px(CHRON_PX if _chrome else 28)
     var wrap_w := 0.0
@@ -342,7 +356,9 @@ func _rebuild() -> void:
         for i in lines.size():
             lines[i] = tidy(String(lines[i]))
         while lines.size() > 1 and _stack_h(lines, font, fs, avail) > budget:
-            lines.remove_at(0)
+            var ti := _trim_index(ents)
+            lines.remove_at(ti)
+            ents.remove_at(ti)
         if lines.size() == 1 and _stack_h(lines, font, fs, avail) > budget:
             lines[0] = tidy(String(lines[0]), true)       # last resort: detail goes, outcome stays
     for i in lines.size():
@@ -510,7 +526,8 @@ func _evict_index(pri: int) -> int:
         var e: Dictionary = _shown[i]
         var age := _clock - float(e["at"])
         var epri := int(e["pri"])
-        var ok: bool = age >= float(DWELL[epri]) or (pri > epri and age >= DWELL_FLOOR)
+        var rd := _read_s(e)             # L74: a long line is held long enough to READ, whatever its class
+        var ok: bool = age >= maxf(float(DWELL[epri]), rd) or (pri > epri and age >= maxf(DWELL_FLOOR, rd))
         if not ok:
             continue
         if w < 0:
@@ -520,6 +537,13 @@ func _evict_index(pri: int) -> int:
         if epri < int(b["pri"]) or (epri == int(b["pri"]) and float(e["at"]) < float(b["at"])):
             w = i
     return w
+
+## L74: seconds to read a line at READ_CPS plus the eye finding it; capped so one huge line cannot pin the scroll
+const READ_CPS := 18.0
+const SCAN_S := 1.0
+const READ_CAP_S := 10.0
+func _read_s(e: Dictionary) -> float:
+    return minf(float(_text_of(e).length()) / READ_CPS + SCAN_S, READ_CAP_S)
 
 func _admit(e: Dictionary) -> void:
     e["at"] = _clock
@@ -542,7 +566,14 @@ func _drop(e: Dictionary, why: String) -> void:
 
 func _text_of(e: Dictionary) -> String:
     var n := int(e["n"])
-    return String(e["text"]) if n <= 1 else "%s  x%d" % [String(e["text"]), n]
+    if n <= 1:
+        return String(e["text"])
+    # L74: the "x5" binds to the last word (no-break space) so it never wraps onto a line alone
+    var t := String(e["text"])
+    var sp := t.rfind(" ")
+    if sp > 0:
+        t = t.substr(0, sp) + "\u00a0" + t.substr(sp + 1)
+    return "%s\u00a0x%d" % [t, n]
 
 func _flog(msg: String) -> void:
     feed_log.append("t=%.1f %s" % [_clock, msg])

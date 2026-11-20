@@ -9,8 +9,18 @@ extends RefCounted
 ## junk and into treasure. A small share of fish come up scar-touched: one
 ## rarity higher, worth triple, glowing (lore: the river runs past the scar).
 
-const RARITY_COLOR := {"common": Color(0.92, 0.92, 0.90), "uncommon": Color(0.45, 0.95, 0.45),
-    "rare": Color(0.40, 0.65, 1.00), "very rare": Color(0.80, 0.45, 1.00), "legendary": Color(1.00, 0.66, 0.20)}
+## THE THIRD RARITY TABLE, closed 18 Nov (team lead TAKE THIS NEXT 07:04 row 1, art's ruling in
+## tools/art/icons.py above RARITY_HUE_LAMP). Art's RARITY_HUE is canonical (U55). This table is
+## its SANCTIONED LAMP VARIANT - every channel +0.10, clamped to 1.0 - because two of its three
+## readers are a light_color and an emission, which want the lifted value or they tint the water.
+## common, junk and starting are BARE: no entry here, so the baseline does not spend the rung
+## above it. uncommon is WHITE (the ladder's claim), not the MMO green it carried before.
+## artifact is absent on purpose: fishing.json `rarities` stops at legendary and the scar bump
+## clamps there, so it is unreachable. tools/_fish_rarity.gd guards all of this.
+const RARITY_COLOR := {"uncommon": Color(1.00, 1.00, 1.00), "rare": Color(0.40, 0.65, 1.00),
+    "very rare": Color(0.80, 0.45, 1.00), "legendary": Color(1.00, 0.65, 0.22)}
+## what a bare rung draws with: the label's own ink and an untinted light - no hue, not a guess
+const BARE := Color(1, 1, 1)
 
 static var _t: Dictionary = {}
 
@@ -75,8 +85,17 @@ static func roll(rng: RandomNumberGenerator, luck: int = 0) -> Dictionary:
             got["note"] = notes[rng.randi() % notes.size()]
     return got
 
+## true when this catch has earned a hue. JUNK never has, whatever rarity its row carries
+## (fishing.json gives 7 junk rows a rarity - before this a boot came up blue).
+static func has_hue(item: Dictionary) -> bool:
+    if String(item.get("cat", "")) == "junk":
+        return false
+    return RARITY_COLOR.has(String(item.get("rarity", "common")).to_lower())
+
 static func colour(item: Dictionary) -> Color:
-    return RARITY_COLOR.get(item.get("rarity", "common"), Color.WHITE)
+    if not has_hue(item):
+        return BARE
+    return RARITY_COLOR[String(item.get("rarity", "common")).to_lower()]
 
 ## D9 (the DnD RULE): striking a bite is a DEX check - d20 + the fisher's bonus
 ## (DEX, + proficiency for those who know the river) vs HOOK_DC. A 1 snaps the

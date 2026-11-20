@@ -62,6 +62,11 @@ static func install(tree: SceneTree, town: Node) -> void:
 		var fb := FightBanner.new()
 		fb.town = town
 		town.add_child(fb)
+	# U104: the mana strip (S64 pool, supervisor ruling 10:16 item 3)
+	if town.get_node_or_null("ManaStrip") == null:
+		var ms := ManaStrip.new()
+		ms.town = town
+		town.add_child(ms)
 
 static func _on_added(n: Node) -> void:
 	if n is Label3D:
@@ -439,14 +444,42 @@ class ChronicleScroll extends Control:
 		draw_circle(c, r * 0.30, BRASS_DK)
 		draw_circle(c - Vector2(r * 0.26, r * 0.30), r * 0.15, UiTheme.SCROLL_GLINT)
 
-	func _dowel(cy: float, cap: float) -> void:
+	## U62: where the CHRONICLE baseline (the glyph ink bottom - capitals, no descenders) sits on the top rod.
+	## One definition, used by the wordmark AND the grain stripe, so the stripe can never be placed
+	## by a ratio that font-size rounding breaks (at 150% the ratio 0.75*cap fell 1 px short).
+	func _wm_baseline(top_cy: float) -> float:
+		var fs := maxi(10, UiTheme.px(17))
+		return top_cy + _wordmark_font().get_string_size("CHRONICLE", HORIZONTAL_ALIGNMENT_LEFT, -1, fs).y * 0.32
+
+	## U63: the grain stripe's [top, height] on a rod. ONE definition, read by _dowel's draw AND by
+	## tools/_u58_contrast.gd's gate, so the gate asserts what the draw does and not a constant that was
+	## only ever true at 100% (the old hard-coded 17.0 floor).
+	func _grain_span(cy: float, cap: float, ink_bot: float = -1.0) -> Vector2:
+		var gy := cy + cap * UiTheme.SCROLL_GRAIN_OFF
+		var gh := maxf(1.0, cap * 0.20)
+		if ink_bot >= 0.0:
+			gy = maxf(gy, ink_bot)
+			gh = clampf(cy + cap - gy, 0.0, gh)
+		return Vector2(gy, gh)
+
+	## U64: which rod carries the wordmark. [top, bottom]. The draw reads it at its two _dowel calls and the
+	## gate reads it too, so flipping it for the top rod is a red gate, not a silent overlap.
+	const ROD_WORDMARK := [true, false]
+
+	## U64: the stripe span of a rod AS DRAWN - resolves the wordmark baseline itself, so there is no
+	## ink_bot argument at a call site to forget. _dowel draws from this; tools/_u58_contrast.gd gates it.
+	func _dowel_grain(cy: float, cap: float, has_wordmark: bool) -> Vector2:
+		return _grain_span(cy, cap, _wm_baseline(cy) if has_wordmark else -1.0)
+
+	func _dowel(cy: float, cap: float, has_wordmark: bool = false) -> void:
 		var s := size
 		var x0 := _p(1.0)
 		var x1 := s.x - _p(1.0)
 		var wdt := x1 - x0
 		_vgrad(Rect2(x0, cy - cap, wdt, cap), WOOD_DK, WOOD_LT, 4)
 		_vgrad(Rect2(x0, cy, wdt, cap), WOOD_LT, WOOD_DK, 4)
-		draw_rect(Rect2(x0, cy - cap * 0.5, wdt, maxf(1.0, cap * 0.20)), UiTheme.SCROLL_GRAIN)
+		var gs := _dowel_grain(cy, cap, has_wordmark)
+		draw_rect(Rect2(x0, gs.x, wdt, gs.y), UiTheme.SCROLL_GRAIN)
 		draw_line(Vector2(x0, cy - cap), Vector2(x1, cy - cap), UiTheme.SCROLL_RULE, 1.0)
 		draw_line(Vector2(x0, cy + cap), Vector2(x1, cy + cap), UiTheme.SCROLL_RULE, 1.0)
 		_finial(Vector2(x0 + cap, cy), cap)
@@ -476,7 +509,7 @@ class ChronicleScroll extends Control:
 		var word := "CHRONICLE"
 		var wsz := font.get_string_size(word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
 		var wx := (s.x - wsz.x) * 0.5
-		var wy := top_cy + wsz.y * 0.32
+		var wy := _wm_baseline(top_cy)
 		# L61: gilt on the dark wood (the burn-brown wordmark vanished into the spindle at 1080p)
 		draw_string(font, Vector2(wx + 1.0, wy + 1.5), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_SHADOW)
 		draw_string(font, Vector2(wx, wy), word, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_HI)
@@ -513,9 +546,140 @@ class ChronicleScroll extends Control:
 		var edge := _sheet_poly(g, 0.0, 0.0)
 		draw_polyline(edge, Color(TAN_DK.r, TAN_DK.g, TAN_DK.b, 0.6), maxf(1.0, _p(1.2)))
 		# the two spindles overhang the sheet; their finials cap the rod ends
-		_dowel(g.top_cy, cap)
-		_dowel(g.bot_cy, cap)
+		_dowel(g.top_cy, cap, ROD_WORDMARK[0])
+		_dowel(g.bot_cy, cap, ROD_WORDMARK[1])
 		_header(g)
+
+## ---------------------------------------------------------------- U104 the mana strip
+## One blue bar per hero who draws on a pool (Roster S64: h["mana"] / h["mana_max"]). A hero who
+## publishes mana_max 0 gets NO row - never an empty bar - and a party with no caster gets no
+## strip. Lives bottom-right of the pane showing the delve (full screen: bottom-right above the
+## chrome), clear of the party frames' bottom-left. Blue is Mr. E's potion colour key for mana.
+class ManaStrip extends CanvasLayer:
+	const MANA_FILL := Color(0.22, 0.44, 0.92)
+	const MANA_BG := Color(0.08, 0.12, 0.30, 0.92)
+	const W := 300.0
+	var town: Node
+	var _plates := {}           # pane key -> PanelContainer
+	var _poll := 0.0
+
+	func _ready() -> void:
+		name = "ManaStrip"
+		layer = 20
+		UiTheme.watch(self)
+
+	func restyle() -> void:
+		_poll = 0.0
+		_drop()
+
+	func _drop() -> void:
+		for k in _plates:
+			if is_instance_valid(_plates[k]):
+				(_plates[k] as Node).queue_free()
+		_plates.clear()
+
+	## the casters of one delve: [[name, mana, mana_max], ...] in party order
+	static func casters(d: Delve) -> Array:
+		var out: Array = []
+		for m: Dictionary in d.party:
+			var h: Dictionary = m.get("h", {})
+			var mx := float(h.get("mana_max", 0.0))
+			if mx <= 0.0 or float(m.get("hp", 0.0)) <= 0.0:
+				continue
+			out.append([String(h.get("name", "?")), float(h.get("mana", mx)), mx])
+		return out
+
+	func _row(c: Array) -> Control:
+		var box := Control.new()
+		box.custom_minimum_size = Vector2(UiTheme.px(W), UiTheme.px(26))
+		box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var b := UiTheme.bar(c[1], c[2], 26)
+		var bg := (b.get_theme_stylebox("background") as StyleBoxFlat).duplicate()
+		bg.bg_color = MANA_BG
+		var fg := (b.get_theme_stylebox("fill") as StyleBoxFlat).duplicate()
+		fg.bg_color = MANA_FILL if c[1] >= Roster.MANA_COST else MANA_FILL.darkened(0.45)
+		b.add_theme_stylebox_override("background", bg)
+		b.add_theme_stylebox_override("fill", fg)
+		b.set_anchors_preset(Control.PRESET_FULL_RECT)
+		box.add_child(b)
+		var nm := UiTheme.label(String(c[0]), 20, Color(0.86, 0.92, 1.0))
+		nm.add_theme_color_override("font_outline_color", UiTheme.INK)
+		nm.add_theme_constant_override("outline_size", UiTheme.px(5))
+		nm.clip_text = true
+		nm.set_anchors_preset(Control.PRESET_FULL_RECT)
+		nm.offset_left = UiTheme.px(8)
+		nm.offset_right = -UiTheme.px(70)
+		nm.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		box.add_child(nm)
+		var num := UiTheme.label("%d/%d" % [int(floor(c[1])), int(c[2])], UiTheme.SMALL, Color(1, 1, 1))
+		num.add_theme_color_override("font_outline_color", UiTheme.INK)
+		num.add_theme_constant_override("outline_size", UiTheme.px(4))
+		num.set_anchors_preset(Control.PRESET_FULL_RECT)
+		num.offset_right = -UiTheme.px(8)
+		num.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		num.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		box.add_child(num)
+		return box
+
+	func _build(rows: Array) -> PanelContainer:
+		var p := PanelContainer.new()
+		var sb := UiTheme.parchment(4)
+		sb.set_content_margin_all(UiTheme.px(8))
+		p.add_theme_stylebox_override("panel", sb)
+		p.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var v := VBoxContainer.new()
+		v.add_theme_constant_override("separation", UiTheme.px(3))
+		v.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		p.add_child(v)
+		v.add_child(UiTheme.label("Mana", UiTheme.SMALL, UiTheme.INK_SOFT))
+		for c in rows:
+			v.add_child(_row(c))
+		return p
+
+	func _process(delta: float) -> void:
+		if town == null:
+			return
+		_poll -= delta / maxf(Engine.time_scale, 0.001)
+		if _poll > 0.0:
+			return
+		_poll = 0.25
+		var groups := {}              # pane key ("full" when not split) -> rows
+		var sp := HudDock.split(town)
+		for c in town.get_children():
+			if not (c is Delve) or (c as Delve).party.is_empty() or (c as Delve).dun == null or not is_instance_valid((c as Delve).dun):
+				continue
+			var k := HudDock.pane_for_delve(town, c) if sp else "full"
+			if k == "":
+				continue
+			var rows := casters(c)
+			if rows.is_empty():
+				continue
+			if not groups.has(k):
+				groups[k] = []
+			(groups[k] as Array).append_array(rows)
+		for k in _plates.keys():
+			if not groups.has(k):
+				if is_instance_valid(_plates[k]):
+					(_plates[k] as Node).queue_free()
+				_plates.erase(k)
+		for k in groups:
+			if _plates.has(k) and is_instance_valid(_plates[k]):
+				(_plates[k] as Node).queue_free()
+			var p := _build((groups[k] as Array).slice(0, 6))
+			add_child(p)
+			_plates[k] = p
+			_place(p, k, sp)
+
+	func _place(p: PanelContainer, k: String, sp: bool) -> void:
+		p.size = p.get_combined_minimum_size()
+		if sp:
+			HudDock.mark(p, k)
+			HudDock.put(p, HudDock.pane(town, k), HudDock.pane_k(town, k), "br")
+		else:
+			HudDock.mark(p, "full")
+			p.scale = Vector2.ONE
+			var sc := HudDock.screen()
+			p.position = Vector2(roundf(sc.x - p.size.x - float(UiTheme.px(12))), roundf(sc.y - p.size.y - float(UiTheme.px(12))))
 
 ## ---------------------------------------------------------------- L31 the fight banner
 ## "NOW FIGHTING / <the lord>": a parchment banner that announces a lord the moment it rises

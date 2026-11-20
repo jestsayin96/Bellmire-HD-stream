@@ -80,6 +80,11 @@ static func skeleton(n: Node) -> Skeleton3D:
 
 ## Attach a mesh (full res:// path) to a bone. `slot` names it so re-equipping
 ## replaces rather than stacks.
+## S24: how far (mesh units, before scale) the pack staff's grip slides toward its butt. S21 measured +0.25:
+## shaft clear of the floor in Idle 0.10-0.15 m on a mage; the Cheer inversion it causes is staff_grip.gd's job.
+const STAFF_GRIP_SHIFT := 0.25
+const STAFF_GRIP := preload("res://scripts/staff_grip.gd")
+
 static func equip(model_root: Node, path: String, bone := "handslot.r", slot := "weapon",
                   scale := 1.0, glow := 0.0) -> Node3D:
     var sk := skeleton(model_root)
@@ -92,13 +97,34 @@ static func equip(model_root: Node, path: String, bone := "handslot.r", slot := 
         return null
     if not _cache.has(path):
         _cache[path] = load(path)
+    ## S35: ResourceLoader.exists() is true for an un-imported asset whose load() still returns
+    ## null (a worktree with a partial .godot/imported). Skip the piece, never instantiate a null.
+    var ps := _cache[path] as PackedScene
+    if ps == null:
+        _cache.erase(path)
+        return null
     var att := BoneAttachment3D.new()
     att.name = "eq_" + slot
     att.bone_name = bone
     sk.add_child(att)
-    var m: Node3D = (_cache[path] as PackedScene).instantiate()
+    var m := ps.instantiate() as Node3D
+    if m == null:
+        att.free()
+        return null
     m.scale = Vector3.ONE * scale
+    m.rotation_degrees = held_rot(path)
     att.add_child(m)
+    if path.begins_with(DUN + "staff_"):
+        ## S24: the pack staff's grip slides toward the butt, and the inverted fist turns it end for end.
+        ## The model's own children move, so deco_piece measures the moved bounds and the wrap stays in the fist.
+        for c in m.get_children():
+            if c is Node3D:
+                (c as Node3D).position.y += STAFF_GRIP_SHIFT
+        m.set_meta("staff_grip", true)
+        var g: Node = STAFF_GRIP.new()
+        g.name = "staff_grip"
+        g.set("held", m)
+        att.add_child(g)
     if glow > 0.0:
         ignite(m, glow)
     return m
@@ -163,20 +189,33 @@ const SKA := "res://addons/kaykit_character_pack_skeletons/Assets/gltf/"
 ## S17 (System 2, second half, part 1): axe/axe and axe/mace tiers 1-3 take the pack's axe_* and
 ## hammer_* the same way (tiers 4-5 keep their existing kit). Same 0.8 hand_scale: measured off the
 ## .glb accessors, axe 0.89/0.95/0.95 and hammer 0.86/0.87/0.90 long, origin in the grip.
+## S18 (System 2, second half, part 2): dagger tiers 1-3 take the pack's dagger_*. Measured off the .glb
+## accessors: 0.90/1.03/1.15 long, origin at the grip -> hand_scale 0.5 (0.45/0.54/0.65 m in the fist).
+## S19: staff and crossbow tiers 1-3 take the pack's staff_*/crossbow_*. Neither needed the held rotation
+## S18 thought: both are built on the SAME axes as the Adventurers' staff/crossbow they replace. The S18
+## staff read as a wand because it was scaled 0.8 - see hand_scale.
 const DUN := "res://assets/gear/dungeon/"
+## S45 (System 6, artifact tier): the found-only tier 5 (C-58) takes Quaternius Ultimate RPG Items' _Golden set (CC0,
+## LICENSE in the dir) for the 7 kinds it covers - sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
+## quarterstaff, wand and crossbow keep their kit[4]. Art (ARTIFACT_GOLD_VS_SCARRED.md): keep the gold, no red tint.
+const ART := "res://assets/gear/artifact/"
 const KINDS := {
-    "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", KIT + "sword_E.gltf"]},
-    "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", SKA + "Skeleton_Blade.gltf"]},
-    "dagger":     {"family": "blade", "noun": "dagger", "kit": [ADV + "dagger.gltf", ADV + "dagger.gltf", KIT + "knife.gltf", ADV + "dagger.gltf", ADV + "dagger.gltf"]},
+    "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", ART + "sword_golden.glb"]},
+    "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", ART + "sword_big_golden.glb"]},
+    "dagger":     {"family": "blade", "noun": "dagger", "kit": [DUN + "dagger_common.glb", DUN + "dagger_uncommon.glb", DUN + "dagger_rare.glb", ADV + "dagger.gltf", ART + "dagger_golden.glb"]},
     "spear":      {"family": "blade", "noun": "spear", "kit": [KIT + "spear_A.gltf", KIT + "spear_A.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf", KIT + "halberd.gltf"]},
-    "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", SKA + "Skeleton_Axe.gltf"]},
-    "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
-    "staff":      {"family": "arcane", "noun": "staff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
+    "axe":        {"family": "axe", "noun": "axe", "kit": [DUN + "axe_common.glb", DUN + "axe_uncommon.glb", DUN + "axe_rare.glb", KIT + "axe_B.gltf", ART + "axe_small_golden.glb"]},
+    "mace":       {"family": "axe", "noun": "mace", "kit": [DUN + "hammer_common.glb", DUN + "hammer_uncommon.glb", DUN + "hammer_rare.glb", KIT + "hammer_B.gltf", ART + "hammer_double_golden.glb"]},
+    # S20 (System 2 engine half, art's SYSTEM2_WEAPONS (b)): a GREATAXE is double-headed, not a hatchet. Tiers 1-3
+    # take the pack's axeDouble_*; 4-5 keep the axe kit until a heavier model exists. "Bearded Greataxe" (t2) and
+    # "Ash-Maul Greataxe" (t4) reach it through D94_KIND_WORDS. Added AFTER "mace" so kinds_of("axe")[0] stays "axe".
+    "greataxe":   {"family": "axe", "noun": "greataxe", "kit": [DUN + "axeDouble_common.glb", DUN + "axeDouble_uncommon.glb", DUN + "axeDouble_rare.glb", KIT + "axe_B.gltf", ART + "axe_double_golden.glb"]},
+    "staff":      {"family": "arcane", "noun": "staff", "kit": [DUN + "staff_common.glb", DUN + "staff_uncommon.glb", DUN + "staff_rare.glb", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     # D94b: an arcane MACE ("Parish Iron Mace") had no kind and fell back to a staff
     "sceptre":    {"family": "arcane", "noun": "mace", "kit": [KIT + "hammer_A.gltf", KIT + "hammer_A.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf", KIT + "hammer_B.gltf"]},
     "wand":       {"family": "arcane", "noun": "wand", "kit": [ADV + "wand.gltf", KIT + "wand_A.gltf", ADV + "wand.gltf", KIT + "wand_A.gltf", KIT + "wand_A.gltf"]},
-    "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [ADV + "crossbow_1handed.gltf", ADV + "crossbow_1handed.gltf", ADV + "crossbow_2handed.gltf", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
-    "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf"]},
+    "crossbow":   {"family": "ranged", "noun": "crossbow", "kit": [DUN + "crossbow_common.glb", DUN + "crossbow_uncommon.glb", DUN + "crossbow_rare.glb", ADV + "crossbow_2handed.gltf", SKA + "Skeleton_Crossbow.gltf"]},
+    "bow":        {"family": "ranged", "noun": "bow", "kit": [KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", KIT + "bow_A_withString.gltf", ART + "bow_golden.glb"]},
     # L4: the monk's open hand - a quarterstaff, or bare wrapped fists (no mesh)
     "quarterstaff": {"family": "open", "noun": "quarterstaff", "kit": [ADV + "staff.gltf", ADV + "staff.gltf", ADV + "staff.gltf", KIT + "staff_B.gltf", SKA + "Skeleton_Staff.gltf"]},
     "wraps":      {"family": "open", "noun": "hand wraps", "bare": true, "kit": ["", "", "", "", ""]},
@@ -196,11 +235,61 @@ static func kind_path(kind: String, tier: int) -> String:
     var l: Array = KINDS[kind]["kit"]
     return String(l[clampi(tier - 1, 0, l.size() - 1)])
 
+## S19: a per-path HELD ROTATION. The hand slot's +Y points FORWARD out of the fist in the idle pose, so
+## a mesh built along +Y lies horizontal (s19_side, first run: the pack staff at x1.9 was a lance).
+## A staff wants its shaft UP. MEASURED, not guessed (tools/_s19_hand.gd AXIS lines, posed idle): the
+## slot's +Y is world-forward and its +X is world-DOWN (-0.99), so +90 about Z turns the mesh's +Y onto
+## the slot's -X = world UP. (A first guess, -90 about X, laid it sideways across the body.)
+static func held_rot(path: String) -> Vector3:
+    if path.begins_with(DUN + "staff_"):
+        return Vector3(0, 0, 90)
+    ## S45: the _Golden bow is built along +Y (limbs) with its belly toward +X; held plain it lay FLAT along the
+    ## forearm (s45_side, first run). The staff's +90 about Z stands the limbs UP and turns the belly forward.
+    if path == ART + "bow_golden.glb":
+        return Vector3(0, 0, 90)
+    ## S20: the pack crossbow is built with its stock along the mesh's +Z (prod at the +Z end), its prod (bow arms)
+    ## along +X and its thin axis along +Y. Held plain, the prod stood VERTICAL and the stock pointed ACROSS the
+    ## body (s19_side). Art's (0, 0, 90.06) was tried first: it levelled the prod but left the stock across the
+    ## body (AXIS: prod +X along world -Z). The wanted map in the slot frame (+Y forward, +X down, measured S19) is
+    ## mesh +Z -> slot +Y (stock forward), mesh +Y -> slot -X (up), mesh +X -> slot -Z (prod across): Godot YXZ
+    ## euler (-90, 0, 90), solved off that matrix, not guessed. tools/_s20_hand.gd gates prod level + stock forward.
+    if path.begins_with(DUN + "crossbow_"):
+        return Vector3(-90, 0, 90)
+    return Vector3.ZERO
+
+## S20: the off hand's scale. The pack shield is built like the Adventurers' shields it replaces (face in the mesh
+## XY plane, centred on its origin, boss toward +Z) so it needs NO held rotation on handslot.l; it is smaller
+## (0.68-0.76 wide against shield_square's 0.88), so x1.2 brings it to the kit shield's size.
+static func offhand_scale(path: String) -> float:
+    if path.begins_with(DUN + "shield_"):
+        return 1.2
+    return 1.0
+
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
 ## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small
 static func hand_scale(path: String) -> float:
     if path.ends_with("bow_A_withString.gltf"):
         return 0.92
+    ## S19: the S18 staff was not lying wrong, it was SMALL. The Adventurers' own staff.gltf - which reads
+    ## as a staff in every mage's hand - is built the SAME way (along +Y, origin in the shaft, -0.90..1.25,
+    ## 2.15 long); the pack staff is 0.91/1.12/1.16 long, so at 0.8 it was a 0.7-0.9 m wand. x1.9 puts it
+    ## at 1.7/2.1/2.2 m, the Adventurers' length.
+    if path.begins_with(DUN + "staff_"):
+        return 1.9
+    ## S19: the pack crossbow is built along +Z exactly like the Adventurers' crossbow_1handed (z -0.28..0.94,
+    ## held at x1.0); 0.64-0.76 deep and 0.69-1.04 wide, so it needs no held rotation - only x1.0, not 0.8.
+    if path.begins_with(DUN + "crossbow_"):
+        return 1.0
+    ## S45: the _Golden set is built along +Y with the grip at the origin, like the pack sword, and BIG - measured off
+    ## the .blend bounds: sword 2.30, big sword 2.74, dagger 1.39, axe 1.58, double axe 2.15, double hammer 2.53, bow 2.17.
+    if path.begins_with(ART + "dagger_"):
+        return 0.5
+    if path.begins_with(ART + "hammer_"):
+        return 0.4
+    if path.begins_with(ART):
+        return 0.6
+    if path.begins_with(DUN + "dagger_"):   # S18: pack daggers are 0.9-1.15 long; 0.5 puts them at a long knife
+        return 0.5
     if path.begins_with(DUN):   # S16: dungeon-pack blades are ~1.3-1.9 long; 0.8 puts the common at an arming sword
         return 0.8
     return 0.62 if path.begins_with(KIT) else 1.0
@@ -1458,6 +1547,7 @@ const D94_KIND_WORDS := [
     ["rapier", "sword"], ["cutlass", "sword"], ["sabre", "sword"], ["falchion", "sword"],
     ["backsword", "sword"], ["longsword", "sword"], ["brand", "sword"], ["sword", "sword"], ["blade", "sword"],
     ["fang", "sword"], ["edge", "sword"],
+    ["greataxe", "greataxe"],   # S20: before "maul", so "Ash-Maul Greataxe" is a greataxe
     ["mace", "mace"], ["mace", "sceptre"], ["maul", "axe"], ["hatchet", "axe"], ["cleaver", "axe"], ["splitter", "axe"],
     ["greataxe", "axe"], ["hewer", "axe"], ["breaker", "axe"], ["axe", "axe"],
     ["quarterstaff", "quarterstaff"], ["wraps", "wraps"], ["knuckles", "wraps"], ["fist", "wraps"],
@@ -1724,7 +1814,9 @@ static func deco_piece(n: Node3D, look: Dictionary) -> void:
         pi = (pi + 1) % D94_PENNON.size()
     if f == 1 or f == 4:
         for k in [-1.0, 1.0]:
-            var rib := _part(n, _box(0.07, 0.045, 0.02), _m_cloth(D94_PENNON[pi], 0.7), dir * (lo - span * 0.14) + Vector3(0.05 * k, 0, 0.05 * k) * (Vector3.ONE - dir), rot)
+            # S24: a pack staff's ribbons hang under the finial, not off the butt (the butt is near the floor)
+            var rat := (hi - span * 0.20) if n.has_meta("staff_grip") else (lo - span * 0.14)
+            var rib := _part(n, _box(0.07, 0.045, 0.02), _m_cloth(D94_PENNON[pi], 0.7), dir * rat + Vector3(0.05 * k, 0, 0.05 * k) * (Vector3.ONE - dir), rot)
             rib.scale = Vector3(1, maxf(2.0, span * 0.30 / 0.045), 1)
             rib.name = "d94_ribbon"
     if f == 2 or f == 4:
@@ -1745,7 +1837,9 @@ static func deco_piece(n: Node3D, look: Dictionary) -> void:
 ## tint an instanced weapon's materials toward its piece's stuff, and give it the piece's glow
 ## S17: material names (KayKit dungeon pack) that are the cutting edge or striking head of a weapon;
 ## tint_piece leaves their albedo alone (the glow still reaches them). Atlas-textured kits match none.
-const EDGE_MATS := ["Metal", "Stone", "StoneDark", "White"]
+## S45: + the artifact _Golden set's metals - art's ruling (ARTIFACT_GOLD_VS_SCARRED.md) keeps the gold untinted;
+## its wood grip still takes the name's stuff word.
+const EDGE_MATS := ["Metal", "Stone", "StoneDark", "White", "Golden", "LightGold", "DarkSteel"]
 
 static func tint_piece(n: Node, look: Dictionary) -> void:
     if n == null:

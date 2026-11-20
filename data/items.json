@@ -95,7 +95,7 @@
     "rollkeeper_ring": {"name": "Roll-keeper's Ring", "slot": "ring", "cost": 410, "saves": 1, "flavour": "The guild wears one to write the names. It is heavier than it looks.", "rarity": "rare"},
     "backstair_cloak": {"name": "Backstair Cloak", "slot": "cloak", "cost": 450, "ac": 1, "flavour": "Grey as a wall and twice as uninteresting. That is the whole trick.", "rarity": "very rare"},
     "pitwalk_boots": {"name": "Pitwalker's Boots", "slot": "boots", "cost": 380, "saves": 1, "flavour": "Thin soles on purpose - you want to feel the floor lie to you.", "rarity": "very rare"},
-    "mender_wraps": {"name": "Mender's Wraps", "slot": "gloves", "cost": 330, "hp": 10, "flavour": "Stained past washing, and every stain walked back out of the scar.", "rarity": "legendary"},
+    "mender_wraps": {"name": "Mender's Wraps", "slot": "gloves", "cost": 330, "hp": 10, "flavour": "Clean linen, bound true. Everyone it wrapped walked back out of the scar.", "rarity": "legendary"},
     "deeplamp_amulet": {"name": "Deep-lamp Amulet", "slot": "amulet", "cost": 470, "saves": 1, "flavour": "A thumb of lamp-glass that has been down further than most men.", "rarity": "legendary"},
     "warhorn_mantle": {"name": "Warhorn Mantle", "slot": "cloak", "cost": 500, "dmg": 1, "flavour": "Cut from a gate banner the raiders never got to take down.", "rarity": "legendary"},
     "tithe_ring": {"name": "Tithe Ring", "slot": "ring", "cost": 340, "saves": 1, "flavour": "The chapel takes a tenth of everything. This is the tenth it gave back.", "rarity": "uncommon"},
@@ -124,7 +124,7 @@
     "weighstone_amulet": {"name": "Weighstone Amulet", "slot": "amulet", "cost": 310, "ac": 1, "flavour": "A market weight, true to the grain. The market hangs men for a false one.", "rarity": "uncommon"},
     "thatcher_cloak": {"name": "Thatcher's Cloak", "slot": "cloak", "cost": 280, "hp": 10, "flavour": "Reed-oiled and stiff as a roof. Rain gives up on it.", "rarity": "uncommon"},
     "crane_cloak": {"name": "Cranesman's Cloak", "slot": "cloak", "cost": 440, "ac": 1, "flavour": "Doubled at the shoulder, where the rope goes when the rope goes wrong.", "rarity": "very rare"},
-    "pilgrim_cloak": {"name": "Pilgrim's Cloak", "slot": "cloak", "cost": 320, "speed": 1, "flavour": "Light, patched, and it has out-walked three better cloaks.", "rarity": "rare"},
+    "pilgrim_cloak": {"name": "Pilgrim's Cloak", "slot": "cloak", "cost": 320, "speed": 1, "flavour": "Light, and sewn to last. It has out-walked three cloaks that cost more.", "rarity": "rare"},
     "towpath_boots": {"name": "Towpath Boots", "slot": "boots", "cost": 310, "speed": 1, "flavour": "Cut for the bank, not the road. The bank is where the work is.", "rarity": "very rare"},
     "pavers_boots": {"name": "Paver's Boots", "slot": "boots", "cost": 360, "ac": 1, "flavour": "Iron under the toe, because the stone always lands the same way.", "rarity": "very rare"},
     "ferrystep_boots": {"name": "Ferrystep Boots", "slot": "boots", "cost": 280, "hp": 10, "flavour": "For standing on a deck that will not stand still. You learn or you swim.", "rarity": "rare"},
@@ -240,7 +240,7 @@
     "grainmeasure_charm": {"name": "Grainmeasure Charm", "slot": "amulet", "cost": 260, "hp": 10, "flavour": "A wheat-ear in resin. Measure the grain, and it will measure back.", "rarity": "common"},
     "flask_amulet": {"name": "Flask-count Pendant", "slot": "amulet", "cost": 330, "hit": 1, "flavour": "Seven little flasks on a cord. The eighth is yours to supply.", "rarity": "uncommon"},
     "clapperless_amulet": {"name": "Clapperless Bell Amulet", "slot": "amulet", "cost": 400, "ac": 1, "flavour": "A bell with no clapper. It rings in the mind and nowhere else.", "rarity": "very rare"},
-    "wall_cloak": {"name": "Wall-walker's Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Wind-faded, rain-stiff. The wall has taught it to stand up straight.", "rarity": "rare"},
+    "wall_cloak": {"name": "Wall-walker's Cloak", "slot": "cloak", "cost": 320, "ac": 1, "flavour": "Wind-proofed, rain-stiff. The wall has taught it to stand up straight.", "rarity": "rare"},
     "scarwatch_cloak": {"name": "Scarwatch Cloak", "slot": "cloak", "cost": 360, "saves": 1, "flavour": "Grey as the stair-head at dusk. The dark does not notice it, which is the point.", "rarity": "rare"},
     "feast_cloak": {"name": "Feast-night Cloak", "slot": "cloak", "cost": 230, "hp": 8, "flavour": "Stained with three toasts and a stew. Warm, and well-loved.", "rarity": "common"},
     "caravan_cloak": {"name": "Caravan Cloak", "slot": "cloak", "cost": 280, "speed": 0.5, "flavour": "Waxed against the road. It has been to places Bellmire does not have names for.", "rarity": "uncommon"},
@@ -2844,6 +2844,111 @@
         ],
         "flavour": "It cuts along the line a thing was always going to break. The scar did the teaching."
       },
+      "w_blade_fishwife_knife": {
+        "name": "Fishwife's Knife",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Gutted ten thousand eels before anyone pointed it at anything else."
+      },
+      "w_blade_watchman_dagger": {
+        "name": "Watchman's Dagger",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Worn bright on one side where the thumb goes. The other side is not worn."
+      },
+      "w_blade_ropecutter_knife": {
+        "name": "Ropecutter's Knife",
+        "family": "blade",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Made to part a line in one pull. Does the same for a belt."
+      },
+      "w_blade_guild_stamped_dagger": {
+        "name": "Guild-Stamped Dagger",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Stamped, numbered and entered in a ledger. Someone will ask where it went."
+      },
+      "w_blade_chandler_wick_knife": {
+        "name": "Chandler's Wick-Knife",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "forged"
+        ],
+        "flavour": "Made to trim a wick. A good smith made it, so it trims other things as well."
+      },
+      "w_blade_sallow_gate_dagger": {
+        "name": "Sallow-Gate Dagger",
+        "family": "blade",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Carried by the gate-ward who counted every coin in. Found with none on him."
+      },
+      "w_blade_lamp_etched_dagger": {
+        "name": "Lamp-Etched Dagger",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Etched by the lampwright, small and even. The runes are paid for and look it."
+      },
+      "w_blade_bellsteel_knife": {
+        "name": "Bellsteel Knife",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Cast from the bell that cracked in the second winter. It still keeps a note."
+      },
+      "w_blade_seam_parting_dagger": {
+        "name": "Seam-Parting Dagger",
+        "family": "blade",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "looted"
+        ],
+        "flavour": "Parts a seam clean. What was sewn there does not stay sewn."
+      },
       "w_axe_woodsman": {
         "name": "Woodsman's Hatchet",
         "family": "axe",
@@ -2878,6 +2983,30 @@
           "shop"
         ],
         "flavour": "Square-bladed. Forgot what it was for and became a weapon."
+      },
+      "w_axe_woodyard_greataxe": {
+        "name": "Woodyard Greataxe",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Two blades, one haft, no pretence. Bought off the yard by the cord."
+      },
+      "w_axe_charcoal_greataxe": {
+        "name": "Charcoal-Burner's Greataxe",
+        "family": "axe",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Black to the haft from the burner's hands. Splits a log in one and a door in two."
       },
       "w_axe_millstone_axe": {
         "name": "Millstone Axe",
@@ -2959,6 +3088,30 @@
           "caravan"
         ],
         "flavour": "A bandit's boast, forged to be carried openly. The bandit lost it on the road."
+      },
+      "w_axe_lamp_etched_greataxe": {
+        "name": "Lamp-Etched Greataxe",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Etched along both bits by the lampwright. Clean work, paid for in full."
+      },
+      "w_axe_bellyard_greataxe": {
+        "name": "Bell-Yard Greataxe",
+        "family": "axe",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Both heads poured in one pour at the bell-yard. The note is flat and nobody argues."
       },
       "w_axe_dragontooth_axe": {
         "name": "Dragontooth Axe",
@@ -3050,6 +3203,30 @@
           "shop"
         ],
         "flavour": "The wrapping is candle-wax. The wizardry is a rumour."
+      },
+      "w_arcane_shepherd_staff": {
+        "name": "Shepherd's Staff",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Longer than a man, crooked at the top. Has moved more sheep than spells."
+      },
+      "w_arcane_lamplighter_staff": {
+        "name": "Lamplighter's Staff",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Hook at one end for the lamp, a stub of tallow at the other. Walks the east lane every dusk."
       },
       "w_arcane_ashen_staff": {
         "name": "Ashen Staff",
@@ -3187,6 +3364,78 @@
           "looted"
         ],
         "flavour": "Violet at the knot, quiet everywhere else. Do not look into the knot."
+      },
+      "w_arcane_vestry_mace": {
+        "name": "Vestry Mace",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Lives behind the vestry door. Carried out for funerals and for arguments about funerals."
+      },
+      "w_arcane_almoners_mace": {
+        "name": "Almoner's Mace",
+        "family": "arcane",
+        "tier": 1,
+        "tier_name": "plain steel",
+        "rarity": "uncommon",
+        "routes": [
+          "shop",
+          "looted"
+        ],
+        "flavour": "Hands out the blessing and the bruise from the same end. The ledger counts both."
+      },
+      "w_arcane_bellfounder_mace": {
+        "name": "Bell-Founder's Mace",
+        "family": "arcane",
+        "tier": 2,
+        "tier_name": "fine steel",
+        "rarity": "rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Poured from bell-metal off-cuts. Strikes once and rings once, which is enough."
+      },
+      "w_arcane_lamp_chased_mace": {
+        "name": "Lamp-Chased Mace",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "shop",
+          "forged"
+        ],
+        "flavour": "Prayers chased into the head by the lampwright, a line at a time. Clean work, paid for."
+      },
+      "w_arcane_rune_banded_mace": {
+        "name": "Rune-Banded Mace",
+        "family": "arcane",
+        "tier": 3,
+        "tier_name": "runed",
+        "rarity": "very rare",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "Three bands on the head, each in a different hand. Nobody has agreed on the third."
+      },
+      "w_arcane_dragontooth_mace": {
+        "name": "Dragontooth Mace",
+        "family": "arcane",
+        "tier": 4,
+        "tier_name": "dragontooth",
+        "rarity": "legendary",
+        "routes": [
+          "forged",
+          "looted"
+        ],
+        "flavour": "A drake's molar sets the head. The priest who blessed it asked not to be named."
       },
       "w_ranged_hunters_crossbow": {
         "name": "Hunter's Crossbow",
@@ -6710,5 +6959,14 @@
   "_note_c54": "C-cycle 54: more cosmetics, accessories and dyes themed on the guild post, the scar stair, the wall, the feast, the harvest and the Commander. Additive only.",
   "_note_c58": "C-58 (WORK_PLAN C-55 step 2): every equipment piece and every accessory now carries \"rarity\", one rung of the shared ladder junk(fishing only) < common < uncommon < rare < very rare < legendary < artifact. Equipment rarity is its tier read straight across (0 common, 1 uncommon, 2 rare, 3 very rare, 4 legendary, 5 artifact - the found-only scarforged and scarwoven pieces). Accessories are all bought, so they stop at legendary and are banded by cost: up to 230 common, 231-300 uncommon, 301-360 rare, 361-440 very rare, 441 and over legendary. Rarity is a label on existing tiers and costs: it changes no number. ARTIFACT is never stocked by a shop and never carried by a trader. Cosmetics and dyes carry no rarity.",
   "_note_c61": "C-61 (WORK_PLAN D94 remainder): accessory rarity is now banded PER SLOT, superseding the single global 441+ cut in _note_c58 for accessories. Within each slot (ring, amulet, cloak, boots, gloves) a piece takes its midrank cost percentile among that slot's own pieces (equal costs share a rung) and the same cuts as the C-58 population: below 15.7% common, to 57.9% uncommon, to 79.5% rare, to 93.7% very rare, above that legendary. Every slot therefore has a legendary band. No cost, stat, price or tier changed; no rung was added, renamed or doubled. Equipment rarity is unchanged. ARTIFACT is still found-only: no shop at any level and no trader may ever stock one, and no accessory is an artifact. Readers must use the stored rarity key, never a global cost threshold.",
-  "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere."
+  "_note_c71": "C-71 (TAKE THIS NEXT, CONTENT row: next-stalest backlog item inside the four files; items.json had no real additions since C-54, only relabels in C-58 and C-61): 48 new title cosmetics (kind title, same four keys as existing titles) and 35 new dyes (plain 6-hex, none repeating an existing hex). Titles cover the Phase 2 words (ascent, errand, Guild Vault, carry weight, the teleportation stone) and a prosperous top band (cost 300-480) for a level 9-12 Bellmire, so a viewer who saves long gets a title that reads as the town's wealth, not make-do. Additive only. No equipment, accessory, rarity, stock or price changed. No artifact is stocked anywhere.",
+  "_note_c91": "C-91 (TAKE THIS NEXT 12:58, CONTENT row; game build S18 finding): nine NAMED blade-family daggers at tiers 1-3, three per tier, in equipment.weapons. Every tier 1-3 blade was a sword word, so the dagger meshes wired at S18 (gear.gd KINDS dagger, dagger_common/uncommon/rare) were reached only by the unnamed !forge path. gear.gd D94_KIND_WORDS reads a piece's kind from its NAME ('shortknife', 'knife', 'dagger' -> dagger), so each new name carries one of those words and no earlier-listed word. Same shape as every other piece: name, family, tier, tier_name, rarity (tier read straight across: 1 uncommon, 2 rare, 3 very rare), routes, flavour. No costs here. None is tier 4 or 5 and none is an artifact. Condition tracks tier: tier 1 is a working tool, tier 3 is paid-for and new-made. Tier 4+ daggers are not added because the dagger kit reuses ADV dagger.gltf there."
+,
+  "_note_c92": "C-92 (TAKE THIS NEXT 13:58, CONTENT row): count of NAMED tier 1-3 staff and crossbow pieces, read the way gear.gd piece_kind reads them (D94_KIND_WORDS, first word that is also a kind of the family). Before: staff 1/2/2 and crossbow 3/3/4 at tiers 1/2/3. Crossbow is not thin, no change. Staff tier 1 was one piece (Hedge-Witch's Staff, which reaches staff only because 'hedge' would read as sword and arcane has no sword kind), so two named tier 1 staves are added: Shepherd's Staff, Lamplighter's Staff. Neither name carries mace, wand, rod or stick, so both resolve to staff. Rarity uncommon. No artifact, no caravan. Same piece shape as the rest.",
+  "_note_c93": "C-93 (TAKE THIS NEXT 14:58, CONTENT row): count of NAMED greataxe pieces by tier, read the way gear.gd piece_kind reads them (D94_KIND_WORDS in order, first word that is also a kind of the family; axe family has kind greataxe from S20, and the word greataxe sits ahead of maul). Before: tier 1 = 0, tier 2 = 1 (Bearded Greataxe), tier 3 = 0, tier 4 = 1 (Ash-Maul Greataxe). The pack mesh axeDouble covers tiers 1-3, so tiers 1 and 3 reached it only through the unnamed forge path. Added two named pieces at each: Woodyard Greataxe, Charcoal-Burner's Greataxe (tier 1, uncommon); Lamp-Etched Greataxe, Bell-Yard Greataxe (tier 3, very rare). Every name carries the word greataxe so each resolves to kind greataxe. Tier 3 routes are shop/forged and forged/looted, never caravan-only, never artifact. Same piece shape as the rest. Tier 2 now 1 and tier 4 1 are untouched.",
+  "_note_c94": "C-94 (TAKE THIS NEXT 15:58, CONTENT row): count of NAMED sceptre pieces by tier, read the way gear.gd piece_kind reads them. FINDING: kind `sceptre` is reachable. The word list has no 'sceptre' entry; the only word that reaches it is 'mace', and it reaches it because the first ['mace','mace'] row is skipped by the family gate (mace is an axe-family kind, not arcane), so ['mace','sceptre'] is the first match for an arcane name. 'mace' sits ahead of wand, rod, stick and staff, so an arcane name containing mace is a sceptre whatever else it says. The trap runs the other way for axe-family names: there 'mace' stays `mace`. Before: named arcane sceptres at tiers 1-5 were 0 / 0 / 0 / 0 / 0 (only the tier-0 starting kit, Parish Iron Mace, w_kit_cleric). The sceptre kit meshes cover every tier (hammer_A t1-2, hammer_B t3-5). Added six, every name carrying the word Mace: Vestry Mace, Almoner's Mace (tier 1, uncommon); Bell-Founder's Mace (tier 2, rare); Lamp-Chased Mace, Rune-Banded Mace (tier 3, very rare); Dragontooth Mace (tier 4, legendary). Result 2 / 1 / 2 / 1 / 0. Tier 5 is artifact-only and none was added. No artifact, no caravan-only; routes are shop/forged/looted. Same piece shape as the rest.",
+  "_note_c95": "C-95 (TAKE THIS NEXT 16:58, CONTENT row): every NAMED weapon in equipment.weapons run through gear.gd piece_kind exactly as it reads (D94_KIND_WORDS in order, first word whose kind is also in the piece's family), 107 names. FINDING: NO NAME LANDS ON A KIND ITS WRITER DID NOT INTEND. 105 resolve to the kind their last word names; 2 resolve to nothing and take the calling's fallback kind (weapon_piece_look fallback_kind): Tooth of the Ash Drake (blade, tier 4) and Emberhaft (axe, tier 3), neither with a kind word in its name. Counts by kind: sword 19, dagger 11, axe 14, greataxe 6, wand 12, staff 10, sceptre 7, crossbow 12, bow 4, quarterstaff 6, wraps 4, unresolved 2. Kind `spear` exists in KINDS and has NO word in the list and no name, so it cannot be reached by name. Names that match more than one word in their family, and the order that saves them: the six greataxes match greataxe, then axe (greataxe kind sits first), and Ash-Maul Greataxe also matches maul (axe kind) and still lands on greataxe because greataxe is listed ahead of maul; the six crossbows match crossbow, then bow (crossbow listed first). Nothing else matches two kinds. Compound names (Sunderfang, Scarfang, Wallbreaker, Wyrmsplitter, Scarcleaver, Seamsplitter, Emberwand, Scarwand, Wyrmstring, Seamstring, Scarbow, Gnarlstick, Runeblade) land on the kind their suffix says. Family gating stops every cross-family leak (staff vs quarterstaff, mace in axe vs arcane). LATENT TRAPS, NONE LIVE: wand is listed ahead of staff, so an arcane name such as Wanderer's Staff would be a wand; rod and edge are bare substrings; mace ahead of wand, rod, stick and staff makes any arcane name carrying mace a sceptre; fang sends any blade name to sword. A name that wants a dagger must carry knife or dagger. No rename, no reorder, no new weapon this cycle; the word list is gear.gd and is the game build's file.",
+  "_note_c102": "C-102 (2026-11-18 00:23 CT, content) - STAND-DOWN continues: accessory and cosmetic flavour audited against rule 2 (condition tracks level, tier and cost). RARITY IS CLEAN: the 254 accessory rarities agree with the per-slot banding in _note_c61 (checked per slot; the single cost bands in _note_c58 are superseded for accessories and a reader that applies them would mislabel 122 pieces, so readers must use the stored rarity key, as C-61 already says). FOUND, THREE WORN WORDS ON PIECES A VIEWER PAID RARE-OR-LEGENDARY FOR: mender_wraps (legendary) 'Stained past washing'; pilgrim_cloak (rare) 'patched'; wall_cloak (rare) 'Wind-faded'. Each states a second-hand condition on a piece the receipt says is good. CHECKED AND LEFT: every other 'worn' in rare-and-up accessories and tier 2-5 equipment is provenance or wearing-as-use ('Worn on the wrong hand on purpose', 'letters worn smooth by one thumb', 'the old mill-wheel') and is not a condition claim; the cosmetic condition words all sit on pieces costing 105 gold or less, where make-do is correct; no gothic words, no 'epic', no S-tier, no floor count in equipment or accessory flavour. PROPOSED REPLACEMENTS, NOT SWAPPED IN (additive only, Mr. E or the supervisor to approve): mender_wraps -> 'Clean linen, bound true. Everyone it wrapped walked back out of the scar.' pilgrim_cloak -> 'Light, and sewn to last. It has out-walked three cloaks that cost more.' wall_cloak -> 'Wind-proofed, rain-stiff. The wall has taught it to stand up straight.' CODE WIRING: none. No rarity, cost or stat changed.",
+  "_note_c103": "C-103 (2026-11-18 CT, content) - STAND-DOWN continues: potions.json flavour audited for PRICE WORDS against the cost beside them (the 'cost statements precise' rule). Surface not audited before: C-100 lord lines, C-101 repeat-pool duplicates, C-102 accessory condition words. FOUND, ONE DEFECT AND ITS TWO SMALLER COPIES. rushlight (tier 2, cost 120) says 'Cheaper than a lamp'. The shop's own lamps are Tin Lantern 22, Sentry Lantern 24, Iron Street Lamp 75 and Brass Lamp 85 (items.json shop_stock), so the draught costs 35 to 98 gold MORE than every lamp the town sells. A viewer who reads the line and then sees 120 has been told something false by the receipt. SAME CLASS: emberdregs (tier 1, cost 70) is 'sold cheap' but costs exactly what the full emberward costs (tier 2, cost 70), and is above the tier-1 median of 40; tallow_cup (tier 1, cost 55) opens 'Cheap' and is also above that median. CHECKED AND LEFT: pennymend 12 and bakers_pennyworth 25 (cheap words, cheap prices); supreme, guildmend, cloisterbrew, scarbite, lordsmeasure, guild_hall_restorative (price words are about who sets the price, not a comparison); bishops_mercy 'cheaper than a pardon' (a pardon is not on any price list here); ferrywater, tollwater (paid-for words, no comparison). Exclamation marks and gothic words in all four files were scanned too: the marks sit in crowd, crier, toast and festival voices where shouting is correct, and the gothic-looking hits (soul, dreadful, foul, horror) are plain or in E3PO's own register. No 'epic', no S-tier, no dungeon floor count. Artifact-rarity check: none of the 11 artifacts appears in shop_stock, trader_cargo, stock_by_tier, trade_stock, caravan_manifests, stock_retirement or price_ladders. Equipment rare-and-up flavour has no condition words (cracked bell, old forge, old bell are provenance). THREE REPLACEMENTS PROPOSED, NOT SWAPPED IN (additive only, Mr. E or the supervisor to approve; each swaps a flavour string only): rushlight -> 'Dearer than a lamp, and nothing down there sees you carrying it.' emberdregs -> 'The bottom of the emberward jar, at the jar's price. Still puts you out.' tallow_cup -> 'Foul, and it saves a lamp's worth of oil every time.' ALTERNATIVE if the words are loved: lower the cost instead (rushlight to 60, emberdregs to 35) - that is a cost change and is the code lane's and Mr. E's call, not content's. CODE WIRING: none. No rarity, cost or stat changed.",
+  "_note_c104": "C-104 (content, 2026-11-18): LOAD-BEARING, DO NOT RENAME, RESHAPE OR RETYPE WITHOUT A DECISION. `dye_cost` (an integer, 25) and the `dyes` table (281 colour names, each a six-digit hex string, e.g. black 2a2a2e) are read by the chat bot as the dyer's authority: its B41 guard checks the dye price it quotes against `dye_cost`, and its B43 guard checks the ten dye colours it publishes against the 281 keys of `dyes`. Renaming or removing a colour, changing a hex value's type, or moving `dye_cost` turns those guards red or, worse, silently blind. Adding a new colour is safe. Retiring or renaming one needs the chat lane told in the same change. This file has one writer, content; the note lives here so that a future rename is a decision and not an accident."
 }

@@ -12521,3 +12521,53 @@ early, no crossing into the HUD's :52 window. Godot EMPTY at release.
 Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits
 spent, nothing redeemed, nothing posted.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## B78 (20 Nov 2026 07:0x-07:2x CST) - THE PATCH THAT WAS REFUSED FIVE TIMES WAS ALREADY ON DISK, AND MR. E LANDED IT LIVE
+
+THE FINDING, AND IT OVERTURNS THE ONE OPEN NEEDS-MR-E ITEM. I went to `tools/_l14_test.gd` to do my row's chore
+and found the guard-faults patch ALREADY WRITTEN THERE, unstaged, in W6's working tree: 7 added lines, 2 of them
+code (`var faults: Array[String] = ChatCmd.guard_faults()` and the `_ok` that moves `_fail` on a non-empty
+answer). I did not write it. Measured, not assumed:
+  - `git status --porcelain --untracked-files=no` -> ` M tools/_l14_test.gd`, the ONLY tracked modification.
+  - `git diff --stat` -> 1 file, +7, -0.
+  - ABSENT from all three other faces: `git show HEAD:tools/_l14_test.gd | find /C "guard_faults"` = 0,
+    `git show origin/main:...` = 0, and `findstr` on R's OWN working copy = no hits (rc 1).
+  - mtime **2026-11-20T07:07:44.603-06:00** - TODAY, ~16 min after B77 released at 06:51, and 1 min 46 s before
+    my first git call at 07:09:30. So it is not B73's (whose cycle the comment credits) and it is not mine.
+Some seat's write DID land and nobody committed it. Five cycles of plan rows have read "nothing was written".
+
+I LEFT IT EXACTLY AS FOUND rather than acting on it alone: reverting would have destroyed the one artifact five
+hours of plan rows have been asking Mr. E to authorise, and committing it unbidden is indistinguishable from the
+sixth attempt row 6 forbids. Reported it instead - and Mr. E was LIVE and said "land it". That is the live turn
+the 06:58 NEEDS-MR-E item asked for, and it is the authority this commit rests on.
+
+VERIFIED THE PATCH WOULD LOAD BEFORE COMMITTING IT, because a patch that cannot parse breaks my own battery:
+`chatcmd.gd:900` is `static func guard_faults() -> Array[String]` returning `_guard_faults.duplicate()` - so the
+call is valid from a static context, the declared type matches the typed assignment exactly, and the gate is
+handed a COPY it cannot mutate. The patch comment's own reasoning also checks out: `_guard_faults.clear()` sits
+INSIDE `if _cmds.is_empty():` in `commands()`, so only the first load clears and a later read could indeed pass
+blind - which is why reading immediately after the first `commands()` is the correct placement. 91
+`_guard_faults.append` arms, re-counted.
+
+THE DISCRIMINATOR FOR THE NEXT SEAT, STATED BEFORE THE GATE RUNS SO IT CANNOT BE FITTED AFTERWARDS: HEAD carries
+15 `_ok` call sites and the working copy carries 16. Every cycle on record prints `L14_TEST OK (22 checks)`. With
+this patch in place the gate must print **23 checks**. If the next L14_TEST prints 22, the engine is not reading
+the file I am looking at, and that is a bigger finding than the patch.
+
+MY ROW'S OWN CHORE, DONE: THE `%s` CANNOT REACH `RUN_LOCK.txt` AGAIN. B77's last line read literally
+`IDLE %s - chat bot B77: ...` - a format string whose argument never arrived, which under Mr. E's yield rule is
+an IDLE no seat can time. The writer now renders the timestamp BEFORE building the line (never as a format slot)
+and then REFUSES the finished line unless it matches `^(RUNNING|IDLE) <ISO ts with UTC offset>` and carries no
+`%s`/`%d`/`%r`/`{}`/`{0}`. Red-armed against itself, five bad lines, all five refused: B77's exact `IDLE %s`
+(placeholder), a timestamp with no offset, a bare `07:12:00-06:00`, a stray `%s` in the BODY, and a `DONE` kind.
+Two real lines pass. Fixing my own writer is not a new item.
+
+NO GODOT THIS CYCLE, AND NO CLAIM WRITTEN. The game build claimed at 07:08:44 (cap 07:33, declared 07:30) with no
+IDLE after it, read from R's WORKING tree at 07:09:30 and again at 07:1x; under the yield rule that lane holds the
+lock, so I never claimed and wrote no RUNNING line. The owed engine gates (parse, L14_TEST at its new 23, the
+TWITCH_PARSE/COMMANDS_DOC pair) carry to my next firing - including the first real run of the patch landed here.
+Godot process check: both `Godot_v4.7.2-stable_win64_console.exe` and `..._win64.exe` absent at 07:09:30.
+
+Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits
+spent, nothing redeemed, nothing posted.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -10,6 +10,83 @@ the same standard as the thirty-six procedural minibosses.
 **ONE, shipped whole, rather than five half-done** — the row said so and it is
 the right instruction for a first pass.
 
+## The two rulings of 20 Nov 01:16 CT — and the two design languages
+
+Written 20 Nov 2026, 01:3x CT by the ART lane (machine clock 01:34:32 CST). Pass 4
+raised two questions and sent both up rather than deciding them. The supervisor
+ruled on both at 01:16 CT. **This section is the record the ruling asked this lane
+to keep.**
+
+### Ruling 1 — Broodglut holds at 2.69× (6.60 m)
+
+2.69× is the top of the corridor-safe band and it stays. The arithmetic is in
+*Pass 4* below and was re-done independently by the team lead: span/height
+4.0995 / 2.60 = 1.576731 m of span per metre; 6.60 × 1.576731 = 10.41 m against a
+corridor clear of 3 × 4.0 − 2 × 0.5 = **11.0 m**, margin **0.59 m**; 2.85× lands
+exactly on the 11.00 wall and **3.00× is room-locked at 11.59 m**.
+
+A true 3× is still available but it is **Mr. E's call, and it costs one of two
+things** — neither taken without him:
+
+- **re-gate on the UAL idle span.** The 1.576731 figure is measured on the
+  authored **T-pose**, and that is not the pose the game draws: `bestiary.gd`
+  grafts the UAL library on at load, so the arms come down and the real footprint
+  is narrower. One measurement pass would say how much narrower, and 3× may well
+  fit. The gate is deliberately conservative, not wrong.
+- **room-lock the spawn.** A game-build wiring change, and it costs the creature
+  its corridor appearances.
+
+### Ruling 2 — the procedural 36 stay at their current scale
+
+**Two design languages, and the distinction is the point rather than an
+inconsistency to be tidied away:**
+
+| | pack variants | the procedural 36 |
+|---|---|---|
+| where the threat reads | **scale** — a bigger, meaner version of a monster you already know | **the mechanic** — what it DOES is the threat |
+| silhouette test | cannot pass against its own regular version (same mesh) — scale is the half that survives | each must read as itself with the colour thrown away |
+| cost | a palette swap and a number | a modelled body |
+| ratio band | **towers**: Broodglut 2.69× | **eye-level**: 0.80 – 1.20× |
+
+So the 36 are not "wrong" at eye level and are not being scaled up. Mr. E's 00:10
+complaint was about **Broodglut specifically**, and the directive says *variant*
+minibosses, not *all* minibosses. If the two read badly side by side on stream,
+that is a thing a picture settles and it gets revisited then.
+
+### The band, measured twice, because the number this lane published was wrong
+
+The comment in `tools/art/monstervariants.py` said until 01:3x CT that *"every one
+of the thirty-six sits at the same 1.06. The whole band was eye-level."* **It was
+disproved by this lane's own measurement in the same commit that wrote it** — the
+team lead found the contradiction. Corrected there and recorded here. Two cuts,
+run this pass:
+
+- **off the `CANON` tables in `tools/art/minibosses.py`** — 36 procedural
+  minibosses, authored height **1.95 m** (reeve) to **2.95 m** (beadle), ratio
+  **0.7959 – 1.2041** against the 2.45 m hero. **Exactly two sit at 1.06**:
+  snuffer and dyer, both 2.60 m.
+- **off every `renders/art/minibosses/_fit_*_register.json`** — **31 pair records
+  over 20 bodies**, ratio **0.84 – 1.20**, **four records at 1.06**. The extra two
+  are chibi duplicates of one body, which is why a register sweep reads four where
+  the authored table reads two. This reproduces the team lead's independent sweep
+  exactly (31, 0.84, 1.20, four at 1.06) from a different cut.
+
+**And it closes his one open caveat.** His net also caught records below 0.84 and
+**one at 1.63**, which he did not filter to bodies and claimed nothing about. They
+are the **creatures**, not minibosses: `renders/art/creatures/` holds 12 pair
+records from spiderling 0.14 to **pitwyrm 1.63**, and no miniboss register sits
+outside 0.84 – 1.20. Nothing unexplained is left in that sweep.
+
+**What is true, and is what the 00:10 directive was answering:** more than half
+the class is at or below a hero — **17 of 36 authored at or under 1.00** (drover at
+2.44 m / 0.9959 counts) — and nothing in it towers. Broodglut's 1.06 was typical of
+the band, not alone in it.
+
+### Wiring the game build still owes from ruling 1
+
+`scripts/bestiary.gd`, broodglut entry: `"h": 2.60` → `"h": 6.60`. Nothing else
+changes, and this lane does not touch that file.
+
 ## Broodglut — the first one
 
 | | |

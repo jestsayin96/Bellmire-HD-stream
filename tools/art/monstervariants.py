@@ -107,8 +107,31 @@ VARIANTS = {
         # size as the hero knight... a miniboss needs to tower over the heroes
         # ... minimum 2-3x the hero's height." Pass 2's reasoning was right
         # about the body (its height is bulk, not stature) and WRONG about the
-        # target: 2.60 against a 2.45 m hero is ratio 1.06, and every one of
-        # the thirty-six sits at the same 1.06. The whole band was eye-level.
+        # target: 2.60 against a 2.45 m hero is ratio 1.06, and that is
+        # EYE-LEVEL. The sentence that stood here until 20 Nov 01:3x CT said
+        # "every one of the thirty-six sits at the same 1.06. The whole band
+        # was eye-level" - and that was WRONG, disproved by this lane's own
+        # measurement in the very commit that wrote it (the team lead caught
+        # the contradiction; it is web/index.html:49 again, a comment stating
+        # what its author had already replaced). THE MEASURED NUMBERS, taken
+        # twice this run by two different cuts:
+        #   off the CANON tables in tools/art/minibosses.py - 36 procedural
+        #     minibosses, authored height 1.95 m (reeve) to 2.95 m (beadle),
+        #     ratio 0.80 to 1.20 against the 2.45 m hero. EXACTLY TWO sit at
+        #     1.06 - snuffer and dyer, both 2.60 m. Not thirty-six. Two.
+        #   off every renders/art/minibosses/_fit_*_register.json - 31 pair
+        #     records over 20 bodies, ratio 0.84 to 1.20, four records at 1.06
+        #     (snuffer, its chibi twice, and dyer: the extra two are chibi
+        #     duplicates of one body, which is why a register sweep reads four
+        #     where the authored table reads two).
+        # So the band is not a point. What is true, and is the thing the 00:10
+        # directive was answering, is that MORE THAN HALF THE CLASS IS AT OR
+        # BELOW 1.0x A HERO - 17 of 36 authored at or under 1.00 (drover is
+        # 2.44 m, 0.9959, and counts) - and nothing
+        # in it towers. Broodglut's 1.06 was typical of the band, not alone in
+        # it. The supervisor ruled at 01:16 CT that THE PROCEDURAL 36 STAY at
+        # their current scale and only PACK VARIANTS tower; see
+        # docs/art/MONSTER_VARIANTS.md for the two design languages.
         #
         # 6.60 m is NOT a free choice - IT IS THE TOP OF A MEASURED BAND AND
         # THE DIRECTIVE'S OWN 3x DOES NOT FIT IN IT. The directive keeps the

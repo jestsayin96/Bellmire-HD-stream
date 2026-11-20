@@ -1,6 +1,8 @@
 # System 7 - the armour fit pass. NOT PASSED. What was measured, and what broke.
 
-Written 19 Nov 2026, 22:3x CT by the ART lane. The team lead's 20:1x row asked for four things:
+Written 19 Nov 2026, 21:0x CT by the ART lane (pass 1). The first version of this line
+read 22:3x CT on a 21:01 commit - a stamp 90 minutes in the future that I did not read off the
+machine. Corrected 19 Nov 21:5x CT off `TZ=America/Chicago date`. The team lead's 20:1x row asked for four things:
 arms through the shell's openings, hem above the belt, horns/spurs anchored, leather closed at
 the back - then a re-render. I measured all four. **Two of them cannot be done the way the row
 describes without damaging the piece, and I am not shipping damage.** The five shells in
@@ -116,3 +118,145 @@ The back closure (finding 4) is ready to ship with it and should go in the same 
 `assets/gear/armour/*.glb` are untouched. The five `.glb.import` siblings generated at S49 stay
 valid. Plan row 1(b) - the cut -> shell mapping in `scripts/gear.gd` - must STAY HELD: fit is
 still not passed, and wiring a shell that does not fit buys nothing.
+
+=============================================================
+# PASS 2 - 19 Nov 2026, 21:3x - 21:5x CT. The back is closed. The widen was not owed.
+
+The team lead's 21:0x row asked for one thing and named it precisely: *widen the chest plate
+band AS GEOMETRY out to the body's half-width plus clearance, leaving horns, skirt and belt
+alone, conform only the few remaining pokes, and ship the back closure in the SAME pass.*
+
+**I measured before I modelled, and the widen is not owed. The plate is already WIDER than the
+torso.** Everything else in the row was right and is delivered.
+
+## FINDING 8 - the "plate reaches 0.4495" number was circular, and it is mine
+
+Pass 1 separated plate from horn with a `|x| <= 0.45` cutoff and then reported the plate's reach
+as **0.4495** - a number that *cannot exceed the cutoff by construction*. It answers the
+threshold, not the geometry. Pass 1 finding 5 then reasoned from it ("a slice of the plate is
+beyond the threshold and gets crushed"), so that conclusion rested on a measurement of my own
+parameter. Same family as `mask_of` at pass 11 and `skin_rows` at pass 1: **the number answered a
+question nobody asked.** That is the fourth.
+
+Separated by CONNECTED COMPONENT instead - a fact about the mesh, not about my cutoff
+(`tools/art/_s7_islands.py` -> `renders/art/s7_armour/_islands.json`):
+
+| shell | islands | plate island | pauldron / spur islands |
+|---|---|---|---|
+| Armor_Black / Golden | 9 | 204 v, x **+-0.4937** | 2x74 v to 0.7699, 6x30 v |
+| Armor_Metal | 3 | 184 v, x +-0.4937 | 2x54 v to 0.7156 |
+| Armor_Metal2 | 3 | 204 v, x +-0.4937 | 2x74 v to 0.7699 |
+| Armor_Leather | **1** | 140 v, x +-0.4877 | none |
+
+The plate is one island reaching **0.4937**. The torso's own half-width, per 0.04 m z band
+(`tools/art/_s7_measure4.py` -> `_measure4.json`), is **0.2366 to 0.3855** across the whole
+chest. The plate is therefore already 0.11 - 0.25 m wider per side than the thing it covers, and
+`need_widen_m` comes out NEGATIVE in 14 of the 18 measurable bands. The front render agrees: at
+stage A the chest is fully covered and front bare area is **4.4%**. Widening it would push the
+plate out past the arms into air.
+
+**Where the row's number came from:** 0.77 is the *pauldron island*, not the plate, and 0.43 is
+the *whole body's* half-width *including the arms*. Comparing those two says the shell overhangs
+- which is true, and is the float fault - but it does not say the plate is narrow.
+
+## WHAT THE OVERHANG ACTUALLY NEEDED - and the taper was the wrong tool
+
+Because the pauldrons and spurs are SEPARATE ISLANDS, they can be translated inward as **rigid
+pieces**. Shape preserved exactly. Pass 1's taper remapped vertices and crushed what it was told
+not to touch; a rigid island shift cannot. Binary-searched per island until its nearest point to
+the posed body is the clearance:
+
+| island | nearest before | dx | nearest after |
+|---|---|---|---|
+| Golden upper spur, +x | 0.0991 | 0.0820 | **0.0300** |
+| Golden upper spur, -x | 0.0988 | 0.0740 | **0.0300** |
+| Golden back spur, +x | 0.1090 | 0.1009 | **0.0300** |
+| Golden back spur, -x | 0.1193 | 0.1370 | **0.0300** |
+
+The other islands were already within clearance and were left alone (dx 0.0).
+
+## FINDING 9 - removing pass 1's y_offset is a REGRESSION, and I only know because I looked
+
+Pass 1 finding 1 called the shipped `y_offset -0.0465` my own fault and the cause of the open
+back. The team lead did not ask me to remove it; I tried it anyway as stage P1, honestly
+re-centred with a shift and no scale. **Front bare area went 4.4% -> 37.1%.** The picture
+(`fit12/P1_Armor_Golden_front.png`) shows why: the hero's own grey breastplate, red brooch and
+belt poke straight through the gold. The offset is what makes the FRONT read.
+
+**Pass 1 finding 1 is half right and the half that asked for its removal is withdrawn.** The
+open back is fixed by closing the back, not by moving the shell. (The red brooch pass 1 mourned
+as "swallowed" at stage J is the HERO'S OWN brooch, not the shell's - visible in P1 and hidden in
+every stage where the shell sits forward, as it should be.)
+
+## THE SHIP CANDIDATE: STAGE Q5, each change measured on its own stage
+
+`tools/art/_s7_fit7.py`, renders in `fit14/` (A..Q4) and `fit15/` (Q5), register
+`fit1{4,5}/_stage.json`. Bare area = body-coloured pixels inside the body's own silhouette,
+torso band, read as a delta. Overlays `ov_*.png` tint those pixels red so the number and the
+picture can be checked against each other.
+
+| stage | what it adds | Golden front | side | back | float% |
+|---|---|---|---|---|---|
+| A | as shipped | 4.4 | 6.6 | 37.4 | 28.8 |
+| Q2 | + back closure | 4.4 | 2.5 | **12.0** | 30.7 |
+| Q3 | + rigid island anchor | 4.4 | **1.1** | 12.0 | **27.3** |
+| Q4 | + inside-only poke conform | **3.3** | 1.0 | 11.4 | 27.0 |
+| Q5 | + side bridge | 3.3 | 1.0 | **8.1** | 29.0 |
+
+All five shells, A -> Q5, back bare area:
+
+| shell | back A | back Q5 | front A | front Q5 | side A | side Q5 |
+|---|---|---|---|---|---|---|
+| Armor_Black | 40.0 | **12.3** | 5.0 | 3.9 | 8.5 | 2.7 |
+| Armor_Golden | 37.4 | **8.1** | 4.4 | 3.3 | 6.6 | 1.0 |
+| Armor_Leather | 40.2 | **21.6** | 14.8 | 13.3 | 44.5 | **40.5** |
+| Armor_Metal | 37.0 | **9.9** | 5.7 | 4.5 | 12.6 | 7.0 |
+| Armor_Metal2 | 41.4 | **13.7** | 7.6 | 6.6 | 10.3 | 4.8 |
+
+The poke conform moves 39-88 vertices per shell - pass 1's conform moved 385-1160, which is why
+it inflated the plate into a sack. **The front column is the proof the modelling survived:** it
+does not move except to improve, and the seams, chevron, bevels and belt are all still there in
+`fit15/Q5_Armor_Golden_front.png`.
+
+0 blanks, 0 frame clips (max border alpha **0.0** across all 120 renders), errors `[]`.
+
+## WHAT I CAN SEE IN THE RENDERS THAT NO NUMBER SAYS
+
+Contact sheet `renders/art/s7_armour/_fit_sheet_pass2b.png`, five shells x as-shipped/Q5 x
+front/back/side. I looked at it, and at the Golden front, side and back full size.
+
+1. **ARMOR_LEATHER DOES NOT PASS AND I AM NOT CLAIMING IT DOES.** Side view 40.5%, unchanged by
+   this pass. The vest stands off the body and you look straight into the hollow at the armhole:
+   the hero's grey arm and brown belt are plainly visible inside it. The side bridge found only
+   20 boundary edges on it and did nothing. Four of five shells pass; this one is held.
+2. On every shell a grey strip of the hero's own collar still shows across the UPPER back,
+   above the armour's top edge. That is most of the remaining 8-14%.
+3. Black and Golden: the spurs no longer float, but anchored they read as a busy claw cluster
+   crowded against the arm at the shoulder.
+4. float% stays 27-33 and max_d 0.311 m. That is a HORN TIP standing off by design, not a fault
+   - but the metric cannot tell those apart, so do not read it as a defect count.
+5. The side bridge costs float: +2pp on Black and Golden, because the new side-wall faces are
+   far from the body. Small, real, named.
+6. The hem still hangs 0.22-0.27 m below the top of the legs on four shells. Unchanged on
+   purpose - pass 1 finding 2 showed that scaling it up exposes MORE body, not less.
+
+## FINDING 10 - my own anchor instrument could not move, and I caught it on the first read
+
+`nearest_after` closed over the vertex snapshot taken BEFORE the shift, so it returned
+`nearest_before` on every island whatever the shift was. Every row read "no change". Fixed to
+re-read the moved vertices off the mesh; it now reads 0.099 -> 0.030, exactly the clearance.
+The fix is in `_anchor_islands` with the reason written beside it. **That is the fifth blind
+instrument of mine caught and labelled rather than quietly replaced.**
+
+`skin_rows` is still carried, still labelled `BLIND`, and is not a pass criterion.
+
+## WIRING FOR THE GAME BUILD: NONE THIS RUN, AND NOTHING REGRESSES
+
+`assets/gear/armour/*.glb` are UNTOUCHED again this pass. The five `.glb.import` siblings
+generated at S49 stay valid. **Plan row 1(b) - the cut -> shell mapping in `scripts/gear.gd` -
+must STAY HELD**, because Armor_Leather still does not fit.
+
+I did NOT export Q5 into `assets/gear/armour/` and that is a deliberate hold, not an omission:
+replacing those `.glb` files regenerates the game build's `.glb.import` siblings, and shipping
+four fitted shells beside one unfitted one would leave the set inconsistent. `_s7_export.py` is
+one command from doing it the moment the team lead wants it.

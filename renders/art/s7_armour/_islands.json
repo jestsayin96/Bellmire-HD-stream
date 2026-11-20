@@ -1,0 +1,526 @@
+{
+ "shells": {
+  "Armor_Black": {
+   "objects": [
+    {
+     "name": "Armor_Black_Cylinder.056",
+     "verts": 532,
+     "tris": 1040
+    }
+   ],
+   "materials": [
+    "Black",
+    "DarkRed"
+   ],
+   "islands": [
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 204,
+     "x": [
+      -0.4937,
+      0.4937
+     ],
+     "y": [
+      -0.4243,
+      0.3352
+     ],
+     "z": [
+      -0.5632,
+      0.431
+     ],
+     "cx": 0.0,
+     "touches_centre": true
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 74,
+     "x": [
+      0.3685,
+      0.7699
+     ],
+     "y": [
+      -0.2673,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": 0.5643,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 74,
+     "x": [
+      -0.7699,
+      -0.3685
+     ],
+     "y": [
+      -0.2673,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": -0.5643,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      0.5475,
+      0.7672
+     ],
+     "y": [
+      -0.1056,
+      0.0994
+     ],
+     "z": [
+      0.1916,
+      0.6386
+     ],
+     "cx": 0.6675,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      0.3061,
+      0.5129
+     ],
+     "y": [
+      -0.1383,
+      -0.0247
+     ],
+     "z": [
+      -0.2552,
+      -0.0863
+     ],
+     "cx": 0.422,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      0.2957,
+      0.4632
+     ],
+     "y": [
+      -0.1289,
+      -0.0341
+     ],
+     "z": [
+      -0.4097,
+      -0.2514
+     ],
+     "cx": 0.3921,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      -0.7672,
+      -0.5475
+     ],
+     "y": [
+      -0.1056,
+      0.0994
+     ],
+     "z": [
+      0.1916,
+      0.6386
+     ],
+     "cx": -0.6675,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      -0.5129,
+      -0.3061
+     ],
+     "y": [
+      -0.1383,
+      -0.0247
+     ],
+     "z": [
+      -0.2552,
+      -0.0863
+     ],
+     "cx": -0.422,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Black_Cylinder.056",
+     "verts": 30,
+     "x": [
+      -0.4632,
+      -0.2957
+     ],
+     "y": [
+      -0.1289,
+      -0.0341
+     ],
+     "z": [
+      -0.4097,
+      -0.2514
+     ],
+     "cx": -0.3921,
+     "touches_centre": false
+    }
+   ]
+  },
+  "Armor_Golden": {
+   "objects": [
+    {
+     "name": "Armor_Golden_Cylinder.054",
+     "verts": 532,
+     "tris": 1040
+    }
+   ],
+   "materials": [
+    "Golden"
+   ],
+   "islands": [
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 204,
+     "x": [
+      -0.4937,
+      0.4937
+     ],
+     "y": [
+      -0.4243,
+      0.3352
+     ],
+     "z": [
+      -0.5632,
+      0.431
+     ],
+     "cx": 0.0,
+     "touches_centre": true
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 74,
+     "x": [
+      0.3685,
+      0.7699
+     ],
+     "y": [
+      -0.2673,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": 0.5643,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 74,
+     "x": [
+      -0.7699,
+      -0.3685
+     ],
+     "y": [
+      -0.2673,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": -0.5643,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      0.5475,
+      0.7672
+     ],
+     "y": [
+      -0.1056,
+      0.0994
+     ],
+     "z": [
+      0.1916,
+      0.6386
+     ],
+     "cx": 0.6675,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      0.3061,
+      0.5129
+     ],
+     "y": [
+      -0.1383,
+      -0.0247
+     ],
+     "z": [
+      -0.2552,
+      -0.0863
+     ],
+     "cx": 0.422,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      0.2957,
+      0.4632
+     ],
+     "y": [
+      -0.1289,
+      -0.0341
+     ],
+     "z": [
+      -0.4097,
+      -0.2514
+     ],
+     "cx": 0.3921,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      -0.7672,
+      -0.5475
+     ],
+     "y": [
+      -0.1056,
+      0.0994
+     ],
+     "z": [
+      0.1916,
+      0.6386
+     ],
+     "cx": -0.6675,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      -0.5129,
+      -0.3061
+     ],
+     "y": [
+      -0.1383,
+      -0.0247
+     ],
+     "z": [
+      -0.2552,
+      -0.0863
+     ],
+     "cx": -0.422,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Golden_Cylinder.054",
+     "verts": 30,
+     "x": [
+      -0.4632,
+      -0.2957
+     ],
+     "y": [
+      -0.1289,
+      -0.0341
+     ],
+     "z": [
+      -0.4097,
+      -0.2514
+     ],
+     "cx": -0.3921,
+     "touches_centre": false
+    }
+   ]
+  },
+  "Armor_Leather": {
+   "objects": [
+    {
+     "name": "Armor_Leather_Cylinder.048",
+     "verts": 140,
+     "tris": 288
+    }
+   ],
+   "materials": [
+    "Brown"
+   ],
+   "islands": [
+    {
+     "obj": "Armor_Leather_Cylinder.048",
+     "verts": 140,
+     "x": [
+      -0.4877,
+      0.4877
+     ],
+     "y": [
+      -0.3352,
+      0.3352
+     ],
+     "z": [
+      -0.4281,
+      0.3935
+     ],
+     "cx": 0.0,
+     "touches_centre": true
+    }
+   ]
+  },
+  "Armor_Metal": {
+   "objects": [
+    {
+     "name": "Armor_Metal_Cylinder.049",
+     "verts": 292,
+     "tris": 584
+    }
+   ],
+   "materials": [
+    "DarkSteel"
+   ],
+   "islands": [
+    {
+     "obj": "Armor_Metal_Cylinder.049",
+     "verts": 184,
+     "x": [
+      -0.4937,
+      0.4937
+     ],
+     "y": [
+      -0.4243,
+      0.3352
+     ],
+     "z": [
+      -0.5115,
+      0.431
+     ],
+     "cx": 0.0,
+     "touches_centre": true
+    },
+    {
+     "obj": "Armor_Metal_Cylinder.049",
+     "verts": 54,
+     "x": [
+      0.3114,
+      0.7156
+     ],
+     "y": [
+      -0.2584,
+      0.2512
+     ],
+     "z": [
+      0.028,
+      0.4182
+     ],
+     "cx": 0.5491,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Metal_Cylinder.049",
+     "verts": 54,
+     "x": [
+      -0.7156,
+      -0.3114
+     ],
+     "y": [
+      -0.2584,
+      0.2512
+     ],
+     "z": [
+      0.028,
+      0.4182
+     ],
+     "cx": -0.5491,
+     "touches_centre": false
+    }
+   ]
+  },
+  "Armor_Metal2": {
+   "objects": [
+    {
+     "name": "Armor_Metal2_Cylinder.052",
+     "verts": 352,
+     "tris": 704
+    }
+   ],
+   "materials": [
+    "LightSteel"
+   ],
+   "islands": [
+    {
+     "obj": "Armor_Metal2_Cylinder.052",
+     "verts": 204,
+     "x": [
+      -0.4937,
+      0.4937
+     ],
+     "y": [
+      -0.4243,
+      0.3352
+     ],
+     "z": [
+      -0.5115,
+      0.431
+     ],
+     "cx": 0.0,
+     "touches_centre": true
+    },
+    {
+     "obj": "Armor_Metal2_Cylinder.052",
+     "verts": 74,
+     "x": [
+      0.3685,
+      0.7699
+     ],
+     "y": [
+      -0.2601,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": 0.5642,
+     "touches_centre": false
+    },
+    {
+     "obj": "Armor_Metal2_Cylinder.052",
+     "verts": 74,
+     "x": [
+      -0.7699,
+      -0.3685
+     ],
+     "y": [
+      -0.2601,
+      0.2512
+     ],
+     "z": [
+      -0.04,
+      0.5885
+     ],
+     "cx": -0.5642,
+     "touches_centre": false
+    }
+   ]
+  }
+ },
+ "errors": []
+}

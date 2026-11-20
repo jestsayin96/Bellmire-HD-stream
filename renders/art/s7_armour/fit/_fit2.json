@@ -1,0 +1,303 @@
+{
+ "uniform_scale": 1.0,
+ "depth_correction": true,
+ "neck_z": 1.235,
+ "chest_band": [
+  0.85,
+  1.12
+ ],
+ "clearance_m": 0.025,
+ "armours": {
+  "Armor_Black": {
+   "collar_z": 0.4227,
+   "dz": 0.8123,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "shell_chest_y_uncorrected": [
+    -0.2682,
+    0.3352
+   ],
+   "shell_chest_y_corrected": [
+    -0.3147,
+    0.2887
+   ],
+   "shell_lo": [
+    -0.7699,
+    -0.4708,
+    0.1686
+   ],
+   "shell_hi": [
+    0.7699,
+    0.2887,
+    1.5423
+   ],
+   "front_first_before": {
+    "rows": 40,
+    "body_in_front": 23,
+    "plate_in_front": 17,
+    "empty_rows": 0,
+    "ok": true
+   },
+   "views": {
+    "front": {
+     "opaque": 128152,
+     "border_alpha": 0.0,
+     "moved_px": 67259
+    },
+    "side": {
+     "opaque": 91910,
+     "border_alpha": 0.0,
+     "moved_px": 33842
+    },
+    "back": {
+     "opaque": 122426,
+     "border_alpha": 0.0,
+     "moved_px": 36344
+    }
+   },
+   "front_first_after": {
+    "rows": 40,
+    "body_in_front": 4,
+    "plate_in_front": 36,
+    "empty_rows": 0,
+    "ok": true
+   }
+  },
+  "Armor_Golden": {
+   "collar_z": 0.4227,
+   "dz": 0.8123,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "shell_chest_y_uncorrected": [
+    -0.2682,
+    0.3352
+   ],
+   "shell_chest_y_corrected": [
+    -0.3147,
+    0.2887
+   ],
+   "shell_lo": [
+    -0.7699,
+    -0.4708,
+    0.1686
+   ],
+   "shell_hi": [
+    0.7699,
+    0.2887,
+    1.5423
+   ],
+   "front_first_before": {
+    "rows": 40,
+    "body_in_front": 23,
+    "plate_in_front": 17,
+    "empty_rows": 0,
+    "ok": true
+   },
+   "views": {
+    "front": {
+     "opaque": 128152,
+     "border_alpha": 0.0,
+     "moved_px": 68482
+    },
+    "side": {
+     "opaque": 91910,
+     "border_alpha": 0.0,
+     "moved_px": 34588
+    },
+    "back": {
+     "opaque": 122426,
+     "border_alpha": 0.0,
+     "moved_px": 37667
+    }
+   },
+   "front_first_after": {
+    "rows": 40,
+    "body_in_front": 4,
+    "plate_in_front": 36,
+    "empty_rows": 0,
+    "ok": true
+   }
+  },
+  "Armor_Leather": {
+   "collar_z": 0.383,
+   "dz": 0.852,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "shell_chest_y_uncorrected": [
+    -0.2682,
+    0.3352
+   ],
+   "shell_chest_y_corrected": [
+    -0.3147,
+    0.2697
+   ],
+   "shell_lo": [
+    -0.4877,
+    -0.3817,
+    0.3626
+   ],
+   "shell_hi": [
+    0.4877,
+    0.2887,
+    1.3018
+   ],
+   "front_first_before": {
+    "rows": 40,
+    "body_in_front": 37,
+    "plate_in_front": 3,
+    "empty_rows": 0,
+    "ok": true
+   },
+   "views": {
+    "front": {
+     "opaque": 110239,
+     "border_alpha": 0.0,
+     "moved_px": 43044
+    },
+    "side": {
+     "opaque": 88408,
+     "border_alpha": 0.0,
+     "moved_px": 16151
+    },
+    "back": {
+     "opaque": 108227,
+     "border_alpha": 0.0,
+     "moved_px": 16869
+    }
+   },
+   "front_first_after": {
+    "rows": 40,
+    "body_in_front": 14,
+    "plate_in_front": 26,
+    "empty_rows": 0,
+    "ok": true
+   }
+  },
+  "Armor_Metal": {
+   "collar_z": 0.4227,
+   "dz": 0.8123,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "shell_chest_y_uncorrected": [
+    -0.2682,
+    0.3352
+   ],
+   "shell_chest_y_corrected": [
+    -0.3147,
+    0.2887
+   ],
+   "shell_lo": [
+    -0.7156,
+    -0.4708,
+    0.2276
+   ],
+   "shell_hi": [
+    0.7156,
+    0.2887,
+    1.305
+   ],
+   "front_first_before": {
+    "rows": 40,
+    "body_in_front": 31,
+    "plate_in_front": 9,
+    "empty_rows": 0,
+    "ok": true
+   },
+   "views": {
+    "front": {
+     "opaque": 120312,
+     "border_alpha": 0.0,
+     "moved_px": 60953
+    },
+    "side": {
+     "opaque": 91196,
+     "border_alpha": 0.0,
+     "moved_px": 27187
+    },
+    "back": {
+     "opaque": 115558,
+     "border_alpha": 0.0,
+     "moved_px": 28158
+    }
+   },
+   "front_first_after": {
+    "rows": 40,
+    "body_in_front": 9,
+    "plate_in_front": 31,
+    "empty_rows": 0,
+    "ok": true
+   }
+  },
+  "Armor_Metal2": {
+   "collar_z": 0.4227,
+   "dz": 0.8123,
+   "y_scale": 1.1431,
+   "y_offset": -0.0465,
+   "shell_chest_y_uncorrected": [
+    -0.2682,
+    0.3352
+   ],
+   "shell_chest_y_corrected": [
+    -0.3147,
+    0.2887
+   ],
+   "shell_lo": [
+    -0.7699,
+    -0.4708,
+    0.2276
+   ],
+   "shell_hi": [
+    0.7699,
+    0.2887,
+    1.485
+   ],
+   "front_first_before": {
+    "rows": 40,
+    "body_in_front": 27,
+    "plate_in_front": 13,
+    "empty_rows": 0,
+    "ok": true
+   },
+   "views": {
+    "front": {
+     "opaque": 120969,
+     "border_alpha": 0.0,
+     "moved_px": 58631
+    },
+    "side": {
+     "opaque": 91212,
+     "border_alpha": 0.0,
+     "moved_px": 31067
+    },
+    "back": {
+     "opaque": 116199,
+     "border_alpha": 0.0,
+     "moved_px": 28818
+    }
+   },
+   "front_first_after": {
+    "rows": 40,
+    "body_in_front": 9,
+    "plate_in_front": 31,
+    "empty_rows": 0,
+    "ok": true
+   }
+  }
+ },
+ "errors": [],
+ "hero_torso_lo": [
+  -0.4056,
+  -0.3642,
+  0.3628
+ ],
+ "hero_torso_hi": [
+  0.405,
+  0.3847,
+  1.2795
+ ],
+ "hero_chest_y": [
+  -0.328,
+  0.3117
+ ],
+ "hero_chest_depth": 0.6397
+}

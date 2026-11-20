@@ -1,0 +1,42 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+19:53:24 | INFO: Starting glTF 2.0 export
+19:53:24 | INFO: Extracting primitive: Armor_Black_Cylinder.056
+19:53:24 | INFO: Primitives created: 2
+19:53:24 | INFO: Finished glTF 2.0 export in 0.06051230430603027 s
+
+EXPORTED C:\hd adventure\bellmire-art\assets\gear\armour\armor_black.glb 1040
+19:53:24 | INFO: Starting glTF 2.0 export
+19:53:24 | INFO: Extracting primitive: Armor_Golden_Cylinder.054
+19:53:24 | INFO: Primitives created: 1
+19:53:24 | INFO: Finished glTF 2.0 export in 0.003350973129272461 s
+
+EXPORTED C:\hd adventure\bellmire-art\assets\gear\armour\armor_golden.glb 1040
+19:53:24 | INFO: Starting glTF 2.0 export
+19:53:24 | INFO: Extracting primitive: Armor_Leather_Cylinder.048
+19:53:24 | INFO: Primitives created: 1
+19:53:24 | INFO: Finished glTF 2.0 export in 0.002177000045776367 s
+
+EXPORTED C:\hd adventure\bellmire-art\assets\gear\armour\armor_leather.glb 288
+19:53:24 | INFO: Starting glTF 2.0 export
+19:53:24 | INFO: Extracting primitive: Armor_Metal_Cylinder.049
+19:53:24 | INFO: Primitives created: 1
+19:53:24 | INFO: Finished glTF 2.0 export in 0.0027887821197509766 s
+
+EXPORTED C:\hd adventure\bellmire-art\assets\gear\armour\armor_metal.glb 584
+19:53:24 | INFO: Starting glTF 2.0 export
+19:53:24 | INFO: Extracting primitive: Armor_Metal2_Cylinder.052
+19:53:24 | INFO: Primitives created: 1
+19:53:24 | INFO: Finished glTF 2.0 export in 0.002813100814819336 s
+
+EXPORTED C:\hd adventure\bellmire-art\assets\gear\armour\armor_metal2.glb 704
+DONE
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+OBJ import of 'Armor_Black.obj' took 1.01 ms
+OBJ import of 'Armor_Golden.obj' took 0.90 ms
+OBJ import of 'Armor_Leather.obj' took 0.57 ms
+OBJ import of 'Armor_Metal.obj' took 0.65 ms
+OBJ import of 'Armor_Metal2.obj' took 0.65 ms
+
+Blender quit

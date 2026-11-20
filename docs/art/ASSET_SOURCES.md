@@ -165,3 +165,14 @@ through `_prop_mesh_m`, which reads the primitive and triangle counts off the
 .gltf JSON before import and caps by the model rather than by a constant. Both
 shipped at full density (976 and 730 triangles). See docs/art/PROPS_SLOT_AUDIT.md
 for why the old fixed cap was the real cause of the torn Barrel.
+
+## System 7 - armour variety (19 Nov 2026, art lane)
+
+The five armour bodies of the Quaternius **Ultimate RPG Items Pack (Aug 2019)** - `Armor_Black`,
+`Armor_Golden`, `Armor_Leather`, `Armor_Metal`, `Armor_Metal2` - are now fitted to the KayKit hero
+body and exported to `assets/gear/armour/*.glb`. The pack is already recorded in the table above;
+its licence file is `License.txt` inside the pack and reads, verbatim: "License: CC0 1.0 Universal
+(CC0 1.0) Public Domain Dedication". I read that file this run rather than a search snippet.
+No attribution is required; the pack is cleared for commercial use and nothing is redistributed as
+an asset. Source geometry is unmodified - the fit is a transform (uniform scale, a depth scale and
+a depth offset) baked at export. Measurements and the fit proof: `renders/art/s7_armour/`.

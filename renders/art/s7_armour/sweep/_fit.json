@@ -1,0 +1,1029 @@
+{
+ "mode": "sweep",
+ "scales": [
+  0.8,
+  0.9,
+  1.0,
+  1.1
+ ],
+ "neck_z": 1.235,
+ "views": {},
+ "armours": {
+  "Armor_Black": {
+   "lo": [
+    -0.7699,
+    -0.4243,
+    -0.5632
+   ],
+   "hi": [
+    0.7699,
+    0.3352,
+    0.6386
+   ],
+   "collar_z": 0.4227,
+   "centre_col_n": 52,
+   "scales": {
+    "0.80": {
+     "shell_lo": [
+      -0.616,
+      -0.3395,
+      0.4463
+     ],
+     "shell_hi": [
+      0.616,
+      0.2682,
+      1.4077
+     ],
+     "dz": 0.8969,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s080_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s080_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s080_back.png",
+     "views": {
+      "front": {
+       "opaque": 45333,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 7264
+      },
+      "side": {
+       "opaque": 34950,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 3722
+      },
+      "back": {
+       "opaque": 45350,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5719
+      }
+     }
+    },
+    "0.90": {
+     "shell_lo": [
+      -0.693,
+      -0.3819,
+      0.3478
+     ],
+     "shell_hi": [
+      0.693,
+      0.3017,
+      1.4293
+     ],
+     "dz": 0.8546,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s090_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s090_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s090_back.png",
+     "views": {
+      "front": {
+       "opaque": 47077,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 12296
+      },
+      "side": {
+       "opaque": 35312,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 6639
+      },
+      "back": {
+       "opaque": 46858,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 9848
+      }
+     }
+    },
+    "1.00": {
+     "shell_lo": [
+      -0.7699,
+      -0.4243,
+      0.2492
+     ],
+     "shell_hi": [
+      0.7699,
+      0.3352,
+      1.4509
+     ],
+     "dz": 0.8123,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s100_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s100_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s100_back.png",
+     "views": {
+      "front": {
+       "opaque": 49423,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 19011
+      },
+      "side": {
+       "opaque": 36248,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 11283
+      },
+      "back": {
+       "opaque": 48943,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 16188
+      }
+     }
+    },
+    "1.10": {
+     "shell_lo": [
+      -0.8469,
+      -0.4668,
+      0.1506
+     ],
+     "shell_hi": [
+      0.8469,
+      0.3687,
+      1.4725
+     ],
+     "dz": 0.7701,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s110_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s110_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Black_s110_back.png",
+     "views": {
+      "front": {
+       "opaque": 52474,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 26233
+      },
+      "side": {
+       "opaque": 37319,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 15931
+      },
+      "back": {
+       "opaque": 51720,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 24398
+      }
+     }
+    }
+   }
+  },
+  "Armor_Golden": {
+   "lo": [
+    -0.7699,
+    -0.4243,
+    -0.5632
+   ],
+   "hi": [
+    0.7699,
+    0.3352,
+    0.6386
+   ],
+   "collar_z": 0.4227,
+   "centre_col_n": 52,
+   "scales": {
+    "0.80": {
+     "shell_lo": [
+      -0.616,
+      -0.3395,
+      0.4463
+     ],
+     "shell_hi": [
+      0.616,
+      0.2682,
+      1.4077
+     ],
+     "dz": 0.8969,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s080_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s080_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s080_back.png",
+     "views": {
+      "front": {
+       "opaque": 45333,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 7478
+      },
+      "side": {
+       "opaque": 34950,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 3950
+      },
+      "back": {
+       "opaque": 45350,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5929
+      }
+     }
+    },
+    "0.90": {
+     "shell_lo": [
+      -0.693,
+      -0.3819,
+      0.3478
+     ],
+     "shell_hi": [
+      0.693,
+      0.3017,
+      1.4293
+     ],
+     "dz": 0.8546,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s090_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s090_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s090_back.png",
+     "views": {
+      "front": {
+       "opaque": 47077,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 12738
+      },
+      "side": {
+       "opaque": 35312,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 6869
+      },
+      "back": {
+       "opaque": 46858,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 10226
+      }
+     }
+    },
+    "1.00": {
+     "shell_lo": [
+      -0.7699,
+      -0.4243,
+      0.2492
+     ],
+     "shell_hi": [
+      0.7699,
+      0.3352,
+      1.4509
+     ],
+     "dz": 0.8123,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s100_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s100_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s100_back.png",
+     "views": {
+      "front": {
+       "opaque": 49423,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 19564
+      },
+      "side": {
+       "opaque": 36248,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 11565
+      },
+      "back": {
+       "opaque": 48943,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 16895
+      }
+     }
+    },
+    "1.10": {
+     "shell_lo": [
+      -0.8469,
+      -0.4668,
+      0.1506
+     ],
+     "shell_hi": [
+      0.8469,
+      0.3687,
+      1.4725
+     ],
+     "dz": 0.7701,
+     "shell_verts": 532,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s110_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s110_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Golden_s110_back.png",
+     "views": {
+      "front": {
+       "opaque": 52474,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 26890
+      },
+      "side": {
+       "opaque": 37319,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 16399
+      },
+      "back": {
+       "opaque": 51720,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 25211
+      }
+     }
+    }
+   }
+  },
+  "Armor_Leather": {
+   "lo": [
+    -0.4877,
+    -0.3352,
+    -0.4281
+   ],
+   "hi": [
+    0.4877,
+    0.3352,
+    0.3935
+   ],
+   "collar_z": 0.383,
+   "centre_col_n": 32,
+   "scales": {
+    "0.80": {
+     "shell_lo": [
+      -0.3902,
+      -0.2682,
+      0.5861
+     ],
+     "shell_hi": [
+      0.3902,
+      0.2682,
+      1.2434
+     ],
+     "dz": 0.9286,
+     "shell_verts": 140,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s080_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s080_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s080_back.png",
+     "views": {
+      "front": {
+       "opaque": 43196,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 1972
+      },
+      "side": {
+       "opaque": 34902,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 1043
+      },
+      "back": {
+       "opaque": 43287,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 2718
+      }
+     }
+    },
+    "0.90": {
+     "shell_lo": [
+      -0.4389,
+      -0.3017,
+      0.505
+     ],
+     "shell_hi": [
+      0.4389,
+      0.3017,
+      1.2445
+     ],
+     "dz": 0.8903,
+     "shell_verts": 140,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s090_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s090_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s090_back.png",
+     "views": {
+      "front": {
+       "opaque": 43323,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 4120
+      },
+      "side": {
+       "opaque": 34983,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 2545
+      },
+      "back": {
+       "opaque": 43417,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5279
+      }
+     }
+    },
+    "1.00": {
+     "shell_lo": [
+      -0.4877,
+      -0.3352,
+      0.4239
+     ],
+     "shell_hi": [
+      0.4877,
+      0.3352,
+      1.2455
+     ],
+     "dz": 0.852,
+     "shell_verts": 140,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s100_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s100_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s100_back.png",
+     "views": {
+      "front": {
+       "opaque": 43565,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 9503
+      },
+      "side": {
+       "opaque": 35192,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5333
+      },
+      "back": {
+       "opaque": 43745,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 8810
+      }
+     }
+    },
+    "1.10": {
+     "shell_lo": [
+      -0.5365,
+      -0.3687,
+      0.3428
+     ],
+     "shell_hi": [
+      0.5365,
+      0.3687,
+      1.2466
+     ],
+     "dz": 0.8137,
+     "shell_verts": 140,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s110_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s110_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Leather_s110_back.png",
+     "views": {
+      "front": {
+       "opaque": 44595,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 15965
+      },
+      "side": {
+       "opaque": 35806,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 8778
+      },
+      "back": {
+       "opaque": 44528,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 13455
+      }
+     }
+    }
+   }
+  },
+  "Armor_Metal": {
+   "lo": [
+    -0.7156,
+    -0.4243,
+    -0.5115
+   ],
+   "hi": [
+    0.7156,
+    0.3352,
+    0.431
+   ],
+   "collar_z": 0.4227,
+   "centre_col_n": 48,
+   "scales": {
+    "0.80": {
+     "shell_lo": [
+      -0.5725,
+      -0.3395,
+      0.4876
+     ],
+     "shell_hi": [
+      0.5725,
+      0.2682,
+      1.2417
+     ],
+     "dz": 0.8969,
+     "shell_verts": 292,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s080_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s080_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s080_back.png",
+     "views": {
+      "front": {
+       "opaque": 44119,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 4985
+      },
+      "side": {
+       "opaque": 34904,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 2685
+      },
+      "back": {
+       "opaque": 44140,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 4164
+      }
+     }
+    },
+    "0.90": {
+     "shell_lo": [
+      -0.6441,
+      -0.3819,
+      0.3942
+     ],
+     "shell_hi": [
+      0.6441,
+      0.3017,
+      1.2425
+     ],
+     "dz": 0.8546,
+     "shell_verts": 292,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s090_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s090_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s090_back.png",
+     "views": {
+      "front": {
+       "opaque": 44969,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 9311
+      },
+      "side": {
+       "opaque": 35162,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 4652
+      },
+      "back": {
+       "opaque": 44979,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 7652
+      }
+     }
+    },
+    "1.00": {
+     "shell_lo": [
+      -0.7156,
+      -0.4243,
+      0.3008
+     ],
+     "shell_hi": [
+      0.7156,
+      0.3352,
+      1.2434
+     ],
+     "dz": 0.8123,
+     "shell_verts": 292,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s100_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s100_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s100_back.png",
+     "views": {
+      "front": {
+       "opaque": 46583,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 16554
+      },
+      "side": {
+       "opaque": 35883,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 9048
+      },
+      "back": {
+       "opaque": 46207,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 13327
+      }
+     }
+    },
+    "1.10": {
+     "shell_lo": [
+      -0.7872,
+      -0.4668,
+      0.2074
+     ],
+     "shell_hi": [
+      0.7872,
+      0.3687,
+      1.2442
+     ],
+     "dz": 0.7701,
+     "shell_verts": 292,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s110_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s110_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal_s110_back.png",
+     "views": {
+      "front": {
+       "opaque": 48891,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 23366
+      },
+      "side": {
+       "opaque": 37069,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 13630
+      },
+      "back": {
+       "opaque": 48236,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 20872
+      }
+     }
+    }
+   }
+  },
+  "Armor_Metal2": {
+   "lo": [
+    -0.7699,
+    -0.4243,
+    -0.5115
+   ],
+   "hi": [
+    0.7699,
+    0.3352,
+    0.5885
+   ],
+   "collar_z": 0.4227,
+   "centre_col_n": 52,
+   "scales": {
+    "0.80": {
+     "shell_lo": [
+      -0.616,
+      -0.3395,
+      0.4876
+     ],
+     "shell_hi": [
+      0.616,
+      0.2682,
+      1.3676
+     ],
+     "dz": 0.8969,
+     "shell_verts": 352,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s080_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s080_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s080_back.png",
+     "views": {
+      "front": {
+       "opaque": 44187,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5586
+      },
+      "side": {
+       "opaque": 34906,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 3299
+      },
+      "back": {
+       "opaque": 44194,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 4263
+      }
+     }
+    },
+    "0.90": {
+     "shell_lo": [
+      -0.693,
+      -0.3819,
+      0.3942
+     ],
+     "shell_hi": [
+      0.693,
+      0.3017,
+      1.3842
+     ],
+     "dz": 0.8546,
+     "shell_verts": 352,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s090_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s090_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s090_back.png",
+     "views": {
+      "front": {
+       "opaque": 45300,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 9878
+      },
+      "side": {
+       "opaque": 35173,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 5956
+      },
+      "back": {
+       "opaque": 45292,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 8043
+      }
+     }
+    },
+    "1.00": {
+     "shell_lo": [
+      -0.7699,
+      -0.4243,
+      0.3008
+     ],
+     "shell_hi": [
+      0.7699,
+      0.3352,
+      1.4008
+     ],
+     "dz": 0.8123,
+     "shell_verts": 352,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s100_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s100_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s100_back.png",
+     "views": {
+      "front": {
+       "opaque": 47003,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 15988
+      },
+      "side": {
+       "opaque": 35907,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 10200
+      },
+      "back": {
+       "opaque": 46604,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 13270
+      }
+     }
+    },
+    "1.10": {
+     "shell_lo": [
+      -0.8469,
+      -0.4668,
+      0.2074
+     ],
+     "shell_hi": [
+      0.8469,
+      0.3687,
+      1.4174
+     ],
+     "dz": 0.7701,
+     "shell_verts": 352,
+     "path_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s110_front.png",
+     "path_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s110_side.png",
+     "path_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\Armor_Metal2_s110_back.png",
+     "views": {
+      "front": {
+       "opaque": 49237,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 22785
+      },
+      "side": {
+       "opaque": 37095,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 14876
+      },
+      "back": {
+       "opaque": 48636,
+       "border_alpha": 0.0,
+       "size": [
+        400,
+        400
+       ],
+       "moved_px": 20516
+      }
+     }
+    }
+   }
+  }
+ },
+ "errors": [],
+ "hero_body_lo": [
+  -0.6516,
+  -0.5316,
+  -0.0009
+ ],
+ "hero_body_hi": [
+  0.669,
+  0.4851,
+  2.3009
+ ],
+ "bare": {
+  "front": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\_bare_front.png",
+  "side": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\_bare_side.png",
+  "back": "C:\\hd adventure\\bellmire-art\\renders\\art\\s7_armour\\sweep\\_bare_back.png"
+ }
+}

@@ -12693,3 +12693,9 @@ game build's IDLE 07:15:02. No Twitch contact, 0 bits, nothing posted, no reward
 Item: TAKE THIS NEXT (20 Nov 07:58 CT) row 3, CONTENT: C-138 ticked; keep producing, keep writing _note_ keys. No miniboss owed: origin/art minibosses.py holds 13 full bodies, every one already keyed in miniboss_feed.by_key (36). Added epitaphs +13 (722->735), descend +6 (453->459), cleared +5 (439->444), misfire 167 unchanged, and _note_c139.
 VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), only new key _note_c139.
 CODE WIRING: none new; the pools already have readers.
+
+
+## U101 - 2026-11-20 08:5x CST - STAND-DOWN (chat bot holds the Godot lock)
+Who held: chat bot, RUNNING 2026-11-20T08:50:31-06:00, cap 09:15, expected finish 09:05 (B80 doc-check discriminator); no IDLE from that lane followed. Checked: R's working-tree docs/RUN_LOCK.txt last line (not a git ref); tasklist showed no Godot process, but a live RUNNING with no same-lane IDLE is a hold under the yield rule, so I did not claim. TAKE THIS NEXT block not found in WORK_PLAN.md by case-insensitive search; standing item is System 2 rarity-hue / L74 (already closed per U97-U99 notes: no new HUD defect). Edited no owned file, ran no Godot.
+Next firing (:52): re-read lock; claim only for a named new HUD item or learned defect, within claim+15, release by :07.
+Nothing for Mr. E to decide.

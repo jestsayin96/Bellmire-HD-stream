@@ -106,7 +106,7 @@ const NEW_TYPES := {
     ## Delve._call_tick + Delve._ward). Kill the adds, not the boss. homes [] - it is not a random draw;
     ## its floor route waits on content's lines and the supervisor's scale ruling.
     "broodglut": {"name": "Broodglut", "path": MON + "minibosses/broodglut.glb", "anims": A_UAL, "hp": 2.4, "atk": 1.5, "spd": 3.6, "h": 6.60,
-                   "lift": 0.0, "family": "fiend",
+                   "span": 10.4063, "lift": 0.0, "family": "fiend",
                    "ways": {"summon": {"type": "puglin", "every": 11.0, "most": 3, "line": "Puglins boil out from under Broodglut - and it shrugs off every blow while they stand."}, "ward": 0.5},
                    "homes": []},
     ## S56: the SECOND pack-variant miniboss (art's register: h 6.20, theme `cells`, Imp body, palette 3).
@@ -115,7 +115,7 @@ const NEW_TYPES := {
     ## last mark and the cuffs (one mesh, Imp_Chains) at the fourth, so the state is SEEN. homes [] -
     ## not a random draw until content writes its lines.
     "lastcuff":  {"name": "Lastcuff", "path": MON + "minibosses/lastcuff.glb", "anims": A_UAL, "hp": 2.2, "atk": 1.4, "spd": 2.6, "h": 6.20,
-                   "lift": 0.0, "family": "fiend",
+                   "span": 6.4807, "lift": 0.0, "family": "fiend",
                    "ways": {"irons": {"at": [0.85, 0.70, 0.55, 0.40, 0.25], "gain": 0.22, "meshes": {"3": "Imp_Chains", "4": "Imp_SpikedCollar"}}},
                    "homes": []},
     ## S57: the THIRD bestiary-carried miniboss, the Leech (Gulworth). h 2.32 is art's CANON height and
@@ -516,6 +516,29 @@ static func pool_for(floor_no: int, theme := "") -> Array:
             out.append(k)
     return out
 
+## S58: THE SPAN TERM - the second half of the supervisor's 01:16 corridor ruling. A body that
+## carries `span` (art's T-pose span_x at its bestiary h, copied out of
+## renders/art/variants/_register.json, not re-derived) may not be drawn wider than the corridor
+## clear, which is READ out of FloorGen (G * HALL_W - 2 * WALL_IN = 11.0 m), never a literal. An
+## upscale that would cross it is REFUSED - the body is drawn at its own h - and counted, so a test
+## can see the refusal. Downscales always pass. A body with no span is unchanged.
+static var span_refused := 0
+static var corridor_clear_override := -1.0   # test hook: < 0 reads FloorGen
+
+static func corridor_clear() -> float:
+    if corridor_clear_override >= 0.0:
+        return corridor_clear_override
+    return float(FloorGen.G) * float(FloorGen.HALL_W) - 2.0 * float(FloorGen.WALL_IN)
+
+static func span_scale(d: Dictionary, k: float) -> float:
+    if k <= 1.0 or not d.has("span"):
+        return k
+    if float(d["span"]) * k > corridor_clear():
+        span_refused += 1
+        d["upscale_refused"] = k
+        return 1.0
+    return k
+
 static func make(type_key: String, strain_key := "plain") -> Dictionary:
     var out: Dictionary = def_of(type_key)
     if out.has("paths"):
@@ -530,7 +553,7 @@ static func make(type_key: String, strain_key := "plain") -> Dictionary:
     out["hp"] = float(out["hp"]) * float(st["hp"])
     out["atk"] = float(out["atk"]) * float(st["atk"])
     out["spd"] = float(out["spd"]) * float(st["spd"])
-    out["h"] = float(out["h"]) * float(st["scale"])
+    out["h"] = float(out["h"]) * span_scale(out, float(st["scale"]))
     # a creature with a look of its own keeps it on a plain strain
     if strain_key != "plain" or not out.has("tint"):
         out["tint"] = st["tint"]

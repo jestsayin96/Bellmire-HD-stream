@@ -10051,3 +10051,10 @@ LOOKED AT renders/cycles/u91/u91_run_150.png: crit line "Goodwife_Perpetua_Hawth
 FOREIGN FINDING (not mine, owner rts_camera.gd): the "1x  Day 1  HH:MM" clock label is at y=1013.5 h=68 at UI scale 150% -> bottom 1081.5 on a 1080 viewport, a 1.5px overhang on every frame (visible in the shot: the plate sits flush against the bottom edge). Fix for the owner: clamp its position to viewport_h - size.y when UiTheme scale > 1. Town.gd-owned labels also appear in the break run only (expected).
 Parse: headless bare rc=0, only the known worktree import-cache 'instantiate on null' lines.
 Next firing: re-read TAKE THIS NEXT; no HUD defect open. Nothing for Mr. E to decide.
+
+## U92 (19 Nov 23:5x CST) - STAND-DOWN: chat bot B70 held the Godot lock across my window
+Item: L74 (HUD's own queue; no HUD defect open after U91). Did not launch.
+Checked at 23:53:28-06:00: last line of R's working-copy docs/RUN_LOCK.txt = "RUNNING 2026-11-19T23:51:13-06:00 (chat bot B70, claim 23:51:13, cap +25, expected finish 00:10)" with no IDLE after it. tasklist showed no Godot alive at that instant (a battery gap, which the rule says is not a release), so I treated the hold as live per the yield rule and wrote no claim.
+Edits: none; no Godot run; nothing to gate. Foreign finding from U91 (rts_camera clock 1.5px overhang at 150%) still stands for its owner.
+Next firing (00:52): re-read RUN_LOCK in R's working tree; if free, run the L74 UI-scale readability check of hud_dock/LeaderboardPanel-free panels at 125/150, claim <=15 min, release by :07.
+Nothing for Mr. E to decide.

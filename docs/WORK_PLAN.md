@@ -1,3 +1,141 @@
+## TAKE THIS NEXT - written 2026-11-19 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 20:58 FIRING. **SYSTEM 2 IS WHOLE. ITS HUD HALF TICKED THIS HOUR ON A PICTURE I
+LOOKED AT MYSELF** - the last open half of Mr. E's Phase 1 is closed. All six lanes ran; I ticked
+TWO and held two as half delivered, both for the right reasons and neither as a charge.
+main f5b57b38 -> seven merges, pushed. ART PUSHED AT 21:01, AFTER MY FIRST MERGE PASS, AND I
+RE-READ THE REF AND MERGED IT AGAIN BEFORE WRITING THIS - that is the re-read rule, not luck.
+I DID NOT LAND THIS BLOCK BEFORE :07. My own 20:4x note asked the next seat to, and I could not:
+verifying the HUD capture by eye is what the tick rested on and it ran past the hour. NO HARM THIS
+TIME and I checked rather than assumed - the row the game build read at :07 is row 1(b) HOLD, and
+art's 21:01 write-up independently says HOLD, so the stale block and the new one agree.
+
+1. GAME BUILD - **NOTHING NEW TO TICK; S49 WAS TICKED IN MY 20:4x ADDENDUM AND STANDS.**
+   **ROW 1(b) STAYS HELD, AND NOW ON ART'S NUMBERS RATHER THAN ON MY JUDGEMENT.** Art re-measured
+   the posed body this hour and wrote the cut->shell mapping off: the shells reach abs(x) 0.77
+   where the body is 0.43 wide at shoulder height, and every hem sits 0.10-0.275 m below the top
+   of the legs. Do NOT wire scripts/gear.gd. Your five .glb.import siblings stay valid - art
+   confirms assets/gear/armour/*.glb are UNTOUCHED by its run, so nothing you shipped regresses.
+   NEXT: the next Phase 2 system in Mr. E's order. Your :07 window is yours; the last lock line is
+   an IDLE (HUD 20:54:05) and no Godot is alive.
+
+2. CONTENT - **C-128 IS TICKED, AND I COUNTED THE DELTA OFF THE FILE RATHER THAN READING YOUR
+   LINE.** epitaphs 566->590 (+24), descend 355->375 (+20), cleared 355->373 (+18), misfire
+   118->130 (+12), and barks +26 split EXACTLY as you said it - enter 4, lord 5, trap 5, hurt 4,
+   drink 4, misfire 4. Stronger than you claimed, and I checked the parts that could have gone
+   wrong silently: ZERO duplicates among the 74 added lines, ZERO collisions with the lines
+   already there, every pre-existing entry in all five pools byte-identical as a prefix, zero
+   non-ASCII, and the only key added anywhere is _note_c128.
+   ONE DEVIATION, NOT A DEFECT, AND IT IS SMALL: my 20:1x row asked you to keep nesting the
+   `_note_` keys under their section as you did for c126 and c127. **_note_c128 is TOP-LEVEL**, so
+   the top-level count went 133 from 132. It wires nothing and breaks nothing - the audit accounts
+   for it - but the whole point of nesting was to keep that raw number honest.
+   NEXT: C-129, full rate, and nest _note_c129 under its section.
+
+3. ART - **THE FIT PASS IS NOT PASSED, YOU SAID SO YOURSELF, AND I AM CONFIRMING YOUR REFUSAL
+   WITH MY OWN EYE RATHER THAN WITH YOUR COVERAGE NUMBERS.** I opened
+   fit8/J_Armor_Golden_front.png - the stage whose numbers were the best of any variant - and you
+   UNDERSTATED it. It is a smooth mustard sack: every seam and bevel on the breastplate is gone,
+   the red brooch is gone, the shoulder horns have become flat flaps hanging off the arms with
+   air behind them, and the hem is a shapeless bell over the thighs. A viewer who paid for a
+   legendary piece would be handed a tabard. YOU WERE RIGHT NOT TO SHIP IT, and "a fix that is
+   only clean in combination is not clean" (finding 5) is the sentence of the hour in this house.
+   FINDING 1 IS A CORRECTION ON YOUR OWN EARLIER WORK and finding 7 is the THIRD blind instrument
+   you have caught and labelled rather than quietly replaced. Keeping the blind one in the harness
+   so the next run cannot re-learn it is exactly right.
+   NEXT - AND IT IS YOUR OWN PLAN, NOT MINE, BECAUSE YOU MEASURED IT AND I DID NOT: widen the
+   chest plate band AS GEOMETRY out to the body's half-width plus clearance, leaving horns, skirt
+   and belt alone, conform only the few remaining pokes, and ship the back closure (finding 4,
+   40% -> 6-13% bare) in the SAME pass. Then re-render front/side/back and the sheet.
+   ONE MECHANICAL CORRECTION, ONE LINE: docs/art/SYSTEM7_ARMOUR_FIT.md is headed "Written 19 Nov
+   2026, 22:3x CT" and your commit is stamped 21:01 CT. That is a stamp you did not read - 90
+   minutes in the future. It is NOT in a lock line, so it does not break the clean-hour count and
+   I am not charging it. Read `TZ=America/Chicago date` and write what it says.
+
+4. HUB - **PUBLISHED AND LEVEL. I RE-MEASURED BOTH TREES MYSELF RATHER THAN COPYING LAST HOUR'S
+   SHAS:** origin/gh-pages^{tree} and origin/hub:web are BOTH 9ca8051e - EQUAL, so the
+   merged-and-not-published delta is ZERO. Your 20:40 standing check says the same thing and it
+   is true. I RAN NO PUBLISH GATE THIS HOUR AND NONE WAS OWED - you claimed no readiness and there
+   is no web/ change to gate.
+   NEXT: nothing is queued for you. Stand down in writing, or audit your own web/.
+
+5. CHAT BOT - **B67 IS HALF DELIVERED AND I AM NOT TICKING IT - FOR A REASON YOU NAMED YOURSELF
+   AND ACTED ON CORRECTLY.** The code is right and I read it rather than trusting it: every
+   callee exists (Gear.weapon_piece gear.gd:1602, Gear.armour_piece :1605, roster.weapon_piece_id
+   roster.gd:905, Gear.armour_id gear.gd:1655, roster.armour_class :332, roster.dice_str :390),
+   both builders handle the bare-handed and no-named-piece cases in words, _band maps epic ->
+   "very rare" so the ladder reads plainly, and data/commands.json is consistent BOTH WAYS at 29 -
+   order 29, commands 29, nothing in one and not the other - with docs/COMMANDS.md carrying
+   exactly 29 table rows.
+   WHAT IS MISSING IS THE ENGINE, NOT THE CODE: no gate ran. You did the right thing - the lock
+   was free but the clock had reached the HUD's :52, so you SPLIT instead of declaring a crossing.
+   That is Mr. E's yield rule working, and it is why this is a continuation and not a charge.
+   NEXT: run the owed gates in YOUR :45 window and B67 ticks on sight. Then town, then bestiary.
+
+6. HUD - **U88 IS TICKED. SYSTEM 2'S HUD HALF IS CLOSED AND WITH IT THE LAST OPEN HALF OF MR. E'S
+   PHASE 1.** I did not take U89's verdict line and I did not take its pixel counts either - I
+   wrote my own counter with my own thresholds and then I LOOKED AT THE PICTURE AT TWO SCALES.
+   My counts: purple 1321 / 2382 / 3091 and orange 1003 / 1520 / 1503 at 100 / 125 / 150. They do
+   not match yours (1006/1679/2422 and 68/112/169) because my threshold is looser, and that is the
+   point - we measured independently and both say the same thing where the 19:56 files said ZERO.
+   WHAT I SAW, AT 150 AND AGAIN AT 100 so the smallest scale is proved and not assumed: a filled
+   PURPLE pip with a dark ring and PURPLE ink on "Scarglass Ring (ring)", +1 AC right-aligned; an
+   ORANGE pip and ORANGE ink on "Mender's Wraps (gloves)", +10 HP; "Market Seal (ring2)" and
+   "rags" BARE with default ink, which is the commons-stay-bare design and not a miss; names
+   aligned in the pip column throughout. The rarity hue reaches the worn rows on the body of the
+   panel. THAT IS THE ITEM, AND IT IS DONE.
+   You also did the small thing exactly as rowed - no red run, no source edit, green capture last,
+   and you kept the 19:56 red proof rather than repeating it and risking the shots. Lock 20:53:09
+   -> IDLE 20:54:05, inside everything.
+   NEXT: L74 - make FeedHUD countable by the theme sweep, as you proposed.
+
+FOR THE SUPERVISOR
+- **SYSTEM 2 IS COMPLETE.** Its engine half was closed and written down at the 23:58 firing on
+  17 Nov; its HUD half - the rarity hue - is TICKED this hour, and the evidence is a picture I
+  opened myself at 100% and 150%, not a verdict line. The prompt I run from still calls it "the
+  most valuable open item in the house" and "still unstarted"; both are now false and the
+  correction is in the FOR THE NEXT TEAM LEAD block below, because a firing cannot write a prompt.
+  **MR. E'S PHASE 1 HAS NO OPEN HALF LEFT.**
+- **SYSTEM 7 IS STILL HALF DELIVERED AND ART IS RIGHT TO HOLD IT.** It tried four fixes, measured
+  all of them, and refused to ship the best-scoring one. I looked at that one and it is a sack.
+  RECOMMENDATION: leave it with art for the geometry widen rather than wiring a shell that does
+  not fit; the game build's row 1(b) stays held and nothing is blocked by the wait.
+- **NOTHING IS WAITING TO BE PUBLISHED.** gh-pages tree and origin/hub:web are both 9ca8051e.
+- TWO AGAINST MY OWN INSTRUMENTS, REPORTED BEFORE ANYTHING ELSE, AND THE SECOND IS A ROW I HAD
+  ALREADY WRITTEN AND WENT BACK AND FIXED. (i) My first dead-data sweep called 12 asset
+  directories unreferenced by matching only the full relative path. (ii) My SECOND sweep then
+  called all 12 referenced by matching the directory's own NAME - and that is the TOO-KIND half,
+  the exact fault the 19:58 seat caught an hour ago. I had already written "ZERO" into this block
+  before I confirmed the hits. Confirmed properly, with grep -n and the line in front of me:
+  `armour`, `ring`, `hat` and `music` are COMMON WORDS and every one of those 12 matches was prose
+  or an unrelated identifier. ELEVEN are genuinely reached by CONCATENATION (sfx.gd:28
+  `const DIR := "res://assets/audio/"`; the four assets/icons/items/* are the HUB's own source
+  under D73, not a game-build gap). **assets/gear/armour IS GENUINELY UNREFERENCED** - gear.gd
+  declares KIT, DUN and ART and no armour const, and `gear/armour`, `armor_black`, `armor_golden`,
+  `armor_metal` and `armor_leather` return ZERO hits across every .gd and .js. **THE HONEST COUNT
+  IS 1, NOT 0**, it is unchanged from the 19:58 seat's finding, and it CLOSES when row 1(b) lands.
+  Neither number reached a lane; both are mine.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt; land these on
+the first live turn, all at once):
+  (1) SYSTEM 2'S HUD HALF IS TICKED (20:58 firing, 19 Nov). The prompt's "the HUD's rarity-hue
+      half is the only part still open", "still unstarted at 09:2x on 18 Nov" and "IT IS THE MOST
+      VALUABLE OPEN ITEM IN THE HOUSE" are all now FALSE. System 2 is whole; Phase 1 is whole.
+  (2) DEAD-DATA BASELINE. Measured 20:5x CT 19 Nov on the merged tree: 48 script files,
+      2,243,046 chars, 12 data files, 133 top-level keys, 43 zero-literal-hit keys, ALL
+      ACCOUNTED FOR - 28 are content's `_note_` keys, 2 are the runtime-built _alt pools (READ),
+      4 are the declared-dead phase2_words family, 9 are prose/spec. UNREAD LIVE DATA KEYS: ZERO.
+      UNREFERENCED ASSET DIRECTORIES: **ONE** - assets/gear/armour, held open by row 1(b) and
+      unchanged from the 19:58 measurement (33 directories with files, measured off assets/ only;
+      a bare directory-NAME match is TOO KIND and reports zero - confirm every hit with grep -n).
+  (3) THE DECLARED-DEAD LIST IS FOUR, NOT THREE: the prompt names phase2_words, phase2_words_alt
+      and town_levels_for_the_desktop. **`phase2_words_alt2` is a fourth** (content's C-114, which
+      content itself already closed in PROGRESS: "a note, not live work"). It is not a new unread
+      key and NO LANE IS TO WIRE IT.
+  (4) THE ID LINE as of 20:58 CT 19 Nov: B67, C-128, D100, H32, L74, S49, T5, U89.
+  (5) THE COMMAND COUNT IS 29, not 26 and no longer 27 - B67 added !weapon and !armour.
+
+FOR MR. E: nothing.
+
 ## ADDENDUM - written 2026-11-19 20:4x CT by the Team Lead, AFTER :05. ON ITS FACE THIS IS THE
 ## NEXT FIRING'S ROW FOR THE GAME BUILD, NOT work owed in the 19:58 hour.
 **S49 IS TICKED.** The game build took row 1(a) inside its own 20:07 window and I checked it off

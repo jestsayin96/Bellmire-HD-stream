@@ -2020,12 +2020,16 @@ static func commands() -> Dictionary:
         #     remove, and !miniboss answers it too.
         #   GHOST - an MB_NAME row keyed on a word that is not a body. Unreachable: the name can
         #     never be drawn, never be asked for here, and the map looks full while being short.
-        # THESE TWO ARE printerr-ONLY AND I AM SAYING WHY RATHER THAN BURYING IT: both have
-        # exactly ONE live instance as I write this (`strickler` unnamed, `drizzler` ghost), they
-        # are the SAME single defect, and it is already corrected on branch `laptop` at a2d6ab2e
-        # and arriving at the next merge of main. A guard that goes red on a fix in flight teaches
-        # a lane to ignore it. The moment main carries that commit these two become push_error
-        # like every other path here - that is owed, and it is in my summary so it can be held.
+        # B71: THESE TWO ARE NOW FULL FAULTS, AND THE DEBT IS PAID IN THE SAME WORDS IT WAS TAKEN
+        # IN. B70 held them at printerr-only with the reason written here: both had exactly ONE
+        # live instance (`strickler` unnamed, `drizzler` ghost), they were the SAME single defect,
+        # and the fix was already on branch `laptop` at a2d6ab2e and arriving at the next merge -
+        # a guard that goes red on a fix in flight teaches a lane to ignore it. Main carries
+        # a2d6ab2e as of the 23:58 merge. I did not take the merge's word for it: I brace-matched
+        # MB_NAME off `scripts/delve.gd` in the merged worktree and walked it against content's
+        # `miniboss_feed.by_key` - 36 rows, 36 names, UNNAMED empty, GHOST empty - so the promotion
+        # lands green rather than landing on a live fault. They are push_error from here on, and
+        # the warning window was one cycle wide exactly as declared.
         # COUNT / ANCHOR / FIELDS are full faults from the first run: those are MY sentence, and
         # "36" in data/commands.json is a number in prose with nothing under it until now.
         var mb_d: Dictionary = (cmd_d.get("miniboss", {}) as Dictionary)
@@ -2070,9 +2074,13 @@ static func commands() -> Dictionary:
             push_error("COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes %d elites and content writes feed rows for %d - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there" % [mb_said[0], mb_live.size()])
             printerr("COMMANDS_DATA MINIBOSS COUNT - published %d, feed rows %d" % [mb_said[0], mb_live.size()])
         if not mb_unnamed.is_empty():
-            printerr("COMMANDS_DATA MINIBOSS UNNAMED (warning) - %d bodies draw a feed with no MB_NAME row and answer to their trade word instead of a name: %s" % [mb_unnamed.size(), mb_unnamed])
+            _guard_faults.append("MINIBOSS UNNAMED")
+            push_error("COMMANDS_DATA MINIBOSS UNNAMED: %d body(s) content writes a feed for carry no `Delve.MB_NAME` row, so the nameplate falls back to the capitalised trade and !miniboss answers the trade word the rename exists to remove - nothing crashes and nothing reads wrong in a log, which is why this is a fault and not a warning: %s" % [mb_unnamed.size(), mb_unnamed])
+            printerr("COMMANDS_DATA MINIBOSS UNNAMED - %d bodies draw a feed with no MB_NAME row and answer to their trade word instead of a name: %s" % [mb_unnamed.size(), mb_unnamed])
         if not mb_ghost.is_empty():
-            printerr("COMMANDS_DATA MINIBOSS GHOST (warning) - %d MB_NAME rows keyed on a word no body carries, so the name can never be drawn or asked for: %s" % [mb_ghost.size(), mb_ghost])
+            _guard_faults.append("MINIBOSS GHOST")
+            push_error("COMMANDS_DATA MINIBOSS GHOST: %d `Delve.MB_NAME` row(s) are keyed on a word no body carries, so the name can never be drawn on a nameplate nor asked for here - the map looks full while being short by that many names: %s" % [mb_ghost.size(), mb_ghost])
+            printerr("COMMANDS_DATA MINIBOSS GHOST - %d MB_NAME rows keyed on a word no body carries, so the name can never be drawn or asked for: %s" % [mb_ghost.size(), mb_ghost])
         # ---- B51: THE `inventory` FIELD LIST - THE FIRST CLAIM IN THIS FILE GUARDED BY WHETHER
         # THE THING THAT DELIVERS IT STILL EXISTS, RATHER THAN BY WHAT A NUMBER SAYS.
         # B34 named fifteen unguarded `what` claims. FOUR carried a number and all four are now

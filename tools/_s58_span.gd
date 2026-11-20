@@ -48,7 +48,7 @@ func _initialize() -> void:
 	# [type, strain, expect_refused]
 	var cases := [["broodglut", "plain", false], ["broodglut", "drowned", false], ["broodglut", "mossbacked", true],
 		["broodglut", "gorged", true], ["broodglut", "hollowed", false], ["lastcuff", "gorged", false],
-		["warrior", "gorged", false]]
+		["warrior", "gorged", false], ["leech", "gorged", false]]
 	_stage = Node3D.new(); root.add_child(_stage)
 	var x := -22.0
 	for c in cases:
@@ -66,6 +66,16 @@ func _initialize() -> void:
 			var m := Monster.new(); m.def = d; m.state = Monster.S.IDLE
 			m.position = Vector3(x, 0, 0); m.rotation.y = PI
 			_stage.add_child(m); _mons.append([m, c[1], k]); x += 15.0
+	# S59: the Leech has no measured span; its exemption is a bound re-read off the live tables.
+	var kmax := 0.0
+	for sk in Bestiary.STRAINS:
+		kmax = maxf(kmax, float(Bestiary.STRAINS[sk]["scale"]))
+	var lh := float(Bestiary.def_of("leech")["h"])
+	var bd: Dictionary = Bestiary.def_of("broodglut")
+	var widest := float(bd["span"]) / float(bd["h"])
+	var need := real / kmax / lh
+	print("  leech span key present=%s (art owes the measurement)" % Bestiary.def_of("leech").has("span"))
+	_ok(need > 2.0 * widest, "leech exempt by bound: crosses only if span > %.2fx its h (clear %.1f / max strain x%.2f / h %.2f); widest measured body %.2fx" % [need, real, kmax, lh, widest])
 	if not _red:
 		_ok(Bestiary.span_refused == 2, "span_refused counted 2 (%d)" % Bestiary.span_refused)
 	var sun := DirectionalLight3D.new(); sun.rotation_degrees = Vector3(-45, 30, 0); root.add_child(sun)

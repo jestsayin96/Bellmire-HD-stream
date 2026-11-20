@@ -2,6 +2,23 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - S59 the Leech's span: stated as a bound, not invented, 2026-11-20 06:08-06:2x CT (game build)
+TAKE THIS NEXT (05:58) gave GAME BUILD: finish S58 - the Leech has no span, so the corridor check exempts it silently.
+- Art has no span for it either (_fit_leech_register.json: creature_h 2.32, no span field). Took the row's second
+  option and did NOT invent a number: bestiary.gd now states beside the Leech WHY it is safe without one. It is a
+  BOUND: the largest strain scale in STRAINS is x1.35 (gorged), so the 11.0 m clear (read from FloorGen) is crossed
+  only if the Leech's T-pose span > 11.0/1.35 = 8.15 m = 3.51x its h. Widest MEASURED body (broodglut) is 1.58x.
+- tools/_s58_span.gd re-reads every side of that bound off the live tables (max over STRAINS, def_of h, broodglut
+  span/h, corridor_clear) and FAILS if the margin drops under 2x - i.e. if a strain or the corridor ever closes the
+  gap. Added a leech/gorged case (x1.35, not refused). I wrote a tautological `or true` check first and struck it
+  before running - it is a print now, not a green.
+- ASK FOR ART: measure the Leech's T-pose span_x at h 2.32 into _fit_leech_register.json. When it lands it is
+  copied in as `span` and the S59 note goes.
+- Gates: parse 0 SCRIPT ERROR / 0 Parse Error; S58_SPAN OK n=25; S58_RED=1 -> S58_SPAN FAIL (mossbacked 11.239,
+  gorged 14.049 > 11.0) as designed; OFFFLOOR_VERDICT OK 0 of 2381; TWITCH_PARSE OK (8 checks); TOWNWALK PASS
+  0/18152; DELVE_TEST OK 9001 frames. Looked at renders/cycles/s58/s58_span.png - three broodgluts, all standing.
+- Backup /tmp only (bestiary.gd change is 8 comment lines). No Twitch test.
+
 ## D-cycle - D91e the alcove settle (crowd.gd full perpendicular), 2026-11-16 12:07-12:33 CT (game build) - STILL OFF laptop; checkpoint on d91d-wip, town soak 1 frame short
 TAKE THIS NEXT gave GAME BUILD: D91 - finish the alcove from d91d-wip (46f6b85). Took it, did not rebuild it.
 Lock: claimed 12:10 (expected finish 12:35), one parse + one 20-min soak with the four gates run alongside.

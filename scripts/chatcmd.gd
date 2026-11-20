@@ -1594,6 +1594,16 @@ static func commands() -> Dictionary:
         # items.json plus a roster.gd fallback, not one constant, which is why it waited an hour.
         # WHAT I AM STILL NOT CLAIMING: `wear`.cost publishes a RANGE
         # (30-420) and `forge`/`armoury` publish tier LISTS that already carry their own guards.
+        ## B83: THE SENTENCE ABOVE IS STALE AND IT COST ME A MEASUREMENT, SO IT IS CORRECTED HERE
+        ## RATHER THAN REWRITTEN. `wear`.cost no longer publishes 30-420; it publishes 30-520, and
+        ## the range IS claimed now - WEAR SPAN LOW and WEAR SPAN HIGH below read the cheapest and
+        ## dearest accessory/cosmetic row out of data/items.json and check both ends. A seat that
+        ## reads B40's words alone goes looking for an unguarded number that was guarded hours ago.
+        ## B40's own walk still holds at 31 commands: I re-walked every digit published in every
+        ## `what`, `short`, `cost`, `args` and `example` across all 31 (the set was 26 when B40
+        ## wrote the line) - forge 60/160/420/1100, armoury 50/150/400/1000, brew 35 and 40-480,
+        ## oil 12, wear 30-520, dye 25, reroll 120, respec 200, look 10, miniboss 36 - and every
+        ## one of them already sits under an arm. No published number in this file is unwatched.
         for pr in [["oil", Roster.OIL_COST, "Roster.OIL_COST", "a flask of lamp oil (buy_oil)"],
                    ["reroll", Roster.REROLL_COST, "Roster.REROLL_COST", "a living hero's re-throw (reroll)"],
                    ["respec", Roster.RESPEC_COST, "Roster.RESPEC_COST", "a change of calling (respec)"]]:

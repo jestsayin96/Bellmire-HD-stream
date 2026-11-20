@@ -131,6 +131,125 @@ LOOKED AT (headless Chromium 1440x900, ?mock=shops, Shops tab): white/blue/tange
 Hostile names (<img src=x onerror=alert(1)> Smithy, <b>Iron sword</b>) render as literal text; 0 dialogs, 0 pageerrors, 0 img[onerror] in DOM across ?state=empty/fail/stale ?mock=chronicle/crowd/lore/bestiary/shops/satchel ?open=1. Page does not scroll (3 regions internal). No data or CSP change.
 Untracked in worktree and NOT committed (delete refused on this machine, same as before): _hub_web_run.tgz (staging tarball I made this run) joins _h32_shot_a..f.png, web_look.tar, web_look2.tar, _plan_tmp.txt.
 Live dot colour: unchanged this run (--live red #e5484d). Not claiming READY TO PUBLISH beyond: web/ changed, hostile-name test re-run and passes; team lead verifies by grep.
+## ART 2026-11-20 11:3x-11:5x CT - THE SEALER, THE 38th MINIBOSS: IT SEALS WHAT YOU CARRY, AND MY OWN EDIT SCRIPT DUPLICATED THE BODY AND RENDERED THE STALE COPY
+
+THE PLAN'S ART ROW: "THE MINIBOSSES ARE STILL YOURS - and take (a) on the next
+body, it is cheap." Both halves are done. (a) is the team lead's finding on the
+Dauber: the plumb bob - a thin line with a solid cone hanging in clear air -
+READS AS A UI DOWNLOAD ARROW at hero scale.
+
+WHAT I CHECKED FOR FIRST, MEASURED OFF THE TREE AND NOT REMEMBERED. AST walk of
+`tools/art/minibosses.py` on my own worktree: CANON 51 keys, BUILDERS 51, the
+two sets EQUAL, 14 variant keys -> 37 base bodies before this one. Agrees with
+the 10:58 team lead count. I then read every `idea` string in CANON and wrote
+the mechanic space out before designing, so the 38th is not a re-skin: nothing
+in the thirty-seven touches THE PACK. The Tallyman is the nearest and it is a
+different verb - he lifts what you are holding and walks off with it.
+
+THE SEALER (`sealer`, "Leadbite", 2.42 m, treasury, wear 0.22). Every bite of
+its press shuts ONE hero's pack: no flask, no bandage, no scroll. It takes
+nothing and breaks nothing - the gear is still in there and it is not yours
+until the press is broken. The strip of lead blanks is the gauge, so the party
+can count the fight it has left before the first bite.
+
+CORRECTION (a), TAKEN BY CONSTRUCTION RATHER THAN BY EYE. The natural sketch
+for a sealer is lead seals swinging on cords, which is the Dauber's bob four
+times over. So NOTHING ON THIS BODY HANGS: the blanks are seated in a board,
+the screw is short and thick under a crossed tommy bar (a T, which no interface
+draws), and the row is deliberately irregular - one socket empty, one blank
+struck - because five identical discs in a line is its own UI read.
+
+FIVE PASSES, ONE CHANGE JUDGED AT A TIME, EVERY ONE FOUND BY LOOKING:
+  1 -> 2  THE PRESS FACED THE CAMERA. I quoted the Drillmaster's foreshortening
+          lesson in my own docstring and then committed it rotated 90 degrees:
+          jaws opening at the front camera collapsed the whole mechanic into a
+          black slab that read as a stove door. Only the side view worked.
+  2       THE DARK SLOT RENDERED AS BRASS. metal 0.30 / rough 0.42 - my "oiled
+          iron" argument - put a warm wash on every up-facing dark face: cap,
+          press arms, boot tops, strongbox lid. Now 0.10 / 0.62, and KEPT is
+          carried by value instead of by a mirror. This change worked.
+  2 -> 3  BROADSIDE WAS NOT ENOUGH. Worn across the chest the frame's three
+          members read as three planks laid over a man - press and body shared
+          the same pixels so neither had an outline. Moved off his right and
+          down, scaled 0.80, mouth opening into clear air. The punch was
+          DELETED: it never once read as a stamp iron in any view.
+  3 -> 4  THE GAUGE OUT-SHOUTED THE MECHANIC. A bar sticking into clear air
+          with four evenly spaced pale discs read as a row of coins - a UI read
+          by another road - and its blanks were bigger and brighter than the
+          blank in the press jaws. Now a board raked down the thigh, discs
+          smaller than the press blank, uneven spacing.
+  4 -> 5  TWO FAULTS THE PICTURES GAVE ME AND NO NUMBER DID. (i) The empty
+          socket - the half of the gauge that says a pack is already shut - was
+          A DARK RECESS IN A DARK BOARD, invisible by construction in all six
+          frames; it is now a pale rim with a dark plug. (ii) THE BEADLE'S
+          FAULT CAME BACK IN A NEW COSTUME: the strongbox stood only 0.135 m
+          proud of the back, so from behind the only readable thing was a pale
+          VERTICAL patch the same size, value and place as the face panel on
+          the front. Box enlarged to stand 0.24 m proud, and the lead turned
+          into a HORIZONTAL bar across the lid.
+
+*** MY OWN WORST FAULT THIS RUN, AND IT IS THE SAME FAMILY AS THE TEAM LEAD'S
+*** RESOLVER EATING ART'S DIVIDER RULES AT 10:58. ***
+My pass-5 edit script sliced on `    _close("backside")` - a marker THE DAUBER
+ALSO USES, and the Dauber comes first in the file. So `str.index` cut at the
+Dauber's marker, and the write produced TWO COPIES of the whole Sealer block.
+Python binds the LAST definition, so the render that came back was the stale
+copy and pass 5 silently did nothing - while the generator returned rc 0 and
+`verdict GREEN` on it. I found it because the picture did not change when I had
+changed the geometry: a number said green, a picture said nothing moved, and
+the picture was right. Repaired, then verified the way the 10:58 seat verified
+his: diffed the pre-Sealer region against `git show HEAD:` line by line -
+0 lines differing, 0 HEAD lines absent from the file anywhere - and re-rendered
+from the repaired file. THE LESSON IS GENERAL: do not slice a file on a marker
+string that another body in the same file also writes.
+
+FIT PROOF - RENDERED ON THE POSED KayKit KNIGHT AND LOOKED AT.
+`renders/art/minibosses/sealer/{front,side,three_quarter,hero_front,hero_side,
+hero_back}.png`. Register `_fit_fit_sealer_register.json`: verdict GREEN,
+creature 2.42 against hero 2.45, ratio 0.99, 3 of 3 proving views, 0 blind
+views, errors [], frame_edge 0 on all four borders of all three hero views.
+My own blank-and-border assertion over all SIX pngs - run separately, because
+minibossgen's own gate only fires on the --sheet path and reported `files: 0`
+this run: front 246059 opaque px, three_quarter 199646, side 198230,
+hero_front 79442, hero_side 68568, hero_back 79888; border 0 on every one;
+0 blanks, 0 clips, verdict GREEN.
+FOOTPRINT 1.64 m span, 2.42 m tall, 4 merged meshes, 1284 faces. CORRIDOR-SAFE
+(margin 9.364 m) and UNDER-LID (clear 4.08 m). NOT room-locked.
+
+WHAT I CAN STILL SEE WRONG AND NO INSTRUMENT HERE REPORTS:
+  - THE PRESS LOOKS UNSUPPORTED. Its carrying strap is hidden behind the arm in
+    the front and three-quarter views, so the frame appears to hang in air
+    beside him, held only by the hand on the knob.
+  - THE BOARD OVERHANGS THE THIGH. Its two lowest blanks stand off the leg into
+    open air on the three-quarter view.
+  - THE STRONGBOX IS NOT A BOX FROM DIRECTLY BEHIND. It breaks the outline in
+    three-quarter but from square-on behind it still reads as a flat panel with
+    a pale bar on it. Better than pass 4; not finished.
+  - THE PRESS ARM READS AS A PLANK, not an arm - one thick straight tube with a
+    sphere on the end.
+  - A FAINT WARM CAST SURVIVES on the cap top and boot soles even at metal 0.10.
+  - The figure is slimmer than the chunky KayKit hero beside it. That is the
+    whole file's register gap, flagged on 16 Nov in `_proportion.png`, not new
+    here and not fixed here.
+
+STALE INPUT, STATED RATHER THAN HIDDEN: this worktree's `scripts/floorgen.gd`
+still carries lid 7.0 / underside 6.5 against origin/main's 10.0 / 9.5, and the
+report's own provenance arm says so in `errors`. The UNDER-LID verdict was
+therefore taken against the LOWER, STRICTER ceiling - conservative, not wrong.
+
+FOR THE GAME BUILD LANE (art does not wire):
+  - `scripts/bestiary.gd` - add `sealer` with `model` =
+    `assets/monsters/minibosses/sealer.glb` and NO `anims` entry; it is static.
+    Use h 2.42.
+  - `scripts/dungeon_hd.gd` ~655 - the theme -> miniboss map: `treasury`.
+  - `assets/monsters/minibosses/sealer.glb` has no `.glb.import` sibling until
+    a Godot run generates one, the same open item as `snarer_chibi.glb`.
+  - The mechanic itself is a design note, not a request: nothing in the engine
+    reads a pack-seal today.
+
+NO GODOT RUN THIS FIRING, SO NO LOCK WAS CLAIMED OR TOUCHED. Scratch logs in
+`renders/art/minibosses/_to_delete/sealer_nov20/`.
+
 ## ART 2026-11-19 19:5x CT - SYSTEM 7, ARMOUR VARIETY: FIVE PACK SHELLS FITTED TO THE HERO BODY, AND THE FIRST FIT INSTRUMENT I WROTE WAS BLIND
 
 THE ONE LINE THE 18:5x ROW ASKED FOR, FIRST. **This session can read
@@ -12933,6 +13052,72 @@ after the discriminator ran and a green on other bytes is not a green on these: 
 **3ca9d699** - parse rc 0 zero ERROR, L14_TEST OK (24 checks) with 0 guard arms fired,
 TWITCH_PARSE OK (8 checks), COMMANDS_DOC OK wrote 31 with docs/COMMANDS.md edff7faa either side,
 data/commands.json dbeb5517.
+
+## B83 - ART TICKED A 37th MINIBOSS BODY THIS HOUR AND MY PUBLISHED 36 IS STILL RIGHT. I MEASURED
+## ALL THREE AUTHORITIES INSTEAD OF TRUSTING ANY ONE OF THEM.
+Nothing was owed to this lane (team lead, 10:58: "nothing is owed - stand down in writing, or keep
+auditing your own shipped chatcmd.gd guard family"). I kept auditing. The 10:58 plan ticks art's
+`dauber` as the 37th distinct miniboss body. `miniboss`.what and `miniboss`.short both publish
+"The 36 elites". That is a number MY file publishes about another lane's content, so I went and
+counted, and the count stands:
+  - content `data/lore_lines.json` `miniboss_feed.by_key`: **36 rows**, no `dauber`.
+  - engine `Delve.MB_NAME` in `scripts/delve.gd` (merged): **36 keys**, no `dauber`.
+  - art `renders/art/minibosses/_report.json`: carries `dauber` - built, and NOT wired into either.
+So the published 36 is true about what the dungeon actually stands up, and art's roster running one
+ahead is not a lie in my doc. **MINIBOSS COUNT gates published-vs-FEED, not published-vs-ART**, and
+that is the right authority: a body nobody spawns is not an elite that holds a chamber.
+THE CLOSURE ARGUMENT, CASE BY CASE, because "it is fine today" is not an answer:
+  (1) MB_NAME **and** a feed row gain `dauber` -> feed 37 vs published 36 -> `MINIBOSS COUNT` fires.
+  (2) MB_NAME only -> an MB_NAME key no feed row carries -> `MINIBOSS GHOST` fires.
+  (3) a feed row only -> feed 37 vs published 36 -> `MINIBOSS COUNT` **and** `MINIBOSS UNNAMED`.
+  (4) neither, the body sits unwired -> nothing fires, and nothing should. That is today.
+The published count cannot go stale in any direction without an arm firing.
+WHAT I PROVED WITH RED ARMS AND WHAT I ONLY READ, SAID APART: cases (2) and (3) need
+`scripts/delve.gd` or `data/lore_lines.json` - other lanes' files, which I do not edit, so they are
+READ IN THE CODE AND NOT TRIGGERED. I say that rather than imply I ran them. Case (1)'s comparison
+is the one my own file can move, and I moved it three ways, each isolating exactly ONE arm:
+  A  what+short -> "The 37 elites"      -> L14_TEST FAIL 3, 1 fired: ["MINIBOSS COUNT"]   (37 vs 36)
+  B  short only -> "The 37 elites"      -> L14_TEST FAIL 1, 1 fired: ["MINIBOSS FIELDS"]  (what 36,
+     short 37; COUNT stays silent because it reads `what`, which was still right - that is how I
+     know FIELDS is load-bearing on its own and not riding COUNT)
+  C  "36 elites" -> "36 wardens" both   -> L14_TEST FAIL 3, 1 fired: ["MINIBOSS ANCHOR"]
+data/commands.json restored byte-identical after each (dbeb5517, match=True), green on re-run.
+
+TWO WHOLE-FAMILY AUDITS CAME BACK CLEAN. Recorded so nobody spends an hour re-running them:
+  - **TAG vs SHOUT, 91/91 AGREE.** Every arm's appended tag is byte-identical to the tag inside its
+    own `push_error` AND its `printerr` (format patterns normalised). 0 disagreements, 0 arms
+    missing a shout. The harness reading (`guard_faults()`) and the log reading can never name
+    different faults. This is the axis B82 left open: B82 made the TAGS distinct, not the words.
+  - **182 FORMAT STRINGS, 0 ARITY FAULTS.** Placeholder count vs `%` argument arity across all 91
+    arms x 2 shouts, 0 non-literal format strings. A dormant `%` mismatch garbles the one
+    diagnostic an operator ever sees - the hour a guard finally fires. There are none.
+
+THE ONE REAL DEFECT I FOUND IS A COMMENT IN MY OWN FILE, AND IT COST ME A MEASUREMENT.
+B40's block above the PRICE loop still says: "WHAT I AM STILL NOT CLAIMING: `wear`.cost publishes a
+RANGE (30-420)". Both halves are stale. `wear`.cost publishes **30-520** now, and the range IS
+claimed - `WEAR SPAN LOW` and `WEAR SPAN HIGH` read the cheapest and dearest accessory/cosmetic row
+out of data/items.json and check both ends. I went looking for an unguarded number because that
+comment sent me, which is the measured cost of leaving it. Corrected in B82's convention: B40's
+words are left standing and a dated note under them says what changed, so no earlier write-up goes
+stale. Comment bytes only - no arm, no tag, no behaviour touched.
+B40's WALK ITSELF STILL HOLDS AT 31 COMMANDS, and I re-did it rather than assume: every digit
+published in every `what`, `short`, `cost`, `args` and `example` across all 31 (the set was 26 when
+B40 wrote that line) - forge 60/160/420/1100, armoury 50/150/400/1000, brew 35 and 40-480, oil 12,
+wear 30-520, dye 25, reroll 120, respec 200, look 10, miniboss 36 - and every one sits under an
+existing arm. **No published number in this file is unwatched.**
+
+BATTERY ON THE EXACT COMMITTED BYTES, chatcmd.gd **f5de3da9**: parse `--quit-after 300` rc 0 with
+ZERO ERROR lines; L14_TEST OK (24 checks), 0 guard arms fired; TWITCH_PARSE OK (8 checks);
+COMMANDS_DOC OK wrote 31 commands with docs/COMMANDS.md edff7faa before and after - a true no-op;
+`_b2_ask.gd` absent, no `.b2_*` logs. The L14 segment carries one `ERROR: 2 resources still in use
+at exit` - I CHECKED THE BASELINE LOG RATHER THAN ASSUMING IT WAS MINE: the same line is in the
+pre-edit run, so it is pre-existing and a comment-only change could not have caused it.
+TRACKED STATE: data/commands.json dbeb5517 and docs/COMMANDS.md edff7faa UNCHANGED (a comment is
+not published). scripts/chatcmd.gd 3ca9d699 -> f5de3da9. Overwrite went through the Blender bridge
+first try per the 08:58 ruling. Scratch lived outside the repo and in the VM's own tmp; no
+_to_delete/ pile this hour.
+NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched, reply contract unchanged.
+No Twitch test this run, 0 bits, no account used.
 ================================================================================
 THE 10:34 CT HOUR, 20 NOV 2026 - ART LANE. THE DAUBER (37th miniboss), AND THE
 LICENCE GAP THE TEAM LEAD HANDED BACK.
@@ -13032,3 +13217,25 @@ goes red on provenance by design. The Dauber's verdict is conservative either wa
 older than main and the gate is right to say so. floorgen.gd is not mine to move.
 
 NEEDED FROM MR. E: nothing.
+
+## D-cycle - S64 THE MANA POOL: casting spends, the pool refills out of combat, 2026-11-20 11:08-11:2x CT (game build)
+Item: TAKE THIS NEXT 10:58 CT row 1 - the supervisor's 10:16 mana ruling (owner game build, casting SPENDS, HUD draws the bar the hour the pool exists).
+- roster.gd: ONE pool, ONE gate. `MANA_ON` (revert switch), `MANA_BASE 30` + `MANA_PER_MOD 6` x the class's primary-stat modifier, `MANA_COST 6` per spell (any spell), `MANA_REGEN 5`/s OUT OF COMBAT ONLY. `uses_mana(h)` = CASTERS + anyone with a mending power (the paladin). `mana_max / mana_of / spend_mana / regen_mana`. Every hero publishes `h["mana"]`, `h["mana_max"]`, `h["mana_regen"]` (0/0/0 for non-casters, who are never gated).
+- delve.gd: the attack cast at the `if caster:` site now reads `if caster and roster.spend_mana(h)`; a dry caster takes the melee swing (`1H_Melee_Attack_Chop`) everyone else uses. The mender's mending is gated the same way - a dry mender holds it. `_process` refills every living delver's pool whenever `state != "fight"`. Counters `mana_casts` / `mana_dry_swings` for the gate test.
+- WHERE THE SPEND LIVES, SAID PLAINLY: the ruling says "make cast() spend". `Spells.cast` is a STATIC visual/sound call shared with monsters (monster.gd), townsfolk and raids, none of which have a pool - so the spend sits at the two DELVER call sites in delve.gd, not inside `Spells.cast`. raids.gd (town raid casting) is NOT gated this hour.
+- Verdicts: parse --quit-after 300 rc 0, zero ERROR lines. `S64_MANA OK mage max=48 casts_before_dry=8 cost=6 regen=5/s []`. RED ARM (`-- red`, demands free spells): `S64_MANA FAIL ... ["mage cast 8 before dry, want 100"]` rc 1, as designed. LIVE PATH `tools/_s64_delve_mana.gd`: `S64_DELVE_MANA OK paid_casts=11 dry_swings=0 mage_max=48 mage_low=30.0 refilled_out_of_combat=true frames=7201` (mage 48 -> 30 in the floor-1 fight, back to 48/48 in search). `TWITCH_PARSE OK (8 checks)`. `OFFFLOOR_VERDICT OK 0 of 2060`, MON_INPROP 0 of 316. `TOWNWALK ... in_solid=0/18986 PASS`. `DELVE_TEST OK ran 9001 frames, floor reached 2`.
+- NOT PROVEN LIVE: dry_swings was 0 in 120 s - at this pace a 48 pool outlasts a floor-1/2 fight. The dry path is proven at unit level only. Balance (30/6/6/5) is a first number, cheap to turn.
+- NO PICTURE: the pool is a number until the HUD draws the bar (HUD's row, the hour this lands). Nothing on screen changed except that a dry caster now swings.
+- No twitch test, 0 bits, no account used.
+## C-142 (20 Nov 2026 11:3x CST) - THE DAUBER'S LINES (37th miniboss, Wetwall)
+- ITEM: TAKE THIS NEXT (10:58 block) row 3, CONTENT: keep producing. Measured: assets/monsters/minibosses/dauber.glb and its CANON/BUILDERS rows are on main (merged), by_key held 36 keys and no dauber. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused; "Wetwall" used in two fall lines per art's tuple). Lines state the mechanic in plain words: a wet course goes up on each hit, breaks to any hand while wet, sets to nothing you carry; the hod counts the courses left. Worn mason, fresh lime. New key: miniboss_feed._note_c142 (expected zero-hit).
+- VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (subset-compared against pre-edit copy), file round-trips byte-identical at indent 2, 17 new lines unique against all existing feed lines, ASCII only.
+- CODE WIRING: none new - miniboss_for will draw the body once bestiary.gd carries dauber (game build, per art's row).
+Next content: C-143.
+
+## U-STANDDOWN 2026-11-20 11:55 CST - HUD firing 11:52: STOOD DOWN, chat bot holds the Godot lock
+Read R's WORKING docs/RUN_LOCK.txt at 11:53 CST (Windows clock 11:53:07-06:00). Last line: `RUNNING 2026-11-20T11:51:00-06:00 (chat bot: claim 11:51:00, cap 12:16, expected finish 12:07; B83 miniboss count closure audit)`, no IDLE from the chat bot after it. tasklist Godot* empty, but a RUNNING with no same-lane IDLE holds under the yield rule, so I did not claim over it.
+Item per the TAKE THIS NEXT block (10:58 CT, 20 Nov): the HUD draws the mana bar now that the pool exists (game build S64, roster.gd mana/mana_max/mana_regen, IDLE 11:17). It is item (3) of the supervisor's mana ruling. Then rarity-hue half of System 2, then L74.
+Finding: this worktree (hud-ui) has NOT merged main, so scripts/roster.gd here has no `mana` field yet. Next firing: merge origin/laptop (keep both sides, strip only marker lines), confirm the roster mana accessors, then build the bar in hud_dock.gd (my file) and leave party_frames.gd alone if the frames live there (not mine; I will say so and ask the owner to expose state).
+Next firing (12:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap, headless parse first, windowed render at 100/125/150, look at it, release by :07.
+Nothing launched, no Godot run, no files of mine edited besides this note.

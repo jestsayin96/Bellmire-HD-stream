@@ -755,6 +755,14 @@ def main():
             reg = {}
     reg.setdefault("variants", {})
     reg["floor_geom"] = _fit_terms.geom
+    # PROVENANCE, 07:5x CT 20 Nov - see floorgeom's own header. The geom block
+    # now names the tree, the file sha, the lid line and whether it still
+    # agrees with origin/main term by term; that stamp is lifted to the top of
+    # the register so nobody has to dig for it, and a drifted read is FLAGGED
+    # rather than published clean.
+    _p = (_fit_terms.geom or {}).get("provenance") or {}
+    reg["floorgeom_stale"] = bool(_p.get("drift")) or not _p.get("verified")
+    reg["floorgeom_stamp"] = FG.stamp(_fit_terms.geom)
 
     # --reverdict: RE-ANSWER THE DUNGEON QUESTION FOR THE RECORDS ALREADY
     # MEASURED, WITHOUT RE-RENDERING ANYTHING. The lid is moving (7.0 -> 10.0,

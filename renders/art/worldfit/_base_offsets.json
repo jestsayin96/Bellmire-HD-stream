@@ -1,0 +1,43 @@
+{
+ "checks": {
+  "border_clear": true,
+  "border_hot_frac": 1.0,
+  "lum_max": 0.7843,
+  "lum_min": 0.1412,
+  "nonblank": true,
+  "props_border_frac": 0.0,
+  "props_opaque_frac": 0.068,
+  "props_visible": true
+ },
+ "placed": [
+  {
+   "base_dz_m": -2.2464,
+   "below_floor": true,
+   "dir": "assets/props",
+   "file": "Banner_1_Cloth.gltf",
+   "top_m": -0.0
+  },
+  {
+   "base_dz_m": -0.9991,
+   "below_floor": true,
+   "dir": "assets/dungeon",
+   "file": "Fence_Straight_Modular.glb",
+   "top_m": 0.2948
+  },
+  {
+   "base_dz_m": 0.8842,
+   "below_floor": false,
+   "dir": "assets/props",
+   "file": "Workbench_Drawers.gltf",
+   "top_m": 1.1265
+  },
+  {
+   "base_dz_m": 0.0034,
+   "below_floor": false,
+   "dir": "assets/props",
+   "file": "Barrel.gltf",
+   "top_m": 0.9014
+  }
+ ],
+ "png": "renders/art/worldfit/_base_offsets.png"
+}

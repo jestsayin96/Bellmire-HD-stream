@@ -38,8 +38,12 @@ arithmetically raises instead of quietly gating against 6.50 or 11.0 forever
 after someone renames the variable.  A gate that cannot see the lid must not
 report a creature as under it.
 """
+import hashlib
 import os
 import re
+import shutil
+import subprocess
+import tempfile
 
 GD_REL = os.path.join("scripts", "floorgen.gd")
 
@@ -72,16 +76,19 @@ def _lit(text):
     return float(t) if re.fullmatch(r"-?[0-9]*\.?[0-9]+", t) else None
 
 
-def read(repo):
+def read(repo, _ref_depth=0):
     """Parse scripts/floorgen.gd.  Never raises; reports what it could not see."""
     path = os.path.join(repo, GD_REL)
     out = {
         "gd": GD_REL, "cell_m": None, "wall_in_m": None, "hall_w": None,
         "corridor_clear_m": None, "lid_y_m": None, "lid_thick_m": None,
         "lid_underside_m": None, "at": {}, "errors": [],
+        "provenance": None,
     }
     if not os.path.isfile(path):
         out["errors"].append("floorgeom: %s not found" % path)
+        if _ref_depth == 0:
+            out["provenance"] = _provenance(repo, path, out)
         return out
     with open(path, encoding="utf-8", errors="replace") as f:
         lines = f.read().splitlines()
@@ -155,6 +162,8 @@ def read(repo):
         out["corridor_clear_m"] = round(out["hall_w"] * out["cell_m"] - 2 * out["wall_in_m"], 4)
     if out["lid_y_m"] is not None and out["lid_thick_m"] is not None:
         out["lid_underside_m"] = round(out["lid_y_m"] - out["lid_thick_m"] / 2.0, 4)
+    if _ref_depth == 0:
+        out["provenance"] = _provenance(repo, path, out)
     return out
 
 
@@ -186,3 +195,167 @@ def verdict(geom, span_m, height_m):
         v["lid_clear_m"] = round(lid - height_m, 3)
     v["fits"] = bool(v["corridor"] == "CORRIDOR-SAFE" and v["lid"] == "UNDER-LID")
     return v, errs
+
+
+# ---------------------------------------------------------------------------
+# PROVENANCE.  Added 2026-11-20 07:5x CT, and WHY.
+#
+# `_leech_span.json` published `lid_y_m 7.0 / lid_underside_m 6.5` with an
+# `errors: []` beside it.  Both were TRUE OF THE TREE IT READ (W5, pre-S56) and
+# FALSE OF THE DUNGEON THAT SHIPS (origin/main carries 10.0).  The register did
+# not have that fault because a human wrote `read_from_tree` into it by hand -
+# so the correct number was in the file a reader would quote LEAST, and the
+# quotable one carried no tree at all.  The team lead found it, 06:58 CT row 2.
+#
+# The fix is not a comment.  A floorgeom number now carries the tree it came
+# out of, the sha of the file it was parsed from, the lid line verbatim, and a
+# TERM-BY-TERM comparison against `origin/main`'s floorgen.gd - and a publisher
+# calls `require_current()`, which REFUSES to write the number out at all when
+# the two disagree.  Refuse or flag, never quietly publish.
+#
+# Why terms and not a file sha: any unrelated edit to floorgen.gd changes the
+# sha, and a gate that cries wolf gets switched off.  The sha is recorded for
+# the record; the DRIFT VERDICT is computed off the seven numbers this file
+# actually derives, which are the only things a floorgeom consumer can be
+# wrong about.
+#
+# GOES RED ON EMPTY, like the rest of this file: a comparison that ran over
+# zero terms is a drift entry, not a silent agreement, and a tree whose
+# `origin/main` cannot be read is UNVERIFIED - which `require_current` also
+# refuses, because "I could not check" is not "it agrees".
+# ---------------------------------------------------------------------------
+
+REF = "origin/main"
+TERMS = ("cell_m", "wall_in_m", "hall_w", "corridor_clear_m",
+         "lid_y_m", "lid_thick_m", "lid_underside_m")
+
+
+class StaleTreeError(RuntimeError):
+    """A floorgeom number was about to be published out of a tree that does not
+    agree with origin/main, or out of a tree nobody could check."""
+
+
+def _git(repo, *args):
+    """(ok, text).  Never raises; a dead git is UNVERIFIED, never a pass."""
+    try:
+        p = subprocess.run(["git", "-C", repo] + list(args), capture_output=True,
+                           timeout=60)
+    except Exception as e:                                  # noqa: BLE001
+        return False, "git failed to run: %r" % (e,)
+    if p.returncode != 0:
+        return False, (p.stderr or b"").decode("utf-8", "replace").strip()
+    return True, (p.stdout or b"").decode("utf-8", "replace")
+
+
+def drift_vs(geom, ref_geom):
+    """Term-by-term comparison of two parsed trees.  Returns a list of lines.
+
+    EMPTY MEANS AGREED, and it can only be empty if terms were actually
+    compared: a pair with nothing comparable yields a drift line saying so,
+    because this lane has shipped a metric computed over zero pairs before.
+    """
+    out, n = [], 0
+    for k in TERMS:
+        a, b = geom.get(k), ref_geom.get(k)
+        if a is None or b is None:
+            out.append("%s: unreadable in %s (tree %r, %s %r)"
+                       % (k, "tree" if a is None else REF, a, REF, b))
+            continue
+        n += 1
+        if a != b:
+            out.append("%s: tree %s, %s %s" % (k, a, REF, b))
+    if n == 0:
+        out.append("provenance: compared 0 terms - this is NOT agreement")
+    return out
+
+
+def _provenance(repo, path, out):
+    """Which tree, which file, which commit - and does it still match the ref."""
+    p = {
+        "repo": os.path.abspath(repo),
+        "worktree": os.path.basename(os.path.abspath(repo)) or None,
+        "gd": GD_REL.replace("\\", "/"),
+        "gd_sha256_8": None,
+        "gd_lid_line": None,
+        "branch": None, "head": None,
+        "ref": REF, "ref_commit": None, "ref_gd_sha256_8": None,
+        "verified": False, "matches_ref": None, "drift": [], "notes": [],
+    }
+    if os.path.isfile(path):
+        with open(path, "rb") as f:
+            raw = f.read()
+        p["gd_sha256_8"] = hashlib.sha256(raw).hexdigest()[:8]
+        loc = out["at"].get("lid_y_m")
+        if loc:
+            try:
+                n = int(loc.rsplit(":", 1)[1])
+                p["gd_lid_line"] = raw.decode("utf-8", "replace").splitlines()[n - 1].strip()
+            except Exception:                                # noqa: BLE001
+                p["notes"].append("provenance: could not re-read the lid line at %s" % loc)
+    else:
+        p["notes"].append("provenance: %s not found - nothing to stamp" % path)
+        return p
+
+    ok, br = _git(repo, "rev-parse", "--abbrev-ref", "HEAD")
+    if ok:
+        p["branch"] = br.strip()
+    ok, hd = _git(repo, "rev-parse", "HEAD")
+    if ok and re.fullmatch(r"[0-9a-f]{40}", hd.strip()):
+        p["head"] = hd.strip()
+    ok, rc = _git(repo, "rev-parse", REF)
+    if ok and re.fullmatch(r"[0-9a-f]{40}", rc.strip()):
+        p["ref_commit"] = rc.strip()
+
+    ok, blob = _git(repo, "--no-pager", "show", "%s:%s" % (REF, GD_REL.replace("\\", "/")))
+    if not ok:
+        p["notes"].append("provenance UNVERIFIED: could not read %s:%s out of %s (%s)"
+                          % (REF, GD_REL.replace("\\", "/"), p["repo"], blob[:200]))
+        return p
+    p["ref_gd_sha256_8"] = hashlib.sha256(blob.encode("utf-8")).hexdigest()[:8]
+
+    d = tempfile.mkdtemp(prefix="floorgeom_ref_")
+    try:
+        rp = os.path.join(d, GD_REL)
+        os.makedirs(os.path.dirname(rp))
+        with open(rp, "w", encoding="utf-8", newline="") as f:
+            f.write(blob)
+        ref_geom = read(d, _ref_depth=1)
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+    if ref_geom["errors"]:
+        p["notes"].append("provenance: %s's own floorgen.gd did not parse clean: %s"
+                          % (REF, "; ".join(ref_geom["errors"])))
+    p["verified"] = True
+    p["drift"] = drift_vs(out, ref_geom)
+    p["matches_ref"] = not p["drift"]
+    return p
+
+
+def stamp(geom):
+    """One line a summary or a log can carry without losing the tree."""
+    p = geom.get("provenance") or {}
+    state = ("AGREES WITH " + REF) if p.get("matches_ref") else (
+        "DRIFTED FROM " + REF if p.get("verified") else "UNVERIFIED")
+    return ("floorgeom %s: tree %s (branch %s) %s sha %s vs %s sha %s%s"
+            % (state, p.get("repo"), p.get("branch"), p.get("gd"),
+               p.get("gd_sha256_8"), p.get("ref_commit"), p.get("ref_gd_sha256_8"),
+               ("  DRIFT: " + "; ".join(p["drift"])) if p.get("drift") else ""))
+
+
+def require_current(geom, allow_stale=False, allow_unverified=False):
+    """*** CALL THIS BEFORE PUBLISHING ANY FLOORGEOM NUMBER. ***
+
+    Raises StaleTreeError when the floorgen.gd that was parsed disagrees with
+    origin/main's, or when nobody could check.  Pass allow_stale=True only to
+    FLAG rather than refuse - and then the flag must be written into whatever
+    you publish, which is why this returns the provenance block.
+    """
+    p = geom.get("provenance") or {}
+    if p.get("drift") and not allow_stale:
+        raise StaleTreeError(
+            "REFUSING to publish a floorgeom number: " + stamp(geom)
+            + "  - read the tree that ships, or pass allow_stale and say so in the file.")
+    if not p.get("verified") and not (allow_unverified or allow_stale):
+        raise StaleTreeError("REFUSING to publish an UNVERIFIED floorgeom number: "
+                             + stamp(geom) + "  notes: " + "; ".join(p.get("notes") or []))
+    return p

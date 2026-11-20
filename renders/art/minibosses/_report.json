@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "d6c4f7d6796640957f4ba13f107fe4dd18ad1c2c",
+   "head": "5e9cc1f4bbec4cd3decf6906ddc849e677e287c9",
    "ref": "origin/main",
-   "ref_commit": "780175f32fb1e1a3f9dde189e19ab43df62ba4e2",
+   "ref_commit": "7b8b6f31bd9a7b95162d03fd58f496fb98351b0e",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2411,13 +2411,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "scraper": {
+   "title": "Scourstone",
+   "theme": "crypt",
+   "idea": "IT RUBS OUT WHAT YOU HAVE JUST DONE - it does not block a blow, it does not heal and it takes nobody away. It works, and when the round is over it draws the stone down the slab and THE LAST THING THE PARTY DID IS UNDONE: the blow that landed comes off, the wound that was closed opens again, the guard that was set is gone. Nothing is kept until something else has been done after it, so the party must get its real work in early and spend its last action on something it is willing to lose. Out-damaging it does not work, because the damage is the thing it takes away - the answer is the STONE PLINTH the slab stands on, and the FIVE CUTS on each of its four faces are the gauge: one cut is one more wipe it has in it, and you can count them from any side of the room",
+   "wear": 0.4,
+   "feed_line": "Someone is rubbing a name off the wall.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1266,
+   "size": [
+    1.9,
+    2.2,
+    2.55
+   ],
+   "footprint_span": 2.2,
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.796,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9344223867106207,
+    "ortho": 3.393771171569824,
+    "clip": [
+     7.720130443572998,
+     19.7822265625
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 780175f32fb1e1a3f9dde189e19ab43df62ba4e2 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 7b8b6f31bd9a7b95162d03fd58f496fb98351b0e sha bc3a603f",
  "blank_check": {
-  "files": 120,
+  "files": 123,
   "failures": []
  }
 }

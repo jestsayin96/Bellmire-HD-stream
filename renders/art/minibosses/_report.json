@@ -1,6 +1,24 @@
 {
  "ok": true,
- "corridor_clear_m": 11.0,
+ "floor_geom": {
+  "gd": "scripts\\floorgen.gd",
+  "cell_m": 4.0,
+  "wall_in_m": 0.5,
+  "hall_w": 3,
+  "corridor_clear_m": 11.0,
+  "lid_y_m": 7.0,
+  "lid_thick_m": 1.0,
+  "lid_underside_m": 6.5,
+  "at": {
+   "cell_m": "scripts\\floorgen.gd:21",
+   "wall_in_m": "scripts\\floorgen.gd:1698",
+   "hall_w": "scripts\\floorgen.gd:848",
+   "lid_y_m": "scripts\\floorgen.gd:1383",
+   "lid_thick_m": "scripts\\floorgen.gd:1378"
+  },
+  "errors": []
+ },
+ "red_arm": null,
  "minibosses": {
   "snarer": {
    "title": "The Snarer",
@@ -32,7 +50,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.75,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "drillmaster": {
    "title": "The Drillmaster",
@@ -64,7 +96,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.2,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.3,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "scrapwright": {
    "title": "The Scrapwright",
@@ -96,7 +142,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.0,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.24,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.5,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "gaoler": {
    "title": "The Gaoler",
@@ -128,7 +188,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "snuffer": {
    "title": "The Snuffer",
@@ -160,7 +234,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.49,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sexton": {
    "title": "The Sexton",
@@ -193,7 +281,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.8,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "porter": {
    "title": "The Porter",
@@ -225,7 +327,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.48,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tallyman": {
    "title": "The Tallyman",
@@ -257,7 +373,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.11,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "cook": {
    "title": "The Cook",
@@ -289,7 +419,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sluicekeeper": {
    "title": "The Sluicekeeper",
@@ -321,7 +465,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sower": {
    "title": "The Sower",
@@ -354,7 +512,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "stoker": {
    "title": "The Stoker",
@@ -387,7 +559,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.89,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "bellman": {
    "title": "The Bellman",
@@ -419,7 +605,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.7,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.8,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "boiler": {
    "title": "The Boiler",
@@ -451,7 +651,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.1,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tallyman_chibi": {
    "title": "The Tallyman (chibi)",
@@ -483,7 +697,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "cook_chibi": {
    "title": "The Cook (chibi)",
@@ -515,7 +743,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.9,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sluicekeeper_chibi": {
    "title": "The Sluicekeeper (chibi)",
@@ -547,7 +789,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sower_chibi": {
    "title": "The Sower (chibi)",
@@ -579,7 +835,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "boiler_chibi": {
    "title": "The Boiler (chibi)",
@@ -611,7 +881,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "snarer_chibi": {
    "title": "The Snarer (chibi)",
@@ -643,7 +927,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "gaoler_chibi": {
    "title": "The Gaoler (chibi)",
@@ -675,7 +973,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "porter_chibi": {
    "title": "The Porter (chibi)",
@@ -707,7 +1019,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sexton_chibi": {
    "title": "The Sexton (chibi)",
@@ -739,7 +1065,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.93,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "stoker_chibi": {
    "title": "The Stoker (chibi)",
@@ -771,7 +1111,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.12,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "snuffer_chibi": {
    "title": "The Snuffer (chibi)",
@@ -803,7 +1157,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.65,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "jointer": {
    "title": "The Jointer",
@@ -835,7 +1203,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.82,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "quartermaster": {
    "title": "The Quartermaster",
@@ -868,7 +1250,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.38,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "loader": {
    "title": "The Loader",
@@ -901,7 +1297,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.65,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.85,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "hurdleman": {
    "title": "The Hurdleman",
@@ -934,7 +1344,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.02,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tanner": {
    "title": "The Tanner",
@@ -967,7 +1391,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.75,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "reeve": {
    "title": "The Reeve",
@@ -1000,7 +1438,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 1.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.55,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tapster": {
    "title": "The Tapster",
@@ -1033,7 +1485,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.8,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.96,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.7,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "pressman": {
    "title": "The Pressman",
@@ -1066,7 +1532,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.85,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.39,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.65,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "strickler": {
    "title": "The Strickler",
@@ -1099,7 +1579,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.01,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "dyer": {
    "title": "The Dyer",
@@ -1132,7 +1626,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.72,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "greener": {
    "title": "The Greener",
@@ -1165,7 +1673,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.29,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "moulder": {
    "title": "The Moulder",
@@ -1198,7 +1720,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.9,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.64,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.6,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "ratcatcher": {
    "title": "The Ratcatcher",
@@ -1231,7 +1767,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.62,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.88,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "drover": {
    "title": "The Drover",
@@ -1264,7 +1814,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.44,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.41,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.06,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "paviser": {
    "title": "The Paviser",
@@ -1297,7 +1861,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.68,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.43,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.82,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "fenman": {
    "title": "The Fenman",
@@ -1330,7 +1908,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.52,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.52,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.98,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "comfitmaker": {
    "title": "The Comfitmaker",
@@ -1363,7 +1955,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.28,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.17,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.22,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "leech": {
    "title": "The Leech",
@@ -1396,7 +2002,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.32,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.18,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "beadle": {
    "title": "The Beadle",
@@ -1429,7 +2049,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.13,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.55,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "rammer": {
    "title": "The Rammer",
@@ -1462,7 +2096,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.97,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.75,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "fuller": {
    "title": "The Fuller",
@@ -1495,7 +2143,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.66,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.84,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "stackman": {
    "title": "The Stackman",
@@ -1528,7 +2190,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.84,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.65,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.66,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   }
  },
  "errors": [],

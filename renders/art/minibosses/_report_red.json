@@ -1,0 +1,2234 @@
+{
+ "ok": false,
+ "floor_geom": {
+  "gd": "scripts\\floorgen.gd",
+  "cell_m": 4.0,
+  "wall_in_m": 0.5,
+  "hall_w": 3,
+  "corridor_clear_m": 11.0,
+  "lid_y_m": 7.0,
+  "lid_thick_m": 1.0,
+  "lid_underside_m": 2.5,
+  "at": {
+   "cell_m": "scripts\\floorgen.gd:21",
+   "wall_in_m": "scripts\\floorgen.gd:1698",
+   "hall_w": "scripts\\floorgen.gd:848",
+   "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+   "lid_thick_m": "scripts\\floorgen.gd:1378"
+  },
+  "errors": []
+ },
+ "red_arm": "2.50",
+ "minibosses": {
+  "snarer": {
+   "title": "The Snarer",
+   "theme": "wood",
+   "idea": "IT HAS ALREADY SET THE ROOM - it drives you onto its own lines",
+   "wear": 0.55,
+   "feed_line": "The lines were here before you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1529,
+   "size": [
+    3.25,
+    1.29,
+    2.3
+   ],
+   "footprint_span": 3.25,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.091396232868839,
+    "ortho": 3.138418674468994,
+    "clip": [
+     7.942865371704102,
+     21.35800552368164
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.75,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "drillmaster": {
+   "title": "The Drillmaster",
+   "theme": "barracks",
+   "idea": "IT SUMMONS - it beats the muster and the garrison forms up",
+   "wear": 0.15,
+   "feed_line": "Someone is beating the muster.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1366,
+   "size": [
+    1.39,
+    0.71,
+    2.2
+   ],
+   "footprint_span": 1.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.347687566089279,
+    "ortho": 2.426368236541748,
+    "clip": [
+     5.84868860244751,
+     15.926436424255371
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.2,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.3,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "scrapwright": {
+   "title": "The Scrapwright",
+   "theme": "workshop",
+   "idea": "IT ARMOURS ITSELF - every plate knocked off is replaced from the floor",
+   "wear": 0.3,
+   "feed_line": "It is wearing the workshop.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 975,
+   "size": [
+    2.76,
+    2.03,
+    2.0
+   ],
+   "footprint_span": 2.76,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9847607575574417,
+    "ortho": 3.1297194957733154,
+    "clip": [
+     7.766417980194092,
+     20.32151222229004
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.0,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.24,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.5,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "gaoler": {
+   "title": "The Gaoler",
+   "theme": "prison",
+   "idea": "IT DRAGS - the hook takes one out of the line and reels them in",
+   "wear": 0.8,
+   "feed_line": "A chain is paying out in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1816,
+   "size": [
+    3.72,
+    2.37,
+    2.35
+   ],
+   "footprint_span": 3.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.498403492422347,
+    "ortho": 3.6511456966400146,
+    "clip": [
+     8.932880401611328,
+     24.024639129638672
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "snuffer": {
+   "title": "The Snuffer",
+   "theme": "shrine",
+   "idea": "IT TAKES THE LIGHT - it puts out the lamps one at a time",
+   "wear": 0.9,
+   "feed_line": "The nearest lamp has gone out.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1107,
+   "size": [
+    1.51,
+    1.2,
+    2.6
+   ],
+   "footprint_span": 1.51,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6183924585745597,
+    "ortho": 3.0667364597320557,
+    "clip": [
+     6.90521240234375,
+     17.56277084350586
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.49,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "sexton": {
+   "title": "The Sexton",
+   "theme": "crypt",
+   "idea": "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
+   "wear": 0.85,
+   "feed_line": "A spade is working somewhere in the dark.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1292,
+   "size": [
+    2.2,
+    1.48,
+    2.45
+   ],
+   "footprint_span": 2.2,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8054553623602727,
+    "ortho": 3.100536346435547,
+    "clip": [
+     7.450505256652832,
+     18.966768264770508
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.8,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "porter": {
+   "title": "The Porter",
+   "theme": "keep",
+   "idea": "IT BARS THE WAY - it drops a leaf across the door: no retreat, no help",
+   "wear": 0.45,
+   "feed_line": "A bar has dropped behind you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1094,
+   "size": [
+    3.52,
+    1.69,
+    2.3
+   ],
+   "footprint_span": 3.52,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.267138468910848,
+    "ortho": 2.6596944332122803,
+    "clip": [
+     8.12244987487793,
+     22.35848617553711
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.48,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "tallyman": {
+   "title": "The Tallyman",
+   "theme": "treasury",
+   "idea": "IT TAKES AND LEAVES - it lifts your gear, wears it and withdraws",
+   "wear": 0.2,
+   "feed_line": "Something is counting what you carry.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1722,
+   "size": [
+    1.89,
+    0.82,
+    2.15
+   ],
+   "footprint_span": 1.89,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4890037044673772,
+    "ortho": 2.436251401901245,
+    "clip": [
+     6.175800323486328,
+     16.859132766723633
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.11,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "cook": {
+   "title": "The Cook",
+   "theme": "mess",
+   "idea": "IT KEEPS THE PACK ALIVE - the pot heals the room; spill the pot",
+   "wear": 0.6,
+   "feed_line": "The pot is on.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1324,
+   "size": [
+    2.39,
+    0.87,
+    2.05
+   ],
+   "footprint_span": 2.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6348626120542995,
+    "ortho": 2.7088701725006104,
+    "clip": [
+     6.585079193115234,
+     17.807273864746094
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "sluicekeeper": {
+   "title": "The Sluicekeeper",
+   "theme": "flooded",
+   "idea": "IT RAISES THE WATER - it winds the sluice open a step at a time",
+   "wear": 0.95,
+   "feed_line": "The water is coming up.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1166,
+   "size": [
+    2.66,
+    1.09,
+    2.5
+   ],
+   "footprint_span": 2.66,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9040444387721582,
+    "ortho": 3.0861074924468994,
+    "clip": [
+     7.227842330932617,
+     19.791120529174805
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "sower": {
+   "title": "The Sower",
+   "theme": "grassland",
+   "idea": "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
+   "wear": 0.4,
+   "feed_line": "Something is broadcasting seed.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1029,
+   "size": [
+    3.5,
+    1.55,
+    2.25
+   ],
+   "footprint_span": 3.5,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.219354668010889,
+    "ortho": 3.0999042987823486,
+    "clip": [
+     8.096267700195312,
+     22.137840270996094
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "stoker": {
+   "title": "The Stoker",
+   "theme": "firepit",
+   "idea": "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
+   "wear": 0.7,
+   "feed_line": "The pit has been fed.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 864,
+   "size": [
+    3.11,
+    1.87,
+    2.4
+   ],
+   "footprint_span": 3.11,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1755388491262613,
+    "ortho": 3.2443673610687256,
+    "clip": [
+     8.316568374633789,
+     21.62593650817871
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.89,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "bellman": {
+   "title": "The Bellman",
+   "theme": "fogbound",
+   "idea": "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
+   "wear": 0.65,
+   "feed_line": "A bell, and not where you thought.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 842,
+   "size": [
+    2.72,
+    1.2,
+    2.7
+   ],
+   "footprint_span": 2.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.0081936886292464,
+    "ortho": 3.2157962322235107,
+    "clip": [
+     7.775533676147461,
+     20.267324447631836
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.7,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.28,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "boiler": {
+   "title": "The Boiler",
+   "theme": "confection",
+   "idea": "IT POURS AND IT SETS - the floor hardens around your feet",
+   "wear": 0.25,
+   "feed_line": "Something is pouring.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1426,
+   "size": [
+    3.65,
+    1.67,
+    2.1
+   ],
+   "footprint_span": 3.65,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.265581696195129,
+    "ortho": 2.9870188236236572,
+    "clip": [
+     8.32926082611084,
+     22.216764450073242
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.1,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "tallyman_chibi": {
+   "title": "The Tallyman (chibi)",
+   "theme": "treasury",
+   "idea": "IT TAKES AND LEAVES - rebuilt in the game's own register",
+   "wear": 0.2,
+   "feed_line": "Something is counting what you carry.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1558,
+   "size": [
+    1.72,
+    1.62,
+    2.15
+   ],
+   "footprint_span": 1.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5974385455971487,
+    "ortho": 2.491278886795044,
+    "clip": [
+     6.803935527801514,
+     17.50223159790039
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "cook_chibi": {
+   "title": "The Cook (chibi)",
+   "theme": "mess",
+   "idea": "IT KEEPS THE PACK ALIVE - rebuilt in the game's own register",
+   "wear": 0.6,
+   "feed_line": "The pot is on.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2539,
+   "size": [
+    2.1,
+    1.8,
+    2.05
+   ],
+   "footprint_span": 2.1,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7195794271663998,
+    "ortho": 2.770378351211548,
+    "clip": [
+     7.0628767013549805,
+     18.207914352416992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.9,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "sluicekeeper_chibi": {
+   "title": "The Sluicekeeper (chibi)",
+   "theme": "flooded",
+   "idea": "IT RAISES THE WATER - rebuilt in the game's own register",
+   "wear": 0.95,
+   "feed_line": "The water is coming up.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2623,
+   "size": [
+    3.5,
+    3.06,
+    2.5
+   ],
+   "footprint_span": 3.5,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.6386402503771986,
+    "ortho": 4.710099697113037,
+    "clip": [
+     9.725982666015625,
+     24.757610321044922
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "sower_chibi": {
+   "title": "The Sower (chibi)",
+   "theme": "grassland",
+   "idea": "IT PLANTS THE GROUND AGAINST YOU - rebuilt in the game's own register",
+   "wear": 0.4,
+   "feed_line": "Something is broadcasting seed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1994,
+   "size": [
+    3.29,
+    3.2,
+    2.4
+   ],
+   "footprint_span": 3.29,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.591340980018317,
+    "ortho": 4.930654048919678,
+    "clip": [
+     9.567414283752441,
+     24.284360885620117
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "boiler_chibi": {
+   "title": "The Boiler (chibi)",
+   "theme": "confection",
+   "idea": "IT POURS AND IT SETS - rebuilt in the game's own register",
+   "wear": 0.25,
+   "feed_line": "Something is pouring.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1940,
+   "size": [
+    3.65,
+    2.48,
+    2.45
+   ],
+   "footprint_span": 3.65,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.524911928057254,
+    "ortho": 3.8164608478546143,
+    "clip": [
+     9.237131118774414,
+     24.144655227661133
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "snarer_chibi": {
+   "title": "The Snarer (chibi)",
+   "theme": "wood",
+   "idea": "IT HAS ALREADY SET THE ROOM - rebuilt in the game's own register",
+   "wear": 0.55,
+   "feed_line": "The lines were here before you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2523,
+   "size": [
+    2.65,
+    3.73,
+    2.45
+   ],
+   "footprint_span": 3.73,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.595877177285081,
+    "ortho": 5.745333194732666,
+    "clip": [
+     9.898907661437988,
+     24.100637435913086
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "gaoler_chibi": {
+   "title": "The Gaoler (chibi)",
+   "theme": "prison",
+   "idea": "IT DRAGS - rebuilt in the game's own proportions",
+   "wear": 0.8,
+   "feed_line": "A chain is paying out in the dark.",
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2292,
+   "size": [
+    3.72,
+    2.59,
+    2.35
+   ],
+   "footprint_span": 3.72,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.552034125859247,
+    "ortho": 3.990356922149658,
+    "clip": [
+     9.216445922851562,
+     24.346511840820312
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "porter_chibi": {
+   "title": "The Porter (chibi)",
+   "theme": "keep",
+   "idea": "IT BARS THE WAY - rebuilt in the game's own register",
+   "wear": 0.45,
+   "feed_line": "A bar has dropped behind you.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1590,
+   "size": [
+    3.66,
+    2.64,
+    2.3
+   ],
+   "footprint_span": 3.66,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.533557969933739,
+    "ortho": 4.0670576095581055,
+    "clip": [
+     9.066532135009766,
+     23.957735061645508
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "sexton_chibi": {
+   "title": "The Sexton (chibi)",
+   "theme": "crypt",
+   "idea": "IT WILL NOT STAY DOWN - rebuilt in the game's own register",
+   "wear": 0.85,
+   "feed_line": "A spade is working somewhere in the dark.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1530,
+   "size": [
+    2.07,
+    1.37,
+    2.45
+   ],
+   "footprint_span": 2.07,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7444858956836924,
+    "ortho": 3.0659327507019043,
+    "clip": [
+     7.278245449066162,
+     18.573881149291992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.93,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "stoker_chibi": {
+   "title": "The Stoker (chibi)",
+   "theme": "firepit",
+   "idea": "IT IS ONLY AS BIG AS THE FIRE - rebuilt in the game's own proportions",
+   "wear": 0.7,
+   "feed_line": "The pit has been fed.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1808,
+   "size": [
+    2.88,
+    1.78,
+    2.4
+   ],
+   "footprint_span": 2.88,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.075176542309413,
+    "ortho": 3.195638418197632,
+    "clip": [
+     8.079339027404785,
+     20.92378044128418
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.12,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "snuffer_chibi": {
+   "title": "The Snuffer (chibi)",
+   "theme": "shrine",
+   "idea": "IT TAKES THE LIGHT - rebuilt in the game's own register",
+   "wear": 0.9,
+   "feed_line": "The nearest lamp has gone out.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1258,
+   "size": [
+    2.35,
+    2.35,
+    2.6
+   ],
+   "footprint_span": 2.35,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1075715444057455,
+    "ortho": 3.612839937210083,
+    "clip": [
+     8.236498832702637,
+     20.808326721191406
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.65,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "jointer": {
+   "title": "The Jointer",
+   "theme": "workshop",
+   "idea": "IT COMES APART AND BOTH HALVES KEEP WORKING - drive the pin or break it and there are two",
+   "wear": 0.35,
+   "feed_line": "It is pinned together.",
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1005,
+   "size": [
+    2.18,
+    1.1,
+    2.25
+   ],
+   "footprint_span": 2.18,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6600336186612612,
+    "ortho": 2.647186756134033,
+    "clip": [
+     6.537636756896973,
+     18.037967681884766
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.82,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "quartermaster": {
+   "title": "The Quartermaster",
+   "theme": "barracks",
+   "idea": "IT ARMS THE ROOM - everything else in here takes a weapon off its sheaf",
+   "wear": 0.5,
+   "feed_line": "Something is handing out arms.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2804,
+   "size": [
+    2.62,
+    2.0,
+    2.35
+   ],
+   "footprint_span": 2.62,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.023361970530197,
+    "ortho": 3.0821645259857178,
+    "clip": [
+     8.006440162658691,
+     20.37047004699707
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.38,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "loader": {
+   "title": "The Loader",
+   "theme": "mess",
+   "idea": "IT WEIGHS YOU DOWN - it loads you, and you fight slower until you drop it",
+   "wear": 0.75,
+   "feed_line": "Something is putting a load on you.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1221,
+   "size": [
+    2.39,
+    1.02,
+    2.65
+   ],
+   "footprint_span": 2.39,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.85654327599654,
+    "ortho": 3.3227827548980713,
+    "clip": [
+     7.549501419067383,
+     19.51810073852539
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.65,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.61,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "hurdleman": {
+   "title": "The Hurdleman",
+   "theme": "grassland",
+   "idea": "IT CUTS THE ROOM IN TWO - it plants a hurdle through your line and you fight it two and two",
+   "wear": 1.0,
+   "feed_line": "A hurdle just went down between you.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1790,
+   "size": [
+    2.98,
+    2.97,
+    2.55
+   ],
+   "footprint_span": 2.98,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.460732054839023,
+    "ortho": 4.574244499206543,
+    "clip": [
+     9.144735336303711,
+     23.323976516723633
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.02,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "tanner": {
+   "title": "The Tanner",
+   "theme": "flooded",
+   "idea": "IT WILL NOT TAKE THE SAME BLOW TWICE - what hurts it once it pegs a fresh hide over; change your answer or stop hurting it",
+   "wear": 0.1,
+   "feed_line": "It is pegging up a fresh hide.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1284,
+   "size": [
+    2.5,
+    2.21,
+    2.75
+   ],
+   "footprint_span": 2.5,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.16039734196887,
+    "ortho": 3.4198811054229736,
+    "clip": [
+     8.389853477478027,
+     21.44964027404785
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.5,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "reeve": {
+   "title": "The Reeve",
+   "theme": "keep",
+   "idea": "IT TAKES THE HAUL - while it stands the floor pays its box and not you; break the box or walk out of here with nothing",
+   "wear": 0.05,
+   "feed_line": "It is here for the lord's share.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1420,
+   "size": [
+    3.26,
+    1.88,
+    1.95
+   ],
+   "footprint_span": 3.26,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.119644302069713,
+    "ortho": 2.893660545349121,
+    "clip": [
+     7.9263129234313965,
+     21.296560287475586
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 1.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.55,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "tapster": {
+   "title": "The Tapster",
+   "theme": "firepit",
+   "idea": "IT DRINKS WHAT YOU BROUGHT - every brew raised in this room goes into its tun and not into the hero; run it dry or your line breaks and walks out",
+   "wear": 0.22,
+   "feed_line": "Something in here is drinking.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2479,
+   "size": [
+    3.04,
+    2.21,
+    2.8
+   ],
+   "footprint_span": 3.04,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.34489781565781,
+    "ortho": 3.5536863803863525,
+    "clip": [
+     8.446961402893066,
+     22.57617950439453
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.8,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.96,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.3,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "pressman": {
+   "title": "The Pressman",
+   "theme": "prison",
+   "idea": "IT PRESSES YOUR FALLEN - a hero that goes down in this room is collared and stood back up on ITS side; get them up, or break the yoke, before the collar shuts",
+   "wear": 0.88,
+   "feed_line": "Irons just came off the yoke.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1439,
+   "size": [
+    2.61,
+    1.18,
+    2.85
+   ],
+   "footprint_span": 2.61,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.0189563663457206,
+    "ortho": 3.621675968170166,
+    "clip": [
+     7.735034942626953,
+     20.237581253051758
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.85,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.39,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "strickler": {
+   "title": "The Strickler",
+   "theme": "treasury",
+   "idea": "IT STRIKES YOU LEVEL - while it stands, your best hero is scraped down to the measure of your worst; your strongest is no answer, so lift the lowest or break the beam",
+   "wear": 0.12,
+   "feed_line": "Something in here is taking the heap off.",
+   "pack_used": true,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 3642,
+   "size": [
+    1.81,
+    2.99,
+    2.55
+   ],
+   "footprint_span": 2.99,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.163064788646083,
+    "ortho": 4.603786468505859,
+    "clip": [
+     8.589690208435059,
+     20.876285552978516
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.01,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "dyer": {
+   "title": "The Dyer",
+   "theme": "workshop",
+   "idea": "IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK - it slings the vat, and while the stain is wet it will walk past everyone else to reach the one wearing it; the stain can be passed hero to hero, so the party chooses who carries it and for how long",
+   "wear": 0.3,
+   "feed_line": "Something back there just marked one of you.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2294,
+   "size": [
+    2.83,
+    3.28,
+    2.6
+   ],
+   "footprint_span": 3.28,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.525294113970275,
+    "ortho": 5.044339656829834,
+    "clip": [
+     9.588174819946289,
+     23.6662540435791
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.72,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "greener": {
+   "title": "The Greener",
+   "theme": "workshop",
+   "idea": "IT GREENS YOUR IRON - every blow landed on it leaves the weapon a little more eaten, and a bitten weapon bites less; a hero can stop and scrape it clean, which costs them the time they would have spent swinging, so the party is not choosing how to kill it but how long each of them can afford to keep hitting it",
+   "wear": 0.55,
+   "feed_line": "Your edge came back green.",
+   "pack_used": false,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 6433,
+   "size": [
+    2.71,
+    2.16,
+    2.5
+   ],
+   "footprint_span": 2.71,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.1385595283437486,
+    "ortho": 3.332960605621338,
+    "clip": [
+     8.195965766906738,
+     21.31563949584961
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.29,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "moulder": {
+   "title": "The Moulder",
+   "theme": "firepit",
+   "idea": "IT TAKES YOUR SHAPE - it presses one of your heroes into its sand bed and pours, and what stands up out of the box fights with that hero's reach and that hero's swing; the party is not choosing how to kill it but which of them it is allowed to read, so the hero who leads is the hero they will have to fight, and the mould can be broken before the metal sets",
+   "wear": 0.26,
+   "feed_line": "It took a copy of one of you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1987,
+   "size": [
+    2.36,
+    2.01,
+    2.9
+   ],
+   "footprint_span": 2.36,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.123993972047776,
+    "ortho": 3.5893654823303223,
+    "clip": [
+     8.055075645446777,
+     20.902973175048828
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.9,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.64,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "ratcatcher": {
+   "title": "The Ratcatcher",
+   "theme": "crypt",
+   "idea": "IT IS PAID BY THE TAIL - everything else that dies in this room goes into the cage on its hip and it is stronger for every bay it fills, so the party is not choosing how to kill it but whether to clear the room at all; leave the lesser things standing and you fight the whole floor at once, clear them and you hand this one the fight, and the bays already filled can be cut open to give them back",
+   "wear": 0.68,
+   "feed_line": "It is paid by the tail.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1510,
+   "size": [
+    3.73,
+    1.33,
+    2.62
+   ],
+   "footprint_span": 3.73,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3757776317424626,
+    "ortho": 3.540572166442871,
+    "clip": [
+     8.724635124206543,
+     23.211870193481445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.62,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.27,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.12,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "drover": {
+   "title": "The Drover",
+   "theme": "wood",
+   "idea": "IT YOKES ONE OF YOU - it closes a bow of its own yoke on a hero and after that the harm you do it travels the chain: while the collar holds, every blow landed on the Drover is paid half by the one wearing it, so the party is not choosing how hard to hit but whether to hit at all; cut the chain and the yoke comes free to take the next, and the second bow hangs open to tell you it can",
+   "wear": 0.74,
+   "feed_line": "It yokes one of you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 5053,
+   "size": [
+    3.59,
+    1.94,
+    2.44
+   ],
+   "footprint_span": 3.59,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3780359514685427,
+    "ortho": 3.1846964359283447,
+    "clip": [
+     8.383544921875,
+     23.248226165771484
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.44,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.41,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.06,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "paviser": {
+   "title": "The Paviser",
+   "theme": "keep",
+   "idea": "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge post and swings it onto whoever is hurting it most, and a blow into the board does nothing at all; so the party cannot win this by standing still and hitting harder - one of you has to get round the post while another holds its attention, and the moment you two swap sides the board swings back",
+   "wear": 0.78,
+   "feed_line": "A board came round to face you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 743,
+   "size": [
+    3.57,
+    2.26,
+    2.68
+   ],
+   "footprint_span": 3.57,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5013586167329933,
+    "ortho": 3.5184850692749023,
+    "clip": [
+     8.862750053405762,
+     23.999229431152344
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.68,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.43,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.18,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "fenman": {
+   "title": "The Fenman",
+   "theme": "fogbound",
+   "idea": "IT TAKES WHAT STIRS - it is hooded blind and it hunts by disturbance, so it comes for whoever moved last: swing, step, drink, and you are the one it wants. A hero who stands perfectly still is not there as far as it is concerned - and a hero who stands perfectly still is also doing nothing. So the party cannot all fight and cannot all hide; somebody has to stir, and the fight is the argument about who and when",
+   "wear": 0.92,
+   "feed_line": "Something out there is listening.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 948,
+   "size": [
+    2.48,
+    0.94,
+    2.52
+   ],
+   "footprint_span": 2.48,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8302842413941942,
+    "ortho": 2.9964725971221924,
+    "clip": [
+     7.006217956542969,
+     19.428373336791992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.52,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.52,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.02,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "comfitmaker": {
+   "title": "The Comfitmaker",
+   "theme": "confection",
+   "idea": "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is sugar-hard and nothing the party carries marks it, but it hands out comfits as it fights and a comfit is the one thing that does. Take one and you can hurt it; the sugar also gums the hand that took it, so that hero swings slower for as long as they hold it. The party cannot hurt it without accepting something from it, and the stand says how many are left",
+   "wear": 0.08,
+   "feed_line": "Everything in here is sweet and none of it is kind.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2626,
+   "size": [
+    1.83,
+    1.41,
+    2.28
+   ],
+   "footprint_span": 1.83,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6229717177561043,
+    "ortho": 2.6771152019500732,
+    "clip": [
+     6.813544750213623,
+     17.82897186279297
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.28,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.17,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.22,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "leech": {
+   "title": "The Leech",
+   "theme": "shrine",
+   "idea": "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this room mends. Every point of healing the party spends is drawn off into the basin at its side, and the Leech spends what the basin holds on itself, so the level in that basin is the mending you paid for. Tip the basin and it has nothing to mend with and your own healing comes back; leave it standing and your healer is carrying water in a sieve",
+   "wear": 0.82,
+   "feed_line": "It will have the bad blood out of you, and keep it.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 986,
+   "size": [
+    2.26,
+    1.59,
+    2.32
+   ],
+   "footprint_span": 2.26,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8040959433186958,
+    "ortho": 2.8286893367767334,
+    "clip": [
+     7.272996425628662,
+     19.072269439697266
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.32,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 0.18,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "beadle": {
+   "title": "The Beadle",
+   "theme": "shrine",
+   "idea": "IT CALLS THE ORDER - while it stands the party does not choose who acts. The Beadle calls, and it calls the same hero again and again while the rest hold their ground and watch; the four brass pegs on the board it holds overhead are the calls it has left and you can count them from the door. Knock the board off its arm and the order comes back to you",
+   "wear": 0.18,
+   "feed_line": "It says who speaks, and it is not you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 698,
+   "size": [
+    1.87,
+    1.19,
+    2.95
+   ],
+   "footprint_span": 1.87,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.845725940381679,
+    "ortho": 3.532595157623291,
+    "clip": [
+     7.4858784675598145,
+     18.80217933654785
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 9.13,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "rammer": {
+   "title": "The Rammer",
+   "theme": "flooded",
+   "idea": "IT DROPS ON THE COUNT - it hauls the monkey to the head of the frame, it holds, and it lets go. Whatever is standing on the pile when the monkey falls is finished, and you can HEAR it coming: the haul is slow and the hold is the warning. The answer is not what you do, it is when - stand off the pile for the drop and come back in while it hauls",
+   "wear": 0.58,
+   "feed_line": "Something is being driven into the floor.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1046,
+   "size": [
+    2.03,
+    1.39,
+    2.75
+   ],
+   "footprint_span": 2.03,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.843907220247193,
+    "ortho": 3.3761470317840576,
+    "clip": [
+     7.484295845031738,
+     19.312549591064453
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 8.97,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "fuller": {
+   "title": "The Fuller",
+   "theme": "fogbound",
+   "idea": "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the cloth in its trough, and when the cloth is full it wrings the lot out over the room at once. The cloth is the gauge and you can see it swell, so the fight is a decision nothing else in here asks for: STOP HITTING IT. Break the stocks, or wring it early and eat a small one, or keep swinging and pay for every blow you landed",
+   "wear": 0.62,
+   "feed_line": "Something in here is taking the blows.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1866,
+   "size": [
+    3.29,
+    1.84,
+    2.66
+   ],
+   "footprint_span": 3.29,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3074741650144572,
+    "ortho": 3.4001755714416504,
+    "clip": [
+     8.474510192871094,
+     22.629627227783203
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.66,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.71,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.16,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  },
+  "stackman": {
+   "title": "The Stackman",
+   "theme": "grassland",
+   "idea": "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a fresh sheaf under its own feet and climbs a course, and from up there nothing with a hand on it can touch it; it pitches down at you for free. The stack is the gauge and you can count the courses from the doorway, so this is the one fight in here that asks about your PARTY and not your footing: cut the bottom course out from under it, or bring something with reach, or watch it climb out of the fight entirely",
+   "wear": 0.7,
+   "feed_line": "Something up there is building itself higher.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1674,
+   "size": [
+    2.53,
+    3.35,
+    2.84
+   ],
+   "footprint_span": 3.35,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5346931540043185,
+    "ortho": 5.161048412322998,
+    "clip": [
+     9.848793983459473,
+     23.550559997558594
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.84,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 2.5,
+   "corridor_margin_m": 7.65,
+   "lid": "THROUGH-LID",
+   "lid_clear_m": -0.34,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "MBG_RED_LID=2.50 (red arm)",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": false
+  }
+ },
+ "errors": [
+  "snuffer: 2.60 m stands 0.10 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "bellman: 2.70 m stands 0.20 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "snuffer_chibi: 2.60 m stands 0.10 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "loader: 2.65 m stands 0.15 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "hurdleman: 2.55 m stands 0.05 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "tanner: 2.75 m stands 0.25 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "tapster: 2.80 m stands 0.30 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "pressman: 2.85 m stands 0.35 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "strickler: 2.55 m stands 0.05 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "dyer: 2.60 m stands 0.10 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "moulder: 2.90 m stands 0.40 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "ratcatcher: 2.62 m stands 0.12 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "paviser: 2.68 m stands 0.18 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "fenman: 2.52 m stands 0.02 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "beadle: 2.95 m stands 0.45 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "rammer: 2.75 m stands 0.25 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "fuller: 2.66 m stands 0.16 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))",
+  "stackman: 2.84 m stands 0.34 m THROUGH the lid underside at 2.50 m (MBG_RED_LID=2.50 (red arm))"
+ ],
+ "blank_check": {
+  "files": 108,
+  "failures": []
+ }
+}

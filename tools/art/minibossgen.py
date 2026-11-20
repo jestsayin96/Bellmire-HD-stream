@@ -15,12 +15,22 @@ answered exactly as they were for the lords and the twelve creatures:
             batches on 15 Nov came back blank with Blender reporting success on
             every file; this assertion is the only reason none of them shipped.
 
-THIS FILE ALSO MEASURES THE CORRIDOR QUESTION so nobody has to hope. D91 widens
-dungeon corridors to THREE CELLS and floorgen.gd's cell is G = 4.0 m, with walls
-reaching WALL_IN = 0.5 m into the edge cells - so the clear span of a three-cell
-corridor is 11.0 m. Every miniboss's measured footprint is compared against that
-and the report says ROOM-LOCKED or CORRIDOR-SAFE per creature. Room-locking is a
-construction fact, never a hope that something fails to fit.
+THIS FILE ALSO MEASURES WHETHER THE CREATURE FITS THE DUNGEON, AND SINCE
+2026-11-20 02:4x CT THAT IS TWO TERMS, NOT ONE.
+
+  SPAN    against the clear span of a three-cell corridor (D91 stage 3).
+  HEIGHT  against the underside of floorgen.gd's shadows-only LID - the box
+          that keeps the overworld sun off the floor. NOBODY HAD EVER MEASURED
+          IT. A gate with no height term gave a 6.60 m body a GREEN verdict
+          while its head stood 0.10 m through a lid at 6.50 m, which is a thing
+          a viewer can see and no number here could.
+
+Both numbers are now READ OUT OF scripts/floorgen.gd every run by
+tools/art/floorgeom.py - they are not literals in this file any more. The
+supervisor is moving the lid (7.0 -> 10.0 at 02:12 CT); a gate carrying a copy
+of a number under review is the next stale comment. If floorgen.gd cannot be
+read the verdict is WITHHELD and the report goes RED: a gate that cannot see
+the lid must not certify a creature as under it.
 
 WEAR IS A VARIABLE: each miniboss carries its own `wear` (minibosses.CANON) and
 it drives the materials here, not the geometry - roughness up, metal down, and
@@ -40,12 +50,35 @@ import lordlib as L          # noqa: E402
 import lordgen as G          # noqa: E402
 import minibosses as M       # noqa: E402
 
-# floorgen.gd: G = 4.0 (cell), WALL_IN = 0.5 (a wall reaches this far into its
-# cell). D91 stage 3: corridors become three cells wide. Hence:
-CELL_M = 4.0
-WALL_IN = 0.5
-CORRIDOR_CLEAR = 3 * CELL_M - 2 * WALL_IN      # 11.0 m
+# The cell, the wall inset, the corridor width and the lid all live in
+# scripts/floorgen.gd and are read from it per run. NO COPIES HERE ON PURPOSE -
+# see floorgeom's own header for why the old `CORRIDOR_CLEAR = 3 * 4.0 - 2 *
+# 0.5` literal was a defect even while it held the right number.
+import floorgeom as FG       # noqa: E402
 
+
+
+def _fit(report, key, geom, span, height):
+    """The two-term verdict, and the report's errors are the gate's teeth.
+
+    ROOM-LOCKED is NOT an error - it is a construction fact the game build
+    gates a spawn on. THROUGH-LID IS an error: a head inside the sun-blocker
+    is the fault that shipped green on 20 Nov, and a WITHHELD verdict is an
+    error too, because an eye that cannot see must not sign off.
+    """
+    v, errs = FG.verdict(geom, span, height)
+    for e in errs:
+        if e not in report["errors"]:
+            report["errors"].append(e)
+    if errs:
+        report["ok"] = False
+    if v["lid"] == "THROUGH-LID":
+        report["ok"] = False
+        report["errors"].append(
+            "%s: %.2f m stands %.2f m THROUGH the lid underside at %.2f m (%s)"
+            % (key, height, -v["lid_clear_m"], v["lid_underside_m"],
+               v["read_from"].get("lid_y_m", "?")))
+    return v
 
 def build_miniboss(key):
     title, height, tint, aura, theme, idea, wear, line = M.CANON[key]
@@ -196,7 +229,25 @@ def main():
     ap.add_argument("--sheet", action="store_true")
     args = ap.parse_args(argv)
     resx, resy = (int(x) for x in args.res.split("x"))
-    report = {"ok": True, "corridor_clear_m": CORRIDOR_CLEAR, "minibosses": {}, "errors": []}
+    geom = FG.read(args.repo)
+    # THE RED ARM. `MBG_RED_LID=<metres>` forces the lid underside down so the
+    # tallest bodies on disk must come out THROUGH-LID. It proves the PLUMBING,
+    # not just the arithmetic: that report["ok"] actually flips, that the error
+    # names the creature and the metres, and that the printed line lists it.
+    # A gate nobody has made fail is a gate nobody has tested, and the real
+    # minibosses all clear the lid by metres, so without this arm the height
+    # term here would be a green number that has never moved.
+    red = os.environ.get("MBG_RED_LID", "").strip()
+    if red:
+        geom = dict(geom, lid_underside_m=float(red),
+                    at=dict(geom["at"], lid_y_m="MBG_RED_LID=%s (red arm)" % red))
+    report = {"ok": True, "floor_geom": geom, "red_arm": red or None,
+              "minibosses": {}, "errors": []}
+    # The reader's own complaints are THIS report's errors. An unreadable
+    # floorgen.gd is a red gate, not a quiet fallback to 11.0 and 6.50.
+    for e in geom["errors"]:
+        report["ok"] = False
+        report["errors"].append(e)
     out = os.path.join(args.repo, "renders", "art", "minibosses", "_report.json")
 
     # a --sheet-only pass used to start from an empty report and overwrite the
@@ -209,6 +260,23 @@ def main():
                 report["minibosses"] = dict(json.load(f).get("minibosses", {}))
         except Exception:
             pass
+
+    # AND RE-VERDICT EVERY CARRIED RECORD AGAINST TODAY'S floorgen.gd. The lid
+    # is moving, so a verdict written on a previous run is a verdict against a
+    # previous dungeon. These are recorded measurements of real renders, so the
+    # height term costs nothing to apply: no re-render, no re-measure, and the
+    # whole set answers the new question in one pass.
+    for k, rec in report["minibosses"].items():
+        sz = rec.get("size") or []
+        sp = rec.get("footprint_span")
+        if len(sz) == 3 and sp is not None:
+            rec["height_m"] = round(float(sz[2]), 3)
+            rec.update(_fit(report, k, geom, float(sp), float(sz[2])))
+        else:
+            report["ok"] = False
+            report["errors"].append(
+                "%s: carried record has no size/footprint_span - cannot be "
+                "verdicted against the lid" % k)
 
     if not args.sheet:
         # --only takes a COMMA LIST: the third set is six keys and one blender
@@ -235,7 +303,8 @@ def main():
                     faces=sum(len(o.data.polygons) for o in objs),
                     size=[round(w, 2), round(d, 2), round(h, 2)],
                     footprint_span=round(span, 2),
-                    corridor="ROOM-LOCKED" if span > CORRIDOR_CLEAR else "CORRIDOR-SAFE",
+                    height_m=round(h, 3),
+                    **_fit(report, key, geom, span, h),
                     glb=ok, glb_msg=msg, cam=cam,
                     views=[os.path.basename(p) for p in written])
                 if len(objs) > 4:
@@ -257,6 +326,11 @@ def main():
         report["ok"] = False
         report["errors"].append("sheets: %s" % traceback.format_exc()[-900:])
 
+    # A RED RUN MUST NEVER OVERWRITE THE GREEN REGISTER. It reads the real
+    # records and writes its evidence beside them, so the shipped report is
+    # always the green pass's and the red proof is still on disk to be read.
+    if red:
+        out = out.replace("_report.json", "_report_red.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w") as f:
         json.dump(report, f, indent=1)
@@ -264,7 +338,18 @@ def main():
         "ok": report["ok"], "n": len(report["minibosses"]),
         "errors": report["errors"][:3],
         "blank": report.get("blank_check", {}).get("failures", [])[:5],
-        "spans": {k: (v["footprint_span"], v["corridor"], v["parts"], v["faces"])
+        "corridor_clear_m": geom["corridor_clear_m"],
+        "lid_underside_m": geom["lid_underside_m"],
+        "lid_read_at": geom["at"].get("lid_y_m"),
+        "through_lid": sorted(k for k, v in report["minibosses"].items()
+                              if v.get("lid") == "THROUGH-LID"),
+        "room_locked": sorted(k for k, v in report["minibosses"].items()
+                              if v.get("corridor") == "ROOM-LOCKED"),
+        "tallest": sorted(((v.get("height_m"), k)
+                           for k, v in report["minibosses"].items()
+                           if v.get("height_m") is not None), reverse=True)[:3],
+        "spans": {k: (v["footprint_span"], v.get("corridor"), v.get("lid"),
+                      v["parts"], v["faces"])
                   for k, v in report["minibosses"].items()}}))
 
 

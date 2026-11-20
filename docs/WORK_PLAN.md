@@ -1,3 +1,128 @@
+## TAKE THIS NEXT - THE 16:58 CT FIRING, 20 NOV 2026 (machine clock 16:58-17:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 15:58 BLOCK. ***
+## EIGHT TASKS IN SCOPE, SEVEN MERGED, THREE TICKED. The HUD pushed U108 at 17:01:34 CT, AFTER
+## my first merge pass, and I re-read the ref and merged it rather than reporting the lane silent.
+## *** TWO ROWS OF MY OWN WERE WRONG. BOTH ARE CORRECTED HERE, FIRST, BEFORE ANY LANE'S WORK. ***
+##  1. THE CHRONICLE CARD IS THE HUD'S FILE, NOT THE GAME BUILD'S. I routed it to the game build
+##     at 15:58 because the STRING is built at `delve.gd:197`. But that line only calls
+##     `FeedHUD.card_on(...)`; `feed_hud.gd:25` card_on -> `card()`, and feed_hud.gd's own L32b
+##     comment says the Chronicle strip carries "a lord's card at its left". The card, its rect
+##     and its z-order are the HUD's. **THE GAME BUILD WAS RIGHT TO RETURN IT AT S69 AND IS
+##     CHARGED WITH NOTHING.** AND MY WORDING WAS WRONG TOO: the card is not "drawn on top of"
+##     the vellum by accident - it is a DESIGNED left-hand element. The fault is its WIDTH: at
+##     125% and 150% it leaves the Chronicle text a four-word column. U109 is a SIZING row.
+##  2. THE BEADLE DOES HAVE A REAR FACING. My 18 Nov row said it had none. ART PROVED ME WRONG
+##     AND I LOOKED AT ITS PICTURE MYSELF (`renders/art/minibosses/_beadle_lightab.png`): panel A
+##     (shipped, world-fixed rig) is an amber-brown wash with no readable detail; panel B (even
+##     light) is plainly a back - no face, dark drum head, staff swapped sides, grey steel on the
+##     hero instead of amber. The control panel is the front and it has a face. **MY READING WAS
+##     MADE ON A PICTURE LIT BY ONE COLOURED LAMP.** That row is CLOSED by art's evidence, not
+##     waved through: the hero is the identical KayKit Knight in all 41 cells and its back mean
+##     RGB tracks the creature's aura every time (beadle 121/76/56 amber, leech 120/53/48 red,
+##     dyer 75/67/90 blue) - one body, three hues, so the hue is the lamp, not the model.
+## *** WHAT ART FOUND IS THE BIGGEST INSTRUMENT FAULT OF THE DAY AND IT IS NOT ART'S FAULT. ***
+##   `lordgen.add_lights` builds key/fill/rim in WORLD space; `minibossfit.shoot` orbits the
+##   CAMERA and never moves the rig. Key and fill both sit on -Y (the front). The only lamp on +Y
+##   is the rim, whose colour IS the creature's aura. So EVERY back view in this tree - all 41 -
+##   is lit by one coloured lamp. `seen: 1.0` scored 3/3 on the Beadle the whole time: an
+##   instrument that cannot SEE is not a pass. The fix (`even_lights`/`aim_lights`) is in, DEFAULT
+##   OFF, with a real control: at az 0 the rotation is the identity and the FRONT view is
+##   pixel-identical (mean delta 0.00, 0 px changed); side 75,294 px and back 98,369 px move.
+##
+## TICKED THIS HOUR (three):
+##   - **C-147** (content): the Scraper's feed lines. Verified BY ME on the merged tree -
+##     `miniboss_feed.by_key` = **41** rows, `scraper` present, arrive **9** / fall **8**, and the
+##     lines name Scourstone, the crypt, the slab and the stone. Clean.
+##   - **S69** (game build): `MB_FIT["scraper"] = 1.04` with the register cited and NOT re-derived,
+##     the crypt THEME row, and the name row deliberately HELD because S51 binds MB_NAME to keys
+##     that have feed rows and content had not written one when it looked (16:17 vs content 16:24).
+##     That hold was correct at the time and is now satisfied - see its row below.
+##   - **U108** (HUD): the mana plate regression I found by looking at U107's own 125% capture is
+##     FIXED, and I verified it the same way I found it - I opened `mana_125_1080.png` from this
+##     run and the plate reads "MossyMage 2/54 / DawnCleric 24/48" at the pane's lower left, clear
+##     of the NOW FIGHTING banner and of the boss card. A number did not tell me; the picture did.
+##
+## NOT TICKED, AND WHY:
+##   - **THE 41st IS NOT WIRED.** The chain is **41 feed / 40 MB_NAME / 40 published** - it was
+##     flush at 40/40/40 last hour and the Scraper has broken it open again. Nothing is wrong;
+##     it is mid-chain. It ticks when MB_NAME carries `scraper`.
+##   - **B88's "NO PUBLISH IS DUE" (chat bot).** The stand-down on the lock was right and its
+##     instrument hardening is real work (every read now indexes; `rep['pairs']` raises instead of
+##     silently returning the top dict - that is the 8-shaped under-count killed at the root).
+##     BUT THE CONCLUSION RESTS ON A STALE FEED. It measured `miniboss_feed.by_key` = 40 with
+##     `scraper` ABSENT and called the Scraper "case (4), body only". MEASURED BY ME: content
+##     pushed C-147 to `origin/content` at **16:24:01 CT**, twenty-one minutes before the bot
+##     claimed, and `cf57d272:data/lore_lines.json` has **41** rows with `scraper` present. The
+##     bot read the MERGED TREE (origin/main 5b3efc55), which is last hour's main. By its own gate
+##     - published is measured against the FEED - **41 was due.** This is the fault it wrote up and
+##     took on the chin in the same entry: READ THE REF YOU ARE MAKING THE CLAIM ABOUT.
+##   - **AND THE STRUCTURAL HALF OF THAT IS MINE, NOT THE LANE'S.** Content pushes the feed at :22.
+##     I merge it into main at :58. The chat bot fires at :45. **So a feed row written this hour is
+##     invisible on main to the chat bot for a full cycle, every cycle.** The lane is not to read
+##     main for the feed. See its row.
+##   - **HUB** stood down correctly and measured why (mana/minibosses have no payload v5 data
+##     path); `web/` unchanged. A stand-down written up is the delivery - no tick, no charge.
+##
+## ---- THE ROWS. ONE ITEM PER LANE. ----
+## GAME BUILD (:07) - **S70: WRITE THE SCRAPER'S MB_NAME ROW.** Your S69 hold is satisfied:
+##   content's C-147 is on main, `miniboss_feed.by_key` = 41 with `scraper` present. Take the
+##   canon title from art's `tools/art/minibosses.py` CANON and content's `_note_` the way S65-S68
+##   did, cite both, and leave MB_FIT alone (1.04 is already in and correct). THE CHRONICLE CARD
+##   IS NOT YOURS - I was wrong at 15:58 and you were right to return it; see correction 1 above.
+## CONTENT (:22) - **NOTHING IS OWED ON THE 41st; C-147 IS TICKED.** Carry your own cycle. If the
+##   42nd body lands this hour, its feed rows are the row; otherwise keep writing. The `_note_`
+##   keys are accounted for in the audit and NO LANE IS TO WIRE ONE - keep writing them.
+## ART (:34) - **THE 42nd MINIBOSS, AND RENDER ITS BACK AND SIDE WITH THE NEW EVEN LIGHT.** Using
+##   your own new switch on NEW work is inside your lane and I am saying out loud that I read it
+##   that way; the 41-BODY RE-RENDER OF THE EXISTING TREE IS NOT YOURS OR MINE - it is with the
+##   supervisor (see FOR THE SUPERVISOR). Your two written-up faults (the four brass pegs at 5
+##   luma, the staff knob on the pale skull at 10 luma) stay written up and unfixed by my reading
+##   of your own "one change at a time" - take them in order after the 42nd if you have window.
+## HUD (:52) - **U109: THE CHRONICLE CARD'S WIDTH AT 125% AND 150%.** It is YOUR file after all
+##   (`feed_hud.gd` card_on/_build), the game build returned it correctly, and it is a SIZING
+##   fault, not an overlap: the card is a designed left-hand element and at 125% it takes the
+##   vellum's left half and at 150% two thirds, leaving the text a four-word column. U107's font
+##   step-down fits the text into the sliver the card leaves - that is fitting text around the
+##   fault. The acceptance test is a 125% AND a 150% capture I can LOOK at. U108 is ticked.
+## HUB (:37) - **WEB WORK, AND THERE IS NOTHING SITTING UNPUBLISHED.** MEASURED BY ME THIS HOUR:
+##   `origin/gh-pages^{tree}` = `origin/hub:web` = **9ca8051e** - IDENTICAL, so publish 5
+##   (05ac2679) carries every merged web byte and the "merged but not published" delta is ZERO for
+##   the first time in days. You are relieved of pack catalogue work. Pick web work that does not
+##   need a payload the engine does not emit, and if the next thing you want IS a payload change,
+##   say so in one line and I will route it rather than let you stand down twice.
+## CHAT BOT (:45) - **B89: PUBLISH 41 - BUT READ THE FEED OFF `origin/content`, NOT MAIN.** This
+##   is the structural fix, and it is mine, not a charge on you: content pushes at :22, I merge at
+##   :58, you fire at :45, so main's feed is ALWAYS one cycle stale when you look. From now on the
+##   feed authority for your gate is `git show origin/content:data/lore_lines.json`, and the name
+##   authority is `git show origin/laptop:scripts/delve.gd`. Measure both refs, not main. 41 is due
+##   the moment MB_NAME carries `scraper`; if the game build's S70 has not landed when you look,
+##   publish against the FEED as you always have and say in one line that MB_NAME trails.
+## PACK CATALOGUE (:15, commits to `hub`) - **NO COMMIT ON `origin/hub` FROM YOUR 16:15 FIRING.**
+##   `origin/hub` carries only the hub lane's own 16:39 stand-down. If you ran and stood down, the
+##   stand-down has to be WRITTEN somewhere a reader finds it - commit it to `hub` like every other
+##   lane. You are new and nothing is charged; this is the first time it is being said.
+## QA TESTER (:41, commits to `laptop`, every 2h) - **COMMIT YOUR RUN, AND THE TWO SILENT GATES
+##   ARE RED.** Your 16:41 run exists ONLY as an IDLE line in R's working `docs/RUN_LOCK.txt`,
+##   which the game build will commit for you at :07 - that is not your record. `s58_span` and
+##   `townwalk` printed NO VERDICT inside your 100 s cap: by COORDINATION 15 a gate that prints no
+##   verdict is RED, not slow. Either raise the cap enough that they print or report them RED by
+##   name. l14 / twitch_parse / delve / offfloor OK is a real result and worth committing.
+##
+## FOR THE SUPERVISOR:
+##   **ART'S EVEN-LIGHT SWITCH - A 41-BODY RE-RENDER DECISION.** Art has proved that every back
+##   view in the tree is lit by one coloured lamp (the creature's own aura rim) and has landed the
+##   fix DEFAULT OFF with a clean control (front pixel-identical at az 0). Turning it on for the
+##   existing tree is a 41-body re-render and art itself calls it a separate decision; it
+##   recommends it, and so do I. MY RECOMMENDATION: approve it as a BACKGROUND re-render of the
+##   back and side views only (the front is provably unchanged, so it is wasted work), spread
+##   across art's own firings rather than one batch, with new bodies rendered even-lit from the
+##   42nd on - which I have already put in art's row as inside its lane. Say the word and I will
+##   make it a plan row with a running total.
+##   Nothing else is waiting on you. The hub has nothing to publish - gh-pages and origin/hub:web
+##   are the same tree this hour.
+##
+## NEEDS MR. E: nothing.
+##
 ## TAKE THIS NEXT - THE 15:58 CT FIRING, 20 NOV 2026 (machine clock 15:58-16:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 BLOCK. ***
 ## SIX LANES FIRED, SIX MERGED, FOUR TICKED, ONE STOOD DOWN CORRECTLY. main is 1d6e45c9.

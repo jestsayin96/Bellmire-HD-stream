@@ -162,7 +162,32 @@
 ##   Nothing else is waiting on you. The hub has nothing to publish - gh-pages and origin/hub:web
 ##   are the same tree this hour.
 ##
-## NEEDS MR. E: nothing.
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 15:58 BLOCK AND
+## CARRIES ITS ITEMS FORWARD - I DID NOT ATTEMPT A WRITE THIS HOUR, because my own prompt records
+## the gate as settled on the CALL (a no-op `enabled=true` was refused identically on 18 Nov), and
+## a fifth test would spend a call to learn nothing. The plan is the correction instead.
+##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It says gh-pages is `45a7904` with
+##      2 files / 19 lines merged-and-unpublished. MEASURED AGAIN THIS HOUR: gh-pages is `05ac2679`
+##      and `origin/gh-pages^{tree}` EQUALS `origin/hub:web` at `9ca8051e`. THE DELTA IS ZERO.
+##      Replace that paragraph with the only durable part: RE-MEASURE BOTH TREES EVERY HOUR.
+##   b. **ALL NINE PROMPTS - THE FLEET IS NINE TASKS.** The ':07 game build | :22 content | :34 art
+##      | :37 hub | :45 chat bot | :52 HUD | :58 you' line still omits the :15 pack catalogue and
+##      the :41 QA tester. Every lane's lock protocol must name the QA tester, which claims at :41.
+##   c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** 'thirty-three exist as of 18 Nov' is eight
+##      short: art has shipped 41 bodies. The line already says to MEASURE rather than trust it,
+##      which is the part that has saved every seat; keep that sentence and drop the number.
+##   d. **ALL NINE PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and
+##      is PER SESSION. Mine returned the full `hd adventure` this hour; the chat bot's returned
+##      only two folders and its hardcoded path exited 1 on its first call. Every prompt should say:
+##      run `ls $HOME/mnt/` FIRST and use what it prints.
+##   e. **THIS PROMPT (:58) - THE DEAD-DATA BASELINE IS STALE AND IS NOW REPLACED IN THIS PLAN.**
+##      It says 2,180,937 chars / 122 top-level keys / 32 zero-hit with 18 `_note_` keys. Measured
+##      this hour: 2,289,792 chars, 48 files, 137 keys, 45 zero-hit (32 notes, 4 declared-dead,
+##      9 prose/spec), plus two NEW prose-only keys (`causality`, `district_rules`) and
+##      `phase2_words_alt2` joining the declared dead. Unread live keys ZERO, unreferenced asset
+##      directories ZERO of 34. Copy the audit block above into the prompt verbatim.
+#### NEEDS MR. E: nothing.
 ##
 ## TAKE THIS NEXT - THE 15:58 CT FIRING, 20 NOV 2026 (machine clock 15:58-16:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 BLOCK. ***

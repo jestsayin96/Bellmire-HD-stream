@@ -627,3 +627,15 @@ IDLE 2026-11-19T23:55:02-06:00 - chat bot B70: !miniboss written (third rowed co
 RUNNING 2026-11-20T00:08:06-06:00 (game build S53, claim 00:08:06, cap 00:33, expected finish 00:32)
 
 IDLE 2026-11-20T00:15:59-06:00 - game build S53: rts_camera.gd clock plate clamped to the viewport at UI 150% (U91's finding); S53_CLOCK OK fails=0 worst 1080.0, red-proven on the pre-fix file FAIL 60 worst 1081.5; battery green; commit 572fe5ab. Claim 00:08:06, cap 00:33, declared 00:32, released early, no crossing. Godot EMPTY. No twitch, 0 bits. (game build)
+
+RUNNING 2026-11-20T00:48:30-06:00 (chat bot B71, claim 00:48:30, cap 01:13, expected finish 00:51)
+
+IDLE 2026-11-20T00:50:40-06:00 - chat bot B71: MINIBOSS UNNAMED and MINIBOSS GHOST promoted printerr -> push_error (the owed B70 debt); verified green first by brace-matching MB_NAME off delve.gd in the merged worktree against content's by_key (36/36, both sets empty), then RED-PROVEN in one mutation of my own worktree's lore_lines.json (renamed `beadle` -> `zzz_fake_trade`: GHOST [beadle] + UNNAMED [zzz_fake_trade], both ERROR), file restored CLEAN. Gates: parse rc=0, L14_TEST OK 22, COMMANDS_DOC OK 31, TWITCH_PARSE OK 8. FINDING ON MY OWN FAMILY: the planted fault printed two push_errors and _l14_test STILL exited rc=0 - no gate in tools/ asserts ChatCmd.guard_faults() empty, so the whole COMMANDS_DATA family is log-only to a battery. tools/ is not mine; routing it up. Claim 00:48:30, cap 01:13, declared 00:51, released early, NO CROSSING into the HUD's :52. Godot EMPTY. No twitch, 0 bits, nothing posted. (chat bot)
+
+RUNNING 2026-11-20T00:54:03-06:00 (HUD U93 L74 theme-at-scale sweep 100/125/150, windowed, claim 00:54:03, cap +15, expected finish 00:58)
+
+IDLE 2026-11-20T00:55:12-06:00 - HUD U93: L74 theme-at-scale sweep 100/125/150 windowed, THEME_SWEEP OK. Claim 00:54:03, cap 01:09, released early, no crossing. Godot EMPTY. No twitch, 0 bits. (HUD)
+
+RUNNING 2026-11-20T01:08:08-06:00 (game build, item per TAKE THIS NEXT, claim 01:08:08, cap 01:33, expected finish 01:33)
+
+IDLE 2026-11-20T01:17:05-06:00 - game build S54: Broodglut wired in bestiary.gd (art's h 6.60, summon puglin + ward 0.5), S54_BROOD OK n=10 red-proved, battery green (OFFFLOOR 0/1981, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 01:08:08, cap 01:33, declared 01:33, released early, no crossing. Godot EMPTY. No twitch, 0 bits. (game build)

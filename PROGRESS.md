@@ -13032,3 +13032,13 @@ goes red on provenance by design. The Dauber's verdict is conservative either wa
 older than main and the gate is right to say so. floorgen.gd is not mine to move.
 
 NEEDED FROM MR. E: nothing.
+
+## D-cycle - S64 THE MANA POOL: casting spends, the pool refills out of combat, 2026-11-20 11:08-11:2x CT (game build)
+Item: TAKE THIS NEXT 10:58 CT row 1 - the supervisor's 10:16 mana ruling (owner game build, casting SPENDS, HUD draws the bar the hour the pool exists).
+- roster.gd: ONE pool, ONE gate. `MANA_ON` (revert switch), `MANA_BASE 30` + `MANA_PER_MOD 6` x the class's primary-stat modifier, `MANA_COST 6` per spell (any spell), `MANA_REGEN 5`/s OUT OF COMBAT ONLY. `uses_mana(h)` = CASTERS + anyone with a mending power (the paladin). `mana_max / mana_of / spend_mana / regen_mana`. Every hero publishes `h["mana"]`, `h["mana_max"]`, `h["mana_regen"]` (0/0/0 for non-casters, who are never gated).
+- delve.gd: the attack cast at the `if caster:` site now reads `if caster and roster.spend_mana(h)`; a dry caster takes the melee swing (`1H_Melee_Attack_Chop`) everyone else uses. The mender's mending is gated the same way - a dry mender holds it. `_process` refills every living delver's pool whenever `state != "fight"`. Counters `mana_casts` / `mana_dry_swings` for the gate test.
+- WHERE THE SPEND LIVES, SAID PLAINLY: the ruling says "make cast() spend". `Spells.cast` is a STATIC visual/sound call shared with monsters (monster.gd), townsfolk and raids, none of which have a pool - so the spend sits at the two DELVER call sites in delve.gd, not inside `Spells.cast`. raids.gd (town raid casting) is NOT gated this hour.
+- Verdicts: parse --quit-after 300 rc 0, zero ERROR lines. `S64_MANA OK mage max=48 casts_before_dry=8 cost=6 regen=5/s []`. RED ARM (`-- red`, demands free spells): `S64_MANA FAIL ... ["mage cast 8 before dry, want 100"]` rc 1, as designed. LIVE PATH `tools/_s64_delve_mana.gd`: `S64_DELVE_MANA OK paid_casts=11 dry_swings=0 mage_max=48 mage_low=30.0 refilled_out_of_combat=true frames=7201` (mage 48 -> 30 in the floor-1 fight, back to 48/48 in search). `TWITCH_PARSE OK (8 checks)`. `OFFFLOOR_VERDICT OK 0 of 2060`, MON_INPROP 0 of 316. `TOWNWALK ... in_solid=0/18986 PASS`. `DELVE_TEST OK ran 9001 frames, floor reached 2`.
+- NOT PROVEN LIVE: dry_swings was 0 in 120 s - at this pace a 48 pool outlasts a floor-1/2 fight. The dry path is proven at unit level only. Balance (30/6/6/5) is a first number, cheap to turn.
+- NO PICTURE: the pool is a number until the HUD draws the bar (HUD's row, the hour this lands). Nothing on screen changed except that a dry caster now swings.
+- No twitch test, 0 bits, no account used.

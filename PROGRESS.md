@@ -13572,3 +13572,20 @@ TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2429; townwalk rc 0 in 88 s
 0 SCRIPT ERROR. (twitch/offfloor/townwalk ran before the MB_NAME revert, on a tree that differed by that one dict entry.)
 WHEN CONTENT WRITES by_key.scraper: add MB_NAME "scraper": "Scourstone" + S51 TABLE 41, restore `_keys.append` in
 _s69_scraper.gd and flip the draw/line arms back to S68's shape. Untracked here, mine, delete refused: _s69_battery.log.
+
+## HUB - 20 Nov 2026 16:39 CT - ROW "reflect the current game on the page": MEASURED, NOT BUILT (web/ unchanged)
+Synced hub = origin/hub + origin/main (clock 16:38 CST). TAKE THIS NEXT (15:58) row 4 asked the page to reflect
+the mana bar, the dungeon props and the forty minibosses. MEASURED on the merged tree:
+- scripts/snapshot_pub.gd is PAYLOAD_V 5 and contains ZERO "mana" and ZERO "miniboss" literals; web/app.js has no
+  mana code and no miniboss section (1 grep hit total, inside the frozen lore blob). The page can only show what the
+  payload or the frozen lore carries, and it estimates nothing (H19 rule) - so mana and minibosses have NO data path.
+- data/lore_lines.json miniboss_feed.by_key holds 40 keys of arrive/fall lines; refresh_lore.py's whitelist drops
+  miniboss_feed on purpose (no hub reader), and refresh_lore.py --check says CURRENT (1215 strings, pin 9f38b9c8).
+- Dungeon props are art/engine assets, not payload data - nothing for a viewer page to read.
+WHAT BLOCKS: a mana field needs the game's snapshot_pub.gd (not mine) to publish h.mana/mana_max per hero (roster.gd
+already holds them); a miniboss shelf needs either a payload "minibosses" field or a whitelist extension to
+refresh_lore.py plus the display-name table (Delve.MB_NAME) frozen into the page. Both are a decision above the hub.
+NEXT FIRING IF THE TEAM LEAD AGREES: extend refresh_lore.py + a "Minibosses" shelf in Bestiary from frozen lore only
+(names + arrive/fall lines, el()/textContent), full state/hostile-name battery. NOT CLAIMING READY TO PUBLISH.
+gh-pages delta: web/ untouched by me; no publish gate owed.
+Untracked _hub_ready_shot.png in the worktree is old and named here; delete refused on this machine.

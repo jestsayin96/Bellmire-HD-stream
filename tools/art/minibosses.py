@@ -13991,3 +13991,409 @@ def relief():
 
 
 BUILDERS.update({"relief": relief})
+
+# =====================================================================
+# 41 THE SCRAPER - "Scourstone", theme `crypt`. 20 Nov 2026, ~15:4x CT.
+#
+# Built under Mr. E's standing permission (17:43) on a plan row that names it:
+# the team lead's 14:58 block says "A 41st MINIBOSS IS THE ONE THING YOU MAY
+# INVENT, AND IT IS YOURS TO TAKE", with the chain flush for the first time
+# (40 bodies, 40 feed rows, 0 bodies without a feed) so a new body starts the
+# next lap clean. The same row orders the acceptance test INTO THE SAME PUSH as
+# the body, because the Relief cost two firings by shipping the mesh first and
+# the proof second. Body, hero trio and register go out together here.
+#
+# THE BAR IS ONE IDEA THAT CHANGES THE FIGHT, AND THIS ONE ATTACKS A RESOURCE
+# NO BODY IN THIS FILE HAS EVER TOUCHED: WHAT THE PARTY HAS ALREADY DONE.
+# Forty bodies argue about the future - how much damage, where it goes, who
+# takes it, who may act, where they stand. Every one of them leaves the past
+# alone: a blow that landed stays landed. This one does not fight the party's
+# next action at all. It waits, and then it takes the LAST one back. The blow
+# comes off, the wound re-opens, the guard is gone. Nothing the party does is
+# banked until something else has been done after it, so the last thing you do
+# each round is the thing you are going to lose, and the party has to put its
+# real work in EARLY and spend its tail-end actions on something it does not
+# mind having rubbed out. You cannot out-damage it, because the damage is
+# precisely what it removes; you go for the plinth the slab stands on.
+#
+# WHY IT IS NOT A RE-SKIN. I printed and read all 40 `idea` strings in CANON
+# this run (measured off the file, not remembered - the count came off
+# `_report.json`'s 51 entries minus 11 `_chibi`, and the ideas off a regex over
+# this file). The five nearest, and why this is not them:
+#   TANNER     refuses a blow BEFORE it lands, and only a repeat of one. Here
+#              every blow lands, from anyone, and ONE of them is taken back
+#              afterwards - and it need not be a blow at all.
+#   FULLER     gives back what you put in: your damage returns as harm. This
+#              returns nothing. It deletes. There is no counter-punch to play
+#              around, only work that did not stick.
+#   SEXTON     will not stay down - it restores ITSELF out of its own graves.
+#              That is a creature healing. This never heals: it un-does the
+#              party's most recent act whatever that act was, and a heal or a
+#              guard is as good a thing for it to rub out as a sword blow.
+#   BEADLE     takes WHO acts. This leaves every choice the party has, and
+#              makes the LAST of them worthless. Opposite ends of a round.
+#   STRICKLER  scrapes your best hero down while it stands - a standing tax on
+#              a hero. This is a one-shot delete of an EVENT, and the party
+#              chooses which event by choosing what to do last.
+# What is new in the file is the KIND of resource attacked: the record.
+#
+# THEME: crypt, which had TWO bodies (Sexton, Ratcatcher) against four in keep
+# and four in workshop - counted off CANON this run. A clerk rubbing a name off
+# a slab is a crypt job in the plainest possible sense, and PLAINNESS IS THE
+# VOICE: he is not a sorcerer of time, he is a man with a scouring stone who
+# has been told to clear the wall.
+#
+# THREE FAULTS FROM MY OWN RELIEF WRITE-UP ARE DESIGNED AGAINST HERE, NOT
+# DISCOVERED AFTERWARDS:
+#   FAULT 1 (the profile was a thin slab). The man is STAGGERED in y and
+#           STOOPED into the work, and the mechanic is a mass on the far
+#           diagonal, so no cardinal view collapses onto one column.
+#   FAULT 3 (the back was a near-blank panel). The back carries the stack of
+#           three spare slates on their strap and the chalk bag - dark, with
+#           thin pale edges only, so the back has a FEATURE without getting a
+#           pale mass that would cost the facing.
+#   THE BEADLE'S WRAPPED BAND (no facing at all). The one pale thing above the
+#           belt is the DUST MASK, and it is on the front face only. From
+#           behind there is no mask, no eyes and nothing pale but two slate
+#           edges.
+# AND THE GAUGE IS THE PLINTH, NOT A THIRD OBJECT. The Relief learned that a
+# count has to be legible at every yaw and solved it with a floor disc. Doing
+# that again would be a re-skin of the solution; instead the five tally cuts
+# are on ALL FOUR FACES of the stone plinth the slab stands on, which is the
+# thing a player is meant to attack, costs no extra footprint, and cannot be
+# turned edge-on because a square at 45 degrees shows two faces to every
+# cardinal camera.
+# =====================================================================
+CANON.update({
+    "scraper": ("Scourstone", 2.55, (0.74, 0.72, 0.66), (0.72, 0.86, 0.98),
+                "crypt", "IT RUBS OUT WHAT YOU HAVE JUST DONE - it does not "
+                "block a blow, it does not heal and it takes nobody away. It "
+                "works, and when the round is over it draws the stone down the "
+                "slab and THE LAST THING THE PARTY DID IS UNDONE: the blow that "
+                "landed comes off, the wound that was closed opens again, the "
+                "guard that was set is gone. Nothing is kept until something "
+                "else has been done after it, so the party must get its real "
+                "work in early and spend its last action on something it is "
+                "willing to lose. Out-damaging it does not work, because the "
+                "damage is the thing it takes away - the answer is the STONE "
+                "PLINTH the slab stands on, and the FIVE CUTS on each of its "
+                "four faces are the gauge: one cut is one more wipe it has in "
+                "it, and you can count them from any side of the room",
+                0.40, "Someone is rubbing a name off the wall."),
+})
+ORDER = ORDER + ["scraper"]
+
+# PER-SLOT MATERIALS, same argument the Dyer measured and the Relief re-stated:
+# the tint-derived path pulls ONE hue over a whole body, and this body's whole
+# read depends on a VALUE SPREAD - a near-black man against pale cut stone.
+# 0.070 / 0.040 / 0.755 across three slots is a 19x range, and it is what makes
+# the slab the brightest object in the frame and the man the darkest, so the
+# thing the fight is about is the thing the eye lands on from the doorway.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"scraper"}
+
+OVERRIDE.update({
+    "scraper": {
+        # THE MAN: crypt wool and dusty leather, the darkest value on the body
+        # on purpose. The Moulder measured this and the Ratcatcher, Drover and
+        # Beadle applied it: a DARK body against PALE furniture has its outline
+        # carried by contrast, so no rim light has to be invented. Rough 0.88,
+        # no metal - a clerk's coat is not the shiny thing here.
+        'body': ((0.070, 0.066, 0.060), 0.88, 0.00),
+        # STRAPS, BOOTS, THE HANDLE, THE SPARE SLATES AND EVERY CUT MARK. Near
+        # black at 0.040 so the carved name-rows are countable dark marks on
+        # pale stone and the five plinth cuts are five separate marks.
+        # NAMED COMPROMISE, the same one the Relief and the Hooper named rather
+        # than hid: the boots and the shoulder strap are leather and they live
+        # in this slot, so they take an iron highlight they have not earned.
+        'dark': ((0.040, 0.042, 0.048), 0.58, 0.28),
+        # THE SLAB, THE PLINTH, THE SCOURING STONE, THE DUST HEAP, THE MASK:
+        # pale dry limestone. Rough 0.82, no metal - a polished slab would read
+        # as a mirror or a pot and this is chalk-dry worked stone.
+        'bone': ((0.755, 0.730, 0.665), 0.82, 0.00),
+        # THE EYES ONLY, and nothing else. Cold, small, and SUNK INSIDE THE
+        # HOOD's own shadow so the glow cannot reach the frame edge at any yaw -
+        # System 1's clipped-glow fault is a border check now, but a glow that
+        # cannot get near the border is better than one the check has to catch.
+        # NO LAMP ON THIS BODY: the light claim belongs to the Snuffer and this
+        # creature makes none.
+        'glow': ((0.72, 0.86, 0.98), 2.4),
+    },
+})
+
+
+def scraper():
+    """IT RUBS OUT WHAT YOU HAVE JUST DONE. The 41st body. PASS 2.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A stooped hooded clerk, near-black, working a PALE
+                         TAPERED GRAVE SLAB that stands on a cut-stone plinth.
+                         He is the darkest thing in the frame and the slab is
+                         the brightest, so the eye lands on the mechanic.
+      WHAT IS IT DOING?  SCOURING. He stands at the slab's LEFT EDGE, turned
+                         into it, both hands on a pale scouring stone pressed
+                         flat on the face, and a HEAP OF PALE DUST has piled
+                         on the floor between them.
+      HOW FAR ALONG?     THE SLAB'S BOTTOM THIRD IS ALREADY GONE - ground
+                         THINNER than the inscribed part above it, so the slab
+                         has a waist in its SILHOUETTE: the before and the
+                         after are the same object. Above the waist, lines of
+                         cut name-marks; below it, clean blank stone; and the
+                         bottom line is down to a single stub, mid-wipe.
+      HOW MANY MORE?     FIVE CUTS on each of the plinth's four faces. One cut
+                         is one more wipe. A square plinth yawed off the
+                         cardinals shows two faces to every camera standing on
+                         the floor, so the count survives every yaw without
+                         needing a floor disc.
+
+    *** PASS 2. FOUR CHANGES, AND PASS 1 IS WHY. I LOOKED AT front.png AND
+    *** side.png AND BOTH SAID THE SAME TWO THINGS.
+      (A) THE WORK WAS INVISIBLE. Pass 1 put the man and the slab on opposite
+          ends of a diagonal with the working face turned toward the man - and
+          therefore AWAY from both cardinal cameras. Front and side both showed
+          the arms running behind the slab and ending nowhere: no hands, no
+          stone, no contact. The creature read as a man standing NEXT TO a
+          stone, which is not the fight. It cannot be fixed by nudging the
+          yaw, because the face that points at the man is the face that points
+          away from a camera standing behind him - so the man now works the
+          slab FROM ITS LEFT EDGE, reaching across, and the face is free to
+          turn toward the room. That is also how you actually scour a wall.
+      (B) THE SLAB READ AS A TOWER BLOCK. Five even rows of three even marks on
+          a plain rectangle with a flat cap is a building with windows, and it
+          was the first thing I saw in both views. Fixed by making the slab a
+          TAPERED stele with a broken top instead of a capped box, and by
+          giving the inscription a left margin and RAGGED LINE ENDS - lines of
+          writing do not all finish in the same place, and windows do.
+      (C) THE SPARE SLATES FLOATED. In side.png the three slates on his back
+          hung 0.2-0.35 m clear of him, three fins in the air, because I placed
+          them behind his hips and then leaned the torso forward away from
+          them. They are now seated on the back surface the lean actually
+          produces, in his own frame rather than in world y.
+      (D) THE HOOD WAS NEARLY SHOULDER-WIDE and made the head read as the
+          biggest mass on the man. Peak radius 0.225 -> 0.185.
+    THEY SHARE ONE RENDER PASS BECAUSE (A) MOVES EVERY NUMBER (B)-(D) USE, but
+    each is judged separately below and in the write-up: (A) by whether the
+    stone and both hands are visible and touching in all three views, (B) by
+    whether a viewer calls it a stone or a building, (C) by whether the slates
+    touch the coat, (D) by head width against shoulder width.
+
+    FACING IS BY CONSTRUCTION. The man is turned 37 degrees off the front
+    camera, into the work. FRONT: the pale dust mask, the brow bar, two small
+    eyes, both arms. BACK: the strap cross, three spare slates and the chalk
+    bag, and nothing pale above the belt but two thin slate edges. The SLAB is
+    deliberately yaw-symmetric - both broad faces inscribed, the same waist all
+    the way round - because the facing is the MAN's job and a mechanic that
+    only reads from one side is the Sealer's press fault.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry.
+
+    ROOM-LOCK is not claimed or pre-judged here: minibossgen measures the real
+    footprint against floorgen's own corridor span and lid, and the report says
+    the verdict.
+    """
+    P = Parts("scraper")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # ------------------------------------------------------------ THE FRAMES
+    # Two local frames, because pass 1's faults were both frame faults: a man
+    # placed in world y while his torso leans somewhere else grows floating
+    # luggage, and a slab placed by eye turns its working face at the wall.
+    MX, MY = -0.34, 0.46          # the man, off the slab's left END
+    SX, SY = 0.42, -0.12          # the slab and its plinth
+    YAW = math.radians(-28.0)     # the slab's own yaw
+    CS, SN = math.cos(YAW), math.sin(YAW)
+    # HIS FACING: straight at the work. Derived from the two placements above
+    # and not dialled, so moving either mass re-aims him.
+    FX, FY = (SX - 0.42) - MX, (SY + 0.06) - MY
+    _fl = math.hypot(FX, FY)
+    FX, FY = FX / _fl, FY / _fl
+    RX, RY = FY, -FX              # his right
+    BF = math.atan2(FY, FX)
+
+    def sw(u, v, z):
+        """SLAB FRAME -> WORLD. u along the width, v out of the broad face.
+        THE WORKING FACE IS -v and it is turned toward the room, not at him."""
+        return (SX + u * CS - v * SN, SY + u * SN + v * CS, z)
+
+    def mw(a, b, z):
+        """MAN FRAME -> WORLD. a to his right, b forward along his facing."""
+        return (MX + a * RX + b * FX, MY + a * RY + b * FY, z)
+
+    T_UP = 0.150                  # inscribed shaft thickness at the waist
+    T_LO = 0.092                  # scoured shaft thickness - THE WAIST
+    Z_PL = 0.46                   # plinth top / slab foot
+    Z_WAIST = 0.92                # how far the scouring has got
+    Z_TOP = 1.88                  # top of the inscribed shaft
+
+    _open()
+    # ------------------------------------------------- THE MAN: BENT INTO IT
+    # Staggered stance along HIS OWN forward axis: lead foot 0.17 forward,
+    # trailing foot 0.15 back. seat() lifts each raked limb so its bottom ring
+    # touches z=0 - minibossgen grounds the merged body on its global minimum,
+    # so one hidden dip lifts every honest foot on the body into the air.
+    for s, fb in ((1, 0.17), (-1, -0.15)):
+        pts = seat([mw(s * 0.185, fb * 0.35, 0.84),
+                    mw(s * 0.235, fb * 0.80, 0.44),
+                    mw(s * 0.255, fb, 0.095)], 0.100)
+        limb(P, pts, 0.100, 0.080, 'body')
+        P.add(L.box(0.235, 0.385, 0.105), 'dark',
+              loc=mw(s * 0.255, fb - 0.035, 0.0525), rot=(0.0, 0.0, BF))
+    # THE STOOP: hip 0.80, shoulder 1.56, torso carried 0.30 m forward along
+    # his facing over that run. He is leaning his weight on the stone.
+    limb(P, [mw(0.0, -0.03, 0.80), mw(-0.01, 0.14, 1.20),
+             mw(-0.02, 0.31, 1.58)], 0.250, 0.230, 'body')
+    P.add(L.box(0.545, 0.275, 0.085), 'dark', loc=mw(0.0, 0.02, 0.98),
+          rot=(0.0, 0.0, BF))
+    for s in (-1, 1):
+        P.add(L.sphere(0.125, 0.118, 0.105, 12, 8), 'body',
+              loc=mw(s * 0.265, 0.20, 1.555))
+    # THE HOOD, pass 2 size: a cowl and a drawn peak, crown 2.00. Head width
+    # 0.37 against a shoulder span 0.83 - pass 1 was 0.45 against 0.83 and the
+    # head was the biggest single mass on the man.
+    P.add(L.sphere(0.155, 0.165, 0.190, 14, 10), 'body', loc=mw(-0.02, 0.32, 1.845))
+    P.add(aim(L.cone(0.185, 0.060, 0.215, 14), mw(-0.02, 0.28, 1.850),
+              (FX * 0.26, FY * 0.26, 1.0)), 'body')
+    # THE DUST MASK: the one pale thing above the belt, on his front only, with
+    # a brow bar over it so the eyes sit in their own shadow and no glow can
+    # reach the frame edge at any yaw.
+    P.add(L.box(0.175, 0.050, 0.100), 'bone', loc=mw(-0.02, 0.455, 1.795),
+          rot=(0.0, 0.0, BF))
+    P.add(L.box(0.205, 0.075, 0.045), 'dark', loc=mw(-0.02, 0.435, 1.905),
+          rot=(0.0, 0.0, BF))
+    for s in (-1, 1):
+        P.add(L.sphere(0.0245, 0.0245, 0.0245, 8, 6), 'glow',
+              loc=mw(s * 0.058, 0.425, 1.883))
+    _close("man")
+
+    _open()
+    # ---------------------------------------------- THE BACK: NOT A BLANK PANEL
+    # Fault 3 of my own Relief write-up answered, and pass 1's floating fins
+    # fixed: the slates are placed in HIS frame at b = -0.02 and back, which is
+    # the back surface his 0.25 m torso and his 0.29 m lean actually produce,
+    # so the first one touches the coat.
+    for i in range(3):
+        P.add(L.box(0.420 - i * 0.035, 0.052, 0.310 - i * 0.030), 'dark',
+              loc=mw(0.01, -0.02 - i * 0.052, 1.31 - i * 0.020),
+              rot=(0.0, 0.0, BF + 0.10 * (i - 1)))
+        P.add(L.box(0.420 - i * 0.035, 0.015, 0.026), 'bone',
+              loc=mw(0.01, -0.02 - i * 0.052,
+                     1.31 - i * 0.020 + (0.310 - i * 0.030) * 0.5),
+              rot=(0.0, 0.0, BF + 0.10 * (i - 1)))
+    for s in (-1, 1):             # the strap cross, over the shoulders
+        limb(P, [mw(s * 0.245, 0.22, 1.59), mw(-s * 0.085, -0.02, 1.16)],
+             0.038, 0.034, 'dark')
+    P.add(L.sphere(0.130, 0.105, 0.140, 12, 8), 'dark', loc=mw(-0.235, -0.05, 0.90))
+    _close("back")
+
+    _open()
+    # --------------------------------------- THE ARMS AND THE SCOURING STONE
+    # PASS 2 FAULT (A), FIXED HERE. Both hands are on one stone pressed on the
+    # slab's -v face, which is the face turned toward the room, and the hands
+    # sit near the slab's LEFT EDGE where a man standing beside it can actually
+    # reach. The stone TOUCHES the slab, the handle TOUCHES both grips, and the
+    # arms are 0.84-0.88 m of bent polyline against a 0.87 m straight reach -
+    # measured, because pass 1's layout needed 1.0 m arms and I only found that
+    # out by failing to place them.
+    HAND_N = sw(-0.385, -(T_LO * 0.5 + 0.080), 0.930)
+    HAND_F = sw(-0.195, -(T_LO * 0.5 + 0.100), 0.985)
+    for a, H in ((0.265, HAND_N), (-0.265, HAND_F)):
+        S = mw(a, 0.20, 1.56)
+        limb(P, [S, (S[0] * 0.45 + H[0] * 0.55, S[1] * 0.45 + H[1] * 0.55, 1.26),
+                 H], 0.095, 0.072, 'body')
+        P.add(L.sphere(0.082, 0.082, 0.078, 10, 7), 'dark', loc=H)
+    # THE STONE, flat on the face, and its dark handle bar through both grips.
+    P.add(L.box(0.300, 0.100, 0.100), 'dark',
+          loc=sw(-0.290, -(T_LO * 0.5 + 0.048), 0.955), rot=(0.0, 0.0, YAW))
+    P.add(L.box(0.310, 0.020, 0.022), 'bone',
+          loc=sw(-0.290, -(T_LO * 0.5 + 0.098), 0.912), rot=(0.0, 0.0, YAW))
+    limb(P, [sw(-0.420, -(T_LO * 0.5 + 0.080), 0.930),
+             sw(-0.160, -(T_LO * 0.5 + 0.100), 0.988)], 0.030, 0.030, 'dark')
+    _close("stone")
+
+    _open()
+    # ------------------------------- THE PLINTH: THE GAUGE AND THE WEAK POINT
+    # 0.62 square, 0.46 tall. FIVE cuts on EACH of the four faces, 0.055 wide
+    # at 0.112 pitch - the Hooper's pass-6 spacing finding (five rings at
+    # 0.13 m read as one helix) applied before the first render, not after it.
+    PL = 0.62
+    P.add(L.box(PL, PL, Z_PL), 'bone', loc=sw(0.0, 0.0, Z_PL * 0.5),
+          rot=(0.0, 0.0, YAW))
+    for face in range(4):
+        fa = YAW + face * (TAU / 4.0)
+        nx, ny = math.cos(fa), math.sin(fa)
+        tx, ty = -ny, nx
+        for k in range(5):
+            o = (k - 2) * 0.112
+            P.add(L.box(0.055, 0.075, 0.175), 'dark',
+                  loc=(SX + nx * (PL * 0.5 - 0.012) + tx * o,
+                       SY + ny * (PL * 0.5 - 0.012) + ty * o, 0.265),
+                  rot=(0.0, 0.0, fa))
+    _close("plinth")
+
+    _open()
+    # ------------------------------------------- THE SLAB: THE RECORD ITSELF
+    # PASS 2 FAULT (B), FIXED HERE. A TAPERED STELE, not a capped box: three
+    # stacked segments 0.82 -> 0.775 -> 0.725 wide and 0.150 -> 0.140 thick, so
+    # the stone narrows as it rises the way cut stone does and a cabinet does
+    # not. The SCOURED SHAFT below the waist keeps the full 0.82 width and
+    # drops to 0.092 thick - that step is the mechanic in the SILHOUETTE, and a
+    # surface-only erasure would have been invisible in outline and to every
+    # number this lane computes.
+    P.add(L.box(0.82, T_LO, Z_WAIST - Z_PL), 'bone',
+          loc=sw(0.0, 0.0, (Z_PL + Z_WAIST) * 0.5), rot=(0.0, 0.0, YAW))
+    SEGS = [(0.92, 1.24, 0.820, 0.150), (1.24, 1.58, 0.775, 0.145),
+            (1.58, Z_TOP, 0.725, 0.140)]
+    for z0, z1, w, t in SEGS:
+        P.add(L.box(w, t, z1 - z0), 'bone', loc=sw(0.0, 0.0, (z0 + z1) * 0.5),
+              rot=(0.0, 0.0, YAW))
+    # THE BROKEN TOP. Not a cap: a short run of the original crown at the left
+    # and one surviving corner block at the right, with the middle gone. A
+    # clean top edge is a panel; a broken one is a stone that has been worked.
+    P.add(L.box(0.400, 0.165, 0.070), 'bone', loc=sw(-0.155, 0.0, Z_TOP + 0.035),
+          rot=(0.0, 0.0, YAW))
+    P.add(L.box(0.130, 0.150, 0.042), 'bone', loc=sw(0.280, 0.0, Z_TOP + 0.021),
+          rot=(0.0, 0.0, YAW))
+    # THE INSCRIPTION, ON BOTH BROAD FACES. A LEFT MARGIN AND RAGGED LINE ENDS:
+    # lines of writing start together and finish in different places, which is
+    # exactly what pass 1's even grid did not do. The BOTTOM line is down to a
+    # single short stub - the stone has reached it and it is half gone.
+    ROWS = [(1.035, [(-0.300, 0.105)]),
+            (1.205, [(-0.330, 0.215), (-0.050, 0.300)]),
+            (1.375, [(-0.330, 0.160), (-0.120, 0.120), (0.065, 0.250)]),
+            (1.545, [(-0.310, 0.300), (0.045, 0.175)]),
+            (1.715, [(-0.300, 0.200), (-0.040, 0.100), (0.115, 0.155)])]
+    for z, marks in ROWS:
+        tt = 0.150
+        for z0, z1, w, t in SEGS:
+            if z0 <= z < z1:
+                tt = t
+        for sv in (1.0, -1.0):
+            vf = sv * (tt * 0.5 - 0.009)
+            for u0, wm in marks:
+                P.add(L.box(wm, 0.055, 0.040), 'dark',
+                      loc=sw(u0 + wm * 0.5, vf, z), rot=(0.0, 0.0, YAW))
+    _close("slab")
+
+    _open()
+    # --------------------------------------------- THE DUST: THE WORK IS REAL
+    # A low pale heap on the floor at the working face, built through _rev so
+    # it is the same width at every yaw and lying ON the floor, which is the one
+    # place a camera standing on the floor cannot hide. The second, smaller
+    # heap runs back toward his boots so the dust is plainly HIS and not a rock
+    # that happens to be there.
+    P.add(_rev([(0.000, 0.420), (0.055, 0.360), (0.135, 0.205),
+                (0.200, 0.000)], 20), 'bone', loc=sw(-0.090, -0.380, 0.0))
+    P.add(_rev([(0.000, 0.205), (0.038, 0.150), (0.072, 0.000)], 16),
+          'bone', loc=sw(-0.430, -0.285, 0.0))
+    _close("dust")
+    return P
+
+
+BUILDERS.update({"scraper": scraper})

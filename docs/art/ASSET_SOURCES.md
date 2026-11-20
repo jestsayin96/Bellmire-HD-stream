@@ -180,3 +180,41 @@ the bytes of a glb that nonetheless imports one; a rigged glb gets one and an
 unrigged one does not. It is a Blender 5.2 glTF-import artifact for any glb
 carrying an armature, so it is not in the shipped asset and not in Godot.
 Drop it before measuring; do not report it as a defect.
+
+---
+
+## TIER 1 PACKS MEASURED 20 NOV 2026, 08:4x CT (worldfit, read-only)
+
+Mr. E's 07:24 directive put Systems 15 (town buildings), 47 (dungeon props) and
+68 (nature) in Tier 1 and told the fleet to wire WHOLE PACK DIRECTORIES. The art
+lane measured the directories below with `tools/art/worldfit.py` so the game
+build can batch-wire them (`renders/art/worldfit/_packs_manifest.json`).
+
+**MEASURING A PACK COPIES NOTHING.** Not one file below was imported into
+`assets/`, re-exported, or modified by this run; worldfit opens each file in a
+throwaway scene and reads its bounds. These rows exist because the NUMBERS are
+now published and the game build has been told to wire from them - a licence has
+to be on the ledger before that, not after.
+
+**EVERY LICENCE BELOW WAS READ OFF THE PACK'S OWN LICENCE FILE ON DISK THIS
+RUN.** No search snippets. All six are CC0 1.0 Universal, which permits
+commercial use with no attribution; credit is kept anyway.
+
+| Pack | Author | Licence | Licence text on disk | Directory measured |
+|---|---|---|---|---|
+| Medieval Village MegaKit (Standard / FREE) | Quaternius | **CC0 1.0** | `_packs/Medieval_Village_MegaKit/Medieval Village MegaKit[Standard]/License_Standard.txt` | `.../glTF` (176 files) |
+| Fantasy Town Kit 2.0 | Kenney (www.kenney.nl) | **CC0 1.0** | `_packs/kenney_fantasy-town-kit_2.0/License.txt` | `.../Models/GLB format` (167) |
+| KayKit Forest Nature Pack 1.0 FREE | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0** | `_packs/KayKit_Forest_Nature_Pack_1.0_FREE/.../License.txt` | `.../Assets/gltf` (105) |
+| Ultimate Stylized Nature (May 2022) | Quaternius | **CC0 1.0** | `_packs/Ultimate_Stylized_Nature/Ultimate Stylized Nature - May 2022/License.txt` | `.../glTF` (36) |
+| KayKit Dungeon Pack 1.0 | Kay Lousberg | **CC0 1.0** | `_packs/kaykit_dungeon_pack_CC0/License.txt` | `.../Models/gltf` (185) |
+| Graveyard Kit 5.0 | Kenney | **CC0 1.0** | `_packs/kenney_graveyard-kit_5.0/License.txt` | not measured this run - row written while the file was open |
+
+### ONE THING WRONG IN A LICENCE FILE, AND IT IS QUATERNIUS'S, NOT OURS
+`Ultimate_Stylized_Nature/.../License.txt` opens **"Ultimate Platformer Pack by
+@Quaternius"** - the wrong pack name, a copy-paste in the vendor's own file. The
+grant underneath it is unambiguous CC0 1.0 with the Public Domain Dedication URL,
+and Quaternius's blanket licence covers the pack either way, so the pack is
+clear to use. It is recorded here so that nobody later quotes that file as proof
+for the Stylized Nature pack without knowing it names another one. **If a
+stricter proof is ever wanted, the authority is quaternius.com's licence page for
+this pack, not this text file.**

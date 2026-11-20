@@ -4,6 +4,13 @@ build can wire a pack directory per cycle instead of one barrel at a time.
   blender -b -noaudio -P tools/art/worldfit.py -- --repo <repo> --dir assets/props
                                                   [--geom-repo <shipping tree>]
 
+  A PACK IS NOT IN THE REPO, so --dir also takes `label=ABSOLUTE\\PATH`:
+  blender ... -- --repo <repo> --geom-repo <shipping tree> --recurse \\
+      --dir "pack:Medieval_Village_MegaKit=C:\\hd adventure\\_packs\\...\\glTF"
+  The label is what goes in the manifest; measuring a pack NEVER copies or
+  modifies it, and the pack's own licence file is read before its numbers ship
+  (docs/art/ASSET_SOURCES.md).
+
 WHY, 20 Nov 2026 07:5x CT. Mr. E's 07:24 directive: wire an ENTIRE PACK
 DIRECTORY per cycle, 10-20 assets, and Tier 1 is the world-placed systems -
 town buildings (15), dungeon props (47), nature (68). The art lane's job on a
@@ -20,9 +27,18 @@ this lane before):
   dims_m x/y/z      world-space AABB after import, metres
   footprint_m       max(x, y) - the term the corridor gate takes
   height_m          z extent
-  base_dz_m         min_z. *** THE PLACEMENT NUMBER. *** A model whose pivot is
-                    at its own centre sinks half its height into the floor when
-                    a spawner puts it at y=0. Positive floats, negative sinks.
+  base_dz_m         min_z, SIGNED, AND THE SIGN IS HALF THE INSTRUCTION.
+                    *** THE PLACEMENT NUMBER. *** How far the lowest vertex sits
+                    from the pivot: NEGATIVE means the mesh reaches BELOW the
+                    pivot and sinks that far through the floor when a spawner
+                    puts the pivot at y=0; POSITIVE means it FLOATS that far
+                    above the pivot, which is a wall-mount tell, not a fault.
+                    `needs_base_offset` is abs() > 5 cm and therefore holds
+                    BOTH, so the summary publishes them as two SIGNED lists -
+                    `sinks_below_pivot` and `floats_above_pivot` - because a
+                    single-sign shift applied to the whole list would fix the
+                    sinkers and bury every floater. Of the 173 files measured
+                    under `assets/` on 20 Nov, 50 sink and 3 float.
   centre_dx/dy_m    how far the footprint centre sits off the pivot, so a
                     spawner can centre a prop in a cell instead of in its file
   cells             ceil(footprint / floorgen's G) - how many corridor cells it eats
@@ -110,11 +126,46 @@ def measure(path):
     return row
 
 
+def parse_dir(spec, repo):
+    """`label=ABS/PATH` -> (label, abspath); otherwise repo-relative."""
+    if "=" in spec and os.path.isabs(spec.split("=", 1)[1]):
+        label, path = spec.split("=", 1)
+        return label, path
+    return spec, os.path.join(repo, spec)
+
+
+def find_models(root, recurse):
+    """Model files under root, relative to it. Non-recursive by default."""
+    if not recurse:
+        return [f for f in os.listdir(root)
+                if f.lower().endswith(EXT) and os.path.isfile(os.path.join(root, f))]
+    hits = []
+    for base, _, files in os.walk(root):
+        for f in files:
+            if f.lower().endswith(EXT):
+                hits.append(os.path.relpath(os.path.join(base, f), root))
+    return hits
+
+
+def out_path(args):
+    return args.out or os.path.join(args.repo, "renders", "art", "worldfit", "_manifest.json")
+
+
+def write(out, man):
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump(man, f, indent=1, sort_keys=True)
+
+
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
     ap.add_argument("--dir", required=True, default=None, action="append",
-                    help="repo-relative directory of .glb/.gltf; repeatable")
+                    help="repo-relative directory of .glb/.gltf, or "
+                         "`label=ABSOLUTE/PATH` for a pack outside the repo; repeatable")
+    ap.add_argument("--recurse", action="store_true",
+                    help="walk subdirectories. Packs nest their exports; "
+                         "assets/ dirs are flat and do not need it.")
     ap.add_argument("--dungeon-dir", default=None, action="append",
                     help="a --dir whose contents are DUNGEON-placed, so floorgeom's "
                          "corridor and lid verdicts BIND. Everything else is "
@@ -140,15 +191,16 @@ def main(argv):
            "dirs": {}, "errors": []}
 
     total = 0
-    for d in args.dir:
-        root = os.path.join(args.repo, d)
+    for spec in args.dir:
+        d, root = parse_dir(spec, args.repo)
         if not os.path.isdir(root):
-            man["errors"].append("%s is not a directory" % d)
+            man["errors"].append("%s is not a directory (%s)" % (d, root))
             continue
-        files = sorted(f for f in os.listdir(root) if f.lower().endswith(EXT))
+        files = sorted(find_models(root, args.recurse))
         rows = []
         for i, f in enumerate(files):
             row = measure(os.path.join(root, f))
+            row["rel"] = f.replace(os.sep, "/")
             if row.get("footprint_m") is not None:
                 v, errs = FG.verdict(geom, row["footprint_m"], row["height_m"])
                 row["corridor"] = v["corridor"]
@@ -164,6 +216,12 @@ def main(argv):
                 # pivot is its wall mount, and it would hang through the floor.
                 # 5 cm is the line between noise and a placement number.
                 row["needs_base_offset"] = abs(row["base_dz_m"]) > BASE_EPS_M
+                # The SIGN, as its own field, so no reader has to infer it from
+                # prose. The team lead found at 07:58 CT that WORLDFIT.md's
+                # definition sentence said "below its own pivot" while the list
+                # it counted was abs(), so 2 of 22 published as sinkers float.
+                row["base_dir"] = ("sink" if row["base_dz_m"] < -BASE_EPS_M else
+                                   "float" if row["base_dz_m"] > BASE_EPS_M else "flush")
                 row["base_note"] = ("sinks %.3f m below its pivot" % -row["base_dz_m"]
                                     if row["base_dz_m"] < -BASE_EPS_M else
                                     ("floats %.3f m above its pivot" % row["base_dz_m"]
@@ -188,16 +246,28 @@ def main(argv):
             ("through_lid" if binding else "taller_than_the_lid_FYI"):
                 sorted(r["file"] for r in ok if r["lid"] == "THROUGH-LID"),
             "unit_flagged": sorted(r["file"] for r in ok if r["unit_flag"]),
+            # abs() list kept because the game build already reads this key -
+            # but it MIXES SIGNS, so the two signed lists beside it are the ones
+            # a spawner should act on. A single shift over this list would put
+            # every floater in the floor.
             "needs_base_offset": sorted(r["file"] for r in ok if r["needs_base_offset"]),
+            "sinks_below_pivot": sorted((r["file"], r["base_dz_m"])
+                                        for r in ok if r["base_dir"] == "sink"),
+            "floats_above_pivot": sorted((r["file"], r["base_dz_m"])
+                                         for r in ok if r["base_dir"] == "float"),
+            "n_sink": sum(1 for r in ok if r["base_dir"] == "sink"),
+            "n_float": sum(1 for r in ok if r["base_dir"] == "float"),
+            "root": root,
             "tallest": max((r["height_m"] for r in ok), default=None),
             "widest_footprint_m": max((r["footprint_m"] for r in ok), default=None),
             "rows": rows,
         }
+        # A pack run is hundreds of imports long. Flush after EVERY directory so
+        # a timeout loses the directory in flight and not the ones behind it.
+        write(out_path(args), man)
 
-    out = args.out or os.path.join(args.repo, "renders", "art", "worldfit", "_manifest.json")
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with open(out, "w", encoding="utf-8") as f:
-        json.dump(man, f, indent=1, sort_keys=True)
+    out = out_path(args)
+    write(out, man)
     bad = sum(v["failed"] for v in man["dirs"].values()) + len(man["errors"])
     # RED ON ZERO: a manifest over no files is not a green manifest.
     print("WORLDFIT " + ("RED - measured 0 files" if total == 0 else

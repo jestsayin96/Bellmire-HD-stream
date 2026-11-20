@@ -1,0 +1,126 @@
+{
+ "checks": {
+  "border_clear": true,
+  "labels_blank_or_clipped": [],
+  "labels_expected": 6,
+  "labels_ok": true,
+  "labels_read": 6,
+  "lum_max": 0.8824,
+  "lum_min": 0.1216,
+  "nonblank": true,
+  "props_border_frac": 0.0,
+  "props_opaque_frac": 0.0245,
+  "props_visible": true
+ },
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\jests-hd-medieval-adventure (branch laptop) scripts/floorgen.gd sha bc3a603f vs 2c0b1b9bf30b8194a458d84ae094433df0c397e5 sha bc3a603f",
+ "labels": {
+  "1.80 m bar": {
+   "box": [
+    190,
+    304,
+    273,
+    361
+   ],
+   "in_frame": true,
+   "opaque_px": 896
+  },
+  "Bush_2_A_Color1.gltf": {
+   "box": [
+    1424,
+    304,
+    1641,
+    361
+   ],
+   "in_frame": true,
+   "opaque_px": 1757
+  },
+  "Prop_Vine1.gltf": {
+   "box": [
+    888,
+    158,
+    1025,
+    215
+   ],
+   "in_frame": true,
+   "opaque_px": 1261
+  },
+  "Roof_Log.gltf": {
+   "box": [
+    324,
+    304,
+    443,
+    361
+   ],
+   "in_frame": true,
+   "opaque_px": 1322
+  },
+  "banner.gltf.glb": {
+   "box": [
+    616,
+    130,
+    724,
+    187
+   ],
+   "in_frame": true,
+   "opaque_px": 1049
+  },
+  "tileSpikes.gltf.glb": {
+   "box": [
+    1188,
+    235,
+    1304,
+    292
+   ],
+   "in_frame": true,
+   "opaque_px": 1331
+  }
+ },
+ "placed": [
+  {
+   "base_dir": "float",
+   "base_dz_m": 3.8487,
+   "below_floor": false,
+   "dir": "pack:Medieval_Village_MegaKit",
+   "file": "Roof_Log.gltf",
+   "manifest_base_dz_m": 3.8487,
+   "top_m": 5.2357
+  },
+  {
+   "base_dir": "sink",
+   "base_dz_m": -2.5303,
+   "below_floor": true,
+   "dir": "pack:kaykit_dungeon_pack",
+   "file": "banner.gltf.glb",
+   "manifest_base_dz_m": -2.5303,
+   "top_m": 0.0846
+  },
+  {
+   "base_dir": "sink",
+   "base_dz_m": -2.1205,
+   "below_floor": true,
+   "dir": "pack:Medieval_Village_MegaKit",
+   "file": "Prop_Vine1.gltf",
+   "manifest_base_dz_m": -2.1205,
+   "top_m": 0.482
+  },
+  {
+   "base_dir": "sink",
+   "base_dz_m": -1.0,
+   "below_floor": true,
+   "dir": "pack:kaykit_dungeon_pack",
+   "file": "tileSpikes.gltf.glb",
+   "manifest_base_dz_m": -1.0,
+   "top_m": 1.0
+  },
+  {
+   "base_dir": "flush",
+   "base_dz_m": 0.0,
+   "below_floor": false,
+   "dir": "pack:KayKit_Forest_Nature",
+   "file": "Bush_2_A_Color1.gltf",
+   "manifest_base_dz_m": 0.0,
+   "top_m": 0.528
+  }
+ ],
+ "png": "renders/art/worldfit/_pack_base_offsets.png"
+}

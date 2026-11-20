@@ -165,3 +165,172 @@ through `_prop_mesh_m`, which reads the primitive and triangle counts off the
 .gltf JSON before import and caps by the model rather than by a constant. Both
 shipped at full density (976 and 730 triangles). See docs/art/PROPS_SLOT_AUDIT.md
 for why the old fixed cap was the real cause of the torn Barrel.
+
+## System 7 - armour variety (19 Nov 2026, art lane)
+
+The five armour bodies of the Quaternius **Ultimate RPG Items Pack (Aug 2019)** - `Armor_Black`,
+`Armor_Golden`, `Armor_Leather`, `Armor_Metal`, `Armor_Metal2` - are now fitted to the KayKit hero
+body and exported to `assets/gear/armour/*.glb`. The pack is already recorded in the table above;
+its licence file is `License.txt` inside the pack and reads, verbatim: "License: CC0 1.0 Universal
+(CC0 1.0) Public Domain Dedication". I read that file this run rather than a search snippet.
+No attribution is required; the pack is cleared for commercial use and nothing is redistributed as
+an asset. Source geometry is unmodified - the fit is a transform (uniform scale, a depth scale and
+a depth offset) baked at export. Measurements and the fit proof: `renders/art/s7_armour/`.
+
+## System 8 - shields (game build S50, 19 Nov 2026)
+The five shields of the Quaternius **Medieval Weapons Pack (Sept 2018)** (row above, CC0 1.0) -
+`Shield_Celtic_Golden`, `Shield_Heater`, `Shield_Heater_2`, `Shield_Round`, `Shield_Round_2` - copied
+unmodified as FBX into `assets/gear/shields/` with `LICENSE_Quaternius_MedievalWeapons_CC0.txt` beside
+them (the extracted pack carries no licence file; the note is ours). `_packs/handpainted_weapons/`
+shield_a..d were NOT used: that folder carries no licence file and no source, so its licence is
+unverified and it stays out until one is read.
+### 19 Nov 2026 - THE BESTIARY KIT ENTERS THE LOG, AND IT WAS ALREADY IN THE REPO
+
+`assets/monsters/Imp.glb`, `Puglin.glb` and their four texture maps each were
+**committed to this repo before this file existed** and were never logged. That
+is the same gap `assets/props/` had on 17 Nov, closed the same way - by writing
+the row rather than working around it.
+
+The first monster-pack variant miniboss, `assets/monsters/minibosses/broodglut.glb`
+(see `docs/art/MONSTER_VARIANTS.md`), is the repo's `Puglin.glb` geometry wearing
+the kit's own alternate skin `T_Puglin_BaseColor_2.png`, with all four maps
+brought down to 1024 - 2.98 MB against the 7.85 MB original. No pack file is
+re-exported as a standalone asset and nothing is redistributed AS an asset,
+which is the only line the QAL draws.
+
+| Pack | Author | Licence | Licence text on disk | Contents used |
+|---|---|---|---|---|
+| Bestiary - Dungeon Monsters Kit (Standard / FREE) | Quaternius | **Quaternius Asset License (QAL) v1.0** | `_packs/Bestiary_Dungeon_Monsters_Kit/Bestiary - Dungeon Monsters Kit[Standard]/License_Standard.txt` | `Imp.glb`, `Puglin.glb` (rigged, unanimated) and their `BaseColor_1/2/3`, `Emissive`, `Normal`, `ORM` maps. `BaseColor_2` is the Broodglut's skin. |
+
+**The licence page was read on disk this run, not inferred from a search
+snippet** - that is the rule, and reading a snippet instead is exactly how the
+wrong Quaternius ban got made on 16 Nov. QAL v1.0 grants a worldwide,
+royalty-free, non-exclusive, perpetual licence for personal, educational AND
+commercial use, with no credit required; the single restriction is reselling or
+redistributing the Assets as Assets. The row is kept anyway.
+
+**NOTE FOR ANYONE WHO MEASURES THESE FILES.** Imported into Blender they appear
+to carry a stray 42-vertex `Icosphere` of radius 1 on the origin, and if it is
+measured with the body the creature reports 1.902 x 2.000 x 2.000 instead of
+1.468 x 0.611 x 0.931. **It is not in the file.** The string does not occur in
+the bytes of a glb that nonetheless imports one; a rigged glb gets one and an
+unrigged one does not. It is a Blender 5.2 glTF-import artifact for any glb
+carrying an armature, so it is not in the shipped asset and not in Godot.
+Drop it before measuring; do not report it as a defect.
+
+---
+
+## TIER 1 PACKS MEASURED 20 NOV 2026, 08:4x CT (worldfit, read-only)
+
+Mr. E's 07:24 directive put Systems 15 (town buildings), 47 (dungeon props) and
+68 (nature) in Tier 1 and told the fleet to wire WHOLE PACK DIRECTORIES. The art
+lane measured the directories below with `tools/art/worldfit.py` so the game
+build can batch-wire them (`renders/art/worldfit/_packs_manifest.json`).
+
+**MEASURING A PACK COPIES NOTHING.** Not one file below was imported into
+`assets/`, re-exported, or modified by this run; worldfit opens each file in a
+throwaway scene and reads its bounds. These rows exist because the NUMBERS are
+now published and the game build has been told to wire from them - a licence has
+to be on the ledger before that, not after.
+
+**EVERY LICENCE BELOW WAS READ OFF THE PACK'S OWN LICENCE FILE ON DISK THIS
+RUN.** No search snippets. All six are CC0 1.0 Universal, which permits
+commercial use with no attribution; credit is kept anyway.
+
+| Pack | Author | Licence | Licence text on disk | Directory measured |
+|---|---|---|---|---|
+| Medieval Village MegaKit (Standard / FREE) | Quaternius | **CC0 1.0** | `_packs/Medieval_Village_MegaKit/Medieval Village MegaKit[Standard]/License_Standard.txt` | `.../glTF` (176 files) |
+| Fantasy Town Kit 2.0 | Kenney (www.kenney.nl) | **CC0 1.0** | `_packs/kenney_fantasy-town-kit_2.0/License.txt` | `.../Models/GLB format` (167) |
+| KayKit Forest Nature Pack 1.0 FREE | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0** | `_packs/KayKit_Forest_Nature_Pack_1.0_FREE/.../License.txt` | `.../Assets/gltf` (105) |
+| Ultimate Stylized Nature (May 2022) | Quaternius | **CC0 1.0** | `_packs/Ultimate_Stylized_Nature/Ultimate Stylized Nature - May 2022/License.txt` | `.../glTF` (36) |
+| KayKit Dungeon Pack 1.0 | Kay Lousberg | **CC0 1.0** | `_packs/kaykit_dungeon_pack_CC0/License.txt` | `.../Models/gltf` (185) |
+| Graveyard Kit 5.0 | Kenney | **CC0 1.0** | `_packs/kenney_graveyard-kit_5.0/License.txt` | not measured this run - row written while the file was open |
+
+### ONE THING WRONG IN A LICENCE FILE, AND IT IS QUATERNIUS'S, NOT OURS
+`Ultimate_Stylized_Nature/.../License.txt` opens **"Ultimate Platformer Pack by
+@Quaternius"** - the wrong pack name, a copy-paste in the vendor's own file. The
+grant underneath it is unambiguous CC0 1.0 with the Public Domain Dedication URL,
+and Quaternius's blanket licence covers the pack either way, so the pack is
+clear to use. It is recorded here so that nobody later quotes that file as proof
+for the Stylized Nature pack without knowing it names another one. **If a
+stricter proof is ever wanted, the authority is quaternius.com's licence page for
+this pack, not this text file.**
+
+## LICENCE GATE - THE PACKS WITH NO LICENCE FILE ON DISK (20 Nov 2026, 10:0x CT)
+
+The 08:58 plan row carries Mr. E's rule as enforcement: **no model out of a pack
+without a read licence goes into `assets/`.** Measuring a pack copies nothing and
+is not gated; importing is.
+
+**I COUNTED THIS MYSELF OFF THE TREE AND I GET A DIFFERENT NUMBER TO THE HUB'S.**
+The hub's catalogue flags **18 of 49**. Walking `_packs` for a file whose name
+contains `licence`/`license`/`copying` I get **21 of 49** - and two of those 21
+(`_extracted_rpg_items`, `_generated`) are OUR OWN working directories, not
+third-party packs at all, so the real figure is **19 third-party packs**. The
+likely cause of the spread is the recipe: I do NOT accept a bare `README` as a
+licence file, and a README is exactly where several of these state their terms.
+Neither number is wrong; they answer different questions. Read the page, not the
+count.
+
+NO LICENCE FILE FOUND ON DISK - IMPORT GATED UNTIL THE PAGE IS READ:
+3d_crystals_new, Animals_Pack_by_Quaternius, Castle, Stone_coffin, dragon_oga,
+dungeon_collection_2, dungeon_collection_for_assetforge, free_mine_assets,
+golem_clean_blend, grass_07, handpainted_weapons, low-poly_RPG_item_collection_2,
+low-poly_RPG_item_collection_3, medieval_pack_CC0, modular_terrain_collections,
+modular_village_collection, quaternius_medieval_weapons_2018_CC0, rocks,
+ultimate_animated_character_pack.
+(plus `_extracted_rpg_items` and `_generated`, which are ours.)
+
+*** NOTE THE TRAP IN THAT LIST: `medieval_pack_CC0` AND
+*** `quaternius_medieval_weapons_2018_CC0` CARRY "CC0" IN THEIR FOLDER NAMES AND
+*** STILL HAVE NO LICENCE FILE IN THEM. A folder name is not a licence, in
+*** exactly the way a search snippet is not a licence. Both are gated.
+
+**THE BATCH-READY WORK IS NOT GATED BY THIS.** All five directories measured in
+worldfit pass 2 carry a licence file that was read off disk on 20 Nov:
+`kaykit_dungeon_pack_CC0` (185, System 47), `Medieval_Village_MegaKit` (176) and
+`kenney_fantasy-town-kit_2.0` (167) for System 15, `KayKit_Forest_Nature_Pack_1.0_FREE`
+(105) and `Ultimate_Stylized_Nature` (36) for System 68 - 669 rows, all CC0 1.0.
+
+## THE THREE PACKS IN THE 18/21 GAP - TERMS ON FILE IN A README (20 Nov 2026, 10:5x CT)
+
+The 09:58 plan row settled the split between my count of 21 packs with no file
+NAMED licence and the hub's 18 packs with no licence text ANYWHERE. Both counts
+were right about different questions; **18 is the number that gates imports.**
+The three packs in the gap are recorded here with the terms **as I read them off
+disk myself this run**, not as quoted from the plan row:
+
+**`_packs/Stone_coffin/readme.txt` - CC0 1.0, usable.** "Provided by Nobiax."
+then verbatim: *"CC0 1.0 Universal (CC0 1.0) / Public Domain Dedication / No
+Copyright / ... You can copy, modify, distribute and perform the work, even for
+commercial purposes, all without asking permission."* A link back is requested,
+not required.
+
+**`_packs/rocks/readme.txt` - CC0 1.0, usable.** The same explicit CC0 1.0
+paragraph, same author, same requested-not-required link.
+
+**`_packs/grass_07/readme.txt` - NOT CC0. A custom permissive grant, usable.**
+The whole file, verbatim, because the point of this entry is that it must not be
+re-recorded as CC0 by a later seat:
+
+> Provided by Nobiax.
+>
+> Absolutely free to use or to modify in any kind of work (personal, commercial
+> or else).
+>
+> Give me a link of the result at nobiax.deviantart.com or my other account on
+> OpenGameArt.com or ShareCG.com
+> ( watch my journal on deviantart ) ;)
+
+Commercial use is granted outright. The link is a REQUEST ("give me a link"),
+not a condition of the grant - there is no "provided that" anywhere in it - so
+it is not an attribution licence and it does not infect anything. It is also not
+share-alike and not non-commercial, so none of the three forbidden families
+apply. **Record it as a custom permissive grant, never as CC0.**
+
+*** THE NAMING TRAP, RESTATED FROM THE OTHER SIDE. *** This file already warns
+that a folder called `medieval_pack_CC0` is not licensed by its name. These three
+are the mirror image: **a pack with no file called `LICENSE` can still be fully
+licensed**, and two of these three are CC0 outright. A filename is not a licence
+in either direction. The recipe that counts files answers "where do I have to go
+and read", not "what am I allowed to use".

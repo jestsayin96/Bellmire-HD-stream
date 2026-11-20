@@ -212,6 +212,11 @@ func _next_floor() -> void:
 ## up for free. The data is laid by dungeon_hd._set_pieces; this is the ONLY code
 ## that resolves it, so the test can count resolutions straight off setpieces_fired.
 static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd)
+## S38: the Beadle's holds are counted per held hero PER FRAME, so they live here and NOT in
+## setpieces_fired - _l29c_test C sums that dict and could otherwise pass on holds alone.
+static var order_held_frames := 0
+static var rammer_struck := 0                # S38: delvers caught on the pile at the count
+static var rammer_read := 0                  # S38: delvers on the pile who read the hold and stepped off
 const _AMBUSH_LINE := [
 	"Shadows peel off the walls - an ambush! %s surges in.",
 	"A grate shifts, and %s is already upon them.",
@@ -385,7 +390,35 @@ const MB_FIT := {
 	"ratcatcher": 1.07,   # S32: art's _fit_ratcatcher_register.json pairs.ratcatcher.ratio, copied not re-derived
 	"drover": 1.00,   # S32: art's _fit_report.json pairs.drover.ratio, copied not re-derived
 	"paviser": 1.09,   # S32: art's _fit_report.json pairs.paviser.ratio (MINIBOSSES.md 29), copied not re-derived
-	"fenman": 1.03}   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
+	"fenman": 1.03,   # S32: art's _fit_report.json pairs.fenman.ratio (MINIBOSSES.md 30, lead's 05:58 row), copied not re-derived
+	"comfitmaker": 0.93,   # S33: art's _fit_comfitmaker_register.json pairs.comfitmaker.ratio, copied not re-derived
+	"leech": 0.95,   # S33: art's _fit_leech_register.json pairs.leech.ratio (MINIBOSSES.md 32), copied not re-derived
+	"rammer": 1.12,   # S38: art's _fit_rammer_register.json pairs.rammer.ratio (MINIBOSSES.md 34), copied not re-derived
+	"beadle": 1.2,   # S35: art's _fit_beadle_register.json beadle.ratio (MINIBOSSES.md 33), copied not re-derived
+	"fuller": 1.09,   # S48: art's _fit_report.json pairs.fuller.ratio (35th, lead's 17:58 tick), copied not re-derived
+	"stackman": 1.16,   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
+	"dauber": 1.05}   # S65: art's _fit_report.json pairs.dauber.ratio (37th, h 2.58, tag keep), copied not re-derived
+## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
+## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
+## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
+## content's miniboss_feed.by_key key - so nothing that finds a body or a line moves. Only what
+## a viewer READS changes: the nameplate, the "holds this chamber alone" line. A proper name
+## takes no "The". These are PROPOSALS and Mr. E has final say: change a name HERE, one place.
+## A key missing from this table falls back to the old capitalised trade word, so an unnamed body
+## still stands up rather than going nameless. S52: row 23 of the directive's old-name column
+## reads "Drizzler" - there is no such key; the live body is `strickler` (CANON 23, by_key, .glb).
+## tools/_s51_names.gd now asserts this table's KEY SET against content's by_key, MB_FIT and the
+## .glb stems on disk - never against a second copy of itself.
+const MB_NAME := {
+	"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "Shacklemaw", "snuffer": "Duskhollow", "sexton": "Gravrik", "porter": "Drudgewall",
+	"tallyman": "Velmok", "cook": "Blisterhand", "sluicekeeper": "Rothenwell", "sower": "Thorncast", "snarer": "Griplash", "stoker": "Cindrak",
+	"bellman": "Tolburn", "boiler": "Scaldmere", "jointer": "Halvrek", "quartermaster": "Wardgrim", "loader": "Millstone", "hurdleman": "Bramblejaw",
+	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "strickler": "Murkspit", "dyer": "Venomshade",
+	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw", "fenman": "Bogwarden",
+	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile",
+	"dauber": "Wetwall"}   # S65: content's _note_c142 "the Dauber (Wetwall)" and art's CANON title, both read
+static func miniboss_name(key: String) -> String:
+	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
 	for nm: String in [key + "_chibi", key]:
@@ -413,7 +446,7 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	var mb_key := String(sp.get("mb_key", ""))
 	if mb_key != "" and not miniboss_lines(mb_key, "arrive").is_empty():
 		def = def.duplicate()
-		def["name"] = mb_key.capitalize()
+		def["name"] = miniboss_name(mb_key)   # S51: the character name, not the trade
 		# D96: the miniboss stands up in ITS OWN BODY. The art lane's model replaces the
 		# theme creature's mesh; scale is art's measured ratio to the posed hero, not ours.
 		var mb_path := miniboss_model(mb_key)
@@ -450,7 +483,8 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 		m.set_meta("mb_key", mb_key)
 		_say(_miniboss_say(mb_key, "arrive"))
 		Delve.setpieces_fired["miniboss_feed_arrive"] = int(Delve.setpieces_fired.get("miniboss_feed_arrive", 0)) + 1
-		nm = "The " + nm
+		if not MB_NAME.has(mb_key):
+			nm = "The " + nm   # S51: only a leftover trade word takes "The"; a name never does
 	_say("%s holds this chamber alone - a mini-boss stands between you and the way deeper." % nm)
 	Sfx.play("roar", -2.0)
 	# the atk bump rides on the meta the hit code already reads nowhere, so set
@@ -622,6 +656,10 @@ func lord_fighting() -> Monster:
 	if l.state == Monster.S.DEAD or l._entering():
 		return null
 	return l
+
+## S64: counters for the mana gate test - spells paid for, and caster swings taken dry
+var mana_casts := 0
+var mana_dry_swings := 0
 
 func _foes() -> Array:
 	var out: Array = []
@@ -1144,6 +1182,10 @@ func _process(delta: float) -> void:
 	_amb_tick(delta)          # S2: the quiet bed below
 	_t += delta
 	_gt += delta
+	# S64: the mana pool refills only out of combat
+	if state != "fight" and roster != null:
+		for mm in _alive():
+			roster.regen_mana(mm["h"], delta)
 	match state:
 		"fight":
 			_fight(delta)
@@ -1535,7 +1577,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 		# D2 spells: renew mends over time, a ward fades
 		if float(m.get("hot_t", 0.0)) > 0.0:
 			m["hot_t"] = float(m["hot_t"]) - delta
-			m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m.get("hot_rate", 0.0)) * delta)
+			_mend(m, float(m.get("hot_rate", 0.0)) * delta)
 		if float(m.get("ward_t", 0.0)) > 0.0:
 			m["ward_t"] = float(m["ward_t"]) - delta
 	# L47: before anyone swings, does the PARTY still want this fight? A lost one is broken off
@@ -1569,7 +1611,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				if float(o["hp"]) < float(o["max"]) * mark and (low == null or float(o["hp"]) < float(low["hp"])):
 					low = o
 			m["swing"] = float(m["swing"]) - delta * _pace(m)
-			if low != null and float(m["swing"]) <= 0.0:
+			# S64: a mending is a spell, and a spell spends mana - a dry mender holds it until the fight ends
+			if low != null and float(m["swing"]) <= 0.0 and roster.spend_mana(h):
 				m["swing"] = float(Economy.healing_rules()["mend_interval_s"])   # D99: classes.json healing.mend_interval_s
 				# L47: choosing WHO to mend is a decision - say so when it is a close call
 				if float(low["hp"]) < float(low["max"]) * 0.35:
@@ -1640,6 +1683,9 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			Rig.play(b._anim, "Running_A")
 			continue
 		b.rotation.y = atan2(tgt.global_position.x - b.global_position.x, tgt.global_position.z - b.global_position.z)
+		if _order_holds(m):
+			Delve.order_held_frames += 1          # S38: NOT a set piece - see order_held_frames
+			continue                                  # S36: not your name - you hold
 		m["swing"] = float(m["swing"]) - delta * _pace(m)
 		if float(m["swing"]) > 0.0:
 			continue
@@ -1654,9 +1700,14 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 		if has_st(m, "invisible"):
 			(m["st"] as Dictionary).erase("invisible")
 		var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
-		if caster:
+		# S64: the spell spends mana; a caster who has run dry swings like everyone else
+		if caster and roster.spend_mana(h):
+			mana_casts += 1
 			_cast_at(m, tgt, roll, ac, ability)
 			continue
+		elif caster:
+			mana_dry_swings += 1
+			Rig.play(b._anim, "1H_Melee_Attack_Chop")
 		else:
 			Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
 		var lands := roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() + (2 if has_st(m, "giant") else 0) >= ac)
@@ -1714,6 +1765,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 			_raise_tick(mon, int(ways["raise"]), delta)
 		if nearest < 16.0:
 			_lord_tick(mon, ways, alive, near, delta)
+		if nearest < 16.0 and mon.has_meta("mb_key"):
+			_mb_way_tick(mon, alive, near, delta)     # S34: the miniboss's ONE idea
 		if nd > r:
 			# a creature mid-swing, mid-rise or reeling from a hit stands until it is done - no gliding
 			if mon.busy():
@@ -1904,6 +1957,191 @@ func _call_one(mon: Monster, spec: Dictionary, at: Vector3) -> Monster:
 		m.call_deferred("rise")
 	return m
 
+## S34: each miniboss's ONE IDEA as delve-side behaviour, voiced from content's own
+## miniboss_feed act/broken lines (data/lore_lines.json). Every MB_WAY_EVERY seconds while the
+## party is within 16 m the idea fires and an `act` line is said; at MB_BROKEN_FRAC of its hp the
+## idea is BROKEN for good (a `broken` line, and anything it built is undone). The fourteen keys
+## that carry act/broken lines each get a way below; a key with no act lines gets none, silently
+## by design (the sixteen S33 bodies stand up named, but content has not written their idea).
+## HONEST LIMIT: "broken" is an hp threshold, not each idea's own weakness (cracking the gong,
+## cutting the lines) - that needs a targetable prop per miniboss and is not built.
+const MB_WAY_EVERY := 8.0
+const MB_BROKEN_FRAC := 0.30
+const MB_WAYS := {
+	"drillmaster": "call", "sexton": "call", "sower": "call",
+	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
+	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
+	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
+	"beadle": "order", "rammer": "drop",
+}
+## S38: the Rammer DROPS ON THE COUNT (art's idea: "the answer is not what you do, it is when").
+## Its act is the haul: the iron goes up and HOLDS for MB_DROP_HOLD seconds, then comes down on the
+## pile - everyone within MB_DROP_R of the frame at that moment. A delver on the pile makes a DEX
+## save to have read the hold and stepped off; ranged delvers standing off are never on it. A
+## TIMING way: no hit at the haul, the whole blow lands on the count. Broken = the rope parts and
+## an iron that is up never comes down.
+const MB_DROP_HOLD := 2.0
+const MB_DROP_R := 2.6
+const MB_DROP_MULT := 2.5
+## S36: the Beadle CALLS THE ORDER (art's idea, verbatim: "while it stands the party does not choose
+## who acts; it calls the same hero again and again while the rest hold"). _order_uid is the hero it
+## has called; while the Beadle stands unbroken and that hero lives, every OTHER hero holds their
+## swing (they still take their places). It keeps calling the same hero until that one falls.
+var _order_uid := ""
+var _order_mon: Monster = null
+
+## true while a standing, unbroken Beadle has called someone other than this hero
+func _order_holds(m: Dictionary) -> bool:
+	if _order_uid == "" or not is_instance_valid(_order_mon):
+		return false
+	if _order_mon.state == Monster.S.DEAD or bool(_order_mon.get_meta("mb_broken", false)):
+		_order_uid = ""
+		return false
+	if String(m.get("uid", "")) == _order_uid:
+		return false
+	for o in party:
+		if String(o.get("uid", "")) == _order_uid:
+			return float(o["hp"]) > 0.0              # the called one is down: the order lapses
+	return false
+## what each caller brings: the drill's garrison, the sexton's dead (they RISE), the sower's thorn
+const MB_CALLS := {"drillmaster": "warrior", "sexton": "bones", "sower": "adder"}
+
+func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) -> void:
+	var key := String(mon.get_meta("mb_key"))
+	var way := String(MB_WAYS.get(key, ""))
+	if way == "" or bool(mon.get_meta("mb_broken", false)) or miniboss_lines(key, "act").is_empty():
+		return
+	if mon.hp / maxf(1.0, mon.max_hp) <= MB_BROKEN_FRAC:
+		mon.set_meta("mb_broken", true)
+		if way == "grow":
+			mon.scale = Vector3.ONE                       # the fire is going: back to its own size
+		if way == "order" and _order_mon == mon:
+			_order_uid = ""                               # the roll is dropped: everyone acts again
+		if mon.has_meta("mb_drop_t"):
+			mon.remove_meta("mb_drop_t")                  # S38: the rope parts - the iron never comes down
+		if mon.has_meta("mb_base_atk"):
+			var d0: Dictionary = mon.def.duplicate()
+			d0["atk"] = float(mon.get_meta("mb_base_atk"))
+			mon.def = d0
+		_say(_miniboss_say(key, "broken"))
+		Delve.setpieces_fired["miniboss_broken"] = int(Delve.setpieces_fired.get("miniboss_broken", 0)) + 1
+		return
+	if mon.has_meta("mb_drop_t"):                     # S38: the Rammer's iron is up - wait for the count
+		var dt := float(mon.get_meta("mb_drop_t")) - delta
+		if dt > 0.0:
+			mon.set_meta("mb_drop_t", dt)
+			return
+		mon.remove_meta("mb_drop_t")
+		_rammer_drop(mon, alive)
+		return
+	var t := float(mon.get_meta("mb_way_t", MB_WAY_EVERY * 0.5)) - delta
+	mon.set_meta("mb_way_t", t)
+	if t > 0.0:
+		return
+	mon.set_meta("mb_way_t", MB_WAY_EVERY)
+	var live_heroes := alive.filter(func(o): return float(o["hp"]) > 0.0)
+	if live_heroes.is_empty():
+		return
+	var far: Dictionary = near
+	for o in live_heroes:
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) > _flat((far["body"] as Node3D).global_position, mon.global_position):
+			far = o
+	match way:
+		"call":
+			if _live_called(mon).size() >= 2:
+				return                                    # it has its two; no act line, nothing happened
+			var a := _rng.randf() * TAU
+			var m := _call_one(mon, {"type": String(MB_CALLS.get(key, "bones")), "rise": key == "sexton"},
+				mon.global_position + Vector3(cos(a), 0, sin(a)) * (1.6 + mon._height() * 0.2))
+			var live := _live_called(mon)
+			live.append(m)
+			mon.set_meta("risen", live)
+		"plate":
+			mon.hp = minf(mon.max_hp, mon.hp + mon.max_hp * 0.06)   # a plate off the floor
+		"grow":
+			if mon.scale.x >= 1.24:
+				return
+			if not mon.has_meta("mb_base_atk"):
+				mon.set_meta("mb_base_atk", float(mon.def.get("atk", 4.0)))
+			mon.scale *= 1.08
+			var d1: Dictionary = mon.def.duplicate()
+			d1["atk"] = float(d1.get("atk", 4.0)) * 1.08
+			mon.def = d1
+		"mend":
+			for mv in dun.monsters:
+				if is_instance_valid(mv) and (mv as Monster).state != Monster.S.DEAD and _flat((mv as Monster).global_position, mon.global_position) < 10.0:
+					(mv as Monster).hp = minf((mv as Monster).max_hp, (mv as Monster).hp + (mv as Monster).max_hp * 0.10)
+		"snuff":
+			for o in live_heroes:
+				_give(o, "blinded", 2.5)                  # another lamp out
+		"hook":
+			# the hook reels the FARTHEST delver in to stand beside it
+			var hb := far["body"] as Node3D
+			var to := mon.global_position + (hb.global_position - mon.global_position).normalized() * 1.6
+			if (dun.info["cells"] as Dictionary).has(_cell_of(to)):
+				hb.global_position = Vector3(to.x, hb.global_position.y, to.z)
+			near = far
+		"strip":
+			_give(near, "frightened", 4.0)            # kit on the frame: the hero fights unhanded
+		"bar":
+			mon.set_meta("mb_guard", int(mon.get_meta("mb_guard", 0)) + 1)
+			var dw: Dictionary = mon.def.duplicate()
+			var wy: Dictionary = (dw.get("ways", {}) as Dictionary).duplicate()
+			wy["guard"] = mini(4, int(wy.get("guard", 0)) + 1)   # the drawbar: harder to hit
+			dw["ways"] = wy
+			mon.def = dw
+		"flood":
+			for o in live_heroes:
+				_give(o, "slowed", 3.0)                   # water to the ankle
+		"snare":
+			_give(near, "slowed", 4.0)
+		"blink":
+			var wp: Vector3 = (far["body"] as Node3D).global_position
+			var land := wp + (wp - mon.global_position).normalized() * 1.4   # it is behind you
+			if not (dun.info["cells"] as Dictionary).has(_cell_of(land)):
+				land = wp
+			mon.swoop(land, true)
+		"set":
+			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
+		"drop":
+			mon.set_meta("mb_drop_t", MB_DROP_HOLD)        # S38: the haul - up, and it holds
+		"order":
+			# the same name again while it still stands; a new one only when the called hero is down
+			var called: Dictionary = {}
+			for o in live_heroes:
+				if _order_mon == mon and String(o.get("uid", "")) == _order_uid:
+					called = o
+			if called.is_empty():
+				called = near
+			_order_uid = String(called.get("uid", ""))
+			_order_mon = mon
+			near = called                             # the act line names the hero it called
+	var line := _miniboss_say_for(key, "act", near)
+	if line != "":
+		_say(line)
+	Delve.setpieces_fired["miniboss_act"] = int(Delve.setpieces_fired.get("miniboss_act", 0)) + 1
+	Delve.setpieces_fired["miniboss_act_" + way] = int(Delve.setpieces_fired.get("miniboss_act_" + way, 0)) + 1
+
+## S38: the count. The iron comes down on the pile; whoever is on it and did not read the hold is struck.
+func _rammer_drop(mon: Monster, alive: Array) -> void:
+	var base := float(mon.def.get("atk", 4.0)) * MB_DROP_MULT
+	for o in alive:
+		if float(o["hp"]) <= 0.0:
+			continue
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) >= MB_DROP_R:
+			continue                                  # off the pile: the count passes them by
+		if _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex") >= 12 + floor_no / 4:
+			Delve.rammer_read += 1                    # read the hold and stepped off in time
+			continue
+		o["hp"] = float(o["hp"]) - _soak(o, base)
+		_give(o, "slowed", 1.5)                       # the ground jumps under them
+		_hero_hit(o)
+		Delve.rammer_struck += 1
+	Sfx.at("hit", mon.global_position)
+	if mon.is_inside_tree():
+		mon.nova(MB_DROP_R)                           # S39: the count is SEEN - a shock ring the size of the pile
+	Delve.setpieces_fired["miniboss_drop"] = int(Delve.setpieces_fired.get("miniboss_drop", 0)) + 1
+
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:
 	if ways.has("summon"):
@@ -1945,6 +2183,35 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
 				live.append(m)
 				mon.set_meta("risen", live)
 			_say(String(sh.get("line", "")))
+	if ways.has("irons"):
+		# S56: Lastcuff - each hp mark knocks one iron off; it hides that piece where the glb names it
+		# and gains pace (read by _mon_pace through the "irons_pace" meta).
+		var ir: Dictionary = ways["irons"]
+		var im: Array = ir["at"]
+		var off := int(mon.get_meta("irons_n", 0))
+		if off < im.size() and mon.hp / maxf(1.0, mon.max_hp) <= float(im[off]):
+			mon.set_meta("irons_n", off + 1)
+			mon.set_meta("irons_pace", 1.0 + float(ir.get("gain", 0.2)) * float(off + 1))
+			var mname := String((ir.get("meshes", {}) as Dictionary).get(str(off), ""))
+			if mname != "":
+				var piece := mon.find_child(mname, true, false)
+				if piece is Node3D:
+					(piece as Node3D).visible = false
+			_say("%s sheds an iron (%d of %d)." % [String(mon.def.get("name", "It")), off + 1, im.size()])
+	if ways.has("basin"):
+		# S57: the Leech drinks the basin back into itself; at `tip` of its hp the basin goes over.
+		var bs: Dictionary = ways["basin"]
+		if not mon.get_meta("basin_tipped", false):
+			if mon.hp / maxf(1.0, mon.max_hp) <= float(bs.get("tip", 0.3)):
+				mon.set_meta("basin_tipped", true)
+				mon.set_meta("basin", 0.0)
+				_say(String(bs.get("line", "")))
+			else:
+				var held := float(mon.get_meta("basin", 0.0))
+				var sip := minf(held, float(bs.get("rate", 4.0)) * delta)
+				if sip > 0.0:
+					mon.hp = minf(mon.max_hp, mon.hp + sip)
+					mon.set_meta("basin", held - sip)
 	if ways.has("swoop"):
 		var sw: Dictionary = ways["swoop"]
 		var t := float(mon.get_meta("swoop_t", float(sw.get("every", 7.0)))) - delta
@@ -2436,6 +2703,29 @@ func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool, kind := "") ->
 		if tgt.def.get("boss", false):
 			_say("%s falls to %s." % [tgt.def.get("name"), m["h"]["name"]])
 
+## S57: every mend to a delver passes here. While a Leech (ways.basin) stands untipped on this floor,
+## the mend goes into its basin instead and the delver gets nothing; returns what actually landed.
+func _leech_basin() -> Monster:
+	if dun == null:
+		return null
+	for c in dun.monsters:
+		if is_instance_valid(c) and (c as Monster).state != Monster.S.DEAD \
+				and ((c as Monster).def.get("ways", {}) as Dictionary).has("basin") \
+				and not (c as Monster).get_meta("basin_tipped", false):
+			return c as Monster
+	return null
+
+func _mend(o: Dictionary, amt: float) -> float:
+	if amt <= 0.0:
+		return 0.0
+	var lc := _leech_basin()
+	if lc != null:
+		lc.set_meta("basin", float(lc.get_meta("basin", 0.0)) + amt)
+		return 0.0
+	var before := float(o["hp"])
+	o["hp"] = minf(float(o["max"]), before + amt)
+	return float(o["hp"]) - before
+
 ## renew mends over Spells.RENEW_T; a ward soaks blows for WARD_T; heal is at once
 func _bless(o: Dictionary, kind: String, pow: float) -> void:
 	match kind:
@@ -2443,11 +2733,11 @@ func _bless(o: Dictionary, kind: String, pow: float) -> void:
 			o["hot_t"] = Spells.RENEW_T
 			o["hot_rate"] = pow * 1.3 / Spells.RENEW_T
 		"ward":
-			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow * 0.5)
+			_mend(o, pow * 0.5)
 			o["ward"] = float(o["max"]) * WARD_SOAK
 			o["ward_t"] = WARD_T
 		"heal", "mend":
-			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow)
+			_mend(o, pow)
 
 func _soak(o: Dictionary, dmg: float) -> float:
 	# L48: the defensive unlocks live here, because this is already the one place a hero's
@@ -2470,7 +2760,8 @@ func _soak(o: Dictionary, dmg: float) -> float:
 
 ## a frosted creature moves and swings at half pace
 func _mon_pace(mon: Monster) -> float:
-	return 0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0
+	var p := float(mon.get_meta("irons_pace", 1.0))     # S56: Lastcuff's shed irons
+	return (0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0) * p
 
 ## ---- L8 (Mr. E, Nov 11): wild magic below. The dungeon is one enormous scar,
 ## so every spell cast down here is a check against it: d20 + casting ability
@@ -3417,7 +3708,7 @@ func drink(m: Dictionary, key: String) -> void:
 	if p.has("heal"):
 		var hd: Array = p["heal"]
 		var amt := float(_dice(int(hd[0]), int(hd[1])) + int(hd[2]))
-		m["hp"] = minf(float(m["max"]), float(m["hp"]) + amt)
+		amt = _mend(m, amt)
 		_float_text(m, "+%d" % int(amt), Color(0.45, 1.0, 0.5))
 		_bark(m, "drink")
 		if key != "mending":
@@ -3543,10 +3834,25 @@ static func intro_line(uniq: bool, id: String, rng: RandomNumberGenerator = null
 static func miniboss_lines(key: String, phase: String) -> Array:
 	var mf: Dictionary = lore().get("miniboss_feed", {})
 	var bk: Dictionary = mf.get("by_key", {})
-	return (bk.get(key, {}) as Dictionary).get(phase, [])
+	# S51: content is renaming the feed to the new names; read the trade key first, then the
+	# new name's key (lower-case), so the gate holds whichever way content keys its rows.
+	var row: Dictionary = bk.get(key, {})
+	if row.is_empty() and MB_NAME.has(key):
+		row = bk.get(String(MB_NAME[key]).to_lower(), {})
+	return row.get(phase, [])
 
 ## one line for the event, {name} filled with an alive delver (lines that need a
 ## hero and have none are skipped in favour of ones that do not)
+## S34: an act line names the delver the idea actually landed on ("The hook takes {name}")
+func _miniboss_say_for(key: String, phase: String, who: Dictionary) -> String:
+	var opts: Array = miniboss_lines(key, phase)
+	if opts.is_empty():
+		return ""
+	var line := String(opts[_rng.randi() % opts.size()])
+	if line.contains("{name}"):
+		line = line.replace("{name}", String((who.get("h", {}) as Dictionary).get("name", "a delver")))
+	return line
+
 func _miniboss_say(key: String, phase: String) -> String:
 	var opts: Array = miniboss_lines(key, phase)
 	var al := _alive()

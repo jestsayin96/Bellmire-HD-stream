@@ -1,0 +1,127 @@
+{
+ "key": "leech",
+ "title": "The Leech",
+ "note": "Written from _fit_report.json of the same run - the numbers are the harness's, not retyped. The game build uses `ratio` and `creature_h`; do not re-derive scale.",
+ "measured_ct": "2026-11-18 08:0x CT",
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "leech": {
+   "creature_h": 2.32,
+   "hero_h": 2.45,
+   "ratio": 0.95,
+   "pair_w": 4.12,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 60531,
+      "vis": 60531,
+      "delta": 61912,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43670,
+      "vis": 43670,
+      "delta": 54436,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 45095,
+      "vis": 45095,
+      "delta": 45997,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 39312,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 62068,
+      "vis": 62068,
+      "delta": 63540,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44035,
+      "vis": 44035,
+      "delta": 45412,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "proving_views": 3,
+   "span_x": 2.2581,
+   "span_y": 1.5929,
+   "span_measured_ct": "2026-11-20 06:4x CT",
+   "span_note": "MEASURED, NOT DERIVED - asked for by the game build's S58 row (05:58 CT 20 Nov): bestiary.gd:127-128 carries no `span` key, so the leech was exempt from the corridor check entirely. Same instrument as the variants' span_x: lordgen.world_bounds off the evaluated depsgraph, leech.glb scaled so z-height == the shipped creature_h 2.32. The glb already ships at that height (native 2.32, scale_k 1.0), which is an independent check on creature_h. 4 meshes, 4168 verts. Script: tools/art/_leech_span.py.",
+   "span_set_by": "THE PROPS, NOT THE BODY. Per-mesh: leech_bone span_x 2.2581 (the basin rim, its tripod and the pale tool), leech_dark 2.0854, leech_body 1.706, leech_glow 1.4595. The corridor term is 0.552 m wider than the creature itself - a gate that measured the body alone would under-report it. Confirmed by eye in hero_side.png: the basin stands proud of the body.",
+   "floorgeom": {
+    "read_from_tree": "R / origin-main merged (floorgen.gd lid y 10.0 after S56)",
+    "corridor_clear_m": 11.0,
+    "lid_underside_m": 9.5,
+    "span_used_m": 2.2581,
+    "corridor": "CORRIDOR-SAFE",
+    "corridor_margin_m": 8.742,
+    "lid": "UNDER-LID",
+    "lid_clear_m": 7.18,
+    "fits": true,
+    "errors": [],
+    "note": "Read with tools/art/floorgeom.py, no literals. On this worktree's own floorgen.gd (still lid y 7.0, behind main's S56) the same body reads UNDER-LID with 4.18 clear - the VERDICT is the same on both trees and only the margin moves. The corridor term 11.0 is identical in both."
+   }
+  }
+ },
+ "proving_views": 3,
+ "verdict": "GREEN",
+ "blank_check": {
+  "files": 3,
+  "failures": []
+ },
+ "border_check": {
+  "views": [
+   "front",
+   "side",
+   "three_quarter",
+   "hero_front",
+   "hero_side",
+   "hero_back"
+  ],
+  "edge_opaque_px": 0,
+  "note": "asserted this run: no opaque pixel touches any frame edge on any of the six"
+ },
+ "footprint_m": 2.26,
+ "corridor_clear_m": 11.0,
+ "corridor": "CORRIDOR-SAFE",
+ "meshes": 4,
+ "faces": 986
+}

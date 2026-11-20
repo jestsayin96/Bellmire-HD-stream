@@ -1,0 +1,64 @@
+{
+ "ears_off": {
+  "frame_edge": {
+   "front": {
+    "top": 0,
+    "bottom": 0,
+    "left": 228,
+    "right": 20
+   },
+   "side": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+   },
+   "back": {
+    "top": 0,
+    "bottom": 0,
+    "left": 19,
+    "right": 233
+   }
+  },
+  "fits_frame": false,
+  "pair_w": 5.96,
+  "span_x": 4.0995,
+  "span_y": 1.7051,
+  "creature_h": 2.6,
+  "frame_w": 5.6,
+  "frame_h": 3.832,
+  "blanks": [],
+  "errors": []
+ },
+ "ears_on": {
+  "frame_edge": {
+   "front": {
+    "top": 0,
+    "bottom": 0,
+    "left": 228,
+    "right": 20
+   },
+   "side": {
+    "top": 0,
+    "bottom": 0,
+    "left": 0,
+    "right": 0
+   },
+   "back": {
+    "top": 0,
+    "bottom": 0,
+    "left": 19,
+    "right": 233
+   }
+  },
+  "fits_frame": false,
+  "pair_w": 5.96,
+  "span_x": 4.0995,
+  "span_y": 1.7051,
+  "creature_h": 2.6,
+  "frame_w": 5.6,
+  "frame_h": 3.832,
+  "blanks": [],
+  "errors": []
+ }
+}

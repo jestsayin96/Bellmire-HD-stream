@@ -1052,9 +1052,16 @@ Looked at on `hero_front.png`, `hero_side.png`, `hero_back.png` and
 ================================================================================
 ## 20. THE REEVE - *IT TAKES THE HAUL*
 `reeve` - keep - h **1.95** - wear **0.05** - 4 meshes, 1,420 faces -
-span **2.96 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
-ratio **0.80** beside the posed 2.45 m KayKit Knight, pair_w 4.83,
-fits_frame true. Procedural, no pack geometry (`pack_used` false).
+span **3.26 m, CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
+ratio **0.80** beside the posed 2.45 m KayKit Knight, pair_w **5.12**,
+fits_frame true.
+*(RECONCILED 18 Nov 18:4x CT, asked for by the team lead. This header used to
+read span 2.96 and pair_w 4.83. THE REPORT WAS RIGHT AND THE HEADER WAS STALE:
+the 17:40 anchor-spike fix removed 170 mm of buried cone from the height that
+canon-height normalisation was scaling, so the VISIBLE body grew ~10% and the
+footprint with it - 2.96 -> 3.26 m, and the pair 4.83 -> 5.12 m. That number is
+in `_report.json` and in the fix commit's own message; only this line was never
+updated. Both re-measured from today's rebuild, not copied.)* Procedural, no pack geometry (`pack_used` false).
 Five passes, 17 Nov 2026.
 
 ### WHY THIS ONE - MEASURED, NOT REMEMBERED
@@ -3041,3 +3048,1228 @@ I touched no `.gd` outside `tools/art/`. To put it in the game:
 
 Procedural bmesh + numpy, original to this repo. No pack geometry, no imported
 mesh, nothing to record in `docs/art/ASSET_SOURCES.md`.
+
+## 32. THE LEECH - *IT WILL NOT LET A WOUND CLOSE* (2026-11-18, art lane)
+
+A stooped man in an undyed wool gown and a bound linen coif, bent over a brass
+basin on a three-leg stand, a fleam in the working hand over the rim, and a
+roll of five cupping horns hanging at the thigh. `shrine`, h 2.32, wear 0.82,
+4 meshes, 986 faces, footprint 2.26 m - CORRIDOR-SAFE against the 11.0 m clear
+span of a three-cell corridor.
+
+**THE IDEA.** While it stands, nothing in this room mends. Every point of
+healing the party spends is drawn off into the basin at its side, and the Leech
+spends what the basin holds on itself - so the level in that basin is the
+mending you paid for. Tip the basin and it has nothing to mend with and your
+own healing comes back; leave it standing and your healer is carrying water in
+a sieve.
+
+### WHY IT IS NOT A 32ND COAT OF ONE OF THE THIRTY-ONE - PARSED, NOT RECALLED
+I parsed the hooks out of `CANON` this run: 31 rows, 31 distinct ideas. Then I
+grepped the whole file for heal/mend/cure. **The set has exactly one creature
+that touches healing and it points the other way**: the Cook KEEPS THE PACK
+ALIVE - its pot heals ITS side and you spill the pot. *Nothing in the
+thirty-one touches the party's healing at all.* A room where no wound closes is
+a class the set does not have, and it is the one class that turns a whole hero
+- the healer - into a passenger until the party does something about it.
+
+The three it stands nearest, and none of the differences is a quibble:
+
+- **The REEVE**: `while it stands the floor pays its box and not you`. Same
+  grammar, different resource - and that matters, because loot is settled
+  AFTER the fight and mending is spent DURING it. One changes what you get;
+  this one changes how you fight.
+- **The RATCATCHER** is `paid by the tail` - a visible gauge that grows, and so
+  is this basin. I am saying so plainly rather than pretending the shapes are
+  unrelated. The difference is whose the gauge is: the Ratcatcher's tally is
+  fed by other monsters dying and the party cannot touch it, while this basin
+  is filled with the party's OWN spent healing and emptying it is the
+  counter-play. A gauge you can empty is a different fight from one you can
+  only outrun.
+- **The GREENER** `greens your iron` - it degrades the thing you brought. This
+  touches your kit not at all; it makes one ACTION worthless.
+
+And it is not the **SNUFFER**, shrine's other body, which TAKES THE LIGHT: that
+removes something the ROOM provides, this removes something the PARTY provides.
+
+### WHY SHRINE - COUNTED OFF THE TREE, NOT REMEMBERED
+Bodies per theme counted off `assets/monsters/minibosses/*.glb`, excluding
+`_chibi` and counting committed files rather than `CANON` rows: workshop 4,
+keep 3, firepit 3, barracks 2, confection 2, crypt 2, flooded 2, fogbound 2,
+grassland 2, mess 2, prison 2, treasury 2, wood 2 - and **shrine 1**. With the
+Comfitmaker closing confection an hour ago, shrine was the last one-candidate
+theme. `dungeon_hd.gd` rolls the slot at 10 on shrine, the rarest weight in the
+table, which is the argument FOR the second body and not against it: when it
+does fire, a viewer has until now seen the same creature every time.
+
+### WEAR 0.82 - A FREE RUNG, AND NOW THE LADDER IS FULL 0.80-0.85
+All 31 wear values parsed this run, 0.05 (Reeve) to 1.00 (Hurdleman). 0.82 sits
+between the Gaoler's 0.80 and the Sexton's 0.85. The receipt it reads as: an
+old trade practised a long time in a wet place - verdigrised brass, a gown
+washed grey, a strop black with use. **The fleam is the one thing on him that
+is not worn**, because a blade that will not cut is no use to anybody and the
+man who owns it knows that better than he knows anything.
+
+### EIGHT PASSES, EACH ONE THING, EVERY ONE DRIVEN BY A PICTURE OR A NUMBER
+1. **Built.** 4 meshes, 980 faces, 0 blanks.
+2. **The head was the whole creature.** Measured off front.png rather than
+   guessed: the head spanned x 215..500 of a 700-wide frame against a body span
+   of 237..520 - *it was as wide as the whole man*, and the crest sat level
+   with it so the two merged into one pale mass. front.png read as a barrel
+   with a lid (the Comfitmaker's pass-6 fault); side.png read as a mushroom.
+   Head cut to 0.60 across and the top quarter, crest dropped behind and below
+   it, lean pulled back - at y -0.60 the skull overhung the far rim of its own
+   basin, so the man was not bent over the bowl, he was lying on it.
+3. **The coif band was a brim**, which is the one thing I had written that it
+   must not be: it sat ON the crown and wider than the skull. Moved to the brow
+   and inside the skull's width, where it adds nothing to the silhouette.
+4. **The glow came down 7.0 -> 1.9** on the theory that the fill was clipping.
+5. **THE FILL WAS NOT IN THE FRAME AT ALL, AND ONLY THE A/B INSTRUMENT KNEW.**
+   See below. This is the run's real finding.
+6. **The colour was chosen off the sweep**, not off my eye.
+7. **The five horns were a claw.** Hung at z 0.98 with their bases where the
+   right arm ENDS, five pale tapered cones radiating off an arm is a HAND OF
+   CLAWS, and that is what the render showed - the creature had a bare left arm
+   and a talon on the right. Pass 6's move (down to 0.80 and back in y) was the
+   right diagnosis and too small: 0.18 of gap is not a gap once the arm is in
+   front of the roll. Pass 7 put the roll on the THIGH, 0.36 below the hand.
+8. **The height was wrong and the fit render overturned my own argument.**
+
+### THE FINDING: `fill_px: 0` - I HAD BEEN LOOKING AT THE BOWL, NOT THE BLOOD
+Passes 1-3 tuned the basin's colour by eye off front.png. Sampled off that
+render, the fill read (193,126,105) and the brass around it (168,132,110) -
+twenty-five levels apart in red and five in blue, which is the Comfitmaker's
+pass-3 fault in a new coat, and I had written that body's lesson into this
+one's override and then broken it by choosing BRASS, the same hue as blood.
+
+So I built `tools/art/_leech_glow_ab.py` - the lane's proven with/without
+instrument (render lit, zero the emission, render the SAME camera again, count
+the pixels that MOVED) because `mask_of` renders a group alone and answers how
+BIG a thing is, never whether it can be SEEN. **All six arms came back
+`fill_px: 0` while the eyes moved 1,215 px.** The lit surface was not in the
+frame: `L.cone(..., cap=True)` is a SOLID, so a fill placed inside the bowl and
+below its rim was buried in brass. The salmon disc I had looked at three times
+and twice tried to colour-correct was *the bowl's own lit interior*.
+
+That is the pass-11 fault of 17 Nov exactly - a number beside a picture that
+disagreed with it - caught this time by the instrument that fault bought.
+Worth saying precisely: the harness did not go green on nothing. It reported
+RED on empty, by construction, which is the only reason the zero was a finding
+rather than a silence.
+
+With the fill moved onto the solid's top face, inside the rolled rim, the sweep
+could finally see (`renders/art/minibosses/_leech_glow_ab.json`):
+
+| arm | strength | fill rgb255 | sat | dish sat | gap | verdict |
+|---|---|---|---|---|---|---|
+| a (pass 1) | 7.00 | 250.8, 205.9, 197.9 | 0.211 | 0.260 | **-0.049** | FAIL |
+| b (pass 3) | 1.90 | 230.6, 145.2, 129.2 | 0.440 | 0.272 | 0.168 | FAIL |
+| c | 1.10 | 217.2, 98.2, 74.9 | 0.655 | 0.277 | 0.378 | PASS |
+| d | 0.85 | 207.8, 72.1, 45.7 | 0.780 | 0.284 | 0.496 | PASS |
+| **e (shipped)** | **0.60** | **190.0, 45.7, 8.5** | **0.955** | 0.287 | **0.668** | PASS |
+
+**Read arm a again: at pass 1's setting the fill was LESS SATURATED THAN THE
+BRASS BOWL IT SITS IN.** I would have shipped a basin whose contents read as a
+paler brass and called the mechanic visible. Arm e's value is 0.745 against the
+dish's 0.534, so it is still the brightest thing in its zone - the guard
+against winning saturation by turning the light off.
+
+**THE RULE I WANT ON THE RECORD BESIDE THE COMFITMAKER'S.** That body needed
+strength 7.0 to separate amber from cream; this one needed 0.60. Both are
+right. *Brightness buys separation and costs saturation*: raise it when a lit
+thing must beat a pale neighbour, lower it when the lit thing's COLOUR is the
+information.
+
+### THE FIT PROOF - ON A BODY, AND THE RENDER OVERTURNED THE HEIGHT
+`minibossfit`, verdict **GREEN**: ratio **0.95**, pair_w 4.12 m, fits_frame
+true, 3 of 3 proving views, blind_views [], blank failures []. Hero measured at
+h 2.45 (raw KayKit glb at scale 1.0 - `townsfolk.gd` leaves hero bodies alone).
+Numbers in `renders/art/minibosses/_fit_leech_register.json`, written from the
+harness's own report rather than retyped.
+
+I first authored this at **h 1.90**, argued off the ladder: the 0.05 rungs
+1.95-2.90 are all occupied, so the only free space was below the Reeve's 1.95,
+and a bent height reads honest for the one creature in the set that stoops. The
+argument was sound and the number was wrong. `hero_front.png` put it beside the
+knight at **ratio 0.78** and it read as a squat stump - visibly shorter than the
+hero it is supposed to be a set piece against, where the rest of the set sits
+near or above (the Comfitmaker, last hour, 0.96). **A miniboss a viewer reads as
+smaller than their own man is not a miniboss.** 2.32 is off-rung, as the
+Comfitmaker's 2.28 and the Fenman's 2.52 are, and it also makes the claim true
+in the picture instead of in the prose: standing up straight this one would be
+the tallest thing in the set. *The ladder is bookkeeping. Fit is the acceptance
+test, and when they disagree the render wins.*
+
+**BLANK AND BORDER.** 0 blanks across all six views; border alpha asserted this
+run - **0 opaque pixels touching any frame edge** on front, side, three_quarter,
+hero_front, hero_side, hero_back (opaque counts 256,152 / 293,895 / 220,775 /
+104,201 / 82,869 / 106,103).
+
+**THE SILHOUETTE**, colour thrown away, reads: a hunched figure bent over a
+stand with a bowl, one arm down into it, a fan hanging at the hip. It does not
+read as a hero, and the stoop - a back crest that is the high point with the
+head BELOW it - is a shape no other body in the file has.
+
+### THE FAULT LIST - EVERY ONE OF THESE IS VISIBLE IN THE SHIPPED RENDERS
+1. **In pure silhouette from three-quarter the head cannot be found.** It
+   merges with the back crest, so the creature reads as a hunched mass with no
+   head at all. The front and side silhouettes are fine. This is the one fault
+   I would fix next.
+2. **The gown is not as cool as the override claims.** I wrote "it is grey, not
+   brown, on purpose" and the lit side renders a warm salmon under the key
+   light. The claim is half delivered; the shadow side is grey.
+3. **Below the waist is one black mass from both front and side** - apron,
+   legs, horn roll and boots merge. Only the boot soles break it.
+4. **The fleam is nearly invisible at hero distance.** At pane distance it is a
+   dark nub over the rim. It reads at full size and not at the size the viewer
+   will see.
+5. **The left arm merges into the torso silhouette from the side**, so the
+   gesture of reaching into the bowl is a front/three-quarter read only.
+6. **The head is a plain drum with a band and two dots** - the least
+   characterful head in the set. It is not wrong, it is empty.
+7. **The basin's front tripod leg crosses the creature's left boot** in the
+   front view - a tangency, not an intersection.
+8. **The dark horn roll merges with the dark apron** from the front; only the
+   five pale horns separate.
+9. **The crest reads as a second pale hat from the front** at small size.
+
+### FOR THE GAME BUILD LANE - THE ART LANE DOES NOT WIRE THIS
+I touched no `.gd` outside `tools/art/`. What this needs, named exactly:
+
+1. `scripts/bestiary.gd` - add a `leech` entry with
+   `model = "res://assets/monsters/minibosses/leech.glb"` and **NO `anims`
+   entry**: this body is STATIC, like the twelve creatures of System 10.
+   Use `h = 2.32` and the ratio 0.95 from
+   `renders/art/minibosses/_fit_leech_register.json` - **do not re-derive the
+   scale**, it is measured off the posed hero.
+2. The miniboss slot in `dungeon_hd.gd` can now prefer `leech` on the `shrine`
+   theme, which until this commit had the Snuffer as its only candidate.
+3. The mechanic, if and when it is implemented, is a room-scoped healing
+   redirect plus a breakable prop: while the Leech lives, healing applied in
+   the room is zeroed and added to a counter; the Leech spends that counter to
+   heal itself; the basin is a destructible that empties the counter. **None of
+   that is mine and none of it is implied to be queued** - the body stands up
+   and reads without it.
+4. `assets/monsters/minibosses/leech.glb` is committed **with no `.glb.import`
+   sibling**, like `snarer_chibi.glb` before it: a Godot run must generate one
+   before the body can load.
+
+### LICENCE
+Entirely original procedural geometry (bmesh/numpy, raw vertex maths via
+`lordlib`). No third-party asset is read by this builder. Nothing to add to
+`docs/art/ASSET_SOURCES.md`.
+
+---
+
+## 33. THE BEADLE - *IT CALLS THE ORDER* (2026-11-18, art lane)
+
+`beadle` | shrine | h **2.95** | wear **0.18** | span **1.86 m** | 4 meshes, 666 faces,
+static, no armature, feet on z=0 | **CORRIDOR-SAFE** against the 11.0 m clear span.
+
+> **IT CALLS THE ORDER** - while it stands the party does not choose who acts. The
+> Beadle calls, and it calls the same hero again and again while the rest hold their
+> ground and watch; the four brass pegs on the board it holds overhead are the calls
+> it has left and you can count them from the door. Knock the board off its arm and
+> the order comes back to you.
+
+Feed line: *"It says who speaks, and it is not you."*
+
+### WHY THIS ONE - MEASURED THIS RUN, NOT REMEMBERED
+
+**THIRTY-TWO IDEAS EXIST AND NOT ONE OF THEM TOUCHES WHO ACTS.** I parsed the hooks
+out of `CANON` rather than recalling them - 32 bodies, 32 distinct hooks - and
+grepped every hook for the words that would mean a turn:
+
+| word | hits | what they were |
+|---|---|---|
+| turn, order, act, acts, initiative, wait, first, last, speak, call, who, queue, haste | **0 each** | - |
+| slow | 1 | the **Loader**: *it loads you, and you fight slower until you drop it* |
+| time | 2 | the **Snuffer** (*one at a time*) and the **Sluicekeeper** (*a step at a time*) - both the creature's own pacing, not the party's |
+
+Every one of the thirty-two is answered by deciding **what** to do - damage, healing,
+gear, gold, stores, light, ground, position, facing, movement. This one takes the
+decision itself away from everyone but one hero. That is a mechanic class the set
+does not have at all.
+
+**THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:**
+
+- the **LOADER** is the closest and it is a **stat**. Slower is a number on a hero
+  that still takes its own turn. The Beadle changes nothing's speed; it changes
+  whose turn it is.
+- the **DYER** *marks one of you and hunts only the mark* - same shape of sentence,
+  opposite direction. The Dyer chooses **its** target. The Beadle chooses **your**
+  action.
+- the **DROVER** *yokes one of you* and the **HURDLEMAN** *cuts the room in two* -
+  both take the party's **formation**. Nobody loses a turn to either.
+
+**WEAR 0.18 IS A FREE RUNG, MEASURED OFF THE REGISTER.** The thirty-two hold 0.05,
+0.08, 0.10, 0.12, 0.15, 0.20, 0.22, 0.25, 0.26, 0.30 ... 1.00. 0.18 is the one gap in
+that low cluster. It is also the honest number for the thing: the staff and the board
+**are** the office, so a beadle keeps them - but the coat is parish issue and has been
+to every moot for years. **HEIGHT 2.95** extends a full 1.95-2.90 ladder by one step,
+and it is the right read: a beadle out-tops the people he is calling.
+
+### NINE PASSES, ONE CHANGE EACH, AND EVERY ONE DRIVEN BY A PICTURE
+
+**PASS 2 - THE HAT WAS WEARING ANOTHER BODY'S SILHOUETTE.** Pass 1's brim was 0.700
+against a 0.385 crown, wider than the shoulders, and `side.png` read the whole
+creature as **a lamp**: shade on top, bell-shaped base under it. That is the
+**Snuffer's** own claimed outline ("a lamp-stand that walks"). Brim to 0.465.
+
+**PASS 3 - THE BOARD WAS EDGE-ON AND THE HAND WAS NOT ON IT.** Two faults, measured in
+two different views. *Side:* the board sat square across x, the side camera threw x
+away, and the four pegs read as **the teeth of a saw blade**. A yaw of 0.38 rad gives
+that camera 0.37 of the board's own length - the Paviser's camber argument, applied to
+yaw. *Front:* the forearm went up **behind** the hat and ended in a stub, so the board
+**floated** over a bent pipe. Elbow forward to y -0.42, mitt onto the board's
+underside. The board also went from 1.34x0.085 to 1.06x0.14 because it read as an
+**aluminium tray**, and the dark under-rail came off because it made it a **scaffold
+plank on a trestle**.
+
+**PASS 4 - I MADE THE DYER'S MISTAKE AFTER QUOTING IT IN THE COMMENT ABOVE IT.** I
+wrote *"strength 1.35 and not higher: the Dyer's pass 3 measured an emissive at 2.30
+coming back CREAM"* directly above a value that still clips: 1.35 x (1.000, 0.735,
+0.255) is (1.35, 0.99, 0.34), so **red and green both reach 1.0**. The pegs rendered
+cream - the exact colour of the oak board behind them - and a gauge the same value as
+its own backing is a gauge you cannot read. 1.10 x (1.000, 0.600, 0.075) clips red
+only, so what reaches the film is amber. The staff finial was also a **candle flame**
+(a tall lit cone on a dark stick is a candle in every view) and is now a knob.
+
+**PASS 5 - FIVE THINGS MOVED AND THEY ARE ONE CHANGE: THE HEAD STOPPED BEING A
+MACHINE.** A dark drum for a skull with a pale rectangle pasted on the front, two round
+lit eyes in it and a slot under them read as **a television** from the front and **a
+robot** from three-quarter - the one thing Bellmire's register cannot carry. `side.png`
+had the other half of the same fault: a dark skull under a dark crown of nearly the
+same width with a pale band between is **a bucket with a lid**, the Comfitmaker's
+pass-6 fault arrived at from the other direction. Both are the same mistake - drawing
+**features on** a head instead of making the head itself the readable object. The skull
+becomes the pale mass, the hat the dark one, the plate is deleted, and the eyes go dark,
+which leaves the amber to the gauge and the staff alone.
+
+**PASS 6 - A FIX THAT STOPPED BEING A FIX WHEN THE THING AROUND IT CHANGED.** The
+tippet was put on pale to keep a **dark** head off a **dark** torso. Pass 5 inverted the
+head and I left the tippet alone, so a pale collar sat directly under a pale skull of
+almost the same width (0.455 jaw against 0.470 tippet): `front.png` read head and tippet
+as one pale trapezoid and `side.png` as a single pale cone - **a wimple, not a man in a
+coat**. The honest move was to delete its colour, not to invent a third value.
+
+**PASS 7 - THE FIT RENDER FOUND BOTH OF THESE, WHICH IS WHY THE FIT RENDER EXISTS.**
+Standing the body beside a posed KayKit knight said two things my own three views had
+not. *One:* the head was **a bell** - 0.455 at the jaw against 0.370 at the crown is a
+23% taper and `hero_side.png` read it as a lampshade next to the knight's near-round
+helm. I had the Comfitmaker's *"a head tapers up"* in hand and **overshot it**; the
+lesson was that a head must not flare out at the **crown**, not that it should flare at
+the **jaw**. 0.420 to 0.395 is 6%. *Two:* at r 0.046 the eyes **vanished at hero
+scale** - `hero_front.png` read the face as a pale blank with a smudge on it. And one
+thing I measured rather than eyeballed: the chin bar sat at y -0.405 where the skull's
+own radius at that height is **0.414**, so it was **inside the head and could never
+have rendered at all**.
+
+**PASS 8 - THE HAND WAS A PEARL, AND THE WHOLE IDEA DEPENDS ON THE BOARD BEING HELD.**
+`hero_front.png` showed a white **ball** sitting under the plank's edge. A ball near a
+thing is not a hand on a thing - and *"knock the board off its arm"* is the party's
+answer to this creature, so the one join that had to be legible was exactly the one
+left as a sphere. A grip is **two** objects: a palm wrapping under and a thumb across
+the top edge. Both are now placed off the board's own axes, like the pegs, because
+pass 7's mitt had been typed in world coordinates while the board had been yawed and
+raised under it twice.
+
+**PASS 9 - THE SILHOUETTE SHEET CONDEMNED WHAT COLOUR HAD BEEN HIDING.** With value
+thrown away the front cell read as **one lump with a comb on top**: the elbow sat at
+x -0.520 against a brim of radius 0.545, so the whole upper arm lay **inside the hat's
+own outline**. The dark sleeve against the dark brim was legible only because they are
+different darks, and the silhouette test exists precisely to take that crutch away.
+Elbow out to -0.720, clear of the brim by 0.175.
+
+### THE FIT PROOF - ON A BODY, AND I LOOKED AT IT
+
+`minibossfit --only beadle` against the real `Knight.glb` at scale 1.0, posed:
+**verdict GREEN**, `blind_views []`, **3 of 3 views proving** (front / side / back),
+each view showing both subjects at `seen 1.000`. Hero measured **2.45 m**, creature
+**2.95 m**, **ratio 1.20**, `pair_w` **3.73 m**, `fits_frame true`.
+
+**THE INSTRUMENT IS PROVED ABLE TO GO RED.** The same gate run with `--prove-red`
+(hero stood **on** the creature) returns **RED** - *"only 0 of 3 views show BOTH
+subjects"*, creature `seen 0.000 vis 0` in all three - while the blank check and the
+border check **pass it**. A gate that has never been seen to fail is not known to be
+able to. Recorded in `renders/art/minibosses/_fit_beadle_red.json`.
+
+**AND A TRAP THE RED PATH SETS FOR WHOEVER RUNS IT NEXT:** `--prove-red` with the same
+`--only` **overwrites the register's shipped hero renders** with its creature-less
+cell. I looked at `hero_front.png` straight after the red run, saw a knight alone in an
+empty frame, and very nearly wrote that the creature had failed to render. It had not -
+I was looking at the proof's own output. The green pass must be re-run after any red
+proof, and it was.
+
+**BLANK AND BORDER: 99 files checked across the whole register, 0 failures.** Border
+alpha measured on all six of this body's PNGs (`front`, `three_quarter`, `side`,
+`hero_front`, `hero_side`, `hero_back`): **max border alpha 0.0000 on every one, no
+frame clip.** minibossgen's own check is opaque-pixel only and cannot see a clipped
+creature, so this was measured separately - a clipped icon is not a blank one.
+
+### WHAT IS STILL WRONG WITH IT - I LOOKED, AND THIS IS THE HONEST LIST
+
+1. **The staff does not exist in the side silhouette.** With colour thrown away it
+   lies entirely inside the body mass. The front and three-quarter cells carry it;
+   the side cell does not.
+2. **The side silhouette merges the raised arm into the hat.** Pass 9 opened daylight
+   in front and three-quarter, where the brim was the obstruction. From the side the
+   arm passes behind the crown and there is no gap to open without moving the board.
+3. **The two spent sockets are not countable at fit scale.** They read at 700x980 in
+   `front.png` and `three_quarter.png` as two dark discs; at hero scale only the four
+   pegs survive. The honest claim is split: **the four pegs are countable from the
+   door, the sockets are not.**
+4. **The grip says "held" but not "hand".** The palm and thumb read as a pale wedge
+   on the plank's edge; there are no fingers at this budget.
+5. **The staff hand is still a pearl.** I fixed the board hand at pass 8 and left the
+   staff hand a sphere on a shaft. It is the same fault, uncorrected, and I am naming
+   it rather than hoping nobody looks.
+6. **The head is a pale cylinder with a straight dark brow** - stern and readable, but
+   it has no crown shape and no ears. At hero scale it is a canister with eyes.
+7. **The coat is a featureless dark trapezoid** and nothing on it shows wear 0.18. The
+   condition argument is carried entirely by the brightness of the brass.
+8. **The board's near end touches the forearm** in the front cell, and the hat overlaps
+   the board's near end in the three-quarter cell.
+9. **The elbow is a hard angular corner** in every view - a tube bent at a point, not a
+   joint.
+
+### WHAT THE GAME BUILD LANE MUST DO - I DO NOT DO IT, AND I TOUCHED NO .gd OUTSIDE tools/art/
+
+1. **`scripts/bestiary.gd`** - add a row for the Beadle with `model` =
+   `res://assets/monsters/minibosses/beadle.glb` and **NO `anims` entry**: this body is
+   **static**, four meshes merged by material, no armature. `h` = **2.95** - that is the
+   authored height the fit sheet was measured at and the `ratio 1.20` above is the
+   argument for it.
+2. **`scripts/dungeon_hd.gd`** - the miniboss set-piece roll on theme `shrine`. The
+   Beadle is the **third** shrine piece (with the Snuffer and the Leech); it is not
+   room-locked, so no spawn gate is needed - footprint span **1.86 m** against the
+   11.0 m clear span of a D91 three-cell corridor.
+3. **The mechanic itself is the game build's**, not mine: turn order is held by the
+   creature while it stands, the four pegs are a destructible gauge, and breaking the
+   board returns the order to the party. The art carries the gauge; the rules do not
+   exist yet anywhere.
+
+### LICENCE
+
+**100% procedural.** Raw vertex maths only (`lordlib` primitives, `creatures.limb`,
+`creatures.eyes`) - no pack geometry is read by this body and `pack_used` is null. The
+only third-party asset in any render here is the CC0 KayKit adventurer `Knight.glb`
+used as the measuring stick in the fit sheet, already logged in
+`docs/art/ASSET_SOURCES.md`.
+
+---
+
+## THE RAMMER (34th) - LIVE FAULT, FOUND 2026-11-18 12:39 CT BY MY OWN SILHOUETTE SHEET
+
+The body shipped GREEN at a8a85a6 (ratio 1.12, 3/3 proving views, 0 blind, blank
+check 3 files 0 failures) and that verdict stands. This is a fault **the register
+is structurally incapable of seeing**, because every number it computes is about
+hero-vs-creature occlusion and this is a creature occluding **itself**.
+
+**THE CLAIM IN MY OWN PASS 5, IN THE SOURCE:** the monkey hangs 0.33 m below the
+head so there is "a visible gap of rope, so it reads as HANGING and not as part
+of the frame".
+
+**MEASURED, on `renders/art/minibosses/rammer/_rammer_silhouette.png`, walking the
+image column through the head cap's centre (3.31 mm/px at sheet scale):**
+
+| view | black run from cap | first white |
+|---|---|---|
+| front | **831 px, unbroken, cap to floor** | **none** |
+| three-quarter | 323 px | 107 px |
+| side | 408 px | 247 px |
+
+**In the front view the gap is not small. It is not there.**
+
+**AND THE CAUSE IS NOT THE ROPE.** I assumed the rope before I measured the width,
+and the width says otherwise: through that band the run grows **52 -> 89 px** as it
+descends. A 44 mm rope is 13 px. That is the **two front legs**, which by z 2.3-2.5
+have converged to about ±0.17 of centre and overlap the centre line in a front
+orthographic view. Pass 5 fixed the monkey's width against the legs at z 1.93 and
+never checked the band **above** the monkey, where the legs are tighter.
+
+**SCOPE, HONESTLY:** in colour it reads - pale wet oak legs against dark iron cap
+and monkey, plain on `hero_front.png`. This is a **hue-free read fault only**. But
+pass 5's own argument is that the telegraph must survive without hue, so by the
+body's own standard it is a fault, and it is the Beadle's family: every number
+green, the shape saying less than the numbers claim.
+
+**NOT FIXED.** The cheap fix is to rake the two front legs ~0.06 wider where they
+meet the head so they pass outside the cap's footprint - one pass, one re-render,
+one re-prove. Not taken inside a row that asked for a write-up.
+
+**ALSO OPEN ON THIS BODY, FROM LOOKING AT THE THREE ON-BODY VIEWS:** the raked back
+leg shares a line with the hauler in the side view (reads as impalement for a
+moment; nothing clips); the frame collapses to a pole from the side; the pile is
+the weakest read in the back view and its shaft shows below the floor plane; and
+the hauler's faceting is coarser than the chibi knight's (its proportion is right
+after pass 6 - it is segment count, not head-height).
+
+### CORRECTION 2026-11-18 12:46 CT - THE CAUSE ABOVE WAS A GUESS; HERE IS THE MEASUREMENT
+
+`tools/art/_rammer_yaw_ab.py` renders the shipped glb through one ortho camera at
+yaw 0/8/16/24/40 and counts daylight in the cap-to-monkey band across the cap's
+full width. **Zero at every angle** (denominator 8778 -> 6498, so the instrument
+is live). A height profile of the yaw-0 alpha: **0 mm of daylight from z 2.50
+down to z 1.90**, first opening at z 1.80 (134 mm) and widening below.
+
+So the band is not "the two front legs" and is not a projection accident - it is
+**the tripod converging at its own apex**, which is what a tripod is, plus the
+rope. **Raking the legs would do nothing, and no camera angle opens it.** Lowering
+the monkey under z 1.80 to find daylight would delete the telegraph it serves.
+
+**What holds:** pass 5's other half - the monkey stands proud of the legs at its
+own height, so the tower bulges where the block is. The telegraph is that bulge,
+the chalk ring **on the head of the pile**, and the oak/iron colour split. The
+source comment claiming "a visible gap of rope" is what is wrong, not the model.
+
+### CORRECTION, 18 Nov 14:3x-15:0x CT - I PUT THE CHALK RING ON THE FLOOR AND IT IS NOT ON THE FLOOR
+
+The team lead went looking for it in `hero_front.png` and `hero_back.png`, could
+not find it, and asked whether it had ever been modelled. **It is modelled, and
+the sentence above was the fault** - the same class as "a visible gap of rope",
+and in the same write-up.
+
+I parsed the glb's own glTF JSON chunk rather than re-rendering: `rammer_glow`
+spans y 0.399..1.335. The ring is `_ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow',
+0.016, 18)` - a horizontal annulus, radius 0.20, laid on the **broomed head of
+the pile at z 0.415**, which is 0.4 **above** the floor plane. Nothing in this
+body lies flat on the floor. The generator's own comment said "on the pile head"
+and "it is on the floor" in one sentence; both it and this file now say the one
+true thing.
+
+**AND I THEN TALKED MYSELF INTO A SECOND WRONG ANSWER, WHICH THE RENDER KILLED.**
+From the geometry alone I reasoned that the broomed collar beneath the ring
+(a cone r 0.255 -> 0.215 over z 0.335..0.410) is **wider** than the ring's 0.20
+and must therefore hide it from any camera at or below its own height. That is
+a tidy argument and it is false. `tools/art/_rammer_ring_ab.py` renders the body
+with and without the ring through one camera and counts the pixels that MOVED,
+sweeping elevation:
+
+| elevation | 0 | 10 | 20 | 30 | 45 | 60 |
+|---|---|---|---|---|---|---|
+| moved px (yaw 0) | 594 | 1022 | 1232 | 1458 | 1818 | 2088 |
+| moved px (yaw 40) | 592 | 908 | 1193 | 1427 | 1730 | 2060 |
+
+**Visible at every elevation including eye level, and it grows with height.**
+The real reason nobody could see it is framing, not occlusion: the fit views
+frame a 3.87 m hero-and-creature pair, and a 0.4 m chalk mark on a knee-high
+stump is a handful of pixels there. It is plainly visible once the camera is
+framed on the pile head, and it is visible as a pale sliver in the yaw-90
+silhouette too.
+
+**A THIRD THING THE SAME PARSE FOUND, AND IT IS A DEFECT IN MY OWN COMMENT:**
+"the ONE glow in the body" is false. `eyes()` in `creatures.py` defaults to
+`slot='glow'`, so the hauler's two eye pinpoints are in this material - 352 of
+`rammer_glow`'s 870 verts. The emissive strength 1.55 was reasoned for a chalk
+mark on wet oak and is also driving a face. Not changed - one change per pass,
+and the eyes read correctly at 1.55 - but it is named rather than hidden.
+
+### PASS 7, ONE CHANGE: THE HEAD CAP - AND IT WAS THE DEPTH, NOT THE WIDTH
+
+My own row said "narrow the head cap so the monkey is the widest thing in the
+upper frame by a clear margin at every angle". The team lead then looked at the
+three silhouettes and said the FRONT already passes, the SIDE is about equal,
+and **the three-quarter is the view that fails**. I built the instrument instead
+of picking between us: `tools/art/_rammer_cap_ab.py` renders the shipped glb
+through one camera at seven yaws and measures **each part's own read** - the
+pixels that move when that part alone is stripped out of its mesh.
+
+It says **we were both wrong about which view**, and the side is the one:
+
+| yaw | 0 | 15 | 30 | 45 | 60 | 75 | 90 |
+|---|---|---|---|---|---|---|---|
+| cap own width, before | 0.403 | 0.474 | 0.518 | 0.525 | 0.496 | 0.435 | 0.341 |
+| monkey own width | 0.624 | 0.700 | 0.729 | 0.710 | 0.641 | 0.528 | 0.381 |
+| margin, before | +0.221 | +0.226 | **+0.211** | +0.184 | +0.145 | +0.093 | **+0.039** |
+| margin, after | +0.221 | +0.241 | +0.246 | +0.233 | +0.206 | +0.162 | **+0.106** |
+
+The three-quarter was never close to failing. **The side was**, by 39 mm, and
+the arithmetic is obvious once the number exists: in pure side view the cap
+reads its DEPTH, 0.34, against the monkey's strap depth of 0.38. So "narrow the
+cap", which plainly means narrow it in x and is what I would have done, would
+have cost the block its seat on the three leg tops and **moved the failing
+number not at all**. The change is 0.34 -> 0.27 in y only, and the proof that it
+was one change is that yaw 0 is identical to four decimal places, 0.403 before
+and after.
+
+**I ALSO HAD TO FIX THE INSTRUMENT BEFORE I COULD TRUST IT, AND THE FIRST
+VERSION WAS GREEN EVERYWHERE.** Pass 1 measured the whole silhouette's extent
+per band and passed all seven yaws. I did not believe it, because one number was
+too big: the monkey band read 0.867 at yaw 0 when the block and its straps are
+0.62. The extra 0.25 is **the side stay rope** crossing that band on its way to
+the hauler's grip. A band margin can be green because the ROPE is wide, which
+says nothing about the block - the same family as `head_glow_px: 156` beside
+"the head has no face". Both numbers are now reported separately and the
+acceptance test is the part's own read.
+
+**WHAT THE NUMBER PASSES AND THE PICTURE STILL ONLY HALF-SAYS, SAID PLAINLY:**
+I looked at both yaw-90 silhouettes. The cap is visibly narrower and nothing
+else moved. But at that angle the monkey's winning margin is carried by **two
+thin strap tabs peeking past the mast**, while the cap is a solid slab - so the
+eye still reads them as comparable masses even at +0.106. If the side is ever to
+read like the front, the next change on this body is the **monkey's depth**,
+0.38 -> ~0.46, not more off the cap. One change per pass; I have made mine.
+
+### THE FIT PROOF FOR PASS 7, AND EVERY FAULT I CAN SEE IN IT
+
+Re-rendered on the posed KayKit knight, front / side / back, and I looked at all
+three. Register `_fit_rammer_register.json` GREEN, errors [], blank check 3
+files 0 failures, border clean on all seven cap-sweep frames.
+**creature_h 2.75, ratio 1.12, pair_w 3.87 - all three UNCHANGED**, because the
+change was in y only. The side silhouette moved 31343 -> 31043 px, which is the
+cap's lost depth and nothing else. **No downstream number changes; the game
+build's MB_FIT 1.12 stands and needs no re-derivation.**
+
+A note on the register itself: `--only rammer` alone writes `_fit_report.json`,
+NOT the named register, so my first fit run left `_fit_rammer_register.json` at
+its 17:53 content and the visibility numbers came back byte-identical to the
+pre-change run. I nearly reported those. **Identical numbers after a change you
+know you made are a reason to check the file's mtime, not a clean sheet.** The
+named register needs `--name _rammer_register` and has been re-run with it.
+
+**Faults I can see in the three views, honestly listed:**
+
+1. **THE PILE SHAFT STILL PROTRUDES BELOW THE FLOOR PLANE** the tripod feet
+   stand on - clearly visible as a thin cylinder under the stump in
+   `hero_back.png`. I found this at pass 6, the team lead seconded it by eye,
+   and it is **unchanged** because I did not touch it this pass. Still owed.
+2. **THE PILE READS AS A STOOL OR A BUCKET**, not as a driven pile. It is
+   knee-high, visually detached from the frame, and in the side view it sits
+   outside the tripod's foot. The broomed head wear does not read at pair
+   framing at all.
+3. **SIDE VIEW READS AS A LADDER OR A SIGNPOST.** Edge-on, the monkey is a thin
+   slab clamped to a mast and the "it is up, so it is coming down" telegraph is
+   at its weakest. This is the same fault the +0.106 margin passes on a
+   technicality; see the monkey-depth note above.
+4. **THE SIDE STAY READS AS A RIGID BEAM, NOT A ROPE** in the side view - it is
+   straight, thick and structural there, though it reads correctly as rope from
+   front and back.
+5. In the side view the hauler's **hooded head overlaps the diagonal stay**, so
+   the beam appears to pass through him. Occlusion only, no interpenetration in
+   the geometry, but it reads badly at that one angle.
+6. **WHAT IS NOT WRONG, CHECKED BECAUSE THE BEADLE WAS:** the hauler **has a
+   facing**. The pale band and the two eye pinpoints are on the front of the
+   hood only - `hero_front.png` shows the eyes, `hero_back.png` does not. This
+   body does not have the Beadle's no-facing fault and I checked rather than
+   assuming the lesson transferred.
+7. The monkey is the widest upper mass in front and back view by an easy margin,
+   and the rope gap between its top and the cap is visible in both. The pass-5
+   telegraph holds.
+
+### PASS 8, 18 Nov 15:3x-16:0x CT - MY OWN "PILE SHAFT BELOW THE FLOOR" FAULT IS FALSE, AND MEASURING IT FOUND A REAL ONE I HAD NOT NAMED
+
+The 12:39 row in this file says, in my own words, "the pile is the weakest read
+in the back view **and its shaft shows below the floor plane**", and the team
+lead confirmed that by eye at 13:1x. Two of us looked and agreed. **It is still
+wrong, and this is the third time on this body that my premise died the moment
+I built something that could measure it.**
+
+**WHAT THE SOURCE SAYS.** The pile is `aim(L.cone(0.205, 0.185, 0.36, 14),
+(HX, HY, 0.0), (0,0,1))`. `lordlib.cone` is documented "base at z=0" and `aim`
+only translates, so the pile's base is at z=0.0 and its top at 0.36. **Nothing
+of the pile is below z=0 and nothing ever was.**
+
+**WHAT HANGS LOWEST, MEASURED IN THE PICTURE.** Walking the alpha of
+`hero_back.png` column by column for the lowest opaque row:
+
+| what | x band | lowest row |
+|---|---|---|
+| hauler's feet | 117-216 | 497 |
+| front leg, far | 350-400 | 493 |
+| **the raked back leg** | **240-330** | **506** |
+
+The lowest thing in the back view is **the back leg's foot**, 13 px under the
+front feet. In the back view that leg stands at y +0.94 - **nearest the
+camera** - and projects onto the pile's own column, so it reads as one
+continuous shaft running through the pile head and out of the bottom. **We both
+read a leg as a pile.** Perspective putting the nearest foot lowest is the
+camera telling the truth about depth, not a model fault.
+
+### AND HERE IS THE REAL FAULT, WHICH NEITHER OF US NAMED: THE THREE FEET WERE NOT ON ONE PLANE
+
+`tools/art/_rammer_floor.py` compares the declared feet against the body's
+global minimum z, because `minibossgen` grounds the merged body on **that**
+(`ob.location.z - mn.z`), not on z=0. It found:
+
+```
+  global min z         : -0.0249   <- minibossgen grounds HERE
+  tripod foot plane    : -0.0249
+  pile base            : +0.0000   (+0.0249 under the feet)
+```
+
+**The pile was not below the floor. It was 24.9 mm ABOVE it** - the exact
+opposite of the fault I wrote down. The cause is `limb()`: it sweeps a ring
+**perpendicular to the polyline**, so a raked leg's bottom ring is tilted and
+its lowest vertex sits `r*sin(tilt)` under the point the builder declared -
+20.9 mm on the two front legs (13.73 deg, r 0.088) and 24.9 mm on the back one
+(17.65 deg, r 0.082). The deepest of those became the floor and lifted
+everything else off it, the pile included. **A driven pile floating off the
+ground is the one thing this creature must not do**, because the pile is the
+WHERE of the entire fight.
+
+**THE FIX, ONE CHANGE:** raise each leg's start point by its own dip, so every
+foot's lowest vertex and the pile's base land on z=0 together. Re-measured:
+float **24.9 mm -> 0.4 mm**, parts below the feet 0.
+
+**AND IT IS INVISIBLE IN THE RENDER, WHICH I SAY RATHER THAN LET THE FIX TAKE
+CREDIT IT HAS NOT EARNED.** Lowest opaque row of the central column is **506
+before and 506 after - zero pixels.** 24.9 mm on a 2.75 m body is ~3 px at
+sheet scale and it sat behind the nearer leg anyway. This is a correctness fix
+in the model, not a visual one; it will show against a real floor at a low
+camera, and it is not a thing a viewer will notice today.
+
+Fit re-run after the change: verdict **GREEN**, errors `[]`, blank check 3
+files 0 failures, 3 proving views, 0 blind, **ratio 1.12 unchanged** - the
+downstream number did not move, which is the proof the change was local.
+Corridor: span 2.03, CORRIDOR-SAFE, 4 meshes, 1046 faces.
+
+### THE LADDER READ FROM THE SIDE - JUDGED, AND STRUCK
+
+The team lead seconded my own listed fault that "the frame collapses to a pole
+from the side" and reads as a ladder or A-frame, and left the judgement to me.
+**I strike it, and the reason is a proof rather than a preference.**
+
+Project the two front legs along x and the polylines are **identical**:
+
+```
+  leg -x : (-0.66, 0.04, 0) -> (-0.34, 0.00, 1.32) -> (0, -0.10, 2.52)
+  leg +x : ( 0.66, 0.04, 0) -> ( 0.34, 0.00, 1.32) -> (0, -0.10, 2.52)
+  both, in (y, z) :  (0.04, 0) -> (0.00, 1.32) -> (-0.10, 2.52)
+```
+
+They are mirror images in x and **agree in y and z at every point**, so edge-on
+they are exactly coincident - zero daylight, at any distance, from any
+elevation. No render was needed to know that and no render can change it.
+
+So the side view is **not failing to show the frame; it is correctly showing
+what the frame is**: an A-frame with one back prop. Plainness is the voice, and
+a pile gantry seen down its own axis does look like a pole with a stay. Both
+things the fight turns on still read in that view - the dark monkey stands
+against pale oak on `hero_side.png`, and the broomed pile head is visible at
+the foot. **A fault correctly struck is as good as one fixed.**
+
+If it is ever wanted open from every angle the remedy is one line - split the
+two front legs in y by about +-0.12 so they stop sharing a plane - and the cost
+is the frame's symmetry. **Not taken: nothing is broken and the symmetry is
+worth more than the third line.**
+
+### THE SAME FAULT ACROSS THE SET - MEASURED, 12 OF 31, AND ONLY MINE IS FIXED
+
+If `limb()`'s tilted end ring lifted the Rammer, it can lift anything with a
+raked leg. `tools/art/_foot_plane_audit.py` walks all 34 builders in `ORDER`
+and asks the narrow question: **does this body declare a contact at z=0.0 -
+geometry a builder deliberately put on the ground - and is something else
+below it?** Only then does the declared contact float.
+
+```
+  bodies 34   declare a contact at z=0: 31   bar 5 mm
+    quartermaster  -0.3172 -> 317.2 mm      moulder       -0.0300 ->  30.0 mm
+    reeve          -0.1700 -> 170.0 mm      pressman      -0.0256 ->  25.6 mm
+    stoker         -0.0836 ->  83.6 mm      scrapwright   -0.0205 ->  20.5 mm
+    sexton         -0.0720 ->  72.0 mm      sluicekeeper  -0.0130 ->  13.0 mm
+    sower          -0.0374 ->  37.4 mm      boiler        -0.0120 ->  12.0 mm
+                                            snarer        -0.0083 ->   8.3 mm
+                                            hurdleman     -0.0060 ->   6.0 mm
+  OVER THE BAR : 12 of 31 judged     seated : 19     not judged : 3
+```
+
+**AS OF 18 Nov 17:1x CT the Quartermaster is out of this list** - 317.2 mm ->
+2.5 mm, under the bar. The run below says how. The table above is kept as it
+stood so the fix has something to be measured against; the live table is:
+
+```
+  bodies 34   declare a contact at z=0: 31   bar 5 mm
+    reeve          -0.1700 -> 170.0 mm      pressman      -0.0256 ->  25.6 mm
+    stoker         -0.0836 ->  83.6 mm      scrapwright   -0.0205 ->  20.5 mm
+    sexton         -0.0720 ->  72.0 mm      sluicekeeper  -0.0130 ->  13.0 mm
+    sower          -0.0374 ->  37.4 mm      boiler        -0.0120 ->  12.0 mm
+    moulder        -0.0300 ->  30.0 mm      snarer        -0.0083 ->   8.3 mm
+                                            hurdleman     -0.0060 ->   6.0 mm
+  OVER THE BAR : 11 of 31 judged     seated : 20     not judged : 3
+```
+
+**MY FIRST VERSION OF THIS AUDIT WAS WRONG AND I REWROTE IT BEFORE TRUSTING
+IT.** It reported "lowest vertex below z=0" and called that the float, which
+flagged the Quartermaster at 317 mm purely because it loads real pack geometry
+around the pack's own origin. A body authored entirely below z=0 grounds on its
+own true lowest point with **nothing** floating. The instrument now requires
+**both** conditions and leaves the 3 bodies that declare no contact unjudged,
+and it goes **red on empty** rather than printing a tidy zero.
+
+**I LOOKED AT THE WORST ONE** rather than shipping a table. `quartermaster/
+hero_front.png`: its two foot blocks plainly sit above the dropped halberd
+lying in front of it. Some of that is the same perspective that fooled us on
+the Rammer - the weapon is nearer the camera - but the model number stands on
+its own, and so does the argument: **the feet and a weapon lying on the ground
+both want to touch the floor, and they are on two different planes 317 mm
+apart. Whichever one is right, they cannot both be.** That holds for all 12.
+
+**ONLY THE RAMMER IS FIXED.** The other 11 are named, not touched: one change
+at a time, each needs its own look, and in several the low part may be a prop
+whose placement is deliberate even if its plane is not. This is a defect in
+already-shipped work that I learned about this hour, which the freeze expressly
+allows me to fix - it is not a new item and I have written no plan row for it.
+
+### THE QUARTERMASTER, 18 Nov 17:1x CT - 317.2 mm TO 2.5 mm, AND IT WAS ONE BUG WEARING FOUR FAULTS
+
+**WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED.** I re-ran the audit in my
+own `--background --factory-startup` Blender and reproduced the table above
+exactly - 34 bodies, 31 judged, 12 over the bar, the Quartermaster worst at
+317.2 mm. Then, because *an audit says how far and never says what*, I wrote
+`tools/art/_fp_locate.py`: it wraps every `Parts.add`/`Parts.raw` and records
+the line of `minibosses.py` that made each item, so the report names source
+lines instead of anonymous indices. It goes **red on empty** and red when it
+resolves no caller at all - a probe that attributes nothing must not read clean.
+
+It named the part in one run:
+
+```
+  quartermaster - 35 items, global min z -0.3172
+    zmin -0.3172  zmax +0.3109  bone 195v  minibosses.py:4338   x3   <- the three shields
+    zmin -0.1912  zmax +1.2995  bone 460v  minibosses.py:4338        <- the offered spear
+  ITEMS DECLARING CONTACT: 2   (both boot blocks, at exactly 0.0000)
+```
+
+Line 4338 is `_lay`, which carries pack geometry. So I measured the pack parts
+in their own unit space, and there it was:
+
+```
+  spear_A    z  min -0.3289  max +0.6711      shield_A   z  min -0.5713  max +0.4287
+```
+
+**`_gear_mesh` scaled to unit length and never re-origined.** Its docstring
+claimed "about the grip" and `_lay`'s claimed "carry a unit-length part to
+`butt`", and **neither was true**: `_lay` was putting the pack's arbitrary
+mid-mesh origin on the point every call site had named as the butt. Each part
+was therefore sunk 0.33-0.57 of its own length backwards along its own
+direction. That single error was producing four separate faults, three of which
+no number in any register could see:
+
+1. **the floor.** The three ground shields were buried past their centres,
+   dragging the global minimum to -0.3172 and lifting the body's two declared
+   boot blocks 317.2 mm into the air - the worst float in the set;
+2. **the feather crown.** Two thirds of each sheaf shaft sat inside the torso,
+   so only the heads showed. That is *the exact fault pass 2 was written to
+   fix*, and pass 2's note says it was fixed. It never was - the fix was
+   correct and the loader undid it;
+3. **the offered spear.** Pass 2 computed the shaft's midpoint to three
+   decimals and put the hand there. The arithmetic was right and the geometry
+   it described was 0.66 m away, so the fist closed near the butt end;
+4. **the two floor spares.** Pass 3 measured them clear of the shield faces,
+   "a clear 0.76 m of floor". They still ran through the stack.
+
+**THE FIX IS ONE LINE IN THE LOADER, NOT FOUR HAND-TUNED NUMBERS.** `_gear_mesh`
+now subtracts the scaled minimum z, so a pack part's butt is at its own origin
+and `_lay`'s documented contract is true. Both docstrings are corrected to say
+what the code does. Blast radius measured before touching it: `_lay` and
+`_gear_mesh` are called **only** by `quartermaster()` - four call sites, one
+body. The procedural fallback `_spear_proc` already produced butt-at-zero
+geometry, which is further evidence of which convention was intended.
+
+**AFTER:** global min -0.0025, float 2.5 mm, under the 5 mm bar. The set goes
+12 over the bar to **11**, seated 19 to **20**. `minibossgen` GREEN, 45 bodies,
+0 errors, 0 blanks, quartermaster span 2.62 CORRIDOR-SAFE; `minibossfit` GREEN,
+0 blanks, 3 views proved, hero ratio 0.96.
+
+**I LOOKED AT ALL THREE VIEWS AND HERE IS EVERYTHING I CAN SEE, GOOD AND BAD.**
+Fixed in the picture and not just in the number: the boots now land on the
+hero's own floor line in `hero_front.png` and `hero_side.png`; the three
+shields **stand** against the near leg and read as a stack of shields instead
+of the sunken grey blob they were; the two spares lie on open floor in front of
+them with daylight between; and the fist closes on the **middle** of the
+offered shaft, so the body finally does on screen the one thing it is for.
+
+Still wrong, named and not hidden:
+
+- **the sheaf reads as a crown from dead-on front, and only from there.** With
+  the shafts finally out of the torso the fan is now a symmetric six-spoke
+  splay centred behind the head. In `three_quarter.png` and `hero_side.png` it
+  reads correctly - spears standing in a quiver, raking up and back. **This is
+  a one-view read and I did not chase it this run**: every change that would
+  break the symmetry head-on also moves the two views where the sheaf is
+  already right, and that is its own pass with its own look.
+- **the quiver root is hidden.** The shafts appear to come from behind the head
+  rather than out of a block, because the quiver sits inside the torso outline.
+- **the tally brand's pale knob** crosses the sheaf shafts in 3/4 - the same
+  family as the Beadle's pale-knob-on-pale-panel, though here it still reads.
+- **the hatch with two lit dots still reads as a letterbox face** at pane
+  distance, which is what pass 2 set out to kill and did not fully.
+- the near boot clips the bottom corner of the nearest shield by a few mm.
+
+**WHAT THIS COSTS THE OTHER TEN.** Nothing - the bug was in a loader only this
+body uses. The other ten floats have other causes and still need their own
+looks, one at a time.
+
+### THE REEVE, 18 Nov 17:4x CT - 170.0 mm TO 4.2 mm, AND THE FLOAT WAS HIDING A 10% UNDERSIZE
+
+**WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED.** I re-ran
+`_foot_plane_audit.py` in my own `--background --factory-startup` Blender
+before touching anything: 34 bodies, 31 declare a contact at z=0, **ELEVEN over
+the 5 mm bar**, not the twelve the 16:0x plan block carries and not the ten the
+17:4x block carries - the Quartermaster's fix had already dropped it out of the
+list and nobody had re-run it since. **THE QUARTERMASTER IS NOT IN THE OVER-BAR
+LIST AND THE 317.2 mm FIGURE ON MY ROW IS DEAD.** I did not start where the row
+pointed me; I started at the top of the table I measured, which is the Reeve at
+170.0 mm - more than double the next (Stoker, 83.6 mm).
+
+**THE INSTRUMENT NAMED THE LINE BEFORE I TOUCHED GEOMETRY.** `_fp_locate.py
+-- reeve`: 60 items, and exactly ONE reaches below the floor by more than a
+millimetre -
+
+    zmin -0.1700  zmax +0.1700  dark  9v  minibosses.py:5642
+      P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX+0.96, BY+0.42, 0.17),
+            rot=(math.pi, 0.0, 0.0))
+
+the chain's floor anchor. `L.cone` **bases at z=0 and tips at +h**; `rot=pi`
+about X flips it point-DOWN about the item's own origin, so the correct `loc.z`
+is the FULL height, not half of it. At 0.17 the point reached **170 mm below
+z=0** - and `minibossgen` grounds the merged body on its GLOBAL minimum, so one
+nine-vertex spike became the floor.
+
+**WHAT IT LIFTED.** Six items declare contact at exactly 0.0 and every one of
+them was in the air: the strongbox's four feet (`minibosses.py:5513`) and the
+man's two boots (`:809`). The box and the officer both hovered 17 cm.
+
+**THE FIX IS ONE NUMBER.** `loc.z` 0.17 -> 0.34, so the point lands AT z=0 and
+the head sits 0.34 above it: a stake driven flush. Nothing else moved. After:
+global min **-0.0042** (the spill lumps, which are spheres seated at `r*0.60`
+and are MEANT to settle into the floor plane), the Reeve is off the over-bar
+list, and the set is **10 of 31 over the bar, 21 seated**.
+
+**THE FLOAT WAS WEARING A SECOND FAULT NOBODY HAD NAMED.** `minibossgen`
+normalises each body to its CANON height, and the old z-span included 170 mm of
+buried spike - so the part a viewer can actually see was being scaled down to
+fit a height that was 170 mm of nothing. Fixing the anchor made the creature
+**10% bigger on the floor**: `_report.json` footprint 2.96 m -> **3.26 m**, size
+2.96x1.71x1.95 -> **3.26x1.88x1.95**. Still **CORRIDOR-SAFE** (three-cell clear
+span 11.0 m), so no spawn gate changes - but any lane holding 2.96 should hold
+3.26 now.
+
+**THE FIT PROOF - I LOOKED AT ALL THREE, AND AT THE BEFORE.** `minibossfit
+--only reeve`, KayKit Knight at scale 1.0, ratio 0.80, pair width 5.12 m,
+verdict GREEN, blank check 3 files 0 failures, 3 of 3 proving views, border
+intact. Front/side/back at `renders/art/minibosses/reeve/`.
+- **BEFORE** (`hero_front.png` at 42b9156): the box feet, the boots and the
+  spill all sit a clear band ABOVE the knight's soles and the spike is the only
+  thing touching the floor line. The float is visible by eye, not just by
+  number - about 23 px at this frame.
+- **AFTER**: feet, boots and spill all land on the knight's sole line in all
+  three views. Nothing clipped, nothing floating, no new gap.
+
+**FAULTS I CAN STILL SEE, AND THE HARNESS CANNOT.**
+- **the anchor does not read as a stake.** At stream distance it is a dark
+  comma from the front and a thin triangle from the side - "the chain ends in a
+  mark on the floor" rather than "driven in". It is correct geometry and poor
+  reading. NOT fixed this pass: one thing at a time, and it is a shape question,
+  not a plane question.
+- the spill lumps are pale on pale and only just carry; they read in all three
+  views but they are the first thing that would be lost to a dark floor tile.
+- back and front are close in mass - the strongbox, hopper and man all mirror.
+  The facing cues are real but small: the lock plate and the man's two pale eyes
+  are front-only. Less dangerous than the Beadle's no-facing fault, but the same
+  family, and I am writing it down rather than calling the body clean.
+- the chain ring on the box's side reads as a handle or a keyhole in the side
+  view, not as a ring the chain passes through.
+
+**WHAT THIS COSTS THE OTHER TEN.** Nothing. This bug was one call site. The
+Stoker is next at 83.6 mm and needs its own look.
+
+### THE STOKER, 18 Nov 17:5x CT - 83.6 mm TO 0.0 mm, AND IT WAS TWO CAUSES, MEASURED ONE AT A TIME
+
+Second body of this pass. `_fp_locate.py -- stoker` before any geometry moved:
+37 items, and the floor was being set by the RAKE -
+
+    zmin -0.0836  zmax +0.1103  dark  7v x4  minibosses.py:1050
+      P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X+1.64+k*0.14, -0.78, 0.10),
+                (0.42, -0.10, -1.0)), 'dark')
+
+four teeth, 0.20 long, aimed with unit z -0.9181 from a base at z=0.10. The
+comment says **"four short teeth, biting the floor"** and the intent is right -
+but the arithmetic made it **42% of every tooth BURIED**, the head's low corner
+9.7 mm under with it, and the only two items this builder declares at 0.0 - the
+man's two boots - lifted **83.6 mm** off the rendered floor. A tooth that passes
+through the floor is not biting, and in game nothing below z=0 is ever seen, so
+there was nothing to weigh against the boots. **FIXED, NOT STRUCK.**
+
+**CHANGE 1, MEASURED ALONE: `RAKE_Z = 0.0836`** lifts haft end, head and teeth
+TOGETHER, so the tips land exactly at z=0 and the three cannot drift apart.
+Result on its own: **83.6 mm -> 26.4 mm**, teeth `zmin -0.0000`.
+
+**CHANGE 2, MEASURED ALONE AFTER IT: `BASKET_Z = 0.0264`.** The lift exposed a
+SECOND cause the first number was hiding - the fuel basket at `:1054` is
+deliberately LEANING, `aim(..., (0.0, 0.08, 1.0))`, and a tilted base circle
+does not sit on its own z: its low edge hung 26.4 mm under. The lean is the
+make-do read and I kept it; the low edge now rests ON the floor. Result:
+**26.4 mm -> 0.0 mm**, global min `-0.0000`, seven items declaring contact.
+
+I report both numbers separately because one render pass carried both changes.
+**THE SET IS NOW 9 OF 31 OVER THE BAR, 22 SEATED** (was 11 at the top of this
+run, 12 in the 16:0x plan block).
+
+**THE FIT PROOF - LOOKED AT, WITH THE BEFORE.** `minibossfit --only stoker`,
+Knight at 1.0, verdict GREEN, blank check 3 files 0 failures, 3 of 3 proving
+views. Before: boots a clear band above the knight's soles, rake head and teeth
+hanging below everything. After: boots, basket and rake teeth all land on the
+knight's sole line, front/side/back. No new clip, no new gap.
+
+**FAULTS I CAN STILL SEE, AND THE HARNESS CANNOT.**
+- **THE SIDE VIEW LOSES THE FIRE.** The grate is on the chest facing front, so
+  at azimuth 90 the Stoker reads as "a figure with a pipe and a rake" and the
+  one thing it is named for is not in the picture. Same family as the Beadle's
+  no-facing fault, inverted: facing is TOO strong here, carried by one panel.
+  Not touched this pass - it is a shape question and this pass was a plane one.
+- the rake head box is edge-on to the front camera, so the teeth look like they
+  grow straight off the haft; the rake reads as a fork rather than a rake.
+- the legs are thin against a KayKit body, as the Reeve's officer is.
+
+================================================================================
+## FOOT-PLANE PASS 3 - SEXTON, SOWER, MOULDER - 18 Nov 2026, 18:3x-18:5x CT
+
+The team lead's 18:0x row: *"YOUR NEXT ITEM IS THE REMAINING FOOT-PLANE BODIES,
+unchanged and still first."* The audit at the top of this run read **9 of 31
+over the 5 mm bar, 22 seated**. It now reads **6 of 31 over the bar, 25 seated**.
+Nothing here was remembered: `_foot_plane_audit.py` for the set, `_fp_locate.py`
+for the cause, re-run between every single change.
+
+### THE SEXTON - 72.0 mm -> 0.0 mm, two causes, measured one at a time
+**CAUSE 1, ALONE: the spade digs past the floor.** `:496/:497` - blade box and
+point cone are both aimed `(0.36, -0.06, 1.0)`, 20 deg off vertical, and a
+tilted box or cone does NOT sit on its own `loc.z`: the blade's low corner sat
+66.0 mm and the point's base circle **72.0 mm** below z=0. `minibossgen` grounds
+the merged body on its global minimum, so that buried depth became the floor and
+lifted the only things this builder declares at 0.0 - the man's two boots at
+`:421` - 72.0 mm into the air. **`SPADE_Z = 0.0720`** lifts blade and point
+together (one lift, so they cannot drift apart; the haft above only gains
+overlap, never a gap). Alone: **72.0 -> 66.0 mm**, point `zmin +0.0000`.
+
+**CAUSE 2, MEASURED ONLY AFTER CAUSE 1: the spoil heap was buried.** `:508` -
+each lump is an ellipsoid of z half-height `r*0.42` sitting at `loc.z r*0.20`,
+so **0.22r of every lump was under the floor**, 66.0 mm on the big one. With the
+spade seated this became the new global minimum. `loc.z = r*0.42` rests each
+lump ON the ground and keeps the flattened spill read. Result: **66.0 -> 0.0 mm**,
+global min `+0.0000`, six items declaring contact.
+
+### THE SOWER - 37.4 mm -> 0.0 mm, one cause, fixed BY DERIVATION
+`:984` - the three shoots are raked stems, and `limb()` sweeps each ring
+PERPENDICULAR to the polyline, so a leaning stem's bottom ring tilts and its
+lowest vertex sits `r0*sin(tilt)` below the 0.0 the builder wrote: **37.4, 33.8
+and 23.4 mm** on the three. The deepest became the floor and lifted the man's
+two boots (`:853`) 37.4 mm.
+
+**NO CONSTANT WAS DIALLED IN.** The lift is computed from each stem's OWN first
+segment, so re-bending or adding a shoot cannot re-open the float. That is now
+`seat(pts, r0)` in `minibosses.py`, next to `TAU`, with the fault written in its
+docstring - **the general answer to the Rammer's pass-8 finding**, which until
+today was being fixed body by body with hand-measured numbers. Result: all three
+stems `zmin -0.0000`.
+
+### THE MOULDER - 30.0 mm -> 0.0 mm, THREE causes, each measured after the last
+1. **The man's own legs** (`:8442/:8444`), raked forward, dipped 30.0 and 19.9
+   mm. Invisible - the boots cover the leg ends - but the deeper one WAS the
+   floor. `seat()`; the ends stay well inside the boots. **30.0 -> 21.7 mm.**
+2. **The trestle's four splayed legs** (`:8305`), same class, 21.7 mm each, and
+   only visible as the floor once the man's legs were fixed. `seat()`.
+   **21.7 -> 8.0 mm.**
+3. **The sand-and-sprue spill** (`:8515`), 0.034 half in z sitting at 0.026, so
+   8.0 mm of every lump was under. Seated at its own half-height.
+   **8.0 -> 0.0 mm.**
+
+### THE FIT PROOF - RENDERED ON A BODY AND LOOKED AT
+`minibossgen` rebuilt the three glb (0 blanks, 0 errors, heights and footprints
+unchanged: sexton 2.20 m, sower 3.50 m, moulder 2.36 m, all CORRIDOR-SAFE
+against the 11.0 m three-cell span). `minibossfit --only sexton,sower,moulder,
+reeve,stoker` against a posed KayKit Knight at scale 1.0: **verdict GREEN**,
+blank check **15 files, 0 failures**, **3 of 3 proving views on every one**,
+ratios sexton 1.00, sower 0.92, moulder 1.18, reeve 0.80, stoker 0.98.
+
+**WHAT I SAW IN THE PICTURES.** Sexton front/side/back: boots flat, the spade
+point touching, the three spoil domes resting on the ground, nothing floating.
+Sower: boots flat and all three stems planted - in the side view their bases are
+now IN THE PICTURE (see the next section). Moulder: boots, the four trestle feet
+and the row of spill lumps all on one line.
+
+### *** AND THE HARNESS COULD NOT SEE A CUT. I FOUND IT BY MEASURING. ***
+Looking at the sower's side render I thought the hero and the creature were not
+standing on the same line, so I measured the lowest opaque row of each subject
+in every hero view rather than trusting my eye. **Two findings, and the second
+is the serious one.**
+
+**(1) THREE HERO SIDE RENDERS WERE CLIPPED AT THE BOTTOM EDGE - sower, reeve and
+stoker, the last two ticked only hours ago.** Content sat on row 519 of 520.
+`minibossfit`'s checks on the hero views were **BLANK ONLY**: `minibossgen`
+asserts border alpha, this file never did, so a creature with its feet cut off
+by the frame returned GREEN. `fits_frame: true` sitting beside it is computed
+from pair WIDTH and was never answering the question. **A clipped render is not
+a blank one** - same family as pass 11's `head_glow_px: 156`.
+FIXED, AND IT IMMEDIATELY EARNED ITS KEEP: the border check is now in
+`minibossfit` per edge and goes RED by name. My first camera fix had the sign
+backwards and the new check went red on three MORE views within the minute -
+raising the aim point raises what the frame covers and pushes the subjects DOWN.
+The cause is that the camera is elevated 6 deg, so a separation in DEPTH becomes
+one in IMAGE HEIGHT; the aim point now drops by `sin(6deg) * half the pair's
+depth span`. Re-run: **0 edge contacts on all 15 views.**
+
+**(2) NOT FIXED, AND THE LEAD SHOULD KNOW BECAUSE IT IS HOW WE ALL READ THESE
+SHEETS: "one fixed ground line" is true of the WORLD, not of the PICTURE.**
+Hero bottom row minus creature bottom row, after the fix: front +21..+25 px,
+back +29..+41 px, side **-40..-59 px** (0.15-0.43 m at this scale), on all five
+bodies including both ticked ones. The world plane is shared; the projection of
+it is not, because the two subjects sit at different depths under a tilted
+camera. **Comparing one body's own parts across a view is sound** - which is
+what the lead did on the stoker and the reeve, and those readings stand - **but
+comparing the hero's bottom to the creature's bottom in these pictures will show
+a float that is not there, or hide one that is.** I have not touched it: it
+changes the framing of every render in the set and belongs in a pass of its own.
+
+### FAULTS I CAN STILL SEE AND DID NOT FIX (this was a plane pass)
+- **THE SEXTON HAS NO BACK.** From behind, the hod grid hides the man entirely:
+  it reads as a board on two legs, no head, no facing. Same family as the Beadle
+  and the Reeve, and worse than either because the grid is the whole silhouette.
+- **THE SEXTON'S MECHANIC IS NOT COUNTABLE FROM THE DOORWAY, WHICH IS THE ONE
+  THING IT IS FOR.** The docstring says twelve pigeonholes, five plugged and
+  LIT; the render shows a **3x3 = nine** cell frame and the plugs read as pale
+  grey slabs on pale grey with no light in them. The geometry and the idea
+  disagree - that is a content fault in my own shipped work and it is named here
+  rather than quietly fixed in the same pass that moved the floor.
+- The sexton's spade reads as a stick with a small blade; at stream distance it
+  will not say "spade".
+- **THE SOWER HAS NO FACE from the side** - the hat disc covers the head
+  completely - and the casting arm is a flat plank, not an arm.
+- The sower's thorns vanish edge-on in the side view, so the three shoots read
+  as plain poles.
+- **THE MOULDER'S CAST reads as a pale mannequin egg** with a visor band, and
+  its arm is the same plank shape as the sower's.
+- The moulder's six spill lumps are evenly spaced and now sit proud of the
+  floor; in a row they read as coins rather than spill.
+
+================================================================================
+## THE REEVE'S FACING FROM BEHIND - ANSWERING THE TEAM LEAD, 18 Nov 18:5x CT
+
+Asked: *"THE REEVE HAS WEAK FACING FROM BEHIND ... Look at it and tell me
+whether you agree; if you do not, say so with the geometry and I will take that
+answer."*
+
+**I AGREE, AND THE GEOMETRY SAYS WHY.** I looked at `reeve/hero_back.png`
+again, not at the register. Nothing on that body is back-only. The hat is a
+flat disc with no brim asymmetry, so it has the same outline from either side.
+The arms are out roughly symmetrically. The apron slab is applied to a round
+torso, so its edges show from behind as a pale panel and it reads as a front.
+The boots and legs are mirrored. The only asymmetries in the whole figure -
+the hand on the box rim and the slung tally sticks - are SIDE features, not
+back ones, and both are nearly edge-on at azimuth 180.
+
+**AND THE REGISTER CANNOT EVER CATCH THIS.** `seen: 1.0` measures how much of
+the creature a viewer can SEE past the hero. A body with no facing is fully
+visible. The number is right and the question is not in it.
+
+**NOT FIXED THIS RUN, AND I WILL NOT PRETEND IT IS SMALL.** The honest fix is
+one back-only mass that cannot be mistaken for a front - a slung coil, a strap
+across one shoulder, a tally board on the back - plus a brim that is deeper at
+the front than the back, so the hat's outline itself says which way he faces.
+Both change the silhouette, so they want their own pass with a before/after
+pair, not a corner of a foot-plane run. **THE SEXTON IS WORSE AND IS IN THE
+SAME QUEUE** (see the pass-3 faults above: from behind the hod grid hides the
+man completely).
+
+## THE DAUBER - "Wetwall", the 37th (20 Nov 2026, 10:3x-11:0x CT)
+
+**MY OWN COUNT, MEASURED OFF `tools/art/minibosses.py` BY AST WALK, NOT QUOTED
+FROM A PROMPT.** `CANON` and `BUILDERS` each carry **50 keys and agree exactly**
+- no builder without a canon row, no canon row without a builder. **14 of those
+are VARIANT BODIES** (`_chibi` x12, `_tall`, `_chibi_tall`), so the distinct
+miniboss count before this one is **THIRTY-SIX**. My prompt says 33, which was
+true on 18 Nov. The Dauber is the **37th**.
+
+| key | title | h | theme | THE IDEA | wear |
+|---|---|---|---|---|---|
+| `dauber` | Wetwall | 2.58 | keep | **IT WALLS YOU IN** - it lays a fresh course every time you hurt it and the floor you have left to fight on gets smaller. The course goes up WET and can be broken by anything; once it sets, nothing the party carries will open it. The choice expires while you argue about it. | 0.42 |
+
+**WHY A WALL.** I read all 36 existing idea lines before designing, because a
+re-skin is the one failure this slot cannot absorb. Nothing in the set TAKES THE
+ROOM AWAY A COURSE AT A TIME: the Hurdleman divides the floor once, the
+Sluicekeeper floods it, neither SHRINKS it and neither puts a **perishable
+window** on the answer. That window is the new verb - wet breaks, set does not.
+
+**MEASURED, GEN PASS 5:** 4 meshes, 1,300 faces, size 1.65 x 1.56 x 2.58 m,
+footprint span **1.65 m** against the 11.0 m three-cell corridor -
+**CORRIDOR-SAFE, margin 9.35 m, NOT room-locked.** **UNDER-LID.** Blank check 3
+files, 0 failures; 0 frame clips.
+**FIT, ON A REAL POSED KayKit Knight (2.45 m, 8 parts):** verdict **GREEN**,
+ratio **1.05**, pair span 3.52, fits_frame true, 3 of 3 proving views, 0 blind
+views, blank 3 files / 0 failures.
+
+### THE FAULTS I CAN SEE, AND THE FIRST ONE IS THE RUN'S BEST FINDING
+
+1. **PASS 2 SHIPPED A FLIGHT OF STAIRS AND EVERY NUMBER WAS GREEN.** Pass 1
+   stepped five blocks up and out along the pole while leaving each block
+   AXIS-ALIGNED. Blanks 0, border 0, span 1.87 m, GREEN fit, five blocks
+   countable - and `front.png` is unmistakably a staircase coming off a mason's
+   shoulder. A stepped run of level slabs IS a staircase; that is what the shape
+   means. Fixed by rotating the blocks onto the pole's own axis.
+2. **AND THEN IT WAS A LADDER - AT ONE SIZE ONLY, WHICH IS WHY NOTHING CAUGHT
+   IT.** At 700 px the hod reads as five mortared blocks on a shaft. **Shrunk to
+   the hero-scale cell - roughly what a viewer gets from across a room, the only
+   distance that matters for a set piece - the stone loses its solidity, the
+   four joints become rungs and the thing is a ladder.** All instruments stayed
+   green through three passes of it. A ladder needs TWO STILES: pass 4 removed
+   one (the second trough board) and the read survived, because the pole's
+   overhang ABOVE the stack and the full-length board were still a pair. Pass 5
+   cut both - the shaft now stops INSIDE the load and the board is a lip under
+   the bottom two courses. **THE LESSON, WRITTEN DOWN: A SILHOUETTE THAT IS
+   CORRECT AT RENDER SIZE CAN BE WRONG AT PANE SIZE, AND NO ASSERTION IN THIS
+   HARNESS LOOKS AT PANE SIZE.** Judge the fit sheet's cell, not the body shot.
+3. **A COLLISION THAT EXISTED ONLY IN PROJECTION.** Pass 1's plumb bob (x +0.46)
+   and the lime bag (x -0.40) are 0.86 m apart and never touch. In `side.png`
+   the camera looks ALONG X, that separation collapses, and the spike is driven
+   clean through the sack. No intersection test would ever have reported it.
+4. **I SHIPPED A MONOCHROME BODY BY AVOIDING A MONOCHROME HUE.** Pass 1 put the
+   smock at (0.112,0.118,0.126) against a dark slot at (0.070,0.068,0.062) -
+   0.04 apart in value. Smock, apron, boots and hod frame read as ONE dark mass.
+   The register's defect arrived from the other direction: one VALUE, not one
+   hue. Lifted to (0.173,0.186,0.208) at pass 2.
+5. **THE SIDE VIEW IS STILL THE WEAKEST OF THE THREE** - same honest verdict the
+   Moulder's write-up gave its own. Edge-on, the four joints show their full
+   faces as a stepped run of dark bars; the stiles are gone so it is no longer a
+   ladder, but it is the least legible of the three cameras.
+6. **THE TROWEL IS MOSTLY HIDDEN BEHIND THE PAIL IN THE FRONT VIEW**, and edge-on
+   in the side view it still reads as a flat paddle rather than a trowel. It is
+   the verb of the whole body and it is the quietest object on it.
+7. **THE LOWEST BLOCK PASSES CLOSE BEHIND THE HEAD.** It does not occlude the
+   eyes or the face panel in any of the three views, but the margin is small and
+   a camera between front and three-quarter could eat the face. The Moulder's
+   crucible welded itself to a head exactly this way and the occlusion test
+   passed, because that test asks whether the HERO can see the CREATURE, never
+   whether one part of a creature has eaten another.
+8. **THE LAID COURSE ON THE FLOOR IS A DETACHED ISLAND IN THE SIDE VIEW** - it
+   sits clear of the body silhouette with daylight around it. Deliberate (it is
+   the wall he has already laid, in front of his own feet) but it is the same
+   shape `_colour_read` flags as a floating fragment on other bodies.
+9. **THE PALE SLOT IS CARRIED ALMOST ENTIRELY BY THE UNLAID STOCK.** The wet
+   daub itself - the bed joint, the pail's dome, the squeeze-out, the smear on
+   the blade - is four small objects. The material pair reads; the WETNESS is
+   argued by roughness 0.44 and by nothing else.
+10. **NOTHING HERE PROVES THE COUNT IS FIVE AT PANE SIZE.** I can count five in
+    the 700 px panes and I believe five in the hero cell, but no assertion
+    measures the joint separations after downscale. That is the instrument this
+    body wants next and it does not exist.
+
+### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
+
+- `scripts/bestiary.gd`: `assets/monsters/minibosses/dauber.glb`, **STATIC** - a
+  `model` path and **NO `anims` entry**. `h = 2.58`, art's measured number; do
+  not re-derive it.
+- theme **`keep`** for the set-piece roll (joins the Porter, the Paviser and the
+  Reeve).
+- **CORRIDOR-SAFE at 1.65 m. No spawn gate needed, not room-locked.**
+- Cheapest honest version of the mechanic: on each Nth point of damage, spawn one
+  wall segment across a random chord of the room with a `wet` timer; while wet it
+  takes damage from anything and breaks; when the timer expires it becomes
+  collision that nothing removes. Five segments total, matched to the five blocks
+  the art shows. The art carries the read whether or not the floor actually
+  shrinks.
+- **A note on provenance, not a blocker:** `minibossgen` ran with
+  `floorgeom_stale: true` - this worktree's `scripts/floorgen.gd` still has
+  `lid_y 7.0 / underside 6.5` where `origin/main` has `10.0 / 9.5`. The verdict
+  is **conservative either way** (clear 3.92 m under the LOWER lid), but the
+  harness is right to go red on a gate it cannot prove current.

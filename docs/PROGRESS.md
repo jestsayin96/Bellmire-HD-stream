@@ -2,6 +2,23 @@
 
 Updated at the end of every build cycle. Newest entry at the top.
 
+## D-cycle - S59 the Leech's span: stated as a bound, not invented, 2026-11-20 06:08-06:2x CT (game build)
+TAKE THIS NEXT (05:58) gave GAME BUILD: finish S58 - the Leech has no span, so the corridor check exempts it silently.
+- Art has no span for it either (_fit_leech_register.json: creature_h 2.32, no span field). Took the row's second
+  option and did NOT invent a number: bestiary.gd now states beside the Leech WHY it is safe without one. It is a
+  BOUND: the largest strain scale in STRAINS is x1.35 (gorged), so the 11.0 m clear (read from FloorGen) is crossed
+  only if the Leech's T-pose span > 11.0/1.35 = 8.15 m = 3.51x its h. Widest MEASURED body (broodglut) is 1.58x.
+- tools/_s58_span.gd re-reads every side of that bound off the live tables (max over STRAINS, def_of h, broodglut
+  span/h, corridor_clear) and FAILS if the margin drops under 2x - i.e. if a strain or the corridor ever closes the
+  gap. Added a leech/gorged case (x1.35, not refused). I wrote a tautological `or true` check first and struck it
+  before running - it is a print now, not a green.
+- ASK FOR ART: measure the Leech's T-pose span_x at h 2.32 into _fit_leech_register.json. When it lands it is
+  copied in as `span` and the S59 note goes.
+- Gates: parse 0 SCRIPT ERROR / 0 Parse Error; S58_SPAN OK n=25; S58_RED=1 -> S58_SPAN FAIL (mossbacked 11.239,
+  gorged 14.049 > 11.0) as designed; OFFFLOOR_VERDICT OK 0 of 2381; TWITCH_PARSE OK (8 checks); TOWNWALK PASS
+  0/18152; DELVE_TEST OK 9001 frames. Looked at renders/cycles/s58/s58_span.png - three broodgluts, all standing.
+- Backup /tmp only (bestiary.gd change is 8 comment lines). No Twitch test.
+
 ## D-cycle - D91e the alcove settle (crowd.gd full perpendicular), 2026-11-16 12:07-12:33 CT (game build) - STILL OFF laptop; checkpoint on d91d-wip, town soak 1 frame short
 TAKE THIS NEXT gave GAME BUILD: D91 - finish the alcove from d91d-wip (46f6b85). Took it, did not rebuild it.
 Lock: claimed 12:10 (expected finish 12:35), one parse + one 20-min soak with the four gates run alongside.
@@ -3411,3 +3428,503 @@ S32_FENMAN OK (8 checks); S31_FIT OK (drink HELD on handslot.r, base 0.09 m); MB
 TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1958 samples off the floor;
 DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16162 raid_in_solid=0/7925 PASS. No live Twitch test,
 nothing spent. Backups *.bak_s32 (untracked). Logs build/s32_run1.log, build/s32/*.log.
+
+## C-cycle - C-111 miniboss feed lines for the Leech (32nd), 2026-11-18 (content)
+TAKE THIS NEXT gave content no engine row; the 08:0x block names the Leech's feed lines as the obvious next. Added miniboss_feed.by_key.leech: 9 arrive, 8 fall (17 lines), plus _note_c111. by_key now 32 keys. Written against art's MINIBOSSES.md entry 32 (nothing mends while it stands; healing drawn into the basin; tip the basin to get it back). Plain register, {name} not used. Only data/lore_lines.json touched; json.load OK, every pre-existing key unchanged. CODE WIRING: none new - delve.gd _miniboss_say already reads by_key[key] arrive/fall; needs a leech row in the spawn table. act/broken omitted on purpose, as C-86 onward.
+
+## D-cycle - S35: gear.gd NEVER INSTANTIATES A NULL; THE LEECH IS IN THE SHRINE DRAW; THE BEADLE (33rd) HAS ITS RATIO AND ITS ROW. 2026-11-18T10:20-06:00 (game build)
+TAKE THIS NEXT (09:1x block) row 1, all three parts.
+- THE NULL GUARD. scripts/gear.gd equip(): `ResourceLoader.exists()` is true for an un-imported asset whose load() still
+  returns null (the HUD's worktree has a partial .godot/imported). The cast `(_cache[path] as PackedScene).instantiate()`
+  ran on that null at :104. Now: cast once to `ps`; if null, drop the cached null and return null BEFORE the
+  BoneAttachment3D is made (no orphan eq_<slot> node); if instantiate() is not a Node3D, free the attachment, return null.
+  Callers already treat a null return as "no piece" (the path=="" / missing-bone branch returns null the same way).
+  Not reproduced by an un-imported gltf in R (all import here); reproduced with a resource that EXISTS but is not a scene.
+- NEW GATE tools/_s35_gearnull.gd: equip(res://icon.svg) returns null, leaves no eq_weapon, caches no null; a real
+  assets/gear scene still attaches. S35_GEARNULL OK 8 checks. RED: S35_RED=1 replays the pre-S35 unguarded cast ->
+  S35_GEARNULL FAIL 1 of 6, rc=1.
+- THE LEECH IS IN THE DRAW - CONFIRMED, NOT ASSUMED. S33_DRAW: `leech shrine ratio 0.95 lines true drawn 200/400`.
+- THE BEADLE. delve.gd MB_FIT "beadle": 1.2 (art's _fit_beadle_register.json pairs.beadle.ratio, copied not re-derived);
+  dungeon_hd.gd THEME_MINIBOSS_MORE "shrine": ["leech", "beadle"] (art's tag). It had NO .glb.import, so it was
+  UNLOADABLE - S33_DRAW went red on it first: `S33_DRAW FAIL 1 of 126: ["beadle: loadable body"]`. `--headless --import`
+  rc=0 7.3 s wrote beadle.glb.import; after: `beadle shrine ratio 1.20 lines false drawn 0/400` - correctly held out
+  until content writes its arrive lines. Its IDEA (it calls the order) is NOT built this cycle; and art's two render
+  notes (no facing from the back; side-view knob contrast) are art's, not mine.
+- NOT LOOKED AT IN PLAY: nothing a viewer sees changes this cycle (the guard skips a piece; the Beadle draws on 0 floors).
+GATES (verdict lines): PARSE rc=0 21.4 s, 0 SCRIPT ERROR / Parse Error; S35_GEARNULL OK 8 (red FAIL rc=1);
+S33_DRAW OK 126 (red-first on beadle); MBFEED_TEST OK 80; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2046; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/15317 raid_in_solid=0/9321 PASS.
+No live Twitch test, nothing spent. Backup scripts/gear.gd.bak_s35 (untracked). Logs build/_s35_battery*.log.
+
+## D-cycle - S36: THE BEADLE CALLS THE ORDER. 2026-11-18T11:08-06:00 (game build)
+TAKE THIS NEXT (10:5x block) row 1, both parts.
+- THE WAY. delve.gd MB_WAYS "beadle": "order" (fifteenth key, thirteenth distinct way). Art's idea, built as written:
+  each act tick the Beadle calls a hero (the nearest the first time) and keeps calling THE SAME ONE while that hero
+  lives; `_order_holds(m)` is true for every OTHER hero while the Beadle stands unbroken and the called one is up, and
+  _fight_body skips that hero's swing (they still take their places, they just do not act). At MB_BROKEN_FRAC the order
+  is dropped and everyone acts again. The act line names the called hero. HONEST LIMITS: it holds the SWING only - a
+  potion (_quaff) or a healer's mend still happens, and "broken" is the S34 hp threshold, not knocking the board off.
+- S34_WAYS extended: fifteen keys, thirteen ways, plus four order checks (called, called acts, rest hold, SAME hero
+  called again) and "broken - nobody holds". S34_WAYS OK 98 checks. Red: S34_RED=1 -> S34_WAYS FAIL 4 of 98, rc=1.
+- NEW GATE tools/_s36_order.gd, MEASURED THROUGH THE REAL FIGHT LOOP (Delve._fight_body, 120 ticks of 0.1 s, three
+  delvers at its side on a real built floor, windowed 1920x1080): SWINGS {s36_0: 9} - the other two 0 and 0; after it
+  breaks {s36_1: 5, s36_2: 4, s36_0: 3}. The Beadle re-acted on its own inside the loop and called the same hero
+  ("Called, once more. The rest hold."). S36_ORDER OK (4 checks). Red: S36_RED=1 clears the call each tick ->
+  SWINGS {8, 8, 9}, S36_ORDER FAIL (4 checks) ["the other two hold (8, 9)"].
+- LOOKED AT: renders/cycles/s36/beadle_2order.png - the three named delvers at the Beadle, "miss" floaters over
+  Called only; Holdfast and Waiting stand with nothing over them. The Beadle's own body is mostly hidden behind the
+  knight at this camera and reads very pale; that is a framing note, not a fault I am charging art with.
+- SECOND PART, THE FREE ONE: S33_DRAW now says `beadle shrine ratio 1.20 lines true drawn 120/400` (it was 0/400 at
+  S35, six minutes before content's lines landed). `leech shrine ... drawn 120/400` (200/400 at S35 - the shrine draw is
+  now shared three ways, as it should be).
+GATES (verdict lines): PARSE rc=0, 0 SCRIPT ERROR / Parse Error; S34_WAYS OK 98 (red FAIL rc=1); S36_ORDER OK (4)
+(red FAIL); S33_DRAW OK 126 checks; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2067 samples off the floor;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR;
+TOWNWALK in_solid=0/17026 (0.000%) raid_in_solid=0/6121 (0.000%) PASS.
+No live Twitch test, nothing spent. Backups scripts/delve.gd.bak_s36, tools/_s34_ways.gd.bak_s36 (untracked).
+Logs build/_s36_gates.log, build/_s36_order.log, build/_s36_townwalk.log.
+## HUB 18 Nov 2026 11:5x CT - hero-sheet overlap sweep at phone width (TAKE THIS NEXT row 5): ZERO overlaps, ZERO clips, web/ unchanged
+Row taken: the 10:58 block's HUB row - run the sigil-badge overlap method across the rest of the hero sheet below ~900 px.
+Method: web/tools/sheet_overlap.js (new). Headless Chromium, snapshot stubbed to [], ?mock=sheets and ?mock=crowd with ?open=all,
+every leaf box inside each .charsheet compared pairwise by LINE BOXES (getClientRects) at 320/360/390/600/768/900 px.
+NUMBER: ?mock=sheets 4 sheets x 6 widths = 0 overlapping pairs, 0 clipped; ?mock=crowd 7 sheets x 6 widths = 0 pairs, 0 clipped.
+RED PROOF: appended three rules to a COPY of style.css (negative margin on .sname, .stats children, .satchelfoot flex): the same
+instrument went to 126 overlapping pairs at 320-600 px and 156 at 768-900 px, max 906 px^2 (crest vs name). It is not blind.
+A FALSE POSITIVE I CAUGHT IN MY OWN FIRST RUN: using getBoundingClientRect reported 12 pairs (max 2253 px^2) in .satchelfoot - the
+wrapped inline spans "Counter would pay / 525 / gold for the priced items". Line boxes show they do not overlap; the first
+version of the method was wrong, not the page. Switched to getClientRects.
+CAVEATS, NAMED: item icons (web/icons, 530 files) were not staged, so <img> icons are missing in my render - their sizes come
+from CSS, but icon-specific overlap is unmeasured. The fallen-hero sheet (4th in ?mock=sheets) sits in a hidden tab and measured
+0 x 0, so it is NOT covered. Document-level scrollWidth is 501 at 320-390 px because the rail strip scrolls sideways inside
+itself; html/body are overflow:hidden and body.scrollWidth equals the viewport - not a page scroll.
+No CSS change was warranted, so none was made. Not claiming READY TO PUBLISH. Git author on this worktree is still "Claude Art Lane" (set in the shared repo config).
+
+## D-cycle - S37: STOOD DOWN - THE CURRENT BLOCK'S GAME-BUILD ROW IS ALREADY DELIVERED. 2026-11-18T12:09:24-06:00 (game build)
+TAKE THIS NEXT is still the 10:5x block (no 11:5x block was written). Its row 1 (the Beadle's way + the S33_DRAW
+re-run) shipped at S36 (a6feb7c) and is waiting on the lead's tick; nothing else in the block is game build's.
+I did not pull a Phase 2 system early. Measured, no code changed:
+- No Godot alive at claim; lock was IDLE (HUD 11:53:52). Claim 12:07:52, claim+25 = 12:32:52, declared 12:30.
+- Miniboss bodies: 44 .glb in assets/monsters/minibosses/, 43 have their own MB_FIT key. The one without is
+  snuffer_chibi (on disk since 16 Nov, 1102d91). NOT A DEFECT: miniboss_ratio() falls back to MB_FIT["snuffer"] 1.06,
+  and art's _fit_report.json pairs.snuffer_chibi.ratio is 1.06 - the same number. No 34th body has landed.
+- Uncommitted renders/cycles/d96/*.png modifications sit in R from another session; I did not touch or stage them.
+No gates run (nothing to gate). No live Twitch test, nothing spent.
+
+## D-cycle - S38: THE RAMMER DROPS ON THE COUNT, AND order_held LEAVES setpieces_fired. 2026-11-18T13:08-06:00 (game build)
+Row: the 12:5x TAKE THIS NEXT block, game build row 1, both halves (a) and (b). Not ticked - the lead ticks.
+(a) THE order_held COUNTER DEFECT - fixed in my own code. delve.gd no longer writes `order_held` into
+`Delve.setpieces_fired` (it was once per held hero PER FRAME, and _l29c_test C sums that dict). It is
+now its own `static var order_held_frames`. Nothing else read the key (grep tools/ scripts/: the one
+write was the only hit). S36_ORDER gains a 5th check proving it: holds counted 240 in order_held_frames,
+key absent from setpieces_fired. S36_ORDER OK (5 checks).
+(b) THE RAMMER, all three parts of the interlock:
+  - MB_FIT "rammer": 1.12 - art's _fit_rammer_register.json pairs.rammer.ratio, copied not re-derived.
+  - dungeon_hd.gd THEME_MINIBOSS_MORE["flooded"] = ["tanner", "rammer"] under art's own tag (field 5 of
+    minibosses.py's tuple read: "flooded"). The lead was right: without the row the gate never saw it.
+    MEASURED: miniboss_for("flooded", n) returns rammer for 150 of n in 0..399 (pool of three).
+    It FAILED 0/400 on my first run - rammer.glb had no .import, so ResourceLoader.exists said no.
+    One --headless --import generated rammer.glb.import; committed, as every other body's .glb.import is tracked.
+  - MB_WAYS "rammer": "drop" - a TIMING way, built from art's idea verbatim. The act is the haul: the
+    iron goes up and HOLDS MB_DROP_HOLD 2.0 s (no hit at the haul). On the count, everyone within
+    MB_DROP_R 2.6 m of the frame is struck for atk x2.5 (soaked) and slowed 1.5 s, unless a DEX save
+    (12 + floor/4, the nova's DC) says they read the hold and stepped off. Ranged delvers stand off at
+    9 m and are never on the pile. Broken (30% hp) = the rope parts: an iron that is up never comes down.
+    Content's 6 act and 4 broken lines are now live; they were the only by_key act lines with no way.
+TEST tools/_s38_rammer.gd (new, windowed, quits itself), on a real built floor, through _mb_way_tick:
+  S38_RAMMER OK (18 checks) - draw 150/400, MB_FIT 1.12, hold set at the haul, NOTHING lands in 1.5 s
+  of the 2.0 s hold, it lands on the count, the off-pile delver untouched across 8 drops, DROPS 8
+  STRUCK 6 READ 10 (struck+read = 2 x drops exactly), broken mid-hold clears it and 6 s later no drop.
+  RED: S38_RED=1 (clears the hold after the haul) -> S38_RAMMER FAIL naming three checks. Proven both ways.
+  LOOKED at renders/cycles/s38/rammer_2after.png: the Rammer stands on the floor at ratio 1.12, frame
+  and monkey readable, two delvers on the pile, the third off it out of frame-centre.
+GATES: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2173; TWITCH_PARSE OK (8 checks);
+TOWNWALK in_solid=0/14385 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+HONEST LIMIT: the Rammer is a STATIC body (no anims), so the haul and the drop are told in the feed and
+the hit, not shown as the monkey rising; the delvers do not yet move off the pile on their own - the DEX
+save stands in for reading the hold. Building a hero "step off" behaviour is a next row, not this one.
+BEADLE: unchanged from S35/S36 (MB_FIT 1.2, shrine row, "order" way). LEECH: not re-measured this hour.
+
+## D-cycle - S39: THE RAMMER'S COUNT IS SEEN - a shock ring on the drop, and one shot taken AFTER a drop resolves. 2026-11-18T14:08-06:00 (game build)
+Row: the 13:58 TAKE THIS NEXT block. Its premise (bridge down) was STALE by my claim - the bridge answered at 14:08 (the
+chat bot's 14:00:30 NOTE said so), so I took the one game-build item the block named for "when the bridge is back":
+a Rammer shot taken AFTER a drop resolves. Not ticked - the lead ticks. S38 is still owed its tick/merge.
+WHY CODE AND NOT JUST A SHOT: the Rammer is a static body, so the iron cannot be shown "down" - nothing on screen
+ever said a count landed. delve.gd _rammer_drop now calls mon.nova(MB_DROP_R): a ring exactly the pile's 2.6 m,
+visual only (nova() deals no damage; the drop's damage path is unchanged). Struck delvers already play Hit_A and
+carry "slowed".
+TEST tools/_s38_rammer.gd gains 3 checks + a third shot rammer_3drop.png (drops repeat until the count strikes):
+  S38_RAMMER OK (21 checks). RED: scripts/delve.gd swapped back to the pre-S39 copy -> S38_RAMMER FAIL (21 checks)
+  ["S39: the count is seen - a shock ring spawned (0)"] - exactly one fault named. delve.gd restored, md5 checked.
+LOOKED at rammer_3drop.png: the gold ring is down around the pile, BOTH on-pile delvers carry "slowed", Alsopile
+is mid-hit, Standsoff (off the pile) is clean. HONEST LIMIT: on this run's floor a wall block sits between the
+camera and the Rammer + Onpile - the frame proves the count landed, but it does not show the creature. The fixed
++6,+8,+6 camera offset in the tool is the cause; a camera that picks an open side is a next small row.
+GATES: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2182; TWITCH_PARSE OK (8 checks);
+TOWNWALK in_solid=0/18237 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+No live Twitch test, nothing spent. docs/WORK_PLAN.md in R carries the lead's hand-written 13:58 block - NOT staged by me.
+
+## D-cycle - S40: NO BUILD ITEM OWED - HOUSEKEEPING ONLY, AND THE BLOCK I READ WAS ALREADY SUPERSEDED. 2026-11-18T15:08-06:00 (game build)
+Row: at 15:08 R held the 13:58 block, whose game-build row (the honest-pair shot) S39 had already delivered. By 15:1x
+origin/main carried the lead's 15:1x block: S39 TICKED, honest-pair ask CLOSED, "nothing of yours is held", the block
+is mine from 16:07. Its row named two housekeeping facts and NO new item, so none was invented.
+(a) scripts/delve.gd.bak_s39 - untracked (git ls-files: no match), S39 is committed, so it was redundant. REMOVED
+    Windows-side; os.path.exists now False. HONEST SCALE: 278 other *.bak_* files remain in scripts/, all made under
+    this lane's own "back up big files" rule. Same inert-but-globbable shape; I removed only the one named. Whether to
+    sweep the rest (or move backups out of scripts/) is the lead's call, not one I take on my own in five minutes.
+(b) R's git identity change ("Claude Bellmire HD") - noted, nothing to do.
+CONFIRMED, as the standing interlock asks: leech, beadle and rammer each carry MB_FIT (0.95 / 1.2 / 1.12), a shrine
+(leech, beadle) or flooded (rammer) row in THEME_MINIBOSS_MORE, AND content lines in miniboss_feed.by_key (2 / 4 / 4).
+So the LEECH now passes both gates of miniboss_for, and the BEADLE's "no lines yet" in my prompt is stale - it has 4.
+R's working docs/WORK_PLAN.md was byte-identical to origin/main's (blob 62d3afc2), so I checked it out and
+fast-forwarded laptop to 11741c9 - no text lost.
+No code changed, so no gate run was owed and none is claimed. No Godot launched. No live Twitch test, nothing spent.
+
+## D-cycle - S41: NO BUILD ITEM OWED - FULL GATE BATTERY ON THE MERGED 15:58 TREE, NOTHING ELSE. 2026-11-18T16:08-06:00 (game build)
+Row: the lead's 15:1x block (mine from 16:07) gives game build NO new item - S39 ticked, honest-pair ask closed, its two
+housekeeping facts were both handled at S40 (delve.gd.bak_s39 removed; identity change noted). "Rows below stand": the
+13:58 row's only game-build item was the honest-pair shot, delivered at S39 and ticked. No Phase 2 system is rowed to
+me, so none was pulled early. Nothing invented.
+STALE IN MY OWN PROMPT, said so: (1) the gear.gd:98-104 null-guard defect is ALREADY CLOSED - S35 put
+`var ps := _cache[path] as PackedScene; if ps == null: _cache.erase(path); return null` at gear.gd:102-105, plus an
+instantiate()==null guard; read on the line this run. (2) the BEADLE does have content lines (4 in by_key, confirmed S40).
+WHAT I DID WITH THE WINDOW: ff laptop to main 8c172a9 (the lead's 15:58 merges of content/hub/hud/art/chatbot) and ran
+the full commit battery against it, because five lanes' code landed and nobody had run my gates over the union:
+  PARSE (--quit-after 300): rc 0, zero lines matching "error".
+  TWITCH_PARSE OK (8 checks)
+  OFFFLOOR_VERDICT OK 0 of 1942 samples off the floor (home)
+  DELVE_TEST OK ran 9001 frames, floor reached 2, state search; 0 SCRIPT ERROR in its section.
+  TOWNWALK ran to T=90s, in_solid=0/11314, 0 SCRIPT ERROR (only MI_Cobble invalid-UID WARNINGs, pre-existing).
+No code changed. No live Twitch test, nothing redeemed, 0 bits. Scratch log removed; tasklist: no Godot of any lane.
+## C-118 - 18 Nov 2026 16:3x CT (content): epitaphs, descend and cleared batch
+- +30 epitaphs (477 -> 507), +16 descend (299 -> 315), +16 cleared (299 -> 315) in data/lore_lines.json; `_note_c118` added. Plainness voice, no duplicates against existing lines, descend keeps the `%s %s` hero+verb shape, cleared keeps `Floor %d`. All three arrays are already read live - no wiring owed.
+- Miniboss check: lore `miniboss_feed.by_key` holds 34 keys and every committed miniboss body has lines; nothing to stand down on.
+- Validation: all four owned files parse; every pre-existing key byte-identical except the three appended arrays (old content is a strict prefix).
+
+## D-cycle - S42: AUDIT OF MY OWN PARSE GATE - IT RUNS THE LIVE GAME, AND YES, IT COULD POST. NO CODE CHANGED. 2026-11-18T17:08-06:00 (game build)
+Row 1 of the 17:0x block (B58's W-LIVE observation). Read from source on merged laptop (origin/main bc10836); no Godot launched - the
+answer is in the code, and launching the gate to "measure" it would itself connect the bot again.
+WHY IT CONNECTS: the parse gate is `--headless --path . --quit-after 300` with NO `--script`, so it runs the MAIN SCENE. town.gd:342 starts
+the live wiring whenever `--script` is absent - TwitchChat (anonymous justinfan IRC, read-only JOIN #jestsayin96), TwitchEventSub
+(validate both tokens, ensure_rewards, EventSub websocket + 7 subs, _fetch_subs) and SnapshotPublisher. Nothing checks headless. So:
+NOT INTENDED as a gate property - it is the game's normal start, and the gate inherits it because it is the cheapest way to compile
+every script. Harnesses (`--script`) are already excluded; the parse gate is the one gate that is not.
+COULD IT POST? YES - NOT BY ITSELF, BUT ON ANY INCOMING TRAFFIC DURING ITS ~20 s:
+  (a) CHAT: a viewer's !command read by TwitchChat -> chatcmd -> twitch_reply -> _tick_chat -> _send_chat POSTs /chat/messages as
+      bellmirebro. dry_run_chat is false outside harnesses. If the real game is also up, the viewer gets TWO answers.
+  (b) REDEMPTIONS: the gate's EventSub session receives the same channel-point events as the live game's and calls _settle (PATCH
+      FULFILLED/CANCELED) on them - a gate instance can settle a REAL viewer's redemption, racing the live game. This is the worst one.
+  (c) FIRST-TIMER / hero_moment replies use the REAL viewers file (only `--script` redirects viewers_path), so a welcome sent by the
+      gate is also marked spent for the live game.
+  (d) REWARDS: ensure_rewards POSTs new rewards only when bootstrapping (no saved reward ids, or rewards_resync=true). Steady state
+      it only GETs. Safe today; would CREATE rewards on a machine whose user:// reward file is missing.
+  (e) HUB: SnapshotPublisher's first beat is FIRST=20 s of process time; whether 300 headless frames reach it is UNMEASURED. If they do,
+      the gate publishes a snapshot of a 300-frame town to the live hub.
+  (f) a 401 on validate makes the gate refresh and REWRITE the token file - disk state, not chat.
+  Any OTHER gate: every tool that builds TwitchEventSub/TwitchChat checked by file. _d702/_d70/_t1_test/_t1_shot/_t3/_t5_roll set
+  offline+dry_run_chat; _d63_clip/_fest/_shot never call setup(), so no token loads and _send_hold_reason holds "no bot token";
+  _twitch_parse sets TwitchChat.enabled=false. NONE CAN POST. ONE IS LIVE BY DESIGN: _t1_live.gd (dry_run_chat, but it opens a real
+  EventSub session - so it shares hazard (b) - and FORCES a refresh of both tokens). It is not in the commit battery.
+  _townwalk.gd/_delve_test.gd/_offfloor.gd run under --script, so town.gd never starts the live nodes.
+COST OF PARSING WITHOUT JOINING: CLEAN AND SMALL. One env guard in town.gd:342 beside the existing JESTS_NO_SFX precedent
+(e.g. JESTS_NO_TWITCH=1 skips TwitchChat, TwitchEventSub and SnapshotPublisher), set by every lane's parse wrapper. Or key it on
+DisplayServer.get_name()=="headless" - the live game is never headless - which needs no wrapper change but also silently disables
+Twitch for any future headless live use. Parse coverage is unchanged either way: the scripts still compile because town.gd names
+the classes. NOT DONE - the row says report, and W-LIVE behaviour is not mine to change unasked. My recommendation is the env guard.
+UNTIL THEN: do not run the parse gate while Mr. E is live.
+Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). Lock claim 17:08:35, cap 17:33, released early.
+
+## D-cycle - S43: SYSTEM 6 SURVEY - THE ARTIFACT TIER ALREADY HAS MESHES, AND THE PACK THAT SHOULD REPLACE THEM IS NAMED. NOTHING IMPORTED. 2026-11-18T18:08-06:00 (game build)
+Row 1 of the lead's 17:4x block (System 6: confirm the 24, find the artifact tier, SAY IN WRITING BEFORE IMPORTING). Read-only cycle,
+no Godot launched. Bare parse gate NOT run (urgent block: Mr. E may be live) - carried; nothing compiled changed, so nothing is owed.
+STALE IN MY PROMPT, said so: the gear.gd:98-104 null-guard defect was closed at S35 (S41 re-read it on the line). Not retaken.
+(1) THE 24 CONFIRMED: assets/gear/dungeon/ = 8 families x common/uncommon/rare .glb + LICENSE_KayKit_Dungeon_CC0.txt, all read by
+    gear.gd KINDS (sword, dagger, axe, mace=hammer, greataxe=axeDouble, staff, crossbow; shield via offhand). KayKit's own dungeon pack
+    holds EXACTLY those 24 weapon .glb plus weaponRack - grep of every .gl* under kaykit_dungeon_pack_CC0 for weapon words. THERE IS NO
+    HIDDEN KAYKIT ARTIFACT TIER TO FIND; its other ~1,050 files are dungeon kit, not weapons.
+(2) "NO ARTIFACT TIER" IS A FILENAME FACT, NOT A WIRING FACT. items.json equipment.weapons tiers 0..5 (C-58: 5 = artifact, found-only;
+    9 pieces: Scarfang, Seam-Edge, Scarcleaver, Seamsplitter, Scarwand, Staff of the Open Seam, Scarbow, Seamstring, Scar-Grown
+    Quarterstaff). gear.gd weapon_piece_look takes kit[maxi(1,tier)-1], so tier 5 reads KINDS kit[4] - ALREADY A MESH FOR EVERY KIND:
+    sword KIT sword_E, greatsword SKA Skeleton_Blade, dagger ADV dagger, axe/greataxe SKA Skeleton_Axe, mace KIT hammer_B, staff and
+    quarterstaff SKA Skeleton_Staff, crossbow SKA Skeleton_Crossbow, bow KIT bow_A_withString, wand KIT wand_A. (The S16 comment calls
+    kit[4] "the skeleton pack's own grave-steel for the found-only tier".) So an artifact never reaches the player bare. The open part
+    of System 6 is that tier-5 meshes are REUSED lower-tier/skeleton kit, not artifact-grade models.
+(3) WHERE A REAL ARTIFACT TIER LIVES - quaternius_ultimate_rpg_items_CC0 (Aug 2019), NOT the 2018 weapons pack the row guessed:
+    it HAS a License.txt (CC0 1.0, read this run) and is ALREADY a row in docs/art/ASSET_SOURCES.md:13, and it carries a matched
+    _Golden variant per family: Sword_Golden, Sword_big_Golden, Dagger_Golden, Axe_small_Golden, Axe_Double_Golden,
+    Hammer_Double_Golden, Bow_Golden (FBX/OBJ/BLEND, no glTF - ASSET_SOURCES:29). That covers sword, greatsword, dagger, axe,
+    greataxe, mace, bow - 7 of the 9 artifact pieces' kinds. NOT covered: staff/quarterstaff, wand, crossbow (keep SKA/KIT kit[4]).
+    quaternius_medieval_weapons_2018_CC0 (24 models, FBX/OBJ/BLEND, NO licence file - covered by Mr. E's Quaternius ruling, note owed on
+    first use) adds Sword_Golden, Bow_Golden, Bow_Evil, Claymore, Scythe, Shield_Celtic_Golden - a second source, and the only golden
+    SHIELD. handpainted_weapons (sword_a..j) has no licence file in the pack - NOT usable until its page is read.
+    OPEN QUESTION FOR THE LEAD/ART, not mine to settle: artifact is RED in ui_theme RARITY (1.00,0.13,0.10) and its pieces are
+    Scar/Seam-forged; _Golden meshes are gold. tint_piece already recolours by the name's stuff word and spares the edge (EDGE_MATS),
+    so gold can be pushed toward scar-red - but whether a gold model reads as "artifact" or as "legendary" is a look call.
+(4) SIDE NOTE, MEASURED, NOT A DEFECT CLAIM: because of maxi(1,tier)-1, data tier 1 (uncommon) wears the pack's _common mesh, tier 2
+    (rare) wears _uncommon, tier 3 (very rare) wears _rare; tiers 0 and 1 share _common. The pack's own file words are one rung under
+    the item's rarity word. S16 chose "tiers 1-3" deliberately; recorded so nobody "fixes" the filenames thinking they mismatch.
+PROPOSED NEXT (one item, ~2 runs, awaiting the lead): convert the 7 Ultimate-RPG _Golden FBX to .glb into assets/gear/artifact/ with a
+LICENSE note, set them as KINDS kit[4] for those 7 kinds, then D95_FIT-style fit proof on a real hero body front/side/back at tier 5.
+Gates: none run - docs-only cycle (PROGRESS + RUN_LOCK). No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 18:08:29 (first written as 18:09:00 - 31 s ahead of the machine, corrected in place at 18:10), cap 18:33:29, declared
+finish 18:33, released early - see the IDLE line.
+S43 ADDENDUM - HAZARD (e), FROM SOURCE, NOTHING LAUNCHED (the lead's 18:0x block landed mid-run; its item is a read, so I took it
+in this window after my IDLE line). snapshot_pub.gd: `_t := FIRST` (20.0, :85), `_process` does `_t -= delta` and calls publish()
+when `_t <= 0` (:148-151), only while `enabled` (key file present - the gate's "SNAPSHOT on" line proves it was). So THE BEAT FIRES IFF
+THE SUM OF _process DELTAS OVER THE GATE'S 300 FRAMES REACHES 20 s - a mean frame of 66.7 ms or worse. Nothing caps or scales delta
+in snapshot_pub, and project.godot sets no max_fps. MEASURED PROXY: the D91 headless town soaks ran 94,041 frames in 20 min = 12.8 ms
+a frame with up to 224 bodies, so 300 frames is ~3.8 s of delta - FIVE TIMES SHORT. publish() itself prints NOTHING on send; only
+_on_done prints ("first publish ok" on 2xx, a "publish failed" warning otherwise), TIMEOUT 20 s. THE ONE THING SOURCE CANNOT SETTLE:
+whether the FIRST frame's delta carries the scene-load time (engine timer behaviour, not our code). If it did and the load ran ~20 s,
+the beat would fire on frame 1 and a response would very likely return inside the run - the lead's ~28 s log shows neither an ok nor a
+fail line, which argues against it. VERDICT: VERY PROBABLY NO BEAT, NOT PROVEN; if one ever fires it POSTs a 300-frame town to the live
+hub AND calls save_mem() (a disk write) first. The env guard (JESTS_NO_TWITCH skipping SnapshotPublisher) closes it either way.
+
+## D-cycle - S44: THE PARSE-GATE ENV GUARD IS IN - JESTS_NO_TWITCH=1 STARTS NO TWITCH NODE AND NO HUB SNAPSHOT. 2026-11-18T19:08-06:00 (game build)
+Row 1(a) of the lead's 19:1x block (supervisor authorised 18:52). The block says its game-build row is "for the 20:07 firing"; it was
+on origin when this run merged at 19:08 and its (a) is the one thing unblocking the chat bot's parse gate, so I took (a) now. (b) waits.
+THE CHANGE, town.gd only (inside the existing `not --script` branch, beside the JESTS_NO_SFX precedent): when JESTS_NO_TWITCH is set,
+TwitchChat, TwitchEventSub AND SnapshotPublisher are not created, and the gate prints one line saying so. The snapshot is under the same
+guard ON PURPOSE - it was in my own S42 recommendation and it closes S43 hazard (e) outright instead of leaving it "very probably no
+beat". Nothing else reads those nodes by path except chatcmd.gd:540 get_node_or_null("SnapshotPublisher"), already null-safe. With the
+variable UNSET the live game is byte-for-byte the old path (same three nodes, same order). RtsCamera and the leaderboard still start.
+PROOF, RED THEN GREEN ON THE SAME GATE: my first edit guarded only the two Twitch nodes, and its parse run (28.5 s) printed
+"SNAPSHOT on: https://...supabase.co every 60 s" - the hub publisher was alive in a gate. After moving SnapshotPublisher under the guard
+the same gate (26 s) prints ONLY "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started": zero SNAPSHOT, TWITCH,
+EventSub, justinfan or publish lines in either run's Twitch half. I did NOT run the gate with the variable unset - that is the live
+connection this exists to prevent. No picture: nothing visible changed.
+FOR EVERY LANE: set JESTS_NO_TWITCH=1 in the parse wrapper's environment (Python: env=dict(os.environ, JESTS_NO_TWITCH='1')). The guard
+is on laptop now and reaches main when the lead merges it - until then a bare gate on main is still the live game.
+Gates (all run with JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error (both runs) | OFFFLOOR_VERDICT OK 0 of 2229 samples |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/20183 raid_in_solid=0/4008 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2,
+0 SCRIPT ERROR. Godot closed, tasklist empty on both image names. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 19:08:36, cap 19:33 computed first, declared 19:29, released early - see the IDLE line.
+
+## D-cycle - S45: SYSTEM 6 ARTIFACT TIER - THE SEVEN _Golden MESHES ARE IN THE HAND AT TIER 5, FIT-PROVED ON REAL BODIES. 2026-11-18T20:08-06:00 (game build)
+Row 1 of the lead's 20:0x block ("back to System 6 artifact tier, the S43 path"), as approved in the 18:3x block: licence note
+first, convert the 7 Ultimate-RPG _Golden, set them as KINDS kit[4] for those 7 kinds, fit proof on a real hero body front/side/back.
+HAZARD (e): CLOSED BY S44'S GUARD, NOT RE-MEASURED UNGUARDED. Every Godot process this run had JESTS_NO_TWITCH=1 and both parse runs
+printed only "JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started" - zero SNAPSHOT/publish lines. Proving
+whether the beat WOULD fire needs an unguarded gate = the live connection; I will not run that, and the guard makes the question moot.
+(1) CONVERSION: Blender 5.2 BACKGROUND subprocess (the open scene untouched) opened each pack .blend and exported .glb (Y-up,
+    transforms applied) into assets/gear/artifact/: sword_golden, sword_big_golden, dagger_golden, axe_small_golden, axe_double_golden,
+    hammer_double_golden, bow_golden + LICENSE_Quaternius_UltimateRPG_CC0.txt (pack License.txt read: CC0 1.0). ASSET_SOURCES.md:13
+    already carries the pack row. Materials checked in the .blend: Golden (0.47,0.34,0.06), LightGold, DarkSteel, DarkWood, LightWood,
+    base colours unlinked - they export. Bounds (m): sword 2.30, big sword 2.74, dagger 1.39, axe 1.58, double axe 2.15, hammer 2.53,
+    bow 2.17; all built along +Y with the origin in the grip. --headless --import rc 0, 7 .import siblings written.
+(2) WIRING, gear.gd only (bak_s45): const ART; kit[4] -> ART for sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
+    quarterstaff, wand, crossbow, spear, sceptre UNCHANGED. hand_scale ART dagger 0.5, hammer 0.4, rest 0.6. held_rot ART bow (0,0,90):
+    the FIRST render showed the bow lying FLAT along the forearm; the staff's +90 about Z stands the limbs up, string to the archer -
+    LOOKED AT s45_side.png both runs. EDGE_MATS += Golden, LightGold, DarkSteel, so tint_piece no longer washes the metal with the
+    name's stuff word (art's ARTIFACT_GOLD_VS_SCARRED.md: keep the gold, no red tint); the wood grip still takes it.
+(3) FIT PROOF, tools/_s45_artifact.gd (windowed 1080p, from _s16_sword): one hero per kind (knight blades, barbarian axes, ranger bow),
+    weapon tier 5, through the REAL Roster.weapon_mesh -> Gear.equip path. Named tier-5 pieces resolve for sword (Scarfang), axe
+    (Seamsplitter), bow (Seamstring); greatsword, dagger, greataxe and mace have NO named tier-5 piece, so they are proved via wkind
+    (the !forge <kind> path) and the tool says so per kind. Held lengths: sword 1.89, greatsword 2.13, dagger 0.90, axe 1.59, greataxe
+    1.68, mace 1.31, bow 2.30 (string to limb tip); hand-in-grip TRUE for all 7. Shots: renders/cycles/s45/ front, side, back + 7 closes.
+(4) WHAT THE PICTURE SAYS AND I WILL NOT HIDE: THE GOLD DOES NOT READ. All seven render PALE LILAC, not gold. Cause, from source:
+    tier 5 is "scarforged" glow 1.3 -> Gear.ignite() sets emission on EVERY surface (cold-white end of its lerp), then tint_piece
+    lays the scar/seam glow_col (violet, gear.gd:1556-1557) on every surface too. That is the EXISTING tier-5 smoulder - the old kit[4]
+    meshes wore it the same way - not a conversion fault (materials verified in the .blend). Art's own doc says the red belongs in the
+    GLOW slot and the body must stay a bright metal, and that ART shoots the plain-vs-seam A/B the run after the meshes land. So the
+    emission-over-the-whole-body question is ART'S A/B, and the meshes it needs are now on disk and in the hand. I did not change the
+    smoulder: it is a look call across all tier-5 gear, not mine to make off one picture.
+Gates (all JESTS_NO_TWITCH=1): see the gate line appended below.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (both runs) | S45_ART OK (10 shots, 0 failures) |
+OFFFLOOR_VERDICT OK 0 of 1876 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15362 raid_in_solid=0/6809 PASS |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 20:08:23, cap 20:33 computed first, declared 20:30, released early - see the IDLE line.
+
+## D-cycle - S46: STAND-DOWN IN WRITING - THE 20:0x GAME-BUILD ROW IS ALREADY DELIVERED BY S45; SHRINE DRAW CONFIRMED. 2026-11-18T21:09:46-06:00 (game build)
+TAKE THIS NEXT (20:0x block, row 1): "back to System 6 artifact tier, the S43 path". S45 (c62ff5b, 20:08) delivered it and it is
+ALREADY ON origin/main (git log origin/main --grep=S45 = c62ff5b); no newer lead block exists on main as of this merge (b34662d).
+Hazard (e) is closed by the S44 guard, not re-measured unguarded (that would be the live connection). Nothing is owed until the lead
+ticks S45 or writes a new row, so I did NOT self-select new engine work and launched no Godot.
+OPEN FROM S45, NOT MINE: (i) the tier-5 smoulder washes the _Golden meshes pale lilac - art's plain-vs-seam A/B decides it;
+(ii) staff, quarterstaff, wand, crossbow have no _Golden source in either Quaternius pack and keep their kit[4] meshes.
+MINIBOSS INTERLOCK, MEASURED FROM FILES (no launch): every body under assets/monsters/minibosses/ (34 keys + chibi variants) has an
+MB_FIT entry and a THEME_MINIBOSS_MORE row. LEECH and BEADLE both now pass miniboss_for's gate - mesh on disk AND
+lore_lines.miniboss_feed.by_key arrive lines (leech 9 arrive/8 fall, beadle 9/7 act/4 broken/8 fall) - so BOTH ARE IN THE SHRINE DRAW.
+Beadle's idea is live (MB_WAYS "order"). THE LEECH STANDS UP NAMED BUT DOES NOTHING: _mb_way_tick returns early for a key with no
+act lines, by S34's accepted design. 18 bodies are in that state: comfitmaker drover dyer fenman greener hurdleman jointer leech loader
+moulder paviser pressman quartermaster ratcatcher reeve strickler tanner tapster. Their ideas need content's act/broken lines first,
+then a way here; recorded so the lead can cut content rows in an order. Leech's idea (no healing in the room) touches 6 heal sites
+in delve.gd (1523, 1547, 2435, 2645, 2649, 3619) - a one-run item once its lines exist.
+WORKTREE NOTE: R carries ~50 MODIFIED tracked renders (renders/cycles/d96, s17-s20, s36, l31, h29p6/payload.json, s31_vials.png) that
+are not from this session. NOT staged, NOT touched; this commit stages only docs/PROGRESS.md and docs/RUN_LOCK.txt.
+Gates: none run - docs-only cycle. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 21:08:32, cap claim+25 = 21:33 computed first, declared 21:30, released early - see the IDLE line.
+S46b - THE LEAD'S 21:0x ROW 1 (landed on laptop mid-run at 21:0x, after the stand-down above was committed; I re-claimed the idle lock
+and took it): "the seven _Golden render white - the export dropped the colour".
+MEASURED, AGREED, AND ONE CORRECTION TO THE ROW: all seven .glb had materials with NO pbrMetallicRoughness at all (so glTF defaults:
+base WHITE, metallic 1.0), POSITION+NORMAL only, 0 images. BUT THE PACK HAS NO UVs AND NO TEXTURE TO LOSE: Sword_Golden.blend's mesh has
+0 uv_layers, and every material in all seven .blends is a flat Principled Base Color (unlinked) - Golden (0.467,0.337,0.059), LightGold
+(0.787,0.677,0.190), DarkSteel (0.266,0.266,0.223, rough 0), DarkWood, LightWood, White (bow string 0.8). The weapons_bits atlas belongs
+to the KayKit kit, not this pack. So "re-export with UVs and the pack texture" has nothing to carry; the fix is the row's own
+alternative, baseColorFactor per material. The exporter dropped it because each material holds THREE Material Output nodes
+(Principled + two Diffuse), a 2019-pack layout the 5.2 glTF exporter does not walk.
+THE FIX: the JSON chunk of each .glb rewritten in place with pbrMetallicRoughness {baseColorFactor from the .blend, metallicFactor 0,
+roughnessFactor from the .blend}; BIN chunk byte-identical (tail compared), lengths re-padded and asserted. Originals kept outside the
+repo. --headless --import rc 0. LICENSE note corrected: the "Geometry and materials unchanged" line is now "Geometry unchanged" plus a
+CORRECTION paragraph saying what S45 lost and what S46 wrote. EDGE_MATS left as it is - per the row, it is right now the gold is in.
+PROOF: tools/_s46_gold.gd (windowed, the seven files with NO game tint and NO smoulder) reads every surface's imported material:
+Golden albedo (0.71,0.62,0.27) sRGB on all seven, LightGold (0.90,0.84,0.47), DarkSteel (0.55,0.55,0.51), metallic 0 everywhere,
+ZERO default-white surfaces. S46_GOLD OK (7 files, 0 failures). LOOKED at renders/cycles/s46/s46_gold_plain.png: seven gold weapons,
+dark wood grips, steel guards, the bow's pale string - the colour is IN THE MESH.
+WHAT THE IN-HAND PICTURE STILL SAYS, NOT HIDDEN: re-ran tools/_s45_artifact.gd (S45_ART OK 10 shots, 0 failures, same held lengths and
+hand-in-grip true for all 7) and LOOKED at s45_front and s45_sword_close: in a hero's hand they still read PALE LILAC. That is the tier-5
+smoulder on top of now-gold albedo: Gear.ignite() turns emission on for every surface, and tint_piece lays the violet glow_col. ONE
+REAL CODE FAULT FOUND THERE, REPORTED NOT CHANGED: gear.gd:146-149 - the scarforged branch sets emission_energy_multiplier = 0.16
+("a smoulder not a lamp") and line 149 IMMEDIATELY overwrites it with amount*0.30 = 0.39 for tier 5. The 0.16 is dead code; the intended
+smoulder is less than half what ships. Fixing it changes every tier-5 piece's look, so it goes to art's plain-vs-seam A/B (art's doc
+already owns that call) and the lead - one line, an `else:` - not changed off one picture by me.
+Hazard (e): closed by the S44 guard; every Godot this run had JESTS_NO_TWITCH=1 and the parse run printed only the skip line.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error (skip line printed) | S46_GOLD OK (7 files, 0 failures) |
+S45_ART OK (10 shots, 0 failures) | OFFFLOOR_VERDICT OK 0 of 2370 samples | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15804
+raid_in_solid=0/7073 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Godot closed, tasklist empty 21:19:31.
+No live Twitch test, nothing redeemed, 0 bits. Lock: re-claim 21:10:15, cap claim+25 = 21:35 computed first, declared 21:33, released
+early - see the IDLE line.
+
+## C-125 - 19 Nov 2026 17:3x CT (content): epitaphs, descend, cleared, misfire and barks batch
+TAKE THIS NEXT row 2: C-125 at full rate into the corrected live list. Added epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire; six each). Added _note_c125. data/lore_lines.json only. No miniboss body committed on origin/art beyond the Rammer (34 keys held, 34 bodies), so no feed lines owed. VALIDATION OK: json.load passes, every pre-existing entry identical, placeholder counts match their pools (descend %s %s, cleared %d, misfire %s %s %d %d).
+
+## D-cycle - S47: bow_golden's STRING IS THERE - YES. ONE CLOSE RENDER, ROW DIES. 2026-11-19T18:15-06:00 (game build)
+TAKE THIS NEXT (18:0x block, row 1): "ONE CLOSE RENDER OF bow_golden to settle whether the string is there. Say yes or no in one line."
+ANSWER: YES. The string is in the mesh and renders, tip to tip. tools/_s47_bow.gd (windowed, the plain file, NO game tint, NO
+smoulder) reads surface 2 "White" albedo (0.91,0.91,0.91) sRGB, 36 verts, AABB (0.009, 2.039, 0.011) - long on the bow's own axis
+(the whole bow is 2.174 tall) and ~1 cm thick, i.e. a string spanning nock to nock. LOOKED at renders/cycles/s47/s47_bow_front.png:
+gold limbs, LightWood grip, a pale straight string from upper to lower nock; s47_bow_side.png shows it lying along the belly.
+It was unseen at plain-render scale because it is 1 cm thick, not because it is missing. Nothing to fix.
+NEXT PHASE 2 SYSTEM - NOT STARTED THIS RUN, ON PURPOSE: the battery took 18:10-18:14 and a new system will not fit honestly in a
+window that must close by :40; carried to my next firing. By the plan's own list (WORK_PLAN ~line 1176) the immediate wave after
+System 6 is System 8 (shields, quaternius_medieval_weapons_2018 - which needs our LICENSE note on first use). I will take it only
+if the lead's next block names it.
+WORKTREE NOTE, unchanged from S46: ~50 MODIFIED tracked renders and ~1,400 untracked web/icons/**.webp.import files are in R and
+are NOT from this session; NOT staged. This commit stages only tools/_s47_bow.gd(+.uid), renders/cycles/s47/, PROGRESS, RUN_LOCK.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error | S47_BOW OK (3 shots, 0 failures) |
+TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2343 samples | TOWNWALK in_solid=0/14819 raid_in_solid=0/7894 PASS |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, released early - see the IDLE line.
+
+## D-cycle - S49: SYSTEM 7 ENGINE HALF, ROW (a) ONLY - THE FIVE ARMOUR SHELLS NOW HAVE .import SIBLINGS AND LOAD. gear.gd NOT WIRED, PER ROW (b). 2026-11-19T20:14-06:00 (game build)
+- Item: TAKE THIS NEXT 19:58 block, row 1 (a)+(b). Claim 20:07:51, claim+25 = 20:32:51 computed first, declared finish 20:32.
+- Honest note on my own run: I merged origin/laptop at 20:07 one minute BEFORE the 19:58 block's plan sync landed (3521d1a4, 20:09:26), so I read the stale 18:5x block, took System 7 as the next system, and drafted a cut->shell mapping in gear.gd (light->leather, tiers 2-5 metal/metal2/golden/black, robe none). I re-fetched before any gate, read row (b) "DO NOT WIRE THE CUT MAPPING YET", and REVERTED gear.gd with git checkout before running anything. Nothing of it is committed. The mapping is here for whenever art's re-render passes fit.
+- (a) DONE: one `--headless --import` (RC=0) generated assets/gear/armour/{armor_black,armor_golden,armor_leather,armor_metal,armor_metal2}.glb.import. Before: 0 of 5. After: 5 of 5.
+- New gate tools/_s49_armour_load.gd: `S49_LOAD OK n=5` - each loads as PackedScene and instantiates with 1 MeshInstance3D. The directory is still referenced by no script; that is correct until art's fit passes and the team lead releases (b).
+- Battery on the merged tree (JESTS_NO_TWITCH=1): parse rc=0, 0 SCRIPT ERROR / Parse Error lines; OFFFLOOR_VERDICT OK 0 of 2164; TWITCH_PARSE OK (8 checks); _townwalk ran, BAD [] (one transient STUCK_EX on Cort the Younger, pre-existing shape); DELVE_TEST OK ran 9001 frames, floor reached, 0 SCRIPT ERROR.
+- No render: nothing visual changed this run (imports only, nothing wired). No Twitch test, no message, 0 bits.
+
+## D-cycle - S50: SYSTEM 8 (SHIELD VARIETY) ENGINE HALF, ROW (a) ONLY - FIVE QUATERNIUS SHIELDS IMPORTED, LICENSED, LOADED AND LOOKED AT. gear.gd NOT WIRED. 2026-11-19T21:1x-06:00 (game build)
+- Item: TAKE THIS NEXT 20:58 block, row 1 - "NEXT: the next Phase 2 system in Mr. E's order". Row 1(b) (System 7 gear.gd wiring) stays HELD per art's fit numbers; untouched.
+  System 8 is the next system in the 18 Nov 16:58 pack-heavy order (6 weapons, 7 armour, 8 shields) and the plan named it twice (WORK_PLAN ~324, ~506).
+- DONE: assets/gear/shields/ - shield_celtic_golden, shield_heater, shield_heater_2, shield_round, shield_round_2 (.fbx, copied UNMODIFIED from
+  _packs/quaternius_medieval_weapons_2018_CC0 FBX/, names lower-cased) + their .fbx.import from one --headless --import (rc=0).
+  LICENCE: the extracted pack has NO licence file, as the 18 Nov plan said; our note is LICENSE_Quaternius_MedievalWeapons_CC0.txt beside the
+  files, and a System 8 paragraph in docs/art/ASSET_SOURCES.md. `_packs/handpainted_weapons/` shield_a..d NOT USED - no licence file, no source; unverified.
+- Gate tools/_s50_shield_load.gd: `S50_LOAD OK n=5` (each loads as PackedScene and instantiates with 1 MeshInstance3D). It also prints an AABB
+  (~2.0 x 2.0-2.6, celtic 2.1 x 4.3) that does NOT match the picture (they read ~0.8 m against 2.5 m spacing) - my walker likely double-applies a
+  node scale; DO NOT use those numbers for the off-hand scale. The next run measures in the hand, not off this print.
+- LOOKED AT IT: tools/_s50_shield_shot.gd (windowed) -> renders/cycles/s50/s50_shields.png, `S50_SHOT OK`. All five read correctly: gold Celtic with
+  green boss and pale-blue field, two iron-rimmed wooden heaters (one cross-banded), two round bucklers (one quartered white). Faces toward +Z like
+  the KayKit shields offhand_scale() already handles. The Celtic one sits slightly yawed in its own file.
+- NOT DONE, ON PURPOSE: the gear.gd entry (a SHIELD const + offhand_scale/rotation for these, and which items/tier draw them). That is row (b) for my
+  next firing: fit in handslot.l on the KayKit hero, front/side/back, looked at. assets/gear/shields is therefore an UNREFERENCED ASSET DIR until then
+  (dead-dir count 1 -> 2) - named here so the lead's audit is not surprised.
+- OWN FAULT, NAMED: my first battery thread ran the parse gate WITHOUT JESTS_NO_TWITCH=1. It joined #jestsayin96 as bellmirebro and subscribed EventSub
+  (7 of 7) for the 300-frame parse run, and the hub SNAPSHOT was on for those seconds. It POSTED NOTHING (no send line in the log), redeemed nothing,
+  0 bits; Godot then exited. I stopped the rest of that thread (killed ONLY my own child Godot PIDs 24124/22976/37852, by parent PID) and re-ran
+  offfloor/townwalk/delve with JESTS_NO_TWITCH=1. If the hub showed a test-town snapshot ~21:09 CT, that was this.
+- Gates: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error (only the old MI_*.tres invalid-UID WARNINGs) | S50_LOAD OK n=5 | S50_SHOT OK |
+  TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2080 samples | TOWNWALK in_solid=0/18541 raid_in_solid=0/5367 PASS, BAD [] |
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- Lock: claim 21:07:55, claim+25 = 21:32:55 computed first, declared 21:32. Staged only the S50 files, PROGRESS, ASSET_SOURCES, RUN_LOCK;
+  the ~50 modified renders and ~1,400 untracked web/icons .import files in R are not this session's and are NOT staged.
+
+## D-cycle - S51: MR. E'S MINIBOSS RENAME, PART 1, ENGINE HALF - THE 36 CHARACTER NAMES ARE WHAT A VIEWER READS; THE TRADE KEYS DID NOT MOVE. 2026-11-19T22:1x-06:00 (game build)
+- Item: TAKE THIS NEXT 21:58 block, row 1 NEXT - "wire the 36 new names ... off the table in the supervisor's doc" (claude/sup-nov19-2150-...).
+  CORRECTION TO THE ROW, NOT A REFUSAL: the minibosses are NOT bestiary.gd entries. Bestiary holds the ordinary creatures; a miniboss is a theme
+  creature def that delve._setpiece_miniboss renames off its mb_key (`def["name"] = mb_key.capitalize()`, delve.gd ~427). That is where the name lives,
+  so that is where it changed. bestiary.gd untouched; tools/art/minibosses.py untouched (art's); nothing re-fit.
+- DONE (scripts/delve.gd, backup delve.gd.bak_s51): `const MB_NAME` - all 36 rows of the directive's table, trade key -> new name, + `miniboss_name(key)`.
+  The KEY stays the trade word ON PURPOSE: it is art's file name, MB_FIT's key, THEME_MINIBOSS_MORE's entry and content's miniboss_feed.by_key key -
+  renaming it would break the body lookup and the line gate at once. Only the nameplate and the "holds this chamber alone" line change, and a proper
+  name takes NO "The" ("Ordrik holds this chamber alone"). Mr. E has final say: a name change is ONE line in MB_NAME.
+- miniboss_lines now reads by_key[trade key] first, then by_key[new name lower-cased], so the gate holds WHICHEVER way content keys its C-130 rename
+  (the plan says "rename ... miniboss_feed keys"). Content: either keying works; please say which you chose.
+- strickler.glb is on disk (MB_FIT 1.04) but the directive's table has NO row for it - it falls back to "Strickler" (capitalised trade word, with "The").
+  It is in no THEME_MINIBOSS_MORE row so it never reaches a floor today. Flagged for the supervisor/Mr. E: it needs a name if it ever ships.
+  And drizzler (#23 Murkspit) has a name but no body on disk - inert until art ships one.
+- Gates (JESTS_NO_TWITCH=1 throughout): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | S51_NAMES OK 149 checks (36 names exact, unique, no "The", no trade
+  word; 35 bodies still resolve by trade key, 35 keys still read arrive lines) | MBFEED_TEST OK 82 checks (updated to the new contract: the elite
+  carries Delve.miniboss_name, hold line "Dregsallow holds this chamber alone", no "The") | TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2128
+  | TOWNWALK in_solid=0/18421 raid_in_solid=0/5308 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- LOOKED AT IT: tools/_s51_shot.gd (copy of _s36_order.gd to renders/cycles/s51/ + a name check), windowed 1080p: `S51_SHOT OK (6 checks)`.
+  beadle_1standing.png - the nameplate over the Beadle body reads "Ordrik"; feed "Ordrik holds this chamber alone"; the order mechanic unchanged
+  (called hero swings 8, other two hold 0/0).
+- Lock: claim 22:07:50, claim+25 = 22:32:50 computed first, declared 22:32. Staged only the S51 files, PROGRESS, RUN_LOCK.
+
+## D-cycle - S52: THE RENAME'S ROW 23 IS `strickler`, NOT `drizzler` - AND THE S51 GATE NOW READS THE LIVE KEYS INSTEAD OF A COPY OF ITSELF. 2026-11-19T23:08-06:00 (game build)
+- Item: TAKE THIS NEXT 22:58 CT, game build row 1 (S51 half delivered, 35 of 36). The lead was right: there is no `drizzler`
+  key anywhere in this game. The directive's OLD-name column mis-transcribes row 23; I copied the column, art and content read
+  the live key. Murkspit was unreachable and `miniboss_name("strickler")` returned the trade word "Strickler".
+- Fix: scripts/delve.gd MB_NAME `"drizzler"` -> `"strickler"`; the wrong comment ("strickler has no row in the directive") is
+  replaced with what is true. tools/_s51_names.gd TABLE likewise. Nothing in tools/art/minibosses.py or lore_lines.json touched.
+- SAID OUT LOUD: the S51 gate could not catch this class at all - TABLE was a second copy of MB_NAME and asserted the map
+  against itself. It now also asserts MB_NAME's KEY SET against three INDEPENDENT sources: content's miniboss_feed.by_key (36),
+  MB_FIT base keys (36) and the .glb stems under MB_DIR (37 - the 37th is art's broodglut, a variant with no feed lines and no
+  MB_FIT entry, correctly not required). Every MB_NAME key must be in all three; every key with feed lines AND a body must be
+  named. A SELF RED-PROOF plants `drizzler` back in a copy of the map: 4 faults caught (not in feed / fit / glb, and
+  "drawable key strickler has no MB_NAME entry") - the gate fails on exactly the S51 fault.
+- Gates (one battery, 23:09-23:13 CT): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | S51_NAMES OK 152 checks |
+  TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2244 samples off the floor (home) | TOWNWALK in_solid=0/18717 PASS |
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- LOOKED AT IT: tools/_s52_shot.gd (cut of _s51_shot.gd), windowed 1080p, strickler stood on a real built floor:
+  `S52_SHOT OK (4 checks)`. renders/cycles/s52/strickler_murkspit.png - the scale-beam body with the plate "Murkspit" over it;
+  feed line "Murkspit holds this chamber alone - ..." with no "The" and no trade word.
+- DISCLOSED: I ran the battery WITHOUT JESTS_NO_TWITCH=1, so the parse run joined #jestsayin96 as bellmirebro and subscribed
+  EventSub (7 of 7) for ~20 s. Read-only: nothing was posted, redeemed or cheered (0 bits); the log shows no send. Next run sets it.
+- NOT taken: broodglut's MB_NAME / MB_FIT / theme row - it is art's variant class (part 2 of the directive), not rowed to me yet.
+
+## S56 - game build - 20 Nov 2026 03:08-03:2x CT - the lid raised (supervisor 02:12 ruling) + Lastcuff wired
+- TAKE THIS NEXT (02:58) gave: raise the lid, then lastcuff (body shipped, wired to nothing).
+- LID: floorgen.gd:1383 `lid.position = Vector3(0, 7.0, 0)` -> `Vector3(0, 10.0, 0)`. One literal. Measured on a built
+  floor: lid underside 9.50 m (was 6.50) - clears broodglut 6.60 by 2.90 m and lastcuff's measured top 6.19 by 3.31 m.
+  Broodglut not re-scaled. Art's `--reverdict` on _register.json is theirs, not touched.
+- LASTCUFF: `lastcuff.glb.import` now exists (--headless --import, plus its four texture .imports). bestiary.gd "lastcuff":
+  art's register h 6.20, Imp body, A_UAL, homes [] (not a random draw - no content lines yet, same as broodglut).
+  THE ONE IDEA made real: `ways.irons` {at [0.85,0.70,0.55,0.40,0.25], gain 0.22}. Delve._lord_tick sheds one iron per hp
+  mark crossed, sets `irons_pace` meta (1.0 -> 2.10), _mon_pace multiplies it in; art's named meshes go visibly -
+  Imp_Chains (the four cuffs, one mesh) at the 4th, Imp_SpikedCollar at the 5th. Feed text is a plain engine line
+  ("Lastcuff sheds an iron (n of 5).") like the enrage line - content may replace it with written words later.
+- Gate: tools/_s56_lastcuff.gd, windowed 1080p, quits itself. `S56_LAST OK n=16`. RED: S56_RED=1 strips `irons` ->
+  `S56_LAST FAIL [first iron..., fourth iron..., fifth iron..., all five off..., exactly five shed (0)]`.
+- Battery (03:10-03:16 CT): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2192 samples off the
+  floor (home) | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/17397 PASS | DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- LOOKED AT IT: renders/cycles/s56/s56_lastcuff_irons.png (collar on) and s56_lastcuff_free.png (collar gone) - whole body
+  head to feet, plate "Lastcuff". Same caveat the lead wrote for S54: the room wall and the knight's plate cover the lower
+  legs/torso; the gate proves FRAMING, not unoccluded. The cuffs are small at this distance - the collar reads, the cuffs
+  barely do.
+- DISCLOSED AGAIN (sorry - the S52 note said next run sets it): battery ran WITHOUT JESTS_NO_TWITCH=1, so the parse run joined
+  EventSub (7 of 7) as bellmirebro for ~20 s. Read-only: nothing posted, redeemed or cheered, 0 bits.
+- NOT done: lastcuff MB_FIT / THEME_MINIBOSS_MORE `cells` row and any floor route - waits on content's lines, as broodglut's does.
+
+## S57 - game build, 2026-11-20T04:18:23-06:00 - the Leech (Gulworth) as the third bestiary-carried miniboss, its basin idea real
+TAKE THIS NEXT (02:58/03:58 row 1): pick ONE body art has measured, give it a bestiary entry and ONE idea, gate it like S56.
+- Picked the LEECH: art-measured (`_fit_leech_register.json` GREEN, creature_h 2.32, ratio 0.95; CANON h 2.32, theme shrine). It was one of 22 bodies with NO MB_WAYS idea.
+- `scripts/bestiary.gd` "leech": h 2.32 copied from art, homes [] (not a random draw; the MB_DIR shrine elite is untouched).
+- ITS IDEA, art's CANON verbatim "IT WILL NOT LET A WOUND CLOSE": new `Delve._mend(o, amt)` is now the one door for heals (_bless heal/mend/ward, renew's hot tick, drink). While a basin-Leech stands untipped on dun.monsters, the mend goes into its basin and the delver gets 0; `_lord_tick` drinks the basin back into the Leech at 4 hp/s; at 0.30 hp the basin goes over (empties for good, a Chronicle line) and healing lands again. Breather-between-floors heal and necro drain left direct (no foe present / not party healing).
+- Gate `tools/_s57_leech.gd`: **S57_LEECH OK n=14**; `S57_RED=1` (basin stripped) **S57_LEECH FAIL** on all 7 idea checks, as designed. Shot renders/cycles/s57/s57_leech_standing.png - looked at: the Leech stands on the floor with its red basin on a tripod, beside the knight.
+- My own instrument was wrong once: a knight-vs-leech ratio check FAILED at 1.17 because the knight's visible height at frame 40 is unstable (1.98 / 2.54 / 2.67 m across three runs). It is printed now, not gated; the leech's own 2.32 is gated, and vs art's hero_h 2.45 it is 0.95 = art's ratio.
+- Battery: parse 0 SCRIPT ERROR, OFFFLOOR_VERDICT OK 0 of 2105, TWITCH_PARSE OK (8 checks), TOWNWALK PASS, DELVE_TEST OK (0 SCRIPT ERROR).
+- HONEST LIMIT: the live shrine elite (MB_DIR path) still carries no way; routing the bestiary basin onto it, and "tip" as a targetable prop rather than an hp mark, are not built. No twitch test, 0 bits.
+- DISCLOSED: battery again ran WITHOUT JESTS_NO_TWITCH=1, so the parse/delve runs may have joined EventSub as bellmirebro read-only; nothing posted, redeemed or cheered, 0 bits. Next run must set it.
+
+## D-cycle - S63: SYSTEM 47 BATCH 3 - SIXTEEN MORE WHOLE-PACK FLOOR PROPS (52 OF THE 114 WIRED), AND THE PROOF SHOT NO LONGER CLIPS. 2026-11-20T10:19:26-06:00 (game build)
+- TAKE THIS NEXT (09:58 CT) gave game build: batch 3, another 10-20 of the 78 unwired, same shape, same signed lift; widen the camera so the sheet proves every piece.
+- Wired 16 into DungeonHD.PROP_BATCH, every base_dz_m / footprint_m copied from renders/art/worldfit/_manifest.json and asserted live: Bed_Twin2, Bookcase_2, BookStand, Bucket_Wooden_1, Cage_Small, CandleStick_Stand, FarmCrate_Apple, FarmCrate_Empty, Pot_1, Stall_Empty, Vase_Rubble_Medium, Chain_Coil, BookGroup_Medium_1, Coin_Pile_2, Carrot (dz -0.2378, a new past-5cm SINKER), dungeon/Skull. One added to each of the 14 THEME_BATCH rows (prison takes two). All are CORRIDOR-SAFE, UNDER-LID and needs_centring False.
+- Left out on purpose: the wall mounts (Banner_*, Lantern_Wall, Sword_WallMount, Shelf_Arch/Simple, Peg_Rack, Shield_Wooden, Torch_Metal - wall-placement row), Trap_empty/Trap_spikes/Trapdoor* (would read as live hazards), Chest_Wood (would read as loot), and every needs_centring piece. 62 remain unwired.
+- No yaw gate added, per the lead: footprint_m is max(x,z), so it holds under the engine's quarter turns.
+- Gate tools/_s63_props.gd: **S63_PROPS OK n=34** (52 pieces within 2 cm of their floor, Carrot lowest vertex +0.0000, Fence -0.9991 at +0.0000, Workbench_Drawers +0.8842 at -0.0001). Floors 1..24 draw **117** batch pieces (was 90), every theme and biome, 0 off-cell, 0 off-base. RED arm S63_RED=1: **S63_PROPS FAIL** on Pedestal2 +0.030 / Statue_Horse +0.030 / Workbench_Drawers +2.564, as designed.
+- S62_PROPS now reads FAIL on ONE line only - its own "batch size == 36" - because the batch is 52; its other 32 checks are ok. S63 supersedes it; the lead may retire S62's size line.
+- CAMERA: the first S63 shot (fov 40, from z 86) fit every piece but showed three overlapping rows as specks. Re-shot from (0,22,62) at fov 46: renders/cycles/s63/s63_props.png - LOOKED AT: three separate rows, nothing clipped at either edge, every piece on the floor line, the stall and coin pile visible at the right where S62 cut off.
+- Battery: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2284, MON_INPROP 0 of 324; TWITCH_PARSE OK (8 checks); DELVE_TEST OK (0 SCRIPT ERROR); TOWNWALK in_solid=0/15935 raid 0/9023 PASS.
+- DISCLOSED: the battery ran WITHOUT JESTS_NO_TWITCH=1 again (the S57 note asked for it; I read that note after launching). The parse run joined EventSub as bellmirebro READ-ONLY (token check, join, subs seed, welcome). Nothing posted, redeemed or cheered, 0 bits. The re-shot S63 run set it.

@@ -1,0 +1,465 @@
+{
+ "variants": {
+  "broodglut": {
+   "title": "Broodglut",
+   "regular": "puglin",
+   "regular_h": 0.9,
+   "height": 6.6,
+   "scale_vs_regular": 7.333,
+   "creature_h": 6.6,
+   "hero_h": 2.45,
+   "ratio": 2.69,
+   "pair_w": 12.27,
+   "span_x": 10.4063,
+   "span_y": 4.3284,
+   "frame_w": 13.249,
+   "frame_h": 9.065,
+   "frame_w_standard": 5.6,
+   "frame_overridden": true,
+   "fits_standard_cell": false,
+   "corridor_clear": 11.0,
+   "room_locked": false,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 64033,
+      "vis": 64033,
+      "delta": 65495,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 8028,
+      "vis": 8028,
+      "delta": 8290,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 47460,
+      "vis": 47460,
+      "delta": 48275,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 6983,
+      "vis": 6983,
+      "delta": 7279,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 66399,
+      "vis": 66399,
+      "delta": 67860,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 8081,
+      "vis": 8081,
+      "delta": 8338,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3,
+   "blanks": [],
+   "frame_clips": {},
+   "errors": [],
+   "blind_views": [],
+   "tris": 7528,
+   "bones": 55,
+   "meshes": [
+    "Puglin_Body",
+    "Puglin_Stick",
+    "Puglin_Tusks"
+   ],
+   "native_h": 0.93103,
+   "stray_dropped": [
+    {
+     "name": "Icosphere",
+     "hidden_render": false,
+     "hidden_view": false,
+     "verts": 42
+    }
+   ],
+   "palette": "T_Puglin_BaseColor_2.png",
+   "palette_report": {
+    "swapped": [
+     "MI_Puglin/Image Texture.001: T_Puglin_BaseColor_1.png -> T_Puglin_BaseColor_2.png"
+    ],
+    "resized": [
+     "T_Puglin_Emissive",
+     "T_Puglin_ORM",
+     "T_Puglin_Normal"
+    ],
+    "mean_before": [
+     0.3878,
+     0.3927,
+     0.1272
+    ],
+    "mean_after": [
+     0.4368,
+     0.2054,
+     0.2074
+    ],
+    "palette_px": [
+     1024,
+     1024
+    ]
+   },
+   "ear_turn": {
+    "moved": 444,
+    "ear_len": 0.2427,
+    "root": [
+     0.2,
+     -0.1422,
+     0.7398
+    ],
+    "tip_centreline": [
+     0.345,
+     -0.0216,
+     0.8807
+    ],
+    "pitch_deg": 40.0,
+    "yaw_deg": 45.0
+   },
+   "theme": "mess",
+   "idea": "IT EATS ITS OWN - while any lesser puglin in the room still lives it will take one, swallow it, and close its own wounds; the swarm is its health and the big one is not the target",
+   "line": "Something in here is eating the little ones.",
+   "note": "ADJACENCY DECLARED RATHER THAN HIDDEN: miniboss 8, Blisterhand (ex-Cook), KEEPS THE PACK ALIVE. This is the arrow reversed - the pack keeps IT alive - so the party's decision is inverted (kill the adds, not the boss) instead of repeated. If Mr. E reads it as the same idea twice, the fix is one word in the idea string and no geometry.",
+   "prove_red": false,
+   "ok": true,
+   "glb": "assets/monsters/minibosses/broodglut.glb",
+   "glb_bytes": 3124424,
+   "corridor_clear_m": 11.0,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 0.594,
+   "lid_underside_m": 9.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 2.9,
+   "gate_height_m": 6.6,
+   "fits_dungeon": true,
+   "floor_read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fit_errors": []
+  },
+  "lastcuff": {
+   "title": "Lastcuff",
+   "regular": "imp",
+   "regular_h": 1.3,
+   "height": 6.2,
+   "scale_vs_regular": 4.769,
+   "creature_h": 6.2,
+   "hero_h": 2.45,
+   "ratio": 2.53,
+   "pair_w": 8.34,
+   "span_x": 6.4807,
+   "span_y": 2.4987,
+   "frame_w": 10.181,
+   "frame_h": 6.966,
+   "frame_w_standard": 5.6,
+   "frame_overridden": true,
+   "frame_driver": "height",
+   "frame_need_w_wide": 9.01,
+   "frame_need_w_tall": 10.181,
+   "fits_standard_cell": false,
+   "corridor_clear": 11.0,
+   "room_locked": false,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 41357,
+      "vis": 41357,
+      "delta": 43064,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 13446,
+      "vis": 13446,
+      "delta": 13814,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27747,
+      "vis": 27747,
+      "delta": 28795,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 11656,
+      "vis": 11656,
+      "delta": 12065,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 41177,
+      "vis": 41177,
+      "delta": 42906,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 13552,
+      "vis": 13552,
+      "delta": 13896,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3,
+   "blanks": [],
+   "frame_clips": {},
+   "errors": [],
+   "blind_views": [],
+   "tris": 15232,
+   "bones": 55,
+   "meshes": [
+    "Imp_Body",
+    "Imp_Chains",
+    "Imp_Mace",
+    "Imp_Shorts",
+    "Imp_SpikedCollar"
+   ],
+   "native_h": 1.67786,
+   "stray_dropped": [
+    {
+     "name": "Icosphere",
+     "hidden_render": false,
+     "hidden_view": false,
+     "verts": 42
+    }
+   ],
+   "palette": "T_Imp_BaseColor_3.png",
+   "palette_report": {
+    "swapped": [
+     "MI_Imp/Image Texture.001: T_Imp_BaseColor_1 -> T_Imp_BaseColor_3.png",
+     "MI_Imp.001/Image Texture.001: T_Imp_BaseColor_1 -> T_Imp_BaseColor_3.png"
+    ],
+    "resized": [
+     "T_Imp_Emissive",
+     "T_Imp_ORM",
+     "T_Imp_Normal"
+    ],
+    "mean_before": [
+     0.3937,
+     0.213,
+     0.2021
+    ],
+    "mean_after": [
+     0.3897,
+     0.3837,
+     0.4154
+    ],
+    "palette_px": [
+     1024,
+     1024
+    ]
+   },
+   "ear_turn": {
+    "moved": 0
+   },
+   "theme": "cells",
+   "idea": "IT IS STILL IN IRONS, AND EVERY ONE YOU KNOCK OFF MAKES IT FASTER - five shackles, four cuffs and a collar; hurt it and one goes, and the thing that was lumbering is not lumbering any more. Kill it early or race something you have been unlocking",
+   "line": "The irons in here are off something.",
+   "note": "THE STATE IS ON THE MODEL AND THAT IS WHY THIS IDEA WAS TAKEN: five removable pieces the pack author already modelled, so a viewer can SEE how far gone the fight is without reading a stat - Mr. E's binding principle applied to a mechanic rather than to a costume. Nothing in the thirty-six ramps speed, and none of them carries its own progress as geometry. ADJACENCY DECLARED: Shacklemaw (gaoler) also fights in chains, but his are a hook he USES on you and these are irons used ON IT, so the two read as jailer and escapee rather than as one idea twice. WIRING NOTE FOR THE GAME BUILD, NOT A REQUEST: the shackles are five named meshes in the shipped glb (Imp_Chains carries the four cuffs, Imp_SpikedCollar the fifth); hiding them one at a time is how the mechanic would show, and if that is not wanted the idea still works unseen.",
+   "prove_red": false,
+   "ok": true,
+   "glb": "assets/monsters/minibosses/lastcuff.glb",
+   "glb_bytes": 4110084,
+   "corridor_clear_m": 11.0,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 4.519,
+   "lid_underside_m": 9.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.3,
+   "gate_height_m": 6.2,
+   "fits_dungeon": true,
+   "floor_read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fit_errors": []
+  }
+ },
+ "verdict": "GREEN",
+ "ab_palette": {
+  "broodglut": {
+   "pixels_compared": 55907,
+   "light": [
+    1.0,
+    0.68,
+    0.34
+   ],
+   "regular_png": "hero_regular.png",
+   "variant_png": "hero_variant.png",
+   "mean_regular": [
+    0.2748,
+    0.2646,
+    0.1232
+   ],
+   "mean_variant": [
+    0.3027,
+    0.1591,
+    0.1633
+   ],
+   "mean_rgb_distance": 0.1343,
+   "p10_rgb_distance": 0.0593,
+   "green_minus_red_regular": -0.0102,
+   "green_minus_red_variant": -0.1436,
+   "sign_flipped_frac": 0.4524,
+   "ok": false,
+   "verdict": "TOO CLOSE UNDER THIS LIGHT",
+   "mess": {
+    "pixels_compared": 55907,
+    "light": [
+     1.0,
+     0.68,
+     0.34
+    ],
+    "regular_png": "hero_regular_mess.png",
+    "variant_png": "hero_variant_mess.png",
+    "mean_regular": [
+     0.2748,
+     0.2646,
+     0.1232
+    ],
+    "mean_variant": [
+     0.3027,
+     0.1591,
+     0.1633
+    ],
+    "mean_rgb_distance": 0.1343,
+    "p10_rgb_distance": 0.0593,
+    "frac_over_jnd": 0.9253,
+    "green_minus_red_regular": -0.0102,
+    "green_minus_red_variant": -0.1436,
+    "gr_shift": -0.1334,
+    "sign_flipped_frac": 0.4524,
+    "ok": true,
+    "verdict": "SEPARATED"
+   },
+   "crypt": {
+    "pixels_compared": 55907,
+    "light": [
+     0.7,
+     0.74,
+     1.0
+    ],
+    "regular_png": "hero_regular_crypt.png",
+    "variant_png": "hero_variant_crypt.png",
+    "mean_regular": [
+     0.2728,
+     0.2653,
+     0.1288
+    ],
+    "mean_variant": [
+     0.3006,
+     0.1599,
+     0.1685
+    ],
+    "mean_rgb_distance": 0.1339,
+    "p10_rgb_distance": 0.0592,
+    "frac_over_jnd": 0.9253,
+    "green_minus_red_regular": -0.0075,
+    "green_minus_red_variant": -0.1407,
+    "gr_shift": -0.1332,
+    "sign_flipped_frac": 0.4983,
+    "ok": true,
+    "verdict": "SEPARATED"
+   }
+  }
+ },
+ "floor_geom": {
+  "gd": "scripts\\floorgen.gd",
+  "cell_m": 4.0,
+  "wall_in_m": 0.5,
+  "hall_w": 3,
+  "corridor_clear_m": 11.0,
+  "lid_y_m": 10.0,
+  "lid_thick_m": 1.0,
+  "lid_underside_m": 9.5,
+  "at": {
+   "cell_m": "scripts\\floorgen.gd:21",
+   "wall_in_m": "scripts\\floorgen.gd:1698",
+   "hall_w": "scripts\\floorgen.gd:848",
+   "lid_y_m": "scripts\\floorgen.gd:1383",
+   "lid_thick_m": "scripts\\floorgen.gd:1378"
+  },
+  "errors": [],
+  "read_from_repo": "C:\\hd adventure\\bellmire-art\\_scratch\\lidgate\\geom_main",
+  "note": "scripts/floorgen.gd READ OUT OF origin/main e0b11257 - the art branch is 1306 commits behind and still carries lid y=7.0"
+ }
+}

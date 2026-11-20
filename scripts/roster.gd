@@ -363,6 +363,55 @@ func max_hp(h: Dictionary) -> float:
     return float(CLASSES[h["class"]]["hp"]) + float(mod(h, "con")) * 5.0 \
          + float(ARMOUR[int(h["armour"])]["hp"]) + acc_bonus(h, "hp")
 
+# S64 MANA (supervisor ruling 20 Nov 10:16 CT, under Mr. E's 07:24 "Diablo/WoW/Elder Scrolls
+# style"). ONE pool per spellcaster and ONE gate: every spell a delver casts spends MANA_COST,
+# and the pool refills at MANA_REGEN per second only out of combat. A caster who runs dry falls
+# back to the melee swing every other class uses; a mender who runs dry holds the mending until
+# the fight ends. Each hero publishes h["mana"], h["mana_max"], h["mana_regen"] for the HUD.
+# Non-spellcasters publish 0 / 0 and are never gated. REVERT: set MANA_ON false - spells are
+# free again and nothing else changes.
+const MANA_ON := true
+const MANA_BASE := 30.0       # every spellcaster's well
+const MANA_PER_MOD := 6.0     # + this per point of the class's primary stat modifier
+const MANA_COST := 6.0        # one spell, any spell
+const MANA_REGEN := 5.0       # per second, out of combat only
+
+## who draws on a pool at all: the CASTERS plus anyone with a mending power (the paladin)
+func uses_mana(h: Dictionary) -> bool:
+    return String(h["class"]) in CASTERS or heal_power(h) > 0.0
+
+func mana_max(h: Dictionary) -> float:
+    if not uses_mana(h):
+        return 0.0
+    var prim := String((CLASSES[h["class"]] as Dictionary).get("primary", "int"))
+    return maxf(MANA_BASE + float(mod(h, prim)) * MANA_PER_MOD, MANA_COST)
+
+## the current pool, clamped to the max; a hero who has never cast starts full
+func mana_of(h: Dictionary) -> float:
+    var mx := mana_max(h)
+    var cur := float(h.get("mana", mx))
+    h["mana"] = clampf(cur, 0.0, mx)
+    h["mana_max"] = mx
+    h["mana_regen"] = MANA_REGEN if mx > 0.0 else 0.0
+    return float(h["mana"])
+
+## THE GATE. True = the spell may go off (and has been paid for). False = not enough mana.
+func spend_mana(h: Dictionary) -> bool:
+    if not MANA_ON or not uses_mana(h):
+        return true
+    var cur := mana_of(h)
+    if cur < MANA_COST:
+        return false
+    h["mana"] = cur - MANA_COST
+    return true
+
+## out of combat only - the caller decides what "out of combat" is
+func regen_mana(h: Dictionary, delta: float) -> void:
+    if not uses_mana(h):
+        mana_of(h)
+        return
+    h["mana"] = minf(mana_of(h) + MANA_REGEN * delta, float(h["mana_max"]))
+
 # a class hits with its own ability: a mage's INT, a rogue's DEX, a knight's STR
 func attack(h: Dictionary) -> float:
     var prim: String = String(CLASSES[h["class"]].get("primary", "str"))

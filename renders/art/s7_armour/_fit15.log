@@ -1,0 +1,131 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+21:45:07 | INFO: Data are loaded, start creating Blender stuff
+21:45:07 | INFO: Blender create Mesh node Cube.125
+21:45:07 | INFO: Blender create Mesh node Cube.126
+21:45:07 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:07 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:07 | INFO: Blender create Mesh node Cube.128
+21:45:07 | INFO: Blender create Mesh node Cube.127
+21:45:07 | INFO: Blender create Mesh node Cube.003
+21:45:07 | INFO: Blender create Mesh node Cylinder.280
+21:45:07 | INFO: Blender create Mesh node Cylinder.005
+21:45:07 | INFO: Blender create Mesh node Cylinder.010
+21:45:07 | INFO: Blender create Mesh node Cylinder.022
+21:45:07 | INFO: Blender create Mesh node Cube.11839
+21:45:07 | INFO: Blender create Mesh node Cube.12993
+21:45:07 | INFO: Blender create Mesh node Cube.124
+21:45:07 | INFO: Blender create Mesh node Plane.004
+21:45:07 | INFO: glTF import finished in 0.49s
+00:02.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\_bare_front.png'
+00:03.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\_bare_side.png'
+00:03.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\_bare_back.png'
+21:45:09 | INFO: Data are loaded, start creating Blender stuff
+21:45:09 | INFO: Blender create Mesh node Cube.125
+21:45:09 | INFO: Blender create Mesh node Cube.126
+21:45:09 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:09 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:09 | INFO: Blender create Mesh node Cube.128
+21:45:09 | INFO: Blender create Mesh node Cube.127
+21:45:09 | INFO: Blender create Mesh node Cube.003
+21:45:09 | INFO: Blender create Mesh node Cylinder.280
+21:45:09 | INFO: Blender create Mesh node Cylinder.005
+21:45:09 | INFO: Blender create Mesh node Cylinder.010
+21:45:09 | INFO: Blender create Mesh node Cylinder.022
+21:45:09 | INFO: Blender create Mesh node Cube.11839
+21:45:09 | INFO: Blender create Mesh node Cube.12993
+21:45:09 | INFO: Blender create Mesh node Cube.124
+21:45:09 | INFO: Blender create Mesh node Plane.004
+21:45:09 | INFO: glTF import finished in 0.48s
+00:04.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Black_front.png'
+00:04.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Black_side.png'
+00:04.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Black_back.png'
+21:45:10 | INFO: Data are loaded, start creating Blender stuff
+21:45:10 | INFO: Blender create Mesh node Cube.125
+21:45:10 | INFO: Blender create Mesh node Cube.126
+21:45:10 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:10 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:10 | INFO: Blender create Mesh node Cube.128
+21:45:10 | INFO: Blender create Mesh node Cube.127
+21:45:10 | INFO: Blender create Mesh node Cube.003
+21:45:10 | INFO: Blender create Mesh node Cylinder.280
+21:45:10 | INFO: Blender create Mesh node Cylinder.005
+21:45:10 | INFO: Blender create Mesh node Cylinder.010
+21:45:10 | INFO: Blender create Mesh node Cylinder.022
+21:45:10 | INFO: Blender create Mesh node Cube.11839
+21:45:10 | INFO: Blender create Mesh node Cube.12993
+21:45:10 | INFO: Blender create Mesh node Cube.124
+21:45:10 | INFO: Blender create Mesh node Plane.004
+21:45:11 | INFO: glTF import finished in 0.48s
+00:05.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Golden_front.png'
+00:05.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Golden_side.png'
+00:05.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Golden_back.png'
+21:45:12 | INFO: Data are loaded, start creating Blender stuff
+21:45:12 | INFO: Blender create Mesh node Cube.125
+21:45:12 | INFO: Blender create Mesh node Cube.126
+21:45:12 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:12 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:12 | INFO: Blender create Mesh node Cube.128
+21:45:12 | INFO: Blender create Mesh node Cube.127
+21:45:12 | INFO: Blender create Mesh node Cube.003
+21:45:12 | INFO: Blender create Mesh node Cylinder.280
+21:45:12 | INFO: Blender create Mesh node Cylinder.005
+21:45:12 | INFO: Blender create Mesh node Cylinder.010
+21:45:12 | INFO: Blender create Mesh node Cylinder.022
+21:45:12 | INFO: Blender create Mesh node Cube.11839
+21:45:12 | INFO: Blender create Mesh node Cube.12993
+21:45:12 | INFO: Blender create Mesh node Cube.124
+21:45:12 | INFO: Blender create Mesh node Plane.004
+21:45:12 | INFO: glTF import finished in 0.48s
+00:06.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Leather_front.png'
+00:07.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Leather_side.png'
+00:07.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Leather_back.png'
+21:45:13 | INFO: Data are loaded, start creating Blender stuff
+21:45:13 | INFO: Blender create Mesh node Cube.125
+21:45:13 | INFO: Blender create Mesh node Cube.126
+21:45:13 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:13 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:13 | INFO: Blender create Mesh node Cube.128
+21:45:13 | INFO: Blender create Mesh node Cube.127
+21:45:13 | INFO: Blender create Mesh node Cube.003
+21:45:13 | INFO: Blender create Mesh node Cylinder.280
+21:45:13 | INFO: Blender create Mesh node Cylinder.005
+21:45:13 | INFO: Blender create Mesh node Cylinder.010
+21:45:13 | INFO: Blender create Mesh node Cylinder.022
+21:45:13 | INFO: Blender create Mesh node Cube.11839
+21:45:13 | INFO: Blender create Mesh node Cube.12993
+21:45:13 | INFO: Blender create Mesh node Cube.124
+21:45:13 | INFO: Blender create Mesh node Plane.004
+21:45:13 | INFO: glTF import finished in 0.48s
+00:08.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal_front.png'
+00:08.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal_side.png'
+00:08.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal_back.png'
+21:45:14 | INFO: Data are loaded, start creating Blender stuff
+21:45:14 | INFO: Blender create Mesh node Cube.125
+21:45:14 | INFO: Blender create Mesh node Cube.126
+21:45:14 | INFO: Blender create Mesh node PrototypePete_body.020
+21:45:14 | INFO: Blender create Mesh node PrototypePete_head.001
+21:45:14 | INFO: Blender create Mesh node Cube.128
+21:45:14 | INFO: Blender create Mesh node Cube.127
+21:45:14 | INFO: Blender create Mesh node Cube.003
+21:45:14 | INFO: Blender create Mesh node Cylinder.280
+21:45:14 | INFO: Blender create Mesh node Cylinder.005
+21:45:14 | INFO: Blender create Mesh node Cylinder.010
+21:45:14 | INFO: Blender create Mesh node Cylinder.022
+21:45:14 | INFO: Blender create Mesh node Cube.11839
+21:45:14 | INFO: Blender create Mesh node Cube.12993
+21:45:14 | INFO: Blender create Mesh node Cube.124
+21:45:14 | INFO: Blender create Mesh node Plane.004
+21:45:15 | INFO: glTF import finished in 0.50s
+00:09.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal2_front.png'
+00:09.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal2_side.png'
+00:10.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\s7_armour\fit15\Q5_Armor_Metal2_back.png'
+FIT7 stages=Q5 errors=0
+DONE
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+OBJ import of 'Armor_Black.obj' took 1.08 ms
+OBJ import of 'Armor_Golden.obj' took 0.93 ms
+OBJ import of 'Armor_Leather.obj' took 0.68 ms
+OBJ import of 'Armor_Metal.obj' took 0.79 ms
+OBJ import of 'Armor_Metal2.obj' took 0.88 ms
+
+Blender quit

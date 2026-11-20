@@ -36,6 +36,25 @@ Gaoler's iron is greased and old; the Snuffer has been down there longest.
 Raw vertex maths only (no bpy.ops, no bmesh.ops) - see lordlib - for the first
 fifteen: every one of those is original generated geometry.
 
+*** ALL THIRTY-SIX WERE RENAMED ON 19 Nov 2026 22:5x CT. THE KEYS DID NOT MOVE. ***
+Mr. E's directive, relayed by the supervisor at 21:50 CT with his own words on
+it - "they all sound like job titles". They did: this file named each one for
+what it DOES, which was the right instinct for a mechanic and the wrong one for
+a character. The bodies, the mechanics, the heights, the tints, the wear and
+every fit proof are UNCHANGED - only the display name in CANON moved, 50
+entries (36 bases and the 14 chibi/tall variants, whose "(chibi)" and "(3.60m)"
+suffixes are kept). THE DICT KEYS ARE STILL THE TRADE WORDS on purpose: the
+game build's S51 wired delve.gd's MB_NAME against unchanged trade keys at
+22:15 CT, so moving them here would have broken a thing that had already
+shipped. The old names are therefore still the identifiers and no longer the
+names, and anyone reading this file for a name must read CANON and not the key
+or the function below it - INCLUDING THE FOUR IN THE PARAGRAPH ABOVE, which is
+kept as written because it is the record of why they were built, not a list of
+what they are called. Karvok, Ironhyde, Shacklemaw and Duskhollow are the
+Drillmaster, Scrapwright, Gaoler and Snuffer in that order.
+Mr. E has final say on every name; these are the supervisor's proposals and a
+change is one string each.
+
 TWO LINES OF THIS DOCSTRING WERE STALE AND ARE CORRECTED HERE, 17 Nov 2026:
   1. "nothing here reads a third-party asset" is no longer true, on purpose.
      The Quartermaster (16) loads real spear and shield geometry out of
@@ -64,22 +83,47 @@ from creatures import surf, limb, arc, eyes, spikes
 
 TAU = math.pi * 2.0
 
+
+def seat(pts, r0):
+    """LIFT A RAKED LIMB SO ITS BOTTOM RING TOUCHES THE FLOOR, NOT DIPS THROUGH IT.
+
+    THE FAULT THIS EXISTS FOR, found on the Rammer at pass 8 and still open on
+    nine bodies at the 18:34 foot-plane audit: limb() sweeps each ring
+    PERPENDICULAR to the polyline, so a limb that leans off vertical has its
+    bottom ring tilted and its lowest vertex r0*sin(tilt) BELOW the z the
+    builder wrote. A builder writing a literal 0.0 is DECLARING "this touches
+    the ground"; minibossgen grounds the merged body on its GLOBAL minimum, so
+    that hidden dip becomes the floor and lifts every honestly-placed foot,
+    base and planted thing that far into the air.
+
+    DERIVED, NOT DIALLED. The lift comes from the limb's own first segment, so
+    re-raking or re-bending a leg cannot re-open the float, and no constant has
+    to be re-measured by hand. Returns a new list; the caller's points are not
+    touched. Pass the SAME r0 you pass to limb().
+    """
+    q = [Vector(p) for p in pts]
+    if len(q) < 2:
+        return q
+    d = (q[1] - q[0]).normalized()
+    lift = r0 * math.sqrt(max(0.0, 1.0 - d.z * d.z))
+    return [v + Vector((0.0, 0.0, lift)) for v in q]
+
 # key: (title, height(m), tint, aura, theme, idea, wear, feed line)
 #   theme - the dungeon_hd.gd theme whose miniboss weight this was built for
 #   idea  - the one thing that makes the fight different. The bar, in a phrase.
 #   wear  - 0 fresh, 1 derelict. Drives roughness, metal and how far the colour
 #           is dulled toward the dark. NEVER the same across the set.
 CANON = {
-    "drillmaster": ("The Drillmaster", 2.20, (0.86, 0.72, 0.38), (1.00, 0.78, 0.34),
+    "drillmaster": ("Karvok", 2.20, (0.86, 0.72, 0.38), (1.00, 0.78, 0.34),
                     "barracks", "IT SUMMONS - it beats the muster and the garrison forms up",
                     0.15, "Someone is beating the muster."),
-    "scrapwright": ("The Scrapwright", 2.00, (0.70, 0.74, 0.78), (0.78, 0.86, 1.00),
+    "scrapwright": ("Ironhyde", 2.00, (0.70, 0.74, 0.78), (0.78, 0.86, 1.00),
                     "workshop", "IT ARMOURS ITSELF - every plate knocked off is replaced from the floor",
                     0.30, "It is wearing the workshop."),
-    "gaoler":      ("The Gaoler", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
+    "gaoler":      ("Shacklemaw", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
                     "prison", "IT DRAGS - the hook takes one out of the line and reels them in",
                     0.80, "A chain is paying out in the dark."),
-    "snuffer":     ("The Snuffer", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
+    "snuffer":     ("Duskhollow", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
                     "shrine", "IT TAKES THE LIGHT - it puts out the lamps one at a time",
                     0.90, "The nearest lamp has gone out."),
 }
@@ -219,6 +263,135 @@ def scrapwright():
     return P
 
 
+# --------------------------------------------- THE DRAG-CHAIN'S HEAP (20 Nov)
+# THE FAULT, found by the team lead on the contact sheet and confirmed by me on
+# gaoler_chibi/three_quarter.png before a line was changed: the chain was a
+# FLAT SPIRAL on the ground plane - 2.6 turns rising 0.085 m over a 0.92 m
+# radius - and at the 3/4 camera's 14 degrees of elevation that projects to a
+# thin ellipse. It reads as a wire hoop lying on the floor. The Gaoler's whole
+# idea is IT DRAGS, and a hoop at rest is the one thing a drag is not.
+#
+# WHAT A CHAIN ACTUALLY DOES, which is the plainness rule doing the work: chain
+# hauled in and dropped does not lie out flat, it HEAPS - a cone of links with
+# the working end coming off the top. So the same helix is stood up: fewer
+# metres of floor, half a metre of height, and the run to the hand now starts
+# at the heap's own free end instead of at a literal.
+#
+# THE OLD SHAPE IS KEPT AS DRAG_HEAP_FLAT, not deleted, so the A arm of
+# _gaoler_chain_ab.py is the real pass-1 geometry and not a reconstruction of
+# it. Same reason MBG_RED_LID exists: an arm nobody can re-run is not evidence.
+DRAG_HEAP = dict(turns=3.5, z0=0.06, z1=0.50, r0=0.62, r1=0.30,
+                 steps=96, phase=-3.49)
+DRAG_HEAP_FLAT = dict(turns=2.6, z0=0.055, z1=0.14, r0=0.92, r1=0.26,
+                      steps=84, phase=0.4)
+
+
+def _dragheap(P, cx, cy, tube=0.055, link=(0.072, 0.072, 0.034), every=9):
+    """The heap of chain on the floor. Returns its FREE END in world co-ords so
+    the run to the hand is anchored to the geometry and not to a literal that
+    goes stale the moment the heap is re-shaped.
+
+    Records the item indices it added on P.heap_idx, so _gaoler_chain_ab.py can
+    render the body with and without exactly this group through ONE camera.
+    That is the pass-11 lesson: a mask rendered alone answers how BIG a thing
+    is and never whether it can be SEEN."""
+    h = DRAG_HEAP
+    i0 = len(P.items)
+    coil = L.helix(h["turns"], h["z0"], h["z1"], h["r0"], h["r1"],
+                   steps=h["steps"], phase=h["phase"])
+    coil = [Vector((p.x + cx, p.y + cy, p.z)) for p in coil]
+    P.raw(L.tube(coil, tube, 6), 'dark')
+    # a few links called out so the heap reads as chain, not as rope
+    for i in range(0, len(coil) - 3, every):
+        P.add(L.sphere(link[0], link[1], link[2], 8, 6), 'dark',
+              loc=(coil[i].x, coil[i].y, coil[i].z + 0.016))
+    P.heap_idx = list(range(i0, len(P.items)))
+    return coil[-1]
+
+
+# THE RUN, 20 Nov, and it is the SECOND half of the same fault. With the heap
+# standing up I looked at the new 3/4 and front frames and the line from the
+# heap to the hand is a PLAIN TUBE: at pane distance it reads as a bar, a haft,
+# a bow stave - anything but chain. The heap already called its links out and
+# the run never did. So the run gets links too, and they ALTERNATE a quarter
+# turn the way real chain does, which is the thing an eye reads as chain rather
+# than as rope or as iron rod. The links are measured on their own arm in
+# _gaoler_chain_ab.py: two changes sharing one render pass are still two
+# measurements.
+# `on` IS FALSE AND THAT IS A RESULT, NOT AN OVERSIGHT. The links were built,
+# rendered and measured in the same run and they did not clear the bar written
+# before the numbers were read (_gaoler_chain_ab.py's header). One term moved
+# hard in their favour - the width profile's local maxima went 4 -> 9 along the
+# visible stretch - and one clause of the bar, "cv must beat the plain tube by
+# 1.4x", turned out to be the wrong term: cv is dominated by the line's own
+# foreshortening, not by links, so a plain tube already reads 0.30 there. THE
+# BAR IS NOT MOVED IN THE RUN THAT WROTE IT. The geometry stays off, the arm
+# stays runnable, and the next pass can write a bumps-only bar before it looks.
+# PASS 2, 20 Nov 05:5x CT. ONE TERM MOVED, rz 0.028 -> 0.068, AND THE MECHANISM
+# WAS ARITHMETIC BEFORE IT WAS A RENDER. A link's flat axis alternates by a
+# quarter turn - that turn is the whole read - so every other link presents `rz`
+# to the camera. rz was **0.028 m against a run tube of radius 0.052 m**: the
+# edge-on link sat ENTIRELY INSIDE THE TUBE and could not make a bulge at all.
+# At most half the links could ever register, and the instrument measured
+# exactly that: bump_frac_of_expected **0.3478 / 0.4103** against a bar of 0.50.
+# rz is now ABOVE the tube radius so the edge-on link still shows, and still
+# well under rx so the link reads as a flattened ring and not a bead - beads
+# would be a different object and the plainness rule forbids it.
+RUN_LINKS = dict(step=0.17, rx=0.080, rz=0.068, on=False)
+# PASS 2 RESULT, 20 Nov 05:5x CT. `on` IS STILL FALSE AND IT IS STILL A RESULT.
+# Against the bumps-only bar written in _gaoler_chain_ab.py BEFORE this pass
+# rendered (bump_frac_of_expected >= 0.50, density_links >= 1.8x plain):
+#     gaoler        0.4103 -> **0.7273**, density 4.01x -> **7.10x**  PASS
+#     gaoler_chibi  0.3478 -> **0.4571**, density 1.22x -> **1.60x**  FAIL
+# THE SET IS SPLIT, SO THE GLOBAL TOGGLE STAYS OFF. One body clearing a bar is
+# not the set clearing it, and I am not moving this bar in the run that wrote
+# it - that is the second time this term has been asked and the answer is the
+# answer. The rz move IS kept: it is the arm's geometry, it is measured in both
+# directions, and the next pass starts from the better number rather than
+# re-deriving it.
+
+
+def _dragrun(P, pts, tube=0.052):
+    """The chain from the heap to the hand. Returns nothing; records the item
+    indices it added on P.run_idx so the A/B instrument can hide exactly this
+    group. `pts` must already start at the heap's free end - the builders pass
+    _dragheap's return value, never a literal."""
+    i0 = len(P.items)
+    P.raw(L.tube(pts, tube, 6), 'dark')
+    # the path itself, kept for the instrument: measuring a line's width
+    # along a PCA axis makes every bend in it look like a bulge, so the A/B
+    # harness walks THIS polyline instead of guessing an axis from the pixels.
+    P.run_path = [Vector(q) for q in pts]
+    cfg = RUN_LINKS
+    if cfg.get("on"):
+        # densify the polyline, then drop a link every `step` metres of it
+        dense = []
+        for a, b in zip(pts[:-1], pts[1:]):
+            seg = Vector(b) - Vector(a)
+            n = max(1, int(seg.length / 0.02))
+            for i in range(n):
+                dense.append((Vector(a) + seg * (i / float(n)), seg.normalized()))
+        k, acc = 0, 0.0
+        for i, (pt, d) in enumerate(dense):
+            acc += 0.02
+            if acc < cfg["step"]:
+                continue
+            acc = 0.0
+            # the two directions perpendicular to the run. A link's FLAT axis
+            # is one of them and the next link's is the other - that quarter
+            # turn is the whole read.
+            up = Vector((0.0, 0.0, 1.0))
+            p1 = d.cross(up)
+            if p1.length < 1e-4:
+                p1 = d.cross(Vector((1.0, 0.0, 0.0)))
+            p1 = p1.normalized()
+            p2 = d.cross(p1).normalized()
+            P.raw(aim(L.sphere(cfg["rx"], cfg["rx"], cfg["rz"], 8, 6),
+                      (pt.x, pt.y, pt.z), p1 if (k % 2 == 0) else p2), 'dark')
+            k += 1
+    P.run_idx = list(range(i0, len(P.items)))
+
+
 # -------------------------------------------- 3 THE GAOLER: a hook and a coil
 def gaoler():
     """IT DRAGS. A hook on a long chain: it takes one hero out of the file and
@@ -267,16 +440,21 @@ def gaoler():
     P.raw(L.tube(hook, [0.075, 0.072, 0.068, 0.064, 0.060, 0.056,
                         0.050, 0.044, 0.038, 0.028, 0.014], 8), 'bone')
     P.add(L.sphere(0.075, 0.075, 0.075, 9, 6), 'dark', loc=(1.22, -0.58, 1.32))
-    # THE CHAIN: a flat spiral on the floor, then a run up to the hook hand
-    coil = L.helix(2.6, 0.055, 0.14, 0.92, 0.26, steps=84, phase=0.4)
-    coil = [Vector((p.x - 0.86, p.y + 0.52, p.z)) for p in coil]
-    P.raw(L.tube(coil, 0.050, 6), 'dark')
-    run = arc((-0.86 + 0.26, 0.52, 0.14), (0.26, -0.26, 1.70), 0.24, 9)
-    P.raw(L.tube(run, 0.046, 6), 'dark')
-    # a few links called out so the coil reads as chain, not as rope
-    for i in range(0, len(coil) - 3, 9):
-        P.add(L.sphere(0.068, 0.068, 0.032, 8, 6), 'dark',
-              loc=(coil[i].x, coil[i].y, coil[i].z + 0.015))
+    # THE CHAIN: a HEAP on the floor (see _dragheap - the flat spiral read as a
+    # hoop at rest, which is the one thing a drag is not), then a run from the
+    # heap's own free end up to the hook hand.
+    end = _dragheap(P, -0.92, 0.58, tube=0.050, link=(0.068, 0.068, 0.032))
+    # THE RUN, and this routing is a fault my own heap introduced: with the
+    # chain standing up instead of lying flat, the old arc from the coil to the
+    # shoulder passed BEHIND the apron and the instrument measured the loss -
+    # 4757 visible pixels in the 3/4 frame down to 999, a 79% loss of the one
+    # line that joins the heap to the hook. So it is re-routed the way the
+    # chibi's already is: out past the left leg and then across in FRONT of the
+    # apron, which is the Stoker's fault 9 in general form - never put a chain
+    # inside another object's column in the silhouette.
+    run = [end, Vector((-0.62, -0.30, 0.46)), Vector((-0.10, -0.62, 0.52)),
+           Vector((0.60, -0.72, 0.86)), Vector((1.10, -0.66, 1.16))]
+    _dragrun(P, run, tube=0.046)
     return P
 
 
@@ -380,16 +558,16 @@ BUILDERS = {
 # =====================================================================
 
 CANON.update({
-    "sexton":   ("The Sexton", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
+    "sexton":   ("Gravrik", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
                  "crypt", "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
                  0.85, "A spade is working somewhere in the dark."),
-    "porter":   ("The Porter", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
+    "porter":   ("Drudgewall", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
                  "keep", "IT BARS THE WAY - it drops a leaf across the door: no retreat, no help",
                  0.45, "A bar has dropped behind you."),
-    "tallyman": ("The Tallyman", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
+    "tallyman": ("Velmok", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
                  "treasury", "IT TAKES AND LEAVES - it lifts your gear, wears it and withdraws",
                  0.20, "Something is counting what you carry."),
-    "cook":     ("The Cook", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
+    "cook":     ("Blisterhand", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
                  "mess", "IT KEEPS THE PACK ALIVE - the pot heals the room; spill the pot",
                  0.60, "The pot is on."),
 })
@@ -481,12 +659,31 @@ def sexton():
     limb(P, [(0.27, -0.26, 1.44), (0.46, -0.30, 1.14), (0.58, -0.28, 0.86)], 0.072, 0.054)
     limb(P, [(-0.27, -0.26, 1.44), (-0.10, -0.34, 1.10), (0.20, -0.32, 0.86)], 0.072, 0.054)
     limb(P, [(0.66, -0.26, 1.08), (0.94, -0.30, 0.40)], 0.055, 0.048, 'bone')
-    P.raw(aim(L.box(0.40, 0.065, 0.50), (1.04, -0.32, 0.18), (0.36, -0.06, 1.0)), 'bone')
-    P.raw(aim(L.cone(0.21, 0.015, 0.15, 4), (1.11, -0.33, 0.00), (0.36, -0.06, 1.0)), 'bone')
+    # *** FOOT-PLANE PASS, CAUSE ONE OF TWO: THE SPADE DIGS PAST THE FLOOR. ***
+    # Both blade pieces are aimed (0.36,-0.06,1.0) - raked 20 deg off vertical -
+    # and a tilted box/cone does not sit on its own loc.z: the blade's low
+    # corner reached 66.0 mm and the point's base circle 72.0 mm BELOW z=0.
+    # minibossgen grounds the merged body on its global minimum, so that buried
+    # depth became the floor and lifted the only things this builder declares at
+    # 0.0 - the man's two boots at :421 - 72.0 mm into the air. SPADE_Z lifts the
+    # blade AND the point together so the point lands AT z=0 and the spade still
+    # stands in the cut: one lift, not two nudges, so the pieces cannot drift
+    # apart, and the haft above only gains overlap, never a gap.
+    SPADE_Z = 0.0720
+    P.raw(aim(L.box(0.40, 0.065, 0.50), (1.04, -0.32, 0.18 + SPADE_Z),
+              (0.36, -0.06, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.21, 0.015, 0.15, 4), (1.11, -0.33, 0.00 + SPADE_Z),
+              (0.36, -0.06, 1.0)), 'bone')
     # a fresh spoil heap at his feet on the spade side - there is a hole here
+    # CAUSE TWO OF TWO, MEASURED ONLY AFTER CAUSE ONE WAS FIXED: each lump is a
+    # flattened ellipsoid of z half-height r*0.42 sitting at loc.z r*0.20, so
+    # 0.22r of every lump was UNDER the floor - 66.0 mm on the big one - and
+    # with the spade seated the heap became the new global minimum. loc.z r*0.42
+    # rests each lump ON the ground and keeps the flattened spill read (0.42 of
+    # its own radius in z, so it is still a low spread heap, not a ball).
     for k, (dx, dy, r) in enumerate(((1.02, -0.62, 0.30), (1.26, -0.34, 0.22),
                                      (0.86, -0.86, 0.17))):
-        P.add(L.sphere(r, r * 0.86, r * 0.42, 10, 7), 'dark', loc=(dx, dy, r * 0.20))
+        P.add(L.sphere(r, r * 0.86, r * 0.42, 10, 7), 'dark', loc=(dx, dy, r * 0.42))
     return P
 
 
@@ -778,22 +975,22 @@ BUILDERS.update({
 # =====================================================================
 
 CANON.update({
-    "sluicekeeper": ("The Sluicekeeper", 2.50, (0.46, 0.54, 0.56), (0.40, 0.80, 1.00),
+    "sluicekeeper": ("Rothenwell", 2.50, (0.46, 0.54, 0.56), (0.40, 0.80, 1.00),
                      "flooded", "IT RAISES THE WATER - it winds the sluice open a step at a time",
                      0.95, "The water is coming up."),
-    "sower":        ("The Sower", 2.25, (0.72, 0.68, 0.44), (0.55, 1.00, 0.42),
+    "sower":        ("Thorncast", 2.25, (0.72, 0.68, 0.44), (0.55, 1.00, 0.42),
                      "grassland", "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
                      0.40, "Something is broadcasting seed."),
-    "snarer":       ("The Snarer", 2.30, (0.50, 0.42, 0.32), (0.80, 0.90, 0.40),
+    "snarer":       ("Griplash", 2.30, (0.50, 0.42, 0.32), (0.80, 0.90, 0.40),
                      "wood", "IT HAS ALREADY SET THE ROOM - it drives you onto its own lines",
                      0.55, "The lines were here before you."),
-    "stoker":       ("The Stoker", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+    "stoker":       ("Cindrak", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
                      "firepit", "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
                      0.70, "The pit has been fed."),
-    "bellman":      ("The Bellman", 2.70, (0.66, 0.68, 0.72), (0.80, 0.92, 1.00),
+    "bellman":      ("Tolburn", 2.70, (0.66, 0.68, 0.72), (0.80, 0.92, 1.00),
                      "fogbound", "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
                      0.65, "A bell, and not where you thought."),
-    "boiler":       ("The Boiler", 2.10, (0.86, 0.60, 0.34), (1.00, 0.78, 0.60),
+    "boiler":       ("Scaldmere", 2.10, (0.86, 0.60, 0.34), (1.00, 0.78, 0.60),
                      "confection", "IT POURS AND IT SETS - the floor hardens around your feet",
                      0.25, "Something is pouring."),
 })
@@ -912,10 +1109,18 @@ def sower():
     P.add(aim(L.cone(0.27, 0.25, 0.045, 16), (X - 0.14, -0.36, 1.30), (0.22, 0.0, 1.0)), 'glow')
     P.raw(L.membrane([(X + 0.16, -0.24, 1.44), (X + 0.26, -0.18, 1.40),
                       (X - 0.30, -0.44, 0.96), (X - 0.40, -0.48, 1.00)], 0.035), 'dark')
-    # THE CAST: the far arm thrown wide and open, low, palm turned out
+    # THE CAST: the far arm thrown wide and open, low, palm turned out.
+    # 18 Nov - THE ARM IS 'dark' NOW, AND THE CAUSE WAS IN THE DEFAULTS. The
+    # team lead found by eye that from the side the forearm, hand and hopper
+    # read as ONE PALE MASS. minibosses.limb() defaults to slot 'bone', so the
+    # torso, this arm, the hopper and the hat were ALL 'bone' - they could not
+    # separate by tone because they were the same material. Measured, not
+    # guessed: tools/art/_mb_landmark.py put the cast hand's boundary step at
+    # 0.004 on the three_quarter view. A leather sleeve and glove on the
+    # casting arm is also what the job wants - it is the hand in the thorns.
     limb(P, [(X - 0.25, -0.12, 1.40), (X - 0.72, -0.26, 1.18), (X - 1.06, -0.34, 1.02)],
-         0.085, 0.060)
-    P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'body', loc=(X - 1.12, -0.36, 0.98))
+         0.085, 0.060, 'dark')
+    P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'dark', loc=(X - 1.12, -0.36, 0.98))
     for k in range(4):   # four seeds already in the air, clear of the hand
         P.add(L.sphere(0.042, 0.042, 0.042, 7, 5), 'glow',
               loc=(X - 1.30 - k * 0.17, -0.40 - k * 0.04, 0.92 - k * 0.14))
@@ -928,7 +1133,17 @@ def sower():
                                             (0.30, 0.56, 1.46, 0.14))):
         base = (X + dx, dy, 0.0)
         tip = (X + dx + bend, dy + 0.10, hh)
-        limb(P, arc(base, tip, 0.0, 6, side=bend * 0.8), 0.075, 0.022, 'bone')
+        # *** FOOT-PLANE PASS: A RAKED STEM'S BOTTOM RING TILTS BELOW ITS BASE. ***
+        # limb() sweeps each ring PERPENDICULAR to the polyline, so a stem that
+        # leans by `bend` has its bottom ring tilted and its lowest vertex
+        # r0*sin(tilt) below the 0.0 the builder declared - 37.4, 33.8 and 23.4
+        # mm on the three shoots. minibossgen grounds on the global minimum, so
+        # the deepest of those became the floor and lifted the man's two boots
+        # (:809, the only declared contacts) 37.4 mm into the air. DERIVED, NOT
+        # DIALLED: each stem is lifted by its OWN first-segment tilt, so adding
+        # or re-bending a shoot cannot re-open this.
+        limb(P, seat(arc(base, tip, 0.0, 6, side=bend * 0.8), 0.075),
+             0.075, 0.022, 'bone')
         for k in range(5):      # thorns, alternating, out of the stem's own line
             t = 0.30 + 0.16 * k
             z = hh * t
@@ -1042,16 +1257,34 @@ def stoker():
     P.add(L.sphere(0.115, 0.115, 0.045, 12, 6), 'glow', loc=(FX - 0.07, 0.24, 2.23))
     limb(P, [(FX + 0.14, 0.18, 1.40), (FX + 0.02, 0.22, 1.32)], 0.050, 0.040, 'bone')
     # THE RAKE - 1.9 m of haft running down into the floor on his right
+    # *** FOOT-PLANE PASS, ONE THING: THE RAKE RIDES UP TO THE FLOOR. ***
+    # The teeth are aimed (0.42,-0.10,-1.0), unit z -0.9181, 0.20 long from a
+    # base at z=0.10 - so each tip reached 83.6 mm BELOW z=0 and the head's low
+    # corner another 9.7 mm under. "Biting the floor" was 42% of each tooth
+    # BURIED, and because minibossgen grounds the merged body on its global
+    # minimum, that buried depth became the floor and lifted the only two
+    # things this builder declares at 0.0 - the man's two boots - 83.6 mm into
+    # the air. RAKE_Z lifts the whole assembly together (haft end, head, teeth)
+    # so the tips land AT z=0 and the rake still bites: one lift, not three
+    # independent nudges, so the haft, head and teeth cannot drift apart.
+    RAKE_Z = 0.0836
     haft = [Vector((X + 0.36, -0.20, 1.52)), Vector((X + 0.92, -0.42, 0.98)),
-            Vector((X + 1.48, -0.64, 0.42)), Vector((X + 1.78, -0.76, 0.12))]
+            Vector((X + 1.48, -0.64, 0.42)), Vector((X + 1.78, -0.76, 0.12 + RAKE_Z))]
     P.raw(L.tube(haft, [0.046, 0.040, 0.036, 0.034], 8), 'bone')
-    P.add(L.box(0.52, 0.10, 0.07), 'dark', loc=(X + 1.80, -0.78, 0.11), rot=(0.0, -0.34, 0.0))
+    P.add(L.box(0.52, 0.10, 0.07), 'dark', loc=(X + 1.80, -0.78, 0.11 + RAKE_Z),
+          rot=(0.0, -0.34, 0.0))
     for k in range(4):                        # four short teeth, biting the floor
-        P.raw(aim(L.cone(0.030, 0.0, 0.20, 6), (X + 1.64 + k * 0.14, -0.78, 0.10),
+        P.raw(aim(L.cone(0.030, 0.0, 0.20, 6),
+                  (X + 1.64 + k * 0.14, -0.78, 0.10 + RAKE_Z),
                   (0.42, -0.10, -1.0)), 'dark')
     limb(P, [(X + 0.26, -0.10, 1.46), (X + 0.40, -0.22, 1.50)], 0.074, 0.054)
     # the fuel basket at his heels - the thing the party has to get to
-    P.raw(aim(L.cone(0.34, 0.40, 0.42, 14, cap=False), (X - 0.30, 0.52, 0.0),
+    # SECOND CAUSE ON THIS BODY, MEASURED SEPARATELY FROM THE RAKE: the basket
+    # is deliberately LEANING (0.0, 0.08, 1.0), and a tilted base circle does
+    # not sit on its own z - its low edge dropped 26.4 mm under the floor. Keep
+    # the lean, which is the make-do read; seat the low edge ON the floor.
+    BASKET_Z = 0.0264
+    P.raw(aim(L.cone(0.34, 0.40, 0.42, 14, cap=False), (X - 0.30, 0.52, BASKET_Z),
               (0.0, 0.08, 1.0)), 'bone')
     for k in range(3):
         P.add(L.box(0.10, 0.10, 0.34), 'dark', loc=(X - 0.34 + k * 0.10, 0.54, 0.46),
@@ -1211,15 +1444,15 @@ BUILDERS.update({
 #   head about 1.09 across, i.e. the head is 55% of the whole height.
 # ===========================================================================
 CANON.update({
-    "drillmaster_chibi": ("The Drillmaster (chibi)", 2.20, (0.86, 0.72, 0.38),
+    "drillmaster_chibi": ("Karvok (chibi)", 2.20, (0.86, 0.72, 0.38),
                           (1.00, 0.78, 0.34), "barracks",
                           "IT SUMMONS - rebuilt in the game's own proportions",
                           0.15, "Someone is beating the muster."),
-    "drillmaster_tall": ("The Drillmaster (3.60m)", 3.60, (0.86, 0.72, 0.38),
+    "drillmaster_tall": ("Karvok (3.60m)", 3.60, (0.86, 0.72, 0.38),
                          (1.00, 0.78, 0.34), "barracks",
                          "IT SUMMONS - same body, the recommended in-game height",
                          0.15, "Someone is beating the muster."),
-    "drillmaster_chibi_tall": ("The Drillmaster (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
+    "drillmaster_chibi_tall": ("Karvok (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
                                (1.00, 0.78, 0.34), "barracks",
                                "IT SUMMONS - both changes together",
                                0.15, "Someone is beating the muster."),
@@ -1332,7 +1565,7 @@ BUILDERS.update({
 # thing. The height in bestiary.gd is the GAME BUILD lane's number, not mine.
 # ===========================================================================
 CANON.update({
-    "stoker_chibi": ("The Stoker (chibi)", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+    "stoker_chibi": ("Cindrak (chibi)", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
                      "firepit",
                      "IT IS ONLY AS BIG AS THE FIRE - rebuilt in the game's own proportions",
                      0.70, "The pit has been fed."),
@@ -1507,7 +1740,7 @@ BUILDERS.update({"stoker_chibi": stoker_chibi})
 #     ('bone') and competes with the face. The belt keeps the hip read instead.
 # ===========================================================================
 CANON.update({
-    "gaoler_chibi": ("The Gaoler (chibi)", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
+    "gaoler_chibi": ("Shacklemaw (chibi)", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
                      "prison",
                      "IT DRAGS - rebuilt in the game's own proportions",
                      0.80, "A chain is paying out in the dark."),
@@ -1622,23 +1855,19 @@ def gaoler_chibi():
     P.raw(L.tube(hook, [0.085, 0.082, 0.078, 0.072, 0.068, 0.062,
                         0.056, 0.050, 0.042, 0.032, 0.016], 8), 'bone')
     P.add(L.sphere(0.085, 0.085, 0.085, 9, 6), 'dark', loc=(1.26, -0.52, 0.93))
-    # THE CHAIN: the flat spiral on the floor is the thing nothing else in the
-    # dungeon has and it is unchanged in idea, moved back and out so the chibi
-    # boots do not stand in it.
-    coil = L.helix(2.6, 0.055, 0.14, 0.92, 0.26, steps=84, phase=0.4)
-    coil = [Vector((p.x - 0.92, p.y + 0.56, p.z)) for p in coil]
-    P.raw(L.tube(coil, 0.055, 6), 'dark')
-    for i in range(0, len(coil) - 3, 9):
-        P.add(L.sphere(0.072, 0.072, 0.034, 8, 6), 'dark',
-              loc=(coil[i].x, coil[i].y, coil[i].z + 0.016))
-    # the run from the coil up to the shank, routed OUTSIDE the left boot and
-    # then across in FRONT of the figure at knee height - the Stoker's fault 9
-    # in general form: never put a limb or a chain inside another object's
-    # column in the front silhouette.
-    run = [Vector((-0.66, 0.54, 0.14)), Vector((-0.52, -0.18, 0.16)),
-           Vector((0.06, -0.60, 0.22)), Vector((0.70, -0.66, 0.50)),
+    # THE CHAIN: a HEAP on the floor, back and out so the chibi boots do not
+    # stand in it. The flat spiral it replaces is kept runnable as
+    # DRAG_HEAP_FLAT; see _dragheap for why it had to go.
+    end = _dragheap(P, -0.98, 0.62, tube=0.055, link=(0.072, 0.072, 0.034))
+    # the run from the heap's free end up to the shank, still routed OUTSIDE
+    # the left boot and then across in FRONT of the figure - the Stoker's fault
+    # 9 in general form: never put a limb or a chain inside another object's
+    # column in the front silhouette. Its first point is the heap's end, not a
+    # literal, so re-shaping the heap can never leave the chain in two pieces.
+    run = [end, Vector((-0.56, -0.10, 0.40)),
+           Vector((0.06, -0.56, 0.34)), Vector((0.70, -0.64, 0.56)),
            Vector((1.12, -0.56, 0.84))]
-    P.raw(L.tube(run, 0.052, 6), 'dark')
+    _dragrun(P, run, tube=0.052)
     # THE KEYS on the right hip - plain working kit, and small on purpose so
     # they do not become a second pale thing competing with the face.
     ring = [Vector((0.40 + 0.10 * math.cos(TAU * i / 14.0), -0.34,
@@ -1699,7 +1928,7 @@ BUILDERS.update({"gaoler_chibi": gaoler_chibi})
 # its own grip. Authored at the same 2.60 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "snuffer_chibi": ("The Snuffer (chibi)", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
+    "snuffer_chibi": ("Duskhollow (chibi)", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
                       "shrine",
                       "IT TAKES THE LIGHT - rebuilt in the game's own register",
                       0.90, "The nearest lamp has gone out."),
@@ -1852,7 +2081,7 @@ BUILDERS.update({"snuffer_chibi": snuffer_chibi})
 # Authored at the same 2.45 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "sexton_chibi": ("The Sexton (chibi)", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
+    "sexton_chibi": ("Gravrik (chibi)", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
                      "crypt",
                      "IT WILL NOT STAY DOWN - rebuilt in the game's own register",
                      0.85, "A spade is working somewhere in the dark."),
@@ -2033,7 +2262,7 @@ BUILDERS.update({"sexton_chibi": sexton_chibi})
 # Authored at the same 2.30 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "porter_chibi": ("The Porter (chibi)", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
+    "porter_chibi": ("Drudgewall (chibi)", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
                      "keep",
                      "IT BARS THE WAY - rebuilt in the game's own register",
                      0.45, "A bar has dropped behind you."),
@@ -2228,7 +2457,7 @@ BUILDERS.update({"porter_chibi": porter_chibi})
 # Authored at the same 2.15 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "tallyman_chibi": ("The Tallyman (chibi)", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
+    "tallyman_chibi": ("Velmok (chibi)", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
                        "treasury",
                        "IT TAKES AND LEAVES - rebuilt in the game's own register",
                        0.20, "Something is counting what you carry."),
@@ -2507,7 +2736,7 @@ BUILDERS.update({"tallyman_chibi": tallyman_chibi})
 # Authored at the same 2.05 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "cook_chibi": ("The Cook (chibi)", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
+    "cook_chibi": ("Blisterhand (chibi)", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
                    "mess",
                    "IT KEEPS THE PACK ALIVE - rebuilt in the game's own register",
                    0.60, "The pot is on."),
@@ -2785,7 +3014,7 @@ BUILDERS.update({"cook_chibi": cook_chibi})
 # `dark`, so the leg has a value break in it at the ankle where the real one is.
 # ===========================================================================
 CANON.update({
-    "sluicekeeper_chibi": ("The Sluicekeeper (chibi)", 2.50, (0.46, 0.54, 0.56),
+    "sluicekeeper_chibi": ("Rothenwell (chibi)", 2.50, (0.46, 0.54, 0.56),
                            (0.40, 0.80, 1.00), "flooded",
                            "IT RAISES THE WATER - rebuilt in the game's own register",
                            0.95, "The water is coming up."),
@@ -3157,7 +3386,7 @@ BUILDERS.update({"sluicekeeper_chibi": sluicekeeper_chibi})
 # breaks in value at the ankle, where a real one does, in all three views.
 # ===========================================================================
 CANON.update({
-    "sower_chibi": ("The Sower (chibi)", 2.40, (0.72, 0.68, 0.44),
+    "sower_chibi": ("Thorncast (chibi)", 2.40, (0.72, 0.68, 0.44),
                     (0.55, 1.00, 0.42), "grassland",
                     "IT PLANTS THE GROUND AGAINST YOU - rebuilt in the game's own register",
                     0.40, "Something is broadcasting seed."),
@@ -3401,7 +3630,7 @@ BUILDERS.update({"sower_chibi": sower_chibi})
 # at the waist cannot show a corner from any azimuth.
 # ===========================================================================
 CANON.update({
-    "boiler_chibi": ("The Boiler (chibi)", 2.45, (0.86, 0.60, 0.34),
+    "boiler_chibi": ("Scaldmere (chibi)", 2.45, (0.86, 0.60, 0.34),
                      (1.00, 0.78, 0.60), "confection",
                      "IT POURS AND IT SETS - rebuilt in the game's own register",
                      0.25, "Something is pouring."),
@@ -3728,7 +3957,7 @@ BUILDERS.update({"boiler_chibi": boiler_chibi})
 # 26. The beating pole, and the man's whole axis with it, is on 45.
 # ===========================================================================
 CANON.update({
-    "snarer_chibi": ("The Snarer (chibi)", 2.45, (0.50, 0.42, 0.32),
+    "snarer_chibi": ("Griplash (chibi)", 2.45, (0.50, 0.42, 0.32),
                      (0.80, 0.90, 0.40), "wood",
                      "IT HAS ALREADY SET THE ROOM - rebuilt in the game's own register",
                      0.55, "The lines were here before you."),
@@ -4041,7 +4270,7 @@ BUILDERS.update({"snarer_chibi": snarer_chibi})
 # =====================================================================
 
 CANON.update({
-    "jointer": ("The Jointer", 2.25, (0.60, 0.44, 0.28), (1.00, 0.92, 0.72),
+    "jointer": ("Halvrek", 2.25, (0.60, 0.44, 0.28), (1.00, 0.92, 0.72),
                 "workshop",
                 "IT COMES APART AND BOTH HALVES KEEP WORKING - drive the pin or break it and there are two",
                 0.35, "It is pinned together."),
@@ -4250,7 +4479,7 @@ BUILDERS.update({"jointer": jointer})
 # =====================================================================
 
 CANON.update({
-    "quartermaster": ("The Quartermaster", 2.35, (0.64, 0.58, 0.46), (0.92, 0.84, 0.46),
+    "quartermaster": ("Wardgrim", 2.35, (0.64, 0.58, 0.46), (0.92, 0.84, 0.46),
                       "barracks",
                       "IT ARMS THE ROOM - everything else in here takes a weapon off its sheaf",
                       0.50, "Something is handing out arms."),
@@ -4268,10 +4497,31 @@ def _gear_mesh(stem):
     logs - so the spears this thing hands out are the same spears the heroes
     carry, which is the point of a quartermaster.
 
-    Returns (verts, faces) normalised to UNIT LENGTH about the grip, shaft
-    along +Z, or None when the file or the importer refuses. A missing pack
-    must never take a body out of the sheet - the caller falls back to
-    procedural geometry and says so in the report.
+    Returns (verts, faces) normalised to UNIT LENGTH AND RE-ORIGINED SO THE
+    BUTT IS AT z=0, shaft along +Z, or None when the file or the importer
+    refuses. A missing pack must never take a body out of the sheet - the
+    caller falls back to procedural geometry and says so in the report.
+
+    PASS 4, AND IT IS THE CAUSE OF FOUR SEPARATE FAULTS, NOT ONE. This used to
+    scale to unit length and STOP, keeping the pack's own origin - measured:
+    spear_A sat at z -0.3289 .. +0.6711 of its own length, shield_A at -0.5713
+    .. +0.4287. The docstring said "about the grip" and _lay's says "carry a
+    unit-length part to `butt`", and NEITHER WAS TRUE: _lay was putting the
+    pack's arbitrary mid-mesh origin at the point every call site had named as
+    the butt. So each part was sunk 0.33-0.57 of its own length back along its
+    own direction. That one error produced all of these:
+      - the three ground shields were buried to past their centres, dragging
+        the global minimum to -0.3172 and lifting the body's declared feet
+        317.2 mm off the floor - the worst float in the set;
+      - the sheaf read as a FEATHER CROWN of heads again, the exact fault pass
+        2 was written to fix: two thirds of each shaft was inside the torso;
+      - the offered spear's hand was NOT at the shaft's midpoint, though pass 2
+        computed that midpoint to three decimals - the arithmetic was right and
+        the geometry it described was 0.66 m away;
+      - the two floor spares ran through the shield stack after pass 3 moved
+        them clear of it on paper.
+    Re-origining to the butt is what the call sites always meant. It is one
+    change and it is in the loader, not in four hand-tuned numbers.
     """
     if stem in _PACK_CACHE:
         return _PACK_CACHE[stem]
@@ -4316,7 +4566,9 @@ def _gear_mesh(stem):
                 span = max(zs) - min(zs)
                 if span > 1e-6:
                     k = 1.0 / span
-                    out = ([Vector((v.x * k, v.y * k, v.z * k)) for v in verts], faces)
+                    z0 = min(zs) * k
+                    out = ([Vector((v.x * k, v.y * k, v.z * k - z0))
+                            for v in verts], faces)
     except Exception:
         out = None
     _PACK_CACHE[stem] = out
@@ -4541,7 +4793,7 @@ BUILDERS.update({"quartermaster": quartermaster})
 # =====================================================================
 
 CANON.update({
-    "loader": ("The Loader", 2.65, (0.58, 0.52, 0.42), (0.86, 0.94, 0.58),
+    "loader": ("Millstone", 2.65, (0.58, 0.52, 0.42), (0.86, 0.94, 0.58),
                "mess",
                "IT WEIGHS YOU DOWN - it loads you, and you fight slower until you drop it",
                0.75, "Something is putting a load on you."),
@@ -4786,7 +5038,7 @@ BUILDERS.update({"loader": loader})
 #     is: split grey hurdles that have stood out in a wet meadow for years.
 #   - Height 2.55 was free (2.00-2.70 in use, 2.55 the gap).
 CANON.update({
-    "hurdleman": ("The Hurdleman", 2.55, (0.58, 0.60, 0.50), (0.72, 0.90, 0.68),
+    "hurdleman": ("Bramblejaw", 2.55, (0.58, 0.60, 0.50), (0.72, 0.90, 0.68),
                   "grassland",
                   "IT CUTS THE ROOM IN TWO - it plants a hurdle through your line and you "
                   "fight it two and two",
@@ -5167,7 +5419,7 @@ BUILDERS.update({"hurdleman": hurdleman})
 #     a beam at chest height and reads SHORTER than the Bellman he is taller
 #     than, which is the point of measuring the body rather than the creature.
 CANON.update({
-    "tanner": ("The Tanner", 2.75, (0.78, 0.72, 0.56), (1.00, 0.95, 0.72),
+    "tanner": ("Flenscar", 2.75, (0.78, 0.72, 0.56), (1.00, 0.95, 0.72),
                "flooded",
                "IT WILL NOT TAKE THE SAME BLOW TWICE - what hurts it once it pegs a fresh "
                "hide over; change your answer or stop hurting it",
@@ -5461,7 +5713,7 @@ BUILDERS.update({"tanner": tanner})
 #     filled, never opened and never fought with has no scars on it. Mr. E's
 #     rule 2 - condition is the receipt - and this receipt reads UNTOUCHED.
 CANON.update({
-    "reeve": ("The Reeve", 1.95, (0.74, 0.70, 0.58), (1.00, 0.84, 0.40),
+    "reeve": ("Lockwarden", 1.95, (0.74, 0.70, 0.58), (1.00, 0.84, 0.40),
               "keep",
               "IT TAKES THE HAUL - while it stands the floor pays its box and not you; "
               "break the box or walk out of here with nothing",
@@ -5616,7 +5868,16 @@ def reeve():
     _ring(P, (BX + 0.70, BY + 0.10, 0.52), 0.11, axis='x', slot='dark', rad=0.030, n=12)
     ch = arc((BX + 0.78, BY + 0.10, 0.50), (BX + 0.96, BY + 0.42, 0.10), -0.13, 7)
     P.raw(L.tube(ch, [0.034] * len(ch), 7), 'dark')
-    P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX + 0.96, BY + 0.42, 0.17),
+    # *** PASS 9, ONE THING: THE ANCHOR SPIKE STOPS AT THE FLOOR. ***
+    # cone() bases at z=0 and tips at +h; rot=pi about X flips it point-DOWN,
+    # so loc z had to be the FULL height, not half of it. At 0.17 the point
+    # reached 170 mm BELOW z=0 - and minibossgen grounds the merged body on its
+    # global minimum, so that one 9-vertex spike became the floor and lifted
+    # everything this builder honestly placed at 0.0 - the strongbox's four
+    # feet and the man's two boots - 170 mm INTO THE AIR. Worst of the eleven
+    # the foot-plane audit found, by more than double. A stake driven flush
+    # reads the same from every camera above the floor and costs nothing.
+    P.add(L.cone(0.070, 0.0, 0.34, 8), 'dark', loc=(BX + 0.96, BY + 0.42, 0.34),
           rot=(math.pi, 0.0, 0.0))
     _span("chain", _i_chain)
 
@@ -5802,7 +6063,7 @@ BUILDERS.update({"reeve": reeve})
 #     docs/art/ASSET_SOURCES.md before this run; it is now. Falls back to
 #     procedural geometry and SAYS SO in the report.
 CANON.update({
-    "tapster": ("The Tapster", 2.80, (0.72, 0.64, 0.46), (0.52, 1.00, 0.72),
+    "tapster": ("Dregsallow", 2.80, (0.72, 0.64, 0.46), (0.52, 1.00, 0.72),
                 "firepit",
                 "IT DRINKS WHAT YOU BROUGHT - every brew raised in this room goes into its "
                 "tun and not into the hero; run it dry or your line breaks and walks out",
@@ -6186,7 +6447,7 @@ BUILDERS.update({"tapster": tapster})
 # theme. PRISON HAS EXACTLY ONE BODY BEHIND IT - the Gaoler - so every miniboss
 # a prison floor has ever shown is the same creature.
 CANON.update({
-    "pressman": ("The Pressman", 2.85, (0.62, 0.60, 0.56), (0.96, 0.74, 0.30),
+    "pressman": ("Crushwright", 2.85, (0.62, 0.60, 0.56), (0.96, 0.74, 0.30),
                  "prison",
                  "IT PRESSES YOUR FALLEN - a hero that goes down in this room is "
                  "collared and stood back up on ITS side; get them up, or break the "
@@ -6437,7 +6698,7 @@ BUILDERS.update({"pressman": pressman})
 
 # ------------------------------- 23 THE STRICKLER: a beam, a measure and a line
 CANON.update({
-    "strickler": ("The Strickler", 2.55, (0.70, 0.66, 0.52), (0.86, 0.92, 1.00),
+    "strickler": ("Murkspit", 2.55, (0.70, 0.66, 0.52), (0.86, 0.92, 1.00),
                   "treasury",
                   "IT STRIKES YOU LEVEL - while it stands, your best hero is scraped "
                   "down to the measure of your worst; your strongest is no answer, so "
@@ -6925,7 +7186,7 @@ def apply_overrides(key, mats):
 
 
 CANON.update({
-    "dyer": ("The Dyer", 2.60, (0.16, 0.32, 0.72), (0.26, 0.46, 1.00),
+    "dyer": ("Venomshade", 2.60, (0.16, 0.32, 0.72), (0.26, 0.46, 1.00),
              "workshop",
              "IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK - it slings the vat, "
              "and while the stain is wet it will walk past everyone else to reach "
@@ -7301,7 +7562,7 @@ BUILDERS.update({"dyer": dyer})
 # in an old colour. Verdigris is the one working-class trade whose PRODUCT is
 # green: copper hung over vinegar, scraped off as pigment, and a man who has
 # done it for twenty years is green to the elbow.
-OVERRIDE_ALLOWED = {"dyer", "greener"}
+OVERRIDE_ALLOWED = {"dyer", "greener", "rammer"}
 
 OVERRIDE.update({
     "greener": {
@@ -7389,7 +7650,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "greener": ("The Greener", 2.50, (0.12, 0.54, 0.40), (0.20, 0.92, 0.64),
+    "greener": ("Corrodan", 2.50, (0.12, 0.54, 0.40), (0.20, 0.92, 0.64),
                 "workshop",
                 "IT GREENS YOUR IRON - every blow landed on it leaves the "
                 "weapon a little more eaten, and a bitten weapon bites less; "
@@ -8129,7 +8390,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "moulder": ("The Moulder", 2.90, (0.62, 0.58, 0.52), (1.00, 0.56, 0.20),
+    "moulder": ("Ashform", 2.90, (0.62, 0.58, 0.52), (1.00, 0.56, 0.20),
                 "firepit",
                 "IT TAKES YOUR SHAPE - it presses one of your heroes into its "
                 "sand bed and pours, and what stands up out of the box fights "
@@ -8198,8 +8459,12 @@ def moulder():
     # the stand it sits on - trestle, not a plinth. Furniture that says so.
     for sx in (-1, 1):
         for sy in (-1, 1):
-            limb(P, [(FX + sx * 0.52, FY + sy * 0.26, 0.00),
-                     (FX + sx * 0.44, FY + sy * 0.22, 0.52 - BOX_DROP)], 0.062, 0.052, 'dark')
+            # CAUSE TWO OF THREE, measured only after the legs were seated:
+            # the trestle's four splayed legs are raked too, 21.7 mm under
+            # each - and with the man's legs fixed, THIS became the floor.
+            limb(P, seat([(FX + sx * 0.52, FY + sy * 0.26, 0.00),
+                          (FX + sx * 0.44, FY + sy * 0.22, 0.52 - BOX_DROP)],
+                         0.062), 0.062, 0.052, 'dark')
     P.add(L.box(1.22, 0.70, 0.075), 'dark', loc=(FX, FY, 0.56 - BOX_DROP))
     # the box itself: four boards and the bed inside. Open at the top.
     for sx in (-1, 1):
@@ -8329,10 +8594,16 @@ def moulder():
     i0 = len(P.items)
     # stooped over the bed: hips low, spine forward into -Y, head LOW and well
     # clear of the cast's head so the two never read as one mass.
-    limb(P, [(HX - 0.14, HY + 0.04, 0.00), (HX - 0.17, HY - 0.02, 0.42),
-             (HX - 0.12, HY + 0.02, 0.86)], 0.126, 0.105, 'body')
-    limb(P, [(HX + 0.16, HY + 0.06, 0.00), (HX + 0.20, HY - 0.04, 0.44),
-             (HX + 0.13, HY + 0.03, 0.88)], 0.126, 0.105, 'body')
+    # FOOT-PLANE PASS, CAUSE ONE OF THREE: both legs are raked forward off
+    # vertical, so their bottom rings dipped 30.0 and 19.9 mm under the floor -
+    # invisible, because the boots at :8387 cover the leg ends, but the deeper
+    # of the two became the body's global minimum and lifted those boots (the
+    # only declared contacts) 30.0 mm into the air. seat() derives each lift
+    # from the leg's own first segment; the ends stay well inside the boots.
+    limb(P, seat([(HX - 0.14, HY + 0.04, 0.00), (HX - 0.17, HY - 0.02, 0.42),
+                  (HX - 0.12, HY + 0.02, 0.86)], 0.126), 0.126, 0.105, 'body')
+    limb(P, seat([(HX + 0.16, HY + 0.06, 0.00), (HX + 0.20, HY - 0.04, 0.44),
+                  (HX + 0.13, HY + 0.03, 0.88)], 0.126), 0.126, 0.105, 'body')
     for sx in (-1, 1):
         P.add(L.box(0.30, 0.34, 0.095), 'body', loc=(HX + sx * 0.15, HY - 0.08, 0.048))
     limb(P, [(HX, HY + 0.02, 0.88), (HX + 0.02, HY - 0.14, 1.26),
@@ -8342,6 +8613,22 @@ def moulder():
           rot=(0.22, 0.0, 0.0))
     # the head, and the eyes are the only light ON him
     P.add(L.sphere(0.165, 0.185, 0.175, 13, 9), 'body', loc=(HX + 0.05, HY - 0.38, 1.64))
+    # *** THE NECK CLOTH - 18 Nov 20:5x CT, AND IT IS A MEASURED FAULT, NOT A
+    # *** DECORATION. The landmark test named "moulder head" is aimed at THIS
+    # man's head, not at the cast's pale egg - I checked the mask picture
+    # rather than the row label, and _head_front_mask.png is the little
+    # foundryman. His head, cap and the apron and shoulders under it are ALL
+    # 'body', the darkest material in this register (lum 0.072), so the head
+    # had no lower boundary at all: median local step 0.033 front, 0.036 on
+    # the three_quarter, with 58% and 60% of the outline flatter than the
+    # threshold. In the picture he is a black blob with two orange eyes.
+    # THE STEP GOES WHERE THE BOUNDARY IS. 'dark' on this body is the rammed
+    # sand - grey-buff, lum 0.243 - and a man who has been ramming sand all
+    # shift has it on his neck cloth. It is what the job wants and it is the
+    # only material on him that can carry a step against his own soot.
+    # NOT A HAT: a cap would separate from the SKY, which was never the fault.
+    P.add(aim(L.cone(0.215, 0.145, 0.105, 14), (HX + 0.045, HY - 0.32, 1.46),
+              (0.0, -0.35, 1.0)), 'dark')
     P.add(L.box(0.33, 0.30, 0.055), 'body', loc=(HX + 0.05, HY - 0.40, 1.76))
     # PASS 2, FORM CHANGE 3. At pass 1 these were r 0.030 on a 2.90 m body -
     # about ten pixels at register framing - and on both renders the man had no
@@ -8401,9 +8688,13 @@ def moulder():
                      [0.016, 0.014], 6), 'body')
         P.add(L.box(0.055, 0.042, h), 'bone',
               loc=(x, FY - 0.47, 0.95 - BOX_DROP - h * 0.5 + 0.015 * (i % 2)))
+    # CAUSE THREE OF THREE, and the smallest: each spill lump is 0.034 half in
+    # z sitting at 0.026, so 8.0 mm of every one was under the floor. With the
+    # two limb causes fixed this was the last thing holding the body up. Seat
+    # the lumps on the ground at their own half-height.
     for i in range(6):
         P.add(L.sphere(0.105, 0.085, 0.034, 9, 6), 'dark',
-              loc=(FX - 0.50 + i * 0.22, FY - 0.52 - 0.06 * (i % 3), 0.026))
+              loc=(FX - 0.50 + i * 0.22, FY - 0.52 - 0.06 * (i % 3), 0.034))
     # PASS 2, FORM CHANGE 5 (cosmetic). One long pale stick on the floor read
     # as a SPOON on both renders. Two short broken sprues instead - what is
     # actually left when a casting is knocked off its runner.
@@ -8487,7 +8778,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "ratcatcher": ("The Ratcatcher", 2.62, (0.70, 0.60, 0.42), (1.00, 0.62, 0.22),
+    "ratcatcher": ("Skivven", 2.62, (0.70, 0.60, 0.42), (1.00, 0.62, 0.22),
                    "crypt",
                    "IT IS PAID BY THE TAIL - everything else that dies in this "
                    "room goes into the cage on its hip and it is stronger for "
@@ -8829,7 +9120,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "drover": ("The Drover", 2.44, (0.72, 0.61, 0.41), (0.86, 0.78, 0.62),
+    "drover": ("Yokebane", 2.44, (0.72, 0.61, 0.41), (0.86, 0.78, 0.62),
                "wood",
                "IT YOKES ONE OF YOU - it closes a bow of its own yoke on a "
                "hero and after that the harm you do it travels the chain: "
@@ -9206,7 +9497,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "paviser": ("The Paviser", 2.68, (0.74, 0.71, 0.63), (0.82, 0.84, 0.88),
+    "paviser": ("Shieldmaw", 2.68, (0.74, 0.71, 0.63), (0.82, 0.84, 0.88),
                 "keep",
                 "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge "
                 "post and swings it onto whoever is hurting it most, and a "
@@ -9598,7 +9889,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "fenman": ("The Fenman", 2.52, (0.30, 0.33, 0.30), (0.72, 0.84, 1.00),
+    "fenman": ("Bogwarden", 2.52, (0.30, 0.33, 0.30), (0.72, 0.84, 1.00),
                "fogbound",
                "IT TAKES WHAT STIRS - it is hooded blind and it hunts by "
                "disturbance, so it comes for whoever moved last: swing, step, "
@@ -9997,7 +10288,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "comfitmaker": ("The Comfitmaker", 2.28, (0.86, 0.82, 0.74), (1.00, 0.84, 0.46),
+    "comfitmaker": ("Brindle", 2.28, (0.86, 0.82, 0.74), (1.00, 0.84, 0.46),
                     "confection",
                     "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is "
                     "sugar-hard and nothing the party carries marks it, but it "
@@ -10260,3 +10551,2537 @@ def comfitmaker():
 
 
 BUILDERS.update({"comfitmaker": comfitmaker})
+
+
+# ===========================================================================
+# 32. THE LEECH - shrine, the second body on the theme that fires rarest.
+# ===========================================================================
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"leech"}
+
+OVERRIDE.update({
+    "leech": {
+        # THE MOULDER'S CONTRAST RULE, SEVENTH BODY RUNNING: the gown is the
+        # LIGHTER dark, the apron/boots/irons are the darker, so the man has
+        # internal structure instead of being one blob (the Paviser's fault 2
+        # and the Drover's fault 3).
+        # AND IT IS GREY, NOT BROWN, ON PURPOSE. Six of the last seven bodies
+        # are warm brown-greys; a leech's gown is undyed wool and going cool
+        # here costs nothing and separates him from the cohort at pane
+        # distance, where hue survives and detail does not.
+        'body': ((0.318, 0.312, 0.302), 0.52, 0.04),
+        # APRON, BOOTS, LEGS, THE TRIPOD IRON AND THE FLEAM. Near-black: the
+        # fleam has to read as the thinnest thing in the picture and a mid-grey
+        # rod dissolves at pane distance (the Fenman's line lesson).
+        'dark': ((0.040, 0.038, 0.040), 0.56, 0.06),
+        # THE BRASS: the basin, its rim, the coif band and the five horns.
+        # *** THE COMFITMAKER'S PASS-4 LESSON APPLIED BEFORE THE FIRST RENDER
+        # *** INSTEAD OF AFTER THE THIRD. *** An emitter is clamped at display
+        # white, so brightness has a ceiling and contrast does not: the way to
+        # make the basin read is to keep everything around it DARK, not to turn
+        # the basin up. So the brass is a mid-dark brass with a little metal in
+        # it - well below the fill in value, and in a different hue from it, so
+        # the two cannot be confused even in a grey read.
+        'bone': ((0.400, 0.330, 0.185), 0.44, 0.22),
+        # WHAT IT HAS TAKEN. The fill in the basin is the mechanic sitting in
+        # the open where a viewer can read its LEVEL - the same reason the
+        # Comfitmaker's shells are countable. Deep red at strength 7.0: this
+        # lane measured AgX taking 56% of a copper on 17 Nov, so a warm colour
+        # that must survive the view transform starts saturated and lit, not
+        # dark and diffuse.
+        # EYES KEPT IN THE DEFAULT SLOT, same reasoning as the Comfitmaker: the
+        # Fenman shipped a hood with a void where a face should be and the
+        # fault list says it read as no face at pane distance. One body learning
+        # that lesson is enough.
+        # *** PASS 3, AND IT IS THE COMFITMAKER'S LESSON RUNNING BACKWARDS. ***
+        # Pass 1 shipped (1.00,0.17,0.11) AT STRENGTH 7.0 because the
+        # Comfitmaker needed 7.0 to separate amber from cream. front.png came
+        # back with a SALMON-PINK disc and PINK eyes - no red anywhere in the
+        # picture. The cause is the same clamp, read from the other side: an
+        # emitter driven far past display white does not get brighter, it gets
+        # WHITER, because the view transform desaturates as it rolls off. The
+        # Comfitmaker's problem was an emitter too dim to separate from a pale
+        # neighbour and 7.0 was the right answer THERE. Here the neighbour is
+        # already dark brass, so all 7.0 bought was the hue burned out of the
+        # one object that carries the mechanic.
+        # THE RULE, AND I WANT IT ON THE RECORD NEXT TO THE OTHER ONE:
+        # BRIGHTNESS BUYS SEPARATION AND COSTS SATURATION. Raise it when a lit
+        # thing must beat a pale neighbour; lower it when the lit thing's
+        # COLOUR is the information. Here the level in the basin has to read as
+        # blood and not as paint, so it comes down to 1.9 and stays saturated.
+        # *** PASS 5 - CHOSEN OFF THE SWEEP, NOT OFF MY EYE. ***
+        # `_leech_glow_ab.py` renders the front lit, zeroes the emission,
+        # renders the SAME camera again and measures the pixels that MOVED,
+        # against the mean colour of the dish immediately around them. Six
+        # arms, and the numbers are in renders/art/minibosses/_leech_glow_ab.json:
+        #   arm            fill rgb255        sat    dish sat  gap     verdict
+        #   a 7.00 (pass1) (250.8,205.9,197.9) 0.211  0.260   -0.049   FAIL
+        #   b 1.90 (pass3) (230.6,145.2,129.2) 0.440  0.272    0.168   FAIL
+        #   c 1.10         (217.2, 98.2, 74.9) 0.655  0.277    0.378   PASS
+        #   d 0.85         (207.8, 72.1, 45.7) 0.780  0.284    0.496   PASS
+        #   e 0.60         (190.0, 45.7,  8.5) 0.955  0.287    0.668   PASS
+        # READ ARM a AGAIN: AT PASS 1'S SETTING THE FILL WAS LESS SATURATED
+        # THAN THE BRASS BOWL IT SITS IN. I would have shipped a basin whose
+        # contents read as a paler brass, and called the mechanic visible.
+        # Arm e is taken: deepest colour, and its value 0.745 is still well
+        # above the dish's 0.534, so it remains the brightest thing in its own
+        # zone - which is the guard against winning saturation by turning the
+        # light off.
+        'glow': ((1.000, 0.030, 0.012), 0.60),
+    },
+})
+
+CANON.update({
+    "leech": ("Gulworth", 2.32, (0.62, 0.60, 0.58), (1.00, 0.22, 0.14),
+              "shrine",
+              "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this "
+              "room mends. Every point of healing the party spends is drawn off "
+              "into the basin at its side, and the Leech spends what the basin "
+              "holds on itself, so the level in that basin is the mending you "
+              "paid for. Tip the basin and it has nothing to mend with and your "
+              "own healing comes back; leave it standing and your healer is "
+              "carrying water in a sieve",
+              0.82, "It will have the bad blood out of you, and keep it."),
+})
+ORDER = ORDER + ["leech"]
+
+
+def leech():
+    """IT WILL NOT LET A WOUND CLOSE. A stooped man in an undyed wool gown and
+    a bound linen coif, bent over a BRASS BASIN on a three-leg stand at his
+    left, a fleam in his left hand over the rim, and a fanned roll of five
+    cupping horns at his right hip.
+
+    THE IDEA, AND WHY IT IS NOT A 32ND COAT OF ONE OF THE THIRTY-ONE.
+    I parsed the ideas out of CANON this run rather than recalling them (31
+    rows, 31 distinct hooks) and I grepped the whole file for heal/mend/cure.
+    THE SET HAS EXACTLY ONE CREATURE THAT TOUCHES HEALING AND IT POINTS THE
+    OTHER WAY: the Cook KEEPS THE PACK ALIVE - its pot heals ITS side, and the
+    counter-play is to spill the pot. Nothing in the thirty-one touches the
+    PARTY'S healing at all. A room where no wound closes is a mechanic class
+    the set does not have, and it is the one class that makes a whole hero -
+    the healer - into a passenger until the party does something about it.
+
+    THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:
+      - the REEVE: `while it stands the floor pays its box and not you`. Same
+        grammar, different resource, and that matters because loot is settled
+        AFTER the fight and mending is spent DURING it. Denying the haul
+        changes what you get; denying the mending changes how you fight.
+      - the RATCATCHER is `paid by the tail` - a visible gauge that grows. So
+        is this basin, and I am saying so plainly rather than pretending the
+        shapes are unrelated. The difference is WHOSE the gauge is: the
+        Ratcatcher's tally is fed by other monsters dying and the party cannot
+        touch it, while this basin is filled with the party's OWN spent healing
+        and emptying it is the counter-play. A gauge you can empty is a
+        different fight from a gauge you can only outrun.
+      - the GREENER `greens your iron` - it degrades the thing you brought.
+        This does not touch your kit at all; it makes one ACTION worthless.
+    AND IT IS NOT THE SNUFFER, the shrine's other body, which TAKES THE LIGHT.
+    That one removes a thing the ROOM provides; this one removes a thing the
+    PARTY provides. The two can stand on the same floor without reading as a
+    pair, which is the point of putting a second body on a one-body theme.
+
+    WHY SHRINE, MEASURED OFF THE TREE AND OFF THE GAME, NOT REMEMBERED.
+    Bodies per theme counted off `assets/monsters/minibosses/*.glb` this run,
+    excluding `_chibi` and counting committed files rather than CANON rows
+    (CANON carries three Drillmaster probe variants that are not bodies):
+    workshop 4, keep 3, firepit 3, barracks 2, confection 2, crypt 2, flooded
+    2, fogbound 2, grassland 2, mess 2, prison 2, treasury 2, wood 2 - and
+    SHRINE 1. Shrine is now the ONLY theme left with a single candidate, the
+    Comfitmaker having closed confection an hour ago. `dungeon_hd.gd` rolls the
+    slot at 35 on barracks/workshop, 10 on shrine/crypt and 15 elsewhere, so
+    shrine is also the theme that fires RAREST - which is the argument for the
+    second body, not against it: when it does fire, a viewer has until now seen
+    the same creature every time.
+
+    WEAR 0.82 - A FREE RUNG, AND THE LADDER IS NOW FULL FROM 0.80 TO 0.85.
+    Parsed this run: 31 wear values from 0.05 (Reeve) to 1.00 (Hurdleman), and
+    0.82 sits between the Gaoler's 0.80 and the Sexton's 0.85. The receipt it
+    reads as: an old trade practised a long time in a wet place. Verdigrised
+    brass, a gown washed grey, a strop black with use - but the FLEAM is the
+    one bright thing, because a blade that will not cut is no use to anybody
+    and the man who owns it knows that better than he knows anything.
+
+    HEIGHT 2.32, AND THE FIT RENDER OVERTURNED MY OWN ARGUMENT FOR 1.90.
+    I argued 1.90 off the LADDER: the 0.05 rungs 1.95-2.90 are all occupied
+    (measured this run), so the only free space was below the Reeve's 1.95, and
+    1.90 reads as honest for the one creature in the set that STOOPS - a bent
+    height, not a standing one. The argument is sound and the number was wrong,
+    and the only thing that could tell me so was hero_front.png.
+    THE HERO IS 2.45 TALL. That is the raw KayKit glb at scale 1.0, measured by
+    minibossfit, because townsfolk.gd leaves hero bodies alone. So 1.90 is
+    RATIO 0.78 - the creature stood beside the knight as a SQUAT STUMP, visibly
+    shorter than the hero it is meant to be a set piece against, where the rest
+    of the set sits near or above the hero (the Comfitmaker, last hour, 0.96).
+    A miniboss a viewer reads as smaller than their own man is not a miniboss.
+    2.32 is off-rung, as the Comfitmaker's 2.28 and the Fenman's 2.52 are, and
+    it puts the creature at about 0.95 of the hero WHILE BENT - which also
+    makes the thing I wanted to say true in the picture rather than in the
+    prose: standing up straight this one would be the tallest thing in the set.
+    THE LADDER IS BOOKKEEPING. FIT IS THE ACCEPTANCE TEST, and when they
+    disagree the render wins.
+
+    SILHOUETTE INTENT - THREE ZONES ACROSS X, CLEAR IN BOTH HORIZONTAL AXES.
+    *** THE COMFITMAKER'S PASS-2 LESSON, TAKEN BEFORE A VERTEX WAS WRITTEN.
+    *** A thing that must stand clear of the body has to be clear in X AND Y,
+    *** because each camera throws one of those axes away. The basin is
+    *** outboard in x AND forward in y for exactly that reason.
+      - FAR LEFT AND FORWARD, A BASIN ON THREE LEGS: a dark brass bowl at hip
+        height with a LIT LEVEL in it. The level is the creature. The stand is
+        three thin splayed legs, so it reads as standing furniture and not as
+        part of the man.
+      - CENTRE, A MAN BENT OVER IT. THE STOOP IS THE SILHOUETTE and nothing in
+        the thirty-one has it: the register's postures are upright, hinged
+        (Paviser), split (Jointer), skirted (Bellman) and leaning (Hurdleman
+        pass 3). A back whose crest is the highest point of the creature and a
+        head BELOW that crest is a shape the set does not own.
+      - FAR RIGHT, A SHALLOW FAN OF FIVE HORNS at the hip, pointing down and
+        out. The register's other far-side objects are a thin dark V
+        (Comfitmaker), a pale vertical pole (Fenman), a lattice panel
+        (Hurdleman), a solid slab (Paviser) and a horizontal bar (Drover). A
+        fan of five short cones is none of those, and five is countable.
+
+    WHAT THE SIDE VIEW CAN AND CANNOT TEST, STATED BEFORE I RENDER IT.
+    A side camera throws x away, so the fan of horns loses its spread and the
+    basin loses its separation from the man in that axis - which is why the
+    basin also comes FORWARD 0.52 in y, where the side camera can still see
+    daylight between it and the gown. What the side view carries BETTER than
+    the front is the stoop itself: the whole point of the posture is a
+    displacement in y, and y is the axis the side camera keeps.
+
+    Front is -Y, the same as the thirty-one before it."""
+    P = Parts("leech")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # THE BASIN, DERIVED NOT TYPED, so a later edit to the stand cannot leave
+    # the bowl floating or the fill below the rim.
+    BAS_X = MX - 0.62
+    BAS_Y = -0.52
+    BAS_Z = 0.74          # rim height - a basin a bent man can reach into
+    BAS_R = 0.300         # outer rim radius
+    FILL_R = BAS_R * 0.84
+    # *** PASS 4, AND THE A/B INSTRUMENT IS THE ONLY REASON I KNOW. ***
+    # Pass 1-3 put the fill at BAS_Z - 0.030, i.e. INSIDE the bowl and below
+    # its rim, which is where a liquid belongs in a bowl that is a SHELL. This
+    # bowl is `L.cone(..., cap=True)` - a SOLID - so the fill was buried in
+    # brass and could not be seen from any camera. I looked at front.png three
+    # times and read the bowl's own lit interior AS the fill, and I would have
+    # shipped a colour sweep tuned on a surface that was never in the frame.
+    # The with/without instrument said `fill_px: 0` on all six arms while the
+    # EYES moved 1,215 px, which is what a thing that cannot be seen looks like
+    # when you ask the viewer's question instead of asking how big it is. That
+    # is the pass-11 fault of 17 Nov in a new coat, caught this time by the
+    # instrument that fault bought.
+    # The fill now sits ON the solid's top face (z = BAS_Z), inside the rolled
+    # rim, which occludes it from a low angle and shows it from above.
+    FILL_Z = BAS_Z - 0.004
+
+    # ------------------------------------------------------- BOOTS AND LEGS
+    # Two separate soles with daylight between them - the Fenman's pass-3
+    # lesson: one slab under a creature reads as a plinth. Legs short and
+    # thick, knees pushed forward under the stoop so the weight reads as being
+    # carried by the back and not by the hips.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        P.add(L.box(0.34, 0.50, 0.075), 'dark', loc=(MX + 0.235 * s, -0.10, 0.038))
+        limb(P, [(MX + 0.195 * s, -0.04, 0.07),
+                 (MX + 0.205 * s, -0.11, 0.33),
+                 (MX + 0.180 * s, -0.04, 0.60)], 0.175, 0.150, 'dark')
+    _span("base", i0)
+
+    # ----------------------------------------------------------- THE APRON
+    # Hip to shin and hanging FORWARD of the legs, because the man is bent
+    # forward and an apron hangs plumb. It is the darkest mass on the body and
+    # it makes the waistline the gown above it needs.
+    i0 = len(P.items)
+    P.add(L.box(0.56, 0.30, 0.42), 'dark', loc=(MX, -0.20, 0.74))
+    P.add(L.box(0.46, 0.26, 0.10), 'dark', loc=(MX, -0.22, 0.51))
+    _span("apron", i0)
+
+    # ------------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    # THE STOOP. The torso runs from the hips UP AND FORWARD, so the top of the
+    # creature is the crest of its own back and not its head. Chibi build, to
+    # the knight profile the Comfitmaker's pass 5 measured off the fit render
+    # (widest at the top, thick limbs, short shins) - not to a mannequin.
+    limb(P, [(MX, -0.06, 0.84), (MX, -0.20, 1.12),
+             (MX, -0.40, 1.34)], 0.390, 0.330, 'body')
+    # THE CREST OF THE BACK, the highest point of the whole creature: a broad
+    # shallow hump sitting over the shoulders at the top of the lean.
+    # *** PASS 2: THE CREST WAS A CANOPY. *** At (0.420,0.330,0.210) it sat
+    # level with the head and the two merged into ONE pale mass - front.png
+    # read as a barrel with a lid, which is the Comfitmaker's pass-6 fault, and
+    # side.png read as a mushroom. A crest is a hump on a BACK: it has to be
+    # smaller than the head, behind it, and below the top of the lean.
+    P.add(L.sphere(0.330, 0.280, 0.150), 'body', loc=(MX, -0.22, 1.420))
+    # shoulders, pitched forward with the lean and narrower than the head, so
+    # the head still reads as the widest thing at its own level.
+    P.add(L.box(0.74, 0.32, 0.140), 'body', loc=(MX, -0.42, 1.345))
+    # a short neck running DOWN and FORWARD out of the shoulders - this is what
+    # puts the head below the crest.
+    limb(P, [(MX, -0.42, 1.32), (MX, -0.50, 1.26)], 0.150, 0.135, 'body')
+    # THE HEAD: a short cylinder TAPERING UP, never a sphere - a dome is the
+    # most occupied head shape in this register, and the Comfitmaker's pass 6
+    # proved a crown WIDER than the jaw reads as a bucket with a lid.
+    # Bowed only ~15 degrees, not fully face-down: a head that looks straight
+    # into the bowl shows the front camera nothing but a crown, and a face the
+    # front view cannot see is the Fenman's fault in a new coat.
+    # *** PASS 2, AND THE PICTURE IS THE EVIDENCE. *** Pass 1's head was 0.84
+    # across on a creature 1.70 tall as authored - HALF ITS OWN WIDTH and the
+    # top 40% of it. I wrote "a dome is the most occupied head shape and
+    # reaching for one is a reflex" and then shipped a drum the size of a
+    # cask. Measured off front.png rather than guessed: the head spanned
+    # x 215..500 of a 700-wide frame against a body span of 237..520 - the head
+    # was AS WIDE AS THE WHOLE MAN. Cut to 0.60 across and the top quarter.
+    # The lean is pulled back with it: at y -0.60 the skull overhung the far
+    # rim of its own basin in side.png, so the man was not bent over the bowl,
+    # he was lying on it.
+    P.add(L.cone(0.300, 0.245, 0.400), 'body', loc=(MX, -0.50, 1.215))
+    # THE BOUND COIF - a band round the brow, NOT a brim and NOT a flat cap:
+    # the Comfitmaker shipped the flat linen cap an hour ago and a brim across
+    # the eyes is the D94 hood fault. A band is the one head-covering in the
+    # set that adds no silhouette and still says the head is bound.
+    # *** PASS 2: THE BAND WAS A BRIM, WHICH IS THE ONE THING I SAID IT MUST
+    # *** NOT BE. *** It sat ON THE CROWN and wider than the skull, so it read
+    # as the lid of the bucket. A coif band goes round the BROW, inside the
+    # skull's own width, where it cannot add a single pixel to the silhouette.
+    P.add(L.cone(0.292, 0.292, 0.062), 'bone', loc=(MX, -0.50, 1.330))
+    P.add(L.cone(0.248, 0.210, 0.055), 'body', loc=(MX, -0.50, 1.605))
+    # the face, on the front (-Y), set low on the skull because the head is
+    # bowed. Eyes kept in the glow slot - see the note above.
+    eyes(P, (MX, -0.50, 1.270), 0.132, 0.040, -0.285)
+    _span("man", i0)
+
+    # ------------------------------------------------------------- THE ARMS
+    i0 = len(P.items)
+    # LEFT ARM (-x) reaching DOWN AND OUT to the basin rim: this is the hand
+    # that is working, and it ties the man to the instrument so the basin reads
+    # as his and not as scenery that happens to be beside him.
+    limb(P, [(MX - 0.330, -0.44, 1.28), (MX - 0.520, -0.52, 1.04),
+             (BAS_X + 0.090, BAS_Y + 0.040, BAS_Z + 0.110)], 0.155, 0.120, 'body')
+    # RIGHT ARM (+x) hanging at the horn roll.
+    limb(P, [(MX + 0.330, -0.42, 1.28), (MX + 0.430, -0.40, 1.08),
+             (MX + 0.470, -0.34, 0.96)], 0.155, 0.120, 'body')
+    _span("arms", i0)
+
+    # ------------------------------------------------- THE FLEAM, OVER THE RIM
+    # The blade, held in the working hand above the basin. THIN is the point -
+    # it must read as the finest thing in the picture - so a near-black 0.026
+    # rod with a short flat edge, and it is the one object on this body that is
+    # NOT worn: see the wear note in the docstring.
+    i0 = len(P.items)
+    HAND = (BAS_X + 0.090, BAS_Y + 0.040, BAS_Z + 0.110)
+    limb(P, [HAND, (BAS_X + 0.040, BAS_Y + 0.010, BAS_Z + 0.030)], 0.026, 0.019, 'dark')
+    P.add(L.box(0.030, 0.085, 0.012), 'dark',
+          loc=(BAS_X + 0.030, BAS_Y, BAS_Z + 0.018))
+    _span("fleam", i0)
+
+    # --------------------------------- THE BASIN ON THREE LEGS, FAR LEFT
+    i0 = len(P.items)
+    # three splayed legs, converging under the bowl. Three, not four: three
+    # legs read as a stand from every azimuth and never as a box.
+    for k in range(3):
+        a = TAU * (k / 3.0) + 0.52
+        fx = BAS_X + 0.260 * math.cos(a)
+        fy = BAS_Y + 0.260 * math.sin(a)
+        limb(P, [(fx, fy, 0.02),
+                 (BAS_X + 0.130 * math.cos(a), BAS_Y + 0.130 * math.sin(a),
+                  BAS_Z - 0.300),
+                 (BAS_X + 0.055 * math.cos(a), BAS_Y + 0.055 * math.sin(a),
+                  BAS_Z - 0.080)], 0.036, 0.028, 'dark')
+        P.add(L.cone(0.052, 0.040, 0.026), 'dark', loc=(fx, fy, 0.013))
+    # a hoop the bowl sits in, so the bowl is CARRIED and not balanced
+    _ring(P, (BAS_X, BAS_Y, BAS_Z - 0.095), BAS_R * 0.78, axis='z',
+          slot='dark', rad=0.028, n=18)
+    # THE BOWL: a shallow brass basin, wider at the rim than at the foot.
+    P.add(L.cone(BAS_R * 0.62, BAS_R, 0.185), 'bone',
+          loc=(BAS_X, BAS_Y, BAS_Z - 0.185))
+    # a rolled rim, so the bowl reads as a bowl and not as a disc, and so the
+    # lit fill inside it has a dark edge to sit against from every angle.
+    _ring(P, (BAS_X, BAS_Y, BAS_Z), BAS_R, axis='z', slot='bone',
+          rad=0.034, n=22)
+    # WHAT IT HAS TAKEN: the fill, a lit surface sitting BELOW the rim so the
+    # rim occludes it from a low angle and it can never read as a floating
+    # disc. The Sluicekeeper's fault was a lit pool ON THE FLOOR reading as a
+    # spotlight; this one is held at hip height inside a dark ring, which is
+    # the structural difference.
+    P.add(L.cone(FILL_R, FILL_R * 0.995, 0.026), 'glow',
+          loc=(BAS_X, BAS_Y, FILL_Z))
+    _span("basin", i0)
+
+    # ------------------------------- THE FIVE HORNS, FAR RIGHT, FANNED
+    i0 = len(P.items)
+    # a leather roll at the hip, and five cupping horns fanned out of it,
+    # pointing down and away. Five is countable from a doorway; the fan spreads
+    # in x AND pitches in y so the side camera still reads several of them.
+    # *** PASS 6: THEY WERE A HAND, NOT A ROLL, AND THE FRONT RENDER SAID SO
+    # *** IN THE PLAINEST WAY AVAILABLE. *** Pass 1-5 hung the five horns at
+    # z 0.98 with their bases at x +0.52..+0.74 - which is exactly where the
+    # right arm ENDS. Five pale tapered cones radiating from the end of an arm
+    # is a HAND OF CLAWS, and that is what front.png showed: the creature had a
+    # bare left arm and a talon on the right. The idea - a tradesman's roll of
+    # horns, countable, hung at the hip - was not in the picture at all.
+    # THE FIX IS SEPARATION, NOT SIZE: the roll drops to the hip and BEHIND the
+    # hand (z 0.80, y +0.02 against the hand's -0.36), and the horns hang
+    # DOWN from it rather than radiating out of it, so the hand is above them
+    # with daylight between. A thing that hangs cannot be read as a thing that
+    # grasps.
+    # *** PASS 7, AND PASS 6 WAS THE RIGHT DIAGNOSIS WITH TOO SMALL A MOVE. ***
+    # Pass 6 dropped the roll to z 0.80 and pushed it back in y, and front.png
+    # STILL read a black mitten with five pale claws coming out of it, because
+    # the hand ends at z 0.96 and the horns began at 0.775 - 0.18 of gap, which
+    # the front camera cannot see as a gap at all once the arm is in front of
+    # the roll. The honest fix is vertical daylight, so the roll goes to the
+    # THIGH: bases at 0.60, a clear 0.36 below the hand, with the horns hanging
+    # to 0.36. The creature now has a hand at hip height and a bundle on its
+    # thigh, which is two objects instead of one claw.
+    ROLL_Y = 0.02
+    P.add(L.box(0.330, 0.150, 0.100), 'dark', loc=(MX + 0.430, ROLL_Y, 0.620))
+    P.add(L.box(0.065, 0.165, 0.300), 'dark', loc=(MX + 0.385, ROLL_Y, 0.690))
+    for k in range(5):
+        t = k / 4.0
+        a = -0.30 + 0.60 * t                      # a shallow fan, hanging
+        bx = MX + 0.310 + 0.066 * k
+        bz = 0.600
+        tipx = bx + 0.250 * math.sin(a)
+        tipz = bz - 0.250 * math.cos(a)
+        # staggered in y as well as x: the side camera throws x away, so a fan
+        # that spreads only across x reads as ONE horn from the side.
+        dy = ROLL_Y - 0.075 + 0.037 * k
+        limb(P, [(bx, dy, bz), (tipx, dy, tipz)], 0.058, 0.014, 'bone')
+    _span("horns", i0)
+    return P
+
+
+BUILDERS.update({"leech": leech})
+
+
+# =====================================================================
+# 33. THE BEADLE - IT CALLS THE ORDER
+# =====================================================================
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"beadle"}
+
+OVERRIDE.update({
+    "beadle": {
+        # THE MAN. Dark blue-grey parish wool - the Moulder's and Ratcatcher's
+        # MEASURED lesson applied rather than rediscovered: put the DARK body
+        # against the PALE furniture so the outline is carried by contrast and
+        # not by a rim light I would have to invent. The thing a viewer has to
+        # read on this body is ABOVE the head, so the head and coat are the
+        # dark ground it is read against.
+        'body': ((0.082, 0.092, 0.118), 0.84, 0.02),
+        # LIMEWASHED OAK AND LINEN: the order board held overhead, the tippet
+        # across the shoulders, the face, the two mitts and the staff collar.
+        # The board is the biggest object on the body and it is the palest, so
+        # it is what the eye lands on first. That is on purpose - it is the
+        # thing the party has to break.
+        'bone': ((0.775, 0.730, 0.615), 0.50, 0.01),
+        # IRON AND FELT: boots, staff shaft, hat, the spent sockets.
+        'dark': ((0.052, 0.050, 0.048), 0.72, 0.06),
+        # BRASS, AND IT IS A GAUGE, NOT A DECORATION. The four pegs are the
+        # calls it has left and a viewer must be able to count them from the
+        # door, which is the same argument as the Sexton's lit niches and the
+        # Comfitmaker's comfits.
+        # *** PASS 4, AND I MADE THE DYER'S MISTAKE AFTER QUOTING IT. *** I
+        # wrote "strength 1.35 and not higher" directly above a value that
+        # still clips: 1.35 x (1.000, 0.735, 0.255) is (1.35, 0.99, 0.34), so
+        # red AND green both reach 1.0 and the pegs rendered CREAM - the exact
+        # colour of the oak board behind them. front.png showed four pale
+        # dowels on a pale plank, which is a gauge you cannot read, and I had
+        # the Dyer's own sentence in the comment while shipping it.
+        # The fix is the Dyer's fix: lower the strength until the HUE survives
+        # instead of pushing it until it is bright. 1.10 x (1.000, 0.600,
+        # 0.075) is (1.10, 0.66, 0.08) - only red clips, so what reaches the
+        # film is amber and not white.
+        'glow': ((1.000, 0.600, 0.075), 1.10),
+    },
+})
+
+CANON.update({
+    "beadle": ("Ordrik", 2.95, (0.26, 0.28, 0.34), (1.00, 0.74, 0.26),
+               "shrine",
+               "IT CALLS THE ORDER - while it stands the party does not choose "
+               "who acts. The Beadle calls, and it calls the same hero again "
+               "and again while the rest hold their ground and watch; the four "
+               "brass pegs on the board it holds overhead are the calls it has "
+               "left and you can count them from the door. Knock the board off "
+               "its arm and the order comes back to you",
+               0.18, "It says who speaks, and it is not you."),
+})
+ORDER = ORDER + ["beadle"]
+
+
+# PASS 12 A/B SWITCHES. Default ON - these are the shipped shape. The env vars
+# exist so the two fixes can be MEASURED SEPARATELY through one camera, which is
+# the standing rule for a pass that changes more than one thing. BEADLE_NAPE=0
+# and BEADLE_KNOB=0 rebuild the pass-11 body exactly.
+_BEADLE_NAPE = os.environ.get("BEADLE_NAPE", "1") != "0"
+_BEADLE_KNOB = os.environ.get("BEADLE_KNOB", "1") != "0"
+
+
+def beadle():
+    """IT CALLS THE ORDER. A tall upright parish officer in dark wool with a
+    pale tippet, an iron-shod staff of office stood on the floor at its far
+    side, and an OAK ORDER BOARD HELD OVERHEAD on its raised near arm with
+    four brass pegs standing out of it and two empty sockets beside them.
+
+    THE IDEA, AND WHY IT IS NOT A 33rd COAT OF ONE OF THE THIRTY-TWO.
+    I PARSED THE IDEAS OUT OF CANON THIS RUN RATHER THAN RECALLING THEM - 32
+    rows, 32 distinct hooks - and then grepped every one of them for the words
+    turn, order, act, acts, initiative, wait, first, last, speak, call, who,
+    queue, haste and time. THE RESULT, MEASURED:
+      - turn, order, act/acts, initiative, wait, first, last, speak, call,
+        who, queue, haste:  ZERO HITS, every one of them.
+      - slow: ONE hit, the LOADER - `it loads you, and you fight slower until
+        you drop it`.
+      - time: TWO hits, and both are the creature's own pacing and not the
+        party's - the Snuffer puts the lamps out `one at a time`, the
+        Sluicekeeper winds the sluice `a step at a time`.
+    SO NOTHING IN THE THIRTY-TWO TOUCHES WHO ACTS, OR WHEN. Every one of the
+    thirty-two is answered by deciding WHAT to do (damage, healing, gear,
+    gold, stores, light, ground, position, facing, movement). This one takes
+    away the decision itself for everyone but one hero, which is a mechanic
+    class the set does not have at all.
+
+    THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:
+      - the LOADER is the closest and it is a STAT: it loads you and you fight
+        slower. Slower is a number on a hero that still takes its own turn.
+        This one does not change anybody's speed; it changes whose turn it is.
+      - the DYER `marks one of you and hunts only the mark`. Same shape of
+        sentence, opposite direction: the Dyer decides who IT goes for, which
+        is the creature choosing its own target. The Beadle decides who YOU
+        go with, which is the creature choosing your action.
+      - the DROVER `yokes one of you` and the HURDLEMAN `cuts the room in
+        two`. Both take the party's FORMATION away - where people can stand
+        and reach. Nobody loses a turn to either of them.
+
+    WEAR 0.18, AND IT IS A FREE RUNG MEASURED OFF THE REGISTER, NOT GUESSED.
+    The thirty-two hold 0.05, 0.08, 0.10, 0.12, 0.15, 0.20, 0.22, 0.25, 0.26,
+    0.30 ... 1.00; 0.18 sits in the one gap in that low cluster and repeats
+    nothing. It is also the honest number for the thing: a staff of office and
+    a board of pegs ARE the office, so a beadle keeps them - but the coat is
+    parish issue and has been worn to every moot for years. Mr. E's second
+    rule, driven by what the object IS.
+
+    HEIGHT 2.95 EXTENDS THE LADDER BY ONE STEP. The register runs 1.95 to 2.90
+    and 2.95 is free. It is also the right read: a beadle out-tops the people
+    he is calling, and the board is held ABOVE that again.
+
+    SILHOUETTE INTENT - AND THE ONE CLAIM IS THE THING OVER ITS HEAD:
+      - A WIDE PALE BAR ACROSS THE TOP OF THE FRAME WITH FOUR TEETH STANDING
+        OUT OF IT, carried on one thin raised arm. I checked the register's
+        claimed outlines before drawing it: a pale vertical pole (Fenman), an
+        open lattice panel (Hurdleman), a solid pale slab down the front
+        (Paviser), a horizontal bar at the floor (Drover), a narrow open V at
+        the floor (Ratcatcher), a disc on the back (Drillmaster), a lopsided
+        mound (Scrapwright), a full skirt (Bellman, and it is the only one).
+        NOTHING IN THE SET HOLDS ANYTHING ABOVE ITS OWN HEAD. That outline was
+        vacant, and it is the one that makes the pegs countable.
+      - THE PEGS ARE ABOVE THE WHOLE BODY, WHICH IS WHY THEY CAN BE COUNTED.
+        The Comfitmaker's pass-2 lesson was that a thing which must stand clear
+        of the body has to be clear in BOTH horizontal axes, because each
+        camera discards one of them. Overhead is clear in all three: nothing
+        of this creature is behind the pegs in any view.
+      - NO FULL SKIRT (the Bellman owns that) and NO DOME HEAD (the most
+        occupied head shape in this file). The coat hem stops above the knee so
+        two legs read under it, and the head is a tapered drum, wider at the
+        jaw than at the crown - the Comfitmaker's pass-6 fix, which is that a
+        head tapers UP and a drum that flares out to meet its hat becomes a
+        bucket with a lid.
+      - THE FACE IS PALE ON A DARK HEAD, not glow on dark. Pass 11 of the
+        Hurdleman is the reason: a face measured by `mask_of` reported 156 px
+        beside my own sentence that the head had no face at all. A bone plate
+        inset in the front of the skull is visible because it is a different
+        VALUE from the skull, which is a thing a single camera can see.
+
+    THE SIDE VIEW, WHICH HAS KILLED THREE BODIES IN THIS FILE, AND THE HONEST
+    LIMIT OF WHAT IT CARRIES. A side camera throws x away, so four pegs set in
+    a line across the board would collapse to ONE peg. They are therefore
+    staggered through 0.15 of the board's 0.30 depth as well, so the side view
+    reads four separate tips. What the side view CANNOT do is tell you which
+    sockets are empty - the sockets are a dark disc in a pale face and they
+    need the face. THE HONEST CLAIM IS THEREFORE SPLIT: the front and
+    three-quarter views carry the COUNT, the side view carries the BOARD and
+    the tips. I would rather write that down than claim four from every angle
+    and be caught by a render.
+
+    Front is -Y, the same as the thirty-two before it."""
+    P = Parts("beadle")
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
+    MX = 0.0
+    # THE BOARD, DERIVED NOT TYPED, so a later edit to the arm cannot leave the
+    # pegs floating off it. Everything about the pegs comes off BOARD_C, TILT
+    # and the board's own thickness.
+    # *** PASS 3: THE BOARD IS YAWED, AND THE SIDE RENDER IS WHY. *** Pass 2's
+    # board sat square across x, so the side camera - which throws x away - got
+    # it EDGE-ON and read the four pegs as the teeth of A SAW BLADE. That is
+    # the fault the Paviser answered with camber and the Comfitmaker answered
+    # by coming forward in y: an object that must be read has to have width in
+    # BOTH horizontal cameras. A yaw of 0.38 rad gives the side view 0.37 of
+    # the board's own length, so it reads as a plank at an angle with four
+    # separate pegs on it instead of a serrated edge.
+    # It is also NARROWER AND THICKER (1.34x0.085 -> 1.06x0.14): pass 2's board
+    # read as an ALUMINIUM TRAY, and a tray is thin, wide and rail-edged. An
+    # oak order board is a plank.
+    BOARD_C = (-0.40, -0.26, 2.34)
+    BOARD_W, BOARD_D, BOARD_T = 1.06, 0.30, 0.140
+    TILT = 0.45                    # tipped forward so the FACE turns to -Y
+    YAW = 0.38                     # and turned, so the side camera has width
+    _BR = (Matrix.Rotation(YAW, 4, 'Z') @ Matrix.Rotation(TILT, 4, 'X'))
+    LENV = tuple(_BR @ Vector((1.0, 0.0, 0.0)))
+    DEPV = tuple(_BR @ Vector((0.0, 1.0, 0.0)))
+    UPV = tuple(_BR @ Vector((0.0, 0.0, 1.0)))
+
+    # DERIVED, NOT TYPED, and hoisted here at pass 8 so the HAND is placed off
+    # the board's own axes exactly as the pegs are. Pass 7's mitt was typed in
+    # world coordinates and the board had been yawed and raised under it twice
+    # since - which is how a hand ends up NEAR a plank instead of ON one.
+    def _on_board(dx, dy, lift=0.5):
+        return tuple(BOARD_C[i] + LENV[i] * dx + DEPV[i] * dy
+                     + UPV[i] * (BOARD_T * lift) for i in range(3))
+
+    # --------------------------------------------------- BOOTS AND LEGS
+    # Two separate soles with daylight between them - the Fenman's pass-3
+    # lesson: one slab under a creature reads as a plinth, not as feet.
+    i0 = len(P.items)
+    for s in (-1, 1):
+        P.add(L.box(0.36, 0.52, 0.080), 'dark', loc=(MX + 0.235 * s, -0.04, 0.040))
+        limb(P, [(MX + 0.200 * s, 0.00, 0.08),
+                 (MX + 0.210 * s, -0.02, 0.30),
+                 (MX + 0.190 * s, -0.04, 0.58)], 0.185, 0.158, 'dark')
+    _span("base", i0)
+
+    # ------------------------------------------------------- THE COAT
+    # Hip to above the knee, flaring DOWN, and stopping at 0.58 so the two legs
+    # read under it. A coat, not a skirt: the Bellman is the only full-skirted
+    # silhouette in this file and it stays that way.
+    i0 = len(P.items)
+    P.add(L.cone(0.455, 0.400, 0.50), 'body', loc=(MX, -0.08, 0.58))
+    P.add(L.box(0.74, 0.30, 0.070), 'dark', loc=(MX, -0.08, 0.60))   # the hem line
+    _span("coat", i0)
+
+    # -------------------------------------------------------- THE MAN
+    i0 = len(P.items)
+    limb(P, [(MX, -0.08, 1.04), (MX, -0.085, 1.16),
+             (MX, -0.090, 1.28)], 0.400, 0.360, 'body')
+    # shoulders NARROWER than the head above them, so the HEAD is the widest
+    # thing up there - the one structural fact the knight profile gave the
+    # Comfitmaker, and the thing its pass 4 had backwards.
+    P.add(L.box(0.80, 0.34, 0.150), 'body', loc=(MX, -0.090, 1.265))
+    # *** PASS 6: THE TIPPET IS DARK NOW, AND PASS 5 IS WHAT TOOK ITS JOB AWAY.
+    # *** It was put here pale to keep a DARK head off a DARK torso. Pass 5
+    # inverted the head to pale and I left the tippet alone, so the one pale
+    # band under the head became a pale collar DIRECTLY BELOW A PALE SKULL of
+    # almost the same width (0.455 jaw against 0.470 tippet). front.png read
+    # head and tippet as one pale trapezoid and side.png read them as a single
+    # pale cone - a wimple, not a man in a coat. A fix that stops being a fix
+    # when the thing around it changes is not a fix any more, and the honest
+    # move is to delete its colour rather than add a third value to separate
+    # the two things that were only pale because of each other.
+    P.add(L.cone(0.470, 0.420, 0.150), 'dark', loc=(MX, -0.090, 1.165))
+    P.add(L.cone(0.150, 0.170, 0.070), 'body', loc=(MX, -0.090, 1.300))
+    _span("man", i0)
+
+    # ------------------------------------------------------- THE HEAD
+    i0 = len(P.items)
+    # a tapered drum, WIDER AT THE JAW than at the crown (Comfitmaker pass 6),
+    # 0.94 across on a figure whose shoulders are 0.80.
+    # *** PASS 5 MOVED FIVE THINGS AND THEY ARE ONE CHANGE, NOT FIVE: THE HEAD
+    # *** STOPPED BEING A MACHINE. *** Pass 4 had a DARK drum for a skull with a
+    # PALE RECTANGLE pasted on the front of it, two round lit eyes in the
+    # rectangle and a slot under them. front.png read that as a television, and
+    # three_quarter.png read it as a robot - which is the one thing Bellmire's
+    # register cannot carry. side.png added the second half of the fault: a dark
+    # skull under a dark crown of nearly the same width, with a pale band
+    # between them, is A BUCKET WITH A LID - the Comfitmaker's pass-6 fault,
+    # arrived at from the other direction.
+    # BOTH ARE THE SAME MISTAKE: I was drawing FEATURES ON a head instead of
+    # making the head itself the readable object. So the skull becomes the pale
+    # mass and the hat becomes the dark one. A pale face under a dark brim is
+    # what a face is, the plate is deleted because there is nothing left for it
+    # to do, and the eyes go DARK - which also leaves the amber for the gauge
+    # and the staff alone, so the only lit things on this body are the office.
+    # *** PASS 7, AND THE FIT RENDER IS WHAT FOUND BOTH OF THESE - WHICH IS WHY
+    # *** THE FIT RENDER EXISTS. *** Standing this body beside a posed KayKit
+    # knight said two things my own three views had not:
+    #   1. THE HEAD WAS A BELL. 0.455 at the jaw against 0.370 at the crown is
+    #      a 23% taper, and hero_side.png read it as a LAMPSHADE next to the
+    #      knight's near-round helm. I had the Comfitmaker's "a head tapers UP"
+    #      in hand and overshot it - the lesson was that a head must not FLARE
+    #      OUT at the crown, not that it should flare out at the jaw. 0.420 to
+    #      0.395 is a 6% taper: still up, no longer a bell.
+    #   2. THE EYES VANISHED AT HERO SCALE. At r 0.046 they were two dots and
+    #      hero_front.png read the face as a pale blank with a smudge on it,
+    #      against a knight whose eyes carry its whole expression. They go to
+    #      0.068 and further out in y.
+    # AND ONE THING I MEASURED RATHER THAN EYEBALLED: the chin bar sat at
+    # y -0.405 where the skull's own radius at that height is 0.414, so it was
+    # INSIDE the head and could never have rendered. It is out at -0.425.
+    P.add(L.cone(0.420, 0.395, 0.560), 'bone', loc=(MX, -0.095, 1.320))
+    # the brow and jaw, cut from the dark slot so the pale skull has structure
+    # and does not read as an egg.
+    P.add(L.box(0.430, 0.090, 0.055), 'dark', loc=(MX, -0.405, 1.705))
+    P.add(L.box(0.230, 0.070, 0.045), 'dark', loc=(MX, -0.425, 1.455))
+    eyes(P, (MX, -0.095, 1.620), 0.150, 0.068, -0.360, 'dark')
+    # THE HAT: flat and low-crowned with a pale band. Not a dome, not a brim
+    # across the eyes (the D94 hood fault) - the brim sits at 1.88, clear
+    # above the plate's top at 1.71.
+    # *** PASS 2, AND THE SIDE VIEW IS WHAT CONDEMNED IT. *** Pass 1's brim was
+    # 0.700 against a 0.385 crown - 1.82 times the head and wider than the
+    # shoulders - and side.png read the whole creature as A LAMP: shade on top,
+    # bell-shaped base under it. THAT IS THE SNUFFER'S OWN CLAIMED SILHOUETTE
+    # ("a lamp-stand that walks"), so pass 1 was not merely ugly from the side,
+    # it was wearing another body's outline. The brim comes in to 0.465, which
+    # is 1.21 times the crown - a hat on a man. Nothing else moves this pass.
+    # PASS 5, the same change seen from the hat's side: a crown as wide as the
+    # skull is what made the barrel. It comes in to 0.330 and goes UP to 0.215,
+    # and the brim goes out to 0.545 - so the hat is 1.65 times its own crown
+    # and clearly a separate object sitting ON something, which is the whole
+    # job of a brim. The band is dark now, not pale: a pale hoop between two
+    # masses is exactly what drew the barrel's hoop.
+    # *** PASS 12, AND THE TEAM LEAD'S 09:1x ROW IS WHAT FOUND IT: FROM THE
+    # *** BACK THIS HEAD HAD NO FACING. *** Pass 5 made the skull the pale mass
+    # and the hat the dark one, which is what fixed the front - and it left the
+    # BACK of that same pale drum as the identical featureless pale panel. I
+    # looked at hero_back.png beside hero_front.png and the two heads read
+    # nearly alike, so the body did not say which way it was turned. For a
+    # creature whose whole idea is IT CALLS THE ORDER - it calls, and the party
+    # answers - the direction it faces is the one thing a player has to read.
+    # THE FIX IS A VALUE INVERSION, NOT A FEATURE. Pass 4 already proved that
+    # drawing features ON this head reads as a machine; the honest move is to
+    # make the BACK OF THE HEAD ITSELF the dark object, so the face is the pale
+    # thing and the nape is the dark thing, which is what a head under a hat
+    # looks like. DERIVED OFF THE SKULL, NOT TYPED: r 0.405/0.380 against the
+    # skull's 0.420/0.395 and h 0.50 against its 0.56, so it is INSIDE the pale
+    # drum in every axis but y.
+    # *** AND THE PUSH-BACK IS 0.090, NOT THE 0.160 I FIRST BUILT, BECAUSE THE
+    # *** SILHOUETTE SHEET CONDEMNED THE FIRST ONE. *** At 0.160 the nape's rear
+    # face landed at y 0.470 against the hat brim's own rear at 0.450 - so the
+    # BACK OF THE HEAD BECAME THE REARMOST THING ON THE BODY and the brim
+    # stopped projecting past it. With colour thrown away the side cell read as
+    # one block from the crown to the shoulder: pass 9's fault, arrived at from
+    # the other direction, and the silhouette test caught it exactly as it
+    # caught that one. At 0.090 the rear face is at 0.400 - 0.050 of daylight
+    # inside the brim, so the brim reads as a brim again - and it is still
+    # 0.075 behind the pale skull's own 0.325, which is all the back camera
+    # needs to see dark instead of cream.
+    if _BEADLE_NAPE:
+        P.add(L.cone(0.405, 0.380, 0.500), 'dark', loc=(MX, -0.005, 1.340))
+    P.add(L.cone(0.545, 0.515, 0.050), 'dark', loc=(MX, -0.095, 1.880))
+    P.add(L.cone(0.330, 0.312, 0.215), 'dark', loc=(MX, -0.095, 1.925))
+    P.add(L.cone(0.336, 0.330, 0.042), 'dark', loc=(MX, -0.095, 1.990))
+    _span("head", i0)
+
+    # ------------------------------- THE STAFF OF OFFICE, FAR SIDE (+X)
+    # Short, DARK and brass-topped on purpose: the Fenman's far-side object is
+    # a PALE VERTICAL POLE, and two bodies must not share one outline. This one
+    # stops at chest height with a lit finial, so it reads as a knob on a stick
+    # and not as a mast.
+    i0 = len(P.items)
+    limb(P, [(MX + 0.560, -0.020, 0.02), (MX + 0.600, -0.060, 0.80),
+             (MX + 0.630, -0.090, 1.44)], 0.055, 0.047, 'dark')
+    P.add(L.cone(0.078, 0.066, 0.140), 'dark', loc=(MX + 0.558, -0.015, 0.000))
+    # *** PASS 12: THE KNOB LOST ITS OUTLINE FROM THE SIDE, AND THE COLLAR WAS
+    # *** PALE. *** The side camera throws x away, so the staff at x +0.63 is
+    # projected ONTO the body - and the knob assembly spans z 1.390-1.648 while
+    # the pale skull spans 1.320-1.880. A BONE collar and an amber ball landed
+    # on the pale skull: hero_side.png read the whole top of the staff as a
+    # smudge on the face. Amber against cream is a HUE difference and barely a
+    # value one, so this is the Dyer's trap from the other side - the colour
+    # was right and the contrast was not.
+    # The board's own pass-3 fix is the answer, applied here: the board stopped
+    # bleeding into a pale background when it got DARK END CAPS. So the knob
+    # gets a dark ferrule under it and a dark cap over it, both WIDER than the
+    # ball (0.108 and 0.100 against 0.092) so the lip shows from any angle, and
+    # the brass is left to be the only lit thing between them.
+    P.add(L.cone(0.108, 0.100, 0.050) if _BEADLE_KNOB else L.cone(0.086, 0.086, 0.050),
+          'dark' if _BEADLE_KNOB else 'bone', loc=(MX + 0.628, -0.088, 1.390))
+    # *** PASS 4: THE FINIAL WAS A CANDLE FLAME. *** A tall lit cone on a dark
+    # stick is a candle in every view, and side.png read it as one sitting in
+    # front of the coat. A staff of office ends in a KNOB, so it is a knob: a
+    # squat cap and a ball, 0.14 tall where the cone was 0.20, and no taper to
+    # a point for the eye to read as a flame.
+    P.add(L.cone(0.072, 0.090, 0.060), 'glow', loc=(MX + 0.630, -0.090, 1.440))
+    P.add(L.sphere(0.092, 0.092, 0.072, 10, 7), 'glow',
+          loc=(MX + 0.630, -0.090, 1.556))
+    if _BEADLE_KNOB:
+        P.add(L.cone(0.100, 0.082, 0.038), 'dark', loc=(MX + 0.630, -0.090, 1.628))
+    # the gripping arm, down and out to the shaft
+    limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095, 1.060),
+             (MX + 0.600, -0.088, 0.965)], 0.145, 0.112, 'body')
+    P.add(L.sphere(0.115, 0.105, 0.105, 10, 7), 'bone',
+          loc=(MX + 0.615, -0.086, 0.945))
+    _span("staff", i0)
+
+    # ------------------------- THE RAISED ARM AND THE ORDER BOARD (-X)
+    # The near side in the three-quarter view, which is the Quartermaster's
+    # pass-3 lesson: the thing the party must read goes on the camera's side of
+    # the body, not behind it.
+    i0 = len(P.items)
+    # *** PASS 3: THE ARM NOW REACHES THE BOARD, AND PASS 2 DID NOT. *** The
+    # forearm went up BEHIND the hat and ended in a stub, so front.png showed a
+    # board FLOATING over a bent pipe - nothing in the picture was carrying
+    # anything. The elbow therefore swings FORWARD to y -0.42, clear of the
+    # brim, and the mitt closes on the board's UNDERSIDE at its near end. A
+    # thing that is held reads as held because you can see the hand under it.
+    # *** PASS 8: THE HAND WAS A PEARL, AND THE WHOLE IDEA DEPENDS ON THE BOARD
+    # *** BEING HELD. *** hero_front.png showed a white BALL sitting under the
+    # plank's edge. A ball near a thing is not a hand on a thing, and "knock
+    # the board off its arm" is the party's answer to this creature - so the
+    # one join that has to be legible is exactly the one I had left as a
+    # sphere. A grip is TWO objects, because that is what makes it read as
+    # closed: a palm wrapping UNDER the board and a thumb lying ACROSS its
+    # top edge, both placed off the board's own axes so a later yaw cannot
+    # part them from it.
+    GRIP = _on_board(0.060, -0.120, -0.55)
+    # *** PASS 9, AND THE SILHOUETTE SHEET IS WHAT CONDEMNED IT - the one test
+    # *** that throws the colour away. *** With value gone, the front cell read
+    # as ONE LUMP WITH A COMB ON TOP: the elbow sat at x -0.520 against a brim
+    # of radius 0.545, so the whole upper arm lay inside the hat's own outline
+    # and the two merged into a single mass. Colour had been hiding it - the
+    # dark sleeve against the dark brim is legible only because they are
+    # different darks, and the silhouette test exists precisely to take that
+    # crutch away. The elbow goes out to -0.720, clear of the brim by 0.175,
+    # so the arm is an arm from the outside in every view.
+    limb(P, [(MX - 0.350, -0.090, 1.215), (MX - 0.720, -0.300, 1.610),
+             (GRIP[0] + 0.030, GRIP[1] + 0.040, GRIP[2] - 0.090)],
+         0.150, 0.108, 'body')
+    P.raw(aim(L.box(0.230, 0.185, 0.090), GRIP, UPV), 'bone')
+    P.raw(aim(L.box(0.075, 0.150, 0.070),
+              _on_board(0.060, -0.185, 0.92), UPV), 'bone')
+    _span("arm", i0)
+
+    i0 = len(P.items)
+    P.add(L.box(BOARD_W, BOARD_D, BOARD_T), 'bone', loc=BOARD_C,
+          rot=(TILT, 0.0, YAW))
+    # PASS 3: the dark UNDER-RAIL is gone. It ran the full length beneath the
+    # plank and that is exactly what made pass 2 read as a scaffold board on a
+    # trestle. Two dark END CAPS instead - they give the plank its line without
+    # putting a beam under it, and they stop the pale board bleeding into the
+    # pale background at its tips.
+    for s_ in (-1, 1):
+        P.add(L.box(0.055, BOARD_D + 0.02, BOARD_T + 0.03), 'dark',
+              loc=tuple(BOARD_C[i] + LENV[i] * (BOARD_W * 0.5 - 0.02)
+                        * s_ for i in range(3)),
+              rot=(TILT, 0.0, YAW))
+    _span("board", i0)
+
+    # ------------------------------------- THE GAUGE: FOUR PEGS, TWO SOCKETS
+    # Four brass pegs standing out of the board's face, and two empty sockets
+    # beside them. THE PEGS ARE THE CALLS IT HAS LEFT. They are staggered
+    # through the board's DEPTH as well as its length, because a side camera
+    # throws x away and four pegs in a line would collapse to one.
+    i0 = len(P.items)
+    # the board's own axes, so a peg placed 'dy along the board' stays ON the
+    # board when TILT changes. A raw y offset would have left them hanging off
+    # a tipped plane, which is the trap the derived-not-typed rule exists for.
+    for k in range(4):
+        P.raw(aim(L.cone(0.058, 0.042, 0.250),
+                  _on_board(-0.400 + 0.200 * k, -0.080 + 0.052 * k), UPV), 'glow')
+    for k in range(2):
+        P.raw(aim(L.cone(0.054, 0.054, 0.032),
+                  _on_board(0.330 + 0.150 * k, -0.020 + 0.040 * k, 0.40), UPV), 'dark')
+    _span("pegs", i0)
+    return P
+
+
+BUILDERS.update({"beadle": beadle})
+
+
+# ============================================================ 34 THE RAMMER
+# A pile-driver: an A-frame, an iron monkey hauled to the head, a hunched
+# hauler on the fall-rope, and the pile already standing in the floor under it.
+#
+# WHY THIS IS NOT A 34th COAT OF ONE OF THE THIRTY-THREE. I parsed the ideas
+# out of CANON this run rather than recalling them - 47 rows, 33 distinct base
+# keys - and grepped every one for the vocabulary of TIMING:
+#   rhythm, tempo, cadence, timing, telegraph, warn, hear, pause,
+#   "every other", turn:          ZERO HITS, every one of them.
+#   beat:   4 hits, all DRILLMASTER rows - "beats the muster", a drum that
+#           SUMMONS. The beat is what the thing plays, not something the party
+#           has to read.
+#   count:  3 hits - the TALLYMAN ("Something is counting what you carry") and
+#           the BEADLE's four brass pegs. Both count THINGS, not time.
+#   coming: 2 hits, the SLUICEKEEPER - "The water is coming up". This is the
+#           nearest row in the set and I am not going to pretend otherwise: it
+#           escalates over time, a step at a time. But it escalates in ONE
+#           direction and the answer is to shut the sluice. There is no moment
+#           in it that is safe and no moment that is not.
+#   sound:  1 hit, the BELLMAN - misdirection in SPACE, not in time.
+# So nothing in the thirty-three is answered by WHEN. Every one of them is
+# answered by deciding WHAT to do - damage, healing, gear, gold, stores,
+# light, ground, position, facing, movement, who acts. This one is answered by
+# standing somewhere else for two beats and then stepping back in, and the
+# telegraph is built into the silhouette: THE MONKEY IS UP. A viewer who has
+# never seen it before can read "that is about to fall" from the door, and can
+# read WHERE from the pile stub on the floor under it.
+#
+# THE TWO IT IS NEAREST TO, and the differences are not quibbles:
+#   - the SNARER has already set the room and drives you onto its lines. That
+#     is a place you must not be, fixed for the whole fight. This is a place
+#     you must not be ON A COUNT - the same square is safe and lethal by turns.
+#   - the PRESSMAN presses your fallen. Also a crushing thing, also vertical,
+#     but it is a punishment for having already lost someone. The Rammer kills
+#     nobody who reads it.
+#
+# ROOM-LOCK: the frame is TALL, not wide - the footprint span is reported by
+# minibossgen against CORRIDOR_CLEAR and recorded in the register.
+#
+# WEAR 0.58, and it is not one wear. Pile gear lives in wet ground: the timber
+# is river-soaked and bruised, the rope is frayed. THE MONKEY IS THE
+# INSTRUMENT AND A WORKING MAN KEEPS HIS INSTRUMENT - the iron is the one
+# thing here that is not rotten, same argument as the Drillmaster's gong.
+CANON.update({
+    "rammer": ("Breachar", 2.75, (0.54, 0.47, 0.37), (0.95, 0.92, 0.70),
+               "flooded",
+               "IT DROPS ON THE COUNT - it hauls the monkey to the head of the "
+               "frame, it holds, and it lets go. Whatever is standing on the "
+               "pile when the monkey falls is finished, and you can HEAR it "
+               "coming: the haul is slow and the hold is the warning. The "
+               "answer is not what you do, it is when - stand off the pile for "
+               "the drop and come back in while it hauls",
+               0.58, "Something is being driven into the floor."),
+})
+ORDER = ORDER + ["rammer"]
+
+
+def rammer():
+    """IT DROPS ON THE COUNT. A three-legged pile-driving frame with an iron
+    monkey hauled high under the head, a bruised pile standing out of the floor
+    beneath it, and a hunched hauler leaning back on the fall-rope at its near
+    side.
+
+    THE SILHOUETTE IS THE TELEGRAPH. The frame is the only frame in the set -
+    nothing else here is an open structure you can see through, and the two
+    things the fight turns on are the two things that read first: the BLOCK IS
+    UP (so it is going to come down) and the PILE IS THERE (so that is where).
+    The hauler is deliberately small and off to one side; it is not the
+    monster, it is the reason the monster is loaded, and it must never read as
+    a hero - no weapon, no shield, bent at the hip, both hands on a rope.
+
+    Plainness is the voice: this is a thing for driving posts into wet ground
+    and it looks like one."""
+    P = Parts("rammer")
+    # ---------------------------------------------------------- THE FRAME
+    # Head over the pile at y -0.10, so the block hangs where the pile is.
+    HX, HY, HZ = 0.0, -0.10, 2.52
+    # two front legs splayed in x, one raked back in +y: a tripod stands on any
+    # floor, and a tripod is also why this reads as built rather than grown.
+    # PASS 8, ONE CHANGE: SEAT THE THREE FEET ON ONE PLANE. The three legs and
+    # the pile all declared z=0.0 and I read that as "they all stand on the
+    # floor". THEY DO NOT, AND A TUBE IS WHY. limb() sweeps a ring that is
+    # PERPENDICULAR TO THE POLYLINE, so a raked leg's bottom ring is TILTED and
+    # its lowest vertex sits r*sin(tilt) BELOW the point I declared:
+    #     front legs  tilt 13.73 deg  r 0.088  ->  dip 20.9 mm
+    #     back  leg   tilt 17.65 deg  r 0.082  ->  dip 24.9 mm
+    # minibossgen grounds the merged body on its GLOBAL minimum z
+    # (minibossgen.py, `ob.location.z - mn.z`), so that 24.9 mm became THE
+    # FLOOR and everything else rose off it: the two front feet ended 4 mm
+    # clear and the pile, whose cone base is honestly at z=0.0, ended 24.9 mm
+    # IN THE AIR. A driven pile floating off the ground is the one thing this
+    # creature must not do - the pile is the WHERE of the whole fight.
+    # Raising each start by its own dip puts every foot's lowest vertex and the
+    # pile's base on z=0 exactly, so the grounding shift is zero and the plane
+    # the eye reads off the three planted feet IS the plane the pile meets.
+    limb(P, [(-0.66, 0.04, 0.0209), (-0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.66, 0.04, 0.0209), (0.34, 0.00, 1.32), (HX, HY, HZ)], 0.088, 0.062, 'bone')
+    limb(P, [(0.0, 0.94, 0.0249), (0.0, 0.52, 1.32), (HX, HY + 0.04, HZ)], 0.082, 0.058, 'bone')
+    # the head: a squat capping block with the sheave pin through it
+    # PASS 7, ONE CHANGE, AND IT IS THE DEPTH - NOT THE WIDTH I SAID IT WAS.
+    # My own 12:39 row read "narrow the head cap so the monkey is the widest
+    # thing in the upper frame by a clear margin at EVERY angle", and the team
+    # lead then looked by eye and said the three-quarter is the view that fails.
+    # _rammer_cap_ab.py renders the shipped glb through one camera at seven
+    # yaws and measures each part's OWN read - what MOVES when that part is
+    # taken away - and it says we were both wrong about which view:
+    #   yaw  0  cap 0.403  monkey 0.624   margin +0.221
+    #   yaw 30  cap 0.518  monkey 0.729   margin +0.211   <- the 3/4 is FINE
+    #   yaw 90  cap 0.341  monkey 0.381   margin +0.039   <- THE SIDE is the
+    #                                                        one that fails
+    # and the reason is arithmetic once you see it: in pure side view the cap
+    # reads its DEPTH, 0.34, against the monkey's strap depth of 0.38. Four
+    # centimetres. Nothing in x was ever wrong - the block is 0.58 against the
+    # cap's 0.40 and front-on it wins by a mile. So narrowing the cap in x,
+    # which is what "narrow the cap" plainly means and what I would have done,
+    # would have cost the capping block its seat on the leg tops and moved the
+    # failing number NOT AT ALL.
+    # 0.34 -> 0.27 puts the side margin at 0.38 - 0.27 = 0.11, over the 0.09
+    # bar, and the three legs still seat: their tops occupy y -0.162..0.002 and
+    # the block now spans -0.215..0.055. A sheave block IS thin front-to-back -
+    # it only has to carry a pin - so plainness and the read want the same
+    # shape here, same as the monkey at pass 5.
+    P.add(L.box(0.40, 0.27, 0.17), 'bone', loc=(HX, HY + 0.02, HZ + 0.06))
+    _ring(P, (HX, HY + 0.02, HZ + 0.06), 0.115, 'y', 'dark', 0.028, 14)
+    # braces. Two, at different heights, and NOT a symmetrical pair - the lower
+    # one carries the hauler's side only, which is how a working frame is
+    # actually braced and keeps the silhouette from reading as a letter A.
+    P.add(L.box(1.06, 0.11, 0.095), 'bone', loc=(0.0, 0.10, 1.12))
+    P.add(L.box(0.62, 0.10, 0.085), 'bone', loc=(0.30, 0.34, 0.52), rot=(0.0, 0.0, -0.22))
+    # ------------------------------------------------- THE PILE IN THE FLOOR
+    # Driven, not fresh: the head is BROOMED - mushroomed and split from being
+    # hit. This is the one piece of wear that has to read, because it is the
+    # evidence that the thing works.
+    P.raw(aim(L.cone(0.205, 0.185, 0.36, 14), (HX, HY, 0.0), (0.0, 0.0, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.255, 0.215, 0.075, 16), (HX, HY, 0.335), (0.0, 0.0, 1.0)), 'bone')
+    for i in range(5):
+        a = TAU * (i / 5.0) + 0.3
+        P.add(L.box(0.055, 0.055, 0.13), 'bone',
+              loc=(HX + 0.165 * math.cos(a), HY + 0.165 * math.sin(a), 0.40),
+              rot=(0.22 * math.sin(a), -0.22 * math.cos(a), 0.0))
+    # the chalk ring the crew marks on the pile head. It says WHERE, which is
+    # the information the fight is about. Kept well inside the frame, nowhere
+    # near the border.
+    # TWO CORRECTIONS TO THIS COMMENT, 18 Nov, BOTH MINE AND BOTH FOUND BY
+    # SOMEBODY LOOKING FOR THE THING IT DESCRIBED AND NOT FINDING IT:
+    #  1. IT IS NOT ON THE FLOOR. The old comment said "on the pile head" and
+    #     "it is on the floor" in the same sentence, and so did my write-up,
+    #     which sent the team lead hunting a floor marking in two renders that
+    #     could never have had one. It is a horizontal annulus, r 0.20, laid on
+    #     the broomed head of the pile at z 0.415 - 0.4 above the floor plane.
+    #  2. IT IS NOT "THE ONE GLOW IN THE BODY". eyes() at the bottom of this
+    #     builder defaults to slot='glow', so the hauler's two eye pinpoints
+    #     are in this material too - which is why rammer_glow spans y up to
+    #     1.335 in the exported glb when this ring alone would stop at 0.431.
+    #     Strength 1.55 was reasoned for a chalk mark on wet oak and it is
+    #     also driving a face. Not changed here - one change per pass, and the
+    #     eyes read correctly at 1.55 - but it is named instead of hidden.
+    _ring(P, (HX, HY, 0.415), 0.20, 'z', 'glow', 0.016, 18)
+    # ------------------------------------------------------- THE MONKEY, UP
+    # Hauled nearly to the head. Its top at ~2.19 against the head at 2.52 -
+    # a visible gap of rope, so it reads as HANGING and not as part of the
+    # frame. Iron: the kept thing.
+    # PASS 5, ONE CHANGE, AND THE SILHOUETTE SHEET IS THE ONLY THING THAT
+    # FOUND IT. Passes 1-4 put the monkey at half-width 0.165. The frame legs
+    # pass through x +-0.167 at that height - I worked it off the leg polyline
+    # rather than off the picture: the leg runs (0.66,0.04,0) -> (0.34,0,1.32)
+    # -> (0,-0.10,2.52), so at z 1.93 it sits at 0.34 - 0.508*0.34 = 0.167.
+    # THE BLOCK AND THE LEGS WERE FLUSH TO TWO MILLIMETRES. In colour that was
+    # fine - dark iron against pale oak - but with the colour thrown away the
+    # block VANISHED into the frame in two of three views, one solid mass, no
+    # outline of its own. The telegraph this whole creature is built on - THE
+    # MONKEY IS UP, SO IT IS COMING DOWN - was being carried by hue alone, and
+    # hue is the one thing a silhouette test takes away. Same family as the
+    # Beadle's facing: every number green, the shape saying nothing.
+    # The fix is not more contrast, it is more OUTLINE. At half-width 0.29 the
+    # block stands 0.12 proud of each leg and reads as a separate heavy thing
+    # at any distance, in any colour - which is also what a real monkey looks
+    # like, so plainness and legibility want the same shape here.
+    # The bands are BOXES, not rings: a ring at this width would have to be
+    # bigger than the block to wrap it, and would read as a hoop floating
+    # around nothing. Straps span the face and break the outline too.
+    MZ = 1.93
+    P.add(L.box(0.58, 0.34, 0.52), 'dark', loc=(HX, HY, MZ))
+    P.add(L.box(0.62, 0.38, 0.062), 'dark', loc=(HX, HY, MZ + 0.195))
+    P.add(L.box(0.62, 0.38, 0.062), 'dark', loc=(HX, HY, MZ - 0.195))
+    # the lifting eye
+    _ring(P, (HX, HY, MZ + 0.30), 0.055, 'y', 'dark', 0.022, 12)
+    # ------------------------------------------------------------ THE ROPE
+    # monkey -> head -> down and back to the hauler's grip. Frayed: thin.
+    limb(P, [(HX, HY, MZ + 0.33), (HX, HY, HZ + 0.02)], 0.022, 0.020, 'dark')
+    limb(P, [(HX + 0.10, HY + 0.04, HZ + 0.05), (HX + 0.38, HY + 0.18, 2.00),
+             (0.62, 0.26, 1.40)], 0.021, 0.018, 'dark')
+    # ----------------------------------------------------------- THE HAULER
+    # PASS 2. Pass 1 shipped a figure I looked at and would not have accepted
+    # from anyone else: a flared cowl wider than its own shoulders that read as
+    # a LAMPSHADE, two arm stubs buried in a cape, and a fall-rope that ended
+    # in mid-air beside its face instead of in its hands. On the side view it
+    # also leaned FORWARD over the frame, which is the opposite of hauling.
+    # Four faults, one cause - I built the man as decoration on the machine
+    # instead of building the action. This block builds the ACTION: feet
+    # planted toward the frame, hips and shoulders tipped BACK off the rope,
+    # both arms reaching up and forward, and the rope terminating AT THE GRIP.
+    # PASS 6, ONE CHANGE: THE HAULER'S PROPORTIONS, AND ONLY THE FIT RENDER
+    # ON AN ACTUAL BODY COULD HAVE FOUND IT. minibossfit came back GREEN -
+    # verdict GREEN, 3 views proving, 0 blank, 0 blind, ratio 1.12 hero heights
+    # - and then I looked at hero_front.png. Beside the KayKit knight my hauler
+    # was a REALISTIC SEVEN-HEAD FIGURE: small head, long thin shins, long
+    # forearms. The knight is chibi - the head is about a third of him. Two
+    # different games standing next to each other, and not one number in that
+    # register is capable of saying so, because every number it computes is
+    # about SIZE and this is about PROPORTION.
+    # The set has hit this before and the register still carries the scars -
+    # ten bodies whose idea text ends "rebuilt in the game's own proportions"
+    # or "in the game's own register", plus a whole family of _chibi variants
+    # that exist for this one reason. The cheap answer is to ship this and
+    # queue a rammer_chibi. I am not doing that: the body has not shipped yet,
+    # so the fix costs one pass now instead of a second body forever.
+    # THE FRAME IS NOT TOUCHED. A pile-driver is a machine and machines are
+    # not chibi; it is the MAN who has to belong to the knight's world.
+    # Head ~0.46 across against a ~1.55 figure - a shade under a third, which
+    # is where the KayKit bodies sit. Limbs short and thick, neck gone.
+    GPX, GPY, GPZ = 0.62, 0.26, 1.40          # the grip - where the rope ends
+    for _s in (-1, 1):
+        limb(P, [(0.90 + _s * 0.14, 0.52, 0.64),
+                 (0.90 + _s * 0.18, 0.46, 0.34),
+                 (0.90 + _s * 0.21, 0.38, 0.085)], 0.125, 0.105, 'body')
+        P.add(L.box(0.215, 0.33, 0.085), 'dark',
+              loc=(0.90 + _s * 0.21, 0.30, 0.0425))
+    # a short barrel torso - broad for its height, which is the whole chibi read
+    limb(P, [(0.94, 0.52, 0.60), (0.97, 0.53, 0.84), (0.98, 0.52, 1.06)], 0.255, 0.225, 'body')
+    P.raw(aim(L.cone(0.280, 0.205, 0.17, 16), (0.98, 0.52, 1.00), (0.05, 0.02, 1.0)), 'body')
+    # THE HEAD. No neck: it sits straight on the shoulders, same as the knight.
+    P.add(L.sphere(0.225, 0.235, 0.240, 16, 11), 'dark', loc=(1.00, 0.50, 1.30))
+    P.raw(aim(L.cone(0.252, 0.088, 0.24, 16), (1.00, 0.51, 1.26), (-0.10, -0.06, 1.0)), 'body')
+    eyes(P, (0.97, 0.44, 1.30), 0.072, 0.035, -0.19)
+    # ARMS: short, thick, both up on the rope. Mitts, not hands - the bodies
+    # this stands beside have mitts.
+    limb(P, [(0.88, 0.44, 1.08), (0.76, 0.36, 1.26), (GPX + 0.04, GPY - 0.01, GPZ - 0.02)],
+         0.105, 0.080, 'body')
+    limb(P, [(1.06, 0.60, 1.04), (0.88, 0.48, 1.18), (GPX + 0.11, GPY + 0.07, GPZ - 0.12)],
+         0.100, 0.076, 'body')
+    P.add(L.sphere(0.092, 0.092, 0.082, 10, 7), 'body', loc=(GPX + 0.04, GPY - 0.01, GPZ - 0.02))
+    P.add(L.sphere(0.088, 0.088, 0.078, 10, 7), 'body', loc=(GPX + 0.11, GPY + 0.07, GPZ - 0.12))
+    return P
+
+
+
+# PASS 3, AND IT IS ONE CHANGE: COLOUR. Passes 1-2 rendered the whole body in
+# one grey. That is the monochrome-by-construction fault the Dyer found in the
+# generator - every material derived from ONE tint - and on THIS body it is not
+# a taste problem, it is a legibility problem and it breaks two of Mr. E's
+# three rules at once. Rule 1, things look like what they are FOR: a timber
+# pile-frame that renders the same value as its own iron block reads as
+# GALVANISED STEEL, which is not a thing a medieval crew drives piles with.
+# Rule 2, wear is a variable, not a style: the whole argument of this body is
+# that the frame is river-rotten and THE MONKEY IS KEPT, and one grey cannot
+# say that. I measured it off the pass-2 render rather than deciding it by eye:
+# the frame and the monkey differed only in value, never in hue.
+#   bone  WET OAK, bruised. Warm and dark: it has stood in water.
+#   dark  THE IRON, and it is the brightest-faced material here on purpose -
+#         a working man keeps his instrument (the Drillmaster's gong argument).
+#         The hauler's hood is also in this slot, so it picks up a little
+#         sheen; on a hood that reads as oiled leather, which is honest, but
+#         it IS a shared slot and I am naming it rather than hiding it.
+#   body  the hauler's wool, pulled to a river green-grey so the man SEPARATES
+#         from the timber he is standing against instead of merging into it.
+#   glow  the crew's chalk ring on the pile head. Strength 1.55, not 3.2: the
+#         Dyer's lesson is that an emissive pushed until it is bright clips to
+#         a white hole, and this mark has to stay a CHALK RING - it is the
+#         "where it lands" read and a white disc says nothing.
+OVERRIDE.update({
+    "rammer": {
+        'body': ((0.235, 0.250, 0.205), 0.80, 0.00),
+        'bone': ((0.330, 0.238, 0.148), 0.78, 0.00),
+        'dark': ((0.155, 0.160, 0.172), 0.42, 0.50),
+        'glow': ((1.000, 0.965, 0.840), 1.55),
+    },
+})
+
+BUILDERS.update({"rammer": rammer})
+
+
+# ============================================================================
+# 35 THE FULLER - IT GIVES BACK WHAT YOU PUT IN
+#
+# WHAT I CHECKED BEFORE DESIGNING, MEASURED OFF THIS FILE AND NOT REMEMBERED:
+# ORDER carries 34 keys at the time of writing (the prompt said 33 - the Rammer
+# landed after it was written), and I read all 34 mechanics in full before
+# choosing. NOTHING in the register stores damage and returns it. The nearest
+# four and why this is not one of them:
+#   TANNER      "will not take the same blow twice" - a damage-TYPE lockout.
+#               You change your answer. Here the type never matters; the TOTAL
+#               does, and the answer is to stop answering.
+#   STRICKLER   caps your best hero DOWN. A ceiling on output, not a ledger.
+#   GREENER     eats your weapons. A cost per blow, paid immediately.
+#   RAMMER      a timed drop. Its clock runs on ITS schedule - stand off the
+#               pile and come back. The Fuller's clock is written by the PARTY:
+#               it only fills when you hit it, so the party chooses when the
+#               payback lands, and that is the inversion - hitting it is how
+#               you lose.
+# AND THE RE-SKIN I NEARLY SHIPPED, WHICH IS WHY THIS IS NOT CLOTH ON A FRAME:
+# the Tanner already pegs flat hides onto upright tenters and this file already
+# has a `_tenter` helper. A fuller with cloth stretched on a frame would have
+# been the Tanner in a different hue - the mechanic would differ and the
+# PICTURE would not, which is the only thing a viewer gets. So the cloth here
+# is BALLED AND SWOLLEN IN A TROUGH, under twin stocks, and there is no
+# stretched sheet and no vertical drop-weight frame anywhere on the body.
+#
+# THE READ, AND IT IS THE MECHANIC: TROUGH, TWO HAMMER HEADS OVER IT, A PALE
+# MASS OF CLOTH BULGING OUT OF IT, MAN STANDING OFF TO THE LEFT ON THE BAR.
+# The cloth OVERFILLS the trough on purpose - that is the gauge, and a viewer
+# reads "that is full" without being told. The Drillmaster's lesson is applied
+# rather than rediscovered: the man stands LEFT of centre and the instrument is
+# off to his right, so the outline is MAN + THING and not a balloon on legs.
+#
+# THE MOULDER'S CONTRAST RULE, NINTH BODY RUNNING, and here it is load-bearing:
+# the man is DARK and the cloth is PALE, so his outline is carried by contrast
+# and I do not have to invent a rim light. His wool is the LIGHTER dark and the
+# hood, apron and the oak are the darker, so he has internal structure instead
+# of being one flat mass - the Paviser's fault 2 and the Drover's fault 3.
+#
+# AND THE BEADLE'S FAULT IS DESIGNED OUT, NOT HOPED AWAY. The team lead found
+# by LOOKING that the Beadle's pale band wrapped its head, so the figure read
+# the same from front and back - it had no facing. Every pale thing on this
+# body is therefore ONE-SIDED: the face panel exists only at -Y, the apron only
+# at -Y, the drips only on the near rim. The +Y side carries different objects
+# (the crank wheel and the dry folded stock on its rack), so front and back are
+# not the same picture. I still have to LOOK at the sheet to believe it.
+CANON.update({
+    "fuller": ("Wrynn", 2.66, (0.58, 0.60, 0.54), (1.00, 0.95, 0.82),
+               "fogbound",
+               "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the "
+               "cloth in its trough, and when the cloth is full it wrings the lot "
+               "out over the room at once. The cloth is the gauge and you can see "
+               "it swell, so the fight is a decision nothing else in here asks "
+               "for: STOP HITTING IT. Break the stocks, or wring it early and eat "
+               "a small one, or keep swinging and pay for every blow you landed",
+               0.62, "Something in here is taking the blows."),
+})
+ORDER = ORDER + ["fuller"]
+
+# Per-slot materials. The tint-derived path makes one hue carry a whole body,
+# which was MEASURED as a defect on the register (median satMean 0.087) and is
+# what OVERRIDE exists for. Here it is doing one specific job: MR. E'S SECOND
+# RULE, "the goods must not look second-hand even when the man does". The man
+# is wear 0.62 and reads it; the cloth is this week's stock off the loom and
+# must read FRESH, and a single wear-dulled tint cannot say both at once.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"fuller"}
+
+OVERRIDE.update({
+    "fuller": {
+        # THE MAN'S WOOL - the LIGHTER dark. Cool grey-green: a fulling yard is
+        # wet, and six of the recent bodies are warm brown-grey, so going cool
+        # costs nothing and separates him from the cohort at pane distance,
+        # where hue survives and detail does not (the Leech's argument, reused).
+        'body': ((0.150, 0.168, 0.158), 0.86, 0.00),
+        # OAK AND IRON IN ONE SLOT, AND I AM NAMING IT RATHER THAN HIDING IT.
+        # The trough, the apron, the hood, the pivot posts AND the two hammer
+        # faces are all here, so the iron cannot be brighter-faced than the
+        # timber the way the Drillmaster's gong is. Metal 0.18 is the
+        # compromise: enough that the hammer faces catch a highlight off the
+        # two suns, not enough to make a wet oak trough read as a cistern. If
+        # the faces do not read as iron on the sheet, that is the thing to fix,
+        # and it is a fifth slot or a vertex colour, not a brighter dark.
+        'dark': ((0.072, 0.062, 0.052), 0.80, 0.18),
+        # THE CLOTH, AND IT IS THE WHOLE POINT OF THE BODY. Greasy cream, warm,
+        # NOT bleached - the Comfitmaker measured that a cold white on a body
+        # reads as BONE, and a fuller's web before dyeing is yellow-white with
+        # the grease still in it. Lowest roughness of the three solids because
+        # wet-fulled wool is the one thing in this yard that is not matte.
+        'bone': ((0.760, 0.706, 0.584), 0.74, 0.00),
+        # THE LIQUOR straining out under the stocks. Strength 1.50, not 3.2:
+        # the Dyer's lesson is that an emissive pushed until it is bright clips
+        # to a white hole, and this has to stay READABLE AS RUNNING LIQUID -
+        # a white blob says nothing and the drips are the only motion cue here.
+        'glow': ((1.000, 0.955, 0.820), 1.50),
+    },
+})
+
+
+def _stock(P, px, pz_top, drop, head_w=0.40):
+    """ONE OF THE TWIN STOCKS: a pivot post, a raked oak arm and an iron-shod
+    head. `drop` 0.0 is fully raised, 1.0 is down on the cloth, so the two are
+    built at different values and the pair reads as ALTERNATING - which is what
+    a fulling stock does and is the only motion a static body can state."""
+    # the pivot post stands on the far (+Y) side so it never crosses the man
+    limb(P, [(px, 0.46, 0.0), (px, 0.44, pz_top)], 0.080, 0.066, 'dark')
+    P.add(L.sphere(0.075, 0.075, 0.075, 10, 7), 'dark', loc=(px, 0.44, pz_top))
+    # the arm swings from the post down and toward the camera over the trough
+    tip_z = pz_top - 0.30 - drop * 0.70
+    tip_y = 0.10 - drop * 0.26
+    limb(P, [(px, 0.42, pz_top), (px, 0.26 - drop * 0.10, pz_top - 0.14 - drop * 0.34),
+             (px, tip_y, tip_z)], 0.062, 0.052, 'bone')
+    # the head: a heavy block, iron-shod face down. Pitched with the arm so it
+    # lands flat on the cloth rather than cornering into it.
+    pitch = 0.30 - drop * 0.52
+    P.add(L.box(head_w, 0.30, 0.26), 'dark', loc=(px, tip_y - 0.04, tip_z - 0.12),
+          rot=(pitch, 0.0, 0.0))
+    for k in range(2):                       # two binding bands, so it reads shod
+        P.add(L.box(head_w * 1.06, 0.055, 0.28), 'bone',
+              loc=(px, tip_y - 0.16 + k * 0.22, tip_z - 0.12), rot=(pitch, 0.0, 0.0))
+    return tip_z
+
+
+def fuller():
+    """IT GIVES BACK WHAT YOU PUT IN. The gauge is on the outside of the
+    creature: the cloth swells in the trough as the party hits it, and when it
+    is full the stocks wring it out over the room. Everything a viewer needs is
+    in the silhouette - a trough, two hammers over it, and a pale mass that is
+    visibly too big for the box it is in.
+
+    Static: no anims entry. The alternating stocks are built at two different
+    drops so the PAIR states the motion the body cannot perform."""
+    P = Parts("fuller")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        # spans are (i0, i1) index pairs, the convention _trade_read, _sheen_ab
+        # and _rat_tally already measure by. Declared here so the instrument is
+        # asking about named groups and not about whatever happened to be built.
+        P.spans[name] = (_m[0], len(P.items))
+
+    # *** PASS 2, CHANGE A: THE MACHINE ATE THE MAN, AND THE NUMBER SAID SO. ***
+    # Pass 1 measured with _trade_read (the repo's own with/without-group pixel
+    # instrument, not a new one): the man was 0.2995 of the front silhouette
+    # and 0.0805 OF THE SIDE - from the side this was a fulling stock with a
+    # grey lump behind it, which is the Drillmaster's pass-1 fault ("the disc
+    # ATE HIM") arrived at from the other end. The man now sets the height and
+    # the machine comes down and in to meet him. ONE IDEA, and it is measured
+    # against the pass-1 number rather than judged by eye a second time.
+    X = -0.70                                  # the man stands left of centre
+    TX = 0.56                                  # the trough's centre, to his right
+
+    _open()
+    # ------------------------------------------------------------- THE TROUGH
+    # A heavy open box on two cross-feet. Built as four walls and a floor so the
+    # cloth can bulge OUT of it; a solid block would have hidden the gauge.
+    TW, TD, TH = 1.30, 0.82, 0.46              # inner width, depth, wall height
+    WALL = 0.085
+    P.add(L.box(TW + 2 * WALL, TD + 2 * WALL, 0.09), 'dark', loc=(TX, 0.0, 0.255))
+    for s in (-1, 1):                          # the two long walls (near/far)
+        P.add(L.box(TW + 2 * WALL, WALL, TH), 'dark',
+              loc=(TX, s * (TD / 2.0 + WALL / 2.0), 0.30 + TH / 2.0))
+        P.add(L.box(WALL, TD + 2 * WALL, TH), 'dark',   # the two end walls
+              loc=(TX + s * (TW / 2.0 + WALL / 2.0), 0.0, 0.30 + TH / 2.0))
+    for s in (-1, 1):                          # cross-feet, planted ON the floor
+        P.add(L.box(0.17, TD + 0.22, 0.30), 'dark', loc=(TX + s * 0.56, 0.0, 0.15))
+    # two iron hoops round the trough - a working trough is banded or it bursts
+    for s in (-1, 1):
+        P.add(L.box(TW + 2 * WALL + 0.03, 0.055, 0.10), 'bone',
+              loc=(TX, s * (TD / 2.0 + WALL / 2.0 + 0.01), 0.62))
+
+    _close("trough")
+    _open()
+    # -------------------------------------------- THE CLOTH: THE GAUGE, PALE
+    # Three squashed spheres plus folds, sitting PROUD of the rim so it reads as
+    # overfull. This is the biggest pale mass on the body and the eye lands on
+    # it first, which is on purpose: the cloth IS the mechanic.
+    for i, (dx, dz, rx, rz) in enumerate(((-0.44, 0.78, 0.44, 0.30),
+                                          (0.04, 0.86, 0.52, 0.34),
+                                          (0.50, 0.76, 0.42, 0.28))):
+        P.add(L.sphere(rx, 0.46, rz, 16, 11), 'bone', loc=(TX + dx, 0.0, dz))
+    # folds over the near rim - the web spilling toward the camera. One-sided on
+    # purpose (the Beadle's no-facing fault), so the near view differs from the far.
+    _close("cloth")
+    _open()
+    # *** PASS 2, CHANGE B, AND IT IS MEASURED ON ITS OWN SPAN. *** Pass 1 hung
+    # four separate round tubes over the near rim as "folds". On all three
+    # renders they read as FOUR BLUNT TEETH in a row - the trough looked like a
+    # jaw. They were 0.1036 of the front silhouette, so a tenth of the picture
+    # was saying the wrong word. Cloth hangs as ONE sheet with soft rolls in it,
+    # not as separate pegs, so it is now a single draped membrane with two
+    # rolls caught in it. Still one-sided (-Y only), which is what keeps the
+    # front and back reads different.
+    # *** PASS 3, CHANGE B2 - B WAS THE WRONG FIX FOR THE RIGHT FAULT. ***
+    # B replaced the four "teeth" with a drape 1.24 wide hanging to z 0.30 -
+    # near the trough's full width and most of its face. On the render the
+    # sheet, the cloth mass and the trough front merged into ONE PALE BLOB and
+    # the dark trough that was giving the cloth its contrast disappeared from
+    # the front view. That is the Comfitmaker's pass-3 pattern exactly: the
+    # fault was real and the fix was wrong. The folds number went UP (0.1036 ->
+    # 0.1648) while the picture got worse, which is why a footprint is not a
+    # verdict. Narrow and shallow now, so the DARK trough frames it on both
+    # sides and underneath and the pale reads as cloth spilling over a rim.
+    P.raw(L.membrane([(TX - 0.31, -0.45, 0.78), (TX + 0.31, -0.45, 0.78),
+                      (TX + 0.28, -0.53, 0.50), (TX - 0.28, -0.53, 0.53)], 0.050), 'bone')
+    for fx, dz in ((-0.17, 0.0), (0.15, 0.04)):
+        P.raw(L.tube([Vector((TX + fx - 0.11, -0.47, 0.74 + dz)),
+                      Vector((TX + fx + 0.01, -0.51, 0.66 + dz)),
+                      Vector((TX + fx + 0.13, -0.47, 0.73 + dz))],
+                     [0.042, 0.058, 0.042], 8), 'bone')
+    _close("folds")
+    _open()
+    # THE LIQUOR: a thin lit line along the near rim and three drips under it.
+    # Interior to the body and well inside the frame, so the border check is not
+    # being asked a question it cannot see.
+    P.add(L.box(TW * 0.86, 0.045, 0.030), 'glow', loc=(TX, -0.47, 0.455))
+    for k, dx in enumerate((-0.40, 0.06, 0.44)):
+        P.raw(L.tube([Vector((TX + dx, -0.47, 0.44)), Vector((TX + dx, -0.47, 0.16 + 0.05 * k))],
+                     [0.026, 0.014], 6), 'glow')
+    _close("liquor")
+    _open()
+    # --------------------------------------------------------- THE TWIN STOCKS
+    # Built at two different drops so the pair reads as alternating: the right
+    # one is DOWN on the cloth (and its head is what the liquor is running off),
+    # the left one is RAISED and about to fall.
+    _stock(P, TX - 0.36, 2.10, 0.08)
+    _stock(P, TX + 0.40, 2.10, 1.00)
+    # the head beam the two posts are braced to - it ties them into one machine
+    P.add(L.box(1.22, 0.11, 0.115), 'dark', loc=(TX + 0.02, 0.45, 2.17))
+
+    _close("stocks")
+    _open()
+    # ------------------------------------------------------------------ THE MAN
+    _legs(P, X, hip=1.10, stance=0.23, r0=0.128, r1=0.104, boot=(0.31, 0.50, 0.14))
+    for s in (-1, 1):                          # waders: wet to the knee, darker
+        limb(P, [(X + s * 0.24, 0.02, 0.62), (X + s * 0.28, -0.04, 0.11)],
+             0.142, 0.126, 'dark')
+    limb(P, [(X, 0.08, 1.04), (X - 0.02, 0.00, 1.38), (X - 0.03, -0.06, 1.62)],
+         0.258, 0.286, 'body')
+    P.add(L.box(0.64, 0.42, 0.58), 'body', loc=(X - 0.03, -0.04, 1.54))
+    for s in (-1, 1):
+        P.add(L.sphere(0.188, 0.170, 0.154, 12, 8), 'body',
+              loc=(X - 0.03 + s * 0.34, -0.04, 1.78))
+    # THE APRON - heavy, oiled, and ONLY on the -Y side. A fuller works in the
+    # splash and the apron is the one thing on him that is kept.
+    # *** PASS 4, CHANGE C: I QUOTED THE LESSON AND THEN BROKE IT. ***
+    # The header on this body cites the Paviser's fault 2 and the Drover's
+    # fault 3 - "the man is a flat dark mass" - and then pass 1 hung an apron
+    # 0.60 wide and 0.88 tall across him in the DARK slot, so from the chest
+    # down he was one unbroken rectangle. I did not see it until the hero sheet
+    # put him beside a KayKit knight, who has a belt, a cape and pauldrons
+    # breaking him up; next to that the Fuller read as a board with a head.
+    # So: the apron narrows and stops at mid-thigh, and a pale cord ties it.
+    # The LIGHTER wool of the torso and hips now shows on both sides of it,
+    # which is the internal structure the lesson is actually asking for - the
+    # fix is not a lighter apron, it is LESS apron.
+    P.raw(L.membrane([(X - 0.21, -0.30, 1.66), (X + 0.19, -0.30, 1.66),
+                      (X + 0.23, -0.38, 1.02), (X - 0.25, -0.38, 1.02)], 0.045), 'dark')
+    # the cord, and the two ends hanging off it - a pale break across the dark
+    P.raw(L.tube([Vector((X - 0.27, -0.30, 1.30)), Vector((X, -0.34, 1.27)),
+                  Vector((X + 0.25, -0.30, 1.30))], [0.032, 0.036, 0.032], 7), 'bone')
+    P.raw(L.tube([Vector((X + 0.17, -0.35, 1.26)), Vector((X + 0.20, -0.36, 1.06))],
+                 [0.028, 0.022], 6), 'bone')
+    # *** PASS 5: CHANGE C ADDED TWO SHOULDER STRAPS AND THEY WERE EARS. ***
+    # Aimed up-and-back off the apron's top corners they stood proud of the
+    # torso as two dark points, and on the hero sheet the apron stopped being a
+    # garment and read as an ANIMAL HEAD with two pricked ears - on the one
+    # body whose whole argument is that the man must read as a man. Removed
+    # rather than re-aimed: the cord already says the apron is worn, and a
+    # strap that has to thread behind a shoulder sphere to be safe is a thing
+    # that will come back as a fault the next time the shoulders move.
+    # the hood, and the head UNDER it. The hood is the darker slot so the pale
+    # face panel has a dark ground to be read against.
+    P.add(L.sphere(0.172, 0.180, 0.174, 14, 9), 'body', loc=(X - 0.04, -0.06, 2.05))
+    P.add(aim(L.cone(0.246, 0.138, 0.29, 14), (X - 0.04, 0.02, 1.95), (0.0, 0.10, 1.0)), 'dark')
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped.
+    P.add(L.box(0.190, 0.048, 0.155), 'bone', loc=(X - 0.04, -0.222, 2.04))
+    eyes(P, (X - 0.04, 0.0, 2.06), 0.057, 0.032, -0.252)
+
+    _close("man")
+    _open()
+    # ------------------------------------------- THE BAR, AND HIS HANDS ON IT
+    # A long oak bar from his grip across to the crank spindle at the trough's
+    # near end: this is the WRINGING, which is the "gives it back" half, and it
+    # physically ties the man to the machine so they read as one set piece.
+    bar = [Vector((X + 0.14, -0.32, 1.56)), Vector((X + 0.68, -0.36, 1.26)),
+           Vector((TX - 0.62, -0.42, 0.94))]
+    P.raw(L.tube(bar, [0.058, 0.051, 0.046], 8), 'bone')
+    limb(P, [(X + 0.26, -0.12, 1.72), (X + 0.18, -0.28, 1.59)], 0.082, 0.062, 'body')
+    limb(P, [(X - 0.34, -0.10, 1.74), (X - 0.46, -0.22, 1.32),
+             (X - 0.39, -0.32, 1.06)], 0.080, 0.058, 'body')
+    # A HAND, not a bare tube end: pass 1 left both arms stopping in mid-air.
+    P.add(L.sphere(0.082, 0.070, 0.070, 10, 7), 'dark', loc=(X + 0.16, -0.30, 1.57))
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=(X - 0.39, -0.33, 1.03))
+
+    _close("bar")
+    _open()
+    # ------------------------- THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The crank wheel on the trough's far end, and the dry folded stock on a low
+    # rack behind the machine. Neither is visible from the front, so front and
+    # back cannot be the same read - the Beadle's fault, designed out.
+    _ring(P, (TX + 0.92, 0.30, 0.78), 0.30, axis='x', slot='dark', rad=0.048, n=22)
+    for k in range(4):
+        a = TAU * k / 4.0 + 0.3
+        P.raw(L.tube([Vector((TX + 0.92, 0.30, 0.78)),
+                      Vector((TX + 0.92, 0.30 + 0.28 * math.cos(a), 0.78 + 0.28 * math.sin(a)))],
+                     [0.030, 0.026], 6), 'dark')
+    P.add(L.box(0.10, 0.10, 0.22), 'bone', loc=(TX + 0.92, 0.56, 0.90))
+    for s in (-1, 1):                          # the rack
+        P.add(L.box(0.085, 0.085, 0.60), 'dark', loc=(TX + s * 0.50, 0.86, 0.30))
+    P.add(L.box(1.20, 0.26, 0.070), 'dark', loc=(TX, 0.86, 0.63))
+    for k in range(3):                         # three bolts of DRY stock, folded
+        P.add(L.box(1.06, 0.195, 0.115), 'bone', loc=(TX, 0.86, 0.72 + k * 0.125))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"fuller": fuller})
+
+
+# ===================================================== 36 THE STACKMAN: a rising stack
+# MEASURED BEFORE DESIGNED. I read every hook in this file's own CANON off the
+# generator (35 keys across the five ORDER statements, not a number from a
+# prompt) and listed what each one DOES: summon, re-plate, drag, douse the
+# lamps, revive from niches, bar the door, steal gear, heal the room, flood it,
+# plant thorn, pre-set lines, size-from-fire, throw its voice, set the floor,
+# split in two, arm the room, weigh you down, cut the room in two, refuse a
+# repeated blow, take the haul, drink your brews, press your fallen, level your
+# best hero, mark one of you, green your iron, take a hero's shape, be paid by
+# the tail, yoke one of you, keep its facing, hunt what stirs, hand you the only
+# thing that cuts it, hold wounds open, take away the party's choice of order,
+# drop on a count, and give back what you put in.
+#
+# NOT ONE OF THE THIRTY-FIVE DENIES REACH. Thirty-five bodies and every single
+# fight happens at the same height. The Paviser turns a face to you, the Porter
+# shuts the door, the Hurdleman splits the floor - all of them are about WHERE
+# ON THE FLOOR you stand. This one leaves the floor. A melee hero with a hand
+# weapon simply cannot touch it while it is up, which is a sentence no other
+# row in this register can make, and it turns the party's whole composition
+# into the decision instead of its positioning.
+#
+# AND THE GAUGE IS THE GEOMETRY, which is the part that makes it art and not a
+# stat. The stack is built as THREE SEPARATE COURSES with their bindings
+# visible, so a viewer across the room can COUNT how far it has climbed without
+# reading a bar - the Fuller's swelling cloth argument, arrived at from the
+# other end. The bottom course is the answer and it says so in the silhouette:
+# its withy band is the only BROKEN one (an open C where the other two are
+# closed O's) and there are sheaves already spilled out of it on the floor.
+# Nobody has to be told to cut the base; the base is visibly the thing giving.
+#
+# WEAR IS A VARIABLE AND THIS BODY IS THE CLEANEST CASE OF IT YET. The man is
+# 0.70 - a field hand at the end of a harvest, and he reads it. The CROP IS
+# THIS WEEK'S and must read fresh-cut gold, because a viewer who spends points
+# on a harvest floor must not be handed last year's rotten straw. Same split
+# the Fuller used (worn man, fresh stock) and I am naming it as borrowed rather
+# than dressing it up as a new idea.
+#
+# THE BEADLE'S FAULT IS DESIGNED OUT, NOT HOPED AWAY. Every pale thing that
+# carries meaning is ONE-SIDED at -Y: the face panel, the ash fork shaft, the
+# spilled sheaves and the broken band. The +Y side carries DIFFERENT objects -
+# the pole ladder he climbed and a rake laid across the stack top - so front
+# and back cannot be the same picture. I still have to LOOK at the sheet to
+# believe it, and the hat worries me before I do: a wide pale brim above a wide
+# pale stack could leave the man as a thin dark bar between two bright masses.
+# That is the first thing I will judge, and it is written down BEFORE I look so
+# the render cannot talk me out of having suspected it.
+CANON.update({
+    "stackman": ("Huskpile", 2.84, (0.72, 0.60, 0.30), (1.00, 0.88, 0.46),
+                 "grassland",
+                 "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a "
+                 "fresh sheaf under its own feet and climbs a course, and from up "
+                 "there nothing with a hand on it can touch it; it pitches down at "
+                 "you for free. The stack is the gauge and you can count the "
+                 "courses from the doorway, so this is the one fight in here that "
+                 "asks about your PARTY and not your footing: cut the bottom "
+                 "course out from under it, or bring something with reach, or "
+                 "watch it climb out of the fight entirely",
+                 0.70, "Something up there is building itself higher."),
+})
+ORDER = ORDER + ["stackman"]
+
+# Per-slot materials. The tint-derived path makes one hue carry a whole body,
+# which is the measured defect OVERRIDE exists for (median satMean 0.087). Here
+# it is doing one specific job and it is Mr. E's second rule: the man is worn
+# and the crop is not, and a single wear-dulled tint cannot say both at once.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"stackman"}
+
+OVERRIDE.update({
+    "stackman": {
+        # *** PASS 2, CHANGE A - AND MY OWN COMMENT HERE WAS WRONG. ***
+        # Pass 1 wrote, in this exact spot, "going cool here would fight the
+        # straw", and put the man in a warm brown. _colour_read then measured
+        # the shipped materials and FAILED the body: satMean 0.2694 (above the
+        # register's 0.207 bar, so the colour does arrive) but BANDS 1 < 2 -
+        # one hue across the whole creature. A warm man on warm straw is a
+        # MONOCHROME BODY BY CONSTRUCTION, which is the exact defect this
+        # register was told to break. The instrument went red on its author and
+        # my taste argument was the thing that was wrong.
+        # So the wool goes cool: a dusty blue-grey smock, period-plain and the
+        # commonest dyed cloth a field hand would own. Value is held DOWN where
+        # pass 1 had it, because the dark man between two bright masses is the
+        # one thing in pass 1 the picture said was working.
+        'body': ((0.094, 0.112, 0.150), 0.88, 0.00),
+        # TIMBER AND IRON IN ONE SLOT, NAMED RATHER THAN HIDDEN - the same
+        # compromise the Fuller wrote down. The withy bands, the pole ladder,
+        # the boots, the rake tines and the FORK TINES are all here. Metal 0.12
+        # is the trade: enough that the tines catch a highlight off the two
+        # suns, not enough to make a withy band read as a hoop of steel. If the
+        # tines do not read as iron on the sheet that is a fifth slot or a
+        # vertex colour, NOT a brighter dark.
+        'dark': ((0.064, 0.054, 0.042), 0.82, 0.12),
+        # THE CROP, AND IT IS THE WHOLE RECEIPT. Fresh-cut straw: warm gold,
+        # NOT bleached - the Comfitmaker measured that a cold white on a body
+        # reads as BONE, and this has to read as grain. Lowest roughness of the
+        # three solids because new straw has a sheen on it that old straw has
+        # lost, which is exactly the difference a viewer is being shown.
+        'bone': ((0.792, 0.648, 0.286), 0.70, 0.00),
+        # The eyes under the brim and nothing else. Strength 1.70 and the eyes
+        # are small and set well inboard: the lesson from System 1's clipped
+        # ladder is that a glow which reaches the frame edge is invisible to a
+        # blank check, so a glow is kept small BY CONSTRUCTION and the border
+        # assertion is the backstop, not the plan.
+        'glow': ((1.00, 0.86, 0.44), 1.70),
+    },
+})
+
+
+def stackman():
+    """IT GETS ABOVE YOUR REACH. The mechanic is the whole lower half of the
+    body: a stack of this year's sheaves in three countable courses, with the
+    man standing ON it and pitching down. The affordance is in the silhouette
+    too - the bottom course's band is the only broken one.
+
+    Static: no anims entry. The two upper courses are closed rings and the
+    bottom one is an open C, so the PAIR of states the body cannot animate
+    through is stated by the geometry instead.
+    """
+    P = Parts("stackman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        # (i0, i1) index pairs - the convention _trade_read, _sheen_ab and
+        # _rat_tally already measure by, so the instruments are asking about
+        # named groups and not about whatever happened to get built.
+        P.spans[name] = (_m[0], len(P.items))
+
+    TOP = 0.98                      # the stack's top face: where he stands
+
+    _open()
+    # ------------------------------------------- THE STACK: THREE COURSES
+    # Sheaves laid radially, butt OUTWARD, tips toward the centre - which is how
+    # a stack is actually built, and it also means every course silhouettes as a
+    # clean drum rather than as a bristle. Each course is a touch smaller than
+    # the one under it so the stack tapers and the COURSE COUNT survives at
+    # pane distance, where the bands and the taper read and detail does not.
+    courses = ((0.17, 1.06, 13), (0.49, 0.96, 12), (0.79, 0.84, 11))
+    for ci, (cz, rad, n) in enumerate(courses):
+        for i in range(n):
+            a = TAU * i / n + ci * 0.26
+            P.raw(aim(L.cone(0.132, 0.050, rad * 0.86, 8),
+                      (rad * math.cos(a), rad * math.sin(a), cz),
+                      (-math.cos(a), -math.sin(a), 0.10)), 'bone')
+    # the top face he stands on - one capping layer, flat
+    P.add(L.cone(0.80, 0.70, 0.10, 16), 'bone', loc=(0.0, 0.0, TOP - 0.10))
+    _close("stack")
+
+    _open()
+    # -------------------------------------- THE BANDS: TWO CLOSED, ONE BROKEN
+    # This is the affordance and it is the only reason a viewer knows what to
+    # hit. An open collar silhouettes as a C and a closed one as an O - the
+    # Paviser's own measured argument, reused here to say "this course is the
+    # one that is giving" without a word of UI.
+    _ring(P, (0.0, 0.0, 0.49 + 0.06), 0.99, axis='z', slot='dark', rad=0.040, n=26)
+    _ring(P, (0.0, 0.0, 0.79 + 0.06), 0.87, axis='z', slot='dark', rad=0.038, n=24)
+    _open_ring(P, (0.0, 0.0, 0.17 + 0.06), 1.09, slot='dark', rad=0.042, n=20,
+               gap=0.30, axis='z', phase=-math.pi / 2.0 + TAU * 0.15)
+    # the two broken ends of that band, bent out of line - a band that merely
+    # stops reads as a band drawn short; a band with its ends sprung reads as a
+    # band that FAILED, which is the sentence this body needs it to say.
+    for s in (-1, 1):
+        P.raw(L.tube([Vector((s * 0.46, -0.99, 0.23)), Vector((s * 0.62, -0.86, 0.14))],
+                     [0.040, 0.030], 7), 'dark')
+    _close("bands")
+
+    _open()
+    # ------------------------------- THE SPILL: WHAT THE BROKEN BAND LET GO
+    # Three sheaves already out of the bottom course and down on the floor at -Y
+    # ONLY. Two jobs: it is the second half of the affordance, and it is a
+    # facing cue, because the back of this stack is intact.
+    for sx, sy, dx, dy in ((-0.52, -1.02, -0.30, -0.95),
+                           (0.06, -1.16, 0.10, -0.99),
+                           (0.56, -0.98, 0.42, -0.90)):
+        P.raw(aim(L.cone(0.128, 0.048, 0.86, 8), (sx, sy, 0.075), (dx, dy, 0.03)), 'bone')
+    # *** PASS 4 - THE CUT STUBBLE IS GONE, AND IT IS THE THING I BLAMED TWICE
+    # ON SOMETHING ELSE. _colour_read reported a ~90 px island floating off the
+    # silhouette in every pass. I guessed the RAKE (pass 2) and removed it: the
+    # island survived. I guessed the LADDER HEAD (pass 3) and re-seated it: the
+    # island survived at the SAME BOX. Two confident diagnoses, both wrong, and
+    # both made by reasoning about the model instead of looking at the picture.
+    # What settled it took one measurement: the island's own mean rgb is
+    # (0.568, 0.520, 0.395) - the BONE slot. Not the dark timber of either thing
+    # I had blamed. Cropping that box and looking showed a single thin tapered
+    # spike standing alone on the floor with clear daylight around it.
+    # IT WAS THE CUT STUBBLE, and it could never have been anything else: six
+    # separate cones standing on the ground at radius 1.18-1.30, touching no
+    # other geometry BY CONSTRUCTION. Floor dressing that stands apart from the
+    # body is a detached fragment every time, not sometimes. Pass 1's own
+    # comment here already suspected the stubble bought nothing and kept it
+    # anyway; it cost AABB, it was invisible at pane distance, and it was
+    # failing a silhouette assertion the whole time. Removed, not re-placed.
+    # THE LESSON IS THE ONE THIS LANE KEEPS RELEARNING: when a number and a
+    # picture disagree the picture wins - and when the number is the only thing
+    # that CAN see the fault, the answer is still to go and look at the pixels
+    # it is pointing at, not to reason about which part it must mean.
+    _close("spill")
+
+    _open()
+    # ------------------------------------------------ THE MAN, UP ON THE STACK
+    HIP = TOP + 0.84
+    for s in (-1, 1):
+        limb(P, [(s * 0.17, 0.05, HIP), (s * 0.23, 0.01, HIP - 0.46),
+                 (s * 0.27, -0.06, TOP + 0.05)], 0.104, 0.082, 'body')
+        # A BOOT, not a bare tube end. Pass 1 of the Fuller left two arms
+        # stopping in mid-air and the same fault at the ankle reads as a man
+        # sunk into the straw.
+        P.add(L.box(0.25, 0.40, 0.11), 'dark', loc=(s * 0.27, -0.13, TOP + 0.055))
+    P.raw(aim(L.cone(0.31, 0.25, 0.60, 12), (0.0, 0.0, HIP), (0.0, -0.06, 1.0)), 'body')
+    for s in (-1, 1):
+        P.add(L.sphere(0.115, 0.108, 0.104, 11, 8), 'body',
+              loc=(s * 0.25, -0.02, HIP + 0.58))
+    P.add(L.sphere(0.168, 0.176, 0.172, 14, 9), 'body', loc=(0.0, -0.03, HIP + 0.80))
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped.
+    P.add(L.box(0.165, 0.045, 0.135), 'bone', loc=(0.0, -0.205, HIP + 0.79))
+    eyes(P, (0.0, 0.0, HIP + 0.81), 0.052, 0.030, -0.232)
+    # the straw hat - the one piece of the crop he wears, and the trade read
+    P.raw(aim(L.cone(0.40, 0.30, 0.045, 16), (0.0, -0.03, HIP + 0.90), (0.0, 0.0, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.185, 0.085, 0.16, 14), (0.0, -0.03, HIP + 0.93), (0.0, 0.0, 1.0)), 'bone')
+    _close("man")
+
+    _open()
+    # ------------------------------------- THE FORK: THE REACH, SAID IN A LINE
+    # One long diagonal from his hands out and DOWN past the stack's edge. The
+    # shaft is ASH and therefore in the pale slot, which is not decoration: it
+    # is the strongest single line in the picture and it has to be, because the
+    # line IS the mechanic. The tines are iron and go dark.
+    # *** PASS 2, CHANGE C - THE MECHANIC VANISHED IN THE ONE VIEW THAT SHIPS.
+    # Pass 1 aimed the fork at (+1.06, -0.86): a 45-degree diagonal toward +X
+    # and -Y, which is almost exactly the THREE-QUARTER CAMERA'S OWN AXIS. In
+    # front.png it was the strongest line in the picture; in three_quarter.png -
+    # the view the contact sheet and the silhouette sheet both use - it
+    # foreshortened into a vertical pole standing between his legs, and the
+    # reach, which IS the mechanic, was simply not in the cell. Same fault class
+    # as the Fuller's pass 1 (the man was 0.2995 of the front and 0.0805 of the
+    # side): a body that only works from one camera.
+    # The fork is mirrored to -X. It is now broadside to the three-quarter
+    # camera, keeps its -Y component so the side view still reads it as a
+    # diagonal, and still crosses the front view - the other way round.
+    g0 = Vector((-0.12, -0.26, HIP + 0.46))
+    g1 = Vector((-0.40, -0.44, HIP + 0.10))
+    tip = Vector((-1.06, -0.86, TOP + 0.06))
+    P.raw(L.tube([Vector((0.06, -0.14, HIP + 0.62)), g0, g1, tip],
+                 [0.040, 0.046, 0.044, 0.038], 8), 'bone')
+    for s in (-1, 1):
+        P.raw(L.tube([tip,
+                      tip - Vector((0.15 + s * 0.09, 0.11, 0.05)),
+                      tip - Vector((0.28 + s * 0.16, 0.23, 0.17))],
+                     [0.030, 0.023, 0.013], 7), 'dark')
+    limb(P, [(0.25, -0.02, HIP + 0.56), (0.03, -0.18, HIP + 0.50),
+             (-0.10, -0.25, HIP + 0.46)], 0.082, 0.060, 'body')
+    limb(P, [(-0.25, -0.02, HIP + 0.56), (-0.36, -0.30, HIP + 0.28),
+             (-0.39, -0.42, HIP + 0.12)], 0.080, 0.058, 'body')
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=tuple(g0))
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=tuple(g1))
+    _close("fork")
+
+    _open()
+    # ------------------ THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The pole ladder he came up, and a rake laid across the stack top. Neither
+    # is visible from the front (the stack is in the way), and the front's pale
+    # objects are not visible from the back - so the two reads differ by
+    # CONSTRUCTION. This is the Beadle's no-facing fault designed out.
+    # *** PASS 3 - AND IT NAMES PASS 2's WRONG FIX. *** _colour_read reported a
+    # ~95 px island floating off the silhouette in BOTH passes. In pass 2 I
+    # blamed the rake and removed it; the island survived at 93 px, so that
+    # diagnosis was wrong and the rake was deleted on a bad reason (it was a
+    # poor prop on its own merits, which is why it has not come back). THEN I
+    # LOOKED AT THE PICTURE, which is what should have happened first: there is
+    # a small chip sitting ON the pale top disc in three_quarter.png, and it is
+    # the LADDER'S HEAD. Both passes put the pole tops ABOVE the capping layer
+    # (z = TOP+0.03 and TOP+0.16), so two stubs emerged through the cap, inside
+    # its radius, touching nothing - a detached fragment by construction. Same
+    # size in both passes because it was the same object both times.
+    # The head now rests against the THIRD COURSE's outer face, below the cap.
+    LY0, LZ0, LY1, LZ1 = 1.44, 0.01, 0.70, TOP - 0.19
+    for s in (-1, 1):
+        P.raw(L.tube([Vector((s * 0.26, LY0, LZ0)), Vector((s * 0.17, LY1, LZ1))],
+                     [0.050, 0.042], 7), 'dark')
+    for k in range(5):
+        t = (k + 0.5) / 5.0
+        yy = LY0 + (LY1 - LY0) * t
+        zz = LZ0 + (LZ1 - LZ0) * t
+        hw = 0.26 + (0.17 - 0.26) * t
+        P.raw(L.tube([Vector((-hw, yy, zz)), Vector((hw, yy, zz))],
+                     [0.028, 0.028], 6), 'dark')
+    # *** PASS 2, CHANGE B - THE RAKE IS GONE, AND AN INSTRUMENT FOUND IT,
+    # NOT MY EYE. Pass 1 laid a rake across the stack top at +Y. By eye I only
+    # wrote that it "reads as a stick through his legs". _colour_read's
+    # connectivity assertion said something my eye could not: a 95 px island at
+    # [394,551]-[400,574] in front.png FLOATS OFF THE BODY, with the mirror of
+    # it in back.png - the rake handle's far end, separated from every other
+    # silhouette pixel by a gap. A detached fragment is worse than a bad prop:
+    # on a dark floor it reads as a second, tiny object. It is removed rather
+    # than re-seated, because it was failing at its own job too - it was
+    # visible from the FRONT, so it was not a facing cue at all.
+    # The ladder now carries the back on its own, and it is built to READ as a
+    # ladder: longer poles, a steeper rake, five rungs, and its head resting
+    # ON the top course so it is one connected silhouette with the stack.
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"stackman": stackman})
+
+
+# ----------------------------------------------------------------- 37 THE DAUBER
+# MY OWN COUNT, MEASURED NOT REMEMBERED (ast walk of this file, 20 Nov 10:4x CT):
+# CANON and BUILDERS each carry 50 keys and agree exactly - no builder without a
+# canon row and no canon row without a builder. 14 of those keys are VARIANT
+# BODIES (_chibi x12, _tall, _chibi_tall), so the distinct miniboss count before
+# this one is THIRTY-SIX, not the 33 my prompt carries. The Dauber is the 37th.
+#
+# WHY A WALL AND NOT ANOTHER GAUGE. I read all 36 idea lines before designing,
+# because a re-skin is the one failure this slot cannot absorb. The thirty-six
+# already own: summoning, re-plating, dragging, light, resurrection, door-barring,
+# gear theft, pack healing, blind-hunts-the-last-mover, mark-and-chase, weapon
+# corrosion, splitting, encumbrance, copying a hero, facing/shield, converting the
+# fallen, arming the room, a timed drop, corpse-eating, loot denial, rising water,
+# pre-set traps, thorns, climbing out of reach, fire-size, levelling the best hero
+# down, no-repeat-damage, potion drinking, healing denial, sugar-shell gifting,
+# yoke damage-sharing, splitting the line in two, displaced sound, floor-setting,
+# forced action order and stored-damage release.
+# NOTHING TAKES THE ROOM AWAY A COURSE AT A TIME. The Hurdleman divides the floor
+# once and the Sluicekeeper floods it, but neither SHRINKS it, and neither puts a
+# PERISHABLE window on the answer. That window is the new verb here: fresh daub
+# can be broken and set stone cannot, so the party is not choosing how to kill
+# this thing, it is choosing between hitting the Dauber and hitting the wall it
+# just laid - and the choice expires while they argue about it.
+CANON.update({
+    "dauber":  ("Wetwall", 2.58, (0.74, 0.72, 0.66), (0.86, 0.92, 0.84),
+                "keep", "IT WALLS YOU IN - every time you hurt it it lays a fresh "
+                "course across the room and the floor you have left to fight on gets "
+                "smaller. The course goes up WET, and while it is wet it can be broken "
+                "by anything; once it sets, nothing the party carries will open it "
+                "again. So the fight is a choice that expires: swing at the Dauber, or "
+                "spend the same swing on the wall it just laid, and the hod on its "
+                "shoulder says how many courses it still has to give you",
+                0.42, "Something is laying up a wall behind you."),
+})
+ORDER = ORDER + ["dauber"]
+
+# PER-SLOT MATERIALS, AND THE REASON IS MR. E'S SECOND RULE RATHER THAN TASTE.
+# The tint-derived path pulls one hue over a whole body (the measured defect at
+# median satMean 0.087). This body has to say TWO conditions at once: the man and
+# his trade are worn, and THE MATERIAL IS BRAND NEW AND STILL WET. Wear is the
+# receipt, and a single wear-dulled tint cannot carry a worn mason and fresh lime
+# in the same frame. Same argument the Stackman wrote down for straw.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"dauber"}
+
+OVERRIDE.update({
+    "dauber": {
+        # The smock. Held cool and DOWN in value, because every pale thing on
+        # this body is load-bearing - the blocks, the daub, the face - and they
+        # only read as bright if the man they hang on is dark. Lime-stained
+        # wool: a mason's smock is never a clean colour.
+        # *** PASS 2, CHANGE D - MEASURED OFF MY OWN RENDER, NOT OFF TASTE. ***
+        # Pass 1 put the smock at (0.112,0.118,0.126) and the dark slot at
+        # (0.070,0.068,0.062) - 0.04 apart in value and barely apart in hue. In
+        # all three renders the smock, the apron, the boots and the hod frame
+        # are ONE dark mass with the pale blocks floating on it, which is the
+        # monochrome-body defect OVERRIDE exists to break, arrived at from the
+        # other direction: I avoided a single hue and shipped a single VALUE.
+        # Lifted and cooled so the man separates from his own ironwork, and
+        # still held well below the pale so the wet lime is the brightest thing
+        # on the body - which it has to be, because it is the affordance.
+        'body': ((0.173, 0.186, 0.208), 0.90, 0.00),
+        # SET STONE, TIMBER AND IRON IN ONE SLOT, NAMED RATHER THAN HIDDEN -
+        # the compromise the Fuller and the Stackman both wrote down. The hod
+        # frame, the pail, the trowel blade, the boots, the apron, the mortar
+        # joints and the plumb bob are all here. Metal 0.14 so the trowel
+        # catches a highlight without a withy reading as steel. THE SET COURSE
+        # IS IN THIS SLOT ON PURPOSE: set stone is the thing you cannot break,
+        # and it is the dark half of the pair this body exists to show.
+        'dark': ((0.070, 0.068, 0.062), 0.80, 0.14),
+        # WET LIME. This is the whole receipt and the whole affordance. Roughness
+        # 0.44 is the lowest solid on any body in this file, because WET is a
+        # specular fact, not a colour fact - dial the colour brighter and you get
+        # chalk, drop the roughness and you get slip. Warm-neutral rather than
+        # blue-white: the Comfitmaker measured that a cold white body reads as
+        # BONE, and this has to read as mortar going off.
+        'bone': ((0.818, 0.800, 0.730), 0.44, 0.00),
+        # Eyes only, small and set well inboard. System 1's clipped ladder is
+        # the standing lesson: a glow that reaches the frame edge is invisible
+        # to a blank check, so the glow is kept small BY CONSTRUCTION and the
+        # border assertion is the backstop, not the plan.
+        'glow': ((0.98, 0.88, 0.52), 1.65),
+    },
+})
+
+
+def dauber():
+    """IT WALLS YOU IN. The mechanic is carried in two places on purpose, so the
+    body answers both halves of the viewer's question without a word of UI:
+
+      HOW MANY MORE?  Five pale blocks stepping up and out along the hod pole,
+                      each one parted from the next by a dark mortar joint.
+                      Countable from the doorway, broadside to the three-quarter
+                      camera (the Stackman's pass-2 lesson: a mechanic aimed
+                      along the camera axis foreshortens into nothing).
+      CAN I BREAK IT? The course already laid is on the floor at -Y, and the bead
+                      of daub along its joint is in the SAME PALE SLOT as the
+                      blocks and the pail. Pale means wet means breakable; the
+                      dark stone is the half you have left too long.
+
+    Static: no anims entry. Its two states - wet and set - are stated by the
+    material pair and by one block left half-seated and out of line, so the pair
+    the body cannot animate through is said by the geometry instead.
+
+    ROOM-LOCKED BY CONSTRUCTION is NOT claimed here. The widest extent is the
+    hod pole reaching out in +X; minibossgen measures the real footprint and the
+    report says whether it clears the corridor. I do not pre-judge that number.
+    """
+    P = Parts("dauber")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 0.95
+    SHO = 1.56
+    HEAD = 1.80
+
+    _open()
+    # ----------------------------------------------------- THE MAN: PLANTED WIDE
+    # One foot forward and one braced back, because a man laying a course is not
+    # standing to attention - and because a raked leg is the one thing in this
+    # file that has floated nine bodies before. seat() lifts each limb by its own
+    # first segment so a literal 0.0 at the ankle really is the floor.
+    for s, fy, by in ((-1, -0.22, 0.0), (1, 0.16, 0.0)):
+        limb(P, seat([(s * 0.19, by, HIP), (s * 0.25, by - 0.04, HIP - 0.48),
+                      (s * 0.27, fy, 0.085)], 0.106),
+             0.106, 0.084, 'body')
+        # A BOOT, not a bare tube end. The Fuller shipped two arms stopping in
+        # mid-air at pass 1 and the same fault at the ankle reads as a man sunk
+        # into his own mortar.
+        P.add(L.box(0.25, 0.42, 0.115), 'dark', loc=(s * 0.27, fy - 0.05, 0.058))
+    P.raw(aim(L.cone(0.32, 0.26, 0.64, 12), (0.0, 0.02, HIP), (0.0, -0.05, 1.0)), 'body')
+    # THE APRON - a dark plate hung on the front only. It does three jobs: it is
+    # the trade read, it keeps the front of the torso dark so the pale face panel
+    # and the pale pail both separate from it, and it is a FACING CUE, because
+    # there is no apron on the back.
+    P.add(L.box(0.46, 0.055, 0.56), 'dark', loc=(0.0, -0.23, HIP - 0.04))
+    for s in (-1, 1):
+        P.add(L.sphere(0.118, 0.110, 0.106, 11, 8), 'body', loc=(s * 0.26, 0.0, SHO))
+    P.add(L.sphere(0.170, 0.178, 0.174, 14, 9), 'body', loc=(0.0, -0.02, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped. This
+    # is the Beadle's measured fault designed out: that body's pale eye-band
+    # wrapped the head and the figure read the same from front and back, so it
+    # had no facing at all. One panel, one side, and the eyes inside it.
+    P.add(L.box(0.168, 0.046, 0.138), 'bone', loc=(0.0, -0.198, HEAD - 0.01))
+    eyes(P, (0.0, 0.0, HEAD + 0.01), 0.052, 0.030, -0.226)
+    # A flat mason's cap, brim at the back only - second facing cue, and it keeps
+    # the top of the head dark so the pale block stack behind it separates.
+    P.raw(aim(L.cone(0.185, 0.172, 0.055, 14), (0.0, -0.02, HEAD + 0.14), (0.0, 0.0, 1.0)), 'dark')
+    P.add(L.box(0.30, 0.20, 0.035), 'dark', loc=(0.0, 0.14, HEAD + 0.155))
+    _close("man")
+
+    _open()
+    # --------------------------------- THE HOD: THE GAUGE, AND IT IS THE AFFORDANCE
+    # A hodman's pole over the right shoulder, raked UP AND OUT IN +X with only a
+    # little +Y. The rake is deliberate and it is the Stackman's pass-2 correction
+    # applied before the fault rather than after it: a line aimed along the
+    # three-quarter camera's own axis (+X,-Y) collapses to a vertical pole in the
+    # one view that ships. This one is swung across the frame instead, so it reads
+    # as a DIAGONAL at three-quarter, as a diagonal from the front, and
+    # foreshortens only in the side view where the five blocks still stack.
+    pole0 = Vector((0.20, 0.10, SHO - 0.18))
+    pole1 = Vector((1.06, 0.40, 2.46))
+    # PASS 3: the butt end carries on past the shoulder and DOWN THE BACK, so
+    # the shaft is a continuous line from the hand to the far tip rather than a
+    # stub appearing out of the stone.
+    P.raw(L.tube([Vector((-0.16, 0.26, HIP - 0.18)), Vector((-0.02, 0.14, HIP + 0.16)),
+                  pole0, pole0 + (pole1 - pole0) * 0.93],
+                 [0.038, 0.046, 0.052, 0.038], 8), 'dark')
+    # The V-trough the blocks sit in - two boards along the pole's upper half.
+    # *** PASS 5, AND THE HERO-SCALE PANE IS WHAT FOUND IT - NOT ANY NUMBER
+    # AND NOT THE 700 px BODY SHOTS. *** At full size the hod reads as five
+    # mortared blocks on a shaft. Shrunk to the fit sheet's cell - roughly what
+    # a viewer gets from across a room, which is the ONLY distance that matters
+    # for a set-piece - the stone loses its solidity, the four joints become
+    # rungs, and the thing on his shoulder is A LADDER. Every instrument was
+    # green through all of it: blanks 0, border 0, span 1.80 m, GREEN fit, and
+    # the count still countable. THE PICTURE AT THE RIGHT SIZE SAID OTHERWISE.
+    # A ladder needs TWO STILES and rungs between them. Pass 4 killed one stile
+    # (the second board) and the read survived, because the pole's overhang
+    # ABOVE the stack and the board running the full length were still a pair.
+    # Both are cut here: the shaft now STOPS INSIDE the load, and the board is a
+    # lip under the bottom two courses only. Nothing brackets the joints any
+    # more, so a stepped run of bars has nothing to be a ladder with - and the
+    # count, which is the mechanic, is untouched.
+    # PASS 4: ONE board, not two. Two parallel boards either side of a pole are
+    # STILES, and stiles plus the old protruding joints are what made the side
+    # view a ladder. One lip on the low side is all a hod needs to hold a course
+    # on, and it is what stops the stack reading as a slab glued to the shaft.
+    a = pole0 + (pole1 - pole0) * 0.16
+    b = pole0 + (pole1 - pole0) * 0.52
+    P.raw(L.tube([a + Vector((0.0, -0.20, 0.03)), b + Vector((0.0, -0.20, 0.03))],
+                 [0.030, 0.026], 6), 'dark')
+    # FIVE BLOCKS, FIVE COURSES LEFT. Each parted from its neighbour by a dark
+    # mortar plate that is WIDER than the block, so the gap survives at pane
+    # distance - the count is the mechanic and a count that merges into one pale
+    # bar at distance is a count nobody can read.
+    # *** PASS 2, CHANGE A - AND THE PICTURE NAMED THE FAULT, NOT A NUMBER. ***
+    # Pass 1 stepped each block up AND out along the pole while leaving every
+    # block AXIS-ALIGNED. Every instrument passed it - blank check clean, border
+    # clean, span 1.87 m, 5 blocks countable - and the render is unmistakably A
+    # FLIGHT OF STAIRS coming off his shoulder. In front.png it is not even
+    # ambiguous. A stepped run of level slabs IS a staircase; that is what the
+    # shape means, and no amount of calling it a hod in a comment changes what a
+    # viewer sees in a 700 px pane. On a MASON, of all bodies, that misread is
+    # the worst one available.
+    # THE FIX IS ONE LINE OF GEOMETRY: rotate each block onto the POLE'S OWN
+    # AXIS, so the blocks stack face to face along the pole and the load reads as
+    # a slanted column of stone carried on a shaft. Nothing else changes - same
+    # five blocks, same mortar joints, same count from the doorway.
+    dirv = (pole1 - pole0).normalized()
+    rot = Vector((0.0, 0.0, 1.0)).rotation_difference(dirv).to_matrix()
+    upp = (Vector((0.0, 0.0, 1.0)) - dirv * dirv.z).normalized()
+    for i in range(5):
+        # *** PASS 3 - THE LOAD HAD NO CARRIER. *** At 0.155 the offset was
+        # SMALLER than the block's own perpendicular half-extent, so the pole ran
+        # INSIDE the stone and the only part of it anyone could see was the stub
+        # out of the top. A slab of five courses apparently glued to a shoulder.
+        # 0.27 puts the shaft clear of the block undersides, where a hod's pole
+        # actually is and where the eye needs it to explain the load.
+        c = pole0 + dirv * (0.26 + 0.238 * i) + upp * 0.27
+        vs, fs = L.box(0.46, 0.34, 0.196)
+        P.raw(([rot @ v + c for v in vs], fs), 'bone')
+        if i < 4:
+            # the joint is WIDER than the block in both lateral axes, so the
+            # parting survives at pane distance - the count is the mechanic and
+            # a count that merges into one pale bar is a count nobody can read.
+            # *** PASS 4 - THE JOINTS WERE BUILT AS RUNGS. *** Pass 2 made the
+            # mortar plate WIDER than the block on purpose, so the parting would
+            # survive at pane distance. It does - and in side.png those four
+            # protruding dark bars, between two trough boards and a pole, add up
+            # to a LADDER: stiles and rungs, the exact silhouette the Stackman
+            # already owns. Recessed inside the block footprint instead. The
+            # parting still reads, because it is a SHADOW LINE between two pale
+            # faces now rather than a bar laid across them, and nothing sticks
+            # out of the stack to be mistaken for a rung.
+            vs, fs = L.box(0.42, 0.30, 0.046)
+            cm = c + dirv * 0.121
+            P.raw(([rot @ v + cm for v in vs], fs), 'dark')
+    _close("hod")
+
+    _open()
+    # ------------------------------------- THE RIGHT ARM: UP ON THE POLE
+    limb(P, [(0.26, 0.0, SHO - 0.02), (0.28, 0.07, SHO - 0.26),
+             (0.21, 0.10, SHO - 0.17)], 0.084, 0.062, 'body')
+    P.add(L.sphere(0.080, 0.070, 0.070, 10, 7), 'dark', loc=tuple(pole0))
+    _close("rightarm")
+
+    _open()
+    # -------------------------- THE TROWEL: THE TOOL, AND IT IS THE VERB
+    # Low and forward in the left hand, blade flat as if it has just struck a
+    # joint off. Iron, so it goes dark - and it is the only thing on the body
+    # whose edge catches the sun off the metal term in the dark slot.
+    hand = Vector((-0.40, -0.40, HIP - 0.28))
+    limb(P, [(-0.26, -0.02, SHO - 0.04), (-0.38, -0.22, HIP + 0.06),
+             tuple(hand)], 0.084, 0.060, 'body')
+    P.raw(L.tube([hand, hand + Vector((-0.08, -0.17, -0.03))], [0.046, 0.040], 7), 'dark')
+    tip = hand + Vector((-0.12, -0.52, -0.05))
+    P.raw(L.tube([hand + Vector((-0.09, -0.19, -0.03)), tip], [0.026, 0.016], 6), 'dark')
+    # *** PASS 2, CHANGE C - IT READ AS A PADDLE. *** Pass 1's blade was 0.44
+    # deep and dead flat, and in side.png it is an oar held out at hip height.
+    # Shorter, narrower and RAKED DOWN at the tip, which is both what a trowel
+    # looks like and what one looks like IN USE - the tip toward the work.
+    _bv, _bf = L.box(0.175, 0.30, 0.024)
+    _br = Matrix.Rotation(math.radians(-24.0), 3, 'X')
+    _bc = hand + Vector((-0.11, -0.36, -0.065))
+    P.raw(([_br @ v + _bc for v in _bv], _bf), 'dark')
+    # A SMEAR OF WET DAUB ON THE BLADE'S UPPER FACE. Two jobs: it is the only
+    # place the pale and the dark touch edge to edge, which is what makes the
+    # pair read as one material in two states rather than as two unrelated
+    # colours; and it says the tool is IN USE.
+    P.add(L.sphere(0.072, 0.115, 0.026, 11, 7), 'bone',
+          loc=tuple(hand + Vector((-0.11, -0.345, -0.042))))
+    _close("trowel")
+
+    _open()
+    # ----------------------------- THE PAIL: WHERE THE WET COMES FROM
+    # Slung at the LEFT hip, front quarter, so it sits against the dark apron and
+    # separates. The pail is timber (dark); the daub standing proud of the rim and
+    # the run down the outside are pale, and the run is what makes a viewer read
+    # "full and slopping" rather than "a bucket".
+    pc = Vector((-0.40, -0.14, HIP - 0.52))
+    P.raw(aim(L.cone(0.205, 0.165, 0.30, 14), tuple(pc), (0.06, -0.04, 1.0)), 'dark')
+    _ring(P, tuple(pc + Vector((0.02, -0.01, 0.30))), 0.205, axis='z', slot='dark',
+          rad=0.026, n=18)
+    P.add(L.sphere(0.198, 0.198, 0.075, 14, 8), 'bone',
+          loc=tuple(pc + Vector((0.02, -0.01, 0.31))))
+    P.raw(L.tube([pc + Vector((-0.16, -0.11, 0.30)), pc + Vector((-0.21, -0.14, 0.12)),
+                  pc + Vector((-0.19, -0.13, 0.02))], [0.055, 0.042, 0.030], 7), 'bone')
+    _close("pail")
+
+    _open()
+    # ---------------- THE COURSE ALREADY LAID: THE HALF A VIEWER CAN STILL BREAK
+    # On the floor at -Y, in front of his own feet, where a mason's last course
+    # actually is. Two blocks seated and a THIRD half-seated and out of line - the
+    # Paviser's open-collar argument reused: a course that merely stops reads as a
+    # wall drawn short, a course with one block still crooked reads as a wall being
+    # BUILT RIGHT NOW, which is the sentence this body needs.
+    for bx in (-0.50, -0.02, 0.46):
+        P.add(L.box(0.455, 0.275, 0.20), 'dark', loc=(bx, -0.80, 0.10))
+    # the bed joint, pale and proud of the stone - WET, therefore breakable
+    P.raw(L.tube([Vector((-0.74, -0.80, 0.205)), Vector((0.70, -0.80, 0.205))],
+                 [0.040, 0.040], 7), 'bone')
+    # THE CROOKED ONE, up on that bed and off square by eye. Rotated about Z
+    # rather than modelled bent, so the block is the SAME box as the three under
+    # it - if a viewer can see this one is crooked, it is because it is crooked
+    # and not because it was drawn differently.
+    vs, fs = L.box(0.455, 0.275, 0.20)
+    rot = Matrix.Rotation(math.radians(13.0), 3, 'Z')
+    off = Vector((0.30, -0.82, 0.325))
+    P.raw(([rot @ v + off for v in vs], fs), 'dark')
+    # and the daub squeezed out under it
+    P.add(L.sphere(0.20, 0.10, 0.030, 12, 7), 'bone', loc=(0.30, -0.80, 0.228))
+    _close("laid")
+
+    _open()
+    # ------------------ THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The plumb line and bob, hung off the hod pole and falling clear behind the
+    # heel. It is invisible from the front (the body is in the way) and the
+    # apron, the pail, the trowel, the laid course and the face are all invisible
+    # from the back - so the two reads differ BY CONSTRUCTION rather than by
+    # hoping the camera is kind. One connected silhouette: the line starts on the
+    # pole and the bob stops ON the floor, not in the air.
+    # *** PASS 2, CHANGE B - A COLLISION THAT EXISTS ONLY IN PROJECTION, AND IT
+    # IS STILL A FAULT. *** In 3D the pass-1 bob (x +0.46) and the lime bag
+    # (x -0.40) are 0.86 apart and never touch. In side.png the camera looks
+    # ALONG X, that separation collapses to nothing, and the bob's spike is
+    # driven clean through the top of the bag. No occupancy or intersection test
+    # would ever have reported it, because nothing intersects. The viewer's
+    # question is not "do these overlap in space", it is "what does this picture
+    # show", and the picture showed a spike in a sack.
+    # The bob now hangs SHORT and well above the floor - which is also what a
+    # plumb bob does - and clears the bag in Y and Z as well as in X, so the
+    # side projection has nothing to stack.
+    anch = pole0 + (pole1 - pole0) * 0.20
+    # PASS 3: swung further round to +Y so it hangs BEHIND the hip rather than
+    # across it. In pass 2's front.png it crossed the torso and read as a dart on
+    # his chest - a back-side cue has no business being the clearest small object
+    # in the front view.
+    P.raw(L.tube([anch, Vector((0.40, 0.46, 1.24)), Vector((0.405, 0.48, 0.97))],
+                 [0.013, 0.012, 0.012], 6), 'dark')
+    P.raw(aim(L.cone(0.052, 0.0, 0.16, 10), (0.405, 0.48, 0.97), (0.0, 0.0, -1.0)), 'dark')
+    # the bagged lime he is working out of, stood against his back heel
+    P.raw(aim(L.cone(0.21, 0.13, 0.34, 12), (-0.40, 0.52, 0.0), (-0.07, 0.10, 1.0)), 'dark')
+    P.add(L.sphere(0.155, 0.155, 0.060, 12, 7), 'bone', loc=(-0.42, 0.55, 0.345))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"dauber": dauber})
+
+
+# =============================================================================
+# 38 THE SEALER - IT SEALS WHAT YOU CARRY
+# =============================================================================
+# THE IDEA, AND WHY IT IS NOT A RE-SKIN OF THE OTHER THIRTY-SEVEN. I read every
+# `idea` string in CANON off this file before designing (AST walk, 51 keys, 14
+# variants, 37 bases) and wrote the mechanic space out: summon, re-armour,
+# drag, douse, mark-and-hunt, split, wall off, divide the room, climb out of
+# reach, block healing, heal the pack, weigh down, steal gear, level down, take
+# the loot, refuse a repeated answer, give damage back, corrode iron, yoke the
+# harm onto a hero, stand your fallen up on its side, raise the water, set the
+# floor, feed on the fire, drink the brews, be paid by the corpses, rise again,
+# lock the turn order, copy a hero, drop on a count, pre-trap the room, bar the
+# door, arm the room, keep its shield facing, hunt whoever moved, throw its
+# voice, hand you the only tool that cuts it, plant thorn.
+#
+# NOTHING IN THAT LIST TOUCHES THE PACK. Every one of the thirty-seven is about
+# the party's BODIES, their TURN or their IRON. The Tallyman lifts gear and
+# wears it, which is the nearest thing, and it is a different verb: he takes
+# what you are HOLDING and walks off with it. The Sealer takes nothing and
+# breaks nothing. It shuts the bag, one hero at a time, and everything inside
+# stays yours and stays unreachable. The flask you were saving is still there.
+#
+#   IT SEALS WHAT YOU CARRY - each bite of the press shuts ONE hero's pack:
+#   no flask, no bandage, no scroll, nothing that hero walked in with. The
+#   strip of lead blanks on its hip says how many more it can still shut, so
+#   the party can count the fight it has left before it starts. Break the press
+#   or win on what is already in your hands.
+#
+# THEME: treasury. Three bodies there now (Strickler, Tallyman, Sealer) against
+# four in keep and workshop - the thinnest theme that a sealer honestly belongs
+# in. A customs man with a press and a strip of lead is a counting-house body,
+# not a barracks one.
+#
+# WEAR 0.22, AND IT IS AN ARGUMENT RATHER THAN A DIAL. A sealer's press IS his
+# authority: it is the one thing on him that is oiled, and a man who seals for
+# a living does not own a rusty press. The coat is another matter and is held
+# worn. 0.22 is free in this file (0.15 Drillmaster, 0.30 Scrapwright, 0.42
+# Dauber, 0.80 Gaoler, 0.90 Snuffer).
+#
+# *** CORRECTION (a) FROM THE 10:58 TEAM LEAD REVIEW, TAKEN ON THIS BODY. ***
+# On the Dauber the lead looked at the pictures and found a fault no number
+# here could reach: the plumb bob - a thin line with a solid cone hanging off
+# its end, clear of the body - READS AS A UI DOWNLOAD ARROW at hero scale, and
+# it was the most legible object on the creature. A sealer's natural first
+# sketch is lead seals swinging on cords, which is the SAME SHAPE FOUR TIMES
+# OVER: thin line, solid blob, hanging in clear air. So it is designed out
+# rather than drawn and judged:
+#   - NOTHING ON THIS BODY HANGS. The blanks are seated in a slotted bar, each
+#     disc touching the bar and its neighbours, so no pale blob ever stands at
+#     the end of a thin line in open space.
+#   - THE SCREW IS NOT A STEM AND A POINT. It is short, thick, and it ends in a
+#     square head under a crossed tommy bar - a T, which no interface draws.
+#   - THE STRIP IS DELIBERATELY IRREGULAR: one slot already empty, one blank
+#     already struck and raised. Five identical discs in a row is its own UI
+#     read (a row of progress dots), and variation is what kills it.
+CANON.update({
+    "sealer":  ("Leadbite", 2.42, (0.62, 0.60, 0.56), (1.00, 0.72, 0.42),
+                "treasury", "IT SEALS WHAT YOU CARRY - every bite of the press "
+                "shuts ONE hero's pack, and while the Sealer stands that pack "
+                "stays shut: no flask, no bandage, no scroll, nothing that hero "
+                "walked in with. It takes nothing and breaks nothing - the gear "
+                "is still in there and it is simply not yours until the press is "
+                "broken. The strip of lead blanks on its hip is the gauge: one "
+                "blank is one more pack it can shut, so the party can count the "
+                "fight it has left before the first bite",
+                0.22, "Someone down there is stamping lead."),
+})
+ORDER = ORDER + ["sealer"]
+
+# PER-SLOT MATERIALS. Same two-conditions argument the Dauber and the Stackman
+# wrote down: the tint-derived path pulls ONE hue over a whole body (the
+# measured defect, median satMean 0.087), and this body must say a WORN MAN and
+# a KEPT INSTRUMENT in the same frame. Wear is the receipt; one wear-dulled
+# tint cannot carry both.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"sealer"}
+
+OVERRIDE.update({
+    "sealer": {
+        # THE COAT. Mid-value and cool-neutral on purpose, and it is the whole
+        # reason the press reads: the press frame, the strongbox, the belt and
+        # the boots are all in the dark slot, so if the coat were dark too the
+        # mechanic would be a dark mass inside a dark mass. The Dauber's
+        # pass-2 finding was a single VALUE, not a single hue - arrived at from
+        # the other direction and just as monochrome. So: coat lifted to sit
+        # BETWEEN the iron and the lead, which makes the silhouette three
+        # bands - dark press / mid man / pale lead - rather than two.
+        'body': ((0.212, 0.206, 0.192), 0.88, 0.00),
+        # IRON, AND IT IS THE KEPT HALF. The press frame, the screw, the tommy
+        # bar, the punch, the slot bar, the strongbox, the straps, the belt and
+        # the boots are all here. Metal 0.30 and roughness 0.42 - the lowest
+        # roughness on any dark slot in this file - because OILED is a specular
+        # fact, not a colour fact, the same way the Dauber's WET was.
+        # NAMED COMPROMISE, not hidden: the boots and the belt are leather and
+        # they are in this slot, so they take an iron highlight they have not
+        # earned. The alternative was a fifth slot for two objects that are
+        # 0.03 of the frame. The Fuller and the Stackman both took this trade
+        # and wrote it down; this is the same trade with the same reason.
+        # *** PASS 2, CHANGE B - MEASURED OFF MY OWN PASS-1 RENDER, NOT OFF
+        # TASTE. *** Pass 1 shipped this slot at metal 0.30 / roughness 0.42 on
+        # the argument that OILED is specular. It is - and at that pair every
+        # UP-FACING dark surface in the frame took the warm key light full in
+        # the face and rendered TAN. The cap, both press arms, the strongbox
+        # lid, the boot tops and the slot bar all read as polished brass in
+        # front.png. The "kept instrument" argument produced a brass band.
+        # Metal down to 0.10 and roughness up to 0.62: the iron goes back to
+        # being iron, the highlight survives as a line on an edge rather than a
+        # wash on a face, and KEPT is now carried by the slot's VALUE (lifted a
+        # touch) instead of by a mirror.
+        'dark': ((0.072, 0.071, 0.068), 0.62, 0.10),
+        # LEAD. This is the affordance and it must be the brightest solid on the
+        # body: the blank in the jaws, the four blanks in the strip, the strip
+        # over the strongbox lid, and the face panel. Cool rather than warm -
+        # the Comfitmaker measured that a warm pale reads as SUGAR and the
+        # Dauber that a cold white reads as BONE; lead is neither, it is a dull
+        # cool grey that is still clearly the lightest thing in frame. Metal
+        # 0.16 so a struck blank catches a line and a flat one does not.
+        # NAMED DOUBLE DUTY: the face panel is in this slot and is not lead. It
+        # is the same trade the Dauber made for the same reason - the pale slot
+        # is where a face has to live if the face is to separate from the head.
+        'bone': ((0.784, 0.792, 0.800), 0.46, 0.16),
+        # Eyes only, sealing-wax warm, and kept small BY CONSTRUCTION. System
+        # 1's clipped ladder glow is the standing lesson: a glow that reaches
+        # the frame edge is invisible to a blank check, so the border assertion
+        # is the backstop and not the plan.
+        'glow': ((1.00, 0.76, 0.44), 1.70),
+    },
+})
+
+
+def sealer():
+    """IT SEALS WHAT YOU CARRY. The mechanic is in two places, answering the two
+    questions a viewer asks from the doorway without a word of UI:
+
+      WHAT IS IT DOING?  A hand screw press worn on the chest, jaws forward,
+                         with a pale lead blank sitting between them and his own
+                         hand on the tommy bar. He is mid-bite. The press is the
+                         largest object on the body and it is the silhouette.
+      HOW MANY MORE?     A slotted bar on his right hip carrying FOUR lead
+                         blanks and ONE EMPTY SLOT - broadside to the camera in
+                         X (the Stackman's pass-2 lesson: a gauge aimed along
+                         the camera axis foreshortens into nothing). Four blanks
+                         is four packs he can still shut; the empty slot says he
+                         has already shut one.
+
+    FACING IS BY CONSTRUCTION, not by hoping the camera is kind - the Beadle's
+    measured fault designed out. The front (-Y) carries the press, the punch,
+    the strip and a pale face panel on one side of the head only. The back (+Y)
+    carries a shut strongbox with a lead strip over its own lid joint - his own
+    pack, sealed, which is the mechanic turned on its owner - and nothing else.
+    Neither read is available from the other side.
+
+    NOTHING HANGS ON THIS BODY. See correction (a) above: that is the Dauber's
+    UI-arrow fault designed out rather than drawn and judged.
+
+    Static: no anims entry. The before/after the body cannot animate through is
+    said by the geometry - one slot empty, one blank struck and raised, one
+    blank still flat in the jaws.
+
+    ROOM-LOCKED is NOT claimed here. The widest extent is the slot bar in +X
+    and the press in -Y; minibossgen measures the real footprint against
+    floorgen's own corridor and lid and the report says the verdict. I do not
+    pre-judge that number.
+    """
+    P = Parts("sealer")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 0.93
+    SHO = 1.52
+    HEAD = 1.78
+
+    _open()
+    # ------------------------------------------------- THE MAN: SQUARE AND SET
+    # A sealer does not lunge. He stands square with his weight even, because
+    # the press needs both feet - which also gives this body a different stance
+    # from the Dauber's one-forward-one-braced and from the Drillmaster's lean.
+    # seat() lifts each limb by its own first segment, so the literal 0.0 at the
+    # ankle really is the floor and no raked leg floats.
+    for s in (-1, 1):
+        limb(P, seat([(s * 0.20, 0.02, HIP), (s * 0.25, 0.00, HIP - 0.46),
+                      (s * 0.26, -0.03, 0.085)], 0.108),
+             0.108, 0.086, 'body')
+        # a boot, not a bare tube end - the Fuller's pass-1 fault
+        P.add(L.box(0.25, 0.40, 0.115), 'dark', loc=(s * 0.26, -0.07, 0.058))
+    # heavy torso, barely turned. Wide at the shoulder so the press has a wall
+    # to hang on and does not read as floating in front of a thin man.
+    P.raw(aim(L.cone(0.33, 0.27, 0.62, 12), (0.0, 0.01, HIP), (0.0, 0.02, 1.0)), 'body')
+    P.add(L.box(0.52, 0.30, 0.085), 'dark', loc=(0.0, 0.00, HIP + 0.10))      # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.125, 0.116, 0.110, 11, 8), 'body', loc=(s * 0.27, -0.01, SHO))
+    P.add(L.sphere(0.168, 0.176, 0.172, 14, 9), 'body', loc=(0.0, -0.01, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY, never a band and never wrapped.
+    # The Beadle's pale eye-band went round the head and that figure read the
+    # same from front and back - it had no facing at all. One panel, one side.
+    # PASS 3, CHANGE D: the panel is NARROWED 0.166 -> 0.124 and the eyes with
+    # it. At pass 1's width it rendered as a letterbox with two lamps in it -
+    # a visor, not a face - because a pale rectangle wider than it is tall is a
+    # slot before it is anything else. Narrower than the skull and taller than
+    # it is wide, it reads as a face set back in a hood.
+    P.add(L.box(0.124, 0.044, 0.138), 'bone', loc=(0.0, -0.196, HEAD - 0.015))
+    eyes(P, (0.0, 0.0, HEAD + 0.005), 0.044, 0.024, -0.224)
+    # a clerk's flat cap, dark, sitting low. Keeps the top of the head dark so
+    # the pale panel under it is the only bright thing on the head.
+    P.raw(aim(L.cone(0.190, 0.196, 0.070, 14), (0.0, -0.01, HEAD + 0.13), (0.0, 0.0, 1.0)), 'dark')
+    _close("man")
+
+    _open()
+    # ------------------------- THE PRESS: THE MECHANIC, WORN WHERE IT IS SEEN
+    # A C-frame hand press on a chest harness. It is authored LARGE on purpose:
+    # on this body the mechanic is not an accessory, it is the outline.
+    #
+    # *** PASS 2, CHANGE A, AND IT IS THE WHOLE RUN. I MADE THE DRILLMASTER'S
+    # *** MISTAKE AFTER QUOTING IT IN MY OWN DOCSTRING. ***
+    # Pass 1 hung the press flat across his chest with the jaws opening STRAIGHT
+    # AT THE FRONT CAMERA. In front.png the open mouth, the screw, the anvil and
+    # the blank all collapsed into one black slab on his ribs - it read as a
+    # stove door, and the only view in which the mechanic was legible at all was
+    # the side. That is exactly the Stackman's and the Drillmaster's measured
+    # lesson - a mechanic aimed along the camera axis foreshortens into
+    # nothing - rotated ninety degrees and committed again.
+    # So the frame is YAWED BROADSIDE: built in its own local frame with the
+    # jaws opening in local -Y, then turned about Z so the C-profile - plate,
+    # two arms, screw, blank in the gap - presents its side to the front camera
+    # and its mouth reads as a mouth. The side view loses the broadside tommy
+    # bar in exchange and that is the right trade: the front view is the one a
+    # viewer gets from the doorway.
+    # *** PASS 3, CHANGE C - AND PASS 2's YAW ALONE WAS NOT THE FIX. ***
+    # Turning the frame broadside was necessary and not sufficient. In pass 2's
+    # front.png the C is broadside and still unreadable, because it is worn
+    # ACROSS HIS CHEST: the plate sits over one shoulder, the mouth reaches to
+    # the other, and the three members read as three separate planks laid over a
+    # man rather than as one frame. The press and the body share the same
+    # pixels, so neither has an outline. It read as a man carrying a sawhorse.
+    # This is the Drillmaster's pass-2 fix, which I should have taken straight
+    # from his docstring: his gong ate him until it moved OFF to one side and
+    # DOWN and he stepped out of its outline. So the press is scaled to 0.80 and
+    # hung off his right, clear of the torso in X, with its mouth opening
+    # OUTWARD into empty air - where a C can be seen to be a C.
+    SC = 0.80
+    THETA = math.radians(-90.0)
+    RZ = Matrix.Rotation(THETA, 3, 'Z')
+    PV = Vector((-0.50, -0.22, 1.08))           # off his right side, and down
+
+    def _press(vf, slot):
+        vs, fs = vf
+        P.raw(([RZ @ (Vector(v) * SC) + PV for v in vs], fs), slot)
+
+    def _box_at(sx, sy, sz, loc, slot):
+        vs, fs = L.box(sx, sy, sz)
+        _press(([Vector(v) + Vector(loc) for v in vs], fs), slot)
+
+    _box_at(0.50, 0.095, 0.66, (0.0, 0.14, 0.0), 'dark')          # back plate
+    _box_at(0.42, 0.44, 0.115, (0.0, -0.09, -0.27), 'dark')       # bottom arm
+    _box_at(0.42, 0.44, 0.115, (0.0, -0.09, 0.27), 'dark')        # top arm
+    # THE ANVIL DIE and THE BLANK ON IT. The blank is the brightest small object
+    # on the body and it sits IN THE GAP between the jaws, because the gap is
+    # where the sentence is.
+    _box_at(0.20, 0.20, 0.055, (0.0, -0.27, -0.185), 'dark')
+    _press(aim(L.cone(0.088, 0.088, 0.048, 16), (0.0, -0.27, -0.157),
+               (0.0, 0.0, 1.0)), 'bone')
+    # THE SCREW. Short, thick, square-headed - correction (a). It stops well
+    # clear of the blank so the press reads as OPEN and about to close: a shut
+    # press has nothing to say about what happens next.
+    _press(aim(L.cone(0.055, 0.050, 0.26, 12), (0.0, -0.27, 0.215),
+               (0.0, 0.0, -1.0)), 'dark')
+    _box_at(0.145, 0.145, 0.075, (0.0, -0.27, -0.038), 'dark')
+    # THE TOMMY BAR through the head of the screw, with a knob each end. A T
+    # with two knobs is a shape no interface draws - which is the whole point
+    # of it after the Dauber's plumb bob.
+    _box_at(0.74, 0.070, 0.070, (0.0, -0.27, 0.40), 'dark')
+    for sgn in (-1, 1):
+        vs, fs = L.sphere(0.058, 0.052, 0.052, 10, 7)
+        _press(([Vector(v) + Vector((sgn * 0.40, -0.27, 0.40)) for v in vs], fs), 'dark')
+    # the strap that carries it, from his right shoulder down onto the frame's
+    # back plate. Without it the press reads as floating beside him, and a
+    # viewer who cannot see HOW it is worn reads it as part of the creature
+    # rather than as a tool it is using. Authored in BODY space: it starts on a
+    # real shoulder and ends on the plate's measured top corner.
+    PLT = RZ @ (Vector((0.0, 0.14, 0.30)) * SC) + PV
+    limb(P, [(-0.26, 0.02, SHO + 0.03), (-0.38, -0.08, 1.42),
+             (PLT.x, PLT.y, PLT.z)], 0.046, 0.038, 'dark')
+    _close("press")
+
+    _open()
+    # --------------------------------------- THE ARMS: ONE OF THEM IS THE VERB
+    # His left hand is ON the tommy bar's near knob, which after pass 2's yaw
+    # comes FORWARD out of the frame toward the viewer - so the gesture that
+    # was only readable from the side in pass 1 is now readable from the front.
+    # A man turning a screw down onto a blank. The right hand is down and holds
+    # the punch, so the two arms say the two halves of the trade: press, strike.
+    # PASS 3: the hands SWAP, because the press moved. His RIGHT hand is on the
+    # tommy bar's near knob - which at -90 degrees comes forward out of the
+    # frame toward the viewer, so the gesture reads from the front and not only
+    # from the side. His left hand is down and open at his side.
+    KNOB = RZ @ (Vector((0.40, -0.27, 0.40)) * SC) + PV
+    limb(P, [(-0.27, -0.01, SHO), (-0.40, -0.22, 1.40),
+             (KNOB.x, KNOB.y, KNOB.z + 0.01)], 0.082, 0.062, 'body')
+    P.add(L.sphere(0.082, 0.078, 0.074, 10, 7), 'body',
+          loc=(KNOB.x, KNOB.y - 0.01, KNOB.z))
+    limb(P, [(0.27, -0.01, SHO), (0.33, -0.08, 1.20), (0.35, -0.14, 0.94)],
+         0.082, 0.064, 'body')
+    P.add(L.sphere(0.084, 0.080, 0.076, 10, 7), 'body', loc=(0.35, -0.15, 0.91))
+    # *** PASS 3: THE PUNCH IS DELETED, AND THAT IS A FINDING RATHER THAN A
+    # *** TIDY-UP. *** In pass 1 and 2 it rendered as a small dark lump by his
+    # thigh in all three views - it never once read as a stamp iron, it crowded
+    # the hip the slot strip has to own, and it cost geometry to say nothing.
+    # A part that is not legible is not earning its draw call. The strike half
+    # of the trade is already said by the struck blank in the strip.
+    _close("arms")
+
+    _open()
+    # ----------------------------- THE STRIP: THE GAUGE, AND IT DOES NOT HANG
+    # *** PASS 4, AND THIS ONE IS MY OWN CLAIM FAILING ITS OWN TEST. ***
+    # Passes 1-3 carried the blanks in a slotted bar slung off the belt and
+    # STICKING STRAIGHT OUT IN +X. I wrote in correction (a) above that the
+    # thing to kill was a UI read, and then shipped three passes of a bar
+    # floating in clear air with four evenly spaced pale discs on it - which in
+    # front.png reads as a row of coins, or a progress meter, which is a UI
+    # read arrived at by a different road. Two more faults the picture gave me
+    # that no number did: the EMPTY SLOT, the half of the gauge that says a pack
+    # has already been shut, was inboard and completely hidden behind his own
+    # hip in all three views; and the four gauge discs were BRIGHTER AND LARGER
+    # than the blank in the press, so the eye went to the counter before it went
+    # to the mechanic. The gauge was out-shouting the sentence.
+    #
+    # So the strip stops being a bar in the air and becomes a BOARD ON HIS
+    # THIGH: raked down and outward along the leg, lying on the body with
+    # nothing standing clear of it, discs smaller than the press blank, spacing
+    # uneven, and the EMPTY SLOT OUTBOARD AT THE TOP where it is the first thing
+    # on the board a viewer meets.
+    BX, BY, BZ = 0.33, -0.205, 0.80
+    RB = Matrix.Rotation(math.radians(-26.0), 3, 'Y')
+    vs, fs = L.box(0.17, 0.075, 0.62)
+    P.raw(([RB @ v + Vector((BX, BY, BZ)) for v in vs], fs), 'dark')
+    # the belt loop it hangs in - short, seated on the board, nothing dangling.
+    # PASS 5: moved INBOARD AND DOWN off the top slot. At pass 4 it sat square
+    # on top of the board and covered the empty socket, which is the half of
+    # the gauge that says a pack has already been shut - I moved that socket to
+    # the top to make it the first thing a viewer meets and then parked a loop
+    # on it.
+    P.add(L.box(0.085, 0.105, 0.12), 'dark', loc=(BX - 0.175, BY + 0.02, BZ + 0.20))
+    # five slots down the board, SPACED UNEVENLY on purpose. Local z runs up the
+    # board; the top one is empty.
+    SLOTS = ((0.255, None), (0.105, 'flat'), (-0.015, 'struck'),
+             (-0.145, 'flat'), (-0.255, 'flat'))
+    for lz, kind in SLOTS:
+        c = RB @ Vector((0.0, -0.040, lz)) + Vector((BX, BY, BZ))
+        if kind is None:
+            # THE EMPTY SLOT. PASS 4 MADE IT A DARK RECESS IN A DARK BOARD,
+            # WHICH IS INVISIBLE BY CONSTRUCTION - I checked it in the picture
+            # and there was nothing there to see, in any of the three views or
+            # on the hero sheet. A socket is only legible if its RIM is, so it
+            # is now a pale ring with a dark plug set proud in the middle of it:
+            # same silhouette as a seated blank, opposite value in the centre,
+            # so the pair reads as one gone and four left rather than as four.
+            P.raw(aim(L.cone(0.062, 0.062, 0.022, 16), (c.x, c.y - 0.010, c.z),
+                      (0.0, -1.0, 0.0)), 'bone')
+            P.raw(aim(L.cone(0.040, 0.040, 0.030, 14), (c.x, c.y - 0.026, c.z),
+                      (0.0, -1.0, 0.0)), 'dark')
+            continue
+        # a seated blank: its rim inside the board's thickness, face just proud
+        # of it, and deliberately SMALLER than the blank in the press jaws
+        # (0.058 against 0.088) so the mechanic stays the brightest sentence.
+        P.raw(aim(L.cone(0.058, 0.058, 0.034, 16), (c.x, c.y - 0.012, c.z),
+                  (0.0, -1.0, 0.0)), 'bone')
+        if kind == 'struck':
+            # ONE ALREADY STRUCK, so the four are not a row of identical dots -
+            # which is the other UI read, and the reason this board is irregular
+            # by design rather than by accident. It also carries the STRIKE half
+            # of the trade now that the punch is gone.
+            P.add(L.sphere(0.030, 0.030, 0.017), 'bone',
+                  loc=(c.x, c.y - 0.042, c.z))
+    _close("strip")
+
+    _open()
+    # --------------- THE BACK (+Y): THE MECHANIC TURNED ON ITS OWN OWNER
+    # A strongbox strapped high on his back, lid shut, with a LEAD STRIP laid
+    # across the lid joint - which is exactly what a sealed thing looks like and
+    # exactly what he does to the party. It is invisible from the front (the
+    # body is in the way) and the press, the punch, the strip and the face are
+    # all invisible from the back, so the two reads differ BY CONSTRUCTION.
+    # The Dauber's pass-2 lesson is the reason the strip sits ON the lid and not
+    # on a cord beside it: a collision or a UI read that exists only in
+    # projection is still a fault, and the cheapest way to not have one is to
+    # leave nothing standing clear of the body for a camera to stack.
+    # *** PASS 5 - THE BEADLE'S FAULT CAME BACK IN A NEW COSTUME AND THE
+    # *** HERO SHEET IS WHERE I SAW IT. ***
+    # At pass 4 the strongbox stood only 0.135 m proud of his back, so in
+    # hero_back.png it did not break the silhouette at all - the box merged into
+    # the torso and the only thing readable from behind was the LEAD STRIP: a
+    # small PALE VERTICAL PATCH high on the body, which is the same size, the
+    # same value and very nearly the same place as the pale face panel on the
+    # front. That is the Beadle's no-facing defect exactly - a body that reads
+    # the same from both ends - arrived at by a different route after I wrote a
+    # paragraph above claiming it was designed out. Two changes, and they are
+    # the same argument twice: make the box BREAK THE OUTLINE (bigger, and
+    # standing 0.24 m proud), and turn the lead from a vertical patch into a
+    # HORIZONTAL BAR across the lid, because a horizontal pale bar cannot be
+    # mistaken for a vertical pale face at any distance.
+    BOXZ = 1.22
+    P.add(L.box(0.60, 0.36, 0.46), 'dark', loc=(0.0, 0.40, BOXZ))
+    for s_ in (-1, 1):   # the two straps over the shoulders, +Y side only
+        limb(P, [(s_ * 0.24, 0.05, SHO + 0.03), (s_ * 0.21, 0.26, 1.46),
+                 (s_ * 0.18, 0.36, BOXZ + 0.23)], 0.044, 0.038, 'dark')
+    # the lid joint, and the lead laid across it. Flat on the box, 0.03 proud -
+    # not a blob on a thread (correction (a) again: nothing on this body hangs).
+    P.add(L.box(0.62, 0.030, 0.030), 'dark', loc=(0.0, 0.40, BOXZ + 0.215))
+    P.add(L.box(0.46, 0.060, 0.090), 'bone', loc=(0.0, 0.595, BOXZ + 0.205))
+    # the hasp, dark, so the pale bar has something to be laid over
+    P.add(L.box(0.090, 0.050, 0.125), 'dark', loc=(0.0, 0.592, BOXZ + 0.055))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"sealer": sealer})

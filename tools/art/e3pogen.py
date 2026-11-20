@@ -39,7 +39,10 @@ def import_knight(path, tag):
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=path)
     new = [ob for ob in bpy.data.objects if ob not in before]
-    # the file ships a stray default Icosphere with no material - never render it
+    # a stray 42-vertex Icosphere with no material turns up on import - never
+    # render it. CORRECTED 19 Nov 2026: the file does NOT "ship" it; it is a
+    # Blender glTF-import artifact for any glb with an armature. Dropping it is
+    # still right. See docs/art/MONSTER_VARIANTS.md.
     for ob in list(new):
         if ob.type == 'MESH' and not ob.data.materials:
             bpy.data.objects.remove(ob, do_unlink=True)

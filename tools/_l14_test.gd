@@ -13,7 +13,17 @@ func _ok(c: bool, what: String) -> void:
 		_fail += 1
 
 func _initialize() -> void:
-	var cs: Dictionary = ChatCmd.commands()["commands"]
+	# B80: ONE load, held whole - the doc check below needs `order` too, and a second
+	# commands() call would not re-clear _guard_faults (see the note just under this).
+	var cdata: Dictionary = ChatCmd.commands()
+	var cs: Dictionary = cdata["commands"]
+	# B73: the COMMANDS_DATA guard count is READ here, and a non-empty answer moves _fail.
+	# From B48 until B73 chatcmd.gd:884 said "any gate can ask" and no gate in tools/ ever did
+	# (git grep guard_faults -- tools/ was rc=1, zero hits) while 91 append sites accumulated.
+	# Read immediately after the first commands() load: the loader clears _guard_faults only
+	# when _cmds is empty, so a later load would not re-clear and a later read could pass blind.
+	var faults: Array[String] = ChatCmd.guard_faults()
+	_ok(faults.is_empty(), "no COMMANDS_DATA guard arm fired on the load (%d fired: %s)" % [faults.size(), faults])
 	# the verbs in ChatCmd's match block, read from its source
 	var src := FileAccess.get_file_as_string("res://scripts/chatcmd.gd")
 	var rx := RegEx.new()
@@ -91,13 +101,35 @@ func _initialize() -> void:
 	cc._last.clear()
 	out = cc.handle("u1", "Ash", "!armoury")
 	_ok(out.contains("needs ") and out.contains(" gold for leather - you have "), "a friendly gold reply: %s" % out)
-	# the doc is the data
-	var before := FileAccess.get_file_as_string("res://docs/COMMANDS.md")
-	var ok_doc := true
-	for k in cs:
-		if not before.contains("`!%s`" % k) or not before.contains(String(cs[k]["what"]).substr(0, 30)):
-			ok_doc = false
-	_ok(ok_doc, "docs/COMMANDS.md carries every command from the data")
+	# the doc is the data - B80: EVERY PUBLISHED FIELD, NOT A 30-CHAR PREFIX OF ONE.
+	# Until B80 this compared "`!<name>`" and what.substr(0, 30). The `what` strings run to
+	# 195 chars, so 165 of them were ungated, and four of the 31 are shorter than 30 entirely.
+	# B79's prose-only red arm drifted the data against the doc (doc sha edff7faa -> 00014f22)
+	# and this check stayed GREEN - it read command names, not published words. The rows below
+	# are built the way tools/_commands_doc.gd builds them, off the same keys in the same
+	# `order`, so the comparison is against WHAT THE GENERATOR PUBLISHES, byte for byte. If the
+	# two ever disagree the GENERATOR WINS and this block is the thing to fix.
+	var doc := FileAccess.get_file_as_string("res://docs/COMMANDS.md")
+	var doc_order: Array = cdata.get("order", cs.keys())
+	var want_rows := PackedStringArray()
+	for k in doc_order:
+		var dd: Dictionary = cs[k]
+		var dal := ", ".join(PackedStringArray((dd.get("aliases", []) as Array).map(func(a): return "!" + String(a))))
+		want_rows.append("| `!%s` | %s | %s | %s | %s%s | `%s` |" % [k, dal, String(dd.get("args", "")).replace("|", "/"), dd.get("cost", "free"), dd["what"], "" if bool(dd.get("needs_hero", true)) else " (no hero needed)", dd.get("example", "!" + k)])
+	var have_rows := PackedStringArray()
+	for ln in doc.split("\n"):
+		if String(ln).begins_with("| `!"):
+			have_rows.append(String(ln))
+	var unpublished: Array = []   # the data says it; the doc does not carry it as written
+	for rw in want_rows:
+		if not have_rows.has(rw):
+			unpublished.append(String(rw).substr(0, 44))
+	var stale: Array = []         # the doc publishes it; the data does not say it
+	for rw in have_rows:
+		if not want_rows.has(rw):
+			stale.append(String(rw).substr(0, 44))
+	_ok(unpublished.is_empty(), "docs/COMMANDS.md carries every field the data publishes, verbatim (%d rows; unpublished %s)" % [want_rows.size(), unpublished])
+	_ok(stale.is_empty() and have_rows.size() == want_rows.size(), "docs/COMMANDS.md publishes nothing the data does not say (%d rows; stale %s)" % [have_rows.size(), stale])
 	# B22 (B21 Faults 3+4): the count is printed, a floor sits under it, and rc agrees.
 	# Twenty-two checks and two checks used to read identically in the log.
 	if _checks < 20:

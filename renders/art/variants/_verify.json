@@ -1,0 +1,151 @@
+{
+ "glb": "C:\\hd adventure\\bellmire-art\\assets\\monsters\\minibosses\\broodglut.glb",
+ "bytes": 3124424,
+ "objects": [
+  {
+   "name": "Armature",
+   "type": "ARMATURE",
+   "parent": null
+  },
+  {
+   "name": "Icosphere",
+   "type": "MESH",
+   "parent": null
+  },
+  {
+   "name": "Puglin_Body",
+   "type": "MESH",
+   "parent": "Armature"
+  },
+  {
+   "name": "Puglin_Stick",
+   "type": "MESH",
+   "parent": "Armature"
+  },
+  {
+   "name": "Puglin_Tusks",
+   "type": "MESH",
+   "parent": "Armature"
+  }
+ ],
+ "images": [
+  {
+   "name": "T_Puglin_BaseColor_2",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.4349,
+    0.2058,
+    0.2069
+   ]
+  },
+  {
+   "name": "T_Puglin_Emissive",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.0482,
+    0.0482,
+    0.0482
+   ]
+  },
+  {
+   "name": "T_Puglin_Normal",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.5073,
+    0.4985,
+    0.9869
+   ]
+  },
+  {
+   "name": "T_Puglin_ORM",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.8895,
+    0.8487,
+    0.0
+   ]
+  }
+ ],
+ "base": [
+  {
+   "mat": "MI_Puglin",
+   "node": "Image Texture",
+   "img": "T_Puglin_Emissive",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.0482,
+    0.0482,
+    0.0482
+   ],
+   "to": [
+    "BSDF_PRINCIPLED"
+   ]
+  },
+  {
+   "mat": "MI_Puglin",
+   "node": "Image Texture.001",
+   "img": "T_Puglin_BaseColor_2",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.4349,
+    0.2058,
+    0.2069
+   ],
+   "to": [
+    "MIX"
+   ]
+  },
+  {
+   "mat": "MI_Puglin",
+   "node": "Image Texture.002",
+   "img": "T_Puglin_ORM",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.8895,
+    0.8487,
+    0.0
+   ],
+   "to": [
+    "SEPARATE_COLOR"
+   ]
+  },
+  {
+   "mat": "MI_Puglin",
+   "node": "Image Texture.003",
+   "img": "T_Puglin_Normal",
+   "size": [
+    1024,
+    1024
+   ],
+   "mean": [
+    0.5073,
+    0.4985,
+    0.9869
+   ],
+   "to": [
+    "NORMAL_MAP"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,458 @@
+{
+  "neck_rule": {
+    "knight": {
+      "head_frac": 0.483,
+      "height_units": 2.467,
+      "width_units": 1.943,
+      "top_row": 0,
+      "head_widest_row": 213,
+      "neck_row": 289,
+      "body_widest_row": 318,
+      "bottom_row": 597,
+      "rows": 598,
+      "neck_width_px": 192,
+      "head_width_px": 278,
+      "max_width_px": 472,
+      "faces": 4628,
+      "height": 2.467,
+      "faces_per_unit_height": 1876.3,
+      "mean_face_area": 0.00333,
+      "median_face_area": 0.00163
+    },
+    "operator": {
+      "head_frac": 0.361,
+      "height_units": 1.54,
+      "width_units": 0.689,
+      "top_row": 0,
+      "head_widest_row": 69,
+      "neck_row": 216,
+      "body_widest_row": 357,
+      "bottom_row": 597,
+      "rows": 598,
+      "neck_width_px": 172,
+      "head_width_px": 252,
+      "max_width_px": 252,
+      "faces": 930,
+      "height": 1.54,
+      "faces_per_unit_height": 603.9,
+      "mean_face_area": 0.00545,
+      "median_face_area": 0.00228
+    },
+    "operator_note": "SEE THE COMMENT ABOVE: the raised arm fuses with the head, so this number is NOT the operator's head."
+  },
+  "visible_head": {
+    "knight": {
+      "visible_head_frac": 0.55,
+      "head_px": 53089,
+      "head_bottom_row": 284,
+      "top_row": 0,
+      "bottom_row": 517,
+      "rows": 518,
+      "raster": {
+        "res": 520,
+        "cols": 409,
+        "units_tall": 2.466579024763968
+      }
+    },
+    "operator": {
+      "visible_head_frac": 0.261,
+      "head_px": 14915,
+      "head_bottom_row": 134,
+      "top_row": 0,
+      "bottom_row": 517,
+      "rows": 518,
+      "raster": {
+        "res": 520,
+        "cols": 242,
+        "units_tall": 1.4875604808330536
+      }
+    }
+  },
+  "visible_head_ratio_knight_over_operator": 2.11,
+  "faceting": {
+    "knight": {
+      "faces": 4628,
+      "height": 2.467,
+      "faces_per_unit_height": 1876.3,
+      "mean_face_area": 0.00333,
+      "median_face_area": 0.00163
+    },
+    "operator": {
+      "faces": 906,
+      "height": 1.488,
+      "faces_per_unit_height": 609.1,
+      "mean_face_area": 0.00507,
+      "median_face_area": 0.00226
+    },
+    "faces_per_unit_height_ratio": 3.08,
+    "mean_face_area_ratio_operator_over_knight": 1.52
+  },
+  "survey": [
+    {
+      "faces": 1816,
+      "height": 3.12,
+      "faces_per_unit_height": 582.1,
+      "mean_face_area": 0.01238,
+      "median_face_area": 0.00324,
+      "name": "loader"
+    },
+    {
+      "faces": 1732,
+      "height": 2.679,
+      "faces_per_unit_height": 646.5,
+      "mean_face_area": 0.01307,
+      "median_face_area": 0.00244,
+      "name": "beadle"
+    },
+    {
+      "faces": 1746,
+      "height": 2.49,
+      "faces_per_unit_height": 701.3,
+      "mean_face_area": 0.0061,
+      "median_face_area": 0.00102,
+      "name": "bellman"
+    },
+    {
+      "faces": 1676,
+      "height": 2.359,
+      "faces_per_unit_height": 710.6,
+      "mean_face_area": 0.0066,
+      "median_face_area": 0.00196,
+      "name": "stoker"
+    },
+    {
+      "faces": 2178,
+      "height": 2.744,
+      "faces_per_unit_height": 793.8,
+      "mean_face_area": 0.00658,
+      "median_face_area": 0.00092,
+      "name": "rammer"
+    },
+    {
+      "faces": 1784,
+      "height": 2.152,
+      "faces_per_unit_height": 829.1,
+      "mean_face_area": 0.01437,
+      "median_face_area": 0.00673,
+      "name": "scrapwright"
+    },
+    {
+      "faces": 2036,
+      "height": 2.332,
+      "faces_per_unit_height": 873.0,
+      "mean_face_area": 0.00702,
+      "median_face_area": 0.00107,
+      "name": "jointer"
+    },
+    {
+      "faces": 2404,
+      "height": 2.75,
+      "faces_per_unit_height": 874.2,
+      "mean_face_area": 0.00558,
+      "median_face_area": 0.00106,
+      "name": "tanner"
+    },
+    {
+      "faces": 2080,
+      "height": 2.302,
+      "faces_per_unit_height": 903.7,
+      "mean_face_area": 0.00969,
+      "median_face_area": 0.00133,
+      "name": "porter"
+    },
+    {
+      "faces": 2384,
+      "height": 2.635,
+      "faces_per_unit_height": 904.7,
+      "mean_face_area": 0.00396,
+      "median_face_area": 0.00065,
+      "name": "snuffer"
+    },
+    {
+      "faces": 1812,
+      "height": 1.928,
+      "faces_per_unit_height": 940.1,
+      "mean_face_area": 0.00489,
+      "median_face_area": 0.0005,
+      "name": "fenman"
+    },
+    {
+      "faces": 2436,
+      "height": 2.555,
+      "faces_per_unit_height": 953.5,
+      "mean_face_area": 0.00806,
+      "median_face_area": 0.00231,
+      "name": "sexton"
+    },
+    {
+      "faces": 1536,
+      "height": 1.608,
+      "faces_per_unit_height": 955.2,
+      "mean_face_area": 0.00803,
+      "median_face_area": 0.00158,
+      "name": "paviser"
+    },
+    {
+      "faces": 1950,
+      "height": 1.942,
+      "faces_per_unit_height": 1004.4,
+      "mean_face_area": 0.00541,
+      "median_face_area": 0.00178,
+      "name": "sower"
+    },
+    {
+      "faces": 2390,
+      "height": 2.377,
+      "faces_per_unit_height": 1005.6,
+      "mean_face_area": 0.00603,
+      "median_face_area": 0.00211,
+      "name": "sluicekeeper"
+    },
+    {
+      "faces": 2876,
+      "height": 2.86,
+      "faces_per_unit_height": 1005.7,
+      "mean_face_area": 0.01288,
+      "median_face_area": 0.004,
+      "name": "sexton_chibi"
+    },
+    {
+      "faces": 2864,
+      "height": 2.811,
+      "faces_per_unit_height": 1018.7,
+      "mean_face_area": 0.00579,
+      "median_face_area": 0.00116,
+      "name": "drillmaster"
+    },
+    {
+      "faces": 2780,
+      "height": 2.6,
+      "faces_per_unit_height": 1069.2,
+      "mean_face_area": 0.0081,
+      "median_face_area": 0.0019,
+      "name": "snuffer_chibi"
+    },
+    {
+      "faces": 2676,
+      "height": 2.356,
+      "faces_per_unit_height": 1135.6,
+      "mean_face_area": 0.00636,
+      "median_face_area": 0.00212,
+      "name": "cook"
+    },
+    {
+      "faces": 2734,
+      "height": 2.184,
+      "faces_per_unit_height": 1252.0,
+      "mean_face_area": 0.00502,
+      "median_face_area": 0.0017,
+      "name": "boiler"
+    },
+    {
+      "faces": 3250,
+      "height": 2.582,
+      "faces_per_unit_height": 1258.7,
+      "mean_face_area": 0.00497,
+      "median_face_area": 0.00098,
+      "name": "quartermaster"
+    },
+    {
+      "faces": 2996,
+      "height": 2.341,
+      "faces_per_unit_height": 1279.8,
+      "mean_face_area": 0.00238,
+      "median_face_area": 0.00078,
+      "name": "snarer"
+    },
+    {
+      "faces": 2872,
+      "height": 2.228,
+      "faces_per_unit_height": 1289.0,
+      "mean_face_area": 0.00396,
+      "median_face_area": 0.00121,
+      "name": "pressman"
+    },
+    {
+      "faces": 3732,
+      "height": 2.876,
+      "faces_per_unit_height": 1297.7,
+      "mean_face_area": 0.00936,
+      "median_face_area": 0.00131,
+      "name": "moulder"
+    },
+    {
+      "faces": 2196,
+      "height": 1.659,
+      "faces_per_unit_height": 1323.3,
+      "mean_face_area": 0.00626,
+      "median_face_area": 0.0014,
+      "name": "leech"
+    },
+    {
+      "faces": 3448,
+      "height": 2.501,
+      "faces_per_unit_height": 1378.8,
+      "mean_face_area": 0.00712,
+      "median_face_area": 0.0035,
+      "name": "stoker_chibi"
+    },
+    {
+      "faces": 3238,
+      "height": 2.339,
+      "faces_per_unit_height": 1384.3,
+      "mean_face_area": 0.00287,
+      "median_face_area": 0.00036,
+      "name": "tallyman"
+    },
+    {
+      "faces": 2944,
+      "height": 2.1,
+      "faces_per_unit_height": 1401.6,
+      "mean_face_area": 0.00521,
+      "median_face_area": 0.00101,
+      "name": "ratcatcher"
+    },
+    {
+      "faces": 3022,
+      "height": 2.035,
+      "faces_per_unit_height": 1485.0,
+      "mean_face_area": 0.00734,
+      "median_face_area": 0.00275,
+      "name": "tallyman_chibi"
+    },
+    {
+      "faces": 2746,
+      "height": 1.816,
+      "faces_per_unit_height": 1512.2,
+      "mean_face_area": 0.01029,
+      "median_face_area": 0.00108,
+      "name": "reeve"
+    },
+    {
+      "faces": 2908,
+      "height": 1.859,
+      "faces_per_unit_height": 1564.6,
+      "mean_face_area": 0.01008,
+      "median_face_area": 0.00191,
+      "name": "porter_chibi"
+    },
+    {
+      "faces": 3410,
+      "height": 2.11,
+      "faces_per_unit_height": 1616.1,
+      "mean_face_area": 0.00304,
+      "median_face_area": 0.00149,
+      "name": "gaoler"
+    },
+    {
+      "faces": 3654,
+      "height": 2.207,
+      "faces_per_unit_height": 1655.9,
+      "mean_face_area": 0.005,
+      "median_face_area": 0.00265,
+      "name": "sower_chibi"
+    },
+    {
+      "faces": 3692,
+      "height": 2.148,
+      "faces_per_unit_height": 1718.7,
+      "mean_face_area": 0.0063,
+      "median_face_area": 0.00445,
+      "name": "boiler_chibi"
+    },
+    {
+      "faces": 3944,
+      "height": 2.239,
+      "faces_per_unit_height": 1761.5,
+      "mean_face_area": 0.00466,
+      "median_face_area": 0.00163,
+      "name": "tapster"
+    },
+    {
+      "faces": 4736,
+      "height": 2.63,
+      "faces_per_unit_height": 1800.8,
+      "mean_face_area": 0.00689,
+      "median_face_area": 0.00197,
+      "name": "dyer"
+    },
+    {
+      "faces": 3562,
+      "height": 1.943,
+      "faces_per_unit_height": 1833.4,
+      "mean_face_area": 0.0051,
+      "median_face_area": 0.00067,
+      "name": "hurdleman"
+    },
+    {
+      "faces": 4350,
+      "height": 2.22,
+      "faces_per_unit_height": 1959.5,
+      "mean_face_area": 0.0053,
+      "median_face_area": 0.0028,
+      "name": "gaoler_chibi"
+    },
+    {
+      "faces": 4740,
+      "height": 2.201,
+      "faces_per_unit_height": 2153.2,
+      "mean_face_area": 0.00329,
+      "median_face_area": 0.00046,
+      "name": "strickler"
+    },
+    {
+      "faces": 5168,
+      "height": 2.365,
+      "faces_per_unit_height": 2185.2,
+      "mean_face_area": 0.00782,
+      "median_face_area": 0.00347,
+      "name": "sluicekeeper_chibi"
+    },
+    {
+      "faces": 4922,
+      "height": 2.235,
+      "faces_per_unit_height": 2202.3,
+      "mean_face_area": 0.004,
+      "median_face_area": 0.00195,
+      "name": "snarer_chibi"
+    },
+    {
+      "faces": 4978,
+      "height": 2.135,
+      "faces_per_unit_height": 2331.6,
+      "mean_face_area": 0.00443,
+      "median_face_area": 0.00283,
+      "name": "cook_chibi"
+    },
+    {
+      "faces": 5160,
+      "height": 2.145,
+      "faces_per_unit_height": 2405.6,
+      "mean_face_area": 0.00341,
+      "median_face_area": 0.00021,
+      "name": "comfitmaker"
+    },
+    {
+      "faces": 11498,
+      "height": 2.305,
+      "faces_per_unit_height": 4988.3,
+      "mean_face_area": 0.00144,
+      "median_face_area": 0.00079,
+      "name": "greener"
+    },
+    {
+      "faces": 10302,
+      "height": 1.631,
+      "faces_per_unit_height": 6317.5,
+      "mean_face_area": 0.0016,
+      "median_face_area": 0.00064,
+      "name": "drover"
+    }
+  ],
+  "red_proofs": {
+    "empty_head_column": "RED",
+    "body_labelled_head": "RED"
+  },
+  "errors": [],
+  "verdict": "GREEN"
+}

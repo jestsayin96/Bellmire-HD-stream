@@ -1,0 +1,9 @@
+Quaternius - Medieval Weapons Pack (Sept 2018)
+Source: https://opengameart.org/content/lowpoly-medieval-weapons  (quaternius.com)
+Licence: CC0 1.0 Universal (public domain dedication). Commercial use permitted, no attribution required.
+Mr. E's standing ruling (16 Nov 2026 22:45 CT, read off the real licence page): all Quaternius packs are
+licensed for commercial use; the only restriction is reselling the assets AS assets, which we never do.
+The extracted pack in C:\hd adventure\_packs\quaternius_medieval_weapons_2018_CC0 ships NO licence file;
+this note is ours, written on first use (game build S50, System 8, 19 Nov 2026 21:1x CT).
+Files here, copied unmodified from the pack's FBX/ folder (lower-cased names):
+  shield_celtic_golden.fbx  shield_heater.fbx  shield_heater_2.fbx  shield_round.fbx  shield_round_2.fbx

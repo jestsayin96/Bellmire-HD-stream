@@ -1,0 +1,655 @@
+{
+ "checks": {
+  "all_down_nonblank": true,
+  "all_nonblank": true,
+  "captions_all_rendered": true,
+  "down_not_blown": true,
+  "down_not_clipped": true,
+  "down_shows_the_model": true,
+  "down_wall_breach_is_occluded": true,
+  "errors": 0,
+  "frames": 12,
+  "instrument_blind": [],
+  "max_border_frac": 0.0,
+  "max_down_border_frac": 0.0,
+  "max_down_occluded_frac": 0.4009,
+  "max_down_white_frac": 0.0,
+  "min_model_px": 7020
+ },
+ "errors": [],
+ "floorgeom": {
+  "corridor_clear_m": 11.0,
+  "lid_underside_m": 9.5,
+  "ref_commit": "2c0b1b9bf30b8194a458d84ae094433df0c397e5",
+  "stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\jests-hd-medieval-adventure (branch laptop) scripts/floorgen.gd sha bc3a603f vs 2c0b1b9bf30b8194a458d84ae094433df0c397e5 sha bc3a603f"
+ },
+ "frames": [
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    6.05,
+    6.05,
+    1.06
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 9990,
+   "down_model_seen_px": 9990,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "tileBrickA_large.gltf.glb",
+   "footprint_m": 6.05,
+   "height_m": 1.06,
+   "measured_world": {
+    "x": [
+     -3.025,
+     3.025
+    ],
+    "x_extent": 6.05,
+    "z": [
+     0.0,
+     1.06
+    ]
+   },
+   "model_px": 8264,
+   "pick": "dungeon widest",
+   "png_down": "renders/art/worldfit/_corr_tilebricka_large_y00_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tilebricka_large_y00_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 0
+  },
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    6.05,
+    6.05,
+    1.06
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 11958,
+   "down_model_seen_px": 11958,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "tileBrickA_large.gltf.glb",
+   "footprint_m": 6.05,
+   "height_m": 1.06,
+   "measured_world": {
+    "x": [
+     -4.278,
+     4.278
+    ],
+    "x_extent": 8.556,
+    "z": [
+     0.0,
+     1.06
+    ]
+   },
+   "model_px": 11638,
+   "pick": "dungeon widest",
+   "png_down": "renders/art/worldfit/_corr_tilebricka_large_y45_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tilebricka_large_y45_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 45
+  },
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    6.05,
+    6.05,
+    1.06
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 9976,
+   "down_model_seen_px": 9976,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "tileBrickA_large.gltf.glb",
+   "footprint_m": 6.05,
+   "height_m": 1.06,
+   "measured_world": {
+    "x": [
+     -3.025,
+     3.025
+    ],
+    "x_extent": 6.05,
+    "z": [
+     0.0,
+     1.06
+    ]
+   },
+   "model_px": 8216,
+   "pick": "dungeon widest",
+   "png_down": "renders/art/worldfit/_corr_tilebricka_large_y90_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tilebricka_large_y90_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 90
+  },
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": -0.0,
+   "dims_m": [
+    4.0,
+    4.0,
+    5.1
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 11809,
+   "down_model_seen_px": 11770,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0033,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "scaffold_high_cornerBoth.gltf.glb",
+   "footprint_m": 4.0,
+   "height_m": 5.1,
+   "measured_world": {
+    "x": [
+     -2.0,
+     2.0
+    ],
+    "x_extent": 4.0,
+    "z": [
+     0.0,
+     5.1
+    ]
+   },
+   "model_px": 7020,
+   "pick": "dungeon tallest",
+   "png_down": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y00_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y00_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 0
+  },
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": -0.0,
+   "dims_m": [
+    4.0,
+    4.0,
+    5.1
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 15367,
+   "down_model_seen_px": 15366,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0001,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "scaffold_high_cornerBoth.gltf.glb",
+   "footprint_m": 4.0,
+   "height_m": 5.1,
+   "measured_world": {
+    "x": [
+     -2.8284,
+     2.8284
+    ],
+    "x_extent": 5.6569,
+    "z": [
+     0.0,
+     5.1
+    ]
+   },
+   "model_px": 14458,
+   "pick": "dungeon tallest",
+   "png_down": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y45_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y45_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 45
+  },
+  {
+   "base_dz_m": 0.0,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 0,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": -0.0,
+   "dims_m": [
+    4.0,
+    4.0,
+    5.1
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 10721,
+   "down_model_seen_px": 10684,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0035,
+   "down_white_frac": 0.0,
+   "expect": "clear",
+   "file": "scaffold_high_cornerBoth.gltf.glb",
+   "footprint_m": 4.0,
+   "height_m": 5.1,
+   "measured_world": {
+    "x": [
+     -2.0,
+     2.0
+    ],
+    "x_extent": 4.0,
+    "z": [
+     0.0,
+     5.1
+    ]
+   },
+   "model_px": 7272,
+   "pick": "dungeon tallest",
+   "png_down": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y90_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_scaffold_high_cornerboth_y90_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\kaykit_dungeon_pack_CC0\\Models\\gltf",
+   "verdict": "CLEAR",
+   "yaw_deg": 90
+  },
+  {
+   "base_dz_m": -0.7821,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 1151,
+    "lid": 0,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    8.2498,
+    15.7059,
+    5.6722
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 25714,
+   "down_model_seen_px": 23186,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0983,
+   "down_white_frac": 0.0,
+   "expect": "breach_wall_some_yaw",
+   "file": "Roof_RoundTiles_6x14.gltf",
+   "footprint_m": 15.7059,
+   "height_m": 5.6722,
+   "measured_world": {
+    "x": [
+     -4.1249,
+     4.1249
+    ],
+    "x_extent": 8.2498,
+    "z": [
+     -0.7821,
+     4.89
+    ]
+   },
+   "model_px": 9187,
+   "pick": "widest over-corridor row",
+   "png_down": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y00_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y00_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF",
+   "verdict": "CLEAR",
+   "yaw_deg": 0
+  },
+  {
+   "base_dz_m": -0.7821,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 15528,
+    "lid": 0,
+    "wall_any": 18647,
+    "wall_left": 9446,
+    "wall_right": 9201
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    8.2498,
+    15.7059,
+    5.6722
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 97011,
+   "down_model_seen_px": 75559,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.2211,
+   "down_white_frac": 0.0,
+   "expect": "breach_wall_some_yaw",
+   "file": "Roof_RoundTiles_6x14.gltf",
+   "footprint_m": 15.7059,
+   "height_m": 5.6722,
+   "measured_world": {
+    "x": [
+     -8.3352,
+     8.3352
+    ],
+    "x_extent": 16.6703,
+    "z": [
+     -0.7821,
+     4.89
+    ]
+   },
+   "model_px": 99535,
+   "pick": "widest over-corridor row",
+   "png_down": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y45_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y45_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF",
+   "verdict": "BREACH",
+   "yaw_deg": 45
+  },
+  {
+   "base_dz_m": -0.7821,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 14837,
+    "lid": 0,
+    "wall_any": 34059,
+    "wall_left": 17160,
+    "wall_right": 16899
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.0,
+   "dims_m": [
+    8.2498,
+    15.7059,
+    5.6722
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 114468,
+   "down_model_seen_px": 68581,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.4009,
+   "down_white_frac": 0.0,
+   "expect": "breach_wall_some_yaw",
+   "file": "Roof_RoundTiles_6x14.gltf",
+   "footprint_m": 15.7059,
+   "height_m": 5.6722,
+   "measured_world": {
+    "x": [
+     -7.8771,
+     7.8288
+    ],
+    "x_extent": 15.7059,
+    "z": [
+     -0.7821,
+     4.89
+    ]
+   },
+   "model_px": 114694,
+   "pick": "widest over-corridor row",
+   "png_down": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y90_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_roof_roundtiles_6x14_y90_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF",
+   "verdict": "BREACH",
+   "yaw_deg": 90
+  },
+  {
+   "base_dz_m": -0.3565,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 178,
+    "lid": 1221,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.1367,
+   "dims_m": [
+    3.7352,
+    2.8691,
+    10.774
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 16474,
+   "down_model_seen_px": 16322,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0092,
+   "down_white_frac": 0.0,
+   "expect": "breach_lid_every_yaw",
+   "file": "Tree_4_C_Color1.gltf",
+   "footprint_m": 3.7352,
+   "height_m": 10.774,
+   "measured_world": {
+    "x": [
+     -1.7309,
+     2.0043
+    ],
+    "x_extent": 3.7352,
+    "z": [
+     -0.3565,
+     10.4175
+    ]
+   },
+   "model_px": 18692,
+   "pick": "only over-lid row",
+   "png_down": "renders/art/worldfit/_corr_tree_4_c_color1_y00_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tree_4_c_color1_y00_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\KayKit_Forest_Nature_Pack_1.0_FREE\\KayKit_Forest_Nature_Pack_1.0_FREE\\Assets\\gltf",
+   "verdict": "BREACH",
+   "yaw_deg": 0
+  },
+  {
+   "base_dz_m": -0.3565,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 178,
+    "lid": 1191,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.1367,
+   "dims_m": [
+    3.7352,
+    2.8691,
+    10.774
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 16727,
+   "down_model_seen_px": 16576,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.009,
+   "down_white_frac": 0.0,
+   "expect": "breach_lid_every_yaw",
+   "file": "Tree_4_C_Color1.gltf",
+   "footprint_m": 3.7352,
+   "height_m": 10.774,
+   "measured_world": {
+    "x": [
+     -1.673,
+     1.5757
+    ],
+    "x_extent": 3.2487,
+    "z": [
+     -0.3565,
+     10.4175
+    ]
+   },
+   "model_px": 19142,
+   "pick": "only over-lid row",
+   "png_down": "renders/art/worldfit/_corr_tree_4_c_color1_y45_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tree_4_c_color1_y45_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\KayKit_Forest_Nature_Pack_1.0_FREE\\KayKit_Forest_Nature_Pack_1.0_FREE\\Assets\\gltf",
+   "verdict": "BREACH",
+   "yaw_deg": 45
+  },
+  {
+   "base_dz_m": -0.3565,
+   "border_px_frac": 0.0,
+   "breach_px": {
+    "below_floor": 178,
+    "lid": 1239,
+    "wall_any": 0,
+    "wall_left": 0,
+    "wall_right": 0
+   },
+   "captions_rendered": 3,
+   "centre_dx_m": 0.1367,
+   "dims_m": [
+    3.7352,
+    2.8691,
+    10.774
+   ],
+   "down_border_frac": 0.0,
+   "down_model_px": 14755,
+   "down_model_seen_px": 14605,
+   "down_nonblank": true,
+   "down_occluded_frac": 0.0102,
+   "down_white_frac": 0.0,
+   "expect": "breach_lid_every_yaw",
+   "file": "Tree_4_C_Color1.gltf",
+   "footprint_m": 3.7352,
+   "height_m": 10.774,
+   "measured_world": {
+    "x": [
+     -1.5473,
+     1.3217
+    ],
+    "x_extent": 2.8691,
+    "z": [
+     -0.3565,
+     10.4175
+    ]
+   },
+   "model_px": 17038,
+   "pick": "only over-lid row",
+   "png_down": "renders/art/worldfit/_corr_tree_4_c_color1_y90_down.png",
+   "png_xsec": "renders/art/worldfit/_corr_tree_4_c_color1_y90_xsec.png",
+   "rect_px": {
+    "floor": 598.42,
+    "lid": 253.29,
+    "wall_l": 250.19,
+    "wall_r": 649.81
+   },
+   "root": "C:\\hd adventure\\_packs\\KayKit_Forest_Nature_Pack_1.0_FREE\\KayKit_Forest_Nature_Pack_1.0_FREE\\Assets\\gltf",
+   "verdict": "BREACH",
+   "yaw_deg": 90
+  }
+ ],
+ "generated_ct": "2026-11-20T09:50:04",
+ "png_sheet": "renders/art/worldfit/_corridor_lid.png",
+ "verdict": "GREEN"
+}

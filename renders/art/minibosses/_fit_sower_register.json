@@ -21,14 +21,82 @@
    "creature_h": 2.25,
    "hero_h": 2.45,
    "ratio": 0.92,
-   "pair_w": 5.29,
+   "pair_w": 5.36,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
     "hero_front.png",
     "hero_side.png",
     "hero_back.png"
-   ]
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 44418,
+      "vis": 44418,
+      "delta": 46526,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43666,
+      "vis": 43666,
+      "delta": 49210,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 35919,
+      "vis": 35919,
+      "delta": 37346,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37782,
+      "vis": 37782,
+      "delta": 38663,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 45280,
+      "vis": 45280,
+      "delta": 47437,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44030,
+      "vis": 44030,
+      "delta": 45966,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
   },
   "sower_chibi": {
    "creature_h": 2.4,
@@ -45,8 +113,22 @@
   }
  },
  "errors": [],
+ "blind_views": [],
+ "seen_min": 0.15,
+ "vis_min": 700,
+ "min_proving": 2,
+ "unproved_cells": [
+  "sower_chibi"
+ ],
+ "measured": [
+  "sower"
+ ],
+ "asked": [
+  "sower"
+ ],
  "blank_check": {
-  "files": 2,
+  "files": 3,
   "failures": []
- }
+ },
+ "verdict": "GREEN"
 }

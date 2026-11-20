@@ -139,7 +139,12 @@ func _dock_hud() -> void:
 		_speed_lb.set_anchors_preset(Control.PRESET_TOP_LEFT)
 		var s := _speed_lb.get_combined_minimum_size()
 		_speed_lb.size = s
-		_speed_lb.position = Vector2(bar.end.x - m - s.x, bar.position.y + (bar.size.y - s.y) * 0.5)
+		# S53: at UI 150% the plate (h 68) is taller than the chrome bar (h 65), so centring it
+		# hung 1.5 px off the frame's bottom edge and its lower rule was never drawn. Clamp
+		# its bottom to the viewport (a no-op at 100/125%, where it fits the bar).
+		var sy := bar.position.y + (bar.size.y - s.y) * 0.5
+		sy = minf(sy, HudDock.screen().y - s.y)
+		_speed_lb.position = Vector2(bar.end.x - m - s.x, sy)
 		right = s.x + m
 	HudDock.reserve_right = right
 	if _frame and _frame.visible:

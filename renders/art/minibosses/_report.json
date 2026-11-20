@@ -1,6 +1,43 @@
 {
  "ok": true,
- "corridor_clear_m": 11.0,
+ "floor_geom": {
+  "gd": "scripts\\floorgen.gd",
+  "cell_m": 4.0,
+  "wall_in_m": 0.5,
+  "hall_w": 3,
+  "corridor_clear_m": 11.0,
+  "lid_y_m": 7.0,
+  "lid_thick_m": 1.0,
+  "lid_underside_m": 6.5,
+  "at": {
+   "cell_m": "scripts\\floorgen.gd:21",
+   "wall_in_m": "scripts\\floorgen.gd:1698",
+   "hall_w": "scripts\\floorgen.gd:848",
+   "lid_y_m": "scripts\\floorgen.gd:1383",
+   "lid_thick_m": "scripts\\floorgen.gd:1378"
+  },
+  "errors": [],
+  "provenance": {
+   "repo": "C:\\hd adventure\\bellmire-art",
+   "worktree": "bellmire-art",
+   "gd": "scripts/floorgen.gd",
+   "gd_sha256_8": "e25c31d9",
+   "gd_lid_line": "lid.position = Vector3(0, 7.0, 0)",
+   "branch": "art",
+   "head": "946e6b2f9588f331a817d89bbb99ac6a82c5b94c",
+   "ref": "origin/main",
+   "ref_commit": "0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f",
+   "ref_gd_sha256_8": "bc3a603f",
+   "verified": true,
+   "matches_ref": false,
+   "drift": [
+    "lid_y_m: tree 7.0, origin/main 10.0",
+    "lid_underside_m: tree 6.5, origin/main 9.5"
+   ],
+   "notes": []
+  }
+ },
+ "red_arm": null,
  "minibosses": {
   "snarer": {
    "title": "The Snarer",
@@ -32,7 +69,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.75,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "drillmaster": {
    "title": "The Drillmaster",
@@ -64,7 +115,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.2,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.3,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "scrapwright": {
    "title": "The Scrapwright",
@@ -96,32 +161,61 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.0,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.24,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.5,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "gaoler": {
-   "title": "The Gaoler",
+   "title": "Shacklemaw",
    "theme": "prison",
    "idea": "IT DRAGS - the hook takes one out of the line and reels them in",
    "wear": 0.8,
    "feed_line": "A chain is paying out in the dark.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 1816,
+   "faces": 1912,
    "size": [
-    3.72,
-    2.37,
+    3.56,
+    2.16,
     2.35
    ],
-   "footprint_span": 3.72,
+   "footprint_span": 3.56,
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.44,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.498403492422347,
-    "ortho": 3.6511456966400146,
+    "radius": 2.3917246265455065,
+    "ortho": 3.3215036392211914,
     "clip": [
-     8.932880401611328,
-     24.024639129638672
+     8.634818077087402,
+     23.310380935668945
     ]
    },
    "views": [
@@ -160,7 +254,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.49,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sexton": {
    "title": "The Sexton",
@@ -168,31 +276,46 @@
    "idea": "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
    "wear": 0.85,
    "feed_line": "A spade is working somewhere in the dark.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 1292,
    "size": [
-    2.14,
-    1.44,
+    2.2,
+    1.48,
     2.45
    ],
-   "footprint_span": 2.14,
+   "footprint_span": 2.2,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.7781781093127815,
-    "ortho": 3.087711811065674,
+    "radius": 1.8054553623602727,
+    "ortho": 3.100536346435547,
     "clip": [
-     7.381783485412598,
-     18.764556884765625
+     7.450505256652832,
+     18.966768264770508
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.8,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "porter": {
    "title": "The Porter",
@@ -224,7 +347,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.48,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tallyman": {
    "title": "The Tallyman",
@@ -256,7 +393,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.11,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "cook": {
    "title": "The Cook",
@@ -288,7 +439,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sluicekeeper": {
    "title": "The Sluicekeeper",
@@ -320,7 +485,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sower": {
    "title": "The Sower",
@@ -328,31 +507,46 @@
    "idea": "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
    "wear": 0.4,
    "feed_line": "Something is broadcasting seed.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 1029,
    "size": [
-    3.43,
-    1.52,
+    3.5,
+    1.55,
     2.25
    ],
-   "footprint_span": 3.43,
+   "footprint_span": 3.5,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.187709566704543,
-    "ortho": 3.087007761001587,
+    "radius": 2.219354668010889,
+    "ortho": 3.0999042987823486,
     "clip": [
-     8.021000862121582,
-     21.908794403076172
+     8.096267700195312,
+     22.137840270996094
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "stoker": {
    "title": "The Stoker",
@@ -360,31 +554,46 @@
    "idea": "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
    "wear": 0.7,
    "feed_line": "The pit has been fed.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 864,
    "size": [
-    3.0,
-    1.8,
+    3.11,
+    1.87,
     2.4
    ],
-   "footprint_span": 3.0,
+   "footprint_span": 3.11,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.122195553057247,
-    "ortho": 3.221266508102417,
+    "radius": 2.1755388491262613,
+    "ortho": 3.2443673610687256,
     "clip": [
-     8.183976173400879,
-     21.247154235839844
+     8.316568374633789,
+     21.62593650817871
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.89,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "bellman": {
    "title": "The Bellman",
@@ -416,7 +625,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.7,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.8,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "boiler": {
    "title": "The Boiler",
@@ -448,7 +671,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.1,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tallyman_chibi": {
    "title": "The Tallyman (chibi)",
@@ -480,7 +717,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.15,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.28,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.35,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "cook_chibi": {
    "title": "The Cook (chibi)",
@@ -512,7 +763,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.05,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.9,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.45,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sluicekeeper_chibi": {
    "title": "The Sluicekeeper (chibi)",
@@ -544,7 +809,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sower_chibi": {
    "title": "The Sower (chibi)",
@@ -576,7 +855,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "boiler_chibi": {
    "title": "The Boiler (chibi)",
@@ -608,7 +901,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "snarer_chibi": {
    "title": "The Snarer (chibi)",
@@ -640,32 +947,61 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "gaoler_chibi": {
-   "title": "The Gaoler (chibi)",
+   "title": "Shacklemaw (chibi)",
    "theme": "prison",
    "idea": "IT DRAGS - rebuilt in the game's own proportions",
    "wear": 0.8,
    "feed_line": "A chain is paying out in the dark.",
+   "pack_used": null,
    "parts": 3,
    "engine": "BLENDER_EEVEE",
-   "faces": 2292,
+   "faces": 2412,
    "size": [
-    3.72,
-    2.59,
+    3.57,
+    2.31,
     2.35
    ],
-   "footprint_span": 3.72,
+   "footprint_span": 3.57,
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.43,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.552034125859247,
-    "ortho": 3.990356922149658,
+    "radius": 2.429005100794557,
+    "ortho": 3.553964614868164,
     "clip": [
-     9.216445922851562,
-     24.346511840820312
+     8.857436180114746,
+     23.53783416748047
     ]
    },
    "views": [
@@ -704,7 +1040,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.34,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "sexton_chibi": {
    "title": "The Sexton (chibi)",
@@ -736,7 +1086,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.93,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "stoker_chibi": {
    "title": "The Stoker (chibi)",
@@ -768,7 +1132,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.12,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "snuffer_chibi": {
    "title": "The Snuffer (chibi)",
@@ -800,7 +1178,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.65,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "jointer": {
    "title": "The Jointer",
@@ -832,7 +1224,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.25,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.82,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.25,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "quartermaster": {
    "title": "The Quartermaster",
@@ -845,27 +1251,41 @@
    "engine": "BLENDER_EEVEE",
    "faces": 2804,
    "size": [
-    2.97,
-    2.01,
+    2.62,
+    2.0,
     2.35
    ],
-   "footprint_span": 2.97,
+   "footprint_span": 2.62,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.1422533121162424,
-    "ortho": 3.0921225547790527,
+    "radius": 2.023361970530197,
+    "ortho": 3.0821645259857178,
     "clip": [
-     8.197546005249023,
-     21.25319480895996
+     8.006440162658691,
+     20.37047004699707
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.35,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.38,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.15,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "loader": {
    "title": "The Loader",
@@ -898,7 +1318,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.65,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.85,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "hurdleman": {
    "title": "The Hurdleman",
@@ -931,7 +1365,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.02,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tanner": {
    "title": "The Tanner",
@@ -964,7 +1412,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.75,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "reeve": {
    "title": "The Reeve",
@@ -977,27 +1439,41 @@
    "engine": "BLENDER_EEVEE",
    "faces": 1420,
    "size": [
-    2.96,
-    1.71,
+    3.26,
+    1.88,
     1.95
    ],
-   "footprint_span": 2.96,
+   "footprint_span": 3.26,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.9686456077388914,
-    "ortho": 2.696118116378784,
+    "radius": 2.119644302069713,
+    "ortho": 2.893660545349121,
     "clip": [
-     7.551932334899902,
-     20.22943878173828
+     7.9263129234313965,
+     21.296560287475586
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 1.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.55,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "tapster": {
    "title": "The Tapster",
@@ -1030,7 +1506,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.8,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.96,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.7,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "pressman": {
    "title": "The Pressman",
@@ -1063,7 +1553,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.85,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.39,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.65,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "strickler": {
    "title": "The Strickler",
@@ -1096,7 +1600,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.01,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "dyer": {
    "title": "The Dyer",
@@ -1129,7 +1647,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.6,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.72,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.9,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "greener": {
    "title": "The Greener",
@@ -1162,7 +1694,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.5,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.29,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.0,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "moulder": {
    "title": "The Moulder",
@@ -1173,29 +1719,43 @@
    "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 1971,
+   "faces": 1987,
    "size": [
-    2.34,
-    1.99,
+    2.36,
+    2.01,
     2.9
    ],
-   "footprint_span": 2.34,
+   "footprint_span": 2.36,
    "corridor": "CORRIDOR-SAFE",
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.112208222661332,
-    "ortho": 3.519352912902832,
+    "radius": 2.123993972047776,
+    "ortho": 3.5893654823303223,
     "clip": [
-     8.025308609008789,
-     20.817302703857422
+     8.055075645446777,
+     20.902973175048828
     ]
    },
    "views": [
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.9,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.64,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.6,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "ratcatcher": {
    "title": "The Ratcatcher",
@@ -1228,7 +1788,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.62,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.88,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "drover": {
    "title": "The Drover",
@@ -1261,7 +1835,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.44,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.41,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.06,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "paviser": {
    "title": "The Paviser",
@@ -1294,7 +1882,21 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ]
+   ],
+   "height_m": 2.68,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.43,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.82,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
   },
   "fenman": {
    "title": "The Fenman",
@@ -1327,12 +1929,406 @@
     "front.png",
     "three_quarter.png",
     "side.png"
+   ],
+   "height_m": 2.52,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.52,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.98,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "comfitmaker": {
+   "title": "The Comfitmaker",
+   "theme": "confection",
+   "idea": "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is sugar-hard and nothing the party carries marks it, but it hands out comfits as it fights and a comfit is the one thing that does. Take one and you can hurt it; the sugar also gums the hand that took it, so that hero swings slower for as long as they hold it. The party cannot hurt it without accepting something from it, and the stand says how many are left",
+   "wear": 0.08,
+   "feed_line": "Everything in here is sweet and none of it is kind.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2626,
+   "size": [
+    1.83,
+    1.41,
+    2.28
+   ],
+   "footprint_span": 1.83,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.6229717177561043,
+    "ortho": 2.6771152019500732,
+    "clip": [
+     6.813544750213623,
+     17.82897186279297
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.28,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.17,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.22,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "leech": {
+   "title": "The Leech",
+   "theme": "shrine",
+   "idea": "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this room mends. Every point of healing the party spends is drawn off into the basin at its side, and the Leech spends what the basin holds on itself, so the level in that basin is the mending you paid for. Tip the basin and it has nothing to mend with and your own healing comes back; leave it standing and your healer is carrying water in a sieve",
+   "wear": 0.82,
+   "feed_line": "It will have the bad blood out of you, and keep it.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 986,
+   "size": [
+    2.26,
+    1.59,
+    2.32
+   ],
+   "footprint_span": 2.26,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8040959433186958,
+    "ortho": 2.8286893367767334,
+    "clip": [
+     7.272996425628662,
+     19.072269439697266
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.32,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.74,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.18,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "beadle": {
+   "title": "The Beadle",
+   "theme": "shrine",
+   "idea": "IT CALLS THE ORDER - while it stands the party does not choose who acts. The Beadle calls, and it calls the same hero again and again while the rest hold their ground and watch; the four brass pegs on the board it holds overhead are the calls it has left and you can count them from the door. Knock the board off its arm and the order comes back to you",
+   "wear": 0.18,
+   "feed_line": "It says who speaks, and it is not you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 698,
+   "size": [
+    1.87,
+    1.19,
+    2.95
+   ],
+   "footprint_span": 1.87,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.845725940381679,
+    "ortho": 3.532595157623291,
+    "clip": [
+     7.4858784675598145,
+     18.80217933654785
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.95,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 9.13,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.55,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "rammer": {
+   "title": "The Rammer",
+   "theme": "flooded",
+   "idea": "IT DROPS ON THE COUNT - it hauls the monkey to the head of the frame, it holds, and it lets go. Whatever is standing on the pile when the monkey falls is finished, and you can HEAR it coming: the haul is slow and the hold is the warning. The answer is not what you do, it is when - stand off the pile for the drop and come back in while it hauls",
+   "wear": 0.58,
+   "feed_line": "Something is being driven into the floor.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1046,
+   "size": [
+    2.03,
+    1.39,
+    2.75
+   ],
+   "footprint_span": 2.03,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.843907220247193,
+    "ortho": 3.3761470317840576,
+    "clip": [
+     7.484295845031738,
+     19.312549591064453
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.75,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 8.97,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.75,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "fuller": {
+   "title": "The Fuller",
+   "theme": "fogbound",
+   "idea": "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the cloth in its trough, and when the cloth is full it wrings the lot out over the room at once. The cloth is the gauge and you can see it swell, so the fight is a decision nothing else in here asks for: STOP HITTING IT. Break the stocks, or wring it early and eat a small one, or keep swinging and pay for every blow you landed",
+   "wear": 0.62,
+   "feed_line": "Something in here is taking the blows.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1866,
+   "size": [
+    3.29,
+    1.84,
+    2.66
+   ],
+   "footprint_span": 3.29,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3074741650144572,
+    "ortho": 3.4001755714416504,
+    "clip": [
+     8.474510192871094,
+     22.629627227783203
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.66,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.84,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "stackman": {
+   "title": "The Stackman",
+   "theme": "grassland",
+   "idea": "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a fresh sheaf under its own feet and climbs a course, and from up there nothing with a hand on it can touch it; it pitches down at you for free. The stack is the gauge and you can count the courses from the doorway, so this is the one fight in here that asks about your PARTY and not your footing: cut the bottom course out from under it, or bring something with reach, or watch it climb out of the fight entirely",
+   "wear": 0.7,
+   "feed_line": "Something up there is building itself higher.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1674,
+   "size": [
+    2.53,
+    3.35,
+    2.84
+   ],
+   "footprint_span": 3.35,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5346931540043185,
+    "ortho": 5.161048412322998,
+    "clip": [
+     9.848793983459473,
+     23.550559997558594
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ],
+   "height_m": 2.84,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor_margin_m": 7.65,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.66,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true
+  },
+  "dauber": {
+   "title": "Wetwall",
+   "theme": "keep",
+   "idea": "IT WALLS YOU IN - every time you hurt it it lays a fresh course across the room and the floor you have left to fight on gets smaller. The course goes up WET, and while it is wet it can be broken by anything; once it sets, nothing the party carries will open it again. So the fight is a choice that expires: swing at the Dauber, or spend the same swing on the wall it just laid, and the hod on its shoulder says how many courses it still has to give you",
+   "wear": 0.42,
+   "feed_line": "Something is laying up a wall behind you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1300,
+   "size": [
+    1.65,
+    1.62,
+    2.58
+   ],
+   "footprint_span": 1.65,
+   "height_m": 2.58,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.92,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7338726072131947,
+    "ortho": 2.9478847980499268,
+    "clip": [
+     7.076239585876465,
+     18.445512771606445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "sealer": {
+   "title": "Leadbite",
+   "theme": "treasury",
+   "idea": "IT SEALS WHAT YOU CARRY - every bite of the press shuts ONE hero's pack, and while the Sealer stands that pack stays shut: no flask, no bandage, no scroll, nothing that hero walked in with. It takes nothing and breaks nothing - the gear is still in there and it is simply not yours until the press is broken. The strip of lead blanks on its hip is the gauge: one blank is one more pack it can shut, so the party can count the fight it has left before the first bite",
+   "wear": 0.22,
+   "feed_line": "Someone down there is stamping lead.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1284,
+   "size": [
+    1.64,
+    1.52,
+    2.42
+   ],
+   "footprint_span": 1.64,
+   "height_m": 2.42,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.364,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.08,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.647614042881936,
+    "ortho": 2.8757717609405518,
+    "clip": [
+     7.016813278198242,
+     17.707426071166992
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
    ]
   }
  },
- "errors": [],
+ "errors": [
+  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
+ ],
+ "floorgeom_stale": true,
+ "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
  "blank_check": {
-  "files": 90,
+  "files": 114,
   "failures": []
  }
 }

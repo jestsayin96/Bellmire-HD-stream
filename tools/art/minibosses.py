@@ -12306,3 +12306,359 @@ def stackman():
 
 
 BUILDERS.update({"stackman": stackman})
+
+
+# ----------------------------------------------------------------- 37 THE DAUBER
+# MY OWN COUNT, MEASURED NOT REMEMBERED (ast walk of this file, 20 Nov 10:4x CT):
+# CANON and BUILDERS each carry 50 keys and agree exactly - no builder without a
+# canon row and no canon row without a builder. 14 of those keys are VARIANT
+# BODIES (_chibi x12, _tall, _chibi_tall), so the distinct miniboss count before
+# this one is THIRTY-SIX, not the 33 my prompt carries. The Dauber is the 37th.
+#
+# WHY A WALL AND NOT ANOTHER GAUGE. I read all 36 idea lines before designing,
+# because a re-skin is the one failure this slot cannot absorb. The thirty-six
+# already own: summoning, re-plating, dragging, light, resurrection, door-barring,
+# gear theft, pack healing, blind-hunts-the-last-mover, mark-and-chase, weapon
+# corrosion, splitting, encumbrance, copying a hero, facing/shield, converting the
+# fallen, arming the room, a timed drop, corpse-eating, loot denial, rising water,
+# pre-set traps, thorns, climbing out of reach, fire-size, levelling the best hero
+# down, no-repeat-damage, potion drinking, healing denial, sugar-shell gifting,
+# yoke damage-sharing, splitting the line in two, displaced sound, floor-setting,
+# forced action order and stored-damage release.
+# NOTHING TAKES THE ROOM AWAY A COURSE AT A TIME. The Hurdleman divides the floor
+# once and the Sluicekeeper floods it, but neither SHRINKS it, and neither puts a
+# PERISHABLE window on the answer. That window is the new verb here: fresh daub
+# can be broken and set stone cannot, so the party is not choosing how to kill
+# this thing, it is choosing between hitting the Dauber and hitting the wall it
+# just laid - and the choice expires while they argue about it.
+CANON.update({
+    "dauber":  ("Wetwall", 2.58, (0.74, 0.72, 0.66), (0.86, 0.92, 0.84),
+                "keep", "IT WALLS YOU IN - every time you hurt it it lays a fresh "
+                "course across the room and the floor you have left to fight on gets "
+                "smaller. The course goes up WET, and while it is wet it can be broken "
+                "by anything; once it sets, nothing the party carries will open it "
+                "again. So the fight is a choice that expires: swing at the Dauber, or "
+                "spend the same swing on the wall it just laid, and the hod on its "
+                "shoulder says how many courses it still has to give you",
+                0.42, "Something is laying up a wall behind you."),
+})
+ORDER = ORDER + ["dauber"]
+
+# PER-SLOT MATERIALS, AND THE REASON IS MR. E'S SECOND RULE RATHER THAN TASTE.
+# The tint-derived path pulls one hue over a whole body (the measured defect at
+# median satMean 0.087). This body has to say TWO conditions at once: the man and
+# his trade are worn, and THE MATERIAL IS BRAND NEW AND STILL WET. Wear is the
+# receipt, and a single wear-dulled tint cannot carry a worn mason and fresh lime
+# in the same frame. Same argument the Stackman wrote down for straw.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"dauber"}
+
+OVERRIDE.update({
+    "dauber": {
+        # The smock. Held cool and DOWN in value, because every pale thing on
+        # this body is load-bearing - the blocks, the daub, the face - and they
+        # only read as bright if the man they hang on is dark. Lime-stained
+        # wool: a mason's smock is never a clean colour.
+        # *** PASS 2, CHANGE D - MEASURED OFF MY OWN RENDER, NOT OFF TASTE. ***
+        # Pass 1 put the smock at (0.112,0.118,0.126) and the dark slot at
+        # (0.070,0.068,0.062) - 0.04 apart in value and barely apart in hue. In
+        # all three renders the smock, the apron, the boots and the hod frame
+        # are ONE dark mass with the pale blocks floating on it, which is the
+        # monochrome-body defect OVERRIDE exists to break, arrived at from the
+        # other direction: I avoided a single hue and shipped a single VALUE.
+        # Lifted and cooled so the man separates from his own ironwork, and
+        # still held well below the pale so the wet lime is the brightest thing
+        # on the body - which it has to be, because it is the affordance.
+        'body': ((0.173, 0.186, 0.208), 0.90, 0.00),
+        # SET STONE, TIMBER AND IRON IN ONE SLOT, NAMED RATHER THAN HIDDEN -
+        # the compromise the Fuller and the Stackman both wrote down. The hod
+        # frame, the pail, the trowel blade, the boots, the apron, the mortar
+        # joints and the plumb bob are all here. Metal 0.14 so the trowel
+        # catches a highlight without a withy reading as steel. THE SET COURSE
+        # IS IN THIS SLOT ON PURPOSE: set stone is the thing you cannot break,
+        # and it is the dark half of the pair this body exists to show.
+        'dark': ((0.070, 0.068, 0.062), 0.80, 0.14),
+        # WET LIME. This is the whole receipt and the whole affordance. Roughness
+        # 0.44 is the lowest solid on any body in this file, because WET is a
+        # specular fact, not a colour fact - dial the colour brighter and you get
+        # chalk, drop the roughness and you get slip. Warm-neutral rather than
+        # blue-white: the Comfitmaker measured that a cold white body reads as
+        # BONE, and this has to read as mortar going off.
+        'bone': ((0.818, 0.800, 0.730), 0.44, 0.00),
+        # Eyes only, small and set well inboard. System 1's clipped ladder is
+        # the standing lesson: a glow that reaches the frame edge is invisible
+        # to a blank check, so the glow is kept small BY CONSTRUCTION and the
+        # border assertion is the backstop, not the plan.
+        'glow': ((0.98, 0.88, 0.52), 1.65),
+    },
+})
+
+
+def dauber():
+    """IT WALLS YOU IN. The mechanic is carried in two places on purpose, so the
+    body answers both halves of the viewer's question without a word of UI:
+
+      HOW MANY MORE?  Five pale blocks stepping up and out along the hod pole,
+                      each one parted from the next by a dark mortar joint.
+                      Countable from the doorway, broadside to the three-quarter
+                      camera (the Stackman's pass-2 lesson: a mechanic aimed
+                      along the camera axis foreshortens into nothing).
+      CAN I BREAK IT? The course already laid is on the floor at -Y, and the bead
+                      of daub along its joint is in the SAME PALE SLOT as the
+                      blocks and the pail. Pale means wet means breakable; the
+                      dark stone is the half you have left too long.
+
+    Static: no anims entry. Its two states - wet and set - are stated by the
+    material pair and by one block left half-seated and out of line, so the pair
+    the body cannot animate through is said by the geometry instead.
+
+    ROOM-LOCKED BY CONSTRUCTION is NOT claimed here. The widest extent is the
+    hod pole reaching out in +X; minibossgen measures the real footprint and the
+    report says whether it clears the corridor. I do not pre-judge that number.
+    """
+    P = Parts("dauber")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 0.95
+    SHO = 1.56
+    HEAD = 1.80
+
+    _open()
+    # ----------------------------------------------------- THE MAN: PLANTED WIDE
+    # One foot forward and one braced back, because a man laying a course is not
+    # standing to attention - and because a raked leg is the one thing in this
+    # file that has floated nine bodies before. seat() lifts each limb by its own
+    # first segment so a literal 0.0 at the ankle really is the floor.
+    for s, fy, by in ((-1, -0.22, 0.0), (1, 0.16, 0.0)):
+        limb(P, seat([(s * 0.19, by, HIP), (s * 0.25, by - 0.04, HIP - 0.48),
+                      (s * 0.27, fy, 0.085)], 0.106),
+             0.106, 0.084, 'body')
+        # A BOOT, not a bare tube end. The Fuller shipped two arms stopping in
+        # mid-air at pass 1 and the same fault at the ankle reads as a man sunk
+        # into his own mortar.
+        P.add(L.box(0.25, 0.42, 0.115), 'dark', loc=(s * 0.27, fy - 0.05, 0.058))
+    P.raw(aim(L.cone(0.32, 0.26, 0.64, 12), (0.0, 0.02, HIP), (0.0, -0.05, 1.0)), 'body')
+    # THE APRON - a dark plate hung on the front only. It does three jobs: it is
+    # the trade read, it keeps the front of the torso dark so the pale face panel
+    # and the pale pail both separate from it, and it is a FACING CUE, because
+    # there is no apron on the back.
+    P.add(L.box(0.46, 0.055, 0.56), 'dark', loc=(0.0, -0.23, HIP - 0.04))
+    for s in (-1, 1):
+        P.add(L.sphere(0.118, 0.110, 0.106, 11, 8), 'body', loc=(s * 0.26, 0.0, SHO))
+    P.add(L.sphere(0.170, 0.178, 0.174, 14, 9), 'body', loc=(0.0, -0.02, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped. This
+    # is the Beadle's measured fault designed out: that body's pale eye-band
+    # wrapped the head and the figure read the same from front and back, so it
+    # had no facing at all. One panel, one side, and the eyes inside it.
+    P.add(L.box(0.168, 0.046, 0.138), 'bone', loc=(0.0, -0.198, HEAD - 0.01))
+    eyes(P, (0.0, 0.0, HEAD + 0.01), 0.052, 0.030, -0.226)
+    # A flat mason's cap, brim at the back only - second facing cue, and it keeps
+    # the top of the head dark so the pale block stack behind it separates.
+    P.raw(aim(L.cone(0.185, 0.172, 0.055, 14), (0.0, -0.02, HEAD + 0.14), (0.0, 0.0, 1.0)), 'dark')
+    P.add(L.box(0.30, 0.20, 0.035), 'dark', loc=(0.0, 0.14, HEAD + 0.155))
+    _close("man")
+
+    _open()
+    # --------------------------------- THE HOD: THE GAUGE, AND IT IS THE AFFORDANCE
+    # A hodman's pole over the right shoulder, raked UP AND OUT IN +X with only a
+    # little +Y. The rake is deliberate and it is the Stackman's pass-2 correction
+    # applied before the fault rather than after it: a line aimed along the
+    # three-quarter camera's own axis (+X,-Y) collapses to a vertical pole in the
+    # one view that ships. This one is swung across the frame instead, so it reads
+    # as a DIAGONAL at three-quarter, as a diagonal from the front, and
+    # foreshortens only in the side view where the five blocks still stack.
+    pole0 = Vector((0.20, 0.10, SHO - 0.18))
+    pole1 = Vector((1.06, 0.40, 2.46))
+    # PASS 3: the butt end carries on past the shoulder and DOWN THE BACK, so
+    # the shaft is a continuous line from the hand to the far tip rather than a
+    # stub appearing out of the stone.
+    P.raw(L.tube([Vector((-0.16, 0.26, HIP - 0.18)), Vector((-0.02, 0.14, HIP + 0.16)),
+                  pole0, pole0 + (pole1 - pole0) * 0.93],
+                 [0.038, 0.046, 0.052, 0.038], 8), 'dark')
+    # The V-trough the blocks sit in - two boards along the pole's upper half.
+    # *** PASS 5, AND THE HERO-SCALE PANE IS WHAT FOUND IT - NOT ANY NUMBER
+    # AND NOT THE 700 px BODY SHOTS. *** At full size the hod reads as five
+    # mortared blocks on a shaft. Shrunk to the fit sheet's cell - roughly what
+    # a viewer gets from across a room, which is the ONLY distance that matters
+    # for a set-piece - the stone loses its solidity, the four joints become
+    # rungs, and the thing on his shoulder is A LADDER. Every instrument was
+    # green through all of it: blanks 0, border 0, span 1.80 m, GREEN fit, and
+    # the count still countable. THE PICTURE AT THE RIGHT SIZE SAID OTHERWISE.
+    # A ladder needs TWO STILES and rungs between them. Pass 4 killed one stile
+    # (the second board) and the read survived, because the pole's overhang
+    # ABOVE the stack and the board running the full length were still a pair.
+    # Both are cut here: the shaft now STOPS INSIDE the load, and the board is a
+    # lip under the bottom two courses only. Nothing brackets the joints any
+    # more, so a stepped run of bars has nothing to be a ladder with - and the
+    # count, which is the mechanic, is untouched.
+    # PASS 4: ONE board, not two. Two parallel boards either side of a pole are
+    # STILES, and stiles plus the old protruding joints are what made the side
+    # view a ladder. One lip on the low side is all a hod needs to hold a course
+    # on, and it is what stops the stack reading as a slab glued to the shaft.
+    a = pole0 + (pole1 - pole0) * 0.16
+    b = pole0 + (pole1 - pole0) * 0.52
+    P.raw(L.tube([a + Vector((0.0, -0.20, 0.03)), b + Vector((0.0, -0.20, 0.03))],
+                 [0.030, 0.026], 6), 'dark')
+    # FIVE BLOCKS, FIVE COURSES LEFT. Each parted from its neighbour by a dark
+    # mortar plate that is WIDER than the block, so the gap survives at pane
+    # distance - the count is the mechanic and a count that merges into one pale
+    # bar at distance is a count nobody can read.
+    # *** PASS 2, CHANGE A - AND THE PICTURE NAMED THE FAULT, NOT A NUMBER. ***
+    # Pass 1 stepped each block up AND out along the pole while leaving every
+    # block AXIS-ALIGNED. Every instrument passed it - blank check clean, border
+    # clean, span 1.87 m, 5 blocks countable - and the render is unmistakably A
+    # FLIGHT OF STAIRS coming off his shoulder. In front.png it is not even
+    # ambiguous. A stepped run of level slabs IS a staircase; that is what the
+    # shape means, and no amount of calling it a hod in a comment changes what a
+    # viewer sees in a 700 px pane. On a MASON, of all bodies, that misread is
+    # the worst one available.
+    # THE FIX IS ONE LINE OF GEOMETRY: rotate each block onto the POLE'S OWN
+    # AXIS, so the blocks stack face to face along the pole and the load reads as
+    # a slanted column of stone carried on a shaft. Nothing else changes - same
+    # five blocks, same mortar joints, same count from the doorway.
+    dirv = (pole1 - pole0).normalized()
+    rot = Vector((0.0, 0.0, 1.0)).rotation_difference(dirv).to_matrix()
+    upp = (Vector((0.0, 0.0, 1.0)) - dirv * dirv.z).normalized()
+    for i in range(5):
+        # *** PASS 3 - THE LOAD HAD NO CARRIER. *** At 0.155 the offset was
+        # SMALLER than the block's own perpendicular half-extent, so the pole ran
+        # INSIDE the stone and the only part of it anyone could see was the stub
+        # out of the top. A slab of five courses apparently glued to a shoulder.
+        # 0.27 puts the shaft clear of the block undersides, where a hod's pole
+        # actually is and where the eye needs it to explain the load.
+        c = pole0 + dirv * (0.26 + 0.238 * i) + upp * 0.27
+        vs, fs = L.box(0.46, 0.34, 0.196)
+        P.raw(([rot @ v + c for v in vs], fs), 'bone')
+        if i < 4:
+            # the joint is WIDER than the block in both lateral axes, so the
+            # parting survives at pane distance - the count is the mechanic and
+            # a count that merges into one pale bar is a count nobody can read.
+            # *** PASS 4 - THE JOINTS WERE BUILT AS RUNGS. *** Pass 2 made the
+            # mortar plate WIDER than the block on purpose, so the parting would
+            # survive at pane distance. It does - and in side.png those four
+            # protruding dark bars, between two trough boards and a pole, add up
+            # to a LADDER: stiles and rungs, the exact silhouette the Stackman
+            # already owns. Recessed inside the block footprint instead. The
+            # parting still reads, because it is a SHADOW LINE between two pale
+            # faces now rather than a bar laid across them, and nothing sticks
+            # out of the stack to be mistaken for a rung.
+            vs, fs = L.box(0.42, 0.30, 0.046)
+            cm = c + dirv * 0.121
+            P.raw(([rot @ v + cm for v in vs], fs), 'dark')
+    _close("hod")
+
+    _open()
+    # ------------------------------------- THE RIGHT ARM: UP ON THE POLE
+    limb(P, [(0.26, 0.0, SHO - 0.02), (0.28, 0.07, SHO - 0.26),
+             (0.21, 0.10, SHO - 0.17)], 0.084, 0.062, 'body')
+    P.add(L.sphere(0.080, 0.070, 0.070, 10, 7), 'dark', loc=tuple(pole0))
+    _close("rightarm")
+
+    _open()
+    # -------------------------- THE TROWEL: THE TOOL, AND IT IS THE VERB
+    # Low and forward in the left hand, blade flat as if it has just struck a
+    # joint off. Iron, so it goes dark - and it is the only thing on the body
+    # whose edge catches the sun off the metal term in the dark slot.
+    hand = Vector((-0.40, -0.40, HIP - 0.28))
+    limb(P, [(-0.26, -0.02, SHO - 0.04), (-0.38, -0.22, HIP + 0.06),
+             tuple(hand)], 0.084, 0.060, 'body')
+    P.raw(L.tube([hand, hand + Vector((-0.08, -0.17, -0.03))], [0.046, 0.040], 7), 'dark')
+    tip = hand + Vector((-0.12, -0.52, -0.05))
+    P.raw(L.tube([hand + Vector((-0.09, -0.19, -0.03)), tip], [0.026, 0.016], 6), 'dark')
+    # *** PASS 2, CHANGE C - IT READ AS A PADDLE. *** Pass 1's blade was 0.44
+    # deep and dead flat, and in side.png it is an oar held out at hip height.
+    # Shorter, narrower and RAKED DOWN at the tip, which is both what a trowel
+    # looks like and what one looks like IN USE - the tip toward the work.
+    _bv, _bf = L.box(0.175, 0.30, 0.024)
+    _br = Matrix.Rotation(math.radians(-24.0), 3, 'X')
+    _bc = hand + Vector((-0.11, -0.36, -0.065))
+    P.raw(([_br @ v + _bc for v in _bv], _bf), 'dark')
+    # A SMEAR OF WET DAUB ON THE BLADE'S UPPER FACE. Two jobs: it is the only
+    # place the pale and the dark touch edge to edge, which is what makes the
+    # pair read as one material in two states rather than as two unrelated
+    # colours; and it says the tool is IN USE.
+    P.add(L.sphere(0.072, 0.115, 0.026, 11, 7), 'bone',
+          loc=tuple(hand + Vector((-0.11, -0.345, -0.042))))
+    _close("trowel")
+
+    _open()
+    # ----------------------------- THE PAIL: WHERE THE WET COMES FROM
+    # Slung at the LEFT hip, front quarter, so it sits against the dark apron and
+    # separates. The pail is timber (dark); the daub standing proud of the rim and
+    # the run down the outside are pale, and the run is what makes a viewer read
+    # "full and slopping" rather than "a bucket".
+    pc = Vector((-0.40, -0.14, HIP - 0.52))
+    P.raw(aim(L.cone(0.205, 0.165, 0.30, 14), tuple(pc), (0.06, -0.04, 1.0)), 'dark')
+    _ring(P, tuple(pc + Vector((0.02, -0.01, 0.30))), 0.205, axis='z', slot='dark',
+          rad=0.026, n=18)
+    P.add(L.sphere(0.198, 0.198, 0.075, 14, 8), 'bone',
+          loc=tuple(pc + Vector((0.02, -0.01, 0.31))))
+    P.raw(L.tube([pc + Vector((-0.16, -0.11, 0.30)), pc + Vector((-0.21, -0.14, 0.12)),
+                  pc + Vector((-0.19, -0.13, 0.02))], [0.055, 0.042, 0.030], 7), 'bone')
+    _close("pail")
+
+    _open()
+    # ---------------- THE COURSE ALREADY LAID: THE HALF A VIEWER CAN STILL BREAK
+    # On the floor at -Y, in front of his own feet, where a mason's last course
+    # actually is. Two blocks seated and a THIRD half-seated and out of line - the
+    # Paviser's open-collar argument reused: a course that merely stops reads as a
+    # wall drawn short, a course with one block still crooked reads as a wall being
+    # BUILT RIGHT NOW, which is the sentence this body needs.
+    for bx in (-0.50, -0.02, 0.46):
+        P.add(L.box(0.455, 0.275, 0.20), 'dark', loc=(bx, -0.80, 0.10))
+    # the bed joint, pale and proud of the stone - WET, therefore breakable
+    P.raw(L.tube([Vector((-0.74, -0.80, 0.205)), Vector((0.70, -0.80, 0.205))],
+                 [0.040, 0.040], 7), 'bone')
+    # THE CROOKED ONE, up on that bed and off square by eye. Rotated about Z
+    # rather than modelled bent, so the block is the SAME box as the three under
+    # it - if a viewer can see this one is crooked, it is because it is crooked
+    # and not because it was drawn differently.
+    vs, fs = L.box(0.455, 0.275, 0.20)
+    rot = Matrix.Rotation(math.radians(13.0), 3, 'Z')
+    off = Vector((0.30, -0.82, 0.325))
+    P.raw(([rot @ v + off for v in vs], fs), 'dark')
+    # and the daub squeezed out under it
+    P.add(L.sphere(0.20, 0.10, 0.030, 12, 7), 'bone', loc=(0.30, -0.80, 0.228))
+    _close("laid")
+
+    _open()
+    # ------------------ THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The plumb line and bob, hung off the hod pole and falling clear behind the
+    # heel. It is invisible from the front (the body is in the way) and the
+    # apron, the pail, the trowel, the laid course and the face are all invisible
+    # from the back - so the two reads differ BY CONSTRUCTION rather than by
+    # hoping the camera is kind. One connected silhouette: the line starts on the
+    # pole and the bob stops ON the floor, not in the air.
+    # *** PASS 2, CHANGE B - A COLLISION THAT EXISTS ONLY IN PROJECTION, AND IT
+    # IS STILL A FAULT. *** In 3D the pass-1 bob (x +0.46) and the lime bag
+    # (x -0.40) are 0.86 apart and never touch. In side.png the camera looks
+    # ALONG X, that separation collapses to nothing, and the bob's spike is
+    # driven clean through the top of the bag. No occupancy or intersection test
+    # would ever have reported it, because nothing intersects. The viewer's
+    # question is not "do these overlap in space", it is "what does this picture
+    # show", and the picture showed a spike in a sack.
+    # The bob now hangs SHORT and well above the floor - which is also what a
+    # plumb bob does - and clears the bag in Y and Z as well as in X, so the
+    # side projection has nothing to stack.
+    anch = pole0 + (pole1 - pole0) * 0.20
+    # PASS 3: swung further round to +Y so it hangs BEHIND the hip rather than
+    # across it. In pass 2's front.png it crossed the torso and read as a dart on
+    # his chest - a back-side cue has no business being the clearest small object
+    # in the front view.
+    P.raw(L.tube([anch, Vector((0.40, 0.46, 1.24)), Vector((0.405, 0.48, 0.97))],
+                 [0.013, 0.012, 0.012], 6), 'dark')
+    P.raw(aim(L.cone(0.052, 0.0, 0.16, 10), (0.405, 0.48, 0.97), (0.0, 0.0, -1.0)), 'dark')
+    # the bagged lime he is working out of, stood against his back heel
+    P.raw(aim(L.cone(0.21, 0.13, 0.34, 12), (-0.40, 0.52, 0.0), (-0.07, 0.10, 1.0)), 'dark')
+    P.add(L.sphere(0.155, 0.155, 0.060, 12, 7), 'bone', loc=(-0.42, 0.55, 0.345))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"dauber": dauber})

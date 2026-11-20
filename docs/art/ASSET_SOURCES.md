@@ -291,3 +291,46 @@ worldfit pass 2 carry a licence file that was read off disk on 20 Nov:
 `kaykit_dungeon_pack_CC0` (185, System 47), `Medieval_Village_MegaKit` (176) and
 `kenney_fantasy-town-kit_2.0` (167) for System 15, `KayKit_Forest_Nature_Pack_1.0_FREE`
 (105) and `Ultimate_Stylized_Nature` (36) for System 68 - 669 rows, all CC0 1.0.
+
+## THE THREE PACKS IN THE 18/21 GAP - TERMS ON FILE IN A README (20 Nov 2026, 10:5x CT)
+
+The 09:58 plan row settled the split between my count of 21 packs with no file
+NAMED licence and the hub's 18 packs with no licence text ANYWHERE. Both counts
+were right about different questions; **18 is the number that gates imports.**
+The three packs in the gap are recorded here with the terms **as I read them off
+disk myself this run**, not as quoted from the plan row:
+
+**`_packs/Stone_coffin/readme.txt` - CC0 1.0, usable.** "Provided by Nobiax."
+then verbatim: *"CC0 1.0 Universal (CC0 1.0) / Public Domain Dedication / No
+Copyright / ... You can copy, modify, distribute and perform the work, even for
+commercial purposes, all without asking permission."* A link back is requested,
+not required.
+
+**`_packs/rocks/readme.txt` - CC0 1.0, usable.** The same explicit CC0 1.0
+paragraph, same author, same requested-not-required link.
+
+**`_packs/grass_07/readme.txt` - NOT CC0. A custom permissive grant, usable.**
+The whole file, verbatim, because the point of this entry is that it must not be
+re-recorded as CC0 by a later seat:
+
+> Provided by Nobiax.
+>
+> Absolutely free to use or to modify in any kind of work (personal, commercial
+> or else).
+>
+> Give me a link of the result at nobiax.deviantart.com or my other account on
+> OpenGameArt.com or ShareCG.com
+> ( watch my journal on deviantart ) ;)
+
+Commercial use is granted outright. The link is a REQUEST ("give me a link"),
+not a condition of the grant - there is no "provided that" anywhere in it - so
+it is not an attribution licence and it does not infect anything. It is also not
+share-alike and not non-commercial, so none of the three forbidden families
+apply. **Record it as a custom permissive grant, never as CC0.**
+
+*** THE NAMING TRAP, RESTATED FROM THE OTHER SIDE. *** This file already warns
+that a folder called `medieval_pack_CC0` is not licensed by its name. These three
+are the mirror image: **a pack with no file called `LICENSE` can still be fully
+licensed**, and two of these three are CC0 outright. A filename is not a licence
+in either direction. The recipe that counts files answers "where do I have to go
+and read", not "what am I allowed to use".

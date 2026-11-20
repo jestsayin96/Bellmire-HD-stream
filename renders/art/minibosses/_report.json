@@ -16,7 +16,26 @@
    "lid_y_m": "scripts\\floorgen.gd:1383",
    "lid_thick_m": "scripts\\floorgen.gd:1378"
   },
-  "errors": []
+  "errors": [],
+  "provenance": {
+   "repo": "C:\\hd adventure\\bellmire-art",
+   "worktree": "bellmire-art",
+   "gd": "scripts/floorgen.gd",
+   "gd_sha256_8": "e25c31d9",
+   "gd_lid_line": "lid.position = Vector3(0, 7.0, 0)",
+   "branch": "art",
+   "head": "d91309d47976f8fcdd5e4cfaa6c3ae7007f4c4a0",
+   "ref": "origin/main",
+   "ref_commit": "72461bc319b600c6238f1605159cde318575f1ba",
+   "ref_gd_sha256_8": "bc3a603f",
+   "verified": true,
+   "matches_ref": false,
+   "drift": [
+    "lid_y_m: tree 7.0, origin/main 10.0",
+    "lid_underside_m: tree 6.5, origin/main 9.5"
+   ],
+   "notes": []
+  }
  },
  "red_arm": null,
  "minibosses": {
@@ -178,7 +197,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.435,
+   "corridor_margin_m": 7.44,
    "lid": "UNDER-LID",
    "lid_clear_m": 4.15,
    "read_from": {
@@ -964,7 +983,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.429,
+   "corridor_margin_m": 7.43,
    "lid": "UNDER-LID",
    "lid_clear_m": 4.15,
    "read_from": {
@@ -2207,11 +2226,62 @@
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
    "fits": true
+  },
+  "dauber": {
+   "title": "Wetwall",
+   "theme": "keep",
+   "idea": "IT WALLS YOU IN - every time you hurt it it lays a fresh course across the room and the floor you have left to fight on gets smaller. The course goes up WET, and while it is wet it can be broken by anything; once it sets, nothing the party carries will open it again. So the fight is a choice that expires: swing at the Dauber, or spend the same swing on the wall it just laid, and the hod on its shoulder says how many courses it still has to give you",
+   "wear": 0.42,
+   "feed_line": "Something is laying up a wall behind you.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1300,
+   "size": [
+    1.65,
+    1.62,
+    2.58
+   ],
+   "footprint_span": 1.65,
+   "height_m": 2.58,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.345,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 3.92,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7338726072131947,
+    "ortho": 2.9478847980499268,
+    "clip": [
+     7.076239585876465,
+     18.445512771606445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
- "errors": [],
+ "errors": [
+  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 72461bc319b600c6238f1605159cde318575f1ba sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
+ ],
+ "floorgeom_stale": true,
+ "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 72461bc319b600c6238f1605159cde318575f1ba sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
  "blank_check": {
-  "files": 108,
+  "files": 111,
   "failures": []
  }
 }

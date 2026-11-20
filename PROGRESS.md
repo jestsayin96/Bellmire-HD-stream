@@ -12161,3 +12161,8 @@ FILES: only PROGRESS.md changes in this commit. scripts/chatcmd.gd, data/command
 FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is untouched - twitch_reply(user_login, text), no @name, no rate limiting.
 NEXT: the second of the three rowed commands - town - then bestiary. Nothing for Mr. E to decide.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## C-130 (19 Nov 22:23 CST) - the miniboss rename, feed lines (content)
+Item: TAKE THIS NEXT (19 Nov 22:0x CT) row 2, CONTENT: THE RENAME, PART 1 of the supervisor's 21:50 Mr. E directive. Renamed all 36 minibosses in the miniboss_feed text: 138 lines (arrive, act, broken and fall lines that named the trade) now use the new character name with no 'the' prefix; the 36 blocks keep every line count. One line was reworded around the name (tapster cask arrive). Directive row 23 reads Drizzler; the body key is strickler and it took Murkspit. by_key KEYS ARE UNCHANGED ON PURPOSE: they are art's body keys and the join for miniboss_for, which draws a body only with a mesh AND lines under its own key, and no new name is on any origin branch yet. When art renames its keys, by_key keys must be renamed in the same change; the mapping is in miniboss_feed._note_c130 (nested, top-level count still 44). Old names survive only in earlier _note_ keys, as history. Names are Mr. E's proposals. Did not extend the phase2_words family. VALIDATION OK: json.load passes, every pre-existing key unchanged except the 138 intended lines, no key added except miniboss_feed._note_c130, ASCII only.
+CODE WIRING: none new for these lines. Owed by others: art/game build rename the body keys, and the by_key keys follow in the same change.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

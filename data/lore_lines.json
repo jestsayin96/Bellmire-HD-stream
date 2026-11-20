@@ -11675,11 +11675,11 @@
           "Nobody answers the call."
         ],
         "fall": [
-          "The Drillmaster is down. The barracks is quiet.",
+          "Karvok is down. The barracks is quiet.",
           "No more muster. The gong hangs still.",
-          "The Drillmaster is down. The line breaks and goes home.",
+          "Karvok is down. The line breaks and goes home.",
           "Dismissed.",
-          "The Drillmaster is down. The roll goes uncalled.",
+          "Karvok is down. The roll goes uncalled.",
           "No more orders in this hall. The garrison does not get up.",
           "The mallet lies where it dropped. The gong is still.",
           "He drilled them well. It was not enough today."
@@ -11712,11 +11712,11 @@
           "Stripped. It looks for more scrap and finds none."
         ],
         "fall": [
-          "The Scrapwright comes apart where it stands.",
+          "Ironhyde comes apart where it stands.",
           "Scrap, all of it. The workshop keeps the pieces.",
-          "The Scrapwright is down. The bench has its tools back.",
+          "Ironhyde is down. The bench has its tools back.",
           "A heap of old iron. Someone will sell it.",
-          "The Scrapwright is down. The plates lie where they landed.",
+          "Ironhyde is down. The plates lie where they landed.",
           "Nothing holds it together now. The bolts roll under the bench.",
           "A rattle, then quiet. Someone will pick the good iron out.",
           "It mended itself right up to the end."
@@ -11726,12 +11726,12 @@
         "arrive": [
           "A chain is paying out in the dark.",
           "Iron on stone. Something is checking the cells.",
-          "The Gaoler keeps the door and has not been relieved.",
+          "Shacklemaw keeps the door and has not been relieved.",
           "Keys on a ring, counted over and over.",
           "Someone is working down the row of cells, slow.",
           "A lantern, a hook, and a man who has never been late.",
           "A cell door shuts somewhere, slow and certain.",
-          "The lamp is turned low. The Gaoler likes it so.",
+          "The lamp is turned low. Shacklemaw likes it so.",
           "A ring of keys, and a man who knows each one by feel."
         ],
         "act": [
@@ -11750,13 +11750,13 @@
           "He has nothing left to catch you with."
         ],
         "fall": [
-          "The Gaoler is down. The keys are still warm.",
+          "Shacklemaw is down. The keys are still warm.",
           "The chain lies where it fell. The cells are open.",
-          "The Gaoler is down. The ring of keys goes quiet.",
+          "Shacklemaw is down. The ring of keys goes quiet.",
           "The cell door stands open. Nobody is sorry.",
-          "The Gaoler is down. Every door on the row hangs open.",
+          "Shacklemaw is down. Every door on the row hangs open.",
           "The keys slide off the ring. Nobody stops them.",
-          "The Gaoler is down. The hook hangs off its chain.",
+          "Shacklemaw is down. The hook hangs off its chain.",
           "The row is unwatched for the first time in years."
         ]
       },
@@ -11774,7 +11774,7 @@
         ],
         "act": [
           "Another lamp out. The room is smaller.",
-          "The Snuffer takes the next light.",
+          "Duskhollow takes the next light.",
           "Fewer lamps. Closer shadows.",
           "The pole comes down. Another wick is dead.",
           "It does not hurry. It does not need to.",
@@ -11783,16 +11783,16 @@
         ],
         "broken": [
           "The lamp stays lit. It has to take the next one.",
-          "Someone relights the wick. The Snuffer turns.",
-          "A wick catches. The Snuffer shies from it.",
+          "Someone relights the wick. Duskhollow turns.",
+          "A wick catches. Duskhollow shies from it.",
           "Lamp relit. The pole is slow now."
         ],
         "fall": [
-          "The Snuffer is down. One lamp is still burning.",
+          "Duskhollow is down. One lamp is still burning.",
           "Dark, then a spark. Someone has a flint.",
-          "The Snuffer is down. Someone lights a lamp, and keeps hold of it.",
+          "Duskhollow is down. Someone lights a lamp, and keeps hold of it.",
           "Light on every wall. It was never a lot to ask.",
-          "The Snuffer is down. The pole rolls out of its hand.",
+          "Duskhollow is down. The pole rolls out of its hand.",
           "A wick catches again, low and blue, then yellow.",
           "It put out a good many lamps. Light them again.",
           "Dark, then a match. The first light in the room is yours."
@@ -11802,10 +11802,10 @@
         "arrive": [
           "A spade is working somewhere in the dark.",
           "Lit niches on a man's back. Count them.",
-          "The Sexton carries his own graves.",
+          "Gravrik carries his own graves.",
           "A bell tolls once for no one yet.",
           "Fresh earth on the floor, and a spade in it.",
-          "The Sexton has dug for all of you already.",
+          "Gravrik has dug for all of you already.",
           "Spade-marks in the floor, and a heap of earth beside each.",
           "A knell for someone not yet dead.",
           "The niches along the wall are lit. A man in black is counting them."
@@ -11826,24 +11826,24 @@
           "He has no one left to call."
         ],
         "fall": [
-          "The Sexton is down and stays down.",
+          "Gravrik is down and stays down.",
           "Back in the ground. He knows the way.",
-          "The Sexton is down. Somebody should dig for him.",
+          "Gravrik is down. Somebody should dig for him.",
           "Laid in his own work. Nobody will say a word over it.",
-          "The Sexton is down. His spade stays in the earth.",
-          "The Sexton is down. Nobody will ring for him.",
+          "Gravrik is down. His spade stays in the earth.",
+          "Gravrik is down. Nobody will ring for him.",
           "The niches go out one by one. The dead stay down.",
-          "Spade down, bell still. The Sexton's work is done."
+          "Spade down, bell still. Gravrik's work is done."
         ]
       },
       "porter": {
         "arrive": [
           "A bar has dropped behind you.",
-          "The leaf is across the door. The Porter is in front of it.",
+          "The leaf is across the door. Drudgewall is in front of it.",
           "Oak and greased iron, and a man under them.",
           "Hinges, and a very large man behind them.",
           "The way out is somewhere behind that door.",
-          "The Porter sets his feet.",
+          "Drudgewall sets his feet.",
           "The big door is shut, and a big man is leaning on it.",
           "A bar as thick as a man's leg, and a man who carries it.",
           "Nobody has come through this door unasked. Nobody is asked."
@@ -11863,21 +11863,21 @@
           "The leaf is off its pin. Go."
         ],
         "fall": [
-          "The Porter is down. The bar comes up.",
+          "Drudgewall is down. The bar comes up.",
           "He kept the door. It is open now.",
-          "The Porter is down. The door stands open.",
+          "Drudgewall is down. The door stands open.",
           "Unbarred. It was heavy work, and he did it.",
-          "The Porter is down. The door is just a door.",
+          "Drudgewall is down. The door is just a door.",
           "He held it as long as it needed holding.",
           "The bar rolls off the brackets and clangs on the flags.",
-          "The Porter is down. His keys stay on his belt."
+          "Drudgewall is down. His keys stay on his belt."
         ]
       },
       "tallyman": {
         "arrive": [
           "Something is counting what you carry.",
           "A frame hung with other people's kit.",
-          "The Tallyman keeps a very good ledger.",
+          "Velmok keeps a very good ledger.",
           "A slate, a nail, and a tally cut in the wall.",
           "It knows what each of you owes.",
           "Chalk marks on a frame, and a good many of them new.",
@@ -11901,11 +11901,11 @@
           "What it stole spills across the floor."
         ],
         "fall": [
-          "The Tallyman is down. Take your things back.",
+          "Velmok is down. Take your things back.",
           "What it wore is on the floor. Count it twice.",
-          "The Tallyman is down. The tally is closed.",
+          "Velmok is down. The tally is closed.",
           "Get your things off the frame.",
-          "The Tallyman is down. The chalk breaks in his fingers.",
+          "Velmok is down. The chalk breaks in his fingers.",
           "The frame comes apart. Take back what was yours.",
           "The tally is finished. Nobody owes.",
           "The frame is bare by the time the dust settles."
@@ -11918,7 +11918,7 @@
           "A yoke, a black pot, and a man who has been cooking a long time.",
           "Someone has laid a table. It is not for you.",
           "Fat in a pan and a smell you do not like.",
-          "The Cook is stirring. He does not look up.",
+          "Blisterhand is stirring. He does not look up.",
           "Onions, and a fire banked high.",
           "The pot is big enough to bathe in. It is not full of water.",
           "A ladle taps the rim. Supper is on its way."
@@ -11939,21 +11939,21 @@
           "Cold, and empty. He cannot mend them now."
         ],
         "fall": [
-          "The Cook is down. The fire goes out.",
+          "Blisterhand is down. The fire goes out.",
           "Supper is cancelled.",
-          "The Cook is down. The pot is empty and so is he.",
+          "Blisterhand is down. The pot is empty and so is he.",
           "No more suppers. The fire dies back.",
-          "The Cook is down. The ladle rings on the floor.",
+          "Blisterhand is down. The ladle rings on the floor.",
           "The fire gutters. Nothing is left on it.",
           "The pot goes cold. Nobody eats.",
-          "The Cook is down. The kitchen smells of smoke and nothing else."
+          "Blisterhand is down. The kitchen smells of smoke and nothing else."
         ]
       },
       "sluicekeeper": {
         "arrive": [
           "The water is coming up.",
           "A wheel turning somewhere, and the floor wet.",
-          "The Sluicekeeper winds the gate a notch at a time.",
+          "Rothenwell winds the gate a notch at a time.",
           "The walls are dripping. They were dry a minute ago.",
           "A great iron wheel, turning with no one on it.",
           "He has been waiting for the river for a long time.",
@@ -11977,27 +11977,27 @@
           "The gate falls shut and the water begins to run out."
         ],
         "fall": [
-          "The Sluicekeeper is down. The water goes out slow.",
+          "Rothenwell is down. The water goes out slow.",
           "The wheel stops. So does the flood.",
-          "The Sluicekeeper is down. The channels are drained, slowly.",
+          "Rothenwell is down. The channels are drained, slowly.",
           "Dry again, in time. Wring out your cloak.",
-          "The Sluicekeeper is down. The gate sticks where it is.",
+          "Rothenwell is down. The gate sticks where it is.",
           "The wheel runs backward and the water finds a drain.",
           "Silence, and the sound of the channels emptying.",
-          "The Sluicekeeper is down. The channel drains, and the stones steam."
+          "Rothenwell is down. The channel drains, and the stones steam."
         ]
       },
       "sower": {
         "arrive": [
           "Something is broadcasting seed.",
           "Wherever it walks, the ground is a little greener.",
-          "The Sower comes across the grass with a full hand.",
+          "Thorncast comes across the grass with a full hand.",
           "Green shoots in a place nothing grows.",
           "It walks the field the way a farmer walks his own.",
           "A sack on its shoulder, and every step plants something.",
           "Seed on the stone, and green in the cracks.",
           "A hand in the sack, a hand on the ground.",
-          "The field does not belong here. The Sower walks it anyway."
+          "The field does not belong here. Thorncast walks it anyway."
         ],
         "act": [
           "What it casts stands up as thorn.",
@@ -12015,13 +12015,13 @@
           "It scrapes the bottom of the bag. Nothing."
         ],
         "fall": [
-          "The Sower is down. The thorn will not last.",
+          "Thorncast is down. The thorn will not last.",
           "Nothing more planted. The field starts to go back.",
-          "The Sower is down. The thorn begins to brown.",
+          "Thorncast is down. The thorn begins to brown.",
           "The field is only a field again.",
-          "The Sower is down. The sack is empty and so is the field.",
+          "Thorncast is down. The sack is empty and so is the field.",
           "Nothing sprouts where it fell.",
-          "The Sower is down. The thorn goes soft at the root.",
+          "Thorncast is down. The thorn goes soft at the root.",
           "Every stalk leans toward the body, then lies down."
         ]
       },
@@ -12032,7 +12032,7 @@
           "Nothing in the wood is where it looks.",
           "The wood is quiet and every branch is tied to another.",
           "A loop of cord by the door. Another by the stair.",
-          "The Snarer is somewhere near. You are standing on its lines.",
+          "Griplash is somewhere near. You are standing on its lines.",
           "Cord, knotted at the knee, strung from beam to beam.",
           "A branch bent back and held. It is not holding itself.",
           "The floor is clear. Every tile of it is a decision."
@@ -12048,18 +12048,18 @@
         ],
         "broken": [
           "The lines are cut. The room is only a room.",
-          "Cord in pieces. The Snarer has nowhere to drive you.",
+          "Cord in pieces. Griplash has nowhere to drive you.",
           "The cord goes slack. The traps hang loose.",
           "Cut one line and the whole set comes down."
         ],
         "fall": [
-          "The Snarer is down, caught in its own set.",
+          "Griplash is down, caught in its own set.",
           "Pull the lines up before anyone else walks them.",
-          "The Snarer is down. Walk out the way you came, carefully.",
+          "Griplash is down. Walk out the way you came, carefully.",
           "Left in his own net. There is a kind of justice in it.",
-          "The Snarer is down. The lines slacken all at once.",
+          "Griplash is down. The lines slacken all at once.",
           "Walk soft. The loose cord still bites.",
-          "The Snarer is down. Nothing in the room is waiting for your foot.",
+          "Griplash is down. Nothing in the room is waiting for your foot.",
           "A last snap, and the set lies slack on the floor."
         ]
       },
@@ -12067,10 +12067,10 @@
         "arrive": [
           "The pit has been fed.",
           "Heat, and a shape as big as the fire it keeps.",
-          "The Stoker has not let the pit go out.",
+          "Cindrak has not let the pit go out.",
           "The heat comes before the man.",
           "A shovel, a furnace door, and a very patient man.",
-          "The Stoker is feeding the fire. It is feeding him.",
+          "Cindrak is feeding the fire. It is feeding him.",
           "A furnace door standing open, and no one near it.",
           "The coal-bunker is empty. The fire is not.",
           "Heat first, then the sound of a shovel."
@@ -12091,13 +12091,13 @@
           "The fire sinks. He is smaller than he was."
         ],
         "fall": [
-          "The Stoker is down. The pit goes to ash.",
+          "Cindrak is down. The pit goes to ash.",
           "Cold. First time in a long while.",
-          "The Stoker is down. The furnace is cold.",
+          "Cindrak is down. The furnace is cold.",
           "Nothing left to feed. It is quiet now.",
-          "The Stoker is down. The furnace ticks as it cools.",
+          "Cindrak is down. The furnace ticks as it cools.",
           "The fire goes out slowly. It took a lot to feed.",
-          "The Stoker is down. The shovel is too hot to lift.",
+          "Cindrak is down. The shovel is too hot to lift.",
           "Ash, a shovel, and the smell of a long shift ending."
         ]
       },
@@ -12105,10 +12105,10 @@
         "arrive": [
           "A bell, and not where you thought.",
           "Fog, and a note from the wrong side of the room.",
-          "The Bellman is in the fog, and the sound is somewhere else.",
+          "Tolburn is in the fog, and the sound is somewhere else.",
           "A bell tolls and you cannot say from where.",
           "Fog on the floor, and a rope hanging in it.",
-          "The Bellman has been ringing since before you came in.",
+          "Tolburn has been ringing since before you came in.",
           "One note, and then the fog closes round it.",
           "A bell-rope swings with nobody on it.",
           "The bell sounds from all sides. He is on one of them."
@@ -12129,24 +12129,24 @@
           "One clean stroke, and you know where he is."
         ],
         "fall": [
-          "The Bellman is down. The last note rings out and stops.",
+          "Tolburn is down. The last note rings out and stops.",
           "Silence in the fog. The right kind.",
-          "The Bellman is down. The bell swings once more and is still.",
+          "Tolburn is down. The bell swings once more and is still.",
           "The fog thins. It is only a room.",
-          "The Bellman is down. The fog lifts off the floor.",
+          "Tolburn is down. The fog lifts off the floor.",
           "No more bells. The echo takes a while to go.",
           "The rope drops. The bell is only iron.",
-          "The Bellman is down. You know where everything is again."
+          "Tolburn is down. You know where everything is again."
         ]
       },
       "boiler": {
         "arrive": [
           "Something is pouring.",
           "Sugar and heat, and the smell of a kitchen with no cook.",
-          "The Boiler stirs, and the floor is stickier than it was.",
+          "Scaldmere stirs, and the floor is stickier than it was.",
           "A kettle the size of a cart, and something stirring it.",
           "The air is thick and sweet. Stay clear of the floor.",
-          "The Boiler has been at the pan a good while.",
+          "Scaldmere has been at the pan a good while.",
           "Sugar scorching somewhere nearby.",
           "The pan is bubbling. Nobody is watching it but him.",
           "The floor sticks to your boots, and it is getting warmer."
@@ -12167,13 +12167,13 @@
           "The pan cracks and runs dry."
         ],
         "fall": [
-          "The Boiler is down. The floor stays hard for a while.",
+          "Scaldmere is down. The floor stays hard for a while.",
           "Cooled and done. Chip your boots loose.",
-          "The Boiler is down. The pan is cold.",
+          "Scaldmere is down. The pan is cold.",
           "Everything he poured is going to harden. Get free of it.",
-          "The Boiler is down. The pan goes off the boil.",
+          "Scaldmere is down. The pan goes off the boil.",
           "The last pour runs thin and cold.",
-          "The Boiler is down. It smells like a fair after the stalls close.",
+          "Scaldmere is down. It smells like a fair after the stalls close.",
           "The kettle tips and the sweet runs off the stone."
         ]
       },
@@ -12186,16 +12186,16 @@
           "Keys on a ring, and the lock already turned.",
           "Spears out of the rack, every one issued.",
           "A man in a store coat, and a queue of things that bite.",
-          "The Quartermaster has been through the stores."
+          "Halvrek has been through the stores."
         ],
         "fall": [
-          "The Quartermaster is down. The stores are shut.",
+          "Halvrek is down. The stores are shut.",
           "The ledger stays open at the last line.",
-          "The Quartermaster is down. Nothing more to issue.",
+          "Halvrek is down. Nothing more to issue.",
           "Keys on the floor. Nobody picks them up.",
-          "The Quartermaster is down. The racks are bare.",
+          "Halvrek is down. The racks are bare.",
           "Counted out, and signed for.",
-          "The Quartermaster is down. The barracks is quiet again.",
+          "Halvrek is down. The barracks is quiet again.",
           "Issued the last of it. Nothing left on the shelf."
         ]
       },
@@ -12204,21 +12204,21 @@
           "Something is hauling in the mess hall.",
           "Crates stacked high, and a man under them.",
           "A rope, a lamp, and a very large load.",
-          "The Loader is carrying more than he should.",
+          "Wardgrim is carrying more than he should.",
           "Sacks, a keg, and boots too heavy to hurry.",
           "The store-hands have left. He has not.",
           "A lamp swings from a bundle the size of a cart.",
           "He walks slow. He has a lot on his back."
         ],
         "fall": [
-          "The Loader is down. The crates come with him.",
-          "The Loader is down. The load lies where it landed.",
+          "Wardgrim is down. The crates come with him.",
+          "Wardgrim is down. The load lies where it landed.",
           "Rope slack, and the lamp on its side.",
-          "The Loader is down. Somebody will have to stack it again.",
+          "Wardgrim is down. Somebody will have to stack it again.",
           "Sacks split on the floor. Grain everywhere.",
-          "The Loader is down. The keg rolls off alone.",
+          "Wardgrim is down. The keg rolls off alone.",
           "Put it all down at last.",
-          "The Loader is down. It was a heavy day."
+          "Wardgrim is down. It was a heavy day."
         ]
       },
       "hurdleman": {
@@ -12229,17 +12229,17 @@
           "He pens the room like a meadow.",
           "Stakes driven, and the line already cut.",
           "A fence where there was no fence.",
-          "The Hurdleman has walked in. Somebody is on the wrong side.",
+          "Millstone has walked in. Somebody is on the wrong side.",
           "Wattle and rope, and a man behind it."
         ],
         "fall": [
-          "The Hurdleman is down. The hurdles lie flat.",
+          "Millstone is down. The hurdles lie flat.",
           "A hurdle just went down between you.",
-          "The Hurdleman is down. The line is one line again.",
+          "Millstone is down. The line is one line again.",
           "Stakes pulled. The pen is open.",
-          "The Hurdleman is down. Step over the wattle.",
+          "Millstone is down. Step over the wattle.",
           "Rope slack, and the gap closed.",
-          "The Hurdleman is down. Nobody is penned.",
+          "Millstone is down. Nobody is penned.",
           "Rotten wattle, split through."
         ]
       },
@@ -12257,13 +12257,13 @@
         ],
         "fall": [
           "The pin is out. Both halves lie where they stood.",
-          "The Jointer is down. It does not come apart again.",
+          "Bramblejaw is down. It does not come apart again.",
           "Two halves, and neither one is moving.",
           "The mallet rolls one way and the saw the other.",
-          "The Jointer is down. The pin is still in it.",
+          "Bramblejaw is down. The pin is still in it.",
           "Split down the seam. Someone will sell the timber.",
           "It held together as long as the pin did.",
-          "The trestles are empty. The Jointer is done for the day."
+          "The trestles are empty. Bramblejaw is done for the day."
         ]
       },
       "tanner": {
@@ -12279,14 +12279,14 @@
           "It has dressed worse than you."
         ],
         "fall": [
-          "The Tanner goes down in its own pit.",
+          "Flenscar goes down in its own pit.",
           "The hides come off the lines and into the water.",
-          "The Tanner is down. The pit stops smelling of work.",
+          "Flenscar is down. The pit stops smelling of work.",
           "A last hide, half pegged. Nobody finishes it.",
           "It had an answer for every blow but the last.",
           "Down. The lime water takes the apron.",
-          "The Tanner is down. Its hands are still the colour of the pit.",
-          "The pegs are bare. The Tanner is done."
+          "Flenscar is down. Its hands are still the colour of the pit.",
+          "The pegs are bare. Flenscar is done."
         ]
       },
       "reeve": {
@@ -12302,13 +12302,13 @@
           "The box is open. The count has started."
         ],
         "fall": [
-          "The Reeve is down. The box is yours.",
+          "Lockwarden is down. The box is yours.",
           "The chain hangs loose. Nothing is pulling it.",
           "The ledger is shut. The share stays where it is.",
-          "The Reeve is down. Nobody is taking a cut today.",
+          "Lockwarden is down. Nobody is taking a cut today.",
           "Quiet at the box. The count is whatever you say it is.",
           "Down, still tied to the box it guarded.",
-          "The Reeve is down. The lord's share is not coming for you.",
+          "Lockwarden is down. The lord's share is not coming for you.",
           "The last tally is half written. Nobody finishes it."
         ]
       },
@@ -12319,20 +12319,20 @@
           "It smells of the cellar. It is not offering.",
           "The tap keeps running. Whatever you brought goes down it.",
           "It has the look of a man who has never paid for a round.",
-          "A cask the size of a cart, and a tapster who has not moved.",
+          "A cask the size of a cart, and Dregsallow, who has not moved.",
           "Whatever you brought, it has a mug for.",
           "Keep your brews corked.",
           "The tap is open and it is not for you."
         ],
         "fall": [
-          "The Tapster is down. The tun runs dry.",
+          "Dregsallow is down. The tun runs dry.",
           "The tap drips, then stops.",
           "Down. The cask rings empty.",
-          "The Tapster is down. What is left is yours.",
+          "Dregsallow is down. What is left is yours.",
           "It poured the last one for itself.",
-          "The Tapster goes over with the tap still open.",
+          "Dregsallow goes over with the tap still open.",
           "A last drip off the spigot. Then quiet.",
-          "The Tapster is down. Nobody is serving."
+          "Dregsallow is down. Nobody is serving."
         ]
       },
       "pressman": {
@@ -12348,13 +12348,13 @@
           "It collects the ones who fall. It is patient about it."
         ],
         "fall": [
-          "The Pressman is down. The yoke comes off whoever it held.",
+          "Crushwright is down. The yoke comes off whoever it held.",
           "Every collar drops open at once.",
           "The chains go slack all down the floor.",
-          "The Pressman is down. Get your people up.",
+          "Crushwright is down. Get your people up.",
           "The yoke lies on the floor. Nobody is in it.",
           "It could not hold them once it was down.",
-          "The Pressman is down. The collars lie empty.",
+          "Crushwright is down. The collars lie empty.",
           "A last clink, and the chains stop."
         ]
       },
@@ -12371,10 +12371,10 @@
           "He was the treasury's measure. He kept the habit."
         ],
         "fall": [
-          "The Strickler is down. The stick slips out of his hand.",
+          "Murkspit is down. The stick slips out of his hand.",
           "The beam swings and settles. Nobody is being measured.",
           "Whatever he took off the top, you have again.",
-          "The Strickler is down. Stand up to your full height.",
+          "Murkspit is down. Stand up to your full height.",
           "The strickle lies flat on the floor. Straight, and still.",
           "The pans hang level, for once.",
           "The measure tips. Grain goes everywhere.",
@@ -12391,14 +12391,14 @@
           "The vat is full. He has a use for it.",
           "He lifts the cloth out and looks at it. Then he looks at you.",
           "Every sheet on the frame is a different colour. None of them are finished.",
-          "The dyer has chosen someone."
+          "Venomshade has chosen someone."
         ],
         "fall": [
-          "The Dyer is down. The vat goes on steaming.",
+          "Venomshade is down. The vat goes on steaming.",
           "The paddle slides out of the dye and lies across the rim.",
           "The cloths hang as they were. Nobody is marked.",
           "Blue to the elbow, and still. The fire under the vat burns low.",
-          "The Dyer is down. The stain stays where it is.",
+          "Venomshade is down. The stain stays where it is.",
           "A last drip from the hem of a sheet.",
           "The vat is cooling. The colour does not fade.",
           "He had a colour for everyone. It was not enough."
@@ -12417,11 +12417,11 @@
           "Verdigris. It gets into everything he touches, and he touches iron."
         ],
         "fall": [
-          "The Greener is down. The plates go on curing.",
+          "Corrodan is down. The plates go on curing.",
           "The scraper slips out of his hand and lies on the floor.",
           "Green to the elbow, and still. The brazier burns low.",
           "A curl of scraped green drops off the blade. Nobody picks it up.",
-          "The Greener is down. The sting goes out of the air.",
+          "Corrodan is down. The sting goes out of the air.",
           "Your iron is yours again. It will want a good cleaning.",
           "The vinegar is cooling. The plates stay as they are.",
           "He made his living from what rust and copper do. Now it is done."
@@ -12440,13 +12440,13 @@
           "Whatever he makes, he makes to order. Today's order is you."
         ],
         "fall": [
-          "The Moulder is down. The pour runs out across the sand.",
+          "Ashform is down. The pour runs out across the sand.",
           "The crucible tips and empties. The sand drinks it.",
           "The copy stands a moment longer than he does. Then it does not.",
           "The box cracks along its seam. Nothing comes out of it.",
           "The rammer drops. Nobody is making your likeness now.",
           "A cast, half set, on the floor. It has your reach. It does not move.",
-          "The Moulder is down. The room cools by degrees.",
+          "Ashform is down. The room cools by degrees.",
           "The last pour went on the floor."
         ]
       },
@@ -12463,12 +12463,12 @@
           "Leave the small ones standing. He goes hungry in an empty room."
         ],
         "fall": [
-          "The Ratcatcher is down. The cage hits the floor.",
+          "Skivven is down. The cage hits the floor.",
           "The tally lamp gutters. Nobody is counting now.",
           "The pole rolls off across the flags.",
           "The willow splits at the lashings. Out it all comes.",
           "He kept a good tally. It is over.",
-          "The Ratcatcher is down. The room is quiet for the first time.",
+          "Skivven is down. The room is quiet for the first time.",
           "One more tail for the cage, and nobody left to be paid for it.",
           "Paid up. The lamp goes out last."
         ]
@@ -12486,13 +12486,13 @@
           "Hit him, and the one in the collar pays half."
         ],
         "fall": [
-          "The Drover is down. The chain goes slack.",
+          "Yokebane is down. The chain goes slack.",
           "The collar falls open and rings on the floor.",
           "He drops the goad. He does not look at it.",
           "The yoke comes off the beam, and it is only iron.",
           "Cut the chain and the yoke comes free. Now nobody wears it.",
           "The ash beam rolls off his shoulders and lies still.",
-          "The Drover is down. The team is your own again.",
+          "Yokebane is down. The team is your own again.",
           "Both bows hang empty."
         ]
       },
@@ -12509,13 +12509,13 @@
           "He does not step out. He turns the board."
         ],
         "fall": [
-          "The Paviser is down. The board is only a board.",
+          "Shieldmaw is down. The board is only a board.",
           "The post gives. The pavise leans and lies flat.",
           "The spear slides off the top edge and rattles.",
           "Nothing swings round now.",
           "The hinge post stands empty.",
           "He kept his face to you to the last.",
-          "The Paviser is down. Someone got round.",
+          "Shieldmaw is down. Someone got round.",
           "Plank and hide on the floor, and nobody behind them."
         ]
       },
@@ -12532,12 +12532,12 @@
           "Five lights hang off him, and the fog sits round each one."
         ],
         "fall": [
-          "The Fenman is down. The lights go out one at a time.",
+          "Bogwarden is down. The lights go out one at a time.",
           "The pole drops across the boards.",
           "The fen is quiet. It was not, before.",
           "He kept his head turned to whoever moved. Now no one has to keep still.",
           "Five lights on the floor, and all of them cold.",
-          "The Fenman is down. You may move.",
+          "Bogwarden is down. You may move.",
           "The hood falls open. There was nothing to see.",
           "The boards creak once and are still."
         ]
@@ -12555,12 +12555,12 @@
           "It hands one to the nearest of you, and waits."
         ],
         "fall": [
-          "The Comfitmaker is down. The stand comes apart in tiers.",
+          "Brindle is down. The stand comes apart in tiers.",
           "The shell was sugar all the way through.",
           "The nippers drop. The comfits roll off across the floor.",
           "Your hand is sticky yet. It will pass.",
           "Nothing left to hand round.",
-          "The Comfitmaker is down. The sweet was the only way in.",
+          "Brindle is down. The sweet was the only way in.",
           "Sugar crunches underfoot, and the smell of honey goes thin.",
           "The tray is empty. It gave you all it had."
         ]
@@ -12578,12 +12578,12 @@
           "He has seen a great many wounds. He keeps them open."
         ],
         "fall": [
-          "The Leech is down. The basin goes over and runs across the floor.",
+          "Gulworth is down. The basin goes over and runs across the floor.",
           "The fleam drops. It rings once on the stone.",
           "Mending comes back. Wounds close as they should.",
           "He bent over the bowl to the last.",
           "The basin is empty. It held more than he took from you.",
-          "The Leech is down. Heal what you like.",
+          "Gulworth is down. Heal what you like.",
           "The coif is spotted dark. None of it is his.",
           "The horns swing on their cord and are still."
         ]
@@ -12616,12 +12616,12 @@
           "The staff stays up and the board goes down. Act as you like."
         ],
         "fall": [
-          "The Beadle is down. The board hits the floor and the pegs scatter.",
+          "Ordrik is down. The board hits the floor and the pegs scatter.",
           "The staff rolls clear. Nobody is calling now.",
           "The order comes back to you. Act as you like.",
           "He kept the call to the last peg.",
           "The board lies face down. It has nothing left to say.",
-          "The Beadle is down. Whoever stood watching can move.",
+          "Ordrik is down. Whoever stood watching can move.",
           "Brass pegs on the stone. Somebody counts them out of habit.",
           "The coat is creased where the board rode. He held it a long time."
         ]
@@ -12653,12 +12653,12 @@
           "The hauler lets the rope run through his hands and does not take it up again."
         ],
         "fall": [
-          "The Rammer is down. The monkey lies on the pile and does not rise.",
+          "Breachar is down. The monkey lies on the pile and does not rise.",
           "The rope goes slack and falls in a heap.",
           "Nothing is hauling now. Nothing is held. Walk the floor.",
           "It dropped on the count to the last.",
           "The frame leans on one leg and holds no weight.",
-          "The Rammer is down. The pile is a stump with a dent in its head.",
+          "Breachar is down. The pile is a stump with a dent in its head.",
           "The hauler sits on the wet stone and looks at his hands. Nobody asks him anything.",
           "The iron is sound. The timber round it is not."
         ]
@@ -12690,12 +12690,12 @@
           "The trough cracks along the seam. It will not hold a load."
         ],
         "fall": [
-          "The Fuller is down. The hammers hang still.",
+          "Wrynn is down. The hammers hang still.",
           "The cloth sags in the trough and gives up its water slowly.",
           "Nothing is wringing. Nothing is full. Walk the floor.",
           "It was empty at the end. You stopped in time, or you paid for it.",
           "The man sits on the bar and wrings his cap between his hands.",
-          "The Fuller is down. The cloth is the only good thing left in the room.",
+          "Wrynn is down. The cloth is the only good thing left in the room.",
           "He lifts a fold of the stock and looks at it, then lays it back.",
           "The trough drips. That is the last sound it makes."
         ]
@@ -12727,12 +12727,12 @@
           "The ladder slides from the back of the stack and lies flat. He has nothing to climb."
         ],
         "fall": [
-          "The Stackman is down. The stack is a heap of straw.",
+          "Huskpile is down. The stack is a heap of straw.",
           "The fork stands in the floor where it landed.",
           "Nothing is climbing now. Nothing is out of reach. Walk the floor.",
           "He came down course by course. You hurt him slowly, or you did not hurt him at all.",
           "The rake lies in the straw. He does not look for it.",
-          "The Stackman is down. The straw is the only good thing in the room.",
+          "Huskpile is down. The straw is the only good thing in the room.",
           "He sits on the spilled sheaves and picks a stalk out of his sleeve. Nobody asks him anything.",
           "The straw is sweet and new-cut. It settles, and the room goes quiet."
         ]
@@ -12753,7 +12753,8 @@
     "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way.",
     "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw.",
     "_note_c126": "C-126 (19 Nov 2026): The Fuller, 35th miniboss (art body committed on origin/art). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: blows soak into the cloth, the cloth fills, it wrings out over the room at once; the answer is to stop hitting it. Man worn, goods fresh. Additive. Expected zero-hit key.",
-    "_note_c127": "C-127 (20 Nov 2026): The Stackman, 36th miniboss (art body committed on origin/main). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: each blow it hurt by pitches a sheaf and climbs a course; from up there nothing with a hand on it reaches it; it pitches down for free; the answer is cut the bottom course or bring reach. Man worn, crop fresh (rule 2). Additive. Expected zero-hit key."
+    "_note_c127": "C-127 (20 Nov 2026): The Stackman, 36th miniboss (art body committed on origin/main). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: each blow it hurt by pitches a sheaf and climbs a course; from up there nothing with a hand on it reaches it; it pitches down for free; the answer is cut the bottom course or bring reach. Man worn, crop fresh (rule 2). Additive. Expected zero-hit key.",
+    "_note_c130": "C-130 (20 Nov 2026): the rename. Mr. E's 21:50 CT directive (via the supervisor) renames all 36 minibosses; the bodies and mechanics are unchanged. Every feed line that named a miniboss by its trade now uses the new character name, no 'the' prefix (138 lines across the 36 blocks; only arrive, act, broken and fall lines that carried the old name were touched, no line was added or removed). by_key KEYS ARE DELIBERATELY UNCHANGED: they are the art lane's body keys and the join to minibosses.py and dungeon_hd.gd miniboss_for, which only draws a body that has BOTH a mesh AND lines under its own key; none of the new names is on any origin branch yet, so renaming a key now would pull a body out of the draw. When art renames its keys, rename the by_key keys in the same change (old key -> new key: strickler -> Murkspit is the one the directive tables as Drizzler). Old name -> new name per directive: drillmaster Karvok, scrapwright Ironhyde, gaoler Shacklemaw, snuffer Duskhollow, sexton Gravrik, porter Drudgewall, tallyman Velmok, cook Blisterhand, sluicekeeper Rothenwell, sower Thorncast, snarer Griplash, stoker Cindrak, bellman Tolburn, boiler Scaldmere, jointer Halvrek, quartermaster Wardgrim, loader Millstone, hurdleman Bramblejaw, tanner Flenscar, reeve Lockwarden, tapster Dregsallow, pressman Crushwright, strickler Murkspit, dyer Venomshade, greener Corrodan, moulder Ashform, ratcatcher Skivven, drover Yokebane, paviser Shieldmaw, fenman Bogwarden, comfitmaker Brindle, leech Gulworth, beadle Ordrik, rammer Breachar, fuller Wrynn, stackman Huskpile. Names are Mr. E's proposals pending his final say. Earlier _note_ keys are history and still name the old trades on purpose. Additive in shape; zero-hit key by design, no lane is to wire it."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

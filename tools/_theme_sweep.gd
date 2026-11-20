@@ -10,6 +10,7 @@ var _bad := 0
 var _tag := "run"
 var _out := ""
 var _panels := 0
+var _feed := 0   # U94: FeedHUD's Chronicle (a ChronicleScroll Control, not a PanelContainer) counted by name so the floor stops being the whole verdict
 func _initialize() -> void:
 	var a := OS.get_cmdline_user_args()
 	if a.size() > 0: _tag = a[0]
@@ -27,7 +28,9 @@ func _process(_d: float) -> bool:
 		_wait -= 1; return false
 	var sc := [1.0, 1.25, 1.5]
 	if _step >= 3:
-		print("U85 panels=", _panels, " bad=", _bad)
+		print("U85 panels=", _panels, " feed_chronicle=", _feed, " bad=", _bad)
+		if _feed < 3:
+			print("THEME_SWEEP NO VERDICT - FeedHUD Chronicle not seen at all three scales (", _feed, ")"); quit(2); return true
 		if _panels < 12:
 			print("THEME_SWEEP NO VERDICT - too few panel checks"); quit(2); return true
 		print("THEME_SWEEP ", "OK" if _bad == 0 else "FAIL"); quit(1 if _bad > 0 else 0); return true
@@ -59,6 +62,7 @@ func _check(pct: int) -> void:
 func _walk(n: Node, out: Array) -> void:
 	for c in n.get_children():
 		if c is Control and (c as Control).is_visible_in_tree() and (c as Control).size.x > 8.0 and (c as Control).size.y > 8.0:
-			if c is PanelContainer or c is Panel:
+			if c is PanelContainer or c is Panel or c is HudDock.ChronicleScroll:
+				if c is HudDock.ChronicleScroll: _feed += 1
 				out.append((c as Control).get_global_rect())
 		_walk(c, out)

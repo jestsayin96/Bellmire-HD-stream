@@ -3952,3 +3952,12 @@ TAKE THIS NEXT (13:58 block) row 3: C-145, the Relief's lines. Body is committed
 - VALIDATION OK: json.load passes on all four owned files; against a pre-edit copy every other key and entry is byte-identical, key order unchanged, only the five arrive arrays grew by one at the end.
 - CODE WIRING: none. These keys already exist and are already drawn from.
 Next content: C-147.
+## C-147 - 20 Nov 2026 16:3x CT (content): miniboss feed lines for the Scraper (41st, Scourstone, crypt)
+TAKE THIS NEXT (15:58 block) row 2: "a feed row for the 41st body (`scraper`, Scourstone) is ordinary chain work". Body is committed (assets/monsters/minibosses/scraper.glb on main, art ad070505, docs/art/SCRAPER.md), so I wrote against it. Without arrive lines miniboss_for never draws the body.
+- ADDED data/lore_lines.json miniboss_feed.by_key["scraper"]: arrive 9 / fall 8, recent shape (no act, no broken, no {name}). First arrive line is art's own barker, word for word ("Someone is rubbing a name off the wall."). The mechanic is said plainly: at round end it draws the stone down the slab and the party's last action is undone; hitting harder fails because the hit is what it removes; the five cuts on each plinth face are the gauge. Rest is scene, plain register, no floor counts, ASCII only. Man worn, slab and slates left unaged.
+- ADDED miniboss_feed._note_c147 (expected zero-hit key; no lane is to wire it).
+- COUNT: by_key 40 -> 41 rows; arrive 9 and fall 8 on the new row, 9 distinct arrive lines.
+- VALIDATION OK: json.load passes; every pre-existing key and entry byte-identical (recursive subset check against pre-edit copy); file round-trips at indent 2.
+- CODE WIRING for other lanes (not mine): scripts/bestiary.gd `scraper` (h 2.55, no anims); scripts/delve.gd MB_NAME["scraper"] = "Scourstone" (41st key); scripts/dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] may take "scraper"; chat bot commands.json "40 elites" -> 41 once MB_NAME lands. scraper.glb has no .glb.import yet.
+Next content: C-148.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -13256,6 +13256,29 @@
           "The plate is quiet, and every notch is empty but the one.",
           "Take your places. Draw a breath. Walk the floor."
         ]
+      },
+      "scraper": {
+        "arrive": [
+          "Someone is rubbing a name off the wall.",
+          "A man in a dark coat at the foot of a pale slab, a stone in both hands, a heap of grit at his boots.",
+          "He does not block and he does not heal. He waits for the round to end, then draws the stone down the slab.",
+          "Whatever you did last comes off. The blow lifts, the wound opens, the guard is gone.",
+          "Do your real work early. Spend your last action on something you can stand to lose.",
+          "Hitting harder does nothing. The hit is the thing he takes back.",
+          "Count the cuts on the plinth. Five on every face. Each one is another round he can wipe.",
+          "The slab is cut with names in rows, and the ends of the rows are ragged. The grit on the floor is fresh.",
+          "A dust mask, a hood, and two cold eyes under it. The crypt is quiet. He has all the time there is."
+        ],
+        "fall": [
+          "Scourstone is down. The stone lies where it fell, and the slab keeps what is on it.",
+          "The names stay cut. Nobody rubs them out now.",
+          "The heap of grit stops growing.",
+          "He folds over the plinth with his mask still on. He goes down slowly and does not make a sound.",
+          "Whatever you do now stays done.",
+          "Count the cuts on the plinth again. Nothing was taken from any of them.",
+          "The three spare slates slide off his back and lie flat on the floor.",
+          "Take your places. Draw a breath. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13279,7 +13302,8 @@
     "_note_c142": "C-142 (20 Nov 2026): the Dauber (Wetwall), the 37th body, committed on main with dauber.glb. Arrive 9 and fall 8, no act or broken, {name} not used. Without arrive lines miniboss_for never draws the body. Zero-hit key by design, no lane is to wire it.",
     "_note_c143": "C-143 (20 Nov 2026): the Sealer's lines (38th miniboss, Leadbite, treasury theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press or fight on what is in hand. Without arrive lines miniboss_for never draws the body. Leadbite is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
     "_note_c144": "C-144 (20 Nov 2026): the Hooper's lines (39th miniboss, Hoopfast, mess theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: it casks ONE hero, who keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper. Without arrive lines miniboss_for never draws the body. Hoopfast is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
-    "_note_c145": "C-145 (20 Nov 2026): the Relief's lines (40th miniboss, Watchturn, barracks theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a quarter turn of the capstan rotates the whole line one place, nobody is hurt or gone, every reach and heal is aimed at the wrong body; the four notches in the ratchet plate and the dog in one of them are the gauge; jam the dog to stop the turn. Without arrive lines miniboss_for never draws the body. Watchturn is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY."
+    "_note_c145": "C-145 (20 Nov 2026): the Relief's lines (40th miniboss, Watchturn, barracks theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a quarter turn of the capstan rotates the whole line one place, nobody is hurt or gone, every reach and heal is aimed at the wrong body; the four notches in the ratchet plate and the dog in one of them are the gauge; jam the dog to stop the turn. Without arrive lines miniboss_for never draws the body. Watchturn is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
+    "_note_c147": "C-147 (20 Nov 2026): the Scraper's lines (41st miniboss, Scourstone, crypt theme; body committed on main, scraper.glb, art ad070505). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: when the round ends it draws the stone down the slab and the party's LAST action is undone (blow lifted, wound reopened, guard gone); out-damaging it fails because the damage is what it removes; the five cuts on each face of the plinth are the gauge. First arrive line is art's own barker, kept word for word. Without arrive lines miniboss_for never draws the body. Expected zero-hit key; no lane is to wire it."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

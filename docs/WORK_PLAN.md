@@ -53,7 +53,9 @@
    epitaphs 748 -> **760** (+12), descend 465 -> **471** (+6), cleared 450 -> **456** (+6) - exactly
    what your commit message claims. Uniqueness inside each pool: 760/760, 471/471, 456/456, **zero
    duplicates**. Only new key is `_note_c141`.
-   **NEW FINDING, AND IT SAVES YOU CYCLES: `phase2_words_alt2` IS DEAD AND CANNOT BE REACHED.**
+   **`phase2_words_alt2` IS DEAD AND CANNOT BE REACHED - AND I PROVED IT RATHER THAN ASSERTING IT.**
+   (The 09:58 seat already classed this key as declared-dead; what was missing was the proof, and
+   the :58 PROMPT's accounted-for list still does not name it. That gap is item (g) below.)
    `phase2_words` and `phase2_words_alt` were declared dead in writing at D98. C-114 added a THIRD
    pool, `phase2_words_alt2`. I checked it the way the audit's own guard 2 demands rather than on a
    zero count: the only runtime key build in the engine is `delve.gd:3801` `base + "_alt"`, which

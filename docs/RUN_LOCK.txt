@@ -645,3 +645,5 @@ RUNNING 2026-11-20T01:54:06-06:00 (HUD U94 L74 sweep with FeedHUD counted, expec
 IDLE 2026-11-20T01:56:56-06:00 - HUD U94: L74 sweep now counts FeedHUD's Chronicle, THEME_SWEEP OK panels=15 feed=3 bad=0, break_shift red-proved (bad=4, feed shifted). Claim 01:54:06, cap 02:09, released early, no crossing. (HUD)
 
 RUNNING 2026-11-20T02:08:40-06:00 (game build, item per TAKE THIS NEXT, claim 02:08:40, cap 02:33, expected finish 02:33)
+
+IDLE 2026-11-20T02:19:23-06:00 - game build S55: Broodglut gate camera frames the whole 6.60 m body (8-corner AABB in-frame check, S55_RED old aim -> FAIL, green S54_BROOD OK n=11); battery green (OFFFLOOR 0/2049, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 02:08:40, cap 02:33, declared 02:33, released early, no crossing. Godot EMPTY. No twitch, 0 bits. Pushed laptop e1d0c35e. (game build)

@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "5e9cc1f4bbec4cd3decf6906ddc849e677e287c9",
+   "head": "cf4ef984323e811a0cb5d9ebc1e43fc9d4e7f37e",
    "ref": "origin/main",
-   "ref_commit": "7b8b6f31bd9a7b95162d03fd58f496fb98351b0e",
+   "ref_commit": "4da9f486809b57c501e3b82149f6d9080bdeba42",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2432,7 +2432,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.796,
+   "corridor_margin_m": 8.8,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.95,
    "read_from": {
@@ -2458,13 +2458,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "ferryman": {
+   "title": "Slackwater",
+   "theme": "flooded",
+   "idea": "IT TAKES ONE AT A TIME - the punt holds one, so it has one of you aboard and NOBODY ELSE'S BLOWS LAND. It does not wound, it does not heal and it takes nobody out of the room: it simply will not answer three heroes at once. Whoever it has taken is the only one it can be hurt by, and it chooses - so a party that has stacked its damage on one hero watches that hero stand on the bank while the healer swings a stick at it. The rest are not idle, they are just not fighting IT: they must shift the fare, which is the PEGS ALONG BOTH GUNWALES - one peg is one more crossing it will make, and when the last peg is drawn it has to put the one it holds down and take the next, which is the window. You can count the pegs from any side of the room",
+   "wear": 0.62,
+   "feed_line": "A flat-bottomed boat is being poled up the passage.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1757,
+   "size": [
+    2.37,
+    3.68,
+    2.62
+   ],
+   "footprint_span": 3.68,
+   "height_m": 2.62,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.323,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.88,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5489282581055264,
+    "ortho": 5.661848545074463,
+    "clip": [
+     9.88558578491211,
+     23.69988441467285
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 7b8b6f31bd9a7b95162d03fd58f496fb98351b0e sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 4da9f486809b57c501e3b82149f6d9080bdeba42 sha bc3a603f",
  "blank_check": {
-  "files": 123,
+  "files": 126,
   "failures": []
  }
 }

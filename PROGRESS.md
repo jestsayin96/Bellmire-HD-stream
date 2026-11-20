@@ -13239,3 +13239,9 @@ Item per the TAKE THIS NEXT block (10:58 CT, 20 Nov): the HUD draws the mana bar
 Finding: this worktree (hud-ui) has NOT merged main, so scripts/roster.gd here has no `mana` field yet. Next firing: merge origin/laptop (keep both sides, strip only marker lines), confirm the roster mana accessors, then build the bar in hud_dock.gd (my file) and leave party_frames.gd alone if the frames live there (not mine; I will say so and ask the owner to expose state).
 Next firing (12:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap, headless parse first, windowed render at 100/125/150, look at it, release by :07.
 Nothing launched, no Godot run, no files of mine edited besides this note.
+
+## C-143 (20 Nov 2026 12:3x CST) - THE SEALER'S LINES (38th miniboss, Leadbite)
+- ITEM: TAKE THIS NEXT (11:58 block) row 3, CONTENT: the Sealer is the 38th body, on main (assets/monsters/minibosses/sealer.glb, CANON/BUILDERS rows in tools/art/minibosses.py). by_key held 37 keys, no sealer. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused). Lines say the mechanic plainly: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press. Leadbite is art's CANON name. Plus `_note_c143`.
+- VALIDATION OK: json.load passes, every pre-existing key and entry unchanged (subset-compared against pre-edit copy), round-trips at indent 2, 17 new lines unique against all existing feed lines, ASCII only. by_key 37 -> 38.
+- CODE WIRING: the Sealer will draw once bestiary.gd carries sealer, AND the same join drift as C-142 repeats: Delve.MB_NAME needs a `sealer` row (name Leadbite) and commands.json "The 36 elites" text is already behind (37 feeds, now 38). Chat bot / game build own those; nothing here is wired by content.
+Next content: C-144.

@@ -230,7 +230,7 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
 ## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
 const THEME_MINIBOSS_MORE := {
-    "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
+    "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],

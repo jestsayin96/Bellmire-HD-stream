@@ -13435,3 +13435,24 @@ from R's WORKING tree. No twitch test, 0 bits, no account used.
 FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment your
 S67 `"hooper": "Hoopfast"` MB_NAME row reaches origin/main; it was green in your own 14:14 run and is simply not
 merged yet.
+
+## S68 - 2026-11-20 15:08-15:14 CST - RELIEF (40th, Watchturn) GETS ITS MB_FIT, MB_NAME AND BARRACKS ROW (game build)
+Row 1 of the 14:58 TAKE THIS NEXT block. Name `Watchturn` read in BOTH owning files: content's NESTED
+`miniboss_feed._note_c145` and art's CANON (tools/art/minibosses.py:13584 header, tuple at :13658 whose
+field 5 is `barracks`). Content's by_key.relief exists (arrive + fall). MB_FIT read off art's NEW hero
+register `_fit_relief_register.json` pairs.relief.ratio = 1.03 (creature_h 2.52 / hero_h 2.45, 3/3
+proving views), not _fit_report.json, and the comment says which. relief.glb present; --import made
+its .import (left untracked, same as hooper's).
+EDITS: delve.gd MB_FIT +"relief": 1.03, MB_NAME +"relief": "Watchturn"; dungeon_hd.gd
+THEME_MINIBOSS_MORE["barracks"] = ["quartermaster", "relief"]; tools/_s51_names.gd TABLE +relief, 39->40;
+new tools/_s68_relief.gd (S67 gate incl. own-body check, narrowed to relief/barracks).
+RESULTS: S51_NAMES OK 168 checks; S68_RELIEF OK 9 checks (barracks floor 16, relief.glb, ratio
+1.03/1.03, arrive + fall lines fire). LOOKED AT renders/cycles/s68/relief.png: kettle-hat sentry with
+the capstan drum and the four-notch ratchet plate stands on the floor beside the knight, label Watchturn.
+NOT RED-FIRST THIS TIME: I did not run S51 against the pre-edit tree; S67 proved the same arm red-first.
+BATTERY: parse --quit-after 300 rc 0, no SCRIPT ERROR / Parse Error; one ERROR line is the chat bot's
+COMMANDS_DATA MINIBOSS COUNT guard (commands.json publishes 39, feed has 40) - correct and THEIR half;
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2176; townwalk ran rc 0 in 89 s with 0 SCRIPT
+ERROR; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+CARRIED, STILL NOT STARTED (row 1b): boss_bar.gd card at 150% (810x200 over "Now watching" + party
+numbers) - cap width/height by pane size. Next firing.

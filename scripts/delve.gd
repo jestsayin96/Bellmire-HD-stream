@@ -399,7 +399,8 @@ const MB_FIT := {
 	"stackman": 1.16,   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
 	"dauber": 1.05,   # S65: art's _fit_report.json pairs.dauber.ratio (37th, h 2.58, tag keep), copied not re-derived
 	"sealer": 0.99,   # S66: art's _fit_fit_sealer_register.json pairs.sealer.ratio (38th, h 2.42, tag treasury, verdict GREEN), copied not re-derived
-	"hooper": 0.96}   # S67: art has NO hero-pair register for the Hooper, so this is _fit_report.json pairs.hooper.ratio (39th, h 2.36 / hero 2.45, tag mess), copied not re-derived
+	"hooper": 0.96,   # S67: art has NO hero-pair register for the Hooper, so this is _fit_report.json pairs.hooper.ratio (39th, h 2.36 / hero 2.45, tag mess), copied not re-derived
+	"relief": 1.03}   # S68: art's _fit_relief_register.json pairs.relief.ratio (40th, h 2.52 / hero 2.45, tag barracks, 3/3 proving views), copied not re-derived
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
@@ -420,7 +421,8 @@ const MB_NAME := {
 	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile",
 	"dauber": "Wetwall",   # S65: content's _note_c142 "the Dauber (Wetwall)" and art's CANON title, both read
 	"sealer": "Leadbite",   # S66: content's _note_c143 "Leadbite" and art's CANON title (minibosses.py), both read
-	"hooper": "Hoopfast"}   # S67: content's _note_c144 "Hoopfast" and art's CANON title (minibosses.py:13186), both read
+	"hooper": "Hoopfast",   # S67: content's _note_c144 "Hoopfast" and art's CANON title (minibosses.py:13186), both read
+	"relief": "Watchturn"}   # S68: content's miniboss_feed._note_c145 "Watchturn" and art's CANON title (minibosses.py:13584), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

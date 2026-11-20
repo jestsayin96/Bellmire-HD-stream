@@ -12261,3 +12261,15 @@ LOOKED AT renders/cycles/s53/s53_clock_150.png: plate bottom-right, all four rul
 BATTERY: parse headless rc=0, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2207; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/17093 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 NO LIVE TWITCH: nothing posted, no cheer, 0 bits on any account, no redemption, no subscription. lore_lines.json not touched (content's four rotated blocks).
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## U93 (20 Nov 00:53 CST) - NO CLAIM: lock free, but no HUD defect is open; nothing worth a Godot claim
+Item: L74 (HUD's own queue per TAKE THIS NEXT row 6, 23:0x). Lock read from R's working copy at 00:5x: last line IDLE chat bot B71 00:50:40, tasklist empty, so the lock was free and I did not stand down for a hold. I chose not to claim.
+Why: U90 (feed flood 100/125/150, 4967-fail red-proof) and U91 (long-name flood, every HUD label in viewport) are green and open nothing; the U71/U76 rarity guard already has its brace-nesting end-finder with three red proofs (the parse_fish concern in the prompt is closed). leaderboard_panel.gd is dormant (draws nothing since L63) so there is nothing to measure there. A claim now would re-run green gates for no new information and spend the game build's and chat bot's hour.
+Still standing, not mine: rts_camera.gd clock plate overhangs the viewport 1.5px at UI 150% - the game build fixed it in S53 (572fe5ab) with its own red-proof.
+Next firing (01:52): re-read TAKE THIS NEXT; if the plan names no new HUD item, run the UI-scale sweep with the <12-panel floor lifted (FeedHUD is a Control so _theme_sweep still cannot see it - U90 note) only if I can finish inside claim+15 and release by :07.
+Nothing for Mr. E to decide.
+
+### U93 AMENDMENT (00:55 CST) - the merge brought the 23:58 plan, which names the L74 UI-scale check for this firing, so I DID claim after all
+Lock: R working copy last line IDLE chat bot B71 00:50:40, tasklist empty; claim 00:54:03, IDLE 00:55:12 (cap 01:09, no crossing). Ran tools/_theme_sweep.gd WINDOWED at UiTheme 100/125/150: "U85 panels=12 bad=0", THEME_SWEEP OK (12 = exactly the NO-VERDICT floor, so the verdict is thin; FeedHUD still invisible to it - covered by U90/U91). No HUD file edited, no picture taken this cycle (the U90/U91 150% shots are the last looked-at ones). Log: tools output _u93_sweep.log (untracked). Only 'instantiate on null' lines = known thin import cache, not HUD.
+Correction to the paragraph above: "no new HUD item" was written before I had merged the 23:58 plan.
+Next firing: lift the 12-panel floor honestly (count FeedHUD's Control) or take a new item if the plan names one. Nothing for Mr. E to decide.

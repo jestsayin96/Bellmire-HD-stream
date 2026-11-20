@@ -184,3 +184,36 @@ unmodified as FBX into `assets/gear/shields/` with `LICENSE_Quaternius_MedievalW
 them (the extracted pack carries no licence file; the note is ours). `_packs/handpainted_weapons/`
 shield_a..d were NOT used: that folder carries no licence file and no source, so its licence is
 unverified and it stays out until one is read.
+### 19 Nov 2026 - THE BESTIARY KIT ENTERS THE LOG, AND IT WAS ALREADY IN THE REPO
+
+`assets/monsters/Imp.glb`, `Puglin.glb` and their four texture maps each were
+**committed to this repo before this file existed** and were never logged. That
+is the same gap `assets/props/` had on 17 Nov, closed the same way - by writing
+the row rather than working around it.
+
+The first monster-pack variant miniboss, `assets/monsters/minibosses/broodglut.glb`
+(see `docs/art/MONSTER_VARIANTS.md`), is the repo's `Puglin.glb` geometry wearing
+the kit's own alternate skin `T_Puglin_BaseColor_2.png`, with all four maps
+brought down to 1024 - 2.98 MB against the 7.85 MB original. No pack file is
+re-exported as a standalone asset and nothing is redistributed AS an asset,
+which is the only line the QAL draws.
+
+| Pack | Author | Licence | Licence text on disk | Contents used |
+|---|---|---|---|---|
+| Bestiary - Dungeon Monsters Kit (Standard / FREE) | Quaternius | **Quaternius Asset License (QAL) v1.0** | `_packs/Bestiary_Dungeon_Monsters_Kit/Bestiary - Dungeon Monsters Kit[Standard]/License_Standard.txt` | `Imp.glb`, `Puglin.glb` (rigged, unanimated) and their `BaseColor_1/2/3`, `Emissive`, `Normal`, `ORM` maps. `BaseColor_2` is the Broodglut's skin. |
+
+**The licence page was read on disk this run, not inferred from a search
+snippet** - that is the rule, and reading a snippet instead is exactly how the
+wrong Quaternius ban got made on 16 Nov. QAL v1.0 grants a worldwide,
+royalty-free, non-exclusive, perpetual licence for personal, educational AND
+commercial use, with no credit required; the single restriction is reselling or
+redistributing the Assets as Assets. The row is kept anyway.
+
+**NOTE FOR ANYONE WHO MEASURES THESE FILES.** Imported into Blender they appear
+to carry a stray 42-vertex `Icosphere` of radius 1 on the origin, and if it is
+measured with the body the creature reports 1.902 x 2.000 x 2.000 instead of
+1.468 x 0.611 x 0.931. **It is not in the file.** The string does not occur in
+the bytes of a glb that nonetheless imports one; a rigged glb gets one and an
+unrigged one does not. It is a Blender 5.2 glTF-import artifact for any glb
+carrying an armature, so it is not in the shipped asset and not in Godot.
+Drop it before measuring; do not report it as a defect.

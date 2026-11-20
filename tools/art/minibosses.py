@@ -36,6 +36,25 @@ Gaoler's iron is greased and old; the Snuffer has been down there longest.
 Raw vertex maths only (no bpy.ops, no bmesh.ops) - see lordlib - for the first
 fifteen: every one of those is original generated geometry.
 
+*** ALL THIRTY-SIX WERE RENAMED ON 19 Nov 2026 22:5x CT. THE KEYS DID NOT MOVE. ***
+Mr. E's directive, relayed by the supervisor at 21:50 CT with his own words on
+it - "they all sound like job titles". They did: this file named each one for
+what it DOES, which was the right instinct for a mechanic and the wrong one for
+a character. The bodies, the mechanics, the heights, the tints, the wear and
+every fit proof are UNCHANGED - only the display name in CANON moved, 50
+entries (36 bases and the 14 chibi/tall variants, whose "(chibi)" and "(3.60m)"
+suffixes are kept). THE DICT KEYS ARE STILL THE TRADE WORDS on purpose: the
+game build's S51 wired delve.gd's MB_NAME against unchanged trade keys at
+22:15 CT, so moving them here would have broken a thing that had already
+shipped. The old names are therefore still the identifiers and no longer the
+names, and anyone reading this file for a name must read CANON and not the key
+or the function below it - INCLUDING THE FOUR IN THE PARAGRAPH ABOVE, which is
+kept as written because it is the record of why they were built, not a list of
+what they are called. Karvok, Ironhyde, Shacklemaw and Duskhollow are the
+Drillmaster, Scrapwright, Gaoler and Snuffer in that order.
+Mr. E has final say on every name; these are the supervisor's proposals and a
+change is one string each.
+
 TWO LINES OF THIS DOCSTRING WERE STALE AND ARE CORRECTED HERE, 17 Nov 2026:
   1. "nothing here reads a third-party asset" is no longer true, on purpose.
      The Quartermaster (16) loads real spear and shield geometry out of
@@ -95,16 +114,16 @@ def seat(pts, r0):
 #   wear  - 0 fresh, 1 derelict. Drives roughness, metal and how far the colour
 #           is dulled toward the dark. NEVER the same across the set.
 CANON = {
-    "drillmaster": ("The Drillmaster", 2.20, (0.86, 0.72, 0.38), (1.00, 0.78, 0.34),
+    "drillmaster": ("Karvok", 2.20, (0.86, 0.72, 0.38), (1.00, 0.78, 0.34),
                     "barracks", "IT SUMMONS - it beats the muster and the garrison forms up",
                     0.15, "Someone is beating the muster."),
-    "scrapwright": ("The Scrapwright", 2.00, (0.70, 0.74, 0.78), (0.78, 0.86, 1.00),
+    "scrapwright": ("Ironhyde", 2.00, (0.70, 0.74, 0.78), (0.78, 0.86, 1.00),
                     "workshop", "IT ARMOURS ITSELF - every plate knocked off is replaced from the floor",
                     0.30, "It is wearing the workshop."),
-    "gaoler":      ("The Gaoler", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
+    "gaoler":      ("Shacklemaw", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
                     "prison", "IT DRAGS - the hook takes one out of the line and reels them in",
                     0.80, "A chain is paying out in the dark."),
-    "snuffer":     ("The Snuffer", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
+    "snuffer":     ("Duskhollow", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
                     "shrine", "IT TAKES THE LIGHT - it puts out the lamps one at a time",
                     0.90, "The nearest lamp has gone out."),
 }
@@ -405,16 +424,16 @@ BUILDERS = {
 # =====================================================================
 
 CANON.update({
-    "sexton":   ("The Sexton", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
+    "sexton":   ("Gravrik", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
                  "crypt", "IT WILL NOT STAY DOWN - it carries its own graves; empty the lit niches",
                  0.85, "A spade is working somewhere in the dark."),
-    "porter":   ("The Porter", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
+    "porter":   ("Drudgewall", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
                  "keep", "IT BARS THE WAY - it drops a leaf across the door: no retreat, no help",
                  0.45, "A bar has dropped behind you."),
-    "tallyman": ("The Tallyman", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
+    "tallyman": ("Velmok", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
                  "treasury", "IT TAKES AND LEAVES - it lifts your gear, wears it and withdraws",
                  0.20, "Something is counting what you carry."),
-    "cook":     ("The Cook", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
+    "cook":     ("Blisterhand", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
                  "mess", "IT KEEPS THE PACK ALIVE - the pot heals the room; spill the pot",
                  0.60, "The pot is on."),
 })
@@ -822,22 +841,22 @@ BUILDERS.update({
 # =====================================================================
 
 CANON.update({
-    "sluicekeeper": ("The Sluicekeeper", 2.50, (0.46, 0.54, 0.56), (0.40, 0.80, 1.00),
+    "sluicekeeper": ("Rothenwell", 2.50, (0.46, 0.54, 0.56), (0.40, 0.80, 1.00),
                      "flooded", "IT RAISES THE WATER - it winds the sluice open a step at a time",
                      0.95, "The water is coming up."),
-    "sower":        ("The Sower", 2.25, (0.72, 0.68, 0.44), (0.55, 1.00, 0.42),
+    "sower":        ("Thorncast", 2.25, (0.72, 0.68, 0.44), (0.55, 1.00, 0.42),
                      "grassland", "IT PLANTS THE GROUND AGAINST YOU - what it casts stands up as thorn",
                      0.40, "Something is broadcasting seed."),
-    "snarer":       ("The Snarer", 2.30, (0.50, 0.42, 0.32), (0.80, 0.90, 0.40),
+    "snarer":       ("Griplash", 2.30, (0.50, 0.42, 0.32), (0.80, 0.90, 0.40),
                      "wood", "IT HAS ALREADY SET THE ROOM - it drives you onto its own lines",
                      0.55, "The lines were here before you."),
-    "stoker":       ("The Stoker", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+    "stoker":       ("Cindrak", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
                      "firepit", "IT IS ONLY AS BIG AS THE FIRE - starve the pit and it starves",
                      0.70, "The pit has been fed."),
-    "bellman":      ("The Bellman", 2.70, (0.66, 0.68, 0.72), (0.80, 0.92, 1.00),
+    "bellman":      ("Tolburn", 2.70, (0.66, 0.68, 0.72), (0.80, 0.92, 1.00),
                      "fogbound", "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
                      0.65, "A bell, and not where you thought."),
-    "boiler":       ("The Boiler", 2.10, (0.86, 0.60, 0.34), (1.00, 0.78, 0.60),
+    "boiler":       ("Scaldmere", 2.10, (0.86, 0.60, 0.34), (1.00, 0.78, 0.60),
                      "confection", "IT POURS AND IT SETS - the floor hardens around your feet",
                      0.25, "Something is pouring."),
 })
@@ -1291,15 +1310,15 @@ BUILDERS.update({
 #   head about 1.09 across, i.e. the head is 55% of the whole height.
 # ===========================================================================
 CANON.update({
-    "drillmaster_chibi": ("The Drillmaster (chibi)", 2.20, (0.86, 0.72, 0.38),
+    "drillmaster_chibi": ("Karvok (chibi)", 2.20, (0.86, 0.72, 0.38),
                           (1.00, 0.78, 0.34), "barracks",
                           "IT SUMMONS - rebuilt in the game's own proportions",
                           0.15, "Someone is beating the muster."),
-    "drillmaster_tall": ("The Drillmaster (3.60m)", 3.60, (0.86, 0.72, 0.38),
+    "drillmaster_tall": ("Karvok (3.60m)", 3.60, (0.86, 0.72, 0.38),
                          (1.00, 0.78, 0.34), "barracks",
                          "IT SUMMONS - same body, the recommended in-game height",
                          0.15, "Someone is beating the muster."),
-    "drillmaster_chibi_tall": ("The Drillmaster (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
+    "drillmaster_chibi_tall": ("Karvok (chibi, 3.60m)", 3.60, (0.86, 0.72, 0.38),
                                (1.00, 0.78, 0.34), "barracks",
                                "IT SUMMONS - both changes together",
                                0.15, "Someone is beating the muster."),
@@ -1412,7 +1431,7 @@ BUILDERS.update({
 # thing. The height in bestiary.gd is the GAME BUILD lane's number, not mine.
 # ===========================================================================
 CANON.update({
-    "stoker_chibi": ("The Stoker (chibi)", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
+    "stoker_chibi": ("Cindrak (chibi)", 2.40, (0.44, 0.38, 0.36), (1.00, 0.42, 0.12),
                      "firepit",
                      "IT IS ONLY AS BIG AS THE FIRE - rebuilt in the game's own proportions",
                      0.70, "The pit has been fed."),
@@ -1587,7 +1606,7 @@ BUILDERS.update({"stoker_chibi": stoker_chibi})
 #     ('bone') and competes with the face. The belt keeps the hip read instead.
 # ===========================================================================
 CANON.update({
-    "gaoler_chibi": ("The Gaoler (chibi)", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
+    "gaoler_chibi": ("Shacklemaw (chibi)", 2.35, (0.52, 0.50, 0.46), (0.95, 0.58, 0.20),
                      "prison",
                      "IT DRAGS - rebuilt in the game's own proportions",
                      0.80, "A chain is paying out in the dark."),
@@ -1779,7 +1798,7 @@ BUILDERS.update({"gaoler_chibi": gaoler_chibi})
 # its own grip. Authored at the same 2.60 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "snuffer_chibi": ("The Snuffer (chibi)", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
+    "snuffer_chibi": ("Duskhollow (chibi)", 2.60, (0.58, 0.60, 0.66), (1.00, 0.86, 0.52),
                       "shrine",
                       "IT TAKES THE LIGHT - rebuilt in the game's own register",
                       0.90, "The nearest lamp has gone out."),
@@ -1932,7 +1951,7 @@ BUILDERS.update({"snuffer_chibi": snuffer_chibi})
 # Authored at the same 2.45 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "sexton_chibi": ("The Sexton (chibi)", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
+    "sexton_chibi": ("Gravrik (chibi)", 2.45, (0.50, 0.54, 0.48), (0.72, 1.00, 0.80),
                      "crypt",
                      "IT WILL NOT STAY DOWN - rebuilt in the game's own register",
                      0.85, "A spade is working somewhere in the dark."),
@@ -2113,7 +2132,7 @@ BUILDERS.update({"sexton_chibi": sexton_chibi})
 # Authored at the same 2.30 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "porter_chibi": ("The Porter (chibi)", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
+    "porter_chibi": ("Drudgewall (chibi)", 2.30, (0.56, 0.46, 0.32), (0.95, 0.70, 0.34),
                      "keep",
                      "IT BARS THE WAY - rebuilt in the game's own register",
                      0.45, "A bar has dropped behind you."),
@@ -2308,7 +2327,7 @@ BUILDERS.update({"porter_chibi": porter_chibi})
 # Authored at the same 2.15 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "tallyman_chibi": ("The Tallyman (chibi)", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
+    "tallyman_chibi": ("Velmok (chibi)", 2.15, (0.88, 0.76, 0.42), (1.00, 0.88, 0.50),
                        "treasury",
                        "IT TAKES AND LEAVES - rebuilt in the game's own register",
                        0.20, "Something is counting what you carry."),
@@ -2587,7 +2606,7 @@ BUILDERS.update({"tallyman_chibi": tallyman_chibi})
 # Authored at the same 2.05 m so the pair sheet compares ONE thing.
 # ===========================================================================
 CANON.update({
-    "cook_chibi": ("The Cook (chibi)", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
+    "cook_chibi": ("Blisterhand (chibi)", 2.05, (0.72, 0.52, 0.38), (1.00, 0.62, 0.26),
                    "mess",
                    "IT KEEPS THE PACK ALIVE - rebuilt in the game's own register",
                    0.60, "The pot is on."),
@@ -2865,7 +2884,7 @@ BUILDERS.update({"cook_chibi": cook_chibi})
 # `dark`, so the leg has a value break in it at the ankle where the real one is.
 # ===========================================================================
 CANON.update({
-    "sluicekeeper_chibi": ("The Sluicekeeper (chibi)", 2.50, (0.46, 0.54, 0.56),
+    "sluicekeeper_chibi": ("Rothenwell (chibi)", 2.50, (0.46, 0.54, 0.56),
                            (0.40, 0.80, 1.00), "flooded",
                            "IT RAISES THE WATER - rebuilt in the game's own register",
                            0.95, "The water is coming up."),
@@ -3237,7 +3256,7 @@ BUILDERS.update({"sluicekeeper_chibi": sluicekeeper_chibi})
 # breaks in value at the ankle, where a real one does, in all three views.
 # ===========================================================================
 CANON.update({
-    "sower_chibi": ("The Sower (chibi)", 2.40, (0.72, 0.68, 0.44),
+    "sower_chibi": ("Thorncast (chibi)", 2.40, (0.72, 0.68, 0.44),
                     (0.55, 1.00, 0.42), "grassland",
                     "IT PLANTS THE GROUND AGAINST YOU - rebuilt in the game's own register",
                     0.40, "Something is broadcasting seed."),
@@ -3481,7 +3500,7 @@ BUILDERS.update({"sower_chibi": sower_chibi})
 # at the waist cannot show a corner from any azimuth.
 # ===========================================================================
 CANON.update({
-    "boiler_chibi": ("The Boiler (chibi)", 2.45, (0.86, 0.60, 0.34),
+    "boiler_chibi": ("Scaldmere (chibi)", 2.45, (0.86, 0.60, 0.34),
                      (1.00, 0.78, 0.60), "confection",
                      "IT POURS AND IT SETS - rebuilt in the game's own register",
                      0.25, "Something is pouring."),
@@ -3808,7 +3827,7 @@ BUILDERS.update({"boiler_chibi": boiler_chibi})
 # 26. The beating pole, and the man's whole axis with it, is on 45.
 # ===========================================================================
 CANON.update({
-    "snarer_chibi": ("The Snarer (chibi)", 2.45, (0.50, 0.42, 0.32),
+    "snarer_chibi": ("Griplash (chibi)", 2.45, (0.50, 0.42, 0.32),
                      (0.80, 0.90, 0.40), "wood",
                      "IT HAS ALREADY SET THE ROOM - rebuilt in the game's own register",
                      0.55, "The lines were here before you."),
@@ -4121,7 +4140,7 @@ BUILDERS.update({"snarer_chibi": snarer_chibi})
 # =====================================================================
 
 CANON.update({
-    "jointer": ("The Jointer", 2.25, (0.60, 0.44, 0.28), (1.00, 0.92, 0.72),
+    "jointer": ("Halvrek", 2.25, (0.60, 0.44, 0.28), (1.00, 0.92, 0.72),
                 "workshop",
                 "IT COMES APART AND BOTH HALVES KEEP WORKING - drive the pin or break it and there are two",
                 0.35, "It is pinned together."),
@@ -4330,7 +4349,7 @@ BUILDERS.update({"jointer": jointer})
 # =====================================================================
 
 CANON.update({
-    "quartermaster": ("The Quartermaster", 2.35, (0.64, 0.58, 0.46), (0.92, 0.84, 0.46),
+    "quartermaster": ("Wardgrim", 2.35, (0.64, 0.58, 0.46), (0.92, 0.84, 0.46),
                       "barracks",
                       "IT ARMS THE ROOM - everything else in here takes a weapon off its sheaf",
                       0.50, "Something is handing out arms."),
@@ -4644,7 +4663,7 @@ BUILDERS.update({"quartermaster": quartermaster})
 # =====================================================================
 
 CANON.update({
-    "loader": ("The Loader", 2.65, (0.58, 0.52, 0.42), (0.86, 0.94, 0.58),
+    "loader": ("Millstone", 2.65, (0.58, 0.52, 0.42), (0.86, 0.94, 0.58),
                "mess",
                "IT WEIGHS YOU DOWN - it loads you, and you fight slower until you drop it",
                0.75, "Something is putting a load on you."),
@@ -4889,7 +4908,7 @@ BUILDERS.update({"loader": loader})
 #     is: split grey hurdles that have stood out in a wet meadow for years.
 #   - Height 2.55 was free (2.00-2.70 in use, 2.55 the gap).
 CANON.update({
-    "hurdleman": ("The Hurdleman", 2.55, (0.58, 0.60, 0.50), (0.72, 0.90, 0.68),
+    "hurdleman": ("Bramblejaw", 2.55, (0.58, 0.60, 0.50), (0.72, 0.90, 0.68),
                   "grassland",
                   "IT CUTS THE ROOM IN TWO - it plants a hurdle through your line and you "
                   "fight it two and two",
@@ -5270,7 +5289,7 @@ BUILDERS.update({"hurdleman": hurdleman})
 #     a beam at chest height and reads SHORTER than the Bellman he is taller
 #     than, which is the point of measuring the body rather than the creature.
 CANON.update({
-    "tanner": ("The Tanner", 2.75, (0.78, 0.72, 0.56), (1.00, 0.95, 0.72),
+    "tanner": ("Flenscar", 2.75, (0.78, 0.72, 0.56), (1.00, 0.95, 0.72),
                "flooded",
                "IT WILL NOT TAKE THE SAME BLOW TWICE - what hurts it once it pegs a fresh "
                "hide over; change your answer or stop hurting it",
@@ -5564,7 +5583,7 @@ BUILDERS.update({"tanner": tanner})
 #     filled, never opened and never fought with has no scars on it. Mr. E's
 #     rule 2 - condition is the receipt - and this receipt reads UNTOUCHED.
 CANON.update({
-    "reeve": ("The Reeve", 1.95, (0.74, 0.70, 0.58), (1.00, 0.84, 0.40),
+    "reeve": ("Lockwarden", 1.95, (0.74, 0.70, 0.58), (1.00, 0.84, 0.40),
               "keep",
               "IT TAKES THE HAUL - while it stands the floor pays its box and not you; "
               "break the box or walk out of here with nothing",
@@ -5914,7 +5933,7 @@ BUILDERS.update({"reeve": reeve})
 #     docs/art/ASSET_SOURCES.md before this run; it is now. Falls back to
 #     procedural geometry and SAYS SO in the report.
 CANON.update({
-    "tapster": ("The Tapster", 2.80, (0.72, 0.64, 0.46), (0.52, 1.00, 0.72),
+    "tapster": ("Dregsallow", 2.80, (0.72, 0.64, 0.46), (0.52, 1.00, 0.72),
                 "firepit",
                 "IT DRINKS WHAT YOU BROUGHT - every brew raised in this room goes into its "
                 "tun and not into the hero; run it dry or your line breaks and walks out",
@@ -6298,7 +6317,7 @@ BUILDERS.update({"tapster": tapster})
 # theme. PRISON HAS EXACTLY ONE BODY BEHIND IT - the Gaoler - so every miniboss
 # a prison floor has ever shown is the same creature.
 CANON.update({
-    "pressman": ("The Pressman", 2.85, (0.62, 0.60, 0.56), (0.96, 0.74, 0.30),
+    "pressman": ("Crushwright", 2.85, (0.62, 0.60, 0.56), (0.96, 0.74, 0.30),
                  "prison",
                  "IT PRESSES YOUR FALLEN - a hero that goes down in this room is "
                  "collared and stood back up on ITS side; get them up, or break the "
@@ -6549,7 +6568,7 @@ BUILDERS.update({"pressman": pressman})
 
 # ------------------------------- 23 THE STRICKLER: a beam, a measure and a line
 CANON.update({
-    "strickler": ("The Strickler", 2.55, (0.70, 0.66, 0.52), (0.86, 0.92, 1.00),
+    "strickler": ("Murkspit", 2.55, (0.70, 0.66, 0.52), (0.86, 0.92, 1.00),
                   "treasury",
                   "IT STRIKES YOU LEVEL - while it stands, your best hero is scraped "
                   "down to the measure of your worst; your strongest is no answer, so "
@@ -7037,7 +7056,7 @@ def apply_overrides(key, mats):
 
 
 CANON.update({
-    "dyer": ("The Dyer", 2.60, (0.16, 0.32, 0.72), (0.26, 0.46, 1.00),
+    "dyer": ("Venomshade", 2.60, (0.16, 0.32, 0.72), (0.26, 0.46, 1.00),
              "workshop",
              "IT MARKS ONE OF YOU AND HUNTS ONLY THE MARK - it slings the vat, "
              "and while the stain is wet it will walk past everyone else to reach "
@@ -7501,7 +7520,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "greener": ("The Greener", 2.50, (0.12, 0.54, 0.40), (0.20, 0.92, 0.64),
+    "greener": ("Corrodan", 2.50, (0.12, 0.54, 0.40), (0.20, 0.92, 0.64),
                 "workshop",
                 "IT GREENS YOUR IRON - every blow landed on it leaves the "
                 "weapon a little more eaten, and a bitten weapon bites less; "
@@ -8241,7 +8260,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "moulder": ("The Moulder", 2.90, (0.62, 0.58, 0.52), (1.00, 0.56, 0.20),
+    "moulder": ("Ashform", 2.90, (0.62, 0.58, 0.52), (1.00, 0.56, 0.20),
                 "firepit",
                 "IT TAKES YOUR SHAPE - it presses one of your heroes into its "
                 "sand bed and pours, and what stands up out of the box fights "
@@ -8629,7 +8648,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "ratcatcher": ("The Ratcatcher", 2.62, (0.70, 0.60, 0.42), (1.00, 0.62, 0.22),
+    "ratcatcher": ("Skivven", 2.62, (0.70, 0.60, 0.42), (1.00, 0.62, 0.22),
                    "crypt",
                    "IT IS PAID BY THE TAIL - everything else that dies in this "
                    "room goes into the cage on its hip and it is stronger for "
@@ -8971,7 +8990,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "drover": ("The Drover", 2.44, (0.72, 0.61, 0.41), (0.86, 0.78, 0.62),
+    "drover": ("Yokebane", 2.44, (0.72, 0.61, 0.41), (0.86, 0.78, 0.62),
                "wood",
                "IT YOKES ONE OF YOU - it closes a bow of its own yoke on a "
                "hero and after that the harm you do it travels the chain: "
@@ -9348,7 +9367,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "paviser": ("The Paviser", 2.68, (0.74, 0.71, 0.63), (0.82, 0.84, 0.88),
+    "paviser": ("Shieldmaw", 2.68, (0.74, 0.71, 0.63), (0.82, 0.84, 0.88),
                 "keep",
                 "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge "
                 "post and swings it onto whoever is hurting it most, and a "
@@ -9740,7 +9759,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "fenman": ("The Fenman", 2.52, (0.30, 0.33, 0.30), (0.72, 0.84, 1.00),
+    "fenman": ("Bogwarden", 2.52, (0.30, 0.33, 0.30), (0.72, 0.84, 1.00),
                "fogbound",
                "IT TAKES WHAT STIRS - it is hooded blind and it hunts by "
                "disturbance, so it comes for whoever moved last: swing, step, "
@@ -10139,7 +10158,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "comfitmaker": ("The Comfitmaker", 2.28, (0.86, 0.82, 0.74), (1.00, 0.84, 0.46),
+    "comfitmaker": ("Brindle", 2.28, (0.86, 0.82, 0.74), (1.00, 0.84, 0.46),
                     "confection",
                     "IT GIVES YOU THE ONLY THING THAT CUTS IT - its shell is "
                     "sugar-hard and nothing the party carries marks it, but it "
@@ -10482,7 +10501,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "leech": ("The Leech", 2.32, (0.62, 0.60, 0.58), (1.00, 0.22, 0.14),
+    "leech": ("Gulworth", 2.32, (0.62, 0.60, 0.58), (1.00, 0.22, 0.14),
               "shrine",
               "IT WILL NOT LET A WOUND CLOSE - while it stands nothing in this "
               "room mends. Every point of healing the party spends is drawn off "
@@ -10852,7 +10871,7 @@ OVERRIDE.update({
 })
 
 CANON.update({
-    "beadle": ("The Beadle", 2.95, (0.26, 0.28, 0.34), (1.00, 0.74, 0.26),
+    "beadle": ("Ordrik", 2.95, (0.26, 0.28, 0.34), (1.00, 0.74, 0.26),
                "shrine",
                "IT CALLS THE ORDER - while it stands the party does not choose "
                "who acts. The Beadle calls, and it calls the same hero again "
@@ -11290,7 +11309,7 @@ BUILDERS.update({"beadle": beadle})
 # INSTRUMENT AND A WORKING MAN KEEPS HIS INSTRUMENT - the iron is the one
 # thing here that is not rotten, same argument as the Drillmaster's gong.
 CANON.update({
-    "rammer": ("The Rammer", 2.75, (0.54, 0.47, 0.37), (0.95, 0.92, 0.70),
+    "rammer": ("Breachar", 2.75, (0.54, 0.47, 0.37), (0.95, 0.92, 0.70),
                "flooded",
                "IT DROPS ON THE COUNT - it hauls the monkey to the head of the "
                "frame, it holds, and it lets go. Whatever is standing on the "
@@ -11575,7 +11594,7 @@ BUILDERS.update({"rammer": rammer})
 # (the crank wheel and the dry folded stock on its rack), so front and back are
 # not the same picture. I still have to LOOK at the sheet to believe it.
 CANON.update({
-    "fuller": ("The Fuller", 2.66, (0.58, 0.60, 0.54), (1.00, 0.95, 0.82),
+    "fuller": ("Wrynn", 2.66, (0.58, 0.60, 0.54), (1.00, 0.95, 0.82),
                "fogbound",
                "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the "
                "cloth in its trough, and when the cloth is full it wrings the lot "
@@ -11898,7 +11917,7 @@ BUILDERS.update({"fuller": fuller})
 # That is the first thing I will judge, and it is written down BEFORE I look so
 # the render cannot talk me out of having suspected it.
 CANON.update({
-    "stackman": ("The Stackman", 2.84, (0.72, 0.60, 0.30), (1.00, 0.88, 0.46),
+    "stackman": ("Huskpile", 2.84, (0.72, 0.60, 0.30), (1.00, 0.88, 0.46),
                  "grassland",
                  "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a "
                  "fresh sheaf under its own feet and climbs a course, and from up "

@@ -103,9 +103,16 @@ def import_hero(repo):
     TWO THINGS THAT HAD TO BE MEASURED, NOT ASSUMED:
 
     1. The glb carries the whole wardrobe - six weapons and shields parked on
-       the rig, plus a hidden Icosphere 1.9 m across. Measured raw it reports
-       3.45 m and the frame is wrong. Only the character's own `Knight_*`
-       meshes are kept.
+       the rig, plus a 1.9 m Icosphere. Measured raw it reports 3.45 m and the
+       frame is wrong. Only the character's own `Knight_*` meshes are kept.
+       CORRECTED 19 Nov 2026 22:5x CT: the Icosphere is NOT "shipped" by the
+       glb and is not hidden in it either - it is a Blender 5.2 glTF-import
+       artifact that appears for any glb carrying an armature. Proved on a
+       byte search (zero occurrences of the string in a glb that imports one)
+       plus two controls, a rigged pack glb and an unrigged one of our own.
+       Dropping it stays right; the reason stated here was wrong, and a lane
+       acting on it would have gone looking for a sphere in the game.
+       See docs/art/MONSTER_VARIANTS.md.
     2. The rest pose is NOT the posed body. The `Idle` action has to be
        assigned WITH ITS SLOT (Blender 4.4+ slotted actions: setting
        `animation_data.action` alone leaves the body in rest) and the scene

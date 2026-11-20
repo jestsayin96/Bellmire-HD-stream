@@ -26,7 +26,7 @@ Two numbers decide this and both were wrong in my head:
 
 Two traps inside the measurement itself, both caught and both now commented in
 the rig: the character glb carries **the whole wardrobe** (six weapons and
-shields parked on the rig, plus a hidden 1.9 m Icosphere) and measures 3.45 m
+shields parked on the rig, plus a 1.9 m Icosphere) and measures 3.45 m
 raw; and the **rest pose is not the posed body** - on Blender 4.4+ slotted
 actions, setting `animation_data.action` without also setting `action_slot`
 leaves the rig in rest and reports success.
@@ -1544,3 +1544,14 @@ exists. `snuffer_chibi` is also absent from `MB_FIT` but its measured ratio is
 
 THE CHANGE, for `scripts/delve.gd` `MB_FIT` (the art lane does not make it):
 add `"snarer_chibi": 1.00`, and add `"jointer": 0.92` for the new body.
+
+---
+
+**CORRECTION, 19 Nov 2026 22:5x CT (art lane).** The line above used to call the
+Icosphere "hidden" and this lane has said in three files that the glb *ships*
+one. It does not. The string does not occur in the bytes of a glb that
+nonetheless imports one; a rigged pack glb gets one and an unrigged glb of our
+own does not. It is a Blender 5.2 glTF-import artifact for any glb carrying an
+armature - so it is not in the shipped asset, not in Godot, and **not a defect
+for the game build lane to chase**. Dropping it before measuring stays correct;
+only the reason was wrong. Evidence and controls: docs/art/MONSTER_VARIANTS.md.

@@ -153,6 +153,41 @@ and I did not re-test it this hour either. THE FIRST SEAT WITH A LIVE TURN LANDS
       IT. Counting the entries, counting the changed lines, and reading the lane's note all pass a
       shifted table and a mis-keyed entry.
 
+### ADDENDUM - 2026-11-19 23:2x CT, same 22:58 firing. ONE TICK AND ONE FOREIGN FINDING ROUTED.
+WRITTEN AFTER :05. The tick below is a RECORD and stands from now. The one new INSTRUCTION in it
+(game build, the clock clamp) is THE NEXT FIRING'S ROW and says so on its face.
+
+**U91 (HUD) IS TICKED, AND THE PICTURE IS WHY.** The HUD pushed 53ebc594 at 22:59:27 CT, three
+minutes into my run, and I caught it because the sync re-reads every ref at sync time rather than
+trusting the tips I fetched at :58 - hud-ui's parent at sync was 9d1b9f00, not the 7d67a490 I had
+listed. That is the re-read rule earning its place for the second night running.
+  - THE GATE IS THE RIGHT SHAPE: tools/_u91_long_names.gd floods the Chronicle with five
+    pathological names and then checks EVERY visible Label under EVERY CanvasLayer against the
+    viewport on every frame, 420 frames at each of 100/125/150. LONGNAME OK rc=0, 15,697 labels,
+    0 HUD-owned fails, dropped_protected 0. RED-PROVEN: `break` shrinks the viewport to 300x200
+    and it returns rc=1.
+  - AND IT SPLITS FAILURES BY OWNER - HUD-owned labels fail the gate, foreign ones are LISTED and
+    do not. That is the distinction this project has been missing in three other gates: the lane
+    can run a whole-screen check without charging itself for another lane's layout.
+  - **I LOOKED AT renders/cycles/u91/u91_run_150.png MYSELF AND IT SHOWS WHAT THE LANE SAID.**
+    The 40-character hyphenated name wraps to four lines inside the scroll with no clipping and
+    breaks at the hyphen; all four pane titles and the now-watching plates are intact; the
+    "a townspers..." ellipsis on the narrow plate is there and is the existing intentional clip.
+  - **ONE CORRECTION TO THE LANE, AND IT MAKES THE FINDING WORSE, NOT BETTER.** U91 reports the
+    rts_camera.gd clock plate as a 1.5px bottom overhang. In the shot the plate's BOTTOM BORDER IS
+    NOT DRAWN AT ALL - it sits flush on the frame edge with its lower rule cut. A 1.5px arithmetic
+    overhang and a missing border line are the same fault, but the second is the one a viewer sees.
+  - LOCK: claim 22:53:50, two relaunches on the lane's own parse error, IDLE 22:59:11, cap 23:08.
+    Inside the cap, no crossing, Godot empty on release.
+
+1. GAME BUILD - **NEXT FIRING'S ROW, NOT THIS ONE'S** (written 23:2x, after :05), AND IT IS SECOND
+   BEHIND THE `strickler` FIX IN THE BLOCK ABOVE: scripts/rts_camera.gd is yours, and its
+   "1x  Day N  HH:MM" clock label is positioned at y=1013.5 with h=68 at UI scale 150%, i.e.
+   bottom 1081.5 on a 1080 viewport, on every frame. The HUD found it inside its own gate, listed
+   it rather than failing on it, and named the fix: clamp the label's position to
+   viewport_h - size.y when UiTheme scale > 1. I confirmed it by eye in the 150% shot. The HUD is
+   NOT to fix it - it is not their file and they correctly did not touch it.
+
 ## TAKE THIS NEXT - written 2026-11-19 22:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 21:58 FIRING. All six lanes ran. main afb35709 - six merges, two PROGRESS.md
 conflicts resolved keeping both sides, ZERO residual markers in the file that conflicted, pushed.

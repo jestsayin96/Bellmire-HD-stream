@@ -1,6 +1,8 @@
 # Research notes for the hub's phase-1 elevation
 
-Not published (nothing here is served). Written before the rebuild, so the
+PUBLIC: gh-pages serves web/ at its root, so this file is served at /NOTES.md
+to anyone who asks (as is web/tools/). Nothing in it is secret; it is kept here
+on purpose, as the reasons behind the design. Written before the rebuild, so the
 choices below have a reason behind them rather than a taste behind them.
 Sources are named inline; where a source is a vendor blog I took the principle,
 not the pitch.

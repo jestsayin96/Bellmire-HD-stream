@@ -109,6 +109,15 @@ const NEW_TYPES := {
                    "lift": 0.0, "family": "fiend",
                    "ways": {"summon": {"type": "puglin", "every": 11.0, "most": 3, "line": "Puglins boil out from under Broodglut - and it shrugs off every blow while they stand."}, "ward": 0.5},
                    "homes": []},
+    ## S56: the SECOND pack-variant miniboss (art's register: h 6.20, theme `cells`, Imp body, palette 3).
+    ## THE ONE IDEA: it is still in irons and every one knocked off makes it faster - `irons` sheds one
+    ## at each hp mark (Delve._lord_tick) and each adds `gain` to its pace; the collar mesh goes at the
+    ## last mark and the cuffs (one mesh, Imp_Chains) at the fourth, so the state is SEEN. homes [] -
+    ## not a random draw until content writes its lines.
+    "lastcuff":  {"name": "Lastcuff", "path": MON + "minibosses/lastcuff.glb", "anims": A_UAL, "hp": 2.2, "atk": 1.4, "spd": 2.6, "h": 6.20,
+                   "lift": 0.0, "family": "fiend",
+                   "ways": {"irons": {"at": [0.85, 0.70, 0.55, 0.40, 0.25], "gain": 0.22, "meshes": {"3": "Imp_Chains", "4": "Imp_SpikedCollar"}}},
+                   "homes": []},
     "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
                    "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
                    "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},

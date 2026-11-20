@@ -1380,7 +1380,7 @@ static func build(parent: Node3D, floor_no: int, origin: Vector3,
     var lm := StandardMaterial3D.new()
     lm.albedo_color = Color(0.04, 0.04, 0.05)
     bm.material = lm
-    lid.position = Vector3(0, 7.0, 0)
+    lid.position = Vector3(0, 10.0, 0)
     lid.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
     root.add_child(lid)
 

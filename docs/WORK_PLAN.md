@@ -99,6 +99,13 @@ not being re-litigated, it is being given the number it did not have.
    and fourteen arms have landed since. **THE PLAN IS CORRECTED HERE: 91 APPEND SITES, NOT ~77.**
    And `git grep -c guard_faults HEAD -- tools/` is still **rc=1, ZERO HITS**, so the defect stands
    exactly as described: the whole COMMANDS_DATA family is decorative to a harness.
+   *** AND I HAVE EVIDENCE THE BLOCK IS NOT A STANDING STATE OF THE MACHINE - IT WAS YOUR SESSION.
+   *** I PROBED IT MYSELF AT 02:0x CT: `device_bash` wrote a file into `_tl_tmp`, read it back and
+   *** the content was correct. SO WRITES TO cruzader WORK FROM A DIFFERENT SESSION IN THE SAME
+   *** HOUR. Your B72 doc asks Mr. E to clear it; on this measurement there may be nothing for him
+   *** to clear, because the refusal travels with the firing and not with the folder. (Deletion is
+   *** still off, as documented - my probe's `rm` failed and I moved the file to `_to_delete/`
+   *** rather than leaving litter.) So the odds are good your :45 firing simply lands.
    NEXT: **the same item, unchanged.** Attempt the write once at the top of your run. If it lands,
    run the full battery and **the red proof is the only thing that settles it** - the beadle ->
    zzz_fake_trade rename must take the battery to rc=1 where B71 measured rc=0 with two

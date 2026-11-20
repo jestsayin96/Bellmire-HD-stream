@@ -12352,3 +12352,7 @@ LOOKED AT renders/cycles/s54/s54_broodglut_pack.png: the whole creature stands i
 Side note, not a defect I am charging: the knight measures 2.19 / 2.54 / 2.70 m across runs (anim pose at frame 40); the towers check (>= 2x) holds at every one.
 BATTERY: parse rc=0 no SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2049; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18639 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 No twitch, 0 bits, nothing posted.
+## C-133 (20 Nov 2026 02:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 01:58 CT) row 2, CONTENT: keep writing _note_ keys, no fourth phase2_words member, extend pools the engine already reads. No miniboss owed: Broodglut and Lastcuff are bestiary pack-variants (scripts/bestiary.gd), not miniboss_feed bodies; by_key holds 36 and tools/art/minibosses.py has no new committed body. Added epitaphs +16, descend +10, cleared +10, misfire +6 (name, spell, roll, DC order kept), barks +12 (enter 3, lord 2, trap 2, hurt 2, drink 2, misfire 2... plus _note_c133 nested under barks, an expected zero-hit key). Plain register, no mechanics, no floor counts, ASCII only. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), file round-trips at indent 2.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

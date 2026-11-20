@@ -888,7 +888,17 @@
     "The lamp is lit from the gate-lamp, not from a spark.",
     "The stair smells of rain and old rope.",
     "One of them tests the first step with a heel.",
-    "The healer wishes them a dull day."
+    "The healer wishes them a dull day.",
+    "The rope is paid out hand over hand.",
+    "Somebody checks the lamp oil twice.",
+    "The gate-bell rings once, and is left to fade.",
+    "They go down in file, shortest last.",
+    "A cart-driver tips his cap and looks away.",
+    "The stair is damp and the lamp hisses.",
+    "Boots find the first step, then the second.",
+    "The gate-keeper chalks a mark on the post.",
+    "Behind them the day gets small.",
+    "Nobody speaks until the landing."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1290,7 +1300,17 @@
     "They share the last of the bread, crumbs and all.",
     "One of them laughs, and is not told to stop.",
     "The loot is sorted by the lamp. It is not much.",
-    "Bandages are tied tight and boots are laced."
+    "Bandages are tied tight and boots are laced.",
+    "The last torch is trimmed. Quiet settles.",
+    "Somebody counts the party twice. All present.",
+    "The rope is coiled. The knots are checked.",
+    "A flask goes round. Nobody takes more than their share.",
+    "Blood is wiped from the blade with a sleeve.",
+    "The dust settles and the lamp steadies.",
+    "They sit a moment. Then they stand.",
+    "One of them finds a coin and keeps quiet about it.",
+    "Wounds are bound. Straps are tightened.",
+    "The way back is chalked on the wall."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -1789,7 +1809,10 @@
       "Count the stairs coming down.",
       "Feet quiet, mouths quieter.",
       "Rope is tied. Go on.",
-      "Chalk first, courage after."
+      "Chalk first, courage after.",
+      "Lamp up. Eyes open.",
+      "One step, then the next.",
+      "Count the doors as we pass."
     ],
     "lord": [
       "Hold together!",
@@ -2068,7 +2091,9 @@
       "One at a time. Then all at once.",
       "That is not a door. That is a mouth.",
       "Nobody run. Nobody.",
-      "Breathe. Then raise the shield."
+      "Breathe. Then raise the shield.",
+      "That is no common thing. Mind your feet.",
+      "Stand together. It is bigger than it looks."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2350,7 +2375,9 @@
       "A thread. Step high.",
       "That stone sits wrong.",
       "Hold. The wall is listening.",
-      "The dust is too even."
+      "The dust is too even.",
+      "Wire. Stop. Do not breathe on it.",
+      "Floor sounds hollow. Go round."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2625,7 +2652,9 @@
       "Worse than it looks. Not by much.",
       "I have had worse from a stable door.",
       "Still on my feet. Mostly.",
-      "Tell the healer I was brave."
+      "Tell the healer I was brave.",
+      "It is only blood. I have more.",
+      "Bind it and move on."
     ],
     "drink": [
       "Bottoms up.",
@@ -2890,7 +2919,9 @@
       "Save me a swallow.",
       "Bitter. It is working.",
       "Down in one. Do not taste it.",
-      "Tastes like pennies and mint."
+      "Tastes like pennies and mint.",
+      "Warm going down. Good.",
+      "Thin, but it will do."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -3167,10 +3198,13 @@
       "The words fell out of my head.",
       "That was a bad one.",
       "Not a word. Not one.",
-      "Again, and slower."
+      "Again, and slower.",
+      "The words slipped. Try again.",
+      "Nothing. Hold the line."
     ],
     "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key.",
-    "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key."
+    "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
+    "_note_c133": "C-133: small additions to existing barks pools; no new readers."
   },
   "misfire": [
     "%s's %s goes wrong - the scar answers (%d vs DC %d).",
@@ -3318,7 +3352,13 @@
     "%s calls on %s. The air does not listen (%d vs DC %d).",
     "%s's %s gutters like a candle in a draught (%d vs DC %d).",
     "%s says %s a breath too fast (%d vs DC %d).",
-    "%s reaches the end of %s and finds nothing there (%d vs DC %d)."
+    "%s reaches the end of %s and finds nothing there (%d vs DC %d).",
+    "%s begins %s and loses the thread of it (%d vs DC %d).",
+    "%s speaks %s and the words come out wrong (%d vs DC %d).",
+    "%s reaches for %s. It is not there (%d vs DC %d).",
+    "%s tries %s with cold fingers and it fails (%d vs DC %d).",
+    "%s casts %s and the lamp flickers, nothing more (%d vs DC %d).",
+    "%s stumbles over %s at the last word (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -3958,7 +3998,23 @@
     "Fixed the bell-rope on the way out.",
     "Packed too much cheese.",
     "Hummed on the stair. Stopped at the landing.",
-    "Asked for the lamp. Got it."
+    "Asked for the lamp. Got it.",
+    "Carried the water. Did not drink it.",
+    "Mended the ladder, then used it.",
+    "Left the good boots by the door.",
+    "Kept the tally on the wall. It stops at eleven.",
+    "Sharpened it twice. Still went in.",
+    "Shared the heel of the loaf.",
+    "Said the stair was only stairs.",
+    "Hung the cloak on the peg for later.",
+    "Knew the way down. Forgot the way back.",
+    "Oiled the hinge so it would not squeal.",
+    "Went first because someone had to.",
+    "Taught the boy to tie a knot. The knot held.",
+    "Paid the ferryman in advance.",
+    "Whistled once. The tune was not finished.",
+    "Wrote home on Tuesday. Left on Wednesday.",
+    "Held the door for the others."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",

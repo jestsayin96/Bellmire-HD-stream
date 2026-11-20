@@ -10143,3 +10143,8 @@ Item: TAKE THIS NEXT (07:58) row 5 HUD - the MANA SYSTEM UI (WoW/Diablo bar), "D
 What would have to change: the owners of hero_body.gd / roster.gd / spells.gd would have to publish a per-hero pool (e.g. mana, mana_max, regen) AND a design decision that the game HAS mana - which contradicts delve.gd:3120 and Mr. E's potion colour key. I would then read it in party_frames.gd's shape (not my file) or a bar in hud_dock.gd.
 FOR MR. E TO DECIDE: does Bellmire HD get a mana resource at all? The plan routes this as "Phase 2 directive" with no verbatim quote (team lead flagged it). Until yes + an owner publishes the value, the HUD stays dry. Edited no owned file.
 Next firing: re-read TAKE THIS NEXT; claim only for a named HUD item whose data exists.
+
+## U103 - 2026-11-20 10:52 CST - STAND-DOWN: chat bot holds the Godot lock. Nothing launched, no owned file edited
+Lock: R's WORKING copy last line is RUNNING 2026-11-20T10:48:17-06:00 (chat bot: claim 10:48:17, cap 11:13, expected finish 11:07; guard-arm audit), no IDLE from the chat bot after it. Machine clock read 10:52:41 CST via VM date. tasklist Godot* was empty at 10:53, but the yield rule says a RUNNING with no IDLE holds the lock and a lane running short batteries looks dead between them - so I did not claim over it.
+Item: unchanged - rarity-hue half of System 2 (then L74). Not started this hour; no engine time available inside my :52-:07 share.
+Next firing (11:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap; start the rarity-hue half, headless parse first, windowed render, look at it.

@@ -12484,3 +12484,40 @@ Item: TAKE THIS NEXT (05:58) row 5 HUD, "NEXT: your own queue - long-roster Lead
 Why: leaderboard_panel.gd has drawn nothing on stream since L63 (dormant), so a long-roster read of it has no pixels to measure (U91). U91 already floods 5 pathological names (40-char hyphenated, underscore, unicode, xX_..._Xx) at UiTheme 100/125/150 and checks EVERY visible Label under every CanvasLayer is inside the viewport; U90 does the feed flood; U93 _theme_sweep (12 panels, 0 bad) covers hud_dock panels. A claim now would re-run green gates for no new information and spend the game build's :07 window prep. Edited no owned file.
 Next firing: re-read TAKE THIS NEXT; if it names a new HUD item, claim inside :52-:07 (claim+15) and write the expected finish in the RUNNING line.
 Standing finding for the plan owner: this row sends HUD at an item U91/U93 already close - the HUD queue is empty, not owed. Nothing for Mr. E to decide.
+## B77 (20 Nov 2026 06:4x CST) - THE RED ARM, OWED SINCE FIVE GREEN-ONLY CYCLES, RAN AND IT IS RED
+Item: the plan's 05:58 row 6 - "attempt the red arm, ONE attempt, on data/commands.json, reverted in the same run,
+git status clean before and after". The guard-faults patch was NOT attempted: fifth attempt not made.
+
+*** THE PLAN'S RED ARM NAMES A COMMAND THAT NO LONGER EXISTS. *** The row says `beadle` -> `zzz_fake_trade`.
+`data/commands.json` carries 31 commands and `beadle` is not one of them (the only `beadle` left in the tree is
+web/icons/items/ring/beadle_ring). I did not invent a command to break. I renamed an existing published command
+instead and I am naming it: `satchel` -> `zzz_fake_trade`, both occurrences (the `commands` key and its `order`
+entry), so `set(order) == set(commands)` stayed exact and the only drift the gate could see was code-vs-data.
+
+THE EDIT LANDED. A tracked-file in-place edit that CHANGED BYTES, not a byte-identical rewrite - sha256
+dbeb5517 -> c82b570a. B76 proved the filesystem writable; this proves a real content change lands too.
+
+THE GATE IS NOT DECORATIVE - rc=1, L14_TEST FAIL 3 (22 checks), and both drift directions fired:
+  - FAIL every verb ChatCmd answers is in the data (71 verbs; missing ["satchel"])
+  - FAIL every command in the data is answered (unanswered ["zzz_fake_trade"])
+  - FAIL docs/COMMANDS.md carries every command from the data
+AND THE FINDING I DID NOT GO LOOKING FOR: TWO `_guard_faults` ARMS IN chatcmd.gd FIRED FOR REAL, to stderr, from
+`ChatCmd.commands()` itself - COMMANDS_DATA SATCHEL ANCHOR (chatcmd.gd:1290: `satchel`.what no longer carries the
+"<fraction> of its shop cost" phrase, so the published sell-back rate can no longer be checked against SELL_BACK 0.4)
+and COMMANDS_DATA NEEDS_HERO ROUTE (chatcmd.gd:2322: 1 published command nothing dispatches - ["zzz_fake_trade"]).
+B71 recorded the whole guard family as log-only to a battery and the team lead has twice noted `grep -rn guard_faults
+tools/` is 0. Both stay true - no tool reads the array - but the arms themselves are live and they caught this edit
+one layer BELOW the gate that was meant to catch it. That is the first live proof any guard arm works.
+
+REVERTED IN THE SAME RUN. `git checkout -- data/commands.json`; sha256 back to dbeb5517, byte-identical to the
+pre-edit file; `git status --porcelain --untracked-files=no` EMPTY before the edit and EMPTY after the revert; the
+gate re-run green, L14_TEST OK (22 checks), rc=0. No owned source file is changed by this cycle.
+(The many `?? web/icons/items/**.import` entries in a bare `git status` are the hub lane's untracked Godot import
+sidecars, present before I started and untouched; that is why the clean check is stated on tracked files.)
+
+Lock: read from R's WORKING tree. Claim 06:47:36-06:00, cap 07:12, declared 06:51, IDLE written 06:48:33 - released
+early, no crossing into the HUD's :52 window. Godot EMPTY at release.
+
+Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits
+spent, nothing redeemed, nothing posted.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -12755,3 +12755,51 @@ Lock: claim 08:50:31 -06:00, cap 09:15, declared 09:05, released early, no cross
 claim (`tasklist /FI "IMAGENAME eq Godot*"` -> no tasks, both console and GUI names). Lock read from
 R's WORKING tree; last line before mine was game build's IDLE 08:21:50. No Twitch contact, 0 bits,
 nothing posted, no reward touched.
+
+
+## B81 - THE 24th CHECK IS LIVE AND IT IS NOT DECORATIVE (chat bot, 2026-11-20 09:47-10:0x CT)
+
+The team lead landed B80's patch through the Blender bridge and asked for the one thing nobody had
+proved: that `tools/_l14_test.gd` ITSELF - not the candidate file - runs 24 checks green. It does.
+
+LIVE-PATH BATTERY, VERDICT LINES NOT RETURN CODES. `tools/_l14_test.gd` on disk hashes
+**66884d35**, which is the candidate hash, so the landing is byte-correct.
+  - parse `--headless --path W6 --quit-after 300`: rc 0, **zero ERROR lines** (warnings only, all
+    `invalid UID` ext_resource notes out of `town.gd:826`, pre-existing and not mine).
+  - **L14_TEST OK (24 checks)** - including the two new rows, `docs/COMMANDS.md carries every field
+    the data publishes, verbatim (31 rows; unpublished [])` and `publishes nothing the data does not
+    say (31 rows; stale [])`.
+  - **TWITCH_PARSE OK (8 checks)**.
+  - **COMMANDS_DOC OK wrote 31 commands**, doc sha256 `edff7faa` before and after - a true no-op.
+    The generator says 31, the prompt still says 26; the generator wins and has since B79.
+  - `_b2_ask.gd` absent at the worktree root, nothing to delete.
+
+RED ARM ON THE LIVE FILE, because a green that cannot go red proves nothing. One prose-only change
+inside `satchel.what` at offset ~145 - "is on the hub" -> "is posted on the hub", command set
+untouched at 31/31, doc not regenerated. The battery went **L14_TEST FAIL 2 (24 checks)**, rc 1,
+with **exactly one row each way and it is satchel's row both times**: `unpublished
+["| \`!satchel\` | !sell, !prices |  | free | Wh"]` and `stale [...]` the same row. The other 29
+checks stayed green, so the arm is pointed and not a blanket failure. `data/commands.json` restored
+in the same call and re-hashes **dbeb5517**; the battery re-run after the restore is
+**L14_TEST OK (24 checks)**.
+
+THE B80 GAP IS CLOSED. The generated doc carried the what-prose while the old check compared
+`what.substr(0, 30)` and stayed green; the live check now assembles the whole published row and goes
+red in both directions on a change past char 30. Measured, landed, exercised, green again.
+
+L56 IS ALREADY TICKED AND MY QUEUE IS EMPTY - someone should see this. My prompt's queue says
+"then L56 (delve-heavy soak - engine and lock)". `docs/WORK_PLAN.md` carries L56 as **[x], ticked
+2026-11-16 12:58 CT by the supervisor**, closed on run 2's numbers (8 live Delves, deepest floor 6,
+5 distinct bosses, L56_SOAK OK) with "L45 AND L46 ARE UNGATED and nobody is to 'fix' either". I did
+not re-run it and I am not inventing a successor. The TAKE THIS NEXT chat bot row is complete as of
+this cycle, so the next row for this lane has to come from the plan, not from the prompt.
+
+Tracked files this cycle: `data/commands.json` dbeb5517 and `docs/COMMANDS.md` edff7faa, both
+identical before and after the red arm; `tools/_l14_test.gd` 66884d35 untouched by me. Scratch
+(`_b81_gate.log`, `_b81_green2.log`) is at the worktree root and goes to `_to_delete/b81` - rm is
+not permitted for this seat.
+
+Lock: claim 09:47:30 -06:00, cap 10:12, declared 10:05, released early, no crossing. Last line
+before mine was game build's **IDLE 09:22:19**, so the window was free; Godot EMPTY at claim
+(`tasklist` -> no process with "odot" in the name). Lock read from R's WORKING tree. No Twitch
+contact, 0 bits, nothing posted, no reward touched.

@@ -935,7 +935,13 @@
     "The bell does not ring this time. They go in anyway.",
     "A strap is retied. It was already tied.",
     "They count heads at the mouth. They count again.",
-    "Boots on the first step. The stair is wet."
+    "Boots on the first step. The stair is wet.",
+    "The torch is checked twice. It is a good torch.",
+    "Somebody coughs. The cough comes back off the wall.",
+    "A glove is put on, finger by finger.",
+    "The rope is paid out. It does not run short.",
+    "They leave the gate open behind them. Someone should.",
+    "A last mouthful of bread. Nobody talks."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1376,7 +1382,12 @@
     "They wipe the blades and do not talk much.",
     "One of them laughs once, short, and stops.",
     "The lamp is relit. The way up is clear.",
-    "What is left is counted. It is enough."
+    "What is left is counted. It is enough.",
+    "The door is wedged open. The air moves.",
+    "Someone sits down on the bottom step and stays there.",
+    "The blade is wiped on a sleeve. The sleeve is ruined.",
+    "A boot is emptied. Water, mostly.",
+    "They look at the count and say nothing. It is the right count."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4225,7 +4236,20 @@
     "Paid the debt in full. Went down with nothing owed.",
     "Hummed on the way in. The humming stopped.",
     "Brought bread for the others. Ate none.",
-    "Tied the knot right. Others climbed on it."
+    "Tied the knot right. Others climbed on it.",
+    "Oiled the hinges before he went. Nobody heard the door.",
+    "Left the good knife on the table. Said someone would want it.",
+    "Counted the stairs down. Lost count on the way back.",
+    "Carried the water skin for all four. Drank last.",
+    "Mended the strap twice. It held. She did not.",
+    "Wrote home that it was a quiet job.",
+    "Kept the rope taut a long while after it went slack.",
+    "Walked in whistling. Somebody else finished the tune.",
+    "Slept in the barn. Paid for the bed anyway.",
+    "Packed the lunch for two. Came back with one empty hand.",
+    "Said the pay was fair. It was.",
+    "Knocked before entering. Old habit.",
+    "Sharpened the blade the night before. It was sharp."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13591,5 +13615,6 @@
   "_note_c124": "C-124: descend +20, cleared +20, epitaphs +30, misfire +12 - all pools with a proven reader (delve.gd _pick_line, epitaph and misfire readers). Plain register, no mechanics, no floor counts. No miniboss body committed beyond the Rammer, so no feed lines owed. Additive. Expected zero-hit key.",
   "_note_c125": "C-125: epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire) - all pools on the corrected proven-live list. Plain register, no mechanics, no floor counts. No new miniboss body committed on origin/art (the Rammer is still the last), so no feed lines owed. Additive. Expected zero-hit key.",
   "_note_c128": "C-128 (19 Nov 2026): no new miniboss body committed on origin/art (36 on disk, 36 keys in by_key; only _chibi variants are unfed, and those are not draw bodies), so no feed lines owed. Repeat-heavy pools extended: epitaphs +24, descend +20 (10 with the '%s %s' verb frame - the code passes descend/descends, so every frame reads as a verb plus object, never 'descend down'), cleared +18, misfire +12 (%s name, %s spell, %d roll, %d DC order kept), barks +26 (enter 4, lord 5, trap 5, hurt 4, drink 4, misfire 4; five candidate lines were exact repeats and were left out). Plain register, no mechanics, no floor counts. Additive. Expected zero-hit key.",
-  "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names."
+  "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names.",
+  "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it."
 }

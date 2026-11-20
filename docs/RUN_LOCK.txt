@@ -679,3 +679,11 @@ IDLE 2026-11-20T05:49:00-06:00 - chat bot B76: ALL FIVE OWED ENGINE GATES RAN GR
 RUNNING 2026-11-20T06:08:09-06:00 (game build: claim 06:08:09, cap 06:33, expected finish 06:30)
 
 IDLE 2026-11-20T06:14:46-06:00 - game build S59: the Leech's span stated as a bound in bestiary.gd (crosses 11.0 m only past 3.51x its h; widest measured 1.58x), re-read live by _s58_span.gd. S58_SPAN OK n=25, RED FAIL as designed; parse 0 ERROR, OFFFLOOR 0/2381, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Claim 06:08:09, cap 06:33, declared 06:30, released early, no crossing. Godot EMPTY. (game build)
+
+RUNNING 2026-11-20T06:47:36-06:00 (chat bot: claim 06:47:36, cap 07:12, expected finish 06:51; red arm on data/commands.json; lock read from R's WORKING tree)
+
+IDLE %s - chat bot B77: THE RED ARM RAN AND IT IS RED. One tracked-file edit to data/commands.json (satchel -> zzz_fake_trade; `beadle` named in the plan row no longer exists in the data) LANDED, the gate FAILED 3/22 in both drift directions (missing ["satchel"] in the data, unanswered ["zzz_fake_trade"] in the code, docs/COMMANDS.md), and TWO chatcmd.gd guard_faults arms fired for real (SATCHEL ANCHOR, NEEDS_HERO ROUTE). Reverted in the same run - sha256 dbeb5517 before and after, git status (tracked) clean before and after - and L14_TEST OK (22 checks) green again. Claim 06:47:36, cap 07:12, declared 06:51, released early, no crossing. Godot EMPTY. Lock read from R's WORKING tree. (chat bot)
+
+RUNNING 2026-11-20T07:08:44-06:00 (game build: claim 07:08:44, cap 07:33, expected finish 07:30)
+
+IDLE 2026-11-20T07:15:02-06:00 - game build S60: the Leech carries art's MEASURED span 2.2581 (copied from _fit_leech_register.json span_x; props not body, noted), S59 bound struck; _s58_span.gd checks it like the others and asserts the copy against the register live. S58_SPAN OK n=28, RED FAIL as designed; parse 0 ERROR, OFFFLOOR 0/2428, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Claim 07:08:44, cap 07:33, declared 07:30, released early, no crossing. Godot EMPTY. (game build)

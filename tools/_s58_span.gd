@@ -48,7 +48,7 @@ func _initialize() -> void:
 	# [type, strain, expect_refused]
 	var cases := [["broodglut", "plain", false], ["broodglut", "drowned", false], ["broodglut", "mossbacked", true],
 		["broodglut", "gorged", true], ["broodglut", "hollowed", false], ["lastcuff", "gorged", false],
-		["warrior", "gorged", false], ["leech", "gorged", false]]
+		["warrior", "gorged", false], ["leech", "gorged", false], ["leech", "plain", false]]
 	_stage = Node3D.new(); root.add_child(_stage)
 	var x := -22.0
 	for c in cases:
@@ -66,16 +66,15 @@ func _initialize() -> void:
 			var m := Monster.new(); m.def = d; m.state = Monster.S.IDLE
 			m.position = Vector3(x, 0, 0); m.rotation.y = PI
 			_stage.add_child(m); _mons.append([m, c[1], k]); x += 15.0
-	# S59: the Leech has no measured span; its exemption is a bound re-read off the live tables.
-	var kmax := 0.0
-	for sk in Bestiary.STRAINS:
-		kmax = maxf(kmax, float(Bestiary.STRAINS[sk]["scale"]))
-	var lh := float(Bestiary.def_of("leech")["h"])
-	var bd: Dictionary = Bestiary.def_of("broodglut")
-	var widest := float(bd["span"]) / float(bd["h"])
-	var need := real / kmax / lh
-	print("  leech span key present=%s (art owes the measurement)" % Bestiary.def_of("leech").has("span"))
-	_ok(need > 2.0 * widest, "leech exempt by bound: crosses only if span > %.2fx its h (clear %.1f / max strain x%.2f / h %.2f); widest measured body %.2fx" % [need, real, kmax, lh, widest])
+	# S60: the Leech now carries art's MEASURED span, so its gorged case above took the same span check as
+	# the other two. Prove the key is art's number, copied: read the register live and compare.
+	var lk: Dictionary = Bestiary.def_of("leech")
+	_ok(lk.has("span"), "leech carries a span key")
+	var reg = JSON.parse_string(FileAccess.get_file_as_string("res://renders/art/minibosses/_fit_leech_register.json"))
+	var art_span := -1.0
+	if reg is Dictionary and reg.get("pairs", {}).get("leech", {}).has("span_x"):
+		art_span = float(reg["pairs"]["leech"]["span_x"])
+	_ok(art_span > 0.0 and is_equal_approx(float(lk.get("span", -2.0)), art_span), "leech span %.4f == art's register span_x %.4f (copied, not re-derived)" % [float(lk.get("span", -2.0)), art_span])
 	if not _red:
 		_ok(Bestiary.span_refused == 2, "span_refused counted 2 (%d)" % Bestiary.span_refused)
 	var sun := DirectionalLight3D.new(); sun.rotation_degrees = Vector3(-45, 30, 0); root.add_child(sun)

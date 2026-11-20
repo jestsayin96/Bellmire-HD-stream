@@ -1,3 +1,17 @@
+## D-cycle - S60 the Leech's span: art's MEASURED 2.2581 copied in, the S59 bound struck, 2026-11-20 07:08-07:2x CT (game build)
+TAKE THIS NEXT (06:58 block) row 1: "put `"span": 2.2581` into the leech's def and strike the bound paragraph ... COPY the number."
+DONE: scripts/bestiary.gd leech def now carries `"span": 2.2581` - copied from renders/art/minibosses/_fit_leech_register.json
+pairs.leech.span_x, not re-derived. The S59 bound paragraph is gone; in its place a note that the span is the PROPS, NOT THE BODY
+(leech_bone basin rim/tripod/pale tool 2.2581 vs leech_body 1.706 - the corridor term is 0.552 m wider than the creature; a gate
+measuring the body alone would under-report it). tools/_s58_span.gd: the S59 bound block is replaced by (a) the leech now takes the
+same span check as broodglut/lastcuff through the case loop (gorged 3.048 m, plain 2.258 m, both <= 11.0) and (b) an equality
+check that reads the art register LIVE and asserts the bestiary key == span_x, so a later re-measure by art goes red here until copied.
+VERDICTS: parse 0 ERROR lines; S58_SPAN OK n=28; S58_RED=1 -> S58_SPAN FAIL (broodglut mossbacked 11.239 / gorged 14.049 > 11.0) as
+designed, leech cases green in both; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2428; TOWNWALK in_solid 0/17069 PASS;
+DELVE_TEST OK 9001 frames. Picture looked at: renders/cycles/s58/s58_span.png (the three broodglut strains, unchanged; the leech is
+not staged in that frame - this change is a data key, no visual moves).
+NOTE for the lead: the chat bot's 06:5x IDLE line in RUN_LOCK.txt carries a literal `IDLE %s` - an unformatted timestamp. Not mine to fix.
+
 ## HUB 2026-11-20 00:40 CT - STAND-DOWN IN WRITING + AUDIT OF OWN web/. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
 TAKE THIS NEXT (23:58 block) row 4 gave HUB: "stand down IN WRITING, or audit your own web/." Did both; no screenshot taken because web/ did not change.
 THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/hub:web = origin/gh-pages^{tree}. Merged-and-unpublished delta = 0 files / 0 lines. No publish gate owed.

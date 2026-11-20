@@ -124,16 +124,14 @@ const NEW_TYPES := {
     ## party spends goes into its BASIN instead (Delve._mend), and it drinks the basin back into itself
     ## at `rate` hp/s (Delve._lord_tick). At `tip` of its hp the basin is tipped: it empties for good and
     ## the party's healing lands again. homes [] - not a random draw; the MB_DIR shrine elite is unchanged.
-    ## S59: THE LEECH CARRIES NO `span`, AND THAT IS STATED, NOT FORGOTTEN. Art has not measured one
-    ## (_fit_leech_register.json carries creature_h 2.32 and no span field) and none is invented here.
-    ## Why it is safe without one is a BOUND, not a number: the largest strain scale in STRAINS is
-    ## x1.35 (gorged), so the corridor clear (11.0 m, read out of FloorGen) is crossed only if the
-    ## Leech's T-pose span exceeds 11.0 / 1.35 = 8.15 m - 3.51x its own h. The widest MEASURED body,
-    ## broodglut, is 10.4063 / 6.60 = 1.58x. tools/_s58_span.gd re-reads both sides of that bound
-    ## off the live tables and goes red if a strain or the corridor ever closes the gap. The real
-    ## span is owed by art; when it lands it goes in as `span` here, copied, and this note goes.
+    ## S60: `span` 2.2581 is ART'S, COPIED NOT RE-DERIVED - _fit_leech_register.json pairs.leech.span_x,
+    ## measured 20 Nov 06:4x CT with the same instrument as the variants' span_x (lordgen.world_bounds,
+    ## glb at creature_h 2.32). IT IS THE PROPS, NOT THE BODY: per-mesh, `leech_bone` (basin rim, tripod,
+    ## pale tool) spans 2.2581 while `leech_body` is only 1.706 - the corridor term is 0.552 m wider than
+    ## the creature, and a gate that measured the body alone would under-report it. Gorged x1.35 draws
+    ## 3.048 m against the 11.0 m clear, so the span term passes it; it now gets the same check as the rest.
     "leech":     {"name": "The Leech", "path": MON + "minibosses/leech.glb", "anims": A_UAL, "hp": 2.0, "atk": 1.1, "spd": 2.4, "h": 2.32,
-                   "lift": 0.0, "family": "fiend",
+                   "span": 2.2581, "lift": 0.0, "family": "fiend",
                    "ways": {"basin": {"rate": 4.0, "tip": 0.30, "line": "The Leech's basin goes over - what it drank runs out across the floor."}},
                    "homes": []},
     "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,

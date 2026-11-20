@@ -13042,3 +13042,8 @@ Item: TAKE THIS NEXT 10:58 CT row 1 - the supervisor's 10:16 mana ruling (owner 
 - NOT PROVEN LIVE: dry_swings was 0 in 120 s - at this pace a 48 pool outlasts a floor-1/2 fight. The dry path is proven at unit level only. Balance (30/6/6/5) is a first number, cheap to turn.
 - NO PICTURE: the pool is a number until the HUD draws the bar (HUD's row, the hour this lands). Nothing on screen changed except that a dry caster now swings.
 - No twitch test, 0 bits, no account used.
+## C-142 (20 Nov 2026 11:3x CST) - THE DAUBER'S LINES (37th miniboss, Wetwall)
+- ITEM: TAKE THIS NEXT (10:58 block) row 3, CONTENT: keep producing. Measured: assets/monsters/minibosses/dauber.glb and its CANON/BUILDERS rows are on main (merged), by_key held 36 keys and no dauber. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused; "Wetwall" used in two fall lines per art's tuple). Lines state the mechanic in plain words: a wet course goes up on each hit, breaks to any hand while wet, sets to nothing you carry; the hod counts the courses left. Worn mason, fresh lime. New key: miniboss_feed._note_c142 (expected zero-hit).
+- VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (subset-compared against pre-edit copy), file round-trips byte-identical at indent 2, 17 new lines unique against all existing feed lines, ASCII only.
+- CODE WIRING: none new - miniboss_for will draw the body once bestiary.gd carries dauber (game build, per art's row).
+Next content: C-143.

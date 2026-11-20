@@ -1,3 +1,147 @@
+## TAKE THIS NEXT - THE 09:58 CT FIRING, 20 NOV 2026 (machine clock 09:59-10:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 BLOCK. ***
+## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is ee2a2f5e.
+## *** THE HEADLINE IS A CROSS-LANE ANSWER NOBODY ASKED FOR AND BOTH LANES NEEDED. ***
+## Art shipped an instrument that condemns pieces which fit at yaw 0 and BREACH when TURNED. The
+## engine places every batch prop at `float(_rng.randi() % 4) * PI * 0.5` - a RANDOM QUARTER TURN.
+## I checked whether art's finding endangers the 36 pieces the game build has already wired. IT DOES
+## NOT, and here is the reason in one line: `batch_radius()` is built from art's `footprint_m`, which
+## is the WIDEST HORIZONTAL EXTENT (verified: lm_granary dims_m [8.2498, 9.6827, 8.0201] ->
+## footprint_m 9.6827), and max(x,z) is INVARIANT under a quarter turn. Art's breaches are at YAW 45,
+## which the engine never uses for batch props. **No wired piece is at risk and no lane need stop.**
+## KEEP IT TRUE: if any lane ever places a batch piece at a yaw that is NOT a multiple of 90 degrees,
+## the footprint number stops being sufficient and art's yaw-45 column becomes load-bearing that day.
+
+1. GAME BUILD - **S62 IS TICKED, AND I COUNTED THE BATCH OFF YOUR ENGINE FILE, NOT OFF YOUR NOTE.**
+   `PROP_BATCH` is **36** top-level keys by my own brace-matched parse of `scripts/dungeon_hd.gd`
+   (20 batch 1 + 16 batch 2), `THEME_BATCH` is **14** keys, and every batch piece is in a theme row.
+   Verdict lines read, not return codes: `S62_PROPS OK n=33`, `S61_PROPS OK n=32` still green, red arm
+   `FAIL` as designed on Pedestal2 +0.030 / Statue_Horse +0.030 / Workbench_Drawers +2.564, parse 0
+   ERROR, OFFFLOOR 0/2229, MON_INPROP 0, TOWNWALK PASS 0/18119, DELVE_TEST OK.
+   **I LOOKED AT `s62_props.png`**: every piece stands ON the floor line - no sinker, no floater, and
+   the Statue_Horse sits on its pedestal. Picture and numbers agree.
+   **ONE THING THE PICTURE TOLD ME THAT NO NUMBER DID: THE SHOT CLIPS ITS OWN RIGHT EDGE.** The
+   right-most piece runs off the frame, so it cannot be judged from the evidence you shipped. Not a
+   fit fault and not a tick blocker - widen the camera next batch so the sheet proves every piece.
+   **NEXT: BATCH 3** - another 10-20 of the 78 still unwired, same shape, same signed lift.
+   AND THE WALL-PLACEMENT ROW for the mount-pivot pieces (banners, wall lantern, wall sword, shelves)
+   is still open and still yours.
+   **YOU DO NOT NEED TO GUARD AGAINST ART'S NEW BREACH FINDING** - see the headline above. Your
+   `footprint_m` radius is already rotation-safe for quarter turns, and you got that right without
+   being told. Do not add a yaw gate you do not need.
+
+2. ART - **THE CORRIDOR/LID INSTRUMENT IS TICKED, AND I READ THE PICTURE BEFORE THE JSON.**
+   `_corridor_lid.json` carries **12 frames, 7 CLEAR / 5 BREACH** - I counted them myself and the
+   PNG agrees frame for frame: ROOF_ROUNDTILES_6X14 is CLEAR at yaw 0 (8.25 m) and visibly crosses
+   BOTH corridor walls at yaw 45 (16.67 m) and yaw 90 (15.71 m) against an 11.0 m corridor, and
+   TREE_4_C_COLOR1 breaches the 9.5 m LID at all three yaws (h 10.77 m) while passing the walls.
+   WALLPX and LIDPX are non-zero exactly where my eye says they should be. **A measurement of the
+   turned footprint is a real new fact** - every earlier CORRIDOR-SAFE verdict was a yaw-0 verdict.
+   **NOW THE CORRECTION, AND IT GIVES YOU WORK BACK RATHER THAN TAKING IT.** You recorded "21 packs
+   with no licence file, not 18" against hub's 18. **I counted all 49 pack folders myself and you are
+   both right about different questions - but 18 is the number that gates imports, not 21.**
+   Your 21 = no file NAMED licence/eula/copying/terms. Hub's 18 = no licence text ON FILE anywhere.
+   The three in the gap are `Stone_coffin`, `rocks` and `grass_07`, and I READ ALL THREE READMES:
+     - `Stone_coffin/readme.txt` - **"CC0 1.0 Universal (CC0 1.0) Public Domain Dedication"**, Nobiax.
+     - `rocks/readme.txt` - the SAME explicit CC0 1.0 text, Nobiax.
+     - `grass_07/readme.txt` - **not CC0**: "Absolutely free to use or to modify in any kind of work
+       (personal, commercial or else)" plus a request for a link. A custom permissive grant, exactly
+       as hub flagged it. Commercial use is granted; the link is a request, not a condition.
+   **SO: Stone_coffin and rocks are CC0 ON FILE - DO NOT SPEND A CYCLE CHASING THEIR LICENCE PAGES.**
+   `grass_07` may be used, but copy its readme text into `docs/art/ASSET_SOURCES.md` rather than
+   recording it as CC0, because it is not. The import gate is **18 packs**, hub's list, unchanged.
+   **NEXT: THE MINIBOSSES ARE YOURS, as the standing arrangement has it** - and STATE YOUR OWN COUNT
+   when you ship; do not quote a number from a prompt (the counting recipe in the :34 prompt is broken
+   and is on the owed list below).
+   NO PROGRESS.md ENTRY CAME WITH THIS WORK. Your two commits carried renders and tools only. Write
+   the hour up next run - the picture is excellent and the write-up is how the next seat finds it.
+
+3. CONTENT - **C-140 IS TICKED AND I RE-DID THE ARITHMETIC KEY BY KEY, AGAINST THE MERGED TREE.**
+   epitaphs 735 -> **748** (+13), descend 459 -> **465** (+6), cleared 444 -> **450** (+6) - your
+   commit message says +13 / +6 / +6 and that is exactly what landed. Uniqueness checked inside every
+   pool: 748/748, 465/465, 450/450, no duplicate slipped in. The only new key is `_note_c140`.
+   **NEXT: KEEP PRODUCING, UNTHROTTLED, AND KEEP WRITING `_note_` KEYS.** They are 31 of this hour's
+   46 zero-hit keys and every one is accounted for by class. They are not an unread-data fault.
+
+4. HUB - **THE LICENCE-SOURCE PASS IS TICKED, AND YOUR 18 IS THE NUMBER THAT SURVIVED THE AUDIT.**
+   Art filed 21 this hour; I counted the folders and read the three disputed readmes myself (see row
+   2). `Stone_coffin` and `rocks` carry explicit CC0 1.0 text and `grass_07` carries the custom
+   free-use grant **you had already read and flagged correctly**. Your catalogue's honesty - "licence
+   as read", "snippet only", and naming the QAL pack rather than waving it through - is what made the
+   dispute resolvable in ten minutes. I grepped the new section for CC-BY-NC, -ND and -SA: none.
+   **NO PUBLISH GATE WAS OWED AND I RAN NONE - saying that plainly.** You touched no file under `web/`
+   and claimed no publish readiness. I measured the delta anyway: `origin/gh-pages^{tree}` **9ca8051e**
+   EQUALS `origin/hub:web` **9ca8051e** - **DELTA 0, THE HUB IS FULLY PUBLISHED.** Last publish
+   19 Nov 20:06:59 CT. Nothing is waiting on the supervisor.
+   **NEXT: FINISH THE SAME ITEM - record the licence SOURCE for the 18, and mark Stone_coffin, rocks
+   and grass_07 in your table as terms-on-file-in-readme** so no future seat re-opens the 18/21 split.
+
+5. HUD - **U102 IS TICKED AS A CORRECT STAND-DOWN, AND I VERIFIED THE "NO" MYSELF BEFORE AGREEING.**
+   You answered step (a) - does the engine expose a mana value - with NO. **It is NO.** My own
+   behaviour grep over `scripts/`: `mp_max` 0 hits, `spell_slot` 0, `stamina` 0; the only `mana` in
+   code is the SOUND EFFECT `mana_charge` (`sfx.gd:105`, `spells.gd:139`) and prose. `spells.gd`
+   `cast()` takes no cost argument and spends nothing. There is no pool to draw.
+   **YOU WERE RIGHT NOT TO DRAW A BAR WITH NOTHING BEHIND IT**, and right that the fix lives in files
+   that are not yours. **AND YOU CAUGHT THE CHAT BOT'S FUTURE STAMP INDEPENDENTLY** - your write-up
+   notes B81's IDLE stamped 10:02:40 while the machine clock read 09:52. I measured the same thing
+   from the other end (git's own commit time, 09:50:17). Two instruments, one answer. That is good work.
+   **WHERE IT GOES NOW: UP, NOT TO YOU AND NOT TO MR. E.** You routed it "FOR MR. E TO DECIDE"; the
+   provenance half of that was already answered at 08:13 CT (Mr. E's "check, implement"). What is left
+   is an OWNER and a BALANCE call, and that is the supervisor's. See FOR THE SUPERVISOR below.
+   **NEXT, UNTIL THAT COMES BACK: you are dry.** System 2 is WHOLE (its HUD rarity-hue half ticked at
+   U88, 19 Nov 20:58; its reach half at U98) - **do not start it, whatever the :52 prompt says.**
+   Stand down in writing, or audit your own shipped `hud/` for a defect in work you already landed.
+   A stand-down written up IS the delivery.
+
+6. CHAT BOT - **B81 IS TICKED, AND I RE-MEASURED THE LANDING I MADE LAST HOUR BECAUSE IT WAS MINE.**
+   `tools/_l14_test.gd` on disk hashes **66884d35** - the candidate hash - so my Blender-bridge
+   landing was byte-correct, `_ok(` calls are **18**, and `tools/_l14_test.B80_CANDIDATE.gd` is gone.
+   **I CHECKED THE ONE THING THAT WOULD HAVE MADE IT A FALSE GREEN:** `substr(0, 30)` still returns a
+   grep hit in that file - it is on **line 105, inside a COMMENT** explaining what the check used to
+   do. The blind comparison is GONE, not retained. Verdicts: `L14_TEST OK (24 checks)`, parse rc 0
+   zero ERROR, `TWITCH_PARSE OK (8)`, `COMMANDS_DOC OK wrote 31` with doc sha `edff7faa` either side.
+   Your red arm on the LIVE file went `FAIL 2 (24 checks)` with exactly one row each way, satchel's
+   both times. The B80 gap is closed and exercised.
+   **ONE FAULT, AND IT IS A REAL ONE: YOUR IDLE LINE IS STAMPED IN THE FUTURE.** You wrote
+   `IDLE 2026-11-20T10:02:40-06:00` into a file whose mtime is **09:50:37**, and your own merge commit
+   is **09:50:17**. The stamp is ~12 minutes ahead of the machine. Your CLAIM (09:47:30), cap (10:12)
+   and declared finish (10:05) are all sound, and the HUD was not blocked by it - liveness is decided
+   by the IDLE, and yours was present. **But it breaks the clean-hour count and it is the second hour
+   running that your stamps have run fast.** THE FIX, AND IT IS MECHANICAL: read the clock off the
+   MACHINE (`TZ=America/Chicago date` through device_bash on cruzader) when you write a lock line, not
+   off your own container clock. Git's timestamps are the machine's and they are right; yours are not.
+   **NEXT: nothing is owed on L14.** Your prompt's queue is stale (you found L56 already ticked and
+   correctly invented no successor - that was the right call). Take the clock fix, then stand down in
+   writing or audit your own shipped `chatcmd.gd` guard arms.
+
+## FOR THE SUPERVISOR - 09:58 CT, 20 NOV. ONE ITEM, AND IT NEEDS A DECISION I DO NOT OWN.
+## **THE MANA BAR CANNOT BE BUILT BY THE HUD, BECAUSE THE GAME HAS NO MANA.** Measured twice, by the
+## HUD lane and then by me independently: no per-hero pool, no max, no regen, no spend. `spells.gd`
+## `cast()` costs nothing; the only `mana` token in the engine is a sound-effect name. Mr. E's
+## "check, implement" (provenance settled at 08:13 CT) therefore lands on work nobody owns yet.
+## TWO THINGS ARE NEEDED AND BOTH ARE YOURS, NOT MINE:
+##   (1) AN OWNER for the engine half - publishing `mana / mana_max / regen` per hero touches
+##       `roster.gd`, `hero_body.gd` and `spells.gd`, which are the GAME BUILD's files, not the HUD's.
+##   (2) A BALANCE ANSWER - does casting SPEND mana? Today spells are free. A bar that only ever sits
+##       full is a decoration; a bar that gates casting is a combat change.
+## MY RECOMMENDATION: assign the engine half to the game build as the second half of Mr. E's existing
+## System (not a new item), smallest honest version - a per-hero pool that `cast()` spends and that
+## regenerates out of combat - and let the HUD draw it the hour it exists. If the answer is that
+## Bellmire has no mana, say so and I will strike the HUD row rather than leave it standing.
+## I have NOT assigned it myself: handing the game build a combat change is past the half-of-an-
+## existing-item judgement I am allowed to make alone.
+
+## FOR THE NEXT TEAM LEAD - CORRECTIONS OWED IN THE SEVEN PROMPTS (a firing cannot edit them).
+## Land these on the first LIVE turn. This list carries forward; add, do not replace.
+## (d) THE :58 PROMPT SAYS SYSTEM 2's HUD RARITY-HUE HALF IS "STILL UNSTARTED" AND "THE MOST VALUABLE
+##     OPEN ITEM IN THE HOUSE". **IT IS TICKED** - U88, the 20:58 firing on 19 Nov, with its reach
+##     half at U98. At least four seats have now flagged this and it keeps sending the HUD at a closed
+##     item. Strike both sentences from the :58 prompt.
+## (e) LANE CONTAINER CLOCKS RUN FAST AND LOCK STAMPS INHERIT IT. The chat bot's :45 container is
+##     ~12 minutes ahead of cruzader (B81: IDLE stamped 10:02:40, file mtime 09:50:37, commit
+##     09:50:17). Git stamps are the machine's and are correct. **Put in all seven prompts: read the
+##     clock off the MACHINE via device_bash before writing a lock line, never off your own clock.**
+
 ## TAKE THIS NEXT - THE 08:58 CT FIRING, 20 NOV 2026 (machine clock 08:59-09:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 07:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is 703c08c3.

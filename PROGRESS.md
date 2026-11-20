@@ -12227,6 +12227,51 @@ Checked at 23:53:28-06:00: last line of R's working-copy docs/RUN_LOCK.txt = "RU
 Edits: none; no Godot run; nothing to gate. Foreign finding from U91 (rts_camera clock 1.5px overhang at 150%) still stands for its owner.
 Next firing (00:52): re-read RUN_LOCK in R's working tree; if free, run the L74 UI-scale readability check of hud_dock/LeaderboardPanel-free panels at 125/150, claim <=15 min, release by :07.
 Nothing for Mr. E to decide.
+## B71 (20 Nov 00:4x CST) - THE OWED PROMOTION, PAID AND RED-PROVEN, AND THE WHOLE GUARD FAMILY TURNS OUT TO BE LOG-ONLY TO A BATTERY
+TAKE THIS NEXT (23:58 block) CHAT BOT row: promote MINIBOSS UNNAMED and MINIBOSS GHOST from printerr
+to push_error. Taken as written. Lock 00:48:30 -> IDLE 00:50:40, released before the HUD's :52.
+
+THE DEBT. B70 shipped both checks at printerr-only with the reason written on the function: both had
+exactly one live instance (`strickler` unnamed, `drizzler` ghost), they were the same single defect, the
+fix was already on `laptop` at a2d6ab2e, and a guard that goes red on a fix in flight teaches a lane to
+ignore it. That window was declared one cycle wide. Main carries a2d6ab2e as of the 23:58 merge, so it
+closes here. Both now append to `_guard_faults` and `push_error` like every other path in COMMANDS_DATA.
+
+GREEN FIRST, AND NOT ON THE MERGE'S WORD. I brace-matched MB_NAME out of `scripts/delve.gd` in the
+merged worktree myself and walked it against content's `miniboss_feed.by_key`: 36 name rows, 36 feed
+rows, UNNAMED empty, GHOST empty. The promotion lands on a clean join rather than on a live fault.
+
+RED-PROVEN IN ONE MUTATION, BECAUSE THE TWO FAULTS ARE THE TWO ENDS OF ONE JOIN. In my own worktree's
+copy of data/lore_lines.json - never R's, never another lane's - I renamed one feed key, `beadle` ->
+`zzz_fake_trade`. That makes the old key a GHOST (an MB_NAME row no body carries) and the new key
+UNNAMED (a body with no MB_NAME row) in a single edit. Both fired as ERROR:
+  COMMANDS_DATA MINIBOSS GHOST   - ["beadle"]
+  COMMANDS_DATA MINIBOSS UNNAMED - ["zzz_fake_trade"]
+File restored; `git diff -- data/lore_lines.json` CLEAN. The green run printed no MINIBOSS line at all.
+
+THE FINDING THAT MATTERS MORE THAN THE PROMOTION, AND IT IS AGAINST MY OWN WORK. With that fault
+planted, `tools/_l14_test.gd` printed both push_errors and STILL EXITED rc=0 - "L14_TEST OK (22
+checks)". Nothing in the battery reads `ChatCmd.guard_faults()`. So every COMMANDS_DATA check in this
+file - all of them, not just these two - is a log line to a gate, and the distinction between printerr
+and push_error that this cycle's row was about buys a redder log and NOT a red gate. Promoting them was
+still right; it was not sufficient, and I would rather say so than let the tick stand on a half-truth.
+tools/ is not my file, so I cannot close it: the fix is one assert in the battery -
+`ChatCmd.guard_faults().is_empty()` -> exit 1. Routed to the team lead in my summary.
+
+GATES (all four, one Godot launch, lock held 2m10s): parse --quit-after 300 rc=0 no script errors;
+L14_TEST OK (22 checks); COMMANDS_DOC OK wrote 31 commands - a true no-op, data/commands.json and
+docs/COMMANDS.md both untouched this cycle and the generator left them byte-identical; TWITCH_PARSE OK
+(8 checks). Godot EMPTY before claim and after release. data/commands.json unchanged, so no drift check
+moved: 31 commands, `order` 31, 31 doc rows, unchanged in both directions.
+
+LOCK, STATED PLAINLY BECAUSE LAST CYCLE'S DECLARATION COST THE HUD ITS FIRING. I had four clean minutes
+between game build's 00:15:59 IDLE and the HUD's :52. I declared 00:51 - the finish I actually meant -
+not a cap, and released at 00:50:40. The red-proof fitted inside it; had it not, it would have been
+carried, not crossed. No crossing.
+
+No Twitch of any kind: no account used, 0 bits, nothing posted, nothing redeemed, no reward touched.
+Nothing for Mr. E to decide.
+
 ## B70 (19 Nov 23:4x-00:0x CST) - !miniboss, THE THIRD ROWED COMMAND, AND A GATE THAT CAUGHT THE RENAME FAULT FROM THE OUTSIDE
 Item: supervisor 19:28 item 3 (miniboss lore), rowed by the team lead's 22:58 CHAT BOT row. Lock: last line IDLE game build 23:14:52 and tasklist showed ZERO Godot; claim 23:51:13, cap 00:16, declared finish 00:10. No crossing.
 WRITTEN: `!miniboss` (aliases !elite, !elites), args [name], free, no hero. No name -> how many hold a chamber alone and how to ask. A name -> that one: what it is called, what it was, and content's first `arrive` line, which is the look of the thing coming through the door. Lines carrying {name} are passed over rather than filled with a hole. A miss and an ambiguous prefix both ask again rather than guessing.

@@ -82,3 +82,31 @@ glTF is present in `Medieval_Village_MegaKit`, `kenney_fantasy-town-kit_2.0`, `U
 ## Reproduce
 The walk is ~25 lines of Python (`os.walk`, `os.path.getsize`, a licence-file regex), run once from the Blender bridge on 20 Nov. Counts drift only if someone adds to `_packs`.
 
+## Where to read the licence for the 18 packs with no licence file (added 20 Nov 2026 09:5x CT, hub lane)
+
+Method: the pack's folder/zip name and inner folder name were matched to a listing page; the page was fetched and the licence line copied as shown. **Page-side CC0 is a claim by the uploader, not a file in the pack**, so art should still record the page URL + date beside any import. `opengameart.org/content/lowpoly-medieval-village-pack` and the Quaternius uploader page refused automated fetch (robots) - those two were NOT read.
+
+**VERIFIED - a listing page names this exact zip and shows its licence line**
+
+| Pack in `_packs` | Listing page (read) | Author on page | Licence line on page | Zip named on page |
+|---|---|---|---|---|
+| `dungeon_collection_for_assetforge` | https://opengameart.org/content/modular-dungeon-3d-models | Keith at Fertile Soil Productions | License(s): CC0 | `dungeon_collection_for_assetforge.zip` |
+| `dungeon_collection_2` | https://opengameart.org/content/modular-dungeon-2-3d-models | Keith at Fertile Soil Productions | License(s): CC0 | `dungeon_collection_2.zip` |
+| `low-poly_RPG_item_collection_2` | https://opengameart.org/content/rpg-item-collection-2 | drummyfish | License(s): CC0 | `low-poly RPG item collection 2.zip` |
+| `low-poly_RPG_item_collection_3` | https://opengameart.org/content/rpg-item-collection-3 | drummyfish | License(s): CC0 | `low-poly RPG item collection 3.zip` |
+
+**PROBABLE - same author and family, but the zip name on the page is not the folder name here**
+
+| Pack in `_packs` | Page to read | What matches / what does not |
+|---|---|---|
+| `quaternius_medieval_weapons_2018_CC0` | https://quaternius.itch.io/lowpoly-medieval-weapons (read: author Quaternius, "CC0 License" in the description, zip `Medieval Weapons Pack by Quaternius.zip`) | Inner folder here is "Medieval Weapons Pack - Sept 2018"; the itch zip name differs. Contents not compared file-by-file. |
+| `medieval_pack_CC0` | https://opengameart.org/content/low-poly-medieval-weapons (read: quaternius, CC0, zip `MedievalPack.zip`) | Inner folder here is `MedievalPack`, so this is probably the OGA weapons pack, **not a town/building pack - the catalogue's "15 (candidate)" proposal for it should be dropped until the contents are looked at.** Not file-compared. |
+
+**NOT VERIFIED - no page read that names the pack; where to look**
+
+- `Animals_Pack_by_Quaternius`, `_extracted_rpg_items`, `ultimate_animated_character_pack`: folder names read "Animals Pack by Quaternius", "Ultimate RPG Items Pack - Aug 2019", "Ultimate Animated Character Pack - Nov 2019" - Quaternius packs. Check quaternius.itch.io / quaternius.com for the exact pack page. (Sibling pack `quaternius_ultimate_rpg_items_CC0` already has a CC0 `License.txt` and is likely the same items, which would cover `_extracted_rpg_items`; not compared.) The OGA farm-animals (`Farm Animals by @Quaternius.zip`) and monsters pages both read CC0 but do not name `Animals Pack`.
+- `modular_village_collection`, `modular_terrain_collections`: inner folders "Modular Village", "Modular Terrain Beach/Cliff/Hilly". Author not established. The OGA medieval-village page was blocked from fetch; search OpenGameArt by those titles.
+- `Castle`, `3d_crystals_new`, `free_mine_assets`, `golem_clean_blend`, `dragon_oga`, `handpainted_weapons`: no author evidence found. `dragon_oga` is by its name from OpenGameArt - read the OGA page for the dragon model. The rest: do not import until a source page is found.
+- `_generated`: this project's own output, not a third-party pack - no external licence applies.
+
+**Rule for art:** until a row above is VERIFIED, treat the pack as unlicensed for anything that ships.

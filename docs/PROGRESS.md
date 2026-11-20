@@ -3866,3 +3866,26 @@ Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, relea
 - DISCLOSED: I ran the battery WITHOUT JESTS_NO_TWITCH=1, so the parse run joined #jestsayin96 as bellmirebro and subscribed
   EventSub (7 of 7) for ~20 s. Read-only: nothing was posted, redeemed or cheered (0 bits); the log shows no send. Next run sets it.
 - NOT taken: broodglut's MB_NAME / MB_FIT / theme row - it is art's variant class (part 2 of the directive), not rowed to me yet.
+
+## S56 - game build - 20 Nov 2026 03:08-03:2x CT - the lid raised (supervisor 02:12 ruling) + Lastcuff wired
+- TAKE THIS NEXT (02:58) gave: raise the lid, then lastcuff (body shipped, wired to nothing).
+- LID: floorgen.gd:1383 `lid.position = Vector3(0, 7.0, 0)` -> `Vector3(0, 10.0, 0)`. One literal. Measured on a built
+  floor: lid underside 9.50 m (was 6.50) - clears broodglut 6.60 by 2.90 m and lastcuff's measured top 6.19 by 3.31 m.
+  Broodglut not re-scaled. Art's `--reverdict` on _register.json is theirs, not touched.
+- LASTCUFF: `lastcuff.glb.import` now exists (--headless --import, plus its four texture .imports). bestiary.gd "lastcuff":
+  art's register h 6.20, Imp body, A_UAL, homes [] (not a random draw - no content lines yet, same as broodglut).
+  THE ONE IDEA made real: `ways.irons` {at [0.85,0.70,0.55,0.40,0.25], gain 0.22}. Delve._lord_tick sheds one iron per hp
+  mark crossed, sets `irons_pace` meta (1.0 -> 2.10), _mon_pace multiplies it in; art's named meshes go visibly -
+  Imp_Chains (the four cuffs, one mesh) at the 4th, Imp_SpikedCollar at the 5th. Feed text is a plain engine line
+  ("Lastcuff sheds an iron (n of 5).") like the enrage line - content may replace it with written words later.
+- Gate: tools/_s56_lastcuff.gd, windowed 1080p, quits itself. `S56_LAST OK n=16`. RED: S56_RED=1 strips `irons` ->
+  `S56_LAST FAIL [first iron..., fourth iron..., fifth iron..., all five off..., exactly five shed (0)]`.
+- Battery (03:10-03:16 CT): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2192 samples off the
+  floor (home) | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/17397 PASS | DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- LOOKED AT IT: renders/cycles/s56/s56_lastcuff_irons.png (collar on) and s56_lastcuff_free.png (collar gone) - whole body
+  head to feet, plate "Lastcuff". Same caveat the lead wrote for S54: the room wall and the knight's plate cover the lower
+  legs/torso; the gate proves FRAMING, not unoccluded. The cuffs are small at this distance - the collar reads, the cuffs
+  barely do.
+- DISCLOSED AGAIN (sorry - the S52 note said next run sets it): battery ran WITHOUT JESTS_NO_TWITCH=1, so the parse run joined
+  EventSub (7 of 7) as bellmirebro for ~20 s. Read-only: nothing posted, redeemed or cheered, 0 bits.
+- NOT done: lastcuff MB_FIT / THEME_MINIBOSS_MORE `cells` row and any floor route - waits on content's lines, as broodglut's does.

@@ -2167,6 +2167,21 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
 				live.append(m)
 				mon.set_meta("risen", live)
 			_say(String(sh.get("line", "")))
+	if ways.has("irons"):
+		# S56: Lastcuff - each hp mark knocks one iron off; it hides that piece where the glb names it
+		# and gains pace (read by _mon_pace through the "irons_pace" meta).
+		var ir: Dictionary = ways["irons"]
+		var im: Array = ir["at"]
+		var off := int(mon.get_meta("irons_n", 0))
+		if off < im.size() and mon.hp / maxf(1.0, mon.max_hp) <= float(im[off]):
+			mon.set_meta("irons_n", off + 1)
+			mon.set_meta("irons_pace", 1.0 + float(ir.get("gain", 0.2)) * float(off + 1))
+			var mname := String((ir.get("meshes", {}) as Dictionary).get(str(off), ""))
+			if mname != "":
+				var piece := mon.find_child(mname, true, false)
+				if piece is Node3D:
+					(piece as Node3D).visible = false
+			_say("%s sheds an iron (%d of %d)." % [String(mon.def.get("name", "It")), off + 1, im.size()])
 	if ways.has("swoop"):
 		var sw: Dictionary = ways["swoop"]
 		var t := float(mon.get_meta("swoop_t", float(sw.get("every", 7.0)))) - delta
@@ -2692,7 +2707,8 @@ func _soak(o: Dictionary, dmg: float) -> float:
 
 ## a frosted creature moves and swings at half pace
 func _mon_pace(mon: Monster) -> float:
-	return 0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0
+	var p := float(mon.get_meta("irons_pace", 1.0))     # S56: Lastcuff's shed irons
+	return (0.5 if float(mon.get_meta("slow_t", -1.0)) > _t else 1.0) * p
 
 ## ---- L8 (Mr. E, Nov 11): wild magic below. The dungeon is one enormous scar,
 ## so every spell cast down here is a check against it: d20 + casting ability

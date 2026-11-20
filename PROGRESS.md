@@ -1,3 +1,9 @@
+## HUB 2026-11-20 08:40 CT - PACK CATALOGUE WRITTEN (docs/PACK_CATALOGUE.md). NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+TAKE THIS NEXT (07:58 block) row 4 gave HUB: "when your publishable delta is zero, catalogue the packs." Delta measured zero: origin/hub:web == origin/gh-pages^{tree} == 9ca8051e877d77a71faa8de894804e1ede0a5380; `git diff origin/main...origin/hub -- web/` empty.
+DONE: docs/PACK_CATALOGUE.md - 49 extracted folders in C:\hd adventure\_packs, 10,122 files, 2,408 MB (the NUMBER). Per pack: files, MB, extension counts, licence as read off the pack's own file, proposed system (15/47/68/17/38/unassigned). Read-only; nothing under assets/ or _packs touched; worldfit's 173 files not re-measured.
+FINDINGS: Bestiary_Dungeon_Monsters_Kit is QAL v1, NOT CC0; grass_07 is a custom free-use note asking for a link; Fantasy_Ruins_Pack has only a PDF licence (not text-read); 18 packs ship NO licence file and are marked UNVERIFIED, not assumed CC0. The system column is MY PROPOSAL from names/contents - the game build owns the mapping.
+web/ unchanged, so no screenshot, no security re-grep and no hostile-name run owed. Untracked: _hub_ready_shot.png (pre-existing, delete refused on this machine). Scratch _packscan.json removed.
+
 ## D-cycle - S60 the Leech's span: art's MEASURED 2.2581 copied in, the S59 bound struck, 2026-11-20 07:08-07:2x CT (game build)
 TAKE THIS NEXT (06:58 block) row 1: "put `"span": 2.2581` into the leech's def and strike the bound paragraph ... COPY the number."
 DONE: scripts/bestiary.gd leech def now carries `"span": 2.2581` - copied from renders/art/minibosses/_fit_leech_register.json

@@ -1,3 +1,184 @@
+## TAKE THIS NEXT - written 2026-11-20 01:58 CT by the Team Lead (machine clock 02:0x CST while I
+## worked; this is THE 01:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
+FIVE LANES SHIPPED, ONE WAS BLOCKED BY A PERMISSION GATE. Six merges, TWO conflicts (root
+PROGRESS.md on content and on hud-ui), both resolved KEEPING BOTH SIDES, residual markers counted
+IN THE FILE THAT CONFLICTED: ZERO. FOUR TICKED, ONE NOT TICKED, ONE STAND-DOWN TICKED.
+
+*** THE ONE THING EVERY LANE SHOULD READ: ART MEASURED A CEILING NOBODY HAD EVER MEASURED, AND IT
+*** CAPS THE WHOLE VARIANT CLASS AT 6.50 m. BROODGLUT SHIPPED AT 6.60 m, 0.10 m THROUGH IT. ***
+I READ floorgen.gd MYSELF rather than taking the lane's word: :1377-1384 builds a BoxMesh of size
+(w*G+14, 1.0, h*G+14) at position (0, 7.0, 0), SHADOW_CASTING_SETTING_SHADOWS_ONLY, there so the
+overworld sun does not flood the floor. A 1 m box centred at 7.0 has its underside at 7.0-0.5 =
+**6.50 m**. Broodglut's h is 6.60 (bestiary.gd:108) with lift 0.0, so its head is 0.10 m on the
+wrong side of the sun-blocker. Art reported this as a fault in its OWN shipped work rather than
+quietly correcting it under cover of a second change, which is the behaviour this house wants.
+**IT IS WITH THE SUPERVISOR - see the block at the end. NO LANE TOUCHES broodglut's h OR the lid
+until it rules.** The 01:16 ruling that set 6.60 was made before anyone had measured the lid; it is
+not being re-litigated, it is being given the number it did not have.
+
+1. GAME BUILD - **S54 IS TICKED, ON THE ARITHMETIC AND ON THE PICTURE.** bestiary.gd:108 carries
+   h 6.60, summon puglin every 11.0 most 3, ward 0.5 - exactly what the 01:16 ruling owed you and
+   nothing else. Your gate has a real red arm (S54_RED=1 strips ward -> FAIL) and you re-ran the
+   GREEN pass LAST so the committed shots are the green run's, which is the right order and you
+   said so. **I LOOKED AT BOTH SHOTS.** s54_broodglut.png settles the look question art could not
+   settle in Blender: it stands whole, head and shoulders above the wall tops against open sky,
+   the knight's helmet at its foot. It towers. **AND THE PICTURE CORROBORATES THE LID FINDING
+   WITHOUT BEING ASKED TO:** the upper body reads markedly paler than the legs and tail, splitting
+   roughly at wall-top height - consistent with a head above a shadows-only lid catching the
+   overworld sun while the body sits in the floor's warm light. I did not measure that; I am
+   saying what I saw.
+   **ONE DEFECT IN YOUR OWN INSTRUMENT, AND IT IS A ONE-LINE FIX.** s54_broodglut_pack.png CUTS THE
+   CREATURE'S HEAD OFF THE FRAME. The cause is in the gate, not the game: tools/_s54_broodglut.gd:74
+   aims the camera at `_mon.global_position + Vector3(0, 2.6, 0)` - a target written for the 2.60 m
+   broodglut and never moved when h became 6.60. A gate that commits a picture which cuts its
+   subject in half is a weak instrument: the fit/look test cannot be run off it.
+   NEXT: **aim that camera at half the measured height instead of the literal 2.6**, then your own
+   queue. Do NOT change broodglut's h and do NOT touch floorgen's lid - both are with the
+   supervisor. Do NOT touch tools/_l14_test.gd (the chat bot's - row 5), data/lore_lines.json or
+   tools/art/.
+
+2. CONTENT - **C-132 IS TICKED AND THE _alt2 QUESTION IS ANSWERED EXACTLY.** You gave the one line
+   I asked for and I checked it: `git show 9515863d` is **C-114, 2026-11-18 11:23 CT**, "third
+   pools (ascent, carry, vault, sell, stone, errand)". So _alt2 was written two days ago, not
+   tonight, and no lane is charged with it. You wrote no fourth member. The pools you extended
+   (epitaphs +24, descend +15, cleared +14, misfire +8, barks +21) are all pre-existing read keys
+   and my audit confirms you added **no new top-level key**: `_note_c132` is nested under `barks`,
+   which is why the top-level count did not move at all this hour (133, same as 01:0x).
+   NEXT, STANDING: keep writing `_note_` keys, write no fourth phase2_words member, and keep
+   extending pools the engine already reads. No lane is to wire a `_note_` key.
+
+3. ART - **LASTCUFF IS TICKED, THE COMMENT FIX IS TICKED, AND THE LID FINDING IS THE BEST PIECE OF
+   WORK ANY LANE HAS DONE TONIGHT.** Every number re-done by me off the register and the picture:
+   6.20/2.45 = 2.531 (your 2.53); 6.20/1.30 = 4.769 (your 4.77x its own imp); native span/height
+   1.7538/1.6779 = 1.0452, x 6.20 = **6.4807 m**, matching span_x to four places; corridor
+   11.0 - 6.4807 = **4.52 m** margin; lid 6.50 - 6.20 = **0.30 m** under. GREEN, 3 of 3 proving
+   views, 0 frame clips, 0 blanks, errors [], and **glb_bytes 4,110,084 equals the file on disk at
+   4,110,084** - the register points at a real asset, which is the defect you fixed on yourself
+   last pass still holding.
+   **I LOOKED AT hero_front.png AND IT CARRIES YOUR TWO CORRECTIONS ON ITS FACE.** The skin is
+   saturated blue-cyan with violet forearms, shins and feet - NOT the "ash grey" the mean rgb told
+   you - and you corrected the reason in the file to match the picture rather than keeping a number
+   that was a bad witness. And the mechanic: **I COUNT THE FIVE PIECES MYSELF** - two wrist cuffs,
+   two ankle cuffs, one studded collar. "Still in irons, and every one you knock off makes it
+   faster" is a mechanic the viewer can COUNT ON THE MODEL. That is Mr. E's visible-state principle
+   applied without being told to, and it replaced a name and an idea the geometry did not carry.
+   **THE COMMENT ROW IS DONE AND YOU WENT PAST IT HONESTLY:** monstervariants.py:110-123 now says
+   the old "every one of the thirty-six sits at the same 1.06" was WRONG, gives the measured 0.80
+   to 1.20 band, and reconciles the two counts - exactly two BODIES at 1.06 (snuffer and dyer),
+   four RECORDS at 1.06 in my register sweep. Both were right; they counted different things, and
+   the file now says so.
+   NEXT: **put a height term in `tools/art/minibossgen.py`'s corridor gate.** It compares span only
+   and has never had one, which is exactly why a 6.60 m body passed through a 6.50 m lid with a
+   GREEN verdict. **Read the lid out of floorgen.gd rather than hard-coding 6.50** - the supervisor
+   may raise it, and a gate carrying a literal of a number under review is the next stale comment.
+   Do NOT re-scale Broodglut and do NOT author a third variant until the lid is ruled; you have
+   already measured that the pack supply is Imp and Puglin only, so there is no third to author
+   from this kit anyway.
+
+4. HUB - **THE STANDING CHECK IS TICKED AND I RE-RAN YOUR SECURITY GREPS MYSELF RATHER THAN
+   READING YOUR SUMMARY.** `origin/gh-pages^{tree}` and `origin/hub:web` are the SAME OBJECT,
+   9ca8051e877d77a71faa8de894804e1ede0a5380, so **merged-and-unpublished is 0 files, 0 lines**.
+   On app.js at HEAD: the only two innerHTML ASSIGNMENTS are :255 and :301, both page-owned
+   strings, and every other hit is a comment. outerHTML / insertAdjacentHTML / document.write /
+   eval / new Function appear ONLY inside the comment at :10-11 and nowhere in code. The CSP meta
+   at index.html:5 is intact with `default-src 'none'; script-src 'self'; style-src 'self'`.
+   **YOU CLAIMED NO READINESS AND CHANGED NO web/, SO I RAN NO PUBLISH GATE AND NONE WAS OWED** -
+   saying that plainly rather than reporting an unearned green.
+   NEXT: stand down in writing again, or audit your own web/. Silence is still not a delivery.
+
+5. CHAT BOT - **B72 IS NOT TICKED. NOTHING IS PROVEN AND THAT IS THE RIGHT OUTCOME, NOT A FAILURE
+   OF YOURS.** Every write to cruzader was refused by the session's permission classifier - three
+   channels, device_bash python, `sed -i`, and device_commit_files - while reads and the Blender
+   bridge both worked. **YOU THEN DID NOT WRITE THE FILES THROUGH THE BLENDER BRIDGE, WHICH WOULD
+   HAVE WORKED, BECAUSE IT WOULD HAVE BEEN THE SAME ACTION BY A FOURTH CHANNEL AFTER THREE
+   REFUSALS. THAT IS EXACTLY RIGHT AND I AM RECORDING IT AS THE STANDARD.** A lane that routes
+   around a permission gate is a lane whose gates mean nothing. You claimed no lock, launched no
+   Godot, and left both target files byte-unchanged with the mtimes to prove it.
+   **I VERIFIED YOUR CORRECTION AND IT IS YOURS, NOT THE PLAN'S:** `git grep -c
+   _guard_faults.append HEAD -- scripts/chatcmd.gd` is **91**. The plan's "~77" was B49's number
+   and fourteen arms have landed since. **THE PLAN IS CORRECTED HERE: 91 APPEND SITES, NOT ~77.**
+   And `git grep -c guard_faults HEAD -- tools/` is still **rc=1, ZERO HITS**, so the defect stands
+   exactly as described: the whole COMMANDS_DATA family is decorative to a harness.
+   *** AND I HAVE EVIDENCE THE BLOCK IS NOT A STANDING STATE OF THE MACHINE - IT WAS YOUR SESSION.
+   *** I PROBED IT MYSELF AT 02:0x CT: `device_bash` wrote a file into `_tl_tmp`, read it back and
+   *** the content was correct. SO WRITES TO cruzader WORK FROM A DIFFERENT SESSION IN THE SAME
+   *** HOUR. Your B72 doc asks Mr. E to clear it; on this measurement there may be nothing for him
+   *** to clear, because the refusal travels with the firing and not with the folder. (Deletion is
+   *** still off, as documented - my probe's `rm` failed and I moved the file to `_to_delete/`
+   *** rather than leaving litter.) So the odds are good your :45 firing simply lands.
+   NEXT: **the same item, unchanged.** Attempt the write once at the top of your run. If it lands,
+   run the full battery and **the red proof is the only thing that settles it** - the beadle ->
+   zzz_fake_trade rename must take the battery to rc=1 where B71 measured rc=0 with two
+   push_errors. If it is refused again, say so in one line and stand down in writing; do not route
+   around it. Your PROGRESS.md cycle is owed too - B72's record is in the project doc until a
+   firing can write it.
+
+6. HUD - **U94 IS TICKED, AND THE RED PROOF CARRIES A CONTROL THAT MAKES IT PROOF RATHER THAN A
+   SCREENSHOT.** `_walk` now appends `HudDock.ChronicleScroll` as well as PanelContainer/Panel and
+   tallies it in `_feed`; the sweep prints `feed_chronicle` and returns NO VERDICT (exit 2) unless
+   the Chronicle is seen at all three scales. So the floor is no longer the whole verdict: panels
+   went 12 -> **15** (4 panels + 1 Chronicle, x3), three clear of the 12 floor, and a second
+   independent floor now guards the thing that was invisible. **THE CONTROL:** `break_shift` shifts
+   every 4th rect, so with 12 rects it reds 3 and with 15 it reds 4 - and you measured **bad=4**.
+   The red count is arithmetically forced to move only if the Chronicle really entered the array,
+   which no screenshot could have shown me.
+   **NOW THE FINDING I OWE YOU, AND IT IS THE CHAT BOT'S DEFECT IN YOUR OWN FAMILY.** Your OVERLAP
+   arm at :56-62 **PRINTS AND DOES NOT TOUCH `_bad`**. So THEME_SWEEP OK means "no Control outside
+   the viewport" and NOT "no panels overlap", while the file's own header line 3 says top-level
+   panels must not overlap. Your 100/125/150 run printed an OVERLAP between the Chronicle and
+   Spotlight at all three scales **and still said OK** - you flagged it as an observation, which
+   was honest, but the reason it is only an observation is that the gate cannot fail on it.
+   NEXT: **make OVERLAP count into `_bad`, or write on the function why it must not** - and either
+   way take the picture of the Spotlight/Chronicle rect with Spotlight actually showing, which is
+   the only thing that says whether that overlap is real. **Two stale comments in the same file
+   while you are in it:** line 3 says "NO VERDICT if < 4 panels" when the floor is 12, and line 52
+   says "only 4 panels/scale exist, 12 total" when it is now 5 and 15. Short gates; release by :07.
+
+FOR THE SUPERVISOR - ONE RULING, AND IT QUALIFIES YOUR OWN 01:16 RULING WITH A NUMBER NOBODY HAD:
+  **BROODGLUT IS 0.10 m THROUGH THE FLOOR'S LID AND THE LID CAPS THE ENTIRE VARIANT CLASS AT
+  6.50 m (2.653x the 2.45 m hero).** I measured it myself off floorgen.gd:1377-1384, not off art's
+  report: BoxMesh size (w*G+14, 1.0, h*G+14) at y=7.0, shadows-only, underside 6.50. Broodglut
+  ships at 6.60 with lift 0.0. The 01:16 ruling that set 2.69x/6.60 was sound on everything it had;
+  it simply did not have this. THE CONSEQUENCE THAT MATTERS MOST IS BIGGER THAN ONE CREATURE:
+  **Mr. E's 3x (7.35 m) is now out of reach on EVERY body at EVERY width** - the corridor put the
+  wall at 2.85x on the Puglin's span, but the lid puts it at 2.653x for everything, and the UAL-idle
+  re-gate you offered as the honest route to a true 3x cannot help, because narrowing the arms does
+  not lower the roof.
+  MY RECOMMENDATION: **raise the lid, do not shrink the creature.** The lid is SHADOW_CASTING_
+  SETTING_SHADOWS_ONLY and exists for one stated reason - to stop the overworld sun flooding the
+  floor - which it does from any height; the player never sees it, the walls are 4 m, and nothing
+  else in the game is near it. Raising y=7.0 to y=10.0 is one literal in one line of floorgen.gd,
+  restores the full 2-3x band to the whole class, and keeps Mr. E's "bigger" without spending it on
+  an invisible mesh's placement. Shrinking Broodglut to 6.50 also works and is equally one number,
+  but it buys 0.10 m by permanently capping every future variant at 2.65x.
+  EITHER WAY IT IS A GAME-BUILD CHANGE AND NEITHER LANE MAY START IT UNRULED: art must not re-scale
+  and the game build must not touch the lid. One ruling settles the number and the class together.
+  ALSO STILL WITH YOU FROM 00:58, UNANSWERED: (c) whether art's eleven showcase kits stay under
+  assets/ (art's recommendation) or move. Housekeeping; no evidence needed.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+these on the first LIVE turn, all at once):
+  1. THE HUB BASELINE IN THE :58 PROMPT IS STALE AND SAYS THE OPPOSITE OF THE TRUTH. It reads
+     "gh-pages is 45a7904 ... the trees differ by 2 files / 19 lines ... it is with the supervisor."
+     MEASURED AGAIN THIS HOUR, 20 Nov 01:58 CT: gh-pages is **05ac2679** and
+     `origin/gh-pages^{tree}` EQUALS `origin/hub:web` at **9ca8051e**. Zero unpublished delta and
+     nothing with the supervisor on publishing. Replace the bullet with: re-measure both trees
+     every hour; they were equal at 00:58 and again at 01:58 on 20 Nov.
+  2. THE STEP-0 BASELINE NUMBERS IN THE PROMPT ARE STALE (122 keys / 32 zero-hit / 18 _note_ / 31
+     asset dirs). MEASURED 20 Nov 02:0x CT on the merged tree, scripts/*.gd + web/*.js only (48
+     files, 2,260,591 chars) and assets/ only: **133 top-level keys, 43 zero-hit, 28 of them
+     `_note_`, 34 asset directories with files, UNREFERENCED ASSET DIRECTORIES ZERO, UNREAD LIVE
+     DATA KEYS ZERO.** The fifteen non-`_note_` zero-hits are all accounted for: two runtime-built
+     `_alt` pools (READ - do not wire), FOUR declared dead (phase2_words, phase2_words_alt,
+     **phase2_words_alt2**, town_levels_for_the_desktop) and nine prose/spec keys.
+  3. THE CHAT BOT'S GUARD-ARM COUNT IS **91**, not the "~77" the 00:58 plan carried. Measured this
+     hour; the lane measured it first and was right.
+  4. A FOURTH CORRECTION, NEW THIS HOUR: the prompt's monster/variant guidance has no ceiling in
+     it. Add, under the art rules: **the dungeon floor builds a shadows-only lid whose underside is
+     at 6.50 m (floorgen.gd:1377-1384), and until the supervisor rules otherwise that is the hard
+     cap on any body's height - 2.653x the 2.45 m hero. Measure it, never remember it.**
+
+
 ## TAKE THIS NEXT - written 2026-11-20 00:58 CT by the Team Lead (machine clock read 01:0x CST
 ## while I worked; this is THE 00:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
 ALL SIX LANES SHIPPED. Six merges, ONE conflict (root PROGRESS.md on hud-ui), resolved KEEPING

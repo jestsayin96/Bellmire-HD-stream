@@ -13052,6 +13052,72 @@ after the discriminator ran and a green on other bytes is not a green on these: 
 **3ca9d699** - parse rc 0 zero ERROR, L14_TEST OK (24 checks) with 0 guard arms fired,
 TWITCH_PARSE OK (8 checks), COMMANDS_DOC OK wrote 31 with docs/COMMANDS.md edff7faa either side,
 data/commands.json dbeb5517.
+
+## B83 - ART TICKED A 37th MINIBOSS BODY THIS HOUR AND MY PUBLISHED 36 IS STILL RIGHT. I MEASURED
+## ALL THREE AUTHORITIES INSTEAD OF TRUSTING ANY ONE OF THEM.
+Nothing was owed to this lane (team lead, 10:58: "nothing is owed - stand down in writing, or keep
+auditing your own shipped chatcmd.gd guard family"). I kept auditing. The 10:58 plan ticks art's
+`dauber` as the 37th distinct miniboss body. `miniboss`.what and `miniboss`.short both publish
+"The 36 elites". That is a number MY file publishes about another lane's content, so I went and
+counted, and the count stands:
+  - content `data/lore_lines.json` `miniboss_feed.by_key`: **36 rows**, no `dauber`.
+  - engine `Delve.MB_NAME` in `scripts/delve.gd` (merged): **36 keys**, no `dauber`.
+  - art `renders/art/minibosses/_report.json`: carries `dauber` - built, and NOT wired into either.
+So the published 36 is true about what the dungeon actually stands up, and art's roster running one
+ahead is not a lie in my doc. **MINIBOSS COUNT gates published-vs-FEED, not published-vs-ART**, and
+that is the right authority: a body nobody spawns is not an elite that holds a chamber.
+THE CLOSURE ARGUMENT, CASE BY CASE, because "it is fine today" is not an answer:
+  (1) MB_NAME **and** a feed row gain `dauber` -> feed 37 vs published 36 -> `MINIBOSS COUNT` fires.
+  (2) MB_NAME only -> an MB_NAME key no feed row carries -> `MINIBOSS GHOST` fires.
+  (3) a feed row only -> feed 37 vs published 36 -> `MINIBOSS COUNT` **and** `MINIBOSS UNNAMED`.
+  (4) neither, the body sits unwired -> nothing fires, and nothing should. That is today.
+The published count cannot go stale in any direction without an arm firing.
+WHAT I PROVED WITH RED ARMS AND WHAT I ONLY READ, SAID APART: cases (2) and (3) need
+`scripts/delve.gd` or `data/lore_lines.json` - other lanes' files, which I do not edit, so they are
+READ IN THE CODE AND NOT TRIGGERED. I say that rather than imply I ran them. Case (1)'s comparison
+is the one my own file can move, and I moved it three ways, each isolating exactly ONE arm:
+  A  what+short -> "The 37 elites"      -> L14_TEST FAIL 3, 1 fired: ["MINIBOSS COUNT"]   (37 vs 36)
+  B  short only -> "The 37 elites"      -> L14_TEST FAIL 1, 1 fired: ["MINIBOSS FIELDS"]  (what 36,
+     short 37; COUNT stays silent because it reads `what`, which was still right - that is how I
+     know FIELDS is load-bearing on its own and not riding COUNT)
+  C  "36 elites" -> "36 wardens" both   -> L14_TEST FAIL 3, 1 fired: ["MINIBOSS ANCHOR"]
+data/commands.json restored byte-identical after each (dbeb5517, match=True), green on re-run.
+
+TWO WHOLE-FAMILY AUDITS CAME BACK CLEAN. Recorded so nobody spends an hour re-running them:
+  - **TAG vs SHOUT, 91/91 AGREE.** Every arm's appended tag is byte-identical to the tag inside its
+    own `push_error` AND its `printerr` (format patterns normalised). 0 disagreements, 0 arms
+    missing a shout. The harness reading (`guard_faults()`) and the log reading can never name
+    different faults. This is the axis B82 left open: B82 made the TAGS distinct, not the words.
+  - **182 FORMAT STRINGS, 0 ARITY FAULTS.** Placeholder count vs `%` argument arity across all 91
+    arms x 2 shouts, 0 non-literal format strings. A dormant `%` mismatch garbles the one
+    diagnostic an operator ever sees - the hour a guard finally fires. There are none.
+
+THE ONE REAL DEFECT I FOUND IS A COMMENT IN MY OWN FILE, AND IT COST ME A MEASUREMENT.
+B40's block above the PRICE loop still says: "WHAT I AM STILL NOT CLAIMING: `wear`.cost publishes a
+RANGE (30-420)". Both halves are stale. `wear`.cost publishes **30-520** now, and the range IS
+claimed - `WEAR SPAN LOW` and `WEAR SPAN HIGH` read the cheapest and dearest accessory/cosmetic row
+out of data/items.json and check both ends. I went looking for an unguarded number because that
+comment sent me, which is the measured cost of leaving it. Corrected in B82's convention: B40's
+words are left standing and a dated note under them says what changed, so no earlier write-up goes
+stale. Comment bytes only - no arm, no tag, no behaviour touched.
+B40's WALK ITSELF STILL HOLDS AT 31 COMMANDS, and I re-did it rather than assume: every digit
+published in every `what`, `short`, `cost`, `args` and `example` across all 31 (the set was 26 when
+B40 wrote that line) - forge 60/160/420/1100, armoury 50/150/400/1000, brew 35 and 40-480, oil 12,
+wear 30-520, dye 25, reroll 120, respec 200, look 10, miniboss 36 - and every one sits under an
+existing arm. **No published number in this file is unwatched.**
+
+BATTERY ON THE EXACT COMMITTED BYTES, chatcmd.gd **f5de3da9**: parse `--quit-after 300` rc 0 with
+ZERO ERROR lines; L14_TEST OK (24 checks), 0 guard arms fired; TWITCH_PARSE OK (8 checks);
+COMMANDS_DOC OK wrote 31 commands with docs/COMMANDS.md edff7faa before and after - a true no-op;
+`_b2_ask.gd` absent, no `.b2_*` logs. The L14 segment carries one `ERROR: 2 resources still in use
+at exit` - I CHECKED THE BASELINE LOG RATHER THAN ASSUMING IT WAS MINE: the same line is in the
+pre-edit run, so it is pre-existing and a comment-only change could not have caused it.
+TRACKED STATE: data/commands.json dbeb5517 and docs/COMMANDS.md edff7faa UNCHANGED (a comment is
+not published). scripts/chatcmd.gd 3ca9d699 -> f5de3da9. Overwrite went through the Blender bridge
+first try per the 08:58 ruling. Scratch lived outside the repo and in the VM's own tmp; no
+_to_delete/ pile this hour.
+NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched, reply contract unchanged.
+No Twitch test this run, 0 bits, no account used.
 ================================================================================
 THE 10:34 CT HOUR, 20 NOV 2026 - ART LANE. THE DAUBER (37th miniboss), AND THE
 LICENCE GAP THE TEAM LEAD HANDED BACK.

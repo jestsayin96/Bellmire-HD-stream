@@ -163,6 +163,163 @@
    "ok": true,
    "glb": "assets/monsters/minibosses/broodglut.glb",
    "glb_bytes": 3124424
+  },
+  "lastcuff": {
+   "title": "Lastcuff",
+   "regular": "imp",
+   "regular_h": 1.3,
+   "height": 6.2,
+   "scale_vs_regular": 4.769,
+   "creature_h": 6.2,
+   "hero_h": 2.45,
+   "ratio": 2.53,
+   "pair_w": 8.34,
+   "span_x": 6.4807,
+   "span_y": 2.4987,
+   "frame_w": 10.181,
+   "frame_h": 6.966,
+   "frame_w_standard": 5.6,
+   "frame_overridden": true,
+   "frame_driver": "height",
+   "frame_need_w_wide": 9.01,
+   "frame_need_w_tall": 10.181,
+   "fits_standard_cell": false,
+   "corridor_clear": 11.0,
+   "room_locked": false,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 41357,
+      "vis": 41357,
+      "delta": 43064,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 13446,
+      "vis": 13446,
+      "delta": 13814,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27747,
+      "vis": 27747,
+      "delta": 28795,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 11656,
+      "vis": 11656,
+      "delta": 12065,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 41177,
+      "vis": 41177,
+      "delta": 42906,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 13552,
+      "vis": 13552,
+      "delta": 13896,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3,
+   "blanks": [],
+   "frame_clips": {},
+   "errors": [],
+   "blind_views": [],
+   "tris": 15232,
+   "bones": 55,
+   "meshes": [
+    "Imp_Body",
+    "Imp_Chains",
+    "Imp_Mace",
+    "Imp_Shorts",
+    "Imp_SpikedCollar"
+   ],
+   "native_h": 1.67786,
+   "stray_dropped": [
+    {
+     "name": "Icosphere",
+     "hidden_render": false,
+     "hidden_view": false,
+     "verts": 42
+    }
+   ],
+   "palette": "T_Imp_BaseColor_3.png",
+   "palette_report": {
+    "swapped": [
+     "MI_Imp/Image Texture.001: T_Imp_BaseColor_1 -> T_Imp_BaseColor_3.png",
+     "MI_Imp.001/Image Texture.001: T_Imp_BaseColor_1 -> T_Imp_BaseColor_3.png"
+    ],
+    "resized": [
+     "T_Imp_Emissive",
+     "T_Imp_ORM",
+     "T_Imp_Normal"
+    ],
+    "mean_before": [
+     0.3937,
+     0.213,
+     0.2021
+    ],
+    "mean_after": [
+     0.3897,
+     0.3837,
+     0.4154
+    ],
+    "palette_px": [
+     1024,
+     1024
+    ]
+   },
+   "ear_turn": {
+    "moved": 0
+   },
+   "theme": "cells",
+   "idea": "IT IS STILL IN IRONS, AND EVERY ONE YOU KNOCK OFF MAKES IT FASTER - five shackles, four cuffs and a collar; hurt it and one goes, and the thing that was lumbering is not lumbering any more. Kill it early or race something you have been unlocking",
+   "line": "The irons in here are off something.",
+   "note": "THE STATE IS ON THE MODEL AND THAT IS WHY THIS IDEA WAS TAKEN: five removable pieces the pack author already modelled, so a viewer can SEE how far gone the fight is without reading a stat - Mr. E's binding principle applied to a mechanic rather than to a costume. Nothing in the thirty-six ramps speed, and none of them carries its own progress as geometry. ADJACENCY DECLARED: Shacklemaw (gaoler) also fights in chains, but his are a hook he USES on you and these are irons used ON IT, so the two read as jailer and escapee rather than as one idea twice. WIRING NOTE FOR THE GAME BUILD, NOT A REQUEST: the shackles are five named meshes in the shipped glb (Imp_Chains carries the four cuffs, Imp_SpikedCollar the fifth); hiding them one at a time is how the mechanic would show, and if that is not wanted the idea still works unseen.",
+   "prove_red": false,
+   "ok": true,
+   "glb": "assets/monsters/minibosses/lastcuff.glb",
+   "glb_bytes": 4110084
   }
  },
  "verdict": "GREEN",

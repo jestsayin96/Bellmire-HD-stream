@@ -593,3 +593,15 @@ IDLE 2026-11-19T20:54:05-06:00 - HUD U88 green re-capture: U88_WORN OK rc=0, sho
 RUNNING 2026-11-19T21:07:55-06:00 (game build: TAKE THIS NEXT item, claim 21:07, cap 21:32, expected finish 21:32)
 
 IDLE 2026-11-19T21:14:48-06:00 - game build S50: System 8 row (a) - 5 Quaternius shields imported to assets/gear/shields + licence note, S50_LOAD OK n=5, S50_SHOT OK; gear.gd NOT wired; battery green. Claim 21:07:55, cap 21:32:55, declared 21:32. Godot EMPTY. (game build)
+
+RUNNING 2026-11-19T21:47:40-06:00 (chat bot B68: the owed B67 engine gates - bare parse --quit-after 300, _l14_test, _twitch_parse, and _commands_doc as the REAL generator against B67's emulated docs/COMMANDS.md. claim 21:47, claim+25 cap = 22:12, BUT THE HUD IS AT :52 AND I COMPUTED IT FIRST: declared finish 21:51, INSIDE :52. Any remainder splits to my next firing. Last lock line = IDLE 2026-11-19T21:14:48-06:00 game build, tasklist shows ZERO Godot.)
+
+IDLE 2026-11-19T21:49:10-06:00 - chat bot B68: all four owed B67 gates GREEN on the merged tree (main 07e4c42b, fast-forward) - bare parse rc=0 with ZERO error lines, L14_TEST OK (22), TWITCH_PARSE OK (8), and the REAL tools/_commands_doc.gd printed "COMMANDS_DOC OK wrote 29 commands" and left docs/COMMANDS.md BYTE-IDENTICAL (md5 6b26fe2e, 6215 bytes before and after) - B67's python emulation stands. Godot EMPTY (tasklist checked). Claim 21:47:40, cap 22:12, declared finish 21:51, released 21:49:10 - early, NO crossing into the HUD :52. No message posted, no cheer, 0 bits, no redemption, no sub. (chat bot)
+
+RUNNING 2026-11-19T21:53:37-06:00 (HUD U90 L74 feed-under-load gate: bare parse + one windowed 3-scale capture ~40s; claim 21:53, claim+15 cap 22:08, declared finish 22:01). Last lock line = IDLE 2026-11-19T21:49:10-06:00 chat bot B68, tasklist shows ZERO Godot.
+
+RUNNING 2026-11-19T21:55:23-06:00 (HUD U90 relaunch: green + red-proof runs of the feed gate, ~2 min; own claim 21:53 still live, refreshed; cap 22:08, declared finish 22:01).
+
+IDLE 2026-11-19T21:57:25-06:00 - HUD U90: feed-under-load gate GREEN (FEED_LOAD OK rc=0) and RED-PROVEN (break arg -> rc=1, 4967 fails); bare parse rc=0. Claim 21:53:37, cap 22:08, declared 22:01, released early, no crossing. Godot EMPTY. (HUD)
+
+RUNNING 2026-11-19T22:07:50-06:00 (game build S-next: fetch/merge, read TAKE THIS NEXT, then item work; claim 22:07:50, claim+25 cap 22:32:50, declared finish 22:32). Last lock line = IDLE 2026-11-19T21:57:25-06:00 HUD U90, tasklist shows ZERO Godot.

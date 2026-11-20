@@ -3821,3 +3821,26 @@ Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, relea
   DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
 - Lock: claim 21:07:55, claim+25 = 21:32:55 computed first, declared 21:32. Staged only the S50 files, PROGRESS, ASSET_SOURCES, RUN_LOCK;
   the ~50 modified renders and ~1,400 untracked web/icons .import files in R are not this session's and are NOT staged.
+
+## D-cycle - S51: MR. E'S MINIBOSS RENAME, PART 1, ENGINE HALF - THE 36 CHARACTER NAMES ARE WHAT A VIEWER READS; THE TRADE KEYS DID NOT MOVE. 2026-11-19T22:1x-06:00 (game build)
+- Item: TAKE THIS NEXT 21:58 block, row 1 NEXT - "wire the 36 new names ... off the table in the supervisor's doc" (claude/sup-nov19-2150-...).
+  CORRECTION TO THE ROW, NOT A REFUSAL: the minibosses are NOT bestiary.gd entries. Bestiary holds the ordinary creatures; a miniboss is a theme
+  creature def that delve._setpiece_miniboss renames off its mb_key (`def["name"] = mb_key.capitalize()`, delve.gd ~427). That is where the name lives,
+  so that is where it changed. bestiary.gd untouched; tools/art/minibosses.py untouched (art's); nothing re-fit.
+- DONE (scripts/delve.gd, backup delve.gd.bak_s51): `const MB_NAME` - all 36 rows of the directive's table, trade key -> new name, + `miniboss_name(key)`.
+  The KEY stays the trade word ON PURPOSE: it is art's file name, MB_FIT's key, THEME_MINIBOSS_MORE's entry and content's miniboss_feed.by_key key -
+  renaming it would break the body lookup and the line gate at once. Only the nameplate and the "holds this chamber alone" line change, and a proper
+  name takes NO "The" ("Ordrik holds this chamber alone"). Mr. E has final say: a name change is ONE line in MB_NAME.
+- miniboss_lines now reads by_key[trade key] first, then by_key[new name lower-cased], so the gate holds WHICHEVER way content keys its C-130 rename
+  (the plan says "rename ... miniboss_feed keys"). Content: either keying works; please say which you chose.
+- strickler.glb is on disk (MB_FIT 1.04) but the directive's table has NO row for it - it falls back to "Strickler" (capitalised trade word, with "The").
+  It is in no THEME_MINIBOSS_MORE row so it never reaches a floor today. Flagged for the supervisor/Mr. E: it needs a name if it ever ships.
+  And drizzler (#23 Murkspit) has a name but no body on disk - inert until art ships one.
+- Gates (JESTS_NO_TWITCH=1 throughout): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | S51_NAMES OK 149 checks (36 names exact, unique, no "The", no trade
+  word; 35 bodies still resolve by trade key, 35 keys still read arrive lines) | MBFEED_TEST OK 82 checks (updated to the new contract: the elite
+  carries Delve.miniboss_name, hold line "Dregsallow holds this chamber alone", no "The") | TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2128
+  | TOWNWALK in_solid=0/18421 raid_in_solid=0/5308 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- LOOKED AT IT: tools/_s51_shot.gd (copy of _s36_order.gd to renders/cycles/s51/ + a name check), windowed 1080p: `S51_SHOT OK (6 checks)`.
+  beadle_1standing.png - the nameplate over the Beadle body reads "Ordrik"; feed "Ordrik holds this chamber alone"; the order mechanic unchanged
+  (called hero swings 8, other two hold 0/0).
+- Lock: claim 22:07:50, claim+25 = 22:32:50 computed first, declared 22:32. Staged only the S51 files, PROGRESS, RUN_LOCK.

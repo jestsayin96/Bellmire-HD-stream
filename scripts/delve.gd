@@ -397,6 +397,23 @@ const MB_FIT := {
 	"beadle": 1.2,   # S35: art's _fit_beadle_register.json beadle.ratio (MINIBOSSES.md 33), copied not re-derived
 	"fuller": 1.09,   # S48: art's _fit_report.json pairs.fuller.ratio (35th, lead's 17:58 tick), copied not re-derived
 	"stackman": 1.16}   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
+## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
+## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
+## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
+## content's miniboss_feed.by_key key - so nothing that finds a body or a line moves. Only what
+## a viewer READS changes: the nameplate, the "holds this chamber alone" line. A proper name
+## takes no "The". These are PROPOSALS and Mr. E has final say: change a name HERE, one place.
+## A key missing from this table (strickler has no row in the directive) falls back to the old
+## capitalised trade word, so an unnamed body still stands up rather than going nameless.
+const MB_NAME := {
+	"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "Shacklemaw", "snuffer": "Duskhollow", "sexton": "Gravrik", "porter": "Drudgewall",
+	"tallyman": "Velmok", "cook": "Blisterhand", "sluicekeeper": "Rothenwell", "sower": "Thorncast", "snarer": "Griplash", "stoker": "Cindrak",
+	"bellman": "Tolburn", "boiler": "Scaldmere", "jointer": "Halvrek", "quartermaster": "Wardgrim", "loader": "Millstone", "hurdleman": "Bramblejaw",
+	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "drizzler": "Murkspit", "dyer": "Venomshade",
+	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw", "fenman": "Bogwarden",
+	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile"}
+static func miniboss_name(key: String) -> String:
+	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []
 static func miniboss_model(key: String) -> String:
 	for nm: String in [key + "_chibi", key]:
@@ -424,7 +441,7 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 	var mb_key := String(sp.get("mb_key", ""))
 	if mb_key != "" and not miniboss_lines(mb_key, "arrive").is_empty():
 		def = def.duplicate()
-		def["name"] = mb_key.capitalize()
+		def["name"] = miniboss_name(mb_key)   # S51: the character name, not the trade
 		# D96: the miniboss stands up in ITS OWN BODY. The art lane's model replaces the
 		# theme creature's mesh; scale is art's measured ratio to the posed hero, not ours.
 		var mb_path := miniboss_model(mb_key)
@@ -461,7 +478,8 @@ func _setpiece_miniboss(sp: Dictionary, _at: Vector3) -> void:
 		m.set_meta("mb_key", mb_key)
 		_say(_miniboss_say(mb_key, "arrive"))
 		Delve.setpieces_fired["miniboss_feed_arrive"] = int(Delve.setpieces_fired.get("miniboss_feed_arrive", 0)) + 1
-		nm = "The " + nm
+		if not MB_NAME.has(mb_key):
+			nm = "The " + nm   # S51: only a leftover trade word takes "The"; a name never does
 	_say("%s holds this chamber alone - a mini-boss stands between you and the way deeper." % nm)
 	Sfx.play("roar", -2.0)
 	# the atk bump rides on the meta the hit code already reads nowhere, so set
@@ -3744,7 +3762,12 @@ static func intro_line(uniq: bool, id: String, rng: RandomNumberGenerator = null
 static func miniboss_lines(key: String, phase: String) -> Array:
 	var mf: Dictionary = lore().get("miniboss_feed", {})
 	var bk: Dictionary = mf.get("by_key", {})
-	return (bk.get(key, {}) as Dictionary).get(phase, [])
+	# S51: content is renaming the feed to the new names; read the trade key first, then the
+	# new name's key (lower-case), so the gate holds whichever way content keys its rows.
+	var row: Dictionary = bk.get(key, {})
+	if row.is_empty() and MB_NAME.has(key):
+		row = bk.get(String(MB_NAME[key]).to_lower(), {})
+	return row.get(phase, [])
 
 ## one line for the event, {name} filled with an alive delver (lines that need a
 ## hero and have none are skipped in favour of ones that do not)

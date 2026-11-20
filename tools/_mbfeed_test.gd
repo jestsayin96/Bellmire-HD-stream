@@ -83,8 +83,12 @@ func _process(_dt: float) -> bool:
 	var arrive: Array = Delve.miniboss_lines(key, "arrive")
 	_ok(not feed.is_empty() and arrive.has(feed[0]), "first feed line is an arrive line from the pool: %s" % [feed[0] if not feed.is_empty() else "<none>"])
 	var spawned: Monster = (dh.monsters as Array).back()
-	_ok(String(spawned.def.get("name", "")) == key.capitalize(), "the elite carries the miniboss's name (%s)" % spawned.def.get("name", ""))
-	_ok(feed.size() >= 2 and String(feed[1]).begins_with("The " + key.capitalize() + " holds"), "hold line names it: %s" % [feed[1] if feed.size() > 1 else "<none>"])
+	# S51: the elite carries its CHARACTER name (Delve.MB_NAME), never the trade word, and a name takes no "The"
+	var want := Delve.miniboss_name(key)
+	_ok(Delve.MB_NAME.has(key) and want != key.capitalize(), "the key has a character name (%s -> %s)" % [key, want])
+	_ok(String(spawned.def.get("name", "")) == want, "the elite carries the miniboss's name (%s)" % spawned.def.get("name", ""))
+	_ok(feed.size() >= 2 and String(feed[1]).begins_with(want + " holds"), "hold line names it: %s" % [feed[1] if feed.size() > 1 else "<none>"])
+	_ok(feed.size() >= 2 and not String(feed[1]).begins_with("The "), "a name takes no The: %s" % [feed[1] if feed.size() > 1 else "<none>"])
 	var n0 := feed.size()
 	spawned.hp = 0
 	spawned.state = Monster.S.DEAD

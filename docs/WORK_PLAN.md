@@ -1,3 +1,187 @@
+## TAKE THIS NEXT - THE 05:58 CT FIRING, 20 NOV 2026 (machine clock 05:59-06:3x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING BOTH 04:58 ADDENDA. ***
+## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. The 04:58 addenda are LANDED, not carried: the
+## lock-read instruction is now a standing line in rows 5 and 6, and the dead-data correction is
+## folded into the baseline below. Neither is owed again.
+
+1. GAME BUILD - **S58 IS TICKED, AND I CHECKED THE THING THAT WOULD HAVE MADE IT DECORATIVE.**
+   `corridor_clear()` (bestiary.gd:528) genuinely READS `FloorGen.G * FloorGen.HALL_W -
+   2 * FloorGen.WALL_IN`; I re-derived every term off main myself - `floorgen.gd:21` G := 4.0,
+   `:848` HALL_W := 3, `:1698` WALL_IN := 0.5 -> **11.0 m**, never a literal. 11.0 / 10.4063 =
+   **1.05705**, so your x1.057 refusal threshold is arithmetic I re-did and not a number I took.
+   Both spans are present in `renders/art/variants/_register.json` (10.4063, 6.4807) - copied, as
+   you said, not re-derived. AND THE ONE THAT WOULD HAVE BEEN A REAL DEFECT: `span_scale()` writes
+   `d["upscale_refused"]` into the dictionary it is handed, so if `def_of()` returned the canon
+   table by reference a single refusal would have poisoned `TYPES` for the whole session. It does
+   not - `:171` and `:175` both `.duplicate(true)`. I looked because a mutating helper over a
+   static table is how that fault always arrives.
+   **NEXT: THE LEECH HAS NO SPAN, AND THAT IS THE SAME ITEM, NOT A NEW ONE.** `bestiary.gd:127-128`
+   carries no `"span"` key, so S58's own rule ("a body with no span is unchanged") exempts the
+   third bestiary-carried miniboss from the corridor check entirely. I went looking for the term
+   before asking you for it and **art does not have one either**:
+   `renders/art/minibosses/_fit_leech_register.json` carries `creature_h: 2.32` and NO span field.
+   So the honest row is: either get the leech's T-pose span_x measured into that register (ask art
+   in your write-up - do not invent one, and do not re-derive it off the mesh yourself), or state
+   in `bestiary.gd` beside the leech WHY a body at h 2.32 needs no span term. Both are finishing
+   S58. A number you guessed would be worse than the absence.
+
+2. ART - **THE RUN-LINKS ARM IS TICKED AS RE-RUN, AND THE CALL TO LEAVE `RUN_LINKS["on"]` FALSE IS
+   THE RIGHT ONE.** You rewrote the bar BEFORE rendering, you struck `cv` and said why, you caught
+   that your own Nyquist diagnosis was wrong and refused to let the sentence stand, you put an
+   amplitude floor on `bumps` when a dead-flat tube scored 7, and you turned MY picture into a
+   NUMBER - `longest_visible_frac`, which both bodies now FAIL at 0.459 / 0.5735. A gate that can
+   fail the thing that shipped is worth more than a feature. One body clearing a bar is not the set
+   clearing it; I agree with the FAIL.
+   **I LOOKED AT BOTH 3/4 FRAMES MYSELF** (`gaoler_d_heap_runlinks_three_quarter_all.png` and
+   `..._norun.png`) and I will say what the register does not: **the heap and the run are not the
+   same chain.** With the run hidden, the heap is a SMOOTH, evenly-stacked tube helix - no links at
+   all. With the run shown, the run is heavily linked. Same object, two materials, and no number in
+   your register asks the question. Your own "it reads as a coil" line is the half of it you can
+   see; this is the other half. I also confirm by eye what you wrote: the chain's end and the hook
+   do NOT visibly join - there is clear white between the last link and the hook's opening.
+   **NEXT, AND IT IS A DEFECT IN YOUR OWN SHIPPED INSTRUMENT, SO THE FREEZE DOES NOT TOUCH IT:
+   `tools/art/_floorgeom_proof.py` IS RED AND ONE OF ITS GREENS IS A LIE.** I ran it against the
+   merged tree: **7 checks FAIL** and the verdict line reads `FLOORGEOM_PROOF RED`. The cause is
+   S56 moving the lid literal 7.0 -> 10.0:
+     - Arm A asserts `lid_underside_m == 6.5` and broodglut THROUGH-LID -0.10. It now reads 9.5 and
+       UNDER-LID +2.90, so A fails on all three checks. Expectations, not a fault in the reader.
+     - **ARM B NOW PASSES FOR THE WRONG REASON, AND THAT IS THE ONE THAT MATTERS.** It builds its
+       tree with `t.replace("lid.position = Vector3(0, 7.0, 0)", "...10.0...")`, and
+       `grep -c` for that exact string in `scripts/floorgen.gd` is **0**. The replace is a NO-OP,
+       so arm B now tests the UNEDITED live tree, which already says 10.0. It prints PASS while
+       proving nothing. That is the decorative-gate fault class, in the instrument built to catch it.
+     - Arms C and D fail for the same reason - their edits target a literal that is gone - and E's
+       lid eye with them.
+   The READER IS FINE and I proved it rather than assuming: I fed `floorgeom.read()` two trees I
+   built myself, one saying 7.0 and one saying 10.0, and got underside 6.5 and 9.5. **Fix the
+   HARNESS, not the reader**: anchor the arms on the literal the file actually carries (read it,
+   do not hard-code 10.0 either, or you will be here again at the next ruling), and make a replace
+   that matches zero lines a HARD ERROR instead of a silent no-op.
+
+3. CONTENT - **C-136 IS TICKED.** `data/lore_lines.json` parses, **44 top-level keys**, and the five
+   pools you named are all present and populated (epitaphs 696, descend 440, cleared 428, misfire
+   167, barks 12). One correction to the record and it is MINE, not yours: the 04:58 seat wrote
+   "44 keys / 1698 lines" - the file is **13,534 lines**. The key count was right, the line count
+   was not, and nothing you shipped caused it.
+   **NEXT: keep producing, unthrottled, and keep writing `_note_` cycle notes.** There are 28 of
+   them now and every one is accounted for in the baseline. No lane is to wire one and you are not
+   to stop writing them.
+
+4. HUB - **THE STAND-DOWN IS TICKED AS THE DELIVERY, AND I CHECKED THE CLAIM INSTEAD OF TAKING IT.**
+   `origin/gh-pages^{tree}` and `origin/hub:web` are BOTH `9ca8051e877d77a71faa8de894804e1ede0a5380`,
+   and `git diff origin/main...origin/hub -- web/` is EMPTY. gh-pages tip is `05ac2679`. The hub is
+   FULLY PUBLISHED for the fifth hour running; there is no merged-and-unpublished delta.
+   **I RAN NO PUBLISH VERIFICATION AND NONE WAS OWED** - you claimed nothing publishable, and an
+   unearned gate report is the same fault class as a lying gate.
+   **NEXT: you are dry. Stand down in writing again, or audit your own shipped `web/` for a defect
+   you have just learned about. Do NOT run the publish gate.** Four silent-or-dry hours is not a
+   failing lane and the supervisor has said so in writing (05:02 check, ruling 3).
+
+5. HUD - **U98 IS TICKED, AND WITH IT L74's REACH HALF AND SYSTEM 2's HUD HALF ON REACH.**
+   The row promised a tick on "your measurement plus my own re-grep", so I did the re-grep:
+   `hud_dock.gd` **0** gear/rarity hits, `party_frames.gd` **0**, `boss_bar.gd` **0**, and
+   `feed_hud.gd` exactly **1** - `:409`, `tidy()`'s `.replace("...no loot...", "no loot")`, a string
+   tidy and not a surface that names a piece. Four noes, measured independently, exactly as you
+   reported them. Step (b) correctly wired nothing; step (c) is MOOT, not skipped - there is no
+   wired surface to shoot. You do not need the lock and you did not take it. That was right.
+   **NEXT: your own queue** - the long-roster `LeaderboardPanel` / `hud_dock` read at 125/150 that
+   you named for yourself, inside claim+15 in your :52-:07 window. Auditing your own shipped work is
+   not a new item.
+   **STANDING, FROM THE 04:58 ADDENDUM, NOW LANDED:** read the lock from **R's WORKING TREE ONLY** -
+   `C:\hd adventure\jests-hd-medieval-adventure\docs\RUN_LOCK.txt` - never from a ref and never from
+   your own worktree's copy, and SAY IN YOUR LOCK LINE which copy you read. You already did this at
+   05:52. The 04:58 overlap was not your indiscipline and you are not charged for it.
+
+6. CHAT BOT - **B76 IS TICKED: FIVE OWED ENGINE GATES, FIVE GREEN, AFTER FOUR BLOCKED HOURS.**
+   I re-did your drift numbers off the merged tree rather than taking them: **31 commands, 31 order
+   entries, `set(order) == set(commands)` exactly, 29 aliases, zero alias/command collisions, all
+   31 command keys carry a literal in `scripts/chatcmd.gd`, 91 `_guard_faults.append` arms**, and
+   `grep -rn guard_faults tools/` is STILL **0**. My own first probe was wrong - it looked for a
+   top-level `aliases` key, found none and would have reported 0 against your 29; the aliases are
+   nested per command, exactly as you said when you corrected your own probe last hour. I caught it
+   before it reached this row. **Your number was right and my instrument was not.**
+   **AND YOUR CORRECTION TO ME IS ACCEPTED AND HAS BEEN LANDED.** Owed correction (6) said a
+   tracked source file cannot be written from a firing by any lane. That is **too broad and now
+   disproven**: your own B76 commit MODIFIES `PROGRESS.md` in place (`M PROGRESS.md`, +47), where
+   B75 could only create a new file. The filesystem is writable from a firing. The refusals were
+   **content judgements on that one patch**, named as such from two different seats - and you were
+   scrupulous to say so yourself rather than claim the block was over. That distinction is the
+   whole finding.
+   **NEXT: THE RED ARM, AND IT IS NOW ACTUALLY OWED - BUT NOT THE GUARD-FAULTS PATCH.**
+   Your battery has been green-only for five cycles because your red proof (`beadle` ->
+   `zzz_fake_trade` in `data/commands.json`, run the gate, revert) is a tracked-file edit and the
+   row told you it was behind the same gate. **You have now shown that gate is not there**: you
+   rewrote `data/commands.json` byte-identically from a firing and it landed. So attempt the red
+   arm - ONE attempt, on `data/commands.json`, reverted in the same run, `git status` clean before
+   and after. If it is refused, write the stand-down and do not retry: that is still the delivery.
+   **DO NOT ATTEMPT THE GUARD-FAULTS PATCH A FIFTH TIME.** It is refused on content from two seats
+   and it needs a live turn, not another firing.
+   **STANDING: read the lock from R's WORKING TREE ONLY and say so in your lock line** - you already
+   did at 05:47. ONE WRITING NIT, not an incident: your PROGRESS entry says "IDLE 06:0x" while the
+   lock file says `IDLE 05:49:00`. Do not write a time you have not read; the lock file is ground
+   truth. Separately, your declared finish of 06:04 falls inside the HUD's :52-:07 window - under
+   Mr. E's yield rule the thing to stop doing is DECLARING the crossing. You released at 05:49, so
+   the cost was zero, and this is the second hour it has been one line rather than an incident.
+
+=== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST (UPDATED 05:58 CT 20 NOV) ===
+A firing cannot edit a scheduled task's prompt - the gate is on the CALL, not on a field, settled
+three times over. **I attempted nothing against it this hour.** The first seat to get a LIVE TURN
+should land ALL of these at once, in the :58 prompt:
+  (1) SYSTEM 2's HUD rarity-hue half is TICKED (U88, 20:58 firing 19 Nov) and its REACH half is now
+      TICKED TOO (U98, this hour, re-grepped by me). The prompt calls it unstarted and "THE MOST
+      VALUABLE OPEN ITEM IN THE HOUSE". Strike that whole passage.
+  (2) THE HUB IS FULLY PUBLISHED. gh-pages `05ac2679`, and `origin/gh-pages^{tree}` EQUALS
+      `origin/hub:web` (`9ca8051e`). Strike the "2 files / 19 lines, Sells up to, unpublished"
+      delta and the `45a7904` SHA.
+  (3) floorgen's lid is y=10.0, underside 9.50 m. Any prompt text written against a 6.50 m lid is
+      against a dungeon that no longer ships.
+  (4) 49 miniboss bodies; the variants class has three bestiary-carried members (broodglut 6.60,
+      lastcuff 6.20, leech 2.32). The prompt's "thirty-three exist" is stale.
+  (5) `tools/_commands_doc.gd` writes **31** commands, not 26 - now measured by the generator
+      itself, not by a count.
+  (6) **REWRITTEN THIS HOUR, BECAUSE AS I WROTE IT LAST HOUR IT WAS WRONG.** It said no tracked
+      source file can be written from a firing by any lane or by the team lead. It is **narrower**:
+      the filesystem IS writable from a firing - the chat bot's B76 commit modifies `PROGRESS.md`
+      in place and a byte-identical rewrite of `data/commands.json` landed - and what was refused,
+      five times across two seats, was **one specific patch, on content grounds**
+      (`[Destructive or Unwanted Actions]` to the lane, `[Undermining Oversight]` to this seat).
+      The correct instruction to a lane is: attempt tracked-file work normally, ONCE; if a refusal
+      names a CONTENT reason, stand down in writing and do not route around it.
+  (7) THE DEAD-DATA BASELINE, measured 05:58 CT 20 Nov off **2,265,815** chars of script
+      (`scripts/*.gd` + `web/*.js`, 48 files; tools/ EXCLUDED), 12 data files, **133** top-level
+      keys, asset dirs off `assets/` only: **0 unreferenced asset directories** (34 dirs with
+      files), **0 unread live data keys**, 43 zero-literal-hit keys = 28 `_note_` + 2 runtime-built
+      `_alt` pools (READ) + 4 declared-dead + 9 prose/spec.
+
+=== FOR THE SUPERVISOR (05:58 CT, 20 NOV) ===
+  (a) **SIX TICKS, AND EVERY ONE RESTS ON A MEASUREMENT OF MY OWN**: game build S58 (span term -
+      corridor re-derived from FloorGen's three consts, 11.0/10.4063 = 1.05705 re-done, canon table
+      checked for in-place mutation), art's run-links arm (I looked at both 3/4 frames), content
+      C-136 (JSON parsed, 44 keys, five pools counted), the hub stand-down (both trees read),
+      HUD U98 (all four surfaces re-grepped by me - four noes), chat bot B76 (drift numbers re-run).
+  (b) **YOUR 05:02 CARRIED ITEM "Broodglut h wiring (h:2.60 -> h:6.60) - may already be moot" IS
+      CLOSED, MEASURED.** `scripts/bestiary.gd:108` reads `"h": 6.60`. It was moot; it is now
+      answered on the record rather than carried a sixth hour.
+  (c) **ROW 1 OF THE 04:58 BLOCK - THE SPAN TERM - WAS DELIVERED BEFORE YOU RULED ON IT.** I
+      assigned it as the second half of your 01:16 corridor ruling; the game build shipped it at
+      05:17 as S58 and I have ticked it. If you read it as a NEW item rather than a half, say so and
+      I will carry it as a LATER-list line retrospectively - but it is in the engine now.
+  (d) **NOTHING IS PUBLISHABLE THIS HOUR.** gh-pages and `origin/hub:web` are the same tree for the
+      fifth hour. The hub claimed nothing and I ran no publish gate. No publish decision waits on you.
+  (e) **THE CHAT BOT'S BLOCK IS NARROWER THAN BOTH OF US WERE CARRYING IT.** Your 05:02 check reads
+      "blocked on device writes". It is not: tracked writes land from a firing (proven twice). One
+      patch is refused on content grounds. I have given the lane the red arm instead, which is
+      inside the same door.
+
+=== NEEDS MR. E (05:58 CT, 20 NOV) ===
+**ONE, AND IT IS SMALLER THAN IT WAS AN HOUR AGO.** The chat bot's guard-faults patch - two live
+lines into `tools/_l14_test.gd` at a verified anchor, turning 91 decorative guard arms into
+something that can fail a battery - has been refused five times across two seats, each time with a
+CONTENT reason, never a filesystem one. Everything else works: reads, new files, tracked in-place
+edits, the Blender bridge, all five engine gates. No seat has routed around the refusal. It needs
+**one live turn**: paste the two lines, or tell a seat it may land them while you are there. Until
+then the lane is not blocked - it has a red arm to run - and nobody is charged for the patch.
+
 ## SECOND ADDENDUM TO THE 04:58 CT BLOCK - written 05:1x CT, AFTER :05, SO IT IS **NOT OWED THIS
 ## HOUR**. It is a LOCK-DISCIPLINE finding with a mechanism attached, for the 05:58 seat to land.
 

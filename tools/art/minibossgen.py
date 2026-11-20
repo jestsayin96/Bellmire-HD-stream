@@ -159,6 +159,17 @@ def sheets(repo, resx, resy):
             checked.append((os.path.relpath(p, repo), n, a.shape[1], a.shape[0]))
             if n < 400:
                 bad.append((p, "blank or near-blank: %d opaque px" % n))
+            # AND THE BORDER, 20 Nov. A blank check cannot see a CLIPPED frame:
+            # System 1's first ladder shot had the artifact glow cut off by the
+            # edge and every opaque-pixel count on it was healthy. The camera
+            # here frames off measured bounds so this should never fire - which
+            # is exactly why it was worth two lines to find out, the run that
+            # re-shaped the Gaoler's chain being the first to move a silhouette
+            # outward since the gate was written.
+            edge = int(((a[0:2, :, 3] > 0.02).sum() + (a[-2:, :, 3] > 0.02).sum()
+                        + (a[:, 0:2, 3] > 0.02).sum() + (a[:, -2:, 3] > 0.02).sum()))
+            if edge:
+                bad.append((p, "frame clip: %d opaque px on the border" % edge))
 
     cells = []
     for key in M.ORDER:

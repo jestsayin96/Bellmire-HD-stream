@@ -159,40 +159,26 @@
    "fits": true
   },
   "gaoler": {
-   "title": "The Gaoler",
+   "title": "Shacklemaw",
    "theme": "prison",
    "idea": "IT DRAGS - the hook takes one out of the line and reels them in",
    "wear": 0.8,
    "feed_line": "A chain is paying out in the dark.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 1816,
+   "faces": 1912,
    "size": [
-    3.72,
-    2.37,
+    3.56,
+    2.16,
     2.35
    ],
-   "footprint_span": 3.72,
-   "corridor": "CORRIDOR-SAFE",
-   "glb": true,
-   "glb_msg": "",
-   "cam": {
-    "radius": 2.498403492422347,
-    "ortho": 3.6511456966400146,
-    "clip": [
-     8.932880401611328,
-     24.024639129638672
-    ]
-   },
-   "views": [
-    "front.png",
-    "three_quarter.png",
-    "side.png"
-   ],
+   "footprint_span": 3.56,
    "height_m": 2.35,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
-   "corridor_margin_m": 7.28,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.435,
    "lid": "UNDER-LID",
    "lid_clear_m": 4.15,
    "read_from": {
@@ -202,7 +188,22 @@
     "lid_y_m": "scripts\\floorgen.gd:1383",
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
-   "fits": true
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3917246265455065,
+    "ortho": 3.3215036392211914,
+    "clip": [
+     8.634818077087402,
+     23.310380935668945
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   },
   "snuffer": {
    "title": "The Snuffer",
@@ -944,40 +945,26 @@
    "fits": true
   },
   "gaoler_chibi": {
-   "title": "The Gaoler (chibi)",
+   "title": "Shacklemaw (chibi)",
    "theme": "prison",
    "idea": "IT DRAGS - rebuilt in the game's own proportions",
    "wear": 0.8,
    "feed_line": "A chain is paying out in the dark.",
+   "pack_used": null,
    "parts": 3,
    "engine": "BLENDER_EEVEE",
-   "faces": 2292,
+   "faces": 2412,
    "size": [
-    3.72,
-    2.59,
+    3.57,
+    2.31,
     2.35
    ],
-   "footprint_span": 3.72,
-   "corridor": "CORRIDOR-SAFE",
-   "glb": true,
-   "glb_msg": "",
-   "cam": {
-    "radius": 2.552034125859247,
-    "ortho": 3.990356922149658,
-    "clip": [
-     9.216445922851562,
-     24.346511840820312
-    ]
-   },
-   "views": [
-    "front.png",
-    "three_quarter.png",
-    "side.png"
-   ],
+   "footprint_span": 3.57,
    "height_m": 2.35,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
-   "corridor_margin_m": 7.28,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.429,
    "lid": "UNDER-LID",
    "lid_clear_m": 4.15,
    "read_from": {
@@ -987,7 +974,22 @@
     "lid_y_m": "scripts\\floorgen.gd:1383",
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
-   "fits": true
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.429005100794557,
+    "ortho": 3.553964614868164,
+    "clip": [
+     8.857436180114746,
+     23.53783416748047
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   },
   "porter_chibi": {
    "title": "The Porter (chibi)",

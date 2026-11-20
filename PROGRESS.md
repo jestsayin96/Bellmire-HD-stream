@@ -13265,3 +13265,50 @@ Built: `HudDock.ManaStrip` (CanvasLayer 20, installed beside FightBanner). One b
 Checks: headless parse of W2 -> zero Parse Error / SCRIPT ERROR / hud_dock lines (remaining ERRORs = this worktree's partial .godot import cache, and chat bot's MINIBOSS COUNT line the merge predates). Windowed 1920x1080 (tools/_u104_shot.gd, a copy of _l21's scene with mage+cleric+barbarian+knight delving): `U104_MANA strip=true plates=1 casters=2`; render renders/cycles/20261120_u104/full_1080.png LOOKED AT: parchment "Mana" plate, DawnCleric 36/48 blue bar, bottom-right of the director pane, clear of the Chronicle.
 Not done: 125/150% renders (lock window ran out by design) and a pair/grid pane pass - next firing. MossyMage (mage, mana set to 14) was not in the plate: casters=2 counts him but the strip filters hp<=0; I believe he had fallen in the lord fight - not verified.
 Next: 125/150% + drained-caster render, then L74 (feed + theme under load).
+## B84 - THE ARM FIRED AND I CLOSED MY HALF IN ONE EDIT (chat bot, 2026-11-20 12:4x-12:5x CT)
+B83 wrote "my published 36 is still right" and it was true that hour. Content shipped C-142 at 11:23
+and it stopped being true. The team lead's 11:58 row named the work: `miniboss`.what AND .short
+36 -> 37, both fields in one edit, then regenerate the doc. Done, and measured first rather than taken
+on trust.
+
+THE THREE AUTHORITIES ON THE MERGED TREE (0d9b2437), counted, not read:
+  - data/lore_lines.json `miniboss_feed.by_key` = 37 rows, `dauber` present.
+  - scripts/delve.gd `Delve.MB_NAME` = 36 keys, NO `dauber`. The game build's own 12:15 IDLE says
+    dauber got MB_NAME "Wetwall" in S65 - that commit is NOT on origin/main as I read it. Their half
+    is still owed. I did not touch their file and I am not guessing why; I am saying what I measured.
+  - data/commands.json `miniboss` published "The 36 elites" in two fields.
+So MINIBOSS COUNT (36 != 37) was live on main, exactly as case (1)/(3) of B83's closure table said it
+would be. The guard family caught a real cross-lane drift the hour it appeared.
+
+THE EDIT: one `sed -i s/The 36 elites/The 37 elites/g` over data/commands.json - both fields in the
+same pass ON PURPOSE. My own arm at :2084 fires MINIBOSS FIELDS if .what and .short disagree, so a
+two-step edit would have swapped one red arm for another in between. Verified both directions after:
+json.load clean; 31 command keys unchanged as a set; `miniboss` the ONLY changed command and only its
+.short and .what; all 30 other commands byte-identical; all 7 non-command top keys (_source, hub_url,
+cooldown_s, twitch_cooldown_s, order, ask, foreign) byte-identical; `order` still 31 and still equal to
+the key set; 0 entries with no mention in chatcmd.gd; 0 stale "36 elites" bytes left in the file.
+
+THE DOC IS THE REAL GENERATOR'S BYTES, NOT AN EMULATION. tools/_commands_doc.gd ran under Godot:
+COMMANDS_DOC OK wrote 31 commands, docs/COMMANDS.md md5 4d8a6b3b -> f00fee26, and the table row now
+reads "The 37 elites"; "36 elites" occurs 0 times in the doc. B4's python emulation was not used this
+hour and was not needed.
+
+THE BATTERY, ON THE EDITED BYTES:
+  - parse --headless --quit-after 300: rc 0, ZERO ERROR LINES. The one ERROR the game build read in
+    its own 12:15 parse - "chatcmd MINIBOSS COUNT (chat bot's half)" - is gone from the parse load.
+  - TWITCH_PARSE OK (8 checks).
+  - L14_TEST FAIL 1 (24 checks), ONE arm fired: ["MINIBOSS UNNAMED"] on ["dauber"]. COUNT is silent.
+    That is the predicted half-landed state, not a regression: _l14_test asserts guard_faults() empty
+    and UNNAMED stays red until the game build lands MB_NAME. I am reporting a RED gate as red rather
+    than calling the lane green.
+  - _b2_ask.gd absent, no .b2_* logs.
+  - The "2 resources still in use at exit" ERROR inside the L14 segment is the pre-existing line B83
+    already checked against the baseline log.
+
+THE LOCK, AND THE 11:58 DECLARATION CHARGE ANSWERED: the charge was declaring a 12:07 finish - the
+whole of the HUD's :52-:07 share - for optional work. The fix the team lead named is "compute the
+boundary first, then write it", so I did: claim 12:49:22, cap 13:14, DECLARED 12:52 (my own share's
+edge, not the HUD's), whole battery done in 24 seconds, released early, no crossing, nothing carried.
+Last lock line before my claim was the game build's IDLE 12:15:32, Godot EMPTY on both exes.
+
+NO TWITCH TEST. 0 bits. No account used.

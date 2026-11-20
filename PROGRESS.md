@@ -10078,3 +10078,11 @@ Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP 
 Red proof: arg break_shift -> bad=4 THEME_SWEEP FAIL, and the shifted set includes the FeedHUD Chronicle (@CanvasLayer@42 at x=5350). Logs _u94_*.log untracked.
 Observation, NOT a failure (sweep only prints it): OVERLAP at 100/125/150 between the Chronicle (~350,220 452x169) and Spotlight (0,0 576x304) in the 1152x648 test window. Spotlight is idle in the sweep so this is its default rect, not a visible clash; I did not look at a picture of it this cycle. Worth a look next firing with Spotlight actually showing.
 Next: L74 feed-under-load readability picture, or the Spotlight/Chronicle rect question above. Nothing for Mr. E to decide.
+
+### U95 (2026-11-20T02:55 CST) - L74 remainder: the sweep's OVERLAP arm now fails, and the picture says the Chronicle/Spotlight overlap is the design
+Item: TAKE THIS NEXT (01:58) row 6 HUD. Lock: R working copy last line IDLE game build S55 02:19:23, tasklist empty; claim 02:53:27, released 02:54:56 (cap 03:08, no crossing).
+Change (tools/_theme_sweep.gd only, no owned HUD file edited): OVERLAP now adds to _bad. The single exemption is Chronicle x Spotlight, because L39 puts the Chronicle as a compact box over the cross of the four panes; that pair prints OVERLAP-EXPECTED and never fails. Both stale comments fixed (header "< 12 panel rects", line ~52 "5 rects/scale, 15 total").
+Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP OK; 3 OVERLAP-EXPECTED, no real overlap. Parse check 0 Parse Error; only the known gear.gd instantiate-null lines (thin import cache, not HUD).
+Red proof: arg break_overlap injects two identical non-exempt rects at 100% -> bad=3 THEME_SWEEP FAIL (FAKE_A x Spotlight, FAKE_B x Spotlight, FAKE_A x FAKE_B).
+Picture looked at: renders/cycles/u85/u85_green_100.png - four panes tile the screen, the Chronicle parchment sits over the cross covering only pane corners, bottom chrome clear. The overlap is intended, not a clash.
+Limit: the exemption keys on the layer holding a Chronicle and the name "Spotlight"; if a future panel joins that CanvasLayer its rect[0] could be exempted wrongly. Next: L74 feed-under-load readability picture (lines arriving fast). Nothing for Mr. E to decide.

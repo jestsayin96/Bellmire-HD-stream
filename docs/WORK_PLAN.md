@@ -1,3 +1,160 @@
+## TAKE THIS NEXT - written 2026-11-19 18:5x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 18:58 FIRING. ALL SIX LANES SHIPPED AND I TICKED FIVE OF THE SIX. The Blender bridge
+is UP and answered every git call. main ee038fc9 -> e3ad43f3, pushed.
+
+1. GAME BUILD - **S47 IS TICKED, AND I LOOKED AT THE PICTURE MYSELF.** I did not take S47_BOW's
+   verdict line. I opened renders/cycles/s47/s47_bow_three_quarter.png and the string is PLAINLY
+   THERE: one white line running nock to nock, attached at both ends, against the gold limb. The
+   "White 2.04 long x 1 cm" measurement and the picture agree. THE NOTE DIES - do not re-open it.
+   ONE HONEST CAVEAT THAT IS NOT A DEFECT AND NOT YOUR WORK TO DO: a CLOSE render proves the
+   geometry exists; it does not prove a 1 cm string READS at gameplay distance. You were asked for
+   the close render and you delivered it. If the string ever matters at range, that is a new
+   measurement and nobody has asked for one.
+   NEXT: the next Phase 2 system in Mr. E's order. Your :07 window is yours; last lock line is an
+   IDLE (art 18:53:41).
+
+2. CONTENT - **C-126 IS TICKED, COUNTED OFF THE FILE BY ME.** miniboss_feed.by_key is 35 keys, not
+   34; the fuller block is arrive 9 / act 6 / broken 4 / fall 8 exactly as you reported; json.load
+   passes; _note_c126 is nested under miniboss_feed (not top-level), which is why the dead-data
+   top-level key count stayed at 132 this hour. Your rule-2 reading (man worn, goods fresh) is in
+   the words and I read them.
+   NEXT: C-127, full rate. ART SHIPPED A 36th BODY THIS HOUR - **THE STACKMAN** - and its feed
+   lines are yours when you get to it; the body is merged on main so you can grep it.
+
+3. ART - **TWO TICKS, AND THEN A CORRECTION ABOUT WHICH ROW YOU WERE ON.**
+   **TICKED - fuller.glb.import (f5c10be2).** This was a real load-blocking gap and you found it by
+   measurement after your prompt told you something false. origin/main carried 46 .glb and 45
+   .glb.import; the missing sibling was fuller.glb - THE BODY I TICKED ONE HOUR AGO. I am recording
+   that plainly against my own seat: the Fuller's tick stands (fit was the acceptance test and the
+   renders were real), but between 17:5x and 18:39 the ticked body could not have loaded in Godot
+   at all. You closed it in ONE headless import under a clean declared window. 46/46 now.
+   **TICKED - THE STACKMAN, the 36th, and I COUNTED IT MYSELF off the five ORDER statements in
+   tools/art/minibosses.py in file order:** base 4 + 4 + 6 + 22 single appends (jointer ... rammer,
+   fuller, stackman) = 36 EXACTLY. I LOOKED AT ALL THREE HERO VIEWS. Front: the figure stands on
+   three countable courses of sheaves at roughly twice hero height, the broken bottom band and its
+   spilled sheaves are legible, the fork reaches DOWN at the hero - the whole mechanic is in the
+   silhouette and needs no UI, which is what you said it would be. Back: facing is unambiguous -
+   pale faceplate and eyes in front, nothing in back, hat brim read from behind, and the LADDER on
+   the back of the stack is a real piece of information, not decoration. **The Beadle fault is not
+   repeated.** Side: unlike the Fuller, the body is NOT occluded by its own prop - all three views
+   carry it. Your two wrong diagnoses (the rake, the ladder head) and the measurement that settled
+   it (mean rgb in the BONE slot -> the cut stubble) are on the record and that is how it should be.
+   *** NOW THE CORRECTION, AND IT IS ABOUT THE QUEUE, NOT THE WORK. ***
+   THE PACK ROW WAS ALREADY ON YOUR OWN BRANCH WHEN YOU FIRED. I checked the ref, not a working
+   directory: ebce017b landed on origin/art at **18:14:51 CT**, twenty minutes before your :34
+   firing, it contains "SYSTEM 7, ARMOUR VARIETY", and it is an ancestor of your stackman commit.
+   That row carries MR. E'S OWN LIVE 18:2x DIRECTIVE putting you on PACK-CONSUMING systems, with
+   minibosses as the DRY FALLBACK. Your commit message - which is otherwise the most careful one in
+   the house this hour - does not mention the packs, System 7, or whether `_packs` was reachable
+   from your session, and you wrote no PROGRESS.md entry at all this firing.
+   I AM NOT CHARGING YOU AND I AM NOT WITHDRAWING EITHER TICK. The body is finished, fit-proven and
+   good, and nothing you make is wasted. But the row said, in plain words, that if a pack row is
+   blocked you SAY SO IN WRITING AND THEN invent a miniboss - and the saying-so is the part that
+   did not happen, so I cannot tell a blocked grant from a missed row.
+   NEXT, AND IT IS ONE LINE BEFORE ANYTHING ELSE: say in writing whether your session can read
+   `C:\hd adventure\_packs` this firing. THEN:
+     - CAN READ -> SYSTEM 7, ARMOUR VARIETY. Five armour bodies are already on disk at
+       `_packs/quaternius_ultimate_rpg_items_CC0/Ultimate RPG Items Pack - Aug 2019/` as .blend and
+       .fbx: Armor_Black, Armor_Golden, Armor_Leather, Armor_Metal, Armor_Metal2. Quaternius is CC0
+       and cleared; note the licence in docs/art/ASSET_SOURCES.md. Fit-proof on the KayKit hero
+       body FRONT, SIDE AND BACK and look at the render yourself before you call it. Then SYSTEM 8
+       (shields): `_packs/handpainted_weapons/` shield_a..d plus Quaternius Medieval Weapons.
+     - CANNOT READ -> say so in one line, do NOT call device_request_folder_access (struck rule 1),
+       and THEN a miniboss is the correct fallback.
+   Still true whatever you work on: PUSH BEFORE YOU RENDER.
+   AND WRITE A PROGRESS.md ENTRY. Two bodies shipped this hour with none; your reasoning is the most
+   valuable thing you produce and a commit message is not where the other five lanes read it.
+
+4. HUB - **TICKED, AND I PROVED IT WITH A HARDER INSTRUMENT THAN YOURS.** The 17:58 seat held this
+   back on the grounds that the 9f38b9c8 pin was one content cycle stale after C-125. **THAT HOLD
+   IS NOW DISPROVED AND THE ITEM IS CLOSED.** I did not run refresh_lore.py and I did not take your
+   --check line. I read the tool, re-implemented its per-section whitelist in my own script, and ran
+   it against the MERGED tree that carries C-125 **and C-126**: page 1215 / data 1215, all seven
+   sections equal one by one (town_life 175, growth_tiers 36, e3po 232, lord_intros 8,
+   unique_intros 5, disasters 559, events 200), and - stronger than any count - the page object and
+   the rebuilt object are **DEEP EQUAL**. The pin is correct. The reason it survives is structural
+   and worth writing down so nobody re-raises it: C-125 and C-126 wrote to `epitaphs`, `descend`,
+   `cleared`, `misfire`, `barks` and `miniboss_feed`, and NOT ONE of those is inside the seven
+   whitelisted sections. Content can keep writing at full rate without staling the page.
+   You correctly did NOT claim READY TO PUBLISH and I correctly ran NO publish gate this hour.
+   NEXT: nothing is queued for you. Stand down in writing, or audit your own shipped web/ work.
+   The standing check you invented is a good instrument - keep running it - but say explicitly which
+   fields moved and whether any of them is inside the seven, which is the only question that matters.
+
+5. CHAT BOT - **B65 IS TICKED, AND I RE-DERIVED EVERY NUMBER OFF THE FILE.** `func handle(` is at
+   99, the `match verb:` inside it is at 128, the other two tables are at 283 and 2345 and your
+   indentation walk cannot reach them, the block is 68 lines and carries 29 case labels - all
+   exactly as you reported. **49 verbs**: I got 51 on my first pass and the extra two were MY
+   instrument's fault, not yours - my regex took every quoted string on a label line, so
+   `"deepest": out = _board("deepest")` and three of its shape double-counted. Stripped to the
+   label side of the colon it is 49, your number. commands 27, order 27, set-equal, no duplicates,
+   aliases 24. The allowlist is right and I checked the gate rather than the claim:
+   chatcmd.gd:175-179 returns "" unless `user_id.begins_with("local_")`, and testbits / testsub /
+   testpoints appear in neither `commands` nor `order` in data/commands.json - so no viewer reaches
+   them and !help cannot advertise them. A FOURTH undocumented verb would still go red, which is
+   the whole point. Your no-change claim I proved off the REF, not your md5s: your entire merge-base
+   diff against main is PROGRESS.md, 13 insertions, one file.
+   THE SENTENCE THAT EARNED THE TICK: "it grepped for case labels by pattern and never anchored on
+   the table, so it measured nothing and printed clean - the worst failure an instrument can have."
+   That is the house rule in your own words, found on yourself.
+   NEXT: the engine re-confirm you split off (parse --quit-after, _l14_test, _twitch_parse,
+   _commands_doc no-op) in your own :45 window, then back to auditing shipped work.
+
+6. HUD - **U87 IS NOT TICKED. IT IS HALF DELIVERED, AND THE MISSING HALF IS ONE ARGUMENT ON YOUR
+   OWN FILE.** First, what I reproduced exactly, because you earned it: I re-ran your grep myself
+   and got your four "no" verbatim - hud_dock.gd one hit, a "drop shadow" comment at :531;
+   party_frames.gd ZERO; boss_bar.gd one hit, a layout comment at :117; feed_hud.gd 14 hits, every
+   one queue-drop logic or the "...no loot..." string tidy at :409, no item field and no stored
+   rarity. Your "a cost-quartile guess for text with no stored rarity is forbidden" is RIGHT and I
+   am not asking you to guess anything. I also settled the 17:58 seat's line that "rarity_hue() has
+   zero call sites": it is reached, transitively - leaderboard_panel.gd:197 -> UiTheme.rarity_pip
+   -> rarity_hue at ui_theme.gd:205. The ladder is live.
+   **NOW THE HALF THAT IS OPEN, AND IT IS NOT A GUESS - THE FIELD IS ALREADY IN THE DATA.**
+   `data/items.json` -> `accessories` holds **254 entries and ALL 254 carry a `rarity` field**:
+   uncommon 109, rare 52, common 40, very rare 36, legendary 17. `Roster.item(key)` (roster.gd:1176)
+   returns that accessory dict straight out of the file. leaderboard_panel.gd:270 already binds it
+   as `it`. And :273 - the WORN ACCESSORY row, which is where RINGS AND GLOVES show, both of them
+   Mr. E's own closed rulings - calls `_piece(name, gives, colour)` with **three** arguments, so the
+   fourth defaults to `""` and the row renders with no pip and fallback ink.
+   The vocabulary matches with nothing left over: RARITY_INK/RARITY_HUE carry rare, very rare,
+   legendary and uncommon, and `common` falls through to a clear hue - which is your own designed
+   "bare rungs get none", not a bug. So one argument, `String(it.get("rarity", ""))` at :273, lights
+   214 of 254 worn accessories correctly and leaves the 40 commons bare BY DESIGN. Zero invented
+   data, zero inference, zero risk of a wrong colour.
+   (:280 cosmetics is DIFFERENT and you are right to leave it: only 7 of 556 cosmetics carry rarity,
+   so there is nothing to read for the rest. :340's sell-back row also reads Roster.item() and so
+   also has the field available - judge that one yourself; I am not charging it.)
+   NEXT: wire :273, then a shot of the Worn block with a ringed hero, front. That is the HUD half of
+   System 2 closing - the most valuable open item in the house - and it needs no Godot to write and
+   one short window to prove. AFTER that, L74 feed-under-load.
+   AND THE FRAGILITY FROM 17:58 STILL STANDS, unticked and unforgotten: your sweep finds exactly 12
+   panel rects and the NO-VERDICT floor is `_panels < 12`. The gate sits ON its own floor. One panel
+   going hidden makes it stop printing a verdict instead of going red, and by this house's standing
+   rule a gate that prints no verdict IS RED.
+
+### FOR THE SUPERVISOR - 18:58 CT, 19 Nov
+**(a) THE PUBLISH HOLD FROM 17:58 IS DISPROVED. MY RECOMMENDATION IS NOW: PUBLISH.** The only
+reason the 17:58 seat gave for holding was that the LORE_FROZEN pin was one content cycle stale and
+publishing would guarantee a second publish immediately after. I disproved that this hour on my own
+re-implementation of the tool's whitelist: page and data are DEEP EQUAL at 1215/1215 on the merged
+tree carrying C-125 **and** C-126, and the fields content is writing are structurally outside the
+seven whitelisted sections, so no near-term content cycle can stale it. The delta is three files,
+viewer-visible, and its security half passed on the team lead's own grep at 17:4x with the CSP
+red-proved. It is still your call and nothing is published without you.
+**(b) FIVE TICKS this hour, each on my own measurement, not a lane's verdict line:** game build S47
+(string looked at), content C-126 (counted off the file), art's fuller.glb.import AND the 36th body
+(ORDER reconstructed, three views looked at), hub's LORE_FROZEN (deep equality), chat bot B65
+(numbers re-derived; my own instrument over-counted and I corrected it).
+**(c) ONE THING AGAINST MY OWN SEAT, REPORTED FIRST:** the Fuller I ticked at 17:58 had no
+.glb.import sibling and could not have loaded in Godot. The tick stands on fit, but the body was
+unloadable for ~40 minutes and ART, not I, caught it.
+**(d) Nothing else is blocked on you.**
+
+### NEEDS MR. E - 18:58 CT, 19 Nov
+Nothing.
+
+---
+
 ## TAKE THIS NEXT - written 2026-11-19 18:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 17:58 FIRING. The fleet is back on the grid: the game build's 17:07, the chat bot's
 17:45 and the HUD's 17:52 all fired in their own windows and the lock log for 17:0x-18:0x is clean.
@@ -516,6 +673,36 @@ ADD TO THIS LIST, DO NOT RESET IT. Land it all at once the moment a write is per
           FILE holding a Windows gitdir path the Linux mount cannot follow. This is separate from
           the no-delete/.lock problem and it bites even when the Blender bridge is UP. Read and run
           python through device_bash; run every git call through the Blender bridge.
+
+  (10) ADDED 2026-11-19 18:5x CT (the 18:58 firing). I SPENT NO CALL ON THE GATE EITHER - the
+      prompt's own block and item (9) both settle it, and probing a fifth time would be the fault
+      the block warns about. ADDENDUM TO (9), NOT A RESET:
+        - THE ID LINE MOVES: B65, C-126, D100, H32, L74, S47, T5, U87. **MINIBOSSES ARE 36**,
+          counted off minibosses.py's five ORDER statements in file order (4 + 4 + 6 + 22 single
+          appends, jointer ... rammer, fuller, stackman). THE ART PROMPT SAYS 33 AND IS WRONG BY
+          THREE; the art lane itself caught that this hour and measured rather than trusting it.
+        - THE ART PROMPT'S "only snarer_chibi.glb.import is owed" IS FALSE and has been for days.
+          snarer_chibi.glb.import exists. The real gap was fuller.glb - the 35th body, ticked at
+          17:58 with no import sibling, so it could not have loaded in Godot at all. Art closed it
+          at 18:39. As of main the tree is 47 .glb / 47 .glb.import, PARITY.
+        - DEAD-DATA BASELINE, measured on the merged tree at 18:4x: 2,244,742 chars of script
+          (49 files: 47 .gd + 2 .js), 12 data files, 132 top-level keys, 42 zero-hit of which 27
+          are `_note_` and 8 are string-valued spec notes. 32 asset dirs with files, ZERO
+          unreferenced. UNREAD LIVE DATA KEYS: ZERO, unmoved. Note for whoever reads the raw
+          number next: C-126's `_note_c126` is NESTED under miniboss_feed, not top-level, which is
+          why 132 did not rise this hour.
+        - FOR THE HUD PROMPT AND ANY ROW THAT REPEATS IT: "rarity_hue() has zero call sites" is
+          misleading and should not be written again. It is reached transitively -
+          leaderboard_panel.gd:197 -> UiTheme.rarity_pip -> rarity_hue (ui_theme.gd:205). What is
+          open in System 2's HUD half is ONE ARGUMENT at leaderboard_panel.gd:273, where the worn
+          accessory row drops a rarity that IS stored: all 254 entries of items.json `accessories`
+          carry a `rarity` field, Roster.item() (roster.gd:1176) returns it, and the ladder's
+          vocabulary covers every value with `common` correctly falling through to bare.
+        - FOR THE HUB PROMPT: the LORE_FROZEN pin does NOT go stale every time content writes.
+          Only the seven whitelisted sections in web/tools/refresh_lore.py can stale it, and
+          content's recent cycles (epitaphs, descend, cleared, misfire, barks, miniboss_feed) are
+          all outside them. Verified by deep equality of the page object against a rebuild on the
+          merged tree carrying C-125 and C-126.
 
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.

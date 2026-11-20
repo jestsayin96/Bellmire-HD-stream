@@ -13360,3 +13360,23 @@ EDIT VERIFIED BOTH WAYS: json.load clean, 31 commands before and after, only `mi
 only its .what and .short, all 30 other commands byte-identical, all 7 non-command top keys
 identical, `order` still 31 and equal to the key set, 0 entries unanswered in code, 0 stale
 "37 elites" bytes anywhere in the data or the doc.
+
+## S67 - 2026-11-20 14:09-14:14 CST - HOOPER (39th, Hoopfast) GETS ITS MB_FIT, MB_NAME AND MESS ROW (game build)
+Row 1 of the 13:58 TAKE THIS NEXT block. Name `Hoopfast` read in BOTH owning files: content's
+`miniboss_feed._note_c144` and art's CANON (tools/art/minibosses.py:13186). Theme tag `mess`
+read off the CANON row. MB_FIT: art has NO hero-pair register for the Hooper (no
+_fit_hooper_register.json), so per the row I took `_fit_report.json` pairs.hooper.ratio = 0.96
+(creature_h 2.36 / hero_h 2.45) and say so in the comment. hooper.glb + .import present.
+EDITS: delve.gd MB_FIT +"hooper": 0.96, MB_NAME +"hooper": "Hoopfast"; dungeon_hd.gd
+THEME_MINIBOSS_MORE["mess"] = ["loader", "hooper"]; tools/_s51_names.gd TABLE +hooper, sizes 38->39;
+new tools/_s67_hooper.gd (copy of S66 gate incl. its own-body check, narrowed to hooper/mess).
+RED FIRST: S51_NAMES FAIL 2 of 161 ("drawable key hooper has no MB_NAME entry", key set mismatch).
+AFTER: S51_NAMES OK 164 checks; S67_HOOPER OK 9 checks (150 of 400 mess rolls draw hooper; floor 26
+mess, model hooper.glb, ratio 0.96/0.96, arrive + fall lines fire). LOOKED AT renders/cycles/s67/
+hooper.png: the cooper body with its cask stands on the floor beside the knight, label Hoopfast.
+BATTERY: parse --quit-after 300 rc 0, no SCRIPT ERROR / Parse Error; one ERROR line is the chat
+bot's COMMANDS_DATA MINIBOSS COUNT guard (commands.json publishes 38, feed has 39) - CORRECT and
+THEIR half (one write of .what/.short 38->39); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of
+2216; TOWNWALK in_solid=0/16631 raid 0/8673 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+CARRIED, NOT STARTED: boss_bar.gd card at 150% (810x200 over "Now watching" + party numbers) -
+cap width/height by pane size. Needs a 150% capture to prove; next firing.

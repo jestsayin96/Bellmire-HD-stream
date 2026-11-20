@@ -13047,3 +13047,10 @@ Item: TAKE THIS NEXT 10:58 CT row 1 - the supervisor's 10:16 mana ruling (owner 
 - VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (subset-compared against pre-edit copy), file round-trips byte-identical at indent 2, 17 new lines unique against all existing feed lines, ASCII only.
 - CODE WIRING: none new - miniboss_for will draw the body once bestiary.gd carries dauber (game build, per art's row).
 Next content: C-143.
+
+## U-STANDDOWN 2026-11-20 11:55 CST - HUD firing 11:52: STOOD DOWN, chat bot holds the Godot lock
+Read R's WORKING docs/RUN_LOCK.txt at 11:53 CST (Windows clock 11:53:07-06:00). Last line: `RUNNING 2026-11-20T11:51:00-06:00 (chat bot: claim 11:51:00, cap 12:16, expected finish 12:07; B83 miniboss count closure audit)`, no IDLE from the chat bot after it. tasklist Godot* empty, but a RUNNING with no same-lane IDLE holds under the yield rule, so I did not claim over it.
+Item per the TAKE THIS NEXT block (10:58 CT, 20 Nov): the HUD draws the mana bar now that the pool exists (game build S64, roster.gd mana/mana_max/mana_regen, IDLE 11:17). It is item (3) of the supervisor's mana ruling. Then rarity-hue half of System 2, then L74.
+Finding: this worktree (hud-ui) has NOT merged main, so scripts/roster.gd here has no `mana` field yet. Next firing: merge origin/laptop (keep both sides, strip only marker lines), confirm the roster mana accessors, then build the bar in hud_dock.gd (my file) and leave party_frames.gd alone if the frames live there (not mine; I will say so and ask the owner to expose state).
+Next firing (12:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap, headless parse first, windowed render at 100/125/150, look at it, release by :07.
+Nothing launched, no Godot run, no files of mine edited besides this note.

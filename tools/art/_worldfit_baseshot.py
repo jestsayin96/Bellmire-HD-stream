@@ -95,8 +95,15 @@ def main(argv):
     # floor slab: top face EXACTLY z=0, so "below the slab" is unambiguous
     bpy.ops.mesh.primitive_cube_add(size=1)
     sl = bpy.context.object
-    sl.scale = (span / 2.0 + 2.0, 3.0, 0.06)
-    sl.location = (span / 2.0 - 1.0, 0.0, -0.06)
+    # *** THE HALVING, FIXED 20 NOV 09:4x CT. ***
+    # `primitive_cube_add(size=1)` is a UNIT cube spanning -0.5..+0.5, so a
+    # scale of s gives EXTENT s, not 2s. This line read `span / 2.0 + 2.0`
+    # and so built a slab HALF the width it claimed: its right edge landed at
+    # 3*span/4 and the rightmost prop had no floor line under it. I found this
+    # in `_worldfit_packshot` at 09:0x CT, fixed it there, and listed this file
+    # as still carrying it. Extents go in here, never half-extents.
+    sl.scale = (span + 4.0, 6.0, 0.30)
+    sl.location = (span / 2.0 - 1.0, 0.0, -0.15)
     sl.data.materials.append(floor_m)
     # 1.80 m human bar at the left
     bpy.ops.mesh.primitive_cube_add(size=1)

@@ -47,7 +47,7 @@ func _run() -> void:
 		for dk in ["assets/props", "assets/dungeon"]:
 			for r in man["dirs"][dk]["rows"]:
 				rows["res://%s/%s" % [dk, r["file"]]] = r
-	_ok(DungeonHD.PROP_BATCH.size() >= 10 and DungeonHD.PROP_BATCH.size() <= 20, "batch size %d in 10..20" % DungeonHD.PROP_BATCH.size())
+	_ok(DungeonHD.PROP_BATCH.size() >= 20, "batch size %d >= batch 1's 20 (S62 added batch 2)" % DungeonHD.PROP_BATCH.size())
 	var copy_bad := []
 	for p in DungeonHD.PROP_BATCH:
 		var r: Dictionary = rows.get(p, {})

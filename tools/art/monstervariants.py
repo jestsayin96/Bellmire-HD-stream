@@ -107,8 +107,31 @@ VARIANTS = {
         # size as the hero knight... a miniboss needs to tower over the heroes
         # ... minimum 2-3x the hero's height." Pass 2's reasoning was right
         # about the body (its height is bulk, not stature) and WRONG about the
-        # target: 2.60 against a 2.45 m hero is ratio 1.06, and every one of
-        # the thirty-six sits at the same 1.06. The whole band was eye-level.
+        # target: 2.60 against a 2.45 m hero is ratio 1.06, and that is
+        # EYE-LEVEL. The sentence that stood here until 20 Nov 01:3x CT said
+        # "every one of the thirty-six sits at the same 1.06. The whole band
+        # was eye-level" - and that was WRONG, disproved by this lane's own
+        # measurement in the very commit that wrote it (the team lead caught
+        # the contradiction; it is web/index.html:49 again, a comment stating
+        # what its author had already replaced). THE MEASURED NUMBERS, taken
+        # twice this run by two different cuts:
+        #   off the CANON tables in tools/art/minibosses.py - 36 procedural
+        #     minibosses, authored height 1.95 m (reeve) to 2.95 m (beadle),
+        #     ratio 0.80 to 1.20 against the 2.45 m hero. EXACTLY TWO sit at
+        #     1.06 - snuffer and dyer, both 2.60 m. Not thirty-six. Two.
+        #   off every renders/art/minibosses/_fit_*_register.json - 31 pair
+        #     records over 20 bodies, ratio 0.84 to 1.20, four records at 1.06
+        #     (snuffer, its chibi twice, and dyer: the extra two are chibi
+        #     duplicates of one body, which is why a register sweep reads four
+        #     where the authored table reads two).
+        # So the band is not a point. What is true, and is the thing the 00:10
+        # directive was answering, is that MORE THAN HALF THE CLASS IS AT OR
+        # BELOW 1.0x A HERO - 17 of 36 authored at or under 1.00 (drover is
+        # 2.44 m, 0.9959, and counts) - and nothing
+        # in it towers. Broodglut's 1.06 was typical of the band, not alone in
+        # it. The supervisor ruled at 01:16 CT that THE PROCEDURAL 36 STAY at
+        # their current scale and only PACK VARIANTS tower; see
+        # docs/art/MONSTER_VARIANTS.md for the two design languages.
         #
         # 6.60 m is NOT a free choice - IT IS THE TOP OF A MEASURED BAND AND
         # THE DIRECTIVE'S OWN 3x DOES NOT FIT IN IT. The directive keeps the
@@ -162,8 +185,104 @@ VARIANTS = {
               "reads it as the same idea twice, the fix is one word in the "
               "idea string and no geometry."),
     ),
+    "lastcuff": dict(
+        title="Lastcuff",
+        source=os.path.join("assets", "monsters", "Imp.glb"),
+        regular="imp",                  # bestiary.gd key of the small version
+        regular_h=1.30,                 # bestiary.gd `h` for "imp", read off the file
+        # THE SECOND PACK VARIANT, 20 Nov 2026 01:4x CT. The supervisor's 01:16
+        # ruling is that PACK VARIANTS TOWER and the procedural 36 stay at
+        # eye level, so this one is authored to tower - and the body was picked
+        # on a MEASUREMENT rather than on taste.
+        #
+        # WHY THE IMP AND NOT ANOTHER. Measured off the pack's Textures dir
+        # this run: only TWO creatures in the Bestiary - Dungeon Monsters Kit
+        # ship three BaseColor maps, `T_Imp` and `T_Puglin`. The Puglin is
+        # Broodglut. So the Imp is the whole remaining supply of this class,
+        # and the class's recipe (recolour + scale, nothing modelled) is only
+        # available where the author already drew a second skin.
+        #
+        # AND IT IS THE BODY THAT CAN CARRY HEIGHT. Broodglut is capped by its
+        # own T-pose arm span: 4.0995 / 2.60 = 1.576731 m of span per metre of
+        # height, so an 11.0 m corridor runs out at 2.85x the hero. The Imp is
+        # also a T-pose, but a far narrower one - measured on the evaluated
+        # depsgraph with the stray Icosphere dropped, native X 1.7538 (the arm
+        # span, symmetric about the origin at +/-0.8769) over native Z 1.6779
+        # (the height, feet at z -0.002) = 1.045 m of span per metre, a THIRD
+        # less than the Puglin. At 6.20 m its span is 6.48 m and the corridor
+        # leaves 4.52 m of margin. The corridor is not what caps this one.
+        #
+        # *** WHAT CAPS IT IS THE CEILING, AND NOBODY IN THIS HOUSE HAD
+        # *** MEASURED THE CEILING UNTIL THIS RUN. floorgen.gd builds a lid -
+        # *** `BoxMesh` size (w*G+14, 1.0, h*G+14) at `position = (0, 7.0, 0)`,
+        # *** SHADOWS_ONLY, there so the overworld sun does not flood the
+        # *** floor - so its UNDERSIDE is at 7.0 - 0.5 = 6.50 m. A creature
+        # *** standing on z=0 is through it above 6.50 m, which is 2.653x the
+        # *** 2.45 m hero. The kit wall tops are 4 m (floorgen's own stairs
+        # *** comment: "3.8 m up, under the 4 m wall top"), so anything in this
+        # *** class already stands head and shoulders over the walls.
+        # So Mr. E's 3x (7.35 m) is NOT available to any body on any width -
+        # not Broodglut's, not this one's - without raising the lid or
+        # room-locking. 6.20 m leaves 0.30 m under the lid, and that margin is
+        # the reason this is 2.53x rather than the 2.6x the lid would just
+        # allow. See docs/art/MONSTER_VARIANTS.md; Broodglut's shipped 6.60 is
+        # 0.10 m THROUGH the lid and that is a fault in this lane's own work,
+        # reported rather than quietly corrected under a second change.
+        height=6.20,                    # 2.53x the hero, 4.77x its own regular imp
+        palette="T_Imp_BaseColor_3.png",
+        # Measured, not remembered, this run: the regular `imp` wears
+        # BaseColor_1 (mean rgb 0.3937/0.2130/0.2021, red-brown). `_2` is olive
+        # (0.3804/0.3470/0.1638) - which is the colour the regular PUGLIN
+        # already wears, so it would read as a cousin of the wrong monster.
+        # `_3` is taken. All three are 2048 and hand-authored over the same UVs
+        # by the pack author, so the normal and ORM detail survive the swap.
+        #
+        # *** AND THE NUMBER I CHOSE IT ON WAS A BAD WITNESS. I CALLED `_3`
+        # *** "ASH GREY" OFF ITS MEAN (0.3897/0.3837/0.4154 - near neutral,
+        # *** faintly blue) AND THEN LOOKED AT THE RENDER: IT IS A SATURATED
+        # *** BLUE-CYAN SKIN WITH VIOLET FOREARMS, SHINS AND FEET.
+        # A mean over a whole 2048 map averages skin, shorts, horn, claw and
+        # every unused corner of the UV sheet into one neutral number, so it
+        # answers HOW BRIGHT and says nothing about HUE or about WHERE on the
+        # body a hue sits. Same family as `mask_of` at pass 11 - a metric that
+        # cannot see the viewer's question reads green on anything. The colour
+        # is kept (blue-violet is neither the red-brown imp you know nor
+        # Broodglut's red, which is all the class asks of it) but the reason in
+        # this file now matches the picture. THE PICTURE IS THE EVIDENCE.
+        theme="cells",
+        aura=(0.70, 0.76, 0.88),        # cold key: ash and iron, not Broodglut's warm red
+        # *** THE IDEA THIS SPEC SHIPPED WITH WAS NOT IN THE MESH, AND THE
+        # *** RENDER IS WHAT CAUGHT IT. It was called "Chainsweep" and its
+        # *** mechanic was a mace running out on a chain to sweep the lane.
+        # I then looked at hero_front.png: `Imp_Chains` is FOUR SHACKLE CUFFS
+        # (both wrists, both ankles) plus a studded collar, and `Imp_Mace` is
+        # held flat against the hand. There is no long chain and nothing runs
+        # out. A mechanic the geometry cannot show is the fault this lane is
+        # told to catch before it ships, not after, so the idea is replaced by
+        # one the body already carries - and it is a BETTER one, because the
+        # state is visible ON the model and a viewer can count it.
+        idea=("IT IS STILL IN IRONS, AND EVERY ONE YOU KNOCK OFF MAKES IT "
+              "FASTER - five shackles, four cuffs and a collar; hurt it and "
+              "one goes, and the thing that was lumbering is not lumbering any "
+              "more. Kill it early or race something you have been unlocking"),
+        line="The irons in here are off something.",
+        note=("THE STATE IS ON THE MODEL AND THAT IS WHY THIS IDEA WAS TAKEN: "
+              "five removable pieces the pack author already modelled, so a "
+              "viewer can SEE how far gone the fight is without reading a stat "
+              "- Mr. E's binding principle applied to a mechanic rather than to "
+              "a costume. Nothing in the thirty-six ramps speed, and none of "
+              "them carries its own progress as geometry. ADJACENCY DECLARED: "
+              "Shacklemaw (gaoler) also fights in chains, but his are a hook he "
+              "USES on you and these are irons used ON IT, so the two read as "
+              "jailer and escapee rather than as one idea twice. WIRING NOTE "
+              "FOR THE GAME BUILD, NOT A REQUEST: the shackles are five named "
+              "meshes in the shipped glb (Imp_Chains carries the four cuffs, "
+              "Imp_SpikedCollar the fifth); hiding them one at a time is how "
+              "the mechanic would show, and if that is not wanted the idea "
+              "still works unseen."),
+    ),
 }
-ORDER = ["broodglut"]
+ORDER = ["broodglut", "lastcuff"]
 
 
 def _drop_stray(objs):
@@ -450,7 +569,23 @@ def fit(key, repo, prove_red=False):
     # VERIFIED BY A/B, tools/art/_bg_frame_ab.py: the clip is byte-identical
     # with the ear turn off, so it is pass 2's to answer and not pass 3's.
     std_w = F.FRAME_W
-    need_w = (amx.x - amn.x) * 1.08
+    # *** THE FRAME WAS SIZED OFF WIDTH ALONE AND THAT CANNOT FRAME A TALL
+    # *** CREATURE. FOUND 20 NOV 01:4x CT BY THE BORDER CHECK, ON MY OWN FIRST
+    # *** LASTCUFF RUN (then still named Chainsweep): frame_w grew to 9.01 m for an 8.34 m pair, FRAME_H
+    # *** came out of the 760x520 cell aspect at 6.16 m, and a 6.20 m creature
+    # *** lost 65 / 47 / 65 px of HEAD off the TOP of front / side / back.
+    # The run went red and shipped nothing, which is the border assertion doing
+    # exactly the job System 1's cut glow bought it - but the harness also
+    # could not have produced a passing sheet for ANY creature taller than the
+    # frame its own width happened to buy, and that is a defect and not a
+    # setting. Height is now a DRIVER of the frame and not a consequence of it:
+    # take the wider of what width needs and what height needs, keep the cell
+    # ASPECT fixed so one cell is still comparable with another, and record
+    # which of the two drove it rather than leaving it to be inferred.
+    need_w_wide = (amx.x - amn.x) * 1.08
+    need_w_tall = ((amx.z - amn.z) + F.GROUND_UP) * 1.08 * F.CELL_X / float(F.CELL_Y)
+    need_w = max(need_w_wide, need_w_tall)
+    frame_driver = "height" if need_w_tall >= need_w_wide else "width"
     frame_overridden = bool(need_w > std_w)
     if frame_overridden:
         F.FRAME_W = need_w
@@ -495,6 +630,8 @@ def fit(key, repo, prove_red=False):
         span_x=info["span_x"], span_y=info["span_y"],
         frame_w=round(F.FRAME_W, 3), frame_h=round(F.FRAME_H, 3),
         frame_w_standard=round(std_w, 3), frame_overridden=frame_overridden,
+        frame_driver=frame_driver,
+        frame_need_w_wide=round(need_w_wide, 3), frame_need_w_tall=round(need_w_tall, 3),
         fits_standard_cell=bool((amx.x - amn.x) <= std_w
                                 and (amx.z - amn.z) <= (std_w * F.CELL_Y / float(F.CELL_X))
                                 - F.GROUND_UP),

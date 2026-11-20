@@ -10,6 +10,226 @@ the same standard as the thirty-six procedural minibosses.
 **ONE, shipped whole, rather than five half-done** — the row said so and it is
 the right instruction for a first pass.
 
+## Lastcuff — the second one, and the ceiling nobody had measured
+
+Written 20 Nov 2026, 01:4x CT by the ART lane (machine clock read with
+`TZ=America/Chicago date`). The 01:16 ruling says **pack variants tower**, so this
+one is authored to tower — and the body was chosen on a measurement, not on taste.
+
+### What I checked for first, before modelling anything
+
+**Nothing was modelled.** Every triangle is the pack author's; the two things this
+class does are a palette swap and a number.
+
+- **Which pack bodies can even be variants.** Measured off the kit's `Textures`
+  directory this run: **exactly two creatures ship three BaseColor maps** —
+  `T_Imp` and `T_Puglin`. The Puglin is Broodglut. So the Imp is **the whole
+  remaining supply of this class**, and that is worth saying plainly: a third pack
+  variant needs a different pack, not a different idea.
+- **Whether the Imp is already in the game.** It is — `bestiary.gd` carries
+  `imp` at `h` 1.30, wearing `BaseColor_1`. So this is a variant of a monster the
+  viewers already know, which is the whole recipe.
+- **Whether a towering body fits.** Measured on the evaluated depsgraph with the
+  stray `Icosphere` dropped: native **X 1.7538** (the T-pose arm span, symmetric
+  about the origin at ±0.8769) over native **Z 1.6779** (the height, feet at
+  z −0.002) = **1.045 m of span per metre of height**, against the Puglin's
+  **1.5767**. A third narrower. At 6.20 m the span is **6.48 m** and the 11.0 m
+  corridor leaves **4.52 m** of margin. **The corridor is not what caps this one.**
+
+### *** THE CEILING IS 6.50 m, AND IT CAPS THE WHOLE CLASS ***
+
+Measuring the Imp's width made the corridor stop mattering, which raised the
+question nobody in this house had asked: **how tall can a thing be before it is
+through the roof?** Read off `scripts/floorgen.gd` this run, not remembered:
+
+- the kit **wall tops are 4 m** — floorgen's own stairs comment sets the flight
+  "3.8 m up, under the 4 m wall top";
+- the floor builds a **lid** — `BoxMesh` of size `(w*G+14, 1.0, h*G+14)` at
+  `position = Vector3(0, 7.0, 0)`, `SHADOW_CASTING_SETTING_SHADOWS_ONLY`, there so
+  the overworld sun does not flood the floor. A 1 m box centred at 7.0 has its
+  **underside at 6.50 m**.
+
+So a creature standing on z = 0 is **through the lid above 6.50 m**, which is
+**2.653×** the 2.45 m hero. Three consequences, and the first is a fault in this
+lane's own shipped work:
+
+1. **Broodglut's shipped 6.60 m is 0.10 m through the lid.** Reported, not quietly
+   corrected under cover of a second change. The lid is shadows-only so nothing
+   visibly clips, but the creature's head is on the wrong side of the thing that
+   blocks the sun, and it is 0.10 m of margin where the register claims none is
+   needed. **Mr. E's call**: drop Broodglut to ≤ 6.50, or raise the lid.
+2. **Mr. E's 3× (7.35 m) is not available to any body at any width.** The corridor
+   arithmetic said 3× was room-locked *on the Puglin's span*; the lid says it is
+   out of reach on **every** span. Raising the lid is a one-line game-build change
+   to a shadows-only mesh — but it is theirs and his, not this lane's.
+3. **Everything in this class already stands head and shoulders over the 4 m
+   walls.** That is a look question a picture settles, and the picture should be
+   taken in the game, not here.
+
+`tools/art/minibossgen.py`'s corridor gate compares **span only**. It has never had
+a height term, which is why this went unseen for the whole class.
+
+### The creature, and the two things the render caught that the numbers did not
+
+**Lastcuff**, the Imp at **6.20 m** — 2.53× the hero, **4.77× its own regular imp**,
+0.30 m under the lid, 4.52 m of corridor margin. Palette `T_Imp_BaseColor_3`.
+
+**I shipped a name and a mechanic that the mesh does not carry, and the render is
+what caught it.** It was authored as *"Chainsweep"*, a mace running out on a chain
+to sweep the corridor end to end. Then I looked at `hero_front.png`: `Imp_Chains`
+is **four shackle cuffs** (both wrists, both ankles) plus a studded collar, and
+`Imp_Mace` is held flat against the hand. **There is no long chain and nothing runs
+out.** The idea is replaced by one the geometry already shows — **it is still in
+irons, and every one you knock off makes it faster** — which is better anyway,
+because the state is **visible on the model**: five removable pieces a viewer can
+count, instead of a stat. That is Mr. E's binding principle applied to a mechanic.
+
+**And the colour number was a bad witness.** `_3`'s mean rgb is
+`0.3897 / 0.3837 / 0.4154` — near-neutral, faintly blue — so this lane wrote "ash
+grey" in the spec. The render is a **saturated blue-cyan skin with violet forearms,
+shins and feet**. A mean over a whole 2048 map averages skin, shorts, horn, claw
+and every unused corner of the UV sheet into one number: it answers *how bright*
+and says nothing about *hue* or *where on the body*. Same family as `mask_of` at
+pass 11. The colour is kept — blue-violet is neither the red-brown imp you know nor
+Broodglut's red, which is all the class asks — but the **reason in the file now
+matches the picture**.
+
+### The fit proof — what I looked at, and every fault I can see
+
+Rendered on the real KayKit knight at scale 1.0, front, side and back.
+**Verdict GREEN**: 0 blanks, **0 frame clips**, 3 of 3 proving views, `errors []`,
+`blind_views []`, `room_locked false`, 15,232 tris, 55 bones, 5 meshes.
+
+Faults, named rather than averaged away:
+
+1. **The side view has no readable head, and it is the worst thing on the sheet.**
+   In a T-pose both arms project along the view axis, so the arms and the mace
+   collapse into one horizontal bar crossing the face at eye level — the mace head
+   reads as a growth off the jaw and the near wrist cuff sits over the mouth.
+   **The register's `seen: 1.0` passed this**, because seen-ness is not
+   readability. Same family as the Beadle's facing fault, and found the same way:
+   by looking.
+2. **It is a pose artifact, and this harness cannot show the pose the game draws.**
+   `bestiary.gd` grafts the UAL library on at load, so in play the arms come down.
+   Every number on this sheet — the side read, the 6.48 m span, Broodglut's whole
+   corridor table — is measured on a **T-pose the game replaces**. *(See the
+   measurement worth doing, below.)*
+3. **The collar fins frame the back of the skull** and at stream distance read a
+   little like a second small mask. A mild version of the Beadle fault; checked on
+   purpose because of it. **The facing itself is fine** — front and back are plainly
+   different (spine ridges, no face, mace on the correct side), unlike the Beadle.
+4. **The mace reads as a lump, not a weapon,** in the front view: it sits flat
+   against the hand with its spikes foreshortened.
+5. Nothing floats, nothing gaps, nothing intersects the ground plane; feet land
+   flat on z = 0.
+
+### A defect in this lane's own harness, red-proven by its own first run
+
+**The fit frame was sized off width alone and could not frame a tall creature.**
+The first Lastcuff run went **red exactly as designed**: `frame_w` grew to 9.01 m
+for an 8.34 m pair, `FRAME_H` fell out of the 760×520 cell aspect at **6.16 m**,
+and the 6.20 m creature lost **65 / 47 / 65 px of head off the TOP** of front,
+side and back. The border assertion — bought after System 1's cut glow — caught it
+and shipped nothing.
+
+But the harness also **could not have produced a passing sheet for any creature
+taller than the frame its own width happened to buy**, and that is a defect, not a
+setting. Height is now a **driver** of the frame rather than a consequence of it:
+take the wider of what width needs and what height needs, keep the cell aspect
+fixed so one cell is still comparable with another, and **record which of the two
+drove it** (`frame_driver`, `frame_need_w_wide`, `frame_need_w_tall`) instead of
+leaving it to be inferred. Second run, same creature: `frame_driver: "height"`,
+`frame_w 10.181`, `frame_h 6.966`, **`frame_clips {}`**, GREEN. The red and the
+green are the proof pair.
+
+### The one measurement that would settle two open questions at once
+
+**Re-measure the arm span in the UAL idle instead of the T-pose.** It is one pass,
+and it answers both of the things currently sitting with Mr. E:
+
+- whether Broodglut can have a true 3× **on span** (the T-pose gate is the only
+  reason it cannot), and
+- whether this class's side view reads at all in the pose the game actually draws.
+
+It does **not** answer the lid, which is 6.50 m whatever the arms are doing.
+
+## The two rulings of 20 Nov 01:16 CT — and the two design languages
+
+Written 20 Nov 2026, 01:3x CT by the ART lane (machine clock 01:34:32 CST). Pass 4
+raised two questions and sent both up rather than deciding them. The supervisor
+ruled on both at 01:16 CT. **This section is the record the ruling asked this lane
+to keep.**
+
+### Ruling 1 — Broodglut holds at 2.69× (6.60 m)
+
+2.69× is the top of the corridor-safe band and it stays. The arithmetic is in
+*Pass 4* below and was re-done independently by the team lead: span/height
+4.0995 / 2.60 = 1.576731 m of span per metre; 6.60 × 1.576731 = 10.41 m against a
+corridor clear of 3 × 4.0 − 2 × 0.5 = **11.0 m**, margin **0.59 m**; 2.85× lands
+exactly on the 11.00 wall and **3.00× is room-locked at 11.59 m**.
+
+A true 3× is still available but it is **Mr. E's call, and it costs one of two
+things** — neither taken without him:
+
+- **re-gate on the UAL idle span.** The 1.576731 figure is measured on the
+  authored **T-pose**, and that is not the pose the game draws: `bestiary.gd`
+  grafts the UAL library on at load, so the arms come down and the real footprint
+  is narrower. One measurement pass would say how much narrower, and 3× may well
+  fit. The gate is deliberately conservative, not wrong.
+- **room-lock the spawn.** A game-build wiring change, and it costs the creature
+  its corridor appearances.
+
+### Ruling 2 — the procedural 36 stay at their current scale
+
+**Two design languages, and the distinction is the point rather than an
+inconsistency to be tidied away:**
+
+| | pack variants | the procedural 36 |
+|---|---|---|
+| where the threat reads | **scale** — a bigger, meaner version of a monster you already know | **the mechanic** — what it DOES is the threat |
+| silhouette test | cannot pass against its own regular version (same mesh) — scale is the half that survives | each must read as itself with the colour thrown away |
+| cost | a palette swap and a number | a modelled body |
+| ratio band | **towers**: Broodglut 2.69× | **eye-level**: 0.80 – 1.20× |
+
+So the 36 are not "wrong" at eye level and are not being scaled up. Mr. E's 00:10
+complaint was about **Broodglut specifically**, and the directive says *variant*
+minibosses, not *all* minibosses. If the two read badly side by side on stream,
+that is a thing a picture settles and it gets revisited then.
+
+### The band, measured twice, because the number this lane published was wrong
+
+The comment in `tools/art/monstervariants.py` said until 01:3x CT that *"every one
+of the thirty-six sits at the same 1.06. The whole band was eye-level."* **It was
+disproved by this lane's own measurement in the same commit that wrote it** — the
+team lead found the contradiction. Corrected there and recorded here. Two cuts,
+run this pass:
+
+- **off the `CANON` tables in `tools/art/minibosses.py`** — 36 procedural
+  minibosses, authored height **1.95 m** (reeve) to **2.95 m** (beadle), ratio
+  **0.7959 – 1.2041** against the 2.45 m hero. **Exactly two sit at 1.06**:
+  snuffer and dyer, both 2.60 m.
+- **off every `renders/art/minibosses/_fit_*_register.json`** — **31 pair records
+  over 20 bodies**, ratio **0.84 – 1.20**, **four records at 1.06**. The extra two
+  are chibi duplicates of one body, which is why a register sweep reads four where
+  the authored table reads two. This reproduces the team lead's independent sweep
+  exactly (31, 0.84, 1.20, four at 1.06) from a different cut.
+
+**And it closes his one open caveat.** His net also caught records below 0.84 and
+**one at 1.63**, which he did not filter to bodies and claimed nothing about. They
+are the **creatures**, not minibosses: `renders/art/creatures/` holds 12 pair
+records from spiderling 0.14 to **pitwyrm 1.63**, and no miniboss register sits
+outside 0.84 – 1.20. Nothing unexplained is left in that sweep.
+
+**What is true, and is what the 00:10 directive was answering:** more than half
+the class is at or below a hero — **17 of 36 authored at or under 1.00** (drover at
+2.44 m / 0.9959 counts) — and nothing in it towers. Broodglut's 1.06 was typical of
+the band, not alone in it.
+
+### Wiring the game build still owes from ruling 1
+
+`scripts/bestiary.gd`, broodglut entry: `"h": 2.60` → `"h": 6.60`. Nothing else
+changes, and this lane does not touch that file.
+
 ## Broodglut — the first one
 
 | | |

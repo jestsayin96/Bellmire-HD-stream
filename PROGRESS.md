@@ -12394,3 +12394,10 @@ Ran WINDOWED 1920x1080 (logs _u97_*.log, untracked, rc in _u97_*.rc):
 So neither gate is asleep: each exits non-zero on a deliberate fault and zero on the real tree. Parse (headless, quit-after 300) rc=0, 0 Parse Error; the only SCRIPT ERRORs in any log are 28 "Cannot call method 'instantiate' on a null value" = the known gear.gd thin-import-cache lines, not HUD.
 Looked at: renders/cycles/u90/u90_run_150.png - four panes tile 1920x1080, Chronicle parchment centred over the cross with two whole wrapped entries, no ellipsis, nothing clipped, clock chip bottom right clear.
 Next: nothing owed; if the plan names no HUD item, long-roster LeaderboardPanel/hud_dock read at 125/150 inside claim+15. Nothing for Mr. E to decide.
+
+## HUB lane - 20 Nov 2026 05:4x CT - STAND-DOWN IN WRITING (the TAKE THIS NEXT row, 03:58, said: stand down in writing or audit web/)
+- The 03:58 HUB row asks for a written stand-down or an audit of web/. This is both. No web/ change; NOT claiming READY TO PUBLISH; no publish gate owed.
+- Publish state re-measured myself: gh-pages tip 05ac2679, origin/gh-pages^{tree} = 9ca8051e... = origin/hub:web (identical). `git diff origin/hub -- web` empty. Unpublished delta: 0 files / 0 lines.
+- Security greps on web/ at hub caeb22b4: innerHTML only at app.js:255 and :301 (page-owned literals; other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only in the app.js:10-11 comment; CSP meta present (1); `node --check app.js` OK; index.html:49 comment ("two page-owned sites") still true. link.href at app.js:2713 is regex-gated to twitch.tv; img.src at :3753 is a whitelist path.
+- Untracked in worktree: _hub_ready_shot.png (new, mine; delete refused on this machine, same class as the _h32_shot_* files). No picture taken this run - web/ unchanged so nothing new to look at.
+- Live-dot colour in shipped design: unchanged from H32 (no edit this run).

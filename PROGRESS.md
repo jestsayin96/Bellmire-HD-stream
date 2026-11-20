@@ -10308,10 +10308,8 @@ CAUGHT (1): tools/_l40_test.gd. Its overlap sweep SKIPS any top-level control >=
 CLEAN, by reading the assertion against its bound: _l71/_l74 (box.size.y vs sheet_rect(): box is a VBox that grows with overflow, bound is the designed sheet from _geo(); can go red), _l39 (box size vs fractions of the screen; spill vs HudDock.centre(), a pure function of viewport), _l57 (label vs spotlight pane_rect and centre()), _l36 (Chronicle vs chat box - another file's rect, independent), _l21 (controls vs pane overlay rects), _u58/_u62/_u63/_u64 (stripe vs _wm_baseline, already walked U63-U65).
 NOT AUDITED: ~60 non-HUD logic gates (delve/gear/monster tests); the L654 audit skips <=2 px and offscreen controls (a collapsed element passes - same class, left for a windowed cycle). 
 Files: tools/_l40_test.gd, PROGRESS.md. Not ticked by me.
-================================================================================
 ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
 ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
-================================================================================
 
 *** 1. THE ELEVEN FILES. THEY ARE MINE, AND THE ANSWER IS NOT A MOVE. ***
 
@@ -13118,10 +13116,8 @@ first try per the 08:58 ruling. Scratch lived outside the repo and in the VM's o
 _to_delete/ pile this hour.
 NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched, reply contract unchanged.
 No Twitch test this run, 0 bits, no account used.
-================================================================================
 THE 10:34 CT HOUR, 20 NOV 2026 - ART LANE. THE DAUBER (37th miniboss), AND THE
 LICENCE GAP THE TEAM LEAD HANDED BACK.
-================================================================================
 
 THE 09:58 PLAN ROW GAVE ART TWO THINGS: the minibosses "as the standing
 arrangement has it", with the instruction to STATE MY OWN COUNT rather than quote
@@ -13380,3 +13376,11 @@ THEIR half (one write of .what/.short 38->39); TWITCH_PARSE OK (8 checks); OFFFL
 2216; TOWNWALK in_solid=0/16631 raid 0/8673 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
 CARRIED, NOT STARTED: boss_bar.gd card at 150% (810x200 over "Now watching" + party numbers) -
 cap width/height by pane size. Needs a 150% capture to prove; next firing.
+
+U106 - 2026-11-20 14:5x CST - MANA PLATE NO LONGER UNDER THE BOSS CARD (carry from U105). One windowed capture, lock 14:53:53 -> IDLE 14:55:00
+Item: TAKE THIS NEXT 13:58 row 6 (HUD): look at the 150% frame; if hidden behind the boss card, move ManaStrip clear in hud_dock.gd. Pair/grid pass and L74 still NEXT.
+Lock: R working RUN_LOCK last line was chat bot IDLE 14:51:10, no Godot alive. Cap was claim+15 = 15:08; released after ~1 min, no crossing, no :07 contact. (Mount path is now $HOME/mnt/bellmire-hud, the prompt's "hd adventure/" path is stale; R is not mounted for device_bash, read via the Blender bridge.)
+Confirmed first: the U105 second-run 150% frame showed the plate HIDDEN - the boss card (810x200) sat over it; only the party-frame numbers peeked out.
+Changed (hud_dock.gd only): ManaStrip._clear_of_boss() runs after HudDock.put in split mode. If the docked plate intersects the visible BossCard plate (group hud_boss, read-only), it takes the first spot in the pane that touches neither the boss card nor the Chronicle box (below the card right, below left, pane-bottom right, left). boss_bar.gd NOT touched (the width/height cap there is still the card owner's).
+Checks: headless parse of W2 = 0 Parse Error / SCRIPT ERROR. Windowed tools/_u104_shot.gd: `U105_MANA scale=1.5 plates=1 offscreen=0 rects=[(11,216) 241x80] under_chronicle=0`. LOOKED AT renders/cycles/20261120_u104/mana_150_1080.png: "Mana" plate (MossyMage 2/54, DawnCleric 24/36) sits bottom-left of the director pane directly under the Nightwing card, clear of the Chronicle. This run's window was 1152x648, so the 150% frame is a smaller window than U105's 1920x1080; 100%/125% not re-looked at this run. Party-frame overlap with the new spot NOT checked.
+Not done: pair/grid pane pass, L74.

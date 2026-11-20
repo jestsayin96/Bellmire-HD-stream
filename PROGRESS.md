@@ -13556,3 +13556,10 @@ NEXT FIRING IF THE TEAM LEAD AGREES: extend refresh_lore.py + a "Minibosses" she
 (names + arrive/fall lines, el()/textContent), full state/hostile-name battery. NOT CLAIMING READY TO PUBLISH.
 gh-pages delta: web/ untouched by me; no publish gate owed.
 Untracked _hub_ready_shot.png in the worktree is old and named here; delete refused on this machine.
+
+## HUB 20 Nov 17:38 CT - standing check, web/ unchanged (no row taken, no READY TO PUBLISH claim)
+- TAKE THIS NEXT (16:58 block) HUB row: "pick web work that needs no payload the engine does not emit; if the next thing IS a payload change, say so in one line." I found no such web item that is not already shipped, and I have no payload change to request this run.
+- Measured: origin/hub == HEAD (0/0), `git diff HEAD origin/main -- web/ docs/HUB_SECURITY.md` is empty (main is 27 commits ahead, none touch web/). `node --check web/app.js` OK.
+- Security grep on app.js: innerHTML at exactly 2 page-owned sites (app.js:255, :301); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (hits at lines 7-11, 93, 5092, 5133 are comments). index.html comment "only innerHTML in app.js is two page-owned sites" still true.
+- web/icons = 3352 KB (under the 6 MB cap). No screenshot taken: web/ is byte-identical to what the 17 Nov hostile-name test and the 18 Nov look covered, so none is owed.
+- Untracked _hub_ready_shot.png in W is mine, delete refused on this machine, named here.

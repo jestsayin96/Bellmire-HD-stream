@@ -96,3 +96,117 @@ fault 9 in general form. Recovered to **17640**.
 - `minibossgen` now also asserts **border alpha** on every rendered frame. A
   blank check cannot see a CLIPPED one. It fired on nothing: 0 border pixels
   across the set.
+
+---
+
+# PASS 2 - THE RUN-LINKS ARM, 20 Nov 2026, 05:3x-05:5x CT
+
+The team lead's 04:58 row: *"the run-links arm you deliberately did not re-run.
+You wrote that its bar 'is not moved in a run that failed it' - correct
+discipline, and the run has now PASSED, so the bar is free. That arm is owed."*
+
+## The bar, rewritten before a frame was rendered - and what I had already seen
+
+`cv` is **struck from the bar** and is now a reported number only. Pass 1 proved
+it is the wrong term: it is dominated by the line's own foreshortening, so a
+plain tube already reads 0.30 and a "beat it by 1.4x" clause is unearnable.
+
+The bumps-only bar, on the 3/4 view:
+
+1. `bumps_links / expected_links >= 0.50` - at least half the links lying on the
+   measured stretch must show as a bulge. `expected_links` is that stretch's own
+   arc length over 0.17 m, so a short visible run cannot pass by being short.
+2. `density_links >= 1.8 x density_plain`, density = bumps / samples, both arms
+   sampled at the same step - the modulation must be the LINKS' and not the
+   line's own bends.
+
+**It is not a blind bar and I will not call it one.** Pass 1's shipped numbers
+(bumps 4 -> 9 and 6 -> 7, cv ~0.30 for a plain tube) were in front of me when I
+wrote it. It is a bar written to ask the right question, and it was written so
+that a row could fail it. One did.
+
+## MY OWN SAMPLING DIAGNOSIS WAS WRONG AND THE FIRST RUN SAID SO
+
+I wrote into the header that the profile's fixed 6.0 px step was **under three
+samples per link** - Nyquist - and that `bumps` had been aliasing. The run
+measured **px_per_m 161.3 / 162.3** and a link period of **27.4 / 27.6 px**:
+the old step was **4.6 samples per link**, comfortably above Nyquist. My
+90-100 px/m was an eyeball off the run's bounding box, not a measurement. The
+step is still DERIVED from the projected period (period/4 = 6.85 px, barely a
+move) because a step that is adequate by luck is not an instrument - but the
+sampling was **not** the fault and that sentence does not get to stand.
+
+## THE FAULT THE FIRST RUN DID FIND, IN MY OWN NUMBERS
+
+`gaoler` b_heap read **cv 0.0412** - a dead-flat width profile, which is exactly
+what a plain tube is - and the same profile scored **7 bumps**, out-scoring the
+links arm's 4. A local maximum with no amplitude floor counts pixel
+quantisation. The whole run-links question rests on that term, so a bump must
+now clear an amplitude floor (`6%` of mean width) **and** be the maximum within
+half a link period. `gaoler` plain fell **7 -> 1**. A flat tube now reads flat.
+
+## THE CONTINUITY GATE - THE TEAM LEAD'S PICTURE, AS A NUMBER
+
+He found by LOOKING that "from 3/4 the run from heap to hand is crossed and is
+not legible as a continuous line", and **every number in pass 1's register
+passed that picture.** The reason was in `_profile`: a sample whose centre fell
+outside the run mask was `continue`d - silently skipped, never counted - so an
+occluder eating the middle of the run cost the harness nothing.
+
+Counted now. `longest_visible_frac` = longest unbroken visible stretch over
+in-frame samples; **BAR >= 0.60**, reported beside the links and gating nothing
+of theirs.
+
+| 3/4, plain run | gaoler_chibi | gaoler |
+|---|---|---|
+| longest_visible_frac | **0.459** | **0.5735** |
+| verdict | FAIL | FAIL |
+
+**BOTH BODIES FAIL IT.** On `gaoler` the break splits the run 39 / 18 samples,
+and I can see where in the picture: the run passes **behind the near leg**. Pass
+1 re-routed it in FRONT of the apron and recovered 999 -> 17640 run pixels; that
+was real and it was not enough. The occluder that remains is the leg.
+
+## ONE GEOMETRY TERM MOVED, AND THE MECHANISM WAS ARITHMETIC FIRST
+
+A link's flat axis alternates by a quarter turn - that turn is the whole read -
+so every other link presents `rz` to the camera. `rz` was **0.028 m against a
+run tube of radius 0.052 m**: the edge-on link sat ENTIRELY INSIDE THE TUBE and
+could not bulge at all. At most half the links could ever register, and the
+instrument measured exactly that - 0.3478 and 0.4103 against a bar of 0.50.
+`rz` 0.028 -> **0.068**: above the tube so the edge-on link still shows, still
+well under `rx` 0.080 so it reads as a flattened ring and not a bead.
+
+| 3/4, links arm | gaoler_chibi | gaoler |
+|---|---|---|
+| bump_frac_of_expected, rz 0.028 | 0.3478 | 0.4103 |
+| bump_frac_of_expected, rz 0.068 | **0.4571** | **0.7273** |
+| density vs plain, rz 0.068 | **1.60x** | **7.10x** |
+| verdict | **FAIL** | **PASS** |
+
+## THE CALL: `RUN_LINKS["on"]` STAYS FALSE
+
+The set is split. One body clearing a bar is not the set clearing it, and the
+bar does not move in the run that wrote it - that is the second hour this term
+has been asked and the answer is the answer. The `rz` move is kept, because it
+is the arm's geometry and it is measured in both directions.
+
+**I looked at all three frames.** The plain run is unmistakably a smooth dark
+POLE. With links at rz 0.068 both bodies read as chain - the full `gaoler`
+obviously so. The number and the picture agree, which is why the FAIL is a
+scoring fail and not a disagreement.
+
+## What this register still cannot see
+
+- **Nothing here names the occluder.** `longest_visible_frac` says the run is
+  broken and by how much; that it is the near LEG is something I read off the
+  picture, not off a number. An occluder-attribution arm would be an honest
+  next instrument.
+- The chibi's run crosses its own heap AND its keyring, so part of its link
+  stretch is measured where the chain overlaps itself. That is where its missing
+  bulges are likely to be, and it is a testable hypothesis, not a reason to move
+  the bar.
+- The small pale keyring hangs **in the middle of the chain run** on both
+  bodies and reads as a link of it rather than as keys.
+- The heap is dark-on-dark against the hood and the apron on both bodies; its
+  silhouette carries it, its contrast does not.

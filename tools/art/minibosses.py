@@ -327,7 +327,28 @@ def _dragheap(P, cx, cy, tube=0.055, link=(0.072, 0.072, 0.034), every=9):
 # foreshortening, not by links, so a plain tube already reads 0.30 there. THE
 # BAR IS NOT MOVED IN THE RUN THAT WROTE IT. The geometry stays off, the arm
 # stays runnable, and the next pass can write a bumps-only bar before it looks.
-RUN_LINKS = dict(step=0.17, rx=0.080, rz=0.028, on=False)
+# PASS 2, 20 Nov 05:5x CT. ONE TERM MOVED, rz 0.028 -> 0.068, AND THE MECHANISM
+# WAS ARITHMETIC BEFORE IT WAS A RENDER. A link's flat axis alternates by a
+# quarter turn - that turn is the whole read - so every other link presents `rz`
+# to the camera. rz was **0.028 m against a run tube of radius 0.052 m**: the
+# edge-on link sat ENTIRELY INSIDE THE TUBE and could not make a bulge at all.
+# At most half the links could ever register, and the instrument measured
+# exactly that: bump_frac_of_expected **0.3478 / 0.4103** against a bar of 0.50.
+# rz is now ABOVE the tube radius so the edge-on link still shows, and still
+# well under rx so the link reads as a flattened ring and not a bead - beads
+# would be a different object and the plainness rule forbids it.
+RUN_LINKS = dict(step=0.17, rx=0.080, rz=0.068, on=False)
+# PASS 2 RESULT, 20 Nov 05:5x CT. `on` IS STILL FALSE AND IT IS STILL A RESULT.
+# Against the bumps-only bar written in _gaoler_chain_ab.py BEFORE this pass
+# rendered (bump_frac_of_expected >= 0.50, density_links >= 1.8x plain):
+#     gaoler        0.4103 -> **0.7273**, density 4.01x -> **7.10x**  PASS
+#     gaoler_chibi  0.3478 -> **0.4571**, density 1.22x -> **1.60x**  FAIL
+# THE SET IS SPLIT, SO THE GLOBAL TOGGLE STAYS OFF. One body clearing a bar is
+# not the set clearing it, and I am not moving this bar in the run that wrote
+# it - that is the second time this term has been asked and the answer is the
+# answer. The rz move IS kept: it is the arm's geometry, it is measured in both
+# directions, and the next pass starts from the better number rather than
+# re-deriving it.
 
 
 def _dragrun(P, pts, tube=0.052):

@@ -29,6 +29,36 @@ RED ON EMPTY, BOTH OF THEM. vis_px == 0 is RED, not a clean sheet. A sep
 computed over zero boundary pairs is RED, not 0.0 - a metric over an empty set
 reading green is the lying-instrument class this lane has shipped before.
 
+PASS 5 ADDS THE QUESTION THE LIT NUMBER CANNOT ANSWER: IS THE STEP IN THE
+MATERIAL, OR IS IT JUST WHERE THE LIGHT IS. sep_local is read off the LIT
+render, so a boundary between two patches of the SAME albedo can score well
+purely because one of them happens to face the key light. That step moves with
+the lamp and with the camera azimuth - the ticked pass-4 table already names
+the hazard twice (the Moulder's neck cloth is the same material as the sand bed
+behind him, and the Sower's hopper, legs and thorn stems are all 'bone') and
+both times the honest answer was "recorded, not resolved". A third render
+answers it: the same creature through the same camera with every slot flattened
+to its own unlit base colour.
+
+  sep_alb     the local step in ALBEDO LUMINANCE. Lightness the material owns.
+  sep_chroma  the local step in ALBEDO CHROMA, so two parts of equal lightness
+              and different colour no longer score zero - the blindness the
+              pass-4 footer declares by construction on the Sower.
+  frac_borrow the share of the boundary that PASSES lit and has neither albedo
+              lightness nor albedo colour behind it. Separation on loan from
+              the lamp.
+
+THE VERDICT IS STILL sep_local AND NOTHING IS REMOVED, so every pass-4 row
+stays comparable. What is new is a second, non-red flag: FRAGILE, raised when a
+row passes lit and more than half its boundary is borrowed. Fragile is not red
+and must not be reported as red - it says the row is one azimuth away from the
+fault, which is exactly what the pass-4 footer wrote down and could not measure.
+
+THE CHROMA THRESHOLD IS UNCALIBRATED. 0.045 is carried over from the luminance
+channel because no stream measurement exists to set it against, so sep_chroma
+is REPORTED AND IS NOT A VERDICT. Saying so is the point; an uncalibrated
+number presented as a pass is this lane's lying-instrument class.
+
 WHAT THIS STILL CANNOT SEE, said plainly so the next run does not trust it too
 far: it judges ONE declared landmark. It says nothing about parts nobody
 declared, nothing about whether the shape READS AS what it is meant to be, and
@@ -60,6 +90,7 @@ OUT = os.path.join(repo, "renders", "art", "minibosses", "_landmark", key)
 os.makedirs(OUT, exist_ok=True)
 os.makedirs(os.path.join(OUT, "nm"), exist_ok=True)
 os.makedirs(os.path.join(OUT, "mk"), exist_ok=True)
+os.makedirs(os.path.join(OUT, "ab"), exist_ok=True)
 
 
 def wipe():
@@ -82,7 +113,42 @@ def dil(m):
     return o
 
 
-def build(mark):
+def local_steps(chans, ring_in, ring_out):
+    """For every landmark edge pixel, the LARGEST distance across the supplied
+    channels to a body pixel ACTUALLY TOUCHING IT. Returns (steps, touched).
+
+    Generalised at pass 5 from the single luminance field of pass 4. With ONE
+    channel sqrt(d*d) is abs(d), so this is bit-for-bit the pass-4 arithmetic
+    and no ticked row moves because of the refactor - that is the only reason
+    it was worth refactoring rather than copying. With TWO channels it is a
+    distance in the opponent-colour plane.
+
+    RED ON EMPTY IS STILL THE CALLER'S JOB and the caller still does it: this
+    returns an empty `touched` rather than a comforting zero, because a median
+    over no pixels is the number this lane has shipped wrong before.
+    """
+    steps = np.zeros(chans[0].shape, dtype=np.float32)
+    touched = np.zeros(chans[0].shape, dtype=bool)
+    for ax, sh in ((0, 1), (0, -1), (1, 1), (1, -1)):
+        o_m = np.roll(ring_out, sh, axis=ax)
+        # a roll wraps, so the wrapped edge row/column is not a neighbour
+        if ax == 0:
+            (o_m.__setitem__((slice(0, 1), slice(None)), False) if sh > 0
+             else o_m.__setitem__((slice(-1, None), slice(None)), False))
+        else:
+            (o_m.__setitem__((slice(None), slice(0, 1)), False) if sh > 0
+             else o_m.__setitem__((slice(None), slice(-1, None)), False))
+        d2 = np.zeros(steps.shape, dtype=np.float32)
+        for ch in chans:
+            d2 = d2 + (ch - np.roll(ch, sh, axis=ax)) ** 2
+        d = np.sqrt(d2)
+        hitm = ring_in & o_m
+        steps = np.where(hitm, np.maximum(steps, d), steps)
+        touched |= hitm
+    return steps, touched
+
+
+def build(mark, albedo=False):
     """Exactly minibossgen.build_miniboss, with the landmark's items moved into
     their own slot when `mark` is set. Geometry is IDENTICAL either way, so
     render_views derives the same bounds and the same camera - which is the
@@ -102,6 +168,42 @@ def build(mark):
         'glow': L.mat_glow(key + "_glow", tuple(min(1.0, c / max(aura)) for c in aura), 3.2),
     }
     mats = M.apply_overrides(key, mats)
+    # ------------------------------------------------------------------ PASS 5
+    # THE ALBEDO VARIANT. Every slot flattened to its OWN declared base colour
+    # as unlit emission, so the render carries material and nothing else: no
+    # key light, no fill, no rim, no normal. Geometry, camera and framing are
+    # untouched, which is the same premise the with/without diff already rests
+    # on. mat_glow at strength 1.0 is a flat emitter - the same node this file
+    # already uses for the magenta marker, and NOT at the strength 6.0 that
+    # pass 1 got burnt by, because here nothing needs to outshine anything.
+    rgbs = {
+        'body': tuple(body),
+        'dark': tuple(c * 0.16 + 0.012 for c in body),
+        'bone': tuple((0.30 + c * 0.55) * dull for c in tint),
+        'glow': tuple(min(1.0, c / max(aura)) for c in aura),
+    }
+    approx = []
+    ov = M.OVERRIDE.get(key) or {}
+    for slot in list(rgbs):
+        # an overridden slot ships a DECLARED colour and the tint arithmetic
+        # above is not what the viewer sees. apply_overrides records the
+        # non-glow ones in SLOT_RGB; 'glow' is not recorded there, so it is
+        # read off the override row itself rather than guessed.
+        dec = M.SLOT_RGB.get((key, slot))
+        if dec is not None:
+            rgbs[slot] = tuple(dec)
+        elif slot == 'glow' and 'glow' in ov:
+            rgbs['glow'] = tuple(ov['glow'][0])
+        if slot in (M.VCOL_SLOTS.get(key) or set()):
+            # THE COLOUR IS ON THE MESH, NOT IN THE SLOT. A vertex-driven slot
+            # has many colours and this flattening gives it one - the fill. The
+            # albedo channel is APPROXIMATE for that slot and the report says so
+            # by name, because a number whose caveat lives only in a comment is
+            # a number that will be trusted too far.
+            approx.append(slot)
+    if albedo:
+        for slot, rgb in rgbs.items():
+            mats[slot] = L.mat_glow(key + "_alb_" + slot, rgb, 1.0)
     # FLAT, NOT EMISSIVE. Pass 1 used mat_glow at strength 6.0. An emissive
     # marker can light or bloom onto its NEIGHBOURS, so pixels move that the
     # landmark does not occupy - an instrument that sees TOO MUCH, which reads
@@ -148,22 +250,24 @@ def build(mark):
     for ob in objs:
         ob.location = (ob.location.x, ob.location.y, ob.location.z - mn.z)
     bpy.context.view_layer.update()
-    return objs, dict(aura=aura), hit
+    return objs, dict(aura=aura), hit, approx
 
 
-objs, info, _ = build(False)
+objs, info, _, approx = build(False)
 pa, _, _ = G.render_views(objs, key, os.path.join(OUT, "nm"), 700, 980, info)
-objs, info, hit = build(True)
+objs, info, hit, _ = build(True)
 pb, _, _ = G.render_views(objs, key, os.path.join(OUT, "mk"), 700, 980, info)
+objs, info, _, _ = build(False, albedo=True)
+pc, _, _ = G.render_views(objs, key, os.path.join(OUT, "ab"), 700, 980, info)
 
 if hit == 0:
     raise SystemExit("RED %s/%s: the landmark sphere selected ZERO parts - it is "
                      "aimed at empty space, and a diff of nothing reads clean" % (key, name))
 
 rep, red = {}, []
-for a_p, b_p in zip(pa, pb):
+for a_p, b_p, c_p in zip(pa, pb, pc):
     v = os.path.splitext(os.path.basename(a_p))[0]
-    A, B = G.read_png(a_p), G.read_png(b_p)
+    A, B, C = G.read_png(a_p), G.read_png(b_p), G.read_png(c_p)
     alpha = A[..., 3] > 0.5
     # PASS 2 OF THIS INSTRUMENT, AND PASS 1 WAS A LIAR. Pass 1 defined the
     # landmark as "any pixel where A and B differ by more than 0.02". Moving
@@ -235,21 +339,7 @@ for a_p, b_p in zip(pa, pb):
     # hat and not at all along the neck has ONE median and TWO truths.
     # BOTH ARE REPORTED AND NOTHING IS REMOVED, so the ticked table stays
     # comparable row for row.
-    steps = np.zeros(Lm.shape, dtype=np.float32)
-    touched = np.zeros(Lm.shape, dtype=bool)
-    for ax, sh in ((0, 1), (0, -1), (1, 1), (1, -1)):
-        o_l = np.roll(Lm, sh, axis=ax)
-        o_m = np.roll(ring_out, sh, axis=ax)
-        # a roll wraps, so the wrapped edge row/column is not a neighbour
-        if ax == 0:
-            (o_m.__setitem__((slice(0, 1), slice(None)), False) if sh > 0
-             else o_m.__setitem__((slice(-1, None), slice(None)), False))
-        else:
-            (o_m.__setitem__((slice(None), slice(0, 1)), False) if sh > 0
-             else o_m.__setitem__((slice(None), slice(-1, None)), False))
-        hitm = ring_in & o_m
-        steps = np.where(hitm, np.maximum(steps, np.abs(Lm - o_l)), steps)
-        touched |= hitm
+    steps, touched = local_steps([Lm], ring_in, ring_out)
     n_touch = int(touched.sum())
     if n_touch == 0:
         # RED ON EMPTY, same rule as every other count in this file.
@@ -261,13 +351,95 @@ for a_p, b_p in zip(pa, pb):
     sv = steps[touched]
     sep_local = float(np.median(sv))
     frac_flat = float((sv < 0.045).mean())
+
+    # ---------------------------------------------------------------- PASS 5
+    # IS THE STEP IN THE MATERIAL OR IS IT JUST WHERE THE LIGHT IS. Everything
+    # above is read off the LIT render, so a boundary between two patches of
+    # the SAME albedo scores well whenever one of them happens to face the key
+    # light - and that step moves with the lamp and with the azimuth. The
+    # pass-4 footer wrote the hazard down twice and could not measure it. The
+    # third render is the same creature through the same camera with every slot
+    # flattened to its own unlit base colour, so the only thing left in the
+    # frame is material.
+    alpha_c = C[..., 3] > 0.5
+    if int(alpha_c.sum()) == 0:
+        # RED ON EMPTY. An albedo render that came out blank must not be
+        # allowed to report "no borrowed separation" - that reads as the
+        # healthiest answer on the sheet and would mean nothing at all.
+        red.append("%s: %s - the ALBEDO render is EMPTY, so sep_alb/sep_chroma "
+                   "are computed over nothing" % (v, name))
+        rep[v] = dict(vis_px=vis, body_px=body_px, sep=round(sep, 4), pairs=pairs,
+                      sep_local=round(sep_local, 4), frac_flat=round(frac_flat, 4),
+                      touch=n_touch, sep_alb=None, sep_chroma=None,
+                      frac_borrow=None, red=True)
+        continue
+    Ca = np.clip(C[..., :3], 0.0, None)
+    La = lum(Ca)
+    # opponent axes off the albedo render: red-green and yellow-blue. Crude and
+    # deliberately so - it is here to stop two parts of EQUAL LIGHTNESS and
+    # different colour scoring a flat zero, which the pass-4 footer declares
+    # this instrument does by construction on the Sower ('body' 0.498 against
+    # 'bone' 0.549). It is NOT a perceptual colour difference and its threshold
+    # is not calibrated against anything, so it is reported and never a verdict.
+    opp_a = Ca[..., 0] - Ca[..., 1]
+    opp_b = 0.5 * (Ca[..., 0] + Ca[..., 1]) - Ca[..., 2]
+    s_alb, t_alb = local_steps([La], ring_in, ring_out)
+    s_chr, _ = local_steps([opp_a, opp_b], ring_in, ring_out)
+    if int(t_alb.sum()) != n_touch:
+        # the two renders share geometry, camera and framing, so the boundary
+        # must be the same pixels. If it is not, something upstream moved and
+        # the comparison is void - say so rather than compare two boundaries.
+        red.append("%s: %s - the albedo boundary is %d px against the lit %d. "
+                   "The two renders are not the same geometry and the albedo "
+                   "channels are VOID for this view"
+                   % (v, name, int(t_alb.sum()), n_touch))
+        rep[v] = dict(vis_px=vis, body_px=body_px, sep=round(sep, 4), pairs=pairs,
+                      sep_local=round(sep_local, 4), frac_flat=round(frac_flat, 4),
+                      touch=n_touch, sep_alb=None, sep_chroma=None,
+                      frac_borrow=None, red=True)
+        continue
+    av, cv = s_alb[touched], s_chr[touched]
+    sep_alb = float(np.median(av))
+    sep_chroma = float(np.median(cv))
+    frac_flat_alb = float((av < 0.045).mean())
+    # BORROWED: this pixel passes on the lit render and has NEITHER albedo
+    # lightness NOR albedo colour behind it. Whatever separates it is the lamp.
+    pass_lit = touched & (steps >= 0.045)
+    n_pass = int(pass_lit.sum())
+    borrowed = pass_lit & (s_alb < 0.045) & (s_chr < 0.045)
+    # RED ON EMPTY once more: a share over zero passing pixels is None, not 0.0.
+    frac_borrow = (float(int(borrowed.sum()) / float(n_pass)) if n_pass else None)
+
+    # THE PICTURE THE NUMBER OWES. Green where the boundary is carried by the
+    # material, red where it is on loan from the light. This lane has twice
+    # shipped a count nobody had seen a picture of.
+    vizb = np.ones(A.shape, dtype=np.float32)
+    vizb[..., :3] = np.where(alpha[..., None], 0.82, 1.0)
+    vizb[pass_lit & ~borrowed] = (0.10, 0.70, 0.30, 1.0)
+    vizb[borrowed] = (0.95, 0.10, 0.10, 1.0)
+    vizb[touched & ~pass_lit] = (0.25, 0.25, 0.25, 1.0)
+    G.write_png(os.path.join(OUT, "_%s_%s_borrow.png" % (name, v)), vizb)
+
+    fragile = bool(sep_local >= 0.045 and frac_borrow is not None
+                   and frac_borrow > 0.50)
     rep[v] = dict(vis_px=vis, body_px=body_px,
                   vis_frac=round(vis / float(body_px), 4),
                   sep=round(sep, 4), pairs=pairs,
                   sep_local=round(sep_local, 4),
                   frac_flat=round(frac_flat, 4), touch=n_touch,
+                  sep_alb=round(sep_alb, 4),
+                  frac_flat_alb=round(frac_flat_alb, 4),
+                  sep_chroma=round(sep_chroma, 4),
+                  pass_lit=n_pass,
+                  frac_borrow=(round(frac_borrow, 4) if frac_borrow is not None
+                               else None),
+                  albedo_approx_slots=approx,
+                  fragile=fragile,
                   red=bool(sep_local < 0.045))
-    # THE VERDICT IS THE LOCAL NUMBER, because it is the one that reproduces.
+    # THE VERDICT IS STILL THE LIT LOCAL NUMBER, because it is the one that
+    # reproduces and the one every ticked row was measured with. FRAGILE below
+    # is a WARNING and is deliberately not red: it does not say the viewer
+    # cannot see the part today, it says the part is one azimuth from the fault.
     if sep_local < 0.045:
         red.append("%s: %s is visible (%d px) but does NOT SEPARATE - the median "
                    "local step along its boundary is %.3f and %.0f%% of that "
@@ -278,8 +450,15 @@ for a_p, b_p in zip(pa, pb):
                    "boundary is FLAT - it reads along part of its outline only"
                    % (v, name, sep_local, 100.0 * frac_flat))
 
+fragile_views = [v for v, d in rep.items() if d.get("fragile")]
+warn = ["%s: %s PASSES lit (sep_local %.3f) and %.0f%% of its passing boundary "
+        "is BORROWED FROM THE LIGHT - albedo step %.3f, chroma step %.3f. Not "
+        "red: one azimuth from the fault."
+        % (v, name, rep[v]["sep_local"], 100.0 * rep[v]["frac_borrow"],
+           rep[v]["sep_alb"], rep[v]["sep_chroma"]) for v in fragile_views]
 out = dict(key=key, landmark=name, at=[cx, cy, cz], r=rr, parts_selected=hit,
-           views=rep, red=red)
+           views=rep, red=red, fragile=fragile_views, warn=warn,
+           albedo_approx_slots=approx)
 with open(os.path.join(OUT, "_%s.json" % name), "w", encoding="utf-8") as f:
     json.dump(out, f, indent=2)
 print("LANDMARK", json.dumps(out))

@@ -62,6 +62,14 @@ TRADE = {
     # built to do - the list is a declaration and a stale declaration is a
     # lie, not a 0.000 share.
     "greener": ("crust", "plates", "scraper", "taken", "brazier"),
+    # THE FULLER, AND "man" IS IN THIS LIST ON PURPOSE. Every other entry asks
+    # "does the trade read"; this one also has to ask the opposite question,
+    # because the fault I am measuring is that THE MACHINE ATE THE MAN - the
+    # Drillmaster's pass-1 fault ("you could not tell there was a man there"),
+    # arrived at from the other side. Declaring "man" as a measured span is the
+    # only way the number can say whether the figure survived the set piece.
+    "fuller": ("man", "trough", "cloth", "folds", "liquor", "stocks", "bar",
+               "backside"),
 }
 BODY_SPANS = ("man", "body", "arms", "legs", "head")
 

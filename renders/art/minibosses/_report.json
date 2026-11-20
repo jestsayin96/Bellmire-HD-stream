@@ -1463,11 +1463,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "fuller": {
+   "title": "The Fuller",
+   "theme": "fogbound",
+   "idea": "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the cloth in its trough, and when the cloth is full it wrings the lot out over the room at once. The cloth is the gauge and you can see it swell, so the fight is a decision nothing else in here asks for: STOP HITTING IT. Break the stocks, or wring it early and eat a small one, or keep swinging and pay for every blow you landed",
+   "wear": 0.62,
+   "feed_line": "Something in here is taking the blows.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1866,
+   "size": [
+    3.29,
+    1.84,
+    2.66
+   ],
+   "footprint_span": 3.29,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.3074741650144572,
+    "ortho": 3.4001755714416504,
+    "clip": [
+     8.474510192871094,
+     22.629627227783203
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 102,
+  "files": 105,
   "failures": []
  }
 }

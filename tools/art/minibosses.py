@@ -11526,3 +11526,326 @@ OVERRIDE.update({
 })
 
 BUILDERS.update({"rammer": rammer})
+
+
+# ============================================================================
+# 35 THE FULLER - IT GIVES BACK WHAT YOU PUT IN
+#
+# WHAT I CHECKED BEFORE DESIGNING, MEASURED OFF THIS FILE AND NOT REMEMBERED:
+# ORDER carries 34 keys at the time of writing (the prompt said 33 - the Rammer
+# landed after it was written), and I read all 34 mechanics in full before
+# choosing. NOTHING in the register stores damage and returns it. The nearest
+# four and why this is not one of them:
+#   TANNER      "will not take the same blow twice" - a damage-TYPE lockout.
+#               You change your answer. Here the type never matters; the TOTAL
+#               does, and the answer is to stop answering.
+#   STRICKLER   caps your best hero DOWN. A ceiling on output, not a ledger.
+#   GREENER     eats your weapons. A cost per blow, paid immediately.
+#   RAMMER      a timed drop. Its clock runs on ITS schedule - stand off the
+#               pile and come back. The Fuller's clock is written by the PARTY:
+#               it only fills when you hit it, so the party chooses when the
+#               payback lands, and that is the inversion - hitting it is how
+#               you lose.
+# AND THE RE-SKIN I NEARLY SHIPPED, WHICH IS WHY THIS IS NOT CLOTH ON A FRAME:
+# the Tanner already pegs flat hides onto upright tenters and this file already
+# has a `_tenter` helper. A fuller with cloth stretched on a frame would have
+# been the Tanner in a different hue - the mechanic would differ and the
+# PICTURE would not, which is the only thing a viewer gets. So the cloth here
+# is BALLED AND SWOLLEN IN A TROUGH, under twin stocks, and there is no
+# stretched sheet and no vertical drop-weight frame anywhere on the body.
+#
+# THE READ, AND IT IS THE MECHANIC: TROUGH, TWO HAMMER HEADS OVER IT, A PALE
+# MASS OF CLOTH BULGING OUT OF IT, MAN STANDING OFF TO THE LEFT ON THE BAR.
+# The cloth OVERFILLS the trough on purpose - that is the gauge, and a viewer
+# reads "that is full" without being told. The Drillmaster's lesson is applied
+# rather than rediscovered: the man stands LEFT of centre and the instrument is
+# off to his right, so the outline is MAN + THING and not a balloon on legs.
+#
+# THE MOULDER'S CONTRAST RULE, NINTH BODY RUNNING, and here it is load-bearing:
+# the man is DARK and the cloth is PALE, so his outline is carried by contrast
+# and I do not have to invent a rim light. His wool is the LIGHTER dark and the
+# hood, apron and the oak are the darker, so he has internal structure instead
+# of being one flat mass - the Paviser's fault 2 and the Drover's fault 3.
+#
+# AND THE BEADLE'S FAULT IS DESIGNED OUT, NOT HOPED AWAY. The team lead found
+# by LOOKING that the Beadle's pale band wrapped its head, so the figure read
+# the same from front and back - it had no facing. Every pale thing on this
+# body is therefore ONE-SIDED: the face panel exists only at -Y, the apron only
+# at -Y, the drips only on the near rim. The +Y side carries different objects
+# (the crank wheel and the dry folded stock on its rack), so front and back are
+# not the same picture. I still have to LOOK at the sheet to believe it.
+CANON.update({
+    "fuller": ("The Fuller", 2.66, (0.58, 0.60, 0.54), (1.00, 0.95, 0.82),
+               "fogbound",
+               "IT GIVES BACK WHAT YOU PUT IN - every blow you land soaks into the "
+               "cloth in its trough, and when the cloth is full it wrings the lot "
+               "out over the room at once. The cloth is the gauge and you can see "
+               "it swell, so the fight is a decision nothing else in here asks "
+               "for: STOP HITTING IT. Break the stocks, or wring it early and eat "
+               "a small one, or keep swinging and pay for every blow you landed",
+               0.62, "Something in here is taking the blows."),
+})
+ORDER = ORDER + ["fuller"]
+
+# Per-slot materials. The tint-derived path makes one hue carry a whole body,
+# which was MEASURED as a defect on the register (median satMean 0.087) and is
+# what OVERRIDE exists for. Here it is doing one specific job: MR. E'S SECOND
+# RULE, "the goods must not look second-hand even when the man does". The man
+# is wear 0.62 and reads it; the cloth is this week's stock off the loom and
+# must read FRESH, and a single wear-dulled tint cannot say both at once.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"fuller"}
+
+OVERRIDE.update({
+    "fuller": {
+        # THE MAN'S WOOL - the LIGHTER dark. Cool grey-green: a fulling yard is
+        # wet, and six of the recent bodies are warm brown-grey, so going cool
+        # costs nothing and separates him from the cohort at pane distance,
+        # where hue survives and detail does not (the Leech's argument, reused).
+        'body': ((0.150, 0.168, 0.158), 0.86, 0.00),
+        # OAK AND IRON IN ONE SLOT, AND I AM NAMING IT RATHER THAN HIDING IT.
+        # The trough, the apron, the hood, the pivot posts AND the two hammer
+        # faces are all here, so the iron cannot be brighter-faced than the
+        # timber the way the Drillmaster's gong is. Metal 0.18 is the
+        # compromise: enough that the hammer faces catch a highlight off the
+        # two suns, not enough to make a wet oak trough read as a cistern. If
+        # the faces do not read as iron on the sheet, that is the thing to fix,
+        # and it is a fifth slot or a vertex colour, not a brighter dark.
+        'dark': ((0.072, 0.062, 0.052), 0.80, 0.18),
+        # THE CLOTH, AND IT IS THE WHOLE POINT OF THE BODY. Greasy cream, warm,
+        # NOT bleached - the Comfitmaker measured that a cold white on a body
+        # reads as BONE, and a fuller's web before dyeing is yellow-white with
+        # the grease still in it. Lowest roughness of the three solids because
+        # wet-fulled wool is the one thing in this yard that is not matte.
+        'bone': ((0.760, 0.706, 0.584), 0.74, 0.00),
+        # THE LIQUOR straining out under the stocks. Strength 1.50, not 3.2:
+        # the Dyer's lesson is that an emissive pushed until it is bright clips
+        # to a white hole, and this has to stay READABLE AS RUNNING LIQUID -
+        # a white blob says nothing and the drips are the only motion cue here.
+        'glow': ((1.000, 0.955, 0.820), 1.50),
+    },
+})
+
+
+def _stock(P, px, pz_top, drop, head_w=0.40):
+    """ONE OF THE TWIN STOCKS: a pivot post, a raked oak arm and an iron-shod
+    head. `drop` 0.0 is fully raised, 1.0 is down on the cloth, so the two are
+    built at different values and the pair reads as ALTERNATING - which is what
+    a fulling stock does and is the only motion a static body can state."""
+    # the pivot post stands on the far (+Y) side so it never crosses the man
+    limb(P, [(px, 0.46, 0.0), (px, 0.44, pz_top)], 0.080, 0.066, 'dark')
+    P.add(L.sphere(0.075, 0.075, 0.075, 10, 7), 'dark', loc=(px, 0.44, pz_top))
+    # the arm swings from the post down and toward the camera over the trough
+    tip_z = pz_top - 0.30 - drop * 0.70
+    tip_y = 0.10 - drop * 0.26
+    limb(P, [(px, 0.42, pz_top), (px, 0.26 - drop * 0.10, pz_top - 0.14 - drop * 0.34),
+             (px, tip_y, tip_z)], 0.062, 0.052, 'bone')
+    # the head: a heavy block, iron-shod face down. Pitched with the arm so it
+    # lands flat on the cloth rather than cornering into it.
+    pitch = 0.30 - drop * 0.52
+    P.add(L.box(head_w, 0.30, 0.26), 'dark', loc=(px, tip_y - 0.04, tip_z - 0.12),
+          rot=(pitch, 0.0, 0.0))
+    for k in range(2):                       # two binding bands, so it reads shod
+        P.add(L.box(head_w * 1.06, 0.055, 0.28), 'bone',
+              loc=(px, tip_y - 0.16 + k * 0.22, tip_z - 0.12), rot=(pitch, 0.0, 0.0))
+    return tip_z
+
+
+def fuller():
+    """IT GIVES BACK WHAT YOU PUT IN. The gauge is on the outside of the
+    creature: the cloth swells in the trough as the party hits it, and when it
+    is full the stocks wring it out over the room. Everything a viewer needs is
+    in the silhouette - a trough, two hammers over it, and a pale mass that is
+    visibly too big for the box it is in.
+
+    Static: no anims entry. The alternating stocks are built at two different
+    drops so the PAIR states the motion the body cannot perform."""
+    P = Parts("fuller")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        # spans are (i0, i1) index pairs, the convention _trade_read, _sheen_ab
+        # and _rat_tally already measure by. Declared here so the instrument is
+        # asking about named groups and not about whatever happened to be built.
+        P.spans[name] = (_m[0], len(P.items))
+
+    # *** PASS 2, CHANGE A: THE MACHINE ATE THE MAN, AND THE NUMBER SAID SO. ***
+    # Pass 1 measured with _trade_read (the repo's own with/without-group pixel
+    # instrument, not a new one): the man was 0.2995 of the front silhouette
+    # and 0.0805 OF THE SIDE - from the side this was a fulling stock with a
+    # grey lump behind it, which is the Drillmaster's pass-1 fault ("the disc
+    # ATE HIM") arrived at from the other end. The man now sets the height and
+    # the machine comes down and in to meet him. ONE IDEA, and it is measured
+    # against the pass-1 number rather than judged by eye a second time.
+    X = -0.70                                  # the man stands left of centre
+    TX = 0.56                                  # the trough's centre, to his right
+
+    _open()
+    # ------------------------------------------------------------- THE TROUGH
+    # A heavy open box on two cross-feet. Built as four walls and a floor so the
+    # cloth can bulge OUT of it; a solid block would have hidden the gauge.
+    TW, TD, TH = 1.30, 0.82, 0.46              # inner width, depth, wall height
+    WALL = 0.085
+    P.add(L.box(TW + 2 * WALL, TD + 2 * WALL, 0.09), 'dark', loc=(TX, 0.0, 0.255))
+    for s in (-1, 1):                          # the two long walls (near/far)
+        P.add(L.box(TW + 2 * WALL, WALL, TH), 'dark',
+              loc=(TX, s * (TD / 2.0 + WALL / 2.0), 0.30 + TH / 2.0))
+        P.add(L.box(WALL, TD + 2 * WALL, TH), 'dark',   # the two end walls
+              loc=(TX + s * (TW / 2.0 + WALL / 2.0), 0.0, 0.30 + TH / 2.0))
+    for s in (-1, 1):                          # cross-feet, planted ON the floor
+        P.add(L.box(0.17, TD + 0.22, 0.30), 'dark', loc=(TX + s * 0.56, 0.0, 0.15))
+    # two iron hoops round the trough - a working trough is banded or it bursts
+    for s in (-1, 1):
+        P.add(L.box(TW + 2 * WALL + 0.03, 0.055, 0.10), 'bone',
+              loc=(TX, s * (TD / 2.0 + WALL / 2.0 + 0.01), 0.62))
+
+    _close("trough")
+    _open()
+    # -------------------------------------------- THE CLOTH: THE GAUGE, PALE
+    # Three squashed spheres plus folds, sitting PROUD of the rim so it reads as
+    # overfull. This is the biggest pale mass on the body and the eye lands on
+    # it first, which is on purpose: the cloth IS the mechanic.
+    for i, (dx, dz, rx, rz) in enumerate(((-0.44, 0.78, 0.44, 0.30),
+                                          (0.04, 0.86, 0.52, 0.34),
+                                          (0.50, 0.76, 0.42, 0.28))):
+        P.add(L.sphere(rx, 0.46, rz, 16, 11), 'bone', loc=(TX + dx, 0.0, dz))
+    # folds over the near rim - the web spilling toward the camera. One-sided on
+    # purpose (the Beadle's no-facing fault), so the near view differs from the far.
+    _close("cloth")
+    _open()
+    # *** PASS 2, CHANGE B, AND IT IS MEASURED ON ITS OWN SPAN. *** Pass 1 hung
+    # four separate round tubes over the near rim as "folds". On all three
+    # renders they read as FOUR BLUNT TEETH in a row - the trough looked like a
+    # jaw. They were 0.1036 of the front silhouette, so a tenth of the picture
+    # was saying the wrong word. Cloth hangs as ONE sheet with soft rolls in it,
+    # not as separate pegs, so it is now a single draped membrane with two
+    # rolls caught in it. Still one-sided (-Y only), which is what keeps the
+    # front and back reads different.
+    # *** PASS 3, CHANGE B2 - B WAS THE WRONG FIX FOR THE RIGHT FAULT. ***
+    # B replaced the four "teeth" with a drape 1.24 wide hanging to z 0.30 -
+    # near the trough's full width and most of its face. On the render the
+    # sheet, the cloth mass and the trough front merged into ONE PALE BLOB and
+    # the dark trough that was giving the cloth its contrast disappeared from
+    # the front view. That is the Comfitmaker's pass-3 pattern exactly: the
+    # fault was real and the fix was wrong. The folds number went UP (0.1036 ->
+    # 0.1648) while the picture got worse, which is why a footprint is not a
+    # verdict. Narrow and shallow now, so the DARK trough frames it on both
+    # sides and underneath and the pale reads as cloth spilling over a rim.
+    P.raw(L.membrane([(TX - 0.31, -0.45, 0.78), (TX + 0.31, -0.45, 0.78),
+                      (TX + 0.28, -0.53, 0.50), (TX - 0.28, -0.53, 0.53)], 0.050), 'bone')
+    for fx, dz in ((-0.17, 0.0), (0.15, 0.04)):
+        P.raw(L.tube([Vector((TX + fx - 0.11, -0.47, 0.74 + dz)),
+                      Vector((TX + fx + 0.01, -0.51, 0.66 + dz)),
+                      Vector((TX + fx + 0.13, -0.47, 0.73 + dz))],
+                     [0.042, 0.058, 0.042], 8), 'bone')
+    _close("folds")
+    _open()
+    # THE LIQUOR: a thin lit line along the near rim and three drips under it.
+    # Interior to the body and well inside the frame, so the border check is not
+    # being asked a question it cannot see.
+    P.add(L.box(TW * 0.86, 0.045, 0.030), 'glow', loc=(TX, -0.47, 0.455))
+    for k, dx in enumerate((-0.40, 0.06, 0.44)):
+        P.raw(L.tube([Vector((TX + dx, -0.47, 0.44)), Vector((TX + dx, -0.47, 0.16 + 0.05 * k))],
+                     [0.026, 0.014], 6), 'glow')
+    _close("liquor")
+    _open()
+    # --------------------------------------------------------- THE TWIN STOCKS
+    # Built at two different drops so the pair reads as alternating: the right
+    # one is DOWN on the cloth (and its head is what the liquor is running off),
+    # the left one is RAISED and about to fall.
+    _stock(P, TX - 0.36, 2.10, 0.08)
+    _stock(P, TX + 0.40, 2.10, 1.00)
+    # the head beam the two posts are braced to - it ties them into one machine
+    P.add(L.box(1.22, 0.11, 0.115), 'dark', loc=(TX + 0.02, 0.45, 2.17))
+
+    _close("stocks")
+    _open()
+    # ------------------------------------------------------------------ THE MAN
+    _legs(P, X, hip=1.10, stance=0.23, r0=0.128, r1=0.104, boot=(0.31, 0.50, 0.14))
+    for s in (-1, 1):                          # waders: wet to the knee, darker
+        limb(P, [(X + s * 0.24, 0.02, 0.62), (X + s * 0.28, -0.04, 0.11)],
+             0.142, 0.126, 'dark')
+    limb(P, [(X, 0.08, 1.04), (X - 0.02, 0.00, 1.38), (X - 0.03, -0.06, 1.62)],
+         0.258, 0.286, 'body')
+    P.add(L.box(0.64, 0.42, 0.58), 'body', loc=(X - 0.03, -0.04, 1.54))
+    for s in (-1, 1):
+        P.add(L.sphere(0.188, 0.170, 0.154, 12, 8), 'body',
+              loc=(X - 0.03 + s * 0.34, -0.04, 1.78))
+    # THE APRON - heavy, oiled, and ONLY on the -Y side. A fuller works in the
+    # splash and the apron is the one thing on him that is kept.
+    # *** PASS 4, CHANGE C: I QUOTED THE LESSON AND THEN BROKE IT. ***
+    # The header on this body cites the Paviser's fault 2 and the Drover's
+    # fault 3 - "the man is a flat dark mass" - and then pass 1 hung an apron
+    # 0.60 wide and 0.88 tall across him in the DARK slot, so from the chest
+    # down he was one unbroken rectangle. I did not see it until the hero sheet
+    # put him beside a KayKit knight, who has a belt, a cape and pauldrons
+    # breaking him up; next to that the Fuller read as a board with a head.
+    # So: the apron narrows and stops at mid-thigh, and a pale cord ties it.
+    # The LIGHTER wool of the torso and hips now shows on both sides of it,
+    # which is the internal structure the lesson is actually asking for - the
+    # fix is not a lighter apron, it is LESS apron.
+    P.raw(L.membrane([(X - 0.21, -0.30, 1.66), (X + 0.19, -0.30, 1.66),
+                      (X + 0.23, -0.38, 1.02), (X - 0.25, -0.38, 1.02)], 0.045), 'dark')
+    # the cord, and the two ends hanging off it - a pale break across the dark
+    P.raw(L.tube([Vector((X - 0.27, -0.30, 1.30)), Vector((X, -0.34, 1.27)),
+                  Vector((X + 0.25, -0.30, 1.30))], [0.032, 0.036, 0.032], 7), 'bone')
+    P.raw(L.tube([Vector((X + 0.17, -0.35, 1.26)), Vector((X + 0.20, -0.36, 1.06))],
+                 [0.028, 0.022], 6), 'bone')
+    # *** PASS 5: CHANGE C ADDED TWO SHOULDER STRAPS AND THEY WERE EARS. ***
+    # Aimed up-and-back off the apron's top corners they stood proud of the
+    # torso as two dark points, and on the hero sheet the apron stopped being a
+    # garment and read as an ANIMAL HEAD with two pricked ears - on the one
+    # body whose whole argument is that the man must read as a man. Removed
+    # rather than re-aimed: the cord already says the apron is worn, and a
+    # strap that has to thread behind a shoulder sphere to be safe is a thing
+    # that will come back as a fault the next time the shoulders move.
+    # the hood, and the head UNDER it. The hood is the darker slot so the pale
+    # face panel has a dark ground to be read against.
+    P.add(L.sphere(0.172, 0.180, 0.174, 14, 9), 'body', loc=(X - 0.04, -0.06, 2.05))
+    P.add(aim(L.cone(0.246, 0.138, 0.29, 14), (X - 0.04, 0.02, 1.95), (0.0, 0.10, 1.0)), 'dark')
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped.
+    P.add(L.box(0.190, 0.048, 0.155), 'bone', loc=(X - 0.04, -0.222, 2.04))
+    eyes(P, (X - 0.04, 0.0, 2.06), 0.057, 0.032, -0.252)
+
+    _close("man")
+    _open()
+    # ------------------------------------------- THE BAR, AND HIS HANDS ON IT
+    # A long oak bar from his grip across to the crank spindle at the trough's
+    # near end: this is the WRINGING, which is the "gives it back" half, and it
+    # physically ties the man to the machine so they read as one set piece.
+    bar = [Vector((X + 0.14, -0.32, 1.56)), Vector((X + 0.68, -0.36, 1.26)),
+           Vector((TX - 0.62, -0.42, 0.94))]
+    P.raw(L.tube(bar, [0.058, 0.051, 0.046], 8), 'bone')
+    limb(P, [(X + 0.26, -0.12, 1.72), (X + 0.18, -0.28, 1.59)], 0.082, 0.062, 'body')
+    limb(P, [(X - 0.34, -0.10, 1.74), (X - 0.46, -0.22, 1.32),
+             (X - 0.39, -0.32, 1.06)], 0.080, 0.058, 'body')
+    # A HAND, not a bare tube end: pass 1 left both arms stopping in mid-air.
+    P.add(L.sphere(0.082, 0.070, 0.070, 10, 7), 'dark', loc=(X + 0.16, -0.30, 1.57))
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=(X - 0.39, -0.33, 1.03))
+
+    _close("bar")
+    _open()
+    # ------------------------- THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The crank wheel on the trough's far end, and the dry folded stock on a low
+    # rack behind the machine. Neither is visible from the front, so front and
+    # back cannot be the same read - the Beadle's fault, designed out.
+    _ring(P, (TX + 0.92, 0.30, 0.78), 0.30, axis='x', slot='dark', rad=0.048, n=22)
+    for k in range(4):
+        a = TAU * k / 4.0 + 0.3
+        P.raw(L.tube([Vector((TX + 0.92, 0.30, 0.78)),
+                      Vector((TX + 0.92, 0.30 + 0.28 * math.cos(a), 0.78 + 0.28 * math.sin(a)))],
+                     [0.030, 0.026], 6), 'dark')
+    P.add(L.box(0.10, 0.10, 0.22), 'bone', loc=(TX + 0.92, 0.56, 0.90))
+    for s in (-1, 1):                          # the rack
+        P.add(L.box(0.085, 0.085, 0.60), 'dark', loc=(TX + s * 0.50, 0.86, 0.30))
+    P.add(L.box(1.20, 0.26, 0.070), 'dark', loc=(TX, 0.86, 0.63))
+    for k in range(3):                         # three bolts of DRY stock, folded
+        P.add(L.box(1.06, 0.195, 0.115), 'bone', loc=(TX, 0.86, 0.72 + k * 0.125))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"fuller": fuller})

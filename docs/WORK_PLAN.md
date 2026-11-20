@@ -1,3 +1,127 @@
+## TAKE THIS NEXT - THE 07:58 CT FIRING, 20 NOV 2026 (machine clock 07:58-08:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 06:58 BLOCK. ***
+## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is bc7baa7a. THE HUB IS FULLY PUBLISHED (delta 0).
+## MR. E'S 07:24 DIRECTIVE IS IN FORCE: BATCH-WIRE WHOLE PACK DIRECTORIES, TIER 1 IS SYSTEMS 15/47/68.
+## ART HANDED THE GAME BUILD THE NUMBERS THAT MAKE SYSTEM 47 A ONE-CYCLE BATCH. TAKE IT.
+
+1. GAME BUILD - **S60 IS TICKED, AND I CHECKED THE COPY AGAINST ITS SOURCE, NOT AGAINST YOUR NOTE.**
+   `origin/art:renders/art/minibosses/_fit_leech_register.json` -> `pairs.leech.span_x` = **2.2581**;
+   `scripts/bestiary.gd` leech `"span": 2.2581`. Identical. The props-not-body sentence is in the file
+   beside the key, the bound paragraph is struck, and `_s58_span.gd` asserts the copy against the
+   register live - S58_SPAN OK n=28 with the RED arm still failing as designed, parse 0 ERROR,
+   OFFFLOOR 0/2428, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK.
+   **NEXT - SYSTEM 47, AND IT IS A BATCH ROW, NOT A MODEL ROW (Mr. E, 07:24 CT, via the supervisor):
+   WIRE THE WHOLE OF `assets/props` (94) AND `assets/dungeon` (20) AS DUNGEON PROPS. 10-20 THIS CYCLE.**
+   Art measured all 114 this hour and I RECOUNTED EVERY TERM OFF THE MANIFEST MYSELF, not off its table:
+   `renders/art/worldfit/_manifest.json` -> 94 + 20 rows, `measured` 94/20, `failed` 0/0, and the
+   `corridor` and `lid` columns are SINGLE-VALUED across all 114: **every row reads CORRIDOR-SAFE and
+   UNDER-LID**. Tallest in either directory is 2.6318 m under a 9.5 m lid. **There is no size gating to
+   write. Do not re-derive those two terms.**
+   *** THE ONE THING THAT WILL BITE YOU, AND IT IS A SIGN: `base_dz_m` IS SIGNED AND ART'S PROSE IS NOT. ***
+   WORLDFIT.md says base_dz_m is "how far a model reaches BELOW ITS OWN PIVOT" and then counts 18 props
+   and 4 dungeon past the 5 cm line. The LIST is `abs(base_dz_m) > 0.05` - I proved set-equality against
+   my own recount in both directions - so of those 22, **20 are BELOW the pivot (they sink) and 2 are
+   ABOVE it (they float): `Lantern_Wall.gltf` and `Workbench_Drawers.gltf` (+0.8842).** A single-sign
+   shift fixes 20 and puts 2 in the floor. Worst is `Banner_1_Cloth.gltf` **-2.2464** - the pivot is the
+   banner's WALL MOUNT, so spawned at floor level the whole cloth is underground. I looked at
+   `renders/art/worldfit/_base_offsets.png` myself: four models through one camera against the floor
+   line - banner far below it, fence straddling, workbench floating clear above, barrel sitting on it.
+   The picture agrees with the numbers. 92 of the 114 need no offset at all.
+
+2. ART - **BOTH HALVES TICKED, AND THE PROVENANCE ONE IS EXACTLY WHAT LAST HOUR ASKED FOR AND MORE.**
+   `_leech_span.json` now carries the full stamp - `read_from_tree`, `read_from_branch` laptop,
+   `read_from_head`, `ref` origin/main, `gd_lid_line` **verbatim at 10.0** (it published 7.0 last hour),
+   `gd_sha256_8` bc3a603f == `ref_gd_sha256_8`, `matches_ref` true, `floorgeom_stale` **false**. The file
+   can now be quoted out of context. Arm **I PROVENANCE** is new in `_floorgeom_proof.py` and refuses an
+   unverifiable tree. WORLDFIT: **173 files measured, 0 failed, 0 unreadable**, floorgeom stamped against
+   main's own floorgen.gd sha - I recounted 12+20+5+42+94 = 173 and 94+20 = **114** off the manifest.
+   **NEXT, STILL TIER 1 AND STILL THE SAME INSTRUMENT: MEASURE THE PACK DIRECTORIES WORLDFIT HAS NOT
+   REACHED YET.** You measured five directories under `assets/`. Systems 15 (town buildings) and 68
+   (nature) are Tier 1 and their models are mostly still in the extracted packs, not in `assets/`. Point
+   `worldfit.py` at the rest of them, same two terms, same stamp, same `base_dz_m`, `--dungeon-dir` only
+   where a thing really goes underground. **30 of 42 in `assets/nature` are already past the 5 cm line and
+   one of them (`Plant_7.gltf`) is past it UPWARD** - carry the sign into the table the way row 1 needs it,
+   and fix the WORLDFIT.md sentence while you are there so the prose and the list agree.
+   NOT A CHARGE: your minibosses stay yours whenever a Tier-1 measurement row is not open.
+
+3. CONTENT - **C-138 IS TICKED, AND I RE-DID THE ARITHMETIC AGAINST MAIN.** epitaphs 709 -> **722** (+13),
+   descend 447 -> **453** (+6), cleared 434 -> **439** (+5), misfire **167** unchanged. Exactly the three
+   deltas you claimed, no more. `data/lore_lines.json` parses; `_note_c138` is the 29th cycle note and is
+   accounted for in the baseline.
+   **NEXT: keep producing, unthrottled, and keep writing `_note_` keys.** No lane wires one. You are the
+   one lane the visual-impact reprioritisation does not touch - it changes what the ENGINE lanes build
+   next, not what you write.
+
+4. HUB - **YOUR STAND-DOWN IS TICKED AND I MEASURED THE SAME NUMBER INDEPENDENTLY BEFORE I READ YOURS.**
+   `origin/gh-pages^{tree}` = **9ca8051e...** = `origin/hub:web`, byte-identical. Unpublished delta
+   **0 files / 0 lines**. You did not claim READY TO PUBLISH, so **I ran no publish gate and none was
+   owed** - and you changed nothing in `web/`, so no security re-grep was owed either. Last look at the
+   live page: 19 Nov 20:0x CT by this seat, at publish 5.
+   **NEXT, AND IT IS NEW WORK HANDED DOWN BY THE SUPERVISOR ON MR. E'S 07:24 DIRECTIVE, NOT INVENTED HERE:
+   WHEN YOUR PUBLISHABLE DELTA IS ZERO, CATALOGUE THE PACKS.** Inventory the extracted packs - per pack:
+   file count by extension, total size, LICENCE as read off the pack's own licence file (not a search
+   snippet), and which system it feeds (15 town buildings / 47 dungeon props / 68 nature / 17 market /
+   38 roads / unassigned). Write it as a doc in `docs/`. **Art has already done five directories under
+   `assets/` - start from `renders/art/worldfit/_manifest.json` and do not re-measure what it covers.**
+   Read-only on assets, no Godot, no lock. This feeds row 1's batch rows for the next several cycles.
+
+5. HUD - **U100's STAND-DOWN IS TICKED, AND THE ROW THAT SENT YOU THERE WAS MINE AND IT WAS RIGHT.**
+   You were dry: System 2's HUD half closed at U98 (all four surfaces answered NO on reach, and that is a
+   real answer), L74's gates carry green AND red proofs from U97, and you correctly did not claim the lock
+   to re-run green gates. Two stand-downs in a row is not a dry lane, it is a lane with an empty queue.
+   **NEXT - YOU HAVE AN ITEM AGAIN: THE MANA SYSTEM UI. Diablo / WoW / Elder Scrolls style MANA BAR, not
+   D&D spell slots.** This comes down from the SUPERVISOR as Mr. E's Phase 2 directive of 07:24 CT. **I AM
+   SAYING OUT LOUD WHERE IT CAME FROM: the supervisor's two docs quote Mr. E verbatim on four of the five
+   directives and NOT on the mana item.** I am routing that gap up (see FOR THE SUPERVISOR) and giving you
+   the row anyway, because work-routing is the seat above me doing its job and the row costs nothing if
+   the quote lands.
+   **DO IT IN U98's SHAPE AND DO STEP (a) FIRST: a bar with nothing behind it is a picture, not a HUD.**
+   (a) ONE LINE PER SURFACE: does the engine expose a per-hero mana / resource value a bar could read, and
+   where? Grep the behaviour, not the word - `mana_charge` exists in the SOUND system (D15) and that is a
+   sound cue, not a resource. If the answer is NO everywhere, **that is a real answer and it closes the
+   step** - write it up, name the file that would have to publish the value, and stop; do not invent one
+   and do not edit a file you do not own. (b) only if (a) answers yes: build the bar in your own files,
+   at UiTheme 100/125/150, with a RED arm. (c) look at the picture yourself before you call it done.
+
+6. CHAT BOT - **B78 AND B79 ARE BOTH TICKED AND THE DISCRIMINATOR IS LOAD-BEARING, WHICH I CHECKED IN THE
+   SOURCE AND NOT IN YOUR LOG.** `tools/_l14_test.gd` reads `ChatCmd.guard_faults()` IMMEDIATELY after the
+   first `commands()` load - which is the only place it can be read without passing blind, and your comment
+   says why - and `_ok(faults.is_empty(), ...)` is the 23rd check. 22 -> 23 is that one line. The red arm is
+   the proof that matters: a PROSE-ONLY edit to `satchel.what` (command set untouched, 31/31) failed
+   **exactly one** check, SATCHEL ANCHOR, with the other 22 green. Reverted clean - data sha256 dbeb5517,
+   doc edff7faa, tracked status clean, 23 green on the re-run.
+   **NEXT: THE GAP YOU REPORTED IS YOURS TO CLOSE AND IT IS NOT A NEW ITEM** - it is a defect in an
+   instrument you shipped, found by your own red arm. `COMMANDS_DOC` compares command NAMES; the generated
+   `docs/COMMANDS.md` carries the `what` PROSE (sha edff7faa -> 00014f22 while drifted) and the check stayed
+   GREEN through it. Make the doc check compare what it publishes, and **red-prove it with the same
+   prose-only edit** - the arm that caught the gap is the arm that must fail afterwards. Same discipline:
+   revert in the same run, sha before and after, tracked status clean both sides.
+
+*** FOR THE SUPERVISOR (07:58 CT, 20 Nov) ***
+  1. **THE MANA ITEM HAS NO VERBATIM QUOTE AND THE OTHER FOUR DIRECTIVES DO.** Your 07:24 and 07:26 docs
+     quote Mr. E on batch-wiring, on your own expanded authority ("you should be able to decide, that's
+     why you are here"), on deferring fit-proofing ("we can do this towards the end as finishing touches")
+     and on the cadence. The mana system UI is named as "Mr. E's Phase 2 directive" with no words and no
+     time. I have written the HUD row to it anyway and said so in the row. **If you hold his words, put
+     them in the plan** - a ruling that only exists in a chat log does not exist.
+  2. **MY OWN PROMPT IS STALE IN ONE PLACE AND IT IS THE PLACE IT CALLS MOST VALUABLE.** The :58 prompt
+     still says System 2's HUD rarity-hue half "was still unstarted" and is "THE MOST VALUABLE OPEN ITEM
+     IN THE HOUSE". It is CLOSED - ticked 19 Nov 20:58, and U98 closed the reach half at 05:53 today.
+     A firing cannot edit a prompt, so it goes on the owed list you are landing: **that makes 9.**
+  3. **PUBLISH 5's COMMIT SUBJECT ON gh-pages CARRIES AN UNRESOLVED `%s`** where origin/hub's SHA belongs
+     ("web/ subtree from origin/hub %s"). It is history and I am not rewriting it. The next publish writer
+     should assert its substitutions before writing - the same fault the chat bot just fixed in its lock
+     writer this hour. No action owed from you; recorded so it is not repeated.
+  RECOMMENDATION: nothing is blocked. Rows 1 and 4 start spending the batch-wiring directive this cycle.
+
+## FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt; land these live)
+  - :58 PROMPT: System 2's HUD half is CLOSED, not "unstarted / the most valuable open item in the house".
+  - :58 PROMPT: the hub's "2 files / 19 lines unpublished" paragraph is SPENT - gh-pages^{tree} has equalled
+    origin/hub:web since publish 5 (05ac2679, 19 Nov 20:06 CT). Re-measure hourly as the prompt says; the
+    worked example in it is stale.
+  - :58 PROMPT + :34 ART PROMPT: the miniboss count line ("thirty-three exist as of 18 Nov") is two days old.
+  - These join the backlog the supervisor is landing.
+
 ## TAKE THIS NEXT - THE 06:58 CT FIRING, 20 NOV 2026 (machine clock 06:58-07:0x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 05:58 BLOCK AND BOTH 04:58 ADDENDA. ***
 ## FIVE LANES SHIPPED, SIX MERGED, FIVE TICKED. The hub was SILENT (plan-sync commit only, no write-up).

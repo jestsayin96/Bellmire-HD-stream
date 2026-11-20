@@ -1,0 +1,70 @@
+{
+ "key": "hooper",
+ "spans": [
+  "cask"
+ ],
+ "yaws": {
+  "0": {
+   "with_px": 113055,
+   "without_px": 86029,
+   "moved_px": 62544,
+   "outline_px": 27427
+  },
+  "45": {
+   "with_px": 125152,
+   "without_px": 93101,
+   "moved_px": 53165,
+   "outline_px": 32444
+  },
+  "90": {
+   "with_px": 94464,
+   "without_px": 73692,
+   "moved_px": 26467,
+   "outline_px": 21195
+  },
+  "135": {
+   "with_px": 86709,
+   "without_px": 80136,
+   "moved_px": 9038,
+   "outline_px": 6832
+  },
+  "180": {
+   "with_px": 110680,
+   "without_px": 83225,
+   "moved_px": 39753,
+   "outline_px": 27907
+  },
+  "225": {
+   "with_px": 123047,
+   "without_px": 91318,
+   "moved_px": 59400,
+   "outline_px": 32243
+  },
+  "270": {
+   "with_px": 95258,
+   "without_px": 73090,
+   "moved_px": 53494,
+   "outline_px": 22569
+  },
+  "315": {
+   "with_px": 89034,
+   "without_px": 80834,
+   "moved_px": 51777,
+   "outline_px": 8509
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "engine": "BLENDER_EEVEE",
+ "survives": 0.145,
+ "cardinal_survives": 0.423,
+ "cardinals": {
+  "0": 62544,
+  "90": 26467,
+  "180": 39753,
+  "270": 53494
+ },
+ "outline_survives": 0.211,
+ "worst_yaw": 135,
+ "best_yaw": 0
+}

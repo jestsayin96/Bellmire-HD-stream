@@ -1,0 +1,72 @@
+{
+ "key": "sealer",
+ "spans": [
+  "press",
+  "strip",
+  "backside"
+ ],
+ "yaws": {
+  "0": {
+   "with_px": 104075,
+   "without_px": 87270,
+   "moved_px": 40109,
+   "outline_px": 17730
+  },
+  "45": {
+   "with_px": 121821,
+   "without_px": 85991,
+   "moved_px": 50909,
+   "outline_px": 36632
+  },
+  "90": {
+   "with_px": 90649,
+   "without_px": 68180,
+   "moved_px": 42965,
+   "outline_px": 23239
+  },
+  "135": {
+   "with_px": 103754,
+   "without_px": 82537,
+   "moved_px": 52304,
+   "outline_px": 21884
+  },
+  "180": {
+   "with_px": 104539,
+   "without_px": 86605,
+   "moved_px": 59137,
+   "outline_px": 18926
+  },
+  "225": {
+   "with_px": 121145,
+   "without_px": 86214,
+   "moved_px": 76110,
+   "outline_px": 35724
+  },
+  "270": {
+   "with_px": 89741,
+   "without_px": 66990,
+   "moved_px": 56252,
+   "outline_px": 23361
+  },
+  "315": {
+   "with_px": 107024,
+   "without_px": 82448,
+   "moved_px": 54234,
+   "outline_px": 25325
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "engine": "BLENDER_EEVEE",
+ "survives": 0.527,
+ "cardinal_survives": 0.678,
+ "cardinals": {
+  "0": 40109,
+  "90": 42965,
+  "180": 59137,
+  "270": 56252
+ },
+ "outline_survives": 0.484,
+ "worst_yaw": 0,
+ "best_yaw": 225
+}

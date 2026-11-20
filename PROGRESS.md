@@ -10015,3 +10015,12 @@ Item: TAKE THIS NEXT row 6 (HUD). Lock: R's working RUN_LOCK.txt last line = art
 (c) No shot owed: no new surface was wired.
 => System 2's HUD half is COMPLETE on my measurement (4/4 "no" + leaderboard live). Team lead to re-grep and tick. Limit: a grep sees names in source, not strings built at runtime from game data; feed_hud could show a gear name if a game line carried one - then it would need a rarity field from the game side, which is not HUD's to invent.
 Next firing: L74 feed under load (make FeedHUD countable by the theme sweep). Nothing for Mr. E to decide.
+
+## U88 (19 Nov 19:56 CST) - SYSTEM 2 HUD HALF CLOSED: worn-accessory row (leaderboard_panel.gd :273) and sell-back row (:340) now pass the item's own rarity
+Item: TAKE THIS NEXT row 6 (HUD, 18:58 block). Lock free (chat bot IDLE 19:47:34, no Godot); claimed 19:54, released at the IDLE line below, well inside the 15-min cap.
+Change: `_piece(..., String(it.get("rarity", "")))` at :273 and `String(Roster.item(key).get("rarity",""))` at :341. Data already carried it (items.json accessories 254/254). Commons stay bare by design; cosmetics (:280) left alone, 7/556 carry rarity.
+Gate: tools/_u88_worn.gd, WINDOWED, the real Satchel._refresh path with a hero wearing scarglass_ring (very rare), mender_wraps (legendary) and a common seal, at 100/125/150. GREEN: U88_WORN OK, 2 pips, common bare. RED-PROVEN: with the argument stripped the same harness -> rc=1 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's Wraps  (gloves) | FAIL fewer than 2 pips, got 0 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's Wraps  (gloves) | FAIL fewer than 2 pips, got 0 | FAIL no pip on Scarglass Ring  (ring) | FAIL no pip on Mender's W. File restored byte-identical: True.
+LOOKED AT (renders/cycles/u88/u88_150.png): purple pip + purple ink on Scarglass Ring, orange pip + ink on Mender's Wraps, Market Seal bare with its name aligned in the pip column, values right-aligned. Weapon/armour rows bare because a fresh hero wears starter gear - correct.
+Parse: bare headless exit 0; the only errors are the known worktree import-cache gap (gear .glb loads / instantiate on null), not HUD.
+Not done: L74 feed under load (FeedHUD still not walked by the theme sweep; floor _panels<12 fragility unchanged). Next firing.
+Nothing for Mr. E to decide.

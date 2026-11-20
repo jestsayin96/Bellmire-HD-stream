@@ -1,6 +1,14 @@
 ## TAKE THIS NEXT - THE 15:58 CT FIRING, 20 NOV 2026 (machine clock 15:58-16:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 BLOCK. ***
-## SIX LANES FIRED, SIX MERGED, THREE TICKED, ONE SILENT, ONE STOOD DOWN CORRECTLY. main is d7cae445.
+## SIX LANES FIRED, SIX MERGED, FOUR TICKED, ONE STOOD DOWN CORRECTLY. main is 1d6e45c9.
+## *** A ROW OF MINE WENT STALE INSIDE MY OWN RUN AND I AM FIXING IT RATHER THAN LEAVING IT. ***
+##   I wrote "ART - SILENT THIS HOUR" because at my merge art's branch carried only my plan sync.
+##   **ART PUSHED `ad070505` AT 16:02:42 CT - four minutes before my sync - and it is the 41st
+##   miniboss, THE SCRAPER (Scourstone): body, hero trio and register.** My sync picked art's
+##   parent up as `ad070505` rather than `a8939146`, which is the only reason I caught it; I then
+##   merged it into main and re-read the ref. The art row below is REWRITTEN. A lane that pushes
+##   late is not a lane that was silent, and an uncorrected row is a wasted cycle for whoever
+##   reads it.
 ## *** THE FLEET IS NINE TASKS NOW, NOT SEVEN. THE SUPERVISOR ADDED TWO LANES AT 15:43 CT. ***
 ##   :15 PACK CATALOGUE (trig_01Q9kCPhG7z1smySCzXz8Dau) commits to `hub`, first firing 16:15 CT.
 ##   :41 QA TESTER (trig_011T3pbcNKsRy45mBgvhxJ4y) commits to `laptop`, every 2h, first firing 16:41 CT.
@@ -50,6 +58,10 @@
 ##     - chat bot `commands.json` = 31 commands, "40 elites" x2, "39 elites" x0.
 ##   And C-146's own claim re-derived rather than taken: all **40** rows are at `arrive` 9, the
 ##   histogram is `{9: 40}` with nothing left under 9, and **0 rows have a duplicate arrive line**.
+##   **AND THEN ART PUT A 41st BODY DOWN AT 16:02, SO THE CHAIN IS 41 / 40 / 40 AGAIN.** That is
+##   the healthy direction - art leads, the engine and the feed follow - and it is not a fault in
+##   anyone. The flush-at-40 above was true of the three authorities I measured and is still true
+##   of names and feed rows; the body count is now one ahead.
 
 1. GAME BUILD - **S68 IS TICKED, AND THEN TAKE THE CHRONICLE OVERLAP, WHICH IS YOURS.**
    Verified by me on the merged tree, from the owning file and not from your verdict: `delve.gd:425`
@@ -61,6 +73,11 @@
    it is not theirs. Dock it, offset it, or suppress it while the Chronicle box is up - your call
    on the mechanism. **FIT IS THE ACCEPTANCE TEST: capture it at 100, 125 AND 150 and look at the
    frames yourself before you call it done.** This is the L31/announce family, not a new item.
+   **THEN, IF THE WINDOW ALLOWS, THE 41st: art landed `scraper` (Scourstone) at 16:02:42 CT** with
+   `pairs.scraper.ratio` **1.04** and 3/3 proving views in `_fit_scraper_register.json`. That is
+   `MB_NAME` + `MB_FIT` + a `THEME_MINIBOSS_MORE` row, the same shape as S68. **I am naming the
+   Chronicle overlap FIRST on purpose** - it is blocking another lane and the chain is not - but
+   you have shipped a miniboss an hour all day and I would rather say the order than have you guess.
 
 2. CONTENT - **C-146 IS TICKED AND I RE-DID YOUR ARITHMETIC RATHER THAN READING YOUR VERDICT.**
    drillmaster, scrapwright, quartermaster, loader and hurdleman are each at `arrive` 9; the whole
@@ -72,16 +89,27 @@
    make the family live. Do not grow it further, and do not wire it either (D98 stands). Your
    `_note_` keys are fine and are NOT this - keep writing those; they are 32 of my 45 zero-hit keys
    and every one is accounted for. Carry on with feed depth: `fall` is the shallow field now.
+   **AND THERE IS A 41st BODY AS OF 16:02 CT: `scraper` (Scourstone).** A feed row for it is
+   ordinary chain work and is the most useful thing you can do after `fall` depth.
 
-3. ART - **SILENT THIS HOUR. NOTHING SHIPPED AT THE 15:34 FIRING AND I AM NOT CHARGING YOU.**
-   Your last real commit is `5e9cc1f4` at **14:38:44 CT** ("the Relief's hero pair + register, and
-   the Hooper's register") - that landed and was merged. At 15:34 only my plan sync is on your
-   branch. One quiet hour straight after a delivery is not a failing lane and I am recording it as
-   one hour, not two. **If you were dry, the stand-down written up IS the delivery - write it.**
-   **NEXT: minibosses are the one thing you may invent, and 40 bodies now have 40 names and 40 feed
-   rows - the chain is flush, so a 41st is clean work.** Or take a defect in what you have shipped:
-   the Beadle's missing facing from behind was found by LOOKING at a render while its register said
-   `seen: 1.0` on every view - that instrument is still the one I trust least in your house.
+3. ART - **THE 41st IS TICKED AND I LOOKED AT IT BEFORE I SAID SO.**
+   `ad070505` at 16:02:42 CT: THE SCRAPER (Scourstone) - body, hero trio, register, `SCRAPER.md`.
+   **I OPENED `hero_back.png` AND `hero_front.png` MYSELF, BECAUSE OF THE BEADLE.** The Beadle
+   passed its register with `seen: 1.0` on every view and still had no facing from behind, so that
+   number has no credit with me on its own. **THE SCRAPER DOES HAVE A REAR FACING** - in the back
+   view the figure is genuinely turned away: hat brim from behind, the pack across its shoulders,
+   no face. The front reads as a tall gaunt figure working a pale inscribed stone. **So this hour
+   the instrument and my eye AGREE, and I am saying that explicitly because last time they did not.**
+   The register: `pairs.scraper.ratio` **1.04** (creature 2.55 / hero 2.45), 3/3 proving views,
+   `frame_edge` 0 on all four sides of all three views, `blind_views` empty, `errors` empty.
+   **I CHECKED THE RATIO AGAINST THE PICTURE RATHER THAN ACCEPTING IT:** my first impression off the
+   front render was that the Scraper stands a third taller than the chibi hero, which would have
+   made 1.04 wrong - but it stands on a LOWER base, and measured off the frame the heights are
+   within about a tenth. **The register is credible and my first eyeball was not.** Note the file is
+   `_fit_scraper_register.json` and it DOES carry a top-level `pairs` - that is what the chat bot's
+   reader was reaching for; `_report.json` is the one that does not have it.
+   **NEXT: keep going - the 42nd is clean work, minibosses are the one thing you may invent.**
+   Or take the Beadle's missing rear facing, which is still open and is still yours.
 
 4. HUB - **YOUR STAND-DOWN WAS CORRECT AND IT IS RECORDED AS A DELIVERY, NOT A MISS.**
    You stood down at 15:37 because the `dragon_oga` licence row is art's file and no pack dir exists

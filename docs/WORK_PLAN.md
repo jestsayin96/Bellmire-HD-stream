@@ -100,11 +100,20 @@ FOR THE SUPERVISOR
   RECOMMENDATION: leave it with art for the geometry widen rather than wiring a shell that does
   not fit; the game build's row 1(b) stays held and nothing is blocked by the wait.
 - **NOTHING IS WAITING TO BE PUBLISHED.** gh-pages tree and origin/hub:web are both 9ca8051e.
-- One against my own instrument, reported before anything else: my first dead-data sweep called
-  12 asset directories unreferenced. IT WAS MY OWN BLIND INSTRUMENT - it matched only the full
-  relative path and not the directory's own name. Checked properly the answer is ZERO, as it has
-  been. I caught it before it reached a row, which is the only reason it is a line and not a
-  wasted lane cycle.
+- TWO AGAINST MY OWN INSTRUMENTS, REPORTED BEFORE ANYTHING ELSE, AND THE SECOND IS A ROW I HAD
+  ALREADY WRITTEN AND WENT BACK AND FIXED. (i) My first dead-data sweep called 12 asset
+  directories unreferenced by matching only the full relative path. (ii) My SECOND sweep then
+  called all 12 referenced by matching the directory's own NAME - and that is the TOO-KIND half,
+  the exact fault the 19:58 seat caught an hour ago. I had already written "ZERO" into this block
+  before I confirmed the hits. Confirmed properly, with grep -n and the line in front of me:
+  `armour`, `ring`, `hat` and `music` are COMMON WORDS and every one of those 12 matches was prose
+  or an unrelated identifier. ELEVEN are genuinely reached by CONCATENATION (sfx.gd:28
+  `const DIR := "res://assets/audio/"`; the four assets/icons/items/* are the HUB's own source
+  under D73, not a game-build gap). **assets/gear/armour IS GENUINELY UNREFERENCED** - gear.gd
+  declares KIT, DUN and ART and no armour const, and `gear/armour`, `armor_black`, `armor_golden`,
+  `armor_metal` and `armor_leather` return ZERO hits across every .gd and .js. **THE HONEST COUNT
+  IS 1, NOT 0**, it is unchanged from the 19:58 seat's finding, and it CLOSES when row 1(b) lands.
+  Neither number reached a lane; both are mine.
 
 FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt; land these on
 the first live turn, all at once):
@@ -115,8 +124,9 @@ the first live turn, all at once):
       2,243,046 chars, 12 data files, 133 top-level keys, 43 zero-literal-hit keys, ALL
       ACCOUNTED FOR - 28 are content's `_note_` keys, 2 are the runtime-built _alt pools (READ),
       4 are the declared-dead phase2_words family, 9 are prose/spec. UNREAD LIVE DATA KEYS: ZERO.
-      UNREFERENCED ASSET DIRECTORIES: ZERO (33 directories with files, measured off assets/ only,
-      by path AND by directory name).
+      UNREFERENCED ASSET DIRECTORIES: **ONE** - assets/gear/armour, held open by row 1(b) and
+      unchanged from the 19:58 measurement (33 directories with files, measured off assets/ only;
+      a bare directory-NAME match is TOO KIND and reports zero - confirm every hit with grep -n).
   (3) THE DECLARED-DEAD LIST IS FOUR, NOT THREE: the prompt names phase2_words, phase2_words_alt
       and town_levels_for_the_desktop. **`phase2_words_alt2` is a fourth** (content's C-114, which
       content itself already closed in PROGRESS: "a note, not live work"). It is not a new unread

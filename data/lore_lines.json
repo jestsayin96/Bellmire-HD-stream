@@ -13205,6 +13205,29 @@
           "The bench is clean, the ledger is closed, and nobody is owed a fee.",
           "Open the pack. Take a breath. Walk the floor."
         ]
+      },
+      "hooper": {
+        "arrive": [
+          "A cooper with a cask raised in both hands and a post on his back, hung with iron hoops.",
+          "Count the hoops on the post. Each one is another of you he can shut in.",
+          "He does not shout. He sets the cask down over one hero and drives the hoops home with a mallet.",
+          "The hero is not out of the fight. They keep swinging, blind, from inside the staves.",
+          "No bandage reaches them, no brew, no shout, no shield. The line can see them and cannot touch them.",
+          "The mallet is oiled. The apron is wet through and has not been washed.",
+          "Break the staves and get one of your own back, or hit the cooper while one of you fights alone in the dark.",
+          "The cask is new, and the wood is pale where the adze went through it.",
+          "The cellar smells of damp oak and cold iron. Somebody is keeping tally."
+        ],
+        "fall": [
+          "Hoopfast is down. The mallet lies on the cask.",
+          "The hoops on the post stop ringing. Nobody counts the ones that are left.",
+          "The staves come away the way a loose cask comes apart. Whoever was inside walks out.",
+          "Everyone is on their feet again, and the line can reach them.",
+          "He sits on the upturned cask and wipes the mallet head with his apron. He does it slowly.",
+          "Hoopfast is down. The new oak is the only pale thing in the cellar.",
+          "The cellar is quiet, and every hoop is where he left it.",
+          "Knock the staves down. Draw a breath. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13226,7 +13249,8 @@
     "_note_c130": "C-130 (19 Nov 2026): the rename. Mr. E's 21:50 CT directive (via the supervisor) renames all 36 minibosses; the bodies and mechanics are unchanged. Every feed line that named a miniboss by its trade now uses the new character name, no 'the' prefix (138 lines across the 36 blocks; only arrive, act, broken and fall lines that carried the old name were touched, no line was added or removed). by_key KEYS ARE DELIBERATELY UNCHANGED: they are the art lane's body keys and the join to minibosses.py and dungeon_hd.gd miniboss_for, which only draws a body that has BOTH a mesh AND lines under its own key; none of the new names is on any origin branch yet, so renaming a key now would pull a body out of the draw. When art renames its keys, rename the by_key keys in the same change (old key -> new key: strickler -> Murkspit is the one the directive tables as Drizzler). Old name -> new name per directive: drillmaster Karvok, scrapwright Ironhyde, gaoler Shacklemaw, snuffer Duskhollow, sexton Gravrik, porter Drudgewall, tallyman Velmok, cook Blisterhand, sluicekeeper Rothenwell, sower Thorncast, snarer Griplash, stoker Cindrak, bellman Tolburn, boiler Scaldmere, jointer Halvrek, quartermaster Wardgrim, loader Millstone, hurdleman Bramblejaw, tanner Flenscar, reeve Lockwarden, tapster Dregsallow, pressman Crushwright, strickler Murkspit, dyer Venomshade, greener Corrodan, moulder Ashform, ratcatcher Skivven, drover Yokebane, paviser Shieldmaw, fenman Bogwarden, comfitmaker Brindle, leech Gulworth, beadle Ordrik, rammer Breachar, fuller Wrynn, stackman Huskpile. Names are Mr. E's proposals pending his final say. Earlier _note_ keys are history and still name the old trades on purpose. Additive in shape; zero-hit key by design, no lane is to wire it.",
     "_note_c131": "C-131 (20 Nov 2026): the c130 rotation fix. In C-130 the four rows 15-18 were renamed one place off: each block carried the NEXT body's name. Corrected by value, 19 lines, no line added or removed: quartermaster -> Wardgrim, loader -> Millstone, hurdleman -> Bramblejaw, jointer -> Halvrek (the mapping _note_c130 already states and is right). Each block now carries only its own name. by_key keys unchanged. Zero-hit key by design, no lane is to wire it.",
     "_note_c142": "C-142 (20 Nov 2026): the Dauber (Wetwall), the 37th body, committed on main with dauber.glb. Arrive 9 and fall 8, no act or broken, {name} not used. Without arrive lines miniboss_for never draws the body. Zero-hit key by design, no lane is to wire it.",
-    "_note_c143": "C-143 (20 Nov 2026): the Sealer's lines (38th miniboss, Leadbite, treasury theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press or fight on what is in hand. Without arrive lines miniboss_for never draws the body. Leadbite is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY."
+    "_note_c143": "C-143 (20 Nov 2026): the Sealer's lines (38th miniboss, Leadbite, treasury theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press or fight on what is in hand. Without arrive lines miniboss_for never draws the body. Leadbite is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
+    "_note_c144": "C-144 (20 Nov 2026): the Hooper's lines (39th miniboss, Hoopfast, mess theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: it casks ONE hero, who keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper. Without arrive lines miniboss_for never draws the body. Hoopfast is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

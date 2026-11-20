@@ -13312,3 +13312,9 @@ edge, not the HUD's), whole battery done in 24 seconds, released early, no cross
 Last lock line before my claim was the game build's IDLE 12:15:32, Godot EMPTY on both exes.
 
 NO TWITCH TEST. 0 bits. No account used.
+
+## C-144 (20 Nov 2026 13:3x CST) - THE HOOPER'S LINES (39th miniboss, Hoopfast)
+- ITEM: TAKE THIS NEXT (12:58 block) row 3, CONTENT: the Hooper (`hooper`, "Hoopfast", theme mess) is the 39th body, committed on main (assets/monsters/minibosses/hooper.glb, CANON row in tools/art/minibosses.py). by_key held 38 keys, no hooper. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused). Lines say the mechanic plainly: ONE hero is casked and keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper.
+- VALIDATION OK: json.load passes, every pre-existing key and entry unchanged (compared against pre-edit copy), round-trips at indent 2, 17 new lines unique against all existing feed lines, ASCII only. by_key 38 -> 39. `_note_c144` added.
+- CODE WIRING: Hooper draws once bestiary.gd carries hooper AND Delve.MB_NAME needs a `hooper` row (Hoopfast) plus MB_FIT and THEME_MINIBOSS_MORE["mess"]; commands.json "The 38 elites" must go to 39 when the join lands. Game build / chat bot own those; content wires nothing.
+Next content: C-145.

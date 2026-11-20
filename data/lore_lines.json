@@ -12517,6 +12517,43 @@
           "He lifts a fold of the stock and looks at it, then lays it back.",
           "The trough drips. That is the last sound it makes."
         ]
+      },
+      "stackman": {
+        "arrive": [
+          "A stack of this year's sheaves, three courses high, and a man standing on the top of it.",
+          "Count the courses. Three. The bottom band is split open and sheaves have spilled out across the floor.",
+          "A pole ladder leans on the back of the stack. A rake lies across the top. The man holds a long fork.",
+          "His smock is blue and thin and patched at the shoulder. The straw under him is cut this week, and gold.",
+          "Hit him and he pitches a fresh sheaf under his boots. He climbs a course.",
+          "Count again after every blow. Each course is one blow's worth of height.",
+          "Up there nothing with a hand on it can reach him. He pitches down at you for nothing.",
+          "Cut the bottom course out from under him. Or bring something with reach.",
+          "A field hand at the end of a harvest keeps his crop better than his coat."
+        ],
+        "act": [
+          "A sheaf goes under his feet. One course higher.",
+          "The stack grows. Count it.",
+          "The fork comes down from above.",
+          "He is past your reach. Hands will not do it now.",
+          "The third course. There is nowhere higher to go.",
+          "He stoops, and pitches. Stand clear of the line."
+        ],
+        "broken": [
+          "The bottom band parts. The course slumps and the whole stack sits down a step.",
+          "A course is cut out from under him. He drops, and catches the fork to keep his feet.",
+          "The withy gives at the base and sheaves run out across the floor.",
+          "The ladder slides from the back of the stack and lies flat. He has nothing to climb."
+        ],
+        "fall": [
+          "The Stackman is down. The stack is a heap of straw.",
+          "The fork stands in the floor where it landed.",
+          "Nothing is climbing now. Nothing is out of reach. Walk the floor.",
+          "He came down course by course. You hurt him slowly, or you did not hurt him at all.",
+          "The rake lies in the straw. He does not look for it.",
+          "The Stackman is down. The straw is the only good thing in the room.",
+          "He sits on the spilled sheaves and picks a stalk out of his sleeve. Nobody asks him anything.",
+          "The straw is sweet and new-cut. It settles, and the room goes quiet."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -12533,7 +12570,8 @@
     "_note_c112": "C-112: beadle (thirty-third miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 33 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 33: while it stands the party does not choose who acts, it calls the same hero again and again while the rest hold and watch, the four brass pegs on its board are the calls it has left, and knocking the board off its arm gives the order back. One arrive line is art's own feed line. Three arrive lines state the mechanic plainly (same hero again, pegs are the calls, knock the board off) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a beadle row; that is engine work.",
     "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way.",
     "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw.",
-    "_note_c126": "C-126 (19 Nov 2026): The Fuller, 35th miniboss (art body committed on origin/art). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: blows soak into the cloth, the cloth fills, it wrings out over the room at once; the answer is to stop hitting it. Man worn, goods fresh. Additive. Expected zero-hit key."
+    "_note_c126": "C-126 (19 Nov 2026): The Fuller, 35th miniboss (art body committed on origin/art). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: blows soak into the cloth, the cloth fills, it wrings out over the room at once; the answer is to stop hitting it. Man worn, goods fresh. Additive. Expected zero-hit key.",
+    "_note_c127": "C-127 (20 Nov 2026): The Stackman, 36th miniboss (art body committed on origin/main). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: each blow it hurt by pitches a sheaf and climbs a course; from up there nothing with a hand on it reaches it; it pitches down for free; the answer is cut the bottom course or bring reach. Man worn, crop fresh (rule 2). Additive. Expected zero-hit key."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

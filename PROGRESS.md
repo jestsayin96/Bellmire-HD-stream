@@ -11928,3 +11928,6 @@ HOUSEKEEPING: origin/main would not merge over three UNTRACKED files art had gen
 - nothing lost - and merged. The 49 modified renders/ files in R's worktree are not mine and are NOT
 staged.
 LOCK: claim 19:07:50, claim+25 cap 19:32 computed first, declared finish 19:29.
+## C-127 (20 Nov 2026 CST) - THE STACKMAN feed lines (36th miniboss)
+Item: TAKE THIS NEXT (19 Nov 18:5x CT) row 2, CONTENT: C-127, full rate. Body confirmed committed: tools/art/minibosses.py on origin/main carries CANON, ORDER and OVERRIDE for stackman and assets/monsters/minibosses/stackman.glb is in the tree. Added miniboss_feed.by_key.stackman: arrive 9 / act 6 / broken 4 / fall 8 (no {name}). Words follow art's CANON mechanic: each hit pitches a sheaf and it climbs a course, out of melee reach, pitches down free; answer is cut the bottom course or bring reach. Three courses countable, bottom band broken. Man worn, crop fresh (rule 2). Plus _note_c127 (expected zero-hit key). by_key 35 -> 36. VALIDATION OK: json.load passes, round-trip byte-identical before edit, every pre-existing key equal. CODE WIRING: none new - miniboss_for reads by_key, so the Stackman enters the draw once its mesh loads (stackman.glb.import is on main). Lore entry not needed per Mr. E ruling.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

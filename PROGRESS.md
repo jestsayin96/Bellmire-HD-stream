@@ -13360,3 +13360,55 @@ EDIT VERIFIED BOTH WAYS: json.load clean, 31 commands before and after, only `mi
 only its .what and .short, all 30 other commands byte-identical, all 7 non-command top keys
 identical, `order` still 31 and equal to the key set, 0 entries unanswered in code, 0 stale
 "37 elites" bytes anywhere in the data or the doc.
+
+## B86 - PUBLISH 39, AND MY OWN MB_NAME INSTRUMENT UNDER-COUNTED 38 KEYS AS 8 (20 Nov 2026, 14:46-14:52 CT)
+TAKE THIS NEXT (13:58 block) row 5: "38 -> 39, BOTH FIELDS, ONE WRITE, AND NOT BEFORE THE FEED IS ON YOUR
+TREE ... measure `by_key` yourself on the merged tree rather than taking my 39."
+MEASURED ALL FOUR AUTHORITIES MYSELF ON THE MERGED TREE 0e75195c (fast-forward from 893c3f91, no conflicts):
+- content `data/lore_lines.json` `miniboss_feed.by_key` = 39 rows, `hooper` PRESENT, `relief` ABSENT (real json.load).
+- engine `scripts/delve.gd` `Delve.MB_NAME` = 38 keys, 38 distinct, 0 duplicates, NO `hooper`. The game build's
+  14:14 S67 Hoopfast row is NOT on main yet, so MINIBOSS UNNAMED is CORRECT to stay red - their half, not my fault.
+- art `renders/art/minibosses/_report.json` = 40 non-chibi bodies (51 total - 11 `_chibi`); `relief` is case (4),
+  body only, no feed, no name - nothing fires on it and nothing is owed. I did NOT pull it into the count.
+- my own `data/commands.json` published "The 38 elites" in both fields.
+Published 38 != 39 feed rows, so MINIBOSS COUNT was firing. FIX: `.what` AND `.short` 38 -> 39 in ONE byte write,
+so MINIBOSS FIELDS never got a window to fire instead of COUNT; `docs/COMMANDS.md` from the REAL
+tools/_commands_doc.gd - no emulation this hour.
+
+*** THE INSTRUMENT FAULT I FOUND IN MYSELF, AND IT IS THE SAME CLASS THE TEAM LEAD CONFESSED AT 13:58. ***
+My first MB_NAME parse was brace-balanced and still WRONG: it reported 8 keys. It used `re.match` per line, and
+MB_NAME packs SIX keys to a line - so it counted LINES, not keys, and silently dropped 30 of 38. The team lead's
+13:58 regex OVER-captured at 58; mine UNDER-captured at 8. I did not report the 8: I printed the declaration
+(delve.gd:413-421), saw six pairs per line, switched to `re.findall` over every line at depth 0, and re-measured
+to 38 / 38 distinct / 0 duplicates. A COUNT THAT DISAGREES WITH ANOTHER SEAT IS A REASON TO DOUBT THE
+INSTRUMENT FIRST. Had I published against 8 I would have written "The 8 elites" into a live chat command.
+
+BATTERY on the shipped bytes (commands.json 2a610777, COMMANDS.md 477a962e, chatcmd.gd f5de3da9 untouched):
+- COMMANDS_DOC OK wrote 31 commands; doc 40e6050c -> 477a962e ("39 elites" x1, "38 elites" x0).
+- parse --headless --quit-after 300 rc 0, ZERO ERROR LINES.
+- L14_TEST FAIL 1 (24 checks), sole arm ["MINIBOSS UNNAMED"] on ["hooper"] - MINIBOSS COUNT now SILENT. The two
+  doc checks pass on the regenerated file: 31 rows, unpublished [], stale [].
+- TWITCH_PARSE OK (8 checks). "2 resources still in use at exit" is the known pre-existing L14 line.
+- _b2_ask.gd absent, no .b2_* logs.
+I DID NOT ACCEPT THE NEW SILENCE - a guard going quiet means fixed OR dead:
+- RED A, both fields -> 40: L14_TEST FAIL 3, arms ["MINIBOSS COUNT","MINIBOSS UNNAMED"]. COUNT IS LIVE and quiet
+  at 39 only because 39 is right.
+- RED B, `.short` ALONE -> 41: FAIL 1, arms ["MINIBOSS FIELDS","MINIBOSS UNNAMED"], COUNT silent because it reads
+  `.what`. FIELDS is load-bearing on its own, not riding COUNT.
+- commands.json restored byte-identical after each (2a610777 both times); GREEN re-run back to the sole UNNAMED.
+A TIMING CLAIM I CHECKED INSTEAD OF WAVING THROUGH: the three-run red battery finished in 4 s, which I did not
+believe. I timed one L14 alone - 1.00 s with the import cache warm - so 4 s is real, and the distinct per-arm
+shas (f7aed9bb, ec82bff7) and three DIFFERENT verdicts rule out a stale log.
+EDIT VERIFIED BOTH WAYS: json.load clean; 31 commands before and after; `miniboss` the ONLY command changed and
+only its .what/.short; all 30 other commands and all 7 non-command top keys byte-identical; `order` still 31 and
+equal to the key set; byte delta 0; 0 stale "38 elites" bytes in data or doc; 0 commands unanswered in code.
+NOTED, NOT A TEST I RAN: the headless scene parse brings up the REAL Twitch connection - it logged
+"bot token valid (bellmirebro)", joined #jestsayin96 and subscribed 7 of 7 EventSub topics. No message was
+posted, nothing was redeemed, 0 bits. That is the scene's own startup, not a chat test, and I say so rather
+than leave a Twitch line in a log unexplained.
+Clocks cross-checked on BOTH bridges at claim (VM 14:45:39 / Windows 14:46:08 -06:00). Claim 14:46:25, cap 15:11,
+declared 14:52 - INSIDE MY OWN :45-:52 SHARE, computed before writing. Godot EMPTY both exes at claim. Lock read
+from R's WORKING tree. No twitch test, 0 bits, no account used.
+FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment your
+S67 `"hooper": "Hoopfast"` MB_NAME row reaches origin/main; it was green in your own 14:14 run and is simply not
+merged yet.

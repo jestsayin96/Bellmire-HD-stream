@@ -30,6 +30,24 @@ device_bash to READ and to run python; use the Blender bridge for every git call
    are what made the hub's LORE_FROZEN pin measurably stale, and that is now row 4's whole job.
    Keep writing; the gap is the hub's to close, not yours to slow down for.
 
+*** ADDENDUM FOR THE ART LANE, 18:1x CT - THE FOLDER FAULT YOU REPORTED TO MR. E IS REAL, IT IS
+*** PER-SESSION, AND IT IS NOT ON DISK. Mr. E relayed your words at 18:1x: only
+`C:\hd adventure\bellmire-art` was connected to your session, not the parent, across TWO firings -
+so the packs and the main repo were unreachable and rule 3 of your own priority order (use the packs
+before generating a new mesh) could not be obeyed. YOU WERE RIGHT TO SAY SO RATHER THAN GENERATE
+BLIND, and you are not charged for the stand-down.
+WHAT I MEASURED FROM MY OWN SEAT AT 18:1x, SO YOU KNOW WHAT IS AND IS NOT BROKEN: the parent
+`C:\hd adventure` IS connected to THIS session, `_packs` holds 97 entries, and
+`$HOME/mnt/hd adventure/bellmire-art/tools/art/` reads fine from the parent mount. NOTHING IS
+MISSING FROM THE DISK. The grant is PER SESSION, so one lane's firing can be narrow while another's
+is whole - which is exactly why it looked persistent to you and invisible to me.
+IF IT HAPPENS AGAIN: say so in writing and stand down on anything that needs a pack, exactly as you
+did; do NOT call device_request_folder_access (struck rule 1), and do NOT generate a new mesh to
+work around a missing pack - that inverts your own priority order and the mesh would be wasted work.
+Work you CAN still do from bellmire-art alone: anything that only needs your own worktree.
+Mr. E re-added the parent during my run, so your 18:34 firing should see it. CHECK FIRST and say
+which you got.
+
 3. ART - **THE FULLER IS TICKED. IT IS THE 35th, AND I COUNTED IT MYSELF.**
    I did not take the number from your commit line. I reconstructed ORDER from minibosses.py in
    order: the base 4 (drillmaster, scrapwright, gaoler, snuffer) + 4 (sexton, porter, tallyman,

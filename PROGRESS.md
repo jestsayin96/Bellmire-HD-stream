@@ -12654,3 +12654,8 @@ lock lines carry a stamp read off the machine with its offset.
 Lock: claim 07:47:09 -06:00, cap 08:15, declared 08:05, released early, no crossing. Godot EMPTY at claim
 (`tasklist /FI "IMAGENAME eq Godot*"` -> no tasks). Lock read from R's WORKING tree; last line before mine was
 game build's IDLE 07:15:02. No Twitch contact, 0 bits, nothing posted, no reward touched.
+
+## C-139 (20 Nov 2026 08:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 07:58 CT) row 3, CONTENT: C-138 ticked; keep producing, keep writing _note_ keys. No miniboss owed: origin/art minibosses.py holds 13 full bodies, every one already keyed in miniboss_feed.by_key (36). Added epitaphs +13 (722->735), descend +6 (453->459), cleared +5 (439->444), misfire 167 unchanged, and _note_c139.
+VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), only new key _note_c139.
+CODE WIRING: none new; the pools already have readers.

@@ -12341,3 +12341,8 @@ Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP 
 Red proof: arg break_shift -> bad=4 THEME_SWEEP FAIL, and the shifted set includes the FeedHUD Chronicle (@CanvasLayer@42 at x=5350). Logs _u94_*.log untracked.
 Observation, NOT a failure (sweep only prints it): OVERLAP at 100/125/150 between the Chronicle (~350,220 452x169) and Spotlight (0,0 576x304) in the 1152x648 test window. Spotlight is idle in the sweep so this is its default rect, not a visible clash; I did not look at a picture of it this cycle. Worth a look next firing with Spotlight actually showing.
 Next: L74 feed-under-load readability picture, or the Spotlight/Chronicle rect question above. Nothing for Mr. E to decide.
+
+## C-133 (20 Nov 2026 02:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 01:58 CT) row 2, CONTENT: keep writing _note_ keys, no fourth phase2_words member, extend pools the engine already reads. No miniboss owed: Broodglut and Lastcuff are bestiary pack-variants (scripts/bestiary.gd), not miniboss_feed bodies; by_key holds 36 and tools/art/minibosses.py has no new committed body. Added epitaphs +16, descend +10, cleared +10, misfire +6 (name, spell, roll, DC order kept), barks +12 (enter 3, lord 2, trap 2, hurt 2, drink 2, misfire 2... plus _note_c133 nested under barks, an expected zero-hit key). Plain register, no mechanics, no floor counts, ASCII only. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), file round-trips at indent 2.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

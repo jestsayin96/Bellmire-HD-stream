@@ -675,11 +675,41 @@ class ManaStrip extends CanvasLayer:
 		if sp:
 			HudDock.mark(p, k)
 			HudDock.put(p, HudDock.pane(town, k), HudDock.pane_k(town, k), "br")
+			_clear_of_boss(p, HudDock.pane(town, k))
 		else:
 			HudDock.mark(p, "full")
 			p.scale = Vector2.ONE
 			var sc := HudDock.screen()
 			p.position = Vector2(roundf(sc.x - p.size.x - float(UiTheme.px(12))), roundf(sc.y - p.size.y - float(UiTheme.px(12))))
+
+	## U106: at 150% the boss card (810x200, not my file) covers the plate that put() docked
+	## "br" - the plate was MEASURED on screen but drawn UNDER the card. Slide it to the first
+	## spot in the pane that touches neither the boss card nor the Chronicle box.
+	func _clear_of_boss(p: PanelContainer, r: Rect2) -> void:
+		var boss := Rect2()
+		for b in get_tree().get_nodes_in_group("hud_boss"):
+			var pl = b.get("_plate")
+			if pl is Control and (pl as Control).is_visible_in_tree():
+				var xf := (pl as Control).get_global_transform()
+				boss = Rect2(xf.origin, (pl as Control).size * xf.get_scale())
+		if boss.size.x <= 0.0:
+			return
+		var m := float(UiTheme.px(12))
+		var sz := p.size * p.scale
+		if not Rect2(p.position, sz).intersects(boss):
+			return
+		var box := HudDock.centre(town)
+		var ys := [boss.end.y + m, r.end.y - m - sz.y]
+		var xs := [r.end.x - m - sz.x, r.position.x + m]
+		for y: float in ys:
+			for x: float in xs:
+				var q := Rect2(Vector2(x, y), sz)
+				if y + sz.y > r.end.y or q.intersects(boss):
+					continue
+				if box.size.x > 0.0 and q.intersects(box):
+					continue
+				p.position = Vector2(roundf(x), roundf(y))
+				return
 
 ## ---------------------------------------------------------------- L31 the fight banner
 ## "NOW FIGHTING / <the lord>": a parchment banner that announces a lord the moment it rises

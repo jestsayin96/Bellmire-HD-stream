@@ -707,6 +707,21 @@ def main():
     ap.add_argument("--prove-red", action="store_true")
     ap.add_argument("--ab", action="store_true")
     ap.add_argument("--reverdict", action="store_true")
+    # WHERE THE LID IS READ FROM, AND WHY THIS IS NOT A LITERAL EITHER.
+    # 20 Nov 04:4x CT: the lid rose to y=10.0 on origin/main and THIS BRANCH IS
+    # 1306 COMMITS BEHIND IT - `scripts/floorgen.gd` in the art worktree still
+    # says 7.0.  So a --reverdict run against the art tree would re-answer the
+    # dungeon question against a dungeon that no longer ships, and would look
+    # like a pass: nothing would change and the register would keep asserting
+    # broodglut is 0.10 m through a lid that is now 3.00 m higher.
+    # The fix is NOT to hand-write 10.0 anywhere and NOT to edit floorgen.gd,
+    # which this lane does not own.  It is to say OUT LOUD which tree the lid
+    # was read out of, and to record that in the register beside the numbers so
+    # the next seat cannot mistake main's lid for art's.
+    ap.add_argument("--geom-repo", default="",
+                    help="read scripts/floorgen.gd out of THIS tree instead of --repo")
+    ap.add_argument("--geom-note", default="",
+                    help="provenance recorded in the register, e.g. a git ref")
     # THE T-POSE IS WIDER THAN THE THIRTY-SIX'S FRAME, AND THE BORDER CHECK
     # CAUGHT IT RATHER THAN MY EYE. At 2.60 the pair spans 5.96 m against
     # minibossfit's fixed 5.60 m cell, and the front and back views lost 228
@@ -724,7 +739,11 @@ def main():
         _F.FRAME_H = args.frame * _F.CELL_Y / float(_F.CELL_X)
     keys = [k for k in args.only.split(",") if k] or list(ORDER)
     _fit_terms.repo = args.repo
-    _fit_terms.geom = FG.read(args.repo)
+    _geom_repo = args.geom_repo or args.repo
+    _fit_terms.geom = FG.read(_geom_repo)
+    _fit_terms.geom["read_from_repo"] = _geom_repo
+    _fit_terms.geom["note"] = args.geom_note or ("same tree as --repo" if not args.geom_repo
+                                                 else "")
     outp = os.path.join(args.repo, "renders", "art", "variants", "_register.json")
     os.makedirs(os.path.dirname(outp), exist_ok=True)
     reg = {}
@@ -766,6 +785,8 @@ def main():
             "corridor_clear_m": _fit_terms.geom["corridor_clear_m"],
             "lid_underside_m": _fit_terms.geom["lid_underside_m"],
             "lid_read_at": _fit_terms.geom["at"].get("lid_y_m"),
+            "lid_read_from_repo": _fit_terms.geom.get("read_from_repo"),
+            "lid_note": _fit_terms.geom.get("note"),
             "geom_errors": _fit_terms.geom["errors"],
             "variants": {k: (v.get("gate_height_m"), v.get("lid"), v.get("lid_clear_m"),
                              v.get("corridor"), v.get("corridor_margin_m"),

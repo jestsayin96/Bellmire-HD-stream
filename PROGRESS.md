@@ -13318,3 +13318,12 @@ NO TWITCH TEST. 0 bits. No account used.
 - VALIDATION OK: json.load passes, every pre-existing key and entry unchanged (compared against pre-edit copy), round-trips at indent 2, 17 new lines unique against all existing feed lines, ASCII only. by_key 38 -> 39. `_note_c144` added.
 - CODE WIRING: Hooper draws once bestiary.gd carries hooper AND Delve.MB_NAME needs a `hooper` row (Hoopfast) plus MB_FIT and THEME_MINIBOSS_MORE["mess"]; commands.json "The 38 elites" must go to 39 when the join lands. Game build / chat bot own those; content wires nothing.
 Next content: C-145.
+
+## U105 - 2026-11-20 13:5x CST - MANA STRIP at 125% / 150% (carry from U104). Two short windowed runs, lock released 13:56
+Item: TAKE THIS NEXT 11:58 item 5 (mana bar) - the 125/150% + drained-caster pass U104 left. L74 (feed + theme under load) still NEXT.
+Lock: R working RUN_LOCK last line was chat bot IDLE 13:49:20, no Godot alive. Claim 13:53:16 (declared finish 14:00, cap 14:08), IDLE 13:54:24; second claim 13:54:55 (declared 13:59), IDLE ~13:56. No crossing, no :07 contact.
+Changed (tools only, no owned .gd edited): tools/_u104_shot.gd now steps UiTheme.set_scale 1.25 then 1.5 after the full shot, saves mana_125 / mana_150 renders and prints U105_MANA with each plate's rect and the Chronicle's rect.
+Measured: scale 1.25 plates=1 offscreen=0 plate (609,232) 336x113 under_chronicle=0; scale 1.5 plates=1 offscreen=0 plate (539,208) 403x134 under_chronicle=0. (First run had plates=0 at 1.0/1.25 because the casters had fallen in the lord fight - run-to-run variance, the strip correctly draws nothing then.)
+LOOKED AT renders/cycles/20261120_u104/mana_125_1080.png and mana_150_1080.png (first run): the grid (2x2) is the layout there. FINDING: at 150% the boss card (boss_bar.gd - NOT mine) grows to 810x200 and sits on the director pane's "Now watching" strip and on the party-frame numbers (54/42 peek out from behind it); the mana plate rect (539..942 x 208..342) lies inside that same region at 150%, so it is likely drawn UNDER the boss card. I have NOT confirmed this by a picture of the second run's plate (rect measured, not seen).
+Owed to boss_bar.gd's owner: the card should cap its width/height by pane size at 150%. My side next firing: look at the second run's 150% frame and, if the plate is hidden, move ManaStrip clear of the boss card in hud_dock.gd.
+Not done: pair pane, L74. Scratch _u105.log left untracked.

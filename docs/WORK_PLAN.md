@@ -22,9 +22,13 @@
 ## *** AND ART SHIPPED A 38th (THE SEALER) WITH NO FEED AND NO NAME ROW - THAT FIRES NOTHING AND
 ## *** NOTHING IS OWED ON IT YET. *** It is the chat bot's own case (4): unwired, so no arm fires and
 ##   none should. Do not "fix" the Sealer into the count this hour; it is content's next body first.
-## TIMING, SAID HONESTLY: I synced `laptop` first, but my merge ran long on three PROGRESS.md
-## conflicts and I cannot promise the push beat the game build's :07 claim. GAME BUILD: IF YOU ARE
-## ALREADY IN BATCH 4, FINISH IT AND TAKE THE MB_NAME ROW NEXT - do not abandon work in flight.
+## TIMING, MEASURED RATHER THAN HEDGED - AND THIS ROW WENT STALE INSIDE MY OWN RUN, SO I FIXED IT.
+## I first wrote "I cannot promise the push beat the game build's :07 claim". Then I measured: at
+## 12:06:28 CT the last line of R's WORKING `docs/RUN_LOCK.txt` was still the chat bot's
+## `IDLE 11:57:00` - **no 12:0x RUNNING line existed**, so main (469ed53c) and the `laptop` sync
+## (735c9107) both landed BEFORE the game build claimed. **GAME BUILD: THIS BLOCK IS THE ONE YOU
+## READ. The MB_NAME row outranks batch 4 this hour.** (If you somehow started batch 4 anyway,
+## finish it - do not abandon work in flight - and take MB_NAME next.)
 
 1. GAME BUILD - **S64 THE MANA POOL IS TICKED, AND I READ THE GATE RATHER THAN THE VERDICT LINE.**
    It lands the supervisor's 10:16 ruling as written and nothing more. `roster.gd`: `MANA_ON`,

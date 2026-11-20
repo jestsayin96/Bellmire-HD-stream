@@ -71,7 +71,40 @@ func _stand() -> void:
 	_mon.state = Monster.S.IDLE
 	_mon.roam = 0.0
 	_hero.global_position = _mon.global_position + Vector3(2.6, 0.0, 1.2)
-	set_meta("cam", [_mon.global_position + Vector3(9.0, 6.0, 9.0), _mon.global_position + Vector3(0, 2.6, 0)])
+	# S55: aim at half the body, not a literal. The 2.6 was written for the 2.60 m broodglut and
+	# cut the 6.60 m one's head off the pack shot. Re-aimed off the MEASURED height at frame 40.
+	set_meta("cam", [_mon.global_position + Vector3(9.0, 6.0, 9.0), _mon.global_position + Vector3(0, float(def["h"]) * 0.5, 0)])
+
+func _box(n: Node) -> AABB:
+	var box := AABB()
+	var first := true
+	for mi in n.find_children("*", "MeshInstance3D", true, false):
+		var m := mi as MeshInstance3D
+		if m.mesh == null or not m.is_visible_in_tree():
+			continue
+		var a: AABB = m.global_transform * m.get_aabb()
+		box = a if first else box.merge(a)
+		first = false
+	return box
+
+func _in_frame(_mh: float) -> bool:
+	# Every corner of the body's world AABB must project inside the viewport. The pivot column is
+	# not enough: the body leans forward, so its head is not above its feet (S55 found that the
+	# column check passed the old 2.6 aim that cut the head off).
+	var rect := Rect2(Vector2.ZERO, Vector2(root.get_visible_rect().size))
+	var box := _box(_mon)
+	if box.size == Vector3.ZERO:
+		return false
+	if OS.get_environment("S55_RED") == "1":  # red arm: the old literal 2.6 aim that cut the head off
+		_cam.global_position = _mon.global_position + Vector3(9.0, 6.0, 9.0)
+		_cam.look_at(_mon.global_position + Vector3(0, 2.6, 0))
+	for k in 8:
+		var w: Vector3 = box.get_endpoint(k)
+		if _cam.is_position_behind(w) or not rect.has_point(_cam.unproject_position(w)):
+			print("  off frame: corner %d %s -> %s" % [k, str(w), str(_cam.unproject_position(w))])
+			return false
+	print("  in frame: all 8 AABB corners on screen, top y %.2f" % box.end.y)
+	return true
 
 func _shot(n: String) -> void:
 	root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + n + ".png"))
@@ -92,6 +125,11 @@ func _process(_dt: float) -> bool:
 		var mh := _vis_h(_mon)
 		var hh := _vis_h(_hero)
 		print("  measured: broodglut %.2f m, knight %.2f m, ratio %.2f" % [mh, hh, mh / maxf(hh, 0.01)])
+		# Aim at the body's own centre (half its measured height, over its lean) and stand the camera
+		# back in proportion: the (9,6,9) offset framed a 4.4 m body, not a 6.6 m one.
+		var bc: Vector3 = _box(_mon).get_center()
+		var k := maxf(1.0, mh / 4.4)
+		set_meta("cam", [_mon.global_position + Vector3(9.0, 6.0, 9.0) * k, Vector3(bc.x, _mon.global_position.y + mh * 0.5, bc.z)])
 		_ok(absf(mh - 6.60) < 0.66, "stands within 10%% of 6.60 m (%.2f)" % mh)
 		_ok(hh > 0.5 and mh / hh >= 2.0, "towers over the knight, >= 2x (%.2f)" % (mh / maxf(hh, 0.01)))
 		_ok(is_equal_approx(_d._ward(_mon), 1.0), "no pack yet: ward 1.0 (%.2f)" % _d._ward(_mon))
@@ -103,6 +141,7 @@ func _process(_dt: float) -> bool:
 		_ok(live.size() >= 1 and String((live[0] as Monster).def.get("type", "")) == "puglin", "the called are puglins")
 		_ok(is_equal_approx(_d._ward(_mon), 0.5), "pack standing: ward 0.5 (%.2f)" % _d._ward(_mon))
 	if _f == 70:
+		_ok(_in_frame(_vis_h(_mon)), "whole body in frame, head and feet both on screen")
 		_shot("s54_broodglut_pack")
 		for m in _d._live_called(_mon):
 			(m as Monster).state = Monster.S.DEAD

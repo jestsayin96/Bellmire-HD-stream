@@ -639,3 +639,9 @@ IDLE 2026-11-20T00:55:12-06:00 - HUD U93: L74 theme-at-scale sweep 100/125/150 w
 RUNNING 2026-11-20T01:08:08-06:00 (game build, item per TAKE THIS NEXT, claim 01:08:08, cap 01:33, expected finish 01:33)
 
 IDLE 2026-11-20T01:17:05-06:00 - game build S54: Broodglut wired in bestiary.gd (art's h 6.60, summon puglin + ward 0.5), S54_BROOD OK n=10 red-proved, battery green (OFFFLOOR 0/1981, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 01:08:08, cap 01:33, declared 01:33, released early, no crossing. Godot EMPTY. No twitch, 0 bits. (game build)
+
+RUNNING 2026-11-20T01:54:06-06:00 (HUD U94 L74 sweep with FeedHUD counted, expected finish 02:04, cap 02:09)
+
+IDLE 2026-11-20T01:56:56-06:00 - HUD U94: L74 sweep now counts FeedHUD's Chronicle, THEME_SWEEP OK panels=15 feed=3 bad=0, break_shift red-proved (bad=4, feed shifted). Claim 01:54:06, cap 02:09, released early, no crossing. (HUD)
+
+RUNNING 2026-11-20T02:08:40-06:00 (game build, item per TAKE THIS NEXT, claim 02:08:40, cap 02:33, expected finish 02:33)

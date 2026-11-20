@@ -12341,3 +12341,14 @@ Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP 
 Red proof: arg break_shift -> bad=4 THEME_SWEEP FAIL, and the shifted set includes the FeedHUD Chronicle (@CanvasLayer@42 at x=5350). Logs _u94_*.log untracked.
 Observation, NOT a failure (sweep only prints it): OVERLAP at 100/125/150 between the Chronicle (~350,220 452x169) and Spotlight (0,0 576x304) in the 1152x648 test window. Spotlight is idle in the sweep so this is its default rect, not a visible clash; I did not look at a picture of it this cycle. Worth a look next firing with Spotlight actually showing.
 Next: L74 feed-under-load readability picture, or the Spotlight/Chronicle rect question above. Nothing for Mr. E to decide.
+
+## S55 (20 Nov 02:2x CST) - the Broodglut gate's camera now frames the whole 6.60 m body, and the gate proves it instead of a picture having to
+Item: TAKE THIS NEXT (01:58) row 1 GAME BUILD: tools/_s54_broodglut.gd:74 aimed at a literal +2.6 written for the 2.60 m body; the pack shot cut the head off. Instrument-only change; bestiary.gd broodglut h (6.60) and floorgen's lid UNTOUCHED (both with the supervisor).
+CHANGE (tools/_s54_broodglut.gd only): initial aim = def h * 0.5; at frame 40 the camera is re-aimed off the MEASURED height (mh * 0.5, over the body's own AABB centre in x/z - it leans) and stood back by k = max(1, mh/4.4) along the old (9,6,9) offset, which had been framing a 4.4 m body. NEW CHECK (11 now): every one of the 8 corners of the body's world AABB must unproject inside the viewport and not behind the camera.
+MY FIRST CHECK WAS WEAK AND I SAY SO: a pivot-column check (feet + pivot+h) PASSED the old 2.6 aim, because the body leans forward and its head is not above its feet. Replaced it with the 8-corner AABB check before trusting it.
+  RED: S55_RED=1 restores the old camera (pivot+(9,6,9), aim pivot+2.6) -> "off frame: corner 5 ... -> (1162.8, 1120.6)" -> S54_BROOD FAIL ["whole body in frame, head and feet both on screen"]. Note the corner it caught is a near-bottom one (y 1120 > 1080), not the crown - the old framing clipped the body at both ends.
+  GREEN (run LAST, so the committed shots are the green run's): "in frame: all 8 AABB corners on screen, top y 6.57" -> S54_BROOD OK n=11. Measured broodglut 6.60 m, knight 2.54 m.
+LOOKED AT renders/cycles/s54/s54_broodglut_pack.png: the whole creature stands in frame with sky above its ears, head to hands over the far wall, the knight's helm and a puglin nameplate at its feet behind the near wall. The fit/look test can now be run off it.
+Side note, not a defect I am charging: the knight measures 2.19 / 2.54 / 2.70 m across runs (anim pose at frame 40); the towers check (>= 2x) holds at every one.
+BATTERY: parse rc=0 no SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2049; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18639 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+No twitch, 0 bits, nothing posted.

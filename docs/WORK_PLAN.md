@@ -1,3 +1,186 @@
+## TAKE THIS NEXT - written 2026-11-20 03:58 CT by the Team Lead (machine clock read 03:58-04:0x
+## CST while I worked; this is THE 03:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
+FOUR LANES SHIPPED, TWO WERE SILENT. Six merges, ONE conflict (root PROGRESS.md on hud-ui),
+resolved KEEPING BOTH SIDES, residual markers counted IN THE FILE THAT CONFLICTED: ZERO (and zero
+in docs/WORK_PLAN.md too). FOUR TICKED - one of them as a regression read and NOT as an item - and
+TWO NOT TICKED.
+
+*** MY OWN FAULTS FIRST, AND THE BIG ONE IS THE TRAP THIS SEAT HAS ALREADY FALLEN INTO ONCE. ***
+(a) `git diff --stat origin/main..origin/art` told me 542 files, 1,611 insertions and **16,991
+    DELETIONS** - PROGRESS.md gutted, docs/RUN_LOCK.txt gone, both Quaternius LICENCE files and
+    eight artifact .glb bodies deleted. For about a minute I had a report that art had wrecked the
+    tree. **IT IS THE TWO-DOT DIFF.** Art's branch is simply BEHIND main on those files, so main's
+    content shows up as art "deleting" it. Art's OWN commit (`29167c27^..29167c27`) is 70 files,
+    1,256 insertions, 72 deletions, and the three-dot `origin/main...origin/art` agrees at 71 /
+    1,409 / 72. **MEASURE A LANE BY ITS OWN COMMIT OR BY THREE DOTS. NEVER BY TWO.** The 00:58
+    firing was nearly caught by this same shape and wrote it down; writing it down did not stop me.
+(b) My residual-marker counter counted bare `=======` lines and reported 191 of them in
+    docs/WORK_PLAN.md. The plan's own section dividers are `=======` lines. Counting `^<<<<<<< `
+    and `^>>>>>>> ` only: ZERO in docs/WORK_PLAN.md and ZERO in root PROGRESS.md, which is the file
+    that actually conflicted.
+(c) I started to write that 47 miniboss bodies are "wired to nothing" because only broodglut and
+    lastcuff appear in scripts/bestiary.gd. **THAT WOULD HAVE BEEN FALSE AND IT IS THE NAME-SEARCH
+    TRAP AGAIN.** delve.gd:373 `const MB_DIR` plus a per-model ratio table at :397 is the D96 draw
+    path, and it draws all of them without a bestiary key. THE TRUE SENTENCE IS BELOW IN ROW 1.
+
+1. GAME BUILD - **S56 IS TICKED, ON THE DIFF AND ON THE READ-BACK.** The lid is up: I opened
+   `scripts/floorgen.gd` on your branch myself and :1383 is `lid.position = Vector3(0, 10.0, 0)`,
+   against `7.0` on main. ONE literal, ONE line - `scripts/floorgen.gd | 2 +-` - exactly the
+   supervisor's 02:12 ruling and nothing smuggled in beside it. Underside 10.0 - 1.0/2 = **9.50 m**.
+   Broodglut's h is untouched at 6.60, so the clearance is 2.90 m and the 01:16 corridor ruling is
+   not disturbed.
+   **AND THE LASTCUFF GAP IS CLOSED BY MEASUREMENT, NOT BY CLAIM:** I listed the whole miniboss
+   directory on your branch - **49 .glb, 49 .glb.import, the missing-import set is EMPTY.** The
+   "only one of 49" fault from the 02:58 row is gone. `scripts/bestiary.gd` carries a real
+   `"lastcuff"` entry (h 6.20), and I read the `irons` way in delve.gd rather than trusting the
+   message: each hp mark sheds one iron, hides the piece the def NAMES (`Imp_Chains`,
+   `Imp_SpikedCollar`) and multiplies `irons_pace`, which `_mon_pace` then folds into the existing
+   frost term rather than replacing it. Five irons, pace 1.0 -> 2.10.
+   **THE GATE IS HONEST AND IT READS THE LID OUT OF THE SCENE.** 17 `_ok()` checks, a `< 12 checks
+   -> S56_LAST NO VERDICT` guard, `S56_RED=1` strips `irons` and must FAIL, `S56_RED_AIM=1` restores
+   the old 2.6 aim. The lid checks go through `_lid_underside()` - READ, not remembered, which is
+   art's rule honoured by your lane.
+   **TWO PRECISIONS, NEITHER A CHARGE, BOTH THINGS I CHECKED BECAUSE I CLAIMED SOMETHING LIKE THEM
+   LAST HOUR.** (i) `tools/_s56_lastcuff.gd` prints its verdict and calls a bare `quit()`; there is
+   no `exit` anywhere in the file, so it does NOT move the exit status. That is FINE under the
+   standing rule - a battery reports the VERDICT LINE, not the return code - but the 02:58 row's
+   sentence "it goes through `_ok()`, so it moves the exit status" is not true of THIS file and I
+   am not repeating it. (ii) lastcuff ships FOUR `*.png.import` siblings with no `.png` anywhere in
+   the tree; no other miniboss has any. Every miniboss embeds its textures in the .glb (broodglut
+   ships exactly two files and works), so this is importer by-product, not a break. One line, not a
+   charge.
+   NEXT, AND IT IS THE SECOND HALF OF MR. E'S OWN VARIANT DIRECTIVE, NOT A NEW ITEM - **A THIRD
+   PACK VARIANT, AND HERE IS THE TRUE MEASUREMENT TO PICK IT FROM.** 49 bodies on disk; **47 of
+   them are already DRAWN** through delve.gd's `MB_DIR` path with a per-model ratio (that is D96,
+   ticked); **exactly TWO - broodglut and lastcuff - additionally carry a bestiary.gd entry with
+   hp/atk/spd/h and a `ways` idea.** So the work is not "wire 47 bodies to nothing", it is: pick
+   ONE body art has measured, give it a bestiary entry and ONE idea that belongs to it the way
+   `irons` belongs to Lastcuff, and gate it the way you gated S56. Take its h from art's register,
+   never from your own eye. Do NOT touch tools/art/, tools/_l14_test.gd or data/lore_lines.json.
+
+2. CONTENT - **C-134 IS TICKED AND I CHECKED THE THING THAT COULD HAVE GONE WRONG.** 74 lines of
+   churn across epitaphs, descend, cleared, misfire and barks. I parsed `data/lore_lines.json` on
+   BOTH refs with a real JSON parser: both parse, **44 top-level keys on main and 44 on content,
+   the added set is EMPTY and the lost set is EMPTY.** The -11 in the diffstat is comma churn on
+   the last element of each list, nothing removed.
+   NEXT, STANDING AND UNCHANGED: keep extending pools the engine already reads, keep writing
+   `_note_` keys, write no fourth phase2_words member. No lane is to wire a `_note_` key - and that
+   now includes the RENAME map, which lives in lore_lines.json as a `_note_` key and says on its
+   own face that the names are Mr. E's proposals pending his final say.
+
+3. ART - **THE DRAG-CHAIN IS TICKED, AND IT IS TICKED ON THE PICTURE AS WELL AS THE NUMBERS.**
+   First, the name: the 02:58 row said "Shacklemaw" and nothing in the tree is called that. You did
+   not guess - you wrote `docs/art/DRAG_CHAIN.md:6` saying Shacklemaw IS `gaoler`/`gaoler_chibi`,
+   it is the CANON title and not the key, and I confirmed it independently in the rename `_note_`
+   map ("gaoler Shacklemaw") and in `_report.json`'s own `"title": "Shacklemaw"`. That is how a
+   name mismatch should be closed.
+   **I RE-READ YOUR BAR AND YOUR ROWS OUT OF `_gaoler_chain_ab.json` MYSELF, AND THEY VERIFY RECORD
+   BY RECORD.** Bar: aspect >= 0.45, h_frac >= 0.20, px_kept >= 0.60. gaoler_chibi 0.2618 ->
+   **0.6154**, h_frac 0.0841 -> **0.2443**, px_kept **0.9163**; full gaoler 0.2571 -> **0.4972**,
+   h_frac 0.0841 -> **0.2526**, px_kept **1.0469**. PASS on both, and the footprint span went DOWN
+   (3.78 -> 3.571 and 3.785 -> 3.565), so the corridor margin improved rather than being spent.
+   **AND THE ARM YOU DID NOT SHIP IS THE REASON TO TRUST THE ONE YOU DID.** The run-links arm is in
+   the same file with `"verdict": "FAIL"` on both bodies - cv 0.2956 and 0.3244 against a bar of
+   0.12 - and you left RUN_LINKS off and said so in the commit. A bar is not moved in the run that
+   wrote it.
+   **I LOOKED AT `gaoler_b_heap_three_quarter_all.png`.** The chain is a stacked pile with real
+   vertical build beside the left foot - several turns heaped, not one ring lying on the plane -
+   and the hook arm sweeps clear to the right. "It drags" is carried by the geometry now.
+   **ONE THING THE PICTURE SAYS THAT NO NUMBER IN THE FILE DOES, AND IT IS THE FAULT YOU FOUND
+   YOURSELF:** from 3/4 the run from heap to hand is crossed by the apron board and is not legible
+   as a continuous line. Your commit names that fault; I am recording that I SAW it, so the next
+   seat does not think it was only arithmetic.
+   NEXT: **the `--reverdict` pass is now UNBLOCKED - the game build landed the lid this hour.** One
+   `--reverdict` on `_register.json` and nothing else: no re-render, no re-scale. Your gate reads
+   the lid out of floorgen.gd, so broodglut's -0.10 should flip to roughly +2.90 by measurement
+   alone. Do NOT re-run the run-links arm chasing its bar.
+
+4. HUB - **SILENT. THIRD HOUR RUNNING. NOTHING BUT MY OWN PLAN-SYNC COMMIT ON YOUR BRANCH.** No
+   commits, no stand-down, no audit. The 01:58 and 02:58 rows both said in terms: stand down IN
+   WRITING or audit your own web/. **I AM NO LONGER ABSORBING THIS - IT IS ESCALATED TO THE
+   SUPERVISOR IN THE BLOCK BELOW.** Two quiet firings is a quiet pair; three is a pattern and the
+   seat above me should know.
+   **I RE-MEASURED THE PUBLISH STATE MYSELF RATHER THAN COPYING LAST HOUR'S LINE:** gh-pages tip
+   **05ac2679**, 19 Nov 20:06 CT, and `origin/gh-pages^{tree}` EQUALS `origin/hub:web`. Merged and
+   unpublished: **0 files, 0 lines.** FOURTH HOUR RUNNING AT ZERO. **YOU CLAIMED NO READINESS AND
+   CHANGED NO web/, SO I RAN NO PUBLISH GATE AND NONE WAS OWED.**
+   NEXT: one of the two, in writing. A stand-down written up IS the delivery; silence is not.
+
+5. CHAT BOT - **SILENT, ZERO COMMITS, AND I OWE YOU A MECHANICAL CORRECTION THAT IS MINE AND NOT
+   YOURS.** The 02:58 row told you: if the edit is refused, "stand down in writing". **THAT
+   INSTRUCTION WAS UNSATISFIABLE AS WRITTEN AND I WROTE IT.** The same row established that
+   IN-PLACE MODIFICATION OF A TRACKED SOURCE FILE IS REFUSED - and `PROGRESS.md` is a tracked file,
+   so appending your stand-down to it is the exact shape that gets refused. I asked you to write a
+   stand-down through the one door that is shut.
+   **THE DOOR THAT IS OPEN IS A NEW FILE, AND THE 02:58 ROW ESTABLISHED THAT TOO: creating a NEW
+   file lands.** So: **write your stand-down as a NEW file - `docs/chatbot/B75_STANDDOWN.md` - and
+   commit it through the BLENDER BRIDGE, which is the standard and which you have now declined
+   twice.** That is a delivery and it is reachable with the half of the machine that works.
+   NEXT, otherwise unchanged: attempt the guard-faults edit ONCE at the top of your run. If it
+   lands: battery, then the beadle -> zzz_fake_trade red proof taking it to rc=1 where B71 got
+   rc=0. If refused: the NEW-FILE stand-down above, and do not route around the refusal.
+   **YOUR PROMPT'S `_commands_doc.gd` FIGURE IS STALE - 31 COMMANDS, NOT 26.** Still true, still
+   here, because a firing cannot edit a prompt.
+
+6. HUD - **U96 IS TICKED AS A WRITTEN REGRESSION READ AND EXPLICITLY NOT AS AN ITEM, AND I AM
+   SAYING WHAT I COULD AND COULD NOT CHECK.** Your own commit is `PROGRESS.md | 7 +++++++` and
+   nothing else, and your entry says so on its face: "no owned file edited". The entry is the
+   honest kind - it names the row it read, quotes its own lock line (claim 03:53:19, IDLE 03:54:31,
+   cap 04:07), gives figures rather than adjectives (labels=3539 panels=1260 fails=0,
+   dropped_protected 0, crit admitted 4, min_gap 0.806s; panels=15 feed_chronicle=3 bad=0), names
+   the picture it looked at, and - the part that earns the tick - **says out loud that neither red
+   arm was re-run, so this is a GREEN-ONLY read.** A lane that labels its own evidence weak is
+   doing the thing this house wants.
+   **WHAT I DID NOT DO: I did not verify those verdict lines.** No log was committed, the verdicts
+   exist only as your report, and your window (:52-:07) was live while I worked - I was not going
+   to take the Godot lock to check a green re-run. So this tick is on the WRITING, not on a gate I
+   ran. Nobody should later read it as a verified battery.
+   NEXT: your own queue, short gates, release by :07 - your last five have all released early. When
+   you next run these two, **carry at least one RED arm with you**, because two consecutive
+   green-only reads cannot tell a working gate from a sleeping one.
+
+FOR THE SUPERVISOR - ONE NEW THING AND ONE STILL OPEN.
+  (NEW) **THE HUB LANE HAS NOW BEEN SILENT THREE FIRINGS RUNNING** - 01:58, 02:58 and 03:58 - with
+  no commits and no written stand-down, after two rows that asked for one or the other in terms.
+  The 02:58 row said I would raise it with you rather than absorb a third. Publishing is unaffected:
+  gh-pages and origin/hub:web are the SAME TREE, zero unpublished delta, fourth hour running.
+  MY RECOMMENDATION: nothing punitive - feed it the identical row a fourth time, but you should
+  know a lane has gone quiet rather than hear it first as a gap.
+  (STILL OPEN FROM 00:58) (c) whether art's eleven showcase kits stay under assets/ (art's
+  recommendation) or move. Housekeeping; no evidence needed.
+  Your 02:12 lid ruling LANDED this hour - floorgen.gd:1383 is 10.0, underside 9.50 m, ticked above.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+these on the first LIVE turn, all at once). I made NO trigger call this hour: the gate is settled
+(it is on the CALL, not on a field) and the prompt says not to test it a fourth time.
+  1. THE HUB BASELINE IN THE :58 PROMPT IS STALE AND SAYS THE OPPOSITE OF THE TRUTH. It reads
+     "gh-pages is 45a7904 ... the trees differ by 2 files / 19 lines ... it is with the supervisor."
+     MEASURED AGAIN AT 03:58 CT 20 Nov: gh-pages **05ac2679**, and `origin/gh-pages^{tree}` EQUALS
+     `origin/hub:web`. Zero unpublished delta. Equal at 00:58, 01:58, 02:58 and now 03:58. Replace
+     the bullet with: re-measure both trees every hour.
+  2. THE STEP-0 BASELINE NUMBERS IN THE PROMPT ARE STALE (122 keys / 32 zero-hit / 18 `_note_` /
+     31 asset dirs). The 02:58 measurement stands: **133 top-level keys, 43 zero-hit, 28 of them
+     `_note_`, 34 asset directories with files, UNREFERENCED ASSET DIRECTORIES ZERO, UNREAD LIVE
+     DATA KEYS ZERO**, measured on scripts/*.gd + web/*.js only and assets/ only. The four declared
+     dead are phase2_words, phase2_words_alt, **phase2_words_alt2**, town_levels_for_the_desktop.
+  3. THE CHAT BOT'S GUARD-ARM COUNT IS **91**, not the "~77" the 00:58 plan carried.
+  4. ADD, UNDER THE ART RULES: the dungeon floor builds a shadows-only lid (floorgen.gd:1377-1384).
+     **ITS UNDERSIDE IS 9.50 m AS OF 20 Nov 03:18 CT** (position y 10.0, box 1.0 thick) - the
+     supervisor's 02:12 ruling, landed by the game build at S56. Write it as: READ THE LID OUT OF
+     floorgen.gd, NEVER REMEMBER IT; `tools/art/floorgeom.py` and `tools/_s56_lastcuff.gd` both do
+     exactly that and are the reference implementations.
+  5. THE :58 PROMPT CONTRADICTS A TICK THIS SEAT ALREADY TOOK. It still says the HUD's rarity-hue
+     half of SYSTEM 2 "was still unstarted at 09:2x on 18 Nov" and is "THE MOST VALUABLE OPEN ITEM
+     IN THE HOUSE". **IT IS NOT OPEN.** System 2 was ticked WHOLE at the 19 Nov 20:58 firing, the
+     HUD half on a picture. Replace with: SYSTEM 2 IS WHOLE, ticked 19 Nov 20:58; do not re-open it.
+  6. THE CHAT BOT PROMPT'S `tools/_commands_doc.gd` FIGURE IS STALE: **31 commands, not 26.**
+  7. NEW THIS HOUR - ADD TO THE :58 PROMPT'S "A NAME SEARCH THAT FINDS NOTHING" BLOCK, BECAUSE THE
+     DELETION SHAPE HAS NOW NEARLY BITTEN TWO SEATS: **NEVER MEASURE A LANE WITH A TWO-DOT DIFF.**
+     `git diff origin/main..origin/<lane>` reports everything the LANE IS BEHIND ON as a deletion -
+     it told me art had deleted 16,991 lines including two LICENCE files. Use the lane's own commit
+     range or three dots. The prompt already carries the worktree-vs-ref version of this lesson;
+     this is its sibling and it is not in there.
+
 ## TAKE THIS NEXT - written 2026-11-20 02:58 CT by the Team Lead (machine clock read 02:5x-03:1x
 ## CST while I worked; this is THE 02:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
 FOUR LANES SHIPPED, ONE WAS BLOCKED BY A PERMISSION GATE, ONE WAS SILENT. Six merges, TWO

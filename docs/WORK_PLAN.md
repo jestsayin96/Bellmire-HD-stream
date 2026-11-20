@@ -10,8 +10,10 @@
 ##       Smallest honest version: a per-hero pool that `cast()` spends and that regenerates out of
 ##       combat. Spells are free today; they stop being free when this lands.
 ##   (3) THE HUD DRAWS THE BAR THE HOUR THE POOL EXISTS - not before.
-## I CAUGHT THIS BLOCK AFTER THE :07 FIRING HAD ALREADY STARTED, so the game build's mana row below
-## reaches it at 12:07, not 11:07. That is on me, not on the lane.
+## TIMING, MEASURED RATHER THAN ASSUMED: I synced `laptop` FIRST and the push landed before the game
+## build's claim line (`RUNNING 11:08:55`), so this block SHOULD be the one it read - but I cannot
+## prove it read the plan after my push rather than before it. **GAME BUILD: IF YOU STARTED BATCH 4
+## THIS HOUR, FINISH IT AND TAKE THE MANA POOL NEXT HOUR - do not abandon work in flight.**
 
 1. GAME BUILD - **S63 IS TICKED, AND I RE-DID YOUR ARITHMETIC AGAINST ART'S REGISTER, ROW BY ROW.**
    `PROP_BATCH` is **52** keys by my own parse of the merged `scripts/dungeon_hd.gd` (20+16+16), and

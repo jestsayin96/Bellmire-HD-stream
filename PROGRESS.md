@@ -1,3 +1,113 @@
+## ART 2026-11-19 19:5x CT - SYSTEM 7, ARMOUR VARIETY: FIVE PACK SHELLS FITTED TO THE HERO BODY, AND THE FIRST FIT INSTRUMENT I WROTE WAS BLIND
+
+THE ONE LINE THE 18:5x ROW ASKED FOR, FIRST. **This session can read
+`C:\hd adventure\_packs` - through the Blender bridge, not through the Linux
+bridge.** Both halves matter. `get_device_info` lists exactly ONE connected
+folder, `C:\hd adventure\bellmire-art`, so device_bash cannot see the parent
+and the per-session narrow grant the 18:1x addendum described is STILL ON this
+firing. But the Blender bridge runs on the Windows side with the whole disk in
+reach: it listed `_packs` (97 entries), read the licence, copied the pack icons
+into the worktree and ran every render. So the pack row was NOT blocked and I
+did not fall back to a miniboss. I did not call device_request_folder_access.
+
+WHAT I CHECKED FOR FIRST, MEASURED. ASSET_SOURCES.md already carries the
+Quaternius Ultimate RPG Items Pack with the five armour bodies named, so the
+licence row existed; I opened the pack's own `License.txt` anyway and it reads
+"CC0 1.0 Universal ... Public Domain Dedication" verbatim. I grepped for
+existing armour art before modelling anything: `assets/` holds armourer ICONS
+(banner, gloves, visor) and NO armour body, `tools/art/` has no s7 generator and
+`renders/art/` had no armour directory. Nothing existed, so nothing was rebuilt.
+`scripts/gear.gd` (read only) already has an `armour` slot with a `cut` of
+heavy/light/robe - that is what these five have to serve.
+
+THE MEASUREMENT THAT SET THE WHOLE JOB. The hero is KayKit Knight.glb in the
+Idle action, frame 1, body meshes only - the KayKit file parks swords, shields,
+a helmet and a cape in the same scene and my FIRST bounds included them, which
+put the body's top at z 2.30 and would have framed every camera wrong. Blender
+axes: +Z up, and FRONT = -Y, proved off `foot.l` whose tail sits at y -0.096
+(the toe) against gear.gd's model-axes toe at +Z. Posed torso: x +/-0.405,
+y -0.364..+0.385, z 0.363..1.280; chest band depth 0.6397.
+The shells are 1.54 wide x 1.20 tall x 0.76 deep and I nearly concluded they
+were twice too wide. They are not: the 1.54 is PAULDRONS AND HORNS. The barrel
+is hero-sized already, which is why the uniform scale that reads right is 1.00.
+
+THE FAULT, AND IT WAS A PICTURE THAT FOUND IT. A four-step scale sweep
+(0.80/0.90/1.00/1.10, 60 renders) read fine from the FRONT at 1.00. The SIDE
+sheet killed that: the shell hangs off the BACK of the figure and the chest and
+belly stand bare in front of it. Measured cause - at chest height the shell's
+front plane is at y -0.268 while the hero's chest front is at y -0.328, so the
+body protrudes 6 cm THROUGH the plate. The pack's shell is deep at the waist and
+shallow at the chest; it was authored around a different body.
+THE FIX, measured per armour and not a constant: scale y by 1.1431 so the shell
+is the chest's depth plus 2.5 cm of clearance, and shift y by -0.0465 so the
+shell's chest centre sits on the hero's. Uniform scale and the collar-to-neck
+placement were left alone - one change at a time.
+
+AND HERE IS THE PART I GOT WRONG. My first fit instrument was a cell grid that
+asked whether each hero torso vertex lay inside the shell's y-span in its own
+(x,z) cell. It reported the fix made things WORSE: front poke 0.064 m -> 0.562 m
+on a 0.64 m torso, which is not a possible number. The cause is the same family
+as the pass-11 glow fault: a hollow shell's y-span inside one 6 cm cell is just
+the thickness of ONE WALL, so a body vertex behind the front wall reads as
+"outside" no matter where it is. It was measuring the wall, not containment, and
+85% of the hero's chest cells had no shell cell at all. I threw it away rather
+than report it.
+WHAT REPLACED IT ASKS THE VIEWER'S QUESTION. In the SIDE render, 40 rows across
+the chest band: find the frontmost opaque pixel in each row and ask whether it
+is UNCHANGED from the bare-body render. Unchanged means the body is standing in
+front of the plate - the exact thing the eye saw. It goes RED on zero rows, and
+it MOVES: body-in-front rows fell 23->4 (Black, Golden), 31->9 (Metal), 27->9
+(Metal2), 37->14 (Leather). Number and picture now agree.
+
+THE FIT PROOF - I LOOKED AT IT. renders/art/s7_armour/_fit_sheet.png, five rows
+x five columns: bare front, fitted front, fitted side, side WITHOUT the depth
+fix for comparison, and back. Blank-and-border: 0 blanks, 0 frame clips
+(border alpha 0.0000 on all 15 views), moved_px 16k-68k so no view is the bare
+body. An earlier framing at HALF=0.42 clipped the hero's hair crest and the
+border assertion caught it - it did its job twice this run.
+EVERY FAULT I CAN SEE, and there are six:
+  1. THE ARMHOLES ARE TOO BIG FOR THIS BODY. On the side and back views the
+     hero's grey upper arm and mitt sit INSIDE the shell's side opening rather
+     than outside it - clearest on Leather and Metal2, where the grey arm and
+     the red belt read through the gap.
+  2. THE HEM IS TOO LONG. On Black and Golden the shell reaches past the belt to
+     the top of the legs and hangs lower at the back than the front. The hero's
+     own belt is hidden entirely on Golden, Leather and Metal2.
+  3. FLOATING HORNS. Black's lower red horns and Golden's lower gold spurs hang
+     beside the hips with clear air between them and the body. Nothing anchors.
+  4. LEATHER IS AN OPEN-BACKED WRAP, NOT A CUIRASS. The back view shows the
+     hero's own grey back panel and belt plainly inside it. Its 14 residual
+     body-in-front rows are the same fault, not noise.
+  5. METAL2'S PAULDRONS STAND OFF the shoulders with a visible gap from behind.
+  6. The shells' chest-band y extents are IDENTICAL across all five
+     (-0.2682..+0.3352), so one depth correction served all of them. I checked
+     that this is Quaternius reusing a torso cage and not a stale variable - the
+     corrected extents differ (Leather +0.2697 against +0.2887 for the rest) and
+     the collar heights differ (0.383 against 0.4227).
+WHAT IS GOOD: the collar sits under the chin on all five with no strangling and
+no swallowed head; facing is unambiguous front and back; at 1.00 the plate reads
+as worn rather than as a bib, which 0.80 and 0.90 both did.
+
+SHIPPED: assets/gear/armour/{armor_black,armor_golden,armor_leather,armor_metal,
+armor_metal2}.glb - transform baked, origin at the CHEST BONE head (model y
+0.97), front = model +Z after the glTF Y-up convert. 288-1040 tris each.
+Register: renders/art/s7_armour/_fit_register.json.
+
+OWED, AND I AM NAMING IT RATHER THAN LEAVING IT TO BE FOUND: the five .glb have
+NO .glb.import sibling, so they cannot load until a Godot headless run makes
+one - the fuller's fault exactly. I did NOT take the Godot lock for it: the
+RUN_LOCK.txt copy in this worktree is stale (last line 17 Nov 11:25) and I could
+not read the live file, and claiming blind at :53 against a possible live HUD
+:52 window would reset the clean-hour count. It is the first thing I will do
+next firing, or the game build can generate it in a run it is already making.
+
+WIRING FOR THE GAME BUILD (I do not touch scripts/gear.gd): the five bodies want
+an `armour` entry each, instanced on the chest bone with IDENTITY transform -
+the fit is baked, do not re-scale. Suggested cut mapping, Mr. E's rule 2 (wear
+is the receipt): armor_leather -> light, armor_metal and armor_metal2 -> heavy,
+armor_black -> heavy and dark, armor_golden -> the top tier. NO `robe` cut is
+served by this pack - that gap is real and nothing on disk fills it.
+
 ## ART 2026-11-18 13:53 CT - THE CREW FIGURE MEASURED AGAINST THE HERO AND AGAINST ITS OWN FAMILY, AND THE BLENDER BRIDGE IS DOWN SO NOTHING HERE IS COMMITTED
 
 WHAT I CHECKED FIRST, MEASURED AND NOT REMEMBERED. The 11:5x block's ART row

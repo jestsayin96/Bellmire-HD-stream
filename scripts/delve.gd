@@ -655,6 +655,10 @@ func lord_fighting() -> Monster:
 		return null
 	return l
 
+## S64: counters for the mana gate test - spells paid for, and caster swings taken dry
+var mana_casts := 0
+var mana_dry_swings := 0
+
 func _foes() -> Array:
 	var out: Array = []
 	for mon in dun.monsters:
@@ -1176,6 +1180,10 @@ func _process(delta: float) -> void:
 	_amb_tick(delta)          # S2: the quiet bed below
 	_t += delta
 	_gt += delta
+	# S64: the mana pool refills only out of combat
+	if state != "fight" and roster != null:
+		for mm in _alive():
+			roster.regen_mana(mm["h"], delta)
 	match state:
 		"fight":
 			_fight(delta)
@@ -1601,7 +1609,8 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				if float(o["hp"]) < float(o["max"]) * mark and (low == null or float(o["hp"]) < float(low["hp"])):
 					low = o
 			m["swing"] = float(m["swing"]) - delta * _pace(m)
-			if low != null and float(m["swing"]) <= 0.0:
+			# S64: a mending is a spell, and a spell spends mana - a dry mender holds it until the fight ends
+			if low != null and float(m["swing"]) <= 0.0 and roster.spend_mana(h):
 				m["swing"] = float(Economy.healing_rules()["mend_interval_s"])   # D99: classes.json healing.mend_interval_s
 				# L47: choosing WHO to mend is a decision - say so when it is a close call
 				if float(low["hp"]) < float(low["max"]) * 0.35:
@@ -1689,9 +1698,14 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 		if has_st(m, "invisible"):
 			(m["st"] as Dictionary).erase("invisible")
 		var ac := 10 + floor_no / 2 + (3 if tgt.def.get("boss", false) else 0) + int((tgt.def.get("ways", {}) as Dictionary).get("guard", 0))
-		if caster:
+		# S64: the spell spends mana; a caster who has run dry swings like everyone else
+		if caster and roster.spend_mana(h):
+			mana_casts += 1
 			_cast_at(m, tgt, roll, ac, ability)
 			continue
+		elif caster:
+			mana_dry_swings += 1
+			Rig.play(b._anim, "1H_Melee_Attack_Chop")
 		else:
 			Rig.play(b._anim, "1H_Melee_Attack_Chop" if String(h["class"]) != "ranger" else "1H_Ranged_Shoot")
 		var lands := roll == 20 or (roll != 1 and roll + roster.attack_bonus(h) + _inspired() + (2 if has_st(m, "giant") else 0) >= ac)

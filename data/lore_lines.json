@@ -947,7 +947,13 @@
     "The first step is a long one. They take it.",
     "A dog follows to the gate and sits down.",
     "Someone says the count out loud. It matches.",
-    "The rope is tested with a heel. It does not give."
+    "The rope is tested with a heel. It does not give.",
+    "The lantern is trimmed. Twice.",
+    "Bootlaces are checked by the one next to them.",
+    "Somebody pats the door frame, the way you pat a horse.",
+    "A child waves from the well. They wave back.",
+    "The bell at the gate is rung once, softly.",
+    "Bread is passed round. Nobody refuses it."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1399,7 +1405,13 @@
     "The tally is chalked on the wall. It is short, and it is good.",
     "They walk out slowly. The stair is the same stair.",
     "A canteen goes round. It comes back lighter.",
-    "The door stays open behind them. The draught is clean."
+    "The door stays open behind them. The draught is clean.",
+    "The lantern is turned down to save the oil.",
+    "Somebody laughs, short and surprised.",
+    "Boots are scraped on the lowest step. Habit.",
+    "A bandage is tied with the teeth.",
+    "The rope is coiled. Neatly, even now.",
+    "Nobody says it was easy. Nobody needs to."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4274,7 +4286,19 @@
     "Asked for water, not wine. Drank it slow.",
     "Whistled the tune the miller whistles. Got it wrong.",
     "Left a loaf on the sill. The crows ate it.",
-    "Never once complained about the cold."
+    "Never once complained about the cold.",
+    "Kept the ledger straight. Owed nobody.",
+    "Mended the net the night before. It held.",
+    "Carried the water up twice a day. Never spilled.",
+    "Shared the last of the bread. Said it was plenty.",
+    "Knew every dog in the lane by name.",
+    "Sharpened the knife before the walk. Not after.",
+    "Left the gate on the latch for whoever came late.",
+    "Fed the stray before the family. Both were glad.",
+    "Said the work was good. Meant it.",
+    "Hung the boots by the stove. They are still warm.",
+    "Wrote home on Sundays. The letters are kept.",
+    "Took the long way round so the kettle would boil."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13642,5 +13666,6 @@
   "_note_c128": "C-128 (19 Nov 2026): no new miniboss body committed on origin/art (36 on disk, 36 keys in by_key; only _chibi variants are unfed, and those are not draw bodies), so no feed lines owed. Repeat-heavy pools extended: epitaphs +24, descend +20 (10 with the '%s %s' verb frame - the code passes descend/descends, so every frame reads as a verb plus object, never 'descend down'), cleared +18, misfire +12 (%s name, %s spell, %d roll, %d DC order kept), barks +26 (enter 4, lord 5, trap 5, hurt 4, drink 4, misfire 4; five candidate lines were exact repeats and were left out). Plain register, no mechanics, no floor counts. Additive. Expected zero-hit key.",
   "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names.",
   "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it.",
-  "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it."
+  "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
+  "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it."
 }

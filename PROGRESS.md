@@ -12850,3 +12850,10 @@ Lock: claim 09:47:30 -06:00, cap 10:12, declared 10:05, released early, no cross
 before mine was game build's **IDLE 09:22:19**, so the window was free; Godot EMPTY at claim
 (`tasklist` -> no process with "odot" in the name). Lock read from R's WORKING tree. No Twitch
 contact, 0 bits, nothing posted, no reward touched.
+
+## C-141 (20 Nov 2026 10:3x CST) - small pool top-up (no miniboss owed)
+- ITEM: TAKE THIS NEXT (09:58 block) row 3, CONTENT: keep producing, unthrottled. Minibosses measured: origin/art holds 36 bodies and miniboss_feed.by_key holds all 36 (Broodglut is a pack variant of an existing body, no new key). No new body, stood down on item 1.
+- ADDED: epitaphs +12 (748 -> 760), descend +6 (465 -> 471), cleared +6 (450 -> 456). Uniqueness checked inside each pool (one candidate collided with an existing epitaph and was replaced). Plain register, no named bodies, no mechanics, no floor counts. New key: _note_c141 (expected zero-hit).
+- VALIDATION OK: json.load passes; every pre-existing key and list entry unchanged (prefix-compared).
+- CODE WIRING: none; epitaph/descend/cleared readers exist.
+Next content: C-142.

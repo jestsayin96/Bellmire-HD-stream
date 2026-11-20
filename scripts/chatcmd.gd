@@ -1533,9 +1533,15 @@ static func commands() -> Dictionary:
                 push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\" as the no-name buy and the apothecary makes no such brew - data/potions.json has no row the sentence can resolve to, so docs/COMMANDS.md names a brew a viewer cannot get" % b_ph_what)
                 printerr("COMMANDS_DATA BREW DEFAULT - published \"%s\" resolves to no brew" % b_ph_what)
             elif b_key_what != BREW_DEFAULT:
-                _guard_faults.append("BREW DEFAULT")
-                push_error("COMMANDS_DATA BREW DEFAULT: `brew`.what publishes \"%s\", which is the brew `%s`, and !brew with no name buys `%s` - the doc promises one brew and the command buys another" % [b_ph_what, b_key_what, BREW_DEFAULT])
-                printerr("COMMANDS_DATA BREW DEFAULT - published `%s`, bought `%s`" % [b_key_what, BREW_DEFAULT])
+                ## B82: THIS ARM USED TO BE TAGGED "BREW DEFAULT" TOO, THE SAME AS THE ARM ABOVE.
+                ## Two different faults under one name: the arm above means the published default
+                ## resolves to NO brew, this one means it resolves to a brew that is not the one
+                ## !brew actually buys. push_error told them apart; guard_faults() could not, and
+                ## guard_faults() is the reading a harness gates on (B48). Measured on the shipped
+                ## file: both arms reported ["BREW DEFAULT"]. One tag, so the count can name which.
+                _guard_faults.append("BREW DEFAULT MISMATCH")
+                push_error("COMMANDS_DATA BREW DEFAULT MISMATCH: `brew`.what publishes \"%s\", which is the brew `%s`, and !brew with no name buys `%s` - the doc promises one brew and the command buys another" % [b_ph_what, b_key_what, BREW_DEFAULT])
+                printerr("COMMANDS_DATA BREW DEFAULT MISMATCH - published `%s`, bought `%s`" % [b_key_what, BREW_DEFAULT])
         if b_row.is_empty():
             _guard_faults.append("BREW KEY")
             push_error("COMMANDS_DATA BREW KEY: BREW_DEFAULT is `%s` and data/potions.json carries no such row - !brew with no name charges and counts a brew the apothecary no longer makes, and the name both of my sentences publish has no authority left" % BREW_DEFAULT)

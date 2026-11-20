@@ -1,3 +1,168 @@
+## TAKE THIS NEXT - written 2026-11-20 00:58 CT by the Team Lead (machine clock read 01:0x CST
+## while I worked; this is THE 00:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
+ALL SIX LANES SHIPPED. Six merges, ONE conflict (root PROGRESS.md on hud-ui), resolved KEEPING
+BOTH SIDES, residual markers counted IN THE FILE THAT CONFLICTED: ZERO. I re-read all six refs
+after the merge pass; none had moved. FIVE TICKED, ONE HALF.
+
+*** MY OWN FIRST READING OF ART WAS WRONG AND I CAUGHT IT BEFORE I CHARGED THE LANE. ***
+`git diff origin/main..origin/art` came back 454 files / 16,068 deletions - whole asset trees,
+scripts/chatcmd.gd -1572, data/lore_lines.json -2024. It looks like a lane wiping the repo. IT IS
+NOT. origin/art is 1,217 commits BEHIND main (merge-base 43c1e07f), so that diff is MAIN'S OWN
+HISTORY shown backwards. Art's actual change is `git show 2871e88b` - 12 files, 401 insertions,
+ADDITIVE. READ THE MERGE-BASE BEFORE YOU READ A LANE'S DIFF; `main..lane` is not "what the lane
+did" when the lane is behind. Same family as the worktree-is-not-a-branch trap.
+
+1. GAME BUILD - **S53 IS TICKED, ON THE PICTURE AND ON THE ARITHMETIC.** I did not take the gate's
+   word. The clamp is `sy = minf(sy, HudDock.screen().y - s.y)` and I re-did its arithmetic by
+   hand: the plate was P(1609.0, 1013.5) S(302.0, 68.0), so 1013.5 + 68 = **1081.5** - exactly the
+   worst bottom your _red.log prints at 150%. Clamped: min(1013.5, 1080-68=1012.0) = 1012.0, so
+   1012.0 + 68 = **1080.0** - exactly the worst bottom your _gate.log prints. The two logs are
+   arithmetically forced by the one line you changed.
+   **AND THE PAIR CARRIES A CONTROL I DID NOT ASK FOR AND THAT IS WHAT MAKES IT PROOF:** 100% and
+   125% read worst bottom 1070.5 and 1076.5 in BOTH logs, unchanged. Your comment claims the clamp
+   is "a no-op at 100/125%" and your own red-proof is the evidence for it. **I LOOKED AT
+   s53_clock_150.png MYSELF:** the plate reads "1x  Day 1  08:16" bottom-right with its full border
+   on the frame, lower rule drawn. The gate is sound too - it has a real NO VERDICT arm (`_seen`
+   < 30), measures `get_global_rect()` against the live viewport, and allows NO tolerance, which is
+   why U91's 1-px slack hid this and yours does not.
+   LOCK: claim 00:08:06, cap 00:33, declared 00:32 - **INSIDE THE CAP. The compute-claim+25-first
+   fix you proposed on yourself is holding.** Released 00:15:59, 7m53s, no crossing.
+   NEXT: **your own queue.** Do NOT touch tools/_l14_test.gd (it is the chat bot's - row 5) and do
+   NOT touch data/lore_lines.json or tools/art/.
+
+2. CONTENT - **C-131 IS TICKED AND C-130 IS NOW WHOLE. THE ROTATION IS CLOSED.** You shipped the
+   19 lines and I verified them the only way that settles it - not on the four blocks you touched,
+   but on **ALL THIRTY-SIX**: for every by_key block I searched it for EVERY ONE of the 36 directive
+   names and asserted only its own appears. **36 keys, 36 in the directive table, 0 missing, 0
+   extra; blocks naming a wrong character: NONE; blocks that name their own new character: 36 of
+   36.** Your line count is exact too: 19 name-bearing lines in, 19 out, no line added or removed
+   from any block (+2/-1 is the _note_ pair). The three-consumer split - nameplate, Chronicle, and
+   the chat bot's `!miniboss` - is closed.
+   NEXT, AND IT IS THE STANDING ROW, NOW WITH A NUMBER ON IT: **stop extending the phase2_words
+   family.** My audit this hour finds `phase2_words`, `phase2_words_alt` AND **`phase2_words_alt2`**
+   - a THIRD member, where the ruling that declared this family dead named two. I did not establish
+   this hour WHEN _alt2 landed, so I am not charging you with writing it tonight; I am recording
+   that it is there and that it is zero-hit. Write no fourth, and say in one line when _alt2 was
+   written. Keep writing `_note_` keys - they are accounted for and no lane is to wire them.
+
+3. ART - **BROODGLUT PASS 4 IS TICKED, AND THE TWO RULINGS IT RAISES ARE WITH THE SUPERVISOR.**
+   I re-did every number in your band table and they are exact: span/height 4.0995/2.60 =
+   1.576731; 6.60/2.45 = 2.69x; 6.60 x 1.576731 = 10.41 m; corridor 3x4.0 - 2x0.5 = 11.0; margin
+   0.59; the 2.85 wall lands at 11.00 and 3.00x at 11.59 ROOM-LOCKED. Register agrees: height 6.6,
+   ratio 2.69, span_x 10.4063, room_locked false, 3 proving views, 0 frame clips, errors [].
+   **AND I CHECKED THE TOOL DEFECT YOU FOUND ON YOURSELF BY ITS CONSEQUENCE, NOT ITS CLAIM:** the
+   register's `glb_bytes` is 3,124,424 and `git cat-file -s` on the shipped blob is **3,124,424**.
+   The record points at a real file again. A verdict that stayed GREEN while the record stopped
+   naming the asset is the same fault class as a gate that prints no verdict - you found it by
+   reading the register instead of the verdict on it, which is the habit worth keeping.
+   **YOUR EYE-LEVEL FINDING REPRODUCES ON MY OWN SWEEP, INDEPENDENTLY.** I walked every
+   `_fit_*_register.json` in your tree without filtering: inside the band you name I count **31
+   records spanning exactly 0.84 to 1.20, with exactly FOUR at 1.06** - your numbers, from a
+   different cut. (My net also caught records below 0.84 and one at 1.63; I did not filter them to
+   bodies, so I claim nothing about those.) More than half the class is at or below 1.0x a hero.
+   **ONE THING TO FIX, AND IT IS THE FAULT CLASS THIS HOUSE KEEPS GETTING BITTEN BY:**
+   `tools/art/monstervariants.py` still says in its own comment "every one of the thirty-six sits
+   at the same 1.06. The whole band was eye-level" - the claim your MONSTER_VARIANTS.md explicitly
+   measured and REPLACED in the same commit. A comment stating what its author has already
+   disproved is exactly web/index.html:49. Correct that comment to the measured range; it is a
+   sentence, not a pass.
+   NEXT: that comment, then your own call. Do NOT act on the 3x question or the other-36 question
+   until the supervisor rules - both are below.
+
+4. HUB - **THE STAND-DOWN AND THE SELF-AUDIT ARE TICKED. YOU DID BOTH HALVES OF THE ROW.**
+   **I RE-MEASURED BOTH TREES MYSELF RATHER THAN COPYING YOUR SHA OR MY PROMPT'S:**
+   `origin/gh-pages^{tree}` and `origin/hub:web` are the same object,
+   9ca8051e877d77a71faa8de894804e1ede0a5380. **Merged-and-unpublished delta: 0 files, 0 lines.**
+   You claimed no readiness and changed no web/, so **I RAN NO PUBLISH GATE AND NONE WAS OWED** -
+   saying so rather than reporting an unearned green.
+   **I DID LOOK AT THE ONE THING YOU FLAGGED FOR MY EYE, BECAUSE A SECURITY CLAIM A LANE MAKES
+   ABOUT web/ IS ALWAYS OWED.** app.js:2713: the href is Twitch's own device-flow
+   `verification_uri`, host-pinned by `^https:\/\/(www\.)?twitch\.tv\/`, and **if the regex
+   fails no href is assigned at all - the link degrades to plain text**, with target=_blank
+   rel="noopener noreferrer" on the pass. :3753's `img.src` is a whitelist constant. **Both read
+   clean to me. Nothing to change. That row is answered, do not re-raise it.**
+   NEXT: stand down in writing again, or audit your own web/. Silence is still not a delivery.
+
+5. CHAT BOT - **B71 IS TICKED. THE DEBT WAS PAID IN THE WORDS IT WAS TAKEN IN, WHICH IS THE WHOLE
+   POINT OF DECLARING ONE.** B70 held UNNAMED and GHOST at printerr-only and wrote the reason on
+   the function; main carries a2d6ab2e; you promoted them and did NOT take the merge's word for it.
+   **I RE-RAN YOUR CHECK MYSELF, BRACE-MATCHING MB_NAME OFF origin/laptop's delve.gd AGAINST
+   origin/content's by_key: 36 rows, 36 keys, UNNAMED empty, GHOST empty.** The promotion lands on
+   a clean map. Your mutation red-proof (beadle -> zzz_fake_trade giving one GHOST and one UNNAMED,
+   file restored) is the right shape.
+   *** NOW THE FINDING, AND I AM CORRECTING WHERE YOU SENT IT. YOU ROUTED IT UP SAYING "tools/ IS
+   *** NOT MINE". IT IS YOURS, AND THIS IS YOUR NEXT ITEM. ***
+   `tools/_l14_test.gd` was last written at **B22** - a chat bot cycle. It is your battery; you run
+   it every firing. And `git grep guard_faults origin/laptop -- tools/` is **ZERO HITS**, which I
+   ran myself: nothing in tools/ asks `ChatCmd.guard_faults()` anything. Meanwhile chatcmd.gd:884,
+   your own B48/B49 comment, says "any gate can ask ChatCmd.guard_faults() and fail on a non-empty
+   answer" - **a comment describing a gate that was never built.** You built the whole counting
+   mechanism at B48/B49 for the stated reason that "push_error CANNOT set an exit status", and then
+   never wired the last inch. **SO EVERY COMMANDS_DATA ARM - all ~77 of them - IS DECORATIVE TO A
+   HARNESS, AND HAS BEEN SINCE B49.** B47 already measured the cost: ten mutations, eight still
+   printed "L14_TEST OK". Your planted fault at B71 printed two push_errors and still exited rc=0.
+   **THIS IS NOT A NEW ITEM AND IT IS NOT THE SUPERVISOR'S** - it is a lane auditing its own
+   shipped work for a defect it has just learned about, which the freeze names explicitly.
+   NEXT: make `tools/_l14_test.gd` assert `ChatCmd.guard_faults().is_empty()` and EXIT NON-ZERO on
+   a non-empty answer, then **RED-PROVE IT WITH THE EXACT MUTATION YOU ALREADY USED AT B71** - the
+   rename that gave you GHOST + UNNAMED must now take the battery RED where it stayed rc=0. Fix the
+   :884 comment in the same change so it describes what exists. Short gates; your :45 window.
+
+6. HUD - **THE L74 THEME-AT-SCALE SWEEP IS TICKED AS RUN AND GREEN. L74's REMAINDER STAYS OPEN,
+   AND THAT IS YOUR OWN CAVEAT, NOT MINE.** THEME_SWEEP OK, panels=12 bad=0 at 100/125/150
+   windowed. **You wrote that 12 is EXACTLY the gate's NO-VERDICT floor, so one panel failing to
+   instantiate would have produced no verdict rather than a failure - the verdict is thin and you
+   said so before I could.** FeedHUD is a Control and still invisible to _theme_sweep.
+   **AND THE NO-CLAIM/AMENDMENT PAIR IS THE RIGHT BEHAVIOUR WRITTEN DOWN, NOT AN EMBARRASSMENT:**
+   you reasoned yourself into standing down, merged the 23:58 plan, found it named this item for
+   you, claimed, ran it, and left BOTH paragraphs in PROGRESS.md with the correction on the face of
+   the first. Do that every time. LOCK: claim 00:54:03, IDLE 00:55:12, 69 seconds, no crossing.
+   NEXT: **lift the 12-panel floor honestly by counting FeedHUD's Control**, as you proposed - so
+   the sweep stops sitting on its own no-verdict boundary. Inside claim+15, release by :07.
+
+FOR THE SUPERVISOR - TWO RULINGS, BOTH RAISED BY ART, BOTH EVIDENCED BY ME INDEPENDENTLY:
+  (a) **3x IS NOT CORRIDOR-SAFE ON THE T-POSE SPAN, AND THE DIRECTIVE ASKS FOR BOTH.** Mr. E's
+      words (via your 00:10 directive) are "minimum 2-3x the hero's height" AND "it has to fit a
+      three-cell corridor". Measured, those cannot both be had: the authored T-pose spans 1.576731 m
+      per metre of height, the corridor clear is 11.0 m, so the hard wall is **2.85x** and 3.00x is
+      room-locked at 11.59 m. Art took **2.69x (6.60 m, 10.41 m span, 0.59 m margin)**.
+      MY RECOMMENDATION: **accept 2.69x now and authorise measuring the span in the UAL idle pose
+      instead of the T-pose** - bestiary.gd grafts the UAL library on at load, so the pose the game
+      actually draws has the arms down and a narrower footprint; the T-pose gate is the worst case,
+      not the real one. That is the honest route to a true 3x without room-locking spawns. Art must
+      not start it unruled - it changes the gate every variant is measured by.
+  (b) **THE OTHER THIRTY-FIVE ARE EYE-LEVEL OR SHORTER, AND NOBODY HAS RULED ON THEM.** Art
+      measured it and **I reproduced it independently off the registers: 31 records from 0.84x to
+      1.20x a hero, four at 1.06, more than half at or below 1.0x.** If "a miniboss needs to tower"
+      is a rule for the class and not a note on one variant, the entire miniboss band is wrong and
+      broodglut is now a 6.60 m outlier standing next to 2.5 m "minibosses".
+      MY RECOMMENDATION: **rule on the CLASS before art makes a second tall variant**, and if the
+      class is to be re-scaled, say whether the corridor gate or the tower rule wins - because by
+      (a) they conflict for every body with an authored T-pose. ONE ruling can settle both.
+  (c) ART also asks one small call it raised earlier: whether the eleven showcase kits stay under
+      assets/ (its recommendation) or move. No evidence needed; it is a housekeeping choice.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+these on the first LIVE turn, all at once):
+  1. THE HUB BASELINE IN THE :58 PROMPT IS STALE AND SAYS THE OPPOSITE OF THE TRUTH. It reads
+     "gh-pages is 45a7904 ... origin/gh-pages^{tree} (2d14aa9) does not equal origin/hub:web
+     (22d212c), the difference is 2 files / 19 lines - the 'Sells up to' tier-underline fix. It is
+     with the supervisor." **MEASURED THIS HOUR: gh-pages is 05ac2679 (pushed 19 Nov 20:06 CT) and
+     the two trees ARE EQUAL at 9ca8051e. There is NO merged-and-unpublished delta and nothing is
+     with the supervisor on publishing.** Replace that whole bullet with: re-measure both trees
+     every hour, and as of 20 Nov 00:58 CT they are equal.
+  2. THE STEP-0 BASELINE NUMBERS ARE STALE (they read 122 top-level keys / 32 zero-hit / 18
+     _note_ / 31 asset dirs). MEASURED 20 Nov 01:0x CT on the merged tree, off scripts/*.gd +
+     web/*.js (48 files, 2,259,556 chars) and assets/ only: **133 top-level keys, 43 zero-hit, 28
+     of them _note_, 34 asset directories with files, UNREFERENCED ASSET DIRECTORIES ZERO, UNREAD
+     LIVE DATA KEYS ZERO.** The accounted-for classes are unchanged except ONE: the prose/spec and
+     declared-dead list must now carry **`phase2_words_alt2`** as a THIRD member of a family the
+     ruling named with two. Everything else moved only by `_note_` keys, exactly as predicted.
+  3. ADD TO THE "READ THE REF, NOT THE WORKING DIRECTORY" BLOCK: **`main..lane` is not the lane's
+     change when the lane is behind main.** Art is 1,217 commits behind and hud-ui 627; their
+     `main..lane` diffs render main's own history as mass deletions. Read `git show <lane tip>` or
+     diff from the merge-base. This nearly had me charge art with deleting 16,068 lines.
+
 ## TAKE THIS NEXT - written 2026-11-19 23:58 CT by the Team Lead (machine clock had rolled to
 ## 2026-11-20 00:0x CST while I worked; this is THE 23:58 FIRING). SUPERSEDES EVERY ROW BELOW.
 All six lanes ran. FOUR shipped work, ONE stood down correctly in writing, ONE shipped nothing and

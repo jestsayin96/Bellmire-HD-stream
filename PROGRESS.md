@@ -12472,3 +12472,9 @@ data-file edit, and the plan's row 6 says it is not owed from me. I did not subs
 Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits,
 nothing redeemed, nothing posted.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## C-137 (20 Nov 2026 06:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 05:58 CT) row 3, CONTENT: C-136 ticked; keep producing, keep writing _note_ keys. No miniboss owed: by_key holds 36 and the art-only keys in minibosses.py on origin/art are chibi/helper entries, no new committed body. Added epitaphs +13, descend +7, cleared +6, barks enter +2, lord +2, trap +2, hurt +1, drink +1, misfire +1 (duplicates dropped). _note_c137 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts.
+VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), only new key barks._note_c137.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -44,6 +44,7 @@ creature inside our own dungeon is not. Licence text read off disk this run at
 `_packs/Bestiary_Dungeon_Monsters_Kit/.../License_Standard.txt`, not off a
 search snippet. Logged in docs/art/ASSET_SOURCES.md.
 """
+import math
 import os
 import sys
 import json
@@ -102,6 +103,24 @@ VARIANTS = {
         # asks about. ONE thing changed in this pass and nothing else.
         height=2.60,                    # authored miniboss height, metres
         palette="T_Puglin_BaseColor_2.png",
+        # PASS 3, 20 Nov 2026, AND IT IS THE TEAM LEAD'S EYE MADE INTO
+        # GEOMETRY. He looked at pass 2's hero_front.png and wrote the one
+        # fault no number in the register could reach: "IN THE FRONT VIEW THE
+        # EARS READ AS A SECOND PAIR OF ARMS. They leave the head at the same
+        # angle, the same hue and nearly the same taper as the real arms."
+        # Measured afterwards by tools/art/_bg_sil_runs.py: 234 of 234 ear
+        # columns carried ONE vertical run - the ear's visible outline rested
+        # flush on the arm's upper edge with no background between them
+        # anywhere. The pack's 55-bone rig has NO ear bone (all 1531 head-and-
+        # ear vertices ride `Head`), so this is geometry and not a pose.
+        # The ear is turned about its own measured root: back behind the skull
+        # and lifted, so it leaves the head on a different line from the arm
+        # and the sky comes through between them. Chosen over a 60 deg droop
+        # and two shallower sweeps BY LOOKING at four silhouette sheets - the
+        # droop squared the skull off and hung the ears as spikes under the
+        # armpits, which is a worse read than the one it fixed.
+        ear_pitch_deg=40.0,             # + lifts the tip
+        ear_yaw_deg=45.0,               # + sweeps it back behind the skull
         theme="mess",
         aura=(1.00, 0.42, 0.30),        # the rig's warm key, red end
         idea=("IT EATS ITS OWN - while any lesser puglin in the room still "
@@ -184,6 +203,100 @@ def _mean(img):
     return [round(float(x), 4) for x in a[..., :3][m].mean(axis=0)]
 
 
+EAR_X0 = 0.20       # measured: Head-dominant geometry runs |x| 0.20 -> 0.443
+EAR_RAMP = 0.20     # the turn reaches its full angle within this much of the ear
+
+
+def ear_indices(body, x0=EAR_X0):
+    """The ear vertices, found by weight and reach rather than by name.
+
+    THE RIG HAS NO EAR BONE. tools/art/_bg_ears_probe.py read all 55 and not
+    one is an ear; the whole head, both ears included, is 1531 vertices riding
+    `Head`. So the ears are the Head-dominant vertices that reach past the
+    skull, and `x0` is where the head's own vertex count collapses (394 in the
+    slice 0.15-0.20, then 166 in 0.20-0.25) - the ear root, measured."""
+    inv = {g.index: g.name for g in body.vertex_groups}
+    mw = body.matrix_world
+    out = []
+    for v in body.data.vertices:
+        best, bw = None, -1.0
+        for ge in v.groups:
+            if ge.weight > bw:
+                bw, best = ge.weight, ge.group
+        if inv.get(best) == "Head" and abs((mw @ v.co).x) > x0:
+            out.append(v.index)
+    return out
+
+
+def ear_turn(body, idx, pitch_deg, yaw_deg, x0=EAR_X0, ramp=EAR_RAMP):
+    """Turn each ear about its own root and carry it along the resulting arc.
+
+    Arc length is preserved, so the ear keeps the pack author's length and
+    taper and only its DIRECTION changes - one thing at a time. The turn
+    reaches full angle within `ramp` of the ear and holds it, so the outer
+    four-fifths rotate rigidly and only the root blends; a smoothstep over the
+    root means no crease where ear meets skull. The cross-section rides the
+    arc's own frame (tangent plus its two normals) so the flap rotates with
+    the ear instead of shearing flat.
+
+    *** THE FIRST VERSION OF THIS RAMPED THE TURN ACROSS THE WHOLE EAR AND
+    *** COULD NOT MOVE IT: at yaw 55 deg the tip travelled 0.089 on a 0.243
+    long ear and span_y did not change at all. Four candidate sheets would
+    have come out looking alike and invited the conclusion that no deform
+    helps. A deform whose strongest setting barely displaces its subject is
+    this lane's "instrument that cannot move" wearing the other hat."""
+    if not idx:
+        return {"moved": 0}
+    co = {i: body.data.vertices[i].co.copy() for i in idx}
+    L = max(abs(c.x) - x0 for c in co.values())
+    if L <= 1e-6:
+        return {"moved": 0}
+    P, Y = math.radians(pitch_deg), math.radians(yaw_deg)
+    near = [c for c in co.values() if abs(c.x) - x0 < 0.15 * L] or list(co.values())
+    y_r = sum(c.y for c in near) / len(near)
+    z_r = sum(c.z for c in near) / len(near)
+
+    def turn(u):
+        if u >= ramp:
+            return 1.0
+        t = u / ramp
+        return t * t * (3.0 - 2.0 * t)
+
+    N = 240
+    du = 1.0 / N
+    arc = [(0.0, 0.0, 0.0)]
+    for k in range(N):
+        u = (k + 0.5) * du
+        t = turn(u)
+        ap, ay = P * t, Y * t
+        x, y, z = arc[-1]
+        arc.append((x + math.cos(ap) * math.cos(ay) * du * L,
+                    y + math.cos(ap) * math.sin(ay) * du * L,
+                    z + math.sin(ap) * du * L))
+
+    for i, c in co.items():
+        sgn = 1.0 if c.x > 0 else -1.0
+        u = min(1.0, max(0.0, (abs(c.x) - x0) / L))
+        k = int(round(u * N))
+        t = turn(u)
+        ap, ay = P * t, Y * t
+        n1 = (-math.sin(ay), math.cos(ay), 0.0)
+        n2 = (-math.sin(ap) * math.cos(ay), -math.sin(ap) * math.sin(ay), math.cos(ap))
+        oy, oz = c.y - y_r, c.z - z_r
+        ax_, ay_, az_ = arc[k]
+        body.data.vertices[i].co = type(c)((
+            sgn * (x0 + ax_ + oy * n1[0] + oz * n2[0]),
+            y_r + ay_ + oy * n1[1] + oz * n2[1],
+            z_r + az_ + oy * n1[2] + oz * n2[2]))
+    body.data.update()
+    return {"moved": len(co), "ear_len": round(L, 4),
+            "root": [x0, round(y_r, 4), round(z_r, 4)],
+            "tip_centreline": [round(x0 + arc[-1][0], 4),
+                               round(y_r + arc[-1][1], 4),
+                               round(z_r + arc[-1][2], 4)],
+            "pitch_deg": pitch_deg, "yaw_deg": yaw_deg}
+
+
 def build_variant(key, repo):
     """Same contract as minibossgen.build_miniboss: returns (objs, info) with
     the creature scaled to its authored height and its feet on z = 0."""
@@ -193,6 +306,13 @@ def build_variant(key, repo):
     bpy.ops.import_scene.gltf(filepath=path)
     new_objs = [o for o in bpy.data.objects if o not in before]
     new_objs, dropped = _drop_stray(new_objs)
+    ear = {"moved": 0}
+    if spec.get("ear_pitch_deg") or spec.get("ear_yaw_deg"):
+        _body = next((o for o in new_objs
+                      if o.type == 'MESH' and o.name.startswith("Puglin_Body")), None)
+        if _body is not None:
+            ear = ear_turn(_body, ear_indices(_body),
+                           spec.get("ear_pitch_deg", 0.0), spec.get("ear_yaw_deg", 0.0))
     pal = _repalette(spec)
     meshes = [o for o in new_objs if o.type == 'MESH']
     rig = next((o for o in new_objs if o.type == 'ARMATURE'), None)
@@ -214,7 +334,7 @@ def build_variant(key, repo):
     info.update(native_h=round(native, 5), scale_k=round(k, 5),
                 measured_h=round(mx.z - mn.z, 4),
                 span_x=round(mx.x - mn.x, 4), span_y=round(mx.y - mn.y, 4),
-                stray_dropped=dropped, palette_report=pal,
+                stray_dropped=dropped, palette_report=pal, ear_turn=ear,
                 bones=(len(rig.data.bones) if rig else 0),
                 meshes=[o.name for o in meshes],
                 tris=_tris(meshes),
@@ -286,6 +406,27 @@ def fit(key, repo, prove_red=False):
     allo = meshes + hmesh
     bpy.context.view_layer.update()
     amn, amx, pts = G.world_bounds(allo)
+
+    # *** THE FRAME, AND PASS 2 REPORTED THIS WRONG. ***
+    # minibossfit's standard cell is FRAME_W 5.60 m. This pair is 5.96 m wide,
+    # because the pack body is authored in a T-pose and its 4.10 m arm span
+    # plus a hero and the gap simply do not fit a 5.60 m cell. Pass 2 recorded
+    # `fits_frame: true` with `frame_w: 6.4` - that run was made with
+    # minibossfit's `--frame` override and NOTHING in the register said so, so
+    # it read as a creature that passed the standard cell. It did not.
+    # Re-rendering at the default 5.60 cuts the HERO off at the left border
+    # (frame_edge front left 228 px), and a sheet that crops a subject hides
+    # whatever fault is under the crop - which is the whole reason this lane
+    # asserts border alpha at all. So the frame is widened to hold the pair,
+    # and the override is RECORDED rather than left to be inferred.
+    # VERIFIED BY A/B, tools/art/_bg_frame_ab.py: the clip is byte-identical
+    # with the ear turn off, so it is pass 2's to answer and not pass 3's.
+    std_w = F.FRAME_W
+    need_w = (amx.x - amn.x) * 1.08
+    frame_overridden = bool(need_w > std_w)
+    if frame_overridden:
+        F.FRAME_W = need_w
+        F.FRAME_H = need_w * F.CELL_Y / float(F.CELL_X)
     outdir = os.path.join(repo, "renders", "art", "variants", key)
     os.makedirs(outdir, exist_ok=True)
     tmpdir = os.path.join(repo, "renders", "art", "variants", "_vis_tmp")
@@ -324,7 +465,11 @@ def fit(key, repo, prove_red=False):
         ratio=round((mx.z - mn.z) / max(0.01, hero["h"]), 2),
         pair_w=round(amx.x - amn.x, 2),
         span_x=info["span_x"], span_y=info["span_y"],
-        frame_w=F.FRAME_W, frame_h=round(F.FRAME_H, 3),
+        frame_w=round(F.FRAME_W, 3), frame_h=round(F.FRAME_H, 3),
+        frame_w_standard=round(std_w, 3), frame_overridden=frame_overridden,
+        fits_standard_cell=bool((amx.x - amn.x) <= std_w
+                                and (amx.z - amn.z) <= (std_w * F.CELL_Y / float(F.CELL_X))
+                                - F.GROUND_UP),
         corridor_clear=11.0,
         room_locked=bool(max(info["span_x"], info["span_y"]) > 11.0),
         fits_frame=bool((amx.x - amn.x) <= F.FRAME_W
@@ -335,6 +480,7 @@ def fit(key, repo, prove_red=False):
         tris=info["tris"], bones=info["bones"], meshes=info["meshes"],
         native_h=info["native_h"], stray_dropped=info["stray_dropped"],
         palette=info["palette"], palette_report=info["palette_report"],
+        ear_turn=info.get("ear_turn"),
         theme=info["theme"], idea=info["idea"], line=info["line"],
         note=info["note"], prove_red=bool(prove_red),
     )

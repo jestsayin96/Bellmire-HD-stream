@@ -160,3 +160,99 @@ and not off a search snippet: worldwide, royalty-free, perpetual, commercial
 use permitted, no attribution required; the only restriction is reselling or
 redistributing the assets **as assets**, which a creature inside our own dungeon
 is not. Logged in `docs/art/ASSET_SOURCES.md`.
+
+---
+
+## Pass 3 — 20 Nov 2026, 00:0x CT: the ears
+
+### The fault, and it came from an eye, not a number
+
+The team lead looked at pass 2's `hero_front.png` and wrote the one thing the
+register could not reach:
+
+> **IN THE FRONT VIEW THE EARS READ AS A SECOND PAIR OF ARMS.** They leave the
+> head at the same angle, the same hue and nearly the same taper as the real
+> arms, so the silhouette is a six-limbed shape.
+
+Every number in that register was green — `seen: 1.0` on all six subject/view
+pairs, 0 blanks, 0 frame clips, 3 of 3 proving views — because **all of them
+ask whether the thing is there and not one asks whether the outline separates.**
+
+### Measured before it was touched
+
+`tools/art/_bg_sil_runs.py` renders the creature alone through a front
+orthographic camera and counts maximal vertical runs of opaque pixels per
+column. On the shipped glb: **234 of 234 ear columns carried a single run** —
+the ear's visible outline rested flush on the arm's upper edge with no
+background between them anywhere. Verdict **FUSED**. The eye and the pixels
+agree.
+
+`tools/art/_bg_ears_probe.py` then answered how to fix it: **the pack's 55-bone
+rig has no ear bone.** All 1531 head-and-ear vertices ride `Head`. So this
+could not be a pose and had to be geometry.
+
+### The change — one thing
+
+`ear_turn()` in `tools/art/monstervariants.py` turns each ear about its own
+measured root (|x| = 0.20, where the head's vertex count collapses from 394 to
+166 per slice) and carries it along the resulting arc. Arc length is preserved,
+so the ear keeps the pack author's length and taper and only its **direction**
+changes. Shipped at **pitch +40°, yaw +45°** — lifted and swept back behind the
+skull.
+
+Chosen over three rivals **by looking at four silhouette sheets**, not by score:
+a 60° droop squared the skull off and hung the ears as spikes under the armpits,
+which is a worse read than the one it fixed.
+
+| | two-run frac | max gap | height overlap |
+|---|---|---|---|
+| shipped (pass 2) | **0.000** | 0 px | 0.027 |
+| droop 60° | 0.000 | 0 px | 0.273 |
+| back 60° | 0.027 | 33 px | 0.031 |
+| back 45° / up 30° | 0.560 | 31 px | 0.004 |
+| **back 45° / up 40° — shipped** | **0.563** | **49 px** | **0.003** |
+
+### Two instruments of mine failed inside this pass, and both were caught here
+
+1. **The deform could not move the ear.** The first `ear_turn` ramped the turn
+   across the whole ear: at yaw 55° the tip travelled 0.089 on a 0.243-long ear
+   and `span_y` did not change at all. Four candidate sheets would have come out
+   looking alike and invited the conclusion that no deform helps.
+2. **The gate passed the known fault.** Mid-pass the gate was moved off the run
+   count onto `ear_touches_arm_px`, which read **0 on the shipped glb** — a
+   perfect score on the fault. The reason is structural and is written on the
+   function: a footprint is what a part *adds* to the outline, so where the ear
+   covers the arm that pixel is the ear's and not the arm's, and the two
+   footprints are disjoint along exactly the seam where the shapes fuse. The
+   harder they fuse, the cleaner the number reads. `height_overlap` failed the
+   same way at 0.027. **Only counting runs ever went red on the fault**, so the
+   gate is back on the run count and the other two are description.
+
+### A pass-2 defect found on the way, and it is not the ears
+
+Re-rendering at minibossfit's **standard cell (FRAME_W 5.60 m)** cut the *hero*
+off at the left border — `frame_edge front {left: 228}`. Pass 2 recorded
+`fits_frame: true` with `frame_w: 6.4`: that run used minibossfit's `--frame`
+override and **nothing in the register said so**, so it read as a creature that
+passed the standard cell. It does not. This pair is **5.96 m** wide, because the
+pack body is authored in a T-pose whose 4.10 m arm span plus a hero and the gap
+do not fit 5.60 m.
+
+`tools/art/_bg_frame_ab.py` ran the pipeline twice in one process, ears off then
+ears on: the clip is **byte-identical both ways**, so it is pass 2's to answer
+and not pass 3's. The frame is now widened to hold the pair and the override is
+**recorded** — `frame_overridden: true`, `fits_standard_cell: false`,
+`frame_w_standard: 5.60` — rather than left to be inferred from a number.
+
+### What the fix does not do
+
+- The body is still a **T-pose**, and that is what the game draws: the shipped
+  glb carries **zero animations**, and so does the pack's own `Puglin.glb`
+  (measured off both glTF JSON chunks this pass). Nothing was dropped by the
+  export.
+- The ears still run close to the upper arm on their inboard half — 42 of 96
+  columns per side remain single-run. That is the shoulder, and it is correct;
+  the fused *read* is gone, the margin is not generous.
+- Separation is **necessary and not sufficient**. Two of the team lead's three
+  cited cues — hue and taper — are invisible to this instrument. The picture
+  stays the verdict.

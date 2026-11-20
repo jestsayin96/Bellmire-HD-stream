@@ -1,3 +1,70 @@
+## SECOND ADDENDUM TO THE 04:58 CT BLOCK - written 05:1x CT, AFTER :05, SO IT IS **NOT OWED THIS
+## HOUR**. It is a LOCK-DISCIPLINE finding with a mechanism attached, for the 05:58 seat to land.
+
+*** TWO LANES HELD THE LOCK AT ONCE THIS HOUR. THE CLEAN-HOUR COUNT RESETS TO 0. ***
+Read off `docs/RUN_LOCK.txt` in R's WORKING tree, which is the authoritative copy:
+    RUNNING 04:49:00  chat bot  (cap 05:14, declared finish 04:58)
+    RUNNING 04:53:49  HUD U97   (cap 05:08, declared finish 05:00)   <-- claimed here
+    IDLE    04:55:00  chat bot
+    IDLE    04:56:29  HUD
+**The HUD claimed at 04:53:49 while the chat bot's RUNNING of 04:49:00 had no IDLE after it.**
+Under Mr. E's yield rule that is a claim over a live hold - liveness is decided BY THE IDLE, not by
+the clock and not by whose scheduled window it is - so roughly **71 seconds** had two holders.
+Both released early, both reported `Godot EMPTY`, and no work was lost.
+
+*** BUT I DO NOT THINK THIS IS HUD INDISCIPLINE, AND THE DIFFERENCE MATTERS. ***
+The chat bot writes its lock lines into **R's WORKING copy and does not commit them**; the game
+build commits them on its next :07 run. So between runs a live chat-bot claim exists ONLY as an
+uncommitted change in R, and any lane that reads the lock from a ref (`git show origin/laptop:...`)
+or from its own worktree's copy **cannot see it at all**. This seat nearly made the same mistake at
+08:58 on 18 Nov and the trap is written into the :58 prompt. If the HUD read a committed or local
+copy at 04:53:49, the chat bot's claim was INVISIBLE to it and the HUD behaved correctly on the
+evidence it had.
+ALSO, SEPARATELY AND SMALLER: the chat bot DECLARED a finish of 04:58, which is inside the HUD's
+:52-:07 window. Mr. E's rule replaced "declare a crossing" with "SPLIT THE JOB", so the declaration
+itself is the thing to stop doing. It released at 04:55, before its own declaration, so the cost
+was zero. ONE LINE, NOT AN INCIDENT - and the chat bot is not to be charged for the overlap above.
+
+**WHAT THE 05:58 SEAT SHOULD LAND (I am not writing it as a row this hour because it is past :05):**
+Tell BOTH the chat bot and the HUD, in their TAKE THIS NEXT rows, to read the lock from **R's
+WORKING tree** (`C:\hd adventure\jests-hd-medieval-adventure\docs\RUN_LOCK.txt`) and from
+nowhere else - not from a ref, not from their own worktree's copy - and to say in their lock line
+WHICH copy they read. That is a one-line instrument fix and it is the whole of this fault. Do NOT
+charge either lane until they have been told, and do NOT ask Mr. E or the supervisor about it: it
+is a mechanical fault in the team lead's own house.
+
+## ADDENDUM TO THE 04:58 CT BLOCK - written 05:1x CT, AFTER :05. *** THIS IS NOT OWED THIS
+## HOUR AND IT ASKS NO LANE FOR ANY WORK. *** It is a BASELINE CORRECTION, recorded so the next
+## seat does not report a regression that is not one. No row above is changed.
+
+THE DEAD-DATA AUDIT, MEASURED THIS HOUR off 2,264,611 chars of script (`scripts/*.gd` + `web/*.js`,
+48 files - tools/ EXCLUDED, it is test code and not the game), 12 data files, **133** top-level
+keys, asset directories measured off `assets/` ONLY:
+  - UNREFERENCED ASSET DIRECTORIES: **ZERO** (34 directories with files; was 31).
+  - UNREAD LIVE DATA KEYS: **ZERO - UNCHANGED.**
+  - ZERO-LITERAL-HIT KEYS: **43**, up from 32, AND THE WHOLE RISE IS ACCOUNTED FOR:
+        28  content's `_note_` cycle notes (was 18 - this is the expected churn)
+         2  the runtime-built `_alt` pools, READ at `delve.gd:3801` via `base + "_alt"`
+            (`lord_intros_alt`, `unique_intros_alt`) - DO NOT WIRE THEM
+         4  the declared-dead family (see below)
+         9  prose/spec keys that are not items (biomes `technique`; bosses `boss_floors`;
+            origins `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`;
+            strains `_gating`; world `canon_silences`)
+        -- 43 exactly. COMPARE THE ACCOUNTED-FOR CLASSES, NEVER THE RAW NUMBER.
+
+**THE ONE KEY MY PROMPT'S BASELINE DOES NOT LIST: `phase2_words_alt2` in `data/lore_lines.json`.**
+I did not call it dead on a zero count. I searched for the suffix and for the concatenation that
+could build it at runtime, which is the guard that has caught three earlier baselines: the ONLY
+such concatenation in the game is `delve.gd:3801` `base + "_alt"`, and `grep -rn alt2 scripts/ web/`
+is **EMPTY**. So it is genuinely unread AND it cannot be built.
+**IT IS NOT A NEW FAULT AND IT DOES NOT MOVE THE UNREAD-LIVE COUNT.** `phase2_words` and
+`phase2_words_alt` were DECLARED DEAD at D98 (ticked 17 Nov 02:33); `_alt2` is a third member of a
+family that was already dead when it was written. It joins the declared-dead class as the fourth
+key beside `town_levels_for_the_desktop`.
+**NO LANE IS TO WIRE IT**, and CONTENT IS NOT BEING ASKED TO STOP OR TO DELETE ANYTHING - D98 is
+closed and is not to be re-opened. The only thing owed here is that the next baseline says 4 in the
+declared-dead class instead of 3, so nobody reports `phase2_words_alt2` as a live key gone unread.
+
 ## TAKE THIS NEXT - written 2026-11-20 04:58 CT by the Team Lead (machine clock read 05:0x CST
 ## while I worked; this is THE 04:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
 SIX LANES SHIPPED - the first hour in four with nothing silent. Six merges, TWO conflicts (root

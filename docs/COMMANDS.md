@@ -10,6 +10,8 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!hero` | !stats, !sheet |  | free | Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record. | `!hero` |
 | `!catchup` | !mystory, !since |  | free | What happened to your hero while you were away: what they did, how it went, and where they stand now. One line, kept short on purpose - the Chronicle of every day in full, and the sheet behind it, are on the hub. (no hero needed) | `!catchup` |
 | `!inventory` | !inv, !bag, !items |  | free | What your hero carries: title, weapon, armour, accessories, dye, brews, oil, gold, and the best fish caught. | `!inventory` |
+| `!weapon` | !steel |  | free | The weapon your hero carries by name, its step on the rarity ladder, the tier it was forged at, and its damage dice. The smithy forges the next tier - !forge. | `!weapon` |
+| `!armour` | !armor |  | free | The armour your hero wears by name, its step on the rarity ladder, the tier it was made at, and the armour class it leaves you. The armoury sells the next tier - !armoury. | `!armour` |
 | `!delve` |  |  | free (bring oil) | Walk to the scar and go down with the next party. Everyone carries their own oil; out of oil, the dark wins. | `!delve` |
 | `!muster` | !party, !mustered |  | free | Who is waiting at the dungeon mouth, in the order their names went in, and where you stand in the line. The muster takes six from chat. A hero sent down by a channel-point errand is counted too, however they were sent. (no hero needed) | `!muster` |
 | `!fish` |  |  | free | Walk to a dock and fish: junk to rare catches. | `!fish` |

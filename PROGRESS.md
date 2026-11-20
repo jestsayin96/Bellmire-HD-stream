@@ -13589,3 +13589,61 @@ NEXT FIRING IF THE TEAM LEAD AGREES: extend refresh_lore.py + a "Minibosses" she
 (names + arrive/fall lines, el()/textContent), full state/hostile-name battery. NOT CLAIMING READY TO PUBLISH.
 gh-pages delta: web/ untouched by me; no publish gate owed.
 Untracked _hub_ready_shot.png in the worktree is old and named here; delete refused on this machine.
+
+
+## B88 - 20 Nov 2026, 16:45-16:5x CT - NO PUBLISH IS DUE: THE 41st BODY IS A BODY ONLY, AND I STOOD DOWN ON THE ENGINE
+
+THE TRAP OF THE HOUR, SAID FIRST. The team lead's 15:58 block opens with "ART PUSHED `ad070505` ... it is
+the 41st miniboss, THE SCRAPER". A lane that publishes off a headline would have written "The 41 elites"
+into a live chat command this hour. I measured the four authorities myself on the merged tree 0019532f
+(origin/main 5b3efc55) and 41 is NOT the number my file answers with:
+  - art  `_report.json`                 = **41** non-chibi bodies (52 total - 11 `_chibi`). `scraper` present.
+  - content `miniboss_feed.by_key`      = **40** rows, 40 distinct. `scraper` ABSENT.
+  - engine `Delve.MB_NAME`              = **40** keys, 40 distinct (brace-balanced findall). `scraper` ABSENT.
+  - chat bot `commands.json` .what/.short = **"The 40 elites"** x2, "39 elites" x0, "41 elites" x0.
+SET ALGEBRA BOTH WAYS, so this is not an eyeball: `feed - MB_NAME` = [], `MB_NAME - feed` = [],
+`bodies - feed` = ["scraper"], `feed - bodies` = []. The scraper is case (4) - body only, no feed row, no
+name row - exactly what `relief` was at 14:45 and `hooper` at 13:45. NOTHING FIRES ON IT and nothing is
+owed by me. **MINIBOSS COUNT gates published against the FEED, not against art's body count**, and feed and
+published are both 40, so the right action is NO EDIT. A no-op defended is a delivery; publishing 41 would
+have been a defect shipped into chat.
+
+THE LEAD'S DIRECTIVE, MADE STRUCTURAL. Row 5 of the 15:58 block: "stop using silent fallbacks in your
+art/engine readers. Index the key you mean and let a KeyError be loud." Every read this run indexes:
+`rep['minibosses']`, `d['miniboss_feed']['by_key']`, `c['commands']`, `c['order']` - no `.get(k, default)`
+anywhere in the instrument. I proved the loudness rather than asserting it: `rep['pairs']` on the real
+file now raises `KeyError('pairs')`, which is the exception the old `rep.get("pairs", rep)` swallowed when
+it handed back the top dict and I counted its 8 keys as 8 bodies. Two 8-shaped under-counts in two hours
+came from that one habit; it is gone from the reader, not just from my attention.
+
+MY FILES AUDITED, UNCHANGED, AND DRIFT CHECKED BOTH DIRECTIONS. `json.load` clean; 31 commands; `order` is
+31 and equal to the key set; 0 entries with no answer in `chatcmd.gd`; 0 code literals that are aliases
+without an entry; `docs/COMMANDS.md` carries all 31 rows and "40 elites" x1 with 0 stale "39 elites" and 0
+premature "41 elites" bytes. `commands.json` f7aed9bb and `COMMANDS.md` 994c76ae are byte-for-byte the
+bytes B87 shipped - I changed neither, because neither was wrong.
+
+I DID NOT TAKE THE GODOT LOCK AND I DID NOT CROSS ANYONE. The QA tester - the new :41 lane - claimed at
+16:42:12 with cap claim+10 and a hard release of 16:52, and no IDLE from that lane followed. CHECKED BY
+PROCESS, NOT BY THE FILE ALONE: `tasklist` showed TWO live `Godot_v4.7.2-stable_win64` processes (26948 at
+6,984 K and 39304 at 393,408 K) at 16:47:17 Windows time. That is a live hold by the yield rule, so I wrote
+no RUNNING line. **The QA tester's 16:42-16:52 window covers my :45-:52 share end to end**, and a battery
+claimed after their release would still be running inside the HUD's :52 window, so I SPLIT THE JOB rather
+than declare a crossing: the gate battery carries to the 17:45 firing whole.
+
+WHAT IS CARRIED, EXACTLY: `--headless --quit-after 300` parse, `_l14_test.gd`, `_twitch_parse.gd`, and a
+`_commands_doc.gd` no-op confirmation. The lead expects `MINIBOSS UNNAMED` GREEN on the merged tree now
+that S68's `"relief": "Watchturn"` has reached main - I verified that INPUT statically (`delve.gd` carries
+`relief`, MB_NAME 40/40, `feed - MB_NAME` empty) and I am NOT claiming the gate result. Static input is not
+a gate and I say so.
+
+AND I TOOK THE LEAD'S CORRECTION ON THE CHIN. B87 wrote that the game build "had not pushed" S68 because
+main lacked `relief`. The lead showed `origin/laptop` carried it at 15:14:21, 33 minutes before I looked.
+**Main being stale is not evidence a lane did not push - read the ref you are making the claim about.** I
+made no claim about another lane's push state this hour; where I needed to know whether `scraper` had
+landed, I read the owning files on the merged tree and said which file each number came from.
+
+Merged origin/main 5b3efc55 (ort, clean) and origin/chatbot; no cycle renumbered. Mount is per session -
+`ls $HOME/mnt/` returned `bellmire-bot` and `jests-hd-medieval-adventure` again this hour, so the prompt's
+`$HOME/mnt/hd adventure/` path exited 1 on my first call; use what `ls` prints. Godot was NOT empty at any
+point in my slot and I launched nothing. No twitch test, 0 bits, no account used. Lock read from R's
+WORKING tree.

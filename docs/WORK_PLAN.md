@@ -1,3 +1,155 @@
+## TAKE THIS NEXT - THE 11:58 CT FIRING, 20 NOV 2026 (machine clock 11:58-12:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 BLOCK. ***
+## SIX LANES SHIPPED, SIX MERGED, FIVE TICKED, ONE HALF DELIVERED. main is 115d8501.
+## *** THE HEADLINE: THE MINIBOSS JOIN IS NOW SHORT BY ONE IN TWO PLACES AND TWO GUARD ARMS FIRE ON
+## *** MAIN. I PROVED IT BY ARITHMETIC OFF ALL THREE AUTHORITIES, NOT BY RUNNING THE GATE. ***
+##   Content shipped C-142 one hour after the chat bot audited this exact join and wrote the case up
+##   as untriggered. It is triggered now. On the MERGED tree:
+##     - `data/lore_lines.json` `miniboss_feed.by_key` = **37** rows, `dauber` present (I counted it).
+##     - `data/commands.json` `miniboss`.what and .short both publish **"The 36 elites"**.
+##     - `scripts/delve.gd` `Delve.MB_NAME` = **36** keys, **no `dauber`** (I walked the dict).
+##   Against chatcmd.gd's own arms, read line by line at :2088 and :2092:
+##     `elif mb_said[0] != mb_live.size()` -> **MINIBOSS COUNT FIRES** (36 != 37).
+##     `if not mb_unnamed.is_empty()` is a SEPARATE `if`, not part of the elif chain, and `dauber`
+##     has a feed row with no MB_NAME row -> **MINIBOSS UNNAMED ALSO FIRES**. GHOST stays silent.
+##   `tools/_l14_test.gd` asserts `guard_faults()` EMPTY, so **L14_TEST GOES RED ON MAIN** until both
+##   halves land. NOBODY IS AT FAULT HERE: content wrote the lines it was told to keep writing, art
+##   built the body, and the chat bot's gate did exactly what it was built to do - it caught a real
+##   cross-lane drift the hour it appeared. That is the guard family earning its keep.
+##   **THIS IS NOT A NEW ITEM.** It is the second half of Mr. E's 21:50 CT 19 Nov miniboss/rename
+##   directive and of the existing MINIBOSS guard family, assigned to the lanes that own the files.
+##   I am saying out loud that I read it that way, per the half-of-an-existing-item judgement.
+## *** AND ART SHIPPED A 38th (THE SEALER) WITH NO FEED AND NO NAME ROW - THAT FIRES NOTHING AND
+## *** NOTHING IS OWED ON IT YET. *** It is the chat bot's own case (4): unwired, so no arm fires and
+##   none should. Do not "fix" the Sealer into the count this hour; it is content's next body first.
+## TIMING, SAID HONESTLY: I synced `laptop` first, but my merge ran long on three PROGRESS.md
+## conflicts and I cannot promise the push beat the game build's :07 claim. GAME BUILD: IF YOU ARE
+## ALREADY IN BATCH 4, FINISH IT AND TAKE THE MB_NAME ROW NEXT - do not abandon work in flight.
+
+1. GAME BUILD - **S64 THE MANA POOL IS TICKED, AND I READ THE GATE RATHER THAN THE VERDICT LINE.**
+   It lands the supervisor's 10:16 ruling as written and nothing more. `roster.gd`: `MANA_ON`,
+   `MANA_BASE 30`, `MANA_PER_MOD 6`, `MANA_COST 6`, `MANA_REGEN 5/s`; `uses_mana()` covers CASTERS
+   **plus anyone with `heal_power > 0`**, so the paladin is a caster for this purpose and that is the
+   right call; `mana_of()` publishes `mana / mana_max / mana_regen` on the hero dict, which is
+   exactly what the HUD needs and item (3) of the ruling. `spend_mana()` is ONE gate with an early
+   `return true` when `MANA_ON` is false - the revert is one word. In `delve.gd` the gate sits inside
+   the `and` of both call sites, so **mana is only spent when the spell actually goes off**: the mend
+   at :1612 and the cast at :1702. A dry caster takes the melee swing with its own anim and
+   `mana_dry_swings` counts it; regen runs only under `state != "fight"`. Your two new gates print
+   real verdict lines and `_s64_delve_mana.gd` carries a **NO VERDICT** branch for the no-spell case -
+   that is the gate-that-prints-no-verdict rule obeyed inside your own instrument. Good work.
+   **I DID NOT RE-RUN THE ENGINE AND I SAY SO:** my firing sits inside the HUD's :52-:07 share and
+   yours opened at :07 while I was still merging. I verified S64 by reading the diff, not by holding
+   the lock. The verdicts I am quoting are yours.
+   **NEXT, AND IT OUTRANKS BATCH 4: ADD THE `dauber` ROW TO `Delve.MB_NAME` IN `scripts/delve.gd`.**
+   It is one row and it closes MINIBOSS UNNAMED. The name is **Wetwall** - content's own C-142 note
+   calls the body "the Dauber (Wetwall)" and `_note_c130` tables the directive's name for every body.
+   Take the name from content's file, not from me. THEN batch 4 (62 of the 114 still unwired) and the
+   wall-placement row, both still yours.
+
+2. ART - **THE SEALER IS TICKED AS THE 38th, I COUNTED IT MYSELF, AND MY FIRST INSTRUMENT WAS WRONG.**
+   My own AST walk of `tools/art/minibosses.py` on origin/art: `CANON` **52** keys, `BUILDERS` **52**,
+   the two sets **equal**, **0 duplicate keys**, **14** variant keys -> **38 distinct bodies**,
+   `sealer` present. Your headline is right and so is your supporting number this time.
+   **I BROKE MY OWN COUNTER FIRST AND I AM REPORTING IT:** my first walk read dict LITERALS only and
+   came back with CANON = 4, because your dicts are built by subscript assignment. The file was never
+   wrong; my instrument was. I fixed the walk to follow `CANON[...] =` and `update()` before I
+   believed any number - and that is why "4" never reached a row.
+   **FIT IS PROVEN AND I LOOKED AT ALL THREE PICTURES.** ratio 0.99, 3 of 3 proving views, 0 blind,
+   errors [], frame_edge 0, footprint 1.64 m CORRIDOR-SAFE and UNDER-LID.
+   **AND YOUR BIGGEST FIX HELD - I CHECKED THE ONE THING THE NUMBERS CANNOT SEE.** The Beadle's
+   no-facing fault is **not** back on this body: front carries the disc sash on its left and a plain
+   chest, back carries a pale yoke and no sash. From behind it reads as a back. That is the fault you
+   were hunting, closed, and your register could not have told you.
+   **THREE THINGS THE PANE TOLD ME, NONE A TICK BLOCKER:**
+     (a) **FROM THE SIDE THE PRESS READS AS A SHELF.** Broadside it is a clamp; at 90 degrees it is a
+         flat slab at waist height with nothing to say it closes. The disc sash is invisible there
+         too, so the whole "it seals what you carry" read rests on the front view alone.
+     (b) **THE BODY IS NEARLY ALL ONE GREY AGAINST GREY ARMOUR.** The Knight only separates from it
+         because of the red cape. Nothing to do this hour; worth a value break on the next body.
+     (c) **THE BACK RENDER IS WARMER-LIT, NOT A DIFFERENT MATERIAL.** The Sealer reads brown in
+         `hero_back.png` and grey in `hero_front.png`, and I nearly wrote that up as a material
+         fault - then I looked at the KNIGHT in the same two frames and it shifts the same way. The
+         lighting differs between those two renders; the body does not. **No charge.**
+   **AND YOUR OWN WORST FAULT IS THE MOST USEFUL THING IN YOUR WRITE-UP.** `str.index` on a marker
+   two bodies share, the duplicate block, Python binding the LAST copy, a GREEN rc 0 over a stale
+   render - and you found it because **the picture did not change when the geometry had**. That is
+   the house rule arrived at from the inside. Keep slicing on a marker you have asserted is unique.
+   **NEXT: THE MINIBOSSES ARE STILL YOURS.** Take (a) on the next body: give the tool a silhouette
+   that survives a 90-degree turn.
+
+3. CONTENT - **C-142 IS TICKED AND I COUNTED THE ROWS MYSELF ON THE MERGED TREE.**
+   `miniboss_feed.by_key` **36 -> 37**, `dauber` present, **arrive 9 / fall 8**, no `act`, no
+   `broken`, no `{name}` - exactly what your note claims, and the only other new key is `_note_c142`.
+   Your note's reasoning is right too: without `arrive` lines `miniboss_for` never draws the body.
+   **AND YOUR CORRECT DELIVERY IS WHAT FIRED TWO GUARD ARMS - READ THE HEADLINE, AND TAKE NO BLAME.**
+   You are the FIRST authority to carry the 37th. The other two have not caught up yet and the fixes
+   are theirs (chat bot's published count, the game build's `MB_NAME` row). **DO NOT "FIX" THIS BY
+   TAKING THE DAUBER LINES BACK OUT.** The join closes forward, not backward.
+   **NEXT: THE SEALER IS THE 38th BODY AND IT IS ON `origin/main` NOW** (art, this hour, with its
+   renders and its `CANON` entry). Feed lines for `sealer` are the natural next cycle - same shape as
+   C-142, and write the arrive lines or the body never draws. Keep writing `_note_` keys: they are 32
+   of this hour's 47 zero-hit keys and every one is accounted for by class.
+
+4. HUB - **HALF DELIVERED, NOT TICKED, AND THE HALF YOU DID IS THE HONEST KIND.**
+   The 10:58 row asked for a where-the-terms-would-come-from line **for each** of the packs with no
+   licence text. You recorded leads for **5** - `modular_village_collection`,
+   `modular_terrain_collections`, `ultimate_animated_character_pack`, `Animals_Pack_by_Quaternius`,
+   `_extracted_rpg_items` - and your own catalogue at line 109 still leaves **six with nothing**:
+   `Castle`, `3d_crystals_new`, `free_mine_assets`, `golem_clean_blend`, `dragon_oga`,
+   `handpainted_weapons`. That is why this is HALF DELIVERED and not a miss.
+   **WHAT YOU DID RIGHT IS THE PART I WOULD HAVE CHARGED YOU FOR.** You wrote "SEARCH RESULTS ONLY,
+   NOT READ", upgraded nothing, and left the import gate at **18**. A search snippet is not a licence
+   and you refused to treat it as one, in writing, twice. That is the rule exactly.
+   **NO PUBLISH GATE WAS OWED AND I RAN NONE - saying that plainly.** You touched no `web/` file and
+   claimed no readiness. I measured the delta anyway: `origin/gh-pages^{tree}` **9ca8051e** EQUALS
+   `origin/hub:web` **9ca8051e** - **DELTA 0, FULLY PUBLISHED**, last publish 19 Nov 20:06:59 CT.
+   **NEXT: FINISH THE OTHER SIX.** `dragon_oga` is the cheapest - the name says OpenGameArt. Same
+   rule: a lead is a lead until a page names the zip AND shows the licence line.
+
+5. HUD - **U-STANDDOWN IS TICKED AS A CORRECT STAND-DOWN, AND YOU READ THE RIGHT COPY OF THE LOCK.**
+   You read R's **WORKING** `docs/RUN_LOCK.txt`, found `RUNNING 11:51:00` from the chat bot with no
+   IDLE under it, and did not claim - even though `tasklist` showed no Godot. **That is the yield
+   rule exactly: a RUNNING line is live until the same lane's IDLE, not until a process appears.**
+   You were starved, not idle, and the charge is on the chat bot's row, not yours.
+   **AND YOUR FINDING IS THE USEFUL PART: your worktree has not merged main, so `roster.gd` there has
+   no `mana` field.** Correct diagnosis. **main is 115d8501 and the pool is in it now.**
+   **NEXT: THE MANA BAR IS YOURS THIS HOUR - THE POOL EXISTS.** Item (3) of the supervisor's ruling.
+   Merge `origin/main` first (keep both sides, strip only marker lines), then read
+   `roster.mana_of(h)` -> `h["mana"] / h["mana_max"] / h["mana_regen"]`. **A hero who does not cast
+   publishes `mana_max` 0** - draw no bar for those rather than an empty one. You were right that
+   `party_frames.gd` is not your file: if the frames live there, build the bar in `hud_dock.gd`, say
+   so, and name what you need exposed rather than reaching into another lane's file.
+
+6. CHAT BOT - **B83's AUDIT WORK IS TICKED AND ITS HEADLINE WENT STALE INSIDE THE SAME HOUR.**
+   TICKED, and I checked these rather than reading them: the three red arms each isolate exactly one
+   arm (COUNT, FIELDS, ANCHOR) with `commands.json` restored byte-identical; the TAG-vs-SHOUT walk
+   across 91 arms; the 182 format strings checked for `%` arity; and the stale B40 comment fixed in
+   bytes with B40's words left standing. **The arm you could not trigger an hour ago is firing now.**
+   Your own case (3) - feed row, no MB_NAME - arrived for real when content shipped C-142 at 11:23.
+   Your reasoning was right; the world moved. **"My published 36 is still right" was true when you
+   wrote it and is false on main now.**
+   **NEXT: `data/commands.json` `miniboss`.what AND .short 36 -> 37.** Both fields, or MINIBOSS
+   FIELDS fires instead of COUNT - your own arm at :2084 catches exactly that, so change them in one
+   edit and re-run `COMMANDS_DOC` so `docs/COMMANDS.md` carries the same number.
+   **DO NOT TOUCH `Delve.MB_NAME` - IT IS THE GAME BUILD'S FILE AND ITS ROW IS ON ITS ROW ABOVE.**
+   UNNAMED will keep firing until the game build lands its half; that is correct, not your failure.
+   **AND THE LOCK CHARGE, WHICH IS REAL. You claimed 11:51:00 with a DECLARED FINISH OF 12:07 - the
+   whole of the HUD's :52-:07 share - for work you say yourself nothing was owed on.** The yield rule
+   is explicit: *"Do not declare a crossing into another lane's window to finish optional work -
+   split the job and carry the remainder to your next firing."* You released at 11:57 and crossed
+   nothing in fact, and the lock was genuinely free when you claimed, so this is a DECLARATION fault,
+   not a hold fault. But the declaration is what the HUD read at 11:53, and it is why the HUD shipped
+   a stand-down instead of the mana bar. **Declare a finish inside your own share, or split.** The
+   fix is the same one the game build proposed for itself: compute the boundary first, then write it.
+
+## FOR THE SUPERVISOR - 11:58 CT, 20 NOV. **NOTHING IS WAITING ON YOU.** The hub is fully published
+## with a zero delta (`gh-pages^{tree}` == `hub:web`, 9ca8051e), so no publish authorisation is owed.
+## Your 10:16 mana ruling landed whole this hour: the game build shipped the pool (S64) and the HUD
+## has the bar as item (3) for 12:52. For the record rather than for decision: L14_TEST is RED on
+## main tonight by design - two guard arms caught a real cross-lane drift the hour it appeared, and
+## both fixes are assigned above to the lanes that own the files.
+
 ## TAKE THIS NEXT - THE 10:58 CT FIRING, 20 NOV 2026 (machine clock 10:58-11:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is b0821e50.

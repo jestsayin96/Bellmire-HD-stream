@@ -2231,45 +2231,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 36787,
-      "vis": 36787,
-      "delta": 37587,
+      "alone": 36905,
+      "vis": 36905,
+      "delta": 37722,
       "seen": 1.0
      },
      "hero": {
       "alone": 43680,
       "vis": 43680,
-      "delta": 51429,
+      "delta": 51220,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 30656,
-      "vis": 30656,
-      "delta": 31593,
+      "alone": 33644,
+      "vis": 33644,
+      "delta": 34563,
       "seen": 1.0
      },
      "hero": {
       "alone": 37778,
       "vis": 37778,
-      "delta": 38728,
+      "delta": 38718,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 36256,
-      "vis": 36256,
-      "delta": 37102,
+      "alone": 36482,
+      "vis": 36482,
+      "delta": 37313,
       "seen": 1.0
      },
      "hero": {
       "alone": 44033,
       "vis": 44033,
-      "delta": 44734,
+      "delta": 44711,
       "seen": 1.0
      },
      "proves": true

@@ -5,66 +5,66 @@
  ],
  "yaws": {
   "0": {
-   "with_px": 113055,
-   "without_px": 86029,
-   "moved_px": 62544,
-   "outline_px": 27427
+   "with_px": 113443,
+   "without_px": 86575,
+   "moved_px": 62025,
+   "outline_px": 27284
   },
   "45": {
-   "with_px": 125152,
-   "without_px": 93101,
-   "moved_px": 53165,
-   "outline_px": 32444
+   "with_px": 126198,
+   "without_px": 94147,
+   "moved_px": 53080,
+   "outline_px": 32524
   },
   "90": {
-   "with_px": 94464,
-   "without_px": 73692,
-   "moved_px": 26467,
-   "outline_px": 21195
+   "with_px": 103396,
+   "without_px": 83785,
+   "moved_px": 26422,
+   "outline_px": 20001
   },
   "135": {
-   "with_px": 86709,
-   "without_px": 80136,
-   "moved_px": 9038,
-   "outline_px": 6832
+   "with_px": 86268,
+   "without_px": 79839,
+   "moved_px": 8626,
+   "outline_px": 6659
   },
   "180": {
-   "with_px": 110680,
-   "without_px": 83225,
-   "moved_px": 39753,
-   "outline_px": 27907
+   "with_px": 111420,
+   "without_px": 84135,
+   "moved_px": 37366,
+   "outline_px": 27713
   },
   "225": {
-   "with_px": 123047,
-   "without_px": 91318,
-   "moved_px": 59400,
-   "outline_px": 32243
+   "with_px": 123980,
+   "without_px": 92251,
+   "moved_px": 54361,
+   "outline_px": 32288
   },
   "270": {
-   "with_px": 95258,
-   "without_px": 73090,
-   "moved_px": 53494,
-   "outline_px": 22569
+   "with_px": 103290,
+   "without_px": 82760,
+   "moved_px": 53336,
+   "outline_px": 20923
   },
   "315": {
-   "with_px": 89034,
-   "without_px": 80834,
-   "moved_px": 51777,
-   "outline_px": 8509
+   "with_px": 88363,
+   "without_px": 80500,
+   "moved_px": 50706,
+   "outline_px": 8151
   }
  },
  "errors": [],
  "ok": true,
  "engine": "BLENDER_EEVEE",
- "survives": 0.145,
- "cardinal_survives": 0.423,
+ "survives": 0.139,
+ "cardinal_survives": 0.426,
  "cardinals": {
-  "0": 62544,
-  "90": 26467,
-  "180": 39753,
-  "270": 53494
+  "0": 62025,
+  "90": 26422,
+  "180": 37366,
+  "270": 53336
  },
- "outline_survives": 0.211,
+ "outline_survives": 0.205,
  "worst_yaw": 135,
  "best_yaw": 0
 }

@@ -10104,3 +10104,15 @@ Ran WINDOWED 1920x1080 (logs _u97_*.log, untracked, rc in _u97_*.rc):
 So neither gate is asleep: each exits non-zero on a deliberate fault and zero on the real tree. Parse (headless, quit-after 300) rc=0, 0 Parse Error; the only SCRIPT ERRORs in any log are 28 "Cannot call method 'instantiate' on a null value" = the known gear.gd thin-import-cache lines, not HUD.
 Looked at: renders/cycles/u90/u90_run_150.png - four panes tile 1920x1080, Chronicle parchment centred over the cross with two whole wrapped entries, no ellipsis, nothing clipped, clock chip bottom right clear.
 Next: nothing owed; if the plan names no HUD item, long-roster LeaderboardPanel/hud_dock read at 125/150 inside claim+15. Nothing for Mr. E to decide.
+
+### U98 (2026-11-20T05:53 CST) - L74 REACH half, steps (a)+(b): all four surfaces answer NO, System 2's HUD half is COMPLETE on reach; no Godot used, no lock claimed
+Item: TAKE THIS NEXT (04:58) row 5 HUD, "L74's REMAINDER - the REACH half" (the 3-step row at WORK_PLAN item 6 of the earlier block). Lock: R working copy last line IDLE chat bot B76 05:49:00, tasklist empty at 05:52; I did not claim because steps (a)/(b) need no engine. Edited no owned file.
+(a) ONE LINE PER SURFACE (grep -i gear|weapon|armou?r|item|equip|loot|rarity|sword|shield, then every "name" hit read):
+- hud_dock.gd: NO - name tags are heroes (HTAG), monsters (MTAG), townsfolk (FTAG) and lane tags; zero gear/rarity hits.
+- party_frames.gd: NO - delver name (h.get("name")), floor, oil, bars; zero gear/rarity hits.
+- boss_bar.gd: NO - the lord's name (lord.def.get("name")) and the floor; zero hits.
+- feed_hud.gd: NO as a surface - it ingests free text lines (source[] + an optional feed_tags dict keyed by text) with NO rarity field; its only loot hit is tidy()'s string replace ("...no loot..." -> "no loot"). A gear name in a line would have no stored rarity to key a ladder on, and bare is the specified behaviour.
+(b) Nothing wired, by the row's own rule: "A no is a real answer and closes that file." Reach stays leaderboard_panel.gd:197/:202 (pip + ink, fed weapon/armour rarity at :261/:266), the one surface that names gear.
+Observation, NOT wired: town.gd:5418 feeds "%s lands a %s (%s)!" with the FISH rarity as text in parentheses. That is a fish (fishing.gd RARITY_COLOR's table, not gear), and the HUD would have to PARSE the word out of the string = a second source. feed_hud.tidy(hard) also strips the parenthetical under load. If Mr. E wants rarity-tinted catch lines, the owner of town.gd should put {rarity} into feed_tags[text]; I would then read it through UiTheme.rarity_ink. Not owed.
+(c) Not triggered: no surface wired, so no per-surface shot is owed. Nothing for Mr. E to decide.
+Next: no HUD item left on System 2; regression gates (_theme_sweep, _u90_feed_load) green as of U97. Will re-read TAKE THIS NEXT.

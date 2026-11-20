@@ -118,6 +118,16 @@ const NEW_TYPES := {
                    "lift": 0.0, "family": "fiend",
                    "ways": {"irons": {"at": [0.85, 0.70, 0.55, 0.40, 0.25], "gain": 0.22, "meshes": {"3": "Imp_Chains", "4": "Imp_SpikedCollar"}}},
                    "homes": []},
+    ## S57: the THIRD bestiary-carried miniboss, the Leech (Gulworth). h 2.32 is art's CANON height and
+    ## _fit_leech_register.json pairs.leech.creature_h (ratio 0.95), copied not re-derived. THE ONE IDEA,
+    ## art's own: "IT WILL NOT LET A WOUND CLOSE" - while it stands unbroken, every point of healing the
+    ## party spends goes into its BASIN instead (Delve._mend), and it drinks the basin back into itself
+    ## at `rate` hp/s (Delve._lord_tick). At `tip` of its hp the basin is tipped: it empties for good and
+    ## the party's healing lands again. homes [] - not a random draw; the MB_DIR shrine elite is unchanged.
+    "leech":     {"name": "The Leech", "path": MON + "minibosses/leech.glb", "anims": A_UAL, "hp": 2.0, "atk": 1.1, "spd": 2.4, "h": 2.32,
+                   "lift": 0.0, "family": "fiend",
+                   "ways": {"basin": {"rate": 4.0, "tip": 0.30, "line": "The Leech's basin goes over - what it drank runs out across the floor."}},
+                   "homes": []},
     "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
                    "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
                    "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},

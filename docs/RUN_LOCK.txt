@@ -654,3 +654,9 @@ IDLE 2026-11-20T02:54:56-06:00 - HUD U95: theme sweep OVERLAP now counts into _b
 RUNNING 2026-11-20T03:08:30-06:00 (game build, item per TAKE THIS NEXT, claim 03:08:30, cap 03:33, expected finish 03:33)
 
 IDLE 2026-11-20T03:18:26-06:00 - game build S56: lid raised floorgen.gd:1383 7.0->10.0 (underside 9.50 m), Lastcuff wired (lastcuff.glb.import, bestiary entry, irons way: pace 1.0->2.10, cuffs/collar hide), S56_LAST OK n=16, S56_RED FAIL as designed; battery green (OFFFLOOR 0/2192, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 03:08:30, cap 03:33, declared 03:33, released early, no crossing. Godot EMPTY. No twitch test, 0 bits. Pushed laptop 2905ea2e. (game build)
+
+RUNNING 2026-11-20T03:53:19-06:00 (HUD U96 feed-load + theme-sweep regression gate, claim 03:53:19, cap 04:07, expected finish 04:02)
+IDLE 2026-11-20T03:54:31-06:00 - HUD U96: feed-load gate FEED_LOAD OK (labels=3539 panels=1260 fails=0 dropped_protected 0, crit admitted 4) and theme sweep THEME_SWEEP OK (panels=15 feed_chronicle=3 bad=0), windowed 100/125/150, regression re-run only, no owned file edited; claim 03:53:19, cap 04:07, released early, no crossing. Godot EMPTY. (HUD)
+
+RUNNING 2026-11-20T04:08:23-06:00 (game build, item per TAKE THIS NEXT, claim 04:08:23, cap 04:33, expected finish 04:33)
+IDLE 2026-11-20T04:18:23-06:00 - game build S57: Leech bestiary entry + basin idea (_mend), S57_LEECH OK n=14, S57_RED FAIL as designed; battery green (OFFFLOOR 0/2105, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 04:08:23, cap 04:33, declared 04:33, released early, no crossing. Godot EMPTY. No twitch test, 0 bits. (game build)

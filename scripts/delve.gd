@@ -1567,7 +1567,7 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 		# D2 spells: renew mends over time, a ward fades
 		if float(m.get("hot_t", 0.0)) > 0.0:
 			m["hot_t"] = float(m["hot_t"]) - delta
-			m["hp"] = minf(float(m["max"]), float(m["hp"]) + float(m.get("hot_rate", 0.0)) * delta)
+			_mend(m, float(m.get("hot_rate", 0.0)) * delta)
 		if float(m.get("ward_t", 0.0)) > 0.0:
 			m["ward_t"] = float(m["ward_t"]) - delta
 	# L47: before anyone swings, does the PARTY still want this fight? A lost one is broken off
@@ -2182,6 +2182,20 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
 				if piece is Node3D:
 					(piece as Node3D).visible = false
 			_say("%s sheds an iron (%d of %d)." % [String(mon.def.get("name", "It")), off + 1, im.size()])
+	if ways.has("basin"):
+		# S57: the Leech drinks the basin back into itself; at `tip` of its hp the basin goes over.
+		var bs: Dictionary = ways["basin"]
+		if not mon.get_meta("basin_tipped", false):
+			if mon.hp / maxf(1.0, mon.max_hp) <= float(bs.get("tip", 0.3)):
+				mon.set_meta("basin_tipped", true)
+				mon.set_meta("basin", 0.0)
+				_say(String(bs.get("line", "")))
+			else:
+				var held := float(mon.get_meta("basin", 0.0))
+				var sip := minf(held, float(bs.get("rate", 4.0)) * delta)
+				if sip > 0.0:
+					mon.hp = minf(mon.max_hp, mon.hp + sip)
+					mon.set_meta("basin", held - sip)
 	if ways.has("swoop"):
 		var sw: Dictionary = ways["swoop"]
 		var t := float(mon.get_meta("swoop_t", float(sw.get("every", 7.0)))) - delta
@@ -2673,6 +2687,29 @@ func _strike(m: Dictionary, tgt: Monster, dmg: float, crit: bool, kind := "") ->
 		if tgt.def.get("boss", false):
 			_say("%s falls to %s." % [tgt.def.get("name"), m["h"]["name"]])
 
+## S57: every mend to a delver passes here. While a Leech (ways.basin) stands untipped on this floor,
+## the mend goes into its basin instead and the delver gets nothing; returns what actually landed.
+func _leech_basin() -> Monster:
+	if dun == null:
+		return null
+	for c in dun.monsters:
+		if is_instance_valid(c) and (c as Monster).state != Monster.S.DEAD \
+				and ((c as Monster).def.get("ways", {}) as Dictionary).has("basin") \
+				and not (c as Monster).get_meta("basin_tipped", false):
+			return c as Monster
+	return null
+
+func _mend(o: Dictionary, amt: float) -> float:
+	if amt <= 0.0:
+		return 0.0
+	var lc := _leech_basin()
+	if lc != null:
+		lc.set_meta("basin", float(lc.get_meta("basin", 0.0)) + amt)
+		return 0.0
+	var before := float(o["hp"])
+	o["hp"] = minf(float(o["max"]), before + amt)
+	return float(o["hp"]) - before
+
 ## renew mends over Spells.RENEW_T; a ward soaks blows for WARD_T; heal is at once
 func _bless(o: Dictionary, kind: String, pow: float) -> void:
 	match kind:
@@ -2680,11 +2717,11 @@ func _bless(o: Dictionary, kind: String, pow: float) -> void:
 			o["hot_t"] = Spells.RENEW_T
 			o["hot_rate"] = pow * 1.3 / Spells.RENEW_T
 		"ward":
-			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow * 0.5)
+			_mend(o, pow * 0.5)
 			o["ward"] = float(o["max"]) * WARD_SOAK
 			o["ward_t"] = WARD_T
 		"heal", "mend":
-			o["hp"] = minf(float(o["max"]), float(o["hp"]) + pow)
+			_mend(o, pow)
 
 func _soak(o: Dictionary, dmg: float) -> float:
 	# L48: the defensive unlocks live here, because this is already the one place a hero's
@@ -3655,7 +3692,7 @@ func drink(m: Dictionary, key: String) -> void:
 	if p.has("heal"):
 		var hd: Array = p["heal"]
 		var amt := float(_dice(int(hd[0]), int(hd[1])) + int(hd[2]))
-		m["hp"] = minf(float(m["max"]), float(m["hp"]) + amt)
+		amt = _mend(m, amt)
 		_float_text(m, "+%d" % int(amt), Color(0.45, 1.0, 0.5))
 		_bark(m, "drink")
 		if key != "mending":

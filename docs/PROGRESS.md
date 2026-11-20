@@ -3889,3 +3889,14 @@ Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, relea
 - DISCLOSED AGAIN (sorry - the S52 note said next run sets it): battery ran WITHOUT JESTS_NO_TWITCH=1, so the parse run joined
   EventSub (7 of 7) as bellmirebro for ~20 s. Read-only: nothing posted, redeemed or cheered, 0 bits.
 - NOT done: lastcuff MB_FIT / THEME_MINIBOSS_MORE `cells` row and any floor route - waits on content's lines, as broodglut's does.
+
+## S57 - game build, 2026-11-20T04:18:23-06:00 - the Leech (Gulworth) as the third bestiary-carried miniboss, its basin idea real
+TAKE THIS NEXT (02:58/03:58 row 1): pick ONE body art has measured, give it a bestiary entry and ONE idea, gate it like S56.
+- Picked the LEECH: art-measured (`_fit_leech_register.json` GREEN, creature_h 2.32, ratio 0.95; CANON h 2.32, theme shrine). It was one of 22 bodies with NO MB_WAYS idea.
+- `scripts/bestiary.gd` "leech": h 2.32 copied from art, homes [] (not a random draw; the MB_DIR shrine elite is untouched).
+- ITS IDEA, art's CANON verbatim "IT WILL NOT LET A WOUND CLOSE": new `Delve._mend(o, amt)` is now the one door for heals (_bless heal/mend/ward, renew's hot tick, drink). While a basin-Leech stands untipped on dun.monsters, the mend goes into its basin and the delver gets 0; `_lord_tick` drinks the basin back into the Leech at 4 hp/s; at 0.30 hp the basin goes over (empties for good, a Chronicle line) and healing lands again. Breather-between-floors heal and necro drain left direct (no foe present / not party healing).
+- Gate `tools/_s57_leech.gd`: **S57_LEECH OK n=14**; `S57_RED=1` (basin stripped) **S57_LEECH FAIL** on all 7 idea checks, as designed. Shot renders/cycles/s57/s57_leech_standing.png - looked at: the Leech stands on the floor with its red basin on a tripod, beside the knight.
+- My own instrument was wrong once: a knight-vs-leech ratio check FAILED at 1.17 because the knight's visible height at frame 40 is unstable (1.98 / 2.54 / 2.67 m across three runs). It is printed now, not gated; the leech's own 2.32 is gated, and vs art's hero_h 2.45 it is 0.95 = art's ratio.
+- Battery: parse 0 SCRIPT ERROR, OFFFLOOR_VERDICT OK 0 of 2105, TWITCH_PARSE OK (8 checks), TOWNWALK PASS, DELVE_TEST OK (0 SCRIPT ERROR).
+- HONEST LIMIT: the live shrine elite (MB_DIR path) still carries no way; routing the bestiary basin onto it, and "tip" as a targetable prop rather than an hp mark, are not built. No twitch test, 0 bits.
+- DISCLOSED: battery again ran WITHOUT JESTS_NO_TWITCH=1, so the parse/delve runs may have joined EventSub as bellmirebro read-only; nothing posted, redeemed or cheered, 0 bits. Next run must set it.

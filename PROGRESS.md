@@ -12374,3 +12374,8 @@ Ran WINDOWED 1920x1080 at UiTheme 100/125/150, no owned HUD file edited: tools/_
 Looked at: renders/cycles/u90/u90_u96_150.png - four panes legible, Chronicle shows two whole entries ("Brother Thistle has fallen to the raiders at the thistle gate x3", "A moss caravan reaches the market square x3") wrapped, no ellipsis, nothing clipped; SUBSCRIBER sub-line ends in an ellipsis ("a townspers...") which is the pane truncating a long name, existing behaviour.
 Only SCRIPT ERROR lines: 3 per log, the known gear.gd instantiate-null (thin worktree import cache), not HUD. Logs _u96_*.log untracked.
 Next: nothing owed; if the plan names no HUD item, lift to a long-roster LeaderboardPanel/hud_dock read at 125/150 only inside claim+15. Nothing for Mr. E to decide.
+
+## C-135 (20 Nov 2026 04:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 03:58 CT) row 2, CONTENT: keep extending pools the engine already reads, keep writing _note_ keys, no fourth phase2_words member (none written), do not wire the rename _note_. No miniboss owed: by_key holds 36; the 13 glb bodies without a key are chibi variants plus Broodglut and Lastcuff (bestiary pack-variants). Added epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds, plus _note_c135 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), top-level count 44 unchanged.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

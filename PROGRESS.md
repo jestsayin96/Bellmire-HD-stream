@@ -12861,3 +12861,73 @@ Next content: C-142.
 Lock: R's WORKING copy last line is RUNNING 2026-11-20T10:48:17-06:00 (chat bot: claim 10:48:17, cap 11:13, expected finish 11:07; guard-arm audit), no IDLE from the chat bot after it. Machine clock read 10:52:41 CST via VM date. tasklist Godot* was empty at 10:53, but the yield rule says a RUNNING with no IDLE holds the lock and a lane running short batteries looks dead between them - so I did not claim over it.
 Item: unchanged - rarity-hue half of System 2 (then L74). Not started this hour; no engine time available inside my :52-:07 share.
 Next firing (11:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap; start the rarity-hue half, headless parse first, windowed render, look at it.
+## B82 (20 Nov 10:4x CT) - GUARD-ARM AUDIT: 91 ARMS, 90 CAN BE NAMED, ONE COULD NOT - AND IT CAN NOW
+Item: TAKE THIS NEXT row 6 - "take the clock fix, then stand down in writing or audit your own
+shipped chatcmd.gd guard arms." I took both. Nothing was owed on L14.
+
+THE CLOCK FIX, FIRST, BECAUSE IT WAS A CHARGE AGAINST THIS LANE TWO HOURS RUNNING.
+The team lead is right: B81's IDLE was stamped ~12 min ahead of the machine. The fix is not to
+trust any single clock - it is to CROSS-CHECK TWO. This run, before writing a lock line:
+  - device_bash `TZ=America/Chicago date`  -> 2026-11-20T10:46:02-06:00
+  - Blender bridge (Windows-side python)   -> 2026-11-20T10:46:13-06:00
+Eleven seconds apart, so the stamp is sound and I said so in the claim line itself. The lock
+file's own mtime agrees independently (game build's IDLE declared 10:19:26, mtime 10:19:26.13).
+Both readings go in every lock line from here; one clock alone is what put a future stamp in
+the file.
+
+THE AUDIT. THREE QUESTIONS, EACH MEASURED, NOT ASSERTED.
+(1) IS EVERY ARM COUNTED? `push_error(` sites in scripts/chatcmd.gd: 91. `_guard_faults.append(`
+    sites: 91. Orphan push_errors (a loud fault with no tag, which B48 called worse than none):
+    ZERO, by pairing every push_error line against an append within three lines. The family is
+    whole - no arm shouts without also being countable.
+(2) CAN EVERY COUNTED ARM BE NAMED? 86 of the 91 appends carry a literal tag, 85 of them distinct;
+    5 compute theirs (`"ENLIST %s DRIFT" % e_tag` and four siblings) and expand to 10 effective
+    tags (ENLIST CALLING/PEOPLE x DRIFT/GHOST, WEAR SLOT/KIND x ANCHOR/GHOST/MISSING) - checked
+    against the pair tables at :1156 and :1909, no collision with a literal. **ONE COLLISION, AND
+    IT IS REAL: "BREW DEFAULT" was appended by TWO arms** (:1532 and :1536), and they are not two
+    reports of one fault. The first means `brew`.what publishes a no-name default the apothecary
+    cannot make at all; the second means it publishes one that resolves fine and is NOT the brew
+    `!brew` with no name actually buys. Different defect, different repair, same name in the one
+    reading a harness gates on.
+(3) DOES THE COLLISION ACTUALLY BITE? I fired each arm separately rather than reasoning about it.
+    Arm A: `No name buys Draughts of Moonshine.` -> resolves to nothing. Arm B: `No name buys
+    Greater Mending.` -> resolves to the key `greater` while BREW_DEFAULT is `mending`. MY FIRST
+    ARM-B TRIGGER WAS WRONG AND I SAY SO: "Draughts of Greater" resolves to NO brew (the row is
+    named "Greater Mending"), so it fired arm A again and proved nothing. Corrected, re-run.
+    ON THE SHIPPED FILE (f56bcdc4): arm A -> ["BREW DEFAULT", "BREW NAME"], arm B -> ["BREW
+    DEFAULT", "BREW NAME"]. **Byte-identical tag for two unrelated faults. The collision bites.**
+
+THE FIX: arm B is now tagged "BREW DEFAULT MISMATCH" (append, push_error and printerr all three),
+with a comment saying what it used to be and why it changed. Arm A keeps "BREW DEFAULT" so no
+earlier write-up goes stale. Nothing outside this file reads a tag string - `grep -rn "BREW
+DEFAULT\|guard_faults"` over the repo finds only chatcmd.gd and tools/_l14_test.gd, and _l14_test
+asserts the array is EMPTY, never a particular name - so the rename cannot break a gate.
+AFTER (43771bce), same two triggers: arm A -> ["BREW DEFAULT", "BREW NAME"], arm B -> ["BREW
+DEFAULT MISMATCH", "BREW NAME"]. Distinct. 91 arms, 91 nameable.
+
+THE BATTERY, ALL REAL GATES, NO EMULATION, ON THE PATCHED FILE:
+  - parse `--headless --path W6 --quit-after 300` rc 0, **ZERO ERROR / SCRIPT ERROR / Parse Error**
+  - `L14_TEST OK (24 checks)` - including the guard-faults check (0 fired) and both doc checks
+  - `TWITCH_PARSE OK (8 checks)`
+  - `COMMANDS_DOC OK wrote 31 commands`, docs/COMMANDS.md sha256 edff7faa before AND after - a
+    true no-op (the generator says 31; a prompt still says 26, and the generator wins)
+  - `_b2_ask.gd` absent, no `.b2_*` logs, nothing to delete
+RED, BECAUSE A GREEN THAT CANNOT GO RED PROVES NOTHING: each trigger gave `L14_TEST FAIL 3
+(24 checks)` rc 1 - the guard check plus both doc checks, which is correct (data moved and the doc
+was deliberately not regenerated). data/commands.json restored in the same driver, re-hashes
+dbeb5517, and the post-restore re-run is `L14_TEST OK (24 checks)`.
+
+TRACKED STATE: data/commands.json dbeb5517 and docs/COMMANDS.md edff7faa UNCHANGED (a tag is not
+published, so the doc cannot drift from this). scripts/chatcmd.gd f56bcdc4 -> 43771bce -> this
+commit. The overwrite went through the BLENDER BRIDGE first try, as the 08:58 ruling says; I did
+not waste a cycle on device_bash refusals. Scratch lived OUTSIDE the repo
+(C:\hd adventure\_b82_scratch) and is deleted, so there is no _to_delete/ pile this hour.
+
+NOTHING FOR THE GAME BUILD LANE. twitch_eventsub.gd untouched; the reply contract is unchanged.
+No Twitch test this run, 0 bits, no account used.
+
+RE-RAN THE WHOLE BATTERY ON THE EXACT COMMITTED BYTES, because the B82 comment changed the file
+after the discriminator ran and a green on other bytes is not a green on these: chatcmd.gd
+**3ca9d699** - parse rc 0 zero ERROR, L14_TEST OK (24 checks) with 0 guard arms fired,
+TWITCH_PARSE OK (8 checks), COMMANDS_DOC OK wrote 31 with docs/COMMANDS.md edff7faa either side,
+data/commands.json dbeb5517.

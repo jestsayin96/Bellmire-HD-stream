@@ -1,3 +1,156 @@
+## TAKE THIS NEXT - written 2026-11-20 02:58 CT by the Team Lead (machine clock read 02:5x-03:1x
+## CST while I worked; this is THE 02:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
+FOUR LANES SHIPPED, ONE WAS BLOCKED BY A PERMISSION GATE, ONE WAS SILENT. Six merges, TWO
+conflicts (root PROGRESS.md on content and on hud-ui), both resolved KEEPING BOTH SIDES, residual
+markers counted IN THE FILE THAT CONFLICTED: ZERO. FOUR TICKED, ONE NOT TICKED, ONE SILENT.
+
+*** MY OWN FAULT FIRST, AND IT IS THE EXACT TRAP THIS PROMPT WARNS ABOUT. *** Auditing art's
+register I probed it for a key named `height_verdict`, got None on all 47 records, and for about
+one minute had a report that said art's "47 all UNDER-LID" was unsupported. THE KEY IS CALLED
+`lid`. I dumped the record's real key list before writing a word of it, and every one of art's
+numbers then verified exactly. A NAME SEARCH THAT FINDS NOTHING IS NOT PROOF THE THING IS MISSING -
+I nearly charged a lane on my own wrong key name. Dump the keys, then query them.
+
+1. GAME BUILD - **S55 IS TICKED, ON THE DIFF AND ON THE PICTURE.** You did what the row asked and
+   then went past it: the aim is `float(def["h"]) * 0.5` instead of the 2.6 literal, the camera
+   stands back in proportion (`k = max(1.0, mh/4.4)`), and the check is an EIGHT-CORNER world-AABB
+   projection, not a pivot column - with the reason written on the function (the body leans, so its
+   head is not above its feet). `S55_RED=1` re-aims at the old 2.6 and FAILS; green is S54_BROOD OK
+   n=11. It goes through `_ok()`, so it moves the exit status; a print could not.
+   **I LOOKED AT s54_broodglut_pack.png AND THE HEAD IS BACK.** Whole body in frame, head to feet,
+   with margin above. **ONE CAVEAT THE NUMBERS CANNOT SEE, AND IT IS NOT A CHARGE:** the creature
+   stands BEHIND a room wall in that shot, and the wall hides it from roughly the shin down. Eight
+   AABB corners on screen is IN FRAME; it is not UNOCCLUDED. Your gate measures what it says it
+   measures - I am recording that the fit/look test off this shot can speak to framing and not to
+   the legs. Same class as the lid: a gate is honest about the term it has.
+   NEXT, AND IT IS THE SUPERVISOR'S 02:12 RULING, NOT MINE: **raise the lid. floorgen.gd:1383,
+   `lid.position = Vector3(0, 7.0, 0)` -> `Vector3(0, 10.0, 0)`. One literal, one line.** I read
+   the line myself this hour; it is still 7.0 and the fault is live. The ruling is in the project
+   at sup-nov20-0212. Broodglut STAYS at 6.60 - the lid moves up around it, no re-scale. The 01:16
+   corridor ruling (2.69x max) still holds separately and is untouched by this.
+   THEN, AND IT IS THE SECOND HALF OF MR. E'S OWN VARIANT DIRECTIVE, NOT A NEW ITEM - I AM SAYING
+   OUT LOUD THAT I READ IT THAT WAY: **lastcuff ships as a body and is wired to nothing.**
+   `assets/monsters/minibosses/lastcuff.glb` has NO `.glb.import` sibling (the only one of 49 that
+   does not), and `scripts/bestiary.gd` has no lastcuff entry at all. Art measured both and cannot
+   fix either - .gd and .import are yours. Same shape as S54 was for broodglut.
+   Do NOT touch tools/art/, tools/_l14_test.gd (the chat bot's - row 5) or data/lore_lines.json.
+
+2. CONTENT - **C-133 IS TICKED AND I CHECKED THE THING THAT COULD HAVE GONE WRONG.** 67 added
+   lines across epitaphs, descend, cleared, misfire and barks; the JSON parses; and the audit
+   confirms you added **no new top-level key** - the removals in the diff are comma churn on the
+   last element of each list, nothing deleted. Top-level count 133, identical to 01:58. The voice
+   holds: "Boots find the first step, then the second." / "Behind them the day gets small." is
+   plainness doing the work, no ornament.
+   NEXT, STANDING AND UNCHANGED: keep extending pools the engine already reads, keep writing
+   `_note_` keys, write no fourth phase2_words member. No lane is to wire a `_note_` key.
+
+3. ART - **THE LID GATE IS TICKED AND I DID NOT TAKE ONE NUMBER OF IT ON TRUST - I RAN YOUR PROOF
+   MYSELF.** `python3 tools/art/_floorgeom_proof.py` in my own shell: six arms, ALL MOVED,
+   `FLOORGEOM_PROOF GREEN`. Arm C (lid line deleted) gives `lid_underside_m None`, verdict
+   WITHHELD, hard error - and the SPAN verdict still works, which is the whole point: one blind eye
+   is not two. Arm D refuses an expression rather than guessing. Arm E withholds the span and keeps
+   the lid eye. Arm F calls two SHADOWS_ONLY an error, not a pick.
+   **AND I RE-DID THE ARITHMETIC OFF floorgen.gd MYSELF, NOT OFF YOUR FILE:** HALL_W 3 at :848,
+   G 4.0 at :21, WALL_IN 0.5 at :1698 -> 3*4.0 - 2*0.5 = **11.0**; BoxMesh size y 1.0 at :1378,
+   position y 7.0 at :1383 -> 7.0 - 1.0/2 = **6.50**. Your register carries both with the source
+   line beside each number. **ONE PRECISION ON YOUR OWN CLAIM, IN YOUR FAVOUR BUT SAY IT THE NARROW
+   WAY:** "no literals in the file at all" is not quite it - there is a `/ 2.0` at :145, which is
+   geometry (halving a thickness), not a measurement. No MEASUREMENT literal. That is the claim
+   that matters and it holds.
+   **THE REGISTERS VERIFY RECORD BY RECORD.** 47 minibosses, every one `lid: UNDER-LID`, tallest
+   `beadle` 2.95 m with 3.55 m clear, 0 room-locked, errors []. The red arm at `MBG_RED_LID=2.50`:
+   ok **False**, **18 THROUGH-LID and 29 UNDER-LID** - exactly your count, in a file that does not
+   overwrite the green one. `_register.json` verdict **NOT PASSED**, broodglut -0.10 cited to
+   floorgen.gd:1383. That is a gate finding the known fault it previously could not see, which is
+   the strongest kind of new instrument.
+   NEXT: **Shacklemaw's drag-chain.** You found it yourself on the contact sheet - it lies flat on
+   the ground plane and reads as a thin ring from 3/4, so "it drags" is not carried by the
+   geometry. That is your own shipped work and auditing it is not a new item. THE FOLLOW, once the
+   game build lands the lid: one `--reverdict` pass on `_register.json` and nothing else - no
+   re-render, no re-scale. Your gate reads the lid, so the verdict flips by measurement.
+
+4. HUB - **SILENT. NOTHING BUT THE PLAN SYNC ON YOUR BRANCH FOR THE SECOND HOUR.** No commits, no
+   stand-down written, no audit. The 01:58 row said in terms: stand down IN WRITING or audit your
+   own web/. Silence is not a delivery and I am recording it as silence, not as a stand-down.
+   **I RE-MEASURED THE PUBLISH STATE MYSELF RATHER THAN COPYING LAST HOUR'S LINE:**
+   `origin/gh-pages^{tree}` and `origin/hub:web` are THE SAME OBJECT, 9ca8051e. Merged and
+   unpublished: **0 files, 0 lines.** gh-pages tip 05ac2679, hub publish 5, 19 Nov 20:06 CT.
+   **YOU CLAIMED NO READINESS AND CHANGED NO web/, SO I RAN NO PUBLISH GATE AND NONE WAS OWED.**
+   NEXT: one of the two, in writing. A stand-down written up IS the delivery; nothing is not.
+
+5. CHAT BOT - **B73 IS NOT TICKED, BY YOUR OWN instruction, AND YOU WERE RIGHT TO SAY SO.** You
+   also corrected ME, and the correction is real: the 01:58 row's guess that "the odds are good
+   your :45 firing simply lands" DID NOT HOLD, and the reason is sharper than either of us had.
+   **MY PROBE AND YOUR B72 WERE BOTH TOO COARSE: IT IS NOT THE SESSION AND NOT THE FOLDER, IT IS
+   THE SHAPE OF THE WRITE.** Creating a NEW file lands (you landed four). Appending to a file you
+   just made lands. In-place modification of a TRACKED SOURCE file is refused - `sed -i` and a
+   python read-modify-write both. My probe wrote a new file, which is the half that works, and I
+   generalised from it. **THAT CORRECTION IS NOW THE PLAN'S, NOT A CHAT LOG'S.**
+   And you refused the Blender bridge a second time, after I had recorded the first refusal as the
+   standard. A standard honoured only when it is convenient is not one. It is held.
+   I verified your two source readings myself last hour and the figures stand: 91 append sites,
+   `guard_faults` zero hits in tools/.
+   NEXT: **the same item, unchanged, and attempt it once at the top of your run.** If the edit
+   lands: battery, then the beadle -> zzz_fake_trade red proof taking it to rc=1 where B71 got
+   rc=0. If refused: one line, stand down in writing, do not route around it. **YOUR PROMPT'S
+   `_commands_doc.gd` FIGURE IS STALE - THE DATA CARRIES 31 COMMANDS, NOT 26.** A firing cannot
+   edit a prompt, so the correction lives here and in the block below: take 31, not your prompt's
+   26, until a live turn can fix the prompt itself.
+
+6. HUD - **U95 IS TICKED, AND THE EXEMPTION IS TICKED ON THE PICTURE, WHICH IS WHY IT IS A TICK AND
+   NOT A SHRUG.** You made OVERLAP count into `_bad` - the exact thing the row asked - and the
+   exemption you carved is narrow and justified in the file: Spotlight x a layer that actually
+   contains a `HudDock.ChronicleScroll`, resolved by `_has_chron()` walking the tree, not by a name
+   match. `break_overlap` injects two identical NON-EXEMPT rects, so the red arm cannot be passed
+   by the exemption it is testing; you measured bad=3 and green bad=0 at panels=15.
+   **AND I LOOKED AT u85_green_100.png, WHICH IS THE HALF A DIFF CANNOT SETTLE.** The Chronicle is
+   a compact parchment box sitting squarely over the cross of the four Spotlight panes - DIRECTOR,
+   BITS, SUBSCRIBER, CHANNEL POINTS all four legible around it, none of them hidden. The overlap is
+   the design, exactly as L39 says, and exempting it is correct rather than convenient. Both stale
+   comments on lines 3 and 52 are corrected to 12/15 in the same pass.
+   NEXT: your own queue. Short gates, release by :07 - your last four have all released early.
+
+FOR THE SUPERVISOR - NOTHING NEW. Your 02:12 lid ruling is in the game build's row above as its
+  next item, quoted to the line. STILL WITH YOU FROM 00:58, UNANSWERED: (c) whether art's eleven
+  showcase kits stay under assets/ (art's recommendation) or move. Housekeeping; no evidence
+  needed. NOTE FOR THE RECORD: the hub lane has now been silent two hours running - no commits and
+  no written stand-down. I am feeding it the same row rather than escalating a lane for one quiet
+  pair of firings; raise it with me if you would rather I did.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+these on the first LIVE turn, all at once). I made NO trigger call this hour: the gate is settled
+(it is on the CALL, not on a field) and the prompt says not to test it again, so re-probing would
+have been a fourth test of an answered question.
+  1. THE HUB BASELINE IN THE :58 PROMPT IS STALE AND SAYS THE OPPOSITE OF THE TRUTH. It reads
+     "gh-pages is 45a7904 ... the trees differ by 2 files / 19 lines ... it is with the supervisor."
+     MEASURED AGAIN AT 02:58 CT 20 Nov: gh-pages **05ac2679**, and `origin/gh-pages^{tree}` EQUALS
+     `origin/hub:web` at **9ca8051e**. Zero unpublished delta, nothing with the supervisor on
+     publishing. Equal at 00:58, 01:58 and now 02:58. Replace the bullet with: re-measure both
+     trees every hour.
+  2. THE STEP-0 BASELINE NUMBERS IN THE PROMPT ARE STALE (122 keys / 32 zero-hit / 18 `_note_` /
+     31 asset dirs). MEASURED 20 Nov 03:0x CT on the merged tree, scripts/*.gd + web/*.js only
+     (48 files, 2,260,638 chars) and assets/ only: **133 top-level keys, 43 zero-hit, 28 of them
+     `_note_`, 34 asset directories with files, UNREFERENCED ASSET DIRECTORIES ZERO, UNREAD LIVE
+     DATA KEYS ZERO.** The fifteen non-`_note_` zero-hits are all accounted for: two runtime-built
+     `_alt` pools (READ at delve.gd:3748 via `base + "_alt"` - do not wire), FOUR declared dead
+     (phase2_words, phase2_words_alt, **phase2_words_alt2**, town_levels_for_the_desktop) and nine
+     prose/spec keys (technique, boss_floors, chronicle_line, word_order, casing, promotion_line,
+     one_roll, _gating, canon_silences).
+  3. THE CHAT BOT'S GUARD-ARM COUNT IS **91**, not the "~77" the 00:58 plan carried.
+  4. ADD, UNDER THE ART RULES: the dungeon floor builds a shadows-only lid (floorgen.gd:1377-1384).
+     Its underside is **6.50 m TODAY and the supervisor ruled at 02:12 on 20 Nov that it rises to
+     y=10.0, underside 9.50 m**, which is the game build's one-line change. Write it as: READ THE
+     LID OUT OF floorgen.gd, NEVER REMEMBER IT - art's `tools/art/floorgeom.py` now does exactly
+     that and is the reference implementation.
+  5. NEW THIS HOUR, AND IT IS THE PROMPT CONTRADICTING A TICK THIS SEAT ALREADY TOOK. The :58
+     prompt still says the HUD's rarity-hue half of SYSTEM 2 "was still unstarted at 09:2x on
+     18 Nov" and is "THE MOST VALUABLE OPEN ITEM IN THE HOUSE". **IT IS NOT OPEN.** System 2 was
+     ticked WHOLE at the 19 Nov 20:58 firing, the HUD half on a picture. Leaving that line in
+     invites a future seat to hand a closed item back to the HUD. Replace it with: SYSTEM 2 IS
+     WHOLE, ticked 19 Nov 20:58; do not re-open it.
+  6. THE CHAT BOT PROMPT'S `tools/_commands_doc.gd` FIGURE IS STALE: **31 commands, not 26.** The
+     lane measured `data/commands.json` itself and it agrees with the plan's COMMANDS_DOC OK 31.
+
 ## TAKE THIS NEXT - written 2026-11-20 01:58 CT by the Team Lead (machine clock 02:0x CST while I
 ## worked; this is THE 01:58 FIRING of 20 Nov). SUPERSEDES EVERY ROW BELOW.
 FIVE LANES SHIPPED, ONE WAS BLOCKED BY A PERMISSION GATE. Six merges, TWO conflicts (root

@@ -11909,3 +11909,42 @@ FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is unt
 FOR MR. E: the mount layout on this machine changed under me - the connected folders now appear as two separate top-level mounts, so the path my prompt gives for the worktree no longer resolves. I found the real one and the run was not affected. Nothing to decide.
 NEXT: L56 (delve-heavy soak - engine and lock), then back to auditing shipped work.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## B67 - 2026-11-19 20:45 CT - FIRST OF THE THREE ROWED COMMANDS: !weapon AND !armour ARE WRITTEN, AND MY OWN DOC EMULATION WAS WRONG ON ITS FIRST TRY AND THE PROOF CAUGHT IT
+THE ITEM, AND IT IS NOT A NEW ONE: the supervisor's 19:28 directive (claude/sup-nov19-1858, item 1 of three, "FIRST") and the team lead's 20:1x CHAT BOT row both say the same thing - gear inspection commands, then town, then bestiary. B66 is ticked and the four owed engine gates were green at 19:47, so nothing was owed from last firing.
+
+WHAT I WROTE, AND ALL THREE FILES ARE MINE:
+(1) data/commands.json - two entries, `weapon` (alias !steel) and `armour` (alias !armor), inserted after `inventory` in BOTH the commands table and `order`. Diff is EIGHT lines: one order line rewritten, six entry lines added.
+(2) scripts/chatcmd.gd - two dispatch cases and two line builders, _weapon_line and _armour_line (chatcmd.gd:484 and :495). They read the named piece through Gear.weapon_piece(roster.weapon_piece_id(h)) and Gear.armour_piece(Gear.armour_id(h)), which is where items.json's {name, tier, tier_name, rarity} already lives. data/items.json is the CONTENT writer's file and I did not touch it, and I added no Roster or Gear function - every call I make already existed.
+(3) docs/COMMANDS.md - regenerated, 27 rows -> 29, 5790 -> 6215 bytes.
+
+THE LINES THEMSELVES, BECAUSE PLAINNESS IS THE VOICE AND A CHAT LINE IS READ IN ONE SECOND:
+  !weapon -> "Harlan carries Ironmonger's Blade  |  uncommon, plain steel (tier 1)  |  1d8"
+  !armour -> "Harlan wears Tanner's Jerkin  |  uncommon, leather (tier 1)  |  AC 13"
+Named weapon, rarity called out, the tier it came from, and the one number that matters (dice, or AC). No flavour text - the flavour line in items.json is two sentences and would not land in a second. A hero at tier 0 with no named piece gets "fights with bare hands. The smith sells steel - !forge." and an armour kit with no named piece falls back to the tier name the sheet already prints and still gives the AC, so neither command can answer with a blank.
+The rarity word goes through _band(), so a stored "epic" prints "very rare" like everywhere else in this file. That was not a new decision; it is C-55's ladder and I reused it rather than writing a second one.
+
+*** THE THING I GOT WRONG THIS FIRING, FOUND BEFORE IT REACHED A FILE ***
+I could not run tools/_commands_doc.gd (see the stand-down below), so I emulated it in python - and I did NOT take B4's old claim as licence. I re-proved the emulation THIS RUN against the committed doc: generate from the ORIGINAL data, compare to HEAD:docs/COMMANDS.md byte for byte. THE FIRST ATTEMPT FAILED - 5788 bytes against 5790, first difference at byte 212. The cause is mine: I formatted the cooldown floats the way GDScript's str() prints a whole float ("3"), and the committed doc says "3.0". Corrected, re-run: IDENTICAL, 5790/5790, first differing byte None, 27 rows. Then a RED PROOF - change one command's `what` and the bytes differ. Only then did I write the new file.
+AND B4'S NUMBERS ARE HISTORICAL, AS B66 ALREADY SAID: 25 commands / 5188 bytes. They settle nothing about today's file. What settles it is the proof above, run on the data that is actually committed.
+THE GENERATOR STILL WINS. docs/COMMANDS.md as committed here is an EMULATION AWAITING THE REAL GATE. If tools/_commands_doc.gd changes a single byte next firing, ITS bytes are kept and I will say the emulation was wrong - exactly as my prompt requires.
+
+VALIDATION AFTER THE EDIT:
+- python json.load on data/commands.json: OK, 8 top-level keys.
+- EVERY PRE-EXISTING KEY BYTE-IDENTICAL: all 6 other top-level keys and all 27 pre-existing commands compared field by field against HEAD's file - drift NONE. `order` with my two names removed is identical to HEAD's `order`.
+- AND I CAUGHT MYSELF REFORMATTING THE WHOLE FILE FIRST. My initial edit rewrote data/commands.json with json.dumps(indent=2) - semantically identical, 126 lines -> 546, and a diff that would have buried two added commands in four hundred lines of noise on a file the hub also reads. I recovered HEAD's exact bytes (read-only `git show`, no write, no lock file touched) and redid the edit as a surgical text insertion in the house style. A passing semantic check is not a passing diff.
+- DRIFT BOTH DIRECTIONS on the edited tree: entry-with-no-code-path 0. Code-label-with-no-entry 3, and all three are the local-only debug verbs testbits/testsub/testpoints gated behind user_id.begins_with("local_") - pre-existing, not mine, and the same three B66 reported. order set-equal to commands keys. No alias colliding with any command name or any other alias.
+
+*** THE ENGINE GATES ARE NOT RUN, AND THIS IS A SPLIT, NOT A SKIP ***
+THE LOCK WAS FREE AND I DID NOT TAKE IT. Last line of docs/RUN_LOCK.txt when I read it: IDLE 2026-11-19T20:14:28-06:00 (game build S49) - no RUNNING outstanding from any lane. But my :45 window ends where the HUD's :52 begins, and by the time the edit was written and proved the clock was 20:5x. Launching a parse battery there would have put a Godot of mine inside the HUD's claim. THE YIELD RULE SAYS SPLIT THE JOB AND CARRY THE REMAINDER, AND IT SAYS SO EXPLICITLY ABOUT CROSSING TO FINISH OPTIONAL WORK. I wrote NO claim line, launched NO Godot, and carry all of it to 21:45:
+  (a) --headless --path W6 --quit-after 300, 0 errors, on the merged tree
+  (b) tools/_l14_test.gd -> L14_TEST OK, and this is the gate that MATTERS now: it fails until the doc carries the new commands, so it is a real test of this commit, not a formality
+  (c) tools/_twitch_parse.gd -> TWITCH_PARSE OK
+  (d) tools/_commands_doc.gd -> expect "COMMANDS_DOC OK wrote 29 commands" and docs/COMMANDS.md byte-unchanged from what is committed here. If it is NOT unchanged, the generator wins.
+Nothing about these two commands is a guess that a gate would settle differently - they call only functions that already exist and are already called from inventory(). But UNGATED IS UNGATED and I am not calling this delivered.
+
+NO LIVE TWITCH TEST THIS FIRING. No Godot ran, so nothing connected. No message posted as bellmirebro, no cheer, 0 bits on any account, no channel-point redemption, no subscription, no channel setting read or written, and Mr. E's personal account was not used at all.
+FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is untouched - twitch_reply(user_login, text), no @name, no rate limiting.
+FOR MR. E: nothing to decide.
+NEXT: run the four gates above FIRST at 21:45, then item 2 of the three - !town / !bellmire. That one WILL need something I do not own: the town's level, what is built and the treasury are not reachable from ChatCmd today, and the game build lane will have to expose a read-only accessor. I will name the exact shape in that firing's summary rather than guess at one now.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

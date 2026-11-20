@@ -130,6 +130,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _hub_tail())
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
+        "weapon":   out = _needs(user_id, func(): return _weapon_line(user_id))
+        "armour":   out = _needs(user_id, func(): return _armour_line(user_id))
         "delve":    out = _delve(user_id)
         "muster", "party", "mustered":
                     out = _muster(user_id)
@@ -476,6 +478,29 @@ func _hub() -> String:
 
 ## D57: the counter pays SELL_BACK (0.4) of shop cost, per item. Said in words here so
 ## chat and the hub quote the same number; the rows themselves are the hub's.
+## B67 (supervisor 19:28, item 1 of three): the named steel a hero carries and its step on
+## the rarity ladder. data/items.json is the CONTENT writer's file - it is read through Gear
+## and never edited here. A hero with no named piece (tier 0, bare hands) is said plainly.
+func _weapon_line(user_id: String) -> String:
+    var h := roster.get_hero(user_id)
+    var wp := Gear.weapon_piece(roster.weapon_piece_id(h))
+    if wp.is_empty() or int(h.get("weapon", 0)) <= 0:
+        return "%s fights with bare hands. The smith sells steel - !forge." % h["name"]
+    return "%s carries %s  |  %s, %s (tier %d)  |  %s" % [
+        h["name"], wp["name"], _band(String(wp.get("rarity", "common"))),
+        wp.get("tier_name", "steel"), int(wp.get("tier", h.get("weapon", 0))), roster.dice_str(h)]
+
+## B67: the mail a hero wears, its step on the ladder, and the AC it leaves them. A kit with
+## no named piece falls back to the tier name the sheet already prints, and still gives the AC.
+func _armour_line(user_id: String) -> String:
+    var h := roster.get_hero(user_id)
+    var ap := Gear.armour_piece(Gear.armour_id(h))
+    if ap.is_empty():
+        return "%s wears %s  |  AC %d" % [h["name"], roster.armour_name(h), roster.armour_class(h)]
+    return "%s wears %s  |  %s, %s (tier %d)  |  AC %d" % [
+        h["name"], ap["name"], _band(String(ap.get("rarity", "common"))),
+        ap.get("tier_name", "cloth"), int(ap.get("tier", h.get("armour", 0))), roster.armour_class(h)]
+
 func _satchel_line() -> String:
     return "The counter pays two fifths of shop cost for anything you own and are not wearing." + _hub_tail()
 

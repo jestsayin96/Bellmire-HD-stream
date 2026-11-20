@@ -176,3 +176,11 @@ its licence file is `License.txt` inside the pack and reads, verbatim: "License:
 No attribution is required; the pack is cleared for commercial use and nothing is redistributed as
 an asset. Source geometry is unmodified - the fit is a transform (uniform scale, a depth scale and
 a depth offset) baked at export. Measurements and the fit proof: `renders/art/s7_armour/`.
+
+## System 8 - shields (game build S50, 19 Nov 2026)
+The five shields of the Quaternius **Medieval Weapons Pack (Sept 2018)** (row above, CC0 1.0) -
+`Shield_Celtic_Golden`, `Shield_Heater`, `Shield_Heater_2`, `Shield_Round`, `Shield_Round_2` - copied
+unmodified as FBX into `assets/gear/shields/` with `LICENSE_Quaternius_MedievalWeapons_CC0.txt` beside
+them (the extracted pack carries no licence file; the note is ours). `_packs/handpainted_weapons/`
+shield_a..d were NOT used: that folder carries no licence file and no source, so its licence is
+unverified and it stays out until one is read.

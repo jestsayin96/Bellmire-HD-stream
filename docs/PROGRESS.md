@@ -3795,3 +3795,29 @@ Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, relea
 - New gate tools/_s49_armour_load.gd: `S49_LOAD OK n=5` - each loads as PackedScene and instantiates with 1 MeshInstance3D. The directory is still referenced by no script; that is correct until art's fit passes and the team lead releases (b).
 - Battery on the merged tree (JESTS_NO_TWITCH=1): parse rc=0, 0 SCRIPT ERROR / Parse Error lines; OFFFLOOR_VERDICT OK 0 of 2164; TWITCH_PARSE OK (8 checks); _townwalk ran, BAD [] (one transient STUCK_EX on Cort the Younger, pre-existing shape); DELVE_TEST OK ran 9001 frames, floor reached, 0 SCRIPT ERROR.
 - No render: nothing visual changed this run (imports only, nothing wired). No Twitch test, no message, 0 bits.
+
+## D-cycle - S50: SYSTEM 8 (SHIELD VARIETY) ENGINE HALF, ROW (a) ONLY - FIVE QUATERNIUS SHIELDS IMPORTED, LICENSED, LOADED AND LOOKED AT. gear.gd NOT WIRED. 2026-11-19T21:1x-06:00 (game build)
+- Item: TAKE THIS NEXT 20:58 block, row 1 - "NEXT: the next Phase 2 system in Mr. E's order". Row 1(b) (System 7 gear.gd wiring) stays HELD per art's fit numbers; untouched.
+  System 8 is the next system in the 18 Nov 16:58 pack-heavy order (6 weapons, 7 armour, 8 shields) and the plan named it twice (WORK_PLAN ~324, ~506).
+- DONE: assets/gear/shields/ - shield_celtic_golden, shield_heater, shield_heater_2, shield_round, shield_round_2 (.fbx, copied UNMODIFIED from
+  _packs/quaternius_medieval_weapons_2018_CC0 FBX/, names lower-cased) + their .fbx.import from one --headless --import (rc=0).
+  LICENCE: the extracted pack has NO licence file, as the 18 Nov plan said; our note is LICENSE_Quaternius_MedievalWeapons_CC0.txt beside the
+  files, and a System 8 paragraph in docs/art/ASSET_SOURCES.md. `_packs/handpainted_weapons/` shield_a..d NOT USED - no licence file, no source; unverified.
+- Gate tools/_s50_shield_load.gd: `S50_LOAD OK n=5` (each loads as PackedScene and instantiates with 1 MeshInstance3D). It also prints an AABB
+  (~2.0 x 2.0-2.6, celtic 2.1 x 4.3) that does NOT match the picture (they read ~0.8 m against 2.5 m spacing) - my walker likely double-applies a
+  node scale; DO NOT use those numbers for the off-hand scale. The next run measures in the hand, not off this print.
+- LOOKED AT IT: tools/_s50_shield_shot.gd (windowed) -> renders/cycles/s50/s50_shields.png, `S50_SHOT OK`. All five read correctly: gold Celtic with
+  green boss and pale-blue field, two iron-rimmed wooden heaters (one cross-banded), two round bucklers (one quartered white). Faces toward +Z like
+  the KayKit shields offhand_scale() already handles. The Celtic one sits slightly yawed in its own file.
+- NOT DONE, ON PURPOSE: the gear.gd entry (a SHIELD const + offhand_scale/rotation for these, and which items/tier draw them). That is row (b) for my
+  next firing: fit in handslot.l on the KayKit hero, front/side/back, looked at. assets/gear/shields is therefore an UNREFERENCED ASSET DIR until then
+  (dead-dir count 1 -> 2) - named here so the lead's audit is not surprised.
+- OWN FAULT, NAMED: my first battery thread ran the parse gate WITHOUT JESTS_NO_TWITCH=1. It joined #jestsayin96 as bellmirebro and subscribed EventSub
+  (7 of 7) for the 300-frame parse run, and the hub SNAPSHOT was on for those seconds. It POSTED NOTHING (no send line in the log), redeemed nothing,
+  0 bits; Godot then exited. I stopped the rest of that thread (killed ONLY my own child Godot PIDs 24124/22976/37852, by parent PID) and re-ran
+  offfloor/townwalk/delve with JESTS_NO_TWITCH=1. If the hub showed a test-town snapshot ~21:09 CT, that was this.
+- Gates: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error (only the old MI_*.tres invalid-UID WARNINGs) | S50_LOAD OK n=5 | S50_SHOT OK |
+  TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2080 samples | TOWNWALK in_solid=0/18541 raid_in_solid=0/5367 PASS, BAD [] |
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- Lock: claim 21:07:55, claim+25 = 21:32:55 computed first, declared 21:32. Staged only the S50 files, PROGRESS, ASSET_SOURCES, RUN_LOCK;
+  the ~50 modified renders and ~1,400 untracked web/icons .import files in R are not this session's and are NOT staged.

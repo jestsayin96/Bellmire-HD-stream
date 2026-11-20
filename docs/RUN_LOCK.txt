@@ -585,3 +585,11 @@ IDLE 2026-11-19T19:56:16-06:00 - HUD U88: parse rc=0 + windowed worn-row gate gr
 
 RUNNING 2026-11-19T20:07:51-06:00 (game build: miniboss interlock check + gear.gd null guard, claim 20:07, cap 20:32, expected finish 20:32)
 IDLE 2026-11-19T20:14:28-06:00 - game build S49: System 7 row (a) - 5 armour .glb.import generated, S49_LOAD OK n=5; gear.gd NOT wired per row (b); battery green. Claim 20:07:51, cap 20:32:51, declared 20:32. Godot EMPTY. (game build)
+
+RUNNING 2026-11-19T20:53:09-06:00 (HUD U88 green re-capture, one windowed run, expected finish 21:02, cap 21:07)
+
+IDLE 2026-11-19T20:54:05-06:00 - HUD U88 green re-capture: U88_WORN OK rc=0, shots purple/orange pixels present; Godot EMPTY. (HUD)
+
+RUNNING 2026-11-19T21:07:55-06:00 (game build: TAKE THIS NEXT item, claim 21:07, cap 21:32, expected finish 21:32)
+
+IDLE 2026-11-19T21:14:48-06:00 - game build S50: System 8 row (a) - 5 Quaternius shields imported to assets/gear/shields + licence note, S50_LOAD OK n=5, S50_SHOT OK; gear.gd NOT wired; battery green. Claim 21:07:55, cap 21:32:55, declared 21:32. Godot EMPTY. (game build)

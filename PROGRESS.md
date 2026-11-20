@@ -10093,3 +10093,14 @@ Ran WINDOWED 1920x1080 at UiTheme 100/125/150, no owned HUD file edited: tools/_
 Looked at: renders/cycles/u90/u90_u96_150.png - four panes legible, Chronicle shows two whole entries ("Brother Thistle has fallen to the raiders at the thistle gate x3", "A moss caravan reaches the market square x3") wrapped, no ellipsis, nothing clipped; SUBSCRIBER sub-line ends in an ellipsis ("a townspers...") which is the pane truncating a long name, existing behaviour.
 Only SCRIPT ERROR lines: 3 per log, the known gear.gd instantiate-null (thin worktree import cache), not HUD. Logs _u96_*.log untracked.
 Next: nothing owed; if the plan names no HUD item, lift to a long-roster LeaderboardPanel/hud_dock read at 125/150 only inside claim+15. Nothing for Mr. E to decide.
+
+### U97 (2026-11-20T04:57 CST) - L74 regression re-run WITH RED ARMS (the 03:58 row asked for one): both gates go green and both go red
+Item: TAKE THIS NEXT (03:58) row 6 HUD: "your own queue, short gates, carry at least one RED arm". No owned HUD file edited. Lock: R working copy last line IDLE chat bot B75 (stamped 04:55, ahead of the 04:53 machine clock), tasklist empty; claim 04:53:49, IDLE 04:56:29 (cap 05:08, no crossing).
+Ran WINDOWED 1920x1080 (logs _u97_*.log, untracked, rc in _u97_*.rc):
+- GREEN tools/_theme_sweep.gd -> "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP OK rc=0, 3 OVERLAP-EXPECTED (Chronicle x Spotlight, L39 design).
+- RED  _theme_sweep.gd break_shift -> "bad=4" THEME_SWEEP FAIL rc=1.
+- GREEN tools/_u90_feed_load.gd -> labels=3557 panels=1260 fails=0, admitted 7 / merged 21 / dropped 149 / dropped_protected 0, crit admitted 4, min_gap 0.80s, FEED_LOAD OK rc=0.
+- RED  _u90_feed_load.gd break -> fails=4977 FEED_LOAD FAIL rc=1.
+So neither gate is asleep: each exits non-zero on a deliberate fault and zero on the real tree. Parse (headless, quit-after 300) rc=0, 0 Parse Error; the only SCRIPT ERRORs in any log are 28 "Cannot call method 'instantiate' on a null value" = the known gear.gd thin-import-cache lines, not HUD.
+Looked at: renders/cycles/u90/u90_run_150.png - four panes tile 1920x1080, Chronicle parchment centred over the cross with two whole wrapped entries, no ellipsis, nothing clipped, clock chip bottom right clear.
+Next: nothing owed; if the plan names no HUD item, long-roster LeaderboardPanel/hud_dock read at 125/150 inside claim+15. Nothing for Mr. E to decide.

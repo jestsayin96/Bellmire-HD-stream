@@ -1,3 +1,22 @@
+## ADDENDUM - written 2026-11-19 20:4x CT by the Team Lead, AFTER :05. ON ITS FACE THIS IS THE
+## NEXT FIRING'S ROW FOR THE GAME BUILD, NOT work owed in the 19:58 hour.
+**S49 IS TICKED.** The game build took row 1(a) inside its own 20:07 window and I checked it off
+the ref, not off its verdict line: assets/gear/armour now holds 10 entries - five .glb and five
+.glb.import, PARITY - and armor_black.glb.import is a real scene remap pointing at
+res://assets/gear/armour/armor_black.glb. Its new gate tools/_s49_armour_load.gd does not merely
+check the file exists: it loads each as a PackedScene, instantiates it and counts MeshInstance3D,
+failing on zero. `S49_LOAD OK n=5`. The directory is still read by no script, which is CORRECT -
+row 1(b) holds the gear.gd wiring until art's fit passes, and the lane obeyed it.
+**AND THE LANE REPORTED A FAULT OF ITS OWN THAT NOBODY WOULD HAVE FOUND:** it merged at 20:07, one
+minute before my plan sync landed at 20:09:26, read the stale 18:5x block, drafted the cut->shell
+mapping in gear.gd - then RE-FETCHED BEFORE RUNNING ANY GATE, found row 1(b), and reverted
+gear.gd before anything was committed or measured. Nothing of it is in the tree. That is the
+re-read rule working, and it is also a cost of MY timing: my block was written at 20:1x and landed
+after the game build's :07 merge. NEXT TEAM LEAD: the plan sync is the first thing the :07 lane
+reads, so land the block before :07 where you can, and say so when you cannot.
+LOCK: claim 20:07:51, cap 20:32:51 computed FIRST, declared 20:32, IDLE 20:14:28 - inside, early,
+no crossing. Clean.
+
 ## TAKE THIS NEXT - written 2026-11-19 20:1x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 19:58 FIRING. ALL SIX LANES SHIPPED. I TICKED FOUR AND HELD TWO, AND
 **HUB PUBLISH 5 IS DONE** - gh-pages 05ac2679, tree 9ca8051e, EQUAL to origin/hub:web, fast-forward

@@ -11849,3 +11849,311 @@ def fuller():
 
 
 BUILDERS.update({"fuller": fuller})
+
+
+# ===================================================== 36 THE STACKMAN: a rising stack
+# MEASURED BEFORE DESIGNED. I read every hook in this file's own CANON off the
+# generator (35 keys across the five ORDER statements, not a number from a
+# prompt) and listed what each one DOES: summon, re-plate, drag, douse the
+# lamps, revive from niches, bar the door, steal gear, heal the room, flood it,
+# plant thorn, pre-set lines, size-from-fire, throw its voice, set the floor,
+# split in two, arm the room, weigh you down, cut the room in two, refuse a
+# repeated blow, take the haul, drink your brews, press your fallen, level your
+# best hero, mark one of you, green your iron, take a hero's shape, be paid by
+# the tail, yoke one of you, keep its facing, hunt what stirs, hand you the only
+# thing that cuts it, hold wounds open, take away the party's choice of order,
+# drop on a count, and give back what you put in.
+#
+# NOT ONE OF THE THIRTY-FIVE DENIES REACH. Thirty-five bodies and every single
+# fight happens at the same height. The Paviser turns a face to you, the Porter
+# shuts the door, the Hurdleman splits the floor - all of them are about WHERE
+# ON THE FLOOR you stand. This one leaves the floor. A melee hero with a hand
+# weapon simply cannot touch it while it is up, which is a sentence no other
+# row in this register can make, and it turns the party's whole composition
+# into the decision instead of its positioning.
+#
+# AND THE GAUGE IS THE GEOMETRY, which is the part that makes it art and not a
+# stat. The stack is built as THREE SEPARATE COURSES with their bindings
+# visible, so a viewer across the room can COUNT how far it has climbed without
+# reading a bar - the Fuller's swelling cloth argument, arrived at from the
+# other end. The bottom course is the answer and it says so in the silhouette:
+# its withy band is the only BROKEN one (an open C where the other two are
+# closed O's) and there are sheaves already spilled out of it on the floor.
+# Nobody has to be told to cut the base; the base is visibly the thing giving.
+#
+# WEAR IS A VARIABLE AND THIS BODY IS THE CLEANEST CASE OF IT YET. The man is
+# 0.70 - a field hand at the end of a harvest, and he reads it. The CROP IS
+# THIS WEEK'S and must read fresh-cut gold, because a viewer who spends points
+# on a harvest floor must not be handed last year's rotten straw. Same split
+# the Fuller used (worn man, fresh stock) and I am naming it as borrowed rather
+# than dressing it up as a new idea.
+#
+# THE BEADLE'S FAULT IS DESIGNED OUT, NOT HOPED AWAY. Every pale thing that
+# carries meaning is ONE-SIDED at -Y: the face panel, the ash fork shaft, the
+# spilled sheaves and the broken band. The +Y side carries DIFFERENT objects -
+# the pole ladder he climbed and a rake laid across the stack top - so front
+# and back cannot be the same picture. I still have to LOOK at the sheet to
+# believe it, and the hat worries me before I do: a wide pale brim above a wide
+# pale stack could leave the man as a thin dark bar between two bright masses.
+# That is the first thing I will judge, and it is written down BEFORE I look so
+# the render cannot talk me out of having suspected it.
+CANON.update({
+    "stackman": ("The Stackman", 2.84, (0.72, 0.60, 0.30), (1.00, 0.88, 0.46),
+                 "grassland",
+                 "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a "
+                 "fresh sheaf under its own feet and climbs a course, and from up "
+                 "there nothing with a hand on it can touch it; it pitches down at "
+                 "you for free. The stack is the gauge and you can count the "
+                 "courses from the doorway, so this is the one fight in here that "
+                 "asks about your PARTY and not your footing: cut the bottom "
+                 "course out from under it, or bring something with reach, or "
+                 "watch it climb out of the fight entirely",
+                 0.70, "Something up there is building itself higher."),
+})
+ORDER = ORDER + ["stackman"]
+
+# Per-slot materials. The tint-derived path makes one hue carry a whole body,
+# which is the measured defect OVERRIDE exists for (median satMean 0.087). Here
+# it is doing one specific job and it is Mr. E's second rule: the man is worn
+# and the crop is not, and a single wear-dulled tint cannot say both at once.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"stackman"}
+
+OVERRIDE.update({
+    "stackman": {
+        # *** PASS 2, CHANGE A - AND MY OWN COMMENT HERE WAS WRONG. ***
+        # Pass 1 wrote, in this exact spot, "going cool here would fight the
+        # straw", and put the man in a warm brown. _colour_read then measured
+        # the shipped materials and FAILED the body: satMean 0.2694 (above the
+        # register's 0.207 bar, so the colour does arrive) but BANDS 1 < 2 -
+        # one hue across the whole creature. A warm man on warm straw is a
+        # MONOCHROME BODY BY CONSTRUCTION, which is the exact defect this
+        # register was told to break. The instrument went red on its author and
+        # my taste argument was the thing that was wrong.
+        # So the wool goes cool: a dusty blue-grey smock, period-plain and the
+        # commonest dyed cloth a field hand would own. Value is held DOWN where
+        # pass 1 had it, because the dark man between two bright masses is the
+        # one thing in pass 1 the picture said was working.
+        'body': ((0.094, 0.112, 0.150), 0.88, 0.00),
+        # TIMBER AND IRON IN ONE SLOT, NAMED RATHER THAN HIDDEN - the same
+        # compromise the Fuller wrote down. The withy bands, the pole ladder,
+        # the boots, the rake tines and the FORK TINES are all here. Metal 0.12
+        # is the trade: enough that the tines catch a highlight off the two
+        # suns, not enough to make a withy band read as a hoop of steel. If the
+        # tines do not read as iron on the sheet that is a fifth slot or a
+        # vertex colour, NOT a brighter dark.
+        'dark': ((0.064, 0.054, 0.042), 0.82, 0.12),
+        # THE CROP, AND IT IS THE WHOLE RECEIPT. Fresh-cut straw: warm gold,
+        # NOT bleached - the Comfitmaker measured that a cold white on a body
+        # reads as BONE, and this has to read as grain. Lowest roughness of the
+        # three solids because new straw has a sheen on it that old straw has
+        # lost, which is exactly the difference a viewer is being shown.
+        'bone': ((0.792, 0.648, 0.286), 0.70, 0.00),
+        # The eyes under the brim and nothing else. Strength 1.70 and the eyes
+        # are small and set well inboard: the lesson from System 1's clipped
+        # ladder is that a glow which reaches the frame edge is invisible to a
+        # blank check, so a glow is kept small BY CONSTRUCTION and the border
+        # assertion is the backstop, not the plan.
+        'glow': ((1.00, 0.86, 0.44), 1.70),
+    },
+})
+
+
+def stackman():
+    """IT GETS ABOVE YOUR REACH. The mechanic is the whole lower half of the
+    body: a stack of this year's sheaves in three countable courses, with the
+    man standing ON it and pitching down. The affordance is in the silhouette
+    too - the bottom course's band is the only broken one.
+
+    Static: no anims entry. The two upper courses are closed rings and the
+    bottom one is an open C, so the PAIR of states the body cannot animate
+    through is stated by the geometry instead.
+    """
+    P = Parts("stackman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        # (i0, i1) index pairs - the convention _trade_read, _sheen_ab and
+        # _rat_tally already measure by, so the instruments are asking about
+        # named groups and not about whatever happened to get built.
+        P.spans[name] = (_m[0], len(P.items))
+
+    TOP = 0.98                      # the stack's top face: where he stands
+
+    _open()
+    # ------------------------------------------- THE STACK: THREE COURSES
+    # Sheaves laid radially, butt OUTWARD, tips toward the centre - which is how
+    # a stack is actually built, and it also means every course silhouettes as a
+    # clean drum rather than as a bristle. Each course is a touch smaller than
+    # the one under it so the stack tapers and the COURSE COUNT survives at
+    # pane distance, where the bands and the taper read and detail does not.
+    courses = ((0.17, 1.06, 13), (0.49, 0.96, 12), (0.79, 0.84, 11))
+    for ci, (cz, rad, n) in enumerate(courses):
+        for i in range(n):
+            a = TAU * i / n + ci * 0.26
+            P.raw(aim(L.cone(0.132, 0.050, rad * 0.86, 8),
+                      (rad * math.cos(a), rad * math.sin(a), cz),
+                      (-math.cos(a), -math.sin(a), 0.10)), 'bone')
+    # the top face he stands on - one capping layer, flat
+    P.add(L.cone(0.80, 0.70, 0.10, 16), 'bone', loc=(0.0, 0.0, TOP - 0.10))
+    _close("stack")
+
+    _open()
+    # -------------------------------------- THE BANDS: TWO CLOSED, ONE BROKEN
+    # This is the affordance and it is the only reason a viewer knows what to
+    # hit. An open collar silhouettes as a C and a closed one as an O - the
+    # Paviser's own measured argument, reused here to say "this course is the
+    # one that is giving" without a word of UI.
+    _ring(P, (0.0, 0.0, 0.49 + 0.06), 0.99, axis='z', slot='dark', rad=0.040, n=26)
+    _ring(P, (0.0, 0.0, 0.79 + 0.06), 0.87, axis='z', slot='dark', rad=0.038, n=24)
+    _open_ring(P, (0.0, 0.0, 0.17 + 0.06), 1.09, slot='dark', rad=0.042, n=20,
+               gap=0.30, axis='z', phase=-math.pi / 2.0 + TAU * 0.15)
+    # the two broken ends of that band, bent out of line - a band that merely
+    # stops reads as a band drawn short; a band with its ends sprung reads as a
+    # band that FAILED, which is the sentence this body needs it to say.
+    for s in (-1, 1):
+        P.raw(L.tube([Vector((s * 0.46, -0.99, 0.23)), Vector((s * 0.62, -0.86, 0.14))],
+                     [0.040, 0.030], 7), 'dark')
+    _close("bands")
+
+    _open()
+    # ------------------------------- THE SPILL: WHAT THE BROKEN BAND LET GO
+    # Three sheaves already out of the bottom course and down on the floor at -Y
+    # ONLY. Two jobs: it is the second half of the affordance, and it is a
+    # facing cue, because the back of this stack is intact.
+    for sx, sy, dx, dy in ((-0.52, -1.02, -0.30, -0.95),
+                           (0.06, -1.16, 0.10, -0.99),
+                           (0.56, -0.98, 0.42, -0.90)):
+        P.raw(aim(L.cone(0.128, 0.048, 0.86, 8), (sx, sy, 0.075), (dx, dy, 0.03)), 'bone')
+    # *** PASS 4 - THE CUT STUBBLE IS GONE, AND IT IS THE THING I BLAMED TWICE
+    # ON SOMETHING ELSE. _colour_read reported a ~90 px island floating off the
+    # silhouette in every pass. I guessed the RAKE (pass 2) and removed it: the
+    # island survived. I guessed the LADDER HEAD (pass 3) and re-seated it: the
+    # island survived at the SAME BOX. Two confident diagnoses, both wrong, and
+    # both made by reasoning about the model instead of looking at the picture.
+    # What settled it took one measurement: the island's own mean rgb is
+    # (0.568, 0.520, 0.395) - the BONE slot. Not the dark timber of either thing
+    # I had blamed. Cropping that box and looking showed a single thin tapered
+    # spike standing alone on the floor with clear daylight around it.
+    # IT WAS THE CUT STUBBLE, and it could never have been anything else: six
+    # separate cones standing on the ground at radius 1.18-1.30, touching no
+    # other geometry BY CONSTRUCTION. Floor dressing that stands apart from the
+    # body is a detached fragment every time, not sometimes. Pass 1's own
+    # comment here already suspected the stubble bought nothing and kept it
+    # anyway; it cost AABB, it was invisible at pane distance, and it was
+    # failing a silhouette assertion the whole time. Removed, not re-placed.
+    # THE LESSON IS THE ONE THIS LANE KEEPS RELEARNING: when a number and a
+    # picture disagree the picture wins - and when the number is the only thing
+    # that CAN see the fault, the answer is still to go and look at the pixels
+    # it is pointing at, not to reason about which part it must mean.
+    _close("spill")
+
+    _open()
+    # ------------------------------------------------ THE MAN, UP ON THE STACK
+    HIP = TOP + 0.84
+    for s in (-1, 1):
+        limb(P, [(s * 0.17, 0.05, HIP), (s * 0.23, 0.01, HIP - 0.46),
+                 (s * 0.27, -0.06, TOP + 0.05)], 0.104, 0.082, 'body')
+        # A BOOT, not a bare tube end. Pass 1 of the Fuller left two arms
+        # stopping in mid-air and the same fault at the ankle reads as a man
+        # sunk into the straw.
+        P.add(L.box(0.25, 0.40, 0.11), 'dark', loc=(s * 0.27, -0.13, TOP + 0.055))
+    P.raw(aim(L.cone(0.31, 0.25, 0.60, 12), (0.0, 0.0, HIP), (0.0, -0.06, 1.0)), 'body')
+    for s in (-1, 1):
+        P.add(L.sphere(0.115, 0.108, 0.104, 11, 8), 'body',
+              loc=(s * 0.25, -0.02, HIP + 0.58))
+    P.add(L.sphere(0.168, 0.176, 0.172, 14, 9), 'body', loc=(0.0, -0.03, HIP + 0.80))
+    # THE FACE: a flat pale panel at -Y ONLY - never a band, never wrapped.
+    P.add(L.box(0.165, 0.045, 0.135), 'bone', loc=(0.0, -0.205, HIP + 0.79))
+    eyes(P, (0.0, 0.0, HIP + 0.81), 0.052, 0.030, -0.232)
+    # the straw hat - the one piece of the crop he wears, and the trade read
+    P.raw(aim(L.cone(0.40, 0.30, 0.045, 16), (0.0, -0.03, HIP + 0.90), (0.0, 0.0, 1.0)), 'bone')
+    P.raw(aim(L.cone(0.185, 0.085, 0.16, 14), (0.0, -0.03, HIP + 0.93), (0.0, 0.0, 1.0)), 'bone')
+    _close("man")
+
+    _open()
+    # ------------------------------------- THE FORK: THE REACH, SAID IN A LINE
+    # One long diagonal from his hands out and DOWN past the stack's edge. The
+    # shaft is ASH and therefore in the pale slot, which is not decoration: it
+    # is the strongest single line in the picture and it has to be, because the
+    # line IS the mechanic. The tines are iron and go dark.
+    # *** PASS 2, CHANGE C - THE MECHANIC VANISHED IN THE ONE VIEW THAT SHIPS.
+    # Pass 1 aimed the fork at (+1.06, -0.86): a 45-degree diagonal toward +X
+    # and -Y, which is almost exactly the THREE-QUARTER CAMERA'S OWN AXIS. In
+    # front.png it was the strongest line in the picture; in three_quarter.png -
+    # the view the contact sheet and the silhouette sheet both use - it
+    # foreshortened into a vertical pole standing between his legs, and the
+    # reach, which IS the mechanic, was simply not in the cell. Same fault class
+    # as the Fuller's pass 1 (the man was 0.2995 of the front and 0.0805 of the
+    # side): a body that only works from one camera.
+    # The fork is mirrored to -X. It is now broadside to the three-quarter
+    # camera, keeps its -Y component so the side view still reads it as a
+    # diagonal, and still crosses the front view - the other way round.
+    g0 = Vector((-0.12, -0.26, HIP + 0.46))
+    g1 = Vector((-0.40, -0.44, HIP + 0.10))
+    tip = Vector((-1.06, -0.86, TOP + 0.06))
+    P.raw(L.tube([Vector((0.06, -0.14, HIP + 0.62)), g0, g1, tip],
+                 [0.040, 0.046, 0.044, 0.038], 8), 'bone')
+    for s in (-1, 1):
+        P.raw(L.tube([tip,
+                      tip - Vector((0.15 + s * 0.09, 0.11, 0.05)),
+                      tip - Vector((0.28 + s * 0.16, 0.23, 0.17))],
+                     [0.030, 0.023, 0.013], 7), 'dark')
+    limb(P, [(0.25, -0.02, HIP + 0.56), (0.03, -0.18, HIP + 0.50),
+             (-0.10, -0.25, HIP + 0.46)], 0.082, 0.060, 'body')
+    limb(P, [(-0.25, -0.02, HIP + 0.56), (-0.36, -0.30, HIP + 0.28),
+             (-0.39, -0.42, HIP + 0.12)], 0.080, 0.058, 'body')
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=tuple(g0))
+    P.add(L.sphere(0.078, 0.068, 0.068, 10, 7), 'dark', loc=tuple(g1))
+    _close("fork")
+
+    _open()
+    # ------------------ THE +Y SIDE: WHY THE BACK IS A DIFFERENT PICTURE
+    # The pole ladder he came up, and a rake laid across the stack top. Neither
+    # is visible from the front (the stack is in the way), and the front's pale
+    # objects are not visible from the back - so the two reads differ by
+    # CONSTRUCTION. This is the Beadle's no-facing fault designed out.
+    # *** PASS 3 - AND IT NAMES PASS 2's WRONG FIX. *** _colour_read reported a
+    # ~95 px island floating off the silhouette in BOTH passes. In pass 2 I
+    # blamed the rake and removed it; the island survived at 93 px, so that
+    # diagnosis was wrong and the rake was deleted on a bad reason (it was a
+    # poor prop on its own merits, which is why it has not come back). THEN I
+    # LOOKED AT THE PICTURE, which is what should have happened first: there is
+    # a small chip sitting ON the pale top disc in three_quarter.png, and it is
+    # the LADDER'S HEAD. Both passes put the pole tops ABOVE the capping layer
+    # (z = TOP+0.03 and TOP+0.16), so two stubs emerged through the cap, inside
+    # its radius, touching nothing - a detached fragment by construction. Same
+    # size in both passes because it was the same object both times.
+    # The head now rests against the THIRD COURSE's outer face, below the cap.
+    LY0, LZ0, LY1, LZ1 = 1.44, 0.01, 0.70, TOP - 0.19
+    for s in (-1, 1):
+        P.raw(L.tube([Vector((s * 0.26, LY0, LZ0)), Vector((s * 0.17, LY1, LZ1))],
+                     [0.050, 0.042], 7), 'dark')
+    for k in range(5):
+        t = (k + 0.5) / 5.0
+        yy = LY0 + (LY1 - LY0) * t
+        zz = LZ0 + (LZ1 - LZ0) * t
+        hw = 0.26 + (0.17 - 0.26) * t
+        P.raw(L.tube([Vector((-hw, yy, zz)), Vector((hw, yy, zz))],
+                     [0.028, 0.028], 6), 'dark')
+    # *** PASS 2, CHANGE B - THE RAKE IS GONE, AND AN INSTRUMENT FOUND IT,
+    # NOT MY EYE. Pass 1 laid a rake across the stack top at +Y. By eye I only
+    # wrote that it "reads as a stick through his legs". _colour_read's
+    # connectivity assertion said something my eye could not: a 95 px island at
+    # [394,551]-[400,574] in front.png FLOATS OFF THE BODY, with the mirror of
+    # it in back.png - the rake handle's far end, separated from every other
+    # silhouette pixel by a gap. A detached fragment is worse than a bad prop:
+    # on a dark floor it reads as a second, tiny object. It is removed rather
+    # than re-seated, because it was failing at its own job too - it was
+    # visible from the FRONT, so it was not a facing cue at all.
+    # The ladder now carries the back on its own, and it is built to READ as a
+    # ladder: longer poles, a steeper rake, five rungs, and its head resting
+    # ON the top course so it is one connected silhouette with the stack.
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"stackman": stackman})

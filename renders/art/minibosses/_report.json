@@ -1496,11 +1496,44 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "stackman": {
+   "title": "The Stackman",
+   "theme": "grassland",
+   "idea": "IT GETS ABOVE YOUR REACH - every time you hurt it it pitches a fresh sheaf under its own feet and climbs a course, and from up there nothing with a hand on it can touch it; it pitches down at you for free. The stack is the gauge and you can count the courses from the doorway, so this is the one fight in here that asks about your PARTY and not your footing: cut the bottom course out from under it, or bring something with reach, or watch it climb out of the fight entirely",
+   "wear": 0.7,
+   "feed_line": "Something up there is building itself higher.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1674,
+   "size": [
+    2.53,
+    3.35,
+    2.84
+   ],
+   "footprint_span": 3.35,
+   "corridor": "CORRIDOR-SAFE",
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5346931540043185,
+    "ortho": 5.161048412322998,
+    "clip": [
+     9.848793983459473,
+     23.550559997558594
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "blank_check": {
-  "files": 105,
+  "files": 108,
   "failures": []
  }
 }

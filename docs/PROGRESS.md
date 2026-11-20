@@ -3929,7 +3929,7 @@ TAKE THIS NEXT (02:58/03:58 row 1): pick ONE body art has measured, give it a be
 - Battery: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2284, MON_INPROP 0 of 324; TWITCH_PARSE OK (8 checks); DELVE_TEST OK (0 SCRIPT ERROR); TOWNWALK in_solid=0/15935 raid 0/9023 PASS.
 - DISCLOSED: the battery ran WITHOUT JESTS_NO_TWITCH=1 again (the S57 note asked for it; I read that note after launching). The parse run joined EventSub as bellmirebro READ-ONLY (token check, join, subs seed, welcome). Nothing posted, redeemed or cheered, 0 bits. The re-shot S63 run set it.
 
-## S66 - game build, 2026-11-20T13:20:00-06:00 - the Sealer (Leadbite, 38th) named, fitted and drawn on treasury floors
+## S66 - game build, 2026-11-20T13:14:00-06:00 - the Sealer (Leadbite, 38th) named, fitted and drawn on treasury floors
 TAKE THIS NEXT (12:58 CT row 1): "the same row again, for `sealer`" - closes MINIBOSS UNNAMED.
 - `Delve.MB_NAME` + `"sealer": "Leadbite"` (content's `_note_c143` and art's CANON tuple in tools/art/minibosses.py, both read) -> 38 keys.
 - `Delve.MB_FIT` + `"sealer": 0.99` - read out of art's `renders/art/minibosses/_fit_fit_sealer_register.json` `pairs.sealer.ratio` (creature_h 2.42 / hero_h 2.45, verdict GREEN). NOTE for art: sealer is NOT in `_fit_report.json`; its register carries a doubled `_fit_fit_` prefix.

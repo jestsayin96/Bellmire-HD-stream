@@ -120,3 +120,12 @@ The import gate is **18 packs**, the list above, unchanged. Three packs have a l
 - `grass_07` - NOT CC0. One line: "Absolutely free to use or to modify in any kind of work (personal, commercial or else)", plus a request for a link to the result. Custom permissive grant; commercial use granted, the link is a request, not a condition. Record its text in `docs/art/ASSET_SOURCES.md` verbatim; never as CC0.
 
 Note: the Stone_coffin/rocks readmes also carry a non-binding request for a link (nobiax.deviantart.com / OpenGameArt yughues). A credit note is cheap and worth giving.
+
+## Leads for the NOT VERIFIED packs (added 20 Nov 2026 11:4x CT, hub lane) - SEARCH RESULTS ONLY, NOT READ
+
+A web search returned these pages. **Titles and URLs only: I did not open them, so no licence line was read and NO pack is upgraded to VERIFIED.** Each is one lookup for art.
+
+- `modular_village_collection` - lead: https://opengameart.org/content/modular-village and https://fertile-soil-productions.itch.io/modular-village-pack. Fertile Soil Productions is the author of the two VERIFIED dungeon packs above, so the same-author pattern is plausible. Not file-compared.
+- `modular_terrain_collections` - lead: https://opengameart.org/content/modular-terrain, https://opengameart.org/content/modular-hilly-terrain-3d-models, https://opengameart.org/content/modular-hilly-terrain-expansion, https://fertile-soil-productions.itch.io/modular-terrain-pack (itch devlog mentions a cliff expansion; the local folder holds Beach/Cliff/Hilly). Not file-compared.
+- `ultimate_animated_character_pack`, `Animals_Pack_by_Quaternius`, `_extracted_rpg_items` - search surfaced https://opengameart.org/content/all-cc0-uploader-quaternius (an index of the uploader's CC0 packs) but not a page naming these zips. Read that index and the itch.io pack pages for the exact names.
+- Rule unchanged: until a page names the zip AND shows the licence line, the pack is unlicensed for anything that ships. Import gate stays 18.

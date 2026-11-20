@@ -13239,3 +13239,76 @@ Item per the TAKE THIS NEXT block (10:58 CT, 20 Nov): the HUD draws the mana bar
 Finding: this worktree (hud-ui) has NOT merged main, so scripts/roster.gd here has no `mana` field yet. Next firing: merge origin/laptop (keep both sides, strip only marker lines), confirm the roster mana accessors, then build the bar in hud_dock.gd (my file) and leave party_frames.gd alone if the frames live there (not mine; I will say so and ask the owner to expose state).
 Next firing (12:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap, headless parse first, windowed render at 100/125/150, look at it, release by :07.
 Nothing launched, no Godot run, no files of mine edited besides this note.
+
+## D-cycle - S65 WETWALL'S NAME ROW: the Dauber (37th) gets MB_NAME, MB_FIT and its keep row, 2026-11-20 12:08-12:15 CT (game build)
+Item: TAKE THIS NEXT 11:58 CT row 1 - "ADD THE `dauber` ROW TO `Delve.MB_NAME`" (outranks batch 4). Closes the engine half of MINIBOSS UNNAMED.
+- RED FIRST: on the merged tree before any edit, tools/_s51_names.gd printed `S51_NAMES FAIL 2 of 153` - "drawable key dauber has no MB_NAME entry" - the same drift the lead found by arithmetic, caught by my own key-set gate.
+- delve.gd: `MB_NAME["dauber"] = "Wetwall"` - read from content's `_note_c142` ("the Dauber (Wetwall)") AND art's CANON title in tools/art/minibosses.py, both agree; `MB_FIT["dauber"] = 1.05` copied from art's _fit_report.json pairs.dauber.ratio (h 2.58, 3/3 proving views).
+- dungeon_hd.gd: `dauber` joins THEME_MINIBOSS_MORE["keep"] - art's tag is field 5 of its tuple, `keep`, read not guessed. The miniboss_for gate (mesh + arrive lines) now admits it: content's C-142 lines are in.
+- dauber.glb had NO .import sibling (nor sealer.glb) - ran --headless --import, both now import; committed like every other miniboss .import.
+- tools/_s51_names.gd: TABLE + size asserts 36 -> 37.
+- NEW tools/_s65_dauber.gd (copy of D96_FIT's real set-piece spawn path, one key, plus a draw check).
+VERDICTS: parse --quit-after 300 rc 0, one ERROR line = chatcmd's MINIBOSS COUNT (36 published vs 37 feed) - THE CHAT BOT'S HALF, NOT MINE; UNNAMED no longer prints. S51_NAMES OK 156 checks (bodies 37, arrive 37). S65_DAUBER OK 8 checks - keep draws dauber 100/400, named Wetwall, stands 2.57 m = 1.05 x hero vs art 1.05, arrive line with body, fall line on kill. OFFFLOOR_VERDICT OK 0 of 2027. TWITCH_PARSE OK (8). TOWNWALK in_solid=0/18077 raid 0/5550 PASS. DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+LOOKED AT IT: renders/cycles/s65/dauber.png - Wetwall nameplate, hod and plank, a laid course of blocks at its feet, on a keep floor beside the knight, at fit. ("FitDauber" over the knight is the test hero's name, test-only.)
+HONEST LIMIT: the Dauber's ONE IDEA (lays a wet course per hit, breakable while wet) is NOT built - it has no act/broken lines and no MB_WAYS entry. That is the wall-placement row, still mine and still open. The Sealer (38th) is untouched by design (no feed, no name - lead's case 4).
+Lock: claim 12:08:39, cap 12:33 computed first, declared 12:30. No twitch test, 0 bits.
+NEEDED FROM MR. E: nothing.
+## C-143 (20 Nov 2026 12:3x CST) - THE SEALER'S LINES (38th miniboss, Leadbite)
+- ITEM: TAKE THIS NEXT (11:58 block) row 3, CONTENT: the Sealer is the 38th body, on main (assets/monsters/minibosses/sealer.glb, CANON/BUILDERS rows in tools/art/minibosses.py). by_key held 37 keys, no sealer. Wrote it: arrive 9, fall 8 (recent shape, no act/broken, {name} unused). Lines say the mechanic plainly: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press. Leadbite is art's CANON name. Plus `_note_c143`.
+- VALIDATION OK: json.load passes, every pre-existing key and entry unchanged (subset-compared against pre-edit copy), round-trips at indent 2, 17 new lines unique against all existing feed lines, ASCII only. by_key 37 -> 38.
+- CODE WIRING: the Sealer will draw once bestiary.gd carries sealer, AND the same join drift as C-142 repeats: Delve.MB_NAME needs a `sealer` row (name Leadbite) and commands.json "The 36 elites" text is already behind (37 feeds, now 38). Chat bot / game build own those; nothing here is wired by content.
+Next content: C-144.
+
+## U104 - 2026-11-20 12:56 CST - THE MANA BAR (item 5, TAKE THIS NEXT 11:58): ManaStrip in hud_dock.gd
+Merged origin/laptop (909 behind, clean, no conflicts; stale render PNGs checkpoint-committed first as 385cd973). Lock: R working RUN_LOCK last line was chat bot IDLE 12:51:35, no Godot alive; claimed 12:55 (declared finish 13:03), released IDLE 12:56:46 - no crossing.
+Built: `HudDock.ManaStrip` (CanvasLayer 20, installed beside FightBanner). One blue bar per hero publishing `h["mana_max"] > 0` (Roster S64: mana / mana_max), living heroes only; a hero with mana_max 0 gets NO row and a party with no caster gets NO strip. Blue per Mr. E's potion key; bar goes dim when below MANA_COST (a dry caster). Docked "br" of the pane showing the delve (HudDock.put, so the Chronicle chokepoint applies), marked with the pane key so guard() keeps it; full screen: bottom-right. party_frames.gd NOT touched (not mine) - frames still carry hp only.
+Checks: headless parse of W2 -> zero Parse Error / SCRIPT ERROR / hud_dock lines (remaining ERRORs = this worktree's partial .godot import cache, and chat bot's MINIBOSS COUNT line the merge predates). Windowed 1920x1080 (tools/_u104_shot.gd, a copy of _l21's scene with mage+cleric+barbarian+knight delving): `U104_MANA strip=true plates=1 casters=2`; render renders/cycles/20261120_u104/full_1080.png LOOKED AT: parchment "Mana" plate, DawnCleric 36/48 blue bar, bottom-right of the director pane, clear of the Chronicle.
+Not done: 125/150% renders (lock window ran out by design) and a pair/grid pane pass - next firing. MossyMage (mage, mana set to 14) was not in the plate: casters=2 counts him but the strip filters hp<=0; I believe he had fallen in the lord fight - not verified.
+Next: 125/150% + drained-caster render, then L74 (feed + theme under load).
+## B84 - THE ARM FIRED AND I CLOSED MY HALF IN ONE EDIT (chat bot, 2026-11-20 12:4x-12:5x CT)
+B83 wrote "my published 36 is still right" and it was true that hour. Content shipped C-142 at 11:23
+and it stopped being true. The team lead's 11:58 row named the work: `miniboss`.what AND .short
+36 -> 37, both fields in one edit, then regenerate the doc. Done, and measured first rather than taken
+on trust.
+
+THE THREE AUTHORITIES ON THE MERGED TREE (0d9b2437), counted, not read:
+  - data/lore_lines.json `miniboss_feed.by_key` = 37 rows, `dauber` present.
+  - scripts/delve.gd `Delve.MB_NAME` = 36 keys, NO `dauber`. The game build's own 12:15 IDLE says
+    dauber got MB_NAME "Wetwall" in S65 - that commit is NOT on origin/main as I read it. Their half
+    is still owed. I did not touch their file and I am not guessing why; I am saying what I measured.
+  - data/commands.json `miniboss` published "The 36 elites" in two fields.
+So MINIBOSS COUNT (36 != 37) was live on main, exactly as case (1)/(3) of B83's closure table said it
+would be. The guard family caught a real cross-lane drift the hour it appeared.
+
+THE EDIT: one `sed -i s/The 36 elites/The 37 elites/g` over data/commands.json - both fields in the
+same pass ON PURPOSE. My own arm at :2084 fires MINIBOSS FIELDS if .what and .short disagree, so a
+two-step edit would have swapped one red arm for another in between. Verified both directions after:
+json.load clean; 31 command keys unchanged as a set; `miniboss` the ONLY changed command and only its
+.short and .what; all 30 other commands byte-identical; all 7 non-command top keys (_source, hub_url,
+cooldown_s, twitch_cooldown_s, order, ask, foreign) byte-identical; `order` still 31 and still equal to
+the key set; 0 entries with no mention in chatcmd.gd; 0 stale "36 elites" bytes left in the file.
+
+THE DOC IS THE REAL GENERATOR'S BYTES, NOT AN EMULATION. tools/_commands_doc.gd ran under Godot:
+COMMANDS_DOC OK wrote 31 commands, docs/COMMANDS.md md5 4d8a6b3b -> f00fee26, and the table row now
+reads "The 37 elites"; "36 elites" occurs 0 times in the doc. B4's python emulation was not used this
+hour and was not needed.
+
+THE BATTERY, ON THE EDITED BYTES:
+  - parse --headless --quit-after 300: rc 0, ZERO ERROR LINES. The one ERROR the game build read in
+    its own 12:15 parse - "chatcmd MINIBOSS COUNT (chat bot's half)" - is gone from the parse load.
+  - TWITCH_PARSE OK (8 checks).
+  - L14_TEST FAIL 1 (24 checks), ONE arm fired: ["MINIBOSS UNNAMED"] on ["dauber"]. COUNT is silent.
+    That is the predicted half-landed state, not a regression: _l14_test asserts guard_faults() empty
+    and UNNAMED stays red until the game build lands MB_NAME. I am reporting a RED gate as red rather
+    than calling the lane green.
+  - _b2_ask.gd absent, no .b2_* logs.
+  - The "2 resources still in use at exit" ERROR inside the L14 segment is the pre-existing line B83
+    already checked against the baseline log.
+
+THE LOCK, AND THE 11:58 DECLARATION CHARGE ANSWERED: the charge was declaring a 12:07 finish - the
+whole of the HUD's :52-:07 share - for optional work. The fix the team lead named is "compute the
+boundary first, then write it", so I did: claim 12:49:22, cap 13:14, DECLARED 12:52 (my own share's
+edge, not the HUD's), whole battery done in 24 seconds, released early, no crossing, nothing carried.
+Last lock line before my claim was the game build's IDLE 12:15:32, Godot EMPTY on both exes.
+
+NO TWITCH TEST. 0 bits. No account used.

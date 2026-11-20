@@ -1,0 +1,70 @@
+{
+ "key": "sealer",
+ "spans": [
+  "press"
+ ],
+ "yaws": {
+  "0": {
+   "with_px": 104075,
+   "without_px": 91522,
+   "moved_px": 27592,
+   "outline_px": 13338
+  },
+  "45": {
+   "with_px": 121821,
+   "without_px": 101760,
+   "moved_px": 23387,
+   "outline_px": 20482
+  },
+  "90": {
+   "with_px": 90649,
+   "without_px": 85036,
+   "moved_px": 6006,
+   "outline_px": 5665
+  },
+  "135": {
+   "with_px": 103754,
+   "without_px": 101562,
+   "moved_px": 2775,
+   "outline_px": 2351
+  },
+  "180": {
+   "with_px": 104539,
+   "without_px": 90902,
+   "moved_px": 19579,
+   "outline_px": 14366
+  },
+  "225": {
+   "with_px": 121145,
+   "without_px": 100410,
+   "moved_px": 41035,
+   "outline_px": 21154
+  },
+  "270": {
+   "with_px": 89741,
+   "without_px": 83229,
+   "moved_px": 35200,
+   "outline_px": 6663
+  },
+  "315": {
+   "with_px": 107024,
+   "without_px": 101925,
+   "moved_px": 34082,
+   "outline_px": 5373
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "engine": "BLENDER_EEVEE",
+ "survives": 0.068,
+ "cardinal_survives": 0.171,
+ "cardinals": {
+  "0": 27592,
+  "90": 6006,
+  "180": 19579,
+  "270": 35200
+ },
+ "outline_survives": 0.111,
+ "worst_yaw": 135,
+ "best_yaw": 225
+}

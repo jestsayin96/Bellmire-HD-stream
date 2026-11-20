@@ -13085,3 +13085,496 @@ def sealer():
 
 
 BUILDERS.update({"sealer": sealer})
+
+
+# =====================================================================
+# 39 THE HOOPER - "Hoopfast", 2.36 m, mess, wear 0.34
+#
+# *** THIS BODY EXISTS TO TAKE CORRECTION (a) FROM THE 11:58 CT TEAM LEAD
+# *** REVIEW, 20 NOV 2026, AND IT TAKES IT BY CONSTRUCTION. ***
+# The finding, made by LOOKING at the Sealer and reachable by no number in the
+# register: "FROM THE SIDE THE PRESS READS AS A SHELF. Broadside it is a clamp;
+# at 90 degrees it is a flat slab at waist height with nothing to say it closes.
+# The whole 'it seals what you carry' read rests on the front view alone."
+# The row: "give the tool a silhouette that survives a 90-degree turn."
+#
+# THE FIX IS NOT A KINDER CAMERA AND IT IS NOT A BIGGER SLAB. A plate, a clamp,
+# a C-frame, a board, a leaf, a pavise and a hurdle are all PLANAR, and every
+# planar thing in this file has the same defect by construction: it has a good
+# axis and a bad one, and a set piece seen from a doorway does not promise which
+# the viewer gets. The Sealer's pass 2 yawed the press broadside to buy the front
+# view and PAID FOR IT WITH THE SIDE - the trade was right for that body and it
+# is still a trade. The only shape that owes nothing at any yaw is a SOLID OF
+# REVOLUTION about the vertical: a cask, a hoop, a ring of staves, a post. Its
+# silhouette is the same width from every direction a floor-standing camera can
+# occupy, so there is no angle to lose.
+#   So: EVERY OBJECT THAT CARRIES THE MECHANIC ON THIS BODY IS AXISYMMETRIC
+#   ABOUT Z. The cask, its three hoops, the open ring of staves, the trussing
+#   post, the five hoops stacked on it and the hoop in his hand. Not one planar
+#   member anywhere in the mechanic.
+#
+# AND THE TENSION THAT CREATES, SAID OUT LOUD RATHER THAN DISCOVERED LATER.
+# A body made only of yaw-invariant objects is a body with NO FACING - which is
+# the Beadle's measured defect, the exact fault the team lead confirmed closed on
+# the Sealer and the one I am most likely to re-open while fixing something else.
+# The two are only in tension if you confuse the OBJECT with the ARRANGEMENT:
+#   - each object's own silhouette is yaw-invariant       -> (a) is answered
+#   - their PLACEMENT on the body is front/back asymmetric -> facing is kept
+# The front (-Y) carries the cask, the apron and one pale face panel. The back
+# (+Y) carries the post, the five-hoop gauge and the two straps, and nothing
+# pale. Neither read is available from the other side, and the brightest object
+# in each is a different thing.
+#
+# *** AND IT TAKES (b) IN THE SAME PASS, WHICH IS WHY THE CASK IS IN THE PALE
+# *** SLOT. *** (b) was the lead's other note: "THE BODY IS NEARLY ALL ONE GREY
+# AGAINST GREY ARMOUR. The Knight only separates from it because of the red cape.
+# Worth a value break on the next body." So the three slots are pushed APART in
+# VALUE rather than in hue - pale blond oak (0.76) for the cask and the face,
+# mid warm-neutral (0.30) for the man, near-black iron (0.105) for every hoop,
+# the post, the belt and the boots. The mechanic is therefore the BRIGHTEST
+# object on the creature and the gauge is the DARKEST, which is the Sealer's
+# three-band argument applied with the mechanic and the man swapped over.
+#
+# THE MECHANIC - IT CASKS ONE OF YOU.
+#   The Hooper raises a cask over one hero and drives the hoops home. That hero
+#   is NOT out of the fight: they keep swinging, blind, from inside. What they
+#   lose is the party - no heal reaches them, no brew, no shout, no shield, no
+#   order. The rest of the line can SEE them and cannot help them.
+#   So the party is not choosing how to kill it. It is choosing whether to spend
+#   its swings on the staves to get one of its own back, or on the Hooper while
+#   one of them fights alone in the dark. Break the cask and the hero is out;
+#   break the Hooper and every cask in the room falls open at once.
+#   THE GAUGE: the hoops stacked on the trussing post on its back. One hoop is
+#   one more hero it can shut in. THE CANON LINE SAYS "the moment it turns"
+#   AND NOT "from the door", AND THAT WORDING IS A MEASURED RETREAT: the gauge
+#   lives on its back by design, so hero_front.png shows a sliver of it and no
+#   count at all. Claiming a front read the picture does not support would be
+#   exactly the kind of number-over-picture this body was built to argue
+#   against, so the line was changed to match the render rather than the render
+#   left to disagree with the line.
+#   The stack is deliberately IRREGULAR - uneven gaps, one slot empty, one hoop
+#   half-driven and canted - because evenly spaced bars in a line are their own
+#   interface read (signal strength, a progress bar), which is the Sealer's
+#   lead-strip lesson arriving in a new shape.
+#
+# WHY IT IS NOT A RE-SKIN. I read every `idea` string in CANON before designing
+# and wrote the taken verbs out. The nearest four, and why this is not them:
+#   LEECH     blocks healing for the WHOLE ROOM, and the answer is to tip a
+#             basin. This cuts ONE hero off from everything, and the answer is
+#             to break the thing around them.
+#   GAOLER    takes a hero TO ITSELF with a hook. This leaves them exactly where
+#             they stood and takes the party away from THEM.
+#   PRESSMAN  turns your FALLEN against you. This one needs the hero alive and
+#             fighting - a casked hero is still hurting it.
+#   DAUBER    shrinks the floor everyone shares. This isolates one body inside a
+#             floor that is otherwise untouched.
+# What is new in the file is the SHAPE of the decision: every other body asks
+# the party how to spend its damage on the ENEMY. This one asks it to spend
+# damage on ITSELF to get a member back.
+#
+# THEME: mess. Two bodies there (Cook, Loader) against four in keep and
+# workshop - with confection, barracks, prison, crypt and wood it is one of the
+# thinnest, and a cooper is a cellar and victualling trade before it is anything
+# else. Measured off CANON this run, not remembered.
+#
+# WEAR 0.34, AND IT IS AN ARGUMENT. A cooper's hoops are consumable stock and
+# his cask is the work in hand, so neither is allowed to be rotten - but a man
+# who spends his day in a wet cellar is not kept either. 0.34 is free in this
+# file (0.30 Scrapwright/Dyer, 0.35 Jointer, 0.42 Dauber).
+# =====================================================================
+CANON.update({
+    "hooper": ("Hoopfast", 2.36, (0.80, 0.69, 0.47), (0.62, 0.84, 1.00),
+               "mess", "IT CASKS ONE OF YOU - it raises a cask over one hero "
+               "and drives the hoops home, and that hero is not out of the "
+               "fight: they keep swinging, blind, from inside. What they lose "
+               "is the party. No heal reaches them, no brew, no shout, no "
+               "shield - the line can see them and cannot touch them. So the "
+               "party is not choosing how to kill it, it is choosing whether "
+               "to spend its swings on the staves to get one of its own back "
+               "or on the Hooper while one of them fights alone in the dark. "
+               "The hoops stacked on the post on its back are the gauge: one "
+               "hoop is one more of you it can shut in, and you can count them "
+               "the moment it turns",
+               0.34, "A hoop has just gone on."),
+})
+ORDER = ORDER + ["hooper"]
+
+# PER-SLOT MATERIALS, and the reason is correction (b) rather than the usual
+# two-conditions argument. The tint-derived path pulls ONE hue over a whole body
+# (measured defect, median satMean 0.087) and the lead's finding is that the
+# RESULT reads as one grey standing next to grey armour. The fix has to be a
+# VALUE spread, which a single wear-dulled tint cannot produce: 0.76 / 0.30 /
+# 0.105 across three slots is a 7x range, and it is what makes the cask the
+# brightest thing in the frame and the gauge the darkest.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"hooper"}
+
+OVERRIDE.update({
+    "hooper": {
+        # THE MAN AND HIS APRON. Mid, warm-neutral, and deliberately the LEAST
+        # interesting value on the body - he is the thing the cask and the hoops
+        # are read against. Rough 0.86: wet cellar leather and wool, no sheen.
+        'body': ((0.300, 0.270, 0.235), 0.86, 0.00),
+        # EVERY HOOP, THE POST, THE STRAPS, THE BELT, THE BOOTS AND THE CAP.
+        # Near-black at 0.105 so the five-hoop gauge on the back is countable as
+        # dark bars against the pale post-top and the lit wall behind, and so the
+        # cask's three driven hoops cut the pale staves into readable courses.
+        # Metal 0.34 / rough 0.52 - working iron, neither oiled (the Sealer's
+        # press, 0.42) nor rotted. NAMED COMPROMISE: the boots and the straps are
+        # leather and they sit in this slot, so they take an iron highlight they
+        # have not earned. Same trade the Sealer named; not hidden.
+        'dark': ((0.105, 0.108, 0.115), 0.52, 0.34),
+        # THE CASK, THE STAVES AND THE FACE PANEL: PALE BLOND OAK. This is the
+        # (b) fix and it is the whole point - the mechanic is the brightest
+        # object on the creature, so the thing the fight is about is the thing
+        # the eye lands on from the doorway. Rough 0.74, no metal: raw riven oak
+        # takes no shine, and a shiny cask would read as a pot (the Cook) or a
+        # tun (the Tapster).
+        'bone': ((0.760, 0.645, 0.430), 0.74, 0.00),
+        'glow': ((0.62, 0.84, 1.00), 2.6),
+    },
+})
+
+
+def _rev(profile, n=18, close_bottom=True, close_top=False):
+    """A SOLID OF REVOLUTION ABOUT Z FROM A (z, r) PROFILE. Raw vertex maths.
+
+    This function is correction (a) in nine lines. Everything built through it
+    has the SAME SILHOUETTE WIDTH AT EVERY YAW by construction, so no camera
+    angle can take the shape away - which is the one property the Sealer's press
+    did not have and could not be given without stopping being a press.
+
+    `profile` is a list of (z, r) bottom-to-top in the object's own frame;
+    r == 0 at an end collapses that end to a point. Faces are quads between
+    successive rings, plus optional caps.
+    """
+    verts, faces = [], []
+    rings = []
+    for z, r in profile:
+        if r <= 1e-6:
+            rings.append(("pt", len(verts)))
+            verts.append(Vector((0.0, 0.0, z)))
+        else:
+            rings.append(("ring", len(verts)))
+            for j in range(n):
+                th = TAU * j / n
+                verts.append(Vector((r * math.cos(th), r * math.sin(th), z)))
+    for i in range(len(rings) - 1):
+        (k0, b0), (k1, b1) = rings[i], rings[i + 1]
+        if k0 == "ring" and k1 == "ring":
+            for j in range(n):
+                j2 = (j + 1) % n
+                faces.append((b0 + j, b0 + j2, b1 + j2, b1 + j))
+        elif k0 == "ring":
+            for j in range(n):
+                faces.append((b0 + j, b0 + (j + 1) % n, b1))
+        else:
+            for j in range(n):
+                faces.append((b0, b1 + (j + 1) % n, b1 + j))
+    if close_bottom and rings[0][0] == "ring":
+        faces.append(tuple(rings[0][1] + j for j in range(n - 1, -1, -1)))
+    if close_top and rings[-1][0] == "ring":
+        faces.append(tuple(rings[-1][1] + j for j in range(n)))
+    return verts, faces
+
+
+def hooper():
+    """IT CASKS ONE OF YOU. The 39th body, and the first built to answer a
+    silhouette question rather than a mechanic one.
+
+    WHAT A VIEWER READS FROM THE DOORWAY, AT ANY YAW:
+      WHAT IS IT?        A heavy man with a part-raised cask standing clear of
+                         his left side, its lower half coopered and hooped and
+                         its upper half an OPEN RING OF SPLAYED STAVES. A ring
+                         of staves standing open is a mouth from every
+                         direction - that is the whole design.
+      WHAT IS IT DOING?  One hoop raised in his right hand, flat, about to go
+                         on. He is mid-truss.
+      HOW MANY MORE?     FIVE hoops stacked on the trussing post on his back,
+                         with ONE SLOT EMPTY and ONE HALF-DRIVEN AND CANTED.
+                         Flat hoops on an upright post present a HORIZONTAL BAR
+                         of the same width at every yaw, so the gauge is
+                         countable from in front, behind and either side.
+
+    FACING IS BY CONSTRUCTION. Front: cask, apron, one pale face panel. Back:
+    post, gauge, straps, nothing pale. See the (a)/facing tension written out
+    above the CANON entry - the objects are yaw-invariant, the arrangement is
+    not, and that is deliberate.
+
+    NOTHING HANGS. The Dauber's UI-download-arrow fault stays designed out: the
+    hoop in his hand TOUCHES the hand, the gauge hoops are SEATED on the post,
+    and there is no hammer on this body at all - a handle with a head on the end
+    is a thin line with a blob in clear air, which is the exact shape the Sealer
+    deleted its punch for. He is holding the hoop, not the thing that drives it.
+
+    Static: no anims entry. The before/after is said by the geometry - one slot
+    empty, one hoop canted, one hoop in the hand, the cask open at the top.
+
+    ROOM-LOCKED is NOT claimed here and NOT pre-judged. minibossgen measures the
+    real footprint against floorgen's own corridor and lid and the report says
+    the verdict.
+    """
+    P = Parts("hooper")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # *** PASS 2, CHANGE A - THE GAUGE WAS ON HIS HEAD. ***
+    # Pass 1 made the trussing post the TALLEST thing on the body so the stack
+    # could be "counted from the door". Looked at, that is a hat: the post rises
+    # dead centre behind the skull and the top three hoops RING THE HEAD, so
+    # from the front the gauge reads as a crown and the face sits inside it.
+    # Worse, the lowest hoop was the only one the torso hid, so the half of the
+    # stack that showed was the half that should not have.
+    # The fix is both halves of the same change and they are judged together:
+    # the MAN GROWS (the 2.36 m stays on the creature, where a set piece wants
+    # it) and the STACK DROPS entirely behind the torso, which is where a back
+    # read belongs. The gauge is now a BACK and SIDE read only - the front
+    # carries the cask and nothing else, which is the facing argument above
+    # getting the arrangement it was always supposed to have.
+    HIP = 1.14
+    SHO = 1.82
+    HEAD = 2.12
+
+    _open()
+    # ------------------------------------------- THE MAN: SQUARE, WEIGHT EVEN
+    # A cooper trusses standing over the work with both feet planted; he does
+    # not lunge and he does not lean. seat() lifts each limb by its own first
+    # segment so a literal 0.0 at the ankle really is the floor.
+    # *** PASS 7, CHANGE G - FROM THE SIDE HE STOOD ON ONE POST. ***
+    # hero_side.png, seen at stream distance, and no number in any register can
+    # reach it: both legs sat at the same y (0.02 -> -0.03), so in a side view
+    # they projected exactly onto each other and the figure stood on a single
+    # column with one boot - a mannequin on a stand. The Knight beside him does
+    # not have this because KayKit stages its feet fore and aft. This is the
+    # Sealer's "square with weight even" stance, which I took from its docstring
+    # without noticing that the Sealer is never SEEN from the side with its own
+    # legs as the silhouette - the press is there instead, and on this body the
+    # cask is on the other side.
+    # The stance stays square in X (a cooper trusses over his work) and is
+    # STAGGERED IN Y: the right foot 0.12 forward, the left 0.10 back. 0.22 m
+    # apart is more than a boot's depth, so the two legs separate in any side
+    # view without the figure reading as mid-stride.
+    for s in (-1, 1):
+        yf = 0.12 if s > 0 else -0.10
+        limb(P, seat([(s * 0.21, 0.02 + yf * 0.35, HIP),
+                      (s * 0.255, yf * 0.75, HIP - 0.58),
+                      (s * 0.265, yf, 0.090)], 0.110),
+             0.110, 0.088, 'body')
+        P.add(L.box(0.25, 0.40, 0.118), 'dark', loc=(s * 0.265, yf - 0.04, 0.059))
+    P.raw(aim(L.cone(0.335, 0.275, 0.76, 12), (0.0, 0.01, HIP), (0.0, 0.02, 1.0)), 'body')
+    P.add(L.box(0.52, 0.30, 0.088), 'dark', loc=(0.0, 0.00, HIP + 0.10))      # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.128, 0.118, 0.112, 11, 8), 'body', loc=(s * 0.28, -0.01, SHO))
+    P.add(L.sphere(0.170, 0.178, 0.174, 14, 9), 'body', loc=(0.0, -0.01, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY, narrower than the skull and taller
+    # than it is wide. The Sealer's pass-3 finding verbatim - a pale rectangle
+    # wider than it is tall reads as a letterbox visor before it reads as a face
+    # - and the Beadle's wrapped band is what both of these are avoiding.
+    P.add(L.box(0.124, 0.044, 0.140), 'bone', loc=(0.0, -0.198, HEAD - 0.015))
+    eyes(P, (0.0, 0.0, HEAD + 0.005), 0.044, 0.024, -0.226)
+    # a flat cap, dark, low. Keeps the top of the head dark so the pale panel
+    # beneath it is the only bright thing above the shoulders.
+    P.raw(aim(L.cone(0.192, 0.198, 0.072, 14), (0.0, -0.01, HEAD + 0.132), (0.0, 0.0, 1.0)), 'dark')
+    # THE APRON. Front only, and it is a facing member as much as a costume one:
+    # it gives the front of the body a flat mid-value field for the pale cask to
+    # be read against, where the back has the dark post and gauge instead.
+    P.add(L.box(0.44, 0.055, 0.66), 'body', loc=(0.0, -0.225, 0.92))
+    P.add(L.box(0.46, 0.050, 0.070), 'dark', loc=(0.0, -0.232, 1.235))   # apron band
+    _close("man")
+
+    _open()
+    # --------------------------- THE CASK: THE MECHANIC, AND THE SILHOUETTE
+    # Centre offset in BOTH X and Y (0.50, 0.34 -> 0.605 m off the body axis,
+    # against a torso half-width of ~0.335). That diagonal placement is chosen
+    # against the instrument rather than by eye: an object offset along a
+    # CARDINAL axis is fully occluded by the torso at exactly the two cardinal
+    # yaws, which are the three views the hero register shoots. Offset on the
+    # diagonal and the worst yaw is a diagonal one, so front, side and back all
+    # read - and _hooper_yaw_ab.py measures all eight and reports the worst.
+    CX, CY = -0.50, -0.34
+    BOT = 0.70
+    # *** PASS 3, CHANGE B - THE OPEN RING READ AS STICKS IN A BUCKET. ***
+    # Pass 2's staves were fourteen round tubes with wide air between them and
+    # three different heights, standing in a belly wider than it was tall. The
+    # picture was a tub of utensils: the staves read as CONTENTS, not as the
+    # vessel continuing, and a mouth made of contents does not say it closes.
+    # Three parts to the fix and they are one object, so they are judged as one:
+    #   1. THE BELLY IS TALLER THAN IT IS WIDE (0.70 against 0.60). A cask is a
+    #      tall thing; a tub is a wide one, and pass 2 was a tub.
+    #   2. THE STAVES ARE BOARDS, NOT RODS - flat, riven, 0.094 tangential by
+    #      0.040 radial, EIGHTEEN of them, one per belly segment, with only a
+    #      slit between neighbours. Close enough to read as one wall with cuts
+    #      in it, open enough that it is plainly not shut yet.
+    #   3. ONE STAVE IS MISSING ALTOGETHER. That gap is the only thing in the
+    #      whole body that proves the cask is HOLLOW - you can see through the
+    #      wall into the empty inside, which is the single most important fact
+    #      about a thing whose mechanic is shutting a hero in. It is also the
+    #      irregularity that stops eighteen identical teeth reading as a gear.
+    # Centre offset in BOTH X and Y (0.50, 0.34 -> 0.605 m off the body axis,
+    # against a torso half-width of ~0.335). That diagonal placement is chosen
+    # against the instrument rather than by eye: an object offset along a
+    # CARDINAL axis is fully occluded by the torso at exactly the two cardinal
+    # yaws, which are the views the hero register shoots. Offset on the diagonal
+    # and the worst yaw is a diagonal one, so front, side and back all read -
+    # and _hooper_yaw_ab.py measures all eight and reports the worst.
+    P.add(_rev([(0.000, 0.232), (0.120, 0.270), (0.320, 0.296),
+                (0.520, 0.300), (0.700, 0.286)], 18),
+          'bone', loc=(CX, CY, BOT))
+    # THE THREE DRIVEN HOOPS. Flat (axis Z), which is the yaw-invariant
+    # orientation: a flat ring presents a horizontal bar of width 2r from every
+    # direction a floor camera can stand in. They also cut the pale staves into
+    # courses, so the cask has internal structure at any distance.
+    for zz, rr in ((0.060, 0.251), (0.360, 0.2985), (0.665, 0.2905)):
+        _ring(P, (CX, CY, BOT + zz), rr, axis='z', slot='dark', rad=0.030, n=22)
+    # THE NEXT HOOP, LAID ON THE MOUTH. Slightly proud of the stave tops and
+    # canted 4 degrees, because a hoop lying true on a mouth reads as a lid.
+    _mouth = []
+    for i in range(23):
+        t = TAU * i / 22.0
+        v = Vector((0.330 * math.cos(t), 0.330 * math.sin(t), 0.0))
+        v = Matrix.Rotation(0.072, 3, 'X') @ v
+        _mouth.append(v + Vector((CX, CY, BOT + 0.985)))
+    P.raw(L.tube(_mouth, [0.032] * len(_mouth), 7), 'dark')
+    NS = 18
+    for j in range(NS):
+        if j == 13:
+            continue                      # the missing stave: the cask is hollow
+        th = TAU * j / NS
+        hh = 0.34
+        lean = 0.21
+        if j in (5, 10):
+            hh = 0.235                    # two short, left unbacked
+        if j == 16:
+            lean = -0.09                  # one canted inward, not yet trued
+        rc = 0.288 + (hh * 0.5) * math.sin(lean)
+        zc = BOT + 0.695 + (hh * 0.5) * math.cos(lean)
+        P.add(L.box(0.040, 0.094, hh), 'bone',
+              loc=(CX + rc * math.cos(th), CY + rc * math.sin(th), zc),
+              rot=(0.0, lean, th))
+    _close("cask")
+
+    _open()
+    # ------------------- THE LEFT ARM: THE CASK IS CARRIED, NOT PARKED BESIDE
+    # The forearm crosses the near face of the cask and the hand closes on the
+    # top driven hoop. Without this the cask reads as a prop standing on the
+    # floor next to a man - the Drillmaster's pass-2 finding in reverse.
+    # *** PASS 4, part of CHANGE C. *** Pass 3's hand closed on the FAR side of
+    # the top hoop, so in front.png the whole forearm was behind the cask and
+    # the cask read as parked on the floor beside a man rather than carried.
+    # The hand now takes the NEAR rim, where the camera can see the grip.
+    # *** PASS 5, CHANGE D. *** Pass 4's hand sat at y -0.595 against a cask
+    # whose near face is at -0.640, so it was INSIDE the barrel's own outline:
+    # in front.png the forearm vanished behind the staves and the arm read as a
+    # stump. The hand now comes OVER the top driven hoop and rests on it, above
+    # the rim line, where it is silhouetted against the pale staves - which also
+    # says CARRIED rather than merely touched.
+    limb(P, [(-0.28, -0.01, SHO - 0.02), (-0.38, -0.28, 1.62),
+             (-0.47, -0.54, 1.452)], 0.092, 0.072, 'body')
+    P.add(L.sphere(0.084, 0.076, 0.066, 9, 7), 'body', loc=(-0.498, -0.585, 1.425))
+    _close("leftarm")
+
+    _open()
+    # --------------- THE RIGHT ARM AND THE HOOP IN IT: WHAT IT IS DOING NOW
+    # One hoop raised flat in the right hand, about to go on. It TOUCHES the
+    # hand - nothing on this body hangs - and it repeats the gauge's motif at
+    # the height a viewer looks, so the stack on the back is legible as "more
+    # of these" the first time it is seen.
+    # *** PASS 4, CHANGE C - THE HOOP IN THE HAND WAS THE WEAKEST OBJECT ON
+    # *** THE BODY AND IT HAS LEFT THE HAND. ***
+    # Held out flat at arm's length it was a dark ring in clear air with nothing
+    # inside it: in front.png it read as a tray or a seat, and in side.png it
+    # read as the same thing from the other end. That is the Dauber's UI fault
+    # arriving by a route I had not guarded - I banned things that HANG and then
+    # built a thing that FLOATS, which is the same defect with a different
+    # preposition. The Sealer deleted its punch for exactly this and that is the
+    # precedent here.
+    # IT IS NOT DELETED, IT IS MOVED TO WHERE IT MEANS SOMETHING: laid across
+    # the open mouth of the cask, resting on the stave tops and visibly NOT yet
+    # driven down to the courses below it. The picture it makes is the whole
+    # mechanic in one object - the next hoop, on the mouth, about to shut. It
+    # touches geometry on every side, it is still axisymmetric, and it has the
+    # staves inside it so it is no longer a ring around nothing.
+    # The right hand takes the DRIVER instead: a cooper's driver is a short
+    # thick block struck with a mallet, not a hammer - no shaft, no head on the
+    # end of a shaft, nothing that can read as an arrow or a pin.
+    limb(P, [(0.28, -0.01, SHO - 0.02), (0.40, -0.14, 1.52),
+             (0.40, -0.26, 1.300)], 0.092, 0.072, 'body')
+    P.add(L.sphere(0.078, 0.070, 0.062, 9, 7), 'body', loc=(0.402, -0.285, 1.268))
+    P.add(L.box(0.095, 0.105, 0.225), 'dark', loc=(0.402, -0.300, 1.175))
+    _close("rightarm")
+
+    _open()
+    # ---------------- THE BACK (+Y): THE TRUSSING POST AND THE FIVE-HOOP GAUGE
+    # Invisible from the front (the body is in the way) and the cask, the apron
+    # and the face panel are invisible from behind, so the two reads differ BY
+    # CONSTRUCTION. This is the Sealer's strongbox argument with an axisymmetric
+    # object in place of a planar one, which is the only change (a) asks for.
+    # *** PASS 4, part of CHANGE C. *** In pass 3's side.png the five gauge
+    # hoops were legible and the POST WAS NOT: at y 0.325 it sat inside the
+    # torso's own silhouette (the torso reaches y +0.34), so the rings read as
+    # floating beside the man, attached to nothing - a ring in clear air again,
+    # the same fault as the hand hoop, found in the same picture. Moved back to
+    # 0.44 the post clears the torso outline and the stack is plainly ON
+    # something. It is still fully hidden from the front, which is the point.
+    # *** PASS 5, CHANGE E - THE TWO HALVES OF THE MECHANIC WERE ON THE SAME
+    # *** DIAGONAL, AND THE INSTRUMENT IS WHAT FOUND IT. ***
+    # _yaw_ab.py put the worst yaw at 135 degrees with 6 240 moved pixels
+    # against 62 755 at the best: from the back-right the torso hides the cask
+    # (front-left) and the post stood dead centre, so nearly the whole mechanic
+    # went behind one body at one angle. Both halves sat on the SAME axis.
+    # So the gauge moves to his back-RIGHT while the cask stays front-LEFT -
+    # opposite quarters, and whichever way a player comes through the door one
+    # of the two is presenting. The post also stops being centred on the spine,
+    # which it had no reason to be. 0.22 in X is chosen so a sliver of the stack
+    # clears the torso from the front (hoops reach 0.426 against a torso 0.335):
+    # enough to say "there is more of this behind him", not enough to compete
+    # with the cask, and the CANON line's claim that you can count them from the
+    # door is now true from more than one door.
+    PX, PY = 0.22, 0.42
+    # Post top 1.78 - BELOW the shoulder line (1.82) and well below the head,
+    # so no part of the gauge can cross the skull in any front view. Its whole
+    # length is behind a torso 0.67 m wide and the hoops are 0.412 m across, so
+    # the stack is hidden from the front by construction rather than by luck.
+    P.raw(aim(L.cone(0.062, 0.052, 0.86, 10), (PX, PY, 0.95), (0.0, 0.0, 1.0)), 'dark')
+    P.add(L.sphere(0.082, 0.082, 0.056, 10, 7), 'dark', loc=(PX, PY, 1.782))  # post cap
+    for s_ in (-1, 1):
+        limb(P, [(s_ * 0.245, 0.04, SHO + 0.03), (s_ * 0.205, 0.265, 1.68),
+                 (PX + s_ * 0.060, 0.410, 1.46)], 0.046, 0.038, 'dark')
+    # THE GAUGE. *** PASS 6, CHANGE F - FIVE HOOPS READ AS A SPRING. ***
+    # hero_back.png is where I saw it and no number in any report says it: at
+    # stream distance five dark rings with 0.125-0.13 m gaps and a tube 0.068 m
+    # thick stop reading as five SEPARATE objects and start reading as one
+    # continuous helix - a coil, or an auger, strapped to his back. A gauge the
+    # player is told to COUNT that cannot be counted is the idea failing
+    # silently, which is this lane's Comfitmaker/Leech lesson arriving as a
+    # spacing problem rather than a colour one.
+    # So: FOUR hoops, no gap smaller than 0.19 m (nearly three tube diameters),
+    # and the biggest gap of all - 0.24 m, between the second and third - IS the
+    # empty slot, which now reads as empty because its neighbours are clearly
+    # not touching either. One is still half-driven and canted, so the stack
+    # keeps its history. Four countable things beat five uncountable ones.
+    for zz, cant in ((1.045, 0.0), (1.285, 0.0),
+                     (1.525, 0.085), (1.715, 0.0)):
+        if abs(cant) < 1e-6:
+            _ring(P, (PX, PY, zz), 0.206, axis='z', slot='dark', rad=0.038, n=22)
+        else:
+            # canted: built flat then tipped about X through its own centre, so
+            # it still touches the post and reads as half-driven rather than as
+            # a sixth object floating beside it.
+            pts = []
+            for i in range(23):
+                t = TAU * i / 22.0
+                v = Vector((0.206 * math.cos(t), 0.206 * math.sin(t), 0.0))
+                v = Matrix.Rotation(cant * 3.4, 3, 'X') @ v
+                pts.append(v + Vector((PX, PY, zz)))
+            P.raw(L.tube(pts, [0.034] * len(pts), 7), 'dark')
+    _close("gauge")
+    return P
+
+
+BUILDERS.update({"hooper": hooper})

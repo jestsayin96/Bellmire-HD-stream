@@ -396,7 +396,8 @@ const MB_FIT := {
 	"rammer": 1.12,   # S38: art's _fit_rammer_register.json pairs.rammer.ratio (MINIBOSSES.md 34), copied not re-derived
 	"beadle": 1.2,   # S35: art's _fit_beadle_register.json beadle.ratio (MINIBOSSES.md 33), copied not re-derived
 	"fuller": 1.09,   # S48: art's _fit_report.json pairs.fuller.ratio (35th, lead's 17:58 tick), copied not re-derived
-	"stackman": 1.16}   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
+	"stackman": 1.16,   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
+	"dauber": 1.05}   # S65: art's _fit_report.json pairs.dauber.ratio (37th, h 2.58, tag keep), copied not re-derived
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
@@ -414,7 +415,8 @@ const MB_NAME := {
 	"bellman": "Tolburn", "boiler": "Scaldmere", "jointer": "Halvrek", "quartermaster": "Wardgrim", "loader": "Millstone", "hurdleman": "Bramblejaw",
 	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "strickler": "Murkspit", "dyer": "Venomshade",
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw", "fenman": "Bogwarden",
-	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile"}
+	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile",
+	"dauber": "Wetwall"}   # S65: content's _note_c142 "the Dauber (Wetwall)" and art's CANON title, both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

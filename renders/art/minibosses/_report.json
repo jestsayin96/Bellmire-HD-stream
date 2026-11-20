@@ -24,9 +24,9 @@
    "gd_sha256_8": "e25c31d9",
    "gd_lid_line": "lid.position = Vector3(0, 7.0, 0)",
    "branch": "art",
-   "head": "946e6b2f9588f331a817d89bbb99ac6a82c5b94c",
+   "head": "50938c1a810c5499569f141823a9daff3b9345bd",
    "ref": "origin/main",
-   "ref_commit": "0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f",
+   "ref_commit": "0d9b243723740c80ea1958f079a5c5c8b91e491a",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": false,
@@ -2294,7 +2294,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 6.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.364,
+   "corridor_margin_m": 9.36,
    "lid": "UNDER-LID",
    "lid_clear_m": 4.08,
    "read_from": {
@@ -2320,15 +2320,62 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "hooper": {
+   "title": "Hoopfast",
+   "theme": "mess",
+   "idea": "IT CASKS ONE OF YOU - it raises a cask over one hero and drives the hoops home, and that hero is not out of the fight: they keep swinging, blind, from inside. What they lose is the party. No heal reaches them, no brew, no shout, no shield - the line can see them and cannot touch them. So the party is not choosing how to kill it, it is choosing whether to spend its swings on the staves to get one of its own back or on the Hooper while one of them fights alone in the dark. The hoops stacked on the post on its back are the gauge: one hoop is one more of you it can shut in, and you can count them the moment it turns",
+   "wear": 0.34,
+   "feed_line": "A hoop has just gone on.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2209,
+   "size": [
+    1.38,
+    1.4,
+    2.36
+   ],
+   "footprint_span": 1.4,
+   "height_m": 2.36,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 6.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.596,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 4.14,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.536381860758837,
+    "ortho": 2.7995753288269043,
+    "clip": [
+     6.609224319458008,
+     16.875896453857422
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [
-  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
+  "floorgeom provenance: floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0d9b243723740c80ea1958f079a5c5c8b91e491a sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5"
  ],
  "floorgeom_stale": true,
- "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0c5e15cbdeb0784ad13ce86d5374b6c0e43e1e7f sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
+ "floorgeom_stamp": "floorgeom DRIFTED FROM origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha e25c31d9 vs 0d9b243723740c80ea1958f079a5c5c8b91e491a sha bc3a603f  DRIFT: lid_y_m: tree 7.0, origin/main 10.0; lid_underside_m: tree 6.5, origin/main 9.5",
  "blank_check": {
-  "files": 114,
+  "files": 117,
   "failures": []
  }
 }

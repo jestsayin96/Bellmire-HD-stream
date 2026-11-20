@@ -10017,7 +10017,6 @@ NOT AUDITED: ~60 non-HUD logic gates (delve/gear/monster tests); the L654 audit 
 Files: tools/_l40_test.gd, PROGRESS.md. Not ticked by me.
 ART - 2026-11-18 02:3x CT. THE MOULDER, THE TWENTY-SIXTH MINIBOSS, AND THE
 ONE-LINE ANSWER THE 00:58 AND 01:58 SEATS BOTH ASKED FOR. (art e4e0a9a)
-================================================================================
 
 *** 1. THE ELEVEN FILES. THEY ARE MINE, AND THE ANSWER IS NOT A MOVE. ***
 
@@ -11685,3 +11684,178 @@ LOCK: claim 20:46:57, cap 21:11, declared finish 20:51, IDLE 20:48. No crossing 
 20:52.
 
 NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## B63 - 2026-11-19 17:0x CT - NO GATE RAN: THE BLENDER BRIDGE IS DOWN, AND THE DRIFT AUDIT CAUGHT MY OWN INSTRUMENT TWICE BEFORE IT CAUGHT ANYTHING ELSE
+
+ITEM: the team lead's 21:0x CHAT BOT row - "yours to choose; a second bare gate on a tree that has
+moved is worth more than a new feature". I could not run it, so I measured exactly what a second
+gate would cover and audited the three owned files instead. No code changed this cycle.
+
+THE BRIDGE IS DOWN AND THAT IS THE HEADLINE. `execute_blender_code` returned
+"Cannot connect to Blender at localhost:9876" on both attempts (23:02 and 23:04 UTC). The Blender
+MCP bridge is the ONLY way this lane launches Godot or runs git on the Windows side, so:
+NO parse gate, NO battery, NO Godot launched at all this hour. `get_device_info` reports Blender
+state "announced" - the server is registered and not answering, i.e. Blender itself is not up with
+the addon serving. This is the same failure mode as B55 (18 Nov, bridge died 12 minutes across my
+slot), except it is covering the whole slot this time.
+
+THE MOUNT PATH HAS CHANGED AND THE PROMPT'S PATH IS NOW WRONG. `$HOME/mnt/hd adventure/...` exits 1.
+The two folders are mounted SEPARATELY now: `$HOME/mnt/bellmire-bot` and
+`$HOME/mnt/jests-hd-medieval-adventure`. I did NOT ask for folder access - I listed `$HOME/mnt/`
+and found them. Every lane whose prompt hard-codes the old joined path will exit 1 on its first
+read; worth a line to the other five.
+
+GIT WORKS FROM THE LINUX SIDE AFTER ALL, AND THAT IS NEW. device_bash cannot `git -C W6` because the
+worktree's .git file holds a WINDOWS gitdir path. But overriding it works:
+    GIT_DIR=.../jests-hd-medieval-adventure/.git/worktrees/bellmire-bot GIT_WORK_TREE=.../bellmire-bot git ...
+status, log, diff and fetch all run. The main repo R needs no override (it is a real repo, not a
+worktree). This cycle's commit went through that override, not the Blender bridge. It does NOT
+replace the bridge: it still cannot launch a Windows exe.
+
+THE LOCK: I claimed NOTHING and launched nothing, so there is no RUNNING line and no IDLE line from
+me this hour. Last lane line anywhere is game build IDLE 2026-11-18T21:19:38-06:00 - on
+origin/laptop as well as in the working tree, so no lane holds the lock and no lane has touched it
+for ~20 hours. Latest commit on any branch is origin/hub 2026-11-18 21:37:51. The team has been
+dormant since last night; I am reporting that, not explaining it.
+
+WHAT A SECOND BARE GATE WOULD ACTUALLY COVER - MEASURED, SO THE NEXT RUN CAN JUDGE IT:
+merge-base(origin/chatbot, origin/main) = 7ec329d. main is 25 commits ahead, chatbot 1 ahead (the
+plan sync). 80 files differ. Of those, exactly THREE are parse-relevant:
+    M  scripts/gear.gd      (+26 -8, the S46b _Golden baseColorFactor work)
+    A  tools/_s45_artifact.gd
+    A  tools/_theme_sweep.gd
+So the delta is ONE changed .gd that the engine actually parses at startup, plus two new tool
+scripts a bare gate never loads. The S44 guard is still on main at town.gd:346/348/368 (read, not
+reported). A second gate is cheap and still worth running - gear.gd is in the startup path - but it
+is a narrow re-validation, not a broad one. Nobody should expect it to find much.
+
+OWNED FILES UNCHANGED AND PROVEN SO: chatcmd.gd 72be1e68, commands.json 0ed19140,
+COMMANDS.md 9a80bfd9 - md5 identical to what B62 published and the lead independently verified.
+Nothing drifted overnight. W6 has ZERO tracked modifications (`status --untracked-files=no` empty),
+so nothing was left in the worktree; the untracked noise is import artifacts and _sup_shot/ from
+other lanes' engine runs, none of it mine and none of it staged.
+
+THE DRIFT AUDIT, BOTH DIRECTIONS - AND MY INSTRUMENT WAS WRONG TWICE FIRST. THAT IS THE B56 LESSON
+AND IT APPLIES TO ME AGAIN:
+  Attempt 1 scanned chatcmd.gd for `"!word"` literals. It found 4 and reported 26 of 27 published
+  commands "missing". A result that says almost everything is broken is an instrument fault, not a
+  finding - the dispatch matches the verb with the `!` ALREADY STRIPPED (msg.substr(1)), so there
+  are no "!x" literals to find. Thrown away.
+  Attempt 2 walked the `match verb:` table by indentation and returned 0 groups, then 15 wrong ones.
+  Two bugs: the file indents with FOUR SPACES (labels at match+4, not match+1), and a label whose
+  body sits on the SAME line - `"enlist":   out = _enlist(...)` - does not end in a colon, so an
+  endswith(':') test drops it. That silently ate the first two commands. Thrown away.
+  Attempt 3 is the one I trust: regex on the label form, indent match+4, anchored at the table
+  inside handle() (line 128) and NOT at the two decoy `match verb:` tables - line 283 (_test_spot)
+  and line 2345 (the UI-intent mapper). chatcmd.gd's own guard at :1971 warns about exactly this
+  confusion; I walked into it anyway and only the count saved me.
+  RESULT: 29 groups, 28 dispatched primaries, 21 aliases.
+    DRIFT A (dispatched, no json entry): `testbits` ONLY.
+    DRIFT B (published entry not dispatched, not even as an alias): NONE. All 27 published commands
+      reach a handler.
+    No alias collides with a published command name. `order` carries all 27 keys, no duplicates,
+      set-equal to `commands` (its sequence differs from dispatch order by design - it is the
+      PUBLISHED order). All 27 appear in docs/COMMANDS.md.
+  So there is no real drift in either direction, and the one asymmetry is deliberate.
+
+`testbits` IS CORRECTLY FENCED AND IT MATTERS FOR THE BITS RULE, SO I READ IT RATHER THAN ASSUMING:
+chatcmd.gd:175-180. The trio `testbits`/`testsub`/`testpoints` is guarded by
+`if not user_id.begins_with("local_"): return ""` - a Twitch viewer's id never begins with
+`local_`, so no viewer can reach it; only Mr. E's local chat box can. And it FAKES the event
+(_test_spot calls bits_tier_fn and Spotlight.bits_seconds with a number) - it spends nothing and
+touches no Twitch API. That is why it is dispatched and unpublished, and it is the right shape: the
+sub path in this lane is a synthetic local event, never a purchase.
+
+NO TWITCH ANYTHING: no connection, no message posted, no redemption, no cheer, zero bits, no
+account used. Nothing was launched that could have reached a channel.
+
+OWED, UNCHANGED, AND STILL OWED: the second bare parse gate on the merged tree (its delta is
+measured above). It needs the bridge back.
+
+## B64 - 2026-11-19 17:45 CT - THE BRIDGE IS BACK, THE OWED BATTERY RAN GREEN ON THE MERGED TREE, AND MY DRIFT INSTRUMENT WAS BLIND A THIRD TIME
+
+ITEM: the team lead's 17:4x CHAT BOT row - "nothing is queued on you. With the lock free you may
+re-run your own battery on the merged tree (it now carries C-125's 128 new lines), or audit your
+own shipped work." I took both. No code changed this cycle; the three owned files are
+byte-identical to B62/B63 (chatcmd 72be1e68, commands.json 0ed19140, COMMANDS.md 9a80bfd9).
+
+THE BRIDGE IS UP AGAIN. The 17:10 CT NOTICE in RUN_LOCK.txt (bridge refusing localhost:9876) no
+longer holds: execute_blender_code answered on the first call of this run. The mount is still the
+SEPARATE layout B63 found - $HOME/mnt/bellmire-bot and $HOME/mnt/jests-hd-medieval-adventure, NOT
+the joined "hd adventure" path the prompt still names. I did not ask for folder access.
+
+I PUSHED B63 BEFORE TOUCHING ANYTHING ELSE, BECAUSE THE LEAD COULD NOT SEE IT. The 17:4x row says
+"your only unmerged commits are my plan syncs" and credits B62 as the last thing this lane shipped.
+That was true of origin: B63 (185fc836) was committed on 19 Nov at 17:0x and never pushed, because
+the bridge died before the push. A commit nobody can fetch is not a delivery. Order this run:
+merge origin/chatbot (the lead's 17:4x plan sync, 6909c78e, +411 lines of WORK_PLAN) -> merge
+origin/main -> resolve -> push. HEAD on origin/chatbot is now 7538be7a and it carries B63.
+
+THE MERGE CONFLICT WAS PROGRESS.md AND I KEPT BOTH SIDES. Four marker lines stripped, no content
+dropped, no cycle renumbered - the standing rule, applied exactly.
+
+THE BATTERY, ON THE MERGED TREE, UNDER THE LOCK (all three JESTS_NO_TWITCH=1, --headless --script):
+  - TWITCH_PARSE OK (8 checks), rc 0
+  - L14_TEST OK (22 checks), rc 0. Godot's own "ERROR: 2 resources still in use at exit" note
+    printed again and I am REPORTING it rather than hiding it: it is the engine's exit bookkeeping,
+    not a failed check, and it printed identically in B62.
+  - COMMANDS_DOC OK wrote 27 commands as a TRUE no-op: docs/COMMANDS.md md5 9a80bfd9 BEFORE and
+    9a80bfd9 AFTER. The generator still agrees with the committed bytes over the 27-command data.
+This is the C-125 tree: 128 new content lines landed in it since the last green battery, and the
+parse and the L14 nudge table are unaffected by them.
+
+THE DRIFT AUDIT, BOTH DIRECTIONS - AND THE FINDING IS AGAINST MY OWN INSTRUMENT, NOT THE CODE.
+data/commands.json parses (json.load, dict), 27 published commands, "order" has 27 and matches the
+command keys exactly, 24 aliases, every published name and every alias present in COMMANDS.md.
+My first pass reported FIVE published names with no dispatch arm - "commands", "sheet", "stats",
+"spotlight", "watch" - which would have meant a viewer typing !stats off the published doc got
+silence. IT WAS WRONG, AND I CHECKED BEFORE I WROTE IT UP. chatcmd.gd:112 is
+`var verb := canonical(String(parts[0]).to_lower())`: canonical() at :2154 resolves an alias to its
+command, AND a plural, before the match ever runs. Re-run with canonical() in the instrument:
+ZERO unanswered published names, ZERO dispatch arms that do not resolve to a published command.
+Spot-checked the resolver's own path: stats->hero, sheet->hero, commands->help, spotlight->look,
+watch->look, items->inventory, prices->satchel, heroes->hero, delves->delve, dyes->dye.
+THAT IS THE THIRD TIME IN TWO CYCLES THIS LANE'S DRIFT INSTRUMENT HAS FLAGGED ITSELF (B63 caught it
+twice). The pattern is always the same: a naive scan over quoted tokens cannot see a resolver or a
+dict. The lesson is now written down rather than re-learned: ANY drift claim on this file must run
+through canonical() first, or it is measuring nothing.
+THE ONLY ARMS WITH NO PUBLISHED ENTRY ARE THE THREE L17 TEST HOOKS - "testbits", "testsub",
+"testpoints" - and that is correct BY DESIGN, not drift: chatcmd.gd:178 returns "" unless the id
+begins with "local_", so a Twitch viewer can never reach them and they must not be published.
+
+LOCK, UNDER THE YIELD RULE: last line before mine was game build IDLE 17:08:20. Godot verified
+EMPTY on BOTH image names at 17:46:17 and again at 17:47:43. claim 17:47:15, cap (claim+25) 18:14
+computed first, BUT THE BOUNDARY IS THE HUD AT :52 AND I COMPUTED IT FIRST: declared finish 17:51.
+IDLE written at 17:47:43 - 28 seconds of engine, released early, NO crossing into :52. Nothing
+split, nothing carried.
+
+NO TWITCH ANYTHING: no connection, nothing posted, no redemption, no cheer, zero bits, no account
+used. Nothing launched this cycle could reach a channel.
+
+FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and the twitch_reply contract is
+unchanged.
+
+NOTHING IS DONE UNTIL THE SUPERVISOR TICKS IT.
+
+## C-124 (2026-11-18 21:23 CT, content) - descend +20, cleared +20, epitaphs +30, misfire +12
+ITEM: TAKE THIS NEXT 21:0x block row 2 (CONTENT) - keep producing into the proven-live list. 82 lines into pools with readers (delve.gd _pick_line descend/cleared; epitaph and misfire readers).
+MINIBOSS: no body committed beyond the Rammer on origin/art (34 keys, all have lines) - nothing owed.
+VALIDATION OK: all four data files parse; every pre-existing entry identical; only _note_c124 added. CODE WIRING IMPLIED: none.
+Next content: C-125.
+## HUB 18 Nov 21:4x CT - standing check, NO ROW OWED (plan row 4: "nothing is owed to you; stand-down written up is the delivery")
+TAKE THIS NEXT (20:0x block) row 4 HUB gave no work. web/ is byte-identical to origin/hub (git diff --stat origin/hub -- web/ = empty). node --check app.js OK.
+Greps on whole app.js: innerHTML at :255 and :301 only (page-owned literals, matches index.html comment); outerHTML 0; eval( 0; insertAdjacentHTML/document.write/new Function appear only inside the comment at app.js:10-11 saying they are absent. CSP meta intact. gh-pages still ae1a483.
+No screenshot (no web/ change). Live-dot colour unchanged. Number: 0 web/ files changed vs origin/hub. NOT claiming READY TO PUBLISH. Untracked worktree files unchanged (delete refused on this machine).
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+## HUB 19 Nov 17:5x CT - ROW 4 TAKEN: THE LORE_FROZEN REFRESH (built, applied, looked at)
+TAKE THIS NEXT (19 Nov 17:2x block) row 4 HUB gave me the LORE_FROZEN refresh. NEW web/tools/refresh_lore.py: inert, offline, per-section whitelist of exactly the fields app.js reads, drops `_` keys and *_alt pools, hard-errors on non-strings, ASCII-only output, --check exits 1 when stale. Applied to app.js: pin 1669c1b/2026-11-14 -> 9f38b9c8/2026-11-18 (last commit on data/lore_lines.json). NUMBER: strings on the page 845 -> 1215 (town_life 97->175, e3po 148->232, disasters 351->559; growth_tiers 36, lord_intros 8, unique_intros 5, events 200 unchanged). --check on the result: CURRENT. app.js 375669 bytes.
+CHECKS: node --check OK. Greps on whole app.js: innerHTML at :255 and :301 only (index.html comment still true, LORE lines are at 2791-2793 so no line moved); outerHTML/insertAdjacentHTML/document.write/new Function/eval 0 as code. ?mock=lore hostile canary renders as literal text in town + lords chapters, 0 img/onerror in any of the 5 chapters, no `_note`/`_alt` text leaked in any chapter. ?state=empty/fail/stale, ?mock=chronicle, ?mock=crowd&open=1: 0 page errors, 0 dialogs, 0 injected nodes. CSP untouched, no new fetch.
+LOOKED AT: headless Chromium, Lore > Tales screenshot - stamp reads "(9f38b9c8, 2026-11-18)", Disasters cards carry the new longer During text. WRONG WITH THE PICTURE: my own test overlay was translucent so the page shows through behind it; that is the harness, not the page. The headless run also cannot reach Supabase (egress proxy 403), so live-data panels were not exercised - only the bundled lore path, which needs no fetch. Live-dot colour unchanged (not touched). Untracked worktree files unchanged (delete refused).
+READY TO PUBLISH: viewer-visible web/ change (app.js lore text) with all checks above passing; the team lead verifies by its own grep and routes it up. Publishing is not mine.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## U86 (19 Nov 17:0x CST) - STAND-DOWN: Blender bridge down, no Godot launch and no git possible (fired 16:52 CST, read 17:01)
+Item: standing System 2 rarity-hue half (not started this firing). Checked: device_bash only mounts bellmire-hud, so R's RUN_LOCK.txt could not be read; execute_blender_code failed twice ("Cannot connect to Blender at localhost:9876"), so no tasklist, no lock claim, no Godot, no git. Did NOT claim the lock. This line is UNCOMMITTED (git via device_bash leaves .lock files). Next firing: if the Blender bridge is back, commit this line, read R's working RUN_LOCK.txt, then take the System 2 rarity-hue item.
+
+## U86 - U85 sweep gate RED-PROVEN (2026-11-19 17:5x CT, HUD firing)
+Lock was free (chat bot IDLE 17:47:43, no Godot alive); claimed 17:53:25, released ~17:57. Cause of the U85 carry: break_shift tested `l is FeedHUD`, then `_watch[0]`, and neither ever matched a rect - only 4 panel rects exist per scale (12 total, exactly the NO-VERDICT floor) so the shift never fired. Now shifts every 4th rect (`_panels % 4 == 1`). Result: break_shift -> Spotlight OFFSCREEN at 100/125/150, bad=3, THEME_SWEEP FAIL, exit 1; clean run -> bad=0, THEME_SWEEP OK, exit 0. Gate is now measured both ways. Caveat for L74: the sweep only sees 4 panels/scale (floor is 12) - FeedHUD is not among the rects it walks, so feed coverage is still unproven. Next: rarity-hue half of System 2, then L74 feed-under-load. Note gear.gd:99/104 null-instantiate noise is the known worktree import-cache gap, not HUD.

@@ -18,6 +18,13 @@
       "sep_local": 0.1415,
       "frac_flat": 0.1948,
       "touch": 421,
+      "sep_alb": 0.0356,
+      "frac_flat_alb": 0.5748,
+      "sep_chroma": 0.0118,
+      "pass_lit": 339,
+      "frac_borrow": 0.3687,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     },
     "three_quarter": {
@@ -29,6 +36,13 @@
       "sep_local": 0.1513,
       "frac_flat": 0.1504,
       "touch": 419,
+      "sep_alb": 0.0376,
+      "frac_flat_alb": 0.5537,
+      "sep_chroma": 0.0143,
+      "pass_lit": 356,
+      "frac_borrow": 0.3961,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     },
     "side": {
@@ -40,8 +54,18 @@
       "sep_local": 0.1207,
       "frac_flat": 0.2642,
       "touch": 477,
+      "sep_alb": 0.0039,
+      "frac_flat_alb": 0.7191,
+      "sep_chroma": 0.0044,
+      "pass_lit": 351,
+      "frac_borrow": 0.4644,
+      "albedo_approx_slots": [],
+      "fragile": false,
       "red": false
     }
   },
-  "red": []
+  "red": [],
+  "fragile": [],
+  "warn": [],
+  "albedo_approx_slots": []
 }

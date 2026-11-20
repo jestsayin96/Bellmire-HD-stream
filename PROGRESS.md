@@ -12405,3 +12405,7 @@ BATTERY: parse headless quit-after 300 rc=0, 0 ERROR; OFFFLOOR_VERDICT OK 0 of 2
 Looked at: renders/cycles/s58/s58_span.png - three Broodgluts side by side; refused mossbacked stands the same height as plain, drowned visibly a touch bigger.
 CANNOT SEE: the span is the T-pose AABB, the worst case; it does not parse doorways or arches. Nothing currently draws broodglut on a strain (homes []), so this is a guard ahead of the floor route, not a live fault fixed. A tracked-file write landed fine from this seat this run (bestiary.gd).
 No Twitch test, 0 bits. Nothing for Mr. E to decide.
+## C-136 (20 Nov 2026 05:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 04:58 CT) row 3, CONTENT: C-135 ticked; keep producing, keep writing _note_ keys, no phase2_words member written. No miniboss owed: by_key holds 36 and none of the committed art bodies is missing a key. Added epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks enter +3, lord +3, trap +2, hurt +3, drink +1, misfire +3 (duplicates skipped), plus _note_c136 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), top-level key order unchanged.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

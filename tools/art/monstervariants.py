@@ -55,6 +55,7 @@ import numpy as np
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import lordgen as G             # noqa: E402
+import floorgeom as FG          # noqa: E402
 
 PACK = os.path.join("C:\\", "hd adventure", "_packs",
                     "Bestiary_Dungeon_Monsters_Kit",
@@ -635,8 +636,14 @@ def fit(key, repo, prove_red=False):
         fits_standard_cell=bool((amx.x - amn.x) <= std_w
                                 and (amx.z - amn.z) <= (std_w * F.CELL_Y / float(F.CELL_X))
                                 - F.GROUND_UP),
-        corridor_clear=11.0,
-        room_locked=bool(max(info["span_x"], info["span_y"]) > 11.0),
+        # TWO TERMS, AND NEITHER IS A LITERAL ANY MORE. The old pair here was
+        # `corridor_clear=11.0` and `> 11.0`, hand-copied out of floorgen.gd,
+        # with NO height term at all - which is how Broodglut shipped GREEN at
+        # 6.60 m standing 0.10 m through a shadows-only lid at 6.50 m that no
+        # gate had measured. floorgeom reads the corridor AND the lid out of
+        # scripts/floorgen.gd per run and WITHHOLDS a verdict it cannot read.
+        **_fit_terms(info, max(info["span_x"], info["span_y"]),
+                     max(float(info["height"]), round(mx.z - mn.z, 3))),
         fits_frame=bool((amx.x - amn.x) <= F.FRAME_W
                         and (amx.z - amn.z) <= F.FRAME_H - F.GROUND_UP),
         engine=eng, views=[os.path.basename(p) for p in written],
@@ -649,8 +656,45 @@ def fit(key, repo, prove_red=False):
         theme=info["theme"], idea=info["idea"], line=info["line"],
         note=info["note"], prove_red=bool(prove_red),
     )
-    rec["ok"] = bool(not errors and not blanks and not clipped and not blind)
+    # A fit error is a verdict error. A variant whose head is in the sun-blocker,
+    # or whose verdict could not be computed at all, is NOT ok - that is the
+    # whole reason this term exists.
+    rec["ok"] = bool(not errors and not blanks and not clipped and not blind
+                     and not rec.get("fit_errors"))
     return rec, roots, meshes
+
+
+def _fit_terms(info, span, height):
+    """floorgeom's two-term verdict, flattened into the register record.
+
+    The height used is the WORSE of the authored target (what bestiary.gd will
+    carry) and the measured world height of the mesh - if those two disagree
+    the gate must answer for the taller of them, not pick the kinder one.
+
+    `fit_errors` is the honest field: a verdict the reader could not compute is
+    recorded as None WITH its reason, never as a pass.
+    """
+    geom = _fit_terms.geom if getattr(_fit_terms, "geom", None) else FG.read(_fit_terms.repo)
+    v, errs = FG.verdict(geom, span, height)
+    out = dict(
+        corridor_clear_m=v["corridor_clear_m"],
+        room_locked=bool(v["corridor"] == "ROOM-LOCKED"),
+        corridor=v["corridor"], corridor_margin_m=v["corridor_margin_m"],
+        lid_underside_m=v["lid_underside_m"], lid=v["lid"],
+        lid_clear_m=v["lid_clear_m"], gate_height_m=round(height, 3),
+        fits_dungeon=v["fits"], floor_read_from=v["read_from"],
+        fit_errors=list(errs),
+    )
+    if v["lid"] == "THROUGH-LID":
+        out["fit_errors"].append(
+            "%.2f m stands %.2f m THROUGH the lid underside at %.2f m (%s)"
+            % (height, -v["lid_clear_m"], v["lid_underside_m"],
+               v["read_from"].get("lid_y_m", "?")))
+    return out
+
+
+_fit_terms.repo = "."
+_fit_terms.geom = None
 
 
 def main():
@@ -662,6 +706,7 @@ def main():
     ap.add_argument("--fit", action="store_true")
     ap.add_argument("--prove-red", action="store_true")
     ap.add_argument("--ab", action="store_true")
+    ap.add_argument("--reverdict", action="store_true")
     # THE T-POSE IS WIDER THAN THE THIRTY-SIX'S FRAME, AND THE BORDER CHECK
     # CAUGHT IT RATHER THAN MY EYE. At 2.60 the pair spans 5.96 m against
     # minibossfit's fixed 5.60 m cell, and the front and back views lost 228
@@ -678,6 +723,8 @@ def main():
         _F.FRAME_W = args.frame
         _F.FRAME_H = args.frame * _F.CELL_Y / float(_F.CELL_X)
     keys = [k for k in args.only.split(",") if k] or list(ORDER)
+    _fit_terms.repo = args.repo
+    _fit_terms.geom = FG.read(args.repo)
     outp = os.path.join(args.repo, "renders", "art", "variants", "_register.json")
     os.makedirs(os.path.dirname(outp), exist_ok=True)
     reg = {}
@@ -688,6 +735,44 @@ def main():
         except Exception:
             reg = {}
     reg.setdefault("variants", {})
+    reg["floor_geom"] = _fit_terms.geom
+
+    # --reverdict: RE-ANSWER THE DUNGEON QUESTION FOR THE RECORDS ALREADY
+    # MEASURED, WITHOUT RE-RENDERING ANYTHING. The lid is moving (7.0 -> 10.0,
+    # supervisor 02:12 CT), so a corridor verdict written before anyone had
+    # measured the lid is a verdict against a dungeon that no longer exists.
+    # These are stored measurements of real renders: the new term costs one
+    # comparison each, and refusing to re-verdict them would leave the register
+    # asserting a pass nobody has checked against today's floorgen.gd.
+    if args.reverdict:
+        for key, rec in reg["variants"].items():
+            h = max(float(rec.get("height") or 0.0), float(rec.get("creature_h") or 0.0))
+            sp = max(float(rec.get("span_x") or 0.0), float(rec.get("span_y") or 0.0))
+            if h <= 0.0 or sp <= 0.0:
+                rec["fit_errors"] = ["carried record has no height/span - verdict withheld"]
+                rec["ok"] = False
+                continue
+            rec.update(_fit_terms({"span_x": rec.get("span_x"), "span_y": rec.get("span_y"),
+                                   "height": h}, sp, h))
+            rec["ok"] = bool(not rec.get("errors") and not rec.get("blanks")
+                             and not rec.get("frame_clips") and not rec.get("blind_views")
+                             and not rec.get("fit_errors"))
+        reg["verdict"] = ("GREEN" if all(v.get("ok") for v in reg["variants"].values())
+                          else "NOT PASSED")
+        with open(outp, "w") as f:
+            json.dump(reg, f, indent=1)
+        print("MONSTERVARIANTS_REVERDICT " + json.dumps({
+            "verdict": reg["verdict"],
+            "corridor_clear_m": _fit_terms.geom["corridor_clear_m"],
+            "lid_underside_m": _fit_terms.geom["lid_underside_m"],
+            "lid_read_at": _fit_terms.geom["at"].get("lid_y_m"),
+            "geom_errors": _fit_terms.geom["errors"],
+            "variants": {k: (v.get("gate_height_m"), v.get("lid"), v.get("lid_clear_m"),
+                             v.get("corridor"), v.get("corridor_margin_m"),
+                             v.get("fits_dungeon"), v.get("fit_errors"))
+                         for k, v in reg["variants"].items()}}))
+        return
+
     for key in keys:
         G.purge()
         if args.ab:

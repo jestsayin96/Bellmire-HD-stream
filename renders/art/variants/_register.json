@@ -160,17 +160,17 @@
    "line": "Something in here is eating the little ones.",
    "note": "ADJACENCY DECLARED RATHER THAN HIDDEN: miniboss 8, Blisterhand (ex-Cook), KEEPS THE PACK ALIVE. This is the arrow reversed - the pack keeps IT alive - so the party's decision is inverted (kill the adds, not the boss) instead of repeated. If Mr. E reads it as the same idea twice, the fix is one word in the idea string and no geometry.",
    "prove_red": false,
-   "ok": false,
+   "ok": true,
    "glb": "assets/monsters/minibosses/broodglut.glb",
    "glb_bytes": 3124424,
    "corridor_clear_m": 11.0,
    "corridor": "CORRIDOR-SAFE",
    "corridor_margin_m": 0.594,
-   "lid_underside_m": 6.5,
-   "lid": "THROUGH-LID",
-   "lid_clear_m": -0.1,
+   "lid_underside_m": 9.5,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 2.9,
    "gate_height_m": 6.6,
-   "fits_dungeon": false,
+   "fits_dungeon": true,
    "floor_read_from": {
     "cell_m": "scripts\\floorgen.gd:21",
     "wall_in_m": "scripts\\floorgen.gd:1698",
@@ -178,9 +178,7 @@
     "lid_y_m": "scripts\\floorgen.gd:1383",
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
-   "fit_errors": [
-    "6.60 m stands 0.10 m THROUGH the lid underside at 6.50 m (scripts\\floorgen.gd:1383)"
-   ]
+   "fit_errors": []
   },
   "lastcuff": {
    "title": "Lastcuff",
@@ -341,9 +339,9 @@
    "corridor_clear_m": 11.0,
    "corridor": "CORRIDOR-SAFE",
    "corridor_margin_m": 4.519,
-   "lid_underside_m": 6.5,
+   "lid_underside_m": 9.5,
    "lid": "UNDER-LID",
-   "lid_clear_m": 0.3,
+   "lid_clear_m": 3.3,
    "gate_height_m": 6.2,
    "fits_dungeon": true,
    "floor_read_from": {
@@ -356,7 +354,7 @@
    "fit_errors": []
   }
  },
- "verdict": "NOT PASSED",
+ "verdict": "GREEN",
  "ab_palette": {
   "broodglut": {
    "pixels_compared": 55907,
@@ -450,9 +448,9 @@
   "wall_in_m": 0.5,
   "hall_w": 3,
   "corridor_clear_m": 11.0,
-  "lid_y_m": 7.0,
+  "lid_y_m": 10.0,
   "lid_thick_m": 1.0,
-  "lid_underside_m": 6.5,
+  "lid_underside_m": 9.5,
   "at": {
    "cell_m": "scripts\\floorgen.gd:21",
    "wall_in_m": "scripts\\floorgen.gd:1698",
@@ -460,6 +458,8 @@
    "lid_y_m": "scripts\\floorgen.gd:1383",
    "lid_thick_m": "scripts\\floorgen.gd:1378"
   },
-  "errors": []
+  "errors": [],
+  "read_from_repo": "C:\\hd adventure\\bellmire-art\\_scratch\\lidgate\\geom_main",
+  "note": "scripts/floorgen.gd READ OUT OF origin/main e0b11257 - the art branch is 1306 commits behind and still carries lid y=7.0"
  }
 }

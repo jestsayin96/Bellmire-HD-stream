@@ -10032,3 +10032,13 @@ Pixel count (not just the log): purple pixels 1006 / 1679 / 2422 and orange 68 /
 LOOKED AT (renders/cycles/u88/u88_150.png): purple pip + purple ink on Scarglass Ring, orange pip + orange ink on Mender's Wraps, Market Seal, sword and rags bare with names aligned in the pip column, values right-aligned.
 Red proof stays the 19:56 one (argument stripped -> rc=1, 2 FAILs per scale); it is recorded in U88 above and I did not repeat it, to keep the shots intact.
 Next: L74 feed under load (make FeedHUD countable by the theme sweep). Nothing for Mr. E to decide.
+
+## U90 (19 Nov 21:5x CST) - L74 FEED UNDER LOAD: gate built, GREEN and RED-PROVEN, the feed is now measured by a harness (the U85 sweep could never see it)
+Item: TAKE THIS NEXT row 6 follow-on / L74. Lock free (chat bot IDLE 21:49:10, tasklist empty); claim 21:53:37, IDLE 21:57, cap 22:08 - inside, no crossing.
+Why the sweep was blind: FeedHUD registers with UiTheme.watch, but its panel is hidden while empty and is a Control, not a PanelContainer, so _theme_sweep _walk counted nothing from it. Rather than touch the sweep's 12-panel floor, tools/_u90_feed_load.gd raises a real flood (40 routine, 10 normal, 6 town, 4 crit, every key distinct) at UiTheme scale 100/125/150, WINDOWED 1920x1080, 420 frames each.
+Per frame it asserts: lines DRAWN <= _cap() (first draft counted _shown and false-failed at 150%: _shown keeps the dwell clock while the drawing is trimmed - the gate was wrong, not the feed), pending <= QUEUE_MAX, every label and the panel inside the viewport. End: dropped_protected == 0 and all 4 crit lines ADMITTED.
+GREEN: FEED_LOAD OK rc=0, labels=3566 panels=1260 fails=0, stats admitted 7 / merged 20 / dropped 151 / dropped_protected 0, by_pri [0,1,2,4], min_gap 0.80s (PACE_S holds under 187 raised lines). RED-PROOF: arg "break" shrinks the allowed rect -> rc=1, fails=4967, own shot names (u90_break_*), so it cannot overwrite the green capture (U88 lesson).
+LOOKED AT (renders/cycles/u90/u90_run_125.png and _150.png from the first run, same behaviour): Chronicle shows two whole entries, crit "Brother Ember/Thistle has fallen to the raiders ... x2" wrapped on two lines with no ellipsis, routine lines dropped first, parchment ink/fade intact, strip centred at the cross of the panes.
+Parse: bare headless rc=0; only the known worktree import-cache 'instantiate on null' lines (not HUD).
+Not done: UI-scale sweep still has the <12 panels floor; feed_hud.gd unchanged this cycle (no defect found). Next firing: L74 theme readability of LeaderboardPanel/hud_dock at 125/150 under a long name roster.
+Nothing for Mr. E to decide.

@@ -898,7 +898,15 @@
     "Boots find the first step, then the second.",
     "The gate-keeper chalks a mark on the post.",
     "Behind them the day gets small.",
-    "Nobody speaks until the landing."
+    "Nobody speaks until the landing.",
+    "The rope creaks and takes the weight.",
+    "Somebody checks the buckle twice.",
+    "The last of the daylight stays on the stair.",
+    "A dog follows to the gate and sits.",
+    "The lamp is trimmed. Nobody says why.",
+    "Cold air comes up to meet them.",
+    "The guard leans on his spear and counts them in.",
+    "Step by step. Nobody hurries."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1310,7 +1318,13 @@
     "They sit a moment. Then they stand.",
     "One of them finds a coin and keeps quiet about it.",
     "Wounds are bound. Straps are tightened.",
-    "The way back is chalked on the wall."
+    "The way back is chalked on the wall.",
+    "The lamp is topped up. The breath comes slow.",
+    "Somebody laughs, short, and stops.",
+    "Packs are shifted and straps are mended.",
+    "They count what is left, and what is not.",
+    "A bandage, a swallow of water, a nod.",
+    "The quiet is a different quiet now."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -1812,7 +1826,10 @@
       "Chalk first, courage after.",
       "Lamp up. Eyes open.",
       "One step, then the next.",
-      "Count the doors as we pass."
+      "Count the doors as we pass.",
+      "Quiet feet. Quiet hands.",
+      "Lamp low, ears up.",
+      "In we go. Stay close."
     ],
     "lord": [
       "Hold together!",
@@ -2093,7 +2110,10 @@
       "Nobody run. Nobody.",
       "Breathe. Then raise the shield.",
       "That is no common thing. Mind your feet.",
-      "Stand together. It is bigger than it looks."
+      "Stand together. It is bigger than it looks.",
+      "Steady. Do not look at its hands.",
+      "Shields up. Slow breaths.",
+      "Together now. Do not scatter."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2377,7 +2397,10 @@
       "Hold. The wall is listening.",
       "The dust is too even.",
       "Wire. Stop. Do not breathe on it.",
-      "Floor sounds hollow. Go round."
+      "Floor sounds hollow. Go round.",
+      "A click. Everybody freeze.",
+      "The stone is warm. That is wrong.",
+      "Mind the floor. Mind it twice."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2654,7 +2677,10 @@
       "Still on my feet. Mostly.",
       "Tell the healer I was brave.",
       "It is only blood. I have more.",
-      "Bind it and move on."
+      "Bind it and move on.",
+      "That one stung. I will live.",
+      "Not deep. Not good either.",
+      "Hold my lamp. I need a moment."
     ],
     "drink": [
       "Bottoms up.",
@@ -2921,7 +2947,10 @@
       "Down in one. Do not taste it.",
       "Tastes like pennies and mint.",
       "Warm going down. Good.",
-      "Thin, but it will do."
+      "Thin, but it will do.",
+      "Bitter, but it works.",
+      "Cold and sweet. Good.",
+      "One swallow and the ache eases."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -3200,11 +3229,15 @@
       "Not a word. Not one.",
       "Again, and slower.",
       "The words slipped. Try again.",
-      "Nothing. Hold the line."
+      "Nothing. Hold the line.",
+      "Lost it. Go again.",
+      "The words will not come.",
+      "Nothing. Keep your guard up."
     ],
     "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key.",
     "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
-    "_note_c133": "C-133: small additions to existing barks pools; no new readers."
+    "_note_c133": "C-133: small additions to existing barks pools; no new readers.",
+    "_note_c134": "C-134 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key; Broodglut and Lastcuff are bestiary pack-variants, not feed bodies). Small top-up of pools the engine already reads: epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key."
   },
   "misfire": [
     "%s's %s goes wrong - the scar answers (%d vs DC %d).",
@@ -3358,7 +3391,12 @@
     "%s reaches for %s. It is not there (%d vs DC %d).",
     "%s tries %s with cold fingers and it fails (%d vs DC %d).",
     "%s casts %s and the lamp flickers, nothing more (%d vs DC %d).",
-    "%s stumbles over %s at the last word (%d vs DC %d)."
+    "%s stumbles over %s at the last word (%d vs DC %d).",
+    "%s starts %s and the thought slides away (%d vs DC %d).",
+    "%s mutters %s and nothing answers (%d vs DC %d).",
+    "%s reaches the end of %s and finds a blank (%d vs DC %d).",
+    "%s grips %s too hard and it snaps off (%d vs DC %d).",
+    "%s calls up %s and gets a cough of smoke (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -4014,7 +4052,21 @@
     "Paid the ferryman in advance.",
     "Whistled once. The tune was not finished.",
     "Wrote home on Tuesday. Left on Wednesday.",
-    "Held the door for the others."
+    "Held the door for the others.",
+    "Left the good boots to the boy.",
+    "Salted the stair so nobody would slip.",
+    "Mended the ladder before going down it.",
+    "Shared the last of the bread.",
+    "Told the others to go on. They did.",
+    "Marked every turning. Missed one.",
+    "Kept the rope tight. It held longer than he did.",
+    "Counted heads at the landing. Was one short.",
+    "Never asked for the bigger share.",
+    "Lit the second lamp for the one behind.",
+    "Swept the guild floor on the way out.",
+    "Said the hole was just a hole.",
+    "Carried the water. Carried the wounded.",
+    "Went down singing under the breath. Stopped."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",

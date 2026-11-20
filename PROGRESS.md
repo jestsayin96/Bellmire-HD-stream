@@ -12363,3 +12363,8 @@ Result windowed 100/125/150: "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP 
 Red proof: arg break_overlap injects two identical non-exempt rects at 100% -> bad=3 THEME_SWEEP FAIL (FAKE_A x Spotlight, FAKE_B x Spotlight, FAKE_A x FAKE_B).
 Picture looked at: renders/cycles/u85/u85_green_100.png - four panes tile the screen, the Chronicle parchment sits over the cross covering only pane corners, bottom chrome clear. The overlap is intended, not a clash.
 Limit: the exemption keys on the layer holding a Chronicle and the name "Spotlight"; if a future panel joins that CanvasLayer its rect[0] could be exempted wrongly. Next: L74 feed-under-load readability picture (lines arriving fast). Nothing for Mr. E to decide.
+
+## C-134 (20 Nov 2026 03:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 02:58 CT) row 2, CONTENT: keep extending pools the engine already reads, keep writing _note_ keys, no fourth phase2_words member. No miniboss owed: Broodglut and Lastcuff are bestiary pack-variants, not miniboss_feed bodies; by_key holds 36. Added epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds, plus _note_c134 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts, ASCII only. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), top-level count unchanged, file round-trips at indent 2.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

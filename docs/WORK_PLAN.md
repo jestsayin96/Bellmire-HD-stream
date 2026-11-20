@@ -1,3 +1,110 @@
+## TAKE THIS NEXT - written 2026-11-19 20:1x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 19:58 FIRING. ALL SIX LANES SHIPPED. I TICKED FOUR AND HELD TWO, AND
+**HUB PUBLISH 5 IS DONE** - gh-pages 05ac2679, tree 9ca8051e, EQUAL to origin/hub:web, fast-forward
+proved. Supervisor authorised it at 19:28 CT; I ran the whole gate myself before pushing.
+main 9289cb8b -> 1943c665 (six merges), pushed.
+
+1. GAME BUILD - **S48 IS TICKED, AND I RE-DID YOUR ARITHMETIC RATHER THAN READING YOUR VERDICT.**
+   MB_FIT fuller 1.09 and stackman 1.16 are EXACTLY renders/art/minibosses/_fit_report.json
+   pairs.<key>.ratio - I opened the register and compared, I did not trust the "copied not
+   re-derived" comment. The theme rows are right: fogbound gained `fuller` (content's C-126 lines
+   are in, so the gate opens) and grassland gained `stackman` - and CONTENT WROTE C-127 THIS SAME
+   HOUR, so the Stackman's gate is open too and BOTH 35th and 36th are now live, not on disk.
+   I looked at renders/cycles/s48/stackman_1front.png myself: it stands on the floor beside the
+   hero at the right ratio, hat brim and down-reaching fork legible, sheaves spilling from the
+   broken band.
+   NEXT, AND I AM SAYING OUT LOUD HOW I READ THE FREEZE: System 7 is MR. E'S OWN numbered system
+   and ART HAS DELIVERED ITS ART HALF. Its ENGINE half lives in YOUR files, so assigning it to you
+   is the half-of-an-existing-item judgement, not a new item.
+   (a) The five bodies in assets/gear/armour/ have NO .glb.import sibling - the Fuller fault
+   exactly, and ART NAMED IT ITSELF rather than leaving it to be found. Generate them in a run you
+   are already making; it is one headless import.
+   (b) DO NOT WIRE THE CUT MAPPING YET. Art's own write-up lists SIX fit faults it found and I
+   reproduced two of them with my own eye (see row 3). Wiring a shell that does not fit yet buys
+   nothing. Generate the imports, say so, and hold the gear.gd entry until art re-renders.
+
+2. CONTENT - **C-127 IS TICKED, COUNTED OFF THE FILE BY ME.** miniboss_feed.by_key is 36, the
+   `stackman` key is present, its block is arrive 9 / act 6 / broken 4 / fall 8 exactly as you
+   reported, json.load passes. Your lines are what opened the game build's draw gate the same hour -
+   the 36th went from on-disk to live because you wrote them.
+   NEXT: C-128, full rate. Keep nesting your `_note_` keys under their section as you did for
+   c126 and c127; it keeps the dead-data top-level count honest and no lane is to wire them.
+
+3. ART - **SYSTEM 7 IS HALF DELIVERED AND I AM NOT TICKING IT - YOUR OWN JUDGEMENT, CONFIRMED BY
+   MY OWN EYE.** You shipped the five Quaternius shells, the licence line, a full measure/probe/fit
+   register and a four-scale sweep, and then you WROTE DOWN SIX FAULTS instead of claiming a pass.
+   I opened two of your renders and both faults are real: fit/Armor_Leather_back.png shows the
+   hero's own grey back panel and belt plainly INSIDE the brown wrap with the arms hanging outside
+   it, and fit/Armor_Golden_front.png shows the grey arms outside the shell, the hem past the belt
+   onto the legs, and the lower gold spurs hanging beside the hips with air behind them. FIT IS THE
+   ACCEPTANCE TEST and it is not passed yet. Naming it yourself is the right behaviour and it is
+   why this row is a continuation and not a charge.
+   NEXT: the fit pass - arms through the shell's openings, hem above the belt, horns/spurs
+   anchored, leather closed at the back - then re-render front/side/back and the sheet.
+   AND ONE MECHANICAL FIX THAT IS MINE, NOT YOURS: you were right not to claim the Godot lock
+   blind, and the reason you gave is a fault in your tooling that I own. **THE LIVE RUN_LOCK.txt IS
+   R'S WORKING COPY - "$HOME/mnt/hd adventure/jests-hd-medieval-adventure/docs/RUN_LOCK.txt" - AND
+   IT IS OFTEN UNCOMMITTED.** The copy in your own worktree is stale by days and always will be.
+   Read R's working copy from now on; you will not have to stand down blind again.
+
+4. HUB - **PUBLISHED. publish 5 went out at 20:1x CT and the merged-not-published delta is now
+   ZERO.** gh-pages 05ac2679 carries tree 9ca8051e, which EQUALS origin/hub:web; the push was a
+   fast-forward from ae1a4831 and index.html is at the ROOT of the branch. What I checked myself
+   before pushing, not from your word: the two innerHTML sites in app.js are both page-owned
+   (status line :255, "nothing yet" :301) and every other match is a comment; no
+   insertAdjacentHTML, document.write, eval or new Function outside comments; the only .href
+   assignment is gated on /^https:\/\/(www\.)?twitch\.tv\//; the only .src is a page-constant
+   whitelist path; the CSP is intact and strict (default-src 'none', script-src 'self',
+   style-src 'self', base-uri 'none', form-action 'none'); all seven state URLs load with the CSP
+   present and no script error; a hostile name rendered as LITERAL TEXT and created zero elements;
+   and I RED-PROVED THE CSP by injecting an inline <style> - it was REFUSED citing style-src
+   'self' and the background never moved. I looked at a 1440x1000 screenshot.
+   AND THE PIN QUESTION IS SETTLED AGAIN ON NEWER DATA THAN THE AUTHORISATION: I re-implemented
+   refresh_lore.py's per-section whitelist myself and the page object and the rebuild are DEEP
+   EQUAL at 1215/1215 strings on the merged tree carrying C-125, C-126 AND C-127.
+   NEXT: nothing is queued for you. Stand down in writing, or audit your own web/.
+
+5. CHAT BOT - **B66 IS TICKED, AND I PROVED THE NO-CHANGE CLAIM OFF THE REF RATHER THAN OFF YOUR
+   md5s:** the whole merge-base diff of 9b41c1b6 is PROGRESS.md, one file, 21 insertions. Four
+   owed gates green and every one reported by its VERDICT LINE.
+   NEXT - AND THIS IS THE SUPERVISOR'S OWN 19:28 DIRECTIVE, SO IT IS NOT A NEW ITEM: the three new
+   commands that were rowed for you - gear, town, bestiary. Start them this cycle. Keep to your :45
+   window and split rather than cross.
+
+6. HUD - **U88 IS NOT TICKED, AND THE REASON IS THE PICTURE, NOT THE CODE.** The code is right and
+   I verified it by reading rather than by trusting: `_piece` really does take a 4th `rarity`
+   param (leaderboard_panel.gd:193), UiTheme.rarity_pip returns null for a bare rung so commons
+   stay bare by design, items.json accessories carry a rarity on 254 of 254, and your three probe
+   items are very rare / legendary / common exactly as the harness assumes. The gate is honest and
+   the red proof is real.
+   **BUT THE THREE COMMITTED SHOTS ARE THE RED-PROOF CAPTURE, NOT THE GREEN ONE.** I scanned all
+   three myself: ZERO purple pixels anywhere in u88_100, u88_125 and u88_150, nothing in the pip
+   column but parchment, and EVERY row's text is the identical default ink (41,25,15) - Scarglass
+   Ring is not tinted either. Your PROGRESS line says you looked and saw a purple pip and purple
+   ink on that file; that cannot be true of the file that is committed. THE MECHANISM IS PLAIN AND
+   IT IS NOT DISHONESTY: your red run writes to the SAME three paths and only quits after saving
+   all three, so it overwrote the green capture.
+   NEXT, AND IT IS SMALL: give the red proof its own output directory (or run the green capture
+   LAST), re-run, LOOK at the result, and this ticks. It is the most valuable open item in the
+   house and it is one run away.
+
+FOR THE SUPERVISOR
+- **HUB PUBLISH 5 IS DONE** under your 19:28 authorisation: gh-pages ae1a4831 -> 05ac2679,
+  fast-forward, tree equal to origin/hub:web, full gate run by me and the CSP red-proved. The
+  merged-and-not-published delta is now zero. One blemish of mine in that commit message: a literal
+  "%s" where the source SHA should read. The source was origin/hub 34bb4ad0. I am NOT rewriting
+  history to tidy it.
+- **SYSTEM 2'S HUD HALF IS STILL OPEN, AND ONLY ON EVIDENCE.** The one-argument wiring landed and
+  reads correct; what is missing is a screenshot that shows the pip, because the lane's red proof
+  overwrote its own green capture. One re-run.
+- **SYSTEM 7 IS HALF DELIVERED.** Art shipped five armour shells and named six fit faults itself;
+  I reproduced two with my own eye. Imports are owed and I have rowed them to the game build.
+  Recommendation: leave it with art for the fit pass rather than wiring a shell that does not fit.
+- One against my own instruments, reported before anything else: my first security grep read
+  `origin/hub:app.js` instead of `origin/hub:web/app.js` and returned EMPTY - it would have
+  reported a clean CSP and zero innerHTML on ZERO BYTES. A size assertion caught it before it
+  reached a verdict. A command that produces no value is RED, not clean.
+
 ## TAKE THIS NEXT - written 2026-11-19 18:5x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 18:58 FIRING. ALL SIX LANES SHIPPED AND I TICKED FIVE OF THE SIX. The Blender bridge
 is UP and answered every git call. main ee038fc9 -> e3ad43f3, pushed.

@@ -607,3 +607,15 @@ IDLE 2026-11-19T21:57:25-06:00 - HUD U90: feed-under-load gate GREEN (FEED_LOAD 
 RUNNING 2026-11-19T22:07:50-06:00 (game build S-next: fetch/merge, read TAKE THIS NEXT, then item work; claim 22:07:50, claim+25 cap 22:32:50, declared finish 22:32). Last lock line = IDLE 2026-11-19T21:57:25-06:00 HUD U90, tasklist shows ZERO Godot.
 
 IDLE 2026-11-19T22:15:36-06:00 - game build S51: miniboss rename part 1 engine half (delve.gd MB_NAME, 36 names; trade keys unchanged), laptop 0b3f8cbf. All gates green, S51_SHOT OK (nameplate reads Ordrik). Claim 22:07:50, cap 22:32:50, declared 22:32, released early, no crossing. Godot EMPTY. No twitch (JESTS_NO_TWITCH=1), 0 bits, nothing posted. (game build)
+
+RUNNING 2026-11-19T22:53:50-06:00 (HUD U91 long-name gate, claim 22:53:50, cap +15, expected finish 22:59)
+
+RUNNING 2026-11-19T22:57:13-06:00 (HUD U91 relaunch, claim 22:57:13, cap 23:08, expected finish 23:04)
+
+RUNNING 2026-11-19T22:57:35-06:00 (HUD U91 relaunch 2 after my own parse error, claim 22:57:35, cap 23:08, expected finish 23:03)
+
+IDLE 2026-11-19T22:59:11-06:00 - HUD U91: long-name flood gate GREEN (LONGNAME OK rc=0, 15697 labels, 0 HUD fails) and RED-PROVEN (break -> rc=1). One foreign finding: rts_camera.gd clock label overhangs viewport bottom at 150%. Claim 22:53:50, cap 23:08, no crossing. Godot EMPTY. (HUD)
+
+RUNNING 2026-11-19T23:08:20-06:00 (game build S52, claim 23:08:20, cap 23:33, expected finish 23:30)
+
+IDLE 2026-11-19T23:14:52-06:00 - game build S52: MB_NAME drizzler->strickler (Murkspit live), S51 gate key-set vs by_key/MB_FIT/glb + drizzler red-proof; S51_NAMES OK 152, S52_SHOT OK, battery green; pushed a2d6ab2e. Claim 23:08:20, cap 23:33, no crossing. Godot EMPTY. (game build)

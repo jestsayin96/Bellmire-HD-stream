@@ -403,13 +403,16 @@ const MB_FIT := {
 ## content's miniboss_feed.by_key key - so nothing that finds a body or a line moves. Only what
 ## a viewer READS changes: the nameplate, the "holds this chamber alone" line. A proper name
 ## takes no "The". These are PROPOSALS and Mr. E has final say: change a name HERE, one place.
-## A key missing from this table (strickler has no row in the directive) falls back to the old
-## capitalised trade word, so an unnamed body still stands up rather than going nameless.
+## A key missing from this table falls back to the old capitalised trade word, so an unnamed body
+## still stands up rather than going nameless. S52: row 23 of the directive's old-name column
+## reads "Drizzler" - there is no such key; the live body is `strickler` (CANON 23, by_key, .glb).
+## tools/_s51_names.gd now asserts this table's KEY SET against content's by_key, MB_FIT and the
+## .glb stems on disk - never against a second copy of itself.
 const MB_NAME := {
 	"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "Shacklemaw", "snuffer": "Duskhollow", "sexton": "Gravrik", "porter": "Drudgewall",
 	"tallyman": "Velmok", "cook": "Blisterhand", "sluicekeeper": "Rothenwell", "sower": "Thorncast", "snarer": "Griplash", "stoker": "Cindrak",
 	"bellman": "Tolburn", "boiler": "Scaldmere", "jointer": "Halvrek", "quartermaster": "Wardgrim", "loader": "Millstone", "hurdleman": "Bramblejaw",
-	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "drizzler": "Murkspit", "dyer": "Venomshade",
+	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "strickler": "Murkspit", "dyer": "Venomshade",
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw", "fenman": "Bogwarden",
 	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile"}
 static func miniboss_name(key: String) -> String:

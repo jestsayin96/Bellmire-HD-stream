@@ -12571,3 +12571,52 @@ Godot process check: both `Godot_v4.7.2-stable_win64_console.exe` and `..._win64
 Nothing for the GAME BUILD lane in twitch_eventsub.gd. No live Twitch test this cycle: no account used, no bits
 spent, nothing redeemed, nothing posted.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## B79 (20 Nov 2026 07:4x-08:0x CST) - THE DISCRIMINATOR CAME BACK 23, AND ONE RED ARM PROVED THE NEW CHECK ALONE
+
+B78's discriminator was stated before the gate ran, so it could not be fitted afterwards: with the guard-faults
+patch in place `tools/_l14_test.gd` must print **23 checks**, not 22. It printed **L14_TEST OK (23 checks)**,
+rc 0, 23 `ok` lines, zero FAIL. The patch Mr. E landed live is not decorative and it is not inert: the first
+line of the log is now `ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`. After five hours of
+plan rows reading "a live signal with no reader", `guard_faults()` has a reader and the reader is in a battery.
+
+THE WHOLE OWED BATTERY, GREEN, ON THE MERGED TREE (4cb7bda8, `git merge origin/main` -> Already up to date):
+  - parse `--headless --path W6 --quit-after 300` -> rc 0, **zero ERROR**, zero SCRIPT ERROR.
+  - `tools/_l14_test.gd` -> **L14_TEST OK (23 checks)**, 71 verbs, missing [], unanswered [].
+  - `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**, PASS 1-7b.
+  - `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 31 commands**, `docs/COMMANDS.md` sha256 `edff7faa`
+    before and after - a true no-op confirmation, not a rewrite.
+  - `_b2_ask.gd` absent from the worktree root, no `.b2_*` logs.
+
+THE RED ARM, AND I BUILT IT TO ISOLATE THE NEW CHECK RATHER THAN TO TRIP EVERYTHING. B77's red arm renamed a
+command and failed three checks at once, so no single check could be credited. This one changes PROSE ONLY:
+`satchel`.what `priced at two fifths of its shop cost` -> `priced at a fair share of its shop cost`, one
+occurrence, in place, in a tracked file. The command set is untouched - 31 commands, 31 order entries,
+`set(order) == set(commands)` still exact, sha256 `dbeb5517` -> `f9704381`. The result:
+  **L14_TEST FAIL 1 (23 checks)** - rc 1, **22 ok, exactly ONE FAIL**, and it is the new one:
+  `FAIL no COMMANDS_DATA guard arm fired on the load (1 fired: ["SATCHEL ANCHOR"])`,
+  with the arm's own two stderr lines naming SELL_BACK 0.4. The other 22 checks stayed green, so the failure is
+  attributable to the patched check and to nothing else. The new check is load-bearing, measured, not asserted.
+REVERTED IN THE SAME RUN: `git checkout -- data/commands.json docs/COMMANDS.md` -> data sha256 back to
+`dbeb5517`, doc back to `edff7faa`, `git status --porcelain` on all three owned files **clean**, and L14_TEST
+re-run GREEN at **23 checks**, rc 0.
+
+AND A GAP THE RED ARM FOUND THAT I AM REPORTING, NOT FIXING (the freeze forbids inventing work). While the
+drifted prose was live I ran the generator: `docs/COMMANDS.md` **CHANGED**, `edff7faa` -> `00014f22`. So the
+generated doc DOES carry the `what` prose - and yet L14_TEST's own doc check, `docs/COMMANDS.md carries every
+command from the data`, stayed **GREEN** through the drift. That check reads command NAMES, not published words.
+Prose drift between `data/commands.json` and the committed doc is caught by NO gate in this lane; the only thing
+that caught this edit was the guard arm, by the SELL_BACK anchor, down a different road entirely. The check's
+name is wider than the check. Nobody is charged - the generator is the authority and it was right both times.
+
+MY OWN WRITING DEFECT FROM B77, FIXED AT THE WRITER AND NOT AT THE LINE. The 06:58 row was right: B77's last
+lock line read literally `IDLE %s - chat bot B77: ...` - a format placeholder that never got its argument, in
+the one file Mr. E's yield rule reads to decide liveness. The fix is not "be careful": the lock writer now
+computes the stamp first, then refuses to write at all -
+  `assert not [t for t in ("%s","%d","%r","{}","{0}") if t in line]` and `assert "None" not in line`
+- so an unformatted placeholder cannot reach `docs/RUN_LOCK.txt` from this lane again. Both of this cycle's
+lock lines carry a stamp read off the machine with its offset.
+
+Lock: claim 07:47:09 -06:00, cap 08:15, declared 08:05, released early, no crossing. Godot EMPTY at claim
+(`tasklist /FI "IMAGENAME eq Godot*"` -> no tasks). Lock read from R's WORKING tree; last line before mine was
+game build's IDLE 07:15:02. No Twitch contact, 0 bits, nothing posted, no reward touched.

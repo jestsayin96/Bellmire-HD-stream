@@ -171,6 +171,74 @@ def place(roots, dx, dy=0.0):
     bpy.context.view_layer.update()
 
 
+# =====================================================================
+# EVEN LIGHT - THE BACK VIEW HAS NEVER BEEN LIT, AND I MEASURED IT RATHER
+# THAN NOTICED IT.
+# =====================================================================
+# 20 Nov 16:4x CT. `lordgen.add_lights` puts the whole rig in WORLD space and
+# never moves it: key SUN from (0.9, -1.0, 0.85) and fill AREA from
+# (-1.0, -0.6, 0.35) both sit on -Y, the FRONT, and the only lamp on +Y is the
+# rim - whose colour is the creature's own `aura`. The camera orbits; the rig
+# does not. So in the back view (az 180) the subjects are lit by ONE COLOURED
+# LAMP and nothing else.
+#
+# THE PROOF IS THE HERO, NOT THE CREATURE, BECAUSE THE HERO IS THE SAME OBJECT
+# IN ALL 41 CELLS. Mean RGB of the identical KayKit Knight, measured off the
+# shipped renders:
+#     beadle  front 108/105/108  ->  back 121/ 76/ 56   (aura 1.00,0.74,0.26)
+#     leech   front 109/105/109  ->  back 120/ 53/ 48   (aura 1.00,0.22,0.14)
+#     dyer    front 108/105/110  ->  back  75/ 67/ 90   (aura 0.26,0.46,1.00)
+# One body, one material, three back views - amber, red and blue, and the hue
+# is the CREATURE'S AURA every time. Not one back render in this file shows a
+# true value. Every judgement this house has made off a back view - mine, and
+# the team lead's "the Beadle reads the same from front and back" - was made
+# through a single coloured lamp.
+#
+# THIS IS TRAP 5 AGAIN: an instrument that cannot SEE is not a pass. The fix
+# is to carry the key and fill round with the camera so every view is lit the
+# same way relative to the viewer, which is the question a contact sheet is
+# asked. The rim travels too, so it stays a rim and does not become a key.
+#
+# DEFAULT OFF ON PURPOSE. Turning it on changes every pixel of every hero view
+# in the tree; that is a 41-body re-render and a separate decision, not
+# something to slip in under a Beadle fix. `--evenlight` / MBFIT_EVENLIGHT=1.
+EVENLIGHT = os.environ.get("MBFIT_EVENLIGHT", "0") != "0"
+
+_LIGHT_SPECS = (("key",  (0.9, -1.0, 0.85), 'SUN',  2.3, None),
+                ("fill", (-1.0, -0.6, 0.35), 'AREA', 1.0, (0.72, 0.80, 1.0)),
+                ("rim",  (0.1, 1.0, 0.55), 'AREA', 1.0, "aura"))
+
+
+def even_lights(center, radius, aura):
+    """The same three lamps lordgen makes, but kept as objects so the view
+    loop can carry them round with the camera. Returns [(obj, base_dir)]."""
+    made = []
+    for name, d, kind, e, col in _LIGHT_SPECS:
+        li = bpy.data.lights.new("even_" + name, type=kind)
+        li.color = aura if col == "aura" else (col or (1.0, 0.97, 0.92))
+        if kind == 'SUN':
+            li.energy = e
+        else:
+            li.energy = 1400.0 * (radius / 3.0) ** 2 * (0.85 if name == "rim" else 0.75)
+            li.size = radius * 2.2
+        ob = bpy.data.objects.new("even_" + name, li)
+        bpy.context.collection.objects.link(ob)
+        made.append((ob, Vector(d).normalized()))
+    return made
+
+
+def aim_lights(lights, center, radius, az_deg):
+    """Spin the rig about Z by the camera's azimuth. At az 0 this reproduces
+    lordgen's world-fixed placement EXACTLY, which is what makes the front
+    view the control in an A/B: only the back and side can move."""
+    a = math.radians(az_deg)
+    ca, sa = math.cos(a), math.sin(a)
+    for ob, d in lights:
+        dv = Vector((d.x * ca - d.y * sa, d.x * sa + d.y * ca, d.z)).normalized()
+        ob.location = center + dv * (radius * 4.0)
+        ob.rotation_euler = dv.to_track_quat('Z', 'Y').to_euler()
+
+
 def _shot(path, hide=()):
     """One render with `hide` taken out of it, restored afterwards."""
     for o in hide:
@@ -204,8 +272,10 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
 
     mn, mx, _ = G.world_bounds(objs)
     radius = max(0.5, (mx - mn).length / 2.0)
-    G.add_lights(Vector(((mn.x + mx.x) / 2.0, (mn.y + mx.y) / 2.0, (mn.z + mx.z) / 2.0)),
-                 radius, aura)
+    lcent = Vector(((mn.x + mx.x) / 2.0, (mn.y + mx.y) / 2.0, (mn.z + mx.z) / 2.0))
+    rig = even_lights(lcent, radius, aura) if EVENLIGHT else None
+    if rig is None:
+        G.add_lights(lcent, radius, aura)
 
     cam_d = bpy.data.cameras.new("cam")
     cam_d.type = 'ORTHO'
@@ -220,6 +290,8 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
     creature = list(creature)
     hero_meshes = list(hero_meshes)
     for vname, az in views:
+        if rig is not None:
+            aim_lights(rig, lcent, radius, az)
         a, e = math.radians(az), math.radians(6.0)
         dirv = Vector((math.sin(a) * math.cos(e), -math.cos(a) * math.cos(e),
                        math.sin(e))).normalized()
@@ -367,7 +439,14 @@ def main():
     # each hides the other. A gate that has never been seen to fail is not
     # known to be able to. This flag must never be used for a shipped register.
     ap.add_argument("--prove-red", action="store_true")
+    # A/B ONLY. --evenlight carries the key/fill/rim round with the camera (see
+    # the EVEN LIGHT note above); --tag writes into <key><tag>/ so an A/B can
+    # never overwrite a shipped render.
+    ap.add_argument("--evenlight", action="store_true")
+    ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
+    if args.evenlight:
+        globals()["EVENLIGHT"] = True
     if args.prove_red:
         globals()["PROVE_RED"] = True
     if args.frame > 0.1:
@@ -401,7 +480,7 @@ def main():
                 allo = objs + hmesh
                 bpy.context.view_layer.update()
                 amn, amx, pts = G.world_bounds(allo)
-                outdir = os.path.join(args.repo, "renders", "art", "minibosses", key)
+                outdir = os.path.join(args.repo, "renders", "art", "minibosses", key + args.tag)
                 os.makedirs(outdir, exist_ok=True)
                 tmpdir = os.path.join(args.repo, "renders", "art", "minibosses", "_vis_tmp")
                 os.makedirs(tmpdir, exist_ok=True)

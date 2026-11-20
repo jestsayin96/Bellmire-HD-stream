@@ -686,25 +686,40 @@ class ManaStrip extends CanvasLayer:
 	## "br" - the plate was MEASURED on screen but drawn UNDER the card. Slide it to the first
 	## spot in the pane that touches neither the boss card nor the Chronicle box.
 	func _clear_of_boss(p: PanelContainer, r: Rect2) -> void:
-		var boss := Rect2()
-		for b in get_tree().get_nodes_in_group("hud_boss"):
-			var pl = b.get("_plate")
-			if pl is Control and (pl as Control).is_visible_in_tree():
-				var xf := (pl as Control).get_global_transform()
-				boss = Rect2(xf.origin, (pl as Control).size * xf.get_scale())
-		if boss.size.x <= 0.0:
+		## U108: blockers are the boss card AND the NOW FIGHTING banner (group hud_fightbanner,
+		## both read-only), every visible one, not just the last boss plate seen.
+		var blk: Array[Rect2] = []
+		for g in ["hud_boss", "hud_fightbanner"]:
+			for b in get_tree().get_nodes_in_group(g):
+				var pl = b.get("_plate")
+				if pl is Control and (pl as Control).is_visible_in_tree():
+					var xf := (pl as Control).get_global_transform()
+					blk.append(Rect2(xf.origin, (pl as Control).size * xf.get_scale()))
+		if blk.is_empty():
 			return
 		var m := float(UiTheme.px(12))
 		var sz := p.size * p.scale
-		if not Rect2(p.position, sz).intersects(boss):
+		var hit := false
+		for bb in blk:
+			if Rect2(p.position, sz).intersects(bb):
+				hit = true
+		if not hit:
 			return
 		var box := HudDock.centre(town)
-		var ys := [boss.end.y + m, r.end.y - m - sz.y]
+		var ys := [r.end.y - m - sz.y]
+		for bb in blk:
+			ys.append(bb.end.y + m)
 		var xs := [r.end.x - m - sz.x, r.position.x + m]
 		for y: float in ys:
 			for x: float in xs:
 				var q := Rect2(Vector2(x, y), sz)
-				if y + sz.y > r.end.y or q.intersects(boss):
+				if y + sz.y > r.end.y or y < r.position.y:
+					continue
+				var bad := false
+				for bb in blk:
+					if q.intersects(bb):
+						bad = true
+				if bad:
 					continue
 				if box.size.x > 0.0 and q.intersects(box):
 					continue
@@ -732,6 +747,7 @@ class FightBanner extends CanvasLayer:
 	func _ready() -> void:
 		name = "FightBanner"
 		layer = 21
+		add_to_group("hud_fightbanner")
 		UiTheme.watch(self)
 		_build()
 

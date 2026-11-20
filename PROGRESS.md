@@ -13539,6 +13539,56 @@ WORKING tree. No twitch test, 0 bits, no account used. Scratch log lived OUTSIDE
 FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment
 your S68 `"relief": "Watchturn"` MB_NAME row reaches origin/main - it was green in your own 15:14 run and is
 simply not pushed yet.
+## S69 - 2026-11-20 16:08-16:17 CST - ROW 1 CHRONICLE OVERLAP RETURNED (the card is feed_hud.gd's layout, not delve.gd's); SCRAPER (41st) GETS MB_FIT + CRYPT ROW, HELD OUT FOR CONTENT (game build)
+ROW 1 (15:58 block), "the lord announce card at delve.gd:197 is drawn over the Chronicle vellum" - NOT TAKEN, AND WHY,
+measured on the merged tree: delve.gd:196 only CALLS `FeedHUD.card_on(town, title, sub, col)` and hands it two strings.
+The card is BUILT, SIZED AND PLACED in feed_hud.gd (HUD): `_card` is a PanelContainer added to the SAME HBoxContainer as
+the line box (`h.add_child(_card)` then `h.add_child(_box)`, feed_hud.gd ~132-166), by L32b design "a lord's card at its
+left"; `_chrome_text_w()` (~396) already subtracts the card's min width from the text width; `_card_sub` has
+`custom_minimum_size = px(240)` with TRIM_WORD_ELLIPSIS. So the card is AT ITS MINIMUM width, and that minimum scales
+with UI scale - which is why the line column narrows at 150%. LOOKED AT renders/cycles/20261120_u104/mana_125_1080.png
+and mana_150_1080.png myself: the card sits BESIDE the text inside the vellum, not over it (125%: card ~40% of the
+vellum, text clear at right; 150%: card ~60%, text squeezed to ~4 words a row). I did NOT find a frame with the card
+drawn over washed-out text; if the lead's frame shows that, it is a newer capture than u104 and I have not seen it.
+The only lever delve.gd holds is the STRINGS (shortening `sub` does not narrow a card already at its 240px*scale floor)
+or SUPPRESSING the card call - which deletes the L32b lord card on the stream's resting layout. That is a design call,
+not a fit fix, so I did not make it. The fit fix is feed_hud.gd's: e.g. scale the sub min width down with UI scale, or
+stack the card ABOVE the lines when vellum width < N. Returned to the lead for the HUD row; nothing in feed_hud.gd touched.
+THEN ROW 1b, THE 41st: `scraper` (Scourstone). Field 5 of art's CANON tuple (tools/art/minibosses.py:14068) = `crypt`.
+Ratio read off `_fit_scraper_register.json` pairs.scraper.ratio = 1.04 (2.55 / 2.45, 3/3 proving views). scraper.glb
+present; --import ran (its .import left untracked, as with relief/hooper). Content has NO by_key.scraper.
+EDITS: delve.gd MB_FIT +"scraper": 1.04; dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] = ["ratcatcher", "scraper"] (+ S69
+comment); new tools/_s69_scraper.gd (S68's gate, staging switched OFF and arms inverted to prove the HOLD).
+NOT ADDED: MB_NAME "scraper". I added it first and S51_NAMES went FAIL 2 of 173 ("MB_NAME key scraper is not in feed",
+"key set matches the live keys") - S51 holds MB_NAME to keys content has written. That is a correct guard, so the name
+waits for content's row, exactly as art's CANON title waited for C-145 on the Relief. Reverted delve.gd from bak_s69
+and re-applied MB_FIT only. And S69 first staged the body and got gloombat.glb at 1.14 m: correct, because
+_setpiece_miniboss (delve.gd:455) only takes the own body when arrive lines exist. Staging is off until content lands.
+LOOKED AT art's renders/art/minibosses/scraper/hero_front.png: a dark hooded figure drawing a stone down a cut plinth,
+beside the knight, roughly a head taller. No engine render this cycle - the engine cannot show its own body until lines exist.
+RESULTS (on the final tree): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error / ERROR lines; S51_NAMES OK 168 checks;
+S69_SCRAPER OK 5 checks (held out of crypt 0/400, glb exists, no MB_NAME, no arrive lines, MB_FIT 1.04);
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2429; townwalk rc 0 in 88 s, 0 SCRIPT ERROR; DELVE_TEST OK 9001 frames,
+0 SCRIPT ERROR. (twitch/offfloor/townwalk ran before the MB_NAME revert, on a tree that differed by that one dict entry.)
+WHEN CONTENT WRITES by_key.scraper: add MB_NAME "scraper": "Scourstone" + S51 TABLE 41, restore `_keys.append` in
+_s69_scraper.gd and flip the draw/line arms back to S68's shape. Untracked here, mine, delete refused: _s69_battery.log.
+
+## HUB - 20 Nov 2026 16:39 CT - ROW "reflect the current game on the page": MEASURED, NOT BUILT (web/ unchanged)
+Synced hub = origin/hub + origin/main (clock 16:38 CST). TAKE THIS NEXT (15:58) row 4 asked the page to reflect
+the mana bar, the dungeon props and the forty minibosses. MEASURED on the merged tree:
+- scripts/snapshot_pub.gd is PAYLOAD_V 5 and contains ZERO "mana" and ZERO "miniboss" literals; web/app.js has no
+  mana code and no miniboss section (1 grep hit total, inside the frozen lore blob). The page can only show what the
+  payload or the frozen lore carries, and it estimates nothing (H19 rule) - so mana and minibosses have NO data path.
+- data/lore_lines.json miniboss_feed.by_key holds 40 keys of arrive/fall lines; refresh_lore.py's whitelist drops
+  miniboss_feed on purpose (no hub reader), and refresh_lore.py --check says CURRENT (1215 strings, pin 9f38b9c8).
+- Dungeon props are art/engine assets, not payload data - nothing for a viewer page to read.
+WHAT BLOCKS: a mana field needs the game's snapshot_pub.gd (not mine) to publish h.mana/mana_max per hero (roster.gd
+already holds them); a miniboss shelf needs either a payload "minibosses" field or a whitelist extension to
+refresh_lore.py plus the display-name table (Delve.MB_NAME) frozen into the page. Both are a decision above the hub.
+NEXT FIRING IF THE TEAM LEAD AGREES: extend refresh_lore.py + a "Minibosses" shelf in Bestiary from frozen lore only
+(names + arrive/fall lines, el()/textContent), full state/hostile-name battery. NOT CLAIMING READY TO PUBLISH.
+gh-pages delta: web/ untouched by me; no publish gate owed.
+Untracked _hub_ready_shot.png in the worktree is old and named here; delete refused on this machine.
 
 
 ## B88 - 20 Nov 2026, 16:45-16:5x CT - NO PUBLISH IS DUE: THE 41st BODY IS A BODY ONLY, AND I STOOD DOWN ON THE ENGINE
@@ -13597,3 +13647,10 @@ Merged origin/main 5b3efc55 (ort, clean) and origin/chatbot; no cycle renumbered
 `$HOME/mnt/hd adventure/` path exited 1 on my first call; use what `ls` prints. Godot was NOT empty at any
 point in my slot and I launched nothing. No twitch test, 0 bits, no account used. Lock read from R's
 WORKING tree.
+
+U108 - 2026-11-20 16:5x CST - MANA PLATE CLEARS THE NOW FIGHTING BANNER AS WELL AS THE BOSS CARD, AND IS BACK IN THE 125% FRAME (carry of U107 finding 2). One windowed claim, lock 16:56:00 -> IDLE 17:01:07
+Item: TAKE THIS NEXT 15:58 row 6 (HUD): fix the plate at 125%, recapture at all three scales. L74 still NEXT.
+Lock: R working RUN_LOCK last line was QA tester IDLE 16:50:15, tasklist Godot EMPTY. Cap claim+15 = 17:11, hard release 17:07; released 17:01, no crossing. (A first headless parse call timed out on the bridge BEFORE I wrote my RUNNING line; Godot was empty when I checked right after, and the lock was free the whole time - recorded for honesty.)
+Changed (hud_dock.gd only): ManaStrip._clear_of_boss now collects EVERY visible blocker - boss card (group hud_boss) and the NOW FIGHTING banner (new group hud_fightbanner, added in FightBanner._ready, read-only) - instead of keeping only the last boss plate, and tries bottom spot plus below-each-blocker spots, left and right, rejecting any that touch a blocker or the Chronicle. boss_bar.gd and delve.gd NOT touched.
+Checks: headless parse of W2 = 0 Parse Error / SCRIPT ERROR in my files (remaining ERRORs = this worktree's partial .godot import cache). Windowed 1920x1080 tools/_u104_shot.gd: 125% `plates=1 offscreen=0 under_chronicle=0 rect=(15,380) 336x113`; 150% `plates=1 offscreen=0 under_chronicle=0`. LOOKED AT mana_125_1080.png: "Mana" plate (MossyMage 2/54, DawnCleric 24/48) bottom-left of the Director pane, clear of the Grubmother boss card, the NOW FIGHTING banner and the Chronicle. CAVEAT: this run's plate showed at 125% in the old spot too, so the original "absent at 125%" was probably run variance (casters fallen) and this change is the guard for the banner case, not a proven cure of that one frame. 150% frame not re-looked (numbers only); 100% not looked.
+Not done: L74 (feed + theme under load); delve.gd:197 lord card over the Chronicle is the game build's (row 1).

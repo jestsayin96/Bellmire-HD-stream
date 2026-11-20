@@ -1,0 +1,827 @@
+{
+ "legs_top_z": 0.5237,
+ "torso_y": [
+  -0.3642,
+  0.3847
+ ],
+ "torso_depth": 0.7489,
+ "float_threshold_m": 0.12,
+ "clearance_m": 0.025,
+ "stages": {
+  "A": {
+   "Armor_Black": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "y_scale": 1.1431,
+    "y_offset": -0.0465,
+    "shell_lo": [
+     -0.7699,
+     -0.5315,
+     0.2492
+    ],
+    "shell_hi": [
+     0.7699,
+     0.3367,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 532,
+     "floating": 153,
+     "floating_pct": 28.8,
+     "max_d": 0.3062,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 124633,
+      "border_alpha": 0.0,
+      "moved_px": 68123,
+      "skin": {
+       "rows": 40,
+       "body_first": 9,
+       "armour_first": 31,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 1723,
+       "bare_pct": 5.4,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 93520,
+      "border_alpha": 0.0,
+      "moved_px": 35936,
+      "skin": {
+       "rows": 40,
+       "body_first": 1,
+       "armour_first": 39,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 1667,
+       "bare_pct": 9.1,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 119688,
+      "border_alpha": 0.0,
+      "moved_px": 37312,
+      "skin": {
+       "rows": 40,
+       "body_first": 3,
+       "armour_first": 37,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 13484,
+       "bare_pct": 42.0,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Golden": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "y_scale": 1.1431,
+    "y_offset": -0.0465,
+    "shell_lo": [
+     -0.7699,
+     -0.5315,
+     0.2492
+    ],
+    "shell_hi": [
+     0.7699,
+     0.3367,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 532,
+     "floating": 153,
+     "floating_pct": 28.8,
+     "max_d": 0.3062,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 124633,
+      "border_alpha": 0.0,
+      "moved_px": 69114,
+      "skin": {
+       "rows": 40,
+       "body_first": 9,
+       "armour_first": 31,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 1521,
+       "bare_pct": 4.8,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 93520,
+      "border_alpha": 0.0,
+      "moved_px": 36551,
+      "skin": {
+       "rows": 40,
+       "body_first": 1,
+       "armour_first": 39,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 1324,
+       "bare_pct": 7.2,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 119688,
+      "border_alpha": 0.0,
+      "moved_px": 38664,
+      "skin": {
+       "rows": 40,
+       "body_first": 1,
+       "armour_first": 39,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 12638,
+       "bare_pct": 39.3,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Leather": {
+    "collar_z_raw": 0.383,
+    "dz": 0.852,
+    "y_scale": 1.1431,
+    "y_offset": -0.0465,
+    "shell_lo": [
+     -0.4877,
+     -0.4296,
+     0.4239
+    ],
+    "shell_hi": [
+     0.4877,
+     0.3367,
+     1.2455
+    ],
+    "hem_above_legs_m": -0.0998,
+    "float": {
+     "n": 140,
+     "floating": 19,
+     "floating_pct": 13.6,
+     "max_d": 0.214,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 109020,
+      "border_alpha": 0.0,
+      "moved_px": 41121,
+      "skin": {
+       "rows": 40,
+       "body_first": 29,
+       "armour_first": 11,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 4839,
+       "bare_pct": 15.1,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 89524,
+      "border_alpha": 0.0,
+      "moved_px": 17328,
+      "skin": {
+       "rows": 40,
+       "body_first": 6,
+       "armour_first": 34,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 8246,
+       "bare_pct": 44.9,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 107465,
+      "border_alpha": 0.0,
+      "moved_px": 20688,
+      "skin": {
+       "rows": 40,
+       "body_first": 28,
+       "armour_first": 12,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 13429,
+       "bare_pct": 41.8,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "y_scale": 1.1431,
+    "y_offset": -0.0465,
+    "shell_lo": [
+     -0.7156,
+     -0.5315,
+     0.3008
+    ],
+    "shell_hi": [
+     0.7156,
+     0.3367,
+     1.2434
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 292,
+     "floating": 75,
+     "floating_pct": 25.7,
+     "max_d": 0.3043,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 117502,
+      "border_alpha": 0.0,
+      "moved_px": 59065,
+      "skin": {
+       "rows": 40,
+       "body_first": 14,
+       "armour_first": 26,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 1930,
+       "bare_pct": 6.0,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92241,
+      "border_alpha": 0.0,
+      "moved_px": 28431,
+      "skin": {
+       "rows": 40,
+       "body_first": 0,
+       "armour_first": 40,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 2414,
+       "bare_pct": 13.2,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 113127,
+      "border_alpha": 0.0,
+      "moved_px": 30217,
+      "skin": {
+       "rows": 40,
+       "body_first": 12,
+       "armour_first": 28,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 12540,
+       "bare_pct": 39.0,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal2": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "y_scale": 1.1431,
+    "y_offset": -0.0465,
+    "shell_lo": [
+     -0.7699,
+     -0.5315,
+     0.3008
+    ],
+    "shell_hi": [
+     0.7699,
+     0.3367,
+     1.4008
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 352,
+     "floating": 100,
+     "floating_pct": 28.4,
+     "max_d": 0.3043,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 118604,
+      "border_alpha": 0.0,
+      "moved_px": 59847,
+      "skin": {
+       "rows": 40,
+       "body_first": 10,
+       "armour_first": 30,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 2578,
+       "bare_pct": 8.1,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92277,
+      "border_alpha": 0.0,
+      "moved_px": 33154,
+      "skin": {
+       "rows": 40,
+       "body_first": 2,
+       "armour_first": 38,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 2014,
+       "bare_pct": 11.0,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 114177,
+      "border_alpha": 0.0,
+      "moved_px": 30397,
+      "skin": {
+       "rows": 40,
+       "body_first": 1,
+       "armour_first": 39,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 13846,
+       "bare_pct": 43.1,
+       "ok": true
+      }
+     }
+    }
+   }
+  },
+  "F": {
+   "Armor_Black": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "depth_scale": 1.0518,
+    "depth_shift_to": 0.0103,
+    "taper_core": 0.45,
+    "back_faces_added": 120,
+    "shell_lo": [
+     -0.6737,
+     -0.3892,
+     0.2492
+    ],
+    "shell_hi": [
+     0.6737,
+     0.4097,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 692,
+     "floating": 61,
+     "floating_pct": 8.8,
+     "max_d": 0.2182,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 115059,
+      "border_alpha": 0.0,
+      "moved_px": 29076,
+      "skin": {
+       "rows": 40,
+       "body_first": 12,
+       "armour_first": 28,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 19381,
+       "bare_pct": 60.6,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92630,
+      "border_alpha": 0.0,
+      "moved_px": 29222,
+      "skin": {
+       "rows": 40,
+       "body_first": 39,
+       "armour_first": 1,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 4518,
+       "bare_pct": 24.6,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 113920,
+      "border_alpha": 0.0,
+      "moved_px": 48566,
+      "skin": {
+       "rows": 40,
+       "body_first": 11,
+       "armour_first": 29,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 4900,
+       "bare_pct": 15.3,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Golden": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "depth_scale": 1.0518,
+    "depth_shift_to": 0.0103,
+    "taper_core": 0.45,
+    "back_faces_added": 120,
+    "shell_lo": [
+     -0.6737,
+     -0.3892,
+     0.2492
+    ],
+    "shell_hi": [
+     0.6737,
+     0.4097,
+     1.4509
+    ],
+    "hem_above_legs_m": -0.2745,
+    "float": {
+     "n": 692,
+     "floating": 61,
+     "floating_pct": 8.8,
+     "max_d": 0.2182,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 115059,
+      "border_alpha": 0.0,
+      "moved_px": 29896,
+      "skin": {
+       "rows": 40,
+       "body_first": 12,
+       "armour_first": 28,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 19236,
+       "bare_pct": 60.2,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 92630,
+      "border_alpha": 0.0,
+      "moved_px": 29748,
+      "skin": {
+       "rows": 40,
+       "body_first": 39,
+       "armour_first": 1,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 4384,
+       "bare_pct": 23.9,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 113920,
+      "border_alpha": 0.0,
+      "moved_px": 50079,
+      "skin": {
+       "rows": 40,
+       "body_first": 9,
+       "armour_first": 31,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 3950,
+       "bare_pct": 12.3,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Leather": {
+    "collar_z_raw": 0.383,
+    "dz": 0.852,
+    "depth_scale": 1.1916,
+    "depth_shift_to": 0.0103,
+    "taper_core": 0.45,
+    "back_faces_added": 62,
+    "shell_lo": [
+     -0.4707,
+     -0.3892,
+     0.4239
+    ],
+    "shell_hi": [
+     0.4707,
+     0.4097,
+     1.2455
+    ],
+    "hem_above_legs_m": -0.0998,
+    "float": {
+     "n": 208,
+     "floating": 20,
+     "floating_pct": 9.6,
+     "max_d": 0.1861,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 108705,
+      "border_alpha": 0.0,
+      "moved_px": 35780,
+      "skin": {
+       "rows": 40,
+       "body_first": 32,
+       "armour_first": 8,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 8616,
+       "bare_pct": 26.9,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 90670,
+      "border_alpha": 0.0,
+      "moved_px": 20566,
+      "skin": {
+       "rows": 40,
+       "body_first": 25,
+       "armour_first": 15,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 7641,
+       "bare_pct": 41.6,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 107535,
+      "border_alpha": 0.0,
+      "moved_px": 38495,
+      "skin": {
+       "rows": 40,
+       "body_first": 28,
+       "armour_first": 12,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 6199,
+       "bare_pct": 19.3,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "depth_scale": 1.0518,
+    "depth_shift_to": 0.0103,
+    "taper_core": 0.45,
+    "back_faces_added": 98,
+    "shell_lo": [
+     -0.6564,
+     -0.3892,
+     0.3008
+    ],
+    "shell_hi": [
+     0.6564,
+     0.4097,
+     1.2434
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 418,
+     "floating": 42,
+     "floating_pct": 10.0,
+     "max_d": 0.1845,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 112206,
+      "border_alpha": 0.0,
+      "moved_px": 26005,
+      "skin": {
+       "rows": 40,
+       "body_first": 15,
+       "armour_first": 25,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 19203,
+       "bare_pct": 60.1,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 91825,
+      "border_alpha": 0.0,
+      "moved_px": 24571,
+      "skin": {
+       "rows": 40,
+       "body_first": 40,
+       "armour_first": 0,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 4914,
+       "bare_pct": 26.8,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 111129,
+      "border_alpha": 0.0,
+      "moved_px": 47179,
+      "skin": {
+       "rows": 40,
+       "body_first": 13,
+       "armour_first": 27,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 4315,
+       "bare_pct": 13.4,
+       "ok": true
+      }
+     }
+    }
+   },
+   "Armor_Metal2": {
+    "collar_z_raw": 0.4227,
+    "dz": 0.8123,
+    "depth_scale": 1.0518,
+    "depth_shift_to": 0.0103,
+    "taper_core": 0.45,
+    "back_faces_added": 118,
+    "shell_lo": [
+     -0.6737,
+     -0.3892,
+     0.3008
+    ],
+    "shell_hi": [
+     0.6737,
+     0.4097,
+     1.4008
+    ],
+    "hem_above_legs_m": -0.2229,
+    "float": {
+     "n": 504,
+     "floating": 58,
+     "floating_pct": 11.5,
+     "max_d": 0.1845,
+     "ok": true
+    },
+    "views": {
+     "front": {
+      "opaque": 112905,
+      "border_alpha": 0.0,
+      "moved_px": 25778,
+      "skin": {
+       "rows": 40,
+       "body_first": 12,
+       "armour_first": 28,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 31975,
+       "bare_px": 19825,
+       "bare_pct": 62.0,
+       "ok": true
+      }
+     },
+     "side": {
+      "opaque": 91761,
+      "border_alpha": 0.0,
+      "moved_px": 26771,
+      "skin": {
+       "rows": 40,
+       "body_first": 40,
+       "armour_first": 0,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 18354,
+       "bare_px": 5057,
+       "bare_pct": 27.6,
+       "ok": true
+      }
+     },
+     "back": {
+      "opaque": 111756,
+      "border_alpha": 0.0,
+      "moved_px": 43708,
+      "skin": {
+       "rows": 40,
+       "body_first": 9,
+       "armour_first": 31,
+       "empty": 0,
+       "ok": true
+      },
+      "bare": {
+       "band_px": 32127,
+       "bare_px": 6084,
+       "bare_pct": 18.9,
+       "ok": true
+      }
+     }
+    }
+   }
+  }
+ },
+ "errors": []
+}

@@ -12480,6 +12480,43 @@
           "The hauler sits on the wet stone and looks at his hands. Nobody asks him anything.",
           "The iron is sound. The timber round it is not."
         ]
+      },
+      "fuller": {
+        "arrive": [
+          "A long trough on trestles, and the cloth in it heaped over the rim. Two timber hammers hang above.",
+          "A man stands off to the left, one hand on the bar. His apron is wet to the knee.",
+          "Something is being worked here. The cloth is pale and thick and new off the loom.",
+          "The stocks lift and fall. Each fall presses the cloth down. It comes back up.",
+          "The trough is full. Watch the cloth, not the man.",
+          "Every blow you land goes into the cloth. It keeps them. It gives them all back at once.",
+          "Stop hitting it. Break the stocks. Or wring it early and take a small one.",
+          "His wool is worn through at the elbow. The goods in the trough are this week's, and clean.",
+          "A working man's stock is better kept than he is."
+        ],
+        "act": [
+          "The stocks lift. The cloth settles.",
+          "The cloth swells. It is rising over the rim.",
+          "Water runs off the lip and darkens the floor.",
+          "The man leans on the bar. The trough shudders.",
+          "It is full. It cannot hold more.",
+          "The wring. Get out from under it."
+        ],
+        "broken": [
+          "A stock splits at the pin and hangs. It does not fall true.",
+          "The bar slips from his hand. The hammers stop where they are.",
+          "The cloth tears at the rim and the water goes out across the floor, a small flood and no more.",
+          "The trough cracks along the seam. It will not hold a load."
+        ],
+        "fall": [
+          "The Fuller is down. The hammers hang still.",
+          "The cloth sags in the trough and gives up its water slowly.",
+          "Nothing is wringing. Nothing is full. Walk the floor.",
+          "It was empty at the end. You stopped in time, or you paid for it.",
+          "The man sits on the bar and wrings his cap between his hands.",
+          "The Fuller is down. The cloth is the only good thing left in the room.",
+          "He lifts a fold of the stock and looks at it, then lays it back.",
+          "The trough drips. That is the last sound it makes."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -12495,7 +12532,8 @@
     "_note_c111": "C-111: leech (thirty-second miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 32 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 32: while it stands nothing in the room mends, every point of healing the party spends is drawn into the basin at its side, the Leech spends what the basin holds on itself, and tipping the basin gives the party's healing back. Three arrive lines state the mechanic plainly (nothing mends, the basin takes it, tip it) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a leech row; that is engine work.",
     "_note_c112": "C-112: beadle (thirty-third miniboss, art lane, shrine) gets arrive and fall lines, 9 and 8. by_key now holds 33 keys. Arrive and fall only; {name} not used. Written against art's MINIBOSSES.md entry 33: while it stands the party does not choose who acts, it calls the same hero again and again while the rest hold and watch, the four brass pegs on its board are the calls it has left, and knocking the board off its arm gives the order back. One arrive line is art's own feed line. Three arrive lines state the mechanic plainly (same hero again, pegs are the calls, knock the board off) and the fall lines answer it; the rest are scene. No mechanic is built from these lines. Nothing spawns this body unless the game build has a beadle row; that is engine work.",
     "_note_c113": "C-113: beadle (thirty-third miniboss, art lane, shrine) gets its act and broken lines: 7 act and 4 broken, the house shape every other act-carrying key holds (porter's 6 aside). Written against art's MINIBOSSES.md entry 33 and the S34 shape (act fires while the mechanic runs, broken when the weakness is hit): while it stands the same hero is called again and again and the rest hold and watch, the four brass pegs are the calls it has left, and knocking the board off its arm gives the order back. Five act lines use {name}, the other two do not. Broken lines are about the board coming off and the order returning. by_key keeps 33 keys; beadle now carries arrive 9, act 7, broken 4, fall 8. No mechanic is built from these lines; S34 reads act and broken only for keys in MB_WAYS, so the Beadle stays silent on those two phases until the game build adds a beadle way.",
-    "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw."
+    "_note_c115": "C-115 rammer lines. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE IT. The rammer carries act and broken (the plan row named them); no {name} token is used. The by_key entry is live: miniboss_for needs arrive lines to put the body in the draw.",
+    "_note_c126": "C-126 (19 Nov 2026): The Fuller, 35th miniboss (art body committed on origin/art). arrive 9 / act 6 / broken 4 / fall 8, no {name}. Mechanic words follow art's CANON text: blows soak into the cloth, the cloth fills, it wrings out over the room at once; the answer is to stop hitting it. Man worn, goods fresh. Additive. Expected zero-hit key."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

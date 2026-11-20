@@ -12394,3 +12394,7 @@ Ran WINDOWED 1920x1080 (logs _u97_*.log, untracked, rc in _u97_*.rc):
 So neither gate is asleep: each exits non-zero on a deliberate fault and zero on the real tree. Parse (headless, quit-after 300) rc=0, 0 Parse Error; the only SCRIPT ERRORs in any log are 28 "Cannot call method 'instantiate' on a null value" = the known gear.gd thin-import-cache lines, not HUD.
 Looked at: renders/cycles/u90/u90_run_150.png - four panes tile 1920x1080, Chronicle parchment centred over the cross with two whole wrapped entries, no ellipsis, nothing clipped, clock chip bottom right clear.
 Next: nothing owed; if the plan names no HUD item, long-roster LeaderboardPanel/hud_dock read at 125/150 inside claim+15. Nothing for Mr. E to decide.
+## C-136 (20 Nov 2026 05:3x CST) - small pool top-up (no miniboss owed)
+Item: TAKE THIS NEXT (20 Nov 04:58 CT) row 3, CONTENT: C-135 ticked; keep producing, keep writing _note_ keys, no phase2_words member written. No miniboss owed: by_key holds 36 and none of the committed art bodies is missing a key. Added epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks enter +3, lord +3, trap +2, hurt +3, drink +1, misfire +3 (duplicates skipped), plus _note_c136 nested under barks (expected zero-hit key). Plain register, no mechanics, no floor counts. VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), top-level key order unchanged.
+CODE WIRING: none new; the pools already have readers.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

@@ -914,7 +914,15 @@
     "Chalk marks the wall at every turn.",
     "The stair is wet. They go carefully.",
     "Somebody hums. Somebody else tells him to stop.",
-    "The town noise fades behind them, a step at a time."
+    "The town noise fades behind them, a step at a time.",
+    "Somebody checks the knots a second time.",
+    "The lamp is trimmed. The torches are not lit yet.",
+    "A boot scuffs the first step. Nobody speaks.",
+    "Cold air rises to meet them.",
+    "They leave the market's smell behind.",
+    "The rope creaks and holds.",
+    "One of them touches the doorframe for luck.",
+    "The gate keeper does not wave. He nods."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1338,7 +1346,13 @@
     "One sits down. The rest let him.",
     "They share the water in order of need.",
     "The hall is quiet and smells of old stone.",
-    "A name is scratched on the wall. A short list."
+    "A name is scratched on the wall. A short list.",
+    "The last torch is still burning. They take it.",
+    "Dust settles on the empty floor.",
+    "They sit on the steps and say nothing for a while.",
+    "Someone counts heads. The number is right.",
+    "The door ahead is shut. It can wait.",
+    "They bind what needs binding and move on."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -1845,7 +1859,10 @@
       "Lamp low, ears up.",
       "In we go. Stay close.",
       "Lamps lit, door kept.",
-      "Mind the third stair."
+      "Mind the third stair.",
+      "Door's open. Go slow.",
+      "Smells of rain down here.",
+      "Quiet. Too quiet."
     ],
     "lord": [
       "Hold together!",
@@ -2132,7 +2149,10 @@
       "Together now. Do not scatter.",
       "That is no ordinary door.",
       "Steady. We came for this.",
-      "Nobody runs. Nobody."
+      "Nobody runs. Nobody.",
+      "That is him. Eyes up.",
+      "Stand together.",
+      "Do not look at the crown."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2422,7 +2442,9 @@
       "Mind the floor. Mind it twice.",
       "Stop. Floor's wrong.",
       "Tripwire. Low and left.",
-      "Hold your step."
+      "Hold your step.",
+      "Plate in the floor.",
+      "Wire. Mind your shins."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2704,7 +2726,10 @@
       "Not deep. Not good either.",
       "Hold my lamp. I need a moment.",
       "Bind it later.",
-      "Keep going."
+      "Keep going.",
+      "I am fine. Keep moving.",
+      "Just a scratch.",
+      "Tell nobody."
     ],
     "drink": [
       "Bottoms up.",
@@ -2977,7 +3002,8 @@
       "One swallow and the ache eases.",
       "Down it. Quick.",
       "That'll burn. Good.",
-      "Swallow and move."
+      "Swallow and move.",
+      "Bitter. Works though."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -3262,13 +3288,17 @@
       "Nothing. Keep your guard up.",
       "Not like that.",
       "It slipped. Again.",
-      "Cold hands. Try once more."
+      "Cold hands. Try once more.",
+      "Wrong word. Wrong word.",
+      "Hands will not hold still.",
+      "That was not it."
     ],
     "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key.",
     "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
     "_note_c133": "C-133: small additions to existing barks pools; no new readers.",
     "_note_c134": "C-134 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key; Broodglut and Lastcuff are bestiary pack-variants, not feed bodies). Small top-up of pools the engine already reads: epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
-    "_note_c135": "C-135 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key; the chibi variants, Broodglut and Lastcuff are not feed bodies). Small top-up of pools the engine already reads: epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds. Additive, nested under barks. Expected zero-hit key."
+    "_note_c135": "C-135 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key; the chibi variants, Broodglut and Lastcuff are not feed bodies). Small top-up of pools the engine already reads: epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks +3 in each of six kinds. Additive, nested under barks. Expected zero-hit key.",
+    "_note_c136": "C-136 (20 Nov 2026 CST): no miniboss body owed (by_key holds 36, none missing). Small top-up of pools the engine already reads: epitaphs +14, descend +8, cleared +6, misfire +5 (name, spell, roll, DC order kept), barks enter +3, lord +3, trap +2, hurt +3, drink +1, misfire +3 (duplicates skipped). Expected zero-hit key; do not wire."
   },
   "misfire": [
     "%s's %s goes wrong - the scar answers (%d vs DC %d).",
@@ -3432,7 +3462,12 @@
     "%s starts %s and loses the thread (%d vs DC %d).",
     "%s tries %s and only a spark answers (%d vs DC %d).",
     "%s mutters %s wrong and winces (%d vs DC %d).",
-    "%s leans on %s and it will not hold (%d vs DC %d)."
+    "%s leans on %s and it will not hold (%d vs DC %d).",
+    "%s calls on %s and the words come out wrong (%d vs DC %d).",
+    "%s reaches for %s and loses the thread (%d vs DC %d).",
+    "%s tries %s with a shaking hand (%d vs DC %d).",
+    "%s breathes out %s and nothing follows (%d vs DC %d).",
+    "%s starts %s and forgets the end of it (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -4116,7 +4151,21 @@
     "Never missed a market day. Missed this one.",
     "Carried a spare bandage for the other fellow.",
     "Wrote his name on the wall. It is still there.",
-    "Fed the guild cat. The cat waits at the gate."
+    "Fed the guild cat. The cat waits at the gate.",
+    "Salted the stair so nobody slipped. Slipped himself.",
+    "Kept the tally of the dead. Is on it now.",
+    "Mended the guild's boots for a winter. Wore out his own.",
+    "Told the young ones to sleep. Did not.",
+    "Carried the lamp oil. Carried it to the end.",
+    "Learned the names of the gate dogs.",
+    "Left a loaf on the sill every dawn.",
+    "Held the rope. The rope held.",
+    "Paid his tab at the Rusty Flagon before going down.",
+    "Never once complained about the soup.",
+    "Stood the last watch and said it was quiet.",
+    "Taught three apprentices to tie a knot that holds.",
+    "Counted the steps down. Forgot to count back.",
+    "Went for the door. Got most of the way."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",

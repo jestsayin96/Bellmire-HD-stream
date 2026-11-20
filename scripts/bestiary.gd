@@ -99,6 +99,16 @@ const NEW_TYPES := {
                    "homes": ["wood", "fogbound"]},
     "spiderling": {"name": "spiderling", "path": MON + "Spider.glb", "anims": A_SPIDER, "hp": 0.3, "atk": 0.5, "spd": 5.2, "h": 0.35, "lift": 0.0,
                    "family": "beast", "homes": []},
+    ## S54: the first PACK-VARIANT miniboss (Mr. E, 19 Nov 21:50 directive part 2). Art's body, recolour
+    ## and fit (docs/art/MONSTER_VARIANTS.md, pass 4): h 6.60 is art's register `height`, the glb is native
+    ## scale because Monster normalises to `h`. THE ONE IDEA: the pack keeps IT alive - it calls puglins,
+    ## and while any it called still stands it takes only `ward` of every blow (the Ossuary Lord's arms,
+    ## Delve._call_tick + Delve._ward). Kill the adds, not the boss. homes [] - it is not a random draw;
+    ## its floor route waits on content's lines and the supervisor's scale ruling.
+    "broodglut": {"name": "Broodglut", "path": MON + "minibosses/broodglut.glb", "anims": A_UAL, "hp": 2.4, "atk": 1.5, "spd": 3.6, "h": 6.60,
+                   "lift": 0.0, "family": "fiend",
+                   "ways": {"summon": {"type": "puglin", "every": 11.0, "most": 3, "line": "Puglins boil out from under Broodglut - and it shrugs off every blow while they stand."}, "ward": 0.5},
+                   "homes": []},
     "scarrat":    {"name": "scar rat", "path": MON + "Rat.glb", "anims": A_RAT, "hp": 0.8, "atk": 0.9, "spd": 5.4, "h": 0.8, "lift": 0.0,
                    "family": "beast", "tint": Color(0.72, 0.88, 0.62), "glow": Color(0.20, 0.50, 0.12),
                    "ways": {"venom": 4.0, "pack": 2}, "homes": ["mess", "prison", "flooded"]},

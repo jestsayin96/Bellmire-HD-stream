@@ -13578,3 +13578,416 @@ def hooper():
 
 
 BUILDERS.update({"hooper": hooper})
+
+
+# =====================================================================
+# 40 THE RELIEF - "Watchturn", theme `barracks`. 20 Nov 2026, ~13:5x CT.
+#
+# Built under Mr. E's standing permission (17:43) on a genuinely dry plan row:
+# the team lead's 12:58 block says "keep inventing minibosses; you are the one
+# genuinely dry lane that may".
+#
+# THE BAR IS ONE IDEA THAT CHANGES THE FIGHT, AND THIS ONE IS NOT A DAMAGE
+# IDEA AT ALL. Every one of the thirty-nine before it asks the party a question
+# about where its DAMAGE goes - at the boss, at a wall, at a cask, at itself.
+# This one does not touch a hit point. It attacks the ONE thing the party owns
+# that no other body in this file reaches: THE ORDER THEY ARE STANDING IN.
+# A quarter-turn of the capstan and the line comes round one place - the front
+# rank is at the back, the back rank is at the front, nobody is hurt, nobody is
+# removed, and every reach, every guard and every heal is now pointing at the
+# wrong body. You fight it by jamming the dog, not by out-damaging it.
+#
+# WHY IT IS NOT A RE-SKIN. I read every `idea` string in CANON this run (39 of
+# them, printed and read, not remembered) and wrote the taken verbs out. The
+# nearest five, and why this is not them:
+#   GAOLER      takes ONE hero TO ITSELF on a hook. This moves EVERYBODY and
+#               takes nobody anywhere - the party keeps all four of its heroes
+#               and loses the arrangement of them.
+#   HOOPER      shuts one hero away from the party. Here nobody is cut off;
+#               they are all still in the fight, just all in the wrong place.
+#   HURDLEMAN   cuts the room in two, which is a WALL between two halves. This
+#               is no wall at all - the floor is untouched and the bodies move
+#               through it.
+#   BEADLE      takes the party's CHOICE (it does not choose its own order of
+#               action). This leaves every choice intact and makes the choices
+#               land somewhere else. Opposite ends of the same sentence.
+#   PAVISER     keeps ITS OWN facing to you. This changes YOUR facing.
+# What is new in the file is the KIND of resource attacked: position. Thirty-
+# nine bodies argue about hit points, cover, healing, gear and turn order. None
+# of them has ever moved a hero one pace.
+#
+# THEME: barracks. TWO bodies there (Drillmaster, Quartermaster) against four
+# in keep and four in workshop - measured off CANON this run, not remembered,
+# and tied with prison, crypt, wood and confection for thinnest. A capstan is
+# garrison gear before it is anything else: it is what a gate-house winds.
+#
+# WEAR 0.22, AND IT IS AN ARGUMENT. A gate capstan is the one machine a
+# garrison cannot let seize, so it is greased and the bars are kept - but the
+# man has stood a watch in a stone passage for a long time and his wool has
+# not. 0.22 is free in this file (0.15 Drillmaster, 0.30 Scrapwright, 0.34
+# Hooper) and it sits deliberately between the Drillmaster's kept instrument
+# and the Scrapwright's torn plate.
+#
+# THREE LESSONS FROM THIS LANE'S OWN LAST SIX BODIES ARE DESIGNED IN AT PASS 1
+# RATHER THAN FOUND AT PASS 7. I am writing them down so that if this body
+# fails, it fails somewhere new:
+#   (a) NO FLAT PRIMARY OBJECT. The Sealer's press and the Beadle's staff knob
+#       both went to a line or to nothing at 90 degrees of yaw. The capstan is
+#       built through _rev - a solid of revolution - so it presents THE SAME
+#       SILHOUETTE WIDTH AT EVERY YAW by construction. There is no camera angle
+#       that can take the mechanic away.
+#   (b) THE TWO HALVES OF THE MECHANIC SIT ON OPPOSITE QUARTERS. The Hooper's
+#       pass-5 instrument found its cask and its gauge on the SAME diagonal, so
+#       one yaw hid nearly all of it. Here the capstan is front-LEFT and the
+#       man's cloak roll and straps are back-RIGHT, and the drum is offset on
+#       the DIAGONAL (-0.46, -0.30) rather than on a cardinal axis, because a
+#       cardinal offset is fully occluded by the torso at exactly the two yaws
+#       the hero register shoots.
+#   (c) NOTHING HANGS AND NOTHING FLOATS. The Dauber's download-arrow and the
+#       Hooper's pass-4 hoop-in-clear-air are the same defect with different
+#       prepositions. Every bar on this body is SOCKETED IN THE DRUM at one end;
+#       the bar he is heaving is socketed at one end and has both his hands on
+#       the other. There is no handle-with-a-head-on-it anywhere on it.
+#
+# ROOM-LOCKED IS NOT CLAIMED AND NOT PRE-JUDGED. minibossgen measures the real
+# footprint and height against floorgen.gd's own corridor and lid and the report
+# says the verdict. This run that lid is 10.0/9.5 - the merge is in and the
+# instrument is no longer reading the 7.0 it carried at 12:58.
+# =====================================================================
+CANON.update({
+    "relief": ("Watchturn", 2.52, (0.72, 0.74, 0.70), (0.70, 0.84, 1.00),
+               "barracks", "IT TAKES YOUR POST - it does not hurt anyone and it "
+               "does not take anyone away. It heaves the gate capstan a quarter "
+               "turn and THE WHOLE LINE COMES ROUND ONE PLACE: your front rank "
+               "is at the back, your back rank is at the front, and every reach, "
+               "guard and heal the party had lined up is now pointing at the "
+               "wrong body. Nobody is wounded and nobody is missing, so there is "
+               "nothing to heal and nothing to free - the only answer is to jam "
+               "the dog in the ratchet plate at its foot, which means spending "
+               "the fight on a floor plate instead of on the thing hitting you. "
+               "The FOUR NOTCHES in that plate are the gauge: one notch is one "
+               "more turn it can take, and the dog sitting in one of them tells "
+               "you how far round the next is",
+               0.22, "Someone has come to relieve the watch."),
+})
+ORDER = ORDER + ["relief"]
+
+# PER-SLOT MATERIALS. Same reason as the Hooper's: the tint-derived path pulls
+# ONE hue over a whole body (measured defect, median satMean 0.087 across the
+# register), and the fix has to be a VALUE spread, which one wear-dulled tint
+# cannot produce. 0.70 / 0.27 / 0.10 across three slots is a 7x range, and it is
+# what makes the capstan the brightest object in the frame and the ironwork the
+# darkest - so the thing the fight is about is the thing the eye lands on from
+# the doorway.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"relief"}
+
+OVERRIDE.update({
+    "relief": {
+        # THE MAN: garrison wool and mail, mid, cool, and deliberately the least
+        # interesting value on the body. He is what the capstan is read against.
+        # Rough 0.84, no metal - a sentry's coat is not the shiny thing here.
+        'body': ((0.268, 0.282, 0.262), 0.84, 0.00),
+        # EVERY BAR, THE HOOPS, THE DOG, THE BOOTS, THE HELM AND THE NOTCHES.
+        # Near-black at 0.10 so four bars radiating off a pale drum are four
+        # countable dark spokes, and the four sunk notches in the pale base plate
+        # are four countable dark marks. Metal 0.36 / rough 0.50: greased working
+        # iron, which is the wear argument above made in a material.
+        # NAMED COMPROMISE, same one the Hooper and the Sealer named rather than
+        # hid: the boots and the shoulder straps are leather and they sit in this
+        # slot, so they take an iron highlight they have not earned.
+        'dark': ((0.100, 0.104, 0.112), 0.50, 0.36),
+        # THE CAPSTAN AND THE BASE PLATE: PALE LIMEWASHED OAK. The mechanic is
+        # the brightest object on the creature on purpose. Rough 0.72, no metal -
+        # a shiny drum would read as a pot (the Cook) or a tun (the Tapster).
+        'bone': ((0.735, 0.700, 0.560), 0.72, 0.00),
+        # THE WATCH LAMP. Cold, seated in the drum head's own well so it is
+        # INSIDE the body's outline at every yaw and cannot reach the frame edge
+        # - System 1's clipped-glow fault is a border check now, but a glow that
+        # cannot get near the border is better than one the check has to catch.
+        # It is a sentry's lamp and NOT a mechanic: the light claim belongs to
+        # the Snuffer and this body makes none.
+        'glow': ((0.70, 0.84, 1.00), 2.8),
+    },
+})
+
+
+def relief():
+    """IT TAKES YOUR POST. The 40th body.
+
+    WHAT A VIEWER READS FROM THE DOORWAY, AT ANY YAW:
+      WHAT IS IT?        A sentry in a brimmed kettle helm standing over a
+                         PALE GATE CAPSTAN that comes up past his waist, with
+                         FOUR DARK BARS radiating out of its head. A waisted
+                         drum is the same width from every direction and four
+                         spokes off it make a shape no other body in this file
+                         has.
+      WHAT IS IT DOING?  HEAVING. Both hands are on the near bar, shoulders
+                         turned into it, and the bar is socketed in the drum at
+                         its far end - so the force has somewhere to go and the
+                         machine is plainly being worked rather than stood by.
+      HOW MANY MORE?     FOUR NOTCHES sunk in the pale base plate at his feet,
+                         with the DOG resting in one of them. One notch is one
+                         more quarter turn. The plate is flat on the floor and
+                         1.60 m across, so the count is legible from in front,
+                         behind and either side - a floor disc cannot be turned
+                         edge-on to a camera that is standing on the floor.
+
+    FACING IS BY CONSTRUCTION, not by decoration. FRONT (-Y): the pale face
+    panel, the heaving arms, the lamp. BACK (+Y): the cloak roll, the strap
+    cross and the helm brim, and nothing pale above the waist. The capstan
+    itself is yaw-invariant and is supposed to be - it is the arrangement that
+    carries the facing, which is the Beadle's wrapped-band lesson applied
+    deliberately rather than tripped over.
+
+    ONE THING IS BROKEN ON PURPOSE. One of the four bars is SPLINTERED SHORT,
+    about half the length of the other three. Four identical spokes read as a
+    wheel or a gear; three and a stub read as a machine that has been worked
+    hard, and it is the irregularity that stops the head being a hub. Same
+    argument as the Hooper's missing stave and its canted hoop.
+
+    Static: no `anims` entry. The before/after is said by the geometry - the dog
+    down in a notch, three notches still open, the near bar heaved out of line
+    with the other three.
+
+    ROOM-LOCKED is NOT claimed here and NOT pre-judged. minibossgen measures the
+    real footprint against floorgen's own corridor and lid and the report says
+    the verdict.
+    """
+    P = Parts("relief")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # *** PASS 3, CHANGE E - HE WAS ALL LEG. ***
+    # All three pass-2 views, looked at: hip at 1.16 against a head at 2.16 put
+    # 54% of the figure below the belt and gave him a 0.78 m torso under a
+    # 1.16 m leg. At stream distance that reads as a stilt-walker, and beside a
+    # KayKit adventurer (whose hip sits near 0.9 of a 1.75 m body) it would read
+    # as a different species rather than as a bigger man. The hip drops and the
+    # TORSO TAKES THE LENGTH BACK (0.78 -> 0.94), so the shoulder and head do
+    # not move and no arm, strap or helm number has to be re-derived - the only
+    # thing that changes is where the belt is.
+    # It also makes the CANON line truer a second time: the drum crown at 1.40
+    # now stands a clear 0.40 m above his belt instead of 0.24 m.
+    HIP = 1.00
+    SHO = 1.86
+    HEAD = 2.16
+    # THE DRUM, ON THE DIAGONAL. See lesson (b) above: a cardinal offset is
+    # fully occluded by the torso at exactly the two cardinal yaws, which are
+    # the views the hero register shoots.
+    # *** PASS 2, PART OF CHANGE B - -0.46/-0.30 IS NOT A DIAGONAL. ***
+    # I wrote a paragraph at pass 1 claiming the drum was offset diagonally so
+    # no cardinal yaw could hide it, then wrote an offset 1.5x longer in x than
+    # in y - which is a cardinal offset with a lean on it. side.png proves it:
+    # the side camera looks along x, the drum sits almost straight behind the
+    # man, and the mechanic is gone. Equal in both now, so the worst yaw is a
+    # true 45 and both cardinals see it.
+    CX, CY = -0.50, -0.50
+
+    _open()
+    # ------------------------------------------- THE MAN: TURNED INTO THE BAR
+    # Not square. A man heaving a capstan bar puts his shoulders across it, so
+    # the stance is STAGGERED IN Y (right foot 0.14 forward, left 0.12 back -
+    # 0.26 m apart, comfortably more than a boot's depth) and the whole torso is
+    # yawed toward the drum. The stagger is the Hooper's pass-7 fix taken as a
+    # starting condition: two legs at the same y project onto each other in a
+    # side view and the figure stands on a single column with one boot.
+    for s in (-1, 1):
+        yf = 0.14 if s > 0 else -0.12
+        limb(P, seat([(s * 0.215, 0.02 + yf * 0.35, HIP),
+                      (s * 0.262, yf * 0.75, HIP - 0.52),
+                      (s * 0.272, yf, 0.092)], 0.112),
+             0.112, 0.090, 'body')
+        P.add(L.box(0.25, 0.42, 0.120), 'dark', loc=(s * 0.272, yf - 0.04, 0.060))
+    # *** PASS 2, CHANGE C - FROM THE SIDE HE WAS A FRIDGE. ***
+    # side.png, looked at: the torso was a 12-segment cone of radius 0.33 with
+    # no y squash and a 9-degree aim tilt, so in the side view it projected as a
+    # near-rectangular slab 0.66 m deep and 0.78 m tall that filled a third of
+    # the frame and hid the entire machine behind it. A human torso is NOT round
+    # in plan - it is about 0.6 as deep as it is wide - and nothing in the
+    # register's numbers can see a silhouette being a box.
+    # Squashed to 0.60 in y and stood up straight (the tilt bought nothing and
+    # cost the side read).
+    P.add(L.cone(0.345, 0.272, 0.94, 12), 'body', loc=(0.0, -0.015, HIP),
+          scale=(1.0, 0.60, 1.0))
+    P.add(L.box(0.52, 0.30, 0.090), 'dark', loc=(0.0, 0.00, HIP + 0.10))      # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.130, 0.120, 0.114, 11, 8), 'body',
+              loc=(s * 0.285 - 0.055, -0.035, SHO - 0.01))
+    P.add(L.sphere(0.170, 0.178, 0.174, 14, 9), 'body', loc=(-0.045, -0.035, HEAD))
+    # THE FACE: a flat pale panel at -Y only, NARROWER THAN THE SKULL AND TALLER
+    # THAN IT IS WIDE. The Sealer's pass-3 finding verbatim - a pale rectangle
+    # wider than it is tall reads as a letterbox visor before it reads as a face
+    # - and the Beadle's band that wrapped the head is what both are avoiding.
+    P.add(L.box(0.120, 0.044, 0.140), 'bone', loc=(-0.045, -0.232, HEAD - 0.015))
+    eyes(P, (-0.045, 0.0, HEAD + 0.005), 0.044, 0.024, -0.260)
+    # THE KETTLE HELM. Built through _rev, so the brim is a true disc and the
+    # head silhouette is identical at every yaw - and a brim is a garrison read
+    # at a glance, where the Hooper's flat cap is a trade one. Dark, so the pale
+    # face panel under it stays the only bright thing above the shoulders.
+    P.add(_rev([(0.000, 0.140), (0.030, 0.252), (0.052, 0.244),
+                (0.078, 0.168), (0.185, 0.120), (0.250, 0.000)], 16),
+          'dark', loc=(-0.045, -0.035, HEAD + 0.055))
+    _close("man")
+
+    _open()
+    # -------------------------------- THE BACK (+Y): CLOAK ROLL AND STRAP CROSS
+    # Back-RIGHT quarter, i.e. the opposite quarter from the drum - lesson (b).
+    # Fully hidden from the front by a torso 0.66 m wide, and carrying nothing
+    # pale, so the front read and the back read differ by construction.
+    # *** PASS 2, CHANGE A - THE CLOAK ROLL WAS A CANNON AND IT IS DELETED. ***
+    # In all three pass-1 views it is the loudest object in the frame: a dark
+    # cylinder 0.62 m long projecting clear of his right shoulder into open air,
+    # longer and heavier than any capstan bar, pointing at nothing and meaning
+    # nothing. It is the Dauber's download-arrow and the Hooper's pass-4 hoop
+    # arriving a third time, and the Sealer's precedent is to DELETE rather than
+    # to shorten: a thing that says nothing does not earn a smaller version of
+    # itself. The back read is now the strap cross, the helm brim and the
+    # absence of anything pale - thinner than I claimed at pass 1, and said so.
+    for s_ in (-1, 1):
+        limb(P, [(s_ * 0.235 - 0.055, -0.150, SHO + 0.02),
+                 (-s_ * 0.090 - 0.055, 0.205, HIP + 0.44)], 0.040, 0.034, 'dark')
+    _close("back")
+
+    _open()
+    # ------------------------- THE CAPSTAN: THE MECHANIC AND THE SILHOUETTE
+    # A WAISTED SOLID OF REVOLUTION - lesson (a). Base flare, drawn-in waist,
+    # flared head. Same width at every yaw by construction, and the waist is
+    # what makes it a capstan rather than a barrel: a cask swells in the middle,
+    # a capstan is pinched there. That difference is the whole reason this is not
+    # the Hooper's object seen again.
+    # *** PASS 2, CHANGE B - IT WAS A MORTAR AND HIS ARM WAS THE PESTLE. ***
+    # three_quarter.png, and it is the worst thing in the pass-1 sheet. The head
+    # ended at r 0.268 with nothing on top, so the drum read as an OPEN BOWL
+    # with a man's forearm coming down into it: a mortar and pestle, which is a
+    # kitchen object and says nothing about a gate. Two faults in one shape and
+    # they are fixed as one object because neither alone is enough:
+    #   1. THE TOP IS CLOSED. A capstan head is a solid crown - you push bars
+    #      through it, you do not put anything in it. Closing it also puts the
+    #      lamp ON the machine instead of down a hole where no camera saw it.
+    #   2. IT GROWS. r x1.28, z x1.22, so the head clears HIP (1.16) and the
+    #      CANON line's "comes up past his waist" is true of the geometry
+    #      instead of being a thing I wrote and did not build. At pass 1 it
+    #      topped out level with his hip and read as a pot at his knees.
+    P.add(_rev([(0.000, 0.384), (0.085, 0.407), (0.146, 0.320),
+                (0.525, 0.251), (0.878, 0.266),
+                (1.074, 0.379), (1.269, 0.392), (1.352, 0.372)], 18,
+               close_top=True),
+          'bone', loc=(CX, CY, 0.0))
+    # TWO FLAT IRON HOOPS. Flat (axis Z) is the yaw-invariant orientation: a
+    # flat ring presents a horizontal bar of width 2r from every direction a
+    # floor camera can stand in. They cut the pale drum into courses so it has
+    # internal structure at any distance.
+    for zz, rr in ((0.156, 0.323), (0.868, 0.271)):
+        _ring(P, (CX, CY, zz), rr, axis='z', slot='dark', rad=0.032, n=20)
+    # THE WATCH LAMP, SEATED IN THE DRUM HEAD'S WELL. Inside the body's outline
+    # at every yaw, so it cannot reach the frame edge. It TOUCHES its frame -
+    # nothing on this body floats.
+    # *** PASS 3, CHANGE F - IT WAS A COFFEE POT. ***
+    # front.png at pass 2, and it is the read I could not un-see once I had it:
+    # pale waisted body + dark band + DOMED cap tapering to a round knob is a
+    # moka pot, not a gate capstan. The dome was mine - I closed the open mouth
+    # at change B by tapering it to a point, which is a lid, and a lid with a
+    # knob on it is a kitchen object. A capstan crown is STRAIGHT-SIDED AND
+    # FLAT: you drive bars through it and you stand on it. Flat now, closed with
+    # a real cap face, and the lamp sits ON that face where it reads as a thing
+    # set down on a machine rather than as a pot's handle.
+    # ON TOP OF THE CLOSED CROWN, not down inside an open mouth. At pass 1
+    # it sat at z 1.15 inside a rim at 1.10 and was invisible in two of three
+    # views - a glow that cannot be seen is this lane's pass-11 fault exactly,
+    # and the blank check cannot see it because the pixels are there, just not
+    # where a viewer is.
+    _ring(P, (CX, CY, 1.368), 0.120, axis='z', slot='dark', rad=0.028, n=14)
+    P.add(L.sphere(0.098, 0.098, 0.090, 10, 8), 'glow', loc=(CX, CY, 1.432))
+    _close("drum")
+
+    _open()
+    # ------------------- THE FOUR BARS. SOCKETED AT ONE END - LESSON (c).
+    # Three stand out true at 0.52 m; ONE IS SPLINTERED SHORT at 0.27 m. The
+    # near bar - the one his hands are on - is yawed out of line with the other
+    # three, which is what says the machine is MID-TURN rather than at rest.
+    # *** PASS 2, CHANGE D - THREE OF THE FOUR SPOKES WERE NOT THERE. ***
+    # The CANON line promises four bars a viewer can count. At pass 1 they were
+    # 0.52 long on a drum of radius 0.30 and socketed at z 0.955, i.e. BELOW the
+    # head flare and right where the arms cross - front.png shows one clearly,
+    # three_quarter.png one, side.png one. Longer (0.70), thicker, and lifted to
+    # the crown's own shoulder at 1.21 where nothing on the man crosses them.
+    SOCK = 1.210
+    # (angle, length, radius-at-tip) - angle 0 is +X, measured in the floor plane
+    BARS = ((0.52, 0.70), (0.52 + TAU * 0.25, 0.70),
+            (0.52 + TAU * 0.50, 0.36), (0.52 + TAU * 0.75, 0.70))
+    NEAR = 3                      # the bar his hands are on: toward the body
+    for i, (th, ln) in enumerate(BARS):
+        th2 = th + (0.085 if i == NEAR else 0.0)      # heaved out of line
+        r0 = 0.310
+        pts = [(CX + r0 * math.cos(th2), CY + r0 * math.sin(th2), SOCK),
+               (CX + (r0 + ln) * math.cos(th2), CY + (r0 + ln) * math.sin(th2),
+                SOCK + (0.055 if i == NEAR else 0.020))]
+        limb(P, pts, 0.075, 0.060 if ln > 0.5 else 0.050, 'dark', ring=9)
+        if ln < 0.5:
+            # the splintered end: a stub cap, so a broken bar does not read as
+            # a bar that someone forgot to finish drawing.
+            P.add(L.box(0.100, 0.100, 0.086), 'dark',
+                  loc=(CX + (r0 + ln) * math.cos(th2),
+                       CY + (r0 + ln) * math.sin(th2), SOCK + 0.020))
+    _close("bars")
+
+    _open()
+    # ----------------- THE ARMS: BOTH HANDS ON THE NEAR BAR, SHOULDERS INTO IT
+    # Without this the drum is a prop standing on the floor next to a man - the
+    # Drillmaster's pass-2 finding and the Hooper's pass-4 one, in the same
+    # place for the third time. The hands close on the bar's OUTER half, where
+    # the camera can see the grip against the pale drum behind it, and the
+    # forearms cross in front of the torso so the front read is ARMS AND WORK.
+    thN = BARS[NEAR][0] + 0.085
+    def _onbar(t):
+        r = 0.310 + BARS[NEAR][1] * t
+        return (CX + r * math.cos(thN), CY + r * math.sin(thN), SOCK + 0.055 * t)
+    for s, t in ((1, 0.62), (-1, 0.90)):
+        g = _onbar(t)
+        limb(P, [(s * 0.265 - 0.055, -0.045, SHO - 0.03),
+                 (s * 0.22 - 0.13, -0.30, 1.52),
+                 (g[0], g[1], g[2] + 0.085)], 0.092, 0.072, 'body')
+        P.add(L.sphere(0.084, 0.078, 0.070, 9, 7), 'body',
+              loc=(g[0], g[1], g[2] + 0.062))
+    _close("arms")
+
+    _open()
+    # ---------------- THE RATCHET PLATE AND THE DOG: THE GAUGE, ON THE FLOOR
+    # FOUR notches, one quarter turn each, sunk as dark blocks into a pale disc
+    # 1.60 m across lying flat on the floor. A floor disc is the one shape a
+    # camera standing on the floor cannot turn edge-on, so this gauge is legible
+    # from every yaw - which is the property the Hooper had to move its stack
+    # twice to get, and the Beadle never got at all.
+    # The notches are 0.17 m wide against gaps of ~0.45 m between them, so they
+    # are four separate marks and not a dashed ring: the Hooper's pass-6 finding
+    # (five rings at 0.13 m read as one helix) is a SPACING rule now, and this is
+    # it applied before the first render rather than after the sixth.
+    P.add(_rev([(0.000, 0.790), (0.052, 0.800), (0.072, 0.355)], 22),
+          'bone', loc=(CX, CY, 0.0))
+    DOG = 1
+    for i in range(4):
+        th = 0.30 + TAU * i / 4.0
+        rr = 0.600
+        P.add(L.box(0.170, 0.230, 0.090), 'dark',
+              loc=(CX + rr * math.cos(th), CY + rr * math.sin(th), 0.050),
+              rot=(0.0, 0.0, th))
+        if i == DOG:
+            # THE DOG, DOWN IN ONE NOTCH. It runs from a floor bracket INTO the
+            # notch, touching both - it is the one object on the body a player is
+            # meant to attack, so it may not be a thing floating near a hole.
+            br = (CX + (rr + 0.300) * math.cos(th), CY + (rr + 0.300) * math.sin(th))
+            P.add(L.box(0.150, 0.150, 0.150), 'dark', loc=(br[0], br[1], 0.075))
+            limb(P, [(br[0], br[1], 0.165),
+                     (CX + rr * math.cos(th), CY + rr * math.sin(th), 0.115)],
+                 0.062, 0.052, 'dark', ring=8)
+    _close("ratchet")
+    return P
+
+
+BUILDERS.update({"relief": relief})

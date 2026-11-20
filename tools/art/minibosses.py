@@ -12662,3 +12662,426 @@ def dauber():
 
 
 BUILDERS.update({"dauber": dauber})
+
+
+# =============================================================================
+# 38 THE SEALER - IT SEALS WHAT YOU CARRY
+# =============================================================================
+# THE IDEA, AND WHY IT IS NOT A RE-SKIN OF THE OTHER THIRTY-SEVEN. I read every
+# `idea` string in CANON off this file before designing (AST walk, 51 keys, 14
+# variants, 37 bases) and wrote the mechanic space out: summon, re-armour,
+# drag, douse, mark-and-hunt, split, wall off, divide the room, climb out of
+# reach, block healing, heal the pack, weigh down, steal gear, level down, take
+# the loot, refuse a repeated answer, give damage back, corrode iron, yoke the
+# harm onto a hero, stand your fallen up on its side, raise the water, set the
+# floor, feed on the fire, drink the brews, be paid by the corpses, rise again,
+# lock the turn order, copy a hero, drop on a count, pre-trap the room, bar the
+# door, arm the room, keep its shield facing, hunt whoever moved, throw its
+# voice, hand you the only tool that cuts it, plant thorn.
+#
+# NOTHING IN THAT LIST TOUCHES THE PACK. Every one of the thirty-seven is about
+# the party's BODIES, their TURN or their IRON. The Tallyman lifts gear and
+# wears it, which is the nearest thing, and it is a different verb: he takes
+# what you are HOLDING and walks off with it. The Sealer takes nothing and
+# breaks nothing. It shuts the bag, one hero at a time, and everything inside
+# stays yours and stays unreachable. The flask you were saving is still there.
+#
+#   IT SEALS WHAT YOU CARRY - each bite of the press shuts ONE hero's pack:
+#   no flask, no bandage, no scroll, nothing that hero walked in with. The
+#   strip of lead blanks on its hip says how many more it can still shut, so
+#   the party can count the fight it has left before it starts. Break the press
+#   or win on what is already in your hands.
+#
+# THEME: treasury. Three bodies there now (Strickler, Tallyman, Sealer) against
+# four in keep and workshop - the thinnest theme that a sealer honestly belongs
+# in. A customs man with a press and a strip of lead is a counting-house body,
+# not a barracks one.
+#
+# WEAR 0.22, AND IT IS AN ARGUMENT RATHER THAN A DIAL. A sealer's press IS his
+# authority: it is the one thing on him that is oiled, and a man who seals for
+# a living does not own a rusty press. The coat is another matter and is held
+# worn. 0.22 is free in this file (0.15 Drillmaster, 0.30 Scrapwright, 0.42
+# Dauber, 0.80 Gaoler, 0.90 Snuffer).
+#
+# *** CORRECTION (a) FROM THE 10:58 TEAM LEAD REVIEW, TAKEN ON THIS BODY. ***
+# On the Dauber the lead looked at the pictures and found a fault no number
+# here could reach: the plumb bob - a thin line with a solid cone hanging off
+# its end, clear of the body - READS AS A UI DOWNLOAD ARROW at hero scale, and
+# it was the most legible object on the creature. A sealer's natural first
+# sketch is lead seals swinging on cords, which is the SAME SHAPE FOUR TIMES
+# OVER: thin line, solid blob, hanging in clear air. So it is designed out
+# rather than drawn and judged:
+#   - NOTHING ON THIS BODY HANGS. The blanks are seated in a slotted bar, each
+#     disc touching the bar and its neighbours, so no pale blob ever stands at
+#     the end of a thin line in open space.
+#   - THE SCREW IS NOT A STEM AND A POINT. It is short, thick, and it ends in a
+#     square head under a crossed tommy bar - a T, which no interface draws.
+#   - THE STRIP IS DELIBERATELY IRREGULAR: one slot already empty, one blank
+#     already struck and raised. Five identical discs in a row is its own UI
+#     read (a row of progress dots), and variation is what kills it.
+CANON.update({
+    "sealer":  ("Leadbite", 2.42, (0.62, 0.60, 0.56), (1.00, 0.72, 0.42),
+                "treasury", "IT SEALS WHAT YOU CARRY - every bite of the press "
+                "shuts ONE hero's pack, and while the Sealer stands that pack "
+                "stays shut: no flask, no bandage, no scroll, nothing that hero "
+                "walked in with. It takes nothing and breaks nothing - the gear "
+                "is still in there and it is simply not yours until the press is "
+                "broken. The strip of lead blanks on its hip is the gauge: one "
+                "blank is one more pack it can shut, so the party can count the "
+                "fight it has left before the first bite",
+                0.22, "Someone down there is stamping lead."),
+})
+ORDER = ORDER + ["sealer"]
+
+# PER-SLOT MATERIALS. Same two-conditions argument the Dauber and the Stackman
+# wrote down: the tint-derived path pulls ONE hue over a whole body (the
+# measured defect, median satMean 0.087), and this body must say a WORN MAN and
+# a KEPT INSTRUMENT in the same frame. Wear is the receipt; one wear-dulled
+# tint cannot carry both.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"sealer"}
+
+OVERRIDE.update({
+    "sealer": {
+        # THE COAT. Mid-value and cool-neutral on purpose, and it is the whole
+        # reason the press reads: the press frame, the strongbox, the belt and
+        # the boots are all in the dark slot, so if the coat were dark too the
+        # mechanic would be a dark mass inside a dark mass. The Dauber's
+        # pass-2 finding was a single VALUE, not a single hue - arrived at from
+        # the other direction and just as monochrome. So: coat lifted to sit
+        # BETWEEN the iron and the lead, which makes the silhouette three
+        # bands - dark press / mid man / pale lead - rather than two.
+        'body': ((0.212, 0.206, 0.192), 0.88, 0.00),
+        # IRON, AND IT IS THE KEPT HALF. The press frame, the screw, the tommy
+        # bar, the punch, the slot bar, the strongbox, the straps, the belt and
+        # the boots are all here. Metal 0.30 and roughness 0.42 - the lowest
+        # roughness on any dark slot in this file - because OILED is a specular
+        # fact, not a colour fact, the same way the Dauber's WET was.
+        # NAMED COMPROMISE, not hidden: the boots and the belt are leather and
+        # they are in this slot, so they take an iron highlight they have not
+        # earned. The alternative was a fifth slot for two objects that are
+        # 0.03 of the frame. The Fuller and the Stackman both took this trade
+        # and wrote it down; this is the same trade with the same reason.
+        # *** PASS 2, CHANGE B - MEASURED OFF MY OWN PASS-1 RENDER, NOT OFF
+        # TASTE. *** Pass 1 shipped this slot at metal 0.30 / roughness 0.42 on
+        # the argument that OILED is specular. It is - and at that pair every
+        # UP-FACING dark surface in the frame took the warm key light full in
+        # the face and rendered TAN. The cap, both press arms, the strongbox
+        # lid, the boot tops and the slot bar all read as polished brass in
+        # front.png. The "kept instrument" argument produced a brass band.
+        # Metal down to 0.10 and roughness up to 0.62: the iron goes back to
+        # being iron, the highlight survives as a line on an edge rather than a
+        # wash on a face, and KEPT is now carried by the slot's VALUE (lifted a
+        # touch) instead of by a mirror.
+        'dark': ((0.072, 0.071, 0.068), 0.62, 0.10),
+        # LEAD. This is the affordance and it must be the brightest solid on the
+        # body: the blank in the jaws, the four blanks in the strip, the strip
+        # over the strongbox lid, and the face panel. Cool rather than warm -
+        # the Comfitmaker measured that a warm pale reads as SUGAR and the
+        # Dauber that a cold white reads as BONE; lead is neither, it is a dull
+        # cool grey that is still clearly the lightest thing in frame. Metal
+        # 0.16 so a struck blank catches a line and a flat one does not.
+        # NAMED DOUBLE DUTY: the face panel is in this slot and is not lead. It
+        # is the same trade the Dauber made for the same reason - the pale slot
+        # is where a face has to live if the face is to separate from the head.
+        'bone': ((0.784, 0.792, 0.800), 0.46, 0.16),
+        # Eyes only, sealing-wax warm, and kept small BY CONSTRUCTION. System
+        # 1's clipped ladder glow is the standing lesson: a glow that reaches
+        # the frame edge is invisible to a blank check, so the border assertion
+        # is the backstop and not the plan.
+        'glow': ((1.00, 0.76, 0.44), 1.70),
+    },
+})
+
+
+def sealer():
+    """IT SEALS WHAT YOU CARRY. The mechanic is in two places, answering the two
+    questions a viewer asks from the doorway without a word of UI:
+
+      WHAT IS IT DOING?  A hand screw press worn on the chest, jaws forward,
+                         with a pale lead blank sitting between them and his own
+                         hand on the tommy bar. He is mid-bite. The press is the
+                         largest object on the body and it is the silhouette.
+      HOW MANY MORE?     A slotted bar on his right hip carrying FOUR lead
+                         blanks and ONE EMPTY SLOT - broadside to the camera in
+                         X (the Stackman's pass-2 lesson: a gauge aimed along
+                         the camera axis foreshortens into nothing). Four blanks
+                         is four packs he can still shut; the empty slot says he
+                         has already shut one.
+
+    FACING IS BY CONSTRUCTION, not by hoping the camera is kind - the Beadle's
+    measured fault designed out. The front (-Y) carries the press, the punch,
+    the strip and a pale face panel on one side of the head only. The back (+Y)
+    carries a shut strongbox with a lead strip over its own lid joint - his own
+    pack, sealed, which is the mechanic turned on its owner - and nothing else.
+    Neither read is available from the other side.
+
+    NOTHING HANGS ON THIS BODY. See correction (a) above: that is the Dauber's
+    UI-arrow fault designed out rather than drawn and judged.
+
+    Static: no anims entry. The before/after the body cannot animate through is
+    said by the geometry - one slot empty, one blank struck and raised, one
+    blank still flat in the jaws.
+
+    ROOM-LOCKED is NOT claimed here. The widest extent is the slot bar in +X
+    and the press in -Y; minibossgen measures the real footprint against
+    floorgen's own corridor and lid and the report says the verdict. I do not
+    pre-judge that number.
+    """
+    P = Parts("sealer")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 0.93
+    SHO = 1.52
+    HEAD = 1.78
+
+    _open()
+    # ------------------------------------------------- THE MAN: SQUARE AND SET
+    # A sealer does not lunge. He stands square with his weight even, because
+    # the press needs both feet - which also gives this body a different stance
+    # from the Dauber's one-forward-one-braced and from the Drillmaster's lean.
+    # seat() lifts each limb by its own first segment, so the literal 0.0 at the
+    # ankle really is the floor and no raked leg floats.
+    for s in (-1, 1):
+        limb(P, seat([(s * 0.20, 0.02, HIP), (s * 0.25, 0.00, HIP - 0.46),
+                      (s * 0.26, -0.03, 0.085)], 0.108),
+             0.108, 0.086, 'body')
+        # a boot, not a bare tube end - the Fuller's pass-1 fault
+        P.add(L.box(0.25, 0.40, 0.115), 'dark', loc=(s * 0.26, -0.07, 0.058))
+    # heavy torso, barely turned. Wide at the shoulder so the press has a wall
+    # to hang on and does not read as floating in front of a thin man.
+    P.raw(aim(L.cone(0.33, 0.27, 0.62, 12), (0.0, 0.01, HIP), (0.0, 0.02, 1.0)), 'body')
+    P.add(L.box(0.52, 0.30, 0.085), 'dark', loc=(0.0, 0.00, HIP + 0.10))      # belt
+    for s in (-1, 1):
+        P.add(L.sphere(0.125, 0.116, 0.110, 11, 8), 'body', loc=(s * 0.27, -0.01, SHO))
+    P.add(L.sphere(0.168, 0.176, 0.172, 14, 9), 'body', loc=(0.0, -0.01, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY, never a band and never wrapped.
+    # The Beadle's pale eye-band went round the head and that figure read the
+    # same from front and back - it had no facing at all. One panel, one side.
+    # PASS 3, CHANGE D: the panel is NARROWED 0.166 -> 0.124 and the eyes with
+    # it. At pass 1's width it rendered as a letterbox with two lamps in it -
+    # a visor, not a face - because a pale rectangle wider than it is tall is a
+    # slot before it is anything else. Narrower than the skull and taller than
+    # it is wide, it reads as a face set back in a hood.
+    P.add(L.box(0.124, 0.044, 0.138), 'bone', loc=(0.0, -0.196, HEAD - 0.015))
+    eyes(P, (0.0, 0.0, HEAD + 0.005), 0.044, 0.024, -0.224)
+    # a clerk's flat cap, dark, sitting low. Keeps the top of the head dark so
+    # the pale panel under it is the only bright thing on the head.
+    P.raw(aim(L.cone(0.190, 0.196, 0.070, 14), (0.0, -0.01, HEAD + 0.13), (0.0, 0.0, 1.0)), 'dark')
+    _close("man")
+
+    _open()
+    # ------------------------- THE PRESS: THE MECHANIC, WORN WHERE IT IS SEEN
+    # A C-frame hand press on a chest harness. It is authored LARGE on purpose:
+    # on this body the mechanic is not an accessory, it is the outline.
+    #
+    # *** PASS 2, CHANGE A, AND IT IS THE WHOLE RUN. I MADE THE DRILLMASTER'S
+    # *** MISTAKE AFTER QUOTING IT IN MY OWN DOCSTRING. ***
+    # Pass 1 hung the press flat across his chest with the jaws opening STRAIGHT
+    # AT THE FRONT CAMERA. In front.png the open mouth, the screw, the anvil and
+    # the blank all collapsed into one black slab on his ribs - it read as a
+    # stove door, and the only view in which the mechanic was legible at all was
+    # the side. That is exactly the Stackman's and the Drillmaster's measured
+    # lesson - a mechanic aimed along the camera axis foreshortens into
+    # nothing - rotated ninety degrees and committed again.
+    # So the frame is YAWED BROADSIDE: built in its own local frame with the
+    # jaws opening in local -Y, then turned about Z so the C-profile - plate,
+    # two arms, screw, blank in the gap - presents its side to the front camera
+    # and its mouth reads as a mouth. The side view loses the broadside tommy
+    # bar in exchange and that is the right trade: the front view is the one a
+    # viewer gets from the doorway.
+    # *** PASS 3, CHANGE C - AND PASS 2's YAW ALONE WAS NOT THE FIX. ***
+    # Turning the frame broadside was necessary and not sufficient. In pass 2's
+    # front.png the C is broadside and still unreadable, because it is worn
+    # ACROSS HIS CHEST: the plate sits over one shoulder, the mouth reaches to
+    # the other, and the three members read as three separate planks laid over a
+    # man rather than as one frame. The press and the body share the same
+    # pixels, so neither has an outline. It read as a man carrying a sawhorse.
+    # This is the Drillmaster's pass-2 fix, which I should have taken straight
+    # from his docstring: his gong ate him until it moved OFF to one side and
+    # DOWN and he stepped out of its outline. So the press is scaled to 0.80 and
+    # hung off his right, clear of the torso in X, with its mouth opening
+    # OUTWARD into empty air - where a C can be seen to be a C.
+    SC = 0.80
+    THETA = math.radians(-90.0)
+    RZ = Matrix.Rotation(THETA, 3, 'Z')
+    PV = Vector((-0.50, -0.22, 1.08))           # off his right side, and down
+
+    def _press(vf, slot):
+        vs, fs = vf
+        P.raw(([RZ @ (Vector(v) * SC) + PV for v in vs], fs), slot)
+
+    def _box_at(sx, sy, sz, loc, slot):
+        vs, fs = L.box(sx, sy, sz)
+        _press(([Vector(v) + Vector(loc) for v in vs], fs), slot)
+
+    _box_at(0.50, 0.095, 0.66, (0.0, 0.14, 0.0), 'dark')          # back plate
+    _box_at(0.42, 0.44, 0.115, (0.0, -0.09, -0.27), 'dark')       # bottom arm
+    _box_at(0.42, 0.44, 0.115, (0.0, -0.09, 0.27), 'dark')        # top arm
+    # THE ANVIL DIE and THE BLANK ON IT. The blank is the brightest small object
+    # on the body and it sits IN THE GAP between the jaws, because the gap is
+    # where the sentence is.
+    _box_at(0.20, 0.20, 0.055, (0.0, -0.27, -0.185), 'dark')
+    _press(aim(L.cone(0.088, 0.088, 0.048, 16), (0.0, -0.27, -0.157),
+               (0.0, 0.0, 1.0)), 'bone')
+    # THE SCREW. Short, thick, square-headed - correction (a). It stops well
+    # clear of the blank so the press reads as OPEN and about to close: a shut
+    # press has nothing to say about what happens next.
+    _press(aim(L.cone(0.055, 0.050, 0.26, 12), (0.0, -0.27, 0.215),
+               (0.0, 0.0, -1.0)), 'dark')
+    _box_at(0.145, 0.145, 0.075, (0.0, -0.27, -0.038), 'dark')
+    # THE TOMMY BAR through the head of the screw, with a knob each end. A T
+    # with two knobs is a shape no interface draws - which is the whole point
+    # of it after the Dauber's plumb bob.
+    _box_at(0.74, 0.070, 0.070, (0.0, -0.27, 0.40), 'dark')
+    for sgn in (-1, 1):
+        vs, fs = L.sphere(0.058, 0.052, 0.052, 10, 7)
+        _press(([Vector(v) + Vector((sgn * 0.40, -0.27, 0.40)) for v in vs], fs), 'dark')
+    # the strap that carries it, from his right shoulder down onto the frame's
+    # back plate. Without it the press reads as floating beside him, and a
+    # viewer who cannot see HOW it is worn reads it as part of the creature
+    # rather than as a tool it is using. Authored in BODY space: it starts on a
+    # real shoulder and ends on the plate's measured top corner.
+    PLT = RZ @ (Vector((0.0, 0.14, 0.30)) * SC) + PV
+    limb(P, [(-0.26, 0.02, SHO + 0.03), (-0.38, -0.08, 1.42),
+             (PLT.x, PLT.y, PLT.z)], 0.046, 0.038, 'dark')
+    _close("press")
+
+    _open()
+    # --------------------------------------- THE ARMS: ONE OF THEM IS THE VERB
+    # His left hand is ON the tommy bar's near knob, which after pass 2's yaw
+    # comes FORWARD out of the frame toward the viewer - so the gesture that
+    # was only readable from the side in pass 1 is now readable from the front.
+    # A man turning a screw down onto a blank. The right hand is down and holds
+    # the punch, so the two arms say the two halves of the trade: press, strike.
+    # PASS 3: the hands SWAP, because the press moved. His RIGHT hand is on the
+    # tommy bar's near knob - which at -90 degrees comes forward out of the
+    # frame toward the viewer, so the gesture reads from the front and not only
+    # from the side. His left hand is down and open at his side.
+    KNOB = RZ @ (Vector((0.40, -0.27, 0.40)) * SC) + PV
+    limb(P, [(-0.27, -0.01, SHO), (-0.40, -0.22, 1.40),
+             (KNOB.x, KNOB.y, KNOB.z + 0.01)], 0.082, 0.062, 'body')
+    P.add(L.sphere(0.082, 0.078, 0.074, 10, 7), 'body',
+          loc=(KNOB.x, KNOB.y - 0.01, KNOB.z))
+    limb(P, [(0.27, -0.01, SHO), (0.33, -0.08, 1.20), (0.35, -0.14, 0.94)],
+         0.082, 0.064, 'body')
+    P.add(L.sphere(0.084, 0.080, 0.076, 10, 7), 'body', loc=(0.35, -0.15, 0.91))
+    # *** PASS 3: THE PUNCH IS DELETED, AND THAT IS A FINDING RATHER THAN A
+    # *** TIDY-UP. *** In pass 1 and 2 it rendered as a small dark lump by his
+    # thigh in all three views - it never once read as a stamp iron, it crowded
+    # the hip the slot strip has to own, and it cost geometry to say nothing.
+    # A part that is not legible is not earning its draw call. The strike half
+    # of the trade is already said by the struck blank in the strip.
+    _close("arms")
+
+    _open()
+    # ----------------------------- THE STRIP: THE GAUGE, AND IT DOES NOT HANG
+    # *** PASS 4, AND THIS ONE IS MY OWN CLAIM FAILING ITS OWN TEST. ***
+    # Passes 1-3 carried the blanks in a slotted bar slung off the belt and
+    # STICKING STRAIGHT OUT IN +X. I wrote in correction (a) above that the
+    # thing to kill was a UI read, and then shipped three passes of a bar
+    # floating in clear air with four evenly spaced pale discs on it - which in
+    # front.png reads as a row of coins, or a progress meter, which is a UI
+    # read arrived at by a different road. Two more faults the picture gave me
+    # that no number did: the EMPTY SLOT, the half of the gauge that says a pack
+    # has already been shut, was inboard and completely hidden behind his own
+    # hip in all three views; and the four gauge discs were BRIGHTER AND LARGER
+    # than the blank in the press, so the eye went to the counter before it went
+    # to the mechanic. The gauge was out-shouting the sentence.
+    #
+    # So the strip stops being a bar in the air and becomes a BOARD ON HIS
+    # THIGH: raked down and outward along the leg, lying on the body with
+    # nothing standing clear of it, discs smaller than the press blank, spacing
+    # uneven, and the EMPTY SLOT OUTBOARD AT THE TOP where it is the first thing
+    # on the board a viewer meets.
+    BX, BY, BZ = 0.33, -0.205, 0.80
+    RB = Matrix.Rotation(math.radians(-26.0), 3, 'Y')
+    vs, fs = L.box(0.17, 0.075, 0.62)
+    P.raw(([RB @ v + Vector((BX, BY, BZ)) for v in vs], fs), 'dark')
+    # the belt loop it hangs in - short, seated on the board, nothing dangling.
+    # PASS 5: moved INBOARD AND DOWN off the top slot. At pass 4 it sat square
+    # on top of the board and covered the empty socket, which is the half of
+    # the gauge that says a pack has already been shut - I moved that socket to
+    # the top to make it the first thing a viewer meets and then parked a loop
+    # on it.
+    P.add(L.box(0.085, 0.105, 0.12), 'dark', loc=(BX - 0.175, BY + 0.02, BZ + 0.20))
+    # five slots down the board, SPACED UNEVENLY on purpose. Local z runs up the
+    # board; the top one is empty.
+    SLOTS = ((0.255, None), (0.105, 'flat'), (-0.015, 'struck'),
+             (-0.145, 'flat'), (-0.255, 'flat'))
+    for lz, kind in SLOTS:
+        c = RB @ Vector((0.0, -0.040, lz)) + Vector((BX, BY, BZ))
+        if kind is None:
+            # THE EMPTY SLOT. PASS 4 MADE IT A DARK RECESS IN A DARK BOARD,
+            # WHICH IS INVISIBLE BY CONSTRUCTION - I checked it in the picture
+            # and there was nothing there to see, in any of the three views or
+            # on the hero sheet. A socket is only legible if its RIM is, so it
+            # is now a pale ring with a dark plug set proud in the middle of it:
+            # same silhouette as a seated blank, opposite value in the centre,
+            # so the pair reads as one gone and four left rather than as four.
+            P.raw(aim(L.cone(0.062, 0.062, 0.022, 16), (c.x, c.y - 0.010, c.z),
+                      (0.0, -1.0, 0.0)), 'bone')
+            P.raw(aim(L.cone(0.040, 0.040, 0.030, 14), (c.x, c.y - 0.026, c.z),
+                      (0.0, -1.0, 0.0)), 'dark')
+            continue
+        # a seated blank: its rim inside the board's thickness, face just proud
+        # of it, and deliberately SMALLER than the blank in the press jaws
+        # (0.058 against 0.088) so the mechanic stays the brightest sentence.
+        P.raw(aim(L.cone(0.058, 0.058, 0.034, 16), (c.x, c.y - 0.012, c.z),
+                  (0.0, -1.0, 0.0)), 'bone')
+        if kind == 'struck':
+            # ONE ALREADY STRUCK, so the four are not a row of identical dots -
+            # which is the other UI read, and the reason this board is irregular
+            # by design rather than by accident. It also carries the STRIKE half
+            # of the trade now that the punch is gone.
+            P.add(L.sphere(0.030, 0.030, 0.017), 'bone',
+                  loc=(c.x, c.y - 0.042, c.z))
+    _close("strip")
+
+    _open()
+    # --------------- THE BACK (+Y): THE MECHANIC TURNED ON ITS OWN OWNER
+    # A strongbox strapped high on his back, lid shut, with a LEAD STRIP laid
+    # across the lid joint - which is exactly what a sealed thing looks like and
+    # exactly what he does to the party. It is invisible from the front (the
+    # body is in the way) and the press, the punch, the strip and the face are
+    # all invisible from the back, so the two reads differ BY CONSTRUCTION.
+    # The Dauber's pass-2 lesson is the reason the strip sits ON the lid and not
+    # on a cord beside it: a collision or a UI read that exists only in
+    # projection is still a fault, and the cheapest way to not have one is to
+    # leave nothing standing clear of the body for a camera to stack.
+    # *** PASS 5 - THE BEADLE'S FAULT CAME BACK IN A NEW COSTUME AND THE
+    # *** HERO SHEET IS WHERE I SAW IT. ***
+    # At pass 4 the strongbox stood only 0.135 m proud of his back, so in
+    # hero_back.png it did not break the silhouette at all - the box merged into
+    # the torso and the only thing readable from behind was the LEAD STRIP: a
+    # small PALE VERTICAL PATCH high on the body, which is the same size, the
+    # same value and very nearly the same place as the pale face panel on the
+    # front. That is the Beadle's no-facing defect exactly - a body that reads
+    # the same from both ends - arrived at by a different route after I wrote a
+    # paragraph above claiming it was designed out. Two changes, and they are
+    # the same argument twice: make the box BREAK THE OUTLINE (bigger, and
+    # standing 0.24 m proud), and turn the lead from a vertical patch into a
+    # HORIZONTAL BAR across the lid, because a horizontal pale bar cannot be
+    # mistaken for a vertical pale face at any distance.
+    BOXZ = 1.22
+    P.add(L.box(0.60, 0.36, 0.46), 'dark', loc=(0.0, 0.40, BOXZ))
+    for s_ in (-1, 1):   # the two straps over the shoulders, +Y side only
+        limb(P, [(s_ * 0.24, 0.05, SHO + 0.03), (s_ * 0.21, 0.26, 1.46),
+                 (s_ * 0.18, 0.36, BOXZ + 0.23)], 0.044, 0.038, 'dark')
+    # the lid joint, and the lead laid across it. Flat on the box, 0.03 proud -
+    # not a blob on a thread (correction (a) again: nothing on this body hangs).
+    P.add(L.box(0.62, 0.030, 0.030), 'dark', loc=(0.0, 0.40, BOXZ + 0.215))
+    P.add(L.box(0.46, 0.060, 0.090), 'bone', loc=(0.0, 0.595, BOXZ + 0.205))
+    # the hasp, dark, so the pale bar has something to be laid over
+    P.add(L.box(0.090, 0.050, 0.125), 'dark', loc=(0.0, 0.592, BOXZ + 0.055))
+    _close("backside")
+    return P
+
+
+BUILDERS.update({"sealer": sealer})

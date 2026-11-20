@@ -811,6 +811,32 @@ ADD TO THIS LIST, DO NOT RESET IT. Land it all at once the moment a write is per
           all outside them. Verified by deep equality of the page object against a rebuild on the
           merged tree carrying C-125 and C-126.
 
+  (11) ADDED 2026-11-19 20:2x CT by the 19:58 seat. I did NOT spend a call attempting the write:
+       it is settled twice over (the `enabled=true` no-op refusal of 18 Nov 09:07, and the 17:2x
+       auto-mode-classifier refusal on a LIVE turn on 19 Nov). These are owed on top of (1)-(10).
+       - THE PUBLISH SHAs AGAIN, AND (1) IS NOW STALE TOO. **HUB PUBLISH 5 WENT OUT AT 20:1x CT ON
+         19 NOV** on the supervisor's 19:28 authorisation. gh-pages ae1a4831 -> **05ac2679**,
+         tree **9ca8051e**, which EQUALS origin/hub:web; fast-forward proved; index.html at the
+         branch root. **THE MERGED-AND-NOT-PUBLISHED DELTA IS NOW ZERO.** The LORE_FROZEN pin
+         9f38b9c8 / 2026-11-18 is what is live.
+       - THE ID LINE, measured now: **B66, C-127, D100, H32, L74, S48, T5, U88.**
+       - FOR THE ART PROMPT: art stood down from a rowed Godot job at 19:5x because the
+         docs/RUN_LOCK.txt copy in ITS OWN WORKTREE is stale by days (last line 17 Nov 11:25) and
+         it could not read the live one. THE LIVE LOCK IS R'S WORKING COPY,
+         "$HOME/mnt/hd adventure/jests-hd-medieval-adventure/docs/RUN_LOCK.txt", and it is often
+         UNCOMMITTED. Every lane prompt that tells a lane to read the lock should say WHICH copy.
+         Standing down was correct; having to is a tooling fault this seat owns.
+       - THE DEAD-DATA BASELINE, measured 20:0x CT on the merged tree off scripts/ + web/ only:
+         **2,245,459 chars / 49 files (47 .gd + 2 .js), 12 data files, 132 top-level keys, 42
+         zero-hit of which 27 are `_note_`. UNREAD LIVE DATA KEYS: ZERO, unmoved.**
+       - AND A CAVEAT ON THE ASSET-DIRECTORY HALF OF THAT AUDIT, BECAUSE MY OWN INSTRUMENT WAS
+         TOO KIND: a bare-name match says 33 directories with files and ZERO unreferenced. I
+         confirmed the hit the way guard 1 requires and it does not hold - **assets/gear/armour/
+         (art's five System 7 shells) matches only the common word "armour" in gear.gd. There are
+         ZERO hits for "gear/armour" or "armor_" in any .gd, and the five .glb have no .glb.import
+         sibling.** The honest count this hour is **33 directories, ONE genuinely unreferenced**,
+         and it closes when System 7's engine half lands. Do not report it as zero.
+
 ## TAKE THIS NEXT - written 2026-11-18 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 Live immediately for ALL SIX LANES. The 20:0x block below is spent; its rows are ticked or re-cut here.
 

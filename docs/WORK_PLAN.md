@@ -84,6 +84,99 @@ FOR THE SUPERVISOR:
       enough for WORK and I have treated it as work. If any part of it ever reads as changing who
       owns what, I will not act on it without his own words and a time.
 
+### ADDENDUM - 2026-11-19 22:2x CT, same 21:58 firing. TICKS AND ONE AUDIT FINDING.
+WRITTEN AFTER :05. The ticks and the audit finding below are RECORDS and stand from now. The one
+new INSTRUCTION in it (content, the alt2 pools) is THE NEXT FIRING'S ROW and says so on its face.
+
+TICKED THIS HOUR, ALL FIVE ON MY OWN MEASUREMENT:
+  - **C-129 (content)** - +81 lines across ten pools, counted off the file; zero dupes, zero
+    collisions, every pre-existing entry byte-identical as a prefix, zero non-ASCII, and
+    _note_c129 nested under barks so the top-level count did not move at all.
+  - **B67 and B68 (chat bot)** - docs/COMMANDS.md on the merged tree hashes md5
+    6b26fe2efa33224a5c48ae3c4f44cecd at 6215 bytes with 29 table rows, and data/commands.json
+    agrees both ways at 29. That is the one thing that could have gone wrong silently and it
+    matched the lane to the byte.
+  - **S50 row (a) (game build)** - 5 .fbx + 5 .fbx.import + the CC0 licence note in
+    assets/gear/shields/, and I LOOKED at renders/cycles/s50/s50_shields.png: five distinct
+    shields, clean faceted geometry, consistent scale, no z-fighting. **THE FIT PROOF IS NOT OWED
+    AT ROW (a) AND I AM SAYING SO RATHER THAN WAIVING IT** - nothing is worn or placed until
+    gear.gd is wired at row (b), and that is where the on-body front/side/back proof falls due.
+  - **U90 (HUD)** - and I ticked it on the GATE SOURCE, not on the shots, because I read the shots
+    first and they did not show what the lane claimed. tools/_u90_feed_load.gd measures what is
+    DRAWN (`_box` children) and says in its own comment that it will not trust `_shown`; it has a
+    real NO-VERDICT path (`_labels < 10 or _panels < 3` -> quit(2)) so it cannot print OK on a run
+    that measured nothing; and `break` shrinks the ALLOWED rect to 300x200, which is a CHECK-side
+    break, not a render-side one. **THAT IS WHY u90_break_100.png LOOKS PERFECTLY FINE AND IS
+    SUPPOSED TO.** I nearly wrote that the red proof was hollow because the picture was clean.
+    ONE HONEST LIMIT ON THE RED PROOF, AND THE LANE SHOULD KNOW IT: break exercises the
+    viewport-containment assertion ONLY. The cap check, the QUEUE_MAX check and
+    dropped_protected == 0 are green but UNPROVEN - a red proof of one assertion is not a red
+    proof of four.
+
+VERIFIED AND DELIBERATELY NOT TICKED:
+  - **S7 pass 2 (art)** - both of art's claims are TRUE and System 7 is still OPEN, which is art's
+    own position and not a disagreement. I opened fit15 Q5_Armor_Golden back and front and the
+    bare control. The back IS closed: the gold wraps collar to hem with no body showing. And the
+    front is NOT the "smooth mustard sack" I called it at 21:0x off fit8 - the shoulder horns are
+    faceted geometry again, the breastplate carries a seam and a V hem. **MY OWN 21:0x SENTENCE NO
+    LONGER DESCRIBES THE WORK AND I AM STRIKING IT RATHER THAN LEAVING IT TO BE QUOTED BACK.**
+  - **AND AN INSTRUMENT OF MINE LIED TO ME INSIDE THIS RUN.** I counted interior transparent
+    pixels across the shoulder band and got 166 on the front and 215 on the back, which reads as
+    see-through holes in the silhouette. IT IS A FALSE POSITIVE. Printing the per-row spans
+    instead of the totals shows the "holes" are the few rows where the HORN TIPS appear as small
+    islands beside the neck before the horn meets the shoulder - legitimate open air - and the
+    bare control is one unbroken span on the same rows. A whole-row gap count cannot tell a breach
+    from a spike. I would have charged art with a hole that is a horn.
+
+*** THE DEAD-DATA AUDIT MOVED, AND THE FAULT IS THIS SEAT'S, NOT CONTENT'S. ***
+Measured off scripts/*.gd + web/*.js ONLY (48 files, 2,243,046 chars) and assets/ only:
+  - UNREFERENCED ASSET DIRECTORIES: ZERO of 34 directories with files.
+  - TOP-LEVEL KEYS 133 across 12 data files. ZERO-LITERAL-HIT: 43, of which 28 are `_note_`.
+  - NON-NOTE ZERO-HIT: 15. The standing baseline accounts for FOURTEEN - the nine prose/spec keys,
+    the two runtime-built _alt pools, and three of the four declared dead.
+  - **THE FIFTEENTH IS `phase2_words_alt2` AND IT IS GENUINELY UNREAD.** delve.gd:3727 builds
+    `base + "_alt"` and NOTHING ELSE; `grep -rn "_alt2" scripts/ web/` returns nothing at all. It
+    is a dict of 7 and it landed at C-114 on 18 Nov 11:23 CT - about two hours AFTER the baseline
+    that every seat since has been quoting.
+  - **SO THE UNREAD LIVE COUNT IS 1, NOT 0, AND HAS BEEN FOR ROUGHLY 34 HOURS WHILE THIS SEAT
+    REPORTED IT AS ZERO.** The prompt tells this seat in capitals to compare the accounted-for
+    classes and not the raw number, and the raw number is exactly what got compared, because the
+    rise looked like notes and 28 of the 29 new keys were notes. I am not handing this to a lane:
+    it is my instrument and my baseline.
+  - THE BASELINE IS CORRECTED HERE TO: FIFTEEN non-note zero-hit keys = nine prose/spec + two
+    runtime _alt + FOUR declared-dead-or-dead-shaped, the fourth being `phase2_words_alt2`.
+    I am treating alt2 as DEAD-SHAPED and NOT wiring it: its two older siblings phase2_words and
+    phase2_words_alt were formally declared dead at D98 and sealed, and a third copy of a sealed
+    pool is not a wiring job. NO LANE IS TO WIRE IT.
+
+1. CONTENT - **NEXT FIRING'S ROW, NOT THIS ONE'S** (written 22:2x, after :05): stop extending the
+   phase2_words family. phase2_words, phase2_words_alt and now phase2_words_alt2 are all unread
+   and the first two are sealed by D98. This is not a complaint about C-114 - you wrote a pool,
+   which is your job, and the audit that was supposed to notice is mine and did not. Just do not
+   add a fourth. Your C-130 row (the 36-name rename) is unchanged and stands above.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST.
+A firing cannot write a scheduled task's prompt; it has no live turn to be approved in. That is
+settled and I did not re-test it. THE FIRST SEAT WITH A LIVE TURN SHOULD LAND ALL OF THESE AT ONCE:
+  (1) THE :58 TEAM LEAD PROMPT, STEP 0 BASELINE. It reads "UNREAD LIVE DATA KEYS: ZERO" and "32
+      keys return zero literal hits". Both are stale as of 18 Nov 11:23 CT. Correct to: 43 zero
+      literal hits, 28 of them `_note_`, FIFTEEN non-note - nine prose/spec, two runtime _alt,
+      and FOUR declared dead or dead-shaped (townsfolk, phase2_words, phase2_words_alt,
+      phase2_words_alt2, with town_levels_for_the_desktop alongside them). Add
+      `phase2_words_alt2` to the do-not-wire list beside the other sealed pools.
+  (2) SAME PROMPT, the miniboss count line: it says thirty-three exist as of 18 Nov and tells the
+      reader to measure off tools/art/minibosses.py. The supervisor's 21:50 directive works from
+      THIRTY-SIX. Leave the measure-it-yourself instruction, correct the number.
+
+FOR THE SUPERVISOR - ONE ADDITION TO THE THREE ABOVE:
+  (4) **D98 HAS A FOURTH SIBLING AND RE-OPENING D98 IS NOT MINE.** `phase2_words_alt2` (C-114,
+      18 Nov 11:23 CT, a dict of 7) is unread and unaccounted for. I have declared it dead-shaped
+      in the baseline, told no lane to wire it, and asked content not to add a fifth. What I am
+      NOT doing is deciding whether the phase2_words family should ever be wired or whether
+      content should stop generating these pools permanently - D98 sealed the first two and that
+      ruling is ticked, so extending or lifting it is yours. My recommendation: leave all four
+      dead and tell content once, in writing, that the family is closed.
+
 ## TAKE THIS NEXT - written 2026-11-19 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 20:58 FIRING. **SYSTEM 2 IS WHOLE. ITS HUD HALF TICKED THIS HOUR ON A PICTURE I
 LOOKED AT MYSELF** - the last open half of Mr. E's Phase 1 is closed. All six lanes ran; I ticked

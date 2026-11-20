@@ -857,7 +857,23 @@
     "Down they go, in the order they always go.",
     "The keeper nods and writes the hour.",
     "The first landing is where the talking stops.",
-    "Someone has left a candle at the top. It is a kindness."
+    "Someone has left a candle at the top. It is a kindness.",
+    "%s %s to the landing, the rope paid out behind.",
+    "%s %s with the bread still warm in the pack.",
+    "%s %s in step, the lamp passed hand to hand.",
+    "%s %s the stair one at a time, no hurry.",
+    "%s %s through the gate. The keeper does not look up.",
+    "%s %s as the bell fades behind them.",
+    "%s %s with the mud of the yard still on their boots.",
+    "%s %s past the old marks on the wall.",
+    "%s %s after a word with the healer.",
+    "%s %s, and the door is eased shut.",
+    "The rope is knotted at the top. It is tested twice.",
+    "Somebody checks the lamp-oil a last time.",
+    "The gate-keeper writes the names in a small, clean hand.",
+    "The stair is dry today. That is something.",
+    "Nobody sings. A few hum.",
+    "The morning bread is eaten on the way down."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1232,7 +1248,20 @@
     "A breath, a swallow of water, and the stair.",
     "They sit with their backs to the wall and let the shaking pass.",
     "It is over, and the floor is very quiet.",
-    "The party tallies the cuts and finds them small."
+    "The party tallies the cuts and finds them small.",
+    "The floor is theirs, and they take a breath.",
+    "Nobody cheers. A hand is clapped on a shoulder.",
+    "The party sit in a ring and pass the flask.",
+    "Slow work, the clearing. It is done now.",
+    "Floor %d is swept. The lamps are trimmed.",
+    "The wounded are seen to first. Then the loot.",
+    "Dust drifts down and the quiet comes with it.",
+    "The party wipe their blades on the same rag, in turn.",
+    "Bandages tied, boots laced, nobody speaking.",
+    "The dark is just dark again.",
+    "Someone finds a bench. Someone else is glad of it.",
+    "They count heads. All there. They count again.",
+    "Floor %d is done. The rope is coiled for the stair."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -1721,7 +1750,11 @@
       "Boots dry, hands steady.",
       "Same dark as yesterday.",
       "Quiet feet, now.",
-      "Lamp high. Eyes lower."
+      "Lamp high. Eyes lower.",
+      "Lamp first, then the foot.",
+      "Mind the third step.",
+      "Light is thin. Use it.",
+      "Breathe low and walk slow."
     ],
     "lord": [
       "Hold together!",
@@ -1993,7 +2026,11 @@
       "Nobody runs. We finish this.",
       "Talk later. Swing now.",
       "Wait for the opening.",
-      "Shields up. Then we see."
+      "Shields up. Then we see.",
+      "He is bigger than the stories.",
+      "Hold the door. We hold it.",
+      "Do not look at his hands.",
+      "One at a time. Then all at once."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2269,7 +2306,10 @@
       "Wire across the way. Step over.",
       "Something under the rug.",
       "I do not like that plate.",
-      "Count to three, then go."
+      "Count to three, then go.",
+      "Feel with the boot first.",
+      "Too quiet by half.",
+      "A thread. Step high."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -2538,7 +2578,11 @@
       "Bleeding, not dying.",
       "That one will mark.",
       "Tell the healer I said nothing.",
-      "A scratch. A long one."
+      "A scratch. A long one.",
+      "It will keep till morning.",
+      "Bind it and go on.",
+      "Worse than it looks. Not by much.",
+      "I have had worse from a stable door."
     ],
     "drink": [
       "Bottoms up.",
@@ -2797,7 +2841,10 @@
       "Tastes of pennies.",
       "Hold my shield, I am drinking.",
       "That will do for now.",
-      "Sweeter than it looks."
+      "Sweeter than it looks.",
+      "Gods, that is foul.",
+      "Better than the last one.",
+      "Save me a swallow."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -3068,8 +3115,11 @@
       "That was the wrong word.",
       "Somebody cough so it is not me.",
       "The words were right. The hands were not.",
-      "Forget you saw that."
-    ]
+      "Forget you saw that.",
+      "That was the cold, not me.",
+      "Again. Quietly."
+    ],
+    "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key."
   },
   "misfire": [
     "%s's %s goes wrong - the scar answers (%d vs DC %d).",
@@ -3201,7 +3251,15 @@
     "%s loses the thread of %s (%d vs DC %d).",
     "%s's %s sparks once and gives up (%d vs DC %d).",
     "%s tightens a grip on %s. Nothing answers (%d vs DC %d).",
-    "%s starts %s and forgets the end (%d vs DC %d)."
+    "%s starts %s and forgets the end (%d vs DC %d).",
+    "%s's %s catches and will not light (%d vs DC %d).",
+    "%s reaches for %s and finds a blank (%d vs DC %d).",
+    "%s mumbles through %s and the air stays still (%d vs DC %d).",
+    "%s's %s goes out like a wet match (%d vs DC %d).",
+    "%s begins %s and is out of breath (%d vs DC %d).",
+    "%s mislays the middle of %s (%d vs DC %d).",
+    "%s mouths %s. Nothing comes of it (%d vs DC %d).",
+    "%s's %s fizzles in the hand (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -3793,7 +3851,31 @@
     "Left the good boots to the next one.",
     "Was told it was a short job.",
     "Did not complain of the cold. Not once.",
-    "Kept the count. The count is all that is left."
+    "Kept the count. The count is all that is left.",
+    "Mended the strap twice and trusted it.",
+    "Said the porridge was good. Meant it.",
+    "Left the ledger squared and the lamp trimmed.",
+    "Never once ran ahead.",
+    "Carried the water for the whole party.",
+    "Put a coin by the door for the next one.",
+    "Hummed on the stair. Stopped when it mattered.",
+    "Was the last to sit and the first to stand.",
+    "Sharpened the knife the night before.",
+    "Counted the party out. Counted it back in, one short.",
+    "Was told to stay up top. Did not.",
+    "Patched the cloak in the dark.",
+    "Owed the baker three loaves.",
+    "Kept the rope dry.",
+    "Had a good laugh and a bad knee.",
+    "Stood between the lamp and the wall.",
+    "Knew the names of the guild cats.",
+    "Did the dull jobs well.",
+    "Bought the round. Went down.",
+    "Slept like a stone and woke before the bell.",
+    "Never learned to swim. Did not need to.",
+    "Left a dry pair of socks in the pack for whoever.",
+    "Held the line and said so after.",
+    "Took the long way round and was glad of it."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",

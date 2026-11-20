@@ -545,3 +545,18 @@ IDLE 2026-11-18T21:09:46-06:00 - game build S46: docs-only stand-down (20:0x row
 RUNNING 2026-11-18T21:10:15-06:00 (game build S46b: re-export the seven _Golden with colour, lead 21:0x row 1, expected finish 21:33, cap claim+25 = 21:35)
 
 IDLE 2026-11-18T21:19:38-06:00 - game build S46b: seven _Golden .glb now carry their colour (baseColorFactor), all gates green, Godot closed, no crossing
+
+NOTICE 2026-11-19T17:10:00-06:00 (TEAM LEAD, 16:58 CT firing - NOT a lock claim, no lane need yield to this line) THE BLENDER BRIDGE IS DOWN ON cruzader: execute_blender_code returns "Cannot connect to Blender at localhost:9876" twice in a row at 17:0x CT. THAT MEANS NO GODOT AND NO GIT WRITES FOR ANY LANE until Mr. E opens Blender with the MCP addon. DO NOT substitute device_bash for git: the team lead red-proved the standing rule at 17:07 CT in a throwaway repo under _tl_tmp - the first commit SUCCEEDED but could not unlink .git/HEAD.lock, and the SECOND commit died with "cannot lock ref 'HEAD' ... File exists". One commit per repo and then the repo is wedged. Report your work in your summary, leave the tree alone, and carry the commit to your next firing. ALSO: the scheduler was out for ~19.5 hours (last commit anywhere 18 Nov 21:37 CT) and ALL SEVEN tasks were flushed together at 17:01:0x CT today - game build, art and chat bot all fired in the same second as the team lead, so the :07/:34/:45/:52 windows did NOT apply this hour and the lock lines below may show simultaneous claims. That is the scheduler, not indiscipline; the team lead is not charging any lane for it.
+
+IDLE 2026-11-19T17:08:20-06:00 - game build 17:07 firing: NO CLAIM TAKEN. Blender bridge refused twice (localhost:9876), so no Godot and no git. Tree untouched, nothing launched. S46b (3481b7f) still awaiting the lead.
+
+RUNNING 2026-11-19T17:47:15-06:00 (chat bot B64 - re-run my own battery on the merged tree per the 17:4x CHAT BOT row; origin/main merged into chatbot and pushed (7538be7a) FIRST so the lead can see B63. Engine verified EMPTY on BOTH image names at 2026-11-19T17:47:15-06:00; last lock line is game build IDLE 17:08:20. claim+25 cap computed first = 18:14, BUT THE BOUNDARY IS THE HUD AT :52 AND I COMPUTED IT FIRST: declared finish 17:51, INSIDE :52. Three short --script runs only, no bare gate. Any remainder splits to 18:45)
+IDLE 2026-11-19T17:47:43-06:00 - chat bot B64: battery GREEN on the merged tree (C-125's 128 new content lines in): TWITCH_PARSE OK (8), L14_TEST OK (22, Godot's own '2 resources still in use at exit' note reported not hidden), COMMANDS_DOC OK wrote 27 as a TRUE no-op (COMMANDS.md md5 9a80bfd9 before and after). Three short --script runs, no bare gate. Godot EMPTY on both image names at 2026-11-19T17:47:43-06:00. Claim 17:47:15, cap 18:14, declared 17:51, IDLE now - NO crossing into the HUD :52. No Twitch connection, nothing posted, no bits. (chat bot)
+
+RUNNING 2026-11-19T17:53:25-06:00 (HUD U86 - break_shift red-proof of the U85 sweep, 3 short windowed --script runs, claim+15 cap 18:07, expected finish 18:03; engine verified EMPTY, last lock line chat bot IDLE 17:47:43)
+
+IDLE 2026-11-19T17:56:55-06:00 - HUD U86: sweep break_shift red-proven (OFFSCREEN Spotlight, bad=3, FAIL) and clean run OK; Godot EMPTY. Claim 17:53:25, declared finish 18:03, released early - NO crossing. (HUD)
+
+RUNNING 2026-11-19T18:08:31-06:00 (game build - claim+25 cap 18:33, expected finish 18:30; last lock line HUD IDLE 17:56:55)
+
+IDLE 2026-11-19T18:14:46-06:00 - game build S47: bow_golden string confirmed present (S47_BOW OK), battery green (TWITCH_PARSE OK 8, OFFFLOOR OK 0/2343, TOWNWALK PASS, DELVE_TEST OK). Godot EMPTY. Claim 18:08:31, cap 18:33, declared 18:30, released early - NO crossing. No Twitch, 0 bits. (game build)

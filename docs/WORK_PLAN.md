@@ -67,8 +67,28 @@ which you got.
    the SIDE the creature's own body is largely occluded by the trough's upright frame - you read
    the machine, not the figure. Front and back both carry it, so fit passes. If a side silhouette
    matters for this one, that is yours to judge, not a defect I am charging.
-   NEXT: minibosses at full rate, and push before you render - a body in W5 is invisible to every
-   other lane. Measure the count off minibosses.py, never off a number in a prompt or in this plan.
+   *** YOUR NEXT ROW IS NOT MINIBOSSES, AND THAT IS A CORRECTION AGAINST MY OWN SEAT. ***
+   MR. E, LIVE AT 18:2x CT, ASKED WHY YOU ARE NOT ON THE PACKS, AND HE IS RIGHT. His own directive
+   of 18 Nov 16:58 CT says it in plain words: prioritise systems that CONSUME PACK ASSETS over pure
+   procedural geometry, and "when dry on minibosses, start fitting pack models to the KayKit hero
+   body instead of inventing new procedural geometry. The packs are the priority now."
+   I MEASURED HOW FAR THAT GOT: of the 46 entries in _report.json, FOUR carry a pack_used
+   (quartermaster, loader, tapster, strickler). The Fuller's is null. Every row my seat has written
+   you since has said "minibosses at full rate" - I carried a stale row for a day instead of
+   reading his directive. The Fuller is good work and stays ticked; the ROW was wrong, not the work.
+   NEXT - SYSTEM 7, ARMOUR VARIETY, AND THE ASSETS ARE ALREADY ON DISK. I looked myself at 18:2x:
+   `_packs/quaternius_ultimate_rpg_items_CC0/Ultimate RPG Items Pack - Aug 2019/` carries FIVE
+   armour bodies as both .blend and .fbx - Armor_Black, Armor_Golden, Armor_Leather, Armor_Metal,
+   Armor_Metal2. Quaternius is CC0 and cleared for commercial use; note the licence file in
+   docs/art/ASSET_SOURCES.md as usual. The job is the one you already know how to do: fit-proof on
+   the KayKit hero body, FRONT, SIDE AND BACK, and look at the render yourself before you call it.
+   AFTER THAT, SYSTEM 8 (shields) - `_packs/handpainted_weapons/` has shield_a..d as .obj/.mtl with
+   textures, and Quaternius Medieval Weapons carries five more.
+   MINIBOSSES ARE NOW THE DRY FALLBACK, NOT THE DEFAULT - which is exactly what Mr. E said in
+   November and what I should have been writing all along. If a pack row is blocked (no folder
+   grant, a licence you cannot verify), say so in writing and THEN invent a miniboss.
+   Still true whatever you work on: push before you render - a body in W5 is invisible to every
+   other lane - and measure the miniboss count off minibosses.py, never off a prompt or this plan.
 
 4. HUB - NOTHING TO TICK, AND YOUR ROW IS UNCHANGED BUT NOW HAS A LIVE TARGET SHA.
    RE-MEASURED THIS HOUR SO NOBODY COPIES A STALE NUMBER: published is origin/gh-pages ae1a483

@@ -12540,4 +12540,12 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 Item: TAKE THIS NEXT (20 Nov 06:58 CT) row 3, CONTENT: C-137 ticked; keep producing, keep writing _note_ keys. No miniboss owed: origin/art minibosses.py holds 13 full bodies, every one already keyed in miniboss_feed.by_key (36). Added epitaphs +13, descend +6, cleared +5, and _note_c138.
 VALIDATION OK: json.load passes (45 top-level keys), every pre-existing key and list entry unchanged (prefix-compared), only new key _note_c138.
 CODE WIRING: none new; the pools already have readers.
+## HUB 2026-11-20 07:45 CT - STAND-DOWN IN WRITING + AUDIT OF OWN web/. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+TAKE THIS NEXT (06:58 block) row 4 gave HUB: "write the stand-down DOWN, or audit your own shipped web/. Do NOT run the publish gate." Did both. No screenshot: web/ did not change.
+THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/hub:web = origin/gh-pages^{tree}. Merged-and-unpublished delta = 0 files / 0 lines. `git diff origin/hub -- web/` empty.
+AUDIT (read off the file): app.js innerHTML code sites only :255 and :301 (page-owned strings); :7 :93 :5092 :5133 are comments. Zero outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code (:10-11 are the comment saying so). index.html:49 and app.js:7 "only innerHTML ... two page-owned sites" still true. node --check app.js OK. CSP meta intact (default-src 'none'; script/style/img/font self; connect-src supabase + twitch only). No external CDN/font refs (only og:url/og:image meta). SHOP_RARITY (app.js:3208) carries "very rare" -> very-rare and "epic" as a legacy alias, so the old FOR-THE-HUB note about a missing "very rare" is already answered.
+sha1: app.js 9745ecd2, index.html 027fdc4b, style.css 6c63b8c9.
+Hostile-name test NOT re-run: web/ byte-identical to the tree it passed on (17 Nov 17:58 CT), not owed.
+Merge hygiene: fast-forwarded origin/hub (plan sync), merged origin/main clean. Untracked _hub_ready_shot.png in W is mine, delete refused on this machine, named here.
+Live-dot colour: unchanged. Nothing for Mr. E to decide.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

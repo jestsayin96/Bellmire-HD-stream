@@ -1,3 +1,182 @@
+## TAKE THIS NEXT - written 2026-11-19 22:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 21:58 FIRING. All six lanes ran. main afb35709 - six merges, two PROGRESS.md
+conflicts resolved keeping both sides, ZERO residual markers in the file that conflicted, pushed.
+I RE-READ ALL SIX REFS AFTER THE MERGE PASS: none moved, so nothing here is stale on arrival.
+*** NEW WORK FROM THE SEAT ABOVE ME. *** The supervisor's 21:50 CT directive
+(claude/sup-nov19-2150-MR-E-DIRECTIVE-miniboss-rename-and-monster-variants.md) carries a MR. E
+DIRECTIVE in two parts: (1) RENAME all 36 minibosses - the bodies, mechanics and fit proofs are
+unchanged, only the names go, because "they all sound like job titles"; (2) a SECOND CLASS of
+miniboss made by recolouring and scaling up existing CC0 pack creatures and naming them. The
+directive carries ONE verbatim fragment and no timestamp of its own, so I am recording it as the
+SUPERVISOR'S relayed directive and acting on it as WORK - it changes no authority, no ownership
+and no rule, so it needs nothing more than that. The full 36-name table is in that doc; READ IT
+THERE rather than from any lane summary. Mr. E has final say on every name - they are proposals.
+THE RENAME GOES FIRST BECAUSE IT IS CHEAP, and it is one item across three lanes, not three items.
+
+1. GAME BUILD - **S50 ROW (a) VERIFIED ON THE FILES BY MY OWN HAND, TICK HELD ONE HOUR FOR THE
+   PICTURE AND NOT FOR THE NUMBERS.** assets/gear/shields/ holds exactly 5 .fbx (celtic_golden,
+   heater, heater_2, round, round_2), 5 matching .fbx.import siblings, and
+   LICENSE_Quaternius_MedievalWeapons_CC0.txt - I listed the directory rather than reading your
+   line, and your "n=5" is 5. gear.gd is NOT wired, exactly as row (b) says it should not be.
+   What I have not yet done is LOOK at renders/cycles/s50/s50_shields.png, and fit is the
+   acceptance test for anything worn or placed, so the tick waits on my eye, not on your battery.
+   NEXT - THE RENAME, PART 1 OF THE DIRECTIVE: wire the 36 new names into bestiary.gd's miniboss
+   entries off the table in the supervisor's doc. Bodies, mechanics and scales UNCHANGED. Do not
+   touch tools/art/minibosses.py - that is art's file - and do not re-fit anything.
+2. CONTENT - **C-129 IS TICKED, AND I COUNTED EVERY POOL OFF THE FILE RATHER THAN READING YOUR
+   LINE.** epitaphs 590->614 (+24), descend 375->391 (+16), cleared 373->386 (+13), misfire
+   130->138 (+8), barks enter +4 / lord +4 / trap +3 / hurt +4 / drink +3 / misfire +2. 81 lines.
+   And I checked the parts that go wrong silently: ZERO duplicates inside the added lines, ZERO
+   collisions with the lines already there, every pre-existing entry in all ten pools byte-
+   identical as a prefix, zero non-ASCII.
+   **AND YOU FIXED LAST HOUR'S DEVIATION WITHOUT BEING ASKED TWICE: _note_c129 IS NESTED UNDER
+   barks, and the top-level key count did not move AT ALL (44 before, 44 after).** That is the
+   whole point of the nesting rule and you took it on the first telling.
+   NEXT - THE RENAME, PART 1 OF THE DIRECTIVE: rename all 36 in lore_lines.json miniboss_feed and
+   rewrite the feed lines to use the new names. One batch per cycle is fine and the directive says
+   so. Nest _note_c130 under miniboss_feed. The old names must not survive anywhere in the pools.
+3. ART - **S7 PASS 2 IS MERGED AND THE TICK IS HELD ONE HOUR FOR MY OWN EYE, NOT FOR DOUBT.** You
+   closed the back on five shells and you also told me the widen my 21:0x row asked for was NOT
+   OWED. I take a lane telling me my own instruction was wrong seriously - it is the third time
+   this week a lane has corrected this seat on its own measurement - but I will not tick it on
+   your reading of it any more than on mine. I have fit14 and fit15 in the tree (90 shots) and
+   _fit_sheet_pass2b.png; I look at the back shots this hour and the row lands in my addendum.
+   NEXT - PART 2 OF THE DIRECTIVE, AND IT IS YOURS ALONE: the monster-pack variant minibosses.
+   Recolour + scale up an existing CC0/QAL pack creature, name it, fit-proof it on the hero body
+   front/side/back to the SAME standard as the 36. This is recolour and scale, NOT new geometry.
+   Start with ONE and ship it whole rather than five half-done. Finish S7 first if S7 is one pass
+   from done - you measured it and I did not.
+4. HUB - **LEVEL, AND I RE-MEASURED IT MYSELF RATHER THAN COPYING LAST HOUR'S SHAS.** See my
+   addendum for the two tree hashes. I RAN NO PUBLISH GATE AND NONE WAS OWED - you claimed no
+   readiness and shipped no web/ change this hour.
+   NEXT: nothing is queued for you and the directive touches no file of yours. Stand down in
+   writing, or audit your own web/. A stand-down written up IS the delivery.
+5. CHAT BOT - **B67 AND B68 ARE BOTH TICKED. THE ONE THING THAT COULD HAVE GONE WRONG SILENTLY IS
+   THE ONE THING I MEASURED MYSELF, AND IT MATCHED YOU TO THE BYTE.** You said the REAL
+   tools/_commands_doc.gd left docs/COMMANDS.md byte-identical at md5 6b26fe2e / 6215 bytes. I
+   hashed the file on the merged tree: md5 6b26fe2efa33224a5c48ae3c4f44cecd, 6215 bytes, 29 table
+   rows - and data/commands.json agrees BOTH WAYS at 29 (order 29, commands 29). So B67's python
+   emulation did not merely look right, it produced what the engine produces.
+   AND YOU SPLIT RATHER THAN CROSSING, TWICE RUNNING: B67 was held last hour because you declined
+   to run into the HUD's :52, and this hour you computed cap 22:12, declared 21:51 INSIDE :52, and
+   released at 21:49:10. That is Mr. E's yield rule being obeyed by arithmetic and not by luck.
+   NEXT: town, then bestiary - and when the bestiary reaches the minibosses, the names are the NEW
+   ones from the supervisor's table, not the trade names.
+6. HUD - **U90 IS MERGED AND THE TICK IS HELD ONE HOUR FOR THE PICTURE.** The L74 feed-under-load
+   gate reads FEED_LOAD OK rc=0 and you RED-PROVED it yourself (break arg -> rc=1, 4967 fails),
+   which is the right shape and the one I would otherwise have had to build. Six shots are in the
+   tree at renders/cycles/u90/ (three run, three break, 100/125/150). I look at a run/break pair
+   this hour and the row lands in my addendum.
+   NEXT: your own queue. The directive touches NO file of yours - the rename is bestiary.gd,
+   minibosses.py and lore_lines.json - so do not pick it up, and say so if a row ever hands it to
+   you. The L31 remainder is still the GAME BUILD's, not yours.
+
+FOR THE SUPERVISOR:
+  (1) THE 21:50 DIRECTIVE IS ROWED, NOT SAT ON. Rename to content + game build this hour, monster
+      variants to art. I read Part 1 and Part 2 as ONE item in two halves rather than as 37 new
+      items, and I am saying that out loud because it is the half-of-an-existing-item judgement.
+      The directive says Mr. E has final say on the 36 names; I have NOT asked him and will not -
+      that is yours to carry up if you want them confirmed before three lanes write them in.
+  (2) NO PUBLISH DECISION IS WAITING. gh-pages and origin/hub:web are level; see my addendum for
+      the two hashes I measured this hour.
+  (3) ONE THING I WANT ON THE RECORD RATHER THAN ACTED ON: the directive doc carries one verbatim
+      Mr. E fragment ("they all sound like job titles") and no time stamp of its own. That is
+      enough for WORK and I have treated it as work. If any part of it ever reads as changing who
+      owns what, I will not act on it without his own words and a time.
+
+### ADDENDUM - 2026-11-19 22:2x CT, same 21:58 firing. TICKS AND ONE AUDIT FINDING.
+WRITTEN AFTER :05. The ticks and the audit finding below are RECORDS and stand from now. The one
+new INSTRUCTION in it (content, the alt2 pools) is THE NEXT FIRING'S ROW and says so on its face.
+
+TICKED THIS HOUR, ALL FIVE ON MY OWN MEASUREMENT:
+  - **C-129 (content)** - +81 lines across ten pools, counted off the file; zero dupes, zero
+    collisions, every pre-existing entry byte-identical as a prefix, zero non-ASCII, and
+    _note_c129 nested under barks so the top-level count did not move at all.
+  - **B67 and B68 (chat bot)** - docs/COMMANDS.md on the merged tree hashes md5
+    6b26fe2efa33224a5c48ae3c4f44cecd at 6215 bytes with 29 table rows, and data/commands.json
+    agrees both ways at 29. That is the one thing that could have gone wrong silently and it
+    matched the lane to the byte.
+  - **S50 row (a) (game build)** - 5 .fbx + 5 .fbx.import + the CC0 licence note in
+    assets/gear/shields/, and I LOOKED at renders/cycles/s50/s50_shields.png: five distinct
+    shields, clean faceted geometry, consistent scale, no z-fighting. **THE FIT PROOF IS NOT OWED
+    AT ROW (a) AND I AM SAYING SO RATHER THAN WAIVING IT** - nothing is worn or placed until
+    gear.gd is wired at row (b), and that is where the on-body front/side/back proof falls due.
+  - **U90 (HUD)** - and I ticked it on the GATE SOURCE, not on the shots, because I read the shots
+    first and they did not show what the lane claimed. tools/_u90_feed_load.gd measures what is
+    DRAWN (`_box` children) and says in its own comment that it will not trust `_shown`; it has a
+    real NO-VERDICT path (`_labels < 10 or _panels < 3` -> quit(2)) so it cannot print OK on a run
+    that measured nothing; and `break` shrinks the ALLOWED rect to 300x200, which is a CHECK-side
+    break, not a render-side one. **THAT IS WHY u90_break_100.png LOOKS PERFECTLY FINE AND IS
+    SUPPOSED TO.** I nearly wrote that the red proof was hollow because the picture was clean.
+    ONE HONEST LIMIT ON THE RED PROOF, AND THE LANE SHOULD KNOW IT: break exercises the
+    viewport-containment assertion ONLY. The cap check, the QUEUE_MAX check and
+    dropped_protected == 0 are green but UNPROVEN - a red proof of one assertion is not a red
+    proof of four.
+
+VERIFIED AND DELIBERATELY NOT TICKED:
+  - **S7 pass 2 (art)** - both of art's claims are TRUE and System 7 is still OPEN, which is art's
+    own position and not a disagreement. I opened fit15 Q5_Armor_Golden back and front and the
+    bare control. The back IS closed: the gold wraps collar to hem with no body showing. And the
+    front is NOT the "smooth mustard sack" I called it at 21:0x off fit8 - the shoulder horns are
+    faceted geometry again, the breastplate carries a seam and a V hem. **MY OWN 21:0x SENTENCE NO
+    LONGER DESCRIBES THE WORK AND I AM STRIKING IT RATHER THAN LEAVING IT TO BE QUOTED BACK.**
+  - **AND AN INSTRUMENT OF MINE LIED TO ME INSIDE THIS RUN.** I counted interior transparent
+    pixels across the shoulder band and got 166 on the front and 215 on the back, which reads as
+    see-through holes in the silhouette. IT IS A FALSE POSITIVE. Printing the per-row spans
+    instead of the totals shows the "holes" are the few rows where the HORN TIPS appear as small
+    islands beside the neck before the horn meets the shoulder - legitimate open air - and the
+    bare control is one unbroken span on the same rows. A whole-row gap count cannot tell a breach
+    from a spike. I would have charged art with a hole that is a horn.
+
+*** THE DEAD-DATA AUDIT MOVED, AND THE FAULT IS THIS SEAT'S, NOT CONTENT'S. ***
+Measured off scripts/*.gd + web/*.js ONLY (48 files, 2,243,046 chars) and assets/ only:
+  - UNREFERENCED ASSET DIRECTORIES: ZERO of 34 directories with files.
+  - TOP-LEVEL KEYS 133 across 12 data files. ZERO-LITERAL-HIT: 43, of which 28 are `_note_`.
+  - NON-NOTE ZERO-HIT: 15. The standing baseline accounts for FOURTEEN - the nine prose/spec keys,
+    the two runtime-built _alt pools, and three of the four declared dead.
+  - **THE FIFTEENTH IS `phase2_words_alt2` AND IT IS GENUINELY UNREAD.** delve.gd:3727 builds
+    `base + "_alt"` and NOTHING ELSE; `grep -rn "_alt2" scripts/ web/` returns nothing at all. It
+    is a dict of 7 and it landed at C-114 on 18 Nov 11:23 CT - about two hours AFTER the baseline
+    that every seat since has been quoting.
+  - **SO THE UNREAD LIVE COUNT IS 1, NOT 0, AND HAS BEEN FOR ROUGHLY 34 HOURS WHILE THIS SEAT
+    REPORTED IT AS ZERO.** The prompt tells this seat in capitals to compare the accounted-for
+    classes and not the raw number, and the raw number is exactly what got compared, because the
+    rise looked like notes and 28 of the 29 new keys were notes. I am not handing this to a lane:
+    it is my instrument and my baseline.
+  - THE BASELINE IS CORRECTED HERE TO: FIFTEEN non-note zero-hit keys = nine prose/spec + two
+    runtime _alt + FOUR declared-dead-or-dead-shaped, the fourth being `phase2_words_alt2`.
+    I am treating alt2 as DEAD-SHAPED and NOT wiring it: its two older siblings phase2_words and
+    phase2_words_alt were formally declared dead at D98 and sealed, and a third copy of a sealed
+    pool is not a wiring job. NO LANE IS TO WIRE IT.
+
+1. CONTENT - **NEXT FIRING'S ROW, NOT THIS ONE'S** (written 22:2x, after :05): stop extending the
+   phase2_words family. phase2_words, phase2_words_alt and now phase2_words_alt2 are all unread
+   and the first two are sealed by D98. This is not a complaint about C-114 - you wrote a pool,
+   which is your job, and the audit that was supposed to notice is mine and did not. Just do not
+   add a fourth. Your C-130 row (the 36-name rename) is unchanged and stands above.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST.
+A firing cannot write a scheduled task's prompt; it has no live turn to be approved in. That is
+settled and I did not re-test it. THE FIRST SEAT WITH A LIVE TURN SHOULD LAND ALL OF THESE AT ONCE:
+  (1) THE :58 TEAM LEAD PROMPT, STEP 0 BASELINE. It reads "UNREAD LIVE DATA KEYS: ZERO" and "32
+      keys return zero literal hits". Both are stale as of 18 Nov 11:23 CT. Correct to: 43 zero
+      literal hits, 28 of them `_note_`, FIFTEEN non-note - nine prose/spec, two runtime _alt,
+      and FOUR declared dead or dead-shaped (townsfolk, phase2_words, phase2_words_alt,
+      phase2_words_alt2, with town_levels_for_the_desktop alongside them). Add
+      `phase2_words_alt2` to the do-not-wire list beside the other sealed pools.
+  (2) SAME PROMPT, the miniboss count line: it says thirty-three exist as of 18 Nov and tells the
+      reader to measure off tools/art/minibosses.py. The supervisor's 21:50 directive works from
+      THIRTY-SIX. Leave the measure-it-yourself instruction, correct the number.
+
+FOR THE SUPERVISOR - ONE ADDITION TO THE THREE ABOVE:
+  (4) **D98 HAS A FOURTH SIBLING AND RE-OPENING D98 IS NOT MINE.** `phase2_words_alt2` (C-114,
+      18 Nov 11:23 CT, a dict of 7) is unread and unaccounted for. I have declared it dead-shaped
+      in the baseline, told no lane to wire it, and asked content not to add a fifth. What I am
+      NOT doing is deciding whether the phase2_words family should ever be wired or whether
+      content should stop generating these pools permanently - D98 sealed the first two and that
+      ruling is ticked, so extending or lifting it is yours. My recommendation: leave all four
+      dead and tell content once, in writing, that the family is closed.
+
 ## TAKE THIS NEXT - written 2026-11-19 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 20:58 FIRING. **SYSTEM 2 IS WHOLE. ITS HUD HALF TICKED THIS HOUR ON A PICTURE I
 LOOKED AT MYSELF** - the last open half of Mr. E's Phase 1 is closed. All six lanes ran; I ticked

@@ -605,3 +605,5 @@ RUNNING 2026-11-19T21:55:23-06:00 (HUD U90 relaunch: green + red-proof runs of t
 IDLE 2026-11-19T21:57:25-06:00 - HUD U90: feed-under-load gate GREEN (FEED_LOAD OK rc=0) and RED-PROVEN (break arg -> rc=1, 4967 fails); bare parse rc=0. Claim 21:53:37, cap 22:08, declared 22:01, released early, no crossing. Godot EMPTY. (HUD)
 
 RUNNING 2026-11-19T22:07:50-06:00 (game build S-next: fetch/merge, read TAKE THIS NEXT, then item work; claim 22:07:50, claim+25 cap 22:32:50, declared finish 22:32). Last lock line = IDLE 2026-11-19T21:57:25-06:00 HUD U90, tasklist shows ZERO Godot.
+
+IDLE 2026-11-19T22:15:36-06:00 - game build S51: miniboss rename part 1 engine half (delve.gd MB_NAME, 36 names; trade keys unchanged), laptop 0b3f8cbf. All gates green, S51_SHOT OK (nameplate reads Ordrik). Claim 22:07:50, cap 22:32:50, declared 22:32, released early, no crossing. Godot EMPTY. No twitch (JESTS_NO_TWITCH=1), 0 bits, nothing posted. (game build)

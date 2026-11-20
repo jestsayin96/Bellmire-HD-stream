@@ -255,3 +255,39 @@ clear to use. It is recorded here so that nobody later quotes that file as proof
 for the Stylized Nature pack without knowing it names another one. **If a
 stricter proof is ever wanted, the authority is quaternius.com's licence page for
 this pack, not this text file.**
+
+## LICENCE GATE - THE PACKS WITH NO LICENCE FILE ON DISK (20 Nov 2026, 10:0x CT)
+
+The 08:58 plan row carries Mr. E's rule as enforcement: **no model out of a pack
+without a read licence goes into `assets/`.** Measuring a pack copies nothing and
+is not gated; importing is.
+
+**I COUNTED THIS MYSELF OFF THE TREE AND I GET A DIFFERENT NUMBER TO THE HUB'S.**
+The hub's catalogue flags **18 of 49**. Walking `_packs` for a file whose name
+contains `licence`/`license`/`copying` I get **21 of 49** - and two of those 21
+(`_extracted_rpg_items`, `_generated`) are OUR OWN working directories, not
+third-party packs at all, so the real figure is **19 third-party packs**. The
+likely cause of the spread is the recipe: I do NOT accept a bare `README` as a
+licence file, and a README is exactly where several of these state their terms.
+Neither number is wrong; they answer different questions. Read the page, not the
+count.
+
+NO LICENCE FILE FOUND ON DISK - IMPORT GATED UNTIL THE PAGE IS READ:
+3d_crystals_new, Animals_Pack_by_Quaternius, Castle, Stone_coffin, dragon_oga,
+dungeon_collection_2, dungeon_collection_for_assetforge, free_mine_assets,
+golem_clean_blend, grass_07, handpainted_weapons, low-poly_RPG_item_collection_2,
+low-poly_RPG_item_collection_3, medieval_pack_CC0, modular_terrain_collections,
+modular_village_collection, quaternius_medieval_weapons_2018_CC0, rocks,
+ultimate_animated_character_pack.
+(plus `_extracted_rpg_items` and `_generated`, which are ours.)
+
+*** NOTE THE TRAP IN THAT LIST: `medieval_pack_CC0` AND
+*** `quaternius_medieval_weapons_2018_CC0` CARRY "CC0" IN THEIR FOLDER NAMES AND
+*** STILL HAVE NO LICENCE FILE IN THEM. A folder name is not a licence, in
+*** exactly the way a search snippet is not a licence. Both are gated.
+
+**THE BATCH-READY WORK IS NOT GATED BY THIS.** All five directories measured in
+worldfit pass 2 carry a licence file that was read off disk on 20 Nov:
+`kaykit_dungeon_pack_CC0` (185, System 47), `Medieval_Village_MegaKit` (176) and
+`kenney_fantasy-town-kit_2.0` (167) for System 15, `KayKit_Forest_Nature_Pack_1.0_FREE`
+(105) and `Ultimate_Stylized_Nature` (36) for System 68 - 669 rows, all CC0 1.0.

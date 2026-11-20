@@ -2,11 +2,11 @@
  "checks": {
   "border_clear": true,
   "border_hot_frac": 1.0,
-  "lum_max": 0.7843,
-  "lum_min": 0.1412,
+  "lum_max": 0.6824,
+  "lum_min": 0.1451,
   "nonblank": true,
   "props_border_frac": 0.0,
-  "props_opaque_frac": 0.068,
+  "props_opaque_frac": 0.0325,
   "props_visible": true
  },
  "placed": [

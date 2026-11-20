@@ -228,10 +228,11 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S38: `rammer` (34th, art's tag flooded) joins the flooded row; content's C-115 lines are in.
 ## S48: `fuller` (35th, art's tag fogbound) joins fogbound; content's C-126 lines are in. `stackman`
 ## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
+## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
-    "keep": ["reeve", "paviser"], "treasury": ["strickler"], "mess": ["loader"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler"], "mess": ["loader"],
     "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:

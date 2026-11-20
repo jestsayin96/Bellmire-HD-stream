@@ -13239,3 +13239,17 @@ Item per the TAKE THIS NEXT block (10:58 CT, 20 Nov): the HUD draws the mana bar
 Finding: this worktree (hud-ui) has NOT merged main, so scripts/roster.gd here has no `mana` field yet. Next firing: merge origin/laptop (keep both sides, strip only marker lines), confirm the roster mana accessors, then build the bar in hud_dock.gd (my file) and leave party_frames.gd alone if the frames live there (not mine; I will say so and ask the owner to expose state).
 Next firing (12:52): re-read R's working RUN_LOCK.txt; if IDLE, claim with expected finish and 15-min cap, headless parse first, windowed render at 100/125/150, look at it, release by :07.
 Nothing launched, no Godot run, no files of mine edited besides this note.
+
+## D-cycle - S65 WETWALL'S NAME ROW: the Dauber (37th) gets MB_NAME, MB_FIT and its keep row, 2026-11-20 12:08-12:15 CT (game build)
+Item: TAKE THIS NEXT 11:58 CT row 1 - "ADD THE `dauber` ROW TO `Delve.MB_NAME`" (outranks batch 4). Closes the engine half of MINIBOSS UNNAMED.
+- RED FIRST: on the merged tree before any edit, tools/_s51_names.gd printed `S51_NAMES FAIL 2 of 153` - "drawable key dauber has no MB_NAME entry" - the same drift the lead found by arithmetic, caught by my own key-set gate.
+- delve.gd: `MB_NAME["dauber"] = "Wetwall"` - read from content's `_note_c142` ("the Dauber (Wetwall)") AND art's CANON title in tools/art/minibosses.py, both agree; `MB_FIT["dauber"] = 1.05` copied from art's _fit_report.json pairs.dauber.ratio (h 2.58, 3/3 proving views).
+- dungeon_hd.gd: `dauber` joins THEME_MINIBOSS_MORE["keep"] - art's tag is field 5 of its tuple, `keep`, read not guessed. The miniboss_for gate (mesh + arrive lines) now admits it: content's C-142 lines are in.
+- dauber.glb had NO .import sibling (nor sealer.glb) - ran --headless --import, both now import; committed like every other miniboss .import.
+- tools/_s51_names.gd: TABLE + size asserts 36 -> 37.
+- NEW tools/_s65_dauber.gd (copy of D96_FIT's real set-piece spawn path, one key, plus a draw check).
+VERDICTS: parse --quit-after 300 rc 0, one ERROR line = chatcmd's MINIBOSS COUNT (36 published vs 37 feed) - THE CHAT BOT'S HALF, NOT MINE; UNNAMED no longer prints. S51_NAMES OK 156 checks (bodies 37, arrive 37). S65_DAUBER OK 8 checks - keep draws dauber 100/400, named Wetwall, stands 2.57 m = 1.05 x hero vs art 1.05, arrive line with body, fall line on kill. OFFFLOOR_VERDICT OK 0 of 2027. TWITCH_PARSE OK (8). TOWNWALK in_solid=0/18077 raid 0/5550 PASS. DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+LOOKED AT IT: renders/cycles/s65/dauber.png - Wetwall nameplate, hod and plank, a laid course of blocks at its feet, on a keep floor beside the knight, at fit. ("FitDauber" over the knight is the test hero's name, test-only.)
+HONEST LIMIT: the Dauber's ONE IDEA (lays a wet course per hit, breakable while wet) is NOT built - it has no act/broken lines and no MB_WAYS entry. That is the wall-placement row, still mine and still open. The Sealer (38th) is untouched by design (no feed, no name - lead's case 4).
+Lock: claim 12:08:39, cap 12:33 computed first, declared 12:30. No twitch test, 0 bits.
+NEEDED FROM MR. E: nothing.

@@ -12080,7 +12080,8 @@
           "He walks the line. Nobody in it moves.",
           "Dust in the barracks, and a row of beds made square.",
           "The roll is called in the dark. Every name is answered.",
-          "A mallet on a gong, kept in time."
+          "A mallet on a gong, kept in time.",
+          "One blow on the gong, and the beds empty."
         ],
         "act": [
           "The gong again. The garrison falls in.",
@@ -12117,7 +12118,8 @@
           "It is the size of the cart it was built from.",
           "Hammering, and the sound of something being fitted.",
           "A bench of spares, and one thing that is not a spare.",
-          "It has been collecting for a long while. Today it is the whole collection."
+          "It has been collecting for a long while. Today it is the whole collection.",
+          "The hammering stops. Whatever it was building is standing."
         ],
         "act": [
           "A plate comes off. It takes another from the floor.",
@@ -12609,7 +12611,8 @@
           "Keys on a ring, and the lock already turned.",
           "Spears out of the rack, every one issued.",
           "A man in a store coat, and a queue of things that bite.",
-          "Wardgrim has been through the stores."
+          "Wardgrim has been through the stores.",
+          "Issue day. Nobody asked for it."
         ],
         "fall": [
           "Wardgrim is down. The stores are shut.",
@@ -12631,7 +12634,8 @@
           "Sacks, a keg, and boots too heavy to hurry.",
           "The store-hands have left. He has not.",
           "A lamp swings from a bundle the size of a cart.",
-          "He walks slow. He has a lot on his back."
+          "He walks slow. He has a lot on his back.",
+          "Boots heavy on the boards, and the load comes in first."
         ],
         "fall": [
           "Millstone is down. The crates come with him.",
@@ -12653,7 +12657,8 @@
           "Stakes driven, and the line already cut.",
           "A fence where there was no fence.",
           "Bramblejaw has walked in. Somebody is on the wrong side.",
-          "Wattle and rope, and a man behind it."
+          "Wattle and rope, and a man behind it.",
+          "Wattle creaks, and the room is in two halves."
         ],
         "fall": [
           "Bramblejaw is down. The hurdles lie flat.",

@@ -3943,3 +3943,12 @@ TAKE THIS NEXT (12:58 CT row 1): "the same row again, for `sealer`" - closes MIN
 
 ## C-145 - 20 Nov 2026 14:3x CT (content): miniboss feed lines for the Relief (40th, Watchturn, barracks)
 TAKE THIS NEXT (13:58 block) row 3: C-145, the Relief's lines. Body is committed (assets/monsters/minibosses/relief.glb on main; CANON row 40 in tools/art/minibosses.py). Added miniboss_feed.by_key.relief: arrive 9 / fall 8, recent shape (no act, no broken, {name} unused). Mechanic said plainly: a quarter turn of the capstan rotates the whole line one place, nobody hurt or gone, every reach and heal aimed at the wrong body; four notches in the ratchet plate with the dog in one are the gauge; jam the dog to stop the turn. Added _note_c145 (nested under miniboss_feed, beside c143 and c144). by_key is now 40 rows. data/lore_lines.json only. VALIDATION OK: json.load passes, every pre-existing key byte-identical in value (diff is the added block plus the comma on _note_c144). CODE WIRING IMPLIED: none for the feed (miniboss_for draws the body once lines exist). Game build still owes Delve.MB_NAME relief -> Watchturn and MB_FIT (art has no relief hero register yet), and the chat bot's 'The N elites' publish count must follow by_key (39 -> 40 here, MB_NAME stays behind). NO CODE LANE IS TO WIRE _note_c145.
+
+## C-146 - 20 Nov 2026 15:3x CT (content): audit of my own shipped miniboss feed (no 41st body exists)
+- ITEM: TAKE THIS NEXT (14:58 CT block) row 3, CONTENT. The block says the engine is one step short (no 41st body), so the hour goes to bringing the earliest `miniboss_feed.by_key` rows up to the settled shape (arrive 9 / fall 8).
+- MEASURED first: 40 keys. Short on arrive: drillmaster 8, scrapwright 8, quartermaster 8, loader 8, hurdleman 8. Every key already has fall 8.
+- ADDED one arrive line to each of those five (now 9 / 9 / 9 / 9 / 9): drillmaster, scrapwright, quartermaster, loader, hurdleman. Mechanic in plain words, no `{name}`.
+- NOT TOUCHED, deliberately: the `act` and `broken` blocks on the 18 old keys that carry them (additive only; nothing deleted or reworded).
+- VALIDATION OK: json.load passes on all four owned files; against a pre-edit copy every other key and entry is byte-identical, key order unchanged, only the five arrive arrays grew by one at the end.
+- CODE WIRING: none. These keys already exist and are already drawn from.
+Next content: C-147.

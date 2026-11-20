@@ -12235,3 +12235,15 @@ FILES: scripts/chatcmd.gd, data/commands.json, docs/COMMANDS.md, PROGRESS.md. Th
 FOR THE GAME BUILD LANE: NOTHING OWED. The contract is untouched - twitch_reply(user_login, text), no @name, no rate limiting. !miniboss needs no new field in twitch_eventsub.gd; it reads Delve's own static accessors and content's data file.
 NEXT: promote MINIBOSS UNNAMED and GHOST to faults once main carries a2d6ab2e, then L56 (the delve-heavy soak). Nothing for Mr. E to decide.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## S53 (20 Nov 00:1x CST) - rts_camera.gd CLOCK CLAMP: the "1x  Day N  HH:MM" plate stays on the frame at UI 150%
+Item: TAKE THIS NEXT (23:58 CT) row 1, game build: the HUD's U91 foreign finding, my file. Lock: last line IDLE chat bot 23:55:02, tasklist empty; claim 00:08:06, cap 00:33 (computed first), declared finish 00:32.
+CAUSE: in split mode _dock_hud centres the plate on the chrome bar (HudDock.chrome: top floor(1080*0.94)=1015, h 65). At 150% the plate is h 68, taller than the bar, so centring put it at y 1013.5 -> bottom 1081.5, and its lower rule was never drawn.
+FIX: scripts/rts_camera.gd _dock_hud - y = minf(centred y, HudDock.screen().y - size.y). Unconditional rather than "when scale > 1": at 100/125% the centred y is already smaller, so the clamp is a no-op there (measured, below). Full-screen placement (offset_top 12) untouched.
+GATE: tools/_s53_clock.gd (windowed 1920x1080, scales 100/125/150, 60 measured frames each while HudDock.split, NO tolerance - U91's 1 px grace is why a 1.5 px overhang was a finding and not a fail; NO VERDICT under 30 frames per scale).
+  GREEN: S53_CLOCK OK fails=0 - worst bottoms 1070.5 / 1076.5 / 1080.0.
+  RED-PROOF on the real bug: pre-fix rts_camera.gd copied in, gate run, fixed file restored and SHA-checked: S53_CLOCK FAIL fails=60, worst bottom 1081.5 at 150% - U91's own number.
+LOOKED AT renders/cycles/s53/s53_clock_150.png: plate bottom-right, all four rules drawn including the bottom one, text "1x  Day 1  08:23" whole. Honest residue: at 150% the plate now overlaps the bottom panes by ~3 px at its top edge (1012 vs bar 1015) - it cannot fit a 65 px bar; shrinking the font at 150% would be the HUD's call, not mine.
+BATTERY: parse headless rc=0, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2207; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/17093 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+NO LIVE TWITCH: nothing posted, no cheer, 0 bits on any account, no redemption, no subscription. lore_lines.json not touched (content's four rotated blocks).
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

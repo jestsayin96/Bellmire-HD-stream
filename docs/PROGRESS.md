@@ -3769,3 +3769,21 @@ early - see the IDLE line.
 
 ## C-125 - 19 Nov 2026 17:3x CT (content): epitaphs, descend, cleared, misfire and barks batch
 TAKE THIS NEXT row 2: C-125 at full rate into the corrected live list. Added epitaphs +29, descend +20, cleared +20, misfire +14, barks +35 (enter, lord, trap, hurt, drink, misfire; six each). Added _note_c125. data/lore_lines.json only. No miniboss body committed on origin/art beyond the Rammer (34 keys held, 34 bodies), so no feed lines owed. VALIDATION OK: json.load passes, every pre-existing entry identical, placeholder counts match their pools (descend %s %s, cleared %d, misfire %s %s %d %d).
+
+## D-cycle - S47: bow_golden's STRING IS THERE - YES. ONE CLOSE RENDER, ROW DIES. 2026-11-19T18:15-06:00 (game build)
+TAKE THIS NEXT (18:0x block, row 1): "ONE CLOSE RENDER OF bow_golden to settle whether the string is there. Say yes or no in one line."
+ANSWER: YES. The string is in the mesh and renders, tip to tip. tools/_s47_bow.gd (windowed, the plain file, NO game tint, NO
+smoulder) reads surface 2 "White" albedo (0.91,0.91,0.91) sRGB, 36 verts, AABB (0.009, 2.039, 0.011) - long on the bow's own axis
+(the whole bow is 2.174 tall) and ~1 cm thick, i.e. a string spanning nock to nock. LOOKED at renders/cycles/s47/s47_bow_front.png:
+gold limbs, LightWood grip, a pale straight string from upper to lower nock; s47_bow_side.png shows it lying along the belly.
+It was unseen at plain-render scale because it is 1 cm thick, not because it is missing. Nothing to fix.
+NEXT PHASE 2 SYSTEM - NOT STARTED THIS RUN, ON PURPOSE: the battery took 18:10-18:14 and a new system will not fit honestly in a
+window that must close by :40; carried to my next firing. By the plan's own list (WORK_PLAN ~line 1176) the immediate wave after
+System 6 is System 8 (shields, quaternius_medieval_weapons_2018 - which needs our LICENSE note on first use). I will take it only
+if the lead's next block names it.
+WORKTREE NOTE, unchanged from S46: ~50 MODIFIED tracked renders and ~1,400 untracked web/icons/**.webp.import files are in R and
+are NOT from this session; NOT staged. This commit stages only tools/_s47_bow.gd(+.uid), renders/cycles/s47/, PROGRESS, RUN_LOCK.
+Gates (JESTS_NO_TWITCH=1, every run): parse 0 SCRIPT ERROR / 0 Parse Error | S47_BOW OK (3 shots, 0 failures) |
+TWITCH_PARSE OK (8 checks) | OFFFLOOR_VERDICT OK 0 of 2343 samples | TOWNWALK in_solid=0/14819 raid_in_solid=0/7894 PASS |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. No live Twitch test, nothing redeemed, 0 bits.
+Lock: claim 18:08:31, cap claim+25 = 18:33 computed first, declared 18:30, released early - see the IDLE line.

@@ -11888,3 +11888,9 @@ FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd. The contract is unt
 NO TWITCH TEST THIS FIRING: no account used, 0 bits, no redemption, no channel state read or written.
 NEXT (19:45): the engine re-confirm I split off - parse --quit-after, _l14_test, _twitch_parse, _commands_doc no-op - in a full window, then back to auditing shipped work.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## HUB standing check - 19 Nov 2026 19:4x CT (hub lane)
+TAKE THIS NEXT (19:58 CT block, row 4 HUB) gave: NOTHING QUEUED - "stand down in writing, or audit your own shipped web/ work". Stood down; audited instead.
+Numbers: web/ vs origin/hub diff = 0 files / 0 lines (byte-identical; docs/HUB_SECURITY.md too). node --check app.js OK. app.js 375669 B, style.css 126190 B, index.html 36889 B. innerHTML in CODE at exactly 2 sites, app.js:255 and :301, both page-owned literals; outerHTML / insertAdjacentHTML / document.write / eval( / new Function = 0 in code (comment mentions only); index.html comment "The only innerHTML in app.js is two page-owned sites" still TRUE; CSP meta count 1.
+No web/ change => hostile-name test and state checks not owed; no screenshot taken (nothing changed); live-dot colour unchanged. NOT claiming READY TO PUBLISH. Only change in this commit: merge of origin/main + origin/hub into hub, and this note.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

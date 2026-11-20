@@ -66,12 +66,70 @@ KEYS = ("gaoler_chibi", "gaoler")
 BAR_ASPECT = 0.45
 BAR_HFRAC = 0.20
 BAR_PXKEEP = 0.60
-# CHANGE 2's bar, also written before any number was read: the run must stop
-# projecting as a constant-width band. cv is its width's coefficient of
-# variation along its own axis, bumps the count of local maxima in that
-# profile - a bar has neither.
-BAR_RUN_CV = 0.12
-BAR_RUN_BUMPS = 4
+# ----------------------------------------------------------------- PASS 2 BAR
+# CHANGE 2's bar, REWRITTEN 20 Nov 05:4x CT, BEFORE this pass rendered a frame,
+# and I am saying plainly what I had already seen when I wrote it: last pass's
+# shipped numbers (bumps 4 -> 9 on gaoler_chibi, 6 -> 7 on gaoler, cv ~0.30 for
+# a PLAIN tube) were in front of me. So this is not a blind bar and I will not
+# claim it is. It is a bar written to ask the right question, and the gaoler row
+# can fail it - if it does, it fails, and the bar does not move again.
+#
+# `cv` IS STRUCK FROM THE BAR AND IS NOW A REPORTED NUMBER ONLY. Last pass
+# proved it is the wrong term: it is dominated by the line's own foreshortening,
+# so a plain tube already reads 0.30 and a 1.4x clause on it is unearnable.
+#
+# I ALSO WROTE A SAMPLING DIAGNOSIS INTO THIS HEADER AND THE RUN DISPROVED IT.
+# WHAT I WROTE: the profile walks at a FIXED 6.0 px step, links sit every
+# RUN_LINKS["step"] = 0.17 m, the run projects at "roughly 90-100 px per metre"
+# so a link period is "about 16 px - under THREE samples per link", at the
+# Nyquist limit, so `bumps` was aliasing.
+# WHAT THE FIRST RUN OF THIS PASS MEASURED: px_per_m **161.3 / 162.3**, link
+# period **27.4 / 27.6 px**. The old 6.0 px step was **4.6 samples per link**,
+# comfortably ABOVE Nyquist. *** THE SAMPLING WAS NOT THE FAULT AND MY 90-100
+# px/m WAS AN EYEBALL OFF THE RUN'S BOUNDING BOX, NOT A MEASUREMENT. *** The
+# step is still DERIVED from the projected period rather than hard-coded -
+# period/4 came out 6.85 px, barely a move - because a step that is adequate by
+# luck is not an instrument. But the gain this pass makes is NOT the step, and
+# I am not going to let that sentence stand as if it were.
+#
+# THE REAL SECOND FAULT, AND MY OWN FIRST-RUN NUMBERS ARE WHAT FOUND IT:
+# `gaoler` b_heap read **cv 0.0412** - a dead-flat width profile, plain tube,
+# exactly what it is - and the SAME profile scored **7 bumps**, out-scoring the
+# links arm's 4. A local maximum with no amplitude floor counts PIXEL
+# QUANTISATION. A bar built on that term manufactures unearned passes in both
+# directions, and it is the term the whole run-links question rests on. So a
+# bump must now clear BOTH:
+#     res[i] >= BUMP_AMP_FRAC * mean_width_px   (a bulge, not a wiggle)
+#     res[i] is the maximum within +/- half a link period of samples
+# which is the shape a link actually makes: a few percent of the width, once per
+# period. `bumps` elsewhere in this file means the thresholded count.
+#
+# THE BUMPS-ONLY BAR, on the 3/4 view, the view the fault was found in:
+#   1. bumps_links / expected_links >= 0.50 - at least half the links lying on
+#      the measured stretch must show up as a bulge. `expected_links` is that
+#      stretch's own arc length over 0.17 m, so a short visible run cannot pass
+#      by being short. RED when expected_links is 0 - a ratio over nothing.
+#   2. density_links >= 1.8 x density_plain, density = bumps / samples, both
+#      arms sampled at the SAME step - the modulation must be the LINKS' and
+#      not the line's own bends.
+BAR_RUN_BUMP_FRAC = 0.50
+BAR_RUN_DENSITY_X = 1.8
+BUMP_AMP_FRAC = 0.06
+# ------------------------------------------------------- THE CONTINUITY GATE
+# A SEPARATE MEASUREMENT OF A SEPARATE FAULT, and it exists because the team
+# lead found it BY LOOKING at gaoler_b_heap_three_quarter_all.png and said so
+# in the 04:58 plan: "from 3/4 the run from heap to hand is crossed by the
+# apron board and is not legible as a continuous line." EVERY NUMBER IN LAST
+# PASS'S REGISTER PASSED THAT PICTURE. The reason is in the old `_profile`: a
+# sample whose centre fell outside the run mask was `continue`d - silently
+# skipped, never counted - so the apron eating the middle of the run cost the
+# harness nothing at all. It is counted now, and the profile is measured on the
+# LONGEST CONTIGUOUS VISIBLE STRETCH instead of on gap-concatenated samples,
+# which also kills the false bump a gap seam used to make.
+#   longest_visible_frac = longest unbroken visible stretch / in-frame samples.
+#   BAR: >= 0.60 for the run to be called a legible continuous line.
+# It gates NOTHING about the links; it is reported beside them, separately.
+BAR_RUN_CONTIG = 0.60
 
 
 def _mats(key):
@@ -189,45 +247,68 @@ def rig(objs, info, resx, resy):
     return aim, shoot, eng
 
 
-def _profile(mask, path_px, step=6.0, reach=48):
+def _profile(mask, path_px, path_m, link_step_m, reach=48):
     """Does the run's outline MODULATE along its own length - bulge, pinch,
-    bulge, the way chain does - or is it an even band like a bar?
+    bulge, the way chain does - or is it an even band like a bar? And is it
+    VISIBLE end to end, or does something cross it?
 
-    TWO EARLIER VERSIONS OF THIS FUNCTION WERE WRONG AND THEIR OWN NUMBERS SAID
-    SO, which is the only reason they were caught. Both found a PCA axis in the
-    pixels and binned along it, and both reported a coefficient of variation
-    around 0.4-0.5 for a PLAIN TUBE - impossible for a constant-width band. The
-    first was measuring the body OCCLUDING the middle of the run and the far
-    end FORESHORTENING; the second still measured the run's own BENDS, because
-    where a bent line leans away from a straight axis the bin under it collects
-    more pixels. Three confounds, none of them links.
+    THREE EARLIER VERSIONS OF THIS FUNCTION WERE WRONG. The first two guessed a
+    PCA axis out of the pixels and both reported cv 0.4-0.5 for a PLAIN tube -
+    impossible for a constant-width band: they were measuring the body
+    OCCLUDING the run and the far end FORESHORTENING, then the run's own BENDS.
+    The third - shipped - walked the run's OWN projected polyline and measured
+    thickness PERPENDICULAR TO THE LOCAL TANGENT, which is the right quantity,
+    AND IT STILL HAD TWO FAULTS THAT ITS OWN NUMBERS COULD NOT SHOW:
 
-    So this one does not guess an axis. It is handed the run's OWN polyline,
-    already projected to pixels through the same camera that shot the frame,
-    walks it at a fixed step, and measures the mask's thickness PERPENDICULAR
-    TO THE LOCAL TANGENT - which is the quantity the claim is actually about.
-    Samples whose centre is not in the mask are dropped, so the stretch hidden
-    behind the body is excluded rather than measured, and the surviving profile
-    is linearly detrended so steady foreshortening contributes nothing.
+      a) IT WALKED AT A FIXED 6.0 px STEP while a link period projects to about
+         16 px. Under three samples per link is the Nyquist limit, so link
+         modulation ALIASED and `bumps` could not count what was there. The step
+         is now derived from the projected link period, period/4, floor 2 px.
+      b) A SAMPLE WHOSE CENTRE FELL OUTSIDE THE MASK WAS SILENTLY SKIPPED. So
+         the apron board crossing the run - a fault the team lead found BY
+         LOOKING and which passed every number in the register - was free. Those
+         samples are COUNTED now (`offmask_dropped`), and the profile is taken
+         on the LONGEST CONTIGUOUS VISIBLE STRETCH, which both exposes the break
+         and removes the false bump a gap seam makes in a concatenated profile.
 
-    Returns None - and the caller reports RED and withholds every number - when
-    fewer than 14 samples survive."""
+    Returns a row with `note` and NO profile numbers - the caller reports RED -
+    when the stretch carries fewer than 14 samples, when the mask is crossed
+    over a quarter of them, or when it lies over less than one link of arc."""
     h, w = mask.shape
-    if len(path_px) < 3:
+    if len(path_px) < 3 or len(path_m) != len(path_px):
         return None
-    # resample the projected path at a fixed pixel step
     pts = [np.array(p, dtype=float) for p in path_px]
+    rates = []
+    for i in range(len(pts) - 1):
+        dm = abs(path_m[i + 1] - path_m[i])
+        dp = float(np.hypot(*(pts[i + 1] - pts[i])))
+        if dm > 1e-5 and dp > 1e-5:
+            rates.append(dp / dm)
+    if not rates:
+        return None
+    px_per_m = float(np.median(rates))
+    period_px = px_per_m * float(link_step_m)
+    step = max(2.0, period_px / 4.0)
+
     dense = []
-    for p0, p1 in zip(pts[:-1], pts[1:]):
-        seg = p1 - p0
+    for i in range(len(pts) - 1):
+        seg = pts[i + 1] - pts[i]
         ln = float(np.hypot(*seg))
         n = max(1, int(ln / step))
-        for i in range(n):
-            dense.append((p0 + seg * (i / float(n)), seg / max(1e-6, ln)))
-    prof, caps = [], 0
+        for j in range(n):
+            dense.append((pts[i] + seg * (j / float(n)), seg / max(1e-6, ln)))
+    marks, widths = [], []
+    inframe = 0
+    offmask = caps = 0
     for c, d in dense:
         x, y = int(round(c[0])), int(round(c[1]))
-        if not (0 <= x < w and 0 <= y < h) or not mask[y, x]:
+        if not (0 <= x < w and 0 <= y < h):
+            marks.append(None)
+            continue
+        inframe += 1
+        if not mask[y, x]:
+            offmask += 1
+            marks.append(False)
             continue
         nx, ny = -d[1], d[0]
         t, capped = 1, False
@@ -239,29 +320,74 @@ def _profile(mask, path_px, step=6.0, reach=48):
                     break
                 t += 1
             else:
-                # the mask runs on past `reach`: the line crosses itself or
-                # another part of itself here and this sample is not a width.
-                # It is COUNTED, not silently clipped - a capped sample that
-                # went into the profile as `reach` would read as a giant bulge.
                 capped = True
         if capped:
             caps += 1
+            marks.append(False)
             continue
-        prof.append(t)
-    # A profile measured mostly at crossings is not a profile of a line.
-    if len(prof) < 14 or caps > 0.25 * (len(prof) + caps):
+        marks.append(True)
+        widths.append(t)
+    if inframe < 1:
         return None
-    a = np.array(prof, dtype=float)
+    best = (0, 0)
+    i = 0
+    seen = 0
+    while i < len(marks):
+        if marks[i] is True:
+            j, k0 = i, seen
+            while j < len(marks) and marks[j] is True:
+                j += 1
+            if j - i > best[1] - best[0]:
+                best = (k0, k0 + (j - i))
+            seen += j - i
+            i = j
+        else:
+            i += 1
+    nlong = best[1] - best[0]
+    contig = nlong / float(inframe)
+    stretch_m = (nlong * step) / max(1e-6, px_per_m)
+    expected = stretch_m / max(1e-6, float(link_step_m))
+    out = {"samples_inframe": inframe, "samples_visible": len(widths),
+           "offmask_dropped": int(offmask), "crossings_dropped": int(caps),
+           "step_px": round(step, 2), "period_px": round(period_px, 2),
+           "px_per_m": round(px_per_m, 1),
+           "longest_visible_px": int(round(nlong * step)),
+           "longest_visible_frac": round(float(contig), 4),
+           "stretch_m": round(float(stretch_m), 3),
+           "expected_links": round(float(expected), 2)}
+    if nlong < 14 or caps > 0.25 * inframe or expected < 1.0:
+        out["note"] = ("RED - the measured stretch is too short, too crossed or "
+                       "under one link of arc; profile numbers withheld")
+        return out
+    a = np.array(widths[best[0]:best[1]], dtype=float)
     x = np.arange(len(a))
     k, c0 = np.polyfit(x, a, 1)
     res = a - (k * x + c0)
     base = float(a.mean())
-    bumps = int(sum(1 for i in range(1, len(res) - 1)
-                    if res[i] > res[i - 1] and res[i] >= res[i + 1] and res[i] > 0))
-    return {"samples": len(a), "crossings_dropped": int(caps),
-            "mean_width_px": round(base, 2),
-            "trend_px_per_sample": round(float(k), 4),
-            "cv": round(float(res.std() / max(1e-6, base)), 4), "bumps": bumps}
+    # a bump is a bulge of real amplitude that is the biggest thing within half a
+    # link period - not any sample taller than its two neighbours. Without the
+    # amplitude floor a profile of cv 0.0412 scored 7 of them (first run of this
+    # pass, `gaoler` b_heap): that is quantisation, not chain.
+    amp = BUMP_AMP_FRAC * base
+    half = max(1, int(round((period_px / step) / 2.0)))
+    bumps = 0
+    for i in range(1, len(res) - 1):
+        if res[i] < amp:
+            continue
+        lo, hi = max(0, i - half), min(len(res), i + half + 1)
+        if res[i] >= res[lo:hi].max() and res[i] > res[i - 1]:
+            bumps += 1
+    bumps = int(bumps)
+    out.update({"bump_amp_px": round(float(amp), 2),
+                "bump_window_samples": int(half),
+                "samples": int(len(a)),
+                "mean_width_px": round(base, 2),
+                "trend_px_per_sample": round(float(k), 4),
+                "cv_reported_not_a_bar": round(float(res.std() / max(1e-6, base)), 4),
+                "bumps": bumps,
+                "bump_density": round(bumps / float(len(a)), 4),
+                "bump_frac_of_expected": round(bumps / max(1e-6, float(expected)), 4)})
+    return out
 
 
 def _box(mask):
@@ -311,10 +437,14 @@ def arm(name, key, tmp, resx, resy):
             ob.hide_render = False
         heap_m, run_m = _moved(A, B), _moved(A, C)
         # the run's own polyline through THE SAME camera, in pixels
-        path_px = []
-        for q in run_world:
+        path_px, path_m = [], []
+        acc = 0.0
+        for n, q in enumerate(run_world):
             co = world_to_camera_view(bpy.context.scene, bpy.context.scene.camera, q)
             path_px.append((co.x * resx, (1.0 - co.y) * resy))
+            if n:
+                acc += float((Vector(q) - Vector(run_world[n - 1])).length)
+            path_m.append(acc)
         fig = A[..., 3] > 0.02
         fb = _box(fig)
         v = {"heap_px": int(heap_m.sum()), "run_px": int(run_m.sum()),
@@ -329,11 +459,12 @@ def arm(name, key, tmp, resx, resy):
                   "heap_aspect": round(hh / float(hw), 4),
                   "heap_fill": round(v["heap_px"] / float(hw * hh), 4),
                   "heap_h_over_fig_px": round(hh / float(fb[3] - fb[2] + 1), 4)})
-        pr = (_profile(run_m, path_px)
+        pr = (_profile(run_m, path_px, path_m, M.RUN_LINKS["step"])
               if (rb is not None and v["run_px"] >= 300) else None)
         if pr is not None:
             v["run_bbox_wh_px"] = [rb[1] - rb[0] + 1, rb[3] - rb[2] + 1]
             v["run_profile"] = pr
+            v["run_path_m"] = round(float(path_m[-1]), 3)
         else:
             v["run_note"] = ("RED - the run mask is too small or too short to "
                              "profile; its numbers are withheld")
@@ -393,23 +524,51 @@ def main():
         D = [r for r in rows if r["key"] == key and r["arm"] == "d_heap_runlinks"][0]
         vd = D["views"].get("three_quarter", {})
         pb, pd = vb.get("run_profile"), vd.get("run_profile")
-        if not pb or not pd:
-            verdict[key]["run"] = "RED - a run arm could not be profiled"
-        else:
+        if not pb or not pd or "bumps" not in pb or "bumps" not in pd:
             verdict[key]["run"] = {
-                "cv_plain": pb["cv"], "cv_links": pd["cv"],
+                "verdict": "RED - a run arm could not be profiled; no numbers",
+                "plain_note": (pb or {}).get("note"),
+                "links_note": (pd or {}).get("note")}
+        else:
+            frac = pd["bump_frac_of_expected"]
+            dens = pd["bump_density"] / max(1e-9, pb["bump_density"])
+            verdict[key]["run"] = {
+                "step_px_plain": pb["step_px"], "step_px_links": pd["step_px"],
+                "expected_links_plain": pb["expected_links"],
+                "expected_links": pd["expected_links"],
                 "bumps_plain": pb["bumps"], "bumps_links": pd["bumps"],
-                "verdict": "PASS" if (pd["cv"] >= BAR_RUN_CV
-                                      and pd["bumps"] >= BAR_RUN_BUMPS
-                                      and pd["cv"] > pb["cv"] * 1.4) else "FAIL"}
+                "density_plain": pb["bump_density"],
+                "density_links": pd["bump_density"],
+                "density_x": round(float(dens), 3),
+                "bump_frac_of_expected": frac,
+                "cv_plain_reported": pb["cv_reported_not_a_bar"],
+                "cv_links_reported": pd["cv_reported_not_a_bar"],
+                "verdict": "PASS" if (frac >= BAR_RUN_BUMP_FRAC
+                                      and dens >= BAR_RUN_DENSITY_X) else "FAIL"}
+        cont = {}
+        for nm, pp in (("plain", pb), ("links", pd)):
+            if not pp:
+                cont[nm] = "RED - no profile"
+            else:
+                cont[nm] = {
+                    "longest_visible_frac": pp["longest_visible_frac"],
+                    "offmask_dropped": pp["offmask_dropped"],
+                    "crossings_dropped": pp["crossings_dropped"],
+                    "samples_inframe": pp["samples_inframe"],
+                    "verdict": ("PASS" if pp["longest_visible_frac"] >= BAR_RUN_CONTIG
+                                else "FAIL - the run is not legible as one line")}
+        verdict[key]["continuity"] = cont
     out = os.path.join(args.repo, "renders", "art", "minibosses",
                        "_gaoler_chain_ab.json")
     with open(out, "w") as f:
         json.dump({"src": SRC, "bar": {"heap_aspect": BAR_ASPECT,
                                        "heap_h_frac": BAR_HFRAC,
                                        "px_kept": BAR_PXKEEP,
-                                       "run_cv": BAR_RUN_CV,
-                                       "run_bumps": BAR_RUN_BUMPS},
+                                       "run_bump_frac_of_expected": BAR_RUN_BUMP_FRAC,
+                                       "run_density_multiple": BAR_RUN_DENSITY_X,
+                                       "run_longest_visible_frac": BAR_RUN_CONTIG,
+                                       "bump_amp_frac_of_width": BUMP_AMP_FRAC,
+                                       "run_cv": "STRUCK - reported, not a bar"},
                    "verdict": verdict, "rows": rows}, f, indent=1)
     print("GAOLER_CHAIN_AB " + json.dumps(verdict))
 

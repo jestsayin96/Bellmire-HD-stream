@@ -101,7 +101,35 @@ VARIANTS = {
         # thirty-six occupy (2.00 - 2.75; the Snuffer is 2.60) and it is 2.89x
         # its own regular version, which is the number the directive actually
         # asks about. ONE thing changed in this pass and nothing else.
-        height=2.60,                    # authored miniboss height, metres
+        #
+        # PASS 4, 20 Nov 2026 00:4x CT - MR. E LOOKED AT PASS 3's SHEET AND
+        # THE SUPERVISOR'S 00:10 DIRECTIVE IS THE ANSWER: "it looks the same
+        # size as the hero knight... a miniboss needs to tower over the heroes
+        # ... minimum 2-3x the hero's height." Pass 2's reasoning was right
+        # about the body (its height is bulk, not stature) and WRONG about the
+        # target: 2.60 against a 2.45 m hero is ratio 1.06, and every one of
+        # the thirty-six sits at the same 1.06. The whole band was eye-level.
+        #
+        # 6.60 m is NOT a free choice - IT IS THE TOP OF A MEASURED BAND AND
+        # THE DIRECTIVE'S OWN 3x DOES NOT FIT IN IT. The directive keeps the
+        # corridor gate ("it has to fit a three-cell corridor"), and
+        # minibossgen's corridor clear is 3*4.0 - 2*0.5 = 11.0 m. This body is
+        # authored in a T-POSE whose arm span scales with the height at
+        # 1.576731 m of span per metre of height (4.0995 / 2.60, measured in
+        # pass 3). So:
+        #     ratio 2.00 -> h 4.90  span  7.73   margin 3.27
+        #     ratio 2.69 -> h 6.60  span 10.41   margin 0.59   <- taken
+        #     ratio 2.85 -> h 6.98  span 11.00   margin 0.00   <- the hard wall
+        #     ratio 3.00 -> h 7.35  span 11.59   ROOM-LOCKED
+        # 3x cannot be had corridor-safe on the T-pose span. 6.60 is 2.69x the
+        # hero and 7.33x its own regular puglin, and it leaves 0.59 m of
+        # corridor margin on the WORST CASE rather than on the pose the game
+        # draws - bestiary.gd grafts the UAL library on at load, so the arms
+        # come down and the real footprint is narrower than this gate. THE WAY
+        # TO 3x, IF MR. E WANTS IT, IS TO MEASURE THE SPAN IN THE UAL IDLE
+        # INSTEAD OF THE T-POSE, or to room-lock the spawn. Not taken this
+        # pass: ONE thing changed and nothing else.
+        height=6.60,                    # authored miniboss height, metres
         palette="T_Puglin_BaseColor_2.png",
         # PASS 3, 20 Nov 2026, AND IT IS THE TEAM LEAD'S EYE MADE INTO
         # GEOMETRY. He looked at pass 2's hero_front.png and wrote the one
@@ -542,6 +570,21 @@ def main():
             path, size = export_variant(key, args.repo, roots, meshes)
             rec["glb"] = os.path.relpath(path, args.repo).replace("\\", "/")
             rec["glb_bytes"] = size
+        else:
+            # *** A DEFECT IN THIS FILE, FOUND AT PASS 4 BY READING THE
+            # *** REGISTER I HAD JUST WRITTEN INSTEAD OF THE VERDICT ON IT. ***
+            # fit() builds `rec` from scratch, so a `--fit` run WITHOUT
+            # `--export` replaced the record wholesale and SILENTLY ERASED
+            # `glb` and `glb_bytes` - the two fields naming the asset that
+            # actually ships. Verdict stayed GREEN throughout, because no
+            # check in this file asks whether the record still points at a
+            # file. The game build lane reads this register for the path.
+            # Carry the shipped-asset fields across any pass that did not
+            # re-export, so a re-render can never quietly un-name the asset.
+            prev = reg["variants"].get(key, {})
+            for f in ("glb", "glb_bytes"):
+                if f in prev and f not in rec:
+                    rec[f] = prev[f]
         if args.prove_red:
             reg.setdefault("red_proof", {})[key] = rec
         else:

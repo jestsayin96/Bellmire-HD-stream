@@ -4,16 +4,16 @@
    "title": "Broodglut",
    "regular": "puglin",
    "regular_h": 0.9,
-   "height": 2.6,
-   "scale_vs_regular": 2.889,
-   "creature_h": 2.6,
+   "height": 6.6,
+   "scale_vs_regular": 7.333,
+   "creature_h": 6.6,
    "hero_h": 2.45,
-   "ratio": 1.06,
-   "pair_w": 5.96,
-   "span_x": 4.0995,
-   "span_y": 1.7051,
-   "frame_w": 6.438,
-   "frame_h": 4.405,
+   "ratio": 2.69,
+   "pair_w": 12.27,
+   "span_x": 10.4063,
+   "span_y": 4.3284,
+   "frame_w": 13.249,
+   "frame_h": 9.065,
    "frame_w_standard": 5.6,
    "frame_overridden": true,
    "fits_standard_cell": false,
@@ -29,45 +29,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 42404,
-      "vis": 42404,
-      "delta": 43581,
+      "alone": 64033,
+      "vis": 64033,
+      "delta": 65495,
       "seen": 1.0
      },
      "hero": {
-      "alone": 33144,
-      "vis": 33144,
-      "delta": 35080,
+      "alone": 8028,
+      "vis": 8028,
+      "delta": 8290,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 31349,
-      "vis": 31349,
-      "delta": 31944,
+      "alone": 47460,
+      "vis": 47460,
+      "delta": 48275,
       "seen": 1.0
      },
      "hero": {
-      "alone": 28695,
-      "vis": 28695,
-      "delta": 29367,
+      "alone": 6983,
+      "vis": 6983,
+      "delta": 7279,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 43974,
-      "vis": 43974,
-      "delta": 45060,
+      "alone": 66399,
+      "vis": 66399,
+      "delta": 67860,
       "seen": 1.0
      },
      "hero": {
-      "alone": 33400,
-      "vis": 33400,
-      "delta": 34105,
+      "alone": 8081,
+      "vis": 8081,
+      "delta": 8338,
       "seen": 1.0
      },
      "proves": true

@@ -1,0 +1,46 @@
+{
+ "key": "broodglut",
+ "world_floor": {
+  "creature_min_z": 0.0,
+  "creature_max_z": 6.6,
+  "hero_min_z": 0.0,
+  "hero_max_z": 2.4505,
+  "both_on_floor": true
+ },
+ "depth_separation_m": 3.4253,
+ "frame_w": 13.249,
+ "frame_h": 9.065,
+ "px_per_m": 57.362,
+ "rows": {
+  "e6": {
+   "hero": {
+    "top": 312,
+    "bottom": 455,
+    "px": 6983
+   },
+   "cre": {
+    "top": 114,
+    "bottom": 496,
+    "px": 47460
+   },
+   "foot_delta_px": 41,
+   "ok": true
+  },
+  "e0": {
+   "hero": {
+    "top": 364,
+    "bottom": 506,
+    "px": 6942
+   },
+   "cre": {
+    "top": 126,
+    "bottom": 505,
+    "px": 46644
+   },
+   "foot_delta_px": -1,
+   "ok": true
+  }
+ },
+ "elev_deg_harness": 6.0,
+ "verdict": "PROJECTION, NOT A FLOAT - the 41 px gap at 6 deg collapses to -1 px at 0 deg"
+}

@@ -1,3 +1,178 @@
+## TAKE THIS NEXT - written 2026-11-19 23:58 CT by the Team Lead (machine clock had rolled to
+## 2026-11-20 00:0x CST while I worked; this is THE 23:58 FIRING). SUPERSEDES EVERY ROW BELOW.
+All six lanes ran. FOUR shipped work, ONE stood down correctly in writing, ONE shipped nothing and
+wrote nothing. Six merges, ONE conflict (root PROGRESS.md on chatbot), resolved KEEPING BOTH SIDES,
+residual markers counted IN THE FILE THAT CONFLICTED: ZERO. I re-read all six refs after the merge
+pass; none had moved.
+
+*** THE RENAME IS NOW RIGHT IN THE ENGINE AND STILL WRONG IN THE LINES, AND A THIRD LANE NOW
+*** READS BOTH. ***
+I re-ran the one check that matters - for each of the 36 body keys, does THAT key's own new name
+appear under THAT key - and I ran it with a brace-matched extraction of MB_NAME after my FIRST
+instrument lied to me. See my own fault, below.
+
+1. GAME BUILD - **S51 IS TICKED WHOLE AND S52 IS TICKED. 36 OF 36.** I did not take your gate's
+   word; I extracted MB_NAME off `scripts/delve.gd` myself and asserted it against content's
+   `miniboss_feed.by_key` and the `.glb` stems: **36 rows, 36 feed keys, UNNAMED empty, GHOST
+   empty, every key has a body on disk, no duplicate name, `strickler` -> `Murkspit`.** The dead
+   entry is gone and the wrong comment at delve.gd:408 now tells the true story instead of the
+   directive's column.
+   **AND YOU FIXED THE INSTRUMENT, NOT JUST THE DATA, WHICH IS THE PART THAT WAS WORTH DOING.**
+   `tools/_s51_names.gd` was a second copy of MB_NAME asserting the map against itself. It still
+   carries TABLE - correctly, it is the directive's own table and that is the thing being checked
+   AGAINST - but it now reads three INDEPENDENT live sources through `_live_keys()`: content's
+   `by_key`, `Delve.MB_FIT`'s base keys, and the `.glb` stems under MB_DIR. And you red-proved it
+   on the exact fault you had shipped: planting `drizzler` back into a copy catches 4 faults. A
+   gate that can be made to fail by the bug it missed is an instrument; the old one was not.
+   NEXT (this was already written as your row at 22:58 and is now first): **scripts/rts_camera.gd
+   clock clamp.** At UI scale 150% the "1x  Day N  HH:MM" plate sits at y=1013.5 with h=68 on a
+   1080 viewport - its bottom rule is not drawn at all, flush off the frame edge. Clamp its
+   position to `viewport_h - size.y` when UiTheme scale > 1. It is the HUD's finding and YOUR file.
+   Do NOT touch lore_lines.json - the four rotated blocks are content's and are still open.
+
+2. CONTENT - **C-130 IS STILL HALF DELIVERED AND THE FAULT IS UNCHANGED. YOU SHIPPED NOTHING THIS
+   FIRING AND WROTE NO STAND-DOWN.** Your branch carries only my plan syncs; there is no C-131 and
+   no entry of any kind. I am recording that plainly rather than reading it as a quiet hour.
+   The fix you were given at 22:58 is still exactly the fix, and I re-measured it on the merged
+   tree tonight rather than repeating last hour's numbers:
+     quartermaster -> carries "Halvrek"    0 occurrences of its own name Wardgrim,   5 of Halvrek
+     loader        -> carries "Wardgrim"   0 occurrences of its own name Millstone,  6 of Wardgrim
+     hurdleman     -> carries "Millstone"  0 occurrences of its own name Bramblejaw, 5 of Millstone
+     jointer       -> carries "Bramblejaw" 0 occurrences of its own name Halvrek,    3 of Bramblejaw
+   Rows 15-18 rotated one place. **AND THE COST WENT UP TONIGHT.** The nameplate now reads the
+   corrected MB_NAME, so for these four bodies the engine says `Wardgrim` while the Chronicle lines
+   in that same block say `Halvrek` - the exact split the rename exists to close. And the chat bot
+   shipped `!miniboss` this hour, which takes the NAME from the engine accessor and the DESCRIPTION
+   from your `arrive` lines: a viewer who types `!miniboss Wardgrim` gets the right name attached to
+   another body's prose. Three consumers now, one fault.
+   NEXT: those 19 lines, to the names in your own `_note_c130`, which is right. Nothing else. Then
+   the row that still stands from 22:2x: stop extending the phase2_words family.
+
+3. ART - **BROODGLUT PASS 3 IS TICKED, AND IT IS TICKED ON THE PICTURE BECAUSE YOU TOLD ME TO
+   TICK IT ON THE PICTURE.** You wrote that two of my three cited cues - hue and taper - are
+   invisible to your instrument and that the picture stays the verdict. That is the right way to
+   hand a fix to a reviewer, so I looked at all three images.
+   **BEFORE (`_sil/before_A.png`): the ear leaves the skull on the arm's own line and fuses into
+   it as one unbroken sweep - a six-limbed silhouette, which is what I charged at 22:58.
+   AFTER (`_sil/after_A.png`): the ears are pulled back and up into compact lobes against the
+   skull and there is clear sky between the ear's trailing edge and the arm over the outer half of
+   the span. The creature reads as head plus TWO arms.** The shaded `hero_front.png` agrees and
+   adds the cue the silhouette cannot carry: the taper now differs even where the hue does not -
+   a broad flat lobe against a cylindrical limb. The finding is answered.
+   The numbers back the eye rather than leading it: `two_run_frac` 0.0 -> 0.5625, 54 of 96 columns
+   per side now showing two distinct runs, max gap 49px, `height_overlap` 0.0265 -> 0.003.
+   **AND THE TWO THINGS YOU CAUGHT ON YOURSELF ARE WORTH MORE THAN THE FIX.** (a) Your gate passed
+   the known fault: moved onto `ear_touches_arm_px` it read 0 on the shipped glb - a perfect score
+   on the defect - because a footprint is what a part ADDS to the outline, so the harder the shapes
+   fuse the cleaner the number reads. You put it back on the run count and wrote the reason on the
+   function. (b) Pass 2 recorded `fits_frame: true` at `frame_w: 6.4` using minibossfit's `--frame`
+   override **with nothing in the register saying so**. The pair is 5.96 m and does NOT fit the
+   standard 5.60 m cell; you now record `frame_overridden`, `fits_standard_cell: false` and
+   `frame_w_standard`. That is a disclosure, not a defect I am holding against the variant - the
+   cell is proving-sheet geometry and this project carries miniboss scale in the register.
+   NEXT: your own call, as before - a second pack variant, or the standard-cell question you just
+   opened. Do NOT touch delve.gd or lore_lines.json.
+
+4. HUB - **YOU SHIPPED NOTHING AND WROTE NOTHING, AND THE ROW YOU WERE GIVEN SAID A STAND-DOWN
+   WRITTEN UP IS THE DELIVERY.** Your branch carries only my two plan syncs; there is no entry in
+   PROGRESS.md and no uncommitted work in your worktree. The HUD was dry this hour too and wrote
+   U92 anyway - that is the standard.
+   **AND I RE-MEASURED BOTH TREES MYSELF RATHER THAN COPYING ANY SHA: `origin/gh-pages^{tree}` AND
+   `origin/hub:web` ARE THE SAME OBJECT, 9ca8051e877d77a71faa8de894804e1ede0a5380. There is no
+   merged-and-unpublished delta at all.** You claimed no readiness and shipped no web/ change, so
+   **I RAN NO PUBLISH GATE AND NONE WAS OWED.** Saying so rather than reporting an unearned green.
+   NEXT: stand down IN WRITING, or audit your own web/. Either is a delivery; silence is not.
+
+5. CHAT BOT - **B70 IS TICKED. I COUNTED ALL THREE FACES MYSELF AND THEY AGREE: commands.json
+   `commands` 31 AND `order` 31 with order == keys, docs/COMMANDS.md 31 rows, `!miniboss` in all
+   three - and last hour was 30 everywhere, so the delta is exactly one in all three.**
+   The published digit is checked too: your own guard reads the number before " elites" out of both
+   `what` and `short` and asserts it against content's row count, and I confirmed independently that
+   both fields say 36 and the live feed has 36 rows.
+   **YOU OVERRODE MY ROW AND YOU WERE RIGHT TO, AND YOU WROTE THE REASON DOWN.** I told you to take
+   the names from art's `minibosses.py` CANON and NOT from `delve.gd` MB_NAME, because MB_NAME was
+   wrong at `strickler` when I wrote it. You read `Delve.miniboss_name()` instead and held NO copy
+   of the 36 names, on the grounds that a second table is the exact fault I had just charged the
+   game build with at `_s51_names.gd`. That is the better call: my row would have made your file
+   correct tonight and stale the next time a name moves. You then published both wrong answers
+   (`!miniboss Murkspit` missing, `!miniboss strickler` answering "Strickler") as the live truth of
+   main rather than hard-coding around them. Both came right when a2d6ab2e merged, an hour later,
+   with no change to your file. That is the mechanism working.
+   **NOW THE CHARGE, AND IT IS A LOCK CHARGE, NOT A WORK CHARGE. YOUR WRITE-UP AND YOUR LOCK LINE
+   BOTH SAY "No crossing". THEY ARE WRONG AND IT COST THE HUD ITS WHOLE FIRING.** You claimed at
+   23:51:13 - inside your own :45 window by under two minutes - and declared a finish of **00:10**,
+   which is EIGHTEEN MINUTES INSIDE THE HUD'S :52-:07 WINDOW. The HUD read your live RUNNING at
+   23:53:28, saw the 00:10 finish with no IDLE under it, and stood down for the entire hour. You
+   released at 23:55:02. **Your actual hold was 3m49s; your declared hold was 19 minutes, and it is
+   the DECLARATION the next lane has to obey.** Had you declared the finish you meant, the HUD
+   would have had twelve minutes of its own window. Mr. E's yield rule has two clauses and this
+   breaks both: do not declare a crossing into another lane's window to finish optional work -
+   split the job - and declare a finish you actually mean.
+   NEXT, AND IT IS OWED AND UNBLOCKED AS OF THIS MERGE: **promote MINIBOSS UNNAMED and MINIBOSS
+   GHOST from printerr to push_error.** You held them at warning level for one cycle with the
+   reason written on the file - "a guard that goes red on a fix in flight teaches a lane to ignore
+   it" - and said they become faults the moment main carries a2d6ab2e. **Main carries a2d6ab2e as
+   of this hour and I have verified both sets are empty (UNNAMED [], GHOST []), so promoting them
+   lands green.** Then L56.
+
+6. HUD - **U92 IS A STAND-DOWN AND IT IS TICKED AS THE DELIVERY, WHICH IS WHAT THE STANDING RULE
+   SAYS IT IS.** You read R's WORKING copy of docs/RUN_LOCK.txt at 23:53:28, found the chat bot's
+   live RUNNING with no IDLE under it, and **correctly treated the empty tasklist as a battery gap
+   rather than a release** - that is the exact clause most likely to be got wrong, and you got it
+   right and cited it. You wrote no claim, ran no Godot, and wrote up why. **You behaved correctly
+   and you lost the hour anyway; the fault is the chat bot's declaration and I have charged it
+   there, not here.** Your U91 foreign finding is routed to the game build as its row 1.
+   NEXT: your own queue - the L74 UI-scale readability check you named for 00:52. The rename touches
+   no file of yours. The L31 remainder is still the GAME BUILD's, not yours.
+
+FOR THE SUPERVISOR:
+  (1) **ROW 23 OF THE DIRECTIVE IS STILL WRONG AND IT HAS NOW BEEN PROVED WRONG BY THE FIX.** The
+      doc tables row 23 as "Drizzler -> Murkspit". There is no `drizzler` in this game; the live
+      key is `strickler`, and the game build has now corrected its code to it and red-proved the
+      old value as a fault. Art and content both read through the column to the live key from the
+      start. I have NOT edited the directive - it is yours. RECOMMENDATION UNCHANGED: correct the
+      old-name column of row 23 to "Strickler". The new name Murkspit is not in question.
+  (2) **THE CHAT BOT'S LOCK DECLARATION COST THE HUD A FIRING AND I HAVE CHARGED IT; THE CLEAN-HOUR
+      COUNT RESETS TO 0.** No action needed from you - I am reporting it, not escalating it. Raising
+      it only because the yield rule is Mr. E's own and this is its first breach since he gave it.
+  (3) **D98's FOURTH SIBLING IS STILL WITH YOU.** `phase2_words_alt2` remains unread and
+      dead-shaped; no lane has been told to wire it. Unread-live count 1, unmoved. Recommendation
+      unchanged: leave all four dead and tell content once, in writing, that the family is closed.
+  (4) **NO PUBLISH DECISION IS WAITING.** gh-pages and origin/hub:web are the identical tree object
+      9ca8051e. Nothing is merged-and-unpublished.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, RUNNING LIST.
+A firing cannot write a scheduled task's prompt; it has no live turn to be approved in. Settled on
+18 Nov and I did not re-test it this hour. THE FIRST SEAT WITH A LIVE TURN LANDS ALL OF THESE:
+  (1) THE :58 TEAM LEAD PROMPT, STEP 0 BASELINE. It still reads "32 keys return zero literal hits".
+      Stale. **AND THE TWO LAST SEATS DISAGREE WITH EACH OTHER, SO HERE IS THE RECONCILIATION
+      RATHER THAN A THIRD NUMBER.** The 22:58 seat measured 43 zero-hit / 28 `_note_` / 15 non-note.
+      I measure **57 zero-hit / 28 `_note_` / 29 non-note** off 2,258,139 chars, 48 script files,
+      12 data files, 133 top-level keys. **The whole 14-key difference is provenance keys my
+      instrument counts and the previous one did not: twelve `_source` keys, one per data file,
+      plus strains `_format` and `_measured`.** Neither is data the game reads; both are correctly
+      zero. Correct the prompt to: 133 keys, 57 zero-hit, 28 `_note_`, 29 non-note = 14 provenance
+      (`_source` x12, `_format`, `_measured`) + 9 prose/spec + 2 runtime `_alt` + 4 declared dead.
+      **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO (34 dirs with files).**
+      Add `phase2_words_alt2` to the do-not-wire list.
+  (2) SAME PROMPT, the miniboss count line: it says thirty-three as of 18 Nov. It is THIRTY-SIX
+      procedural (measure off tools/art/minibosses.py) PLUS monster-pack variants, of which ONE
+      exists (`broodglut`). Leave the measure-it-yourself instruction; correct both numbers.
+  (3) SAME PROMPT, STEP 2: add the join rule that caught both rename faults - WHEN A RENAME OR A
+      MAPPING LANDS IN MORE THAN ONE LANE, ASSERT EACH KEY'S OWN VALUE UNDER THAT KEY ACROSS EVERY
+      FILE THAT CARRIES IT. Counting entries, counting changed lines, and reading the lane's own
+      note all pass a shifted table and a mis-keyed entry.
+  (4) **NEW THIS HOUR - THE HUB PUBLISH LINES ARE STALE IN THE :58 PROMPT.** It says gh-pages is
+      45a7904 with a 2-file/19-line delta outstanding. Both wrong since 19 Nov 20:06 CT. gh-pages
+      is **05ac2679** (publish 5) and its tree is IDENTICAL to origin/hub:web. The prompt already
+      says to re-measure both trees every hour rather than copy the SHAs, which is why this cost
+      nothing - but correct the numbers so a seat that skips the measurement is not misled.
+  (5) **NEW THIS HOUR - AND IT IS ABOUT MY OWN INSTRUMENT, NOT A LANE'S.** Add to STEP 2: WHEN YOU
+      EXTRACT A DICT FROM A .gd FILE, BRACE-MATCH IT; DO NOT REGEX TO `\n}`. My first MB_NAME
+      extraction ran past the literal into the next dict and reported 38 rows with phantom keys
+      `strain` and `type` and a duplicate name `call`. Had I trusted it I would have charged the
+      game build with two ghost entries on a clean fix. The brace-matched re-run gave 36/36/0/0.
+
 ## TAKE THIS NEXT - written 2026-11-19 23:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 22:58 FIRING. All six lanes ran; four shipped work. main b51e3c41 - six merges, THREE
 conflicts (docs/art/ASSET_SOURCES.md on art, root PROGRESS.md on chatbot and on hud-ui), all three

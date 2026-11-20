@@ -1,0 +1,56 @@
+[
+ {
+  "name": "c4_back45_up40",
+  "pitch": 40.0,
+  "yaw": 45.0,
+  "ear_verts": 444,
+  "deform": {
+   "moved": 444,
+   "ear_len": 0.2427,
+   "root": [
+    0.2,
+    -0.1422,
+    0.7398
+   ],
+   "tip_centreline": [
+    0.345,
+    -0.0216,
+    0.8807
+   ]
+  },
+  "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\variants\\_cand\\c4_back45_up40.png",
+  "sheet_opaque_px": 96204,
+  "glb": "C:\\hd adventure\\bellmire-art\\renders\\art\\variants\\_cand\\c4_back45_up40.glb",
+  "bytes": 3124392,
+  "span_x": 1.468,
+  "span_y": 0.6106,
+  "height": 0.931
+ },
+ {
+  "name": "c5_back60_up30",
+  "pitch": 30.0,
+  "yaw": 60.0,
+  "ear_verts": 444,
+  "deform": {
+   "moved": 444,
+   "ear_len": 0.2427,
+   "root": [
+    0.2,
+    -0.1422,
+    0.7398
+   ],
+   "tip_centreline": [
+    0.3218,
+    0.0243,
+    0.8492
+   ]
+  },
+  "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\variants\\_cand\\c5_back60_up30.png",
+  "sheet_opaque_px": 94896,
+  "glb": "C:\\hd adventure\\bellmire-art\\renders\\art\\variants\\_cand\\c5_back60_up30.glb",
+  "bytes": 3124392,
+  "span_x": 1.468,
+  "span_y": 0.6106,
+  "height": 0.931
+ }
+]

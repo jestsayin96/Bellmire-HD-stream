@@ -12,8 +12,11 @@
    "pair_w": 5.96,
    "span_x": 4.0995,
    "span_y": 1.7051,
-   "frame_w": 6.4,
-   "frame_h": 4.379,
+   "frame_w": 6.438,
+   "frame_h": 4.405,
+   "frame_w_standard": 5.6,
+   "frame_overridden": true,
+   "fits_standard_cell": false,
    "corridor_clear": 11.0,
    "room_locked": false,
    "fits_frame": true,
@@ -26,45 +29,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 43000,
-      "vis": 43000,
-      "delta": 44126,
+      "alone": 42404,
+      "vis": 42404,
+      "delta": 43581,
       "seen": 1.0
      },
      "hero": {
-      "alone": 33536,
-      "vis": 33536,
-      "delta": 35542,
+      "alone": 33144,
+      "vis": 33144,
+      "delta": 35080,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 31700,
-      "vis": 31700,
-      "delta": 32314,
+      "alone": 31349,
+      "vis": 31349,
+      "delta": 31944,
       "seen": 1.0
      },
      "hero": {
-      "alone": 29023,
-      "vis": 29023,
-      "delta": 29710,
+      "alone": 28695,
+      "vis": 28695,
+      "delta": 29367,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 45341,
-      "vis": 45341,
-      "delta": 46442,
+      "alone": 43974,
+      "vis": 43974,
+      "delta": 45060,
       "seen": 1.0
      },
      "hero": {
-      "alone": 33794,
-      "vis": 33794,
-      "delta": 34506,
+      "alone": 33400,
+      "vis": 33400,
+      "delta": 34105,
       "seen": 1.0
      },
      "proves": true
@@ -135,6 +138,22 @@
      1024,
      1024
     ]
+   },
+   "ear_turn": {
+    "moved": 444,
+    "ear_len": 0.2427,
+    "root": [
+     0.2,
+     -0.1422,
+     0.7398
+    ],
+    "tip_centreline": [
+     0.345,
+     -0.0216,
+     0.8807
+    ],
+    "pitch_deg": 40.0,
+    "yaw_deg": 45.0
    },
    "theme": "mess",
    "idea": "IT EATS ITS OWN - while any lesser puglin in the room still lives it will take one, swallow it, and close its own wounds; the swarm is its health and the big one is not the target",

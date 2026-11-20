@@ -1,0 +1,39 @@
+{
+ "floorgeom": {
+  "corridor_clear_m": 11.0,
+  "errors": [],
+  "lid_underside_m": 6.5,
+  "lid_y_m": 7.0,
+  "read_from": {
+   "cell_m": "scripts\\floorgen.gd:21",
+   "hall_w": "scripts\\floorgen.gd:848",
+   "lid_thick_m": "scripts\\floorgen.gd:1378",
+   "lid_y_m": "scripts\\floorgen.gd:1383",
+   "wall_in_m": "scripts\\floorgen.gd:1698"
+  }
+ },
+ "glb": "assets/monsters/minibosses/leech.glb",
+ "key": "leech",
+ "measured_h": 2.32,
+ "meshes": [
+  "leech_body",
+  "leech_bone",
+  "leech_dark",
+  "leech_glow"
+ ],
+ "native_h": 2.32,
+ "scale_k": 1.0,
+ "shipped_creature_h": 2.32,
+ "span_used": 2.2581,
+ "span_x": 2.2581,
+ "span_y": 1.5929,
+ "verdict": {
+  "corridor": "CORRIDOR-SAFE",
+  "corridor_margin_m": 8.742,
+  "fits": true,
+  "lid": "UNDER-LID",
+  "lid_clear_m": 4.18
+ },
+ "verdict_errors": [],
+ "verts": 4168
+}

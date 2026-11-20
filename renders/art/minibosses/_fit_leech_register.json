@@ -80,7 +80,25 @@
      "proves": true
     }
    },
-   "proving_views": 3
+   "proving_views": 3,
+   "span_x": 2.2581,
+   "span_y": 1.5929,
+   "span_measured_ct": "2026-11-20 06:4x CT",
+   "span_note": "MEASURED, NOT DERIVED - asked for by the game build's S58 row (05:58 CT 20 Nov): bestiary.gd:127-128 carries no `span` key, so the leech was exempt from the corridor check entirely. Same instrument as the variants' span_x: lordgen.world_bounds off the evaluated depsgraph, leech.glb scaled so z-height == the shipped creature_h 2.32. The glb already ships at that height (native 2.32, scale_k 1.0), which is an independent check on creature_h. 4 meshes, 4168 verts. Script: tools/art/_leech_span.py.",
+   "span_set_by": "THE PROPS, NOT THE BODY. Per-mesh: leech_bone span_x 2.2581 (the basin rim, its tripod and the pale tool), leech_dark 2.0854, leech_body 1.706, leech_glow 1.4595. The corridor term is 0.552 m wider than the creature itself - a gate that measured the body alone would under-report it. Confirmed by eye in hero_side.png: the basin stands proud of the body.",
+   "floorgeom": {
+    "read_from_tree": "R / origin-main merged (floorgen.gd lid y 10.0 after S56)",
+    "corridor_clear_m": 11.0,
+    "lid_underside_m": 9.5,
+    "span_used_m": 2.2581,
+    "corridor": "CORRIDOR-SAFE",
+    "corridor_margin_m": 8.742,
+    "lid": "UNDER-LID",
+    "lid_clear_m": 7.18,
+    "fits": true,
+    "errors": [],
+    "note": "Read with tools/art/floorgeom.py, no literals. On this worktree's own floorgen.gd (still lid y 7.0, behind main's S56) the same body reads UNDER-LID with 4.18 clear - the VERDICT is the same on both trees and only the margin moves. The corridor term 11.0 is identical in both."
+   }
   }
  },
  "proving_views": 3,

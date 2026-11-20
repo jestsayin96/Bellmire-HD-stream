@@ -660,3 +660,22 @@ IDLE 2026-11-20T03:54:31-06:00 - HUD U96: feed-load gate FEED_LOAD OK (labels=35
 
 RUNNING 2026-11-20T04:08:23-06:00 (game build, item per TAKE THIS NEXT, claim 04:08:23, cap 04:33, expected finish 04:33)
 IDLE 2026-11-20T04:18:23-06:00 - game build S57: Leech bestiary entry + basin idea (_mend), S57_LEECH OK n=14, S57_RED FAIL as designed; battery green (OFFFLOOR 0/2105, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK). Claim 04:08:23, cap 04:33, declared 04:33, released early, no crossing. Godot EMPTY. No twitch test, 0 bits. (game build)
+
+RUNNING 2026-11-20T04:49:00-06:00 (chat bot B75 green-only battery, claim 04:49:00, cap 05:14, expected finish 04:58)
+IDLE 2026-11-20T04:55:00-06:00 - chat bot B75: guard-faults patch REFUSED A FOURTH TIME by the auto mode classifier, attempted once at the top of the run, NOT routed around the bridge; stand-down written as a NEW FILE docs/chatbot/B75_STANDDOWN.md per the 03:58 row. Battery GREEN-ONLY (no red arm, and said so): parse rc=0 zero ERROR, L14_TEST OK 22 (missing [] unanswered []), COMMANDS_DOC OK wrote 31 and docs/COMMANDS.md CLEAN after - true no-op, TWITCH_PARSE OK 8. Audit: 31 commands, 29 aliases, 56 unique verbs (71 tokens - the test counts tokens), 91 guard arms, grep guard_faults tools/ still ZERO. My own drift probe was wrong first - a regex-scraped canonical() map reported 28 phantom drifts; canonical() reads aliases out of the DATA. Claim 04:49:00, cap 05:14, declared 04:58, released early, no crossing. Godot EMPTY. No twitch, 0 bits, nothing posted. (chat bot)
+
+RUNNING 2026-11-20T04:53:49-06:00 (HUD U97 green+RED re-run of feed-load and theme sweep, claim 04:53:49, cap 05:08, expected finish 05:00)
+
+IDLE 2026-11-20T04:56:29-06:00 - HUD U97: feed-load and theme sweep re-run WITH red arms. Green FEED_LOAD OK / THEME_SWEEP OK panels=15; red break_shift -> bad=4 FAIL, red break -> fails=4977 FAIL. Claim 04:53:49, cap 05:08, released early, no crossing. Godot EMPTY. (HUD)
+
+RUNNING 2026-11-20T05:08:30-06:00 (game build: claim 05:08:30, cap 05:33, expected finish 05:30)
+
+IDLE 2026-11-20T05:17:28-06:00 - game build S58: span term in bestiary.gd (broodglut 10.4063, lastcuff 6.4807, corridor clear read from FloorGen 11.0, upscale past x1.057 refused). S58_SPAN OK n=22, RED FAIL as designed; parse 0 ERROR, OFFFLOOR 0/2504, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Claim 05:08:30, cap 05:33, declared 05:30, released early, no crossing. Godot EMPTY. (game build)
+
+RUNNING 2026-11-20T05:47:16-06:00 (chat bot: claim 05:47:16, cap 06:12, expected finish 06:04; lock read from R's WORKING tree)
+
+IDLE 2026-11-20T05:49:00-06:00 - chat bot B76: ALL FIVE OWED ENGINE GATES RAN GREEN after four blocked hours. parse 0 ERROR / 0 SCRIPT ERROR (24 pre-existing .tres UID warnings), L14_TEST OK (22 checks), TWITCH_PARSE OK (8 checks), COMMANDS_DOC OK wrote 31 commands and left docs/COMMANDS.md byte-identical (no-op confirmed), _b2_ask.gd absent from the worktree root with no .b2_* logs. Claim 05:47:16, cap 06:12, declared 06:04, released early, no crossing. Godot EMPTY. Lock read from R's WORKING tree. (chat bot)
+
+RUNNING 2026-11-20T06:08:09-06:00 (game build: claim 06:08:09, cap 06:33, expected finish 06:30)
+
+IDLE 2026-11-20T06:14:46-06:00 - game build S59: the Leech's span stated as a bound in bestiary.gd (crosses 11.0 m only past 3.51x its h; widest measured 1.58x), re-read live by _s58_span.gd. S58_SPAN OK n=25, RED FAIL as designed; parse 0 ERROR, OFFFLOOR 0/2381, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK. Claim 06:08:09, cap 06:33, declared 06:30, released early, no crossing. Godot EMPTY. (game build)

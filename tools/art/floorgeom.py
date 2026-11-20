@@ -22,8 +22,10 @@ the register can say WHERE each number came from):
   const WALL_IN := 0.5    how far a wall reaches into its cell
   const HALL_W := 3       corridor width in cells (D91 stage 3)
   the lid block           anchored on the single SHADOWS_ONLY line: the lid's
-                          own `.position = Vector3(0, y, 0)` and the BoxMesh's
-                          `.size = Vector3(_, thick, _)` above it.
+                          own `.position = Vector3(0, y, 0)` - which must be the
+                          ONLY such assignment IN THE FILE, because a later one
+                          is what the engine would actually ship - and the
+                          BoxMesh's `.size = Vector3(_, thick, _)` above it.
 
   corridor_clear_m = HALL_W * G - 2 * WALL_IN
   lid_underside_m  = lid_y - lid_thick / 2
@@ -108,13 +110,23 @@ def read(repo):
         var = lines[a].strip().split(".cast_shadow")[0].strip()
         win = lines[max(0, a - 24):a + 1]
         base = max(0, a - 24)
-        pos = [(base + i + 1, ln) for i, ln in enumerate(win)
+        # THE LID'S y IS COUNTED ACROSS THE WHOLE FILE, NOT JUST ABOVE THE ANCHOR.
+        # 2026-11-20 06:5x CT: windowing it was a LYING GATE.  A second
+        # `lid.position = Vector3(0, 2.0, 0)` one line BELOW the anchor is what
+        # the engine actually ships, and the windowed read could not see it: it
+        # reported UNDER-LID with 2.90 m clear for a 6.60 m Broodglut standing
+        # 5.10 m THROUGH a lid at 1.50 m, with `errors` empty.  Found by this
+        # lane's own red arm H, not in production.  Two assignments is now
+        # AMBIGUOUS and ambiguity is an error, never a pick - the same policy
+        # this file already applies to the SHADOWS_ONLY anchor.
+        pos = [(i + 1, ln) for i, ln in enumerate(lines)
                if re.search(r"\b%s\.position\s*=" % re.escape(var), ln)]
         siz = [(base + i + 1, ln) for i, ln in enumerate(win)
                if re.search(r"\.size\s*=", ln) and "Vector3" in ln]
         if len(pos) != 1:
-            out["errors"].append("floorgeom: %d `%s.position =` lines above the lid anchor, "
-                                 "wanted 1" % (len(pos), var))
+            out["errors"].append("floorgeom: %d `%s.position =` lines in %s, wanted 1 - "
+                                 "the lid's y is ambiguous and is NOT guessed"
+                                 % (len(pos), var, GD_REL))
         if len(siz) != 1:
             out["errors"].append("floorgeom: %d mesh `.size = Vector3(` lines above the lid "
                                  "anchor, wanted 1" % len(siz))

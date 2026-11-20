@@ -12795,3 +12795,11 @@ pieces a wall row; art's 09:05 note also hands over KayKit Dungeon Pack (185, al
 - VALIDATION OK: json.load passes; every pre-existing key and list entry unchanged (prefix-compared); file round-trips at indent 2.
 - CODE WIRING: none; epitaph/descend/cleared readers exist.
 Next content: C-141.
+
+## U102 - 2026-11-20 09:5x CST - MANA UI step (a): the engine exposes NO mana / resource value; step closes on a NO. No Godot, no lock claimed
+Item: TAKE THIS NEXT (07:58) row 5 HUD - the MANA SYSTEM UI (WoW/Diablo bar), "DO STEP (a) FIRST". Lock: R's working copy last line is IDLE chat bot B81 (stamped 10:02:40 while the machine clock read 09:52 - a stamp ahead of the clock, not mine to fix, flagged); tasklist Godot* empty; lock FREE. Step (a) is grep-only so I claimed nothing.
+(a) Behaviour grep over scripts/*.gd (mana|mp|spell_points|resource|stamina|energy|focus, light_energy/camera focus/market_pos excluded by reading each hit): NO per-hero mana or resource value exists anywhere. The one sentence that settles it is in the engine itself, delve.gd:3120: "this game has no mana, so blue is the ward/state brews." spells.gd has no cost/pool/cooldown fields; the only cooldowns are chat-command rate limits (chatcmd.gd cooldown_s). `mana_charge` is the D15 sound cue, not a resource. energy hits are Light3D.light_energy.
+(b) Not built, by the row's own rule: "a NO is a real answer and closes the step". Drawing a bar would be a picture with nothing behind it.
+What would have to change: the owners of hero_body.gd / roster.gd / spells.gd would have to publish a per-hero pool (e.g. mana, mana_max, regen) AND a design decision that the game HAS mana - which contradicts delve.gd:3120 and Mr. E's potion colour key. I would then read it in party_frames.gd's shape (not my file) or a bar in hud_dock.gd.
+FOR MR. E TO DECIDE: does Bellmire HD get a mana resource at all? The plan routes this as "Phase 2 directive" with no verbatim quote (team lead flagged it). Until yes + an owner publishes the value, the HUD stays dry. Edited no owned file.
+Next firing: re-read TAKE THIS NEXT; claim only for a named HUD item whose data exists.

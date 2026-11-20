@@ -1,3 +1,113 @@
+## TAKE THIS NEXT - THE 10:58 CT FIRING, 20 NOV 2026 (machine clock 10:58-11:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 BLOCK. ***
+## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is b0821e50.
+## *** THE HEADLINE IS THE SUPERVISOR'S MANA RULING, AND IT IS WRITTEN HERE BECAUSE A RULING IN A
+## *** CHAT LOG DOES NOT EXIST. (Supervisor check, 10:16 CT 20 Nov, under Mr. E's 07:24 authority.)
+##   (1) OWNER: **THE GAME BUILD OWNS THE ENGINE HALF.** The pool touches roster.gd, hero_body.gd
+##       and spells.gd - game build files. It is the SECOND HALF of Mr. E's existing mana directive,
+##       NOT a new item, so it is not a freeze violation.
+##   (2) BALANCE: **CASTING SPENDS MANA.** Mr. E said "Diablo/WoW/Elder Scrolls style" (07:24 CT).
+##       Smallest honest version: a per-hero pool that `cast()` spends and that regenerates out of
+##       combat. Spells are free today; they stop being free when this lands.
+##   (3) THE HUD DRAWS THE BAR THE HOUR THE POOL EXISTS - not before.
+## I CAUGHT THIS BLOCK AFTER THE :07 FIRING HAD ALREADY STARTED, so the game build's mana row below
+## reaches it at 12:07, not 11:07. That is on me, not on the lane.
+
+1. GAME BUILD - **S63 IS TICKED, AND I RE-DID YOUR ARITHMETIC AGAINST ART'S REGISTER, ROW BY ROW.**
+   `PROP_BATCH` is **52** keys by my own parse of the merged `scripts/dungeon_hd.gd` (20+16+16), and
+   I matched **all 52** against `renders/art/worldfit/_manifest.json` on origin/art to four decimals:
+   **52 MATCH, 0 MISMATCH, 0 MISSING.** Every one of the 52 is `CORRIDOR-SAFE` and `UNDER-LID` in
+   that same register - I checked the columns, not just the numbers you copied. The one row that
+   looks wrong is right: `Carrot.gltf` base_dz **-0.2378** is the manifest's own value with
+   `base_note "sinks 0.238 m below its pivot"` and `needs_base_offset true`, so the signed lift is
+   what keeps it on the floor. Verdicts read as lines: `S63_PROPS OK n=34`, red arm `FAIL` as
+   designed, parse 0 ERROR, OFFFLOOR 0/2284, MON_INPROP 0, TWITCH_PARSE OK 8, TOWNWALK PASS 0/15935,
+   DELVE_TEST OK. **I did NOT adopt your "floors 1..24 draw 117" - I did not measure it.**
+   **NEXT, AND IT OUTRANKS BATCH 4: THE MANA POOL. IT IS YOURS BY THE SUPERVISOR'S RULING ABOVE.**
+   Publish `mana / mana_max / regen` per hero, make `cast()` SPEND, regenerate out of combat. Keep it
+   one number and one gate so it is cheap to revert if Mr. E says otherwise when he wakes.
+   THEN batch 4 (62 of the 114 still unwired) and the wall-placement row, both still yours.
+   And widen the proof camera - the 09:58 row's clipped-edge note was taken; s63 reads wider.
+
+2. ART - **THE DAUBER IS TICKED AS THE 37th, AND I COUNTED IT MYSELF BY AST WALK OF YOUR OWN FILE.**
+   `tools/art/minibosses.py` on origin/art: `CANON` **51** keys, `BUILDERS` **51** keys, the two sets
+   **equal** (no canon row without a builder, none the other way), **14** variant keys
+   (`_chibi` x12, `_tall`, `_chibi_tall`) -> **37 distinct bodies INCLUDING `dauber`**, so 36 before
+   it. **YOUR "37th" IS RIGHT.** One correction inside your own write-up: it says "CANON and BUILDERS
+   each carry 50 keys" - that was the PRE-DAUBER count; the shipped file carries 51. Your headline is
+   right and your supporting number is one hour stale. Say which tree you measured next time.
+   **FIT IS PROVEN AND I LOOKED AT THE PICTURES, NOT THE JSON.** Hero front, side and back on the
+   posed 2.45 m Knight: GREEN, ratio 1.05, 3 of 3 proving views, 0 blind views, errors [].
+   **TWO THINGS THE PICTURE TOLD ME THAT NO NUMBER DID, AND NEITHER IS A TICK BLOCKER:**
+     (a) **THE PLUMB BOB READS AS A UI ARROW.** Hanging off the hod it is a thin line with a solid
+         cone at the bottom - at hero-scale that is a download arrow, not a mason's tool. It is the
+         single most legible thing on the body and it points at nothing.
+     (b) **THE LADDER READ IS REDUCED, NOT GONE.** You cut both stiles at pass 5 and you were right
+         that it helped. But in the front view a dark rail still runs the full length of the stack
+         with four lit crossbars over it, and that is one stile and four rungs. Your own pass-5 test
+         was "does it still read as a ladder" - my answer from the pane is "less, and still a bit".
+   Your fault list is the most honest in the house this hour and your side-view admission matches
+   what I see. **NEXT: THE MINIBOSSES ARE STILL YOURS** - and take (a) on the next body, it is cheap.
+
+3. CONTENT - **C-141 IS TICKED AND I RE-COUNTED EVERY POOL ON THE MERGED TREE.**
+   epitaphs 748 -> **760** (+12), descend 465 -> **471** (+6), cleared 450 -> **456** (+6) - exactly
+   what your commit message claims. Uniqueness inside each pool: 760/760, 471/471, 456/456, **zero
+   duplicates**. Only new key is `_note_c141`.
+   **NEW FINDING, AND IT SAVES YOU CYCLES: `phase2_words_alt2` IS DEAD AND CANNOT BE REACHED.**
+   `phase2_words` and `phase2_words_alt` were declared dead in writing at D98. C-114 added a THIRD
+   pool, `phase2_words_alt2`. I checked it the way the audit's own guard 2 demands rather than on a
+   zero count: the only runtime key build in the engine is `delve.gd:3801` `base + "_alt"`, which
+   reaches `_alt`, and **nothing anywhere builds `_alt2`** - `alt2` is 0 hits across scripts/ and
+   web/. **DO NOT WRITE MORE LINES INTO THAT FAMILY.** Nothing to undo; just stop feeding it.
+   **NEXT: KEEP PRODUCING, UNTHROTTLED, AND KEEP WRITING `_note_` KEYS** - they are 32 of this
+   hour's 47 zero-hit keys and every one is accounted for by class.
+
+4. HUB - **PACK_CATALOGUE IS TICKED AND I READ ALL THREE READMES MYSELF BEFORE AGREEING.**
+   `Stone_coffin/readme.txt` and `rocks/readme.txt` carry the identical full CC0 1.0 Universal Public
+   Domain Dedication text (Nobiax), including "even for commercial purposes, all without asking
+   permission"; `grass_07/readme.txt` carries only "Absolutely free to use or to modify in any kind
+   of work (personal, commercial or else)" plus a link request - **not CC0**, exactly as you marked
+   it. I scanned all three for NonCommercial / ShareAlike / NoDerivatives: **none**. The import gate
+   stays **18**. Your terms-on-file-in-readme section closes the 18/21 split for good.
+   **NO PUBLISH GATE WAS OWED AND I RAN NONE - saying that plainly.** You touched no `web/` file and
+   claimed no readiness. I measured the delta anyway: `origin/gh-pages^{tree}` **9ca8051e** EQUALS
+   `origin/hub:web` **9ca8051e** - **DELTA 0, FULLY PUBLISHED**, last publish 19 Nov 20:06:59 CT.
+   **NEXT: THE 18 WITH NO LICENCE TEXT ANYWHERE ARE THE REAL GATE** - for each, record in the
+   catalogue where its terms WOULD come from (listing page, author, pack name as published) so art
+   can clear one in a single lookup rather than a search. Evidence, not verdicts: do not mark any
+   pack licensed off a search snippet.
+
+5. HUD - **U103 IS TICKED AS A CORRECT STAND-DOWN, AND THE YIELD RULE WORKED EXACTLY AS WRITTEN.**
+   The chat bot's RUNNING line at 10:48:17 had no IDLE under it when you read, so you stood down and
+   wrote it up. That is the rule, obeyed, and a stand-down written up IS the delivery.
+   **THE MANA ANSWER CAME BACK AND IT IS NOT YET YOURS.** The supervisor ruled the engine half to the
+   game build (headline above). **YOU DRAW THE BAR THE HOUR THE POOL EXISTS - do not scaffold a bar
+   against a pool that is not there yet.** When `mana / mana_max` land in roster.gd, the bar is yours
+   the same hour and nobody has to re-route it.
+   **UNTIL THEN YOU ARE DRY. System 2 IS WHOLE** (rarity-hue half U88 19 Nov 20:58, reach half U98) -
+   do not start it, whatever the :52 prompt says. Stand down in writing, or audit your own shipped
+   `hud/` for a defect in work you already landed.
+
+6. CHAT BOT - **B82 IS TICKED AND I PROVED THE TWO TAGS APART ON THE PUSHED REF, NOT ON YOUR LOG.**
+   `git grep "BREW DEFAULT" origin/chatbot -- scripts/chatcmd.gd`: one `_guard_faults.append("BREW
+   DEFAULT")` at :1532 and one `_guard_faults.append("BREW DEFAULT MISMATCH")` at :1542. **DISTINCT,
+   on the ref the next lane will read.** Arm A is untouched, so no earlier write-up goes stale, and
+   nothing outside chatcmd.gd reads a tag string. Verdicts: `L14_TEST OK (24 checks)` 0 arms fired,
+   parse rc 0 zero ERROR, `TWITCH_PARSE OK (8)`, `COMMANDS_DOC OK wrote 31` doc sha `edff7faa` either
+   side; red arm `FAIL 3` per trigger, restored and green.
+   **AND THE CLOCK FIX HELD - I CHECKED IT, BECAUSE I WAS THE ONE WHO CHARGED YOU.** Your claim
+   10:48:17 and IDLE 10:53:03 sit INSIDE your own commit time (10:52:27) and the merge (10:52:35) -
+   no future stamp this hour. **Charge withdrawn; the double-clock discipline is what fixed it.**
+   **NEXT: nothing is owed.** Stand down in writing, or keep auditing your own shipped `chatcmd.gd`
+   guard family - the tag-uniqueness pass was real work and found a real defect.
+
+## FOR THE SUPERVISOR - 10:58 CT, 20 NOV. **NOTHING IS WAITING ON YOU.** The mana ruling came back at
+## 10:16 CT and is now written into this plan where the lanes read it (headline above): owner GAME
+## BUILD, casting SPENDS, HUD draws the bar the hour the pool exists. The hub is fully published with
+## a zero delta, so no publish authorisation is owed either. One thing for the record rather than for
+## decision: I broke four of art's PROGRESS.md divider rules with my own conflict resolver this hour
+## and restored them before pushing - detail in my 10:58 run doc.
+
 ## TAKE THIS NEXT - THE 09:58 CT FIRING, 20 NOV 2026 (machine clock 09:59-10:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is ee2a2f5e.

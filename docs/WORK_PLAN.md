@@ -1,3 +1,121 @@
+## TAKE THIS NEXT - written 2026-11-19 18:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 17:58 FIRING. The fleet is back on the grid: the game build's 17:07, the chat bot's
+17:45 and the HUD's 17:52 all fired in their own windows and the lock log for 17:0x-18:0x is clean.
+THE BLENDER BRIDGE IS UP - I used it for every git call in this run. The 17:07 game-build
+stand-down was taken on a bridge that was still refusing at that minute and IS NOT A FAILURE.
+
+A STANDING NOTE FOR ALL SIX LANES, CARRIED FORWARD BECAUSE IT IS STILL NOT IN YOUR PROMPTS: if
+execute_blender_code answers "Cannot connect to Blender at localhost:9876", you have NO GODOT AND
+NO GIT. Do NOT substitute device_bash for git - it was red-proved at 17:07 CT, the FIRST commit
+returns rc=0 but cannot unlink .git/HEAD.lock and the SECOND dies with "cannot lock ref 'HEAD' ...
+File exists". One commit and the repo is wedged. Write your work up, leave the tree alone, carry
+the commit to your next firing. A stand-down in writing IS the delivery. Only Mr. E reopens Blender.
+I HIT THE SAME SHAPE FROM THE OTHER SIDE THIS RUN AND IT IS WORTH ONE LINE: `git -C` through
+device_bash inside a WORKTREE dies with "fatal: not a git repository: .../C:/hd adventure/...",
+because the worktree's .git FILE holds a Windows gitdir path the Linux mount cannot follow. Use
+device_bash to READ and to run python; use the Blender bridge for every git call, always.
+
+1. GAME BUILD - NOTHING TO TICK AND NOTHING IS CHARGED TO YOU. Your only unmerged commits are my
+   own plan syncs. Your 17:07 firing took NO claim because the bridge was refusing - correct
+   behaviour, written up in the lock log, and it does not touch the clean-hour count.
+   NEXT, UNCHANGED AND SMALL: ONE CLOSE RENDER OF bow_golden to settle whether the string is there.
+   It is the only one of the seven whose third material is named "White" at [0.8,0.8,0.8,1]; at
+   plain-render scale it could not be seen and it was NOT called a defect. Say yes or no in one
+   line and the note dies. Then the next Phase 2 system in Mr. E's order. Your :07 window is yours
+   and the last lock line is an IDLE (HUD, 17:56:55).
+
+2. CONTENT - NOTHING TO TICK. C-125 was ticked at 17:4x and stands; your only unmerged commits
+   since are my plan syncs. NEXT: C-126, full rate.
+   ONE THING YOU SHOULD KNOW, BECAUSE IT IS YOUR WORK MOVING SOMEONE ELSE'S ROW: C-125's 128 lines
+   are what made the hub's LORE_FROZEN pin measurably stale, and that is now row 4's whole job.
+   Keep writing; the gap is the hub's to close, not yours to slow down for.
+
+3. ART - **THE FULLER IS TICKED. IT IS THE 35th, AND I COUNTED IT MYSELF.**
+   I did not take the number from your commit line. I reconstructed ORDER from minibosses.py in
+   order: the base 4 (drillmaster, scrapwright, gaoler, snuffer) + 4 (sexton, porter, tallyman,
+   cook) + 6 (sluicekeeper, sower, snarer, stoker, bellman, boiler) + 21 single appends from
+   jointer through rammer to fuller = 35 EXACTLY. (_report.json's 46 entries are 35 creatures plus
+   11 _chibi/_tall builder variants - do not read 46 as a creature count.)
+   I LOOKED AT ALL THREE HERO VIEWS, NOT AT THE NUMBERS. Front: the creature stands beside its
+   trough at roughly twice the hero's height, the frame and the screw read as a machine and not as
+   scenery, and THE CLOTH IN THE TROUGH IS PLAINLY VISIBLE - which matters more here than on any
+   miniboss so far, because your own idea makes the cloth the GAUGE the player is meant to read.
+   Back: facing is unambiguous - dark hood crown behind, pale faceplate in front. That is the
+   Beadle fault explicitly NOT repeated.
+   I RE-DID THE ONE PIECE OF ARITHMETIC THE VERDICT RESTS ON: footprint_span 3.29 against
+   corridor_clear_m 11.0 - CORRIDOR-SAFE is correct. parts 4, faces 1866, glb true, blank_check 105
+   files / 0 failures, wear 0.62.
+   ONE OBSERVATION THE NUMBERS DO NOT MAKE AND THE PICTURE DOES. IT IS A NOTE, NOT A BLOCK: from
+   the SIDE the creature's own body is largely occluded by the trough's upright frame - you read
+   the machine, not the figure. Front and back both carry it, so fit passes. If a side silhouette
+   matters for this one, that is yours to judge, not a defect I am charging.
+   NEXT: minibosses at full rate, and push before you render - a body in W5 is invisible to every
+   other lane. Measure the count off minibosses.py, never off a number in a prompt or in this plan.
+
+4. HUB - NOTHING TO TICK, AND YOUR ROW IS UNCHANGED BUT NOW HAS A LIVE TARGET SHA.
+   RE-MEASURED THIS HOUR SO NOBODY COPIES A STALE NUMBER: published is origin/gh-pages ae1a483
+   (publish 4, 18 Nov 19:02 CT), tree 656eb1b. origin/hub:web is now 9ca8051 and the unpublished
+   delta is THREE files - NOTES.md +4/-2, app.js +6/-2, tools/refresh_lore.py +149. It IS
+   viewer-visible now. I ran NO publish verification this hour because you made no READY TO
+   PUBLISH claim since the one I already gated at 17:4x; that gate's findings stand.
+   NEXT, AND IT IS SHORT: re-run refresh_lore.py against **MAIN at 7f966a67**, which carries C-124
+   AND C-125. Re-pin, run --check until it says CURRENT, and say the new string count in one line.
+   Your pin is 9f38b9c8/2026-11-18 and C-125 landed on lore_lines.json at 17:24 CT today, so your
+   own --check should read stale right now. That is your tool working, not a fault.
+
+5. CHAT BOT - **B64 IS TICKED, AND I PROVED THE NO-OP OFF THE REF RATHER THAN OFF YOUR md5.**
+   You reported COMMANDS_DOC "wrote 27 as a TRUE no-op, COMMANDS.md md5 9a80bfd9 before and after".
+   I did not take the hash: your entire merge-base diff against main is PROGRESS.md, 66 insertions,
+   ONE FILE. COMMANDS.md is byte-identical on the ref, which is the same claim proved by an
+   instrument you do not control. TWITCH_PARSE OK (8) and L14_TEST OK (22) on the merged tree with
+   C-125's 128 lines in, three short --script runs, no bare gate, and you computed the :52 boundary
+   BEFORE the cap and released at 17:47:43 without crossing. That is the yield rule done exactly.
+   NEXT: nothing is queued on you. Audit your own shipped work, or stand down in writing. Do not
+   invent an item and do not pull a Phase 2 system early.
+
+6. HUD - **U86 IS TICKED: THE U85 SWEEP IS NOW RED-PROVABLE BOTH WAYS.** But read the correction.
+   WHAT I VERIFIED MYSELF, STRUCTURALLY, WITHOUT GODOT: the old `break_shift` branch sat INSIDE the
+   `for r in rects` loop, so any creature contributing ZERO rects could never be shifted no matter
+   what the predicate said - that is why the gate was a no-op, and it is a real cause, not a guess.
+   The new `_panels % 4 == 1` shifts rect 1 of each scale, which is 3 rects across 100/125/150 -
+   and your reported bad=3 is exactly what that arithmetic predicts. Cause, fix and count agree.
+   **THE CORRECTION, AND IT SHARPENS YOUR OWN CAVEAT RATHER THAN WEAKENING IT:** your note says
+   "FeedHUD is not among the rects it walks" and reads as though FeedHUD is unwatched. IT IS
+   WATCHED - feed_hud.gd:34 calls UiTheme.watch(self), and feed_hud.gd builds PanelContainers at
+   :132, :230 and :248. So the precise statement is: FeedHUD IS in _watch and DOES own panels, but
+   during the sweep none of them is visible-in-tree and larger than 8x8, so _walk returns nothing
+   for it. That is a stronger version of your L74 caveat, not a softer one - the feed surface
+   exists and the gate still cannot see it.
+   AND THE THING NEITHER OF US SHOULD LEAVE STANDING: the sweep finds exactly 12 panel rects and
+   the NO-VERDICT floor is `_panels < 12`. You are sitting ON the floor. If any single panel goes
+   hidden the gate stops printing a verdict instead of going red, and by this house's own standing
+   rule a gate that prints no verdict IS RED. That is a one-line fragility worth naming in your
+   next pass; I am not asking for new work.
+   NEXT: System 2's HUD half, steps (a) and (b) from the 17:4x row, and NEITHER NEEDS GODOT.
+   (a) For each of hud_dock.gd, party_frames.gd, boss_bar.gd and feed_hud.gd, say in ONE LINE
+       whether that surface ever names a PIECE OF GEAR. A "no" is a real answer and closes it.
+   (b) Wire pip/ink through UiTheme.rarity_pip/rarity_ink only where (a) says yes. Never a second
+       table, never a cost-quartile guess. If (a) is "no" on all four, System 2's HUD half is
+       COMPLETE, you say so, and I tick it on your measurement plus my own re-grep.
+   The L31 remainder (status-effect icons) is still NOT yours.
+
+FOR THE SUPERVISOR:
+  (a) THREE TICKS THIS HOUR, all on my own measurement, none on a lane's claim: art's FULLER (35th
+      counted off ORDER by me; all three hero views looked at; corridor arithmetic re-done), chat
+      bot B64 (the COMMANDS_DOC no-op proved off the ref, not off the lane's md5), and HUD U86 (the
+      no-op cause confirmed structurally - the shift sat inside an empty rect loop - and bad=3 is
+      what the new modulo predicts). main is 7f966a67, pushed, plan synced to all six lanes.
+  (b) THE PUBLISH DECISION IS NOW A REAL ONE AGAIN, AND MY RECOMMENDATION IS UNCHANGED: HOLD ONE
+      MORE CYCLE. The unpublished delta is three files and IS viewer-visible (app.js carries the
+      regenerated lore bundle), and the security half of the gate passed on my own grep at 17:4x
+      with the CSP red-proved. The only reason to hold is that the lane's pin is one content cycle
+      stale - C-125 landed on lore_lines.json at 17:24 CT, after the pin - so publishing now spends
+      a publish on text that is stale on arrival and guarantees a second publish immediately after.
+      One re-run of the lane's own new tool closes it. Shipping now is defensible and the evidence
+      supports it; it is yours either way.
+  (c) NOTHING IS BLOCKED ON YOU OTHERWISE. Six lanes fed, clean-hour count held.
+
+
 ## CORRECTION TO MY OWN 17:4x BLOCK ABOVE - written 2026-11-19 18:0x CT by the Team Lead.
 THIS IS NOT A NEW HOUR'S ROW. It corrects row 4, which went stale INSIDE MY OWN RUN: the hub
 pushed 3ce4b7f7 while I was writing the block that called its item "still open". My sync re-read

@@ -13228,6 +13228,29 @@
           "The cellar is quiet, and every hoop is where he left it.",
           "Knock the staves down. Draw a breath. Walk the floor."
         ]
+      },
+      "relief": {
+        "arrive": [
+          "A sentry in a kettle hat with his back to a gate winch, a lamp on the drum head, and a ratchet plate at his foot.",
+          "Count the notches in the plate. Four. The dog sits in one of them.",
+          "He does not shout. He heaves the capstan a quarter turn, and the whole line comes round one place.",
+          "Your front rank is at the back and your back rank is at the front. Nobody is hurt. Nobody is gone.",
+          "Every reach, every guard, every heal was lined up on a body that is no longer standing there.",
+          "The bars are greased and the lamp is cold and blue. He has the look of a man who has stood this watch before.",
+          "Jam the dog in the ratchet plate and the turn stops. It costs you a turn on the floor and not on the thing hitting you.",
+          "The drum is pale oak, scrubbed white. The iron is the darkest thing in the room.",
+          "The guardroom smells of lamp oil and cold mail. Somebody has come to relieve the watch."
+        ],
+        "fall": [
+          "Watchturn is down. The bars hang slack in the drum.",
+          "The dog drops into its notch and the capstan does not move again.",
+          "The line settles where it stands. Front is front. Back is back.",
+          "The lamp on the drum head goes out. Nobody lights it.",
+          "He sits against the winch with his kettle hat in his lap. He does it quietly.",
+          "Watchturn is down. The drum is the only pale thing in the room.",
+          "The plate is quiet, and every notch is empty but the one.",
+          "Take your places. Draw a breath. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13250,7 +13273,8 @@
     "_note_c131": "C-131 (20 Nov 2026): the c130 rotation fix. In C-130 the four rows 15-18 were renamed one place off: each block carried the NEXT body's name. Corrected by value, 19 lines, no line added or removed: quartermaster -> Wardgrim, loader -> Millstone, hurdleman -> Bramblejaw, jointer -> Halvrek (the mapping _note_c130 already states and is right). Each block now carries only its own name. by_key keys unchanged. Zero-hit key by design, no lane is to wire it.",
     "_note_c142": "C-142 (20 Nov 2026): the Dauber (Wetwall), the 37th body, committed on main with dauber.glb. Arrive 9 and fall 8, no act or broken, {name} not used. Without arrive lines miniboss_for never draws the body. Zero-hit key by design, no lane is to wire it.",
     "_note_c143": "C-143 (20 Nov 2026): the Sealer's lines (38th miniboss, Leadbite, treasury theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press or fight on what is in hand. Without arrive lines miniboss_for never draws the body. Leadbite is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
-    "_note_c144": "C-144 (20 Nov 2026): the Hooper's lines (39th miniboss, Hoopfast, mess theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: it casks ONE hero, who keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper. Without arrive lines miniboss_for never draws the body. Hoopfast is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY."
+    "_note_c144": "C-144 (20 Nov 2026): the Hooper's lines (39th miniboss, Hoopfast, mess theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: it casks ONE hero, who keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper. Without arrive lines miniboss_for never draws the body. Hoopfast is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
+    "_note_c145": "C-145 (20 Nov 2026): the Relief's lines (40th miniboss, Watchturn, barracks theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a quarter turn of the capstan rotates the whole line one place, nobody is hurt or gone, every reach and heal is aimed at the wrong body; the four notches in the ratchet plate and the dog in one of them are the gauge; jam the dog to stop the turn. Without arrive lines miniboss_for never draws the body. Watchturn is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

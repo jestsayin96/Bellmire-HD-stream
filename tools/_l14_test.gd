@@ -14,6 +14,13 @@ func _ok(c: bool, what: String) -> void:
 
 func _initialize() -> void:
 	var cs: Dictionary = ChatCmd.commands()["commands"]
+	# B73: the COMMANDS_DATA guard count is READ here, and a non-empty answer moves _fail.
+	# From B48 until B73 chatcmd.gd:884 said "any gate can ask" and no gate in tools/ ever did
+	# (git grep guard_faults -- tools/ was rc=1, zero hits) while 91 append sites accumulated.
+	# Read immediately after the first commands() load: the loader clears _guard_faults only
+	# when _cmds is empty, so a later load would not re-clear and a later read could pass blind.
+	var faults: Array[String] = ChatCmd.guard_faults()
+	_ok(faults.is_empty(), "no COMMANDS_DATA guard arm fired on the load (%d fired: %s)" % [faults.size(), faults])
 	# the verbs in ChatCmd's match block, read from its source
 	var src := FileAccess.get_file_as_string("res://scripts/chatcmd.gd")
 	var rx := RegEx.new()

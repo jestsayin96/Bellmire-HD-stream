@@ -1,0 +1,51 @@
+{
+ "glb": "C:\\hd adventure\\bellmire-art\\assets\\monsters\\minibosses\\broodglut.glb",
+ "res": [
+  900,
+  900
+ ],
+ "band": "derived from the ear footprint",
+ "ear_verts": 432,
+ "arm_verts": 1292,
+ "opaque_px": 102038,
+ "ear_px": 10025,
+ "arm_px": 19374,
+ "ear_touches_arm_px": 0,
+ "frame_edge": {
+  "top": 0,
+  "bottom": 0,
+  "left": 0,
+  "right": 0
+ },
+ "ear_z": [
+  0.6995,
+  0.8515
+ ],
+ "arm_z": [
+  0.5513,
+  0.7014
+ ],
+ "height_overlap": 0.003,
+ "sides": {
+  "left": {
+   "ear_cols": 96,
+   "two_run": 54,
+   "one_run": 42,
+   "two_run_frac": 0.5625,
+   "max_gap_px": 49,
+   "ear_lowest_z": 0.6995
+  },
+  "right": {
+   "ear_cols": 96,
+   "two_run": 54,
+   "one_run": 42,
+   "two_run_frac": 0.5625,
+   "max_gap_px": 49,
+   "ear_lowest_z": 0.6995
+  }
+ },
+ "two_run_frac": 0.5625,
+ "separated": true,
+ "errors": [],
+ "verdict": "SEPARATED"
+}

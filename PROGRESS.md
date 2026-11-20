@@ -13539,3 +13539,36 @@ WORKING tree. No twitch test, 0 bits, no account used. Scratch log lived OUTSIDE
 FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment
 your S68 `"relief": "Watchturn"` MB_NAME row reaches origin/main - it was green in your own 15:14 run and is
 simply not pushed yet.
+## S69 - 2026-11-20 16:08-16:17 CST - ROW 1 CHRONICLE OVERLAP RETURNED (the card is feed_hud.gd's layout, not delve.gd's); SCRAPER (41st) GETS MB_FIT + CRYPT ROW, HELD OUT FOR CONTENT (game build)
+ROW 1 (15:58 block), "the lord announce card at delve.gd:197 is drawn over the Chronicle vellum" - NOT TAKEN, AND WHY,
+measured on the merged tree: delve.gd:196 only CALLS `FeedHUD.card_on(town, title, sub, col)` and hands it two strings.
+The card is BUILT, SIZED AND PLACED in feed_hud.gd (HUD): `_card` is a PanelContainer added to the SAME HBoxContainer as
+the line box (`h.add_child(_card)` then `h.add_child(_box)`, feed_hud.gd ~132-166), by L32b design "a lord's card at its
+left"; `_chrome_text_w()` (~396) already subtracts the card's min width from the text width; `_card_sub` has
+`custom_minimum_size = px(240)` with TRIM_WORD_ELLIPSIS. So the card is AT ITS MINIMUM width, and that minimum scales
+with UI scale - which is why the line column narrows at 150%. LOOKED AT renders/cycles/20261120_u104/mana_125_1080.png
+and mana_150_1080.png myself: the card sits BESIDE the text inside the vellum, not over it (125%: card ~40% of the
+vellum, text clear at right; 150%: card ~60%, text squeezed to ~4 words a row). I did NOT find a frame with the card
+drawn over washed-out text; if the lead's frame shows that, it is a newer capture than u104 and I have not seen it.
+The only lever delve.gd holds is the STRINGS (shortening `sub` does not narrow a card already at its 240px*scale floor)
+or SUPPRESSING the card call - which deletes the L32b lord card on the stream's resting layout. That is a design call,
+not a fit fix, so I did not make it. The fit fix is feed_hud.gd's: e.g. scale the sub min width down with UI scale, or
+stack the card ABOVE the lines when vellum width < N. Returned to the lead for the HUD row; nothing in feed_hud.gd touched.
+THEN ROW 1b, THE 41st: `scraper` (Scourstone). Field 5 of art's CANON tuple (tools/art/minibosses.py:14068) = `crypt`.
+Ratio read off `_fit_scraper_register.json` pairs.scraper.ratio = 1.04 (2.55 / 2.45, 3/3 proving views). scraper.glb
+present; --import ran (its .import left untracked, as with relief/hooper). Content has NO by_key.scraper.
+EDITS: delve.gd MB_FIT +"scraper": 1.04; dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] = ["ratcatcher", "scraper"] (+ S69
+comment); new tools/_s69_scraper.gd (S68's gate, staging switched OFF and arms inverted to prove the HOLD).
+NOT ADDED: MB_NAME "scraper". I added it first and S51_NAMES went FAIL 2 of 173 ("MB_NAME key scraper is not in feed",
+"key set matches the live keys") - S51 holds MB_NAME to keys content has written. That is a correct guard, so the name
+waits for content's row, exactly as art's CANON title waited for C-145 on the Relief. Reverted delve.gd from bak_s69
+and re-applied MB_FIT only. And S69 first staged the body and got gloombat.glb at 1.14 m: correct, because
+_setpiece_miniboss (delve.gd:455) only takes the own body when arrive lines exist. Staging is off until content lands.
+LOOKED AT art's renders/art/minibosses/scraper/hero_front.png: a dark hooded figure drawing a stone down a cut plinth,
+beside the knight, roughly a head taller. No engine render this cycle - the engine cannot show its own body until lines exist.
+RESULTS (on the final tree): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error / ERROR lines; S51_NAMES OK 168 checks;
+S69_SCRAPER OK 5 checks (held out of crypt 0/400, glb exists, no MB_NAME, no arrive lines, MB_FIT 1.04);
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2429; townwalk rc 0 in 88 s, 0 SCRIPT ERROR; DELVE_TEST OK 9001 frames,
+0 SCRIPT ERROR. (twitch/offfloor/townwalk ran before the MB_NAME revert, on a tree that differed by that one dict entry.)
+WHEN CONTENT WRITES by_key.scraper: add MB_NAME "scraper": "Scourstone" + S51 TABLE 41, restore `_keys.append` in
+_s69_scraper.gd and flip the draw/line arms back to S68's shape. Untracked here, mine, delete refused: _s69_battery.log.

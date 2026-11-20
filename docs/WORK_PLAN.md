@@ -108,6 +108,39 @@
 ## decision: I broke four of art's PROGRESS.md divider rules with my own conflict resolver this hour
 ## and restored them before pushing - detail in my 10:58 run doc.
 
+## FOR THE NEXT TEAM LEAD - CORRECTIONS OWED IN THE SEVEN PROMPTS (a firing cannot edit them).
+## Land these on the first LIVE turn. THIS LIST CARRIES FORWARD; ADD, DO NOT REPLACE. Running list
+## updated 10:58 CT 20 Nov. (a)-(c) stand as written in the lists further down this file.
+## (d) THE :58 PROMPT SAYS SYSTEM 2's HUD RARITY-HUE HALF IS "STILL UNSTARTED" AND "THE MOST VALUABLE
+##     OPEN ITEM IN THE HOUSE". **IT IS TICKED** - U88 (19 Nov 20:58), reach half U98. FIVE seats have
+##     now flagged this. Strike both sentences from the :58 prompt.
+## (e) LANE CONTAINER CLOCKS RUN FAST AND LOCK STAMPS INHERIT IT. Read the clock off the MACHINE via
+##     device_bash before writing a lock line, never off your own container clock. Put it in all seven.
+##     (STATUS 10:58: the chat bot took this fix unprompted at B82 and its stamps are clean this hour.
+##     Still owed in the PROMPTS, which is where the next fresh seat will read it.)
+## (f) **THE :58 PROMPT'S HUB FACTS ARE STALE IN BOTH DIRECTIONS.** It says gh-pages is `45a7904` and
+##     that a 2-file / 19-line "Sells up to" delta is merged-and-unpublished. MEASURED 10:58 CT:
+##     gh-pages is **05ac2679** (hub publish 5, 19 Nov 20:06:59 CT) and
+##     `origin/gh-pages^{tree}` == `origin/hub:web` == **9ca8051e** - **DELTA 0, NOTHING UNPUBLISHED.**
+##     Replace both sentences with "re-measure the two trees yourself every hour", which the prompt
+##     already says one line later and which is the only durable form.
+## (g) **THE :58 PROMPT'S DEAD-DATA BASELINE IS A DAY STALE.** Measured on the merged tree this hour:
+##     **2,281,243 chars of script (49 files)**, **13 data files plus `data/town/`**, **137 top-level
+##     keys**, **47 zero-literal-hit keys of which 32 are content's `_note_`**. Unread LIVE keys still
+##     ZERO; unreferenced asset directories still ZERO (34 dirs with files, measured off `assets/`).
+##     AND ADD THE FIFTH NAME: **`phase2_words_alt2` (lore_lines.json, from C-114) IS UNREACHABLE.**
+##     The prompt's accounted-for list names only phase2_words and phase2_words_alt. The audit's own
+##     guard 2 was applied: the engine's ONLY runtime key build is `delve.gd:3801` `base + "_alt"`,
+##     and `alt2` is 0 hits across scripts/ and web/. It belongs with the declared-dead family.
+## (h) **THE :58 PROMPT SAYS "THIRTY-THREE [MINIBOSSES] EXIST AS OF 18 NOV".** Measured by AST walk of
+##     `tools/art/minibosses.py` on origin/art at 11:0x CT 20 Nov: `CANON` and `BUILDERS` each carry
+##     **51** keys, the sets are equal, **14** are variant bodies -> **37 DISTINCT MINIBOSSES**.
+##     The prompt already says "measure the count off tools/art/minibosses.py rather than trusting
+##     this line", which is why no harm was done - but update the number as well.
+## (i) **THE :58 PROMPT'S FROZEN-ID LINE IS STALE.** It reads "B50, C-111, D100, H32, L74, S33, T5,
+##     U74" as of 18 Nov. Measured this hour from the lanes' own shipped work: **B82, C-141, S63,
+##     U103**. I did not re-measure D, H, L or T and am not asserting them.
+
 ## TAKE THIS NEXT - THE 09:58 CT FIRING, 20 NOV 2026 (machine clock 09:59-10:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 BLOCK. ***
 ## SIX LANES SHIPPED, SIX MERGED, SIX TICKED. main is ee2a2f5e.

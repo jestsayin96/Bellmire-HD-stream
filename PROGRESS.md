@@ -1,3 +1,12 @@
+## HUB 2026-11-20 00:40 CT - STAND-DOWN IN WRITING + AUDIT OF OWN web/. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+TAKE THIS NEXT (23:58 block) row 4 gave HUB: "stand down IN WRITING, or audit your own web/." Did both; no screenshot taken because web/ did not change.
+THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/hub:web = origin/gh-pages^{tree}. Merged-and-unpublished delta = 0 files / 0 lines. No publish gate owed.
+AUDIT (read off the file, not recalled): app.js innerHTML appears at 6 lines, only :255 and :301 are code (page-owned strings); :7 :93 :5092 :5133 are comments. outerHTML 0, eval( 0. insertAdjacentHTML / document.write / new Function each appear once, all inside the :10-11 comment that says there are none. index.html: innerHTML 1 (the comment that says "two page-owned sites" - still true), no external src/href, CSP meta intact (default-src 'none'; connect only supabase/twitch). node --check app.js rc 0.
+Two assignments to .href/.src in app.js: :2713 link.href gated by /^https:\/\/(www\.)?twitch\.tv\// regex on a chat URI, target=_blank rel=noopener noreferrer - pre-existing, host-pinned, not a snapshot field; :3753 img.src is a whitelist constant. Flagging :2713 for the team lead's eye only; nothing changed.
+Hostile-name test NOT re-run: web/ is byte-identical to the tree it passed on (17 Nov 17:58 CT), so it is not owed.
+Merge hygiene: merged origin/main, then origin/hub (WORK_PLAN.md conflicted; kept the main copy, top block is the 23:58 CT one, 0 conflict markers). Local-only _hub_ready_shot.png remains untracked and unstaged (delete refused on this machine; named here as before).
+Live-dot colour: unchanged, not touched this run.
+
 ## HUB 2026-11-19 20:40 CT - STANDING CHECK: web/ IS BYTE-EQUAL TO THE PUBLISHED TREE. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
 TAKE THIS NEXT (18:5x block) gave HUB no row: "nothing is queued for you. Stand down in writing, or audit your own shipped web/ work." Standing down in writing; named so the team lead knows the block was read.
 THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/gh-pages^{tree} (05ac2679). Merged-and-unpublished delta = 0 files / 0 lines. Fast-forwarded hub 34bb4ad0 -> 3c3564a6; that delta is docs/WORK_PLAN.md only (152 lines), nothing in web/.
@@ -12165,6 +12174,11 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ## C-130 (19 Nov 22:23 CST) - the miniboss rename, feed lines (content)
 Item: TAKE THIS NEXT (19 Nov 22:0x CT) row 2, CONTENT: THE RENAME, PART 1 of the supervisor's 21:50 Mr. E directive. Renamed all 36 minibosses in the miniboss_feed text: 138 lines (arrive, act, broken and fall lines that named the trade) now use the new character name with no 'the' prefix; the 36 blocks keep every line count. One line was reworded around the name (tapster cask arrive). Directive row 23 reads Drizzler; the body key is strickler and it took Murkspit. by_key KEYS ARE UNCHANGED ON PURPOSE: they are art's body keys and the join for miniboss_for, which draws a body only with a mesh AND lines under its own key, and no new name is on any origin branch yet. When art renames its keys, by_key keys must be renamed in the same change; the mapping is in miniboss_feed._note_c130 (nested, top-level count still 44). Old names survive only in earlier _note_ keys, as history. Names are Mr. E's proposals. Did not extend the phase2_words family. VALIDATION OK: json.load passes, every pre-existing key unchanged except the 138 intended lines, no key added except miniboss_feed._note_c130, ASCII only.
 CODE WIRING: none new for these lines. Owed by others: art/game build rename the body keys, and the by_key keys follow in the same change.
+
+C-131 (20 Nov 2026 CST) - the rotation fix, 19 lines (content)
+Item: TAKE THIS NEXT (19 Nov 23:58 CT) row 2, CONTENT: C-130 half delivered. Rows 15-18 were renamed one place off. Fixed by value to the names in _note_c130: quartermaster -> Wardgrim (5 lines), loader -> Millstone (6), hurdleman -> Bramblejaw (5), jointer -> Halvrek (3). 19 lines, none added or removed; by_key keys unchanged. One nested _note_c131 added in miniboss_feed (top-level count unchanged). Did not extend phase2_words. Independent check over all 36 blocks: no block carries another body's name. VALIDATION OK: json.load passes, every pre-existing key unchanged except the 19 intended lines and the c130 note's trailing comma, ASCII only.
+CODE WIRING: none. !miniboss and the Chronicle now read the same name for these four bodies.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
 ## B69 - 2026-11-19 22:45 CT - THE SECOND ROWED COMMAND: !town IS WRITTEN AND READS THE TOWN THE GAME ALREADY EXPOSES, SO NOTHING IS OWED BY ANOTHER LANE. THE GODOT GATES SPLIT TO :45 RATHER THAN CROSSING INTO THE HUD.
 ITEM: the supervisor's second chat bot item (sup-nov19-1858) - `!town` / `!bellmire`: town level, what has been built, economy status, read-only. The team lead's 22:0x CHAT BOT row says "NEXT: town, then bestiary", and B67/B68 are both ticked, so this is the row.
 
@@ -12213,6 +12227,51 @@ Checked at 23:53:28-06:00: last line of R's working-copy docs/RUN_LOCK.txt = "RU
 Edits: none; no Godot run; nothing to gate. Foreign finding from U91 (rts_camera clock 1.5px overhang at 150%) still stands for its owner.
 Next firing (00:52): re-read RUN_LOCK in R's working tree; if free, run the L74 UI-scale readability check of hud_dock/LeaderboardPanel-free panels at 125/150, claim <=15 min, release by :07.
 Nothing for Mr. E to decide.
+## B71 (20 Nov 00:4x CST) - THE OWED PROMOTION, PAID AND RED-PROVEN, AND THE WHOLE GUARD FAMILY TURNS OUT TO BE LOG-ONLY TO A BATTERY
+TAKE THIS NEXT (23:58 block) CHAT BOT row: promote MINIBOSS UNNAMED and MINIBOSS GHOST from printerr
+to push_error. Taken as written. Lock 00:48:30 -> IDLE 00:50:40, released before the HUD's :52.
+
+THE DEBT. B70 shipped both checks at printerr-only with the reason written on the function: both had
+exactly one live instance (`strickler` unnamed, `drizzler` ghost), they were the same single defect, the
+fix was already on `laptop` at a2d6ab2e, and a guard that goes red on a fix in flight teaches a lane to
+ignore it. That window was declared one cycle wide. Main carries a2d6ab2e as of the 23:58 merge, so it
+closes here. Both now append to `_guard_faults` and `push_error` like every other path in COMMANDS_DATA.
+
+GREEN FIRST, AND NOT ON THE MERGE'S WORD. I brace-matched MB_NAME out of `scripts/delve.gd` in the
+merged worktree myself and walked it against content's `miniboss_feed.by_key`: 36 name rows, 36 feed
+rows, UNNAMED empty, GHOST empty. The promotion lands on a clean join rather than on a live fault.
+
+RED-PROVEN IN ONE MUTATION, BECAUSE THE TWO FAULTS ARE THE TWO ENDS OF ONE JOIN. In my own worktree's
+copy of data/lore_lines.json - never R's, never another lane's - I renamed one feed key, `beadle` ->
+`zzz_fake_trade`. That makes the old key a GHOST (an MB_NAME row no body carries) and the new key
+UNNAMED (a body with no MB_NAME row) in a single edit. Both fired as ERROR:
+  COMMANDS_DATA MINIBOSS GHOST   - ["beadle"]
+  COMMANDS_DATA MINIBOSS UNNAMED - ["zzz_fake_trade"]
+File restored; `git diff -- data/lore_lines.json` CLEAN. The green run printed no MINIBOSS line at all.
+
+THE FINDING THAT MATTERS MORE THAN THE PROMOTION, AND IT IS AGAINST MY OWN WORK. With that fault
+planted, `tools/_l14_test.gd` printed both push_errors and STILL EXITED rc=0 - "L14_TEST OK (22
+checks)". Nothing in the battery reads `ChatCmd.guard_faults()`. So every COMMANDS_DATA check in this
+file - all of them, not just these two - is a log line to a gate, and the distinction between printerr
+and push_error that this cycle's row was about buys a redder log and NOT a red gate. Promoting them was
+still right; it was not sufficient, and I would rather say so than let the tick stand on a half-truth.
+tools/ is not my file, so I cannot close it: the fix is one assert in the battery -
+`ChatCmd.guard_faults().is_empty()` -> exit 1. Routed to the team lead in my summary.
+
+GATES (all four, one Godot launch, lock held 2m10s): parse --quit-after 300 rc=0 no script errors;
+L14_TEST OK (22 checks); COMMANDS_DOC OK wrote 31 commands - a true no-op, data/commands.json and
+docs/COMMANDS.md both untouched this cycle and the generator left them byte-identical; TWITCH_PARSE OK
+(8 checks). Godot EMPTY before claim and after release. data/commands.json unchanged, so no drift check
+moved: 31 commands, `order` 31, 31 doc rows, unchanged in both directions.
+
+LOCK, STATED PLAINLY BECAUSE LAST CYCLE'S DECLARATION COST THE HUD ITS FIRING. I had four clean minutes
+between game build's 00:15:59 IDLE and the HUD's :52. I declared 00:51 - the finish I actually meant -
+not a cap, and released at 00:50:40. The red-proof fitted inside it; had it not, it would have been
+carried, not crossed. No crossing.
+
+No Twitch of any kind: no account used, 0 bits, nothing posted, nothing redeemed, no reward touched.
+Nothing for Mr. E to decide.
+
 ## B70 (19 Nov 23:4x-00:0x CST) - !miniboss, THE THIRD ROWED COMMAND, AND A GATE THAT CAUGHT THE RENAME FAULT FROM THE OUTSIDE
 Item: supervisor 19:28 item 3 (miniboss lore), rowed by the team lead's 22:58 CHAT BOT row. Lock: last line IDLE game build 23:14:52 and tasklist showed ZERO Godot; claim 23:51:13, cap 00:16, declared finish 00:10. No crossing.
 WRITTEN: `!miniboss` (aliases !elite, !elites), args [name], free, no hero. No name -> how many hold a chamber alone and how to ask. A name -> that one: what it is called, what it was, and content's first `arrive` line, which is the look of the thing coming through the door. Lines carrying {name} are passed over rather than filled with a hole. A miss and an ambiguous prefix both ask again rather than guessing.
@@ -12247,3 +12306,15 @@ LOOKED AT renders/cycles/s53/s53_clock_150.png: plate bottom-right, all four rul
 BATTERY: parse headless rc=0, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2207; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/17093 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 NO LIVE TWITCH: nothing posted, no cheer, 0 bits on any account, no redemption, no subscription. lore_lines.json not touched (content's four rotated blocks).
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## U93 (20 Nov 00:53 CST) - NO CLAIM: lock free, but no HUD defect is open; nothing worth a Godot claim
+Item: L74 (HUD's own queue per TAKE THIS NEXT row 6, 23:0x). Lock read from R's working copy at 00:5x: last line IDLE chat bot B71 00:50:40, tasklist empty, so the lock was free and I did not stand down for a hold. I chose not to claim.
+Why: U90 (feed flood 100/125/150, 4967-fail red-proof) and U91 (long-name flood, every HUD label in viewport) are green and open nothing; the U71/U76 rarity guard already has its brace-nesting end-finder with three red proofs (the parse_fish concern in the prompt is closed). leaderboard_panel.gd is dormant (draws nothing since L63) so there is nothing to measure there. A claim now would re-run green gates for no new information and spend the game build's and chat bot's hour.
+Still standing, not mine: rts_camera.gd clock plate overhangs the viewport 1.5px at UI 150% - the game build fixed it in S53 (572fe5ab) with its own red-proof.
+Next firing (01:52): re-read TAKE THIS NEXT; if the plan names no new HUD item, run the UI-scale sweep with the <12-panel floor lifted (FeedHUD is a Control so _theme_sweep still cannot see it - U90 note) only if I can finish inside claim+15 and release by :07.
+Nothing for Mr. E to decide.
+
+### U93 AMENDMENT (00:55 CST) - the merge brought the 23:58 plan, which names the L74 UI-scale check for this firing, so I DID claim after all
+Lock: R working copy last line IDLE chat bot B71 00:50:40, tasklist empty; claim 00:54:03, IDLE 00:55:12 (cap 01:09, no crossing). Ran tools/_theme_sweep.gd WINDOWED at UiTheme 100/125/150: "U85 panels=12 bad=0", THEME_SWEEP OK (12 = exactly the NO-VERDICT floor, so the verdict is thin; FeedHUD still invisible to it - covered by U90/U91). No HUD file edited, no picture taken this cycle (the U90/U91 150% shots are the last looked-at ones). Log: tools output _u93_sweep.log (untracked). Only 'instantiate on null' lines = known thin import cache, not HUD.
+Correction to the paragraph above: "no new HUD item" was written before I had merged the 23:58 plan.
+Next firing: lift the 12-panel floor honestly (count FeedHUD's Control) or take a new item if the plan names one. Nothing for Mr. E to decide.

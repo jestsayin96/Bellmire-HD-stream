@@ -12478,3 +12478,9 @@ Item: TAKE THIS NEXT (20 Nov 05:58 CT) row 3, CONTENT: C-136 ticked; keep produc
 VALIDATION OK: json.load passes, every pre-existing key and list entry unchanged (prefix-compared), only new key barks._note_c137.
 CODE WIRING: none new; the pools already have readers.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+### U99 (2026-11-20T06:58 CST) - STAND-DOWN, written up: the plan's HUD queue ("long-roster LeaderboardPanel / hud_dock at 125/150") is already answered by U91/U93; no Godot launched, no lock claimed
+Item: TAKE THIS NEXT (05:58) row 5 HUD, "NEXT: your own queue - long-roster LeaderboardPanel / hud_dock read at 125/150". Lock: read R's WORKING copy of docs/RUN_LOCK.txt at 06:52 - last RUNNING was chat bot 06:47:36 (declared 06:51), followed by its own IDLE (B77 red arm); tasklist Godot* empty. Lock was FREE; I chose not to claim.
+Why: leaderboard_panel.gd has drawn nothing on stream since L63 (dormant), so a long-roster read of it has no pixels to measure (U91). U91 already floods 5 pathological names (40-char hyphenated, underscore, unicode, xX_..._Xx) at UiTheme 100/125/150 and checks EVERY visible Label under every CanvasLayer is inside the viewport; U90 does the feed flood; U93 _theme_sweep (12 panels, 0 bad) covers hud_dock panels. A claim now would re-run green gates for no new information and spend the game build's :07 window prep. Edited no owned file.
+Next firing: re-read TAKE THIS NEXT; if it names a new HUD item, claim inside :52-:07 (claim+15) and write the expected finish in the RUNNING line.
+Standing finding for the plan owner: this row sends HUD at an item U91/U93 already close - the HUD queue is empty, not owed. Nothing for Mr. E to decide.

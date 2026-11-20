@@ -10042,3 +10042,12 @@ LOOKED AT (renders/cycles/u90/u90_run_125.png and _150.png from the first run, s
 Parse: bare headless rc=0; only the known worktree import-cache 'instantiate on null' lines (not HUD).
 Not done: UI-scale sweep still has the <12 panels floor; feed_hud.gd unchanged this cycle (no defect found). Next firing: L74 theme readability of LeaderboardPanel/hud_dock at 125/150 under a long name roster.
 Nothing for Mr. E to decide.
+
+## U91 (19 Nov 22:5x CST) - L74 LONG-NAME FLOOD + EVERY HUD LABEL IN THE VIEWPORT: gate GREEN, RED-PROVEN, one foreign finding
+Item: L74 (the HUD's own queue; TAKE THIS NEXT row 6 says "your own queue"). Lock: last line IDLE game build 22:15:36, tasklist empty; claim 22:53:50, IDLE 22:59, cap 23:08 - inside, no crossing. One relaunch: my own first edit of the gate had a parse error (`:=` on a Variant), fixed and rerun.
+leaderboard_panel.gd is DORMANT (draws nothing on stream since L63), so "LeaderboardPanel under a long roster" has nothing to measure; I measured everything that does draw instead. tools/_u91_long_names.gd (windowed 1920x1080, scale 100/125/150, 420 frames each): floods the Chronicle with 5 pathological names (40-char hyphenated, underscore, unicode Ae, xX_..._Xx) in routine and crit lines, and EVERY frame checks every visible Label under every CanvasLayer is inside the viewport, split by which script owns the layer (HUD-owned fails count; foreign ones are listed, not failed).
+GREEN: LONGNAME OK rc=0, labels=15697, HUD fails=0, dropped_protected=0, crit admitted 6, min_gap 0.80s. RED-PROOF: arg "break" (viewport shrunk to 300x200) -> rc=1.
+LOOKED AT renders/cycles/u91/u91_run_150.png: crit line "Goodwife_Perpetua_Hawthorne-Underbough has fallen ... x3" wraps in four lines inside the scroll with no clipping, pane titles and now-watching plates intact, "a townspers..." ellipsis on the narrow plate is the existing intentional clip.
+FOREIGN FINDING (not mine, owner rts_camera.gd): the "1x  Day 1  HH:MM" clock label is at y=1013.5 h=68 at UI scale 150% -> bottom 1081.5 on a 1080 viewport, a 1.5px overhang on every frame (visible in the shot: the plate sits flush against the bottom edge). Fix for the owner: clamp its position to viewport_h - size.y when UiTheme scale > 1. Town.gd-owned labels also appear in the break run only (expected).
+Parse: headless bare rc=0, only the known worktree import-cache 'instantiate on null' lines.
+Next firing: re-read TAKE THIS NEXT; no HUD defect open. Nothing for Mr. E to decide.

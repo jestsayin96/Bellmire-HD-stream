@@ -35,7 +35,7 @@ Written by the hub lane, 20 Nov 2026 08:5x CT, on the 07:58 TAKE THIS NEXT row (
 | `KayKit_ResourceBits_1.0_FREE` | 466 | 17.6 | .fbx 152, .bin 76, .gltf 76, .mtl 76, .obj 76, .png 6, .url 3 | CC0 1.0 (read off the pack's licence file) - `License.txt` | 17 (candidate, market goods/resources) |
 | `Medieval_Village_MegaKit` | 936 | 174.3 | .fbx 176, .bin 176, .gltf 176, .mtl 176, .obj 176, .png 54, .txt 1 | CC0 1.0 (read off the pack's licence file) - `License_Standard.txt` | 15 (town buildings; the largest by file count) |
 | `Smith1_blend` | 3 | 5.1 | .html 1, .jpg 1, .blend 1 | Creative Commons Zero (Public Domain), by Daniel74 - read off the html licence | 15 (town building: the smithy; blend + jpg only, no glTF) |
-| `Stone_coffin` | 5 | 2.2 | .tga 1, .jpg 1, .txt 1, .fbx 1, .obj 1 | CC0 1.0 (`readme.txt`), provided by Nobiax | 47 (candidate, crypt prop) |
+| `Stone_coffin` | 5 | 2.2 | .tga 1, .jpg 1, .txt 1, .fbx 1, .obj 1 | **TERMS ON FILE IN readme.txt** - full CC0 1.0 text read 20 Nov 10:4x CT, provided by Nobiax (also asks, non-binding, for a link) | 47 (candidate, crypt prop) |
 | `ThePaintedWench_blend` | 3 | 5.4 | .html 1, .jpg 1, .blend 1 | Creative Commons Zero (Public Domain), by Daniel74 - read off the html licence | 15 (town building: the tavern; blend + jpg only, no glTF) |
 | `Ultimate_Animated_Animals` | 63 | 129.1 | .blend 12, .fbx 12, .gltf 12, .mtl 12, .obj 12, .txt 1, .jpg 1 | CC0 1.0 (read off the pack's licence file) - `License.txt` | unassigned (animals) |
 | `Ultimate_Monsters` | 69 | 72.4 | .fbx 18, .obj 17, .mtl 15, .blend 11, .gltf 4, .png 2, .txt 1 | CC0 1.0 (read off the pack's licence file) - `License.txt` | unassigned (monsters) |
@@ -48,7 +48,7 @@ Written by the hub lane, 20 Nov 2026 08:5x CT, on the 07:58 TAKE THIS NEXT row (
 | `forest-monster` | 10 | 45.8 | .png 8, .blend 1, .txt 1 | Creative Commons (CC0), author Cestmir Dammer (`Licenses.txt`); textures derived from Rick Hoppmann's - derivation not separately licensed in the file | unassigned (monster) |
 | `free_mine_assets` | 9 | 27.6 | .png 7, .blend 2 | **no licence file in pack** | 47 (candidate, mine dressing) |
 | `golem_clean_blend` | 1 | 7.0 | .blend 1 | **no licence file in pack** | unassigned (monster) |
-| `grass_07` | 8 | 6.5 | .tga 4, .fbx 1, .obj 1, .jpg 1, .txt 1 | Custom free-use note by Nobiax (`readme.txt`): free for personal/commercial work, asks for a link to the result - NOT a CC0 grant; a soft condition | 68 (nature) |
+| `grass_07` | 8 | 6.5 | .tga 4, .fbx 1, .obj 1, .jpg 1, .txt 1 | **TERMS ON FILE IN readme.txt (custom grant, NOT CC0)** - free-use note by Nobiax: free for personal/commercial work, asks for a link to the result - NOT a CC0 grant; a soft condition | 68 (nature) |
 | `handpainted_weapons` | 72 | 5.9 | .png 42, .mtl 14, .obj 14, .blend 2 | **no licence file in pack** | unassigned (gear) |
 | `kaykit_character_animations_CC0` | 53 | 9.0 | .fbx 22, .png 7, .mtl 6, .obj 6, .pdf 3, .dae 3, .url 2 | CC0 1.0 (read off the pack's licence file) - `License.txt` | unassigned (character animation) |
 | `kaykit_dungeon_pack_CC0` | 1,079 | 85.9 | .mtl 226, .obj 226, .fbx 208, .dae 202, .glb 192, .png 12, .gltf 10 | CC0 1.0 (read off the pack's licence file) - `License.txt` | 47 (dungeon props; parts already in assets/gear/dungeon) |
@@ -64,7 +64,7 @@ Written by the hub lane, 20 Nov 2026 08:5x CT, on the 07:58 TAKE THIS NEXT row (
 | `quaternius_medieval_weapons_2018_CC0` | 97 | 24.7 | .blend 24, .fbx 24, .mtl 24, .obj 24, .png 1 | **no licence file in pack** | unassigned (gear; already under assets/gear/shields) |
 | `quaternius_rpg_characters_CC0` | 60 | 39.9 | .fbx 12, .mtl 12, .obj 12, .blend 11, .png 11, .txt 1, .jpg 1 | CC0 1.0 (read off the pack's licence file) - `License.txt` | unassigned (characters) |
 | `quaternius_ultimate_rpg_items_CC0` | 533 | 100.5 | .png 107, .blend 106, .fbx 106, .mtl 106, .obj 106, .txt 1, .jpg 1 | CC0 1.0 (read off the pack's licence file) - `License.txt` | unassigned (gear; seven models already in assets/gear/artifact) |
-| `rocks` | 32 | 237.3 | .tga 15, .jpg 6, .fbx 5, .obj 5, .txt 1 | CC0 (`readme.txt`; snippet only, the full text was not read) | 68 (nature; 237 MB, 5 fbx) |
+| `rocks` | 32 | 237.3 | .tga 15, .jpg 6, .fbx 5, .obj 5, .txt 1 | **TERMS ON FILE IN readme.txt** - full CC0 1.0 text read 20 Nov 10:4x CT (same Nobiax text as Stone_coffin) | 68 (nature; 237 MB, 5 fbx) |
 | `ultimate_animated_character_pack` | 209 | 228.5 | .blend 52, .fbx 52, .mtl 52, .obj 52, .png 1 | **no licence file in pack** | unassigned (characters) |
 | `ultimate_nature_pack_by_quaternius` | 602 | 99.6 | .blend 150, .fbx 150, .mtl 150, .obj 150, .txt 1, .jpg 1 | CC0 1.0 (read off the pack's licence file) - `License.txt` | 68 (nature) |
 
@@ -110,3 +110,13 @@ Method: the pack's folder/zip name and inner folder name were matched to a listi
 - `_generated`: this project's own output, not a third-party pack - no external licence applies.
 
 **Rule for art:** until a row above is VERIFIED, treat the pack as unlicensed for anything that ships.
+
+## Terms on file in a readme - NOT part of the 18 (added 20 Nov 2026 10:4x CT, hub lane)
+
+The import gate is **18 packs**, the list above, unchanged. Three packs have a licence-bearing `readme.txt` that is not NAMED licence/eula and are the gap between art's 21 and this list's 18 (team lead's ruling, 09:58 CT). I read all three readmes in full:
+
+- `Stone_coffin` - full CC0 1.0 Universal Public Domain Dedication text, "Provided by Nobiax". CC0 ON FILE; no listing page needs chasing.
+- `rocks` - the identical CC0 1.0 text, Nobiax. CC0 ON FILE.
+- `grass_07` - NOT CC0. One line: "Absolutely free to use or to modify in any kind of work (personal, commercial or else)", plus a request for a link to the result. Custom permissive grant; commercial use granted, the link is a request, not a condition. Record its text in `docs/art/ASSET_SOURCES.md` verbatim; never as CC0.
+
+Note: the Stone_coffin/rocks readmes also carry a non-binding request for a link (nobiax.deviantart.com / OpenGameArt yughues). A credit note is cheap and worth giving.

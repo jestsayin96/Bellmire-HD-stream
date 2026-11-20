@@ -13654,3 +13654,26 @@ Lock: R working RUN_LOCK last line was QA tester IDLE 16:50:15, tasklist Godot E
 Changed (hud_dock.gd only): ManaStrip._clear_of_boss now collects EVERY visible blocker - boss card (group hud_boss) and the NOW FIGHTING banner (new group hud_fightbanner, added in FightBanner._ready, read-only) - instead of keeping only the last boss plate, and tries bottom spot plus below-each-blocker spots, left and right, rejecting any that touch a blocker or the Chronicle. boss_bar.gd and delve.gd NOT touched.
 Checks: headless parse of W2 = 0 Parse Error / SCRIPT ERROR in my files (remaining ERRORs = this worktree's partial .godot import cache). Windowed 1920x1080 tools/_u104_shot.gd: 125% `plates=1 offscreen=0 under_chronicle=0 rect=(15,380) 336x113`; 150% `plates=1 offscreen=0 under_chronicle=0`. LOOKED AT mana_125_1080.png: "Mana" plate (MossyMage 2/54, DawnCleric 24/48) bottom-left of the Director pane, clear of the Grubmother boss card, the NOW FIGHTING banner and the Chronicle. CAVEAT: this run's plate showed at 125% in the old spot too, so the original "absent at 125%" was probably run variance (casters fallen) and this change is the guard for the banner case, not a proven cure of that one frame. 150% frame not re-looked (numbers only); 100% not looked.
 Not done: L74 (feed + theme under load); delve.gd:197 lord card over the Chronicle is the game build's (row 1).
+
+## S70 - 2026-11-20 17:08-17:18 CST - THE SCRAPER (41st) GETS ITS MB_NAME ROW: "Scourstone" (game build)
+TAKE THIS NEXT (16:58 block), GAME BUILD row: S70, write the Scraper's MB_NAME row now that S69's hold is satisfied.
+MEASURED FIRST: content's C-147 is on main - `lore_lines.json` miniboss_feed.by_key = 41 with `scraper` present.
+NAME CITED FROM BOTH SOURCES, NOT INVENTED: content's miniboss_feed._note_c147 ("41st miniboss, Scourstone, crypt
+theme") and art's CANON tuple tools/art/minibosses.py:14068 ("scraper": ("Scourstone", 2.55, ...)). They agree.
+EDITS: scripts/delve.gd MB_NAME +"scraper": "Scourstone" (S70 comment citing both); MB_FIT scraper 1.04 left as-is,
+only its S69 "NO MB_NAME yet" comment updated. tools/_s51_names.gd TABLE +scraper, size arms 40 -> 41 (bak_s70 kept,
+untracked). New gate tools/_s70_scraper.gd = S68's post-lines shape (stage the body for the gated key, draw, name,
+fit, own model, height, arrive + fall fired) switched to scraper/crypt/1.04.
+tools/_s69_scraper.gd IS NOW OBSOLETE BY DESIGN: it asserts the HOLD (no lines, no name, 0/400 draws) and will print
+S69_SCRAPER FAIL on this tree because the hold is over. It is superseded by _s70_scraper.gd, not a regression.
+LOOKED AT renders/cycles/s70/scraper.png myself: the Scourstone nameplate floats over a dark hooded figure drawing a
+stone down a pale slab, standing beside the knight about a head taller, on a crypt hex floor. The pale slab reads
+near blown-out white under the engine's light - that is art's already-written pale-on-pale note on this body
+(art nov20-1615), not an engine fault, and I did not touch it. The shot is crowded by a wall at right (gate camera).
+RESULTS (final tree): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error; S70_SCRAPER OK 9 checks (crypt
+draws 150/400, Scourstone, MB_FIT 1.04, scraper.glb, stands 2.55 m = 1.04 x hero, arrive + fall lines fired);
+S51_NAMES OK 172 checks; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1838 samples off the floor;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16786 (0.000%) raid_in_solid=0/5513 PASS.
+FOR THE QA TESTER (information, not a charge): townwalk DOES print a verdict - it simulates 120 s and took 3 min 59 s
+wall here (17:11:35 -> 17:15:34). A 100 s cap cannot reach it; ~300 s does. The chain is now 41 feed / 41 MB_NAME.
+No live Twitch test this cycle.

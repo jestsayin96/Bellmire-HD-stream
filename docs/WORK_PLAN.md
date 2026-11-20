@@ -1,3 +1,89 @@
+## TAKE THIS NEXT - written 2026-11-19 22:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
+THIS IS THE 21:58 FIRING. All six lanes ran. main afb35709 - six merges, two PROGRESS.md
+conflicts resolved keeping both sides, ZERO residual markers in the file that conflicted, pushed.
+I RE-READ ALL SIX REFS AFTER THE MERGE PASS: none moved, so nothing here is stale on arrival.
+*** NEW WORK FROM THE SEAT ABOVE ME. *** The supervisor's 21:50 CT directive
+(claude/sup-nov19-2150-MR-E-DIRECTIVE-miniboss-rename-and-monster-variants.md) carries a MR. E
+DIRECTIVE in two parts: (1) RENAME all 36 minibosses - the bodies, mechanics and fit proofs are
+unchanged, only the names go, because "they all sound like job titles"; (2) a SECOND CLASS of
+miniboss made by recolouring and scaling up existing CC0 pack creatures and naming them. The
+directive carries ONE verbatim fragment and no timestamp of its own, so I am recording it as the
+SUPERVISOR'S relayed directive and acting on it as WORK - it changes no authority, no ownership
+and no rule, so it needs nothing more than that. The full 36-name table is in that doc; READ IT
+THERE rather than from any lane summary. Mr. E has final say on every name - they are proposals.
+THE RENAME GOES FIRST BECAUSE IT IS CHEAP, and it is one item across three lanes, not three items.
+
+1. GAME BUILD - **S50 ROW (a) VERIFIED ON THE FILES BY MY OWN HAND, TICK HELD ONE HOUR FOR THE
+   PICTURE AND NOT FOR THE NUMBERS.** assets/gear/shields/ holds exactly 5 .fbx (celtic_golden,
+   heater, heater_2, round, round_2), 5 matching .fbx.import siblings, and
+   LICENSE_Quaternius_MedievalWeapons_CC0.txt - I listed the directory rather than reading your
+   line, and your "n=5" is 5. gear.gd is NOT wired, exactly as row (b) says it should not be.
+   What I have not yet done is LOOK at renders/cycles/s50/s50_shields.png, and fit is the
+   acceptance test for anything worn or placed, so the tick waits on my eye, not on your battery.
+   NEXT - THE RENAME, PART 1 OF THE DIRECTIVE: wire the 36 new names into bestiary.gd's miniboss
+   entries off the table in the supervisor's doc. Bodies, mechanics and scales UNCHANGED. Do not
+   touch tools/art/minibosses.py - that is art's file - and do not re-fit anything.
+2. CONTENT - **C-129 IS TICKED, AND I COUNTED EVERY POOL OFF THE FILE RATHER THAN READING YOUR
+   LINE.** epitaphs 590->614 (+24), descend 375->391 (+16), cleared 373->386 (+13), misfire
+   130->138 (+8), barks enter +4 / lord +4 / trap +3 / hurt +4 / drink +3 / misfire +2. 81 lines.
+   And I checked the parts that go wrong silently: ZERO duplicates inside the added lines, ZERO
+   collisions with the lines already there, every pre-existing entry in all ten pools byte-
+   identical as a prefix, zero non-ASCII.
+   **AND YOU FIXED LAST HOUR'S DEVIATION WITHOUT BEING ASKED TWICE: _note_c129 IS NESTED UNDER
+   barks, and the top-level key count did not move AT ALL (44 before, 44 after).** That is the
+   whole point of the nesting rule and you took it on the first telling.
+   NEXT - THE RENAME, PART 1 OF THE DIRECTIVE: rename all 36 in lore_lines.json miniboss_feed and
+   rewrite the feed lines to use the new names. One batch per cycle is fine and the directive says
+   so. Nest _note_c130 under miniboss_feed. The old names must not survive anywhere in the pools.
+3. ART - **S7 PASS 2 IS MERGED AND THE TICK IS HELD ONE HOUR FOR MY OWN EYE, NOT FOR DOUBT.** You
+   closed the back on five shells and you also told me the widen my 21:0x row asked for was NOT
+   OWED. I take a lane telling me my own instruction was wrong seriously - it is the third time
+   this week a lane has corrected this seat on its own measurement - but I will not tick it on
+   your reading of it any more than on mine. I have fit14 and fit15 in the tree (90 shots) and
+   _fit_sheet_pass2b.png; I look at the back shots this hour and the row lands in my addendum.
+   NEXT - PART 2 OF THE DIRECTIVE, AND IT IS YOURS ALONE: the monster-pack variant minibosses.
+   Recolour + scale up an existing CC0/QAL pack creature, name it, fit-proof it on the hero body
+   front/side/back to the SAME standard as the 36. This is recolour and scale, NOT new geometry.
+   Start with ONE and ship it whole rather than five half-done. Finish S7 first if S7 is one pass
+   from done - you measured it and I did not.
+4. HUB - **LEVEL, AND I RE-MEASURED IT MYSELF RATHER THAN COPYING LAST HOUR'S SHAS.** See my
+   addendum for the two tree hashes. I RAN NO PUBLISH GATE AND NONE WAS OWED - you claimed no
+   readiness and shipped no web/ change this hour.
+   NEXT: nothing is queued for you and the directive touches no file of yours. Stand down in
+   writing, or audit your own web/. A stand-down written up IS the delivery.
+5. CHAT BOT - **B67 AND B68 ARE BOTH TICKED. THE ONE THING THAT COULD HAVE GONE WRONG SILENTLY IS
+   THE ONE THING I MEASURED MYSELF, AND IT MATCHED YOU TO THE BYTE.** You said the REAL
+   tools/_commands_doc.gd left docs/COMMANDS.md byte-identical at md5 6b26fe2e / 6215 bytes. I
+   hashed the file on the merged tree: md5 6b26fe2efa33224a5c48ae3c4f44cecd, 6215 bytes, 29 table
+   rows - and data/commands.json agrees BOTH WAYS at 29 (order 29, commands 29). So B67's python
+   emulation did not merely look right, it produced what the engine produces.
+   AND YOU SPLIT RATHER THAN CROSSING, TWICE RUNNING: B67 was held last hour because you declined
+   to run into the HUD's :52, and this hour you computed cap 22:12, declared 21:51 INSIDE :52, and
+   released at 21:49:10. That is Mr. E's yield rule being obeyed by arithmetic and not by luck.
+   NEXT: town, then bestiary - and when the bestiary reaches the minibosses, the names are the NEW
+   ones from the supervisor's table, not the trade names.
+6. HUD - **U90 IS MERGED AND THE TICK IS HELD ONE HOUR FOR THE PICTURE.** The L74 feed-under-load
+   gate reads FEED_LOAD OK rc=0 and you RED-PROVED it yourself (break arg -> rc=1, 4967 fails),
+   which is the right shape and the one I would otherwise have had to build. Six shots are in the
+   tree at renders/cycles/u90/ (three run, three break, 100/125/150). I look at a run/break pair
+   this hour and the row lands in my addendum.
+   NEXT: your own queue. The directive touches NO file of yours - the rename is bestiary.gd,
+   minibosses.py and lore_lines.json - so do not pick it up, and say so if a row ever hands it to
+   you. The L31 remainder is still the GAME BUILD's, not yours.
+
+FOR THE SUPERVISOR:
+  (1) THE 21:50 DIRECTIVE IS ROWED, NOT SAT ON. Rename to content + game build this hour, monster
+      variants to art. I read Part 1 and Part 2 as ONE item in two halves rather than as 37 new
+      items, and I am saying that out loud because it is the half-of-an-existing-item judgement.
+      The directive says Mr. E has final say on the 36 names; I have NOT asked him and will not -
+      that is yours to carry up if you want them confirmed before three lanes write them in.
+  (2) NO PUBLISH DECISION IS WAITING. gh-pages and origin/hub:web are level; see my addendum for
+      the two hashes I measured this hour.
+  (3) ONE THING I WANT ON THE RECORD RATHER THAN ACTED ON: the directive doc carries one verbatim
+      Mr. E fragment ("they all sound like job titles") and no time stamp of its own. That is
+      enough for WORK and I have treated it as work. If any part of it ever reads as changing who
+      owns what, I will not act on it without his own words and a time.
+
 ## TAKE THIS NEXT - written 2026-11-19 21:0x CT by the Team Lead. SUPERSEDES EVERY ROW BELOW.
 THIS IS THE 20:58 FIRING. **SYSTEM 2 IS WHOLE. ITS HUD HALF TICKED THIS HOUR ON A PICTURE I
 LOOKED AT MYSELF** - the last open half of Mr. E's Phase 1 is closed. All six lanes ran; I ticked

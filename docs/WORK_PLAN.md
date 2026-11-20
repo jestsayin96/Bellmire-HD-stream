@@ -1,3 +1,38 @@
+## SECOND ADDENDUM TO THE 04:58 CT BLOCK - written 05:1x CT, AFTER :05, SO IT IS **NOT OWED THIS
+## HOUR**. It is a LOCK-DISCIPLINE finding with a mechanism attached, for the 05:58 seat to land.
+
+*** TWO LANES HELD THE LOCK AT ONCE THIS HOUR. THE CLEAN-HOUR COUNT RESETS TO 0. ***
+Read off `docs/RUN_LOCK.txt` in R's WORKING tree, which is the authoritative copy:
+    RUNNING 04:49:00  chat bot  (cap 05:14, declared finish 04:58)
+    RUNNING 04:53:49  HUD U97   (cap 05:08, declared finish 05:00)   <-- claimed here
+    IDLE    04:55:00  chat bot
+    IDLE    04:56:29  HUD
+**The HUD claimed at 04:53:49 while the chat bot's RUNNING of 04:49:00 had no IDLE after it.**
+Under Mr. E's yield rule that is a claim over a live hold - liveness is decided BY THE IDLE, not by
+the clock and not by whose scheduled window it is - so roughly **71 seconds** had two holders.
+Both released early, both reported `Godot EMPTY`, and no work was lost.
+
+*** BUT I DO NOT THINK THIS IS HUD INDISCIPLINE, AND THE DIFFERENCE MATTERS. ***
+The chat bot writes its lock lines into **R's WORKING copy and does not commit them**; the game
+build commits them on its next :07 run. So between runs a live chat-bot claim exists ONLY as an
+uncommitted change in R, and any lane that reads the lock from a ref (`git show origin/laptop:...`)
+or from its own worktree's copy **cannot see it at all**. This seat nearly made the same mistake at
+08:58 on 18 Nov and the trap is written into the :58 prompt. If the HUD read a committed or local
+copy at 04:53:49, the chat bot's claim was INVISIBLE to it and the HUD behaved correctly on the
+evidence it had.
+ALSO, SEPARATELY AND SMALLER: the chat bot DECLARED a finish of 04:58, which is inside the HUD's
+:52-:07 window. Mr. E's rule replaced "declare a crossing" with "SPLIT THE JOB", so the declaration
+itself is the thing to stop doing. It released at 04:55, before its own declaration, so the cost
+was zero. ONE LINE, NOT AN INCIDENT - and the chat bot is not to be charged for the overlap above.
+
+**WHAT THE 05:58 SEAT SHOULD LAND (I am not writing it as a row this hour because it is past :05):**
+Tell BOTH the chat bot and the HUD, in their TAKE THIS NEXT rows, to read the lock from **R's
+WORKING tree** (`C:\hd adventure\jests-hd-medieval-adventure\docs\RUN_LOCK.txt`) and from
+nowhere else - not from a ref, not from their own worktree's copy - and to say in their lock line
+WHICH copy they read. That is a one-line instrument fix and it is the whole of this fault. Do NOT
+charge either lane until they have been told, and do NOT ask Mr. E or the supervisor about it: it
+is a mechanical fault in the team lead's own house.
+
 ## ADDENDUM TO THE 04:58 CT BLOCK - written 05:1x CT, AFTER :05. *** THIS IS NOT OWED THIS
 ## HOUR AND IT ASKS NO LANE FOR ANY WORK. *** It is a BASELINE CORRECTION, recorded so the next
 ## seat does not report a regression that is not one. No row above is changed.

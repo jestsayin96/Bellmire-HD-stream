@@ -1,3 +1,12 @@
+## HUB 2026-11-20 00:40 CT - STAND-DOWN IN WRITING + AUDIT OF OWN web/. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+TAKE THIS NEXT (23:58 block) row 4 gave HUB: "stand down IN WRITING, or audit your own web/." Did both; no screenshot taken because web/ did not change.
+THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/hub:web = origin/gh-pages^{tree}. Merged-and-unpublished delta = 0 files / 0 lines. No publish gate owed.
+AUDIT (read off the file, not recalled): app.js innerHTML appears at 6 lines, only :255 and :301 are code (page-owned strings); :7 :93 :5092 :5133 are comments. outerHTML 0, eval( 0. insertAdjacentHTML / document.write / new Function each appear once, all inside the :10-11 comment that says there are none. index.html: innerHTML 1 (the comment that says "two page-owned sites" - still true), no external src/href, CSP meta intact (default-src 'none'; connect only supabase/twitch). node --check app.js rc 0.
+Two assignments to .href/.src in app.js: :2713 link.href gated by /^https:\/\/(www\.)?twitch\.tv\// regex on a chat URI, target=_blank rel=noopener noreferrer - pre-existing, host-pinned, not a snapshot field; :3753 img.src is a whitelist constant. Flagging :2713 for the team lead's eye only; nothing changed.
+Hostile-name test NOT re-run: web/ is byte-identical to the tree it passed on (17 Nov 17:58 CT), so it is not owed.
+Merge hygiene: merged origin/main, then origin/hub (WORK_PLAN.md conflicted; kept the main copy, top block is the 23:58 CT one, 0 conflict markers). Local-only _hub_ready_shot.png remains untracked and unstaged (delete refused on this machine; named here as before).
+Live-dot colour: unchanged, not touched this run.
+
 ## HUB 2026-11-19 20:40 CT - STANDING CHECK: web/ IS BYTE-EQUAL TO THE PUBLISHED TREE. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
 TAKE THIS NEXT (18:5x block) gave HUB no row: "nothing is queued for you. Stand down in writing, or audit your own shipped web/ work." Standing down in writing; named so the team lead knows the block was read.
 THE NUMBER: tree of HEAD:web = 9ca8051e877d77a71faa8de894804e1ede0a5380 = origin/gh-pages^{tree} (05ac2679). Merged-and-unpublished delta = 0 files / 0 lines. Fast-forwarded hub 34bb4ad0 -> 3c3564a6; that delta is docs/WORK_PLAN.md only (152 lines), nothing in web/.

@@ -12384,3 +12384,13 @@ The TAKE THIS NEXT block (01:58 row 4) gave HUB no work, only "stand down in wri
 - Publish state re-measured: origin/gh-pages 05ac2679; gh-pages^{tree} == origin/hub:web == HEAD:web == 9ca8051e877d77a71faa8de894804e1ede0a5380. Unpublished delta: 0 files, 0 lines.
 - web/ audit: node --check app.js OK; innerHTML only at app.js:255 and :301 (page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; 1 CSP meta; index.html comment still true. web/ not modified, so no new hostile-name run owed. No READY TO PUBLISH claim.
 - Untracked _hub_ready_shot.png in W is mine (delete refused on this machine).
+### U97 (2026-11-20T04:57 CST) - L74 regression re-run WITH RED ARMS (the 03:58 row asked for one): both gates go green and both go red
+Item: TAKE THIS NEXT (03:58) row 6 HUD: "your own queue, short gates, carry at least one RED arm". No owned HUD file edited. Lock: R working copy last line IDLE chat bot B75 (stamped 04:55, ahead of the 04:53 machine clock), tasklist empty; claim 04:53:49, IDLE 04:56:29 (cap 05:08, no crossing).
+Ran WINDOWED 1920x1080 (logs _u97_*.log, untracked, rc in _u97_*.rc):
+- GREEN tools/_theme_sweep.gd -> "U85 panels=15 feed_chronicle=3 bad=0" THEME_SWEEP OK rc=0, 3 OVERLAP-EXPECTED (Chronicle x Spotlight, L39 design).
+- RED  _theme_sweep.gd break_shift -> "bad=4" THEME_SWEEP FAIL rc=1.
+- GREEN tools/_u90_feed_load.gd -> labels=3557 panels=1260 fails=0, admitted 7 / merged 21 / dropped 149 / dropped_protected 0, crit admitted 4, min_gap 0.80s, FEED_LOAD OK rc=0.
+- RED  _u90_feed_load.gd break -> fails=4977 FEED_LOAD FAIL rc=1.
+So neither gate is asleep: each exits non-zero on a deliberate fault and zero on the real tree. Parse (headless, quit-after 300) rc=0, 0 Parse Error; the only SCRIPT ERRORs in any log are 28 "Cannot call method 'instantiate' on a null value" = the known gear.gd thin-import-cache lines, not HUD.
+Looked at: renders/cycles/u90/u90_run_150.png - four panes tile 1920x1080, Chronicle parchment centred over the cross with two whole wrapped entries, no ellipsis, nothing clipped, clock chip bottom right clear.
+Next: nothing owed; if the plan names no HUD item, long-roster LeaderboardPanel/hud_dock read at 125/150 inside claim+15. Nothing for Mr. E to decide.

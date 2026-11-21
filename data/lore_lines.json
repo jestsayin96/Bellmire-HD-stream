@@ -1035,7 +1035,13 @@
     "The boots are scraped on the sill, one then the other.",
     "Frost lies on the stair. Somebody has salted it.",
     "The cook wraps cheese in a cloth and presses it into a hand.",
-    "The watch-dog gets up, looks, and lies down again."
+    "The watch-dog gets up, looks, and lies down again.",
+    "The rope-walker checks the knot at the rail and says nothing of it.",
+    "The gate-ward holds the lantern a moment longer than he needs to.",
+    "Wet slate on the stair. Somebody has laid straw down it.",
+    "A neighbour presses a coin into a palm and closes the fingers over it.",
+    "The ferryman's boy sweeps the step. The step is already clean.",
+    "The old drover touches his cap as they pass. Nobody sees him do it."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1575,7 +1581,13 @@
     "The lamp is trimmed. It will be wanted again soon enough.",
     "A pot of barley goes on. Nobody asks for it. It is eaten.",
     "The door-ward counts the heads and finds the count right.",
-    "Wet wool steams by the fire. Nobody moves it."
+    "Wet wool steams by the fire. Nobody moves it.",
+    "The tally is read out loud, once, and then chalked.",
+    "Somebody sets a kettle on the coals. It sings before anyone sits.",
+    "The gate-ward unbars the door and lets the cold in with them.",
+    "Straw is shaken out on the flags. The boots go over it.",
+    "The cart is backed to the gate and the sacks counted down.",
+    "Bandages are rolled and put back in the chest, the clean ones first."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4614,7 +4626,19 @@
     "Salted the winter fish and shared the barrel. It lasted the season.",
     "Swept the chapel steps before dawn. The steps are clean.",
     "Knew every dog in Bellmire by name. They followed the cart to the gate.",
-    "Tied the bundle tight and went down first. The knot held."
+    "Tied the bundle tight and went down first. The knot held.",
+    "Chalked the sums on the barn door every harvest. The door is kept.",
+    "Walked the wall at first light and counted the stones. Found them all.",
+    "Fixed the miller's wheel in a flood. The wheel still turns.",
+    "Gave the carter's boy a coat. It was his own.",
+    "Kept a bee-skep behind the chapel. The honey went to the sick.",
+    "Cut the reeds for every roof on the lane. None leak.",
+    "Rang the hour true for thirty winters. Rang it once more.",
+    "Had a limp and never once was last down the stair.",
+    "Hauled the net with the old men and ate with them after.",
+    "Taught three children their letters in a cold kitchen.",
+    "Spoke seldom. When it was said, it was done.",
+    "Went down on a Tuesday with a full flask. The flask was not found."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14247,5 +14271,6 @@
   "_note_c160": "C-160 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c161": "C-161 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c162": "C-162 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+  "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c164": "C-164 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 }

@@ -14553,3 +14553,9 @@ LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll cen
 Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
 Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
 Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).
+
+## C-164 (21 Nov 2026 09:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (08:58 CT block, CONTENT row) gave content: "C-163 ticked. Free C-cycle, your own pick." No miniboss owed: every committed art body has a miniboss_feed.by_key entry (44 keys; the 45th builder key, drillmaster_tall, is a variant of drillmaster).
+Added (data/lore_lines.json only): epitaphs +12 (912 -> 924), descend +6 (553 -> 559), cleared +6 (538 -> 544), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c164` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c164` only; no duplicates, no blanks. Other three owned files untouched.
+CODE WIRING: none; the three lists are already drawn from at random.

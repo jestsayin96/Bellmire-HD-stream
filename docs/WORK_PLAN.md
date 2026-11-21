@@ -1,6 +1,12 @@
 ## TAKE THIS NEXT - THE 19:58 CT FIRING, 20 NOV 2026 (machine clock 19:58-20:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 18:58 BLOCK. ***
-## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SIX TICKED. main is 62cabed4.
+## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SEVEN TICKED. main is af3d14e8.
+## *** CORRECTED AT 20:1x WITHIN THIS SAME RUN, NOT AN ADDENDUM FOR NEXT HOUR. *** Art pushed
+##   TWICE after my first merge - the 43rd body at 20:01 and EVEN-LIGHT INSTALMENT 2 at 20:07 -
+##   and the second one answers the decision I had just written up as still open. I re-read the
+##   ref, merged both, verified both, and rewrote the two rows below that went stale inside my
+##   own hour (ART, and FOR THE SUPERVISOR item 1). Leaving them as written would have held a
+##   lane on a question that was answered at 19:33.
 ##
 ## *** MY OWN FAULT FIRST, AND IT IS THE ONE THE RECIPE WARNS ABOUT. *** My first pass at
 ##   content's C-150 arithmetic read the OLD lore_lines.json through the Linux bridge, got an
@@ -41,6 +47,16 @@
 ##     (h 2.34 / hero 2.45), pair_w 4.86, 3 proving views, `fits_frame` true; `_report.json` is
 ##     **43 non-chibi bodies** and `blank_check` opened **129 files with 0 failures** - exactly
 ##     43 x 3. (My ORDER regex returned 4. I did not use it; the count above is `_report.json`.)
+##   - **ART, SECOND DELIVERY - EVEN LIGHT INSTALMENT 2: 8 BODIES, ALL THREE VIEWS.** The
+##     supervisor ruled at 19:33 and art shipped at 20:07: drillmaster, scrapwright, gaoler,
+##     snuffer, sexton, porter, tallyman, cook - 24 renders, every body green, errors [] and
+##     blind_views []. **I MEASURED THE CLAIM MYSELF ON gaoler/hero_back.png, old vs new:** mean
+##     saturation over lit pixels falls **0.453 -> 0.214**, the warm-pixel fraction falls
+##     **82.6% -> 26.9%**, and the mean lit colour goes from (109,76,57) - flat tan - to
+##     (110,92,94) - neutral. **AND I LOOKED AT THE TWO PICTURES SIDE BY SIDE:** in the old one
+##     the hook, the frame and the chain coil are all one brown and the coil is barely a shape;
+##     in the new one the iron reads grey, the hook reads pale against it and you can count the
+##     links of the chain. That is the fault the 16:34 run found, fixed. 34 bodies left.
 ##   - **PACK CATALOGUE - Church1_blend, CLEARED (CC0 1.0).** I DID NOT TAKE THE ROW: I opened
 ##     `_packs\Church1_blend\75990_Church1Upload_blend\75990 - Medieval Church - License.html` on
 ##     disk myself and read it - "released by Daniel74 under the following license: Creative
@@ -85,11 +101,15 @@
 ##   **"Haulback"**, tag wood, and its canon line says it hooks delvers and drags them back rather
 ##   than wounding them. Its `by_key.winder` rows are the one thing that unblocks `MB_NAME` at the
 ##   game build's next turn, exactly as your C-149 unblocked the ferryman. Your cycle, your call.
-## ART (:34) - **THE 44th MINIBOSS, and even-light BACK AND SIDE instalments only.** The Winder is
-##   ticked. **THE STALE-FRONT DECISION IS STILL WITH THE SUPERVISOR** - it was routed at 18:58 and
-##   there is no answer yet, so instalment 2 stays held and you are right to hold it. Do not fold a
-##   front re-render into anything. Your self-correction on "symmetric by construction" is the kind
-##   of thing that makes the rest of your register believable; keep doing it.
+## ART (:34) - **REWRITTEN AT 20:1x: MY EARLIER ROW SAID BACK AND SIDE ONLY AND THE SUPERVISOR
+##   HAD ALREADY SAID OTHERWISE.** The 19:33 ruling is **all three views on bodies you are
+##   already re-rendering**, instalment 2 is in, and both your deliveries this hour are ticked.
+##   **SO: CARRY ON - THE NEXT EVEN-LIGHT INSTALMENT, ALL THREE VIEWS, and a 44th body when the
+##   instalment leaves room.** 34 bodies are still on the old light. Keep the instalments bounded
+##   the way this one was (8 bodies, every one green, the register committed) - that bound is why
+##   this is background housekeeping and not a freeze problem. Your self-correction on
+##   'symmetric by construction' and your abort at the guard are both why your register is
+##   believable; keep doing exactly that.
 ## HUB (:37) - **THE CHIP SHOWS THE TRADE WORD, AND THAT IS MY FAULT, NOT YOURS.** You built
 ##   exactly the ask I wrote: `parties[].miniboss` = the MB_NAME **key**, title-cased. But S51
 ##   (Mr. E's 19 Nov directive) took the trade words AWAY from the player - the key `gaoler` is the
@@ -117,11 +137,11 @@
 ##   the two print a VERDICT LINE, then report the lines.
 ##
 ## FOR THE SUPERVISOR - ONE DECISION STILL WAITING, TWO FOR INFORMATION.
-## (1) *** THE EVEN-LIGHT / STALE-FRONT DECISION FROM 18:58 IS STILL OPEN AND ART IS STILL HELD. ***
-##   Nothing new has come in and I have not re-measured the count, because the decision does not
-##   turn on whether it is 28 or 31 of 42. Unchanged recommendation: **let art write all three
-##   views on bodies it is already re-rendering**, so the library does not end up with a current
-##   back and a two-day-old front on the same body. Art is producing meanwhile (the 43rd landed).
+## (1) *** ANSWERED AND CLOSED - NOT WAITING ON YOU. You ruled at 19:33 (all three views on
+##   bodies already being re-rendered, which is what I recommended), art shipped instalment 2 at
+##   20:07, I merged and verified it, and it is ticked above. My first draft of this block still
+##   said the question was open; it was written before art pushed and it is corrected here. ***
+##   NOTHING IS WAITING ON YOU THIS HOUR.
 ## (2) FOR INFORMATION: the miniboss chain is **flush at 42/42/42** for the first time since the
 ##   scraper; the 43rd body (Winder) is on disk and deliberately unnamed until content feeds it.
 ## (3) FOR INFORMATION: **LOCK DISCIPLINE WAS CLEAN THIS HOUR - clean-hour count 1.** Game build
@@ -129,6 +149,38 @@
 ##   which is AFTER the chat bot's IDLE, which is the rule working. The two touching lanes did what
 ##   I recommended last hour without being told to.
 
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 17:58 BLOCK AND
+## CARRIES ITS ITEMS FORWARD. I DID NOT ATTEMPT A WRITE THIS HOUR - the gate is settled ON THE
+## CALL (a no-op `enabled=true` was refused identically on 18 Nov), so a fifth test buys nothing.
+##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It names gh-pages `45a7904` with a
+##      2-file / 19-line unpublished delta. MEASURED MYSELF THIS HOUR: gh-pages is **05ac2679**
+##      (pushed 19 Nov 20:06:59 CT), `origin/gh-pages^{tree}` is `9ca8051e` and `origin/hub:web`
+##      is `ee0375df`, and the real unpublished delta is **3 files / 51 lines** - the v6
+##      consumption. Replace the paragraph with its one durable sentence: RE-MEASURE BOTH TREES
+##      EVERY HOUR. (The 17:58 list recorded the delta as ZERO; that was true then and the hub has
+##      shipped since. The numbers go stale by the hour; only the instruction keeps.)
+##   b. **ALL NINE PROMPTS - THE FLEET IS NINE TASKS.** The ':07 game build | :22 content | :34 art
+##      | :37 hub | :45 chat bot | :52 HUD | :58 you' line still omits the :15 pack catalogue and
+##      the :41 QA tester. Every lane's lock protocol must name the QA tester, which claims at :41.
+##   c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** 'thirty-three exist as of 18 Nov' is TEN
+##      short: **43 bodies** as of 20:01 CT on 20 Nov. Keep the sentence that says to MEASURE and
+##      drop the number, and name the instrument: `_report.json` non-chibi entries (43, with
+##      `blank_check` 129 files / 0 failures = 43 x 3), **NOT** a regex over `minibosses.py` - mine
+##      returned 4 this hour and an earlier seat's returned 0 and 46.
+##   d. **ALL NINE PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and
+##      is PER SESSION. Every prompt should say: run `ls $HOME/mnt/` FIRST and use what it prints.
+##   e. **THIS PROMPT (:58) - THE DEAD-DATA BASELINE.** Measured this hour on the merged tree:
+##      **2,293,550 chars, 48 files, 12 data files, 137 top-level keys, 47 zero-hit** (32 `_note_`,
+##      2 runtime-built `_alt` READ, 4 declared-dead, 9 prose/spec), unread live keys ZERO,
+##      unreferenced asset directories ZERO. Copy the audit block above into the prompt.
+##   f. **THIS PROMPT (:58) - THE GIT-IN-THE-LINUX-BRIDGE WARNING SHOULD NAME READS TOO.** The
+##      prompt warns that device_bash git leaves .lock files on writes. It should also say that a
+##      READ through that bridge can come back EMPTY AND rc-clean: `git show <sha>:data/...` gave
+##      me an empty string this hour and my arithmetic silently reported the whole file as new.
+##      Read blobs through the Blender bridge, and assert the length before you compute on it.
+#### NEEDS MR. E: nothing.
 ## TAKE THIS NEXT - THE 18:58 CT FIRING, 20 NOV 2026 (machine clock 18:58-19:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 17:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SIX TICKED. main is 178c489c.

@@ -1,3 +1,211 @@
+## TAKE THIS NEXT - THE 06:58 CT FIRING, 21 NOV 2026 (machine clock read 07:0x CST while writing;
+## same day, no midnight rollover. The 06:58 firing and the 07:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 05:58 BLOCK. ***
+## *** WRITTEN AFTER 07:07, SO THE GAME BUILD'S 07:07 RUN DID NOT READ IT. *** It read the 05:58
+##   block, whose GAME BUILD row said "build row (a), the purse on the floor" - which is exactly
+##   what S83 did at 06:08. Nothing is lost; its row below is written for 08:07.
+##
+## SIX MERGES, main is 59403016. **THREE TICKED, THREE CORRECTLY NOT TICKED (two stand-downs and
+## one lane-declared hold) - and not ticking those three is the right answer, not a shortfall.**
+## Three root PROGRESS.md conflicts (hub, hud-ui, chatbot, all appending at the same end-of-file).
+## Both sides kept, marker lines only stripped by a state machine. **I counted residuals in the
+## file that actually conflicted - root PROGRESS.md: 0 start / 0 mid / 0 end markers - and then
+## asserted the stronger thing: `diff --numstat origin/main HEAD` reads +77/-0 on PROGRESS.md and
+## +2/-0 on docs/PROGRESS.md. ZERO LINES REMOVED.** All four lanes' landmarks present in the
+## merged file (B102, U122, the hub check, C-161; S83 in docs/PROGRESS.md).
+##
+## TICKED THIS HOUR (three):
+##   - **C-161 (content)** - counted off the file at the ref, not taken from the message:
+##     epitaphs 876 -> 888, descend 535 -> 541, cleared 520 -> 526 = **+12 / +6 / +6** exactly as
+##     claimed. **0 duplicates and 0 blank entries in all three keys** (888/888, 541/541, 526/526
+##     unique), nothing removed, exactly one new top-level key and it is `_note_c161`.
+##   - **B102 (chat bot) - a published half-truth found and corrected in the lane's own shipped
+##     text, and I PROVED THE ENGINE CLAIM MYSELF RATHER THAN TAKING THE COMMENT.** The lane says
+##     `delve`.what was wrong: it told viewers "Everyone carries their own oil" while the engine
+##     POOLS it. **I opened `scripts/delve.gd` on main and read all four cited sites: :78-79 is
+##     `oil += float(int(m["h"].get("oil", 0)))` followed by `m["h"]["oil"] = 0` - every hero's
+##     flasks added to one party total and their own count zeroed; :80 says "They carry %d flasks
+##     of oil between them" in the game's own voice; :161 is
+##     `oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))` - the `maxi(1,...)`
+##     IS a real floor minimum, so a lone delver pays a whole flask; :2453 is the `- 0.5` search
+##     cost; and the docstring at :26-27 says "Each hero empties their own satchel into the
+##     party's at the mouth".** Every line is as the lane wrote it. Both corrected sentences match
+##     the engine. **I also checked its honesty about what it CANNOT guard: `grep` for a readable
+##     burn constant over all of `scripts/` returns only `roster.gd:214 const OIL_COST := 12` -
+##     the gold price, which matches "12 gold a flask" - and NO per-head constant exists.** So its
+##     three new arms are correctly described as wording-regression guards, not engine guards, and
+##     its ask to the game build is mechanically sound: `class_name Delve` is declared at :1.
+##     Gates read as VERDICT LINES: COMMANDS_DOC OK 32, L14_TEST OK 24 with 0 arms fired incl. the
+##     4 new ones, TWITCH_PARSE OK 8, parse rc=0 / 0 errors.
+##   - **ART pass 6 - the lane disproved its own earlier instrument, and the picture agrees.**
+##     Its claim is that `_bandblame --axis row` called `paviser/front` 0.5740 "explained by
+##     construction" and was WRONG - banded by COLUMN the right-hand 35.8% of the man reads
+##     survival 1.0000, hidden by nothing: he stood BESIDE his board. **I LOOKED AT front.png AND
+##     side.png MYSELF.** The front now reads as the design asked - pale board across the torso,
+##     dark head clear over the top edge, far shoulder and arm past the right side. The lane then
+##     listed **five faults it can still see and is NOT fixing in the same pass** (the board floats
+##     off the hinge post, the prop leg ends in mid-air, the ironwork reads as a barred gate, the
+##     legs read as one plinth, the bottom edge does not reach the floor) - **I can see all five in
+##     the render too, so that list is accurate and not a hedge.** Its BX -0.18 -> -0.10 is a
+##     deliberate reversal of half of pass 4, with the sweep separating the two variables pass 4
+##     moved together. `footprint_span` 3.57 -> 3.43, still CORRIDOR-SAFE / UNDER-LID.
+##
+## WHAT I DID NOT TICK, AND WHY EACH IS CORRECT:
+##   - **S83 (game build) - the lane HELD IT ITSELF on `s83-wip` for an L29C soak regression.**
+##     The purse-on-the-floor is built and S83_PURSE reads OK, but the lane did not merge it to
+##     `laptop`; what reached me is a pointer commit and the RUN_LOCK lines. **A lane that catches
+##     its own regression and holds the work is doing the thing the protocol asks for**, and there
+##     is nothing on `laptop` for me to tick. The row below carries it forward.
+##   - **U122 (HUD) - a stand-down, and it is CORRECT BEHAVIOUR UNDER MR. E'S YIELD RULE.** I
+##     checked it against the lock rather than taking it: the chat bot wrote `RUNNING 06:52:30`
+##     and its `IDLE` did not land until `06:56:40`; the HUD's stand-down is stamped 06:53, inside
+##     that live hold. It read the last line, saw a live RUNNING with no following IDLE from the
+##     same lane, and stood down instead of claiming over it. **That is the rule working, and a
+##     stand-down written up IS the delivery** - but it is not a tick, because nothing shipped.
+##   - **THE HUB - standing check, no claim.** I re-ran the two hashes myself: `origin/hub:web`
+##     and `origin/main:web` are both `02257b2f`, byte-identical as the lane said. **No READY TO
+##     PUBLISH claim, so I ran NO publish verification and none was owed.**
+##
+## A CORRECTION I OWE ON MY OWN WORK THIS HOUR, SAID FIRST:
+##   **I nearly charged the art lane with gutting the fit register.** Reading the `_report.json`
+##   hunk I saw `glb`, `glb_msg`, `cam` and `views` disappear from the paviser block and started
+##   writing it up as a regression. **I then parsed both versions instead of reading the diff: all
+##   four keys are present on 55 of 55 bodies including paviser, and the block was only REORDERED
+##   by the JSON writer. The finding was my own misreading of a diff hunk and there is no fault.**
+##   The same mistake in a second place: art's two-dot diff showed ~1054 PROGRESS.md lines as
+##   deletions and two `====` separators as additions. **Art is 487 commits BEHIND main and has NO
+##   commit touching PROGRESS.md** - the "deletions" were main's own newer content art simply
+##   lacks. Carried item 8 warned about exactly this and I still had to catch myself. Both checks
+##   cost nothing because I measured before writing; had I published either, two lanes would have
+##   spent a cycle answering a fiction.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - nothing ticked, and that is not a mark against you: holding S83 on
+##   `s83-wip` for the L29C soak regression is the right call. **Finish the soak and land the
+##   purse.** When it merges, ship it with the windowed gate AND a render you have looked at, as
+##   you said at 06:08. If the regression turns out to be in L29C itself rather than in your
+##   change, say so plainly and hold it again - a second hold with a reason is worth more than a
+##   merge that costs the soak. **ONE THING THE CHAT BOT ASKED FOR AND I AM PASSING ON AS A
+##   REQUEST, NOT AN ITEM** (it is your file, and I am not writing work for you): `delve.gd:161`
+##   burns `maxi(1, ceil(alive * 0.5))` with no named constant, so the published "one flask for
+##   two delvers" line can only be guarded by its own wording. `class_name Delve` is already
+##   declared. If you are in that file anyway, two consts (`OIL_PER_HEAD`, `OIL_FLOOR_MIN`) would
+##   turn B102's wording guard into a real two-authority arm. Decline it freely if it is not worth
+##   a cycle.
+##
+## - **CONTENT** - C-161 ticked, counted line by line and checked for duplicates. Free C-cycle,
+##   your own pick. Keep writing `_note_` keys: they are 40 of the zero-hit keys this hour and not
+##   one of them is a defect.
+##
+## - **ART** - pass 6 ticked, and the column axis is the right kind of find: an instrument that
+##   was confidently answering the wrong question. **You named five remaining faults on the
+##   paviser yourself. Take the one you judge worst** - my own look says the board floating off
+##   the hinge post is the most visible at a glance, but you have the geometry and I do not, so
+##   that is a suggestion and not a direction. **Do NOT take all five in one pass** - pass 4 moved
+##   two variables at once to cure one fault and cost pass 6 a whole cycle to untangle. One
+##   variable, one measurement, one pass.
+##
+## - **HUB** - standing check verified, hashes re-run by me. Own cycle on your three files.
+##   **Do not publish** - the delta is with the supervisor for a sixth hour. If you change `web/`,
+##   say READY TO PUBLISH plainly so the gate is earned and I will run it.
+##
+## - **HUD** - U122 was a correct stand-down and costs you nothing. **The U121 measurement you
+##   named is still yours and is now two hours old: does a Chronicle line's drawn width exceed the
+##   scroll's inner rect at 150% in 2x2?** The 05:58 seat's addition still stands and still
+##   matters: in that frame the ambient lines are cut at the RIGHT by the scroll edge AND covered
+##   at the LEFT by the lord tooltip card. Two faults, two owners. Measure both; do not let the
+##   card's occlusion be charged to the text width.
+##
+## - **CHAT BOT** - B102 ticked, and the engine claim under it checked line by line by me. **This
+##   is the second hour running you have found a defect in your own published text and fixed it
+##   with the gate green; that is the most valuable thing any lane is doing right now.** Own
+##   cycle. You closed three of B34's four numeric claims and wrote down honestly why the fourth
+##   cannot be closed from your side - that written reason is worth more than a forced arm.
+##
+## - (QA tester, not one of the six) - **still owed in writing, now from 04:58, three hours old:**
+##   acknowledge the 03:06 stale-lock clear, name which gates are windowed-only, and say where its
+##   declared `cap claim+12` comes from (the protocol's number is +25). It did fire at 06:41 and
+##   ran a clean sweep, and it correctly named S58_SPAN as windowed-only and killed its own hung
+##   Godot - so part of item 2 is now answered in a lock line. The written acknowledgement is not.
+##
+## FOR THE SUPERVISOR (06:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured myself, unchanged for a SIXTH hour.**
+##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
+##      `origin/hub:web` `02257b2f`; difference **3 files / 59 insertions / 1 deletion**
+##      (NOTES.md +9, app.js +47/-1, style.css +4). No READY TO PUBLISH claim this hour, so no
+##      publish verification was run and none was owed. **Recommendation: still not yet** - the
+##      only reason left is that the gate is unearned until the lane claims it. The lane has now
+##      delivered three clean hours running.
+##   2. **THE LEDGER QUESTION (carried from 05:58, unchanged, nothing blocked).** The Master
+##      Vision doc numbers Phase 2 systems 6/7/8 as crystal drops / chests by rarity / mimics,
+##      while the 18 Nov 16:58 directive renumbered 6/7/8 as weapon / armour / shield variety -
+##      the numbering the fleet has used since. Both agree 9 = loot on the ground, so S83 is safe
+##      either way. The strings "mimic", "crystal drops" and "chests by rarity" appear nowhere in
+##      the repository except the game build's own note. **Recommendation:** confirm the
+##      directive's numbering is authoritative and either re-enter those three at free numbers in
+##      the 5-80 range or say plainly they are dropped. A ledger decision, not a build decision.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 07:1x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once). **NINE items.**
+## *** I ATTEMPTED THE WRITE THIS RUN, ONCE, AND IT WAS REFUSED - same substance as every prior
+##   refusal: the gate is on the CALL, a firing has no live turn to be approved in, and it is not
+##   something Mr. E can click. I stopped and did not retry.
+##   1. (carried, RE-MEASURED on merged tree 59403016, **AND I USED A CRUDER MATCHER THAN THE
+##      05:58 SEAT - SAYING SO RATHER THAN LETTING THE NUMBERS LOOK LIKE A JUMP**) my scan is
+##      literal `"key"` / `'key'` only over **49 script files / 2,329,809 chars** (scripts/*.gd +
+##      web/*.js). It raises **40 `_note_` + 39 non-note** zero-literal-hit keys where the 05:58
+##      seat's confirmed matcher raises 38 + **15**. **THE DIFFERENCE IS MY INSTRUMENT, NOT THE
+##      TREE.** I spot-checked five of my extras with `grep -n` and LOOKED AT EVERY LINE (guard 1):
+##      `uniques`, `district_rules`, `budget`, `_looks`, `measured` - **every hit is prose, a
+##      comment, or an unrelated local** (`floorgen.gd:436 static var _looks` is a cache populated
+##      from the key `looks`; `chatcmd.gd:802 budget` is a function parameter). So they are the
+##      SAME CLASS as the baseline's nine prose/spec keys, just not enumerated in the nine. **The
+##      conclusion is unchanged and is the thing to carry: UNREAD LIVE DATA KEYS: ZERO.
+##      UNREFERENCED ASSET DIRECTORIES: ZERO, off 34 dirs with files** (the prompt still says 31).
+##      **NEW AND WORTH WRITING DOWN SO NOBODY "DISCOVERS" IT:** the baseline globs `data/*.json`
+##      and there is a 13th file one level down, **`data/town/bellmire.json`, 7 top-level keys,
+##      zero reads from `scripts/` or `web/`** - I grepped for `bellmire.json`, `town/bellmire`
+##      and `data/town` and the engine never names it. **It is NOT a dead-data finding: it is read
+##      by `tools/_d93_export.gd` and `tools/_d93_validate.gd`, and guard 3 says tools/ is not the
+##      game.** It is a D93a generated layout plus its validator. Leave it out of the live-data
+##      baseline and say the glob is `data/*.json`.
+##   2. (carried, and still the important one) **THE PROMPT'S PHASE 2 SECTION IS WRONG ABOUT THE
+##      MOST VALUABLE OPEN ITEM.** It says the HUD's rarity-hue half of System 2 "is the only part
+##      still open" and "was still unstarted at 09:2x on 18 Nov". **IT SHIPPED** - `ui_theme.gd:176`
+##      names itself "U55 (System 2, HUD half): the rarity hue ladder", `rarity_hue` :196,
+##      `rarity_ink` :200, `rarity_pip` :204, and `leaderboard_panel.gd:197`/:202 call two of them
+##      on the worn rows. **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   3. (carried) the prompt's `parse_fish()` line - hardened at U76, re-proved at U119. Struck.
+##   4. (carried, re-measured by me) the miniboss count line - measure off the feed keys and
+##      `MB_NAME`, never quote the prompt. **21 Nov 07:0x: `miniboss_feed.by_key` = 44 keys,
+##      `Delve.MB_NAME` = 44 entries, published `miniboss`.what and .short both say 44. The chain
+##      is WHOLE at 44/44/44 with zero keys on either side the other lacks.** Art's `_report.json`
+##      renamed paviser's title "The Paviser" -> **"Shieldmaw"** this hour; that is art catching up
+##      to canon, not a new name - `MB_NAME["paviser"] = "Shieldmaw"` was already on main.
+##      **AND A WARNING FOR WHOEVER COUNTS THIS NEXT: my first `MB_NAME` regex returned ZERO keys.**
+##      A brace-matched parse returns 44. This is the third seat whose dict regex has lied about
+##      this exact constant. Brace-match it; never trust a flat regex on `MB_NAME`.
+##   5. (carried, re-measured) the prompt's hub SHAs. gh-pages is `05ac2679`, tree `9ca8051e`,
+##      pushed **19 Nov 20:06 CT**. The prompt's "45a7904 pushed 18 Nov 03:34" is STRUCK AND WRONG,
+##      as was "40223be" before it. `origin/hub:web` is `02257b2f`; delta 3 files / +59 / -1.
+##   6. (carried, re-measured) the Step 5 ID line is behind. As of this hour: **B102, C-161, S83
+##      (held on s83-wip), U122**, and art is on paviser pass 6 with no new body this cycle.
+##   7. (carried) the lock section should record that the game build's over-declaration pattern has
+##      STOPPED: since 02:08 on 21 Nov its lock lines carry "claim HH:MM, cap claim+25 = HH:MM"
+##      with the cap computed BEFORE the declaration. **Held again this hour: claim 06:08, cap
+##      06:33 computed first, declared 06:30, IDLE 06:25. Zero over-declarations in five hours.**
+##   8. (carried, AND IT CAUGHT ME THIS HOUR - see my own correction above) the prompt should
+##      carry the two-dot/three-dot warning. `git diff origin/main origin/<b>` reports main's own
+##      newer files as the lane's "deletions". Use `origin/main...origin/<b>` when measuring WHAT A
+##      LANE DID. **Add the sibling trap: a reordered JSON block reads as deleted keys in a hunk.
+##      Parse both versions and compare key SETS before calling anything dropped.**
+##   9. (carried, measured off `ls-tree origin/main`) the ART prompt's standing `snarer_chibi.glb`
+##      item is stale. `snarer_chibi.glb.import` IS on main (17 Nov 06:23, b06c2cfb). Of the `.glb`
+##      under that directory exactly **four** lack an `.import` sibling - **ferryman, hooper,
+##      relief, scraper** - and a Godot run generates them, which makes that the GAME BUILD's tree,
+##      not art's. Strike the snarer item.
+
 ## TAKE THIS NEXT - THE 05:58 CT FIRING, 21 NOV 2026 (machine clock read 06:0x CST while writing;
 ## same day, no midnight rollover. The 05:58 firing and the 06:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 04:58 BLOCK. ***

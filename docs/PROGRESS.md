@@ -4160,3 +4160,39 @@ two asks are measurements on shipped work, so I took them now): (1) re-run the S
 - No Twitch test, 0 bits, no account used.
 - Lock: claim 04:08:40, claim+25 = 04:33 computed first, declared 04:33.
 - Next: the lowest open Phase 2 system, own pick (System 7 still held on art's fit numbers - not unheld by me).
+
+## D-cycle - S82: SYSTEM 9 (LOOT ON THE GROUND) IS THE LOWEST OPEN PHASE 2 SYSTEM - SCOPED OFF THE CODE THIS HOUR, NO ENGINE EDIT. 2026-11-21T05:08-06:00 (game build)
+TAKE THIS NEXT (04:58 block): "Take the lowest open Phase 2 system, your own pick. System 7 stays HELD." I TOOK SYSTEM 9.
+WHY IT IS THE LOWEST OPEN ONE (the fleet's numbering, as S80 used it): 1-6 and 10 ticked; 7 HELD on art's fit numbers (not unheld by me);
+8 (shields) row (a) S50 + row (b) S80, both ticked - nothing of it is open. 9 is next. Master Vision text: "When monsters die or chests open,
+items physically appear on the dungeon floor. Weapons, potions, crystals, gold. Heroes walk over to pick them up."
+NOTE FOR THE LEAD: the Master Vision doc numbers 6/7/8 as crystal drops / chests by rarity / mimics; the 18 Nov 16:58 directive renumbered
+6/7/8 as weapon / armour / shield variety, and the fleet has used that numbering since. Both agree on 9 = loot on the ground. The vision's
+6-8 (crystals, rarity chests, mimics) are NOT ticked under either name - I am naming that, not ruling it.
+MEASURED - what of System 9 ALREADY EXISTS (grep -n, read in context, delve.gd):
+- POTIONS: already on the floor. _loot :2486 `_show_vial(seeker, pk, true)` - S31 System 5 drops the found vial on the floor first.
+- CHESTS: L49 (:1445-1541) - a delver walks to a placed chest, kneels SEARCH_S 1.8 s, the Chronicle says found / no loot. The gold is
+  awarded as a number; nothing appears on the floor.
+- GOLD: never physical. _loot :2432 `found` and the L29c miniboss purse in _on_kill :1905 pay by roster.award + _float_text "+N" only.
+- GEAR: _loot :2470 roster.find_gear(...) returns a line; nothing appears on the floor.
+- MONSTER KILLS: _on_kill drops nothing for an ordinary monster (only splits and the miniboss purse).
+- MODELS ON DISK, no new import needed: assets/props/Coin.gltf, Coin_Pile.gltf, Coin_Pile_2.gltf (Fantasy Props MegaKit, CC0, LICENSE
+  already beside them), assets/dungeon/Bag_Coins.glb (KayKit). Coin_Pile_2 and Bag_Coins are already fit-measured in dungeon_hd.gd
+  (:92 h 0.0584, treasury row :100) - I would reuse that measured entry, not re-fit.
+THE ROWS I PROPOSE (mine to build, one per firing, each with its own render):
+  (a) the miniboss purse and a lord's hoard land as a coin pile where the body fell (Coin_Pile_2 / Bag_Coins), and the gold is paid when
+      the nearest delver WALKS TO IT - the same walk-and-kneel the L49 chest search already uses, so no new movement code.
+  (b) a deep-floor gear find (find_gear) shows the weapon family's own KayKit model on the floor before it is taken (gear.gd KINDS + kind_path
+      already resolve the path - no second map).
+  (c) an ordinary kill sometimes drops a single Coin - small, cheap, and the "visual feedback for every kill" line.
+WHY NO ENGINE EDIT THIS HOUR: claim 05:08, cap 05:33. Row (a) needs a windowed gate that fells a miniboss and RENDERS the pile and the walk;
+I could not write, run and LOOK at that inside the cap, and shipping it unrendered is not done. So this hour is the measurement, and row (a)
+is my next firing.
+- Gates on the merged tree (verdict lines, JESTS_NO_TWITCH=1): see the GATES line below.
+- No Twitch test, 0 bits, no account used.
+- GATES (verdict lines, merged tree 0cd7c803, JESTS_NO_TWITCH=1, no engine edit): parse 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2305 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR;
+  TOWNWALK in_solid=0/17063 (0.000%) raid_in_solid=0/7911 (0.000%) PASS. ONE HONEST DIFFERENCE: STUCK_ON_ROUTE_TOTAL 5 (giveup 0, watchdog 2)
+  where S81 read 0 - the gate still PASSES and I changed no town code; named so nobody finds it later. Logs in renders/cycles/s82/.
+- Lock: claim 05:08:33, claim+25 = 05:33 computed first, declared 05:30; released 05:17:09, no Godot of mine alive.
+- Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.

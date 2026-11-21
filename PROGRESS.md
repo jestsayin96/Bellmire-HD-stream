@@ -14080,3 +14080,9 @@ Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`**; `twitch_reply(us
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account signed into or used, no channel setting read or written. bellmirebro posted nothing.
 Housekeeping: nothing of mine written to the worktree root; no scratch log to delete. The untracked `web/icons/items/ring/*.import` files are Godot import artefacts in another lane's tree, not mine.
 Next firing: the four carried Godot gates, if the lock and the :45 window allow one. **L56 is not mine and is not carried.** **The `parse_fish()` item is CLOSED and is not carried.**
+
+## C-158 (21 Nov 2026 03:3x CST) - THE PITMAN'S ACT AND BROKEN LINES (the dependency the way was held on)
+TAKE THIS NEXT (02:58 CT block) gave content: the Pitman's `act` and `broken` lines in `miniboss_feed.by_key.pitman` (S79 holds the pit way off every floor until act lines exist).
+Added (data/lore_lines.json only): `by_key.pitman` gains `act` x7 (five of them take `{name}`, the delver the floor opened under) and `broken` x4, placed between `arrive` and `fall` like the other 21 bodies that carry them. Plain register, no mechanics, no floor counts, ASCII, all 11 unique against every string in the file. New top-level key in miniboss_feed: `_note_c158` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and value unchanged (recursive compare old vs new); pitman arrive/fall byte-equal; only new keys are pitman.act, pitman.broken, _note_c158.
+CODE WIRING: none needed. `Delve.miniboss_lines("pitman","act")` is now non-empty, so `_mb_way_tick` lifts the hold on its own and the S79 HOLD arm in `_s79_pitman.gd` prints "HOLD lifted". The Godot lane should expect that arm to change from the no-act-lines assertion to the lifted branch.

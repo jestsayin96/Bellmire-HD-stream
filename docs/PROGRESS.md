@@ -4066,3 +4066,25 @@ TAKE THIS NEXT (22:58 CT block) gave CONTENT: C-154, pool top-up. No miniboss ow
 - VALIDATION OK: json.load parses; every pre-existing key and every pre-existing list entry unchanged; no duplicates against existing pools.
 - Code wiring: none. Lines join the existing pools the game already draws from.
 Next content: C-155.
+
+## D-cycle - S77: boss_bar.gd - the boss card no longer covers the Director "Now watching" chip at 150%. 2026-11-21T00:16:30-06:00 (game build)
+TAKE THIS NEXT (23:58 CT 20 Nov block, merged off origin/laptop c6c8771c) gave GAME BUILD: boss_bar.gd at 150% (HUD reported it at U113/U114/U115).
+- CAUSE, MEASURED: at 150% the card's unscaled min size is ~960 x 238; _dock put it UNDER the pane's label plate at the pane's
+  0.85, so it was 815 x 202 tall, and HudDock.put()'s Chronicle rule (L40) then LIFTED it above the Chronicle box
+  (y = box.top - m - h = 140), straight up over "Now watching: Bellmire" (label rect y 94..156).
+- FIX (boss_bar.gd only, hud_dock.gd untouched): new _fit_k() caps the card's scale so it fits where it is put - the pane (or
+  beside-plate room) width, and the height between its top and the Chronicle box when the box crosses that column. Applied on
+  all three placements in _dock. A card that fits is never lifted. Backup scripts/boss_bar.gd.bak_s77 (not committed).
+- New gate tools/_s77_bossbar.gd (the HUD's _u104_shot.gd scene, own OUT dir) + S77_BOSSCARD: at 100/125/150 the card must be
+  inside its pane, over no visible label chip of that pane, and clear of the Chronicle box.
+  RED on the pre-edit code: S77_BOSSCARD FAIL 12 checks ["scale=1.5 card over 1 label chip(s)"] (card 815x202 at y 140).
+  GREEN after: S77_BOSSCARD OK 12 checks (150%: card 677x168 at (142,174), below the chip, above the Chronicle top 360).
+  100% and 125% placements are byte-identical before/after (they already fit beside the plate).
+- LOOKED AT renders/cycles/s77/mana_150_1080.png: "Now watching: Bellmire" fully readable, the card sits under it inside the
+  Director pane, clear of the Chronicle and the Mana plate.
+- FOR THE HUD (not mine, not touched): a faint "NOW FIGHTING" banner ghost shows BEHIND the card in that frame (fading) -
+  the U108 banner docks under the card; it is no longer over the chip, but worth a look in your lane at 150%.
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; S77_BOSSCARD OK 12 checks; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2068 samples off the floor; DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR;
+  TOWNWALK in_solid=0/18332 (0.000%) raid_in_solid=0/6128 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 4, giveup 1).
+- No Twitch test, 0 bits. NEXT (offered, not taken): the pitman's ONE IDEA (a pit under a delver, a lost beat, the pit stays).

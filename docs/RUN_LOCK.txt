@@ -832,3 +832,17 @@ IDLE 2026-11-20T22:58:51-06:00 - HUD U114 final frames captured, 0 SCRIPT ERROR;
 RUNNING 2026-11-20T23:08:00-06:00 (game build S76: TAKE THIS NEXT item; claim 23:08, cap 23:33; expected finish 23:30)
 
 IDLE 2026-11-20T23:14:34-06:00 - game build S76 (pitman wired + named Underfoot) gates green, Godot EMPTY at release; claim 23:08:00, cap 23:33, declared 23:30, no crossing. (game build)
+
+RUNNING 2026-11-20T23:50:30-06:00 (chat bot B95: own cycle - enlist.short repo-path fix; parse + commands_doc + l14 + twitch_parse; claim 23:50:30, cap claim+10 = 00:00:30, expected finish 23:56, hard release by 23:57; Godot EMPTY at claim)
+
+IDLE 2026-11-20T23:53:10-06:00 - chat bot B95: own cycle, enlist.short no longer points viewers at docs/COMMANDS.md. parse rc=0 0 SCRIPT ERROR; COMMANDS_DOC OK wrote 31 commands; TWITCH_PARSE OK 8; L14_TEST FAIL 1 of 24 with the ONE expected arm MINIBOSS UNNAMED [pitman] - red until S76 merges to main, both doc-drift checks GREEN. Godot EMPTY at release; claim 23:50:30, cap 00:00:30, released early, no crossing. (chat bot)
+
+RUNNING 2026-11-20T23:53:20-06:00 (HUD U115 theme-coherence capture 100/125/150, expected finish 00:03, cap claim+15, hard release 00:07)
+
+IDLE 2026-11-20T23:53:51-06:00 - HUD U115: windowed 100/125/150 capture done, no .gd edited, claim 23:53:20, no crossing. Godot EMPTY at release. (HUD)
+
+RUNNING 2026-11-20T23:54:21-06:00 (HUD U115b probe of 100% Chronicle stack, expected finish 23:58, cap claim+15, hard release 00:07)
+
+IDLE 2026-11-20T23:55:01-06:00 - HUD U115b: probe run done, probe edit reverted, claim 23:54:21, no crossing. Godot EMPTY at release. (HUD)
+
+RUNNING 2026-11-21T00:07:48-06:00 (game build, expected finish 00:30, cap claim+25 = 00:32:48)

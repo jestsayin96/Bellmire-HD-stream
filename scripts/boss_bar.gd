@@ -117,7 +117,8 @@ func _dock() -> void:
 	# that room would shrink it below 70% of the pane's own scale, drop it UNDER the plate.
 	var plate := _plate_rect(k)
 	if plate.size.x <= 0.0:
-		HudDock.put(self, r, pk, "tc", float(UiTheme.px(54)) if k != "director" else 0.0)
+		var tp := float(UiTheme.px(54)) if k != "director" else 0.0
+		HudDock.put(self, r, _fit_k(pk, r, tp), "tc", tp)
 		return
 	var m := float(UiTheme.px(12))
 	var w0 := maxf(get_combined_minimum_size().x, 1.0)
@@ -126,9 +127,27 @@ func _dock() -> void:
 		room = Rect2(r.position, Vector2(plate.position.x - r.position.x, r.size.y))
 	var kk := minf(pk, (room.size.x - 2.0 * m) / w0)
 	if kk >= pk * 0.7:
-		HudDock.put(self, room, kk, "tc", 0.0)
+		HudDock.put(self, room, _fit_k(kk, room, 0.0), "tc", 0.0)
 	else:
-		HudDock.put(self, r, pk, "tc", plate.end.y - r.position.y)
+		var under := plate.end.y - r.position.y
+		HudDock.put(self, r, _fit_k(pk, r, under), "tc", under)
+
+## S77: the card's scale capped so it FITS where it is put - inside the pane's width, and in the
+## height between its top (after top_pad) and the Chronicle box when the box crosses that column.
+## At 150% the card was ~960 px wide unscaled and put() lifted it ABOVE the Chronicle box, which
+## dragged it up over the pane's "Now watching" chip. A card that fits is never lifted.
+func _fit_k(k0: float, r: Rect2, top_pad: float) -> float:
+	var m := float(UiTheme.px(12))
+	var s := get_combined_minimum_size()
+	var kk := minf(k0, (r.size.x - 2.0 * m) / maxf(s.x, 1.0))
+	var top := r.position.y + m + top_pad
+	var bottom := r.end.y - m
+	var box := HudDock.centre(town)
+	if box.size.x > 0.0 and box.position.x < r.end.x and box.end.x > r.position.x and box.position.y > top:
+		bottom = minf(bottom, box.position.y - m)
+	if bottom > top:
+		kk = minf(kk, (bottom - top) / maxf(s.y, 1.0))
+	return maxf(kk, 0.05)
 
 ## D41: the union of the label chips the spotlight draws across the top of pane k (global px)
 func _plate_rect(k: String) -> Rect2:

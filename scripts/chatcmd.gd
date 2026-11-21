@@ -1299,6 +1299,77 @@ static func commands() -> Dictionary:
             _guard_faults.append("SATCHEL RATE")
             push_error("COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes \"%s\" (%s) of shop cost and SELL_BACK pays %s - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; %s" % [s_phrase, str(s_said), str(s_panel), s_tip])
             printerr("COMMANDS_DATA SATCHEL RATE - published \"%s\" (%s), enforced %s" % [s_phrase, str(s_said), str(s_panel)])
+        # B96: THE SAME NUMBER, SAID IN THREE PLACES, AND THE GUARD ABOVE READS ONE OF THEM.
+        # The three paths above check `satchel`.what and nothing else. `satchel`.what is the ONLY
+        # one of the three that reaches docs/COMMANDS.md, and that is exactly why it is the only
+        # one that was ever checked - the drift arms are built around what the generator
+        # publishes. But the sell-back rate is stated to a viewer in THREE places in my own file:
+        #   `satchel`.what    "two fifths of its shop cost"  -> published, GATED above.
+        #   `satchel`.short   "two fifths of shop cost"      -> chat only. `help_line()` sends it
+        #                       verbatim on `!help satchel`; the generator does not publish
+        #                       `short` AT ALL (B95's finding), so no drift arm can see it.
+        #   `ask.gold`.reply  "pays two fifths of shop cost"  -> answered to a plain question in
+        #                       chat by the `ask` tree. The ASK arms above check that topics have
+        #                       phrases and are not mute; NOTHING reads what an answer SAYS.
+        # SO THE FAILURE IS CONCRETE, not theoretical: change SELL_BACK to 0.3 and the RATE arm
+        # goes red on `.what` alone. A lane fixes `.what`, the gate goes green, and `!help satchel`
+        # and every plain "how do I get gold" answer keep paying a viewer two fifths at a counter
+        # that pays three tenths. A GREEN GATE BESIDE A WRONG SENTENCE IS THE FAULT CLASS THE LEAD
+        # NAMED AT 23:58 - it is the one the art lane fixed this hour and the one B95 found in this
+        # very file. Here it is a THIRD time, and twice over in one value.
+        # THE ARM: sweep every viewer-facing string my file owns - `short` and `what` on all 31
+        # commands, and every `ask` topic `reply` - for a known fraction phrase in front of
+        # "of shop cost" or "of its shop cost", and require EVERY site to state SELL_BACK. The
+        # vocabulary is `s_words`, already built above; this adds no second table to drift.
+        # It does NOT fire when SPLIT fired: with two disagreeing authorities there is no rate to
+        # check any site against, and saying so once is the honest reading.
+        if absf(s_panel - s_pub) <= 0.0005:
+            var se_tails: Array[String] = [" of its shop cost", " of shop cost"]
+            var se_sites: Array = []
+            for se_k in cmd_d:
+                var se_row: Dictionary = cmd_d[se_k] as Dictionary
+                for se_f in ["short", "what"]:
+                    if se_row.has(se_f):
+                        se_sites.append(["`%s`.%s" % [String(se_k), se_f], String(se_row[se_f])])
+            var se_ask: Dictionary = (ask_d if ask_d is Dictionary else {}) as Dictionary
+            var se_top: Dictionary = se_ask.get("topics", {}) as Dictionary
+            for se_t in se_top:
+                var se_tr: Dictionary = se_top[se_t] as Dictionary
+                if se_tr.has("reply"):
+                    se_sites.append(["`ask.%s`.reply" % String(se_t), String(se_tr["reply"])])
+            var se_bad: Array = []
+            var se_seen: int = 0
+            for se_pair in se_sites:
+                var se_name: String = String((se_pair as Array)[0])
+                var se_text: String = String((se_pair as Array)[1]).to_lower()
+                for se_tail in se_tails:
+                    var se_from: int = 0
+                    while true:
+                        var se_at: int = se_text.find(se_tail, se_from)
+                        if se_at < 0:
+                            break
+                        se_from = se_at + 1
+                        # " of shop cost" is a suffix of " of its shop cost"; count the longer
+                        # tail only, or every `.what` is reported twice for one sentence.
+                        if se_tail == " of shop cost" and se_text.substr(0, se_at).ends_with(" of its"):
+                            continue
+                        var se_head: String = se_text.substr(0, se_at)
+                        var se_ph := ""
+                        var se_val: float = -1.0
+                        for se_w in s_words:
+                            var se_ws := String(se_w)
+                            if se_head.ends_with(se_ws) and se_ws.length() > se_ph.length():
+                                se_ph = se_ws
+                                se_val = float(s_words[se_w])
+                        if se_val < 0.0:
+                            continue   # no phrase this guard knows; ANCHOR is the arm for that
+                        se_seen += 1
+                        if absf(se_val - s_panel) > 0.0005:
+                            se_bad.append("%s says \"%s\" (%s)" % [se_name, se_ph, str(se_val)])
+            if not se_bad.is_empty():
+                _guard_faults.append("SATCHEL ECHO")
+                push_error("COMMANDS_DATA SATCHEL ECHO: %d viewer-facing site(s) state a sell-back rate that is not SELL_BACK (%s) - a viewer reads one number and is paid another, and only `satchel`.what is covered by the RATE arm above: %s" % [se_bad.size(), str(s_panel), ", ".join(PackedStringArray(se_bad))])
+                printerr("COMMANDS_DATA SATCHEL ECHO - %d site(s) off SELL_BACK %s: %s" % [se_bad.size(), str(s_panel), ", ".join(PackedStringArray(se_bad))])
         # B37: THE ARMOURY - CHOSEN ON SHAPE, AND THE ONLY CLAIM LEFT WHERE *MY OWN FILE*
         # DECLARES THE SAME LADDER TWICE. The row let me pick on shape over size. This one wins
         # on all three of the shapes the row named, which is why it beat the two smaller ones:

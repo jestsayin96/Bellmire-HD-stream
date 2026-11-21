@@ -354,7 +354,11 @@ func _rebuild() -> void:
         # whole text fits the vellum's height. The roll's outcome is never the part that is cut.
         var avail := _chrome_text_w()
         wrap_w = avail
-        var font: Font = ThemeDB.fallback_font
+        # U114: measure with the font the Labels will really draw with (the theme's), not the engine
+        # fallback: at 100% the two disagree and a 7-line stack was judged to fit a 5-line vellum.
+        var font: Font = _box.get_theme_font("font", "Label")
+        if font == null:
+            font = ThemeDB.fallback_font
         var budget := _chrome_h()
         for i in lines.size():
             lines[i] = tidy(String(lines[i]))

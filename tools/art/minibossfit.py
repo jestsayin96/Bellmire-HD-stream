@@ -239,6 +239,207 @@ def aim_lights(lights, center, radius, az_deg):
         ob.rotation_euler = dv.to_track_quat('Z', 'Y').to_euler()
 
 
+# =====================================================================
+# GROUND CONTACT - THE RIG FIX, AND THE MECHANISM I HAD TO MEASURE FIRST
+# =====================================================================
+# 20 Nov 22:4x CT, instalment 5. THREE INSTALMENTS HAVE NAMED THIS AND NONE
+# FIXED IT, because it is not a per-body fault: `shoot` renders with
+# `film_transparent = True` and NO FLOOR IN THE SCENE AT ALL, so every subject
+# in every cell - 44 bodies, 132 views - stands on nothing. The sluicekeeper,
+# the tanner, the greener's feet and frame legs, the dyer's four frame feet and
+# its vat: all the same one fault, counted five times.
+#
+# THE OBVIOUS FIX IS DEAD AND I KILLED IT WITH A RENDER, NOT A RELEASE NOTE.
+# `tools/art/_el_ground_probe.py` builds a cube on a plane three ways and reads
+# the alpha. Blender 5.2.3 LTS, BLENDER_EEVEE: `Object.is_shadow_catcher`
+# EXISTS as an attribute (hasattr is True, so a `hasattr` guard would have
+# passed and shipped) and EEVEE DOES NOT HONOUR IT - the catcher render and the
+# plain opaque-plane render came back IDENTICAL, 31,488 opaque px / 768 partial
+# / mean alpha 0.48500305 on both, against 2,000 opaque with no floor at all.
+# A shadow catcher here would have turned the cut-out into a white slab.
+#
+# SO THE SHADOW IS MEASURED, NOT CAUGHT. Per view, two extra renders of a white
+# plane at the ground line: once WITH the subjects, once with the subjects
+# hidden. The ratio of the two is the shadow and nothing else - it divides out
+# the lamp gradient, the aura colour and the world background, so it works
+# under the even-light rig and under the old world-fixed one without knowing
+# which is on. The shadow is then composited into the transparent film as dark
+# semi-opaque pixels ONLY where the beauty render is empty, so the cut-out
+# survives and no subject pixel is touched.
+#
+# WHAT THIS INSTRUMENT CANNOT SEE, SAID BEFORE IT IS TRUSTED:
+#   - It was blind in the antialiased rim where the beauty alpha is partial and
+#     the plane render is contaminated by the subject. I PREDICTED THAT RIM
+#     BEFORE RENDERING AND THEN WENT AND LOOKED AT IT AT FULL RESOLUTION
+#     (`_el_gc_crop.py`, greener front): it is real, it is 1-2 px, and it reads
+#     as the boots being pasted onto the shadow rather than standing in it.
+#     A caveat nobody checks is an excuse, so it is now CLOSED, not caveated:
+#     `dilate_into_rim` carries the shadow one step outward into exactly those
+#     partial-alpha pixels and nowhere else. It can only ADD shadow under a
+#     silhouette edge; it cannot reach a pixel whose beauty alpha is 1, and it
+#     cannot reach open background, where s is already measured.
+#   - A shadow can run off the bottom of the frame. That is NOT the clip the
+#     border check exists to catch (a floor continues; a severed foot does
+#     not), so it is counted SEPARATELY as `shadow_edge` and never fails the
+#     view. The edge and visibility rows are computed off the BEAUTY render,
+#     before compositing, so neither number moves when this flag is on.
+#   - RED ON EMPTY: if the unoccluded plane render has no opaque pixels the
+#     view is recorded as an error, not as a clean zero shadow.
+#
+# *** PASS 2, AND BOTH CHANGES CAME OUT OF THE FIRST A/B RATHER THAN OUT OF MY
+# *** HEAD. The first build of this ran on greener and dyer and was GREEN, zero
+# *** subject pixels touched, 5-12k new alpha per view - and it was WRONG TWICE.
+#   (1) THE SHADOW WAS INVISIBLE. Peak occlusion across all six views was
+#       0.2262 / 0.2051 / 0.2346 / 0.2409 / 0.2198 / 0.2345 and the MEAN was
+#       0.044-0.080, so after grading the darkest pixel reached alpha 0.12 of
+#       255. The cause is not a bug: the display rig's fill and rim are AREA
+#       lamps `radius * 2.2` across - metres wide on these bodies - and a lamp
+#       that size casts a smear, not a contact. Measuring the shadow off the
+#       lamps that light the PICTURE cannot produce one you can see.
+#       THE FIX: the floor pass gets its own lamp. Every light in the scene is
+#       hidden and a single overhead SUN is switched on for those two renders
+#       only. The ratio is then pure occlusion of that one lamp - no lamp
+#       gradient to divide out, no aura colour, nothing to grade. Straight down
+#       on purpose: a contact shadow directly under the body reads as standing
+#       from all three azimuths, and nothing in it changes when the camera
+#       orbits. THE DISPLAY RENDER IS NOT TOUCHED BY THIS LAMP - it is off
+#       again before the beauty film is written, and the beauty film was
+#       already written before the floor pass begins.
+#   (2) I ZEROED THE COLOUR OF EVERY TRANSPARENT PIXEL. The `over` divided by
+#       alpha everywhere, so a pixel with alpha 0 and no shadow came out
+#       RGB 0,0,0 instead of keeping Blender's background colour. Invisible
+#       composited over anything alpha-aware - and that is exactly why it is
+#       worth saying: my own diff instrument reported 49,825-62,773 moved
+#       pixels against 5,353-10,458 of new alpha, and the gap was ALL of it.
+#       A number that large with nothing visible behind it is the shape of a
+#       fault, and chasing it is what found this. Now the blend touches only
+#       pixels the shadow actually reaches.
+#
+# DEFAULT OFF, like --evenlight: turning it on changes every pixel of every
+# cell. `--ground` / MBFIT_GROUND=1.
+GROUND = os.environ.get("MBFIT_GROUND", "0") != "0"
+GROUND_MAX_A = 0.50          # darkest the contact shadow may ever get
+GROUND_RGB = (0.07, 0.07, 0.085)
+GROUND_GAMMA = 1.0           # occlusion of a single lamp needs no grading
+GROUND_SUN_E = 3.0
+GROUND_SUN_ANGLE = 0.10      # radians; softens the rim of the contact
+GROUND_STATS = {}            # view -> row; a dict, not a return value, because
+                             # creaturefit.py still unpacks shoot() as a pair.
+
+
+def ground_plane(center, radius):
+    """A white lambertian floor at world z = 0 - the same z the camera's aim
+    point calls the ground line. Returned hidden; `shoot` shows it only for the
+    two measuring renders."""
+    me = bpy.data.meshes.new("gc_floor")
+    half = radius * 6.0
+    cx, cy = center.x, center.y
+    me.from_pydata([(cx - half, cy - half, 0.0), (cx + half, cy - half, 0.0),
+                    (cx + half, cy + half, 0.0), (cx - half, cy + half, 0.0)],
+                   [], [(0, 1, 2, 3)])
+    me.update()
+    mat = bpy.data.materials.new("gc_floor_mat")
+    mat.use_nodes = True
+    bsdf = next((n for n in mat.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if bsdf:
+        bsdf.inputs['Base Color'].default_value = (1.0, 1.0, 1.0, 1.0)
+        for k, v in (('Roughness', 1.0), ('Metallic', 0.0), ('Specular IOR Level', 0.0)):
+            if k in bsdf.inputs:
+                bsdf.inputs[k].default_value = v
+    me.materials.append(mat)
+    ob = bpy.data.objects.new("gc_floor", me)
+    bpy.context.collection.objects.link(ob)
+    ob.hide_render = True
+    return ob, half
+
+
+def shadow_sun(center, radius):
+    """The lamp the contact shadow is measured by, and the ONLY lamp alight
+    during the two floor renders. Straight down, so the shadow is a contact
+    and not a projection, and view-independent by construction."""
+    li = bpy.data.lights.new("gc_sun", type='SUN')
+    li.energy = GROUND_SUN_E
+    li.color = (1.0, 1.0, 1.0)
+    try:
+        li.angle = GROUND_SUN_ANGLE
+    except Exception:
+        pass
+    ob = bpy.data.objects.new("gc_sun", li)
+    bpy.context.collection.objects.link(ob)
+    ob.location = center + Vector((0.0, 0.0, radius * 6.0))
+    ob.rotation_euler = (0.0, 0.0, 0.0)      # SUN points down -Z at identity
+    ob.hide_render = True
+    return ob
+
+
+def _luma(a):
+    return a[:, :, 0] * 0.2126 + a[:, :, 1] * 0.7152 + a[:, :, 2] * 0.0722
+
+
+def shadow_from_pair(with_subj, without_subj, beauty):
+    """1 - (lit with subjects / lit without them), on the plane only, and only
+    where the beauty film is empty. Returns (shadow, row) or (None, row) when
+    the control render is empty - which is an error, never a zero."""
+    row = {"plane_px": 0, "shadow_px": 0, "mean": 0.0, "max": 0.0, "error": None}
+    ctrl = without_subj[:, :, 3] > 0.98
+    row["plane_px"] = int(ctrl.sum())
+    if row["plane_px"] == 0:
+        row["error"] = "control plane render is empty - no floor to measure"
+        return None, row
+    free = beauty[:, :, 3] <= 0.02
+    valid = ctrl & free
+    s = np.zeros(beauty.shape[:2], dtype=np.float32)
+    lw, lo = _luma(with_subj), _luma(without_subj)
+    den = np.maximum(lo, 1e-4)
+    s[valid] = np.clip(1.0 - (lw[valid] / den[valid]), 0.0, 1.0)
+    if GROUND_GAMMA != 1.0:
+        s = s ** GROUND_GAMMA
+    lit = s > 0.02
+    row["shadow_px"] = int(lit.sum())
+    row["mean"] = round(float(s[lit].mean()), 4) if row["shadow_px"] else 0.0
+    row["max"] = round(float(s.max()), 4)
+    return s, row
+
+
+def dilate_into_rim(s, beauty, steps=2):
+    """Fill the antialiased silhouette rim, where the floor pass is
+    contaminated by the subject and s could only ever read 0. Max of the eight
+    neighbours, applied ONLY where s is zero and the beauty alpha is partial."""
+    a = beauty[:, :, 3]
+    rim = (s <= 1e-6) & (a > 0.02) & (a < 0.999)
+    if not rim.any():
+        return s, 0
+    out = s.copy()
+    filled = 0
+    for _ in range(steps):
+        d = out.copy()
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                if dy == 0 and dx == 0:
+                    continue
+                d = np.maximum(d, np.roll(np.roll(out, dy, 0), dx, 1))
+        take = rim & (out <= 1e-6) & (d > 1e-6)
+        filled += int(take.sum())
+        out[take] = d[take]
+    return out, filled
+
+
+def composite_shadow(beauty, s):
+    """Straight-alpha `over`: the shadow goes UNDER the beauty film."""
+    out = beauty.copy()
+    sa = (s * GROUND_MAX_A) * (1.0 - beauty[:, :, 3])
+    hit = sa > 1e-4            # *** everything else is left byte-identical ***
+    if not hit.any():
+        return out
+    oa = np.clip(beauty[:, :, 3] + sa, 0.0, 1.0)
+    den = np.maximum(oa, 1e-6)
+    for i in range(3):
+        blended = (beauty[:, :, i] * beauty[:, :, 3] + GROUND_RGB[i] * sa) / den
+        out[:, :, i] = np.where(hit, blended, beauty[:, :, i])
+    out[:, :, 3] = np.where(hit, oa, beauty[:, :, 3])
+    return out
+
+
 def _shot(path, hide=()):
     """One render with `hide` taken out of it, restored afterwards."""
     for o in hide:
@@ -276,6 +477,9 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
     rig = even_lights(lcent, radius, aura) if EVENLIGHT else None
     if rig is None:
         G.add_lights(lcent, radius, aura)
+    floor, floor_half = ground_plane(lcent, radius) if GROUND else (None, 0.0)
+    gsun = shadow_sun(lcent, radius) if GROUND else None
+    GROUND_STATS.clear()
 
     cam_d = bpy.data.cameras.new("cam")
     cam_d.type = 'ORTHO'
@@ -328,7 +532,7 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
         fwd = (cam.matrix_world.to_3x3() @ Vector((0, 0, -1))).normalized()
         depth = [(p - cam.location).dot(fwd) for p in pts]
         cam_d.clip_start = max(0.01, min(depth) - radius * 0.5)
-        cam_d.clip_end = max(depth) + radius * 2.0 + 8.0
+        cam_d.clip_end = max(depth) + radius * 2.0 + 8.0 + floor_half * 1.5
         path = os.path.join(outdir, "hero_%s.png" % vname)
         B = _shot(path, hide=creature if PROVE_RED else ())
         written.append(path)
@@ -342,6 +546,38 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
         ea = B[:, :, 3] > DIFF_EPS
         edge[vname] = dict(top=int(ea[0].sum()), bottom=int(ea[-1].sum()),
                            left=int(ea[:, 0].sum()), right=int(ea[:, -1].sum()))
+        # *** GROUND CONTACT. The edge row above is already taken, off the
+        # beauty film, so turning this on cannot move a border count or a
+        # visibility score - only the pixels a viewer sees. ***
+        if floor is not None:
+            td = tmpdir or outdir
+            # every display lamp off, the measuring sun on - see (1) in the
+            # GROUND CONTACT note. Their previous states are restored exactly.
+            lamps = [o for o in scene.objects if o.type == 'LIGHT' and o is not gsun]
+            was = [o.hide_render for o in lamps]
+            for o in lamps:
+                o.hide_render = True
+            gsun.hide_render = False
+            floor.hide_render = False
+            W = _shot(os.path.join(td, "_gcwith_%s.png" % vname))
+            O = _shot(os.path.join(td, "_gcfree_%s.png" % vname), hide=objs)
+            floor.hide_render = True
+            gsun.hide_render = True
+            for o, h in zip(lamps, was):
+                o.hide_render = h
+            sh, grow = shadow_from_pair(W, O, B)
+            if sh is None:
+                GROUND_STATS[vname] = grow
+            else:
+                sh, grow["rim_filled_px"] = dilate_into_rim(sh, B)
+                B = composite_shadow(B, sh)
+                G.write_png(path, B)
+                sa = B[:, :, 3] > DIFF_EPS
+                grow["shadow_edge"] = dict(top=int(sa[0].sum()) - edge[vname]["top"],
+                                           bottom=int(sa[-1].sum()) - edge[vname]["bottom"],
+                                           left=int(sa[:, 0].sum()) - edge[vname]["left"],
+                                           right=int(sa[:, -1].sum()) - edge[vname]["right"])
+                GROUND_STATS[vname] = grow
         if creature and hero_meshes and tmpdir:
             A = _shot(os.path.join(tmpdir, "_heroalone_%s.png" % vname), hide=creature)
             C = _shot(os.path.join(tmpdir, "_crealone_%s.png" % vname), hide=hero_meshes)
@@ -461,10 +697,14 @@ def main():
     # the EVEN LIGHT note above); --tag writes into <key><tag>/ so an A/B can
     # never overwrite a shipped render.
     ap.add_argument("--evenlight", action="store_true")
+    # THE RIG FIX. See the GROUND CONTACT note above. Off by default.
+    ap.add_argument("--ground", action="store_true")
     ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
     if args.evenlight:
         globals()["EVENLIGHT"] = True
+    if args.ground:
+        globals()["GROUND"] = True
     if args.prove_red:
         globals()["PROVE_RED"] = True
     if args.frame > 0.1:
@@ -513,6 +753,7 @@ def main():
                     fits_frame=bool((amx.x - amn.x) <= FRAME_W and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
                     engine=eng, views=[os.path.basename(p) for p in written],
                     visibility=vis, frame_edge=edge,
+                    ground=dict(GROUND_STATS) if GROUND else None,
                     proving_views=sum(1 for c in vis.values() if c["proves"]))
                 if vis:
                     pv = rep["pairs"][key]["proving_views"]

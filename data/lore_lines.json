@@ -965,7 +965,17 @@
     "Hands are rubbed warm. Then the grip is taken.",
     "A scarf is tied tighter by someone who is not asked.",
     "The last coin is left on the sill for the way back.",
-    "The first step is slow. The second is not."
+    "The first step is slow. The second is not.",
+    "The lamp is trimmed twice. Once is not enough.",
+    "Boots are laced by someone who has done it before.",
+    "A last look at the roofs. Then the door.",
+    "Somebody checks the rope. Nobody says so.",
+    "The pack is shifted onto the other shoulder.",
+    "Bread in the pocket. Water at the hip.",
+    "The gate is held open until the last one is through.",
+    "A thumb is run along the blade. It will do.",
+    "Names are left with the guard. It is a habit.",
+    "The stair is dark. The count begins."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1435,7 +1445,17 @@
     "A cut is washed in cold water. Nobody flinches.",
     "The map is folded smaller. Put away.",
     "The tally is chalked on the wall. One more line.",
-    "Bread is broken. The big piece goes to the tired one."
+    "Bread is broken. The big piece goes to the tired one.",
+    "The lamp is turned down. The air is still.",
+    "Boots are scraped on the sill. Habit.",
+    "The rope is coiled and hung where it was found.",
+    "A canteen goes round. Everyone has some.",
+    "The door is wedged shut behind them.",
+    "Somebody counts heads. The number is right.",
+    "The blade is wiped on a rag and put away.",
+    "Dust is shaken from the cloak. The count is kept.",
+    "A long breath. Then the stair up.",
+    "The chalk mark is crossed through."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4352,7 +4372,21 @@
     "Shared the bench. Shared the bowl.",
     "Kept the count of the wall stones. Lost none.",
     "Went in steady. The rope is still tied at the top.",
-    "Told no tall tales. Had no need of them."
+    "Told no tall tales. Had no need of them.",
+    "Mended the roof twice. It held.",
+    "Carried the water up. Never asked for thanks.",
+    "Paid what was owed. Owed nobody.",
+    "Salted the fish. Salted it right.",
+    "Knew every stair in the guildhouse by dark.",
+    "Sharpened the others' blades before his own.",
+    "Kept the shop open through the flood.",
+    "Left the lamp lit. It was needed.",
+    "Counted the nails. Counted the days.",
+    "Walked the wall every dusk. Missed one.",
+    "Taught the boy to knot a rope. He used it.",
+    "Never late to the muster. Not late now.",
+    "Baked for the watch. The watch remembers.",
+    "Said little. Did the work."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13419,6 +13453,29 @@
           "The drum turns once more on its own weight, and stops.",
           "Take your places. Coil the rope. Walk the floor."
         ]
+      },
+      "pitman": {
+        "arrive": [
+          "Somebody is digging up ahead, and it is not for ore.",
+          "A man in a flat cap with a mattock, and a boarded ring in the floor at his feet. A ladder stands up out of it.",
+          "He does not swing at you. He digs. Whoever stands where he wants them not to be has no floor under them.",
+          "The delver is not hurt. They are simply at the bottom of a hole, and the next beat goes on the ladder.",
+          "He leaves the ladder every time. He is not a cruel man. He is a careful one.",
+          "The pit stays. When the fight moves on, the hole is still there.",
+          "Look at the room you came in by. It will not be the room you leave by.",
+          "Pale new timber shores the ring, and a dark heap of spoil sits behind him, still loose.",
+          "Clay to the knee, a clean flat cap, and not one wasted stroke. He has been at this since before you came in."
+        ],
+        "fall": [
+          "Underfoot is down. The mattock lies across the rim of the ring.",
+          "The ladder stands in its hole with nobody on it.",
+          "He sits down on the spoil heap with his hands open. He does not dig again.",
+          "The holes are still there. Mind where you put your feet.",
+          "A hole does not fill itself. Walk round them.",
+          "The room is not the room you came into. Count what is left of the floor.",
+          "One last shovelful slides off the heap and into the ring.",
+          "Take the ladders out. Board the holes. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13446,7 +13503,8 @@
     "_note_c147": "C-147 (20 Nov 2026): the Scraper's lines (41st miniboss, Scourstone, crypt theme; body committed on main, scraper.glb, art ad070505). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: when the round ends it draws the stone down the slab and the party's LAST action is undone (blow lifted, wound reopened, guard gone); out-damaging it fails because the damage is what it removes; the five cuts on each face of the plinth are the gauge. First arrive line is art's own barker, kept word for word. Without arrive lines miniboss_for never draws the body. Expected zero-hit key; no lane is to wire it.",
     "_note_c149": "C-149, the Ferryman (42nd, Slackwater, flooded). Idea per art's CANON row: it takes one hero aboard and only that one's blows land; the fare pegs along both gunwales are crossings left, and when the last is drawn it must put its passenger down and take the next, which is the window. It does not wound, heal or remove anyone. Arrive 9 / fall 8, recent shape, no act, no broken, {name} unused. Expected zero-hit key; no lane is to wire it.",
     "_note_c150": "C-150. SHAPE NOTE, no keys changed. The `_note` above describes four phases (arrive, act, broken, fall). That is true of the original fourteen bodies from C-62/C-67 and the C-74 era. Every body from `quartermaster` onward is TWO-PHASE on purpose: nine arrive lines and eight fall lines, no act, no broken. Two-phase is the house shape for new bodies. delve.gd skips an empty act and broken, so an absent phase costs nothing. Do not read the shorter blocks as unfinished.",
-    "_note_c151": "C-151 (20 Nov 2026): Haulback, the 43rd miniboss (key winder, wood theme; body committed on main, winder.glb, art register green). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words per art's CANON text: it wounds nobody, it takes GROUND - each turn of the drum drags whoever is hooked back toward the mouth of the room, nothing is undone; the three ropes on the floor are the gauge (one rope, one hero at a time, a cut rope stays cut); the pawl is why it cannot be out-pulled. Without arrive lines miniboss_for never draws the body. Haulback is the CANON name in tools/art/minibosses.py; MB_NAME['winder'] is held by the game build until this key is on main. No code lane is to wire this note."
+    "_note_c151": "C-151 (20 Nov 2026): Haulback, the 43rd miniboss (key winder, wood theme; body committed on main, winder.glb, art register green). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words per art's CANON text: it wounds nobody, it takes GROUND - each turn of the drum drags whoever is hooked back toward the mouth of the room, nothing is undone; the three ropes on the floor are the gauge (one rope, one hero at a time, a cut rope stays cut); the pawl is why it cannot be out-pulled. Without arrive lines miniboss_for never draws the body. Haulback is the CANON name in tools/art/minibosses.py; MB_NAME['winder'] is held by the game build until this key is on main. No code lane is to wire this note.",
+    "_note_c152": "C-152: pitman feed lines (44th miniboss, Underfoot, crypt). Arrive 9 + fall 8, recent two-phase shape. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
@@ -13935,5 +13993,6 @@
   "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names.",
   "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
-  "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it."
+  "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
+  "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
 }

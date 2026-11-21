@@ -1640,48 +1640,68 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 45783,
-      "vis": 45783,
-      "delta": 47844,
+      "alone": 45857,
+      "vis": 45857,
+      "delta": 47877,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43682,
-      "vis": 43682,
-      "delta": 45784,
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 45790,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 34464,
-      "vis": 34464,
-      "delta": 36125,
+      "alone": 34475,
+      "vis": 34475,
+      "delta": 37915,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37764,
-      "vis": 37764,
-      "delta": 38548,
+      "alone": 37765,
+      "vis": 37765,
+      "delta": 38490,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 45045,
-      "vis": 45045,
-      "delta": 47058,
+      "alone": 44997,
+      "vis": 44997,
+      "delta": 48374,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44037,
-      "vis": 44037,
-      "delta": 44704,
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 44720,
       "seen": 1.0
      },
      "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
     }
    },
    "proving_views": 3
@@ -1701,15 +1721,15 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 82349,
-      "vis": 82349,
-      "delta": 85031,
+      "alone": 82347,
+      "vis": 82347,
+      "delta": 85040,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43671,
-      "vis": 43671,
-      "delta": 46818,
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 46808,
       "seen": 1.0
      },
      "proves": true
@@ -1718,31 +1738,51 @@
      "creature": {
       "alone": 51628,
       "vis": 51628,
-      "delta": 52960,
+      "delta": 55858,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37768,
-      "vis": 37768,
-      "delta": 38741,
+      "alone": 37767,
+      "vis": 37767,
+      "delta": 38486,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 82681,
-      "vis": 82681,
-      "delta": 85219,
+      "alone": 82679,
+      "vis": 82679,
+      "delta": 91341,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44019,
-      "vis": 44019,
-      "delta": 45571,
+      "alone": 44021,
+      "vis": 44021,
+      "delta": 44668,
       "seen": 1.0
      },
      "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
     }
    },
    "proving_views": 3
@@ -1823,48 +1863,68 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 44105,
-      "vis": 44105,
-      "delta": 46071,
+      "alone": 44096,
+      "vis": 44096,
+      "delta": 46026,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43683,
-      "vis": 43683,
-      "delta": 53098,
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 53059,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 27313,
-      "vis": 27313,
-      "delta": 28038,
+      "alone": 27315,
+      "vis": 27315,
+      "delta": 29829,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37787,
-      "vis": 37787,
-      "delta": 38887,
+      "alone": 37783,
+      "vis": 37783,
+      "delta": 38490,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 43630,
-      "vis": 43630,
-      "delta": 45453,
+      "alone": 43612,
+      "vis": 43612,
+      "delta": 47685,
       "seen": 1.0
      },
      "hero": {
       "alone": 44023,
       "vis": 44023,
-      "delta": 45761,
+      "delta": 44672,
       "seen": 1.0
      },
      "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
     }
    },
    "proving_views": 3
@@ -1945,48 +2005,68 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 58523,
-      "vis": 58523,
-      "delta": 60107,
+      "alone": 58754,
+      "vis": 58754,
+      "delta": 60192,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43669,
-      "vis": 43669,
-      "delta": 56324,
+      "alone": 43673,
+      "vis": 43673,
+      "delta": 56334,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 42205,
-      "vis": 42205,
-      "delta": 43117,
+      "alone": 42234,
+      "vis": 42234,
+      "delta": 53958,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37788,
-      "vis": 37788,
-      "delta": 38907,
+      "alone": 37784,
+      "vis": 37784,
+      "delta": 38494,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 58488,
-      "vis": 58488,
-      "delta": 60081,
+      "alone": 58598,
+      "vis": 58598,
+      "delta": 70121,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44016,
-      "vis": 44016,
-      "delta": 46263,
+      "alone": 44024,
+      "vis": 44024,
+      "delta": 44722,
       "seen": 1.0
      },
      "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
     }
    },
    "proving_views": 3
@@ -2165,13 +2245,13 @@
      "creature": {
       "alone": 61882,
       "vis": 61882,
-      "delta": 63270,
+      "delta": 67594,
       "seen": 1.0
      },
      "hero": {
       "alone": 37771,
       "vis": 37771,
-      "delta": 38693,
+      "delta": 38491,
       "seen": 1.0
      },
      "proves": true
@@ -2180,13 +2260,13 @@
      "creature": {
       "alone": 98870,
       "vis": 98870,
-      "delta": 101654,
+      "delta": 108978,
       "seen": 1.0
      },
      "hero": {
       "alone": 44033,
       "vis": 44033,
-      "delta": 46502,
+      "delta": 44674,
       "seen": 1.0
      },
      "proves": true
@@ -2318,7 +2398,7 @@
      "hero": {
       "alone": 43667,
       "vis": 43667,
-      "delta": 45488,
+      "delta": 45487,
       "seen": 1.0
      },
      "proves": true
@@ -2327,13 +2407,13 @@
      "creature": {
       "alone": 27840,
       "vis": 27840,
-      "delta": 29066,
+      "delta": 30119,
       "seen": 1.0
      },
      "hero": {
       "alone": 37780,
       "vis": 37780,
-      "delta": 38627,
+      "delta": 38486,
       "seen": 1.0
      },
      "proves": true
@@ -2348,7 +2428,7 @@
      "hero": {
       "alone": 44030,
       "vis": 44030,
-      "delta": 44668,
+      "delta": 44704,
       "seen": 1.0
      },
      "proves": true
@@ -2408,13 +2488,13 @@
      "creature": {
       "alone": 33644,
       "vis": 33644,
-      "delta": 34563,
+      "delta": 37398,
       "seen": 1.0
      },
      "hero": {
       "alone": 37778,
       "vis": 37778,
-      "delta": 38718,
+      "delta": 38494,
       "seen": 1.0
      },
      "proves": true
@@ -2423,13 +2503,13 @@
      "creature": {
       "alone": 36482,
       "vis": 36482,
-      "delta": 37313,
+      "delta": 43182,
       "seen": 1.0
      },
      "hero": {
       "alone": 44033,
       "vis": 44033,
-      "delta": 44711,
+      "delta": 45800,
       "seen": 1.0
      },
      "proves": true
@@ -2561,7 +2641,7 @@
      "hero": {
       "alone": 43672,
       "vis": 43672,
-      "delta": 45662,
+      "delta": 45663,
       "seen": 1.0
      },
      "proves": true
@@ -2570,13 +2650,13 @@
      "creature": {
       "alone": 49596,
       "vis": 49596,
-      "delta": 51392,
+      "delta": 51360,
       "seen": 1.0
      },
      "hero": {
       "alone": 37773,
       "vis": 37773,
-      "delta": 38558,
+      "delta": 38487,
       "seen": 1.0
      },
      "proves": true
@@ -2585,13 +2665,13 @@
      "creature": {
       "alone": 57639,
       "vis": 57639,
-      "delta": 59140,
+      "delta": 59134,
       "seen": 1.0
      },
      "hero": {
       "alone": 44030,
       "vis": 44030,
-      "delta": 44664,
+      "delta": 44677,
       "seen": 1.0
      },
      "proves": true
@@ -2699,6 +2779,168 @@
     }
    },
    "proving_views": 3
+  },
+  "comfitmaker": {
+   "creature_h": 2.28,
+   "hero_h": 2.45,
+   "ratio": 0.93,
+   "pair_w": 3.69,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 48583,
+      "vis": 48583,
+      "delta": 50006,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 51859,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 38118,
+      "vis": 38118,
+      "delta": 41074,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37790,
+      "vis": 37790,
+      "delta": 38492,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 48489,
+      "vis": 48489,
+      "delta": 52076,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44035,
+      "vis": 44035,
+      "delta": 44681,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
+  },
+  "dyer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.69,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 93582,
+      "vis": 93582,
+      "delta": 95478,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 48022,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 71132,
+      "vis": 71132,
+      "delta": 77123,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37795,
+      "vis": 37795,
+      "delta": 38474,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 88564,
+      "vis": 88564,
+      "delta": 93024,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44011,
+      "vis": 44011,
+      "delta": 44661,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "proving_views": 3
   }
  },
  "errors": [],
@@ -2711,10 +2953,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "pitman"
+  "hooper"
  ],
  "asked": [
-  "pitman"
+  "hooper"
  ],
  "blank_check": {
   "files": 3,

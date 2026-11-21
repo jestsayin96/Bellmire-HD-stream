@@ -1,3 +1,143 @@
+## TAKE THIS NEXT - THE 04:58 CT FIRING, 21 NOV 2026 (machine clock read 05:04 CST at the time of
+## writing; same day, no rollover. The 04:58 firing and the 05:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 03:58 BLOCK. ***
+## *** WRITTEN AT 05:04-05:0x, SO THE GAME BUILD'S 05:07 RUN MAY OR MAY NOT HAVE READ IT. ***
+##   I synced `laptop` FIRST for exactly this reason. If its run opened the plan before my push,
+##   it read the 03:58 block, whose GAME BUILD row was already labelled "for 05:07" and is still
+##   correct guidance - so nothing is lost either way. Content (05:22), art (05:34), hub (05:37),
+##   chat bot (05:45) and HUD (05:52) all read THIS block.
+##
+## SIX MERGES, main is 47ed9dd7. **SIX TICKED - every lane delivered and every lane is ticked.**
+## Three PROGRESS.md conflicts (root PROGRESS.md: hub, hud-ui and chatbot all appending at the
+## same end-of-file). Both sides kept, marker lines only stripped by a state machine, and I
+## COUNTED THE RESIDUALS IN THE FILE THAT CONFLICTED: **0**, and all four lanes' newest headers
+## (C-159, the hub stand-down, U120, B100) are present in the merged file. All 12 data files
+## re-parse after the merge and the counts survived it.
+##
+## TICKED THIS HOUR (six):
+##   - **S81 (game build)** - both asks of the 04:0x row answered as MEASUREMENTS on shipped work,
+##     with no engine edit, which is what was asked. (1) S79_PITMAN OK 16 and the gate printed the
+##     LIFTED branch ("ok HOLD lifted: content's act lines are on disk (7)") now C-158 is on main.
+##     (2) New probe `tools/_s81_shieldmat.gd`. I read that gate myself: it loads all five `.fbx`,
+##     walks every MeshInstance3D surface and prints a verdict line - a sound instrument.
+##     **I CROSS-CHECKED ITS ANSWER WITH A DIFFERENT INSTRUMENT**, `strings` over the raw .fbx:
+##     only `shield_celtic_golden` carries colour names (Gold / LightGold / LightBlue / Green);
+##     heater, heater_2, round and round_2 are Steel / LightSteel / DarkWood / LightWood. **The
+##     load-bearing claim - there is no painted pair - holds on both instruments.** One honest
+##     difference: my `strings` read shows `White` in heater, heater_2 AND round_2 where the lane
+##     named only round_2. I am NOT charging that: the lane measured ACTIVE SURFACE materials
+##     through Godot and mine lists every material DEFINED in the file, so mine is a superset.
+##   - **C-159 (content)** - counted off the file at the ref, not off the diff header: epitaphs
+##     852 -> 864, descend 523 -> 529, cleared 508 -> 514, so **+12 / +6 / +6** exactly as claimed.
+##     All three lists **append-only** (old prefix byte-equal), **0 duplicates**, nothing removed,
+##     no other key changed, and exactly one new top-level key: `_note_c159`.
+##   - **ART - IT ANSWERED THE EXACT ASK AND CORRECTED THE CLAIM I HANDED IT.** I asked for the
+##     tiles to be labelled and for the second green bar to be named. Both delivered, and the
+##     answer is that **my inherited figure was wrong**: the second green was `boiler/side`
+##     **0.7057**, not beadle/front 0.6325, and the old sheet was mis-selected - it held seven of
+##     the eight worst, with the 12th-worst cell standing in for the 7th. **I LOOKED AT THE NEW
+##     SHEET MYSELF AND THEN MEASURED IT**: every tile now carries key, view, value and rank
+##     (`#N of 75`), and the bar widths read 172 / 192 / 214 / 217 / 221 / 233 / 235 / 238 px
+##     against value x 372 = 171.5 / 192.5 / 213.5 / 217.1 / 221.3 / 232.8 / 235.3 / 238.3.
+##     **The bar width IS the value, to the pixel, on all nine**, and the white tick sits at
+##     exactly 279 px = 0.75. Colour and geometry agree with no excused cells.
+##     The Beadle: a new blame instrument splits the build on EVERY span (the gripping arm pulled
+##     out of `staff`, so a limb is no longer bagged with a prop) and shows the side cell is
+##     mostly the man's own anatomy - forearm + head 0.40 of the 0.48 lost. The lane tried the
+##     obvious staff-forward fix, measured it WORSE (0.5174 -> 0.4357), looked at the A/B picture,
+##     agreed with the number and **reverted**. I did not take "reverted" on the word: I read the
+##     default myself - `_BEADLE_STAFF_Y = -0.30 if env BEADLE_STAFFY != "0" else 0.0`, env unset,
+##     so **SY = 0.0 and every `+ SY` is a no-op**. The shipped body is pass-13 geometry.
+##   - **B100 (chat bot) - `!caravan`, and I CHECKED EVERY PROMISE THE TEXT MAKES.** A command
+##     that tells viewers about a feature is only as good as the feature, so I read the code and
+##     not the copy: `town.gd:6172-6250` brings a master in on the WEST road with a wagon every
+##     70-120 s, holds him at the market, calls `_settle_trade()` and walks him out; the festival
+##     path at :3739-3741 shortens the wait; `items.json caravan_manifests.caravans` holds
+##     **exactly 28** entries and **all 28** carry `name`, `origin` and `cargo`; town growth gates
+##     which can turn up (`first_tier <= economy.town_level`, :6203-6209). The chatcmd comment's
+##     trade figures are accurate to `_settle_trade()`: `pr > base_p * 1.12 and treasury > 80`
+##     sells, `have > 90.0` buys. `_caravan_line()` returns a string and calls nothing - read-only
+##     as claimed. COMMANDS_DOC OK 32: I counted it myself - order 32, command keys 32, doc rows
+##     32, caravan present in all three.
+##   - **U120 (HUD)** - the windowed cycle U119 named, delivered: L74_TEST OK with
+##     protected_unread 0 / dropped_protected 0 at 100/125/150 under the hostile burst, U117_DONE
+##     fails 0, 0 script errors in both logs, no `.gd` changed. A verification cycle that runs the
+##     burst it promised and reports verdict LINES is a delivery.
+##   - **THE HUB - TICKED, AND THE CONTRAST WITH LAST HOUR IS THE POINT.** At 03:38 it produced a
+##     bare merge and I did not tick it. This hour it wrote the stand-down up, OWNED the bare
+##     merge in writing, and ran the standing check. **I re-ran its two load-bearing claims
+##     myself**: `origin/hub:web` and `origin/main:web` are both `02257b2f` - byte-identical - and
+##     `innerHTML` appears at exactly app.js:255 and :301, both page-owned literals, with the four
+##     other hits in comments and the five other sink names only inside the header comment.
+##     **I ran NO publish verification**: the lane made no READY TO PUBLISH claim, and an unearned
+##     gate report is the same fault class as a lying gate.
+##
+## ------------------------------------------------------------------------------------------
+## THE SIX ROWS
+##
+## **GAME BUILD (:07)** - S81 ticked; both asks answered and the tier-4 shield question is
+##   CLOSED on your measurement - there is no painted pair, and I confirmed it with a second
+##   instrument. Do NOT spend another cycle on it. You were right that "tier 4 richer than tier 3"
+##   is a tint decision and not yours to rule; it is not mine either, because under the FREEZE it
+##   would be a NEW item nobody asked for. I have put it in the LATER list and named it to the
+##   supervisor as an observation. **Take the lowest open Phase 2 system, your own pick.**
+##   System 7 (armour variety) stays HELD on art's fit numbers - do not unhold it yourself.
+##
+## **CONTENT (:22)** - C-159 ticked, counted line by line. Free C-cycle, your own pick, the usual
+##   shape. Keep writing `_note_` keys: they are an accounted-for class, they are the ONLY reason
+##   the raw zero-hit number moves, and no lane is to wire one.
+##
+## **ART (:34)** - both halves ticked, and the correction you made to my figure is exactly the
+##   behaviour this project runs on. The sheet is now a committed, self-labelling tool, so the
+##   evidence gap I raised at 03:58 is closed. **Next: the under-bar queue, but take `fuller/side`
+##   (0.4611, #1 of 75) rather than working strictly down from the Beadle** - you have just shown
+##   the Beadle's side cell is the man's own anatomy and NOT the apparatus fault `_backread.py`
+##   exists to catch, so it is explained, not owed. Run the new blame instrument on the fuller
+##   first and let it name the culprit span before you move anything. If it is anatomy again, say
+##   so and move on; a measured "nothing to fix here" is a delivery.
+##
+## **HUB (:37)** - stand-down ticked; the write-up and the owning of last hour's bare merge are
+##   what earned it. `web/` is still byte-identical to main, so nothing is owed to another lane.
+##   Your own cycle on your three files. **Do not publish** - that is the supervisor's call and
+##   there is no authorisation. If you do change `web/`, say READY TO PUBLISH so the gate is
+##   earned and I will run it.
+##
+## **HUD (:52)** - U120 ticked. Take the cycle you named yourself: the hostile feed with 60-char
+##   names and mixed-width glyphs at 150% against the pane-label strips. Both items you flagged as
+##   stale ARE stale and the prompt is wrong, not you - System 2 is whole (correction 2 below) and
+##   `parse_fish()` is hardened; neither is owed by you and neither will be handed back again.
+##
+## **CHAT BOT (:45)** - B100 ticked, every promise in the command text checked against the code,
+##   lock clean. Your own cycle.
+##
+## (QA tester, not one of the six) - your 04:42 run was clean and S58_SPAN OK 28 headless answers
+##   the 02:47 hang in practice. **Still owed in writing: acknowledge the 03:06 stale-lock clear,
+##   and name which of your gates are windowed-only** so no seat runs one headless by mistake
+##   again. Your 04:42 line also declared `cap claim+12` - say where that cap comes from, since
+##   the protocol's number is claim+25.
+##
+## ------------------------------------------------------------------------------------------
+## LATER LIST - NOT WORK. NO LANE PULLS FROM THIS.
+##   - The shield ladder steps DOWN in richness at tier 4 (tier 3 the pack's coloured rare, tier 4
+##     plain steel/wood, tier 5 gold). Measured and confirmed: the Quaternius set has no painted
+##     pair, so making tier 4 richer would be a TINT feature on the off hand. **Nobody asked for
+##     it, so under the freeze it is not an item.** Recorded here and named to the supervisor.
+##
+## ------------------------------------------------------------------------------------------
+## FOR THE SUPERVISOR (04:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured by me this hour, UNCHANGED for the fourth hour.**
+##      `origin/gh-pages` is `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT** (publish 5).
+##      `origin/hub:web` is `02257b2f`. Difference: **3 files / 59 insertions / 1 deletion**
+##      (`NOTES.md` +9, `app.js` +47/-1, `style.css` +4). The hub made NO READY TO PUBLISH claim
+##      and I ran no publish verification. **Recommendation: still not yet** - but note the lane
+##      DID deliver this hour (stand-down written up, standing security check green, two claims
+##      re-run by me), so the second reason I gave at 03:58 has gone. The remaining reason is just
+##      that the gate is unearned until the lane claims it.
+##   2. **An observation, not a request.** The armour shield ladder is plain at tier 4 and
+##      coloured at tiers 3 and 5. It is not a defect and not a freeze item; it is in the LATER
+##      list. If you want tier 4 richer, that is a tint ruling and I will route it to the game
+##      build as an item on your word.
+
 ## TAKE THIS NEXT - THE 03:58 CT FIRING, 21 NOV 2026 (machine clock 03:58-04:1x CST, same day -
 ## no rollover this hour; the 03:58 firing and the 04:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 02:58 BLOCK. ***

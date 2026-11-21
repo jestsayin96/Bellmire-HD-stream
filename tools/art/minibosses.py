@@ -11021,6 +11021,20 @@ ORDER = ORDER + ["beadle"]
 _BEADLE_NAPE = os.environ.get("BEADLE_NAPE", "1") != "0"
 _BEADLE_KNOB = os.environ.get("BEADLE_KNOB", "1") != "0"
 
+# PASS 13 A/B SWITCHES - THE TWO VALUE FAULTS I WROTE UP AND LEFT UNFIXED.
+# Both are the same family: a feature carried by HUE against a ground of nearly
+# the same LUMA. Stream compression crushes chroma before luma, the creature
+# draws small on a dungeon floor, and a deuteranope loses amber-on-cream
+# outright - so a gauge that separates only in hue is a gauge you cannot read.
+#   BEADLE_RAIL=0  rebuilds the pass-12 board: four amber pegs (luma 172)
+#                  standing on a limewashed oak face (luma 167). Five luma.
+#   BEADLE_PLATE=0 rebuilds the pass-12 staff head: an amber ball (luma 172)
+#                  projected onto the pale skull (luma 162). Ten luma.
+# Default ON - these are the shipped shape. The switches exist so each fix can
+# be measured SEPARATELY through ONE locked camera, which is the standing rule.
+_BEADLE_RAIL = os.environ.get("BEADLE_RAIL", "1") != "0"
+_BEADLE_PLATE = os.environ.get("BEADLE_PLATE", "1") != "0"
+
 
 def beadle():
     """IT CALLS THE ORDER. A tall upright parish officer in dark wool with a
@@ -11313,6 +11327,30 @@ def beadle():
           loc=(MX + 0.630, -0.090, 1.556))
     if _BEADLE_KNOB:
         P.add(L.cone(0.100, 0.082, 0.038), 'dark', loc=(MX + 0.630, -0.090, 1.628))
+    # *** PASS 13: THE KNOB GETS A DARK PLATE BEHIND IT, BECAUSE PASS 12 PUT
+    # *** DARK ABOVE AND BELOW IT AND THE FAULT IS TO THE SIDES. *** Pass 12's
+    # ferrule and cap bracket the ball in Z and they work - measured on
+    # hero_side.png the ball still reads as a smudge on the cheek, amber
+    # (200,170,110) luma 172 across the pale skull (170,160,150) luma 162. TEN
+    # LUMA OUT OF 255. The side camera throws x away, so the staff at x +0.63
+    # is projected ONTO the head, and what is beside the ball in that
+    # projection is skull, not ferrule: dark above and below cannot fix a
+    # left-and-right fault.
+    # So the dark goes BEHIND it, in x, between the ball and the head - the
+    # boss plate a staff head is seated on, which is a thing that is there for
+    # a reason and not a flourish. Flattened in x (0.018) so the FRONT and BACK
+    # cameras, which throw y away, see it edge-on as a thin line beside the
+    # shaft rather than a paddle; wider in y (0.150) than the ball's own 0.092
+    # so it shows past the ball on both sides in the side view, which is the
+    # whole point of it.
+    # IT IS INSIDE THE BODY'S ENVELOPE IN EVERY AXIS (x 0.527-0.563 against the
+    # ball's own 0.722, z 1.441-1.671 against the knob assembly's 1.365-1.647
+    # plus the shaft above it), so it cannot change the bounds - which is what
+    # lets the A/B lock one camera across both variants and trust the moved
+    # pixels. The harness asserts that rather than assuming it.
+    if _BEADLE_PLATE:
+        P.add(L.sphere(0.018, 0.150, 0.115, 14, 9), 'dark',
+              loc=(MX + 0.545, -0.090, 1.556))
     # the gripping arm, down and out to the shaft
     limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095, 1.060),
              (MX + 0.600, -0.088, 0.965)], 0.145, 0.112, 'body')
@@ -11379,6 +11417,50 @@ def beadle():
     # through the board's DEPTH as well as its length, because a side camera
     # throws x away and four pegs in a line would collapse to one.
     i0 = len(P.items)
+    # *** PASS 13: THE PEGS NOW STAND ON A DARK RAIL, AND THAT IS A VALUE FIX
+    # *** FOR A VALUE FAULT. *** Pass 4's comment says it fixed this - "the pegs
+    # rendered CREAM, the exact colour of the oak board" - by lowering the glow
+    # strength until the HUE survived. Measured off the render it shipped:
+    # pegs (204,168,108) luma 172, board top face (168,168,156) luma 167. FIVE
+    # LUMA OUT OF 255. The hue was right and the contrast was not, which is the
+    # Dyer's trap, and I quoted the Dyer while shipping it.
+    # The board's own pass-3 fix is the answer applied a third time: dark END
+    # CAPS stopped the pale plank bleeding into a pale background, a dark
+    # FERRULE stopped the knob bleeding into the pale skull, and a dark RAIL
+    # stops the pegs bleeding into the pale board. Four bright teeth on a dark
+    # bar separate in VALUE, so they survive desaturation - and the two empty
+    # sockets stay out on the bare pale plank at dx 0.330/0.480, which is the
+    # Beadle's own stated logic (DARK body against PALE furniture) applied to
+    # its gauge: a filled call is bright-on-dark, a spent one is dark-on-pale.
+    # DERIVED OFF THE PEG RUN, NOT TYPED. The four pegs are staggered through
+    # the board's depth as well as its length, so the rail is ROTATED IN THE
+    # BOARD'S OWN PLANE to lie along them - a rail typed square across the board
+    # would have had to be 0.26 deep to cover the stagger, which is most of a
+    # 0.30 board and would have turned the pale plank dark. This one is 0.175
+    # wide and leaves the plank reading as a plank.
+    if _BEADLE_RAIL:
+        _PDX0, _PDX1 = -0.400, -0.400 + 0.200 * 3
+        _PDY0, _PDY1 = -0.080, -0.080 + 0.052 * 3
+        _RTH = math.atan2(_PDY1 - _PDY0, _PDX1 - _PDX0)
+        # 0.100 AND NOT THE 0.160 I FIRST BUILT, BECAUSE I LOOKED AT THE
+        # SHEET. At 0.160 the rail's left end landed at dx -0.477 against the
+        # dark END CAP's inner edge at -0.4825 - they touched, and the left
+        # third of the board read as ONE DARK BLOCK instead of a pale plank
+        # with a dark cap. The cap's own job (stop the pale board bleeding into
+        # the pale background) needs the pale board to still be there beside
+        # it. At 0.100 the rail ends at dx -0.448: 0.034 of daylight, about 13
+        # px in the 700-wide proving render. It still clears the four pegs by
+        # their own radius, and its right end at +0.248 stays 0.028 clear of
+        # the first empty socket, so a filled call and a spent one do not run
+        # into one another.
+        _RLEN = math.hypot(_PDX1 - _PDX0, _PDY1 - _PDY0) + 0.100
+        _RT = 0.048
+        _RR = (Matrix.Rotation(YAW, 4, 'Z') @ Matrix.Rotation(TILT, 4, 'X')
+               @ Matrix.Rotation(_RTH, 4, 'Z'))
+        P.add(L.box(_RLEN, 0.175, _RT), 'dark',
+              loc=_on_board((_PDX0 + _PDX1) * 0.5, (_PDY0 + _PDY1) * 0.5,
+                            0.5 + (_RT * 0.5) / BOARD_T),
+              rot=tuple(_RR.to_euler('XYZ')))
     # the board's own axes, so a peg placed 'dy along the board' stays ON the
     # board when TILT changes. A raw y offset would have left them hanging off
     # a tipped plane, which is the trap the derived-not-typed rule exists for.

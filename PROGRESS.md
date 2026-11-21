@@ -13883,3 +13883,9 @@ Changed: NOTHING in my three files. This cycle is a measurement, a correction of
 Not done / not mine: nothing owed in `twitch_eventsub.gd`. L56 (delve-heavy soak) still wants a long engine window; starting one at 21:48 would have run into the HUD's :53 claim, so it is split off again rather than started.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account used, no channel setting read or written.
 Next firing: publish 43 the moment `MB_NAME["winder"]` is on main (that clears both arms together with the publish); otherwise re-confirm the four gates and hold.
+
+## C-153 (20 Nov 2026 22:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (21:58 CT block) gave content: "your own cycle, unthrottled; nothing owed". All 44 art bodies already carry feed lines, so backlog item 3 (most-repeated lines). The dyer/greener lines were re-read per the FYI: neither leans on being seen from behind, no change.
+Added (data/lore_lines.json only): epitaphs +14, descend +10, cleared +10, all unique against existing lines, ASCII, plain register; `_note_c153` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new keys: `_note_c153` only.
+CODE WIRING: none; the three lists are already drawn from at random.

@@ -217,6 +217,7 @@ static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd
 static var order_held_frames := 0
 static var rammer_struck := 0                # S38: delvers caught on the pile at the count
 static var fuller_struck := 0                # S78: delvers under the stocks when the Fuller wrung
+static var pitman_fell := 0                  # S79: delvers who went into one of the Pitman's pits
 static var rammer_read := 0                  # S38: delvers on the pile who read the hold and stepped off
 const _AMBUSH_LINE := [
 	"Shadows peel off the walls - an ambush! %s surges in.",
@@ -1987,7 +1988,7 @@ const MB_WAYS := {
 	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
-	"beadle": "order", "rammer": "drop", "fuller": "wring",
+	"beadle": "order", "rammer": "drop", "fuller": "wring", "pitman": "pit",
 }
 ## S78: the Fuller KEEPS EVERY BLOW (content's C-126 words, verbatim: "Every blow you land goes into
 ## the cloth. It keeps them. It gives them all back at once."). Each act it counts the hp it lost
@@ -1999,6 +2000,20 @@ const MB_WRING_FULL := 0.20
 const MB_WRING_R := 3.2
 const MB_WRING_MULT := 0.5
 const MB_WRING_CAP := 4.0
+## S79: the Pitman OPENS THE FLOOR (art's idea, S76 hand-off: "it opens a pit under a delver, who loses
+## a beat climbing out; the pit stays"). Each act a pit opens under the delver nearest it (meta
+## mb_pits, at most MB_PIT_MAX - the oldest closes when a new one opens). Anyone who stands within
+## MB_PIT_R of an open pit goes in and loses MB_PIT_BEAT seconds off their next swing; climbing out
+## they cannot go in again for MB_PIT_CLIMB seconds. THE PIT STAYS: pits outlive the act and the break.
+## Broken = it stops digging; the pits it already opened are still in the floor.
+## HOLD: content's by_key.pitman has arrive/fall only, no act/broken lines yet, so _mb_way_tick's
+## existing gate holds this way out of every real floor until those lines land.
+## HONEST LIMIT: the pits are ticked by the Pitman - once it is dead they stop taking anyone (the marks
+## stay in the floor as scenery); a floor-owned hazard that outlives its maker is not built.
+const MB_PIT_MAX := 3
+const MB_PIT_R := 1.0
+const MB_PIT_BEAT := 1.5
+const MB_PIT_CLIMB := 3.0
 ## S38: the Rammer DROPS ON THE COUNT (art's idea: "the answer is not what you do, it is when").
 ## Its act is the haul: the iron goes up and HOLDS for MB_DROP_HOLD seconds, then comes down on the
 ## pile - everyone within MB_DROP_R of the frame at that moment. A delver on the pile makes a DEX
@@ -2034,6 +2049,8 @@ const MB_CALLS := {"drillmaster": "warrior", "sexton": "bones", "sower": "adder"
 func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) -> void:
 	var key := String(mon.get_meta("mb_key"))
 	var way := String(MB_WAYS.get(key, ""))
+	if mon.has_meta("mb_pits"):
+		_pit_tick(mon, alive, delta)                  # S79: the pits stay - broken or not
 	if way == "" or bool(mon.get_meta("mb_broken", false)) or miniboss_lines(key, "act").is_empty():
 		return
 	if mon.hp / maxf(1.0, mon.max_hp) <= MB_BROKEN_FRAC:
@@ -2141,6 +2158,18 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 				_fuller_wring(mon, live_heroes, store)
 				store = 0.0
 			mon.set_meta("mb_store", store)
+		"pit":
+			# S79: the floor opens under the nearest delver, and they go straight in
+			var nb := near["body"] as Node3D
+			var pits: Array = mon.get_meta("mb_pits", [])
+			while pits.size() >= MB_PIT_MAX:
+				var old: Array = pits.pop_front()
+				if is_instance_valid(old[1]):
+					(old[1] as Node).queue_free()
+			pits.append([Vector3(nb.global_position.x, 0.0, nb.global_position.z), _pit_mark(mon, nb.global_position)])
+			mon.set_meta("mb_pits", pits)
+			near.erase("pit_out")                     # the one it dug under has no footing to save them
+			_pit_tick(mon, [near], 0.0)
 		"order":
 			# the same name again while it still stands; a new one only when the called hero is down
 			var called: Dictionary = {}
@@ -2192,6 +2221,41 @@ func _fuller_wring(mon: Monster, live_heroes: Array, store: float) -> void:
 	if mon.is_inside_tree():
 		mon.nova(MB_WRING_R)                          # the wring is SEEN - a ring the size of the stocks
 	Delve.setpieces_fired["miniboss_wring"] = int(Delve.setpieces_fired.get("miniboss_wring", 0)) + 1
+
+## S79: who is standing in an open pit goes in and loses a beat; climbing out buys MB_PIT_CLIMB seconds.
+func _pit_tick(mon: Monster, alive: Array, delta: float) -> void:
+	var pits: Array = mon.get_meta("mb_pits", [])
+	for o in alive:
+		if float(o.get("hp", 0.0)) <= 0.0:
+			continue
+		var po := float(o.get("pit_out", 0.0))
+		if po > 0.0:
+			o["pit_out"] = po - delta
+			continue
+		var bp := (o["body"] as Node3D).global_position
+		for pv in pits:
+			if _flat(bp, pv[0]) < MB_PIT_R:
+				o["swing"] = float(o.get("swing", 0.0)) + MB_PIT_BEAT   # the lost beat: climbing out
+				o["pit_out"] = MB_PIT_CLIMB
+				Delve.pitman_fell += 1
+				Delve.setpieces_fired["miniboss_pit_fell"] = int(Delve.setpieces_fired.get("miniboss_pit_fell", 0)) + 1
+				break
+
+## S79: the pit is SEEN - a dark mouth in the floor, parented beside the Pitman so it goes with its floor.
+func _pit_mark(mon: Monster, at: Vector3) -> Node3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = MB_PIT_R; cm.bottom_radius = MB_PIT_R * 0.8; cm.height = 0.04; cm.radial_segments = 20
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.04, 0.03, 0.02); mat.roughness = 1.0
+	cm.material = mat
+	mi.mesh = cm
+	var par := mon.get_parent()
+	if par == null:
+		return mi
+	par.add_child(mi)
+	mi.global_position = Vector3(at.x, 0.09, at.z)   # above the hex tiles' bevelled tops, which hid it at 0.025
+	return mi
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:

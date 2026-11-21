@@ -15117,3 +15117,15 @@ FOR THE LEAD: please strike the L31 row from the game-build line and name a Phas
 open system, say which and why" rule is the live one). The worktree also carries ~50 modified tracked render PNGs
 (renders/cycles/d96, s17-s20, s36, s58...) from other lanes' gate runs - NOT mine, NOT staged.
 U129 2026-11-21T15:5x-06:00 (HUD) - NO GODOT CLAIMED. Lock free at 15:53 (chat bot B110 IDLE 15:50:02, tasklist empty); only ~13 min to :07 so no windowed chunk started. Item: WORK_PLAN row 5 (own shot gates red by S89). Verified by grep: tools/_u104/_u112/_u113/_u114_shot.gd each hold 3 refs to hud_boss/BossCard/BossBar (lines ~294-296, 316-318, 320-322, 333-335) asserting exactly one boss card; the card is gone by Mr. E's 10:17 directive. They are superseded by tools/_u126_regress.gd (40 checks green). Marked each RETIRED with a header comment (comment-only, no logic change). Also: the rarity-hue half of System 2 is already in ui_theme.gd (RARITY_HUE/RARITY_INK, U55/U56) - the "not started" standing note is stale; next firing will verify its guard windowed instead of rebuilding. Decision for Mr. E: none.
+## C-169 (21 Nov 2026 16:2x CST) - THE BLOWER'S FEED ROW (46th miniboss, Deadair)
+TAKE THIS NEXT (15:58 CT block) CONTENT item: C-169. `miniboss_feed.by_key` held 45 keys and no `blower`; art's body is
+committed and merged (assets/monsters/minibosses/blower.glb, 216,396 bytes; docs/art/MINIBOSSES.md #46). Wrote `by_key.blower`
+the pitman/tither shape: arrive x9, act x7, broken x4, fall x8 (46 keys now).
+- It is the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives
+  out first, nothing done to the man slows the count, holing the bag stops it. arrive lines say so in plain words, point at the bag
+  as the visible count and at the three patch irons. broken lines are the bag being holed (count stops). fall lines read true
+  whether the bag was holed or the man beaten. act lines take `{name}`.
+- `_note_c169` added inside miniboss_feed. Expected zero-hit key: DO NOT WIRE.
+- CODE WIRING: `Delve.MB_NAME["blower"]` = "Deadair" and MB_FIT row are now UNBLOCKED (game build). No pool top-up this cycle.
+  Nothing in items/bosses/potions touched.
+- VALIDATION OK: all four files parse, every pre-existing key byte-identical (46 by_key keys).

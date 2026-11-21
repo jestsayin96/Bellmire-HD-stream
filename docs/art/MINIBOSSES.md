@@ -4351,7 +4351,7 @@ run and not claimed as done.
   a `model` path and **NO `anims` entry**. `h = 2.30`, art's measured number;
   do not re-derive it.
 - theme **`crypt`** for the set-piece roll (joins the Sexton and the Scraper).
-- **CORRIDOR-SAFE at 2.85 m, UNDER-LID. No spawn gate needed, not
+- **CORRIDOR-SAFE at 3.10 m, UNDER-LID. No spawn gate needed, not
   room-locked.**
 - `MB_FIT["pitman"]`: ratio **0.94**, tag **"crypt"**, 3 proving views -
   **copy it from the register, do not re-derive it.**

@@ -1,3 +1,84 @@
+## TAKE THIS NEXT - UPDATED 21 NOV 2026, 14:0x CT (THE 13:58 CT FIRING, 21 NOV 2026).
+## THIS SUPERSEDES EVERY ROW BELOW IT.
+## NOTHING MERGED AND NOTHING TICKED THIS PASS, AND THAT IS THE CORRECT OUTCOME: no lane has
+## pushed since the 12:58 run finished on a live turn at 13:55 (main c9630fc1). Every lane tip is
+## that run's plan-sync commit and nothing else - I checked `origin/main..origin/<b>` on all six.
+## Plan blob 60c253be on all SEVEN refs, set size asserted = 1. No branch missing.
+## LOCK FREE: last RUN_LOCK line is the game build's IDLE 13:10:21; `tasklist | findstr /I godot`
+## returned rc=1 and EMPTY at 13:59 CT, so the orphan question stays closed.
+## DEAD-DATA AUDIT, measured by me on merged main c9630fc1: 48 files (47 scripts/*.gd + web/app.js)
+## / 2,361,323 chars / 12 data/*.json / 149 top-level keys / 59 zero-hit = 44 `_note_` + 15
+## NON-NOTE, and the 15 are MEMBER-FOR-MEMBER THE SAME FIFTEEN as the baseline. UNREAD LIVE DATA
+## KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO of 34. Series 52-53-56-59; the non-note count
+## has not moved off 15.
+
+1. GAME BUILD - unchanged from the 12:58 row, but now MEASURED BY ME rather than relayed:
+   `dungeon_hd.gd:237` reads "S89: `tither` ... NO content lines yet, so miniboss_for holds it
+   out". I read `data/lore_lines.json` myself: `miniboss_feed.by_key.tither` = arrive 9 / act 7 /
+   broken 4 / fall 8, and `THEME_MINIBOSS_MORE["prison"]` at `dungeon_hd.gd:239` ALREADY contains
+   "tither". `MB_NAME` = 45 keys by a brace-matched parse, tither included, blower absent. The
+   COMMENT is the only wrong thing on main. Correct it, prove the draw with one gate run, add no
+   wiring the data gate already does. Then S90 proper.
+2. CONTENT - nothing owed. Keep producing and KEEP WRITING `_note_` keys: there are 44 of them now
+   and every one is correct behaviour, not drift. The blower/Deadair feed row is STILL NOT OWED -
+   as of 14:0x there is not one blower file on any ref.
+3. ART - TWO THINGS, both measured by me this hour, NEITHER of them new work:
+   (a) COMMIT AND PUSH THE BLOWER (Deadair, 46th), built 12:41-12:48 and stranded by the outage.
+       Still not one blower file on `origin/art`.
+   (b) *** RE-RUN THE SYSTEM 2 FIT REGISTER. ITS RED IS FOUR-DAY-OLD EVIDENCE OF A FAULT THAT WAS
+       FIXED 35 MINUTES AFTER THE REGISTER WAS LAST WRITTEN. *** `renders/art/system2/
+       _fit_register.json` on merged main reads `verdict FAIL / ok false` on EXACTLY ONE cell:
+       "crossbow_common: only 1 of 3 views show the weapon - front seen 0.395 vis 726, side seen
+       0.664 vis 2039, back seen 0.097 vis 175". errors [], blanks [], frame_clips [] - that one
+       blind_view is the whole of the red. The plan ALREADY ruled that red CORRECT, not yours, and
+       said in your own row: "The game build found the identical fault from inside Godot in the
+       same hour and has it as its first row. When it lands, re-run and the red clears on its own."
+       IT LANDED. `git log` on `scripts/gear.gd`: **ada04de8, 17 Nov 14:21:25 CT, "S20: System 2
+       engine half - crossbow levelled and pointed (-90,0,90)"**. The register's last commit is
+       **90e79b4d, 17 Nov 13:46:03 CT** - THIRTY-FIVE MINUTES EARLIER. Nobody re-ran it in four
+       days. Re-run it. DO NOT TOUCH THE MESH to make a register go green.
+4. HUB - nothing owed; `web/` is unchanged. Publish delta RE-MEASURED BY ME, not copied:
+   `origin/gh-pages^{tree}` 9ca8051e vs `origin/hub:web` 02257b2f, 3 files - NOTES.md +9/-0,
+   app.js +46/-1, style.css +4/-0. You have claimed NO publish readiness, so NO publish gate is
+   owed and I RAN NONE. Stay on the mana-bar half of Mr. E's 10:17 directive.
+5. HUD - unchanged and counted by me on merged main: `tools/_u104_shot.gd`, `_u112_shot.gd`,
+   `_u113_shot.gd` and `_u114_shot.gd` each carry THREE references to `hud_boss` / `BossCard` /
+   `BossBar`, all four red by S89's removal of the floating card. They are your files; auditing
+   your own shipped gates is not new work and not a freeze violation.
+6. CHAT BOT - (a) re-prove red-prove B (ALIAS UNUSABLE): B108's Godot was killed by its own 70 s
+   subprocess timeout at ~12:50 and NO LOG EXISTS, so that one arm is still UNPROVEN. (b) Both
+   Godot exes were EMPTY at 13:59 - nothing of yours is alive and nothing needs killing. (c) KEEP
+   CLAIMING BY :50 WITH A DECLARED FINISH INSIDE :52. That row is mine and it worked at 08:45;
+   it is why the HUD got its window back.
+
+FOR THE SUPERVISOR: the hub publish delta is UNCHANGED and still yours - 3 files / +59 / -1 between
+`origin/gh-pages^{tree}` (9ca8051e) and `origin/hub:web` (02257b2f), outstanding since 20 Nov,
+re-measured per-file this hour rather than copied. The lane has claimed no publish readiness, so no
+publish gate has been run. RECOMMENDATION: PUBLISH - say the word and the first seat runs the full
+verification and the subtree push by the proven plumbing recipe.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS. I CHECKED THE TWO THE 12:58 BLOCK HANDED ME
+INSTEAD OF CARRYING THEM FORWARD, AND ONE OF THEM WAS ITSELF WRONG:
+  (i) STANDS, AND HARDER THAN IT WAS WRITTEN. `renders/art/minibosses/_fit_report.json` on merged
+      main reads `verdict GREEN / ok true / pairs 47 / errors [] / blind_views [] /
+      unproved_cells [] / stale_margin [] / red_summary.rows []`. The :58 prompt's standing note -
+      "its top-level verdict reads RED / ok:false ... on two CARRIED unmeasured rows
+      (snuffer_chibi, tallyman_chibi)" and "do not report that the art gate is green" - is FALSE
+      and now backwards.
+  (ii) *** BUT THE 12:58 WORDING IS WRONG AND I AM NOT PASSING IT ON. *** It says the keys
+      `shipped_red` and `ok_shipped` "DO NOT EXIST in it". THEY EXIST. They are NESTED under
+      `red_summary`: `red_summary.shipped_red = []` and `red_summary.ok_shipped = true`, alongside
+      `red_summary.rows` and `red_summary.retired_red`. They are not TOP-LEVEL keys, which is a
+      different and much smaller claim. Write "no longer top-level", never "do not exist".
+  (iii) THE ROW COUNT IS 47 ON MERGED MAIN - 45 live `MB_NAME` bodies + the 2 retired `_chibi`
+      cells - not the prompt's 46 and not the 12:58 block's 48. The 48 counts the blower, which is
+      built but on NO ref, so it cannot be in a register measured off main. KEEP THE INSTRUCTION
+      TO MEASURE IT rather than quote any of these three numbers.
+  NO PROMPT WRITE WAS ATTEMPTED THIS RUN, and I am naming why rather than implying a refusal I did
+  not collect: a firing has no live turn for the approval to be asked in, and the 11:4x
+  PROMPT-CORRECTION BACKLOG block below records that even a LIVE turn was refused by the harness
+  permission classifier today. Everything above is live in the plan, which is what the lanes read.
+
 ## TAKE THIS NEXT - UPDATED 21 NOV 2026, 13:5x CT (the 12:58 firing, finished on a LIVE TURN at
 ## 13:5x after Mr. E brought the Blender bridge back up). THIS SUPERSEDES EVERY ROW BELOW IT.
 ## Merged this pass into main d4daa062: laptop S89, content C-167, hub (mana-bar proof + licence).

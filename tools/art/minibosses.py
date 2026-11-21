@@ -16251,6 +16251,62 @@ def blower():
                  (s * 0.180, -0.120, 0.930)], 0.052, 0.044, 'dark')
     _close("man")
 
+    # ------------------------------------------------------------ THE GAUGE
+    # PASS 6, PART TWO, AND THE ONLY THING THIS PASS ACTUALLY SHIPS. With
+    # option (a) refuted above, the note's option (b) is the one left: give
+    # the front its own face carrying the same count.
+    #
+    # WHAT IT IS, IN MR. E'S FIRST RULE'S TERMS - a thing that looks like what
+    # it is FOR. Not a dial, not an instrument panel, nothing with a needle on
+    # it. A TALLY BOARD hung on the two straps already crossing his chest,
+    # pale hide like the bag because it is OFF the bag, with eight dark rungs
+    # across it - one rung per band, the same eight bands the bag is built
+    # from. A man who works a bellows all day and must know how many strokes
+    # are left marks them where he can see them: on his own chest, upside
+    # down to him, right way up to whoever is standing in front of him. That
+    # is the whole idea and it is the plainest version of it I could find.
+    #
+    # It is also the only pale mass on the front half of this body other than
+    # the nozzle mouth, which is what the front needed: at pass 5 the front
+    # view was 4% lit pale and nearly all of that was two rims out at the
+    # edges. Nothing goes on the back or the sides - the back already reads,
+    # and the back-lamp guard reads back/side chromaticity against the front,
+    # so pale added FORWARD is the safe direction and pale added aft is the
+    # exact fault that guard exists to catch.
+    #
+    # Sized off the torso rather than guessed: the torso limb runs r0.340 at
+    # z0.72 to r0.272 at z1.38, so at z1.20 its front surface is y -0.327.
+    # The board's back face sits at -0.303, INSIDE that surface, so it is
+    # stitched on and not floating; its front face stands 0.030 proud. The
+    # straps pass at x +-0.18..0.235 over this height, so a board 0.24 wide
+    # hangs between them and touches neither.
+    GAUGE = os.environ.get("BLOWER_GAUGE", "1") != "0"
+    if GAUGE:
+        _open()
+        # THE FIRST PLACEMENT OF THIS BOARD WAS WRONG AND I CAUGHT IT BY
+        # LOOKING, NOT BY MEASURING - every number it produced was an
+        # improvement and the picture was worse. At GZ 1.200 with a dark lug
+        # across its top, the lug sat a tenth of a unit under the two eyes and
+        # spanned the same width, so the front view read as A FACE: two eyes,
+        # a wide banded grin under them, and the board below it a bib. That is
+        # the Beadle's lesson in a new costume - a body saying something it was
+        # never meant to say - and no count in _bagfacing.py can see it,
+        # because a misread is not a quantity. So: the board drops to 1.090,
+        # it loses 0.04 of height so it does not ride onto the hip, and THE TOP
+        # LUG IS GONE. Only the bottom lug remains, which is the one that reads
+        # as a board hung on strapping rather than as a jaw.
+        GZ, GH = 1.090, 0.400
+        P.add(L.box(0.240, 0.055, GH), 'bone', loc=(0.0, -0.330, GZ))
+        # the eight rungs, one per band of the bag, proud of the board so they
+        # throw their own line instead of being a painted-on stripe.
+        for i in range(8):
+            z = GZ - GH * 0.5 + GH * (i + 0.5) / 8.0
+            P.add(L.box(0.266, 0.020, 0.024), 'dark', loc=(0.0, -0.352, z))
+        # one dark lug, at the FOOT, where the board hangs off the strapping.
+        P.add(L.box(0.150, 0.070, 0.050), 'dark',
+              loc=(0.0, -0.330, GZ - (GH * 0.5 + 0.030)))
+        _close("gauge")
+
     # ------------------------------------------------------------- THE HANDLES
     # Two spars raked UP AND FORWARD over his head, with his hands on them.
     # They are the only thing in this file that breaks the frame line above a
@@ -16280,10 +16336,45 @@ def blower():
     # view that matters. Pass 1's 0.430 behind a 0.62 X-squash left 0.27 - all
     # of it inside the man's own outline.
     RADII = [0.520, 0.495, 0.410, 0.300, 0.172]
-    _ribbag(P, STATIONS, RADII, flat=0.58, bands=2)
+    # PASS 6, PART ONE: A HYPOTHESIS I RAN AND THEN KILLED. Leaving the knob
+    # in with its ORIGINAL default, because the next seat deserves the failed
+    # experiment and not just the conclusion.
+    #
+    # The open fault was that the bag is the clock and the party fights this
+    # from the FRONT, where the clock was not there. I measured it off the
+    # shipped pass-5 renders with tools/art/_bagfacing.py rather than trusting
+    # the eye alone: lit pale over the creature's own silhouette is 0.040 from
+    # the front against 0.181 from behind, and of the little pale the front
+    # does get, only 0.16 of it lies inside the middle half of the figure -
+    # two thin rims standing out beside him. That is the archway read, in
+    # numbers.
+    #
+    # The owed note offered two fixes and said to take ONE. I took the first -
+    # bring the bag's own flanks round toward the front camera by making the
+    # wedge less flat - and swept it at 0.58 / 0.74 / 0.88 with everything
+    # else frozen. IT GOES THE WRONG WAY:
+    #
+    #     flat       front litpale_share    front width_px
+    #     0.58  (shipped)      0.0401              196
+    #     0.74                 0.0329              196
+    #     0.88                 0.0296              196
+    #
+    # Deeper is WORSE from the front and not by a little. The reason is plain
+    # once the three renders are laid side by side, which I did and looked at:
+    # the bag is wide in X and banded in Z, so from the front the viewer sees
+    # the band EDGES nearly tangent to the view direction. They take grazing
+    # light whatever their depth, and added depth is added self-shadow. The
+    # front silhouette does not move one pixel wider at any value. So the
+    # first fix cannot work AT ALL - it is not a matter of finding the right
+    # number - and the note's option (a) is struck. Default stays 0.58, which
+    # is pass 5's geometry exactly; only the lid now derives from it instead
+    # of being a second number to keep in step.
+    FLAT = float(os.environ.get("BLOWER_FLAT", "0.58"))
+    _ribbag(P, STATIONS, RADII, flat=FLAT, bands=2)
     # the top board - a bellows has a flat lid, and without it the stack reads
     # as a cone with a dome on it.
-    P.add(L.box(1.085, 0.625, 0.055), 'dark', loc=(0.0, 0.455, 1.676))
+    P.add(L.box(1.085, 2.0 * RADII[0] * FLAT + 0.022, 0.055), 'dark',
+          loc=(0.0, 0.455, 1.676))
     # THE THREE PATCHES. Iron plates stitched over old holes - they are where
     # the party is being told to put the next one, and they are NEWER than the
     # bag, which is what wear 0.48 is for. Each gets four pale rivets so it

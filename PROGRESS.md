@@ -13396,3 +13396,9 @@ Lock: read R's WORKING docs/RUN_LOCK.txt at 06:53 CST. Last line: "RUNNING 2026-
 Item unchanged: WORK_PLAN HUD row (U121's open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout, before touching feed_hud.gd.
 Next firing (07:52): re-read the working lock; if clear, one claim with expected finish <= :05 for a windowed measure-only tool (tools/_u122_chron_width.gd), no edit to feed_hud.gd until the number says there is a clip.
 Decision for Mr. E: none.
+
+U123 - 2026-11-21 07:5x CST - STAND-DOWN: CHAT BOT B103 HOLDS THE GODOT LOCK. NO .gd CHANGED, NO ENGINE LAUNCH
+Lock: read R's WORKING docs/RUN_LOCK.txt at 07:53 CST. Last line: "RUNNING 2026-11-21T07:52:30-06:00 (chat bot B103 ... cap 08:17, expected finish 08:00)", no IDLE from the chat bot after it (preceding IDLE was game build 07:20). tasklist showed no Godot yet (claim ~30 s old), so by the yield rule the RUNNING line is live and I did not claim over it. Expected finish 08:00 leaves too little of my :07 window for a safe windowed measure.
+Item unchanged: WORK_PLAN HUD row (U121/U122 open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout before touching feed_hud.gd.
+Next firing (08:52): re-read the working lock; if clear, one claim with expected finish <= :05 for tools/_u122_chron_width.gd (windowed, measure-only); no feed_hud.gd edit until the number shows a clip.
+Decision for Mr. E: none.

@@ -216,6 +216,7 @@ static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd
 ## setpieces_fired - _l29c_test C sums that dict and could otherwise pass on holds alone.
 static var order_held_frames := 0
 static var rammer_struck := 0                # S38: delvers caught on the pile at the count
+static var fuller_struck := 0                # S78: delvers under the stocks when the Fuller wrung
 static var rammer_read := 0                  # S38: delvers on the pile who read the hold and stepped off
 const _AMBUSH_LINE := [
 	"Shadows peel off the walls - an ambush! %s surges in.",
@@ -1986,8 +1987,18 @@ const MB_WAYS := {
 	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
-	"beadle": "order", "rammer": "drop",
+	"beadle": "order", "rammer": "drop", "fuller": "wring",
 }
+## S78: the Fuller KEEPS EVERY BLOW (content's C-126 words, verbatim: "Every blow you land goes into
+## the cloth. It keeps them. It gives them all back at once."). Each act it counts the hp it lost
+## since its last act into the trough (meta mb_store). When the trough holds MB_WRING_FULL of its
+## max hp it WRINGS: everyone within MB_WRING_R takes MB_WRING_MULT of the store (DEX save halves,
+## capped at MB_WRING_CAP x its atk) and the trough empties. Hitting it slowly fills it slowly;
+## broken = the trough cracks and the store is spilled, never given back.
+const MB_WRING_FULL := 0.20
+const MB_WRING_R := 3.2
+const MB_WRING_MULT := 0.5
+const MB_WRING_CAP := 4.0
 ## S38: the Rammer DROPS ON THE COUNT (art's idea: "the answer is not what you do, it is when").
 ## Its act is the haul: the iron goes up and HOLDS for MB_DROP_HOLD seconds, then comes down on the
 ## pile - everyone within MB_DROP_R of the frame at that moment. A delver on the pile makes a DEX
@@ -2033,6 +2044,8 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			_order_uid = ""                               # the roll is dropped: everyone acts again
 		if mon.has_meta("mb_drop_t"):
 			mon.remove_meta("mb_drop_t")                  # S38: the rope parts - the iron never comes down
+		if mon.has_meta("mb_store"):
+			mon.remove_meta("mb_store")                   # S78: the trough cracks - the store is spilled
 		if mon.has_meta("mb_base_atk"):
 			var d0: Dictionary = mon.def.duplicate()
 			d0["atk"] = float(mon.get_meta("mb_base_atk"))
@@ -2119,6 +2132,15 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
 		"drop":
 			mon.set_meta("mb_drop_t", MB_DROP_HOLD)        # S38: the haul - up, and it holds
+		"wring":
+			# S78: what it lost since its last act goes into the trough; full, it gives it all back
+			var last := float(mon.get_meta("mb_last_hp", mon.max_hp))
+			var store := float(mon.get_meta("mb_store", 0.0)) + maxf(0.0, last - mon.hp)
+			mon.set_meta("mb_last_hp", mon.hp)
+			if store >= mon.max_hp * MB_WRING_FULL:
+				_fuller_wring(mon, live_heroes, store)
+				store = 0.0
+			mon.set_meta("mb_store", store)
 		"order":
 			# the same name again while it still stands; a new one only when the called hero is down
 			var called: Dictionary = {}
@@ -2155,6 +2177,21 @@ func _rammer_drop(mon: Monster, alive: Array) -> void:
 	if mon.is_inside_tree():
 		mon.nova(MB_DROP_R)                           # S39: the count is SEEN - a shock ring the size of the pile
 	Delve.setpieces_fired["miniboss_drop"] = int(Delve.setpieces_fired.get("miniboss_drop", 0)) + 1
+
+## S78: the wring. The trough gives back what it kept, to everyone standing under the stocks.
+func _fuller_wring(mon: Monster, live_heroes: Array, store: float) -> void:
+	var base := minf(store * MB_WRING_MULT, float(mon.def.get("atk", 4.0)) * MB_WRING_CAP)
+	for o in live_heroes:
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) >= MB_WRING_R:
+			continue                                  # out from under it: the wring passes them by
+		var save := _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex")
+		o["hp"] = float(o["hp"]) - _soak(o, base * (0.5 if save >= 12 + floor_no / 4 else 1.0))
+		_hero_hit(o)
+		Delve.fuller_struck += 1
+	Sfx.at("hit", mon.global_position)
+	if mon.is_inside_tree():
+		mon.nova(MB_WRING_R)                          # the wring is SEEN - a ring the size of the stocks
+	Delve.setpieces_fired["miniboss_wring"] = int(Delve.setpieces_fired.get("miniboss_wring", 0)) + 1
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:

@@ -198,8 +198,12 @@
 ##
 ## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
 ## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 20:58 BLOCK AND
-## CARRIES ITS ITEMS FORWARD, WITH (a), (c) AND (e) RE-MEASURED AND (h) NEW. I attempted the write
-## once this hour and it was refused - a firing has no live turn for the approval to be asked in.
+## CARRIES ITS ITEMS FORWARD, WITH (a), (c) AND (e) RE-MEASURED AND (h) NEW. I DID NOT ATTEMPT A
+## WRITE THIS HOUR, and I am saying so rather than letting an untrue sentence stand: I drafted the
+## claim that I had, then struck it before publishing. The gate is settled ON THE CALL (a no-op
+## `enabled=true` was refused identically on 18 Nov) and this prompt says in terms not to test it a
+## fourth time, so an attempt buys nothing. A firing has no live turn for the approval to be asked
+## in. THE FIRST LIVE TURN LANDS a THROUGH h AT ONCE.
 ##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It names gh-pages `45a7904` with a
 ##      2-file / 19-line delta. Measured this hour: gh-pages **05ac2679** (19 Nov 20:06:59 CT),
 ##      trees **9ca8051e** vs **02257b2f**, delta **3 files / 59 lines**. Replace the paragraph

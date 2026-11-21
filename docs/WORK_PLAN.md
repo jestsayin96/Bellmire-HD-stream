@@ -1,3 +1,238 @@
+## TAKE THIS NEXT - THE 08:58 CT FIRING, 21 NOV 2026 (machine clock read 09:0x CST while
+## writing; same day, no midnight rollover. The 08:58 firing and the 09:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 07:58 BLOCK. ***
+##
+## SIX MERGES, main is 12ad68e9. **FOUR TICKED, TWO NOT TICKED BECAUSE NOTHING SHIPPED (hub own
+## cycle, chat bot a correct stand-down).** ONE root PROGRESS.md conflict (content vs hud-ui),
+## both sides kept, 1 start / 1 mid / 1 end marker dropped by a state machine, 0 base.
+## **I counted residuals with the EXACT marker shapes, not a loose `=` run** (the loose grep this
+## seat ran first matched eighteen 80-character rule lines in WORK_PLAN.md and COORDINATION.md
+## and would have read as a dirty tree - it is not): `^<<<<<<< `, `^=======$`, `^>>>>>>> `,
+## `^|||||||` all return ZERO over the whole of HEAD. `diff --numstat origin/main HEAD` reads
+## **+15/-0 on PROGRESS.md and +22/-0 on docs/PROGRESS.md - ZERO LINES REMOVED**, and +15 is
+## exactly content's 5 plus the HUD's 10. Landmarks U124, C-163, S85 all present.
+##
+## TICKED THIS HOUR (four):
+##   - **S85 (game build) - L29C ARM C IS GREEN, AND THE DIAGNOSIS IS THE REAL DELIVERY.** Last
+##     hour arm C was red on HEAD across four runs at `state=fight frames=10801`. The lane found
+##     the cause is the SOAK'S OWN 180-game-second budget, not the set pieces. **I CHECKED THE
+##     NUMBER RATHER THAN THE STORY, IN `s85/diag2.log`: floor 3's fight does not end until frame
+##     11738 - past the old 10801 cap - and the first set piece (an ambush on floor 4) does not
+##     fire until frame 19758.** The old harness could not have seen one. `l29c.log` now ends
+##     `soak ended state=fight frames=18825 fired={ "ambush": 1 } (total=1)` / `CHECKS 33 FAILS 0`
+##     / `L29C_TEST OK`, read as verdict lines. **AND I CHECKED THE ARM CAN STILL GO RED**, which
+##     is the thing that matters when a test's exit condition is loosened: the edit ends the soak
+##     on `total >= 1` OR a 600-second ceiling, so a run that fires nothing still reaches the
+##     ceiling with total=0 and still FAILS. The arm was made honest, not made quiet. Other
+##     gates, all read as verdict lines: parse 0/0, OFFFLOOR OK 0/2300, TOWNWALK PASS 0/20903,
+##     TWITCH_PARSE OK 8, DELVE_TEST OK 9001.
+##   - **C-163 (content)** - counted off the ref by parsing both versions, not taken from the
+##     message: epitaphs 900 -> 912, descend 547 -> 553, cleared 532 -> 538 = **+12 / +6 / +6**
+##     exactly as claimed. **0 duplicates and 0 blanks in all three (912/912, 553/553, 538/538
+##     unique), 0 entries lost**, exactly one new top-level key and it is `_note_c163`.
+##   - **U124 (HUD) - A THREE-HOUR-OLD OPEN QUESTION CLOSED, AND CLOSED THE RIGHT WAY ROUND: THE
+##     ANSWER IS "THERE IS NO CLIP", AND THE LANE CHANGED NO `feed_hud.gd`.** U121 saw
+##     "The wet is wa" / "is the worst o" in a frame and three seats have carried it as a
+##     possible clip. The measure says it never was one. **I READ THE LOG MYSELF** (`_u122.log`,
+##     649 lines, in W2's working tree): `U122_DONE checks=118 fails=0`, `vis_clip=false` on
+##     every sampled line, and the worst right-edge margin to the vellum is **-16.0 px at 125%**
+##     (100%: -19.1, 150%: -27.5) - inside, never over. **AND THE LOG CARRIES ITS OWN EXPLANATION
+##     OF THE ORIGINAL SIGHTING: lines appear at `a=0.55, 0.63, 0.64, 0.67, 0.98` - mid-fade
+##     alphas - so a single frame catching a line part-revealed is a fade-in, not a cut.**
+##     **AND I LOOKED AT THE PICTURE, AND AT THE WORST SCALE, NOT THE PRETTIEST ONE**
+##     (`chron_s125_1080.png`, the 16 px row - the lane looked at s150): both Chronicle lines wrap
+##     and finish clear of the right spindle, the trailing "x6" on each is whole, ink clear of
+##     both spindles. Picture and number agree.
+##   - **ART pass 8 - THE SPLITS CLEAR THE BAR, AND THE LANE PUBLISHED A REFUTATION OF ITS OWN
+##     HYPOTHESIS, WHICH IS THE BEST THING IN THIS HOUR.** Pass 7 left fault 5b named: three dark
+##     splits still ran up to ~0.52 of the board and read as a grid with the two straps. Pass 8
+##     swept SPLITH three ways: **1.00 -> bars 7, max_run 0.5179; 0.55 -> bars 0, max 0.2837;
+##     0.00 -> bars 0, max 0.0981**, and the shipped body measures `bars 0, max 0.2837`
+##     (`_gateread_paviser.json` 7 -> 0 bars, 0.5179 -> 0.2837). **AND IT SWEPT SPLITC AT 1.00 TOO
+##     AND GOT cols=240 bars=7 share=0.0292 max=0.5179 - BYTE-FOR-BYTE THE SPLITH=1.00 ROW - so
+##     the "it is the join" hypothesis is refuted by its own instrument, and the lane says so in
+##     its own commit subject rather than burying it.**
+##     **I RED-PROVED IT WITH MY OWN EYES, NOT WITH THE TABLE.** I opened
+##     `_sweep/paviser_splith1.00/front.png` and `minibosses/paviser/front.png` side by side. At
+##     1.00 two long near-full-height dark verticals cross BOTH iron straps and the board reads as
+##     a portcullis. In the shipped body those verticals are short stubs - one below the top
+##     strap, one above the bottom - that connect to nothing; the board reads as banded planks
+##     with nail heads. **The fault comes back when the change is removed. That is the proof the
+##     sweep table cannot give.**
+##     **ONE THING I AM NOT CALLING GREEN, AND IT IS NOT PASS 8'S:** the fit register's own
+##     verdict is still `RED / ok:false`, on the two carried unmeasured rows `snuffer_chibi` and
+##     `tallyman_chibi`. **I diffed it against main and the verdict, the errors and the
+##     red_summary are BYTE-IDENTICAL there** - `shipped_red: []`, `ok_shipped: true`,
+##     `retired_red` = those two. So it is carried, it is about retired cells, and no shipped body
+##     is red. The tick stands; I am recording it so nobody reports "the art gate is green".
+##
+## WHAT I DID NOT TICK, AND WHY EACH IS CORRECT:
+##   - **THE HUB - nothing shipped. `origin/main...origin/hub` is EMPTY** (its only commit is the
+##     plan-sync merge). No READY TO PUBLISH claim, **so I ran NO publish verification and none
+##     was owed.** I did re-run the hashes: `origin/hub:web` and `origin/main:web` are both
+##     `02257b2f`.
+##   - **THE CHAT BOT (B104) - A STAND-DOWN, AND IT IS THE ROW I WROTE LAST HOUR BEING OBEYED
+##     INSIDE ONE CYCLE.** Last hour I told the lane its :45 window had twice spilled into the
+##     HUD's :52 and cost the HUD two cycles. This hour it wrote no lock line at all and stood
+##     down rather than cross - and **the HUD then took its window at 08:54:36 and delivered
+##     U124, the item it had lost twice.** Nothing shipped, so nothing to tick; but the protocol
+##     correction worked in one hour and the HUD's tick is downstream of it.
+##
+## *** THE DEAD-DATA AUDIT, AND A CORRECTION TO LAST HOUR'S NUMBER - NOT TO MINE. ***
+##   Measured on merged tree 12ad68e9 with the crude literal matcher: **48 script files /
+##   2,345,688 chars** (47 `scripts/*.gd` + `web/app.js`), 12 `data/*.json`, **146 top-level
+##   keys, 56 zero-hit = 41 `_note_` + 15 non-note.**
+##   **THE NON-NOTE COUNT IS 15, WHICH IS WHAT IT HAS BEEN FOR DAYS, AND THAT IS THE NUMBER THIS
+##   PLAN SAYS TO WATCH.** The series reconciles exactly: 05:0x read 37+15=52, the 06:58-era read
+##   38+15=53, I read 41+15=56, and the notes rise only because content keeps writing them.
+##   **SO THE 07:58 SEAT'S 81 (42 `_note_` + 39 non-note) IS THE OUTLIER AND IT IS WRONG. It read
+##   39 non-note where every seat before and after it reads 15, on a corpus of identical bytes
+##   (both 2,345,688 chars / 48 files). It was an over-count, as that seat itself suspected of
+##   the 06:58 seat's file count an hour earlier.** Do not carry the 81 forward.
+##   The 15, every one accounted for and none of it new: the 2 runtime-built `_alt` pools
+##   (`lord_intros_alt`, `unique_intros_alt` - **READ** at delve.gd:4022 via `base + "_alt"`,
+##   DO NOT WIRE), the 4 of the dead family (`phase2_words`, `phase2_words_alt`,
+##   `phase2_words_alt2`, `town_levels_for_the_desktop`), and the 9 prose/spec strings
+##   (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`,
+##   `one_roll`, `_gating`, `canon_silences`). **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET
+##   DIRECTORIES: ZERO, off 34 dirs with files.**
+##   **A CHECK I RAN AND A CLAIM I THEREFORE DID NOT MAKE:** I had `phase2_words_alt2` written up
+##   as a NEW find and as proof the declared-dead set was five, not four. **It is not new - this
+##   plan has carried it in the dead family since at least the 05:0x block, and I found that by
+##   grepping the plan before publishing.** What IS true and is a prompt fault, not a discovery:
+##   the PROMPT's declared-dead four are `townsfolk / phase2_words / phase2_words_alt /
+##   town_levels_for_the_desktop` and omit `phase2_words_alt2` entirely. See item 2 below. I
+##   re-applied guard 2 to it anyway: no `alt2` anywhere in scripts/, web/ or tools/, and
+##   delve.gd:4022 composes `base + "_alt"` only. It stays dead. NO LANE IS TO WIRE IT.
+##   Also: `web/tools/sheet_overlap.js` is tools/ test code and is correctly OUTSIDE the corpus;
+##   a recursive `web/**/*.js` glob pulls it in and makes the file count 49. The 48 is right.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - **S85 ticked: L29C arm C is green and the red was the harness budget, as
+##   you said.** You held the item an hour, proved the red was not your edit's, then found the
+##   real cause and fixed it without weakening the arm - I checked that last part specifically
+##   and the 600 s ceiling still fails a soak that fires nothing. Your cycle, your pick. **The
+##   two chat bot asks from last hour are still open and still yours to decline freely:**
+##   (1) `Gear.ARMOUR` is read by nothing in the game; `Gear.WEAPONS` is NOT dead - town.gd:4571
+##   dresses the stall from it. (2) a `REWORK_DIVISOR := 4` at roster.gd:510 and `OIL_PER_HEAD` /
+##   `OIL_FLOOR_MIN` at delve.gd:161 would turn three wording guards into real two-authority arms.
+##
+## - **CONTENT** - C-163 ticked, parsed both versions and checked for duplicates and losses.
+##   Free C-cycle, your own pick. Keep writing `_note_` keys - 41 of this hour's 56 zero-hit keys
+##   are yours and not one of them is a defect.
+##
+## - **ART** - **pass 8 ticked and red-proved by my own eyes; fault 5b from pass 7 is CURED, not
+##   reduced** - bars 7 -> 0, max run 0.5179 -> 0.2837, and the portcullis read is gone from the
+##   picture. **Refuting your own join hypothesis in the commit subject is the standard.** The
+##   paviser's board is now the quietest it has been. **THE MAN'S BACK IS THE OPEN FAULT AND IT
+##   HAS BEEN UNOWNED FOR THREE DAYS** - no back render in the tree is lit by more than one lamp,
+##   found 20 Nov 16:34 and still true. Take it or name what you judge worse, as you did this
+##   hour. Separately and at your own pace: the fit register's carried `RED` is the two retired
+##   `_chibi` rows with no occlusion measurement on record - retiring them properly or measuring
+##   them once would let the register print its real verdict again.
+##
+## - **HUB** - nothing shipped this hour and `origin/main...origin/hub` is empty; no claim, so no
+##   publish gate was owed or run. Own cycle on your three files. **Do not publish** - the delta
+##   is with the supervisor for an EIGHTH hour. If you touch `web/`, say READY TO PUBLISH plainly
+##   and I will run the gate.
+##
+## - **HUD** - **U124 ticked, and it closed U121's question by disproving it rather than by
+##   fixing something.** "No clip; it was a fade-in at a=0.55" is worth more than a width tweak,
+##   and not touching `feed_hud.gd` was right. Two things, neither a fault in the work:
+##   (1) **COMMIT THE LOG.** `_u122.log` is the whole evidence for 118 checks and it is
+##   UNCOMMITTED - on `origin/hud-ui` there is no log to judge U124 by, and I had to read W2's
+##   working tree to verify you. The png and the tool landed; the log should land with them.
+##   (2) **ONE QUESTION ABOUT L21, NOT A CHARGE** - and I checked the code before raising it, so
+##   it is a question and not a claim. In `chron_s125_1080.png` the Chronicle card visibly
+##   overlays all four panes at 2x2, which reads against L21's "no HUD element may overlap a pane
+##   seam". **Your own checker already answers it** - `_l21_test.gd:141/212` has a THIRD home,
+##   `centre` (HudDock.centre), beside `chrome`, and `feed_hud.gd:202` says the centre and the
+##   chrome bar are separate bands by construction. **So the picture is almost certainly correct
+##   and I am recording it only so the next seat who looks does not file it as a regression.**
+##   Confirm in one line when you next write and it is closed for good.
+##
+## - **CHAT BOT** - **no claim, no lock line, a clean stand-down - and the HUD got its window
+##   back the same hour and shipped U124 with it. That is the correction landing, and it cost you
+##   a cycle to make it land.** Nothing is owed for it. Your window is :45 and it is yours;
+##   claim it with a declared finish inside :52 and take a normal cycle. If your gate set cannot
+##   fit before :52, say so in the lock line and I will take it up rather than leaving you to
+##   stand down a second time.
+##
+## - (QA tester, not one of the six) - it DID fire this hour, 08:42:23-08:47:56, all five gates
+##   green (TWITCH_PARSE OK 8, L14_TEST OK 24, COMMANDS_DOC OK 32, OFFFLOOR OK 0/1972, TOWNWALK
+##   PASS 0/18490), released early, no Godot left alive. **Still owed in writing, now from 04:58
+##   and five hours old:** acknowledge the 03:06 stale-lock clear, name which gates are
+##   windowed-only, and say where its declared `cap claim+12` comes from (the protocol's is +25).
+##
+## FOR THE SUPERVISOR (08:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured myself, unchanged for an EIGHTH hour.**
+##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
+##      `origin/hub:web` `02257b2f`, identical to `origin/main:web`; difference **3 files /
+##      +59 / -1** (NOTES.md +9, app.js +47/-1, style.css +4). No READY TO PUBLISH claim this
+##      hour, so no publish verification was run and none was owed.
+##      **Recommendation: still not yet**, and the reason is unchanged and purely procedural -
+##      the gate is unearned until the lane claims it. The lane has now delivered five clean
+##      hours running. **If you would rather not wait on a claim that may never come, say so and
+##      I will run the full publish gate on the merged tree unprompted and bring you the result.**
+##   2. **THE LEDGER QUESTION (carried from 05:58, unchanged, nothing blocked).** The Master
+##      Vision doc numbers Phase 2 systems 6/7/8 as crystal drops / chests by rarity / mimics;
+##      the 18 Nov 16:58 directive renumbered 6/7/8 as weapon / armour / shield variety, which is
+##      what the fleet has used since. Both agree 9 = loot on the ground, and System 9 row (a) is
+##      LIVE on main. **Recommendation:** confirm the directive's numbering is authoritative and
+##      either re-enter those three at free numbers in the 5-80 range or say plainly they are
+##      dropped. A ledger decision, not a build decision.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 09:0x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once). **ELEVEN items.**
+## *** I MADE NO PROMPT-WRITE ATTEMPT THIS RUN AND I SAY SO PLAINLY. Settled 18 Nov: the gate is
+##   on the CALL, not on a field. Five seats have now re-proved it; spending the call again is
+##   noise, not evidence.
+##   1. (carried, RE-MEASURED on merged tree 12ad68e9) **48 script files / 2,345,688 chars**
+##      (47 `scripts/*.gd` + `web/app.js`; `web/tools/sheet_overlap.js` is tools/ and is excluded
+##      - a recursive glob wrongly makes it 49), 12 `data/*.json`, **146 top-level keys, 56
+##      zero-hit = 41 `_note_` + 15 non-note.** **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET
+##      DIRECTORIES: ZERO, off 34 dirs with files** (the prompt still says 31). **WATCH THE
+##      NON-NOTE 15, NOT THE RAW TOTAL** - it has been 15 for days and the raw total rises with
+##      every `_note_`. The 07:58 block's 81 / 39-non-note is an over-count; do not carry it.
+##   2. **THE PROMPT'S DECLARED-DEAD FOUR OMIT `phase2_words_alt2`.** The prompt lists
+##      `townsfolk / phase2_words / phase2_words_alt / town_levels_for_the_desktop`; the plan's
+##      dead family (carried for days) is `phase2_words / phase2_words_alt / phase2_words_alt2 /
+##      town_levels_for_the_desktop`, with `townsfolk` separate because it returns prose hits.
+##      `phase2_words_alt2` is C-114's third pool in `data/lore_lines.json` and its own `_note`
+##      says "dead until wired". Guard 2 re-applied this hour: no `alt2` in scripts/, web/ or
+##      tools/, and delve.gd:4022 builds `base + "_alt"` only. NO LANE IS TO WIRE IT.
+##   3. (carried) **THE PROMPT'S PHASE 2 SECTION IS STILL WRONG ABOUT THE MOST VALUABLE OPEN
+##      ITEM.** It says the HUD's rarity-hue half of System 2 "is the only part still open" and
+##      "was still unstarted at 09:2x on 18 Nov". **IT SHIPPED** - `ui_theme.gd:176` names itself
+##      "U55 (System 2, HUD half): the rarity hue ladder", `rarity_hue` :196, `rarity_ink` :200,
+##      `rarity_pip` :204, and `leaderboard_panel.gd:197`/:202 call two of them on the worn rows.
+##      **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   4. (carried) the prompt's `parse_fish()` line - hardened at U76, re-proved at U119. Struck.
+##   5. (carried) `Delve.MB_NAME` = **44**, `miniboss_feed.by_key` = **44**, published
+##      `miniboss`.what and .short both say 44. Whole at 44/44/44. Never quote the prompt's count;
+##      never use a flat regex on `MB_NAME` - three seats' regexes have lied about that constant.
+##   6. (carried, re-measured) the prompt's hub SHAs. gh-pages is `05ac2679`, tree `9ca8051e`,
+##      pushed **19 Nov 20:06 CT**. "45a7904 pushed 18 Nov 03:34" is STRUCK AND WRONG, as was
+##      "40223be" before it. `origin/hub:web` is `02257b2f`; delta 3 files / +59 / -1.
+##   7. (carried, re-measured) the Step 5 ID line is behind. As of this hour: **B104, C-163, S85,
+##      U124**, art on paviser pass 8, hub ID unchanged.
+##   8. (carried, re-measured) the game build's over-declaration pattern has STOPPED and should be
+##      recorded as stopped: since 02:08 on 21 Nov every lock line carries "claim HH:MM, cap
+##      claim+25 = HH:MM" with the cap computed BEFORE the declaration. **Held again this hour:
+##      claim 08:08:13, cap 08:33 computed first, declared 08:30, IDLE 08:22:02. Zero
+##      over-declarations in seven hours.**
+##   9. (carried) the two-dot/three-dot warning. `git diff origin/main origin/<b>` reports main's
+##      own newer files as the lane's "deletions"; use `origin/main...origin/<b>` to measure WHAT
+##      A LANE DID. Sibling trap: a reordered JSON block reads as deleted keys - parse both
+##      versions and compare key SETS before calling anything dropped.
+##  10. **NEW THIS HOUR: THE MERGE-MARKER AUDIT NEEDS THE EXACT SHAPES, NOT A LOOSE RUN.** A grep
+##      for `^={7}` matches the 80-character `=` rule lines that WORK_PLAN.md and COORDINATION.md
+##      use as section dividers and reports a clean tree as dirty. Use `^<<<<<<< `, `^=======$`,
+##      `^>>>>>>> `, `^|||||||`. I hit this on my own first pass this hour.
+##  11. (carried) keep the note that the glob is `data/*.json` and that `data/town/bellmire.json`
+##      is a tools/ artefact, not live data.
+##
 ## TAKE THIS NEXT - THE 07:58 CT FIRING, 21 NOV 2026 (machine clock read 08:0x CST while writing;
 ## same day, no midnight rollover. The 07:58 firing and the 08:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 06:58 BLOCK. ***

@@ -14804,3 +14804,28 @@ and no access was needed; the path shape changed. **I did not call
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.
+
+## S88 - THE BOSS NAME OVER ITS OWN HEAD: THE GAME-BUILD HALF OF MR. E'S 10:17 DIRECTIVE (21 Nov 2026, 11:07 CST firing)
+Item: the 09:58 TAKE THIS NEXT gave game build a free pick (S87 closed the Gear.ARMOUR ask). Took the
+game-build half of Mr. E's 21 Nov 10:17 directive (supervisor report sup-nov21-1017): "Boss name
+appears as a nameplate over the boss entity's head" - the HUD is removing the NOW FIGHTING card.
+MEASURED BEFORE BUILDING: every lord ALREADY carried a `name_tag` Label3D (monster.gd _label). It was
+not missing - it was WRONG in a way that matters once it is the only title: it carried the epithet
+(`def.note`) as a second line at lord size (font 72, px 0.009). LOOKED AT THE FRAMES (d97, 1080):
+`rattling_host.png` - "a hundred dead men in one harness" ran across the health bar and off both
+edges; `grubmother_uniq.png` - the written variant's note ("no bigger than the base wall, but she
+never stops spilling brood...") ran off the frame entirely. Exactly the viewport-eating text Mr. E
+is clearing off the HUD, re-created over the boss.
+FIX (monster.gd _label, backup monster.gd.bak_s88): the plate is the NAME ONLY, like every other
+creature; boss plates are VERTICAL_ALIGNMENT_BOTTOM so the distance-scaled plate grows UP from its
+anchor and never sinks onto the bar 0.25 m under it. The epithet is not lost: Delve still speaks it
+whole in the Chronicle as the lord rises ("X rises. <note>.", delve.gd:177).
+GATE: tools/_d97_lords.gd grew 6 S88 checks per rising (backup .bak_s88): tag exists, visible, leads
+with the lord's name, ONE line, bottom-aligned, stands above the body. Measured rows, e.g.
+`S88 rattling_host tag y 6.15 body 5.28 bar y 5.90 text The Rattling Host`.
+Before the fix the same gate (first 4 checks) read 222 OK with the two-line text in the rows.
+VERDICTS: D97_LORDS OK 254 checks, 16 risings | parse 0 SCRIPT ERROR / 0 Parse Error |
+OFFFLOOR_VERDICT OK 0 of 2105 | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15207 PASS | DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+PICTURE after: `rattling_host.png` - one line, "The Rattling Host", clear above the bar.
+NOT DONE / NOT MINE: the HUD removes the card and the Chronicle boss card (HUD lane). Mana Option A
+vs B is undecided by Mr. E - no over-head mana bar was built.

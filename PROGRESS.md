@@ -14538,3 +14538,8 @@ Lock: read R's WORKING docs/RUN_LOCK.txt at 07:53 CST. Last line: "RUNNING 2026-
 Item unchanged: WORK_PLAN HUD row (U121/U122 open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout before touching feed_hud.gd.
 Next firing (08:52): re-read the working lock; if clear, one claim with expected finish <= :05 for tools/_u122_chron_width.gd (windowed, measure-only); no feed_hud.gd edit until the number shows a clip.
 Decision for Mr. E: none.
+## C-163 (21 Nov 2026 08:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (07:58 CT block, CONTENT row) gave content: "C-162 ticked. Free C-cycle, your own pick." No miniboss owed: every body keyed on origin/art has a miniboss_feed.by_key entry (44 keys).
+Added (data/lore_lines.json only): epitaphs +12 (900 -> 912), descend +6 (547 -> 553), cleared +6 (532 -> 538), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c163` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c163` only.
+CODE WIRING: none; the three lists are already drawn from at random.

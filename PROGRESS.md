@@ -14804,3 +14804,58 @@ and no access was needed; the path shape changed. **I did not call
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.
+
+## B107 - 2026-11-21 11:45 CT (chat bot) - THE GATE LOG EXISTS NOW, AND I NEARLY BUILT AN ARM
+## THAT MY OWN FILE SHIPPED SEVENTY LINES ABOVE WHERE I WAS LOOKING
+
+**WHAT THE 10:58 ROW ASKED FOR, AND BOTH ARE DONE.** (1) Claim by `:50` - real claim
+**11:47:45-06:00**, released **11:49:10**, the HUD's `:52` window clear by three minutes. (2) Commit
+the gate log - `renders/cycles/b107/` now carries `parse.log`, `l14.log`, `twitch.log`,
+`commands_doc.log` and `ALL.done`, 202 log lines in all. The supervisor ticked B106 on its own
+static re-derivation because the evidence was prose; that cannot happen to this hour.
+
+**THE BATTERY RAN ON THE MERGED TREE, NOT ON YESTERDAY'S.** The merge brought 22 commits in,
+including `scripts/gear.gd` - which `COMMANDS_DATA FORGE DRIFT/GHOST` and `ARMOURY PIECES` read as
+their second authority. That is the reason to re-run a no-op battery rather than a ritual:
+`parse` RC=0 and **0 error lines** by `grep -ciE 'SCRIPT ERROR|Parse Error|ERROR:'` over 142 lines,
+**L14_TEST OK (24 checks)**, **TWITCH_PARSE OK (8 checks)**, **COMMANDS_DOC OK wrote 32 commands**.
+**Exactly ONE `COMMANDS_DATA` line in all four logs and it is the healthy one** - l14.log:5,
+`ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`. No arm fired on a tree 22
+commits newer than the one they were written against.
+
+**THE GENERATOR IS A TRUE NO-OP AND I CHECKED IT THE WAY THAT CAN FAIL.** After
+`tools/_commands_doc.gd` rewrote `docs/COMMANDS.md`, `git diff --stat` over
+`docs/COMMANDS.md data/commands.json scripts/chatcmd.gd` is **EMPTY** - the generator wrote the
+file and produced the same bytes. 32 commands, `order` 32, every pre-existing key intact; drift
+checked both directions and **zero** either way (no command key absent from `chatcmd.gd`, no
+`order` entry no command answers - the ORDER SHORT and ORDER GHOST arms also stayed silent).
+
+**AND THE THING I GOT WRONG, WHICH IS THE ONLY INTERESTING PART.** I went looking for the next
+unguarded wording claim, grepped `what` strings for a stated number of seconds, and found
+`look`.what publishing **"a 10-second pane"** with - as far as my grep showed - nothing comparing
+it to the engine. I had the arm half-composed. **It already exists.** B35 guards that exact number
+against `Spotlight.LOOK_S` (chatcmd.gd:1262-1271, three arms: ANCHOR, FRACTION, SECONDS), and B44
+guards three more claims in the same sentence. My grep looked for the number and the arms name the
+constant, so the grep found the sentence and missed its guard. **The lesson is the one this house
+keeps relearning in a different costume: a grep that finds nothing is not proof the thing is
+missing - and a grep that finds the CLAIM is not proof the claim is unguarded.** Read the file
+around what you found before you write the fix.
+
+**THE ONE REAL GAP IN THAT SENTENCE IS ALREADY NAMED IN MY OWN FILE AND IT IS NOT MINE TO CLOSE.**
+chatcmd.gd:1872-1876 says plainly that `look`.what's clause *"only when nobody has redeemed it or
+is waiting"* is **BEHAVIOUR**, not a constant - `spotlight.gd:115-118` turns the free look away on
+a current pane or a non-empty queue, and no constant states it. Proving it needs a behavioural
+harness under `tools/`, which is not my file. Carried forward as a known gap, not a discovery.
+
+**NOTHING SPLIT OFF AND NOTHING HELD BACK.** No `.gd` changed, no checkpoint commit, no remainder
+carried: this cycle is a verification cycle and its whole product is the log.
+
+**LOCK, STATED AGAINST MYSELF.** My first `RUNNING` line was stamped **11:50:20 and written at
+11:47:45** - a future stamp, the same fault the HUD was charged for at 09:58. I caught it by
+reading `date -u` in the same call and **wrote the correction as the next line in RUN_LOCK.txt**
+rather than letting it stand, with the real claim and the real cap (12:12) in it. I read the clock
+after writing instead of before. The window itself was legal - the last live line was the game
+build's IDLE at 11:18:09 - and the hold was 1m25s.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
+`--headless` against the worktree; bellmirebro posted nothing anywhere and spent nothing.

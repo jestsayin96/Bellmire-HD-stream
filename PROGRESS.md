@@ -13986,3 +13986,27 @@ MEASURED WHILE I WAS IN THERE, none of it a defect, recorded so the next seat ne
 Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`.** `roster.gd` and `leaderboard_panel.gd` are read-only to me and I changed neither; the ECHO arm reads `SELL_BACK` through the same accessor the RATE arm already used.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account signed into or used, no channel setting read or written.
 L56 (delve-heavy soak) carried again, not started: the lead's own L56 note is still with the supervisor and my windows this hour were 5 and 1 minutes.
+
+## B97 - 2026-11-21 01:45 CT (chat bot) - THE RED HALF OF SATCHEL ECHO, PROVEN THREE WAYS, AND THE TWO UNGATED SITES NAMED BY THE GATE ITSELF
+Took: the WORK_PLAN CHAT BOT row of the 00:58 block - "PROVE THE RED HALF OF SATCHEL ECHO ... perturb one site at a time in a COPY of `data/commands.json` ... A guard that has never fired is not a guard." That is exactly the debt B96 wrote itself and split rather than cross into the HUD's window. Merged `origin/main`: fast-forward `3801e477` -> `508fe6d6` (the six-lane merge b2f21330 plus two plan commits).
+
+**THE RED HALF IS PROVEN. FIVE RUNS OF `tools/_l14_test.gd`, ONE CLAIM, AND THE ARM NAMED THE RIGHT SITE WITH THE RIGHT RATE EVERY TIME.** The pristine bytes were held in memory and restored in a `finally`, so no failure path could leave a perturbation on disk:
+  - **A, baseline (unperturbed)** -> rc=0, `L14_TEST OK (24 checks)`, `no COMMANDS_DATA guard arm fired on the load (0 fired: [])`.
+  - **B, `satchel`.short alone** ("two fifths of shop cost." -> "three tenths of shop cost.") -> rc=1, `L14_TEST FAIL 1 (24 checks)`, `1 fired: ["SATCHEL ECHO"]`, and the error names it: **`COMMANDS_DATA SATCHEL ECHO - 1 site(s) off SELL_BACK 0.4: `satchel`.short says "three tenths" (0.3)`**.
+  - **C, `ask.gold`.reply alone** ("two fifths of shop cost for" -> "a quarter of shop cost for") -> rc=1, FAIL 1, `1 fired: ["SATCHEL ECHO"]`, **`1 site(s) off SELL_BACK 0.4: `ask.gold`.reply says "a quarter" (0.25)`**.
+  - **D, both at once** -> rc=1, FAIL 1, **`2 site(s) off SELL_BACK 0.4: `satchel`.short says "three tenths" (0.3), `ask.gold`.reply says "a quarter" (0.25)`** - two sites, both named, in one line, with the enforced rate beside each published one.
+  - **E, restored** -> rc=0, `L14_TEST OK (24 checks)`, 0 arms, and `data/commands.json` byte-identical to the pre-run bytes (16787 bytes, verified by string compare in the driver and by an empty `git status --porcelain` over `data scripts docs PROGRESS.md` afterwards).
+So the arm is not blind: it reaches both sites no drift arm can see, it counts them correctly, and it falls silent the moment the data is right. B96's silence is now evidence instead of a hope.
+
+**AND THE RUN CORROBORATED B95's FINDING WITHOUT BEING ASKED TO.** In case B the two doc-drift arms stayed GREEN - `docs/COMMANDS.md carries every field the data publishes, verbatim (31 rows; unpublished [])` and `publishes nothing the data does not say (31 rows; stale [])` - with a WRONG rate sitting in `satchel`.short. That is the exact mechanism B96 described in prose, now shown: the generator does not publish `short`, so the published-vs-data arms cannot see a lie in it. The `.what` RATE arm would have caught `.what`; nothing but ECHO catches these two.
+
+CHANGED: `PROGRESS.md` only. No `.gd`, no data, no doc. The arm itself shipped at B96 (`3801e477`) and needed no edit to pass its red proof - proving it required running it, not changing it. `docs/COMMANDS.md` and `data/commands.json` are byte-identical to `origin/main`.
+
+THE LOCK, AND A FAULT OF MY OWN IN IT AGAIN - SMALLER, AND STRUCK IN PLACE: one claim, `RUNNING 01:47:16-06:00` -> `IDLE 01:47:39-06:00`, Godot EMPTY at claim (tasklist 01:46:33, zero Godot lines) and empty at release, no crossing anywhere near the HUD's :52 window. Both timestamps were read from the machine clock. **But the cap figure inside my RUNNING line is wrong arithmetic**: it says "cap claim+6 = 01:52:33" against a claim of 01:47:16, where claim+6 is 01:53:16. I composed the cap from the schedule I had planned before reading the clock - the same root cause as B96's two bad lines, caught one step earlier this time. A `CORRECTION` line sits under the IDLE striking that one derived number and confirming the claim/release reads. Nobody was blocked: the whole window was 23 seconds.
+TWENTY-THREE SECONDS FOR FIVE GODOT RUNS, AND I CHECKED IT RATHER THAN BELIEVING IT - a `--script` run on an already-imported project is ~4 s, where B93's `--quit-after 300` parse was 26.8 s, and the five cases are visibly distinct runs (each prints its own randomised gold line: 43/50/31/30/28 gold for leather). Not one run reported five times.
+
+Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`.** No file of another lane was touched or needed; `SELL_BACK` was read through the accessor the RATE arm already used.
+NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account signed into or used, no channel setting read or written.
+Housekeeping: the driver's `_b97_echo.log` was written at the worktree root and deleted in the same cycle; nothing of mine is left untracked.
+L56 (delve-heavy soak - engine and lock) carried again, not started: the row named the red proof and the window I needed for it was 23 seconds, not a soak.
+Next firing: L56 if the plan's CHAT BOT row leaves it to me, and the `parse_fish()` end-finder hardening carried from B95.

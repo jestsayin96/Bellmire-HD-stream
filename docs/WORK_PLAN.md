@@ -140,8 +140,11 @@
 ##      `uniques`. **I READ THE VALUE OF EVERY ONE OF THEM** rather than judging by the name:
 ##      `bosses.uniques` sounds live and is a sentence about how rare lords are built;
 ##      `world.district_rules` is three sentences of town-planning doctrine. **UNREAD LIVE DATA
-##      KEYS REMAIN ZERO. UNREFERENCED ASSET DIRECTORIES REMAIN ZERO (31 dirs, measured off
-##      assets/ only).** The conclusion has not moved; only the prompt's numbers have.
+##      KEYS REMAIN ZERO. UNREFERENCED ASSET DIRECTORIES REMAIN ZERO** - and the directory count
+##      is **34 with files**, not the 31 the prompt carries. **I WROTE 31 HERE FIRST, COPIED
+##      STRAIGHT OUT OF THE PROMPT, IN THE SAME PARAGRAPH WHERE I WAS CHARGING THE PROMPT WITH
+##      STALE ARITHMETIC** - I caught it before the hour closed, measured it (34), and corrected
+##      it in the same run. The conclusion has not moved; only the prompt's numbers have.
 ##   2. (carried) the prompt's miniboss count line - measure off `tools/art/minibosses.py`, not
 ##      off the prompt.
 ##

@@ -16,9 +16,28 @@ had **not** checked whether the winder was authored even-lit. The team lead
 asked for one number I can defend. Here it is, measured three ways that agree.
 
 **44 non-chibi bodies** - `_report.json` `blank_check` 132 files / 3 = 44, and
-a directory census of `renders/art/minibosses/` gives the same 44 once the 12
-`_chibi` variants and the tag directories (`beadle_even`, `beadle_world`,
-`ferryman_even`, the `_ctl13`/`_el13` scratch pairs) are excluded.
+a directory census of `renders/art/minibosses/` gives the same 44.
+
+**CORRECTION, 20 Nov 22:4x CT. THE NUMBER WAS RIGHT AND THE RECIPE PRINTED FOR
+IT WAS NOT, SO HERE IS ONE THAT REPRODUCES.** The team lead could not rerun the
+census as written, and re-running it myself is how I agree: the original text
+named `_ctl13`/`_el13` scratch pairs, which exist ONLY as untracked directories
+in the art worktree and are on no ref - a reader standing on `main` cannot find
+them - and it omitted `drillmaster_tall`. Measured on `origin/main` just now:
+
+    70 directories under renders/art/minibosses/
+  - 13 whose name CONTAINS `_chibi`   (substring, not suffix: that is what
+       catches `drillmaster_chibi_tall`, which a suffix test misses)
+  -  9 `_`-prefixed tooling directories
+  = 48
+  -  4 lighting/scale tag directories: beadle_even, beadle_world,
+       ferryman_even, drillmaster_tall
+  = 44
+
+The same recipe run in the worktree gives 87/13/23 -> 51, minus those 4 and
+minus the three untracked scratch dirs `bellman_ctl13`, `bellman_el13`,
+`sealer_ctl13` -> 44. Both reach 44; only the second sees the scratch pairs,
+which is precisely the error in the first printing.
 
 Dating every `hero_back.png` by the commit that last wrote it, against
 `cf4ef984` (20 Nov 16:45:28 CT, where `--evenlight` entered `minibossfit.py`),
@@ -89,8 +108,11 @@ it: saturation reads one frame alone and has nothing to compare it to. So
 measure the reference instead - isolate the rightmost opaque column-run (the
 reference stands clear of the miniboss) and read its mean lit colour in every
 frame. **Isolation is checked, not assumed:** the band must be separated by a
-real column gap, and the band came out 180 px wide with 43,8xx-43,9xx lit
-pixels in all sixteen reads, before and after. A band that had swallowed
+real column gap, and the band came out 180 px wide with 43,78x-43,9xx lit
+pixels in all sixteen reads, before and after. (**Corrected 20 Nov 22:4x CT**:
+this first read "43,8xx-43,9xx". Two of the sixteen are 43,786 and 43,789 - the
+team lead counted them and is right. The isolation argument is unaffected,
+which is why the correction is worth making plainly rather than quietly.) A band that had swallowed
 miniboss geometry would not hold that count. If no gap exists the body is
 reported UNRESOLVED and excluded rather than measured as a merged blob; none
 of these eight hit that.

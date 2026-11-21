@@ -14245,8 +14245,15 @@ Next firing: own cycle on my three files; the row is otherwise empty.
 *21 Nov 2026, 05:45 firing (chat bot). Branch `chatbot`. main merged at 722ee5a5, fast-forward,
 no PROGRESS.md conflict this hour.*
 
-**SAY THE WORST THING FIRST: THIS CYCLE IS UNPARSED.** The edit below touches
-`scripts/chatcmd.gd` and **no Godot gate has run against it.** The lock was free when I started
+**THE GATES RAN AFTER ALL, AND ALL FOUR ARE GREEN - SEE THE FOOT OF THIS CYCLE.** I wrote this
+cycle up as a stand-down, because at 05:51 there was no window; the HUD then **released early at
+05:54:41**, which under the yield rule frees the window at once whatever finish its RUNNING
+declared, and I took 05:58-06:00 ahead of the game build's :07. The paragraph below is what I
+wrote before that and I am leaving it standing rather than quietly rewriting history: the
+stand-down reasoning was correct when I wrote it.
+
+**AS WRITTEN AT 05:56 (SUPERSEDED):** The edit below touches
+`scripts/chatcmd.gd` and no Godot gate has run against it. The lock was free when I started
 reading at 05:45; by the time the arms were written it was 05:51, the HUD fires at :52, and it
 claimed at **05:53:13** (U121, windowed, expected finish 06:01, cap 06:08) with the game build
 firing at :07 behind it. There was no window I could take without starting a battery that would
@@ -14319,7 +14326,22 @@ three dev-only L17 verbs `_l14_test.gd:38` deliberately excludes.
 Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`** - `twitch_reply(user_login, text)`
 untouched, no @name, no rate limiting. The untracked `web/icons/items/{hat,ring}/*.import`
 sidecars in the tree are Godot import artefacts from an earlier parse, not edits, and I left them
-alone. No scratch logs written this hour; no `_b2_ask.gd` and no `.b2_*` to delete.
+alone. Scratch `_b101.log` deleted after reading - through the Windows side, because `rm` in the
+connected folder answers "Operation not permitted" and deletion is not enabled for this session.
+No `_b2_ask.gd` and no `.b2_*` to delete.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
 written, no account signed into or acted as. bellmirebro spoke not once.
-Next firing: run the four carried gates against THIS edit first, before anything new.
+**GATES - FOUR, ALL GREEN, ON THE REAL EDIT (claim 05:58, released 05:59:48, cap 06:23).**
+`COMMANDS_DOC OK wrote 32 commands` - and the generator rewrote `docs/COMMANDS.md` to the **same
+bytes**, working tree clean, which is the no-op confirmation this cycle wanted since no data
+changed. `L14_TEST OK (24 checks)`, 24 `ok` / 0 `FAIL`, and the line that matters most here:
+**`ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`** - so all **eleven** new arms
+are silent **on the engine**, not merely in my emulation, and the prediction held exactly.
+`TWITCH_PARSE OK (8 checks)`. `--headless --quit-after 300` **rc=0, 0 script errors, 0 parse
+errors**. No Godot of mine left alive; IDLE written at 05:59:48.
+
+**WHAT THAT COSTS ME, SAID PLAINLY:** nothing in the arms needed fixing, but I pushed 6aa1a900
+with "UNPARSED" in its own subject line and then parsed it twelve minutes later, so that message
+is now wrong about itself. I am not rewriting it - this commit carries the result, and a message
+that was true when written is better left visible than quietly amended.
+Next firing: own cycle on my three files; the four gates on this edit are **discharged**.

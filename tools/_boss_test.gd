@@ -40,7 +40,7 @@ func _process(_dt: float) -> bool:
         _eye = RtsCamera.new()
         _t.add_child(_eye)
         _eye.setup(_t)
-        _check(not _eye.boss_bar.visible, "bar hidden with no lord")
+        _check(_eye.boss_bar == null and get_nodes_in_group("hud_boss").is_empty(), "S89: the eye builds no floating boss card")
         var r: Roster = _t.get("roster")
         var ids := []
         for v in [["2001", "JestFan", "knight"], ["2002", "MossyMage", "mage"], ["2003", "DawnCleric", "cleric"], ["2004", "BigAxe", "barbarian"]]:
@@ -67,7 +67,9 @@ func _process(_dt: float) -> bool:
             var canon: float = float((Bestiary.BOSS_DEFS[String(_find_id(l))] as Dictionary)["h"])
             _check(absf(float(l.def["h"]) - canon * Bestiary.LORD_SCALE) < 0.01, "lord is %.1f m (canon %.1f x %.1f)" % [float(l.def["h"]), canon, Bestiary.LORD_SCALE])
         var hud := _hud()
-        _check(hud != null and hud.card_showing() and hud._card_title.text == String(l.def.get("name", "")) if l else false, "Chronicle name card: %s / %s" % [hud._card_title.text if hud else "-", hud._card_sub.text if hud else "-"])
+        # S89 INVERTED: Mr. E's 10:17 directive item 3 took the boss card out of the Chronicle (HUD U126,
+        # feed_hud.gd:284-287). A lord has risen here, so a card would show if one still existed.
+        _check(hud != null and not hud.card_showing(), "S89: no boss card in the Chronicle as the lord rises (title '%s')" % (hud._card_title.text if hud else "-"))
         root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + "/card.png"))
     if _f > 30 and _seen_at < 0 and _d.lord_fighting() != null:
         _seen_at = _f
@@ -78,10 +80,11 @@ func _process(_dt: float) -> bool:
         _dir_ms = Time.get_ticks_msec() - _seen_ms
         _check(_dir_ms <= 3000, "director cut to the lord %d ms after it rose" % _dir_ms)
     if _seen_at > 0 and _f - _seen_at == 150:
-        _eye.boss_bar.refresh()
         var l: Monster = _d.lord_fighting()
-        var bb := _eye.boss_bar
-        _check(bb.visible and l != null and bb._title.text == String(l.def.get("name", "")), "boss bar up: '%s' %s" % [bb._title.text, bb._num.text])
+        # S89: no floating card while the lord fights; its name and hp live on the lord itself (S88)
+        _check(get_nodes_in_group("hud_boss").is_empty() and root.find_children("BossCard", "", true, false).is_empty(), "S89: no floating boss card while the lord fights")
+        var tg: Label3D = l.get_node_or_null("name_tag") as Label3D if l else null
+        _check(tg != null and tg.text == String(l.def.get("name", "")), "lord's own name plate reads '%s'" % (tg.text if tg else "-"))
         var best: Dictionary = _eye.director._best()
         _check(String(best.get("key", "")).begins_with("lord_") and float(best.get("pri", 0.0)) >= 100.0, "director best %s pri %s" % [best.get("key", ""), best.get("pri", 0)])
     if _seen_at > 0 and (_f - _seen_at) in [152, 300]:
@@ -91,8 +94,7 @@ func _process(_dt: float) -> bool:
         var l: Monster = _d.dun.lord
         if l and is_instance_valid(l):
             l.state = Monster.S.DEAD
-        _eye.boss_bar.refresh()
-        _check(not _eye.boss_bar.visible, "bar gone once the lord is down")
+        _check(get_nodes_in_group("hud_boss").is_empty(), "S89: still no floating boss card once the lord is down")
     if (_seen_at > 0 and _f - _seen_at > 330) or _f > 6000:
         if _seen_at < 0:
             _fails.append("the lord never fought")

@@ -13365,3 +13365,11 @@ Next: rarity row is stale - ask the team lead to strike it; then L74 is whole, s
 Checked at 02:52:50-06:00: last RUNNING line in R's working docs/RUN_LOCK.txt is "RUNNING 02:47:54 (QA tester) - NOT RELEASED", no IDLE from QA follows. The chat bot's 02:50:40 NOTE killed the two hung QA PIDs (15748/17800) and says explicitly it did NOT clear or claim the lock; tasklist shows zero Godot. Under the yield rule a RUNNING stays live until the same lane's IDLE, so I did not claim and launched no Godot.
 Delivered: this stand-down line only; no .gd files touched.
 Next firing: re-read the lock; if QA has written IDLE (or the lock is stale per rule), take the standing item - the rarity row is still owed a team-lead strike, L74 is whole, so open a fresh U-cycle on the next TAKE THIS NEXT HUD item.
+
+## U119 - 2026-11-21 03:5x CST - FILE-ONLY CYCLE: THE parse_fish() END-FINDER ROW IS ALREADY SHIPPED (U76); NO .gd CHANGED, NO GODOT LAUNCHED
+Checked 03:53:06-06:00: R's working RUN_LOCK.txt last line is chat bot B99 "IDLE 03:52:30 - four carried gates all GREEN", Godot empty by tasklist, so the lock was free; I did not claim it because this cycle needed no engine.
+Item: WORK_PLAN HUD row of the 01:58 block ("your own cycle - name it"). I took the parse_fish() brace-aware end-finder I had carried since U116 and the prompt still lists.
+Found: tools/_u71_rarity_guard.gd:110-124 already ends the block with block_end() (brace-aware), and :246-262 carries the U76 END-FINDER RED PROOFS (a "}" in a comment, a nested {"a":1}, a comment "{open}", and an unterminated "{{" that must read as empty). The prompt's wording is stale on this point. Nothing to build.
+Stale items still in the prompt, for the team lead: rarity-hue half of System 2 (ticked U88/U98), parse_fish end-finder (U76).
+Decision for Mr. E: none new (150% banner yield is with the supervisor).
+Next firing: re-read the lock; own cycle - candidate is a windowed shot of every HUD panel at 100/125/150 with a hostile 40-line chat burst to re-check L74 after U117's banner change.

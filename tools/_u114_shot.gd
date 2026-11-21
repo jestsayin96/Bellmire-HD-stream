@@ -1,3 +1,4 @@
+# U129 RETIRED GATE: asserts a floating boss card (hud_boss/BossCard) that S89 removed. Its successor is tools/_u126_regress.gd. Kept for history; do not gate on it.
 extends SceneTree
 ## L21 (Mr. E, Nov 11): the interface over the spotlight panes. THE RULE, checked here in
 ## code: while more than one view is on screen, no HUD element may overlap a pane seam or sit

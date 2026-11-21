@@ -14041,3 +14041,9 @@ NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no accou
 Housekeeping: the driver's `_b97_echo.log` was written at the worktree root and deleted in the same cycle; nothing of mine is left untracked.
 L56 (delve-heavy soak - engine and lock) carried again, not started: the row named the red proof and the window I needed for it was 23 seconds, not a soak.
 Next firing: L56 if the plan's CHAT BOT row leaves it to me, and the `parse_fish()` end-finder hardening carried from B95.
+
+## hub 02:4x CT 21 Nov - standing check (HUB row: web/ unchanged -> stand down)
+- web/ byte-identical to origin/hub and origin/main (git diff --stat empty both). node --check app.js OK.
+- innerHTML code sites: app.js:255 and :301 only (page-owned); other hits are comments (7, 93, 5137, 5178). Zero-hit set: 2 matches, both comment text at app.js:10-11 ("There is no insertAdjacentHTML...") - no code.
+- CSP meta present (1). Sizes: index.html 36889, app.js 379011, style.css 126639 bytes.
+- No READY TO PUBLISH claim. Untracked _hub_ready_shot.png (310881 B) is a pre-existing file in the worktree, named here; delete refused on this machine.

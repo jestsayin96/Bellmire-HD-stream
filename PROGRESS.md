@@ -14805,6 +14805,36 @@ and no access was needed; the path shape changed. **I did not call
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.
 
+## S88 - THE BOSS NAME OVER ITS OWN HEAD: THE GAME-BUILD HALF OF MR. E'S 10:17 DIRECTIVE (21 Nov 2026, 11:07 CST firing)
+Item: the 09:58 TAKE THIS NEXT gave game build a free pick (S87 closed the Gear.ARMOUR ask). Took the
+game-build half of Mr. E's 21 Nov 10:17 directive (supervisor report sup-nov21-1017): "Boss name
+appears as a nameplate over the boss entity's head" - the HUD is removing the NOW FIGHTING card.
+MEASURED BEFORE BUILDING: every lord ALREADY carried a `name_tag` Label3D (monster.gd _label). It was
+not missing - it was WRONG in a way that matters once it is the only title: it carried the epithet
+(`def.note`) as a second line at lord size (font 72, px 0.009). LOOKED AT THE FRAMES (d97, 1080):
+`rattling_host.png` - "a hundred dead men in one harness" ran across the health bar and off both
+edges; `grubmother_uniq.png` - the written variant's note ("no bigger than the base wall, but she
+never stops spilling brood...") ran off the frame entirely. Exactly the viewport-eating text Mr. E
+is clearing off the HUD, re-created over the boss.
+FIX (monster.gd _label, backup monster.gd.bak_s88): the plate is the NAME ONLY, like every other
+creature; boss plates are VERTICAL_ALIGNMENT_BOTTOM so the distance-scaled plate grows UP from its
+anchor and never sinks onto the bar 0.25 m under it. The epithet is not lost: Delve still speaks it
+whole in the Chronicle as the lord rises ("X rises. <note>.", delve.gd:177).
+GATE: tools/_d97_lords.gd grew 6 S88 checks per rising (backup .bak_s88): tag exists, visible, leads
+with the lord's name, ONE line, bottom-aligned, stands above the body. Measured rows, e.g.
+`S88 rattling_host tag y 6.15 body 5.28 bar y 5.90 text The Rattling Host`.
+Before the fix the same gate (first 4 checks) read 222 OK with the two-line text in the rows.
+VERDICTS: D97_LORDS OK 254 checks, 16 risings | parse 0 SCRIPT ERROR / 0 Parse Error |
+OFFFLOOR_VERDICT OK 0 of 2105 | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/15207 PASS | DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+PICTURE after: `rattling_host.png` - one line, "The Rattling Host", clear above the bar.
+NOT DONE / NOT MINE: the HUD removes the card and the Chronicle boss card (HUD lane). Mana Option A
+vs B is undecided by Mr. E - no over-head mana bar was built.
+## C-166 (21 Nov 2026 11:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (10:58 CT block, CONTENT row) gave content: "C-165 ticked. Free C-cycle, your own pick." No miniboss owed: 44 ORDER entries per art's guard, miniboss_feed.by_key holds 44.
+Added (data/lore_lines.json only): epitaphs +12 (936 -> 948), descend +6 (565 -> 571), cleared +6 (550 -> 556), all unique against existing lines (one epitaph duplicate caught and replaced before write), ASCII, plain register, no mechanics, no floor counts; `_note_c166` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c166` only. items/bosses/potions untouched and parse.
+CODE WIRING: none; the three lists are already drawn from at random.
+Next content: C-167.
 ## HUB standing check - 21 Nov 2026 11:4x CT (hub lane, :37 firing)
 - TAKE THIS NEXT gave the hub NO new row: the 10:58 block carries none for hub; the 09:58 block's hub line says "own cycle on your three files, do not publish". Standing check only; nothing shipped in web/.
 - origin/hub:web == origin/main:web == HEAD:web == 02257b2f (measured). gh-pages 05ac2679 / tree 9ca8051e unchanged; I did not touch it.
@@ -14813,3 +14843,64 @@ and no access was needed; the path shape changed. **I did not call
 - NOT claiming READY TO PUBLISH. No publish gate owed.
 - Mount note: the hub folder mounts at $HOME/mnt/bellmire-hub (not "hd adventure/bellmire-hub") on this run.
 - Untracked in W: _hub_ready_shot.png (new, pre-existing, not mine to delete; delete refused on this machine).
+U126 - 2026-11-21 11:5x CST - MR. E'S 10:17 DIRECTIVE, HUD HALF: NO FLOATING MANA STRIP, NO "NOW FIGHTING" BANNER, NO BOSS CARD IN THE CHRONICLE
+Lock: R's WORKING RUN_LOCK.txt at 11:53: last line chat bot B107 IDLE 11:49:10, no Godot alive. Claim 11:53:22 (expected finish 12:03), RELEASED 11:55:14 (IDLE written, Godot empty) - inside :07 and the 15 min cap.
+Item: not the rarity-hue row - Mr. E's live 10:17 directive (supervisor report) overrides HUD layout and was not on hud-ui. hud_dock.gd: HudDock no longer adds FightBanner or ManaStrip to the town (classes left in file, never instantiated; mana is for the hub sheet / game lane's overhead bar). feed_hud.gd: card() is a no-op, so the boss info card never shows and the Chronicle keeps full width for event text.
+Result: headless parse 0 Parse Error / 0 SCRIPT ERROR; windowed tools/_u126_regress.gd (copy of U125's tool) U126_DONE checks=40 fails=0.
+LOOKED AT renders/cycles/20261121_u126/host_s150_1080.png: Chronicle scroll is event text only ("The Hollow King rises. Wreathed in cold fire.") - no card, no mana panel, no NOW FIGHTING banner. REMAINING: a large "The Hollow King 150/150 / Lord of floor 5" HP card still floats top-left in the Director pane. That is scripts/boss_bar.gd:209 - NOT a HUD-owned file. Its owner must remove it (or make it a thin strip flush with the top bar) to finish directive item 2.
+Next firing: re-read lock; if boss_bar.gd is changed upstream, re-run the regress; otherwise take the rarity-hue half of System 2.
+Decision for Mr. E: none (boss_bar.gd owner needs routing by the team lead).
+## B107 - 2026-11-21 11:45 CT (chat bot) - THE GATE LOG EXISTS NOW, AND I NEARLY BUILT AN ARM
+## THAT MY OWN FILE SHIPPED SEVENTY LINES ABOVE WHERE I WAS LOOKING
+
+**WHAT THE 10:58 ROW ASKED FOR, AND BOTH ARE DONE.** (1) Claim by `:50` - real claim
+**11:47:45-06:00**, released **11:49:10**, the HUD's `:52` window clear by three minutes. (2) Commit
+the gate log - `renders/cycles/b107/` now carries `parse.log`, `l14.log`, `twitch.log`,
+`commands_doc.log` and `ALL.done`, 202 log lines in all. The supervisor ticked B106 on its own
+static re-derivation because the evidence was prose; that cannot happen to this hour.
+
+**THE BATTERY RAN ON THE MERGED TREE, NOT ON YESTERDAY'S.** The merge brought 22 commits in,
+including `scripts/gear.gd` - which `COMMANDS_DATA FORGE DRIFT/GHOST` and `ARMOURY PIECES` read as
+their second authority. That is the reason to re-run a no-op battery rather than a ritual:
+`parse` RC=0 and **0 error lines** by `grep -ciE 'SCRIPT ERROR|Parse Error|ERROR:'` over 142 lines,
+**L14_TEST OK (24 checks)**, **TWITCH_PARSE OK (8 checks)**, **COMMANDS_DOC OK wrote 32 commands**.
+**Exactly ONE `COMMANDS_DATA` line in all four logs and it is the healthy one** - l14.log:5,
+`ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`. No arm fired on a tree 22
+commits newer than the one they were written against.
+
+**THE GENERATOR IS A TRUE NO-OP AND I CHECKED IT THE WAY THAT CAN FAIL.** After
+`tools/_commands_doc.gd` rewrote `docs/COMMANDS.md`, `git diff --stat` over
+`docs/COMMANDS.md data/commands.json scripts/chatcmd.gd` is **EMPTY** - the generator wrote the
+file and produced the same bytes. 32 commands, `order` 32, every pre-existing key intact; drift
+checked both directions and **zero** either way (no command key absent from `chatcmd.gd`, no
+`order` entry no command answers - the ORDER SHORT and ORDER GHOST arms also stayed silent).
+
+**AND THE THING I GOT WRONG, WHICH IS THE ONLY INTERESTING PART.** I went looking for the next
+unguarded wording claim, grepped `what` strings for a stated number of seconds, and found
+`look`.what publishing **"a 10-second pane"** with - as far as my grep showed - nothing comparing
+it to the engine. I had the arm half-composed. **It already exists.** B35 guards that exact number
+against `Spotlight.LOOK_S` (chatcmd.gd:1262-1271, three arms: ANCHOR, FRACTION, SECONDS), and B44
+guards three more claims in the same sentence. My grep looked for the number and the arms name the
+constant, so the grep found the sentence and missed its guard. **The lesson is the one this house
+keeps relearning in a different costume: a grep that finds nothing is not proof the thing is
+missing - and a grep that finds the CLAIM is not proof the claim is unguarded.** Read the file
+around what you found before you write the fix.
+
+**THE ONE REAL GAP IN THAT SENTENCE IS ALREADY NAMED IN MY OWN FILE AND IT IS NOT MINE TO CLOSE.**
+chatcmd.gd:1872-1876 says plainly that `look`.what's clause *"only when nobody has redeemed it or
+is waiting"* is **BEHAVIOUR**, not a constant - `spotlight.gd:115-118` turns the free look away on
+a current pane or a non-empty queue, and no constant states it. Proving it needs a behavioural
+harness under `tools/`, which is not my file. Carried forward as a known gap, not a discovery.
+
+**NOTHING SPLIT OFF AND NOTHING HELD BACK.** No `.gd` changed, no checkpoint commit, no remainder
+carried: this cycle is a verification cycle and its whole product is the log.
+
+**LOCK, STATED AGAINST MYSELF.** My first `RUNNING` line was stamped **11:50:20 and written at
+11:47:45** - a future stamp, the same fault the HUD was charged for at 09:58. I caught it by
+reading `date -u` in the same call and **wrote the correction as the next line in RUN_LOCK.txt**
+rather than letting it stand, with the real claim and the real cap (12:12) in it. I read the clock
+after writing instead of before. The window itself was legal - the last live line was the game
+build's IDLE at 11:18:09 - and the hold was 1m25s.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
+`--headless` against the worktree; bellmirebro posted nothing anywhere and spent nothing.

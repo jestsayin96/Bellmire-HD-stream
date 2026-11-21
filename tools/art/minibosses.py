@@ -15823,3 +15823,221 @@ def pitman():
 
 
 BUILDERS.update({"pitman": pitman})
+
+
+# ============================================================ 45 THE TITHER
+CANON.update({
+    "tither": ("Tenthpart", 2.42, (0.44, 0.42, 0.46), (0.96, 0.92, 0.78),
+               "prison", "IT WILL BE PAID - it does not come to kill you and "
+               "it cannot be driven off. It steps into the way with its "
+               "balance up and one hand out flat, and it asks for the tenth "
+               "of what this floor has paid you so far. PAY IT and it stands "
+               "aside that same beat: no blows, no losses, the set piece is "
+               "simply OVER and the floor opens. REFUSE IT and the hand "
+               "closes and it is the hardest thing on this floor, and "
+               "whatever it puts down it takes the whole purse off. THIS IS "
+               "THE ONE FIGHT IN HERE THAT NOBODY HAS TO WIN. Every other "
+               "body in this file is ended by killing it; this one has a "
+               "second door, and the party chooses which. THE COUNT IS THE "
+               "PANS - his weight is already in the low one and the one "
+               "tipped toward you is EMPTY, so a viewer can see what is "
+               "being asked and that it has not been paid.",
+               0.30, "Something ahead is holding a balance up."),
+})
+ORDER = ORDER + ["tither"]
+
+# PER-SLOT MATERIALS, THE SAME ONE RULE AS THE WINDER AND THE PITMAN: the pale
+# things are the ones the mechanic is counted on. Here that is THE BALANCE -
+# the beam, the two pans and the single weight in the low one - because the
+# pans ARE the state of the transaction. THE MAN IS DARK, which is the
+# Moulder's lesson applied on purpose rather than re-learned: this lane has
+# shipped a dark creature lost against its own dark furniture more than once,
+# and the fix that worked was a dark man read against a pale instrument.
+# THE EMPTY PAN'S INSIDE IS THE DARKEST THING ON THE BODY, which is the
+# Pitman's open fault answered in advance: an empty vessel that has a lit
+# interior reads as a lid or a plate, and the one thing this pan must say is
+# NOTHING IS IN IT.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"tither"}
+
+OVERRIDE.update({
+    "tither": {
+        # THE MAN. Prison wool gone grey-green, rough, no sheen. Deliberately
+        # the least interesting value on the body: he is what the balance is
+        # read against.
+        'body': ((0.088, 0.094, 0.086), 0.90, 0.01),
+        # THE HOOD VOID, THE PAN INTERIORS, THE SATCHEL. Near black.
+        'dark': ((0.022, 0.024, 0.026), 0.80, 0.02),
+        # THE BALANCE: worn brass, kept. His instrument is his business and a
+        # working man keeps his instrument - the Drillmaster's gong argument,
+        # and the reason this body's wear is 0.30 and not the prison's own.
+        'bone': ((0.760, 0.650, 0.330), 0.38, 0.52),
+        # Eyes only, and small. Nothing emissive goes on the back of this body:
+        # the back-lamp guard reads back/side chromaticity against the front
+        # view and a rear light source is exactly the fault it was built for.
+        'glow': ((1.00, 0.94, 0.72), 2.2),
+    },
+})
+
+
+def _pan(P, c, r=0.27, deep=0.075, cords_from=None, weight=False):
+    """A SHALLOW HANGING PAN, dark inside, on three real cords.
+
+    THE FAULT THIS SHAPE IS AIMED AT, and it is the one I expect to still be
+    open after pass 1: a pan hangs on cord, and cord at stream distance is
+    under a pixel. If the cords do not read, two pale discs float in the air
+    beside a man and the object is not a balance any more. So the cords are
+    tubes at a radius that survives, there are three of them per pan, and the
+    DROP IS SHORT - the pans hang close under the beam rather than swinging a
+    foot below it, because a short gap is a gap the eye closes itself.
+    """
+    # the pan: a shallow upward-opening cone, pale rim
+    P.add(L.cone(r * 0.52, r, deep, 20), 'bone', loc=(c[0], c[1], c[2]))
+    # the inside, sunk and DARK - this is what says "empty"
+    P.add(L.cone(r * 0.46, r * 0.90, deep * 0.55, 20), 'dark',
+          loc=(c[0], c[1], c[2] + deep * 0.52))
+    if weight:
+        # the tenth already in: one squat pale block, unmistakably ONE thing
+        P.add(L.box(0.17, 0.17, 0.13), 'bone',
+              loc=(c[0], c[1], c[2] + deep * 0.70))
+    if cords_from is not None:
+        for i in range(3):
+            t = TAU * i / 3.0 + 0.4
+            rim = (c[0] + r * 0.88 * math.cos(t), c[1] + r * 0.88 * math.sin(t),
+                   c[2] + deep * 0.45)
+            limb(P, [cords_from, rim], 0.016, 0.014, 'bone')
+
+
+def tither():
+    """IT WILL BE PAID. The 45th body. PASS 1.
+
+    WHY THIS ONE EXISTS, AND WHAT I CHECKED BEFORE I BUILT IT. Mr. E's bar for
+    an invented miniboss is ONE IDEA THAT CHANGES THE FIGHT. I read all 44
+    gimmick strings in this file before designing, and THREE DESIGNS DIED ON
+    THAT READING rather than on taste:
+      - a bellows that blows the line back down the corridor: the WINDER
+        already takes GROUND ("every turn of the drum drags whoever is hooked
+        back toward the mouth"). Same effect, different machine. Dead.
+      - a capstan that re-orders the party: the RELIEF already heaves a
+        quarter turn and brings the whole line round one place. Dead.
+      - a timberman drawing the props so the roof comes down on a count: the
+        SLUICEKEEPER already winds its hazard open A STEP AT A TIME. An
+        escalating room clock is one fight shape, not two. Dead.
+      - and a strongbox silhouette was dead before it was drawn, because the
+        REEVE carries one.
+    What is NOT in the other 44 is an EXIT CONDITION. Every one of them ends
+    when it dies. This one can be ended by paying it, and that is the whole
+    idea: the party - and on a stream, the chat - gets to decide whether the
+    haul or the fight is the cheaper thing. The verb is new, not the monster.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A stooped man in a low hood with a BALANCE held up in
+                         one fist, and the other hand out flat, palm up.
+      WHAT IS IT DOING?  Asking. It is the only body in this file whose pose
+                         is a transaction and not a threat.
+      HOW MANY OF US?    Not a count of us. THE PANS ARE THE COUNT: the far
+                         pan is down and has one pale block in it, the near
+                         pan is up and is EMPTY and dark inside.
+      WHY NOT WALK ROUND? You can. That is the point - and the price of
+                         walking round is in the near pan, where everyone can
+                         see it is not yet.
+
+    WHAT I EXPECT TO GO WRONG, WRITTEN BEFORE I RENDERED IT, so the render can
+    refute me rather than confirm me:
+      1. THE CORDS. See `_pan`. Thin suspension is the most likely thing to
+         disappear, and if it does the pans read as floating discs.
+      2. THE SIDE VIEW, which is where the Pitman's ladder was lost: a beam
+         laid along X is EDGE-ON to the side camera and collapses to a point.
+         The beam is therefore YAWED 34 deg, the same fix that gave the
+         Pitman's ladder its rungs back, so no view has it edge-on.
+      3. THE OPEN HAND. A flat palm is small and faces up - toward nothing.
+         I expect it to read as "holding something" at best. The two pale
+         coins on it are an attempt at rescuing that and may just be clutter;
+         if they are, they should go.
+      4. THE HEIGHT BUDGET. The balance is held above the shoulder, so the
+         body's bounds include the beam and the CANON height of 2.42 m is
+         spent partly on an instrument. The man will therefore read SHORTER
+         than a 2.42 m figure. That is intended - a tithe-taker is not meant
+         to tower - but it is a thing to look at, not assume.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here: minibossgen measures the real footprint
+    against floorgen's own corridor span and lid and the report says it.
+    """
+    P = Parts("tither")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # FRONT IS -Y. lordgen's front camera sits at az 0 -> (0, -1, el), so
+    # everything the mechanic is carried by goes on the -Y half of the body.
+    # ---------------------------------------------------------------- THE MAN
+    _open()
+    for s in (-1, 1):
+        pts = seat([(s * 0.190, 0.015, 0.78), (s * 0.235, -0.030, 0.42),
+                    (s * 0.255, -0.055, 0.085)], 0.136)
+        limb(P, pts, 0.136, 0.114, 'body')
+        P.add(L.box(0.300, 0.44, 0.120), 'body', loc=(s * 0.255, -0.120, 0.060))
+    # torso, stooped FORWARD - he leans in to be paid
+    limb(P, [(0.0, 0.045, 0.74), (0.0, -0.020, 1.08), (0.0, -0.075, 1.40)],
+         0.330, 0.268, 'body')
+    # the back: a hunched cloak over the shoulders. THIS IS THE FACING
+    # ARGUMENT - the Beadle read the same from front and back because its pale
+    # band wrapped the head. Here the back half carries nothing but wool and a
+    # satchel, and everything pale is forward of the shoulder line.
+    P.add(L.sphere(0.320, 0.225, 0.258, 16, 10), 'body', loc=(0.0, 0.165, 1.215))
+    P.add(L.box(0.250, 0.170, 0.215), 'dark', loc=(0.200, 0.175, 0.760))
+    # hood: a low cowl with a dark mouth and two small eyes in it
+    P.add(L.sphere(0.248, 0.252, 0.236, 16, 10), 'body', loc=(0.0, -0.045, 1.585))
+    P.add(L.sphere(0.178, 0.132, 0.158, 14, 9), 'dark', loc=(0.0, -0.205, 1.548))
+    for s in (-1, 1):
+        P.add(L.sphere(0.044, 0.038, 0.042, 9, 7), 'glow',
+              loc=(s * 0.078, -0.300, 1.566))
+    # THE OPEN HAND, palm up, out in front at waist height
+    limb(P, [(-0.265, -0.055, 1.320), (-0.365, -0.285, 1.195),
+             (-0.335, -0.470, 1.140)], 0.112, 0.082, 'body')
+    P.add(L.box(0.215, 0.230, 0.040), 'body', loc=(-0.295, -0.540, 1.130))
+    for dx, dy in ((-0.060, -0.575), (0.035, -0.510)):
+        P.add(L.cone(0.055, 0.055, 0.020, 12), 'bone', loc=(dx - 0.255, dy, 1.158))
+    # THE ARM THAT HOLDS THE BALANCE, up and forward of the shoulder
+    HAND = (0.800, -0.225, 1.330)
+    limb(P, [(0.270, -0.050, 1.340), (0.555, -0.140, 1.350), HAND],
+         0.118, 0.082, 'body')
+    _close("man")
+
+    # ------------------------------------------------------------ THE BALANCE
+    _open()
+    # the ring in his fist, standing up and facing the front camera
+    _ring(P, (HAND[0], HAND[1], HAND[2] + 0.078), 0.070, 'y', 'bone', 0.022, 20)
+    # THE BEAM. Yawed 34 deg so no view is edge-on (trap 2 above), and TILTED
+    # about its own length so the pan that holds his weight is DOWN and the
+    # empty one is UP. Endpoints are computed from the direction vector rather
+    # than left to a rotation order, so the pans can be hung off the exact
+    # ends instead of off an estimate of where they ended up.
+    yaw, tilt, half = math.radians(46.0), math.radians(14.0), 0.480
+    d = Vector((math.cos(yaw) * math.cos(tilt), math.sin(yaw) * math.cos(tilt),
+                math.sin(tilt)))
+    piv = Vector((HAND[0], HAND[1], HAND[2] - 0.030))
+    e_lo, e_hi = piv - d * half, piv + d * half
+    P.raw(L.tube([e_lo, piv, e_hi], [0.030, 0.034, 0.030], 9), 'bone')
+    # the suspension stirrups, one each end
+    for e in (e_lo, e_hi):
+        _ring(P, (e.x, e.y, e.z - 0.040), 0.040, 'y', 'bone', 0.014, 14)
+    # THE PANS. The LOW one is his, and his weight is already in it. The HIGH
+    # one is yours, it is empty, and it is the one on the near side.
+    _pan(P, (e_lo.x, e_lo.y, e_lo.z - 0.250), 0.215, 0.068,
+         cords_from=(e_lo.x, e_lo.y, e_lo.z - 0.050), weight=True)
+    _pan(P, (e_hi.x, e_hi.y, e_hi.z - 0.215), 0.215, 0.068,
+         cords_from=(e_hi.x, e_hi.y, e_hi.z - 0.050), weight=False)
+    _close("balance")
+
+    return P
+
+
+BUILDERS.update({"tither": tither})

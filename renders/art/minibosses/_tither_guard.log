@@ -1,0 +1,13 @@
+RC=0
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--ERR--
+Traceback (most recent call last):
+  File "C:\hd adventure\bellmire-art\tools\art\_backlamp_guard.py", line 79, in <module>
+    from PIL import Image
+ModuleNotFoundError: No module named 'PIL'
+
+DONE

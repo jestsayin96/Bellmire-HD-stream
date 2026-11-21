@@ -4443,3 +4443,146 @@ run and not claimed as done.
   point of damage, mark one occupied cell impassable and cost its occupant one
   beat. **If the engine has no cell-removal mechanic, say so plainly and do
   not invent one** - the body, the fit and the draw are the item.
+
+---
+
+# 45 THE TITHER - "Tenthpart", theme `prison`. 21 Nov 2026, 11:4x-12:4x CT.
+
+**IT WILL BE PAID.** It does not come to kill you and it cannot be driven off.
+It steps into the way with its balance up and one hand out flat and asks for
+the tenth of what this floor has paid you so far. **Pay it and it stands aside
+that same beat** - no blows, no losses, the set piece is simply over. Refuse it
+and the hand closes and it is the hardest thing on the floor, and whatever it
+puts down it takes the whole purse off.
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `tither` | Tenthpart | 2.42 | prison | **IT WILL BE PAID** - a tenth of the haul and it stands aside; refuse and it is the hardest thing here | 0.30 | 2.39 |
+
+## WHAT I CHECKED BEFORE I BUILT IT, AND THE THREE DESIGNS IT KILLED
+
+The bar is ONE IDEA THAT CHANGES THE FIGHT, so the first work of the run was
+reading **all 44 existing gimmick strings out of `minibosses.py`** - not the
+prompt's summary of them, which was nine bodies out of date and said 33.
+**`ast.parse` gives ORDER 44 entries, 44 unique**, and I read every `IT ...`
+string in the file. Three designs died on that reading and one died before it
+was drawn:
+
+- **a bellows that blows the line back down the corridor.** The **WINDER**
+  already takes GROUND: *"every turn of the drum drags whoever is hooked back
+  toward the mouth of the chamber"*. Same effect, different machine. Dead.
+- **a capstan that re-orders the party.** The **RELIEF** already heaves a
+  quarter turn and brings the whole line round one place. Dead.
+- **a timberman drawing the props so the roof comes down on a count.** The
+  **SLUICEKEEPER** already winds its hazard open *"a step at a time"*. An
+  escalating room clock is one fight shape, not two. Dead.
+- **a strongbox silhouette** was dead before it was drawn: the **REEVE**
+  carries one (`_strongbox`), and the **TALLYMAN** already owns counting.
+
+**What is NOT in the other 44 is an EXIT CONDITION.** Every one of them ends
+when it dies. This one has a second door, and the party - on a stream, the
+chat - chooses which. The verb is new, not the monster. That is the whole
+claim being made for it and it is the only one.
+
+## THE FIVE PASSES, AND WHICH OF MY OWN PREDICTIONS WERE REFUTED
+
+I wrote four predicted faults into the builder docstring **before** rendering,
+so the picture could refute me rather than confirm me. Two were wrong:
+
+- **REFUTED - "the cords will not read."** Three tubes per pan at r 0.016 read
+  cleanly in every view, including at hero-sheet size.
+- **REFUTED - "the beam will be edge-on in the side view"** (the Pitman's
+  ladder fault). The 34 deg yaw answered it at pass 1 and it never recurred.
+- **CONFIRMED - "the open palm will not read as a hand."** Still true after
+  five passes. See the open faults below.
+- **CONFIRMED - "the balance eats the height budget."** The man reads shorter
+  than a 2.42 m figure because the instrument is inside the bounds.
+
+| pass | change | what the picture said |
+|---|---|---|
+| 1 | first build | balance reads; **the beam cut straight across the hood in BOTH views** and the low pan hid the asking hand |
+| 2 | A: balance out on a straight arm; B: hump shrunk; C: legs shortened, torso thickened | front **clear**; **side still had the beam across the head** - a fix aimed at one camera is not a fix |
+| 3 | E: balance dropped to chest height; F: eyes enlarged and moved forward | both views **clear**; eyes read head-on for the first time, **but pass 3 put them proud of the cowl and from the side they read as two pale lumps on the rim** |
+| 4 | G: eyes pulled back to the mouth of the void | the fault **pass 3 itself introduced**, corrected |
+| 5 | H: every radius up, stance wider | **only the hero-beside render could show this one** - see below |
+
+**THE FIT RENDER EARNED ITS KEEP AT PASS 5.** Beside the real posed KayKit
+Knight the body was **SPINDLY**: the heroes in this game are chibi - thick
+limbs, heavy boots, big head - and a realistically-proportioned figure next to
+one reads as a different art language rather than as a monster. Nothing in the
+body-only sheet showed it; the pair did. Pass 5 raises every radius and widens
+the stance. It is **closer** to the register now, not identical, and the
+figure is still the leaner of the two on purpose.
+
+## THE NUMBERS, AND WHAT THEY DO NOT SAY
+
+- `minibossgen`: **ok true, blank [], errors [], frame-edge clean.** Span
+  **2.39 m CORRIDOR-SAFE**, **UNDER-LID**, **4 meshes / 1230 faces**.
+- `minibossfit`: **verdict GREEN, ok true, errors []**. `pairs.tither`
+  creature_h 2.42, hero_h 2.45, **ratio 0.99**, pair_w 4.27, fits_frame true,
+  all three views `proves: true`, `seen: 1.0`.
+- `_backlamp_guard`: **GREEN, audited 45, red [], calibration pair still
+  splits** (bad 0.20386 / good 0.06788, so the red arm fired and the verdict
+  is earned). **Tither back distance 0.08541** against the 0.1550 cap, side
+  0.01869, min ground 3537 px - **rank 7 of 45, and the worst body is still
+  the boiler at 0.11890, not this one.** Nothing emissive was put on the back
+  of this body on purpose, which is the decision that number is measuring.
+- **A NOTE ON THAT GUARD, WHICH IS MINE FROM THE 10:4x RUN:** it imports PIL
+  at module scope, so **it cannot be run through the Blender bridge** -
+  Blender has numpy and no PIL, and cruzader has no system python. It runs
+  fine under `python3` on the Linux bridge, which is how it was run here. Not
+  a wrong answer, but a seat that reaches for it from the Windows side will
+  get `ModuleNotFoundError` and should not read that as a failed audit.
+
+**AND `seen: 1.0` ON EVERY VIEW STILL DOES NOT SAY THE BODY READS**, which is
+why the faults below come off the pictures and not off the register.
+
+## STILL WRONG AFTER PASS 5 - WRITTEN DOWN RATHER THAN HIDDEN
+
+Every number above is green for all of these.
+
+- **THE OPEN HAND DOES NOT READ AS A HAND.** It reads as a small tray or a
+  bracket stuck to his left hip with two discs on it. This is half the pose -
+  the half that says *transaction* rather than *threat* - and it is the one
+  predicted fault that five passes did not fix. It wants fingers, or a
+  forearm turned so the palm faces the camera, or to be dropped for a
+  different asking gesture.
+- **THE HEAD READS AS A MASK, NOT A COWL.** A dark dome with two pale discs
+  in a dark void. It carries at distance and it gives the body its facing,
+  but the hood's silhouette is not distinguishable from a helmet.
+- **A DARK WEDGE ON THE LOWER TORSO.** Visible front and side; it is the dark
+  satchel plus the body's own self-shadow, and in the side view it reads as a
+  hole in him rather than as a bag. I have not proved which of the two
+  dominates and I am not asserting it.
+- **THE BACK HUMP IS AMBIGUOUS.** From behind it reads as a lumpy shoulder
+  bag rather than as a stooped cloak.
+- **THE ARMS ARE SHORT** relative to the pass-5 body, and the balance ring now
+  sits very close to the end of the right arm.
+
+**THE FACING TEST PASSES**, which is the thing the Beadle failed: from behind
+there are no eyes, no face, no pale band wrapping the head - a plain dome, the
+hump, the satchel and the balance seen from the rear. Front and back are not
+the same picture.
+
+### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
+
+- `scripts/bestiary.gd`: `assets/monsters/minibosses/tither.glb`, **STATIC** -
+  a `model` path and **NO `anims` entry**. `h = 2.42`, art's measured number;
+  do not re-derive it.
+- theme **`prison`** for the set-piece roll (joins the Gaoler; prison was the
+  thinnest of the fourteen themes at two bodies, and is now three).
+- **CORRIDOR-SAFE at 2.39 m, UNDER-LID. No spawn gate needed, not
+  room-locked.**
+- `MB_FIT["tither"]`: ratio **0.99**, tag **"prison"**, 3 proving views -
+  **copy it from the register, do not re-derive it.**
+- **HOLD `MB_NAME["tither"]`** until content writes `by_key.tither`, the same
+  way the Winder and the Pitman are held. The canon name is **"Tenthpart"**.
+- **THE MECHANIC NEEDS A CHOICE, NOT A STAT**, and it is the only miniboss
+  that does. Cheapest honest version: when the set piece resolves, offer the
+  party one extra option - *pay the tenth* - priced off the floor's haul so
+  far; taking it ends the encounter with no combat round and no loss, and
+  declining it applies whatever "hardest thing on the floor" means in the
+  engine already. **If there is no way to end a set piece other than by
+  killing it, say so plainly and do not invent one** - the body, the fit and
+  the draw are the item, and the second door can wait for an engine that has
+  one.

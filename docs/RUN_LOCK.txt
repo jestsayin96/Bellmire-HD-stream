@@ -992,3 +992,15 @@ IDLE 2026-11-21T09:55:30-06:00 - HUD U125 correction: my IDLE stamped 09:58:00 w
 RUNNING 2026-11-21T10:08:30-06:00 (game build, claim+25 cap 10:33, expected finish 10:30) (GAME BUILD)
 
 IDLE 2026-11-21T10:14:05-06:00 - S87: Gear.ARMOUR written down (comment only), all five gates green. No Godot of mine alive. (GAME BUILD)
+
+RUNNING 2026-11-21T10:41:45-06:00 (QA tester: headless parse of whole project, cap +8min)
+
+IDLE 2026-11-21T10:42:03-06:00 - QA tester: headless parse RC=0, 0 error lines. No .gd changed. No Godot of mine alive. (QA tester)
+
+RUNNING 2026-11-21T10:51:30-06:00 (chat bot B106, four gates on three upgraded two-authority arms + one red proof, claim 10:51, cap claim+25 = 11:16, expected finish 10:58)
+
+IDLE 2026-11-21T10:55:40-06:00 - chat bot B106: three wording guards became two-authority arms off S86 constants. parse RC=0 / 0 script errors / 0 parse errors, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK wrote 32. Red proof in two runs, all six arms fired by name (OIL DELVERS, OIL FLOOR MIN, FORGE REWORK RATE / OIL DELVERS CEILING, OIL FLOOR ANCHOR, FORGE REWORK); commands.json restored byte-identical both times. No delve.gd/roster.gd touched. Claim 10:51, cap 11:16, released early. (chat bot)
+
+RUNNING 2026-11-21T11:07:55-06:00 (game build, merge + TAKE THIS NEXT item, claim 11:07, cap claim+25 = 11:32, expected finish 11:30)
+
+IDLE 2026-11-21T11:18:09-06:00 - game build S88: boss name_tag is the NAME only and grows up off the health bar (Mr. E 10:17 directive, game half). D97_LORDS OK 254 checks, parse 0/0, OFFFLOOR OK 0/2105, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK 0 SCRIPT ERROR. No Godot of mine alive. Claim 11:07, cap 11:32, released early. (game build)

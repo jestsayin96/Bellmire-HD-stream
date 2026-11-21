@@ -1,0 +1,282 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+  ok   file: hollow_king is in the lesser bag in data/bosses.json and in the code
+  ok   file: grubmother is in the lesser bag in data/bosses.json and in the code
+  ok   file: rattling_host is in the lesser bag in data/bosses.json and in the code
+  ok   file: nightwing is in the lesser bag in data/bosses.json and in the code
+  ok   file: gravewyrm is in the greater bag in data/bosses.json and in the code
+  ok   file: ossuary_lord is in the greater bag in data/bosses.json and in the code
+  ok   file: pale_duchess is in the greater bag in data/bosses.json and in the code
+  ok   file: mourncoil is in the greater bag in data/bosses.json and in the code
+  ok   file: all eight lords have a row in data/bosses.json lesser/greater (8)
+  ok   file: no lord row the code cannot match ([])
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone bowman, 1 bone sentinel, 1 skeleton mage, 1 risen bones, 1 bone bowman.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   hollow_king: a lord rose on the boss floor
+  ok   hollow_king: it is the lord the bag was set for (hollow_king)
+  ok   hollow_king: rises in ITS OWN model (hollow_king.glb)
+  ok   hollow_king: the model loaded
+  ok   hollow_king: stands 5.04m vs art's 4.20m x 1.2 x size 1.00 = 5.04m
+  ok   hollow_king: the Chronicle names it as it rises ("The Hollow King rises.")
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 1 bone sentinel, 1 cave spider, 2 hollowed skeleton warriors.
+FEED The Hollow King, Thrice-Kindled rises. Its cold fire clings - the ground it crosses stays burning behind it.
+FEED The guild has put down The Hollow King before. Not this one.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   hollow_king / The Hollow King, Thrice-Kindled: a lord rose on the boss floor
+  ok   hollow_king / The Hollow King, Thrice-Kindled: it is the lord the bag was set for (hollow_king)
+  ok   hollow_king / The Hollow King, Thrice-Kindled: rises in ITS OWN model (hollow_king.glb)
+  ok   hollow_king / The Hollow King, Thrice-Kindled: the model loaded
+  ok   hollow_king / The Hollow King, Thrice-Kindled: stands 5.31m vs art's 4.20m x 1.2 x size 1.05 = 5.31m
+  ok   hollow_king / The Hollow King, Thrice-Kindled: hp is the FILE's 175 x depth
+  ok   hollow_king / The Hollow King, Thrice-Kindled: the Chronicle names it as it rises ("The Hollow King, Thrice-Kindled rises.")
+  ok   hollow_king / The Hollow King, Thrice-Kindled: it rises AS the written variant
+  ok   hollow_king / The Hollow King, Thrice-Kindled: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 1 hollowed skeleton warrior, 1 hollowed bone sentinel, 2 bone bowmans.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   grubmother: a lord rose on the boss floor
+  ok   grubmother: it is the lord the bag was set for (grubmother)
+  ok   grubmother: rises in ITS OWN model (grubmother.glb)
+  ok   grubmother: the model loaded
+  ok   grubmother: stands 5.40m vs art's 4.50m x 1.2 x size 1.00 = 5.40m
+  ok   grubmother: hp is the FILE's 230 x depth
+  ok   grubmother: speed is the FILE's 1.8
+  ok   grubmother: the Chronicle names it as it rises ("The Grubmother rises.")
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 4 bone bowmans, 1 bone sentinel.
+FEED The Grubmother, Overfull rises. No bigger than the base wall, but she never stops spilling brood - it keeps replacing itself.
+FEED The guild has put down The Grubmother before. Not this one.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   grubmother / The Grubmother, Overfull: a lord rose on the boss floor
+  ok   grubmother / The Grubmother, Overfull: it is the lord the bag was set for (grubmother)
+  ok   grubmother / The Grubmother, Overfull: rises in ITS OWN model (grubmother.glb)
+  ok   grubmother / The Grubmother, Overfull: the model loaded
+  ok   grubmother / The Grubmother, Overfull: stands 5.40m vs art's 4.50m x 1.2 x size 1.00 = 5.40m
+  ok   grubmother / The Grubmother, Overfull: hp is the FILE's 230 x depth
+  ok   grubmother / The Grubmother, Overfull: speed is the FILE's 1.4
+  ok   grubmother / The Grubmother, Overfull: the Chronicle names it as it rises ("The Grubmother, Overfull rises.")
+  ok   grubmother / The Grubmother, Overfull: it rises AS the written variant
+  ok   grubmother / The Grubmother, Overfull: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 hollowed risen bones, 1 drowned risen bones, 1 hollowed bone bowman.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rattling_host: a lord rose on the boss floor
+  ok   rattling_host: it is the lord the bag was set for (rattling_host)
+  ok   rattling_host: rises in ITS OWN model (rattling_host.glb)
+  ok   rattling_host: the model loaded
+  ok   rattling_host: stands 5.28m vs art's 4.40m x 1.2 x size 1.00 = 5.28m
+  ok   rattling_host: the Chronicle names it as it rises ("The Rattling Host rises.")
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned bone sentinel, 1 drowned bone bowman, 1 cave spider, 1 hollowed bone sentinel, 1 skeleton warrior.
+FEED The Rattling Host, Unburdened rises. Sheds its dead early and often - a thinning crowd that will not thin.
+FEED The guild has put down The Rattling Host before. Not this one.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED FitRattlingHost rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   rattling_host / The Rattling Host, Unburdened: a lord rose on the boss floor
+  ok   rattling_host / The Rattling Host, Unburdened: it is the lord the bag was set for (rattling_host)
+  ok   rattling_host / The Rattling Host, Unburdened: rises in ITS OWN model (rattling_host.glb)
+  ok   rattling_host / The Rattling Host, Unburdened: the model loaded
+  ok   rattling_host / The Rattling Host, Unburdened: stands 5.11m vs art's 4.40m x 1.2 x size 0.97 = 5.11m
+  ok   rattling_host / The Rattling Host, Unburdened: hp is the FILE's 150 x depth
+  ok   rattling_host / The Rattling Host, Unburdened: the Chronicle names it as it rises ("The Rattling Host, Unburdened rises.")
+  ok   rattling_host / The Rattling Host, Unburdened: it rises AS the written variant
+  ok   rattling_host / The Rattling Host, Unburdened: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 2 skeleton warriors, 1 drowned bone sentinel, 1 bone bowman.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   nightwing: a lord rose on the boss floor
+  ok   nightwing: it is the lord the bag was set for (nightwing)
+  ok   nightwing: rises in ITS OWN model (nightwing.glb)
+  ok   nightwing: the model loaded
+  ok   nightwing: stands 3.84m vs art's 3.20m x 1.2 x size 1.00 = 3.84m
+  ok   nightwing: hp is the FILE's 110 x depth
+  ok   nightwing: speed is the FILE's 6.6
+  ok   nightwing: the Chronicle names it as it rises ("Nightwing rises.")
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton warrior, 1 bone sentinel, 1 drowned cave spider, 1 bone bowman, 1 hollowed bone sentinel.
+FEED Nightwing, the Famished rises. Faster and frailer - it swoops twice before you hear the first.
+FEED The guild has put down Nightwing before. Not this one.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   nightwing / Nightwing, the Famished: a lord rose on the boss floor
+  ok   nightwing / Nightwing, the Famished: it is the lord the bag was set for (nightwing)
+  ok   nightwing / Nightwing, the Famished: rises in ITS OWN model (nightwing.glb)
+  ok   nightwing / Nightwing, the Famished: the model loaded
+  ok   nightwing / Nightwing, the Famished: stands 3.59m vs art's 3.20m x 1.2 x size 0.93 = 3.59m
+  ok   nightwing / Nightwing, the Famished: hp is the FILE's 90 x depth
+  ok   nightwing / Nightwing, the Famished: speed is the FILE's 7.4
+  ok   nightwing / Nightwing, the Famished: the Chronicle names it as it rises ("Nightwing, the Famished rises.")
+  ok   nightwing / Nightwing, the Famished: it rises AS the written variant
+  ok   nightwing / Nightwing, the Famished: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 7; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 mossbacked pale cutthroat, 2 veilstruck marrow hewers, 1 emberbound bone bowman, 1 scarborn risen bones, 3 emberbound blood wasps.
+FEED The Gravewyrm rises. The thing the dungeon was built to hold.
+FEED The dungeon was built around this, and it knows it.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   gravewyrm: a lord rose on the boss floor
+  ok   gravewyrm: it is the lord the bag was set for (gravewyrm)
+  ok   gravewyrm: rises in ITS OWN model (gravewyrm.glb)
+  ok   gravewyrm: the model loaded
+  ok   gravewyrm: stands 10.80m vs art's 9.00m x 1.2 x size 1.00 = 10.80m
+  ok   gravewyrm: the Chronicle names it as it rises ("The Gravewyrm rises.")
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 duskforged skeleton mage, 3 gorged blood wasps, 3 emberbound blood wasps, 1 ash wight.
+FEED The Gravewyrm, Half-Woken rises. Only half risen - slower and softer in the body, but its breath comes deep and ill-tempered.
+FEED The guild has put down The Gravewyrm before. Not this one.
+FEED The dungeon was built around this, and it knows it.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   gravewyrm / The Gravewyrm, Half-Woken: a lord rose on the boss floor
+  ok   gravewyrm / The Gravewyrm, Half-Woken: it is the lord the bag was set for (gravewyrm)
+  ok   gravewyrm / The Gravewyrm, Half-Woken: rises in ITS OWN model (gravewyrm.glb)
+  ok   gravewyrm / The Gravewyrm, Half-Woken: the model loaded
+  ok   gravewyrm / The Gravewyrm, Half-Woken: stands 10.36m vs art's 9.00m x 1.2 x size 0.96 = 10.36m
+  ok   gravewyrm / The Gravewyrm, Half-Woken: hp is the FILE's 230 x depth
+  ok   gravewyrm / The Gravewyrm, Half-Woken: attack is the FILE's 26 x depth
+  ok   gravewyrm / The Gravewyrm, Half-Woken: the Chronicle names it as it rises ("The Gravewyrm, Half-Woken rises.")
+  ok   gravewyrm / The Gravewyrm, Half-Woken: it rises AS the written variant
+  ok   gravewyrm / The Gravewyrm, Half-Woken: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 gorged grave-whelp, 1 veilstruck scar adder, 3 emberbound gloom bats, 3 scarborn blood wasps.
+FEED The Ossuary Lord rises. It does not hurry; it does not need to.
+FEED It has waited a very long time. A little longer is nothing.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   ossuary_lord: a lord rose on the boss floor
+  ok   ossuary_lord: it is the lord the bag was set for (ossuary_lord)
+  ok   ossuary_lord: rises in ITS OWN model (ossuary_lord.glb)
+  ok   ossuary_lord: the model loaded
+  ok   ossuary_lord: stands 8.40m vs art's 7.00m x 1.2 x size 1.00 = 8.40m
+  ok   ossuary_lord: the Chronicle names it as it rises ("The Ossuary Lord rises.")
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 7; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 emberbound silk mother, 1 sporeblown pit wyrm, 1 veilstruck bone bowman, 1 emberbound grave-whelp, 1 veilstruck risen bones, 1 gorged skeleton warrior, 1 veilstruck imp, 1 mossbacked grave-whelp.
+FEED The Ossuary Lord, Unending rises. It raises its bones faster than any party can lay them down.
+FEED The guild has put down The Ossuary Lord before. Not this one.
+FEED It has waited a very long time. A little longer is nothing.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   ossuary_lord / The Ossuary Lord, Unending: a lord rose on the boss floor
+  ok   ossuary_lord / The Ossuary Lord, Unending: it is the lord the bag was set for (ossuary_lord)
+  ok   ossuary_lord / The Ossuary Lord, Unending: rises in ITS OWN model (ossuary_lord.glb)
+  ok   ossuary_lord / The Ossuary Lord, Unending: the model loaded
+  ok   ossuary_lord / The Ossuary Lord, Unending: stands 8.65m vs art's 7.00m x 1.2 x size 1.03 = 8.65m
+  ok   ossuary_lord / The Ossuary Lord, Unending: hp is the FILE's 360 x depth
+  ok   ossuary_lord / The Ossuary Lord, Unending: the Chronicle names it as it rises ("The Ossuary Lord, Unending rises.")
+  ok   ossuary_lord / The Ossuary Lord, Unending: it rises AS the written variant
+  ok   ossuary_lord / The Ossuary Lord, Unending: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 6; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 silk mother, 1 bone sentinel, 1 sporeblown risen bones, 1 skeleton mage, 1 veilstruck gravecaller, 1 veilstruck lost delver, 1 duskforged silk mother, 1 emberbound silk mother.
+FEED The Pale Duchess rises. She opens throats, not doors.
+FEED A lady laughs somewhere ahead, very politely.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   pale_duchess: a lord rose on the boss floor
+  ok   pale_duchess: it is the lord the bag was set for (pale_duchess)
+  ok   pale_duchess: rises in ITS OWN model (pale_duchess.glb)
+  ok   pale_duchess: the model loaded
+  ok   pale_duchess: stands 5.52m vs art's 4.60m x 1.2 x size 1.00 = 5.52m
+  ok   pale_duchess: attack is the FILE's 27 x depth
+  ok   pale_duchess: the Chronicle names it as it rises ("The Pale Duchess rises.")
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 8; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 2 veilstruck marrow hewers, 1 wraithtouched skeleton warrior, 3 veilstruck blood wasps, 1 scarborn ash wight, 1 sporeblown ash wight.
+FEED The Pale Duchess, Unmasked rises. No patience left - she opens throats on the first pass and does not curtsy.
+FEED The guild has put down The Pale Duchess before. Not this one.
+FEED A lady laughs somewhere ahead, very politely.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   pale_duchess / The Pale Duchess, Unmasked: a lord rose on the boss floor
+  ok   pale_duchess / The Pale Duchess, Unmasked: it is the lord the bag was set for (pale_duchess)
+  ok   pale_duchess / The Pale Duchess, Unmasked: rises in ITS OWN model (pale_duchess.glb)
+  ok   pale_duchess / The Pale Duchess, Unmasked: the model loaded
+  ok   pale_duchess / The Pale Duchess, Unmasked: stands 5.33m vs art's 4.60m x 1.2 x size 0.96 = 5.33m
+  ok   pale_duchess / The Pale Duchess, Unmasked: hp is the FILE's 180 x depth
+  ok   pale_duchess / The Pale Duchess, Unmasked: attack is the FILE's 31 x depth
+  ok   pale_duchess / The Pale Duchess, Unmasked: the Chronicle names it as it rises ("The Pale Duchess, Unmasked rises.")
+  ok   pale_duchess / The Pale Duchess, Unmasked: it rises AS the written variant
+  ok   pale_duchess / The Pale Duchess, Unmasked: the Chronicle marks it as a version of the lord
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 3; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 3 scarborn blood wasps, 1 emberbound silk mother, 1 duskforged silk mother, 3 gorged blood wasps.
+FEED Mourncoil rises. Frost comes off it in sheets.
+FEED Breath steams. Then the steam freezes.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   mourncoil: a lord rose on the boss floor
+  ok   mourncoil: it is the lord the bag was set for (mourncoil)
+  ok   mourncoil: rises in ITS OWN model (mourncoil.glb)
+  ok   mourncoil: the model loaded
+  ok   mourncoil: stands 12.00m vs art's 10.00m x 1.2 x size 1.00 = 12.00m
+  ok   mourncoil: the Chronicle names it as it rises ("Mourncoil rises.")
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 6; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 emberbound lost delver, 2 gorged pit wyrms, 1 skeleton warrior, 1 emberbound silk mother, 3 wraithtouched blood wasps.
+FEED Mourncoil, the Deep Freeze rises. Frost in sheets and the whole floor going to ice - everything slows but it.
+FEED The guild has put down Mourncoil before. Not this one.
+FEED Breath steams. Then the steam freezes.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+  ok   mourncoil / Mourncoil, the Deep Freeze: a lord rose on the boss floor
+  ok   mourncoil / Mourncoil, the Deep Freeze: it is the lord the bag was set for (mourncoil)
+  ok   mourncoil / Mourncoil, the Deep Freeze: rises in ITS OWN model (mourncoil.glb)
+  ok   mourncoil / Mourncoil, the Deep Freeze: the model loaded
+  ok   mourncoil / Mourncoil, the Deep Freeze: stands 12.27m vs art's 10.00m x 1.2 x size 1.02 = 12.27m
+  ok   mourncoil / Mourncoil, the Deep Freeze: hp is the FILE's 320 x depth
+  ok   mourncoil / Mourncoil, the Deep Freeze: the Chronicle names it as it rises ("Mourncoil, the Deep Freeze rises.")
+  ok   mourncoil / Mourncoil, the Deep Freeze: it rises AS the written variant
+  ok   mourncoil / Mourncoil, the Deep Freeze: the Chronicle marks it as a version of the lord
+D97 ROWS:
+  hollow_king floor 5 model hollow_king.glb 5.04m hp 150 atk 15 spd 3.6 (file row: ["name", "bag"])
+  hollow_king / The Hollow King, Thrice-Kindled floor 5 model hollow_king.glb 5.31m hp 175 atk 15 spd 3.6 (file row: ["name", "shape", "hp"])
+  grubmother floor 5 model grubmother.glb 5.40m hp 230 atk 10 spd 1.8 (file row: ["name", "hp", "speed", "shape", "bag"])
+  grubmother / The Grubmother, Overfull floor 5 model grubmother.glb 5.40m hp 230 atk 10 spd 1.4 (file row: ["name", "shape", "hp", "speed"])
+  rattling_host floor 5 model rattling_host.glb 5.28m hp 165 atk 14 spd 3.9 (file row: ["name", "bag"])
+  rattling_host / The Rattling Host, Unburdened floor 5 model rattling_host.glb 5.11m hp 150 atk 14 spd 3.9 (file row: ["name", "shape", "hp"])
+  nightwing floor 5 model nightwing.glb 3.84m hp 110 atk 19 spd 6.6 (file row: ["name", "hp", "speed", "shape", "bag"])
+  nightwing / Nightwing, the Famished floor 5 model nightwing.glb 3.59m hp 90 atk 19 spd 7.4 (file row: ["name", "shape", "hp", "speed"])
+  gravewyrm floor 10 model gravewyrm.glb 10.80m hp 332 atk 26 spd 3.0 (file row: ["name", "bag"])
+  gravewyrm / The Gravewyrm, Half-Woken floor 10 model gravewyrm.glb 10.36m hp 294 atk 31 spd 3.0 (file row: ["name", "shape", "hp", "attack"])
+  ossuary_lord floor 10 model ossuary_lord.glb 8.40m hp 422 atk 21 spd 4.4 (file row: ["name", "bag"])
+  ossuary_lord / The Ossuary Lord, Unending floor 10 model ossuary_lord.glb 8.65m hp 460 atk 21 spd 4.4 (file row: ["name", "shape", "hp"])
+  pale_duchess floor 10 model pale_duchess.glb 5.52m hp 256 atk 32 spd 4.8 (file row: ["name", "attack", "shape", "bag"])
+  pale_duchess / The Pale Duchess, Unmasked floor 10 model pale_duchess.glb 5.33m hp 230 atk 37 spd 4.8 (file row: ["name", "shape", "hp", "attack"])
+  mourncoil floor 10 model mourncoil.glb 12.00m hp 384 atk 29 spd 3.0 (file row: ["name", "bag"])
+  mourncoil / Mourncoil, the Deep Freeze floor 10 model mourncoil.glb 12.27m hp 409 atk 29 spd 3.0 (file row: ["name", "shape", "hp"])
+D97 no-model lords: []
+D97_LORDS OK 139 checks, 16 risings

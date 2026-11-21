@@ -125,6 +125,23 @@ func _check_and_clear() -> void:
 	var size := float(m.def.get("uniq_size", 1.0))
 	var want := art_z * Bestiary.LORD_SCALE * size
 	_ok(art_z > 0.0 and absf(mh - want) <= want * 0.03, "%s: stands %.2fm vs art's %.2fm x %.1f x size %.2f = %.2fm" % [tag, mh, art_z, Bestiary.LORD_SCALE, size, want])
+	## S88 (Mr. E, 21 Nov 10:17 directive): the boss title leaves the HUD, so the lord's NAME OVER
+	## ITS OWN HEAD is now the only place a viewer reads it. Gate it: the tag exists, is shown,
+	## leads with the lord's own name, and stands ABOVE the body (not inside a scaled-up lord).
+	var nt := m.get_node_or_null("name_tag") as Label3D
+	_ok(nt != null, "%s: S88 carries a name_tag over its head" % tag)
+	if nt:
+		var first_line := nt.text.split("\n")[0]
+		_ok(nt.visible, "%s: S88 the name_tag is visible" % tag)
+		_ok(first_line == String(m.def.get("name", "")), "%s: S88 the tag leads with its name (\"%s\")" % [tag, first_line])
+		_ok(not nt.text.contains("\n"), "%s: S88 the tag is ONE line - the name, no epithet riding the bar" % tag)
+		_ok(nt.vertical_alignment == VERTICAL_ALIGNMENT_BOTTOM, "%s: S88 the tag grows up, away from the bar" % tag)
+		_ok(nt.position.y >= mh, "%s: S88 the tag stands at %.2fm, above the %.2fm body" % [tag, nt.position.y, mh])
+		var hb_y := -1.0
+		for c in m.get_children():
+			if c is HealthBar3D:
+				hb_y = (c as Node3D).position.y
+		_rows.append("S88 %s tag y %.2f body %.2f bar y %.2f text %s" % [tag, nt.position.y, mh, hb_y, nt.text.replace("\n", " | ")])
 	# the numbers: the writer's where the file has them
 	var fr := Bestiary.lord_file_row(id)
 	var src := uq if uq != "" else ""

@@ -14094,3 +14094,73 @@ Found: tools/_u71_rarity_guard.gd:110-124 already ends the block with block_end(
 Stale items still in the prompt, for the team lead: rarity-hue half of System 2 (ticked U88/U98), parse_fish end-finder (U76).
 Decision for Mr. E: none new (150% banner yield is with the supervisor).
 Next firing: re-read the lock; own cycle - candidate is a windowed shot of every HUD panel at 100/125/150 with a hostile 40-line chat burst to re-check L74 after U117's banner change.
+## B99 - 2026-11-21 03:45 CT (chat bot) - THE FOUR CARRIED GATES ARE RUN AND ALL FOUR ARE GREEN, AND THE GENERATOR CHANGED NOTHING
+
+Took the plan's CHAT BOT row of the 02:58 block verbatim: "Your four carried Godot gates, if the
+lock and the :45 window allow one." They did, so I ran them. B98's stand-down carried them whole;
+this cycle discharges them. `parse_fish()` stays closed and L56 stays not-mine - neither is carried.
+
+**THE LOCK WAS FREE AND I PROVED IT BY PROCESS BEFORE CLAIMING.** Last line in R's working
+`docs/RUN_LOCK.txt` was the game build's own **IDLE 03:17:23** (S80 done, released early), so no
+RUNNING was live under the yield rule. `tasklist` on **both** exe names -
+`Godot_v4.7.2-stable_win64_console.exe` and `Godot_v4.7.2-stable_win64.exe` - returned "No tasks
+are running which match the specified criteria" at 03:47 CT. Claimed **RUNNING 03:49:00-06:00**
+(expected finish 03:58, cap claim+25 = 04:14), one Godot at a time, never two; **IDLE 03:52:30**,
+released early and well inside the cap. No lane's window was crossed.
+
+**THE FOUR GATES, EACH READ OFF THE RUN AND NOT OFF A PRIOR CYCLE:**
+- **PARSE** - `--headless --path W6 --quit-after 300`, **rc=0, 0 script errors, 0 parse errors**.
+  The only stderr lines are the shutdown pair every lane sees (`5 ObjectDB instances leaked`,
+  `2 resources still in use at exit`) and a run of `invalid UID ... using text path instead`
+  warnings on `assets/kit/materials/*.tres` - **asset-side and pre-existing, not mine and not new
+  this run.** Boot reached the live town: valley dressed, snapshot on, and the EventSub lane
+  joined `#jestsayin96` and seeded its panes. **IT POSTED NOTHING.**
+- **L14_TEST OK (24 checks)**, every one `ok`. Two of those checks are the drift gate itself and
+  they agree with my own scan: "every verb ChatCmd answers is in the data (**71 verbs; missing
+  []**)" and "every command in the data is answered (**unanswered []**)". Two more hold the doc:
+  "`docs/COMMANDS.md` carries every field the data publishes, verbatim (**31 rows; unpublished
+  []**)" and "publishes nothing the data does not say (**31 rows; stale []**)".
+- **TWITCH_PARSE OK (8 checks)** - PASS 1-7b: command->chat_line, ping->pong, plain chat ignored,
+  bot ignored, cooldown, split packet, four per frame, rest next frame.
+- **COMMANDS_DOC OK wrote 31 commands** - and this is the no-op confirmation the row wanted:
+  `git diff --stat` after the run is **EMPTY**. The real generator rewrote `docs/COMMANDS.md` to
+  the **same bytes** it already had. **B4's python emulation is vindicated on this tree at 31
+  commands, not just at the 25 it was proved on** - but the standing rule holds and I did not need
+  it: the generator wins and its bytes are what is in the file.
+
+**MY OWN FIRST DRIFT SCAN WAS WRONG TWICE AND THE GATE CORRECTED IT BOTH TIMES.** I keep this in
+because the wrong numbers nearly went into this file.
+- Pass 1 read `also` as the alias field. The real key is **`aliases`** (`commands.json`,
+  `hero.aliases = [stats, sheet]`). That single wrong name produced a fiction of **14 commands
+  with no code and 25 tokens with no entry** - every one of them false.
+- Pass 2 fixed the field and still raised **7 "aliases not answered"**: `armor`, `commands`,
+  `sheet`, `spotlight`, `stats`, `steel`, `watch`. They are answered - **`ChatCmd.canonical()`
+  (`chatcmd.gd:2485-2503`) resolves an alias to its key before `match verb`**, and it also eats a
+  plural (`!heroes`->hero). This is the exact set B98 reclassified an hour ago, and I re-derived
+  it the wrong way round before reading the resolver. **Nothing from either pass reached a finding.**
+- What survives measurement: dispatch table at `chatcmd.gd:133`, **56 literal verbs** in the main
+  block plus the `!test*` block at `:294`. CODE WITH NO ENTRY: `testbits`, `testsub`, `testpoints`
+  - and that is **by design, gated and documented**: `_l14_test.gd:38` excludes
+  `v.begins_with("test")` with the comment "L17: !test* are local-only, never documented", and
+  `chatcmd.gd:282` says the same. So the honest statement is not "clean" but **"clean, with three
+  dev-only verbs deliberately out of scope"**. ENTRY WITH NO CODE: **[]**, all 31 of 31.
+- `data/commands.json`: `json.load` clean, **8 top-level keys, 31 commands, `order` == `commands`
+  key order exactly**, `commands.json` byte-unchanged this hour. `docs/COMMANDS.md` 7080 bytes,
+  31 rows, unchanged by the generator.
+
+CHANGED: **`PROGRESS.md` only.** No `.gd`, no data, no doc - all four gates passed and the freeze
+forbids inventing an edit to show for the hour. The two lock lines are in R on branch `laptop`,
+not mine to commit. Scratch log `_b99.log` written to the worktree root and **deleted** after
+reading; `_b2_ask.gd` and `.b2_*` are already gone from the root, so that item's cleanup is done
+and needs no repeat.
+
+Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`**; `twitch_reply(user_login, text)`
+untouched, no @name, no rate limiting, the queue and the API call still that lane's. **For the
+hub lane:** my parse generated ~90 untracked `web/icons/items/{hat,ring}/*.import` sidecars in
+your tree - Godot import artefacts, not edits; they are yours to keep or ignore and I left them
+alone. **For the QA tester:** the 02:47:54 claim the team lead cleared at 03:06 is still owed an
+acknowledgement in your own words, and the lock has been free since.
+NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
+written, no account signed into. bellmirebro spoke not once; the EventSub lane's join line in the
+parse log is a connection, not a message.
+Next firing: own cycle on my three files - the four gates are discharged and the row is empty.

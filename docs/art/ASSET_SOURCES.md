@@ -345,3 +345,14 @@ and read", not "what am I allowed to use".
 - Checked: every file in `_packs\3d_crystals_new\` and every entry in the sibling `3d_crystals_new.zip` (the same five files, read by listing the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file of any kind.
 - A `.blend` can carry text datablocks with terms, but none was opened for this entry; the pack is recorded as unlicensed until a licence is found on disk.
 - Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. The crystal textures are not to be imported on the strength of their folder name or of any search snippet.
+
+
+## PACK CATALOGUE - Animals_Pack_by_Quaternius (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|
+| Animals_Pack_by_Quaternius | **NO LICENCE FILE FOUND** | none | 21 (`Animals Pack by Quaternius\Blends\`: Bird, Chick, Fish, Red Fox, Whale `.blend` plus `FishTexture.png`; `FBX\`: 5 `.fbx`; `OBJ\`: 5 `.obj` + 5 `.mtl`) | not established | not established |
+
+- Checked: every file under `_packs\Animals_Pack_by_Quaternius\` and every entry in the sibling `Animals_Pack_by_Quaternius.zip` (listed by reading the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file apart from the three `.mtl` material files, which carry material values only.
+- The folder name, the `Quaternius` author credit and the Animals Pack's public listing are not a licence and are not treated as one here.
+- Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file.

@@ -4001,3 +4001,22 @@ TAKE THIS NEXT (19:58 CT block) gave GAME BUILD: S73 - wire the 43rd body, the W
   dungeon consts + a new tool), but a gate without a verdict is not a pass, so S73 is NOT pushed to laptop:
   committed locally and pushed to origin s73-wip as a checkpoint. NEXT FIRING: re-run _townwalk.gd when the machine
   is free, then push laptop.
+
+## D-cycle - S74: S73 re-battery on merged main (fef3f932) - TOWNWALK RED AGAIN UNDER LOAD, still NOT pushed to laptop. 2026-11-20T21:20:51-06:00 (game build)
+TAKE THIS NEXT (19:58 CT block, still the top block) gave GAME BUILD: S73 (the Winder). S73's code is unchanged; this run
+only re-ran the battery the 20:08 run could not finish.
+- Content check first: `by_key.winder` is still absent from data/ (grep), so the hold stands and no flip is owed.
+- Gates on the merged tree (origin/main merged clean, art renders + 8 _fit_el json only): parse rc 0, 0 SCRIPT ERROR /
+  0 Parse Error (47s); S73_WINDER OK 7 checks (hold shape); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2050
+  samples off the floor (home); DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- TOWNWALK: NO VERDICT LINE = RED. 0 SCRIPT ERROR, in_solid 0 at every print (0/6922 at T=40s), stuck_on_route 0, but it
+  reached T=40s of 120 in 420 s wall and hit the timeout - the SAME ~1/10 speed as 20:08. Marvel-Win64-Shipping and
+  obs64 are again the top CPU processes on cruzader. A full walk needs ~20 min wall at that rate, which does not fit a
+  25-minute claim alongside the rest of the battery. Not my diff (no town code touched) - but no verdict is no pass.
+- FOUND AND FIXED IN MY OWN TOOL: tools/_s73_winder.gd raised "SCRIPT ERROR: Cannot call method 'save_png' on a null
+  value" (:224) under --headless - no framebuffer, get_image() is null. The verdict still printed OK, but a gate that
+  throws is not clean. Added _snap(): null image -> print "picture skipped", checks untouched. Re-run: S73_WINDER OK 7
+  checks, 0 SCRIPT ERROR. (The picture itself was looked at at 20:08 and is unchanged.)
+- Checkpoint only: committed locally on laptop and pushed to origin s73-wip. NEXT FIRING: run _townwalk.gd FIRST and
+  ALONE when the machine is free (or windowed at a quiet hour), then push laptop. If load persists, team lead may want
+  to rule whether a town walk can be skipped for a diff that touches no town file - that is his call, not mine.

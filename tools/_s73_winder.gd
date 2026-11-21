@@ -216,12 +216,19 @@ func _aabb(n: Node, xf: Transform3D) -> AABB:
 	return out
 
 var _shot := 0
+## S74: --headless has no framebuffer, so get_image() is null there. Skip the picture, never the checks.
+func _snap(path: String) -> void:
+	var img := root.get_texture().get_image()
+	if img == null:
+		print("S73 no framebuffer (headless) - picture skipped: " + path.get_file())
+		return
+	img.save_png(ProjectSettings.globalize_path(path))
 func _process(_dt: float) -> bool:
 	if _cur.is_empty():
 		if _i >= _keys.size() and _shot < 8:
 			_shot += 1
 			if _shot == 8:
-				root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + "winder_static.png"))
+				_snap(OUT + "winder_static.png")
 			return false
 		if _i >= _keys.size():
 			print("S73 ROWS:")
@@ -247,6 +254,6 @@ func _process(_dt: float) -> bool:
 		return false
 	_wait += 1
 	if _wait == 8:
-		root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + "%s.png" % _cur["k"]))
+		_snap(OUT + "%s.png" % _cur["k"])
 		_check_and_clear()
 	return false

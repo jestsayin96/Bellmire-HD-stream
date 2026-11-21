@@ -23,7 +23,7 @@ var _stage := "boot"
 var _at := 0
 var _scales: Array = []
 var _shots := not DisplayServer.get_name().to_lower().contains("headless")
-const OUT := "res://renders/cycles/20261120_u104"
+const OUT := "res://renders/cycles/20261120_u115"
 
 func _initialize() -> void:
 	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is

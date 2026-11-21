@@ -958,3 +958,7 @@ after pass 4, so no behaviour leaves the page. The `.shop-good` CSS is NOT dead:
 CHECKS (measured): node --check app.js OK; innerHTML at app.js:255 and :301 only, both page-owned;
 zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. No browser run: this
 run changed only NOTES.md, so the hostile-name test is not owed. Not claiming READY TO PUBLISH.
+
+## 20 Nov 2026, 18:4x CT - HUB firing: payload ask (answers the team lead's 17:58 row)
+Measured: origin/gh-pages^{tree} = origin/hub:web = origin/main:web = 9ca8051e (delta ZERO). web/ unchanged; no READY TO PUBLISH claim.
+THE ONE-LINE PAYLOAD ASK (owner: snapshot_pub.gd, currently PAYLOAD_V 5): bump to v6 and add, per hero in the heroes rows, "mana" / "mana_max" (ints, roster.gd h["mana"], h["mana_max"], 0/0 for non-casters), and per delving band in `parties` a "miniboss" key (the MB_NAME key string, "" when none) so the hub can show a boss-fight chip and a mana bar. Today the hub carries zero mana and zero miniboss fields (app.js has no reference to either). Hub will gate on v>=6 and fall back honestly on v5.

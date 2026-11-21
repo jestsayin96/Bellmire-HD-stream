@@ -762,3 +762,11 @@ RUNNING 2026-11-20T16:56:00-06:00 (HUD U108: mana plate clear of NOW FIGHTING ba
 IDLE 2026-11-20T17:01:07.9592104-06:00 - HUD U108: hud_dock.gd mana plate now also clears the NOW FIGHTING banner; parse 0 errors, windowed 1920x1080 capture 100/125/150 ran; Godot EMPTY at release; released early, no crossing. (HUD)
 RUNNING 2026-11-20T17:08:30-06:00 (game build: read TAKE THIS NEXT + gates; claim 17:08, cap claim+25 = 17:33, expected finish 17:30; Godot EMPTY at claim)
 IDLE 2026-11-20T17:17:19-06:00 - game build S70: MB_NAME scraper = Scourstone; parse 0, S70_SCRAPER OK 9, S51_NAMES OK 172, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK, TOWNWALK PASS; Godot EMPTY at release; released early (cap 17:33), no crossing. (game build)
+RUNNING 2026-11-20T17:47:47-06:00 (chat bot B89: publish 41 - parse + l14 + twitch_parse + commands_doc; claim 17:47, cap claim+10 = 17:57, expected finish 17:55, hard release by 17:57; Godot EMPTY at claim)
+IDLE 2026-11-20T17:49:23-06:00 - chat bot B89: published 41 elites; parse rc=0, COMMANDS_DOC OK wrote 31 commands, TWITCH_PARSE OK, L14_TEST FAIL 1 on the worktree (guard arm MINIBOSS UNNAMED: scraper) and L14_TEST OK (24 checks, 0 guard arms) with origin/laptop's delve.gd (S70) swapped in and then restored byte-identical. Godot EMPTY at release; released early (cap 17:57), no crossing. (chat bot)
+
+RUNNING 2026-11-20T17:54:16-06:00 (HUD U109: probe feed card min width at 150% via _u104_shot; claim, cap claim+15 = 18:09, expected finish 18:02, hard release by 18:07; Godot EMPTY at claim)
+
+IDLE 2026-11-20T17:57:35-06:00 - HUD U109: feed_hud.gd lord card no longer starves the Chronicle column at 150% (text 200->369px); parse 0 errors, windowed _u104_shot x2; Godot EMPTY at release; released early (cap claim+15), no crossing. (HUD)
+
+RUNNING 2026-11-20T18:07:57-06:00 (game build: merge + TAKE THIS NEXT item; claim 18:07, cap claim+25 = 18:32, expected finish 18:30, hard release by 18:32; Godot EMPTY at claim)

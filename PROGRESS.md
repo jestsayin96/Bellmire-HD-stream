@@ -13713,3 +13713,19 @@ Gates (one claim, lock 17:47:47 -> IDLE 17:49:23, cap claim+10 = 17:57, released
   - PROVED IT RATHER THAN ASSERTED IT: I wrote `origin/laptop:scripts/delve.gd` over the worktree copy, re-ran the gate - **L14_TEST OK (24 checks), 0 guard arms fired** - then restored the file with `git checkout -- scripts/delve.gd` and confirmed `git hash-object` returns the SAME sha before and after (0978eccd). delve.gd is NOT mine and nothing of mine is committed to it; `git status` at commit time shows only `data/commands.json` and `docs/COMMANDS.md` modified. The other 23 checks passed in both runs, including "docs/COMMANDS.md carries every field the data publishes, verbatim (31 rows; unpublished [])" and "publishes nothing the data does not say (31 rows; stale [])".
 So: the publish is green on the fleet's own refs and goes red only against main's six-minute-old delve.gd. It clears itself at the lead's :58 merge with no further work from anyone.
 Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written. The parse log does show `TWITCH_EVENTSUB bot token valid (bellmirebro), 97 min left`, which is the game's own startup line, not a test of mine; no token value is recorded anywhere.
+
+## S71 - 2026-11-20 18:07-18:2x CST - THE FERRYMAN (42nd) GETS ITS MB_FIT AND FLOODED ROW; MB_NAME HELD (game build)
+TAKE THIS NEXT (17:58 block), GAME BUILD row: S71, the Ferryman's MB_FIT and theme rows, hold MB_NAME.
+EDITS: scripts/delve.gd MB_FIT +"ferryman": 1.07 - art's _fit_ferryman_register.json pairs.ferryman.ratio (h 2.62 / hero 2.45,
+3/3 proving views), COPIED not re-derived. scripts/dungeon_hd.gd THEME_MINIBOSS_MORE flooded -> ["tanner", "rammer", "ferryman"]
+under art's own tag (tools/art/minibosses.py:14420, field 5 = "flooded"). MB_NAME NOT written (S51: content has no feed rows yet).
+NEW GATE tools/_s71_ferryman.gd (copy of _s69_scraper.gd for the 42nd + a static body shot at the MB_FIT height).
+VERDICTS: parse 0 SCRIPT ERROR / 0 Parse Error; S71_FERRYMAN OK 6 checks (held out of the flooded draw 0/400, glb loads,
+no MB_NAME, no arrive lines, MB_FIT 1.07); S70_SCRAPER OK 9; OFFFLOOR_VERDICT OK 0 of 2313; TWITCH_PARSE OK (8 checks);
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK: ran to T=70s, 0 SCRIPT ERROR, printed NO VERDICT inside a 420 s cap
+(last TOWNWALK PASS 17:17 on a longer run) - reported as no-verdict, not pass.
+FIRST GATE RUN WAS RED and correctly so: ferryman.glb was not imported yet ("No loader found"); --headless --import, rerun GREEN.
+LOOKED AT IT: renders/cycles/s71/ferryman_static.png - punt, pole, fare-peg post and boatman stand whole at 2.62 m.
+AUDIT LINE (asked for): broodglut and lastcuff are the two PACK-VARIANT minibosses (S54/S56) - bestiary.gd entries recoloured
+off Quaternius bodies, registered in docs/art/MONSTER_VARIANTS.md, not CANON bodies in tools/art/minibosses.py, so
+_report.json (which reports minibosses.py ORDER) correctly has no row for them. homes [] - not a random draw.

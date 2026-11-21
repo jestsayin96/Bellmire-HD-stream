@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "96af6730ec27b22de05c53f2838781cdcb8c8ddb",
+   "head": "16f31ca6137a120a921b36a2edeeab165a983ade",
    "ref": "origin/main",
-   "ref_commit": "a1158b025490c36ac663d5b7475e63a9d51e7327",
+   "ref_commit": "7c476bb092cf4ffd301189838149d010db2370de",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -639,11 +639,12 @@
    "fits": true
   },
   "boiler": {
-   "title": "The Boiler",
+   "title": "Scaldmere",
    "theme": "confection",
    "idea": "IT POURS AND IT SETS - the floor hardens around your feet",
    "wear": 0.25,
    "feed_line": "Something is pouring.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
    "faces": 1426,
@@ -653,7 +654,21 @@
     2.1
    ],
    "footprint_span": 3.65,
+   "height_m": 2.1,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.347,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
    "glb": true,
    "glb_msg": "",
    "cam": {
@@ -668,21 +683,7 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ],
-   "height_m": 2.1,
-   "corridor_clear_m": 11.0,
-   "lid_underside_m": 9.5,
-   "corridor_margin_m": 7.35,
-   "lid": "UNDER-LID",
-   "lid_clear_m": 7.4,
-   "read_from": {
-    "cell_m": "scripts\\floorgen.gd:21",
-    "wall_in_m": "scripts\\floorgen.gd:1698",
-    "hall_w": "scripts\\floorgen.gd:848",
-    "lid_y_m": "scripts\\floorgen.gd:1383",
-    "lid_thick_m": "scripts\\floorgen.gd:1378"
-   },
-   "fits": true
+   ]
   },
   "tallyman_chibi": {
    "title": "The Tallyman (chibi)",
@@ -1755,7 +1756,7 @@
    "fits": true
   },
   "ratcatcher": {
-   "title": "The Ratcatcher",
+   "title": "Skivven",
    "theme": "crypt",
    "idea": "IT IS PAID BY THE TAIL - everything else that dies in this room goes into the cage on its hip and it is stronger for every bay it fills, so the party is not choosing how to kill it but whether to clear the room at all; leave the lesser things standing and you fight the whole floor at once, clear them and you hand this one the fight, and the bays already filled can be cut open to give them back",
    "wear": 0.68,
@@ -1770,7 +1771,21 @@
     2.62
    ],
    "footprint_span": 3.73,
+   "height_m": 2.62,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.27,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.88,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
    "glb": true,
    "glb_msg": "",
    "cam": {
@@ -1785,21 +1800,7 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ],
-   "height_m": 2.62,
-   "corridor_clear_m": 11.0,
-   "lid_underside_m": 9.5,
-   "corridor_margin_m": 7.27,
-   "lid": "UNDER-LID",
-   "lid_clear_m": 6.88,
-   "read_from": {
-    "cell_m": "scripts\\floorgen.gd:21",
-    "wall_in_m": "scripts\\floorgen.gd:1698",
-    "hall_w": "scripts\\floorgen.gd:848",
-    "lid_y_m": "scripts\\floorgen.gd:1383",
-    "lid_thick_m": "scripts\\floorgen.gd:1378"
-   },
-   "fits": true
+   ]
   },
   "drover": {
    "title": "The Drover",
@@ -2573,7 +2574,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.904,
+   "corridor_margin_m": 7.9,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.2,
    "read_from": {
@@ -2603,7 +2604,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs a1158b025490c36ac663d5b7475e63a9d51e7327 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 7c476bb092cf4ffd301189838149d010db2370de sha bc3a603f",
  "blank_check": {
   "files": 132,
   "failures": []

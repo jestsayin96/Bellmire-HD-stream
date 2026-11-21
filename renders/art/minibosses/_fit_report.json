@@ -2169,13 +2169,13 @@
      "creature": {
       "alone": 37499,
       "vis": 37499,
-      "delta": 44886,
+      "delta": 39039,
       "seen": 1.0
      },
      "hero": {
       "alone": 43682,
       "vis": 43682,
-      "delta": 53769,
+      "delta": 47413,
       "seen": 1.0
      },
      "proves": true
@@ -2184,13 +2184,13 @@
      "creature": {
       "alone": 27067,
       "vis": 27067,
-      "delta": 32427,
+      "delta": 28093,
       "seen": 1.0
      },
      "hero": {
       "alone": 37779,
       "vis": 37779,
-      "delta": 43253,
+      "delta": 38551,
       "seen": 1.0
      },
      "proves": true
@@ -2199,13 +2199,13 @@
      "creature": {
       "alone": 36370,
       "vis": 36370,
-      "delta": 44048,
+      "delta": 38010,
       "seen": 1.0
      },
      "hero": {
       "alone": 44015,
       "vis": 44015,
-      "delta": 50909,
+      "delta": 44810,
       "seen": 1.0
      },
      "proves": true
@@ -2231,50 +2231,7 @@
      "right": 0
     }
    },
-   "ground": {
-    "front": {
-     "plane_px": 264480,
-     "shadow_px": 4566,
-     "mean": 0.4316,
-     "max": 0.708,
-     "error": null,
-     "rim_filled_px": 4522,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    },
-    "side": {
-     "plane_px": 270560,
-     "shadow_px": 3412,
-     "mean": 0.4375,
-     "max": 0.708,
-     "error": null,
-     "rim_filled_px": 3434,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    },
-    "back": {
-     "plane_px": 264480,
-     "shadow_px": 4550,
-     "mean": 0.428,
-     "max": 0.7103,
-     "error": null,
-     "rim_filled_px": 4574,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    }
-   },
+   "ground": null,
    "proving_views": 3,
    "air_px": {
     "front": [
@@ -2282,8 +2239,8 @@
      8
     ],
     "side": [
-     135,
-     134
+     138,
+     138
     ],
     "back": [
      8,
@@ -6704,13 +6661,13 @@
      "creature": {
       "alone": 61306,
       "vis": 61306,
-      "delta": 71559,
+      "delta": 64322,
       "seen": 1.0
      },
      "hero": {
       "alone": 43677,
       "vis": 43677,
-      "delta": 55352,
+      "delta": 50077,
       "seen": 1.0
      },
      "proves": true
@@ -6719,13 +6676,13 @@
      "creature": {
       "alone": 36575,
       "vis": 36575,
-      "delta": 46388,
+      "delta": 38198,
       "seen": 1.0
      },
      "hero": {
       "alone": 37794,
       "vis": 37794,
-      "delta": 43282,
+      "delta": 38587,
       "seen": 1.0
      },
      "proves": true
@@ -6734,13 +6691,13 @@
      "creature": {
       "alone": 61637,
       "vis": 61637,
-      "delta": 75569,
+      "delta": 64890,
       "seen": 1.0
      },
      "hero": {
       "alone": 44032,
       "vis": 44032,
-      "delta": 52037,
+      "delta": 46717,
       "seen": 1.0
      },
      "proves": true
@@ -6766,50 +6723,7 @@
      "right": 0
     }
    },
-   "ground": {
-    "front": {
-     "plane_px": 258400,
-     "shadow_px": 5650,
-     "mean": 0.332,
-     "max": 0.7103,
-     "error": null,
-     "rim_filled_px": 6059,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    },
-    "side": {
-     "plane_px": 265240,
-     "shadow_px": 3572,
-     "mean": 0.3727,
-     "max": 0.708,
-     "error": null,
-     "rim_filled_px": 3384,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    },
-    "back": {
-     "plane_px": 259160,
-     "shadow_px": 5124,
-     "mean": 0.3121,
-     "max": 0.7103,
-     "error": null,
-     "rim_filled_px": 6541,
-     "shadow_edge": {
-      "top": 0,
-      "bottom": 0,
-      "left": 0,
-      "right": 0
-     }
-    }
-   },
+   "ground": null,
    "proving_views": 3,
    "air_px": {
     "front": [
@@ -6817,8 +6731,8 @@
      8
     ],
     "side": [
-     157,
-     154
+     161,
+     160
     ],
     "back": [
      8,
@@ -7402,99 +7316,13 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman"
+  "boiler"
  ],
  "asked": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman"
+  "boiler"
  ],
  "blank_check": {
-  "files": 132,
+  "files": 3,
   "failures": []
  },
  "red_summary": {
@@ -7510,6 +7338,6 @@
   "ok_shipped": true
  },
  "verdict": "RED",
- "rendered_this_run": 0,
- "verdict_scope": "every row in pairs (46), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 46 judged from stored measurements)"
+ "rendered_this_run": 1,
+ "verdict_scope": "every row in pairs (46), re-derived from stored measurements; 1 of them rendered this run"
 }

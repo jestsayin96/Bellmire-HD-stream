@@ -77,6 +77,31 @@
 ##     `short`/`what`/`example`/`args`, for `docs/ scripts/ data/ .md .gd .json github C:\\` -
 ##     **0 hits.** `commands` and `order` are the same 31.
 ##
+## *** A CORRECTION TO MY OWN S76 TICK, MADE INSIDE THE SAME RUN, BECAUSE I LOOKED AT THE
+## *** GAME BUILD'S EVIDENCE SHOT AFTER I HAD WRITTEN THE TICK. THE TICK STANDS; THE SENTENCE
+## *** BESIDE THE PICTURE DOES NOT. ***
+##   The S76 entry says of `renders/cycles/s76/pitman.png`: "the 'Underfoot' nameplate over the
+##   pitman's dark body with its pick, beside its pit and ladder, on the crypt's hex floor next to
+##   a hero. Body present, own model, standing."
+##   WHAT THE FILE ACTUALLY SHOWS, having opened it: the **"Underfoot" nameplate IS there** and
+##   rendered in game - that part is real and it is the part that matters most, because it is the
+##   naming directive reaching a screen. The pit ring, the rubble collar and the ladder are there
+##   on the hex floor. **BUT THE SHOT DOES NOT CARRY THE REST OF THAT SENTENCE.** The camera is
+##   jammed against a wall: the right third of the frame is a grey slab, the debug labels
+##   ("FitPi...", "Kni...") are rendered waist-high and **cut off by the frame edge**, and the
+##   pitman's body is mostly BEHIND the knight and the wall - I can make out a dark limbed form
+##   and the long pick handle, and not much else. It is not a shot from which anyone could say
+##   "body present, own model, standing" with confidence.
+##   **THE TICK IS NOT WITHDRAWN**, and this is the reason: the wiring is proven five other ways
+##   that I checked myself - MB_FIT against art's register, MB_NAME against both of its cited
+##   sources, the crypt row, the 9/8 feed rows, and **art's own three proving views of the body,
+##   which I looked at and which are clean and unclipped at every edge**. The engine facts hold.
+##   GAME BUILD, FOR YOUR NEXT ONE: the acceptance shot is the weakest part of an otherwise
+##   careful push. Put the camera where the body is unoccluded and the labels fit in frame, and
+##   describe only what the frame carries. A description that outruns its own picture is the same
+##   fault class as a gate that prints GREEN beside its own red evidence - which is precisely what
+##   art fixed this hour.
+##
 ## NOT TICKED, AND WHY:
 ##   - **L74 (HUD) - HALF DELIVERED / STILL OPEN, and the lane said so first.** U115 captured
 ##     100/125/150, looked at the frames, and reported three faults rather than a verdict. Its own
@@ -88,8 +113,14 @@
 ##     that S76 is on main - but I HAVE NOT SEEN IT PRINT `0 of 24`, and a gate is green when it
 ##     prints, not when I reason that it should. The chat bot prints it at 00:45.
 ##
-## *** A BASELINE FIX I OWE, AND IT IS MINE: A FIFTH DEAD `phase2_words` KEY NO BASELINE HAS EVER
-## *** ACCOUNTED FOR. *** My Step 0 baseline accounts for its zero-hit keys in four classes. On
+## *** A SECOND FAULT OF MY OWN, AND IT IS THE SAME ONE I JUST CHARGED THE GAME BUILD WITH:
+## *** I WROTE THAT NOBODY HAD ACCOUNTED FOR `phase2_words_alt2`. THE 22:58 SEAT HAD, AN HOUR
+## *** AGO, IN THIS VERY FILE. ***
+##   It is item 2 of the FOR THE NEXT TEAM LEAD prompt-corrections list below - "content's C-114
+##   third pool, dead until wired" - and that list even carries the same non-note count I
+##   arrived at (15, not 14). I claimed a discovery that was a duplicate. The honest value of
+##   what I did is the INDEPENDENT RE-MEASUREMENT, not the finding, and I have struck the
+##   supervisor question I had raised on the back of it. The measurement, which stands: My Step 0 baseline accounts for its zero-hit keys in four classes. On
 ##   this merged tree the count is **48** (up from 32, and the rise is all `_note_` keys as the
 ##   baseline predicts), and **47** fall in those classes: 33 `_note_` keys, 2 runtime-built `_alt`
 ##   pools (READ - do not wire), 3 declared dead, 9 prose/spec keys. **THE 48th IS
@@ -99,8 +130,8 @@
 ##   (delve.gd:3831), which builds `lord_intros_alt` and `unique_intros_alt` and **cannot build
 ##   `_alt2`**; and the key has the same shape and the same sub-keys (ascent, errand, carry, sell,
 ##   vault, stone) as the two D98 declared dead. **READ IT AS DEAD ALONGSIDE `phase2_words` AND
-##   `phase2_words_alt`. NO LANE IS TO WIRE IT AND CONTENT IS NOT TO EXTEND IT.** It is routed up
-##   below because D98 is a ticked ruling and this extends the list it named.
+##   `phase2_words_alt`. NO LANE IS TO WIRE IT AND CONTENT IS NOT TO EXTEND IT.** It is NOT
+##   routed up: it is already an owed prompt correction and does not need the supervisor twice.
 ##
 ## THE SIX ROWS:
 ##
@@ -163,11 +194,10 @@
 ##      RECOMMENDATION: publish it. It is a four-line CSS/JS fix that has now been merged and
 ##      unpublished for over a day. If you say publish, I will do the subtree-plumbing push and
 ##      the four assertions, and run the full security and state-check gate first.
-##   2. **A FIFTH DEAD KEY EXTENDS A RULING YOU TICKED.** D98 declared four keys dead in writing.
-##      `lore_lines.phase2_words_alt2` is a fifth, same family, same shape, measured zero-read this
-##      hour (no literal hit, and the one runtime concatenation in the tree cannot build it).
-##      RECOMMENDATION: read it as covered by D98 rather than re-opening D98. I have told content
-##      not to extend it and no lane to wire it; say the word if you want it handled otherwise.
+##   2. **WITHDRAWN BY ME BEFORE YOU READ IT.** I had raised `lore_lines.phase2_words_alt2` as a
+##      fifth dead key extending D98. It is not news - the 22:58 seat recorded it an hour ago in
+##      the prompt-corrections list in this same file, and I had not read far enough down before
+##      writing. Nothing is owed of you here. The measurement stands and is recorded above.
 ##   3. **L56 (the delve-heavy soak) HAS BEEN CARRIED FOR HOURS BECAUSE THE PROTOCOL CANNOT FIT
 ##      IT, AND THAT IS A PROTOCOL QUESTION, NOT A LANE FAILURE.** The chat bot's window is :45
 ##      with short gates and it has correctly declined to start a long soak inside a ten-minute
@@ -349,6 +379,22 @@
 ##      it is fully accounted for. **UNREAD LIVE DATA KEYS IS STILL ZERO.**
 ##   3. **TEAM LEAD prompt, Step 5.** "thirty-three exist as of 18 Nov" for minibosses. It is
 ##      **44 bodies** on disk and in `by_key` as of 20 Nov 23:0x CT, 43 of them wired.
+##   4. **TEAM LEAD prompt, Step 5, again - the number moved inside one hour.** As of the merged
+##      tree 9b666e83 (20 Nov 23:58 firing) it is **44 bodies, 44 wired, 44 named, 44 published**.
+##      Item 3's "43 of them wired" was true when written and is now stale. Write the instruction,
+##      not the number: "measure the count off `tools/art/minibosses.py` CANON and content's
+##      `miniboss_feed.by_key`, and never carry a figure from this prompt."
+##   5. **TEAM LEAD prompt, Step 0 baseline - the raw figures.** It reads "2,180,937 chars of
+##      script (48 files), 12 data files, 122 top-level keys" and "31 directories with files".
+##      Measured on 9b666e83: **2,296,006 chars, 48 files, 12 data files, 138 top-level keys,
+##      34 asset directories, 48 zero-hit keys (33 of them `_note_`)**. UNREAD LIVE DATA KEYS AND
+##      UNREFERENCED ASSET DIRECTORIES ARE BOTH STILL **ZERO** - that is the part that matters and
+##      it has not moved. Same remedy as item 4: replace the figures with the method.
+##   6. **TEAM LEAD prompt, Step 0 - add the MB_FIT chibi warning.** `MB_FIT` has **55** keys and
+##      `MB_NAME` **44**, and that is correct, not a gap: the extra 11 are `_chibi` variants
+##      (drillmaster, gaoler, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker,
+##      boiler). Four seats have now mis-counted one of these two dicts. The prompt warns about
+##      regexes over MB_NAME; it should warn about the chibis in MB_FIT in the same breath.
 ##
 ## NEEDS MR. E: nothing.
 ##

@@ -14930,3 +14930,317 @@ def ferryman():
 
 
 BUILDERS.update({"ferryman": ferryman})
+
+
+# ===================================================================== 43 THE
+# WINDER: a wound drum on a low frame, a bowed man on the bar, three ropes out.
+#
+# WHY THIS ONE AND NOT A FORTY-THIRD RE-SKIN. I read every one of the 42 ideas
+# off CANON before designing (not off memory - off the file) and sorted them
+# by WHAT THEY TAKE:
+#   a hero          - gaoler (drags), drover (yokes), dyer (marks), ferryman
+#                     (takes one at a time), tapster (casks one)
+#   a resource      - tallyman (the haul), tapster (brews), leech (healing),
+#                     sealer (what you carry), greener (your iron)
+#   an action       - beadle (the order), relief (your post), scraper (rubs
+#                     out the round), pressman (your fallen)
+#   the room itself - hurdleman (cuts it), stackman (walls you in), strickler
+#                     (sets it), snuffer (the light), sluicekeeper (the water)
+# NOT ONE OF THEM TAKES **GROUND**. Every one of the room-benders ADDS
+# something to the floor - a hurdle, a course of brick, a trap, a thorn. None
+# of them MOVES THE PARTY. That is the gap, and it is why this is not the
+# Gaoler with a bigger hook: the Gaoler takes ONE hero OUT OF THE FILE and
+# brings them to itself. This one leaves everybody in the fight and takes back
+# the STEPS, all three at once, over and over, so the fight is about whether
+# you can hold a yard of floor rather than about who is being targeted.
+#
+# THE COUNT IS THREE ROPES, LYING ON THE FLOOR IN FRONT OF IT. The Ferryman's
+# peg row was the right device and I am deliberately NOT repeating it - a
+# second body counting pegs on a rail would read as the same creature twice.
+#
+# THEME `wood` ON PURPOSE. It is the thinnest theme in the set - 2 bodies
+# against 4 each on keep/workshop/shrine/crypt/treasury/mess/flooded/firepit -
+# counted off CANON this run, not remembered. A timber-snigging windlass at
+# the woodside is what this machine actually is.
+#
+# WEAR 0.26, AND THE LOW END IS THE POINT. This is a KEPT RIG: sound timber,
+# fresh hemp, greased iron. Mr. E's second rule is that wear is a variable and
+# the set must not settle on one value - the Ferryman immediately before it is
+# 0.62 and its wear belonged to the MAN, not his boat. Here the wear belongs
+# to the MACHINE and the machine is maintained, because a windlass whose rope
+# has gone is a windlass that has stopped, and this creature's whole threat is
+# that it has not stopped.
+CANON.update({
+    "winder": ("Haulback", 2.34, (0.30, 0.32, 0.26), (0.98, 0.78, 0.40),
+               "wood", "IT WINDS YOU BACK - it has three hooked ropes out "
+               "across the floor and it does not wound anybody: it takes "
+               "GROUND. Every turn of the drum drags whoever is hooked back "
+               "toward the mouth of the chamber, so the party spends a beat "
+               "buying a yard and the next beat watching it go. Nothing you "
+               "did is undone and nobody is taken out of the room - you are "
+               "simply not where you were, and the melee that was about to "
+               "land is out of reach again. THE COUNT IS THE THREE ROPES, "
+               "lying on the floor in front of it where anyone can see them: "
+               "one rope is one hero it can have on at a time, and a rope "
+               "that is cut stays cut. Cut all three and the drum turns on "
+               "nothing. The PAWL is why you cannot simply out-pull it - it "
+               "drops into the ratchet every tooth and the drum does not give "
+               "a single turn back",
+               0.26, "Something is taking a turn on a drum up ahead."),
+})
+ORDER = ORDER + ["winder"]
+
+# PER-SLOT MATERIALS, AND ONE RULE: EVERY PALE THING ON THIS BODY IS ROPE, OR
+# THE BAR THAT TURNS IT. The Ferryman inverted the set's dark-man/pale-
+# furniture arrangement (pale man, black hull) because the thing to be counted
+# was one pale plank inside a dark mass. Here the thing to be counted is the
+# THREE ROPES, so the rope takes the light and everything else gets out of its
+# way - including the drum, which went dark at pass 5 for exactly that reason.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"winder"}
+
+OVERRIDE.update({
+    "winder": {
+        # THE MAN: felted wool gone the colour of the wood he works in.
+        # Rough 0.92, no metal - this is cloth, and a sheen on it would read
+        # as oilskin and put him into the Ferryman's family.
+        'body': ((0.205, 0.215, 0.180), 0.92, 0.00),
+        # THE DRUM BARREL, THE POSTS, THE CRADLE, THE FAIRLEAD, THE PAWL AND
+        # ITS RATCHET, THE HOOKS AND HIS BOOTS. Greased iron and tarred
+        # post-foot: dark, a little metal, rough enough not to flare.
+        'dark': ((0.072, 0.070, 0.065), 0.48, 0.28),
+        # THE ROPE - wound on the drum and lying on the floor - THE FLANGES
+        # and THE BAR. New hemp and barked timber, the brightest value on the
+        # body at 0.805, because the thing a viewer must total (THREE ROPES)
+        # lives in this slot and is read against the floor and the dark frame.
+        'bone': ((0.805, 0.770, 0.655), 0.70, 0.00),
+        # THE EYES ONLY, set back inside the hood brim so the glow cannot
+        # reach the frame edge at any yaw. NO LAMP: the Snuffer owns light.
+        'glow': ((0.98, 0.78, 0.40), 2.4),
+    },
+})
+
+
+def winder():
+    """IT WINDS YOU BACK. The 43rd body. PASS 5.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A low dark drum wound in PALE ROPE, slung in a heavy
+                         frame, with a bowed man leaning his whole weight on
+                         a long pale bar out of its right hub.
+      WHAT IS IT DOING?  HEAVING. His facing is DERIVED from where his hands
+                         are on the bar, not dialled in degrees - move the
+                         grip and the man re-aims.
+      HOW MANY OF US?    THREE. Three pale ropes come off the drum, pass under
+                         the sill and lie flat across the floor between the
+                         creature and the viewer, each ending in its own dark
+                         hook. The count is on the ground, in front.
+      WHY NOT OUT-PULL?  THE PAWL. A dark iron arm off the stay post drops
+                         into a toothed ring on the right flange. It says the
+                         drum never gives a turn back, and it is ON THE
+                         OUTLINE rather than inside it.
+
+    *** THE FAULT THIS BODY IS REALLY A RECORD OF, AND IT TOOK FOUR PASSES. ***
+    Pass 1's docstring claimed that three ropes fanning out on the floor were
+    "symmetric by construction, so no yaw can take the mechanic away". I
+    rendered it and THE CLAIM WAS FALSE. Head-on, ropes that run AWAY from the
+    camera foreshorten to nothing and leave only their vertical drop, so three
+    ropes under a drum read as TABLE LEGS - I counted four or five pale
+    verticals in my own front render before I could find three ropes. The side
+    view read perfectly throughout, which is the Sealer's one-sided mechanic
+    wearing a new costume, and every number in the gate (verdict GREEN, blank
+    0, border clear, seen 1.0) was happy the whole time.
+      PASS 2 spread the floor run hard in X and added the fairlead. The outer
+             two ropes began to read; the middle one was still a leg. HALF.
+      PASS 3 lowered the drum from head height to shin height to shorten the
+             drop. **IT CHANGED ALMOST NOTHING AND THE REASON IS WORTH
+             WRITING DOWN: minibossgen GROUNDS AND NORMALISES the merged body
+             to its CANON height, so moving one part down relative to another
+             and then re-normalising gives most of it back.** A fix that the
+             pipeline can undo is not a fix. The drum stays low anyway,
+             because low is right for the object.
+      PASS 4 took the drop BEHIND the drum - the ropes leave the bottom-rear,
+             fall on the far side, pass under the sill and surface in front.
+             That is what removed the legs, because the only thing that takes
+             a vertical out of a head-on view is to put something in front of
+             it. PASSED: the front view now shows three ropes lying flat.
+      PASS 5 is a VALUE fault, not a shape one. The drum was a PALE barrel
+             with four pale wraps proud of it; I wrote "wound drum" four times
+             and the picture said RADIATOR. Pale rope on a pale drum is the
+             pale-on-pale fault I wrote up on the Relief and then repeated on
+             the Scraper - this is the third time, on my own new body. The
+             barrel is dark now and the rope on it is one continuous pale
+             helix about the drum's own axis.
+
+    STILL OPEN AND WRITTEN UP RATHER THAN HIDDEN (see the run summary):
+    the man is dark-on-dark against the stay post in the front view and reads
+    as a bent scarecrow rather than as a man heaving; his hood reads as a
+    wide brim; the bar is nearly invisible head-on and only works in the side
+    view; the stay post and its cap read as a separate signpost; and the back
+    view is lit by one warm lamp, so its values are not a fair test.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here: minibossgen measures the real footprint
+    against floorgen's own corridor span and lid and the report says it.
+    """
+    P = Parts("winder")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # ------------------------------------------------------------- THE DRUM
+    DY = -0.25                    # the drum sits toward the camera
+    DZ = 0.76                     # hub height - knee on a hero (see PASS 3)
+    DX0, DX1 = -0.52, 0.72        # the barrel's two ends
+    RD, RF = 0.40, 0.50           # barrel radius, flange radius
+
+    _open()
+    P.add(aim(L.cone(RD, RD, DX1 - DX0, 24), (DX0, DY, DZ), (1.0, 0.0, 0.0)), 'dark')
+    for fx in (DX0 - 0.08, DX1):
+        P.add(aim(L.cone(RF, RF, 0.08, 24), (fx, DY, DZ), (1.0, 0.0, 0.0)), 'bone')
+    # THE WOUND ROPE - a real helix about the drum's own axis, so the turns
+    # are one continuous rope going round and not a stack of separate rings.
+    TURNS, STEPS = 9, 9 * 14
+    wrap = []
+    for i in range(STEPS + 1):
+        t = i / float(STEPS)
+        th = TAU * TURNS * t
+        wrap.append(Vector((DX0 + 0.07 + t * (DX1 - DX0 - 0.14),
+                            DY + (RD + 0.032) * math.cos(th),
+                            DZ + (RD + 0.032) * math.sin(th))))
+    P.raw(L.tube(wrap, [0.034] * len(wrap), 6), 'bone')
+    _close("drum")
+
+    # ------------------------------------------- THE FRAME AND THE RATCHET
+    _open()
+    for px in (-0.74, 0.92):
+        P.add(L.box(0.17, 0.30, DZ), 'dark', loc=(px, DY, DZ / 2.0))
+        P.add(L.box(0.46, 0.56, 0.11), 'dark', loc=(px, DY, 0.055))
+        P.add(L.sphere(0.13, 0.13, 0.13, 12, 8), 'dark', loc=(px, DY, DZ))
+        limb(P, seat([(px, DY + 0.46, 0.14), (px, DY + 0.20, 0.44),
+                      (px, DY - 0.02, DZ - 0.06)], 0.052),
+             0.052, 0.040, 'dark')
+    P.add(L.box(1.90, 0.22, 0.10), 'dark', loc=(0.09, DY + 0.08, 0.17))
+    # THE RATCHET RING. Teeth stand on the flange rim so they break the
+    # OUTLINE at every yaw instead of being a pattern painted on one face.
+    for k in range(14):
+        th = TAU * k / 14.0
+        P.add(L.box(0.055, 0.075, 0.105), 'dark',
+              loc=(DX1 + 0.10, DY + (RF - 0.01) * math.cos(th),
+                   DZ + (RF - 0.01) * math.sin(th)),
+              rot=(th, 0.0, 0.0))
+    _close("frame")
+
+    _open()
+    # THE STAY POST - the tallest thing on the body and the reason the
+    # silhouette has a vertical at all. It carries the pawl, so it is not an
+    # ornament: take it away and the mechanic loses its one object.
+    P.add(L.box(0.15, 0.15, 2.26), 'dark', loc=(1.02, DY + 0.46, 1.13))
+    P.add(L.box(0.30, 0.30, 0.09), 'dark', loc=(1.02, DY + 0.46, 2.29))
+    limb(P, [(1.02, DY + 0.40, 1.62), (0.99, DY + 0.18, 1.12),
+             (0.94, DY + 0.02, DZ + RF - 0.04)], 0.048, 0.038, 'dark')
+    _close("pawl")
+
+    # ---------------------------------------------------------- THE BAR
+    HUB = (DX1 + 0.06, DY, DZ)
+    TIP = (1.52, 0.80, 0.34)
+    _open()
+    limb(P, [HUB, (1.14, 0.30, 0.62), TIP], 0.068, 0.050, 'bone')
+    P.add(L.sphere(0.075, 0.075, 0.075, 10, 7), 'bone', loc=TIP)
+    _close("bar")
+
+    # ----------------------------------------------------------- THE MAN
+    GX, GY, GZ = 1.26, 0.44, 0.62          # where his hands take the bar
+    MX, MY = 1.14, 0.74                    # where he stands
+    FX, FY = GX - MX, GY - MY
+    _fl = math.hypot(FX, FY)
+    FX, FY = FX / _fl, FY / _fl            # his facing, derived from the grip
+    RX, RY = FY, -FX
+
+    def mw(a, b, z):
+        """MAN FRAME -> WORLD. a to his right, b forward along his facing."""
+        return (MX + a * RX + b * FX, MY + a * RY + b * FY, z)
+
+    _yaw = math.atan2(FY, FX) - math.pi / 2.0
+    _open()
+    for s in (-1, 1):                       # braced stance, one leg back
+        toe = 0.30 if s < 0 else -0.46
+        limb(P, seat([mw(s * 0.17, 0.04, 0.94), mw(s * 0.20, toe * 0.52, 0.52),
+                      mw(s * 0.22, toe, 0.11)], 0.104), 0.104, 0.084)
+        P.add(L.box(0.25, 0.40, 0.11), 'dark',
+              loc=mw(s * 0.22, toe - 0.06, 0.055), rot=(0.0, 0.0, _yaw))
+    # the bowed spine - he is over the bar, not standing beside it
+    limb(P, [mw(0.0, 0.0, 0.90), mw(0.0, 0.14, 1.18), mw(0.0, 0.26, 1.40)],
+         0.235, 0.205)
+    P.add(L.box(0.56, 0.26, 0.09), 'dark', loc=mw(0.0, 0.04, 1.00),
+          rot=(0.0, 0.0, _yaw))
+    for s in (-1, 1):
+        P.add(L.sphere(0.155, 0.145, 0.130, 12, 8), 'body',
+              loc=mw(s * 0.27, 0.24, 1.40))
+        limb(P, [mw(s * 0.27, 0.24, 1.38), mw(s * 0.20, 0.34, 1.02),
+                 (GX + s * 0.025 * RX, GY + s * 0.025 * RY, GZ + 0.02)],
+             0.072, 0.052)
+        P.add(L.sphere(0.072, 0.066, 0.062, 10, 7), 'body',
+              loc=(GX + s * 0.085 * RX, GY + s * 0.085 * RY, GZ + 0.02))
+    P.add(L.sphere(0.145, 0.150, 0.150, 14, 9), 'body', loc=mw(0.0, 0.36, 1.52))
+    P.add(aim(L.cone(0.185, 0.090, 0.195, 14), mw(0.0, 0.34, 1.47),
+              (FX * 0.34, FY * 0.34, 1.0)), 'body')
+    # THE BRIM. The eyes sit 0.06 INSIDE it, so no yaw can walk the glow to
+    # the frame edge - System 1's clipped-glow fault is a border assertion
+    # now, but a glow that cannot get near the border is better than one the
+    # check has to catch.
+    P.add(aim(L.cone(0.215, 0.165, 0.055, 16), mw(0.0, 0.42, 1.46),
+              (FX * 0.90, FY * 0.90, 1.0)), 'body')
+    for s in (-1, 1):
+        P.add(L.sphere(0.027, 0.027, 0.027, 8, 6), 'glow',
+              loc=mw(s * 0.052, 0.42, 1.49))
+    _close("man")
+
+    # -------------------------------------------------- THE THREE ROPES
+    # They leave the drum's BOTTOM-REAR, drop on the far side of it, pass
+    # under the sill and surface in front, then run a long flat run across
+    # the floor spread hard in X. See PASS 4 in the docstring for why the
+    # drop is hidden rather than shortened.
+    _open()
+    P.add(aim(L.cone(0.075, 0.075, 1.46, 14), (-0.64, DY - 0.46, 0.21),
+              (1.0, 0.0, 0.0)), 'dark')
+    for rx in (-0.68, 0.86):
+        P.add(L.box(0.10, 0.16, 0.30), 'dark', loc=(rx, DY - 0.46, 0.15))
+    for sx, mx, ex, ey in ((-0.34, -0.80, -1.22, -1.00),
+                           (0.06, 0.10, 0.14, -1.34),
+                           (0.46, 0.80, 1.16, -0.96)):
+        P.raw(L.tube([Vector((sx, DY + 0.14, DZ - RD + 0.05)),
+                      Vector((sx, DY + 0.02, DZ - RD - 0.14)),
+                      Vector((sx, DY - 0.26, 0.055)),
+                      Vector((sx * 0.5 + mx * 0.5, DY - 0.70, 0.052)),
+                      Vector((mx, DY + ey * 0.55, 0.040)),
+                      Vector((ex, DY + ey, 0.038))],
+                     [0.042, 0.040, 0.038, 0.036, 0.034, 0.032], 7), 'bone')
+        # THE HOOK - a dark shank and a real bent bill, lying over on the
+        # floor and pointing on along the rope's own line, so it reads as the
+        # END of the rope from any yaw rather than as a brick beside it.
+        hx, hy = ex - mx, ey - ey * 0.55
+        _hl = math.hypot(hx, hy) or 1.0
+        hx, hy = hx / _hl, hy / _hl
+        P.add(aim(L.cone(0.042, 0.030, 0.16, 9),
+                  (ex, DY + ey, 0.038), (hx, hy, 0.05)), 'dark')
+        P.raw(L.tube([Vector((ex + hx * 0.17, DY + ey + hy * 0.17, 0.040)),
+                      Vector((ex + hx * 0.27 - hy * 0.09,
+                              DY + ey + hy * 0.27 + hx * 0.09, 0.052)),
+                      Vector((ex + hx * 0.21 - hy * 0.17,
+                              DY + ey + hy * 0.21 + hx * 0.17, 0.044)),
+                      Vector((ex + hx * 0.10 - hy * 0.14,
+                              DY + ey + hy * 0.10 + hx * 0.14, 0.040))],
+                     [0.030, 0.028, 0.025, 0.021], 7), 'dark')
+    _close("ropes")
+
+    return P
+
+
+BUILDERS.update({"winder": winder})

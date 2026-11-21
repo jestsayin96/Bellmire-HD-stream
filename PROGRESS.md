@@ -14533,6 +14533,64 @@ launches the whole project, so its log shows the headless game joining `#jestsay
 refresh - that is every lane's parse run, not a test. The bot posted nothing.
 Next firing: own cycle.
 
+## B104 - 21 Nov 08:45 CT - THE ONE TILL MY OWN AWAY GATE NEVER COVERED, AND A STAND-DOWN THAT
+## COST NOBODY A WINDOW. **HELD UNGATED ON `b104-wip`. DO NOT TICK, DO NOT MERGE.**
+
+**I DID NOT CLAIM THE LOCK AND THAT WAS THE RIGHT CALL, NOT A MISS.** The last line of
+`docs/RUN_LOCK.txt` reads `RUNNING 2026-11-21T08:42:23-06:00 (QA tester, ... cap claim+15)` with
+**no `IDLE` from that lane after it**, so the QA tester holds the window. `tasklist` showed **no
+Godot of any name alive at 08:47:52 CT**, and I am saying plainly that this did NOT make the hold
+stale and I did not clear it: the line was **five minutes old**, which is a lane between
+batteries, exactly the case B4 was right to walk away from. Beyond that, the 07:58 plan told this
+lane to **claim by :50 with a finish inside :52 or split the gates**; by the time the QA cap
+expires (08:57) the HUD's :52-:07 window is live. **So the gates are split off and carried to the
+09:45 firing, and the HUD keeps a cycle this lane has taken from it twice.**
+
+**THE DEFECT, AND IT IS MINE.** `handle()` refuses a shop command while a hero is on the scar road
+or below it. That list was a bare literal and **`oil` was never in it**: `!oil` reached
+`Roster.buy_oil`, which rolls `haggle()` and spends gold, so **a hero standing in the dark bought
+flasks at a counter in town** while `!forge`, `!armoury`, `!brew`, `!wear` and `!dye` all refused
+with where that hero was. Nothing published the gate, so nothing could contradict it - a hole in a
+promise kept only in code is silent by nature. `delve.gd:78` pools each hero's oil **at the
+descend and zeroes `h["oil"]`**, so this was never a live top-up of a party's lamp (I checked
+before writing it up, and it is a smaller fault than it first looked): the flasks sat on an absent
+hero for the next delve. The charge, the haggle line and the refusal that never came are real.
+
+**THE FIX AND THE NEW ARM.** The list is now `const AWAY_COUNTERS` with `oil` in it, and a new
+guard holds it to **the engine's own authority rather than to my taste**: `haggle()` IS the
+counter, and the functions that call it in `scripts/roster.gd` are the set of tills the game
+actually has. The arm reads that file, tracks the enclosing `func`, **drops everything after a
+`#`** (so `kit_up_after_delve`, which mentions `haggle()` only in a comment, is correctly not
+collected) and holds every call site to `AWAY_COUNTERS`:
+- `COUNTER AWAY` - a haggled till whose command is not gated.
+- `COUNTER UNKNOWN` - a till this guard's func -> command map has never heard of, i.e. a new shop.
+- `COUNTER AWAY ANCHOR` - `roster.gd` unreadable, or not one `haggle()` call left in it.
+
+**PREDICTED, NOT MEASURED - AND IT IS A PYTHON EMULATION OF MY OWN GDSCRIPT, AWAITING THE REAL
+GATE.** Walking the same scan in python over the real `scripts/roster.gd` collects seven tills -
+`buy_weapon, buy_armour, buy_potion, buy_oil, buy_brew, wear, dye` - **0 unknown, 0 ungated with
+the fix in**. **The red half is the state `main` is in right now**: with `oil` taken back out of
+my own const, the arm raises exactly `buy_oil -> !oil` and nothing else. **That half was proven by
+perturbing MY OWN file and nothing else** - no `roster.gd` or `gear.gd` edit, the limit B103
+reported and that still stands for the two `AUTHORITY` arms.
+
+**NOTHING ELSE MOVED.** `data/commands.json` and `docs/COMMANDS.md` are **untouched this cycle**
+(`md5 c2bd481b…` / `4f9e19e5…`), so the generator has nothing to rewrite and no doc drift exists
+to fix. Drift scanned both directions off the dispatch table: **32 entries, 32 answered, 0 entries
+with no command**; the only code verbs with no entry are `testbits` / `testsub` / `testpoints`,
+which are local-only by design and deliberately unpublished. The 7 published aliases that are not
+dispatch cases (`armor, commands, sheet, spotlight, stats, steel, watch`) are **not drift** -
+`canonical()` maps every alias to its key before the `match`, and I checked that rather than
+counting them as faults. `armory` is kept as a literal in the const for the one path where
+`canonical()` is blind: if `data/commands.json` ever fails to parse, the alias arrives verbatim.
+
+**STILL OWED, UNCHANGED FROM B103:** `--headless` parse, `_l14_test`, `_twitch_parse`,
+`_commands_doc`. **None of them has run against this edit.** This is a checkpoint commit on
+`b104-wip`, not a delivery on `chatbot`.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE SENT ON ANY ACCOUNT.** No Godot was
+launched at all, so not even a headless join happened. The bot posted nothing.
+Next firing: claim the :45 window early, run the four gates on this edit, and only then land it.
 U123 - 2026-11-21 07:5x CST - STAND-DOWN: CHAT BOT B103 HOLDS THE GODOT LOCK. NO .gd CHANGED, NO ENGINE LAUNCH
 Lock: read R's WORKING docs/RUN_LOCK.txt at 07:53 CST. Last line: "RUNNING 2026-11-21T07:52:30-06:00 (chat bot B103 ... cap 08:17, expected finish 08:00)", no IDLE from the chat bot after it (preceding IDLE was game build 07:20). tasklist showed no Godot yet (claim ~30 s old), so by the yield rule the RUNNING line is live and I did not claim over it. Expected finish 08:00 leaves too little of my :07 window for a safe windowed measure.
 Item unchanged: WORK_PLAN HUD row (U121/U122 open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout before touching feed_hud.gd.
@@ -14575,3 +14633,53 @@ TAKE THIS NEXT (07:58 block) HUB row = standing check, no new row. Took it as wr
 - app.js: `node --check` OK. innerHTML at app.js:255 and :301 only (both page-owned); the other grep hits are comments. 0 outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. CSP meta count 1. index.html comment "only innerHTML ... two page-owned sites" still true.
 - web/ unchanged so no screenshot or hostile-name rerun owed. NOT claiming READY TO PUBLISH. Live-dot colour: unchanged, no edit this run.
 - Untracked _hub_ready_shot.png in worktree is from an earlier run; delete refused on this machine, named here.
+## B105 - 2026-11-21 09:45 CT (chat bot) - THE EMULATION WAS RIGHT, AND NOW A GATE SAYS SO: B104's
+## AWAY-COUNTER ARM IS GREEN AND RED-PROVED BY GODOT, NOT BY PYTHON
+
+**I GOT THE WINDOW AND I USED IT FOR THE ONE THING IT WAS OWED.** The last line of
+`docs/RUN_LOCK.txt` was `IDLE 2026-11-21T09:15:12-06:00 ... (game build)`, so no lane held the
+lock. Claimed 09:47:10-06:00, declared finish 09:52, cap 10:12, **released early at 09:5x with
+every gate run**. No second Godot alongside anyone's.
+
+**WHAT LANDED: NOTHING NEW, AND THAT IS THE POINT.** B104 was a checkpoint commit held on
+`b104-wip` with four gates owed and none run. This cycle ran them. `scripts/chatcmd.gd`,
+`data/commands.json` and `docs/COMMANDS.md` are **byte-identical to what B104 held** - no edit was
+made to buy the green. The delivery is that the held edit is now gated and on `chatbot`.
+
+**THE FOUR GATES, READ AS VERDICT LINES, NOT AS STORIES:**
+- parse: `--headless --path . --quit-after 300` -> **RC=0, 0 SCRIPT ERROR, 0 Parse Error** over the
+  whole 10,009-byte log.
+- `tools/_l14_test.gd` -> **`L14_TEST OK (24 checks)`**, and arm 1 reads
+  `no COMMANDS_DATA guard arm fired on the load (0 fired: [])` - **the new COUNTER arm among them**.
+- `tools/_twitch_parse.gd` -> **`TWITCH_PARSE OK (8 checks)`**.
+- `tools/_commands_doc.gd` -> **`COMMANDS_DOC OK wrote 32 commands`** and the doc's md5 is
+  **`4f9e19e5fb4787655534bf12728110a3` before and after** - a true no-op, not a quiet rewrite.
+
+**THE RED HALF IS NO LONGER AN EMULATION, AND I SAY PLAINLY THAT IT WAS ONE UNTIL THIS HOUR.**
+B104 predicted the arm's red half by walking the scan in python over the real `scripts/roster.gd`
+and reported it as a prediction. **Godot now agrees with the prediction exactly.** Taking `"oil"`
+back out of my own `AWAY_COUNTERS` and running the real `_l14_test`:
+`FAIL no COMMANDS_DATA guard arm fired on the load (1 fired: ["COUNTER AWAY"])`,
+`L14_TEST FAIL 1 (24 checks)`, and the arm names **`["buy_oil -> !oil"]` and nothing else** - one
+charge, the one B104 found, no false siblings. `scripts/chatcmd.gd` was then restored and its md5
+is **`91fb4f196a53e32f48ce5d16e0c1a63d` before the perturbation and after it**. The perturbation
+was to **MY OWN FILE ONLY** - no `roster.gd`, no `gear.gd`.
+
+**DRIFT, BOTH DIRECTIONS, BY THE GATE RATHER THAN BY MY OWN COUNTING:** 74 verbs answered with
+`missing []`, every data command answered with `unanswered []`, `docs/COMMANDS.md` carries all 32
+rows with `unpublished []` and `stale []`. Zero drift each way.
+
+**THE MERGE, COUNTED RATHER THAN ASSUMED.** `origin/main` into `chatbot` conflicted once in root
+`PROGRESS.md`. **Both sides kept, only the 3 marker lines stripped** (1 `^<<<<<<< `, 1 `^=======$`,
+1 `^>>>>>>> `, 0 `^|||||||`), and all four shapes return **ZERO** afterwards.
+`diff --numstat` reads **+58/-0 against `origin/main` and +32/-0 against `b104-wip`** -
+**ZERO LINES REMOVED IN EITHER DIRECTION**, so neither side lost a cycle.
+
+**FOR THE GAME BUILD LANE - THANK YOU, AND IT UNBLOCKS SOMETHING.** S86 named `REWORK_DIVISOR`,
+`OIL_PER_HEAD` and `OIL_FLOOR_MIN`. Those were the second of my two asks and they are the exact
+missing authority for the two `AUTHORITY` arms B103 and B104 both had to report as wording guards.
+**I did not take that this hour** - it is a real edit and it arrived with nine minutes of window
+left, and I would rather carry it than rush an arm into a gate I could not red-prove. Next firing.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
+`--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.

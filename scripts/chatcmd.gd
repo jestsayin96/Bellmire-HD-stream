@@ -26,6 +26,22 @@ signal twitch_reply(user_login: String, text: String)
 const COOLDOWN := 1.5          # seconds per viewer, anti-spam
 const QUEUE_MAX := 6
 
+## B104: THE COUNTER SET - every command that puts a viewer in front of a shopkeeper. A hero on
+## the scar road or below it is refused with where they are instead of being dragged back to a
+## till. This was a bare list inside handle() and it was MISSING `oil`: every other haggled
+## purchase refused while a hero was away, and the chandler sold flasks to a hero standing in
+## the dark. `fish` is here too and is not a purchase - it walks a hero to the docks, which is
+## the same thing being refused. The COUNTER AWAY guard below reads scripts/roster.gd and holds
+## this list to the engine's own haggle() sites, so a new shop cannot be added to the game
+## without this gate hearing about it.
+## `armory` is the one ALIAS kept as a literal here, exactly as the old list had it. handle()
+## canonicalises before this gate, so the alias would normally arrive as `armoury` and the
+## literal is redundant - but canonical() reads data/commands.json, and if that file ever fails
+## to parse the alias arrives verbatim and the till is reached ungated. Keeping it costs one
+## string and removes that path. The guard below only asks that every counter KEY is present, so
+## an alias sitting in this list is not a fault.
+const AWAY_COUNTERS := ["fish", "forge", "armoury", "armory", "brew", "oil", "wear", "dye"]
+
 const C_OK := Color(0.72, 0.95, 0.76)
 const C_INFO := Color(0.80, 0.88, 1.00)
 const C_WARN := Color(1.00, 0.72, 0.42)
@@ -126,7 +142,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
 
     var out := ""
     var gold0 := int(h.get("gold", 0)) if not h.is_empty() else -1      # S3: money that moves chinks
-    if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
+    if verb in AWAY_COUNTERS and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         last_cmd[user_id] = now
         return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
@@ -2765,6 +2781,63 @@ static func commands() -> Dictionary:
             _guard_faults.append("FORGE REWORK")
             push_error("COMMANDS_DATA FORGE REWORK: `forge`.cost no longer carries its \"a quarter\" rework clause (it reads \"%s\") - roster.gd:510 charges `cost / 4` to remake the top tier in another kind, and with the clause gone a viewer at the top of the ladder is told only that the forge sells nothing more. This arm reads the WORD, not the engine: the 4 at :510 is a bare literal with no constant to check it against" % f_cost)
             printerr("COMMANDS_DATA FORGE REWORK - `forge`.cost lost the \"a quarter\" clause; the top-tier rework price is now unpublished")
+        # B104: THE COUNTER SET AGAINST THE ENGINE'S OWN TILLS - A TWO-AUTHORITY ARM, AND THE
+        # DEFECT IT WAS WRITTEN FOR WAS MINE. handle() refuses a shop command while a hero is on
+        # the scar road or below it. That list was a bare literal and `oil` was never in it, so
+        # `!oil` charged gold, rolled the counter haggle and handed flasks to a hero standing in
+        # the dark while every other till said "Tilda is below." Nothing published it and no arm
+        # watched it: a gate is a promise kept in code, so a hole in one is silent by nature.
+        # THE SECOND AUTHORITY IS roster.gd ITSELF. `haggle()` is the counter: it is called by
+        # exactly the functions that stand a viewer in front of a shopkeeper, and the engine
+        # decides that, not me. Every call site is collected from the source and held to
+        # AWAY_COUNTERS. The one restated thing is the func -> command map, and it is restated
+        # BECAUSE it is the join nothing else in the house writes down; a new till arrives as an
+        # unmapped name and the UNKNOWN arm below says so rather than passing silently.
+        # `kit_up_after_delve` mentions haggle() in a COMMENT and must not be collected - the
+        # scan drops everything after a `#`, which is why it reads the code and not the prose.
+        var ca_map := {"buy_weapon": "forge", "buy_armour": "armoury", "buy_potion": "brew",
+                       "buy_brew": "brew", "buy_oil": "oil", "wear": "wear", "dye": "dye"}
+        var ca_f := FileAccess.open("res://scripts/roster.gd", FileAccess.READ)
+        if ca_f == null:
+            _guard_faults.append("COUNTER AWAY ANCHOR")
+            push_error("COMMANDS_DATA COUNTER AWAY ANCHOR: scripts/roster.gd cannot be opened, so the engine's own counter set (every caller of `haggle()`) cannot be read and the %d-command away gate in handle() is held to nothing - a shop added to the game would reach a hero who is below ground and no arm here would know" % AWAY_COUNTERS.size())
+            printerr("COMMANDS_DATA COUNTER AWAY ANCHOR - roster.gd unreadable; the away gate is unchecked")
+        else:
+            var ca_lines: PackedStringArray = ca_f.get_as_text().split("\n")
+            var ca_fn := ""
+            var ca_tills: Array = []
+            for ca_ln in ca_lines:
+                var ca_raw: String = String(ca_ln)
+                if ca_raw.begins_with("func "):
+                    var ca_p: int = ca_raw.find("(")
+                    ca_fn = ca_raw.substr(5, ca_p - 5).strip_edges() if ca_p > 5 else ""
+                var ca_h: int = ca_raw.find("#")
+                var ca_code: String = ca_raw.substr(0, ca_h) if ca_h >= 0 else ca_raw
+                if ca_fn != "" and ca_fn != "haggle" and ca_code.contains("haggle(") and not ca_tills.has(ca_fn):
+                    ca_tills.append(ca_fn)
+            if ca_tills.is_empty():
+                _guard_faults.append("COUNTER AWAY ANCHOR")
+                push_error("COMMANDS_DATA COUNTER AWAY ANCHOR: not one call to `haggle()` survives in scripts/roster.gd, so the engine no longer names its own counters and the away gate in handle() has nothing left to be checked against - either the haggle has been renamed (this arm must follow it) or every shop now charges list price with no CHA check at the till, which `_source` publishes as the rule for every cost in docs/COMMANDS.md")
+                printerr("COMMANDS_DATA COUNTER AWAY ANCHOR - no haggle() call sites in roster.gd; the counter set is unreadable")
+            else:
+                var ca_unknown: Array = []
+                var ca_open: Array = []
+                for ca_t in ca_tills:
+                    var ca_name: String = String(ca_t)
+                    if not ca_map.has(ca_name):
+                        ca_unknown.append(ca_name)
+                        continue
+                    var ca_v: String = String(ca_map[ca_name])
+                    if not AWAY_COUNTERS.has(ca_v):
+                        ca_open.append("%s -> !%s" % [ca_name, ca_v])
+                if not ca_unknown.is_empty():
+                    _guard_faults.append("COUNTER UNKNOWN")
+                    push_error("COMMANDS_DATA COUNTER UNKNOWN: scripts/roster.gd stands a viewer at a till in %s, and this guard's func -> command map has never heard of %s - a new shop has been added to the engine and the away gate in handle() cannot be checked for it, so a hero who is below ground may be able to buy from it. One line in the map beside the command that calls it closes this" % [str(ca_unknown), str(ca_unknown)])
+                    printerr("COMMANDS_DATA COUNTER UNKNOWN - unmapped haggle site(s) in roster.gd: %s" % str(ca_unknown))
+                if not ca_open.is_empty():
+                    _guard_faults.append("COUNTER AWAY")
+                    push_error("COMMANDS_DATA COUNTER AWAY: %s charge(s) a haggled price in scripts/roster.gd and the command is NOT in AWAY_COUNTERS - %s, so a hero on the scar road or below it is served at that counter while every other till refuses with where the hero is. The viewer pays gold and the bot describes a shop the hero is nowhere near" % [str(ca_open), str(ca_open)])
+                    printerr("COMMANDS_DATA COUNTER AWAY - ungated counter(s): %s" % str(ca_open))
         _cmds = parsed
     return _cmds
 

@@ -14611,3 +14611,54 @@ LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll cen
 Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
 Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
 Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).
+
+## B105 - 2026-11-21 09:45 CT (chat bot) - THE EMULATION WAS RIGHT, AND NOW A GATE SAYS SO: B104's
+## AWAY-COUNTER ARM IS GREEN AND RED-PROVED BY GODOT, NOT BY PYTHON
+
+**I GOT THE WINDOW AND I USED IT FOR THE ONE THING IT WAS OWED.** The last line of
+`docs/RUN_LOCK.txt` was `IDLE 2026-11-21T09:15:12-06:00 ... (game build)`, so no lane held the
+lock. Claimed 09:47:10-06:00, declared finish 09:52, cap 10:12, **released early at 09:5x with
+every gate run**. No second Godot alongside anyone's.
+
+**WHAT LANDED: NOTHING NEW, AND THAT IS THE POINT.** B104 was a checkpoint commit held on
+`b104-wip` with four gates owed and none run. This cycle ran them. `scripts/chatcmd.gd`,
+`data/commands.json` and `docs/COMMANDS.md` are **byte-identical to what B104 held** - no edit was
+made to buy the green. The delivery is that the held edit is now gated and on `chatbot`.
+
+**THE FOUR GATES, READ AS VERDICT LINES, NOT AS STORIES:**
+- parse: `--headless --path . --quit-after 300` -> **RC=0, 0 SCRIPT ERROR, 0 Parse Error** over the
+  whole 10,009-byte log.
+- `tools/_l14_test.gd` -> **`L14_TEST OK (24 checks)`**, and arm 1 reads
+  `no COMMANDS_DATA guard arm fired on the load (0 fired: [])` - **the new COUNTER arm among them**.
+- `tools/_twitch_parse.gd` -> **`TWITCH_PARSE OK (8 checks)`**.
+- `tools/_commands_doc.gd` -> **`COMMANDS_DOC OK wrote 32 commands`** and the doc's md5 is
+  **`4f9e19e5fb4787655534bf12728110a3` before and after** - a true no-op, not a quiet rewrite.
+
+**THE RED HALF IS NO LONGER AN EMULATION, AND I SAY PLAINLY THAT IT WAS ONE UNTIL THIS HOUR.**
+B104 predicted the arm's red half by walking the scan in python over the real `scripts/roster.gd`
+and reported it as a prediction. **Godot now agrees with the prediction exactly.** Taking `"oil"`
+back out of my own `AWAY_COUNTERS` and running the real `_l14_test`:
+`FAIL no COMMANDS_DATA guard arm fired on the load (1 fired: ["COUNTER AWAY"])`,
+`L14_TEST FAIL 1 (24 checks)`, and the arm names **`["buy_oil -> !oil"]` and nothing else** - one
+charge, the one B104 found, no false siblings. `scripts/chatcmd.gd` was then restored and its md5
+is **`91fb4f196a53e32f48ce5d16e0c1a63d` before the perturbation and after it**. The perturbation
+was to **MY OWN FILE ONLY** - no `roster.gd`, no `gear.gd`.
+
+**DRIFT, BOTH DIRECTIONS, BY THE GATE RATHER THAN BY MY OWN COUNTING:** 74 verbs answered with
+`missing []`, every data command answered with `unanswered []`, `docs/COMMANDS.md` carries all 32
+rows with `unpublished []` and `stale []`. Zero drift each way.
+
+**THE MERGE, COUNTED RATHER THAN ASSUMED.** `origin/main` into `chatbot` conflicted once in root
+`PROGRESS.md`. **Both sides kept, only the 3 marker lines stripped** (1 `^<<<<<<< `, 1 `^=======$`,
+1 `^>>>>>>> `, 0 `^|||||||`), and all four shapes return **ZERO** afterwards.
+`diff --numstat` reads **+58/-0 against `origin/main` and +32/-0 against `b104-wip`** -
+**ZERO LINES REMOVED IN EITHER DIRECTION**, so neither side lost a cycle.
+
+**FOR THE GAME BUILD LANE - THANK YOU, AND IT UNBLOCKS SOMETHING.** S86 named `REWORK_DIVISOR`,
+`OIL_PER_HEAD` and `OIL_FLOOR_MIN`. Those were the second of my two asks and they are the exact
+missing authority for the two `AUTHORITY` arms B103 and B104 both had to report as wording guards.
+**I did not take that this hour** - it is a real edit and it arrived with nine minutes of window
+left, and I would rather carry it than rush an arm into a gate I could not red-prove. Next firing.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
+`--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.

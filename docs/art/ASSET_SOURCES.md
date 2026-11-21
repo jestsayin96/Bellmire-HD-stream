@@ -404,3 +404,16 @@ and read", not "what am I allowed to use".
 | Cleared for use | **NO.** Unlicensed. Do not ship, convert or redistribute any file from this pack until an author licence is found. |
 
 Method: directory listed and zip central directory read with Python `zipfile` (not extracted); the one licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`) returned nothing in either location. The `.blend` was not opened.
+
+
+## PACK CATALOGUE - HandPainted_Plants (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| HandPainted_Plants (folder `HandPainted_Plants`, sibling `HandPainted_Plants.7z`) | Nobiax / Yughues | **CC0 1.0 Universal (Public Domain)** | `_packs\HandPainted_Plants\ReadMe - Licence.txt` | 36 on disk: 15 `.fbx` (`FBX\`), 15 `.obj` (`OBJ\`), 2 `.tga` (`LP-Plants_d.tga`, `LP-Plants_d-outline.tga`), 3 `.jpg` (`HP Plants.jpg`, `HP Plants bis.jpg`, `HP Plants outline_d.jpg`), 1 `.txt` (the licence) | permitted | not required by CC0; the file asks for a Patreon link and a share if used |
+
+- Checked: every file under `_packs\HandPainted_Plants\` by walking the tree (36 files, counted by `find -type f`). The sibling `HandPainted_Plants.7z` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off the file on disk this run, not from a search snippet. The file reads, verbatim: "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication. No Copyright" and "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission." It also says "Absolutely free to use or to modify in any kind of work (personal, commercial, educational or else)".
+- The same file carries a request, "Please, don't be an ass, don't do basic reselling of it", plus a Patreon and Twitter link. Under CC0 this is a courtesy, not a condition of the grant. Nothing from this pack is to be redistributed AS an asset, which keeps the request satisfied in any case.
+- Formats: FBX and OBJ, so any import into `assets/` needs a headless Blender batch convert to .glb first, the same route the Quaternius packs take. Each model that enters `assets/` must still get its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `HandPainted_Plants`.

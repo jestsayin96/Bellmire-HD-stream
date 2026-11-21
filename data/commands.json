@@ -5,7 +5,7 @@
   "twitch_cooldown_s": 3.0,
   "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "festival", "town", "bestiary", "miniboss", "help"],
   "commands": {
-    "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order (see !help in docs/COMMANDS.md).",
+    "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
                   "example": "!enlist knight dwarf"},
     "hero":      {"aliases": ["stats", "sheet"], "args": "", "cost": "free", "needs_hero": true, "short": "Your hero's sheet.",

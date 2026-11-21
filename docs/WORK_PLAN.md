@@ -204,6 +204,16 @@
 ##      `const X := {...}` literal must track BRACE DEPTH and strip comments, or it silently
 ##      truncates: mine returned MB_NAME 12 and MB_FIT 30 this hour against true 42 and 53. Same
 ##      fault family as the ORDER regex that returned 4, 0 and 46 on three different seats.
+##   h. **THIS PROMPT (:58) - AND A FAULT OF MINE THIS HOUR THAT THE PROMPT ALREADY PREDICTS.**
+##      I synced `laptop` FIRST as the recipe says, but my whole run finished at 21:10 and **the
+##      game build claimed at 21:08:12**, so it read the 19:58 plan, not mine. The deep checks (a
+##      Chromium render, two image measurements, a blob-level arithmetic pass) are what ran the
+##      clock out. **THE GAME BUILD ROW THIS HOUR NEEDED NONE OF THEM** - "S73 is built on
+##      `origin/s73-wip`, land it, do not rebuild it" came straight off the lock line and
+##      `git log origin/main..origin/<b>` inside the first five minutes. **SO: WRITE AND SYNC THE
+##      GAME BUILD ROW FIRST, OFF THE LOCK LINE AND THE BRANCH LIST, BEFORE ANY VERIFICATION**, then
+##      do the merges, the ticks and the rest of the block. One lane has a hard deadline nine
+##      minutes after you start; the other five do not.
 #### NEEDS MR. E: nothing.
 
 ## TAKE THIS NEXT - THE 19:58 CT FIRING, 20 NOV 2026 (machine clock 19:58-20:1x CST).

@@ -1,6 +1,6 @@
 ## TAKE THIS NEXT - THE 22:58 CT FIRING, 20 NOV 2026 (machine clock 22:59-23:0x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 BLOCK. ***
-## SIX BRANCHES WITH NEW WORK, SIX MERGED, FIVE TICKED. main is the six-lane merge 65698d88
+## SIX BRANCHES WITH NEW WORK, SEVEN MERGES, SIX TICKED. main is the six-lane merge 65698d88
 ## plus this plan commit.
 ##
 ## *** MY OWN CORRECTION FIRST, AND IT IS TO THE 21:58 BLOCK'S OWN NUMBER. *** That block's B93
@@ -62,20 +62,34 @@
 ##     AT `u114_s100_t600_1080.png` MYSELF** at full resolution: five lines on the vellum, the
 ##     last line clear of the lower rail with real margin, nothing cut. I could not red-prove it -
 ##     that needs Godot - so this tick rests on the code, the parse and the picture, and I say so.
+##   - **ART - EVEN LIGHT IS FINISHED, 44/44, WITH THE FLOOR UNDER ALL OF IT (`5275fab3`, pushed
+##     between my merge and my sync; I re-read the ref, merged it, and re-measured before ticking).
+##     EVERY NUMBER IN THE CLAIM REPRODUCES ON MY OWN COUNT:** the 44 body directories are
+##     **set-equal to content's `miniboss_feed.by_key`** - not merely the same size, the same keys,
+##     symmetric difference empty - **132 views all present**, **132 ground rows, 0 errors, 0 views
+##     with zero shadow**, and peak occlusion across all 132 lands in **0.7077-0.7107**, the band
+##     the lane stated. Remainder 0.
+##     **AND THE ONE RED IS REAL - I LOOKED AT IT.** `ratcatcher` front and back carry
+##     `frame_edge` 15, and it is the only body of the 44 that touches a frame edge at all. I
+##     opened `ratcatcher/hero_front.png`: **16 pixel rows touch x=0 (y 381-476) and the hero's
+##     left fist and elbow are sliced flat against the border.** `fits_frame` says **true** on
+##     `pair_w` 5.59 against FRAME_W 5.60 - true by a centimetre while an arm is cut. The lane
+##     found a pre-existing fault in shipped work and reported it against itself; that is the
+##     opposite of a miss.
+##     **THE HARNESS FAULT IT NAMES IS WORTH MORE THAN THE BODY AND I REPRODUCED IT:**
+##     `_fit_report.json` top level reads **`ok: true`, `errors: []`, `blind_views: []`** at this
+##     very moment, with ratcatcher clipped in its own pair row. A later `--only` run rewrites the
+##     top-level verdict from its own keys and merges the earlier pair rows underneath, so a
+##     per-key RED is erased by the next key rendered. **NO LANE AND NO SEAT MAY READ THAT
+##     TOP-LEVEL VERDICT AS A STATEMENT ABOUT THE TREE** - read the pair rows. This is the
+##     lying-instrument class and it is now written down.
 ##
 ## NOT TICKED, AND WHY:
-##   - **ART - EVEN LIGHT INSTALMENT 5. HALF DELIVERED, STILL OPEN, AND THAT IS THE RIGHT SHAPE.**
-##     It ships the ground-contact fix as a **measured** thing and kills its own obvious version
-##     with a render first: `Object.is_shadow_catcher` exists on Blender 5.2.3 so `hasattr` passes,
-##     **and BLENDER_EEVEE does not honour it** - catcher and plain-opaque rows identical to the
-##     digit - so the easy fix would have shipped a white slab. The shadow is two floor renders per
-##     view differenced instead, composited only where the beauty film is empty (**subject_px
-##     touched 0, all six views**). It also reports its own pass 1 as green-and-wrong twice. **IT
-##     IS DEFAULT OFF** (`--ground` / `MBFIT_GROUND=1`) and A/B'd on two bodies only, so no shipped
-##     file moved and 42 of 44 bodies are untouched. Adoption rewrites 132 files and art says
-##     itself it should land with the last 18 bodies. **Nothing to tick until it is adopted.**
-##     It also lands both corrections I gave instalment 4 (the 44-exclusion recipe now reproduces
-##     on origin/main; 43,8xx -> 43,78x). Those are closed.
+##   - **ART - INSTALMENT 5 WAS NOT TICKED WHEN I FIRST WROTE THIS BLOCK, AND THEN ART LANDED THE
+##     ADOPTION WHILE I WAS SYNCING. I AM REPLACING MY OWN ROW RATHER THAN LEAVING IT STANDING.**
+##     See the sixth tick below. What I wrote first - "default off, nothing to tick until adopted,
+##     adoption should land with the last 18 bodies" - was true of `058a97bd` and was overtaken by
+##     `5275fab3` inside my own run. The lane did exactly what the earlier commit said it would.
 ##   - **No publish verification was run and none was owed** - `origin/hub` carries no `web/`
 ##     change this hour and made no readiness claim.
 ##
@@ -89,11 +103,15 @@
 ##     the named condition is satisfied **before** you start. Then the usual battery.
 ##   - **CONTENT (:22) - C-154, pool top-up, your own cycle.** No miniboss is owed: the 44th's
 ##     lines are written and the next body does not exist yet. Keep the `_note_` key nested.
-##   - **ART (:34) - THE 45th BODY, and keep even light OFF.** Instalment 5 is sound and adoption
-##     waits for the last 18 bodies, as you said yourself. The two faults you named in your own
-##     pictures - **the dyer has no creature in its back view and the greener's man is one flat
-##     dark mass** - are still open and are the Beadle-facing fault a third time; they are yours
-##     and they are not a new item.
+##   - **ART (:34) - RATCATCHER'S FRAME, THEN THE HARNESS VERDICT, THEN THE 45th BODY - IN THAT
+##     ORDER.** Even light is finished and ticked, so the open things are the two faults your own
+##     pass found. (1) `ratcatcher` is cut at x=0 front and x=759 back; `pair_w` 5.59 vs FRAME_W
+##     5.60 is the cause and `fits_frame` cannot see it. (2) `_fit_report.json`'s top-level verdict
+##     is rewritten by every `--only` run and currently reads `ok: true` over a clipped body -
+##     make the top level either report the union of the pair rows or stop claiming a verdict at
+##     all. **Both are defects in work you have shipped and neither is a new item.** Still open
+##     from instalment 4 and not forgotten: **the dyer has no creature in its back view and the
+##     greener's man is one flat dark mass** - the Beadle-facing fault a third time.
 ##   - **HUB (:37) - NEXT PACK IN THE CATALOGUE.** The Fantasy_Ruins_Pack row is ticked and the
 ##     "unreadable licence" flag in `docs/PACK_CATALOGUE.md` is superseded - make sure that flag is
 ##     actually struck in that file, not only contradicted in ASSET_SOURCES.md.

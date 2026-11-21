@@ -131,17 +131,61 @@ If the unoccluded floor render comes back with no opaque pixels, the view is
 recorded as an `error` in the register, not as a clean zero shadow. A shadow
 measured over nothing would otherwise read as a pass.
 
-## THE DECISION THAT IS NOT MINE
+## AND THEN I ADOPTED IT, IN ONE PASS, OVER ALL 44
 
-`--ground` is **default OFF**, exactly as `--evenlight` was, because turning it
-on changes every pixel of every cell. Adopting it is one command and about five
-minutes of render - but it rewrites **132 shipped files**, and half-applying it
-would give a contact sheet where some cells have floors and some do not. **I
-have not adopted it.** The 18 bodies still on the old light (beadle, leech,
-moulder, paviser, pressman, quartermaster, rammer, ratcatcher, reeve, relief,
-scraper, sealer, sower, stackman, stoker, strickler, tapster, winder) should be
-finished in the SAME pass that adopts the floor, so the set lands consistent in
-one move rather than two.
+The section that stood here said adoption was a decision I was leaving open.
+Time remained in the firing, so I took it rather than leave 18 bodies on the
+old light for another hour - **and I am replacing the sentence instead of
+leaving it, because it is no longer true.** All 44 non-chibi bodies re-rendered
+with `--evenlight --ground`, which lands the rig fix and finishes even light in
+the same move. Half-applying it would have given a sheet where some cells have
+floors and some do not; that is the whole reason it went in one pass.
+
+**EVEN LIGHT IS NOW COMPLETE. The remainder is 0.** The last 18 - beadle,
+leech, moulder, paviser, pressman, quartermaster, rammer, ratcatcher, reeve,
+relief, scraper, sealer, sower, stackman, stoker, strickler, tapster, winder -
+are in.
+
+Measured across the whole pass, 44 bodies / **132 views**:
+
+- **43 of 44 GREEN**, `errors []`, `blind_views []`, blank check 3 of 3 files
+  per body with 0 failures.
+- **132 ground rows, 0 errors, 0 views with zero shadow.** Peak occlusion sits
+  in a band of **0.7077 to 0.7107** across every one of the 132 - the residue
+  is the world background, identical everywhere, which is what a correctly
+  divided ratio should look like.
+- Rim fill 2,112-7,958 px per view. It adds almost nothing visually by
+  construction: the shadow is scaled by `1 - alpha`, so a filled pixel that is
+  nearly opaque receives nearly nothing. It only bites where the halo was.
+- Shadow reaching a frame edge on **3 views of 132** - ferryman side 3 px,
+  ratcatcher front 2 px, ratcatcher back 2 px. Counted, not failed: a floor
+  that continues past the frame is not a severed foot.
+
+### THE ONE RED, AND IT IS A REAL FAULT THIS PASS FOUND
+
+**ratcatcher is CUT BY THE FRAME** - front view 15 px off the left edge and
+3 px off the right, back view the mirror. I can see it in the sheet: the rack
+of dark spheres runs straight off the side of the cell.
+
+It is **not** caused by anything here. `git show HEAD:...\_fit_report.json`
+has **no `frame_edge` row for ratcatcher at all** - that body was last rendered
+before the border check existed, so no instrument had ever asked the question.
+And `pair_w` is **5.59 m** against a `FRAME_W` of **5.60**, so `fits_frame`
+returned **true** by one centimetre while 15 px were being cut: the file's own
+note says `fits_frame` is computed from pair WIDTH and was never answering this
+question, and here is that fault with a body behind it.
+
+### A REGISTER FAULT WORTH MORE THAN THE BODY
+
+`_fit_report.json` now reads `ok: true, errors: []` **while ratcatcher is
+clipped.** The per-key run that found it printed the RED, but every later
+`--only` run rewrites the top-level verdict from its own keys and merges the
+earlier pair rows underneath. **So a per-key RED is erased by the next key
+rendered.** The evidence survives - the `frame_edge` numbers are in the pair
+row, which is how I found it again - but the top-level verdict of that file
+cannot be trusted as a statement about the tree, only about the last key.
+I am naming it rather than changing verdict semantics at the end of a firing;
+it is a harness that can report an unearned pass and it should be fixed next.
 
 ## CORRECTIONS LANDED IN INSTALMENT 4 THIS PASS
 

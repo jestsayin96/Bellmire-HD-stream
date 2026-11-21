@@ -1,0 +1,20 @@
+{
+ "bar_frac": 0.5,
+ "pale_l": 0.45,
+ "mark_l": 0.3,
+ "rows": [
+  {
+   "label": "measured",
+   "png": "_gateread_redarm.png",
+   "res": [
+    64,
+    64
+   ],
+   "pale_px": 0,
+   "errors": [
+    "VOID: only 0 board columns, the read means nothing"
+   ],
+   "ok": false
+  }
+ ]
+}

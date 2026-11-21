@@ -2651,6 +2651,37 @@ at every one. `renders/art/minibosses/paviser/hero_*.png`.
    wrong. Shortened to 0.055 and sunk, all inboard of |u| 0.28.
 8. **PASS 6 WAS A FIX THAT MADE THINGS WORSE AND IT IS REVERTED, NOT SHIPPED.**
    See the live fault list below.
+9. **PASS 7 KILLED THE GATE, AND THE GATE WAS MY OWN PASS 3.** Pass 3 deleted
+   the centre rib because the front view had *"two identical dark verticals and
+   the board sat in a frame between them - a gate"* - and the same pass added
+   **two plank seams, which are two identical dark verticals running 96% of the
+   board's height**. The rib was deleted and its read was rebuilt out of the
+   replacement in the same breath. I did not get this from the comments; I
+   looked at `front.png` and the pale board reads as a portcullis. **One
+   variable** (`PAVISER_SEAMH`, the seams' height), swept 1.00 / 0.50 / 0.00
+   and **measured by a new instrument that asks the viewer's question**,
+   `tools/art/_gateread.py`: a BAR is a dark run crossing >= 50% of the board's
+   height with pale above and below it in the same column, so a bolt stub is
+   not a bar and the man, who is not enclosed by the board, cannot be charged.
+
+   | SEAMH | bar columns | bar share | longest run | p90 run |
+   |---|---|---|---|---|
+   | 1.00 (shipped before) | 18 | 0.0750 | **0.956** | 0.3773 |
+   | 0.50 | 7 | 0.0292 | 0.5179 | 0.3773 |
+   | **0.00 (shipped)** | **7** | **0.0292** | **0.5179** | **0.0956** |
+
+   **0.50 is worse than 0.00 in the picture and the number cannot see why** -
+   it scores the same bar count, but five short verticals read as more damage,
+   not less grille. The picture decided; the number only ranked 1.00 last.
+   The instrument **goes RED ON EMPTY and that arm has been fired**: a fully
+   transparent frame returns `ok: false`, `VOID: only 0 board columns`
+   (`renders/art/_sweep/_gateread_redarm.json`). The sweep renders are kept at
+   `renders/art/_sweep/paviser_seam*/`.
+   **WHAT THE INSTRUMENT CANNOT SEE**, written down because this lane shipped
+   `head_glow_px: 156` beside "the head has no face at all" on 17 Nov: a pale
+   bar on a pale field; a dark mark that reaches the board's outline (not
+   enclosed, so not counted); and anything at all about the post, the prop, the
+   legs or the floor.
 
 ### THE HONEST FAULT LIST - EVERY ONE OF THESE IS VISIBLE ON THE SHEETS
 1. **The back of the board is a dead blank pale rectangle.** `hero_back.png`
@@ -2669,11 +2700,18 @@ at every one. `renders/art/minibosses/paviser/hero_*.png`.
    `hero_front.png` the creature's largest mass and the hero's plate sit at
    nearly the same lightness. The limewash is meant to be warm; it is reading
    as slate.
-4. **The strikes and seams dissolve at pane distance.** On the hero sheet they
-   are faint marks. The "six countable hits" claim is TRUE at render distance
-   and FALSE on stream, and I am not going to pretend otherwise.
+4. **The strikes dissolve at pane distance.** On the hero sheet they are faint
+   marks. The "six countable hits" claim is TRUE at render distance and FALSE
+   on stream, and I am not going to pretend otherwise. (The seams are gone as
+   of pass 7, so they are no longer part of this fault.)
 5. **The strikes and the three splits are not distinguishable from each other**
    even up close - two kinds of damage reading as one kind of speckle.
+5b. **THE GATE IS REDUCED, NOT CURED, AND THE SPLITS ARE WHY.** With the two
+   seams gone the face still carries **three dark verticals** (the splits at
+   u -0.22 / +0.10 / +0.29) crossed by the two iron straps, and the longest of
+   them still runs **0.52 of the board's height**. On `front.png` they still
+   make a faint grid with the straps. That is the next pass's one variable and
+   it is NOT done; pass 7 moved one thing and stopped.
 6. **The near arm is invisible from the front** (behind the board). Only the
    far arm and fist read, so he looks one-armed.
 7. **From the side the fist and forearm cross his own helm and take one eye.**

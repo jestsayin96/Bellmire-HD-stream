@@ -1,0 +1,24 @@
+{
+ "bar_frac": 0.5,
+ "pale_l": 0.45,
+ "mark_l": 0.3,
+ "rows": [
+  {
+   "label": "measured",
+   "png": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "pale_px": 73572,
+   "errors": [],
+   "board_cols": 240,
+   "bar_cols": 7,
+   "bar_share": 0.0292,
+   "max_run_frac": 0.5179,
+   "mean_run_frac": 0.0766,
+   "p90_run_frac": 0.0956,
+   "ok": true
+  }
+ ]
+}

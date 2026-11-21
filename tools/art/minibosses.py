@@ -9912,11 +9912,26 @@ def paviser():
     # single shell gave up, and because they are ON the face and inboard of the
     # ends they cannot reach the silhouette from any of the three cameras -
     # which is the exact property the nine plank boxes did not have.
+    # *** PASS 7: THE SEAMS ARE THE GATE, AND THE HOOK IS HOW THAT GETS
+    # *** MEASURED INSTEAD OF ARGUED. ***
+    # Pass 3 deleted the centre rib because the front view had "two identical
+    # dark verticals and the board sat in a frame between them - a GATE", and
+    # the SAME pass added these two seams, which are two identical dark
+    # verticals running 96% of the board's height. The rib was deleted and its
+    # read was rebuilt out of its own replacement in the same breath. I did not
+    # work this out from the comments - I looked at front.png and the pale
+    # board reads as a portcullis.
+    # SEAMH scales their height; 0.00 removes them. Unset env = the shipped
+    # body, so the sweep is re-runnable.
+    SEAMH = float(os.environ.get("PAVISER_SEAMH", "0.00"))
     i0 = len(P.items)
     for u in (-0.14, 0.14):
         zt = ZT - ARCH * (u / HALF) ** 2
+        sh = (zt - ZB - 0.05) * SEAMH
+        if sh < 0.02:
+            continue
         x, y, _ = W(u, face_dy(u) - 0.010, 0.0)
-        P.add(L.box(0.011, 0.020, zt - ZB - 0.05), 'dark',
+        P.add(L.box(0.011, 0.020, sh), 'dark',
               loc=(x, y, ZB + (zt - ZB) * 0.5),
               rot=(0.0, 0.0, BYAW - (u / HALF) * 0.36))
     _span("seams", i0)
@@ -10023,8 +10038,14 @@ def paviser():
     # THE CAUSE IS NOT THE BOARD, IT IS THE MAN, and that is why the revert is
     # the honest move rather than a third placement: anything put on the back
     # of this board is behind him by construction, so the back view will stay
-    # thin until the MAN'S back carries something. That is pass 7's item and it
-    # is carried in docs/art/MINIBOSSES.md as a live fault, not as a done job.
+    # thin until the MAN'S back carries something. It is carried in
+    # docs/art/MINIBOSSES.md as a live fault, not as a done job.
+    # *** THIS COMMENT CALLED IT "PASS 7'S ITEM" AND PASS 7 DID NOT TAKE IT. ***
+    # Pass 7 took the GATE instead (see the seams above), because I looked at
+    # front.png before choosing and the five dark verticals on the pale face
+    # are the worse fault by a distance: the front view is the half of this
+    # body a party meets first, and a barred gate is the one read the docstring
+    # says it must not have. The man's back is still open and still next.
     # I am writing the failed attempt down instead of deleting it so the next
     # run does not spend a pass rediscovering that the board's back is hidden.
 

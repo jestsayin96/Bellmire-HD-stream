@@ -1,0 +1,78 @@
+{
+ "bar_frac": 0.5,
+ "pale_l": 0.45,
+ "mark_l": 0.3,
+ "rows": [
+  {
+   "label": "measured",
+   "png": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "pale_px": 55180,
+   "errors": [],
+   "board_cols": 240,
+   "bar_cols": 18,
+   "bar_share": 0.075,
+   "max_run_frac": 0.956,
+   "mean_run_frac": 0.1184,
+   "p90_run_frac": 0.3773,
+   "ok": true
+  },
+  {
+   "png": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "pale_px": 55180,
+   "errors": [],
+   "board_cols": 240,
+   "bar_cols": 18,
+   "bar_share": 0.075,
+   "max_run_frac": 0.956,
+   "mean_run_frac": 0.1184,
+   "p90_run_frac": 0.3773,
+   "ok": true,
+   "label": "SEAMH=1.00",
+   "dir": "C:\\hd adventure\\bellmire-art\\renders\\art\\_sweep\\paviser_seam1.00"
+  },
+  {
+   "png": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "pale_px": 71214,
+   "errors": [],
+   "board_cols": 240,
+   "bar_cols": 7,
+   "bar_share": 0.0292,
+   "max_run_frac": 0.5179,
+   "mean_run_frac": 0.0961,
+   "p90_run_frac": 0.3773,
+   "ok": true,
+   "label": "SEAMH=0.50",
+   "dir": "C:\\hd adventure\\bellmire-art\\renders\\art\\_sweep\\paviser_seam0.50"
+  },
+  {
+   "png": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "pale_px": 73572,
+   "errors": [],
+   "board_cols": 240,
+   "bar_cols": 7,
+   "bar_share": 0.0292,
+   "max_run_frac": 0.5179,
+   "mean_run_frac": 0.0766,
+   "p90_run_frac": 0.0956,
+   "ok": true,
+   "label": "SEAMH=0.00",
+   "dir": "C:\\hd adventure\\bellmire-art\\renders\\art\\_sweep\\paviser_seam0.00"
+  }
+ ]
+}

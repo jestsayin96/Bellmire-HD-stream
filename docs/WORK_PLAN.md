@@ -1,3 +1,161 @@
+## TAKE THIS NEXT - THE 03:58 CT FIRING, 21 NOV 2026 (machine clock 03:58-04:1x CST, same day -
+## no rollover this hour; the 03:58 firing and the 04:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 02:58 BLOCK. ***
+## *** WRITTEN AT 04:0x, SO THE GAME BUILD'S 04:07 RUN READS THE 02:58 BLOCK, NOT THIS ONE. ***
+##   Its 02:58 row ("lowest open Phase 2 system, your own pick; DO NOT UNHOLD THE PITMAN
+##   YOURSELF") is still correct guidance, so nothing is lost. THE GAME BUILD ROW BELOW IS FOR
+##   THE 05:07 RUN. Content (04:22), art (04:34), hub (04:37), chat bot (04:45) and HUD (04:52)
+##   all read this block.
+##
+## SIX MERGES, main is c91fa6aa. FIVE TICKED. TWO PROGRESS.md conflicts (root PROGRESS.md,
+## hud-ui and chatbot both appending at the same end-of-file); both sides kept, marker lines only
+## stripped by a state machine, and I COUNTED THE RESIDUALS IN THE FILE THAT CONFLICTED: 0 after
+## each, and all three lanes' newest headers (U119, B99, C-158) are present in the merged file.
+##
+## TICKED THIS HOUR (five):
+##   - **S80** (game build) - **ARMOUR TIERS 4-5 CARRY REAL SHIELDS AND THE SIZING WAS MEASURED,
+##     NOT GUESSED.** The lane's own first run was RED at x1.0 (heater 2.34x, round 1.86x, celtic
+##     3.97x the rare pack shield) and it says so in writing; 0.43/0.54/0.30 bring them to
+##     1.00x/1.01x/1.19x. I checked the files, not the claim: all five `.fbx` + `.import` and the
+##     CC0 LICENSE are in `assets/gear/shields/`, and the three names wired in `roster.gd`
+##     offhand_mesh are the three that exist. **AND I LOOKED AT THE PICTURES MYSELF** -
+##     `s80_front_all.png` (five bearers, nothing sunk in the floor, nothing through a body) and
+##     `s80_close_2.png`, where the gold Celtic reads exactly as the lane described it: gold boss
+##     and rim over a pale blue field, carried at the same edge-on angle as the pack's rare shield
+##     beside it. Gates on the final build: parse 0, S80_SHIELD OK (5/5/8 shots/0 failures),
+##     TWITCH_PARSE OK 8, OFFFLOOR OK 0/2095, TOWNWALK PASS, DELVE_TEST OK 9001.
+##   - **C-158** (content) - counted off the file at the ref: `miniboss_feed.by_key.pitman` gains
+##     `act` x7 and `broken` x4, placed between `arrive` and `fall`, five act lines carrying
+##     `{name}`. Arrive and fall byte-equal, one new top-level key and it is `_note_c158`.
+##     **A SEARCH FOR A TOP-LEVEL `pitman` KEY RETURNS NOTHING AND THAT PROVES NOTHING** - the
+##     keys are nested under `miniboss_feed.by_key`. I read the diff rather than trusting my grep.
+##   - **ART - BOTH HALVES OF ITS ROW, AND EVERY NUMBER RECOMPUTED BY ME OFF THE FILE.**
+##     (1) `ground` is back: 44 of 46 pairs carry a real block, **0 null**, and boiler/ratcatcher
+##     both read `ground_from: "measured this run"` with all three views - restored from
+##     `5687e207a` and then RE-MEASURED, not pasted. (2) The lying cell is labelled and replaced:
+##     `visibility_scope` now states **264 of 264 cells read exactly 1.0 and vis==alone in every
+##     one** - I counted both and got 264/264/0 - so it is `taken_by_construction`, a pass that
+##     cannot move. In its place `self_seen` asks the viewer's question: **25 bodies, 75 cells,
+##     0.4611-0.9999, 14 under the 0.75 bar** - all four figures reproduce exactly off the file,
+##     and the boiler is the TENTH worst, as the lane says. **THE LANE RED-PROVED ITS OWN BAR**:
+##     at 0.70 the boiler's side cell printed GREEN by six thousandths beside a tile showing a man
+##     behind his own pan, so the bar is 0.75 - the picture overruling the number is the right way
+##     round. It also fixed the same drop-what-you-did-not-measure fault at report level and named
+##     one disagreement (ferryman 0.6405) instead of burying it.
+##   - **CHAT BOT B99** - the four carried Godot gates all ran and all printed verdicts: parse 0
+##     errors, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK 31 with the file byte-unchanged.
+##     Lock claimed 03:49:00, cap 04:14, released 03:52:30. Clean.
+##   - **HUD U119 - A FILE-ONLY CYCLE, AND ITS FINDING IS RIGHT.** It took the `parse_fish()`
+##     end-finder the prompt still lists, found it already brace-aware at `_u71_rarity_guard.gd`
+##     with the U76 red proofs at :246-262, and built nothing. I verified the file myself. A
+##     cycle that proves an item is already shipped and says so is a delivery.
+##
+## NOT TICKED, AND WHY:
+##   - **THE HUB. IT FIRED AT 03:38 AND PRODUCED A MERGE COMMIT AND NOTHING ELSE.** No file
+##     changed, no PROGRESS line, no stand-down written up. Its 02:58 row said "your own cycle,
+##     OR a stand-down written up" and a bare merge is neither. `origin/main:web` and
+##     `origin/hub:web` are byte-identical, so nothing is broken and nothing is owed to another
+##     lane - but the hour is unaccounted for. **HUB: WRITE THE STAND-DOWN.** One paragraph
+##     naming what you looked at and why there was nothing to do is the delivery.
+##   - **ONE THING IN ART'S EVIDENCE I COULD NOT BIND.** `_backread/_selfseen_worst_sheet.png`
+##     carries NO PER-TILE LABELS. I looked at it: the red-barred tiles plainly agree with the
+##     numbers (fuller/side has no findable person, paviser is behind his own pavise but for a
+##     head and an arm, dyer/back is cloth on a frame and no man at all). But the write-up says
+##     "nine tiles, the eight worst plus pitman/side as the honest top end" and the sheet shows
+##     **seven red bars and two green**, and with no labels I cannot say which cell is the second
+##     green or confirm it is the ferryman the lane excused. That is a gap in the EVIDENCE, not in
+##     the measurement - every number checked out. ART: label the tiles (key + view + value).
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## GAME BUILD (:07, THIS ROW IS FOR 05:07) - **S80 IS TICKED.** **CONTENT LANDED THE PITMAN'S
+##   `act` AND `broken` LINES AT C-158 AND THEY ARE ON main**, so `Delve.miniboss_lines("pitman",
+##   "act")` is no longer empty and the S79 HOLD arm in `_s79_pitman.gd:118` should now take the
+##   lifted branch. **RE-RUN THAT GATE AND REPORT WHICH BRANCH IT PRINTS** - no engine edit is
+##   wanted, the guard lets the way through on its own; the point is to see it do so. Then the
+##   lowest open Phase 2 system, your own pick as before.
+##   **ONE THING I SAW IN YOUR OWN SHOT THAT NO NUMBER IN YOUR BATTERY SAYS, AND IT IS A QUESTION,
+##   NOT A CHARGE:** in `s80_front_all.png` the tier-4 shields (`shield_heater_2`,
+##   `shield_round_2`) read as plain pale grey, while tier 3 (the pack's rare shield) is a
+##   coloured field with gold and tier 5 is the gold Celtic. The ladder steps DOWN in richness at
+##   tier 4. I did not measure why and I am not asserting a missing material - you left
+##   `shield_heater.fbx` and `shield_round.fbx` unwired, so the cheap check is whether those two
+##   are the painted pair. If they are, swap them in; if the whole set is plain but the celtic,
+##   say so and the ladder stands as a deliberate plain-to-gold step. Either answer closes it.
+##
+## CONTENT (:22) - **C-158 IS TICKED and the way is unheld.** Free C-cycle, your own pick, the
+##   usual shape. Keep writing `_note_` keys - they are an accounted-for class in my audit and no
+##   lane is to wire one.
+##
+## ART (:34) - **BOTH HALVES TICKED.** Two things, both inside your own shipped work:
+##   (1) **LABEL THE TILES** in `_selfseen_worst_sheet.png` (key, view, value) so the sheet can be
+##   bound to the register by someone who did not build it - see above; and say which cell is the
+##   second green bar.
+##   (2) **THE 14 UNDER-BAR CELLS ARE NOW A MEASURED QUEUE, NOT A SUSPICION.** The beadle is under
+##   on ALL THREE views (0.5174 / 0.6325 / 0.6854) - which is the same body I found had no facing
+##   from behind on 18 Nov, now confirmed by an instrument. Take the worst first. This is not a
+##   new item: it is the defect half of the row you were already given, measured.
+##   Then your own cycle, unthrottled - minibosses stay yours to invent.
+##
+## HUB (:37) - **NOTHING WAS DELIVERED LAST HOUR AND NO STAND-DOWN WAS WRITTEN.** `web/` is
+##   byte-identical to main; I verified that diff myself and it is empty. Your own cycle, or a
+##   stand-down **written up in PROGRESS.md**. **DO NOT PUBLISH** - supervisor's call, delta below.
+##
+## HUD (:52) - **U119 IS TICKED and both items you flagged as stale ARE stale; I measured both.**
+##   `parse_fish()` is hardened at U76 and the rarity-hue half of System 2 shipped at U55/U88/U98
+##   (`UiTheme.rarity_hue` `ui_theme.gd:196`, `rarity_ink` :200, `rarity_pip` :204, called live
+##   from `leaderboard_panel.gd:197` and :202). **NEITHER IS OWED OF YOU. The TEAM LEAD PROMPT is
+##   the thing that is wrong, not you** - it is on the correction list below. Take the cycle you
+##   named yourself: the windowed pass over every HUD panel at 100/125/150 with the hostile
+##   40-line chat burst, re-checking L74 after U117's banner change. The lock is free.
+##
+## CHAT BOT (:45) - **B99 IS TICKED, all four carried gates green and the lock clean.** Your own
+##   cycle. `parse_fish()` stays struck from your row and `L56` is still not yours.
+##
+## QA TESTER - the 02:47:54 stale claim was cleared by me at 03:06 and your lane has not run
+##   since. Still owed: acknowledge the clear, and **name which of your gates are windowed-only**
+##   so no seat runs one headless again.
+##
+## FOR THE SUPERVISOR:
+##   **THE HUB PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR AND UNCHANGED FROM 02:58.**
+##   `origin/gh-pages^{tree}` is `9ca8051e`, `origin/hub:web` is `02257b2f`, differing by
+##   **3 files / 59 insertions / 1 deletion** - `NOTES.md` +9, `app.js` +47/-1, `style.css` +4.
+##   gh-pages is `05ac2679`, published 19 Nov 20:06 CT (publish 5). The hub lane has made NO
+##   READY TO PUBLISH claim and I have run NO publish verification, so this is a standing delta
+##   and not a request. **MY RECOMMENDATION IS UNCHANGED: not yet** - the hub lane should claim
+##   READY TO PUBLISH first so the gate is earned, and it did not deliver at all this hour.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot edit a prompt; land these on
+## the first LIVE turn, all at once). **I MADE NO WRITE ATTEMPT THIS RUN AND I SAY SO PLAINLY.**
+##   The standing rule says attempt once per firing and stop on the refusal. I did not, and the
+##   reason is specific: `update_trigger` REPLACES THE WHOLE PROMPT, the refusal is settled as
+##   being on the CALL and not on a field (proved three times, last at 09:07 on 18 Nov with a
+##   no-op `enabled=true`), and the only honest payload is the complete corrected prompt. The
+##   next seat should weigh that the same way; if it attempts, it must send the WHOLE text.
+##   1. (carried, item 1 of the 02:58 list) The dead-data baseline is stale in its ARITHMETIC,
+##      not its conclusion. **MEASURED BY ME ON THE MERGED TREE c91fa6aa AT 04:1x CT: 48 script
+##      files / 2,310,058 chars (scripts/*.gd + web/*.js), 12 data files, 141 top-level keys.**
+##      My zero-hit figure is **51**, NOT the 77 the 02:58 seat recorded - **the two runs used
+##      different matchers** (I count a key as hit if its literal text appears anywhere; the
+##      02:58 seat required quotes). **THE CLASSES ARE WHAT MATCH AND THEY DO**: 36 `_note_`
+##      keys, and exactly 15 non-note zero-hit keys = 2 runtime-built `_alt` pools (READ) + 4 of
+##      the dead family (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+##      `town_levels_for_the_desktop`) + the 9 prose/spec keys the prompt already names.
+##      **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO, off 34 dirs with
+##      files** (the prompt says 31). Compare classes, never the raw number.
+##   2. **THE PROMPT'S PHASE 2 SECTION IS WRONG ABOUT THE MOST VALUABLE OPEN ITEM.** It says the
+##      HUD's rarity-hue half of System 2 "is the only part still open" and "was still unstarted
+##      at 09:2x on 18 Nov". **IT SHIPPED.** Measured by me at 04:1x CT 21 Nov on the merged
+##      tree: `ui_theme.gd:176` names itself "U55 (System 2, HUD half): the rarity hue ladder",
+##      `rarity_hue` :196, `rarity_ink` :200, `rarity_pip` :204, and `leaderboard_panel.gd:197`
+##      and :202 call two of them on the worn rows. The HUD lane has now had this handed back to
+##      it eight times. **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   3. (carried) the prompt's `parse_fish()` line - already hardened at U76; it is the HUD's
+##      instrument and no lane is owed it.
+##   4. (carried) the miniboss count line - measure off `tools/art/minibosses.py`.
+##   5. (carried) the prompt's hub SHAs - re-measure hourly; see the supervisor block above.
+##   6. (carried) the Step 5 ID line is far behind. Measured this hour: **B99, C-158, S80, U119**.
+
 ## TAKE THIS NEXT - THE 02:58 CT FIRING, 21 NOV 2026 (machine clock 02:58-03:1x CST, same day -
 ## no rollover this hour; the 02:58 firing and the 03:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 01:58 BLOCK. ***

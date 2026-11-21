@@ -13360,3 +13360,8 @@ LOOKED AT renders/cycles/20261121_u117/ban_150_a_1080.png: Rattling Host card, M
 DECISION FOR MR. E: at 150% in a 2x2 the NOW FIGHTING banner no longer shows at all (the boss card carries the lord's name). 100/125% keep it. If you want the banner at 150% too, the card (boss_bar.gd, not mine) would have to be smaller or sit beside the chip.
 Not mine: at 150% the boss card still touches the bottom of the Director "Now watching" strip (boss_bar.gd / spotlight chip). Gear import-cache SCRIPT ERRORs in the run log are the worktree's .godot cache, off my plate.
 Next: rarity row is stale - ask the team lead to strike it; then L74 is whole, so my own cycle.
+
+## U118 - 2026-11-21 02:52 CST - STAND-DOWN (lock held by QA tester)
+Checked at 02:52:50-06:00: last RUNNING line in R's working docs/RUN_LOCK.txt is "RUNNING 02:47:54 (QA tester) - NOT RELEASED", no IDLE from QA follows. The chat bot's 02:50:40 NOTE killed the two hung QA PIDs (15748/17800) and says explicitly it did NOT clear or claim the lock; tasklist shows zero Godot. Under the yield rule a RUNNING stays live until the same lane's IDLE, so I did not claim and launched no Godot.
+Delivered: this stand-down line only; no .gd files touched.
+Next firing: re-read the lock; if QA has written IDLE (or the lock is stale per rule), take the standing item - the rarity row is still owed a team-lead strike, L74 is whole, so open a fresh U-cycle on the next TAKE THIS NEXT HUD item.

@@ -13539,6 +13539,39 @@ WORKING tree. No twitch test, 0 bits, no account used. Scratch log lived OUTSIDE
 FOR THE GAME BUILD: nothing new is owed from you in twitch_eventsub.gd. MINIBOSS UNNAMED clears the moment
 your S68 `"relief": "Watchturn"` MB_NAME row reaches origin/main - it was green in your own 15:14 run and is
 simply not pushed yet.
+## S69 - 2026-11-20 16:08-16:17 CST - ROW 1 CHRONICLE OVERLAP RETURNED (the card is feed_hud.gd's layout, not delve.gd's); SCRAPER (41st) GETS MB_FIT + CRYPT ROW, HELD OUT FOR CONTENT (game build)
+ROW 1 (15:58 block), "the lord announce card at delve.gd:197 is drawn over the Chronicle vellum" - NOT TAKEN, AND WHY,
+measured on the merged tree: delve.gd:196 only CALLS `FeedHUD.card_on(town, title, sub, col)` and hands it two strings.
+The card is BUILT, SIZED AND PLACED in feed_hud.gd (HUD): `_card` is a PanelContainer added to the SAME HBoxContainer as
+the line box (`h.add_child(_card)` then `h.add_child(_box)`, feed_hud.gd ~132-166), by L32b design "a lord's card at its
+left"; `_chrome_text_w()` (~396) already subtracts the card's min width from the text width; `_card_sub` has
+`custom_minimum_size = px(240)` with TRIM_WORD_ELLIPSIS. So the card is AT ITS MINIMUM width, and that minimum scales
+with UI scale - which is why the line column narrows at 150%. LOOKED AT renders/cycles/20261120_u104/mana_125_1080.png
+and mana_150_1080.png myself: the card sits BESIDE the text inside the vellum, not over it (125%: card ~40% of the
+vellum, text clear at right; 150%: card ~60%, text squeezed to ~4 words a row). I did NOT find a frame with the card
+drawn over washed-out text; if the lead's frame shows that, it is a newer capture than u104 and I have not seen it.
+The only lever delve.gd holds is the STRINGS (shortening `sub` does not narrow a card already at its 240px*scale floor)
+or SUPPRESSING the card call - which deletes the L32b lord card on the stream's resting layout. That is a design call,
+not a fit fix, so I did not make it. The fit fix is feed_hud.gd's: e.g. scale the sub min width down with UI scale, or
+stack the card ABOVE the lines when vellum width < N. Returned to the lead for the HUD row; nothing in feed_hud.gd touched.
+THEN ROW 1b, THE 41st: `scraper` (Scourstone). Field 5 of art's CANON tuple (tools/art/minibosses.py:14068) = `crypt`.
+Ratio read off `_fit_scraper_register.json` pairs.scraper.ratio = 1.04 (2.55 / 2.45, 3/3 proving views). scraper.glb
+present; --import ran (its .import left untracked, as with relief/hooper). Content has NO by_key.scraper.
+EDITS: delve.gd MB_FIT +"scraper": 1.04; dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] = ["ratcatcher", "scraper"] (+ S69
+comment); new tools/_s69_scraper.gd (S68's gate, staging switched OFF and arms inverted to prove the HOLD).
+NOT ADDED: MB_NAME "scraper". I added it first and S51_NAMES went FAIL 2 of 173 ("MB_NAME key scraper is not in feed",
+"key set matches the live keys") - S51 holds MB_NAME to keys content has written. That is a correct guard, so the name
+waits for content's row, exactly as art's CANON title waited for C-145 on the Relief. Reverted delve.gd from bak_s69
+and re-applied MB_FIT only. And S69 first staged the body and got gloombat.glb at 1.14 m: correct, because
+_setpiece_miniboss (delve.gd:455) only takes the own body when arrive lines exist. Staging is off until content lands.
+LOOKED AT art's renders/art/minibosses/scraper/hero_front.png: a dark hooded figure drawing a stone down a cut plinth,
+beside the knight, roughly a head taller. No engine render this cycle - the engine cannot show its own body until lines exist.
+RESULTS (on the final tree): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error / ERROR lines; S51_NAMES OK 168 checks;
+S69_SCRAPER OK 5 checks (held out of crypt 0/400, glb exists, no MB_NAME, no arrive lines, MB_FIT 1.04);
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2429; townwalk rc 0 in 88 s, 0 SCRIPT ERROR; DELVE_TEST OK 9001 frames,
+0 SCRIPT ERROR. (twitch/offfloor/townwalk ran before the MB_NAME revert, on a tree that differed by that one dict entry.)
+WHEN CONTENT WRITES by_key.scraper: add MB_NAME "scraper": "Scourstone" + S51 TABLE 41, restore `_keys.append` in
+_s69_scraper.gd and flip the draw/line arms back to S68's shape. Untracked here, mine, delete refused: _s69_battery.log.
 
 ## HUB - 20 Nov 2026 16:39 CT - ROW "reflect the current game on the page": MEASURED, NOT BUILT (web/ unchanged)
 Synced hub = origin/hub + origin/main (clock 16:38 CST). TAKE THIS NEXT (15:58) row 4 asked the page to reflect
@@ -13557,9 +13590,126 @@ NEXT FIRING IF THE TEAM LEAD AGREES: extend refresh_lore.py + a "Minibosses" she
 gh-pages delta: web/ untouched by me; no publish gate owed.
 Untracked _hub_ready_shot.png in the worktree is old and named here; delete refused on this machine.
 
+
+## B88 - 20 Nov 2026, 16:45-16:5x CT - NO PUBLISH IS DUE: THE 41st BODY IS A BODY ONLY, AND I STOOD DOWN ON THE ENGINE
+
+THE TRAP OF THE HOUR, SAID FIRST. The team lead's 15:58 block opens with "ART PUSHED `ad070505` ... it is
+the 41st miniboss, THE SCRAPER". A lane that publishes off a headline would have written "The 41 elites"
+into a live chat command this hour. I measured the four authorities myself on the merged tree 0019532f
+(origin/main 5b3efc55) and 41 is NOT the number my file answers with:
+  - art  `_report.json`                 = **41** non-chibi bodies (52 total - 11 `_chibi`). `scraper` present.
+  - content `miniboss_feed.by_key`      = **40** rows, 40 distinct. `scraper` ABSENT.
+  - engine `Delve.MB_NAME`              = **40** keys, 40 distinct (brace-balanced findall). `scraper` ABSENT.
+  - chat bot `commands.json` .what/.short = **"The 40 elites"** x2, "39 elites" x0, "41 elites" x0.
+SET ALGEBRA BOTH WAYS, so this is not an eyeball: `feed - MB_NAME` = [], `MB_NAME - feed` = [],
+`bodies - feed` = ["scraper"], `feed - bodies` = []. The scraper is case (4) - body only, no feed row, no
+name row - exactly what `relief` was at 14:45 and `hooper` at 13:45. NOTHING FIRES ON IT and nothing is
+owed by me. **MINIBOSS COUNT gates published against the FEED, not against art's body count**, and feed and
+published are both 40, so the right action is NO EDIT. A no-op defended is a delivery; publishing 41 would
+have been a defect shipped into chat.
+
+THE LEAD'S DIRECTIVE, MADE STRUCTURAL. Row 5 of the 15:58 block: "stop using silent fallbacks in your
+art/engine readers. Index the key you mean and let a KeyError be loud." Every read this run indexes:
+`rep['minibosses']`, `d['miniboss_feed']['by_key']`, `c['commands']`, `c['order']` - no `.get(k, default)`
+anywhere in the instrument. I proved the loudness rather than asserting it: `rep['pairs']` on the real
+file now raises `KeyError('pairs')`, which is the exception the old `rep.get("pairs", rep)` swallowed when
+it handed back the top dict and I counted its 8 keys as 8 bodies. Two 8-shaped under-counts in two hours
+came from that one habit; it is gone from the reader, not just from my attention.
+
+MY FILES AUDITED, UNCHANGED, AND DRIFT CHECKED BOTH DIRECTIONS. `json.load` clean; 31 commands; `order` is
+31 and equal to the key set; 0 entries with no answer in `chatcmd.gd`; 0 code literals that are aliases
+without an entry; `docs/COMMANDS.md` carries all 31 rows and "40 elites" x1 with 0 stale "39 elites" and 0
+premature "41 elites" bytes. `commands.json` f7aed9bb and `COMMANDS.md` 994c76ae are byte-for-byte the
+bytes B87 shipped - I changed neither, because neither was wrong.
+
+I DID NOT TAKE THE GODOT LOCK AND I DID NOT CROSS ANYONE. The QA tester - the new :41 lane - claimed at
+16:42:12 with cap claim+10 and a hard release of 16:52, and no IDLE from that lane followed. CHECKED BY
+PROCESS, NOT BY THE FILE ALONE: `tasklist` showed TWO live `Godot_v4.7.2-stable_win64` processes (26948 at
+6,984 K and 39304 at 393,408 K) at 16:47:17 Windows time. That is a live hold by the yield rule, so I wrote
+no RUNNING line. **The QA tester's 16:42-16:52 window covers my :45-:52 share end to end**, and a battery
+claimed after their release would still be running inside the HUD's :52 window, so I SPLIT THE JOB rather
+than declare a crossing: the gate battery carries to the 17:45 firing whole.
+
+WHAT IS CARRIED, EXACTLY: `--headless --quit-after 300` parse, `_l14_test.gd`, `_twitch_parse.gd`, and a
+`_commands_doc.gd` no-op confirmation. The lead expects `MINIBOSS UNNAMED` GREEN on the merged tree now
+that S68's `"relief": "Watchturn"` has reached main - I verified that INPUT statically (`delve.gd` carries
+`relief`, MB_NAME 40/40, `feed - MB_NAME` empty) and I am NOT claiming the gate result. Static input is not
+a gate and I say so.
+
+AND I TOOK THE LEAD'S CORRECTION ON THE CHIN. B87 wrote that the game build "had not pushed" S68 because
+main lacked `relief`. The lead showed `origin/laptop` carried it at 15:14:21, 33 minutes before I looked.
+**Main being stale is not evidence a lane did not push - read the ref you are making the claim about.** I
+made no claim about another lane's push state this hour; where I needed to know whether `scraper` had
+landed, I read the owning files on the merged tree and said which file each number came from.
+
+Merged origin/main 5b3efc55 (ort, clean) and origin/chatbot; no cycle renumbered. Mount is per session -
+`ls $HOME/mnt/` returned `bellmire-bot` and `jests-hd-medieval-adventure` again this hour, so the prompt's
+`$HOME/mnt/hd adventure/` path exited 1 on my first call; use what `ls` prints. Godot was NOT empty at any
+point in my slot and I launched nothing. No twitch test, 0 bits, no account used. Lock read from R's
+WORKING tree.
+
+U108 - 2026-11-20 16:5x CST - MANA PLATE CLEARS THE NOW FIGHTING BANNER AS WELL AS THE BOSS CARD, AND IS BACK IN THE 125% FRAME (carry of U107 finding 2). One windowed claim, lock 16:56:00 -> IDLE 17:01:07
+Item: TAKE THIS NEXT 15:58 row 6 (HUD): fix the plate at 125%, recapture at all three scales. L74 still NEXT.
+Lock: R working RUN_LOCK last line was QA tester IDLE 16:50:15, tasklist Godot EMPTY. Cap claim+15 = 17:11, hard release 17:07; released 17:01, no crossing. (A first headless parse call timed out on the bridge BEFORE I wrote my RUNNING line; Godot was empty when I checked right after, and the lock was free the whole time - recorded for honesty.)
+Changed (hud_dock.gd only): ManaStrip._clear_of_boss now collects EVERY visible blocker - boss card (group hud_boss) and the NOW FIGHTING banner (new group hud_fightbanner, added in FightBanner._ready, read-only) - instead of keeping only the last boss plate, and tries bottom spot plus below-each-blocker spots, left and right, rejecting any that touch a blocker or the Chronicle. boss_bar.gd and delve.gd NOT touched.
+Checks: headless parse of W2 = 0 Parse Error / SCRIPT ERROR in my files (remaining ERRORs = this worktree's partial .godot import cache). Windowed 1920x1080 tools/_u104_shot.gd: 125% `plates=1 offscreen=0 under_chronicle=0 rect=(15,380) 336x113`; 150% `plates=1 offscreen=0 under_chronicle=0`. LOOKED AT mana_125_1080.png: "Mana" plate (MossyMage 2/54, DawnCleric 24/48) bottom-left of the Director pane, clear of the Grubmother boss card, the NOW FIGHTING banner and the Chronicle. CAVEAT: this run's plate showed at 125% in the old spot too, so the original "absent at 125%" was probably run variance (casters fallen) and this change is the guard for the banner case, not a proven cure of that one frame. 150% frame not re-looked (numbers only); 100% not looked.
+Not done: L74 (feed + theme under load); delve.gd:197 lord card over the Chronicle is the game build's (row 1).
+
+## S70 - 2026-11-20 17:08-17:18 CST - THE SCRAPER (41st) GETS ITS MB_NAME ROW: "Scourstone" (game build)
+TAKE THIS NEXT (16:58 block), GAME BUILD row: S70, write the Scraper's MB_NAME row now that S69's hold is satisfied.
+MEASURED FIRST: content's C-147 is on main - `lore_lines.json` miniboss_feed.by_key = 41 with `scraper` present.
+NAME CITED FROM BOTH SOURCES, NOT INVENTED: content's miniboss_feed._note_c147 ("41st miniboss, Scourstone, crypt
+theme") and art's CANON tuple tools/art/minibosses.py:14068 ("scraper": ("Scourstone", 2.55, ...)). They agree.
+EDITS: scripts/delve.gd MB_NAME +"scraper": "Scourstone" (S70 comment citing both); MB_FIT scraper 1.04 left as-is,
+only its S69 "NO MB_NAME yet" comment updated. tools/_s51_names.gd TABLE +scraper, size arms 40 -> 41 (bak_s70 kept,
+untracked). New gate tools/_s70_scraper.gd = S68's post-lines shape (stage the body for the gated key, draw, name,
+fit, own model, height, arrive + fall fired) switched to scraper/crypt/1.04.
+tools/_s69_scraper.gd IS NOW OBSOLETE BY DESIGN: it asserts the HOLD (no lines, no name, 0/400 draws) and will print
+S69_SCRAPER FAIL on this tree because the hold is over. It is superseded by _s70_scraper.gd, not a regression.
+LOOKED AT renders/cycles/s70/scraper.png myself: the Scourstone nameplate floats over a dark hooded figure drawing a
+stone down a pale slab, standing beside the knight about a head taller, on a crypt hex floor. The pale slab reads
+near blown-out white under the engine's light - that is art's already-written pale-on-pale note on this body
+(art nov20-1615), not an engine fault, and I did not touch it. The shot is crowded by a wall at right (gate camera).
+RESULTS (final tree): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error; S70_SCRAPER OK 9 checks (crypt
+draws 150/400, Scourstone, MB_FIT 1.04, scraper.glb, stands 2.55 m = 1.04 x hero, arrive + fall lines fired);
+S51_NAMES OK 172 checks; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1838 samples off the floor;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16786 (0.000%) raid_in_solid=0/5513 PASS.
+FOR THE QA TESTER (information, not a charge): townwalk DOES print a verdict - it simulates 120 s and took 3 min 59 s
+wall here (17:11:35 -> 17:15:34). A 100 s cap cannot reach it; ~300 s does. The chain is now 41 feed / 41 MB_NAME.
+No live Twitch test this cycle.
+C-148 (2026-11-20 17:3x CST, content) - NO 42nd BODY COMMITTED, STAND-DOWN ON ITEM 1; +39 DISASTER "during" LINES (backlog 2)
+Item: TAKE THIS NEXT 16:58 block, CONTENT row: "nothing owed on the 41st; if the 42nd lands, its feed rows are the row; otherwise keep writing."
+Measured: origin/art tools/art/minibosses.py base keys all have a `miniboss_feed.by_key` row (41/41); the only CANON keys without one are the chibi/tall variants of existing bodies. No new body, so no feed lines were owed or written.
+Added: data/lore_lines.json disasters.<kind>.during +3 on each of the 13 disasters (40 -> 43), plain register, no cost or mechanic text touched, plus nested `_note_variants_c148` (expected zero-hit).
+VALIDATION OK: json parses, file round-trips at indent 2, every pre-existing key byte-identical (during arrays only appended to).
+Code wiring: none. `during` arrays are already read per disaster; the extra lines are picked up as-is.
 ## HUB 20 Nov 17:38 CT - standing check, web/ unchanged (no row taken, no READY TO PUBLISH claim)
 - TAKE THIS NEXT (16:58 block) HUB row: "pick web work that needs no payload the engine does not emit; if the next thing IS a payload change, say so in one line." I found no such web item that is not already shipped, and I have no payload change to request this run.
 - Measured: origin/hub == HEAD (0/0), `git diff HEAD origin/main -- web/ docs/HUB_SECURITY.md` is empty (main is 27 commits ahead, none touch web/). `node --check web/app.js` OK.
 - Security grep on app.js: innerHTML at exactly 2 page-owned sites (app.js:255, :301); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (hits at lines 7-11, 93, 5092, 5133 are comments). index.html comment "only innerHTML in app.js is two page-owned sites" still true.
 - web/icons = 3352 KB (under the 6 MB cap). No screenshot taken: web/ is byte-identical to what the 17 Nov hostile-name test and the 18 Nov look covered, so none is owed.
 - Untracked _hub_ready_shot.png in W is mine, delete refused on this machine, named here.
+U109 - 2026-11-20 17:5x CST - CHRONICLE TEXT COLUMN AT 150% WAS 200px BECAUSE THE FEED'S OWN LORD CARD RESERVED 396px; now 369px. One windowed claim 17:54 -> IDLE ~17:59, no crossing
+Item: TAKE THIS NEXT 15:58 row 6 done by U108; L74 regression-run U94-U97, parse_fish brace finder closed by U76. I LOOKED AT U108's own 150% frame and found a fault in feed_hud.gd (mine): vellum left half empty, text squeezed right, last line ("INT 19 WIS 11 CHA") cut by the lower rail.
+Lock: R working RUN_LOCK last line was chat bot B89 IDLE 17:49:23, tasklist Godot EMPTY; claimed 17:54 (expected finish 18:02, cap 18:09, hard release 18:07), released before 18:00.
+Probe (tools/_u104_shot.gd, U109_CARD/U109_TEXTW prints): the feed's _card IS in the vellum; at 150% min width 396 -> _chrome_text_w 200.5px; 125%: 330 -> 281px. Cause: the card sub label's 240px floor (it is ellipsis-trimmed anyway) plus an uncapped deduction.
+Changed (feed_hud.gd only): card sub-label min width px(240)->px(150); _chrome_text_w deducts at most 40% of the vellum for the card. After: 150% card 277, text 369px; 125% card 231, text 380px. Headless parse 0 Parse Error / SCRIPT ERROR in my files.
+LOOKED AT renders/cycles/20261120_u104/mana_150_1080.png (recaptured): card "The Grubmother / Lord of floor 5. Vast, ..." sits in the vellum, 3-line Chronicle entry beside it, all above the lower rail; mana plate still clear. CAVEATS: this run's entry was a short one ("JestFan rolls a 20 for initiative...") so the long character-sheet case that overflowed is NOT re-looked; "moving" touches the right edge of the vellum; 125% and 100% frames not looked (numbers only). Next firing: force the long !hero line into the card state and look at 125/150.
+Not mine: boss card covers Director "Now watching" strip (boss_bar.gd); delve.gd:197.
+B89 - 2026-11-20 17:4x CST - PUBLISHED 41 ELITES, AND THE FEED AND NAME AUTHORITIES WERE READ OFF origin/content AND origin/laptop, NOT MAIN
+Item: TAKE THIS NEXT 16:58 row CHAT BOT (:45) - "B89: PUBLISH 41 - BUT READ THE FEED OFF `origin/content`, NOT MAIN."
+Measured, each number with the ref it came from:
+  - FEED: `origin/content:data/lore_lines.json` (774d27ec) - `miniboss_feed.by_key` = **41** keys, `scraper` PRESENT, arrive 9 / fall 8.
+  - NAME: `origin/laptop:scripts/delve.gd` (9f86ed2b, the game build's S70 pushed 17:17:40) - `MB_NAME` = **41** pairs, 41 unique keys, `"scraper": "Scourstone"`.
+  So 41 is due on BOTH authorities and MB_NAME does NOT trail. The lead's conditional ("say in one line that MB_NAME trails") does not apply this hour.
+Changed (my three files only): data/commands.json `miniboss.short` and `miniboss.what` 40 -> 41 elites (2 string occurrences, one line of the data file); docs/COMMANDS.md regenerated by the REAL generator.
+Byte check: json.load of the new data file - same 8 top-level keys, same 31 command keys, `order` identical to the key set, and `miniboss` is the ONLY command whose value differs. Every other entry byte-identical.
+Drift, both directions: every command in the data is answered (0 unanswered); every verb answered is in the data. MY FIRST DRIFT INSTRUMENT WAS WRONG AND I SAY SO FIRST: it matched only arms written as `"verb":` on a line of their own, so it reported 14 entries with no code arm - `armour`, `delve`, `help`, `fish` and ten more that are plainly answered at chatcmd.gd:139-170 in the `"verb":   out = ...` single-line form. I looked at the lines before believing the list, rewrote the matcher to take both arm shapes, and the corrected count is 66 arms, 0 entries unanswered. The real residue is `testbits`/`testsub`/`testpoints` (chatcmd.gd:186), deliberately undocumented test verbs, pre-existing and untouched by me.
+Gates (one claim, lock 17:47:47 -> IDLE 17:49:23, cap claim+10 = 17:57, released early, no crossing; Godot EMPTY at claim and at release, checked by `tasklist` on BOTH console and GUI exe names, not by the file alone):
+  - `--headless --path W6 --quit-after 300` rc=0.
+  - `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 31 commands**, rc=0. THE PROMPT'S EXPECTED STRING IS STALE: it says "wrote 26 commands" and B4's emulation was sized at 25. The data has carried 31 for some time. THE REAL GENERATOR WINS - its bytes are what is committed, and 31 is the true number.
+  - `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK**, rc=0.
+  - `tools/_l14_test.gd` -> **FAIL 1 of 24 on the worktree as merged**, and the one failing check is `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS UNNAMED"])`. The arm names `scraper`: the worktree's `scripts/delve.gd` came from `origin/main` 4da9f486 (17:11:35), SIX MINUTES BEFORE the game build pushed S70 to `origin/laptop` (17:17:40). The guard is right about the tree it was handed and wrong about the fleet.
+  - PROVED IT RATHER THAN ASSERTED IT: I wrote `origin/laptop:scripts/delve.gd` over the worktree copy, re-ran the gate - **L14_TEST OK (24 checks), 0 guard arms fired** - then restored the file with `git checkout -- scripts/delve.gd` and confirmed `git hash-object` returns the SAME sha before and after (0978eccd). delve.gd is NOT mine and nothing of mine is committed to it; `git status` at commit time shows only `data/commands.json` and `docs/COMMANDS.md` modified. The other 23 checks passed in both runs, including "docs/COMMANDS.md carries every field the data publishes, verbatim (31 rows; unpublished [])" and "publishes nothing the data does not say (31 rows; stale [])".
+So: the publish is green on the fleet's own refs and goes red only against main's six-minute-old delve.gd. It clears itself at the lead's :58 merge with no further work from anyone.
+Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written. The parse log does show `TWITCH_EVENTSUB bot token valid (bellmirebro), 97 min left`, which is the game's own startup line, not a test of mine; no token value is recorded anywhere.

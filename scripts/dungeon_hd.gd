@@ -229,9 +229,10 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S48: `fuller` (35th, art's tag fogbound) joins fogbound; content's C-126 lines are in. `stackman`
 ## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
 ## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
+## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; NO content lines yet, so miniboss_for holds it out.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
+    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}

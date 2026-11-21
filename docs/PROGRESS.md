@@ -4196,3 +4196,5 @@ is my next firing.
   where S81 read 0 - the gate still PASSES and I changed no town code; named so nobody finds it later. Logs in renders/cycles/s82/.
 - Lock: claim 05:08:33, claim+25 = 05:33 computed first, declared 05:30; released 05:17:09, no Godot of mine alive.
 - Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.
+
+## D-cycle - S83 (pointer): System 9 row (a) built and rendered but HELD on branch `s83-wip` (f42ccbac) - S83_PURSE OK, DELVE_TEST OK, parse 0, but L29C soak C regresses (FAIL 2/2 with the edit, OK 1/1 on HEAD). Full entry on s83-wip. Not for merge yet. 2026-11-21T06:25:19-06:00 (game build)

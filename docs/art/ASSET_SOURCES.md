@@ -417,3 +417,14 @@ Method: directory listed and zip central directory read with Python `zipfile` (n
 - The same file carries a request, "Please, don't be an ass, don't do basic reselling of it", plus a Patreon and Twitter link. Under CC0 this is a courtesy, not a condition of the grant. Nothing from this pack is to be redistributed AS an asset, which keeps the request satisfied in any case.
 - Formats: FBX and OBJ, so any import into `assets/` needs a headless Blender batch convert to .glb first, the same route the Quaternius packs take. Each model that enters `assets/` must still get its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `HandPainted_Plants`.
+
+
+## PACK CATALOGUE - House1_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| House1_blend (Blendswap 75519 "Medieval houses") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\House1_blend\75519 - Medieval houses - License.html` | 3 on disk: `House1Upload.blend` (7.9 MB), `preview_75519.jpg`, the licence HTML. The sibling `House1_blend.zip` lists the same three entries (not extracted) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75519) |
+
+- Checked: every file in `_packs\House1_blend\` by listing the tree (3 files), and the sibling `House1_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House1_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.

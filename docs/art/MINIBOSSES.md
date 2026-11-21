@@ -4273,3 +4273,78 @@ views, blank 3 files / 0 failures.
   `lid_y 7.0 / underside 6.5` where `origin/main` has `10.0 / 9.5`. The verdict
   is **conservative either way** (clear 3.92 m under the LOWER lid), but the
   harness is right to go red on a gate it cannot prove current.
+
+---
+
+## 44 - THE PITMAN ("Underfoot"), crypt. PASS 2.
+
+**IT TAKES THE FLOOR.** It does not wound and it does not grab. Every beat it
+opens a pit under whoever is standing where it wants them not to be; that
+delver spends their next beat climbing out on the ladder it leaves them, and
+**the pit stays** - the room the party finishes in is not the room they
+started in. The count is not a count of heroes, it is a count of ground.
+
+Built this run, 20 Nov, the 20:34 CT firing, in two passes.
+
+`minibossgen`: **ok true, 0 errors, 0 blanks**, span **2.85 m -
+CORRIDOR-SAFE, UNDER-LID** against floorgen's own 11.0 m clear / 9.5 m
+underside, **3 merged meshes, 1,280 tris**. **NOT ROOM-LOCKED** - no spawn
+gate needed.
+
+`minibossfit --evenlight`: **GREEN**, `errors []`, `blind_views []`,
+creature_h **2.30** / hero 2.45 = ratio **0.94**, pair_w **4.71**,
+`fits_frame` true, **3 proving views**, `blank_check` 3 files / 0 failures,
+and every `frame_edge` count is **0** on all three views. Register at
+`renders/art/minibosses/_fit_pitman_register.json`.
+
+### WHAT I LOOKED AT AND WHAT IS STILL WRONG
+
+All three hero views, opened full size, both passes. Three views are three
+different pictures: front is the boarded ring with the ladder out of it, side
+is the ladder in profile with the man over his mattock, back is the spoil
+heap with the ring behind it.
+
+**PASS 1 -> PASS 2 changed two things, judged separately:**
+
+1. **THE MAN'S VALUE (worked).** I wrote the rule "the pale things are the pit
+   and the ladder, everything else gets out of their way" directly above the
+   function and then built the man out of the PALE material - in the same run
+   in which I wrote up the Tanner's pale-on-pale hides. Head-on he was a stack
+   of pale blobs against a pale ladder and did not read as a man. Dark now; he
+   reads in all three views.
+2. **THE LADDER'S PLANE (worked).** My own written prediction was that the flat
+   pit would collapse head-on and the ladder would save it. The pit survived
+   head-on. **The ladder failed, side-on** - its plane was exactly edge-on, so
+   all six rungs vanished and the one tall object read as a plain prop. Yawed
+   40 deg; the side view now shows six rungs.
+
+**STILL WRONG, AND THE REGISTER IS GREEN ON ALL THREE:**
+
+- **The man is now dark-on-dark.** He separated from the ladder and lost
+  himself against the pit mouth (front) and the spoil heap (side) - his legs
+  are gone in both. The value fix moved the fault; it did not remove it.
+- **The mouth does not read as a hole.** The sunk drum has a lit top face and
+  no depth, so it reads as a dark lid or a tarpaulin laid over the ring.
+- **The spoil reads as three smooth boulders**, not dug earth, and from the
+  back it occludes the kerb completely - the one pale object that says
+  "boarded hole" is hidden by the one dark object in front of it.
+
+Next pass is the spoil (angular, broken, and moved off the man's line) and
+then the mouth. Not done this run and not claimed as done.
+
+### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
+
+- `scripts/bestiary.gd`: `assets/monsters/minibosses/pitman.glb`, **STATIC** -
+  a `model` path and **NO `anims` entry**. `h = 2.30`, art's measured number;
+  do not re-derive it.
+- theme **`crypt`** for the set-piece roll (joins the Sexton and the Scraper).
+- **CORRIDOR-SAFE at 2.85 m, UNDER-LID. No spawn gate needed, not
+  room-locked.**
+- `MB_FIT["pitman"]`: ratio **0.94**, tag **"crypt"**, 3 proving views -
+  **copy it from the register, do not re-derive it.**
+- **HOLD `MB_NAME["pitman"]` until content writes `by_key.pitman`**, the same
+  way the Winder is held. The canon name is **"Underfoot"**.
+- Cheapest honest version of the mechanic if displacement exists: on each Nth
+  point of damage, mark one occupied cell impassable and cost its occupant one
+  beat. **If the engine has no cell-removal mechanic, say so plainly and do
+  not invent one** - the body, the fit and the draw are the item.

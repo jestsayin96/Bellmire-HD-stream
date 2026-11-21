@@ -15244,3 +15244,219 @@ def winder():
 
 
 BUILDERS.update({"winder": winder})
+
+
+# ============================================================ 44 THE PITMAN
+CANON.update({
+    "pitman": ("Underfoot", 2.30, (0.26, 0.24, 0.22), (0.96, 0.84, 0.46),
+               "crypt", "IT TAKES THE FLOOR - it does not wound and it does "
+               "not grab. It digs. Every beat it opens a pit under whoever "
+               "is standing on the spot it wants, and that delver spends "
+               "their next beat climbing out on the ladder it leaves them. "
+               "THE PIT STAYS. It is still there when the fight moves on, so "
+               "the room the party started in is not the room they finish "
+               "in: the lines they were holding get cut by holes, and the "
+               "ground they gave up cannot be taken back. THE COUNT IS THE "
+               "PIT AT ITS FEET - one mouth, boarded, with a ladder standing "
+               "out of it, and the spoil it came out of heaped behind.",
+               0.34, "Someone is digging up ahead, and not for ore."),
+})
+ORDER = ORDER + ["pitman"]
+
+# PER-SLOT MATERIALS, SAME ONE RULE AS THE WINDER: the pale things are the
+# ones the mechanic is counted on. Here that is THE PIT RIM AND THE LADDER -
+# the two objects that say "hole" - so both take the light and everything
+# else gets out of their way. THE SPOIL HEAP IS DARK ON PURPOSE: a pale heap
+# behind a pale ladder is the Relief/Scraper/Winder pale-on-pale fault for a
+# fourth time, and the ladder has to read AGAINST something.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"pitman"}
+
+
+def pitman():
+    """IT TAKES THE FLOOR. The 44th body. PASS 2.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A short broad man in a flat cap, both hands on a
+                         mattock whose head is already IN the ground.
+      WHAT IS IT DOING?  It has just opened a hole. The hole is the object:
+                         a boarded kerb standing proud of the floor with a
+                         dark mouth inside it.
+      HOW MANY OF US?    Not a count of us - A COUNT OF GROUND. One pit here,
+                         and the spoil heap behind says where the dirt went.
+      WHY NOT WALK ROUND? THE LADDER. It stands out of the mouth and leans
+                         toward the viewer, which is the only part of this
+                         body that is tall, and it says the hole is deep
+                         enough to need one.
+
+    *** PASS 2, AND THE PREDICTION BELOW WAS HALF RIGHT AND HALF WRONG. ***
+    I wrote, before rendering, that the flat pit would collapse head-on and
+    the ladder would carry the body. THE PIT SURVIVED HEAD-ON - the standing
+    kerb works, the boards read as boards. THE LADDER IS WHAT FAILED, and in
+    the view I did not think about: side-on its plane was exactly edge-on, so
+    every rung vanished and the one tall object on the body read as a plain
+    prop. PASS 2 yaws the ladder plane 40 deg so no view is edge-on; the side
+    view now shows six rungs.
+
+    PASS 2 ALSO FIXED A FAULT I COMMITTED WHILE WRITING ABOUT IT. The note
+    above this function says the pale things are the pit and the ladder and
+    everything else gets out of their way - and I then built the man out of
+    the PALE material, in the same run in which I wrote up the Tanner's
+    pale-on-pale hides. Head-on he was a stack of pale blobs beside a pale
+    ladder and did not read as a man at all. He is dark now and he reads.
+
+    STILL WRONG AFTER PASS 2, AND WRITTEN DOWN RATHER THAN HIDDEN - the
+    register is GREEN on every number for all three of these:
+      - THE MAN IS NOW DARK-ON-DARK. He separated from the ladder and lost
+        himself against the pit mouth (front) and the spoil heap (side): his
+        legs are gone in both. The value fix moved the fault, it did not
+        remove it. The spoil wants to be elsewhere, not the man re-paled.
+      - THE MOUTH IS NOT A HOLE. The sunk drum reads as a dark lid or a
+        tarpaulin laid over the ring, because it has a lit top face and no
+        depth. A hole has to be darkest at its centre.
+      - THE SPOIL READS AS BOULDERS. Three smooth lumps; from the back they
+        also occlude the kerb entirely, so the one pale object that says
+        "boarded hole" is hidden by the one dark object standing in front of
+        it. Dug earth wants angular, broken geometry.
+
+    WHAT I EXPECTED TO GO WRONG, WRITTEN BEFORE I RENDERED IT. The Winder's
+    lesson was that a thing lying FLAT on the floor foreshortens to nothing
+    head-on. A pit is the flattest object in the set, so head-on the kerb
+    ring will collapse to a line. That is why the kerb is a standing kerb of
+    real boards and not a painted ring, and why the LADDER carries the
+    silhouette: the ladder is a diagonal and no yaw can take a diagonal away.
+    If the front view still reads as a man beside a low fence, the body has
+    failed and I will say so rather than let the register's numbers say it
+    passed.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here: minibossgen measures the real footprint
+    against floorgen's own corridor span and lid and the report says it.
+    """
+    P = Parts("pitman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    PX, PY = -0.58, -0.34          # the pit mouth, toward the camera
+    RO, KH = 0.86, 0.26            # outer radius, kerb height
+
+    # -------------------------------------------------------------- THE PIT
+    _open()
+    # the mouth: a dark drum sunk to the lip, so there is a real dark hole
+    # inside the kerb and not a disc painted on the floor
+    P.add(L.cone(RO - 0.16, RO - 0.16, KH - 0.04, 22), 'dark',
+          loc=(PX, PY, (KH - 0.04) / 2.0))
+    # THE BOARDED KERB - 16 upright boards round the lip. Upright, because a
+    # ring laid flat is gone head-on (see the docstring).
+    for k in range(16):
+        th = TAU * k / 16.0
+        P.add(L.box(0.26, 0.11, KH + (0.05 if k % 3 == 0 else 0.0)), 'bone',
+              loc=(PX + RO * math.cos(th), PY + RO * math.sin(th),
+                   (KH + (0.05 if k % 3 == 0 else 0.0)) / 2.0),
+              rot=(0.0, 0.0, th))
+    _close("pit")
+
+    # ----------------------------------------------------------- THE LADDER
+    # Out of the mouth and leaning at the viewer. The tallest thing on the
+    # body: the top of the silhouette is the ladder, not the man.
+    _open()
+    FOOT = (PX + 0.10, PY + 0.26, 0.04)
+    TOP = (PX - 0.26, PY - 0.86, 2.02)
+    LA = math.radians(40.0)
+    WX, WY = 0.23 * math.cos(LA), 0.23 * math.sin(LA)
+    for s in (-1, 1):
+        P.raw(L.tube([Vector((FOOT[0] + s * WX, FOOT[1] + s * WY, FOOT[2])),
+                      Vector((TOP[0] + s * WX, TOP[1] + s * WY, TOP[2]))],
+                     [0.052, 0.046], 7), 'bone')
+    for i in range(6):
+        t = 0.10 + 0.17 * i
+        rx = FOOT[0] + (TOP[0] - FOOT[0]) * t
+        ry = FOOT[1] + (TOP[1] - FOOT[1]) * t
+        rz = FOOT[2] + (TOP[2] - FOOT[2]) * t
+        P.raw(L.tube([Vector((rx - WX, ry - WY, rz)),
+                      Vector((rx + WX, ry + WY, rz))],
+                     [0.034, 0.034], 6), 'bone')
+    _close("ladder")
+
+    # ------------------------------------------------------- THE SPOIL HEAP
+    # Dark, low, behind the pit - it answers "where did the dirt go" and it
+    # is the dark field the pale ladder is read against.
+    _open()
+    for hx, hy, hr, hh in ((0.18, 0.72, 0.62, 0.40), (-0.52, 0.86, 0.46, 0.30),
+                           (-1.02, 0.58, 0.34, 0.22)):
+        P.add(L.sphere(hr, hr * 0.80, hh, 14, 9), 'dark', loc=(hx, hy, hh * 0.34))
+    for bx, by, bth in ((-0.18, 0.96, 0.6), (0.38, 0.42, -0.9)):
+        P.add(L.box(0.62, 0.09, 0.07), 'bone', loc=(bx, by, 0.30),
+              rot=(0.0, 0.22, bth))
+    _close("spoil")
+
+    # ---------------------------------------------------------- THE MATTOCK
+    # Head already in the ground at the kerb. The haft is pale only along its
+    # upper half - the lower half is dark so it does not become a third pale
+    # diagonal competing with the ladder.
+    GRIP = (0.52, -0.22, 1.08)
+    BITE = (PX + RO - 0.02, PY + 0.30, 0.10)
+    _open()
+    P.raw(L.tube([Vector(GRIP), Vector(((GRIP[0] + BITE[0]) / 2.0,
+                                        (GRIP[1] + BITE[1]) / 2.0,
+                                        (GRIP[2] + BITE[2]) / 2.0))],
+                 [0.048, 0.044], 7), 'bone')
+    P.raw(L.tube([Vector(((GRIP[0] + BITE[0]) / 2.0, (GRIP[1] + BITE[1]) / 2.0,
+                          (GRIP[2] + BITE[2]) / 2.0)), Vector(BITE)],
+                 [0.044, 0.040], 7), 'dark')
+    _hd = math.atan2(BITE[1] - GRIP[1], BITE[0] - GRIP[0])
+    P.add(L.box(0.50, 0.10, 0.13), 'dark', loc=BITE, rot=(0.0, 0.30, _hd))
+    _close("mattock")
+
+    # -------------------------------------------------------------- THE MAN
+    MX, MY = 0.86, 0.06
+    FX, FY = GRIP[0] - MX, GRIP[1] - MY
+    _fl = math.hypot(FX, FY) or 1.0
+    FX, FY = FX / _fl, FY / _fl
+    RX, RY = FY, -FX
+    _yaw = math.atan2(FY, FX) - math.pi / 2.0
+
+    def mw(a, b, z):
+        return (MX + a * RX + b * FX, MY + a * RY + b * FY, z)
+
+    _open()
+    for s in (-1, 1):
+        toe = 0.28 if s < 0 else -0.40
+        limb(P, seat([mw(s * 0.18, 0.02, 0.86), mw(s * 0.21, toe * 0.50, 0.47),
+                      mw(s * 0.23, toe, 0.11)], 0.100), 0.100, 0.082, 'dark')
+        P.add(L.box(0.25, 0.38, 0.11), 'dark',
+              loc=mw(s * 0.23, toe - 0.05, 0.055), rot=(0.0, 0.0, _yaw))
+    limb(P, [mw(0.0, 0.0, 0.82), mw(0.0, 0.12, 1.10), mw(0.0, 0.22, 1.32)],
+         0.228, 0.198, 'dark')
+    P.add(L.box(0.54, 0.24, 0.09), 'dark', loc=mw(0.0, 0.03, 0.94),
+          rot=(0.0, 0.0, _yaw))
+    for s in (-1, 1):
+        P.add(L.sphere(0.150, 0.140, 0.126, 12, 8), 'dark',
+              loc=mw(s * 0.26, 0.20, 1.32))
+        limb(P, [mw(s * 0.26, 0.20, 1.30), mw(s * 0.19, 0.30, 1.00),
+                 (GRIP[0] + s * 0.030 * RX, GRIP[1] + s * 0.030 * RY,
+                  GRIP[2] + s * 0.02)], 0.070, 0.050, 'dark')
+        P.add(L.sphere(0.070, 0.064, 0.060, 10, 7), 'dark',
+              loc=(GRIP[0] + s * 0.090 * RX, GRIP[1] + s * 0.090 * RY,
+                   GRIP[2] + 0.02))
+    P.add(L.sphere(0.142, 0.146, 0.146, 14, 9), 'dark', loc=mw(0.0, 0.32, 1.44))
+    # THE FLAT CAP - a pitman's cap, not a hood and not a brim. The eyes sit
+    # 0.06 inside its edge so no yaw walks the glow onto the frame border.
+    P.add(aim(L.cone(0.200, 0.178, 0.070, 16), mw(0.0, 0.33, 1.52),
+              (FX * 0.42, FY * 0.42, 1.0)), 'dark')
+    for s in (-1, 1):
+        P.add(L.sphere(0.026, 0.026, 0.026, 8, 6), 'glow',
+              loc=mw(s * 0.050, 0.39, 1.44))
+    _close("man")
+
+    return P
+
+
+BUILDERS.update({"pitman": pitman})

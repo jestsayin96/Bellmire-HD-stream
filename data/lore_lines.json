@@ -999,7 +999,13 @@
     "The lamp is trimmed at the top, where the air is still good.",
     "A last look at the town. It is not a long look.",
     "The gate-ward nods. That is all the blessing there is.",
-    "Somebody's mother packed the bread. It goes down with them."
+    "Somebody's mother packed the bread. It goes down with them.",
+    "The rope is checked twice. Nobody remarks on it.",
+    "Rain on the gate-stones. They go down anyway.",
+    "The baker's boy runs out with one more loaf. It is taken without a word.",
+    "Someone has chalked the day on the lintel. They step under it.",
+    "The cart-horse stands and watches them go. It has seen this before.",
+    "A cough, a strap pulled tight, a nod. The dark takes it from there."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1503,7 +1509,13 @@
     "Dust settles. Nobody says well done. They sit.",
     "The floor is quiet, and the quiet is theirs for an hour.",
     "Blood on the flags. A bucket is found. The work goes on.",
-    "Somebody laughs, once, and is not stopped."
+    "Somebody laughs, once, and is not stopped.",
+    "Lamps are trimmed. The packs are lighter and nobody says by how much.",
+    "The smith's boy is sent for water. He comes back at a run.",
+    "Boots are scraped on the step. The town is glad of clean floors.",
+    "A kettle goes on. It is the first sound that is not work.",
+    "They wash their hands in the trough and take their time doing it.",
+    "The ledger is opened and the figures are made to agree."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4470,7 +4482,19 @@
     "Wrote home on the first of the month. The month ran out.",
     "Tied the knot right. It held. He did not.",
     "Walked slowly. Arrived anyway.",
-    "Said she would be back for supper. The pot is still warm."
+    "Said she would be back for supper. The pot is still warm.",
+    "Banked the stove before he left. It was still warm when we came for it.",
+    "Mended the rope twice. Trusted it a third time.",
+    "Kept the tally honest. The tally is all that came back.",
+    "Left her boots by the door, as she always did. They are still there.",
+    "Poured the last of the ale for the man beside him. Then the stair went.",
+    "Counted the torches down. Counted one short coming back.",
+    "Said the wall looked sound. He was right about the wall.",
+    "Carried the ladder. Left it where it would be found.",
+    "Slept in the loft over the baker's. Nobody has taken the bed.",
+    "Paid the debt on the first day it was due. Owed nothing at the end.",
+    "Whistled off-key all the way to the gate. The gate noticed when it stopped.",
+    "Gave her ration to the youngest. Went on hungry. Went on."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14082,4 +14106,5 @@
   "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
   "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
   "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
-}
+,
+  "_note_c157": "C-157 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."}

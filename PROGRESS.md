@@ -14041,3 +14041,9 @@ NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no accou
 Housekeeping: the driver's `_b97_echo.log` was written at the worktree root and deleted in the same cycle; nothing of mine is left untracked.
 L56 (delve-heavy soak - engine and lock) carried again, not started: the row named the red proof and the window I needed for it was 23 seconds, not a soak.
 Next firing: L56 if the plan's CHAT BOT row leaves it to me, and the `parse_fish()` end-finder hardening carried from B95.
+
+## C-157 (21 Nov 2026 02:23 CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (01:58 CT block) gave content: "C-157, your own cycle, unthrottled." No miniboss owed - 44 feed keys in miniboss_feed.by_key, 44 bodies per the plan.
+Added (data/lore_lines.json only): epitaphs +12 (840 -> 852), descend +6 (517 -> 523), cleared +6 (502 -> 508), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c157` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c157` only.
+CODE WIRING: none; the three lists are already drawn from at random.

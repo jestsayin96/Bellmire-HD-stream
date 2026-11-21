@@ -14397,3 +14397,454 @@ def scraper():
 
 
 BUILDERS.update({"scraper": scraper})
+
+
+# ========================================================= 42 THE FERRYMAN
+# MEASURED FIRST, NOT REMEMBERED: 41 base keys in this file's CANON before
+# this block (chibi/tall variants excluded), and I read every one of their
+# `idea` strings before designing. The families already spoken for are
+# summon / self-armour / drag-one / douse-light / revive / bar-exit /
+# steal-gear / heal-room / flood / terrain / pre-set-traps / scale-with-fire /
+# sound-misdirect / floor-set / split-in-two / arm-the-room / encumber /
+# split-the-room / type-immunity / take-the-haul / drink-the-brews /
+# press-the-fallen / level-down-the-best / mark-one / degrade-iron /
+# no-choosing / only-its-own-drop-cuts-it / yoke-one / hunt-by-movement /
+# return-what-you-put-in / cask-one / no-healing / copy-a-hero / keep-its-face /
+# drop-on-the-count / paid-by-the-tail / take-your-post / undo-the-round /
+# get-above-reach / seal / rub-out.
+# NOT ONE OF THEM IS ABOUT THROUGHPUT - how many of you get to act on it at
+# all. That is the gap this fills, and it is why it is not the Gaoler with a
+# boat: the Gaoler takes a hero AWAY, this one decides WHOSE BLOWS COUNT.
+CANON.update({
+    "ferryman": ("Slackwater", 2.62, (0.62, 0.60, 0.54), (0.56, 0.86, 0.82),
+                 "flooded", "IT TAKES ONE AT A TIME - the punt holds one, so "
+                 "it has one of you aboard and NOBODY ELSE'S BLOWS LAND. It "
+                 "does not wound, it does not heal and it takes nobody out of "
+                 "the room: it simply will not answer three heroes at once. "
+                 "Whoever it has taken is the only one it can be hurt by, and "
+                 "it chooses - so a party that has stacked its damage on one "
+                 "hero watches that hero stand on the bank while the healer "
+                 "swings a stick at it. The rest are not idle, they are just "
+                 "not fighting IT: they must shift the fare, which is the "
+                 "PEGS ALONG BOTH GUNWALES - one peg is one more crossing it "
+                 "will make, and when the last peg is drawn it has to put the "
+                 "one it holds down and take the next, which is the window. "
+                 "You can count the pegs from any side of the room",
+                 0.62, "A flat-bottomed boat is being poled up the passage."),
+})
+ORDER = ORDER + ["ferryman"]
+
+# PER-SLOT MATERIALS. THE CONTRAST IS DELIBERATELY INVERTED FROM THE LAST FOUR
+# BODIES AND I AM SAYING SO RATHER THAN LETTING IT LOOK LIKE AN ACCIDENT.
+# The Moulder measured dark-man-against-pale-furniture and the Ratcatcher,
+# Drover, Beadle and Scraper all applied it - four in a row, and a rule applied
+# five times running stops being a rule and becomes the look of the set. Here
+# the MAN IS PALE (silt-caked sacking, dried stiff) and the FURNITURE IS DARK
+# (a tarred hull - which is also simply what a working boat is). The contrast
+# that carries the outline is the same magnitude, 0.60 against 0.055, just
+# pointing the other way; and it buys something the dark-man arrangement could
+# not give me here, which is that the ONE PALE PLANK inside a black hull reads
+# as the one seat from the doorway without a single extra object.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"ferryman"}
+
+OVERRIDE.update({
+    "ferryman": {
+        # THE MAN: sacking and canvas that has been wet and dried stiff with
+        # river silt in it. Rough 0.90, no metal - this is cloth with grit in
+        # it, not armour, and a sheen on it would read as oilskin.
+        'body': ((0.600, 0.585, 0.520), 0.90, 0.00),
+        # THE HULL, THE STRAPS, THE BOOTS, THE POLE SHOE, THE HOOK, THE COAT
+        # AND THE BOOT ON THE THWART. Pitch black with a warm bias, rough 0.52
+        # and a little metal: wet tar does catch a light, and the hull's one
+        # job in the silhouette is to be a black mass with a pale plank in it.
+        'dark': ((0.055, 0.050, 0.046), 0.52, 0.10),
+        # THE THWART, THE POLE, THE FARE PEGS AND THE WET ON THE FLOOR.
+        # Bleached driftwood, the brightest value on the body at 0.80, because
+        # the two things a viewer must COUNT (one seat, four pegs) both live
+        # in this slot and they are counted against the black hull.
+        'bone': ((0.800, 0.780, 0.700), 0.78, 0.00),
+        # THE EYES ONLY. Set back 0.06 inside the hood's own brim so the glow
+        # cannot reach the frame edge at any yaw - System 1's clipped-glow
+        # fault is a border assertion now, but a glow that cannot get near the
+        # border is better than one the check has to catch. NO LAMP ON THIS
+        # BODY: the Snuffer owns light and this creature makes none.
+        'glow': ((0.56, 0.86, 0.82), 2.4),
+    },
+})
+
+
+def ferryman():
+    """IT TAKES ONE AT A TIME. The 42nd body. PASS 2.
+
+    *** PASS 2 VERDICTS, JUDGED SEPARATELY OFF THE EVEN-LIGHT RENDERS I
+    *** ACTUALLY OPENED (renders/art/minibosses/ferryman_even/hero_*.png).
+    *** THEY SHARE ONE RENDER PASS; THEY DO NOT SHARE ONE VERDICT.
+      (A) LIFT THE THWART PROUD OF THE RAIL so the one seat reads - **FAILED.**
+          It is no longer buried inside the hull, but in the front view it
+          does not read as A SEAT: it joins the fare stick and the coat into
+          one pale cluster right of centre. The mechanic still does not come
+          off the picture from the doorway. OPEN, AND IT IS THE NEXT PASS.
+      (B) GUNWALE PEGS -> ONE CENTRAL FARE STICK - **PASSED IN ALL THREE
+          VIEWS.** Four dark cross-pegs on a pale post, countable from front,
+          side AND back. The thing I told a viewer to count can be counted.
+      (C) TAKE THE POLE OFF HIS FACE - **PASSED.** It is a clean diagonal in
+          both the front and the side frame and clear of the head at both.
+      (D) KILL THE POINTED-HAT HOOD - **HALF.** The lampshade is gone, but it
+          now reads as a blocky visor, and the nape gather gives him a SECOND
+          LUMP BEHIND THE HEAD that reads as a second head in the side view.
+          AND THE EYES STILL CANNOT BE SEEN IN ANY VIEW - I am not claiming
+          they read, because the picture says they do not.
+      (E) PUT SOMETHING ON HIS BACK - **PASSED, BUT OVERSHOT.** The back is no
+          longer a blank slab and the dark strap cross reads well; the sack
+          panel is too big and in the side view it reads as a white board
+          hung on him rather than as sacking.
+    STILL OPEN AND WRITTEN UP RATHER THAN HIDDEN: the hull reads as an open
+    black skip from the front and the back (the swim ends only tell from the
+    side); the rope coil reads as a pale plate; the hook and one swim end read
+    as loose bricks on the floor beside the hull.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A tall silt-pale riverman standing in a BLACK TARRED
+                         PUNT, both hands on a long pale quant pole that runs
+                         corner to corner across the frame.
+      WHAT IS IT DOING?  POLING. The pole's shoe is planted on the FLOOR
+                         OUTSIDE the hull, forward and to his left, and he is
+                         leaning his weight down it. His facing is DERIVED
+                         from that plant, not dialled, so moving the shoe
+                         re-aims the man.
+      HOW MANY FIT?      ONE. There is exactly ONE PALE PLANK across the black
+                         hull and there is already a wet coat folded on it
+                         with a single boot standing beside it. One seat, and
+                         it is taken. That is the mechanic with no second
+                         object needed.
+      HOW MANY MORE?     FOUR PALE PEGS along the gunwale, in a row of SEVEN
+                         peg holes - three drawn, four left. One peg is one
+                         more crossing. THE ROW IS ON BOTH GUNWALES, because
+                         the Sealer's press fault was a mechanic that only
+                         read from one side and the Scraper's answer was to
+                         make the countable thing yaw-symmetric.
+
+    FACING IS BY CONSTRUCTION, and the three views are meant to be three
+    different readings of the same fact:
+      FRONT - the bow comes at the camera, the gunwales converge, the pale
+              thwart lies across the black hull with the coat and the boot on
+              it, and the hooded head is over it. The mechanic is the picture.
+      SIDE  - the full length of the hull, the swim ends, the whole diagonal
+              of the pole, and the peg row in profile.
+      BACK  - his back, the sacking cape, the stern deck with the rope coil
+              and the hook, and the STARBOARD peg row - so the count survives
+              the view the team lead proved nobody had ever lit properly.
+
+    WEAR 0.62, and it is not the set's average by accident: this is a working
+    boat that is kept (the tar is sound, the pole is true) carried by a man who
+    is not (sacking, no coat of his own, one spare boot that is not his). A
+    level-12 Bellmire does not make this creature newer; the wear is HIS.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed or pre-judged here: minibossgen measures the real
+    footprint against floorgen's own corridor span and lid and the report says
+    the verdict. PASS 1 BUILT IT 3.00 m LONG AND THE FIT HARNESS'S BORDER
+    CHECK CAUGHT IT: `ferryman/side: render reaches the frame edge - left 192
+    px, right 29 px`. The body was CUT and that view proved nothing about
+    where it ended. I SHORTENED THE BOAT RATHER THAN WIDENING THE FRAME
+    (`--frame` exists and would have made the number go away without making
+    the creature fit): a hull the shared frame cannot hold is a hull that will
+    also own the corridor. 2.24 m long now, which
+    is why it is yawed mostly into depth rather than laid across the passage.
+    """
+    P = Parts("ferryman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # ------------------------------------------------------------ THE FRAMES
+    BX, BY = 0.06, 0.20           # the punt's centre
+    BYAW = math.radians(202.0)    # bow toward the front camera and a little +X
+    CSb, SNb = math.cos(BYAW), math.sin(BYAW)
+
+    def bw(u, v, z):
+        """BOAT FRAME -> WORLD. u athwartships (+ to port), v along the length
+        with the BOW at +v. The bow is turned toward the room, not at a wall."""
+        return (BX + u * CSb - v * SNb, BY + u * SNb + v * CSb, z)
+
+    HALF_L = 1.12                 # half the hull length - 2.24 m overall
+    HALF_B = 0.455                # half the beam
+    Z_SOLE = 0.085                # top of the bottom boards: his standing floor
+    Z_GUN = 0.470                 # gunwale top
+    SWIM = 0.66                   # where the flat bottom starts to ramp up
+
+    # HIS PLACE IN THE BOAT and THE PLANT. The shoe is a real point on the
+    # floor outside the hull; his facing is the vector from him to it. The
+    # Scraper's pass-2 lesson is that a man placed by eye turns his work at a
+    # wall, so nothing here is dialled in degrees.
+    MX, MY, _z = bw(-0.03, -0.26, 0.0)
+    SHX, SHY, _z2 = bw(1.20, 0.86, 0.0)   # PASS 2 (C): further to port
+    FX, FY = SHX - MX, SHY - MY
+    _fl = math.hypot(FX, FY)
+    FX, FY = FX / _fl, FY / _fl
+    RX, RY = FY, -FX              # his right
+    BF = math.atan2(FY, FX)
+
+    def mw(a, b, z):
+        """MAN FRAME -> WORLD. a to his right, b forward along his facing."""
+        return (MX + a * RX + b * FX, MY + a * RY + b * FY, z)
+
+    _open()
+    # ------------------------------------------------- THE HULL: A PUNT, NOT
+    # A CANOE. A punt is a rectangle with RAMPED SWIM ENDS, not a pointed
+    # thing, and that is the whole reason it reads as a working boat from the
+    # doorway instead of as a canoe or a coffin. The bottom boards run flat
+    # between -SWIM and +SWIM and then rise to the gunwale at each end.
+    P.add(L.box(HALF_B * 2.0, SWIM * 2.0, 0.072), 'dark',
+          loc=bw(0.0, 0.0, Z_SOLE - 0.036), rot=(0.0, 0.0, BYAW))
+    for sv in (1.0, -1.0):
+        # THE SWIM. A raked slab from the flat bottom up to the gunwale, built
+        # as a tube through three points so the rake is a real wedge in the
+        # silhouette and not a stair of boxes.
+        pts = [Vector(bw(0.0, sv * (SWIM - 0.02), Z_SOLE - 0.030)),
+               Vector(bw(0.0, sv * (SWIM + 0.30), Z_SOLE + 0.090)),
+               Vector(bw(0.0, sv * HALF_L, Z_GUN - 0.075))]
+        P.raw(L.tube(pts, [0.050, 0.046, 0.040], 4), 'dark')
+        for su in (1.0, -1.0):
+            P.raw(L.tube([Vector(bw(su * HALF_B, sv * (SWIM - 0.02), Z_SOLE)),
+                          Vector(bw(su * (HALF_B - 0.035), sv * (SWIM + 0.30),
+                                    Z_SOLE + 0.120)),
+                          Vector(bw(su * (HALF_B - 0.085), sv * HALF_L,
+                                    Z_GUN - 0.030))],
+                         [0.062, 0.058, 0.050], 5), 'dark')
+        # THE END PANEL - the flat face a punt has instead of a stem.
+        P.add(L.box(HALF_B * 1.48, 0.055, 0.170), 'dark',
+              loc=bw(0.0, sv * (HALF_L - 0.03), Z_GUN - 0.080),
+              rot=(0.0, 0.0, BYAW))
+    for su in (1.0, -1.0):
+        # THE SIDE STRAKES. Two planks a side, so the hull has a line along it
+        # and does not read as one extruded block.
+        for zc, th in ((Z_SOLE + 0.095, 0.185), (Z_SOLE + 0.285, 0.190)):
+            P.add(L.box(0.055, SWIM * 2.0 + 0.44, th), 'dark',
+                  loc=bw(su * HALF_B, 0.0, zc), rot=(0.0, 0.0, BYAW))
+        # THE GUNWALE CAP - the rail the pegs live in.
+        P.add(L.box(0.090, SWIM * 2.0 + 0.52, 0.055), 'dark',
+              loc=bw(su * HALF_B, 0.0, Z_GUN), rot=(0.0, 0.0, BYAW))
+    # THE FRAMES INSIDE. Three athwart ribs standing proud of the bottom:
+    # they catch the key light and stop the hull's inside reading as a void.
+    for v in (-0.46, 0.0, 0.46):
+        P.add(L.box(HALF_B * 1.92, 0.070, 0.105), 'dark',
+              loc=bw(0.0, v, Z_SOLE + 0.052), rot=(0.0, 0.0, BYAW))
+    _close("hull")
+
+    _open()
+    # ------------------------------------------- THE ONE SEAT: THE MECHANIC
+    # ONE pale plank across a black hull. There is no second thwart and there
+    # is no room for one between the ribs - the fact that only one hero is
+    # aboard is a CONSTRUCTION FACT of the boat, not a label on it.
+    # PASS 2 (A). PASS 1 PUT THE THWART 0.105 m BELOW THE GUNWALE AND I COULD
+    # NOT FIND IT IN ANY OF THE THREE RENDERS. The one seat is the mechanic and
+    # it was inside the hull, behind the near strake, under the man. It now
+    # sits PROUD OF THE RAIL and OVERHANGS it 0.075 m a side, so it is a pale
+    # bar lying across a black hull in outline and not a plank in a box.
+    P.add(L.box(HALF_B * 2.0 + 0.150, 0.265, 0.072), 'bone',
+          loc=bw(0.0, 0.10, Z_GUN + 0.058), rot=(0.0, 0.0, BYAW))
+    for su in (1.0, -1.0):
+        P.add(L.box(0.070, 0.110, 0.130), 'bone',
+              loc=bw(su * (HALF_B - 0.075), 0.10, Z_GUN - 0.040),
+              rot=(0.0, 0.0, BYAW))
+    # THE FARE ALREADY ABOARD, AND IT IS A PERSON'S THINGS, NOT A PROP PILE:
+    # a wet coat folded down to a low dark lump, and ONE boot standing beside
+    # it. One boot and not a pair, because a pair reads as spare kit and one
+    # reads as someone who is not coming back for it.
+    P.add(L.sphere(0.175, 0.125, 0.085, 12, 8), 'dark',
+          loc=bw(-0.115, 0.105, Z_GUN + 0.168))
+    P.add(L.sphere(0.145, 0.105, 0.052, 10, 7), 'dark',
+          loc=bw(-0.100, 0.135, Z_GUN + 0.228))
+    P.add(L.box(0.115, 0.185, 0.165), 'dark',
+          loc=bw(0.215, 0.095, Z_GUN + 0.218), rot=(0.0, 0.0, BYAW))
+    P.add(L.box(0.125, 0.225, 0.062), 'dark',
+          loc=bw(0.215, 0.120, Z_GUN + 0.148), rot=(0.0, 0.0, BYAW))
+    _close("seat")
+
+    _open()
+    # ------------------------------- THE FARE PEGS: THE COUNT, ON BOTH SIDES
+    # SEVEN HOLES, FOUR PEGS. The three drawn holes are cut as dark recesses
+    # so the ROW is still seven long and the viewer is counting gaps against
+    # pegs rather than being asked to remember how many there were. Both
+    # gunwales carry the identical row: the Sealer shipped a mechanic that
+    # only read from one side and that is the fault this avoids by
+    # construction, not by picking a lucky yaw.
+    # PASS 2 (B). THE GUNWALE PEGS WERE A FAILURE AND I AM REPLACING THEM
+    # OUTRIGHT, NOT TUNING THEM. Two rows of seven round posts with ball tops
+    # read as BOLLARDS or chess pawns in all three renders, and - the fault
+    # that actually matters - the near and far rows do not align under the
+    # hull's yaw, so the front view showed SIX-TO-EIGHT posts for a count of
+    # FOUR. A thing the viewer is told to count that cannot be counted is
+    # worse than no count at all: it is a number the picture contradicts.
+    # The answer is the Scraper's, adapted: ONE object, at the body's centre
+    # line, that cannot interleave with itself. A PALE FARE STICK standing in
+    # the bow, with SEVEN dark collars for the seven crossings and FOUR dark
+    # CROSS-PEGS still in it. Dark on pale, one stick, countable from every
+    # yaw by construction rather than by a lucky camera.
+    FZ0, FZ1 = Z_SOLE + 0.30, Z_SOLE + 0.96
+    P.raw(L.tube([Vector(bw(0.0, 0.70, Z_SOLE - 0.02)),
+                  Vector(bw(0.0, 0.70, FZ1 + 0.10))],
+                 [0.052, 0.044], 9), 'bone')
+    P.add(L.sphere(0.062, 0.062, 0.040, 9, 6), 'bone',
+          loc=bw(0.0, 0.70, FZ1 + 0.13))
+    STATIONS = [FZ0 + (FZ1 - FZ0) * k / 6.0 for k in range(7)]
+    FARE = (0, 2, 4, 6)
+    for k, z in enumerate(STATIONS):
+        P.add(L.cone(0.060, 0.060, 0.016, 10), 'dark', loc=bw(0.0, 0.70, z))
+        if k in FARE:
+            P.add(L.box(0.255, 0.052, 0.042), 'dark',
+                  loc=bw(0.0, 0.70, z + 0.030), rot=(0.0, 0.0, BYAW))
+            P.add(L.box(0.052, 0.255, 0.042), 'dark',
+                  loc=bw(0.0, 0.70, z + 0.030), rot=(0.0, 0.0, BYAW))
+    _close("pegs")
+
+    _open()
+    # --------------------------------------------- THE MAN: LEANING ON IT
+    # Feet on the bottom boards at Z_SOLE, NOT on z=0 - he is standing in the
+    # boat. seat() lifts each raked limb so its bottom ring touches that plane
+    # rather than dipping through it; minibossgen grounds the merged body on
+    # its GLOBAL minimum, so one hidden dip in a leg lifts the whole hull off
+    # the floor and every peg, every plank and the pole shoe with it.
+    for s, fb in ((1, 0.21), (-1, -0.19)):
+        pts = seat([mw(s * 0.185, fb * 0.40, Z_SOLE + 0.80),
+                    mw(s * 0.230, fb * 0.86, Z_SOLE + 0.42),
+                    mw(s * 0.248, fb, Z_SOLE + 0.095)], 0.098)
+        limb(P, pts, 0.098, 0.078, 'body')
+        P.add(L.box(0.230, 0.375, 0.100), 'dark',
+              loc=mw(s * 0.248, fb - 0.030, Z_SOLE + 0.050), rot=(0.0, 0.0, BF))
+    # THE WEIGHT IS ON THE POLE. Hip 0.78 above the boards, shoulder 1.48, and
+    # the torso carried 0.26 m forward along his facing over that run - the
+    # lean IS the poling and it is what makes the pole look loaded rather than
+    # held. His shoulder line is rolled 14 degrees so the leading shoulder is
+    # the one the pole passes.
+    limb(P, [mw(0.0, -0.02, Z_SOLE + 0.78), mw(-0.015, 0.12, Z_SOLE + 1.14),
+             mw(-0.02, 0.26, Z_SOLE + 1.48)], 0.192, 0.168, 'body')
+    SHZ = Z_SOLE + 1.50
+    for s in (1, -1):
+        P.add(L.sphere(0.115, 0.105, 0.100, 10, 7), 'body',
+              loc=mw(s * 0.225, 0.255 + s * 0.030, SHZ - s * 0.028))
+    # THE CAPE. Three sodden sacking panels hung off the shoulders rather than
+    # one sheet: a sheet reads as a cloak and a cloak is a lord, and this is a
+    # man with a sack over him. They stop at the thigh so the braced stance
+    # stays in the outline.
+    for a, bb, w in ((-0.235, 0.12, 0.30), (0.0, 0.10, 0.34), (0.235, 0.12, 0.30)):
+        P.add(L.box(w, 0.085, 0.72), 'body',
+              loc=mw(a, bb - 0.045, Z_SOLE + 1.10), rot=(0.0, 0.0, BF))
+    P.add(L.box(0.70, 0.300, 0.115), 'body',
+          loc=mw(0.0, 0.16, SHZ - 0.030), rot=(0.0, 0.0, BF))
+    # PASS 2 (E). THE BACK VIEW WAS A BLANK PALE SLAB. Pass 1 hung all three
+    # sacking panels in FRONT of his torso (b = +0.10..0.12), so the half of
+    # the body the back camera gets had nothing in it at all - and this is the
+    # hour the team lead proved that no back view in this tree had ever been
+    # lit by more than one coloured lamp, which is exactly how an empty back
+    # goes on passing. A sack hung down his back, and the strap cross that
+    # carries the rope, in 'dark' so the back has a value break in it.
+    P.add(L.box(0.580, 0.095, 0.780), 'body',
+          loc=mw(0.0, -0.115, Z_SOLE + 1.11), rot=(0.0, 0.0, BF))
+    for s in (1, -1):
+        P.raw(L.tube([Vector(mw(s * 0.215, -0.085, SHZ - 0.040)),
+                      Vector(mw(-s * 0.175, -0.135, Z_SOLE + 0.86))],
+                     [0.042, 0.038], 5), 'dark')
+    # THE HOOD. Peak radius 0.165 against a 0.70 shoulder - the Scraper's
+    # pass-2 (D) fault was a hood nearly shoulder-wide that made the head the
+    # biggest mass on the man, and the ratio here is deliberately under half.
+    P.add(L.sphere(0.165, 0.175, 0.185, 12, 9), 'body',
+          loc=mw(0.0, 0.265, SHZ + 0.185))
+    # PASS 2 (D). THE CONE ON TOP OF THE BALL READ AS A POINTED HAT, not as
+    # a hood - a lampshade over a bald head in the front view and the same
+    # from the side. A hood's silhouette is a BROW THROWN FORWARD over a face,
+    # not a peak thrown up, so the cone is gone and a forward brim takes its
+    # place; the sacking gathers at the nape instead.
+    P.add(L.box(0.330, 0.230, 0.070), 'body',
+          loc=mw(0.0, 0.330, SHZ + 0.265), rot=(0.0, 0.0, BF))
+    P.add(L.sphere(0.155, 0.120, 0.095, 10, 7), 'body',
+          loc=mw(0.0, 0.105, SHZ + 0.215))
+    # THE FACE IS A RECESS, NOT A FACE. A dark block set INSIDE the hood's
+    # mouth with the two eyes 0.06 further in again, so the glow is shadowed
+    # by the brim from every yaw.
+    # THE FACE IS A HOLE, NOT A BALL. Pass 1's dark sphere sat PROUD of the
+    # hood and read as a black ball stuck on the front of his head, and the
+    # eyes inside it could not be seen at all in any of the three renders - I
+    # am not claiming they read until a picture shows them. Recessed now, and
+    # the eyes are brought forward to the mouth of the recess so they are
+    # inside the brim's shadow but not buried behind the cloth.
+    P.add(L.sphere(0.105, 0.070, 0.095, 10, 7), 'dark',
+          loc=mw(0.0, 0.255, SHZ + 0.165))
+    eyes(P, mw(0.0, 0.300, SHZ + 0.170), 0.050, 0.030, 0.0)
+    _close("man")
+
+    _open()
+    # ------------------------------------------- THE POLE: THE LONGEST LINE
+    # A quant: a long pale shaft with a dark SHOE on the bottom so it does not
+    # sink into the mud. It runs from the shoe on the floor OUTSIDE the hull,
+    # through both his hands, and out past his shoulder behind him - one
+    # unbroken diagonal corner to corner, which is this creature's whole
+    # contribution to the silhouette.
+    FOOT = Vector((SHX, SHY, 0.012))
+    # PASS 2 (C). IN BOTH THE FRONT AND THE SIDE RENDER THE POLE RAN
+    # STRAIGHT THROUGH HIS HEAD. Pass 1 took the top end back over the centre
+    # of his shoulders, which from the front is a vertical bar splitting the
+    # man in half and from the side is a shaft across his face. The top end is
+    # now 0.34 to HIS RIGHT, so the shaft passes outside the head at both
+    # yaws, and the shoe moved further to port so the line is a real diagonal
+    # in the FRONT frame and not only in the side one.
+    TOPP = Vector(mw(0.345, -0.60, Z_SOLE + 1.98))
+    P.raw(L.tube([FOOT, FOOT.lerp(TOPP, 0.5), TOPP],
+                 [0.044, 0.040, 0.034], 8), 'bone')
+    P.add(L.cone(0.090, 0.062, 0.135, 10), 'dark',
+          loc=(FOOT.x, FOOT.y, 0.066))
+    # THE HANDS ARE ON IT, AND THEY ARE ON IT BY CONSTRUCTION: both grips are
+    # points ON the pole's own line, and each forearm is drawn TO that point.
+    # The Scraper's pass-1 fault was arms that ended nowhere near the work.
+    for t, s in ((0.46, -1), (0.60, 1)):
+        g = FOOT.lerp(TOPP, t)
+        limb(P, [mw(s * 0.225, 0.255 + s * 0.030, SHZ - s * 0.028),
+                 ((mw(s * 0.235, 0.33, SHZ - 0.18)[0] + g.x) * 0.5,
+                  (mw(s * 0.235, 0.33, SHZ - 0.18)[1] + g.y) * 0.5,
+                  (SHZ - 0.17 + g.z) * 0.5),
+                 (g.x, g.y, g.z)], 0.092, 0.070, 'body')
+        P.add(L.sphere(0.082, 0.082, 0.072, 9, 7), 'dark', loc=(g.x, g.y, g.z))
+    _close("pole")
+
+    _open()
+    # ----------------------------------- THE STERN: THE ROPE AND THE HOOK
+    # Three flat coils laid ON the stern deck and a run of rope over the
+    # transom to a hook lying on the floor. This is the half of the body the
+    # BACK view gets, and it is here because the team lead proved this hour
+    # that no back view in this tree has ever been lit by more than one
+    # coloured lamp - a back with nothing in it would have gone on passing.
+    for i, r in enumerate((0.215, 0.165, 0.115)):
+        _ring(P, bw(0.165, -0.80, Z_GUN - 0.055 + i * 0.038), r,
+              axis='z', slot='bone', rad=0.028, n=16)
+    P.raw(L.tube([Vector(bw(0.165, -0.94, Z_GUN - 0.030)),
+                  Vector(bw(0.235, -1.22, Z_GUN - 0.340)),
+                  Vector(bw(0.300, -1.42, 0.040))],
+                 [0.028, 0.026, 0.024], 6), 'bone')
+    P.add(L.cone(0.055, 0.030, 0.230, 8), 'dark',
+          loc=bw(0.325, -1.50, 0.030), rot=(math.radians(84.0), 0.0, BYAW))
+    _close("stern")
+
+    _open()
+    # ------------------------------------------------ THE WET HE CAME OUT OF
+    # Two thin pale patches on the floor astern, built through _rev so they are
+    # the same width at every yaw and are LYING ON the floor, which is the one
+    # place a camera standing on the floor cannot hide a float. Deliberately
+    # small: a full disc would become the biggest pale mass in the frame and
+    # take the eye off the one pale plank, which is the thing being counted.
+    P.add(_rev([(0.000, 0.520), (0.010, 0.440), (0.015, 0.000)], 18),
+          'bone', loc=bw(0.120, -1.26, 0.0))
+    P.add(_rev([(0.000, 0.300), (0.009, 0.230), (0.013, 0.000)], 14),
+          'bone', loc=bw(-0.420, -0.98, 0.0))
+    _close("wet")
+    return P
+
+
+BUILDERS.update({"ferryman": ferryman})

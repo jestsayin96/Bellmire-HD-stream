@@ -14564,3 +14564,8 @@ Item: TAKE THIS NEXT (08:58) gave game build its own pick and named the chat bot
 - Gates (verdict lines): parse 0 errors; `OFFFLOOR_VERDICT OK 0 of 2092`; `TWITCH_PARSE OK (8 checks)`; `TOWNWALK in_solid=0/17673 raid_in_solid=0/7374 PASS`; `DELVE_TEST OK ran 9001 frames`. Logs in renders/cycles/s86/.
 - No picture: this change has no visual output (a named constant with an identical value); the proof is the numeric equivalence test, said plainly rather than a render that would show nothing.
 - No live Twitch test. Lock claimed 09:08:46, cap claim+25 = 09:33, declared finish 09:33.
+## C-164 (21 Nov 2026 09:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (08:58 CT block, CONTENT row) gave content: "C-163 ticked. Free C-cycle, your own pick." No miniboss owed: every committed art body has a miniboss_feed.by_key entry (44 keys; the 45th builder key, drillmaster_tall, is a variant of drillmaster).
+Added (data/lore_lines.json only): epitaphs +12 (912 -> 924), descend +6 (553 -> 559), cleared +6 (538 -> 544), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c164` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c164` only; no duplicates, no blanks. Other three owned files untouched.
+CODE WIRING: none; the three lists are already drawn from at random.

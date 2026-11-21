@@ -1055,4 +1055,4 @@ RUNNING 2026-11-21T16:42:07-06:00 (QA tester)
 
 RUNNING 2026-11-21T16:49:52-06:00 (chat bot B111, claim 2026-11-21T16:49:52-06:00, cap claim+25 = 17:14, HARD RELEASE :52 - declared finish 16:52 - four gate logs, split at the clock)
 
-IDLE 2026-11-21T16:51:58-06:00 - chat bot B111 done: the four gate logs the team lead asked for are RUN AND WRITTEN (parse rc=0, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK wrote 32), committing them next. Battery 16:50:09-16:50:33, no gate skipped by the clock guard. No Godot of mine alive. Claim 16:49:52, cap 17:14, declared 16:52, released 16:51:58 - inside the HARD :52. (chat bot)
+IDLE 2026-11-21T16:51:34-06:00 - chat bot B111 done: the four gate logs the team lead asked for are RUN AND WRITTEN (parse rc=0, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK wrote 32), committing them next. Battery 16:50:09-16:50:33, no gate skipped by the clock guard. No Godot of mine alive. Claim 16:49:52, cap 17:14, declared 16:52, released 16:51:34 (first typed 16:51:58, a stamp 24 s in the FUTURE written from an estimate; corrected in place against the machine clock 16:51:34 before the push) - inside the HARD :52. (chat bot)

@@ -356,3 +356,14 @@ and read", not "what am I allowed to use".
 - Checked: every file under `_packs\Animals_Pack_by_Quaternius\` and every entry in the sibling `Animals_Pack_by_Quaternius.zip` (listed by reading the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file apart from the three `.mtl` material files, which carry material values only.
 - The folder name, the `Quaternius` author credit and the Animals Pack's public listing are not a licence and are not treated as one here.
 - Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file.
+
+
+## PACK CATALOGUE - Church1_blend (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Church1_blend (Blendswap 75990 "Medieval Church") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs/Church1_blend/75990_Church1Upload_blend/75990 - Medieval Church - License.html` | 17 on disk (`Church1Upload.blend`, `church.dae`, `preview_75990.jpg`, 13 textures under `EXPORT\`, the licence HTML); the sibling `Church1_blend.zip` lists the same content | permitted | not required; credit kept (Daniel74, blendswap.com/blends/view/75990) |
+
+- Checked: the whole `_packs\Church1_blend\` tree by walking it, and the sibling `Church1_blend.zip` by listing its entries (not extracted). The licence was read off the file this run, not from a search snippet. The HTML page states: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain)" and "There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, and the text it holds is the licence statement itself. The `.blend` may carry its own text datablocks and embedded assets; none was opened here, so the CC0 grant is recorded for the pack as published, not re-checked per embedded texture.
+- Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Church1_blend`.

@@ -2426,8 +2426,195 @@ static func commands() -> Dictionary:
                     _guard_faults.append("NEEDS_HERO EXEMPT")
                     push_error("COMMANDS_DATA NEEDS_HERO EXEMPT: %s now route(s) through the living-hero gate, and it was carved out of this guard precisely because it must not - a dead viewer can no longer raise a new hero, which is the one thing that command exists to do" % [nh_broke])
                     printerr("COMMANDS_DATA NEEDS_HERO EXEMPT - %s now gates on a LIVING hero; revival is broken for every dead viewer" % [nh_broke])
+        # ---- B101: THE FIVE SPECIAL BUILDINGS !town NAMES. -------------------------------
+        # A CLAIM ON MY OWN SURFACE THAT NOTHING HAS EVER CHECKED, AND IT IS A SECOND COPY OF
+        # SOMEBODY ELSE'S TABLE SITTING IN MY OWN FILE. `_town_line()` turns the growth lane's
+        # special-building KEYS into words through `TOWN_BUILT`, declared in this file - and the
+        # lookup is `TOWN_BUILT.get(String(k), "")` with an EMPTY-STRING fallback that is then
+        # skipped. So if the growth lane adds a sixth special, or renames one of the five keys,
+        # the building is SILENTLY DROPPED OFF THE !town LINE: no crash, no log line, no wrong
+        # word on screen - just a building a viewer built and the bot never mentions, while
+        # `town`.what goes on naming all five to them. Same fault class as the MB_NAME map and
+        # the satchel split, and it is the reason this arm exists.
+        # THE AUTHORITY IS `UNLOCK` IN scripts/growth.gd, READ OFF THE SCRIPT, NOT COPIED.
+        # growth.gd carries no `class_name`, so there is no global to reach it by; the constant
+        # comes out of the script's own constant map, which is the lane's declaration itself. If
+        # the growth lane ever renames UNLOCK the AUTHORITY arm fires, rather than this guard
+        # scoring a green off an empty table - a guard that cannot read its authority must say so.
+        var tb_unlock: Dictionary = {}
+        if ResourceLoader.exists("res://scripts/growth.gd"):
+            var tb_script: Variant = load("res://scripts/growth.gd")
+            if tb_script is Object and (tb_script as Object).has_method("get_script_constant_map"):
+                var tb_cm: Variant = (tb_script as Object).call("get_script_constant_map")
+                if tb_cm is Dictionary:
+                    var tb_raw: Variant = (tb_cm as Dictionary).get("UNLOCK", null)
+                    if tb_raw is Dictionary:
+                        tb_unlock = tb_raw as Dictionary
+        # the names `town`.what publishes, read out of the sentence rather than assumed
+        var tw: String = String(((cmd_d.get("town", {}) as Dictionary)).get("what", ""))
+        var tb_lead := "which of "
+        var tb_tail := " are open"
+        var tb_said: Array[String] = []
+        var tb_a: int = tw.find(tb_lead)
+        var tb_b: int = tw.find(tb_tail)
+        if tb_a >= 0 and tb_b > tb_a:
+            var tb_list: String = tw.substr(tb_a + tb_lead.length(), tb_b - tb_a - tb_lead.length())
+            for tb_part in tb_list.replace(" and ", ", ").split(","):
+                var tb_p := String(tb_part).strip_edges()
+                if tb_p.begins_with("the "):
+                    tb_p = tb_p.substr(4).strip_edges()
+                if tb_p != "":
+                    tb_said.append(tb_p)
+        # the words my own table would actually print, with the article stripped the same way
+        var tb_mine: Array[String] = []
+        for tb_k in TOWN_BUILT.keys():
+            var tb_w := String(TOWN_BUILT[tb_k]).strip_edges()
+            if tb_w.begins_with("the "):
+                tb_w = tb_w.substr(4).strip_edges()
+            if tb_w != "":
+                tb_mine.append(tb_w)
+        if tb_unlock.is_empty():
+            _guard_faults.append("TOWN SPECIALS AUTHORITY")
+            push_error("COMMANDS_DATA TOWN SPECIALS AUTHORITY: scripts/growth.gd carries no readable `UNLOCK` dictionary, so the specials the growth lane can open cannot be read at all - the %d name(s) in this file's own TOWN_BUILT table and the %d `town`.what publishes are both unanchored, and a sixth building would reach a viewer's town with nothing here to name it" % [tb_mine.size(), tb_said.size()])
+            printerr("COMMANDS_DATA TOWN SPECIALS AUTHORITY - growth.gd has no readable UNLOCK; TOWN_BUILT (%d) and `town`.what (%d) are unchecked" % [tb_mine.size(), tb_said.size()])
+        else:
+            var tb_unnamed: Array[String] = []
+            var tb_ghost: Array[String] = []
+            for tb_u in tb_unlock.keys():
+                if String(TOWN_BUILT.get(String(tb_u), "")) == "":
+                    tb_unnamed.append(String(tb_u))
+            for tb_m in TOWN_BUILT.keys():
+                if not tb_unlock.has(String(tb_m)):
+                    tb_ghost.append(String(tb_m))
+            if not tb_unnamed.is_empty():
+                _guard_faults.append("TOWN SPECIALS UNNAMED")
+                push_error("COMMANDS_DATA TOWN SPECIALS UNNAMED: the growth lane can open %d special(s) this file's TOWN_BUILT table has no word for - %s - and `_town_line()` skips a key it cannot name, so a viewer builds it and !town never says it stands while `town`.what still promises it by name" % [tb_unnamed.size(), tb_unnamed])
+                printerr("COMMANDS_DATA TOWN SPECIALS UNNAMED - %d unlockable special(s) TOWN_BUILT drops in silence: %s" % [tb_unnamed.size(), tb_unnamed])
+            if not tb_ghost.is_empty():
+                _guard_faults.append("TOWN SPECIALS GHOST")
+                push_error("COMMANDS_DATA TOWN SPECIALS GHOST: TOWN_BUILT carries %d name(s) keyed on a special the growth lane never unlocks - %s - so that word can never print on the !town line, and the table looks complete while being short by that many live keys" % [tb_ghost.size(), tb_ghost])
+                printerr("COMMANDS_DATA TOWN SPECIALS GHOST - %d TOWN_BUILT key(s) nothing can open: %s" % [tb_ghost.size(), tb_ghost])
+            if tb_said.is_empty():
+                _guard_faults.append("TOWN SPECIALS ANCHOR")
+                push_error("COMMANDS_DATA TOWN SPECIALS ANCHOR: `town`.what no longer says \"which of <buildings> are open\" - the buildings docs/COMMANDS.md tells a viewer !town will name can no longer be checked against the words TOWN_BUILT prints, so a dropped building would go unpublished in silence")
+                printerr("COMMANDS_DATA TOWN SPECIALS ANCHOR - `town`.what lost its \"which of ... are open\" list; the published buildings are now unchecked")
+            else:
+                var tb_said_ghost: Array[String] = []
+                var tb_said_miss: Array[String] = []
+                for tb_s in tb_said:
+                    if not tb_mine.has(tb_s):
+                        tb_said_ghost.append(tb_s)
+                for tb_v in tb_mine:
+                    if not tb_said.has(tb_v):
+                        tb_said_miss.append(tb_v)
+                if not tb_said_ghost.is_empty():
+                    _guard_faults.append("TOWN SPECIALS SAID GHOST")
+                    push_error("COMMANDS_DATA TOWN SPECIALS SAID GHOST: `town`.what names %d building(s) the !town line can never print - %s - the words it does print are %s, so docs/COMMANDS.md sends a viewer looking for a building that is not on the line" % [tb_said_ghost.size(), tb_said_ghost, tb_mine])
+                    printerr("COMMANDS_DATA TOWN SPECIALS SAID GHOST - %d published building(s) nothing prints: %s" % [tb_said_ghost.size(), tb_said_ghost])
+                if not tb_said_miss.is_empty():
+                    _guard_faults.append("TOWN SPECIALS SAID SHORT")
+                    push_error("COMMANDS_DATA TOWN SPECIALS SAID SHORT: the !town line can print %d building(s) `town`.what never names - %s - so a viewer reads docs/COMMANDS.md, learns which buildings the command reports, and is told about fewer than it reports" % [tb_said_miss.size(), tb_said_miss])
+                    printerr("COMMANDS_DATA TOWN SPECIALS SAID SHORT - %d printable building(s) unpublished: %s" % [tb_said_miss.size(), tb_said_miss])
+        # ---- B101: THE CARAVAN COUNT, AND IT IS SPELLED OUT IN WORDS. ---------------------
+        # `caravan`.what states THREE things about the content writer's manifest list: how many
+        # carts are written, that each carries a name / a road it came from / a load, and that
+        # the town's growth decides which can turn up. The team lead verified all three BY HAND
+        # at 04:58 - which is exactly why this arm is worth writing: a claim that needs a human
+        # to re-count it every hour is an unguarded claim. The authority is data/items.json
+        # `caravan_manifests.caravans`, the CONTENT lane's file, read through `Roster.items()` -
+        # the same accessor the dye and wear arms use - and town.gd:6203 reads the same rows.
+        # THE NUMBER IS A WORD, NOT A DIGIT: "Twenty-eight". No digit search in the house would
+        # ever have found it, which is why the satchel arm's word table had to be joined by one
+        # for whole numbers - `_word_int` below.
+        # THE GROWTH CLAUSE IS THE SUBTLE ONE. town.gd:6207 tests
+        # `int(m.get("first_tier", 99)) <= economy.town_level`, and the growth ladder tops out at
+        # 6, so a row carrying no `first_tier` can NEVER turn up: it is written and unreachable.
+        # My sentence counts it as written. A quiet half-truth, not a crash, so it gets its own
+        # arm rather than a mention in a comment.
+        var cv_rows: Array = []
+        var cv_man: Variant = (Roster.items().get("caravan_manifests", {}) as Dictionary).get("caravans", [])
+        if cv_man is Array:
+            cv_rows = cv_man as Array
+        var cw: String = String(((cmd_d.get("caravan", {}) as Dictionary)).get("what", ""))
+        var cv_tail := " carts are written"
+        var cv_said: int = -1
+        var cv_phrase := ""
+        var cv_at: int = cw.find(cv_tail)
+        if cv_at > 0:
+            var cv_head: String = cw.substr(0, cv_at)
+            var cv_sp: int = cv_head.rfind(" ")
+            cv_phrase = (cv_head.substr(cv_sp + 1) if cv_sp >= 0 else cv_head).strip_edges()
+            cv_said = _word_int(cv_phrase)
+        if cv_rows.is_empty():
+            _guard_faults.append("CARAVAN AUTHORITY")
+            push_error("COMMANDS_DATA CARAVAN AUTHORITY: data/items.json carries no `caravan_manifests.caravans` rows, so every cart that comes up the west road is an unnamed crossing (town.gd reads the same list) and `caravan`.what counts carts that are not written")
+            printerr("COMMANDS_DATA CARAVAN AUTHORITY - items.json has no caravan_manifests.caravans rows; the published count is unanchored")
+        elif cv_said < 0:
+            _guard_faults.append("CARAVAN ANCHOR")
+            push_error("COMMANDS_DATA CARAVAN ANCHOR: `caravan`.what no longer says \"<number> carts are written\" in words this guard can read (it reads \"%s\") - the number of manifests docs/COMMANDS.md publishes can no longer be checked against the %d row(s) in data/items.json" % [cv_phrase, cv_rows.size()])
+            printerr("COMMANDS_DATA CARAVAN ANCHOR - `caravan`.what lost its \"<number> carts are written\" phrase (read \"%s\"); the count is now unchecked" % cv_phrase)
+        else:
+            if cv_said != cv_rows.size():
+                _guard_faults.append("CARAVAN COUNT")
+                push_error("COMMANDS_DATA CARAVAN COUNT: `caravan`.what publishes \"%s\" (%d) carts and data/items.json carries %d manifest row(s) - docs/COMMANDS.md counts the content writer's carts wrong, and the number is spelled out in words so no digit search would ever find it" % [cv_phrase, cv_said, cv_rows.size()])
+                printerr("COMMANDS_DATA CARAVAN COUNT - published \"%s\" (%d), rows %d" % [cv_phrase, cv_said, cv_rows.size()])
+            var cv_short: Array[String] = []
+            var cv_notier: Array[String] = []
+            for cv_i in cv_rows.size():
+                var cv_r: Variant = cv_rows[cv_i]
+                var cv_id := "row %d" % cv_i
+                if not (cv_r is Dictionary):
+                    cv_short.append("%s (not a row)" % cv_id)
+                    continue
+                var cv_d: Dictionary = cv_r as Dictionary
+                cv_id = String(cv_d.get("id", cv_id))
+                var cv_lack: Array[String] = []
+                if String(cv_d.get("name", "")).strip_edges() == "":
+                    cv_lack.append("name")
+                if String(cv_d.get("origin", "")).strip_edges() == "":
+                    cv_lack.append("origin")
+                if not (cv_d.get("cargo", null) is Array) or (cv_d["cargo"] as Array).is_empty():
+                    cv_lack.append("cargo")
+                if not cv_lack.is_empty():
+                    cv_short.append("%s: %s" % [cv_id, ", ".join(PackedStringArray(cv_lack))])
+                if not cv_d.has("first_tier"):
+                    cv_notier.append(cv_id)
+            if not cv_short.is_empty():
+                _guard_faults.append("CARAVAN FIELDS")
+                push_error("COMMANDS_DATA CARAVAN FIELDS: `caravan`.what promises every cart carries a name, a road it came from and a load, and %d row(s) in data/items.json are missing one of the three - %s - so !caravan publishes a promise the manifest list does not keep" % [cv_short.size(), cv_short])
+                printerr("COMMANDS_DATA CARAVAN FIELDS - %d row(s) short of name/origin/cargo: %s" % [cv_short.size(), cv_short])
+            if not cv_notier.is_empty():
+                _guard_faults.append("CARAVAN TIER")
+                push_error("COMMANDS_DATA CARAVAN TIER: %d manifest row(s) carry no `first_tier` - %s - and town.gd:6207 reads a missing one as 99, above every growth level, so those carts are written and can NEVER turn up; `caravan`.what counts them among the %d it tells a viewer are waiting on the road" % [cv_notier.size(), cv_notier, cv_said])
+                printerr("COMMANDS_DATA CARAVAN TIER - %d row(s) with no first_tier can never be drawn: %s" % [cv_notier.size(), cv_notier])
         _cmds = parsed
     return _cmds
+
+## B101: a whole number written out in words, or -1 when this guard cannot read it. The satchel
+## arm already had to carry a FRACTION table ("two fifths" -> 0.4) because the voice of this bot
+## spells its numbers out; the caravan count is the first WHOLE number published the same way,
+## and a digit search would have walked straight past it. Digits are accepted too, so the
+## sentence can be rewritten either way without the arm going blind.
+static func _word_int(w: String) -> int:
+    var s := w.strip_edges().to_lower()
+    if s.is_valid_int():
+        return int(s)
+    var units := {"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+                  "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+                  "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+                  "seventeen": 17, "eighteen": 18, "nineteen": 19}
+    var tens := {"twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+                 "seventy": 70, "eighty": 80, "ninety": 90}
+    if units.has(s):
+        return int(units[s])
+    if tens.has(s):
+        return int(tens[s])
+    var parts: PackedStringArray = s.split("-")
+    if parts.size() == 2 and tens.has(String(parts[0])) and units.has(String(parts[1])):
+        var u: int = int(units[String(parts[1])])
+        if u >= 1 and u <= 9:
+            return int(tens[String(parts[0])]) + u
+    return -1
 
 ## B53: THE GATE TEST READS CODE, NEVER PROSE. The first emulation of the needs_hero arm found
 ## the text `_needs(` inside the arm's OWN COMMENT BLOCK and scored it as a hero gate on

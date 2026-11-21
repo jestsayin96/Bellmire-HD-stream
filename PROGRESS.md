@@ -14553,3 +14553,10 @@ LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll cen
 Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
 Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
 Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).
+
+## HUB standing check - 21 Nov 2026 09:4x CT (hub build firing)
+TAKE THIS NEXT (07:58 block) HUB row = standing check, no new row. Took it as written; no claim.
+- hub fast-forwarded to origin/main caa261eb (behind 2, clean). web/ tree HEAD:web = origin/main:web = 02257b2f (0 bytes differ). gh-pages tree 9ca8051e unchanged; delta still 3 files / +59 / -1.
+- app.js: `node --check` OK. innerHTML at app.js:255 and :301 only (both page-owned); the other grep hits are comments. 0 outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. CSP meta count 1. index.html comment "only innerHTML ... two page-owned sites" still true.
+- web/ unchanged so no screenshot or hostile-name rerun owed. NOT claiming READY TO PUBLISH. Live-dot colour: unchanged, no edit this run.
+- Untracked _hub_ready_shot.png in worktree is from an earlier run; delete refused on this machine, named here.

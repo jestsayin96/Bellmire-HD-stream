@@ -4108,3 +4108,30 @@ I TOOK THE PITMAN'S IDEA - miniboss-family work this lane already owns, offered 
   TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2265 samples off the floor (home); TOWNWALK in_solid=0/16148 raid_in_solid=0/8237 PASS;
   DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. The last four ran on the build before the cosmetic y 0.025 -> 0.09 edit; parse and S79 re-ran after.
 - No Twitch test, 0 bits.
+
+## D-cycle - S80: SYSTEM 8 (SHIELD VARIETY) ROW (b) - armour tiers 4-5 now carry the five-shield Quaternius set's heater/round/celtic on the off hand, sized on the hand. 2026-11-21T03:08-06:00 (game build)
+TAKE THIS NEXT (02:58 CT block) gave GAME BUILD: "the lowest open Phase 2 system, your own pick". I TOOK SYSTEM 8 ROW (b).
+WHY IT IS THE LOWEST OPEN ONE: Systems 1-6 and 10 are ticked; System 7 (armour variety) is HELD on art's own fit numbers (S49 row (a) only,
+gear.gd wiring held by the plan) and is not mine to unhold; System 8 row (a) landed at S50 (five .fbx + .import + CC0 note in
+assets/gear/shields/) and its row (b) - the gear wiring and the on-body proof - was named there as my next firing and never taken.
+- roster.gd offhand_mesh: a shield-bearer at armour tier 4 now takes shields/shield_heater_2.fbx (a round-shield class: shield_round_2.fbx,
+  the quartered buckler); tier 5 takes shield_celtic_golden.fbx. Tiers 0 and 1-3 unchanged (kit / the dungeon pack ladder). The class
+  field is untouched, so armour_class's +2 and delve's shield check read exactly as before. Backups roster.gd/gear.gd .bak_s80 (not committed).
+- gear.gd: const SHD + per-file SHD_SCALE in offhand_scale. MEASURED, NOT GUESSED: the first gate run at x1.0 came back RED -
+  S80_SHIELD FAIL (5 shields, 5 sized, 8 shots, 4 failures): heater_2 2.34x, round_2 1.86x, celtic 3.97x the rare pack shield's largest
+  world dimension, and the picture showed three cart-wheel shields. That run is the red proof (S80_RED=1 also forces x3 on demand).
+  Scales 0.43 / 0.54 / 0.30 bring them to 1.00x / 1.01x / 1.19x (the celtic is a tall kite; 1.19x is on purpose).
+- New gate tools/_s80_shield.gd (windowed; the S22 scene on the real Roster.offhand_mesh -> Gear.equip path). S80_SHIELD OK (5 shields,
+  5 sized, 8 shots, 0 failures).
+- LOOKED AT renders/cycles/s80/s80_front_all.png and s80_close_2.png: five bearers at kit size; the gold Celtic stands upright at the knight's
+  left hand, rim and blue field readable, carried at the same edge-on angle as the pack's rare shield beside it (the S22 settled read - same
+  for kit and pack). NOT a back view: the off hand is the only thing changed and S22 settled its read front/side; the close shots are front.
+- shield_heater.fbx and shield_round.fbx stay unwired files in an already-referenced dir (the S50 five; two tiers, three faces chosen).
+  assets/gear/shields/ is NO LONGER AN UNREFERENCED ASSET DIR (gear.gd SHD) - the lead's audit count should drop by one.
+
+- Gates (verdict lines, all on the final x0.43/0.54/0.30 build): parse 0 SCRIPT ERROR / 0 Parse Error; S80_SHIELD OK (5 shields, 5 sized,
+  8 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2095 samples off the floor (home); TOWNWALK in_solid=0/20470
+  (0.000%) raid_in_solid=0/10014 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+  All runs with JESTS_NO_TWITCH=1. No Twitch test, 0 bits.
+- Lock: claim 03:08:18, claim+25 = 03:33 computed first, declared 03:33.
+- Pitman way still HELD on content's act/broken lines - not touched, as the row said.

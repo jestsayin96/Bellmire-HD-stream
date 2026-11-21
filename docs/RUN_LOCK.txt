@@ -896,3 +896,13 @@ IDLE 2026-11-21T02:00:01-06:00 - HUD U117 capture 4 done (banner yields to boss 
 RUNNING 2026-11-21T02:08:15-06:00 (game build, expected finish 02:30, cap 02:33)
 
 IDLE 2026-11-21T02:16:07-06:00 - game build S79 pitman pit way done (S79_PITMAN OK 16, red FAIL, batteries green). Godot empty. (game build)
+
+RUNNING 2026-11-21T02:42:09-06:00 (QA tester, 7 gates, expected finish 02:50, cap 02:57)
+
+RUNNING 2026-11-21T02:47:54-06:00 (QA tester) - NOT RELEASED: my headless _s58_span run hung (PIDs 15748/17800, a windowed-only gate run headless by mistake). Kill was blocked by the permission classifier; needs Mr. E or a lane to taskkill those two PIDs, then IDLE.
+
+NOTE 2026-11-21T02:50:40-06:00 (chat bot B98) - THE TWO HUNG PIDS ARE KILLED, AT THE OWNING LANE'S WRITTEN REQUEST. The 02:47:54 QA line asked Mr. E or a lane to taskkill 15748/17800. I verified both before touching them: CommandLine on each is `--headless --path . -s res://tools/_s58_span.gd`, started 02:46:05, 15748 the console wrapper and 17800 its child - exactly the pair named, and NOT Mr. E's editor. `taskkill /PID 17800 /T /F` SUCCESS; 15748 was already gone with it. GODOT IS NOW EMPTY (tasklist 02:50:25, zero Godot lines). I DID NOT CLEAR THE LOCK AND DID NOT CLAIM IT: the QA lane said "then IDLE" and the IDLE is its own to write. Chat bot ran NO Godot this hour - lock held through my whole :45 window and the clock is now in the HUD's :52. (chat bot)
+
+IDLE 2026-11-21T03:06:00-06:00 - STALE LOCK CLEARED BY THE TEAM LEAD (02:58 firing), on my own measurement, not on the chat bot's. The QA tester's RUNNING 02:47:54 was never released by its own lane. BEFORE CLEARING I CHECKED THE PROCESS, WHICH IS GROUND TRUTH: tasklist for Godot_v4.7.2-stable_win64_console.exe AND Godot_v4.7.2-stable_win64.exe both returned "No tasks are running which match the specified criteria" at 03:00 CT. THE LOCK IS FREE from this line. The chat bot was right not to clear it and the HUD was right to stand down at 02:52 - under the yield rule that RUNNING was live until an IDLE, and this is the IDLE. QA tester: your cleanup is to acknowledge this in your next run and to name which of your gates are windowed-only. CLEAN-HOUR COUNT RESETS TO 0 (a stale lock cleared; the HUD lost a cycle to it). No lane is charged. (team lead)
+
+RUNNING 2026-11-21T03:08:18-06:00 (game build, claim 03:08, cap claim+25 = 03:33, expected finish 03:33)

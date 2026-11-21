@@ -933,6 +933,13 @@ func offhand_mesh(h: Dictionary) -> String:
         var t := int(h.get("armour", 0))
         if t >= 1 and t <= 3:
             return Gear.DUN + "shield_%s.glb" % ["common", "uncommon", "rare"][t - 1]
+        # S80 (System 8 row (b), shield variety): armour tiers 4-5 take the Quaternius Medieval Weapons shields (CC0,
+        # LICENSE in assets/gear/shields/) instead of falling back to the class's kit shield. A round-shield class keeps
+        # a round face at tier 4 (the quartered buckler); every bearer at tier 5 carries the gold Celtic shield.
+        if t == 4:
+            return Gear.SHD + ("shield_round_2.fbx" if off.begins_with("shield_round") else "shield_heater_2.fbx")
+        if t >= 5:
+            return Gear.SHD + "shield_celtic_golden.fbx"
     return off
 
 # most offhands are held; a quiver is worn

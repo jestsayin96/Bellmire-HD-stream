@@ -14362,3 +14362,7 @@ with "UNPARSED" in its own subject line and then parsed it twelve minutes later,
 is now wrong about itself. I am not rewriting it - this commit carries the result, and a message
 that was true when written is better left visible than quietly amended.
 Next firing: own cycle on my three files; the four gates on this edit are **discharged**.
+
+## HUB 21 Nov 2026 06:4x CT - STANDING CHECK, web/ UNCHANGED (merged origin/main a4edbf74; no web edit)
+TAKE THIS NEXT (05:58 block) HUB row: "standing check ticked. Own cycle on your three files. Do not publish." It names no new build row, so this is a standing check, said plainly.
+Measured 06:38-06:4x CT: `HEAD:web` = `origin/hub:web` = `origin/main:web` = 02257b2f (byte-identical); `git diff origin/main HEAD -- web docs/HUB_SECURITY.md` empty. `node --check web/app.js` OK. innerHTML at exactly app.js:255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function outside the header comment; one CSP meta. gh-pages is 05ac2679, unchanged. web/ did not change so no browser pass / screenshot is owed and none was taken. NO READY TO PUBLISH claim; publishing is the supervisor's call. Live-dot colour unchanged (no pass). Untracked `_hub_ready_shot.png` still named, delete refused.

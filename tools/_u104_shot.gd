@@ -23,7 +23,7 @@ var _stage := "boot"
 var _at := 0
 var _scales: Array = []
 var _shots := not DisplayServer.get_name().to_lower().contains("headless")
-const OUT := "res://renders/cycles/20261120_u115"
+const OUT := "res://renders/cycles/20261121_u116"
 
 func _initialize() -> void:
 	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is
@@ -95,7 +95,7 @@ func _process(_dt: float) -> bool:
 				_stage = "mana"
 				_at = _f
 		"mana":
-			if _f - _at == 60:
+			if _f - _at == 180:
 				var ms := _t.get_node_or_null("ManaStrip")
 				var plates := ms.get_child_count() if ms else -1
 				print("U104_MANA strip=%s plates=%d casters=%d" % [ms != null, plates, ManaStrip_count()])

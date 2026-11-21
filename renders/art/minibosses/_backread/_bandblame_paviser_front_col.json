@@ -1,0 +1,254 @@
+{
+ "key": "paviser",
+ "view": "front",
+ "bands": 10,
+ "errors": [],
+ "bounds_control": [
+  -2.32211,
+  -1.41245,
+  0.0,
+  1.1127,
+  0.84877,
+  2.68
+ ],
+ "bounds_split": [
+  -2.32211,
+  -1.41245,
+  0.0,
+  1.1127,
+  0.84877,
+  2.68
+ ],
+ "item_counts": {
+  "man": 13,
+  "board": 1,
+  "seams": 2,
+  "bands": 2,
+  "strikes": 9,
+  "post": 5,
+  "prop": 2,
+  "_covered": 34,
+  "_total": 34
+ },
+ "engine": "BLENDER_EEVEE",
+ "man_alone_px": 106036,
+ "floor_px": 0,
+ "man_seen_all": 0.4851,
+ "axis": "col",
+ "man_cols": [
+  367,
+  703
+ ],
+ "band_edges": [
+  367,
+  401,
+  434,
+  468,
+  501,
+  535,
+  569,
+  602,
+  636,
+  669,
+  703
+ ],
+ "rows_top_is_crown": false,
+ "band_rows": [
+  {
+   "band": 0,
+   "cols": [
+    367,
+    401
+   ],
+   "man_px": 3431,
+   "survival": 0.0769,
+   "hidden_px": 3167,
+   "blame_px": {
+    "board": 3431,
+    "seams": 0,
+    "bands": 305,
+    "strikes": 0,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 1,
+   "cols": [
+    401,
+    434
+   ],
+   "man_px": 5315,
+   "survival": 0.1259,
+   "hidden_px": 4646,
+   "blame_px": {
+    "board": 5071,
+    "seams": 677,
+    "bands": 500,
+    "strikes": 798,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 2,
+   "cols": [
+    434,
+    468
+   ],
+   "man_px": 13932,
+   "survival": 0.1782,
+   "hidden_px": 11450,
+   "blame_px": {
+    "board": 11756,
+    "seams": 0,
+    "bands": 928,
+    "strikes": 55,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 3,
+   "cols": [
+    468,
+    501
+   ],
+   "man_px": 16260,
+   "survival": 0.2626,
+   "hidden_px": 11990,
+   "blame_px": {
+    "board": 12256,
+    "seams": 0,
+    "bands": 880,
+    "strikes": 444,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 4,
+   "cols": [
+    501,
+    535
+   ],
+   "man_px": 15198,
+   "survival": 0.2958,
+   "hidden_px": 10702,
+   "blame_px": {
+    "board": 10819,
+    "seams": 1063,
+    "bands": 665,
+    "strikes": 191,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 5,
+   "cols": [
+    535,
+    569
+   ],
+   "man_px": 14386,
+   "survival": 0.3452,
+   "hidden_px": 9420,
+   "blame_px": {
+    "board": 9536,
+    "seams": 0,
+    "bands": 333,
+    "strikes": 392,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 6,
+   "cols": [
+    569,
+    602
+   ],
+   "man_px": 16161,
+   "survival": 0.8008,
+   "hidden_px": 3220,
+   "blame_px": {
+    "board": 3220,
+    "seams": 0,
+    "bands": 0,
+    "strikes": 0,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": "board"
+  },
+  {
+   "band": 7,
+   "cols": [
+    602,
+    636
+   ],
+   "man_px": 13688,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "board": 0,
+    "seams": 0,
+    "bands": 0,
+    "strikes": 0,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 8,
+   "cols": [
+    636,
+    669
+   ],
+   "man_px": 5288,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "board": 0,
+    "seams": 0,
+    "bands": 0,
+    "strikes": 0,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 9,
+   "cols": [
+    669,
+    703
+   ],
+   "man_px": 2377,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "board": 0,
+    "seams": 0,
+    "bands": 0,
+    "strikes": 0,
+    "post": 0,
+    "prop": 0
+   },
+   "culprit": null
+  }
+ ],
+ "hidden_px": 54595,
+ "hidden_by_a_span_px": 54595,
+ "hidden_by_no_span_px": 0,
+ "hidden_by_no_span_frac": 0.0,
+ "sheet_raw": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_backread\\_bandblame_paviser_front_col_raw.png",
+ "ok": true
+}

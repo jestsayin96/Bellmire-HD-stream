@@ -9765,7 +9765,32 @@ def paviser():
     # showed a board, a fist and ONE EYE. 0.08 further out puts his right
     # shoulder, arm and the whole helm back against background without moving
     # the board's own outline a millimetre in the side or back cameras.
-    BX, BY = -0.18, -0.56          # the board's centre, forward of the chest
+    # *** PASS 6: BX -0.18 -> -0.10, AND IT IS A REVERSAL OF HALF OF PASS 4. ***
+    # The column instrument is what found it. `_bandblame --axis row` on
+    # paviser/front reads band0 (the helm) 1.0000 and bands 2-8 around 0.40
+    # charged to `board`, which is EXACTLY the profile "a dark head over the
+    # board's top edge" would print - so the row axis called 0.5740 explained
+    # and it was wrong. Banded by COLUMN the same pixels read
+    # [0.08 0.10 0.18 0.26 0.34 0.74 1.0 1.0 1.0 1.0]: the right-hand 35.8% of
+    # the man is at survival 1.0000, hidden by NOTHING. He was not behind the
+    # board with his head showing over it. He was standing BESIDE it.
+    #
+    # WHY, from this file's own comments: pass 4 met one fault - "front.png
+    # showed a board, a fist and ONE EYE" - and moved TWO things at once to
+    # cure it, ZT 1.46 -> 1.34 and BX -0.10 -> -0.18. The sweep separates them.
+    # With pass 4's own ZT 1.34 in place, BX -0.10 reads helm row band0 1.0000
+    # - both eyes clear above the top edge, far shoulder and arm past the right
+    # side - so the LOWERED TOP EDGE alone had already cured it and the 0.08 of
+    # lateral offset was redundant. It is the redundant half that evicted him.
+    # Measured over the sweep (front survival / fully-clear share of the man):
+    #   -0.18  0.5739  35.8%      <- shipped, he stands beside the board
+    #   -0.14  0.5318  35.6%
+    #   -0.10  0.4851  20.1%      <- taken; the board covers him, helm clear
+    # The side view is unmoved by this (0.9854 -> 0.9796, board still an arc,
+    # man still in front of it) because BY, the depth, did not move.
+    # The hook stays so the sweep is re-runnable: unset env = the shipped body.
+    BX = float(os.environ.get("PAVISER_BX", "-0.10"))
+    BY = -0.56                     # the board's centre, forward of the chest
     BYAW = 0.34                    # the board is turned - he is bringing it round
     # *** PASS 3 MOVED ALL FOUR OF THESE AND THEY ARE ONE CHANGE, NOT FOUR:
     # *** THE BOARD STOPPED BEING A BARREL. *** Pass 2's shell was solid, which

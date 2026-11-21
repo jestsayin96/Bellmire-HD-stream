@@ -94,7 +94,7 @@ def _clear():
         bpy.data.objects.remove(ob, do_unlink=True)
 
 
-def run(repo, key, view, nbands, outdir):
+def run(repo, key, view, nbands, outdir, axis="row"):
     rep = {"key": key, "view": view, "bands": nbands, "errors": []}
     _clear()
     SPLIT["spans"] = None
@@ -209,17 +209,29 @@ def run(repo, key, view, nbands, outdir):
         vis = (np.abs(P2 - P2n).max(axis=2) > EPS) & alone
         per_span[nm] = ~vis & alone          # hidden-by-nm mask
 
+    # AXIS. The row banding answers WHERE UP THE MAN he is hidden. It cannot
+    # answer WHERE ACROSS, and on the paviser that is the whole question: a
+    # head surviving OVER a board's top edge and a whole man standing BESIDE
+    # the board give the same row profile. `--axis col` transposes the three
+    # masks and nothing else, so every number below is computed by the same
+    # code over the same pixels, banded left-to-right instead of top-down.
+    if axis == "col":
+        alone = alone.T
+        moved = moved.T
+        per_span = {k: (None if v is None else v.T) for k, v in per_span.items()}
+    rep["axis"] = axis
     rows = np.where(alone.any(axis=1))[0]
     r0, r1 = int(rows.min()), int(rows.max()) + 1
-    rep["man_rows"] = [r0, r1]
+    rep["man_rows" if axis == "row" else "man_cols"] = [r0, r1]
     edges = [r0 + int(round((r1 - r0) * i / float(nbands))) for i in range(nbands + 1)]
     rep["band_edges"] = edges
-    rep["rows_top_is_crown"] = True
+    rep["rows_top_is_crown"] = (axis == "row")
     out_bands = []
     for i in range(nbands):
         s = slice(edges[i], edges[i + 1])
         tot = int(alone[s].sum())
-        cellb = {"band": i, "rows": [edges[i], edges[i + 1]], "man_px": tot}
+        cellb = {"band": i, ("rows" if axis == "row" else "cols"):
+                 [edges[i], edges[i + 1]], "man_px": tot}
         if tot == 0:
             cellb["survival"] = None
             cellb["note"] = "no man pixels in this band - not scored"
@@ -261,13 +273,19 @@ def run(repo, key, view, nbands, outdir):
     r = alone & ~moved
     tint[g] = tint[g] * 0.35 + np.array([0.20, 0.95, 0.35, 1.0]) * 0.65
     tint[r] = tint[r] * 0.25 + np.array([0.98, 0.25, 0.14, 1.0]) * 0.75
+    lim = tint.shape[0] if axis == "row" else tint.shape[1]
     for ed in edges:
-        if 0 <= ed < tint.shape[0]:
-            tint[ed, :, :3] = np.array([1.0, 1.0, 1.0]) * 0.55
-            tint[ed, :, 3] = 1.0
+        if 0 <= ed < lim:
+            if axis == "row":
+                tint[ed, :, :3] = np.array([1.0, 1.0, 1.0]) * 0.55
+                tint[ed, :, 3] = 1.0
+            else:
+                tint[:, ed, :3] = np.array([1.0, 1.0, 1.0]) * 0.55
+                tint[:, ed, 3] = 1.0
     sheet = np.concatenate([B, tint], axis=1)
     os.makedirs(os.path.join(repo, "renders", "art", "minibosses", key), exist_ok=True)
-    pathA = os.path.join(outdir, "_bandblame_%s_%s_raw.png" % (key, view))
+    sfx = "" if axis == "row" else "_col"
+    pathA = os.path.join(outdir, "_bandblame_%s_%s%s_raw.png" % (key, view, sfx))
     G.write_png(pathA, sheet)
     rep["sheet_raw"] = pathA
     return rep
@@ -280,12 +298,14 @@ def main():
     ap.add_argument("--key", default="fuller")
     ap.add_argument("--view", default="side", choices=sorted(AZ))
     ap.add_argument("--bands", type=int, default=10)
+    ap.add_argument("--axis", default="row", choices=("row", "col"))
     args = ap.parse_args(argv)
     outdir = os.path.join(args.repo, "renders", "art", "minibosses", "_backread")
     os.makedirs(outdir, exist_ok=True)
-    rep = run(args.repo, args.key, args.view, args.bands, outdir)
+    rep = run(args.repo, args.key, args.view, args.bands, outdir, args.axis)
     rep["ok"] = not rep["errors"]
-    out = os.path.join(outdir, "_bandblame_%s_%s.json" % (args.key, args.view))
+    out = os.path.join(outdir, "_bandblame_%s_%s%s.json"
+                       % (args.key, args.view, "" if args.axis == "row" else "_col"))
     with open(out, "w") as fh:
         json.dump(rep, fh, indent=1)
     print("[bandblame] wrote %s ok=%s" % (out, rep["ok"]), flush=True)

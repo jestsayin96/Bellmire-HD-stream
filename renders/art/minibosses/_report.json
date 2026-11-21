@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "16f31ca6137a120a921b36a2edeeab165a983ade",
+   "head": "98f7fa8ca24e3caec119819a6056fe4e2cb5c65f",
    "ref": "origin/main",
-   "ref_commit": "7c476bb092cf4ffd301189838149d010db2370de",
+   "ref_commit": "a4edbf74f40504f93c2c328843853d4dbee85f45",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -658,7 +658,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.347,
+   "corridor_margin_m": 7.35,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.4,
    "read_from": {
@@ -1850,7 +1850,7 @@
    "fits": true
   },
   "paviser": {
-   "title": "The Paviser",
+   "title": "Shieldmaw",
    "theme": "keep",
    "idea": "IT KEEPS ITS FACE TO YOU - it carries a pavise on a hinge post and swings it onto whoever is hurting it most, and a blow into the board does nothing at all; so the party cannot win this by standing still and hitting harder - one of you has to get round the post while another holds its attention, and the moment you two swap sides the board swings back",
    "wear": 0.78,
@@ -1860,31 +1860,16 @@
    "engine": "BLENDER_EEVEE",
    "faces": 743,
    "size": [
-    3.57,
+    3.43,
     2.26,
     2.68
    ],
-   "footprint_span": 3.57,
-   "corridor": "CORRIDOR-SAFE",
-   "glb": true,
-   "glb_msg": "",
-   "cam": {
-    "radius": 2.5013586167329933,
-    "ortho": 3.5184850692749023,
-    "clip": [
-     8.862750053405762,
-     23.999229431152344
-    ]
-   },
-   "views": [
-    "front.png",
-    "three_quarter.png",
-    "side.png"
-   ],
+   "footprint_span": 3.43,
    "height_m": 2.68,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
-   "corridor_margin_m": 7.43,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.565,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.82,
    "read_from": {
@@ -1894,7 +1879,22 @@
     "lid_y_m": "scripts\\floorgen.gd:1383",
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
-   "fits": true
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.454254036359061,
+    "ortho": 3.49049973487854,
+    "clip": [
+     8.763325691223145,
+     23.651159286499023
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   },
   "fenman": {
    "title": "The Fenman",
@@ -2604,7 +2604,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 7c476bb092cf4ffd301189838149d010db2370de sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs a4edbf74f40504f93c2c328843853d4dbee85f45 sha bc3a603f",
  "blank_check": {
   "files": 132,
   "failures": []

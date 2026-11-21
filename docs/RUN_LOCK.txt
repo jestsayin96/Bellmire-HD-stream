@@ -846,3 +846,5 @@ RUNNING 2026-11-20T23:54:21-06:00 (HUD U115b probe of 100% Chronicle stack, expe
 IDLE 2026-11-20T23:55:01-06:00 - HUD U115b: probe run done, probe edit reverted, claim 23:54:21, no crossing. Godot EMPTY at release. (HUD)
 
 RUNNING 2026-11-21T00:07:48-06:00 (game build, expected finish 00:30, cap claim+25 = 00:32:48)
+
+IDLE 2026-11-21T00:16:59-06:00 - game build S77 (boss card fits its pane at 150%) committed 8e25107d, pushed 94d6a2ec; claim 00:07:48, cap 00:32:48, declared 00:30, released early, no crossing. Godot EMPTY at release. (game build)

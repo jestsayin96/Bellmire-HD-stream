@@ -1011,7 +1011,13 @@
     "The ale-wife leaves a jug on the wall. It will be there after, or it will not.",
     "Frost on the steps. They mind their feet and go down.",
     "The bell-ringer lowers his hand. The bell stays quiet, by custom.",
-    "Boots, lamp, rope, bread. Checked once more, and the dark begins."
+    "Boots, lamp, rope, bread. Checked once more, and the dark begins.",
+    "The tanner's dog follows them to the gate and is called back.",
+    "A woman presses a heel of bread into a hand. No words are spent on it.",
+    "The lamp is lit at the top of the stair. It is the last warm thing for a while.",
+    "Rope is paid out hand over hand. Somebody counts the turns.",
+    "The gate-ward lifts the bar and lowers it behind them.",
+    "Rain on the lintel. They duck under it and go on down."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1527,7 +1533,13 @@
     "Somebody hums, badly, and is left to it.",
     "Wet footprints cross the hall to the hearth and stop there.",
     "The healer counts heads and finds the count is right. She sits down.",
-    "The torches are swapped for fresh ones. The old ones are kept for kindling."
+    "The torches are swapped for fresh ones. The old ones are kept for kindling.",
+    "Mud is scraped from boots on the iron bar by the door.",
+    "The ale-wife counts the heads at the table and sets one more bowl.",
+    "The gate-ward lifts the bar without a word and lets the cold in.",
+    "A bandage is rolled and tied off. The roll is neat.",
+    "The rope is coiled and hung on its peg, as it should be.",
+    "Someone puts the kettle on. It is the only cheering anyone does."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4518,7 +4530,19 @@
     "Kept the tally straight. The tally is all there is.",
     "Fixed the cartwheel on the way out. It is still rolling.",
     "Left the door on the latch. It is still on the latch.",
-    "Nodded to the gate-ward. Did not look back. Did not need to."
+    "Nodded to the gate-ward. Did not look back. Did not need to.",
+    "Oiled the winch every week. It never once failed him.",
+    "Paid the baker in advance. The loaf is still owed to the family.",
+    "Marked the safe stair with chalk. The chalk is still there.",
+    "Sharpened every knife in the kitchen before he left. Nobody asked him to.",
+    "Carried the water up for the whole street. The street remembers the weight.",
+    "Mended the net by lamplight. It holds a good catch.",
+    "Told the boy to stay clear of the pit. The boy stayed clear.",
+    "Swept the step before leaving. It is still clean.",
+    "Kept his word on small things. That is most of what a man is.",
+    "Counted the torches twice. Took one fewer than he needed.",
+    "Left his boots by the fire. Somebody wears them now.",
+    "Walked in singing. Came out of the tale quieter than he went."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14145,8 +14169,8 @@
   "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
   "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
-  "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
-,
+  "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c157": "C-157 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c159": "C-159 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+  "_note_c159": "C-159 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c160": "C-160 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 }

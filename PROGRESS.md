@@ -13329,3 +13329,12 @@ Measured (headless parse rc=0, 0 SCRIPT ERROR; windowed 1920x1080): seen 39 -> a
 LOOKED AT renders/cycles/20261120_u113/u113_t160_1080.png (full) and u113_t600_1080.png (crop): Chronicle in the centre of the 2x2, lord card left, ONE whole entry on the scroll each time ("A goblin falls in the market (30) x2", later the 4-line Commander line with "x2" bound to the last word), right margin clear, nothing cut by the rail. CAVEAT: at 150% with the card up the scroll holds one entry - by L71 design, but it means a burst reads as a trickle of single lines; whether that is too thin for a busy stream is Mr. E's call. 100% and 125% under load not captured.
 Not mine: boss card overlaps Director "Now watching" strip (boss_bar.gd).
 Next: 125% and 100% burst frames, then theme coherence across panels (second half of L74).
+
+U114 - 2026-11-20 22:5x CST - L74 SECOND HALF, FEED BURST AT 125% AND 100%; A REAL 100% OVERFLOW FOUND AND FIXED. Three short windowed claims 22:53:28 / 22:55:56 / 22:57:33, last IDLE 22:58:51, no crossing, Godot EMPTY at every release; lock read from R's working RUN_LOCK.txt (last line chat bot B94 IDLE 22:51:40).
+Item: WORK_PLAN HUD row "U113 TICKED, take the second half of L74" (rarity-hue row struck by the team lead this hour).
+Found: tools/_u114_shot.gd (U113's burst, scale via env U114_SCALE) at 100%: first frame showed 6-7 Chronicle lines, top one jammed under the header and the last ("Padding | 1 Mending...") cut by the lower rail. 125% was clean.
+Changed (feed_hud.gd): _rebuild measured the stack with ThemeDB.fallback_font; now uses the Labels' own theme font (_box.get_theme_font) so the height fit agrees with what is drawn. Tool: shoot only 6 frames AFTER _rebuild (the first 100% t600 frame was a pre-layout frame).
+Measured after: 100% real label stack 189px in a 216.6px vellum (2+1+3 lines); 125% 150px in 204px. Burst: seen 37-45, protected drops 0, min_gap 0.80s. Headless parse 0 Parse Error / SCRIPT ERROR.
+LOOKED AT renders/cycles/20261120_u114/u114_s100_t600_1080.png and u114_s125_t600_1080.png: both whole entries inside the scroll, right margin clear, nothing under the lower rail; 100% is tight (last line ~10px above the rail). CAVEAT: the stale pre-layout frame means I cannot say how much of the original overflow the font change fixed vs the shoot timing; the real-height numbers are the proof, not the old picture.
+Not mine: boss card over Director "Now watching" strip (boss_bar.gd).
+Next: theme coherence across panels at 100/125/150 (second half of L74's second half).

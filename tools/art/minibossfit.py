@@ -702,6 +702,64 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
     return bad, checked
 
 
+def measure_disk_frames(repo, rep, tag=""):
+    """RE-ASK THE BORDER QUESTION OF THE FILE ON DISK, AND MEASURE THE AIR.
+
+    *** THE FAULT THIS CLOSES, FOUND 21 NOV 2026 ~01:00 CT BY MEASURING WHAT
+    *** THE HARNESS WAS CARRYING RATHER THAN READING WHAT IT SAID. ***
+    `frame_edge` is measured ONCE, inside shoot(), on the buffer that run just
+    wrote - and then it is carried in the register for ever. audit_rows() judges
+    that stored number, sheet() opens all 132 PNGs to count whether they are
+    BLANK, and NOTHING in this file ever re-asks the border question of the
+    picture now sitting at the canonical path. So the register's red depends on
+    a number no later run can contradict, while holding the alpha array of the
+    actual file in its hand.
+    It is not hypothetical. `ferryman/hero_side.png` on disk carries 3 pixels
+    of alpha > DIFF_EPS in column 0 (values 6, 7, 8 of 255 - the outer falloff,
+    not a body) and its row says `side left: 0`. A tagged/untagged re-render
+    put a different picture under the canonical name, exactly as the 17:47 tag
+    fault did to the sheet, and the stored row went on vouching for it.
+
+    AND THE SECOND THING, which is why this also finishes the margin item:
+    MARGIN_X is a WORLD-SPACE width budget. `air_x = FRAME_W - pair_w` says how
+    much air the pair's MESH BOUNDS leave; it does not say how much air the
+    RENDER leaves, and the two differ because alpha spreads past the bounds
+    (falloff, aura, antialiasing). Measured across all 46 rows, the rendered
+    air is SMALLER than the derived air on every single row, by 1.6 to 19 px
+    (mean 8). So `air_x >= MARGIN_X` is a necessary pre-filter and NOT a
+    guarantee of real air, and `air_px` - counted in pixels, which is the unit
+    a clip happens in - is the number that answers the viewer's question.
+
+    Stored per view as `air_px` (left, right) and `frame_edge_disk`. Judged in
+    audit_rows(). RED ON UNREADABLE: a view whose file is missing or whose
+    alpha is empty is named, never skipped.
+    """
+    root = os.path.join(repo, "renders", "art", "minibosses")
+    for key in sorted(rep.get("pairs", {})):
+        row = rep["pairs"][key] or {}
+        views = row.get("views") or []
+        if not views:
+            continue
+        air, dedge = {}, {}
+        for fname in views:
+            vname = os.path.splitext(fname)[0].replace("hero_", "")
+            path = os.path.join(root, key + tag, fname)
+            if not os.path.isfile(path):
+                air[vname] = None
+                dedge[vname] = "MISSING FILE"
+                continue
+            a = G.read_png(path)
+            m = a[..., 3] > DIFF_EPS
+            dedge[vname] = dict(top=int(m[0].sum()), bottom=int(m[-1].sum()),
+                                left=int(m[:, 0].sum()), right=int(m[:, -1].sum()))
+            cols = np.where(m.any(axis=0))[0]
+            air[vname] = (None if cols.size == 0
+                          else [int(cols[0]), int(m.shape[1] - 1 - int(cols[-1]))])
+        row["air_px"] = air
+        row["frame_edge_disk"] = dedge
+        row["air_px_eps"] = DIFF_EPS
+
+
 def audit_rows(rep, asked):
     """THE TOP-LEVEL VERDICT, DERIVED FROM EVERY ROW IN THE FILE.
 
@@ -774,6 +832,67 @@ def audit_rows(rep, asked):
                     % (mark, key, vname,
                        ", ".join("%s %d px" % kv for kv in sorted(hit.items()))))
                 rep["ok"] = False
+        # *** AND THE SAME QUESTION OF THE FILE ON DISK. ***
+        # See measure_disk_frames(). The stored `frame_edge` cannot be
+        # contradicted by any later run; this one can, and it is the picture a
+        # viewer gets. A disagreement is RED on its own - a register whose
+        # numbers do not match its own files is not a register.
+        for vname, e in sorted((row.get("frame_edge_disk") or {}).items()):
+            if not isinstance(e, dict):
+                rep["errors"].append(
+                    "%s%s/%s: %s - the view this row vouches for is not on "
+                    "disk at the canonical path" % (mark, key, vname, e))
+                rep["ok"] = False
+                continue
+            # *** TWO FILMS, AND I CONFLATED THEM FOR TEN MINUTES. ***
+            # `frame_edge` is counted on the BEAUTY render, before the ground
+            # is composited; `ground[view].shadow_edge` counts the shadow's
+            # own reach and by this file's existing design NEVER fails a view,
+            # because a shadow touching the border does not cut a body. The
+            # PNG on disk is the COMPOSITE of both. My first version of this
+            # check read the composite and compared it with the beauty count
+            # alone, so it accused `ferryman/side` of "vouching for a
+            # different render" when the row's own `shadow_edge: {left: 3}`
+            # accounted for all three pixels exactly. The register was right
+            # and the new instrument was wrong. Caught by looking at the
+            # pixels (alpha 6,7,8 of 255 at rows 423-425, on the ground plane)
+            # before re-rendering anything on the strength of it.
+            # SO THE DISK RED IS NOW ONLY WHAT NEITHER FILM ACCOUNTS FOR -
+            # which is the question worth asking of a file: is this the render
+            # this row measured?
+            stored = ((row.get("frame_edge") or {}).get(vname) or {})
+            shadow = (((row.get("ground") or {}).get(vname) or {})
+                      .get("shadow_edge") or {})
+            unaccounted = {k2: v2 for k2, v2 in e.items()
+                           if v2 > stored.get(k2, 0) + shadow.get(k2, 0)}
+            if unaccounted:
+                rep["errors"].append(
+                    "%s%s/%s: THE FILE ON DISK reaches the frame edge by more "
+                    "than this row accounts for - %s (alpha > %.2f; beauty %s, "
+                    "shadow %s). The row is vouching for a different render "
+                    "than the one at this path."
+                    % (mark, key, vname,
+                       ", ".join("%s %d px" % kv for kv in sorted(unaccounted.items())),
+                       DIFF_EPS, stored or "{}", shadow or "{}"))
+                rep["ok"] = False
+        # the air a VIEWER gets, in pixels. Named, not judged against
+        # MARGIN_X: the world-space margin over-states it on every row (see
+        # measure_disk_frames), so a pixel floor is a separate decision and
+        # Mr. E has not been asked for one. Zero is already RED above, as a
+        # border hit. An UNREADABLE view is RED here.
+        apx = row.get("air_px")
+        if apx is not None:
+            blank = [v for v, t in apx.items() if t is None]
+            if blank:
+                rep["errors"].append(
+                    "%s%s: no readable alpha in %s - an air measurement over "
+                    "nothing is RED, not green" % (mark, key, ",".join(sorted(blank))))
+                rep["ok"] = False
+            else:
+                tight = min(min(t) for t in apx.values())
+                row["air_px_min"] = tight
+                row["air_px_tightest_view"] = sorted(
+                    apx, key=lambda v: min(apx[v]))[0]
         if "fits_frame" in row and not row["fits_frame"]:
             rep["errors"].append(
                 "%s%s: pair %.2f m does not fit the fixed frame with its "
@@ -781,11 +900,58 @@ def audit_rows(rep, asked):
                 % (mark, key, row.get("pair_w", -1.0),
                    row.get("pair_w", -1.0), FRAME_W - MARGIN_X))
             rep["ok"] = False
-        # A ROW WRITTEN BEFORE THE MARGIN EXISTED CANNOT ANSWER FOR IT.
-        # `fits_frame: true` on an old row means "<= 5.60", not "<= 5.48",
-        # so it is not evidence either way and says so rather than passing.
-        if "air_x" not in row:
+        # *** THE 44 STALE ROWS, CLOSED BY ARITHMETIC - 21 NOV 2026, 00:4x CT. ***
+        # The first version of this test flagged every row written before
+        # MARGIN_X existed and stopped there: `fits_frame: true` on an old row
+        # means "<= 5.60", not "<= 5.48", so it is not evidence either way.
+        # That flag was honest and it read like 44 re-renders. IT IS NOT, and
+        # the reason is one line of the writer above:
+        #     air_x = round(FRAME_W - (amx.x - amn.x), 3)
+        # `air_x` is a PURE FUNCTION of `pair_w`, which EVERY row stores. So a
+        # stale row is not a row that cannot answer the margin question - it is
+        # a row missing a field derivable from a field it has. The honest close
+        # is therefore not to re-render but to RE-DECIDE: derive the air, judge
+        # it against the CURRENT margin, and keep the provenance so nobody
+        # mistakes arithmetic for a measurement.
+        #
+        # WHAT THIS DERIVATION CANNOT SEE, because the last three faults in
+        # this file were all instruments that could not see:
+        #   - It re-measures NOTHING. If a row's stored `pair_w` is itself
+        #     wrong, the derived air inherits the error. It does go RED on the
+        #     one way that has actually happened (the compounding-offset bug
+        #     wrote pair_w 10.80 and 11.03, which derive to NEGATIVE air).
+        #   - It is the X axis only. There is no MARGIN_Y and this says nothing
+        #     about the top and bottom edges; the only evidence there is the
+        #     measured `frame_edge` border count, judged above, and it is not
+        #     derived from anything.
+        #   - A row with NO `pair_w` cannot be derived at all. That is RED, not
+        #     stale - an instrument that computes over nothing must not read
+        #     green, which is the empty-measurement rule this file already
+        #     carries for `hero` and `pairs`.
+        pw = row.get("pair_w")
+        if pw is None:
             rep["stale_margin"].append(key)
+            rep["errors"].append(
+                "%s%s: no pair_w on record, so the frame margin cannot be "
+                "derived either - an underivable cell is RED, not stale"
+                % (mark, key))
+            rep["ok"] = False
+        else:
+            if "air_x" not in row:
+                row["air_x"] = round(FRAME_W - pw, 3)
+                row["air_x_derived"] = ("FRAME_W - pair_w, arithmetic from the "
+                                        "stored pair width - NOT a re-measurement")
+            # the list is rebuilt from the ROWS, not from what this run did, so
+            # the provenance survives every later republish of the file.
+            if row.get("air_x_derived"):
+                rep.setdefault("margin_derived", []).append(key)
+            if pw > FRAME_W - MARGIN_X + 1e-9:
+                rep["errors"].append(
+                    "%s%s: pair %.2f m leaves %.3f m of air, under the %.2f m "
+                    "this frame demands - RED whether or not the row's own "
+                    "fits_frame predates the margin"
+                    % (mark, key, pw, FRAME_W - pw, MARGIN_X))
+                rep["ok"] = False
 
 
 def main():
@@ -821,7 +987,7 @@ def main():
     out = os.path.join(args.repo, "renders", "art", "minibosses",
                        "_fit_report.json" if args.name == "_hero_scale" else "_fit_%s.json" % args.name.strip("_"))
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
-           "stale_margin": [],
+           "stale_margin": [], "margin_derived": [],
            "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
            "frame_w": FRAME_W, "margin_x": MARGIN_X}
     if os.path.isfile(out):
@@ -915,6 +1081,13 @@ def main():
     # *** THE VERDICT IS DRAWN HERE, OVER EVERY ROW IN THE FILE. ***
     # This replaces an `unproved` check that looked only at the keys this run
     # asked for - the same blind spot, one rung smaller. See audit_rows().
+    # THE DISK PASS COMES FIRST: audit_rows() judges what it writes.
+    try:
+        measure_disk_frames(args.repo, rep, args.tag)
+    except Exception:
+        import traceback
+        rep["ok"] = False
+        rep["errors"].append("measure_disk_frames: %s" % traceback.format_exc()[-600:])
     audit_rows(rep, keys)
     # AND THE SAME QUESTION ABOUT THE CELLS NOBODY ASKED FOR THIS RUN. The
     # file accumulates: the first full run after this test shipped found
@@ -979,9 +1152,20 @@ def main():
     rep["verdict"] = "GREEN" if rep["ok"] else "RED"
     # SAY WHAT THE VERDICT COVERS, IN THE FILE, so no reader has to know the
     # history above to know what `ok` is a statement about.
+    # *** SAY HOW MANY WERE RENDERED, NOT HOW MANY WERE ASKED FOR. ***
+    # 21 Nov 00:5x CT: this sentence read "44 of them rendered this run" on a
+    # `--sheet` run, which renders NO bodies at all - `measured` is the keys
+    # ASKED FOR that have a row, and on the sheet path that is the whole set.
+    # A description that outruns its own evidence is the fault class this file
+    # exists to kill, and it was in the file's own summary line.
+    rendered = 0 if args.sheet else len(measured)
+    rep["rendered_this_run"] = rendered
     rep["verdict_scope"] = ("every row in pairs (%d), re-derived from stored "
-                            "measurements; %d of them rendered this run"
-                            % (len(rep["pairs"]), len(measured)))
+                            "measurements; %d of them rendered this run%s"
+                            % (len(rep["pairs"]), rendered,
+                               " (--sheet: no bodies rendered, %d judged from "
+                               "stored measurements)" % len(rep["pairs"])
+                               if args.sheet else ""))
     with open(out, "w") as f:
         json.dump(rep, f, indent=1)
     print("MINIBOSSFIT_REPORT " + json.dumps({
@@ -991,7 +1175,11 @@ def main():
         "proving": {k: v.get("proving_views") for k, v in rep["pairs"].items()},
         "unproved_cells": rep.get("unproved_cells", []),
         "stale_margin": rep.get("stale_margin", []),
-        "rows_judged": len(rep["pairs"]), "rendered": len(measured),
+        "margin_derived": len(rep.get("margin_derived", [])),
+        "air_px_min": sorted(((v.get("air_px_min"), k, v.get("air_px_tightest_view"))
+                              for k, v in rep["pairs"].items()
+                              if v.get("air_px_min") is not None))[:6],
+        "rows_judged": len(rep["pairs"]), "rendered": rendered,
         "red_summary": rep.get("red_summary", {}),
         "blank": rep.get("blank_check", {}),
         "ratios": {k: (v["ratio"], v["pair_w"], v["fits_frame"])

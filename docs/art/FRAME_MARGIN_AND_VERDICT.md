@@ -121,3 +121,126 @@ artefact rewritten from a local scope. Rebuilt over all 44, now 2280 x 8400.
 
 Each of those is a value pass on a body, not a harness fix, and none of them is
 what the plan asked for this hour.
+
+---
+
+# 4. THE 44 STALE ROWS, CLOSED BY ARITHMETIC - AND THE THREE THINGS THAT
+#    TURNED UP WHEN I ASKED WHAT THE MARGIN CANNOT SEE
+
+21 Nov 2026, 00:34-01:2x CT. The team lead's 23:58 row asked for the cheap
+honest close of the `stale_margin` flag part 1 left behind, and did the
+expensive half first: "I CHECKED EVERY STORED `pair_w` IN THE FILE AGAINST
+FRAME_W - MARGIN_X = 5.48 AND NOT ONE STALE ROW EXCEEDS IT."
+
+## 4.1 THE ARITHMETIC REPRODUCES, INDEPENDENTLY
+
+Re-measured off the file, not off the row:
+
+    stale rows                       44  (42 shipped + snuffer_chibi, tallyman_chibi)
+    stale rows with NO stored pair_w  0  - so there is no blind cell
+    widest stale row                  drover 5.45, then paviser 5.43, gaoler 5.43
+    stale rows exceeding 5.48         0
+    widest row in the whole file      ratcatcher 5.47 and boiler 5.47, NEITHER stale
+
+The two widest rows in the register are the two the solver re-placed last
+hour, and **every one of the 44 stale rows has MORE air than the solver's own
+output**. The arithmetic is confirmed and the 44 re-renders are not owed.
+
+## 4.2 WHY THE FLAG WAS NEVER A RE-RENDER - ONE LINE OF THE WRITER
+
+    air_x = round(FRAME_W - (amx.x - amn.x), 3)
+
+`air_x` is a PURE FUNCTION of `pair_w`, which every row stores. A stale row was
+never a row that could not answer the margin question; it was a row missing a
+field derivable from a field it has. So `audit_rows()` now RE-DECIDES instead
+of flagging: it derives `air_x` from the stored `pair_w`, marks the row
+`air_x_derived` ("NOT a re-measurement") so arithmetic is never mistaken for a
+measurement, lists the derived keys in `margin_derived`, and judges `pair_w`
+against the CURRENT `FRAME_W - MARGIN_X` on every row, fresh or carried.
+
+`stale_margin` now means only what it should: a row with NO `pair_w`, which is
+RED - underivable, not stale. It is EMPTY. `margin_derived` is 44.
+
+RED-PROVED BEFORE IT WAS RUN, on synthetic rows, both directions:
+pair 5.45 green, 5.48 green (the boundary), **5.49 RED by a centimetre**,
+**10.80 RED** (the compounding-offset value from part 1, which derives to
+-5.20 m of air), missing `pair_w` RED and named. An instrument that cannot
+move is not a pass.
+
+## 4.3 AND THE SENTENCE IN MY OWN SUMMARY THAT OUTRAN ITS EVIDENCE
+
+`verdict_scope` read "44 of them rendered this run" on a `--sheet` run, which
+renders NO bodies at all: `measured` is the keys ASKED FOR that have a row, and
+on the sheet path that is the whole set. Same fault the team lead charged the
+game build with an hour ago, sitting in this file's own verdict line. There is
+now a `rendered_this_run` and the sheet path says `0 ... (--sheet: no bodies
+rendered, 46 judged from stored measurements)`.
+
+## 4.4 THE MARGIN IS A WORLD-SPACE WIDTH BUDGET AND NOT A PROMISE OF AIR
+
+`MARGIN_X = 0.12` m reads as ~16 px of air across the pair at 760 px / 5.60 m.
+Measured off the rendered PNGs, alpha > DIFF_EPS, the air a VIEWER gets is
+SMALLER than the derived air on **every single row**, by 1.6 to 19 px, mean 8 -
+because alpha spreads past the mesh bounds the margin is computed from. Five
+rows carry less real air than the margin advertises:
+
+    drover    8 px total   paviser  9 px   boiler 16 px   ratcatcher 16 px   gaoler 22 px
+
+Nothing is clipped - 0 border hits anywhere in the set - so this is not a red.
+But `air_x >= MARGIN_X` is a **necessary pre-filter, not a guarantee**, and the
+register now stores the measured `air_px` per view (left, right), `air_px_min`
+and `air_px_tightest_view` so the pixel answer is on record beside the derived
+one. No pixel floor is judged: choosing one is Mr. E's call, not mine.
+
+## 4.5 THE ONE THE MARGIN STRUCTURALLY CANNOT SEE: THE SIDE VIEW IS THE OTHER AXIS
+
+**`ferryman/hero_side.png` has 2 px of air on the right and 0 on the left**, and
+every number in its row is green. It is the tightest cell in the set by a wide
+margin and the margin machinery is blind to it BY CONSTRUCTION:
+
+  - `pair_w`, `air_x`, `fits_frame` and the hero-offset solver are all the **X**
+    axis. `ferryman` pair_w 4.23 leaves air_x 1.37 m = 186 px, and the front and
+    back views measure 92 + 92 = **184 px**, which is the derivation confirmed
+    by pixels almost exactly.
+  - The **side camera looks along X and renders the pair's DEPTH (Y)**. Nothing
+    in the margin machinery measures Y, and the solver only ever narrows X, so
+    it cannot relieve a tight side view even in principle.
+
+This is the gloves' 3/4-view overlap again: the instrument measured the axis it
+was built for and the fault was on the other one. **NOT FIXED THIS RUN** - the
+fix is a depth budget (`MARGIN_Y` plus a `GAP`-aware solve) and the depth gap is
+the occlusion margin, so tightening it trades a border for the two subjects
+hiding each other. Named here, defect in my own harness, carried.
+
+## 4.6 THE DISK PASS - AND THE FALSE RED I ALMOST SHIPPED OFF IT
+
+`frame_edge` is measured ONCE, in `shoot()`, on the buffer that run wrote, and
+carried for ever. `audit_rows()` judges that stored number; `sheet()` opens all
+132 PNGs to ask whether they are BLANK and throws the alpha away. **Nothing ever
+re-asked the border question of the picture now sitting at the canonical path** -
+so the register's red rested on a number no later run could contradict, while
+holding the alpha array of the real file in its hand. `measure_disk_frames()`
+now re-measures every view of every row from disk into `frame_edge_disk`.
+
+**AND MY FIRST VERSION OF IT WAS WRONG, WHICH IS THE PART WORTH READING.** It
+raised `ferryman/side: THE FILE ON DISK reaches the frame edge - left 3 px - AND
+THE STORED frame_edge SAYS OTHERWISE`, a shipped RED with `ok_shipped: false`.
+I went to the pixels before acting on it: 3 pixels, alpha **6, 7 and 8 of 255**,
+rows 423-425, on the ground plane. And the row's OWN
+`ground.side.shadow_edge` reads `{left: 3}` - accounting for all three exactly.
+
+There are **TWO FILMS**: `frame_edge` is counted on the beauty render before
+the ground is composited, `shadow_edge` counts the shadow's reach and by this
+file's existing and deliberate design never fails a view, and the PNG on disk
+is the composite of both. I had compared a composite against one of its parts.
+The register was right and my new instrument was crying wolf - and if I had
+trusted it I would have re-rendered the ferryman to chase a shadow.
+
+The disk check now reds only on what **neither film accounts for**, which is
+the question actually worth asking of a file: is this the render this row
+measured? Red-proved: shadow-only 3 px GREEN, 9 px where 3 are accounted RED,
+a real body clip still RED exactly once, a disk hit with no `ground` block at
+all RED.
+
+When a number and a picture disagree the picture is the evidence - and when two
+numbers disagree, check which film each was shot on before you believe either.

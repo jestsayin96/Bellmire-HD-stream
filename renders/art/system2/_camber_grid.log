@@ -1,0 +1,123 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+17:44:11 | INFO: Data are loaded, start creating Blender stuff
+17:44:11 | INFO: Blender create Mesh node Cube.125
+17:44:11 | INFO: Blender create Mesh node Cube.126
+17:44:11 | INFO: Blender create Mesh node PrototypePete_body.020
+17:44:11 | INFO: Blender create Mesh node PrototypePete_head.001
+17:44:11 | INFO: Blender create Mesh node Cube.128
+17:44:11 | INFO: Blender create Mesh node Cube.127
+17:44:11 | INFO: Blender create Mesh node Cube.003
+17:44:11 | INFO: Blender create Mesh node Cylinder.280
+17:44:11 | INFO: Blender create Mesh node Cylinder.005
+17:44:11 | INFO: Blender create Mesh node Cylinder.010
+17:44:11 | INFO: Blender create Mesh node Cylinder.022
+17:44:11 | INFO: Blender create Mesh node Cube.11839
+17:44:11 | INFO: Blender create Mesh node Cube.12993
+17:44:11 | INFO: Blender create Mesh node Cube.124
+17:44:11 | INFO: Blender create Mesh node Plane.004
+17:44:11 | INFO: glTF import finished in 0.48s
+00:02.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_body_front.png'
+00:02.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_body_side.png'
+00:03.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_body_back.png'
+17:44:13 | INFO: Data are loaded, start creating Blender stuff
+17:44:13 | INFO: Blender create Mesh node Cube.4447
+17:44:13 | INFO: glTF import finished in 0.00s
+00:03.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r000_front.png'
+00:03.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r000_front.png'
+00:03.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r000_side.png'
+00:03.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r000_side.png'
+00:03.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r000_back.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r000_back.png'
+17:44:14 | INFO: Data are loaded, start creating Blender stuff
+17:44:14 | INFO: Blender create Mesh node Cube.4447
+17:44:14 | INFO: glTF import finished in 0.00s
+00:04.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r020_front.png'
+00:04.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r020_front.png'
+00:04.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r020_side.png'
+00:04.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r020_side.png'
+00:04.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r020_back.png'
+00:05.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r020_back.png'
+17:44:15 | INFO: Data are loaded, start creating Blender stuff
+17:44:15 | INFO: Blender create Mesh node Cube.4447
+17:44:15 | INFO: glTF import finished in 0.00s
+00:05.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r035_front.png'
+00:05.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r035_front.png'
+00:05.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r035_side.png'
+00:05.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r035_side.png'
+00:05.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c000r035_back.png'
+00:05.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c000r035_back.png'
+17:44:15 | INFO: Data are loaded, start creating Blender stuff
+17:44:15 | INFO: Blender create Mesh node Cube.4447
+17:44:15 | INFO: glTF import finished in 0.00s
+00:06.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r000_front.png'
+00:06.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r000_front.png'
+00:06.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r000_side.png'
+00:06.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r000_side.png'
+00:06.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r000_back.png'
+00:06.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r000_back.png'
+17:44:16 | INFO: Data are loaded, start creating Blender stuff
+17:44:16 | INFO: Blender create Mesh node Cube.4447
+17:44:16 | INFO: glTF import finished in 0.00s
+00:07.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r020_front.png'
+00:07.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r020_front.png'
+00:07.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r020_side.png'
+00:07.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r020_side.png'
+00:07.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r020_back.png'
+00:07.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r020_back.png'
+17:44:17 | INFO: Data are loaded, start creating Blender stuff
+17:44:17 | INFO: Blender create Mesh node Cube.4447
+17:44:17 | INFO: glTF import finished in 0.00s
+00:07.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r035_front.png'
+00:08.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r035_front.png'
+00:08.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r035_side.png'
+00:08.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r035_side.png'
+00:08.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c030r035_back.png'
+00:08.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c030r035_back.png'
+17:44:18 | INFO: Data are loaded, start creating Blender stuff
+17:44:18 | INFO: Blender create Mesh node Cube.4447
+17:44:18 | INFO: glTF import finished in 0.00s
+00:08.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r000_front.png'
+00:08.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r000_front.png'
+00:09.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r000_side.png'
+00:09.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r000_side.png'
+00:09.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r000_back.png'
+00:09.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r000_back.png'
+17:44:19 | INFO: Data are loaded, start creating Blender stuff
+17:44:19 | INFO: Blender create Mesh node Cube.4447
+17:44:19 | INFO: glTF import finished in 0.00s
+00:09.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r020_front.png'
+00:09.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r020_front.png'
+00:09.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r020_side.png'
+00:10.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r020_side.png'
+00:10.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r020_back.png'
+00:10.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r020_back.png'
+17:44:20 | INFO: Data are loaded, start creating Blender stuff
+17:44:20 | INFO: Blender create Mesh node Cube.4447
+17:44:20 | INFO: glTF import finished in 0.00s
+00:10.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r035_front.png'
+00:10.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r035_front.png'
+00:10.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r035_side.png'
+00:11.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r035_side.png'
+00:11.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\c040r035_back.png'
+00:11.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_camber\_w_c040r035_back.png'
+S2_CAMBER sheet C:\hd adventure\bellmire-art\renders\art\system2\_camber\_sheet_grid.png
+S2_CAMBER ok=True angles=9 errors=0
+  camber   0.0 roll   0.0  show 0.39 (live 0.39)  minor {'front': 35, 'side': 41, 'back': 51}  clip 40 ground 0
+  camber   0.0 roll  20.0  show 0.536 (live 0.539)  minor {'front': 57, 'side': 70, 'back': 64}  clip 35 ground 0
+  camber   0.0 roll  35.0  show 0.757 (live 0.833)  minor {'front': 87, 'side': 99, 'back': 90}  clip 35 ground 0
+  camber  30.0 roll   0.0  show 0.574 (live 0.602)  minor {'front': 60, 'side': 71, 'back': 75}  clip 38 ground 0
+  camber  30.0 roll  20.0  show 0.696 (live 0.778)  minor {'front': 78, 'side': 85, 'back': 91}  clip 26 ground 0
+  camber  30.0 roll  35.0  show 0.742 (live 0.941)  minor {'front': 92, 'side': 97, 'back': 96}  clip 15 ground 0
+  camber  40.0 roll   0.0  show 0.643 (live 0.747)  minor {'front': 70, 'side': 80, 'back': 84}  clip 36 ground 0
+  camber  40.0 roll  20.0  show 0.734 (live 0.91)  minor {'front': 84, 'side': 91, 'back': 96}  clip 20 ground 0
+  camber  40.0 roll  35.0  show 0.757 (live 1.01)  minor {'front': 96, 'side': 97, 'back': 99}  clip 15 ground 0
+S2_CAMBER_DONE C:\hd adventure\bellmire-art\renders\art\system2\_camber\_camber_grid.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+=== STDERR ===
+C:\hd adventure\bellmire-art\tools\art\_s2_camber.py:161: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+RC=0

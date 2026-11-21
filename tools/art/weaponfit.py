@@ -171,9 +171,35 @@ DIFF_EPS = 0.02
 # The distribution is bimodal with a 0.60-wide empty gap. SHOW_MIN is set in
 # that gap, not tuned to make anything pass or fail.
 #
-# The world AABB overstates the middle extent for a canted weapon, so `show` is
-# understated for exactly the cells most likely to be canted - the conservative
-# direction is toward RED, which is where an instrument's error belongs.
+# *** THE DENOMINATOR USED TO MOVE, AND IT MOVED THE WRONG WAY. FIXED 21 NOV
+# *** 17:5x CT, AND THE NOTE THAT STOOD HERE BEFORE WAS WRONG.
+# What stood here said the world AABB "overstates the middle extent for a
+# canted weapon, so `show` is understated ... the conservative direction is
+# toward RED". I MEASURED IT AND IT IS THE OPPOSITE. Rotating a weapon changes
+# its world AABB, so the denominator was a property of the CARRY and not of the
+# weapon, and every change that improves the numerator shrinks it at the same
+# time. From tools/art/_s2_camber.py, crossbow_common, one body, one camera set:
+#
+#      camber  roll   best_minor   world mid_px   show(world)   show(fixed)
+#         0      0        51           130.7         0.390         0.390
+#         0     35        99           118.8         0.833         0.757
+#        40      0        84           112.5         0.747         0.643
+#        40     35        99            98.0         1.010         0.757
+#
+# The bottom row scores 1.01 on a weapon whose honest number is 0.757 - a 33%
+# unearned pass, and it is unearned in exactly the direction a lane fixing a
+# lath would push. A gate that rewards shrinking the weapon is not a gate.
+# THE DENOMINATOR IS NOW TAKEN IN THE MESH'S OWN LOCAL FRAME (times the
+# engine's hand_scale), which no carry rotation can touch. `show` therefore
+# answers only "how much of the breadth this weapon HAS does the carry turn to
+# a camera", which is the question it was built to ask.
+# RESIDUAL, SAID PLAINLY AND MEASURED RATHER THAN GUESSED: a change that
+# genuinely DEFORMS the mesh - bending the limbs, not rotating them - still
+# shrinks the local extent, so camber can still buy some of its own pass.
+# At 40 deg the local mid falls 0.6535 -> 0.5623 m, which is 14% (I wrote 4%
+# here from reasoning first, then measured it). Against the 33% above that is
+# an improvement and NOT a closure. A real OBB, or the max silhouette minor
+# over all orientations, would close it.
 SHOW_MIN = 0.70
 PX_PER_M = CELL_Y / FRAME_H
 
@@ -427,6 +453,11 @@ def main():
                 continue
             hs = OVR[fam]["scale"] if fam in OVR else HAND_SCALE
             S = Matrix.Diagonal((hs,) * 3).to_4x4()
+            # The `show` denominator, taken BEFORE the carry is applied so no
+            # rotation can shrink it. See the note above SHOW_MIN.
+            lv = world_verts(meshes)
+            local_ext = (sorted([max(v[i] for v in lv) - min(v[i] for v in lv)
+                                 for i in range(3)]) if lv else None)
             Rslot = slot_matrix(fam) if fam in SLOT_ROT else Matrix.Identity(4)
             for o in objs:
                 if o.parent is None:
@@ -518,9 +549,11 @@ def main():
                 bpy.data.objects.remove(cam, do_unlink=True)
             rec["outside"] = outs
             ext = sorted([max(v[i] for v in wv) - min(v[i] for v in wv) for i in range(3)])
-            mid_px = ext[1] * PX_PER_M
+            mid_px = (local_ext[1] * hs * PX_PER_M) if local_ext else 0.0
             rec["ext"] = [round(e, 4) for e in ext]
+            rec["local_ext"] = [round(e, 4) for e in local_ext] if local_ext else None
             rec["mid_px"] = round(mid_px, 1)
+            rec["mid_px_world_was"] = round(ext[1] * PX_PER_M, 1)
             mins = rec.get("minor", {})
             if mid_px <= 1.0 or not mins:
                 # RED ON EMPTY. A `show` over a zero-width mesh, or over no

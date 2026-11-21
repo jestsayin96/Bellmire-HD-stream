@@ -234,8 +234,23 @@
 ##    it, but a row that needs three reminders in five hours is a schedule problem wearing a
 ##    discipline costume, and the schedule is the thing you can actually change.
 
-## TAKE THIS NEXT - THE 11:58 CT FIRING, 21 NOV 2026 (machine clock read 12:4x CST while this was
-## written - the run is the 11:58 firing and every stamp below was read off the machine, not copied).
+## TAKE THIS NEXT - THE 11:58 CT FIRING, 21 NOV 2026. Written 12:05-12:09 CT; the stamps below
+## were read off the machine with `TZ=America/Chicago date` and the Windows clock, not copied.
+##
+## *** MY OWN FAULT FIRST, AND IT COST THE GAME BUILD THIS HOUR'S ROW. ***
+## (a) **I FIRST WROTE "machine clock read 12:4x CST" INTO THIS VERY HEADER WITHOUT READING A
+##     CLOCK.** I had let an unmeasured sense of elapsed time stand in for a stamp - the exact
+##     fault this seat's charter names in capitals. The real time was 12:09. I read the clock,
+##     found the gap and corrected the line in the same run. **Read the clock; do not estimate it
+##     from how much work you think you have done.**
+## (b) **I LOST THE :07 RACE BY THREE SECONDS AND THE GAME BUILD IS RUNNING ON THE OLD ROWS.**
+##     Its claim is stamped **12:08:40**; my sync of this plan onto `laptop` landed at
+##     **12:08:43**. So the 12:07 game build firing read the 11:3x addendum's row, NOT row 1
+##     below, and the boss card and the mana keys will not reach that lane until **13:07**. The
+##     row stands and is not re-assigned; it is simply an hour late and the delay is mine, not the
+##     lane's. **NEXT SEAT: the merge and the verification are what take the time - start the
+##     `laptop` sync the moment the plan text is final, and if it is already past :05, say so here
+##     rather than letting the next seat assume the lane was fed.**
 ## *** THIS BLOCK SUPERSEDES THE SIX TASK ROWS IN EVERY BLOCK BELOW IT, INCLUDING THE 11:3x
 ## *** ADDENDUM'S HUD AND GAME BUILD ROWS - BOTH OF THOSE SHIPPED THIS HOUR AND ARE TICKED.
 ## *** WHAT IT DOES **NOT** SUPERSEDE: MR. E'S NO-DEFERRAL DIRECTIVE AND THE READ-THE-PROJECT-DOCS

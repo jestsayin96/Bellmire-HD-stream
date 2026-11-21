@@ -13781,3 +13781,8 @@ hit my 360 s cap at T=100s of its 120 s simulation, in_solid=0/15313, stuck_on_r
 slower still (T=20s at 5 min wall, in_solid=0/3205) and was cut by its 480 s cap at 19:26:56 so I could release by :40.
 It RUNS with no script error (the commit condition), and S72 touches no town file - but the verdict is owed to the next
 firing: run townwalk FIRST and alone with a >= 600 s cap. Why run 2 was ~4x slower than S70's 3m59s is unmeasured.
+## C-150 (20 Nov 2026 19:3x CST) - epitaph/descend/cleared top-up, two-phase shape note (no miniboss owed)
+TAKE THIS NEXT gave content: "C-150, your own cycle, unthrottled; nothing owed." No committed art body lacks feed lines (every non-chibi key in minibosses.py has a feed block; the 43rd body is not on origin/art yet) - stood down on item 1.
+Added (data/lore_lines.json only): +30 epitaphs (760 -> 790), +12 descend (471 -> 483), +12 cleared (456 -> 468), all checked unique against the existing pools. New key `miniboss_feed._note_c150`: one-paragraph note that two-phase (arrive/fall) is the house shape for every body from quartermaster onward, retiring the note-vs-shape drift the plan flagged. The older `_note` was not reworded.
+VALIDATION OK: items, lore_lines, bosses, potions all json.load; every pre-existing key and list prefix byte-identical in value; the only new key is _note_c150; diff is 59 insertions, 4 deletions (trailing commas only).
+CODE WIRING: none. Pools are already read. `_note_c150` is a zero-hit key by design - DO NOT WIRE.

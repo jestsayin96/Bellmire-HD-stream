@@ -1,3 +1,104 @@
+## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main 1a796f36: all SIX lanes (laptop 5dc67902, content 31efb7de, art cacd6c98,
+hub cc237b92, hud-ui aa6d5bf2, chatbot bd603450). PROGRESS.md +103/-0 across two conflicts - ZERO
+lines removed. Zero merge markers tree-wide, checked with all four exact shapes.
+
+*** BASELINE CORRECTION I OWN: THE MINIBOSS CHAIN IS 45/45/45, NOT 44/44/44. ***
+Measured on merged tree 1a796f36 with a brace-matched parse THAT STRIPS `#` COMMENTS FIRST:
+`Delve.MB_NAME` (delve.gd:427-442) = 45 keys, 0 duplicates; `lore_lines.json` by_key = 45; the
+in-either-not-the-other sets are BOTH EMPTY. data/commands.json:99-100 and docs/COMMANDS.md:39 now
+say "The 45 elites" - the chat bot corrected them at B109 this hour and I confirmed the figure
+against the file, not against its claim. WORK_PLAN.md:2833 and :2842 still read 44/44; those are
+HISTORICAL entries from when 44 was right and are LEFT AS WRITTEN - this row is the current
+measurement. The 44 in the team-lead prompt is stale; a firing cannot edit a prompt, so it is
+listed in FOR THE NEXT TEAM LEAD below.
+*** AND A FAULT OF MY OWN, FIRST: my first parse of MB_NAME returned 37. *** It was my parser, not
+the file: it tracked quotes and brackets but NEVER STRIPPED `#` COMMENTS, and those comments carry
+prose commas, apostrophes and unbalanced parentheses ("content's _note_c142 \"the Dauber
+(Wetwall)\""). I caught it because 37 sat on no series anyone has ever read, dumped the raw region,
+and counted 6x6+9=45 by hand before trusting any instrument. A parser is not a parser either, if it
+reads a comment as code. I never published the 37.
+
+GAME BUILD - L31 REMAINDER: the status-effect icons (delve.gd, monster.gd, party_frames.gd,
+  boss_bar.gd). D61.1 already landed the damage numbers; this is the open half and the files are
+  yours, not HUD's. S91 VERIFIED AND TICKED: tither.glb.import was genuinely absent and is now
+  tracked beside tither.glb - that was why the body never loaded; S33_DRAW OK 186 checks, and I
+  read the RED log too - it FAILs 3 of 190 on nobody_redproof, so the two repaired arms can still
+  go red. A test made honest, not a test made quiet.
+CONTENT - C-169: the Blower (Deadair) feed row. Art shipped the body at 8587df63 as the 46th, and
+  by_key is at 45, so the Blower is the one miniboss with a body and no lines. Same pipeline as
+  the tither at C-167 - not new work. C-168 VERIFIED AND TICKED: epitaphs 948->960 (+12), descend
+  571->577 (+6), cleared 556->562 (+6), counted off both refs by parsing the JSON, not the diff.
+ART - THE BLOWER'S PASS 6: the bag that reads only from behind, which is the one thing your own
+  _BLOWER_COMMIT_OWED.md still calls open. SYSTEM 2 IS NOT TICKED AND HERE IS WHY, IN YOUR FAVOUR:
+  you did the harder half - you re-ran the four-day-old red unchanged, got a BIT-IDENTICAL FAIL,
+  and found the cause is that tools/art/weaponfit.py never read gear.gd at all. The plan's claim
+  that the red was stale and would "clear on its own" WAS WRONG AND IS STRUCK. I LOOKED AT
+  crossbow_common_side.png MYSELF at the 14:58 firing and I agree with your own verdict: there is
+  a small flat plank forward of the hand and nothing a viewer would call a crossbow. The new
+  register is GREEN on 24 models, but it measures CARRY GEOMETRY (reach/drop/span) and it RAISED
+  min_proving 1 -> 2 - a tightening, so I am not treating the GREEN as a loosened test. The carry
+  itself is still unproven to a viewer, so the item stays open.
+HUB - HOLD. You shipped one verified licence line (House1_blend, CC0 1.0, read off disk) and that
+  is a correct dry-lane delivery. The 3-file delta is STILL unpublished and STILL the supervisor's
+  call - I re-measured it myself this hour rather than copying it: origin/gh-pages 05ac2679 tree
+  9ca8051e (pushed 19 Nov 20:06 CT) vs origin/hub:web 02257b2f; NOTES.md +9, app.js +46/-1,
+  style.css +4; 3 files, +59/-1. You did not claim "ready to publish", so I ran NO publish gate
+  and I am not reporting one.
+HUD - U129, AND THE WINDOW IS YOURS: you lost 12:52 to the dead bridge and 14:51 to the chat bot's
+  B109 claim, and you stood down correctly both times - U127/U128 are written up and that IS the
+  delivery. Nothing is charged to you. The chat bot's claim at 14:51 was over a FREE lock so it
+  broke no rule, but it sat in your window again; see the chat bot row.
+CHAT BOT - B110, AND KEEP CLAIMING BY :50 WITH A FINISH INSIDE :52. The rule worked at 08:45 and
+  again at 12:48. It did NOT hold at 14:51:00 - you claimed one minute before the HUD's window and
+  declared 14:57, and the HUD lost the cycle. The lock was free and you broke no rule; the cost is
+  real anyway. B109 VERIFIED AND TICKED: ALIAS UNUSABLE red-proven with a log this time, data
+  restored byte-identical, and the miniboss count caught AGAINST YOUR OWN PUBLISHED FILE - 44
+  published against 45 feed rows - and corrected in data/commands.json and docs/COMMANDS.md. I
+  confirmed 45/45 independently. Finding your own published figure one short is worth more than a
+  green gate.
+
+*** LOCK DISCIPLINE, 14:58 CT 21 NOV - THE CLEAN-HOUR COUNT RESETS TO 0, AND THE FAULT IS MINE. ***
+  game build 14:08:09 -> IDLE 14:17:33 (9 min), declared 14:30, cap 14:33. Inside both. It also
+    caught a future stamp of its own (typed 14:18 for a ~14:16 read) and corrected it on the line.
+  QA tester 14:42:12 -> IDLE 14:50:14 (8 min), cap 14:57. Inside. Its battery did not complete
+    (bat-redirect harness bug) - a gate fault to fix, not a lock fault.
+  chat bot 14:51:00 -> IDLE 14:55:30 (4.5 min), declared 14:57, cap 15:16. Inside both, and the
+    lock was genuinely FREE (QA released 14:50:14), so IT BROKE NO RULE. It also caught a stamp 7
+    minutes in the FUTURE in its own IDLE line and corrected it against the machine clock.
+  HUD - STARVED. It stood down at 14:51 because the chat bot held the lock inside the HUD's :52
+    window. That is the SECOND cycle the HUD has lost today to this same shape and the THIRD in
+    two days. A STARVED LANE BREAKS THE COUNT, so the count is 0 from this hour.
+  THE FAULT IS THE SCHEDULE'S AND THE SCHEDULE IS MINE. My own 08:58 row said "claim by :50 with a
+  finish inside :52" and it held at 08:45 and 12:48; at 14:51 the chat bot claimed one minute late
+  and declared 14:57, five minutes INTO the HUD's window, and the row had no hard edge to stop it.
+  A row that relies on a lane being early is not a rule. SO, SHARPENED, AND IT BINDS FROM THE CHAT
+  BOT'S 15:45 FIRING - not retroactively, and nothing is charged to the chat bot for 14:51:
+  *** CHAT BOT: HARD RELEASE AT :52, the same shape the game build has at :40 and the HUD at :07.
+  *** Claim by :50. Declare a finish at or before :52. If a gate set will not fit, SPLIT IT and
+  *** carry the remainder to your next firing - a stand-down written up is the delivery.
+  I did not re-derive the pre-14:58 count and I am not quoting one; the reset stands on this hour's
+  starved lane alone.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these all at
+once on the first live turn):
+  1. TEAM LEAD prompt, Step 0 BASELINE and the `Delve.MB_NAME` paragraph: the chain is 45/45/45 as
+     of 21 Nov 14:58, not 44/44/44. Keep the warning about flat regexes and ADD: strip `#` comments
+     before parsing, or the parser reads comment prose as entries (it returned 37 for me).
+  2. TEAM LEAD prompt, the miniboss count line in STEP 5: art is on the 46th body (the Blower);
+     MB_NAME carries 45. The two numbers are correctly different - a body ships before its row.
+  3. TEAM LEAD prompt, gh-pages block: 05ac2679 / tree 9ca8051e / 19 Nov 20:06 CT is still correct
+     as of 14:58 on 21 Nov. No change needed - recorded so the next seat need not re-derive it.
+
+FOR THE SUPERVISOR: ONE ITEM, UNCHANGED AND NOW IN ITS SECOND DAY. origin/hub:web (02257b2f) is 3
+files / +59 / -1 ahead of what is published at origin/gh-pages (9ca8051e, pushed 19 Nov 20:06 CT):
+NOTES.md +9, web/app.js +46/-1, web/style.css +4. The hub lane has NOT claimed "ready to publish",
+so no publish gate has been run and I am not recommending the push on my own measurement alone. MY
+RECOMMENDATION: either say publish and I will run the full gate (el()-only, no innerHTML on a
+snapshot value, no snapshot value as URL/src/href/style, CSP intact by live injection refusal, the
+six state checks, a hostile name as literal text, and I will LOOK at a screenshot) before any push,
+or say hold and I will stop re-measuring it hourly and report it only when it moves.
+
 ## TAKE THIS NEXT - UPDATED 21 NOV 2026, 14:0x CT (THE 13:58 CT FIRING, 21 NOV 2026).
 ## THIS SUPERSEDES EVERY ROW BELOW IT.
 ## NOTHING MERGED AND NOTHING TICKED THIS PASS, AND THAT IS THE CORRECT OUTCOME: no lane has

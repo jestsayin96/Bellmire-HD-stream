@@ -4135,3 +4135,28 @@ assets/gear/shields/) and its row (b) - the gear wiring and the on-body proof - 
   All runs with JESTS_NO_TWITCH=1. No Twitch test, 0 bits.
 - Lock: claim 03:08:18, claim+25 = 03:33 computed first, declared 03:33.
 - Pitman way still HELD on content's act/broken lines - not touched, as the row said.
+
+## D-cycle - S81: THE PITMAN'S HOLD LIFTS ON ITS OWN, AND THE TIER-4 SHIELD QUESTION IS ANSWERED OFF THE FILES. 2026-11-21T04:08-06:00 (game build)
+TAKE THIS NEXT: the 04:0x block (supersedes the 02:58 block; its GAME BUILD row is labelled for 05:07 but was on main at 04:08, and its
+two asks are measurements on shipped work, so I took them now): (1) re-run the S79 gate now C-158 is on main and report the branch;
+(2) say whether shield_heater/shield_round are a painted pair that tier 4 should carry instead of the _2 pair. No engine edit made.
+- (1) S79_PITMAN OK (16 checks). On disk: by_key.pitman arrive 9 / act 7 / broken 4 / fall 8. The gate printed
+  "content by_key.pitman act lines on disk: 7" and "ok HOLD lifted: content's act lines are on disk (7)" - THE LIFTED BRANCH, taken by the
+  guard with no edit. The in-memory test-line feed was skipped (has("act") true), so the feed in the run shows CONTENT'S REAL LINES
+  ("The mattock comes down. The floor goes from under Dugunder.", "The ladder is knocked out of the ring. He has nothing to dig with.").
+  Crypt draw reaches the Pitman 100 of 400 n; pit under the nearest delver, second delver walks in, climb window, cap 3, broken stops
+  digging and the pit still takes a delver. LOOKED AT renders/cycles/s79/pitman_2pit.png: a dark open ring with a ladder beside the knight
+  on the crypt floor, the Pitman behind it.
+- (2) New probe tools/_s81_shieldmat.gd (headless; lists every surface material of the five shields). S81_SHIELDMAT OK (5 files, 0 load
+  failures). ANSWER: THERE IS NO PAINTED PAIR. shield_heater, shield_heater_2 and shield_round all carry exactly Steel (0.58,0.60,0.63) /
+  LightSteel (0.64,0.66,0.69) / DarkWood (0.40,0.27,0.19) / LightWood (0.47,0.32,0.22); shield_round_2 adds White (0.82); untextured,
+  metallic 0. The ONLY coloured file is shield_celtic_golden (Gold / LightGold / LightBlue / Green). So the whole Quaternius set is plain
+  steel-and-wood but the celtic: swapping heater/round in would change nothing, and the ladder stands as a deliberate plain-to-gold step
+  (tier 3 the pack's coloured rare, tier 4 plain steel/wood, tier 5 gold). If the lead wants tier 4 richer than tier 3, that is a TINT
+  decision (Gear tint on the off hand), not a file swap - not taken, not mine to rule.
+- Gates (verdict lines, this tree, JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error; S79_PITMAN OK (16 checks); S81_SHIELDMAT OK;
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1996 samples off the floor (home); TOWNWALK in_solid=0/18912 (0.000%)
+  raid_in_solid=0/5359 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2.
+- No Twitch test, 0 bits, no account used.
+- Lock: claim 04:08:40, claim+25 = 04:33 computed first, declared 04:33.
+- Next: the lowest open Phase 2 system, own pick (System 7 still held on art's fit numbers - not unheld by me).

@@ -1,0 +1,71 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Somebody's mother packed the bread. It goes down with them.
+FEED They carry 48 flasks of oil between them.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 giant rat, 1 puglin, 1 cave spider.
+FEED A half-built thing on a trestle has your shape, roughly.
+S85 frame=1 floor=2  -> fight fired={  }
+FEED Corvin casts Smite at puglin.
+FEED Bram casts Bolt at puglin.
+FEED Corvin tries bolt. The floor is unmoved (1 vs DC 11).
+FEED Corvin casts Smite at puglin.
+FEED Bram casts Chain Bolt at puglin.
+FEED Corvin casts Bolt at giant rat.
+FEED Bram's fire fizzles into a damp little hiss (8 vs DC 11).
+FEED Bram searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Floor 2 holds. The scar keeps count too.
+S85 frame=2307 floor=2 fight -> search fired={  }
+FEED Aen and 3 others take a breather, and press on deeper.
+S85 frame=4047 floor=2 search -> descend fired={  }
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 puglins, 2 risen bones.
+S85 frame=7868 floor=3 descend -> fight fired={  }
+FEED Corvin casts Smite at risen bones.
+FEED Bram casts Bolt at risen bones.
+FEED Corvin casts Smite at puglin.
+FEED Bram casts Bolt at puglin.
+FEED Corvin casts Smite at puglin.
+FEED Corvin asks for bolt. The scar is not taking requests (8 vs DC 11).
+FEED Bram tightens a grip on chain. Nothing answers (7 vs DC 11).
+FEED Bram casts Fire at risen bones.
+FEED Bram searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Floor 3 is clear. Boots are checked before the stair.
+S85 frame=11738 floor=3 fight -> search fired={  }
+FEED Aen and 3 others take a breather, and press on deeper.
+S85 frame=13478 floor=3 search -> descend fired={  }
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 drowned bone bowman, 2 cave bats, 1 hollowed puglin.
+S85 frame=15731 floor=4 descend -> fight fired={  }
+FEED Corvin's bolt goes out like a wet match (7 vs DC 12).
+FEED Bram's fire arrives, but something else wore it in (8 vs DC 12).
+FEED Bram searches (Investigation 20) and turns up 54 gold on floor 4.
+FEED Floor 4 is quiet, and the quiet is earned.
+S85 frame=18645 floor=4 fight -> search fired={  }
+FEED A grate shifts, and 1 bone bowman, 1 slime is already upon them.
+S85 frame=19758 floor=4 search -> fight fired={ "ambush": 1 }
+FEED Bram is cut off and falls back to the others.
+FEED The slime divides.
+S85 frame=21522 floor=4 fight -> search fired={ "ambush": 1 }
+FEED Bram searches the chest - Successfully found loot!! 46 gold (Investigation 20 vs DC 12).
+FEED Aen and 3 others take a breather, and press on deeper.
+S85 frame=23262 floor=4 search -> descend fired={ "ambush": 1 }
+S85_DUMP end frame=25201 floor=4 state=descend back_to=
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   hero 29c1 hp=56.4 pos=(21.92643, -400.0, -14.3044) cell=(20, 10)
+   hero 29c2 hp=47.7 pos=(21.99999, -400.0, -41.2049) cell=(20, 3)
+   hero 29c3 hp=70.0 pos=(21.99945, -400.0, -6.461969) cell=(20, 12)
+   hero 29c4 hp=92.0 pos=(21.99174, -400.0, -17.35824) cell=(20, 9)
+S85 fired={ "ambush": 1 }
+S85_DIAG DONE

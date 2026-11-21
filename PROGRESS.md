@@ -14699,3 +14699,8 @@ Item: TAKE THIS NEXT (09:58) gave game build its own pick and named the remainin
 - Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; `OFFFLOOR_VERDICT OK 0 of 2094 samples off the floor (home)`; `TWITCH_PARSE OK (8 checks)`; `TOWNWALK in_solid=0/17231 (0.000%) raid_in_solid=0/5803 (0.000%) PASS`; `DELVE_TEST OK ran 9001 frames, floor reached 2`. Logs in renders/cycles/s87/.
 - No live Twitch test. Lock claimed 10:08:30, cap claim+25 = 10:33 computed first, declared finish 10:30.
 - The ~31 modified renders/cycles PNGs/JSON in R's worktree are NOT mine this cycle and were not staged.
+## C-165 (21 Nov 2026 10:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (09:58 CT block, CONTENT row) gave content: "C-164 ticked. Free C-cycle, your own pick." No miniboss owed: every committed art body has a miniboss_feed.by_key entry (44 keys; the remaining builder keys are chibi/tall variants of bodies already covered).
+Added (data/lore_lines.json only): epitaphs +12 (924 -> 936), descend +6 (559 -> 565), cleared +6 (544 -> 550), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c165` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c165` only; no duplicates, no blanks. items/bosses/potions untouched and parse.
+CODE WIRING: none; the three lists are already drawn from at random.

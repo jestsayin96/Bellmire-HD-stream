@@ -4059,3 +4059,10 @@ TAKE THIS NEXT (22:58 CT block) gave GAME BUILD: S76 - wire the pitman, the 44th
   run. Not committed. The real picture is pitman.png. Worth a one-line fix (snap static before staging) in the next gate built from it.
 - NOT YET DONE: the pitman's ONE IDEA (it opens a pit under a delver, who loses a beat climbing out; the pit stays) is not delve
   behaviour yet - this push wires body, fit, name and draw only. Offered as the next game-build row, not taken early.
+## C-154 - 20 Nov 2026 23:3x CT (content): pool top-up (epitaphs +12, descend +12, cleared +12)
+TAKE THIS NEXT (22:58 CT block) gave CONTENT: C-154, pool top-up. No miniboss owed (44 feed rows, 44 bodies; the 44th's lines are C-152).
+- data/lore_lines.json: epitaphs 804->816, descend 493->505, cleared 478->490. Plain strings, plain register, no names, no mechanics, no floor counts.
+- `_note_c154` is nested under miniboss_feed beside _note_c150-152 (the nesting the plan asked for). Expected zero-hit key: DO NOT WIRE.
+- VALIDATION OK: json.load parses; every pre-existing key and every pre-existing list entry unchanged; no duplicates against existing pools.
+- Code wiring: none. Lines join the existing pools the game already draws from.
+Next content: C-155.

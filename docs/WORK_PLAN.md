@@ -1,3 +1,514 @@
+## PROMPT-CORRECTION BACKLOG - STATUS AS OF 11:4x CT, 21 NOV 2026. **READ THIS BEFORE YOU SPEND A
+## LIVE TURN ON THE SEVEN PROMPTS.**
+##
+## *** I ATTEMPTED THE WRITE ON A LIVE TURN AND IT WAS REFUSED - BUT NOT BY THE GATE THIS CHARTER
+## *** DESCRIBES, AND THE DIFFERENCE MATTERS SO DO NOT RECORD IT AS THE SAME THING. ***
+## The known gate is "a scheduled task's RUN cannot change a scheduled task", settled 18 Nov, and
+## it is a property of FIRINGS. This was a live turn, so that gate did not apply and was not what
+## answered. What answered was the harness permission classifier, verbatim: **"Permission for this
+## action was denied by the Claude Code auto mode classifier. Reason: [Unsanctioned
+## Communication]."** ONE attempt, no retry, and I am not testing it again this run.
+## **WHAT THAT MEANS FOR THE NEXT SEAT: do NOT conclude that prompts can no longer be edited.**
+## Eleven corrections landed on a live turn at 09:5x CT TODAY, under the same account, through the
+## same tool. Something about THIS turn's conditions differed. Ask Mr. E; it is a one-line
+## question and he is the only one who can clear it.
+##
+## **NOTHING IS BLOCKED BY THIS.** Every correction below is already live in the plan, which is
+## what the lanes actually read. The prompts are the durable copy, not the operative one.
+##
+## OWED ON THE :58 TEAM LEAD PROMPT (trig_01AiNVX4tT9xupV9p8b928fB) - the full replacement text was
+## composed this turn and is reproducible from this block plus the 10:58 block:
+##   1. **THE STANDING NOTE SAYING THE ART FIT REGISTER READS `RED / ok:false` IS FALSE**, as is
+##      its instruction "do not report that the art gate is green". The register reads `GREEN /
+##      ok true / rows_judged 46 / errors [] / unproved_cells [] / ok_shipped true` as of 11:0x.
+##      Add the second art gate: `tools/art/_backlamp_guard.py`, 44 bodies, two arms, VOIDs on
+##      roster disagreement, red-proved on a live slot by this seat.
+##   2. **THE BASELINE BLOCK**: 48 files / 2,359,235 chars / 12 `data/*.json` / 148 top-level keys
+##      / 58 zero-hit = 43 `_note_` + 15 non-note, membership unchanged. Series 52-53-56-57-58.
+##   3. **THE STEP 5 ID LINE**: B106, C-166, D100, H32, L74, S88, T5, U125, art on the back-lamp
+##      guard. And the art count line should read "46 rows: 44 live and two `_chibi` RETIRED BUT
+##      NOW FULLY MEASURED".
+##   4. **THE CLEAN-HOUR COUNT** reads "stood at 2 after the 08:58 firing"; it is **0**. The
+##      over-declaration line reads "seven hours"; it is **ten** and the pattern is stopped.
+##   5. **THE PLAN-SYNC FACE OF THE TWO-DOT/THREE-DOT TRAP** (`docs/WORK_PLAN.md +231/-0` on any
+##      lane whose merge base predates the last plan sync - prove it with the blob, set size 1).
+##   6. **THE LEDGER NUMBERING RULING** belongs in the Phase 2 block and in the STRUCK-FROM-NEEDS-
+##      MR-E list as item 11.
+##   7. **NEW, AND THE MOST IMPORTANT TWO:** (a) a STEP 0.5 - *read the project docs written since
+##      your last firing BEFORE writing any row, and act on them in the same run* - with the cost
+##      of not doing it written out; (b) **MR. E'S NO-DEFERRAL DIRECTIVE**, verbatim, which belongs
+##      in ALL SEVEN prompts and not only this one.
+##   8. The 10:16 mana/boss-UI directive as a HARD RULE ("UI does not eat the game view") and in
+##      the Phase 2 block.
+##   9. The hub publish GATE is authorized standing as of 11:28 CT and the "unearned gate" rule is
+##      overridden by the seat that owns it - **the gate is not the push**.
+##
+## OWED ON THE SIX LANE PROMPTS: the no-deferral directive, verbatim, in each. The chat bot's also
+## needs the `:50` claim row written into the prompt and not only the plan - it has now broken
+## three times from the plan alone.
+##
+## *** AND THE AUDIT DISCIPLINE STAYS: *** before adding to this list, check each carried item
+## against the prompt text the scheduler hands this seat verbatim at every firing. At 11:3x I
+## checked the ten the 09:58 block carried and THREE WERE ALREADY LANDED while a FOURTH had never
+## been wrong. A backlog carrying landed items teaches the next seat to skim it.
+
+## *** STANDING DIRECTIVE TO ALL SIX LANES - MR. E THROUGH THE SUPERVISOR, 21 NOV 2026, 11:3x CT.
+## *** DELIVERED LIVE. IT BINDS EVERY LANE FROM THE MOMENT IT IS READ AND IT OUTRANKS EVERY ROW
+## *** IN EVERY BLOCK BELOW IT. IT IS NOT A SUGGESTION ABOUT PACE. ***
+##
+## HIS WORDS, RELAYED WHOLE BECAUSE PARAPHRASING A DIRECTIVE IS HOW ONE GETS SOFTENED:
+##
+##   "Directive from Mr. E through the supervisor: stop deferring work that can be done now.
+##    When a row gives you something to do, do it in that firing. Do not write 'carried to next
+##    cycle,' do not recommend and wait, do not route a question up when you already have the
+##    information to answer it. A lane that stands down on a lock or yields to another lane's
+##    window is doing the right thing. A lane that has clear work, no blocker, and pushes it to
+##    the next hour is not.
+##    If your harness found a fault, fix it in the same run - do not log it for later. If a
+##    supervisor ruling answers your question, act on it - do not re-ask it. If your row says
+##    build something and the files are on main, build it - do not scope it and stop.
+##    The fleet runs 24 hours. Mr. E does not. Every hour a lane defers clean work is an hour he
+##    paid for and got nothing from. Deliver or stand down with a reason. There is no third
+##    option."
+##
+## WHAT IT MEANS IN PRACTICE, SO NO LANE HAS TO GUESS:
+##   - **"CARRIED TO NEXT CYCLE" IS NO LONGER AN ACCEPTABLE LINE IN A PROGRESS ENTRY** when the
+##     work was clear and nothing blocked it. Write what you built, or write what blocked you.
+##   - **A SCOPE IS NOT A DELIVERY.** "I read the files and here is what I would do" on work
+##     whose files are already on main is the shape this directive is aimed at. Scope and build
+##     in the same firing.
+##   - **A FAULT YOUR OWN HARNESS FOUND IS FIXED IN THE RUN THAT FOUND IT**, not filed. Fixing a
+##     broken instrument has never been a new item and never needed anyone's permission.
+##   - **DO NOT ROUTE UP WHAT YOU CAN ANSWER.** Check the project docs and the plan first: a
+##     question that already has a ruling is answered, and re-asking it costs an hour.
+##   - **STANDING DOWN IS STILL CORRECT AND IS STILL A DELIVERY** - on a live lock, inside
+##     another lane's window, or genuinely dry. **Mr. E named this himself and it is protected.**
+##     Say WHY in one line. What is not protected is having clear work and leaving it.
+##   - **IT DOES NOT LICENCE RUSHING A GATE OR SKIPPING A VERIFICATION.** "Deliver" means deliver
+##     something proved. A green reported without its verdict line is not delivery, it is the
+##     other failure this house spends its time catching. Split a long job across firings with a
+##     running total - that is delivering, not deferring.
+##
+## **AND I AM THE FIRST SEAT IT LANDS ON, BECAUSE I AM THE ONE IT WAS AIMED AT.** I carried a
+## ledger question for three firings after it was ruled on, and I handed two lanes a free pick
+## while a live directive from Mr. E sat unread in the project. The addendum below is me doing
+## in this turn the work I should have done at 10:58. **EVERY SEAT IN THIS CHAIR INHERITS THE
+## DUTY: read the project docs written since your last firing BEFORE you write a row, and act on
+## what you find in the same run.**
+
+## ADDENDUM - WRITTEN 11:3x CT, 21 NOV 2026, ON A LIVE TURN WITH MR. E. NOT PART OF THE 10:58
+## FIRING'S OWED WORK AND I CLAIM NO CREDIT FOR IT THERE. **BINDING ON EVERY LANE FROM THE
+## MOMENT IT IS READ, INCLUDING THE HUD AT 11:52 AND THE GAME BUILD AT 12:07.**
+## *** THIS ADDENDUM SUPERSEDES THE HUD AND GAME BUILD ROWS IN THE 10:58 BLOCK BELOW. ***
+##
+## *** WHY IT EXISTS: I MISSED THREE RULINGS THAT WERE SITTING IN THE PROJECT, AND MR. E HAD TO
+## *** TELL ME TO READ THEM. HIS WORDS, 11:3x CT: "Stop carrying questions that already have
+## *** answers sitting in the project docs... If a question has a supervisor doc answering it, it
+## *** is answered. Act on it." HE IS RIGHT AND THE COST WAS REAL.
+##   - **THE WORST OF IT: A LIVE DIRECTIVE FROM MR. E HIMSELF, POSTED 10:16-10:19 CT, WHICH SAYS
+##     IN ITS OWN LAST LINE "Team Lead: Write the rows."** I did not read it and at 10:58 I handed
+##     BOTH affected lanes a free-pick row instead. The HUD and the game build each lost an hour
+##     they could have spent on work Mr. E had already asked for. **A free-pick row handed to a
+##     lane that has a directive waiting is not a neutral act - it is me telling the lane the
+##     directive does not exist.**
+##   - The ledger ruling was made at **06:38 CT** and published in the 08:37 CT overnight doc. I
+##     carried it as an open question at 08:58, 09:58 AND 10:58 - **three firings and six hours
+##     after it was answered** - each time writing "Recommendation: confirm..." about a thing
+##     already confirmed. **Asking for a ruling that exists is not caution, it is not reading.**
+##   - **THE STANDING DUTY I AM ADDING TO MY OWN JOB, AND THE NEXT SEAT INHERITS IT: READ THE
+##     PROJECT DOCS WRITTEN SINCE YOUR LAST FIRING BEFORE YOU WRITE A SINGLE ROW.** The supervisor
+##     and Mr. E both post there and neither of them pushes to a branch. A ruling in a doc I have
+##     not opened is, from the lanes' side, indistinguishable from no ruling at all - and I am the
+##     only seat whose job is to carry it from there into the plan.
+##
+## =====================================================================================
+## 1. MR. E'S DIRECTIVE OF 10:16-10:19 CT - MANA AND BOSS UI OFF THE GAME VIEW.
+##    **THIS IS MR. E'S OWN, SO IT IS NOT A FREEZE VIOLATION; IT IS THE HIGHEST-PRIORITY OPEN
+##    WORK IN THE HOUSE AND IT OUTRANKS EVERY FREE PICK AND EVERY PHASE 2 SYSTEM.**
+##    His reasoning, verbatim: **"or else we would see mana from every magic user taking up the
+##    screen."** The fault is that the current UI does not SCALE - one caster looks fine, six do
+##    not. Read every row below through that lens rather than as four separate cosmetic asks.
+##
+## - **HUD LANE - THREE REMOVALS. THIS IS YOUR ROW UNTIL IT IS DONE; IGNORE THE FREE-PICK ROW
+##   THE 10:58 BLOCK GAVE YOU, WHICH I WROTE WITHOUT HAVING READ THE DIRECTIVE.**
+##   (a) **THE FLOATING MANA PANEL COMES OFF THE GAME VIEWPORT.** The box reading
+##       "Mana / DawnCleric 48/54" is removed. Mana then lives in ONE of two places and
+##       **MR. E LEFT THE CHOICE OPEN, SO IT IS A REAL CHOICE AND NOT MINE TO PRE-EMPT**:
+##       **Option A** - on the character sheet, in the HUB only, never on the game view;
+##       **Option B** - a small bar above the caster's head, lined up with their floating health
+##       bar. **Option B has a game-build half** (see below); Option A does not and is entirely
+##       deliverable by you and the hub. **Say which you are building and why, in writing, before
+##       you build it** - if you pick B, the game build has to move with you.
+##   (b) **THE "NOW FIGHTING" CARD AND THE LARGE BOSS NAME/HP BANNER COME OFF AS FLOATING
+##       PANELS.** The boss name goes over the boss's head like any other nameplate (game build
+##       half). **IF A BANNER IS KEPT AT ALL IT IS A THIN STRIP FLUSH WITH THE TOP BAR** - Mr. E
+##       named his own reference: the slim `DIRECTOR | The Rattling Host` bar already in the
+##       layout. **A floating card is what is being removed; do not replace it with a smaller
+##       floating card.**
+##   (c) **THE BOSS INFO CARD COMES OUT OF THE IN-GAME CHRONICLE.** ("The Rattling Host / Lord of
+##       floor 5. A ...") It eats roughly half the Chronicle's width and leaves room for one
+##       event at a time. **The in-game Chronicle is for EVENT TEXT ONLY.** The boss info is not
+##       lost: the supervisor confirmed at 10:19 CT that the hub page already carries a full
+##       Chronicle section with history, filtering and per-hero chronicle lines on the character
+##       sheets (`app.js` from line 1531, section `chronicle` of the 13-section layout).
+##       **VERIFY THAT FOR YOURSELF BEFORE YOU DELETE ANYTHING** - the whole argument that this
+##       removal costs nothing rests on the hub already having the information, and that is a
+##       claim about a file, which means it is checkable.
+##   (d) **IT APPLIES TO EVERY SCREEN LAYOUT, NOT THE DEFAULT VIEW ONLY.** The quad view (2x2
+##       panes) is the case that cannot afford large panels at all; prove your removals at the
+##       quad view as well as at 100% and 150%.
+##   **AND YOUR OWN CARRIED ITEM IS NOW CLOSED BY THIS DIRECTIVE, SO DROP IT:** the hostile
+##   60-char Chronicle line you were going to sample over its arrival was a symptom of the
+##   Chronicle having half its width taken. Fix the cause. If you still want the measure
+##   afterwards, take it after (c) lands and it will mean something different.
+##
+## - **GAME BUILD LANE - TWO HALVES, AND THE SECOND IS CONDITIONAL. THIS SUPERSEDES YOUR
+##   FREE-PICK ROW IN THE 10:58 BLOCK.**
+##   (a) **THE BOSS NAME BECOMES A NAMEPLATE OVER THE BOSS ENTITY'S HEAD**, like any other
+##       entity nameplate. This is yours outright and does not wait on the HUD.
+##   (b) **ONLY IF THE HUD PICKS MANA OPTION B:** a small mana bar above each caster's head,
+##       beside the existing floating health bar. **DO NOT BUILD THIS ON SPECULATION.** Wait for
+##       the HUD to say in writing which option it is building. If it picks A, (b) does not
+##       exist and you have lost nothing.
+##   **AND THE SCALING TEST IS THE ACCEPTANCE TEST FOR BOTH HALVES, BECAUSE IT IS THE WHOLE
+##   POINT OF THE DIRECTIVE: prove it with SIX casters on screen and a lord, not one.** A
+##   nameplate scheme that reads cleanly with one caster and turns the screen to soup with six
+##   has failed Mr. E's actual complaint while passing every screenshot anyone would think to
+##   take. Take the ugly frame on purpose.
+##
+## - **WHAT THIS DIRECTIVE SUPERSEDES, SO NOBODY RE-LITIGATES IT:**
+##   * The supervisor's 02:39 CT "NOW FIGHTING banner yield at 150%" ruling is **MOOT** - the
+##     banner is being removed, so the yield question has no subject.
+##   * The Chronicle-at-150% taste call that was routed to Mr. E is **WITHDRAWN** - the space
+##     problem was the boss card and the mana panel, and (a) and (c) remove both.
+##
+## =====================================================================================
+## 2. THE LEDGER QUESTION IS CLOSED. RULED 06:38 CT, RE-STATED 11:28 CT. **I AM NOT ROUTING IT
+##    UP AGAIN AND NEITHER IS THE NEXT SEAT.**
+##    **Mr. E's 18 Nov 16:58 directive numbering IS AUTHORITATIVE:**
+##      **System 6 = weapon variety. System 7 = armour variety. System 8 = shield variety.
+##      System 9 = loot on the ground.**
+##    **The Master Vision's original 6/7/8 - crystal drops, chests by rarity, mimics - ARE NOT
+##    DROPPED.** They are real items that take the next free numbers in the 5-80 range when the
+##    fleet reaches them. **No lane is or ever was blocked on this.** Every "FOR THE SUPERVISOR"
+##    ledger paragraph below this line, in every block, is **SPENT** - do not copy one forward.
+##
+## =====================================================================================
+## 3. THE HUB PUBLISH GATE IS AUTHORIZED. **RUN IT AT THE 11:58 FIRING, UNPROMPTED.**
+##    Authorized by the supervisor at 11:28 CT - "I am authorizing Team Lead to run the full
+##    publish gate unprompted at the next :58 sweep... Run the gate, bring me the result, and I
+##    will authorize or block the publish based on what the gate finds" - and relayed live by
+##    Mr. E at 11:3x CT: "I've authorized the full gate. Run it at your next :58 and bring the
+##    result. Ten hours of 'recommendation: still not yet' on a procedural hold is enough."
+##    **THE STANDING RULE THAT A GATE IS UNEARNED WITHOUT A LANE'S READY-TO-PUBLISH CLAIM IS
+##    OVERRIDDEN FOR THIS RUN, BY THE SEAT THAT OWNS THE RULE.** The hub lane still does not
+##    publish and still does not need to claim anything.
+##    **AND THE GATE IS NOT THE PUSH.** The supervisor kept the publish decision explicitly:
+##    run it, report it, stop. **DO NOT PUSH gh-pages on the strength of a green gate** - take
+##    that to the supervisor and wait, exactly as the charter says.
+##    **WHAT THE 11:58 SEAT RUNS, ALL OF IT, BY ITS OWN HAND:** `el()` only and no `innerHTML`
+##    on any snapshot value; no snapshot value used as a URL/src/href/style; strict CSP intact,
+##    proved the cheap way by trying to inject an inline `<style>` with the browser's own API and
+##    confirming the page REFUSES it citing `style-src 'self'`; the six state checks
+##    (`?state=empty`, `?state=fail`, `?state=stale`, `?mock=chronicle`, `?mock=crowd`,
+##    `?open=1`); a hostile name rendering as literal text; **and LOOK AT A SCREENSHOT** - you
+##    have Chromium and Playwright in your own container, so stage `web/index.html`, `app.js` and
+##    `style.css` and render it. **Say out loud that a `file://` render carries no snapshot data,
+##    so your numbers will not equal the lane's.**
+##    **AND MEASURE THE DELTA FRESH RATHER THAN QUOTING IT.** As of 11:1x CT: `gh-pages`
+##    `05ac2679`, tree `9ca8051e`, pushed 19 Nov 20:06 CT; `origin/hub:web` `02257b2f`
+##    (== `origin/main:web`); 3 files / +59 / -1. **Two seats have now copied this split out of
+##    a paragraph warning them not to. Run the numstat.**
+##
+## =====================================================================================
+## 4. FOR THE SUPERVISOR - THE CHATBOT/HUD TRIGGER YOU ARMED HAS FIRED.
+##    Your 08:37 CT ruling 6: "If it happens a third time after the plan row, I will adjust the
+##    chatbot's cron schedule. Watching." **IT HAPPENED A THIRD TIME AT 10:51:30 CT** - the chat
+##    bot claimed ninety seconds into the HUD's :52 window, held four minutes, and the HUD stood
+##    down and lost the cycle. The yield rule was NOT broken: the lock was genuinely free (QA
+##    IDLE 10:42:03), so the claim was legal and the stand-down was correct. **The plan row is
+##    what failed, and the plan row is mine.** It held at 08:45 and 09:47 and broke at 10:51.
+##    **Recommendation: adjust the cron as you said you would** - the chat bot fires at :45 and
+##    needs about five minutes, so moving it earlier (:40) buys the margin without shortening its
+##    work. I have re-stated the `:50` row to the lane in the 10:58 block and will keep enforcing
+##    it, but a row that needs three reminders in five hours is a schedule problem wearing a
+##    discipline costume, and the schedule is the thing you can actually change.
+
+## TAKE THIS NEXT - THE 10:58 CT FIRING, 21 NOV 2026 (machine clock read 11:0x CST while
+## writing; same day, no midnight rollover. The 10:58 firing and the 11:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 BLOCK. ***
+##
+## SIX MERGES, main is 78635330. **FOUR TICKED, TWO CORRECTLY NOT TICKED (the hub's standing
+## check - nothing shipped in `web/`; the HUD - a stand-down, nothing to tick).** FOUR root
+## PROGRESS.md conflicts (content, hub, hud-ui, chatbot), both sides kept, 3 marker lines dropped
+## per conflict by a state machine, 0 base sections.
+## **Residuals counted with the EXACT four shapes** (`^<<<<<<< `, `^=======$`, `^>>>>>>> `,
+## `^|||||||`): ZERO in root PROGRESS.md - the file that actually conflicted - and ZERO over the
+## whole tree by `git grep` on all four shapes.
+## **THE STRONGER ASSERTION, AND IT IS THE ONE I ACTED ON: `diff --numstat 2c95f348 HEAD` reads
+## +114/-0 on PROGRESS.md. ZERO LINES REMOVED**, 14,693 -> 14,807 lines. **And I did not let a
+## line count stand as the proof:** for EVERY lane I took the set of non-blank lines it added
+## over its own merge base and checked each one is present in merged main - **laptop 9, content
+## 4, hub 6, hud-ui 2, art 0, chatbot 74, and ZERO missing from main on all six.** The 114-vs-95
+## gap is blank separators, which a line count counts and a set does not.
+##
+## TICKED THIS HOUR (four):
+##   - **ART - THE BACK-LAMP GUARD IS BUILT, AND THE FIT REGISTER PRINTS `GREEN / ok: true` FOR
+##     THE FIRST TIME IN DAYS. BOTH THINGS MY 09:58 ROW ASKED FOR, IN ONE RUN.**
+##     (1) `tools/art/_backlamp_guard.py` re-reads all 44 shipped bodies from the PNGs - no
+##     Blender - on two arms: back/side chromaticity distance from the front view at or under
+##     **0.1550**, and at least **300** ground pixels per view.
+##     **I DID NOT TAKE THE VERDICT. I RED-PROVED THE INSTRUMENT MYSELF.** I built a scratch
+##     root of symlinks to the real renders, dropped `beadle_world`'s three views into the LIVE
+##     `beadle` slot, monkeypatched `ROOT`/`FIT` and ran the lane's own `main()`. It returned
+##     `RED ok=False audited=44 red=['beadle']` and named body, view and number:
+##     `back: chroma 0.20386 from front, over 0.1550 - reads as a second lamp`, plus three
+##     `0 ground px` faults. **The arm can go red on a live slot, and it still audited 44.**
+##     **AND I RE-MEASURED THE POPULATION WITH MY OWN INSTRUMENT, NOT THE LANE'S** - my own numpy
+##     mean-chromaticity at MY alpha threshold of 0.5 where art uses 0.9, so the absolute numbers
+##     are NOT art's and I say so: `beadle_world` **0.14913** against `beadle_even` 0.03535 and
+##     `beadle` 0.03525; worst live `boiler` **0.08910**, `greener` 0.05700; the repaired
+##     `ratcatcher` 0.03817 and `pitman` 0.04204 sit in the clean pack. **The separation
+##     reproduces at 1.67x where art's reads 1.71x. Direction and size reproduce; the absolutes
+##     do not and were never supposed to.**
+##     **AND I CHECKED THE ROSTER WITH AN AST PARSE, NOT A REGEX**, because the guard's own
+##     roster arm uses `^ORDER\s*=\s*...(\[[^\]]*\])$` and this house has published three wrong
+##     constants off flat regexes. `ast.parse` of `tools/art/minibosses.py` gives **44 ORDER
+##     entries, 44 unique**; `_fit_report.json` gives 46 pairs, 44 non-`_chibi`; **symmetric
+##     difference EMPTY.** The two authorities are genuinely independent and they agree, and the
+##     guard VOIDs rather than picks a side if they ever do not - which is the right shape.
+##     **AND I LOOKED, TWICE.** `_backlamp_look.png`: in the A/B's bad arm the whole back view
+##     turns warm brass against a cool front - a cast you can see on every material at once -
+##     while `boiler`, `greener`, `snuffer` and the `dyer` control hold the same neutral in all
+##     three views. **That is why the bar sits above the worst honest body and the picture, not
+##     the statistic, is the reason it is allowed to.** The lane also built a second statistic
+##     that should have separated a cast from a change of mix, **found it scored a known-clean
+##     body BETWEEN the two arms of its own A/B, and left it out of the shipped file.** An
+##     instrument that fails its own calibration and is thrown away is worth more than one that
+##     is kept and quietly trusted.
+##     (2) **THE TWO RETIRED `_chibi` CELLS ARE MEASURED, NOT REDEFINED** - and the lane picked
+##     the harder of the two options I offered it, on an unattended run, saying in writing that
+##     turning a red green by shrinking what `ok` covers was the worse one. One 7.9 s render pass.
+##     `_fit_report.json` now reads `verdict GREEN / ok true / rows_judged 46 / errors [] /
+##     unproved_cells [] / red_summary rows [] shipped_red [] retired_red [] ok_shipped true`.
+##     **I READ THE ROWS MYSELF AND I NEARLY PUBLISHED A FALSE REFUTATION OF THEM - SEE MY OWN
+##     FAULTS BELOW.** Both cells now carry all three views with `proves: true` and `seen: 1.0`.
+##     **AND I LOOKED AT A SHIPPED PNG, NOT ONLY THE CONTACT SHEET** (`snuffer_chibi/
+##     hero_back.png`): pale ground plane, contact shadows under both figures, hero and creature
+##     clear of one another. The contact sheet is composited on a dark backdrop and shows no
+##     floor at all, so the sheet alone would NOT have proved the ground arm - the shipped frame
+##     did. The lane's own criticism of both bodies (a mushroom that reads "lamp stand"; a dark
+##     cluttered mass) is accurate and is why they are retired, and it named them anyway.
+##   - **S87 (game build) - THE B103 ASK IS CLOSED BY WRITE-DOWN, WHICH WAS THE RIGHT CALL.**
+##     Five comment lines above `Gear.ARMOUR` at gear.gd:30. **I GREPPED FOR THE BEHAVIOUR, NOT
+##     THE CLAIM:** across `scripts/` + `web/` the ONLY non-comment reader of `Gear.ARMOUR` is
+##     `chatcmd.gd:2744`, the ARMOURY drift arm, exactly as the write-down says; `Roster.ARMOUR`
+##     is the till (roster.gd:183, and hp/ac at :337/:368). `tools/_l3_test.gd:22` reads it too -
+##     **tools/ is test code and is not the game, and the write-down's wording is right.** And
+##     the write-down does NOT over-claim: it says plainly that `Gear.WEAPONS` is different
+##     because `town.gd:4571` dresses the smithy stall from it. Keeping the table as the drift
+##     arm's second authority rather than deleting it is the correct outcome.
+##   - **B106 (chat bot) - THREE WORDING GUARDS BECOME TWO-AUTHORITY ARMS, AND THE 2 THAT USED TO
+##     LIVE IN `chatcmd.gd` IS GONE.** The arms now rebuild the engine's burn out of the engine's
+##     own constants. **I VERIFIED THE CHAIN AND THEN I HAND-SIMULATED ALL THREE ARMS AGAINST THE
+##     REAL STRING, BECAUSE THE LANE COMMITTED NO LOG** (see its row below). `Delve.OIL_PER_HEAD
+##     := 0.5` and `OIL_FLOOR_MIN := 1` at delve.gd:336/:337, **READ at :161** - I grepped the
+##     read. Against the live `oil`.what ("one flask lights a floor for two delvers. A floor
+##     costs a flask at least"): `o_said` = 2 -> `o_burn = maxi(1, ceil(2*0.5))` = **1**, so the
+##     rate arm passes; `o_next = maxi(1, ceil(3*0.5))` = **2 > 1**, so the new CEILING arm
+##     passes; the floor clause parses "a" in front of "flask" to **1 == OIL_FLOOR_MIN**, so the
+##     floor arm passes. **AND ALL THREE RED PATHS ARE REACHABLE BY INSPECTION** - "three
+##     delvers" fires OIL DELVERS, `OIL_PER_HEAD 0.25` fires OIL DELVERS CEILING, a raised
+##     `OIL_FLOOR_MIN` fires OIL FLOOR MIN. **The CEILING arm is the real content here:** the old
+##     arm checked only that the engine was not stingier than the sentence, so an engine that got
+##     cheaper would have left the published rate quietly understating the light and passed. The
+##     lane named that as the same half-truth class as B102's pooling fault, and it is.
+##   - **C-165 (content)** - counted off the ref by parsing BOTH versions, not by reading a hunk:
+##     epitaphs 924 -> 936, descend 559 -> 565, cleared 544 -> 550 = **+12 / +6 / +6** exactly as
+##     claimed. **936/936, 565/565, 550/550 unique, 0 blanks, 0 entries lost, no key dropped**,
+##     and exactly one new top-level key, `_note_c165`.
+##
+## NOT TICKED, AND BOTH CORRECTLY SO:
+##   - **HUB** - a standing check with nothing shipped in `web/`; there is no item to tick and
+##     the lane claimed none. **I re-ran its security greps myself rather than taking them:**
+##     `innerHTML` only at app.js:255 and :301, both page-owned literals; ZERO `outerHTML` /
+##     `insertAdjacentHTML` / `document.write` / `eval(` / `new Function` outside comments; CSP
+##     meta present (1); `node --check app.js` OK; and index.html:49's sentence still matches the
+##     code it describes. `origin/hub:web` == `origin/main:web` == `02257b2f`. **No READY TO
+##     PUBLISH claim, so no publish gate was run and none was owed.**
+##   - **HUD** - a stand-down, written up, with no claim and no edits. That is the delivery under
+##     the yield rule and it is the right behaviour. **The cost of it is mine, not the lane's.**
+##
+## *** MY OWN FAULTS FIRST, AND THE FIRST ONE IS THE EXPENSIVE KIND. ***
+##   1. **I ALMOST PUBLISHED A REFUTATION OF ART'S CENTRAL CLAIM OUT OF MY OWN MISREADING.** Art
+##      wrote that `proving` is now 3 of 3 views on both `_chibi` rows where it read `null`. I
+##      queried `pairs[k]['proving']`, got `None` on both, and had a sentence forming that said
+##      the lane's claim was false. **`proving` IS NOT A PER-ROW KEY AND NEVER WAS** - the rows
+##      carry `visibility.{front,side,back}.proves`, and the top-level key is `min_proving`. I
+##      had asked the file for a key that exists on NO row, live or retired, and a key that
+##      exists nowhere returns `None` for everyone. **The shape of this is exactly the fault this
+##      house keeps re-learning: a name search that finds nothing is not proof the thing is
+##      missing.** I caught it by printing the whole row instead of the key I expected. **Printing
+##      the object rather than the field you assumed is the cheap habit that would have saved
+##      three of the seats this prompt warns about.**
+##   2. **I STARVED THE HUD FOR THE THIRD TIME TODAY AND THE SCHEDULE IS MINE.** See the lock
+##      section. The chat bot broke the `:50` row I wrote; but a row that holds for two hours and
+##      breaks in the third is a row, not a fix.
+##
+## LOCK DISCIPLINE - AND THE ONE REAL FAULT THIS HOUR IS AGAINST A ROW OF MINE, NOT THE PROTOCOL.
+##   Game build 10:08:30 -> 10:14:05 (5m35s, cap 10:33, declared 10:30 - **cap computed FIRST and
+##   written into the line, the ninth clean hour of that habit; the over-declaration pattern is
+##   stopped and I will not charge it again**). QA tester 10:41:45 -> 10:42:03 (18s). Chat bot
+##   10:51:30 -> 10:55:40 (4m10s, cap 11:16, declared 10:58). No two lanes held at once, no stale
+##   lock, no future stamp, nothing cleared on age.
+##   **THE YIELD RULE WAS NOT BROKEN.** The lock was genuinely free at 10:51:30 - the QA tester's
+##   IDLE stands at 10:42:03 - so the chat bot's claim was legal, and the HUD standing down at
+##   10:52 over a live RUNNING line was exactly right.
+##   **WHAT BROKE IS THE `:50` ROW I WROTE AT 07:58, AND THE HUD PAID FOR IT A THIRD TIME.** That
+##   row told the chat bot to claim by :50 with a finish inside :52. It held at 08:45 and again at
+##   09:47. **This hour the claim came at 10:51:30 - ninety seconds into the HUD's window - and
+##   the HUD lost its cycle at 06:52, 07:52 and now 10:52.** The lane had four minutes of work and
+##   fired at :45; claiming at :46 would have cost it nothing.
+##   **CLEAN-HOUR COUNT: RESET TO 0.** A starved lane breaks it, and the HUD was starved.
+##
+## DEAD-DATA AUDIT - merged tree `78635330`, 11:0x CT. **48 files** (47 `scripts/*.gd` + `web/
+## app.js`, NOT a recursive `web/**` glob) **/ 2,359,235 chars, 12 `data/*.json`, 148 top-level
+## keys. 58 zero-hit = 43 `_note_` + 15 NON-NOTE.** **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED
+## ASSET DIRECTORIES: ZERO off 34** (measured off `assets/` only; `renders/` is evidence output).
+## **THE NON-NOTE 15 AND ITS MEMBERSHIP ARE UNCHANGED** and I printed the list rather than the
+## count: `_gating`, `boss_floors`, `canon_silences`, `casing`, `chronicle_line`,
+## `lord_intros_alt`, `one_roll`, `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+## `promotion_line`, `technique`, `town_levels_for_the_desktop`, `unique_intros_alt`,
+## `word_order`. **THE SERIES: 52 (05:0x) -> 53 (06:58) -> 56 (08:58) -> 57 (09:58) -> 58 now.**
+## The raw total moved by exactly one, and that one is content's new `_note_c165`. **The 07:58
+## block's 81 stays struck.** NO LANE IS TO WIRE A `_note_` KEY and content is not to stop
+## writing them.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - **S87 ticked; I grepped every reader of `Gear.ARMOUR` myself and your
+##   write-down is accurate down to the `Gear.WEAPONS` caveat.** The B103 ask is now closed in
+##   both directions and nothing of yours is open. Your cycle, your pick, from Systems 5-80.
+##
+## - **CONTENT** - C-165 ticked, parsed both versions, checked uniqueness and losses. Free
+##   C-cycle, your own pick. **43 of this hour's 58 zero-hit keys are your `_note_` keys and not
+##   one of them is a defect** - keep writing them.
+##
+## - **ART** - **both things my 09:58 row asked for, delivered in one run, and I red-proved your
+##   guard myself rather than reading your verdict.** Nothing of yours is open and the register
+##   prints its real verdict again. **Your cycle, your pick - you may invent a miniboss** (the
+##   only lane that may invent work). Two small housekeeping notes, neither a charge: (a)
+##   `_chibi_measure.log` landed at the REPOSITORY ROOT rather than under `renders/`; put the
+##   next one beside its pictures. (b) If you ever do re-open the `_chibi` pair, the register now
+##   judges 46 rows green - **say so explicitly in the same breath, because a future seat reading
+##   `rows_judged 46` will no longer have the retired-red caveat to warn it.**
+##
+## - **HUB** - nothing shipped in `web/`, your standing check verified exactly as written, and I
+##   re-ran all four security greps plus `node --check` myself. `origin/hub:web` ==
+##   `origin/main:web` == `02257b2f`. Own cycle on your three files. **Do not publish** - the
+##   delta is with the supervisor for a TENTH hour. If you touch `web/`, say READY TO PUBLISH
+##   plainly and I will run the full gate.
+##
+## - **HUD** - **you stood down correctly over a live RUNNING line and wrote it up; that is the
+##   delivery and I am recording it as one. THE LOST CYCLE IS MY SCHEDULE'S FAULT, NOT YOURS**,
+##   and it is the third time. Two things when you next get the window:
+##   (1) the own-cycle item you named yourself and have now carried two hours: sample that
+##   hostile 60-char Chronicle line over its full arrival (every 10 frames) at 150% and assert
+##   its bottom stays inside the vellum - **one measure before any change**, which is the right
+##   order and why I am not pushing it.
+##   (2) **COMMIT THE LOG when you next ship.** Nothing is owed this hour - a stand-down has no
+##   log - but U124 and U125 both had to be verified out of W2's working tree.
+##
+## - **CHAT BOT** - **B106 ticked, and the CEILING arm is the best thing in it: you noticed that
+##   the old arm would have passed an engine that got CHEAPER and left your own published rate
+##   understating the light. That is catching a half-truth in your own shipped work.** Two
+##   things, and the first is not optional:
+##   (1) **CLAIM BY :50. YOU BROKE THIS ROW THIS HOUR AND THE HUD LOST ITS THIRD CYCLE OF THE
+##   DAY.** You fired at :45, claimed at **10:51:30** and held four minutes; claiming at :46
+##   would have cost you nothing and the HUD would have had its window. The yield rule was NOT
+##   broken - the lock was free and your claim was legal - **this is a row of mine, and it held
+##   at 08:45 and 09:47 before this.** Keep it.
+##   (2) **COMMIT YOUR GATE LOG.** `origin/chatbot` carries only `PROGRESS.md` and `chatcmd.gd`
+##   this hour; there is no `b106` directory anywhere in R or W6, so the entire evidence for
+##   "parse 0/0, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK 32, six arms fired by name"
+##   is prose. **I ticked you on my own static re-derivation of all three arms against the real
+##   `oil`.what string and the real constants - not on your gate line** - and that only worked
+##   because this change happens to be statically checkable. Put the next one in
+##   `renders/cycles/b107/`.
+##
+## - (QA tester, not one of the six) - fired 10:41, headless parse RC=0, 0 error lines, 18 s, no
+##   `.gd` changed. Clean. **Still owed in writing, now SEVEN hours old (from 04:58):**
+##   acknowledge the 03:06 stale-lock clear, name which gates are windowed-only, and say where
+##   its declared `cap claim+12` comes from (the protocol's is +25).
+##
+## FOR THE SUPERVISOR (10:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured by me this hour, unchanged for a TENTH hour.**
+##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
+##      `origin/hub:web` `02257b2f`, identical to `origin/main:web`; difference **3 files /
+##      +59 / -1** (NOTES.md +9, app.js +46/-1, style.css +4). **I RAN THE NUMSTAT MYSELF rather
+##      than copying the split** - that copy-the-figure fault has happened twice in this house
+##      and both times in the paragraph warning against it. No READY TO PUBLISH claim this hour,
+##      so no publish verification was run and none was owed.
+##      **Recommendation: still not yet**, purely procedural - the gate is unearned until the
+##      lane claims it. **Standing offer, open since 08:58: say the word and I will run the full
+##      publish gate on the merged tree unprompted and bring you the result.**
+##   2. **THE LEDGER QUESTION (carried from 05:58, unchanged, nothing blocked).** The Master
+##      Vision doc numbers Phase 2 systems 6/7/8 as crystal drops / chests by rarity / mimics;
+##      the 18 Nov 16:58 directive renumbered 6/7/8 as weapon / armour / shield variety, which is
+##      what the fleet has used since. Both agree 9 = loot on the ground, and System 9 row (a) is
+##      LIVE on main. **Recommendation:** confirm the directive's numbering is authoritative and
+##      either re-enter those three at free numbers in the 5-80 range or say plainly they are
+##      dropped. A ledger decision, not a build decision.
+##   3. **FOR INFORMATION, NOT A DECISION: the art fit register now prints `GREEN / ok: true`.**
+##      It has read `RED / ok: false` for days on two retired `_chibi` rows. The lane measured
+##      them rather than retiring them, which was the honest of the two routes, and I red-proved
+##      its new back-lamp guard myself. **Every standing note in the fleet that says "the art
+##      gate is red, do not report it green" is now stale** - I have put it at the head of the
+##      prompt-correction backlog below.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 11:1x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once).
+## *** I MADE NO PROMPT-WRITE ATTEMPT THIS RUN AND I SAY SO PLAINLY. Settled 18 Nov: the gate is
+##   on the CALL, not on a field. Spending the call again is noise, not evidence.
+## *** AND I CUT THE LIST BEFORE ADDING TO IT. The 09:58 block carried TEN. **I checked each one
+##   against the prompt text the scheduler hands this seat verbatim at every firing, and THREE
+##   WERE ALREADY LANDED** - the `MB_NAME` 44/44/44 paragraph, the exact-four-marker-shapes
+##   paragraph, and the `data/*.json` glob paragraph are all in the prompt already - **and a
+##   FOURTH was never wrong**: the hub SHAs in the prompt (`05ac2679` / `9ca8051e` / 19 Nov
+##   20:06 CT / `02257b2f` / 3 files +59/-1) match what I measured today, exactly. **A backlog
+##   that carries landed items costs the next live turn its attention and teaches the seat after
+##   that to skim it.** SIX are genuinely owed:
+##   1. *** THE STANDING NOTE ON THE ART FIT REGISTER IS NOW FALSE AND IS THE MOST IMPORTANT
+##      ITEM HERE. *** The prompt says the register "reads `RED / ok:false` and has done for
+##      days, on two CARRIED unmeasured rows (`snuffer_chibi`, `tallyman_chibi`) that are
+##      RETIRED", and instructs this seat **"Do not report 'the art gate is green'"**. As of
+##      21 Nov 11:0x the register reads **`verdict GREEN / ok true / rows_judged 46 / errors []
+##      / unproved_cells [] / ok_shipped true`** - the two rows were MEASURED this hour, not
+##      retired away. **Strike the instruction.** The replacement fact: the register is green on
+##      46 rows, and `tools/art/_backlamp_guard.py` is a second, independent art gate that reads
+##      all 44 shipped bodies from the PNGs and goes RED on a drifted body - I red-proved it.
+##   2. **THE BASELINE BLOCK IS STALE.** Current, on merged tree `78635330`: **48 files /
+##      2,359,235 chars, 12 `data/*.json`, 148 top-level keys, 58 zero-hit = 43 `_note_` + 15
+##      non-note.** The non-note 15 and its membership are UNCHANGED. Unread live data keys
+##      ZERO; unreferenced asset directories ZERO off 34.
+##   3. (carried from 09:58, still owed) the prompt's inherited claim that **"no back render in
+##      the tree is lit by more than one lamp"** is **REFUTED for 41 of 44 and was true of only
+##      three bodies, all three now repaired.** Strike it. `tools/art/minibossfit.py` now
+##      defaults `EVENLIGHT=1` and `GROUND=1`; the opt-outs are `--worldlight` / `--noground`.
+##   4. **THE STEP 5 ID LINE IS BEHIND.** As of this hour: **B106, C-165, D100, H32, L74, S87,
+##      T5, U125**, art on the back-lamp guard, hub ID unchanged.
+##   5. **THE CLEAN-HOUR COUNT IN THE PROMPT SAYS "STOOD AT 2 AFTER THE 08:58 FIRING". It is 0**
+##      - reset at 09:58 by the HUD's self-caught future stamp, and reset again this hour by the
+##      HUD being starved. **And the over-declaration line should read NINE clean hours, not
+##      seven as of 08:58:** every game-build lock line since 02:08 carries "claim HH:MM, cap
+##      claim+25 = HH:MM" with the cap computed first.
+##   6. **A NEW FACE OF THE TWO-DOT/THREE-DOT TRAP, WORTH ADDING BESIDE THE SIBLING TRAP.** A
+##      three-dot numstat shows `docs/WORK_PLAN.md +231/-0` on any lane whose merge base predates
+##      main's last plan sync - it reads as two lanes editing the plan and they did not. **It hit
+##      art and hud-ui again this hour.** Prove it with the blob rather than asserting it:
+##      `git rev-parse origin/<ref>:docs/WORK_PLAN.md` on all seven refs and assert the set size
+##      is 1.
+
 ## TAKE THIS NEXT - THE 09:58 CT FIRING, 21 NOV 2026 (machine clock read 10:0x CST while
 ## writing; same day, no midnight rollover. The 09:58 firing and the 10:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 BLOCK. ***

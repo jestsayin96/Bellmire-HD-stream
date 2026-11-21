@@ -987,7 +987,13 @@
     "The count is said aloud, once. Then the dark.",
     "The pack is checked strap by strap.",
     "Someone hums at the top of the stair. It fades below.",
-    "The torch is held low. The stair is steep."
+    "The torch is held low. The stair is steep.",
+    "The rope is coiled over a shoulder. The stair is not.",
+    "A lamp is trimmed. The wick is short.",
+    "Boots are laced twice. Then the door.",
+    "The bread is eaten at the threshold. No point carrying it down.",
+    "The last of the daylight is left on the step.",
+    "A cough, a nod, and the first stair."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1479,7 +1485,13 @@
     "The gate guard is nodded to. He nods back.",
     "The oil flask is empty. It is put away.",
     "Somebody sits on the step and does not get up yet.",
-    "The slate is wiped. The hour is noted."
+    "The slate is wiped. The hour is noted.",
+    "The cloth is wrung out. The water runs dark.",
+    "Water is passed round. Nobody speaks.",
+    "The dust settles. The door stays open.",
+    "A bootprint is counted. It is not ours.",
+    "The lamp is turned up. The way home is plain.",
+    "Somebody laughs, once, and stops."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4422,7 +4434,19 @@
     "Left the gate latched. It is still latched.",
     "Sharpened the whole watch's blades. Never his own.",
     "Counted the sheep twice. Came up one short himself.",
-    "Told the children to go home before dark. Went on alone."
+    "Told the children to go home before dark. Went on alone.",
+    "Kept the ledger straight. Kept the lamp lit.",
+    "Patched every roof on the lane but his own.",
+    "Brought the water up the hill. Twice a day. For years.",
+    "Told the truth about the weather. Was not thanked.",
+    "Turned the bread before it burned. Turned back for the child.",
+    "Walked the wall at dusk. Walked it once more.",
+    "Mended the net. Did not mend the stair.",
+    "Paid what was owed. Owed nothing at the end.",
+    "Taught the apprentice to tie a knot. It held.",
+    "Rang the bell on time. Went down on time.",
+    "Shared the last of the cheese.",
+    "Said he'd be back for supper."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14031,5 +14055,6 @@
   "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
-  "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
+  "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
+  "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
 }

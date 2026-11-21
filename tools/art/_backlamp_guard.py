@@ -76,7 +76,52 @@ not split, the verdict is VOID and no body is called green.
 import json, os, re, sys
 
 import numpy as np
-from PIL import Image
+# --- PNG READER WITH A FALLBACK, ADDED 21 NOV 2026 12:5x CT BY THE ART LANE ---
+# THE FAULT THIS FIXES IS MY OWN GATE FAILING CLOSED WITHOUT SAYING SO.
+# renders/art/minibosses/_tither_guard.log, committed beside the 45th body,
+# reads `RC=0` on the wrapper and then
+#     ModuleNotFoundError: No module named 'PIL'
+# because the guard was launched through BLENDER, and Blender ships numpy and
+# NOT PIL - the exact constraint this lane's own charter states in capitals.
+# So the second art gate did not fail red and did not fail green: it did not
+# RUN, and the wrapper's RC=0 made that look like a pass to anyone reading the
+# log tail. An instrument that cannot run is not a pass, and one that cannot
+# run while printing RC=0 is worse than one that is missing.
+# The shim below gives the same `Image.open(p).convert("RGBA")` surface off
+# bpy when PIL is absent, so the guard now runs under BOTH interpreters and
+# the RGBA bytes are identical either way (bpy pixels are float 0..1 in
+# bottom-up scanline order and are flipped and scaled back to uint8 here).
+try:
+    from PIL import Image                                    # noqa: F401
+except ModuleNotFoundError:                                  # pragma: no cover
+    import numpy as _np
+
+    class _BpyRGBA(object):
+        def __init__(self, arr):
+            self._a = arr
+
+        def convert(self, mode="RGBA"):
+            if mode != "RGBA":
+                raise ValueError("_BpyRGBA only serves RGBA, asked for %s" % mode)
+            return self
+
+        def __array__(self, dtype=None):
+            return self._a if dtype is None else self._a.astype(dtype)
+
+    class Image(object):
+        @staticmethod
+        def open(path):
+            import bpy
+            img = bpy.data.images.load(str(path), check_existing=False)
+            try:
+                w, h = img.size
+                buf = _np.empty(w * h * 4, dtype=_np.float32)
+                img.pixels.foreach_get(buf)
+                a = buf.reshape(h, w, 4)[::-1]          # bpy is bottom-up
+                return _BpyRGBA((_np.clip(a, 0.0, 1.0) * 255.0 + 0.5)
+                                .astype(_np.uint8))
+            finally:
+                bpy.data.images.remove(img)
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _HERE)

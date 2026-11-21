@@ -1,0 +1,240 @@
+{
+ "what": "DISCARDED CANDIDATE ARM - pale-material fraction, front view vs back view, inside the creature's own alpha. Luminance > 0.55 on the shipped hero PNGs. NOT A GATE. Published as evidence that it does not separate.",
+ "why_discarded": "Built to ask 'is the feature that carries this body's fight readable from the FRONT, which is where the party stands'. It does not answer that. 27 of 46 bodies read more pale from behind and the median ratio is 1.10, so a back-heavy figure is the NORM, not a fault. The blower sits 5th at 3.03 among bodies nobody has criticised (leech 6.92, sluicekeeper 4.87, hurdleman 3.33, greener 3.11). It measures where the light-coloured material happens to be - the same 'change of mix, not a cast' confound the back-lamp guard already documents - and it would charge a clean body. An instrument that cannot separate is not an instrument.",
+ "measured_ct": "2026-11-21 13:3x CT",
+ "n": 46,
+ "median_ratio": 1.101,
+ "n_ratio_over_1": 27,
+ "bodies": {
+  "beadle": {
+   "front": 0.2279,
+   "back": 0.0997,
+   "ratio": 0.437
+  },
+  "bellman": {
+   "front": 0.5939,
+   "back": 0.6789,
+   "ratio": 1.143
+  },
+  "blower": {
+   "front": 0.0884,
+   "back": 0.2674,
+   "ratio": 3.025
+  },
+  "boiler": {
+   "front": 0.4391,
+   "back": 0.4851,
+   "ratio": 1.105
+  },
+  "comfitmaker": {
+   "front": 0.1376,
+   "back": 0.1889,
+   "ratio": 1.373
+  },
+  "cook": {
+   "front": 0.4369,
+   "back": 0.3111,
+   "ratio": 0.712
+  },
+  "dauber": {
+   "front": 0.2311,
+   "back": 0.2719,
+   "ratio": 1.177
+  },
+  "drillmaster": {
+   "front": 0.2595,
+   "back": 0.1521,
+   "ratio": 0.586
+  },
+  "drover": {
+   "front": 0.1489,
+   "back": 0.1533,
+   "ratio": 1.03
+  },
+  "dyer": {
+   "front": 0.0458,
+   "back": 0.0061,
+   "ratio": 0.133
+  },
+  "fenman": {
+   "front": 0.1291,
+   "back": 0.161,
+   "ratio": 1.247
+  },
+  "ferryman": {
+   "front": 0.3806,
+   "back": 0.417,
+   "ratio": 1.096
+  },
+  "fuller": {
+   "front": 0.2985,
+   "back": 0.2621,
+   "ratio": 0.878
+  },
+  "gaoler": {
+   "front": 0.0991,
+   "back": 0.2167,
+   "ratio": 2.187
+  },
+  "greener": {
+   "front": 0.1341,
+   "back": 0.417,
+   "ratio": 3.11
+  },
+  "hooper": {
+   "front": 0.2069,
+   "back": 0.1983,
+   "ratio": 0.958
+  },
+  "hurdleman": {
+   "front": 0.0454,
+   "back": 0.1514,
+   "ratio": 3.335
+  },
+  "jointer": {
+   "front": 0.1711,
+   "back": 0.2826,
+   "ratio": 1.652
+  },
+  "leech": {
+   "front": 0.025,
+   "back": 0.1729,
+   "ratio": 6.916
+  },
+  "loader": {
+   "front": 0.1995,
+   "back": 0.291,
+   "ratio": 1.459
+  },
+  "moulder": {
+   "front": 0.3339,
+   "back": 0.4468,
+   "ratio": 1.338
+  },
+  "paviser": {
+   "front": 0.4522,
+   "back": 0.2469,
+   "ratio": 0.546
+  },
+  "pitman": {
+   "front": 0.0576,
+   "back": 0.1357,
+   "ratio": 2.356
+  },
+  "porter": {
+   "front": 0.3761,
+   "back": 0.1389,
+   "ratio": 0.369
+  },
+  "pressman": {
+   "front": 0.0862,
+   "back": 0.1923,
+   "ratio": 2.231
+  },
+  "quartermaster": {
+   "front": 0.4367,
+   "back": 0.4147,
+   "ratio": 0.95
+  },
+  "rammer": {
+   "front": 0.0304,
+   "back": 0.0206,
+   "ratio": 0.678
+  },
+  "ratcatcher": {
+   "front": 0.3039,
+   "back": 0.3002,
+   "ratio": 0.988
+  },
+  "reeve": {
+   "front": 0.1856,
+   "back": 0.2052,
+   "ratio": 1.106
+  },
+  "relief": {
+   "front": 0.372,
+   "back": 0.2742,
+   "ratio": 0.737
+  },
+  "scraper": {
+   "front": 0.5066,
+   "back": 0.4759,
+   "ratio": 0.939
+  },
+  "scrapwright": {
+   "front": 0.2483,
+   "back": 0.271,
+   "ratio": 1.091
+  },
+  "sealer": {
+   "front": 0.0646,
+   "back": 0.039,
+   "ratio": 0.604
+  },
+  "sexton": {
+   "front": 0.2173,
+   "back": 0.0507,
+   "ratio": 0.233
+  },
+  "sluicekeeper": {
+   "front": 0.0836,
+   "back": 0.4071,
+   "ratio": 4.87
+  },
+  "snarer": {
+   "front": 0.2924,
+   "back": 0.4318,
+   "ratio": 1.477
+  },
+  "snuffer": {
+   "front": 0.1625,
+   "back": 0.2788,
+   "ratio": 1.716
+  },
+  "sower": {
+   "front": 0.5679,
+   "back": 0.0549,
+   "ratio": 0.097
+  },
+  "stackman": {
+   "front": 0.3513,
+   "back": 0.2838,
+   "ratio": 0.808
+  },
+  "stoker": {
+   "front": 0.1908,
+   "back": 0.1224,
+   "ratio": 0.642
+  },
+  "strickler": {
+   "front": 0.2949,
+   "back": 0.4486,
+   "ratio": 1.521
+  },
+  "tallyman": {
+   "front": 0.388,
+   "back": 0.65,
+   "ratio": 1.675
+  },
+  "tanner": {
+   "front": 0.3535,
+   "back": 0.5272,
+   "ratio": 1.491
+  },
+  "tapster": {
+   "front": 0.339,
+   "back": 0.3404,
+   "ratio": 1.004
+  },
+  "tither": {
+   "front": 0.0489,
+   "back": 0.0329,
+   "ratio": 0.673
+  },
+  "winder": {
+   "front": 0.314,
+   "back": 0.3737,
+   "ratio": 1.19
+  }
+ }
+}

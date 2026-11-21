@@ -13382,3 +13382,11 @@ Ran windowed 1920x1080: tools/_l74_test.gd (2 lines/s for 24 s, then 125% and 15
 Looked at: renders/cycles/l74/l74_u120_150.png - 2x2 panes, Chronicle scroll centred, 4 lines readable at 150% with the crit line on top and the x5 merge, pane labels and clock unclipped.
 Delivered: this verification line only. Next firing: re-read the lock; own cycle - hostile feed with 60-char names and mixed-width glyphs at 150% against the pane-label strips.
 Decision for Mr. E: none.
+
+U121 - 2026-11-21 05:5x CST - HOSTILE FEED + 60-CHAR / MIXED-GLYPH NAMES AT 100/125/150 AGAINST THE PANE-LABEL STRIPS: 40 CHECKS GREEN; ONE OPEN QUESTION ON THE CHRONICLE RIGHT EDGE. NO .gd OF MINE CHANGED
+Lock: read R's WORKING RUN_LOCK.txt, last line game build S82 IDLE 05:17:09; tasklist showed no Godot. One claim 05:53:13, expected finish 06:01, cap 06:08, RELEASED 05:54:41 (IDLE written, Godot empty).
+Item: WORK_PLAN HUD row of the 04:58 block (the cycle U120 named). New tools/_u121_hostile.gd (windowed, 2x2 + lord fight): four heroes named with a 60-char Latin run, a 60-char katakana run, Cyrillic + 40 W, and 60 'i'; 12 hostile feed lines; at each scale every visible pane label must sit inside its own pane, not touch its kind chip, not touch the Chronicle; Chronicle must stay on screen.
+Result: U121_DONE checks=40 fails=0, 0 Parse Error / SCRIPT ERROR (headless parse + windowed). Labels trim with an ellipsis exactly when the text is wider than the pane allows (bits pane 'iiii...' trimmed at 125 and 150, never past the 960 px pane). The Mana plate's katakana and Cyrillic names render and clip inside the plate.
+LOOKED AT renders/cycles/20261121_u121/host_s150_phone480.png: four pane labels clean and inside their panes, kind chips unclipped, clock unclipped. OPEN: inside the Chronicle vellum two ambient lines read "The wet is wa" / "is the worst o" - cut at the right edge of the scroll. One frame cannot tell a half-revealed line from a real clip; no check of mine covers it.
+Next firing: measure that (does a line's drawn width exceed the Chronicle's inner rect at 150% in 2x2?) before touching feed_hud.gd.
+Decision for Mr. E: none.

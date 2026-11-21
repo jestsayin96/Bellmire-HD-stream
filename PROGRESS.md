@@ -13424,3 +13424,11 @@ Decision for Mr. E: none.
 
 ## U-standdown 2026-11-21 10:52 CST - STAND-DOWN (no Godot claim)
 RUN_LOCK last line (R working copy) at 10:52:39-06:00: RUNNING 10:51:30 chat bot B106 (expected finish 10:58, cap 11:16), no IDLE from that lane after it. Process check: no Godot alive at that instant, but the lane runs short gates with gaps, so I treated the hold as live per the YIELD RULE and did not claim over it. No .gd edited, no engine launched. Next firing (11:52): re-read RUN_LOCK, take the rarity-hue half of System 2 (TAKE THIS NEXT), split any capture into <=15 min chunks, release by :07.
+
+U126 - 2026-11-21 11:5x CST - MR. E'S 10:17 DIRECTIVE, HUD HALF: NO FLOATING MANA STRIP, NO "NOW FIGHTING" BANNER, NO BOSS CARD IN THE CHRONICLE
+Lock: R's WORKING RUN_LOCK.txt at 11:53: last line chat bot B107 IDLE 11:49:10, no Godot alive. Claim 11:53:22 (expected finish 12:03), RELEASED 11:55:14 (IDLE written, Godot empty) - inside :07 and the 15 min cap.
+Item: not the rarity-hue row - Mr. E's live 10:17 directive (supervisor report) overrides HUD layout and was not on hud-ui. hud_dock.gd: HudDock no longer adds FightBanner or ManaStrip to the town (classes left in file, never instantiated; mana is for the hub sheet / game lane's overhead bar). feed_hud.gd: card() is a no-op, so the boss info card never shows and the Chronicle keeps full width for event text.
+Result: headless parse 0 Parse Error / 0 SCRIPT ERROR; windowed tools/_u126_regress.gd (copy of U125's tool) U126_DONE checks=40 fails=0.
+LOOKED AT renders/cycles/20261121_u126/host_s150_1080.png: Chronicle scroll is event text only ("The Hollow King rises. Wreathed in cold fire.") - no card, no mana panel, no NOW FIGHTING banner. REMAINING: a large "The Hollow King 150/150 / Lord of floor 5" HP card still floats top-left in the Director pane. That is scripts/boss_bar.gd:209 - NOT a HUD-owned file. Its owner must remove it (or make it a thin strip flush with the top bar) to finish directive item 2.
+Next firing: re-read lock; if boss_bar.gd is changed upstream, re-run the regress; otherwise take the rarity-hue half of System 2.
+Decision for Mr. E: none (boss_bar.gd owner needs routing by the team lead).

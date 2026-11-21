@@ -239,16 +239,12 @@ func _check(tag: String) -> void:
 			_ok(big >= UiTheme.px(28) - 1, "%s: Chronicle lines at the L15 size (%d px)" % [tag, big])
 			_ok(lines >= 2, "%s: the Chronicle shows %d lines" % [tag, lines])
 	# 3. the boss card - by group + name: in the pane the pane lookup names, whose camera is in the fight
+	# S89 INVERTED, not deleted: Mr. E's 10:17 directive took the floating boss card off the game
+	# view. A lord IS fighting in this scene, so a card would be up if one existed - this arm goes
+	# RED the day any node rejoins group hud_boss or a "BossCard" is built anywhere in the tree.
 	var bbs := get_nodes_in_group("hud_boss")
-	_ok(bbs.size() == 1 and String((bbs[0] as Node).name) == "BossCard", "%s: exactly one boss card, by group + name (%d)" % [tag, bbs.size()])
-	var bb: BossBar = bbs[0] if bbs.size() == 1 else null
-	if bb and bb.is_visible_in_tree() and bb.delve:
-		var want := HudDock.pane_for_delve(_t, bb.delve)
-		_ok(want != "", "%s: the pane lookup finds a pane showing the fight ('%s')" % [tag, want])
-		var h := _home(bb.get_global_rect(), reg)
-		_ok(want != "" and h == want and HudDock.region_of(bb) == want and _cam_in(s._panes[h]["cam"], bb.delve), "%s: the boss card is in the pane showing the fight (want '%s', in '%s', %s)" % [tag, want, h, bb.get_global_rect()])
-	else:
-		_ok(false, "%s: the boss card is up" % tag)
+	var named := root.find_children("BossCard", "", true, false)
+	_ok(bbs.is_empty() and named.is_empty(), "%s: NO floating boss card while the lord fights (hud_boss %d, BossCard %d)" % [tag, bbs.size(), named.size()])
 	# 4. party blocks - by group, each carrying its delve: in the pane following that party
 	var blocks := get_nodes_in_group("hud_party").filter(func(n): return is_instance_valid(n) and not (n as Node).is_queued_for_deletion() and (n as Control).is_visible_in_tree())
 	_ok(not blocks.is_empty(), "%s: a party block is up (by group)" % tag)

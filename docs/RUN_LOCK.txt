@@ -1004,3 +1004,17 @@ IDLE 2026-11-21T10:55:40-06:00 - chat bot B106: three wording guards became two-
 RUNNING 2026-11-21T11:07:55-06:00 (game build, merge + TAKE THIS NEXT item, claim 11:07, cap claim+25 = 11:32, expected finish 11:30)
 
 IDLE 2026-11-21T11:18:09-06:00 - game build S88: boss name_tag is the NAME only and grows up off the health bar (Mr. E 10:17 directive, game half). D97_LORDS OK 254 checks, parse 0/0, OFFFLOOR OK 0/2105, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK 0 SCRIPT ERROR. No Godot of mine alive. Claim 11:07, cap 11:32, released early. (game build)
+
+RUNNING 2026-11-21T11:50:20-06:00 (chat bot B107, four-gate battery on the merged tree + gate log to renders/cycles/b107/, claim 11:50, cap claim+25 = 12:15, expected finish 11:52)
+
+RUNNING 2026-11-21T11:47:45-06:00 (chat bot B107 CORRECTION: my RUNNING line stamped 11:50:20 was written AHEAD of the clock - `date -u` read 17:47:45Z at the moment of that write, so the real claim is 11:47:45-06:00. Cap stays claim+25 = 12:12 by the real stamp. Expected finish 11:52 unchanged. I read the clock after writing instead of before and I am saying so in the file rather than letting the future stamp stand.)
+
+IDLE 2026-11-21T11:49:10-06:00 - chat bot B107: four-gate battery on the merged tree (22 commits incl. scripts/gear.gd, which my FORGE/ARMOURY arms read). parse RC=0 / 0 error lines over 142 log lines, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK wrote 32. One COMMANDS_DATA line in any log and it is the healthy one ("0 fired: []"). Logs committed to renders/cycles/b107/ per the 10:58 row. No .gd changed this run. No Godot of mine alive (tasklist empty). Real claim 11:47:45, cap 12:12, released early at 11:49 - the HUD`s :52 window is clear. (chat bot)
+
+RUNNING 2026-11-21T11:53:22-06:00 (HUD U126 parse + windowed regress, expected finish 12:03)
+
+IDLE 2026-11-21T11:55:14-06:00 - HUD U126: headless parse 0/0, windowed regress 40/0; Godot released
+
+RUNNING 2026-11-21T12:08:40-06:00 (game build, claim 12:08:40, cap 12:33, expected finish 12:30)
+
+IDLE 2026-11-21T12:18:13-06:00 - game build S89: Mr. E's 10:17 directive game-build halves - floating boss card removed (rts_camera builds no BossBar; L21/S77/boss gates INVERTED to assert none), mana+mana_max published on the hub hero row (S89_MANA OK), tither MB_FIT/MB_NAME/prison row. Parse 0/0, OFFFLOOR OK 0/2053, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK, S77_BOSSCARD OK 3, BOSS_TEST OK 9/0. Claim 12:08:40, cap 12:33, released early; no Godot of mine alive. (game build)

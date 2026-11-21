@@ -11223,6 +11223,38 @@ _BEADLE_KNOB = os.environ.get("BEADLE_KNOB", "1") != "0"
 # be measured SEPARATELY through ONE locked camera, which is the standing rule.
 _BEADLE_RAIL = os.environ.get("BEADLE_RAIL", "1") != "0"
 _BEADLE_PLATE = os.environ.get("BEADLE_PLATE", "1") != "0"
+# *** PASS 14 WAS TRIED, MEASURED AND REVERTED, AND THE MEASUREMENT IS THE
+# *** DELIVERY. THE BODY BELOW IS UNCHANGED FROM PASS 13. ***
+# `_selfseen_blame.py` (new this run) splits the build on EVERY span and asks,
+# per span, how much of the MAN that span leaves standing. The Beadle's side
+# cell - 0.5174, the 2nd worst of 75 in the register - breaks down like this,
+# with the gripping arm split out of `staff` so a limb is not bagged with a
+# prop:
+#       side:   griparm 0.2091   head 0.1929   staff 0.1390   coat 0.0884
+#       front:  head 0.2117   coat 0.1174   arm 0.0358   staff 0.0000
+#       back:   head 0.2035   coat 0.0689   arm 0.0163   staff 0.0000
+# SO THE SIDE CELL IS MOSTLY THE MAN'S OWN ANATOMY: his forearm and his own
+# head account for 0.40 of the 0.48 that is lost, and the only prop in it is
+# the staff at 0.139. That is NOT the fault `_backread.py` was built to catch
+# (a man hidden behind his own APPARATUS, the Dyer fault); a forearm across a
+# chest is a man.
+# THE FIX I TRIED ANYWAY, AND WHY IT IS NOT HERE. Move the whole staff span
+# forward in y by 0.30 so the side camera stops projecting it onto him, the
+# shoulder of the gripping arm staying on the body. MEASURED, same locked
+# camera, bounds identical to 5 dp in both builds ([-1.06405, -0.7072, 0.0,
+# 0.81045, 0.48047, 2.95]):
+#       side man_seen 0.5174 -> 0.4357      WORSE
+#       staff 0.1390 -> 0.1124, griparm 0.2091 -> 0.2360, overlap 2583 -> 1168
+# The shaft barely came off him; what changed is that the shaft and the arm
+# stopped covering the SAME pixels and started covering different ones. AND
+# THE PICTURE SAYS THE SAME THING, which is why it is reverted rather than
+# argued with: in `renders/art/minibosses/_backread/_p14_side_ab.png` the moved staff runs down the
+# figure's own front CONTOUR and breaks the coat's silhouette edge, the foot
+# crosses in front of the boot, the gripping arm reads as a wedge jammed
+# across the belly, and the amber knob has barely left the cheek. Number and
+# picture agree, and they agree that this is worse.
+# The flag stays so the next pass can re-run the A/B in one command; it is OFF.
+_BEADLE_STAFF_Y = -0.30 if os.environ.get("BEADLE_STAFFY", "0") != "0" else 0.0
 
 
 def beadle():
@@ -11488,9 +11520,10 @@ def beadle():
     # stops at chest height with a lit finial, so it reads as a knob on a stick
     # and not as a mast.
     i0 = len(P.items)
-    limb(P, [(MX + 0.560, -0.020, 0.02), (MX + 0.600, -0.060, 0.80),
-             (MX + 0.630, -0.090, 1.44)], 0.055, 0.047, 'dark')
-    P.add(L.cone(0.078, 0.066, 0.140), 'dark', loc=(MX + 0.558, -0.015, 0.000))
+    SY = _BEADLE_STAFF_Y
+    limb(P, [(MX + 0.560, -0.020 + SY, 0.02), (MX + 0.600, -0.060 + SY, 0.80),
+             (MX + 0.630, -0.090 + SY, 1.44)], 0.055, 0.047, 'dark')
+    P.add(L.cone(0.078, 0.066, 0.140), 'dark', loc=(MX + 0.558, -0.015 + SY, 0.000))
     # *** PASS 12: THE KNOB LOST ITS OUTLINE FROM THE SIDE, AND THE COLLAR WAS
     # *** PALE. *** The side camera throws x away, so the staff at x +0.63 is
     # projected ONTO the body - and the knob assembly spans z 1.390-1.648 while
@@ -11505,17 +11538,17 @@ def beadle():
     # ball (0.108 and 0.100 against 0.092) so the lip shows from any angle, and
     # the brass is left to be the only lit thing between them.
     P.add(L.cone(0.108, 0.100, 0.050) if _BEADLE_KNOB else L.cone(0.086, 0.086, 0.050),
-          'dark' if _BEADLE_KNOB else 'bone', loc=(MX + 0.628, -0.088, 1.390))
+          'dark' if _BEADLE_KNOB else 'bone', loc=(MX + 0.628, -0.088 + SY, 1.390))
     # *** PASS 4: THE FINIAL WAS A CANDLE FLAME. *** A tall lit cone on a dark
     # stick is a candle in every view, and side.png read it as one sitting in
     # front of the coat. A staff of office ends in a KNOB, so it is a knob: a
     # squat cap and a ball, 0.14 tall where the cone was 0.20, and no taper to
     # a point for the eye to read as a flame.
-    P.add(L.cone(0.072, 0.090, 0.060), 'glow', loc=(MX + 0.630, -0.090, 1.440))
+    P.add(L.cone(0.072, 0.090, 0.060), 'glow', loc=(MX + 0.630, -0.090 + SY, 1.440))
     P.add(L.sphere(0.092, 0.092, 0.072, 10, 7), 'glow',
-          loc=(MX + 0.630, -0.090, 1.556))
+          loc=(MX + 0.630, -0.090 + SY, 1.556))
     if _BEADLE_KNOB:
-        P.add(L.cone(0.100, 0.082, 0.038), 'dark', loc=(MX + 0.630, -0.090, 1.628))
+        P.add(L.cone(0.100, 0.082, 0.038), 'dark', loc=(MX + 0.630, -0.090 + SY, 1.628))
     # *** PASS 13: THE KNOB GETS A DARK PLATE BEHIND IT, BECAUSE PASS 12 PUT
     # *** DARK ABOVE AND BELOW IT AND THE FAULT IS TO THE SIDES. *** Pass 12's
     # ferrule and cap bracket the ball in Z and they work - measured on
@@ -11539,13 +11572,27 @@ def beadle():
     # pixels. The harness asserts that rather than assuming it.
     if _BEADLE_PLATE:
         P.add(L.sphere(0.018, 0.150, 0.115, 14, 9), 'dark',
-              loc=(MX + 0.545, -0.090, 1.556))
+              loc=(MX + 0.545, -0.090 + SY, 1.556))
     # the gripping arm, down and out to the shaft
-    limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095, 1.060),
-             (MX + 0.600, -0.088, 0.965)], 0.145, 0.112, 'body')
-    P.add(L.sphere(0.115, 0.105, 0.105, 10, 7), 'bone',
-          loc=(MX + 0.615, -0.086, 0.945))
     _span("staff", i0)
+
+    # ---------------------------------------- THE GRIPPING ARM, ITS OWN SPAN
+    # *** IT WAS INSIDE `staff` UNTIL PASS 14 AND THAT MADE THE BLAME UNREADABLE.
+    # A span that puts a LIMB and a PROP in one bag cannot answer the only
+    # question the blame probe is for - a prop in front of a man is the Dyer
+    # fault, a man's own forearm in front of his chest is a man. Pass 14's
+    # first measurement read `staff 0.2680 -> 0.3172` and that single number
+    # was two opposite movements cancelling: the shaft came off him and the
+    # arm swung across him. Splitting it is not a convenience, it is the
+    # instrument being able to see.
+    i0 = len(P.items)
+    # the SHOULDER stays on the body, the hand follows the shaft, so the elbow
+    # takes half the offset and the arm reaches forward.
+    limb(P, [(MX + 0.350, -0.090, 1.215), (MX + 0.520, -0.095 + SY * 0.5, 1.060),
+             (MX + 0.600, -0.088 + SY, 0.965)], 0.145, 0.112, 'body')
+    P.add(L.sphere(0.115, 0.105, 0.105, 10, 7), 'bone',
+          loc=(MX + 0.615, -0.086 + SY, 0.945))
+    _span("griparm", i0)
 
     # ------------------------- THE RAISED ARM AND THE ORDER BOARD (-X)
     # The near side in the three-quarter view, which is the Quartermaster's

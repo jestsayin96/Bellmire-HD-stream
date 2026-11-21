@@ -2540,10 +2540,11 @@ time rather than rediscovered. The honest list:
 ---
 
 ## 29. THE PAVISER - *IT KEEPS ITS FACE TO YOU* (2026-11-18, art lane)
-`paviser` - **keep** - h **2.68** - wear **0.78** - 4 meshes, **743 faces** -
-span **3.57 m**, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
-ratio **1.09** beside the posed 2.45 m Knight, pair_w **5.43**, fits_frame
-true. **Procedural, no pack geometry** (`pack_used` false - see below, I looked
+`paviser` - **keep** - h **2.68** - wear **0.78** - 4 meshes, **731 faces**
+(pass 8, was 743) - span **3.43 m**, **CORRIDOR-SAFE** against the 11.0 m
+three-cell clear span - ratio **1.09** beside the posed 2.45 m Knight, pair_w
+**5.3**, fits_frame true. Gate read on the shipped `front.png`: **0 bar
+columns of 240**, longest run **0.2837** (pass 8). **Procedural, no pack geometry** (`pack_used` false - see below, I looked
 first).
 
 Feed line: *"A board came round to face you."*
@@ -2682,6 +2683,49 @@ at every one. `renders/art/minibosses/paviser/hero_*.png`.
    bar on a pale field; a dark mark that reaches the board's outline (not
    enclosed, so not counted); and anything at all about the post, the prop, the
    legs or the floor.
+
+   **PASS 8 (21 Nov, 08:4x CT) - THE SPLITS, AND THE INSTRUMENT COULD NOT TELL
+   THE TWO CANDIDATES APART.** Pass 7 said the gate was REDUCED, NOT CURED:
+   three dark splits still made a faint grid with the two straps and the
+   longest ran 0.5179 of its column, over the 0.50 bar line. Two things could
+   be causing that, so there are two hooks and they were swept APART:
+
+   - `PAVISER_SPLITH` - the splits' height, scaled about each split's own
+     centre.
+   - `PAVISER_SPLITC` - the splits TRANSLATED in z into the clear band between
+     the two straps, **heights untouched**, so the column's longest run cannot
+     move and anything that changes in the picture is the JOIN and only the
+     join. Every shipped split crossed a strap (straps 0.372-0.428 and
+     1.122-1.178; splits 0.62-1.24, 0.30-0.76, 0.86-1.26), giving the face six
+     closed cells.
+
+   | variable | bar columns | bar share | longest run | p90 run |
+   |---|---|---|---|---|
+   | SPLITH 1.00 (shipped before) | 7 | 0.0292 | 0.5179 | 0.0956 |
+   | **SPLITH 0.55 (shipped)** | **0** | **0.0** | **0.2837** | **0.0956** |
+   | SPLITH 0.00 | 0 | 0.0 | 0.0981 | 0.0554 |
+   | SPLITC 1.00 (rejected) | 7 | 0.0292 | 0.5179 | 0.0956 |
+
+   **THE FINDING OF THIS PASS IS THAT MY OWN HYPOTHESIS WAS WRONG AND THE
+   PICTURE IS WHAT SAID SO.** I went in believing the JOIN was the cause - I
+   could see the six cells in `front.png`. Lifting the three splits clear of
+   the straps made it **worse**: three equal verticals stacked tidily between
+   two rails is a grille drawn from life. And `_gateread` reported
+   `cols=240 bars=7 share=0.0292 max=0.5179` for that body - **byte-for-byte
+   the shipped numbers**, by construction, because translating a run does not
+   change its length. **A pass that had trusted the instrument alone would
+   have shipped the worse board on an unchanged green line.** That is the
+   blind spot named in advance by the "what this cannot see" list and now
+   demonstrated rather than asserted.
+
+   0.00 also clears the bar and is the cleanest face of the three, and it was
+   **not** taken: the splits are the wear RECEIPT on a board whose entire
+   purpose is to be hit (Mr. E's rule 2), so 0.00 buys the gate with the thing
+   the board is for. 0.55 keeps three short checks, none of which reaches a
+   second rail. Sweep renders at `renders/art/_sweep/paviser_split*/`,
+   readings at `renders/art/_sweep/_gateread_splith.json` and
+   `_gateread_splitc.json`, shipped reading at
+   `renders/art/minibosses/_gateread_paviser.json`.
 
 ### THE HONEST FAULT LIST - EVERY ONE OF THESE IS VISIBLE ON THE SHEETS
 1. **The back of the board is a dead blank pale rectangle.** `hero_back.png`

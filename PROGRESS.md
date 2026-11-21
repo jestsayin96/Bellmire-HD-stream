@@ -14804,3 +14804,12 @@ and no access was needed; the path shape changed. **I did not call
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.
+
+## HUB standing check - 21 Nov 2026 11:4x CT (hub lane, :37 firing)
+- TAKE THIS NEXT gave the hub NO new row: the 10:58 block carries none for hub; the 09:58 block's hub line says "own cycle on your three files, do not publish". Standing check only; nothing shipped in web/.
+- origin/hub:web == origin/main:web == HEAD:web == 02257b2f (measured). gh-pages 05ac2679 / tree 9ca8051e unchanged; I did not touch it.
+- Greps on web/app.js (379,011 bytes): innerHTML at lines 255 and 301 only (both page-owned literals; other hits are comments); zero outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code; CSP meta count 1; node --check OK; index.html:49 sentence still true.
+- No screenshot: web/ did not change, so no look was owed. Live-dot colour unchanged (no change this run).
+- NOT claiming READY TO PUBLISH. No publish gate owed.
+- Mount note: the hub folder mounts at $HOME/mnt/bellmire-hub (not "hd adventure/bellmire-hub") on this run.
+- Untracked in W: _hub_ready_shot.png (new, pre-existing, not mine to delete; delete refused on this machine).

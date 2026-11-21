@@ -143,6 +143,35 @@
 ##      clipped, and a floor chosen before we have seen it bite would just be a number to argue
 ##      with. Revisit it the first time a body actually clips.
 ##
+## DEAD-DATA BASELINE, RE-MEASURED 21 NOV 01:1x CT ON THE MERGED TREE b4c12efe - A NOTE, NOT A
+## ROW. NO LANE IS ASKED FOR ANYTHING HERE AND NOTHING BELOW IS OWED BY ANYONE.
+##   Measured off `scripts/*.gd` + `web/*.js` ONLY (48 files, 2,302,331 chars) and `assets/` only.
+##   UNREFERENCED ASSET DIRECTORIES: **ZERO** (34 directories with files, was 31).
+##   UNREAD LIVE DATA KEYS: **ZERO**. 12 data files, **139 top-level keys** (was 122 on 18 Nov).
+##   **49 keys return zero literal hits and ALL 49 ARE ACCOUNTED FOR:**
+##     34 are content's own `_note_` cycle notes (`_note_c155` is this hour's, and the ONLY new
+##        top-level key in `data/lore_lines.json` this hour - content behaved exactly right).
+##        **NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP WRITING THEM.**
+##      2 are the runtime-built `_alt` pools and are **READ**: `lord_intros_alt` and
+##        `unique_intros_alt`, at `delve.gd:3831` - `lore().get(base + "_alt", {})`.
+##        DO NOT RE-WIRE THEM.
+##      4 are DECLARED DEAD - and that is **FOUR, not the three every baseline since D98 has
+##        carried.** `phase2_words`, `phase2_words_alt`, `town_levels_for_the_desktop`, and
+##        **`phase2_words_alt2`, WHICH NO BASELINE HAS EVER NAMED.** I checked it rather than
+##        assuming: it entered at **C-114** ("third pools: ascent, carry, vault, sell, stone,
+##        errand"), it is a 7-key dict, and `delve.gd` builds `base + "_alt"` and **never
+##        `_alt2`** - there is no concatenation anywhere in `scripts/` or `web/` that could reach
+##        it. It is a fourth sibling of an already-dead family, NOT a new gap and NOT work.
+##        **IT IS RECORDED DEAD HERE SO NO FUTURE SEAT RAISES IT AS AN UNREAD KEY, AND NO LANE IS
+##        TO WIRE IT** - D98 closed that family and this does not re-open it.
+##      9 are prose/spec keys and are not items: `biomes.technique`, `bosses.boss_floors`,
+##        `origins.chronicle_line`, `origins.word_order`, `origins.casing`,
+##        `ranks.promotion_line`, `ranks.one_roll`, `strains._gating`, `world.canon_silences`.
+##   `townsfolk` is not in the 49 - it returns prose hits, as the standing guard says it does.
+##   `twitch_cooldown_s` IS STRUCK PERMANENTLY and is not re-raised here.
+##   **COMPARE THE CLASSES, NOT THE RAW NUMBER.** 32 -> 49 is 17 more `_note_` keys and one
+##   dead-family sibling that was always there and was never counted. Nothing has gone unread.
+
 ## FOR THE NEXT TEAM LEAD (prompt corrections owed - a firing cannot write a prompt; land these the
 ## first time Mr. E is live, all at once):
 ##   1. The TEAM LEAD prompt's hub section says gh-pages is 45a7904 and the merged-not-published

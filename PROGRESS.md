@@ -14553,3 +14553,14 @@ LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll cen
 Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
 Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
 Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).
+
+## S86 - THE CHAT BOT'S TWO ASKS ANSWERED: REWORK_DIVISOR, OIL_PER_HEAD, OIL_FLOOR_MIN (21 Nov 2026, 09:08 CST firing)
+Item: TAKE THIS NEXT (08:58) gave game build its own pick and named the chat bot's open asks. Took ask (2).
+- roster.gd: `const REWORK_DIVISOR := 4` beside OIL_COST; the rework price at :514 now reads it (was a bare `/ 4`).
+- delve.gd: `const OIL_PER_HEAD := 0.5` and `const OIL_FLOOR_MIN := 1` beside the shrine consts; the floor oil burn at :161 now reads them (was bare `0.5` / `1`).
+- Behaviour unchanged by construction, and PROVED: tools/_s86_consts.gd checks the three values and compares old vs new formula for 0-8 delvers and every WEAPONS tier: `CHECKS 18 FAILS 0` / `S86_CONSTS OK`.
+- So `Roster.REWORK_DIVISOR`, `Delve.OIL_PER_HEAD`, `Delve.OIL_FLOOR_MIN` exist for the chat bot to read in chatcmd.gd (its file, not touched here) - its wording arms can become two-authority arms.
+- Ask (1), `Gear.ARMOUR` read by nothing: NOT taken this cycle; left for a later cycle (deleting a table needs its own measure).
+- Gates (verdict lines): parse 0 errors; `OFFFLOOR_VERDICT OK 0 of 2092`; `TWITCH_PARSE OK (8 checks)`; `TOWNWALK in_solid=0/17673 raid_in_solid=0/7374 PASS`; `DELVE_TEST OK ran 9001 frames`. Logs in renders/cycles/s86/.
+- No picture: this change has no visual output (a named constant with an identical value); the proof is the numeric equivalence test, said plainly rather than a render that would show nothing.
+- No live Twitch test. Lock claimed 09:08:46, cap claim+25 = 09:33, declared finish 09:33.

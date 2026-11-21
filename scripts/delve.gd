@@ -158,7 +158,7 @@ func _next_floor() -> void:
 			dun.lord.phase_changed.connect(_lord_phase)
 	# a floor costs one flask per two bodies
 	var alive_now := _alive().size()
-	oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
+	oil = maxf(0.0, oil - float(maxi(OIL_FLOOR_MIN, int(ceil(float(alive_now) * OIL_PER_HEAD)))))
 	var origin_key := FloorGen.origin_for(floor_no)
 	var of := String((FloorGen.ORIGINS.get(origin_key, {}) as Dictionary).get("of", "a ruin"))
 	var biome := String(dun.info.get("theme_name", "the dark"))
@@ -330,6 +330,11 @@ func _setpiece_prisoner(sp: Dictionary, at: Vector3) -> void:
 ## point is the risk of the touch, not the hit.
 const SHRINE_BOON_FRAC := 1.0           # a boon mends the party back to full
 const SHRINE_CURSE_HP := 12.0           # a curse takes this many hp from each
+## S86: the oil a floor burns - OIL_PER_HEAD flasks per living delver, rounded up,
+## never under OIL_FLOOR_MIN. Named so the chat bot's `delve`/`oil` wording guards
+## read the engine (two authorities) instead of only their own sentence.
+const OIL_PER_HEAD := 0.5
+const OIL_FLOOR_MIN := 1
 
 func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
 	var alive := _alive()

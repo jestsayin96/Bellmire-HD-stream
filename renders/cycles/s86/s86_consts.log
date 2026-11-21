@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS REWORK_DIVISOR is 4 (a quarter)
+PASS OIL_PER_HEAD is 0.5 (a flask per two)
+PASS OIL_FLOOR_MIN is 1
+PASS burn 0 heads old=1 new=1
+PASS burn 1 heads old=1 new=1
+PASS burn 2 heads old=1 new=1
+PASS burn 3 heads old=2 new=2
+PASS burn 4 heads old=2 new=2
+PASS burn 5 heads old=3 new=3
+PASS burn 6 heads old=3 new=3
+PASS burn 7 heads old=4 new=4
+PASS burn 8 heads old=4 new=4
+PASS rework tier 0 cost 0 -> 0
+PASS rework tier 1 cost 60 -> 15
+PASS rework tier 2 cost 160 -> 40
+PASS rework tier 3 cost 420 -> 105
+PASS rework tier 4 cost 1100 -> 275
+PASS rework tier 5 cost 0 -> 0
+CHECKS 18 FAILS 0
+S86_CONSTS OK

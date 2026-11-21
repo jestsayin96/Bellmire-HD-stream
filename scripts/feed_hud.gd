@@ -383,7 +383,7 @@ func _rebuild() -> void:
             lb.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
             lb.clip_text = false
             lb.custom_minimum_size = Vector2(wrap_w, 0)
-            lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+            lb.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN   # U111: width = the padded wrap width, not the box
         lb.add_theme_font_size_override("font_size", fs)
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
@@ -399,7 +399,8 @@ func _chrome_text_w() -> float:
     if card_showing() and _card != null:
         # U109: the card never takes more than 40% of the vellum; the text keeps at least 60%
         w -= minf(_card.get_combined_minimum_size().x + float(UiTheme.px(14)), w * 0.4)
-    return maxf(w - 4.0, 120.0)
+    # U111: right padding - U110's 150% frame had a word touching the vellum edge (~2px margin)
+    return maxf(w - float(UiTheme.px(10)), 120.0)
 
 func _chrome_h() -> float:
     if _panel is HudDock.ChronicleScroll:

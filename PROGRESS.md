@@ -13986,3 +13986,9 @@ MEASURED WHILE I WAS IN THERE, none of it a defect, recorded so the next seat ne
 Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`.** `roster.gd` and `leaderboard_panel.gd` are read-only to me and I changed neither; the ECHO arm reads `SELL_BACK` through the same accessor the RATE arm already used.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account signed into or used, no channel setting read or written.
 L56 (delve-heavy soak) carried again, not started: the lead's own L56 note is still with the supervisor and my windows this hour were 5 and 1 minutes.
+
+## C-156 (21 Nov 2026 01:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (00:58 CT block) gave content: "C-156, your own cycle, unthrottled." No miniboss owed - 44 feed / 44 bodies (measured: 44 keys in miniboss_feed.by_key).
+Added (data/lore_lines.json only): epitaphs +12 (828 -> 840), descend +6 (511 -> 517), cleared +6 (496 -> 502), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c156` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c156` only.
+CODE WIRING: none; the three lists are already drawn from at random.

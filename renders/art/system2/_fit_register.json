@@ -34,9 +34,9 @@
  "show_min": 0.7,
  "px_per_m": 200.0,
  "laths": [
-  "crossbow_common: show 0.39 (best view turns 51 px of a possible 131 to the camera) - the carry never shows this weapon's broad face",
-  "crossbow_uncommon: show 0.37 (best view turns 56 px of a possible 150 to the camera) - the carry never shows this weapon's broad face",
-  "crossbow_rare: show 0.40 (best view turns 60 px of a possible 149 to the camera) - the carry never shows this weapon's broad face"
+  "crossbow_common: show 0.40 (best view turns 51 px of a possible 128 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_uncommon: show 0.37 (best view turns 56 px of a possible 152 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_rare: show 0.41 (best view turns 60 px of a possible 148 to the camera) - the carry never shows this weapon's broad face"
  ],
  "blanks": [],
  "frame_clips": [],
@@ -102,7 +102,13 @@
     0.315,
     1.0146
    ],
+   "local_ext": [
+    0.1267,
+    0.3937,
+    1.2791
+   ],
    "mid_px": 63.0,
+   "mid_px_world_was": 63.0,
    "best_minor": 65,
    "show": 1.032,
    "proving_views": 3
@@ -166,7 +172,13 @@
     0.3282,
     1.2009
    ],
+   "local_ext": [
+    0.1914,
+    0.4102,
+    1.5126
+   ],
    "mid_px": 65.6,
+   "mid_px_world_was": 65.6,
    "best_minor": 68,
    "show": 1.036,
    "proving_views": 3
@@ -230,7 +242,13 @@
     0.5937,
     1.5031
    ],
+   "local_ext": [
+    0.1914,
+    0.7422,
+    1.8953
+   ],
    "mid_px": 118.7,
+   "mid_px_world_was": 118.7,
    "best_minor": 120,
    "show": 1.011,
    "proving_views": 3
@@ -294,7 +312,13 @@
     0.3051,
     0.7064
    ],
+   "local_ext": [
+    0.1863,
+    0.3814,
+    0.8903
+   ],
    "mid_px": 61.0,
+   "mid_px_world_was": 61.0,
    "best_minor": 63,
    "show": 1.032,
    "proving_views": 3
@@ -358,7 +382,13 @@
     0.3845,
     0.7571
    ],
+   "local_ext": [
+    0.1686,
+    0.4806,
+    0.9528
+   ],
    "mid_px": 76.9,
+   "mid_px_world_was": 76.9,
    "best_minor": 78,
    "show": 1.014,
    "proving_views": 3
@@ -422,7 +452,13 @@
     0.4334,
     0.7541
    ],
+   "local_ext": [
+    0.2754,
+    0.5417,
+    0.9504
+   ],
    "mid_px": 86.7,
+   "mid_px_world_was": 86.7,
    "best_minor": 88,
    "show": 1.015,
    "proving_views": 3
@@ -486,9 +522,15 @@
     0.4236,
     0.6854
    ],
+   "local_ext": [
+    0.3274,
+    0.5293,
+    0.8632
+   ],
    "mid_px": 84.7,
+   "mid_px_world_was": 84.7,
    "best_minor": 90,
-   "show": 1.062,
+   "show": 1.063,
    "proving_views": 3
   },
   "hammer_uncommon": {
@@ -550,7 +592,13 @@
     0.6302,
     0.6954
    ],
+   "local_ext": [
+    0.421,
+    0.7876,
+    0.8701
+   ],
    "mid_px": 126.0,
+   "mid_px_world_was": 126.0,
    "best_minor": 132,
    "show": 1.047,
    "proving_views": 3
@@ -614,7 +662,13 @@
     0.6756,
     0.7292
    ],
+   "local_ext": [
+    0.4477,
+    0.8443,
+    0.8981
+   ],
    "mid_px": 135.1,
+   "mid_px_world_was": 135.1,
    "best_minor": 142,
    "show": 1.051,
    "proving_views": 3
@@ -678,9 +732,15 @@
     0.1409,
     0.7131
    ],
-   "mid_px": 28.2,
+   "local_ext": [
+    0.104,
+    0.1507,
+    0.8978
+   ],
+   "mid_px": 24.1,
+   "mid_px_world_was": 28.2,
    "best_minor": 29,
-   "show": 1.029,
+   "show": 1.203,
    "proving_views": 2
   },
   "dagger_uncommon": {
@@ -742,7 +802,13 @@
     0.3094,
     0.8185
    ],
+   "local_ext": [
+    0.1167,
+    0.3867,
+    1.0307
+   ],
    "mid_px": 61.9,
+   "mid_px_world_was": 61.9,
    "best_minor": 63,
    "show": 1.018,
    "proving_views": 2
@@ -806,7 +872,13 @@
     0.2992,
     0.9155
    ],
+   "local_ext": [
+    0.1445,
+    0.374,
+    1.1535
+   ],
    "mid_px": 59.8,
+   "mid_px_world_was": 59.8,
    "best_minor": 61,
    "show": 1.019,
    "proving_views": 3
@@ -874,9 +946,15 @@
     0.3975,
     1.7224
    ],
-   "mid_px": 79.5,
+   "local_ext": [
+    0.2062,
+    0.2111,
+    0.9065
+   ],
+   "mid_px": 80.2,
+   "mid_px_world_was": 79.5,
    "best_minor": 81,
-   "show": 1.019,
+   "show": 1.01,
    "proving_views": 3
   },
   "staff_uncommon": {
@@ -942,9 +1020,15 @@
     0.4938,
     2.1326
    ],
-   "mid_px": 98.8,
+   "local_ext": [
+    0.2607,
+    0.2607,
+    1.1224
+   ],
+   "mid_px": 99.1,
+   "mid_px_world_was": 98.8,
    "best_minor": 101,
-   "show": 1.023,
+   "show": 1.02,
    "proving_views": 3
   },
   "staff_rare": {
@@ -1010,9 +1094,15 @@
     0.4257,
     2.2082
    ],
-   "mid_px": 85.1,
+   "local_ext": [
+    0.2153,
+    0.2211,
+    1.1622
+   ],
+   "mid_px": 84.0,
+   "mid_px_world_was": 85.1,
    "best_minor": 87,
-   "show": 1.022,
+   "show": 1.036,
    "proving_views": 3
   },
   "crossbow_common": {
@@ -1078,9 +1168,15 @@
     0.6535,
     0.69
    ],
-   "mid_px": 130.7,
+   "local_ext": [
+    0.1945,
+    0.6382,
+    0.691
+   ],
+   "mid_px": 127.6,
+   "mid_px_world_was": 130.7,
    "best_minor": 51,
-   "show": 0.39,
+   "show": 0.4,
    "proving_views": 2
   },
   "crossbow_uncommon": {
@@ -1146,9 +1242,15 @@
     0.7498,
     1.0234
    ],
-   "mid_px": 150.0,
+   "local_ext": [
+    0.2098,
+    0.7584,
+    1.0352
+   ],
+   "mid_px": 151.7,
+   "mid_px_world_was": 150.0,
    "best_minor": 56,
-   "show": 0.373,
+   "show": 0.369,
    "proving_views": 3
   },
   "crossbow_rare": {
@@ -1214,9 +1316,15 @@
     0.7425,
     1.0325
    ],
-   "mid_px": 148.5,
+   "local_ext": [
+    0.2366,
+    0.7409,
+    1.0445
+   ],
+   "mid_px": 148.2,
+   "mid_px_world_was": 148.5,
    "best_minor": 60,
-   "show": 0.404,
+   "show": 0.405,
    "proving_views": 3
   },
   "axeDouble_common": {
@@ -1278,7 +1386,13 @@
     0.4382,
     0.7064
    ],
+   "local_ext": [
+    0.1863,
+    0.5477,
+    0.8903
+   ],
    "mid_px": 87.6,
+   "mid_px_world_was": 87.6,
    "best_minor": 88,
    "show": 1.004,
    "proving_views": 3
@@ -1342,7 +1456,13 @@
     0.6341,
     0.7571
    ],
+   "local_ext": [
+    0.1686,
+    0.7926,
+    0.9528
+   ],
    "mid_px": 126.8,
+   "mid_px_world_was": 126.8,
    "best_minor": 128,
    "show": 1.009,
    "proving_views": 3
@@ -1406,7 +1526,13 @@
     0.6464,
     0.7541
    ],
+   "local_ext": [
+    0.2754,
+    0.808,
+    0.9504
+   ],
    "mid_px": 129.3,
+   "mid_px_world_was": 129.3,
    "best_minor": 130,
    "show": 1.006,
    "proving_views": 3
@@ -1470,9 +1596,15 @@
     0.544,
     0.5503
    ],
-   "mid_px": 108.8,
+   "local_ext": [
+    0.13,
+    0.6879,
+    0.6879
+   ],
+   "mid_px": 110.1,
+   "mid_px_world_was": 108.8,
    "best_minor": 110,
-   "show": 1.011,
+   "show": 0.999,
    "proving_views": 3
   },
   "shield_uncommon": {
@@ -1534,7 +1666,13 @@
     0.6053,
     0.6611
    ],
+   "local_ext": [
+    0.1991,
+    0.7567,
+    0.8359
+   ],
    "mid_px": 121.1,
+   "mid_px_world_was": 121.1,
    "best_minor": 122,
    "show": 1.008,
    "proving_views": 3
@@ -1598,7 +1736,13 @@
     0.5603,
     0.6999
    ],
+   "local_ext": [
+    0.3635,
+    0.7004,
+    0.8742
+   ],
    "mid_px": 112.1,
+   "mid_px_world_was": 112.1,
    "best_minor": 114,
    "show": 1.017,
    "proving_views": 3

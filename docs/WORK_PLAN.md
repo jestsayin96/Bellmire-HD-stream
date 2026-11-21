@@ -1,3 +1,185 @@
+## *** STANDING DIRECTIVE TO ALL SIX LANES - MR. E THROUGH THE SUPERVISOR, 21 NOV 2026, 11:3x CT.
+## *** DELIVERED LIVE. IT BINDS EVERY LANE FROM THE MOMENT IT IS READ AND IT OUTRANKS EVERY ROW
+## *** IN EVERY BLOCK BELOW IT. IT IS NOT A SUGGESTION ABOUT PACE. ***
+##
+## HIS WORDS, RELAYED WHOLE BECAUSE PARAPHRASING A DIRECTIVE IS HOW ONE GETS SOFTENED:
+##
+##   "Directive from Mr. E through the supervisor: stop deferring work that can be done now.
+##    When a row gives you something to do, do it in that firing. Do not write 'carried to next
+##    cycle,' do not recommend and wait, do not route a question up when you already have the
+##    information to answer it. A lane that stands down on a lock or yields to another lane's
+##    window is doing the right thing. A lane that has clear work, no blocker, and pushes it to
+##    the next hour is not.
+##    If your harness found a fault, fix it in the same run - do not log it for later. If a
+##    supervisor ruling answers your question, act on it - do not re-ask it. If your row says
+##    build something and the files are on main, build it - do not scope it and stop.
+##    The fleet runs 24 hours. Mr. E does not. Every hour a lane defers clean work is an hour he
+##    paid for and got nothing from. Deliver or stand down with a reason. There is no third
+##    option."
+##
+## WHAT IT MEANS IN PRACTICE, SO NO LANE HAS TO GUESS:
+##   - **"CARRIED TO NEXT CYCLE" IS NO LONGER AN ACCEPTABLE LINE IN A PROGRESS ENTRY** when the
+##     work was clear and nothing blocked it. Write what you built, or write what blocked you.
+##   - **A SCOPE IS NOT A DELIVERY.** "I read the files and here is what I would do" on work
+##     whose files are already on main is the shape this directive is aimed at. Scope and build
+##     in the same firing.
+##   - **A FAULT YOUR OWN HARNESS FOUND IS FIXED IN THE RUN THAT FOUND IT**, not filed. Fixing a
+##     broken instrument has never been a new item and never needed anyone's permission.
+##   - **DO NOT ROUTE UP WHAT YOU CAN ANSWER.** Check the project docs and the plan first: a
+##     question that already has a ruling is answered, and re-asking it costs an hour.
+##   - **STANDING DOWN IS STILL CORRECT AND IS STILL A DELIVERY** - on a live lock, inside
+##     another lane's window, or genuinely dry. **Mr. E named this himself and it is protected.**
+##     Say WHY in one line. What is not protected is having clear work and leaving it.
+##   - **IT DOES NOT LICENCE RUSHING A GATE OR SKIPPING A VERIFICATION.** "Deliver" means deliver
+##     something proved. A green reported without its verdict line is not delivery, it is the
+##     other failure this house spends its time catching. Split a long job across firings with a
+##     running total - that is delivering, not deferring.
+##
+## **AND I AM THE FIRST SEAT IT LANDS ON, BECAUSE I AM THE ONE IT WAS AIMED AT.** I carried a
+## ledger question for three firings after it was ruled on, and I handed two lanes a free pick
+## while a live directive from Mr. E sat unread in the project. The addendum below is me doing
+## in this turn the work I should have done at 10:58. **EVERY SEAT IN THIS CHAIR INHERITS THE
+## DUTY: read the project docs written since your last firing BEFORE you write a row, and act on
+## what you find in the same run.**
+
+## ADDENDUM - WRITTEN 11:3x CT, 21 NOV 2026, ON A LIVE TURN WITH MR. E. NOT PART OF THE 10:58
+## FIRING'S OWED WORK AND I CLAIM NO CREDIT FOR IT THERE. **BINDING ON EVERY LANE FROM THE
+## MOMENT IT IS READ, INCLUDING THE HUD AT 11:52 AND THE GAME BUILD AT 12:07.**
+## *** THIS ADDENDUM SUPERSEDES THE HUD AND GAME BUILD ROWS IN THE 10:58 BLOCK BELOW. ***
+##
+## *** WHY IT EXISTS: I MISSED THREE RULINGS THAT WERE SITTING IN THE PROJECT, AND MR. E HAD TO
+## *** TELL ME TO READ THEM. HIS WORDS, 11:3x CT: "Stop carrying questions that already have
+## *** answers sitting in the project docs... If a question has a supervisor doc answering it, it
+## *** is answered. Act on it." HE IS RIGHT AND THE COST WAS REAL.
+##   - **THE WORST OF IT: A LIVE DIRECTIVE FROM MR. E HIMSELF, POSTED 10:16-10:19 CT, WHICH SAYS
+##     IN ITS OWN LAST LINE "Team Lead: Write the rows."** I did not read it and at 10:58 I handed
+##     BOTH affected lanes a free-pick row instead. The HUD and the game build each lost an hour
+##     they could have spent on work Mr. E had already asked for. **A free-pick row handed to a
+##     lane that has a directive waiting is not a neutral act - it is me telling the lane the
+##     directive does not exist.**
+##   - The ledger ruling was made at **06:38 CT** and published in the 08:37 CT overnight doc. I
+##     carried it as an open question at 08:58, 09:58 AND 10:58 - **three firings and six hours
+##     after it was answered** - each time writing "Recommendation: confirm..." about a thing
+##     already confirmed. **Asking for a ruling that exists is not caution, it is not reading.**
+##   - **THE STANDING DUTY I AM ADDING TO MY OWN JOB, AND THE NEXT SEAT INHERITS IT: READ THE
+##     PROJECT DOCS WRITTEN SINCE YOUR LAST FIRING BEFORE YOU WRITE A SINGLE ROW.** The supervisor
+##     and Mr. E both post there and neither of them pushes to a branch. A ruling in a doc I have
+##     not opened is, from the lanes' side, indistinguishable from no ruling at all - and I am the
+##     only seat whose job is to carry it from there into the plan.
+##
+## =====================================================================================
+## 1. MR. E'S DIRECTIVE OF 10:16-10:19 CT - MANA AND BOSS UI OFF THE GAME VIEW.
+##    **THIS IS MR. E'S OWN, SO IT IS NOT A FREEZE VIOLATION; IT IS THE HIGHEST-PRIORITY OPEN
+##    WORK IN THE HOUSE AND IT OUTRANKS EVERY FREE PICK AND EVERY PHASE 2 SYSTEM.**
+##    His reasoning, verbatim: **"or else we would see mana from every magic user taking up the
+##    screen."** The fault is that the current UI does not SCALE - one caster looks fine, six do
+##    not. Read every row below through that lens rather than as four separate cosmetic asks.
+##
+## - **HUD LANE - THREE REMOVALS. THIS IS YOUR ROW UNTIL IT IS DONE; IGNORE THE FREE-PICK ROW
+##   THE 10:58 BLOCK GAVE YOU, WHICH I WROTE WITHOUT HAVING READ THE DIRECTIVE.**
+##   (a) **THE FLOATING MANA PANEL COMES OFF THE GAME VIEWPORT.** The box reading
+##       "Mana / DawnCleric 48/54" is removed. Mana then lives in ONE of two places and
+##       **MR. E LEFT THE CHOICE OPEN, SO IT IS A REAL CHOICE AND NOT MINE TO PRE-EMPT**:
+##       **Option A** - on the character sheet, in the HUB only, never on the game view;
+##       **Option B** - a small bar above the caster's head, lined up with their floating health
+##       bar. **Option B has a game-build half** (see below); Option A does not and is entirely
+##       deliverable by you and the hub. **Say which you are building and why, in writing, before
+##       you build it** - if you pick B, the game build has to move with you.
+##   (b) **THE "NOW FIGHTING" CARD AND THE LARGE BOSS NAME/HP BANNER COME OFF AS FLOATING
+##       PANELS.** The boss name goes over the boss's head like any other nameplate (game build
+##       half). **IF A BANNER IS KEPT AT ALL IT IS A THIN STRIP FLUSH WITH THE TOP BAR** - Mr. E
+##       named his own reference: the slim `DIRECTOR | The Rattling Host` bar already in the
+##       layout. **A floating card is what is being removed; do not replace it with a smaller
+##       floating card.**
+##   (c) **THE BOSS INFO CARD COMES OUT OF THE IN-GAME CHRONICLE.** ("The Rattling Host / Lord of
+##       floor 5. A ...") It eats roughly half the Chronicle's width and leaves room for one
+##       event at a time. **The in-game Chronicle is for EVENT TEXT ONLY.** The boss info is not
+##       lost: the supervisor confirmed at 10:19 CT that the hub page already carries a full
+##       Chronicle section with history, filtering and per-hero chronicle lines on the character
+##       sheets (`app.js` from line 1531, section `chronicle` of the 13-section layout).
+##       **VERIFY THAT FOR YOURSELF BEFORE YOU DELETE ANYTHING** - the whole argument that this
+##       removal costs nothing rests on the hub already having the information, and that is a
+##       claim about a file, which means it is checkable.
+##   (d) **IT APPLIES TO EVERY SCREEN LAYOUT, NOT THE DEFAULT VIEW ONLY.** The quad view (2x2
+##       panes) is the case that cannot afford large panels at all; prove your removals at the
+##       quad view as well as at 100% and 150%.
+##   **AND YOUR OWN CARRIED ITEM IS NOW CLOSED BY THIS DIRECTIVE, SO DROP IT:** the hostile
+##   60-char Chronicle line you were going to sample over its arrival was a symptom of the
+##   Chronicle having half its width taken. Fix the cause. If you still want the measure
+##   afterwards, take it after (c) lands and it will mean something different.
+##
+## - **GAME BUILD LANE - TWO HALVES, AND THE SECOND IS CONDITIONAL. THIS SUPERSEDES YOUR
+##   FREE-PICK ROW IN THE 10:58 BLOCK.**
+##   (a) **THE BOSS NAME BECOMES A NAMEPLATE OVER THE BOSS ENTITY'S HEAD**, like any other
+##       entity nameplate. This is yours outright and does not wait on the HUD.
+##   (b) **ONLY IF THE HUD PICKS MANA OPTION B:** a small mana bar above each caster's head,
+##       beside the existing floating health bar. **DO NOT BUILD THIS ON SPECULATION.** Wait for
+##       the HUD to say in writing which option it is building. If it picks A, (b) does not
+##       exist and you have lost nothing.
+##   **AND THE SCALING TEST IS THE ACCEPTANCE TEST FOR BOTH HALVES, BECAUSE IT IS THE WHOLE
+##   POINT OF THE DIRECTIVE: prove it with SIX casters on screen and a lord, not one.** A
+##   nameplate scheme that reads cleanly with one caster and turns the screen to soup with six
+##   has failed Mr. E's actual complaint while passing every screenshot anyone would think to
+##   take. Take the ugly frame on purpose.
+##
+## - **WHAT THIS DIRECTIVE SUPERSEDES, SO NOBODY RE-LITIGATES IT:**
+##   * The supervisor's 02:39 CT "NOW FIGHTING banner yield at 150%" ruling is **MOOT** - the
+##     banner is being removed, so the yield question has no subject.
+##   * The Chronicle-at-150% taste call that was routed to Mr. E is **WITHDRAWN** - the space
+##     problem was the boss card and the mana panel, and (a) and (c) remove both.
+##
+## =====================================================================================
+## 2. THE LEDGER QUESTION IS CLOSED. RULED 06:38 CT, RE-STATED 11:28 CT. **I AM NOT ROUTING IT
+##    UP AGAIN AND NEITHER IS THE NEXT SEAT.**
+##    **Mr. E's 18 Nov 16:58 directive numbering IS AUTHORITATIVE:**
+##      **System 6 = weapon variety. System 7 = armour variety. System 8 = shield variety.
+##      System 9 = loot on the ground.**
+##    **The Master Vision's original 6/7/8 - crystal drops, chests by rarity, mimics - ARE NOT
+##    DROPPED.** They are real items that take the next free numbers in the 5-80 range when the
+##    fleet reaches them. **No lane is or ever was blocked on this.** Every "FOR THE SUPERVISOR"
+##    ledger paragraph below this line, in every block, is **SPENT** - do not copy one forward.
+##
+## =====================================================================================
+## 3. THE HUB PUBLISH GATE IS AUTHORIZED. **RUN IT AT THE 11:58 FIRING, UNPROMPTED.**
+##    Authorized by the supervisor at 11:28 CT - "I am authorizing Team Lead to run the full
+##    publish gate unprompted at the next :58 sweep... Run the gate, bring me the result, and I
+##    will authorize or block the publish based on what the gate finds" - and relayed live by
+##    Mr. E at 11:3x CT: "I've authorized the full gate. Run it at your next :58 and bring the
+##    result. Ten hours of 'recommendation: still not yet' on a procedural hold is enough."
+##    **THE STANDING RULE THAT A GATE IS UNEARNED WITHOUT A LANE'S READY-TO-PUBLISH CLAIM IS
+##    OVERRIDDEN FOR THIS RUN, BY THE SEAT THAT OWNS THE RULE.** The hub lane still does not
+##    publish and still does not need to claim anything.
+##    **AND THE GATE IS NOT THE PUSH.** The supervisor kept the publish decision explicitly:
+##    run it, report it, stop. **DO NOT PUSH gh-pages on the strength of a green gate** - take
+##    that to the supervisor and wait, exactly as the charter says.
+##    **WHAT THE 11:58 SEAT RUNS, ALL OF IT, BY ITS OWN HAND:** `el()` only and no `innerHTML`
+##    on any snapshot value; no snapshot value used as a URL/src/href/style; strict CSP intact,
+##    proved the cheap way by trying to inject an inline `<style>` with the browser's own API and
+##    confirming the page REFUSES it citing `style-src 'self'`; the six state checks
+##    (`?state=empty`, `?state=fail`, `?state=stale`, `?mock=chronicle`, `?mock=crowd`,
+##    `?open=1`); a hostile name rendering as literal text; **and LOOK AT A SCREENSHOT** - you
+##    have Chromium and Playwright in your own container, so stage `web/index.html`, `app.js` and
+##    `style.css` and render it. **Say out loud that a `file://` render carries no snapshot data,
+##    so your numbers will not equal the lane's.**
+##    **AND MEASURE THE DELTA FRESH RATHER THAN QUOTING IT.** As of 11:1x CT: `gh-pages`
+##    `05ac2679`, tree `9ca8051e`, pushed 19 Nov 20:06 CT; `origin/hub:web` `02257b2f`
+##    (== `origin/main:web`); 3 files / +59 / -1. **Two seats have now copied this split out of
+##    a paragraph warning them not to. Run the numstat.**
+##
+## =====================================================================================
+## 4. FOR THE SUPERVISOR - THE CHATBOT/HUD TRIGGER YOU ARMED HAS FIRED.
+##    Your 08:37 CT ruling 6: "If it happens a third time after the plan row, I will adjust the
+##    chatbot's cron schedule. Watching." **IT HAPPENED A THIRD TIME AT 10:51:30 CT** - the chat
+##    bot claimed ninety seconds into the HUD's :52 window, held four minutes, and the HUD stood
+##    down and lost the cycle. The yield rule was NOT broken: the lock was genuinely free (QA
+##    IDLE 10:42:03), so the claim was legal and the stand-down was correct. **The plan row is
+##    what failed, and the plan row is mine.** It held at 08:45 and 09:47 and broke at 10:51.
+##    **Recommendation: adjust the cron as you said you would** - the chat bot fires at :45 and
+##    needs about five minutes, so moving it earlier (:40) buys the margin without shortening its
+##    work. I have re-stated the `:50` row to the lane in the 10:58 block and will keep enforcing
+##    it, but a row that needs three reminders in five hours is a schedule problem wearing a
+##    discipline costume, and the schedule is the thing you can actually change.
+
 ## TAKE THIS NEXT - THE 10:58 CT FIRING, 21 NOV 2026 (machine clock read 11:0x CST while
 ## writing; same day, no midnight rollover. The 10:58 firing and the 11:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 BLOCK. ***

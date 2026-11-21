@@ -14240,3 +14240,9 @@ I left them alone. Scratch `_b100.log` / `_b100b.log` deleted after reading.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
 written, no account signed into or acted as. bellmirebro spoke not once.
 Next firing: own cycle on my three files; the row is otherwise empty.
+
+## C-160 (21 Nov 2026 05:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (04:58 CT block, CONTENT :22 row) gave content: "C-159 ticked. Free C-cycle, your own pick, the usual shape." No miniboss owed: origin/art tools/art/minibosses.py names 21 bodies and every one has a miniboss_feed.by_key entry (44 keys in by_key); no committed body is missing lines.
+Added (data/lore_lines.json only): epitaphs +12 (864 -> 876), descend +6 (529 -> 535), cleared +6 (514 -> 520), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c160` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new key: `_note_c160` only.
+CODE WIRING: none; the three lists are already drawn from at random.

@@ -412,7 +412,8 @@ const MB_FIT := {
 	"ferryman": 1.07,   # S71: art's _fit_ferryman_register.json pairs.ferryman.ratio (42nd, h 2.62 / hero 2.45, tag flooded - field 5, 3/3 proving views), copied not re-derived. MB_NAME row added at S72 once content C-149 wrote the feed
 	"winder": 0.96,   # S73: art's _fit_winder_register.json pairs.winder.ratio (43rd, Haulback in CANON, h 2.34 / hero 2.45, tag wood - field 5, 3/3 proving views, verdict GREEN), copied not re-derived. MB_NAME row added at S75 once content C-151 wrote the feed
 	"pitman": 0.94,   # S76: art's _fit_pitman_register.json pairs.pitman.ratio (44th, Underfoot in CANON, h 2.30, tag crypt - field 5, frame_edge 0 on all three views, fits_frame true), copied not re-derived
-	"tither": 0.99}   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
+	"tither": 0.99,   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
+	"blower": 1.01}   # S93: art's _fit_report.json pairs.blower.ratio (46th, Deadair in CANON, h 2.48 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived. NO MB_NAME row yet: content's C-169 feed row has not landed, and _s51_names requires every MB_NAME key to be in by_key
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and

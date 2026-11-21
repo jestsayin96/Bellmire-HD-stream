@@ -1017,7 +1017,13 @@
     "The lamp is lit at the top of the stair. It is the last warm thing for a while.",
     "Rope is paid out hand over hand. Somebody counts the turns.",
     "The gate-ward lifts the bar and lowers it behind them.",
-    "Rain on the lintel. They duck under it and go on down."
+    "Rain on the lintel. They duck under it and go on down.",
+    "The cooper taps the cask once for luck and goes back to his hoops.",
+    "A child holds the gate for them and is thanked with a nod.",
+    "Chalk marks on the first step, one for each who goes down.",
+    "The lamp-oil is topped up at the last post. Nobody hurries it.",
+    "Frost on the stair rail. Gloves go on before the hand does.",
+    "The ferryman's wife counts them through the gate, and does not say the number."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1539,7 +1545,13 @@
     "The gate-ward lifts the bar without a word and lets the cold in.",
     "A bandage is rolled and tied off. The roll is neat.",
     "The rope is coiled and hung on its peg, as it should be.",
-    "Someone puts the kettle on. It is the only cheering anyone does."
+    "Someone puts the kettle on. It is the only cheering anyone does.",
+    "The wounded are laid on the long bench. The healer is already there.",
+    "Someone sweeps the grit from the doorstep. It comes back with the next boots.",
+    "The lamp is trimmed and set on the sill, so the lane can see it.",
+    "A pot of broth goes round the table. Nobody asks for the story yet.",
+    "The gate-ward writes the number in the book and shuts it.",
+    "Boots come off by the hearth. The steam rises off them for an hour."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4542,7 +4554,19 @@
     "Kept his word on small things. That is most of what a man is.",
     "Counted the torches twice. Took one fewer than he needed.",
     "Left his boots by the fire. Somebody wears them now.",
-    "Walked in singing. Came out of the tale quieter than he went."
+    "Walked in singing. Came out of the tale quieter than he went.",
+    "Hung the lantern at the turn of the stair. It was lit when the rest came down.",
+    "Paid back what he owed on the Tuesday. Nobody had asked.",
+    "Split his bread with the dog at the gate. Both were fed.",
+    "Fixed the cart wheel before the road. The wheel held.",
+    "Taught the girl her knots. She ties them yet.",
+    "Kept the tally straight for the whole company. The sums came out.",
+    "Never raised his voice in the tavern. Never needed to.",
+    "Went first through the narrow place. The rest went through after.",
+    "Oiled the hinges on the cellar door. It opens quiet now.",
+    "Left the shutters latched and the stove banked. A tidy house to come home to.",
+    "Said he would be back by supper. The table is still laid.",
+    "Mended the roof of a neighbour who could not pay. The roof is dry."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14172,5 +14196,6 @@
   "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c157": "C-157 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c159": "C-159 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c160": "C-160 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+  "_note_c160": "C-160 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c161": "C-161 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 }

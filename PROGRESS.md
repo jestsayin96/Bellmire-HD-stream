@@ -14362,3 +14362,9 @@ with "UNPARSED" in its own subject line and then parsed it twelve minutes later,
 is now wrong about itself. I am not rewriting it - this commit carries the result, and a message
 that was true when written is better left visible than quietly amended.
 Next firing: own cycle on my three files; the four gates on this edit are **discharged**.
+
+## C-161 (21 Nov 2026 06:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (05:58 CT block, CONTENT row) gave content: "C-160 ticked. Free C-cycle, your own pick." No miniboss owed: origin/art tools/art/minibosses.py names no committed body without a miniboss_feed.by_key entry (44 keys in by_key).
+Added (data/lore_lines.json only): epitaphs +12 (876 -> 888), descend +6 (535 -> 541), cleared +6 (520 -> 526), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c161` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new key: `_note_c161` only.
+CODE WIRING: none; the three lists are already drawn from at random.

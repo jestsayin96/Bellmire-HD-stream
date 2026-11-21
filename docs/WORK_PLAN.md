@@ -1,3 +1,234 @@
+## TAKE THIS NEXT - THE 09:58 CT FIRING, 21 NOV 2026 (machine clock read 10:0x CST while
+## writing; same day, no midnight rollover. The 09:58 firing and the 10:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 BLOCK. ***
+##
+## SIX MERGES, main is b63aa573. **FIVE TICKED, ONE CORRECTLY NOT TICKED (the hub's standing
+## check - nothing shipped in `web/`).** THREE root PROGRESS.md conflicts (content, hub, chatbot,
+## hud-ui all appending at the same end-of-file - three of the four collided), both sides kept,
+## 3 marker lines dropped per conflict by a state machine, 0 base sections.
+## **Residuals counted with the EXACT four shapes** (`^<<<<<<< `, `^=======$`, `^>>>>>>> `,
+## `^|||||||`): ZERO in root PROGRESS.md after each resolve.
+## **THE STRONGER ASSERTION, AND IT IS THE ONE I ACTED ON: `diff --numstat origin/main HEAD`
+## reads +137/-0 on PROGRESS.md. ZERO LINES REMOVED**, and the file goes 14,554 -> 14,691 lines.
+## **AND I DID NOT LET THE NAIVE SUM PASS FOR A PROOF.** The six lanes' own additions sum to 141,
+## not 137, and rather than report a match that was not there I ran the real test: for EVERY lane
+## I took the set of non-blank lines it added over its own merge base and checked each one is
+## present in merged main. **laptop 10, content 4, art 0, hub 6, chatbot 93, hud-ui 6 - and
+## ZERO lines missing from main on all six.** The 141-vs-137 gap is duplicate blank separators
+## that a line count counts twice and a set does not. Nothing was lost.
+## **AND A TRAP I WALKED INTO AND CLIMBED OUT OF BEFORE WRITING A WORD OF THIS:** the three-dot
+## numstat shows `docs/WORK_PLAN.md +235/-0` on BOTH art and hud-ui, which reads as two lanes
+## editing the plan. They did not. Their merge bases predate main's own 08:58 plan sync, so the
+## plan shows as added. **I proved it instead of asserting it: the plan blob is
+## `94d9cb5b`, 2,369,622 bytes, on ALL SEVEN refs - set size 1.** No lane touched the plan.
+##
+## TICKED THIS HOUR (five):
+##   - **ART - THE BACK LAMP WAS BACK ON THREE BODIES, AND THE LANE REFUTED MY OWN ROW TO FIND
+##     IT. THIS IS THE BEST WORK IN THE HOUSE THIS HOUR.** My 08:58 row told this lane
+##     "**no back render in the tree is lit by more than one lamp**, found 20 Nov 16:34 and still
+##     true". **THAT SENTENCE WAS WRONG FOR 41 OF THE 44 BODIES AND RIGHT FOR THREE**, and the
+##     lane only knows which three because it built an instrument instead of taking either side.
+##     `tools/art/_backlamp.py` reads the shipped PNGs: back-view chromaticity distance from the
+##     front view, plus a floor test. **IT WAS CALIBRATED ON A KNOWN A/B FIRST** - `beadle_world`
+##     (old rig) 0.20386 vs `beadle_even` 0.06788 vs shipped `beadle` 0.06840 - so the instrument
+##     is proved able to move before it is believed. **And the lane threw away its own first
+##     floor test when the calibration caught it firing 2,904 px on a body that has no floor at
+##     all** (it was counting an antialiased rim). A number that reads the same on both arms of a
+##     known A/B is not a number.
+##     **I DID NOT TAKE THE TABLE. I RE-MEASURED ALL THREE BODIES MYSELF, IN MY OWN CONTAINER,
+##     WITH MY OWN NUMPY, ON THE OLD AND NEW PNGS SIDE BY SIDE:**
+##       ratcatcher back-chroma **0.25250 -> 0.06460**   (art: 0.23272 -> even)
+##       pitman     back-chroma **0.15213 -> 0.07038**, and a floor appears
+##       paviser    back-chroma 0.03550 -> 0.03193 (never the fault), **floor restored**
+##     My absolute numbers are NOT art's and I say so: different alpha threshold, and my crude
+##     floor count includes the antialiased rim art's third-part test correctly excludes. **The
+##     direction and the size of the move are what reproduce, and they reproduce on all three.**
+##     **AND I LOOKED AT THE PICTURE** (`ratcatcher/hero_back.png`, the worst body in the tree):
+##     neutral light from behind, both figures read, contact shadows on the floor under both.
+##     **THE CAUSE IS ONE DEFAULT, NOT THREE MISTAKES, AND THE FIX IS THE RIGHT ONE.**
+##     `EVENLIGHT` and `GROUND` were default OFF while adoption was a decision; instalment 5 took
+##     that decision over all 44 but **left the defaults off, so every later per-body pass that
+##     forgot a flag silently shot that body back onto the old rig and left it shipped beside 41
+##     bodies on the new one.** Both are now default ON with explicit opt-outs (`--worldlight`,
+##     `--noground`). A default that must be remembered on every call is a harness that can
+##     report an unearned pass. The pitman is the 44th body, so instalment 5's "44/44" never
+##     covered it - that is how it hid.
+##   - **S86 (game build) - THREE MAGIC NUMBERS BECOME TWO-AUTHORITY ARMS, AND IT IS THE CHAT
+##     BOT'S ASK TAKEN UP.** `REWORK_DIVISOR` named at roster.gd:218 and READ at :514;
+##     `OIL_PER_HEAD` / `OIL_FLOOR_MIN` named at delve.gd:161 and READ at :333-:337 - **I grepped
+##     the reads, not just the declarations.** `S86_CONSTS` read as verdict LINES, not a return
+##     code: `CHECKS 18 FAILS 0`, and the rows are real two-sided checks (`rework tier 3 cost 420
+##     -> 105`, `burn 7 heads old=4 new=4`), i.e. the constant and the old literal agree.
+##   - **B105 (chat bot) - THE RED HALF IS NOW PROVED BY THE REAL GATE INSTEAD OF BY PYTHON, AND
+##     THAT IS THE WHOLE POINT OF THE CYCLE.** B104's held away-gate arm landed GATED. **I read
+##     `red_l14.log` myself**: with `"oil"` pulled out of `AWAY_COUNTERS` the engine raises
+##     `COMMANDS_DATA COUNTER AWAY: ["buy_oil -> !oil"]` and `L14_TEST FAIL 1 (24 checks)` -
+##     named exactly, by Godot, not by a python stand-in. Green side: `L14_TEST OK (24 checks)`,
+##     `COMMANDS_DOC OK wrote 32 commands` (md5 unchanged either side, a true no-op), parse 0/0.
+##     The arm itself is at chatcmd.gd:2831/:2839 and anchors on roster.gd's own `haggle()`
+##     sites, with a push_error if roster.gd cannot be opened - it fails loud, not open.
+##   - **C-164 (content)** - counted off the ref by parsing BOTH versions: epitaphs 912 -> 924,
+##     descend 553 -> 559, cleared 538 -> 544 = **+12 / +6 / +6** exactly as claimed. **924/924,
+##     559/559, 544/544 unique, 0 blanks, 0 entries lost**, exactly one new top-level key and it
+##     is `_note_c164`, which says "DO NOT WIRE" on its own face.
+##   - **U125 (HUD) - the hostile-feed regression is green and NO `.gd` CHANGED, which is the
+##     right shape for a regression pass.** `U125_DONE checks=40 fails=0`, parse 0/0 - **I read
+##     the log, and I looked at the frame the numbers say is worst, not the prettiest one**
+##     (`host_s150_phone480.png`): the 46-character hostile name wraps inside the Chronicle
+##     vellum, nothing escapes the panel, the CJK leaderboard rows render, nothing overlaps a
+##     pane seam. Picture and number agree.
+##
+## WHAT I DID NOT TICK, AND WHY IT IS CORRECT:
+##   - **THE HUB - a standing check, nothing shipped.** Its only content commit says `web/` is
+##     byte-identical to main and I verified exactly that: `origin/hub:web` and `origin/main:web`
+##     are both `02257b2f`. I re-ran the security greps myself anyway, because a lane's own
+##     security claim about `web/` is always owed a check: **innerHTML appears at app.js:255 and
+##     :301 only, both page-owned strings, and the CSP meta is intact in index.html.** **No
+##     READY TO PUBLISH claim, so I ran NO publish verification and none was owed.**
+##
+## *** THE DEAD-DATA AUDIT, MEASURED ON MERGED TREE b63aa573, NOT REMEMBERED. ***
+##   **48 script files / 2,352,813 chars** (47 `scripts/*.gd` + `web/app.js`; the recursive glob
+##   that makes it 49 pulls in tools/ test code and is wrong), 12 `data/*.json`, **147 top-level
+##   keys, 57 zero-hit = 42 `_note_` + 15 NON-NOTE.**
+##   **THE NON-NOTE COUNT IS 15 AGAIN - UNCHANGED, AND IT IS THE ONLY NUMBER THAT CARRIES
+##   SIGNAL.** The series now reads 52 (05:0x) -> 53 (06:58) -> 56 (08:58) -> **57 (this hour)**,
+##   and the whole of that rise is content writing `_note_` keys: the key count went 146 -> 147
+##   and the new key is `_note_c164`. **The 07:58 block's 81 / 39-non-note remains the one
+##   outlier and is still wrong; do not carry it.**
+##   The 15, every one accounted for and none new: `lord_intros_alt` + `unique_intros_alt`
+##   (**READ** at delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four dead
+##   (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`),
+##   and the nine prose/spec strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`,
+##   `casing`, `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+##   **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO, off 34 dirs with
+##   files.** NO LANE IS TO WIRE A `_note_` KEY, AND CONTENT IS NOT TO STOP WRITING THEM.
+##
+## *** LOCK DISCIPLINE - THE CLEAN-HOUR COUNT RESETS TO 0, AND IT IS A FUTURE STAMP. ***
+##   The HUD wrote `IDLE 2026-11-21T09:58:00-06:00` at roughly 09:55 and then **caught it itself
+##   and wrote a correction line stamped 09:55:30 saying so.** A future stamp in a lock line is a
+##   named breaker of the clean-hour count, so the count goes 2 -> **0**. I am recording it
+##   exactly as it happened: the lane self-reported inside one line, which is the behaviour the
+##   protocol wants, and the window was genuinely free from 09:55 either way.
+##   **THE SCHEDULE FIX HELD A SECOND HOUR AND THAT IS THE GOOD NEWS.** The chat bot claimed at
+##   09:47:10 with a declared finish of 09:52 and cap 10:12 computed first, released 09:51:40 -
+##   inside its own window, clear of :52. The HUD then took 09:54:00-09:55 and shipped U125.
+##   **Nobody claimed over a live hold; no lane was starved; no stale lock cleared.**
+##   The game build: claim 09:08:46, cap claim+25 = 09:33 computed BEFORE the declaration,
+##   declared 09:33, IDLE 09:15:12. **Zero over-declarations in eight hours. The old pattern is
+##   over and should not be charged again.**
+##   (Not one of the six: the pack catalogue worker wrote NO lock line at :15 this hour. Stated
+##   as an observation, not a charge - it is not one of my six and may simply have had nothing
+##   to take the lock for.)
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - **S86 ticked, and taking the chat bot's ask was the right call: three
+##   wording guards are now real two-authority arms.** I checked the READS, not just the
+##   declarations. Your cycle, your pick. The remaining open ask from B103 is still yours to
+##   decline freely: `Gear.ARMOUR` is read by nothing in the game, while `Gear.WEAPONS` is NOT
+##   dead (town.gd:4571 dresses the stall from it) - a one-line write-down either way closes it.
+##
+## - **CONTENT** - C-164 ticked, parsed both versions, checked uniqueness and losses. Free
+##   C-cycle, your own pick. **42 of this hour's 57 zero-hit keys are your `_note_` keys and not
+##   one of them is a defect** - keep writing them.
+##
+## - **ART** - **the census is ticked and it corrected ME, not you. My row said no back render in
+##   the tree is lit by more than one lamp; you measured and it was true of three bodies out of
+##   44. That row is withdrawn and this one replaces it.** Two things, both yours and neither
+##   urgent: (1) **the three repaired bodies are repaired in the TREE but the default change is
+##   the real fix - consider one sweep that re-reads all 44 with `_backlamp.py` after any future
+##   per-body pass**, so a body can never drift back silently again; the instrument is cheap
+##   (it reads PNGs, no re-render). (2) unchanged and at your own pace: the fit register's
+##   carried `RED / ok:false` is the two RETIRED `_chibi` rows with no occlusion measurement -
+##   `shipped_red` is empty and `ok_shipped` is true, so no shipped body is red; retiring them
+##   properly or measuring them once would let the register print its real verdict again.
+##
+## - **HUB** - nothing shipped in `web/` and your standing check verified exactly as written;
+##   `origin/hub:web` == `origin/main:web` == `02257b2f`. Own cycle on your three files.
+##   **Do not publish** - the delta is with the supervisor for a NINTH hour. If you touch `web/`,
+##   say READY TO PUBLISH plainly and I will run the full gate.
+##
+## - **HUD** - **U125 ticked, and no `.gd` changed, which is what a regression pass should look
+##   like.** Three things, in order of how much they matter:
+##   (1) **COMMIT THE LOG. THIS IS THE SECOND HOUR RUNNING.** `_u125_run.log`, `_u125_done.txt`
+##   and `_u125_parse.log` sit UNTRACKED in W2's root; on `origin/hud-ui` there is again no log
+##   to judge U125 by and I again had to read your working tree to verify you. The tool and the
+##   six pngs landed - **put the log in `renders/cycles/20261121_u125/` beside them.** I am not
+##   docking the work for it; I am telling you it will eventually cost a tick when a seat cannot
+##   reach your working tree.
+##   (2) **THE FUTURE STAMP.** Your IDLE read 09:58:00 at about 09:55. You caught it and
+##   corrected it in the next line, which is exactly right - but it reset the clean-hour count to
+##   0, so it is worth a word: **read the clock, do not compute the stamp from your expected
+##   finish.**
+##   (3) L21 from last hour stays open only as a one-line confirmation when you next write.
+##
+## - **CHAT BOT** - **B105 ticked: you moved the red half from python to the real Godot gate and
+##   it names `["buy_oil -> !oil"]` out of the engine's own mouth. That is the difference between
+##   a test and a story.** And your window discipline held a second hour - claim 09:47, declared
+##   09:52, released 09:51:40, the HUD took :52 cleanly. **The :50 row is working; keep it.**
+##   Your cycle, your pick.
+##
+## - (QA tester, not one of the six) - did NOT fire this hour; it is every two hours and is next
+##   due 10:41. **Still owed in writing, now from 04:58 and six hours old:** acknowledge the
+##   03:06 stale-lock clear, name which gates are windowed-only, and say where its declared
+##   `cap claim+12` comes from (the protocol's is +25).
+##
+## FOR THE SUPERVISOR (09:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured by me this hour, unchanged for a NINTH hour.**
+##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
+##      `origin/hub:web` `02257b2f`, identical to `origin/main:web`; difference **3 files /
+##      +59 / -1** (NOTES.md +9, app.js +46/-1, style.css +4). **I RAN THE NUMSTAT MYSELF RATHER
+##      THAN COPYING THE SPLIT** - the 08:58 seat copied "+47" out of its own prompt while its
+##      own numstat said +46, and that is now twice in this house. No READY TO PUBLISH claim this
+##      hour, so no publish verification was run and none was owed.
+##      **Recommendation: still not yet**, purely procedural - the gate is unearned until the
+##      lane claims it. **Standing offer, open since 08:58: say the word and I will run the full
+##      publish gate on the merged tree unprompted and bring you the result.**
+##   2. **THE LEDGER QUESTION (carried from 05:58, unchanged, nothing blocked).** The Master
+##      Vision doc numbers Phase 2 systems 6/7/8 as crystal drops / chests by rarity / mimics;
+##      the 18 Nov 16:58 directive renumbered 6/7/8 as weapon / armour / shield variety, which is
+##      what the fleet has used since. Both agree 9 = loot on the ground, and System 9 row (a) is
+##      LIVE on main. **Recommendation:** confirm the directive's numbering is authoritative and
+##      either re-enter those three at free numbers in the 5-80 range or say plainly they are
+##      dropped. A ledger decision, not a build decision.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 10:0x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once). **TEN items - and note
+## that the eleven carried at 08:58 WERE LANDED on a live turn at 09:5x, so this list is the
+## NEW backlog accumulating since, plus the few that stayed true.**
+## *** I MADE NO PROMPT-WRITE ATTEMPT THIS RUN AND I SAY SO PLAINLY. Settled 18 Nov: the gate is
+##   on the CALL, not on a field. Spending the call again is noise, not evidence.
+##   1. **THE BASELINE BLOCK IS ONE HOUR STALE (it reads 09:1x on tree 12ad68e9).** Current, on
+##      merged tree `b63aa573`: **48 files / 2,352,813 chars, 12 `data/*.json`, 147 top-level
+##      keys, 57 zero-hit = 42 `_note_` + 15 non-note.** The non-note 15 and its membership are
+##      UNCHANGED. Unread live data keys ZERO; unreferenced asset directories ZERO off 34.
+##   2. **THE PROMPT'S ART COUNT LINE SAYS "46 rows, 44 live bodies, two retired `_chibi`".**
+##      That is still right, but the prompt's *surrounding* claim that "no back render in the
+##      tree is lit by more than one lamp" (inherited from 20 Nov 16:34 and repeated into my own
+##      08:58 row) is **REFUTED for 41 of 44 and was true of only three bodies, all three now
+##      repaired.** Strike it. `tools/art/minibossfit.py` now defaults `EVENLIGHT=1` and
+##      `GROUND=1`; the opt-outs are `--worldlight` / `--noground`.
+##   3. (carried) the Step 5 ID line is behind. As of this hour: **B105, C-164, D100, H32, L74,
+##      S86, T5, U125**, art on the back-lamp census, hub ID unchanged.
+##   4. (carried, re-measured) the hub SHAs. gh-pages `05ac2679`, tree `9ca8051e`, pushed
+##      **19 Nov 20:06 CT**; `origin/hub:web` `02257b2f`; delta 3 files / +59 / -1.
+##   5. (carried, re-measured) the game build's over-declaration pattern is STOPPED and should be
+##      recorded as stopped: **zero over-declarations in eight hours**, every lock line carrying
+##      "claim HH:MM, cap claim+25 = HH:MM" with the cap computed before the declaration.
+##   6. **THE CLEAN-HOUR COUNT IN THE PROMPT SAYS "STOOD AT 2 AFTER THE 08:58 FIRING". It is now
+##      0**, reset this hour by the HUD's future stamp (self-caught and self-corrected).
+##   7. (carried) `Delve.MB_NAME` = **44**, `miniboss_feed.by_key` = **44**, published
+##      `miniboss`.what and .short both say 44. Whole at 44/44/44. Never quote the prompt's
+##      count; never use a flat regex on a multi-line GDScript dict.
+##   8. (carried) the two-dot/three-dot warning, **and a new face of it worth adding**: a
+##      three-dot numstat shows `docs/WORK_PLAN.md +235/-0` on any lane whose merge base predates
+##      main's last plan sync. That is NOT the lane editing the plan. Prove it with the blob:
+##      `git rev-parse origin/<ref>:docs/WORK_PLAN.md` on all seven and assert the set size is 1.
+##   9. (carried) the merge-marker audit needs the exact four shapes, not a loose `^={7}` run,
+##      which matches the 80-character rule lines in WORK_PLAN.md and COORDINATION.md.
+##  10. (carried) the glob is `data/*.json`, one level; `data/town/bellmire.json` is a tools/
+##      artefact, not live data; and the script corpus is `scripts/*.gd` + `web/app.js` only.
+##
 ## TAKE THIS NEXT - THE 08:58 CT FIRING, 21 NOV 2026 (machine clock read 09:0x CST while
 ## writing; same day, no midnight rollover. The 08:58 firing and the 09:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 07:58 BLOCK. ***

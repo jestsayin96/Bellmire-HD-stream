@@ -14439,3 +14439,84 @@ whole project, so its log shows `TWITCH joined #jestsayin96` and a bellmirebro t
 that is the headless game connecting, the same as every lane's parse run. The bot posted nothing
 and no bits were spent on any account.
 Next firing: own cycle. The four gates on this edit are **discharged**.
+
+## B103 - THE ARMOURY'S PRICE GUARD WAS READING A TABLE NO SHOP CHARGES (21 Nov, 07:45 firing)
+
+Own cycle, taken on the row's own terms. I went looking for the next published number with no arm
+on it and found something worse than a gap: **an arm that has been printing OK against the wrong
+authority for sixty-odd cycles.**
+
+**THE FINDING, IN THE ORDER I FOUND IT.**
+1. `armoury`.cost has a COST arm (B36) and `forge`.cost has none. That asymmetry is what I pulled
+   on. `forge`.cost publishes `60 / 160 / 420 / 1100` and the FORGE arms above it check
+   `Gear.KINDS` - the KIND LIST - and nothing else. **Nothing in the house has ever compared the
+   forge's money to the smith's.**
+2. **THAT DISPROVES A SENTENCE IN MY OWN FILE.** B83 asserts, in a comment ~1200 lines up: "every
+   one of them already sits under an arm. No published number in this file is unwatched", and it
+   lists `forge 60/160/420/1100` among the numbers it had walked. **It was false when it was
+   written.** (The same comment still reads `miniboss 36`; the published count has been 44 since
+   B94.) I have not rewritten either line - a lane's wrong sentence is the evidence of how the
+   mistake happened. Both are corrected where the work is, in the B103 block.
+3. **THEN THE REAL ONE.** `grep -rn "Gear\.ARMOUR\b" scripts/` over the whole game returns
+   **nothing outside my own chatcmd.gd**. `Gear.ARMOUR` (gear.gd:30) is read by my guard and by no
+   shop, no till and no stall. `Roster.buy_armour` charges `Roster.ARMOUR` (roster.gd:183) - a
+   SECOND six-row table with its own copy of every price. So ARMOURY COST has been comparing the
+   price I publish against **a table no viewer ever pays**, and its own error text said
+   "Gear.ARMOUR charges" - a false statement about the engine, written by me, inside the arm built
+   to catch false statements about the engine. **The two copies agree row for row today, which is
+   exactly why it printed OK and why no battery could see it.**
+4. The weapons side is the same shape with one difference that makes it worse, not better.
+   `Roster.WEAPONS` (roster.gd:171) is what `buy_weapon` charges; `Gear.WEAPONS` (gear.gd:21) **is**
+   read elsewhere - `town.gd:4571` dresses the smithy's stall out of it. A drift between those two
+   does not merely blind a guard: it puts one price on goods a viewer can SEE on the stall and a
+   different one in the till.
+
+**WHAT I CHANGED.** The ladder, COST and FOUND arms now read `Roster.ARMOUR`, the table that
+charges; `ARMOUR_LOOK` stays `Gear`'s, which is correct - it has no second copy. Five new arms:
+`FORGE COST ANCHOR` and `FORGE COST` (published ladder against the till), one `AUTHORITY` arm per
+ladder (till copy against stall copy, on name/cost/found), and `FORGE REWORK`. **I copied no price
+into my own file to compare against** - B41's rule holds, a fourth copy of a price would be the
+defect and not the guard; the AUTHORITY arms put the engine's two copies against each other
+instead, so the drift that hid all of this now goes red first. 107 arms -> 111 sites.
+
+**WHAT `FORGE REWORK` HONESTLY IS: A WORDING GUARD, AND IT SAYS SO IN ITS OWN ERROR TEXT.**
+`forge`.cost ends "(rework at the top: a quarter)"; the engine site is `roster.gd:510`,
+`int(int(WEAPONS[...]["cost"]) / 4)`. **The 4 is a bare literal** - no named constant anywhere in
+`scripts/` - so there is no second authority and this arm reads my word, not the engine. Same
+limit B102's oil arms carry, stated rather than left for a reader to work out.
+
+**GATES - FOUR, ALL GREEN, ON THE REAL EDIT (claim 07:52:30, released 07:58, cap 08:17).**
+`--headless --quit-after 300` **rc=0, 0 script errors, 0 parse errors**. `L14_TEST OK (24 checks)`,
+24 `ok` / 0 `FAIL`, including **`ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`**
+- all 111 sites silent, so the published forge ladder DOES match `Roster.WEAPONS` and the two
+engine copies of both ladders DO agree today. `TWITCH_PARSE OK (8 checks)`.
+`COMMANDS_DOC OK wrote 32 commands` and **`docs/COMMANDS.md` came back byte-identical**
+(sha `4a105f8b…` before and after) - a true no-op, as it should be: this cycle touched no data.
+
+**THE RED HALF - PROVEN FOR THREE OF THE FIVE, AND I SAY WHICH TWO ARE NOT.** I perturbed
+`forge`.cost three ways, ran `_l14_test` on each, and restored:
+- `160 -> 165` fired **exactly `["FORGE COST"]`**, printing `published [60, 165, 420, 1100],
+  charged [60, 160, 420, 1100]` - independent confirmation the arm reads the till's table.
+- digits stripped fired **exactly `["FORGE COST ANCHOR"]`**.
+- `a quarter` dropped fired **exactly `["FORGE REWORK"]`**.
+One arm each, no collateral. **`data/commands.json` restored byte-identical
+(sha `5b8d2ab2…` both sides) and `git diff` on data and doc is EMPTY.**
+**THE TWO `AUTHORITY` ARMS' RED HALF IS UNPROVEN AND WILL STAY UNPROVEN FROM THIS LANE.** Firing
+them needs a perturbation in `roster.gd` or `gear.gd`, which are the GAME BUILD's files. I am not
+editing another lane's file to exercise my own guard, so that half is owed to whoever owns those
+files, and I would rather say so than imply five proven arms.
+
+**FOR THE GAME BUILD LANE - ONE REQUEST, DECLINE IT FREELY.** Two copies of each gear ladder is
+the actual defect under all of this; my arms only report the drift. If `Gear.ARMOUR` is dead (and
+`grep` says it is), deleting it or making `Roster.ARMOUR` an alias of it would end the class. I
+have not touched either file. Separately, a `REWORK_DIVISOR := 4` const at `roster.gd:510` would
+turn `FORGE REWORK` into a real two-authority arm; the earlier `OIL_PER_HEAD` / `OIL_FLOOR_MIN`
+ask from B102 still stands on the same terms.
+
+**LOCK.** Game build wrote `IDLE 07:20:00`, so the window was free by its own release. No Godot
+alive by `tasklist` before I claimed. Claimed 07:52:30, released inside my declared finish.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE SENT ON ANY ACCOUNT.** The parse gate
+launches the whole project, so its log shows the headless game joining `#jestsayin96` and a token
+refresh - that is every lane's parse run, not a test. The bot posted nothing.
+Next firing: own cycle.

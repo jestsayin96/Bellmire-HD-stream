@@ -1395,6 +1395,11 @@ static func commands() -> Dictionary:
         #   nothing in the house compared them. So one guard covers the NAMES and THE MONEY.
         #   AN AUTHORITY IN A FILE I DO NOT OWN - scripts/gear.gd is the GAME BUILD's, and it holds
         #   TWO tables, not one: Gear.ARMOUR (names, costs, the found-only flag) and
+        ##  B103 CORRECTS THE LINE BELOW AND THE THREE ARMS THAT TRUSTED IT: Gear.ARMOUR is NOT
+        ##  the authority for the ladder, the prices or the found-only flag, because NO SHOP READS
+        ##  IT. `Roster.buy_armour` charges `Roster.ARMOUR` (roster.gd:183). The ladder, COST and
+        ##  FOUND arms below now read Roster.ARMOUR; only ARMOUR_LOOK is still Gear's, and that
+        ##  one is correct - it has no second copy. See the B103 block at the end of this guard.
         #   Gear.ARMOUR_LOOK (which pieces actually show, per tier). A tier added there is exactly
         #   how `greataxe` (S20) and `sceptre` (D94b) reached the smithy unpublished.
         # AND IT CORRECTS MY OWN LANE'S RECORD. B36's leftovers list said this claim's authority
@@ -1437,7 +1442,7 @@ static func commands() -> Dictionary:
         var a_real: Array = []
         var a_real_cost: Array = []
         var a_found: Array = []
-        for a_row in Gear.ARMOUR:
+        for a_row in Roster.ARMOUR:
             var a_r: Dictionary = a_row
             var a_nm := String(a_r.get("name", "")).to_lower()
             if a_nm == "":
@@ -1483,25 +1488,25 @@ static func commands() -> Dictionary:
                     a_real_pc.append(String(a_k))
         if a_said.is_empty():
             _guard_faults.append("ARMOURY ANCHOR")
-            push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Gear.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
+            push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Roster.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
             printerr("COMMANDS_DATA ARMOURY ANCHOR - `armoury`.what lost its \"%s\" anchor; the ladder and the prices are now unchecked" % a_anchor)
         else:
             if a_said_short != a_said:
                 var a_sp_tip: String = "`armoury`.short no longer carries the ladder at all" if a_said_short.is_empty() else "short says %s" % str(a_said_short)
                 _guard_faults.append("ARMOURY SPLIT")
-                push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Gear.ARMOUR" % [str(a_said), a_sp_tip])
+                push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Roster.ARMOUR" % [str(a_said), a_sp_tip])
                 printerr("COMMANDS_DATA ARMOURY SPLIT - what %s vs short %s; no single published ladder" % [str(a_said), str(a_said_short)])
             if a_said != a_real:
                 var a_unsaid: Array = a_real.filter(func(n): return not a_said.has(n))
                 var a_ghost2: Array = a_said.filter(func(n): return not a_real.has(n))
                 var a_tip: String = "same names, WRONG ORDER - a ladder's order is the claim" if (a_unsaid.is_empty() and a_ghost2.is_empty()) else "unpublished: %s; invented: %s" % [str(a_unsaid), str(a_ghost2)]
                 _guard_faults.append("ARMOURY LADDER")
-                push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Gear.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
+                push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Roster.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
                 printerr("COMMANDS_DATA ARMOURY LADDER - published %s, sold %s; %s" % [str(a_said), str(a_real), a_tip])
             if a_said_cost != a_real_cost:
                 var a_ctip: String = "`armoury`.cost no longer states a slash-separated price ladder" if a_said_cost.is_empty() else "published %d price(s) against %d tier(s)" % [a_said_cost.size(), a_real_cost.size()]
                 _guard_faults.append("ARMOURY COST")
-                push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Gear.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
+                push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Roster.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
                 printerr("COMMANDS_DATA ARMOURY COST - published %s, charged %s" % [str(a_said_cost), str(a_real_cost)])
             if a_said_pc != a_real_pc:
                 var a_ptip: String = "`armoury`.what no longer carries \"It shows: \"" if a_said_pc.is_empty() else "published %s" % str(a_said_pc)
@@ -1513,7 +1518,7 @@ static func commands() -> Dictionary:
             if not a_sold_found.is_empty() or not a_mute_found.is_empty():
                 var a_ftip: String = "named in the buy ladder though it cannot be bought: %s" % str(a_sold_found) if not a_sold_found.is_empty() else "found-only armour `armoury`.what never mentions: %s" % str(a_mute_found)
                 _guard_faults.append("ARMOURY FOUND")
-                push_error("COMMANDS_DATA ARMOURY FOUND: Gear.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
+                push_error("COMMANDS_DATA ARMOURY FOUND: Roster.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
                 printerr("COMMANDS_DATA ARMOURY FOUND - found-only %s; %s" % [str(a_found), a_ftip])
         # B38: THE BREW - CHOSEN ON SHAPE AGAIN, AND ITS AUTHORITIES SIT IN TWO FILES I DO NOT
         # OWN. The row let me choose on shape over size; `brew` beat the three small ones that
@@ -2645,6 +2650,121 @@ static func commands() -> Dictionary:
             _guard_faults.append("OIL FLOOR MIN")
             push_error("COMMANDS_DATA OIL FLOOR MIN: `oil`.what no longer carries its \"a flask at least\" clause (it reads \"%s\") - delve.gd:161 wraps the burn in `maxi(1, ...)`, so a lone delver pays a WHOLE flask for a floor; without the clause a viewer reads \"one flask for two delvers\" and expects one flask to light two floors alone" % olw)
             printerr("COMMANDS_DATA OIL FLOOR MIN - `oil`.what lost the floor-minimum clause; a solo delver's cost is now unpublished")
+        # B103: THE ARMOURY'S PRICE GUARD WAS READING A TABLE NO SHOP CHARGES, AND THE FORGE'S
+        # PRICE LADDER HAD NO ARM AT ALL. Both found by measurement, and the second one disproves
+        # a sentence THIS FILE PUBLISHES ABOUT ITSELF.
+        # WHAT B83 ASSERTS, ~1200 LINES ABOVE: "every one of them already sits under an arm. No
+        # published number in this file is unwatched", listing "forge 60/160/420/1100" among the
+        # numbers it had walked. THAT IS FALSE, AND IT WAS FALSE WHEN IT WAS WRITTEN. `forge`.cost
+        # publishes four prices; the FORGE arms above check Gear.KINDS and nothing else - the KIND
+        # LIST. Nothing in the house has ever compared the forge's money to the smith's. (The same
+        # comment still says "miniboss 36"; the published count has been 44 since B94. Neither
+        # line is rewritten - a lane's wrong sentence is the evidence of how the mistake happened,
+        # and the correction belongs where the work is, which is here.)
+        # WORSE, AND THE REASON THIS IS NOT MERELY A GAP: `grep -rn "Gear\.ARMOUR\b" scripts/`
+        # over the whole game returns NOTHING OUTSIDE THIS FILE. Gear.ARMOUR (gear.gd:30) is read
+        # by my own guard and by no shop, no till and no stall. `Roster.buy_armour` charges
+        # `Roster.ARMOUR` (roster.gd:183), a SECOND six-row table carrying its own copy of every
+        # price. So ARMOURY COST has been checking the price I publish against a table no viewer
+        # ever pays, and its own error text said "Gear.ARMOUR charges" - a false statement about
+        # the engine, written by me, inside the arm built to catch false statements about the
+        # engine. The two copies agree row for row TODAY, which is exactly why it printed OK and
+        # why no battery, mine or anyone's, could see it.
+        # THE SAME SHAPE ON THE WEAPONS SIDE, with one difference that makes it worse rather than
+        # better: `Roster.WEAPONS` (roster.gd:171) is what `buy_weapon` charges, and Gear.WEAPONS
+        # IS read elsewhere - town.gd:4571 dresses the smithy's stall out of it. A drift between
+        # those two copies does not just blind a guard: it puts one price on the goods a viewer
+        # can SEE on the stall and a different one in the till.
+        # WHAT I CHANGED, AND WHAT I REFUSED TO DO: the armoury arms now read the table that
+        # CHARGES, and I did NOT copy a price into this file to compare against. B41's rule holds
+        # - a fourth copy of a price would be the defect and not the guard. Instead the two engine
+        # copies are now compared TO EACH OTHER, so the drift that would have hidden all of this
+        # is the thing that goes red first.
+        # FIVE NEW PATHS, all independent: FORGE COST ANCHOR and FORGE COST (two authorities, the
+        # published ladder against the till), one AUTHORITY arm per ladder (till copy against
+        # stall copy), and FORGE REWORK, which is WORDING ONLY and says so.
+        var f_d: Dictionary = (cmd_d.get("forge", {}) as Dictionary)
+        var f_cost: String = String(f_d.get("cost", ""))
+        # the published ladder: leading digits of each slash-separated piece, the same reading
+        # ARMOURY COST uses, so one published-ladder reader serves both shops.
+        var f_said_cost: Array = []
+        for f_pc in f_cost.split("/", false):
+            var f_piece := String(f_pc).strip_edges()
+            var f_dig := ""
+            for f_i in f_piece.length():
+                var f_ch := f_piece[f_i]
+                if f_ch >= "0" and f_ch <= "9":
+                    f_dig += f_ch
+                elif f_dig != "":
+                    break
+            if f_dig != "":
+                f_said_cost.append(int(f_dig))
+        # what the smith actually charges. `bare hands` is neither bought nor found - it is the
+        # state a hero starts in - and `scarforged` is found-only, so neither is a priced tier.
+        var f_real_cost: Array = []
+        var f_real_name: Array = []
+        for f_row in Roster.WEAPONS:
+            var f_r: Dictionary = f_row
+            if bool(f_r.get("found", false)):
+                continue
+            if int(f_r.get("cost", 0)) > 0:
+                f_real_cost.append(int(f_r.get("cost", 0)))
+                f_real_name.append(String(f_r.get("name", "")))
+        if f_said_cost.is_empty():
+            _guard_faults.append("FORGE COST ANCHOR")
+            push_error("COMMANDS_DATA FORGE COST ANCHOR: `forge`.cost no longer carries a slash-separated price ladder (it reads \"%s\") - the forge prices docs/COMMANDS.md publishes can no longer be checked against Roster.WEAPONS, which charges %s for %s" % [f_cost, str(f_real_cost), str(f_real_name)])
+            printerr("COMMANDS_DATA FORGE COST ANCHOR - `forge`.cost lost its price ladder; the smith's money is now unchecked")
+        elif f_said_cost != f_real_cost:
+            var f_ctip: String = "published %d price(s) against %d forgeable tier(s)" % [f_said_cost.size(), f_real_cost.size()]
+            if f_said_cost.size() == f_real_cost.size():
+                f_ctip = "same count, wrong money - a price ladder's order is the claim"
+            _guard_faults.append("FORGE COST")
+            push_error("COMMANDS_DATA FORGE COST: `forge`.cost publishes %s gold by tier and `Roster.buy_weapon` charges %s for %s - a viewer is quoted a price the smith does not take, and finds out by paying; %s" % [str(f_said_cost), str(f_real_cost), str(f_real_name), f_ctip])
+            printerr("COMMANDS_DATA FORGE COST - published %s, charged %s" % [str(f_said_cost), str(f_real_cost)])
+        # THE TWO COPIES OF EACH LADDER. The till's table is the authority for what a viewer pays;
+        # the other copy is what the rest of the game dresses itself from. They are compared on
+        # the three fields my own arms read - name, cost and the found-only flag - and nothing is
+        # restated here: both sides of every comparison are the engine's own.
+        for f_auth in [["ARMOURY", "armour", Roster.ARMOUR, Gear.ARMOUR, "Roster.ARMOUR (roster.gd:183)", "Gear.ARMOUR (gear.gd:30)", "Roster.buy_armour", "nothing outside this guard reads the gear.gd copy, so a drift there is silent until a lane wires it up"],
+                       ["FORGE", "weapon", Roster.WEAPONS, Gear.WEAPONS, "Roster.WEAPONS (roster.gd:171)", "Gear.WEAPONS (gear.gd:21)", "Roster.buy_weapon", "town.gd:4571 dresses the smithy's stall from the gear.gd copy, so a drift puts one price on the stall and another in the till"]]:
+            var au_tag: String = String(f_auth[0])
+            var au_word: String = String(f_auth[1])
+            var au_till: Array = f_auth[2]
+            var au_other: Array = f_auth[3]
+            var au_tname: String = String(f_auth[4])
+            var au_oname: String = String(f_auth[5])
+            var au_buyer: String = String(f_auth[6])
+            var au_why: String = String(f_auth[7])
+            var au_diff: Array = []
+            if au_till.size() != au_other.size():
+                au_diff.append("%d rows in %s against %d in %s" % [au_till.size(), au_tname, au_other.size(), au_oname])
+            for au_i in range(mini(au_till.size(), au_other.size())):
+                var au_a: Dictionary = au_till[au_i]
+                var au_b: Dictionary = au_other[au_i]
+                for au_k in ["name", "cost", "found"]:
+                    var au_va: String = str(au_a.get(au_k, null))
+                    var au_vb: String = str(au_b.get(au_k, null))
+                    if au_va != au_vb:
+                        au_diff.append("row %d `%s`: %s vs %s" % [au_i, String(au_k), au_va, au_vb])
+            if not au_diff.is_empty():
+                _guard_faults.append("%s AUTHORITY" % au_tag)
+                push_error("COMMANDS_DATA %s AUTHORITY: the %s ladder is declared TWICE IN THE ENGINE and the two no longer agree - %s is what %s charges, %s is the other copy, and they differ: %s. docs/COMMANDS.md can only be right about one of them, and %s" % [au_tag, au_word, au_tname, au_buyer, au_oname, str(au_diff), au_why])
+                printerr("COMMANDS_DATA %s AUTHORITY - the two engine %s tables disagree: %s" % [au_tag, au_word, str(au_diff)])
+        # THE REWORK CLAUSE, AND WHAT THIS ARM HONESTLY IS. `forge`.cost ends "(rework at the top:
+        # a quarter)" - the promise that a hero already at the best forgeable tier pays a QUARTER
+        # to have their steel remade in another kind. The engine site is roster.gd:510,
+        # `int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)`. THE 4 IS A BARE LITERAL: there is no
+        # named constant anywhere in scripts/ for it, so there is no second authority to compare
+        # against and THIS ARM GUARDS MY OWN WORDING, NOT THE ENGINE - exactly the limit B102's
+        # oil arms carry, and it is said here rather than left for a reader to work out. If the
+        # GAME BUILD lane ever wants this to be a real two-authority arm, one const at that site
+        # (`REWORK_DIVISOR := 4`) is all it needs and this arm will read it instead. Declining
+        # that is free; the wording guard stands either way, because a clause silently deleted
+        # from my own file is the failure this arm actually catches.
+        if not f_cost.to_lower().contains("quarter"):
+            _guard_faults.append("FORGE REWORK")
+            push_error("COMMANDS_DATA FORGE REWORK: `forge`.cost no longer carries its \"a quarter\" rework clause (it reads \"%s\") - roster.gd:510 charges `cost / 4` to remake the top tier in another kind, and with the clause gone a viewer at the top of the ladder is told only that the forge sells nothing more. This arm reads the WORD, not the engine: the 4 at :510 is a bare literal with no constant to check it against" % f_cost)
+            printerr("COMMANDS_DATA FORGE REWORK - `forge`.cost lost the \"a quarter\" clause; the top-tier rework price is now unpublished")
         _cmds = parsed
     return _cmds
 

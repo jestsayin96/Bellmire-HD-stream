@@ -13751,3 +13751,24 @@ Gates (one claim, lock 18:49:10 -> IDLE, cap claim+10 = 18:59, released early, n
   - PROVED THE NUMBER RATHER THAN ASSERTING IT: wrote `origin/content:data/lore_lines.json` over the worktree copy, re-ran the gate - **the MINIBOSS COUNT arm cleared** (42 published, 42 fed) and the only arm left was `MINIBOSS UNNAMED: ["ferryman"]`, which is the trailing MB_NAME and nothing of mine. Restored the file and confirmed md5 identical before and after (20f1105e208682d28fd1a84ba9d1fa92). `data/lore_lines.json` is the CONTENT lane's and is not in my commit.
   - I DID NOT MANUFACTURE A GREEN. No configuration of real files is fully green this hour: main's feed makes COUNT fire, content's feed makes UNNAMED fire. A tree with both content's feed and a ferryman row written into delve.gd would pass, and I did not build it, because writing another lane's file to produce a green is the fault, not the proof.
 Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written.
+
+## B91 - RE-RAN L14 AGAINST MERGED MAIN. ONE RED LEFT, IT IS NOT MINE, AND I PROVED IT CLEARS.
+Took the lead's :45 row (TAKE THIS NEXT, 18:58 CT): "B91: RE-RUN L14 AGAINST MERGED MAIN AND REPORT WHAT IS LEFT... expect ONE red at worst. Then back to your own cycle - do not re-publish 42." I did exactly that and published nothing.
+Merged `origin/main` d9e4a053 into `chatbot` (fast-forward; B90 is in main). Tree state I MEASURED MYSELF on the merged worktree, not taken from the plan:
+  - `miniboss_feed.by_key` = **42**, `ferryman` present (content's C-149 is in main now).
+  - `data/commands.json` publishes **42 elites** in both `short` and `what`.
+  - `Delve.MB_NAME` = **41 keys, 41 unique**, `ferryman` ABSENT - S72 is pushed to `origin/laptop` (b20c20b2) but is NOT in main yet.
+  So the chain on merged main this minute is **42 feed / 41 MB_NAME / 42 published** - the deliberate one-hour stagger the lead flagged, measured rather than assumed.
+TWO OF MY OWN INSTRUMENTS WERE WRONG AND I THREW BOTH AWAY BEFORE REPORTING ANYTHING:
+  - My first MB_NAME regex returned **74 keys / 58 unique** because it swept inline comment text and ran past the closing brace. Stripping `#` comments and stopping at the real `}` gives **41 / 41**. 74 was a fiction.
+  - My first `commands.json` read returned **8** - that is the TOP-LEVEL key count (`_source, hub_url, cooldown_s, twitch_cooldown_s, order, commands, ask, foreign`), not the command count. The commands live under `commands`: **31**. This is the SAME silent-dict-fallback fault B87 wrote up against itself; I caught it before it reached a number in a summary, but I caught it the second time, not the first.
+Changed: NOTHING in my three files. `tools/_commands_doc.gd` ran as a no-op confirmation and `git status` on scripts/ data/ docs/ came back EMPTY - the generator rewrote `docs/COMMANDS.md` byte-identical. No publish, as instructed.
+Gates (one claim, lock 19:47:40 -> IDLE, cap claim+10 = 19:57, released early, no crossing; Godot EMPTY at claim and at release; last lock line re-read IMMEDIATELY before the claim was written, per the lead's 18:58 recommendation after the 18:53 append race):
+  - `--headless --path W6 --quit-after 300` rc=0.
+  - `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 31 commands**, rc=0, file unchanged.
+  - `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**, rc=0.
+  - `tools/_l14_test.gd` on the merged worktree -> **L14_TEST FAIL 1 (24 checks)**. The one failing check is `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS UNNAMED"])` - ferryman draws a feed with no MB_NAME row. **B90's COUNT arm is GONE: the lead's merge cleared it exactly as it said it would.**
+  - PROVED THE REMAINING RED CLEARS RATHER THAN ASSERTING IT: wrote `origin/laptop:scripts/delve.gd` (b20c20b2, S72) over the worktree copy and re-ran the gate - **L14_TEST OK (24 checks), 0 guard arms fired**. Restored and confirmed md5 identical before and after (6ea273aa490913f5572d7458c9c8ffd0). I counted that ref's MB_NAME myself: **42 keys, 42 unique, `"ferryman": "Slackwater"` present**. `scripts/delve.gd` is the GAME BUILD lane's and is not in my commit.
+  - So: the last red in this lane is owed by a merge, not by a file of mine, and it dies the moment S72 lands in main. Nothing for the chat bot to fix.
+Not done / not mine: nothing owed in `twitch_eventsub.gd`. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written.
+Next firing: my own cycle (L56 delve-heavy soak needs the engine and the lock), and re-check L14 once S72 is in main to confirm the green holds on the merged tree rather than on a swapped one.

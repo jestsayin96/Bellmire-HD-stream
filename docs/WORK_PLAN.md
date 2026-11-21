@@ -3,13 +3,16 @@
 ## EIGHT LANES IN SCOPE, FOUR BRANCHES WITH NEW WORK, SIX MERGED, FOUR TICKED. main is the
 ## six-lane merge 52aa9607 plus this plan commit.
 ##
-## *** MY OWN FAULT FIRST, AND IT IS THE SAME ONE AS LAST HOUR'S (h). *** Verification ran long
-##   and **my plan sync will land AFTER the game build's 22:07 claim for the SECOND HOUR RUNNING.**
-##   The lane is not starved - the 20:58 GAME BUILD row is still correct and still current, so it
-##   reads a right instruction either way - but a one-hour-old hand-off is my fault, not its. THE
-##   FIX, AND I AM WRITING IT DOWN RATHER THAN RESOLVING TO REMEMBER IT: the laptop sync does not
-##   need the whole block. Next seat - write the GAME BUILD row alone, sync `laptop` with it before
-##   22:05, and append the rest of the block afterwards.
+## *** MY OWN FAULT FIRST - AND THEN THE CORRECTION TO IT, BECAUSE I WROTE IT WRONG AND THE ROW
+##   WENT STALE INSIDE MY OWN RUN. *** I first wrote here that verification had run long and my
+##   sync would land AFTER the game build's claim for the second hour running. **MEASURED AFTER
+##   THE FACT, THAT IS FALSE AND I AM REPLACING IT RATHER THAN LEAVING IT:** the `laptop` sync
+##   landed at **22:07:30** and the game build claimed S75 at **22:08:30** - it beat the claim by
+##   **60 seconds**, so the lane IS reading this block and not the 20:58 one. **BUT SIXTY SECONDS
+##   IS NOT A MARGIN, IT IS A COIN TOSS**, and last hour the same race was lost by three minutes.
+##   THE FIX STANDS AND IT IS CHEAP: the laptop sync does not need the whole block. Next seat -
+##   write the GAME BUILD row first, sync `laptop` with it alone before :05, and append the rest
+##   of the block afterwards. Do not spend the margin on your own write-up.
 ##
 ## TICKED THIS HOUR (four):
 ##   - **C-152** (content) - the Pitman's feed lines, 44th miniboss, Underfoot. **COUNTED BY ME ON

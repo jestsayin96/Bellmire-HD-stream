@@ -14345,3 +14345,66 @@ with "UNPARSED" in its own subject line and then parsed it twelve minutes later,
 is now wrong about itself. I am not rewriting it - this commit carries the result, and a message
 that was true when written is better left visible than quietly amended.
 Next firing: own cycle on my three files; the four gates on this edit are **discharged**.
+
+## B102 - 21 Nov 2026, 06:45 CT firing - THE LAST OF B34's FOUR NUMERIC CLAIMS, AND A PUBLISHED LINE OF MINE THAT WAS WRONG
+
+**I went looking for the fourth unguarded number and found a half-truth beside it.** B35 (line
+1211) named four `what` claims carrying a number: `look` (gated B35), `satchel` (gated B36,
+echoed to every viewer-facing site B96), `bestiary`'s eight lords (gated, BESTIARY LORDS), and
+`oil`.what's "two delvers" - left with a written reason at line 1223: *a burn RATE in delve.gd,
+no constant to read.* That reason still holds. **Rather than fake an authority, I read the
+engine by hand** and found the claim beside it was the defect.
+
+**WHAT delve.gd ACTUALLY DOES (read on the merged tree, line by line):**
+- `:161` `oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))` - one flask
+  per two bodies a floor, **and `maxi(1, ...)` means a floor never costs less than one flask,
+  however few go down.** So `oil`.what's "two delvers" was RIGHT and INCOMPLETE: a lone delver
+  pays a whole flask, and nothing published said so.
+- `:2453` `oil = maxf(0.0, oil - 0.5)` - half a flask more to search a room.
+- `:78-80` every hero's flasks are added to one party total and **their own count is set to
+  zero** at the mouth; `:80` then says, in the game's own voice, *"They carry %d flasks of oil
+  between them."* delve.gd's own docstring at `:26-27` says the same thing.
+
+**SO `delve`.what WAS WRONG, AND IT IS MINE.** It said *"Everyone carries their own oil"*. A
+viewer reads that as: my flasks light me, and a hero who brought none goes dark alone. The engine
+pools them - a hero with no oil descends on the party's pool, and a hero who brought three loses
+them to it. A quiet half-truth in a published line is the fault class the lead named at 23:58,
+and this one was published in `docs/COMMANDS.md` and answered to chat on `!delve` and `!help
+delve`. **Two sentences corrected in `data/commands.json`:**
+- `delve`.what - "Everyone brings their own oil and it is pooled at the mouth; out of oil, the
+  dark wins."
+- `oil`.what - adds "A floor costs a flask at least, however few go down."
+
+**THE ARM - FOUR PATHS, AND I SAY PLAINLY WHAT IT IS NOT.** `DELVE POOL` (the pooling clause is
+gone), `OIL DELVERS ANCHOR` (the "<number> delvers" phrase is no longer readable), `OIL DELVERS`
+(the published count is not 2), `OIL FLOOR MIN` (the floor-minimum clause is gone). It reuses
+`_word_int` from B101 - no second table. **This is a WORDING-REGRESSION guard, not an engine
+guard.** It cannot catch the game build retuning the `0.5`, because there is nothing to read, and
+`OIL DELVERS` carries the 2 itself. If that number moves, this arm and my sentence go stale
+together. I would rather that be written here than discovered later.
+
+**FOR THE GAME BUILD LANE** - `scripts/delve.gd` is yours and I did not touch it. `class_name
+Delve` is already declared, so **one named const** (say `const OIL_PER_HEAD := 0.5` and
+`const OIL_FLOOR_MIN := 1` at `:161`) turns this into a real two-authority arm like LOOK and
+SATCHEL and closes the last of B34's four. Nothing is blocked while it waits.
+
+**GATES - FOUR, ALL GREEN, ON THE REAL EDIT, GATE-THEN-PUSH (claim 06:52, released 06:56:40, cap
+07:17).** The team lead's 05:58 note asked for gate-then-push when the cap allows; it allowed, so
+this cycle's commit is the first one of mine that has never existed unparsed on a branch.
+`COMMANDS_DOC OK wrote 32 commands` - and **the generator rewrote `docs/COMMANDS.md` itself; I
+hand-wrote none of it.** Two rows changed, `!delve` and `!oil`, exactly the two sentences I
+edited. `L14_TEST OK (24 checks)`, 24 `ok` / 0 `FAIL`, including
+**`ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`** - the four new arms are
+silent on the engine - and both drift directions clean: `32 rows; unpublished []` and
+`32 rows; stale []`. `TWITCH_PARSE OK (8 checks)`. `--headless --quit-after 300` **rc=0, 0 script
+errors, 0 parse errors** (the stderr carries only the tree's pre-existing `invalid UID` material
+warnings from `town.gd:826`, which every lane's parse shows).
+
+**LOCK.** QA tester wrote `IDLE 06:47:45`, so the window was free by its own release, not by a
+clock I guessed at. I claimed 06:52:30 and released at 06:56:40, inside my own declared finish.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE SENT.** The parse gate launches the
+whole project, so its log shows `TWITCH joined #jestsayin96` and a bellmirebro token refresh -
+that is the headless game connecting, the same as every lane's parse run. The bot posted nothing
+and no bits were spent on any account.
+Next firing: own cycle. The four gates on this edit are **discharged**.

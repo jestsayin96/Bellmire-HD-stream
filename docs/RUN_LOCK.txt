@@ -964,3 +964,15 @@ IDLE 2026-11-21T07:58:10-06:00 - chat bot B103: parse rc=0 / 0 script errors / 0
 RUNNING 2026-11-21T08:08:13-06:00 (game build S-next, claim 08:08, cap claim+25 = 08:33, expected finish 08:30)
 
 IDLE 2026-11-21T08:22:02-06:00 - game build S85: L29C arm C red was the soak's 180 s clock cutting floor 3's fight, not the set pieces; soak now ends on first fire, ceiling 600 s. Gates: parse 0/0, L29C_TEST OK 33/0 (ambush @18825), TWITCH_PARSE OK 8, OFFFLOOR OK 0/2300, TOWNWALK PASS, DELVE_TEST OK 9001. No Godot of mine alive. Claim 08:08:13, cap 08:33, released early. (game build)
+
+RUNNING 2026-11-21T08:42:23-06:00 (QA tester, gates twitch_parse/l14/townwalk/commands_doc/offfloor, claim now, cap claim+15)
+
+IDLE 2026-11-21T08:47:56-06:00 - QA tester: TWITCH_PARSE OK 8, L14_TEST OK 24, COMMANDS_DOC OK 32 (doc unchanged), OFFFLOOR OK 0/1972, TOWNWALK PASS 0/18490. No Godot of mine alive. Claim 08:42:23, released early. (QA tester)
+
+RUNNING 2026-11-21T08:54:36-06:00 (HUD U124 chronicle width measure, windowed, expected finish 09:02, cap claim+15)
+
+RUNNING 2026-11-21T08:55:41-06:00 (HUD U124 chronicle width measure relaunch after tool fix, expected finish 09:00, cap claim+15)
+
+IDLE 2026-11-21T08:56:40-06:00 - HUD U124: Chronicle width measure windowed, 118 checks 0 fails, no line past vellum or panel at 100/125/150. No Godot of mine alive. (HUD)
+
+RUNNING 2026-11-21T09:08:46-06:00 (game build, expected finish 09:33, cap claim+25 = 09:33)

@@ -835,6 +835,13 @@ class FightBanner extends CanvasLayer:
 		_sub.text = ("A rare one" if rare else "Lord of the deep") + "  -  " + ("the town's band" if d.npc_party else "the delvers")
 		_t = HOLD
 
+	func _over_card() -> bool:
+		var pr := Rect2(_plate.position, _plate.size * _plate.scale)
+		for b in _plate.get_tree().get_nodes_in_group("hud_boss"):
+			if b is Control and (b as Control).visible and pr.intersects(Rect2((b as Control).position, (b as Control).size * (b as Control).scale)):
+				return true
+		return false
+
 	## under the boss card, in the pane showing this fight; full screen: below the boss bar
 	func _place() -> void:
 		var s := _plate.get_combined_minimum_size()
@@ -849,14 +856,22 @@ class FightBanner extends CanvasLayer:
 			var r := HudDock.pane(town, k)
 			var pad := float(UiTheme.px(54))
 			for b in _plate.get_tree().get_nodes_in_group("hud_boss"):
-				if b is Control and (b as Control).visible and r.has_point((b as Control).position):
+				## U117: a card wider than its pane docks at a NEGATIVE x (card -20,140 in a 960 pane at 150%), so the old
+				## has_point(position) test missed it and the banner sat under the card. Test the card's drawn rect.
+				if b is Control and (b as Control).visible and r.intersects(Rect2((b as Control).position, (b as Control).size * (b as Control).scale)):
 					pad = maxf(pad, (b as Control).position.y + (b as Control).size.y * (b as Control).scale.y - r.position.y + float(UiTheme.px(8)))
 			HudDock.put(_plate, r, HudDock.pane_k(town, k), "tc", pad)
+			## U117: put() keeps it clear of the Chronicle box, and at 150% in a 2x2 pane there is no room for
+			## card + banner above that box, so it lands UNDER the card (73k px2 overlap, the "ghost"). The card
+			## already names the lord and its hp: the banner yields for the fight rather than draw behind it.
+			if _over_card():
+				_plate.visible = false
+				HudDock.mark(_plate, "none")
 		else:
 			HudDock.mark(_plate, "full")
 			_plate.scale = Vector2.ONE
 			var y := float(UiTheme.px(140))
 			for b in _plate.get_tree().get_nodes_in_group("hud_boss"):
 				if b is Control and (b as Control).visible:
-					y = maxf(y, (b as Control).position.y + (b as Control).size.y + float(UiTheme.px(8)))
+					y = maxf(y, (b as Control).position.y + (b as Control).size.y * (b as Control).scale.y + float(UiTheme.px(8)))
 			_plate.position = Vector2(roundf((HudDock.screen().x - s.x) * 0.5), roundf(y))

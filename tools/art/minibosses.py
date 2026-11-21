@@ -7444,7 +7444,23 @@ def dyer():
     # side view's screen axis - the drum covered him to the chest and his
     # apron, belt, skeins and legs were all behind it. He steps 0.40 m
     # forward. The front view barely changes; the side view gets a whole man.
-    MX, MY = -1.06, -1.12
+    # PASS 8, CHANGE M, AND IT IS THE FAULT THE 21 NOV 01:34 ROW TOOK: FROM
+    # BEHIND THIS CREATURE WAS FURNITURE. At MX -1.06 the man's x span
+    # (-1.33..-0.69) sat squarely under the LEFT SHEET, whose world span is
+    # -1.13..-0.59 once the frame's 28 deg turn is applied. From the front he
+    # is 1.6 m forward of the cloth and occludes it; from the BACK the cloth
+    # is the near thing and it ate him. Measured, not eyeballed: _backread.py
+    # renders the `man` span alone and again hidden through one locked camera
+    # and counts the pixels where the man is front-most - front 0.874, side
+    # 0.941, BACK 0.329. The fit register could not see this and was not
+    # lying: its occlusion cell asks how much of THE CREATURE the hero hides,
+    # and the man and the cloth are both the creature, so it read seen 1.000
+    # on all three views while two thirds of the man was behind his own props.
+    # HE MOVES 0.30 LEFT AND NOTHING ELSE MOVES. The paddle butt is already at
+    # x -1.62, so this costs the pair NO WIDTH - the creature's left bound is
+    # the paddle, not the man - and the frame's left post still crosses him,
+    # which is a man standing AT his tenter rather than beside a picture of one.
+    MX, MY = -1.36, -1.12
     HIP, SH, HEAD = 0.90, 1.46, 1.78
     for s in (-1, 1):
         limb(P, [(MX + s * 0.17, MY + 0.04, HIP), (MX + s * 0.21, MY - 0.04, 0.48),
@@ -7495,6 +7511,66 @@ def dyer():
     # THE APRON - woad lining, bowed forward off the chest to the knee
     _cloth(P, 'body', MX - 0.27, MX + 0.29, 1.34, 0.50, MY - 0.30, 0.0, 0.0,
            nx=5, nz=5, bow=0.17, thick=0.030)
+    # *** PASS 8, CHANGE N. THE SECOND HALF OF THE SAME ROW, AND IT IS THE
+    # *** BEADLE'S FAULT FOR THE THIRD TIME IN THIS HOUSE. ***
+    # Change M got the man out from behind his own cloth; it did nothing for
+    # what you then see, which was a near-black back with one blue sliver of
+    # apron showing past his hip. Everything on this man above the elbow is
+    # the 'dark' slot, and 'dark' is the body tint at 0.16 - from behind he
+    # was one value. The apron is the only coloured thing he wears and ALL OF
+    # IT faced away from the back camera.
+    # An apron is TIED ON, and the ties are at the back by construction: a
+    # neck loop over each shoulder and a waist tie knotted behind. Nothing
+    # here is decoration - it is the part of the garment the back view is
+    # entitled to see, in the woad the garment is already made of. The three
+    # splashes are the same argument the skeins and the floor splashes make:
+    # a man who slings a wet paddle over his shoulder wears what comes off it,
+    # and they carry the yard's OTHER two hues onto him so the back reads in
+    # colour as well as in value.
+    for s in (-1, 1):
+        P.raw(L.tube([(MX + 0.01 + s * 0.22, MY - 0.30, 1.32),
+                      (MX + 0.08 + s * 0.23, MY - 0.14, 1.52),
+                      (MX + 0.11 + s * 0.16, MY + 0.155, 1.40)],
+                     [0.034, 0.036, 0.032], 7), 'body')
+    P.raw(L.tube([(MX - 0.25, MY - 0.24, 1.02), (MX - 0.14, MY + 0.17, 1.00),
+                  (MX + 0.04, MY + 0.28, 0.99), (MX + 0.22, MY + 0.14, 1.00),
+                  (MX + 0.29, MY - 0.24, 1.02)],
+                 [0.030, 0.034, 0.036, 0.034, 0.030], 7), 'body')
+    P.add(L.sphere(0.072, 0.058, 0.060, 9, 7), 'body',
+          loc=(MX + 0.04, MY + 0.30, 0.99))
+    # CHANGE N(ii), OFF THE CHANGE-N PICTURE AND NOTHING ELSE. At (r, 0.42r,
+    # 0.80r) the three splashes were flattened in Y - which is the back
+    # camera's DEPTH axis, so the axis I squashed is the one it cannot see.
+    # In the render they are three round balls on a man's back: boils, not
+    # splashes. The squash has to be in Z, the axis that IS in the picture,
+    # and a thrown drop runs sideways and down - so they go wide, shallow and
+    # low onto the shoulder blade, and the third one off the spine altogether.
+    # CHANGE N(iii), AND THE N(ii) PICTURE EARNED IT. Squashing them in Z did
+    # stop them reading as boils and immediately made them read as FINS: a
+    # lens centred ON the surface shows its whole width, so from behind each
+    # was a thin flat disc standing out past the shoulder line with a hard
+    # horizontal edge. A splash does not project. The centre goes 0.035 INSIDE
+    # the back and the y-radius goes up, so what emerges is a shallow CAP -
+    # and the insertion depth is computed off the torso limb's own taper
+    # (centre MY+0.08 to MY-0.12, radius 0.235 to 0.245 over z 0.84 to SH)
+    # rather than off one guessed y, because the back surface moves 0.08 over
+    # the three heights and one constant would bury the top one.
+    # CHANGE N(iv), AND IT IS THE THIRD GO AT THE SAME THREE MARKS, SO SAY
+    # PLAINLY WHAT THE PICTURE SHOWED EACH TIME: round balls (boils), then
+    # flat lenses standing proud (fins), and now - at rx 0.132 against a torso
+    # of radius 0.242 - a cap more than half the width of the back, which
+    # wrapped past the silhouette edge and read as a limpet stuck on him.
+    # Sinking it further cannot fix that; the thing is simply TOO BIG. Two
+    # small marks, deeper in, and the third goes altogether. Plainness is the
+    # voice: a man who has had dye come off a paddle onto his back has a
+    # couple of marks on it, and the apron's own ties are already carrying the
+    # woad up here. Three blobs, two straps and a tie was a decorated back.
+    for (sx, sz, rx, slot) in ((-0.17, 1.28, 0.074, 'body'),
+                               (0.14, 1.14, 0.058, 'bone')):
+        _t = (sz - 0.84) / (SH - 0.84)
+        _surf = MY + 0.08 - 0.20 * _t + (0.235 + 0.010 * _t)
+        P.add(L.sphere(rx, rx * 0.62, rx * 0.46, 10, 6), slot,
+              loc=(MX + sx, _surf - 0.030, sz))
     _span("man", i0)
 
     # ------------------------------------------------- THE PADDLE
@@ -8110,6 +8186,47 @@ def greener():
                         (0.00, HEAD - 0.17, 0.056)):
         P.add(L.sphere(r, r * 0.80, r * 0.62, 8, 6), 'body',
               loc=(MX + 0.12 + jx, MY - 0.285, jz))
+    # *** PASS 9, AND IT CORRECTS PASS 3's CHANGE H WITH THE PICTURE PASS 3
+    # *** DID NOT HAVE. *** Change H put five crusts on his shoulder blades
+    # at MY + 0.06 "because that is the view that needed it", and they have
+    # never been seen once: the leaf rack rides at MY + 0.17 to + 0.30, which
+    # is NEARER the back camera, and it spans x MX-0.78 to MX+0.26 - the whole
+    # torso. So the back crust is behind the stock, and from behind this
+    # creature was a dark man under a tan panel. Measured rather than argued:
+    # _backread.py puts the visible man's near-black fraction at 0.427 on the
+    # back against 0.167 on the front, over three value bands against five for
+    # the whole creature. Change H's crusts STAY - they are right for the side
+    # camera and they cost nothing - and the trade now also goes where the
+    # rack cannot cover it: the calves, the shoulder caps outboard of the
+    # stock, and the nape. That is also where it would be. A man carries wet
+    # plates against his back and his legs take the run-off; the strap already
+    # modelled across his shoulders is the one place on him that is always wet.
+    # PASS 9(iii), off the pass-9 picture: at three per leg, same x, evenly
+    # spaced and shrinking in order, they read as a LADDER - greaves, or knee
+    # pads, not a bloom. Corrosion grows where the wet runs, which is not a
+    # grid. The two legs are given different heights, sizes and sideways
+    # offsets so no row lines up across the gap, which is the Drillmaster's
+    # lesson one more time: a symmetrical thing reads as wallpaper.
+    for s, rows in ((-1, ((0.78, 0.082, 0.104, 0.018), (0.50, 0.036, 0.079, -0.026),
+                          (0.23, -0.014, 0.067, 0.014))),
+                    (1, ((0.66, 0.056, 0.092, -0.022), (0.41, 0.018, 0.098, 0.020),
+                         (0.17, -0.030, 0.060, -0.012)))):
+        for (lz, ly, r, dx) in rows:
+            P.add(L.sphere(r, r * 0.70, r * 0.52, 9, 6), 'body',
+                  loc=(MX + s * 0.21 + dx, MY + ly, lz))
+    # PASS 9(ii), AND THE THIRD OF THESE WAS A FLOAT I CAUGHT BY ARITHMETIC
+    # BEFORE THE PICTURE COULD HIDE IT. The nape crust sat at MY + 0.09 with
+    # a y-radius of 0.046, so it spanned MY+0.044 to MY+0.136 - and the head's
+    # own back surface is MY - 0.18 + 0.152 = MY - 0.028. It was hanging SEVEN
+    # CENTIMETRES clear of the skull, which is the Dyer's pass-7 eye fault
+    # exactly, and WORSE than that one: the leaf rack is nearer the back
+    # camera than it is, so the float was INVISIBLE and no render of any view
+    # would ever have shown it to me. It is placed on the surface it belongs
+    # to - the nape, below the cap and above the collar, where the strap sits.
+    for (cx, cy, cz, r) in ((MX + 0.34, MY + 0.02, SH + 0.01, 0.112),
+                            (MX - 0.33, MY - 0.02, SH - 0.04, 0.100),
+                            (MX + 0.12, MY - 0.055, HEAD - 0.155, 0.072)):
+        P.add(L.sphere(r, r * 0.66, r * 0.54, 9, 6), 'body', loc=(cx, cy, cz))
     _span("crust", i0)
 
     # ------------------------------------------------- THE STOCK ON HIS BACK

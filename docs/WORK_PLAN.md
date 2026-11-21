@@ -1,3 +1,130 @@
+## TAKE THIS NEXT - Updated THE 15:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main 64831292: all SIX lanes (laptop 83dee2d9, content f020ba78, hub ebe291fb,
+hud-ui 244c38ff, art 84d98960, chatbot 4fabe88b). PROGRESS.md +53/-0 across ONE conflict, and the
+per-lane sum proves nothing was lost: laptop 17 + hud-ui 1 + chatbot 35 = 53. Zero residual merge
+markers, checked with all four exact shapes.
+
+*** THE HUB IS PUBLISHED AND THE SUPERVISOR'S ONE ITEM IS DISCHARGED. ***
+gh-pages moved to 029e4fac at 15:39 CT today. The supervisor authorised it at 11:28 CT, ran the
+gate itself and pushed at 15:38 CT. I verified the outcome rather than the message: origin/gh-pages
+^{tree} == origin/hub:web == 02257b2f, EQUAL, so NOTHING is merged-and-unpublished for the first
+time in two days; and old 05ac2679 is an ancestor of the new tip, so the push was a fast-forward.
+The "3 files / +59 / -1" delta that has been in this block since 20 Nov IS NOW SPENT - do not carry
+it forward. I ran NO publish gate this hour and claim none: the push was not mine.
+
+*** A ROW OF MINE WAS WRONG FOR THE SECOND TIME AND THE GAME BUILD WAS RIGHT TO REFUSE IT. ***
+The 14:58 block (and three before it, and the TEAM LEAD PROMPT) handed the game build "the L31
+remainder - the status-effect icons". L31 IS WHOLE. It was ticked at L31c on 18 Nov 01:5x CT and
+this very file records it at line 13507 as `[x] GAME BUILD - L31c. TICKED`, with line 2812 noting a
+seat had ALREADY caught this once. S92 refused the row and re-proved it anyway: L31_ICONS OK 15
+(party=6, states_wanted=15, icons=15, keyed_and_sized=15), log committed at renders/cycles/s92/
+l31.log. I confirmed the tick in the file myself before writing this. THE COST IS A LANE CYCLE SPENT
+REFUSING A CLOSED ITEM, AND IT IS MINE, NOT THE LANE'S. The row is struck here and queued for the
+prompt below. I should have grepped `[x]` before re-issuing an item four hours running.
+
+*** AND A NEAR-MISS OF MY OWN, BEFORE ANYTHING ELSE: MY PARSER READ `Delve.MB_NAME` AS 15. ***
+It is 45. My regex was `^\s*"key":` with re.M on a dict that puts SIX KEYS ON ONE LINE, so it
+counted lines, not keys - 15 lines, 45 keys. The 14:58 seat's parser read the same constant as 37
+by not stripping `#` comments. TWO SEATS, TWO DIFFERENT WRONG NUMBERS, ONE CONSTANT, IN TWO HOURS.
+I did not publish the 15. AND THE 45/45/45 FINDING IS NOT MINE AND IS NOT NEW: I grepped this file
+before writing it up and the 14:58 block already carries it. This row is an INDEPENDENT
+CONFIRMATION on merged tree 64831292 - MB_NAME 45 (comment-stripped), lore_lines by_key 45,
+data/commands.json "The 45 elites" - and nothing more than that.
+
+GAME BUILD - THE BLOWER'S ENGINE ROW, BUT ONLY AFTER CONTENT LANDS C-169. Measured on the merged
+  tree this hour: assets/monsters/minibosses/blower.glb SHIPS (216,396 bytes, art 84d98960), and
+  `blower` is absent from BOTH lore_lines by_key (45 rows) AND Delve.MB_NAME (45 keys). That is the
+  documented order working, not a gap - body, then content's feed row, then your MB_NAME/MB_FIT
+  row, exactly as the tither went at C-167 -> S89/S91. DO NOT WRITE THE MB_NAME ROW WHILE by_key
+  LACKS `blower`; tools/_s51_names.gd asserts the key set against content's by_key and would go
+  red. If C-169 has not landed when you fire, say so and audit your own shipped work instead.
+  S92 VERIFIED AND TICKED - for the refusal as much as the re-proof. Refusing a closed item with a
+  committed log is the behaviour this house wants.
+CONTENT - C-169: the Blower (Deadair) feed row. UNCHANGED, and now confirmed against the files by
+  me rather than carried: the body ships, by_key is at 45, `blower` is in neither by_key nor
+  MB_NAME, so the Blower is still the one miniboss with a body and no lines. Same pipeline as the
+  tither at C-167 - not new work. Nothing else shipped from you this hour (plan sync only), which
+  is a correct dry-lane cycle.
+ART - THE CROSSBOW CARRY, STILL UNPROVEN TO A VIEWER. That is the 14:58 verdict and it stands: the
+  new weaponfit register is GREEN on 24 models but it measures CARRY GEOMETRY, and a viewer looking
+  at crossbow_common_side.png still sees a flat plank forward of the hand. Raising min_proving
+  1 -> 2 was a TIGHTENING, so the GREEN is not a loosened test - the item is open because the
+  picture is, not because the number is.
+  BLOWER PASS 6 VERIFIED AND TICKED, AND I LOOKED AT IT. _p6_three_views.png: the front now carries
+  a pale tally board with EIGHT dark rungs, legible as a count at that size, and it is the only
+  pale mass forward other than the nozzle. The fit register is GREEN 48/48 with blower measured,
+  errors [] and blind_views []. Your own write-up records that your FIRST placement at GZ 1.200
+  read as a face and that you caught it BY LOOKING while every number said improvement - and the
+  fix (drop to 1.090, delete the top lug) works: there is clear dark body between the eyes and the
+  board, and the surviving lug reads as a foot, not a jaw. ONE RESERVATION, NOT A BLOCK: from the
+  front there is still a faint two-eyes-above-a-ribbed-panel read. Leave it; the next pass can
+  judge it with fresh eyes, and I would rather record my reservation than quietly bank it.
+HUB - DRY, AND SAY SO. Your branch carried one verified licence row this hour (House2_blend, CC0
+  1.0) - that is the PACK CATALOGUE worker's output landing on your branch, not your own cycle, and
+  I have attributed it there. The publish backlog you have been holding is GONE (see the top of
+  this block), so there is nothing to stage. Stand down and audit what you have shipped; a
+  stand-down written up IS the delivery.
+HUD - U130: THE RARITY-HUE GUARD, WINDOWED - AND THE WINDOW IS GENUINELY YOURS NOW. The chat bot's
+  hard release at :52 HELD this hour (claimed 15:46:57, released 15:50:02), so :52-:07 is clear.
+  U129 VERIFIED AND TICKED: I counted the refs myself - _u104/_u112/_u113/_u114_shot.gd carry
+  exactly THREE hud_boss/BossCard refs each, your figure is right, and the edits are COMMENT-ONLY
+  with the gate logic untouched. I also checked the thing a header comment cannot fix: NO battery,
+  .bat or script invokes any of the four, so retiring them by comment is sufficient and not a test
+  made quiet. AND YOUR OPEN ROUTING QUESTION IS ANSWERED IN CODE, SO STOP CARRYING IT:
+  rts_camera.gd:92 states "BossBar (scripts/boss_bar.gd) stays a class for its own unit gates; the
+  eye builds none". Nothing calls BossBar.setup(), so `name = "BossCard"` at boss_bar.gd:25 never
+  runs. boss_bar.gd needs no owner and no routing - it is a deliberately unbuilt class.
+CHAT BOT - B111, AND THE HARD :52 WORKED - KEEP IT. You claimed 15:46:57, declared 15:52, released
+  15:50:02, and the HUD's window was clear. That is the fix landing on its first hour.
+  B110 IS VERIFIED ON ITS CENTRAL CLAIM BUT **NOT TICKED**, AND HERE IS THE ONE THING MISSING: your
+  cycle commit is PROGRESS.md +35 AND NOTHING ELSE. The four green gates are the whole delivery and
+  NOT ONE LOG IS COMMITTED on your branch - there is no artefact on any ref for me to judge by, and
+  "I ran it and it was green" is the lane's word, which is exactly what this house does not tick
+  on. COMMIT THE FOUR LOGS and it ticks next hour on sight. (Your commands_doc no-op claim I CAN
+  check without a log and it holds: docs/COMMANDS.md is byte-identical across the merge.)
+
+*** LOCK DISCIPLINE, 15:58 CT 21 NOV - CLEAN HOUR. THE COUNT GOES 0 -> 1. ***
+  game build 15:08:29 -> IDLE 15:15:47 (7 min), declared 15:33, cap claim+25 = 15:33. Inside both,
+    and the cap was computed BEFORE the declaration, as it has been since 02:08.
+  chat bot 15:46:57 -> IDLE 15:50:02 (3 min), declared 15:52, cap 16:11. Inside both, and INSIDE
+    THE NEW HARD :52 on the first hour it bound. It released before the HUD's window opened.
+  HUD - took no lock and was NOT starved: the window was free from 15:50 and it chose not to start
+    a chunk it could not finish by :07. That is the yield rule working, not a lost cycle.
+  No overrun, no claim over a live hold, no stale lock cleared, no two lanes at once, no future
+  stamp in any lock line this hour. The 14:58 reset to 0 stands as written; this hour earns 1.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these all at
+once on the first live turn). ITEMS 1-2 CARRIED FROM 14:58, ITEM 3 NOW SPENT, ITEMS 4-6 ARE NEW:
+  1. CARRIED. Step 0 BASELINE and the `Delve.MB_NAME` paragraph: the chain is 45/45/45, not
+     44/44/44. Keep the flat-regex warning and ADD BOTH failure modes now seen: strip `#` comments
+     before parsing (read 37), and do not anchor on `^\s*"key":` when the dict puts several keys on
+     one line (read 15).
+  2. CARRIED. STEP 5 miniboss count: art is on the 46th body (the Blower); MB_NAME carries 45. The
+     two numbers are correctly different - a body ships before its row.
+  3. SPENT, REPLACE DO NOT DELETE. The gh-pages block's "05ac2679 / tree 9ca8051e / 19 Nov 20:06
+     CT" and the whole "WHAT IS MERGED AND NOT PUBLISHED: 3 files / +59 / -1" paragraph are now
+     STALE. Correct to: gh-pages 029e4fac, tree 02257b2f, pushed 15:39 CT 21 Nov by the SUPERVISOR
+     (authorised 11:28 CT, gate run by the supervisor); tree EQUALS origin/hub:web; nothing
+     unpublished. Keep the standing instruction to re-measure both trees every hour.
+  4. NEW, AND IT HAS COST A LANE CYCLE. The prompt's "THE L31 REMAINDER IS THE GAME BUILD'S, NOT
+     HUD'S ... It is the status-effect icons" is FALSE. L31 is WHOLE, ticked at L31c on 18 Nov
+     01:5x CT (WORK_PLAN.md:13507). Strike the sentence and record L31 under the closed rulings.
+  5. NEW. The "STANDING NOTE ON THE ART FIT REGISTER" - that its verdict reads `RED / ok:false` on
+     two carried unmeasured `_chibi` rows, and that no seat may report the art gate as green - IS
+     NOW STALE. Measured on 64831292: verdict "GREEN", ok true, 48 rows in pairs, red_summary
+     {rows:[], shipped_red:[], retired_red:[], ok_shipped:true}, errors [], blind_views [], and
+     BOTH `snuffer_chibi` and `tallyman_chibi` now carry full measurements. The red was cured by
+     MEASURING the two rows, not by scoping them out - I checked that the `ok` line is unchanged in
+     art's own diff, so the flip predates this hour's push. The register may now be reported green.
+  6. NEW, SMALL. STEP 5's ID list is stale every hour by design, but record the 15:58 reading so
+     the next seat has a floor: B110, C-169, D100, H32, S92, T5, U129, art on blower pass 6. I did
+     NOT get a trustworthy figure for L - my matcher returned 654, which is plainly an over-read -
+     so I am leaving L at its last measured value rather than publishing a number I do not trust.
+
+FOR THE SUPERVISOR: NOTHING. The single item that has sat here since 20 Nov - the unpublished 3-file
+hub delta - was authorised at 11:28 CT and pushed by you at 15:38 CT today, and I have verified the
+published tree equals origin/hub:web exactly. Nothing is waiting on your seat this hour.
+
 ## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main 1a796f36: all SIX lanes (laptop 5dc67902, content 31efb7de, art cacd6c98,
 hub cc237b92, hud-ui aa6d5bf2, chatbot bd603450). PROGRESS.md +103/-0 across two conflicts - ZERO

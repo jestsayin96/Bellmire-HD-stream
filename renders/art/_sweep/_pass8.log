@@ -1,0 +1,41 @@
+START
+
+=== PAVISER_SPLITH 1.00,0.55,0.00
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:02.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith1.00\front.png'
+00:02.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith1.00\three_quarter.png'
+00:02.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith1.00\side.png'
+00:02.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.55\front.png'
+00:02.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.55\three_quarter.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.55\side.png'
+00:03.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.00\front.png'
+00:03.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.00\three_quarter.png'
+00:03.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splith0.00\side.png'
+GATEREAD SPLITH=1.00    cols=240  bars=7    share=0.0292  max=0.5179  p90=0.0956  -
+GATEREAD SPLITH=0.55    cols=240  bars=0    share=0.0     max=0.2837  p90=0.0956  -
+GATEREAD SPLITH=0.00    cols=240  bars=0    share=0.0     max=0.0981  p90=0.0554  -
+GATEREAD WROTE C:\hd adventure\bellmire-art\renders\art\_sweep\_gateread_splith.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+RC=0
+
+=== PAVISER_SPLITC 1.00
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:02.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splitc1.00\front.png'
+00:02.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splitc1.00\three_quarter.png'
+00:02.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_sweep\paviser_splitc1.00\side.png'
+GATEREAD SPLITC=1.00    cols=240  bars=7    share=0.0292  max=0.5179  p90=0.0956  -
+GATEREAD WROTE C:\hd adventure\bellmire-art\renders\art\_sweep\_gateread_splitc.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR
+
+RC=0
+
+DONE

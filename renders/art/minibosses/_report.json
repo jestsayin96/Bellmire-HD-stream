@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "d1b5625c50c2e37bb33d75608d4abadb9f3a7128",
+   "head": "f2e0e92d7744a9dca58e65c9c81ba0d2c56e09c5",
    "ref": "origin/main",
-   "ref_commit": "b9d4c2893ba50332a837831dd3aaa7ab55eb379f",
+   "ref_commit": "5c2b650749e52fdcdaa49404c0147063c6d2f131",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2604,7 +2604,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs b9d4c2893ba50332a837831dd3aaa7ab55eb379f sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5c2b650749e52fdcdaa49404c0147063c6d2f131 sha bc3a603f",
  "blank_check": {
   "files": 132,
   "failures": []

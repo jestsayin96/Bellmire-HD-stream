@@ -9995,10 +9995,64 @@ def paviser():
         P.add(L.cone(0.026, 0.009, 0.055, 6), 'dark',
               loc=(x, y, z), rot=(math.pi / 2.0, 0.0, 0.0))
     # THREE SPLITS, one of them long. Thin dark slots let into the face.
-    for u, z0, h in ((-0.22, 0.62, 0.62), (0.10, 0.30, 0.46), (0.29, 0.86, 0.40)):
+    # *** PASS 8: THE SPLITS ARE THE REST OF THE GATE, AND THERE ARE TWO
+    # *** CANDIDATE CAUSES, SO THERE ARE TWO HOOKS AND THEY ARE SWEPT APART.
+    # Pass 7 removed the two seams and the portcullis read went with them, but
+    # it said plainly that the gate was REDUCED, NOT CURED: three dark splits
+    # still make a faint grid with the two straps and the longest runs 0.5179
+    # of its column, over the instrument's 0.50 bar line. Two things could be
+    # doing that and they are NOT the same thing:
+    #   HEIGHT  - split A is 0.62 tall in a 1.188 column. On its own that is
+    #             0.522 and it is a bar by the measure, strap or no strap.
+    #   THE JOIN - EVERY ONE OF THE THREE CROSSES A STRAP. A 0.372-0.428 and
+    #             1.122-1.178 are the two strap bands; A spans 0.62-1.24, B
+    #             0.30-0.76, C 0.86-1.26, so each vertical is welded through a
+    #             horizontal and the face carries six closed cells. THE GATE
+    #             INSTRUMENT CANNOT SEE THIS AT ALL - it reads one column's
+    #             longest enclosed dark run and a crossing does not lengthen
+    #             the run that split A already has. This is the fault my eye
+    #             found in front.png and the number cannot.
+    # PAVISER_SPLITH scales the heights about each split's OWN CENTRE. That
+    # conflates: a shorter split also pulls its ends off the strap. Which is
+    # exactly why PAVISER_SPLITC exists - it TRANSLATES each split in z into
+    # the clear band between the straps with its height UNCHANGED, so the
+    # column's longest run is unchanged by construction and anything that
+    # moves in the picture is the join and only the join. Unset = shipped.
+    # *** THE PASS 8 DECISION, AND THE PICTURE OVERRULED MY OWN HYPOTHESIS. ***
+    # SPLITH 0.55 SHIPS. Swept 1.00 / 0.55 / 0.00 and looked at all three:
+    #   1.00  bars 7/240  max 0.5179   the shipped grid; split A carries from
+    #                                  the top strap down past mid-board
+    #   0.55  bars 0/240  max 0.2837   <- TAKEN. Three short checks, no run
+    #                                  reaches a second rail, the board reads
+    #                                  as hit timber and not as a frame
+    #   0.00  bars 0/240  max 0.0981   clean, but the splits are the wear
+    #                                  RECEIPT on a board whose whole purpose
+    #                                  is to be hit - 0.00 pays for the gate
+    #                                  with the thing the board is for
+    # SPLITC 1.00 IS REJECTED AND IT IS THE FINDING OF THIS PASS. I went in
+    # believing the join was the cause - every split crosses a strap, six
+    # closed cells, and I could see it in front.png. Moving the three into the
+    # clear band with their heights untouched made it WORSE, not better: three
+    # equal verticals stacked tidily between two rails is a grille drawn from
+    # life. THE INSTRUMENT COULD NOT TELL. SPLITC=1.00 reads cols=240 bars=7
+    # share=0.0292 max=0.5179 - BYTE-FOR-BYTE THE SAME NUMBERS as the shipped
+    # body, by construction, because translating a run does not change its
+    # length. A pass that trusted `_gateread` alone would have shipped the
+    # worse board on an unchanged green line. The picture is the evidence.
+    SPLITH = float(os.environ.get("PAVISER_SPLITH", "0.55"))
+    SPLITC = float(os.environ.get("PAVISER_SPLITC", "0.00"))
+    # (u, z0, h) as shipped, and the same three heights dropped into the
+    # 0.428-1.122 clear band between the two straps.
+    SPLITS = ((-0.22, 0.62, 0.62), (0.10, 0.30, 0.46), (0.29, 0.86, 0.40))
+    SPLITS_CLEAR = ((-0.22, 0.45, 0.62), (0.10, 0.50, 0.46), (0.29, 0.68, 0.40))
+    for u, z0, h0 in (SPLITS_CLEAR if SPLITC >= 0.5 else SPLITS):
+        h = h0 * SPLITH
+        if h < 0.02:
+            continue
+        zc = z0 + h0 * 0.5
         x, y, _ = W(u, face_dy(u) - 0.012, 0.0)
         P.add(L.box(0.013, 0.026, h), 'dark',
-              loc=(x, y, z0 + h * 0.5), rot=(0.0, 0.0, BYAW - (u / HALF) * 0.36))
+              loc=(x, y, zc), rot=(0.0, 0.0, BYAW - (u / HALF) * 0.36))
     _span("strikes", i0)
 
     # ------------------------------------------------------- THE HINGE POST

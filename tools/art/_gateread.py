@@ -156,6 +156,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
     ap.add_argument("--sweep", default="")
+    ap.add_argument("--var", default="PAVISER_SEAMH",
+                    help="env var the sweep drives; one variable per run")
     ap.add_argument("--measure", default="")
     ap.add_argument("--out", default="")
     args = ap.parse_args(argv)
@@ -163,15 +165,20 @@ def main():
     res = {"bar_frac": BAR_FRAC, "pale_l": PALE_L, "mark_l": MARK_L, "rows": []}
     if args.measure:
         res["rows"].append(dict(label="measured", **gate_read(args.measure)))
+    tag = args.var.replace("PAVISER_", "").lower()
     for sv in [s for s in args.sweep.split(",") if s]:
-        os.environ["PAVISER_SEAMH"] = sv
+        # ONE VARIABLE PER RUN. Every other hook is cleared to its shipped
+        # default first, so a sweep can never silently ride on a leftover.
+        for k in ("PAVISER_SEAMH", "PAVISER_SPLITH", "PAVISER_SPLITC"):
+            os.environ.pop(k, None)
+        os.environ[args.var] = sv
         G.purge()
         objs, info = MG.build_miniboss("paviser")
         outdir = os.path.join(args.repo, "renders", "art", "_sweep",
-                              "paviser_seam%s" % sv)
+                              "paviser_%s%s" % (tag, sv))
         render_front(objs, info, outdir)
         row = gate_read(os.path.join(outdir, "front.png"))
-        row["label"] = "SEAMH=%s" % sv
+        row["label"] = "%s=%s" % (args.var.replace("PAVISER_", ""), sv)
         row["dir"] = outdir
         res["rows"].append(row)
     out = args.out or os.path.join(args.repo, "renders", "art", "_sweep",

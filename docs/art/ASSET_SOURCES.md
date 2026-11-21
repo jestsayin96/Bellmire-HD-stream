@@ -389,3 +389,18 @@ and read", not "what am I allowed to use".
 - The earlier catalogue line that called this licence "unreadable" (docs/PACK_CATALOGUE.md, Licence flags) is superseded by this entry.
 - Formats: `.dts` (Torque), `.dae` (Collada) and `.cs` (game-engine scripts). No glTF, GLB or FBX, so any use needs a conversion step. The `.cs` files are engine code and are not to be copied into the repo.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for this pack. Nothing is redistributed as an asset; any model that enters `assets/` must still be recorded in its own row.
+
+## Pack catalogue verification - 3d_crystals_new (20 Nov 2026, pack-catalogue worker)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\3d_crystals_new\` (sibling `3d_crystals_new.zip` checked: identical 5 entries, no extra files) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms file in the directory or the zip. Nothing guessed. |
+| File count | 5 (4 x .jpg: `174.jpg`, `174_norm.jpg`, `crystal.jpg`, `crystal_simple_norm.jpg`; 1 x .blend: `crystals.blend`) |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| File dates | jpg 2014-01-24 / 2014-07-17; blend 2014-07-18 (inside zip) |
+| Cleared for use | **NO.** Unlicensed. Do not ship, convert or redistribute any file from this pack until an author licence is found. |
+
+Method: directory listed and zip central directory read with Python `zipfile` (not extracted); the one licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`) returned nothing in either location. The `.blend` was not opened.

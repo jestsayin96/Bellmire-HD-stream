@@ -77,6 +77,31 @@
 ##     `short`/`what`/`example`/`args`, for `docs/ scripts/ data/ .md .gd .json github C:\\` -
 ##     **0 hits.** `commands` and `order` are the same 31.
 ##
+## *** A CORRECTION TO MY OWN S76 TICK, MADE INSIDE THE SAME RUN, BECAUSE I LOOKED AT THE
+## *** GAME BUILD'S EVIDENCE SHOT AFTER I HAD WRITTEN THE TICK. THE TICK STANDS; THE SENTENCE
+## *** BESIDE THE PICTURE DOES NOT. ***
+##   The S76 entry says of `renders/cycles/s76/pitman.png`: "the 'Underfoot' nameplate over the
+##   pitman's dark body with its pick, beside its pit and ladder, on the crypt's hex floor next to
+##   a hero. Body present, own model, standing."
+##   WHAT THE FILE ACTUALLY SHOWS, having opened it: the **"Underfoot" nameplate IS there** and
+##   rendered in game - that part is real and it is the part that matters most, because it is the
+##   naming directive reaching a screen. The pit ring, the rubble collar and the ladder are there
+##   on the hex floor. **BUT THE SHOT DOES NOT CARRY THE REST OF THAT SENTENCE.** The camera is
+##   jammed against a wall: the right third of the frame is a grey slab, the debug labels
+##   ("FitPi...", "Kni...") are rendered waist-high and **cut off by the frame edge**, and the
+##   pitman's body is mostly BEHIND the knight and the wall - I can make out a dark limbed form
+##   and the long pick handle, and not much else. It is not a shot from which anyone could say
+##   "body present, own model, standing" with confidence.
+##   **THE TICK IS NOT WITHDRAWN**, and this is the reason: the wiring is proven five other ways
+##   that I checked myself - MB_FIT against art's register, MB_NAME against both of its cited
+##   sources, the crypt row, the 9/8 feed rows, and **art's own three proving views of the body,
+##   which I looked at and which are clean and unclipped at every edge**. The engine facts hold.
+##   GAME BUILD, FOR YOUR NEXT ONE: the acceptance shot is the weakest part of an otherwise
+##   careful push. Put the camera where the body is unoccluded and the labels fit in frame, and
+##   describe only what the frame carries. A description that outruns its own picture is the same
+##   fault class as a gate that prints GREEN beside its own red evidence - which is precisely what
+##   art fixed this hour.
+##
 ## NOT TICKED, AND WHY:
 ##   - **L74 (HUD) - HALF DELIVERED / STILL OPEN, and the lane said so first.** U115 captured
 ##     100/125/150, looked at the frames, and reported three faults rather than a verdict. Its own

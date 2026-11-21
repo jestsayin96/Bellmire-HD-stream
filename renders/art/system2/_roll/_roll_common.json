@@ -1,0 +1,315 @@
+{
+ "ok": true,
+ "tier": "common",
+ "hand_scale": 1.0,
+ "angles": [
+  0.0,
+  20.0,
+  35.0,
+  50.0,
+  65.0,
+  80.0,
+  90.0
+ ],
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "shipped_angle": 0.0,
+ "best_angle": 50.0,
+ "best_godot_held_rot": null,
+ "godot_derivation_refused": "S2_ROLL FAIL - no signed axis permutation reproduces BOTH shipped gear.gd carries. The Godot euler cannot be derived and will NOT be guessed.",
+ "errors": [],
+ "rows": [
+  {
+   "angle": 0.0,
+   "clip": 40,
+   "ground": 0,
+   "reach": 0.08,
+   "drop": 0.114,
+   "minor": {
+    "front": 35,
+    "side": 41,
+    "back": 51
+   },
+   "major": {
+    "front": 140,
+    "side": 132,
+    "back": 140
+   },
+   "aspect": {
+    "front": 4.0,
+    "side": 3.22,
+    "back": 2.75
+   },
+   "alone": {
+    "front": 2790,
+    "side": 3076,
+    "back": 3038
+   },
+   "vis": {
+    "front": 2610,
+    "side": 2264,
+    "back": 864
+   },
+   "seen": {
+    "front": 0.9355,
+    "side": 0.736,
+    "back": 0.2844
+   },
+   "worst_minor": 35,
+   "worst_aspect": 4.0
+  },
+  {
+   "angle": 20.0,
+   "clip": 35,
+   "ground": 0,
+   "reach": 0.155,
+   "drop": 0.126,
+   "minor": {
+    "front": 57,
+    "side": 70,
+    "back": 64
+   },
+   "major": {
+    "front": 134,
+    "side": 131,
+    "back": 134
+   },
+   "aspect": {
+    "front": 2.35,
+    "side": 1.87,
+    "back": 2.09
+   },
+   "alone": {
+    "front": 2788,
+    "side": 4798,
+    "back": 3129
+   },
+   "vis": {
+    "front": 2574,
+    "side": 3940,
+    "back": 865
+   },
+   "seen": {
+    "front": 0.9232,
+    "side": 0.8212,
+    "back": 0.2764
+   },
+   "worst_minor": 57,
+   "worst_aspect": 2.35
+  },
+  {
+   "angle": 35.0,
+   "clip": 35,
+   "ground": 0,
+   "reach": 0.23,
+   "drop": 0.205,
+   "minor": {
+    "front": 87,
+    "side": 99,
+    "back": 90
+   },
+   "major": {
+    "front": 120,
+    "side": 130,
+    "back": 120
+   },
+   "aspect": {
+    "front": 1.38,
+    "side": 1.31,
+    "back": 1.33
+   },
+   "alone": {
+    "front": 2807,
+    "side": 5062,
+    "back": 3170
+   },
+   "vis": {
+    "front": 2629,
+    "side": 4238,
+    "back": 865
+   },
+   "seen": {
+    "front": 0.9366,
+    "side": 0.8372,
+    "back": 0.2729
+   },
+   "worst_minor": 87,
+   "worst_aspect": 1.38
+  },
+  {
+   "angle": 50.0,
+   "clip": 22,
+   "ground": 0,
+   "reach": 0.29,
+   "drop": 0.27,
+   "minor": {
+    "front": 98,
+    "side": 121,
+    "back": 98
+   },
+   "major": {
+    "front": 112,
+    "side": 129,
+    "back": 115
+   },
+   "aspect": {
+    "front": 1.14,
+    "side": 1.07,
+    "back": 1.17
+   },
+   "alone": {
+    "front": 2909,
+    "side": 5023,
+    "back": 3181
+   },
+   "vis": {
+    "front": 2607,
+    "side": 4218,
+    "back": 849
+   },
+   "seen": {
+    "front": 0.8962,
+    "side": 0.8397,
+    "back": 0.2669
+   },
+   "worst_minor": 98,
+   "worst_aspect": 1.17
+  },
+  {
+   "angle": 65.0,
+   "clip": 9,
+   "ground": 0,
+   "reach": 0.33,
+   "drop": 0.317,
+   "minor": {
+    "front": 72,
+    "side": 128,
+    "back": 72
+   },
+   "major": {
+    "front": 130,
+    "side": 136,
+    "back": 131
+   },
+   "aspect": {
+    "front": 1.81,
+    "side": 1.06,
+    "back": 1.82
+   },
+   "alone": {
+    "front": 3005,
+    "side": 4741,
+    "back": 3152
+   },
+   "vis": {
+    "front": 2625,
+    "side": 4044,
+    "back": 831
+   },
+   "seen": {
+    "front": 0.8735,
+    "side": 0.853,
+    "back": 0.2636
+   },
+   "worst_minor": 72,
+   "worst_aspect": 1.82
+  },
+  {
+   "angle": 80.0,
+   "clip": 6,
+   "ground": 0,
+   "reach": 0.347,
+   "drop": 0.342,
+   "minor": {
+    "front": 58,
+    "side": 127,
+    "back": 59
+   },
+   "major": {
+    "front": 139,
+    "side": 140,
+    "back": 139
+   },
+   "aspect": {
+    "front": 2.4,
+    "side": 1.1,
+    "back": 2.36
+   },
+   "alone": {
+    "front": 3100,
+    "side": 4512,
+    "back": 3119
+   },
+   "vis": {
+    "front": 2640,
+    "side": 3916,
+    "back": 992
+   },
+   "seen": {
+    "front": 0.8516,
+    "side": 0.8679,
+    "back": 0.3181
+   },
+   "worst_minor": 58,
+   "worst_aspect": 2.4
+  },
+  {
+   "angle": 90.0,
+   "clip": 5,
+   "ground": 0,
+   "reach": 0.345,
+   "drop": 0.346,
+   "minor": {
+    "front": 55,
+    "side": 126,
+    "back": 55
+   },
+   "major": {
+    "front": 140,
+    "side": 140,
+    "back": 140
+   },
+   "aspect": {
+    "front": 2.55,
+    "side": 1.11,
+    "back": 2.55
+   },
+   "alone": {
+    "front": 3133,
+    "side": 4554,
+    "back": 3078
+   },
+   "vis": {
+    "front": 2692,
+    "side": 3954,
+    "back": 1202
+   },
+   "seen": {
+    "front": 0.8592,
+    "side": 0.8682,
+    "back": 0.3905
+   },
+   "worst_minor": 55,
+   "worst_aspect": 2.55
+  }
+ ]
+}

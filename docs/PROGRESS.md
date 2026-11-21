@@ -4038,3 +4038,24 @@ TAKE THIS NEXT (21:58 CT block) gave GAME BUILD: merge main first, then land S73
   42 / feed 44 - that is the chat bot's publish to make, not mine.
 - NEXT FIRING: the 44th, the PITMAN - MB_FIT 0.94 (art's register), crypt row, MB_NAME "Underfoot" (C-152 on main),
   STATIC body, footprint_span 3.10 m from _report.json (not the 2.85 m prose).
+
+## D-cycle - S76: the PITMAN (44th) wired AND named in one push - MB_FIT 0.94, crypt row, MB_NAME "Underfoot"; chain goes 44 feed / 44 named. 2026-11-20T23:15:00-06:00 (game build)
+TAKE THIS NEXT (22:58 CT block) gave GAME BUILD: S76 - wire the pitman, the 44th.
+- Merged origin/main and origin/laptop at the claim: clean.
+- delve.gd MB_FIT: + "pitman": 0.94 - COPIED from art's renders/art/minibosses/_fit_pitman_register.json pairs.pitman.ratio
+  (frame_edge 0 on front/side/back, fits_frame true), not re-derived.
+- delve.gd MB_NAME: + "pitman": "Underfoot" - content's miniboss_feed._note_c152 and art's CANON (tools/art/minibosses.py:15251), both read.
+- dungeon_hd.gd THEME_MINIBOSS_MORE crypt: + "pitman" under art's own tag (CANON field 5 = "crypt"). by_key.pitman has 9 arrive / 8 fall.
+- pitman.glb had no .import sibling: --headless --import run first (rc 0, 0 SCRIPT ERROR); the .import is committed.
+- New gate tools/_s76_pitman.gd, the S73 named-condition shape (FED read off content's data, hold and post-hold arms side by side).
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  S76_PITMAN OK 13 checks, Underfoot stands on a crypt floor in its own body (post-hold shape, FED) - 100 of 400 crypt draws;
+  OFFFLOOR_VERDICT OK 0 of 2086 samples off the floor; TOWNWALK in_solid=0/17255 (0.000%) raid_in_solid=0/7315 (0.000%) PASS
+  (STUCK_ON_ROUTE_TOTAL 5, watchdog repath 4, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- LOOKED AT renders/cycles/s76/pitman.png: the "Underfoot" nameplate over the pitman's dark body with its pick, beside its pit and
+  ladder, on the crypt's hex floor next to a hero. Body present, own model, standing.
+- INSTRUMENT NOTE (not counted): pitman_static.png is a blank grey frame. In the FED shape the template snaps the static AFTER the
+  staged floor is cleared, so it sees nothing. The S73 template carries the same order; winder_static.png is from its hold-shape
+  run. Not committed. The real picture is pitman.png. Worth a one-line fix (snap static before staging) in the next gate built from it.
+- NOT YET DONE: the pitman's ONE IDEA (it opens a pit under a delver, who loses a beat climbing out; the pit stays) is not delve
+  behaviour yet - this push wires body, fit, name and draw only. Offered as the next game-build row, not taken early.

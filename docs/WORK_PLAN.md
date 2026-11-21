@@ -1,3 +1,191 @@
+## TAKE THIS NEXT - THE 00:58 CT FIRING, 21 NOV 2026 (machine clock 01:0x CST, same day -
+## no rollover this hour; the 00:58 firing and the 01:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 23:58 BLOCK AND ITS TWO ADDENDA. ***
+## SIX BRANCHES WITH NEW WORK, SIX MERGES, FIVE TICKED. main is the six-lane merge b2f21330.
+##
+## *** WRITTEN AT 01:0x, SO THE GAME BUILD'S 01:07 RUN MAY READ THE 23:58 BLOCK, NOT THIS ONE. ***
+##   `laptop` is synced FIRST, as always, but if the read beats the write the game build owes
+##   nothing of the row below this hour and is not charged for it. Every other lane fires later.
+##
+## *** I FIXED A ROW OF MY OWN THAT WAS WRONG, AND THE HUB LANE IS RIGHT. *** The 23:58 HUB row
+##   said "carry on with the pack catalogue sweep". The hub lane REFUSED it with a measurement and
+##   a citation: `docs/PACK_CATALOGUE.md` is not a file that lane owns (it owns `web/` and
+##   `docs/HUB_SECURITY.md`), and the plan's own earlier ruling relieves the hub of pack-catalogue
+##   work because it belongs to the :15 PACK CATALOGUE trigger. I checked both and THE LANE IS
+##   CORRECT; my row contradicted a standing ruling. THE ROW IS STRUCK. No lane is to hand the
+##   pack catalogue to the hub again. A lane that refuses an instruction with evidence and names
+##   the contradiction has done the job, and this one did.
+##
+## TICKED THIS HOUR (five):
+##   - **S77** (game build) - **THE BOSS CARD NO LONGER COVERS THE DIRECTOR CHIP AT 150%.** I read
+##     the diff: `_fit_k()` caps the card's scale against the pane width AND against the room
+##     between its top and the Chronicle box, applied at all three `_dock` placements; `hud_dock.gd`
+##     untouched. The lane red-proved it itself (S77_BOSSCARD FAIL 12, "scale=1.5 card over 1 label
+##     chip(s)", card 815x202 at y 140 -> OK 12, card 677x168 at (142,174)).
+##     **AND I LOOKED AT THE PICTURE MYSELF** - `renders/cycles/s77/mana_150_1080.png`, cropped to
+##     the Director pane: "Now watching: Bellmire" is fully legible with clear air under it, the
+##     Grubmother card sits below the chip inside the pane, and the Chronicle rail is clear below
+##     the card. The fix is real in the frame, not only in the number. Gate verdict lines all
+##     present (parse 0 SCRIPT ERROR, TWITCH_PARSE OK 8, OFFFLOOR OK 0 of 2068, DELVE_TEST OK 9001
+##     frames, TOWNWALK PASS 0/18332). The lane also flagged, honestly and without touching it, a
+##     faint "NOW FIGHTING" banner ghost behind the card at 150% - that is the HUD's U108 banner
+##     and it is in the HUD row below.
+##   - **L74 IS WHOLE** (HUD, U116) - and it closed because three lanes each did their own half.
+##     (a) the 100% Chronicle last line under the rail: SETTLED as a stale pre-layout capture, now
+##     shot 180 frames after the chat lines instead of 60; the lane LOOKED at the new frame and all
+##     three lines sit inside the vellum. (b) the boss card over the Director strip: NOT the HUD's
+##     file, routed to the game build, and FIXED THIS HOUR as S77 above. (c) the bottom-right clock:
+##     owner established as `rts_camera.gd` `_speed_lb` (built :59-68, placed :139-148, marked
+##     `HudDock.mark(...,"chrome")` at :103) - NOT a HUD file, so the HUD's half is answered, not
+##     owed. Only a `tools/` shot script changed; no `.gd` of the game.
+##   - **ART - THE 44 STALE `stale_margin` ROWS ARE CLOSED BY ARITHMETIC, AND I REPRODUCED THE
+##     ARITHMETIC MYSELF OFF THE FILE RATHER THAN OFF THE ROW.** My own independent pass over
+##     `_fit_report.json`: 46 rows, **every one has a stored `pair_w`** (so no blind cell),
+##     **ZERO rows exceed `FRAME_W - MARGIN_X` = 5.48**, widest stale row `drover` 5.45 then
+##     `paviser` 5.43 and `gaoler` 5.43, widest row in the whole file `ratcatcher` 5.47 and
+##     `boiler` 5.47 - and NEITHER of those two is stale. `margin_derived` is 44, `stale_margin`
+##     is EMPTY, `red_summary.shipped_red` is EMPTY with only the two retired `_chibi` cells red.
+##     Every number the lane published reproduces exactly. The 44 re-renders are NOT owed.
+##     The lane also rebuilt the master contact sheet, which was **2280x560 - three cells** because
+##     a per-key run rebuilt the global sheet from its own `--only` scope; **I measured the new file
+##     myself: 2280x8400**, which is the 44 cells. And it caught its own first `measure_disk_frames`
+##     red as FALSE before shipping it (3 px of alpha 6-8/255 on the ground plane, accounted for by
+##     the row's own `shadow_edge`). **I LOOKED AT `_margin_evidence.png`**: the red frame rules and
+##     the cells read as described.
+##   - **C-155** (content) - pool top-up, **counted off the two trees myself and not off the diff
+##     header**: epitaphs 816 -> 828, descend 505 -> 511, cleared 490 -> 496, so **+12 / +6 / +6**
+##     exactly as claimed. Zero duplicates and zero blanks in all three pools. No code wiring,
+##     correctly. One new top-level key, which is the lane's own `_note_` and is not to be wired.
+##   - **CHAT BOT B96 - THE PLAN ROW IS DELIVERED AND THE SELL-BACK RATE IS SAID IN THREE PLACES
+##     WHILE THE GATE READ ONE.** The row asked for COMMANDS_DOC + the L14_TEST verdict: printed,
+##     `L14_TEST OK (24 checks)`, the `MINIBOSS UNNAMED [pitman]` arm has CLEARED on main,
+##     `COMMANDS_DOC OK wrote 31 commands` with `docs/COMMANDS.md` byte-unchanged, `TWITCH_PARSE OK
+##     (8 checks)`, parse 0 SCRIPT ERROR, and the generator was run BEFORE the test.
+##     **I CHECKED THE THREE-SITE CLAIM AGAINST THE DATA MYSELF** and it is exactly right:
+##     `data/commands.json` states a sell-back rate in three viewer-facing places and no more -
+##     `satchel`.short (line 84, chat only, `short` is never published so no drift arm can see it),
+##     `satchel`.what (line 85, published, the ONLY one the RATE arm gated) and `ask.gold`.reply
+##     (line 121, answered to a plain question). The new SATCHEL ECHO arm sweeps all three families.
+##
+## NOT TICKED, AND WHY:
+##   - **THE SATCHEL ECHO ARM ITSELF IS HALF DELIVERED.** The GREEN half is proven (parses, 0 SCRIPT
+##     ERROR, silent on correct data). The RED half is NOT - the lane said so itself and carried it
+##     to B97. A guard that has never been seen to fire is not a proven guard. It is in the row below.
+##   - **THE HUB IS NOT TICKED AND NOTHING IS OWED OF IT.** `web/` did not change, so there was
+##     nothing to verify; the standing check is recorded, not ticked. I RAN NO PUBLISH VERIFICATION
+##     because the lane did not claim READY TO PUBLISH, and an unearned gate report is the same
+##     fault class as a lying gate.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## GAME BUILD (:07) - **L31 IS WHOLE AND SO IS SYSTEM 2's ENGINE HALF; DO NOT RE-OPEN EITHER.** I
+##   checked the plan before writing this row: L31 was closed at L31c on 18 Nov and the status-
+##   effect-icon remainder no longer exists. S77 is ticked. YOUR ROW IS YOURS TO NAME from the
+##   Phase 2 queue (Mr. E's Systems 5-80, in his order) - take the lowest-numbered system that is
+##   not already wired, SAY IN YOUR ENTRY WHICH NUMBER YOU TOOK AND WHY IT IS THE LOWEST OPEN ONE,
+##   and do not pull one out of order. If you would rather spend the hour on the pitman's ONE IDEA
+##   that you offered at S77, that is miniboss-family work you already own and it is equally fine -
+##   name which you chose. Do not take the NOW FIGHTING banner ghost: it is the HUD's.
+##
+## CONTENT (:22) - C-156, your own cycle, unthrottled. Nothing you make is wasted; it is queued
+##   work. Keep writing `_note_` keys - NO LANE IS TO WIRE ONE and you are not to stop writing them.
+##
+## ART (:34) - **THE VALUE PASS ON THE BODIES YOU NAMED YOURSELF.** You listed four in your own
+##   "STILL OPEN, CONFIRMED BY LOOKING THIS RUN": `dyer` back (the body is behind a cloth - from
+##   behind the dyer is furniture), `greener` back (one flat near-black mass, the Beadle fault a
+##   third time), and `ratcatcher` and `boiler` (near-black on near-black and pale on pale). These
+##   are defects in bodies YOU shipped, so they are not new items and the freeze does not touch
+##   them. TAKE `dyer` AND `greener` BACKS FIRST - a view with no readable creature in it is worse
+##   than a flat one. WEAR IS A VARIABLE, NOT A STYLE, and plainness is the voice. Render front,
+##   side and back and LOOK at all three before you call either done. Your `MARGIN_Y` depth-budget
+##   gap from 4.5 is correctly carried, not owed this hour.
+##
+## HUB (:37) - **THE PACK CATALOGUE ROW IS STRUCK AND YOU WERE RIGHT TO REFUSE IT** (see the top of
+##   this block). Your row is the standing `web/` security check only: `node --check`, the innerHTML
+##   site count, the zero-hit set, the CSP meta, and the byte sizes - exactly as you ran it at 00:38.
+##   If `web/` has not changed again, say so in one line and stand down; a stand-down written up IS
+##   the delivery and you are not to invent a sweep to fill the hour. Publishing is NOT yours and
+##   NOT Mr. E's - it is with the supervisor, and the delta is in the FOR THE SUPERVISOR block below.
+##
+## CHAT BOT (:45) - **PROVE THE RED HALF OF SATCHEL ECHO.** You shipped the green half and said
+##   plainly that the red was unproven. Finish it: perturb one site at a time in a COPY of
+##   `data/commands.json` - `satchel`.short alone, then `ask.gold`.reply alone, then both - and show
+##   the arm naming the right site each time with the right rate, then restore and show it silent
+##   again. The `.what`-only case is already covered by the RATE arm, so the whole point is the two
+##   sites no drift arm could see. A guard that has never fired is not a guard.
+##
+## HUD (:52) - **THE RARITY-HUE HALF OF SYSTEM 2. IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE**
+##   and it is the last unstarted half of one of Mr. E's own Phase 1 systems. You named it yourself
+##   as your next. START IT THIS HOUR. Second, and only if that leaves room: the game build found a
+##   faint "NOW FIGHTING" banner ghost showing BEHIND the boss card at 150% - that is your U108
+##   banner docking under the card, it is no longer over the chip, and it is yours to look at.
+##   The L31 remainder does NOT exist any more; `rts_camera.gd` is not yours either.
+##
+## FOR THE SUPERVISOR:
+##   1. **THE HUB PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR, AND IT IS BIGGER THAN THE LAST
+##      REPORT.** `origin/gh-pages` is 05ac2679, tree 9ca8051e; `origin/hub:web` is 02257b2f. The
+##      difference is **3 files / 59 insertions / 1 deletion** - `web/NOTES.md` +9, `web/app.js`
+##      +47/-1, `web/style.css` +4 - NOT the 2 files / 19 lines carried in my prompt, which is
+##      stale. The hub lane has NOT claimed READY TO PUBLISH, so I ran no publish verification and
+##      make no readiness claim. **RECOMMENDATION: no publish this hour.** Ask the hub lane to
+##      claim readiness first; the moment it does, I will run the full gate (el()-only, no
+##      innerHTML on a snapshot value, no snapshot value as URL/src/href/style, CSP intact, the six
+##      state checks, a hostile name rendering as literal text, and a screenshot I have looked at)
+##      and bring you a verified recommendation.
+##   2. **A PIXEL-AIR FLOOR FOR THE MINIBOSS FRAME.** Art measured that the air a VIEWER gets is
+##      smaller than the derived margin on EVERY row, by 1.6 to 19 px (mean 8), because alpha
+##      spreads past the mesh bounds the margin is computed from. Five rows are tightest: drover 8
+##      px, paviser 9, boiler 16, ratcatcher 16, gaoler 22. **Nothing is clipped - 0 border hits
+##      anywhere in the set** - so this is not a red, and `air_px` is now stored per view. Art
+##      routed the choice of a floor to Mr. E; I am routing it to you instead, because it is an
+##      internal fit standard and not a thing to spend his attention on. **RECOMMENDATION: set no
+##      floor yet.** The register now records the pixel answer beside the derived one, nothing is
+##      clipped, and a floor chosen before we have seen it bite would just be a number to argue
+##      with. Revisit it the first time a body actually clips.
+##
+## DEAD-DATA BASELINE, RE-MEASURED 21 NOV 01:1x CT ON THE MERGED TREE b4c12efe - A NOTE, NOT A
+## ROW. NO LANE IS ASKED FOR ANYTHING HERE AND NOTHING BELOW IS OWED BY ANYONE.
+##   Measured off `scripts/*.gd` + `web/*.js` ONLY (48 files, 2,302,331 chars) and `assets/` only.
+##   UNREFERENCED ASSET DIRECTORIES: **ZERO** (34 directories with files, was 31).
+##   UNREAD LIVE DATA KEYS: **ZERO**. 12 data files, **139 top-level keys** (was 122 on 18 Nov).
+##   **49 keys return zero literal hits and ALL 49 ARE ACCOUNTED FOR:**
+##     34 are content's own `_note_` cycle notes (`_note_c155` is this hour's, and the ONLY new
+##        top-level key in `data/lore_lines.json` this hour - content behaved exactly right).
+##        **NO LANE IS TO WIRE A `_note_` KEY AND CONTENT IS NOT TO STOP WRITING THEM.**
+##      2 are the runtime-built `_alt` pools and are **READ**: `lord_intros_alt` and
+##        `unique_intros_alt`, at `delve.gd:3831` - `lore().get(base + "_alt", {})`.
+##        DO NOT RE-WIRE THEM.
+##      4 are DECLARED DEAD - and that is **FOUR, not the three every baseline since D98 has
+##        carried.** `phase2_words`, `phase2_words_alt`, `town_levels_for_the_desktop`, and
+##        **`phase2_words_alt2`, WHICH NO BASELINE HAS EVER NAMED.** I checked it rather than
+##        assuming: it entered at **C-114** ("third pools: ascent, carry, vault, sell, stone,
+##        errand"), it is a 7-key dict, and `delve.gd` builds `base + "_alt"` and **never
+##        `_alt2`** - there is no concatenation anywhere in `scripts/` or `web/` that could reach
+##        it. It is a fourth sibling of an already-dead family, NOT a new gap and NOT work.
+##        **IT IS RECORDED DEAD HERE SO NO FUTURE SEAT RAISES IT AS AN UNREAD KEY, AND NO LANE IS
+##        TO WIRE IT** - D98 closed that family and this does not re-open it.
+##      9 are prose/spec keys and are not items: `biomes.technique`, `bosses.boss_floors`,
+##        `origins.chronicle_line`, `origins.word_order`, `origins.casing`,
+##        `ranks.promotion_line`, `ranks.one_roll`, `strains._gating`, `world.canon_silences`.
+##   `townsfolk` is not in the 49 - it returns prose hits, as the standing guard says it does.
+##   `twitch_cooldown_s` IS STRUCK PERMANENTLY and is not re-raised here.
+##   **COMPARE THE CLASSES, NOT THE RAW NUMBER.** 32 -> 49 is 17 more `_note_` keys and one
+##   dead-family sibling that was always there and was never counted. Nothing has gone unread.
+
+## FOR THE NEXT TEAM LEAD (prompt corrections owed - a firing cannot write a prompt; land these the
+## first time Mr. E is live, all at once):
+##   1. The TEAM LEAD prompt's hub section says gh-pages is 45a7904 and the merged-not-published
+##      delta is "2 files / 19 lines". BOTH ARE STALE. Measured 21 Nov 01:0x CT: gh-pages 05ac2679
+##      (tree 9ca8051e), hub:web 02257b2f, delta 3 files / 59 insertions / 1 deletion. The prompt
+##      already says to re-measure every hour rather than copy the SHAs, so this is a refresh of
+##      the example, not a new rule.
+##   2. The prompt's dead-data baseline is dated 18 Nov and names 122 top-level keys / 32 zero-hit
+##      keys. The measured numbers have moved with content's `_note_` keys every hour since; the
+##      CLASSES are what to compare, which the prompt already says. Refresh the figures when a live
+##      turn allows.
+##   3. The prompt's Step 5 ID line (B50, C-111, D100, H32, L74, S33, T5, U74) is far behind the
+##      real high-water marks. Measured this hour: B96, C-155, S77, U116. Refresh it.
+
 ## TAKE THIS NEXT - THE 23:58 CT FIRING, 20 NOV 2026 (machine clock 00:06-00:1x CST, 21 NOV -
 ## the firing is the 23:58 one; the clock has rolled over. Both are true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 22:58 BLOCK AND ITS THREE ADDENDA. ***

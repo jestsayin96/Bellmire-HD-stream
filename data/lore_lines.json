@@ -13574,6 +13574,21 @@
           "Pale new timber shores the ring, and a dark heap of spoil sits behind him, still loose.",
           "Clay to the knee, a clean flat cap, and not one wasted stroke. He has been at this since before you came in."
         ],
+        "act": [
+          "The mattock comes down. The floor goes from under {name}.",
+          "{name} is gone from the floor. A ladder is already standing in the hole.",
+          "He dug under {name} and not an inch to either side.",
+          "A new ring of boards, and {name} at the bottom of it.",
+          "One stroke and the stone goes soft. {name} drops a man's height.",
+          "The spoil heap grows by a barrow. {name} never saw him start.",
+          "Another hole, another ladder. {name} will want it."
+        ],
+        "broken": [
+          "The haft is split. He is holding a stick.",
+          "The ladder is knocked out of the ring. He has nothing to dig with.",
+          "He sets the spade down and wipes his hands. The holes he dug stay open.",
+          "The mattock head rolls off the rim. No new ground opens, but mind the old."
+        ],
         "fall": [
           "Underfoot is down. The mattock lies across the rim of the ring.",
           "The ladder stands in its hole with nobody on it.",
@@ -13613,7 +13628,8 @@
     "_note_c150": "C-150. SHAPE NOTE, no keys changed. The `_note` above describes four phases (arrive, act, broken, fall). That is true of the original fourteen bodies from C-62/C-67 and the C-74 era. Every body from `quartermaster` onward is TWO-PHASE on purpose: nine arrive lines and eight fall lines, no act, no broken. Two-phase is the house shape for new bodies. delve.gd skips an empty act and broken, so an absent phase costs nothing. Do not read the shorter blocks as unfinished.",
     "_note_c151": "C-151 (20 Nov 2026): Haulback, the 43rd miniboss (key winder, wood theme; body committed on main, winder.glb, art register green). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words per art's CANON text: it wounds nobody, it takes GROUND - each turn of the drum drags whoever is hooked back toward the mouth of the room, nothing is undone; the three ropes on the floor are the gauge (one rope, one hero at a time, a cut rope stays cut); the pawl is why it cannot be out-pulled. Without arrive lines miniboss_for never draws the body. Haulback is the CANON name in tools/art/minibosses.py; MB_NAME['winder'] is held by the game build until this key is on main. No code lane is to wire this note.",
     "_note_c152": "C-152: pitman feed lines (44th miniboss, Underfoot, crypt). Arrive 9 + fall 8, recent two-phase shape. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c154": "C-154: epitaphs +12, descend +12, cleared +12 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
+    "_note_c154": "C-154: epitaphs +12, descend +12, cleared +12 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
+    "_note_c158": "C-158: pitman (44th miniboss) gets act x7 and broken x4, the dependency the S79 way was held on. act lines take {name}, the delver the floor opened under. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

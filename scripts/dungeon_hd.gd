@@ -231,6 +231,7 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
 ## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; NO content lines yet, so miniboss_for holds it out.
 ## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; NO content lines yet, so miniboss_for holds it out.
+## S72: content's C-149 ferryman lines are in (9 arrive / 8 fall), so the gate now lets it into the flooded draw.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper"],

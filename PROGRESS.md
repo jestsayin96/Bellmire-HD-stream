@@ -13751,3 +13751,33 @@ Gates (one claim, lock 18:49:10 -> IDLE, cap claim+10 = 18:59, released early, n
   - PROVED THE NUMBER RATHER THAN ASSERTING IT: wrote `origin/content:data/lore_lines.json` over the worktree copy, re-ran the gate - **the MINIBOSS COUNT arm cleared** (42 published, 42 fed) and the only arm left was `MINIBOSS UNNAMED: ["ferryman"]`, which is the trailing MB_NAME and nothing of mine. Restored the file and confirmed md5 identical before and after (20f1105e208682d28fd1a84ba9d1fa92). `data/lore_lines.json` is the CONTENT lane's and is not in my commit.
   - I DID NOT MANUFACTURE A GREEN. No configuration of real files is fully green this hour: main's feed makes COUNT fire, content's feed makes UNNAMED fire. A tree with both content's feed and a ferryman row written into delve.gd would pass, and I did not build it, because writing another lane's file to produce a green is the fault, not the proof.
 Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written.
+
+## S72 - 2026-11-20 19:07-19:2x CST - THE FERRYMAN HOLD IS FLIPPED: MB_NAME "Slackwater", 42 / 42 / 42 (game build)
+TAKE THIS NEXT (18:58 block), GAME BUILD row: S72, flip the ferryman hold now that content's C-149 is on main.
+MEASURED FIRST: lore_lines.json miniboss_feed.by_key = 42 with `ferryman` = arrive 9 / fall 8 (no act/broken - the
+two-phase house shape, delve.gd guards an empty act). dungeon_hd.gd THEME_MINIBOSS_MORE flooded already carries
+ferryman since S71, so "release into the flooded draw" needed no table edit - the miniboss_for gate opened on the lines.
+NAME CITED FROM BOTH SOURCES: content's miniboss_feed._note_c149 ("the Ferryman (42nd, Slackwater, flooded)") and art's
+CANON tuple tools/art/minibosses.py:14501 ("ferryman": ("Slackwater", 2.62, ...)). They agree.
+EDITS: scripts/delve.gd MB_NAME +"ferryman": "Slackwater" (S72 comment citing both), MB_FIT ferryman 1.07 untouched,
+only its "MB_NAME HELD" comment updated. scripts/dungeon_hd.gd: one S72 comment line. tools/_s51_names.gd TABLE
++ferryman and both size arms 41 -> 42 IN THE SAME COMMIT. tools/_s71_ferryman.gd REWRITTEN TO THE POST-HOLD SHAPE (the
+four hold arms flipped: drawn > 0, named Slackwater, C-149 lines read 9/8, arrive fired with the body present + fall on
+the kill; the real spawn path is staged again; check floor 5 -> 11). Backups *.bak_s72 kept, untracked.
+RED PROOF OF THE FLIP: the pre-S72 gate (bak_s72 copy run on this tree, then removed) prints S71_FERRYMAN FAIL 3 of 6 -
+held-out, no-MB_NAME and no-arrive-lines arms all fire. The old gate was green only on a tree that no longer exists.
+LOOKED AT renders/cycles/s71/ferryman.png myself: the Slackwater nameplate over a pale robed figure poling a dark punt on
+the flooded floor's water-sheen, beside the knight, about a head taller. The body reads near blown-out white under the
+engine light - art's even-light / pale-on-pale matter, not an engine fault; not touched. Gate camera crowded by a wall.
+THE CHAIN, SAID OUT LOUD: 42 feed (by_key) / 42 MB_NAME (42 unique, feed-minus-named = {} and named-minus-feed = {}) /
+42 published (data/commands.json "42 elites" in short and what).
+RESULTS: parse --quit-after 300 rc 0, 0 SCRIPT ERROR / Parse Error; S71_FERRYMAN OK 12 checks (flooded draws 100/400,
+Slackwater, 9/8 lines, MB_FIT 1.07, stands 2.62 m = 1.07 x hero, arrive + fall fired); S51_NAMES OK 176 checks;
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2203 samples off the floor; DELVE_TEST OK ran 9001 frames, 0 SCRIPT
+ERROR; TOWNWALK: see the line below.
+No live Twitch test this cycle - 0 bits, no cheer, no redemption, no account used.
+TOWNWALK - NO VERDICT LINE THIS HOUR, SO BY COORDINATION 15 IT IS RED, NOT A PASS: run 1 (in parallel with DELVE_TEST)
+hit my 360 s cap at T=100s of its 120 s simulation, in_solid=0/15313, stuck_on_route=0, 0 SCRIPT ERROR; run 2 alone was
+slower still (T=20s at 5 min wall, in_solid=0/3205) and was cut by its 480 s cap at 19:26:56 so I could release by :40.
+It RUNS with no script error (the commit condition), and S72 touches no town file - but the verdict is owed to the next
+firing: run townwalk FIRST and alone with a >= 600 s cap. Why run 2 was ~4x slower than S70's 3m59s is unmeasured.

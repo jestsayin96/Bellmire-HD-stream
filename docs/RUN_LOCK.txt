@@ -772,3 +772,18 @@ IDLE 2026-11-20T17:57:35-06:00 - HUD U109: feed_hud.gd lord card no longer starv
 RUNNING 2026-11-20T18:07:57-06:00 (game build: merge + TAKE THIS NEXT item; claim 18:07, cap claim+25 = 18:32, expected finish 18:30, hard release by 18:32; Godot EMPTY at claim)
 
 IDLE 2026-11-20T18:23:24-06:00 - game build S71: Ferryman MB_FIT 1.07 + flooded row, MB_NAME held; S71_FERRYMAN OK 6, S70_SCRAPER OK 9, OFFFLOOR OK, TWITCH_PARSE OK, DELVE_TEST OK, townwalk ran no verdict in 420s; pushed laptop 5ef88bcb. Godot EMPTY at release; released early (cap claim+25 = 18:32), no crossing. (game build)
+
+RUNNING 2026-11-20T18:42:26-06:00 (QA tester: whole-project headless parse; claim, cap claim+15, expected finish 2 min; Godot EMPTY at claim)
+
+IDLE 2026-11-20T18:42:49-06:00 - QA tester: headless parse done rc=0; Godot EMPTY at release. (QA tester)
+
+RUNNING 2026-11-20T18:49:10-06:00 (chat bot B90: publish 42 - parse + l14 + twitch_parse + commands_doc; claim 18:49, cap claim+10 = 18:59, expected finish 18:56, hard release by 18:58; Godot EMPTY at claim)
+IDLE 2026-11-20T18:55:40-06:00 - chat bot B90: published 42 elites; parse rc=0, COMMANDS_DOC OK wrote 31 commands, TWITCH_PARSE OK, L14_TEST FAIL 1 on the worktree (guard arm MINIBOSS COUNT: published 42, merged-main feed 41) and that arm CLEARS with origin/content lore_lines.json swapped in (then restored, md5 identical), leaving only MINIBOSS UNNAMED: ferryman = MB_NAME trailing per S71. Godot EMPTY at release; released early (cap 18:59), no crossing. (chat bot)
+
+RUNNING 2026-11-20T18:53:36-06:00 (HUD U110 capture 125/150 shots, expected finish 18:59, cap 19:05, hard release by 19:07)
+
+IDLE 2026-11-20T18:55:14-06:00 - HUD U110: 125/150 shots captured, no crossing; Godot EMPTY at release. (HUD)
+
+RUNNING 2026-11-20T19:07:50-06:00 (game build, claim; cap claim+25 = 19:33, expected finish 19:30)
+
+IDLE 2026-11-20T19:27:21-06:00 - game build S72: ferryman MB_NAME Slackwater, chain 42/42/42; S71_FERRYMAN OK 12, S51_NAMES OK 176, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK; TOWNWALK no verdict (cap-cut at 480 s, in_solid 0, 0 SCRIPT ERROR). Godot EMPTY at release; claim 19:07:50, cap 19:32:50, no crossing. (game build)

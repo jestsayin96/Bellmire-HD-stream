@@ -25,21 +25,18 @@ func _initialize() -> void:
 	_r = Roster.new()
 	root.add_child(_r)
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
-	# S71: NOT staged. The real spawn (delve.gd _setpiece_miniboss :455) only takes the own body
-	# when content has arrive lines, so staging now would prove nothing but the fallback. Static arms
-	# only until content writes by_key.ferryman; then restore this line and the line/body arms.
-	# _keys.append(["ferryman", "flooded"])
+	# S72: content's C-149 by_key.ferryman landed, so the REAL spawn path is staged (S71 held it out).
+	_keys.append(["ferryman", "flooded"])
 	var drawn := 0
 	for n in range(400):
 		if DungeonHD.miniboss_for("flooded", n) == "ferryman":
 			drawn += 1
 	print("S71 flooded draws of ferryman over 400 rolls: %d" % drawn)
-	# S71: content has NO by_key.ferryman yet, so miniboss_for MUST hold it out - a draw here would
-	# put a mute body on a floor. When content lands the lines, flip this arm to drawn > 0.
-	_ok(drawn == 0, "ferryman is HELD OUT of the flooded draw until content writes its lines (%d of 400)" % drawn)
-	_ok(ResourceLoader.exists("res://assets/monsters/minibosses/ferryman.glb"), "ferryman.glb loads (so the hold is the lines, not the mesh)")
-	_ok(not Delve.MB_NAME.has("ferryman"), "ferryman has NO MB_NAME yet (S51: names follow feed rows; art CANON says Slackwater)")
-	_ok(Delve.miniboss_lines("ferryman", "arrive").is_empty(), "content has written no ferryman arrive lines yet - the hold is the lines")
+	# S72: POST-HOLD SHAPE. The four S71 hold arms asserted absences C-149 has since filled.
+	_ok(drawn > 0, "ferryman enters the flooded draw (%d of 400)" % drawn)
+	_ok(ResourceLoader.exists("res://assets/monsters/minibosses/ferryman.glb"), "ferryman.glb loads")
+	_ok(Delve.miniboss_name("ferryman") == "Slackwater", "ferryman is named Slackwater (%s)" % Delve.miniboss_name("ferryman"))
+	_ok(Delve.miniboss_lines("ferryman", "arrive").size() == 9 and Delve.miniboss_lines("ferryman", "fall").size() == 8, "content's C-149 lines read: arrive %d / fall %d (want 9 / 8)" % [Delve.miniboss_lines("ferryman", "arrive").size(), Delve.miniboss_lines("ferryman", "fall").size()])
 	_ok(absf(float(Delve.MB_FIT.get("ferryman", 0.0)) - 1.07) < 0.0001, "MB_FIT ferryman is art's register 1.07")
 	_cam = Camera3D.new()
 	_cam.fov = 40.0
@@ -157,7 +154,7 @@ func _check_and_clear() -> void:
 	var got := mh / Delve.MB_HERO_H
 	_ok(absf(got - want) <= 0.03, "%s: stands %.2fm = %.2f x hero vs art register %.2f (live hero bounds incl. weapon %.2fm, info only)" % [k, mh, got, want, hh])
 	var arrive: Array = Delve.miniboss_lines(k, "arrive")
-	_ok(arrive.is_empty(), "%s: content has written NO arrive lines yet (%d) - the hold is correct; flip when C- lands" % [k, arrive.size()])
+	_ok(not feed.is_empty() and arrive.has(feed[0]), "%s: arrive line fired with the body present" % k)
 	var n0 := feed.size()
 	m.hp = 0
 	m.state = Monster.S.DEAD
@@ -167,7 +164,7 @@ func _check_and_clear() -> void:
 	for l in feed.slice(n0):
 		if fall.has(l):
 			has_fall = true
-	_ok(fall.is_empty() and not has_fall, "%s: no fall lines yet (%d) and none fired on the kill" % [k, fall.size()])
+	_ok(has_fall, "%s: fall line on the kill" % k)
 	_rows.append("%s floor %d (%s) model %s ratio %.2f/%.2f live-hero %.2fm" % [k, _cur["fn"], _cur["theme"], path.get_file(), got, want, hh])
 	for n in ["d", "town", "dh"]:
 		(_cur[n] as Node).queue_free()
@@ -199,10 +196,10 @@ func _process(_dt: float) -> bool:
 			print("S71 ROWS:")
 			for r in _rows:
 				print("  " + r)
-			if _checks < 5:
-				_fails.append("check floor: %d checks is under 5" % _checks)
+			if _checks < 11:
+				_fails.append("check floor: %d checks is under 11" % _checks)
 			if _fails.is_empty():
-				print("S71_FERRYMAN OK %d checks, ferryman is fitted (1.07), in the flooded row and HELD OUT until content writes it" % _checks)
+				print("S71_FERRYMAN OK %d checks, Slackwater stands on a flooded floor in its own body (S72 post-hold shape)" % _checks)
 			else:
 				print("S71_FERRYMAN FAIL %d of %d: %s" % [_fails.size(), _checks, _fails])
 			quit(0 if _fails.is_empty() else 1)

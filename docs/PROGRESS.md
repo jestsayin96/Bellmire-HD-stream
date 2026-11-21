@@ -4088,3 +4088,23 @@ TAKE THIS NEXT (23:58 CT 20 Nov block, merged off origin/laptop c6c8771c) gave G
   OFFFLOOR_VERDICT OK 0 of 2068 samples off the floor; DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR;
   TOWNWALK in_solid=0/18332 (0.000%) raid_in_solid=0/6128 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 4, giveup 1).
 - No Twitch test, 0 bits. NEXT (offered, not taken): the pitman's ONE IDEA (a pit under a delver, a lost beat, the pit stays).
+
+## D-cycle - S79: the PITMAN'S ONE IDEA - it opens the floor under a delver, who loses a beat climbing out; the pit stays. HELD on content's act/broken lines. 2026-11-21T02:15:58-06:00 (game build)
+TAKE THIS NEXT (01:58 CT block) offered GAME BUILD a choice: the lowest open Phase 2 system, or the pitman's ONE IDEA offered at S77.
+I TOOK THE PITMAN'S IDEA - miniboss-family work this lane already owns, offered twice (S76, S77) and never taken early. No Phase 2 number was taken.
+- delve.gd MB_WAYS: + "pitman": "pit". New consts MB_PIT_MAX 3, MB_PIT_R 1.0, MB_PIT_BEAT 1.5 s, MB_PIT_CLIMB 3.0 s; new static Delve.pitman_fell.
+- The act: a pit opens under the nearest delver (meta mb_pits; oldest closes past MB_PIT_MAX) and they go straight in: +MB_PIT_BEAT on their
+  next swing. _pit_tick runs every way-tick BEFORE the broken/lines guard, so anyone who stands on an open pit goes in, once per MB_PIT_CLIMB.
+  Broken = it stops digging; the pits it already dug still take people. _pit_mark puts a dark mouth in the floor, parented beside the Pitman.
+- HOLD: content's by_key.pitman has arrive 9 / fall 8 and NO act/broken lines, so the existing gate in _mb_way_tick keeps this way off every
+  real floor until content writes them. CONTENT IS OWED: pitman act + broken lines (the act line takes {name} - the delver it dug under).
+- HONEST LIMIT (in the code comment): pits are ticked by the Pitman; once it is dead they take nobody (marks stay as scenery).
+- New gate tools/_s79_pitman.gd: HOLD arm on real data first, then act/broken lines FED IN MEMORY ONLY ("[S79 TEST ...]", never written to data/).
+  S79_PITMAN OK (16 checks). Red: S79_RED=1 fills the pits in after each act -> S79_PITMAN FAIL (16 checks), 7 named failures.
+- LOOKED AT renders/cycles/s79/pitman_2pit.png: the first render (mark at y 0.025) showed NO pit - the hex tiles' bevelled tops hid it. Raised to
+  y 0.09, re-shot: a dark round mouth in the floor beside the knight who has stepped off it, the Pitman and its ladder behind. That is the fix
+  the picture made, not the number.
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (after the y edit); S79_PITMAN OK (16 checks) (after the y edit);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2265 samples off the floor (home); TOWNWALK in_solid=0/16148 raid_in_solid=0/8237 PASS;
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. The last four ran on the build before the cosmetic y 0.025 -> 0.09 edit; parse and S79 re-ran after.
+- No Twitch test, 0 bits.

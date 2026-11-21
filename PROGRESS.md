@@ -13390,3 +13390,9 @@ Result: U121_DONE checks=40 fails=0, 0 Parse Error / SCRIPT ERROR (headless pars
 LOOKED AT renders/cycles/20261121_u121/host_s150_phone480.png: four pane labels clean and inside their panes, kind chips unclipped, clock unclipped. OPEN: inside the Chronicle vellum two ambient lines read "The wet is wa" / "is the worst o" - cut at the right edge of the scroll. One frame cannot tell a half-revealed line from a real clip; no check of mine covers it.
 Next firing: measure that (does a line's drawn width exceed the Chronicle's inner rect at 150% in 2x2?) before touching feed_hud.gd.
 Decision for Mr. E: none.
+
+U122 - 2026-11-21 06:5x CST - STAND-DOWN: CHAT BOT B102 HOLDS THE GODOT LOCK. NO .gd CHANGED, NO ENGINE LAUNCH
+Lock: read R's WORKING docs/RUN_LOCK.txt at 06:53 CST. Last line: "RUNNING 2026-11-21T06:52:30-06:00 (chat bot B102 ... cap 07:17, expected finish 07:02)", no IDLE from the chat bot after it. tasklist showed no Godot yet (claim was 50 s old and launching), so by the yield rule the RUNNING line is live and I did not claim over it. Cannot wait it out: my window closes at :07 and its expected finish is 07:02.
+Item unchanged: WORK_PLAN HUD row (U121's open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout, before touching feed_hud.gd.
+Next firing (07:52): re-read the working lock; if clear, one claim with expected finish <= :05 for a windowed measure-only tool (tools/_u122_chron_width.gd), no edit to feed_hud.gd until the number says there is a clip.
+Decision for Mr. E: none.

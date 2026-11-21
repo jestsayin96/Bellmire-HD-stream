@@ -1,3 +1,134 @@
+## TAKE THIS NEXT - THE 19:58 CT FIRING, 20 NOV 2026 (machine clock 19:58-20:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 18:58 BLOCK. ***
+## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SIX TICKED. main is 62cabed4.
+##
+## *** MY OWN FAULT FIRST, AND IT IS THE ONE THE RECIPE WARNS ABOUT. *** My first pass at
+##   content's C-150 arithmetic read the OLD lore_lines.json through the Linux bridge, got an
+##   EMPTY string back, and happily reported every list in the file as new - "+10,009 lines".
+##   AN EMPTY RESULT FROM A FAILED READ IS NOT "NOTHING", IT IS THE OPPOSITE OF THE TRUTH. I threw
+##   it away, re-read the old blob through the Blender bridge, and the real number is 54.
+##
+## TICKED THIS HOUR (six):
+##   - **S72** (game build) - THE FERRYMAN HOLD IS FLIPPED AND THE CHAIN IS FLUSH. COUNTED ON THE
+##     MERGED TREE MYSELF: `MB_NAME` is **42 entries, 42 unique keys, 42 unique names**, `ferryman`
+##     = "Slackwater"; `miniboss_feed.by_key` is 42; and **the two key sets are IDENTICAL - no fed
+##     body unnamed, no name without a feed row.** `commands.json` says "42 elites" twice. So the
+##     three numbers are **42 feed / 42 MB_NAME / 42 published**. Both citations are real (art's
+##     CANON and content's `_note_c149` both carry "Slackwater"). AND IT DID THE HARD HALF: all
+##     FOUR hold arms in `_s71_ferryman.gd` are rewritten to the post-hold shape - the draw arm is
+##     now `drawn > 0`, the name arm asserts "Slackwater", the line arms assert 9 arrive / 8 fall
+##     and that a line actually FIRED on spawn and on the kill - and the check floor went 5 -> 11.
+##     That is a gate that got STRONGER, not a gate that got deleted.
+##   - **C-150** (content) - VERIFIED BY ARITHMETIC I DID MYSELF (second time, see above):
+##     `epitaphs` 760 -> 790 (+30), `descend` 471 -> 483 (+12), `cleared` 456 -> 468 (+12). 54 new
+##     lines, **nothing removed**, no key added or lost. Exactly the claim, to the line.
+##   - **B91** (chat bot) - its prediction was right and I proved it rather than taking it: on the
+##     merged tree `feed keys - MB_NAME keys` is the EMPTY SET, so the one red it had left
+##     (`MINIBOSS UNNAMED: ferryman`) is cleared by my merge. It also swapped `origin/laptop`'s
+##     delve.gd in, got OK 24 / 0 arms, and restored md5-identical. No Godot needed to check it.
+##   - **HUB - V6 CONSUMED, AND I RENDERED IT MYSELF.** Greps first: the only two `innerHTML` sites
+##     are the page-owned status line and the "nothing yet" box, both untouched; no eval/Function;
+##     no snapshot value reaches `src`/`href`/`style`; the mana fill is a CSSOM number. **THEN I
+##     RAN IT IN CHROMIUM IN MY OWN CONTAINER** with a stubbed snapshot and `?mock=v6`: the
+##     hostile miniboss key was **DROPPED** (that band gets no chip), the hostile band NAME rendered
+##     as literal text, **no `<img>` element was created and no dialog fired**, 0 page errors, and
+##     the MP bar reads "Mana 18 of 40" in blue under the green HP bar. That is the test.
+##   - **ART - THE WINDER (Haulback), THE 43rd MINIBOSS.** It pushed at 20:01, after my first merge,
+##     so I re-read the ref and merged it before syncing. **I LOOKED AT ALL THREE HERO VIEWS:** a
+##     ratcheted drum on a timber frame with three hooked ropes out across the floor - front, side
+##     and back are three DIFFERENT pictures, which is the point, because art caught and wrote up
+##     that its own "symmetric by construction" claim was FALSE. Register GREEN: ratio 0.96
+##     (h 2.34 / hero 2.45), pair_w 4.86, 3 proving views, `fits_frame` true; `_report.json` is
+##     **43 non-chibi bodies** and `blank_check` opened **129 files with 0 failures** - exactly
+##     43 x 3. (My ORDER regex returned 4. I did not use it; the count above is `_report.json`.)
+##   - **PACK CATALOGUE - Church1_blend, CLEARED (CC0 1.0).** I DID NOT TAKE THE ROW: I opened
+##     `_packs\Church1_blend\75990_Church1Upload_blend\75990 - Medieval Church - License.html` on
+##     disk myself and read it - "released by Daniel74 under the following license: Creative
+##     Commons Zero (Public Domain)... There are no requirements for CC-Zero licensed blends."
+##     17 files on disk, which is the count in the row. Commercial use permitted, attribution not
+##     required. The Animals pack stays NOT CLEARED and nothing from it enters `assets/`.
+##
+## NOT TICKED, AND WHY:
+##   - **U111 (HUD) - THE FIX IS PROBABLY RIGHT AND THE EVIDENCE DOES NOT PROVE IT.** The code is
+##     two lines and honest (`_chrome_text_w` padding 4px -> `UiTheme.px(10)`, label flag
+##     EXPAND_FILL -> SHRINK_BEGIN). But I pulled BOTH `mana_150_1080.png` frames - the one before
+##     your change and the one after - and put them side by side: **the Chronicle line is not the
+##     same line.** The old frame reads "The Commander does not sleep while a lord has a name and
+##     the town does not have its head", and the word "has" really is touching the right rule -
+##     your fault report is real. The new frame reads "Nightwing rises. Too fast to see coming.",
+##     which is SHORT and would clear that edge with or without your fix. A frame whose text never
+##     reaches the margin cannot prove a margin. See your row for the one capture that earns it.
+##
+## *** DEAD-DATA AUDIT, RE-MEASURED 20 NOV 20:0x CT ON THE MERGED TREE. NOTHING MOVED. ***
+##   2,293,550 chars of script (48 files, scripts/*.gd + web/*.js only), 12 data files, **137**
+##   top-level keys - the same 137 as 19:0x. **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET
+##   DIRECTORIES: ZERO.** 47 keys return zero literal hits and all 47 are accounted for exactly as
+##   last hour: 32 `_note_` keys, 2 runtime-built `_alt` pools (READ - DO NOT WIRE), 4
+##   declared-dead (incl. `phase2_words_alt2`, unreachable BY CONSTRUCTION), 9 prose/spec keys.
+##   C-150 added 54 lines and NO key, which is why the number did not move.
+##
+## ---- THE ROWS. ONE ITEM PER LANE. ----
+## GAME BUILD (:07) - **S73: WIRE THE 43rd BODY, THE WINDER.** Art's `_fit_winder_register.json` is
+##   GREEN - ratio **0.96** (creature_h 2.34 / hero 2.45), tag **"wood"** (field 5 of its CANON
+##   tuple), 3 proving views. Add the `MB_FIT["winder"]` row **copied, not re-derived**, cite the
+##   register file the way S71 cited the ferryman's, and put it in the wood theme row.
+##   **HOLD `MB_NAME["winder"]` until content writes `by_key.winder`** - that is S51 and it is
+##   right. **BUT WRITE THE HOLD ARMS IN THE SHAPE YOU JUST LEARNED AT S72.** You had to rewrite
+##   four arms an hour after you wrote them because they asserted an absence. Write them so the
+##   flip is ONE LINE: assert the hold against a named condition ("no feed rows yet"), say in the
+##   comment which C- item flips it, and keep the post-hold assertions next to them, commented,
+##   ready to uncomment. Art's canon says this one "takes GROUND" - it drags delvers back and does
+##   not wound. **IF THE ENGINE HAS NO DISPLACEMENT MECHANIC, SAY SO PLAINLY AND DO NOT INVENT
+##   ONE** - the body, the fit and the draw are the item; the mechanic is not in scope this hour.
+## CONTENT (:22) - **C-151, your own cycle, unthrottled.** Nothing is owed and nothing is blocked.
+##   FOR INFORMATION, not an order: art landed a 43rd body this hour - key `winder`, canon name
+##   **"Haulback"**, tag wood, and its canon line says it hooks delvers and drags them back rather
+##   than wounding them. Its `by_key.winder` rows are the one thing that unblocks `MB_NAME` at the
+##   game build's next turn, exactly as your C-149 unblocked the ferryman. Your cycle, your call.
+## ART (:34) - **THE 44th MINIBOSS, and even-light BACK AND SIDE instalments only.** The Winder is
+##   ticked. **THE STALE-FRONT DECISION IS STILL WITH THE SUPERVISOR** - it was routed at 18:58 and
+##   there is no answer yet, so instalment 2 stays held and you are right to hold it. Do not fold a
+##   front re-render into anything. Your self-correction on "symmetric by construction" is the kind
+##   of thing that makes the rest of your register believable; keep doing it.
+## HUB (:37) - **THE CHIP SHOWS THE TRADE WORD, AND THAT IS MY FAULT, NOT YOURS.** You built
+##   exactly the ask I wrote: `parties[].miniboss` = the MB_NAME **key**, title-cased. But S51
+##   (Mr. E's 19 Nov directive) took the trade words AWAY from the player - the key `gaoler` is the
+##   file name; the player's word is **"Shacklemaw"**. So the chip I asked for would put the one
+##   name the directive removed in front of every viewer. **AMEND IT:** change the v6 ask in
+##   `web/NOTES.md` to a display name (`miniboss_name`, the MB_NAME value; keep the key alongside
+##   if you want it for matching), and make the chip prefer the NAME - and when only a key arrives,
+##   show **nothing**, never the key. Same guards, same `el()` discipline. Say "READY TO PUBLISH"
+##   if you reach it; the gate is mine to run and the push is the supervisor's.
+## HUD (:52) - **U111 NEEDS ONE CAPTURE AND THEN IT TICKS.** Re-shoot `mana_150_1080` with a
+##   Chronicle line **long enough to wrap and reach the right margin** - the old frame's own
+##   "The Commander does not sleep while a lord has a name and the town does not have its head" is
+##   perfect and you already have it. Same 150% frame, same card showing. If you can, shoot it
+##   twice - once with the padding and once with it stripped out of a copy - and the tick is
+##   automatic. **THEN BACK TO SYSTEM 2'S RARITY-HUE HALF**, which is still the most valuable open
+##   item in the house and has been unstarted since 18 Nov.
+## CHAT BOT (:45) - **B92: YOUR OWN CYCLE. DO NOT RE-PUBLISH 42.** Your last red is gone by my
+##   merge and I proved it myself. The next publish is **43**, and it is not owed until content
+##   writes `by_key.winder` AND the game build lands `MB_NAME["winder"]` - two lanes away, so do
+##   not pre-publish it and do not write a gate that asserts the absence (see what S72 cost).
+## PACK CATALOGUE - **NEXT PACK IN THE QUEUE.** Church1_blend is CLEARED and I re-read the licence
+##   myself; the row stands as written. Same shape: licence page or licence file, by your own eyes.
+## QA TESTER (every 2h, :41) - **YOUR TWO SILENT GATES ARE STILL RED AND THAT IS STILL YOUR ITEM.**
+##   A gate that prints no verdict line is RED until it prints one (COORDINATION 15). Make each of
+##   the two print a VERDICT LINE, then report the lines.
+##
+## FOR THE SUPERVISOR - ONE DECISION STILL WAITING, TWO FOR INFORMATION.
+## (1) *** THE EVEN-LIGHT / STALE-FRONT DECISION FROM 18:58 IS STILL OPEN AND ART IS STILL HELD. ***
+##   Nothing new has come in and I have not re-measured the count, because the decision does not
+##   turn on whether it is 28 or 31 of 42. Unchanged recommendation: **let art write all three
+##   views on bodies it is already re-rendering**, so the library does not end up with a current
+##   back and a two-day-old front on the same body. Art is producing meanwhile (the 43rd landed).
+## (2) FOR INFORMATION: the miniboss chain is **flush at 42/42/42** for the first time since the
+##   scraper; the 43rd body (Winder) is on disk and deliberately unnamed until content feeds it.
+## (3) FOR INFORMATION: **LOCK DISCIPLINE WAS CLEAN THIS HOUR - clean-hour count 1.** Game build
+##   19:07:50-19:27:21 (cap 19:32, no crossing); chat bot 19:47:40-19:52:10; HUD claimed 19:53:57,
+##   which is AFTER the chat bot's IDLE, which is the rule working. The two touching lanes did what
+##   I recommended last hour without being told to.
+
 ## TAKE THIS NEXT - THE 18:58 CT FIRING, 20 NOV 2026 (machine clock 18:58-19:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 17:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SIX TICKED. main is 178c489c.

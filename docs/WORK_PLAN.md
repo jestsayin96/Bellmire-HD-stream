@@ -75,11 +75,22 @@
 ##   still describes four phases (arrive/act/broken/fall). THE ENGINE IS FINE - delve.gd:2021 skips
 ##   an empty `act`. This is a NOTE-vs-SHAPE drift in prose, not a defect, and it is not an item: if
 ##   two-phase is the intended shape for new bodies, one sentence in the `_note` would retire it.
-## ART (:34) - **THE 43rd MINIBOSS**, and alongside it the supervisor's 18:32 ruling, which is now
-##   standing work: **THE EVEN-LIGHT RE-RENDER IS APPROVED FOR BACK AND SIDE VIEWS ONLY**, spread
-##   across your own firings as background housekeeping. **FRONT VIEWS ARE PROVABLY UNCHANGED - DO
-##   NOT RE-RENDER THEM.** New bodies from the 42nd on already render even-lit. It is housekeeping
-##   and it does not block the 43rd.
+## ART (:34) - **ADDENDUM, WRITTEN 19:1x AFTER YOU PUSHED 43f48604 - THIS REPLACES THE ROW I HAD
+##   WRITTEN FOR YOU TEN MINUTES AGO.** My earlier row told you the even-light re-render was
+##   straightforward housekeeping. YOUR OWN INSTALMENT 1 FOUND IT IS NOT, and you were right to
+##   abort at the guard rather than ship the obvious reading. **INSTALMENT 2 IS BLOCKED ON A
+##   DECISION THAT IS THE SUPERVISOR'S, NOT MINE AND NOT YOURS** - the ruling you would be bending
+##   is the supervisor's own. It is routed up below; DO NOT fold a front re-render in while it is
+##   open, which is exactly what you said you would not do.
+##   SO YOUR ITEM THIS HOUR IS **THE 43rd MINIBOSS**, and even-light BACK AND SIDE instalments only
+##   where they do not touch a front, which is what is already approved.
+##   **I CHECKED YOUR DATING MYSELF AND I DO NOT GET YOUR NUMBER.** Dating each non-chibi
+##   `hero_front.png` by the last commit that touched it on main against `e4e9b2f2` (18 Nov
+##   18:48:17 CT): **42 fronts, 31 stale, 11 current** - you say 28 and 14. The two instruments are
+##   not the same instrument (mine dates the COMMIT, yours dates the RENDER) and three bodies land
+##   differently between them. I am not calling your 28 wrong; I am saying the honest range is
+##   **28 to 31 of 42** and that the decision below does not turn on which. Your "UP TO 28" caveat
+##   was the right instinct and it should read "up to 31" until the two instruments agree.
 ## HUB (:37) - **YOUR PAYLOAD ASK IS ANSWERED AND THE WAITING IS OVER.** v6 is in `web/NOTES.md`.
 ##   Build against it: the mana and miniboss fields you asked for, behind the snapshot's own
 ##   `?state=` guards, `el()` only, no `innerHTML` on any snapshot value, nothing from a snapshot
@@ -100,17 +111,33 @@
 ##   parse rc=0 is a return code, not a verdict. Make each of the two print a VERDICT LINE, then
 ##   report the lines.
 ##
-## FOR THE SUPERVISOR: nothing is blocked on you. Two things for your 19:32 look. (1) The ferryman
-##   chain is deliberately staggered one more hour - 42 feed / 41 MB_NAME / 42 published - because
-##   S71 held the name on purpose and S72 at :07 closes it; that stagger is correct, not drift.
-##   (2) LOCK DISCIPLINE BROKE THIS HOUR AND I AM NOT FOLDING IT AWAY: by timestamp, HUD claimed at
-##   18:53:36 while the chat bot's 18:49:10 RUNNING line still had no IDLE under it (chat bot went
-##   IDLE at 18:55:40, HUD at 18:55:14). Two lanes held at once for about 1m38s. The clean-hour
-##   count RESETS TO 0. I am charging it to the rule and not to the HUD until I know what it read:
-##   both lanes write `RUN_LOCK.txt` UNCOMMITTED into R's working copy and the four lines are out of
-##   timestamp order in the file, which is exactly what an append race looks like. My recommendation
-##   is that the two lanes whose windows touch (:45 chat bot, :52 HUD) re-read the last line
-##   IMMEDIATELY BEFORE writing their claim rather than at the top of the run.
+## FOR THE SUPERVISOR - ONE DECISION IS NOW WAITING ON YOU, PLUS TWO FOR INFORMATION.
+## (1) *** THE DECISION: YOUR 18:32 EVEN-LIGHT RULING HAS HIT A THING IT DID NOT KNOW ABOUT. ***
+##   Your ruling said back and side only, because "front views are provably unchanged". **THAT
+##   PREMISE IS INTACT** - art measured it: plain re-render vs even-light re-render is ONE pixel.
+##   But the guard it ran fired anyway, and the cause is unrelated to even light: the `drop`
+##   vertical-aim fix (`e4e9b2f2`, 18 Nov 18:48:17 CT) moved the front frame ~22 px, and most
+##   shipped fronts predate it. Art dates 28 of 42 stale; **my own count, dating by last commit
+##   rather than by render, is 31 of 42.** Either way a majority of front views on disk do not
+##   carry a fix that landed two days ago.
+##   THE QUESTION IS YOURS BECAUSE IT IS YOUR RULING: do the background re-renders write ALL THREE
+##   views and bring the stale fronts current, or hold to back-and-side as ruled and leave them?
+##   **MY RECOMMENDATION: let art write all three views on bodies it is already re-rendering.** The
+##   marginal cost is one extra view on a body whose scene is already built, it is still background
+##   housekeeping, and the alternative is a library where the back is current and the front is two
+##   days behind - which is worse to reason about than either end state. Art has correctly refused
+##   to fold this in on its own and is holding instalment 2 until you answer.
+## (2) FOR INFORMATION: the ferryman chain is deliberately staggered one more hour - 42 feed /
+##   41 MB_NAME / 42 published - because S71 held the name on purpose and S72 at :07 closes it.
+##   That stagger is correct, not drift.
+## (3) *** LOCK DISCIPLINE BROKE THIS HOUR AND I AM NOT FOLDING IT AWAY. *** By timestamp, HUD
+##   claimed at 18:53:36 while the chat bot's 18:49:10 RUNNING line still had no IDLE under it
+##   (chat bot IDLE 18:55:40, HUD IDLE 18:55:14). Two lanes held at once for about 1m38s. **THE
+##   CLEAN-HOUR COUNT RESETS TO 0.** I am charging it to the rule rather than to the HUD until I
+##   know what it read: both lanes write `RUN_LOCK.txt` UNCOMMITTED into R's working copy, and the
+##   four lines sit OUT OF TIMESTAMP ORDER in the file, which is what an append race looks like.
+##   My recommendation is that the two lanes whose windows touch (:45 chat bot, :52 HUD) re-read
+##   the last line IMMEDIATELY BEFORE writing their claim rather than at the top of the run.
 
 ## TAKE THIS NEXT - THE 17:58 CT FIRING, 20 NOV 2026 (machine clock 17:59-18:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 16:58 BLOCK. ***

@@ -13373,3 +13373,12 @@ Found: tools/_u71_rarity_guard.gd:110-124 already ends the block with block_end(
 Stale items still in the prompt, for the team lead: rarity-hue half of System 2 (ticked U88/U98), parse_fish end-finder (U76).
 Decision for Mr. E: none new (150% banner yield is with the supervisor).
 Next firing: re-read the lock; own cycle - candidate is a windowed shot of every HUD panel at 100/125/150 with a hostile 40-line chat burst to re-check L74 after U117's banner change.
+
+
+## U120 - 2026-11-21 04:5x CST - WINDOWED RE-CHECK OF L74 AFTER U117: BURST AT 100/125/150 GREEN, BANNER SHOT GREEN; NO .gd CHANGED
+Lock: read R's WORKING RUN_LOCK.txt, last line chat bot B100 IDLE 04:52:04; tasklist showed no Godot. One claim 04:53:27, expected finish 05:03, RELEASED 04:55:16 (IDLE written) - well inside the :07 deadline and the 15 min cap.
+Item: the cycle U119 named (TAKE THIS NEXT 03:58 block: windowed pass at 100/125/150 with the hostile chat burst, after U117's banner change).
+Ran windowed 1920x1080: tools/_l74_test.gd (2 lines/s for 24 s, then 125% and 150%) -> L74 measured=16 fed=48 by_pri=[3,7,3,3] taken_off_unread=[1,1,0,0] (ambient/low only), L74_TEST OK protected_unread=0 dropped_protected=0, U84 crit kept. tools/_u117_shot.gd -> U117_DONE fails=0, banner hidden over the boss card at 150%, overlap 0. 0 SCRIPT ERROR / Parse Error in both logs.
+Looked at: renders/cycles/l74/l74_u120_150.png - 2x2 panes, Chronicle scroll centred, 4 lines readable at 150% with the crit line on top and the x5 merge, pane labels and clock unclipped.
+Delivered: this verification line only. Next firing: re-read the lock; own cycle - hostile feed with 60-char names and mixed-width glyphs at 150% against the pane-label strips.
+Decision for Mr. E: none.

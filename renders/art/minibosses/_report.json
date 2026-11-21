@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "43f4860483dfe6e48554bb5671c539eac5862a87",
+   "head": "96af6730ec27b22de05c53f2838781cdcb8c8ddb",
    "ref": "origin/main",
-   "ref_commit": "d9e4a0534ea823891925aa88543a57d9adb65f0d",
+   "ref_commit": "a1158b025490c36ac663d5b7475e63a9d51e7327",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2526,7 +2526,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.743,
+   "corridor_margin_m": 7.74,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.16,
    "read_from": {
@@ -2552,13 +2552,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "pitman": {
+   "title": "Underfoot",
+   "theme": "crypt",
+   "idea": "IT TAKES THE FLOOR - it does not wound and it does not grab. It digs. Every beat it opens a pit under whoever is standing on the spot it wants, and that delver spends their next beat climbing out on the ladder it leaves them. THE PIT STAYS. It is still there when the fight moves on, so the room the party started in is not the room they finish in: the lines they were holding get cut by holes, and the ground they gave up cannot be taken back. THE COUNT IS THE PIT AT ITS FEET - one mouth, boarded, with a ladder standing out of it, and the spoil it came out of heaped behind.",
+   "wear": 0.34,
+   "feed_line": "Someone is digging up ahead, and not for ore.",
+   "pack_used": null,
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 932,
+   "size": [
+    3.1,
+    2.93,
+    2.3
+   ],
+   "footprint_span": 3.1,
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.904,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.4205117111033063,
+    "ortho": 4.505660533905029,
+    "clip": [
+     9.132416725158691,
+     23.24559783935547
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs d9e4a0534ea823891925aa88543a57d9adb65f0d sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs a1158b025490c36ac663d5b7475e63a9d51e7327 sha bc3a603f",
  "blank_check": {
-  "files": 129,
+  "files": 132,
   "failures": []
  }
 }

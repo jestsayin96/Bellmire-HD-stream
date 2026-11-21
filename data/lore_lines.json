@@ -13396,6 +13396,52 @@
           "Water drains out of the passage the way it came in, without a sound.",
           "Take your places. Wipe the pole. Walk the floor."
         ]
+      },
+      "winder": {
+        "arrive": [
+          "Something is taking a turn on a drum up ahead.",
+          "A low drum slung in a timber frame, wound with pale rope. A bowed man leans his whole weight on the bar.",
+          "He does not strike. He winds. Whoever a hook is in gets drawn back toward the door.",
+          "Nothing you did is undone. You are simply not where you were, and the blow you were about to land is out of reach.",
+          "Look at the floor. Three ropes lie across it, each with its own dark hook. Three is all he can have on at once.",
+          "A rope that is cut stays cut. Cut all three and the drum turns on nothing.",
+          "Hauling against him buys a yard. The next turn takes it back.",
+          "The iron pawl drops into the ratchet every tooth. The drum does not give a single turn back.",
+          "Greased iron, new hemp, a man in wool the colour of the timber. He has not stopped since you came in."
+        ],
+        "fall": [
+          "Haulback is down. The bar swings loose and the drum runs out its last length of rope.",
+          "The last hook lies slack on the floor. Nobody is on it.",
+          "The pawl lifts out of the teeth and does not drop again.",
+          "He slides down the bar with both hands still on it.",
+          "Walk where you like. Nothing is drawing you back now.",
+          "Count the ropes. Three, and every one of them lying still.",
+          "The drum turns once more on its own weight, and stops.",
+          "Take your places. Coil the rope. Walk the floor."
+        ]
+      },
+      "pitman": {
+        "arrive": [
+          "Somebody is digging up ahead, and it is not for ore.",
+          "A man in a flat cap with a mattock, and a boarded ring in the floor at his feet. A ladder stands up out of it.",
+          "He does not swing at you. He digs. Whoever stands where he wants them not to be has no floor under them.",
+          "The delver is not hurt. They are simply at the bottom of a hole, and the next beat goes on the ladder.",
+          "He leaves the ladder every time. He is not a cruel man. He is a careful one.",
+          "The pit stays. When the fight moves on, the hole is still there.",
+          "Look at the room you came in by. It will not be the room you leave by.",
+          "Pale new timber shores the ring, and a dark heap of spoil sits behind him, still loose.",
+          "Clay to the knee, a clean flat cap, and not one wasted stroke. He has been at this since before you came in."
+        ],
+        "fall": [
+          "Underfoot is down. The mattock lies across the rim of the ring.",
+          "The ladder stands in its hole with nobody on it.",
+          "He sits down on the spoil heap with his hands open. He does not dig again.",
+          "The holes are still there. Mind where you put your feet.",
+          "A hole does not fill itself. Walk round them.",
+          "The room is not the room you came into. Count what is left of the floor.",
+          "One last shovelful slides off the heap and into the ring.",
+          "Take the ladders out. Board the holes. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13422,7 +13468,9 @@
     "_note_c145": "C-145 (20 Nov 2026): the Relief's lines (40th miniboss, Watchturn, barracks theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a quarter turn of the capstan rotates the whole line one place, nobody is hurt or gone, every reach and heal is aimed at the wrong body; the four notches in the ratchet plate and the dog in one of them are the gauge; jam the dog to stop the turn. Without arrive lines miniboss_for never draws the body. Watchturn is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
     "_note_c147": "C-147 (20 Nov 2026): the Scraper's lines (41st miniboss, Scourstone, crypt theme; body committed on main, scraper.glb, art ad070505). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: when the round ends it draws the stone down the slab and the party's LAST action is undone (blow lifted, wound reopened, guard gone); out-damaging it fails because the damage is what it removes; the five cuts on each face of the plinth are the gauge. First arrive line is art's own barker, kept word for word. Without arrive lines miniboss_for never draws the body. Expected zero-hit key; no lane is to wire it.",
     "_note_c149": "C-149, the Ferryman (42nd, Slackwater, flooded). Idea per art's CANON row: it takes one hero aboard and only that one's blows land; the fare pegs along both gunwales are crossings left, and when the last is drawn it must put its passenger down and take the next, which is the window. It does not wound, heal or remove anyone. Arrive 9 / fall 8, recent shape, no act, no broken, {name} unused. Expected zero-hit key; no lane is to wire it.",
-    "_note_c150": "C-150. SHAPE NOTE, no keys changed. The `_note` above describes four phases (arrive, act, broken, fall). That is true of the original fourteen bodies from C-62/C-67 and the C-74 era. Every body from `quartermaster` onward is TWO-PHASE on purpose: nine arrive lines and eight fall lines, no act, no broken. Two-phase is the house shape for new bodies. delve.gd skips an empty act and broken, so an absent phase costs nothing. Do not read the shorter blocks as unfinished."
+    "_note_c150": "C-150. SHAPE NOTE, no keys changed. The `_note` above describes four phases (arrive, act, broken, fall). That is true of the original fourteen bodies from C-62/C-67 and the C-74 era. Every body from `quartermaster` onward is TWO-PHASE on purpose: nine arrive lines and eight fall lines, no act, no broken. Two-phase is the house shape for new bodies. delve.gd skips an empty act and broken, so an absent phase costs nothing. Do not read the shorter blocks as unfinished.",
+    "_note_c151": "C-151 (20 Nov 2026): Haulback, the 43rd miniboss (key winder, wood theme; body committed on main, winder.glb, art register green). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words per art's CANON text: it wounds nobody, it takes GROUND - each turn of the drum drags whoever is hooked back toward the mouth of the room, nothing is undone; the three ropes on the floor are the gauge (one rope, one hero at a time, a cut rope stays cut); the pawl is why it cannot be out-pulled. Without arrive lines miniboss_for never draws the body. Haulback is the CANON name in tools/art/minibosses.py; MB_NAME['winder'] is held by the game build until this key is on main. No code lane is to wire this note.",
+    "_note_c152": "C-152: pitman feed lines (44th miniboss, Underfoot, crypt). Arrive 9 + fall 8, recent two-phase shape. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

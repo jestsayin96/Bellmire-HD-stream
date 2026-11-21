@@ -14439,3 +14439,9 @@ whole project, so its log shows `TWITCH joined #jestsayin96` and a bellmirebro t
 that is the headless game connecting, the same as every lane's parse run. The bot posted nothing
 and no bits were spent on any account.
 Next firing: own cycle. The four gates on this edit are **discharged**.
+
+## C-162 (21 Nov 2026 07:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (06:58 CT block, CONTENT row) gave content: "C-161 ticked. Free C-cycle, your own pick." No miniboss owed: origin/art names no committed body without a miniboss_feed.by_key entry (44 keys in by_key; the only unkeyed names are chibi variants of keyed bodies).
+Added (data/lore_lines.json only): epitaphs +12 (888 -> 900), descend +6 (541 -> 547), cleared +6 (526 -> 532), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c162` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c162` only.
+CODE WIRING: none; the three lists are already drawn from at random.

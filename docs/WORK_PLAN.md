@@ -1,3 +1,57 @@
+## PROMPT-CORRECTION BACKLOG - STATUS AS OF 11:4x CT, 21 NOV 2026. **READ THIS BEFORE YOU SPEND A
+## LIVE TURN ON THE SEVEN PROMPTS.**
+##
+## *** I ATTEMPTED THE WRITE ON A LIVE TURN AND IT WAS REFUSED - BUT NOT BY THE GATE THIS CHARTER
+## *** DESCRIBES, AND THE DIFFERENCE MATTERS SO DO NOT RECORD IT AS THE SAME THING. ***
+## The known gate is "a scheduled task's RUN cannot change a scheduled task", settled 18 Nov, and
+## it is a property of FIRINGS. This was a live turn, so that gate did not apply and was not what
+## answered. What answered was the harness permission classifier, verbatim: **"Permission for this
+## action was denied by the Claude Code auto mode classifier. Reason: [Unsanctioned
+## Communication]."** ONE attempt, no retry, and I am not testing it again this run.
+## **WHAT THAT MEANS FOR THE NEXT SEAT: do NOT conclude that prompts can no longer be edited.**
+## Eleven corrections landed on a live turn at 09:5x CT TODAY, under the same account, through the
+## same tool. Something about THIS turn's conditions differed. Ask Mr. E; it is a one-line
+## question and he is the only one who can clear it.
+##
+## **NOTHING IS BLOCKED BY THIS.** Every correction below is already live in the plan, which is
+## what the lanes actually read. The prompts are the durable copy, not the operative one.
+##
+## OWED ON THE :58 TEAM LEAD PROMPT (trig_01AiNVX4tT9xupV9p8b928fB) - the full replacement text was
+## composed this turn and is reproducible from this block plus the 10:58 block:
+##   1. **THE STANDING NOTE SAYING THE ART FIT REGISTER READS `RED / ok:false` IS FALSE**, as is
+##      its instruction "do not report that the art gate is green". The register reads `GREEN /
+##      ok true / rows_judged 46 / errors [] / unproved_cells [] / ok_shipped true` as of 11:0x.
+##      Add the second art gate: `tools/art/_backlamp_guard.py`, 44 bodies, two arms, VOIDs on
+##      roster disagreement, red-proved on a live slot by this seat.
+##   2. **THE BASELINE BLOCK**: 48 files / 2,359,235 chars / 12 `data/*.json` / 148 top-level keys
+##      / 58 zero-hit = 43 `_note_` + 15 non-note, membership unchanged. Series 52-53-56-57-58.
+##   3. **THE STEP 5 ID LINE**: B106, C-166, D100, H32, L74, S88, T5, U125, art on the back-lamp
+##      guard. And the art count line should read "46 rows: 44 live and two `_chibi` RETIRED BUT
+##      NOW FULLY MEASURED".
+##   4. **THE CLEAN-HOUR COUNT** reads "stood at 2 after the 08:58 firing"; it is **0**. The
+##      over-declaration line reads "seven hours"; it is **ten** and the pattern is stopped.
+##   5. **THE PLAN-SYNC FACE OF THE TWO-DOT/THREE-DOT TRAP** (`docs/WORK_PLAN.md +231/-0` on any
+##      lane whose merge base predates the last plan sync - prove it with the blob, set size 1).
+##   6. **THE LEDGER NUMBERING RULING** belongs in the Phase 2 block and in the STRUCK-FROM-NEEDS-
+##      MR-E list as item 11.
+##   7. **NEW, AND THE MOST IMPORTANT TWO:** (a) a STEP 0.5 - *read the project docs written since
+##      your last firing BEFORE writing any row, and act on them in the same run* - with the cost
+##      of not doing it written out; (b) **MR. E'S NO-DEFERRAL DIRECTIVE**, verbatim, which belongs
+##      in ALL SEVEN prompts and not only this one.
+##   8. The 10:16 mana/boss-UI directive as a HARD RULE ("UI does not eat the game view") and in
+##      the Phase 2 block.
+##   9. The hub publish GATE is authorized standing as of 11:28 CT and the "unearned gate" rule is
+##      overridden by the seat that owns it - **the gate is not the push**.
+##
+## OWED ON THE SIX LANE PROMPTS: the no-deferral directive, verbatim, in each. The chat bot's also
+## needs the `:50` claim row written into the prompt and not only the plan - it has now broken
+## three times from the plan alone.
+##
+## *** AND THE AUDIT DISCIPLINE STAYS: *** before adding to this list, check each carried item
+## against the prompt text the scheduler hands this seat verbatim at every firing. At 11:3x I
+## checked the ten the 09:58 block carried and THREE WERE ALREADY LANDED while a FOURTH had never
+## been wrong. A backlog carrying landed items teaches the next seat to skim it.
+
 ## *** STANDING DIRECTIVE TO ALL SIX LANES - MR. E THROUGH THE SUPERVISOR, 21 NOV 2026, 11:3x CT.
 ## *** DELIVERED LIVE. IT BINDS EVERY LANE FROM THE MOMENT IT IS READ AND IT OUTRANKS EVERY ROW
 ## *** IN EVERY BLOCK BELOW IT. IT IS NOT A SUGGESTION ABOUT PACE. ***

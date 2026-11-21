@@ -14240,3 +14240,83 @@ I left them alone. Scratch `_b100.log` / `_b100b.log` deleted after reading.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
 written, no account signed into or acted as. bellmirebro spoke not once.
 Next firing: own cycle on my three files; the row is otherwise empty.
+
+## B101 - TWO UNGUARDED CLAIMS ON MY OWN SURFACE, AND THE PARSE GATE DID NOT RUN
+*21 Nov 2026, 05:45 firing (chat bot). Branch `chatbot`. main merged at 722ee5a5, fast-forward,
+no PROGRESS.md conflict this hour.*
+
+**SAY THE WORST THING FIRST: THIS CYCLE IS UNPARSED.** The edit below touches
+`scripts/chatcmd.gd` and **no Godot gate has run against it.** The lock was free when I started
+reading at 05:45; by the time the arms were written it was 05:51, the HUD fires at :52, and it
+claimed at **05:53:13** (U121, windowed, expected finish 06:01, cap 06:08) with the game build
+firing at :07 behind it. There was no window I could take without starting a battery that would
+still be running inside another lane's claim, which the yield rule forbids. **I STOOD DOWN RATHER
+THAN CROSSING, AND I DID NOT CLEAR OR CLAIM OVER A LIVE HOLD.** What I checked and when: lock tail
+read at 05:45 (last line IDLE, game build S82 released 05:17), 05:52:19 (still IDLE, HUD had not
+yet claimed), 05:54:30 (HUD RUNNING 05:53:13). I wrote no RUNNING line of my own and launched no
+Godot. **THE FOUR CARRIED GATES ARE STILL OWED ON THIS EDIT: parse / L14_TEST / TWITCH_PARSE /
+COMMANDS_DOC. Whoever runs next - QA tester or my 06:45 firing - should run them before this is
+leaned on, and the team lead should weigh that before merging.**
+
+**WHAT I FOUND, AND WHY IT IS THE RIGHT KIND OF FAULT.** The plan's row for this hour was "your
+own cycle", so I went looking for the next CLASS of unchecked claim rather than the next instance
+of one I had already done. Every price, ladder, colour list, field list and `needs_hero` flag I
+publish has an arm. Two live claims had none, and the first is the better find:
+
+1. **`TOWN_BUILT` IS A SECOND COPY OF THE GROWTH LANE'S TABLE, SITTING IN MY OWN FILE.**
+   `_town_line()` turns growth's special-building keys into words through `TOWN_BUILT`
+   (chatcmd.gd), and the lookup is `TOWN_BUILT.get(String(k), "")` **with an empty-string
+   fallback that is then skipped.** So if the growth lane opens a sixth special or renames one of
+   the five keys, that building is **silently dropped off the !town line** - no crash, no log, no
+   wrong word on screen - while `town`.what goes on naming all five to the viewer. Same fault
+   class as the MB_NAME map and the satchel split.
+2. **THE CARAVAN COUNT IS SPELLED OUT IN WORDS.** `caravan`.what says "**Twenty-eight** carts are
+   written". The team lead re-counted that **by hand** at 04:58. A claim that needs a human to
+   re-count it every hour is an unguarded claim, and **no digit search in the house would ever
+   have found this one** - which is why the satchel arm's FRACTION word table now has a
+   whole-number sibling, `_word_int` (words or digits, so the sentence can be rewritten either
+   way without the arm going blind).
+
+**SIX NEW ARMS, ALL IN MY OWN FILE, ALL READING THEIR AUTHORITY RATHER THAN COPYING IT.**
+`TOWN SPECIALS AUTHORITY / UNNAMED / GHOST / ANCHOR / SAID GHOST / SAID SHORT` and
+`CARAVAN AUTHORITY / ANCHOR / COUNT / FIELDS / TIER`. The town authority is `UNLOCK` in
+`scripts/growth.gd`, which carries **no `class_name`** - so there is no global to reach it by and
+the constant comes out of the script's own constant map, the lane's own declaration. If that
+constant is ever renamed the **AUTHORITY** arm fires rather than this guard scoring a green off an
+empty table. The caravan authority is `data/items.json caravan_manifests.caravans` read through
+`Roster.items()`, the same accessor the dye and wear arms use, and the same rows `town.gd:6203`
+reads.
+
+**THE SUBTLE ONE, AND IT IS A REAL HALF-TRUTH, NOT A STYLE NOTE.** `town.gd:6207` tests
+`int(m.get("first_tier", 99)) <= economy.town_level` and the growth ladder tops out at 6, so a
+manifest row carrying **no `first_tier` can never turn up** - written and unreachable - while my
+sentence counts it among the carts on the road. That is the `CARAVAN TIER` arm. Today **28 of 28**
+rows carry one, so it is silent; it exists for the row that does not.
+
+**WHAT I COULD PROVE WITHOUT THE ENGINE, STATED AS EMULATION AND NOT AS A GATE.** All six arms
+predict SILENT on the merged tree, emulated in python off the same files: `Growth.UNLOCK` keys
+`[market_hall, stables, guild, bathhouse, mage_tower]` = `TOWN_BUILT` keys exactly (0 unnamed, 0
+ghost); the words `TOWN_BUILT` prints and the five `town`.what publishes agree both directions
+(`market hall, stables, guild hall, bathhouse, mage tower`); `"Twenty-eight"` -> **28** against
+**28** rows; **0** rows short of name/origin/cargo; **0** rows without `first_tier`. Structural
+lint on the inserted lines: no tabs, no unterminated string, parens/brackets balanced, and **every
+`%d`/`%s` count matches its argument list** - the two "indent" hits are the aligned dictionary
+continuations in `_word_int`, the same shape the shipped satchel word table already uses. **NONE OF
+THIS IS A PARSE.** An emulation awaiting the real gate is exactly what it says it is.
+
+**NO IDENTIFIER COLLISION, CHECKED RATHER THAN ASSUMED.** `commands()` is 1,680 lines and declares
+a great many locals; every name I added (`tb_*`, `cv_*`, `tw`, `cw`) is declared **once** in that
+function, and `_word_int` is defined once in the file.
+
+**DATA AND DOC UNTOUCHED THIS CYCLE.** `data/commands.json` is byte-identical - 32 commands, 32
+order keys, re-parses - so `docs/COMMANDS.md` needs no regeneration and is unchanged. Drift both
+directions is therefore unmoved from B100: entry with no code 0 of 32; code with no entry only the
+three dev-only L17 verbs `_l14_test.gd:38` deliberately excludes.
+
+Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`** - `twitch_reply(user_login, text)`
+untouched, no @name, no rate limiting. The untracked `web/icons/items/{hat,ring}/*.import`
+sidecars in the tree are Godot import artefacts from an earlier parse, not edits, and I left them
+alone. No scratch logs written this hour; no `_b2_ask.gd` and no `.b2_*` to delete.
+NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
+written, no account signed into or acted as. bellmirebro spoke not once.
+Next firing: run the four carried gates against THIS edit first, before anything new.

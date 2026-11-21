@@ -13319,6 +13319,29 @@
           "The three spare slates slide off his back and lie flat on the floor.",
           "Take your places. Draw a breath. Walk the floor."
         ]
+      },
+      "ferryman": {
+        "arrive": [
+          "A flat-bottomed boat is being poled up the passage.",
+          "A man in stiff grey sacking stands in a black punt, a pale pole in his hands. The water under it is only a wet floor.",
+          "The punt holds one. He takes one of you aboard, and only that one can hurt him.",
+          "Nobody else's blows land. They go through him like wind through a net.",
+          "He chooses. If you stacked everything on one hero, watch that hero stand on the bank.",
+          "Look along the gunwales. Pale pegs, one for every crossing he has left.",
+          "The rest of you are not idle. Draw the pegs. Shift the fare.",
+          "A plank for a seat, and one pale seat only. A boot sits on it, left behind by the last passenger.",
+          "He does not hurry and he does not speak. The river never asked anyone twice."
+        ],
+        "fall": [
+          "Slackwater is down. The pole floats off on its own, and the punt rides low and empty.",
+          "The last peg is drawn. He has to put the one he holds down, and nobody is left to take.",
+          "Everyone's blows land now. Nobody waits their turn on the bank.",
+          "The punt turns slowly against the wall and stays there.",
+          "The grey sacking sags in the boat. There is silt in the folds.",
+          "Count the seats. There is one. It is empty.",
+          "Water drains out of the passage the way it came in, without a sound.",
+          "Take your places. Wipe the pole. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13343,7 +13366,8 @@
     "_note_c143": "C-143 (20 Nov 2026): the Sealer's lines (38th miniboss, Leadbite, treasury theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a bite shuts ONE hero's pack, nothing is taken, the strip of lead blanks is the gauge, break the press or fight on what is in hand. Without arrive lines miniboss_for never draws the body. Leadbite is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
     "_note_c144": "C-144 (20 Nov 2026): the Hooper's lines (39th miniboss, Hoopfast, mess theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: it casks ONE hero, who keeps swinging blind from inside; no heal, brew, shout or shield reaches them; the hoops on the post are the gauge; break the staves or hit the cooper. Without arrive lines miniboss_for never draws the body. Hoopfast is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
     "_note_c145": "C-145 (20 Nov 2026): the Relief's lines (40th miniboss, Watchturn, barracks theme). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: a quarter turn of the capstan rotates the whole line one place, nobody is hurt or gone, every reach and heal is aimed at the wrong body; the four notches in the ratchet plate and the dog in one of them are the gauge; jam the dog to stop the turn. Without arrive lines miniboss_for never draws the body. Watchturn is the CANON name in tools/art/minibosses.py. NO CODE LANE IS TO WIRE THIS KEY.",
-    "_note_c147": "C-147 (20 Nov 2026): the Scraper's lines (41st miniboss, Scourstone, crypt theme; body committed on main, scraper.glb, art ad070505). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: when the round ends it draws the stone down the slab and the party's LAST action is undone (blow lifted, wound reopened, guard gone); out-damaging it fails because the damage is what it removes; the five cuts on each face of the plinth are the gauge. First arrive line is art's own barker, kept word for word. Without arrive lines miniboss_for never draws the body. Expected zero-hit key; no lane is to wire it."
+    "_note_c147": "C-147 (20 Nov 2026): the Scraper's lines (41st miniboss, Scourstone, crypt theme; body committed on main, scraper.glb, art ad070505). Arrive 9 / fall 8, recent shape: no act, no broken, {name} unused. The lines say the mechanic in plain words: when the round ends it draws the stone down the slab and the party's LAST action is undone (blow lifted, wound reopened, guard gone); out-damaging it fails because the damage is what it removes; the five cuts on each face of the plinth are the gauge. First arrive line is art's own barker, kept word for word. Without arrive lines miniboss_for never draws the body. Expected zero-hit key; no lane is to wire it.",
+    "_note_c149": "C-149, the Ferryman (42nd, Slackwater, flooded). Idea per art's CANON row: it takes one hero aboard and only that one's blows land; the fare pegs along both gunwales are crossings left, and when the last is drawn it must put its passenger down and take the next, which is the window. It does not wound, heal or remove anyone. Arrive 9 / fall 8, recent shape, no act, no broken, {name} unused. Expected zero-hit key; no lane is to wire it."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

@@ -3961,3 +3961,13 @@ TAKE THIS NEXT (15:58 block) row 2: "a feed row for the 41st body (`scraper`, Sc
 - CODE WIRING for other lanes (not mine): scripts/bestiary.gd `scraper` (h 2.55, no anims); scripts/delve.gd MB_NAME["scraper"] = "Scourstone" (41st key); scripts/dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] may take "scraper"; chat bot commands.json "40 elites" -> 41 once MB_NAME lands. scraper.glb has no .glb.import yet.
 Next content: C-148.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## C-149 - 20 Nov 2026 18:2x CT (content): miniboss feed lines for the Ferryman (42nd, Slackwater, flooded)
+TAKE THIS NEXT (17:58 CT block), CONTENT row: the Ferryman's feed lines and `_note_`. Body is committed (assets/monsters/minibosses/ferryman.glb on main; CANON row 42 in tools/art/minibosses.py), so I wrote against it. Without arrive lines miniboss_for never draws the body.
+- ADDED data/lore_lines.json miniboss_feed.by_key["ferryman"]: arrive 9 / fall 8, recent shape (no act, no broken, no {name}). First arrive line is art's own barker, word for word. Mechanic said plainly: the punt holds one, only the hero aboard can hurt it, everyone else's blows do not land, the pegs along the gunwales are crossings left, the last peg drawn is the window. Fall lines say everyone's blows land again.
+- ADDED miniboss_feed._note_c149 (expected zero-hit key; no lane is to wire it).
+- COUNT: by_key 41 -> 42 rows.
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key and entry byte-identical (recursive subset check against a pre-edit copy), key order unchanged, file round-trips at indent 2.
+- CODE WIRING for other lanes (not mine): scripts/delve.gd MB_NAME["ferryman"] = "Slackwater" (42nd key, S71 holds until this lands) + MB_FIT; dungeon_hd.gd THEME_MINIBOSS_MORE["flooded"]; chat bot commands.json "41 elites" -> 42 once MB_NAME lands.
+Next content: C-150.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>

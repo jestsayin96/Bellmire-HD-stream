@@ -14569,3 +14569,9 @@ TAKE THIS NEXT (08:58 CT block, CONTENT row) gave content: "C-163 ticked. Free C
 Added (data/lore_lines.json only): epitaphs +12 (912 -> 924), descend +6 (553 -> 559), cleared +6 (538 -> 544), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c164` (zero-hit key, DO NOT WIRE).
 VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c164` only; no duplicates, no blanks. Other three owned files untouched.
 CODE WIRING: none; the three lists are already drawn from at random.
+## HUB standing check - 21 Nov 2026 09:4x CT (hub build firing)
+TAKE THIS NEXT (07:58 block) HUB row = standing check, no new row. Took it as written; no claim.
+- hub fast-forwarded to origin/main caa261eb (behind 2, clean). web/ tree HEAD:web = origin/main:web = 02257b2f (0 bytes differ). gh-pages tree 9ca8051e unchanged; delta still 3 files / +59 / -1.
+- app.js: `node --check` OK. innerHTML at app.js:255 and :301 only (both page-owned); the other grep hits are comments. 0 outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. CSP meta count 1. index.html comment "only innerHTML ... two page-owned sites" still true.
+- web/ unchanged so no screenshot or hostile-name rerun owed. NOT claiming READY TO PUBLISH. Live-dot colour: unchanged, no edit this run.
+- Untracked _hub_ready_shot.png in worktree is from an earlier run; delete refused on this machine, named here.

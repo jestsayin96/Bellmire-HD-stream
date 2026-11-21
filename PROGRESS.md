@@ -13729,3 +13729,10 @@ LOOKED AT IT: renders/cycles/s71/ferryman_static.png - punt, pole, fare-peg post
 AUDIT LINE (asked for): broodglut and lastcuff are the two PACK-VARIANT minibosses (S54/S56) - bestiary.gd entries recoloured
 off Quaternius bodies, registered in docs/art/MONSTER_VARIANTS.md, not CANON bodies in tools/art/minibosses.py, so
 _report.json (which reports minibosses.py ORDER) correctly has no row for them. homes [] - not a random draw.
+
+U110 - 2026-11-20 18:53 CST - THE 125% AND 150% PICTURES THAT TICK U109, COMMITTED. One windowed claim 18:53:36 -> IDLE 18:55:14 (declared finish 18:59, cap 19:05), no crossing, Godot EMPTY at release
+Item: TAKE THIS NEXT HUD row "U110 is one capture". Lock: R working RUN_LOCK last line was chat bot B90 IDLE 18:55:40-class entry, tasklist Godot EMPTY; claimed, ran tools/_u104_shot.gd at 1920x1080, released.
+Changed: no .gd edited. Committed renders/cycles/20261120_u104/mana_125_1080, mana_150_1080 (+ phone480 and full).
+Probe prints: 125% card 231x69, Chronicle text column 380px, plates=1 offscreen=0 under_chronicle=0; 150% card 277x81, text 369px, plates=1 offscreen=0 under_chronicle=0.
+LOOKED AT BOTH PNGs. 125%: lord card sits left of the text, 4 wrapped lines inside the scroll above the lower rail, Mana plate clear of the boss card/banner/Chronicle. 150%: card + 4 lines inside the scroll, nothing cut by the lower rail; the card-starved left half is fixed. CAVEATS: at 150% the word "has" on line 2 of the entry touches the vellum's right edge (about 2px of margin) - a right-padding nit in feed_hud.gd to take next; the entry is the short Commander line, so the long !hero character-sheet case is STILL not looked at; 100% not looked. NOT MINE: at 150% the Grubmother boss card sits over the Director "Now watching: Bellmire" strip (boss_bar.gd).
+Next firing: add right padding to _chrome_text_w (or wrap width -8px) and force the long !hero line at 150%; then L74.

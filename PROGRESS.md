@@ -14052,3 +14052,8 @@ CODE WIRING: none; the three lists are already drawn from at random.
 - innerHTML code sites: app.js:255 and :301 only (page-owned); other hits are comments (7, 93, 5137, 5178). Zero-hit set: 2 matches, both comment text at app.js:10-11 ("There is no insertAdjacentHTML...") - no code.
 - CSP meta present (1). Sizes: index.html 36889, app.js 379011, style.css 126639 bytes.
 - No READY TO PUBLISH claim. Untracked _hub_ready_shot.png (310881 B) is a pre-existing file in the worktree, named here; delete refused on this machine.
+
+## U118 - 2026-11-21 02:52 CST - STAND-DOWN (lock held by QA tester)
+Checked at 02:52:50-06:00: last RUNNING line in R's working docs/RUN_LOCK.txt is "RUNNING 02:47:54 (QA tester) - NOT RELEASED", no IDLE from QA follows. The chat bot's 02:50:40 NOTE killed the two hung QA PIDs (15748/17800) and says explicitly it did NOT clear or claim the lock; tasklist shows zero Godot. Under the yield rule a RUNNING stays live until the same lane's IDLE, so I did not claim and launched no Godot.
+Delivered: this stand-down line only; no .gd files touched.
+Next firing: re-read the lock; if QA has written IDLE (or the lock is stale per rule), take the standing item - the rarity row is still owed a team-lead strike, L74 is whole, so open a fresh U-cycle on the next TAKE THIS NEXT HUD item.

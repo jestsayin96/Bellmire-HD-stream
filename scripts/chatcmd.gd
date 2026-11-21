@@ -172,6 +172,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _hub()
         "satchel", "sell", "prices":
                     out = _satchel_line()
+        "caravan", "trader", "cargo":
+                    out = _caravan_line()
         "festival", "feast":
                     out = _festival_line()
         "town", "bellmire":
@@ -512,6 +514,14 @@ func _armour_line(user_id: String) -> String:
 
 func _satchel_line() -> String:
     return "The counter pays two fifths of shop cost for anything you own and are not wearing." + _hub_tail()
+
+## B100: the caravan. town.gd brings a master up the west road with a wagon every 70-120 s, holds
+## him at the market, settles the trade against the economy's own prices (sells the town a good
+## priced over 1.12x base while the treasury is over 80, buys back anything over 90 in store) and
+## walks him out. A festival shortens the wait. !festival already named the caravan and nothing
+## answered when a viewer asked after it. READ-ONLY: this command trades nothing and calls nothing.
+func _caravan_line() -> String:
+    return "A caravan comes up the west road with a wagon and stands at the market. It sells the town what the town is short of, buys up the surplus, and takes the road back out. A festival brings one sooner." + _hub_tail()
 
 ## D63: a festival is an event with a reason. A paid one is named for whoever paid.
 func _festival_line() -> String:

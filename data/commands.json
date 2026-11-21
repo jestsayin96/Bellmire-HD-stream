@@ -3,7 +3,7 @@
   "hub_url": "https://jestsayin96.github.io/Bellmire-HD-stream/",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "festival", "town", "bestiary", "miniboss", "help"],
+  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "town", "bestiary", "miniboss", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -84,6 +84,9 @@
     "satchel":   {"aliases": ["sell", "prices"], "args": "", "cost": "free", "needs_hero": false, "short": "What the counter would pay for what you carry: two fifths of shop cost.",
                   "what": "What the counter would pay for what your hero carries. Anything you own and are not wearing is priced at two fifths of its shop cost, per item. Your own Satchel, priced row by row, is on the hub.",
                   "example": "!satchel"},
+    "caravan":   {"aliases": ["trader", "cargo"], "args": "", "cost": "free", "needs_hero": false, "short": "A trade caravan comes up the west road, trades at the market, and goes.",
+                  "what": "A caravan master walks in from the west road with a wagon, stands at the market a while, then settles the trade against Bellmire's own prices: it sells the town the goods the town is short of and buys up whatever the town has too much of. Then it takes the road back out. A festival brings one in sooner. Twenty-eight carts are written, each with a name, a road it came from and a load, and how far the town has grown decides which of them can turn up. Asking changes nothing - it only reports. The caravan's arrival and what it traded go into the Chronicle on the hub.",
+                  "example": "!caravan"},
     "festival":  {"aliases": ["feast"], "args": "", "cost": "free", "needs_hero": false, "short": "A festival gathers the town in the market square.",
                   "what": "A festival gathers Bellmire in the market square - music, stalls, a crowd, and a caravan is likelier while it runs. The town growing a level calls one. A festival a viewer paid for is theirs: the square is strung with gold in their name.",
                   "example": "!festival"},

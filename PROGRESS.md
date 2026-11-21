@@ -14181,3 +14181,62 @@ Ran windowed 1920x1080: tools/_l74_test.gd (2 lines/s for 24 s, then 125% and 15
 Looked at: renders/cycles/l74/l74_u120_150.png - 2x2 panes, Chronicle scroll centred, 4 lines readable at 150% with the crit line on top and the x5 merge, pane labels and clock unclipped.
 Delivered: this verification line only. Next firing: re-read the lock; own cycle - hostile feed with 60-char names and mixed-width glyphs at 150% against the pane-label strips.
 Decision for Mr. E: none.
+## B100 - 2026-11-21 04:45 CT (chat bot) - !caravan: THE ONE THING !festival NAMED THAT NOTHING ANSWERED
+
+My row was "**B99 IS TICKED** ... your own cycle", with `parse_fish()` struck and `L56` still not
+mine. So this is an own cycle on my three files and nothing else was touched.
+
+**THE GAP, AND WHY IT IS A REAL ONE.** `!festival` has said for cycles that "a caravan is likelier
+while it runs" - and `!caravan` answered nothing. The caravan is not decoration: `town.gd:6172-6274`
+walks a master up the west road with a wagon every 70-120 s, holds him at the market 16 s, settles
+the trade against the economy's own prices and walks him out; `snapshot_pub.gd:473-488` publishes
+which cart it was; `items.json caravan_manifests` holds **28 named carts** with `first_tier` 2-12.
+A viewer could read the word in one command's answer and had no second command to ask it with.
+
+**WHAT I WROTE** (all three of my files, nothing else):
+- `data/commands.json` - a 32nd command, `caravan`, aliases `trader` / `cargo`, inserted after
+  `satchel` in both `commands` and `order` so **`order` still equals key order exactly** (L14
+  checks that). The 31 pre-existing entries are **byte-identical** (compared key by key against a
+  pre-edit copy) and the other six top-level values are untouched.
+- `scripts/chatcmd.gd` - `"caravan", "trader", "cargo":` in the dispatch at `:175` and
+  `_caravan_line()` at `:517`. Static text plus `_hub_tail()`: **it calls no game API, trades
+  nothing, spawns nothing.** The line reads: "A caravan comes up the west road with a wagon and
+  stands at the market. It sells the town what the town is short of, buys up the surplus, and
+  takes the road back out. A festival brings one sooner."
+- `docs/COMMANDS.md` - **not hand-written. The real generator wrote it**, in the same breath:
+  `COMMANDS_DOC OK wrote 32 commands`, 7725 bytes, 32 rows.
+
+**EVERY CLAIM IN THAT DOC ROW IS OFF THE CODE, NOT OFF THE VIBE.** Sells what the town is short of
+= `price > base*1.12 and treasury > 80` (`town.gd:6258`); buys the surplus = `have > 90.0` (:6264);
+"a festival brings one in sooner" = `_caravan_t = randf_range(6.0, 15.0)` at `:3739-3741` against
+the ordinary 70-120; "28 carts ... how far the town has grown decides which can turn up" =
+`first_tier <= economy.town_level` at `:6203-6209`; "goes into the Chronicle on the hub" =
+`feed.append` + `tag_feed("caravan")`, and `snapshot_pub.scan_feed()` is what makes town.feed the
+hub's Chronicle.
+
+**THE LOCK, PROVED BY PROCESS BEFORE I CLAIMED.** Last line was the QA tester's own
+**IDLE 04:44:37**, so no RUNNING was live under the yield rule; `tasklist` on **both** exe names
+returned "No tasks are running" at 04:49. Claimed **RUNNING 04:49:47** (declared finish 04:56,
+cap claim+25 = 05:16), **IDLE 04:52:04** - released early, 2 min inside my own window, so the HUD's
+:52 firing never met a live hold of mine. One Godot at a time. I SPLIT RATHER THAN CROSS: the first
+claim carried three gates (commands_doc, l14, parse) because the fourth would have run past :52 if
+the first three were slow; they were fast, so `_twitch_parse` went in the same window.
+
+**GATES - FOUR, ALL GREEN:** `COMMANDS_DOC OK wrote 32 commands` / `L14_TEST OK (24 checks)`, 24
+`ok` and 0 `FAIL` / `--headless --quit-after 300` **rc=0, 0 SCRIPT ERROR, 0 Parse Error** /
+`TWITCH_PARSE OK (8 checks)`, PASS 1-7b. Parse stderr is the usual shutdown pair and the
+pre-existing `invalid UID` warnings on `assets/kit/materials/*.tres` - asset-side, not mine.
+
+**DRIFT, BOTH DIRECTIONS, MY OWN SCAN:** 59 literal verbs in the dispatch; **ENTRY WITH NO CODE
+[] (32 of 32)**; **CODE WITH NO ENTRY: `testbits` / `testsub` / `testpoints` only** - the L17
+dev-only block `_l14_test.gd:38` deliberately excludes. So: clean, with three dev-only verbs
+deliberately out of scope. No token is claimed twice: `trader` and `cargo` were on no command and
+no alias list, and `canonical()` resolves both, plus the plural `!caravans`.
+
+Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`** - `twitch_reply(user_login, text)`
+untouched, no @name, no rate limiting. **For the hub lane:** my parse again generated untracked
+`web/icons/items/{hat,ring}/*.import` sidecars in your tree; Godot import artefacts, not edits, and
+I left them alone. Scratch `_b100.log` / `_b100b.log` deleted after reading.
+NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
+written, no account signed into or acted as. bellmirebro spoke not once.
+Next firing: own cycle on my three files; the row is otherwise empty.

@@ -58,6 +58,28 @@ FRAME_H = FRAME_W * CELL_Y / float(CELL_X)
 GROUND_UP = 0.25
 GAP = 0.45                      # clear air between hero and creature footprint
 
+# *** THE FRAME MARGIN, 20 NOV 2026 23:4x CT. THE RATCATCHER FAULT. ***
+# `fits_frame` compared the pair's width against FRAME_W with ZERO margin and
+# therefore answered TRUE at pair_w 5.59 against a 5.60 m frame - true by a
+# centimetre, which at 760 px / 5.60 m is SEVEN TENTHS OF A PIXEL per side.
+# The render clipped: ratcatcher front carries 15 px of hero arm on x=0 AND
+# 3 px of pole tip on x=759, and the back view mirrors it. BOTH EDGES, not
+# one - the pair genuinely spans the whole frame, so no amount of re-centring
+# saves it and only a narrower pair does.
+# Two changes, and they are separate on purpose:
+#   (a) fits_frame now demands MARGIN_X of real air, so the number can SEE the
+#       condition the border count was catching behind its back;
+#   (b) the hero's HORIZONTAL offset is solved per cell instead of being a
+#       fixed 0.45, so a wide creature gets its frame instead of a clip. The
+#       DEPTH offset stays at GAP untouched - that one is the occlusion
+#       margin, and tightening it to win pixels would buy a border at the
+#       price of the two subjects hiding each other in the side view.
+# GAP_MIN is the floor: below it hero and creature read as touching, and a
+# cell that still will not fit at the floor is a REAL red for a wider frame or
+# a narrower creature, not something to be squeezed away silently.
+MARGIN_X = 0.12                 # ~16 px of air across the pair at this cell
+GAP_MIN = 0.20
+
 # *** THE OCCLUSION TEST, ADDED 17 NOV 2026, 15:40 CT - PORTED FROM weaponfit. ***
 # THE DEFECT THIS CLOSES, FOUND BY LOOKING AND NOT BY ANY NUMBER HERE: the
 # Reeve's pass 1 side view had a body standing entirely behind another body.
@@ -680,6 +702,92 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
     return bad, checked
 
 
+def audit_rows(rep, asked):
+    """THE TOP-LEVEL VERDICT, DERIVED FROM EVERY ROW IN THE FILE.
+
+    *** THE DEFECT THIS CLOSES - FOUND BY THE TEAM LEAD 20 NOV 2026 22:58 CT
+    *** IN WORK THIS LANE SHIPPED, AND REPRODUCED HERE BEFORE IT WAS TOUCHED. ***
+    `_fit_report.json` read `ok: true`, `verdict: "GREEN"`, `errors: []`,
+    `blind_views: []` AT THE SAME MOMENT its own `pairs.ratcatcher.frame_edge`
+    carried `front left 15, right 3`. Both were written by the same program.
+
+    THE MECHANISM, exactly: main() starts a FRESH `rep` with ok True and empty
+    error lists, then carries forward ONLY `pairs` and `hero` from the file on
+    disk. The verdict was then drawn inside the render loop, which visits only
+    the keys named by `--only`. So a one-key run inherits forty-five other
+    cells' DATA and none of their VERDICTS, and republishes a clean sheet over
+    them. `--only winder` erased a red raised by a ratcatcher run hours
+    earlier while leaving the evidence for it sitting in the file.
+
+    This is the lying-instrument class and it is the worst kind: it does not
+    fail to see the fault, it SEES the fault, writes it down, and then prints
+    GREEN next to it.
+
+    THE FIX IS NOT A BIGGER LOOP. Re-rendering every key on every run would
+    cost an hour to answer a question the stored rows already answer. Instead
+    the verdict is RE-DERIVED FROM THE ROWS THEMSELVES, every row, every run -
+    so a carried cell is judged by exactly the same test as a fresh one, and a
+    red can only leave this file when the render that fixes it lands.
+
+    Rows judged from stored data are marked `[carried]` so no reader mistakes
+    a re-derivation for a re-measurement. `asked` is recorded, not used as a
+    filter: scope is what the run RENDERED, never what it VOUCHES FOR.
+    """
+    asked = set(asked or ())
+    for key in sorted(rep.get("pairs", {})):
+        row = rep["pairs"][key] or {}
+        mark = "" if key in asked else "[carried] "
+        vis = row.get("visibility") or {}
+        if not vis:
+            rep["errors"].append(
+                "%s%s: no occlusion measurement on record - an unmeasured "
+                "cell is RED, not green" % (mark, key))
+            rep["ok"] = False
+        else:
+            for vname in sorted(vis):
+                c = vis[vname] or {}
+                for who in ("creature", "hero"):
+                    if (c.get(who) or {}).get("alone", 0) == 0:
+                        rep["errors"].append(
+                            "%s%s/%s: the %s renders EMPTY alone - its seen "
+                            "fraction would be computed over nothing"
+                            % (mark, key, vname, who))
+                        rep["ok"] = False
+            pv = row.get("proving_views")
+            if pv is None:
+                pv = sum(1 for c in vis.values() if (c or {}).get("proves"))
+            if pv < MIN_PROVING:
+                rep["blind_views"].append(
+                    "%s%s: only %d of %d views show BOTH subjects "
+                    "(seen>=%.2f AND vis>=%d px each)"
+                    % (mark, key, pv, len(vis), SEEN_MIN, VIS_MIN))
+                rep["ok"] = False
+        # a view whose content reaches an edge is CUT, and a cut render
+        # cannot prove a foot plane, a silhouette or anything else about
+        # where the body ends. RED, named edge by edge.
+        for vname, e in sorted((row.get("frame_edge") or {}).items()):
+            hit = {k2: v2 for k2, v2 in (e or {}).items() if v2 > 0}
+            if hit:
+                rep["errors"].append(
+                    "%s%s/%s: render reaches the frame edge - %s. The body is "
+                    "CUT and this view proves nothing about where it ends."
+                    % (mark, key, vname,
+                       ", ".join("%s %d px" % kv for kv in sorted(hit.items()))))
+                rep["ok"] = False
+        if "fits_frame" in row and not row["fits_frame"]:
+            rep["errors"].append(
+                "%s%s: pair %.2f m does not fit the fixed frame with its "
+                "margin (%.2f m of %.2f m usable)"
+                % (mark, key, row.get("pair_w", -1.0),
+                   row.get("pair_w", -1.0), FRAME_W - MARGIN_X))
+            rep["ok"] = False
+        # A ROW WRITTEN BEFORE THE MARGIN EXISTED CANNOT ANSWER FOR IT.
+        # `fits_frame: true` on an old row means "<= 5.60", not "<= 5.48",
+        # so it is not evidence either way and says so rather than passing.
+        if "air_x" not in row:
+            rep["stale_margin"].append(key)
+
+
 def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
@@ -713,7 +821,9 @@ def main():
     out = os.path.join(args.repo, "renders", "art", "minibosses",
                        "_fit_report.json" if args.name == "_hero_scale" else "_fit_%s.json" % args.name.strip("_"))
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
-           "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING}
+           "stale_margin": [],
+           "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
+           "frame_w": FRAME_W, "margin_x": MARGIN_X}
     if os.path.isfile(out):
         try:
             with open(out) as f:
@@ -732,12 +842,36 @@ def main():
                 hroots, hmesh, hero = import_hero(args.repo)
                 rep["hero"] = hero
                 mn, mx, _ = G.world_bounds(objs)
-                # hero to the creature's left, clear of its footprint
-                place(hroots, mn.x - GAP - hero["w"] / 2.0 - 0.10,
+                # hero to the creature's left, clear of its footprint.
+                # THE HORIZONTAL OFFSET IS SOLVED, NOT FIXED - see MARGIN_X.
+                # Moving the hero right by d narrows the pair by exactly d so
+                # long as the hero stays the leftmost thing in it, which it
+                # does at every gap down to GAP_MIN; the loop re-measures
+                # instead of trusting that, and stops the moment it fits.
+                # *** place() IS RELATIVE, NOT ABSOLUTE - READ ITS BODY. ***
+                # My first version of this loop called it with an absolute
+                # target on every attempt and the offsets COMPOUNDED: four
+                # passes walked the hero clean out of the frame, pair_w 10.80
+                # on ratcatcher and 11.03 on boiler, both cells RED with "the
+                # hero renders EMPTY alone" in every view. The new row audit
+                # caught it on the first run, which is the only reason this
+                # note is here and not a shipped regression. After the first
+                # placement the hero is moved by the DIFFERENCE only, and
+                # since the offset is (C - gap) that difference is exactly
+                # (old gap - new gap).
+                gap_x = GAP
+                place(hroots, mn.x - gap_x - hero["w"] / 2.0 - 0.10,
                       mn.y - GAP - hero["d"] / 2.0 - 0.10)
                 allo = objs + hmesh
-                bpy.context.view_layer.update()
-                amn, amx, pts = G.world_bounds(allo)
+                for _attempt in range(3):
+                    bpy.context.view_layer.update()
+                    amn, amx, pts = G.world_bounds(allo)
+                    over = (amx.x - amn.x) - (FRAME_W - MARGIN_X)
+                    if over <= 1e-6 or gap_x <= GAP_MIN + 1e-6:
+                        break
+                    new_gap = max(GAP_MIN, gap_x - over - 0.01)
+                    place(hroots, gap_x - new_gap, 0.0)
+                    gap_x = new_gap
                 outdir = os.path.join(args.repo, "renders", "art", "minibosses", key + args.tag)
                 os.makedirs(outdir, exist_ok=True)
                 tmpdir = os.path.join(args.repo, "renders", "art", "minibosses", "_vis_tmp")
@@ -750,50 +884,19 @@ def main():
                     creature_h=round(mx.z - mn.z, 3), hero_h=hero["h"],
                     ratio=round((mx.z - mn.z) / max(0.01, hero["h"]), 2),
                     pair_w=round(amx.x - amn.x, 2),
-                    fits_frame=bool((amx.x - amn.x) <= FRAME_W and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
+                    gap_x=round(gap_x, 3), margin_x=MARGIN_X,
+                    air_x=round(FRAME_W - (amx.x - amn.x), 3),
+                    fits_frame=bool((amx.x - amn.x) <= FRAME_W - MARGIN_X
+                                    and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
                     engine=eng, views=[os.path.basename(p) for p in written],
                     visibility=vis, frame_edge=edge,
                     ground=dict(GROUND_STATS) if GROUND else None,
                     proving_views=sum(1 for c in vis.values() if c["proves"]))
-                if vis:
-                    pv = rep["pairs"][key]["proving_views"]
-                    for vname, c in vis.items():
-                        for who in ("creature", "hero"):
-                            if c[who]["alone"] == 0:
-                                rep["errors"].append(
-                                    "%s/%s: the %s renders EMPTY alone - its seen "
-                                    "fraction would be computed over nothing"
-                                    % (key, vname, who))
-                                rep["ok"] = False
-                    if pv < MIN_PROVING:
-                        rep["blind_views"].append(
-                            "%s: only %d of %d views show BOTH subjects "
-                            "(seen>=%.2f AND vis>=%d px each) - %s"
-                            % (key, pv, len(vis), SEEN_MIN, VIS_MIN,
-                               "; ".join("%s creature seen %.3f vis %d / hero seen %.3f vis %d"
-                                         % (v, c["creature"]["seen"], c["creature"]["vis"],
-                                            c["hero"]["seen"], c["hero"]["vis"])
-                                         for v, c in vis.items())))
-                        rep["ok"] = False
-                else:
-                    rep["errors"].append("%s: no visibility measured for any view - "
-                                         "an unmeasured cell is RED, not green" % key)
-                    rep["ok"] = False
-                # a view whose content reaches an edge is CUT, and a cut
-                # render cannot prove a foot plane, a silhouette or anything
-                # else about where the body ends. RED, named edge by edge.
-                for vname, e in (edge or {}).items():
-                    hit = {k2: v2 for k2, v2 in e.items() if v2 > 0}
-                    if hit:
-                        rep["errors"].append(
-                            "%s/%s: render reaches the frame edge - %s. The "
-                            "body is CUT and this view proves nothing about "
-                            "where it ends." % (key, vname,
-                                                ", ".join("%s %d px" % kv for kv in sorted(hit.items()))))
-                        rep["ok"] = False
-                if not rep["pairs"][key]["fits_frame"]:
-                    rep["errors"].append("%s: pair does not fit the fixed frame" % key)
-                    rep["ok"] = False
+                # *** NO VERDICT IS DRAWN HERE ANY MORE. *** Every per-key
+                # judgement now happens in audit_rows() below, over EVERY row
+                # in the file rather than only the keys this run rendered.
+                # See the note on that function: judging in the loop is what
+                # let a `--only` run publish ok:true over a clipped body.
             except Exception:
                 import traceback
                 rep["ok"] = False
@@ -809,13 +912,10 @@ def main():
     # A CELL MEASURED BEFORE THIS TEST EXISTED IS NOT EVIDENCE FOR IT. An old
     # entry carries a ratio and no `visibility`, and reading the file alone
     # would make the whole set look proved by a run that only touched one key.
-    unproved = [k for k in keys
-                if k in rep["pairs"] and "visibility" not in rep["pairs"][k]]
-    if unproved:
-        rep["ok"] = False
-        rep["errors"].append("no occlusion measurement on record for: %s - "
-                             "these cells predate the visibility test and are "
-                             "not proved by it" % ",".join(unproved))
+    # *** THE VERDICT IS DRAWN HERE, OVER EVERY ROW IN THE FILE. ***
+    # This replaces an `unproved` check that looked only at the keys this run
+    # asked for - the same blind spot, one rung smaller. See audit_rows().
+    audit_rows(rep, keys)
     # AND THE SAME QUESTION ABOUT THE CELLS NOBODY ASKED FOR THIS RUN. The
     # file accumulates: the first full run after this test shipped found
     # snuffer_chibi and tallyman_chibi sitting in `pairs` with a ratio and no
@@ -856,7 +956,32 @@ def main():
         rep["errors"].append("sheet: %s" % traceback.format_exc()[-800:])
 
     os.makedirs(os.path.dirname(out), exist_ok=True)
+    # *** SAY WHICH KIND OF RED, OR THE VERDICT BECOMES NOISE. ***
+    # With every row judged, two retired cells with no occlusion measurement
+    # (snuffer_chibi, tallyman_chibi - in `pairs`, not in M.ORDER, never
+    # rendered again) hold the whole register RED for ever. That is literally
+    # true and practically useless: a reader who learns that RED always means
+    # "those two again" has learned to ignore the one number that matters.
+    # So the red is CLASSIFIED and the shipped set is reported on its own
+    # line. `ok` is NOT weakened - it still covers every row - and the
+    # shipped verdict is published beside it, not instead of it.
+    shipped = set(M.ORDER)
+    red_keys = set()
+    for msg in rep["errors"] + rep["blind_views"]:
+        head = msg.replace("[carried] ", "").split(":")[0].split("/")[0]
+        if head in rep["pairs"]:
+            red_keys.add(head)
+    rep["red_summary"] = {
+        "rows": sorted(red_keys),
+        "shipped_red": sorted(red_keys & shipped),
+        "retired_red": sorted(red_keys - shipped),
+        "ok_shipped": not (red_keys & shipped) and bool(rep["pairs"]) and bool(rep["hero"])}
     rep["verdict"] = "GREEN" if rep["ok"] else "RED"
+    # SAY WHAT THE VERDICT COVERS, IN THE FILE, so no reader has to know the
+    # history above to know what `ok` is a statement about.
+    rep["verdict_scope"] = ("every row in pairs (%d), re-derived from stored "
+                            "measurements; %d of them rendered this run"
+                            % (len(rep["pairs"]), len(measured)))
     with open(out, "w") as f:
         json.dump(rep, f, indent=1)
     print("MINIBOSSFIT_REPORT " + json.dumps({
@@ -865,6 +990,9 @@ def main():
         "blind_views": rep["blind_views"][:6],
         "proving": {k: v.get("proving_views") for k, v in rep["pairs"].items()},
         "unproved_cells": rep.get("unproved_cells", []),
+        "stale_margin": rep.get("stale_margin", []),
+        "rows_judged": len(rep["pairs"]), "rendered": len(measured),
+        "red_summary": rep.get("red_summary", {}),
         "blank": rep.get("blank_check", {}),
         "ratios": {k: (v["ratio"], v["pair_w"], v["fits_frame"])
                    for k, v in rep["pairs"].items()}}))

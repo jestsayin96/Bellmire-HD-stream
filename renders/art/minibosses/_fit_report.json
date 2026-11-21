@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -1646,7 +1646,10 @@
    "creature_h": 2.1,
    "hero_h": 2.45,
    "ratio": 0.86,
-   "pair_w": 5.51,
+   "pair_w": 5.47,
+   "gap_x": 0.406,
+   "margin_x": 0.12,
+   "air_x": 0.13,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1657,45 +1660,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 37497,
-      "vis": 37497,
-      "delta": 44929,
+      "alone": 37499,
+      "vis": 37499,
+      "delta": 44886,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43680,
-      "vis": 43680,
-      "delta": 53575,
+      "alone": 43682,
+      "vis": 43682,
+      "delta": 53769,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 27035,
-      "vis": 27035,
-      "delta": 32447,
+      "alone": 27067,
+      "vis": 27067,
+      "delta": 32427,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37776,
-      "vis": 37776,
-      "delta": 43272,
+      "alone": 37779,
+      "vis": 37779,
+      "delta": 43253,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 36366,
-      "vis": 36366,
-      "delta": 44053,
+      "alone": 36370,
+      "vis": 36370,
+      "delta": 44048,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44016,
-      "vis": 44016,
-      "delta": 50914,
+      "alone": 44015,
+      "vis": 44015,
+      "delta": 50909,
       "seen": 1.0
      },
      "proves": true
@@ -1723,12 +1726,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 265240,
-     "shadow_px": 4579,
-     "mean": 0.4301,
-     "max": 0.7103,
+     "plane_px": 264480,
+     "shadow_px": 4566,
+     "mean": 0.4316,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 4439,
+     "rim_filled_px": 4522,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -1737,12 +1740,12 @@
      }
     },
     "side": {
-     "plane_px": 271320,
-     "shadow_px": 3443,
-     "mean": 0.4376,
-     "max": 0.7103,
+     "plane_px": 270560,
+     "shadow_px": 3412,
+     "mean": 0.4375,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 3315,
+     "rim_filled_px": 3434,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -1751,12 +1754,12 @@
      }
     },
     "back": {
-     "plane_px": 265240,
-     "shadow_px": 4566,
-     "mean": 0.4265,
+     "plane_px": 264480,
+     "shadow_px": 4550,
+     "mean": 0.428,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 4557,
+     "rim_filled_px": 4574,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -5047,7 +5050,10 @@
    "creature_h": 2.62,
    "hero_h": 2.45,
    "ratio": 1.07,
-   "pair_w": 5.59,
+   "pair_w": 5.47,
+   "gap_x": 0.326,
+   "margin_x": 0.12,
+   "air_x": 0.13,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5058,45 +5064,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 60826,
-      "vis": 60826,
-      "delta": 71836,
+      "alone": 61306,
+      "vis": 61306,
+      "delta": 71559,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43667,
-      "vis": 43667,
-      "delta": 54890,
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 55352,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 36520,
-      "vis": 36520,
-      "delta": 46642,
+      "alone": 36575,
+      "vis": 36575,
+      "delta": 46388,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37790,
-      "vis": 37790,
-      "delta": 43307,
+      "alone": 37794,
+      "vis": 37794,
+      "delta": 43282,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 61132,
-      "vis": 61132,
-      "delta": 77077,
+      "alone": 61637,
+      "vis": 61637,
+      "delta": 75569,
       "seen": 1.0
      },
      "hero": {
       "alone": 44032,
       "vis": 44032,
-      "delta": 52500,
+      "delta": 52037,
       "seen": 1.0
      },
      "proves": true
@@ -5106,8 +5112,8 @@
     "front": {
      "top": 0,
      "bottom": 0,
-     "left": 15,
-     "right": 3
+     "left": 0,
+     "right": 0
     },
     "side": {
      "top": 0,
@@ -5118,32 +5124,32 @@
     "back": {
      "top": 0,
      "bottom": 0,
-     "left": 3,
-     "right": 15
+     "left": 0,
+     "right": 0
     }
    },
    "ground": {
     "front": {
-     "plane_px": 262960,
-     "shadow_px": 5644,
-     "mean": 0.3315,
+     "plane_px": 258400,
+     "shadow_px": 5650,
+     "mean": 0.332,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 6961,
+     "rim_filled_px": 6059,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
-      "left": 2,
+      "left": 0,
       "right": 0
      }
     },
     "side": {
-     "plane_px": 269040,
-     "shadow_px": 3600,
-     "mean": 0.3716,
+     "plane_px": 265240,
+     "shadow_px": 3572,
+     "mean": 0.3727,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 3341,
+     "rim_filled_px": 3384,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -5152,17 +5158,17 @@
      }
     },
     "back": {
-     "plane_px": 263720,
-     "shadow_px": 5137,
-     "mean": 0.3117,
+     "plane_px": 259160,
+     "shadow_px": 5124,
+     "mean": 0.3121,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 7958,
+     "rim_filled_px": 6541,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
       "left": 0,
-      "right": 2
+      "right": 0
      }
     }
    },
@@ -5544,24 +5550,174 @@
    "proving_views": 3
   }
  },
- "errors": [],
+ "errors": [
+  "[carried] snuffer_chibi: no occlusion measurement on record - an unmeasured cell is RED, not green",
+  "[carried] tallyman_chibi: no occlusion measurement on record - an unmeasured cell is RED, not green"
+ ],
  "blind_views": [],
+ "stale_margin": [
+  "beadle",
+  "bellman",
+  "comfitmaker",
+  "cook",
+  "dauber",
+  "drillmaster",
+  "drover",
+  "dyer",
+  "fenman",
+  "ferryman",
+  "fuller",
+  "gaoler",
+  "greener",
+  "hooper",
+  "hurdleman",
+  "jointer",
+  "leech",
+  "loader",
+  "moulder",
+  "paviser",
+  "pitman",
+  "porter",
+  "pressman",
+  "quartermaster",
+  "rammer",
+  "reeve",
+  "relief",
+  "scraper",
+  "scrapwright",
+  "sealer",
+  "sexton",
+  "sluicekeeper",
+  "snarer",
+  "snuffer",
+  "snuffer_chibi",
+  "sower",
+  "stackman",
+  "stoker",
+  "strickler",
+  "tallyman",
+  "tallyman_chibi",
+  "tanner",
+  "tapster",
+  "winder"
+ ],
  "seen_min": 0.15,
  "vis_min": 700,
  "min_proving": 2,
+ "frame_w": 5.6,
+ "margin_x": 0.12,
  "unproved_cells": [
   "snuffer_chibi",
   "tallyman_chibi"
  ],
  "measured": [
-  "winder"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman"
  ],
  "asked": [
-  "winder"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman"
  ],
  "blank_check": {
-  "files": 3,
+  "files": 132,
   "failures": []
  },
- "verdict": "GREEN"
+ "red_summary": {
+  "rows": [
+   "snuffer_chibi",
+   "tallyman_chibi"
+  ],
+  "shipped_red": [],
+  "retired_red": [
+   "snuffer_chibi",
+   "tallyman_chibi"
+  ],
+  "ok_shipped": true
+ },
+ "verdict": "RED",
+ "verdict_scope": "every row in pairs (46), re-derived from stored measurements; 44 of them rendered this run"
 }

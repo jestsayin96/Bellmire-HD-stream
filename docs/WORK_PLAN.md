@@ -1,3 +1,52 @@
+## TAKE THIS NEXT - UPDATED 21 NOV 2026, 13:5x CT (the 12:58 firing, finished on a LIVE TURN at
+## 13:5x after Mr. E brought the Blender bridge back up). THIS SUPERSEDES EVERY ROW BELOW IT.
+## Merged this pass into main d4daa062: laptop S89, content C-167, hub (mana-bar proof + licence).
+## TICKED: S89, C-167, the hub's two. Godot verified EMPTY both exes at 13:53 - the chat bot's
+## feared orphan from ~12:50 IS NOT ALIVE and that question is CLOSED.
+
+1. GAME BUILD - S89 IS TICKED AND MERGED. Your FIRST job is a one-line comment correction you
+   already own: dungeon_hd.gd:237 and the delve.gd MB_NAME tither row both say "NO content lines
+   yet, so miniboss_for holds it out". Content's C-167 landed its 9 arrive lines FIVE MINUTES
+   before you wrote that, and `miniboss_for` is DATA-DRIVEN (it appends a key when
+   miniboss_model(key) != "" and miniboss_lines(key,"arrive") is non-empty). SO THE TITHER IS
+   ALREADY IN THE PRISON DRAW ON MERGED MAIN. Do NOT add wiring the data gate already does; correct
+   the comment and prove the draw with one gate run. Then S90 proper.
+2. CONTENT - C-167 TICKED. Keep producing; keep writing _note_ keys. The blower/Deadair feed row is
+   NOT owed yet - art has not pushed the body. Do not pre-write it.
+3. ART - COMMIT AND PUSH THE BLOWER (Deadair, 46th), which Blender finished at 12:41-12:48 and the
+   outage stranded. As of main d4daa062 there is NOT ONE blower file on refs/heads/art or
+   origin/art, so no other lane can see it and the engine cannot be charged with not wiring it.
+   Push it with its fit evidence first, then the next body.
+4. HUB - nothing owed. web/ is byte-unchanged by your two commits, so the publish delta did not
+   move (3 files / +59 / -1) and NO publish gate is owed; I ran none. Stay on the mana-bar half of
+   Mr. E's 10:17 directive.
+5. HUD - FOUR OF YOUR OWN SHOT GATES ASSERT A BOSS CARD THAT NO LONGER EXISTS. tools/_u104_shot.gd,
+   _u112, _u113 and _u114 each still reference hud_boss / BossCard and are red by S89's change. The
+   game build named them and left them to you, which is correct - they are your files. Auditing your
+   own shipped gates is not new work and not a freeze violation.
+6. CHAT BOT - TWO THINGS B108 LEFT OPEN BY ITS OWN ACCOUNT, and one of them is now closed for you:
+   (a) red-prove B (ALIAS UNUSABLE) has NO LOG - its Godot was killed by a 70 s subprocess timeout
+   at ~12:50 - so that ONE arm is still UNPROVEN and is yours to re-prove; (b) you could not read
+   tasklist and warned a Godot of yours might be alive - I READ IT AT 13:53 AND BOTH EXES ARE EMPTY,
+   so nothing is hanging and nobody needs to kill anything.
+
+FOR THE SUPERVISOR: the hub publish delta is unchanged and still waiting on you - 3 files / +59 / -1
+between origin/gh-pages^{tree} (9ca8051e) and origin/hub:web (02257b2f), since 20 Nov. The lane has
+claimed no publish readiness, so no publish gate has been run. RECOMMENDATION: publish; say the word
+and the first seat runs the full verification and the subtree push by the proven plumbing recipe.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (the two below are NEW this pass; earlier owed
+items still stand):
+  (i) The standing art-fit-register note in the :58 prompt is STALE. It says the register "reads
+      RED / ok:false ... shipped_red is empty and ok_shipped is true". Measured on origin/art AND
+      art's worktree on 21 Nov: it reads ok:true / verdict GREEN, and the keys shipped_red and
+      ok_shipped DO NOT EXIST in it - it carries red_summary, verdict_scope and visibility_scope.
+      The instruction "do not report the art gate is green" is now backwards.
+  (ii) The miniboss count in that prompt ("46 rows, 44 live bodies, two retired _chibi") is stale:
+      it is 48 pairs = 45 MB_NAME bodies + blower (built, unpushed, unwired) + the 2 _chibi.
+      Keep the instruction to MEASURE it rather than quote it.
+
+
 ## PROMPT-CORRECTION BACKLOG - STATUS AS OF 11:4x CT, 21 NOV 2026. **READ THIS BEFORE YOU SPEND A
 ## LIVE TURN ON THE SEVEN PROMPTS.**
 ##

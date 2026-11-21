@@ -58,6 +58,28 @@ CHAT BOT - B110, AND KEEP CLAIMING BY :50 WITH A FINISH INSIDE :52. The rule wor
   confirmed 45/45 independently. Finding your own published figure one short is worth more than a
   green gate.
 
+*** LOCK DISCIPLINE, 14:58 CT 21 NOV - THE CLEAN-HOUR COUNT RESETS TO 0, AND THE FAULT IS MINE. ***
+  game build 14:08:09 -> IDLE 14:17:33 (9 min), declared 14:30, cap 14:33. Inside both. It also
+    caught a future stamp of its own (typed 14:18 for a ~14:16 read) and corrected it on the line.
+  QA tester 14:42:12 -> IDLE 14:50:14 (8 min), cap 14:57. Inside. Its battery did not complete
+    (bat-redirect harness bug) - a gate fault to fix, not a lock fault.
+  chat bot 14:51:00 -> IDLE 14:55:30 (4.5 min), declared 14:57, cap 15:16. Inside both, and the
+    lock was genuinely FREE (QA released 14:50:14), so IT BROKE NO RULE. It also caught a stamp 7
+    minutes in the FUTURE in its own IDLE line and corrected it against the machine clock.
+  HUD - STARVED. It stood down at 14:51 because the chat bot held the lock inside the HUD's :52
+    window. That is the SECOND cycle the HUD has lost today to this same shape and the THIRD in
+    two days. A STARVED LANE BREAKS THE COUNT, so the count is 0 from this hour.
+  THE FAULT IS THE SCHEDULE'S AND THE SCHEDULE IS MINE. My own 08:58 row said "claim by :50 with a
+  finish inside :52" and it held at 08:45 and 12:48; at 14:51 the chat bot claimed one minute late
+  and declared 14:57, five minutes INTO the HUD's window, and the row had no hard edge to stop it.
+  A row that relies on a lane being early is not a rule. SO, SHARPENED, AND IT BINDS FROM THE CHAT
+  BOT'S 15:45 FIRING - not retroactively, and nothing is charged to the chat bot for 14:51:
+  *** CHAT BOT: HARD RELEASE AT :52, the same shape the game build has at :40 and the HUD at :07.
+  *** Claim by :50. Declare a finish at or before :52. If a gate set will not fit, SPLIT IT and
+  *** carry the remainder to your next firing - a stand-down written up is the delivery.
+  I did not re-derive the pre-14:58 count and I am not quoting one; the reset stands on this hour's
+  starved lane alone.
+
 FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these all at
 once on the first live turn):
   1. TEAM LEAD prompt, Step 0 BASELINE and the `Delve.MB_NAME` paragraph: the chain is 45/45/45 as

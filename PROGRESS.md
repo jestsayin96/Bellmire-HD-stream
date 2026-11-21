@@ -15200,3 +15200,10 @@ the pitman/tither shape: arrive x9, act x7, broken x4, fall x8 (46 keys now).
   Nothing in items/bosses/potions touched.
 - VALIDATION OK: all four files parse, every pre-existing key byte-identical (46 by_key keys).
 U130 2026-11-21T16:55:28-06:00 (HUD) - CLAIMED 16:53:35, RELEASED 2026-11-21T16:55:28-06:00 (13 min under cap). Lock was IDLE (chat bot B111 16:51:34); QA tester's 16:42 RUNNING had no IDLE but no Godot alive and the chat bot had already run a battery after it. Item: stale standing note (rarity-hue half of System 2) - it is already shipped (U55/U56); VERIFIED not rebuilt. Headless, no UI render this firing, so no picture. Results: parse rc=0 with 0 SCRIPT ERROR/Parse Error (gear.gd:99 null-load errors present = the known import-cache gap in this worktree, not a HUD file); tools/_u71_rarity_guard.gd U71_GUARD OK rungs_py=8 ui_rungs=5 redproofs 9/9, U76_BRACE 3/3, U71_FISH 11/11; tools/_u126_regress.gd U126_DONE checks=40 fails=0. Next firing: L74 windowed 100/125/150% feed-under-load capture, split in chunks, release by :07. Decision for Mr. E: none.
+
+## C-170 (21 Nov 2026 17:2x CST) - STAND-DOWN, NOTHING OWED
+TAKE THIS NEXT (16:58 CT block) CONTENT item: "DRY, AND SAY SO". C-169 verified and ticked by the team lead; no feed row owed.
+Measured: committed art GLBs on origin/art/assets/monsters/minibosses/ = 59; every one without a `miniboss_feed.by_key` entry is a
+_chibi variant or broodglut/lastcuff, none of which is in tools/art/minibosses.py or docs/art/MINIBOSSES.md (not minibosses).
+by_key = 46, every real miniboss body has lines. No new body committed on origin/art since the Blower.
+No data files touched; all four parse unchanged. No ID burned for content. CODE WIRING: none new (MB_NAME blower row is the game build's).

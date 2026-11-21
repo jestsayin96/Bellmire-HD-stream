@@ -1,3 +1,185 @@
+## TAKE THIS NEXT - THE 05:58 CT FIRING, 21 NOV 2026 (machine clock read 06:0x CST while writing;
+## same day, no midnight rollover. The 05:58 firing and the 06:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 04:58 BLOCK. ***
+## *** WRITTEN AT 06:0x, SO THE GAME BUILD'S 06:07 RUN MAY OR MAY NOT HAVE READ IT. *** I synced
+##   `laptop` FIRST. If its run opened the plan before my push it read the 04:58 block, whose GAME
+##   BUILD row said "take the lowest open Phase 2 system, your own pick" - it already did that and
+##   named row (a) as its own next step, so nothing is lost either way.
+##
+## SIX MERGES, main is 29916387. **SIX TICKED - every lane delivered and every lane is ticked.**
+## Three root PROGRESS.md conflicts (hub, hud-ui, chatbot, all appending at the same end-of-file).
+## Both sides kept, marker lines only stripped by a state machine, and I did not stop at counting
+## residuals: I took every line each of the four lanes ADDED to PROGRESS.md and asserted each one
+## is present in the merged file - **content 6/6, hub 5/5, hud-ui 8/8, chatbot 105/105 present, 0
+## missing, 0 residual markers.** All 12 data files re-parse and every count a tick rests on was
+## re-counted AFTER the merge (876/535/520 lore lines, 28 caravans, 32/32 commands, 11 guard arms).
+##
+## TICKED THIS HOUR (six):
+##   - **S82 (game build)** - System 9 (loot on the ground) scoped as the lowest open Phase 2
+##     system, no engine edit, which is the honest answer inside a 25-minute cap. **I re-read every
+##     load-bearing line myself rather than taking the grep table**: delve.gd:2486 is exactly
+##     `_show_vial(seeker, pk, true)` with the "lands on the floor first" comment; :2432 pays gold
+##     as an integer and :2470 returns a `find_gear` LINE - neither puts anything on the floor; and
+##     **`Coin`, `Coin_Pile` and `Bag_Coins` appear ZERO times in delve.gd**, so the gap is real and
+##     not a naming miss. All four models are on main with `.import` siblings. Gates read as VERDICT
+##     LINES: DELVE_TEST OK 9001 frames, OFFFLOOR OK 0/2305, TWITCH_PARSE OK 8, TOWNWALK PASS
+##     in_solid 0/17063. The lane named its own honest difference (STUCK_ON_ROUTE_TOTAL 5 where S81
+##     read 0) - **I opened the log: four of the five are one watchman, Cort the Younger, stuck at a
+##     single spot with navoff ~0.60, one is a smith; the gate still PASSES and no town code moved.**
+##   - **C-160 (content)** - counted off the file at the ref: epitaphs 864 -> 876, descend 529 ->
+##     535, cleared 514 -> 520 = **+12 / +6 / +6** exactly as claimed. All three **append-only**
+##     (old prefix byte-equal), **0 duplicates**, nothing removed, no other key changed, exactly one
+##     new top-level key and it is `_note_c160`.
+##   - **ART - fuller/side blamed by height band, and the band table REPRODUCES the headline figure
+##     to four decimals.** I did not take the verdict: I recomputed it. The ten bands sum to 52,516
+##     px, **exactly** the man-alone mask, so they partition it with nothing double-counted; and
+##     survival-weighted they give 24,215 surviving of 52,516 = **0.46110**, which IS the 0.4611 the
+##     register carries. I also rebuilt the register ranking myself - **75 cells, fuller/side is #1
+##     worst, and the next three are beadle/side 0.5174, paviser/front 0.5740, moulder/back 0.5837,
+##     exactly as written.** The lane's precision that the under-bar queue is 14 cells and not 75 is
+##     right: I count 14 under 0.75. **AND I LOOKED AT THE SHEET**: crown green at band 0, boots red
+##     at band 9 - top-down confirmed by the picture, not by a comment - and in the render he is
+##     plainly a man standing behind a waist-high vat. Verdict accepted: explained, not owed.
+##     Its strike of the stale `snarer_chibi.glb` item also checks out on my own `ls-tree`:
+##     `snarer_chibi.glb.import` IS on main, and of 57 `.glb` exactly four lack an `.import`
+##     sibling - ferryman, hooper, relief, scraper.
+##   - **B101 (chat bot) - eleven new guard arms, and I PREDICTED EVERY ONE OF THEIR VERDICTS BY
+##     HAND BEFORE THE GATE RAN.** The commit landed saying "UNPARSED, no Godot gate has run on this
+##     edit", so I computed the arms' answers in my own instrument off the data: `growth.gd` UNLOCK
+##     carries five keys (market_hall, stables, guild, bathhouse, mage_tower) and TOWN_BUILT names
+##     **exactly those five** - no unnamed, no ghost; `town`.what's "which of ... are open" list
+##     parses to the same five words the table prints - no said-ghost, no said-short;
+##     `caravan`.what says "**Twenty-eight** carts are written" and `items.json` holds **28** rows,
+##     **28 of 28** carrying name + origin + cargo, and **zero** rows missing `first_tier`. So all
+##     eleven arms should be SILENT. **The lane's gate came back at 05:59:48 while I was still
+##     working - L14_TEST OK 24 with 0 guard arms fired, incl. the 11 new ones; COMMANDS_DOC OK 32;
+##     parse rc=0, 0 parse errors - and it agrees with my hand computation arm for arm.** Its own
+##     correction commit ("the arm count is ELEVEN, not six") is right: I count 11 `_guard_faults`
+##     appends on the merged tree.
+##   - **U121 (HUD)** - the cycle U120 named, delivered: hostile feed, 60-char Latin / katakana /
+##     Cyrillic / 60-'i' names at 100/125/150 against the pane-label strips, U121_DONE checks=40
+##     fails=0, 0 script errors, and **no `.gd` of the game changed** (the new file is
+##     `tools/_u121_hostile.gd`, test code). **I looked at host_s150_phone480.png myself**: four
+##     pane labels inside their panes, kind chips and clock unclipped, the Mana plate's katakana and
+##     Cyrillic clipping inside the plate. The lane raised its own OPEN question rather than letting
+##     me find it, which is why this is a tick and not a half.
+##   - **THE HUB - standing check, and the two claims it rests on are mine now too.** `origin/hub:web`
+##     and `origin/main:web` are both `02257b2f` - I ran the hashes - and the delta to gh-pages is
+##     3 files / +59 / -1, which I re-measured by `diff --name-status`. No READY TO PUBLISH claim,
+##     so **I ran NO publish verification** and none was owed.
+##
+## WHAT I DID NOT TICK: nothing was withheld. Every lane delivered something checkable.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - S82 ticked; the System 9 scoping is accepted as written and I am NOT asking
+##   you to re-derive it. Build **row (a)**: the miniboss purse / lord's hoard lands as a coin pile
+##   where the body fell and the gold is paid when the nearest delver WALKS TO IT, reusing the L49
+##   walk-and-kneel. Ship it with its own windowed gate AND a render you have looked at - that was
+##   your own reason for not doing it inside the 05:08 cap, and it is the right reason.
+##   ON YOUR NUMBERING NOTE: you named it rather than ruling it, which was correct. **I have routed
+##   it to the supervisor and I am not ruling it either.** My own measurement, so you do not redo
+##   it: the words "mimic", "crystal drops" and "chests by rarity" appear NOWHERE in this repo
+##   except in your own note of this hour. Keep using the directive's numbering until the seat
+##   above rules; System 9 = loot on the ground is safe under both.
+##
+## - **CONTENT** - C-160 ticked, counted line by line. Free C-cycle, your own pick. Keep writing
+##   `_note_` keys: they are 38 of the 53 zero-hit keys and not one of them is a defect.
+##
+## - **ART** - ticked, and the band instrument is the best measuring tool added to this tree in a
+##   week. Next under-bar cell: **`paviser/front` 0.5740 (#3 of 75)** - it is the first one in the
+##   queue that nothing has explained yet (#1 fuller is the vat, #2 beadle/side is his own anatomy,
+##   both closed this week). Run `_bandblame` first and let it name the band before anything moves.
+##   Your new `hidden_by_no_span_px` counter is a real find; keep reporting it per view.
+##
+## - **HUB** - standing check ticked. Own cycle on your three files. **Do not publish** - the delta
+##   is with the supervisor for a fifth hour. If you change `web/`, say READY TO PUBLISH plainly so
+##   the gate is earned and I will run it.
+##
+## - **HUD** - U121 ticked. Take the measurement you named yourself: does a Chronicle line's drawn
+##   width exceed the scroll's inner rect at 150% in 2x2? **AND ONE THING MY OWN LOOK ADDS, because
+##   it changes what you are measuring:** in that frame the two ambient lines are cut at the RIGHT
+##   by the scroll edge AND covered at the LEFT by the lord tooltip card ("The Grubmother,
+##   Beam-Bred / Lord of floor 5..."), which is why one of them reads as starting mid-word. Those
+##   are two different faults with two different owners. Measure both; do not let the card's
+##   occlusion be charged to the text width.
+##
+## - **CHAT BOT** - B101 ticked, all eleven arms checked against the data by me independently and
+##   the gate agrees arm for arm. Own cycle. One note for your next guard: you shipped an engine
+##   edit to `scripts/chatcmd.gd` and pushed it BEFORE the gate ran, saying so in the commit
+##   message. Saying so is what made it mergeable - but prefer gate-then-push when the cap allows,
+##   so a merge window never opens on an unparsed script.
+##
+## - (QA tester, not one of the six) - still owed in writing from 04:58: acknowledge the 03:06
+##   stale-lock clear, name which gates are windowed-only, and say where its declared
+##   `cap claim+12` comes from (the protocol's number is +25).
+##
+## FOR THE SUPERVISOR (05:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured, unchanged for a FIFTH hour.** `origin/gh-pages`
+##      `05ac2679`, tree `9ca8051e`, pushed 19 Nov 20:06 CT; `origin/hub:web` `02257b2f`;
+##      difference **3 files / 59 insertions / 1 deletion** (NOTES.md +9, app.js +47/-1,
+##      style.css +4). No READY TO PUBLISH claim this hour, so no publish verification was run.
+##      **Recommendation: still not yet** - the only reason left is that the gate is unearned
+##      until the lane claims it. The lane itself has now delivered two clean hours running.
+##   2. **NEW - A LEDGER QUESTION THE GAME BUILD RAISED AND CORRECTLY DID NOT RULE.** It reports
+##      that the Master Vision doc numbers Phase 2 systems 6/7/8 as *crystal drops / chests by
+##      rarity / mimics*, while the 18 Nov 16:58 directive renumbered 6/7/8 as *weapon / armour /
+##      shield variety*, which is the numbering the whole fleet has used since. Both agree that
+##      9 = loot on the ground, so this hour's work is safe either way. **What I measured myself:
+##      the strings "mimic", "crystal drops" and "chests by rarity" do not appear anywhere in this
+##      repository except in the game build's own note of this hour** - so under the directive's
+##      numbering those three items are currently in the ledger under NO number at all.
+##      **Recommendation:** confirm the directive's numbering is authoritative and either re-enter
+##      crystals / rarity chests / mimics at free numbers in the 5-80 range, or say plainly that
+##      they are dropped. It is a ledger decision, not a build decision, so it is yours and I have
+##      taken no part of it. Nothing is blocked while it waits.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 06:0x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once). **NINE items.**
+## *** I DID ATTEMPT THE WRITE THIS RUN, ONCE, WITH THE WHOLE CORRECTED TEXT, AND IT WAS REFUSED.
+##   The 04:58 seat set the practice (attempt once with the complete payload, stop on refusal) and
+##   I followed it rather than letting a reasoned skip become the habit. Same substance as every
+##   prior refusal: **the gate is on the CALL, a firing has no live turn to be approved in, and it
+##   is not something Mr. E can click.** I stopped and did not retry.
+##   1. (carried, RE-MEASURED THIS HOUR on merged tree 29916387) the dead-data baseline's
+##      ARITHMETIC is stale, not its conclusion. **48 script files / 2,325,806 chars (scripts/*.gd
+##      + web/*.js), 12 data files, 143 top-level keys, 53 zero-hit.** Classes: **38** `_note_`
+##      keys + **15** non-note (2 runtime-built `_alt` pools, READ; 4 of the dead family incl.
+##      `phase2_words_alt2`; the 9 prose/spec keys). 38+2+4+9 = 53. **UNREAD LIVE DATA KEYS: ZERO.
+##      UNREFERENCED ASSET DIRECTORIES: ZERO, off 34 dirs with files** (the prompt still says 31).
+##      The non-note count has been EXACTLY 15 for days - that is the number to watch, not the raw
+##      total, which rises every time content writes a note. SAY WHICH MATCHER YOU USED.
+##   2. (carried, and still the important one) **THE PROMPT'S PHASE 2 SECTION IS WRONG ABOUT THE
+##      MOST VALUABLE OPEN ITEM.** It says the HUD's rarity-hue half of System 2 "is the only part
+##      still open" and "was still unstarted at 09:2x on 18 Nov". **IT SHIPPED** - `ui_theme.gd:176`
+##      names itself "U55 (System 2, HUD half): the rarity hue ladder", `rarity_hue` :196,
+##      `rarity_ink` :200, `rarity_pip` :204, and `leaderboard_panel.gd:197`/:202 call two of them
+##      on the worn rows. **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   3. (carried) the prompt's `parse_fish()` line - hardened at U76, re-proved at U119. Struck.
+##   4. (carried) the miniboss count line - measure off `tools/art/minibosses.py` and the feed keys
+##      in `miniboss_feed.by_key`, never quote the prompt. 21 Nov: 44 feed keys, 25 bodies in the
+##      self-seen register (75 cells = 25 bodies x 3 views, re-counted by me this hour).
+##   5. (carried, re-measured) the prompt's hub SHAs. gh-pages is `05ac2679`, tree `9ca8051e`,
+##      pushed **19 Nov 20:06 CT**. The prompt's "45a7904 pushed 18 Nov 03:34" is STRUCK AND WRONG,
+##      as was "40223be" before it. `origin/hub:web` is `02257b2f`; delta 3 files / +59 / -1.
+##   6. (carried, re-measured) the Step 5 ID line is behind. As of this hour: **B101, C-160, S82,
+##      U121**, and art is on the fuller with no new body this cycle.
+##   7. (carried) the lock section should record that the game build's over-declaration pattern has
+##      STOPPED: since 02:08 on 21 Nov its lock lines carry "claim HH:MM, cap claim+25 = HH:MM"
+##      with the cap computed BEFORE the declaration, and it has not over-declared since. Held
+##      again this hour (claim 05:08, cap 05:33 computed first, declared 05:30, released 05:17).
+##   8. (carried) the prompt should carry the two-dot/three-dot warning. `git diff origin/main
+##      origin/<b>` reports main's own newer files as the lane's "deletions". Use
+##      `origin/main...origin/<b>` when measuring WHAT A LANE DID, and confirm a suspicious
+##      WORK_PLAN delta by comparing BLOBS.
+##   9. (NEW, measured by me this hour off `ls-tree origin/main`) **the ART prompt's standing
+##      `snarer_chibi.glb` item is stale and the art lane struck it with a measurement, correctly.**
+##      `assets/monsters/minibosses/snarer_chibi.glb.import` IS on main (landed 17 Nov 06:23 in
+##      b06c2cfb). Of the 57 `.glb` under that directory, exactly **four** lack an `.import`
+##      sibling - **ferryman, hooper, relief, scraper**, the four newest bodies - and a Godot run
+##      generates them, which makes that the GAME BUILD's tree, not art's. Strike the snarer item
+##      and, if anything replaces it, it is those four.
+
 ## TAKE THIS NEXT - THE 04:58 CT FIRING, 21 NOV 2026 (machine clock read 05:04 CST at the time of
 ## writing; same day, no rollover. The 04:58 firing and the 05:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 03:58 BLOCK. ***

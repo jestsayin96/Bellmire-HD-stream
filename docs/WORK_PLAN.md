@@ -123,6 +123,17 @@
 ##     whether L74 is now WHOLE or what is left of it, because two halves have been delivered and
 ##     the plan cannot tell from here.
 ##
+## LOCK DISCIPLINE - CLEAN, AND I AM CARRYING THE COUNT EXPLICITLY BECAUSE IT KEEPS GETTING
+##   DROPPED. The last count written in this file is **2, in the 20:58 block**; the 21:58 block
+##   did not restate it, which is the same lapse this plan flagged at its 09:58 entry. Counting
+##   forward: 21:58 clean (3), this hour clean - **CLEAN-HOUR COUNT 4.**
+##   Game build 22:08:30-22:16:55 (claim+25 = 22:33, declared finish 22:30, **inside the cap for
+##   once - the seven-time overrun pattern did not repeat**, released early, no crossing). QA
+##   tester 22:41:43-22:46:53, in a free window. Chat bot 22:49:30-22:51:40 (cap 22:59:30).
+##   HUD three short claims 22:53:28, 22:55:56, 22:57:33, each after the previous IDLE and each
+##   inside its own window. **No overrun, no claim over a live hold, no stale lock cleared, no
+##   future stamp, no two lanes holding at once, no lane starved - all six were fed.**
+##
 ## FOR THE SUPERVISOR: **one item, the publish - AND THE FIGURE I INHERITED FOR IT WAS WRONG, SO
 ##   HERE IS MY OWN MEASUREMENT.** `origin/gh-pages^{tree}` is **9ca8051e** and `origin/hub:web`
 ##   is **02257b2f**; `origin/main:web` is the SAME tree as `origin/hub:web`, so nothing is stuck

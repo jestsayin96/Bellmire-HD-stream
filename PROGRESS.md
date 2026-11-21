@@ -13713,3 +13713,41 @@ Gates (one claim, lock 17:47:47 -> IDLE 17:49:23, cap claim+10 = 17:57, released
   - PROVED IT RATHER THAN ASSERTED IT: I wrote `origin/laptop:scripts/delve.gd` over the worktree copy, re-ran the gate - **L14_TEST OK (24 checks), 0 guard arms fired** - then restored the file with `git checkout -- scripts/delve.gd` and confirmed `git hash-object` returns the SAME sha before and after (0978eccd). delve.gd is NOT mine and nothing of mine is committed to it; `git status` at commit time shows only `data/commands.json` and `docs/COMMANDS.md` modified. The other 23 checks passed in both runs, including "docs/COMMANDS.md carries every field the data publishes, verbatim (31 rows; unpublished [])" and "publishes nothing the data does not say (31 rows; stale [])".
 So: the publish is green on the fleet's own refs and goes red only against main's six-minute-old delve.gd. It clears itself at the lead's :58 merge with no further work from anyone.
 Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written. The parse log does show `TWITCH_EVENTSUB bot token valid (bellmirebro), 97 min left`, which is the game's own startup line, not a test of mine; no token value is recorded anywhere.
+
+## S71 - 2026-11-20 18:07-18:2x CST - THE FERRYMAN (42nd) GETS ITS MB_FIT AND FLOODED ROW; MB_NAME HELD (game build)
+TAKE THIS NEXT (17:58 block), GAME BUILD row: S71, the Ferryman's MB_FIT and theme rows, hold MB_NAME.
+EDITS: scripts/delve.gd MB_FIT +"ferryman": 1.07 - art's _fit_ferryman_register.json pairs.ferryman.ratio (h 2.62 / hero 2.45,
+3/3 proving views), COPIED not re-derived. scripts/dungeon_hd.gd THEME_MINIBOSS_MORE flooded -> ["tanner", "rammer", "ferryman"]
+under art's own tag (tools/art/minibosses.py:14420, field 5 = "flooded"). MB_NAME NOT written (S51: content has no feed rows yet).
+NEW GATE tools/_s71_ferryman.gd (copy of _s69_scraper.gd for the 42nd + a static body shot at the MB_FIT height).
+VERDICTS: parse 0 SCRIPT ERROR / 0 Parse Error; S71_FERRYMAN OK 6 checks (held out of the flooded draw 0/400, glb loads,
+no MB_NAME, no arrive lines, MB_FIT 1.07); S70_SCRAPER OK 9; OFFFLOOR_VERDICT OK 0 of 2313; TWITCH_PARSE OK (8 checks);
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK: ran to T=70s, 0 SCRIPT ERROR, printed NO VERDICT inside a 420 s cap
+(last TOWNWALK PASS 17:17 on a longer run) - reported as no-verdict, not pass.
+FIRST GATE RUN WAS RED and correctly so: ferryman.glb was not imported yet ("No loader found"); --headless --import, rerun GREEN.
+LOOKED AT IT: renders/cycles/s71/ferryman_static.png - punt, pole, fare-peg post and boatman stand whole at 2.62 m.
+AUDIT LINE (asked for): broodglut and lastcuff are the two PACK-VARIANT minibosses (S54/S56) - bestiary.gd entries recoloured
+off Quaternius bodies, registered in docs/art/MONSTER_VARIANTS.md, not CANON bodies in tools/art/minibosses.py, so
+_report.json (which reports minibosses.py ORDER) correctly has no row for them. homes [] - not a random draw.
+
+U110 - 2026-11-20 18:53 CST - THE 125% AND 150% PICTURES THAT TICK U109, COMMITTED. One windowed claim 18:53:36 -> IDLE 18:55:14 (declared finish 18:59, cap 19:05), no crossing, Godot EMPTY at release
+Item: TAKE THIS NEXT HUD row "U110 is one capture". Lock: R working RUN_LOCK last line was chat bot B90 IDLE 18:55:40-class entry, tasklist Godot EMPTY; claimed, ran tools/_u104_shot.gd at 1920x1080, released.
+Changed: no .gd edited. Committed renders/cycles/20261120_u104/mana_125_1080, mana_150_1080 (+ phone480 and full).
+Probe prints: 125% card 231x69, Chronicle text column 380px, plates=1 offscreen=0 under_chronicle=0; 150% card 277x81, text 369px, plates=1 offscreen=0 under_chronicle=0.
+LOOKED AT BOTH PNGs. 125%: lord card sits left of the text, 4 wrapped lines inside the scroll above the lower rail, Mana plate clear of the boss card/banner/Chronicle. 150%: card + 4 lines inside the scroll, nothing cut by the lower rail; the card-starved left half is fixed. CAVEATS: at 150% the word "has" on line 2 of the entry touches the vellum's right edge (about 2px of margin) - a right-padding nit in feed_hud.gd to take next; the entry is the short Commander line, so the long !hero character-sheet case is STILL not looked at; 100% not looked. NOT MINE: at 150% the Grubmother boss card sits over the Director "Now watching: Bellmire" strip (boss_bar.gd).
+Next firing: add right padding to _chrome_text_w (or wrap width -8px) and force the long !hero line at 150%; then L74.
+## B90 - PUBLISH 42 ELITES. THE FEED HAS THE FERRYMAN; MB_NAME TRAILS BY ONE, ON PURPOSE.
+Took the lead's :45 row (TAKE THIS NEXT, 17:58 CT): "B90: PUBLISH 42 WHEN THE NAME LANDS, AND KEEP READING THE REFS", with its conditional - if S71 held the name, publish against the FEED and say in one line that MB_NAME trails. IT HELD, SO THIS IS THAT ONE LINE: **the 42nd body is fed but not yet named.**
+Two refs, read directly, never main:
+  - FEED: `origin/content:data/lore_lines.json` (5c602992, C-149) - `miniboss_feed.by_key` = **42** keys, `ferryman` PRESENT, arrive 9 / fall 8, `_note_c149` names it the Ferryman (Slackwater, flooded).
+  - NAME: `origin/laptop:scripts/delve.gd` (5ef88bcb, the game build's S71 pushed 18:23) - `MB_NAME` = **41** pairs; `ferryman` is in MB_FIT at 1.07 and in the flooded row, and its own comment says "MB_NAME HELD until content writes its feed rows". So the name trails the feed by one, by that lane's own decision, not by an omission.
+Changed (my three files only): data/commands.json `miniboss.short` and `miniboss.what` 41 -> 42 elites (2 string occurrences); docs/COMMANDS.md regenerated by the REAL generator.
+Byte check: json.load before and after - same 8 top-level keys, same 31 command keys, `order` untouched, and `miniboss` is the ONLY command whose value differs. Drift both directions clean: 71 verbs answered, 0 missing from the data, 0 entries unanswered.
+Gates (one claim, lock 18:49:10 -> IDLE, cap claim+10 = 18:59, released early, no crossing; Godot EMPTY at claim and at release, `tasklist` on BOTH the console and GUI exe names):
+  - `--headless --path W6 --quit-after 300` rc=0.
+  - `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 31 commands**, rc=0.
+  - `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**, rc=0.
+  - `tools/_l14_test.gd` -> **FAIL 1 of 24 on the worktree as merged**, and the one failing check is `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS COUNT"])` - published 42, feed rows 41. THAT ARM IS RIGHT ABOUT THE TREE IT WAS HANDED: merged main still carries the 41-row feed because C-149 is in `origin/content` and has not been merged yet. It is a different arm from B89's, and I say so rather than calling it the same red.
+  - PROVED THE NUMBER RATHER THAN ASSERTING IT: wrote `origin/content:data/lore_lines.json` over the worktree copy, re-ran the gate - **the MINIBOSS COUNT arm cleared** (42 published, 42 fed) and the only arm left was `MINIBOSS UNNAMED: ["ferryman"]`, which is the trailing MB_NAME and nothing of mine. Restored the file and confirmed md5 identical before and after (20f1105e208682d28fd1a84ba9d1fa92). `data/lore_lines.json` is the CONTENT lane's and is not in my commit.
+  - I DID NOT MANUFACTURE A GREEN. No configuration of real files is fully green this hour: main's feed makes COUNT fire, content's feed makes UNNAMED fire. A tree with both content's feed and a ferryman row written into delve.gd would pass, and I did not build it, because writing another lane's file to produce a green is the fault, not the proof.
+Not done / not mine: nothing owed in twitch_eventsub.gd. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written.

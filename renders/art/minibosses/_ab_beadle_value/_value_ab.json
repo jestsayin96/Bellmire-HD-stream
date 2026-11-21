@@ -1,0 +1,278 @@
+{
+ "res": [
+  700,
+  980
+ ],
+ "errors": [],
+ "checks": {
+  "a_pegs_on_board": {
+   "pass12_shipped": {
+    "feature_px": 9710,
+    "ring_px": 1254,
+    "feature_lum_mean": 0.694,
+    "ring_lum_mean": 0.6041,
+    "gap": 0.0899,
+    "gap_bytes_255": 22.9,
+    "per_side_gap": {
+     "above": {
+      "px": 0,
+      "gap": null
+     },
+     "below": {
+      "px": 319,
+      "gap": 0.071
+     },
+     "left": {
+      "px": 569,
+      "gap": 0.1134
+     },
+     "right": {
+      "px": 366,
+      "gap": 0.0698
+     }
+    },
+    "worst_side_gap": 0.0698,
+    "worst_side_bytes_255": 17.8,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.668
+   },
+   "pass13_dark_rail": {
+    "feature_px": 8152,
+    "ring_px": 1118,
+    "feature_lum_mean": 0.6849,
+    "ring_lum_mean": 0.2691,
+    "gap": 0.4158,
+    "gap_bytes_255": 106.0,
+    "per_side_gap": {
+     "above": {
+      "px": 0,
+      "gap": null
+     },
+     "below": {
+      "px": 247,
+      "gap": 0.4738
+     },
+     "left": {
+      "px": 517,
+      "gap": 0.3615
+     },
+     "right": {
+      "px": 354,
+      "gap": 0.4545
+     }
+    },
+    "worst_side_gap": 0.3615,
+    "worst_side_bytes_255": 92.2,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.2213
+   },
+   "rail_alone": {
+    "feature_px": 8152,
+    "ring_px": 1118,
+    "feature_lum_mean": 0.6849,
+    "ring_lum_mean": 0.2691,
+    "gap": 0.4158,
+    "gap_bytes_255": 106.0,
+    "per_side_gap": {
+     "above": {
+      "px": 0,
+      "gap": null
+     },
+     "below": {
+      "px": 247,
+      "gap": 0.4738
+     },
+     "left": {
+      "px": 517,
+      "gap": 0.3615
+     },
+     "right": {
+      "px": 354,
+      "gap": 0.4545
+     }
+    },
+    "worst_side_gap": 0.3615,
+    "worst_side_bytes_255": 92.2,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.2213
+   }
+  },
+  "b_knob_on_skull": {
+   "pass12_shipped": {
+    "feature_px": 2857,
+    "ring_px": 604,
+    "feature_lum_mean": 0.6832,
+    "ring_lum_mean": 0.3257,
+    "gap": 0.3574,
+    "gap_bytes_255": 91.1,
+    "per_side_gap": {
+     "above": {
+      "px": 148,
+      "gap": 0.3853
+     },
+     "below": {
+      "px": 153,
+      "gap": 0.4631
+     },
+     "left": {
+      "px": 153,
+      "gap": 0.082
+     },
+     "right": {
+      "px": 150,
+      "gap": 0.5031
+     }
+    },
+    "worst_side_gap": 0.082,
+    "worst_side_bytes_255": 20.9,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.2328
+   },
+   "pass13_dark_plate": {
+    "feature_px": 2878,
+    "ring_px": 608,
+    "feature_lum_mean": 0.6779,
+    "ring_lum_mean": 0.1959,
+    "gap": 0.482,
+    "gap_bytes_255": 122.9,
+    "per_side_gap": {
+     "above": {
+      "px": 150,
+      "gap": 0.4569
+     },
+     "below": {
+      "px": 153,
+      "gap": 0.4579
+     },
+     "left": {
+      "px": 155,
+      "gap": 0.4088
+     },
+     "right": {
+      "px": 150,
+      "gap": 0.6071
+     }
+    },
+    "worst_side_gap": 0.4088,
+    "worst_side_bytes_255": 104.2,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.1908
+   },
+   "plate_alone": {
+    "feature_px": 2878,
+    "ring_px": 608,
+    "feature_lum_mean": 0.6779,
+    "ring_lum_mean": 0.1959,
+    "gap": 0.482,
+    "gap_bytes_255": 122.9,
+    "per_side_gap": {
+     "above": {
+      "px": 150,
+      "gap": 0.4569
+     },
+     "below": {
+      "px": 153,
+      "gap": 0.4579
+     },
+     "left": {
+      "px": 155,
+      "gap": 0.4088
+     },
+     "right": {
+      "px": 150,
+      "gap": 0.6071
+     }
+    },
+    "worst_side_gap": 0.4088,
+    "worst_side_bytes_255": 104.2,
+    "feature_lum_p50": 0.6951,
+    "ring_lum_p50": 0.1908
+   }
+  },
+  "b_plate_cost_in_front_view": {
+   "plate_front_px": 744,
+   "body_front_px": 245438,
+   "frac_of_body": 0.00303
+  },
+  "renders": {
+   "base_front.png": {
+    "opaque": 244872,
+    "border_alpha": 0.0
+   },
+   "base_probeknob_side.png": {
+    "opaque": 182107,
+    "border_alpha": 0.0
+   },
+   "base_probepegs_front.png": {
+    "opaque": 244872,
+    "border_alpha": 0.0
+   },
+   "base_side.png": {
+    "opaque": 182107,
+    "border_alpha": 0.0
+   },
+   "fixed_front.png": {
+    "opaque": 245438,
+    "border_alpha": 0.0
+   },
+   "fixed_probeknob_side.png": {
+    "opaque": 182343,
+    "border_alpha": 0.0
+   },
+   "fixed_probepegs_front.png": {
+    "opaque": 245438,
+    "border_alpha": 0.0
+   },
+   "fixed_side.png": {
+    "opaque": 182343,
+    "border_alpha": 0.0
+   },
+   "plateonly_side.png": {
+    "opaque": 182107,
+    "border_alpha": 0.0
+   },
+   "railonly_front.png": {
+    "opaque": 245123,
+    "border_alpha": 0.0
+   }
+  }
+ },
+ "probe_items": {
+  "base_probepegs": 4,
+  "base_probeknob": 2,
+  "fixed_probepegs": 4,
+  "fixed_probeknob": 2
+ },
+ "camera": {
+  "center": [
+   -0.1268,
+   -0.1134,
+   1.475
+  ],
+  "ortho": 3.481,
+  "locked": true
+ },
+ "bounds_base": [
+  [
+   -1.064055,
+   -0.707196,
+   0.0
+  ],
+  [
+   0.810448,
+   0.480472,
+   2.95
+  ]
+ ],
+ "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_ab_beadle_value\\_value_sheet.png",
+ "sheet_note": "top row COLOUR, bottom row the same four frames with CHROMA THROWN AWAY. cells left to right: a  pegs  BEFORE, a  pegs  AFTER, b  knob  BEFORE, b  knob  AFTER",
+ "blanks": [],
+ "frame_clips": [],
+ "worst_side": {
+  "a_before": 0.0698,
+  "a_after": 0.3615,
+  "b_before": 0.082,
+  "b_after": 0.4088
+ },
+ "verdict": "GREEN"
+}

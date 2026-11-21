@@ -895,6 +895,10 @@ function manaBar(h) {
 // v6 MINIBOSS KEY. The publisher sends the MB_NAME key ("" when none). It is attacker-
 // adjacent text, so only a plain snake_case token is accepted, and it is shown as text.
 function mbKey(v) { const k = typeof v === "string" ? v.trim().toLowerCase() : ""; return /^[a-z][a-z0-9_]{0,39}$/.test(k) ? k : ""; }
+// v6 MINIBOSS DISPLAY NAME. The key is the file name (trade word); the PLAYER's word is the MB_NAME
+// value ("Shacklemaw"), sent as parties[].miniboss_name. Letters/digits/space/'-.,  only, <=40 chars;
+// anything else (angle brackets included) is dropped. Shown as text only. A key with no name shows NOTHING.
+function mbName(v) { const n = typeof v === "string" ? v.replace(/\s+/g, " ").trim() : ""; return /^[\p{L}][\p{L}\p{N} '\-.,]{0,39}$/u.test(n) ? n : ""; }
 
 // The level + XP bar. Like HP, the snapshot has xp but no per-hero next-level
 // threshold, so it is forward-compatible: if the publisher adds xp_next /
@@ -1432,7 +1436,8 @@ function normalizeParties(raw) {
     .map((p) => ({
       name: firstStr(p.name, p.band, p.party, p.title).slice(0, 60),
       floor: (function () { const v = pickNum(p.floor, p.depth); return v != null && v >= 0 ? Math.round(v) : null; })(),
-      miniboss: mbKey(p.miniboss),
+      miniboss: mbKey(p.miniboss),              // key kept for matching only; NEVER displayed
+      minibossName: mbName(p.miniboss_name),    // the player-facing word; the chip shows this or nothing
       members: arr(p.members != null ? p.members : (p.roster != null ? p.roster : p.heroes))
         .filter((m) => m && typeof m === "object")
         .map(partyMember)
@@ -1490,7 +1495,7 @@ function partyCard(p) {
   nm.append(document.createTextNode(p.name || "A band"));           // viewer text: textContent
   head.append(nm);
   if (p.floor != null) head.append(el("span", "bandfloor", "Floor " + num(p.floor)));
-  if (p.miniboss) head.append(el("span", "bandboss", "Boss fight \u00b7 " + titleCase(p.miniboss)));   // v6: key charset-checked, text only
+  if (p.minibossName) head.append(el("span", "bandboss", "Boss fight \u00b7 " + p.minibossName));   // v6: display NAME only, charset-checked, text only; a bare key shows nothing
   const total = p.members.length;
   const fallen = p.members.filter((m) => m.status === "fallen").length;
   if (total) head.append(el("span", "bandmeta",
@@ -5019,9 +5024,10 @@ function withMock(p) {
       { name: "Brum the Cooper", class: "knight", level: 9, hp: 80, max_hp: 80, mana: 0, mana_max: 0, deepest: 12, gold: 540 },
     ];
     out.parties = [
-      { name: "The Salt Wolves", floor: 5, miniboss: "the_gaoler", members: [{ name: "Ysolde", class: "mage", hp: 30, max_hp: 44 }] },
-      { name: bad + " Band", floor: 3, miniboss: bad, members: [{ name: "Brum the Cooper", class: "knight", hp: 80, max_hp: 80 }] },
+      { name: "The Salt Wolves", floor: 5, miniboss: "the_gaoler", miniboss_name: "Shacklemaw", members: [{ name: "Ysolde", class: "mage", hp: 30, max_hp: 44 }] },
+      { name: bad + " Band", floor: 3, miniboss: bad, miniboss_name: bad, members: [{ name: "Brum the Cooper", class: "knight", hp: 80, max_hp: 80 }] },
       { name: "Quiet Band", floor: 2, miniboss: "", members: [] },
+      { name: "Key-Only Band", floor: 4, miniboss: "the_gaoler", members: [] },   // key, no name: must show NO chip
     ];
   }
   if (MOCK === "fallen") out.fallen = MOCK_FALLEN;

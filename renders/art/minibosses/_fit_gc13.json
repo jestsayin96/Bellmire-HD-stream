@@ -1,0 +1,288 @@
+{
+ "ok": true,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "greener": {
+   "creature_h": 2.5,
+   "hero_h": 2.45,
+   "ratio": 1.02,
+   "pair_w": 4.57,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 45857,
+      "vis": 45857,
+      "delta": 53348,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 51825,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 34475,
+      "vis": 34475,
+      "delta": 43245,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37765,
+      "vis": 37765,
+      "delta": 44330,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 44997,
+      "vis": 44997,
+      "delta": 53897,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 50825,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 253840,
+     "shadow_px": 4306,
+     "mean": 0.3812,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5082,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 256120,
+     "shadow_px": 4155,
+     "mean": 0.3608,
+     "max": 0.7107,
+     "error": null,
+     "rim_filled_px": 4890,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 253080,
+     "shadow_px": 4319,
+     "mean": 0.3865,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4994,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3
+  },
+  "dyer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.69,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 93582,
+      "vis": 93582,
+      "delta": 99972,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 53062,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 71132,
+      "vis": 71132,
+      "delta": 81723,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37795,
+      "vis": 37795,
+      "delta": 44145,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 88564,
+      "vis": 88564,
+      "delta": 98364,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44011,
+      "vis": 44011,
+      "delta": 50483,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 289560,
+     "shadow_px": 3342,
+     "mean": 0.4095,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4743,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 285000,
+     "shadow_px": 3658,
+     "mean": 0.3957,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 7099,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 288040,
+     "shadow_px": 3937,
+     "mean": 0.3835,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4375,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3
+  }
+ },
+ "errors": [],
+ "blind_views": [],
+ "seen_min": 0.15,
+ "vis_min": 700,
+ "min_proving": 2,
+ "unproved_cells": [],
+ "measured": [
+  "dyer"
+ ],
+ "asked": [
+  "dyer"
+ ],
+ "blank_check": {
+  "files": 3,
+  "failures": []
+ },
+ "verdict": "GREEN"
+}

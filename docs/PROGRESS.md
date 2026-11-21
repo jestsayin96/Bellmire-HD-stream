@@ -4038,3 +4038,11 @@ TAKE THIS NEXT (21:58 CT block) gave GAME BUILD: merge main first, then land S73
   42 / feed 44 - that is the chat bot's publish to make, not mine.
 - NEXT FIRING: the 44th, the PITMAN - MB_FIT 0.94 (art's register), crypt row, MB_NAME "Underfoot" (C-152 on main),
   STATIC body, footprint_span 3.10 m from _report.json (not the 2.85 m prose).
+
+## C-154 - 20 Nov 2026 23:3x CT (content): pool top-up (epitaphs +12, descend +12, cleared +12)
+TAKE THIS NEXT (22:58 CT block) gave CONTENT: C-154, pool top-up. No miniboss owed (44 feed rows, 44 bodies; the 44th's lines are C-152).
+- data/lore_lines.json: epitaphs 804->816, descend 493->505, cleared 478->490. Plain strings, plain register, no names, no mechanics, no floor counts.
+- `_note_c154` is nested under miniboss_feed beside _note_c150-152 (the nesting the plan asked for). Expected zero-hit key: DO NOT WIRE.
+- VALIDATION OK: json.load parses; every pre-existing key and every pre-existing list entry unchanged; no duplicates against existing pools.
+- Code wiring: none. Lines join the existing pools the game already draws from.
+Next content: C-155.

@@ -13677,3 +13677,9 @@ DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TOWNWALK in_solid=0/16786 (0.000%
 FOR THE QA TESTER (information, not a charge): townwalk DOES print a verdict - it simulates 120 s and took 3 min 59 s
 wall here (17:11:35 -> 17:15:34). A 100 s cap cannot reach it; ~300 s does. The chain is now 41 feed / 41 MB_NAME.
 No live Twitch test this cycle.
+C-148 (2026-11-20 17:3x CST, content) - NO 42nd BODY COMMITTED, STAND-DOWN ON ITEM 1; +39 DISASTER "during" LINES (backlog 2)
+Item: TAKE THIS NEXT 16:58 block, CONTENT row: "nothing owed on the 41st; if the 42nd lands, its feed rows are the row; otherwise keep writing."
+Measured: origin/art tools/art/minibosses.py base keys all have a `miniboss_feed.by_key` row (41/41); the only CANON keys without one are the chibi/tall variants of existing bodies. No new body, so no feed lines were owed or written.
+Added: data/lore_lines.json disasters.<kind>.during +3 on each of the 13 disasters (40 -> 43), plain register, no cost or mechanic text touched, plus nested `_note_variants_c148` (expected zero-hit).
+VALIDATION OK: json parses, file round-trips at indent 2, every pre-existing key byte-identical (during arrays only appended to).
+Code wiring: none. `during` arrays are already read per disaster; the extra lines are picked up as-is.

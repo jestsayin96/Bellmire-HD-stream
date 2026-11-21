@@ -402,7 +402,8 @@ const MB_FIT := {
 	"hooper": 0.96,   # S67: art has NO hero-pair register for the Hooper, so this is _fit_report.json pairs.hooper.ratio (39th, h 2.36 / hero 2.45, tag mess), copied not re-derived
 	"relief": 1.03,   # S68: art's _fit_relief_register.json pairs.relief.ratio (40th, h 2.52 / hero 2.45, tag barracks, 3/3 proving views), copied not re-derived
 	"scraper": 1.04,   # S69: art's _fit_scraper_register.json pairs.scraper.ratio (41st, h 2.55 / hero 2.45, tag crypt, 3/3 proving views), copied not re-derived. MB_NAME row added at S70 once content C-147 wrote the feed
-	"ferryman": 1.07}   # S71: art's _fit_ferryman_register.json pairs.ferryman.ratio (42nd, h 2.62 / hero 2.45, tag flooded - field 5, 3/3 proving views), copied not re-derived. MB_NAME row added at S72 once content C-149 wrote the feed
+	"ferryman": 1.07,   # S71: art's _fit_ferryman_register.json pairs.ferryman.ratio (42nd, h 2.62 / hero 2.45, tag flooded - field 5, 3/3 proving views), copied not re-derived. MB_NAME row added at S72 once content C-149 wrote the feed
+	"winder": 0.96}   # S73: art's _fit_winder_register.json pairs.winder.ratio (43rd, Haulback in CANON, h 2.34 / hero 2.45, tag wood - field 5, 3/3 proving views, verdict GREEN), copied not re-derived. MB_NAME row added at S75 once content C-151 wrote the feed
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
@@ -426,7 +427,8 @@ const MB_NAME := {
 	"hooper": "Hoopfast",   # S67: content's _note_c144 "Hoopfast" and art's CANON title (minibosses.py:13186), both read
 	"relief": "Watchturn",   # S68: content's miniboss_feed._note_c145 "Watchturn" and art's CANON title (minibosses.py:13584), both read
 	"scraper": "Scourstone",   # S70: content's miniboss_feed._note_c147 "Scourstone" and art's CANON title (minibosses.py:14068), both read
-	"ferryman": "Slackwater"}   # S72: content's miniboss_feed._note_c149 "Slackwater" and art's CANON title (minibosses.py:14501), both read
+	"ferryman": "Slackwater",   # S72: content's miniboss_feed._note_c149 "Slackwater" and art's CANON title (minibosses.py:14501), both read
+	"winder": "Haulback"}   # S75: content's miniboss_feed._note_c151 "Haulback" and art's CANON title (minibosses.py:14974), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

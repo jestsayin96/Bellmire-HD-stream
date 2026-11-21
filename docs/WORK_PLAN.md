@@ -1,3 +1,118 @@
+## TAKE THIS NEXT - THE 22:58 CT FIRING, 20 NOV 2026 (machine clock 22:59-23:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 BLOCK. ***
+## SIX BRANCHES WITH NEW WORK, SIX MERGED, FIVE TICKED. main is the six-lane merge 65698d88
+## plus this plan commit.
+##
+## *** MY OWN CORRECTION FIRST, AND IT IS TO THE 21:58 BLOCK'S OWN NUMBER. *** That block's B93
+##   row states "MB_NAME has 62 entries on main, laptop, chatbot, content AND on s73-wip". **THAT
+##   IS WRONG AND IT IS MINE.** I parsed the `const MB_NAME := {...}` block by brace-matching,
+##   stripped `#` comments, and then HAND-COUNTED the printed dict row by row: six rows of six
+##   (36) plus dauber, sealer, hooper, relief, scraper, ferryman, winder = **43 on the merged
+##   tree, 42 before S75**. 62 is a fiction - do not carry it forward. The same block's chain
+##   line ("42 MB_NAME") was correct for the hour it was written. 
+##   LESSON, THE SAME ONE THAT HAS NOW BITTEN THREE SEATS ON THIS ONE DICT: **COUNT MB_NAME BY
+##   BRACE-MATCHING AND THEN HAND-CHECK THE PRINTED ROWS.** A bare regex over the file counts
+##   MB_FIT's comment text, which names MB_NAME in six of its own rows.
+##
+## *** THE CHAIN, COUNTED BY ME ON THE MERGED TREE 65698d88:
+## *** 44 FEED ROWS / 44 BODIES ON DISK / 43 MB_NAME / 43 MB_FIT / 44 PUBLISHED.
+##   `pitman` is the ONLY key in `miniboss_feed.by_key` that is in neither MB_NAME nor MB_FIT;
+##   every by_key row has a `.glb`, and no `.glb` outside the 13 known `_chibi`/extra stems lacks
+##   a row. **AND THE PUBLISH HAS MADE THAT GAP VISIBLE TO VIEWERS THIS HOUR, SO NAME THE COST
+##   EXACTLY:** `pitman` IS live - content wrote its lines, so `_setpiece_miniboss` takes the
+##   branch - and it stands up on BOTH fallbacks at once. `miniboss_name()` falls back to
+##   `key.capitalize()`, so the Chronicle calls it **"Pitman"**, the trade word, which is the one
+##   thing Mr. E's 19 Nov naming directive says a viewer must never read; and `miniboss_ratio()`
+##   falls back to **1.0** against art's measured **0.94** (`_fit_pitman_register.json`,
+##   creature_h 2.30 / hero_h 2.45, three proving views, seen 1.0), so it stands about **6% too
+##   tall**. Neither fallback is a break - both are the specified behaviour - but both are
+##   READABLE ON STREAM NOW, which they were not before 22:51.
+##
+## TICKED THIS HOUR (five):
+##   - **S75** (game build) - the Winder, 43rd, landed WITH its name. MB_NAME `winder` =
+##     **Haulback**, MB_FIT `winder` = **0.96** (art's register, copied not re-derived), body on
+##     disk, content's C-151 feed row present. Counted on the merged tree by the method above.
+##     Batteries at the lock line: parse 0, TOWNWALK **PASS 0/16584** (the no-verdict that held
+##     this for two hours is gone), TWITCH_PARSE OK, S73_WINDER OK 13, OFFFLOOR OK 0 of 2360,
+##     DELVE_TEST OK. **The two-hour hold was the right call and it ended the right way.**
+##   - **B94** (chat bot) - published the miniboss count as **44**, not the 43 the plan named,
+##     because it counted content's feed rows instead of trusting my row. **IT WAS RIGHT AND I WAS
+##     WRONG**: by_key is 44. `data/commands.json` carries 44 in both the what and the short,
+##     `docs/COMMANDS.md` regenerated, COMMANDS_DOC OK 31 commands, both doc-drift checks green on
+##     the re-run after the generator. L14 now fails on ONE arm, MINIBOSS UNNAMED [pitman] - and
+##     `winder` drops off that arm the moment this merge lands, which it has.
+##   - **C-153** (content) - pool top-up. **I COUNTED EVERY ADDED LINE IN THE DIFF MYSELF:
+##     epitaphs +14, descend +10, cleared +10**, exactly as claimed. Plain register, no names, no
+##     mechanics, no floor counts. `_note_c153` is nested, not top-level.
+##   - **HUB - Fantasy_Ruins_Pack licence, CLEARED CC0 1.0, AND I REPRODUCED THE DECODE MYSELF.**
+##     The lane's claim is the hard kind to take on trust - a PDF with no plain-text strings - so I
+##     did it independently: inflated the five streams, pulled the ToUnicode CMap (**65 one-byte
+##     `beginbfchar` entries**, not the 4-hex-digit shape my first attempt assumed, which is why
+##     that attempt recovered nothing), and mapped the content streams through it. **12,248
+##     characters recovered**, opening "CC0 1.0 Universal / CREATIVE COMMONS CORPORATION IS NOT A
+##     LAW FIRM", containing "Statement of Purpose", "waive", "for any purpose whatsoever" and the
+##     grant "...for any purposes, including without limitation commercial purposes." **The file
+##     census reproduces to the digit**: 110 files, 39 jpg / 35 png / 12 dts / 12 dae / 11 cs /
+##     1 pdf - note dae is 9 lowercase + 3 uppercase `.DAE`, which the lane's table folded
+##     correctly. Commercial use permitted, no attribution required. Gate satisfied.
+##   - **U114** (HUD) - the Chronicle stack is measured with the font the Labels actually draw
+##     with (`_box.get_theme_font("font","Label")`, `ThemeDB.fallback_font` kept as the null
+##     guard) instead of the engine fallback the two disagree with at 100%. Three short claims,
+##     parse 0 errors on each, L74 burst frames at 100% and 125% x 1080/phone480. **AND I LOOKED
+##     AT `u114_s100_t600_1080.png` MYSELF** at full resolution: five lines on the vellum, the
+##     last line clear of the lower rail with real margin, nothing cut. I could not red-prove it -
+##     that needs Godot - so this tick rests on the code, the parse and the picture, and I say so.
+##
+## NOT TICKED, AND WHY:
+##   - **ART - EVEN LIGHT INSTALMENT 5. HALF DELIVERED, STILL OPEN, AND THAT IS THE RIGHT SHAPE.**
+##     It ships the ground-contact fix as a **measured** thing and kills its own obvious version
+##     with a render first: `Object.is_shadow_catcher` exists on Blender 5.2.3 so `hasattr` passes,
+##     **and BLENDER_EEVEE does not honour it** - catcher and plain-opaque rows identical to the
+##     digit - so the easy fix would have shipped a white slab. The shadow is two floor renders per
+##     view differenced instead, composited only where the beauty film is empty (**subject_px
+##     touched 0, all six views**). It also reports its own pass 1 as green-and-wrong twice. **IT
+##     IS DEFAULT OFF** (`--ground` / `MBFIT_GROUND=1`) and A/B'd on two bodies only, so no shipped
+##     file moved and 42 of 44 bodies are untouched. Adoption rewrites 132 files and art says
+##     itself it should land with the last 18 bodies. **Nothing to tick until it is adopted.**
+##     It also lands both corrections I gave instalment 4 (the 44-exclusion recipe now reproduces
+##     on origin/main; 43,8xx -> 43,78x). Those are closed.
+##   - **No publish verification was run and none was owed** - `origin/hub` carries no `web/`
+##     change this hour and made no readiness claim.
+##
+## THE SIX ROWS:
+##   - **GAME BUILD (:07) - S76: WIRE THE PITMAN, THE 44th.** It is the whole remaining gap and it
+##     is live on stream right now on two fallbacks (see the chain block above). Add `MB_FIT`
+##     `"pitman": 0.94` - **copy art's `renders/art/minibosses/_fit_pitman_register.json`
+##     `pairs.pitman.ratio`, do not re-derive it** - and `MB_NAME "pitman": <the proper name in
+##     content's `_note_c152` and art's CANON title in `tools/art/minibosses.py`, both read, as
+##     every row from S65 on has done>`. Content's row and art's body are both already on main, so
+##     the named condition is satisfied **before** you start. Then the usual battery.
+##   - **CONTENT (:22) - C-154, pool top-up, your own cycle.** No miniboss is owed: the 44th's
+##     lines are written and the next body does not exist yet. Keep the `_note_` key nested.
+##   - **ART (:34) - THE 45th BODY, and keep even light OFF.** Instalment 5 is sound and adoption
+##     waits for the last 18 bodies, as you said yourself. The two faults you named in your own
+##     pictures - **the dyer has no creature in its back view and the greener's man is one flat
+##     dark mass** - are still open and are the Beadle-facing fault a third time; they are yours
+##     and they are not a new item.
+##   - **HUB (:37) - NEXT PACK IN THE CATALOGUE.** The Fantasy_Ruins_Pack row is ticked and the
+##     "unreadable licence" flag in `docs/PACK_CATALOGUE.md` is superseded - make sure that flag is
+##     actually struck in that file, not only contradicted in ASSET_SOURCES.md.
+##   - **CHAT BOT (:45) - OWN CYCLE; DO NOT RE-PUBLISH.** 44 is correct and is now consistent with
+##     MB_NAME 43 + one documented fallback. L14's MINIBOSS UNNAMED [pitman] arm is **expected to
+##     stay red until the game build lands S76** - that is the hold working, not a defect. Do not
+##     write an arm that asserts pitman's absence.
+##   - **HUD (:52) - L74 remainder.** U113 and U114 are both ticked; say plainly in your next row
+##     whether L74 is now WHOLE or what is left of it, because two halves have been delivered and
+##     the plan cannot tell from here.
+##
+## FOR THE SUPERVISOR: **one item, and it is the publish.** `origin/gh-pages^{tree}` (9ca8051e)
+##   still does not equal `origin/hub:web` (02257b2f) - re-measured by me this hour. The delta is
+##   unchanged from the last two hours (the "Sells up to" tier-underline fix) and no new `web/`
+##   change landed this hour. **My recommendation is unchanged: it is a two-file cosmetic fix and
+##   it is safe to publish, but the call is yours and the hub lane has not re-claimed readiness.**
+##
+## NEEDS MR. E: nothing.
+##
 ## TAKE THIS NEXT - THE 21:58 CT FIRING, 20 NOV 2026 (machine clock 21:58-22:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 20:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, FOUR BRANCHES WITH NEW WORK, SIX MERGED, FOUR TICKED. main is the

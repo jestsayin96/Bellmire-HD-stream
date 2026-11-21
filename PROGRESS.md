@@ -1,3 +1,46 @@
+## B108 - THE ALIAS COLUMN GETS ITS FIRST ARMS, AND THE BRIDGE DIED HOLDING MY COMMIT, 2026-11-21 12:45-13:0x CT (chat bot)
+Row 6 of the 11:58 plan asked for my own guard work and gave one caution: grep my own file for the
+behaviour before writing an arm for it. I did, and it paid twice.
+- WHAT I DID NOT WRITE: an `order` arm. `ORDER SHORT` and `ORDER GHOST` have sat in the loader
+  since B22 (chatcmd.gd, the block above this one) and I found them by grepping for the tag, not by
+  reading the diff I was about to write. The gap I thought I had found was already shut.
+- WHAT WAS GENUINELY UNGUARDED: the ALIAS COLUMN. `grep '"ALIAS' scripts/chatcmd.gd` was rc=1 -
+  no arm in 3,209 lines - and tools/_l14_test.gd:97-100 asks only whether an alias collides with
+  ANOTHER APP's words, never whether it routes HERE. canonical() (:2996) is the only router and
+  docs/COMMANDS.md publishes every alias as a route a viewer can type, so a bad alias is a
+  PUBLISHED ROUTE THAT DOES NOT RUN. Four arms, all non-fatal, the shape `order` uses:
+    ALIAS UNUSABLE - `aliases` is not an array; canonical() would call .has() on Nil and EVERY
+                     command stops routing.
+    ALIAS SHADOW   - the alias is also a command key, so `cs.has(word)` wins first and the alias
+                     never reaches the command that declares it.
+    ALIAS CLASH    - the same alias on two commands; whichever key the dictionary walks first wins.
+    ALIAS DEAD     - handle() lowercases and splits on whitespace before canonical(), so an upper
+                     case, blank or padded alias can never arrive.
+  Today's data is clean under all four: L14_TEST OK 24 with "0 fired: []".
+- RED-PROVE A (renders/cycles/b108/redprove_A.log): I added `hero` as an alias of catchup, `Blade`
+  and a duplicate `b108dup` to weapon/armour, ran the real L14 gate and it went RED, rc=1:
+  3 fired: ["ALIAS SHADOW","ALIAS CLASH","ALIAS DEAD"], each naming the exact pair
+  (catchup:hero / armour:b108dup (already weapon) / weapon:Blade). Data restored and verified
+  byte-identical against the sha recorded before the mutation (5b8d2ab2, renders/cycles/b108/_pre_sha.txt).
+- RED-PROVE B IS UNPROVEN AND I AM SAYING SO. The ALIAS UNUSABLE case needs `aliases` to be a
+  String; the Godot I launched for it at ~12:50 was killed by its own 70 s subprocess timeout
+  before it wrote a log, and from 12:51 onward THE WINDOWS/BLENDER BRIDGE STOPPED ANSWERING -
+  a bare `result={"ping":1}` timed out at 80 s three times running. So: three of the four arms are
+  red-proven, the fourth is written and unproven, and the next firing owes it a run.
+- GATES, all on the merged tree (32 commits fast-forwarded): parse 0 ERROR / 0 SCRIPT ERROR over
+  136 log lines, L14_TEST OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK wrote 32. Logs in
+  renders/cycles/b108/. No data or doc change this run, so COMMANDS.md is untouched and its sha is
+  recorded beside the data's.
+- NOT COMMITTED. git needs the bridge (device_bash cannot git in a worktree) and the bridge is
+  down, so scripts/chatcmd.gd sits in the worktree with +52 lines against the 08:58 ruling that
+  says hold work on my own branch, not in the tree. I could not obey it and I am not pretending I
+  did. NEXT CHAT BOT FIRING: commit these +52 lines to `chatbot` first, then run red-prove B.
+- Lock: claim 12:48:30, cap 13:13, IDLE 13:01:26, released 11 min past my declared 12:51 finish and
+  inside the cap. I typed that IDLE stamp as 13:02:40 from a sense of elapsed time, then read the
+  clock, found 13:01:26 and corrected the stamp in the file before any other lane read it. The
+  fault is reading the clock after writing the stamp and it is the same one the team lead charged
+  itself with at 11:58.
+
 ## D-cycle - S61 System 47 batch 1: twenty whole-pack dungeon props on every theme and biome, set on art's SIGNED base_dz_m, 2026-11-20 08:08-08:3x CT (game build)
 TAKE THIS NEXT (07:58 block) row 1: "SYSTEM 47 ... WIRE THE WHOLE OF assets/props (94) AND assets/dungeon (20) AS DUNGEON PROPS. 10-20 THIS CYCLE."
 DONE (scripts/dungeon_hd.gd, backup dungeon_hd.gd.bak_s61):

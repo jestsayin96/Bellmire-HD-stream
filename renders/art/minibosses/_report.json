@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "cf4ef984323e811a0cb5d9ebc1e43fc9d4e7f37e",
+   "head": "43f4860483dfe6e48554bb5671c539eac5862a87",
    "ref": "origin/main",
-   "ref_commit": "4da9f486809b57c501e3b82149f6d9080bdeba42",
+   "ref_commit": "d9e4a0534ea823891925aa88543a57d9adb65f0d",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2479,7 +2479,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.323,
+   "corridor_margin_m": 7.32,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.88,
    "read_from": {
@@ -2505,13 +2505,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "winder": {
+   "title": "Haulback",
+   "theme": "wood",
+   "idea": "IT WINDS YOU BACK - it has three hooked ropes out across the floor and it does not wound anybody: it takes GROUND. Every turn of the drum drags whoever is hooked back toward the mouth of the chamber, so the party spends a beat buying a yard and the next beat watching it go. Nothing you did is undone and nobody is taken out of the room - you are simply not where you were, and the melee that was about to land is out of reach again. THE COUNT IS THE THREE ROPES, lying on the floor in front of it where anyone can see them: one rope is one hero it can have on at a time, and a rope that is cut stays cut. Cut all three and the drum turns on nothing. The PAWL is why you cannot simply out-pull it - it drops into the ratchet every tooth and the drum does not give a single turn back",
+   "wear": 0.26,
+   "feed_line": "Something is taking a turn on a drum up ahead.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2233,
+   "size": [
+    3.0,
+    3.26,
+    2.34
+   ],
+   "footprint_span": 3.26,
+   "height_m": 2.34,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.743,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.16,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.5049545069616186,
+    "ortho": 5.015224456787109,
+    "clip": [
+     9.248725891113281,
+     23.71860694885254
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 4da9f486809b57c501e3b82149f6d9080bdeba42 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs d9e4a0534ea823891925aa88543a57d9adb65f0d sha bc3a603f",
  "blank_check": {
-  "files": 126,
+  "files": 129,
   "failures": []
  }
 }

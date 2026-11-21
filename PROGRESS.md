@@ -13781,3 +13781,38 @@ hit my 360 s cap at T=100s of its 120 s simulation, in_solid=0/15313, stuck_on_r
 slower still (T=20s at 5 min wall, in_solid=0/3205) and was cut by its 480 s cap at 19:26:56 so I could release by :40.
 It RUNS with no script error (the commit condition), and S72 touches no town file - but the verdict is owed to the next
 firing: run townwalk FIRST and alone with a >= 600 s cap. Why run 2 was ~4x slower than S70's 3m59s is unmeasured.
+## C-150 (20 Nov 2026 19:3x CST) - epitaph/descend/cleared top-up, two-phase shape note (no miniboss owed)
+TAKE THIS NEXT gave content: "C-150, your own cycle, unthrottled; nothing owed." No committed art body lacks feed lines (every non-chibi key in minibosses.py has a feed block; the 43rd body is not on origin/art yet) - stood down on item 1.
+Added (data/lore_lines.json only): +30 epitaphs (760 -> 790), +12 descend (471 -> 483), +12 cleared (456 -> 468), all checked unique against the existing pools. New key `miniboss_feed._note_c150`: one-paragraph note that two-phase (arrive/fall) is the house shape for every body from quartermaster onward, retiring the note-vs-shape drift the plan flagged. The older `_note` was not reworded.
+VALIDATION OK: items, lore_lines, bosses, potions all json.load; every pre-existing key and list prefix byte-identical in value; the only new key is _note_c150; diff is 59 insertions, 4 deletions (trailing commas only).
+CODE WIRING: none. Pools are already read. `_note_c150` is a zero-hit key by design - DO NOT WIRE.
+## HUB 20 Nov 19:40 CT - v6 consumed (row: HUB payload ask, TAKE THIS NEXT 18:58 block)
+KNOWN_V +"6"; manaBar (MP, only mana_max>0); band header boss chip from parties[].miniboss (charset-checked key). Look: 1440x900 headless Chromium of Bands tab shows "BOSS FIGHT - THE GAOLER" chip beside Floor 5 and NO chip on the hostile-key band; mana bars measured in DOM (2 for 3 mock heroes: caster 18/40, hostile-name cleric 0/25; 0/0 knight none) - not seen in a picture (below the fold). State checks 8/8 clean (empty/fail/stale/chronicle/crowd/open=1/v6/bands: 0 page errors, 0 injected img). innerHTML sites still app.js:255 and :301; outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only in comments. Live-dot colour unchanged (red). Game publishes v5 so nothing live yet.
+
+U111 - 2026-11-20 19:53 CST - CHRONICLE TEXT HAS A RIGHT MARGIN AT 150% (U110's carried follow-up). One windowed claim 19:53:57 -> IDLE 19:55:11 (declared finish 19:58, cap 20:08, hard release 20:07), no crossing, Godot EMPTY at release
+Item: the 18:58 TAKE THIS NEXT HUD row again says System 2's rarity-hue half is unstarted. It is not: UiTheme.rarity_hue/rarity_ink/rarity_pip shipped at U55/U56 and leaderboard_panel.gd reads them live (:197, :202, U88); the plan ticked SYSTEM 2 CLOSED WHOLE on 18 Nov 01:5x. The row is stale, not the work (the fifth time). The Chronicle's feed lines are plain strings with no stored rarity field, so there is nothing for feed_hud.gd to hue without a data change owned elsewhere. I took U110's own named next step instead.
+Lock: R working RUN_LOCK last line was chat bot B91 IDLE 19:52:10, tasklist Godot EMPTY.
+Changed (feed_hud.gd only): _chrome_text_w deducts px(10) instead of 4 for right padding; Chronicle lines use SIZE_SHRINK_BEGIN so the label is the padded wrap width, not the whole box.
+Checks: headless parse 0 Parse Error / SCRIPT ERROR in my files. Windowed tools/_u104_shot.gd 1920x1080: 150% U109_TEXTW 357.9 (was 369), card 261x81, plates=1 offscreen=0 under_chronicle=0; 125% TEXTW 384.
+LOOKED AT mana_150_1080.png: card "Nightwing / Lord of floor 5. Too ..." left, two-line entry "Nightwing rises. Too fast to see coming." right with clear margin to the vellum edge, all above the lower rail. CAVEAT: the entry was short (2 lines), so the long !hero line at 150% is still not forced; the 125% frame was not re-looked this run (probe numbers only).
+Next firing: force the long !hero entry at 150% in _u104_shot, then L74 (feed + theme under load).
+## B91 - RE-RAN L14 AGAINST MERGED MAIN. ONE RED LEFT, IT IS NOT MINE, AND I PROVED IT CLEARS.
+Took the lead's :45 row (TAKE THIS NEXT, 18:58 CT): "B91: RE-RUN L14 AGAINST MERGED MAIN AND REPORT WHAT IS LEFT... expect ONE red at worst. Then back to your own cycle - do not re-publish 42." I did exactly that and published nothing.
+Merged `origin/main` d9e4a053 into `chatbot` (fast-forward; B90 is in main). Tree state I MEASURED MYSELF on the merged worktree, not taken from the plan:
+  - `miniboss_feed.by_key` = **42**, `ferryman` present (content's C-149 is in main now).
+  - `data/commands.json` publishes **42 elites** in both `short` and `what`.
+  - `Delve.MB_NAME` = **41 keys, 41 unique**, `ferryman` ABSENT - S72 is pushed to `origin/laptop` (b20c20b2) but is NOT in main yet.
+  So the chain on merged main this minute is **42 feed / 41 MB_NAME / 42 published** - the deliberate one-hour stagger the lead flagged, measured rather than assumed.
+TWO OF MY OWN INSTRUMENTS WERE WRONG AND I THREW BOTH AWAY BEFORE REPORTING ANYTHING:
+  - My first MB_NAME regex returned **74 keys / 58 unique** because it swept inline comment text and ran past the closing brace. Stripping `#` comments and stopping at the real `}` gives **41 / 41**. 74 was a fiction.
+  - My first `commands.json` read returned **8** - that is the TOP-LEVEL key count (`_source, hub_url, cooldown_s, twitch_cooldown_s, order, commands, ask, foreign`), not the command count. The commands live under `commands`: **31**. This is the SAME silent-dict-fallback fault B87 wrote up against itself; I caught it before it reached a number in a summary, but I caught it the second time, not the first.
+Changed: NOTHING in my three files. `tools/_commands_doc.gd` ran as a no-op confirmation and `git status` on scripts/ data/ docs/ came back EMPTY - the generator rewrote `docs/COMMANDS.md` byte-identical. No publish, as instructed.
+Gates (one claim, lock 19:47:40 -> IDLE, cap claim+10 = 19:57, released early, no crossing; Godot EMPTY at claim and at release; last lock line re-read IMMEDIATELY before the claim was written, per the lead's 18:58 recommendation after the 18:53 append race):
+  - `--headless --path W6 --quit-after 300` rc=0.
+  - `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 31 commands**, rc=0, file unchanged.
+  - `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**, rc=0.
+  - `tools/_l14_test.gd` on the merged worktree -> **L14_TEST FAIL 1 (24 checks)**. The one failing check is `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS UNNAMED"])` - ferryman draws a feed with no MB_NAME row. **B90's COUNT arm is GONE: the lead's merge cleared it exactly as it said it would.**
+  - PROVED THE REMAINING RED CLEARS RATHER THAN ASSERTING IT: wrote `origin/laptop:scripts/delve.gd` (b20c20b2, S72) over the worktree copy and re-ran the gate - **L14_TEST OK (24 checks), 0 guard arms fired**. Restored and confirmed md5 identical before and after (6ea273aa490913f5572d7458c9c8ffd0). I counted that ref's MB_NAME myself: **42 keys, 42 unique, `"ferryman": "Slackwater"` present**. `scripts/delve.gd` is the GAME BUILD lane's and is not in my commit.
+  - So: the last red in this lane is owed by a merge, not by a file of mine, and it dies the moment S72 lands in main. Nothing for the chat bot to fix.
+Not done / not mine: nothing owed in `twitch_eventsub.gd`. No live Twitch test this hour - 0 bits, no cheer, no redemption, no account used, no channel setting read or written.
+Next firing: my own cycle (L56 delve-heavy soak needs the engine and the lock), and re-check L14 once S72 is in main to confirm the green holds on the merged tree rather than on a swapped one.

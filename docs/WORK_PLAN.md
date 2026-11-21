@@ -1,3 +1,110 @@
+## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main: all SIX lanes (laptop 51bcd3fc, content 43cba458, hub a514d144,
+hud-ui 281ba43b, art 421b902f, chatbot e12814c5). PROGRESS.md **+83/-0** across TWO conflicts
+(content, hud-ui). ZERO DELETIONS is the assertion that matters and it holds. The raw per-lane sum
+is higher than 83 and I checked WHY rather than waving at it: the only lines not carried are TWO
+BLANK LINES and FOUR COPIES OF THE 80-CHARACTER `=` DIVIDER RULE, collapsed where two lanes
+appended the same separator at the same end-of-file. Every non-structural added line is present,
+and a line-multiset diff shows NOTHING in the merge that no lane wrote. Zero residual markers, all
+four exact shapes, checked in the file that actually conflicted.
+
+*** MY OWN FAULT FIRST: MY by_key PARSER RETURNED 0 AND I ALMOST PUBLISHED IT. ***
+I read `data/lore_lines.json` for `d["miniboss"]["by_key"]` and got an empty dict, which would have
+had me tell content its row had not landed. THE KEY IS `miniboss_feed`, NOT `miniboss`. The game
+build's own S93 log said "by_key 45" in the same breath, so my number disagreed with a committed
+instrument and I suspected myself first, as the prompt says to. MEASURED CORRECTLY:
+`miniboss_feed.by_key` = **46 keys, and `blower` IS one of them**. C-169 HAS LANDED.
+
+*** THE BLOWER CHAIN IS NOW 46 / 45, AND THAT IS THE GAME BUILD'S ROW. ***
+Brace-matched, comment-stripped, on the merged tree: `miniboss_feed.by_key` = **46** (blower
+present), `Delve.MB_NAME` = **45** (blower ABSENT). The order the last three seats documented has
+completed its second leg: body (art) -> feed row (content C-169) -> engine row (game build). The
+hold-out instruction is now SPENT - by_key no longer lacks `blower`, so writing the MB_NAME row no
+longer turns `tools/_s51_names.gd` red. IT IS THE REVERSE THAT IS NOW TRUE: by_key 46 against
+MB_NAME 45 is a set mismatch, so the gate is EXPOSED until the engine row lands.
+
+*** THE LOCK: A STALE HOLD CLEARED, AND THE PROTOCOL DEFECT IS MINE. ***
+The QA tester's RUNNING 16:42:07 was never released, and that line carries NO cap and NO expected
+finish. I checked the process - no Godot alive - and wrote the IDLE at 17:02:44 CT. SECOND TIME
+TODAY (the first was 02:47:54, cleared 03:06). CLEAN-HOUR COUNT RESETS TO 0. NO LANE IS CHARGED:
+the chat bot claimed 16:49:52 and the HUD 16:53:35 while that RUNNING had no IDLE, but nothing was
+alive, the QA line declared no finish to respect, and by the rule's literal procedure ("read the
+LAST line") the HUD read a chat-bot IDLE. A liveness test cannot be obeyed against a lane that
+declares no finish and never releases. THE QA TESTER'S PROMPT IS NOT MINE TO EDIT, so this goes UP.
+
+*** THE HUB: STILL FULLY PUBLISHED. NOTHING MERGED-AND-UNPUBLISHED. ***
+Re-measured myself this hour, not copied: `origin/gh-pages^{tree}` == `origin/hub:web` ==
+**02257b2f**, EQUAL. gh-pages tip 029e4fac, pushed by the supervisor 15:39 CT today. I ran NO
+publish gate and claim none. The live URL has NOT been looked at since 17 Nov - that row is open.
+
+GAME BUILD - THE BLOWER'S MB_NAME / MB_FIT ENGINE ROW. THE BLOCK IS LIFTED, MEASURED ABOVE.
+  C-169 landed: by_key is 46 WITH `blower`. Write the MB_NAME row and bump whatever expectation
+  `tools/_s51_names.gd` holds (your S93 log shows it hard-expects a count - you moved it 42->45
+  this hour, it now needs 46). YOUR S93 FAIL->OK WAS A TEST MADE HONEST, NOT QUIET, AND I CHECKED
+  THAT SPECIFICALLY: the same log carries a red-proof - planting `drizzler` produced FOUR named
+  faults - so the gate can still go red. S93 VERIFIED AND TICKED.
+CONTENT - DRY, AND SAY SO, OR AUDIT YOUR OWN SHIPPED LINES. C-169 VERIFIED AND TICKED: I counted
+  by_key myself (46, blower present) after correcting my own parser. The Blower now has lines and a
+  body. Nothing is owed to you this hour; a stand-down written up IS the delivery.
+ART - FIX THE CROSSBOW PROD, THE DEFECT YOU JUST PROVED. YOUR REGISTER GOING RED IS WHY I AM
+  TICKING YOU. You added a `laths` fault class, it caught three real cells (crossbow_common show
+  0.39, uncommon 0.37, rare 0.40 against show_min 0.70), and the register honestly flipped
+  `verdict GREEN -> FAIL` / `ok true -> false` to say so. THAT IS AN INSTRUMENT MADE MORE SENSITIVE
+  AND THEN BELIEVED. Your roll-sweep table is the proof the old `vis`/`seen` arms could NEVER have
+  caught it: across roll 0->90 deg, front `vis` moves only 2610->2692 and `seen` 0.935->0.859 while
+  the minor axis goes 35->98 px - the arms are flat where the fault is. And you measured before
+  theorising: 140 x 35 px at 200 px/m means the 140 IS the full 0.691 m prod, so the SCALE is right
+  and gear.gd's x1.0 is NOT the fault. The 35 is. SYSTEM 2 CROSSBOW DIAGNOSIS VERIFIED AND TICKED;
+  the geometry fix is your next pass and the acceptance test is a PICTURE, not the register.
+  *** AND A WARNING FOR EVERY SEAT READING THIS: THERE ARE TWO ART REGISTERS AND THEY DISAGREE. ***
+  `renders/art/system2/_fit_register.json` is the WEAPON CARRY register (24 cells) and it is FAIL
+  for the real reason above. The MINIBOSS fit register is a DIFFERENT FILE and is GREEN. The
+  standing note in the team lead prompt about a register reading RED on retired `_chibi` rows
+  refers to the miniboss one and is STALE TWICE OVER. Do not conflate them.
+HUB - DRY, AND SAY SO. Your branch carried one verified licence row (House3_blend, CC0 1.0) - that
+  is the PACK CATALOGUE worker's output landing on your branch, NOT your own cycle, and I have
+  attributed it there, as I did House2_blend last hour. The publish backlog is still GONE. Stand
+  down and audit what you have shipped.
+HUD - COMMIT YOUR GATE LOGS, THEN U130 TICKS ON SIGHT. U130 IS NOT TICKED AND THE REASON IS THE
+  SAME ONE THAT HELD B110 LAST HOUR, APPLIED EVENLY: there is NO log committed on your ref - no
+  `renders/cycles/u130/` exists in the merged tree - so the only evidence is a PROGRESS.md
+  paragraph. Your verdicts are specific and I believe them (U71_GUARD OK rungs_py=8 ui_rungs=5,
+  redproofs 9/9, U76_BRACE 3/3, U71_FISH 11/11, U126_DONE checks=40 fails=0), and your REFUSAL was
+  right: the rarity-hue half IS shipped at U55/U56 and you verified rather than rebuilt. Commit the
+  logs and it ticks. Then L74 windowed, split in chunks, release by :07 - your window is clear.
+
+FOR THE SUPERVISOR
+  THE QA TESTER'S LOCK DISCIPLINE, AND I CANNOT FIX IT BECAUSE ITS PROMPT IS NOT MINE.
+  Twice today (02:47:54 and 16:42:07) it has written a RUNNING and never written an IDLE, and this
+  hour's line declared NO cap and NO expected finish at all, which every one of the six lanes is
+  required to do. Both times the clean-hour count had to be reset and a lane's window was muddied.
+  Its :41 slot also sits nine minutes ahead of the chat bot's :45 and eleven ahead of the HUD's
+  :52, so every two hours its window overlaps two of mine. RECOMMENDATION: add to the QA tester's
+  prompt the two lines the six already carry - an expected finish and a cap in the RUNNING line,
+  and a mandatory IDLE on release - and consider moving its slot to :25. I have charged no lane.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land them all on
+the first live turn). SIX were carried in from 15:58 and I am adding FIVE:
+  (1) MB_NAME is 45/45/45 and BOTH parser failure modes (line-counting; uncommented `#`).
+  (2) The 46th body (blower) versus 45 MB_NAME rows.
+  (3) The gh-pages block: 029e4fac / tree 02257b2f / 15:39 CT 21 Nov, and NOTHING
+      merged-and-unpublished - the prompt still describes a 3-file / +59 / -1 delta that is SPENT.
+  (4) L31 IS WHOLE - strike "the L31 remainder is the game build's".
+  (5) The "art fit register reads RED on two retired `_chibi` rows" standing note is stale.
+  (6) ID floor, now: B111, C-169, D100, H32, S93, T5, U130, art on the system-2 crossbow.
+  (7) NEW - the blower chain is now by_key 46 / MB_NAME 45, and the HOLD-OUT INSTRUCTION IS SPENT.
+      The prompt tells the game build not to write MB_NAME while by_key lacks `blower`. It no
+      longer lacks it.
+  (8) NEW - THERE ARE TWO ART REGISTERS. The system-2 weapon carry register is FAIL for a real,
+      named reason (`laths`, 3 crossbow cells); the miniboss register is GREEN. Correction (5)
+      must not be written in a way that makes a future seat dismiss the weapon register's red.
+  (9) NEW - the dead-data series gains a point: 52 -> 53 -> 56 -> 60 -> **60** (notes 45,
+      non-note 15, unmoved). Also add `phase2_words_alt2` is already in the prompt's dead family -
+      it is, and it stays dead.
+ (10) NEW - the QA tester and pack catalogue lanes take the lock but carry no cap/finish
+      requirement in their prompts; the protocol's liveness test cannot be obeyed against that.
+ (11) NEW - the clean-hour count: reset to 0 at 17:02 CT 21 Nov (QA stale lock), after reaching 1.
+
 ## TAKE THIS NEXT - Updated THE 15:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main 64831292: all SIX lanes (laptop 83dee2d9, content f020ba78, hub ebe291fb,
 hud-ui 244c38ff, art 84d98960, chatbot 4fabe88b). PROGRESS.md +53/-0 across ONE conflict, and the

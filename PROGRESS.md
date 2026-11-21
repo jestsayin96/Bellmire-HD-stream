@@ -14520,3 +14520,62 @@ alive by `tasklist` before I claimed. Claimed 07:52:30, released inside my decla
 launches the whole project, so its log shows the headless game joining `#jestsayin96` and a token
 refresh - that is every lane's parse run, not a test. The bot posted nothing.
 Next firing: own cycle.
+
+## B104 - 21 Nov 08:45 CT - THE ONE TILL MY OWN AWAY GATE NEVER COVERED, AND A STAND-DOWN THAT
+## COST NOBODY A WINDOW. **HELD UNGATED ON `b104-wip`. DO NOT TICK, DO NOT MERGE.**
+
+**I DID NOT CLAIM THE LOCK AND THAT WAS THE RIGHT CALL, NOT A MISS.** The last line of
+`docs/RUN_LOCK.txt` reads `RUNNING 2026-11-21T08:42:23-06:00 (QA tester, ... cap claim+15)` with
+**no `IDLE` from that lane after it**, so the QA tester holds the window. `tasklist` showed **no
+Godot of any name alive at 08:47:52 CT**, and I am saying plainly that this did NOT make the hold
+stale and I did not clear it: the line was **five minutes old**, which is a lane between
+batteries, exactly the case B4 was right to walk away from. Beyond that, the 07:58 plan told this
+lane to **claim by :50 with a finish inside :52 or split the gates**; by the time the QA cap
+expires (08:57) the HUD's :52-:07 window is live. **So the gates are split off and carried to the
+09:45 firing, and the HUD keeps a cycle this lane has taken from it twice.**
+
+**THE DEFECT, AND IT IS MINE.** `handle()` refuses a shop command while a hero is on the scar road
+or below it. That list was a bare literal and **`oil` was never in it**: `!oil` reached
+`Roster.buy_oil`, which rolls `haggle()` and spends gold, so **a hero standing in the dark bought
+flasks at a counter in town** while `!forge`, `!armoury`, `!brew`, `!wear` and `!dye` all refused
+with where that hero was. Nothing published the gate, so nothing could contradict it - a hole in a
+promise kept only in code is silent by nature. `delve.gd:78` pools each hero's oil **at the
+descend and zeroes `h["oil"]`**, so this was never a live top-up of a party's lamp (I checked
+before writing it up, and it is a smaller fault than it first looked): the flasks sat on an absent
+hero for the next delve. The charge, the haggle line and the refusal that never came are real.
+
+**THE FIX AND THE NEW ARM.** The list is now `const AWAY_COUNTERS` with `oil` in it, and a new
+guard holds it to **the engine's own authority rather than to my taste**: `haggle()` IS the
+counter, and the functions that call it in `scripts/roster.gd` are the set of tills the game
+actually has. The arm reads that file, tracks the enclosing `func`, **drops everything after a
+`#`** (so `kit_up_after_delve`, which mentions `haggle()` only in a comment, is correctly not
+collected) and holds every call site to `AWAY_COUNTERS`:
+- `COUNTER AWAY` - a haggled till whose command is not gated.
+- `COUNTER UNKNOWN` - a till this guard's func -> command map has never heard of, i.e. a new shop.
+- `COUNTER AWAY ANCHOR` - `roster.gd` unreadable, or not one `haggle()` call left in it.
+
+**PREDICTED, NOT MEASURED - AND IT IS A PYTHON EMULATION OF MY OWN GDSCRIPT, AWAITING THE REAL
+GATE.** Walking the same scan in python over the real `scripts/roster.gd` collects seven tills -
+`buy_weapon, buy_armour, buy_potion, buy_oil, buy_brew, wear, dye` - **0 unknown, 0 ungated with
+the fix in**. **The red half is the state `main` is in right now**: with `oil` taken back out of
+my own const, the arm raises exactly `buy_oil -> !oil` and nothing else. **That half was proven by
+perturbing MY OWN file and nothing else** - no `roster.gd` or `gear.gd` edit, the limit B103
+reported and that still stands for the two `AUTHORITY` arms.
+
+**NOTHING ELSE MOVED.** `data/commands.json` and `docs/COMMANDS.md` are **untouched this cycle**
+(`md5 c2bd481b…` / `4f9e19e5…`), so the generator has nothing to rewrite and no doc drift exists
+to fix. Drift scanned both directions off the dispatch table: **32 entries, 32 answered, 0 entries
+with no command**; the only code verbs with no entry are `testbits` / `testsub` / `testpoints`,
+which are local-only by design and deliberately unpublished. The 7 published aliases that are not
+dispatch cases (`armor, commands, sheet, spotlight, stats, steel, watch`) are **not drift** -
+`canonical()` maps every alias to its key before the `match`, and I checked that rather than
+counting them as faults. `armory` is kept as a literal in the const for the one path where
+`canonical()` is blind: if `data/commands.json` ever fails to parse, the alias arrives verbatim.
+
+**STILL OWED, UNCHANGED FROM B103:** `--headless` parse, `_l14_test`, `_twitch_parse`,
+`_commands_doc`. **None of them has run against this edit.** This is a checkpoint commit on
+`b104-wip`, not a delivery on `chatbot`.
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE SENT ON ANY ACCOUNT.** No Godot was
+launched at all, so not even a headless join happened. The bot posted nothing.
+Next firing: claim the :45 window early, run the four gates on this edit, and only then land it.

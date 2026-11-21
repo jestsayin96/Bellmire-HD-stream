@@ -27,6 +27,11 @@ const WEAPONS := [
     # L3: never forged in Bellmire - only ever found below, grown in the scar's wild magic
     {"name": "scarforged", "cost": 0, "atk": 34, "scale": 1.3, "glow": 1.3, "found": true, "dice": [2, 8]},
 ]
+## S87 WRITE-DOWN (B103's ask, closed): this ARMOUR copy is NOT read by any game path. The till is
+## Roster.ARMOUR (roster.gd:183, Roster.buy_armour) and so are hp/ac (roster.gd:337/:368). Its ONLY reader is
+## chatcmd.gd's ARMOURY drift arm (:2744), which compares it to Roster.ARMOUR - so it is KEPT as that
+## arm's second authority, not deleted. Gear.WEAPONS differs: town.gd:4571 dresses the smithy stall from it.
+## Do not wire a shop or a stat to this table; change prices in roster.gd and mirror them here.
 const ARMOUR := [
     {"name": "rags", "cost": 0, "hp": 0, "ac": 0},
     {"name": "leather", "cost": 50, "hp": 10, "ac": 1},

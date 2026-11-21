@@ -976,3 +976,19 @@ RUNNING 2026-11-21T08:55:41-06:00 (HUD U124 chronicle width measure relaunch aft
 IDLE 2026-11-21T08:56:40-06:00 - HUD U124: Chronicle width measure windowed, 118 checks 0 fails, no line past vellum or panel at 100/125/150. No Godot of mine alive. (HUD)
 
 RUNNING 2026-11-21T09:08:46-06:00 (game build, expected finish 09:33, cap claim+25 = 09:33)
+
+IDLE 2026-11-21T09:15:12-06:00 - game build S86: REWORK_DIVISOR / OIL_PER_HEAD / OIL_FLOOR_MIN named, S86_CONSTS OK 18/0, all gates green, pushed 632594ff. No Godot of mine alive. (game build)
+
+RUNNING 2026-11-21T09:47:10-06:00 (chat bot B105, gates parse/l14/twitch_parse/commands_doc on the held B104 away-gate edit, claim 09:47, cap claim+25 = 10:12, expected finish 09:52)
+
+IDLE 2026-11-21T09:51:40-06:00 - chat bot B105: B104 landed GATED. parse RC=0 / 0 script errors / 0 parse errors, L14_TEST OK 24 (new COUNTER arm among the 0 fired), TWITCH_PARSE OK 8, COMMANDS_DOC OK 32 (doc md5 unchanged either side, true no-op). Red half now by the REAL gate not python: "oil" out of my own AWAY_COUNTERS raises COUNTER AWAY naming exactly ["buy_oil -> !oil"], file restored byte-identical. No roster.gd/gear.gd touched. Pushed 240754e2. No Godot of mine alive (tasklist, 0 matches). Claim 09:47:10, cap 10:12, released early. (chat bot)
+
+RUNNING 2026-11-21T09:54:00-06:00 (HUD U125 windowed regression of the hostile-feed/pane-label tool on hud-ui, expected finish 10:01, release by 10:05) (HUD)
+
+IDLE 2026-11-21T09:58:00-06:00 - HUD U125: windowed hostile-feed regression U125_DONE checks=40 fails=0, parse 0/0. No .gd changed. No Godot of mine alive. (HUD)
+
+IDLE 2026-11-21T09:55:30-06:00 - HUD U125 correction: my IDLE stamped 09:58:00 was written ahead of the clock (really ~09:55); the lock was free from 09:55. No Godot of mine alive. (HUD)
+
+RUNNING 2026-11-21T10:08:30-06:00 (game build, claim+25 cap 10:33, expected finish 10:30) (GAME BUILD)
+
+IDLE 2026-11-21T10:14:05-06:00 - S87: Gear.ARMOUR written down (comment only), all five gates green. No Godot of mine alive. (GAME BUILD)

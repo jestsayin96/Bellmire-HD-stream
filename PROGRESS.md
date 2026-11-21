@@ -14986,3 +14986,9 @@ NOT LOOKED AT A PICTURE: nothing visual changed (two comments, one gate, one imp
 rendering a shot of nothing.
 FOR ART/LEAD: tither.glb was pushed without its .import. Other trees that have not run --import will see the same
 "no loadable body" until this commit merges. The blower (46th) is still on no ref.
+## C-168 (21 Nov 2026 14:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (13:58 CT block, row 2 CONTENT) gave content: "nothing owed. Keep producing and KEEP WRITING `_note_` keys." Blower/Deadair (46th) feed row still NOT owed: no blower body in any commit on origin/art (git grep), so standing down on it.
+Added (data/lore_lines.json only): epitaphs +12 (948 -> 960), descend +6 (571 -> 577), cleared +6 (556 -> 562), all unique against every string in the file, ASCII, plain register, no mechanics, no floor counts; `_note_c168` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c168` only. items/bosses/potions untouched and parse.
+CODE WIRING: none; the three lists are already drawn from at random.
+Next content: C-169.

@@ -149,6 +149,38 @@
 ##   which is AFTER the chat bot's IDLE, which is the rule working. The two touching lanes did what
 ##   I recommended last hour without being told to.
 
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 17:58 BLOCK AND
+## CARRIES ITS ITEMS FORWARD. I DID NOT ATTEMPT A WRITE THIS HOUR - the gate is settled ON THE
+## CALL (a no-op `enabled=true` was refused identically on 18 Nov), so a fifth test buys nothing.
+##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It names gh-pages `45a7904` with a
+##      2-file / 19-line unpublished delta. MEASURED MYSELF THIS HOUR: gh-pages is **05ac2679**
+##      (pushed 19 Nov 20:06:59 CT), `origin/gh-pages^{tree}` is `9ca8051e` and `origin/hub:web`
+##      is `ee0375df`, and the real unpublished delta is **3 files / 51 lines** - the v6
+##      consumption. Replace the paragraph with its one durable sentence: RE-MEASURE BOTH TREES
+##      EVERY HOUR. (The 17:58 list recorded the delta as ZERO; that was true then and the hub has
+##      shipped since. The numbers go stale by the hour; only the instruction keeps.)
+##   b. **ALL NINE PROMPTS - THE FLEET IS NINE TASKS.** The ':07 game build | :22 content | :34 art
+##      | :37 hub | :45 chat bot | :52 HUD | :58 you' line still omits the :15 pack catalogue and
+##      the :41 QA tester. Every lane's lock protocol must name the QA tester, which claims at :41.
+##   c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** 'thirty-three exist as of 18 Nov' is TEN
+##      short: **43 bodies** as of 20:01 CT on 20 Nov. Keep the sentence that says to MEASURE and
+##      drop the number, and name the instrument: `_report.json` non-chibi entries (43, with
+##      `blank_check` 129 files / 0 failures = 43 x 3), **NOT** a regex over `minibosses.py` - mine
+##      returned 4 this hour and an earlier seat's returned 0 and 46.
+##   d. **ALL NINE PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and
+##      is PER SESSION. Every prompt should say: run `ls $HOME/mnt/` FIRST and use what it prints.
+##   e. **THIS PROMPT (:58) - THE DEAD-DATA BASELINE.** Measured this hour on the merged tree:
+##      **2,293,550 chars, 48 files, 12 data files, 137 top-level keys, 47 zero-hit** (32 `_note_`,
+##      2 runtime-built `_alt` READ, 4 declared-dead, 9 prose/spec), unread live keys ZERO,
+##      unreferenced asset directories ZERO. Copy the audit block above into the prompt.
+##   f. **THIS PROMPT (:58) - THE GIT-IN-THE-LINUX-BRIDGE WARNING SHOULD NAME READS TOO.** The
+##      prompt warns that device_bash git leaves .lock files on writes. It should also say that a
+##      READ through that bridge can come back EMPTY AND rc-clean: `git show <sha>:data/...` gave
+##      me an empty string this hour and my arithmetic silently reported the whole file as new.
+##      Read blobs through the Blender bridge, and assert the length before you compute on it.
+#### NEEDS MR. E: nothing.
 ## TAKE THIS NEXT - THE 18:58 CT FIRING, 20 NOV 2026 (machine clock 18:58-19:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 17:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SIX TICKED. main is 178c489c.

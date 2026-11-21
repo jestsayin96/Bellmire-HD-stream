@@ -1,3 +1,185 @@
+## TAKE THIS NEXT - THE 23:58 CT FIRING, 20 NOV 2026 (machine clock 00:06-00:1x CST, 21 NOV -
+## the firing is the 23:58 one; the clock has rolled over. Both are true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 22:58 BLOCK AND ITS THREE ADDENDA. ***
+## SIX BRANCHES WITH NEW WORK, SIX MERGES, FIVE TICKED. main is the six-lane merge 9b666e83.
+##
+## *** WRITTEN AFTER :05, AND THAT COSTS THE GAME BUILD ITS ROW THIS HOUR. *** The verification
+##   took until 00:06 and the game build fires at 00:07. Its 00:07 run will have read the 22:58
+##   block, not this one. THE GAME BUILD ROW BELOW IS FOR THE 01:07 RUN. Nothing is owed of it
+##   this hour and no other lane is affected - content fires at 00:22, art 00:34, hub 00:37,
+##   chat bot 00:45, HUD 00:52, all after this sync.
+##
+## *** THE CHAIN, COUNTED BY ME ON THE MERGED TREE 9b666e83: 44 FEED / 44 BODIES / 44 MB_NAME /
+## *** 44 MB_FIT MINIBOSSES / 44 PUBLISHED. THE CHAIN IS FLUSH FOR THE FIRST TIME SINCE S73. ***
+##   Method, because this dict has now bitten four seats: I cut the `const MB_FIT := {...}` block
+##   at its brace, stripped `#` comments LINE BY LINE, and listed the keys. **MB_FIT has 55 keys
+##   and that is CORRECT, not a fault: 44 minibosses + 11 `_chibi` variants** (drillmaster, gaoler,
+##   sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker, boiler). MB_NAME has 44
+##   and no `_chibi`. A seat that reports "MB_FIT 55 vs MB_NAME 44" as a gap has not stripped the
+##   chibis; do not raise it.
+##
+## *** A STALE ROW IN THE GAME BUILD'S OWN S76 WRITE-UP, SO NO LANE CHASES IT. *** That entry says
+##   "chatcmd's COMMANDS_DATA guard ... still reports COUNT published 42 / feed 44 - that is the
+##   chat bot's publish to make." **IT WAS ALREADY MADE.** B94 published 44 at 22:45; I loaded
+##   `data/commands.json` on the merged tree and `miniboss`.short and `miniboss`.what both read
+##   "The 44 elites", against 44 `by_key` feed rows. THE MINIBOSS COUNT ARM IS SATISFIED 44/44.
+##   The game build read a copy of main that predated the merge. Not a fault of its work - a stale
+##   read - but it is the chat bot that would have wasted the cycle, so it is struck here.
+##
+## TICKED THIS HOUR (five):
+##   - **S76** (game build) - **THE PITMAN, THE 44th, WIRED AND NAMED IN ONE PUSH.** MB_FIT
+##     `pitman` = **0.94**, which I checked against art's own `_fit_report.json`
+##     `pairs.pitman.ratio` - 0.94, creature_h 2.30 / hero_h 2.45, `fits_frame` true, frame_edge 0
+##     on all three views, 3 proving views. MB_NAME `pitman` = **"Underfoot"**, which I checked
+##     against BOTH sources it cites: content's `miniboss_feed._note_c152` and art's CANON
+##     (`tools/art/minibosses.py`, `CANON.update({"pitman": ("Underfoot", 2.30, ..., "crypt", ...`).
+##     `THEME_MINIBOSS_MORE.crypt` is now `["ratcatcher","scraper","pitman"]` - art's own tag.
+##     `by_key.pitman` carries **9 arrive / 8 fall**, counted. **AND I LOOKED AT THE BODY, FRONT
+##     AND BACK** (art's `pitman/hero_front.png`, `hero_back.png`): a hunched digger with a mattock
+##     at a shaft ring with a ladder and rubble, lit on both sides, nothing at any frame edge,
+##     plainly shorter than the hero as 0.94 says. Gate verdict lines all present in the lane's
+##     entry (S76_PITMAN OK 13, OFFFLOOR OK 0 of 2086, TOWNWALK PASS 0/17255, DELVE_TEST OK).
+##   - **ART - THE RATCATCHER CLIP IS FIXED AT BOTH EDGES AND THE TOP-LEVEL VERDICT HAS STOPPED
+##     LYING.** Both halves of what I charged this lane with at 22:58, in one push, with the
+##     mechanism written down in `docs/art/FRAME_MARGIN_AND_VERDICT.md` and in `audit_rows()`.
+##     **I RED-PROVED IT WITH MY OWN CODE, NOT THE LANE'S.** I wrote an independent predicate over
+##     every row of both reports - frame_edge > 0, fits_frame false, missing visibility,
+##     proving_views < 2 - and ran it on the report as it stood on main and as it stands now:
+##       OLD (main): header `ok: true`, `verdict: GREEN`, `errors: []` - and my audit finds
+##         `ratcatcher/front {left 15, right 3}` and `ratcatcher/back {left 3, right 15}`.
+##         THE LIE REPRODUCES EXACTLY.
+##       NEW (art): header `ok: false`, `verdict: RED`, 2 errors - and my audit finds **zero edge
+##         hits across all 46 rows** and exactly the same two unmeasured rows the header names
+##         (`snuffer_chibi`, `tallyman_chibi`, both retired test cells; `shipped_red` is EMPTY).
+##     My independent verdict and the lane's header now agree row for row, which is the whole
+##     point of the fix. **AND I LOOKED AT ALL THREE RATCATCHER VIEWS**: front, side and back,
+##     nothing touching any border, the pole tip and the hero's arm both clear.
+##     The lane also caught and wrote up its own compounding-offset regression (`place()` is
+##     relative, not absolute) BEFORE shipping it - caught by the very audit it was adding.
+##   - **C-154** (content) - pool top-up, **and I counted it off the two trees myself rather than
+##     off the diff header**: epitaphs 804 -> 816, descend 493 -> 505, cleared 478 -> 490, so
+##     **+12 / +12 / +12** exactly as claimed. Zero duplicates in any of the three pools, zero
+##     blank entries, and no pre-existing top-level key added or removed. `_note_c154` is nested
+##     under `miniboss_feed`. No code wiring, correctly.
+##   - **HUB / PACK CATALOGUE - `3d_crystals_new` recorded as NOT CLEARED, and I verified it the
+##     only way that counts: by looking in the pack.** Directory listed and the sibling zip's
+##     entries read: **5 files in both, identical** (174.jpg, 174_norm.jpg, crystal.jpg,
+##     crystal_simple_norm.jpg, crystals.blend), and a search for `*licen* *readme* *credit*
+##     *terms* *.txt *.md *.html` returns **nothing in either**. "NO LICENCE FILE FOUND - do not
+##     ship, convert or redistribute" is the right answer and the right register: nothing guessed.
+##     The lane also said plainly that it could not re-decode the Ruins PDF itself because `_packs`
+##     is not mounted in its worktree, and rested that clearance on my reproduction instead of
+##     claiming it. **That sentence is why this row is tickable.**
+##   - **B95** (chat bot) - `enlist.short` no longer sends a Twitch viewer to `docs/COMMANDS.md`.
+##     A one-value change, and the lane's own account of WHY no gate could have caught it (the doc
+##     generator does not publish `short` at all, so both drift arms were green before and after)
+##     is the valuable part. **I SWEPT IT MYSELF, NOT JUST THE ONE FIELD**: all 31 commands, every
+##     `short`/`what`/`example`/`args`, for `docs/ scripts/ data/ .md .gd .json github C:\\` -
+##     **0 hits.** `commands` and `order` are the same 31.
+##
+## NOT TICKED, AND WHY:
+##   - **L74 (HUD) - HALF DELIVERED / STILL OPEN, and the lane said so first.** U115 captured
+##     100/125/150, looked at the frames, and reported three faults rather than a verdict. Its own
+##     words: feed burst WHOLE, theme coherence "mostly proven", with (a) the 100% Chronicle line
+##     under the rail needing a post-layout frame and (c) the bottom-right clock's owner unknown.
+##     **A lane that declines to call its own item whole is doing the job**; I will not tick over
+##     it. (b) is NOT the HUD's and is re-routed below.
+##   - **L14_TEST going green.** The one red arm (`MINIBOSS UNNAMED ["pitman"]`) should clear now
+##     that S76 is on main - but I HAVE NOT SEEN IT PRINT `0 of 24`, and a gate is green when it
+##     prints, not when I reason that it should. The chat bot prints it at 00:45.
+##
+## *** A BASELINE FIX I OWE, AND IT IS MINE: A FIFTH DEAD `phase2_words` KEY NO BASELINE HAS EVER
+## *** ACCOUNTED FOR. *** My Step 0 baseline accounts for its zero-hit keys in four classes. On
+##   this merged tree the count is **48** (up from 32, and the rise is all `_note_` keys as the
+##   baseline predicts), and **47** fall in those classes: 33 `_note_` keys, 2 runtime-built `_alt`
+##   pools (READ - do not wire), 3 declared dead, 9 prose/spec keys. **THE 48th IS
+##   `lore_lines.phase2_words_alt2` AND IT IS IN NONE OF THEM.** Measured, not assumed: zero
+##   literal `phase2` hits across all 48 script files (scripts/*.gd + web/*.js, 2,296,006 chars);
+##   the ONLY runtime key-building concatenation anywhere in the tree is `base + "_alt"`
+##   (delve.gd:3831), which builds `lord_intros_alt` and `unique_intros_alt` and **cannot build
+##   `_alt2`**; and the key has the same shape and the same sub-keys (ascent, errand, carry, sell,
+##   vault, stone) as the two D98 declared dead. **READ IT AS DEAD ALONGSIDE `phase2_words` AND
+##   `phase2_words_alt`. NO LANE IS TO WIRE IT AND CONTENT IS NOT TO EXTEND IT.** It is routed up
+##   below because D98 is a ticked ruling and this extends the list it named.
+##
+## THE SIX ROWS:
+##
+## GAME BUILD (FOR THE 01:07 RUN - see the lateness note above):
+##   **boss_bar.gd: the boss card covers the Director "Now watching" strip at 150%.** The HUD has
+##   now reported this THREE TIMES (U113, U114, U115) and named the file each time, and it has sat
+##   because nobody routed it. THAT IS MY FAULT, NOT THE HUD'S. `boss_bar.gd` is one of the four
+##   files the 16 Nov 18:02 re-route put in your lane with the L31 remainder, so this is a defect
+##   in a file you own, not a new item. LOOK at a 150% frame before and after.
+##   OFFERED AFTER, NOT INSTEAD: the pitman's ONE IDEA (it opens a pit under a delver, who loses a
+##   beat climbing out; the pit stays), which you correctly offered rather than took early.
+##
+## CONTENT: **C-155, your own cycle.** No miniboss is owed - 44 feed / 44 bodies / 44 named /
+##   44 published, the chain is flush. Pool top-up in the C-153/C-154 register, or whatever is
+##   driest. **ONE THING NOT TO DO: do not extend `phase2_words_alt2`** (see the baseline fix
+##   above) - it is dead, like `phase2_words` and `phase2_words_alt`. Keep writing `_note_` keys;
+##   they are expected zero-hit keys and the audit accounts for them by class.
+##
+## ART: **FINISH THE INSTRUMENT YOU JUST SHIPPED - AND I HAVE DONE THE EXPENSIVE HALF FOR YOU.**
+##   `_fit_report.json` now carries `stale_margin` with **44 rows** - rows written before MARGIN_X
+##   existed, whose `fits_frame: true` means "<= 5.60" and not "<= 5.48". That flag is honest and
+##   it reads like 44 re-renders. **IT IS NOT. I CHECKED EVERY STORED `pair_w` IN THE FILE AGAINST
+##   FRAME_W - MARGIN_X = 5.48 AND NOT ONE STALE ROW EXCEEDS IT.** The widest pairs in the whole
+##   file are `boiler` 5.47 and `ratcatcher` 5.47 - and both of those are already re-placed with
+##   the solver and are NOT in the stale list. The widest row that IS stale is `drover` at 5.45,
+##   with `gaoler` and `paviser` at 5.43; everything else is lower. Every row has a stored
+##   `pair_w`, so there is no blind cell. **So the honest close is cheap**: record the derivation
+##   (stored `pair_w` <= 5.48 on all 44) in the report or in FRAME_MARGIN_AND_VERDICT.md, and
+##   re-render only if you want `air_x` on record for its own sake - not to answer a risk, because
+##   there is not one. If you disagree with my arithmetic, say so and show the row.
+##   THEN, and only then, the 45th miniboss - your licence to invent stands.
+##
+## HUB: **no web/ change and no READY TO PUBLISH claim this hour, so I ran NO publish
+##   verification and I am saying so plainly rather than reporting an unearned gate.** Carry on
+##   with the pack catalogue sweep in the register you have been using - the `3d_crystals_new` row
+##   is the model: list the pack, read the zip, name what is NOT there, guess nothing, and say
+##   when a clearance rests on someone else's reproduction. The 18-pack no-licence gate stands at
+##   18 (the Ruins pack was never in it).
+##
+## CHAT BOT: **re-run `tools/_l14_test.gd` FIRST and publish the verdict line.** S76 is on main as
+##   of 9b666e83, so `MB_NAME["pitman"]` = "Underfoot" is there and the UNNAMED arm should clear
+##   to **0 of 24**. I have not ticked it on reasoning; print it. Run the doc generator BEFORE the
+##   test, as you did at B95. After that your own cycle, in the B95 register - a field that reaches
+##   viewers and reaches no gate is exactly the right thing to go hunting for.
+##   **L56 IS NOT YOURS TO SQUEEZE INTO TEN MINUTES** - see FOR THE SUPERVISOR below.
+##
+## HUD: **settle (a) and close (c); (b) has been taken off you.** (a) shoot the 100% Chronicle
+##   frame after the layout has settled - your own U115 probe already measured the stack at
+##   194px in a 216.6px vellum, so the layout FITS and what you need is a frame that shows it.
+##   (c) find which file draws the bottom-right clock (bare text at 100%, parchment plate at 150%)
+##   and say whether it is yours. **(b) the boss card over the Director strip is routed to the
+##   game build this hour - stop carrying it, and thank you for reporting it three times.**
+##
+## FOR THE SUPERVISOR:
+##   1. **THE PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR, UNCHANGED IN SUBSTANCE AND STILL
+##      WAITING.** `origin/gh-pages` is **05ac2679** (tree `9ca8051e`), `origin/hub:web` is tree
+##      `02257b2f`; they are NOT equal and the difference is **3 files, +59 / -1**: `app.js`
+##      +47/-1, `style.css` +4, `NOTES.md` +9 - the "Sells up to" tier-underline fix. The hub lane
+##      made no web/ change this hour and claimed no readiness, so no new risk entered the delta.
+##      RECOMMENDATION: publish it. It is a four-line CSS/JS fix that has now been merged and
+##      unpublished for over a day. If you say publish, I will do the subtree-plumbing push and
+##      the four assertions, and run the full security and state-check gate first.
+##   2. **A FIFTH DEAD KEY EXTENDS A RULING YOU TICKED.** D98 declared four keys dead in writing.
+##      `lore_lines.phase2_words_alt2` is a fifth, same family, same shape, measured zero-read this
+##      hour (no literal hit, and the one runtime concatenation in the tree cannot build it).
+##      RECOMMENDATION: read it as covered by D98 rather than re-opening D98. I have told content
+##      not to extend it and no lane to wire it; say the word if you want it handled otherwise.
+##   3. **L56 (the delve-heavy soak) HAS BEEN CARRIED FOR HOURS BECAUSE THE PROTOCOL CANNOT FIT
+##      IT, AND THAT IS A PROTOCOL QUESTION, NOT A LANE FAILURE.** The chat bot's window is :45
+##      with short gates and it has correctly declined to start a long soak inside a ten-minute
+##      claim at B94 and again at B95. The work is real and it is starved by the shape of the
+##      schedule, not by the lane. RECOMMENDATION: let the chat bot take ONE extended claim for
+##      L56 - up to 40 minutes between :40 and :07, after the game build has written IDLE and
+##      before the HUD's :52 window, declared in RUN_LOCK with that finish. I have NOT changed the
+##      lock protocol: it is in the seven prompts, a firing cannot edit those, and widening a
+##      window is not a mechanical fix I should take on my own. Your call.
+##
+## NEEDS MR. E: nothing.
+##
 ## TAKE THIS NEXT - THE 22:58 CT FIRING, 20 NOV 2026 (machine clock 22:59-23:0x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 BLOCK. ***
 ## SIX BRANCHES WITH NEW WORK, SEVEN MERGES, SIX TICKED. main is the six-lane merge 65698d88

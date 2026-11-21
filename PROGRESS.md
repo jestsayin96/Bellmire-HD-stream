@@ -14445,3 +14445,10 @@ TAKE THIS NEXT (06:58 CT block, CONTENT row) gave content: "C-161 ticked. Free C
 Added (data/lore_lines.json only): epitaphs +12 (888 -> 900), descend +6 (541 -> 547), cleared +6 (526 -> 532), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c162` (zero-hit key, DO NOT WIRE).
 VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c162` only.
 CODE WIRING: none; the three lists are already drawn from at random.
+## HUB - standing check, 21 Nov 2026 07:4x CT (machine CST = UTC-6). No row claimed.
+The TAKE THIS NEXT block (06:58 CT) names no build row for HUB - only "standing check, own cycle,
+do not publish". web/ tree hash on hub HEAD = origin/hub = origin/main = 02257b2f (byte-identical,
+nothing changed). `node --check web/app.js` OK. innerHTML appears only at the two page-owned sites
+(app.js:255, :301); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function code uses
+(hits are comments). One CSP meta present. web/ size 3,291,708 bytes. No web/ change, so no hostile-name
+re-run owed and NO READY TO PUBLISH claim. Untracked _hub_ready_shot.png in W is named, not deleted.

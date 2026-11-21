@@ -14711,3 +14711,7 @@ CODE WIRING: none; the three lists are already drawn from at random.
 - Security greps: innerHTML only at app.js:255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only); CSP meta present (1). index.html:49 comment still true.
 - web/ unchanged so the hostile-name test is not owed; no screenshot taken (no change to look at); no live-dot change. No READY TO PUBLISH claim. gh-pages untouched (05ac2679).
 - Untracked _hub_ready_shot.png in W is pre-existing, named here, delete refused on this machine.
+
+
+## U-standdown 2026-11-21 10:52 CST - STAND-DOWN (no Godot claim)
+RUN_LOCK last line (R working copy) at 10:52:39-06:00: RUNNING 10:51:30 chat bot B106 (expected finish 10:58, cap 11:16), no IDLE from that lane after it. Process check: no Godot alive at that instant, but the lane runs short gates with gaps, so I treated the hold as live per the YIELD RULE and did not claim over it. No .gd edited, no engine launched. Next firing (11:52): re-read RUN_LOCK, take the rarity-hue half of System 2 (TAKE THIS NEXT), split any capture into <=15 min chunks, release by :07.

@@ -1,3 +1,211 @@
+## TAKE THIS NEXT - THE 20:58 CT FIRING, 20 NOV 2026 (machine clock 20:58-21:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 19:58 BLOCK. ***
+## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SEVEN TICKED. main is the six-lane merge
+## f9a31ccd plus this plan commit.
+##
+## *** MY OWN FAULT FIRST, AND IT IS A LYING INSTRUMENT OF EXACTLY THE KIND THIS PROMPT WARNS
+##   ABOUT. *** My first count of `MB_NAME` and `MB_FIT` came back **12 and 30**. Both are false.
+##   The regex stopped at the FIRST `}` inside the literal and only matched keys at line start.
+##   I threw both numbers away and re-counted with a brace-DEPTH scan over a comment-stripped
+##   block: the true counts are **MB_NAME 42, MB_FIT 53**. Nothing was published off the bad
+##   numbers. A REGEX OVER A GDSCRIPT DICT IS NOT A COUNTER unless it tracks depth.
+##
+## TICKED THIS HOUR (seven):
+##   - **C-151** (content) - VERIFIED BY ARITHMETIC I DID MYSELF, old blob read through the BLENDER
+##     bridge and its length asserted first (796,328 -> 798,670 chars). `miniboss_feed.by_key` goes
+##     **42 -> 43**; the new key set minus the old is **exactly {winder}**; nothing lost; the
+##     top-level key set is IDENTICAL (48 both sides); and **no other list in the file changed
+##     length at all.** `winder` carries **9 arrive + 8 fall** - exactly the claim - and the fall
+##     line names **Haulback**. One body fed, one key added, nothing else touched.
+##   - **HUB - THE CHIP SHOWS THE NAME, AND I RAN IT MYSELF.** Greps first: `innerHTML` is still
+##     exactly the two page-owned sites (app.js:255 status line, :301 "nothing yet"); no
+##     `outerHTML`/`insertAdjacentHTML`/`document.write`/`eval`/`new Function`; the only
+##     `setAttribute("href")` is the fixed `#ic-` literal; CSP meta unchanged. **THEN CHROMIUM IN
+##     MY OWN CONTAINER**, snapshot stubbed at the route so `?mock=v6` renders over a real payload:
+##     the Salt Wolves chip reads **"Boss fight . Shacklemaw"** - the NAME, not the key
+##     `the_gaoler`; the **hostile band shows NO chip** and its name renders as the literal text
+##     `<img src=x onerror=alert(1)> Band`; the **key-only band shows NO chip**, which is the new
+##     requirement; **0 `<img>` elements, 0 dialogs, 0 page errors**; and the CSP probe
+##     (`addStyleTag`) was **REFUSED citing style-src 'self'**. The lane's own render found the same
+##     two chip nodes I did.
+##   - **U111** (HUD) - **THE CAPTURE EARNED IT, AND IT IS A RED-PROOF.** Last hour I refused this
+##     because the two frames carried DIFFERENT Chronicle text. This pair does not: both read
+##     **"DawnCleric casts Smite at drowned risen bones."** With the padding stripped out through
+##     the lane's own `legacy_margin` switch the line wraps `DawnCleric casts Smite / at drowned
+##     risen / bones.` and **the final "e" of "Smite" is cut by the card's right rule**; with the
+##     padding in it wraps `DawnCleric casts / Smite at drowned / risen bones.` and clears it. I
+##     opened both crops and looked. Dark text pixels in the 40 px just inside the parchment's right
+##     rule: **460 legacy vs 111 padded** (the 111 is the decorative rule, not text).
+##   - **U112** (HUD) - the A/B instrument itself: a `legacy_margin` test switch in `feed_hud.gd`
+##     plus `tools/_u112_shot.gd`, two 1080 frames, 0 SCRIPT ERROR. A switch that can bring the
+##     fault BACK is worth more than a second screenshot of the fix.
+##   - **ART - EVEN LIGHT INSTALMENT 3: 8 BODIES, ALL THREE VIEWS.** bellman, boiler, hurdleman,
+##     jointer, loader, sluicekeeper, snarer, tanner; 24 renders, `errors []`, `blind_views []`.
+##     **I RE-MEASURED THE HARDEST ONE MYSELF** on `sluicekeeper/hero_back.png`, old blob vs new:
+##     mean saturation over lit pixels **0.380 -> 0.224**, warm-pixel fraction **0.176 -> 0.177
+##     (FLAT)**, mean lit colour **(87,99,110) blue-dominant -> (118,106,111) neutral**. **ART'S
+##     FINDING IS CORRECT AND IT IS AN INSTRUMENT FIX, NOT JUST A RENDER:** a warm-fraction test
+##     alone would have passed sluicekeeper as "nothing to fix" and been wrong. Saturation over lit
+##     pixels is the instrument; warm fraction only says which way the wash leaned. I looked at the
+##     contact sheet: the gain is visible on every pair.
+##   - **ART - THE PITMAN ("Underfoot"), THE 44th MINIBOSS.** Register GREEN: ratio **0.94**
+##     (creature_h 2.30 / hero 2.45), pair_w **4.96**, `fits_frame` true, **3 proving views**, and
+##     **every `frame_edge` count is 0 on all three views** - the assertion that went RED on its own
+##     first try at the spoil heap and made it back the change off. `_report.json` is **55 entries,
+##     11 chibi, 44 non-chibi**, `blank_check` **132 files / 0 failures = 44 x 3 exactly**. **I
+##     LOOKED AT ALL THREE HERO VIEWS:** front is the boarded ring with the ladder out of it, side
+##     is the ladder in profile with the man over his mattock, back is the spoil heap with the ring
+##     behind - three different pictures, hero lit in all three. The four faults art names itself
+##     (the mouth reads as a lid not a hole; the new pale shoring timbers muddle the kerb; the
+##     mattock head is dark-on-dark; the man is dark-on-dark head-on) are the next pass, not a
+##     failed item - **and I saw all four before I read its write-up.**
+##   - **B92** (chat bot) - all four engine gates green on merged main `a1158b02` (parse rc=0,
+##     L14_TEST OK 24 / 0 arms, TWITCH_PARSE OK 8, COMMANDS_DOC OK 31 commands, file byte-identical
+##     so no publish). **AND IT WAS RIGHT NOT TO PUBLISH 43** - the winder is fed and unnamed.
+##
+## NOT TICKED, AND WHY:
+##   - **S73 (game build) - BUILT, PROVEN, AND DELIBERATELY NOT LANDED. DO NOT REBUILD IT.** The
+##     work exists on **`origin/s73-wip` = 73738c04**: `MB_FIT["winder"]` 0.96 copied from art's
+##     register, the wood row, `tools/_s73_winder.gd` (252 lines) and S73_WINDER OK 7. It is NOT on
+##     `laptop` because **TOWNWALK printed no verdict under machine load** (Marvel Rivals + OBS) and
+##     a gate that prints no verdict is RED. The lane checkpointed instead of pushing a tree it had
+##     not proved. That is the rule working and it is the right call; it is not a miss.
+##
+## *** THE CHAIN, COUNTED BY ME ON THE MERGED TREE WITH A DEPTH-AWARE SCAN: 43 FEED / 42 MB_NAME /
+##   42 PUBLISHED. *** `miniboss_feed.by_key` 43, `MB_NAME` 42 unique, `MB_FIT` 53, `commands.json`
+##   says "42 elites" twice. **`feed - MB_NAME` is exactly {winder}; `MB_NAME - feed` is EMPTY.**
+##   The winder is fed-and-unnamed **by design** - content fed it at :22, the game build's naming
+##   run is on s73-wip. The 44th (pitman) is on disk with no MB_FIT and no MB_NAME, which is also
+##   correct: it landed this hour.
+##
+## *** A STALE NUMBER IN A HAND-OFF BLOCK - ART'S, AND IT IS FOR THE GAME BUILD TO COPY. ***
+##   `docs/art/MINIBOSSES.md`, FOR THE GAME BUILD LANE, says the Pitman is "CORRIDOR-SAFE at
+##   **2.85 m**". The shipped pass-3 number in `renders/art/minibosses/_report.json` is
+##   `footprint_span` **3.10**, size [3.1, 2.93, 2.3]. 2.85 is the PASS-2 span, left behind when
+##   pass 3 reworked the heap; the same document's own header already says 3.10. **It changes no
+##   verdict** - corridor margin is 7.904 m either way - but the game build is told to COPY that
+##   block, so the block has to be right. Row below.
+##
+## *** DEAD-DATA AUDIT, RE-MEASURED 20 NOV 21:0x CT ON THE MERGED TREE. NOTHING MOVED. ***
+##   2,294,592 chars of script (48 files, scripts/*.gd + web/*.js only), 12 data files, **137**
+##   top-level keys - the same 137 as 20:0x and 19:0x. **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED
+##   ASSET DIRECTORIES: ZERO** (34 directories with files, measured off assets/ only). 47 keys
+##   return zero literal hits and all 47 are accounted for exactly as last hour: **32** `_note_`
+##   keys, **2** runtime-built `_alt` pools (`lord_intros_alt`, `unique_intros_alt` - READ at
+##   delve.gd intro_pool, DO NOT WIRE), **4** declared-dead (`phase2_words`, `phase2_words_alt`,
+##   `phase2_words_alt2`, `town_levels_for_the_desktop`), **9** prose/spec. C-151 added lines and
+##   NO key, which is why the number did not move.
+##
+## ---- THE ROWS. ONE ITEM PER LANE. ----
+## GAME BUILD (:07) - **LAND S73. IT IS ALREADY BUILT - MERGE YOUR OWN CHECKPOINT, DO NOT REDO IT.**
+##   `origin/s73-wip` = **73738c04** carries `MB_FIT["winder"]` 0.96, the wood row and S73_WINDER
+##   OK 7. The one thing it lacks is a TOWNWALK **verdict line**. Get that printed and push to
+##   `laptop`. **AND THE HOLD IS OVER IN THE SAME RUN: content landed `by_key.winder` at :22** (9
+##   arrive / 8 fall, canon name **"Haulback"**), so `MB_NAME["winder"] = "Haulback"` is unblocked
+##   and the chain goes **43/43/42** the moment you push it - which is what makes the chat bot's
+##   publish of 43 owed. **IF TOWNWALK STILL WILL NOT PRINT UNDER LOAD, SAY SO AND LAND THE REST** -
+##   do not sit on a proven MB_FIT row for a gate another process is starving.
+##   **THEN THE 44th, THE PITMAN:** `MB_FIT["pitman"]` ratio **0.94**, tag **crypt**, 3 proving
+##   views, STATIC (`model` path, NO `anims`), h **2.30**, **footprint_span 3.10 m** - take that
+##   number from `_report.json`, **NOT** the "2.85 m" in art's prose, which is stale. Hold
+##   `MB_NAME["pitman"]` until content writes `by_key.pitman`, in the named-condition shape you
+##   wrote at S73, not the absence-asserting shape that cost you S72. Art says it TAKES GROUND and
+##   does not wound: **if the engine has no displacement mechanic, say so plainly and do not invent
+##   one.**
+## CONTENT (:22) - **YOUR OWN CYCLE, UNTHROTTLED. Nothing is owed and nothing is blocked.** C-151 is
+##   ticked and it was exact. FOR INFORMATION, not an order: art landed a **44th** body this hour -
+##   key `pitman`, canon name **"Underfoot"**, theme **crypt**. Its canon says it opens a pit under
+##   a delver every beat, leaves them a ladder, and **the pit stays** - it takes GROUND and does not
+##   wound, so its lines want ground and holes, not blood. `by_key.pitman` is the one thing that
+##   unblocks `MB_NAME["pitman"]`, exactly as C-151 unblocked the winder. Your cycle, your call.
+## ART (:34) - **CARRY ON: THE NEXT EVEN-LIGHT INSTALMENT, ALL THREE VIEWS, same bound as 2 and 3.**
+##   **AND FIX ONE STALE NUMBER IN YOUR OWN HAND-OFF BLOCK FIRST - it is two characters and another
+##   lane reads it:** `docs/art/MINIBOSSES.md` FOR THE GAME BUILD LANE says the Pitman is
+##   "CORRIDOR-SAFE at 2.85 m"; the shipped span is **3.10** (`_report.json` `footprint_span`, and
+##   your own header already says 3.10). **SETTLE YOUR OWN BODY COUNT WHILE YOU ARE THERE:**
+##   instalment 3 says "43 non-chibi bodies" and "26 remain", written before the Pitman;
+##   `_report.json` is now **44 non-chibi** (132 blank-check files / 3). You also flagged that you
+##   had not checked whether the winder was authored even-lit - check it and state the remaining
+##   number once, so instalment 4 starts from a number you can defend. The Pitman's four named
+##   faults are its next pass and none of them blocked the tick. Your frame-edge assertion going RED
+##   on the heap, and you backing the change off rather than widening the frame, is why your
+##   register is believed.
+## HUB (:37) - **TICKED, AND I RAN THE CHROMIUM CHECK MYSELF - the key-only band shows no chip and
+##   the hostile name is literal text.** You did NOT claim "READY TO PUBLISH", so **I ran no publish
+##   verification** and none was owed; the security greps I did run are the Step-2 check your own
+##   `web/` claim always earns. **MEASURED: the unpublished delta is 3 files / 59 lines** -
+##   `web/NOTES.md` +9, `web/app.js` +47/-1, `web/style.css` +4 - `origin/gh-pages^{tree}` 9ca8051e
+##   vs `origin/hub:web` 02257b2f. **If you believe it is ready, say "READY TO PUBLISH" in your
+##   write-up** and I will run the full gate and route the push up. Otherwise: your own cycle.
+## HUD (:52) - **U111 AND U112 ARE BOTH TICKED - the A/B earned it and the legacy switch is why.**
+##   **NOW GO TO SYSTEM 2'S RARITY-HUE HALF.** It is the HUD half of one of Mr. E's own Phase-1
+##   systems, the supervisor confirmed that reading on 18 Nov at 11:40, and it has been **unstarted
+##   since 18 Nov**. It is the most valuable open item in the house and it has been out-prioritised
+##   by margin work for two days. Start it this firing, even if all you land is the first pass.
+## CHAT BOT (:45) - **B93: YOUR OWN CYCLE, AND EXPECT ONE RED YOU DID NOT CAUSE.** On merged main
+##   the chain is **43 feed / 42 MB_NAME**, so L14's `MINIBOSS UNNAMED: winder` arm will read RED
+##   until the game build lands `MB_NAME["winder"]`. **THAT IS THE HOLD WORKING AND I WILL NOT
+##   CHARGE YOU FOR IT** - report it as the hold, name the lane it waits on, and do not pre-publish
+##   43 and do not write an arm that asserts the absence. **The publish of 43 becomes owed the
+##   moment the game build pushes that name** - it may land this very hour, so check `origin/laptop`
+##   before you decide your cycle is empty.
+## PACK CATALOGUE (:15) - **NEXT PACK IN THE QUEUE.** Church1_blend and Fantasy_Props_MegaKit are
+##   both CLEARED (CC0 1.0, read off disk). Same shape: the licence page or licence file, by your
+##   own eyes, never a search snippet. The Animals pack stays NOT CLEARED.
+## QA TESTER (every 2h, :41) - **YOUR TWO SILENT GATES ARE STILL RED AND STILL YOURS.** A gate that
+##   prints no verdict line is RED until it prints one (COORDINATION 15). TOWNWALK is now the third
+##   instance of this shape and it cost the game build a landing this hour - if your two share a
+##   cause with it, say so.
+##
+## FOR THE SUPERVISOR - NOTHING WAITING, THREE FOR INFORMATION.
+## (1) **THE HUB IS 3 FILES / 59 LINES AHEAD OF gh-pages AND THE LANE HAS NOT CLAIMED READY.**
+##   gh-pages is **05ac2679** (pushed 19 Nov 20:06:59 CT), tree 9ca8051e; `origin/hub:web` is
+##   02257b2f. The delta is the v6 consumption plus this hour's display-name fix. **I ran no publish
+##   gate** because the lane made no readiness claim. My recommendation is to let it ride one more
+##   hub cycle and take the v6 work up as ONE publish rather than two.
+## (2) FOR INFORMATION: **the miniboss chain is 43/42/42 and that is the designed hold**, not a
+##   regression from last hour's flush 42/42/42. Content fed the winder, the game build's naming run
+##   is checkpointed on `s73-wip` behind a TOWNWALK gate that would not print. A 44th body (pitman)
+##   landed on disk this hour.
+## (3) FOR INFORMATION: **LOCK DISCIPLINE WAS CLEAN THIS HOUR - clean-hour count 2.** Game build
+##   20:08:10-20:21:58 (cap 20:33, released early, no crossing); chat bot 20:47:12-20:49:15 (cap
+##   20:57, released early); HUD claimed 20:53:55, **after** the chat bot's IDLE. No overrun, no
+##   claim over a live hold, no stale lock cleared, no future stamp.
+
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 19:58 BLOCK AND
+## CARRIES ITS ITEMS FORWARD. I DID NOT ATTEMPT A WRITE THIS HOUR - the gate is settled ON THE CALL
+## (a no-op `enabled=true` was refused identically on 18 Nov), so a fifth test buys nothing.
+##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It names gh-pages `45a7904` with a
+##      2-file / 19-line delta. Measured this hour: gh-pages **05ac2679**, trees 9ca8051e vs
+##      02257b2f, delta **3 files / 59 lines**. Replace the paragraph with its one durable sentence:
+##      RE-MEASURE BOTH TREES EVERY HOUR. The numbers go stale hourly; only the instruction keeps.
+##   b. **ALL NINE PROMPTS - THE FLEET IS NINE TASKS.** The ':07 game build | :22 content | :34 art
+##      | :37 hub | :45 chat bot | :52 HUD | :58 you' line still omits the **:15 pack catalogue**
+##      and the **:41 QA tester**. Every lane's lock protocol must name the QA tester at :41.
+##   c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** 'thirty-three exist as of 18 Nov' is now
+##      ELEVEN short: **44 bodies** as of 20:34 CT on 20 Nov. Keep the sentence that says MEASURE,
+##      drop the number, and name the instrument: `_report.json` non-chibi entries (44, with
+##      `blank_check` 132 files / 0 failures = 44 x 3), **NOT** a regex over `minibosses.py`.
+##   d. **ALL NINE PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and
+##      is PER SESSION. Every prompt should say: run `ls $HOME/mnt/` FIRST and use what it prints.
+##   e. **THIS PROMPT (:58) - THE DEAD-DATA BASELINE.** Measured this hour on the merged tree:
+##      **2,294,592 chars, 48 files, 12 data files, 137 top-level keys, 47 zero-hit** (32 `_note_`,
+##      2 runtime-built `_alt` READ, 4 declared-dead, 9 prose/spec), unread live keys ZERO,
+##      unreferenced asset directories ZERO (34 dirs). Copy the audit block above into the prompt.
+##   f. **THIS PROMPT (:58) - THE GIT-IN-THE-LINUX-BRIDGE WARNING SHOULD NAME READS TOO, AND IT IS
+##      WORSE THAN WRITES.** On this machine **every** `git` call through device_bash in a WORKTREE
+##      fails outright - `.git` is a FILE holding a Windows path, so the bridge resolves it to
+##      `/sessions/.../C:/hd adventure/...` and returns `fatal: not a git repository`. It is not
+##      only `.lock` files on writes: a READ can come back EMPTY AND rc-clean. **ALL git goes
+##      through the Blender bridge**, and assert a blob's length before computing on it.
+##   g. **THIS PROMPT (:58) - ADD A LINE ABOUT COUNTING GDSCRIPT DICTS.** A regex over a
+##      `const X := {...}` literal must track BRACE DEPTH and strip comments, or it silently
+##      truncates: mine returned MB_NAME 12 and MB_FIT 30 this hour against true 42 and 53. Same
+##      fault family as the ORDER regex that returned 4, 0 and 46 on three different seats.
+#### NEEDS MR. E: nothing.
+
 ## TAKE THIS NEXT - THE 19:58 CT FIRING, 20 NOV 2026 (machine clock 19:58-20:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 18:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SEVEN TICKED. main is af3d14e8.

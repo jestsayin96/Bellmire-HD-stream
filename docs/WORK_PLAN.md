@@ -1,3 +1,175 @@
+## TAKE THIS NEXT - THE 22:58 CT FIRING, 20 NOV 2026 (machine clock 22:59-23:0x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 BLOCK. ***
+## SIX BRANCHES WITH NEW WORK, SEVEN MERGES, SIX TICKED. main is the six-lane merge 65698d88
+## plus this plan commit.
+##
+## *** MY OWN CORRECTION FIRST, AND IT IS TO THE 21:58 BLOCK'S OWN NUMBER. *** That block's B93
+##   row states "MB_NAME has 62 entries on main, laptop, chatbot, content AND on s73-wip". **THAT
+##   IS WRONG AND IT IS MINE.** I parsed the `const MB_NAME := {...}` block by brace-matching,
+##   stripped `#` comments, and then HAND-COUNTED the printed dict row by row: six rows of six
+##   (36) plus dauber, sealer, hooper, relief, scraper, ferryman, winder = **43 on the merged
+##   tree, 42 before S75**. 62 is a fiction - do not carry it forward. The same block's chain
+##   line ("42 MB_NAME") was correct for the hour it was written. 
+##   LESSON, THE SAME ONE THAT HAS NOW BITTEN THREE SEATS ON THIS ONE DICT: **COUNT MB_NAME BY
+##   BRACE-MATCHING AND THEN HAND-CHECK THE PRINTED ROWS.** A bare regex over the file counts
+##   MB_FIT's comment text, which names MB_NAME in six of its own rows.
+##
+## *** THE CHAIN, COUNTED BY ME ON THE MERGED TREE 65698d88:
+## *** 44 FEED ROWS / 44 BODIES ON DISK / 43 MB_NAME / 43 MB_FIT / 44 PUBLISHED.
+##   `pitman` is the ONLY key in `miniboss_feed.by_key` that is in neither MB_NAME nor MB_FIT;
+##   every by_key row has a `.glb`, and no `.glb` outside the 13 known `_chibi`/extra stems lacks
+##   a row. **AND THE PUBLISH HAS MADE THAT GAP VISIBLE TO VIEWERS THIS HOUR, SO NAME THE COST
+##   EXACTLY:** `pitman` IS live - content wrote its lines, so `_setpiece_miniboss` takes the
+##   branch - and it stands up on BOTH fallbacks at once. `miniboss_name()` falls back to
+##   `key.capitalize()`, so the Chronicle calls it **"Pitman"**, the trade word, which is the one
+##   thing Mr. E's 19 Nov naming directive says a viewer must never read; and `miniboss_ratio()`
+##   falls back to **1.0** against art's measured **0.94** (`_fit_pitman_register.json`,
+##   creature_h 2.30 / hero_h 2.45, three proving views, seen 1.0), so it stands about **6% too
+##   tall**. Neither fallback is a break - both are the specified behaviour - but both are
+##   READABLE ON STREAM NOW, which they were not before 22:51.
+##
+## TICKED THIS HOUR (five):
+##   - **S75** (game build) - the Winder, 43rd, landed WITH its name. MB_NAME `winder` =
+##     **Haulback**, MB_FIT `winder` = **0.96** (art's register, copied not re-derived), body on
+##     disk, content's C-151 feed row present. Counted on the merged tree by the method above.
+##     Batteries at the lock line: parse 0, TOWNWALK **PASS 0/16584** (the no-verdict that held
+##     this for two hours is gone), TWITCH_PARSE OK, S73_WINDER OK 13, OFFFLOOR OK 0 of 2360,
+##     DELVE_TEST OK. **The two-hour hold was the right call and it ended the right way.**
+##   - **B94** (chat bot) - published the miniboss count as **44**, not the 43 the plan named,
+##     because it counted content's feed rows instead of trusting my row. **IT WAS RIGHT AND I WAS
+##     WRONG**: by_key is 44. `data/commands.json` carries 44 in both the what and the short,
+##     `docs/COMMANDS.md` regenerated, COMMANDS_DOC OK 31 commands, both doc-drift checks green on
+##     the re-run after the generator. L14 now fails on ONE arm, MINIBOSS UNNAMED [pitman] - and
+##     `winder` drops off that arm the moment this merge lands, which it has.
+##   - **C-153** (content) - pool top-up. **I COUNTED EVERY ADDED LINE IN THE DIFF MYSELF:
+##     epitaphs +14, descend +10, cleared +10**, exactly as claimed. Plain register, no names, no
+##     mechanics, no floor counts. `_note_c153` is nested, not top-level.
+##   - **HUB - Fantasy_Ruins_Pack licence, CLEARED CC0 1.0, AND I REPRODUCED THE DECODE MYSELF.**
+##     The lane's claim is the hard kind to take on trust - a PDF with no plain-text strings - so I
+##     did it independently: inflated the five streams, pulled the ToUnicode CMap (**65 one-byte
+##     `beginbfchar` entries**, not the 4-hex-digit shape my first attempt assumed, which is why
+##     that attempt recovered nothing), and mapped the content streams through it. **12,248
+##     characters recovered**, opening "CC0 1.0 Universal / CREATIVE COMMONS CORPORATION IS NOT A
+##     LAW FIRM", containing "Statement of Purpose", "waive", "for any purpose whatsoever" and the
+##     grant "...for any purposes, including without limitation commercial purposes." **The file
+##     census reproduces to the digit**: 110 files, 39 jpg / 35 png / 12 dts / 12 dae / 11 cs /
+##     1 pdf - note dae is 9 lowercase + 3 uppercase `.DAE`, which the lane's table folded
+##     correctly. Commercial use permitted, no attribution required. Gate satisfied.
+##   - **U114** (HUD) - the Chronicle stack is measured with the font the Labels actually draw
+##     with (`_box.get_theme_font("font","Label")`, `ThemeDB.fallback_font` kept as the null
+##     guard) instead of the engine fallback the two disagree with at 100%. Three short claims,
+##     parse 0 errors on each, L74 burst frames at 100% and 125% x 1080/phone480. **AND I LOOKED
+##     AT `u114_s100_t600_1080.png` MYSELF** at full resolution: five lines on the vellum, the
+##     last line clear of the lower rail with real margin, nothing cut. I could not red-prove it -
+##     that needs Godot - so this tick rests on the code, the parse and the picture, and I say so.
+##   - **ART - EVEN LIGHT IS FINISHED, 44/44, WITH THE FLOOR UNDER ALL OF IT (`5275fab3`, pushed
+##     between my merge and my sync; I re-read the ref, merged it, and re-measured before ticking).
+##     EVERY NUMBER IN THE CLAIM REPRODUCES ON MY OWN COUNT:** the 44 body directories are
+##     **set-equal to content's `miniboss_feed.by_key`** - not merely the same size, the same keys,
+##     symmetric difference empty - **132 views all present**, **132 ground rows, 0 errors, 0 views
+##     with zero shadow**, and peak occlusion across all 132 lands in **0.7077-0.7107**, the band
+##     the lane stated. Remainder 0.
+##     **AND THE ONE RED IS REAL - I LOOKED AT IT.** `ratcatcher` front and back carry
+##     `frame_edge` 15, and it is the only body of the 44 that touches a frame edge at all. I
+##     opened `ratcatcher/hero_front.png`: **16 pixel rows touch x=0 (y 381-476) and the hero's
+##     left fist and elbow are sliced flat against the border.** `fits_frame` says **true** on
+##     `pair_w` 5.59 against FRAME_W 5.60 - true by a centimetre while an arm is cut. The lane
+##     found a pre-existing fault in shipped work and reported it against itself; that is the
+##     opposite of a miss.
+##     **THE HARNESS FAULT IT NAMES IS WORTH MORE THAN THE BODY AND I REPRODUCED IT:**
+##     `_fit_report.json` top level reads **`ok: true`, `errors: []`, `blind_views: []`** at this
+##     very moment, with ratcatcher clipped in its own pair row. A later `--only` run rewrites the
+##     top-level verdict from its own keys and merges the earlier pair rows underneath, so a
+##     per-key RED is erased by the next key rendered. **NO LANE AND NO SEAT MAY READ THAT
+##     TOP-LEVEL VERDICT AS A STATEMENT ABOUT THE TREE** - read the pair rows. This is the
+##     lying-instrument class and it is now written down.
+##
+## NOT TICKED, AND WHY:
+##   - **ART - INSTALMENT 5 WAS NOT TICKED WHEN I FIRST WROTE THIS BLOCK, AND THEN ART LANDED THE
+##     ADOPTION WHILE I WAS SYNCING. I AM REPLACING MY OWN ROW RATHER THAN LEAVING IT STANDING.**
+##     See the sixth tick below. What I wrote first - "default off, nothing to tick until adopted,
+##     adoption should land with the last 18 bodies" - was true of `058a97bd` and was overtaken by
+##     `5275fab3` inside my own run. The lane did exactly what the earlier commit said it would.
+##   - **No publish verification was run and none was owed** - `origin/hub` carries no `web/`
+##     change this hour and made no readiness claim.
+##
+## THE SIX ROWS:
+##   - **GAME BUILD (:07) - S76: WIRE THE PITMAN, THE 44th.** It is the whole remaining gap and it
+##     is live on stream right now on two fallbacks (see the chain block above). Add `MB_FIT`
+##     `"pitman": 0.94` - **copy art's `renders/art/minibosses/_fit_pitman_register.json`
+##     `pairs.pitman.ratio`, do not re-derive it** - and `MB_NAME "pitman": <the proper name in
+##     content's `_note_c152` and art's CANON title in `tools/art/minibosses.py`, both read, as
+##     every row from S65 on has done>`. Content's row and art's body are both already on main, so
+##     the named condition is satisfied **before** you start. Then the usual battery.
+##   - **CONTENT (:22) - C-154, pool top-up, your own cycle.** No miniboss is owed: the 44th's
+##     lines are written and the next body does not exist yet. Keep the `_note_` key nested.
+##   - **ART (:34) - RATCATCHER'S FRAME, THEN THE HARNESS VERDICT, THEN THE 45th BODY - IN THAT
+##     ORDER.** Even light is finished and ticked, so the open things are the two faults your own
+##     pass found. (1) `ratcatcher` is cut at x=0 front and x=759 back; `pair_w` 5.59 vs FRAME_W
+##     5.60 is the cause and `fits_frame` cannot see it. (2) `_fit_report.json`'s top-level verdict
+##     is rewritten by every `--only` run and currently reads `ok: true` over a clipped body -
+##     make the top level either report the union of the pair rows or stop claiming a verdict at
+##     all. **Both are defects in work you have shipped and neither is a new item.** Still open
+##     from instalment 4 and not forgotten: **the dyer has no creature in its back view and the
+##     greener's man is one flat dark mass** - the Beadle-facing fault a third time.
+##   - **HUB (:37) - NEXT PACK IN THE CATALOGUE.** The Fantasy_Ruins_Pack row is ticked and the
+##     "unreadable licence" flag in `docs/PACK_CATALOGUE.md` is superseded - make sure that flag is
+##     actually struck in that file, not only contradicted in ASSET_SOURCES.md.
+##   - **CHAT BOT (:45) - OWN CYCLE; DO NOT RE-PUBLISH.** 44 is correct and is now consistent with
+##     MB_NAME 43 + one documented fallback. L14's MINIBOSS UNNAMED [pitman] arm is **expected to
+##     stay red until the game build lands S76** - that is the hold working, not a defect. Do not
+##     write an arm that asserts pitman's absence.
+##   - **HUD (:52) - L74 remainder.** U113 and U114 are both ticked; say plainly in your next row
+##     whether L74 is now WHOLE or what is left of it, because two halves have been delivered and
+##     the plan cannot tell from here.
+##
+## LOCK DISCIPLINE - CLEAN, AND I AM CARRYING THE COUNT EXPLICITLY BECAUSE IT KEEPS GETTING
+##   DROPPED. The last count written in this file is **2, in the 20:58 block**; the 21:58 block
+##   did not restate it, which is the same lapse this plan flagged at its 09:58 entry. Counting
+##   forward: 21:58 clean (3), this hour clean - **CLEAN-HOUR COUNT 4.**
+##   Game build 22:08:30-22:16:55 (claim+25 = 22:33, declared finish 22:30, **inside the cap for
+##   once - the seven-time overrun pattern did not repeat**, released early, no crossing). QA
+##   tester 22:41:43-22:46:53, in a free window. Chat bot 22:49:30-22:51:40 (cap 22:59:30).
+##   HUD three short claims 22:53:28, 22:55:56, 22:57:33, each after the previous IDLE and each
+##   inside its own window. **No overrun, no claim over a live hold, no stale lock cleared, no
+##   future stamp, no two lanes holding at once, no lane starved - all six were fed.**
+##
+## FOR THE SUPERVISOR: **one item, the publish - AND THE FIGURE I INHERITED FOR IT WAS WRONG, SO
+##   HERE IS MY OWN MEASUREMENT.** `origin/gh-pages^{tree}` is **9ca8051e** and `origin/hub:web`
+##   is **02257b2f**; `origin/main:web` is the SAME tree as `origin/hub:web`, so nothing is stuck
+##   on the hub branch - the whole gap is publish-side. **THE DELTA IS 3 FILES / 60 LINES
+##   (+59 / -1): `NOTES.md` +9, `app.js` +46/-1, `style.css` +4.** The standing description -
+##   "2 files / 19 lines, app.js -14, style.css +5, the 'Sells up to' tier-underline fix" - is
+##   STALE and is struck; it has been carried for several hours and it understates the change by
+##   three times. **gh-pages last moved at `05ac2679`, "hub publish 5", 19 Nov 20:06 CT** (not the
+##   18 Nov 03:34 `45a7904` some standing text still names).
+##   **MY RECOMMENDATION IS NOW WEAKER THAN IT WAS AND I AM SAYING SO RATHER THAN REPEATING
+##   LAST HOUR'S.** A 46-line `app.js` change is not the cosmetic two-liner the stale figure
+##   described, and I have run no publish verification this hour because the hub lane has made no
+##   readiness claim - so I will not recommend publishing it sight-unseen. **What I recommend is
+##   that the hub lane be asked to re-state readiness for this exact delta, at which point the
+##   full gate (greps, the seven state URLs, CSP red-proof, hostile name, a screenshot looked at)
+##   is owed and I will run it before anything is pushed.**
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED THE NEXT TIME MR. E IS LIVE.
+##   A firing cannot edit a scheduled task's prompt; that is a property of the machine and it was
+##   settled by three tests, so I did not spend a fourth. These corrections live here instead and
+##   this list is cumulative - add to it, do not reset it.
+##   1. **TEAM LEAD prompt, the hub block.** It states gh-pages is `45a7904` pushed 18 Nov
+##      03:34 CT and that the unpublished delta is "2 files / 19 lines". **Both are wrong as of
+##      20 Nov 23:1x CT:** gh-pages is `05ac2679` (19 Nov 20:06 CT, "hub publish 5") and the delta
+##      is 3 files / 60 lines. Replace both figures with an instruction to measure, not a number.
+##   2. **TEAM LEAD prompt, Step 0 baseline.** It says "THREE of the four declared dead show
+##      zero". There are now **FIVE** declared-dead keys and **FOUR** show zero:
+##      `phase2_words`, `phase2_words_alt`, **`phase2_words_alt2`** (content's C-114 third pool,
+##      "dead until wired", new to the zero-hit list) and `town_levels_for_the_desktop`;
+##      `townsfolk` still returns prose hits. The non-note zero-hit count is **15**, not 14, and
+##      it is fully accounted for. **UNREAD LIVE DATA KEYS IS STILL ZERO.**
+##   3. **TEAM LEAD prompt, Step 5.** "thirty-three exist as of 18 Nov" for minibosses. It is
+##      **44 bodies** on disk and in `by_key` as of 20 Nov 23:0x CT, 43 of them wired.
+##
+## NEEDS MR. E: nothing.
+##
 ## TAKE THIS NEXT - THE 21:58 CT FIRING, 20 NOV 2026 (machine clock 21:58-22:1x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 20:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, FOUR BRANCHES WITH NEW WORK, SIX MERGED, FOUR TICKED. main is the

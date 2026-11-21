@@ -14904,3 +14904,14 @@ build's IDLE at 11:18:09 - and the hold was 1m25s.
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; bellmirebro posted nothing anywhere and spent nothing.
+
+
+## HUB 21 Nov 2026 12:5x CT - TAKE THIS NEXT row 5: prove the character-sheet mana bar on a fixture
+Row taken: HUB (row 5) - "prove the character sheet's mana bar renders the moment the publisher sends the key".
+web/ NOT CHANGED (no code needed: app.js manaBar() + the ?mock=v6 fixture, Ysolde mana 18/40, already exist).
+Proved in headless Chromium 1440x900 with the snapshot fetch routed to [] so the mock renders: LOOKED AT the Ysolde sheet.
+NUMBERS: Ysolde `.manabar` text "MP 18 / 40", aria-label "Mana 18 of 40", --hp fill 0.45 (18/40, exact). Cleric (mana 0, max 25) draws "MP 0 / 25" (floor 3%). Brum (0/0, non-caster) draws NO bar. Hostile name `<img src=x onerror=alert(1)>` rendered as text, 0 injected <img src=x>, 0 dialogs, 0 page errors.
+So the receiver is proven: the moment snapshot_pub.gd sends mana/mana_max on the hero row, the bar draws. Nothing to build hub-side.
+State checks ?state=empty/fail/stale ?mock=chronicle ?mock=crowd ?open=1 all render, no page errors. node --check app.js OK; innerHTML assignments = 2 (app.js:255, :301, page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function.
+Live-dot colour: unchanged, red (functional) - seen on the LIVE pill and rail dots in the shot. NOT claiming READY TO PUBLISH: web/ is byte-identical to origin/hub, delta with gh-pages unchanged and with the supervisor.
+Seen wrong: nothing in the sheet; the shot is a mock on an empty town so the "has not reported yet" banner shows by design.

@@ -1029,7 +1029,13 @@
     "The bell is not rung. It is never rung for this.",
     "A cart is pulled aside to clear the road. The wheels leave two lines in the mud.",
     "Straps are tightened, then tightened again. Nobody speaks.",
-    "The lamp-boy runs ahead with the light and stops at the top step."
+    "The lamp-boy runs ahead with the light and stops at the top step.",
+    "The lamp is trimmed, filled and lit. It is carried to the gate.",
+    "A child holds the gate open and is told to stand back.",
+    "The boots are scraped on the sill, one then the other.",
+    "Frost lies on the stair. Somebody has salted it.",
+    "The cook wraps cheese in a cloth and presses it into a hand.",
+    "The watch-dog gets up, looks, and lies down again."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1563,7 +1569,13 @@
     "A needle goes through torn leather. The stitches are small and even.",
     "The tally-board is chalked and the chalk put back in its dish.",
     "Somebody hangs the wet cloaks over the rail. The drip is steady.",
-    "The gate-ward bars the door and lets the lamp burn on."
+    "The gate-ward bars the door and lets the lamp burn on.",
+    "The water-bucket goes round. It comes back empty.",
+    "Somebody scrapes the mud off the stair with a flat stone.",
+    "The lamp is trimmed. It will be wanted again soon enough.",
+    "A pot of barley goes on. Nobody asks for it. It is eaten.",
+    "The door-ward counts the heads and finds the count right.",
+    "Wet wool steams by the fire. Nobody moves it."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4590,7 +4602,19 @@
     "Planted beans along the wall. They came up in spring.",
     "Taught the dog to wait at the gate. It waits.",
     "Paid the debt before he went down. The slate is clean.",
-    "Wrote his letters in a small hand to save the paper. There are a great many."
+    "Wrote his letters in a small hand to save the paper. There are a great many.",
+    "Sharpened every knife on the street and took no coin for it.",
+    "Kept the well-rope oiled. It never once frayed.",
+    "Carried water up the hill in the dry month. Did not complain of the hill.",
+    "Mended the ferry-rope twice a year. It held.",
+    "Stood the third watch most nights. Said the third was quietest.",
+    "Left a loaf on the sill for whoever came by late. Somebody always did.",
+    "Counted the sheep home every dusk. Was one short only the once.",
+    "Sang badly and often. The street misses it.",
+    "Salted the winter fish and shared the barrel. It lasted the season.",
+    "Swept the chapel steps before dawn. The steps are clean.",
+    "Knew every dog in Bellmire by name. They followed the cart to the gate.",
+    "Tied the bundle tight and went down first. The knot held."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14222,5 +14246,6 @@
   "_note_c159": "C-159 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c160": "C-160 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c161": "C-161 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c162": "C-162 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+  "_note_c162": "C-162 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 }

@@ -4020,3 +4020,21 @@ only re-ran the battery the 20:08 run could not finish.
 - Checkpoint only: committed locally on laptop and pushed to origin s73-wip. NEXT FIRING: run _townwalk.gd FIRST and
   ALONE when the machine is free (or windowed at a quiet hour), then push laptop. If load persists, team lead may want
   to rule whether a town walk can be skipped for a diff that touches no town file - that is his call, not mine.
+
+## D-cycle - S75: S73 LANDED with the name - MB_NAME["winder"] = "Haulback"; chain goes 44 feed / 43 named. 2026-11-20T22:16:55-06:00 (game build)
+TAKE THIS NEXT (21:58 CT block) gave GAME BUILD: merge main first, then land S73 and the winder's name in one push.
+- Merged origin/main (52aa9607 + plan 5159fd2b) and origin/laptop into the S74 checkpoint 6efb0834: clean. On the merged
+  tree `miniboss_feed.by_key` has 44 rows and `winder` carries 9 arrive / 8 fall (C-151) - the hold condition is met.
+- delve.gd MB_NAME: + "winder": "Haulback" - content's _note_c151 and art's CANON (tools/art/minibosses.py:14974) both read.
+  Stale hold comments in delve.gd MB_FIT and dungeon_hd.gd wood row updated. No other code changed.
+- Gates (machine quiet this hour; Marvel/OBS gone): parse rc 0, 0 SCRIPT ERROR / 0 Parse Error (22s);
+  TOWNWALK in_solid=0/16584 (0.000%) raid_in_solid=0/6125 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 0 over 120 s (89s wall);
+  TWITCH_PARSE OK (8 checks); S73_WINDER OK 13 checks, Haulback stands on a wood floor in its own body (post-hold shape,
+  FED) - the tool flipped to its post-hold arms by itself off content's data; OFFFLOOR_VERDICT OK 0 of 2360;
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- NOTE: my first townwalk capture lost the verdict line (I glued stdout+stderr and kept the tail, which was all import
+  warnings). Re-ran it alone with stdout kept separately; the PASS above is that run's verdict line, not an rc.
+- chatcmd's COMMANDS_DATA guard now names only ["pitman"] as UNNAMED (winder cleared) and still reports COUNT published
+  42 / feed 44 - that is the chat bot's publish to make, not mine.
+- NEXT FIRING: the 44th, the PITMAN - MB_FIT 0.94 (art's register), crypt row, MB_NAME "Underfoot" (C-152 on main),
+  STATIC body, footprint_span 3.10 m from _report.json (not the 2.85 m prose).

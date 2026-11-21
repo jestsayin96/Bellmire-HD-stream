@@ -334,3 +334,14 @@ are the mirror image: **a pack with no file called `LICENSE` can still be fully
 licensed**, and two of these three are CC0 outright. A filename is not a licence
 in either direction. The recipe that counts files answers "where do I have to go
 and read", not "what am I allowed to use".
+
+
+## PACK CATALOGUE - 3d_crystals_new (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|
+| 3d_crystals_new | **NO LICENCE FILE FOUND** | none | 5 (`crystals.blend`, `174.jpg`, `174_norm.jpg`, `crystal.jpg`, `crystal_simple_norm.jpg`) | not established | not established |
+
+- Checked: every file in `_packs\3d_crystals_new\` and every entry in the sibling `3d_crystals_new.zip` (the same five files, read by listing the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file of any kind.
+- A `.blend` can carry text datablocks with terms, but none was opened for this entry; the pack is recorded as unlicensed until a licence is found on disk.
+- Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. The crystal textures are not to be imported on the strength of their folder name or of any search snippet.

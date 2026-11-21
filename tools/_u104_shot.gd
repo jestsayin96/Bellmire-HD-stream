@@ -130,6 +130,14 @@ func _process(_dt: float) -> bool:
 					if (q as Rect2).intersects(chr_r):
 						hit += 1
 				print("U105_MANA scale=%s plates=%d offscreen=%d rects=%s chronicle=%s under_chronicle=%d" % [UiTheme.scale, ms2.get_child_count() if ms2 else -1, bad, prs, chr_r, hit])
+				for fh in get_nodes_in_group("hud_chronicle"):
+					var fp := fh.get_parent()
+					var fcard = fp.get("_card") if fp != null else null
+					print("U109_CARD parent=%s card=%s" % [fp, fcard])
+					if fcard is Control:
+						print("U109_CARD vis=%s min=%s rect=%s" % [(fcard as Control).visible, (fcard as Control).get_combined_minimum_size(), (fcard as Control).get_global_rect()])
+					if fp != null and fp.has_method("_chrome_text_w"):
+						print("U109_TEXTW w=%s" % fp.call("_chrome_text_w"))
 				_save("mana_%d" % int(round(UiTheme.scale * 100.0)))
 				_scales.remove_at(0)
 				_at = _f

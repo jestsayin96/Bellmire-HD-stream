@@ -153,9 +153,11 @@ func _build_chrome() -> void:
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
     _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(240), 0)
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(150), 0)
     _card_sub.add_theme_font_size_override("font_size", UiTheme.px(CARD_SUB_PX))
     _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
+    # U109: sub line is ellipsis-trimmed; its old 240px floor made the card 396px at 150% and left the
+    # Chronicle text a 200px column. 150px keeps the card readable and the text a column.
     cv.add_child(_card_sub)
     _card.visible = false
     h.add_child(_card)
@@ -395,7 +397,8 @@ func _chrome_text_w() -> float:
     if _panel is HudDock.ChronicleScroll:
         w = _vellum().size.x
     if card_showing() and _card != null:
-        w -= _card.get_combined_minimum_size().x + float(UiTheme.px(14))
+        # U109: the card never takes more than 40% of the vellum; the text keeps at least 60%
+        w -= minf(_card.get_combined_minimum_size().x + float(UiTheme.px(14)), w * 0.4)
     return maxf(w - 4.0, 120.0)
 
 func _chrome_h() -> float:

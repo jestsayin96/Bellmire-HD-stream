@@ -362,10 +362,22 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
     return written, eng, vis, edge
 
 
-def sheet(repo, keys, hero, name="_hero_scale", cols=3):
+def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
     """Fourteen cells, one scale, one ground line, and the hero's head height
     drawn straight across every cell as a dashed rule - so the comparison is in
-    the picture and not in a table."""
+    the picture and not in a table.
+
+    `tag` MUST BE THE SAME TAG THE VIEWS WERE WRITTEN UNDER. FOUND 20 NOV
+    ~17:47 CT ON THE FERRYMAN, THE FIRST BODY EVER RENDERED WITH --evenlight:
+    this function read `root/<key>/hero_front.png` with the tag dropped on the
+    floor, so `--name ferryman_even --tag _even` wrote a sheet called
+    `ferryman_even.png` out of the WORLD-FIXED directory. The two sheets came
+    out BYTE-IDENTICAL (md5 cf123ec2...) and that is how it was caught - not by
+    a verdict, because no verdict reads the sheet. A picture filed under the
+    name of a lighting rig it was not lit by is the same fault family as
+    `seen: 1.0` on a body with no face: the label says the instrument looked
+    and it did not. Default "" so every existing call and all 41 shipped
+    sheets are byte-for-byte unchanged."""
     root = os.path.join(repo, "renders", "art", "minibosses")
     lab = 40
     rows = (len(keys) + cols - 1) // cols
@@ -379,7 +391,7 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3):
     ground_row = ch - int(GROUND_UP * px_per_m)
     head_row = ground_row - int(hero["h"] * px_per_m)
     for i, key in enumerate(keys):
-        p = os.path.join(root, key, "hero_front.png")
+        p = os.path.join(root, key + tag, "hero_front.png")
         cx, cy = (i % cols) * cw, (i // cols) * (ch + lab)
         if os.path.isfile(p):
             a = G.read_png(p)
@@ -397,8 +409,14 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3):
         # an instrument that can return a GREEN verdict over renders it never
         # opened. Same fault class as a gate that cannot go red. The other two
         # are now opened and counted here, and a missing one fails the run.
+        # AND THE SAME 17:47 TAG FAULT WAS HERE TOO, AND IT IS WORSE HERE:
+        # this loop RETURNS `bad`, which the caller turns into a RED. On a
+        # tagged run it opened the UNTAGGED side and back, so a tagged pass
+        # could have shipped three blank renders while this check went green
+        # over three different files that were fine. An instrument pointed at
+        # the wrong file is not a weaker instrument, it is no instrument.
         for extra in ("hero_side.png", "hero_back.png"):
-            q = os.path.join(root, key, extra)
+            q = os.path.join(root, key + tag, extra)
             if os.path.isfile(q):
                 b = G.read_png(q)
                 m = int((b[..., 3] > 0.02).sum())
@@ -587,7 +605,7 @@ def main():
     G.purge()
     try:
         hero = rep["hero"] if rep["hero"] else {"h": 1.0}
-        bad, checked = sheet(args.repo, keys, hero, args.name, args.cols)
+        bad, checked = sheet(args.repo, keys, hero, args.name, args.cols, args.tag)
         rep["blank_check"] = {"files": len(checked), "failures": [list(b) for b in bad]}
         if bad:
             rep["ok"] = False

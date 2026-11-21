@@ -1047,7 +1047,13 @@
     "The lamp-boy trims a wick and hands it over without a word.",
     "Somebody has put a heel of bread in the pack.",
     "The chapel bell is not rung. The door is held instead.",
-    "The dyer's wife watches from the window until the stair takes them."
+    "The dyer's wife watches from the window until the stair takes them.",
+    "The cooper knocks the hoops tight on the barrel and says nothing.",
+    "Someone has chalked a sun on the doorpost, low, where a child could reach.",
+    "The smith sets down the hammer to watch them go.",
+    "A boot-lace is retied on the stair, slow, then they are gone.",
+    "The lamp-boy trims the wick twice and hands it over.",
+    "The baker's boy runs out with a hot roll, and is told off for it."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1599,7 +1605,13 @@
     "The healer counts the bandages and finds enough.",
     "Bread is torn and passed along the bench, heel last.",
     "The ward lays the bar back across the door and rests a hand on it.",
-    "Boots come off at the hearth. The fire is built up without being asked."
+    "Boots come off at the hearth. The fire is built up without being asked.",
+    "Mud is scraped from the boots at the step. The step is swept after.",
+    "The kettle goes on before the packs come off.",
+    "A lamp is left in the window until the last of them is in.",
+    "The chandler counts the stubs and writes down what was burned.",
+    "Somebody finds a clean cloth for the blade and says nothing.",
+    "The ward sits on the well-edge a while with the lamp between their feet."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4662,7 +4674,19 @@
     "Salted the stair for the old women. Nobody asked.",
     "Stood the last watch and did not call for relief.",
     "Planted pear trees for a town that had not yet grown.",
-    "Said little at table. Cleared it after."
+    "Said little at table. Cleared it after.",
+    "Hung the lantern at the turn. It was lit every night after.",
+    "Sharpened every blade on the street and charged for none.",
+    "Kept the ledger honest. Kept the door too.",
+    "Taught three children their letters and one to swim.",
+    "Salted the steps before frost. Nobody asked.",
+    "Mended the net. Went down with the boat's lamp.",
+    "Counted the heads at the gate and was one short.",
+    "Baked for the watch. Walked the stair last.",
+    "Carried the water up. Did not carry it down.",
+    "Left the stew on. Said back by dark.",
+    "Tied off the last sack. Did not tie off the last knot.",
+    "Paid the tithe early and the debt late. Both were paid."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14297,5 +14321,6 @@
   "_note_c162": "C-162 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c164": "C-164 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+  "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
 }

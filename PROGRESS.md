@@ -14804,3 +14804,10 @@ and no access was needed; the path shape changed. **I did not call
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.
+
+## C-166 (21 Nov 2026 11:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (10:58 CT block, CONTENT row) gave content: "C-165 ticked. Free C-cycle, your own pick." No miniboss owed: 44 ORDER entries per art's guard, miniboss_feed.by_key holds 44.
+Added (data/lore_lines.json only): epitaphs +12 (936 -> 948), descend +6 (565 -> 571), cleared +6 (550 -> 556), all unique against existing lines (one epitaph duplicate caught and replaced before write), ASCII, plain register, no mechanics, no floor counts; `_note_c166` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c166` only. items/bosses/potions untouched and parse.
+CODE WIRING: none; the three lists are already drawn from at random.
+Next content: C-167.

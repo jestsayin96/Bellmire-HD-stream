@@ -15273,7 +15273,7 @@ OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"pitman"}
 
 
 def pitman():
-    """IT TAKES THE FLOOR. The 44th body. PASS 2.
+    """IT TAKES THE FLOOR. The 44th body. PASS 3.
 
     WHAT A VIEWER READS FROM THE DOORWAY:
       WHAT IS IT?        A short broad man in a flat cap, both hands on a
@@ -15304,19 +15304,31 @@ def pitman():
     pale-on-pale hides. Head-on he was a stack of pale blobs beside a pale
     ladder and did not read as a man at all. He is dark now and he reads.
 
-    STILL WRONG AFTER PASS 2, AND WRITTEN DOWN RATHER THAN HIDDEN - the
-    register is GREEN on every number for all three of these:
-      - THE MAN IS NOW DARK-ON-DARK. He separated from the ladder and lost
-        himself against the pit mouth (front) and the spoil heap (side): his
-        legs are gone in both. The value fix moved the fault, it did not
-        remove it. The spoil wants to be elsewhere, not the man re-paled.
+    PASS 3 TOOK THE SPOIL, AND ONLY THE SPOIL. It was three smooth spheres:
+    it read as BOULDERS, it stood directly behind the man and took his legs
+    away in the side view, and from the back it hid the kerb completely. It
+    is now five broken angular clods with two pale shoring timbers lying in
+    them, moved off his line and kept lower than the kerb. BOTH FAULTS IT WAS
+    AIMED AT ARE GONE: his legs read in the side view, and the ring of boards
+    reads from behind. **MY FIRST ATTEMPT AT IT WENT RED** - I gave the heap
+    a metre more room, the span went 2.85 -> 3.85, pair_w 5.71, and the
+    frame-edge assertion cut the front 50 px left and the back 48 px right.
+    The guard caught something my eye would have called generosity.
+
+    STILL WRONG AFTER PASS 3, AND WRITTEN DOWN RATHER THAN HIDDEN - the
+    register is GREEN on every number for all of these:
       - THE MOUTH IS NOT A HOLE. The sunk drum reads as a dark lid or a
         tarpaulin laid over the ring, because it has a lit top face and no
-        depth. A hole has to be darkest at its centre.
-      - THE SPOIL READS AS BOULDERS. Three smooth lumps; from the back they
-        also occlude the kerb entirely, so the one pale object that says
-        "boarded hole" is hidden by the one dark object standing in front of
-        it. Dug earth wants angular, broken geometry.
+        depth. A hole has to be darkest at its centre. Untouched this run.
+      - PASS 3 PUT A NEW FAULT IN WHILE REMOVING TWO. The pale shoring
+        timbers in the heap are the same value as the pale kerb boards, so
+        the whole floor line is now a busy band of similar pale fragments and
+        the kerb reads as part of the rubble rather than as a ring. The
+        timbers want to be fewer, or darker, or gone.
+      - THE MATTOCK HEAD DOES NOT READ AS BEING IN THE GROUND. It is dark
+        against the dark mouth; only the pale upper haft reads.
+      - THE MAN IS STILL DARK-ON-DARK AGAINST THE MOUTH head-on, though the
+        spoil fix gave him his legs back in the side view.
 
     WHAT I EXPECTED TO GO WRONG, WRITTEN BEFORE I RENDERED IT. The Winder's
     lesson was that a thing lying FLAT on the floor foreshortens to nothing
@@ -15388,13 +15400,28 @@ def pitman():
     # ------------------------------------------------------- THE SPOIL HEAP
     # Dark, low, behind the pit - it answers "where did the dirt go" and it
     # is the dark field the pale ladder is read against.
+    # PASS 3. At pass 2 this was three smooth spheres sitting directly behind
+    # the man: it read as BOULDERS, took his legs away in the side view, and
+    # from the back it stood in front of the kerb and hid the one pale object
+    # that says "boarded hole". Now it is broken angular clods, it is moved
+    # off his line, and it is lower than the kerb. MY FIRST TRY AT THIS PUT
+    # it a metre further out and the FRAME-EDGE ASSERTION WENT RED - span 3.85,
+    # pair_w 5.71, front cut 50 px left and back 48 px right. The guard caught
+    # a fault my eye would have called 'more room for the heap'.
     _open()
-    for hx, hy, hr, hh in ((0.18, 0.72, 0.62, 0.40), (-0.52, 0.86, 0.46, 0.30),
-                           (-1.02, 0.58, 0.34, 0.22)):
-        P.add(L.sphere(hr, hr * 0.80, hh, 14, 9), 'dark', loc=(hx, hy, hh * 0.34))
-    for bx, by, bth in ((-0.18, 0.96, 0.6), (0.38, 0.42, -0.9)):
-        P.add(L.box(0.62, 0.09, 0.07), 'bone', loc=(bx, by, 0.30),
-              rot=(0.0, 0.22, bth))
+    for cx, cy, cw, cd, ch, cth, ctl in (
+            (-0.98, 0.82, 0.46, 0.40, 0.28, 0.5, 0.18),
+            (-1.28, 0.58, 0.36, 0.32, 0.20, -0.8, 0.12),
+            (-0.74, 1.06, 0.40, 0.32, 0.22, 1.1, -0.15),
+            (-1.22, 0.98, 0.30, 0.28, 0.16, -0.3, 0.20),
+            (-1.30, 0.78, 0.26, 0.24, 0.13, 0.9, -0.10)):
+        P.add(L.box(cw, cd, ch), 'dark', loc=(cx, cy, ch * 0.42),
+              rot=(ctl, ctl * 0.6, cth))
+    # the shoring timber that came out of the hole - pale, standing at angles
+    # in a dark heap, so the heap has edges to read and is not one mass
+    for bx, by, bth, btl in ((-1.16, 0.64, 0.4, 0.55), (-0.90, 0.92, -1.0, 0.75)):
+        P.add(L.box(0.66, 0.10, 0.08), 'bone', loc=(bx, by, 0.26),
+              rot=(0.0, btl, bth))
     _close("spoil")
 
     # ---------------------------------------------------------- THE MATTOCK

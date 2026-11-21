@@ -24,7 +24,7 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "f46c24bf71b61b7eb4763b4b0e66761ae7dedf0b",
+   "head": "96af6730ec27b22de05c53f2838781cdcb8c8ddb",
    "ref": "origin/main",
    "ref_commit": "a1158b025490c36ac663d5b7475e63a9d51e7327",
    "ref_gd_sha256_8": "bc3a603f",
@@ -2562,18 +2562,18 @@
    "pack_used": null,
    "parts": 3,
    "engine": "BLENDER_EEVEE",
-   "faces": 1280,
+   "faces": 932,
    "size": [
-    2.85,
-    2.59,
+    3.1,
+    2.93,
     2.3
    ],
-   "footprint_span": 2.85,
+   "footprint_span": 3.1,
    "height_m": 2.3,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.151,
+   "corridor_margin_m": 7.904,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.2,
    "read_from": {
@@ -2587,11 +2587,11 @@
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.2433245231555556,
-    "ortho": 3.9935479164123535,
+    "radius": 2.4205117111033063,
+    "ortho": 4.505660533905029,
     "clip": [
-     8.60172176361084,
-     22.0273494720459
+     9.132416725158691,
+     23.24559783935547
     ]
    },
    "views": [

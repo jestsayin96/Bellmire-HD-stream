@@ -4276,7 +4276,7 @@ views, blank 3 files / 0 failures.
 
 ---
 
-## 44 - THE PITMAN ("Underfoot"), crypt. PASS 2.
+## 44 - THE PITMAN ("Underfoot"), crypt. PASS 3.
 
 **IT TAKES THE FLOOR.** It does not wound and it does not grab. Every beat it
 opens a pit under whoever is standing where it wants them not to be; that
@@ -4284,15 +4284,15 @@ delver spends their next beat climbing out on the ladder it leaves them, and
 **the pit stays** - the room the party finishes in is not the room they
 started in. The count is not a count of heroes, it is a count of ground.
 
-Built this run, 20 Nov, the 20:34 CT firing, in two passes.
+Built this run, 20 Nov, the 20:34 CT firing, in three passes.
 
-`minibossgen`: **ok true, 0 errors, 0 blanks**, span **2.85 m -
+`minibossgen`: **ok true, 0 errors, 0 blanks**, span **3.10 m -
 CORRIDOR-SAFE, UNDER-LID** against floorgen's own 11.0 m clear / 9.5 m
-underside, **3 merged meshes, 1,280 tris**. **NOT ROOM-LOCKED** - no spawn
+underside, **3 merged meshes, 932 tris**. **NOT ROOM-LOCKED** - no spawn
 gate needed.
 
 `minibossfit --evenlight`: **GREEN**, `errors []`, `blind_views []`,
-creature_h **2.30** / hero 2.45 = ratio **0.94**, pair_w **4.71**,
+creature_h **2.30** / hero 2.45 = ratio **0.94**, pair_w **4.96**,
 `fits_frame` true, **3 proving views**, `blank_check` 3 files / 0 failures,
 and every `frame_edge` count is **0** on all three views. Register at
 `renders/art/minibosses/_fit_pitman_register.json`.
@@ -4318,19 +4318,32 @@ heap with the ring behind it.
    all six rungs vanished and the one tall object read as a plain prop. Yawed
    40 deg; the side view now shows six rungs.
 
-**STILL WRONG, AND THE REGISTER IS GREEN ON ALL THREE:**
+3. **THE SPOIL HEAP (pass 3, worked, and it went RED on the way).** It was
+   three smooth spheres: boulders, not dug earth; it stood directly behind the
+   man and took his legs away side-on; and from the back it hid the kerb
+   completely. Now five broken angular clods with two pale shoring timbers in
+   them, moved off his line and kept below the kerb. His legs read side-on and
+   the ring of boards reads from behind. **My first attempt gave the heap a
+   metre more room and the frame-edge assertion went RED** - span 2.85 -> 3.85,
+   pair_w 5.71, front cut 50 px left, back cut 48 px right. The guard caught
+   something I would have called generosity.
 
-- **The man is now dark-on-dark.** He separated from the ladder and lost
-  himself against the pit mouth (front) and the spoil heap (side) - his legs
-  are gone in both. The value fix moved the fault; it did not remove it.
+**STILL WRONG AFTER PASS 3, AND THE REGISTER IS GREEN ON ALL OF IT:**
+
 - **The mouth does not read as a hole.** The sunk drum has a lit top face and
-  no depth, so it reads as a dark lid or a tarpaulin laid over the ring.
-- **The spoil reads as three smooth boulders**, not dug earth, and from the
-  back it occludes the kerb completely - the one pale object that says
-  "boarded hole" is hidden by the one dark object in front of it.
+  no depth, so it reads as a dark lid or a tarpaulin laid over the ring. A
+  hole has to be darkest at its centre. Untouched this run.
+- **Pass 3 put a new fault in while removing two.** The pale shoring timbers
+  in the heap are the kerb boards' own value, so the floor line is now a busy
+  band of similar pale fragments and the kerb reads as part of the rubble
+  rather than as a ring. Fewer timbers, or darker ones, or none.
+- **The mattock head does not read as being in the ground** - dark on dark;
+  only the pale upper haft reads.
+- **The man is still dark-on-dark against the mouth head-on**, though the
+  spoil fix gave him his legs back in the side view.
 
-Next pass is the spoil (angular, broken, and moved off the man's line) and
-then the mouth. Not done this run and not claimed as done.
+Next pass is the mouth and then the pale count at floor level. Not done this
+run and not claimed as done.
 
 ### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
 

@@ -21,7 +21,7 @@
    "creature_h": 2.3,
    "hero_h": 2.45,
    "ratio": 0.94,
-   "pair_w": 4.71,
+   "pair_w": 4.96,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -32,45 +32,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 46013,
-      "vis": 46013,
-      "delta": 47509,
+      "alone": 46487,
+      "vis": 46487,
+      "delta": 48417,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43666,
-      "vis": 43666,
-      "delta": 48363,
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 48502,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 44033,
-      "vis": 44033,
-      "delta": 48141,
+      "alone": 49053,
+      "vis": 49053,
+      "delta": 53991,
       "seen": 1.0
      },
      "hero": {
       "alone": 37774,
       "vis": 37774,
-      "delta": 38489,
+      "delta": 38488,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 50339,
-      "vis": 50339,
-      "delta": 53796,
+      "alone": 48570,
+      "vis": 48570,
+      "delta": 52286,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44012,
-      "vis": 44012,
-      "delta": 44700,
+      "alone": 44019,
+      "vis": 44019,
+      "delta": 44702,
       "seen": 1.0
      },
      "proves": true
@@ -104,5 +104,5 @@
  "seen_min": 0.15,
  "vis_min": 700,
  "min_proving": 2,
- "note": "Pass 2. GREEN on every number; three faults the numbers cannot see are written up in the pitman() docstring in tools/art/minibosses.py."
+ "note": "Pass 3. GREEN on every number; the faults the numbers cannot see are written up in the pitman() docstring in tools/art/minibosses.py and in docs/art/MINIBOSSES.md."
 }

@@ -916,3 +916,19 @@ IDLE 2026-11-21T03:52:30-06:00 - chat bot B99 four carried gates all GREEN (pars
 RUNNING 2026-11-21T04:08:40-06:00 (game build, claim 04:08, cap claim+25 = 04:33, expected finish 04:33)
 
 IDLE 2026-11-21T04:16:14-06:00 - game build S81 done (S79_PITMAN OK, HOLD lifted on content's 7 act lines; S81_SHIELDMAT OK - no painted shield pair, only the celtic is coloured). No Godot of mine alive. Claim 04:08:40, cap 04:33, released early.
+
+RUNNING 2026-11-21T04:42:06-06:00 (QA tester, gates l14/twitch_parse/commands_doc/delve/s58 headless, cap claim+12)
+
+IDLE 2026-11-21T04:44:37-06:00 - QA tester: L14 OK 24, TWITCH_PARSE OK 8, COMMANDS_DOC OK 31, DELVE_TEST OK, OFFFLOOR OK 0/2370, S58_SPAN OK 28. No Godot alive. (QA tester)
+
+RUNNING 2026-11-21T04:49:47-06:00 (chat bot B100, gates commands_doc/l14/parse, expected finish 04:56, cap claim+25 = 05:16)
+
+IDLE 2026-11-21T04:52:04-06:00 - chat bot B100: COMMANDS_DOC OK 32, L14_TEST OK 24, parse rc=0 / 0 script errors, TWITCH_PARSE OK 8. No Godot of mine alive. Claim 04:49:47, cap 05:16, released early. (chat bot)
+
+RUNNING 2026-11-21T04:53:27-06:00 (HUD U120 windowed L74 burst re-check at 100/125/150 + U117 banner shot, expected finish 05:03, cap 05:10)
+
+IDLE 2026-11-21T04:55:16-06:00 - HUD U120: L74_TEST OK (protected_unread 0, dropped_protected 0), U117_DONE fails=0, script errors {'l74': 0, 'u117': 0}. No Godot of mine alive. (HUD)
+
+RUNNING 2026-11-21T05:08:33-06:00 (game build S82, claim 05:08, cap 05:33, expected finish 05:30)
+
+IDLE 2026-11-21T05:17:09-06:00 - game build S82: System 9 scoped, no engine edit. parse 0 errors, TWITCH_PARSE OK 8, OFFFLOOR OK 0/2305, DELVE_TEST OK 9001, TOWNWALK PASS. No Godot of mine alive. Claim 05:08, cap 05:33, released early. (game build)

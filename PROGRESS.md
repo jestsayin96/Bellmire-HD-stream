@@ -14047,3 +14047,8 @@ TAKE THIS NEXT (01:58 CT block) gave content: "C-157, your own cycle, unthrottle
 Added (data/lore_lines.json only): epitaphs +12 (840 -> 852), descend +6 (517 -> 523), cleared +6 (502 -> 508), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c157` (zero-hit key, DO NOT WIRE).
 VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c157` only.
 CODE WIRING: none; the three lists are already drawn from at random.
+## hub 02:4x CT 21 Nov - standing check (HUB row: web/ unchanged -> stand down)
+- web/ byte-identical to origin/hub and origin/main (git diff --stat empty both). node --check app.js OK.
+- innerHTML code sites: app.js:255 and :301 only (page-owned); other hits are comments (7, 93, 5137, 5178). Zero-hit set: 2 matches, both comment text at app.js:10-11 ("There is no insertAdjacentHTML...") - no code.
+- CSP meta present (1). Sizes: index.html 36889, app.js 379011, style.css 126639 bytes.
+- No READY TO PUBLISH claim. Untracked _hub_ready_shot.png (310881 B) is a pre-existing file in the worktree, named here; delete refused on this machine.

@@ -1,3 +1,219 @@
+## TAKE THIS NEXT - THE 07:58 CT FIRING, 21 NOV 2026 (machine clock read 08:0x CST while writing;
+## same day, no midnight rollover. The 07:58 firing and the 08:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 06:58 BLOCK. ***
+## *** WRITTEN AND PUSHED AROUND 08:0x, SO THE GAME BUILD'S 08:07 RUN MAY OR MAY NOT HAVE READ
+##   IT. I synced `laptop` FIRST. If it read the 06:58 block instead, nothing is lost: that block
+##   said "finish the soak and land the purse", which is exactly what S84 did.
+##
+## SIX MERGES, main is 0c4aa6a7. **FOUR TICKED, TWO CORRECTLY NOT TICKED (one standing check and
+## one stand-down).** Three root PROGRESS.md conflicts (hub, chatbot, hud-ui - all appending at
+## the same end-of-file), both sides kept, 3 marker lines each dropped by a state machine.
+## **I counted residuals in the file that actually conflicted - root PROGRESS.md: 0 start / 0 mid
+## / 0 base / 0 end - then asserted the stronger thing: `diff --numstat origin/main HEAD` reads
+## +99/-0 on PROGRESS.md and +17/-0 on docs/PROGRESS.md. ZERO LINES REMOVED**, and a marker grep
+## over every .md/.gd/.json/.js on HEAD returns nothing. All four landmarks present (B103, U123,
+## the 07:4x hub check, C-162).
+##
+## TICKED THIS HOUR (four):
+##   - **S83 / S84 (game build) - SYSTEM 9 ROW (a) IS LIVE, AND THE HELD REGRESSION WAS NOT ITS
+##     OWN.** The lane held S83 on `s83-wip` last hour for an L29C soak red; this hour it proved
+##     the red is on HEAD *without* the edit and landed the purse. **I DID NOT TAKE THAT ON ITS
+##     WORD - I READ ALL FOUR LOGS.** `s84/l29c_base0/1/2.log` and `s84/l29c_edit.log` each end
+##     `L29c C: soak ended state=fight frames=10801 fired={ } (total=0)` / `CHECKS 33 FAILS 1` /
+##     `L29C_TEST FAIL` - **identical on three base runs and on the edit run**, so arm C is red
+##     independently of S83. `S83_PURSE OK (8 checks, 0 failed)`, read as verdict lines, including
+##     "no gold is paid at the kill", "the pile sits on the floor (dy -0.001)" and "every alive
+##     delver's gold rose by at least the share (40)". **AND I LOOKED AT BOTH RENDERS.**
+##     `s83_1_purse_on_floor.png` is the tick: the coin pile sits flat on the hex, no float, no
+##     sink, legible at the RTS camera. **`s83_2_walked_to_it.png` IS A POOR PIECE OF EVIDENCE AND
+##     I AM SAYING SO RATHER THAN COUNTING IT** - the camera is inside the delver's shoulder and
+##     the hero fills the left half of the frame, half-occluding the pile. The gate's own wording
+##     ("the walked-to-it frame was rendered") is honest about claiming only that the frame
+##     exists, so this is an evidence-quality note, not a fault in the work. **L29C arm C stays
+##     RED on main and is now a named open defect - see the GAME BUILD row.**
+##   - **C-162 (content)** - counted off the file at the ref, not taken from the message:
+##     epitaphs 888 -> 900, descend 541 -> 547, cleared 526 -> 532 = **+12 / +6 / +6** exactly as
+##     claimed. **0 duplicates and 0 blanks in all three keys** (900/900, 547/547, 532/532
+##     unique), **nothing removed**, exactly one new top-level key and it is `_note_c162`.
+##   - **B103 (chat bot) - AN ARM THAT HAD BEEN PRINTING OK AGAINST A TABLE NO SHOP CHARGES, AND
+##     I RE-GREPPED EVERY LOAD-BEARING CLAIM MYSELF RATHER THAN READING THE WRITE-UP.**
+##     `git grep "Gear\.ARMOUR\b" -- scripts/` returns **nothing outside chatcmd.gd** - confirmed,
+##     the only other hits are `Gear.ARMOUR_LOOK`, which is a different constant and correctly
+##     left alone. `Roster.ARMOUR` IS live (leaderboard_panel.gd:262, snapshot_pub.gd:461/586/592/
+##     658, twitch_eventsub.gd:1046/1067). `Gear.WEAPONS` IS read at **town.gd:4571** - the stall
+##     - exactly as the lane says, which is what makes the weapons side worse than the armour
+##     side. Line numbers check: `roster.gd:171` WEAPONS, `:183` ARMOUR, `:510` the bare `/ 4`.
+##     **AND I CHECKED THE CLAIM THE LANE'S OWN GREEN GATE DEPENDS ON: the two engine copies
+##     really do agree row for row today** - gear.gd:21-28 vs roster.gd:171-178 and gear.gd:30-36
+##     vs roster.gd:183-189 match on name, cost and `found`, so the two new AUTHORITY arms are
+##     silent for the right reason and not because they are wired to nothing. The published
+##     `forge`.cost "60 / 160 / 420 / 1100" equals `Roster.WEAPONS` minus `bare hands` (cost 0)
+##     and `scarforged` (`found`), which is the lane's filter. Arm count 107 -> **111 by my own
+##     count of `_guard_faults.append(`**, matching its claim. B83's "No published number in this
+##     file is unwatched" is at chatcmd.gd:1692 and was false when written, as the lane says.
+##     Its data and doc are untouched on the branch, which independently corroborates
+##     "restored byte-identical". **The two AUTHORITY arms' red half is honestly declared
+##     unproven because firing it needs an edit in the GAME BUILD's files, and the lane refused to
+##     make one. That refusal is correct and is worth more than five arms it could have claimed.**
+##   - **ART pass 7 - the lane found that its own pass 3 built the fault pass 3 was fixing, and
+##     I RED-PROVED IT WITH MY OWN EYES.** I opened `_sweep/paviser_seam1.00/front.png` (the body
+##     as shipped before) and `minibosses/paviser/front.png` (as shipped now) side by side.
+##     **At SEAMH 1.00 the pale board reads as a portcullis - two full-height dark verticals
+##     crossed by the two iron straps. At 0.00 that read is gone.** The fault comes back when the
+##     change is removed, which is the proof the sweep table alone cannot give. **The lane's own
+##     fault 5b is accurate and I can see it: three dark splits remain and the longest still runs
+##     ~0.52 of the board, so the gate is REDUCED, NOT CURED - it says exactly that and claims no
+##     more.** One variable, swept three ways, picture overruling the number at 0.50 with the
+##     reason written down. The new instrument `tools/art/_gateread.py` **goes red on empty and
+##     that arm has been fired** (`_gateread_redarm.json`: `ok: false`, "VOID: only 0 board
+##     columns"). **AND I CHECKED THE TRAP THAT CAUGHT ME LAST HOUR**: `_fit_report.json` parses
+##     to 22 bodies before and after, zero keys lost, zero bodies lost - the 99-line hunk is the
+##     writer reordering, not a gutted register.
+##
+## WHAT I DID NOT TICK, AND WHY EACH IS CORRECT:
+##   - **THE HUB - standing check, no claim, nothing shipped.** I re-ran the hashes myself:
+##     `origin/hub:web` and `origin/main:web` are both `02257b2f`, byte-identical as the lane
+##     said. **No READY TO PUBLISH claim, so I ran NO publish verification and none was owed.**
+##   - **U123 (HUD) - a stand-down, and CORRECT UNDER MR. E'S YIELD RULE. I checked it against the
+##     lock rather than taking it:** the chat bot wrote `RUNNING 07:52:30` and its `IDLE` did not
+##     land until `07:58:10`; the HUD read R's working lock at 07:53, inside that live hold, saw
+##     no IDLE from the same lane after it, and stood down. **That is the rule working.** It is
+##     not a tick because nothing shipped - but see the lock section: this is the SECOND
+##     CONSECUTIVE HOUR the HUD has lost its window, and that part is mine, not the HUD's.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## - **GAME BUILD** - **S83/S84 ticked: System 9 row (a) is live and the purse is on the floor.**
+##   Holding it an hour and then proving the red was not yours is exactly the right sequence.
+##   **THE NAMED OPEN DEFECT IS NOW L29C ARM C ITSELF** - "at least one set piece of any kind
+##   fired during the soak (0)", red on HEAD across four runs, `state=fight frames=10801`. The
+##   soak never leaves the fight state, so nothing it watches for can fire; **that reads like the
+##   harness, not the set pieces, and it is an existing item of yours, not new work.** Take it or
+##   say plainly why not. Two requests from the chat bot, **both of which you may decline freely -
+##   they are its asks, not rows I am writing for you**: (1) `Gear.ARMOUR` is read by nothing in
+##   the game (I re-grepped and confirm it), so deleting it or aliasing it would end a whole class
+##   of silent drift; `Gear.WEAPONS` is NOT dead - town.gd:4571 dresses the stall from it. (2) a
+##   `REWORK_DIVISOR := 4` at roster.gd:510, and the earlier `OIL_PER_HEAD` / `OIL_FLOOR_MIN` at
+##   delve.gd:161, would turn three wording guards into real two-authority arms.
+##
+## - **CONTENT** - C-162 ticked, counted line by line and checked for duplicates. Free C-cycle,
+##   your own pick. Keep writing `_note_` keys: they are 42 of the 81 zero-hit keys this hour and
+##   not one of them is a defect.
+##
+## - **ART** - pass 7 ticked and red-proved by me. **You named 5b yourself: three splits still
+##   make a faint grid with the two straps and the longest runs ~0.52 of the board.** That is the
+##   obvious one variable for pass 8 and your own note already calls it next. One variable, one
+##   measurement, one pass - and `_gateread.py` can now rank the candidates before you ship one.
+##   The man's back is still the other open fault and still unowned; take whichever you judge
+##   worse, but say which and why, as you did this hour.
+##
+## - **HUB** - standing check verified, hashes re-run by me. Own cycle on your three files.
+##   **Do not publish** - the delta is with the supervisor for a SEVENTH hour. If you change
+##   `web/`, say READY TO PUBLISH plainly so the gate is earned and I will run it.
+##
+## - **HUD** - **U123 was a correct stand-down and costs you nothing, and the reason you keep
+##   losing the window is mine to fix, not yours** - see the CHAT BOT row and the lock section.
+##   Your item is unchanged and is now three hours old: does a Chronicle line's drawn width exceed
+##   the scroll's inner rect at 150% in 2x2? Your own plan for it is right - one claim, windowed,
+##   measure-only (`tools/_u122_chron_width.gd`), no `feed_hud.gd` edit until the number shows a
+##   clip. **And the 05:58 seat's addition still stands: in that frame the ambient lines are cut
+##   at the RIGHT by the scroll edge AND covered at the LEFT by the lord tooltip card. Two faults,
+##   two owners - do not let the card's occlusion be charged to the text width.**
+##
+## - **CHAT BOT** - **B103 ticked, and every engine claim under it re-grepped by me.** Third hour
+##   running you have found a defect in your own shipped work and fixed it with the gate green;
+##   nothing else in the house is producing that. **ONE THING TO CHANGE, AND IT IS A PROTOCOL
+##   MATTER, NOT A QUALITY ONE: YOUR WINDOW IS :45. Your last two claims landed at 06:52:30 and
+##   07:52:30, both inside the HUD's :52-:07 window, and the HUD has correctly stood down both
+##   times.** Neither of you broke the yield rule - the lock was genuinely free when you claimed -
+##   but the HUD has now lost two cycles to it. **Claim by :50 with a declared finish inside :52,
+##   or split the gates and carry the remainder to your next firing.** If your gates cannot fit
+##   before :52, say so in the lock line and I will take it up rather than leaving it on you.
+##
+## - (QA tester, not one of the six) - **still owed in writing, now from 04:58, four hours old:**
+##   acknowledge the 03:06 stale-lock clear, name which gates are windowed-only, and say where its
+##   declared `cap claim+12` comes from (the protocol's number is +25). It did not fire in this
+##   hour's window at all.
+##
+## FOR THE SUPERVISOR (07:58 CT, 21 Nov)
+##   1. **THE HUB PUBLISH DELTA - re-measured myself, unchanged for a SEVENTH hour.**
+##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
+##      `origin/hub:web` `02257b2f`, identical to `origin/main:web`; difference **3 files / 59
+##      insertions / 1 deletion** (NOTES.md +9, app.js +47/-1, style.css +4). No READY TO PUBLISH
+##      claim this hour, so no publish verification was run and none was owed.
+##      **Recommendation: still not yet** - the only reason left is that the gate is unearned
+##      until the lane claims it. The lane has now delivered four clean hours running.
+##   2. **THE LEDGER QUESTION (carried from 05:58, unchanged, nothing blocked).** The Master
+##      Vision doc numbers Phase 2 systems 6/7/8 as crystal drops / chests by rarity / mimics,
+##      while the 18 Nov 16:58 directive renumbered 6/7/8 as weapon / armour / shield variety -
+##      the numbering the fleet has used since. Both agree 9 = loot on the ground, **and System 9
+##      row (a) is now LIVE on main**, so the question is no longer theoretical for S83 but is
+##      still not blocking. **Recommendation:** confirm the directive's numbering is
+##      authoritative and either re-enter those three at free numbers in the 5-80 range or say
+##      plainly they are dropped. A ledger decision, not a build decision.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 08:0x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once). **TEN items.**
+## *** I MADE NO PROMPT-WRITE ATTEMPT THIS RUN AND I SAY SO PLAINLY. The question was settled on
+##   18 Nov: the gate is on the CALL, not on a field, and a firing has no live turn to be approved
+##   in. Four seats have now re-proved it; spending the call again is not evidence, it is noise.
+##   1. (carried, RE-MEASURED on merged tree 0c4aa6a7 with the same crude literal matcher the
+##      06:58 seat used, so the numbers are comparable) **48 script files / 2,345,688 chars**
+##      (47 `scripts/*.gd` + 1 `web/*.js`), 12 `data/*.json`, **145 top-level keys**. 81 keys
+##      return zero literal hits: **42 `_note_`** and 39 others, every one accounted for - twelve
+##      `_source`, the declared-dead four, the two runtime-built `_alt` pools, and the prose/spec
+##      strings. **I SPOT-CHECKED SEVEN OF THE 39 BY OPENING THE VALUES (guard 1), INCLUDING FIVE
+##      THE 06:58 SEAT DID NOT ENUMERATE** - `causality`, `draw`, `rule`, `_format`, `_measured`,
+##      `uniques`, `district_rules`: **every one is a prose sentence or a spec note, not data the
+##      engine loads.** CONCLUSION UNCHANGED: **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET
+##      DIRECTORIES: ZERO, off 34 dirs with files** (the prompt still says 31).
+##      **AND A CORRECTION TO THE 06:58 SEAT'S OWN NUMBER, MEASURED BOTH WAYS: it reported 49
+##      script files; `git ls-tree` says 47 `.gd` + 1 `.js` = 48 on ITS tree (b9d4c289) AND on
+##      mine. Nothing was dropped - the 49 was an over-count.** Keep the note that the glob is
+##      `data/*.json` and that `data/town/bellmire.json` is a tools/ artefact, not live data.
+##   2. (carried, and still the important one) **THE PROMPT'S PHASE 2 SECTION IS WRONG ABOUT THE
+##      MOST VALUABLE OPEN ITEM.** It says the HUD's rarity-hue half of System 2 "is the only part
+##      still open" and "was still unstarted at 09:2x on 18 Nov". **IT SHIPPED** - `ui_theme.gd:176`
+##      names itself "U55 (System 2, HUD half): the rarity hue ladder", `rarity_hue` :196,
+##      `rarity_ink` :200, `rarity_pip` :204, and `leaderboard_panel.gd:197`/:202 call two of them
+##      on the worn rows. **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   3. (carried) the prompt's `parse_fish()` line - hardened at U76, re-proved at U119. Struck.
+##   4. (carried, **RE-MEASURED BY ME THIS HOUR WITH A BRACE-MATCHED PARSE, NOT A REGEX**)
+##      `Delve.MB_NAME` = **44** entries, `miniboss_feed.by_key` = **44** keys, **zero keys on
+##      either side the other lacks**, and published `miniboss`.what and .short both say 44.
+##      The chain is WHOLE at 44/44/44. Never quote the prompt's count; never use a flat regex on
+##      `MB_NAME` - three seats' regexes have lied about this exact constant.
+##   5. (carried, re-measured) the prompt's hub SHAs. gh-pages is `05ac2679`, tree `9ca8051e`,
+##      pushed **19 Nov 20:06 CT**. The prompt's "45a7904 pushed 18 Nov 03:34" is STRUCK AND WRONG,
+##      as was "40223be" before it. `origin/hub:web` is `02257b2f`; delta 3 files / +59 / -1.
+##   6. (carried, re-measured) the Step 5 ID line is behind. As of this hour: **B103, C-162, S84,
+##      U123**, art on paviser pass 7, and the last hub ID unchanged. S83 is LANDED, not held.
+##   7. (carried, re-measured) the lock section should record that the game build's
+##      over-declaration pattern has STOPPED: since 02:08 on 21 Nov its lock lines carry
+##      "claim HH:MM, cap claim+25 = HH:MM" with the cap computed BEFORE the declaration.
+##      **Held again this hour: claim 07:08:31, cap 07:33 computed first, declared 07:30, IDLE
+##      07:20:00. Zero over-declarations in six hours.**
+##   8. (carried) the prompt should carry the two-dot/three-dot warning. `git diff origin/main
+##      origin/<b>` reports main's own newer files as the lane's "deletions". Use
+##      `origin/main...origin/<b>` when measuring WHAT A LANE DID. And the sibling trap: a
+##      reordered JSON block reads as deleted keys in a hunk - parse both versions and compare key
+##      SETS before calling anything dropped. **I used that this hour on art's `_fit_report.json`
+##      and it is what kept me from re-reporting last hour's phantom.**
+##   9. (carried, measured off `ls-tree origin/main`) the ART prompt's standing `snarer_chibi.glb`
+##      item is stale. `snarer_chibi.glb.import` IS on main. Of the `.glb` under that directory
+##      exactly **four** lack an `.import` sibling - **ferryman, hooper, relief, scraper** - and a
+##      Godot run generates them, which makes that the GAME BUILD's tree, not art's. Strike it.
+##  10. **NEW THIS HOUR - THE LOCK WINDOWS AND THE CHAT BOT'S FIRING TIME DO NOT FIT TOGETHER, AND
+##      IT HAS NOW COST THE HUD TWO CONSECUTIVE CYCLES.** The chat bot fires at :45; its gate
+##      preparation means its claim lands at ~:52:30 (06:52:30 and 07:52:30, measured off the lock
+##      file), which is inside the HUD's :52-:07 window, and the HUD has correctly stood down both
+##      times. **Nobody broke the yield rule** - the lock was free at both claims, and standing
+##      down is what Mr. E's rule asks for. The fault is the geometry. I have put the instruction
+##      in the CHAT BOT row (claim by :50 or split the gates) because the plan is the only
+##      instrument a firing can write to, **but the durable fix is one line in the chat bot's
+##      prompt**: its claim, not its firing, must sit before :52. **Report it to the supervisor if
+##      it recurs a third time, because at that point it is a schedule decision and not mine.**
+
 ## TAKE THIS NEXT - THE 06:58 CT FIRING, 21 NOV 2026 (machine clock read 07:0x CST while writing;
 ## same day, no midnight rollover. The 06:58 firing and the 07:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 05:58 BLOCK. ***

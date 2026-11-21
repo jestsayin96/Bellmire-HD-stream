@@ -13853,6 +13853,44 @@
           "Whatever it cost, the floor is open again.",
           "Count what you kept."
         ]
+      },
+      "blower": {
+        "arrive": [
+          "Something ahead is drawing the air in.",
+          "A broad man in pit wool, working a bellows backwards. A pale ribbed bag rides high on his back.",
+          "He does not strike anyone. He draws the room empty, a stroke at a time.",
+          "Every stroke, everybody in here acts a little slower. Whoever carries the most gives out first.",
+          "Look at the bag. It stands one band fuller every stroke. That is how long the room has left.",
+          "Nothing done to the man slows the count. Hit him all you like.",
+          "Three iron patches are stitched over the bag. It has been holed in those places before.",
+          "Hole the bag and the count stops.",
+          "Half-worn hide, newer iron on it, and a man who has not lost his rhythm since you came in."
+        ],
+        "act": [
+          "The bellows draws. {name} is slower for it.",
+          "Another stroke. {name} feels the air go thin.",
+          "{name} is carrying the most, and it shows.",
+          "The bag stands a band fuller. {name} reaches for the next move and it comes late.",
+          "{name} breathes short. The bellows does not stop.",
+          "One stroke more. {name} is a half-beat behind.",
+          "{name} goes for the patch iron. The bag is a long way up his back."
+        ],
+        "broken": [
+          "The bag is holed. The air stops moving.",
+          "A rent in the hide at the patch iron. The count stops where it stands.",
+          "He works the handles and nothing draws. The bag hangs slack.",
+          "The bellows wheeze. The room has stopped getting emptier."
+        ],
+        "fall": [
+          "Deadair is down. The bellows hang slack in his hands.",
+          "The bag sags flat. The air comes back into the room.",
+          "Nobody is drawing on it now. Breathe.",
+          "The handles drop out of his grip and the count is gone.",
+          "He folds over the bag with his hands still on the bar.",
+          "Move how you like. Nothing is slowing you now.",
+          "The last stroke goes out of him and does not come back.",
+          "Take the bellows down. Mend the bag. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13884,7 +13922,8 @@
     "_note_c152": "C-152: pitman feed lines (44th miniboss, Underfoot, crypt). Arrive 9 + fall 8, recent two-phase shape. Expected zero-hit key: DO NOT WIRE.",
     "_note_c154": "C-154: epitaphs +12, descend +12, cleared +12 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
     "_note_c158": "C-158: pitman (44th miniboss) gets act x7 and broken x4, the dependency the S79 way was held on. act lines take {name}, the delver the floor opened under. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c167": "C-167: tither (45th miniboss, Tenthpart, the first EXIT CONDITION: paid off or refused, not only killed) gets arrive x9, act x7, broken x4, fall x8 - the pitman's shape. act lines take {name}, the delver paying or refusing. fall lines are written to read true whether the tenth was paid or the body was beaten, since the encounter can end either way. Expected zero-hit key: DO NOT WIRE."
+    "_note_c167": "C-167: tither (45th miniboss, Tenthpart, the first EXIT CONDITION: paid off or refused, not only killed) gets arrive x9, act x7, broken x4, fall x8 - the pitman's shape. act lines take {name}, the delver paying or refusing. fall lines are written to read true whether the tenth was paid or the body was beaten, since the encounter can end either way. Expected zero-hit key: DO NOT WIRE.",
+    "_note_c169": "C-169: blower (46th miniboss, Deadair, the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives out first, nothing done to the man slows the count, holing the bag stops it) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither shape. act lines take {name}, the delver slowed or reaching for the patch iron. broken lines are the bag being holed (count stops). fall lines read true whether the bag was holed or the man beaten. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

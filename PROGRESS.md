@@ -15142,3 +15142,15 @@ S93 ADDENDUM (2026-11-21T16:14:59-06:00): the 15:58 TAKE THIS NEXT block reached
   MB_FIT/fogbound/.import half AHEAD of C-169 (the beadle precedent; gate-held, drawn 0/400) and did NOT write MB_NAME, which is
   the row's actual red line. If the lead wants the early half reverted, it is three lines in e77b40c9. Next firing: read
   origin/laptop's WORK_PLAN head as well as main's.
+## C-169 (21 Nov 2026 16:2x CST) - THE BLOWER'S FEED ROW (46th miniboss, Deadair)
+TAKE THIS NEXT (15:58 CT block) CONTENT item: C-169. `miniboss_feed.by_key` held 45 keys and no `blower`; art's body is
+committed and merged (assets/monsters/minibosses/blower.glb, 216,396 bytes; docs/art/MINIBOSSES.md #46). Wrote `by_key.blower`
+the pitman/tither shape: arrive x9, act x7, broken x4, fall x8 (46 keys now).
+- It is the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives
+  out first, nothing done to the man slows the count, holing the bag stops it. arrive lines say so in plain words, point at the bag
+  as the visible count and at the three patch irons. broken lines are the bag being holed (count stops). fall lines read true
+  whether the bag was holed or the man beaten. act lines take `{name}`.
+- `_note_c169` added inside miniboss_feed. Expected zero-hit key: DO NOT WIRE.
+- CODE WIRING: `Delve.MB_NAME["blower"]` = "Deadair" and MB_FIT row are now UNBLOCKED (game build). No pool top-up this cycle.
+  Nothing in items/bosses/potions touched.
+- VALIDATION OK: all four files parse, every pre-existing key byte-identical (46 by_key keys).

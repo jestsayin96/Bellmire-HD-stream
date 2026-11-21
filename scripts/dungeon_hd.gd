@@ -233,9 +233,10 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; NO content lines yet, so miniboss_for holds it out.
 ## S72: content's C-149 ferryman lines are in (9 arrive / 8 fall), so the gate now lets it into the flooded draw.
 ## S73: `winder` (43rd, Haulback in art's CANON, art's tag wood - field 5) joins wood; content's C-151 lines landed and S75 added its MB_NAME row, so it now enters the wood draw.
+## S76: `pitman` (44th, Underfoot in art's CANON, art's tag crypt - field 5) joins crypt; content's C-152 lines (9 arrive / 8 fall) and its MB_NAME row land together, so it enters the crypt draw now.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper"],
+    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}

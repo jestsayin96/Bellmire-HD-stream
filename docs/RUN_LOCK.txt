@@ -808,3 +808,27 @@ IDLE 2026-11-20T21:50:35-06:00 - chat bot B93: own cycle on merged main 895cb1f6
 RUNNING 2026-11-20T21:53:32-06:00 (HUD U113 L74 feed-under-load capture, parse then one windowed 150% run; expected finish 21:59, cap 22:07)
 IDLE 2026-11-20T21:55:19-06:00 - HUD U113: parse rc=0, one windowed 150% feed-burst run done; Godot EMPTY at release, no crossing. (HUD)RUNNING 2026-11-20T22:08:30-06:00 (game build S75: claim 22:08, cap claim+25 = 22:33, expected finish 22:30, hard release by 22:33)
 IDLE 2026-11-20T22:16:55-06:00 - game build S75: S73 + MB_NAME winder=Haulback landed on laptop; parse 0 / TOWNWALK PASS 0/16584 / TWITCH_PARSE OK / S73_WINDER OK 13 / OFFFLOOR OK 0 of 2360 / DELVE_TEST OK. Godot EMPTY at release; claim 22:08, cap 22:33, released early, no crossing. (game build)
+
+RUNNING 2026-11-20T22:41:43-06:00 (QA tester: parse + gate batteries, claim 22:41:43, cap +15, expected finish ~10 min)
+
+IDLE 2026-11-20T22:46:53-06:00 - QA tester: parse rc=0; L14 FAIL 1 (guard arms fired, see MINIBOSS COUNT 42 vs 44 / pitman no MB_NAME); TWITCH_PARSE OK 8; DELVE_TEST OK; OFFFLOOR OK 0/2078; TOWNWALK PASS 0/16557; S58_SPAN OK 28. Godot EMPTY at release; claim 22:41, released early. (QA tester)
+
+RUNNING 2026-11-20T22:49:30-06:00 (chat bot B94: publish of 44 - parse + l14 + twitch_parse + commands_doc on merged main 1c66cc71; claim 22:49:30, cap claim+10 = 22:59:30, expected finish 22:55, hard release by 22:56; Godot EMPTY at claim)
+
+IDLE 2026-11-20T22:51:40-06:00 - chat bot B94: PUBLISHED 44 (miniboss what+short 42 -> 44, feed rows 44) and regenerated docs/COMMANDS.md. parse rc=0 0 SCRIPT ERROR; TWITCH_PARSE OK 8; COMMANDS_DOC OK wrote 31 commands; L14_TEST FAIL 1 of 24 with ONE arm - MINIBOSS UNNAMED [winder, pitman] - the MINIBOSS COUNT arm is CLEARED by the publish and the two doc-drift checks are green on the re-run after the generator. Godot EMPTY at release (count 0); claim 22:49:30, cap 22:59:30, released early, no crossing. (chat bot)
+
+RUNNING 2026-11-20T22:53:28-06:00 (HUD U114: L74 second half - burst frames at 125% and 100%, headless parse + 2 short windowed runs; expected finish 23:00, cap claim+15, hard release by 23:07; Godot EMPTY at claim)
+
+IDLE 2026-11-20T22:55:22-06:00 - HUD U114: 125% and 100% feed-burst frames captured, parse 0 errors; Godot EMPTY at release; claim 22:53:28, no crossing. (HUD)
+
+RUNNING 2026-11-20T22:55:56-06:00 (HUD U114 fix check: feed_hud.gd font measure; parse + one windowed 100% run; expected finish 23:02, hard release by 23:07)
+
+IDLE 2026-11-20T22:57:03-06:00 - HUD U114 fix check done, parse 0 errors; Godot EMPTY at release; claims 22:53:28 and 22:55:56, no crossing. (HUD)
+
+RUNNING 2026-11-20T22:57:33-06:00 (HUD U114 final frames: settle-then-shoot at 100% and 125%, 2 short windowed runs; expected finish 23:01, hard release by 23:07)
+
+IDLE 2026-11-20T22:58:51-06:00 - HUD U114 final frames captured, 0 SCRIPT ERROR; Godot EMPTY at release; third claim 22:57:33, no crossing. (HUD)
+
+RUNNING 2026-11-20T23:08:00-06:00 (game build S76: TAKE THIS NEXT item; claim 23:08, cap 23:33; expected finish 23:30)
+
+IDLE 2026-11-20T23:14:34-06:00 - game build S76 (pitman wired + named Underfoot) gates green, Godot EMPTY at release; claim 23:08:00, cap 23:33, declared 23:30, no crossing. (game build)

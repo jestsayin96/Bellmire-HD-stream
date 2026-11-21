@@ -1357,7 +1357,21 @@ def boiler():
     fourteen has a line from a held thing down to the ground - that line is the
     whole creature. Wear 0.25: a sugar man scours his copper or it burns."""
     P = Parts("boiler")
+    # 21 NOV 02:4x CT - SPANS, so `_backread.py` can ask the viewer's question
+    # of THIS body: "can you see the man, and is what you see one flat mass?".
+    # The man's two arms and his hand were authored LAST, after the pan and the
+    # skimmer, and a span is a CONTIGUOUS range - so they are moved up to sit
+    # with the rest of him. THE GEOMETRY IS UNCHANGED: merge_objs groups by
+    # material, so a different authoring order gives the same four meshes with
+    # the same verts in a different order, and `_backread`'s own bounds
+    # assertion is what proves it rather than my saying so.
+    P.spans = {}
+
+    def _span(name, i0):
+        P.spans[name] = (i0, len(P.items))
+
     X = -0.44
+    i0 = len(P.items)
     _legs(P, X, hip=0.80, stance=0.24, r0=0.115, r1=0.095, boot=(0.28, 0.44, 0.12))
     # short, wide, braced back against the weight of a full pan
     limb(P, [(X - 0.02, 0.14, 0.74), (X - 0.08, 0.06, 1.02), (X - 0.14, -0.02, 1.26)], 0.265, 0.250)
@@ -1367,9 +1381,24 @@ def boiler():
     P.add(L.sphere(0.140, 0.155, 0.152, 14, 9), 'bone', loc=(X - 0.16, -0.08, 1.50))
     P.add(L.sphere(0.168, 0.172, 0.100, 14, 8), 'bone', loc=(X - 0.16, -0.06, 1.60))
     eyes(P, (X - 0.16, 0.0, 1.48), 0.052, 0.026, -0.26)
-    # the apron, one flat panel, scoured pale
+    # THE APRON. 21 NOV 03:0x CT - IT LEFT 'bone' AND I LOOKED AT THE PICTURE
+    # THAT MADE ME MOVE IT. Darkening the man's 'body' slot alone changed
+    # almost nothing a viewer could see, and the A/B frame says why better
+    # than the numbers did: this panel is the LARGEST surface the man shows
+    # from the front and the back, and it was in the same slot as the copper
+    # pan, the skimmer and the pool ring. The man could not leave the pale
+    # band while his chest was still in it. It is cloth, not copper, so it
+    # belongs with his leather. His HEAD stays 'bone' on purpose - a pale head
+    # over a dark apron is the one internal line that tells you where he is
+    # looking.
     P.raw(L.membrane([(X - 0.46, -0.28, 1.06), (X + 0.18, -0.28, 1.06),
-                      (X + 0.14, -0.34, 0.50), (X - 0.42, -0.34, 0.50)], 0.03), 'bone')
+                      (X + 0.14, -0.34, 0.50), (X - 0.42, -0.34, 0.50)], 0.03), 'body')
+    # HIS ARMS AND HIS HAND - authored here now, see the span note above.
+    limb(P, [(X - 0.44, -0.04, 1.22), (X - 0.56, -0.06, 1.34)], 0.072, 0.052)
+    # the near arm on the pan's tipping handle
+    limb(P, [(X + 0.15, -0.10, 1.22), (X + 0.62, -0.22, 1.28)], 0.080, 0.056)
+    limb(P, [(X + 0.66, -0.22, 1.28), (X + 0.98, -0.16, 1.34)], 0.034, 0.030, 'dark')
+    _span("man", i0)
     # THE TRUNNION: two short posts in front of him carrying the pan's pivot
     for s in (-1, 1):
         limb(P, [(X + 1.00, -0.42 + s * 0.34, 0.02), (X + 1.06, -0.40 + s * 0.32, 1.36)],
@@ -1386,7 +1415,10 @@ def boiler():
     # SMALL (0.80 m) and HIGH, and the stream travels 0.9 m sideways before it
     # reaches the floor - a long diagonal nothing else in the fourteen has.
     PX, PY, PZ = X + 1.06, -0.42, 1.42
-    P.add(L.sphere(0.40, 0.38, 0.15, 20, 9), 'body', loc=(PX, PY, PZ), rot=(-0.30, 0.52, 0.0))
+    # 'bone', not 'body': the dish is COPPER and the man is now leather. Left
+    # in 'body' the pan would have gone dark with him and the creature's one
+    # idea - a pale dish pouring a pale line - would have gone out with it.
+    P.add(L.sphere(0.40, 0.38, 0.15, 20, 9), 'bone', loc=(PX, PY, PZ), rot=(-0.30, 0.52, 0.0))
     P.raw(aim(L.cone(0.41, 0.42, 0.065, 20), (PX + 0.07, PY - 0.04, PZ + 0.11), (0.52, -0.30, 1.0)), 'bone')
     P.add(aim(L.cone(0.31, 0.32, 0.03, 18), (PX + 0.05, PY - 0.03, PZ + 0.09), (0.52, -0.30, 1.0)), 'glow')
     # THE POUR - one thick unbroken line from the lip, well clear of the pan
@@ -1398,15 +1430,12 @@ def boiler():
     # THE SKIMMER - a long haft back over the shoulder, a flat perforated blade
     limb(P, [(X - 0.42, -0.14, 1.20), (X - 0.78, 0.04, 1.62), (X - 1.02, 0.16, 2.02)],
          0.038, 0.030, 'bone')
-    P.add(aim(L.cone(0.27, 0.26, 0.05, 16), (X - 1.06, 0.18, 2.06), (-0.22, 0.12, 1.0)), 'body')
+    # the blade is metal too - same reason as the dish.
+    P.add(aim(L.cone(0.27, 0.26, 0.05, 16), (X - 1.06, 0.18, 2.06), (-0.22, 0.12, 1.0)), 'bone')
     for k in range(6):
         a = TAU * k / 6.0
         P.add(L.sphere(0.052, 0.052, 0.07, 7, 5), 'dark',
               loc=(X - 1.06 + 0.15 * math.cos(a), 0.18 + 0.15 * math.sin(a), 2.07))
-    limb(P, [(X - 0.44, -0.04, 1.22), (X - 0.56, -0.06, 1.34)], 0.072, 0.052)
-    # the near arm on the pan's tipping handle
-    limb(P, [(X + 0.15, -0.10, 1.22), (X + 0.62, -0.22, 1.28)], 0.080, 0.056)
-    limb(P, [(X + 0.66, -0.22, 1.28), (X + 0.98, -0.16, 1.34)], 0.034, 0.030, 'dark')
     return P
 
 
@@ -8865,6 +8894,36 @@ BUILDERS.update({"moulder": moulder})
 # mass and all of the silhouette's lower half.
 OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"ratcatcher"}
 
+# 21 NOV 02:5x CT - THE BOILER JOINS THE OVERRIDE LIST, AND IT IS AN ALREADY-
+# SHIPPED KEY, WHICH IS EXACTLY WHAT THIS LIST EXISTS TO STOP BY ACCIDENT. It
+# is not an accident: the 00:58 plan row names `boiler` as one of the two
+# bodies whose value fault I am to fix this hour ("pale on pale"), so the
+# change is the charge, not a drive-by. WHY IT NEEDS AN OVERRIDE AT ALL: with
+# tint (0.86,0.60,0.34) and wear 0.25 the generator derives 'body' at luma
+# 0.510 and 'bone' at 0.577 - SIXTY-SEVEN THOUSANDTHS APART. The man's limbs,
+# his apron, his head, the pan rim and the skimmer were all one value BY
+# CONSTRUCTION, and no amount of lighting separates two materials that are the
+# same colour. The man goes to dark boiled leather and the copper and the sugar
+# keep the pale end.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"boiler"}
+
+OVERRIDE.update({
+    "boiler": {
+        # THE MAN: boiled leather, scorched. A sugar man stands over a pan hot
+        # enough to set a floor and he does not do it in linen.
+        'body': ((0.205, 0.138, 0.090), 0.84, 0.03),
+        # The derived 'dark' was 0.096 luma, which would have collided with the
+        # new body at 0.149 and traded one flat mass for another. Taken down to
+        # 0.043 so the trunnion, his shoulder strap and the skimmer's
+        # perforations are a real second line on him, 3.4x apart.
+        'dark': ((0.052, 0.043, 0.035), 0.74, 0.04),
+        # 'bone' AND 'glow' ARE DELIBERATELY ABSENT: the apron, the head, the
+        # pan rim, the haft and the pool ring keep the exact pale copper the
+        # generator derives, and the pour keeps its heat. The whole fix is that
+        # the man leaves that band, not that the band moves.
+    },
+})
+
 OVERRIDE.update({
     "ratcatcher": {
         # THE MAN AND THE IRON. The Moulder's measured lesson, applied and not
@@ -8872,7 +8931,20 @@ OVERRIDE.update({
         # outline is carried by contrast instead of by a rim light I would
         # have to invent. The Greener's head vanishing from the side is the
         # live fault that argument comes from.
-        'body': ((0.078, 0.062, 0.050), 0.86, 0.02),
+        # 21 NOV 02:5x CT - THE VALUE PASS THE PLAN CHARGED ME WITH. The
+        # argument above is still right and is NOT being reversed: the man
+        # stays the dark half and the willow stays the pale half. What was
+        # wrong is HOW dark. At 0.078 albedo the man rendered as ONE FLAT
+        # CUT-OUT - measured, not felt: `_backread_pre.json` scores his side
+        # view at 2 value bands (the doc's own definition of one flat mass)
+        # and HALF of his front-view pixels under 0.20 luma. Worse, his boots
+        # and cap band are 'dark' at 0.038 and at that distance 0.078 against
+        # 0.038 is no boundary at all, so the one internal line he had was
+        # spent. Lifted x2.0 to a worn leather. He is still 4.6x darker than
+        # the willow (0.129 luma against 0.598), so the contrast argument is
+        # untouched, and he is now 3.4x lighter than his own boots, which is
+        # where his internal read comes back from.
+        'body': ((0.156, 0.124, 0.100), 0.86, 0.02),
         # THE WILLOW. Buff, dry, pale - and it is the BIGGEST object on the
         # body, so the cage is what a viewer's eye lands on first. That is on
         # purpose: the cage is the idea.

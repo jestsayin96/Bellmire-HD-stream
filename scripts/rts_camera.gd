@@ -86,10 +86,11 @@ func setup(t: Node3D) -> void:
 	party_frames = PartyFrames.new()
 	_layer.add_child(party_frames)
 	party_frames.setup(t)
-	# the lord's bar: top centre, only while a floor lord fights
-	boss_bar = BossBar.new()
-	_layer.add_child(boss_bar)
-	boss_bar.setup(t)
+	# S89: NO floating boss card. Mr. E, 21 Nov 10:17: "The 'NOW FIGHTING' card and the large boss
+	# name/HP banner must be removed as floating UI panels." The lord's name and hp are on the lord
+	# itself (monster.gd name plate + bar, S88) and its epithet in the Chronicle (delve.gd). BossBar
+	# (scripts/boss_bar.gd) stays a class for its own unit gates; the eye builds none, so boss_bar
+	# is null and the group `hud_boss` is empty - _l21_test / _s77_bossbar / _boss_test assert that.
 
 	director = AutoDirector.new()
 	add_child(director)
@@ -103,7 +104,6 @@ func setup(t: Node3D) -> void:
 	HudDock.mark(_speed_lb, "chrome")
 	HudDock.mark(_chat, "chrome")
 	HudDock.mark(party_frames, "none")
-	HudDock.mark(boss_bar, "none")
 	cam.cull_mask = HudDock.ALL & ~HudDock.LANES_MASK
 
 ## ---- L21: the spotlight panes up -> the eye's own HUD leaves the seams. The clock chip

@@ -14905,6 +14905,52 @@ build's IDLE at 11:18:09 - and the hold was 1m25s.
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; bellmirebro posted nothing anywhere and spent nothing.
 
+## S89 - MR. E'S 10:17 DIRECTIVE, THE GAME BUILD'S LAST TWO HALVES: NO FLOATING BOSS CARD, MANA ON THE HUB SHEET, AND THE TITHER WIRED (21 Nov 2026, 12:07 CST firing)
+Item: the 11:58 TAKE THIS NEXT row 1 (a)+(b)+(c), all three taken.
+(a) BOSS CARD REMOVED, NOT SHRUNK. Mr. E gave "remove it, or a thin strip"; removal, because the
+strip would only repeat what is already on the lord: S88's name plate over its head and its own hp
+bar, plus the epithet spoken in the Chronicle (delve.gd:177). rts_camera.gd (backup .bak_s89) no
+longer builds BossBar and no longer marks it; `boss_bar` is null; scripts/boss_bar.gd stays as a
+class (tools/_l16_test.gd builds one directly). THE TWO GATES WERE INVERTED, NOT SILENCED:
+_l21_test.gd and _s77_bossbar.gd "exactly one boss card" -> "NO floating boss card while the lord
+fights (hud_boss 0, BossCard 0)", tested by group AND by node name over the whole tree, in a scene
+where a lord IS fighting - a card coming back turns it RED. S77's _bosscheck now FAILS on any card
+found and passes on none. _boss_test.gd: "bar up" -> no card + the lord's own name_tag reads its
+name. _l15_shot/_l16_shot guard the null. NOT MY FILES, REPORTED NOT EDITED: the HUD's
+_u104/_u112/_u113/_u114_shot.gd still assert "exactly one boss card" and will now read RED on that
+arm - that red is TRUE (the card is gone by directive); they need the same inversion in the HUD lane.
+hud_dock.gd's hud_boss loops (_clear_of_boss, FightBanner _place) iterate an empty group - harmless.
+(b) MANA PUBLISHED. snapshot_pub.gd hero row (backup .bak_s89) adds `mana` and `mana_max`,
+additively, read WITHOUT writing (Roster.mana_of stores into the hero dict, so the publisher uses
+mana_max + the stored pool, clamped). web/app.js manaBar is the receiver; no hub change.
+NEW GATE tools/_s89_mana.gd: caster max = Roster.mana_max, never-cast = full, spent = what is left,
+knight 0/0, hero dict untouched -> S89_MANA OK (7 checks).
+(c) TITHER (45th, Tenthpart, art's tag `prison` - field 5 of CANON, minibosses.py:15830): MB_FIT 0.99
+(art _fit_report.json pairs.tither.ratio), MB_NAME "Tenthpart", THEME_MINIBOSS_MORE prison row.
+content has NO by_key.tither yet (grep data/*.json: zero hits), so miniboss_for correctly holds it out.
+Its one idea (PAY or REFUSE - the fight nobody has to win) is a delve-side way still to build once
+content's lines land. tools/_s51_names.gd was already stale at 42 (MB_NAME was 44, now 45) - not in
+the battery; noted, not touched this run.
+VERDICTS (logs committed in renders/cycles/s89/): parse 0 SCRIPT ERROR / 0 Parse Error (before and after
+the (a) edits); S89_MANA OK (7); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2053; TOWNWALK
+in_solid=0/16425 PASS; DELVE_TEST OK 9001 frames (twice), 0 SCRIPT ERROR; S77_BOSSCARD OK 3 checks
+("none" at 100/125/150%, windowed 1920x1080) with no L21 FAIL line; BOSS_TEST OK 9 checks, 0 failed (first
+run 1 FAIL on its stale "Chronicle name card" arm - item 3 of the same directive removed that card at
+U126; inverted to "no boss card in the Chronicle as the lord rises", re-run green).
+LOOKED: renders/cycles/s77/mana_150_1080.png and full_1080.png - the Director pane shows the lord in
+the fight and NOTHING floats over it; only the lane chips and the Chronicle remain.
+## C-167 (21 Nov 2026 12:2x CST) - THE TITHER'S FEED ROW (45th miniboss, Tenthpart)
+TAKE THIS NEXT item 3 (CONTENT): `miniboss_feed.by_key` held 44 keys and no `tither`; art's body
+is committed (assets/monsters/minibosses/tither.glb, docs/art/MINIBOSSES.md #45). Wrote
+`by_key.tither` the way the pitman was written: arrive x9, act x7, broken x4, fall x8 (45 keys now).
+- It is the first EXIT CONDITION: it is paid off or refused, not only killed. arrive lines state the
+  two doors in plain words (pay the tenth and it stands aside; refuse and the hand closes).
+- act lines take `{name}` (the delver paying or refusing). fall lines are written to read true whether
+  the tenth was paid or the body was beaten, because the encounter can end either way.
+- `_note_c167` added inside miniboss_feed. Expected zero-hit key: DO NOT WIRE.
+- CODE WIRING: `Delve.MB_NAME["tither"]` = "Tenthpart" is now unblocked (game build). No pool top-up this
+  cycle. Nothing in items/bosses/potions touched.
+- VALIDATION OK: all four files parse, every pre-existing key byte-identical.
 
 ## HUB 21 Nov 2026 12:5x CT - TAKE THIS NEXT row 5: prove the character-sheet mana bar on a fixture
 Row taken: HUB (row 5) - "prove the character sheet's mana bar renders the moment the publisher sends the key".

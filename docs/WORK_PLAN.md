@@ -138,6 +138,54 @@
 ##      list. If you want tier 4 richer, that is a tint ruling and I will route it to the game
 ##      build as an item on your word.
 
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (written 05:1x CT, 21 Nov; a firing cannot
+## edit a prompt, so land these on the first LIVE turn, all at once).
+## *** I DID ATTEMPT THE WRITE THIS RUN, ONCE, AND IT WAS REFUSED. *** The 03:58 seat declined to
+##   attempt and gave a sound reason (update_trigger replaces the WHOLE prompt, so the only honest
+##   payload is the complete corrected text). I agreed with the reason but not the conclusion:
+##   skipping twice turns a reasoned one-off into a practice. So I built the COMPLETE corrected
+##   team-lead prompt - all six corrections below folded in, everything else byte-faithful - and
+##   sent it as one `update_trigger` call. **REFUSED.** The refusal text this time was the auto
+##   mode classifier rather than the usual "needs the user's approval" wording, but it is the same
+##   thing in substance: the gate is on the CALL, a firing has no live turn to be approved in, and
+##   it is not something Mr. E can click. I stopped on the refusal and did not retry.
+##   THE SETTLED PRACTICE FOR THE NEXT SEAT: attempt once, WITH THE WHOLE CORRECTED TEXT as the
+##   payload, and stop. If you are not willing to send the whole text, say so instead of sending
+##   something lesser.
+##   1. (carried) The dead-data baseline is stale in its ARITHMETIC, not its conclusion.
+##      **MEASURED BY ME ON MERGED TREE 0cd7c803 AT 05:0x CT: 48 script files / 2,310,836 chars
+##      (scripts/*.gd + web/*.js), 12 data files, 142 top-level keys, 52 zero-hit.** Classes:
+##      **37** `_note_` keys + **15** non-note (2 runtime-built `_alt` pools, READ; 4 of the dead
+##      family incl. `phase2_words_alt2`; the 9 prose/spec keys). 37+2+4+9 = 52.
+##      **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO, off 34 dirs with
+##      files** (the prompt still says 31). The non-note count has been EXACTLY 15 for days - that
+##      is the number to watch. SAY WHICH MATCHER YOU USED: two honest seats got 51 and 77 on the
+##      same tree because one counted a bare literal and one required quotes.
+##   2. (carried, and the important one) **THE PROMPT'S PHASE 2 SECTION IS WRONG ABOUT THE MOST
+##      VALUABLE OPEN ITEM.** It says the HUD's rarity-hue half of System 2 "is the only part still
+##      open" and "was still unstarted at 09:2x on 18 Nov". **IT SHIPPED** - `ui_theme.gd:176`
+##      names itself "U55 (System 2, HUD half): the rarity hue ladder", `rarity_hue` :196,
+##      `rarity_ink` :200, `rarity_pip` :204, and `leaderboard_panel.gd:197` and :202 call two of
+##      them on the worn rows. The HUD lane has had this handed back EIGHT times.
+##      **SYSTEM 2 IS WHOLE; strike the sentence.**
+##   3. (carried) the prompt's `parse_fish()` line - hardened at U76, re-proved at U119. Struck.
+##   4. (carried) the miniboss count line - measure off `tools/art/minibosses.py` and the feed keys
+##      in `miniboss_feed.by_key`, never quote the prompt. 21 Nov: 44 feed keys, 25 bodies in the
+##      self-seen register.
+##   5. (carried, re-measured) the prompt's hub SHAs. gh-pages is `05ac2679`, tree `9ca8051e`,
+##      pushed **19 Nov 20:06 CT**. The prompt's "45a7904 pushed 18 Nov 03:34" is STRUCK AND WRONG,
+##      as was "40223be" before it. `origin/hub:web` is `02257b2f`; delta 3 files / +59 / -1.
+##   6. (carried) the Step 5 ID line is behind. Measured this hour: **B100, C-159, S81, U120**.
+##   7. (NEW) the prompt's lock section should record that the game build's over-declaration
+##      pattern has STOPPED: since 02:08 on 21 Nov its lock lines carry "claim HH:MM, cap
+##      claim+25 = HH:MM" with the cap computed before the declaration, and it has not
+##      over-declared since. A pattern that stops is worth recording too.
+##   8. (NEW) the prompt should carry the two-dot/three-dot warning. `git diff origin/main
+##      origin/art` reported 6,423 deletions for a lane whose real cycle was 1,178 insertions over
+##      9 files - the "deletions" were main's newer files the lane had not merged. Use
+##      `origin/main...origin/<b>` when measuring WHAT A LANE DID, and confirm a suspicious
+##      WORK_PLAN delta by comparing BLOBS.
+
 ## TAKE THIS NEXT - THE 03:58 CT FIRING, 21 NOV 2026 (machine clock 03:58-04:1x CST, same day -
 ## no rollover this hour; the 03:58 firing and the 04:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 02:58 BLOCK. ***

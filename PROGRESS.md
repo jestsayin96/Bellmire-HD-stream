@@ -15064,3 +15064,20 @@ CODE WIRING: none; the three lists are already drawn from at random.
 Next content: C-169.
 U127 STAND-DOWN 2026-11-21T12:52:40-06:00 (HUD): Blender/Windows bridge to cruzader did not respond (two execute_blender_code calls timed out at 80s), so I could NOT read R's working RUN_LOCK.txt, check for a live Godot, run Godot, or run git (device_bash cannot do git here: worktree gitdir points at a Windows path). I did not claim the lock. Nothing edited. This line is UNCOMMITTED on hud-ui for that reason. Next firing: if the bridge is back, commit this line, read R's lock, and take the rarity-hue half of System 2 (or re-run the boss_bar.gd regress if upstream changed).
 U128 STAND-DOWN 2026-11-21T14:53:00-06:00 (HUD): Bridge is back (U127's committed here). R's working RUN_LOCK.txt last lines: QA tester IDLE 14:50:14, then "RUNNING 14:51:00 (chat bot B109, cap 15:16, expected finish 14:57 - single headless red-prove of ALIAS UNUSABLE)", no IDLE after it. tasklist showed no Godot alive at 14:53, but the claim is 2 minutes old and may not have launched; per the yield rule a RUNNING line is live until the same lane's IDLE, so I did NOT claim. Even if it releases at 14:57, a rarity-hue capture would have <10 min before :07 and I will not start a chunk I cannot finish. Nothing edited in my 7 files. Next firing (:52): read R's lock first; if free, take the rarity-hue half of System 2 (ui_theme.gd RARITY hues), windowed, release by :07.
+## S92 (21 Nov 2026 15:08-15:1x CST) - GAME BUILD: THE TOP ROW'S "L31 REMAINDER" IS CLOSED; REFUSED WITH A RE-PROVE, NOT RE-OPENED
+TAKE THIS NEXT (14:58 CT block) gave game build "L31 REMAINDER: the status-effect icons". THAT ROW IS STALE. It was closed
+and ticked TWICE on 18 Nov - WORK_PLAN.md:13766 "THE L31 REMAINDER IS CLOSED. TICKED 2026-11-18 01:1x CT (laptop 23c9951,
+main 756697c)" and :13507 "L31c. TICKED 2026-11-18 01:5x CT (laptop d2dbbba)" - and WORK_PLAN.md:2811 says in the lead's own
+words "L31 IS WHOLE ... DO NOT RE-OPEN". The row looks carried forward from an old block. I built nothing for it.
+RE-PROVED ON THE MERGED TREE (laptop + main 36 commits, c733fe8f) rather than refusing on paper:
+  L31_ICONS party=6 states_wanted=15 icons=15 keyed_and_sized=15 / L31_ICONS OK 15.
+  LOOKED AT renders/cycles/l31/l31_icons_1080.png (written 15:1x today, not the 18 Nov crop): fifteen icon-and-word chips
+  under three heroes, flowing 3+2, nothing clipped - poisoned/burning/slowed/blinded/frightened, emberward/hearthwarm/
+  hasted/ogre-strong/unseen, heroic/owl-eyed/warded/mending/scar-touched.
+ALSO CHECKED: the gear.gd unguarded-null defect the game-build prompt still hands over is ALREADY FIXED - gear.gd:103-109
+(S35) casts to PackedScene, erases and returns null on a failed load before instantiate(). Not re-done.
+GATES (logs renders/cycles/s92/): parse 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of
+2164; TOWNWALK in_solid=0/14804 raid_in_solid=0/10820 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+FOR THE LEAD: please strike the L31 row from the game-build line and name a Phase 2 row (or confirm the :2811 "lowest
+open system, say which and why" rule is the live one). The worktree also carries ~50 modified tracked render PNGs
+(renders/cycles/d96, s17-s20, s36, s58...) from other lanes' gate runs - NOT mine, NOT staged.

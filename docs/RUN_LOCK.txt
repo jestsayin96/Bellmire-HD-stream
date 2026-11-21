@@ -1028,3 +1028,17 @@ RUNNING 2026-11-21T13:08:06-06:00 (game build S90, claim 13:08:06, cap claim+25 
 IDLE 2026-11-21T13:10:21-06:00 - game build S90 STOOD DOWN, NO WORK DONE: the Windows/Blender bridge is still dead (tasklist call timed out at 80 s, then a no-op ping returned "Connection closed"), the same outage the chat bot reported from 12:51. Without it I cannot git fetch/merge, cannot launch Godot, and cannot read tasklist, so I CANNOT confirm whether the chat bot's 12:50 Godot is still alive - next lane with a working bridge, check tasklist first. Launched nothing, committed nothing, edited nothing but this file (uncommitted, as usual). Claim 13:08:06, cap 13:33, released early. (game build)
 
 RUNNING 2026-11-21T14:08:09-06:00 (game build S91, claim 2026-11-21T14:08:09-06:00, cap claim+25 = 14:33, expected finish 14:30)
+
+IDLE 2026-11-21T14:17:33-06:00 - game build S91 done early: tither comment (+ scraper/ferryman siblings) corrected; tither.glb.import was MISSING (why the body never loaded) - imported and committed, tither now drawn 120/400 prison; S33_DRAW regex + bestiary-body arms fixed, S33_DRAW OK 186 / red FAIL 3. Battery green. Pushed laptop 5dc67902. No Godot of mine alive (tasklist read empty at the last S33 run, ~14:16 - corrected in place: I first typed 14:18, a future stamp). Claim 14:08:09, cap 14:33. (game build)
+
+RUNNING 2026-11-21T14:42:12-06:00 (QA tester, claim 2026-11-21T14:42:12-06:00, cap claim+15, gate battery)
+
+IDLE 2026-11-21T14:50:14-06:00 - QA tester gate battery stopped: twitch_parse/l14 run; s58/delve/offfloor/commands_doc/townwalk not completed (bat-redirect harness bug). No Godot of mine alive. Claim 14:42:12, cap 14:57. (QA tester)
+
+RUNNING 2026-11-21T14:51:00-06:00 (chat bot B109, claim 2026-11-21T14:51:00-06:00, cap claim+25 = 15:16, expected finish 14:57 - single headless red-prove of ALIAS UNUSABLE)
+
+IDLE 2026-11-21T14:55:30-06:00 - chat bot B109 done: red-prove B (ALIAS UNUSABLE) PROVEN with a log, data restored byte-identical (sha256 5b8d2ab2...); MINIBOSS COUNT found against my own file (published 44, feed rows 45) and corrected, docs/COMMANDS.md regenerated (COMMANDS_DOC OK wrote 32 commands); green parse zero COMMANDS_DATA lines, rc=0. Three Godot runs, all exited, tasklist empty before my claim. Finished INSIDE my declared 14:57 (I first typed this line 15:02:00 - a stamp 7 min in the FUTURE, written from an estimate instead of the clock; corrected in place after reading the machine clock at 14:55:10). Claim 14:51:00, cap 15:16. (chat bot)
+
+RUNNING 2026-11-21T15:08:29-06:00 (game build, claim 2026-11-21T15:08:29-06:00, cap claim+25 = 15:33, expected finish 15:33)
+
+IDLE 2026-11-21T15:15:47-06:00 - game build S92 done: TAKE THIS NEXT's L31 row refused as already closed (ticked 18 Nov), re-proved L31_ICONS OK 15 + parse/twitch/offfloor/townwalk/delve all green. No Godot of mine alive. Claim 15:08:29, cap 15:33, declared 15:33. (game build)

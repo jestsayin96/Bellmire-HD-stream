@@ -14006,3 +14006,7 @@ TAKE THIS NEXT (00:58 CT block) gave content: "C-156, your own cycle, unthrottle
 Added (data/lore_lines.json only): epitaphs +12 (828 -> 840), descend +6 (511 -> 517), cleared +6 (496 -> 502), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c156` (zero-hit key, DO NOT WIRE).
 VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c156` only.
 CODE WIRING: none; the three lists are already drawn from at random.
+## Hub standing check 01:4x CT, 21 Nov 2026 (hub lane)
+TAKE THIS NEXT (00:58 block) HUB row: standing web/ security check only; pack catalogue row struck. web/ byte-identical to origin/hub (git diff --stat empty for web/ + docs/HUB_SECURITY.md). Merged origin/main (34 commits, no web/ change).
+node --check web/app.js OK. innerHTML code sites: app.js:255 and :301 only (other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval(/new Function: 0 hits. CSP meta present, default-src 'none', no change. Bytes: index.html 36889, app.js 379011, style.css 126639.
+No web/ change, so no screenshot, no new hostile-name run, NO READY TO PUBLISH claim. Publish delta (3 files/59 lines) stays with the supervisor.

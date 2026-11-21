@@ -2169,13 +2169,13 @@
      "creature": {
       "alone": 37499,
       "vis": 37499,
-      "delta": 39039,
+      "delta": 44881,
       "seen": 1.0
      },
      "hero": {
       "alone": 43682,
       "vis": 43682,
-      "delta": 47413,
+      "delta": 53677,
       "seen": 1.0
      },
      "proves": true
@@ -2184,13 +2184,13 @@
      "creature": {
       "alone": 27067,
       "vis": 27067,
-      "delta": 28093,
+      "delta": 32469,
       "seen": 1.0
      },
      "hero": {
       "alone": 37779,
       "vis": 37779,
-      "delta": 38551,
+      "delta": 43315,
       "seen": 1.0
      },
      "proves": true
@@ -2199,13 +2199,13 @@
      "creature": {
       "alone": 36370,
       "vis": 36370,
-      "delta": 38010,
+      "delta": 43739,
       "seen": 1.0
      },
      "hero": {
       "alone": 44015,
       "vis": 44015,
-      "delta": 44810,
+      "delta": 51026,
       "seen": 1.0
      },
      "proves": true
@@ -2231,16 +2231,82 @@
      "right": 0
     }
    },
-   "ground": null,
+   "ground": {
+    "front": {
+     "plane_px": 264480,
+     "shadow_px": 4566,
+     "mean": 0.4316,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4520,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 270560,
+     "shadow_px": 3412,
+     "mean": 0.4375,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3434,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 264480,
+     "shadow_px": 4550,
+     "mean": 0.428,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4571,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
    "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9901,
+     "man_alone_px": 32020,
+     "man_seen_px": 31702,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7057,
+     "man_alone_px": 20097,
+     "man_seen_px": 14182,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9936,
+     "man_alone_px": 30840,
+     "man_seen_px": 30643,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7057,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
     "front": [
      8,
      8
     ],
     "side": [
-     138,
-     138
+     135,
+     134
     ],
     "back": [
      8,
@@ -3357,7 +3423,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 31,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9214,
+     "man_alone_px": 37195,
+     "man_seen_px": 34271,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8541,
+     "man_alone_px": 23873,
+     "man_seen_px": 20391,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9869,
+     "man_alone_px": 36065,
+     "man_seen_px": 35592,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8541,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "pressman": {
    "creature_h": 2.85,
@@ -3521,7 +3609,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 76,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9881,
+     "man_alone_px": 91940,
+     "man_seen_px": 90847,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8878,
+     "man_alone_px": 79572,
+     "man_seen_px": 70646,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.932,
+     "man_alone_px": 90463,
+     "man_seen_px": 84307,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8878,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "strickler": {
    "creature_h": 2.55,
@@ -3685,7 +3795,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 45,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7748,
+     "man_alone_px": 93239,
+     "man_seen_px": 72243,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9086,
+     "man_alone_px": 80231,
+     "man_seen_px": 72894,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9385,
+     "man_alone_px": 91669,
+     "man_seen_px": 86032,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7748,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "greener": {
    "creature_h": 2.5,
@@ -3850,7 +3982,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8113,
+     "man_alone_px": 65322,
+     "man_seen_px": 52998,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8542,
+     "man_alone_px": 54696,
+     "man_seen_px": 46722,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6257,
+     "man_alone_px": 62532,
+     "man_seen_px": 39126,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6257,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "drover": {
    "creature_h": 2.44,
@@ -4014,7 +4168,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9787,
+     "man_alone_px": 79925,
+     "man_seen_px": 78225,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9383,
+     "man_alone_px": 59451,
+     "man_seen_px": 55780,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.916,
+     "man_alone_px": 81305,
+     "man_seen_px": 74477,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.916,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "paviser": {
    "creature_h": 2.68,
@@ -4178,7 +4354,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 7,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.574,
+     "man_alone_px": 98228,
+     "man_seen_px": 56382,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9854,
+     "man_alone_px": 74431,
+     "man_seen_px": 73342,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 99947,
+     "man_seen_px": 99929,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.574,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "fenman": {
    "creature_h": 2.52,
@@ -4342,7 +4540,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 84,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9895,
+     "man_alone_px": 56458,
+     "man_seen_px": 55865,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7301,
+     "man_alone_px": 57115,
+     "man_seen_px": 41698,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.852,
+     "man_alone_px": 54556,
+     "man_seen_px": 46479,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7301,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "leech": {
    "creature_h": 2.32,
@@ -4506,7 +4726,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 99,
-   "air_px_tightest_view": "back"
+   "air_px_tightest_view": "back",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.967,
+     "man_alone_px": 98758,
+     "man_seen_px": 95497,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.84,
+     "man_alone_px": 103807,
+     "man_seen_px": 87201,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9713,
+     "man_alone_px": 101290,
+     "man_seen_px": 98388,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.84,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "beadle": {
    "creature_h": 2.95,
@@ -4670,7 +4912,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6325,
+     "man_alone_px": 18402,
+     "man_seen_px": 11639,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.5174,
+     "man_alone_px": 17385,
+     "man_seen_px": 8995,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6854,
+     "man_alone_px": 17375,
+     "man_seen_px": 11908,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5174,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "rammer": {
    "creature_h": 2.75,
@@ -4998,7 +5262,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 93,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.977,
+     "man_alone_px": 56673,
+     "man_seen_px": 55370,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8554,
+     "man_alone_px": 44862,
+     "man_seen_px": 38374,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5837,
+     "man_alone_px": 56495,
+     "man_seen_px": 32977,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5837,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "fuller": {
    "creature_h": 2.66,
@@ -5162,7 +5448,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9724,
+     "man_alone_px": 74791,
+     "man_seen_px": 72727,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.4611,
+     "man_alone_px": 52516,
+     "man_seen_px": 24216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 74205,
+     "man_seen_px": 74101,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.4611,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "stackman": {
    "creature_h": 2.84,
@@ -5326,7 +5634,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 21,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9464,
+     "man_alone_px": 44682,
+     "man_seen_px": 42289,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9865,
+     "man_alone_px": 36239,
+     "man_seen_px": 35751,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 43849,
+     "man_seen_px": 43789,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9464,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "dauber": {
    "creature_h": 2.58,
@@ -5490,7 +5820,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 138,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8214,
+     "man_alone_px": 56720,
+     "man_seen_px": 46590,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8344,
+     "man_alone_px": 48859,
+     "man_seen_px": 40766,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8459,
+     "man_alone_px": 55318,
+     "man_seen_px": 46792,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8214,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "hooper": {
    "creature_h": 2.36,
@@ -5654,7 +6006,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 153,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8912,
+     "man_alone_px": 98860,
+     "man_seen_px": 88104,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8914,
+     "man_alone_px": 85701,
+     "man_seen_px": 76397,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8718,
+     "man_alone_px": 97782,
+     "man_seen_px": 85242,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8718,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "scraper": {
    "creature_h": 2.55,
@@ -5818,7 +6192,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 98,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8864,
+     "man_alone_px": 88525,
+     "man_seen_px": 78465,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7627,
+     "man_alone_px": 89888,
+     "man_seen_px": 68562,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9088,
+     "man_alone_px": 89285,
+     "man_seen_px": 81143,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7627,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "winder": {
    "creature_h": 2.34,
@@ -5982,13 +6378,38 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7102,
+     "man_alone_px": 41437,
+     "man_seen_px": 29428,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9958,
+     "man_alone_px": 39233,
+     "man_seen_px": 39070,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.983,
+     "man_alone_px": 42498,
+     "man_seen_px": 41775,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7102,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "pitman": {
    "creature_h": 2.3,
    "hero_h": 2.45,
    "ratio": 0.94,
    "pair_w": 4.96,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.642,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -6001,13 +6422,13 @@
      "creature": {
       "alone": 46487,
       "vis": 46487,
-      "delta": 56291,
+      "delta": 48417,
       "seen": 1.0
      },
      "hero": {
       "alone": 43678,
       "vis": 43678,
-      "delta": 57154,
+      "delta": 48502,
       "seen": 1.0
      },
      "proves": true
@@ -6016,13 +6437,13 @@
      "creature": {
       "alone": 49053,
       "vis": 49053,
-      "delta": 60774,
+      "delta": 50909,
       "seen": 1.0
      },
      "hero": {
       "alone": 37774,
       "vis": 37774,
-      "delta": 46411,
+      "delta": 38757,
       "seen": 1.0
      },
      "proves": true
@@ -6031,13 +6452,13 @@
      "creature": {
       "alone": 48570,
       "vis": 48570,
-      "delta": 59019,
+      "delta": 50426,
       "seen": 1.0
      },
      "hero": {
       "alone": 44019,
       "vis": 44019,
-      "delta": 52225,
+      "delta": 44837,
       "seen": 1.0
      },
      "proves": true
@@ -6107,21 +6528,42 @@
      }
     }
    },
+   "ground_from": "carried - this run did not measure the ground",
    "proving_views": 3,
-   "air_x": 0.64,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9998,
+     "man_alone_px": 36625,
+     "man_seen_px": 36618,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9967,
+     "man_alone_px": 42826,
+     "man_seen_px": 42685,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9999,
+     "man_alone_px": 37386,
+     "man_seen_px": 37384,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9967,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
     "front": [
      43,
      43
     ],
     "side": [
-     50,
-     52
+     53,
+     53
     ],
     "back": [
      43,
-     42
+     43
     ]
    },
    "frame_edge_disk": {
@@ -6145,8 +6587,8 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 42,
-   "air_px_tightest_view": "back"
+   "air_px_min": 43,
+   "air_px_tightest_view": "front"
   },
   "comfitmaker": {
    "creature_h": 2.28,
@@ -6310,7 +6752,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 128,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9962,
+     "man_alone_px": 98629,
+     "man_seen_px": 98254,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8616,
+     "man_alone_px": 96309,
+     "man_seen_px": 82980,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 96037,
+     "man_seen_px": 96014,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8616,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "dyer": {
    "creature_h": 2.6,
@@ -6475,7 +6939,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8787,
+     "man_alone_px": 49167,
+     "man_seen_px": 43205,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9094,
+     "man_alone_px": 38251,
+     "man_seen_px": 34787,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5949,
+     "man_alone_px": 47971,
+     "man_seen_px": 28536,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "ferryman": {
    "creature_h": 2.62,
@@ -6639,7 +7125,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 0,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6405,
+     "man_alone_px": 90080,
+     "man_seen_px": 57694,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8573,
+     "man_alone_px": 91234,
+     "man_seen_px": 78216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8063,
+     "man_alone_px": 92858,
+     "man_seen_px": 74876,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6405,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "ratcatcher": {
    "creature_h": 2.62,
@@ -6661,13 +7169,13 @@
      "creature": {
       "alone": 61306,
       "vis": 61306,
-      "delta": 64322,
+      "delta": 71567,
       "seen": 1.0
      },
      "hero": {
       "alone": 43677,
       "vis": 43677,
-      "delta": 50077,
+      "delta": 58047,
       "seen": 1.0
      },
      "proves": true
@@ -6676,13 +7184,13 @@
      "creature": {
       "alone": 36575,
       "vis": 36575,
-      "delta": 38198,
+      "delta": 42958,
       "seen": 1.0
      },
      "hero": {
       "alone": 37794,
       "vis": 37794,
-      "delta": 38587,
+      "delta": 43418,
       "seen": 1.0
      },
      "proves": true
@@ -6691,13 +7199,13 @@
      "creature": {
       "alone": 61637,
       "vis": 61637,
-      "delta": 64890,
+      "delta": 71704,
       "seen": 1.0
      },
      "hero": {
       "alone": 44032,
       "vis": 44032,
-      "delta": 46717,
+      "delta": 54027,
       "seen": 1.0
      },
      "proves": true
@@ -6723,16 +7231,82 @@
      "right": 0
     }
    },
-   "ground": null,
+   "ground": {
+    "front": {
+     "plane_px": 258400,
+     "shadow_px": 5650,
+     "mean": 0.332,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6059,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 265240,
+     "shadow_px": 3572,
+     "mean": 0.3727,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3379,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 259160,
+     "shadow_px": 5124,
+     "mean": 0.3121,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6541,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
    "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9874,
+     "man_alone_px": 45952,
+     "man_seen_px": 45375,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9793,
+     "man_alone_px": 38943,
+     "man_seen_px": 38137,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9987,
+     "man_alone_px": 46886,
+     "man_seen_px": 46823,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9793,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
     "front": [
      8,
      8
     ],
     "side": [
-     161,
-     160
+     157,
+     154
     ],
     "back": [
      8,
@@ -6925,7 +7499,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 123,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6887,
+     "man_alone_px": 84272,
+     "man_seen_px": 58035,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9543,
+     "man_alone_px": 65269,
+     "man_seen_px": 62289,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.973,
+     "man_alone_px": 84216,
+     "man_seen_px": 81938,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6887,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "sealer": {
    "creature_h": 2.42,
@@ -7089,7 +7685,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 142,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9395,
+     "man_alone_px": 100055,
+     "man_seen_px": 94001,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8129,
+     "man_alone_px": 81090,
+     "man_seen_px": 65922,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6949,
+     "man_alone_px": 100398,
+     "man_seen_px": 69764,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   },
   "tapster": {
    "creature_h": 2.8,
@@ -7253,7 +7871,29 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 43,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9582,
+     "man_alone_px": 48973,
+     "man_seen_px": 46927,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8299,
+     "man_alone_px": 34189,
+     "man_seen_px": 28372,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9652,
+     "man_alone_px": 46919,
+     "man_seen_px": 45285,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8299,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
   }
  },
  "errors": [
@@ -7281,7 +7921,6 @@
   "loader",
   "moulder",
   "paviser",
-  "pitman",
   "porter",
   "pressman",
   "quartermaster",
@@ -7311,15 +7950,130 @@
  "min_proving": 2,
  "frame_w": 5.6,
  "margin_x": 0.12,
+ "visibility_scope": {
+  "asks": "how much of each subject survives the OTHER subject, in the pair cell",
+  "cells": 264,
+  "cells_reading_exactly_1_0": 264,
+  "cells_where_vis_differs_from_alone": 0,
+  "taken_by_construction": true,
+  "note": "MEASURED 21 Nov 03:4x CT, not remembered: 264 of 264 cells read seen 1.0 and vis == alone in EVERY ONE. The method is sound - with/without through one locked camera - but place() holds measured air between the two bodies (air_px >= 8 in the tightest view of every row), so neither can ever hide the other and the answer is settled before the render. THIS CELL IS A TAKEN-BY-CONSTRUCTION PASS, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never again be cited as if it did. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone==0 still catches a blank or mis-aimed render. The question it was being read for is answered by `self_seen`."
+ },
+ "self_seen": {
+  "asks": "how much of THE MAN survives HIS OWN GEAR, per view - the viewer's question",
+  "instrument": "tools/art/_backread.py, 21 Nov 03:3x CT -> _backread/_selfseen_all.json",
+  "bar": 0.75,
+  "bar_provenance": "0.75, AND THE FIRST BAR I WROTE THIS RUN WAS 0.70 AND THE PICTURE OVERRULED IT. At 0.70 the boiler's side cell - the one defect the team lead handed me - printed GREEN on my own contact sheet by six thousandths (0.7057), while the tile shows a man substantially behind his own pan and pour. A bar that passes the fault it was built to catch is set too low. It is still a bar I CHOSE against nine pictures I looked at, not a measured constant, and NO VERDICT IN THIS FILE TURNS ON IT: it names rows, it does not fail them.",
+  "measured_bodies": 25,
+  "measured_cells": 75,
+  "unmeasured_bodies": 21,
+  "unmeasured": [
+   "bellman",
+   "cook",
+   "drillmaster",
+   "gaoler",
+   "hurdleman",
+   "jointer",
+   "loader",
+   "porter",
+   "quartermaster",
+   "rammer",
+   "scrapwright",
+   "sexton",
+   "sluicekeeper",
+   "snarer",
+   "snuffer",
+   "snuffer_chibi",
+   "sower",
+   "stoker",
+   "tallyman",
+   "tallyman_chibi",
+   "tanner"
+  ],
+  "unmeasured_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green. 21 of 46.",
+  "under_bar": [
+   {
+    "key": "fuller",
+    "view": "side",
+    "man_seen": 0.4611
+   },
+   {
+    "key": "beadle",
+    "view": "side",
+    "man_seen": 0.5174
+   },
+   {
+    "key": "paviser",
+    "view": "front",
+    "man_seen": 0.574
+   },
+   {
+    "key": "moulder",
+    "view": "back",
+    "man_seen": 0.5837
+   },
+   {
+    "key": "dyer",
+    "view": "back",
+    "man_seen": 0.5949
+   },
+   {
+    "key": "greener",
+    "view": "back",
+    "man_seen": 0.6257
+   },
+   {
+    "key": "beadle",
+    "view": "front",
+    "man_seen": 0.6325
+   },
+   {
+    "key": "ferryman",
+    "view": "front",
+    "man_seen": 0.6405
+   },
+   {
+    "key": "beadle",
+    "view": "back",
+    "man_seen": 0.6854
+   },
+   {
+    "key": "relief",
+    "view": "front",
+    "man_seen": 0.6887
+   },
+   {
+    "key": "sealer",
+    "view": "back",
+    "man_seen": 0.6949
+   },
+   {
+    "key": "boiler",
+    "view": "side",
+    "man_seen": 0.7057
+   },
+   {
+    "key": "winder",
+    "view": "front",
+    "man_seen": 0.7102
+   },
+   {
+    "key": "fenman",
+    "view": "side",
+    "man_seen": 0.7301
+   }
+  ],
+  "looked_at": "renders/art/minibosses/_backread/_selfseen_worst_sheet.png - nine tiles, the eight worst cells plus pitman/side 0.9967 as the honest top end. The picture agrees with the number on eight of nine: fuller/side has no findable person in it; paviser's man is behind his own pavise but for a head and one arm; dyer/back and greener/back are a sliver of dark arm past hanging cloth; moulder/back is a pale ball with a man behind it; beadle/side reads as a barrel. THE ONE DISAGREEMENT IS THE FERRYMAN at 0.6405 front: a figure with a pole does read in that tile, and the score is pushed down by the punt and pole crossing him rather than by a body that cannot be found. There the number is the suspect, not the picture - it is named, not condemned.",
+  "note": "25 bodies x 3 views = 75 cells. The register's own `visibility.seen` reads 1.0 on every one of these same cells. THIS INSTRUMENT MOVES: 0.4611 to 0.9998, 14 cells under the bar. The boiler's 0.7057 side - the one defect the 02:58 row carried - is the TENTH worst in the house, and four bodies are worse on a view than the dyer and greener backs called out at 01:34. Red on empty is inherited from _backread: a man-alone mask under 500 px is RED, not 0.0 passed off as a reading."
+ },
  "unproved_cells": [
   "snuffer_chibi",
   "tallyman_chibi"
  ],
  "measured": [
-  "boiler"
+  "pitman"
  ],
  "asked": [
-  "boiler"
+  "pitman"
  ],
  "blank_check": {
   "files": 3,

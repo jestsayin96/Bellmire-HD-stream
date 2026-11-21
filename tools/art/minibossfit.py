@@ -986,6 +986,12 @@ def main():
         globals()["FRAME_H"] = args.frame * CELL_Y / float(CELL_X)
     out = os.path.join(args.repo, "renders", "art", "minibosses",
                        "_fit_report.json" if args.name == "_hero_scale" else "_fit_%s.json" % args.name.strip("_"))
+    # Keys this run always recomputes from scratch. A stale copy of any of
+    # them is worse than none, so these are the ONLY ones not carried forward.
+    _RUN_OWNED = ("ok", "errors", "verdict", "verdict_scope", "red_summary",
+                  "blank_check", "rendered_this_run", "unproved_cells",
+                  "blind_views", "stale_margin", "margin_derived", "measured",
+                  "asked")
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
            "stale_margin": [], "margin_derived": [],
            "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
@@ -996,6 +1002,17 @@ def main():
                 old = json.load(f)
             rep["pairs"] = dict(old.get("pairs", {}))
             rep["hero"] = dict(old.get("hero", {}))
+            # *** THE SAME FAULT A THIRD TIME, AT REPORT LEVEL. ***
+            # `rep` is built fresh above, so until now EVERY top-level block
+            # this run does not itself produce was silently dropped on write.
+            # It ate `visibility_scope` and `self_seen` - two blocks measured
+            # by another harness minutes earlier - the first time I ran a
+            # --ground pass after writing them, and nothing said so. Anything
+            # this run does not compute is CARRIED, never dropped; the run's
+            # own keys still win, so no carried block can mask a fresh one.
+            for _k, _v in old.items():
+                if _k not in rep and _k not in _RUN_OWNED:
+                    rep[_k] = _v
         except Exception:
             pass
 
@@ -1046,6 +1063,26 @@ def main():
                                           (("front", 0.0), ("side", 90.0), ("back", 180.0)),
                                           info["aura"], creature=objs, hero_meshes=hmesh,
                                           tmpdir=tmpdir)
+                # *** A RUN THAT DID NOT MEASURE THE GROUND MUST NOT SAY
+                # *** THE GROUND IS UNMEASURABLE. ***
+                # 21 NOV 03:4x CT. This row is rebuilt wholesale, so the old
+                # `ground` block was overwritten with None on every run made
+                # without `--ground` - and the 02:47 value pass did exactly
+                # that to `boiler` and `ratcatcher`, turning two real
+                # measurements into nulls that read like a measured absence.
+                # The team lead found it. An absent measurement and a measured
+                # absence are not the same fact, so the prior block is carried
+                # and LABELLED as carried; only a --ground run writes a fresh
+                # one. Restored values came from 5687e207a (21 Nov 01:56 CT),
+                # the last ref where both were real.
+                prior_ground = (rep["pairs"].get(key) or {}).get("ground")
+                # SAME FAULT, SAME FAMILY, CAUGHT BEFORE IT COULD SHIP: the
+                # `self_seen` block (tools/art/_backread.py) is measured by a
+                # DIFFERENT harness and would be wiped by this wholesale
+                # rebuild exactly as `ground` was. Anything this loop does not
+                # measure is carried with its own provenance, never dropped.
+                _carry = {k: v for k, v in (rep["pairs"].get(key) or {}).items()
+                          if k in ("self_seen", "self_seen_worst", "self_seen_from")}
                 rep["pairs"][key] = dict(
                     creature_h=round(mx.z - mn.z, 3), hero_h=hero["h"],
                     ratio=round((mx.z - mn.z) / max(0.01, hero["h"]), 2),
@@ -1056,8 +1093,12 @@ def main():
                                     and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
                     engine=eng, views=[os.path.basename(p) for p in written],
                     visibility=vis, frame_edge=edge,
-                    ground=dict(GROUND_STATS) if GROUND else None,
-                    proving_views=sum(1 for c in vis.values() if c["proves"]))
+                    ground=(dict(GROUND_STATS) if GROUND else prior_ground),
+                    ground_from=("measured this run" if GROUND else
+                                 ("carried - this run did not measure the ground"
+                                  if prior_ground else None)),
+                    proving_views=sum(1 for c in vis.values() if c["proves"]),
+                    **_carry)
                 # *** NO VERDICT IS DRAWN HERE ANY MORE. *** Every per-key
                 # judgement now happens in audit_rows() below, over EVERY row
                 # in the file rather than only the keys this run rendered.

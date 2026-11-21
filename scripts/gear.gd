@@ -199,6 +199,8 @@ const DUN := "res://assets/gear/dungeon/"
 ## LICENSE in the dir) for the 7 kinds it covers - sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
 ## quarterstaff, wand and crossbow keep their kit[4]. Art (ARTIFACT_GOLD_VS_SCARRED.md): keep the gold, no red tint.
 const ART := "res://assets/gear/artifact/"
+## S80 (System 8 row (b)): the Quaternius Medieval Weapons shields (CC0, LICENSE in the dir), armour tiers 4-5.
+const SHD := "res://assets/gear/shields/"
 const KINDS := {
     "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", ART + "sword_golden.glb"]},
     "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", ART + "sword_big_golden.glb"]},
@@ -263,7 +265,14 @@ static func held_rot(path: String) -> Vector3:
 static func offhand_scale(path: String) -> float:
     if path.begins_with(DUN + "shield_"):
         return 1.2
+    if path.begins_with(SHD):
+        return float(SHD_SCALE.get(path.get_file(), 1.0))
     return 1.0
+
+## S80: measured on the hand by tools/_s80_shield.gd at x1.0 (largest world dim against the pack's rare shield at its
+## x1.2: heater_2 2.34x, round_2 1.86x, celtic 3.97x), not off a file print. Heater/round brought to ~1.0x; the celtic
+## is a tall kite, so ~1.2x.
+const SHD_SCALE := {"shield_heater_2.fbx": 0.43, "shield_round_2.fbx": 0.54, "shield_celtic_golden.fbx": 0.30}
 
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
 ## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small

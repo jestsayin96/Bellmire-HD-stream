@@ -965,7 +965,17 @@
     "Hands are rubbed warm. Then the grip is taken.",
     "A scarf is tied tighter by someone who is not asked.",
     "The last coin is left on the sill for the way back.",
-    "The first step is slow. The second is not."
+    "The first step is slow. The second is not.",
+    "The lamp is trimmed twice. Once is not enough.",
+    "Boots are laced by someone who has done it before.",
+    "A last look at the roofs. Then the door.",
+    "Somebody checks the rope. Nobody says so.",
+    "The pack is shifted onto the other shoulder.",
+    "Bread in the pocket. Water at the hip.",
+    "The gate is held open until the last one is through.",
+    "A thumb is run along the blade. It will do.",
+    "Names are left with the guard. It is a habit.",
+    "The stair is dark. The count begins."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1435,7 +1445,17 @@
     "A cut is washed in cold water. Nobody flinches.",
     "The map is folded smaller. Put away.",
     "The tally is chalked on the wall. One more line.",
-    "Bread is broken. The big piece goes to the tired one."
+    "Bread is broken. The big piece goes to the tired one.",
+    "The lamp is turned down. The air is still.",
+    "Boots are scraped on the sill. Habit.",
+    "The rope is coiled and hung where it was found.",
+    "A canteen goes round. Everyone has some.",
+    "The door is wedged shut behind them.",
+    "Somebody counts heads. The number is right.",
+    "The blade is wiped on a rag and put away.",
+    "Dust is shaken from the cloak. The count is kept.",
+    "A long breath. Then the stair up.",
+    "The chalk mark is crossed through."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4352,7 +4372,21 @@
     "Shared the bench. Shared the bowl.",
     "Kept the count of the wall stones. Lost none.",
     "Went in steady. The rope is still tied at the top.",
-    "Told no tall tales. Had no need of them."
+    "Told no tall tales. Had no need of them.",
+    "Mended the roof twice. It held.",
+    "Carried the water up. Never asked for thanks.",
+    "Paid what was owed. Owed nobody.",
+    "Salted the fish. Salted it right.",
+    "Knew every stair in the guildhouse by dark.",
+    "Sharpened the others' blades before his own.",
+    "Kept the shop open through the flood.",
+    "Left the lamp lit. It was needed.",
+    "Counted the nails. Counted the days.",
+    "Walked the wall every dusk. Missed one.",
+    "Taught the boy to knot a rope. He used it.",
+    "Never late to the muster. Not late now.",
+    "Baked for the watch. The watch remembers.",
+    "Said little. Did the work."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13959,5 +13993,6 @@
   "_note_c138": "C-138: small pool top-up, no miniboss owed (origin/art minibosses.py holds 13 full bodies, all already keyed in miniboss_feed.by_key). epitaphs +13, descend +6, cleared +5. Plain register; epitaph lines past tense, no names.",
   "_note_c139": "C-139: pool top-up. epitaphs +13, descend +6, cleared +5. Plain register, no named bodies, no mechanics; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
-  "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it."
+  "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
+  "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
 }

@@ -123,11 +123,39 @@
 ##     whether L74 is now WHOLE or what is left of it, because two halves have been delivered and
 ##     the plan cannot tell from here.
 ##
-## FOR THE SUPERVISOR: **one item, and it is the publish.** `origin/gh-pages^{tree}` (9ca8051e)
-##   still does not equal `origin/hub:web` (02257b2f) - re-measured by me this hour. The delta is
-##   unchanged from the last two hours (the "Sells up to" tier-underline fix) and no new `web/`
-##   change landed this hour. **My recommendation is unchanged: it is a two-file cosmetic fix and
-##   it is safe to publish, but the call is yours and the hub lane has not re-claimed readiness.**
+## FOR THE SUPERVISOR: **one item, the publish - AND THE FIGURE I INHERITED FOR IT WAS WRONG, SO
+##   HERE IS MY OWN MEASUREMENT.** `origin/gh-pages^{tree}` is **9ca8051e** and `origin/hub:web`
+##   is **02257b2f**; `origin/main:web` is the SAME tree as `origin/hub:web`, so nothing is stuck
+##   on the hub branch - the whole gap is publish-side. **THE DELTA IS 3 FILES / 60 LINES
+##   (+59 / -1): `NOTES.md` +9, `app.js` +46/-1, `style.css` +4.** The standing description -
+##   "2 files / 19 lines, app.js -14, style.css +5, the 'Sells up to' tier-underline fix" - is
+##   STALE and is struck; it has been carried for several hours and it understates the change by
+##   three times. **gh-pages last moved at `05ac2679`, "hub publish 5", 19 Nov 20:06 CT** (not the
+##   18 Nov 03:34 `45a7904` some standing text still names).
+##   **MY RECOMMENDATION IS NOW WEAKER THAN IT WAS AND I AM SAYING SO RATHER THAN REPEATING
+##   LAST HOUR'S.** A 46-line `app.js` change is not the cosmetic two-liner the stale figure
+##   described, and I have run no publish verification this hour because the hub lane has made no
+##   readiness claim - so I will not recommend publishing it sight-unseen. **What I recommend is
+##   that the hub lane be asked to re-state readiness for this exact delta, at which point the
+##   full gate (greps, the seven state URLs, CSP red-proof, hostile name, a screenshot looked at)
+##   is owed and I will run it before anything is pushed.**
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED THE NEXT TIME MR. E IS LIVE.
+##   A firing cannot edit a scheduled task's prompt; that is a property of the machine and it was
+##   settled by three tests, so I did not spend a fourth. These corrections live here instead and
+##   this list is cumulative - add to it, do not reset it.
+##   1. **TEAM LEAD prompt, the hub block.** It states gh-pages is `45a7904` pushed 18 Nov
+##      03:34 CT and that the unpublished delta is "2 files / 19 lines". **Both are wrong as of
+##      20 Nov 23:1x CT:** gh-pages is `05ac2679` (19 Nov 20:06 CT, "hub publish 5") and the delta
+##      is 3 files / 60 lines. Replace both figures with an instruction to measure, not a number.
+##   2. **TEAM LEAD prompt, Step 0 baseline.** It says "THREE of the four declared dead show
+##      zero". There are now **FIVE** declared-dead keys and **FOUR** show zero:
+##      `phase2_words`, `phase2_words_alt`, **`phase2_words_alt2`** (content's C-114 third pool,
+##      "dead until wired", new to the zero-hit list) and `town_levels_for_the_desktop`;
+##      `townsfolk` still returns prose hits. The non-note zero-hit count is **15**, not 14, and
+##      it is fully accounted for. **UNREAD LIVE DATA KEYS IS STILL ZERO.**
+##   3. **TEAM LEAD prompt, Step 5.** "thirty-three exist as of 18 Nov" for minibosses. It is
+##      **44 bodies** on disk and in `by_key` as of 20 Nov 23:0x CT, 43 of them wired.
 ##
 ## NEEDS MR. E: nothing.
 ##

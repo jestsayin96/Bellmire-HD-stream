@@ -14904,3 +14904,16 @@ build's IDLE at 11:18:09 - and the hold was 1m25s.
 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
 `--headless` against the worktree; bellmirebro posted nothing anywhere and spent nothing.
+
+## C-167 (21 Nov 2026 12:2x CST) - THE TITHER'S FEED ROW (45th miniboss, Tenthpart)
+TAKE THIS NEXT item 3 (CONTENT): `miniboss_feed.by_key` held 44 keys and no `tither`; art's body
+is committed (assets/monsters/minibosses/tither.glb, docs/art/MINIBOSSES.md #45). Wrote
+`by_key.tither` the way the pitman was written: arrive x9, act x7, broken x4, fall x8 (45 keys now).
+- It is the first EXIT CONDITION: it is paid off or refused, not only killed. arrive lines state the
+  two doors in plain words (pay the tenth and it stands aside; refuse and the hand closes).
+- act lines take `{name}` (the delver paying or refusing). fall lines are written to read true whether
+  the tenth was paid or the body was beaten, because the encounter can end either way.
+- `_note_c167` added inside miniboss_feed. Expected zero-hit key: DO NOT WIRE.
+- CODE WIRING: `Delve.MB_NAME["tither"]` = "Tenthpart" is now unblocked (game build). No pool top-up this
+  cycle. Nothing in items/bosses/potions touched.
+- VALIDATION OK: all four files parse, every pre-existing key byte-identical.

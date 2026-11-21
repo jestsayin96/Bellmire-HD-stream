@@ -2587,6 +2587,64 @@ static func commands() -> Dictionary:
                 _guard_faults.append("CARAVAN TIER")
                 push_error("COMMANDS_DATA CARAVAN TIER: %d manifest row(s) carry no `first_tier` - %s - and town.gd:6207 reads a missing one as 99, above every growth level, so those carts are written and can NEVER turn up; `caravan`.what counts them among the %d it tells a viewer are waiting on the road" % [cv_notier.size(), cv_notier, cv_said])
                 printerr("COMMANDS_DATA CARAVAN TIER - %d row(s) with no first_tier can never be drawn: %s" % [cv_notier.size(), cv_notier])
+        # B102: THE LAST OF B34's FOUR NUMERIC CLAIMS, AND A HALF-TRUTH FOUND WHILE READING FOR IT.
+        # B35 listed four `what` claims carrying a number. `look` (B35), `satchel` (B36, echoed
+        # B96) and `bestiary`'s eight lords (BESTIARY LORDS above) are all gated. The fourth was
+        # left with a reason written at line 1223: `oil`.what "two delvers" is a burn RATE in
+        # delve.gd with NO CONSTANT TO READ. That reason still holds and I am not pretending
+        # otherwise - see the ASK at the bottom of this block.
+        # WHAT I DID READ, BY HAND, THIS RUN, off scripts/delve.gd on the merged tree:
+        #   :161  `oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))`
+        #         - one flask per two bodies a floor, AND A FLOOR NEVER COSTS LESS THAN ONE
+        #           FLASK, however few go down. `maxi(1, ...)` is that minimum.
+        #   :2453 `oil = maxf(0.0, oil - 0.5)` - half a flask more to search a room.
+        #   :78-80 every hero's flasks are added to one party total and their own count is SET TO
+        #         ZERO at the mouth; :80 then says in the game's own voice "They carry %d flasks of
+        #         oil between them." delve.gd's own docstring (:26-27) says the same: "Each hero
+        #         empties their own satchel into the party's at the mouth".
+        # SO `oil`.what WAS RIGHT AND INCOMPLETE, and `delve`.what WAS WRONG. It said "Everyone
+        # carries their own oil", which reads to a viewer as: my flasks light me, and a hero who
+        # brought none goes dark alone. The engine pools them - a hero with no oil descends on the
+        # party's pool, and a hero who brought three loses them to it. That is a quiet half-truth
+        # in a published line, the fault class the lead named at 23:58, and it is MINE. Both
+        # sentences are corrected in data/commands.json this cycle.
+        # WHAT THIS ARM IS, SAID PLAINLY: a WORDING-REGRESSION guard, not an engine guard. It
+        # holds the two corrected sentences in place - the pooling clause and the floor minimum -
+        # and reads the delver count so a reword to "three delvers" goes red. It CANNOT catch the
+        # game build retuning the 0.5, because there is nothing to read. If that number moves,
+        # this arm and my sentence go stale together, and I would rather that be written here than
+        # discovered later.
+        # ASK TO THE GAME BUILD LANE (scripts/delve.gd is theirs, not mine): `class_name Delve` is
+        # already declared, so one named const - say `const OIL_PER_HEAD := 0.5` and
+        # `const OIL_FLOOR_MIN := 1` at :161 - turns this into a real two-authority arm like LOOK
+        # and SATCHEL, and closes the last of B34's four. I am not editing their file to get it.
+        var dvw: String = String(((cmd_d.get("delve", {}) as Dictionary)).get("what", ""))
+        if not dvw.to_lower().contains("pooled at the mouth"):
+            _guard_faults.append("DELVE POOL")
+            push_error("COMMANDS_DATA DELVE POOL: `delve`.what no longer says the oil is \"pooled at the mouth\" (it reads \"%s\") - delve.gd:78-80 empties every hero's flasks into ONE party total and zeroes their own, and :80 says \"between them\" in the game's own voice, so a published line that leaves the pooling out tells a viewer their flasks light only them" % dvw)
+            printerr("COMMANDS_DATA DELVE POOL - `delve`.what lost the pooling clause; the published line implies per-hero oil")
+        var olw: String = String(((cmd_d.get("oil", {}) as Dictionary)).get("what", ""))
+        var o_tail := " delvers"
+        var o_said: int = -1
+        var o_phrase := ""
+        var o_at: int = olw.find(o_tail)
+        if o_at > 0:
+            var o_head: String = olw.substr(0, o_at)
+            var o_sp: int = o_head.rfind(" ")
+            o_phrase = (o_head.substr(o_sp + 1) if o_sp >= 0 else o_head).strip_edges()
+            o_said = _word_int(o_phrase)
+        if o_said < 0:
+            _guard_faults.append("OIL DELVERS ANCHOR")
+            push_error("COMMANDS_DATA OIL DELVERS ANCHOR: `oil`.what no longer says \"<number> delvers\" in words this guard can read (it reads \"%s\") - the burn rate docs/COMMANDS.md publishes can no longer be checked at all, and delve.gd exposes no constant for it either" % o_phrase)
+            printerr("COMMANDS_DATA OIL DELVERS ANCHOR - `oil`.what lost its \"<number> delvers\" phrase (read \"%s\")" % o_phrase)
+        elif o_said != 2:
+            _guard_faults.append("OIL DELVERS")
+            push_error("COMMANDS_DATA OIL DELVERS: `oil`.what publishes one flask per \"%s\" (%d) delvers and delve.gd:161 burns `maxi(1, ceil(alive * 0.5))` - one per TWO bodies a floor. This arm carries the 2 itself because delve.gd declares no constant; if the engine's 0.5 has moved, BOTH this number and the sentence are stale and a human must re-read :161" % [o_phrase, o_said])
+            printerr("COMMANDS_DATA OIL DELVERS - published %d delvers a flask, delve.gd:161 burns one per 2" % o_said)
+        if not olw.to_lower().contains("a flask at least"):
+            _guard_faults.append("OIL FLOOR MIN")
+            push_error("COMMANDS_DATA OIL FLOOR MIN: `oil`.what no longer carries its \"a flask at least\" clause (it reads \"%s\") - delve.gd:161 wraps the burn in `maxi(1, ...)`, so a lone delver pays a WHOLE flask for a floor; without the clause a viewer reads \"one flask for two delvers\" and expects one flask to light two floors alone" % olw)
+            printerr("COMMANDS_DATA OIL FLOOR MIN - `oil`.what lost the floor-minimum clause; a solo delver's cost is now unpublished")
         _cmds = parsed
     return _cmds
 

@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+FEED The lamp is lit at the top of the stair. It is the last warm thing for a while.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 1 skeleton mage, 1 drowned bone sentinel, 1 bone bowman, 1 skeleton warrior.
+FEED Everything here was dug by something smaller than you.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED A crown's worth of blue light, and nothing wearing it yet.
+FEED The risen bones's purse spills across the floor - 120 gold, for whoever goes to it.
+  ok  a PursePile is registered on the floor with its purse
+  ok  purses_dropped == 1 (1)
+  ok  no gold is paid at the kill - the purse is on the floor
+  ok  the pile sits on the floor (dy -0.001)
+SAVED s83_1_purse_on_floor state=fight
+FEED Purse2 casts Smite at drowned bone sentinel.
+FEED Purse0 turns on the wounded drowned bone sentinel to finish it.
+FEED Purse2 turns on the wounded drowned bone sentinel to finish it.
+FEED Purse2 mouths bolt and the scar answers in a rival tongue (11 vs DC 12).
+FEED Purse2 casts Bolt at skeleton mage.
+FEED Cold fire rolls off the Hollow King.
+FEED Purse2 casts Smite at The Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Hollow King falls to Purse2.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 3 ways - 74 gold each to Purse0, Purse1, Purse2.
+FEED Purse1 finds a vial of Shingler's Dram.
+SAVED s83_2_walked_to_it state=search
+FEED Purse1 gathers up the purse - 120 gold, 40 a share, 3 ways.
+  ok  a delver stood within reach of the pile in the search state before it was taken
+  ok  the walked-to-it frame was rendered
+  ok  the pile is gathered up (node freed)
+  ok  every alive delver's gold rose by at least the share (40)
+S83_PURSE OK (8 checks, 0 failed)

@@ -1,3 +1,257 @@
+## TAKE THIS NEXT - THE 21:58 CT FIRING, 20 NOV 2026 (machine clock 21:58-22:1x CST).
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 20:58 BLOCK. ***
+## EIGHT LANES IN SCOPE, FOUR BRANCHES WITH NEW WORK, SIX MERGED, FOUR TICKED. main is the
+## six-lane merge 52aa9607 plus this plan commit.
+##
+## *** MY OWN FAULT FIRST - AND THEN THE CORRECTION TO IT, BECAUSE I WROTE IT WRONG AND THE ROW
+##   WENT STALE INSIDE MY OWN RUN. *** I first wrote here that verification had run long and my
+##   sync would land AFTER the game build's claim for the second hour running. **MEASURED AFTER
+##   THE FACT, THAT IS FALSE AND I AM REPLACING IT RATHER THAN LEAVING IT:** the `laptop` sync
+##   landed at **22:07:30** and the game build claimed S75 at **22:08:30** - it beat the claim by
+##   **60 seconds**, so the lane IS reading this block and not the 20:58 one. **BUT SIXTY SECONDS
+##   IS NOT A MARGIN, IT IS A COIN TOSS**, and last hour the same race was lost by three minutes.
+##   THE FIX STANDS AND IT IS CHEAP: the laptop sync does not need the whole block. Next seat -
+##   write the GAME BUILD row first, sync `laptop` with it alone before :05, and append the rest
+##   of the block afterwards. Do not spend the margin on your own write-up.
+##
+## TICKED THIS HOUR (four):
+##   - **C-152** (content) - the Pitman's feed lines, 44th miniboss, Underfoot. **COUNTED BY ME ON
+##     THE MERGED TREE:** `miniboss_feed.by_key` **43 -> 44**, `pitman` carries **9 arrive / 8
+##     fall** exactly as claimed, **0 duplicate lines** in either phase, `{name}` unused (the
+##     recent shape), and **every one of the 44 rows is now arrive >= 9 and fall == 8** - the whole
+##     register is uniform, not just the new row. `_note_c152` says "Expected zero-hit key: DO NOT
+##     WIRE" and it is nested under `miniboss_feed`, not top-level, which is why the dead-data
+##     top-level count did not move.
+##   - **ART - EVEN LIGHT INSTALMENT 4, AND IT CORRECTS THE CLAIM ALL THREE EARLIER INSTALMENTS
+##     WERE MEASURING.** comfitmaker, dauber, drover, dyer, fenman, fuller, greener, hooper; 24
+##     renders, three views each present on disk (I checked the files), `_fit_report.json` `ok`
+##     true / `errors []` / `blind_views []`, `_report.json` `blank_check` **132 files / 0
+##     failures = 44 x 3**.
+##     **I RE-DERIVED ALL SIXTEEN REFERENCE READS MYSELF** - my own band-isolation script over the
+##     shipped `hero_back.png` and over the pre-merge blobs pulled at `895cb1f6` through the
+##     Blender bridge. Every one of the sixteen lands within **0.5 of a level** of art's table.
+##     Spread across the eight frames: **R 50.2 -> 3.3, G 17.8 -> 3.5, B 22.4 -> 4.0, mean
+##     saturation 0.1722 -> 0.0128** against art's stated 50/18/22 -> 3/3/4 and 0.172 -> 0.012.
+##     The band is 180-181 px with a real column gap on all sixteen reads, so the isolation holds.
+##     **AND I LOOKED AT `_el_inst4_sheet.png`.** The correction is visible and it is the whole
+##     point: in the BEFORE column the reference adventurer - one mesh, one material, eight frames
+##     - reads **blue** in the dyer's frame and **green** in the greener's; in the AFTER column all
+##     eight read the same grey head and red body. **EVEN LIGHT IS A NORMALISER, NOT A
+##     DESATURATOR**, and dauber's saturation RISING is the claim working, not failing. Instalments
+##     2 and 3 stated it as "saturation falls"; that statement cannot express dauber and art says
+##     so about its own earlier work. The two faults it names in the pictures - **the dyer has no
+##     creature in its back view** (a drying frame and a vat; the man is a sliver) and **the
+##     greener's man is one flat dark mass** - I saw both before reading the write-up. They are the
+##     Beadle-facing fault again: the harness is GREEN on all eight and cannot see either.
+##     **TWO SMALL THINGS WRONG IN THE WRITE-UP, NEITHER CHANGING A VERDICT, BOTH ART'S TO FIX:**
+##     (i) the stated exclusion recipe for 44 does not reproduce - it names `_ctl13`/`_el13` scratch
+##     pairs that are not in the tree and omits `drillmaster_tall` and `drillmaster_chibi_tall`.
+##     My census: 70 directories, 12 `_chibi`, 9 `_`-prefixed tag dirs, and of the remaining 49 you
+##     must also drop `beadle_even`, `beadle_world`, `ferryman_even`, `drillmaster_tall`,
+##     `drillmaster_chibi_tall` to reach **44**. The NUMBER is right; the recipe printed for it is
+##     not. (ii) "43,8xx-43,9xx lit pixels in all sixteen reads" - two of my sixteen are 43,786 and
+##     43,789. The isolation argument is unaffected.
+##   - **B93** (chat bot) - own cycle on merged main, and **its diagnosis is right in every part,
+##     measured by me across every ref.** parse rc=0, TWITCH_PARSE OK 8, COMMANDS_DOC OK 31
+##     commands byte-identical (no publish), L14_TEST FAIL 1 of 24 with TWO arms. **`MB_NAME` has
+##     62 entries on main, laptop, chatbot, content AND on the s73-wip checkpoint, and `winder` is
+##     in NONE of them** - the name is on no ref, exactly as the lane reported after going and
+##     looking. `MB_FIT["winder"]` is on **s73-wip only** (129 keys vs 128 everywhere else). It
+##     published nothing, wrote no absence-asserting arm, and checked the checkpoint before calling
+##     its cycle empty. That is the hold working.
+##   - **U113** (HUD) - L74 feed under load at 150%, no `.gd` edited, new `tools/_u113_shot.gd`.
+##     Burst of 36 mixed lines: seen 39 -> admitted 5, merged 7, dropped 17, **dropped_protected
+##     0**; at +600f seen 43, admitted 6, dropped 20, **protected drops 0**; min_gap 0.80s with
+##     PACE_S held. It looked at both frames itself, named what is **not** its own (the boss card
+##     over Director's "Now watching" strip, `boss_bar.gd`), and split the remainder honestly.
+##
+## NOT TICKED, AND WHY:
+##   - **S73/S74 (game build) - STILL NOT LANDED, SECOND HOUR. STILL NOT A MISS.** `origin/s73-wip`
+##     is now **6efb0834**. The S73 work is proven - MB_FIT 0.96, the wood row, S73_WINDER OK 7,
+##     parse/TWITCH_PARSE/OFFFLOOR 0 of 2050/DELVE_TEST all green - but **TOWNWALK printed no
+##     verdict for the second consecutive firing** (T=40s of 120 in 420 s, Marvel Rivals + OBS on
+##     the machine) and a gate that prints no verdict is RED. The lane checkpointed rather than
+##     push an unproved tree. Right call twice. Routed up below.
+##   - **HUB - NOTHING TO TICK, AND NOTHING OWED.** `origin/hub` carries only my own plan-sync
+##     commit this hour; no `web/` change, no readiness claim. **So I ran no publish verification
+##     and none was owed.** Not a stand-down to charge the lane for - it shipped v6 at 20:xx and
+##     that is already ticked.
+##
+## *** THE CHAIN, COUNTED BY ME ON THE MERGED TREE: 44 FEED / 42 MB_NAME / 42 PUBLISHED. ***
+##   `miniboss_feed.by_key` **44** (winder and pitman both fed), `MB_NAME` **62 entries, 42 unique
+##   minibosses**, `commands.json` still "42 elites". `feed - MB_NAME` is exactly **{winder,
+##   pitman}**. The winder's hold is the one that is over; the pitman's is correctly still on.
+##
+## *** AND HERE IS THE THING THE GAME BUILD CANNOT SEE FROM WHERE IT IS STANDING. ***
+##   S73's own comment in `delve.gd` says `NO MB_NAME row: the name waits on content's
+##   by_key.winder`. **THAT CONDITION IS SATISFIED ON main AND HAS BEEN SINCE 21:12.** C-151
+##   (`859fa6ce`) landed the winder's 9 arrive / 8 fall. **`git merge-base --is-ancestor 859fa6ce
+##   origin/s73-wip` is FALSE; against `origin/main` it is TRUE.** s73-wip's `lore_lines.json` has
+##   **42** `by_key` rows; main has **44**. The lane claimed the Godot lock at 21:08, three minutes
+##   before my predecessor's sync landed at 21:11, so it has never had a tree that contains the
+##   lines it is waiting for. **It is not wrong; it is looking at a tree where the answer is not
+##   yet.** The row below says: merge main FIRST, then re-read your own condition.
+##
+## *** DEAD-DATA AUDIT, RE-MEASURED 20 NOV 22:0x CT ON THE MERGED TREE. NOTHING MOVED. ***
+##   **2,294,545 chars** of script (48 files, `scripts/*.gd` + `web/*.js` only), 12 data files,
+##   **137** top-level keys - the same 137 as 21:0x, 20:0x and 19:0x. **UNREAD LIVE DATA KEYS:
+##   ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO** (34 directories with files, measured off
+##   `assets/` only). **47** keys return zero literal hits and all 47 are accounted for: **32**
+##   `_note_`, **2** runtime-built `_alt` pools READ at delve.gd intro_pool (`lord_intros_alt`,
+##   `unique_intros_alt` - DO NOT WIRE), **4** declared-dead (`phase2_words`, `phase2_words_alt`,
+##   `phase2_words_alt2`, `town_levels_for_the_desktop`), **9** prose/spec. C-152 added a nested
+##   note and no top-level key, which is why the number did not move.
+##
+## ---- THE ROWS. ONE ITEM PER LANE. ----
+## GAME BUILD (:07) - **MERGE main FIRST. THEN LAND S73 AND THE NAME IN THE SAME PUSH.**
+##   **Read this before you re-read your own S73 comment:** your checkpoint waits on content's
+##   `by_key.winder`, and **that landed on main at 21:12 as C-151 `859fa6ce`** - 9 arrive, 8 fall,
+##   canon name **"Haulback"** (content's `_note_c151` and art's CANON both say it; both read).
+##   `859fa6ce` is **NOT an ancestor of s73-wip** - your tree has 42 `by_key` rows, main has 44 -
+##   which is why the condition still looks unmet from where you are. Merge **52aa9607**, and the
+##   hold is over on sight. Then push `MB_FIT["winder"]` 0.96 + the wood row + `MB_NAME["winder"] =
+##   "Haulback"` to `laptop` and the chain goes **44/43/42**.
+##   **ON TOWNWALK, WHICH HAS NOW COST YOU TWO LANDINGS: DO NOT RELAX THE GATE AND DO NOT LAND
+##   WITHOUT IT ON YOUR OWN AUTHORITY** - I have routed that question to the supervisor and it is
+##   not yours or mine. **What you may do without any ruling is SPLIT IT**, exactly as the yield
+##   rule tells a lane to split a job: you already report a running `T=` figure (40 s of 120 in
+##   420 s), so carry that total across firings in PROGRESS.md the way the HUD carries a shot count
+##   and let the verdict print over two or three claims. That is a verdict, not a waiver.
+##   **THEN THE 44th, THE PITMAN:** `MB_FIT["pitman"]` ratio **0.94**, tag **crypt**, 3 proving
+##   views, STATIC (`model` path, NO `anims`), h **2.30**, **footprint_span 3.10 m** from
+##   `_report.json` - NOT the "2.85 m" in art's prose. **`by_key.pitman` IS NOW ON main** (C-152,
+##   9 arrive / 8 fall, canon name **"Underfoot"**), so the pitman's name is unblocked too - but
+##   land the winder first and do not take both in one claim if it costs you the cap.
+## CONTENT (:22) - **YOUR OWN CYCLE, UNTHROTTLED. Nothing owed, nothing blocked.** C-152 is ticked
+##   and the arithmetic was exact - and your 44 rows are now uniform at arrive >= 9 / fall 8, which
+##   no row of mine asked for and which I only found by counting all of them. FOR INFORMATION, not
+##   an order: art's instalment 4 names the **dyer** and the **greener** as bodies whose back view
+##   does not read as a creature at all. If their lines lean on being seen from behind, they may
+##   want re-reading - your call entirely.
+## ART (:34) - **INSTALMENT 5. The remainder is 18 and you named every one of them**, so do not
+##   re-derive it: beadle, leech, moulder, paviser, pressman, quartermaster, rammer, ratcatcher,
+##   reeve, relief, scraper, sealer, sower, stackman, stoker, strickler, tapster, winder. **The
+##   reference-body instrument is the one to keep** - I reproduced all sixteen of your reads to
+##   within half a level and it is the only one of your three that can tell a normaliser from a
+##   desaturator. **Two small fixes in your own write-up first, both two-minute edits:** the
+##   exclusion recipe for 44 does not reproduce (it names `_ctl13`/`_el13`, which are not in the
+##   tree, and omits `drillmaster_tall` and `drillmaster_chibi_tall`), and "43,8xx-43,9xx lit
+##   pixels in all sixteen reads" has two reads at 43,78x. The number 44 is right both times; the
+##   recipe is what is wrong. **AND GROUND CONTACT IS NOW THREE INSTALMENTS OLD** - you have called
+##   it rig-level yourself twice. If instalment 5 can carry one rig fix instead of a ninth body, I
+##   would rather have the rig fix.
+## HUB (:37) - **NOTHING OWED AND NOTHING TO TICK THIS HOUR - your own cycle.** You pushed no
+##   `web/` change and made no readiness claim, so no publish gate was owed and I ran none.
+##   **RE-MEASURED BY ME THIS HOUR: the unpublished delta is unchanged at 3 files / 59 lines** -
+##   `web/NOTES.md` +9, `web/app.js` +47/-1, `web/style.css` +4; `origin/gh-pages` **05ac2679**
+##   (pushed 19 Nov 20:06:59 CT), tree **9ca8051e** vs `origin/hub:web` **02257b2f**. It is with the
+##   supervisor. **If you believe it is ready, write "READY TO PUBLISH"** and I will run the full
+##   gate and route the push up.
+## HUD (:52) - **U113 TICKED. TAKE THE SECOND HALF OF L74** - the 125% and 100% burst frames, then
+##   theme coherence across panels, as you scoped it yourself.
+##   *** AND YOUR SEVENTH FLAG WAS RIGHT AND THE ROW WAS MINE. THE SYSTEM 2 RARITY-HUE ROW IS
+##   STRUCK. *** You have raised it seven times; I verified it myself this hour instead of
+##   re-issuing it. `UiTheme.rarity_hue` / `rarity_ink` / `rarity_pip` exist at `ui_theme.gd:196`,
+##   `:200`, `:204` and **are consumed in live code** at `leaderboard_panel.gd:197` and `:202`.
+##   `feed_hud.gd` contains the string "rarity" **zero times** and the feed's lines carry no rarity
+##   field, so there is nothing there to hue without a data change owned by another lane. **The HUD
+##   half of System 2 shipped at U55/U56 and the plan ticked it closed on 18 Nov; every re-issue
+##   since has been a stale row of mine, not an unstarted item of yours.** It is also wrong in THIS
+##   SEAT'S OWN PROMPT, which still calls it "the most valuable open item in the house" - that is
+##   item (h) in the prompt-correction list below. No lane is to be given that row again.
+## CHAT BOT (:45) - **B93 TICKED AND THE DIAGNOSIS WAS EXACT.** The two arms are one hold, and I
+##   confirmed `MB_NAME["winder"]` is on no ref including the checkpoint. **The publish of 43 - and
+##   then 44 - becomes owed the moment the game build pushes those names**, which its row above now
+##   un-blocks by naming the merge it was missing. Check `origin/laptop` before you decide your
+##   cycle is empty; it may land this very hour. Until then: your own cycle, publish nothing, and
+##   keep writing the hold as a hold.
+## PACK CATALOGUE (:15) - **NEXT PACK IN THE QUEUE.** Church1_blend and Fantasy_Props_MegaKit are
+##   CLEARED (CC0 1.0, read off disk). Same shape: the licence page or licence file by your own
+##   eyes, never a search snippet. The Animals pack stays NOT CLEARED.
+## QA TESTER (every 2h, :41) - **YOUR TWO SILENT GATES ARE STILL RED AND STILL YOURS.** A gate that
+##   prints no verdict line is RED until it prints one (COORDINATION 15). TOWNWALK is now the third
+##   instance of this shape and it has cost the game build **two** landings. If your two share a
+##   cause with it - a cap cut under external machine load - say so, because that answer is now
+##   worth a landing an hour.
+##
+## FOR THE SUPERVISOR - ONE DECISION WAITING, TWO FOR INFORMATION.
+## (1) *** WAITING ON YOU: TOWNWALK HAS NOW BLOCKED THE SAME PROVEN LANDING FOR TWO CONSECUTIVE
+##   HOURS, AND THE CAUSE IS OUTSIDE OUR CODE. *** S73 is built and green on five gates
+##   (parse, S73_WINDER OK 7, TWITCH_PARSE OK, OFFFLOOR OK 0 of 2050, DELVE_TEST OK) on
+##   `origin/s73-wip` **6efb0834**. TOWNWALK alone prints no verdict: it is cap-cut at 420-480 s
+##   having reached T=40 s of 120, because Marvel Rivals and OBS are on the machine. Under
+##   COORDINATION 15 that is RED, so the lane has correctly refused to push twice. **THE QUESTION
+##   IS YOURS, NOT MINE: may a landing proceed on five green gates when the sixth is starved by an
+##   external process rather than by the change under test?**
+##   **MY RECOMMENDATION: NO - do not relax COORDINATION 15, and do not grant a waiver.** The rule
+##   is the most load-bearing instrument this fleet has and it has caught real faults; buying one
+##   landing with it is a bad trade. **Authorise the cheaper thing instead: let the game build
+##   SPLIT TOWNWALK across firings with a running `T=` total carried in PROGRESS.md**, the way the
+##   HUD already splits a 150-shot capture. That yields an actual verdict line, needs no exception,
+##   and costs at most two more firings. I have written the split into the game build's row as
+##   something it may do without a ruling; what I need from you is whether the gate may ever be
+##   bypassed if the split also fails, and I recommend that it may not.
+## (2) FOR INFORMATION: **the hub is 3 files / 59 lines ahead of gh-pages and the lane still has
+##   not claimed ready** - unchanged from last hour, re-measured by me (gh-pages **05ac2679**, tree
+##   9ca8051e vs `origin/hub:web` **02257b2f**). No `web/` change this hour. My recommendation is
+##   unchanged: let it ride and take the v6 work up as ONE publish.
+## (3) FOR INFORMATION: **the chain is 44 feed / 42 named / 42 published** and both gaps are
+##   designed holds, not regressions. The winder's hold is now satisfiable on main and the game
+##   build's row says exactly what it was missing; the pitman's is correctly still on.
+##
+## FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+## these all at once on the first LIVE turn). THIS LIST SUPERSEDES THE ONE IN THE 20:58 BLOCK AND
+## CARRIES ITS ITEMS FORWARD, WITH (a), (c) AND (e) RE-MEASURED AND (h) NEW. I DID NOT ATTEMPT A
+## WRITE THIS HOUR, and I am saying so rather than letting an untrue sentence stand: I drafted the
+## claim that I had, then struck it before publishing. The gate is settled ON THE CALL (a no-op
+## `enabled=true` was refused identically on 18 Nov) and this prompt says in terms not to test it a
+## fourth time, so an attempt buys nothing. A firing has no live turn for the approval to be asked
+## in. THE FIRST LIVE TURN LANDS a THROUGH h AT ONCE.
+##   a. **THIS PROMPT (:58) - THE HUB PUBLISH BLOCK IS STALE.** It names gh-pages `45a7904` with a
+##      2-file / 19-line delta. Measured this hour: gh-pages **05ac2679** (19 Nov 20:06:59 CT),
+##      trees **9ca8051e** vs **02257b2f**, delta **3 files / 59 lines**. Replace the paragraph
+##      with its one durable sentence: RE-MEASURE BOTH TREES EVERY HOUR.
+##   b. **ALL NINE PROMPTS - THE FLEET IS NINE TASKS.** The ':07 game build | :22 content | :34 art
+##      | :37 hub | :45 chat bot | :52 HUD | :58 you' line still omits the **:15 pack catalogue**
+##      and the **:41 QA tester**. Every lane's lock protocol must name the QA tester at :41.
+##   c. **THIS PROMPT (:58) - THE MINIBOSS COUNT LINE.** 'thirty-three exist as of 18 Nov' is now
+##      ELEVEN short: **44 bodies**, re-confirmed this hour by directory census AND by
+##      `_report.json` `blank_check` 132 files / 3 views. Keep the sentence that says MEASURE, drop
+##      the number, name the instrument (`_report.json`, **NOT** a regex over `minibosses.py`), and
+##      **add the exclusion list that actually reproduces 44**: drop the 12 `_chibi`, the 9
+##      `_`-prefixed tag dirs, and `beadle_even`, `beadle_world`, `ferryman_even`,
+##      `drillmaster_tall`, `drillmaster_chibi_tall`.
+##   d. **ALL NINE PROMPTS - THE MOUNT PATH.** `$HOME/mnt/hd adventure/<worktree>` is hardcoded and
+##      is PER SESSION. Every prompt should say: run `ls $HOME/mnt/` FIRST and use what it prints.
+##   e. **THIS PROMPT (:58) - THE DEAD-DATA BASELINE.** Measured this hour on the merged tree:
+##      **2,294,545 chars, 48 files, 12 data files, 137 top-level keys, 47 zero-hit** (32 `_note_`,
+##      2 runtime-built `_alt` READ, 4 declared-dead, 9 prose/spec), unread live keys ZERO,
+##      unreferenced asset directories ZERO (34 dirs). Copy the audit block above into the prompt.
+##   f. **THIS PROMPT (:58) - THE GIT-IN-THE-LINUX-BRIDGE WARNING SHOULD NAME READS TOO.** On this
+##      machine every `git` call through device_bash in a WORKTREE fails outright - `.git` is a
+##      FILE holding a Windows path - and a READ can come back EMPTY AND rc-clean. **I hit this
+##      again this hour**: a `git show` of eight PNG blobs through device_bash returned empty files
+##      and PIL raised `UnidentifiedImageError`, which is the only reason I noticed. **ALL git goes
+##      through the Blender bridge**, and assert a blob's length before computing on it.
+##   g. **THIS PROMPT (:58) - ADD A LINE ABOUT COUNTING GDSCRIPT DICTS.** A regex over a
+##      `const X := {...}` literal must track BRACE DEPTH and strip comments, or it silently
+##      truncates: a previous seat's returned MB_NAME 12 and MB_FIT 30 against true 42 and 53.
+##   h. *** NEW, AND IT IS THE ONE THAT HAS COST A LANE THE MOST. THIS PROMPT (:58) IS WRONG ABOUT
+##      SYSTEM 2'S HUD HALF. *** It says "THE HUD'S RARITY-HUE HALF IS THE ONLY PART STILL OPEN...
+##      still unstarted at 09:2x on 18 Nov. IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE."
+##      **MEASURED BY ME THIS HOUR: it shipped.** `UiTheme.rarity_hue`/`rarity_ink`/`rarity_pip` at
+##      `ui_theme.gd:196/200/204`, consumed live at `leaderboard_panel.gd:197` and `:202`;
+##      `feed_hud.gd` contains "rarity" **zero** times and the feed carries no rarity field, so the
+##      remainder needs a data change owned by another lane. The HUD has flagged this **seven
+##      times** and seven seats re-issued the row anyway. **Strike the sentence from the prompt and
+##      from the PHASE 2 block above it, and record System 2's HUD half as CLOSED at U55/U56.**
+#### NEEDS MR. E: ONE, AND IT IS THE HUD'S, NOT MINE.
+#### At 150% UI scale with a lord card up, the Chronicle scroll holds **ONE whole entry at a time**
+#### - that is L71's design working, but under a burst it means a busy moment reads as a trickle of
+#### single lines. The HUD measured it (seen 39 -> admitted 5 at +160f; seen 43 -> admitted 6 at
+#### +600f, 0 protected drops) and says plainly it is your taste call, not an engineering one.
+#### Is one-entry-at-150% what you want on stream, or should the scroll grow when a card is up?
+
 ## TAKE THIS NEXT - THE 20:58 CT FIRING, 20 NOV 2026 (machine clock 20:58-21:0x CST).
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 19:58 BLOCK. ***
 ## EIGHT LANES IN SCOPE, SIX BRANCHES PUSHED, SIX MERGED, SEVEN TICKED. main is the six-lane merge

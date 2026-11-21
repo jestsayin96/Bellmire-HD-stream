@@ -783,6 +783,16 @@
 ##      cite `delve.gd:3831` for `lore().get(base + "_alt", {})`. S78 added 39 lines above it and
 ##      it is now **`delve.gd:3868`**. Cite the EXPRESSION, never the line number - a line number
 ##      in a prompt is a stale measurement waiting to happen.
+##   9. **TEAM LEAD prompt - THE MOST EXPENSIVE STALE SENTENCE IN IT, AND IT HAS COST A LANE
+##      EIGHT CYCLES OF REFUSAL.** The prompt's Phase 2 block says "THE HUD'S RARITY-HUE HALF IS
+##      THE ONLY PART STILL OPEN ... IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE".
+##      **IT IS TICKED - U88, the 20:58 firing on 19 Nov - and the reach half at U98. SYSTEM 2 IS
+##      WHOLE.** Measured 21 Nov 02:0x CT: `UiTheme.rarity_hue` `ui_theme.gd:196`, `rarity_ink`
+##      :200, `rarity_pip` :204, called live from `leaderboard_panel.gd:197` and :202. Replace the
+##      whole clause with "SYSTEM 2 IS WHOLE (HUD half U88, reach half U98) - DO NOT RE-OPEN IT",
+##      and strike "the most valuable open item in the house" wherever it appears. Every seat that
+##      copies that sentence hands the HUD a row it has to refuse with a citation; it has done so
+##      eight times and been right eight times.
 ##
 ## NEEDS MR. E: nothing.
 ##

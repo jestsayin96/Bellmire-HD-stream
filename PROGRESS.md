@@ -14277,7 +14277,10 @@ publish has an arm. Two live claims had none, and the first is the better find:
    whole-number sibling, `_word_int` (words or digits, so the sentence can be rewritten either
    way without the arm going blind).
 
-**SIX NEW ARMS, ALL IN MY OWN FILE, ALL READING THEIR AUTHORITY RATHER THAN COPYING IT.**
+**ELEVEN NEW ARMS - SIX ON THE TOWN CLAIM, FIVE ON THE CARAVAN - ALL IN MY OWN FILE, ALL
+READING THEIR AUTHORITY RATHER THAN COPYING IT.** (I first wrote "six" here and in the commit
+message for 6aa1a900 and then counted the registered tags: **eleven**. Correcting my own
+arithmetic rather than leaving a sentence my own evidence does not carry.)
 `TOWN SPECIALS AUTHORITY / UNNAMED / GHOST / ANCHOR / SAID GHOST / SAID SHORT` and
 `CARAVAN AUTHORITY / ANCHOR / COUNT / FIELDS / TIER`. The town authority is `UNLOCK` in
 `scripts/growth.gd`, which carries **no `class_name`** - so there is no global to reach it by and
@@ -14293,7 +14296,7 @@ manifest row carrying **no `first_tier` can never turn up** - written and unreac
 sentence counts it among the carts on the road. That is the `CARAVAN TIER` arm. Today **28 of 28**
 rows carry one, so it is silent; it exists for the row that does not.
 
-**WHAT I COULD PROVE WITHOUT THE ENGINE, STATED AS EMULATION AND NOT AS A GATE.** All six arms
+**WHAT I COULD PROVE WITHOUT THE ENGINE, STATED AS EMULATION AND NOT AS A GATE.** All eleven arms
 predict SILENT on the merged tree, emulated in python off the same files: `Growth.UNLOCK` keys
 `[market_hall, stables, guild, bathhouse, mage_tower]` = `TOWN_BUILT` keys exactly (0 unnamed, 0
 ghost); the words `TOWN_BUILT` prints and the five `town`.what publishes agree both directions

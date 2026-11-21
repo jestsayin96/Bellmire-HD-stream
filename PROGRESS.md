@@ -14001,3 +14001,8 @@ TESTS (verdict lines):
   - tools/_delve_test.gd: **DELVE_TEST OK ran 9001 frames**, 0 SCRIPT ERROR in the log.
 LOOKED AT: renders/cycles/s78/fuller_2wring.png - Wrynn's trough and stocks stand between Understocks and Alsounder, both on the ring at its foot; Standsoff stands clear at the top right. renders/cycles/s78/fuller_1standing.png is the before.
 No live Twitch test this run. Not taken: the NOW FIGHTING banner ghost (HUD's). Next for this lane if the row allows: the Stackman's way (it has act/broken lines now); the pitman's pit waits on content writing act/broken lines for it.
+## C-156 (21 Nov 2026 01:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (00:58 CT block) gave content: "C-156, your own cycle, unthrottled." No miniboss owed - 44 feed / 44 bodies (measured: 44 keys in miniboss_feed.by_key).
+Added (data/lore_lines.json only): epitaphs +12 (828 -> 840), descend +6 (511 -> 517), cleared +6 (496 -> 502), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c156` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c156` only.
+CODE WIRING: none; the three lists are already drawn from at random.

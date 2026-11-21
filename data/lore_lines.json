@@ -993,7 +993,13 @@
     "Boots are laced twice. Then the door.",
     "The bread is eaten at the threshold. No point carrying it down.",
     "The last of the daylight is left on the step.",
-    "A cough, a nod, and the first stair."
+    "A cough, a nod, and the first stair.",
+    "The rope is checked twice. Then a third time, quietly.",
+    "Boots on stone. Nobody counts the steps aloud.",
+    "The lamp is trimmed at the top, where the air is still good.",
+    "A last look at the town. It is not a long look.",
+    "The gate-ward nods. That is all the blessing there is.",
+    "Somebody's mother packed the bread. It goes down with them."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1491,7 +1497,13 @@
     "The dust settles. The door stays open.",
     "A bootprint is counted. It is not ours.",
     "The lamp is turned up. The way home is plain.",
-    "Somebody laughs, once, and stops."
+    "Somebody laughs, once, and stops.",
+    "The last of it stops moving. The hall is only a hall again.",
+    "They count the lamps. They count the packs. Both come out right.",
+    "Dust settles. Nobody says well done. They sit.",
+    "The floor is quiet, and the quiet is theirs for an hour.",
+    "Blood on the flags. A bucket is found. The work goes on.",
+    "Somebody laughs, once, and is not stopped."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4446,7 +4458,19 @@
     "Taught the apprentice to tie a knot. It held.",
     "Rang the bell on time. Went down on time.",
     "Shared the last of the cheese.",
-    "Said he'd be back for supper."
+    "Said he'd be back for supper.",
+    "Oiled the hinges. Nobody heard him leave.",
+    "Salted the road before the frost. Did not see the frost.",
+    "Carried the water. Left the bucket full.",
+    "Mended the net twice. Went out a third time.",
+    "Stayed for the last cart. The last cart came.",
+    "Swept the step every morning. Swept it once more.",
+    "Knew every stair by its creak. Knew the last one too.",
+    "Shared the bread. Kept the heel for himself.",
+    "Wrote home on the first of the month. The month ran out.",
+    "Tied the knot right. It held. He did not.",
+    "Walked slowly. Arrived anyway.",
+    "Said she would be back for supper. The pot is still warm."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14056,5 +14080,6 @@
   "_note_c140": "C-140: pool top-up. epitaphs +13, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c141": "C-141: pool top-up. epitaphs +12, descend +6, cleared +6. Plain register, no named bodies, no mechanics, no floor counts; readers already exist. Expected zero-hit key, no lane wires it.",
   "_note_c153": "C-153: epitaphs +14, descend +10, cleared +10 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
-  "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE."
+  "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
+  "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 }

@@ -932,3 +932,15 @@ IDLE 2026-11-21T04:55:16-06:00 - HUD U120: L74_TEST OK (protected_unread 0, drop
 RUNNING 2026-11-21T05:08:33-06:00 (game build S82, claim 05:08, cap 05:33, expected finish 05:30)
 
 IDLE 2026-11-21T05:17:09-06:00 - game build S82: System 9 scoped, no engine edit. parse 0 errors, TWITCH_PARSE OK 8, OFFFLOOR OK 0/2305, DELVE_TEST OK 9001, TOWNWALK PASS. No Godot of mine alive. Claim 05:08, cap 05:33, released early. (game build)
+
+RUNNING 2026-11-21T05:53:13-06:00 (HUD U121 hostile-feed windowed probe, claim 05:53, cap 06:08, expected finish 06:01)
+
+IDLE 2026-11-21T05:54:41-06:00 - HUD U121: hostile 60-char/mixed-glyph feed at 100/125/150, U121_DONE checks=40 fails=0, 0 script errors. No Godot of mine alive. (HUD)
+
+RUNNING 2026-11-21T05:57:52-06:00 (chat bot B101, gates parse/l14/twitch_parse/commands_doc on the B101 edit, claim 05:58, cap claim+25 = 06:23, expected finish 06:05)
+
+IDLE 2026-11-21T05:59:48-06:00 - chat bot B101: COMMANDS_DOC OK 32, L14_TEST OK 24 (guard arms 0 fired, incl. the 11 new ones), TWITCH_PARSE OK 8, parse rc=0 / 0 script errors / 0 parse errors. No Godot of mine alive. Claim 05:58, cap 06:23, released early. (chat bot)
+
+RUNNING 2026-11-21T06:08:10-06:00 (game build, claim 06:08, cap claim+25 = 06:33, expected finish 06:30)
+
+IDLE 2026-11-21T06:25:19-06:00 - game build S83: purse-on-the-floor built, S83_PURSE OK, held on s83-wip (L29C soak regression). No Godot of mine alive. Claim 06:08, cap 06:33. (game build)

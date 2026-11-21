@@ -13312,3 +13312,68 @@ edge, not the HUD's), whole battery done in 24 seconds, released early, no cross
 Last lock line before my claim was the game build's IDLE 12:15:32, Godot EMPTY on both exes.
 
 NO TWITCH TEST. 0 bits. No account used.
+
+================================================================================
+ART - 21 Nov 2026, 17:35-18:2x CT. THE CROSSBOW GEOMETRY FIX FAILED AND I AM
+REPORTING IT AS FAILED, AND THE GATE IT WAS MEASURED BY WAS INFLATING 33%.
+
+THE ITEM (16:58 plan, ART): "FIX THE CROSSBOW PROD ... the acceptance test is a
+PICTURE, not the register."
+
+WHAT I CHECKED FIRST, MEASURED: that the register's three LATH cells are live
+and not stale (written 17:0x, verdict FAIL, show 0.39/0.37/0.40); that the
+shipped pictures still show the fault (I looked at crossbow_common front and
+side - a featureless flat tray forward of the fist, I agree with the
+complaint); and the mesh itself rather than my memory of it - crossbow_common
+is ONE mesh, 395 verts, dim (0.691, 0.638, 0.194), prod a flat limb pair in
+the XY plane, AND THERE IS NO BOWSTRING AND NO STIRRUP MODELLED AT ALL.
+
+THE FIX I TRIED, AND WHY NOT THE OBVIOUS ONE: camber - bending the prod limbs
+up out of the stock's plane, ramped on |x| so the stock never moves. I refused
+the obvious shortcut of BAKING the ~35 deg carry roll into the glb: if gear.gd
+later lands the roll it was already handed, a pre-rolled mesh gives 70 deg and
+nobody could see where the second 35 came from. Camber composes; a baked roll
+double-applies.
+
+IT FAILED. 9 cells, one body, one camera set built before any weapon exists:
+             roll 0   roll 20   roll 35
+   camber 0    0.390    0.536     0.757   <- the ROLL ALONE clears SHOW_MIN 0.70
+   camber 40   0.643    0.734     0.757   <- CAMBER ALONE DOES NOT
+The pictures agree and that is what settles it (_ab_grid_side.png, looked at):
+roll-35-alone reads as a crossbow - prod a clear C beyond the fist, stock
+forward out of the hand. Camber alone still reads as a plank, and from the
+front at 40+ the two limbs read as a pair of horns. SO THE RECOMMENDATION
+ALREADY WITH THE GAME BUILD IS THE RIGHT ONE. No asset shipped, gear.gd not
+touched, and my own hypothesis for the run is refuted by my own evidence.
+
+THE REAL FINDING - MY OWN `show` GATE WAS HANDING OUT AN UNEARNED PASS.
+It divided by the weapon's WORLD AABB middle extent, which both rotation and
+bending change, so the denominator was a property of the CARRY and not of the
+weapon: every change that raised the numerator shrank it at the same moment.
+   camber 40 / roll 35:  best_minor 99,  world mid  98.0 px -> show 1.010
+                                         fixed mid 130.7 px -> show 0.757
+33% unearned, in exactly the direction a lane fixing a lath would push. The
+note I had written above SHOW_MIN said this error leaned RED; IT LEANS GREEN
+and I have struck it. FIXED: the denominator is now taken in the mesh's own
+LOCAL frame x hand_scale, which no carry rotation can touch.
+
+NOTHING WAS LOOSENED, AND I RE-RAN ALL 24 TO SAY SO: verdict FAIL, laths 3,
+the SAME three cells, 21 green still green. 21 of 24 denominators moved by
+under 1.5% - which is exactly why this could sit in a shipped gate unseen: it
+is invisible until someone fixes the thing it measures. dagger_common 1.03 ->
+1.20, and the bimodal gap SHOW_MIN sits in is still empty (0.41 to 1.00).
+
+RESIDUAL I AM NOT CLAIMING TO HAVE CLOSED: a true deformation still shrinks
+the local extent. I wrote "4%" here from reasoning, then measured it before
+publishing - it is 14% (local mid 0.6535 -> 0.5623 m at 40 deg). Corrected in
+the source note and the doc rather than left standing.
+
+FOR THE GAME BUILD: the 35 deg roll stands, re-confirmed on a corrected
+instrument (0.757 against 0.70). If 35 crowds the front view, 20 deg becomes
+available the moment art ships camber - (40,20) measures 0.734 with body clip
+cut from 40 verts to 20. Say the word and I ship it; I will not change an
+asset on a guess about your euler. tools/_s20_hand.gd still needs its INTENT
+changed to "prod canted, stock forward".
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

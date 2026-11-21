@@ -8124,6 +8124,172 @@
    },
    "self_seen_worst": 0.8299,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+  },
+  "tither": {
+   "creature_h": 2.42,
+   "hero_h": 2.45,
+   "ratio": 0.99,
+   "pair_w": 4.25,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.349,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 43507,
+      "vis": 43507,
+      "delta": 50580,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43676,
+      "vis": 43676,
+      "delta": 51670,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 33090,
+      "vis": 33090,
+      "delta": 40286,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37763,
+      "vis": 37763,
+      "delta": 44320,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42337,
+      "vis": 42337,
+      "delta": 49675,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44028,
+      "vis": 44028,
+      "delta": 50295,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 229520,
+     "shadow_px": 4561,
+     "mean": 0.4408,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3388,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 234080,
+     "shadow_px": 4495,
+     "mean": 0.4215,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2644,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 229520,
+     "shadow_px": 4350,
+     "mean": 0.4404,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3694,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     91,
+     88
+    ],
+    "side": [
+     143,
+     143
+    ],
+    "back": [
+     88,
+     91
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 88,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -8291,15 +8457,13 @@
  },
  "unproved_cells": [],
  "measured": [
-  "snuffer_chibi",
-  "tallyman_chibi"
+  "tither"
  ],
  "asked": [
-  "snuffer_chibi",
-  "tallyman_chibi"
+  "tither"
  ],
  "blank_check": {
-  "files": 6,
+  "files": 3,
   "failures": []
  },
  "red_summary": {
@@ -8309,6 +8473,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 2,
- "verdict_scope": "every row in pairs (46), re-derived from stored measurements; 2 of them rendered this run"
+ "rendered_this_run": 1,
+ "verdict_scope": "every row in pairs (47), re-derived from stored measurements; 1 of them rendered this run"
 }

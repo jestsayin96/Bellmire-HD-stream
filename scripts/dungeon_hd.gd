@@ -229,12 +229,12 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S48: `fuller` (35th, art's tag fogbound) joins fogbound; content's C-126 lines are in. `stackman`
 ## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
 ## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
-## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; NO content lines yet, so miniboss_for holds it out.
-## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; NO content lines yet, so miniboss_for holds it out.
+## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; content's feed row has since landed (by_key.scraper arrive 9 / fall 8), so miniboss_for draws it (S91, measured).
+## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; content's feed row has since landed (by_key.ferryman arrive 9 / fall 8), so miniboss_for draws it (S91, measured).
 ## S72: content's C-149 ferryman lines are in (9 arrive / 8 fall), so the gate now lets it into the flooded draw.
 ## S73: `winder` (43rd, Haulback in art's CANON, art's tag wood - field 5) joins wood; content's C-151 lines landed and S75 added its MB_NAME row, so it now enters the wood draw.
 ## S76: `pitman` (44th, Underfoot in art's CANON, art's tag crypt - field 5) joins crypt; content's C-152 lines (9 arrive / 8 fall) and its MB_NAME row land together, so it enters the crypt draw now.
-## S89: `tither` (45th, Tenthpart in art's CANON, art's tag prison - field 5) joins prison; NO content lines yet, so miniboss_for holds it out.
+## S89: `tither` (45th, Tenthpart in art's CANON, art's tag prison - field 5) joins prison; content's C-167 landed by_key.tither (arrive 9 / act 7 / broken 4 / fall 8), so miniboss_for draws it (S91, measured).
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman", "tither"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman"],

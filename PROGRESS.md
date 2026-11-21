@@ -14961,3 +14961,28 @@ So the receiver is proven: the moment snapshot_pub.gd sends mana/mana_max on the
 State checks ?state=empty/fail/stale ?mock=chronicle ?mock=crowd ?open=1 all render, no page errors. node --check app.js OK; innerHTML assignments = 2 (app.js:255, :301, page-owned); no outerHTML/insertAdjacentHTML/document.write/eval/new Function.
 Live-dot colour: unchanged, red (functional) - seen on the LIVE pill and rail dots in the shot. NOT claiming READY TO PUBLISH: web/ is byte-identical to origin/hub, delta with gh-pages unchanged and with the supervisor.
 Seen wrong: nothing in the sheet; the shot is a mock on an empty town so the "has not reported yet" banner shows by design.
+
+## S91 (21 Nov 2026 14:08-14:2x CST) - GAME BUILD: the tither comment, and the reason the tither was NOT drawn here
+TAKE THIS NEXT item 1 (GAME BUILD): correct the stale "NO content lines yet" comment and prove the draw with one gate run.
+COMMENTS CORRECTED (no wiring added): dungeon_hd.gd:237 (tither, C-167 arrive 9 / act 7 / broken 4 / fall 8) and
+delve.gd:442 (MB_NAME tither row). Two SIBLINGS carried the same stale words and are corrected too, measured against
+data/lore_lines.json first: dungeon_hd.gd:232 scraper (arrive 9 / fall 8) and :233 ferryman (arrive 9 / fall 8).
+*** THE DRAW GATE DID NOT SAY THE TITHER WAS DRAWN. *** First S33_DRAW run on the merged tree: `tither: loadable body`
+FAIL, drawn 0/400 prison floors. CAUSE MEASURED: assets/monsters/minibosses/tither.glb is committed with NO
+tither.glb.import sidecar (pitman.glb.import is tracked; tither's never was), so ResourceLoader.exists is false and
+Delve.miniboss_model("tither") returns "" - the data gate correctly held it out. So the plan's "THE TITHER IS ALREADY
+IN THE PRISON DRAW ON MERGED MAIN" was true of the DATA and false of the ENGINE in any tree that had not re-imported.
+Ran --headless --import; the sidecar is generated and COMMITTED here. After it: tither drawn 120/400 prison floors.
+S33_DRAW WAS ALSO LYING RED ON TWO OF ITS OWN ARMS (my gate, fixed, not new work):
+  (1) its CANON tag regex required titles beginning `"The ` - art's titles no longer do ("Underfoot", "Tenthpart"),
+      so it parsed 0 tags and failed 29 tag arms. Regex now takes any title.
+  (2) "body broodglut / lastcuff is in a draw" - those are S54 Bestiary pack-variant bodies (homes [], called by name),
+      not theme-draw minibosses. Exempted ONLY when the body is not already in a draw AND is a Bestiary key.
+VERDICTS (logs in renders/cycles/s91/): parse 0 SCRIPT ERROR / 0 Parse Error (before and after import);
+S33_DRAW OK 186 checks (bodies 45, drawn-with-lines 31, held-for-lines 0); red-proof S33_RED=1 -> S33_DRAW FAIL 3 of
+190 (the injected key, as designed); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2242; TOWNWALK
+in_solid=0/17365 raid_in_solid=0/7221 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+NOT LOOKED AT A PICTURE: nothing visual changed (two comments, one gate, one import sidecar). Saying so rather than
+rendering a shot of nothing.
+FOR ART/LEAD: tither.glb was pushed without its .import. Other trees that have not run --import will see the same
+"no loadable body" until this commit merges. The blower (46th) is still on no ref.

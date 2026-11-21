@@ -7,7 +7,8 @@ extends SceneTree
 ##   - Delve.MB_FIT carries art's measured ratio (pairs.<key>.ratio in _fit_report.json or the
 ##     key's _fit_<key>_register.json), equal to 0.005;
 ##   - with arrive lines it is DRAWN on at least one of floors 1..400; without lines it is drawn on NONE.
-## Also: every art body on disk (non-_chibi, non-_tall) is in THEME_MINIBOSS or THEME_MINIBOSS_MORE.
+## Also: every art body on disk (non-_chibi, non-_tall, not a Bestiary key) is in THEME_MINIBOSS or THEME_MINIBOSS_MORE.
+## S91: CANON titles no longer all begin "The " (tither = "Tenthpart"), so the tag regex takes any title.
 ## S33_RED=1 injects a key with no body and no ratio - the gate must print FAIL.
 ## Prints S33_DRAW OK <n> checks | S33_DRAW FAIL ...
 var _fails: Array = []
@@ -37,7 +38,7 @@ func _init() -> void:
 	var src := FileAccess.get_file_as_string("res://tools/art/minibosses.py")
 	_ok(src.length() > 1000, "tools/art/minibosses.py read (%d chars)" % src.length())
 	var re := RegEx.new()
-	re.compile("(?m)^\\s+\"([a-z_]+)\":\\s*\\(\"The [^\"]+\",\\s*[0-9.]+,\\s*\\([^)]*\\),\\s*\\([^)]*\\),\\s*\"([a-z]+)\"")
+	re.compile("(?m)^\\s+\"([a-z_]+)\":\\s*\\(\"[^\"]+\",\\s*[0-9.]+,\\s*\\([^)]*\\),\\s*\\([^)]*\\),\\s*\"([a-z]+)\"")
 	var tag := {}
 	for m in re.search_all(src):
 		tag[m.get_string(1)] = m.get_string(2)
@@ -85,6 +86,11 @@ func _init() -> void:
 				continue
 			var b := f.get_basename()
 			if b.ends_with("_chibi") or b.ends_with("_tall"):
+				continue
+			# S91: a bestiary pack-variant body (S54 broodglut, lastcuff) lives in this folder but is
+			# placed by Bestiary (homes [], called by name), not by the theme draw - exempt it here.
+			if not listed.has(b) and Bestiary.all_keys().has(b):
+				print("  bestiary body %s: placed by Bestiary, not a theme draw" % b)
 				continue
 			bodies += 1
 			_ok(listed.has(b), "body %s is in a draw" % b)

@@ -439,7 +439,7 @@ const MB_NAME := {
 	"ferryman": "Slackwater",   # S72: content's miniboss_feed._note_c149 "Slackwater" and art's CANON title (minibosses.py:14501), both read
 	"winder": "Haulback",   # S75: content's miniboss_feed._note_c151 "Haulback" and art's CANON title (minibosses.py:14974), both read
 	"pitman": "Underfoot",   # S76: content's miniboss_feed._note_c152 "Underfoot" and art's CANON title (minibosses.py:15251), both read
-	"tither": "Tenthpart"}   # S89: art's CANON title (minibosses.py:15830); content has no by_key.tither yet, so miniboss_for holds the body out until its lines land
+	"tither": "Tenthpart"}   # S89: art's CANON title (minibosses.py:15830); content's C-167 by_key.tither has landed, so miniboss_for draws the body (S91)
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

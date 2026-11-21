@@ -13420,3 +13420,7 @@ Result: U125_DONE checks=40 fails=0; headless parse 0 Parse Error / 0 SCRIPT ERR
 LOOKED AT renders/cycles/20261121_u125/host_s150_phone480.png: four pane labels clean inside their panes, lord card up, Mana plate katakana/Cyrillic names clipped inside the plate, clock unclipped. OBSERVATION, not a fault yet: in this one frame the Chronicle's hostile 60-char-name line sits in the right half of the scroll and its third wrapped row ("...XXXX1 rolls a 20 for initiative and is") runs to the bottom of the vellum. U122's 118 measured checks say no line exceeds the rect, and lines slide/fade in, so I call this mid-arrival; no feed_hud.gd edit.
 Next firing: nothing HUD-owned is open. If the lock is clear, own cycle: sample that same hostile 60-char line over its full arrival (every 10 frames) and assert its bottom stays inside the vellum at 150% - one measure before any change.
 Decision for Mr. E: none.
+
+
+## U-standdown 2026-11-21 10:52 CST - STAND-DOWN (no Godot claim)
+RUN_LOCK last line (R working copy) at 10:52:39-06:00: RUNNING 10:51:30 chat bot B106 (expected finish 10:58, cap 11:16), no IDLE from that lane after it. Process check: no Godot alive at that instant, but the lane runs short gates with gaps, so I treated the hold as live per the YIELD RULE and did not claim over it. No .gd edited, no engine launched. Next firing (11:52): re-read RUN_LOCK, take the rarity-hue half of System 2 (TAKE THIS NEXT), split any capture into <=15 min chunks, release by :07.

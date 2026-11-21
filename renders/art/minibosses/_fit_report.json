@@ -4212,13 +4212,13 @@
      "creature": {
       "alone": 93109,
       "vis": 93109,
-      "delta": 94913,
+      "delta": 101617,
       "seen": 1.0
      },
      "hero": {
       "alone": 43680,
       "vis": 43680,
-      "delta": 47436,
+      "delta": 54394,
       "seen": 1.0
      },
      "proves": true
@@ -4227,13 +4227,13 @@
      "creature": {
       "alone": 68095,
       "vis": 68095,
-      "delta": 69165,
+      "delta": 77553,
       "seen": 1.0
      },
      "hero": {
       "alone": 37797,
       "vis": 37797,
-      "delta": 38915,
+      "delta": 44842,
       "seen": 1.0
      },
      "proves": true
@@ -4242,13 +4242,13 @@
      "creature": {
       "alone": 95803,
       "vis": 95803,
-      "delta": 97790,
+      "delta": 109878,
       "seen": 1.0
      },
      "hero": {
       "alone": 44035,
       "vis": 44035,
-      "delta": 45650,
+      "delta": 51001,
       "seen": 1.0
      },
      "proves": true
@@ -4276,12 +4276,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 280440,
-     "shadow_px": 5391,
-     "mean": 0.3969,
-     "max": 0.7103,
+     "plane_px": 277400,
+     "shadow_px": 5378,
+     "mean": 0.3989,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 4769,
+     "rim_filled_px": 4556,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -4290,12 +4290,12 @@
      }
     },
     "side": {
-     "plane_px": 285760,
-     "shadow_px": 4841,
-     "mean": 0.3956,
-     "max": 0.708,
+     "plane_px": 282720,
+     "shadow_px": 4846,
+     "mean": 0.3962,
+     "max": 0.7077,
      "error": null,
-     "rim_filled_px": 3362,
+     "rim_filled_px": 3394,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -4304,12 +4304,12 @@
      }
     },
     "back": {
-     "plane_px": 278160,
-     "shadow_px": 4644,
-     "mean": 0.3895,
-     "max": 0.7102,
+     "plane_px": 275120,
+     "shadow_px": 4562,
+     "mean": 0.3932,
+     "max": 0.7077,
      "error": null,
-     "rim_filled_px": 4989,
+     "rim_filled_px": 4912,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -4318,7 +4318,7 @@
      }
     }
    },
-   "ground_from": "carried - this run did not measure the ground",
+   "ground_from": "measured this run",
    "proving_views": 3,
    "self_seen": {
     "front": {
@@ -4345,14 +4345,14 @@
    "air_px": {
     "front": [
      20,
-     20
+     17
     ],
     "side": [
-     98,
+     95,
      98
     ],
     "back": [
-     20,
+     17,
      20
     ]
    },
@@ -4377,7 +4377,7 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 20,
+   "air_px_min": 17,
    "air_px_tightest_view": "front"
   },
   "fenman": {
@@ -6424,13 +6424,13 @@
      "creature": {
       "alone": 46487,
       "vis": 46487,
-      "delta": 48417,
+      "delta": 56291,
       "seen": 1.0
      },
      "hero": {
       "alone": 43678,
       "vis": 43678,
-      "delta": 48502,
+      "delta": 57154,
       "seen": 1.0
      },
      "proves": true
@@ -6439,13 +6439,13 @@
      "creature": {
       "alone": 49053,
       "vis": 49053,
-      "delta": 50909,
+      "delta": 60774,
       "seen": 1.0
      },
      "hero": {
       "alone": 37774,
       "vis": 37774,
-      "delta": 38757,
+      "delta": 46411,
       "seen": 1.0
      },
      "proves": true
@@ -6454,13 +6454,13 @@
      "creature": {
       "alone": 48570,
       "vis": 48570,
-      "delta": 50426,
+      "delta": 59019,
       "seen": 1.0
      },
      "hero": {
       "alone": 44019,
       "vis": 44019,
-      "delta": 44837,
+      "delta": 52225,
       "seen": 1.0
      },
      "proves": true
@@ -6530,7 +6530,7 @@
      }
     }
    },
-   "ground_from": "carried - this run did not measure the ground",
+   "ground_from": "measured this run",
    "proving_views": 3,
    "self_seen": {
     "front": {
@@ -6560,12 +6560,12 @@
      43
     ],
     "side": [
-     53,
-     53
+     50,
+     52
     ],
     "back": [
      43,
-     43
+     42
     ]
    },
    "frame_edge_disk": {
@@ -6589,8 +6589,8 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 43,
-   "air_px_tightest_view": "front"
+   "air_px_min": 42,
+   "air_px_tightest_view": "back"
   },
   "comfitmaker": {
    "creature_h": 2.28,
@@ -7171,13 +7171,13 @@
      "creature": {
       "alone": 61306,
       "vis": 61306,
-      "delta": 71567,
+      "delta": 71566,
       "seen": 1.0
      },
      "hero": {
       "alone": 43677,
       "vis": 43677,
-      "delta": 58047,
+      "delta": 58048,
       "seen": 1.0
      },
      "proves": true
@@ -7186,13 +7186,13 @@
      "creature": {
       "alone": 36575,
       "vis": 36575,
-      "delta": 42958,
+      "delta": 46389,
       "seen": 1.0
      },
      "hero": {
       "alone": 37794,
       "vis": 37794,
-      "delta": 43418,
+      "delta": 43300,
       "seen": 1.0
      },
      "proves": true
@@ -7201,13 +7201,13 @@
      "creature": {
       "alone": 61637,
       "vis": 61637,
-      "delta": 71704,
+      "delta": 75575,
       "seen": 1.0
      },
      "hero": {
       "alone": 44032,
       "vis": 44032,
-      "delta": 54027,
+      "delta": 52053,
       "seen": 1.0
      },
      "proves": true

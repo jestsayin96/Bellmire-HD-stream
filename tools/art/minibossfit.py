@@ -221,10 +221,32 @@ def place(roots, dx, dy=0.0):
 # same way relative to the viewer, which is the question a contact sheet is
 # asked. The rim travels too, so it stays a rim and does not become a key.
 #
-# DEFAULT OFF ON PURPOSE. Turning it on changes every pixel of every hero view
-# in the tree; that is a 41-body re-render and a separate decision, not
-# something to slip in under a Beadle fix. `--evenlight` / MBFIT_EVENLIGHT=1.
-EVENLIGHT = os.environ.get("MBFIT_EVENLIGHT", "0") != "0"
+# *** DEFAULT ON SINCE 21 NOV 09:4x CT, AND A CENSUS IS WHY - NOT A PREFERENCE.
+# It was default OFF on purpose while adoption was a decision; instalment 5
+# took that decision and re-rendered all 44 with `--evenlight --ground`. But
+# the FLAGS STAYED OFF BY DEFAULT, so every later per-body pass that did not
+# remember to pass them silently shot that body back onto the old rig - and
+# left it in the shipped tree beside 41 bodies on the new one.
+#
+# `tools/art/_backlamp.py` measured it instead of assuming it, calibrated on
+# `beadle_world/` (old rig) against `beadle_even/` (even rig) - the same body
+# shot both ways, so the instrument is known to be able to move:
+#     back-view chromaticity distance from the front view
+#     beadle_world  0.20386   <- one coloured lamp
+#     beadle_even   0.06788   <- rig carried round with the camera
+#     beadle        0.06840   <- shipped: on the new rig
+# Across the 44, three bodies had drifted back and the census named them:
+#     ratcatcher  0.23272, floor PRESENT  -> `--ground` alone, no `--evenlight`
+#     pitman      0.14432, floor ABSENT   -> NEITHER flag, and it is the 44th,
+#                                            so instalment 5's "44/44" never
+#                                            covered it
+#     paviser     floor ABSENT            -> was even-lit by instalment 5 and
+#                                            passes 6/7/8 shot it away again
+# A default that has to be remembered on every call is a harness that can
+# report an unearned pass. The opt-out is explicit now: `--worldlight` /
+# MBFIT_EVENLIGHT=0, which is what an A/B control arm should have been saying
+# out loud all along.
+EVENLIGHT = os.environ.get("MBFIT_EVENLIGHT", "1") != "0"
 
 _LIGHT_SPECS = (("key",  (0.9, -1.0, 0.85), 'SUN',  2.3, None),
                 ("fill", (-1.0, -0.6, 0.35), 'AREA', 1.0, (0.72, 0.80, 1.0)),
@@ -337,9 +359,11 @@ def aim_lights(lights, center, radius, az_deg):
 #       fault, and chasing it is what found this. Now the blend touches only
 #       pixels the shadow actually reaches.
 #
-# DEFAULT OFF, like --evenlight: turning it on changes every pixel of every
-# cell. `--ground` / MBFIT_GROUND=1.
-GROUND = os.environ.get("MBFIT_GROUND", "0") != "0"
+# DEFAULT ON since 21 Nov 09:4x CT, for the same measured reason as
+# --evenlight above: instalment 5 adopted it over all 44, the flag stayed off
+# by default, and three bodies have since been shot standing on nothing again.
+# Opt out with `--noground` / MBFIT_GROUND=0.
+GROUND = os.environ.get("MBFIT_GROUND", "1") != "0"
 GROUND_MAX_A = 0.50          # darkest the contact shadow may ever get
 GROUND_RGB = (0.07, 0.07, 0.085)
 GROUND_GAMMA = 1.0           # occlusion of a single lamp needs no grading
@@ -970,15 +994,29 @@ def main():
     # A/B ONLY. --evenlight carries the key/fill/rim round with the camera (see
     # the EVEN LIGHT note above); --tag writes into <key><tag>/ so an A/B can
     # never overwrite a shipped render.
+    # Both are ON by default since 21 Nov (see the EVEN LIGHT and GROUND
+    # CONTACT notes above). The flags are kept so existing callers that pass
+    # them keep working unchanged and read as intent; --worldlight and
+    # --noground are the opt-outs an A/B control arm must now state out loud.
     ap.add_argument("--evenlight", action="store_true")
-    # THE RIG FIX. See the GROUND CONTACT note above. Off by default.
+    ap.add_argument("--worldlight", action="store_true",
+                    help="old world-fixed rig: one coloured lamp on the back. "
+                         "A/B control arms only, never a shipped register.")
+    # THE RIG FIX. See the GROUND CONTACT note above.
     ap.add_argument("--ground", action="store_true")
+    ap.add_argument("--noground", action="store_true",
+                    help="no floor pass; the subject stands on nothing. "
+                         "A/B control arms only.")
     ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
     if args.evenlight:
         globals()["EVENLIGHT"] = True
+    if args.worldlight:
+        globals()["EVENLIGHT"] = False
     if args.ground:
         globals()["GROUND"] = True
+    if args.noground:
+        globals()["GROUND"] = False
     if args.prove_red:
         globals()["PROVE_RED"] = True
     if args.frame > 0.1:

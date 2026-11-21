@@ -4196,3 +4196,39 @@ is my next firing.
   where S81 read 0 - the gate still PASSES and I changed no town code; named so nobody finds it later. Logs in renders/cycles/s82/.
 - Lock: claim 05:08:33, claim+25 = 05:33 computed first, declared 05:30; released 05:17:09, no Godot of mine alive.
 - Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.
+
+## D-cycle - S83: SYSTEM 9 ROW (a) - THE MINIBOSS PURSE SPILLS ON THE FLOOR AND A DELVER WALKS TO IT. 2026-11-21T06:08-06:00 (game build)
+TAKE THIS NEXT (05:58 block, GAME BUILD row): "Build row (a): the miniboss purse / lord's hoard lands as a coin pile where the body fell and
+the gold is paid when the nearest delver WALKS TO IT, reusing the L49 walk-and-kneel. Ship it with its own windowed gate AND a render."
+WHAT CHANGED (scripts/delve.gd only, backup delve.gd.bak_s83, not committed):
+- _on_kill, L29c purse branch: in a LIVE fight (state "fight", no D83 _back_to) the purse no longer pays at the kill. _drop_purse lays
+  assets/props/Coin_Pile_2.gltf (art's measured prop, base_dz +0.0003 - on the floor at any scale; PURSE_SCALE 4.0 = 0.23 m tall) where the
+  body fell, guarded by ResourceLoader.exists + `is PackedScene` (the gear.gd:104 lesson - no unguarded null), and registers it in
+  dun.info.chests as {node, searched, purse}. Chronicle: content's fall line (unchanged), then "The X's purse spills across the floor - N gold,
+  for whoever goes to it." miniboss_down / miniboss_feed_fall still count. Anywhere else (a cold _on_kill, a kill on the stairs walk) it pays
+  at once exactly as before - which is why L29C's B.miniboss case (state "enter") is untouched.
+- _search_tick (L49): a purse entry is gone to FIRST, by the NEAREST delver (_nearest_to), not the sharpest eye; at reach the same Use_Item
+  kneel for SEARCH_S, then _take_purse pays the L29c share rule across the alive party, floats +N, frees the pile, "X gathers up the purse".
+- The purse is NEVER lost: an unreachable pile (stuck_on give-up) is gathered instead of abandoned, and the 12 s search cap calls
+  _purses_left before _floor_decision.
+- First run caught a real ordering fault: the purse was queued behind a chest, the 12 s cap expired, and _purses_left paid it with nobody
+  walking - S83_PURSE FAILED its "stood within reach" arm. Fixed by taking purses first; second run green.
+- LORD'S HOARD NOT DONE this hour: _loot :2405 still splits it as a number. Named, not hidden - it is the same mechanism and is next.
+NEW GATE tools/_s83_purse.gd (WINDOWED, quits itself, run without --quit): real Delve.start floor 5, felling one live monster with the purse
+meta mid-fight. Test artifact named in the file: setting DEAD skips the death animation, so the corpse is hidden to show the floor.
+RENDERS LOOKED AT (renders/cycles/s83/): s83_1_purse_on_floor.png - the coin pile plainly on the flagstones, not sunk, not floating (my first
+render at scale 2.2 was illegible under the standing corpse, which is why the scale is 4.0); s83_2_walked_to_it.png - the delver at the pile,
+hand down to it, ring on the floor beside it (framing is tight - the body fills the left half; legible, not pretty).
+GATES (verdict lines, merged tree a4edbf74 + this edit, JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error (final code);
+S83_PURSE OK (8 checks, 0 failed) (final code); DELVE_TEST OK ran 9001 frames, floor reached 2, state search, 0 SCRIPT ERROR (final code);
+TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2202 samples off the floor (home); TOWNWALK in_solid=0/17093 (0.000%) raid_in_solid=0/5703
+PASS, STUCK_ON_ROUTE_TOTAL 0. The last three ran on the first edit (before purses-first and scale 4.0); neither change touches town or twitch.
+L29C (not a required gate, run because I changed its branch): first run B.miniboss ALL ok (purse 40 -> 183, paid once) but C soak FAIL
+"at least one set piece fired (0)" - see L29C2 line below.
+- No Twitch test, 0 bits, no account used.
+L29C2 (final code): B.miniboss all ok again, C soak FAIL again "(0)". BASELINE (delve.gd swapped back to HEAD for one run, then restored):
+L29C_TEST OK, CHECKS 33 FAILS 0. So 2 of 2 FAIL with the edit vs 1 of 1 OK without - I am treating it as MY REGRESSION until shown
+otherwise, not as a flake. Cause NOT found inside the cap (the soak's set pieces fire before any kill, so the mechanism is not obvious).
+VERDICT: NOT PUSHED TO laptop. Checkpointed on my own branch `s83-wip` (renders, gate, delve.gd, this entry) so nothing sits in the
+worktree. Next firing: find why L29C's C soak fires 0 set pieces with the edit, fix, re-run all gates, then push to laptop.
+- Lock: claim 06:08:10, claim+25 = 06:33 computed first, declared 06:30.

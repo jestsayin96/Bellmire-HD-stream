@@ -1,11 +1,26 @@
 ## TAKE THIS NEXT - THE 01:58 CT FIRING, 21 NOV 2026 (machine clock 01:58-02:1x CST, same day -
 ## no rollover this hour; the 01:58 firing and the 02:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 00:58 BLOCK. ***
-## SIX BRANCHES MERGED, FOUR TICKED. main is the six-lane merge dbdfb18d.
-## The HUD was MID-RUN at my merge (RUNNING 01:58:43, U117 capture 4) and its branch carried only
-## plan syncs, so there was nothing of its to judge. That is not a miss by the lane.
+## SEVEN MERGES, FIVE TICKED. The HUD pushed U117 BETWEEN MY MERGE AND MY SYNC - my sync read
+## `origin/hud-ui` as 94b8883d where my merge had read edcae26c - so I went back for it, judged it,
+## merged it and rewrote the two rows that depended on it. A lane that ships at :00 is not late.
 ##
-## TICKED THIS HOUR (four):
+## *** AND THE ROW I WROTE FIRST WAS WRONG, FOR THE EIGHTH TIME IN THIS PLAN, AND THE HUD LANE IS
+## *** RIGHT. I AM STRIKING IT PERMANENTLY RATHER THAN SOFTENING IT. ***
+##   I first wrote "THE RARITY-HUE HALF OF SYSTEM 2 - THE MOST VALUABLE OPEN ITEM IN THE HOUSE -
+##   START IT THIS HOUR", copied from my prompt and from the block above. **IT IS NOT OPEN. IT WAS
+##   TICKED AT U88 ON 19 NOV (20:58 firing) AND THE REACH HALF AT U98. SYSTEM 2 IS WHOLE**, and
+##   this plan says so in nine separate places, including a 3281 entry where an earlier seat
+##   ALREADY recorded that the prompt's claim is stale. **I MEASURED IT MYSELF BEFORE STRIKING IT**
+##   rather than taking the lane's word: `UiTheme.rarity_hue` at `ui_theme.gd:196`, `rarity_ink`
+##   :200, `rarity_pip` :204, and they are NOT dead code - `leaderboard_panel.gd:197` and :202
+##   call `rarity_pip` and `rarity_ink` on the worn rows. **NO SEAT IS TO PUT THE RARITY HUE IN
+##   THE HUD's ROW AGAIN**, and no lane is to be asked to start it. The fault is mine and it is
+##   exactly the one this seat's own standing orders warn about: I carried a figure out of a
+##   prompt instead of measuring the tree. The HUD lane has now refused this row EIGHT TIMES with
+##   a citation each time and has been right every time.
+##
+## TICKED THIS HOUR (five):
 ##   - **S78** (game build) - **THE FULLER KEEPS EVERY BLOW AND WRINGS IT BACK.** I read the diff
 ##     rather than the message: `MB_WAYS` gains `fuller: wring`; the act banks `maxf(0, last - hp)`
 ##     into meta `mb_store` against `mb_last_hp`, and at `MB_WRING_FULL` (0.20) of max hp it calls
@@ -48,6 +63,20 @@
 ##     RESTORE CLAIM IS TRUE AT THE REF, NOT ONLY IN THE DRIVER**: `git diff --stat origin/main
 ##     origin/chatbot -- data/ scripts/ docs/` is EMPTY, so no perturbation survived and the arm
 ##     needed no edit to pass its own red proof. B96's silence is now evidence.
+##   - **U117** (HUD) - **THE NOW FIGHTING BANNER GHOST AT 150% IS GONE, AND I LOOKED AT THE FRAME
+##     MYSELF.** `renders/cycles/20261121_u117/ban_150_a_1080.png`: the Rattling Host card sits in
+##     the Director pane with 165/165 and "Lord of floor 5 - against the delvers (4 standing)"
+##     legible, the Mana plate below it, the Chronicle box clear - and **there is no cream-on-cream
+##     banner behind the card.** I read the diff too: the old pad test was
+##     `r.has_point(card.position)` and a card wider than its pane docks at a NEGATIVE x, so the
+##     test missed it - it is a rect intersect now; the full-screen branch's `y` was missing
+##     `* scale.y` and now has it; and `_over_card()` hides the plate and marks it "none" when the
+##     placed banner still lands on a visible card. 100% and 125% keep the banner, overlap 0; 150%
+##     hides it, overlap 0. Parse 0 Parse Error / 0 SCRIPT ERROR, U117_DONE fails=0. **AND THE
+##     THING THE LANE FLAGGED AS NOT ITS OWN IS REAL AND I CAN SEE IT**: the boss card's top-left
+##     still overlaps the tail of the "Now watching: Bellmire" strip. The strip's TEXT is fully
+##     legible, which is what S77 was ticked on, so this is cosmetic residue and not a regression -
+##     it is in the GAME BUILD row below as an option, not a charge.
 ##
 ## NOT TICKED, AND WHY:
 ##   - **THE HUB IS NOT TICKED AND NOTHING IS OWED OF IT.** I verified the lane's claim rather than
@@ -55,7 +84,6 @@
 ##     BOTH EMPTY, so `web/` is byte-unchanged and there was nothing to verify. **I RAN NO PUBLISH
 ##     VERIFICATION** because the lane did not claim READY TO PUBLISH - an unearned gate report is
 ##     the same fault class as a lying gate.
-##   - **THE HUD.** Mid-run at my merge, branch carried plan syncs only. Nothing to judge.
 ##
 ## TAKE THIS NEXT - SIX ROWS:
 ##
@@ -64,7 +92,12 @@
 ##   queue (Mr. E's Systems 5-80, in his order): take the lowest-numbered system that is not
 ##   already wired, SAY IN YOUR ENTRY WHICH NUMBER YOU TOOK AND WHY IT IS THE LOWEST OPEN ONE, or
 ##   take the pitman's ONE IDEA you offered at S77, which is miniboss-family work you already own.
-##   Name which you chose. Do not take the NOW FIGHTING banner ghost: it is the HUD's U117.
+##   Name which you chose. The NOW FIGHTING banner ghost is CLOSED (U117, ticked above) and is not
+##   yours. **A THIRD OPTION, AND IT IS SMALL:** at 150% the boss card's top-left still overlaps
+##   the tail of the Director's "Now watching" strip. I looked at the HUD's `ban_150_a_1080.png`
+##   myself and the strip's text is FULLY LEGIBLE, so S77's tick stands and this is cosmetic
+##   residue in your own `boss_bar.gd`, not a regression. Take it only if you want a cheap hour;
+##   it is not owed and nobody is charged for leaving it.
 ##
 ## CONTENT (:22) - C-157, your own cycle, unthrottled. Nothing you make is wasted; it is queued
 ##   work. Keep writing `_note_` keys - NO LANE IS TO WIRE ONE and you are not to stop writing them.
@@ -98,14 +131,14 @@
 ##   composing a derived number from the schedule you planned instead of from the clock you read.
 ##   COMPUTE THE CAP FROM THE CLAIM YOU JUST READ, THEN WRITE THE LINE.
 ##
-## HUD (:52) - **THE RARITY-HUE HALF OF SYSTEM 2. IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE**
-##   and it is the last unstarted half of one of Mr. E's own Phase 1 systems. It has now been the
-##   first item in your row for two consecutive blocks and has not been started; U117 was the
-##   SECOND item in that row. Finish and COMMIT U117 - your capture 3 found the cause (the boss
-##   card docks at x=-20 and the banner's `has_point` test missed it) and capture 4 was verifying
-##   the yield edit - and then START THE RARITY HUE. If the two will not both fit, SPLIT AND SAY
-##   SO; do not carry the hue a third hour in silence. `rts_camera.gd` is not yours; the L31
-##   remainder does not exist any more.
+## HUD (:52) - **U117 IS TICKED AND THE RARITY-HUE ROW IS STRUCK PERMANENTLY** (see the top of
+##   this block - you were right, I measured it myself, and no seat is to re-issue it). L74 is
+##   whole. **YOUR OWN CYCLE IS THE ROW**, and you have earned the right to name it: take whatever
+##   you judge the best use of the hour in your own files, say in your entry why you chose it, and
+##   that is the delivery. Two things are NOT yours and are not to be taken: the boss card over the
+##   Director strip is `boss_bar.gd` and is in the game build's row, and the gear import-cache
+##   SCRIPT ERRORs are your worktree's `.godot` cache. The banner's 150% behaviour is with the
+##   supervisor below - do not pre-empt it either way.
 ##
 ## FOR THE SUPERVISOR:
 ##   1. **THE HUB PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR AND UNCHANGED FROM 00:58.**
@@ -124,6 +157,15 @@
 ##      0 border hits anywhere in the set.** **RECOMMENDATION: set no floor yet** - the register
 ##      now stores `air_px` per view beside the derived number and a floor chosen before it has
 ##      bitten is just a number to argue with. Revisit the first time a body actually clips.
+##   3. **NEW THIS HOUR - THE NOW FIGHTING BANNER NOW SHOWS NOTHING AT 150% IN A 2x2 PANE.** U117
+##      fixed a real ghost (the banner drew BEHIND the boss card, 73,093 px2 of overlap) by having
+##      the banner YIELD: at 150% there is no room for card + banner above the Chronicle box, so
+##      the banner hides for that fight. 100% and 125% are unchanged and keep it. The HUD routed
+##      the choice to Mr. E; **I am routing it to you instead, because it is an interface call and
+##      the alternative is resizing another lane's card.** **RECOMMENDATION: keep the yield.** The
+##      card already carries the lord's name, its hp and "against the delvers", so nothing a viewer
+##      needs is lost; the only other way to get the banner back at 150% is to shrink the boss card
+##      in `boss_bar.gd`, which trades a legible card for a redundant line.
 ##
 ## DEAD-DATA BASELINE, RE-MEASURED 21 NOV 02:0x CT ON THE MERGED TREE dbdfb18d - A NOTE, NOT A
 ## ROW. NO LANE IS ASKED FOR ANYTHING HERE AND NOTHING BELOW IS OWED BY ANYONE.

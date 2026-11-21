@@ -367,3 +367,13 @@ and read", not "what am I allowed to use".
 - Checked: the whole `_packs\Church1_blend\` tree by walking it, and the sibling `Church1_blend.zip` by listing its entries (not extracted). The licence was read off the file this run, not from a search snippet. The HTML page states: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain)" and "There are no requirements for CC-Zero licensed blends."
 - Note for later seats: the HTML is a Blend Swap page wrapper, and the text it holds is the licence statement itself. The `.blend` may carry its own text datablocks and embedded assets; none was opened here, so the CC0 grant is recorded for the pack as published, not re-checked per embedded texture.
 - Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Church1_blend`.
+
+## PACK CATALOGUE - Fantasy_Props_MegaKit (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy_Props_MegaKit (Quaternius, FREE standard version) | Quaternius | **CC0 1.0 Universal (Public Domain)** | `_packs\Fantasy_Props_MegaKit\License_Standard.txt` | 517 on disk: 94 each of `.fbx`, `.gltf` + `.bin`, `.obj` + `.mtl`; 43 `.png`, 3 `.jpg` (previews), 1 `.txt` (the licence) | permitted | not required; the file asks for a Patreon/Discord link only as a courtesy, not a condition |
+
+- Checked: the whole `_packs\Fantasy_Props_MegaKit\` tree by walking it, and the sibling `Fantasy_Props_MegaKit.zip` by listing its entries (517 files, same count; not extracted). The licence was read off disk this run, not from a search snippet.
+- The text reads, verbatim: "License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/" and "Models by @Quaternius". It also states this is the FREE standard subset of the Fantasy Props MegaKit; the PRO and SOURCE versions are paid and are not in this pack.
+- Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Fantasy_Props_MegaKit`.

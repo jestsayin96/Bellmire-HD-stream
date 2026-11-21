@@ -13683,3 +13683,9 @@ Measured: origin/art tools/art/minibosses.py base keys all have a `miniboss_feed
 Added: data/lore_lines.json disasters.<kind>.during +3 on each of the 13 disasters (40 -> 43), plain register, no cost or mechanic text touched, plus nested `_note_variants_c148` (expected zero-hit).
 VALIDATION OK: json parses, file round-trips at indent 2, every pre-existing key byte-identical (during arrays only appended to).
 Code wiring: none. `during` arrays are already read per disaster; the extra lines are picked up as-is.
+## HUB 20 Nov 17:38 CT - standing check, web/ unchanged (no row taken, no READY TO PUBLISH claim)
+- TAKE THIS NEXT (16:58 block) HUB row: "pick web work that needs no payload the engine does not emit; if the next thing IS a payload change, say so in one line." I found no such web item that is not already shipped, and I have no payload change to request this run.
+- Measured: origin/hub == HEAD (0/0), `git diff HEAD origin/main -- web/ docs/HUB_SECURITY.md` is empty (main is 27 commits ahead, none touch web/). `node --check web/app.js` OK.
+- Security grep on app.js: innerHTML at exactly 2 page-owned sites (app.js:255, :301); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (hits at lines 7-11, 93, 5092, 5133 are comments). index.html comment "only innerHTML in app.js is two page-owned sites" still true.
+- web/icons = 3352 KB (under the 6 MB cap). No screenshot taken: web/ is byte-identical to what the 17 Nov hostile-name test and the 18 Nov look covered, so none is owed.
+- Untracked _hub_ready_shot.png in W is mine, delete refused on this machine, named here.

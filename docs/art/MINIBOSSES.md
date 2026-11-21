@@ -4586,3 +4586,98 @@ the same picture.
   killing it, say so plainly and do not invent one** - the body, the fit and
   the draw are the item, and the second door can wait for an engine that has
   one.
+
+---
+
+## 46 THE BLOWER - "Deadair" - 21 Nov 2026, 12:3x-12:5x CT
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `blower` | Deadair | 2.48 | fogbound | **IT TAKES THE AIR** - it works the bellows backwards and draws the room empty a stroke at a time; the party acts slower each stroke and nothing done to the man slows the count. Hole the bag and the count stops. | 0.48 | 1.88 |
+
+### WHAT I CHECKED FOR BEFORE DESIGNING IT, MEASURED NOT REMEMBERED
+
+`ORDER` was parsed out of `tools/art/minibosses.py` - every `ORDER = ORDER +
+[...]` evaluated and concatenated, not grepped - and it carried **45 keys**. I
+then read all 45 idea strings out of `CANON` before writing a word of this
+one. **Nothing in the set is a clock.** The four nearest and why each is a
+different fight are written into the file above the `CANON.update` so the
+argument travels with the code: the Stoker starves a resource OUTSIDE itself,
+the Rammer is ONE telegraphed blow on a beat, the Snuffer takes what you see
+by rather than what you act with, and the Tither is an exit condition the
+party chooses. This is the first body in the file whose fight has a running
+cost per beat, and the cost is on its own body where a viewer can watch it.
+
+### THE FIVE PASSES - ONE CHANGE EACH, EACH JUDGED ON A PICTURE
+
+| pass | the ONE thing changed | what the render then showed |
+|---|---|---|
+| 1 | first build | **A DARK LUMP WITH A BUCKLER.** The bag was X-squashed into a wedge narrower than the man's own shoulders, so the FRONT view - the view a viewer watches the fight from - showed no bag, no ribs and no clock at all. |
+| 2 | the bag's squash axis: flatten DEPTH, widen to 0.520 (shoulders are 0.330) | Pale ribbing now stands clear on both flanks from the front. The clock is visible. The nozzle became the worst thing in the frame. |
+| 3 | the nozzle alone - swung down and outboard, shrunk | The buckler read is **gone**. It was aimed straight down the front camera's axis, which gave a perfect pale ring with a black disc in it at chest height; the body was saying IT BLOCKS, which is the Paviser's fight. |
+| 4 | the rib proportion: 36/28/36 instead of equal bands | Reads as a bellows rather than a striped barrel, and the dark groove no longer merges with the lid into one black block at the crown. |
+| 5 | the stance - feet planted under/behind the hips, torso forward | The man no longer reads as toppling backwards, which is what feet-forward plus all the mass behind must look like. |
+
+### THE FIT PROOF - I LOOKED AT ALL SIX RENDERS
+
+`renders/art/minibosses/blower/` - `front` / `side` / `three_quarter`, and
+`hero_front` / `hero_side` / `hero_back` beside a real KayKit adventurer at
+scale 1.0.
+
+- **blank-and-border: CLEAN.** 3 files, 0 blank failures; border alpha
+  measured myself on all six PNGs, 1px edge and 2px band, **max alpha 0 on
+  every edge of every view**. *I had read a frame clip off the pass-1 side
+  render by eye and the measurement refuted me* - the lid board ends about
+  55px short of the right edge. Recorded because the lane's standing rule is
+  that the picture beats the number, and this is the case where it did not.
+- **fit register GREEN**, `ok true`, `errors []`, `unproved_cells []`,
+  `blind_views []`. `blower` ratio **1.01**, margin 3.31, `fits_frame true`,
+  3 proving views, 48 rows judged.
+- **BACK-LAMP GUARD GREEN, audited 46** (the new body included): even light on
+  all three views and a real floor under it.
+- **THE FACING TEST PASSES.** Back view: the pale ribbed lung fills the frame,
+  two patches on it, the lid across the top, dark legs below, **no eyes, no
+  mouth-void, nothing emissive anywhere.** Front and back are not the same
+  picture and neither is the side.
+
+### WHAT IS STILL WRONG WITH IT - I CAN SEE ALL OF THIS
+
+- **THE NOZZLE IS CRUDE.** From the side it is a megaphone jutting forward at
+  hip height and you cannot see where it comes from; the run from the bag's
+  foot is hidden behind the thigh. Pass 3 removed the *wrong* read; it did not
+  make it a good one.
+- **THE MAN IS A DARK PILLAR.** From the side after pass 5 both legs align
+  into one column and the torso is an undifferentiated mass with a head on it.
+  The stance fix cost the figure some legibility and I am not hiding that.
+- **THE LID OVERHANGS THE BAG** on both sides in the back view and reads as a
+  plank laid across rather than a board clamped onto leather.
+- **THE SPARS READ AS KNOBS.** From the front and from behind the two handle
+  tops are little dark stubs beside the head - they read as ears or antennae,
+  not as the two handles a man is working.
+- **AT HERO SCALE THE FLANKING RIBS READ AS A FRILL** rather than as one lung
+  seen past a body, and the figure is narrow and long-legged next to the
+  stocky KayKit knight.
+- **THE BAG'S TAPER TO THE HIP IS ABRUPT** and the lowest two bands crowd.
+- **ONLY TWO OF THE THREE PATCHES ARE VISIBLE** in the back view; the third is
+  on the near flank and is easy to miss from the front.
+
+### FOR THE GAME BUILD LANE - I TOUCHED NO `.gd` OUTSIDE `tools/art/`
+
+- `scripts/bestiary.gd`: `assets/monsters/minibosses/blower.glb`, **STATIC** -
+  a `model` path and **NO `anims` entry**. `h = 2.48`, art's measured number;
+  do not re-derive it.
+- theme **`fogbound`** for the set-piece roll (joins the Bellman, Fenman and
+  Fuller; fogbound was three bodies and is now four).
+- **CORRIDOR-SAFE at 1.88 m, UNDER-LID. No spawn gate needed, not
+  room-locked.** 1868 faces.
+- `MB_FIT["blower"]`: ratio **1.01**, tag **"fogbound"**, 3 proving views -
+  **copy it from the register, do not re-derive it.**
+- **HOLD `MB_NAME["blower"]`** until content writes `by_key.blower`, the same
+  way the Winder, the Pitman and the Tither were held. The canon name is
+  **"Deadair"**.
+- **THE MECHANIC IS A PER-BEAT COST, NOT A STAT**, and the cheapest honest
+  version is a stacking initiative or action-delay penalty on every delver in
+  the room that grows one step per round while the body lives, cleared the
+  moment it dies. The "whoever carries the most gives out first" half is a
+  nicety - **if encumbrance is not already a term in the engine, drop that
+  half and say so rather than inventing one.**

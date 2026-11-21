@@ -1053,7 +1053,13 @@
     "The smith sets down the hammer to watch them go.",
     "A boot-lace is retied on the stair, slow, then they are gone.",
     "The lamp-boy trims the wick twice and hands it over.",
-    "The baker's boy runs out with a hot roll, and is told off for it."
+    "The baker's boy runs out with a hot roll, and is told off for it.",
+    "The cobbler looks at the boots and says they will do.",
+    "Someone leaves a heel of bread on the wall and does not say whose.",
+    "The gate-ward counts them out. The count is written down.",
+    "A dog follows to the last house and sits.",
+    "The tinker slips a flint into the nearest pack and looks elsewhere.",
+    "The rope-maker tests each knot with a thumb and nods once."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1611,7 +1617,13 @@
     "A lamp is left in the window until the last of them is in.",
     "The chandler counts the stubs and writes down what was burned.",
     "Somebody finds a clean cloth for the blade and says nothing.",
-    "The ward sits on the well-edge a while with the lamp between their feet."
+    "The ward sits on the well-edge a while with the lamp between their feet.",
+    "The first one in sits on the step and unlaces slowly.",
+    "Water is heated before anyone asks for it.",
+    "The tally of packs matches the tally that left.",
+    "A bed is made up in the back room before it is needed.",
+    "The lamp-boy counts the burned wicks back into the tray.",
+    "The bell is rung once, and not for alarm."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4686,7 +4698,19 @@
     "Carried the water up. Did not carry it down.",
     "Left the stew on. Said back by dark.",
     "Tied off the last sack. Did not tie off the last knot.",
-    "Paid the tithe early and the debt late. Both were paid."
+    "Paid the tithe early and the debt late. Both were paid.",
+    "Sharpened every blade in the guild. Left his own dull.",
+    "Fed the hens before the stair. The hens were fed.",
+    "Swore at the rope. Trusted it anyway.",
+    "Stood the middle watch. Stood it to the end.",
+    "Wrote a name in the ledger. Is in it still.",
+    "Salted the road for the carts. Walked it on foot.",
+    "Kept three spare wicks. Used the third.",
+    "Said the stair was nothing. Counted it twice.",
+    "Packed bread for two days. Needed one.",
+    "Hauled the sledge to the pit-head. Went down behind it.",
+    "Washed the cup. Hung it on the peg. Did not drink from it again.",
+    "Knew every cellar in town. Did not know the last one."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14361,5 +14385,6 @@
   "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c164": "C-164 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
+  "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
+  "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
 }

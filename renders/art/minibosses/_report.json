@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "c974d64226585607106e84ba7ad8eaeb6555b3b3",
+   "head": "f201970feac617695497ad57b8db26d1b3ab665e",
    "ref": "origin/main",
-   "ref_commit": "5cc7b6e7f425ca9325ad42a12691788eeef45e76",
+   "ref_commit": "498dcb59e1f1014463dbcaaa7f68fc33383d4a27",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2647,13 +2647,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "blower": {
+   "title": "Deadair",
+   "theme": "fogbound",
+   "idea": "IT TAKES THE AIR - it does not wound anybody and it does not take anyone away. It works the bellows BACKWARDS and draws the room empty a stroke at a time, and with the air goes what the party does with it: every delver in here acts slower on each stroke, and whoever is carrying the most gives out first. Nothing done to the man slows the count. THE COUNT IS THE BAG - it rides high on his back, pale and ribbed, and it stands one band fuller every stroke, so a viewer can see how long this room has left without being told a number. HOLE THE BAG AND THE COUNT STOPS - and the bag says where to put it: three iron patches are stitched over the places it has been holed before. THIS IS THE ONLY FIGHT IN THIS FILE RUN BY A CLOCK, and the clock is hung on the creature where the party can reach it.",
+   "wear": 0.48,
+   "feed_line": "Something ahead is drawing the air in.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1868,
+   "size": [
+    1.45,
+    1.88,
+    2.48
+   ],
+   "footprint_span": 1.88,
+   "height_m": 2.48,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.118,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.02,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7164270482216133,
+    "ortho": 2.9325368404388428,
+    "clip": [
+     7.100573539733887,
+     18.130664825439453
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5cc7b6e7f425ca9325ad42a12691788eeef45e76 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 498dcb59e1f1014463dbcaaa7f68fc33383d4a27 sha bc3a603f",
  "blank_check": {
-  "files": 135,
+  "files": 138,
   "failures": []
  }
 }

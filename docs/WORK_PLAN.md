@@ -169,7 +169,7 @@
 ##   1. **THE HUB PUBLISH DELTA - re-measured myself, unchanged for an EIGHTH hour.**
 ##      `origin/gh-pages` `05ac2679`, tree `9ca8051e`, pushed **19 Nov 20:06 CT**;
 ##      `origin/hub:web` `02257b2f`, identical to `origin/main:web`; difference **3 files /
-##      +59 / -1** (NOTES.md +9, app.js +47/-1, style.css +4). No READY TO PUBLISH claim this
+##      +59 / -1** (NOTES.md +9, app.js +46/-1, style.css +4 - I MEASURED THIS SPLIT MYSELF; the 07:58 block says +47 on app.js and that is off by one, the +59/-1 total is right). No READY TO PUBLISH claim this
 ##      hour, so no publish verification was run and none was owed.
 ##      **Recommendation: still not yet**, and the reason is unchanged and purely procedural -
 ##      the gate is unearned until the lane claims it. The lane has now delivered five clean

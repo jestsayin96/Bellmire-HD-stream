@@ -1,0 +1,171 @@
+{
+ "key": "beadle",
+ "errors": [],
+ "views": {
+  "front": {
+   "man_alone_px": 18402,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 2160,
+     "hidden_frac": 0.1174
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3895,
+     "hidden_frac": 0.2117
+    },
+    "staff": {
+     "items": 9,
+     "hidden_px": 27,
+     "hidden_frac": 0.0015
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 659,
+     "hidden_frac": 0.0358
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.6324,
+   "all_rest_hidden_px": 6764,
+   "all_rest_hidden_frac": 0.3676,
+   "sum_of_parts_px": 6741,
+   "overlap_px": -23
+  },
+  "side": {
+   "man_alone_px": 17385,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 1536,
+     "hidden_frac": 0.0884
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3353,
+     "hidden_frac": 0.1929
+    },
+    "staff": {
+     "items": 9,
+     "hidden_px": 4660,
+     "hidden_frac": 0.268
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 33,
+     "hidden_frac": 0.0019
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.5174,
+   "all_rest_hidden_px": 8390,
+   "all_rest_hidden_frac": 0.4826,
+   "sum_of_parts_px": 9582,
+   "overlap_px": 1192
+  },
+  "back": {
+   "man_alone_px": 17375,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 1197,
+     "hidden_frac": 0.0689
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3536,
+     "hidden_frac": 0.2035
+    },
+    "staff": {
+     "items": 9,
+     "hidden_px": 4,
+     "hidden_frac": 0.0002
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 283,
+     "hidden_frac": 0.0163
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.6854,
+   "all_rest_hidden_px": 5467,
+   "all_rest_hidden_frac": 0.3146,
+   "sum_of_parts_px": 5020,
+   "overlap_px": -447
+  }
+ },
+ "bounds_control": [
+  -1.06405,
+  -0.7072,
+  0.0,
+  0.81045,
+  0.48047,
+  2.95
+ ],
+ "bounds_split": [
+  -1.06405,
+  -0.7072,
+  0.0,
+  0.81045,
+  0.48047,
+  2.95
+ ],
+ "item_counts": {
+  "base": 4,
+  "coat": 2,
+  "man": 4,
+  "head": 9,
+  "staff": 9,
+  "arm": 3,
+  "board": 3,
+  "pegs": 7,
+  "_covered": 41,
+  "_total": 41
+ },
+ "engine": "BLENDER_EEVEE",
+ "ok": true
+}

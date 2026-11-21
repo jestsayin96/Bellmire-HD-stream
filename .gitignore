@@ -33,3 +33,6 @@ build/
 /_d*.done
 /_d*.flag
 /_sup_share*/
+
+# bandblame per-span scratch renders - regenerated on every run, never evidence
+renders/art/minibosses/_backread/_tmp/

@@ -14715,3 +14715,92 @@ CODE WIRING: none; the three lists are already drawn from at random.
 
 ## U-standdown 2026-11-21 10:52 CST - STAND-DOWN (no Godot claim)
 RUN_LOCK last line (R working copy) at 10:52:39-06:00: RUNNING 10:51:30 chat bot B106 (expected finish 10:58, cap 11:16), no IDLE from that lane after it. Process check: no Godot alive at that instant, but the lane runs short gates with gaps, so I treated the hold as live per the YIELD RULE and did not claim over it. No .gd edited, no engine launched. Next firing (11:52): re-read RUN_LOCK, take the rarity-hue half of System 2 (TAKE THIS NEXT), split any capture into <=15 min chunks, release by :07.
+
+## B106 - THE THREE WORDING GUARDS ARE TWO-AUTHORITY ARMS NOW, AND IT IS MY OWN ASK COMING BACK
+
+**WHAT I TOOK, AND WHY IT WAS SITTING THERE.** B105 ended saying S86 had landed the exact missing
+authority for two arms this lane had been forced to report as *wording* guards, and that I was
+carrying it rather than rushing it into a gate I could not red-prove with nine minutes left. This
+is that carry, taken first thing. `Delve.OIL_PER_HEAD := 0.5` and `Delve.OIL_FLOOR_MIN := 1`
+(delve.gd:336-337, **read** at :161) and `Roster.REWORK_DIVISOR := 4` (roster.gd:218, **read** at
+:514) - **I grepped the reads, not just the declarations**, because a named constant nothing reads
+is a second place to be wrong, not a second authority.
+
+**THE NUMBER THAT USED TO LIVE IN MY FILE IS GONE.** The old OIL DELVERS arm carried its own `2`
+and said so in its error text: *"This arm carries the 2 itself because delve.gd declares no
+constant"*. It no longer carries anything. Both oil arms rebuild the engine's burn from the
+engine's own constants - `maxi(OIL_FLOOR_MIN, ceil(bodies * OIL_PER_HEAD))`, the same shape as
+delve.gd:161 - and ask whether the sentence I publish is true of it.
+
+**AND I CHECKED THE SENTENCE STRICTLY ENOUGH TO FIND A SECOND HALF NOBODY HAD GUARDED.** "One
+flask lights a floor for two delvers" is a **CEILING** claim, so it is two-sided. N delvers must
+burn exactly one flask **and N+1 must burn more**. An arm with only the first half would stay green
+if the engine got *cheaper* and my sentence quietly understated the light - the same half-truth
+class as B102's pooling fault, and mine to catch. That is the new OIL DELVERS CEILING arm, and it
+would not exist if I had only wired the constant into the test that was already there.
+The floor is folded into **both** burn tests, because :161 wraps the burn in `maxi()`: a raised
+`OIL_FLOOR_MIN` makes "for two delvers" false without `OIL_PER_HEAD` moving at all.
+
+**THE FORGE CLAUSE IS READ AS A FRACTION, NOT AS A STRING.** It used to be
+`contains("quarter")` - which could only ever notice the clause being deleted outright. The arm now
+reads *which* fraction word the sentence publishes, turns it into the divisor that word means, and
+compares that to `Roster.REWORK_DIVISOR`. So re-pricing the rework to a third goes red with my
+sentence named, **and so does rewording my sentence to a third while the smith still charges a
+quarter.** Same for the floor clause: the quantity word in front of "flask" is parsed to a number
+and compared to the constant, so a doubled floor goes red here instead of being discovered by a
+solo delver paying twice what this file quoted them.
+
+**WHAT I DID NOT DO:** I did not rewrite the old ask blocks. They say "delve.gd declares no
+constant" and "I am not editing their file to get it", and they stay as written - a lane that
+answered an ask deserves the asking kept, not tidied away. A dated B106 note sits above each arm
+saying the ask was answered and what reads what now. One line in the old block is corrected in the
+new note rather than in place: it cites roster.gd:510, which is where the bare literal stood when
+the ask was written; S86's edit moved that site to :514.
+
+**THE GATES, ALL FOUR, ON THE REAL ENGINE.**
+- parse `--headless --path W6 --quit-after 300` -> **RC=0, 0 SCRIPT ERROR, 0 Parse Error**
+- `tools/_l14_test.gd` -> **L14_TEST OK (24 checks)**, `no COMMANDS_DATA guard arm fired on the
+  load (0 fired: [])`
+- `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**
+- `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 32 commands**, and `git status` shows
+  `docs/COMMANDS.md` **unmodified** afterwards - a true no-op, proved by the index rather than by
+  an md5 I took myself.
+
+**AND I PREDICTED THE CHECK COUNT BEFORE RUNNING IT, WHICH IS THE ONLY REASON IT IS EVIDENCE.**
+Six arms changed and L14_TEST still reads **24 checks**, not 28 or 30 - because every COMMANDS_DATA
+arm feeds the gate's *single* `guard_faults()` check. A count that moved would have meant I had
+misread how my own arms reach the gate.
+
+**THE RED HALF - ALL SIX ARMS, BY THE REAL GATE, IN TWO RUNS, FROM MY OWN FILE ONLY.**
+RED_A (published "three delvers" / "two flasks at least" / "a third"):
+`FAIL ... (3 fired: ["OIL DELVERS", "OIL FLOOR MIN", "FORGE REWORK RATE"])`, `L14_TEST FAIL 3`.
+Godot's own text: *"publishes one flask per "three" (3) delvers and delve.gd:161 burns 2 flask(s)
+for that many bodies - `maxi(OIL_FLOOR_MIN 1, ceil(alive * OIL_PER_HEAD 0.5))`"*; *"publishes a
+floor of "two" (2) ... and `Delve.OIL_FLOOR_MIN` is 1"*; *"publishes the top-tier rework at "a
+third" (1/3) and `Roster.REWORK_DIVISOR` is 4"*. **The engine's constants are quoted out of the
+engine's own mouth, which is the whole point: a python stand-in could not have said 0.5 or 4.**
+RED_B (published "one delvers" / clause reworded to "at least a flask" / "a fourth"):
+`FAIL ... (3 fired: ["OIL DELVERS CEILING", "OIL FLOOR ANCHOR", "FORGE REWORK"])`, `L14_TEST FAIL 3`
+- *"still burns only 1 flask(s) for 2 bodies - the engine lights MORE delvers than the sentence
+promises"*. **`data/commands.json` restored byte-identical after each run, md5
+`c2bd481b96b86ea1f536be5596743906` either side.** The mutations were to **MY OWN FILE ONLY** - no
+`delve.gd`, no `roster.gd`.
+
+**DRIFT, BOTH DIRECTIONS, BY THE GATE AND NOT BY MY COUNTING:** 74 verbs `missing []`, every data
+command `unanswered []`, `docs/COMMANDS.md` 32 rows with `unpublished []` and `stale []`.
+
+**THE MERGE AND THE LOCK.** `origin/main` 2c95f348 merged into `chatbot` as a clean
+**fast-forward** - B105's 240754e2 is an ancestor of main, so there was nothing to conflict and I
+say that rather than claiming a conflict resolved. `diff --numstat` reads **+74/-11 on
+scripts/chatcmd.gd and nothing else**. Lock free at 10:50 (last line QA tester's IDLE 10:42:03,
+zero Godot processes); claimed 10:51 with cap 11:16 computed first, declared 10:58, **released
+10:55:40 - inside my own window, clear of the HUD's :52 slot.**
+
+**ONE THING WORTH SAYING ABOUT THE MOUNT, because it cost the first two tool calls.** The connected
+folders are now mounted as `~/mnt/bellmire-bot` and `~/mnt/jests-hd-medieval-adventure`
+**directly** - not under an `hd adventure` parent as the prompt's path says. Nothing was missing
+and no access was needed; the path shape changed. **I did not call
+`device_request_folder_access`.**
+
+**NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE ON ANY ACCOUNT.** Every Godot run was
+`--headless` against the worktree; the bot posted nothing anywhere and bellmirebro spent nothing.

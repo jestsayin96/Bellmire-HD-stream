@@ -2656,16 +2656,56 @@ static func commands() -> Dictionary:
             o_said = _word_int(o_phrase)
         if o_said < 0:
             _guard_faults.append("OIL DELVERS ANCHOR")
-            push_error("COMMANDS_DATA OIL DELVERS ANCHOR: `oil`.what no longer says \"<number> delvers\" in words this guard can read (it reads \"%s\") - the burn rate docs/COMMANDS.md publishes can no longer be checked at all, and delve.gd exposes no constant for it either" % o_phrase)
+            push_error("COMMANDS_DATA OIL DELVERS ANCHOR: `oil`.what no longer says \"<number> delvers\" in words this guard can read (it reads \"%s\") - the burn rate docs/COMMANDS.md publishes can no longer be checked against `Delve.OIL_PER_HEAD` at all" % o_phrase)
             printerr("COMMANDS_DATA OIL DELVERS ANCHOR - `oil`.what lost its \"<number> delvers\" phrase (read \"%s\")" % o_phrase)
-        elif o_said != 2:
-            _guard_faults.append("OIL DELVERS")
-            push_error("COMMANDS_DATA OIL DELVERS: `oil`.what publishes one flask per \"%s\" (%d) delvers and delve.gd:161 burns `maxi(1, ceil(alive * 0.5))` - one per TWO bodies a floor. This arm carries the 2 itself because delve.gd declares no constant; if the engine's 0.5 has moved, BOTH this number and the sentence are stale and a human must re-read :161" % [o_phrase, o_said])
-            printerr("COMMANDS_DATA OIL DELVERS - published %d delvers a flask, delve.gd:161 burns one per 2" % o_said)
-        if not olw.to_lower().contains("a flask at least"):
+        # B106: THE OIL ARMS ARE TWO-AUTHORITY ARMS NOW, AND THIS IS THE ASK ABOVE BEING ANSWERED.
+        # S86 (game build, 10:14 today) named `OIL_PER_HEAD := 0.5` and `OIL_FLOOR_MIN := 1` at
+        # delve.gd:336-337 and READS them at :161 - I grepped the read, not just the declaration.
+        # So these arms no longer carry a number of my own: they rebuild the engine's burn out of
+        # the engine's own constants and ask whether the sentence I publish is true of it. THE 2
+        # THAT USED TO LIVE IN THIS FILE IS GONE, and nothing here restates a figure delve.gd owns.
+        # The ask block above is left standing exactly as written - it is the record of how this
+        # arm got here, and a lane that answered an ask deserves the asking kept, not tidied away.
+        # WHAT THE SENTENCE CLAIMS, READ STRICTLY: "one flask lights a floor for two delvers" is a
+        # CEILING claim, so it is two-sided and BOTH sides are checked - N delvers must burn
+        # exactly one flask, and N+1 must burn more. An arm that checked only the first half would
+        # pass unchanged if the engine got cheaper and my sentence quietly understated the light,
+        # which is the same half-truth class as B102's pooling fault and also mine to catch.
+        # The floor is folded into both, because delve.gd:161 wraps the burn in `maxi()`: a raised
+        # OIL_FLOOR_MIN makes "for two delvers" false without OIL_PER_HEAD moving at all.
+        if o_said >= 0:
+            var o_burn: int = maxi(Delve.OIL_FLOOR_MIN, int(ceil(float(o_said) * Delve.OIL_PER_HEAD)))
+            var o_next: int = maxi(Delve.OIL_FLOOR_MIN, int(ceil(float(o_said + 1) * Delve.OIL_PER_HEAD)))
+            if o_burn != 1:
+                _guard_faults.append("OIL DELVERS")
+                push_error("COMMANDS_DATA OIL DELVERS: `oil`.what publishes one flask per \"%s\" (%d) delvers and delve.gd:161 burns %d flask(s) for that many bodies - `maxi(OIL_FLOOR_MIN %d, ceil(alive * OIL_PER_HEAD %s))`. A viewer buying at the published rate goes dark on the floor they paid for" % [o_phrase, o_said, o_burn, Delve.OIL_FLOOR_MIN, str(Delve.OIL_PER_HEAD)])
+                printerr("COMMANDS_DATA OIL DELVERS - published %d delvers a flask, delve.gd:161 burns %d for %d" % [o_said, o_burn, o_said])
+            elif o_next <= 1:
+                _guard_faults.append("OIL DELVERS CEILING")
+                push_error("COMMANDS_DATA OIL DELVERS CEILING: `oil`.what publishes \"%s\" (%d) delvers to a flask, but delve.gd:161 still burns only %d flask(s) for %d bodies - the engine lights MORE delvers than the sentence promises, so the published rate is not the ceiling it reads as and a viewer overbuys light they already had. OIL_PER_HEAD is %s, OIL_FLOOR_MIN %d" % [o_phrase, o_said, o_next, o_said + 1, str(Delve.OIL_PER_HEAD), Delve.OIL_FLOOR_MIN])
+                printerr("COMMANDS_DATA OIL DELVERS CEILING - published %d a flask, engine lights %d on the same one" % [o_said, o_said + 1])
+        # THE FLOOR CLAUSE, NOW READ AS A NUMBER RATHER THAN AS A STRING. It used to be
+        # `contains("a flask at least")`, a wording guard that could not tell a raised floor from a
+        # kept promise. The quantity word in front of "flask" is parsed and compared to
+        # `Delve.OIL_FLOOR_MIN`, so the engine doubling the floor goes red HERE instead of being
+        # discovered by a solo delver paying twice what this file quoted them.
+        var o_fl_said: int = -1
+        var o_fl_word := ""
+        var o_fl_at: int = olw.to_lower().find(" at least")
+        if o_fl_at > 0:
+            var o_fl_parts: PackedStringArray = olw.substr(0, o_fl_at).strip_edges().split(" ", false)
+            if o_fl_parts.size() >= 2 and String(o_fl_parts[o_fl_parts.size() - 1]).to_lower().begins_with("flask"):
+                o_fl_word = String(o_fl_parts[o_fl_parts.size() - 2]).strip_edges()
+                var o_fl_low := o_fl_word.to_lower()
+                o_fl_said = (1 if (o_fl_low == "a" or o_fl_low == "an") else _word_int(o_fl_word))
+        if o_fl_said < 0:
+            _guard_faults.append("OIL FLOOR ANCHOR")
+            push_error("COMMANDS_DATA OIL FLOOR ANCHOR: `oil`.what no longer carries a readable \"<n> flask(s) at least\" clause (it reads \"%s\"; the quantity word this guard found was \"%s\") - delve.gd:161 wraps the burn in `maxi(OIL_FLOOR_MIN, ...)` and that floor is now published nowhere a guard can read, so a lone delver's cost goes unwatched" % [olw, o_fl_word])
+            printerr("COMMANDS_DATA OIL FLOOR ANCHOR - `oil`.what lost its readable floor clause (quantity word \"%s\")" % o_fl_word)
+        elif o_fl_said != Delve.OIL_FLOOR_MIN:
             _guard_faults.append("OIL FLOOR MIN")
-            push_error("COMMANDS_DATA OIL FLOOR MIN: `oil`.what no longer carries its \"a flask at least\" clause (it reads \"%s\") - delve.gd:161 wraps the burn in `maxi(1, ...)`, so a lone delver pays a WHOLE flask for a floor; without the clause a viewer reads \"one flask for two delvers\" and expects one flask to light two floors alone" % olw)
-            printerr("COMMANDS_DATA OIL FLOOR MIN - `oil`.what lost the floor-minimum clause; a solo delver's cost is now unpublished")
+            push_error("COMMANDS_DATA OIL FLOOR MIN: `oil`.what publishes a floor of \"%s\" (%d) flask(s) a floor and `Delve.OIL_FLOOR_MIN` is %d - delve.gd:161 charges the engine's figure, so a viewer sending one hero down is quoted %d and pays %d" % [o_fl_word, o_fl_said, Delve.OIL_FLOOR_MIN, o_fl_said, Delve.OIL_FLOOR_MIN])
+            printerr("COMMANDS_DATA OIL FLOOR MIN - published floor %d, engine OIL_FLOOR_MIN %d" % [o_fl_said, Delve.OIL_FLOOR_MIN])
         # B103: THE ARMOURY'S PRICE GUARD WAS READING A TABLE NO SHOP CHARGES, AND THE FORGE'S
         # PRICE LADDER HAD NO ARM AT ALL. Both found by measurement, and the second one disproves
         # a sentence THIS FILE PUBLISHES ABOUT ITSELF.
@@ -2777,10 +2817,33 @@ static func commands() -> Dictionary:
         # (`REWORK_DIVISOR := 4`) is all it needs and this arm will read it instead. Declining
         # that is free; the wording guard stands either way, because a clause silently deleted
         # from my own file is the failure this arm actually catches.
-        if not f_cost.to_lower().contains("quarter"):
+        # B106: AND THE REWORK CLAUSE IS A TWO-AUTHORITY ARM NOW TOO - the other half of the same
+        # ask, answered by the same cycle. `Roster.REWORK_DIVISOR := 4` is declared at roster.gd:218
+        # and READ at :514 (I grepped both ends; the ask block above still says :510 because that
+        # is where the bare literal stood when the ask was written, and S86's edit moved the line).
+        # The arm no longer asks whether the WORD "quarter" is present. It reads WHICH fraction word
+        # the sentence publishes, turns it into the divisor that word means, and compares that to the
+        # engine's constant. So re-pricing the rework to a third goes red with my sentence named, and
+        # so does rewording my sentence to a third while the smith still charges a quarter. A wording
+        # guard could catch neither: it only ever noticed the clause being deleted outright.
+        var f_rw_words := {"half": 2, "third": 3, "quarter": 4, "fifth": 5, "sixth": 6,
+                           "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}
+        var f_rw_low := f_cost.to_lower()
+        var f_rw_word := ""
+        var f_rw_said: int = -1
+        for f_rw_k in f_rw_words:
+            if f_rw_low.contains(String(f_rw_k)):
+                f_rw_word = String(f_rw_k)
+                f_rw_said = int(f_rw_words[f_rw_k])
+                break
+        if f_rw_said < 0:
             _guard_faults.append("FORGE REWORK")
-            push_error("COMMANDS_DATA FORGE REWORK: `forge`.cost no longer carries its \"a quarter\" rework clause (it reads \"%s\") - roster.gd:510 charges `cost / 4` to remake the top tier in another kind, and with the clause gone a viewer at the top of the ladder is told only that the forge sells nothing more. This arm reads the WORD, not the engine: the 4 at :510 is a bare literal with no constant to check it against" % f_cost)
-            printerr("COMMANDS_DATA FORGE REWORK - `forge`.cost lost the \"a quarter\" clause; the top-tier rework price is now unpublished")
+            push_error("COMMANDS_DATA FORGE REWORK: `forge`.cost no longer carries a readable fraction word for the rework clause (it reads \"%s\") - roster.gd:514 charges `cost / REWORK_DIVISOR` (%d) to remake the top tier in another kind, and with the clause gone a viewer at the top of the ladder is told only that the forge sells nothing more" % [f_cost, Roster.REWORK_DIVISOR])
+            printerr("COMMANDS_DATA FORGE REWORK - `forge`.cost lost its rework fraction word; the top-tier price is unpublished")
+        elif f_rw_said != Roster.REWORK_DIVISOR:
+            _guard_faults.append("FORGE REWORK RATE")
+            push_error("COMMANDS_DATA FORGE REWORK RATE: `forge`.cost publishes the top-tier rework at \"a %s\" (1/%d) and `Roster.REWORK_DIVISOR` is %d, which roster.gd:514 charges - a hero at the top of the ladder is quoted one fraction of their steel's cost and billed another, and the gap is paid in gold before anybody reads a log" % [f_rw_word, f_rw_said, Roster.REWORK_DIVISOR])
+            printerr("COMMANDS_DATA FORGE REWORK RATE - published 1/%d (\"a %s\"), engine REWORK_DIVISOR %d" % [f_rw_said, f_rw_word, Roster.REWORK_DIVISOR])
         # B104: THE COUNTER SET AGAINST THE ENGINE'S OWN TILLS - A TWO-AUTHORITY ARM, AND THE
         # DEFECT IT WAS WRITTEN FOR WAS MINE. handle() refuses a shop command while a hero is on
         # the scar road or below it. That list was a bare literal and `oil` was never in it, so

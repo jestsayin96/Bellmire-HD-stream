@@ -770,3 +770,5 @@ RUNNING 2026-11-20T17:54:16-06:00 (HUD U109: probe feed card min width at 150% v
 IDLE 2026-11-20T17:57:35-06:00 - HUD U109: feed_hud.gd lord card no longer starves the Chronicle column at 150% (text 200->369px); parse 0 errors, windowed _u104_shot x2; Godot EMPTY at release; released early (cap claim+15), no crossing. (HUD)
 
 RUNNING 2026-11-20T18:07:57-06:00 (game build: merge + TAKE THIS NEXT item; claim 18:07, cap claim+25 = 18:32, expected finish 18:30, hard release by 18:32; Godot EMPTY at claim)
+
+IDLE 2026-11-20T18:23:24-06:00 - game build S71: Ferryman MB_FIT 1.07 + flooded row, MB_NAME held; S71_FERRYMAN OK 6, S70_SCRAPER OK 9, OFFFLOOR OK, TWITCH_PARSE OK, DELVE_TEST OK, townwalk ran no verdict in 420s; pushed laptop 5ef88bcb. Godot EMPTY at release; released early (cap claim+25 = 18:32), no crossing. (game build)

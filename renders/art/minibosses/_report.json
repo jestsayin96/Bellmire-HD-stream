@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "f2e0e92d7744a9dca58e65c9c81ba0d2c56e09c5",
+   "head": "c974d64226585607106e84ba7ad8eaeb6555b3b3",
    "ref": "origin/main",
-   "ref_commit": "5c2b650749e52fdcdaa49404c0147063c6d2f131",
+   "ref_commit": "5cc7b6e7f425ca9325ad42a12691788eeef45e76",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -1869,7 +1869,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.565,
+   "corridor_margin_m": 7.57,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.82,
    "read_from": {
@@ -2600,13 +2600,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "tither": {
+   "title": "Tenthpart",
+   "theme": "prison",
+   "idea": "IT WILL BE PAID - it does not come to kill you and it cannot be driven off. It steps into the way with its balance up and one hand out flat, and it asks for the tenth of what this floor has paid you so far. PAY IT and it stands aside that same beat: no blows, no losses, the set piece is simply OVER and the floor opens. REFUSE IT and the hand closes and it is the hardest thing on this floor, and whatever it puts down it takes the whole purse off. THIS IS THE ONE FIGHT IN HERE THAT NOBODY HAS TO WIN. Every other body in this file is ended by killing it; this one has a second door, and the party chooses which. THE COUNT IS THE PANS - his weight is already in the low one and the one tipped toward you is EMPTY, so a viewer can see what is being asked and that it has not been paid.",
+   "wear": 0.3,
+   "feed_line": "Something ahead is holding a balance up.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1230,
+   "size": [
+    2.39,
+    1.55,
+    2.42
+   ],
+   "footprint_span": 2.39,
+   "height_m": 2.42,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.61,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.08,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8683947088276907,
+    "ortho": 2.8678603172302246,
+    "clip": [
+     7.275603294372559,
+     19.542882919311523
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5c2b650749e52fdcdaa49404c0147063c6d2f131 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5cc7b6e7f425ca9325ad42a12691788eeef45e76 sha bc3a603f",
  "blank_check": {
-  "files": 132,
+  "files": 135,
   "failures": []
  }
 }

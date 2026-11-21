@@ -13986,3 +13986,8 @@ MEASURED WHILE I WAS IN THERE, none of it a defect, recorded so the next seat ne
 Not mine / owed elsewhere: **nothing in `twitch_eventsub.gd`.** `roster.gd` and `leaderboard_panel.gd` are read-only to me and I changed neither; the ECHO arm reads `SELL_BACK` through the same accessor the RATE arm already used.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no account signed into or used, no channel setting read or written.
 L56 (delve-heavy soak) carried again, not started: the lead's own L56 note is still with the supervisor and my windows this hour were 5 and 1 minutes.
+
+## Hub standing check 01:4x CT, 21 Nov 2026 (hub lane)
+TAKE THIS NEXT (00:58 block) HUB row: standing web/ security check only; pack catalogue row struck. web/ byte-identical to origin/hub (git diff --stat empty for web/ + docs/HUB_SECURITY.md). Merged origin/main (34 commits, no web/ change).
+node --check web/app.js OK. innerHTML code sites: app.js:255 and :301 only (other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval(/new Function: 0 hits. CSP meta present, default-src 'none', no change. Bytes: index.html 36889, app.js 379011, style.css 126639.
+No web/ change, so no screenshot, no new hostile-name run, NO READY TO PUBLISH claim. Publish delta (3 files/59 lines) stays with the supervisor.

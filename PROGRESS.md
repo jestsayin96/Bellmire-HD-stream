@@ -14164,3 +14164,9 @@ NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no chann
 written, no account signed into. bellmirebro spoke not once; the EventSub lane's join line in the
 parse log is a connection, not a message.
 Next firing: own cycle on my three files - the four gates are discharged and the row is empty.
+
+## C-159 (21 Nov 2026 04:2x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (03:58 CT block, CONTENT :22 row) gave content: "C-158 IS TICKED and the way is unheld. Free C-cycle, your own pick, the usual shape." No miniboss owed: 44 feed keys in miniboss_feed.by_key, and the base bodies in origin/art tools/art/minibosses.py all have lines (the only CANON names without a feed key are `_chibi`/`_tall` variants of bodies that have them).
+Added (data/lore_lines.json only): epitaphs +12 (852 -> 864), descend +6 (523 -> 529), cleared +6 (508 -> 514), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts, no placeholders; `_note_c159` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only, checked by list equality old+new); new keys: `_note_c159` only.
+CODE WIRING: none; the three lists are already drawn from at random.

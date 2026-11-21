@@ -1005,7 +1005,13 @@
     "The baker's boy runs out with one more loaf. It is taken without a word.",
     "Someone has chalked the day on the lintel. They step under it.",
     "The cart-horse stands and watches them go. It has seen this before.",
-    "A cough, a strap pulled tight, a nod. The dark takes it from there."
+    "A cough, a strap pulled tight, a nod. The dark takes it from there.",
+    "The wheelwright spits on the stone for luck. They step over it.",
+    "A child holds the gate-rope for them. It is let go gently.",
+    "The ale-wife leaves a jug on the wall. It will be there after, or it will not.",
+    "Frost on the steps. They mind their feet and go down.",
+    "The bell-ringer lowers his hand. The bell stays quiet, by custom.",
+    "Boots, lamp, rope, bread. Checked once more, and the dark begins."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1515,7 +1521,13 @@
     "Boots are scraped on the step. The town is glad of clean floors.",
     "A kettle goes on. It is the first sound that is not work.",
     "They wash their hands in the trough and take their time doing it.",
-    "The ledger is opened and the figures are made to agree."
+    "The ledger is opened and the figures are made to agree.",
+    "A tally is cut into the post. The knife is wiped on a sleeve.",
+    "The ale-wife sets out the mugs before she is asked.",
+    "Somebody hums, badly, and is left to it.",
+    "Wet footprints cross the hall to the hearth and stop there.",
+    "The healer counts heads and finds the count is right. She sits down.",
+    "The torches are swapped for fresh ones. The old ones are kept for kindling."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4494,7 +4506,19 @@
     "Slept in the loft over the baker's. Nobody has taken the bed.",
     "Paid the debt on the first day it was due. Owed nothing at the end.",
     "Whistled off-key all the way to the gate. The gate noticed when it stopped.",
-    "Gave her ration to the youngest. Went on hungry. Went on."
+    "Gave her ration to the youngest. Went on hungry. Went on.",
+    "Stacked the firewood for a winter he did not see.",
+    "Mended the net by the light of the forge. Left it hanging dry.",
+    "Took the long watch so the others could sleep. Nobody woke him.",
+    "Knew the stair by heart. The stair did not return the favour.",
+    "Walked the lamp-lighters' round every dusk. One lamp stays dark.",
+    "Sold the last cheese at cost. Went down with the coin to spare.",
+    "Said he would be back before the bread cooled. The bread cooled.",
+    "Taught the apprentice the knot. The knot held.",
+    "Kept the tally straight. The tally is all there is.",
+    "Fixed the cartwheel on the way out. It is still rolling.",
+    "Left the door on the latch. It is still on the latch.",
+    "Nodded to the gate-ward. Did not look back. Did not need to."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -14123,4 +14147,6 @@
   "_note_c155": "C-155: epitaphs +12, descend +6, cleared +6 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
   "_note_c156": "C-156 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
 ,
-  "_note_c157": "C-157 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."}
+  "_note_c157": "C-157 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
+  "_note_c159": "C-159 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed."
+}

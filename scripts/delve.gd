@@ -1482,11 +1482,16 @@ func _search_tick(delta: float) -> void:
 	# the whole searching phase is capped far shorter.
 	if alive.is_empty() or left.is_empty() or _t > 12.0:
 		_search_t = 0.0
+		_purses_left(alive)          # S83: a spilled purse is never lost to the search cap
 		_floor_decision(_alive())
 		return
 	var cd: Dictionary = left[0]
+	for c in left:
+		if (c as Dictionary).has("purse"):
+			cd = c          # S83: gold lying on the floor is gone to first, before any chest
+			break
 	var node: Node3D = cd["node"]
-	var m := _seeker(alive)
+	var m := _nearest_to(alive, node.global_position) if cd.has("purse") else _seeker(alive)
 	var b: HeroBody = m["body"]
 	if not is_instance_valid(b):
 		cd["searched"] = true
@@ -1496,6 +1501,9 @@ func _search_tick(delta: float) -> void:
 		# give up on a chest we are plainly not getting to, rather than grinding at it
 		if stuck_on(b, 2.0):
 			cd["searched"] = true
+			if cd.has("purse"):
+				_take_purse(m, cd)
+				return
 			chests_unreachable += 1
 			_prog.erase(b)
 			_say("%s cannot get to the chest and leaves it." % m["h"]["name"])
@@ -1512,7 +1520,76 @@ func _search_tick(delta: float) -> void:
 		return
 	_search_t = 0.0
 	cd["searched"] = true
+	if cd.has("purse"):
+		_take_purse(m, cd)
+		return
 	_open_chest(m, cd)
+
+## ---------------------------------------------------------------- S83: SYSTEM 9 row (a)
+## the miniboss purse lands as a coin pile where the body fell. Coin_Pile_2 is art's measured
+## prop (dungeon_hd PROP_BATCH base_dz_m +0.0003 - effectively on the floor at any scale).
+const PURSE_MODEL := "res://assets/props/Coin_Pile_2.gltf"
+const PURSE_SCALE := 4.0          # h 0.0584 m * 4 = 0.23 m: reads at the RTS camera, still ankle-high
+var purses_dropped := 0
+var purses_taken := 0
+
+func _drop_purse(tgt: Monster, purse: int) -> bool:
+	if dun == null or not is_instance_valid(dun) or not ResourceLoader.exists(PURSE_MODEL):
+		return false
+	var ps = load(PURSE_MODEL)
+	if not (ps is PackedScene):
+		return false
+	var pile: Node3D = (ps as PackedScene).instantiate()
+	pile.name = "PursePile"
+	pile.scale = Vector3.ONE * PURSE_SCALE
+	dun.add_child(pile)
+	var at := tgt.global_position
+	pile.global_position = Vector3(at.x, dun.global_position.y - 0.0003 * PURSE_SCALE, at.z)
+	pile.set_meta("purse", purse)
+	if not dun.info.has("chests"):
+		dun.info["chests"] = []
+	(dun.info["chests"] as Array).append({"node": pile, "searched": false, "purse": purse})
+	purses_dropped += 1
+	return true
+
+func _nearest_to(alive: Array, at: Vector3) -> Dictionary:
+	var best: Dictionary = alive[0]
+	var bd := INF
+	for m in alive:
+		var d := _flat(b_pos(m), at)
+		if d < bd:
+			bd = d
+			best = m
+	return best
+
+## the delver who reached it gathers it; the gold is still split the old way (L29c share rule)
+func _take_purse(m: Dictionary, cd: Dictionary) -> void:
+	var purse := int(cd.get("purse", 0))
+	cd.erase("purse")
+	cd["searched"] = true
+	var node: Node3D = cd["node"]
+	var alive := _alive()
+	if alive.is_empty() or purse <= 0:
+		return
+	var share := maxi(1, purse / alive.size())
+	for a in alive:
+		roster.award(String(a["uid"]), share, 0, 0, floor_no)
+		_float_text(a, "+%d" % share, Color(1.0, 0.85, 0.35))
+	_gold += share * alive.size()
+	purses_taken += 1
+	Delve.setpieces_fired["purse_taken"] = int(Delve.setpieces_fired.get("purse_taken", 0)) + 1
+	Sfx.play("coin", -4.0)
+	_say("%s gathers up the purse - %d gold, %d a share, %d ways." % [m["h"]["name"], purse, share, alive.size()])
+	if is_instance_valid(node):
+		node.queue_free()
+
+func _purses_left(alive: Array) -> void:
+	if dun == null or not dun.info.has("chests") or alive.is_empty():
+		return
+	for c in dun.info["chests"]:
+		var cd: Dictionary = c
+		if cd.has("purse"):
+			_take_purse(_nearest_to(alive, (cd["node"] as Node3D).global_position if is_instance_valid(cd["node"]) else b_pos(alive[0])), cd)
 
 ## the find itself: an Investigation check, the chest opens, and the Chronicle reads BOTH ways
 func _open_chest(m: Dictionary, cd: Dictionary) -> void:
@@ -1910,6 +1987,19 @@ func _on_kill(tgt: Monster, by: Dictionary = {}) -> void:
 		var purse := int(tgt.get_meta("l29c_miniboss_purse"))
 		tgt.remove_meta("l29c_miniboss_purse")
 		var alive := _alive()
+		# S83 / SYSTEM 9 row (a): in a live fight the purse SPILLS where the body fell and is
+		# paid only when a delver walks to it (the L49 walk-and-kneel). Anywhere else - a test
+		# calling _on_kill cold, a kill on the walk to the stairs - it pays at once, as before.
+		if not alive.is_empty() and state == "fight" and _back_to == "" and _drop_purse(tgt, purse):
+			var mbk0 := String(tgt.get_meta("mb_key", ""))
+			if mbk0 != "":
+				_say(_miniboss_say(mbk0, "fall"))
+				Delve.setpieces_fired["miniboss_feed_fall"] = int(Delve.setpieces_fired.get("miniboss_feed_fall", 0)) + 1
+			_say("The %s's purse spills across the floor - %d gold, for whoever goes to it."
+				% [String(tgt.def.get("name", "elite")), purse])
+			Delve.setpieces_fired["miniboss_down"] = int(Delve.setpieces_fired.get("miniboss_down", 0)) + 1
+			Delve.setpieces_fired["purse_dropped"] = int(Delve.setpieces_fired.get("purse_dropped", 0)) + 1
+			alive = []
 		if not alive.is_empty():
 			var share := maxi(1, purse / alive.size())
 			for m in alive:

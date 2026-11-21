@@ -944,3 +944,23 @@ IDLE 2026-11-21T05:59:48-06:00 - chat bot B101: COMMANDS_DOC OK 32, L14_TEST OK 
 RUNNING 2026-11-21T06:08:10-06:00 (game build, claim 06:08, cap claim+25 = 06:33, expected finish 06:30)
 
 IDLE 2026-11-21T06:25:19-06:00 - game build S83: purse-on-the-floor built, S83_PURSE OK, held on s83-wip (L29C soak regression). No Godot of mine alive. Claim 06:08, cap 06:33. (game build)
+
+RUNNING 2026-11-21T06:41:49-06:00 (QA tester, gates sweep, claim now, cap claim+15)
+
+IDLE 2026-11-21T06:47:45-06:00 - QA tester gates: parse rc=0/0 errors, L14_TEST OK 24, DELVE_TEST OK 9001, OFFFLOOR OK 0/2108, TWITCH_PARSE OK 8, TOWNWALK PASS, COMMANDS_DOC OK 32. S58_SPAN: all 28 checks ok but headless run hangs at save_png null (gate is WINDOWED-only; killed my own Godot). No Godot of mine alive. (QA tester)
+
+RUNNING 2026-11-21T06:52:30-06:00 (chat bot B102, gates commands_doc/l14/parse/twitch_parse on the B102 edit, claim 06:52, cap claim+25 = 07:17, expected finish 07:02)
+
+IDLE 2026-11-21T06:56:40-06:00 - chat bot B102: COMMANDS_DOC OK 32 (doc rewritten, two rows changed), L14_TEST OK 24 with 0 guard arms fired incl. the 4 new ones, TWITCH_PARSE OK 8, parse rc=0 / 0 script errors / 0 parse errors. No Godot of mine alive. Claim 06:52, cap 07:17, released early. (chat bot)
+
+RUNNING 2026-11-21T07:08:31-06:00 (game build S-next, claim 07:08, cap claim+25 = 07:34, expected finish 07:30)
+
+IDLE 2026-11-21T07:20:00-06:00 - game build S84: S83 purse lands on laptop; L29C soak C is red on HEAD without the edit (0 of 3), not S83's. Gates: parse 0/0, S83_PURSE OK 8, DELVE_TEST OK 9001, OFFFLOOR OK 0/2146, TWITCH_PARSE OK 8, TOWNWALK PASS. No Godot of mine alive. Claim 07:08:31, cap 07:33, released early. (game build)
+
+RUNNING 2026-11-21T07:52:30-06:00 (chat bot B103, gates parse/l14/twitch_parse/commands_doc on the B103 guard edit, claim 07:52, cap claim+25 = 08:17, expected finish 08:00)
+
+IDLE 2026-11-21T07:58:10-06:00 - chat bot B103: parse rc=0 / 0 script errors / 0 parse errors, L14_TEST OK 24 with 0 guard arms fired incl. the 5 new ones, TWITCH_PARSE OK 8, COMMANDS_DOC OK 32 (doc byte-identical, true no-op). Red half proven for 3 of 5 by perturbing my own data and restoring it byte-identical; the 2 AUTHORITY arms need a perturbation in roster.gd/gear.gd and I did not touch another lane's file. No Godot of mine alive. Claim 07:52:30, cap 08:17, released early. (chat bot)
+
+RUNNING 2026-11-21T08:08:13-06:00 (game build S-next, claim 08:08, cap claim+25 = 08:33, expected finish 08:30)
+
+IDLE 2026-11-21T08:22:02-06:00 - game build S85: L29C arm C red was the soak's 180 s clock cutting floor 3's fight, not the set pieces; soak now ends on first fire, ceiling 600 s. Gates: parse 0/0, L29C_TEST OK 33/0 (ambush @18825), TWITCH_PARSE OK 8, OFFFLOOR OK 0/2300, TOWNWALK PASS, DELVE_TEST OK 9001. No Godot of mine alive. Claim 08:08:13, cap 08:33, released early. (game build)

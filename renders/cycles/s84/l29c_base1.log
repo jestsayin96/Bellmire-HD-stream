@@ -1,0 +1,253 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+L29c A: do set pieces LAND on floors at all?
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 0; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 0; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 0; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 0; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+L28C_EMITTERS floor 9 shrine: 2 (cap 12), creatures 0; lights 51 (shadowed 1)
+L28D_DECALS floor 9 shrine: 18 (cap 24)
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 0; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+L28C_EMITTERS floor 11 prison: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 11 prison: 18 (cap 24)
+L28C_EMITTERS floor 12 fogbound: 3 (cap 12), creatures 0; lights 64 (shadowed 1)
+L28D_DECALS floor 12 fogbound: 18 (cap 24)
+L28C_EMITTERS floor 13 crypt: 3 (cap 12), creatures 0; lights 73 (shadowed 1)
+L28D_DECALS floor 13 crypt: 18 (cap 24)
+L28C_EMITTERS floor 14 keep: 3 (cap 12), creatures 0; lights 60 (shadowed 1)
+L28D_DECALS floor 14 keep: 17 (cap 24)
+L28C_EMITTERS floor 15 flooded: 3 (cap 12), creatures 0; lights 71 (shadowed 2)
+L28D_DECALS floor 15 flooded: 18 (cap 24)
+L28C_EMITTERS floor 16 barracks: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 16 barracks: 18 (cap 24)
+L28C_EMITTERS floor 17 firepit: 2 (cap 12), creatures 0; lights 68 (shadowed 1)
+L28D_DECALS floor 17 firepit: 18 (cap 24)
+L28C_EMITTERS floor 18 workshop: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 18 workshop: 17 (cap 24)
+L28C_EMITTERS floor 19 treasury: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 19 treasury: 17 (cap 24)
+L28C_EMITTERS floor 20 shrine: 3 (cap 12), creatures 0; lights 61 (shadowed 2)
+L28D_DECALS floor 20 shrine: 17 (cap 24)
+L28C_EMITTERS floor 21 wood: 2 (cap 12), creatures 0; lights 56 (shadowed 1)
+L28D_DECALS floor 21 wood: 18 (cap 24)
+L28C_EMITTERS floor 22 prison: 4 (cap 12), creatures 0; lights 46 (shadowed 1)
+L28D_DECALS floor 22 prison: 18 (cap 24)
+L28C_EMITTERS floor 23 fogbound: 3 (cap 12), creatures 0; lights 71 (shadowed 1)
+L28D_DECALS floor 23 fogbound: 17 (cap 24)
+L28C_EMITTERS floor 24 crypt: 3 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 24 crypt: 18 (cap 24)
+L28C_EMITTERS floor 25 keep: 5 (cap 12), creatures 0; lights 74 (shadowed 2)
+L28D_DECALS floor 25 keep: 17 (cap 24)
+L28C_EMITTERS floor 26 mess: 2 (cap 12), creatures 0; lights 58 (shadowed 1)
+L28D_DECALS floor 26 mess: 18 (cap 24)
+L28C_EMITTERS floor 27 grassland: 2 (cap 12), creatures 0; lights 43 (shadowed 1)
+L28D_DECALS floor 27 grassland: 18 (cap 24)
+L28C_EMITTERS floor 28 confection: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 28 confection: 18 (cap 24)
+L28C_EMITTERS floor 29 workshop: 2 (cap 12), creatures 0; lights 66 (shadowed 1)
+L28D_DECALS floor 29 workshop: 17 (cap 24)
+L28C_EMITTERS floor 30 treasury: 4 (cap 12), creatures 0; lights 65 (shadowed 2)
+L28D_DECALS floor 30 treasury: 17 (cap 24)
+L28C_EMITTERS floor 31 shrine: 2 (cap 12), creatures 0; lights 59 (shadowed 1)
+L28D_DECALS floor 31 shrine: 18 (cap 24)
+L28C_EMITTERS floor 32 wood: 2 (cap 12), creatures 0; lights 55 (shadowed 1)
+L28D_DECALS floor 32 wood: 18 (cap 24)
+L28C_EMITTERS floor 33 prison: 3 (cap 12), creatures 0; lights 64 (shadowed 1)
+L28D_DECALS floor 33 prison: 18 (cap 24)
+L28C_EMITTERS floor 34 fogbound: 2 (cap 12), creatures 0; lights 67 (shadowed 1)
+L28D_DECALS floor 34 fogbound: 18 (cap 24)
+L28C_EMITTERS floor 35 crypt: 3 (cap 12), creatures 0; lights 64 (shadowed 2)
+L28D_DECALS floor 35 crypt: 18 (cap 24)
+L28C_EMITTERS floor 36 keep: 3 (cap 12), creatures 0; lights 43 (shadowed 1)
+L28D_DECALS floor 36 keep: 18 (cap 24)
+L28C_EMITTERS floor 37 mess: 2 (cap 12), creatures 0; lights 66 (shadowed 1)
+L28D_DECALS floor 37 mess: 18 (cap 24)
+L28C_EMITTERS floor 38 grassland: 2 (cap 12), creatures 0; lights 62 (shadowed 1)
+L28D_DECALS floor 38 grassland: 18 (cap 24)
+L28C_EMITTERS floor 39 confection: 3 (cap 12), creatures 0; lights 51 (shadowed 1)
+L28D_DECALS floor 39 confection: 17 (cap 24)
+   out of floors 2-39 (non-boss), 19 had a set piece, 12 had none; boss floors with set pieces: 0
+   kinds seen: { "prisoner": 5, "ambush": 7, "miniboss": 5, "shrine": 2 }
+  ok   A: set pieces appear on a healthy share of floors (19 of 31)
+  ok   A: set pieces NEVER land on a boss floor (0)
+  ok   A: all four kinds appear across the sample (seen={ "prisoner": 5, "ambush": 7, "miniboss": 5, "shrine": 2 })
+L29c B: do all three KINDS fire their resolvers?
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+   AMBUSH floor 3 at (-6.0, 0.0, -44.0)
+FEED Shadows peel off the walls - an ambush! 1 puglin, 1 hollowed slime, 1 skeleton minion surges in.
+  ok   B.ambush: the pack SPAWNED (4 -> 7)
+  ok   B.ambush: resolved
+  ok   B.ambush: counted exactly once (1)
+  ok   B.ambush: does NOT re-fire
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+   PRISONER floor 2 at (-14.0, 0.0, 32.0) purse=42
+FEED Finder cracks the chain off a captive - 42 gold passes to the party, split 1 ways.
+  ok   B.prisoner: the party RECEIVES gold (40 -> 82)
+  ok   B.prisoner: share equals purse / alive (expected 42, got 42)
+  ok   B.prisoner: resolved
+  ok   B.prisoner: counted exactly once (1)
+  ok   B.prisoner: does NOT re-fire
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 5; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 3; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 7; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+L28C_EMITTERS floor 9 shrine: 2 (cap 12), creatures 5; lights 51 (shadowed 1)
+L28D_DECALS floor 9 shrine: 18 (cap 24)
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+L28C_EMITTERS floor 11 prison: 3 (cap 12), creatures 5; lights 52 (shadowed 1)
+L28D_DECALS floor 11 prison: 18 (cap 24)
+L28C_EMITTERS floor 12 fogbound: 3 (cap 12), creatures 5; lights 64 (shadowed 1)
+L28D_DECALS floor 12 fogbound: 18 (cap 24)
+L28C_EMITTERS floor 13 crypt: 3 (cap 12), creatures 7; lights 73 (shadowed 1)
+L28D_DECALS floor 13 crypt: 18 (cap 24)
+L28C_EMITTERS floor 14 keep: 3 (cap 12), creatures 10; lights 60 (shadowed 1)
+L28D_DECALS floor 14 keep: 17 (cap 24)
+L28C_EMITTERS floor 15 flooded: 3 (cap 12), creatures 5; lights 71 (shadowed 2)
+L28D_DECALS floor 15 flooded: 18 (cap 24)
+L28C_EMITTERS floor 16 barracks: 2 (cap 12), creatures 8; lights 52 (shadowed 1)
+L28D_DECALS floor 16 barracks: 18 (cap 24)
+L28C_EMITTERS floor 17 firepit: 2 (cap 12), creatures 4; lights 68 (shadowed 1)
+L28D_DECALS floor 17 firepit: 18 (cap 24)
+L28C_EMITTERS floor 18 workshop: 2 (cap 12), creatures 7; lights 63 (shadowed 1)
+L28D_DECALS floor 18 workshop: 17 (cap 24)
+L28C_EMITTERS floor 19 treasury: 2 (cap 12), creatures 6; lights 61 (shadowed 1)
+L28D_DECALS floor 19 treasury: 17 (cap 24)
+L28C_EMITTERS floor 20 shrine: 3 (cap 12), creatures 7; lights 61 (shadowed 2)
+L28D_DECALS floor 20 shrine: 17 (cap 24)
+L28C_EMITTERS floor 21 wood: 2 (cap 12), creatures 5; lights 56 (shadowed 1)
+L28D_DECALS floor 21 wood: 18 (cap 24)
+L28C_EMITTERS floor 22 prison: 4 (cap 12), creatures 8; lights 44 (shadowed 1)
+L28D_DECALS floor 22 prison: 18 (cap 24)
+L28C_EMITTERS floor 23 fogbound: 3 (cap 12), creatures 5; lights 71 (shadowed 1)
+L28D_DECALS floor 23 fogbound: 17 (cap 24)
+L28C_EMITTERS floor 24 crypt: 3 (cap 12), creatures 6; lights 46 (shadowed 1)
+L28D_DECALS floor 24 crypt: 18 (cap 24)
+   SHRINE BOON floor 24 at (6.0, 0.0, -2.0)
+FEED Pilgrim touches the altar - a boon. The light steadies; the party is mended.
+  ok   B.shrine.boon: hp mended back to max (100/100)
+  ok   B.shrine.boon: resolved
+  ok   B.shrine.boon: counted exactly once (1)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 5; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 3; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 3; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+L28C_EMITTERS floor 9 shrine: 2 (cap 12), creatures 7; lights 51 (shadowed 1)
+L28D_DECALS floor 9 shrine: 18 (cap 24)
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+L28C_EMITTERS floor 11 prison: 3 (cap 12), creatures 8; lights 52 (shadowed 1)
+L28D_DECALS floor 11 prison: 18 (cap 24)
+L28C_EMITTERS floor 12 fogbound: 3 (cap 12), creatures 8; lights 64 (shadowed 1)
+L28D_DECALS floor 12 fogbound: 18 (cap 24)
+L28C_EMITTERS floor 13 crypt: 3 (cap 12), creatures 6; lights 73 (shadowed 1)
+L28D_DECALS floor 13 crypt: 18 (cap 24)
+   SHRINE CURSE floor 13 at (20.0, 0.0, 34.0)
+FEED Fool touches the altar - a curse. Something older than the floor takes a bite.
+  ok   B.shrine.curse: hp took a bite but not killed (88)
+  ok   B.shrine.curse: resolved
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 5; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 6; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+   MINIBOSS floor 7 at (-6.0, 0.0, 14.0) purse=143 (base hp=0.77 atk=1.50)
+FEED Plate on plate on an old dark core. It is not done yet.
+FEED Ironhyde holds this chamber alone - a mini-boss stands between you and the way deeper.
+  ok   B.miniboss: exactly one elite spawned (6 -> 7)
+  ok   B.miniboss: resolved
+  ok   B.miniboss: counted exactly once (1)
+  ok   B.miniboss: max_hp = (14 + floor*6) * base * MINIBOSS_HP_MULT (85.7 vs 85.7)
+  ok   B.miniboss: carries l29c_miniboss_purse meta
+  ok   B.miniboss.rally: rallied flag starts false
+FEED Ironhyde finds its second wind - its strikes land harder.
+  ok   B.miniboss.rally: rallied flag set after dipping under half hp
+  ok   B.miniboss.rally: atk climbs on rally (1.80 -> 2.70)
+  ok   B.miniboss.rally: atk multiplied by MINIBOSS_RALLY_MULT exactly (1.80 * 1.50 = 2.70, got 2.70)
+  ok   B.miniboss.rally: setpieces_fired[miniboss_rally] counted
+  ok   B.miniboss.rally: a second tick does NOT re-fire
+  ok   B.miniboss.rally: atk does NOT climb again on the second tick
+FEED It mended itself right up to the end.
+FEED The chamber keeps a purse of 143 gold - 143 a share, 1 ways.
+  ok   B.miniboss: killing the elite pays out a purse (40 -> 183)
+  ok   B.miniboss: setpieces_fired[miniboss_down] counted (1)
+  ok   B.miniboss: a second _on_kill does NOT pay the purse again
+L29c C: soak - does ANY set piece fire in a REAL delve?
+FEED One of them touches the doorframe for luck.
+FEED They carry 48 flasks of oil between them.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 giant rat, 2 slimes.
+FEED Half a machine, and no telling what the other half was for.
+FEED Corvin speaks smite; something else finishes it (1 vs DC 11).
+FEED Bram casts Bolt at slime.
+FEED Corvin casts Bolt at slime.
+FEED The slime divides.
+FEED Bram's chain arrives, but something else wore it in (7 vs DC 11).
+FEED Corvin casts Bolt at giant rat.
+FEED Corvin casts Smite at skeleton minion.
+FEED Bram casts Fire at skeleton minion.
+FEED Bram casts Bolt at slime.
+FEED Bram searches (Investigation 19) and turns up 27 gold on floor 2.
+FEED The wounded are sat against the wall. The rest keep watch.
+FEED Bram finds a vial of Cellar Cider.
+FEED Aen and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 drowned puglins, 2 skeleton minions.
+L29c C: soak ended state=fight frames=10801 fired={  } (total=0)
+  FAIL C: at least one set piece of any kind fired during the soak (0)
+
+CHECKS 33 FAILS 1
+  - C: at least one set piece of any kind fired during the soak (0)
+L29C_TEST FAIL
+ERROR: 1 RID allocations of type 'PN13RendererDummy14TextureStorage12DummyTextureE' were leaked at exit.
+ERROR: 14 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+WARNING: 16 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

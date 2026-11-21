@@ -2540,10 +2540,11 @@ time rather than rediscovered. The honest list:
 ---
 
 ## 29. THE PAVISER - *IT KEEPS ITS FACE TO YOU* (2026-11-18, art lane)
-`paviser` - **keep** - h **2.68** - wear **0.78** - 4 meshes, **743 faces** -
-span **3.57 m**, **CORRIDOR-SAFE** against the 11.0 m three-cell clear span -
-ratio **1.09** beside the posed 2.45 m Knight, pair_w **5.43**, fits_frame
-true. **Procedural, no pack geometry** (`pack_used` false - see below, I looked
+`paviser` - **keep** - h **2.68** - wear **0.78** - 4 meshes, **731 faces**
+(pass 8, was 743) - span **3.43 m**, **CORRIDOR-SAFE** against the 11.0 m
+three-cell clear span - ratio **1.09** beside the posed 2.45 m Knight, pair_w
+**5.3**, fits_frame true. Gate read on the shipped `front.png`: **0 bar
+columns of 240**, longest run **0.2837** (pass 8). **Procedural, no pack geometry** (`pack_used` false - see below, I looked
 first).
 
 Feed line: *"A board came round to face you."*
@@ -2651,6 +2652,80 @@ at every one. `renders/art/minibosses/paviser/hero_*.png`.
    wrong. Shortened to 0.055 and sunk, all inboard of |u| 0.28.
 8. **PASS 6 WAS A FIX THAT MADE THINGS WORSE AND IT IS REVERTED, NOT SHIPPED.**
    See the live fault list below.
+9. **PASS 7 KILLED THE GATE, AND THE GATE WAS MY OWN PASS 3.** Pass 3 deleted
+   the centre rib because the front view had *"two identical dark verticals and
+   the board sat in a frame between them - a gate"* - and the same pass added
+   **two plank seams, which are two identical dark verticals running 96% of the
+   board's height**. The rib was deleted and its read was rebuilt out of the
+   replacement in the same breath. I did not get this from the comments; I
+   looked at `front.png` and the pale board reads as a portcullis. **One
+   variable** (`PAVISER_SEAMH`, the seams' height), swept 1.00 / 0.50 / 0.00
+   and **measured by a new instrument that asks the viewer's question**,
+   `tools/art/_gateread.py`: a BAR is a dark run crossing >= 50% of the board's
+   height with pale above and below it in the same column, so a bolt stub is
+   not a bar and the man, who is not enclosed by the board, cannot be charged.
+
+   | SEAMH | bar columns | bar share | longest run | p90 run |
+   |---|---|---|---|---|
+   | 1.00 (shipped before) | 18 | 0.0750 | **0.956** | 0.3773 |
+   | 0.50 | 7 | 0.0292 | 0.5179 | 0.3773 |
+   | **0.00 (shipped)** | **7** | **0.0292** | **0.5179** | **0.0956** |
+
+   **0.50 is worse than 0.00 in the picture and the number cannot see why** -
+   it scores the same bar count, but five short verticals read as more damage,
+   not less grille. The picture decided; the number only ranked 1.00 last.
+   The instrument **goes RED ON EMPTY and that arm has been fired**: a fully
+   transparent frame returns `ok: false`, `VOID: only 0 board columns`
+   (`renders/art/_sweep/_gateread_redarm.json`). The sweep renders are kept at
+   `renders/art/_sweep/paviser_seam*/`.
+   **WHAT THE INSTRUMENT CANNOT SEE**, written down because this lane shipped
+   `head_glow_px: 156` beside "the head has no face at all" on 17 Nov: a pale
+   bar on a pale field; a dark mark that reaches the board's outline (not
+   enclosed, so not counted); and anything at all about the post, the prop, the
+   legs or the floor.
+
+   **PASS 8 (21 Nov, 08:4x CT) - THE SPLITS, AND THE INSTRUMENT COULD NOT TELL
+   THE TWO CANDIDATES APART.** Pass 7 said the gate was REDUCED, NOT CURED:
+   three dark splits still made a faint grid with the two straps and the
+   longest ran 0.5179 of its column, over the 0.50 bar line. Two things could
+   be causing that, so there are two hooks and they were swept APART:
+
+   - `PAVISER_SPLITH` - the splits' height, scaled about each split's own
+     centre.
+   - `PAVISER_SPLITC` - the splits TRANSLATED in z into the clear band between
+     the two straps, **heights untouched**, so the column's longest run cannot
+     move and anything that changes in the picture is the JOIN and only the
+     join. Every shipped split crossed a strap (straps 0.372-0.428 and
+     1.122-1.178; splits 0.62-1.24, 0.30-0.76, 0.86-1.26), giving the face six
+     closed cells.
+
+   | variable | bar columns | bar share | longest run | p90 run |
+   |---|---|---|---|---|
+   | SPLITH 1.00 (shipped before) | 7 | 0.0292 | 0.5179 | 0.0956 |
+   | **SPLITH 0.55 (shipped)** | **0** | **0.0** | **0.2837** | **0.0956** |
+   | SPLITH 0.00 | 0 | 0.0 | 0.0981 | 0.0554 |
+   | SPLITC 1.00 (rejected) | 7 | 0.0292 | 0.5179 | 0.0956 |
+
+   **THE FINDING OF THIS PASS IS THAT MY OWN HYPOTHESIS WAS WRONG AND THE
+   PICTURE IS WHAT SAID SO.** I went in believing the JOIN was the cause - I
+   could see the six cells in `front.png`. Lifting the three splits clear of
+   the straps made it **worse**: three equal verticals stacked tidily between
+   two rails is a grille drawn from life. And `_gateread` reported
+   `cols=240 bars=7 share=0.0292 max=0.5179` for that body - **byte-for-byte
+   the shipped numbers**, by construction, because translating a run does not
+   change its length. **A pass that had trusted the instrument alone would
+   have shipped the worse board on an unchanged green line.** That is the
+   blind spot named in advance by the "what this cannot see" list and now
+   demonstrated rather than asserted.
+
+   0.00 also clears the bar and is the cleanest face of the three, and it was
+   **not** taken: the splits are the wear RECEIPT on a board whose entire
+   purpose is to be hit (Mr. E's rule 2), so 0.00 buys the gate with the thing
+   the board is for. 0.55 keeps three short checks, none of which reaches a
+   second rail. Sweep renders at `renders/art/_sweep/paviser_split*/`,
+   readings at `renders/art/_sweep/_gateread_splith.json` and
+   `_gateread_splitc.json`, shipped reading at
+   `renders/art/minibosses/_gateread_paviser.json`.
 
 ### THE HONEST FAULT LIST - EVERY ONE OF THESE IS VISIBLE ON THE SHEETS
 1. **The back of the board is a dead blank pale rectangle.** `hero_back.png`
@@ -2669,11 +2744,18 @@ at every one. `renders/art/minibosses/paviser/hero_*.png`.
    `hero_front.png` the creature's largest mass and the hero's plate sit at
    nearly the same lightness. The limewash is meant to be warm; it is reading
    as slate.
-4. **The strikes and seams dissolve at pane distance.** On the hero sheet they
-   are faint marks. The "six countable hits" claim is TRUE at render distance
-   and FALSE on stream, and I am not going to pretend otherwise.
+4. **The strikes dissolve at pane distance.** On the hero sheet they are faint
+   marks. The "six countable hits" claim is TRUE at render distance and FALSE
+   on stream, and I am not going to pretend otherwise. (The seams are gone as
+   of pass 7, so they are no longer part of this fault.)
 5. **The strikes and the three splits are not distinguishable from each other**
    even up close - two kinds of damage reading as one kind of speckle.
+5b. **THE GATE IS REDUCED, NOT CURED, AND THE SPLITS ARE WHY.** With the two
+   seams gone the face still carries **three dark verticals** (the splits at
+   u -0.22 / +0.10 / +0.29) crossed by the two iron straps, and the longest of
+   them still runs **0.52 of the board's height**. On `front.png` they still
+   make a faint grid with the straps. That is the next pass's one variable and
+   it is NOT done; pass 7 moved one thing and stopped.
 6. **The near arm is invisible from the front** (behind the board). Only the
    far arm and fist read, so he looks one-armed.
 7. **From the side the fist and forearm cross his own helm and take one eye.**

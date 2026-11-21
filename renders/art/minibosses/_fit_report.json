@@ -4196,7 +4196,10 @@
    "creature_h": 2.68,
    "hero_h": 2.45,
    "ratio": 1.09,
-   "pair_w": 5.43,
+   "pair_w": 5.3,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.304,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -4207,45 +4210,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 98029,
-      "vis": 98029,
-      "delta": 106591,
+      "alone": 93109,
+      "vis": 93109,
+      "delta": 94913,
       "seen": 1.0
      },
      "hero": {
       "alone": 43680,
       "vis": 43680,
-      "delta": 55438,
+      "delta": 47436,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 67979,
-      "vis": 67979,
-      "delta": 77472,
+      "alone": 68095,
+      "vis": 68095,
+      "delta": 69165,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37790,
-      "vis": 37790,
-      "delta": 44849,
+      "alone": 37797,
+      "vis": 37797,
+      "delta": 38915,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 100685,
-      "vis": 100685,
-      "delta": 114285,
+      "alone": 95803,
+      "vis": 95803,
+      "delta": 97790,
       "seen": 1.0
      },
      "hero": {
       "alone": 44035,
       "vis": 44035,
-      "delta": 51122,
+      "delta": 45650,
       "seen": 1.0
      },
      "proves": true
@@ -4315,21 +4318,42 @@
      }
     }
    },
+   "ground_from": "carried - this run did not measure the ground",
    "proving_views": 3,
-   "air_x": 0.17,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.574,
+     "man_alone_px": 98228,
+     "man_seen_px": 56382,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9854,
+     "man_alone_px": 74431,
+     "man_seen_px": 73342,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 99947,
+     "man_seen_px": 99929,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.574,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
     "front": [
-     11,
-     7
+     20,
+     20
     ],
     "side": [
-     95,
+     98,
      98
     ],
     "back": [
-     8,
-     10
+     20,
+     20
     ]
    },
    "frame_edge_disk": {
@@ -4353,30 +4377,8 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 7,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.574,
-     "man_alone_px": 98228,
-     "man_seen_px": 56382,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9854,
-     "man_alone_px": 74431,
-     "man_seen_px": 73342,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9998,
-     "man_alone_px": 99947,
-     "man_seen_px": 99929,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.574,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "air_px_min": 20,
+   "air_px_tightest_view": "front"
   },
   "fenman": {
    "creature_h": 2.52,
@@ -7920,7 +7922,6 @@
   "leech",
   "loader",
   "moulder",
-  "paviser",
   "porter",
   "pressman",
   "quartermaster",
@@ -8070,10 +8071,10 @@
   "tallyman_chibi"
  ],
  "measured": [
-  "pitman"
+  "paviser"
  ],
  "asked": [
-  "pitman"
+  "paviser"
  ],
  "blank_check": {
   "files": 3,

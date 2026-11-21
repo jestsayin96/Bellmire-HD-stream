@@ -4198,3 +4198,42 @@ is my next firing.
 - Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.
 
 ## D-cycle - S83 (pointer): System 9 row (a) built and rendered but HELD on branch `s83-wip` (f42ccbac) - S83_PURSE OK, DELVE_TEST OK, parse 0, but L29C soak C regresses (FAIL 2/2 with the edit, OK 1/1 on HEAD). Full entry on s83-wip. Not for merge yet. 2026-11-21T06:25:19-06:00 (game build)
+
+## D-cycle - S84: S83 (SYSTEM 9 ROW (a), THE MINIBOSS PURSE SPILLS AND A DELVER WALKS TO IT) LANDS ON laptop - THE L29C SOAK-C "REGRESSION" IS PRE-EXISTING ON HEAD, NOT S83. 2026-11-21T07:19:49-06:00 (game build)
+TAKE THIS NEXT: the 05:58 block names no new GAME BUILD row; my own S83 named the next step - find why L29C soak C fired 0 set pieces with the edit.
+MEASURED, NOT ARGUED: L29C on laptop HEAD 59403016 WITHOUT the S83 edit, three runs: soak ended state=fight frames=10801 fired={} (total=0),
+L29C_TEST FAIL - 3 of 3 (renders/cycles/s84/l29c_base0-2.log). S83's single green baseline (prisoner 1, total=1) was a lucky draw: Delve
+calls _rng.randomize() (delve.gd:53), so the soak is unseeded, and every run - base and edit - times out in "fight" at 10801 frames, so it sees
+at most a floor or two. The S83 edit is inert unless a purse-carrying miniboss dies in a LIVE fight. With the edit: 0 of 1 green (same 0) and
+B.miniboss all ok. So base 1/4, edit 0/3 - indistinguishable. FOR THE TEAM LEAD: L29C soak C is a flaky/red gate on HEAD (not a required gate);
+widening it (more frames, or seeding the soak) is test work, not owed by S83 - named so nobody re-blames the purse.
+WHAT LANDED: scripts/delve.gd + tools/_s83_purse.gd + renders/cycles/s83 taken from s83-wip f42ccbac (delve.gd unchanged a4edbf74..laptop, so
+no conflict; backup delve.gd.bak_s84). Full design entry is S83's on s83-wip; the lord's hoard (_loot) still splits as a number - next.
+RENDER LOOKED AT: s83_2_walked_to_it.png - the delver's hand down on the coin pile, pile on the flagstones, not sunk. Legible.
+GATES (verdict lines, laptop 59403016 + this edit, JESTS_NO_TWITCH=1, logs renders/cycles/s84/): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error;
+S83_PURSE OK (8 checks, 0 failed); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2146 samples off
+the floor (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/20294 (0.000%) raid_in_solid=0/10246 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 1.
+- No Twitch test, 0 bits, no account used.
+- Lock: claim 07:08:31, claim+25 = 07:33 (my lock line rounded it to 07:34 - a 29 s overstatement; the declared finish 07:30 was inside it).
+
+## D-cycle - S85: THE L29C ARM C RED WAS THE SOAK'S CLOCK, NOT THE SET PIECES - floor 3's fight outlasted the 180 s budget. 2026-11-21T08:22:00-06:00 (game build)
+TAKE THIS NEXT (07:58 block, GAME BUILD row): the named open defect is L29C arm C itself ("0 set pieces", state=fight frames=10801, red on HEAD x4).
+MEASURED (tools/_s85_diag.gd, same soak setup, logs renders/cycles/s85/diag.log + diag2.log): NOT A HANG. Run 2 state trace:
+floor 2 fight -> search @2307, descend @4047, floor 3 fight @7868 -> search @11738 (past the old 10800 cap), floor 4 fight @15731 -> search
+@18645, first set piece (ambush) @19758. Run 1's floor-2 fight alone took 3694 frames (unseeded RNG). The soak was simply being cut off
+mid-fight on floor 3 every run, before the party ever walked past a set piece. "The slime divides." was the last line only because it was the
+last thing said before the cap - the slimelings are killed and the fight ends (checked: slimeling carries no `splits`, def_of takes WAYS only
+for TYPES keys).
+FIX (tools/_l29c_test.gd only - no game code changed; backup .bak_s85): the soak ends the moment >= 1 set piece fires (all arm C asks), with
+the ceiling raised 60*180 -> 60*600 frames for a true stall. The red half is unchanged: a soak that fires nothing still ends at the ceiling
+or at "home" and FAILs arm C. NOT RED-PROVED THIS HOUR by perturbation (no time inside the window) - the 4 S84 base logs are the red arm on
+the old cap.
+GATES (verdict lines, laptop + merge origin/main 5c2b6507, logs renders/cycles/s85/): parse 0 SCRIPT ERROR / 0 Parse Error;
+L29C_TEST OK (CHECKS 33 FAILS 0; soak ended state=fight frames=18825 fired={ "ambush": 1 } (total=1)); TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2300 samples off the floor (home); TOWNWALK in_solid=0/20903 (0.000%) raid_in_solid=0/2270 (0.000%) PASS;
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- HONEST SLIP: I ran this hour's gates WITHOUT JESTS_NO_TWITCH=1. parse.log shows the bot token validated (bellmirebro), joined #jestsayin96
+  and subscribed 7 of 7 EventSub topics for the 300-frame parse run (and likely the Town-scene gates). No send/post line in any log; nothing
+  redeemed, 0 bits, no account action. Read-only connect - but it should have been off. Next run sets the env var.
+- Chat bot asks (Gear.ARMOUR alias, REWORK_DIVISOR / OIL_PER_HEAD constants): not taken this hour - window spent on the owed defect. Open.
+- Lock: claim 08:08:13, claim+25 = 08:33 computed first, declared 08:30.

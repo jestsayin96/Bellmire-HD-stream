@@ -14440,6 +14440,18 @@ that is the headless game connecting, the same as every lane's parse run. The bo
 and no bits were spent on any account.
 Next firing: own cycle. The four gates on this edit are **discharged**.
 
+## C-162 (21 Nov 2026 07:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (06:58 CT block, CONTENT row) gave content: "C-161 ticked. Free C-cycle, your own pick." No miniboss owed: origin/art names no committed body without a miniboss_feed.by_key entry (44 keys in by_key; the only unkeyed names are chibi variants of keyed bodies).
+Added (data/lore_lines.json only): epitaphs +12 (888 -> 900), descend +6 (541 -> 547), cleared +6 (526 -> 532), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c162` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c162` only.
+CODE WIRING: none; the three lists are already drawn from at random.
+## HUB - standing check, 21 Nov 2026 07:4x CT (machine CST = UTC-6). No row claimed.
+The TAKE THIS NEXT block (06:58 CT) names no build row for HUB - only "standing check, own cycle,
+do not publish". web/ tree hash on hub HEAD = origin/hub = origin/main = 02257b2f (byte-identical,
+nothing changed). `node --check web/app.js` OK. innerHTML appears only at the two page-owned sites
+(app.js:255, :301); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function code uses
+(hits are comments). One CSP meta present. web/ size 3,291,708 bytes. No web/ change, so no hostile-name
+re-run owed and NO READY TO PUBLISH claim. Untracked _hub_ready_shot.png in W is named, not deleted.
 ## B103 - THE ARMOURY'S PRICE GUARD WAS READING A TABLE NO SHOP CHARGES (21 Nov, 07:45 firing)
 
 Own cycle, taken on the row's own terms. I went looking for the next published number with no arm
@@ -14579,3 +14591,23 @@ counting them as faults. `armory` is kept as a literal in the const for the one 
 **NO TWITCH TEST THIS CYCLE. NO BITS, NO CHEER, NO MESSAGE SENT ON ANY ACCOUNT.** No Godot was
 launched at all, so not even a headless join happened. The bot posted nothing.
 Next firing: claim the :45 window early, run the four gates on this edit, and only then land it.
+U123 - 2026-11-21 07:5x CST - STAND-DOWN: CHAT BOT B103 HOLDS THE GODOT LOCK. NO .gd CHANGED, NO ENGINE LAUNCH
+Lock: read R's WORKING docs/RUN_LOCK.txt at 07:53 CST. Last line: "RUNNING 2026-11-21T07:52:30-06:00 (chat bot B103 ... cap 08:17, expected finish 08:00)", no IDLE from the chat bot after it (preceding IDLE was game build 07:20). tasklist showed no Godot yet (claim ~30 s old), so by the yield rule the RUNNING line is live and I did not claim over it. Expected finish 08:00 leaves too little of my :07 window for a safe windowed measure.
+Item unchanged: WORK_PLAN HUD row (U121/U122 open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout before touching feed_hud.gd.
+Next firing (08:52): re-read the working lock; if clear, one claim with expected finish <= :05 for tools/_u122_chron_width.gd (windowed, measure-only); no feed_hud.gd edit until the number shows a clip.
+Decision for Mr. E: none.
+## C-163 (21 Nov 2026 08:3x CST) - epitaph/descend/cleared top-up (no miniboss owed)
+TAKE THIS NEXT (07:58 CT block, CONTENT row) gave content: "C-162 ticked. Free C-cycle, your own pick." No miniboss owed: every body keyed on origin/art has a miniboss_feed.by_key entry (44 keys).
+Added (data/lore_lines.json only): epitaphs +12 (900 -> 912), descend +6 (547 -> 553), cleared +6 (532 -> 538), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c163` (zero-hit key, DO NOT WIRE).
+VALIDATION OK: four data files json.load; every pre-existing key and entry unchanged (lists append-only); new key: `_note_c163` only.
+CODE WIRING: none; the three lists are already drawn from at random.
+
+U124 - 2026-11-21 08:5x CST - U121's OPEN QUESTION ANSWERED: NO CHRONICLE LINE IS CUT AT THE RIGHT EDGE AT 100/125/150% (2x2, lord card up and down). NO .gd OF MINE CHANGED
+Lock: read R's WORKING RUN_LOCK.txt at 08:53 CST: last line QA tester IDLE 08:47:56, tasklist no Godot. Claim 08:54:36, relaunch 08:55:41 (tool fix), RELEASED 08:56:40 (IDLE written, Godot empty) - inside the :07 deadline and 15 min cap.
+Item: the measure U121/U122/U123 carried (hostile-feed row of the WORK_PLAN HUD block). New tools/_u122_chron_width.gd (windowed 1920x1080, lord fight 2x2): 14 ambient lines + hostile names, sampled every 60 frames for 480 frames at each scale; for each Chronicle Label, the drawn text width (font.get_multiline_string_size at the label's wrap width) vs the vellum rect and the panel rect, plus bottom vs panel, plus visible_characters/ratio.
+Result: U122_DONE checks=118 fails=0. Worst right-edge margin to the vellum was 16.0 px (100%: 19.1, 125%: 16.0, 150%: 27.5); to the panel 59+ px; every line's bottom inside the panel; vis_clip=false on every line.
+Answer to U121: "The wet is wa" / "is the worst o" was NOT a clip - lines arrive with a fade-in (modulate.a 0.55-0.98 seen mid-fade) and a single frame caught one mid-reveal. Nothing to fix in feed_hud.gd.
+LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll centred, "Dunn the Younger swings a stick at a lord only he can see." on two lines, ink clear of both spindles, card gone, pane labels clean.
+Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
+Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
+Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).

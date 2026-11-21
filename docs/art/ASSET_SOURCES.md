@@ -377,3 +377,15 @@ and read", not "what am I allowed to use".
 - Checked: the whole `_packs\Fantasy_Props_MegaKit\` tree by walking it, and the sibling `Fantasy_Props_MegaKit.zip` by listing its entries (517 files, same count; not extracted). The licence was read off disk this run, not from a search snippet.
 - The text reads, verbatim: "License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/" and "Models by @Quaternius". It also states this is the FREE standard subset of the Fantasy Props MegaKit; the PRO and SOURCE versions are paid and are not in this pack.
 - Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Fantasy_Props_MegaKit`.
+
+## PACK CATALOGUE - Fantasy_Ruins_Pack (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy_Ruins_Pack (folder `FantasyRuins_Ready`) | not named in the licence text; the file prefix is `3TD` | **CC0 1.0 Universal (Public Domain)** | `_packs\Fantasy_Ruins_Pack\FantasyRuins_Ready\3TD_CC0_License_EULA.pdf` | 110 on disk: 39 `.jpg`, 35 `.png`, 12 `.dts`, 12 `.dae`, 11 `.cs`, 1 `.pdf` (the licence) | permitted | not required |
+
+- Checked: every file in `_packs\Fantasy_Ruins_Pack\` by walking the tree (110 files). The sibling `Fantasy_Ruins_Pack.zip` was not opened in this firing.
+- The licence PDF was read off disk this run, not from a search snippet. Its text layer is a Calibri TrueType subset with no plain-text strings, so the text was recovered by decoding the three page content streams through the font's ToUnicode map. The recovered text is the Creative Commons CC0 legal code: a Statement of Purpose, the "Work made available under CC0" wording, and the grant "for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes".
+- The earlier catalogue line that called this licence "unreadable" (docs/PACK_CATALOGUE.md, Licence flags) is superseded by this entry.
+- Formats: `.dts` (Torque), `.dae` (Collada) and `.cs` (game-engine scripts). No glTF, GLB or FBX, so any use needs a conversion step. The `.cs` files are engine code and are not to be copied into the repo.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for this pack. Nothing is redistributed as an asset; any model that enters `assets/` must still be recorded in its own row.

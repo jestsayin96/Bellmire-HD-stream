@@ -1050,3 +1050,7 @@ IDLE 2026-11-21T15:50:02-06:00 - chat bot B110 done early, well inside the new H
 RUNNING 2026-11-21T16:08:09-06:00 (game build S93, claim 2026-11-21T16:08:09-06:00, cap 16:33, expected finish 16:33)
 
 IDLE 2026-11-21T16:14:59-06:00 - game build S93 done: Blower MB_FIT 1.01 + fogbound row + blower.glb.import (held out, no MB_NAME until C-169); _s51_names 42->45 made honest; all gates green. No Godot of mine alive. Claim 16:08:09, cap 16:33, declared 16:33. (game build)
+
+RUNNING 2026-11-21T16:42:07-06:00 (QA tester)
+
+RUNNING 2026-11-21T16:49:52-06:00 (chat bot B111, claim 2026-11-21T16:49:52-06:00, cap claim+25 = 17:14, HARD RELEASE :52 - declared finish 16:52 - four gate logs, split at the clock)

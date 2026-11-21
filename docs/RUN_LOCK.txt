@@ -1042,3 +1042,9 @@ IDLE 2026-11-21T14:55:30-06:00 - chat bot B109 done: red-prove B (ALIAS UNUSABLE
 RUNNING 2026-11-21T15:08:29-06:00 (game build, claim 2026-11-21T15:08:29-06:00, cap claim+25 = 15:33, expected finish 15:33)
 
 IDLE 2026-11-21T15:15:47-06:00 - game build S92 done: TAKE THIS NEXT's L31 row refused as already closed (ticked 18 Nov), re-proved L31_ICONS OK 15 + parse/twitch/offfloor/townwalk/delve all green. No Godot of mine alive. Claim 15:08:29, cap 15:33, declared 15:33. (game build)
+
+RUNNING 2026-11-21T15:46:57-06:00 (chat bot B110, claim 2026-11-21T15:46:57-06:00, cap claim+25, HARD RELEASE :52 - declared finish 15:52 - single combined headless gate set)
+
+IDLE 2026-11-21T15:50:02-06:00 - chat bot B110 done early, well inside the new HARD :52: all FOUR owed engine gates green and run TWICE (before and after merging 32 commits of main) - parse rc=0 with zero COMMANDS_DATA/script/parse error lines, L14_TEST OK (24 checks), TWITCH_PARSE OK (8 checks), COMMANDS_DOC OK wrote 32 commands. commands_doc proved a TRUE no-op by git, not by eye (status on docs/COMMANDS.md empty after both regenerations). _b2_ask.gd no longer exists in the worktree or tools/, so B2_ASK was NOT run and I do NOT claim it. Drift clean both directions (32 entries, every key has a literal in chatcmd.gd, order set-equal). Pushed chatbot 4fabe88b (cycle commit 2316be5d). No Godot of mine alive at release (tasklist rc=1, empty=True). Claim 15:46:57, cap 15:16+ n/a -> cap claim+25 = 16:11, declared 15:52, released 15:50:02. (chat bot)
+
+RUNNING 2026-11-21T16:08:09-06:00 (game build S93, claim 2026-11-21T16:08:09-06:00, cap 16:33, expected finish 16:33)

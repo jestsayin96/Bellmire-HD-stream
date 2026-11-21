@@ -1,0 +1,264 @@
+{
+ "key": "fuller",
+ "view": "front",
+ "bands": 10,
+ "errors": [],
+ "bounds_control": [
+  -1.48545,
+  -0.67069,
+  0.0,
+  1.80662,
+  1.16899,
+  2.66
+ ],
+ "bounds_split": [
+  -1.48545,
+  -0.67069,
+  0.0,
+  1.80662,
+  1.16899,
+  2.66
+ ],
+ "item_counts": {
+  "trough": 9,
+  "cloth": 3,
+  "folds": 3,
+  "liquor": 4,
+  "stocks": 13,
+  "man": 18,
+  "bar": 5,
+  "backside": 12,
+  "_covered": 67,
+  "_total": 67
+ },
+ "engine": "BLENDER_EEVEE",
+ "man_alone_px": 74791,
+ "floor_px": 0,
+ "man_seen_all": 0.9724,
+ "man_rows": [
+  127,
+  654
+ ],
+ "band_edges": [
+  127,
+  180,
+  232,
+  285,
+  338,
+  391,
+  443,
+  496,
+  549,
+  601,
+  654
+ ],
+ "rows_top_is_crown": true,
+ "band_rows": [
+  {
+   "band": 0,
+   "rows": [
+    127,
+    180
+   ],
+   "man_px": 4490,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 1,
+   "rows": [
+    180,
+    232
+   ],
+   "man_px": 8016,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 2,
+   "rows": [
+    232,
+    285
+   ],
+   "man_px": 11044,
+   "survival": 0.9373,
+   "hidden_px": 692,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 693,
+    "backside": 0
+   },
+   "culprit": "bar"
+  },
+  {
+   "band": 3,
+   "rows": [
+    285,
+    338
+   ],
+   "man_px": 7950,
+   "survival": 0.858,
+   "hidden_px": 1129,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 1129,
+    "backside": 0
+   },
+   "culprit": "bar"
+  },
+  {
+   "band": 4,
+   "rows": [
+    338,
+    391
+   ],
+   "man_px": 7361,
+   "survival": 0.9999,
+   "hidden_px": 1,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 1,
+    "backside": 0
+   },
+   "culprit": "bar"
+  },
+  {
+   "band": 5,
+   "rows": [
+    391,
+    443
+   ],
+   "man_px": 7704,
+   "survival": 0.9686,
+   "hidden_px": 242,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 245,
+    "backside": 0
+   },
+   "culprit": "bar"
+  },
+  {
+   "band": 6,
+   "rows": [
+    443,
+    496
+   ],
+   "man_px": 6013,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 7,
+   "rows": [
+    496,
+    549
+   ],
+   "man_px": 7311,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 8,
+   "rows": [
+    549,
+    601
+   ],
+   "man_px": 7062,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  },
+  {
+   "band": 9,
+   "rows": [
+    601,
+    654
+   ],
+   "man_px": 7840,
+   "survival": 1.0,
+   "hidden_px": 0,
+   "blame_px": {
+    "trough": 0,
+    "cloth": 0,
+    "folds": 0,
+    "liquor": 0,
+    "stocks": 0,
+    "bar": 0,
+    "backside": 0
+   },
+   "culprit": null
+  }
+ ],
+ "hidden_px": 2064,
+ "hidden_by_a_span_px": 2061,
+ "hidden_by_no_span_px": 3,
+ "hidden_by_no_span_frac": 4e-05,
+ "sheet_raw": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_backread\\_bandblame_fuller_front_raw.png",
+ "ok": true
+}

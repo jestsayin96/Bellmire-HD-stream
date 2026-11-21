@@ -1,0 +1,171 @@
+{
+ "key": "fuller",
+ "errors": [],
+ "views": {
+  "front": {
+   "man_alone_px": 74791,
+   "blame": {
+    "trough": {
+     "items": 9,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "cloth": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "folds": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "liquor": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "stocks": {
+     "items": 13,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "bar": {
+     "items": 5,
+     "hidden_px": 2068,
+     "hidden_frac": 0.0277
+    },
+    "backside": {
+     "items": 12,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.9724,
+   "all_rest_hidden_px": 2064,
+   "all_rest_hidden_frac": 0.0276,
+   "sum_of_parts_px": 2068,
+   "overlap_px": 4
+  },
+  "side": {
+   "man_alone_px": 52516,
+   "blame": {
+    "trough": {
+     "items": 9,
+     "hidden_px": 14040,
+     "hidden_frac": 0.2673
+    },
+    "cloth": {
+     "items": 3,
+     "hidden_px": 10525,
+     "hidden_frac": 0.2004
+    },
+    "folds": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "liquor": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "stocks": {
+     "items": 13,
+     "hidden_px": 8558,
+     "hidden_frac": 0.163
+    },
+    "bar": {
+     "items": 5,
+     "hidden_px": 1984,
+     "hidden_frac": 0.0378
+    },
+    "backside": {
+     "items": 12,
+     "hidden_px": 2911,
+     "hidden_frac": 0.0554
+    }
+   },
+   "man_seen_all": 0.4611,
+   "all_rest_hidden_px": 28301,
+   "all_rest_hidden_frac": 0.5389,
+   "sum_of_parts_px": 38018,
+   "overlap_px": 9717
+  },
+  "back": {
+   "man_alone_px": 74205,
+   "blame": {
+    "trough": {
+     "items": 9,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "cloth": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "folds": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "liquor": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "stocks": {
+     "items": 13,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "bar": {
+     "items": 5,
+     "hidden_px": 13,
+     "hidden_frac": 0.0002
+    },
+    "backside": {
+     "items": 12,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.9986,
+   "all_rest_hidden_px": 104,
+   "all_rest_hidden_frac": 0.0014,
+   "sum_of_parts_px": 13,
+   "overlap_px": -91
+  }
+ },
+ "bounds_control": [
+  -1.48545,
+  -0.67069,
+  0.0,
+  1.80662,
+  1.16899,
+  2.66
+ ],
+ "bounds_split": [
+  -1.48545,
+  -0.67069,
+  0.0,
+  1.80662,
+  1.16899,
+  2.66
+ ],
+ "item_counts": {
+  "trough": 9,
+  "cloth": 3,
+  "folds": 3,
+  "liquor": 4,
+  "stocks": 13,
+  "man": 18,
+  "bar": 5,
+  "backside": 12,
+  "_covered": 67,
+  "_total": 67
+ },
+ "engine": "BLENDER_EEVEE",
+ "ok": true
+}

@@ -232,11 +232,12 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; NO content lines yet, so miniboss_for holds it out.
 ## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; NO content lines yet, so miniboss_for holds it out.
 ## S72: content's C-149 ferryman lines are in (9 arrive / 8 fall), so the gate now lets it into the flooded draw.
+## S73: `winder` (43rd, Haulback in art's CANON, art's tag wood - field 5) joins wood; NO content lines yet, so miniboss_for holds it out.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader", "hooper"],
-    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
+    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))

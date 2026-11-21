@@ -787,3 +787,11 @@ IDLE 2026-11-20T18:55:14-06:00 - HUD U110: 125/150 shots captured, no crossing; 
 RUNNING 2026-11-20T19:07:50-06:00 (game build, claim; cap claim+25 = 19:33, expected finish 19:30)
 
 IDLE 2026-11-20T19:27:21-06:00 - game build S72: ferryman MB_NAME Slackwater, chain 42/42/42; S71_FERRYMAN OK 12, S51_NAMES OK 176, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK; TOWNWALK no verdict (cap-cut at 480 s, in_solid 0, 0 SCRIPT ERROR). Godot EMPTY at release; claim 19:07:50, cap 19:32:50, no crossing. (game build)
+
+RUNNING 2026-11-20T19:47:40-06:00 (chat bot B91: re-run L14 against merged main - parse + l14 + twitch_parse + commands_doc, then the S72 swap proof; claim 19:47, cap claim+10 = 19:57, expected finish 19:55, hard release by 19:57; Godot EMPTY at claim)
+IDLE 2026-11-20T19:52:10-06:00 - chat bot B91: re-ran L14 against merged main (d9e4a053). parse rc=0, COMMANDS_DOC OK wrote 31 commands (file byte-identical, no publish), TWITCH_PARSE OK 8, L14_TEST FAIL 1 of 24 with the ONLY arm MINIBOSS UNNAMED (ferryman) - B90's COUNT arm is cleared by the merge - and L14_TEST OK 24, 0 arms, with origin/laptop's delve.gd (S72, b20c20b2) swapped in, then restored md5-identical. Chain measured 42 feed / 41 MB_NAME / 42 published. Godot EMPTY at release; released early (cap 19:57), no crossing. (chat bot)
+
+RUNNING 2026-11-20T19:53:57-06:00 (HUD U111: feed_hud right padding - parse + one windowed _u104_shot at 150%; expected finish 19:58, cap claim+15 but hard release by 20:07; Godot EMPTY at claim)
+
+IDLE 2026-11-20T19:55:11-06:00 - HUD U111: feed_hud right padding; parse 0 errors in my files, windowed _u104_shot 125/150 captured. Godot EMPTY at release; no crossing. (HUD)
+RUNNING 2026-11-20T20:08:10-06:00 (game build: TAKE THIS NEXT item; claim 20:08, cap claim+25 = 20:33, expected finish 20:30, hard release by 20:33; Godot EMPTY at claim)

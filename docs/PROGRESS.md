@@ -3971,3 +3971,33 @@ TAKE THIS NEXT (17:58 CT block), CONTENT row: the Ferryman's feed lines and `_no
 - CODE WIRING for other lanes (not mine): scripts/delve.gd MB_NAME["ferryman"] = "Slackwater" (42nd key, S71 holds until this lands) + MB_FIT; dungeon_hd.gd THEME_MINIBOSS_MORE["flooded"]; chat bot commands.json "41 elites" -> 42 once MB_NAME lands.
 Next content: C-150.
 Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## D-cycle - S73 the Winder (43rd, Haulback): fitted, in the wood row, HELD on a named condition. 2026-11-20T20:08-06:00 (game build)
+TAKE THIS NEXT (19:58 CT block) gave GAME BUILD: S73 - wire the 43rd body, the Winder.
+- delve.gd MB_FIT["winder"] = 0.96, copied from art's _fit_winder_register.json pairs.winder.ratio (creature_h 2.34 /
+  hero 2.45, verdict GREEN, 3/3 proving views), cited in the line the way S71 cited the ferryman. Tag read off field 5
+  of the CANON tuple (minibosses.py:14974) = "wood"; dungeon_hd.gd THEME_MINIBOSS_MORE["wood"] = ["drover", "winder"].
+- MB_NAME["winder"] NOT added (S51): content has no by_key.winder yet. CANON title is "Haulback".
+- tools/_s73_winder.gd built in the S72 shape: FED is a NAMED CONDITION read off content's own file
+  (lore_lines.json miniboss_feed.by_key has "winder"), and every hold arm sits beside its post-hold arm, chosen by FED.
+  When content writes the feed (C-151 or later) the gate flips BY ITSELF - zero lines to edit - and the post-hold
+  arms then demand MB_NAME["winder"] == "Haulback", so it goes RED until this lane lands the name. That RED is the ask.
+- THE MECHANIC ("takes GROUND": drags hooked delvers back toward the chamber mouth): NOT BUILT, by the row. Plainly:
+  the engine DOES have a displacement primitive - MB_WAYS "hook" (delve.gd:2087, the gaoler) teleports the FARTHEST
+  delver IN to 1.6 m of the miniboss, cell-checked. The Winder's idea is the reverse direction (away, toward the
+  entry) and per-turn; it would be a new way "haul" on that same cell-checked move. It also needs content's act/broken
+  lines to fire at all (S34: a key with no act lines gets no way). Not invented this hour.
+- FIRST S73 RUN WAS RED AND RIGHT: "No loader found for winder.glb" - the merge brought the .glb with no .import. Ran
+  --headless --import, re-ran: green. (My own pre-merge untracked winder.glb differed from main's; moved aside as
+  winder.glb.bak_pre_s73_moved, main's is the one committed. Three art renders likewise backed up *.bak_pre_s73.)
+- Looked at renders/cycles/s73/winder_static.png: drum on a low frame, bowed man on the bar, three hooked ropes on the
+  floor, standing at 2.35 m. Reads as the CANON describes.
+- Gates: parse 0 SCRIPT ERROR / 0 Parse Error (rc 0, 29s); S73_WINDER OK 7 checks (hold shape); TWITCH_PARSE OK (8
+  checks); OFFFLOOR_VERDICT OK 0 of 2063 samples off the floor; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+  TOWNWALK: NO VERDICT LINE = RED (COORDINATION 15). It ran with 0 SCRIPT ERROR and in_solid 0 at every print, but
+  at ~1/20 real speed: run 1 reached T=40s of 120 in 240 s wall and hit my timeout; run 2 reached T=10s and I killed
+  it at 20:22. Cause measured, not guessed: Marvel Rivals + OBS were the top CPU processes on cruzader (Mr. E is
+  playing, maybe streaming), and my windowless Godot showed "Not Responding". My diff touches no town code (two
+  dungeon consts + a new tool), but a gate without a verdict is not a pass, so S73 is NOT pushed to laptop:
+  committed locally and pushed to origin s73-wip as a checkpoint. NEXT FIRING: re-run _townwalk.gd when the machine
+  is free, then push laptop.

@@ -14240,3 +14240,8 @@ I left them alone. Scratch `_b100.log` / `_b100b.log` deleted after reading.
 NO LIVE TWITCH TEST THIS HOUR: 0 bits, no cheer, no redemption, no sub, no channel setting read or
 written, no account signed into or acted as. bellmirebro spoke not once.
 Next firing: own cycle on my three files; the row is otherwise empty.
+
+## HUB 21 Nov 2026 05:4x CT - STANDING CHECK, web/ UNCHANGED (merged origin/main; no web edit)
+TAKE THIS NEXT (04:58 block) HUB row: stand-down ticked; "your own cycle on your three files; do not publish." It names no new work row, so this is a standing check, said plainly.
+Measured at 05:37-05:4x CT: `web` tree is 02257b2f on HEAD, origin/hub and origin/main (byte-identical); `git diff origin/main HEAD -- web docs/HUB_SECURITY.md` is empty. `node --check web/app.js` OK. innerHTML appears at exactly app.js:255 and :301 (both page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function outside comments; one CSP meta present; index.html line 49 comment ("two page-owned sites") still true. gh-pages is 05ac2679, unchanged; delta to origin/hub:web remains 3 files / +59 / -1 and is the supervisor's call.
+No web/ change, so the hostile-name test and ?state= / ?mock= checks are not owed and were not re-run; no screenshot taken (nothing rendered differently). Live-dot colour: unchanged from shipped. NOT claiming READY TO PUBLISH. No game file touched; no Godot run. Untracked worktree files unchanged and already answered (delete refused on this machine).

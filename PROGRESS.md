@@ -15137,3 +15137,8 @@ GATES (logs renders/cycles/s93/): parse 0 SCRIPT ERROR / 0 Parse Error; S33_DRAW
   in_solid=0/19106 raid_in_solid=0/4988 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 NOT LOOKED AT IN ENGINE: there is nothing to see yet - the gate keeps the Blower off every floor until its lines land; S33's
   drawn 0/400 is the evidence. The first render is owed the hour C-169 lands.
+S93 ADDENDUM (2026-11-21T16:14:59-06:00): the 15:58 TAKE THIS NEXT block reached me only on the push - it was on origin/laptop (455bd306), not main,
+  and I read the top of the plan from the main merge. Its game-build row says the Blower's engine row waits for C-169. I did the
+  MB_FIT/fogbound/.import half AHEAD of C-169 (the beadle precedent; gate-held, drawn 0/400) and did NOT write MB_NAME, which is
+  the row's actual red line. If the lead wants the early half reverted, it is three lines in e77b40c9. Next firing: read
+  origin/laptop's WORK_PLAN head as well as main's.

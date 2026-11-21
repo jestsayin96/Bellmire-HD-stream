@@ -57,16 +57,9 @@ static func install(tree: SceneTree, town: Node) -> void:
 		tree.node_added.connect(_on_added)
 	for n in town.find_children("*", "Label3D", true, false):
 		sort(n as Label3D)
-	# L31: the "Now fighting" banner (one per town, made once)
-	if town.get_node_or_null("FightBanner") == null:
-		var fb := FightBanner.new()
-		fb.town = town
-		town.add_child(fb)
-	# U104: the mana strip (S64 pool, supervisor ruling 10:16 item 3)
-	if town.get_node_or_null("ManaStrip") == null:
-		var ms := ManaStrip.new()
-		ms.town = town
-		town.add_child(ms)
+	# U126 (Mr. E 21 Nov 10:17 directive): NO floating "Now fighting" banner and NO floating mana
+	# strip on the game view. The boss name is the nameplate over its head (game lane S88); mana
+	# lives on the hub character sheet. FightBanner / ManaStrip classes stay below, never added.
 
 static func _on_added(n: Node) -> void:
 	if n is Label3D:

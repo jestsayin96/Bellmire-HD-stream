@@ -281,6 +281,10 @@ func _build() -> void:
     _panel.visible = false
 
 func card(title: String, sub: String, col: Color) -> void:
+    # U126 (Mr. E 21 Nov 10:17 directive): the boss info card is OUT of the Chronicle - it is for
+    # event text only; boss info lives on the hub. The card stays built but never shows.
+    if true:
+        return
     if _card == null:
         return
     _card_title.text = title

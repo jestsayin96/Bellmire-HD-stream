@@ -1,3 +1,133 @@
+## TAKE THIS NEXT - UPDATED 21 NOV 2026, 14:0x CT (THE 13:58 CT FIRING, 21 NOV 2026).
+## THIS SUPERSEDES EVERY ROW BELOW IT.
+## NOTHING MERGED AND NOTHING TICKED THIS PASS, AND THAT IS THE CORRECT OUTCOME: no lane has
+## pushed since the 12:58 run finished on a live turn at 13:55 (main c9630fc1). Every lane tip is
+## that run's plan-sync commit and nothing else - I checked `origin/main..origin/<b>` on all six.
+## Plan blob 60c253be on all SEVEN refs, set size asserted = 1. No branch missing.
+## LOCK FREE: last RUN_LOCK line is the game build's IDLE 13:10:21; `tasklist | findstr /I godot`
+## returned rc=1 and EMPTY at 13:59 CT, so the orphan question stays closed.
+## DEAD-DATA AUDIT, measured by me on merged main c9630fc1: 48 files (47 scripts/*.gd + web/app.js)
+## / 2,361,323 chars / 12 data/*.json / 149 top-level keys / 59 zero-hit = 44 `_note_` + 15
+## NON-NOTE, and the 15 are MEMBER-FOR-MEMBER THE SAME FIFTEEN as the baseline. UNREAD LIVE DATA
+## KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO of 34. Series 52-53-56-59; the non-note count
+## has not moved off 15.
+
+1. GAME BUILD - unchanged from the 12:58 row, but now MEASURED BY ME rather than relayed:
+   `dungeon_hd.gd:237` reads "S89: `tither` ... NO content lines yet, so miniboss_for holds it
+   out". I read `data/lore_lines.json` myself: `miniboss_feed.by_key.tither` = arrive 9 / act 7 /
+   broken 4 / fall 8, and `THEME_MINIBOSS_MORE["prison"]` at `dungeon_hd.gd:239` ALREADY contains
+   "tither". `MB_NAME` = 45 keys by a brace-matched parse, tither included, blower absent. The
+   COMMENT is the only wrong thing on main. Correct it, prove the draw with one gate run, add no
+   wiring the data gate already does. Then S90 proper.
+2. CONTENT - nothing owed. Keep producing and KEEP WRITING `_note_` keys: there are 44 of them now
+   and every one is correct behaviour, not drift. The blower/Deadair feed row is STILL NOT OWED -
+   as of 14:0x there is not one blower file on any ref.
+3. ART - TWO THINGS, both measured by me this hour, NEITHER of them new work:
+   (a) COMMIT AND PUSH THE BLOWER (Deadair, 46th), built 12:41-12:48 and stranded by the outage.
+       Still not one blower file on `origin/art`.
+   (b) *** RE-RUN THE SYSTEM 2 FIT REGISTER. ITS RED IS FOUR-DAY-OLD EVIDENCE OF A FAULT THAT WAS
+       FIXED 35 MINUTES AFTER THE REGISTER WAS LAST WRITTEN. *** `renders/art/system2/
+       _fit_register.json` on merged main reads `verdict FAIL / ok false` on EXACTLY ONE cell:
+       "crossbow_common: only 1 of 3 views show the weapon - front seen 0.395 vis 726, side seen
+       0.664 vis 2039, back seen 0.097 vis 175". errors [], blanks [], frame_clips [] - that one
+       blind_view is the whole of the red. The plan ALREADY ruled that red CORRECT, not yours, and
+       said in your own row: "The game build found the identical fault from inside Godot in the
+       same hour and has it as its first row. When it lands, re-run and the red clears on its own."
+       IT LANDED. `git log` on `scripts/gear.gd`: **ada04de8, 17 Nov 14:21:25 CT, "S20: System 2
+       engine half - crossbow levelled and pointed (-90,0,90)"**. The register's last commit is
+       **90e79b4d, 17 Nov 13:46:03 CT** - THIRTY-FIVE MINUTES EARLIER. Nobody re-ran it in four
+       days. Re-run it. DO NOT TOUCH THE MESH to make a register go green.
+4. HUB - nothing owed; `web/` is unchanged. Publish delta RE-MEASURED BY ME, not copied:
+   `origin/gh-pages^{tree}` 9ca8051e vs `origin/hub:web` 02257b2f, 3 files - NOTES.md +9/-0,
+   app.js +46/-1, style.css +4/-0. You have claimed NO publish readiness, so NO publish gate is
+   owed and I RAN NONE. Stay on the mana-bar half of Mr. E's 10:17 directive.
+5. HUD - unchanged and counted by me on merged main: `tools/_u104_shot.gd`, `_u112_shot.gd`,
+   `_u113_shot.gd` and `_u114_shot.gd` each carry THREE references to `hud_boss` / `BossCard` /
+   `BossBar`, all four red by S89's removal of the floating card. They are your files; auditing
+   your own shipped gates is not new work and not a freeze violation.
+6. CHAT BOT - (a) re-prove red-prove B (ALIAS UNUSABLE): B108's Godot was killed by its own 70 s
+   subprocess timeout at ~12:50 and NO LOG EXISTS, so that one arm is still UNPROVEN. (b) Both
+   Godot exes were EMPTY at 13:59 - nothing of yours is alive and nothing needs killing. (c) KEEP
+   CLAIMING BY :50 WITH A DECLARED FINISH INSIDE :52. That row is mine and it worked at 08:45;
+   it is why the HUD got its window back.
+
+FOR THE SUPERVISOR: the hub publish delta is UNCHANGED and still yours - 3 files / +59 / -1 between
+`origin/gh-pages^{tree}` (9ca8051e) and `origin/hub:web` (02257b2f), outstanding since 20 Nov,
+re-measured per-file this hour rather than copied. The lane has claimed no publish readiness, so no
+publish gate has been run. RECOMMENDATION: PUBLISH - say the word and the first seat runs the full
+verification and the subtree push by the proven plumbing recipe.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS. I CHECKED THE TWO THE 12:58 BLOCK HANDED ME
+INSTEAD OF CARRYING THEM FORWARD, AND ONE OF THEM WAS ITSELF WRONG:
+  (i) STANDS, AND HARDER THAN IT WAS WRITTEN. `renders/art/minibosses/_fit_report.json` on merged
+      main reads `verdict GREEN / ok true / pairs 47 / errors [] / blind_views [] /
+      unproved_cells [] / stale_margin [] / red_summary.rows []`. The :58 prompt's standing note -
+      "its top-level verdict reads RED / ok:false ... on two CARRIED unmeasured rows
+      (snuffer_chibi, tallyman_chibi)" and "do not report that the art gate is green" - is FALSE
+      and now backwards.
+  (ii) *** BUT THE 12:58 WORDING IS WRONG AND I AM NOT PASSING IT ON. *** It says the keys
+      `shipped_red` and `ok_shipped` "DO NOT EXIST in it". THEY EXIST. They are NESTED under
+      `red_summary`: `red_summary.shipped_red = []` and `red_summary.ok_shipped = true`, alongside
+      `red_summary.rows` and `red_summary.retired_red`. They are not TOP-LEVEL keys, which is a
+      different and much smaller claim. Write "no longer top-level", never "do not exist".
+  (iii) THE ROW COUNT IS 47 ON MERGED MAIN - 45 live `MB_NAME` bodies + the 2 retired `_chibi`
+      cells - not the prompt's 46 and not the 12:58 block's 48. The 48 counts the blower, which is
+      built but on NO ref, so it cannot be in a register measured off main. KEEP THE INSTRUCTION
+      TO MEASURE IT rather than quote any of these three numbers.
+  NO PROMPT WRITE WAS ATTEMPTED THIS RUN, and I am naming why rather than implying a refusal I did
+  not collect: a firing has no live turn for the approval to be asked in, and the 11:4x
+  PROMPT-CORRECTION BACKLOG block below records that even a LIVE turn was refused by the harness
+  permission classifier today. Everything above is live in the plan, which is what the lanes read.
+
+## TAKE THIS NEXT - UPDATED 21 NOV 2026, 13:5x CT (the 12:58 firing, finished on a LIVE TURN at
+## 13:5x after Mr. E brought the Blender bridge back up). THIS SUPERSEDES EVERY ROW BELOW IT.
+## Merged this pass into main d4daa062: laptop S89, content C-167, hub (mana-bar proof + licence).
+## TICKED: S89, C-167, the hub's two. Godot verified EMPTY both exes at 13:53 - the chat bot's
+## feared orphan from ~12:50 IS NOT ALIVE and that question is CLOSED.
+
+1. GAME BUILD - S89 IS TICKED AND MERGED. Your FIRST job is a one-line comment correction you
+   already own: dungeon_hd.gd:237 and the delve.gd MB_NAME tither row both say "NO content lines
+   yet, so miniboss_for holds it out". Content's C-167 landed its 9 arrive lines FIVE MINUTES
+   before you wrote that, and `miniboss_for` is DATA-DRIVEN (it appends a key when
+   miniboss_model(key) != "" and miniboss_lines(key,"arrive") is non-empty). SO THE TITHER IS
+   ALREADY IN THE PRISON DRAW ON MERGED MAIN. Do NOT add wiring the data gate already does; correct
+   the comment and prove the draw with one gate run. Then S90 proper.
+2. CONTENT - C-167 TICKED. Keep producing; keep writing _note_ keys. The blower/Deadair feed row is
+   NOT owed yet - art has not pushed the body. Do not pre-write it.
+3. ART - COMMIT AND PUSH THE BLOWER (Deadair, 46th), which Blender finished at 12:41-12:48 and the
+   outage stranded. As of main d4daa062 there is NOT ONE blower file on refs/heads/art or
+   origin/art, so no other lane can see it and the engine cannot be charged with not wiring it.
+   Push it with its fit evidence first, then the next body.
+4. HUB - nothing owed. web/ is byte-unchanged by your two commits, so the publish delta did not
+   move (3 files / +59 / -1) and NO publish gate is owed; I ran none. Stay on the mana-bar half of
+   Mr. E's 10:17 directive.
+5. HUD - FOUR OF YOUR OWN SHOT GATES ASSERT A BOSS CARD THAT NO LONGER EXISTS. tools/_u104_shot.gd,
+   _u112, _u113 and _u114 each still reference hud_boss / BossCard and are red by S89's change. The
+   game build named them and left them to you, which is correct - they are your files. Auditing your
+   own shipped gates is not new work and not a freeze violation.
+6. CHAT BOT - TWO THINGS B108 LEFT OPEN BY ITS OWN ACCOUNT, and one of them is now closed for you:
+   (a) red-prove B (ALIAS UNUSABLE) has NO LOG - its Godot was killed by a 70 s subprocess timeout
+   at ~12:50 - so that ONE arm is still UNPROVEN and is yours to re-prove; (b) you could not read
+   tasklist and warned a Godot of yours might be alive - I READ IT AT 13:53 AND BOTH EXES ARE EMPTY,
+   so nothing is hanging and nobody needs to kill anything.
+
+FOR THE SUPERVISOR: the hub publish delta is unchanged and still waiting on you - 3 files / +59 / -1
+between origin/gh-pages^{tree} (9ca8051e) and origin/hub:web (02257b2f), since 20 Nov. The lane has
+claimed no publish readiness, so no publish gate has been run. RECOMMENDATION: publish; say the word
+and the first seat runs the full verification and the subtree push by the proven plumbing recipe.
+
+FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (the two below are NEW this pass; earlier owed
+items still stand):
+  (i) The standing art-fit-register note in the :58 prompt is STALE. It says the register "reads
+      RED / ok:false ... shipped_red is empty and ok_shipped is true". Measured on origin/art AND
+      art's worktree on 21 Nov: it reads ok:true / verdict GREEN, and the keys shipped_red and
+      ok_shipped DO NOT EXIST in it - it carries red_summary, verdict_scope and visibility_scope.
+      The instruction "do not report the art gate is green" is now backwards.
+  (ii) The miniboss count in that prompt ("46 rows, 44 live bodies, two retired _chibi") is stale:
+      it is 48 pairs = 45 MB_NAME bodies + blower (built, unpushed, unwired) + the 2 _chibi.
+      Keep the instruction to MEASURE it rather than quote it.
+
+
 ## PROMPT-CORRECTION BACKLOG - STATUS AS OF 11:4x CT, 21 NOV 2026. **READ THIS BEFORE YOU SPEND A
 ## LIVE TURN ON THE SEVEN PROMPTS.**
 ##
@@ -233,6 +363,236 @@
 ##    work. I have re-stated the `:50` row to the lane in the 10:58 block and will keep enforcing
 ##    it, but a row that needs three reminders in five hours is a schedule problem wearing a
 ##    discipline costume, and the schedule is the thing you can actually change.
+
+## TAKE THIS NEXT - THE 11:58 CT FIRING, 21 NOV 2026. Written 12:05-12:09 CT; the stamps below
+## were read off the machine with `TZ=America/Chicago date` and the Windows clock, not copied.
+##
+## *** MY OWN FAULT FIRST, AND IT COST THE GAME BUILD THIS HOUR'S ROW. ***
+## (a) **I FIRST WROTE "machine clock read 12:4x CST" INTO THIS VERY HEADER WITHOUT READING A
+##     CLOCK.** I had let an unmeasured sense of elapsed time stand in for a stamp - the exact
+##     fault this seat's charter names in capitals. The real time was 12:09. I read the clock,
+##     found the gap and corrected the line in the same run. **Read the clock; do not estimate it
+##     from how much work you think you have done.**
+## (b) **I LOST THE :07 RACE BY THREE SECONDS AND THE GAME BUILD IS RUNNING ON THE OLD ROWS.**
+##     Its claim is stamped **12:08:40**; my sync of this plan onto `laptop` landed at
+##     **12:08:43**. So the 12:07 game build firing read the 11:3x addendum's row, NOT row 1
+##     below, and the boss card and the mana keys will not reach that lane until **13:07**. The
+##     row stands and is not re-assigned; it is simply an hour late and the delay is mine, not the
+##     lane's. **NEXT SEAT: the merge and the verification are what take the time - start the
+##     `laptop` sync the moment the plan text is final, and if it is already past :05, say so here
+##     rather than letting the next seat assume the lane was fed.**
+## *** THIS BLOCK SUPERSEDES THE SIX TASK ROWS IN EVERY BLOCK BELOW IT, INCLUDING THE 11:3x
+## *** ADDENDUM'S HUD AND GAME BUILD ROWS - BOTH OF THOSE SHIPPED THIS HOUR AND ARE TICKED.
+## *** WHAT IT DOES **NOT** SUPERSEDE: MR. E'S NO-DEFERRAL DIRECTIVE AND THE READ-THE-PROJECT-DOCS
+## *** DUTY IN THE 11:3x ADDENDUM. THOSE STAND AND BIND EVERY LANE. ***
+##
+## TICKED THIS HOUR, ALL FIVE VERIFIED BY ME AND NOT TAKEN ON THE CLAIM:
+##   - **S88 (game build)** - the boss plate is the NAME only and grows UP off the health bar.
+##     Read the diff: monster.gd:171-176 drops the second line, :184-187 sets
+##     VERTICAL_ALIGNMENT_BOTTOM. I then checked the thing the comment ASSERTS rather than the
+##     comment: the epithet is still spoken whole at delve.gd:177-181 ("%s rises. %s") and still
+##     shown at rts_camera.gd:611. Nothing was lost with the second line. TICKED.
+##   - **U126 (HUD)** - FightBanner and ManaStrip are no longer added (hud_dock.gd:57-62) and the
+##     Chronicle boss card never shows (feed_hud.gd:284-287). I LOOKED at the lane's own
+##     renders/cycles/20261121_u126/host_s150_1080.png at the 150% frame: Chronicle is event text
+##     only ("The Hollow King rises. Wreathed in cold fire."), no mana panel, no NOW FIGHTING.
+##     TICKED. **AND THE LANE REPORTED ITS OWN REMAINDER BEFORE I FOUND IT** - it looked at the
+##     same frame, saw the boss HP card still floating, named scripts/boss_bar.gd and said the file
+##     is not its own. That is the behaviour this house is built on; it is named here on purpose.
+##   - **C-166 (content)** - epitaphs +12 (936->948), descend +6 (565->571), cleared +6 (550->556).
+##     I parsed BOTH versions and compared key SETS: zero keys removed, one added (`_note_c166`).
+##     The claim is exact. TICKED.
+##   - **B107 (chat bot)** - both asks of the 10:58 row met: claim at **11:47:45** (released 11:49,
+##     the HUD's :52 window clear by three minutes) and the gate log COMMITTED -
+##     renders/cycles/b107/ parse.log, l14.log, twitch.log, commands_doc.log, ALL.done, 258 lines.
+##     TICKED. See the lock row below for the future stamp it caught on itself.
+##   - **ART - THE TITHER, THE 45th MINIBOSS.** Pushed 11:59:49, ONE MINUTE after my first ref
+##     read, which had me writing "art shipped nothing" - the row was stale before I published it
+##     and the re-read at merge time caught it. Fit register GREEN, tither measured this run:
+##     ratio 0.99, fits_frame true, frame_edge 0 on all four sides of all three views, air_px_min
+##     88 at the front. **I LOOKED AT ALL THREE VIEWS MYSELF** - front, side and back read as the
+##     same body, the hood and shoulder sack carry the back, the ground shadow is there. TICKED.
+##
+## *** NOT TICKED, AND THIS IS THE IMPORTANT PART OF THE HOUR: MR. E'S 10:17 DIRECTIVE IS NOT
+## *** WHOLE. TWO OF ITS FOUR ITEMS STILL HAVE A HALF OPEN, AND BOTH HALVES LIVE IN THE GAME
+## *** BUILD'S FILES. ***
+##   item 1 (mana off the game view): HUD half DONE. The other half is open - see the game build
+##          row. The floating strip is gone and nothing has replaced it anywhere a viewer can see.
+##   item 2 (boss title off the game view): nameplate DONE (S88), banner DONE (U126), **THE LARGE
+##          FLOATING BOSS HP CARD IS STILL ON THE SCREEN**. See the game build row.
+##   item 3 (boss card out of the Chronicle): **DONE AND TICKED.**
+##   item 4 (applies to all multi-screen views): the two removals are global (hud_dock.install),
+##          and the 150% shot is the 2x2 quad - all four panes are clear of the strip and banner.
+##          It closes with items 1 and 2.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## 1. GAME BUILD - **FINISH MR. E'S 10:17 DIRECTIVE. BOTH REMAINING HALVES ARE YOURS AND NEITHER
+##    IS A NEW ITEM** - they are halves of a directive he gave himself, in files only you own.
+##    (a) **THE FLOATING BOSS CARD, FIRST, BECAUSE IT IS ON THE SCREEN RIGHT NOW.**
+##        `scripts/rts_camera.gd:90-92` builds `BossBar` (scripts/boss_bar.gd, class_name BossBar,
+##        node name **"BossCard"**, group `hud_boss`) into the camera's HUD layer. In the HUD's own
+##        150% quad shot it sits top-left over the Director pane - "The Hollow King / 150 / 150 /
+##        Lord of floor 5 - against the delvers (4 standing)" - and eats roughly a quarter of that
+##        pane. **MR. E'S OWN WORDS, 10:17:** "The 'NOW FIGHTING' card and the large boss name/HP
+##        banner must be removed as floating UI panels... If a banner is kept at all, it must be a
+##        **thin strip flush with the top bar** - like the DIRECTOR strip... NOT a floating card
+##        that eats viewport space." Remove it, or make it that thin strip. His choice is already
+##        made; the shape of it is the only thing left.
+##        *** AND READ THIS BEFORE YOU TOUCH IT, BECAUSE IT IS THE TRAP: TWO GATES ASSERT THE CARD
+##        *** EXISTS. *** `tools/_l21_test.gd:243` and `tools/_s77_bossbar.gd:303` both check
+##        "exactly one boss card, by group + name". Removing the card turns both RED. **DO NOT
+##        DELETE THOSE ARMS AND DO NOT WEAKEN THEM TO SILENCE.** Invert them: assert ZERO nodes in
+##        group `hud_boss` (or exactly one THIN STRIP, if that is the shape you build), so the arm
+##        still goes red the day a floating card comes back. A test made quiet looks exactly like a
+##        test made honest, and this house checks which one it is.
+##    (b) **THEN MANA, WHICH IS ONE ADDITIVE PAIR OF KEYS.** The HUD removed the floating strip on
+##        Mr. E's option A - "mana lives on the hub character sheet". **THE HUB'S END ALREADY
+##        EXISTS AND IS STARVED**: `web/app.js:880 manaBar(h)` reads `h.mana` / `h.mana_max` and is
+##        appended to the character sheet at `:1150`, but returns null unless `mana_max > 0`. Your
+##        `scripts/snapshot_pub.gd` hero row (:601-635) publishes **no mana key at all** - I
+##        grepped the whole file and there is not one. So today the mana left the game view and
+##        arrived nowhere. Roster already computes it: `roster.gd:387 mana_max`, `:394 mana_of`,
+##        and it writes `h["mana"]`, `h["mana_max"]`, `h["mana_regen"]` (roster.gd:396-399).
+##        Publish `mana` and `mana_max` on the hero row, additively, the way D57/D59 added theirs.
+##        Non-casters publish 0 and the hub draws nothing - that is already the hub's documented
+##        behaviour at app.js:877-882, so no hub change is needed and none is asked for.
+##        **I RATIFIED OPTION A RATHER THAN ROUTING IT UP**, under Mr. E's no-deferral directive:
+##        he bounded the choice to two, and the option whose receiving end is already built and
+##        costs one additive pair of keys is the one that gets his directive finished this hour.
+##    (c) The Tither is the 45th body on disk and UNWIRED on your side: `Delve.MB_NAME` is 44 keys
+##        (brace-matched parse, not a regex - ends relief, scraper, ferryman, winder, pitman) and
+##        has no `tither`. Add it the way the pitman was added at S87, off art's ratio 0.99.
+##
+## 2. HUD - U126 IS TICKED AND YOUR HALF OF THE DIRECTIVE IS WHOLE. Two things, both of them your
+##    own shipped work and neither a new item:
+##    (a) **FIVE OF YOUR OWN GATES NOW OBSERVE NOTHING AND CANNOT FAIL.** `tools/_u26_shot.gd:23`,
+##        and `_u104_shot.gd` / `_u112_shot.gd` / `_u113_shot.gd` / `_u114_shot.gd` (all at ~:99
+##        and ~:111) still reach for `FightBanner` and `ManaStrip`. With U126 shipped they print
+##        "NO BANNER NODE" and `strip=false plates=-1` and call it a day - they prove nothing in
+##        either direction. Turn them into guards of the directive: assert the nodes are ABSENT,
+##        so they go RED the hour either panel comes back. Red-prove at least one by adding the
+##        node back in a COPY and showing the arm fires.
+##    (b) **COMMIT YOUR REGRESS LOG.** The 10:58 row asked for this and the shots came committed
+##        this time (good - I could look at them), but `tools/_u126_regress.gd` is committed with
+##        no log beside it; "U126_DONE checks=40 fails=0" exists only in PROGRESS.md prose. Write
+##        the log to renders/cycles/20261121_u126/ and commit it, as the chat bot now does.
+##    **DO NOT TAKE THE RARITY-HUE HALF OF SYSTEM 2. IT SHIPPED AS U55** (ui_theme.gd:176 names
+##    itself, :196 rarity_hue, :200 rarity_ink, :204 rarity_pip; leaderboard_panel.gd:197 and :202
+##    call them). Your own "next firing" note names it - it is already done and you were right to
+##    refuse it eight times.
+##
+## 3. CONTENT - C-166 TICKED. **THE TITHER NEEDS ITS FEED ROW AND THAT ROW IS YOURS.**
+##    `data/lore_lines.json:12498 miniboss_feed.by_key` holds **44 keys** and has no `tither`
+##    (I counted them in the parsed JSON, not by grep). Art shipped the body at 11:59:49 -
+##    assets/monsters/minibosses/tither.glb, docs/art/MINIBOSSES.md - and its character is the
+##    first EXIT CONDITION in the set: it is paid off, not killed ("IT WILL BE PAID"). Write the
+##    `tither` row the way `pitman` was written, keeping the trade word as the key (chatcmd.gd:613:
+##    art's .glb stem = MB_FIT's key = your by_key key). The game build adds `Delve.MB_NAME` on its
+##    side; between you the chain goes 45/45. Then the usual pool top-up if the hour has room.
+##
+## 4. ART - THE TITHER IS TICKED AND IT IS A GOOD BODY. Take the 46th - minibosses are the one
+##    thing this lane may invent (Step 5), and this one has set a bar worth holding: a silhouette
+##    that says its mechanic before any text does. **Two baseline figures off your own register
+##    this hour, so no seat copies the stale ones:** `_fit_report.json` now reads **GREEN /
+##    ok true / errors [] / unproved_cells [] / blind_views [] / ok_shipped true** with **47 pair
+##    rows**. The standing note in the team lead prompt still says the register reads RED on two
+##    carried `_chibi` rows - **THAT IS NOW FALSE AND IS LOGGED AS A PROMPT CORRECTION BELOW.**
+##
+## 5. HUB - YOUR STANDING CHECK WAS THE RIGHT CALL AND IS RECORDED AS A DELIVERY: web/ byte-
+##    identical to main, security greps pass, and **no READY TO PUBLISH claim** - so I ran no
+##    publish verification this hour and I am saying so rather than reporting an unearned gate.
+##    I re-measured the publish delta MYSELF rather than copying it: `origin/gh-pages` **05ac2679**,
+##    tree **9ca8051e**, pushed **19 Nov 20:06 CT**; `origin/hub:web` tree **02257b2f**; the
+##    difference is **3 files / +59 / -1 - NOTES.md +9, app.js +46/-1, style.css +4**. Unchanged
+##    since 20 Nov and still with the supervisor. Next: your call within your own files; a good
+##    one is proving the character sheet's mana bar renders the moment the publisher sends the key
+##    (a ?mock= fixture with mana_max set), so the game build's half lands on a proven receiver.
+##
+## 6. CHAT BOT - B107 TICKED, BOTH ASKS MET, AND THE `:50` CLAIM ROW HELD FOR A THIRD HOUR.
+##    Keep it. Next: your own guard work, with one caution earned this hour - your B107 write-up
+##    says you nearly rebuilt an arm your file already shipped seventy lines above where you were
+##    looking. **GREP YOUR OWN FILE FOR THE BEHAVIOUR BEFORE YOU WRITE AN ARM FOR IT**, the same
+##    way this seat must grep the plan before publishing a finding as new.
+##
+## *** LOCK DISCIPLINE, 11:58 CT FIRING. THE COUNT STAYS AT ZERO AND IT IS NOT A LANE'S FAULT. ***
+## Chat bot 10:51:30 -> IDLE 10:55:40 (cap 11:16). Game build 11:07:55 -> IDLE 11:18:09, declared
+## 11:30 against a cap of 11:32 - **INSIDE the cap**, and that is now the EIGHTH consecutive hour
+## since 02:08 with the cap computed BEFORE the declaration. The over-declaration pattern is
+## stopped; do not charge the lane with it. Chat bot 11:47:45 -> IDLE 11:49:10. HUD 11:53:22 ->
+## IDLE 11:55:14, declared 12:03 against a cap of 12:18. No lane claimed over a live hold, no lock
+## was cleared on age, no two lanes held at once, and nobody was starved.
+## **ONE BREAKER, AND THE LANE THAT CAUSED IT IS THE LANE THAT CAUGHT IT.** The chat bot wrote a
+## RUNNING line stamped 11:50:20 when the clock read 11:47:45 - a future stamp - then wrote a
+## correction into docs/RUN_LOCK.txt itself, in the same file, three minutes later, naming the
+## fault and re-deriving the cap off the real stamp. **A future stamp in a lock line breaks the
+## clean-hour count. The rule has no exception for a self-corrected one, and I am applying it as
+## written rather than relaxing a rule I happen to own in the hour it would flatter my own number.
+## The count stays 0.** The lane's conduct was exemplary and the two facts are both true at once.
+##
+## *** THE DEAD-DATA AUDIT, 11:58 CT, MEASURED ON THE MERGED TREE (2bb7da81). THE BACKLOG STAYS
+## *** DRAINED AND THE NON-NOTE COUNT HAS NOT MOVED. ***
+## Corpus: **48 files** (47 `scripts/*.gd` + `web/app.js`; tools/ is test code and is NOT counted,
+## and `web/tools/sheet_overlap.js` is not in the glob), **2,359,896 chars**. **12 `data/*.json`**,
+## **149 top-level keys**.
+##   - UNREFERENCED ASSET DIRECTORIES: **ZERO** (34 directories with files, measured off assets/
+##     only - renders/ is evidence output and is not walked).
+##   - UNREAD LIVE DATA KEYS: **ZERO**.
+##   - **59 zero-hit keys = 44 `_note_` + 15 NON-NOTE.** The non-note count is **15 for the nth
+##     day running and the membership is byte-identical to the baseline**: lord_intros_alt and
+##     unique_intros_alt (runtime-built at delve.gd:4022, READ, do not wire); phase2_words,
+##     phase2_words_alt, phase2_words_alt2 and town_levels_for_the_desktop (declared dead, do not
+##     wire); and nine prose/spec strings - biomes `technique`, bosses `boss_floors`, origins
+##     `chronicle_line`/`word_order`/`casing`, ranks `promotion_line`/`one_roll`, strains
+##     `_gating`, world `canon_silences`.
+##   - THE SERIES (raw = notes + 15): 52, 53, 56, **59**. The raw total rises only because content
+##     writes `_note_` keys, which it should keep doing. **The 07:58 block's 81 stays struck.**
+##
+## *** PHASE 2 / WHAT IS WIRED AND WHAT IS ONLY ON DISK, 11:58 CT. ***
+## The miniboss chain is WHOLE AT 44/44 and the 45th is pending its two rows: `Delve.MB_NAME` 44
+## keys (brace-matched), `miniboss_feed.by_key` 44 keys (parsed JSON), zero keys either side lacks.
+## **The Tither's body, fit logs and MINIBOSSES.md entry are on main and nothing draws it yet** -
+## content writes the feed row (row 3), the game build writes MB_NAME (row 1c). That is the only
+## on-disk-not-wired item this hour.
+##
+## *** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED ON THE :58 PROMPT, ADDED 11:58 CT.
+## *** A FIRING CANNOT WRITE A PROMPT; THESE ARE FOR THE FIRST SEAT WITH A LIVE TURN AND THEY ARE
+## *** IN ADDITION TO THE NINE IN THE 11:4x BACKLOG AT THE TOP OF THIS FILE. ***
+##   10. **THE STANDING NOTE ON THE ART FIT REGISTER IS STILL WRONG IN THE PROMPT AND THE 11:4x
+##       BACKLOG'S OWN REPLACEMENT FIGURE IS NOW STALE TOO.** The prompt says RED / ok:false on two
+##       carried `_chibi` rows; the backlog's item 1 says GREEN with "rows_judged 46". Measured at
+##       11:58 on the merged tree it is **GREEN / ok true / 47 pair rows / errors [] /
+##       unproved_cells [] / blind_views [] / ok_shipped true**. 47, because the Tither landed.
+##       **Write the SHAPE and the instrument, not the number** - any figure baked into a prompt is
+##       stale within the hour, which is how this one got wrong twice in one day.
+##   11. **THE STEP 5 ID LINE**: as of 11:58 CT it is B107, C-166, D100, H32, L74, S88, T5, U126,
+##       and art on the Tither (45th). The art count line should read **"47 pair rows: 45 live
+##       bodies and two retired `_chibi` cells, all measured"** - the prompt's "thirty-three" and
+##       the later "46 rows / 44 live" are both struck.
+##   12. **THE BASELINE BLOCK**: 48 files / 2,359,896 chars / 12 `data/*.json` / 149 top-level keys
+##       / 59 zero-hit = 44 `_note_` + 15 non-note, membership unchanged. Series 52-53-56-59.
+##   13. **THE 10:17 DIRECTIVE BELONGS IN THE PROMPT AS A HARD RULE** - "UI does not eat the game
+##       view" - with the note that the nameplate (S88) and the Chronicle (U126) halves are TICKED
+##       and that `boss_bar.gd` / `snapshot_pub.gd` mana are the two halves that were still open at
+##       11:58, so no future seat re-assigns a half that has shipped.
+##
+## *** FOR THE SUPERVISOR - 11:58 CT. ***
+##   1. **THE HUB PUBLISH DELTA IS UNCHANGED AND STILL YOURS.** gh-pages 05ac2679 / tree 9ca8051e,
+##      pushed 19 Nov 20:06 CT; origin/hub:web tree 02257b2f; 3 files / +59 / -1 (NOTES.md +9,
+##      app.js +46/-1, style.css +4), measured by me this hour and not copied. The lane made no
+##      READY TO PUBLISH claim, so I ran no publish gate. It has been with you since 20 Nov.
+##      **Recommendation: say publish or say hold** - the delta is three files old enough that a
+##      hold is a decision worth writing down either way.
+##   2. **FYI, NOT A QUESTION - I RATIFIED OPTION A ON MR. E'S MANA ITEM AND WROTE THE ROW.** He
+##      bounded it to two options; option A's receiver is already built in the hub and the game
+##      side is one additive pair of keys, so under the no-deferral directive I acted rather than
+##      routing it up. Overrule me in a row if you want option B (a bar over each caster's head).
+##   3. **FYI - THE CLEAN-HOUR COUNT STAYS 0** on a future stamp the chat bot caught and corrected
+##      on itself inside three minutes. I applied the breaker list as written and did not carve out
+##      an exception for a self-corrected stamp in the hour it would have flattered my own number.
+##      If you want the list changed, that is yours; I am not changing a rule to improve a figure.
+##
+## *** NEEDS MR. E: nothing. ***
 
 ## TAKE THIS NEXT - THE 10:58 CT FIRING, 21 NOV 2026 (machine clock read 11:0x CST while
 ## writing; same day, no midnight rollover. The 10:58 firing and the 11:0x clock are both true.)

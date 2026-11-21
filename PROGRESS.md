@@ -14704,3 +14704,10 @@ TAKE THIS NEXT (09:58 CT block, CONTENT row) gave content: "C-164 ticked. Free C
 Added (data/lore_lines.json only): epitaphs +12 (924 -> 936), descend +6 (559 -> 565), cleared +6 (544 -> 550), all unique against existing lines, ASCII, plain register, no mechanics, no floor counts; `_note_c165` (zero-hit key, DO NOT WIRE).
 VALIDATION OK: lore_lines.json json.loads; every pre-existing key and entry unchanged (lists append-only, prefixes identical); new key: `_note_c165` only; no duplicates, no blanks. items/bosses/potions untouched and parse.
 CODE WIRING: none; the three lists are already drawn from at random.
+
+## HUB 21 Nov 2026 10:4x CT - standing check, nothing shipped in web/
+- TAKE THIS NEXT (09:58 block) HUB row = standing check, own cycle, do not publish. Taken as written.
+- origin/hub:web == origin/main:web == HEAD:web == 02257b2f (re-run by me). node --check app.js OK.
+- Security greps: innerHTML only at app.js:255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only); CSP meta present (1). index.html:49 comment still true.
+- web/ unchanged so the hostile-name test is not owed; no screenshot taken (no change to look at); no live-dot change. No READY TO PUBLISH claim. gh-pages untouched (05ac2679).
+- Untracked _hub_ready_shot.png in W is pre-existing, named here, delete refused on this machine.

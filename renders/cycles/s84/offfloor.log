@@ -1,0 +1,75 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The lamp is lit and the rope is checked.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed cave spider, 2 slimes.
+FEED Fresh flowers on a grave a hundred years older than flowers.
+FEED Hero2 casts Smite at slime.
+FEED Hero6 casts Frost at slime.
+FEED The slime divides.
+FEED Hero1 reaches for bolt and the scar reaches back (9 vs DC 10).
+FEED Hero2's bolt hisses and goes out (8 vs DC 10).
+FEED Hero6 casts Frost at hollowed cave spider.
+FEED Hero1 turns on the wounded slimeling to finish it.
+FEED Hero2 turns on the wounded slimeling to finish it.
+FEED Hero3 turns on the wounded slimeling to finish it.
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero5 turns on the wounded slimeling to finish it.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero3 rolls a 20 - and the slimeling is gone.
+FEED Hero6 searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Floor 1 is clear. Wash the hands, mend the strap.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 2 bog frogs, 1 puglin.
+FEED Hero6 mouths bolt. Nothing comes of it (9 vs DC 11).
+FEED Hero2 casts Smite at puglin.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero2 breathes in for bolt and breathes out nothing (9 vs DC 11).
+FEED Hero2 casts Smite at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero1 casts Bolt at bog frog.
+FEED Hero6 searches (Investigation 18) and turns up 26 gold on floor 2.
+FEED The last of the noise stops, and the quiet is the loud part.
+FEED Hero6 searches the chest - Successfully found loot!! 36 gold (Investigation 23 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 bone bowman, 1 cave spider, 1 hollowed skeleton minion, 1 risen bones.
+FEED Hero2 casts Bolt at hollowed skeleton minion.
+FEED Hero2's bolt goes thin as breath on cold iron (7 vs DC 11).
+FEED Hero2 casts Smite at risen bones.
+FEED Hero2 casts Smite at cave spider.
+FEED Hero6 speaks bolt. The scar spells it backwards (8 vs DC 11).
+FEED Hero1's chain comes out as heat, light and nothing useful (6 vs DC 11).
+FEED Hero6 searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Blades wiped on whatever cloth is nearest.
+FEED A grate shifts, and 1 cave bat, 1 drowned skeleton minion, 1 hollowed slime is already upon them.
+FEED Hero7 turns on the wounded cave bat to finish it.
+FEED Hero5 rolls a 20 - and the drowned skeleton minion is gone.
+FEED The hollowed slime divides.
+FEED Hero0 turns on the wounded hollowed slimeling to finish it.
+FEED Hero6 searches the chest - ...no loot... (Investigation 9 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 2 cave bats, 2 puglins.
+FEED The oil is running low.
+FEED Hero7 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 begins smite. The torch gutters. Nothing follows (8 vs DC 12).
+FEED Hero5 turns on the wounded cave bat to finish it.
+FEED Hero6 starts bolt and the thought slides away (1 vs DC 12).
+FEED Hero1 says bolt right, and it still comes out wrong (1 vs DC 12).
+FEED Hero4 rolls a 20 - and the puglin is gone.
+FEED Hero6 searches (Investigation 9) and turns up 35 gold on floor 4.
+FEED Floor 4 is quiet again.
+FEED Hero6 searches the chest - ...no loot... (Investigation 11 vs DC 12).
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 140 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 3 potions. 25 kills between them.
+FEED Hero6 is fitted with Reed-Cloth Robe. (+10 hp) Haggled 17% off (19).
+OFFFLOOR 0 of 2146 samples; INPROP 0; MON_INPROP 0 of 282; floor reached 4 frames 7012 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2146 samples off the floor (home)

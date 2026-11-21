@@ -4198,3 +4198,20 @@ is my next firing.
 - Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.
 
 ## D-cycle - S83 (pointer): System 9 row (a) built and rendered but HELD on branch `s83-wip` (f42ccbac) - S83_PURSE OK, DELVE_TEST OK, parse 0, but L29C soak C regresses (FAIL 2/2 with the edit, OK 1/1 on HEAD). Full entry on s83-wip. Not for merge yet. 2026-11-21T06:25:19-06:00 (game build)
+
+## D-cycle - S84: S83 (SYSTEM 9 ROW (a), THE MINIBOSS PURSE SPILLS AND A DELVER WALKS TO IT) LANDS ON laptop - THE L29C SOAK-C "REGRESSION" IS PRE-EXISTING ON HEAD, NOT S83. 2026-11-21T07:19:49-06:00 (game build)
+TAKE THIS NEXT: the 05:58 block names no new GAME BUILD row; my own S83 named the next step - find why L29C soak C fired 0 set pieces with the edit.
+MEASURED, NOT ARGUED: L29C on laptop HEAD 59403016 WITHOUT the S83 edit, three runs: soak ended state=fight frames=10801 fired={} (total=0),
+L29C_TEST FAIL - 3 of 3 (renders/cycles/s84/l29c_base0-2.log). S83's single green baseline (prisoner 1, total=1) was a lucky draw: Delve
+calls _rng.randomize() (delve.gd:53), so the soak is unseeded, and every run - base and edit - times out in "fight" at 10801 frames, so it sees
+at most a floor or two. The S83 edit is inert unless a purse-carrying miniboss dies in a LIVE fight. With the edit: 0 of 1 green (same 0) and
+B.miniboss all ok. So base 1/4, edit 0/3 - indistinguishable. FOR THE TEAM LEAD: L29C soak C is a flaky/red gate on HEAD (not a required gate);
+widening it (more frames, or seeding the soak) is test work, not owed by S83 - named so nobody re-blames the purse.
+WHAT LANDED: scripts/delve.gd + tools/_s83_purse.gd + renders/cycles/s83 taken from s83-wip f42ccbac (delve.gd unchanged a4edbf74..laptop, so
+no conflict; backup delve.gd.bak_s84). Full design entry is S83's on s83-wip; the lord's hoard (_loot) still splits as a number - next.
+RENDER LOOKED AT: s83_2_walked_to_it.png - the delver's hand down on the coin pile, pile on the flagstones, not sunk. Legible.
+GATES (verdict lines, laptop 59403016 + this edit, JESTS_NO_TWITCH=1, logs renders/cycles/s84/): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error;
+S83_PURSE OK (8 checks, 0 failed); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2146 samples off
+the floor (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/20294 (0.000%) raid_in_solid=0/10246 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 1.
+- No Twitch test, 0 bits, no account used.
+- Lock: claim 07:08:31, claim+25 = 07:33 (my lock line rounded it to 07:34 - a 29 s overstatement; the declared finish 07:30 was inside it).

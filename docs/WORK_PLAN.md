@@ -1,3 +1,193 @@
+## TAKE THIS NEXT - THE 01:58 CT FIRING, 21 NOV 2026 (machine clock 01:58-02:1x CST, same day -
+## no rollover this hour; the 01:58 firing and the 02:0x clock are both true.)
+## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 00:58 BLOCK. ***
+## SEVEN MERGES, FIVE TICKED. The HUD pushed U117 BETWEEN MY MERGE AND MY SYNC - my sync read
+## `origin/hud-ui` as 94b8883d where my merge had read edcae26c - so I went back for it, judged it,
+## merged it and rewrote the two rows that depended on it. A lane that ships at :00 is not late.
+##
+## *** AND THE ROW I WROTE FIRST WAS WRONG, FOR THE EIGHTH TIME IN THIS PLAN, AND THE HUD LANE IS
+## *** RIGHT. I AM STRIKING IT PERMANENTLY RATHER THAN SOFTENING IT. ***
+##   I first wrote "THE RARITY-HUE HALF OF SYSTEM 2 - THE MOST VALUABLE OPEN ITEM IN THE HOUSE -
+##   START IT THIS HOUR", copied from my prompt and from the block above. **IT IS NOT OPEN. IT WAS
+##   TICKED AT U88 ON 19 NOV (20:58 firing) AND THE REACH HALF AT U98. SYSTEM 2 IS WHOLE**, and
+##   this plan says so in nine separate places, including a 3281 entry where an earlier seat
+##   ALREADY recorded that the prompt's claim is stale. **I MEASURED IT MYSELF BEFORE STRIKING IT**
+##   rather than taking the lane's word: `UiTheme.rarity_hue` at `ui_theme.gd:196`, `rarity_ink`
+##   :200, `rarity_pip` :204, and they are NOT dead code - `leaderboard_panel.gd:197` and :202
+##   call `rarity_pip` and `rarity_ink` on the worn rows. **NO SEAT IS TO PUT THE RARITY HUE IN
+##   THE HUD's ROW AGAIN**, and no lane is to be asked to start it. The fault is mine and it is
+##   exactly the one this seat's own standing orders warn about: I carried a figure out of a
+##   prompt instead of measuring the tree. The HUD lane has now refused this row EIGHT TIMES with
+##   a citation each time and has been right every time.
+##
+## TICKED THIS HOUR (five):
+##   - **S78** (game build) - **THE FULLER KEEPS EVERY BLOW AND WRINGS IT BACK.** I read the diff
+##     rather than the message: `MB_WAYS` gains `fuller: wring`; the act banks `maxf(0, last - hp)`
+##     into meta `mb_store` against `mb_last_hp`, and at `MB_WRING_FULL` (0.20) of max hp it calls
+##     `_fuller_wring`, which pays `store * 0.5` capped at `4.0 x atk`, DEX save halves, radius
+##     3.2, and empties the trough. Broken removes `mb_store` in the same block that already
+##     removes `mb_drop_t` - the store is SPILLED, never given back, which is the one thing that
+##     could have made this way a free second health bar. **I RESOLVED EVERY SYMBOL IT USES
+##     RATHER THAN TRUSTING THE PARSE**: `live_heroes` is NOT a parameter of `_mb_way_tick` and
+##     that is the thing most likely to be a fiction - it is declared at `delve.gd:2069`, inside
+##     the same function and above the match, so the call at :2140 is in scope. `_flat` :1020,
+##     `_soak` :2793, `_hero_hit` :2439, `roster.save_bonus` `roster.gd:347`, `floor_no` :18,
+##     `Monster.nova` `monster.gd:588`, and the new `Delve.fuller_struck` counter is declared :219
+##     and incremented :2190. Red-proved by the lane (S78_FULLER OK 16); parse 0 SCRIPT ERROR,
+##     OFFFLOOR OK, TWITCH_PARSE OK 8, TOWNWALK PASS, DELVE_TEST OK 9001.
+##   - **ART - THE DYER AND GREENER BACKS, AND I LOOKED AT BOTH PICTURES MYSELF.** This is the
+##     01:34 row delivered whole. `renders/art/minibosses/dyer/hero_back.png`: the man now stands
+##     CLEAR of the hanging sheets with the paddle raised - from behind he is a man at his tenter,
+##     not furniture. `greener/hero_back.png`: the teal trade now reads down the calves, the arm
+##     and the shoulder caps against the dark body - it is no longer one flat near-black mass.
+##     Both faults are gone in the frame, not only in the number. **AND I REPRODUCED THE NUMBERS
+##     OFF `_fit_report.json` MYSELF**: dyer `pair_w` 4.69 -> 4.74 exactly as claimed,
+##     `air_px_min` 26 -> 27, tightest view still `side`; greener unchanged at 4.57 / 68;
+##     `stale_margin` empty, `blind_views` empty, 0 border hits. `margin_derived` falls 44 -> 42
+##     and **the two keys that left the derived list are exactly `dyer` and `greener`**, which is
+##     the per-key re-measure the lane said it ran. The new `_backread.py` instrument is honest
+##     about the direction of its own numbers: greener's back `man_seen` goes DOWN, 0.674 -> 0.626,
+##     because the crust that now reads sits in front of the man, and the lane said so itself
+##     instead of reporting the fall as a win.
+##   - **C-156** (content) - counted off the file, not the diff header: epitaphs 828 -> 840,
+##     descend 511 -> 517, cleared 496 -> 502, so **+12 / +6 / +6** exactly as claimed. Zero
+##     duplicates and zero blanks in all three pools. One new top-level key and it is `_note_c156`.
+##   - **CHAT BOT B97 - THE RED HALF OF SATCHEL ECHO IS PROVEN, AND I CHECKED IT AGAINST THE ARM'S
+##     OWN SOURCE RATHER THAN AGAINST THE LOG.** I cannot re-run Godot from this seat, so I read
+##     `chatcmd.gd:1327-1372` and derived what the arm MUST print: it builds its site list from
+##     `short` and `what` on every command plus every `ask` topic `reply`, names them
+##     "`satchel`.short" and "`ask.gold`.reply" in exactly that spelling, takes the LONGEST known
+##     phrase before " of shop cost", and prints
+##     `COMMANDS_DATA SATCHEL ECHO - N site(s) off SELL_BACK 0.4: ...`. The five logged outputs are
+##     character-for-character what that code produces for those two perturbations. **AND THE
+##     RESTORE CLAIM IS TRUE AT THE REF, NOT ONLY IN THE DRIVER**: `git diff --stat origin/main
+##     origin/chatbot -- data/ scripts/ docs/` is EMPTY, so no perturbation survived and the arm
+##     needed no edit to pass its own red proof. B96's silence is now evidence.
+##   - **U117** (HUD) - **THE NOW FIGHTING BANNER GHOST AT 150% IS GONE, AND I LOOKED AT THE FRAME
+##     MYSELF.** `renders/cycles/20261121_u117/ban_150_a_1080.png`: the Rattling Host card sits in
+##     the Director pane with 165/165 and "Lord of floor 5 - against the delvers (4 standing)"
+##     legible, the Mana plate below it, the Chronicle box clear - and **there is no cream-on-cream
+##     banner behind the card.** I read the diff too: the old pad test was
+##     `r.has_point(card.position)` and a card wider than its pane docks at a NEGATIVE x, so the
+##     test missed it - it is a rect intersect now; the full-screen branch's `y` was missing
+##     `* scale.y` and now has it; and `_over_card()` hides the plate and marks it "none" when the
+##     placed banner still lands on a visible card. 100% and 125% keep the banner, overlap 0; 150%
+##     hides it, overlap 0. Parse 0 Parse Error / 0 SCRIPT ERROR, U117_DONE fails=0. **AND THE
+##     THING THE LANE FLAGGED AS NOT ITS OWN IS REAL AND I CAN SEE IT**: the boss card's top-left
+##     still overlaps the tail of the "Now watching: Bellmire" strip. The strip's TEXT is fully
+##     legible, which is what S77 was ticked on, so this is cosmetic residue and not a regression -
+##     it is in the GAME BUILD row below as an option, not a charge.
+##
+## NOT TICKED, AND WHY:
+##   - **THE HUB IS NOT TICKED AND NOTHING IS OWED OF IT.** I verified the lane's claim rather than
+##     taking it: `git diff origin/main:web origin/hub:web` and `24c97dd1:web origin/hub:web` are
+##     BOTH EMPTY, so `web/` is byte-unchanged and there was nothing to verify. **I RAN NO PUBLISH
+##     VERIFICATION** because the lane did not claim READY TO PUBLISH - an unearned gate report is
+##     the same fault class as a lying gate.
+##
+## TAKE THIS NEXT - SIX ROWS:
+##
+## GAME BUILD (:07) - S78 is TICKED and the Fuller's way is shut. L31 is WHOLE and System 2's
+##   engine half is shut; neither is to be re-opened. Your row is yours to name from the Phase 2
+##   queue (Mr. E's Systems 5-80, in his order): take the lowest-numbered system that is not
+##   already wired, SAY IN YOUR ENTRY WHICH NUMBER YOU TOOK AND WHY IT IS THE LOWEST OPEN ONE, or
+##   take the pitman's ONE IDEA you offered at S77, which is miniboss-family work you already own.
+##   Name which you chose. The NOW FIGHTING banner ghost is CLOSED (U117, ticked above) and is not
+##   yours. **A THIRD OPTION, AND IT IS SMALL:** at 150% the boss card's top-left still overlaps
+##   the tail of the Director's "Now watching" strip. I looked at the HUD's `ban_150_a_1080.png`
+##   myself and the strip's text is FULLY LEGIBLE, so S77's tick stands and this is cosmetic
+##   residue in your own `boss_bar.gd`, not a regression. Take it only if you want a cheap hour;
+##   it is not owed and nobody is charged for leaving it.
+##
+## CONTENT (:22) - C-157, your own cycle, unthrottled. Nothing you make is wasted; it is queued
+##   work. Keep writing `_note_` keys - NO LANE IS TO WIRE ONE and you are not to stop writing them.
+##
+## ART (:34) - **`ratcatcher` AND `boiler` - the last two of the four you named yourself**:
+##   near-black on near-black and pale on pale. Defects in bodies YOU shipped, so the freeze does
+##   not touch them. Front, side and back, and LOOK at all three.
+##   **AND ONE THING YOUR OWN REGISTER HAS BEEN SAYING FOR DAYS THAT NO ROW HAS EVER NAMED:
+##   `_fit_report.json` carries `ok: false` AND HAS DONE ON MAIN AS WELL AS ON YOUR BRANCH** - I
+##   diffed the two and the verdict and both errors are IDENTICAL, so you did not introduce it
+##   this hour. The two errors are `[carried] snuffer_chibi` and `[carried] tallyman_chibi`: "no
+##   occlusion measurement on record - an unmeasured cell is RED, not green". A register whose
+##   top-level verdict can never be true is an instrument nobody can read a verdict off, which is
+##   the fault class in the other direction. Either MEASURE the two cells or take the retired
+##   `_chibi` bodies out of the verdict set and say in the file which you did. Fixing your own
+##   instrument is NOT a new item.
+##
+## HUB (:37) - standing `web/` security check only: `node --check`, the innerHTML site count, the
+##   zero-hit set, the CSP meta, the byte sizes. **If `web/` has not changed again, say so in one
+##   line and stand down** - a stand-down written up IS the delivery and you are not to invent a
+##   sweep to fill the hour. The pack-catalogue row stays STRUCK. Publishing is NOT yours and NOT
+##   Mr. E's - it is with the supervisor, and the delta is in the FOR THE SUPERVISOR block below.
+##
+## CHAT BOT (:45) - the `parse_fish()` end-finder hardening you carried from B95. That is a defect
+##   you found in your own shipped work and it is not a new item. **L56 IS NOT YOURS TO START AND
+##   IS NOT OWED** - it is still with the supervisor; stop carrying it as a debt of yours.
+##   ONE THING IN YOUR LOCK LINES, AND IT IS THE THIRD HOUR RUNNING: your B97 `RUNNING` line
+##   carried "cap claim+6 = 01:52:33" against a claim of 01:47:16, where claim+6 is 01:53:16.
+##   You struck it yourself in the same run and both real stamps were clock reads, so I have NOT
+##   counted it against the clean hour - but the root cause is the same each time, which is
+##   composing a derived number from the schedule you planned instead of from the clock you read.
+##   COMPUTE THE CAP FROM THE CLAIM YOU JUST READ, THEN WRITE THE LINE.
+##
+## HUD (:52) - **U117 IS TICKED AND THE RARITY-HUE ROW IS STRUCK PERMANENTLY** (see the top of
+##   this block - you were right, I measured it myself, and no seat is to re-issue it). L74 is
+##   whole. **YOUR OWN CYCLE IS THE ROW**, and you have earned the right to name it: take whatever
+##   you judge the best use of the hour in your own files, say in your entry why you chose it, and
+##   that is the delivery. Two things are NOT yours and are not to be taken: the boss card over the
+##   Director strip is `boss_bar.gd` and is in the game build's row, and the gear import-cache
+##   SCRIPT ERRORs are your worktree's `.godot` cache. The banner's 150% behaviour is with the
+##   supervisor below - do not pre-empt it either way.
+##
+## FOR THE SUPERVISOR:
+##   1. **THE HUB PUBLISH DELTA, RE-MEASURED BY ME THIS HOUR AND UNCHANGED FROM 00:58.**
+##      `origin/gh-pages` is 05ac2679, tree 9ca8051e; `origin/hub:web` is 02257b2f; the difference
+##      is **3 files / 59 insertions / 1 deletion** - `web/NOTES.md` +9, `web/app.js` +47/-1,
+##      `web/style.css` +4. The hub lane has NOT claimed READY TO PUBLISH, so I ran no publish
+##      verification and make no readiness claim. **RECOMMENDATION: no publish this hour.** The
+##      moment the lane claims readiness I will run the full gate - el()-only, no innerHTML on a
+##      snapshot value, no snapshot value as URL/src/href/style, CSP intact including the inline
+##      `<style>` injection test, the six state checks, a hostile name rendering as literal text,
+##      and a screenshot I have looked at - and bring you a verified call.
+##   2. **A PIXEL-AIR FLOOR FOR THE MINIBOSS FRAME - CARRIED, STILL OPEN FROM 00:58.** Art measured
+##      that the air a VIEWER gets is smaller than the derived margin on every row, by 1.6 to 19 px
+##      (mean 8), because alpha spreads past the mesh bounds the margin is computed from. Tightest
+##      five: drover 8 px, paviser 9, boiler 16, ratcatcher 16, gaoler 22. **Nothing is clipped -
+##      0 border hits anywhere in the set.** **RECOMMENDATION: set no floor yet** - the register
+##      now stores `air_px` per view beside the derived number and a floor chosen before it has
+##      bitten is just a number to argue with. Revisit the first time a body actually clips.
+##   3. **NEW THIS HOUR - THE NOW FIGHTING BANNER NOW SHOWS NOTHING AT 150% IN A 2x2 PANE.** U117
+##      fixed a real ghost (the banner drew BEHIND the boss card, 73,093 px2 of overlap) by having
+##      the banner YIELD: at 150% there is no room for card + banner above the Chronicle box, so
+##      the banner hides for that fight. 100% and 125% are unchanged and keep it. The HUD routed
+##      the choice to Mr. E; **I am routing it to you instead, because it is an interface call and
+##      the alternative is resizing another lane's card.** **RECOMMENDATION: keep the yield.** The
+##      card already carries the lord's name, its hp and "against the delvers", so nothing a viewer
+##      needs is lost; the only other way to get the banner back at 150% is to shrink the boss card
+##      in `boss_bar.gd`, which trades a legible card for a redundant line.
+##
+## DEAD-DATA BASELINE, RE-MEASURED 21 NOV 02:0x CT ON THE MERGED TREE dbdfb18d - A NOTE, NOT A
+## ROW. NO LANE IS ASKED FOR ANYTHING HERE AND NOTHING BELOW IS OWED BY ANYONE.
+##   Measured off `scripts/*.gd` + `web/*.js` ONLY (48 files, 2,305,549 chars) and `assets/` only.
+##   UNREFERENCED ASSET DIRECTORIES: **ZERO** (34 directories with files).
+##   UNREAD LIVE DATA KEYS: **ZERO**. 12 data files, **140 top-level keys** (was 139 at 00:58).
+##   **50 keys return zero literal hits and all 50 are accounted for:** 35 `_note_` cycle notes
+##   (`_note_c156` is this hour's and the only new top-level key anywhere); 2 runtime-built `_alt`
+##   pools that ARE READ - `lord_intros_alt` and `unique_intros_alt`, and **the line has MOVED to
+##   `delve.gd:3868`** because S78 added 39 lines above it, so do not look for 3831 and conclude
+##   the read is gone; 4 DECLARED DEAD (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+##   `town_levels_for_the_desktop`); 9 prose/spec keys (`biomes.technique`, `bosses.boss_floors`,
+##   `origins.chronicle_line`, `origins.word_order`, `origins.casing`, `ranks.promotion_line`,
+##   `ranks.one_roll`, `strains._gating`, `world.canon_silences`).
+##   49 -> 50 is ONE `_note_` key. **THE UNREAD COUNT DID NOT MOVE.** `townsfolk` is still not in
+##   the set (it returns prose hits) and `twitch_cooldown_s` IS STRUCK PERMANENTLY.
+##   A NOTE ON THE INSTRUMENT, BECAUSE I GOT A WRONG NUMBER FIRST: my first pass required a QUOTED
+##   literal (`"key"` or `'key'`) and returned 76 zero-hit keys, including all twelve `_source`
+##   provenance keys and live keys like `bosses.uniques`. A stricter instrument that disagrees
+##   with the baseline is not a discovery; I re-ran it the baseline's way (bare substring, hits
+##   confirmed by eye) before writing a single number here.
+
 ## TAKE THIS NEXT - THE 00:58 CT FIRING, 21 NOV 2026 (machine clock 01:0x CST, same day -
 ## no rollover this hour; the 00:58 firing and the 01:0x clock are both true.)
 ## *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 23:58 BLOCK AND ITS TWO ADDENDA. ***
@@ -583,6 +773,26 @@
 ##      (drillmaster, gaoler, sexton, porter, tallyman, cook, sluicekeeper, sower, snarer, stoker,
 ##      boiler). Four seats have now mis-counted one of these two dicts. The prompt warns about
 ##      regexes over MB_NAME; it should warn about the chibis in MB_FIT in the same breath.
+##   7. **TEAM LEAD prompt, Step 0 baseline and Step 5 ID line - refreshed again 21 Nov 02:0x CT
+##      on merged tree dbdfb18d.** Script 2,305,549 chars over 48 files; 12 data files; **140**
+##      top-level keys; 34 asset directories; **50** zero-hit keys, 35 of them `_note_`.
+##      UNREAD LIVE DATA KEYS **ZERO**, UNREFERENCED ASSET DIRECTORIES **ZERO**. Real ID
+##      high-water marks this hour: **B97, C-156, S78, U116** (U117 in flight, uncommitted).
+##      The prompt's "B50, C-111, D100, H32, L74, S33, T5, U74" is far behind all of them.
+##   8. **TEAM LEAD prompt, Step 0 - the `_alt` read moved line.** The prompt and three run docs
+##      cite `delve.gd:3831` for `lore().get(base + "_alt", {})`. S78 added 39 lines above it and
+##      it is now **`delve.gd:3868`**. Cite the EXPRESSION, never the line number - a line number
+##      in a prompt is a stale measurement waiting to happen.
+##   9. **TEAM LEAD prompt - THE MOST EXPENSIVE STALE SENTENCE IN IT, AND IT HAS COST A LANE
+##      EIGHT CYCLES OF REFUSAL.** The prompt's Phase 2 block says "THE HUD'S RARITY-HUE HALF IS
+##      THE ONLY PART STILL OPEN ... IT IS THE MOST VALUABLE OPEN ITEM IN THE HOUSE".
+##      **IT IS TICKED - U88, the 20:58 firing on 19 Nov - and the reach half at U98. SYSTEM 2 IS
+##      WHOLE.** Measured 21 Nov 02:0x CT: `UiTheme.rarity_hue` `ui_theme.gd:196`, `rarity_ink`
+##      :200, `rarity_pip` :204, called live from `leaderboard_panel.gd:197` and :202. Replace the
+##      whole clause with "SYSTEM 2 IS WHOLE (HUD half U88, reach half U98) - DO NOT RE-OPEN IT",
+##      and strike "the most valuable open item in the house" wherever it appears. Every seat that
+##      copies that sentence hands the HUD a row it has to refuse with a citation; it has done so
+##      eight times and been right eight times.
 ##
 ## NEEDS MR. E: nothing.
 ##

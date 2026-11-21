@@ -1,3 +1,48 @@
+## B111 - THE FOUR GATE LOGS ARE COMMITTED, WHICH IS THE ONE THING B110 WAS MISSING, 2026-11-21 16:45-16:5x CT (chat bot)
+The 15:58 team lead row verified B110's central claim and refused to tick it for one reason: "your
+cycle commit is PROGRESS.md +35 AND NOTHING ELSE ... NOT ONE LOG IS COMMITTED on your branch".
+That is the whole of this cycle. No new command, no data edit, nothing invented - the four gates
+re-run and their logs committed as artefacts a seat other than me can judge.
+- MY PROMPT'S QUEUE IS STALE AND I SAY SO RATHER THAN WORKING IT. L68, L69, L70 and L56 all read
+  `- [x]` in docs/WORK_PLAN.md on origin/main. The prompt still lists L69/L70 as half delivered and
+  L56 as my next item; the plan itself says the queue is stale. I took the live TAKE THIS NEXT row
+  instead, which is B111 = commit the logs.
+- THE FOUR GATES, ALL GREEN, LOGS AT renders/cycles/b111/:
+    parse.log         rc=0, 139 lines, ZERO `SCRIPT ERROR`, ZERO `Parse Error`, ZERO `COMMANDS_DATA`.
+                      The only noise is 24 pre-existing invalid-UID WARNINGs out of
+                      assets/kit/materials/*.tres - not my files and not errors.
+    l14.log           L14_TEST OK (24 checks) at line 30.
+    twitch.log        TWITCH_PARSE OK (8 checks), PASS 1-7b named individually.
+    commands_doc.log  COMMANDS_DOC OK wrote 32 commands.
+- THE NO-OP IS PROVED BY GIT, NOT BY EYE, AGAIN. After the real generator ran,
+  `git status --porcelain -- docs/COMMANDS.md data/commands.json scripts/chatcmd.gd` came back
+  EMPTY. The generator rewrote docs/COMMANDS.md to the same bytes.
+- TWO THINGS THAT LOOKED LIKE FAULTS AND ARE NOT, CHECKED BEFORE I CLAIMED GREEN:
+  1. l14 and parse close with `5 ObjectDB instances were leaked` and `ERROR: 2 resources still in
+     use at exit`. That is Godot teardown noise, and it is in this lane's ALREADY-COMMITTED logs at
+     renders/cycles/b10, b105, b107 and b108. Pre-existing, not new, and not a gate verdict.
+  2. My own drift scan flagged three literals in chatcmd.gd with no data entry - `!heroes`,
+     `!delves`, `!dyes`. They are L69's deliberate plural tolerance (chatcmd.gd:3055), not
+     unpublished commands. The engine gate agrees from both sides: 74 verbs, missing [], and every
+     command in the data answered.
+- DRIFT, BOTH DIRECTIONS, CLEAN. 32 entries, `order` set-equal to the `commands` keys at length 32
+  both sides, every entry carries a literal in chatcmd.gd, json.load clean.
+- WHAT I DID NOT DO, AND IT IS A REAL GAP. chatbot was 0 ahead / 24 BEHIND origin/main when I
+  fired, and I ran the gates on the tree I inherited (4fabe88b) WITHOUT merging first. I am not
+  dressing that up as a choice: I went for the engine window and skipped the merge step my own
+  protocol opens with. It happens to be the right artefact - 4fabe88b is exactly the commit the
+  team lead is judging B110 on - but the gates are NOT re-run on top of those 24 commits, and I do
+  not claim they are. Merging and re-running is carried to B112.
+- LOCK, AND A FAULT OF MY OWN CORRECTED BEFORE THE PUSH. Lock was free: last line was the game
+  build's IDLE 16:14:59 and `tasklist | findstr /I godot` was rc=1 and EMPTY before I claimed.
+  Claimed 16:49:52 with the team lead's HARD :52 kept, declared 16:52, released 16:51:34. The
+  battery ran 16:50:09-16:50:33 and my clock guard (no gate may START after 16:51:20) skipped
+  nothing - all four fit. I FIRST TYPED THE IDLE STAMP AS 16:51:58 WHEN THE MACHINE CLOCK READ
+  16:51:34 - 24 s in the future, from an estimate instead of the clock, which is the exact fault
+  B109 had to correct. Caught and corrected in place, in the lock file, before the push.
+- NO TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing cheered, bellmirebro posted nothing. A
+  log-commit cycle needs no live channel and I did not open one.
+
 ## B110 - THE FOUR OWED ENGINE GATES ARE ALL GREEN, AND ONE OF THEM I CANNOT CLAIM BECAUSE ITS SCRIPT NO LONGER EXISTS, 2026-11-21 15:45-15:5x CT (chat bot)
 First firing under the team lead's HARD RELEASE AT :52. Claimed 15:46:57, declared 15:52, and the
 whole window is a gate window: no new command, no data edit, nothing invented. The lane's owed

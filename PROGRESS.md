@@ -1,3 +1,48 @@
+## B111 - THE FOUR GATE LOGS ARE COMMITTED, WHICH IS THE ONE THING B110 WAS MISSING, 2026-11-21 16:45-16:5x CT (chat bot)
+The 15:58 team lead row verified B110's central claim and refused to tick it for one reason: "your
+cycle commit is PROGRESS.md +35 AND NOTHING ELSE ... NOT ONE LOG IS COMMITTED on your branch".
+That is the whole of this cycle. No new command, no data edit, nothing invented - the four gates
+re-run and their logs committed as artefacts a seat other than me can judge.
+- MY PROMPT'S QUEUE IS STALE AND I SAY SO RATHER THAN WORKING IT. L68, L69, L70 and L56 all read
+  `- [x]` in docs/WORK_PLAN.md on origin/main. The prompt still lists L69/L70 as half delivered and
+  L56 as my next item; the plan itself says the queue is stale. I took the live TAKE THIS NEXT row
+  instead, which is B111 = commit the logs.
+- THE FOUR GATES, ALL GREEN, LOGS AT renders/cycles/b111/:
+    parse.log         rc=0, 139 lines, ZERO `SCRIPT ERROR`, ZERO `Parse Error`, ZERO `COMMANDS_DATA`.
+                      The only noise is 24 pre-existing invalid-UID WARNINGs out of
+                      assets/kit/materials/*.tres - not my files and not errors.
+    l14.log           L14_TEST OK (24 checks) at line 30.
+    twitch.log        TWITCH_PARSE OK (8 checks), PASS 1-7b named individually.
+    commands_doc.log  COMMANDS_DOC OK wrote 32 commands.
+- THE NO-OP IS PROVED BY GIT, NOT BY EYE, AGAIN. After the real generator ran,
+  `git status --porcelain -- docs/COMMANDS.md data/commands.json scripts/chatcmd.gd` came back
+  EMPTY. The generator rewrote docs/COMMANDS.md to the same bytes.
+- TWO THINGS THAT LOOKED LIKE FAULTS AND ARE NOT, CHECKED BEFORE I CLAIMED GREEN:
+  1. l14 and parse close with `5 ObjectDB instances were leaked` and `ERROR: 2 resources still in
+     use at exit`. That is Godot teardown noise, and it is in this lane's ALREADY-COMMITTED logs at
+     renders/cycles/b10, b105, b107 and b108. Pre-existing, not new, and not a gate verdict.
+  2. My own drift scan flagged three literals in chatcmd.gd with no data entry - `!heroes`,
+     `!delves`, `!dyes`. They are L69's deliberate plural tolerance (chatcmd.gd:3055), not
+     unpublished commands. The engine gate agrees from both sides: 74 verbs, missing [], and every
+     command in the data answered.
+- DRIFT, BOTH DIRECTIONS, CLEAN. 32 entries, `order` set-equal to the `commands` keys at length 32
+  both sides, every entry carries a literal in chatcmd.gd, json.load clean.
+- WHAT I DID NOT DO, AND IT IS A REAL GAP. chatbot was 0 ahead / 24 BEHIND origin/main when I
+  fired, and I ran the gates on the tree I inherited (4fabe88b) WITHOUT merging first. I am not
+  dressing that up as a choice: I went for the engine window and skipped the merge step my own
+  protocol opens with. It happens to be the right artefact - 4fabe88b is exactly the commit the
+  team lead is judging B110 on - but the gates are NOT re-run on top of those 24 commits, and I do
+  not claim they are. Merging and re-running is carried to B112.
+- LOCK, AND A FAULT OF MY OWN CORRECTED BEFORE THE PUSH. Lock was free: last line was the game
+  build's IDLE 16:14:59 and `tasklist | findstr /I godot` was rc=1 and EMPTY before I claimed.
+  Claimed 16:49:52 with the team lead's HARD :52 kept, declared 16:52, released 16:51:34. The
+  battery ran 16:50:09-16:50:33 and my clock guard (no gate may START after 16:51:20) skipped
+  nothing - all four fit. I FIRST TYPED THE IDLE STAMP AS 16:51:58 WHEN THE MACHINE CLOCK READ
+  16:51:34 - 24 s in the future, from an estimate instead of the clock, which is the exact fault
+  B109 had to correct. Caught and corrected in place, in the lock file, before the push.
+- NO TWITCH TEST THIS CYCLE. Nothing was redeemed, nothing cheered, bellmirebro posted nothing. A
+  log-commit cycle needs no live channel and I did not open one.
+
 ## B110 - THE FOUR OWED ENGINE GATES ARE ALL GREEN, AND ONE OF THEM I CANNOT CLAIM BECAUSE ITS SCRIPT NO LONGER EXISTS, 2026-11-21 15:45-15:5x CT (chat bot)
 First firing under the team lead's HARD RELEASE AT :52. Claimed 15:46:57, declared 15:52, and the
 whole window is a gate window: no new command, no data edit, nothing invented. The lane's owed
@@ -15142,3 +15187,16 @@ S93 ADDENDUM (2026-11-21T16:14:59-06:00): the 15:58 TAKE THIS NEXT block reached
   MB_FIT/fogbound/.import half AHEAD of C-169 (the beadle precedent; gate-held, drawn 0/400) and did NOT write MB_NAME, which is
   the row's actual red line. If the lead wants the early half reverted, it is three lines in e77b40c9. Next firing: read
   origin/laptop's WORK_PLAN head as well as main's.
+## C-169 (21 Nov 2026 16:2x CST) - THE BLOWER'S FEED ROW (46th miniboss, Deadair)
+TAKE THIS NEXT (15:58 CT block) CONTENT item: C-169. `miniboss_feed.by_key` held 45 keys and no `blower`; art's body is
+committed and merged (assets/monsters/minibosses/blower.glb, 216,396 bytes; docs/art/MINIBOSSES.md #46). Wrote `by_key.blower`
+the pitman/tither shape: arrive x9, act x7, broken x4, fall x8 (46 keys now).
+- It is the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives
+  out first, nothing done to the man slows the count, holing the bag stops it. arrive lines say so in plain words, point at the bag
+  as the visible count and at the three patch irons. broken lines are the bag being holed (count stops). fall lines read true
+  whether the bag was holed or the man beaten. act lines take `{name}`.
+- `_note_c169` added inside miniboss_feed. Expected zero-hit key: DO NOT WIRE.
+- CODE WIRING: `Delve.MB_NAME["blower"]` = "Deadair" and MB_FIT row are now UNBLOCKED (game build). No pool top-up this cycle.
+  Nothing in items/bosses/potions touched.
+- VALIDATION OK: all four files parse, every pre-existing key byte-identical (46 by_key keys).
+U130 2026-11-21T16:55:28-06:00 (HUD) - CLAIMED 16:53:35, RELEASED 2026-11-21T16:55:28-06:00 (13 min under cap). Lock was IDLE (chat bot B111 16:51:34); QA tester's 16:42 RUNNING had no IDLE but no Godot alive and the chat bot had already run a battery after it. Item: stale standing note (rarity-hue half of System 2) - it is already shipped (U55/U56); VERIFIED not rebuilt. Headless, no UI render this firing, so no picture. Results: parse rc=0 with 0 SCRIPT ERROR/Parse Error (gear.gd:99 null-load errors present = the known import-cache gap in this worktree, not a HUD file); tools/_u71_rarity_guard.gd U71_GUARD OK rungs_py=8 ui_rungs=5 redproofs 9/9, U76_BRACE 3/3, U71_FISH 11/11; tools/_u126_regress.gd U126_DONE checks=40 fails=0. Next firing: L74 windowed 100/125/150% feed-under-load capture, split in chunks, release by :07. Decision for Mr. E: none.

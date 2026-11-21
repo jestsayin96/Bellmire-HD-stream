@@ -137,6 +137,46 @@ VIS_MIN = 900                # ...AND A RATIO IS BLIND TO SIZE. Found by looking
 MIN_PROVING = 2              # a cell needs two views that actually show the weapon
 DIFF_EPS = 0.02
 
+# =============================================================================
+# *** FAULT 6, FOUND 21 NOV 16:4x CT. `vis` AND `seen` CANNOT SEE READABILITY,
+# *** AND THE SWEEP THAT PROVED IT MOVED NEITHER NUMBER.
+# =============================================================================
+# The register went GREEN on all 24 cells at 14:55 and the team lead, looking
+# at crossbow_common_side.png, still saw "a flat plank forward of the hand and
+# nothing a viewer would call a crossbow". Both were right.
+#
+# THE PROOF IS A SWEEP, NOT AN OPINION (tools/art/_s2_roll.py, seven angles of
+# roll about the slot's own forward axis, everything else frozen, one camera
+# per view shared by every angle):
+#
+#       roll   front vis   front seen   front minor   side minor
+#         0      2610        0.935          35            41     <- ships
+#        35      2629        0.937          87            99
+#        90      2692        0.859          55           126
+#
+# `vis` moves 3% across a sweep that takes the picture from an unreadable tray
+# to a crossbow anyone can name, and `seen` moves the WRONG WAY. Raising
+# VIS_MIN could never have caught this; it would only have failed the dagger.
+#
+# WHAT DOES SEPARATE THEM IS WHETHER THE CARRY EVER TURNS THE WEAPON'S BROADEST
+# FACE TO A CAMERA. `show` is the best view's silhouette MINOR extent divided
+# by the pixels the weapon's own MIDDLE world extent would subtend. A dagger is
+# a sliver and scores 1.03 because it shows all the breadth it has; the
+# crossbow is 0.69 x 0.64 m and scores 0.39 because its prod plane is level and
+# all three cameras are level, so every one of them catches it edge-on.
+#
+# MEASURED ON ALL 24 SHIPPED CELLS, 21 Nov 16:5x CT:
+#   crossbow_uncommon 0.37, crossbow_common 0.39, crossbow_rare 0.40
+#   ... and then NOTHING until axeDouble_common 1.00, through to hammer 1.06.
+# The distribution is bimodal with a 0.60-wide empty gap. SHOW_MIN is set in
+# that gap, not tuned to make anything pass or fail.
+#
+# The world AABB overstates the middle extent for a canted weapon, so `show` is
+# understated for exactly the cells most likely to be canted - the conservative
+# direction is toward RED, which is where an instrument's error belongs.
+SHOW_MIN = 0.70
+PX_PER_M = CELL_Y / FRAME_H
+
 
 # =============================================================================
 # *** FAULT 5, FOUND 21 NOV 14:3x CT BY RE-RUNNING THE REGISTER AND LOOKING. ***
@@ -372,7 +412,7 @@ def main():
     bmn, bmx, bpts = G.world_bounds(body)
     cz = (FRAME_H / 2.0) - GROUND_UP
 
-    reg, errors, blanks, clipped_frames, blind = {}, [], [], [], []
+    reg, errors, blanks, clipped_frames, blind, laths = {}, [], [], [], [], []
     body_only = {}
 
     for fam in fams:
@@ -435,6 +475,11 @@ def main():
                 C = render_to(os.path.join(tmpdir, "_w_%s_%s.png" % (key, vname)))
                 show(body, True)
 
+                cm = C[:, :, 3] > DIFF_EPS
+                if int(cm.sum()) >= 2:
+                    cys, cxs = np.nonzero(cm)
+                    rec.setdefault("minor", {})[vname] = int(min(cxs.max() - cxs.min() + 1,
+                                                                 cys.max() - cys.min() + 1))
                 op = int((B[:, :, 3] > DIFF_EPS).sum())
                 if op == 0:
                     blanks.append(os.path.basename(png))
@@ -472,6 +517,24 @@ def main():
                 rec.setdefault("seen", {})[vname] = round(seen, 4)
                 bpy.data.objects.remove(cam, do_unlink=True)
             rec["outside"] = outs
+            ext = sorted([max(v[i] for v in wv) - min(v[i] for v in wv) for i in range(3)])
+            mid_px = ext[1] * PX_PER_M
+            rec["ext"] = [round(e, 4) for e in ext]
+            rec["mid_px"] = round(mid_px, 1)
+            mins = rec.get("minor", {})
+            if mid_px <= 1.0 or not mins:
+                # RED ON EMPTY. A `show` over a zero-width mesh, or over no
+                # measured view at all, is a ratio of nothing and must not read
+                # as a pass just because it computed.
+                errors.append("%s: cannot compute `show` - mid_px %.2f over %d measured "
+                              "views. This is a FAIL, not a 1.0." % (key, mid_px, len(mins)))
+            else:
+                rec["best_minor"] = max(mins.values())
+                rec["show"] = round(rec["best_minor"] / mid_px, 3)
+                if rec["show"] < SHOW_MIN:
+                    laths.append("%s: show %.2f (best view turns %d px of a possible %.0f to "
+                                 "the camera) - the carry never shows this weapon's broad face"
+                                 % (key, rec["show"], rec["best_minor"], mid_px))
             # the control camera is a measurement OF THE OLD VIEW, not evidence
             # for the cell - it must not be able to rescue a cell by existing.
             if (a.control and rec["seen"].get(CONTROL_VIEW[0], 0.0) >= SEEN_MIN
@@ -493,22 +556,26 @@ def main():
         errors.append("register has %d of %d cells" % (len(reg), want))
     if not reg:
         errors.append("EMPTY REGISTER - nothing was measured, this is a FAIL not a pass")
-    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind)
+    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind) and (not laths)
     out = dict(verdict="GREEN" if ok else "FAIL", ok=ok, hero=hinfo,
                handslot=[round(v, 4) for v in slot], cells=len(reg),
                views=[v for v, _ in views], seen_min=SEEN_MIN, vis_min=VIS_MIN,
-               min_proving=MIN_PROVING,
+               min_proving=MIN_PROVING, show_min=SHOW_MIN, px_per_m=PX_PER_M,
+               laths=laths,
                blanks=blanks, frame_clips=clipped_frames, blind_views=blind,
                errors=errors, models=reg)
     rp = os.path.join(outdir, "_fit_register.json")
     with open(rp, "w") as f:
         json.dump(out, f, indent=1)
-    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d errors=%d"
-          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind), len(errors)))
+    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d laths=%d errors=%d"
+          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind),
+             len(laths), len(errors)))
     for e in errors:
         print("  ERROR", e)
     for e in blind:
         print("  BLIND", e)
+    for e in laths:
+        print("  LATH", e)
     print("WEAPONFIT_DONE", rp)
 
 

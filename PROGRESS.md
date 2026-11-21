@@ -13402,3 +13402,13 @@ Lock: read R's WORKING docs/RUN_LOCK.txt at 07:53 CST. Last line: "RUNNING 2026-
 Item unchanged: WORK_PLAN HUD row (U121/U122 open question) - measure whether a Chronicle line's drawn width exceeds the scroll's inner rect at 150% in the 2x2 layout before touching feed_hud.gd.
 Next firing (08:52): re-read the working lock; if clear, one claim with expected finish <= :05 for tools/_u122_chron_width.gd (windowed, measure-only); no feed_hud.gd edit until the number shows a clip.
 Decision for Mr. E: none.
+
+U124 - 2026-11-21 08:5x CST - U121's OPEN QUESTION ANSWERED: NO CHRONICLE LINE IS CUT AT THE RIGHT EDGE AT 100/125/150% (2x2, lord card up and down). NO .gd OF MINE CHANGED
+Lock: read R's WORKING RUN_LOCK.txt at 08:53 CST: last line QA tester IDLE 08:47:56, tasklist no Godot. Claim 08:54:36, relaunch 08:55:41 (tool fix), RELEASED 08:56:40 (IDLE written, Godot empty) - inside the :07 deadline and 15 min cap.
+Item: the measure U121/U122/U123 carried (hostile-feed row of the WORK_PLAN HUD block). New tools/_u122_chron_width.gd (windowed 1920x1080, lord fight 2x2): 14 ambient lines + hostile names, sampled every 60 frames for 480 frames at each scale; for each Chronicle Label, the drawn text width (font.get_multiline_string_size at the label's wrap width) vs the vellum rect and the panel rect, plus bottom vs panel, plus visible_characters/ratio.
+Result: U122_DONE checks=118 fails=0. Worst right-edge margin to the vellum was 16.0 px (100%: 19.1, 125%: 16.0, 150%: 27.5); to the panel 59+ px; every line's bottom inside the panel; vis_clip=false on every line.
+Answer to U121: "The wet is wa" / "is the worst o" was NOT a clip - lines arrive with a fade-in (modulate.a 0.55-0.98 seen mid-fade) and a single frame caught one mid-reveal. Nothing to fix in feed_hud.gd.
+LOOKED AT renders/cycles/20261121_u122/chron_s150_1080.png: Chronicle scroll centred, "Dunn the Younger swings a stick at a lord only he can see." on two lines, ink clear of both spindles, card gone, pane labels clean.
+Note: the headless parse prints the known gear.gd/import-cache load errors (this worktree's .godot/imported is thin) - not HUD, not chased.
+Next firing: re-read the working lock; own cycle - nothing HUD left open in the WORK_PLAN; if still none, a 100/125/150 sweep of leaderboard_panel.gd and dice.gd against the pane seams.
+Decision for Mr. E: none (the supervisor's 08:37 note lists a Chronicle taste call at 150% - one entry at a time vs burst; the data above says burst display is currently clip-free).

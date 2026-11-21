@@ -1,0 +1,187 @@
+{
+ "key": "beadle",
+ "errors": [],
+ "views": {
+  "front": {
+   "man_alone_px": 18402,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 2160,
+     "hidden_frac": 0.1174
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3895,
+     "hidden_frac": 0.2117
+    },
+    "staff": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "griparm": {
+     "items": 2,
+     "hidden_px": 1,
+     "hidden_frac": 0.0001
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 659,
+     "hidden_frac": 0.0358
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.6437,
+   "all_rest_hidden_px": 6557,
+   "all_rest_hidden_frac": 0.3563,
+   "sum_of_parts_px": 6715,
+   "overlap_px": 158
+  },
+  "side": {
+   "man_alone_px": 17385,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 1536,
+     "hidden_frac": 0.0884
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3353,
+     "hidden_frac": 0.1929
+    },
+    "staff": {
+     "items": 7,
+     "hidden_px": 1954,
+     "hidden_frac": 0.1124
+    },
+    "griparm": {
+     "items": 2,
+     "hidden_px": 4103,
+     "hidden_frac": 0.236
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 33,
+     "hidden_frac": 0.0019
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.4357,
+   "all_rest_hidden_px": 9811,
+   "all_rest_hidden_frac": 0.5643,
+   "sum_of_parts_px": 10979,
+   "overlap_px": 1168
+  },
+  "back": {
+   "man_alone_px": 17375,
+   "blame": {
+    "base": {
+     "items": 4,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "coat": {
+     "items": 2,
+     "hidden_px": 1197,
+     "hidden_frac": 0.0689
+    },
+    "head": {
+     "items": 9,
+     "hidden_px": 3536,
+     "hidden_frac": 0.2035
+    },
+    "staff": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "griparm": {
+     "items": 2,
+     "hidden_px": 154,
+     "hidden_frac": 0.0089
+    },
+    "arm": {
+     "items": 3,
+     "hidden_px": 283,
+     "hidden_frac": 0.0163
+    },
+    "board": {
+     "items": 3,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    },
+    "pegs": {
+     "items": 7,
+     "hidden_px": 0,
+     "hidden_frac": 0.0
+    }
+   },
+   "man_seen_all": 0.693,
+   "all_rest_hidden_px": 5334,
+   "all_rest_hidden_frac": 0.307,
+   "sum_of_parts_px": 5170,
+   "overlap_px": -164
+  }
+ },
+ "bounds_control": [
+  -1.06405,
+  -0.7072,
+  0.0,
+  0.81045,
+  0.48047,
+  2.95
+ ],
+ "bounds_split": [
+  -1.06405,
+  -0.7072,
+  0.0,
+  0.81045,
+  0.48047,
+  2.95
+ ],
+ "item_counts": {
+  "base": 4,
+  "coat": 2,
+  "man": 4,
+  "head": 9,
+  "staff": 7,
+  "griparm": 2,
+  "arm": 3,
+  "board": 3,
+  "pegs": 7,
+  "_covered": 41,
+  "_total": 41
+ },
+ "engine": "BLENDER_EEVEE",
+ "ok": true
+}

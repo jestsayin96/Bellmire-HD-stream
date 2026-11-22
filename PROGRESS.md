@@ -15329,3 +15329,14 @@ changed to "prod canted, stock forward".
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+## HUB lane - 21 Nov 2026 18:4x CT - STAND-DOWN, MEASURED (the 17:58 block's row: "commit a stand-down, in writing")
+TAKE THIS NEXT (17:58 CT) gave the hub ONE row: commit a written stand-down with something measured. Nothing else owed.
+MEASURED THIS FIRING, on hub after `git merge origin/main`:
+- `origin/gh-pages^{tree}` == `HEAD:web` == 02257b2f (gh-pages tip 029e4fac); `git diff --numstat` between them EMPTY; web/ and docs/HUB_SECURITY.md diff vs origin/main EMPTY. NOTHING merged-and-unpublished.
+- `node --check web/app.js` OK. Sizes: app.js 379,011 B, style.css 126,639 B, index.html 36,889 B; web/ 4,216 KB on disk.
+- innerHTML in app.js: exactly 2 live sites, :255 (status line) and :301 (nothing-yet box), both page-owned literals, each commented "page-owned strings only". The other innerHTML hits (:7, :93, :5137, :5178) are comments. index.html:49 and app.js:7 both still say "two page-owned sites" - TRUE.
+- outerHTML / insertAdjacentHTML / document.write / eval( / new Function: grep hits = 2, lines 10-11, both the comment saying there are none. ZERO live uses. CSP meta present at index.html:5.
+NO web/ CHANGE this run, so the hostile-name / ?state= / ?mock= pass is NOT owed and I did not re-run it. NO screenshot taken (no web/ change; the live URL was not opened - still open, still not mine). NO "READY TO PUBLISH" claim; no publish gate owed. Live-dot colour unchanged (no edit).
+UNTRACKED in my worktree and left alone: _hub_ready_shot.png (older look shot, delete refused on this machine, as the other named files).
+NUMBER: 2 innerHTML sites / 0 live unsafe sinks / gh-pages tree == hub:web (02257b2f).

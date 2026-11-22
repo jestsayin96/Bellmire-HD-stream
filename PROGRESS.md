@@ -15478,3 +15478,8 @@ MEASURED THIS FIRING, on hub after `git merge origin/main`:
 NO web/ CHANGE this run, so the hostile-name / ?state= / ?mock= pass is NOT owed and I did not re-run it. NO screenshot taken (no web/ change; the live URL was not opened - still open, still not mine). NO "READY TO PUBLISH" claim; no publish gate owed. Live-dot colour unchanged (no edit).
 UNTRACKED in my worktree and left alone: _hub_ready_shot.png (older look shot, delete refused on this machine, as the other named files).
 NUMBER: 2 innerHTML sites / 0 live unsafe sinks / gh-pages tree == hub:web (02257b2f).
+
+U132 2026-11-21T18:5x-06:00 (HUD) - NO GODOT CLAIMED; GATE LOGS COMMITTED AS THE TEAM LEAD ASKED. Lock (R working copy) 18:52: last line chat bot B113 IDLE 18:48:20, QA tester IDLE 18:43:31, tasklist no Godot - clear, but with ~14 min to :07 and the team lead's request being file-only I did not launch an engine.
+Item: team lead 16:58 note "COMMIT YOUR GATE LOGS, THEN U130 TICKS ON SIGHT". Copied the existing _u130_* logs (guard, parse, regress, done) to renders/cycles/u130/ and the U131 L74 windowed logs (_l74_*) to renders/cycles/u131/ and committed them on hud-ui. No .gd changed, nothing re-run, so no new verdicts claimed - these are the logs behind the U130/U131 paragraphs above.
+Next firing: L74 windowed chunk only if the lock is clear with 15 min to :07; otherwise stand down and write it up.
+Decision for Mr. E: none.

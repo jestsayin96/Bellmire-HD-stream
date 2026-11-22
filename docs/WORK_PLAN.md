@@ -1,3 +1,137 @@
+## TAKE THIS NEXT - Updated THE 20:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main 4eea60ed: all SIX lanes (laptop b853be7b, content a4389515, hub 1661513a,
+hud-ui 73ef3669, art 62a4dfc0, chatbot f5abce18). TWO conflicts (hub, hud-ui), both in root
+PROGRESS.md, resolved by the state machine keeping BOTH sides; exactly 6 marker lines removed, 3 per
+conflict. PROGRESS.md **+76/-0** against origin/main. ZERO residual markers on all four exact shapes.
+Zero lines removed is the assertion that matters and it holds.
+
+*** TICKED THIS HOUR ***
+- **S97 (game build) - THE STAFF DOES NOT DRAG THROUGH THE FLOOR. TICKED, AND THE FIX IS CORRECTLY
+  REFUSED.** The 19:58 row - mine, from this seat - told the game build to move the staff in gear.gd
+  on art's register numbers. The lane measured first and refused, and it was RIGHT. I checked the
+  central claim myself rather than taking it: `git grep STAFF_GRIP_SHIFT` finds `gear.gd:90`
+  (const 0.25) and `gear.gd:127` (applied to the staff model's children before the x1.9 hand scale),
+  and returns **NO HIT ANYWHERE IN tools/** - so art's weaponfit.py genuinely never reads it and
+  carries every staff 0.25 x 1.9 = 0.475 m lower than the game does. Its deepest break was 0.216 m,
+  so the shipped butt sits about +0.26 m ABOVE its floor. I re-did that arithmetic. Engine verdict
+  line S21_STAFF OK (9 staves, 7 poses, 0 failures), worst +0.089 m in Walking_A, and I LOOKED at
+  renders/cycles/s21/s21_pose_A_Walking_A.png - the worst pose - myself: staff carried horizontally
+  over the shoulder, butt well clear of the stones, feet on the floor. A ROW FROM THIS SEAT BUILT ON
+  A LANE'S INSTRUMENT WAS WRONG AND THE LANE CAUGHT IT. That is the measure-before-you-fix rule
+  working, and the fault was mine, not the game build's.
+- **ART - THE CHANGER, the 47th miniboss body. TICKED AS A BODY.** Fit is the acceptance test and it
+  passes on its own numbers rendered this run: 3 proving views, `seen` 1.0 front/side/back, every
+  `frame_edge` and `frame_edge_disk` zero, air_px min 46 (side), ground measured this run, ratio 1.11
+  against the hero. I LOOKED at renders/art/minibosses/changerch5/hero_front.png myself. It is NOT
+  wired - see the game build row. And art's own "STILL OPEN" note is accurate by my eye: the bars do
+  cross his silhouette from the front, and at hero scale he still reads as a man beside a post rather
+  than one creature. Art called its own pass-5 tie a PARTIAL fix and refused to call it more. Right.
+- **B114 (chat bot) - THE SMITHY CEILING ARM AND ITS REGENERATED DOC. TICKED, the owed gate is
+  discharged.** B115 ran the four gates on merged main and reported verdict LINES, not return codes:
+  parse --quit-after 300 rc=0 / 0 SCRIPT ERROR / 0 Parse Error; L14_TEST OK (24 checks) with "0
+  COMMANDS_DATA guard arms fired"; TWITCH_PARSE OK (8 checks); COMMANDS_DOC OK wrote 32 commands with
+  `git status --porcelain` EMPTY on all three owned files. I corroborated the no-op the only way a
+  reader can: commit d7edcde3 touches **PROGRESS.md and nothing else**. The real generator rewrote
+  the file and changed no bytes, so B114's emulation is vindicated BY THE AUTHORITY, which is the
+  distinction the lane itself drew and held to.
+
+*** NOT TICKED, AND WHY ***
+- **ART'S FIT REGISTER HAS GONE RED ON 46 SHIPPED BODIES AND THE BODIES ARE FINE. THE INSTRUMENT IS
+  BROKEN AND ART UNDER-REPORTED IT BY A FACTOR OF 48.** Measured by me on the merged tree, both
+  versions of the file parsed and compared as key SETS, not as a diff hunk:
+    origin/main: `errors` **0**, `red_summary.rows` **0**, `shipped_red` **0**, `ok_shipped` **true**.
+    HEAD:        `errors` **192**, rows **48**, `shipped_red` **46**, `ok_shipped` **FALSE**.
+  192 = 48 rows x 4 errors; every single row carries the same four. Art's own write-up
+  (docs/art/CHANGER_THE_47TH.md) says "minibossfit is RED for FOUR errors, all beadle" - it read the
+  first four lines of its own errors list and generalised. **THE CAUSE, read off the file:**
+  `tools/art/minibossfit.py:770`, inside `measure_disk_frames(repo, rep, tag="")`, builds
+  `os.path.join(root, key + tag, fname)` for EVERY key in `pairs` using **THIS RUN'S** tag. This run
+  tagged "ch5", so it looked for `beadlech5/hero_front.png`, `blowerch5/...`, and so on - directories
+  that exist only for the body rendered this run. **THE FILES ARE ON DISK.** I listed the directory:
+  `renders/art/minibosses/beadle/` holds hero_front.png, hero_side.png and hero_back.png, exactly the
+  three views that row vouches for. So "the Beadle's renders need regenerating at the canonical path"
+  is a WRONG DIAGNOSIS of a REAL red, and nothing needs regenerating. This is the same file's 20 Nov
+  defect inverted: that one published GREEN over a red row, this one publishes RED over 46 sound ones.
+  A gate that cries wolf on everything is as useless as one that never cries at all.
+- **THE PROMPT'S STANDING ART-REGISTER NOTE IS NOW WRONG IN BOTH DIRECTIONS** and is listed in the
+  corrections block below. It says the RED rests on two retired `_chibi` rows with `shipped_red`
+  empty and `ok_shipped` true. On main that was already stale (rows was EMPTY, not the two chibis);
+  on HEAD it is flatly false. Nobody is to quote it.
+
+*** THE ROWS - ONE PER LANE ***
+- **GAME BUILD - FINISH MR. E'S 10:17 DIRECTIVE, ITEM 2. I SAW IT MYSELF THIS HOUR.** I opened the
+  HUD's own 150% capture renders/cycles/u134/chron_s150_1080.png and **THE LARGE FLOATING BOSS HP
+  CARD IS STILL THERE** - "Nightwing / 110 / 110 / Lord of floor 5 - against the delvers (4
+  standing)" sitting squarely over the DIRECTOR pane's game view. Nameplate (S88) and banner (U126)
+  are done; this card is the remainder, it is in your files, and it is a half of a directive HE gave,
+  not a new item. Item 1 (mana) is still yours too. SECOND, once that is in: **wire the Changer** -
+  art handed you the exact spec in docs/art/CHANGER_THE_47TH.md (bestiary.gd, model
+  `assets/monsters/minibosses/changer.glb`, `h` 2.72, NO `anims` entry, not room-locked) and the 47th
+  `MB_NAME` pair `changer` -> `Evenhand`. I measured `Delve.MB_NAME` with a brace-matched parser:
+  **46 keys, and `changer` is not among them.**
+- **CONTENT - stand down again, or re-audit the feed AFTER the changer lands.** C-173 was a correct
+  stand-down. Right now `Delve.MB_NAME` is 46 and the 47th body ships unwired, so the feed is not
+  behind - it is level. The moment the game build adds `changer` to MB_NAME, `miniboss_feed` owes a
+  47th row, and that is your work, not art's. Measure both sides with a brace-matched parser; three
+  seats have been lied to by a flat regex on that constant.
+- **HUB - hold web/ steady. Nothing is unpublished.** I re-measured rather than copying: tip
+  **029e4fac**, `origin/gh-pages^{tree}` == `origin/hub:web` == **02257b2f**. No publish gap exists
+  this hour. Your 20:4x standing check was correct and correctly declined to claim READY TO PUBLISH.
+  The Smith1_blend licence line (CC0 1.0, read off disk, not off a search snippet) is the right way
+  to do that and is exactly what the hard rule asks for.
+- **HUD - U134 VERIFIED BY EYE, AND YOUR PROBE IS THE THING TO FIX.** Your claim was that the 8 fails
+  are the probe measuring UNWRAPPED width and that the render wraps clean. I opened
+  chron_s150_1080.png myself: the hostile name wraps across three lines INSIDE the parchment card,
+  renders as literal text, no horizontal clip, nothing crosses the card edge. **You are right and I
+  am not ticking the probe.** Next: make `tools/_u134_chron_sample150.gd` measure the LAID-OUT line
+  boxes rather than the unwrapped string width, so a future 8-fail means a real clip. Fixing your own
+  instrument is not a new item. Do NOT take L31's status-effect icons - those files are the game
+  build's.
+- **ART - FIX `minibossfit.py` BEFORE YOU INVENT ANOTHER BODY. ONE LINE, AND IT IS YOURS.** Line 770
+  must use the tag **the row was rendered under**, not the tag of the current run - carried rows have
+  no `ch<N>` suffix and live at `renders/art/minibosses/<key>/`. Store the directory on the row when
+  you write it, or fall back to the untagged path when `<key><tag>/` is absent, but do NOT silence
+  the error: a genuinely missing view must still go red. Then re-run and show me `ok_shipped` back to
+  true with the changer still green. SECOND: `weaponfit.py` must read `STAFF_GRIP_SHIFT` out of
+  gear.gd the red-on-empty way it already reads `hand_scale` and `held_rot`, and apply it inside the
+  scale (base @ Rslot @ S @ T) - until it does, your staff floor numbers are 0.475 m pessimistic and
+  they sent a row of mine to the wrong lane.
+- **CHAT BOT - L56, THE DELVE-HEAVY SOAK, FIRST THING AT :45.** You carried it whole and said so,
+  which is the right call. **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52** - that is the schedule
+  fix this seat made and it has now held three hours running; at 20:50:30 you claimed and released by
+  20:51:40, and the HUD took 20:53:16 unobstructed. Keep doing exactly that. If L56 cannot finish
+  inside your window, SPLIT IT and carry the remainder - do not declare a crossing.
+
+*** FOR THE SUPERVISOR ***
+Nothing is waiting on you. gh-pages and origin/hub:web are both tree 02257b2f, so there is no publish
+gap to authorise this hour. I ran NO publish verification gate, because no lane claimed READY TO
+PUBLISH and an unearned gate report is the same fault class as a lying gate.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt - the gate is on
+the CALL, not a field, settled 09:07 CT 18 Nov - so I made NO write attempt this run and say so.
+Land them all on the first live turn). CARRIED FROM 19:58 AND STILL OWED: (1) MB_NAME/by_key are
+46 and SETS EQUAL, with the three parser failure modes recorded; (2) the gh-pages block - tip
+**029e4fac**, tree **02257b2f**, pushed 15:39 CT 21 Nov, NOTHING merged-and-unpublished, the
+prompt's "3 files / +59 / -1 with the supervisor since 20 Nov" is SPENT AND WRONG - **FOURTH HOUR
+OWED**; (3) L31 IS WHOLE; (4) THERE ARE TWO ART REGISTERS. ADDED THIS HOUR:
+  (5) THE PROMPT'S STANDING ART-REGISTER NOTE IS WRONG AND MUST BE REPLACED, NOT SOFTENED. It reads
+      "RED on two CARRIED unmeasured rows (`snuffer_chibi`, `tallyman_chibi`) that are RETIRED;
+      `shipped_red` is empty and `ok_shipped` is true". On origin/main `red_summary.rows` was
+      **EMPTY** - not the two chibis - and on HEAD `shipped_red` holds **46 bodies** with
+      `ok_shipped` **FALSE** and 192 errors. The note is stale in one direction and false in the
+      other. Replace it with: *the register's top-level verdict is not quotable from this prompt;
+      parse `_fit_report.json` and compare `red_summary` against origin/main's copy every hour.*
+  (6) THE 47th MINIBOSS EXISTS AS A BODY AND `MB_NAME` IS STILL 46. The prompt's "the fit register
+      judges 46 rows, of which 44 are live bodies and two are retired `_chibi` cells" is now 49
+      rows / 47 live bodies / 2 retired. Measure it off the register, never off this sentence.
+  (7) THE STAFF FLOOR RED IS CLOSED AND THE PROMPT'S OLD LINE ABOUT IT ("the staff goes through the
+      floor") IS STRUCK. S97 measured the engine: S21_STAFF OK, 9 staves, 7 poses, 0 failures,
+      worst +0.089 m. The open half is art's `weaponfit.py`, which never reads STAFF_GRIP_SHIFT.
+  (8) THE DEAD-DATA BASELINE MOVED AND THE NON-NOTE 15 DID NOT. Measured on the merged tree this
+      hour: 48 corpus files (47 `scripts/*.gd` + `web/app.js`), 2,374,725 chars, 12 `data/*.json`,
+      **150** top-level keys (was 146), **60** zero-hit = **45 `_note_` + 15 NON-NOTE**, same 15 as
+      ever. Unreferenced asset directories **ZERO** of 34. Series: 52 -> 53 -> 56 -> **60** raw.
+
 ## TAKE THIS NEXT - Updated THE 19:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main a77edff6: all SIX lanes (laptop 4c8c23f2, content 76e426ce, hub
 171db18d, hud-ui ee656f8f, art ce3edd9a, chatbot 1cc3db4e). TWO conflicts (hub, hud-ui), both in

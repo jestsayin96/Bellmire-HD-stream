@@ -4271,3 +4271,36 @@ GATES (verdict lines, laptop 7a07e92e + this edit, JESTS_NO_TWITCH=1, logs rende
 INTERLOCK CONFIRMED (prompt's two live items): LEECH - MB_FIT 0.95, shrine row present, miniboss_feed.by_key has leech -> it is in the shrine draw. BEADLE - MB_FIT 1.2, shrine row present, by_key has beadle -> in the draw too; both already closed, nothing to do.
 - No Twitch test, 0 bits, no account used.
 - NEXT: System 9 row (c) - an ordinary kill sometimes drops a single Coin.
+## D-cycle - S97: THE STAFF DOES NOT DRAG THROUGH THE FLOOR IN THE GAME - ART'S REGISTER CARRIES IT 0.475 m TOO LOW (it never reads STAFF_GRIP_SHIFT). NO gear.gd CHANGE. 2026-11-21T20:07:48-06:00 (game build)
+TAKE THIS NEXT (19:58 block, GAME BUILD row) gave S97: "the staff carry drags through the floor on all three tiers"
+(art's register: staff_common 51 verts / 0.180 m under, uncommon 38 / 0.216, rare 149 / 0.212). MEASURED IN THE ENGINE
+BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. I am refusing the fix and saying why.
+- THE CAUSE OF THE RED, read off the file, not guessed: tools/art/weaponfit.py gear_overrides() reads only two things
+  from gear.gd per family - hand_scale (1.9) and held_rot (0,0,90). It does NOT read gear.gd:90 STAFF_GRIP_SHIFT = 0.25,
+  which Gear.equip (gear.gd:121-130, S24) applies to the staff model's children along mesh +Y BEFORE the x1.9 scale.
+  Under held_rot mesh +Y is world UP, so the register carries every staff 0.25 x 1.9 = 0.475 m LOWER than the game
+  does. Its deepest break is 0.216 m, so on art's own numbers the shipped butt sits roughly +0.26 m above its floor.
+  It also does not model staff_grip.gd's end-for-end flip in Cheer. Same family as FAULT 6 (the crossbow roll): a
+  register mirroring part of the engine carry scores a carry the game does not ship.
+- THE ENGINE MEASUREMENT, this tree, 20:09 CT, tools/_s21_staff.gd unchanged (windowed, build/s97_battery.log). Row A =
+  the real path (Gear.equip on handslot.r via roster.weapon_mesh, all three pack tiers, D94 ribbons included), lowest
+  vertex in world space sampled every frame, 132 samples per pose:
+  Idle 0.106 | Walking_A 0.089 | Hit_A 0.203 | Spellcast_Shoot 0.204 | Use_Item 0.170 | Cheer 0.425 | 1H_Melee_Attack_Chop 0.259.
+  S21_STAFF WORST row A: 0.089 m in Walking_A. AXIS (idle) row A (0.0, 1.0, -0.02) on all three tiers.
+  VERDICT LINE: S21_STAFF OK (9 staves, 7 poses, 0 failures). (S24 measured worst 0.097 Idle; unchanged within noise.)
+- LOOKED AT: renders/cycles/s21/s21_side_A.png - shaft upright in the fist, butt at the boot top ABOVE the floor,
+  crystal over the hat brim. s21_pose_A_Walking_A.png (the worst pose) - staff swung over the shoulder, nothing near
+  the ground.
+- HANDED TO ART (tools/art is art's, not edited): weaponfit.py must read STAFF_GRIP_SHIFT out of gear.gd the same
+  red-on-empty way it reads scale and rot, and apply it as a translation of +SHIFT along the mesh's glTF +Y (Blender +Z
+  after the importer) INSIDE the scale - base @ Rslot @ S @ T - then re-run the register. If art's floor still breaks
+  after that, the next suspect is the hero/pose (engine hero scale on the held node reads 1.88-2.10, not 1.9 flat) and
+  I will measure again; until then the game is clear and the engine number is the one that ships.
+- Battery on this tree (build/s97_battery.log, build/s97_gates.log): parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0
+  Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2230 samples off the floor (home);
+  TOWNWALK in_solid=0/14998 (0.000%) raid_in_solid=0/8311 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2.
+- Merge note: origin/main's merge was blocked by 4 untracked miniboss .glb.import files (ferryman, hooper, relief,
+  scraper) left by art's 19:43 headless import. Each was BYTE-IDENTICAL to main's committed copy (same uid, same
+  length); moved aside to C:\hd adventure\_gb_import_aside_2007 (not deleted), then merged clean.
+- No live Twitch test - no account used, 0 bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team
+  lead ticks. Claim 20:07:48, cap claim+25 = 20:32:48 computed first, declared 20:31.

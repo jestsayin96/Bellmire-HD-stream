@@ -1,0 +1,265 @@
+{
+ "roll_forecast_deg": 35.0,
+ "show_min": 0.7,
+ "px_per_m": 200.0,
+ "hero_h": 2.45,
+ "cells": {
+  "crossbow_common": {
+   "hand_scale": 1.0,
+   "engine_rot_deg": [
+    "-90",
+    "35",
+    "90"
+   ],
+   "roll_forecast_deg": 35.0,
+   "built": {
+    "stirrup": {
+     "y": [
+      -0.529,
+      -0.379
+     ],
+     "z": [
+      -0.1247,
+      0.0073
+     ],
+     "strap_t": 0.03,
+     "strap_w": 0.05,
+     "hung_from_under_z": -0.0077
+    },
+    "string": {
+     "tip": [
+      0.3335,
+      -0.3072,
+      0.0159
+     ],
+     "nut": [
+      -0.1216,
+      0.0659
+     ],
+     "r": 0.012,
+     "note": "drawn to the nut - a loaded crossbow, not a bare lath"
+    },
+    "bolt": {
+     "y": [
+      -0.5279,
+      -0.1216
+     ],
+     "z": 0.0707
+    }
+   },
+   "views": {
+    "front": {
+     "moved_px": 781,
+     "minor_base": 87,
+     "minor_parts": 87,
+     "opaque_base": 2807,
+     "opaque_parts": 3218,
+     "opaque_cell_parts": 95221
+    },
+    "side": {
+     "moved_px": 1517,
+     "minor_base": 99,
+     "minor_parts": 99,
+     "opaque_base": 5062,
+     "opaque_parts": 5753,
+     "opaque_cell_parts": 85290
+    },
+    "back": {
+     "moved_px": 318,
+     "minor_base": 90,
+     "minor_parts": 90,
+     "opaque_base": 3170,
+     "opaque_parts": 3297,
+     "opaque_cell_parts": 95802
+    }
+   },
+   "mid_base": 0.6382,
+   "ext_base": [
+    0.1945,
+    0.6382,
+    0.691
+   ],
+   "mid_parts": 0.6478,
+   "ext_parts": [
+    0.2284,
+    0.6478,
+    0.691
+   ],
+   "show_base": 0.776,
+   "show_parts": 0.764,
+   "denominator_grew": 0.0096
+  },
+  "crossbow_uncommon": {
+   "hand_scale": 1.0,
+   "engine_rot_deg": [
+    "-90",
+    "35",
+    "90"
+   ],
+   "roll_forecast_deg": 35.0,
+   "built": {
+    "stirrup": {
+     "y": [
+      -0.6492,
+      -0.4932
+     ],
+     "z": [
+      -0.1663,
+      -0.0263
+     ],
+     "strap_t": 0.035,
+     "strap_w": 0.055,
+     "hung_from_under_z": -0.0438
+    },
+    "string": {
+     "tip": [
+      0.5046,
+      -0.239,
+      0.0148
+     ],
+     "nut": [
+      -0.0841,
+      0.0619
+     ],
+     "r": 0.013,
+     "note": "drawn to the nut - a loaded crossbow, not a bare lath"
+    },
+    "bolt": {
+     "y": [
+      -0.6415,
+      -0.0841
+     ],
+     "z": 0.0671
+    }
+   },
+   "views": {
+    "front": {
+     "moved_px": 870,
+     "minor_base": 125,
+     "minor_parts": 125,
+     "opaque_base": 4385,
+     "opaque_parts": 4966,
+     "opaque_cell_parts": 96099
+    },
+    "side": {
+     "moved_px": 1703,
+     "minor_base": 144,
+     "minor_parts": 144,
+     "opaque_base": 6719,
+     "opaque_parts": 7724,
+     "opaque_cell_parts": 87096
+    },
+    "back": {
+     "moved_px": 520,
+     "minor_base": 130,
+     "minor_parts": 130,
+     "opaque_base": 4793,
+     "opaque_parts": 5031,
+     "opaque_cell_parts": 96612
+    }
+   },
+   "mid_base": 0.7584,
+   "ext_base": [
+    0.2098,
+    0.7584,
+    1.0352
+   ],
+   "mid_parts": 0.7704,
+   "ext_parts": [
+    0.2792,
+    0.7704,
+    1.0352
+   ],
+   "show_base": 0.949,
+   "show_parts": 0.935,
+   "denominator_grew": 0.012
+  },
+  "crossbow_rare": {
+   "hand_scale": 1.0,
+   "engine_rot_deg": [
+    "-90",
+    "35",
+    "90"
+   ],
+   "roll_forecast_deg": 35.0,
+   "built": {
+    "stirrup": {
+     "y": [
+      -0.6465,
+      -0.4865
+     ],
+     "z": [
+      -0.1448,
+      0.0052
+     ],
+     "strap_t": 0.042,
+     "strap_w": 0.062,
+     "hung_from_under_z": -0.0158
+    },
+    "string": {
+     "tip": [
+      0.5082,
+      -0.2362,
+      0.0148
+     ],
+     "nut": [
+      -0.0892,
+      0.0625
+     ],
+     "r": 0.014,
+     "note": "drawn to the nut - a loaded crossbow, not a bare lath"
+    },
+    "bolt": {
+     "y": [
+      -0.6397,
+      -0.0892
+     ],
+     "z": 0.0681
+    }
+   },
+   "views": {
+    "front": {
+     "moved_px": 1307,
+     "minor_base": 123,
+     "minor_parts": 123,
+     "opaque_base": 3994,
+     "opaque_parts": 4599,
+     "opaque_cell_parts": 95928
+    },
+    "side": {
+     "moved_px": 1846,
+     "minor_base": 143,
+     "minor_parts": 143,
+     "opaque_base": 7689,
+     "opaque_parts": 8460,
+     "opaque_cell_parts": 87876
+    },
+    "back": {
+     "moved_px": 586,
+     "minor_base": 129,
+     "minor_parts": 129,
+     "opaque_base": 4474,
+     "opaque_parts": 4766,
+     "opaque_cell_parts": 96508
+    }
+   },
+   "mid_base": 0.7409,
+   "ext_base": [
+    0.2366,
+    0.7409,
+    1.0445
+   ],
+   "mid_parts": 0.7563,
+   "ext_parts": [
+    0.2879,
+    0.7563,
+    1.0445
+   ],
+   "show_base": 0.965,
+   "show_parts": 0.945,
+   "denominator_grew": 0.0154
+  }
+ },
+ "errors": [],
+ "verdict": "GREEN"
+}

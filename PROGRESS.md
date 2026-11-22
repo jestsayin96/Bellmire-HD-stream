@@ -15438,3 +15438,157 @@ changed to "prod canted, stock forward".
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+## S95 - GAME BUILD: ART'S 35 DEG CROSSBOW ROLL LANDED (System 2 crossbow, engine half), 21 Nov 18:08-18:15 CT
+- ITEM: the 17:58 TAKE THIS NEXT block, "GAME BUILD - LAND ART'S 35 DEG CROSSBOW ROLL". S94 is ticked; not redone.
+- CHANGE: scripts/gear.gd held_rot(), the `DUN + "crossbow_"` branch: Vector3(-90, 0, 90) -> Vector3(-90, 35, 90).
+  DERIVED, not guessed: Godot's YXZ euler builds Basis = Ry * Rx * Rz with Ry OUTERMOST, i.e. applied in the parent
+  (hand slot) frame, so a roll about the slot's own forward axis (+Y, the S20 measurement) is exactly the euler's y
+  term: Ry(35) * [Rx(-90) Rz(90)] == (-90, 35, 90). Scale untouched (x1.0) - art measured the scale is not the fault.
+- GATE: tools/_s20_hand.gd - INTENT CHANGED, ARM NOT WEAKENED. Was "prod LEVEL" (|prod +X.y| <= 0.35); now "prod
+  CANTED 25-45 deg" (|+X.y| in [sin 25, sin 45] = [0.42, 0.71]), and it prints the cant per crossbow. The old level
+  carry would FAIL the new arm (|+X.y| was <= 0.35 by construction), and so would an upright prod. The stock-forward
+  arm is unchanged (+Z.z <= -0.6).
+- MEASURED (posed, world frame): common +X.y 0.56 = 34.0 deg, uncommon 0.47 = 28.3 deg, rare 0.57 = 35.0 deg; stock
+  +Z (0.26, 0.0, -0.96) on all three, i.e. still pointing the way the hero faces. The uncommon reads 6-7 deg less than
+  its siblings off the same euler - that is the pose/mesh, not the rotation, and it sits inside the band.
+- LOOKED AT renders/cycles/s20/s20_side.png and s20_ranger_crossbow_t1_close.png (fresh, 18:10 CT): from the side the
+  prod now stands as a C beyond the fist with the stock running forward - it reads as a crossbow, where the S20 carry
+  was a flat lath. I agree with the team lead's and art's (0,35) cell. The close shot is crowded by neighbouring heroes
+  (framing pre-dates this change) but shows the canted prod clearly.
+- VERDICT LINES (logs in renders/cycles/s95/): parse 0 SCRIPT ERROR / 0 Parse Error; S20_HEFT OK (11 shots, 0 failures);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2061 samples off the floor (home); TOWNWALK in_solid=0/17947
+  raid_in_solid=0/6192 PASS (the town.gd:826 _load_materials backtraces are the same pre-existing lines S94's log
+  carries); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- NOT DONE / FOR ART: the stirrup/bowstring route is art's and untouched here. Do NOT ship a pre-rolled mesh now - this
+  roll is live and a baked one would double it.
+- No live Twitch test this cycle. Lock: claim 2026-11-21T18:08:32-06:00, cap claim+25 = 18:33:32 computed before the
+  declared finish 18:30; IDLE written 2026-11-21T18:15:10-06:00.
+## C-171 (21 Nov 2026 18:2x CST) - STAND-DOWN, NOTHING OWED; AUDIT OF OWN SHIPPED FEED LINES
+TAKE THIS NEXT (17:58 CT block) CONTENT item: "DRY, AND SAY SO, OR AUDIT YOUR OWN SHIPPED LINES". C-170 accepted by the team lead.
+Measured on origin/art (fetched 18:2x): 59 committed GLBs under assets/monsters/minibosses/; the only ones without a `miniboss_feed.by_key` key
+are broodglut and lastcuff (not minibosses, as C-170 said). No art commit since the Blower carries a new body (art's last two commits are the crossbow report and a plan sync).
+by_key = 46: 21 keys carry arrive/act/broken/fall, 25 carry arrive/fall only. No empty pool. No `{name}` in any arrive or fall pool.
+AUDIT FINDING: one line sits in two keys - "Take your places. Draw a breath. Walk the floor." is relief/fall[7] AND scraper/fall[7]. Both are shipped,
+IDs are frozen and the lane is additive-only, so NOT reworded. A repeat only shows if both bodies fall in one stream session; low cost. Raised for Mr. E / team lead: say the word and a later cycle replaces one.
+No data files touched; all four parse unchanged. No ID burned beyond C-171. CODE WIRING: none.
+=================================================================================
+## 21 NOV 2026, 18:5x CT - ART - THE CROSSBOWS GET A STIRRUP, A STRING AND A BOLT,
+## AND THE PART THAT CLOSES THE LATH IS STILL NOT MINE
+=================================================================================
+TAKE THIS NEXT (17:58) gave this lane the system-2 crossbow and named the route:
+"no bowstring, no stirrup, on any of the three crossbows ... a stirrup hangs
+perpendicular to the prod and would read from exactly the angles the prod does
+not". Built, rendered on the body, looked at, shipped.
+
+WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED. The three shipped glbs
+were probed before one vertex was authored (tools/art/_s2_xbow_probe.py and
+_s2_xbow_probe2.py): one mesh each, 395/531/688 verts, two materials each, and
+NO string, NO stirrup, NO bolt anywhere in the vertex set. The prod recurves -
+the belly reaches local y -0.533 at |x| ~0.15 and the lath TIPS come BACK to
+y ~-0.30 - so the string anchors are measured off the mesh per tier, not
+hard-coded; the rare prod is 1.045 wide against common's 0.691 and a copied
+anchor would have hung its string in mid air.
+
+*** WHAT THIS DOES NOT DO, SAID BEFORE THE NUMBERS THAT LOOK GOOD. ***
+IT DOES NOT CLOSE THE LATH AND I DO NOT CLAIM IT DOES. `show` is a BBOX-MINOR
+measure and the GRIP already hangs to local z -0.1145, so a stirrup at the nose
+cannot move a bbox the grip already sets. The full 24-cell register, re-run on
+the augmented meshes, is still FAIL with the SAME three lath cells. The 35 deg
+roll remains the only fix for `show` and it is the game build's.
+
+AND IT CANNOT BUY ITSELF A PASS, WHICH IS THE WHOLE DIFFERENCE FROM CAMBER.
+`show`'s denominator is the LOCAL MIDDLE extent. Adding geometry can only grow
+an extent, so every part here pushes `show` DOWN or leaves it. Measured, not
+asserted: mid 0.6382 -> 0.6478 (common), 0.7584 -> 0.7704, 0.7409 -> 0.7563.
+The parts are built INSIDE the existing Y envelope on purpose. At the roll the
+game build has committed, `show` falls 0.776 -> 0.764 / 0.949 -> 0.935 /
+0.965 -> 0.945 and all three still clear SHOW_MIN 0.70 - the pass is the ROLL's
+and it survives my change making it harder. Camber scored 1.010 on an honest
+0.757 by shrinking what it was divided by; this is the opposite direction.
+
+THE READABILITY TEST, ASKED THE WAY PASS 11 TAUGHT (tools/art/_s2_stirrup_ab.py).
+A mask of the stirrup alone answers how BIG it is, not whether it can be SEEN.
+So every view is three plates through ONE camera built once - body alone, body +
+the pack crossbow, body + the augmented crossbow - and the number is the pixels
+that MOVED between the last two. RED ON EMPTY and RED ON ZERO MOVED are both in.
+At the carry main still ships (roll 0), all 9 cells green, 0 errors:
+    common    front 1179  side 1017  back  250   minor 35->52, 41->48, 51->55
+    uncommon  front 1415  side 1495  back  595   minor 35->64, 46->62, 56->57
+    rare      front 1760  side 1445  back  624   minor 39->61, 52->64, 60->60
+`show` 0.400->0.425, 0.369->0.415, 0.405->0.423 - earned against a denominator
+that grew by 0.0096/0.0120/0.0154 m.
+
+I LOOKED AT IT: renders/art/system2_stirrup/_sheet_roll35.png, 18 frames, base
+beside parts, three views, three tiers, cropped to the weapon. THE HONEST FAULT
+LIST, everything I can see:
+  1. THE BACK VIEW PROVES ALMOST NOTHING AND THAT IS NOT MY GEOMETRY. The red
+     cape fills the frame and only a sliver of weapon clears the hip - back
+     `seen` is 0.26/0.34/0.32 against 0.78-0.85 at the side. The back cell has
+     been passing on a sliver this whole time.
+  2. On COMMON the loop reads nearly as deep as the stock is tall and from the
+     side it can read as a second, smaller limb rather than a foot iron. It is
+     the smallest crossbow of the three and takes the stirrup worst.
+  3. From the FRONT the string is a thin X near the hand - correct, but fussy
+     at stream distance, and the bolt is end-on and contributes nothing there.
+  4. On UNCOMMON the brown bolt lies along a brown stock and reads as a stripe
+     on it rather than a shaft above it from some angles.
+  5. On RARE the white bolt projects well forward of the prod. It is inside the
+     mesh's own Y envelope and it reads as a bolt, but it is the longest thing
+     on the weapon from the side.
+The side view - the one the team lead called "a flat plank forward of the hand"
+- now reads as a crossbow on all three tiers. That is the delivery.
+
+CLIP WENT UP BY EXACTLY 24 VERTS ON EVERY TIER AND I WENT AND FOUND OUT WHY
+rather than reporting "+24 somewhere" (tools/art/_s2_clipblame.py prints every
+intruding vertex in the mesh's own frame). 40->64, 74->98, 116->140. ALL 24 are
+the BOWSTRING'S TWO LEGS AT THE LATH TIPS, at local x 0.32-0.345 - the exact
+coordinates of the prod tips that were ALREADY among the old 40. The string is
+not finding a new way into the hero; it is following the lath tip into the hip
+the lath was already buried in. At the game build's 35 the intrusion FALLS:
+64->59, 98->87, 140->112. Nothing is gated on clip and nothing should be yet.
+
+WEAR IS A VARIABLE (rule 2): common a thin rough iron loop (strap 0.030) on the
+stone-grey prod, uncommon a heavier strap (0.035) in the tier's own Metal, rare
+thicker, cleaner and taller (0.042) in its own Gold. Each part takes a material
+ALREADY on that tier's mesh and the generator REFUSES to guess a slot - a gold
+crossbow shipping a grey loop is the kind of thing nobody looks at twice.
+
+FULL REGISTER, re-run on the augmented meshes with --control, against the game
+build's own gear.gd: cells 24, blanks 0, frameclips 0, blind 0, errors 0,
+laths 3 (the same three). Verdict FAIL, correctly, for a reason that is not mine.
+
+FOR THE GAME BUILD - NO WIRING IS NEEDED AND THAT IS DELIBERATE. The parts are
+baked into assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb, the paths
+gear.gd already uses. The .glb.import siblings are untouched and Godot will
+re-import on its next scan because the file content changed; if a run reports a
+stale import, that is the cause. NO CARRY ROTATION IS BAKED - the 35 is yours
+and a baked roll would double it.
+
+FOR THE TEAM LEAD - MY OWN NEXT ITEM, NAMED BEFORE IT BITES. weaponfit's
+SLOT_ROT is hard-coded from the OLD intent, Vector3(-90, 0, 90). gear.gd on
+origin/laptop now reads (-90, 35, 90) and main still reads (-90, 0, 90), so the
+moment that merges my register is measuring a carry the engine no longer ships -
+FAULT 5 again, in the same file. I did NOT mirror it this run on purpose: doing
+so would turn my own gate's three red cells green off another lane's unmerged
+branch, and that is the one change a lane should not make quietly. It is a
+one-line read of the euler's middle component with an assertion that the other
+two still match; say the word and it goes in the hour after the merge.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.
+## HUB lane - 21 Nov 2026 18:4x CT - STAND-DOWN, MEASURED (the 17:58 block's row: "commit a stand-down, in writing")
+TAKE THIS NEXT (17:58 CT) gave the hub ONE row: commit a written stand-down with something measured. Nothing else owed.
+MEASURED THIS FIRING, on hub after `git merge origin/main`:
+- `origin/gh-pages^{tree}` == `HEAD:web` == 02257b2f (gh-pages tip 029e4fac); `git diff --numstat` between them EMPTY; web/ and docs/HUB_SECURITY.md diff vs origin/main EMPTY. NOTHING merged-and-unpublished.
+- `node --check web/app.js` OK. Sizes: app.js 379,011 B, style.css 126,639 B, index.html 36,889 B; web/ 4,216 KB on disk.
+- innerHTML in app.js: exactly 2 live sites, :255 (status line) and :301 (nothing-yet box), both page-owned literals, each commented "page-owned strings only". The other innerHTML hits (:7, :93, :5137, :5178) are comments. index.html:49 and app.js:7 both still say "two page-owned sites" - TRUE.
+- outerHTML / insertAdjacentHTML / document.write / eval( / new Function: grep hits = 2, lines 10-11, both the comment saying there are none. ZERO live uses. CSP meta present at index.html:5.
+NO web/ CHANGE this run, so the hostile-name / ?state= / ?mock= pass is NOT owed and I did not re-run it. NO screenshot taken (no web/ change; the live URL was not opened - still open, still not mine). NO "READY TO PUBLISH" claim; no publish gate owed. Live-dot colour unchanged (no edit).
+UNTRACKED in my worktree and left alone: _hub_ready_shot.png (older look shot, delete refused on this machine, as the other named files).
+NUMBER: 2 innerHTML sites / 0 live unsafe sinks / gh-pages tree == hub:web (02257b2f).
+
+U132 2026-11-21T18:5x-06:00 (HUD) - NO GODOT CLAIMED; GATE LOGS COMMITTED AS THE TEAM LEAD ASKED. Lock (R working copy) 18:52: last line chat bot B113 IDLE 18:48:20, QA tester IDLE 18:43:31, tasklist no Godot - clear, but with ~14 min to :07 and the team lead's request being file-only I did not launch an engine.
+Item: team lead 16:58 note "COMMIT YOUR GATE LOGS, THEN U130 TICKS ON SIGHT". Copied the existing _u130_* logs (guard, parse, regress, done) to renders/cycles/u130/ and the U131 L74 windowed logs (_l74_*) to renders/cycles/u131/ and committed them on hud-ui. No .gd changed, nothing re-run, so no new verdicts claimed - these are the logs behind the U130/U131 paragraphs above.
+Next firing: L74 windowed chunk only if the lock is clear with 15 min to :07; otherwise stand down and write it up.
+Decision for Mr. E: none.

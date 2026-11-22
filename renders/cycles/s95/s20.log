@@ -1,0 +1,30 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+S20_HEFT tier 1 | Ford-Stalker's Crossbow | res://assets/gear/dungeon/crossbow_common.glb | scale 0.945 | blade 0.18 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.345483, -0.114465, -0.105235), S: (0.690966, 0.194485, 0.638244)])
+S20_HEFT tier 2 | Guild Arbalest | res://assets/gear/dungeon/crossbow_uncommon.glb | scale 1.086 | blade 0.23 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.517623, -0.114465, -0.105235), S: (1.035246, 0.209834, 0.758435)])
+S20_HEFT tier 3 | Emberbolt Crossbow | res://assets/gear/dungeon/crossbow_rare.glb | scale 1.091 | blade 0.26 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.522228, -0.114465, -0.090441), S: (1.044456, 0.236633, 0.740923)])
+S20_HEFT tier 1 | Charcoal-Burner's Greataxe | res://assets/gear/dungeon/axeDouble_common.glb | scale 0.766 | blade 0.68 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.273859, -0.20007, -0.093142), S: (0.547697, 0.890339, 0.186283)])
+S20_HEFT tier 2 | Bearded Greataxe | res://assets/gear/dungeon/axeDouble_uncommon.glb | scale 0.800 | blade 0.76 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.396327, -0.20007, -0.08429), S: (0.792639, 0.952809, 0.16858)])
+S20_HEFT tier 3 | Bell-Yard Greataxe | res://assets/gear/dungeon/axeDouble_rare.glb | scale 0.914 | blade 0.87 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.403994, -0.197638, -0.137717), S: (0.808004, 0.950377, 0.275446)])
+S20_HEFT SHIELD tier 1 | res://assets/gear/dungeon/shield_common.glb | held true
+S20_HEFT tier 1 | Charcoal-Burner's Greataxe | res://assets/gear/dungeon/axeDouble_common.glb | scale 0.766 | blade 0.68 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.273859, -0.20007, -0.093142), S: (0.547697, 0.890339, 0.186283)])
+S20_HEFT SHIELD tier 2 | res://assets/gear/dungeon/shield_uncommon.glb | held true
+S20_HEFT tier 2 | Bearded Greataxe | res://assets/gear/dungeon/axeDouble_uncommon.glb | scale 0.800 | blade 0.76 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.396327, -0.20007, -0.08429), S: (0.792639, 0.952809, 0.16858)])
+S20_HEFT SHIELD tier 3 | res://assets/gear/dungeon/shield_rare.glb | held true
+S20_HEFT tier 3 | Bell-Yard Greataxe | res://assets/gear/dungeon/axeDouble_rare.glb | scale 0.914 | blade 0.87 m | hand-in-grip true (hand (0.0, 0.0, 0.0), bounds [P: (-0.403994, -0.197638, -0.137717), S: (0.808004, 0.950377, 0.275446)])
+S20_HEFT AXIS crossbow_common2: mesh +X (-0.8, 0.56, -0.22) +Y (0.57, 0.81, 0.15) +Z (0.26, 0.0, -0.96)
+S20_HEFT CANT crossbow_common2: prod +X.y 0.56 = 34.0 deg
+S20_HEFT AXIS crossbow_uncommon2: mesh +X (-0.85, 0.47, -0.23) +Y (0.65, 0.74, 0.18) +Z (0.26, 0.0, -0.96)
+S20_HEFT CANT crossbow_uncommon2: prod +X.y 0.47 = 28.3 deg
+S20_HEFT AXIS crossbow_rare2: mesh +X (-0.79, 0.57, -0.22) +Y (0.55, 0.82, 0.15) +Z (0.26, 0.0, -0.96)
+S20_HEFT CANT crossbow_rare2: prod +X.y 0.57 = 35.0 deg
+S20_HEFT AXIS axeDouble_common2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT AXIS axeDouble_uncommon2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT AXIS axeDouble_rare2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT AXIS axeDouble_common2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT AXIS axeDouble_uncommon2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT AXIS axeDouble_rare2: mesh +X (0.0, -1.0, 0.0) +Y (0.26, 0.0, -0.96) +Z (0.96, 0.0, 0.26)
+S20_HEFT OK (11 shots, 0 failures)
+
+---STDERR---

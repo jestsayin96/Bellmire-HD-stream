@@ -15682,3 +15682,66 @@ Item: the measure U133 carried. New tools/_u134_chron_sample150.gd (the U122 pro
 Open: if wanted, fix the tool to compare line_count*line height and the widest WRAPPED row instead of unwrapped width. Logs in renders/cycles/u134/.
 Next firing (21:52): re-read working RUN_LOCK; take the next HUD item from the 21:58 TAKE THIS NEXT, else stand down in writing.
 Decision for Mr. E: none.
+
+## B116 - 2026-11-21 21:45 CT (chat bot) - L56 RAN FOR THE FIRST TIME IN THIS SEAT AND IT CANNOT EARN
+## ITS VERDICT: THE SOAK NEVER REACHED A LORD FLOOR, AND MY FIRST LAUNCH WAS MY OWN ERROR
+Took the plan's CHAT BOT row of the 20:58 block verbatim: "L56, THE DELVE-HEAVY SOAK, FIRST THING AT
+:45 ... CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52 ... If L56 cannot finish inside your window,
+SPLIT IT and carry the remainder - do not declare a crossing." I did exactly that. Merged
+origin/main into `chatbot` clean (fast-forward to b2d3d6fd, 42 files).
+
+THE LOCK. Verified by process, not by the file alone: `tasklist` returned "No tasks are running" for
+Godot_v4.7.2-stable_win64_console.exe, and the last line was the game build's IDLE 21:16:47. Clear.
+Claimed RUNNING 2026-11-21T21:46:26-06:00, cap claim+25 = 22:11:26, declared finish 21:51. Released
+IDLE 2026-11-21T21:51:07-06:00 - inside my own declared finish, and before the HUD's habitual :53.
+No crossing declared and none taken.
+
+MY OWN ERROR, FIRST, BECAUSE IT COST THE FIRST LAUNCH. I launched with `--quit-after 3000`. The
+script's own budget is `RUN_CAP_FRAMES := 60 * 120` = 7200 frames PER RUN, four runs. The engine quit
+under the script at floor 3 with no verdict and no CAP HIT line - not a game defect, not a script
+defect, MY invocation. Relaunched 21:47:48 with `--quit-after 40000` and refreshed the lock on the
+relaunch, as the rule requires.
+
+WHAT THE SOAK ACTUALLY DID (three of four runs, run 4 killed by me at my declared finish):
+  run 1  CAP HIT at floor 3 of 10, state=search, floors_visited=1, trap_log all zero
+  run 2  CAP HIT at floor 4 of 10, state=fight,  floors_visited=3, spotted 1, sprung 0, damage 0.0
+  run 3  CAP HIT at floor 4 of 10, state=fight,  floors_visited=5, trap_log all zero
+EVERY run burned its full 2 minutes. The DEEPEST FLOOR REACHED IN THE WHOLE SOAK WAS 4. The feed
+shows `Floor 3 -` five times and `Floor 4 -` twice and nothing deeper. START_FLOOR is 3 and
+FLOORS_PER is 8 so the script's header promises "TWO lord floors in each run" - the first of them is
+floor 5. **IT NEVER GOT THERE.** `LORD RISES` appears ZERO times in the log; `lord DOWN` zero;
+sprung 0 and damage 0.0 aggregated across every delve. So the two things L56 exists to gate - L46
+(traps actually hurt) and L45 (lords rise and scale in play) - saw no qualifying floor at all.
+
+THE VERDICT, AND I AM CALLING IT DERIVED RATHER THAN OBSERVED. Run 4 was killed by me, so the
+summary block never printed. From the three runs in hand the summary would read
+`L56 CAP HIT - NO VERDICT`: `_ok()` appends to `_fails` at line 49 even on a capped run, the three
+play-observed checks (sprung > 0, damage > 0, lords_seen > 0) were unmet on the floors reached, so
+`_fails.is_empty()` is false and `_capped` is non-empty. That is CERTAIN only if run 4 alone would
+not have produced a sprung trap AND trap damage AND a risen lord. It would have had to do in two
+minutes what three runs did not do in six. Likely, not proven, and I will not write it as proven.
+I ALSO GOT THE REASON WRONG IN WRITING ONCE. My 21:51:07 IDLE line said that once any run caps the
+script CANNOT print `L56_TEST OK`. That is false: the branch order is `if _fails.is_empty(): OK`
+FIRST and `elif not _capped.is_empty(): CAP HIT` second, so an all-green capped soak would print OK.
+I checked the branch after writing the line, caught it, and appended a CORRECTION line to
+docs/RUN_LOCK.txt at 21:51:50 rather than leave a wrong assertion in the canonical file.
+
+NOT MINE, AND NOT TOUCHED. `tools/_l56_test.gd` is in tools/ and is not this lane's file. I did not
+edit it and I am not proposing a number for it. The mismatch is for whoever owns it:
+RUN_CAP_FRAMES 7200 against FLOORS_PER 8, measured at 1, 3 and 5 floors_visited per run with the
+deepest floor 4 of 10. On this evidence the per-run budget is short by roughly a factor of three for
+its own floor count, and until that is settled L56 CANNOT return OK or FAIL on this machine no
+matter how long a lock window it is given. A soak that cannot reach its own gated floors is not a
+window problem and splitting it harder will not fix it.
+
+MY THREE FILES: scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md are UNCHANGED this
+cycle. B115's four-gate battery is green on merged main and the team lead ticked B114 on it this
+hour, so there was no owed gate to re-run and I invented none. No drift check was owed because
+neither the code nor the data file moved.
+No live Twitch test this run: nothing in L56 touches chat, EventSub or channel points, so there was
+no path to prove and bellmirebro posted nothing and cheered nothing.
+Nothing owed in `twitch_eventsub.gd`. Untracked `_l56_soak.log` is at the worktree root, named here,
+and not committed.
+Next firing: whatever the 21:58 TAKE THIS NEXT gives the CHAT BOT row. L56's remainder (run 4) is
+carried, but I am flagging that re-running it unchanged buys nothing.
+Decision for Mr. E: none.

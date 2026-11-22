@@ -1,3 +1,167 @@
+## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main **42673a8b**: all SIX lanes (laptop 7f04982c, content f2e24f51, hub
+0d762c8a, hud-ui 78ce6f40, art 7ec49022, chatbot d3d6cd1e). FOUR conflicts (content, hub, hud-ui,
+chatbot), every one in root PROGRESS.md, resolved by the state machine keeping BOTH sides. The
+assertion that matters: `diff --numstat` origin/main(eb98fb07)..HEAD on PROGRESS.md reads **+93/-0**
+- ZERO lines removed - and the per-lane contributions measured off `...` three-dot ranges are
+21 + 5 + 8 + 7 + 0 + 52 = **93**, which is the same number. Insertions equal the sum of what each
+lane added; nothing was dropped in a merge. ZERO residual markers on all four exact shapes.
+
+*** TICKED THIS HOUR - SIX ***
+- **S99 (game build) - THE CHANGER'S `MB_NAME` ROW. TICKED, AND I PARSED BOTH SIDES MYSELF.** The
+  21:58 row asked for `"changer": "Evenhand"` in `Delve.MB_NAME` and a re-run of
+  `tools/_s51_names.gd`. I did NOT count with a regex: a brace-matched parse of `const MB_NAME` in
+  scripts/delve.gd gives **47 entries**, `miniboss_feed.by_key` in data/lore_lines.json gives **47
+  keys**, and the set difference is **EMPTY IN BOTH DIRECTIONS**. SETS EQUAL. That constant has lied
+  to three seats through a flat regex and it did not lie to this one.
+- **ART - THE 48TH BODY: THE STOPPER ("Chokewell"). TICKED AS A BODY.** Fit is the acceptance test
+  and I did not stop at the numbers. The row's own measurements: 4 parts, 910 faces, 2.24 x 2.13 x
+  2.38 m, CORRIDOR-SAFE with 8.758 m margin, UNDER-LID with 7.12 m clear, `floorgeom_stale` false.
+  Then I LOOKED at `front.png`, `side.png` and `hero_back.png` myself. Front: the ring reads, the
+  five pale pegs on the rim are countable. **Side - and this is the view the idea stakes itself on
+  ("a viewer can see how long the party has ... from the side of the screen where the ring is
+  edge-on") - the five pegs are the MOST legible thing in the frame.** The claim and the picture
+  agree, which is not something a register can tell you. Back: it has a facing - hood, ring and pegs
+  all read - which is the exact defect that got past every number in the Beadle's register on 18 Nov,
+  so I checked for it on purpose. It is a body, it is NOT WIRED, and the wiring is the row below.
+- **ART - MR. E'S 22:38 RULING: THE CHANGER'S TURNSTILE BARS ARE DELETED. TICKED.** His words,
+  22:38 CT, carried verbatim with a time in the supervisor's doc: *"if its a big deal delete the
+  bars"*. I treated it as WORK, not as an authority change - that is the only reading a relayed
+  ruling supports, and I say so rather than leaving it implied. Verified two ways: `grep -i
+  turnstile tools/art/minibosses.py` returns **NOTHING**, and I LOOKED at the re-rendered
+  `changer/front.png` - the three bars at hip height are gone, the post, drum and tie are untouched
+  exactly as the ruling specified, and the silhouette no longer has anything crossing it. This also
+  retires the 20:58 seat's own "the bars do cross his silhouette from the front" note.
+- **C-175 (content) - THE STAND-DOWN. TICKED; A WRITTEN STAND-DOWN IS THE DELIVERY.** The row said
+  the feed was level at 47/47 and nothing was owed. The lane measured rather than trusted, named
+  the four data files it did NOT touch so every pre-existing key is byte-identical, and said in
+  writing that `phase2_words`, `phase2_words_alt` and `phase2_words_alt2` stay unwired. Its
+  PROGRESS.md contribution is +5/-0. Confirmed against my own parse: by_key 47.
+- **HUB - THE STANDING CHECK. TICKED.** Its claim and mine are the same number and I measured mine
+  on the refs, not on its report: `origin/gh-pages^{tree}` == `origin/hub:web` == `origin/main:web`
+  == **02257b2f**, and `git diff` between gh-pages' tree and hub's web tree is **EMPTY**. It also
+  logged the Ultimate_Animated_Animals licence as CC0 1.0 **read off disk**, which is the hard rule
+  obeyed to the letter for the second hour running.
+- **U136 (HUD) - THE STAND-DOWN, AND IT READ THE RIGHT COPY. TICKED.** No .gd changed, no Godot
+  claimed, nothing HUD-owned open, written up with its own next-firing plan. It read the lock from
+  **R's WORKING copy** at 22:53, saw `IDLE 22:14:49` with no RUNNING after it, correctly called the
+  lock FREE - and then did not claim it, because there was no run to make. That is the distinction
+  between a free lock and an owed run, drawn correctly.
+
+*** NOT TICKED, AND WHY ***
+- **B117 (chat bot) - THE LOCK-WRITER ROW IS STILL OWED. NOT TICKED - AND THE LANE IS NOT CHARGED
+  FOR IT, BECAUSE THE FILE LIED TO IT AND THE FILE IS MINE TO FIX.** It was given two things at
+  21:58: L56's remainder, and fix your own `%s` lock writer. It did neither; it stood down. It
+  reported drift clean both ways and COMMANDS.md level at 32, which is a real delivery, but the row
+  is not discharged and carries forward.
+
+*** THE LOCK FILE IS LYING IN TWO NEW WAYS AND IT COST THE CHAT BOT ITS 22:45 CYCLE. MINE TO FIX. ***
+This is the finding of the hour and it is not a lane's fault. Measured by me, not taken from a
+report:
+  (a) **A RUNNING LINE WAS WELDED ONTO THE TAIL OF ANOTHER LANE'S IDLE.** On `origin/laptop`, on
+      `origin/main` and in R's working tree, this is **ONE LINE**:
+      `IDLE 2026-11-21T21:54:46-06:00 - HUD U135: ... (HUD)RUNNING 2026-11-21T22:07:47-06:00 (game
+      build: merge + gates + item, ...)`. The game build appended its claim with **no leading
+      newline**. A line-oriented reader asking "what is the last line" or "is there an IDLE after
+      the last RUNNING" gets the wrong answer from a file in that state. The chat bot found this and
+      reported it in its own PROGRESS entry; I confirmed it on all three copies.
+  (b) **THE COMMITTED COPY ENDS ON A RUNNING THAT WAS RELEASED SEVEN SECONDS LATER.** `origin/laptop`
+      was committed at **22:14:42**; the game build wrote `IDLE 22:14:49` into the working tree
+      **seven seconds after that**, and it will not reach a ref until the 23:07 commit. So from
+      22:14 to 23:07, every lane reading the REF sees a game-build hold that has in fact ended.
+  **THE COST, THIS HOUR:** the chat bot read `docs/RUN_LOCK.txt` on the `laptop` ref at 22:45, saw a
+  RUNNING with no IDLE following it, and stood down. **That is Mr. E's yield rule applied exactly as
+  he wrote it** - liveness is decided by the IDLE, not by the clock, and the lane explicitly refused
+  to clear on age even though it had the stale signature in hand (no Godot alive, twice checked, 16
+  minutes past cap). The HUD, eight minutes later, read R's WORKING copy, saw the IDLE and correctly
+  called the lock free. **BOTH LANES WERE RIGHT. THE TWO COPIES DISAGREED.**
+  **WHAT I DID ABOUT IT THIS RUN:** nothing to the file itself. The lock file is append-only
+  evidence and repairing a historical line would be rewriting evidence, so lines 1105, 1107 and the
+  welded 22:07 line all STAY AS WRITTEN. The fix is forward-only and it is in the two rows below.
+
+*** THE ROWS - ONE PER LANE ***
+- **GAME BUILD - WIRE THE STOPPER, AND FIX HOW YOU WRITE YOUR LOCK LINE.** (1) Art shipped the 48th
+  body this hour; `Delve.MB_NAME` is at 47 and `miniboss_feed.by_key` is at 47, so the Stopper has a
+  body and no name. Add `"stopper": "Chokewell"` **only after content's feed row lands** - you held
+  the changer out at S98 for exactly this reason and you were right to; do not reverse that
+  judgement now. Re-run `tools/_s51_names.gd` and MEASURE BOTH SIDES WITH A BRACE-MATCHED PARSER.
+  (2) **Your lock append has no leading newline** - see (a) above. Make the writer ensure the file
+  ends in a newline before it appends, so a RUNNING can never weld onto the previous lane's IDLE.
+  (3) **Write and COMMIT your IDLE line.** Your commit at 22:14:42 preceded your release at 22:14:49
+  by seven seconds, which leaves a permanently-open RUNNING on every ref for 53 minutes. Either
+  write the IDLE before you push, or commit it. Fixing your own instrument is NOT a new item.
+  (4) Still yours and still open: **item 1 of Mr. E's 10:17 directive, the mana UI off the game
+  view.**
+- **CONTENT - THE STOPPER'S FEED ROW. THIS IS A REAL ITEM AGAIN.** `miniboss_feed.by_key` is 47 and
+  there are 48 bodies. The 48th is `stopper`, title "Chokewell", theme crypt, wear 0.32, and art's
+  own feed_line is *"The air has gone thick. Something is seating a lid."* Its mechanic is the one
+  thing no other miniboss in the set has - **a DEADLINE**: five pegs on the rim, one drops every
+  notch, and nothing the party does to the room buys time back. Put the clock in the lines rather
+  than explaining it beside them, the way C-174 did for the changer. **DO NOT WIRE
+  `phase2_words_alt2`, `phase2_words` or `phase2_words_alt`** - dead by your own `_note` and by the
+  audit below, for the fourth hour running.
+- **ART - THE 48TH IS TICKED. HOLD, AND DO NOT RE-RENDER THE 47.** You re-rendered the changer this
+  hour and that was CORRECT - Mr. E's 22:38 ruling required it - but nothing else needs a frame. If
+  you build a 49th, fit is still the acceptance test and the back view is still the one that catches
+  what the numbers miss. Your register is GREEN on its own measurement this hour: `ok` **true**,
+  `errors` **[]**, `floorgeom_stale` **false**, **59 rows = 48 live bodies + 11 retired `_chibi`**.
+- **HUB - HOLD web/ STEADY. THERE IS NO PUBLISH GAP, SECOND HOUR RUNNING.** Re-measured on the refs
+  rather than copied: gh-pages tip **029e4fac**, tree **02257b2f**, identical to `origin/hub:web`,
+  empty diff. You made no READY TO PUBLISH claim, so **I ran NO publish verification gate and none
+  was owed** - saying that plainly rather than reporting an unearned gate.
+- **HUD - NOTHING OWED; YOUR 22:55 STAND-DOWN WAS THE RIGHT SHAPE.** Keep reading the lock from R's
+  WORKING copy - you did, the chat bot read the ref, and the two disagreed tonight; your copy was
+  the true one. Keep committing your logs. Do NOT take L31's status-effect icons - delve.gd,
+  monster.gd, party_frames.gd and boss_bar.gd are the game build's files.
+- **CHAT BOT - FIX YOUR LOCK WRITER FIRST THIS TIME, THEN L56's REMAINDER.** The `%s` row carries
+  forward unchanged: three lines in docs/RUN_LOCK.txt read `RUNNING %s` / `IDLE %s` (685 from B77,
+  1105 and 1107 from B116). Nobody was misled because you carry the times in the prose, but a seat
+  clearing on AGE cannot read a stamp that says `%s`. **AND READ R'S WORKING COPY, NOT THE `laptop`
+  REF.** Your 22:45 stand-down was correct reasoning on a bad input and I am charging you nothing
+  for it - but the working copy had the IDLE your ref was missing, and the standing rule has always
+  been that R's working tree is the authoritative lock. Your second, independent reason (an L56 soak
+  is 4 x 2 min plus boot and would have run into the HUD's :53) was sound on its own.
+
+*** FOR THE SUPERVISOR ***
+Nothing is waiting on you. gh-pages and `origin/hub:web` are both tree **02257b2f** with an empty
+diff, so there is no publish gap to authorise and no lane claimed READY TO PUBLISH.
+
+*** THE DEAD-DATA AUDIT, 22:58 CT 21 NOV, measured on merged main 42673a8b ***
+Corpus `scripts/*.gd` + `web/app.js` = **48 files / 2,375,449 chars**; `data/*.json` = 12 files,
+**150 top-level keys**. UNREFERENCED ASSET DIRECTORIES **ZERO** (34 directories with files, measured
+off `assets/` only). UNREAD LIVE DATA KEYS **ZERO**. Zero-hit total **60 = 45 `_note_` + 15
+NON-NOTE**, the same accounted-for 15 as every honest reading before it: `lord_intros_alt` and
+`unique_intros_alt` (READ at delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four declared-dead
+(`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`), and the
+nine prose/spec strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`,
+`promotion_line`, `one_roll`, `_gating`, `canon_silences`). THE SERIES, non-note first because the
+raw total carries no signal: **15 / 15 / 15 / 15 / 15**, notes 37 -> 38 -> 41 -> 45 -> **45**, totals
+52 -> 53 -> 56 -> 60 -> **60**. THE UNREAD COUNT DID NOT MOVE. My matcher is LITERAL-KEY ONLY and
+cannot see a runtime-composed key - that is what the accounted-for list is for.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt - the gate is on the
+CALL, not a field, settled 09:07 CT 18 Nov - so I made NO write attempt this run and say so. Land
+them all on the first live turn). CARRIED AND STILL OWED: (1) the gh-pages block - tip **029e4fac**,
+tree **02257b2f**, NOTHING merged-and-unpublished; the prompt's "3 files / +59 / -1 with the
+supervisor since 20 Nov" is SPENT AND WRONG - **SIXTH HOUR OWED**; (2) L31 IS WHOLE; (3) THERE ARE
+TWO ART REGISTERS; (4) the standing art-register note must be DELETED OUTRIGHT, not softened - it
+has been wrong in three directions in twelve hours and is GREEN now. CORRECTED AND ADDED THIS HOUR:
+  (5) **THE 21:58 SEAT'S CORRECTION (6) IS ITSELF WRONG AND MUST NOT BE BAKED IN.** It says the fit
+      register "judges 49 rows / 47 live". It does not. `49` is the `pairs` count from the OTHER
+      register and `pairs` does not appear in `_report.json` at all. I parsed the file: the
+      `minibosses` map holds **59 rows = 48 live bodies + 11 retired `_chibi` cells**. The
+      replacement sentence for the prompt is: *"art's fit register judges 59 rows - 48 live bodies
+      and 11 retired `_chibi`. RE-MEASURE ITS VERDICT AND ITS COUNT EVERY HOUR AND NEVER QUOTE
+      EITHER FROM THIS PROMPT."* Two seats running have now mis-stated this number; that is what the
+      never-quote-a-count rule is for, and it applies to the correction as much as to the prompt.
+  (6) **MB_NAME / by_key ARE NOW EQUAL AT 47/47** (S99, ticked above). The owed correction is no
+      longer "46 vs 47"; it is that there are **48 bodies and 47 names**, with the Stopper's row
+      owed to content then the game build.
+  (7) **ADD THE LOCK-FILE WRITER RULE TO THE GAME BUILD PROMPT:** ensure the file ends in a newline
+      before appending a RUNNING line, and write-or-commit the IDLE before pushing. Both defects are
+      measured above and both are forward-only fixes.
+  (8) THE ID BASELINE: **B117, C-175, D100, H32, L74, S99, T5, U136**, art on its 48th body.
+
 ## TAKE THIS NEXT - Updated THE 21:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main **808fe03c**: all SIX lanes (laptop efddb5d1, content 78d0f634, hub
 1b36289a, hud-ui 8c162ac5, art b4abebb1, chatbot 06a9551d). FOUR conflicts (content, hub, hud-ui,

@@ -644,7 +644,65 @@ def shoot(objs, pts, outdir, views, aura, creature=(), hero_meshes=(), tmpdir=No
     return written, eng, vis, edge
 
 
-def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
+def views_dir_for(repo, key, row, tag="", prefer_tag=False, names=None):
+    """WHICH DIRECTORY DID *THIS ROW'S* PICTURES GO INTO? ASK THE ROW, NOT THE RUN.
+
+    *** THE DEFECT THIS CLOSES - FOUND BY THE TEAM LEAD 21 NOV 2026 20:58 CT IN
+    *** WORK THIS LANE SHIPPED, AND IT IS THE CRY-WOLF INVERSION OF THE 20 NOV
+    *** LYING-GATE FAULT. ***
+    `measure_disk_frames` built `os.path.join(root, key + tag, fname)` for EVERY
+    row using *THIS RUN'S* tag. The changer pass ran `--tag ch5`, so the disk
+    pass went looking for `beadlech5/hero_front.png`, `blowerch5/...` and 44
+    more directories that exist only for the body rendered this run. Result:
+    `errors` 192 (48 rows x the same 4), `shipped_red` **46**, `ok_shipped`
+    **false** - over 46 bodies whose three views are sitting on disk, correct,
+    at `renders/art/minibosses/<key>/`. I had read the first four lines of my
+    own error list and written "the Beadle's renders need regenerating", which
+    was a WRONG DIAGNOSIS of a REAL red: nothing needed regenerating.
+    A gate that cries wolf on everything is as useless as one that never cries.
+
+    AND THE FIX IS NOT "DROP THE TAG" - that is the 17:47 fault going the other
+    way, and it would read the UNTAGGED picture for the body this run actually
+    rendered. `changer/` on disk holds front.png, side.png, three_quarter.png
+    from a different harness entirely, so a row whose views are hero_*.png and
+    a directory that merely EXISTS are not the same question. So:
+      - the directory is chosen by whether it holds THIS ROW'S OWN view files,
+      - the row's recorded `views_dir` wins (it is written at render time now),
+      - then this run's tag, then the untagged canonical path,
+      - and a row for which NO candidate holds the views is RED, naming every
+        candidate tried and why it was rejected. Nothing is silenced: a
+        genuinely missing view still goes red, as it must.
+    `prefer_tag` flips the first two for sheet(), whose whole purpose on a
+    tagged run is to show the TAGGED arm of an A/B (see sheet's own note).
+    Returns (abs dir or None, relpath, why, tried)."""
+    root = os.path.join(repo, "renders", "art", "minibosses")
+    names = list(names or (row or {}).get("views") or ())
+    rec = (row or {}).get("views_dir")
+    cands = []
+    tagged = (key + tag, "this run's tag %r" % tag) if tag else None
+    recorded = (rec, "recorded on the row when it was rendered") if rec else None
+    for c in ((tagged, recorded) if prefer_tag else (recorded, tagged)):
+        if c:
+            cands.append(c)
+    cands.append((key, "the untagged canonical path"))
+    tried, seen = [], set()
+    for rel, why in cands:
+        if rel in seen:
+            continue
+        seen.add(rel)
+        d = os.path.join(root, rel)
+        if not os.path.isdir(d):
+            tried.append((rel, "no such directory"))
+            continue
+        miss = [n for n in names if not os.path.isfile(os.path.join(d, n))]
+        if miss:
+            tried.append((rel, "exists but lacks %s" % ",".join(sorted(miss))))
+            continue
+        return d, rel, why, tried
+    return None, None, None, tried
+
+
+def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag="", rep=None):
     """Fourteen cells, one scale, one ground line, and the hero's head height
     drawn straight across every cell as a dashed rule - so the comparison is in
     the picture and not in a table.
@@ -672,8 +730,15 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
     px_per_m = ch / FRAME_H
     ground_row = ch - int(GROUND_UP * px_per_m)
     head_row = ground_row - int(hero["h"] * px_per_m)
+    TRIO = ("hero_front.png", "hero_side.png", "hero_back.png")
     for i, key in enumerate(keys):
-        p = os.path.join(root, key + tag, "hero_front.png")
+        # SAME DIRECTORY QUESTION AS THE DISK PASS, SAME ANSWER - but the tag
+        # wins here, because a tagged sheet exists to show the tagged arm.
+        row = ((rep or {}).get("pairs") or {}).get(key) or {}
+        d, _rel, _why, _tried = views_dir_for(repo, key, row, tag,
+                                              prefer_tag=True, names=TRIO)
+        base = d if d is not None else os.path.join(root, key + tag)
+        p = os.path.join(base, "hero_front.png")
         cx, cy = (i % cols) * cw, (i // cols) * (ch + lab)
         if os.path.isfile(p):
             a = G.read_png(p)
@@ -698,7 +763,7 @@ def sheet(repo, keys, hero, name="_hero_scale", cols=3, tag=""):
         # over three different files that were fine. An instrument pointed at
         # the wrong file is not a weaker instrument, it is no instrument.
         for extra in ("hero_side.png", "hero_back.png"):
-            q = os.path.join(root, key + tag, extra)
+            q = os.path.join(base, extra)
             if os.path.isfile(q):
                 b = G.read_png(q)
                 m = int((b[..., 3] > 0.02).sum())
@@ -765,9 +830,25 @@ def measure_disk_frames(repo, rep, tag=""):
         if not views:
             continue
         air, dedge = {}, {}
+        d, rel, why, tried = views_dir_for(repo, key, row, tag, names=views)
+        if d is None:
+            # RED, AND IT SAYS WHERE IT LOOKED. See views_dir_for().
+            row["views_from"] = None
+            row["views_dir_tried"] = ["%s: %s" % t for t in tried]
+            note = ("NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried %s"
+                    % "; ".join("%s (%s)" % t for t in tried))
+            row["air_px"] = {os.path.splitext(f)[0].replace("hero_", ""): None
+                             for f in views}
+            row["frame_edge_disk"] = {os.path.splitext(f)[0].replace("hero_", ""): note
+                                      for f in views}
+            row["air_px_eps"] = DIFF_EPS
+            continue
+        row["views_dir"] = rel
+        row["views_from"] = why
+        row.pop("views_dir_tried", None)
         for fname in views:
             vname = os.path.splitext(fname)[0].replace("hero_", "")
-            path = os.path.join(root, key + tag, fname)
+            path = os.path.join(d, fname)
             if not os.path.isfile(path):
                 air[vname] = None
                 dedge[vname] = "MISSING FILE"
@@ -1130,6 +1211,10 @@ def main():
                     fits_frame=bool((amx.x - amn.x) <= FRAME_W - MARGIN_X
                                     and (amx.z - amn.z) <= FRAME_H - GROUND_UP),
                     engine=eng, views=[os.path.basename(p) for p in written],
+                    # THE ROW NOW CARRIES ITS OWN DIRECTORY. A later run with a
+                    # different --tag can no longer go looking for this row's
+                    # pictures under ITS tag. See views_dir_for().
+                    views_dir=key + args.tag,
                     visibility=vis, frame_edge=edge,
                     ground=(dict(GROUND_STATS) if GROUND else prior_ground),
                     ground_from=("measured this run" if GROUND else
@@ -1198,7 +1283,8 @@ def main():
     G.purge()
     try:
         hero = rep["hero"] if rep["hero"] else {"h": 1.0}
-        bad, checked = sheet(args.repo, keys, hero, args.name, args.cols, args.tag)
+        bad, checked = sheet(args.repo, keys, hero, args.name, args.cols,
+                             args.tag, rep)
         rep["blank_check"] = {"files": len(checked), "failures": [list(b) for b in bad]}
         if bad:
             rep["ok"] = False

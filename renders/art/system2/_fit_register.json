@@ -1,6 +1,6 @@
 {
- "verdict": "FAIL",
- "ok": false,
+ "verdict": "GREEN",
+ "ok": true,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -51,11 +51,7 @@
   ]
  },
  "laths": [],
- "floor_breaks": [
-  "staff_common: 51 vertices below the floor, deepest 0.180 m under it - the carry drags this weapon through the ground",
-  "staff_uncommon: 38 vertices below the floor, deepest 0.216 m under it - the carry drags this weapon through the ground",
-  "staff_rare: 149 vertices below the floor, deepest 0.212 m under it - the carry drags this weapon through the ground"
- ],
+ "floor_breaks": [],
  "blanks": [],
  "frame_clips": [],
  "blind_views": [],
@@ -77,6 +73,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 65,
     "side": 44,
@@ -149,6 +146,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 67,
     "side": 54,
@@ -221,6 +219,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 119,
     "side": 62,
@@ -293,6 +292,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 63,
     "side": 40,
@@ -365,6 +365,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 78,
     "side": 42,
@@ -437,6 +438,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 88,
     "side": 48,
@@ -509,6 +511,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 90,
     "side": 60,
@@ -581,6 +584,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 132,
     "side": 75,
@@ -653,6 +657,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 142,
     "side": 79,
@@ -725,6 +730,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 26,
     "side": 29,
@@ -797,6 +803,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 63,
     "side": 35,
@@ -869,6 +876,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 61,
     "side": 37,
@@ -928,15 +936,15 @@
   "staff_common": {
    "model": "assets/gear/dungeon/staff_common.glb",
    "verts": 315,
-   "checked": 302,
-   "reach": 0.902,
-   "drop": 0.821,
+   "checked": 315,
+   "reach": 1.377,
+   "drop": 0.346,
    "span": 0.393,
-   "tip_z": 1.542,
+   "tip_z": 2.017,
    "hero_h": 2.45,
-   "clip": 52,
-   "ground": 51,
-   "floor_depth": 0.1802,
+   "clip": 141,
+   "ground": 0,
+   "floor_depth": 0.0,
    "hand_scale": 1.9,
    "engine_mirrored": true,
    "engine_rot_deg": [
@@ -945,15 +953,27 @@
     "90"
    ],
    "roll_applied_deg": 0.0,
+   "grip_shift": {
+    "fam": "staff",
+    "value": 0.25,
+    "axis_godot": "y",
+    "sign": 1.0,
+    "mesh_vec": [
+     0.0,
+     0.0,
+     0.25
+    ],
+    "read_from": "gear.gd"
+   },
    "minor": {
     "front": 80,
     "side": 81,
     "back": 80
    },
    "opaque": {
-    "front": 100814,
-    "side": 82329,
-    "back": 101537
+    "front": 98961,
+    "side": 81319,
+    "back": 99750
    },
    "border": {
     "front": 0.0,
@@ -961,24 +981,24 @@
     "back": 0.0
    },
    "vis": {
-    "front": 10744,
-    "side": 10996,
-    "back": 7277
+    "front": 9016,
+    "side": 11144,
+    "back": 5669
    },
    "delta": {
-    "front": 11287,
-    "side": 11218,
-    "back": 7492
+    "front": 9533,
+    "side": 12174,
+    "back": 5872
    },
    "alone": {
-    "front": 13683,
-    "side": 13778,
-    "back": 13731
+    "front": 13672,
+    "side": 13781,
+    "back": 13735
    },
    "seen": {
-    "front": 0.7852,
-    "side": 0.7981,
-    "back": 0.53
+    "front": 0.6594,
+    "side": 0.8086,
+    "back": 0.4127
    },
    "outside": {
     "front": 0,
@@ -1004,15 +1024,15 @@
   "staff_uncommon": {
    "model": "assets/gear/dungeon/staff_uncommon.glb",
    "verts": 331,
-   "checked": 318,
-   "reach": 1.276,
-   "drop": 0.857,
+   "checked": 331,
+   "reach": 1.751,
+   "drop": 0.382,
    "span": 0.486,
-   "tip_z": 1.916,
+   "tip_z": 2.391,
    "hero_h": 2.45,
-   "clip": 64,
-   "ground": 38,
-   "floor_depth": 0.2164,
+   "clip": 110,
+   "ground": 0,
+   "floor_depth": 0.0,
    "hand_scale": 1.9,
    "engine_mirrored": true,
    "engine_rot_deg": [
@@ -1021,15 +1041,27 @@
     "90"
    ],
    "roll_applied_deg": 0.0,
+   "grip_shift": {
+    "fam": "staff",
+    "value": 0.25,
+    "axis_godot": "y",
+    "sign": 1.0,
+    "mesh_vec": [
+     0.0,
+     0.0,
+     0.25
+    ],
+    "read_from": "gear.gd"
+   },
    "minor": {
     "front": 99,
     "side": 101,
     "back": 99
    },
    "opaque": {
-    "front": 104891,
-    "side": 83137,
-    "back": 105516
+    "front": 103738,
+    "side": 81466,
+    "back": 104455
    },
    "border": {
     "front": 0.0,
@@ -1037,24 +1069,24 @@
     "back": 0.0
    },
    "vis": {
-    "front": 17002,
-    "side": 18607,
-    "back": 11984
+    "front": 16740,
+    "side": 18925,
+    "back": 10726
    },
    "delta": {
-    "front": 17760,
-    "side": 19204,
-    "back": 12253
+    "front": 17380,
+    "side": 21016,
+    "back": 10999
    },
    "alone": {
-    "front": 22071,
-    "side": 21753,
-    "back": 21945
+    "front": 22085,
+    "side": 21764,
+    "back": 21958
    },
    "seen": {
-    "front": 0.7703,
-    "side": 0.8554,
-    "back": 0.5461
+    "front": 0.758,
+    "side": 0.8696,
+    "back": 0.4885
    },
    "outside": {
     "front": 0,
@@ -1080,15 +1112,15 @@
   "staff_rare": {
    "model": "assets/gear/dungeon/staff_rare.glb",
    "verts": 890,
-   "checked": 890,
-   "reach": 1.355,
-   "drop": 0.853,
+   "checked": 832,
+   "reach": 1.83,
+   "drop": 0.378,
    "span": 0.417,
-   "tip_z": 1.996,
+   "tip_z": 2.471,
    "hero_h": 2.45,
-   "clip": 202,
-   "ground": 149,
-   "floor_depth": 0.2122,
+   "clip": 310,
+   "ground": 0,
+   "floor_depth": 0.0,
    "hand_scale": 1.9,
    "engine_mirrored": true,
    "engine_rot_deg": [
@@ -1097,15 +1129,27 @@
     "90"
    ],
    "roll_applied_deg": 0.0,
+   "grip_shift": {
+    "fam": "staff",
+    "value": 0.25,
+    "axis_godot": "y",
+    "sign": 1.0,
+    "mesh_vec": [
+     0.0,
+     0.0,
+     0.25
+    ],
+    "read_from": "gear.gd"
+   },
    "minor": {
     "front": 85,
     "side": 87,
     "back": 85
    },
    "opaque": {
-    "front": 102584,
-    "side": 82860,
-    "back": 103234
+    "front": 101780,
+    "side": 81491,
+    "back": 102489
    },
    "border": {
     "front": 0.0,
@@ -1113,24 +1157,24 @@
     "back": 0.0
    },
    "vis": {
-    "front": 12860,
-    "side": 15461,
-    "back": 9397
+    "front": 14156,
+    "side": 15354,
+    "back": 8555
    },
    "delta": {
-    "front": 13770,
-    "side": 15908,
-    "back": 9722
+    "front": 15170,
+    "side": 19774,
+    "back": 8909
    },
    "alone": {
-    "front": 17822,
+    "front": 17828,
     "side": 18099,
-    "back": 17832
+    "back": 17833
    },
    "seen": {
-    "front": 0.7216,
-    "side": 0.8542,
-    "back": 0.527
+    "front": 0.794,
+    "side": 0.8483,
+    "back": 0.4797
    },
    "outside": {
     "front": 0,
@@ -1173,6 +1217,7 @@
     "90"
    ],
    "roll_applied_deg": 35.0,
+   "grip_shift": null,
    "minor": {
     "front": 87,
     "side": 99,
@@ -1249,6 +1294,7 @@
     "90"
    ],
    "roll_applied_deg": 35.0,
+   "grip_shift": null,
    "minor": {
     "front": 125,
     "side": 144,
@@ -1325,6 +1371,7 @@
     "90"
    ],
    "roll_applied_deg": 35.0,
+   "grip_shift": null,
    "minor": {
     "front": 123,
     "side": 143,
@@ -1397,6 +1444,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 88,
     "side": 40,
@@ -1469,6 +1517,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 128,
     "side": 43,
@@ -1541,6 +1590,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 130,
     "side": 48,
@@ -1613,6 +1663,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 110,
     "side": 30,
@@ -1685,6 +1736,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 122,
     "side": 44,
@@ -1757,6 +1809,7 @@
    "engine_mirrored": false,
    "engine_rot_deg": null,
    "roll_applied_deg": 0.0,
+   "grip_shift": null,
    "minor": {
     "front": 113,
     "side": 68,

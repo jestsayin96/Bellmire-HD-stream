@@ -296,6 +296,79 @@ def gear_overrides(gear_path):
     return out
 
 
+# =============================================================================
+# *** FAULT 8, RAISED BY THE TEAM LEAD 21 NOV 2026 20:58 CT AFTER A ROW FROM
+# *** THAT SEAT, BUILT ON THIS FILE'S NUMBERS, WAS SENT TO THE WRONG LANE. ***
+# =============================================================================
+# This register said the staff drags through the floor on all three tiers
+# (deepest break 0.216 m) and the game build was told to move it. The lane
+# measured first and REFUSED, and it was right: `git grep STAFF_GRIP_SHIFT`
+# finds gear.gd:90 (const 0.25) and gear.gd:127 (applied to the staff model's
+# children) and NO HIT ANYWHERE IN tools/. The engine already lifts the staff's
+# grip toward its butt before the x1.9 hand scale, so the shipped butt sits
+# about +0.26 m ABOVE the floor and this file was 0.475 m pessimistic.
+# SAME FAMILY AS FAULT 5 AND FAULT 6: a carry this file does not READ is a
+# carry this file cannot MEASURE, and the number it prints instead is an
+# assumption with a decimal point on it. So the shift is READ, red on empty,
+# and the three things that make it a link rather than a photograph are all
+# read too - the value, the AXIS it moves on, and the FAMILY the engine gates
+# it to. If any of them moves, this file fails loudly instead of scoring a
+# carry nobody mirrored.
+#
+# THE AXIS, DERIVED THROUGH THE SAME BOUNDARY AS SLOT_ROT AND NOT COPIED:
+# gear.gd moves the model's CHILDREN on the model's local +Y, in Godot's axes
+# (Godot and glTF are both Y-up, so the node offset crosses unchanged); the
+# Blender glTF importer sends glTF +Y -> Blender +Z and glTF +Z -> Blender -Y.
+# So Godot local +Y is Blender mesh local +Z, which is the frame SLOT_ROT's
+# columns are written in. Hence GODOT_TO_BLENDER_MESH below.
+# AND THE PLACE IT GOES: the engine sets m.scale and m.rotation_degrees on the
+# model and then offsets the children INSIDE it, so the offset is scaled by the
+# hand scale - world = att @ R @ S @ T @ child. Offsetting the root by T is
+# identical for the whole mesh set, since every child moves by the same local
+# vector. base @ Rslot @ S @ T is therefore the engine's own order.
+GODOT_TO_BLENDER_MESH = {"x": (1.0, 0.0, 0.0),
+                         "y": (0.0, 0.0, 1.0),
+                         "z": (0.0, -1.0, 0.0)}
+
+
+def grip_shift(gear_path):
+    """Read the engine's grip shift out of gear.gd: value, axis and family.
+    RED ON EMPTY in all three, and red if the family is one this file does not
+    mirror - a shift applied to a carry nobody calibrated is not measurable."""
+    with open(gear_path, encoding="utf-8", errors="replace") as fh:
+        src = fh.read()
+    m = re.search(r"const\s+STAFF_GRIP_SHIFT\s*:?=\s*(-?[0-9.]+)", src)
+    if not m:
+        raise SystemExit("WEAPONFIT FAIL - gear.gd carries no STAFF_GRIP_SHIFT this "
+                         "file could parse. It was 0.25 at gear.gd:90 on 21 Nov; if "
+                         "the engine dropped it, say so here rather than measuring a "
+                         "carry nobody checked.")
+    val = float(m.group(1))
+    ap = re.search(r"\.position\.([xyz])\s*([-+])=\s*STAFF_GRIP_SHIFT", src)
+    if not ap:
+        raise SystemExit("WEAPONFIT FAIL - gear.gd declares STAFF_GRIP_SHIFT but this "
+                         "file cannot find where it is APPLIED. A constant nobody "
+                         "applies and an offset this file guesses at are both wrong.")
+    axis, sign = ap.group(1), (1.0 if ap.group(2) == "+" else -1.0)
+    gate = None
+    for g in re.finditer(r'path\.begins_with\(DUN \+ "([A-Za-z]+)_"\)', src[:ap.start()]):
+        gate = g.group(1)
+    if gate is None:
+        raise SystemExit("WEAPONFIT FAIL - STAFF_GRIP_SHIFT is applied at an "
+                         "unguarded site in gear.gd, so this file cannot tell which "
+                         "family carries it.")
+    if gate not in SLOT_ROT:
+        raise SystemExit("WEAPONFIT FAIL - gear.gd gates the grip shift to %r, which "
+                         "has no calibrated slot basis in this file. Re-derive "
+                         "SLOT_ROT[%r] before measuring that carry." % (gate, gate))
+    if axis not in GODOT_TO_BLENDER_MESH:
+        raise SystemExit("WEAPONFIT FAIL - grip shift on unknown axis %r" % axis)
+    vec = Vector(GODOT_TO_BLENDER_MESH[axis]) * (sign * val)
+    return {"fam": gate, "value": val, "axis_godot": axis,
+            "sign": sign, "mesh_vec": [round(c, 4) for c in vec],
+            "read_from": "gear.gd"}, vec
+
+
 def slot_matrix(fam, engine_rot=None):
     """The calibrated basis, plus whatever roll gear.gd has moved since it was
     calibrated. Returns (matrix, roll_applied_deg)."""
@@ -456,7 +529,9 @@ def main():
                          "register mirrors gear.gd; without it every cell would be "
                          "measuring an assumption." % gear_path)
     OVR = gear_overrides(gear_path)
+    GRIP, GRIP_VEC = grip_shift(gear_path)
     print("WEAPONFIT engine carry read from %s: %s" % (gear_path, json.dumps(OVR)))
+    print("WEAPONFIT grip shift read from gear.gd: %s" % json.dumps(GRIP))
     pb = rig.pose.bones["handslot.r"]
     base = rig.matrix_world @ pb.matrix
     slot = base @ Vector((0, 0, 0))
@@ -527,9 +602,12 @@ def main():
                     fam, OVR[fam]["engine_rot_deg"] if fam in OVR else None)
             else:
                 Rslot, roll_applied = Matrix.Identity(4), 0.0
+            # THE ENGINE'S GRIP SHIFT, INSIDE THE SCALE. See grip_shift().
+            T = (Matrix.Translation(GRIP_VEC) if fam == GRIP["fam"]
+                 else Matrix.Identity(4))
             for o in objs:
                 if o.parent is None:
-                    o.matrix_world = base @ Rslot @ S @ o.matrix_world
+                    o.matrix_world = base @ Rslot @ S @ T @ o.matrix_world
             bpy.context.view_layer.update()
             wv = world_verts(meshes)
             if not wv:
@@ -553,7 +631,8 @@ def main():
                        hand_scale=hs,
                        engine_mirrored=(fam in OVR),
                        engine_rot_deg=(OVR[fam]["engine_rot_deg"] if fam in OVR else None),
-                       roll_applied_deg=round(roll_applied, 3))
+                       roll_applied_deg=round(roll_applied, 3),
+                       grip_shift=(dict(GRIP) if fam == GRIP["fam"] else None))
             if n_ground:
                 floor_breaks.append(
                     "%s: %d vertices below the floor, deepest %.3f m under it - "

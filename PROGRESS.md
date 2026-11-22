@@ -1,3 +1,72 @@
+## B114 - THE SMITHY'S LEVEL IS THE CEILING, AND UNTIL THIS CYCLE NO COMMAND SAID SO, 2026-11-21 19:45-20:1x CT (chat bot)
+The 18:58 TAKE THIS NEXT gave this lane one line: B113 is ticked, the red is closed, take the next
+chat bot item. My prompt's queue (L68/L69/L70 then L56) is spent - none of those four is open on
+the plan. So I went looking for a published claim that the game had outgrown, which is Mr. E's own
+Nov 15 ask ("COVER WHAT SHIPPED ... the gear and shop economy now being built, D64-D66"), and found
+one with a viewer's gold behind it.
+- WHAT WAS WRONG. D64a (game build, `scripts/economy.gd`) gave the smithy a LEVEL and made that
+  level alone the top rarity the counter will ever stock: `shop_cap()` -> `Roster.town_tier`,
+  clamped to `SHOP_MAX_LEVEL`. So a hero who HAS the gold for the next step is refused by the
+  BUILDING, not by their purse. What my own file published about that: `forge`.what said "The best
+  tiers need Bellmire to grow" - true, and unmeasurable by any gate - and `armoury`.what said
+  **NOTHING AT ALL**. A viewer saving 1000 gold for warded plate had no published way to learn the
+  counter would turn them away. Nothing restates this rule anywhere a viewer can read it, and no
+  guard in the loader watched it: `grep` for `sells_to`, `town_tier`, `shop_grown`, `shop_level`
+  across `scripts/chatcmd.gd` returned NOTHING before this cycle.
+- WHAT I SHIPPED. One sentence appended to BOTH `forge`.what and `armoury`.what, identical in each
+  so one arm reads both: "The smithy carries a level and the level is the ceiling: level 1 stocks
+  common, level 4 stocks very rare, and no counter in Bellmire stocks higher." Terse declaratives,
+  no new vocabulary. The ceiling is a real fact and a slightly surprising one: `SHOP_MAX_LEVEL` is
+  **4** and `RARITY[5]` is `legendary`, so **no shop in Bellmire ever stocks legendary** - it is
+  found-only, which is what `scarforged` and `scarwoven mail` already were in words.
+- THE NEW ARM: `COMMANDS_DATA SHOP CAP`, four paths, inserted immediately before `_cmds = parsed`
+  so it registers its tag in `guard_faults()` like every other arm since B49.
+    SHOP CAP AUTHORITY - economy.gd yields no readable `const RARITY :=` / `const SHOP_MAX_LEVEL :=`
+    SHOP CAP ANCHOR    - a `what` carries fewer than the two "level <n> stocks <rarity>" phrases
+    SHOP CAP DRIFT     - a published (level, word) pair is not that level's word in Economy.RARITY,
+                         or names a level above the cap
+    SHOP CAP CEILING   - the top level published is not SHOP_MAX_LEVEL (D66's raise_shop moves this)
+- THE AUTHORITY IS READ AS SOURCE TEXT, AND THAT WAS A DECISION, NOT A HABIT. `project.godot`
+  registers exactly ONE autoload - `Lore`. `economy.gd` is the GAME BUILD's file and is reached by
+  class name elsewhere; the COUNTER AWAY arm's practice of reading roster.gd as text is the one
+  that survives a rename, so SHOP CAP reads economy.gd the same way. **Comment lines are dropped
+  before the consts are read** - that is the exact trap that read `MB_NAME` as 37 three times in
+  one evening, and `economy.gd` has a comment two lines above `const RARITY` that contains the
+  word RARITY. My reader skips it.
+- I PROVED THE ARM BITES BEFORE CLAIMING ANYTHING, and the proof is an EMULATION of the arm's own
+  regex in python - the real `COMMANDS_DATA` load is owed to the next firing (see the lock note).
+  As shipped: GREEN. "very rare" -> the retired word "epic": DRIFT [(4, 'epic')]. "level 4" ->
+  "level 5": DRIFT and CEILING top=5. Sentence pulled out entirely: ANCHOR. "level 1 stocks
+  common" -> "level 1 stocks rare": DRIFT [(1, 'rare')]. Four mutations, four reds, one green.
+- THE DOC. `docs/COMMANDS.md` copies `what` through verbatim, so it drifted the moment the data
+  changed. I rebuilt it from `data/commands.json` with B4's generator emulation and **EXACTLY TWO
+  LINES DIFFER** from the committed file - indices 17 and 18, the `!forge` and `!armoury` rows -
+  which is itself the proof the emulation reproduced the other 38 lines and the header byte for
+  byte. 32 rows, 8103 bytes. **THIS IS AN EMULATION AWAITING THE REAL `COMMANDS_DOC` GATE. IF THE
+  REAL GENERATOR CHANGES THESE BYTES, THE GENERATOR WINS and I will say the emulation was wrong.**
+- EVERY PRE-EXISTING KEY IS BYTE-IDENTICAL AND I CHECKED IT STRUCTURALLY, not by eye: a recursive
+  walk of old against new reports the changed-value set as exactly
+  `['/commands/forge/what', '/commands/armoury/what']` and the key sets equal at every level. 32
+  commands, 32 `order` slots, no additions. THE CONTRACT IS UNTOUCHED: `twitch_reply(user_login,
+  text)`, no @name, no rate limiting; `twitch_eventsub.gd` still owns the queue, the prefix and the
+  send. No new command, so no `order` slot and no code arm in the dispatch.
+- DRIFT CHECKED BOTH DIRECTIONS. 63 published keys and aliases, 59 verbs scraped out of the
+  dispatch. The only verbs in code with no entry are `testbits`, `testsub` and `testpoints`, which
+  are T1's test harness and are not viewer commands - l14 was OK on them at 18:48, so that is my
+  scraper's noise and not drift. Nothing published goes unanswered.
+- NO GODOT, AND THE REASON IS THE YIELD RULE, NOT A BUSY LOCK. The last line of RUN_LOCK.txt when I
+  started was art's **IDLE 19:44:52**, so the lock was FREE and mine for the taking. By the time
+  the change was written and checked it was 20:0x, and the game build's slot opens at :08. A
+  four-gate battery started then would still have been running inside their claim, and the rule
+  says SPLIT THE JOB rather than cross. So I claimed NOTHING, launched NOTHING, and carry the
+  battery (parse / L14_TEST / TWITCH_PARSE / COMMANDS_DOC) to the 20:45 firing as the first thing
+  it does. This cycle is a checkpoint commit on `chatbot`, which is where held work belongs.
+- NO LIVE TWITCH TEST THIS CYCLE. Nothing here touches EventSub, cheers, rewards or the bot's
+  voice. No account was used, no bits were spent, nothing was redeemed.
+- FOR THE GAME BUILD: nothing is owed to you in `twitch_eventsub.gd`. When D66's `raise_shop()`
+  starts moving `shop_raised`, SHOP CAP CEILING is the arm that will catch the published sentence
+  going stale, and `SHOP_MAX_LEVEL` is the number to tell this lane about if it changes.
+
 ## B113 - THE MINIBOSS UNNAMED RED IS CLOSED ON MERGED MAIN, WITH NO BORROWED FILE AND NO EDIT OF MINE, 2026-11-21 18:45-18:5x CT (chat bot)
 The 17:58 TAKE THIS NEXT block gave this lane one row: re-run l14 on merged main and close my own
 red in writing. That is exactly what this cycle is, and the honest shape of it is that I FIXED

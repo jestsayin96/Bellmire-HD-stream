@@ -4245,3 +4245,29 @@ DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
 - Battery, renders/cycles/s94/ (JESTS_NO_TWITCH=1): parse --quit-after 300 RC 0, 0 SCRIPT ERROR/Parse Error; S51_NAMES OK 176 checks (by_key 46, MB_FIT base 46, glb stems 48); S33_DRAW OK 191 checks - "blower fogbound ratio 1.01 lines true drawn 100/400", bodies 46, drawn-with-lines 32, held-for-lines 0 (S93 read 31 / 1); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2056; TOWNWALK in_solid=0/17937 raid 0/3465 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
 - LOOKED: S33_LOOK OK (5 checks) with S33_KEY=blower - fitted h 2.47 vs knight 2.54, min y 0.000, no overlap; renders/cycles/s33/blower_1front.png viewed: stands on the floor beside the knight, bag and bellows read.
 - HONEST LIMIT / NEXT ROW: Deadair's ONE IDEA (C-169: the CLOCK - air drawn a stroke at a time, every delver slower each stroke, heaviest-laden gives out first, holing the bag stops it) is NOT built. MB_WAYS has no "blower" entry, so it fights as a fitted body with the generic loop and reads its arrive/fall lines. Its act/broken lines exist and wait for that behaviour. Not pulled early - needs a row.
+
+## D-cycle - S96: SYSTEM 9 ROW (b) - A DEEP-FLOOR WEAPON FIND LIES ON THE FLOOR IN ITS OWN MODEL BEFORE IT IS TAKEN. 2026-11-21T19:08-06:00 (game build)
+TAKE THIS NEXT (18:58 block, GAME BUILD row): "S95 is ticked; do not redo it, do not re-roll the crossbows. TAKE THE NEXT UNSTARTED PHASE 2 SYSTEM in Mr. E's own order, and NAME IT."
+I TOOK SYSTEM 9 ROW (b). HONEST SLIP: my 19:08 claim line did NOT name it (it says only "game build"); it is named here and on the IDLE line. WHY IT IS THE LOWEST OPEN ONE: 1-6, 8 and 10 ticked; 7 HELD on art's fit numbers (not unheld by me);
+9 row (a) ticked at S83/S84; rows (b) and (c) were scoped by me at S82 and never started. S85-S95 were defect/interlock rows, not System 9.
+WHAT CHANGED (scripts/delve.gd, backup delve.gd.bak_s96):
+- _loot: records the finder's weapon tier before roster.find_gear; if the find raised it (a WEAPON find - an armour find does not), calls _show_find(finder, roster.weapon_mesh(h)).
+- new _show_find: the weapon's OWN mesh (roster.weapon_mesh - the same path the hand will carry; no second map) is laid flat on the stones 0.7 m in front of the finder,
+  turns once over 3 s, is lifted to the hand and freed - the same choreography S31's on-floor vial uses. Guarded like miniboss_model: ResourceLoader.exists + "is PackedScene"
+  before instantiate, so a path that fails to load is skipped, never instantiated through a null (the gear.gd:104 class of fault does not repeat here).
+- The gold/number behaviour of find_gear is unchanged; the Chronicle line is unchanged.
+NEW GATE tools/_s96_find.gd (windowed, quits itself): real Delve.start, the delve's own _loot called in the first fight with floor_no raised so find_gear can fire
+(test artifacts, named: _loot pays its gold each call; the lord is held aside for the call; foes hidden for the frame).
+RENDER LOOKED AT: renders/cycles/s96/s96_1_find_on_floor.png - a plain steel spear lying flat across the hex flagstones in front of the finder, not sunk, not floating, legible.
+The red glow at its butt is the SAME _loot's vial find (Crowfeather Draught) also lying on the floor - System 5 working alongside. A wall edge crowds the right third; the find itself is clear.
+FIRST RENDER WAS USELESS AND I SAY SO: the camera at a fixed world offset sat inside a wall (all brown). Re-aimed over the finder's shoulder and re-run; the gate verdict was OK both times.
+GATES (verdict lines, laptop 7a07e92e + this edit, JESTS_NO_TWITCH=1, logs renders/cycles/s96/):
+  parse rc=0, 0 SCRIPT ERROR / 0 Parse Error
+  S96_FIND OK (6 checks, 0 failed) - finds_shown 1, mesh == finder's weapon_mesh (spear_A.gltf) and loads, dy 0.040, freed in 3.8 s
+  TWITCH_PARSE OK (8 checks)
+  OFFFLOOR_VERDICT OK 0 of 2614 samples off the floor (home)
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR
+  TOWNWALK in_solid=0/18520 (0.000%) raid_in_solid=0/6310 (0.000%) PASS
+INTERLOCK CONFIRMED (prompt's two live items): LEECH - MB_FIT 0.95, shrine row present, miniboss_feed.by_key has leech -> it is in the shrine draw. BEADLE - MB_FIT 1.2, shrine row present, by_key has beadle -> in the draw too; both already closed, nothing to do.
+- No Twitch test, 0 bits, no account used.
+- NEXT: System 9 row (c) - an ordinary kill sometimes drops a single Coin.

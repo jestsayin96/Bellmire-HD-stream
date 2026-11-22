@@ -1,0 +1,26 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+FEED The air thickens early. That always means something.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton warrior, 1 hollowed bone sentinel, 1 drowned bone bowman, 1 hollowed risen bones, 1 bone bowman.
+FEED A chair pulled out, as if somebody rose quick.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The hall is colder at the far end than at the door.
+FEED Find0 searches (Investigation 21) and turns up 271 gold on floor 24.
+FEED Done. Nobody dies of this one, which is its own small victory.
+FEED Find0 prises a plain steel spear from the dead on floor 24.
+FEED Find0 finds a vial of The Brewer's Bracing.
+  ok  a weapon find was shown on the floor (finds_shown 1, 1 _loot calls)
+  ok  a FoundWeapon node is in the scene
+  ok  its mesh is the finder's own weapon_mesh (res://assets/gear/spear_A.gltf)
+  ok  that mesh loads
+  ok  it lies on the floor (dy 0.040)
+SAVED s96_1_find_on_floor state=fight
+FEED Find2 casts Smite at drowned bone bowman.
+  ok  the find is lifted and freed inside 5 s (3.8 s)
+S96_FIND OK (6 checks, 0 failed)
+
+RC=0

@@ -1,0 +1,47 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend down the scar while the crier is still reading the name.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 cave spider.
+FEED Every skull faces the door, and the door faces us.
+T10s floor=1 state=fight foes=3 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at cave spider.
+FEED MossyMage casts Bolt at cave spider.
+T20s floor=1 state=fight foes=2 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T30s floor=1 state=fight foes=2 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at slime.
+FEED The slime divides.
+FEED MossyMage casts Bolt at slimeling.
+FEED MossyMage's chain goes off a breath early - the scar is impatient (9 vs DC 10).
+T40s floor=1 state=fight foes=1 ["JestFan 109/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T50s floor=1 state=fight foes=1 ["JestFan 109/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric mutters bolt wrong and winces (5 vs DC 10).
+FEED MossyMage casts Fire at slimeling.
+T60s floor=1 state=fight foes=1 ["JestFan 109/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage searches (Investigation 10) and turns up 11 gold on floor 1.
+FEED A breath, a sip, a sigh. Then on.
+FEED MossyMage finds a vial of Salter's Cure.
+T70s floor=1 state=search foes=0 ["JestFan 109/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T80s floor=1 state=search foes=0 ["JestFan 109/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED MossyMage searches the chest - Successfully found loot!! 18 gold (Investigation 24 vs DC 10).
+FEED JestFan and 3 others take a breather, and press on deeper.
+T90s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T100s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T110s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+T120s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 giant rat, 1 bog frog, 1 slime.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+T130s floor=2 state=fight foes=5 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at bog frog.
+T140s floor=2 state=fight foes=4 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at giant rat.
+T150s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 83/83", "DawnCleric 81/81", "BigAxe 124/124"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state fight (capped at 9001 frames); engine error lines are still read off the log
+
+RC=0

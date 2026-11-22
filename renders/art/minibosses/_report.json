@@ -24,7 +24,7 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "b4abebb1ba57f2bfe23c2a0a32725dceb591540f",
+   "head": "f3039bdd28ea34366661cbc0b6f69ae0d0301242",
    "ref": "origin/main",
    "ref_commit": "eb98fb073dde9dc9cb5479d5a1924d7a77815b52",
    "ref_gd_sha256_8": "bc3a603f",
@@ -2741,13 +2741,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "stopper": {
+   "title": "Chokewell",
+   "theme": "crypt",
+   "idea": "IT TAKES THE AIR - the lid comes down a notch at a time and when the last peg drops the room is shut. THIS IS THE ONLY MINIBOSS IN THE SET WITH A DEADLINE: it does not chase you, it does not bar the door and it takes nothing off your back - it stands in the middle of its own ring and screws the lid down, and every notch costs the party wind. Nothing you do to the room buys time back. The one thing that does is getting a shoulder under the ring and lifting, which means standing inside its reach with the hands you wanted for hitting it. THE COUNT IS THE PEGS on the rim - five pale uprights left, one drops every notch - so a viewer can see how long the party has without being told a number, and can see it from the side of the screen where the ring is edge-on. A party that fights this one like the other forty-seven loses to the clock while it is winning on damage.",
+   "wear": 0.32,
+   "feed_line": "The air has gone thick. Something is seating a lid.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 910,
+   "size": [
+    2.24,
+    2.13,
+    2.38
+   ],
+   "footprint_span": 2.24,
+   "height_m": 2.38,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.758,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.12,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.95238337360181,
+    "ortho": 3.286656618118286,
+    "clip": [
+     7.571364879608154,
+     19.79084587097168
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
  "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs eb98fb073dde9dc9cb5479d5a1924d7a77815b52 sha bc3a603f",
  "blank_check": {
-  "files": 141,
+  "files": 144,
   "failures": []
  }
 }

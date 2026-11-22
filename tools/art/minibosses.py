@@ -16848,3 +16848,366 @@ def changer():
 
 
 BUILDERS.update({"changer": changer})
+
+
+# ============================================================ 48 THE STOPPER
+# WHAT I CHECKED FOR BEFORE DESIGNING THIS, MEASURED OFF THIS FILE AND NOT
+# REMEMBERED. I parsed `BUILDERS = {` and every `BUILDERS.update({` block by
+# brace-matching: 61 keys, 0 duplicates, 47 distinct bodies once the twelve
+# `_chibi` and the two `_tall` variants are folded out. The prompt I was given
+# says "THIRTY-THREE already exist as of 18 Nov" - that line is FOURTEEN BODIES
+# STALE and I measured rather than trusting it. Then I read EVERY idea string
+# in the file - all 47 - before writing a word of this one, because the bar is
+# ONE IDEA THAT CHANGES THE FIGHT and a re-skin of an existing fight fails it.
+#
+# NOT ONE OF THE FORTY-SEVEN PUTS A CLOCK ON THE FIGHT. They change WHAT the
+# party may do, WHERE it may stand, WHO may act or WHAT it keeps - and every
+# one of them leaves the party free to take as long as it likes. That is the
+# hole, and it is a big one: a fight with a deadline is a different fight from
+# the first second, because every cooldown held back is a cooldown wasted. The
+# five nearest and why each is a different fight:
+#   snuffer   (IT TAKES THE LIGHT) - takes a SENSE. The party can still stand
+#             there all night; it just cannot see. No deadline.
+#   stoker    (ONLY AS BIG AS THE FIRE) - a clock on the CREATURE, which the
+#             party runs down in its own time. This one runs on the PARTY.
+#   leech     (WILL NOT LET A WOUND CLOSE) - attrition is a slope, not a line.
+#             A party that out-damages it never meets a wall.
+#   sluicekeeper (RAISES THE WATER) - the nearest of all and still not it: the
+#             water takes GROUND a notch at a time, so the answer is to move.
+#             Nothing here is a place you can move to.
+#   tither    (IT WILL BE PAID) - a price per action, not a time.
+# So the forty-eighth is the first body in this file that ENDS.
+CANON.update({
+    "stopper": ("Chokewell", 2.38, (0.56, 0.58, 0.54), (0.82, 0.88, 0.76),
+                "crypt", "IT TAKES THE AIR - the lid comes down a notch at a "
+                "time and when the last peg drops the room is shut. THIS IS "
+                "THE ONLY MINIBOSS IN THE SET WITH A DEADLINE: it does not "
+                "chase you, it does not bar the door and it takes nothing off "
+                "your back - it stands in the middle of its own ring and "
+                "screws the lid down, and every notch costs the party wind. "
+                "Nothing you do to the room buys time back. The one thing "
+                "that does is getting a shoulder under the ring and lifting, "
+                "which means standing inside its reach with the hands you "
+                "wanted for hitting it. THE COUNT IS THE PEGS on the rim - "
+                "five pale uprights left, one drops every notch - so a viewer "
+                "can see how long the party has without being told a number, "
+                "and can see it from the side of the screen where the ring is "
+                "edge-on. A party that fights this one like the other "
+                "forty-seven loses to the clock while it is winning on damage.",
+                0.32, "The air has gone thick. Something is seating a lid."),
+})
+ORDER = ORDER + ["stopper"]
+
+# PER-SLOT MATERIALS - the Tither's rule: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON. Here that is the RING and the FIVE PEGS, because the
+# ring is the deadline and the pegs are how much of it is left. The mouth-cloth
+# and the test lamp are pale too and that is not a leak: on this body the
+# mechanic IS the air, so the two objects that say "the air is the fight"
+# belong in the same value family as the ring.
+#
+# WEAR 0.32 IS THE RUNG THIS BODY ARGUES FOR, not a free number picked for
+# novelty - 0.30 and 0.34 are live and 0.32 was unoccupied, so it extends the
+# ladder by a step instead of repeating one. A pit-air man's lid is the thing
+# standing between him and the damp, so the ring is KEPT: sound timber, sound
+# iron. The worn parts are the five pegs and the rim bays, the only things on
+# this body a hand ever touches. Height 2.38 m is unoccupied (2.36 and 2.40 are
+# live) and it is chosen for a reason a viewer can see rather than for spacing:
+# the ring must sit at a HERO'S CHEST, because "get a shoulder under it" is the
+# fight and a ring above head height would not have one.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"stopper"}
+
+OVERRIDE.update({
+    "stopper": {
+        'body': ((0.086, 0.078, 0.070), 0.92, 0.02),
+        'dark': ((0.030, 0.030, 0.028), 0.72, 0.08),
+        'bone': ((0.760, 0.730, 0.650), 0.58, 0.02),
+        # Eyes only. Nothing emissive is aft of the shoulder line - the
+        # back-lamp guard reads back and side chromaticity against the front
+        # and an aft lamp is the exact fault it exists to catch.
+        'glow': ((1.000, 0.880, 0.560), 0.85),
+    },
+})
+
+
+def stopper():
+    """IT TAKES THE AIR. The 48th body, and the first in this file with a
+    deadline in it.
+
+    SILHOUETTE ARGUMENT, WHICH IS THE ACCEPTANCE TEST: with the colour thrown
+    away this is A MAN STANDING UP THROUGH A WIDE FLAT RING AT CHEST HEIGHT -
+    one strong horizontal plane, 2.04 m across and 0.09 thick, the body passing
+    through a clear hole in the middle of it, and five short uprights standing
+    on its right-hand arc. NOTHING IN THE OTHER FORTY-SEVEN IS A HORIZONTAL
+    PLANE THE BODY PASSES THROUGH, and I checked the four nearest rather than
+    asserting it:
+      Drillmaster   a disc, but VERTICAL and worn on the back - a circle seen
+                    edge-on from the side, with the body BEHIND it, not in it.
+      Changer       a post with a drum, standing BESIDE him - and as of 21 Nov
+                    its three radial bars are deleted, so there is no longer
+                    anything in the set that puts worked geometry out at hip
+                    height around a body at all.
+      Paviser       a curved upright shield on a hinge post: a vertical plane.
+      Stackman      a pile in three courses - no worked plane, no hole.
+    From above this one is AN ANNULUS WITH A MAN IN THE MIDDLE and nothing else
+    in the file is.
+
+    THE THREE VIEWS ARE DELIBERATELY DIFFERENT - the Beadle's lesson applied
+    rather than re-learned. On the Beadle the pale band carrying the eyes
+    WRAPPED the head, so the figure read the same from front and back and had
+    NO FACING. Here the pale mouth-cloth is a lens on the FRONT of the face
+    only, it does not wrap, and its two ties stop at the ear line:
+      FRONT  the eyes, the pale mouth-cloth under them, the pale test lamp
+             hung at his right hip, and the ring crossing the frame as one
+             wide bar with two of the five pegs standing clear to his right.
+      SIDE   THIS LINE WAS WRONG IN PASS 1 AND IS CORRECTED RATHER THAN
+             SOFTENED. I wrote "the ring on its thin axis - one clean
+             horizontal line through the whole frame" before I had looked at
+             side.png, and it is not what the camera does: lordgen's side view
+             carries an elevation, so the ring presents its FULL ANNULUS and
+             reads as a wide shallow BASIN, not as an edge. That is a
+             different read from the one I claimed and it is not obviously a
+             worse one - a basin is a thing with a lid - but a docstring that
+             describes a render nobody took is the same fault as a gate that
+             cannot see. What the side view actually gives: the full ring, the
+             pale arc of live bays against the dark arc of spent ones, the
+             pegs in profile, the haft raking up across the chest, and the
+             lamp clear of the hip.
+      BACK   NO eyes, NO cloth, NO glow of any kind; the haft coming out over
+             his right shoulder on the diagonal, the back strap, the dark arc
+             of spent bays turned toward the viewer and the pale arc on the
+             OPPOSITE side of the frame from where the front put it.
+             "NO LAMP" WAS IN THIS LINE IN PASSES 1 AND 2 AND IT IS FALSE -
+             found by looking at hero_back.png, not by a number. The lamp
+             hangs at x 0.330 with r 0.070, so its outer edge stands at 0.400
+             against a torso surface of 0.315 at that height: it CLEARS the
+             body and the back camera sees it. I am correcting the sentence
+             rather than moving the lamp, for two reasons said plainly. It is
+             NOT a back-lamp-guard fault - that guard is about EMISSIVE mass
+             aft of the shoulder line and this lamp emits nothing, which was
+             deliberate from pass 1. And a small pale mass on the back is not
+             a facing leak the way the Beadle's wrapped band was: the back
+             still has no eyes, no cloth and no glow, so the three things that
+             say WHICH WAY THIS FACES are all still front-only. What was wrong
+             was my description, and a docstring that describes a render
+             nobody looked at is the fault this file keeps re-learning.
+
+    WHY THE PEGS ARE ON ONE ARC AND NOT ALL ROUND. A count spread evenly round
+    a ring is the same count from every angle, which is a ring with a texture
+    on it. Five pegs on the 300-60 degree arc means the FRONT sees two, the
+    SIDE sees them in profile and the BACK sees three on the opposite side of
+    the frame from where the front put them - so the count reads from every
+    view AND the view tells you which way the thing faces. One object doing two
+    jobs, which is what the Changer's drum did.
+
+    WHAT THE GATES CANNOT SEE ON THIS BODY, STATED BECAUSE I CAN SEE IT:
+      1. THE RING CROSSES THE MAN'S SILHOUETTE IN ALL THREE VIEWS, by
+         construction - he is standing in it. The numbers are clearances, not
+         hopes: the ring's inner edge is r 0.520 and the torso's surface at the
+         ring's own z (1.220) is r 0.277, so 0.243 m of clear air all round.
+         Nothing interpenetrates. But a plane drawn across a body can be
+         misread as a table he is standing behind, and no blank check, border
+         check or corridor span can see a misread - that is trap 5 in another
+         coat, and it is the exact fault class Mr. E just ruled on for the
+         Changer. The two straps exist to answer it by saying the ring HANGS
+         ON HIM. Whether they do is his eye and not my register.
+      2. THE PEGS ARE SHORT. At 0.26 m raw they are the smallest countable
+         objects here, pale against a pale ring on purpose (a peg is stood IN
+         the rim, not stuck ON it). That is the weakest reading on this body.
+         If the count does not read, the fix is DEPTH - sink the empty bays
+         dark - and not longer pegs, which would start competing with the head.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here and must not be: minibossgen measures the
+    real footprint against floorgen's own corridor span and lid, and the
+    register says it. The ring is the widest thing on this body ON PURPOSE, and
+    the honest place to find out whether it fits a corridor is the gate.
+    """
+    P = Parts("stopper")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # FRONT IS -Y, same as every body in this file: lordgen's front camera sits
+    # at az 0 -> (0, -1, el). So the cloth, the eyes and the lamp go on -Y and
+    # the haft's far end goes to +Y, where only the back camera finds it.
+    RING_Z = 1.220             # a hero's chest - the mechanic's own weakness,
+    # because "get a shoulder under it" is the counterplay and a ring above
+    # head height would not have one.
+    RING_IN = 0.520
+    RING_OUT = 1.020
+    RING_T = 0.090
+    PEG_DEG = (300.0, 330.0, 0.0, 30.0, 60.0)   # five left of twelve bays
+
+    # ---------------------------------------------------------------- THE MAN
+    _open()
+    # Legs BRACED and planted wide. He is holding something DOWN, which is the
+    # one posture argument on this body: thirteen of the forty-seven are
+    # stooped under a load and this one is pressing against one from above, so
+    # the weight goes through straight legs set apart, not through a bent back.
+    for s in (-1, 1):
+        pts = seat([(s * 0.150, 0.030, 0.720), (s * 0.200, 0.045, 0.380),
+                    (s * 0.215, 0.040, 0.100)], 0.126)
+        limb(P, pts, 0.126, 0.102, 'body')
+        P.add(L.box(0.250, 0.400, 0.110), 'body', loc=(s * 0.215, -0.018, 0.058))
+    # Torso, near upright with the faintest lean BACK into the lift. A man
+    # leaning forward over a thing he presses down reads as a man falling onto
+    # it; a man leaning back reads as a man taking weight.
+    limb(P, [(0.0, 0.030, 0.680), (0.0, 0.005, 1.020), (0.0, -0.030, 1.380)],
+         0.320, 0.248, 'body')
+    P.add(L.sphere(0.312, 0.228, 0.188, 16, 10), 'body', loc=(0.0, -0.030, 1.392))
+    P.add(L.cone(0.146, 0.168, 0.050, 16), 'dark', loc=(0.0, -0.034, 1.462))
+    P.add(L.sphere(0.208, 0.218, 0.228, 16, 10), 'body', loc=(0.0, -0.054, 1.628))
+    # A close leather pit-cap, rounded. NOT a hood: eleven bodies in this file
+    # wear one and the twelfth would be a re-skin of a silhouette, which is the
+    # same fault class as a re-skin of a mechanic.
+    P.add(L.cone(0.210, 0.120, 0.105, 16), 'dark', loc=(0.0, -0.054, 1.742))
+    _close("man")
+
+    # -------------------------------------------------- THE CLOTH AND THE EYES
+    # THE FRONT'S OWN PALE MASS, and the Beadle's fault answered by
+    # construction rather than by hope. Head centre y -0.054 with ry 0.218 puts
+    # the face surface at y -0.272; the lens is centred at -0.215 with a y
+    # radius of 0.075, so it reaches -0.290 and is bedded 0.018 into the wool.
+    # It does NOT wrap: its two ties run back along the cheeks and STOP at
+    # x +-0.196, the ear line, so the back camera finds nothing of it at all.
+    _open()
+    P.add(L.sphere(0.165, 0.075, 0.098, 14, 8), 'bone', loc=(0.0, -0.215, 1.560))
+    for s in (-1, 1):
+        limb(P, [(s * 0.120, -0.238, 1.586), (s * 0.196, -0.120, 1.616)],
+             0.026, 0.022, 'dark')
+    eyes(P, (0.0, -0.054, 1.655), 0.070, 0.038, -0.178, 'glow')
+    _close("face")
+
+    # --------------------------------------------------------------- THE HAFT
+    # The screw-bar he seats the lid with, and the object that gives the BACK
+    # view a line of its own. It runs from his low left hand, up across the
+    # FRONT of the chest, through the ring's own hole, and out over his right
+    # shoulder to +Y where only the back camera sees the end of it.
+    #
+    # KEPT CLEAR OF THE TORSO BY ARITHMETIC AND NOT BY EYE, because a bar run
+    # across a body is the Changer's pass-1 fault and Mr. E has now had to rule
+    # on that family once. I am not paying for it twice. At z 0.950 the bar is
+    # at (-0.246, -0.330) and the torso axis is at y +0.018 with surface radius
+    # 0.312, so the gap is 0.420 - 0.312 - 0.046 = 0.062. At z 1.290 the bar is
+    # at (0.172, -0.328) against a 0.265 surface, so 0.371 - 0.265 - 0.046 =
+    # 0.060. At the shoulder (z 1.392) it is at (0.292, -0.212), OUTSIDE the
+    # shoulder ellipsoid - (0.292/0.312)^2 + (0.182/0.228)^2 = 1.51 - so it
+    # passes the widest part of the body in the open.
+    #
+    # WHERE IT CROSSES THE RING IS THE OTHER NUMBER THAT MATTERS. At z 1.220
+    # the bar is at (0.087, -0.329), r 0.340 from the ring's axis against an
+    # inner edge of 0.520. It goes through the HOLE with 0.180 of air, not
+    # through the timber.
+    _open()
+    limb(P, [(-0.330, -0.330, 0.880), (0.180, -0.330, 1.290),
+             (0.640, 0.150, 1.700)], 0.046, 0.038, 'dark')
+    _close("haft")
+
+    # --------------------------------------------------------------- THE ARMS
+    # BOTH HANDS GO ON THE HAFT, at two points the haft's own polyline actually
+    # passes through - (-0.330, -0.330, 0.880) and, at t 0.90 of the first
+    # segment, (0.129, -0.330, 1.249). Placed off the bar's parametrisation,
+    # not by eye. The Changer's far hand was just found closing on air after
+    # its bar was deleted; a hand is placed ON geometry in this file or it is
+    # not placed.
+    _open()
+    limb(P, [(-0.262, -0.045, 1.348), (-0.330, -0.200, 1.090),
+             (-0.330, -0.322, 0.900)], 0.094, 0.074, 'body')
+    limb(P, [(0.262, -0.045, 1.350), (0.230, -0.230, 1.300),
+             (0.140, -0.325, 1.252)], 0.094, 0.070, 'body')
+    _close("arms")
+
+    # ---------------------------------------------------------------- THE LAMP
+    # The trade's instrument: a flame-test lamp, the thing a pit-air man reads
+    # the air WITH. Second pale mass on the front, hung at the right hip CLEAR
+    # of the wool - the torso surface at z 0.760 is r 0.315 and the lamp body is
+    # centred 0.425 out with r 0.070, so 0.040 of air. NOT emissive: nothing on
+    # this body is except two eyes.
+    _open()
+    limb(P, [(0.270, -0.150, 0.985), (0.320, -0.245, 0.870)], 0.024, 0.020, 'dark')
+    P.add(L.cone(0.070, 0.070, 0.130, 12), 'bone', loc=(0.330, -0.270, 0.760))
+    P.add(L.cone(0.078, 0.050, 0.040, 12), 'dark', loc=(0.330, -0.270, 0.845))
+    _close("lamp")
+
+    # --------------------------------------------------------------- THE RING
+    # THE MECHANIC. Twelve bays at 30 degrees, each a plank aimed along its own
+    # bearing, with a gap between them so the thing reads as COUNTABLE bays and
+    # not as a smooth plate. Tangential pitch at the mid radius (0.770) is
+    # 2*pi*0.770/12 = 0.403 and the plank is 0.385 wide, so every bay carries a
+    # visible 0.018 shadow line down each side.
+    #
+    # THERE IS NO SOLID HUB AND THAT IS DELIBERATE. A filled inner disc would be
+    # a cylinder of r 0.520 centred on a torso of r 0.277 - one solid inside
+    # another, the exact thing trap 5 cannot see - and it would throw away the
+    # one fact the whole silhouette rests on, which is that you can see daylight
+    # between the man and his own ring.
+    #
+    # PASS 2 IS THIS BLOCK AND NOTHING ELSE, AND IT IS A FAULT FOUND BY LOOKING
+    # AT THE PICTURE AFTER EVERY NUMBER CAME BACK GREEN. Pass 1 made all twelve
+    # bays pale and carried the count on the five pegs alone. The register said
+    # GREEN - 0 blanks, 0 frame clips, 0 blind views, 0 unproved cells - and
+    # then I opened side.png and COUNTED SEVEN PALE UPRIGHTS where I had built
+    # five. The extra two were not pegs: they were the lit vertical faces of
+    # the bay seams, reading at a glance exactly like the objects the whole
+    # mechanic is counted on. A count you cannot count is not a count, and no
+    # number in this house measures countability - that is trap 5 in its third
+    # coat and it is mine again.
+    #
+    # THE FIX IS DEPTH AND NOT SIZE, which is what my own pass-1 docstring said
+    # it would have to be before I had seen the fault: the five bays that still
+    # hold a peg stay PALE and the seven spent ones go DARK. The count is now
+    # an arc of light against an arc of dark, which survives at hero scale and
+    # at stream distance where five small pale pegs on a pale rim do not. The
+    # pegs stay - on a pale bay they now read as what is IN the bay rather than
+    # as the whole of the count - and longer pegs were rejected because they
+    # would start competing with the head.
+    PEG_BAYS = set(int(round(d / 30.0)) % 12 for d in PEG_DEG)
+    _open()
+    for i in range(12):
+        a = math.radians(i * 30.0)
+        dx, dy = math.cos(a), math.sin(a)
+        P.raw(aim(L.box(RING_OUT - RING_IN, 0.385, RING_T),
+                  Vector((dx * 0.770, dy * 0.770, RING_Z)),
+                  Vector((dx, dy, 0.0))), 'bone' if i in PEG_BAYS else 'dark')
+    _close("ring")
+
+    # --------------------------------------------------------------- THE PEGS
+    # THE COUNT: five left of twelve, on the 300-60 degree arc. See the
+    # docstring for why they are not spread evenly round the rim.
+    _open()
+    for deg in PEG_DEG:
+        a = math.radians(deg)
+        P.add(L.cone(0.055, 0.042, 0.260, 10), 'bone',
+              loc=(math.cos(a) * 0.860, math.sin(a) * 0.860, RING_Z + 0.175))
+    _close("pegs")
+
+    # ------------------------------------------------------------- THE STRAPS
+    # THE TIE, and it is the Changer's pass-4 and pass-5 lesson applied IN
+    # ADVANCE rather than re-learned - and tonight's hero sheet is the proof
+    # that lesson is real, because with its bars gone the Changer reads at hero
+    # scale as a man standing next to a lamppost. Without these straps this body
+    # would read as A MAN STANDING IN A HOOP: two objects, not one creature.
+    # They are placed to be SEEN in the views that would carry the fault, which
+    # is what pass 5 of the Changer had to be re-done for: the left strap leaves
+    # the shoulder outboard and FORWARD so the front camera gets its whole run,
+    # the right one leaves aft so the back camera gets that one. Both ends sit
+    # ON geometry - the shoulder sphere, and a bay's inner face at r 0.569 and
+    # 0.621 against an inner edge of 0.520.
+    _open()
+    limb(P, [(-0.300, -0.085, 1.432), (-0.420, -0.250, 1.336),
+             (-0.470, -0.320, 1.246)], 0.038, 0.030, 'dark')
+    limb(P, [(0.300, 0.020, 1.432), (0.455, 0.215, 1.338),
+             (0.520, 0.340, 1.248)], 0.038, 0.030, 'dark')
+    _close("straps")
+
+    return P
+
+
+BUILDERS.update({"stopper": stopper})

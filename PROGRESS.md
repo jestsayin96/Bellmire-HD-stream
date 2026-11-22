@@ -15355,3 +15355,11 @@ needs none. NO TWITCH TEST. 0 bits.
   roll is live and a baked one would double it.
 - No live Twitch test this cycle. Lock: claim 2026-11-21T18:08:32-06:00, cap claim+25 = 18:33:32 computed before the
   declared finish 18:30; IDLE written 2026-11-21T18:15:10-06:00.
+## C-171 (21 Nov 2026 18:2x CST) - STAND-DOWN, NOTHING OWED; AUDIT OF OWN SHIPPED FEED LINES
+TAKE THIS NEXT (17:58 CT block) CONTENT item: "DRY, AND SAY SO, OR AUDIT YOUR OWN SHIPPED LINES". C-170 accepted by the team lead.
+Measured on origin/art (fetched 18:2x): 59 committed GLBs under assets/monsters/minibosses/; the only ones without a `miniboss_feed.by_key` key
+are broodglut and lastcuff (not minibosses, as C-170 said). No art commit since the Blower carries a new body (art's last two commits are the crossbow report and a plan sync).
+by_key = 46: 21 keys carry arrive/act/broken/fall, 25 carry arrive/fall only. No empty pool. No `{name}` in any arrive or fall pool.
+AUDIT FINDING: one line sits in two keys - "Take your places. Draw a breath. Walk the floor." is relief/fall[7] AND scraper/fall[7]. Both are shipped,
+IDs are frozen and the lane is additive-only, so NOT reworded. A repeat only shows if both bodies fall in one stream session; low cost. Raised for Mr. E / team lead: say the word and a later cycle replaces one.
+No data files touched; all four parse unchanged. No ID burned beyond C-171. CODE WIRING: none.

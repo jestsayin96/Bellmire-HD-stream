@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "ce3edd9a25211f14dc5aaf56ff9eec5ccb741697",
+   "head": "b4abebb1ba57f2bfe23c2a0a32725dceb591540f",
    "ref": "origin/main",
-   "ref_commit": "2fd2f62fceec063cdb845be98e3791e79b40babf",
+   "ref_commit": "eb98fb073dde9dc9cb5479d5a1924d7a77815b52",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2698,24 +2698,24 @@
   "changer": {
    "title": "Evenhand",
    "theme": "treasury",
-   "idea": "IT TRADES PLACES - whoever hits it hardest ends up standing where it stood. It does not drag anybody to it and it does not take anybody away: it works its turnstile and the two of you come out the other side of each other. Your front rank is now at the back and the thing is standing beside whoever you were keeping out of reach, so the fight punishes the party for landing its best blow and the answer is to choose WHO lands it. THE COUNT IS THE DRUM on top of the post - pale, with three dark rungs, and it turns a third of a turn on every trade, so a viewer can see how many times the room has been shuffled without being told a number. JAM THE ARMS AND IT CANNOT TRADE: the three bars are at hip height where a body can stand against one, which is the only thing in the room that stops the swap.",
+   "idea": "IT TRADES PLACES - whoever hits it hardest ends up standing where it stood. It does not drag anybody to it and it does not take anybody away: it works its post and the two of you come out the other side of each other. Your front rank is now at the back and the thing is standing beside whoever you were keeping out of reach, so the fight punishes the party for landing its best blow and the answer is to choose WHO lands it. THE COUNT IS THE DRUM on top of the post - pale, with three dark rungs, and it turns a third of a turn on every trade, so a viewer can see how many times the room has been shuffled without being told a number. *** THE COUNTERPLAY IS OPEN AND MUST NOT BE READ AS SHIPPED. *** Until 21 Nov this line ended JAM THE ARMS AND IT CANNOT TRADE, and the three bars at hip height were the object that did it. MR. E RULED THEM DELETED AT 22:38 CT and the art lane did not invent a replacement in the same pass. So this creature currently has NO in-world thing a party can stand against to stop the swap, and whoever balances the fight must either accept an unstoppable trade on a cooldown or say what the new answer is. The art lane will build whatever object is named.",
    "wear": 0.38,
    "feed_line": "A turnstile is being worked up ahead.",
    "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 878,
+   "faces": 788,
    "size": [
-    2.59,
-    2.99,
+    1.35,
+    1.35,
     2.72
    ],
-   "footprint_span": 2.99,
+   "footprint_span": 1.35,
    "height_m": 2.72,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.014,
+   "corridor_margin_m": 9.65,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.78,
    "read_from": {
@@ -2729,11 +2729,11 @@
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 2.397867364870969,
-    "ortho": 4.59804630279541,
+    "radius": 1.6607224968518246,
+    "ortho": 3.1272470951080322,
     "clip": [
-     9.128079414367676,
-     22.719154357910156
+     6.935729026794434,
+     17.762548446655273
     ]
    },
    "views": [
@@ -2745,7 +2745,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 2fd2f62fceec063cdb845be98e3791e79b40babf sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs eb98fb073dde9dc9cb5479d5a1924d7a77815b52 sha bc3a603f",
  "blank_check": {
   "files": 141,
   "failures": []

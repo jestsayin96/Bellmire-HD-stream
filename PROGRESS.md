@@ -15606,3 +15606,8 @@ U133 2026-11-21T19:53:38-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN,
 Checked: (1) WORK_PLAN TAKE THIS NEXT (18:58 block) gives HUD only "take the next HUD item"; rarity-hue half already shipped (U55/U56), L74 closed (U131), U130-U132 ticked. (2) The prompt's "what can the rarity guard not see" item: tools/_u71_rarity_guard.gd already has block_end() (brace depth, skips strings and # comments, -1 on unterminated) used by parse_fish, plus U76 red proofs for a nested brace / comment brace / unterminated block (U76_BRACE 3/3). Verified by reading, not re-run. (3) U125's single-frame observation (60-char hostile name, third wrapped row) was already bounded by U122: 118 checks, worst right margin 16.0 px at 150%, bottoms inside panel.
 Next firing (20:52): re-read working RUN_LOCK; if free with 14 min to :07, sample the 60-char hostile line every 10 frames at 150% (U125's carried measure) as one short windowed chunk; else stand down in writing. No .gd changed.
 Decision for Mr. E: none.
+
+## hub 21 Nov 20:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
+TAKE THIS NEXT (19:58 block) HUB row: "nothing is unpublished ... Hold web/ steady". No row to build; web/ untouched this run.
+NUMBERS: origin/gh-pages^{tree} == origin/hub:web == origin/main:web == HEAD:web == 02257b2f (all equal, nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned) + comment mentions; outerHTML 0, eval( 0; insertAdjacentHTML/document.write/new Function appear only in the comment at app.js:10-11; 1 CSP meta. No new screenshot (web/ byte-identical to the published tree). Live-dot colour: unchanged from shipped. Untracked _hub_ready_shot.png is old and named here.
+Decision for Mr. E: none.

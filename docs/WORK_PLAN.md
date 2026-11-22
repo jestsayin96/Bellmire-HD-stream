@@ -1,3 +1,78 @@
+## TAKE THIS NEXT - Updated THE 19:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main a77edff6: all SIX lanes (laptop 4c8c23f2, content 76e426ce, hub
+171db18d, hud-ui ee656f8f, art ce3edd9a, chatbot 1cc3db4e). TWO conflicts (hub, hud-ui), both in
+root PROGRESS.md, resolved by the state machine keeping BOTH sides. PROGRESS.md **+83/-0**,
+docs/PROGRESS.md **+26/-0**. ZERO residual markers on all four exact shapes, grepped over the whole
+HEAD tree. Zero lines removed is the assertion that matters and it holds. (Raw per-lane sum on the
+first conflict was 11 and the merged result is 10: one shared trailing blank line, the same dedup
+the 18:58 seat recorded. My state machine removed exactly 3 lines in that file and 3 in the next -
+the six markers - which is the arithmetic that proves nothing was lost.)
+And the three-dot trap again, named so the next seat does not fall in: `origin/main...origin/hud-ui`
+reported **docs/WORK_PLAN.md +174/-0**. That is NOT the HUD editing the plan. I checked it the only
+way that settles it - the plan blob on all SEVEN refs BEFORE my sync was the single blob
+c0bf5be6. It is the merge base, nothing else.
+
+*** TICKED THIS HOUR ***
+- **S96 (game build) - System 9 row (b), TICKED.** A deep-floor weapon find now lies on the stones
+  in the weapon's OWN model before it is taken up (delve.gd `_show_find`, FIND_SCALE 0.8, mesh from
+  `roster.weapon_mesh` - the same path the hand carries, no second map). I did not take the lane's
+  word: S96_FIND OK (6 checks, 0 failed), DELVE_TEST OK 9001 frames, OFFFLOOR_VERDICT OK 0 of 2614,
+  TWITCH_PARSE OK 8 - all four verdict LINES read off the logs, not return codes - and I LOOKED at
+  renders/cycles/s96/s96_1_find_on_floor.png myself: the spear lies flat on the hex stones at the
+  finder's feet, its own mesh, not a sack. `_show_find` applies NO material override, so the find
+  shows the kit's own colours and cannot drift from the carried weapon by construction.
+- **ART - the 8 missing `.glb.import` siblings, TICKED.** blower, ferryman, hooper, pitman, relief,
+  scraper, tither, winder all ship in MB_NAME and had no import sibling. Art generated them headless
+  and then PROVED they load: LOADCHECK_DONE checked=10 fails=0, 3-4 meshes each, with beadle and
+  drillmaster as controls. A generated sibling that nobody loads is not evidence; this one is.
+
+*** NOT TICKED, AND WHY ***
+- **B114 (chat bot) - the smithy ceiling. NOT TICKED: the gate is owed.** The work itself is good and
+  the lane is honest about the hole - 69 lines of a new four-path COMMANDS_DATA SHOP CAP arm, one
+  sentence appended to `forge`.what and `armoury`.what, and the whole proof is a python EMULATION of
+  the arm's own regex plus an emulated COMMANDS_DOC regeneration. No Godot ran. A gate that printed
+  no verdict is RED, and an emulation is not a verdict however carefully it is built. It stood down
+  rather than cross into the game build's :08 window, which is the yield rule working correctly.
+
+*** THE ROWS - ONE PER LANE ***
+- **GAME BUILD - S97: THE STAFF CARRY DRAGS THROUGH THE FLOOR, ON ALL THREE TIERS.** Art turned its
+  own System 2 register red to catch this and the numbers are its own: staff_common 51 verts below
+  the floor (deepest 0.180 m), staff_uncommon 38 (0.216 m), staff_rare 149 (0.212 m). No other
+  family breaks the floor. The measuring half is art's and it is done; the CARRY half is gear.gd,
+  which is yours - you set crossbow held_rot at S95 the same way. I am reading this as the second
+  half of one of Mr. E's own systems (System 2), not as a new item, and I say so out loud.
+- **CONTENT - stand down again, or audit your own shipped feed.** C-172 was a correct stand-down and
+  I verified its claim rather than taking it: `miniboss_feed.by_key` = 46 and `Delve.MB_NAME` = 46,
+  symmetric difference EMPTY both ways, measured with my own brace-matched parser on both sides, not
+  a flat regex. Nothing is owed to art or to the engine. If you stand down, write it up - that IS
+  the delivery.
+- **HUB - nothing is unpublished for the first time in days. Hold web/ steady.** Measured by me this
+  hour, not copied: `origin/gh-pages^{tree}` = `origin/hub:web` = `origin/main:web` =
+  **02257b2f**, and the numstat between gh-pages and hub:web is EMPTY. Publish 6 landed 15:39 CT.
+  The prompt's "3 files / +59 / -1 waiting" block is SPENT and the next seat must not re-raise it.
+- **HUD - stand down stands.** U133 found nothing HUD-owned open and said so; U131 measured
+  L74_TEST OK (measured=17 fed=48 protected_unread=0) and U126_DONE checks=40 fails=0. Correct.
+  Your one standing item remains L31's status-effect icons, and that half is the GAME BUILD's files
+  (delve.gd, monster.gd, party_frames.gd, boss_bar.gd), not yours. Do not take it.
+- **ART - carry the floor-break finding, do not fix it in gear.gd.** You found FAULT 7 in your own
+  instrument - `ground` was printed on every cell since pass 1 and gated on NOTHING, so a weapon
+  could hang through the floor on every tier and the register would still say GREEN. Folding
+  `floor_breaks` into `ok` is the right fix and I verified the direction: the change TIGHTENS the
+  gate (and a missing calibration record is now a hard SystemExit), it does not quiet it. The
+  register now reads FAIL for a true reason. Next: keep inventing minibosses, and re-run the
+  register after the game build moves the staff so the red closes on a measurement, not a claim.
+- **CHAT BOT - B115: RUN THE OWED BATTERY FIRST, AT :45, BEFORE YOU WRITE ANYTHING NEW.** parse /
+  L14_TEST / TWITCH_PARSE / COMMANDS_DOC on merged main, in that order, as the first thing the
+  firing does. B114's SHOP CAP arm and its regenerated docs/COMMANDS.md are both unverified until
+  the real generator and the real loader have spoken. Your own entry says the generator wins if the
+  bytes differ - hold to that. Write new work only with the time left after the gates.
+
+*** FOR THE SUPERVISOR ***
+Nothing is waiting on you. gh-pages, origin/hub:web and origin/main:web are all tree 02257b2f, so
+there is no publish gap to authorise this hour - publish 6 (15:39 CT) consumed it. I ran NO publish
+verification gate, because no lane claimed READY TO PUBLISH and an unearned gate report is the same
+fault class as a lying gate.
+
 ## TAKE THIS NEXT - Updated THE 18:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main f5507d8a: all SIX lanes (laptop 01e00b09, content 3ef0cdb9, art
 23875b30, hub eeeeeecd, hud-ui 907aea14, chatbot 8f3e45f2). FOUR conflicts (content, art, hub,

@@ -2953,6 +2953,75 @@ static func commands() -> Dictionary:
                     _guard_faults.append("COUNTER AWAY")
                     push_error("COMMANDS_DATA COUNTER AWAY: %s charge(s) a haggled price in scripts/roster.gd and the command is NOT in AWAY_COUNTERS - %s, so a hero on the scar road or below it is served at that counter while every other till refuses with where the hero is. The viewer pays gold and the bot describes a shop the hero is nowhere near" % [str(ca_open), str(ca_open)])
                     printerr("COMMANDS_DATA COUNTER AWAY - ungated counter(s): %s" % str(ca_open))
+        # B114: THE SMITHY'S LEVEL IS THE CEILING, AND NOTHING PUBLISHED IT. D64a (game build,
+        # scripts/economy.gd) gave the smithy a LEVEL and made that level alone the top rarity the
+        # counter will ever stock - `shop_cap()` feeds `Roster.town_tier`, clamped to
+        # SHOP_MAX_LEVEL. A hero with the gold for the top step is refused by the BUILDING, not by
+        # their purse. `forge`.what said only "The best tiers need Bellmire to grow" - true and
+        # unmeasurable - and `armoury`.what said NOTHING AT ALL, so a viewer saving 1000 gold for
+        # warded plate had no published way to learn the counter would turn them away. Both now
+        # state the ceiling in the ladder's own words and this arm holds those words to the engine.
+        # THE AUTHORITY IS READ AS SOURCE TEXT, not through a class name: economy.gd is the GAME
+        # BUILD's file and is NOT an autoload (project.godot registers only `Lore`), so the
+        # COUNTER AWAY arm's habit of reading the file is the one that survives a rename. Comment
+        # lines are dropped before the consts are read - that is the trap that read MB_NAME as 37.
+        # NOT FATAL: the commands answer either way. A battery greps COMMANDS_DATA and no line is
+        # the healthy reading; the tag is registered so guard_faults() counts it.
+        var sc_f := FileAccess.open("res://scripts/economy.gd", FileAccess.READ)
+        var sc_rar: Array = []
+        var sc_max := -1
+        if sc_f != null:
+            for sc_ln in sc_f.get_as_text().split("\n"):
+                var sc_raw: String = String(sc_ln)
+                if sc_raw.strip_edges().begins_with("#"):
+                    continue
+                var sc_h: int = sc_raw.find("#")
+                var sc_code: String = sc_raw.substr(0, sc_h) if sc_h >= 0 else sc_raw
+                if sc_rar.is_empty() and sc_code.contains("const RARITY :="):
+                    var sc_a: int = sc_code.find("[")
+                    var sc_b: int = sc_code.rfind("]")
+                    if sc_a >= 0 and sc_b > sc_a:
+                        for sc_w in sc_code.substr(sc_a + 1, sc_b - sc_a - 1).split(",", false):
+                            var sc_t: String = String(sc_w).strip_edges().trim_prefix("\"").trim_suffix("\"")
+                            if sc_t != "":
+                                sc_rar.append(sc_t)
+                if sc_max < 0 and sc_code.contains("const SHOP_MAX_LEVEL :="):
+                    var sc_n: String = sc_code.get_slice(":=", 1).strip_edges()
+                    if sc_n.is_valid_int():
+                        sc_max = int(sc_n)
+        if sc_rar.is_empty() or sc_max < 1 or sc_max >= sc_rar.size():
+            _guard_faults.append("SHOP CAP AUTHORITY")
+            push_error("COMMANDS_DATA SHOP CAP AUTHORITY: scripts/economy.gd no longer yields a readable `const RARITY :=` ladder and `const SHOP_MAX_LEVEL :=` (read %s and %d), so the top tier a counter will ever stock cannot be checked and the ceiling `forge`.what and `armoury`.what publish to chat is unguarded" % [str(sc_rar), sc_max])
+            printerr("COMMANDS_DATA SHOP CAP AUTHORITY - economy.gd RARITY/SHOP_MAX_LEVEL unreadable (%s, %d); the published shop ceiling is unchecked" % [str(sc_rar), sc_max])
+        else:
+            var sc_rx := RegEx.new()
+            sc_rx.compile("level\\s+(\\d+)\\s+stocks\\s+([a-z][a-z ]*?)\\s*(?:,|\\.|;|$)")
+            for sc_key in ["forge", "armoury"]:
+                var sc_what: String = String(((cmd_d.get(sc_key, {}) as Dictionary)).get("what", "")).to_lower()
+                var sc_pairs: Array = []
+                for sc_m in sc_rx.search_all(sc_what):
+                    sc_pairs.append([int(sc_m.get_string(1)), String(sc_m.get_string(2)).strip_edges()])
+                if sc_pairs.size() < 2:
+                    _guard_faults.append("SHOP CAP ANCHOR")
+                    push_error("COMMANDS_DATA SHOP CAP ANCHOR: `%s`.what carries %d \"level <n> stocks <rarity>\" phrase(s) and this arm needs the floor and the ceiling - the smithy's level is what refuses a hero who has the gold (economy.gd shop_cap -> Roster.town_tier, top level %d = \"%s\"), and docs/COMMANDS.md no longer tells a viewer that before they save for it" % [sc_key, sc_pairs.size(), sc_max, String(sc_rar[sc_max])])
+                    printerr("COMMANDS_DATA SHOP CAP ANCHOR - `%s`.what lost its \"level <n> stocks <rarity>\" phrases; the published ceiling is unchecked" % sc_key)
+                    continue
+                var sc_bad: Array = []
+                var sc_top := -1
+                for sc_p in sc_pairs:
+                    var sc_lv: int = int(sc_p[0])
+                    var sc_word: String = String(sc_p[1])
+                    sc_top = maxi(sc_top, sc_lv)
+                    if sc_lv < 1 or sc_lv > sc_max or String(sc_rar[sc_lv]) != sc_word:
+                        sc_bad.append("level %d stocks \"%s\"" % [sc_lv, sc_word])
+                if not sc_bad.is_empty():
+                    _guard_faults.append("SHOP CAP DRIFT")
+                    push_error("COMMANDS_DATA SHOP CAP DRIFT: `%s`.what publishes %s and economy.gd's ladder is %s capped at level %d - a viewer is told a level stocks a tier the counter will not put on it; %s" % [sc_key, str(sc_bad), str(sc_rar), sc_max, str(sc_pairs)])
+                    printerr("COMMANDS_DATA SHOP CAP DRIFT - `%s`.what: %s against ladder %s cap %d" % [sc_key, str(sc_bad), str(sc_rar), sc_max])
+                if sc_top != sc_max:
+                    _guard_faults.append("SHOP CAP CEILING")
+                    push_error("COMMANDS_DATA SHOP CAP CEILING: `%s`.what publishes level %d as the best a smithy reaches and economy.gd's SHOP_MAX_LEVEL is %d (\"%s\") - the doc either promises a tier no building can stock or hides one a grown town can, and D66's raise_shop() moves this number" % [sc_key, sc_top, sc_max, String(sc_rar[sc_max])])
+                    printerr("COMMANDS_DATA SHOP CAP CEILING - `%s`.what tops out at level %d, SHOP_MAX_LEVEL is %d" % [sc_key, sc_top, sc_max])
         _cmds = parsed
     return _cmds
 

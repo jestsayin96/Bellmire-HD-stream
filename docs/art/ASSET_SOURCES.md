@@ -519,3 +519,15 @@ added by a re-run.
 - Checked: every file in `_packs\ThePaintedWench_blend\` by walking the tree (3 files), and the sibling zip's entry list read with Python `zipfile`. The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
 - Note for later seats: the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ThePaintedWench_blend`. Nothing is redistributed AS an asset.
+
+
+## PACK CATALOGUE - Ultimate_Animated_Animals (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate_Animated_Animals (folder `Ultimate Animated Animals - July 2021\`) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Animated_Animals\Ultimate Animated Animals - July 2021\License.txt` (364 bytes, read in full this run) | 63 on disk: 12 `.blend` (Blends\), 12 `.fbx` (FBX\), 12 `.gltf` (glTF\), 12 `.obj` + 12 `.mtl` (OBJ\), `Preview.jpg`, `Preview.mp4`, `License.txt` | permitted | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\Ultimate_Animated_Animals\` by walking the tree (63 files), and the licence file read in full off disk. The licence text states: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Animals in the pack (12 species, each present in the blend, FBX, glTF and OBJ sets): Alpaca, Bull, Cow, Deer, Donkey, Fox, Horse, Horse_White, Husky, ShibaInu, Stag, Wolf.
+- Note for later seats: the `.zip` sibling `Ultimate_Animated_Animals.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. Any animal that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Animated_Animals`. Nothing is redistributed AS an asset.

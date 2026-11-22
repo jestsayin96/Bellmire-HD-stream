@@ -1,3 +1,146 @@
+## TAKE THIS NEXT - Updated THE 21:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main **808fe03c**: all SIX lanes (laptop efddb5d1, content 78d0f634, hub
+1b36289a, hud-ui 8c162ac5, art b4abebb1, chatbot 06a9551d). FOUR conflicts (content, hub, hud-ui,
+chatbot), every one in root PROGRESS.md, resolved by the state machine keeping BOTH sides, one
+conflict each. The assertion that matters: `diff --numstat HEAD^1 HEAD -- PROGRESS.md` reads
+**+5/-0, +4/-0, +5/-0, +61/-0** - ZERO lines removed on all four. ZERO residual markers on all four
+exact shapes. Push to main was a fast-forward from b2d3d6fd and all six lanes are ancestors of HEAD.
+EVERY ONE OF THE SIX LANES DID THE ROW IT WAS GIVEN AT 20:58. That has not happened before.
+
+*** TICKED THIS HOUR - FIVE ***
+- **S98 (game build) - MR. E'S 10:17 DIRECTIVE, ITEM 2: THE FLOATING BOSS CARD IS GONE. TICKED, AND
+  I DID NOT TAKE THE CLAIM.** The lane's answer to my 20:58 row was that the card was ALREADY gone on
+  the merged tree and the HUD's 150% shot was pre-S89. My first read of its evidence nearly tanked
+  the tick: `card=false` on all 37 probe frames proves nothing if the capture never reached a boss.
+  So I checked whether a lord was ever up, and it was - `_s98_u134.log:136-143` has the party on
+  **floor 5 barracks** with the DIRECTOR cutting to subject `lord_747223677797` at priority **101.0
+  (lord)**, which is exactly the state the old code drew the card in. 37/37 `card=false` with a lord
+  live is the card being gone, not the card being unreached. The HUD's own U135 run says the same
+  (37 x card=false). AND I LOOKED at renders/cycles/s98/s98_chron_s150_1080_merged_tree.png myself:
+  no floating HP card anywhere over the DIRECTOR pane. Say plainly what my eye did and did not do -
+  that frame is a town scene at Day 1 09:09, so the EYE corroborates "no card on this frame" and the
+  LOG carries "no card while a lord is up". Both, not one dressed as the other.
+- **ART - `minibossfit.py` STOPS CRYING WOLF. TICKED, AND THE RED-PROVE IS GENUINE.** The 20:58 row
+  asked for the row's own directory, a fallback to the untagged path, and NO silencing. All three
+  landed in `views_dir_for()`. I parsed both versions as key SETS, not as a diff hunk, because the
+  file read **+1698/-648**: top-level keys IDENTICAL (22 both sides), `pairs` **49 both sides**, zero
+  rows lost, zero gained. `errors` **192 -> 0**, verdict **RED -> GREEN**, `red_summary.rows` [],
+  `shipped_red` [], `ok_shipped` **true**, `unproved_cells` [], `blind_views` []. And the gate can
+  STILL GO RED - I did not take art's word for that either: `_fit_redprove.json` is verdict **RED,
+  ok false, 4 errors**, and the errors name every candidate directory tried and why each was
+  rejected ("tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png)"). A test
+  made quiet looks exactly like a test made honest, and this one is honest.
+- **ART - `weaponfit.py` READS THE ENGINE'S GRIP SHIFT. TICKED, AND IT CLOSES THE SYSTEM 2 RED.**
+  `grip_shift()` parses `const STAFF_GRIP_SHIFT := 0.25` out of gear.gd:90 and then refuses to run
+  unless it also finds the AXIS and SIGN it is applied on (`.position.y +=`, gear.gd:127) and the
+  family it is gated to - four separate `SystemExit` arms, red-on-empty, no duplicated constant.
+  `_fit_register.json` is now verdict GREEN, ok true, `errors` [], `floor_breaks` **[]**,
+  `frame_clips` [], `blanks` [], `blind_views` [], 24 cells. The staff-through-the-floor red this
+  house carried for hours was the INSTRUMENT, and both halves of it are now shut.
+- **U135 (HUD) - THE CHRONICLE PROBE MEASURES WHAT THE LABEL ACTUALLY LAYS OUT. TICKED.** The row
+  asked for laid-out line boxes instead of unwrapped string width and that is what landed: rows x
+  `get_line_height()`, width clamped to the label's own wrap box only when autowrap is ON.
+  U134_DONE **checks=149 fails=0**. I checked the thing that matters about a loosened test - whether
+  it can still go red - BY READING, not by running: all three `_ok()` arms survive, `over_panel` and
+  `over_vellum` now test the label's BOX placement against the panel (a box can still be placed past
+  it), and `bottom` is rows x line height, which GROWS with wrapping and is the arm a real overflow
+  trips. I did NOT red-prove it in-engine: the game build holds :07-:40 and I will not take the lock
+  for a check I can make by reading. Say so rather than implying a run.
+- **C-174 (content) - THE CHANGER'S FEED ROW. TICKED.** I parsed `data/lore_lines.json` on the
+  merged tree rather than counting with a regex: `miniboss_feed.by_key` is **47 keys** and `changer`
+  is one of them, with 9 arrive / 7 act / 4 broken / 8 fall. The voice is plain and the mechanic is
+  in the lines rather than explained beside them ("The arms come round. {name} is standing where he
+  stood.").
+
+*** NOT TICKED, AND WHY ***
+- **B116 (chat bot) - L56 RAN AND CANNOT EARN ITS VERDICT. CORRECTLY NOT TICKED, AND THE LANE IS NOT
+  CHARGED FOR IT.** Runs 1 and 2 of 4 both hit the script's own RUN_CAP_FRAMES having reached floors
+  3 and 4 of the 8 each run needs; the lane killed runs 3-4 at its declared finish rather than cross
+  into the HUD's :53 window, which is the yield rule working exactly as Mr. E wrote it. It then
+  posted a CORRECTION to its own IDLE line within two minutes - it had written that a capped run
+  CANNOT print OK, checked the branch order, found `if _fails.is_empty()` comes FIRST, and said so
+  against itself. A lane that audits its own reasoning in public is worth more than a green gate.
+  The verdict stands as CAP HIT - NO VERDICT and the remainder is carried.
+- **HUB** - no item to tick. Its standing check was correct and it correctly declined to claim READY
+  TO PUBLISH. Logging the ThePaintedWench_blend licence as CC0 1.0 **read off disk** is the hard
+  rule obeyed to the letter: a search snippet is not a licence.
+
+*** THE ROWS - ONE PER LANE ***
+- **GAME BUILD - THE CHANGER'S `MB_NAME` ROW IS NOW OWED, AND IT IS ONE LINE.** You held it out at
+  S98 because `by_key.changer` was absent, and you were RIGHT to: your commit is 21:16:55 and
+  content's C-174 is 21:23:11, six minutes behind you. It has landed now - I parsed it myself,
+  `by_key` 47 keys including `changer`. So: add `"changer": "Evenhand"` to `Delve.MB_NAME` and re-run
+  `tools/_s51_names.gd`, which requires every MB_NAME key to exist in `by_key`. That takes MB_NAME
+  47 / by_key 47, SETS EQUAL. MEASURE BOTH SIDES WITH A BRACE-MATCHED PARSER - a flat regex has lied
+  to three seats about that one constant. SECOND, still yours: **item 1 of Mr. E's 10:17 directive,
+  the mana UI off the game view.** Item 2 is ticked above.
+- **CONTENT - the feed is LEVEL at 47/47 and nothing is owed on the changer.** Once the game build
+  writes the MB_NAME row, both sides are 47 and your part is already in. Stand down and write it up,
+  or audit a pool you have already shipped - both are deliveries. **DO NOT WIRE `phase2_words_alt2`,
+  `phase2_words` or `phase2_words_alt`.** They are dead by your own `_note` and by the audit below,
+  and no lane is to touch them.
+- **ART - YOU ARE CLEAR TO BUILD THE 48TH BODY.** Both your instruments were fixed and ticked this
+  hour and you are the one lane that may invent a miniboss. Fit is the acceptance test: front, side
+  and back on a real body, and LOOK at the render yourself before you call it done. **DO NOT RE-RENDER
+  THE 47.** Your own register judges all 49 rows from STORED measurements (`rendered_this_run` 0,
+  verdict GREEN) - re-rendering them buys nothing and risks the tag question you just closed.
+- **HUB - HOLD web/ STEADY. THERE IS NO PUBLISH GAP.** I re-measured both trees rather than copying
+  a figure out of a block that warns against copying figures: gh-pages tip **029e4fac**,
+  `origin/gh-pages^{tree}` == `origin/hub:web` == **02257b2f**, and `git diff` between the two trees
+  is **EMPTY**. Your 21:4x standing check said exactly this and it is correct. I ran NO publish
+  verification gate, because you made no READY TO PUBLISH claim and an unearned gate report is the
+  same fault class as a lying gate.
+- **HUD - U135 IS TICKED; CARRY ON WITH YOUR OWN QUEUE, AND KEEP COMMITTING YOUR LOGS.** Last hour
+  U124's whole evidence was an UNCOMMITTED file in your working tree; this hour `_u135_run.log` and
+  `_u135_parse.log` are both on your branch, which is why the tick above could be earned by reading
+  your ref instead of your desk. Keep doing that. Do NOT take L31's status-effect icons - delve.gd,
+  monster.gd, party_frames.gd and boss_bar.gd are the game build's files.
+- **CHAT BOT - L56's REMAINDER FIRST, AND THEN FIX YOUR OWN LOCK WRITER.** Three lines in
+  docs/RUN_LOCK.txt read `RUNNING %s` and `IDLE %s` - a literal, unsubstituted format token standing
+  where the timestamp belongs (line 685 from B77 at 06:47 this morning, and lines 1105 and 1107 from
+  B116 tonight). Nobody was misled, because you carry the claim and release times inside the prose of
+  the line itself - but a seat clearing a lock on AGE cannot read a stamp that says `%s`, and the
+  standing rule is that a stamp you did not read is a stamp you must not write. Fixing your own
+  instrument is NOT a new item. Keep claiming by :50 with a declared finish inside :52; you did that
+  again tonight (21:46:26 claim, released 21:51:07) and the HUD took 21:53:11 unobstructed.
+
+*** FOR THE SUPERVISOR ***
+Nothing is waiting on you. gh-pages and `origin/hub:web` are both tree **02257b2f** with an empty
+diff between them, so there is no publish gap to authorise this hour, and no lane claimed READY TO
+PUBLISH.
+
+*** THE DEAD-DATA AUDIT, 21:58 CT 21 NOV, measured on merged main 808fe03c ***
+Corpus `scripts/*.gd` + `web/app.js` = **48 files / 2,375,323 chars**; `data/*.json` = 12 files,
+**150 top-level keys**. UNREFERENCED ASSET DIRECTORIES **ZERO** (34 directories with files, measured
+off `assets/` only). UNREAD LIVE DATA KEYS **ZERO**. Zero-hit total **60 = 45 `_note_` + 15
+NON-NOTE**, and the NON-NOTE 15 is the same accounted-for list as every honest reading before it:
+`lord_intros_alt` and `unique_intros_alt` (READ at delve.gd:4022 via `base + "_alt"` - DO NOT WIRE),
+the four declared-dead (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+`town_levels_for_the_desktop`), and the nine prose/spec strings (`technique`, `boss_floors`,
+`chronicle_line`, `word_order`, `casing`, `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+THE SERIES, non-note first because the raw total carries no signal: **15 / 15 / 15 / 15**, with notes
+37 -> 38 -> 41 -> **45** and totals 52 -> 53 -> 56 -> **60**. My matcher is LITERAL-KEY ONLY, so it
+cannot see a runtime-composed key - that is what the accounted-for list is for, and it is why the
+two `_alt` pools appear in my zero-hit output and are NOT dead.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt - the gate is on the
+CALL, not a field, settled 09:07 CT 18 Nov - so I made NO write attempt this run and say so. Land
+them all on the first live turn). CARRIED AND STILL OWED: (1) MB_NAME/by_key - now **46 vs 47** with
+the game build's one-line row owed, SETS EQUAL once it lands; (2) the gh-pages block - tip
+**029e4fac**, tree **02257b2f**, NOTHING merged-and-unpublished; the prompt's "3 files / +59 / -1
+with the supervisor since 20 Nov" is SPENT AND WRONG - **FIFTH HOUR OWED**; (3) L31 IS WHOLE;
+(4) THERE ARE TWO ART REGISTERS. ADDED THIS HOUR:
+  (5) **THE STANDING ART-REGISTER NOTE MUST BE DELETED OUTRIGHT, NOT SOFTENED.** It has now been
+      wrong in three different directions inside twelve hours: it said RED-on-two-retired-chibis
+      (stale), then the file went RED on 46 sound bodies (a broken instrument), and as of 21:58 it is
+      **GREEN, errors 0, ok_shipped true, red_summary.rows [], unproved_cells [], and the two retired
+      `_chibi` rows are MEASURED** (`views_from: recorded on the row when it was rendered`). The
+      replacement is one sentence: "art's fit register judges 49 rows - 47 live bodies and 2 retired
+      `_chibi`. RE-MEASURE ITS VERDICT EVERY HOUR AND NEVER QUOTE ONE FROM THIS PROMPT."
+  (6) THE PROMPT'S "the fit register judges 46 rows, of which 44 are live bodies and two are retired
+      `_chibi` cells" IS STALE: it is **49 rows / 47 live** as of 21:58 CT 21 Nov.
+  (7) THE ID BASELINE: **B116, C-174, D100, H32, L74, S98, T5, U135**, art on its 47th body.
+
 ## TAKE THIS NEXT - Updated THE 20:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main 4eea60ed: all SIX lanes (laptop b853be7b, content a4389515, hub 1661513a,
 hud-ui 73ef3669, art 62a4dfc0, chatbot f5abce18). TWO conflicts (hub, hud-ui), both in root

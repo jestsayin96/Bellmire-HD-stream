@@ -1,3 +1,43 @@
+## B113 - THE MINIBOSS UNNAMED RED IS CLOSED ON MERGED MAIN, WITH NO BORROWED FILE AND NO EDIT OF MINE, 2026-11-21 18:45-18:5x CT (chat bot)
+The 17:58 TAKE THIS NEXT block gave this lane one row: re-run l14 on merged main and close my own
+red in writing. That is exactly what this cycle is, and the honest shape of it is that I FIXED
+NOTHING THIS HOUR - the red was cross-lane ordering, the game build's S94 row landed in the 17:58
+merge, and the gate went green on arrival. My delivery is the measurement and the committed log.
+- I MEASURED THE JOIN MYSELF BEFORE RUNNING ANYTHING, because the team lead's own write-up records
+  THREE parser failure modes on this one constant and I have contributed a fourth. Character
+  tokenizer over `scripts/delve.gd` from `const MB_NAME :=`, brace-matched, skipping `#` comments
+  outside strings: **MB_NAME 46 keys, 46 unique, 0 duplicates**. `data/lore_lines.json`
+  `miniboss_feed.by_key` = **46**. `blower` in BOTH. **Symmetric difference EMPTY IN BOTH
+  DIRECTIONS** - not two counts that happen to agree. This is my own number, not a copy of the
+  17:58 block's; it agrees with it, and I say so because agreement measured is worth more than
+  agreement assumed.
+- THE GATE, ON THE TREE EVERYONE ELSE READS. chatbot fast-forwarded to origin/main 7e77f8c6 (no
+  conflicts, no merge commit, nothing of mine in flight). Lock claimed 18:46:42 CT, released
+  18:4x, well inside the :52 hard release. Three runs, logs in `renders/cycles/b113/`:
+    l14.log           **L14_TEST OK (24 checks)** - and the arm that matters is arm 1,
+                      "no COMMANDS_DATA guard arm fired on the load (0 fired: [])". That is where
+                      the UNNAMED and GHOST faults report from; they are push_error full faults
+                      since B71, so an empty fault array is the whole claim. **RED DISCHARGED.**
+    twitch_parse.log  TWITCH_PARSE OK (8 checks).
+    commands_doc.log  COMMANDS_DOC OK wrote 32 commands, and `git status` on docs/COMMANDS.md,
+                      data/commands.json and scripts/chatcmd.gd came back **EMPTY afterwards** -
+                      a true no-op confirmation, which is the only form of that gate worth having.
+- I WANT THE RECORD STRAIGHT ON WHERE THE RED LIVED, because B112's own wording could mislead a
+  future seat: there is NO miniboss arm in `tools/_l14_test.gd`. I grepped it for
+  unnamed/MB_NAME/elite and got nothing, which for about a minute looked like the arm had been
+  deleted. It never existed there. The UNNAMED/GHOST guard is in `scripts/chatcmd.gd`'s
+  COMMANDS_DATA load block (the B70/B71 join), and l14 only reports its fault array. Anyone
+  looking for the guard in the test file will not find it.
+- MY PUBLISHED COUNT, RE-CHECKED RATHER THAN TRUSTED. B112 moved `data/commands.json` 45 -> 46 at
+  the end of a hurried window. On the merged tree `commands.miniboss.what` and `.short` both read
+  "The 46 elites", docs/COMMANDS.md row 39 carries the same sentence verbatim, and l14's two doc
+  arms report 32 rows with `unpublished []` and `stale []`. The count arm of my own guard did not
+  fire. Drift is zero in both directions.
+
+NOTHING IS OWED TO THE GAME BUILD LANE this hour - `twitch_eventsub.gd` is untouched and the
+twitch_reply(user_login, text) contract is unchanged. NO TWITCH TEST, NO CHEER, 0 BITS, no account
+used. No edit to any file outside the three I own - and in fact no edit to those three either.
+
 ## B112 - MY OWN GATE WENT RED ON MY OWN FILE: data/commands.json PUBLISHED 45 ELITES WHILE CONTENT SHIPS 46, 2026-11-21 17:45-17:5x CT (chat bot)
 The 16:58 TAKE THIS NEXT block carries NO CHAT BOT ROW at all (checked: the only two mentions of
 this lane in it are the lock paragraph and the supervisor note on the QA tester's slot). So the

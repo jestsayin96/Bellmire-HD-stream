@@ -2566,8 +2566,12 @@ func _loot(alive: Array) -> void:
 	var finder: Dictionary = seeker
 	var lordly := boss and not uniq
 	var deep_find := sd == 20 or (sd != 1 and st >= 25 - floor_no / 2 - (5 if lordly else 0))
+	var w_before := int(finder["h"].get("weapon", 0))
 	var found_line := roster.find_gear(String(finder["uid"]), floor_no, 0.0 if deep_find else 1.0, lordly)
 	if found_line != "":
+		# S96 / SYSTEM 9 row (b): a found WEAPON lies on the stones first, in its own model, then is taken up
+		if int(finder["h"].get("weapon", 0)) > w_before:
+			_show_find(finder, roster.weapon_mesh(finder["h"]))
 		_say(found_line)
 		var fb: HeroBody = finder["body"]
 		if is_instance_valid(fb):
@@ -3666,6 +3670,41 @@ func _tint_vial(n: Node, col: Color) -> void:
 	mat.emission_energy_multiplier = 1.6
 	for c in n.find_children("*", "MeshInstance3D", true, false):
 		(c as MeshInstance3D).material_overlay = mat
+
+## S96 / SYSTEM 9 row (b): a deep-floor weapon find lies on the floor at the finder's feet in the weapon's own
+## mesh (roster.weapon_mesh - the same path the hand will carry, no second map), turns once, and is lifted away.
+## Guarded like miniboss_model: a path that does not load is skipped, never instantiated through a null.
+const FIND_SCALE := 0.8
+var finds_shown := 0
+var _find_scn := {}
+
+func _show_find(m: Dictionary, path: String) -> void:
+	var b = m.get("body")
+	if path == "" or not (b is Node3D) or not is_instance_valid(b) or not (b as Node3D).is_inside_tree():
+		return
+	if not ResourceLoader.exists(path):
+		return
+	if not _find_scn.has(path):
+		_find_scn[path] = load(path)
+	if not (_find_scn[path] is PackedScene):
+		return
+	var w: Node3D = (_find_scn[path] as PackedScene).instantiate()
+	w.name = "FoundWeapon"
+	w.top_level = true
+	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
+	host.add_child(w)
+	var bn := b as Node3D
+	var fwd := bn.global_transform.basis.z.normalized()
+	# laid flat on the stones: the kit meshes are built along +Y, so -90 about X lays the blade down
+	w.global_transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-90.0)).scaled(Vector3.ONE * FIND_SCALE),
+		bn.global_position + fwd * 0.7 + Vector3(0, 0.04, 0))
+	w.set_meta("find_path", path)
+	finds_shown += 1
+	var tw := w.create_tween()
+	tw.tween_property(w, "rotation:y", TAU, 3.0)
+	tw.tween_property(w, "global_position", bn.global_position + Vector3(0, 1.1, 0), 0.5).set_ease(Tween.EASE_IN)
+	tw.tween_property(w, "scale", Vector3.ONE * 0.01, 0.25)
+	tw.tween_callback(w.queue_free)
 
 func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
 	var b = m.get("body")

@@ -1,3 +1,64 @@
+## B115 - THE OWED BATTERY IS GREEN AND THE REAL GENERATOR AGREED WITH B114'S EMULATION TO THE BYTE, 2026-11-21 20:45-20:5x CT (chat bot)
+
+Took: the WORK_PLAN TAKE THIS NEXT (19:58 block) CHAT BOT row - "B115: RUN THE OWED BATTERY FIRST,
+AT :45, BEFORE YOU WRITE ANYTHING NEW. parse / L14_TEST / TWITCH_PARSE / COMMANDS_DOC on merged
+main, in that order, as the first thing the firing does." That is what this cycle is. No new
+command, no new arm, no new wording - B114's SHOP CAP work was unverified and verifying it was the
+whole job.
+
+MERGED FIRST: `git merge origin/main` in W6 fast-forwarded `chatbot` 26 commits to **2fd2f62f**
+(S96's weapon-on-the-floor, S97's staff carry, art's 8 `.glb.import` siblings and the six-lane
+merge). The gates below ran on THAT tree, not on the tree B114 wrote against.
+
+THE LOCK, AND WHY THIS LANE DID NOT CROSS: at 20:45:27 UTC the last line of docs/RUN_LOCK.txt was
+`RUNNING 2026-11-21T20:41:45-06:00 (QA tester ... declared finish 20:51)` with no IDLE from that
+lane after it, so QA tester held it. I did not claim and did not launch a second Godot. I polled
+the file every 15 s and logged each read (20:46:32 through 20:49:51 all RUNNING; QA tester's
+`IDLE 2026-11-21T20:50:00-06:00` appeared on the 20:50:06 read). Claimed 20:50:30, declared finish
+20:56, **released 20:51:40** - early, with the IDLE line written before I said anything in words,
+because the HUD's own note says its next firing is 20:52 and an unused window is worth more to it
+than a padded one to me. `tasklist` empty before the claim and after the release.
+
+THE FOUR GATES - 25 SECONDS, ALL FOUR VERDICT LINES READ OFF THE LOG, NOT RETURN CODES:
+- **parse** `--headless --path W6 --quit-after 300` -> **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (21.8 s).
+- **`tools/_l14_test.gd`** -> **`L14_TEST OK (24 checks)`** (1.1 s), and the two arms that matter here:
+  - `ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])` - B114's four-path SHOP CAP arm
+    loads clean on merged main. AUTHORITY, ANCHOR, DRIFT and CEILING all stayed silent for a real
+    reason, not because the arm is unreachable: `scripts/economy.gd:622-623` reads
+    `RARITY := ["none","common","uncommon","rare","very rare","legendary"]` and
+    `SHOP_MAX_LEVEL := 4`, so level 1 -> "common" and level 4 -> "very rare" is exactly what
+    `forge`.what and `armoury`.what publish. The published sentence is TRUE, measured against the
+    game build's own file.
+  - `ok  docs/COMMANDS.md carries every field the data publishes, verbatim (32 rows; unpublished [])`
+    and `ok  docs/COMMANDS.md publishes nothing the data does not say (32 rows; stale [])`.
+- **`tools/_twitch_parse.gd`** -> **`TWITCH_PARSE OK (8 checks)`** (PASS 1-7b).
+- **`tools/_commands_doc.gd`** -> **`COMMANDS_DOC OK wrote 32 commands`** (1.0 s), and
+  `git status --porcelain` over scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md came
+  back **EMPTY**. A true no-op.
+
+**THE EMULATION WAS RIGHT, AND NOW THE AUTHORITY HAS SAID SO.** B114 proved its regenerated
+docs/COMMANDS.md only by a python emulation of `_commands_doc.gd`, and said in writing that the
+generator wins if the bytes differ. They do not differ: the real generator rewrote the file and
+changed nothing. The emulation is vindicated, but the record should say that the GREEN comes from
+the generator's run, not from the emulation - an emulation that happens to be correct is still not
+a verdict.
+
+FILE-ONLY CHECKS DONE BESIDE THE BATTERY (both directions, as the lane's own rule requires):
+`json.load` on data/commands.json clean, 32 commands, `order` is exactly the key set (no extra, no
+missing), every entry has a literal site in scripts/chatcmd.gd, and the loader's own arm reports
+`every verb ChatCmd answers is in the data (74 verbs; missing [])` plus `every command in the data
+is answered (unanswered [])`. Drift is zero in both directions by two independent readers.
+
+NOT DONE, AND SAID PLAINLY: **L56** (the delve-heavy soak) is still owed and this cycle did not
+start it. It needs a long engine window and I had released mine at 20:51 so the HUD could take
+20:52; starting a soak that would still be running inside another lane's claim is the thing the
+yield rule forbids. It is carried whole to B116, which should take it at :45 as the first thing
+after re-reading the lock.
+
+Nothing is owed to the GAME BUILD lane in twitch_eventsub.gd this cycle. No Twitch test ran: no
+account was used, nothing was redeemed, no bits were spent, nothing was posted.
+Decision for Mr. E: none.
+
 ## B114 - THE SMITHY'S LEVEL IS THE CEILING, AND UNTIL THIS CYCLE NO COMMAND SAID SO, 2026-11-21 19:45-20:1x CT (chat bot)
 The 18:58 TAKE THIS NEXT gave this lane one line: B113 is ticked, the red is closed, take the next
 chat bot item. My prompt's queue (L68/L69/L70 then L56) is spent - none of those four is open on

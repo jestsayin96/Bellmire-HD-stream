@@ -15780,3 +15780,24 @@ and not committed.
 Next firing: whatever the 21:58 TAKE THIS NEXT gives the CHAT BOT row. L56's remainder (run 4) is
 carried, but I am flagging that re-running it unchanged buys nothing.
 Decision for Mr. E: none.
+## S99 (2026-11-21T22:14:20-06:00, game build) - THE CHANGER'S MB_NAME ROW: "changer" -> "Evenhand". MB_NAME 47 = by_key 47, SETS EQUAL, AND THE 47th NOW DRAWS ON TREASURY FLOORS. MANA HALF RE-PROVED, NOT RE-DONE.
+TAKE THIS NEXT (21:58 CT block) game-build row: (1) add "changer": "Evenhand" to Delve.MB_NAME, re-run tools/_s51_names.gd, measure both sides
+  with a brace-matched parser; (2) item 1 of Mr. E's 10:17 directive, the mana UI off the game view.
+(1) DONE. scripts/delve.gd MB_NAME += "changer": "Evenhand" (name read from BOTH content's miniboss_feed._note_c174 and art's CANON
+  title, minibosses.py:16466). tools/_s51_names.gd count line 46 -> 47 (the S93 count beside the key-set check). Brace-matched parse of
+  the MB_NAME literal, comments stripped: 47 keys, 47 unique; lore_lines.json miniboss_feed.by_key parsed as JSON: 47; SETS EQUAL True.
+  S51_NAMES OK 176 checks ("S52 live key sources: by_key 47, MB_FIT base 47, glb stems 49"; drizzler red-proof still catches 4 faults).
+  S33_DRAW OK 196 checks - "changer treasury ratio 1.11 lines true drawn 100/400": the body S98 held out now enters its theme's draw.
+  LOOKED: S33_KEY=changer tools/_s33_look.gd windowed 1920x1080 -> S33_LOOK OK (5 checks), fitted h 2.72, min y 0.000, no overlap;
+  renders/cycles/s33/changer_1front.png and changer_3side90.png - the drum post and four arms stand on the floor beside the knight,
+  one head taller, the arms clear in the 90 view. The ONE IDEA (the SWAP - hardest hitter trades places with it) is still NOT built.
+(2) ALREADY DONE AT S89 and said so at S98; re-proved on this merged tree rather than re-done: S89_MANA OK (snapshot_pub.gd:618-625
+  publishes mana / mana_max on the hero row; the HUD removed the floating strip at U126 on option A; the hub receiver is proven).
+  So both halves of item 1 are in. Nothing new built for it.
+FOR THE CHAT BOT, NOT MINE: every Godot boot now prints chatcmd.gd's own guard "COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 46
+  elites and content writes feed rows for 47". It went red when C-174 landed (by_key 47), not from this commit; the fix is the count
+  in data/commands.json / docs/COMMANDS.md, which are the chat bot's files. Untouched by me.
+GATES (logs renders/cycles/s99/): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error; S51_NAMES OK 176 checks; S33_DRAW OK 196 checks;
+  S89_MANA OK; S33_LOOK OK (5 checks); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2067 samples off the floor (home);
+  TOWNWALK in_solid=0/18384 (0.000%) raid_in_solid=0/5570 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+No live Twitch test. Decision for Mr. E: none.

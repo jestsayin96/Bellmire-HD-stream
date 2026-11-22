@@ -442,7 +442,8 @@ const MB_NAME := {
 	"winder": "Haulback",   # S75: content's miniboss_feed._note_c151 "Haulback" and art's CANON title (minibosses.py:14974), both read
 	"pitman": "Underfoot",   # S76: content's miniboss_feed._note_c152 "Underfoot" and art's CANON title (minibosses.py:15251), both read
 	"tither": "Tenthpart",   # S89: art's CANON title (minibosses.py:15830); content's C-167 by_key.tither has landed, so miniboss_for draws the body (S91)
-	"blower": "Deadair"}   # S94: content's miniboss_feed._note_c169 "Deadair" and art's CANON title (minibosses.py:16064), both read; C-169 by_key.blower landed (9/7/4/8)
+	"blower": "Deadair",   # S94: content's miniboss_feed._note_c169 "Deadair" and art's CANON title (minibosses.py:16064), both read; C-169 by_key.blower landed (9/7/4/8)
+	"changer": "Evenhand"}   # S99: content's miniboss_feed._note_c174 "Evenhand" and art's CANON title (minibosses.py:16466), both read; C-174 by_key.changer landed (9/7/4/8)
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

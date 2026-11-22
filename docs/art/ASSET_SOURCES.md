@@ -499,3 +499,13 @@ added by a re-run.
 - Formats: glTF (with `.bin`) needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
 - The pack is a resource-props set (copper, gold, iron and silver bars, nuggets and stacks; fuel barrels and jerrycans; pallets; stone bricks and chunks; textiles; wood logs and planks; parts piles and cogs). It is not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_ResourceBits_1.0_FREE`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Smith1_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Smith1_blend (Blendswap 75579 "Medieval Smith Pack") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\Smith1_blend\75579 - Medieval Smith Pack - License.html` | 3 on disk: `Smith1Upload.blend`, `preview_75579.jpg`, the licence HTML (folder count 3; the sibling `Smith1_blend.zip` was not opened this firing) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75579) |
+
+- Checked: every file in `_packs\Smith1_blend\` by walking the tree (3 files). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; it was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Smith1_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.

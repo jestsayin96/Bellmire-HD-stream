@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "cacd6c98042b625b341b0109e65702c58ba3daaa",
+   "head": "ce3edd9a25211f14dc5aaf56ff9eec5ccb741697",
    "ref": "origin/main",
-   "ref_commit": "3dca304361a4070c90008b692be2dcc66b31e58c",
+   "ref_commit": "2fd2f62fceec063cdb845be98e3791e79b40babf",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2668,7 +2668,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.118,
+   "corridor_margin_m": 9.12,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.02,
    "read_from": {
@@ -2694,13 +2694,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "changer": {
+   "title": "Evenhand",
+   "theme": "treasury",
+   "idea": "IT TRADES PLACES - whoever hits it hardest ends up standing where it stood. It does not drag anybody to it and it does not take anybody away: it works its turnstile and the two of you come out the other side of each other. Your front rank is now at the back and the thing is standing beside whoever you were keeping out of reach, so the fight punishes the party for landing its best blow and the answer is to choose WHO lands it. THE COUNT IS THE DRUM on top of the post - pale, with three dark rungs, and it turns a third of a turn on every trade, so a viewer can see how many times the room has been shuffled without being told a number. JAM THE ARMS AND IT CANNOT TRADE: the three bars are at hip height where a body can stand against one, which is the only thing in the room that stops the swap.",
+   "wear": 0.38,
+   "feed_line": "A turnstile is being worked up ahead.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 878,
+   "size": [
+    2.59,
+    2.99,
+    2.72
+   ],
+   "footprint_span": 2.99,
+   "height_m": 2.72,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.014,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.78,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.397867364870969,
+    "ortho": 4.59804630279541,
+    "clip": [
+     9.128079414367676,
+     22.719154357910156
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 3dca304361a4070c90008b692be2dcc66b31e58c sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 2fd2f62fceec063cdb845be98e3791e79b40babf sha bc3a603f",
  "blank_check": {
-  "files": 138,
+  "files": 141,
   "failures": []
  }
 }

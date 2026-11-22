@@ -509,3 +509,13 @@ added by a re-run.
 - Checked: every file in `_packs\Smith1_blend\` by walking the tree (3 files). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
 - Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; it was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Smith1_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - ThePaintedWench_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| ThePaintedWench_blend (Blendswap 75282 "Medieval Tavern") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\ThePaintedWench_blend\75282 - Medieval Tavern - License.html` | 3 on disk: `ThePaintedWench_02Upload.blend` (5,351,400 bytes), `preview_75282.jpg` (3,066 bytes), the licence HTML (5,278 bytes). The sibling `ThePaintedWench_blend.zip` lists the same three entries and was not extracted. | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75282) |
+
+- Checked: every file in `_packs\ThePaintedWench_blend\` by walking the tree (3 files), and the sibling zip's entry list read with Python `zipfile`. The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ThePaintedWench_blend`. Nothing is redistributed AS an asset.

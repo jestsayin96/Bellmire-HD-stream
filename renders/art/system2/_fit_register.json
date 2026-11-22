@@ -26,7 +26,8 @@
  "views": [
   "front",
   "side",
-  "back"
+  "back",
+  "side_offhand"
  ],
  "seen_min": 0.15,
  "vis_min": 900,
@@ -34,9 +35,9 @@
  "show_min": 0.7,
  "px_per_m": 200.0,
  "laths": [
-  "crossbow_common: show 0.40 (best view turns 51 px of a possible 128 to the camera) - the carry never shows this weapon's broad face",
-  "crossbow_uncommon: show 0.37 (best view turns 56 px of a possible 152 to the camera) - the carry never shows this weapon's broad face",
-  "crossbow_rare: show 0.41 (best view turns 60 px of a possible 148 to the camera) - the carry never shows this weapon's broad face"
+  "crossbow_common: show 0.42 (best view turns 55 px of a possible 130 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_uncommon: show 0.41 (best view turns 64 px of a possible 154 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_rare: show 0.42 (best view turns 64 px of a possible 151 to the camera) - the carry never shows this weapon's broad face"
  ],
  "blanks": [],
  "frame_clips": [],
@@ -60,42 +61,50 @@
    "minor": {
     "front": 65,
     "side": 44,
-    "back": 65
+    "back": 65,
+    "side_offhand": 44
    },
    "opaque": {
     "front": 99229,
     "side": 81266,
-    "back": 100000
+    "back": 100000,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 5430,
     "side": 1619,
-    "back": 5162
+    "back": 5162,
+    "side_offhand": 0
    },
    "delta": {
     "front": 5657,
     "side": 1709,
-    "back": 5400
+    "back": 5400,
+    "side_offhand": 0
    },
    "alone": {
     "front": 6487,
     "side": 1827,
-    "back": 6477
+    "back": 6477,
+    "side_offhand": 1831
    },
    "seen": {
     "front": 0.8371,
     "side": 0.8862,
-    "back": 0.797
+    "back": 0.797,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2134,
@@ -130,42 +139,50 @@
    "minor": {
     "front": 67,
     "side": 54,
-    "back": 68
+    "back": 68,
+    "side_offhand": 54
    },
    "opaque": {
     "front": 100524,
     "side": 81266,
-    "back": 101312
+    "back": 101312,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 6856,
     "side": 1981,
-    "back": 6529
+    "back": 6529,
+    "side_offhand": 0
    },
    "delta": {
     "front": 7118,
     "side": 2028,
-    "back": 6774
+    "back": 6774,
+    "side_offhand": 0
    },
    "alone": {
     "front": 8124,
     "side": 2318,
-    "back": 8128
+    "back": 8128,
+    "side_offhand": 2311
    },
    "seen": {
     "front": 0.8439,
     "side": 0.8546,
-    "back": 0.8033
+    "back": 0.8033,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2588,
@@ -200,42 +217,50 @@
    "minor": {
     "front": 119,
     "side": 62,
-    "back": 120
+    "back": 120,
+    "side_offhand": 62
    },
    "opaque": {
     "front": 103706,
     "side": 81266,
-    "back": 104495
+    "back": 104495,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 10299,
     "side": 3122,
-    "back": 9764
+    "back": 9764,
+    "side_offhand": 0
    },
    "delta": {
     "front": 10739,
     "side": 3257,
-    "back": 10173
+    "back": 10173,
+    "side_offhand": 0
    },
    "alone": {
     "front": 11407,
     "side": 3376,
-    "back": 11404
+    "back": 11404,
+    "side_offhand": 3380
    },
    "seen": {
     "front": 0.9029,
     "side": 0.9248,
-    "back": 0.8562
+    "back": 0.8562,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.3015,
@@ -270,42 +295,50 @@
    "minor": {
     "front": 63,
     "side": 40,
-    "back": 63
+    "back": 63,
+    "side_offhand": 41
    },
    "opaque": {
     "front": 96858,
     "side": 81266,
-    "back": 97617
+    "back": 97617,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 2954,
     "side": 1235,
-    "back": 2686
+    "back": 2686,
+    "side_offhand": 0
    },
    "delta": {
     "front": 3124,
     "side": 1283,
-    "back": 2855
+    "back": 2855,
+    "side_offhand": 0
    },
    "alone": {
     "front": 3617,
     "side": 1507,
-    "back": 3605
+    "back": 3605,
+    "side_offhand": 1525
    },
    "seen": {
     "front": 0.8167,
     "side": 0.8195,
-    "back": 0.7451
+    "back": 0.7451,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1946,
@@ -340,42 +373,50 @@
    "minor": {
     "front": 78,
     "side": 42,
-    "back": 78
+    "back": 78,
+    "side_offhand": 42
    },
    "opaque": {
     "front": 98338,
     "side": 81266,
-    "back": 99099
+    "back": 99099,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 4398,
     "side": 1486,
-    "back": 4170
+    "back": 4170,
+    "side_offhand": 0
    },
    "delta": {
     "front": 4616,
     "side": 1537,
-    "back": 4392
+    "back": 4392,
+    "side_offhand": 0
    },
    "alone": {
     "front": 5155,
     "side": 1879,
-    "back": 5153
+    "back": 5153,
+    "side_offhand": 1922
    },
    "seen": {
     "front": 0.8532,
     "side": 0.7908,
-    "back": 0.8092
+    "back": 0.8092,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2038,
@@ -410,42 +451,50 @@
    "minor": {
     "front": 88,
     "side": 48,
-    "back": 87
+    "back": 87,
+    "side_offhand": 48
    },
    "opaque": {
     "front": 98642,
     "side": 81266,
-    "back": 99388
+    "back": 99388,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 4780,
     "side": 2043,
-    "back": 4455
+    "back": 4455,
+    "side_offhand": 0
    },
    "delta": {
     "front": 4978,
     "side": 2050,
-    "back": 4682
+    "back": 4682,
+    "side_offhand": 0
    },
    "alone": {
     "front": 5577,
     "side": 2254,
-    "back": 5565
+    "back": 5565,
+    "side_offhand": 2244
    },
    "seen": {
     "front": 0.8571,
     "side": 0.9064,
-    "back": 0.8005
+    "back": 0.8005,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2325,
@@ -480,42 +529,50 @@
    "minor": {
     "front": 90,
     "side": 60,
-    "back": 87
+    "back": 87,
+    "side_offhand": 60
    },
    "opaque": {
     "front": 99060,
     "side": 81280,
-    "back": 99668
+    "back": 99668,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 5173,
     "side": 4150,
-    "back": 4767
+    "back": 4767,
+    "side_offhand": 0
    },
    "delta": {
     "front": 5389,
     "side": 4153,
-    "back": 5006
+    "back": 5006,
+    "side_offhand": 0
    },
    "alone": {
     "front": 5865,
     "side": 4654,
-    "back": 5710
+    "back": 5710,
+    "side_offhand": 4654
    },
    "seen": {
     "front": 0.882,
     "side": 0.8917,
-    "back": 0.8349
+    "back": 0.8349,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2895,
@@ -550,42 +607,50 @@
    "minor": {
     "front": 132,
     "side": 75,
-    "back": 132
+    "back": 132,
+    "side_offhand": 75
    },
    "opaque": {
     "front": 102005,
     "side": 81654,
-    "back": 102750
+    "back": 102750,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 8095,
     "side": 7957,
-    "back": 7838
+    "back": 7838,
+    "side_offhand": 0
    },
    "delta": {
     "front": 8626,
     "side": 7984,
-    "back": 8309
+    "back": 8309,
+    "side_offhand": 0
    },
    "alone": {
     "front": 8866,
     "side": 8492,
-    "back": 8851
+    "back": 8851,
+    "side_offhand": 8509
    },
    "seen": {
     "front": 0.913,
     "side": 0.937,
-    "back": 0.8855
+    "back": 0.8855,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.3684,
@@ -620,42 +685,50 @@
    "minor": {
     "front": 142,
     "side": 79,
-    "back": 141
+    "back": 141,
+    "side_offhand": 79
    },
    "opaque": {
     "front": 103578,
     "side": 81734,
-    "back": 104349
+    "back": 104349,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 9765,
     "side": 8803,
-    "back": 9431
+    "back": 9431,
+    "side_offhand": 0
    },
    "delta": {
     "front": 10377,
     "side": 8858,
-    "back": 9897
+    "back": 9897,
+    "side_offhand": 0
    },
    "alone": {
     "front": 10446,
     "side": 8937,
-    "back": 10455
+    "back": 10455,
+    "side_offhand": 8919
    },
    "seen": {
     "front": 0.9348,
     "side": 0.985,
-    "back": 0.9021
+    "back": 0.9021,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.3919,
@@ -690,42 +763,50 @@
    "minor": {
     "front": 26,
     "side": 29,
-    "back": 26
+    "back": 26,
+    "side_offhand": 30
    },
    "opaque": {
     "front": 95736,
     "side": 81266,
-    "back": 96516
+    "back": 96516,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 1637,
     "side": 392,
-    "back": 1612
+    "back": 1612,
+    "side_offhand": 0
    },
    "delta": {
     "front": 1750,
     "side": 438,
-    "back": 1691
+    "back": 1691,
+    "side_offhand": 0
    },
    "alone": {
     "front": 2377,
     "side": 559,
-    "back": 2402
+    "back": 2402,
+    "side_offhand": 570
    },
    "seen": {
     "front": 0.6887,
     "side": 0.7013,
-    "back": 0.6711
+    "back": 0.6711,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1206,
@@ -739,8 +820,8 @@
    ],
    "mid_px": 24.1,
    "mid_px_world_was": 28.2,
-   "best_minor": 29,
-   "show": 1.203,
+   "best_minor": 30,
+   "show": 1.244,
    "proving_views": 2
   },
   "dagger_uncommon": {
@@ -760,42 +841,50 @@
    "minor": {
     "front": 63,
     "side": 35,
-    "back": 62
+    "back": 62,
+    "side_offhand": 35
    },
    "opaque": {
     "front": 96137,
     "side": 81266,
-    "back": 96913
+    "back": 96913,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 2229,
     "side": 706,
-    "back": 2044
+    "back": 2044,
+    "side_offhand": 0
    },
    "delta": {
     "front": 2402,
     "side": 775,
-    "back": 2221
+    "back": 2221,
+    "side_offhand": 0
    },
    "alone": {
     "front": 3112,
     "side": 1078,
-    "back": 3111
+    "back": 3111,
+    "side_offhand": 1070
    },
    "seen": {
     "front": 0.7163,
     "side": 0.6549,
-    "back": 0.657
+    "back": 0.657,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1668,
@@ -830,42 +919,50 @@
    "minor": {
     "front": 61,
     "side": 37,
-    "back": 61
+    "back": 61,
+    "side_offhand": 37
    },
    "opaque": {
     "front": 96935,
     "side": 81266,
-    "back": 97713
+    "back": 97713,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 3100,
     "side": 921,
-    "back": 2849
+    "back": 2849,
+    "side_offhand": 0
    },
    "delta": {
     "front": 3345,
     "side": 1022,
-    "back": 3085
+    "back": 3085,
+    "side_offhand": 0
    },
    "alone": {
     "front": 3944,
     "side": 1162,
-    "back": 3949
+    "back": 3949,
+    "side_offhand": 1161
    },
    "seen": {
     "front": 0.786,
     "side": 0.7926,
-    "back": 0.7214
+    "back": 0.7214,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1789,
@@ -904,42 +1001,50 @@
    "minor": {
     "front": 80,
     "side": 81,
-    "back": 80
+    "back": 80,
+    "side_offhand": 81
    },
    "opaque": {
     "front": 100814,
     "side": 82329,
-    "back": 101537
+    "back": 101537,
+    "side_offhand": 81808
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 10744,
     "side": 10996,
-    "back": 7277
+    "back": 7277,
+    "side_offhand": 571
    },
    "delta": {
     "front": 11287,
     "side": 11218,
-    "back": 7492
+    "back": 7492,
+    "side_offhand": 620
    },
    "alone": {
     "front": 13683,
     "side": 13778,
-    "back": 13731
+    "back": 13731,
+    "side_offhand": 13701
    },
    "seen": {
     "front": 0.7852,
     "side": 0.7981,
-    "back": 0.53
+    "back": 0.53,
+    "side_offhand": 0.0417
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.3933,
@@ -978,42 +1083,50 @@
    "minor": {
     "front": 99,
     "side": 101,
-    "back": 99
+    "back": 99,
+    "side_offhand": 101
    },
    "opaque": {
     "front": 104891,
     "side": 83137,
-    "back": 105516
+    "back": 105516,
+    "side_offhand": 82307
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 17002,
     "side": 18607,
-    "back": 11984
+    "back": 11984,
+    "side_offhand": 1137
    },
    "delta": {
     "front": 17760,
     "side": 19204,
-    "back": 12253
+    "back": 12253,
+    "side_offhand": 1204
    },
    "alone": {
     "front": 22071,
     "side": 21753,
-    "back": 21945
+    "back": 21945,
+    "side_offhand": 21674
    },
    "seen": {
     "front": 0.7703,
     "side": 0.8554,
-    "back": 0.5461
+    "back": 0.5461,
+    "side_offhand": 0.0525
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.4863,
@@ -1052,42 +1165,50 @@
    "minor": {
     "front": 85,
     "side": 87,
-    "back": 85
+    "back": 85,
+    "side_offhand": 87
    },
    "opaque": {
     "front": 102584,
     "side": 82860,
-    "back": 103234
+    "back": 103234,
+    "side_offhand": 82163
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 12860,
     "side": 15461,
-    "back": 9397
+    "back": 9397,
+    "side_offhand": 937
    },
    "delta": {
     "front": 13770,
     "side": 15908,
-    "back": 9722
+    "back": 9722,
+    "side_offhand": 998
    },
    "alone": {
     "front": 17822,
     "side": 18099,
-    "back": 17832
+    "back": 17832,
+    "side_offhand": 18108
    },
    "seen": {
     "front": 0.7216,
     "side": 0.8542,
-    "back": 0.527
+    "back": 0.527,
+    "side_offhand": 0.0517
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.4165,
@@ -1107,224 +1228,248 @@
   },
   "crossbow_common": {
    "model": "assets/gear/dungeon/crossbow_common.glb",
-   "verts": 395,
-   "checked": 214,
-   "reach": 0.08,
-   "drop": 0.114,
+   "verts": 745,
+   "checked": 526,
+   "reach": 0.088,
+   "drop": 0.14,
    "span": 0.69,
-   "tip_z": 0.72,
+   "tip_z": 0.729,
    "hero_h": 2.45,
-   "clip": 40,
+   "clip": 64,
    "ground": 0,
    "hand_scale": 1.0,
    "engine_mirrored": true,
    "engine_rot_deg": [
     "-90",
-    "0",
+    "35",
     "90"
    ],
    "minor": {
-    "front": 35,
-    "side": 41,
-    "back": 51
+    "front": 52,
+    "side": 48,
+    "back": 55,
+    "side_offhand": 48
    },
    "opaque": {
-    "front": 95025,
-    "side": 82892,
-    "back": 95803
+    "front": 95412,
+    "side": 83388,
+    "back": 95803,
+    "side_offhand": 83374
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
-    "front": 2610,
-    "side": 2264,
-    "back": 864
+    "front": 3304,
+    "side": 2820,
+    "back": 865,
+    "side_offhand": 2077
    },
    "delta": {
-    "front": 2694,
-    "side": 2421,
-    "back": 933
+    "front": 3427,
+    "side": 3035,
+    "back": 935,
+    "side_offhand": 2203
    },
    "alone": {
-    "front": 2790,
-    "side": 3076,
-    "back": 3038
+    "front": 3480,
+    "side": 3628,
+    "back": 3346,
+    "side_offhand": 3600
    },
    "seen": {
-    "front": 0.9355,
-    "side": 0.736,
-    "back": 0.2844
+    "front": 0.9494,
+    "side": 0.7773,
+    "back": 0.2585,
+    "side_offhand": 0.5769
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
-    0.1942,
+    0.2284,
     0.6535,
     0.69
    ],
    "local_ext": [
-    0.1945,
-    0.6382,
+    0.2284,
+    0.6478,
     0.691
    ],
-   "mid_px": 127.6,
+   "mid_px": 129.6,
    "mid_px_world_was": 130.7,
-   "best_minor": 51,
-   "show": 0.4,
+   "best_minor": 55,
+   "show": 0.425,
    "proving_views": 2
   },
   "crossbow_uncommon": {
    "model": "assets/gear/dungeon/crossbow_uncommon.glb",
-   "verts": 531,
-   "checked": 350,
+   "verts": 881,
+   "checked": 662,
    "reach": 0.095,
-   "drop": 0.114,
-   "span": 1.023,
+   "drop": 0.184,
+   "span": 1.025,
    "tip_z": 0.735,
    "hero_h": 2.45,
-   "clip": 74,
+   "clip": 98,
    "ground": 0,
    "hand_scale": 1.0,
    "engine_mirrored": true,
    "engine_rot_deg": [
     "-90",
-    "0",
+    "35",
     "90"
    ],
    "minor": {
-    "front": 35,
-    "side": 46,
-    "back": 56
+    "front": 64,
+    "side": 62,
+    "back": 57,
+    "side_offhand": 61
    },
    "opaque": {
-    "front": 95893,
-    "side": 83559,
-    "back": 96554
+    "front": 96400,
+    "side": 84409,
+    "back": 96659,
+    "side_offhand": 84370
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
-    "front": 4350,
-    "side": 3010,
-    "back": 1617
+    "front": 5141,
+    "side": 3980,
+    "back": 1755,
+    "side_offhand": 3072
    },
    "delta": {
-    "front": 4496,
-    "side": 3191,
-    "back": 1727
+    "front": 5319,
+    "side": 4255,
+    "back": 1887,
+    "side_offhand": 3269
    },
    "alone": {
-    "front": 4465,
-    "side": 3853,
-    "back": 4582
+    "front": 5273,
+    "side": 4787,
+    "back": 5092,
+    "side_offhand": 4658
    },
    "seen": {
-    "front": 0.9742,
-    "side": 0.7812,
-    "back": 0.3529
+    "front": 0.975,
+    "side": 0.8314,
+    "back": 0.3447,
+    "side_offhand": 0.6595
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
-    0.2093,
-    0.7498,
-    1.0234
+    0.2793,
+    0.7657,
+    1.0245
    ],
    "local_ext": [
-    0.2098,
-    0.7584,
+    0.2792,
+    0.7704,
     1.0352
    ],
-   "mid_px": 151.7,
-   "mid_px_world_was": 150.0,
-   "best_minor": 56,
-   "show": 0.369,
+   "mid_px": 154.1,
+   "mid_px_world_was": 153.1,
+   "best_minor": 64,
+   "show": 0.415,
    "proving_views": 3
   },
   "crossbow_rare": {
    "model": "assets/gear/dungeon/crossbow_rare.glb",
-   "verts": 688,
-   "checked": 514,
+   "verts": 1038,
+   "checked": 826,
    "reach": 0.122,
-   "drop": 0.114,
-   "span": 1.033,
+   "drop": 0.166,
+   "span": 1.034,
    "tip_z": 0.762,
    "hero_h": 2.45,
-   "clip": 116,
+   "clip": 140,
    "ground": 0,
    "hand_scale": 1.0,
    "engine_mirrored": true,
    "engine_rot_deg": [
     "-90",
-    "0",
+    "35",
     "90"
    ],
    "minor": {
-    "front": 39,
-    "side": 52,
-    "back": 60
+    "front": 61,
+    "side": 64,
+    "back": 60,
+    "side_offhand": 64
    },
    "opaque": {
-    "front": 95691,
-    "side": 84048,
-    "back": 96353
+    "front": 96306,
+    "side": 84708,
+    "back": 96413,
+    "side_offhand": 84675
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
-    "front": 4003,
-    "side": 3503,
-    "back": 1402
+    "front": 5008,
+    "side": 4267,
+    "back": 1495,
+    "side_offhand": 3376
    },
    "delta": {
-    "front": 4167,
-    "side": 3649,
-    "back": 1514
+    "front": 5190,
+    "side": 4452,
+    "back": 1620,
+    "side_offhand": 3555
    },
    "alone": {
-    "front": 4090,
-    "side": 4275,
-    "back": 4220
+    "front": 5082,
+    "side": 5002,
+    "back": 4651,
+    "side_offhand": 4889
    },
    "seen": {
-    "front": 0.9787,
-    "side": 0.8194,
-    "back": 0.3322
+    "front": 0.9854,
+    "side": 0.8531,
+    "back": 0.3214,
+    "side_offhand": 0.6905
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
-    0.2361,
-    0.7425,
-    1.0325
+    0.288,
+    0.7523,
+    1.0338
    ],
    "local_ext": [
-    0.2366,
-    0.7409,
+    0.2879,
+    0.7563,
     1.0445
    ],
-   "mid_px": 148.2,
-   "mid_px_world_was": 148.5,
-   "best_minor": 60,
-   "show": 0.405,
+   "mid_px": 151.3,
+   "mid_px_world_was": 150.5,
+   "best_minor": 64,
+   "show": 0.423,
    "proving_views": 3
   },
   "axeDouble_common": {
@@ -1344,42 +1489,50 @@
    "minor": {
     "front": 88,
     "side": 40,
-    "back": 88
+    "back": 88,
+    "side_offhand": 40
    },
    "opaque": {
     "front": 98118,
     "side": 81266,
-    "back": 98885
+    "back": 98885,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 4203,
     "side": 1607,
-    "back": 3952
+    "back": 3952,
+    "side_offhand": 0
    },
    "delta": {
     "front": 4424,
     "side": 1644,
-    "back": 4179
+    "back": 4179,
+    "side_offhand": 0
    },
    "alone": {
     "front": 4859,
     "side": 1904,
-    "back": 4854
+    "back": 4854,
+    "side_offhand": 1907
    },
    "seen": {
     "front": 0.865,
     "side": 0.844,
-    "back": 0.8142
+    "back": 0.8142,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1946,
@@ -1414,42 +1567,50 @@
    "minor": {
     "front": 128,
     "side": 43,
-    "back": 128
+    "back": 128,
+    "side_offhand": 43
    },
    "opaque": {
     "front": 101093,
     "side": 81266,
-    "back": 101849
+    "back": 101849,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 7154,
     "side": 2373,
-    "back": 6918
+    "back": 6918,
+    "side_offhand": 0
    },
    "delta": {
     "front": 7453,
     "side": 2410,
-    "back": 7219
+    "back": 7219,
+    "side_offhand": 0
    },
    "alone": {
     "front": 7889,
     "side": 2807,
-    "back": 7880
+    "back": 7880,
+    "side_offhand": 2807
    },
    "seen": {
     "front": 0.9068,
     "side": 0.8454,
-    "back": 0.8779
+    "back": 0.8779,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2038,
@@ -1484,42 +1645,50 @@
    "minor": {
     "front": 130,
     "side": 48,
-    "back": 130
+    "back": 130,
+    "side_offhand": 48
    },
    "opaque": {
     "front": 101196,
     "side": 81266,
-    "back": 101941
+    "back": 101941,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 7325,
     "side": 2693,
-    "back": 7010
+    "back": 7010,
+    "side_offhand": 0
    },
    "delta": {
     "front": 7618,
     "side": 2694,
-    "back": 7324
+    "back": 7324,
+    "side_offhand": 0
    },
    "alone": {
     "front": 8108,
     "side": 2926,
-    "back": 8098
+    "back": 8098,
+    "side_offhand": 2928
    },
    "seen": {
     "front": 0.9034,
     "side": 0.9204,
-    "back": 0.8656
+    "back": 0.8656,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2325,
@@ -1554,42 +1723,50 @@
    "minor": {
     "front": 110,
     "side": 30,
-    "back": 110
+    "back": 110,
+    "side_offhand": 30
    },
    "opaque": {
     "front": 96638,
     "side": 81269,
-    "back": 97406
+    "back": 97406,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 4830,
     "side": 2157,
-    "back": 2689
+    "back": 2689,
+    "side_offhand": 0
    },
    "delta": {
     "front": 4924,
     "side": 2224,
-    "back": 2781
+    "back": 2781,
+    "side_offhand": 0
    },
    "alone": {
     "front": 9638,
     "side": 2781,
-    "back": 9635
+    "back": 9635,
+    "side_offhand": 2784
    },
    "seen": {
     "front": 0.5011,
     "side": 0.7756,
-    "back": 0.2791
+    "back": 0.2791,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.1419,
@@ -1624,42 +1801,50 @@
    "minor": {
     "front": 122,
     "side": 44,
-    "back": 122
+    "back": 122,
+    "side_offhand": 44
    },
    "opaque": {
     "front": 97061,
     "side": 81388,
-    "back": 97797
+    "back": 97797,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 6459,
     "side": 3171,
-    "back": 3095
+    "back": 3095,
+    "side_offhand": 0
    },
    "delta": {
     "front": 6570,
     "side": 3186,
-    "back": 3202
+    "back": 3202,
+    "side_offhand": 0
    },
    "alone": {
     "front": 10111,
     "side": 3831,
-    "back": 10117
+    "back": 10117,
+    "side_offhand": 3832
    },
    "seen": {
     "front": 0.6388,
     "side": 0.8277,
-    "back": 0.3059
+    "back": 0.3059,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.2084,
@@ -1694,42 +1879,50 @@
    "minor": {
     "front": 113,
     "side": 68,
-    "back": 114
+    "back": 114,
+    "side_offhand": 68
    },
    "opaque": {
     "front": 97396,
     "side": 81456,
-    "back": 98090
+    "back": 98090,
+    "side_offhand": 81344
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0
+    "back": 0.0,
+    "side_offhand": 0.0
    },
    "vis": {
     "front": 6152,
     "side": 3884,
-    "back": 4095
+    "back": 4095,
+    "side_offhand": 0
    },
    "delta": {
     "front": 6378,
     "side": 3939,
-    "back": 4266
+    "back": 4266,
+    "side_offhand": 0
    },
    "alone": {
     "front": 11183,
     "side": 4996,
-    "back": 11190
+    "back": 11190,
+    "side_offhand": 5000
    },
    "seen": {
     "front": 0.5501,
     "side": 0.7774,
-    "back": 0.366
+    "back": 0.366,
+    "side_offhand": 0.0
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0
+    "back": 0,
+    "side_offhand": 0
    },
    "ext": [
     0.3326,

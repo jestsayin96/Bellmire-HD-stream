@@ -334,3 +334,17 @@ are the mirror image: **a pack with no file called `LICENSE` can still be fully
 licensed**, and two of these three are CC0 outright. A filename is not a licence
 in either direction. The recipe that counts files answers "where do I have to go
 and read", not "what am I allowed to use".
+
+### 21 Nov 2026 - System 2: the three dungeon crossbows are MODIFIED in place (art)
+`assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb` are the **KayKit
+Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)** models already listed in the table
+above, now carrying a stirrup, a drawn bowstring and a bolt added procedurally
+by `tools/art/xbowparts.py` (+116 verts each; 395->511, 531->647, 688->804).
+CC0 explicitly permits modification and incorporation and requires no
+attribution; the row is kept anyway because every pack used gets recorded. The
+added geometry is original and procedural. Nothing is redistributed AS an
+asset. THE PRISTINE COPY, if these ever need restoring, is
+`_packs/kaykit_dungeon_pack_CC0/Models/gltf/crossbow_<tier>.gltf.glb`, and the
+generator REFUSES to run on an already augmented mesh - it asserts the vertex
+count against the pack's own 395/531/688 first, so a second stirrup cannot be
+added by a re-run.

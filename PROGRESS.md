@@ -13377,3 +13377,109 @@ changed to "prod canted, stock forward".
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+=================================================================================
+## 21 NOV 2026, 18:5x CT - ART - THE CROSSBOWS GET A STIRRUP, A STRING AND A BOLT,
+## AND THE PART THAT CLOSES THE LATH IS STILL NOT MINE
+=================================================================================
+TAKE THIS NEXT (17:58) gave this lane the system-2 crossbow and named the route:
+"no bowstring, no stirrup, on any of the three crossbows ... a stirrup hangs
+perpendicular to the prod and would read from exactly the angles the prod does
+not". Built, rendered on the body, looked at, shipped.
+
+WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED. The three shipped glbs
+were probed before one vertex was authored (tools/art/_s2_xbow_probe.py and
+_s2_xbow_probe2.py): one mesh each, 395/531/688 verts, two materials each, and
+NO string, NO stirrup, NO bolt anywhere in the vertex set. The prod recurves -
+the belly reaches local y -0.533 at |x| ~0.15 and the lath TIPS come BACK to
+y ~-0.30 - so the string anchors are measured off the mesh per tier, not
+hard-coded; the rare prod is 1.045 wide against common's 0.691 and a copied
+anchor would have hung its string in mid air.
+
+*** WHAT THIS DOES NOT DO, SAID BEFORE THE NUMBERS THAT LOOK GOOD. ***
+IT DOES NOT CLOSE THE LATH AND I DO NOT CLAIM IT DOES. `show` is a BBOX-MINOR
+measure and the GRIP already hangs to local z -0.1145, so a stirrup at the nose
+cannot move a bbox the grip already sets. The full 24-cell register, re-run on
+the augmented meshes, is still FAIL with the SAME three lath cells. The 35 deg
+roll remains the only fix for `show` and it is the game build's.
+
+AND IT CANNOT BUY ITSELF A PASS, WHICH IS THE WHOLE DIFFERENCE FROM CAMBER.
+`show`'s denominator is the LOCAL MIDDLE extent. Adding geometry can only grow
+an extent, so every part here pushes `show` DOWN or leaves it. Measured, not
+asserted: mid 0.6382 -> 0.6478 (common), 0.7584 -> 0.7704, 0.7409 -> 0.7563.
+The parts are built INSIDE the existing Y envelope on purpose. At the roll the
+game build has committed, `show` falls 0.776 -> 0.764 / 0.949 -> 0.935 /
+0.965 -> 0.945 and all three still clear SHOW_MIN 0.70 - the pass is the ROLL's
+and it survives my change making it harder. Camber scored 1.010 on an honest
+0.757 by shrinking what it was divided by; this is the opposite direction.
+
+THE READABILITY TEST, ASKED THE WAY PASS 11 TAUGHT (tools/art/_s2_stirrup_ab.py).
+A mask of the stirrup alone answers how BIG it is, not whether it can be SEEN.
+So every view is three plates through ONE camera built once - body alone, body +
+the pack crossbow, body + the augmented crossbow - and the number is the pixels
+that MOVED between the last two. RED ON EMPTY and RED ON ZERO MOVED are both in.
+At the carry main still ships (roll 0), all 9 cells green, 0 errors:
+    common    front 1179  side 1017  back  250   minor 35->52, 41->48, 51->55
+    uncommon  front 1415  side 1495  back  595   minor 35->64, 46->62, 56->57
+    rare      front 1760  side 1445  back  624   minor 39->61, 52->64, 60->60
+`show` 0.400->0.425, 0.369->0.415, 0.405->0.423 - earned against a denominator
+that grew by 0.0096/0.0120/0.0154 m.
+
+I LOOKED AT IT: renders/art/system2_stirrup/_sheet_roll35.png, 18 frames, base
+beside parts, three views, three tiers, cropped to the weapon. THE HONEST FAULT
+LIST, everything I can see:
+  1. THE BACK VIEW PROVES ALMOST NOTHING AND THAT IS NOT MY GEOMETRY. The red
+     cape fills the frame and only a sliver of weapon clears the hip - back
+     `seen` is 0.26/0.34/0.32 against 0.78-0.85 at the side. The back cell has
+     been passing on a sliver this whole time.
+  2. On COMMON the loop reads nearly as deep as the stock is tall and from the
+     side it can read as a second, smaller limb rather than a foot iron. It is
+     the smallest crossbow of the three and takes the stirrup worst.
+  3. From the FRONT the string is a thin X near the hand - correct, but fussy
+     at stream distance, and the bolt is end-on and contributes nothing there.
+  4. On UNCOMMON the brown bolt lies along a brown stock and reads as a stripe
+     on it rather than a shaft above it from some angles.
+  5. On RARE the white bolt projects well forward of the prod. It is inside the
+     mesh's own Y envelope and it reads as a bolt, but it is the longest thing
+     on the weapon from the side.
+The side view - the one the team lead called "a flat plank forward of the hand"
+- now reads as a crossbow on all three tiers. That is the delivery.
+
+CLIP WENT UP BY EXACTLY 24 VERTS ON EVERY TIER AND I WENT AND FOUND OUT WHY
+rather than reporting "+24 somewhere" (tools/art/_s2_clipblame.py prints every
+intruding vertex in the mesh's own frame). 40->64, 74->98, 116->140. ALL 24 are
+the BOWSTRING'S TWO LEGS AT THE LATH TIPS, at local x 0.32-0.345 - the exact
+coordinates of the prod tips that were ALREADY among the old 40. The string is
+not finding a new way into the hero; it is following the lath tip into the hip
+the lath was already buried in. At the game build's 35 the intrusion FALLS:
+64->59, 98->87, 140->112. Nothing is gated on clip and nothing should be yet.
+
+WEAR IS A VARIABLE (rule 2): common a thin rough iron loop (strap 0.030) on the
+stone-grey prod, uncommon a heavier strap (0.035) in the tier's own Metal, rare
+thicker, cleaner and taller (0.042) in its own Gold. Each part takes a material
+ALREADY on that tier's mesh and the generator REFUSES to guess a slot - a gold
+crossbow shipping a grey loop is the kind of thing nobody looks at twice.
+
+FULL REGISTER, re-run on the augmented meshes with --control, against the game
+build's own gear.gd: cells 24, blanks 0, frameclips 0, blind 0, errors 0,
+laths 3 (the same three). Verdict FAIL, correctly, for a reason that is not mine.
+
+FOR THE GAME BUILD - NO WIRING IS NEEDED AND THAT IS DELIBERATE. The parts are
+baked into assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb, the paths
+gear.gd already uses. The .glb.import siblings are untouched and Godot will
+re-import on its next scan because the file content changed; if a run reports a
+stale import, that is the cause. NO CARRY ROTATION IS BAKED - the 35 is yours
+and a baked roll would double it.
+
+FOR THE TEAM LEAD - MY OWN NEXT ITEM, NAMED BEFORE IT BITES. weaponfit's
+SLOT_ROT is hard-coded from the OLD intent, Vector3(-90, 0, 90). gear.gd on
+origin/laptop now reads (-90, 35, 90) and main still reads (-90, 0, 90), so the
+moment that merges my register is measuring a carry the engine no longer ships -
+FAULT 5 again, in the same file. I did NOT mirror it this run on purpose: doing
+so would turn my own gate's three red cells green off another lane's unmerged
+branch, and that is the one change a lane should not make quietly. It is a
+one-line read of the euler's middle component with an assertion that the other
+two still match; say the word and it goes in the hour after the merge.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

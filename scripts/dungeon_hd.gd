@@ -236,10 +236,11 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S76: `pitman` (44th, Underfoot in art's CANON, art's tag crypt - field 5) joins crypt; content's C-152 lines (9 arrive / 8 fall) and its MB_NAME row land together, so it enters the crypt draw now.
 ## S89: `tither` (45th, Tenthpart in art's CANON, art's tag prison - field 5) joins prison; content's C-167 landed by_key.tither (arrive 9 / act 7 / broken 4 / fall 8), so miniboss_for draws it (S91, measured).
 ## S93: `blower` (46th, Deadair in art's CANON, art's tag fogbound - field 5) joins fogbound with MB_FIT 1.01; content's C-169 lines have NOT landed (by_key.blower absent), so miniboss_for correctly holds it out until they do. S94: C-169 landed (by_key.blower 9 arrive / 8 fall) and its MB_NAME row is written, so it enters the fogbound draw now.
+## S98: `changer` (47th, Evenhand in art's CANON, art's tag treasury - field 5) joins treasury with MB_FIT 1.11; content's by_key.changer has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When it lands the row is one line: "changer": "Evenhand".
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman", "tither"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer"], "mess": ["loader", "hooper"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:

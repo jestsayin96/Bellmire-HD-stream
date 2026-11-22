@@ -179,7 +179,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 156,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "drillmaster",
+   "views_from": "recorded on the row when it was rendered"
   },
   "gaoler": {
    "creature_h": 2.35,
@@ -343,7 +345,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "gaoler",
+   "views_from": "recorded on the row when it was rendered"
   },
   "scrapwright": {
    "creature_h": 2.0,
@@ -507,7 +511,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 65,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "scrapwright",
+   "views_from": "recorded on the row when it was rendered"
   },
   "snuffer": {
    "creature_h": 2.6,
@@ -671,7 +677,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 149,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "snuffer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "sexton": {
    "creature_h": 2.45,
@@ -835,7 +843,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 103,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "sexton",
+   "views_from": "recorded on the row when it was rendered"
   },
   "porter": {
    "creature_h": 2.3,
@@ -999,7 +1009,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "porter",
+   "views_from": "recorded on the row when it was rendered"
   },
   "tallyman": {
    "creature_h": 2.15,
@@ -1163,7 +1175,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "tallyman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "cook": {
    "creature_h": 2.05,
@@ -1327,7 +1341,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "cook",
+   "views_from": "recorded on the row when it was rendered"
   },
   "sluicekeeper": {
    "creature_h": 2.5,
@@ -1491,7 +1507,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 72,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "sluicekeeper",
+   "views_from": "recorded on the row when it was rendered"
   },
   "sower": {
    "creature_h": 2.25,
@@ -1655,7 +1673,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 15,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "sower",
+   "views_from": "recorded on the row when it was rendered"
   },
   "snarer": {
    "creature_h": 2.3,
@@ -1819,7 +1839,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 32,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "snarer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "stoker": {
    "creature_h": 2.4,
@@ -1983,7 +2005,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "stoker",
+   "views_from": "recorded on the row when it was rendered"
   },
   "bellman": {
    "creature_h": 2.7,
@@ -2147,7 +2171,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "bellman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "boiler": {
    "creature_h": 2.1,
@@ -2335,7 +2361,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "boiler",
+   "views_from": "recorded on the row when it was rendered"
   },
   "snuffer_chibi": {
    "creature_h": 2.6,
@@ -2501,7 +2529,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 89,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "views_dir": "snuffer_chibi",
+   "views_from": "recorded on the row when it was rendered"
   },
   "tallyman_chibi": {
    "creature_h": 2.15,
@@ -2667,7 +2697,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 136,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "tallyman_chibi",
+   "views_from": "recorded on the row when it was rendered"
   },
   "jointer": {
    "creature_h": 2.25,
@@ -2831,7 +2863,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 105,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "jointer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "quartermaster": {
    "creature_h": 2.35,
@@ -2995,7 +3029,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 75,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "quartermaster",
+   "views_from": "recorded on the row when it was rendered"
   },
   "loader": {
    "creature_h": 2.65,
@@ -3159,7 +3195,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "loader",
+   "views_from": "recorded on the row when it was rendered"
   },
   "hurdleman": {
    "creature_h": 2.55,
@@ -3323,7 +3361,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 47,
-   "air_px_tightest_view": "side"
+   "air_px_tightest_view": "side",
+   "views_dir": "hurdleman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "tanner": {
    "creature_h": 2.75,
@@ -3487,7 +3527,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 83,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "tanner",
+   "views_from": "recorded on the row when it was rendered"
   },
   "reeve": {
    "creature_h": 1.95,
@@ -3673,7 +3715,9 @@
     }
    },
    "self_seen_worst": 0.8541,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "reeve",
+   "views_from": "recorded on the row when it was rendered"
   },
   "pressman": {
    "creature_h": 2.85,
@@ -3859,7 +3903,9 @@
     }
    },
    "self_seen_worst": 0.8878,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "pressman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "strickler": {
    "creature_h": 2.55,
@@ -4045,7 +4091,9 @@
     }
    },
    "self_seen_worst": 0.7748,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "strickler",
+   "views_from": "recorded on the row when it was rendered"
   },
   "greener": {
    "creature_h": 2.5,
@@ -4232,7 +4280,9 @@
     }
    },
    "self_seen_worst": 0.6257,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "greener",
+   "views_from": "recorded on the row when it was rendered"
   },
   "drover": {
    "creature_h": 2.44,
@@ -4418,7 +4468,9 @@
     }
    },
    "self_seen_worst": 0.916,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "drover",
+   "views_from": "recorded on the row when it was rendered"
   },
   "paviser": {
    "creature_h": 2.68,
@@ -4606,7 +4658,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 17,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "paviser",
+   "views_from": "recorded on the row when it was rendered"
   },
   "fenman": {
    "creature_h": 2.52,
@@ -4792,7 +4846,9 @@
     }
    },
    "self_seen_worst": 0.7301,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "fenman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "leech": {
    "creature_h": 2.32,
@@ -4978,7 +5034,9 @@
     }
    },
    "self_seen_worst": 0.84,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "leech",
+   "views_from": "recorded on the row when it was rendered"
   },
   "beadle": {
    "creature_h": 2.95,
@@ -5164,7 +5222,9 @@
     }
    },
    "self_seen_worst": 0.5174,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "beadle",
+   "views_from": "recorded on the row when it was rendered"
   },
   "rammer": {
    "creature_h": 2.75,
@@ -5328,7 +5388,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 114,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "rammer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "moulder": {
    "creature_h": 2.9,
@@ -5514,7 +5576,9 @@
     }
    },
    "self_seen_worst": 0.5837,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "moulder",
+   "views_from": "recorded on the row when it was rendered"
   },
   "fuller": {
    "creature_h": 2.66,
@@ -5700,7 +5764,9 @@
     }
    },
    "self_seen_worst": 0.4611,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "fuller",
+   "views_from": "recorded on the row when it was rendered"
   },
   "stackman": {
    "creature_h": 2.84,
@@ -5886,7 +5952,9 @@
     }
    },
    "self_seen_worst": 0.9464,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "stackman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "dauber": {
    "creature_h": 2.58,
@@ -6072,7 +6140,9 @@
     }
    },
    "self_seen_worst": 0.8214,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "dauber",
+   "views_from": "recorded on the row when it was rendered"
   },
   "hooper": {
    "creature_h": 2.36,
@@ -6258,7 +6328,9 @@
     }
    },
    "self_seen_worst": 0.8718,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "hooper",
+   "views_from": "recorded on the row when it was rendered"
   },
   "scraper": {
    "creature_h": 2.55,
@@ -6444,7 +6516,9 @@
     }
    },
    "self_seen_worst": 0.7627,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "scraper",
+   "views_from": "recorded on the row when it was rendered"
   },
   "winder": {
    "creature_h": 2.34,
@@ -6630,7 +6704,9 @@
     }
    },
    "self_seen_worst": 0.7102,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "winder",
+   "views_from": "recorded on the row when it was rendered"
   },
   "pitman": {
    "creature_h": 2.3,
@@ -6818,7 +6894,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "back"
+   "air_px_tightest_view": "back",
+   "views_dir": "pitman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "comfitmaker": {
    "creature_h": 2.28,
@@ -7004,7 +7082,9 @@
     }
    },
    "self_seen_worst": 0.8616,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "comfitmaker",
+   "views_from": "recorded on the row when it was rendered"
   },
   "dyer": {
    "creature_h": 2.6,
@@ -7191,7 +7271,9 @@
     }
    },
    "self_seen_worst": 0.5949,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "dyer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "ferryman": {
    "creature_h": 2.62,
@@ -7377,7 +7459,9 @@
     }
    },
    "self_seen_worst": 0.6405,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "ferryman",
+   "views_from": "recorded on the row when it was rendered"
   },
   "ratcatcher": {
    "creature_h": 2.62,
@@ -7565,7 +7649,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "ratcatcher",
+   "views_from": "recorded on the row when it was rendered"
   },
   "relief": {
    "creature_h": 2.52,
@@ -7751,7 +7837,9 @@
     }
    },
    "self_seen_worst": 0.6887,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "relief",
+   "views_from": "recorded on the row when it was rendered"
   },
   "sealer": {
    "creature_h": 2.42,
@@ -7937,7 +8025,9 @@
     }
    },
    "self_seen_worst": 0.6949,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "sealer",
+   "views_from": "recorded on the row when it was rendered"
   },
   "tapster": {
    "creature_h": 2.8,
@@ -8123,7 +8213,9 @@
     }
    },
    "self_seen_worst": 0.8299,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split"
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "tapster",
+   "views_from": "recorded on the row when it was rendered"
   },
   "tither": {
    "creature_h": 2.42,
@@ -8289,7 +8381,9 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 88,
-   "air_px_tightest_view": "front"
+   "air_px_tightest_view": "front",
+   "views_dir": "tither",
+   "views_from": "recorded on the row when it was rendered"
   },
   "blower": {
    "creature_h": 2.48,
@@ -8455,6 +8549,176 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 118,
+   "air_px_tightest_view": "side",
+   "views_dir": "blower",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "changer": {
+   "creature_h": 2.72,
+   "hero_h": 2.45,
+   "ratio": 1.11,
+   "pair_w": 4.45,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.153,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "changerch5",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 50318,
+      "vis": 50318,
+      "delta": 57362,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43685,
+      "vis": 43685,
+      "delta": 53236,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 43814,
+      "vis": 43814,
+      "delta": 53881,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37776,
+      "vis": 37776,
+      "delta": 43856,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 50790,
+      "vis": 50790,
+      "delta": 61596,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 50308,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 276640,
+     "shadow_px": 4111,
+     "mean": 0.3756,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4051,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 274360,
+     "shadow_px": 3809,
+     "mean": 0.3634,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4127,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 276640,
+     "shadow_px": 3976,
+     "mean": 0.3615,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3942,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     77,
+     77
+    ],
+    "side": [
+     46,
+     48
+    ],
+    "back": [
+     77,
+     77
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 46,
    "air_px_tightest_view": "side"
   }
  },
@@ -8623,13 +8887,105 @@
  },
  "unproved_cells": [],
  "measured": [
-  "blower"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer"
  ],
  "asked": [
-  "blower"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer"
  ],
  "blank_check": {
-  "files": 3,
+  "files": 141,
   "failures": []
  },
  "red_summary": {
@@ -8639,6 +8995,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (48), re-derived from stored measurements; 1 of them rendered this run"
+ "rendered_this_run": 0,
+ "verdict_scope": "every row in pairs (49), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 49 judged from stored measurements)"
 }

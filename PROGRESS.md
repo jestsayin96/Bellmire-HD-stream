@@ -1,3 +1,64 @@
+## B115 - THE OWED BATTERY IS GREEN AND THE REAL GENERATOR AGREED WITH B114'S EMULATION TO THE BYTE, 2026-11-21 20:45-20:5x CT (chat bot)
+
+Took: the WORK_PLAN TAKE THIS NEXT (19:58 block) CHAT BOT row - "B115: RUN THE OWED BATTERY FIRST,
+AT :45, BEFORE YOU WRITE ANYTHING NEW. parse / L14_TEST / TWITCH_PARSE / COMMANDS_DOC on merged
+main, in that order, as the first thing the firing does." That is what this cycle is. No new
+command, no new arm, no new wording - B114's SHOP CAP work was unverified and verifying it was the
+whole job.
+
+MERGED FIRST: `git merge origin/main` in W6 fast-forwarded `chatbot` 26 commits to **2fd2f62f**
+(S96's weapon-on-the-floor, S97's staff carry, art's 8 `.glb.import` siblings and the six-lane
+merge). The gates below ran on THAT tree, not on the tree B114 wrote against.
+
+THE LOCK, AND WHY THIS LANE DID NOT CROSS: at 20:45:27 UTC the last line of docs/RUN_LOCK.txt was
+`RUNNING 2026-11-21T20:41:45-06:00 (QA tester ... declared finish 20:51)` with no IDLE from that
+lane after it, so QA tester held it. I did not claim and did not launch a second Godot. I polled
+the file every 15 s and logged each read (20:46:32 through 20:49:51 all RUNNING; QA tester's
+`IDLE 2026-11-21T20:50:00-06:00` appeared on the 20:50:06 read). Claimed 20:50:30, declared finish
+20:56, **released 20:51:40** - early, with the IDLE line written before I said anything in words,
+because the HUD's own note says its next firing is 20:52 and an unused window is worth more to it
+than a padded one to me. `tasklist` empty before the claim and after the release.
+
+THE FOUR GATES - 25 SECONDS, ALL FOUR VERDICT LINES READ OFF THE LOG, NOT RETURN CODES:
+- **parse** `--headless --path W6 --quit-after 300` -> **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (21.8 s).
+- **`tools/_l14_test.gd`** -> **`L14_TEST OK (24 checks)`** (1.1 s), and the two arms that matter here:
+  - `ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])` - B114's four-path SHOP CAP arm
+    loads clean on merged main. AUTHORITY, ANCHOR, DRIFT and CEILING all stayed silent for a real
+    reason, not because the arm is unreachable: `scripts/economy.gd:622-623` reads
+    `RARITY := ["none","common","uncommon","rare","very rare","legendary"]` and
+    `SHOP_MAX_LEVEL := 4`, so level 1 -> "common" and level 4 -> "very rare" is exactly what
+    `forge`.what and `armoury`.what publish. The published sentence is TRUE, measured against the
+    game build's own file.
+  - `ok  docs/COMMANDS.md carries every field the data publishes, verbatim (32 rows; unpublished [])`
+    and `ok  docs/COMMANDS.md publishes nothing the data does not say (32 rows; stale [])`.
+- **`tools/_twitch_parse.gd`** -> **`TWITCH_PARSE OK (8 checks)`** (PASS 1-7b).
+- **`tools/_commands_doc.gd`** -> **`COMMANDS_DOC OK wrote 32 commands`** (1.0 s), and
+  `git status --porcelain` over scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md came
+  back **EMPTY**. A true no-op.
+
+**THE EMULATION WAS RIGHT, AND NOW THE AUTHORITY HAS SAID SO.** B114 proved its regenerated
+docs/COMMANDS.md only by a python emulation of `_commands_doc.gd`, and said in writing that the
+generator wins if the bytes differ. They do not differ: the real generator rewrote the file and
+changed nothing. The emulation is vindicated, but the record should say that the GREEN comes from
+the generator's run, not from the emulation - an emulation that happens to be correct is still not
+a verdict.
+
+FILE-ONLY CHECKS DONE BESIDE THE BATTERY (both directions, as the lane's own rule requires):
+`json.load` on data/commands.json clean, 32 commands, `order` is exactly the key set (no extra, no
+missing), every entry has a literal site in scripts/chatcmd.gd, and the loader's own arm reports
+`every verb ChatCmd answers is in the data (74 verbs; missing [])` plus `every command in the data
+is answered (unanswered [])`. Drift is zero in both directions by two independent readers.
+
+NOT DONE, AND SAID PLAINLY: **L56** (the delve-heavy soak) is still owed and this cycle did not
+start it. It needs a long engine window and I had released mine at 20:51 so the HUD could take
+20:52; starting a soak that would still be running inside another lane's claim is the thing the
+yield rule forbids. It is carried whole to B116, which should take it at :45 as the first thing
+after re-reading the lock.
+
+Nothing is owed to the GAME BUILD lane in twitch_eventsub.gd this cycle. No Twitch test ran: no
+account was used, nothing was redeemed, no bits were spent, nothing was posted.
+Decision for Mr. E: none.
+
 ## B114 - THE SMITHY'S LEVEL IS THE CEILING, AND UNTIL THIS CYCLE NO COMMAND SAID SO, 2026-11-21 19:45-20:1x CT (chat bot)
 The 18:58 TAKE THIS NEXT gave this lane one line: B113 is ticked, the red is closed, take the next
 chat bot item. My prompt's queue (L68/L69/L70 then L56) is spent - none of those four is open on
@@ -15606,13 +15667,116 @@ U133 2026-11-21T19:53:38-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN,
 Checked: (1) WORK_PLAN TAKE THIS NEXT (18:58 block) gives HUD only "take the next HUD item"; rarity-hue half already shipped (U55/U56), L74 closed (U131), U130-U132 ticked. (2) The prompt's "what can the rarity guard not see" item: tools/_u71_rarity_guard.gd already has block_end() (brace depth, skips strings and # comments, -1 on unterminated) used by parse_fish, plus U76 red proofs for a nested brace / comment brace / unterminated block (U76_BRACE 3/3). Verified by reading, not re-run. (3) U125's single-frame observation (60-char hostile name, third wrapped row) was already bounded by U122: 118 checks, worst right margin 16.0 px at 150%, bottoms inside panel.
 Next firing (20:52): re-read working RUN_LOCK; if free with 14 min to :07, sample the 60-char hostile line every 10 frames at 150% (U125's carried measure) as one short windowed chunk; else stand down in writing. No .gd changed.
 Decision for Mr. E: none.
+## C-173 (21 Nov 2026 20:2x CST) - STAND-DOWN, NOTHING OWED
+TAKE THIS NEXT (18:58 CT block, still on top) CONTENT item: "stand down again, or audit your own shipped feed". C-172 accepted by the team lead (19:58 plan).
+Measured after merging origin/main (2fd2f62f): minibosses/*.glb on origin/art == on origin/main (art-not-main empty). Every art body minus miniboss_feed.by_key (46 keys) minus the documented non-feed bodies (13 *_chibi, broodglut, lastcuff - bestiary pack variants, see C-134/C-135) is EMPTY. The plan's own count (46 keys = 46 Delve.MB_NAME, symmetric difference empty) stands; my quick MB_NAME regex over-captured and I did not use it.
+No new committed body, so no feed row is owed and none is invented. No data files touched; all four parse unchanged. No ID burned (next stays C-174). CODE WIRING: none.
 
 ## hub 21 Nov 20:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
 TAKE THIS NEXT (19:58 block) HUB row: "nothing is unpublished ... Hold web/ steady". No row to build; web/ untouched this run.
 NUMBERS: origin/gh-pages^{tree} == origin/hub:web == origin/main:web == HEAD:web == 02257b2f (all equal, nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned) + comment mentions; outerHTML 0, eval( 0; insertAdjacentHTML/document.write/new Function appear only in the comment at app.js:10-11; 1 CSP meta. No new screenshot (web/ byte-identical to the published tree). Live-dot colour: unchanged from shipped. Untracked _hub_ready_shot.png is old and named here.
+
+U134 2026-11-21T20:53-06:00 (HUD) - L74 150% CHRONICLE SAMPLED EVERY 10 FRAMES: THE 8 "FAILS" ARE THE TOOL, NOT THE PANEL. NO .gd CHANGED.
+Lock (R working copy) 20:52: last line chat bot B115 IDLE 20:51:40, no Godot alive - clear. Claimed RUNNING 20:53:16 (expected finish 21:03, cap 21:07), released IDLE 20:54:09 (run took under a minute).
+Item: the measure U133 carried. New tools/_u134_chron_sample150.gd (the U122 probe, scale 150% only, sampled every 10 frames 120..480, windowed 1920x1080, lord fight 2x2). Result: U134_DONE checks=149 fails=8. All 8 are the 60-char unbreakable hostile name (\"ВЕЛИКИЙ_МАГ_WWWW...\") at k450-480: the tool measured textw=1472 UNWRAPPED against the label's 607 px wrap width. bottom_over=-96.7 (inside panel), vis_clip=false. I LOOKED at renders/cycles/u134/chron_s150_1080.png: the name arbitrary-wraps onto three rows inside the vellum, the next line follows cleanly, nothing crosses the border. U122 never tripped this because its hostile name was a shorter, breakable string - so the probe's width check is blind to autowrap on a single unbreakable run. Not a HUD defect.
+Open: if wanted, fix the tool to compare line_count*line height and the widest WRAPPED row instead of unwrapped width. Logs in renders/cycles/u134/.
+Next firing (21:52): re-read working RUN_LOCK; take the next HUD item from the 21:58 TAKE THIS NEXT, else stand down in writing.
 Decision for Mr. E: none.
 
+## S98 (2026-11-21T21:16:47-06:00, game build) - THE FLOATING BOSS CARD IS ALREADY GONE FROM THE SHIPPED GAME; THE 150% RENDER THAT SHOWED IT WAS TAKEN ON A TREE WITHOUT S89. THE CHANGER (47th) GETS MB_FIT + TREASURY ROW, HELD OUT UNTIL CONTENT.
+TAKE THIS NEXT (20:58 CT block) game-build row: (1) remove the large floating boss HP card seen in renders/cycles/u134/chron_s150_1080.png; mana too; (2) then wire the Changer.
+(1) MEASURED, NOT RE-DONE. S89 (6388a6ef, 21 Nov 12:18 CT) removed BossBar.new() from scripts/rts_camera.gd and published mana/mana_max
+  in snapshot_pub.gd:618-625. git: origin/main has NO "BossBar.new" under scripts/; origin/hud-ui:scripts/rts_camera.gd:90 STILL HAS IT,
+  and `git merge-base --is-ancestor 6388a6ef origin/hud-ui` is FALSE - the HUD branch has not merged main since before S89 (its last
+  five merges are all origin/hud-ui into hud-ui). U134's 150% shot was rendered in bellmire-hud on that stale tree, so its card is
+  real THERE and absent from what ships. PROOF: I re-ran the HUD's own tools/_u134_chron_sample150.gd windowed 1920x1080 on merged
+  laptop 5131e328 -> U134_DONE checks=149 fails=0 (HUD's tree: fails=8). LOOKED AT IT: renders/cycles/s98/s98_chron_s150_1080_merged_tree.png
+  - same 2x2 quad, Director pane in the delve, NO boss card anywhere; only the DIRECTOR/Now watching strips and the Chronicle.
+  Owed by the HUD lane, not me: merge origin/main into hud-ui before any further capture. Mana half: also done at S89 (S89_MANA OK 7).
+(2) CHANGER (Evenhand, art tag treasury - field 5 of CANON["changer"], minibosses.py:16466): delve.gd MB_FIT "changer": 1.11 copied
+  from renders/art/minibosses/_fit_report.json pairs.changer.ratio; dungeon_hd.gd THEME_MINIBOSS_MORE treasury += "changer";
+  assets/monsters/minibosses/changer.glb.import generated by --headless --import and staged (S91's lesson).
+  NO MB_NAME ROW, AGAINST THE ROW'S WORDING, BECAUSE A GATE SAYS SO: I wrote it, then read tools/_s51_names.gd:46-55 - every MB_NAME
+  key must be in content's by_key, and by_key has no "changer" (grep data/: zero hits). Writing it would turn S51_NAMES red; the S93
+  blower precedent is the same. Reverted before any commit. When content writes by_key.changer the row is one line: "changer": "Evenhand".
+  So content's next row is to write the 47th feed row FIRST; MB_NAME follows it, not the other way round.
+  The Changer's ONE IDEA (IT TRADES PLACES - the hardest hitter ends up where it stood) is not built; it needs the body on a floor first.
+GATES (logs renders/cycles/s98/): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error (re-run after the revert); S51_NAMES OK 176 checks;
+  S33_DRAW OK 196 checks ("changer treasury ratio 1.11 lines false drawn 0/400" - correctly held out); TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 1942; TOWNWALK in_solid=0/18640 raid_in_solid=0/4935 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+No live Twitch test. Decision for Mr. E: none.
+## C-174 (21 Nov 2026 21:3x CST) - THE CHANGER (47th miniboss, Evenhand): FEED ROW
+TAKE THIS NEXT (20:58 CT block) CONTENT item: "re-audit the feed after the changer lands". The body IS committed on main (assets/monsters/minibosses/changer.glb, tools/art/minibosses.py CANON "changer", docs/art/CHANGER_THE_47TH.md); Delve.MB_NAME is still 46 so the game build has not wired it. The lines are the gate in dungeon_hd.gd miniboss_for (mesh AND arrive lines), so writing them now ships the body the moment it is wired.
+ADDED: data/lore_lines.json miniboss_feed.by_key.changer - arrive x9, act x7, broken x4, fall x8 ({name} in act only), the pitman/tither/blower shape; plus `_note_c174` (expected zero-hit key, DO NOT WIRE). Mechanic written from the art doc: a SWAP - whoever hits hardest ends where it stood, it stands beside the back rank, the drum turns a third per trade, a body against a bar jams the arms (broken lines). Plain register, treasury wear (good wool, clean plates).
+by_key is now 47 keys. VALIDATION OK: all four owned files parse; every pre-existing key byte-identical in value; items/bosses/potions untouched. Next ID C-175.
+CODE WIRING: game build must add `changer` -> `Evenhand` to Delve.MB_NAME and the bestiary row (model changer.glb, h 2.72, no anims); tools/_s51_names.gd should then see 47 = 47.
 ## hub 21 Nov 21:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
 TAKE THIS NEXT (20:58 block) HUB row: "hold web/ steady. Nothing is unpublished." No row to build; web/ untouched this run.
 NUMBERS: origin/gh-pages^{tree} == origin/hub:web == HEAD:web == 02257b2f (git diff origin/hub -- web empty; nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only comment mentions); CSP meta present x1; index.html "only innerHTML ... two page-owned sites" comment true. Hostile-name test not owed (web/ unchanged). Live-dot colour: unchanged, no pass this run.
+U135 2026-11-21T21:55-06:00 (HUD) - U134'S 8 "FAILS" FIXED IN THE TOOL; THE PANEL WAS NEVER AT FAULT. NO PRODUCT .gd CHANGED.
+Lock (R working copy): chat bot B116 IDLE 21:51:07, no Godot alive. Claimed RUNNING 21:53:11, RELEASED IDLE 2026-11-21T21:54:46-06:00 (under 2 min, inside :07 and the cap).
+tools/_u134_chron_sample150.gd now measures rows x line height and the widest row clamped to the label's wrap width (Label autowraps arbitrarily; get_multiline_string_size used word-bound breaks and read the 60-char name as 1472 px). Headless parse 0 Parse Error / 0 SCRIPT ERROR. Windowed 1920x1080: U134_DONE checks=149 fails=0 (was 8).
+LOOKED AT renders/cycles/u135/chron_s150_1080.png: hostile 60-char name wraps on three rows inside the vellum, next line follows cleanly, nothing crosses the panel. Still visible and NOT HUD-owned: the large "Nightwing 110/110 Lord of floor 5" card top-left in the Director pane (scripts/boss_bar.gd, Mr. E's 10:17 directive item 2, already routed in U126).
+Next firing: nothing HUD-owned open; re-read lock, stand down in writing unless a new TAKE THIS NEXT row names HUD.
+## B116 - 2026-11-21 21:45 CT (chat bot) - L56 RAN FOR THE FIRST TIME IN THIS SEAT AND IT CANNOT EARN
+## ITS VERDICT: THE SOAK NEVER REACHED A LORD FLOOR, AND MY FIRST LAUNCH WAS MY OWN ERROR
+Took the plan's CHAT BOT row of the 20:58 block verbatim: "L56, THE DELVE-HEAVY SOAK, FIRST THING AT
+:45 ... CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52 ... If L56 cannot finish inside your window,
+SPLIT IT and carry the remainder - do not declare a crossing." I did exactly that. Merged
+origin/main into `chatbot` clean (fast-forward to b2d3d6fd, 42 files).
+
+THE LOCK. Verified by process, not by the file alone: `tasklist` returned "No tasks are running" for
+Godot_v4.7.2-stable_win64_console.exe, and the last line was the game build's IDLE 21:16:47. Clear.
+Claimed RUNNING 2026-11-21T21:46:26-06:00, cap claim+25 = 22:11:26, declared finish 21:51. Released
+IDLE 2026-11-21T21:51:07-06:00 - inside my own declared finish, and before the HUD's habitual :53.
+No crossing declared and none taken.
+
+MY OWN ERROR, FIRST, BECAUSE IT COST THE FIRST LAUNCH. I launched with `--quit-after 3000`. The
+script's own budget is `RUN_CAP_FRAMES := 60 * 120` = 7200 frames PER RUN, four runs. The engine quit
+under the script at floor 3 with no verdict and no CAP HIT line - not a game defect, not a script
+defect, MY invocation. Relaunched 21:47:48 with `--quit-after 40000` and refreshed the lock on the
+relaunch, as the rule requires.
+
+WHAT THE SOAK ACTUALLY DID (three of four runs, run 4 killed by me at my declared finish):
+  run 1  CAP HIT at floor 3 of 10, state=search, floors_visited=1, trap_log all zero
+  run 2  CAP HIT at floor 4 of 10, state=fight,  floors_visited=3, spotted 1, sprung 0, damage 0.0
+  run 3  CAP HIT at floor 4 of 10, state=fight,  floors_visited=5, trap_log all zero
+EVERY run burned its full 2 minutes. The DEEPEST FLOOR REACHED IN THE WHOLE SOAK WAS 4. The feed
+shows `Floor 3 -` five times and `Floor 4 -` twice and nothing deeper. START_FLOOR is 3 and
+FLOORS_PER is 8 so the script's header promises "TWO lord floors in each run" - the first of them is
+floor 5. **IT NEVER GOT THERE.** `LORD RISES` appears ZERO times in the log; `lord DOWN` zero;
+sprung 0 and damage 0.0 aggregated across every delve. So the two things L56 exists to gate - L46
+(traps actually hurt) and L45 (lords rise and scale in play) - saw no qualifying floor at all.
+
+THE VERDICT, AND I AM CALLING IT DERIVED RATHER THAN OBSERVED. Run 4 was killed by me, so the
+summary block never printed. From the three runs in hand the summary would read
+`L56 CAP HIT - NO VERDICT`: `_ok()` appends to `_fails` at line 49 even on a capped run, the three
+play-observed checks (sprung > 0, damage > 0, lords_seen > 0) were unmet on the floors reached, so
+`_fails.is_empty()` is false and `_capped` is non-empty. That is CERTAIN only if run 4 alone would
+not have produced a sprung trap AND trap damage AND a risen lord. It would have had to do in two
+minutes what three runs did not do in six. Likely, not proven, and I will not write it as proven.
+I ALSO GOT THE REASON WRONG IN WRITING ONCE. My 21:51:07 IDLE line said that once any run caps the
+script CANNOT print `L56_TEST OK`. That is false: the branch order is `if _fails.is_empty(): OK`
+FIRST and `elif not _capped.is_empty(): CAP HIT` second, so an all-green capped soak would print OK.
+I checked the branch after writing the line, caught it, and appended a CORRECTION line to
+docs/RUN_LOCK.txt at 21:51:50 rather than leave a wrong assertion in the canonical file.
+
+NOT MINE, AND NOT TOUCHED. `tools/_l56_test.gd` is in tools/ and is not this lane's file. I did not
+edit it and I am not proposing a number for it. The mismatch is for whoever owns it:
+RUN_CAP_FRAMES 7200 against FLOORS_PER 8, measured at 1, 3 and 5 floors_visited per run with the
+deepest floor 4 of 10. On this evidence the per-run budget is short by roughly a factor of three for
+its own floor count, and until that is settled L56 CANNOT return OK or FAIL on this machine no
+matter how long a lock window it is given. A soak that cannot reach its own gated floors is not a
+window problem and splitting it harder will not fix it.
+
+MY THREE FILES: scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md are UNCHANGED this
+cycle. B115's four-gate battery is green on merged main and the team lead ticked B114 on it this
+hour, so there was no owed gate to re-run and I invented none. No drift check was owed because
+neither the code nor the data file moved.
+No live Twitch test this run: nothing in L56 touches chat, EventSub or channel points, so there was
+no path to prove and bellmirebro posted nothing and cheered nothing.
+Nothing owed in `twitch_eventsub.gd`. Untracked `_l56_soak.log` is at the worktree root, named here,
+and not committed.
+Next firing: whatever the 21:58 TAKE THIS NEXT gives the CHAT BOT row. L56's remainder (run 4) is
+carried, but I am flagging that re-running it unchanged buys nothing.
 Decision for Mr. E: none.

@@ -1,0 +1,8988 @@
+{
+ "ok": false,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "pairs": {
+  "drillmaster": {
+   "creature_h": 2.2,
+   "hero_h": 2.45,
+   "ratio": 0.9,
+   "pair_w": 3.25,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 28508,
+      "vis": 28508,
+      "delta": 33085,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43675,
+      "vis": 43675,
+      "delta": 55951,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 14380,
+      "vis": 14380,
+      "delta": 20095,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37756,
+      "vis": 37756,
+      "delta": 41884,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 28268,
+      "vis": 28268,
+      "delta": 36775,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44034,
+      "vis": 44034,
+      "delta": 48477,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 183920,
+     "shadow_px": 2833,
+     "mean": 0.4535,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2577,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 187720,
+     "shadow_px": 2656,
+     "mean": 0.4425,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2341,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 183160,
+     "shadow_px": 2802,
+     "mean": 0.4464,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2757,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 2.35,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     158,
+     156
+    ],
+    "side": [
+     200,
+     201
+    ],
+    "back": [
+     156,
+     158
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 156,
+   "air_px_tightest_view": "front",
+   "views_dir": "drillmaster",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "gaoler": {
+   "creature_h": 2.35,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 5.43,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 47427,
+      "vis": 47427,
+      "delta": 56224,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 54384,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 35400,
+      "vis": 35400,
+      "delta": 43600,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37776,
+      "vis": 37776,
+      "delta": 45294,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 47570,
+      "vis": 47570,
+      "delta": 59278,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44010,
+      "vis": 44010,
+      "delta": 52395,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 274360,
+     "shadow_px": 5615,
+     "mean": 0.4392,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5864,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 280440,
+     "shadow_px": 5265,
+     "mean": 0.4334,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4752,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 272840,
+     "shadow_px": 5762,
+     "mean": 0.4724,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5783,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.17,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     11,
+     11
+    ],
+    "side": [
+     102,
+     105
+    ],
+    "back": [
+     11,
+     11
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 11,
+   "air_px_tightest_view": "front",
+   "views_dir": "gaoler",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "scrapwright": {
+   "creature_h": 2.0,
+   "hero_h": 2.45,
+   "ratio": 0.82,
+   "pair_w": 4.62,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 46724,
+      "vis": 46724,
+      "delta": 53942,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43665,
+      "vis": 43665,
+      "delta": 53677,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 39218,
+      "vis": 39218,
+      "delta": 44561,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37758,
+      "vis": 37758,
+      "delta": 43787,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 46025,
+      "vis": 46025,
+      "delta": 53624,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 51403,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 250800,
+     "shadow_px": 5140,
+     "mean": 0.5322,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4205,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 253080,
+     "shadow_px": 3882,
+     "mean": 0.5085,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3394,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 250040,
+     "shadow_px": 5214,
+     "mean": 0.5325,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3957,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.98,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     65,
+     65
+    ],
+    "side": [
+     111,
+     113
+    ],
+    "back": [
+     65,
+     65
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 65,
+   "air_px_tightest_view": "front",
+   "views_dir": "scrapwright",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "snuffer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 3.37,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 23965,
+      "vis": 23965,
+      "delta": 29935,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 51500,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 17594,
+      "vis": 17594,
+      "delta": 27069,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37793,
+      "vis": 37793,
+      "delta": 42857,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 24079,
+      "vis": 24079,
+      "delta": 33059,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44034,
+      "vis": 44034,
+      "delta": 49035,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 201400,
+     "shadow_px": 3542,
+     "mean": 0.4846,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3272,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 202920,
+     "shadow_px": 3458,
+     "mean": 0.478,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2510,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 202160,
+     "shadow_px": 3233,
+     "mean": 0.5111,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3329,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 2.23,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     150,
+     149
+    ],
+    "side": [
+     167,
+     167
+    ],
+    "back": [
+     149,
+     150
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 149,
+   "air_px_tightest_view": "front",
+   "views_dir": "snuffer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "sexton": {
+   "creature_h": 2.45,
+   "hero_h": 2.45,
+   "ratio": 1.0,
+   "pair_w": 4.06,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 50491,
+      "vis": 50491,
+      "delta": 57025,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 53146,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27906,
+      "vis": 27906,
+      "delta": 34083,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37787,
+      "vis": 37787,
+      "delta": 43272,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 49149,
+      "vis": 49149,
+      "delta": 57306,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44040,
+      "vis": 44040,
+      "delta": 50252,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 222680,
+     "shadow_px": 3857,
+     "mean": 0.4666,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3444,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 224960,
+     "shadow_px": 3636,
+     "mean": 0.4814,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2946,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 223440,
+     "shadow_px": 4210,
+     "mean": 0.4754,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3289,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.54,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     103,
+     103
+    ],
+    "side": [
+     147,
+     145
+    ],
+    "back": [
+     103,
+     103
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 103,
+   "air_px_tightest_view": "front",
+   "views_dir": "sexton",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "porter": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 5.39,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 55593,
+      "vis": 55593,
+      "delta": 63952,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 57713,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 30848,
+      "vis": 30848,
+      "delta": 39040,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37789,
+      "vis": 37789,
+      "delta": 45371,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 53737,
+      "vis": 53737,
+      "delta": 62371,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44025,
+      "vis": 44025,
+      "delta": 51685,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 262200,
+     "shadow_px": 5384,
+     "mean": 0.4093,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3679,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 269040,
+     "shadow_px": 5375,
+     "mean": 0.4217,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3596,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 260680,
+     "shadow_px": 5256,
+     "mean": 0.431,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3612,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.21,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     13,
+     11
+    ],
+    "side": [
+     134,
+     136
+    ],
+    "back": [
+     12,
+     14
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 11,
+   "air_px_tightest_view": "front",
+   "views_dir": "porter",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "tallyman": {
+   "creature_h": 2.15,
+   "hero_h": 2.45,
+   "ratio": 0.88,
+   "pair_w": 3.75,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 25413,
+      "vis": 25413,
+      "delta": 31283,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43682,
+      "vis": 43682,
+      "delta": 53947,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 14962,
+      "vis": 14962,
+      "delta": 21860,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37777,
+      "vis": 37777,
+      "delta": 42259,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 25486,
+      "vis": 25486,
+      "delta": 31849,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44017,
+      "vis": 44017,
+      "delta": 49177,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 198360,
+     "shadow_px": 3003,
+     "mean": 0.4105,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3503,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 204440,
+     "shadow_px": 2734,
+     "mean": 0.3964,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2633,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 199120,
+     "shadow_px": 2800,
+     "mean": 0.4061,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 4011,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.85,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     125,
+     124
+    ],
+    "side": [
+     193,
+     195
+    ],
+    "back": [
+     124,
+     125
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 124,
+   "air_px_tightest_view": "front",
+   "views_dir": "tallyman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "cook": {
+   "creature_h": 2.05,
+   "hero_h": 2.45,
+   "ratio": 0.84,
+   "pair_w": 4.26,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 34655,
+      "vis": 34655,
+      "delta": 41059,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43675,
+      "vis": 43675,
+      "delta": 57449,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 18635,
+      "vis": 18635,
+      "delta": 24064,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 42683,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 34292,
+      "vis": 34292,
+      "delta": 40926,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44022,
+      "vis": 44022,
+      "delta": 49977,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 212800,
+     "shadow_px": 4011,
+     "mean": 0.4764,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4013,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 219640,
+     "shadow_px": 3310,
+     "mean": 0.4845,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 2152,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 211280,
+     "shadow_px": 3925,
+     "mean": 0.4698,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4220,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.34,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     90,
+     90
+    ],
+    "side": [
+     190,
+     192
+    ],
+    "back": [
+     90,
+     90
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 90,
+   "air_px_tightest_view": "front",
+   "views_dir": "cook",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "sluicekeeper": {
+   "creature_h": 2.5,
+   "hero_h": 2.45,
+   "ratio": 1.02,
+   "pair_w": 4.52,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 56645,
+      "vis": 56645,
+      "delta": 63048,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43673,
+      "vis": 43673,
+      "delta": 62505,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 22483,
+      "vis": 22483,
+      "delta": 29533,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37785,
+      "vis": 37785,
+      "delta": 42280,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 56478,
+      "vis": 56478,
+      "delta": 67672,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44010,
+      "vis": 44010,
+      "delta": 49369,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 225720,
+     "shadow_px": 3295,
+     "mean": 0.4249,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4498,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 234080,
+     "shadow_px": 2777,
+     "mean": 0.4405,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2673,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 223440,
+     "shadow_px": 3106,
+     "mean": 0.4356,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 5039,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.08,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     72,
+     72
+    ],
+    "side": [
+     175,
+     177
+    ],
+    "back": [
+     72,
+     73
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 72,
+   "air_px_tightest_view": "front",
+   "views_dir": "sluicekeeper",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "sower": {
+   "creature_h": 2.25,
+   "hero_h": 2.45,
+   "ratio": 0.92,
+   "pair_w": 5.36,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 44418,
+      "vis": 44418,
+      "delta": 52008,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43666,
+      "vis": 43666,
+      "delta": 55053,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 35919,
+      "vis": 35919,
+      "delta": 41538,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37782,
+      "vis": 37782,
+      "delta": 43230,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 45280,
+      "vis": 45280,
+      "delta": 54718,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44030,
+      "vis": 44030,
+      "delta": 50550,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 258400,
+     "shadow_px": 4112,
+     "mean": 0.451,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 6061,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 265240,
+     "shadow_px": 3140,
+     "mean": 0.4294,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4104,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 258400,
+     "shadow_px": 3933,
+     "mean": 0.4435,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6370,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.24,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     15,
+     16
+    ],
+    "side": [
+     144,
+     144
+    ],
+    "back": [
+     16,
+     15
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 15,
+   "air_px_tightest_view": "front",
+   "views_dir": "sower",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "snarer": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 5.11,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 33102,
+      "vis": 33102,
+      "delta": 41016,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43666,
+      "vis": 43666,
+      "delta": 56234,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 23002,
+      "vis": 23002,
+      "delta": 27867,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37781,
+      "vis": 37781,
+      "delta": 42422,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 33558,
+      "vis": 33558,
+      "delta": 42030,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44012,
+      "vis": 44012,
+      "delta": 50331,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 245480,
+     "shadow_px": 3692,
+     "mean": 0.3637,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 7681,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 253080,
+     "shadow_px": 2617,
+     "mean": 0.3658,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3731,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 243960,
+     "shadow_px": 3355,
+     "mean": 0.3654,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 7910,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.49,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     32,
+     33
+    ],
+    "side": [
+     161,
+     163
+    ],
+    "back": [
+     33,
+     33
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 32,
+   "air_px_tightest_view": "front",
+   "views_dir": "snarer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "stoker": {
+   "creature_h": 2.4,
+   "hero_h": 2.45,
+   "ratio": 0.98,
+   "pair_w": 4.97,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 35590,
+      "vis": 35590,
+      "delta": 41926,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 52697,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 29603,
+      "vis": 29603,
+      "delta": 35294,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37779,
+      "vis": 37779,
+      "delta": 42695,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36360,
+      "vis": 36360,
+      "delta": 42461,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44007,
+      "vis": 44007,
+      "delta": 49001,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 256120,
+     "shadow_px": 3646,
+     "mean": 0.4235,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 4619,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 260680,
+     "shadow_px": 2955,
+     "mean": 0.4049,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3698,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 254600,
+     "shadow_px": 2899,
+     "mean": 0.3951,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4530,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.63,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     42,
+     42
+    ],
+    "side": [
+     122,
+     124
+    ],
+    "back": [
+     42,
+     42
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 42,
+   "air_px_tightest_view": "front",
+   "views_dir": "stoker",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "bellman": {
+   "creature_h": 2.7,
+   "hero_h": 2.45,
+   "ratio": 1.1,
+   "pair_w": 4.58,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 42862,
+      "vis": 42862,
+      "delta": 48899,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43670,
+      "vis": 43670,
+      "delta": 57834,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 36751,
+      "vis": 36751,
+      "delta": 44788,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37771,
+      "vis": 37771,
+      "delta": 41652,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42503,
+      "vis": 42503,
+      "delta": 54072,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44020,
+      "vis": 44020,
+      "delta": 49392,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 233320,
+     "shadow_px": 3443,
+     "mean": 0.4095,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3205,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 240160,
+     "shadow_px": 2296,
+     "mean": 0.4269,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2679,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 232560,
+     "shadow_px": 3310,
+     "mean": 0.407,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3422,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.02,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     68,
+     68
+    ],
+    "side": [
+     168,
+     170
+    ],
+    "back": [
+     68,
+     68
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 68,
+   "air_px_tightest_view": "front",
+   "views_dir": "bellman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "boiler": {
+   "creature_h": 2.1,
+   "hero_h": 2.45,
+   "ratio": 0.86,
+   "pair_w": 5.47,
+   "gap_x": 0.406,
+   "margin_x": 0.12,
+   "air_x": 0.13,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 37499,
+      "vis": 37499,
+      "delta": 44881,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43682,
+      "vis": 43682,
+      "delta": 53677,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27067,
+      "vis": 27067,
+      "delta": 32469,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37779,
+      "vis": 37779,
+      "delta": 43315,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36370,
+      "vis": 36370,
+      "delta": 43739,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44015,
+      "vis": 44015,
+      "delta": 51026,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 264480,
+     "shadow_px": 4566,
+     "mean": 0.4316,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4520,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 270560,
+     "shadow_px": 3412,
+     "mean": 0.4375,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3434,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 264480,
+     "shadow_px": 4550,
+     "mean": 0.428,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4571,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9901,
+     "man_alone_px": 32020,
+     "man_seen_px": 31702,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7057,
+     "man_alone_px": 20097,
+     "man_seen_px": 14182,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9936,
+     "man_alone_px": 30840,
+     "man_seen_px": 30643,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7057,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "air_px": {
+    "front": [
+     8,
+     8
+    ],
+    "side": [
+     135,
+     134
+    ],
+    "back": [
+     8,
+     8
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 8,
+   "air_px_tightest_view": "front",
+   "views_dir": "boiler",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "snuffer_chibi": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.21,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.393,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 42710,
+      "vis": 42710,
+      "delta": 49905,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 52729,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 45824,
+      "vis": 45824,
+      "delta": 56565,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37791,
+      "vis": 37791,
+      "delta": 45082,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42831,
+      "vis": 42831,
+      "delta": 54871,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44015,
+      "vis": 44015,
+      "delta": 50532,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 251560,
+     "shadow_px": 4725,
+     "mean": 0.4662,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3875,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 250800,
+     "shadow_px": 5051,
+     "mean": 0.4705,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4044,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 250800,
+     "shadow_px": 4297,
+     "mean": 0.4602,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3806,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     94,
+     93
+    ],
+    "side": [
+     89,
+     91
+    ],
+    "back": [
+     93,
+     94
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 89,
+   "air_px_tightest_view": "side",
+   "views_dir": "snuffer_chibi",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "tallyman_chibi": {
+   "creature_h": 2.15,
+   "hero_h": 2.45,
+   "ratio": 0.88,
+   "pair_w": 3.58,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.016,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 41178,
+      "vis": 41178,
+      "delta": 47361,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 58106,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 33609,
+      "vis": 33609,
+      "delta": 42856,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37754,
+      "vis": 37754,
+      "delta": 43984,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 41461,
+      "vis": 41461,
+      "delta": 55980,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 50293,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 215840,
+     "shadow_px": 4306,
+     "mean": 0.445,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2973,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 215080,
+     "shadow_px": 4335,
+     "mean": 0.4115,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2648,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 214320,
+     "shadow_px": 4312,
+     "mean": 0.4379,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3056,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     136,
+     136
+    ],
+    "side": [
+     139,
+     141
+    ],
+    "back": [
+     136,
+     136
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 136,
+   "air_px_tightest_view": "front",
+   "views_dir": "tallyman_chibi",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "jointer": {
+   "creature_h": 2.25,
+   "hero_h": 2.45,
+   "ratio": 0.92,
+   "pair_w": 4.04,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 38602,
+      "vis": 38602,
+      "delta": 43772,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 54949,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27372,
+      "vis": 27372,
+      "delta": 32187,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37785,
+      "vis": 37785,
+      "delta": 41533,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 38637,
+      "vis": 38637,
+      "delta": 45148,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44015,
+      "vis": 44015,
+      "delta": 48352,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 212800,
+     "shadow_px": 2717,
+     "mean": 0.4136,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3787,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 218880,
+     "shadow_px": 2232,
+     "mean": 0.4194,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2826,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 212040,
+     "shadow_px": 2465,
+     "mean": 0.4048,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4312,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.56,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     105,
+     105
+    ],
+    "side": [
+     174,
+     177
+    ],
+    "back": [
+     105,
+     105
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 105,
+   "air_px_tightest_view": "front",
+   "views_dir": "jointer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "quartermaster": {
+   "creature_h": 2.35,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 4.48,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 34256,
+      "vis": 34256,
+      "delta": 41984,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 53153,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 19596,
+      "vis": 19596,
+      "delta": 26489,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37761,
+      "vis": 37761,
+      "delta": 44016,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 32096,
+      "vis": 32096,
+      "delta": 41055,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44022,
+      "vis": 44022,
+      "delta": 51164,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 247000,
+     "shadow_px": 3641,
+     "mean": 0.3653,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 7036,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 247760,
+     "shadow_px": 3838,
+     "mean": 0.3304,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4361,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 247760,
+     "shadow_px": 4116,
+     "mean": 0.3362,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 7008,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.12,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     75,
+     76
+    ],
+    "side": [
+     113,
+     116
+    ],
+    "back": [
+     76,
+     75
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 75,
+   "air_px_tightest_view": "front",
+   "views_dir": "quartermaster",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "loader": {
+   "creature_h": 2.65,
+   "hero_h": 2.45,
+   "ratio": 1.08,
+   "pair_w": 4.26,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 35469,
+      "vis": 35469,
+      "delta": 40818,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43674,
+      "vis": 43674,
+      "delta": 53699,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27213,
+      "vis": 27213,
+      "delta": 35801,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 41718,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 35340,
+      "vis": 35340,
+      "delta": 46797,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44029,
+      "vis": 44029,
+      "delta": 48771,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 218880,
+     "shadow_px": 3164,
+     "mean": 0.4481,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3664,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 224960,
+     "shadow_px": 2326,
+     "mean": 0.4324,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2861,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 219640,
+     "shadow_px": 2965,
+     "mean": 0.4524,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3419,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.34,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     90,
+     90
+    ],
+    "side": [
+     179,
+     182
+    ],
+    "back": [
+     90,
+     90
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 90,
+   "air_px_tightest_view": "front",
+   "views_dir": "loader",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "hurdleman": {
+   "creature_h": 2.55,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 4.84,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 90298,
+      "vis": 90298,
+      "delta": 98472,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43674,
+      "vis": 43674,
+      "delta": 62574,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 76003,
+      "vis": 76003,
+      "delta": 84249,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37785,
+      "vis": 37785,
+      "delta": 45622,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 89222,
+      "vis": 89222,
+      "delta": 98804,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44036,
+      "vis": 44036,
+      "delta": 52369,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 283480,
+     "shadow_px": 4393,
+     "mean": 0.4023,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 6994,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 281960,
+     "shadow_px": 5128,
+     "mean": 0.3846,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 6738,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 281960,
+     "shadow_px": 5378,
+     "mean": 0.403,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6880,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.76,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     50,
+     50
+    ],
+    "side": [
+     47,
+     50
+    ],
+    "back": [
+     50,
+     50
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 47,
+   "air_px_tightest_view": "side",
+   "views_dir": "hurdleman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "tanner": {
+   "creature_h": 2.75,
+   "hero_h": 2.45,
+   "ratio": 1.12,
+   "pair_w": 4.36,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 57720,
+      "vis": 57720,
+      "delta": 64072,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43675,
+      "vis": 43675,
+      "delta": 55577,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 47115,
+      "vis": 47115,
+      "delta": 56101,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37778,
+      "vis": 37778,
+      "delta": 43160,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 58479,
+      "vis": 58479,
+      "delta": 68573,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44017,
+      "vis": 44017,
+      "delta": 49026,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 253080,
+     "shadow_px": 3483,
+     "mean": 0.4283,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4938,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 253080,
+     "shadow_px": 3160,
+     "mean": 0.3849,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4838,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 251560,
+     "shadow_px": 2969,
+     "mean": 0.4324,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5261,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.24,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     83,
+     84
+    ],
+    "side": [
+     99,
+     101
+    ],
+    "back": [
+     84,
+     83
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 83,
+   "air_px_tightest_view": "front",
+   "views_dir": "tanner",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "reeve": {
+   "creature_h": 1.95,
+   "hero_h": 2.45,
+   "ratio": 0.8,
+   "pair_w": 5.12,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 67735,
+      "vis": 67735,
+      "delta": 76063,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43668,
+      "vis": 43668,
+      "delta": 57478,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 49119,
+      "vis": 49119,
+      "delta": 58410,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 44316,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 67690,
+      "vis": 67690,
+      "delta": 78510,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44007,
+      "vis": 44007,
+      "delta": 52359,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 259920,
+     "shadow_px": 5295,
+     "mean": 0.4787,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5500,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 266000,
+     "shadow_px": 4348,
+     "mean": 0.4843,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3886,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 259160,
+     "shadow_px": 5739,
+     "mean": 0.487,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5129,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.48,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     31,
+     32
+    ],
+    "side": [
+     122,
+     124
+    ],
+    "back": [
+     32,
+     32
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 31,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9214,
+     "man_alone_px": 37195,
+     "man_seen_px": 34271,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8541,
+     "man_alone_px": 23873,
+     "man_seen_px": 20391,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9869,
+     "man_alone_px": 36065,
+     "man_seen_px": 35592,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8541,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "reeve",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "pressman": {
+   "creature_h": 2.85,
+   "hero_h": 2.45,
+   "ratio": 1.16,
+   "pair_w": 4.47,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 60839,
+      "vis": 60839,
+      "delta": 69441,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43676,
+      "vis": 43676,
+      "delta": 61122,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 39243,
+      "vis": 39243,
+      "delta": 53198,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37759,
+      "vis": 37759,
+      "delta": 43286,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 60338,
+      "vis": 60338,
+      "delta": 78067,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44020,
+      "vis": 44020,
+      "delta": 51213,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 232560,
+     "shadow_px": 5069,
+     "mean": 0.3918,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3781,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 239400,
+     "shadow_px": 3551,
+     "mean": 0.3895,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2985,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 231800,
+     "shadow_px": 4873,
+     "mean": 0.3973,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3882,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.13,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     76,
+     76
+    ],
+    "side": [
+     169,
+     171
+    ],
+    "back": [
+     76,
+     76
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 76,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9881,
+     "man_alone_px": 91940,
+     "man_seen_px": 90847,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8878,
+     "man_alone_px": 79572,
+     "man_seen_px": 70646,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.932,
+     "man_alone_px": 90463,
+     "man_seen_px": 84307,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8878,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "pressman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "strickler": {
+   "creature_h": 2.55,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 3.67,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 45908,
+      "vis": 45908,
+      "delta": 53528,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43671,
+      "vis": 43671,
+      "delta": 50868,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 51857,
+      "vis": 51857,
+      "delta": 62703,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37762,
+      "vis": 37762,
+      "delta": 45389,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 44837,
+      "vis": 44837,
+      "delta": 54209,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 50688,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 258400,
+     "shadow_px": 5054,
+     "mean": 0.4499,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3518,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 252320,
+     "shadow_px": 5156,
+     "mean": 0.4251,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4376,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 258400,
+     "shadow_px": 4485,
+     "mean": 0.4553,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3809,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.93,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     130,
+     128
+    ],
+    "side": [
+     45,
+     45
+    ],
+    "back": [
+     127,
+     130
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 45,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7748,
+     "man_alone_px": 93239,
+     "man_seen_px": 72243,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9086,
+     "man_alone_px": 80231,
+     "man_seen_px": 72894,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9385,
+     "man_alone_px": 91669,
+     "man_seen_px": 86032,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7748,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "strickler",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "greener": {
+   "creature_h": 2.5,
+   "hero_h": 2.45,
+   "ratio": 1.02,
+   "pair_w": 4.57,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.026,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 45911,
+      "vis": 45911,
+      "delta": 53408,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 51931,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 35044,
+      "vis": 35044,
+      "delta": 43852,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37765,
+      "vis": 37765,
+      "delta": 44369,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 45058,
+      "vis": 45058,
+      "delta": 53986,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 50868,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 253840,
+     "shadow_px": 4338,
+     "mean": 0.3801,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5096,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 256120,
+     "shadow_px": 4179,
+     "mean": 0.3651,
+     "max": 0.7107,
+     "error": null,
+     "rim_filled_px": 4969,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 253080,
+     "shadow_px": 4353,
+     "mean": 0.3888,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5019,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     69,
+     68
+    ],
+    "side": [
+     101,
+     103
+    ],
+    "back": [
+     68,
+     68
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 68,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8113,
+     "man_alone_px": 65322,
+     "man_seen_px": 52998,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8542,
+     "man_alone_px": 54696,
+     "man_seen_px": 46722,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6257,
+     "man_alone_px": 62532,
+     "man_seen_px": 39126,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6257,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "greener",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "drover": {
+   "creature_h": 2.44,
+   "hero_h": 2.45,
+   "ratio": 1.0,
+   "pair_w": 5.45,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 82347,
+      "vis": 82347,
+      "delta": 92129,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 54595,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 51628,
+      "vis": 51628,
+      "delta": 61405,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37767,
+      "vis": 37767,
+      "delta": 44399,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 82679,
+      "vis": 82679,
+      "delta": 98092,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44021,
+      "vis": 44021,
+      "delta": 51969,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 269800,
+     "shadow_px": 5601,
+     "mean": 0.4173,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6891,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 275880,
+     "shadow_px": 4308,
+     "mean": 0.4085,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4553,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 269800,
+     "shadow_px": 5223,
+     "mean": 0.4124,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 6989,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.15,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     9,
+     8
+    ],
+    "side": [
+     117,
+     119
+    ],
+    "back": [
+     8,
+     9
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 8,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9787,
+     "man_alone_px": 79925,
+     "man_seen_px": 78225,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9383,
+     "man_alone_px": 59451,
+     "man_seen_px": 55780,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.916,
+     "man_alone_px": 81305,
+     "man_seen_px": 74477,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.916,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "drover",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "paviser": {
+   "creature_h": 2.68,
+   "hero_h": 2.45,
+   "ratio": 1.09,
+   "pair_w": 5.3,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.304,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 93109,
+      "vis": 93109,
+      "delta": 101617,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 54394,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 68095,
+      "vis": 68095,
+      "delta": 77553,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37797,
+      "vis": 37797,
+      "delta": 44842,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 95803,
+      "vis": 95803,
+      "delta": 109878,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44035,
+      "vis": 44035,
+      "delta": 51001,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 277400,
+     "shadow_px": 5378,
+     "mean": 0.3989,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4556,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 282720,
+     "shadow_px": 4846,
+     "mean": 0.3962,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3394,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 275120,
+     "shadow_px": 4562,
+     "mean": 0.3932,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4912,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.574,
+     "man_alone_px": 98228,
+     "man_seen_px": 56382,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9854,
+     "man_alone_px": 74431,
+     "man_seen_px": 73342,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 99947,
+     "man_seen_px": 99929,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.574,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "air_px": {
+    "front": [
+     20,
+     17
+    ],
+    "side": [
+     95,
+     98
+    ],
+    "back": [
+     17,
+     20
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 17,
+   "air_px_tightest_view": "front",
+   "views_dir": "paviser",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "fenman": {
+   "creature_h": 2.52,
+   "hero_h": 2.45,
+   "ratio": 1.03,
+   "pair_w": 4.35,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 44096,
+      "vis": 44096,
+      "delta": 49995,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 57080,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27315,
+      "vis": 27315,
+      "delta": 32710,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37783,
+      "vis": 37783,
+      "delta": 41492,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 43612,
+      "vis": 43612,
+      "delta": 51512,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44023,
+      "vis": 44023,
+      "delta": 48554,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 218120,
+     "shadow_px": 2966,
+     "mean": 0.4341,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4028,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 227240,
+     "shadow_px": 2211,
+     "mean": 0.3996,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2143,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 217360,
+     "shadow_px": 2777,
+     "mean": 0.4326,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4459,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.25,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     84,
+     85
+    ],
+    "side": [
+     184,
+     187
+    ],
+    "back": [
+     84,
+     84
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 84,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9895,
+     "man_alone_px": 56458,
+     "man_seen_px": 55865,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7301,
+     "man_alone_px": 57115,
+     "man_seen_px": 41698,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.852,
+     "man_alone_px": 54556,
+     "man_seen_px": 46479,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7301,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "fenman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "leech": {
+   "creature_h": 2.32,
+   "hero_h": 2.45,
+   "ratio": 0.95,
+   "pair_w": 4.12,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 60494,
+      "vis": 60494,
+      "delta": 67651,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43675,
+      "vis": 43675,
+      "delta": 60359,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 45067,
+      "vis": 45067,
+      "delta": 55222,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37783,
+      "vis": 37783,
+      "delta": 43913,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 62046,
+      "vis": 62046,
+      "delta": 75462,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44006,
+      "vis": 44006,
+      "delta": 49646,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 227240,
+     "shadow_px": 4755,
+     "mean": 0.5096,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4192,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 229520,
+     "shadow_px": 4325,
+     "mean": 0.4981,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3217,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 226480,
+     "shadow_px": 3715,
+     "mean": 0.4977,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4337,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.48,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     100,
+     100
+    ],
+    "side": [
+     140,
+     142
+    ],
+    "back": [
+     100,
+     99
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 99,
+   "air_px_tightest_view": "back",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.967,
+     "man_alone_px": 98758,
+     "man_seen_px": 95497,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.84,
+     "man_alone_px": 103807,
+     "man_seen_px": 87201,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9713,
+     "man_alone_px": 101290,
+     "man_seen_px": 98388,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.84,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "leech",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "beadle": {
+   "creature_h": 2.95,
+   "hero_h": 2.45,
+   "ratio": 1.2,
+   "pair_w": 3.74,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_ghost.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 58754,
+      "vis": 58754,
+      "delta": 64802,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43673,
+      "vis": 43673,
+      "delta": 61044,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 42234,
+      "vis": 42234,
+      "delta": 58217,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37784,
+      "vis": 37784,
+      "delta": 42897,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 58598,
+      "vis": 58598,
+      "delta": 74219,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44024,
+      "vis": 44024,
+      "delta": 49036,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 215840,
+     "shadow_px": 3584,
+     "mean": 0.4426,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2978,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 219640,
+     "shadow_px": 3435,
+     "mean": 0.4275,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2171,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 215840,
+     "shadow_px": 3236,
+     "mean": 0.4355,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3079,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.86,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": null,
+    "side": null,
+    "ghost": null
+   },
+   "frame_edge_disk": {
+    "front": "NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png)",
+    "side": "NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png)",
+    "ghost": "NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png)"
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 124,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6325,
+     "man_alone_px": 18402,
+     "man_seen_px": 11639,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.5174,
+     "man_alone_px": 17385,
+     "man_seen_px": 8995,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6854,
+     "man_alone_px": 17375,
+     "man_seen_px": 11908,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5174,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": null,
+   "views_dir_tried": [
+    "beadlech5: no such directory",
+    "beadle: exists but lacks hero_ghost.png"
+   ]
+  },
+  "rammer": {
+   "creature_h": 2.75,
+   "hero_h": 2.45,
+   "ratio": 1.12,
+   "pair_w": 3.89,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 44137,
+      "vis": 44137,
+      "delta": 49760,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 56347,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 31538,
+      "vis": 31538,
+      "delta": 43920,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37787,
+      "vis": 37787,
+      "delta": 42096,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 44182,
+      "vis": 44182,
+      "delta": 57391,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44014,
+      "vis": 44014,
+      "delta": 49183,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 220400,
+     "shadow_px": 2938,
+     "mean": 0.4265,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4775,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 223440,
+     "shadow_px": 2515,
+     "mean": 0.4234,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3421,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 218880,
+     "shadow_px": 3019,
+     "mean": 0.4193,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4970,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.71,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     115,
+     114
+    ],
+    "side": [
+     155,
+     157
+    ],
+    "back": [
+     114,
+     115
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 114,
+   "air_px_tightest_view": "front",
+   "views_dir": "rammer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "moulder": {
+   "creature_h": 2.9,
+   "hero_h": 2.45,
+   "ratio": 1.18,
+   "pair_w": 4.22,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 72603,
+      "vis": 72603,
+      "delta": 78850,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43670,
+      "vis": 43670,
+      "delta": 51206,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 55920,
+      "vis": 55920,
+      "delta": 66632,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37769,
+      "vis": 37769,
+      "delta": 44635,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 72587,
+      "vis": 72587,
+      "delta": 84489,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44011,
+      "vis": 44011,
+      "delta": 50935,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 247760,
+     "shadow_px": 3712,
+     "mean": 0.4104,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3764,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 250040,
+     "shadow_px": 4606,
+     "mean": 0.4397,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3931,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 247760,
+     "shadow_px": 4760,
+     "mean": 0.4534,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3830,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.38,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     93,
+     93
+    ],
+    "side": [
+     112,
+     110
+    ],
+    "back": [
+     93,
+     93
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 93,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.977,
+     "man_alone_px": 56673,
+     "man_seen_px": 55370,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8554,
+     "man_alone_px": 44862,
+     "man_seen_px": 38374,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5837,
+     "man_alone_px": 56495,
+     "man_seen_px": 32977,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5837,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "moulder",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "fuller": {
+   "creature_h": 2.66,
+   "hero_h": 2.45,
+   "ratio": 1.09,
+   "pair_w": 5.15,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 98905,
+      "vis": 98905,
+      "delta": 109868,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43669,
+      "vis": 43669,
+      "delta": 61664,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 61882,
+      "vis": 61882,
+      "delta": 71732,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37771,
+      "vis": 37771,
+      "delta": 43171,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 98870,
+      "vis": 98870,
+      "delta": 116800,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 53227,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 262200,
+     "shadow_px": 6983,
+     "mean": 0.5303,
+     "max": 0.7107,
+     "error": null,
+     "rim_filled_px": 5182,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 269040,
+     "shadow_px": 3302,
+     "mean": 0.4129,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3158,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 261440,
+     "shadow_px": 6559,
+     "mean": 0.4943,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5020,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.45,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     29,
+     27
+    ],
+    "side": [
+     124,
+     125
+    ],
+    "back": [
+     28,
+     29
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 27,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9724,
+     "man_alone_px": 74791,
+     "man_seen_px": 72727,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.4611,
+     "man_alone_px": 52516,
+     "man_seen_px": 24216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 74205,
+     "man_seen_px": 74101,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.4611,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "fuller",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "stackman": {
+   "creature_h": 2.84,
+   "hero_h": 2.45,
+   "ratio": 1.16,
+   "pair_w": 4.39,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 54574,
+      "vis": 54574,
+      "delta": 62916,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 53437,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 54619,
+      "vis": 54619,
+      "delta": 64766,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37781,
+      "vis": 37781,
+      "delta": 47846,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 52342,
+      "vis": 52342,
+      "delta": 61506,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 52987,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 288040,
+     "shadow_px": 5821,
+     "mean": 0.5039,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4778,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 281960,
+     "shadow_px": 7757,
+     "mean": 0.5505,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4491,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 286520,
+     "shadow_px": 6755,
+     "mean": 0.5215,
+     "max": 0.7107,
+     "error": null,
+     "rim_filled_px": 4931,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.21,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     81,
+     81
+    ],
+    "side": [
+     21,
+     24
+    ],
+    "back": [
+     81,
+     81
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 21,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9464,
+     "man_alone_px": 44682,
+     "man_seen_px": 42289,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9865,
+     "man_alone_px": 36239,
+     "man_seen_px": 35751,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 43849,
+     "man_seen_px": 43789,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9464,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "stackman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "dauber": {
+   "creature_h": 2.58,
+   "hero_h": 2.45,
+   "ratio": 1.05,
+   "pair_w": 3.52,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 36291,
+      "vis": 36291,
+      "delta": 40722,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 49229,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 27840,
+      "vis": 27840,
+      "delta": 34151,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37780,
+      "vis": 37780,
+      "delta": 42922,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36019,
+      "vis": 36019,
+      "delta": 41169,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44030,
+      "vis": 44030,
+      "delta": 48954,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 215840,
+     "shadow_px": 2709,
+     "mean": 0.4641,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3084,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 215840,
+     "shadow_px": 3239,
+     "mean": 0.4486,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3529,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 214320,
+     "shadow_px": 3144,
+     "mean": 0.4662,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2912,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 2.08,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     140,
+     139
+    ],
+    "side": [
+     138,
+     141
+    ],
+    "back": [
+     139,
+     141
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 138,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8214,
+     "man_alone_px": 56720,
+     "man_seen_px": 46590,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8344,
+     "man_alone_px": 48859,
+     "man_seen_px": 40766,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8459,
+     "man_alone_px": 55318,
+     "man_seen_px": 46792,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8214,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "dauber",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "hooper": {
+   "creature_h": 2.36,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 3.24,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 36905,
+      "vis": 36905,
+      "delta": 42153,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 55634,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 33644,
+      "vis": 33644,
+      "delta": 41164,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37778,
+      "vis": 37778,
+      "delta": 42416,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36482,
+      "vis": 36482,
+      "delta": 47436,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 50077,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 201400,
+     "shadow_px": 3439,
+     "mean": 0.4587,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2112,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 201400,
+     "shadow_px": 2960,
+     "mean": 0.4048,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2503,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 201400,
+     "shadow_px": 3326,
+     "mean": 0.4423,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2192,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 2.36,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     159,
+     157
+    ],
+    "side": [
+     153,
+     153
+    ],
+    "back": [
+     157,
+     159
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 153,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8912,
+     "man_alone_px": 98860,
+     "man_seen_px": 88104,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8914,
+     "man_alone_px": 85701,
+     "man_seen_px": 76397,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8718,
+     "man_alone_px": 97782,
+     "man_seen_px": 85242,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8718,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "hooper",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "scraper": {
+   "creature_h": 2.55,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 3.76,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 71483,
+      "vis": 71483,
+      "delta": 75458,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 61066,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 56542,
+      "vis": 56542,
+      "delta": 63679,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37789,
+      "vis": 37789,
+      "delta": 41771,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 70621,
+      "vis": 70621,
+      "delta": 83177,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44017,
+      "vis": 44017,
+      "delta": 47388,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 237120,
+     "shadow_px": 2025,
+     "mean": 0.4876,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2837,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 234840,
+     "shadow_px": 2315,
+     "mean": 0.4679,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3441,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 234840,
+     "shadow_px": 2018,
+     "mean": 0.4794,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 2950,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.84,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     124,
+     124
+    ],
+    "side": [
+     98,
+     101
+    ],
+    "back": [
+     124,
+     124
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 98,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8864,
+     "man_alone_px": 88525,
+     "man_seen_px": 78465,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7627,
+     "man_alone_px": 89888,
+     "man_seen_px": 68562,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9088,
+     "man_alone_px": 89285,
+     "man_seen_px": 81143,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7627,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "scraper",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "winder": {
+   "creature_h": 2.34,
+   "hero_h": 2.45,
+   "ratio": 0.96,
+   "pair_w": 4.86,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 57904,
+      "vis": 57904,
+      "delta": 64783,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 51576,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 49596,
+      "vis": 49596,
+      "delta": 55182,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37773,
+      "vis": 37773,
+      "delta": 43377,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 57639,
+      "vis": 57639,
+      "delta": 64771,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44030,
+      "vis": 44030,
+      "delta": 51019,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 291080,
+     "shadow_px": 4244,
+     "mean": 0.4902,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5177,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 288800,
+     "shadow_px": 3098,
+     "mean": 0.4082,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 5362,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 288800,
+     "shadow_px": 4749,
+     "mean": 0.539,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4497,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.74,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     49,
+     47
+    ],
+    "side": [
+     27,
+     30
+    ],
+    "back": [
+     47,
+     49
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 27,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7102,
+     "man_alone_px": 41437,
+     "man_seen_px": 29428,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9958,
+     "man_alone_px": 39233,
+     "man_seen_px": 39070,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.983,
+     "man_alone_px": 42498,
+     "man_seen_px": 41775,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7102,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "winder",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "pitman": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 4.96,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.642,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 46487,
+      "vis": 46487,
+      "delta": 56291,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 57154,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 49053,
+      "vis": 49053,
+      "delta": 60774,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 46411,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 48570,
+      "vis": 48570,
+      "delta": 59019,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44019,
+      "vis": 44019,
+      "delta": 52225,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 283480,
+     "shadow_px": 6549,
+     "mean": 0.4904,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6686,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 282720,
+     "shadow_px": 5713,
+     "mean": 0.4731,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 6114,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 281960,
+     "shadow_px": 5633,
+     "mean": 0.505,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 6143,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9998,
+     "man_alone_px": 36625,
+     "man_seen_px": 36618,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9967,
+     "man_alone_px": 42826,
+     "man_seen_px": 42685,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9999,
+     "man_alone_px": 37386,
+     "man_seen_px": 37384,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9967,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "air_px": {
+    "front": [
+     43,
+     43
+    ],
+    "side": [
+     50,
+     52
+    ],
+    "back": [
+     43,
+     42
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 42,
+   "air_px_tightest_view": "back",
+   "views_dir": "pitman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "comfitmaker": {
+   "creature_h": 2.28,
+   "hero_h": 2.45,
+   "ratio": 0.93,
+   "pair_w": 3.69,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 48583,
+      "vis": 48583,
+      "delta": 54286,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 56258,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 38118,
+      "vis": 38118,
+      "delta": 44997,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37790,
+      "vis": 37790,
+      "delta": 42616,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 48489,
+      "vis": 48489,
+      "delta": 55787,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44035,
+      "vis": 44035,
+      "delta": 48504,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 212040,
+     "shadow_px": 3508,
+     "mean": 0.4757,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3547,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 213560,
+     "shadow_px": 3138,
+     "mean": 0.4711,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2715,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 212040,
+     "shadow_px": 2988,
+     "mean": 0.4916,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3598,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.91,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     128,
+     128
+    ],
+    "side": [
+     153,
+     152
+    ],
+    "back": [
+     129,
+     128
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 128,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9962,
+     "man_alone_px": 98629,
+     "man_seen_px": 98254,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8616,
+     "man_alone_px": 96309,
+     "man_seen_px": 82980,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 96037,
+     "man_seen_px": 96014,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8616,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "comfitmaker",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "dyer": {
+   "creature_h": 2.6,
+   "hero_h": 2.45,
+   "ratio": 1.06,
+   "pair_w": 4.74,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.862,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 96866,
+      "vis": 96866,
+      "delta": 103325,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 53298,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 70884,
+      "vis": 70884,
+      "delta": 80478,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37777,
+      "vis": 37777,
+      "delta": 44286,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 93529,
+      "vis": 93529,
+      "delta": 102730,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44025,
+      "vis": 44025,
+      "delta": 50293,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 290320,
+     "shadow_px": 3465,
+     "mean": 0.4185,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4556,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 286520,
+     "shadow_px": 3690,
+     "mean": 0.4019,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 7107,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 288800,
+     "shadow_px": 3851,
+     "mean": 0.3809,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4553,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     57,
+     58
+    ],
+    "side": [
+     27,
+     29
+    ],
+    "back": [
+     58,
+     57
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 27,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8787,
+     "man_alone_px": 49167,
+     "man_seen_px": 43205,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9094,
+     "man_alone_px": 38251,
+     "man_seen_px": 34787,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5949,
+     "man_alone_px": 47971,
+     "man_seen_px": 28536,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "dyer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "ferryman": {
+   "creature_h": 2.62,
+   "hero_h": 2.45,
+   "ratio": 1.07,
+   "pair_w": 4.23,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 54760,
+      "vis": 54760,
+      "delta": 61739,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 51389,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 72791,
+      "vis": 72791,
+      "delta": 80748,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37774,
+      "vis": 37774,
+      "delta": 45625,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 57395,
+      "vis": 57395,
+      "delta": 63056,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44044,
+      "vis": 44044,
+      "delta": 50053,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 291840,
+     "shadow_px": 4742,
+     "mean": 0.4785,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4118,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 283480,
+     "shadow_px": 5085,
+     "mean": 0.4654,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 5220,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 3,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 290320,
+     "shadow_px": 3717,
+     "mean": 0.5147,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4366,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.37,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     92,
+     92
+    ],
+    "side": [
+     0,
+     2
+    ],
+    "back": [
+     92,
+     92
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 3,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 0,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6405,
+     "man_alone_px": 90080,
+     "man_seen_px": 57694,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8573,
+     "man_alone_px": 91234,
+     "man_seen_px": 78216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8063,
+     "man_alone_px": 92858,
+     "man_seen_px": 74876,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6405,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "ferryman",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "ratcatcher": {
+   "creature_h": 2.62,
+   "hero_h": 2.45,
+   "ratio": 1.07,
+   "pair_w": 5.47,
+   "gap_x": 0.326,
+   "margin_x": 0.12,
+   "air_x": 0.13,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 61306,
+      "vis": 61306,
+      "delta": 71566,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 58048,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 36575,
+      "vis": 36575,
+      "delta": 46389,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37794,
+      "vis": 37794,
+      "delta": 43300,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 61637,
+      "vis": 61637,
+      "delta": 75575,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44032,
+      "vis": 44032,
+      "delta": 52053,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 258400,
+     "shadow_px": 5650,
+     "mean": 0.332,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6059,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 265240,
+     "shadow_px": 3572,
+     "mean": 0.3727,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3379,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 259160,
+     "shadow_px": 5124,
+     "mean": 0.3121,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 6541,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9874,
+     "man_alone_px": 45952,
+     "man_seen_px": 45375,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9793,
+     "man_alone_px": 38943,
+     "man_seen_px": 38137,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9987,
+     "man_alone_px": 46886,
+     "man_seen_px": 46823,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9793,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "air_px": {
+    "front": [
+     8,
+     8
+    ],
+    "side": [
+     157,
+     154
+    ],
+    "back": [
+     8,
+     8
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 8,
+   "air_px_tightest_view": "front",
+   "views_dir": "ratcatcher",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "relief": {
+   "creature_h": 2.52,
+   "hero_h": 2.45,
+   "ratio": 1.03,
+   "pair_w": 3.61,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 42802,
+      "vis": 42802,
+      "delta": 46531,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 51911,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 42767,
+      "vis": 42767,
+      "delta": 46337,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37769,
+      "vis": 37769,
+      "delta": 41060,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42246,
+      "vis": 42246,
+      "delta": 46371,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44040,
+      "vis": 44040,
+      "delta": 47229,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 222680,
+     "shadow_px": 1916,
+     "mean": 0.4831,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2982,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 221920,
+     "shadow_px": 1844,
+     "mean": 0.4496,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2982,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 221920,
+     "shadow_px": 1793,
+     "mean": 0.4671,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2781,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 1.99,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     134,
+     134
+    ],
+    "side": [
+     123,
+     126
+    ],
+    "back": [
+     135,
+     134
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 123,
+   "air_px_tightest_view": "side",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6887,
+     "man_alone_px": 84272,
+     "man_seen_px": 58035,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9543,
+     "man_alone_px": 65269,
+     "man_seen_px": 62289,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.973,
+     "man_alone_px": 84216,
+     "man_seen_px": 81938,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6887,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "relief",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "sealer": {
+   "creature_h": 2.42,
+   "hero_h": 2.45,
+   "ratio": 0.99,
+   "pair_w": 3.5,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 35765,
+      "vis": 35765,
+      "delta": 41412,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 54124,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 30782,
+      "vis": 30782,
+      "delta": 39259,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37786,
+      "vis": 37786,
+      "delta": 42816,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 35868,
+      "vis": 35868,
+      "delta": 48713,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44020,
+      "vis": 44020,
+      "delta": 49730,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 210520,
+     "shadow_px": 3426,
+     "mean": 0.4816,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3025,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 209760,
+     "shadow_px": 3277,
+     "mean": 0.44,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2366,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 210520,
+     "shadow_px": 3842,
+     "mean": 0.4687,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3108,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 2.1,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     142,
+     142
+    ],
+    "side": [
+     146,
+     144
+    ],
+    "back": [
+     142,
+     142
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 142,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9395,
+     "man_alone_px": 100055,
+     "man_seen_px": 94001,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8129,
+     "man_alone_px": 81090,
+     "man_seen_px": 65922,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6949,
+     "man_alone_px": 100398,
+     "man_seen_px": 69764,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "sealer",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "tapster": {
+   "creature_h": 2.8,
+   "hero_h": 2.45,
+   "ratio": 1.14,
+   "pair_w": 4.9,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 87686,
+      "vis": 87686,
+      "delta": 95508,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43674,
+      "vis": 43674,
+      "delta": 58780,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 66795,
+      "vis": 66795,
+      "delta": 76076,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37789,
+      "vis": 37789,
+      "delta": 43600,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 87873,
+      "vis": 87873,
+      "delta": 99583,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44026,
+      "vis": 44026,
+      "delta": 50896,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 267520,
+     "shadow_px": 4124,
+     "mean": 0.4418,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 5453,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 272840,
+     "shadow_px": 3565,
+     "mean": 0.4149,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4175,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 267520,
+     "shadow_px": 4065,
+     "mean": 0.4276,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 5909,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "proving_views": 3,
+   "air_x": 0.7,
+   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "air_px": {
+    "front": [
+     46,
+     43
+    ],
+    "side": [
+     98,
+     98
+    ],
+    "back": [
+     44,
+     46
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 43,
+   "air_px_tightest_view": "front",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9582,
+     "man_alone_px": 48973,
+     "man_seen_px": 46927,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8299,
+     "man_alone_px": 34189,
+     "man_seen_px": 28372,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9652,
+     "man_alone_px": 46919,
+     "man_seen_px": 45285,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8299,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_dir": "tapster",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "tither": {
+   "creature_h": 2.42,
+   "hero_h": 2.45,
+   "ratio": 0.99,
+   "pair_w": 4.25,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.349,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 43507,
+      "vis": 43507,
+      "delta": 50580,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43676,
+      "vis": 43676,
+      "delta": 51670,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 33090,
+      "vis": 33090,
+      "delta": 40286,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37763,
+      "vis": 37763,
+      "delta": 44320,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42337,
+      "vis": 42337,
+      "delta": 49675,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44028,
+      "vis": 44028,
+      "delta": 50295,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 229520,
+     "shadow_px": 4561,
+     "mean": 0.4408,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3388,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 234080,
+     "shadow_px": 4495,
+     "mean": 0.4215,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2644,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 229520,
+     "shadow_px": 4350,
+     "mean": 0.4404,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3694,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     91,
+     88
+    ],
+    "side": [
+     143,
+     143
+    ],
+    "back": [
+     88,
+     91
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 88,
+   "air_px_tightest_view": "front",
+   "views_dir": "tither",
+   "views_from": "recorded on the row when it was rendered"
+  },
+  "blower": {
+   "creature_h": 2.48,
+   "hero_h": 2.45,
+   "ratio": 1.01,
+   "pair_w": 3.31,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.292,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 45568,
+      "vis": 45568,
+      "delta": 51664,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43674,
+      "vis": 43674,
+      "delta": 54892,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 47349,
+      "vis": 47349,
+      "delta": 56936,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37744,
+      "vis": 37744,
+      "delta": 44398,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 45778,
+      "vis": 45778,
+      "delta": 63092,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44020,
+      "vis": 44020,
+      "delta": 50356,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 217360,
+     "shadow_px": 4107,
+     "mean": 0.4798,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2642,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 215080,
+     "shadow_px": 4859,
+     "mean": 0.4749,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2373,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 217360,
+     "shadow_px": 4674,
+     "mean": 0.5197,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2551,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
+    "front": [
+     154,
+     150
+    ],
+    "side": [
+     121,
+     118
+    ],
+    "back": [
+     149,
+     155
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 118,
+   "air_px_tightest_view": "side",
+   "views_dir": "blower",
+   "views_from": "the untagged canonical path"
+  },
+  "changer": {
+   "creature_h": 2.72,
+   "hero_h": 2.45,
+   "ratio": 1.11,
+   "pair_w": 4.45,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.153,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "changerch5",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 50318,
+      "vis": 50318,
+      "delta": 57362,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43685,
+      "vis": 43685,
+      "delta": 53236,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 43814,
+      "vis": 43814,
+      "delta": 53881,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37776,
+      "vis": 37776,
+      "delta": 43856,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 50790,
+      "vis": 50790,
+      "delta": 61596,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 50308,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 276640,
+     "shadow_px": 4111,
+     "mean": 0.3756,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4051,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 274360,
+     "shadow_px": 3809,
+     "mean": 0.3634,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4127,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 276640,
+     "shadow_px": 3976,
+     "mean": 0.3615,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3942,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     77,
+     77
+    ],
+    "side": [
+     46,
+     48
+    ],
+    "back": [
+     77,
+     77
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 46,
+   "air_px_tightest_view": "side"
+  }
+ },
+ "errors": [
+  "beadle/front: NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png) - the view this row vouches for is not on disk at the canonical path",
+  "beadle/ghost: NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png) - the view this row vouches for is not on disk at the canonical path",
+  "beadle/side: NO DIRECTORY HOLDS THIS ROW'S VIEWS - tried beadlech5 (no such directory); beadle (exists but lacks hero_ghost.png) - the view this row vouches for is not on disk at the canonical path",
+  "beadle: no readable alpha in front,ghost,side - an air measurement over nothing is RED, not green"
+ ],
+ "blind_views": [],
+ "stale_margin": [],
+ "margin_derived": [
+  "beadle",
+  "bellman",
+  "comfitmaker",
+  "cook",
+  "dauber",
+  "drillmaster",
+  "drover",
+  "fenman",
+  "ferryman",
+  "fuller",
+  "gaoler",
+  "hooper",
+  "hurdleman",
+  "jointer",
+  "leech",
+  "loader",
+  "moulder",
+  "porter",
+  "pressman",
+  "quartermaster",
+  "rammer",
+  "reeve",
+  "relief",
+  "scraper",
+  "scrapwright",
+  "sealer",
+  "sexton",
+  "sluicekeeper",
+  "snarer",
+  "snuffer",
+  "sower",
+  "stackman",
+  "stoker",
+  "strickler",
+  "tallyman",
+  "tanner",
+  "tapster",
+  "winder"
+ ],
+ "seen_min": 0.15,
+ "vis_min": 700,
+ "min_proving": 2,
+ "frame_w": 5.6,
+ "margin_x": 0.12,
+ "visibility_scope": {
+  "asks": "how much of each subject survives the OTHER subject, in the pair cell",
+  "cells": 264,
+  "cells_reading_exactly_1_0": 264,
+  "cells_where_vis_differs_from_alone": 0,
+  "taken_by_construction": true,
+  "note": "MEASURED 21 Nov 03:4x CT, not remembered: 264 of 264 cells read seen 1.0 and vis == alone in EVERY ONE. The method is sound - with/without through one locked camera - but place() holds measured air between the two bodies (air_px >= 8 in the tightest view of every row), so neither can ever hide the other and the answer is settled before the render. THIS CELL IS A TAKEN-BY-CONSTRUCTION PASS, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never again be cited as if it did. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone==0 still catches a blank or mis-aimed render. The question it was being read for is answered by `self_seen`."
+ },
+ "self_seen": {
+  "asks": "how much of THE MAN survives HIS OWN GEAR, per view - the viewer's question",
+  "instrument": "tools/art/_backread.py, 21 Nov 03:3x CT -> _backread/_selfseen_all.json",
+  "bar": 0.75,
+  "bar_provenance": "0.75, AND THE FIRST BAR I WROTE THIS RUN WAS 0.70 AND THE PICTURE OVERRULED IT. At 0.70 the boiler's side cell - the one defect the team lead handed me - printed GREEN on my own contact sheet by six thousandths (0.7057), while the tile shows a man substantially behind his own pan and pour. A bar that passes the fault it was built to catch is set too low. It is still a bar I CHOSE against nine pictures I looked at, not a measured constant, and NO VERDICT IN THIS FILE TURNS ON IT: it names rows, it does not fail them.",
+  "measured_bodies": 25,
+  "measured_cells": 75,
+  "unmeasured_bodies": 21,
+  "unmeasured": [
+   "bellman",
+   "cook",
+   "drillmaster",
+   "gaoler",
+   "hurdleman",
+   "jointer",
+   "loader",
+   "porter",
+   "quartermaster",
+   "rammer",
+   "scrapwright",
+   "sexton",
+   "sluicekeeper",
+   "snarer",
+   "snuffer",
+   "snuffer_chibi",
+   "sower",
+   "stoker",
+   "tallyman",
+   "tallyman_chibi",
+   "tanner"
+  ],
+  "unmeasured_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green. 21 of 46.",
+  "under_bar": [
+   {
+    "key": "fuller",
+    "view": "side",
+    "man_seen": 0.4611
+   },
+   {
+    "key": "beadle",
+    "view": "side",
+    "man_seen": 0.5174
+   },
+   {
+    "key": "paviser",
+    "view": "front",
+    "man_seen": 0.574
+   },
+   {
+    "key": "moulder",
+    "view": "back",
+    "man_seen": 0.5837
+   },
+   {
+    "key": "dyer",
+    "view": "back",
+    "man_seen": 0.5949
+   },
+   {
+    "key": "greener",
+    "view": "back",
+    "man_seen": 0.6257
+   },
+   {
+    "key": "beadle",
+    "view": "front",
+    "man_seen": 0.6325
+   },
+   {
+    "key": "ferryman",
+    "view": "front",
+    "man_seen": 0.6405
+   },
+   {
+    "key": "beadle",
+    "view": "back",
+    "man_seen": 0.6854
+   },
+   {
+    "key": "relief",
+    "view": "front",
+    "man_seen": 0.6887
+   },
+   {
+    "key": "sealer",
+    "view": "back",
+    "man_seen": 0.6949
+   },
+   {
+    "key": "boiler",
+    "view": "side",
+    "man_seen": 0.7057
+   },
+   {
+    "key": "winder",
+    "view": "front",
+    "man_seen": 0.7102
+   },
+   {
+    "key": "fenman",
+    "view": "side",
+    "man_seen": 0.7301
+   }
+  ],
+  "looked_at": "renders/art/minibosses/_backread/_selfseen_worst_sheet.png - nine tiles, the eight worst cells plus pitman/side 0.9967 as the honest top end. The picture agrees with the number on eight of nine: fuller/side has no findable person in it; paviser's man is behind his own pavise but for a head and one arm; dyer/back and greener/back are a sliver of dark arm past hanging cloth; moulder/back is a pale ball with a man behind it; beadle/side reads as a barrel. THE ONE DISAGREEMENT IS THE FERRYMAN at 0.6405 front: a figure with a pole does read in that tile, and the score is pushed down by the punt and pole crossing him rather than by a body that cannot be found. There the number is the suspect, not the picture - it is named, not condemned.",
+  "note": "25 bodies x 3 views = 75 cells. The register's own `visibility.seen` reads 1.0 on every one of these same cells. THIS INSTRUMENT MOVES: 0.4611 to 0.9998, 14 cells under the bar. The boiler's 0.7057 side - the one defect the 02:58 row carried - is the TENTH worst in the house, and four bodies are worse on a view than the dyer and greener backs called out at 01:34. Red on empty is inherited from _backread: a man-alone mask under 500 px is RED, not 0.0 passed off as a reading."
+ },
+ "unproved_cells": [],
+ "measured": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer"
+ ],
+ "asked": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer"
+ ],
+ "blank_check": {
+  "files": 141,
+  "failures": []
+ },
+ "red_summary": {
+  "rows": [
+   "beadle"
+  ],
+  "shipped_red": [
+   "beadle"
+  ],
+  "retired_red": [],
+  "ok_shipped": false
+ },
+ "verdict": "RED",
+ "rendered_this_run": 0,
+ "verdict_scope": "every row in pairs (49), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 49 judged from stored measurements)"
+}

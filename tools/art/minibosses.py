@@ -16428,3 +16428,399 @@ def blower():
 
 
 BUILDERS.update({"blower": blower})
+
+
+# ============================================================ 47 THE CHANGER
+# WHAT I CHECKED FOR BEFORE DESIGNING THIS, MEASURED OFF THIS FILE AND NOT
+# REMEMBERED. The prompt I was given says "THIRTY-THREE already exist"; that
+# line is fourteen bodies stale. I parsed `BUILDERS` by brace-matching every
+# `BUILDERS = {` and `BUILDERS.update({` block: 60 keys, 0 duplicates, which
+# is 46 distinct bodies once the `_chibi` and `_tall` variants are folded in -
+# and 46 is exactly `Delve.MB_NAME`, so the set the game ships and the set this
+# file builds are the same size. Then I read EVERY `IT ...` idea string in the
+# file (46 of them) before writing a word of this one, because the bar is one
+# idea that changes the fight and a re-skin of an existing fight fails it.
+#
+# NOTHING IN THE SET EXCHANGES. The five nearest and why each is a different
+# fight:
+#   gaoler     (IT DRAGS) - the hook takes a hero OUT of the line and reels
+#              them to itself. One body moves, toward the creature, and the
+#              creature does not give up its own ground.
+#   ferryman   (IT TAKES ONE AT A TIME) - a hero is REMOVED from the fight.
+#              Here nobody leaves: both bodies stay in the room and both keep
+#              acting, which is why this is a formation problem and not an
+#              attrition one.
+#   winder     (IT WINDS YOU BACK) - pulls the party toward one place. A
+#              direction, applied to everyone, repeatedly.
+#   hurdleman  (IT CUTS THE ROOM IN TWO) - changes the ROOM so the line cannot
+#              hold. This changes WHO IS STANDING WHERE and leaves the room
+#              alone.
+#   porter     (IT BARS THE WAY) - takes the exit. Nothing here is barred; the
+#              door is open the whole fight.
+# So the forty-seventh is the first body in this file whose mechanic is a SWAP:
+# the hero who hits it hardest finds themselves standing where it stood, and it
+# arrives where they were - in the back line, next to whoever was being kept
+# safe. Nothing is removed, nothing is summoned, nothing is barred. The party's
+# own arrangement is the thing being taken.
+CANON.update({
+    "changer": ("Evenhand", 2.72, (0.62, 0.58, 0.50), (0.88, 0.84, 0.70),
+                "treasury", "IT TRADES PLACES - whoever hits it hardest ends "
+                "up standing where it stood. It does not drag anybody to it "
+                "and it does not take anybody away: it works its turnstile "
+                "and the two of you come out the other side of each other. "
+                "Your front rank is now at the back and the thing is standing "
+                "beside whoever you were keeping out of reach, so the fight "
+                "punishes the party for landing its best blow and the answer "
+                "is to choose WHO lands it. THE COUNT IS THE DRUM on top of "
+                "the post - pale, with three dark rungs, and it turns a third "
+                "of a turn on every trade, so a viewer can see how many times "
+                "the room has been shuffled without being told a number. JAM "
+                "THE ARMS AND IT CANNOT TRADE: the three bars are at hip "
+                "height where a body can stand against one, which is the only "
+                "thing in the room that stops the swap.",
+                0.38, "A turnstile is being worked up ahead."),
+})
+ORDER = ORDER + ["changer"]
+
+# PER-SLOT MATERIALS - the Tither's rule applied a third time, because it has
+# worked every time: THE PALE THING IS THE THING THE MECHANIC IS COUNTED ON.
+# Here that is the DRUM on the post-head and the three paddle ends of the arms,
+# because those are the two objects that say "this turns". The man is dark
+# clerk's wool and the post and bars are dark iron, so neither competes.
+#
+# WEAR 0.38 IS NOT A FREE RUNG PICKED FOR NOVELTY - it is the rung that says
+# what this body is. A turnstile is a thing a man's trade DEPENDS on, so it is
+# kept: the frame is sound and the iron is greased. But it is worked all day,
+# so the three paddles - the only parts a hand or a hip ever touches - are the
+# worn thing on an otherwise maintained machine. Half-kept is 0.38, and 0.38
+# is unoccupied in the ladder (nearest live rungs 0.35 and 0.40), so it extends
+# the set rather than repeating a step. Height 2.72 m is unoccupied too (2.70
+# and 2.75 are live) and it is chosen for a reason a viewer can see: the drum
+# must stand clear ABOVE a hero's head, because a count nobody can see over
+# the fight is not a count.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"changer"}
+
+OVERRIDE.update({
+    "changer": {
+        # THE MAN. Clerk's wool, flat, no sheen. Deliberately the least
+        # interesting value on the body.
+        'body': ((0.090, 0.086, 0.078), 0.90, 0.02),
+        # THE POST, THE THREE BARS, THE CAP AND THE DRUM'S RUNGS. Near black -
+        # these are the lines that make the pale drum read as a COUNTER with
+        # thirds marked on it rather than as a smooth lid.
+        'dark': ((0.028, 0.028, 0.026), 0.70, 0.08),
+        # THE DRUM AND THE THREE PADDLES. Worn ash, pale and warm, the
+        # brightest thing here and the only thing that must be legible at
+        # stream distance.
+        'bone': ((0.745, 0.705, 0.615), 0.60, 0.02),
+        # Eyes only, small, FORWARD OF THE SHOULDER LINE. Nothing emissive
+        # goes near the back of this body - the back-lamp guard reads back and
+        # side chromaticity against the front and an aft lamp is the exact
+        # fault it exists to catch.
+        # (rgb, strength) - the glow slot takes TWO elements, not the three a
+        # surface slot takes. My first write of this row had three and the gate
+        # caught it: apply_overrides unpacks exactly two for 'glow'. 0.85 is a
+        # low strength on purpose - two small eyes, no lamp.
+        'glow': ((1.000, 0.880, 0.560), 0.85),
+    },
+})
+
+
+def changer():
+    """THE CHANGER - 47th. A man standing at a three-armed turnstile.
+
+    SILHOUETTE ARGUMENT, WHICH IS THE ACCEPTANCE TEST: with the colour thrown
+    away this is AN UPRIGHT MAN BESIDE A POST, with THREE BARS RADIATING FROM
+    THE POST AT HIP HEIGHT and a drum on the post-head above him. Nothing in
+    the other forty-six has radial arms in the horizontal plane: the nearest
+    masses are the Drover's ash yoke (TWO bows, both across the shoulders, not
+    radial and not on a post), the Blower's two spars (both raked FORWARD over
+    the head, a wedge not a star), the Rammer's three-legged frame (three legs
+    going DOWN to the floor, a tripod seen as a triangle) and the Winder's
+    three ropes (slack lines on the floor, no frame). From above this one is a
+    three-pointed star and nothing else in the file is.
+
+    THE THREE ARMS ARE AT 60, 180 AND 300 DEGREES ABOUT A POST AT (0.460,
+    0.520), WHICH IS BEHIND HIM AND TO HIS RIGHT. A four-armed cross on the
+    centre line would have been the obvious build and it would have been wrong
+    twice: four-fold symmetry reads the same from front and back - FACELESS, in
+    the Beadle's exact way - and a post on the centre line puts the drum on the
+    crown of his head from the front camera, which is what pass 2 did and what
+    pass 3 undid. Looked at, not asserted:
+      FRONT  the man, two eyes, the pale token on his chest; the post and the
+             drum standing clear to his right; three plates at three different
+             heights and depths. Asymmetric from the first glance.
+      SIDE   the post, the collar and two bars make one clean horizontal
+             through the frame - this is the view where the thing reads as a
+             TURNSTILE and not as a signpost.
+      BACK   no eyes, no token, no glow of any kind, and the drum on the
+             opposite side of the frame from where the front view put it.
+    Three reads, one mechanic, and the facing is unambiguous from any of them.
+
+    WHAT THE GATES CANNOT SEE ON THIS BODY, STATED BECAUSE I CAN SEE IT:
+      1. THE BARS CROSS HIS SILHOUETTE IN TWO VIEWS OF THREE. From the front
+         the 180 bar comes out past his left side and from the back the same
+         bar crosses his waist. Both are DEPTH-CLEAR and the numbers are mine:
+         the 180 bar runs along y +0.520 the whole way and his back surface is
+         at +0.29, so 0.23 m of air, and the 300 bar clears his flank by 0.47.
+         Nothing is interpenetrating. But a bar drawn across a body is a thing
+         a viewer can misread as a spit, and no blank check, border check or
+         corridor span can see a misread - that is trap 5 in another coat. I am
+         not fixing it by shortening an arm, because a turnstile you can walk
+         round is not a turnstile and unequal arms are not a turnstile either.
+         It is recorded as a thing for Mr. E to look at and overrule if he
+         wants it gone.
+      2. THE EYES ARE SMALL AND THE TOKEN IS THE ONLY PALE THING ON THE MAN.
+         At hero scale he is a dark mass with one pale disc on it. That is the
+         Tither's rule working as intended - the pale thing is the thing the
+         mechanic is counted on, and here that is the drum and the plates - but
+         it means this body lives or dies on the drum reading, and the drum is
+         the first thing I would re-measure if it does not.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here and must not be: minibossgen measures the
+    real footprint against floorgen's own corridor span and lid, and the
+    register says it. The arms are the widest thing on this body ON PURPOSE -
+    a turnstile a party can walk round is not a turnstile - so if anything in
+    this file comes out room-locked by construction it will be this one, and
+    the honest place to find that out is the gate and not this docstring.
+    """
+    P = Parts("changer")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # FRONT IS -Y. lordgen's front camera sits at az 0 -> (0, -1, el), so the
+    # token goes on -Y (the front) and the arm that points away from the
+    # viewer in the front view is the one at +Y.
+    # PASS 2 MOVED THE POST AND THIS IS THE WHOLE OF PASS 2. At pass 1 the post
+    # stood BESIDE him at x 0.455 and I found the fault by LOOKING at front.png,
+    # not by measuring: the 210-degree bar ran straight THROUGH his belly and
+    # came out at his far hip. The gate could not see it and never could - a
+    # blank check, a border check and a corridor span are all blind to one solid
+    # passing through another - and every number in the report was green while
+    # the picture showed a man on a spit.
+    #
+    # It is not a nudge, it is arithmetic, and the arithmetic says a post BESIDE
+    # him cannot work at all: three bars at 120 degrees cover every direction,
+    # so whichever phase I choose one of them sweeps into the half-plane the man
+    # is standing in, and the only ways out are a post so far off that the body
+    # falls into two objects, or arms too short to be a turnstile.
+    #
+    # So the post goes BEHIND him and he stands INSIDE his own gate, which is
+    # also the set's own idiom - the Blower wears his bellows, the Sexton wears
+    # his niches. Measured: the torso's back surface at hip height is y +0.30,
+    # a post of r 0.072 centred at y +0.52 leaves 0.148 of clear air. The bars
+    # at 210 and 330 degrees cross the man's own y at x -0.90 and +0.90, and he
+    # is 0.33 wide there, so they pass OUTSIDE him by 0.57 rather than through
+    # him. The bar at 90 degrees points straight back, away from every part of
+    # the body. His hanging arms sit at x +-0.33, y -0.06; the bars are at
+    # y +0.33 where they pass that x, clear by 0.39.
+    #
+    # PASS 3 IS THE POST'S X AND THE ARM PHASE, AND IT IS ANOTHER FAULT FOUND BY
+    # LOOKING. Pass 2 put the post DIRECTLY behind him at x 0 and the front
+    # camera, which sits on that same axis, projected the drum exactly onto the
+    # crown of his hat: the counter read as a CHIMNEY GROWING OUT OF HIS HEAD
+    # and the post itself was invisible behind his body. Every number was green
+    # again - a thing standing behind another thing is not a clip, not a blank
+    # and not a frame break - and the picture was worse than pass 1's.
+    #
+    # So the post comes off the centre line: x 0.460, y 0.520, which is behind
+    # him AND to his right, and the drum now stands clear of the head in the
+    # front read instead of on it. Clearance measured, not eyeballed: the post
+    # centre is 0.694 from the torso axis, the torso is r 0.29 at hip height and
+    # the post is r 0.072, so 0.332 of air.
+    #
+    # THE ARM PHASE IS NOT A STYLE CHOICE, IT IS THE ONLY SAFE ONE. With the
+    # post at (0.460, 0.520) the man lies at bearing 228 degrees from it, so a
+    # bar anywhere near that bearing goes through him - that is pass 1's fault
+    # in a new place. 90/210/330 puts a bar 18 degrees off him and 0/120/240
+    # puts one through his belly at x 0.16. 60/180/300 is the phase that clears
+    # him on all three: the 180 bar runs along y +0.520 the whole way, 0.23
+    # clear of his back surface at +0.29; the 300 bar crosses his own y at
+    # x 0.76, 0.47 clear of his side; the 60 bar leaves backwards and never
+    # comes near any part of the body.
+    PX_POST = 0.460
+    PY_POST = 0.520
+    ARM_Z = 1.000              # hip height on this body - the height a hero
+    # can put a shoulder against, which is the mechanic's own weakness.
+    ARM_R = 1.230              # longer than pass 1's 0.98: with the post behind
+    # him a 120-degree spread puts the tips BESIDE him rather than ahead unless
+    # the arms reach, and a turnstile a party can walk round is not a turnstile.
+
+    # ---------------------------------------------------------------- THE MAN
+    _open()
+    # Legs planted square and NARROW. Thirteen of the forty-six are stooped
+    # and most of the braced ones are braced against a load; this one carries
+    # nothing. He stands at a gate all day, so the stance is a standing man's
+    # and the posture is the one piece of character he gets.
+    for s in (-1, 1):
+        pts = seat([(s * 0.145, 0.020, 0.74), (s * 0.172, 0.030, 0.40),
+                    (s * 0.182, 0.030, 0.098)], 0.128)
+        limb(P, pts, 0.128, 0.104, 'body')
+        P.add(L.box(0.255, 0.415, 0.112), 'body', loc=(s * 0.182, -0.022, 0.056))
+    # Torso, UPRIGHT. No forward carry: there is no load on this body to be
+    # braced against, and a man leaning into nothing reads as a man falling.
+    limb(P, [(0.0, 0.028, 0.70), (0.0, -0.008, 1.06), (0.0, -0.026, 1.40)],
+         0.325, 0.250, 'body')
+    P.add(L.sphere(0.318, 0.232, 0.192, 16, 10), 'body', loc=(0.0, -0.028, 1.412))
+    # A dark collar ring, then the head. The ring is here so the head reads as
+    # SET ON a collar rather than as a ball on a tube at stream distance.
+    P.add(L.cone(0.150, 0.172, 0.052, 16), 'dark', loc=(0.0, -0.032, 1.482))
+    P.add(L.sphere(0.212, 0.222, 0.232, 16, 10), 'body', loc=(0.0, -0.052, 1.650))
+    # A flat clerk's cap. NOT a hood: eleven bodies in this file wear one and
+    # the twelfth would be a re-skin of a silhouette, which is the same fault
+    # as a re-skin of a mechanic.
+    P.add(L.cone(0.242, 0.262, 0.046, 18), 'dark', loc=(0.0, -0.052, 1.806))
+    eyes(P, (0.0, -0.052, 1.662), 0.072, 0.040, -0.172, 'glow')
+    # The near arm, down and slack, and the far arm reaching to the post. The
+    # far hand ON the bar is what makes the man and the machine one body
+    # instead of a figure standing next to scenery.
+    limb(P, [(-0.270, -0.040, 1.370), (-0.330, -0.060, 1.060),
+             (-0.318, -0.090, 0.790)], 0.096, 0.076, 'body')
+    # the far hand goes ON the forward-right bar, at t 0.60 along it - measured
+    # off that bar's own parametrisation, (0.639, 0.212), not placed by eye
+    limb(P, [(0.268, -0.040, 1.372), (0.470, 0.000, 1.185),
+             (0.700, 0.020, ARM_Z + 0.055)], 0.096, 0.072, 'body')
+    # PASS 4 IS ONE OBJECT AND NOTHING ELSE: THE TIE. The fault is one only the
+    # HERO SHEET could show, and it is the reason that sheet exists - at three
+    # views alone this body looked finished, and beside a 2.45 m KayKit knight
+    # it read as A MAN STANDING NEXT TO A LAMPPOST. Two objects, not one
+    # creature. The hand on the bar was carrying that whole argument and at
+    # hero scale a hand is four pixels. So: a dark tie from the back of his
+    # shoulder to the post's collar, the one line that says the gate travels
+    # with him. It runs from (0.205, 0.175, 1.405) on his shoulder to
+    # (PX_POST - 0.040, PY_POST - 0.030, 1.330) just under the drum's stem,
+    # both ends ON geometry rather than near it.
+    # PASS 5: THE TIE AGAIN, AND PASS 4'S VERSION BOUGHT NOTHING. I put it
+    # from (0.205, 0.175, 1.405) to the collar and re-shot the hero sheet, and
+    # the sheet was INDISTINGUISHABLE from the one that motivated it: the line
+    # started INSIDE the shoulder sphere, which reaches x 0.318, and ran away
+    # from the front camera, so it was hidden for its whole length in the one
+    # view the fault lives in. A fix that cannot be seen in the view that
+    # showed the fault is not a fix, and I am recording the failed attempt
+    # rather than quietly replacing it. It now leaves ABOVE the shoulder line
+    # at z 1.470 and outboard at x 0.300, so it breaks the silhouette's top
+    # edge and crosses the gap as a visible line.
+    limb(P, [(0.300, 0.020, 1.470), (0.395, 0.250, 1.430),
+             (PX_POST - 0.030, PY_POST - 0.040, 1.352)], 0.050, 0.042, 'dark')
+    _close("man")
+
+    # -------------------------------------------------------------- THE TOKEN
+    # THE FRONT GETS ITS OWN PALE MASS, AND THIS IS THE BLOWER'S PASS 6 LESSON
+    # APPLIED RATHER THAN RE-LEARNED. On the Blower the front view came out 4%
+    # pale and the fix was a tally board hung on the chest. The same problem is
+    # here by construction: every pale thing on this body is on the POST, and
+    # the post is off to one side, so the man himself would read as an
+    # unlit dark column from the front.
+    #
+    # WHAT IT IS, IN MR. E'S FIRST RULE'S TERMS - a thing that looks like what
+    # it is FOR. A changer gives you a token for what he takes, and he carries
+    # the spares on a cord round his neck. So: one pale token, a flat disc, with
+    # a dark bar across its face. Not a badge, not a medal, no device on it.
+    #
+    # Sized off the torso rather than guessed: at z 1.16 the torso limb's
+    # surface stands at y -0.286, so a disc 0.055 thick centred at -0.300 is
+    # sunk 0.014 into the wool and stands 0.014 proud. It hangs on the cord,
+    # it is not pinned on.
+    _open()
+    for s in (-1, 1):
+        limb(P, [(s * 0.150, -0.150, 1.448), (s * 0.110, -0.270, 1.300),
+                 (0.0, -0.296, 1.205)], 0.020, 0.016, 'dark')
+    P.add(L.cone(0.098, 0.098, 0.055, 20), 'bone', loc=(0.0, -0.300, 1.155),
+          rot=(math.pi * 0.5, 0.0, 0.0))
+    P.add(L.box(0.126, 0.016, 0.030), 'dark', loc=(0.0, -0.331, 1.155))
+    _close("token")
+
+    # --------------------------------------------------------------- THE POST
+    _open()
+    # A footplate on the floor, then the post. The plate is here because a post
+    # that stops at the floor line reads as DRIVEN INTO the stone, which is a
+    # fixture; a turnstile that walks with the creature has to stand on
+    # something, and the plate is that something.
+    # PASS 2 ALSO KILLED A SECOND PLATE. Pass 1 put one under the MAN as well,
+    # at x 0, and the picture showed what the number could not: it read as a
+    # plinth he was standing on, and it sat below his own soles so he looked
+    # mounted rather than standing. One plate, under the post, which is the only
+    # thing here that needs a foot.
+    P.add(L.cone(0.232, 0.205, 0.070, 20), 'dark', loc=(PX_POST, PY_POST, 0.035))
+    limb(P, [(PX_POST, PY_POST, 0.060), (PX_POST, PY_POST, 1.240),
+             (PX_POST, PY_POST, 1.930)], 0.072, 0.062, 'dark')
+    # the collar the three bars are pinned through, so the arms read as fitted
+    # to the post rather than as passing through it
+    P.add(L.cone(0.108, 0.108, 0.150, 16), 'dark', loc=(PX_POST, PY_POST, ARM_Z - 0.075))
+    _close("post")
+
+    # --------------------------------------------------------------- THE ARMS
+    # The mechanic itself. Three bars at 120 degrees, phased so that TWO come
+    # forward of the post and ONE goes back - see the docstring: this phase is
+    # the whole reason the three views are different, and a 0 or 90 degree
+    # phase would have put a bar straight down the front camera's axis and
+    # thrown away the front read.
+    _open()
+    for i, deg in enumerate((60.0, 180.0, 300.0)):
+        a = math.radians(deg)
+        dx, dy = math.cos(a), math.sin(a)
+        # the bar: slightly drooping at the end, because a worked arm is never
+        # dead level and a perfectly horizontal bar reads as a drawn line
+        root = (PX_POST + dx * 0.095, PY_POST + dy * 0.095, ARM_Z)
+        mid = (PX_POST + dx * 0.680, PY_POST + dy * 0.680, ARM_Z - 0.010)
+        tip = (PX_POST + dx * ARM_R, PY_POST + dy * ARM_R, ARM_Z - 0.038)
+        limb(P, [root, mid, tip], 0.062, 0.046, 'dark')
+        # THE PADDLE - the pale end a body is pushed by, turned to face along
+        # the arm's own direction so it presents its face to whoever is in
+        # front of it. This is the worn thing on this body (wear 0.38 is about
+        # these three objects and nothing else), and it is pale because it is
+        # the second half of the count: three paddles, three rungs on the drum.
+        # PASS 2: A FLAT UPRIGHT PLATE, NOT A DISC. At pass 1 these were discs
+        # of r 0.145 on the ends of round bars and the front view read as a
+        # BARBELL - three pale coins on three sticks, which is a gymnasium and
+        # not a gate. A disc also says nothing about which way it turns. A
+        # plate standing on its edge is what a real turnstile arm ends in, it
+        # is taller than it is wide so it reads as a thing a body is stopped
+        # by, and it keeps a silhouette at every angle instead of collapsing
+        # to a line when seen edge-on.
+        P.raw(aim(L.box(0.046, 0.250, 0.300),
+                  Vector((PX_POST + dx * (ARM_R + 0.020),
+                          PY_POST + dy * (ARM_R + 0.020), ARM_Z - 0.030)),
+                  Vector((dx, dy, 0.0))), 'bone')
+        # a dark strap across each plate's face, same as the token's bar, so
+        # the plates and the token read as one trade's worth of kit
+        P.raw(aim(L.box(0.024, 0.212, 0.038),
+                  Vector((PX_POST + dx * (ARM_R + 0.046),
+                          PY_POST + dy * (ARM_R + 0.046), ARM_Z - 0.030)),
+                  Vector((dx, dy, 0.0))), 'dark')
+    _close("arms")
+
+    # --------------------------------------------------------------- THE DRUM
+    # THE COUNT, and it is on the post-head where the fight cannot hide it.
+    # Three dark rungs across a pale drum, one per arm, so a third of a turn is
+    # a readable event rather than a number in a log. The Blower's bag taught
+    # this: put the clock on the body where the party can reach it.
+    _open()
+    P.add(L.cone(0.098, 0.192, 0.062, 20), 'dark', loc=(PX_POST, PY_POST, 1.952))
+    P.add(L.cone(0.196, 0.196, 0.168, 24), 'bone', loc=(PX_POST, PY_POST, 2.062))
+    # the three rungs, proud of the drum so they read as cut into it rather
+    # than as painted on - a groove has a silhouette, a stripe does not
+    for deg in (60.0, 180.0, 300.0):
+        a = math.radians(deg)
+        P.raw(aim(L.box(0.034, 0.200, 0.034),
+                  Vector((PX_POST + math.cos(a) * 0.186,
+                          PY_POST + math.sin(a) * 0.186, 2.062)),
+                  Vector((math.cos(a), math.sin(a), 0.0))), 'dark')
+    # a flat cap on top, dark, so the drum has a lid and does not read as an
+    # open vessel (the Pitman's open fault, answered in advance)
+    P.add(L.cone(0.196, 0.168, 0.044, 24), 'dark', loc=(PX_POST, PY_POST, 2.168))
+    _close("drum")
+
+    return P
+
+
+BUILDERS.update({"changer": changer})

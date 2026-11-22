@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -144,38 +144,14 @@
    "air_x": 2.35,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     158,
-     156
-    ],
-    "side": [
-     200,
-     201
-    ],
-    "back": [
-     156,
-     158
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 156,
@@ -308,38 +284,14 @@
    "air_x": 0.17,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     11,
-     11
-    ],
-    "side": [
-     102,
-     105
-    ],
-    "back": [
-     11,
-     11
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
@@ -472,38 +424,14 @@
    "air_x": 0.98,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     65,
-     65
-    ],
-    "side": [
-     111,
-     113
-    ],
-    "back": [
-     65,
-     65
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 65,
@@ -636,38 +564,14 @@
    "air_x": 2.23,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     150,
-     149
-    ],
-    "side": [
-     167,
-     167
-    ],
-    "back": [
-     149,
-     150
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 149,
@@ -800,38 +704,14 @@
    "air_x": 1.54,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     103,
-     103
-    ],
-    "side": [
-     147,
-     145
-    ],
-    "back": [
-     103,
-     103
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 103,
@@ -964,38 +844,14 @@
    "air_x": 0.21,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     13,
-     11
-    ],
-    "side": [
-     134,
-     136
-    ],
-    "back": [
-     12,
-     14
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
@@ -1128,38 +984,14 @@
    "air_x": 1.85,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     125,
-     124
-    ],
-    "side": [
-     193,
-     195
-    ],
-    "back": [
-     124,
-     125
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
@@ -1292,38 +1124,14 @@
    "air_x": 1.34,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     90,
-     90
-    ],
-    "side": [
-     190,
-     192
-    ],
-    "back": [
-     90,
-     90
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
@@ -1456,38 +1264,14 @@
    "air_x": 1.08,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     72,
-     72
-    ],
-    "side": [
-     175,
-     177
-    ],
-    "back": [
-     72,
-     73
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 72,
@@ -1620,38 +1404,14 @@
    "air_x": 0.24,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     15,
-     16
-    ],
-    "side": [
-     144,
-     144
-    ],
-    "back": [
-     16,
-     15
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 15,
@@ -1784,38 +1544,14 @@
    "air_x": 0.49,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     32,
-     33
-    ],
-    "side": [
-     161,
-     163
-    ],
-    "back": [
-     33,
-     33
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 32,
@@ -1948,38 +1684,14 @@
    "air_x": 0.63,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     42,
-     42
-    ],
-    "side": [
-     122,
-     124
-    ],
-    "back": [
-     42,
-     42
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
@@ -2112,38 +1824,14 @@
    "air_x": 1.02,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     68,
-     68
-    ],
-    "side": [
-     168,
-     170
-    ],
-    "back": [
-     68,
-     68
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
@@ -2300,38 +1988,14 @@
    "self_seen_worst": 0.7057,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
-    "front": [
-     8,
-     8
-    ],
-    "side": [
-     135,
-     134
-    ],
-    "back": [
-     8,
-     8
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
@@ -2466,38 +2130,14 @@
    "ground_from": "measured this run",
    "proving_views": 3,
    "air_px": {
-    "front": [
-     94,
-     93
-    ],
-    "side": [
-     89,
-     91
-    ],
-    "back": [
-     93,
-     94
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 89,
@@ -2632,38 +2272,14 @@
    "ground_from": "measured this run",
    "proving_views": 3,
    "air_px": {
-    "front": [
-     136,
-     136
-    ],
-    "side": [
-     139,
-     141
-    ],
-    "back": [
-     136,
-     136
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 136,
@@ -2796,38 +2412,14 @@
    "air_x": 1.56,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     105,
-     105
-    ],
-    "side": [
-     174,
-     177
-    ],
-    "back": [
-     105,
-     105
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 105,
@@ -2960,38 +2552,14 @@
    "air_x": 1.12,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     75,
-     76
-    ],
-    "side": [
-     113,
-     116
-    ],
-    "back": [
-     76,
-     75
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 75,
@@ -3124,38 +2692,14 @@
    "air_x": 1.34,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     90,
-     90
-    ],
-    "side": [
-     179,
-     182
-    ],
-    "back": [
-     90,
-     90
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
@@ -3288,38 +2832,14 @@
    "air_x": 0.76,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     50,
-     50
-    ],
-    "side": [
-     47,
-     50
-    ],
-    "back": [
-     50,
-     50
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 47,
@@ -3452,38 +2972,14 @@
    "air_x": 1.24,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     83,
-     84
-    ],
-    "side": [
-     99,
-     101
-    ],
-    "back": [
-     84,
-     83
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 83,
@@ -3616,38 +3112,14 @@
    "air_x": 0.48,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     31,
-     32
-    ],
-    "side": [
-     122,
-     124
-    ],
-    "back": [
-     32,
-     32
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 31,
@@ -3802,38 +3274,14 @@
    "air_x": 1.13,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     76,
-     76
-    ],
-    "side": [
-     169,
-     171
-    ],
-    "back": [
-     76,
-     76
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 76,
@@ -3988,38 +3436,14 @@
    "air_x": 1.93,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     130,
-     128
-    ],
-    "side": [
-     45,
-     45
-    ],
-    "back": [
-     127,
-     130
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 45,
@@ -4175,38 +3599,14 @@
    },
    "proving_views": 3,
    "air_px": {
-    "front": [
-     69,
-     68
-    ],
-    "side": [
-     101,
-     103
-    ],
-    "back": [
-     68,
-     68
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
@@ -4361,38 +3761,14 @@
    "air_x": 0.15,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     9,
-     8
-    ],
-    "side": [
-     117,
-     119
-    ],
-    "back": [
-     8,
-     9
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
@@ -4571,38 +3947,14 @@
    "self_seen_worst": 0.574,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
-    "front": [
-     20,
-     17
-    ],
-    "side": [
-     95,
-     98
-    ],
-    "back": [
-     17,
-     20
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 17,
@@ -4735,38 +4087,14 @@
    "air_x": 1.25,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     84,
-     85
-    ],
-    "side": [
-     184,
-     187
-    ],
-    "back": [
-     84,
-     84
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 84,
@@ -4921,38 +4249,14 @@
    "air_x": 1.48,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     100,
-     100
-    ],
-    "side": [
-     140,
-     142
-    ],
-    "back": [
-     100,
-     99
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 99,
@@ -5107,38 +4411,14 @@
    "air_x": 1.86,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     126,
-     124
-    ],
-    "side": [
-     168,
-     166
-    ],
-    "back": [
-     124,
-     126
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
@@ -5293,38 +4573,14 @@
    "air_x": 1.71,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     115,
-     114
-    ],
-    "side": [
-     155,
-     157
-    ],
-    "back": [
-     114,
-     115
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 114,
@@ -5457,38 +4713,14 @@
    "air_x": 1.38,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     93,
-     93
-    ],
-    "side": [
-     112,
-     110
-    ],
-    "back": [
-     93,
-     93
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 93,
@@ -5643,38 +4875,14 @@
    "air_x": 0.45,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     29,
-     27
-    ],
-    "side": [
-     124,
-     125
-    ],
-    "back": [
-     28,
-     29
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
@@ -5829,38 +5037,14 @@
    "air_x": 1.21,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     81,
-     81
-    ],
-    "side": [
-     21,
-     24
-    ],
-    "back": [
-     81,
-     81
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 21,
@@ -6015,38 +5199,14 @@
    "air_x": 2.08,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     140,
-     139
-    ],
-    "side": [
-     138,
-     141
-    ],
-    "back": [
-     139,
-     141
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 138,
@@ -6201,38 +5361,14 @@
    "air_x": 2.36,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     159,
-     157
-    ],
-    "side": [
-     153,
-     153
-    ],
-    "back": [
-     157,
-     159
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 153,
@@ -6387,38 +5523,14 @@
    "air_x": 1.84,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     124,
-     124
-    ],
-    "side": [
-     98,
-     101
-    ],
-    "back": [
-     124,
-     124
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 98,
@@ -6573,38 +5685,14 @@
    "air_x": 0.74,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     49,
-     47
-    ],
-    "side": [
-     27,
-     30
-    ],
-    "back": [
-     47,
-     49
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
@@ -6783,38 +5871,14 @@
    "self_seen_worst": 0.9967,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
-    "front": [
-     43,
-     43
-    ],
-    "side": [
-     50,
-     52
-    ],
-    "back": [
-     43,
-     42
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
@@ -6947,38 +6011,14 @@
    "air_x": 1.91,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     128,
-     128
-    ],
-    "side": [
-     153,
-     152
-    ],
-    "back": [
-     129,
-     128
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 128,
@@ -7134,38 +6174,14 @@
    },
    "proving_views": 3,
    "air_px": {
-    "front": [
-     57,
-     58
-    ],
-    "side": [
-     27,
-     29
-    ],
-    "back": [
-     58,
-     57
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
@@ -7320,38 +6336,14 @@
    "air_x": 1.37,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     92,
-     92
-    ],
-    "side": [
-     0,
-     2
-    ],
-    "back": [
-     92,
-     92
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 3,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 0,
@@ -7530,38 +6522,14 @@
    "self_seen_worst": 0.9793,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
    "air_px": {
-    "front": [
-     8,
-     8
-    ],
-    "side": [
-     157,
-     154
-    ],
-    "back": [
-     8,
-     8
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
@@ -7694,38 +6662,14 @@
    "air_x": 1.99,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     134,
-     134
-    ],
-    "side": [
-     123,
-     126
-    ],
-    "back": [
-     135,
-     134
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 123,
@@ -7880,38 +6824,14 @@
    "air_x": 2.1,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     142,
-     142
-    ],
-    "side": [
-     146,
-     144
-    ],
-    "back": [
-     142,
-     142
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 142,
@@ -8066,38 +6986,14 @@
    "air_x": 0.7,
    "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
    "air_px": {
-    "front": [
-     46,
-     43
-    ],
-    "side": [
-     98,
-     98
-    ],
-    "back": [
-     44,
-     46
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 43,
@@ -8254,38 +7150,14 @@
    "ground_from": "measured this run",
    "proving_views": 3,
    "air_px": {
-    "front": [
-     91,
-     88
-    ],
-    "side": [
-     143,
-     143
-    ],
-    "back": [
-     88,
-     91
-    ]
+    "front": null,
+    "side": null,
+    "back": null
    },
    "frame_edge_disk": {
-    "front": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "side": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    },
-    "back": {
-     "top": 0,
-     "bottom": 0,
-     "left": 0,
-     "right": 0
-    }
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
    },
    "air_px_eps": 0.02,
    "air_px_min": 88,
@@ -8420,17 +7292,159 @@
    "ground_from": "measured this run",
    "proving_views": 3,
    "air_px": {
+    "front": null,
+    "side": null,
+    "back": null
+   },
+   "frame_edge_disk": {
+    "front": "MISSING FILE",
+    "side": "MISSING FILE",
+    "back": "MISSING FILE"
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 118,
+   "air_px_tightest_view": "side"
+  },
+  "changer": {
+   "creature_h": 2.72,
+   "hero_h": 2.45,
+   "ratio": 1.11,
+   "pair_w": 4.45,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.153,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 50318,
+      "vis": 50318,
+      "delta": 57362,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43685,
+      "vis": 43685,
+      "delta": 53236,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 43814,
+      "vis": 43814,
+      "delta": 53881,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37776,
+      "vis": 37776,
+      "delta": 43856,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 50790,
+      "vis": 50790,
+      "delta": 61596,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 50308,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 276640,
+     "shadow_px": 4111,
+     "mean": 0.3756,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 4051,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 274360,
+     "shadow_px": 3809,
+     "mean": 0.3634,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 4127,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 276640,
+     "shadow_px": 3976,
+     "mean": 0.3615,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 3942,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "air_px": {
     "front": [
-     154,
-     150
+     77,
+     77
     ],
     "side": [
-     121,
-     118
+     46,
+     48
     ],
     "back": [
-     149,
-     155
+     77,
+     77
     ]
    },
    "frame_edge_disk": {
@@ -8454,11 +7468,204 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 118,
+   "air_px_min": 46,
    "air_px_tightest_view": "side"
   }
  },
- "errors": [],
+ "errors": [
+  "[carried] beadle/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] beadle/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] beadle/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] beadle: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] bellman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] bellman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] bellman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] bellman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] blower/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] blower/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] blower/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] blower: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] boiler/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] boiler/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] boiler/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] boiler: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] comfitmaker/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] comfitmaker/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] comfitmaker/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] comfitmaker: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] cook/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] cook/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] cook/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] cook: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] dauber/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dauber/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dauber/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dauber: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] drillmaster/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drillmaster/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drillmaster/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drillmaster: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] drover/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drover/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drover/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] drover: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] dyer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dyer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dyer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] dyer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] fenman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fenman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fenman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fenman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] ferryman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ferryman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ferryman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ferryman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] fuller/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fuller/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fuller/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] fuller: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] gaoler/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] gaoler/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] gaoler/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] gaoler: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] greener/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] greener/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] greener/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] greener: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] hooper/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hooper/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hooper/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hooper: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] hurdleman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hurdleman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hurdleman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] hurdleman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] jointer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] jointer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] jointer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] jointer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] leech/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] leech/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] leech/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] leech: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] loader/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] loader/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] loader/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] loader: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] moulder/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] moulder/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] moulder/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] moulder: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] paviser/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] paviser/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] paviser/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] paviser: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] pitman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pitman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pitman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pitman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] porter/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] porter/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] porter/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] porter: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] pressman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pressman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pressman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] pressman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] quartermaster/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] quartermaster/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] quartermaster/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] quartermaster: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] rammer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] rammer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] rammer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] rammer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] ratcatcher/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ratcatcher/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ratcatcher/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] ratcatcher: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] reeve/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] reeve/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] reeve/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] reeve: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] relief/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] relief/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] relief/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] relief: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] scraper/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scraper/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scraper/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scraper: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] scrapwright/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scrapwright/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scrapwright/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] scrapwright: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] sealer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sealer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sealer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sealer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] sexton/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sexton/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sexton/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sexton: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] sluicekeeper/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sluicekeeper/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sluicekeeper/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sluicekeeper: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] snarer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snarer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snarer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snarer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] snuffer/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] snuffer_chibi/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer_chibi/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer_chibi/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] snuffer_chibi: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] sower/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sower/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sower/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] sower: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] stackman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stackman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stackman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stackman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] stoker/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stoker/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stoker/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] stoker: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] strickler/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] strickler/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] strickler/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] strickler: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] tallyman/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] tallyman_chibi/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman_chibi/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman_chibi/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tallyman_chibi: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] tanner/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tanner/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tanner/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tanner: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] tapster/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tapster/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tapster/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tapster: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] tither/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tither/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tither/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] tither: no readable alpha in back,front,side - an air measurement over nothing is RED, not green",
+  "[carried] winder/back: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] winder/front: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] winder/side: MISSING FILE - the view this row vouches for is not on disk at the canonical path",
+  "[carried] winder: no readable alpha in back,front,side - an air measurement over nothing is RED, not green"
+ ],
  "blind_views": [],
  "stale_margin": [],
  "margin_derived": [
@@ -8623,22 +7830,121 @@
  },
  "unproved_cells": [],
  "measured": [
-  "blower"
+  "changer"
  ],
  "asked": [
-  "blower"
+  "changer"
  ],
  "blank_check": {
   "files": 3,
   "failures": []
  },
  "red_summary": {
-  "rows": [],
-  "shipped_red": [],
-  "retired_red": [],
-  "ok_shipped": true
+  "rows": [
+   "beadle",
+   "bellman",
+   "blower",
+   "boiler",
+   "comfitmaker",
+   "cook",
+   "dauber",
+   "drillmaster",
+   "drover",
+   "dyer",
+   "fenman",
+   "ferryman",
+   "fuller",
+   "gaoler",
+   "greener",
+   "hooper",
+   "hurdleman",
+   "jointer",
+   "leech",
+   "loader",
+   "moulder",
+   "paviser",
+   "pitman",
+   "porter",
+   "pressman",
+   "quartermaster",
+   "rammer",
+   "ratcatcher",
+   "reeve",
+   "relief",
+   "scraper",
+   "scrapwright",
+   "sealer",
+   "sexton",
+   "sluicekeeper",
+   "snarer",
+   "snuffer",
+   "snuffer_chibi",
+   "sower",
+   "stackman",
+   "stoker",
+   "strickler",
+   "tallyman",
+   "tallyman_chibi",
+   "tanner",
+   "tapster",
+   "tither",
+   "winder"
+  ],
+  "shipped_red": [
+   "beadle",
+   "bellman",
+   "blower",
+   "boiler",
+   "comfitmaker",
+   "cook",
+   "dauber",
+   "drillmaster",
+   "drover",
+   "dyer",
+   "fenman",
+   "ferryman",
+   "fuller",
+   "gaoler",
+   "greener",
+   "hooper",
+   "hurdleman",
+   "jointer",
+   "leech",
+   "loader",
+   "moulder",
+   "paviser",
+   "pitman",
+   "porter",
+   "pressman",
+   "quartermaster",
+   "rammer",
+   "ratcatcher",
+   "reeve",
+   "relief",
+   "scraper",
+   "scrapwright",
+   "sealer",
+   "sexton",
+   "sluicekeeper",
+   "snarer",
+   "snuffer",
+   "sower",
+   "stackman",
+   "stoker",
+   "strickler",
+   "tallyman",
+   "tanner",
+   "tapster",
+   "tither",
+   "winder"
+  ],
+  "retired_red": [
+   "snuffer_chibi",
+   "tallyman_chibi"
+  ],
+  "ok_shipped": false
  },
- "verdict": "GREEN",
+ "verdict": "RED",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (48), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (49), re-derived from stored measurements; 1 of them rendered this run"
 }

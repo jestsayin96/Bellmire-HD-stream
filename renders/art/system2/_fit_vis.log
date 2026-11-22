@@ -1,296 +1,252 @@
-00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
-13:43:46 | INFO: Data are loaded, start creating Blender stuff
-13:43:46 | INFO: Blender create Mesh node Cube.125
-13:43:46 | INFO: Blender create Mesh node Cube.126
-13:43:46 | INFO: Blender create Mesh node PrototypePete_body.020
-13:43:46 | INFO: Blender create Mesh node PrototypePete_head.001
-13:43:46 | INFO: Blender create Mesh node Cube.128
-13:43:46 | INFO: Blender create Mesh node Cube.127
-13:43:46 | INFO: Blender create Mesh node Cube.003
-13:43:46 | INFO: Blender create Mesh node Cylinder.280
-13:43:46 | INFO: Blender create Mesh node Cylinder.005
-13:43:46 | INFO: Blender create Mesh node Cylinder.010
-13:43:46 | INFO: Blender create Mesh node Cylinder.022
-13:43:46 | INFO: Blender create Mesh node Cube.11839
-13:43:46 | INFO: Blender create Mesh node Cube.12993
-13:43:46 | INFO: Blender create Mesh node Cube.124
-13:43:46 | INFO: Blender create Mesh node Plane.004
-13:43:47 | INFO: glTF import finished in 0.49s
-C:\hd adventure\bellmire-art\tools\art\weaponfit.py:254: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
-  scene.world.use_nodes = True
-13:43:47 | INFO: Data are loaded, start creating Blender stuff
-13:43:47 | INFO: Blender create Mesh node Cube.4512
-13:43:47 | INFO: glTF import finished in 0.00s
-00:02.921  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_front.png'
-00:03.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_front.png'
-00:03.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_front.png'
-00:03.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_side.png'
-00:03.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_side.png'
-00:03.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_side.png'
-00:03.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_back.png'
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+17:46:18 | INFO: Data are loaded, start creating Blender stuff
+17:46:18 | INFO: Blender create Mesh node Cube.125
+17:46:18 | INFO: Blender create Mesh node Cube.126
+17:46:18 | INFO: Blender create Mesh node PrototypePete_body.020
+17:46:18 | INFO: Blender create Mesh node PrototypePete_head.001
+17:46:18 | INFO: Blender create Mesh node Cube.128
+17:46:18 | INFO: Blender create Mesh node Cube.127
+17:46:18 | INFO: Blender create Mesh node Cube.003
+17:46:18 | INFO: Blender create Mesh node Cylinder.280
+17:46:18 | INFO: Blender create Mesh node Cylinder.005
+17:46:18 | INFO: Blender create Mesh node Cylinder.010
+17:46:18 | INFO: Blender create Mesh node Cylinder.022
+17:46:18 | INFO: Blender create Mesh node Cube.11839
+17:46:18 | INFO: Blender create Mesh node Cube.12993
+17:46:18 | INFO: Blender create Mesh node Cube.124
+17:46:18 | INFO: Blender create Mesh node Plane.004
+17:46:18 | INFO: glTF import finished in 0.49s
+WEAPONFIT engine carry read from C:\hd adventure\jests-hd-medieval-adventure\scripts\gear.gd: {"crossbow": {"scale": 1.0, "engine_rot_deg": ["-90", "0", "90"]}, "staff": {"scale": 1.9, "engine_rot_deg": ["0", "0", "90"]}}
+17:46:18 | INFO: Data are loaded, start creating Blender stuff
+17:46:18 | INFO: Blender create Mesh node Cube.4512
+17:46:18 | INFO: glTF import finished in 0.00s
+00:02.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_front.png'
+00:02.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_front.png'
+00:03.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_front.png'
+00:03.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_side.png'
+00:03.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_side.png'
+00:03.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_side.png'
+00:03.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_back.png'
 00:03.921  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_back.png'
-00:04.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_back.png'
-00:04.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_body_side_offhand.png'
-00:04.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_common_side_offhand.png'
-00:04.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_side_offhand.png'
-13:43:49 | INFO: Data are loaded, start creating Blender stuff
-13:43:49 | INFO: Blender create Mesh node Cube.4514
-13:43:49 | INFO: glTF import finished in 0.00s
-00:04.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_front.png'
-00:04.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_front.png'
-00:04.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_side.png'
-00:05.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_side.png'
-00:05.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_back.png'
-00:05.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_back.png'
-00:05.468  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_side_offhand.png'
-00:05.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_side_offhand.png'
-13:43:50 | INFO: Data are loaded, start creating Blender stuff
-13:43:50 | INFO: Blender create Mesh node Cube.4513
-13:43:50 | INFO: glTF import finished in 0.00s
-00:05.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_front.png'
-00:05.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_front.png'
-00:06.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_side.png'
-00:06.171  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_side.png'
-00:06.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_back.png'
-00:06.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_back.png'
-00:06.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_side_offhand.png'
-00:06.718  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_side_offhand.png'
-13:43:51 | INFO: Data are loaded, start creating Blender stuff
-13:43:51 | INFO: Blender create Mesh node Cube.4408
-13:43:51 | INFO: glTF import finished in 0.00s
-00:06.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_front.png'
-00:07.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_front.png'
-00:07.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_side.png'
-00:07.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_side.png'
-00:07.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_back.png'
-00:07.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_back.png'
-00:07.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_side_offhand.png'
-00:07.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_side_offhand.png'
-13:43:52 | INFO: Data are loaded, start creating Blender stuff
-13:43:52 | INFO: Blender create Mesh node Cube.4410
-13:43:52 | INFO: glTF import finished in 0.00s
-00:07.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_front.png'
-00:08.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_front.png'
-00:08.218  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_side.png'
-00:08.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_side.png'
-00:08.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_back.png'
-00:08.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_back.png'
-00:08.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_side_offhand.png'
-00:08.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_side_offhand.png'
-13:43:53 | INFO: Data are loaded, start creating Blender stuff
-13:43:53 | INFO: Blender create Mesh node Cube.4409
-13:43:53 | INFO: glTF import finished in 0.01s
-00:09.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_front.png'
-00:09.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_front.png'
-00:09.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_side.png'
-00:09.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_side.png'
-00:09.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_back.png'
-00:09.687  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_back.png'
-00:09.843  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_side_offhand.png'
-00:09.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_side_offhand.png'
-13:43:55 | INFO: Data are loaded, start creating Blender stuff
-13:43:55 | INFO: Blender create Mesh node Cube.4461
-13:43:55 | INFO: glTF import finished in 0.00s
-00:10.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_front.png'
-00:10.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_front.png'
-00:10.390  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_side.png'
-00:10.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_side.png'
-00:10.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_back.png'
-00:10.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_back.png'
-00:10.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_side_offhand.png'
-00:11.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_side_offhand.png'
-13:43:56 | INFO: Data are loaded, start creating Blender stuff
-13:43:56 | INFO: Blender create Mesh node Cube.4463
-13:43:56 | INFO: glTF import finished in 0.00s
-00:11.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_front.png'
-00:11.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_front.png'
-00:11.468  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_side.png'
-00:11.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_side.png'
-00:11.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_back.png'
-00:11.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_back.png'
-00:12.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_side_offhand.png'
-00:12.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_side_offhand.png'
-13:43:57 | INFO: Data are loaded, start creating Blender stuff
-13:43:57 | INFO: Blender create Mesh node Cube.4462
-13:43:57 | INFO: glTF import finished in 0.01s
-00:12.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_front.png'
-00:12.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_front.png'
-00:12.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_side.png'
-00:12.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_side.png'
-00:12.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_back.png'
-00:12.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_back.png'
-00:13.093  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_side_offhand.png'
-00:13.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_side_offhand.png'
-13:43:58 | INFO: Data are loaded, start creating Blender stuff
-13:43:58 | INFO: Blender create Mesh node Cube.4450
-13:43:58 | INFO: glTF import finished in 0.00s
-00:13.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_front.png'
-00:13.468  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_front.png'
-00:13.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_side.png'
-00:13.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_side.png'
-00:13.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_back.png'
-00:14.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_back.png'
-00:14.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_side_offhand.png'
-00:14.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_side_offhand.png'
-13:43:59 | INFO: Data are loaded, start creating Blender stuff
-13:43:59 | INFO: Blender create Mesh node Cube.4452
-13:43:59 | INFO: glTF import finished in 0.00s
-00:14.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_front.png'
-00:14.562  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_front.png'
-00:14.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_side.png'
-00:14.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_side.png'
-00:14.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_back.png'
-00:15.093  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_back.png'
-00:15.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_side_offhand.png'
-00:15.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_side_offhand.png'
-13:44:00 | INFO: Data are loaded, start creating Blender stuff
-13:44:00 | INFO: Blender create Mesh node Cube.4451
-13:44:00 | INFO: glTF import finished in 0.00s
-00:15.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_front.png'
-00:15.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_front.png'
-00:15.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_side.png'
-00:15.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_side.png'
-00:16.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_back.png'
-00:16.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_back.png'
-00:16.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_side_offhand.png'
-00:16.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_side_offhand.png'
-13:44:01 | INFO: Data are loaded, start creating Blender stuff
-13:44:01 | INFO: Blender create Mesh node Cube.4506
-13:44:01 | INFO: glTF import finished in 0.00s
-00:16.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_front.png'
-00:16.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_front.png'
-00:16.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_side.png'
-00:16.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_side.png'
-00:17.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_back.png'
-00:17.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_back.png'
-00:17.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_side_offhand.png'
-00:17.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_side_offhand.png'
-13:44:02 | INFO: Data are loaded, start creating Blender stuff
-13:44:02 | INFO: Blender create Mesh node Cube.4508
-13:44:02 | INFO: glTF import finished in 0.00s
-00:17.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_front.png'
-00:17.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_front.png'
-00:17.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_side.png'
-00:18.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_side.png'
-00:18.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_back.png'
-00:18.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_back.png'
-00:18.390  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_side_offhand.png'
-00:18.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_side_offhand.png'
-13:44:03 | INFO: Data are loaded, start creating Blender stuff
-13:44:03 | INFO: Blender create Mesh node Cube.4507
-13:44:03 | INFO: glTF import finished in 0.00s
-00:18.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_front.png'
-00:18.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_front.png'
-00:18.921  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_side.png'
-00:19.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_side.png'
-00:19.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_back.png'
-00:19.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_back.png'
-00:19.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_side_offhand.png'
-00:19.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_side_offhand.png'
-13:44:04 | INFO: Data are loaded, start creating Blender stuff
-13:44:04 | INFO: Blender create Mesh node Cube.4447
-13:44:04 | INFO: glTF import finished in 0.00s
-00:19.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_front.png'
-00:19.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_front.png'
-00:19.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_side.png'
-00:20.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_side.png'
-00:20.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_back.png'
-00:20.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_back.png'
-00:20.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_side_offhand.png'
-00:20.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_side_offhand.png'
-13:44:05 | INFO: Data are loaded, start creating Blender stuff
-13:44:05 | INFO: Blender create Mesh node Cube.4449
-13:44:05 | INFO: glTF import finished in 0.00s
-00:20.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_front.png'
-00:20.843  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_front.png'
-00:20.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_side.png'
-00:21.093  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_side.png'
-00:21.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_back.png'
-00:21.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_back.png'
-00:21.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_side_offhand.png'
-00:21.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_side_offhand.png'
-13:44:06 | INFO: Data are loaded, start creating Blender stuff
-13:44:06 | INFO: Blender create Mesh node Cube.4448
-13:44:06 | INFO: glTF import finished in 0.00s
-00:21.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_front.png'
-00:21.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_front.png'
-00:22.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_side.png'
-00:22.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_side.png'
-00:22.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_back.png'
-00:22.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_back.png'
-00:22.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_side_offhand.png'
-00:22.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_side_offhand.png'
-13:44:07 | INFO: Data are loaded, start creating Blender stuff
-13:44:07 | INFO: Blender create Mesh node Cube.4405
-13:44:07 | INFO: glTF import finished in 0.00s
-00:22.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_front.png'
-00:22.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_front.png'
-00:23.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_side.png'
-00:23.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_side.png'
-00:23.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_back.png'
-00:23.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_back.png'
-00:23.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_side_offhand.png'
-00:23.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_side_offhand.png'
-13:44:08 | INFO: Data are loaded, start creating Blender stuff
-13:44:08 | INFO: Blender create Mesh node Cube.4407
-13:44:08 | INFO: glTF import finished in 0.00s
-00:23.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_front.png'
-00:23.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_front.png'
-00:23.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_side.png'
-00:24.093  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_side.png'
-00:24.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_back.png'
-00:24.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_back.png'
-00:24.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_side_offhand.png'
-00:24.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_side_offhand.png'
-13:44:09 | INFO: Data are loaded, start creating Blender stuff
-13:44:09 | INFO: Blender create Mesh node Cube.4406
-13:44:09 | INFO: glTF import finished in 0.00s
-00:24.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_front.png'
-00:24.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_front.png'
-00:24.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_side.png'
-00:25.093  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_side.png'
-00:25.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_back.png'
-00:25.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_back.png'
-00:25.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_side_offhand.png'
-00:25.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_side_offhand.png'
-13:44:10 | INFO: Data are loaded, start creating Blender stuff
-13:44:10 | INFO: Blender create Mesh node Cylinder.298
-13:44:10 | INFO: glTF import finished in 0.00s
-00:25.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_front.png'
-00:25.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_front.png'
-00:25.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_side.png'
-00:26.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_side.png'
-00:26.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_back.png'
-00:26.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_back.png'
-00:26.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_side_offhand.png'
-00:26.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_side_offhand.png'
-13:44:11 | INFO: Data are loaded, start creating Blender stuff
-13:44:11 | INFO: Blender create Mesh node Cube.4504
-13:44:11 | INFO: glTF import finished in 0.00s
-00:26.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_front.png'
-00:26.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_front.png'
-00:27.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_side.png'
-00:27.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_side.png'
-00:27.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_back.png'
-00:27.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_back.png'
-00:27.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_side_offhand.png'
-00:27.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_side_offhand.png'
-13:44:12 | INFO: Data are loaded, start creating Blender stuff
-13:44:12 | INFO: Blender create Mesh node Cube.4503
-13:44:12 | INFO: glTF import finished in 0.00s
-00:27.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_front.png'
-00:27.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_front.png'
-00:28.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_side.png'
-00:28.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_side.png'
-00:28.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_back.png'
-00:28.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_back.png'
-00:28.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_side_offhand.png'
-00:28.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_side_offhand.png'
-WEAPONFIT verdict=FAIL cells=24 blanks=0 frameclips=0 blind=1 errors=0
-  BLIND crossbow_common: only 1 of 3 views show the weapon (seen>=0.15 AND vis>=900 px) - front seen 0.395 vis 726, side seen 0.664 vis 2039, back seen 0.097 vis 175
+00:04.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_common_back.png'
+17:46:20 | INFO: Data are loaded, start creating Blender stuff
+17:46:20 | INFO: Blender create Mesh node Cube.4514
+17:46:20 | INFO: glTF import finished in 0.00s
+00:04.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_front.png'
+00:04.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_front.png'
+00:04.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_side.png'
+00:04.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_side.png'
+00:04.843  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_uncommon_back.png'
+00:04.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_uncommon_back.png'
+17:46:21 | INFO: Data are loaded, start creating Blender stuff
+17:46:21 | INFO: Blender create Mesh node Cube.4513
+17:46:21 | INFO: glTF import finished in 0.00s
+00:05.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_front.png'
+00:05.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_front.png'
+00:05.468  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_side.png'
+00:05.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_side.png'
+00:05.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\sword_rare_back.png'
+00:05.921  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_sword_rare_back.png'
+17:46:22 | INFO: Data are loaded, start creating Blender stuff
+17:46:22 | INFO: Blender create Mesh node Cube.4408
+17:46:22 | INFO: glTF import finished in 0.00s
+00:06.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_front.png'
+00:06.218  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_front.png'
+00:06.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_side.png'
+00:06.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_side.png'
+00:06.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_common_back.png'
+00:06.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_common_back.png'
+17:46:23 | INFO: Data are loaded, start creating Blender stuff
+17:46:23 | INFO: Blender create Mesh node Cube.4410
+17:46:23 | INFO: glTF import finished in 0.00s
+00:06.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_front.png'
+00:07.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_front.png'
+00:07.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_side.png'
+00:07.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_side.png'
+00:07.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_uncommon_back.png'
+00:07.718  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_uncommon_back.png'
+17:46:24 | INFO: Data are loaded, start creating Blender stuff
+17:46:24 | INFO: Blender create Mesh node Cube.4409
+17:46:24 | INFO: glTF import finished in 0.00s
+00:07.921  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_front.png'
+00:08.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_front.png'
+00:08.218  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_side.png'
+00:08.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_side.png'
+00:08.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axe_rare_back.png'
+00:08.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axe_rare_back.png'
+17:46:25 | INFO: Data are loaded, start creating Blender stuff
+17:46:25 | INFO: Blender create Mesh node Cube.4461
+17:46:25 | INFO: glTF import finished in 0.00s
+00:08.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_front.png'
+00:08.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_front.png'
+00:09.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_side.png'
+00:09.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_side.png'
+00:09.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_common_back.png'
+00:09.562  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_common_back.png'
+17:46:26 | INFO: Data are loaded, start creating Blender stuff
+17:46:26 | INFO: Blender create Mesh node Cube.4463
+17:46:26 | INFO: glTF import finished in 0.00s
+00:09.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_front.png'
+00:09.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_front.png'
+00:10.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_side.png'
+00:10.171  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_side.png'
+00:10.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_uncommon_back.png'
+00:10.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_uncommon_back.png'
+17:46:27 | INFO: Data are loaded, start creating Blender stuff
+17:46:27 | INFO: Blender create Mesh node Cube.4462
+17:46:27 | INFO: glTF import finished in 0.01s
+00:10.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_front.png'
+00:10.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_front.png'
+00:10.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_side.png'
+00:11.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_side.png'
+00:11.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\hammer_rare_back.png'
+00:11.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_hammer_rare_back.png'
+17:46:28 | INFO: Data are loaded, start creating Blender stuff
+17:46:28 | INFO: Blender create Mesh node Cube.4450
+17:46:28 | INFO: glTF import finished in 0.00s
+00:11.562  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_front.png'
+00:11.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_front.png'
+00:11.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_side.png'
+00:12.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_side.png'
+00:12.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_common_back.png'
+00:12.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_common_back.png'
+17:46:29 | INFO: Data are loaded, start creating Blender stuff
+17:46:29 | INFO: Blender create Mesh node Cube.4452
+17:46:29 | INFO: glTF import finished in 0.00s
+00:12.468  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_front.png'
+00:12.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_front.png'
+00:12.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_side.png'
+00:12.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_side.png'
+00:13.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_uncommon_back.png'
+00:13.171  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_uncommon_back.png'
+17:46:29 | INFO: Data are loaded, start creating Blender stuff
+17:46:29 | INFO: Blender create Mesh node Cube.4451
+17:46:29 | INFO: glTF import finished in 0.00s
+00:13.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_front.png'
+00:13.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_front.png'
+00:13.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_side.png'
+00:13.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_side.png'
+00:13.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\dagger_rare_back.png'
+00:14.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_dagger_rare_back.png'
+17:46:30 | INFO: Data are loaded, start creating Blender stuff
+17:46:30 | INFO: Blender create Mesh node Cube.4506
+17:46:30 | INFO: glTF import finished in 0.00s
+00:14.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_front.png'
+00:14.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_front.png'
+00:14.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_side.png'
+00:14.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_side.png'
+00:14.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_common_back.png'
+00:14.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_common_back.png'
+17:46:31 | INFO: Data are loaded, start creating Blender stuff
+17:46:31 | INFO: Blender create Mesh node Cube.4508
+17:46:31 | INFO: glTF import finished in 0.00s
+00:15.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_front.png'
+00:15.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_front.png'
+00:15.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_side.png'
+00:15.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_side.png'
+00:15.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_uncommon_back.png'
+00:15.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_uncommon_back.png'
+17:46:32 | INFO: Data are loaded, start creating Blender stuff
+17:46:32 | INFO: Blender create Mesh node Cube.4507
+17:46:32 | INFO: glTF import finished in 0.00s
+00:16.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_front.png'
+00:16.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_front.png'
+00:16.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_side.png'
+00:16.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_side.png'
+00:16.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\staff_rare_back.png'
+00:16.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_staff_rare_back.png'
+17:46:33 | INFO: Data are loaded, start creating Blender stuff
+17:46:33 | INFO: Blender create Mesh node Cube.4447
+17:46:33 | INFO: glTF import finished in 0.00s
+00:16.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_front.png'
+00:17.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_front.png'
+00:17.218  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_side.png'
+00:17.343  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_side.png'
+00:17.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_common_back.png'
+00:17.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_common_back.png'
+17:46:34 | INFO: Data are loaded, start creating Blender stuff
+17:46:34 | INFO: Blender create Mesh node Cube.4449
+17:46:34 | INFO: glTF import finished in 0.00s
+00:17.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_front.png'
+00:17.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_front.png'
+00:18.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_side.png'
+00:18.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_side.png'
+00:18.390  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_uncommon_back.png'
+00:18.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_uncommon_back.png'
+17:46:35 | INFO: Data are loaded, start creating Blender stuff
+17:46:35 | INFO: Blender create Mesh node Cube.4448
+17:46:35 | INFO: glTF import finished in 0.00s
+00:18.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_front.png'
+00:18.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_front.png'
+00:18.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_side.png'
+00:19.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_side.png'
+00:19.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\crossbow_rare_back.png'
+00:19.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_crossbow_rare_back.png'
+17:46:36 | INFO: Data are loaded, start creating Blender stuff
+17:46:36 | INFO: Blender create Mesh node Cube.4405
+17:46:36 | INFO: glTF import finished in 0.00s
+00:19.562  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_front.png'
+00:19.687  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_front.png'
+00:19.843  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_side.png'
+00:19.968  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_side.png'
+00:20.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_common_back.png'
+00:20.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_common_back.png'
+17:46:37 | INFO: Data are loaded, start creating Blender stuff
+17:46:37 | INFO: Blender create Mesh node Cube.4407
+17:46:37 | INFO: glTF import finished in 0.00s
+00:20.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_front.png'
+00:20.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_front.png'
+00:20.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_side.png'
+00:20.843  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_side.png'
+00:21.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_uncommon_back.png'
+00:21.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_uncommon_back.png'
+17:46:37 | INFO: Data are loaded, start creating Blender stuff
+17:46:37 | INFO: Blender create Mesh node Cube.4406
+17:46:37 | INFO: glTF import finished in 0.00s
+00:21.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_front.png'
+00:21.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_front.png'
+00:21.593  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_side.png'
+00:21.718  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_side.png'
+00:21.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\axeDouble_rare_back.png'
+00:22.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_axeDouble_rare_back.png'
+17:46:38 | INFO: Data are loaded, start creating Blender stuff
+17:46:38 | INFO: Blender create Mesh node Cylinder.298
+17:46:38 | INFO: glTF import finished in 0.00s
+00:22.171  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_front.png'
+00:22.296  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_front.png'
+00:22.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_side.png'
+00:22.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_side.png'
+00:22.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_common_back.png'
+00:22.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_common_back.png'
+17:46:39 | INFO: Data are loaded, start creating Blender stuff
+17:46:39 | INFO: Blender create Mesh node Cube.4504
+17:46:39 | INFO: glTF import finished in 0.00s
+00:23.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_front.png'
+00:23.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_front.png'
+00:23.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_side.png'
+00:23.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_side.png'
+00:23.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_uncommon_back.png'
+00:23.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_uncommon_back.png'
+17:46:40 | INFO: Data are loaded, start creating Blender stuff
+17:46:40 | INFO: Blender create Mesh node Cube.4503
+17:46:40 | INFO: glTF import finished in 0.00s
+00:23.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_front.png'
+00:24.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_front.png'
+00:24.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_side.png'
+00:24.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_side.png'
+00:24.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\shield_rare_back.png'
+00:24.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\system2\_vis_tmp\_w_shield_rare_back.png'
+WEAPONFIT verdict=FAIL cells=24 blanks=0 frameclips=0 blind=0 laths=3 errors=0
+  LATH crossbow_common: show 0.40 (best view turns 51 px of a possible 128 to the camera) - the carry never shows this weapon's broad face
+  LATH crossbow_uncommon: show 0.37 (best view turns 56 px of a possible 152 to the camera) - the carry never shows this weapon's broad face
+  LATH crossbow_rare: show 0.41 (best view turns 60 px of a possible 148 to the camera) - the carry never shows this weapon's broad face
 WEAPONFIT_DONE C:\hd adventure\bellmire-art\renders\art\system2\_fit_register.json
 Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
 
 Blender quit
 
-EXITED
+=== STDERR ===
+C:\hd adventure\bellmire-art\tools\art\weaponfit.py:418: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+
+RC=0

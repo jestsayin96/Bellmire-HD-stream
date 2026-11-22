@@ -26,17 +26,21 @@
  "views": [
   "front",
   "side",
-  "back",
-  "side_offhand"
+  "back"
  ],
  "seen_min": 0.15,
  "vis_min": 900,
  "min_proving": 2,
+ "show_min": 0.7,
+ "px_per_m": 200.0,
+ "laths": [
+  "crossbow_common: show 0.40 (best view turns 51 px of a possible 128 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_uncommon: show 0.37 (best view turns 56 px of a possible 152 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_rare: show 0.41 (best view turns 60 px of a possible 148 to the camera) - the carry never shows this weapon's broad face"
+ ],
  "blanks": [],
  "frame_clips": [],
- "blind_views": [
-  "crossbow_common: only 1 of 3 views show the weapon (seen>=0.15 AND vis>=900 px) - front seen 0.395 vis 726, side seen 0.664 vis 2039, back seen 0.097 vis 175"
- ],
+ "blind_views": [],
  "errors": [],
  "models": {
   "sword_common": {
@@ -51,48 +55,62 @@
    "clip": 23,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 65,
+    "side": 44,
+    "back": 65
+   },
    "opaque": {
-    "front": 99237,
-    "side": 81265,
-    "back": 100001,
-    "side_offhand": 81339
+    "front": 99229,
+    "side": 81266,
+    "back": 100000
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 5448,
-    "side": 1623,
-    "back": 5157,
-    "side_offhand": 0
+    "front": 5430,
+    "side": 1619,
+    "back": 5162
    },
    "delta": {
-    "front": 5666,
-    "side": 1713,
-    "back": 5406,
-    "side_offhand": 0
+    "front": 5657,
+    "side": 1709,
+    "back": 5400
    },
    "alone": {
-    "front": 6494,
-    "side": 1823,
-    "back": 6472,
-    "side_offhand": 1826
+    "front": 6487,
+    "side": 1827,
+    "back": 6477
    },
    "seen": {
-    "front": 0.8389,
-    "side": 0.8903,
-    "back": 0.7968,
-    "side_offhand": 0.0
+    "front": 0.8371,
+    "side": 0.8862,
+    "back": 0.797
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2134,
+    0.315,
+    1.0146
+   ],
+   "local_ext": [
+    0.1267,
+    0.3937,
+    1.2791
+   ],
+   "mid_px": 63.0,
+   "mid_px_world_was": 63.0,
+   "best_minor": 65,
+   "show": 1.032,
    "proving_views": 3
   },
   "sword_uncommon": {
@@ -107,48 +125,62 @@
    "clip": 50,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 67,
+    "side": 54,
+    "back": 68
+   },
    "opaque": {
-    "front": 100513,
-    "side": 81265,
-    "back": 101306,
-    "side_offhand": 81339
+    "front": 100524,
+    "side": 81266,
+    "back": 101312
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 6838,
-    "side": 1968,
-    "back": 6519,
-    "side_offhand": 0
+    "front": 6856,
+    "side": 1981,
+    "back": 6529
    },
    "delta": {
-    "front": 7124,
-    "side": 2016,
-    "back": 6776,
-    "side_offhand": 0
+    "front": 7118,
+    "side": 2028,
+    "back": 6774
    },
    "alone": {
-    "front": 8112,
-    "side": 2316,
-    "back": 8124,
-    "side_offhand": 2315
+    "front": 8124,
+    "side": 2318,
+    "back": 8128
    },
    "seen": {
-    "front": 0.8429,
-    "side": 0.8497,
-    "back": 0.8024,
-    "side_offhand": 0.0
+    "front": 0.8439,
+    "side": 0.8546,
+    "back": 0.8033
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2588,
+    0.3282,
+    1.2009
+   ],
+   "local_ext": [
+    0.1914,
+    0.4102,
+    1.5126
+   ],
+   "mid_px": 65.6,
+   "mid_px_world_was": 65.6,
+   "best_minor": 68,
+   "show": 1.036,
    "proving_views": 3
   },
   "sword_rare": {
@@ -163,48 +195,62 @@
    "clip": 76,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 119,
+    "side": 62,
+    "back": 120
+   },
    "opaque": {
-    "front": 103712,
-    "side": 81265,
-    "back": 104497,
-    "side_offhand": 81339
+    "front": 103706,
+    "side": 81266,
+    "back": 104495
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 10293,
-    "side": 3121,
-    "back": 9761,
-    "side_offhand": 0
+    "front": 10299,
+    "side": 3122,
+    "back": 9764
    },
    "delta": {
-    "front": 10730,
-    "side": 3258,
-    "back": 10172,
-    "side_offhand": 0
+    "front": 10739,
+    "side": 3257,
+    "back": 10173
    },
    "alone": {
-    "front": 11401,
-    "side": 3374,
-    "back": 11401,
-    "side_offhand": 3379
+    "front": 11407,
+    "side": 3376,
+    "back": 11404
    },
    "seen": {
-    "front": 0.9028,
-    "side": 0.925,
-    "back": 0.8562,
-    "side_offhand": 0.0
+    "front": 0.9029,
+    "side": 0.9248,
+    "back": 0.8562
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.3015,
+    0.5937,
+    1.5031
+   ],
+   "local_ext": [
+    0.1914,
+    0.7422,
+    1.8953
+   ],
+   "mid_px": 118.7,
+   "mid_px_world_was": 118.7,
+   "best_minor": 120,
+   "show": 1.011,
    "proving_views": 3
   },
   "axe_common": {
@@ -219,48 +265,62 @@
    "clip": 101,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 63,
+    "side": 40,
+    "back": 63
+   },
    "opaque": {
-    "front": 96850,
-    "side": 81265,
-    "back": 97614,
-    "side_offhand": 81339
+    "front": 96858,
+    "side": 81266,
+    "back": 97617
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 2936,
-    "side": 1226,
-    "back": 2682,
-    "side_offhand": 0
+    "front": 2954,
+    "side": 1235,
+    "back": 2686
    },
    "delta": {
-    "front": 3121,
-    "side": 1273,
-    "back": 2859,
-    "side_offhand": 0
+    "front": 3124,
+    "side": 1283,
+    "back": 2855
    },
    "alone": {
-    "front": 3601,
-    "side": 1512,
-    "back": 3603,
-    "side_offhand": 1523
+    "front": 3617,
+    "side": 1507,
+    "back": 3605
    },
    "seen": {
-    "front": 0.8153,
-    "side": 0.8108,
-    "back": 0.7444,
-    "side_offhand": 0.0
+    "front": 0.8167,
+    "side": 0.8195,
+    "back": 0.7451
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1946,
+    0.3051,
+    0.7064
+   ],
+   "local_ext": [
+    0.1863,
+    0.3814,
+    0.8903
+   ],
+   "mid_px": 61.0,
+   "mid_px_world_was": 61.0,
+   "best_minor": 63,
+   "show": 1.032,
    "proving_views": 3
   },
   "axe_uncommon": {
@@ -275,48 +335,62 @@
    "clip": 38,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 78,
+    "side": 42,
+    "back": 78
+   },
    "opaque": {
-    "front": 98350,
-    "side": 81265,
-    "back": 99102,
-    "side_offhand": 81339
+    "front": 98338,
+    "side": 81266,
+    "back": 99099
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 4410,
-    "side": 1488,
-    "back": 4171,
-    "side_offhand": 0
+    "front": 4398,
+    "side": 1486,
+    "back": 4170
    },
    "delta": {
-    "front": 4613,
-    "side": 1539,
-    "back": 4383,
-    "side_offhand": 0
+    "front": 4616,
+    "side": 1537,
+    "back": 4392
    },
    "alone": {
-    "front": 5160,
-    "side": 1878,
-    "back": 5150,
-    "side_offhand": 1917
+    "front": 5155,
+    "side": 1879,
+    "back": 5153
    },
    "seen": {
-    "front": 0.8547,
-    "side": 0.7923,
-    "back": 0.8099,
-    "side_offhand": 0.0
+    "front": 0.8532,
+    "side": 0.7908,
+    "back": 0.8092
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2038,
+    0.3845,
+    0.7571
+   ],
+   "local_ext": [
+    0.1686,
+    0.4806,
+    0.9528
+   ],
+   "mid_px": 76.9,
+   "mid_px_world_was": 76.9,
+   "best_minor": 78,
+   "show": 1.014,
    "proving_views": 3
   },
   "axe_rare": {
@@ -331,48 +405,62 @@
    "clip": 24,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 88,
+    "side": 48,
+    "back": 87
+   },
    "opaque": {
-    "front": 98643,
-    "side": 81265,
-    "back": 99390,
-    "side_offhand": 81339
+    "front": 98642,
+    "side": 81266,
+    "back": 99388
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
     "front": 4780,
-    "side": 2044,
-    "back": 4456,
-    "side_offhand": 0
+    "side": 2043,
+    "back": 4455
    },
    "delta": {
-    "front": 4979,
-    "side": 2051,
-    "back": 4663,
-    "side_offhand": 0
+    "front": 4978,
+    "side": 2050,
+    "back": 4682
    },
    "alone": {
-    "front": 5570,
-    "side": 2260,
-    "back": 5561,
-    "side_offhand": 2248
+    "front": 5577,
+    "side": 2254,
+    "back": 5565
    },
    "seen": {
-    "front": 0.8582,
-    "side": 0.9044,
-    "back": 0.8013,
-    "side_offhand": 0.0
+    "front": 0.8571,
+    "side": 0.9064,
+    "back": 0.8005
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2325,
+    0.4334,
+    0.7541
+   ],
+   "local_ext": [
+    0.2754,
+    0.5417,
+    0.9504
+   ],
+   "mid_px": 86.7,
+   "mid_px_world_was": 86.7,
+   "best_minor": 88,
+   "show": 1.015,
    "proving_views": 3
   },
   "hammer_common": {
@@ -387,48 +475,62 @@
    "clip": 101,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 90,
+    "side": 60,
+    "back": 87
+   },
    "opaque": {
     "front": 99060,
-    "side": 81278,
-    "back": 99670,
-    "side_offhand": 81339
+    "side": 81280,
+    "back": 99668
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 5163,
-    "side": 4155,
-    "back": 4769,
-    "side_offhand": 0
+    "front": 5173,
+    "side": 4150,
+    "back": 4767
    },
    "delta": {
-    "front": 5383,
-    "side": 4158,
-    "back": 5003,
-    "side_offhand": 0
+    "front": 5389,
+    "side": 4153,
+    "back": 5006
    },
    "alone": {
-    "front": 5863,
-    "side": 4659,
-    "back": 5714,
-    "side_offhand": 4654
+    "front": 5865,
+    "side": 4654,
+    "back": 5710
    },
    "seen": {
-    "front": 0.8806,
-    "side": 0.8918,
-    "back": 0.8346,
-    "side_offhand": 0.0
+    "front": 0.882,
+    "side": 0.8917,
+    "back": 0.8349
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2895,
+    0.4236,
+    0.6854
+   ],
+   "local_ext": [
+    0.3274,
+    0.5293,
+    0.8632
+   ],
+   "mid_px": 84.7,
+   "mid_px_world_was": 84.7,
+   "best_minor": 90,
+   "show": 1.063,
    "proving_views": 3
   },
   "hammer_uncommon": {
@@ -443,48 +545,62 @@
    "clip": 64,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 132,
+    "side": 75,
+    "back": 132
+   },
    "opaque": {
-    "front": 102004,
-    "side": 81651,
-    "back": 102743,
-    "side_offhand": 81339
+    "front": 102005,
+    "side": 81654,
+    "back": 102750
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
     "front": 8095,
-    "side": 7952,
-    "back": 7830,
-    "side_offhand": 0
+    "side": 7957,
+    "back": 7838
    },
    "delta": {
-    "front": 8620,
-    "side": 7986,
-    "back": 8316,
-    "side_offhand": 0
+    "front": 8626,
+    "side": 7984,
+    "back": 8309
    },
    "alone": {
-    "front": 8861,
-    "side": 8486,
-    "back": 8842,
-    "side_offhand": 8519
+    "front": 8866,
+    "side": 8492,
+    "back": 8851
    },
    "seen": {
-    "front": 0.9136,
-    "side": 0.9371,
-    "back": 0.8855,
-    "side_offhand": 0.0
+    "front": 0.913,
+    "side": 0.937,
+    "back": 0.8855
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.3684,
+    0.6302,
+    0.6954
+   ],
+   "local_ext": [
+    0.421,
+    0.7876,
+    0.8701
+   ],
+   "mid_px": 126.0,
+   "mid_px_world_was": 126.0,
+   "best_minor": 132,
+   "show": 1.047,
    "proving_views": 3
   },
   "hammer_rare": {
@@ -499,48 +615,62 @@
    "clip": 110,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 142,
+    "side": 79,
+    "back": 141
+   },
    "opaque": {
-    "front": 103597,
-    "side": 81731,
-    "back": 104363,
-    "side_offhand": 81339
+    "front": 103578,
+    "side": 81734,
+    "back": 104349
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 9777,
-    "side": 8806,
-    "back": 9442,
-    "side_offhand": 0
+    "front": 9765,
+    "side": 8803,
+    "back": 9431
    },
    "delta": {
-    "front": 10374,
-    "side": 8861,
-    "back": 9884,
-    "side_offhand": 0
+    "front": 10377,
+    "side": 8858,
+    "back": 9897
    },
    "alone": {
-    "front": 10460,
+    "front": 10446,
     "side": 8937,
-    "back": 10465,
-    "side_offhand": 8922
+    "back": 10455
    },
    "seen": {
-    "front": 0.9347,
-    "side": 0.9853,
-    "back": 0.9022,
-    "side_offhand": 0.0
+    "front": 0.9348,
+    "side": 0.985,
+    "back": 0.9021
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.3919,
+    0.6756,
+    0.7292
+   ],
+   "local_ext": [
+    0.4477,
+    0.8443,
+    0.8981
+   ],
+   "mid_px": 135.1,
+   "mid_px_world_was": 135.1,
+   "best_minor": 142,
+   "show": 1.051,
    "proving_views": 3
   },
   "dagger_common": {
@@ -555,48 +685,62 @@
    "clip": 3,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 26,
+    "side": 29,
+    "back": 26
+   },
    "opaque": {
-    "front": 95749,
-    "side": 81265,
-    "back": 96521,
-    "side_offhand": 81339
+    "front": 95736,
+    "side": 81266,
+    "back": 96516
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 1645,
-    "side": 389,
-    "back": 1614,
-    "side_offhand": 0
+    "front": 1637,
+    "side": 392,
+    "back": 1612
    },
    "delta": {
     "front": 1750,
-    "side": 435,
-    "back": 1706,
-    "side_offhand": 0
+    "side": 438,
+    "back": 1691
    },
    "alone": {
-    "front": 2367,
-    "side": 558,
-    "back": 2392,
-    "side_offhand": 569
+    "front": 2377,
+    "side": 559,
+    "back": 2402
    },
    "seen": {
-    "front": 0.695,
-    "side": 0.6971,
-    "back": 0.6747,
-    "side_offhand": 0.0
+    "front": 0.6887,
+    "side": 0.7013,
+    "back": 0.6711
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1206,
+    0.1409,
+    0.7131
+   ],
+   "local_ext": [
+    0.104,
+    0.1507,
+    0.8978
+   ],
+   "mid_px": 24.1,
+   "mid_px_world_was": 28.2,
+   "best_minor": 29,
+   "show": 1.203,
    "proving_views": 2
   },
   "dagger_uncommon": {
@@ -611,48 +755,62 @@
    "clip": 8,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 63,
+    "side": 35,
+    "back": 62
+   },
    "opaque": {
     "front": 96137,
-    "side": 81265,
-    "back": 96920,
-    "side_offhand": 81339
+    "side": 81266,
+    "back": 96913
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 2224,
-    "side": 708,
-    "back": 2043,
-    "side_offhand": 0
+    "front": 2229,
+    "side": 706,
+    "back": 2044
    },
    "delta": {
-    "front": 2399,
-    "side": 776,
-    "back": 2219,
-    "side_offhand": 0
+    "front": 2402,
+    "side": 775,
+    "back": 2221
    },
    "alone": {
-    "front": 3109,
-    "side": 1084,
-    "back": 3114,
-    "side_offhand": 1070
+    "front": 3112,
+    "side": 1078,
+    "back": 3111
    },
    "seen": {
-    "front": 0.7153,
-    "side": 0.6531,
-    "back": 0.6561,
-    "side_offhand": 0.0
+    "front": 0.7163,
+    "side": 0.6549,
+    "back": 0.657
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1668,
+    0.3094,
+    0.8185
+   ],
+   "local_ext": [
+    0.1167,
+    0.3867,
+    1.0307
+   ],
+   "mid_px": 61.9,
+   "mid_px_world_was": 61.9,
+   "best_minor": 63,
+   "show": 1.018,
    "proving_views": 2
   },
   "dagger_rare": {
@@ -667,384 +825,506 @@
    "clip": 19,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 61,
+    "side": 37,
+    "back": 61
+   },
    "opaque": {
-    "front": 96938,
-    "side": 81265,
-    "back": 97733,
-    "side_offhand": 81339
+    "front": 96935,
+    "side": 81266,
+    "back": 97713
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 3099,
-    "side": 922,
-    "back": 2865,
-    "side_offhand": 0
+    "front": 3100,
+    "side": 921,
+    "back": 2849
    },
    "delta": {
-    "front": 3334,
-    "side": 1023,
-    "back": 3072,
-    "side_offhand": 0
+    "front": 3345,
+    "side": 1022,
+    "back": 3085
    },
    "alone": {
-    "front": 3947,
-    "side": 1160,
-    "back": 3966,
-    "side_offhand": 1163
+    "front": 3944,
+    "side": 1162,
+    "back": 3949
    },
    "seen": {
-    "front": 0.7852,
-    "side": 0.7948,
-    "back": 0.7224,
-    "side_offhand": 0.0
+    "front": 0.786,
+    "side": 0.7926,
+    "back": 0.7214
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1789,
+    0.2992,
+    0.9155
+   ],
+   "local_ext": [
+    0.1445,
+    0.374,
+    1.1535
+   ],
+   "mid_px": 59.8,
+   "mid_px_world_was": 59.8,
+   "best_minor": 61,
+   "show": 1.019,
    "proving_views": 3
   },
   "staff_common": {
    "model": "assets/gear/dungeon/staff_common.glb",
    "verts": 315,
-   "checked": 294,
-   "reach": 0.08,
-   "drop": 0.089,
-   "span": 0.722,
-   "tip_z": 0.721,
+   "checked": 302,
+   "reach": 0.902,
+   "drop": 0.821,
+   "span": 0.393,
+   "tip_z": 1.542,
    "hero_h": 2.45,
-   "clip": 51,
-   "ground": 0,
-   "hand_scale": 0.8,
+   "clip": 52,
+   "ground": 51,
+   "hand_scale": 1.9,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "0",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 80,
+    "side": 81,
+    "back": 80
+   },
    "opaque": {
-    "front": 95443,
-    "side": 81265,
-    "back": 96191,
-    "side_offhand": 81339
+    "front": 100814,
+    "side": 82329,
+    "back": 101537
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 1471,
-    "side": 870,
-    "back": 1289,
-    "side_offhand": 0
+    "front": 10744,
+    "side": 10996,
+    "back": 7277
    },
    "delta": {
-    "front": 1553,
-    "side": 912,
-    "back": 1376,
-    "side_offhand": 0
+    "front": 11287,
+    "side": 11218,
+    "back": 7492
    },
    "alone": {
-    "front": 2564,
-    "side": 1020,
-    "back": 2565,
-    "side_offhand": 1026
+    "front": 13683,
+    "side": 13778,
+    "back": 13731
    },
    "seen": {
-    "front": 0.5737,
-    "side": 0.8529,
-    "back": 0.5025,
-    "side_offhand": 0.0
+    "front": 0.7852,
+    "side": 0.7981,
+    "back": 0.53
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
-   "proving_views": 2
+   "ext": [
+    0.3933,
+    0.3975,
+    1.7224
+   ],
+   "local_ext": [
+    0.2062,
+    0.2111,
+    0.9065
+   ],
+   "mid_px": 80.2,
+   "mid_px_world_was": 79.5,
+   "best_minor": 81,
+   "show": 1.01,
+   "proving_views": 3
   },
   "staff_uncommon": {
    "model": "assets/gear/dungeon/staff_uncommon.glb",
    "verts": 331,
-   "checked": 310,
-   "reach": 0.099,
-   "drop": 0.11,
-   "span": 0.891,
-   "tip_z": 0.739,
+   "checked": 318,
+   "reach": 1.276,
+   "drop": 0.857,
+   "span": 0.486,
+   "tip_z": 1.916,
    "hero_h": 2.45,
-   "clip": 38,
-   "ground": 0,
-   "hand_scale": 0.8,
+   "clip": 64,
+   "ground": 38,
+   "hand_scale": 1.9,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "0",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 99,
+    "side": 101,
+    "back": 99
+   },
    "opaque": {
-    "front": 96700,
-    "side": 81265,
-    "back": 97439,
-    "side_offhand": 81339
+    "front": 104891,
+    "side": 83137,
+    "back": 105516
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 2773,
-    "side": 1345,
-    "back": 2547,
-    "side_offhand": 0
+    "front": 17002,
+    "side": 18607,
+    "back": 11984
    },
    "delta": {
-    "front": 2888,
-    "side": 1364,
-    "back": 2678,
-    "side_offhand": 0
+    "front": 17760,
+    "side": 19204,
+    "back": 12253
    },
    "alone": {
-    "front": 4080,
-    "side": 1549,
-    "back": 4027,
-    "side_offhand": 1512
+    "front": 22071,
+    "side": 21753,
+    "back": 21945
    },
    "seen": {
-    "front": 0.6797,
-    "side": 0.8683,
-    "back": 0.6325,
-    "side_offhand": 0.0
+    "front": 0.7703,
+    "side": 0.8554,
+    "back": 0.5461
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.4863,
+    0.4938,
+    2.1326
+   ],
+   "local_ext": [
+    0.2607,
+    0.2607,
+    1.1224
+   ],
+   "mid_px": 99.1,
+   "mid_px_world_was": 98.8,
+   "best_minor": 101,
+   "show": 1.02,
    "proving_views": 3
   },
   "staff_rare": {
    "model": "assets/gear/dungeon/staff_rare.glb",
    "verts": 890,
-   "checked": 827,
-   "reach": 0.086,
-   "drop": 0.086,
-   "span": 0.921,
-   "tip_z": 0.727,
+   "checked": 890,
+   "reach": 1.355,
+   "drop": 0.853,
+   "span": 0.417,
+   "tip_z": 1.996,
    "hero_h": 2.45,
-   "clip": 207,
-   "ground": 0,
-   "hand_scale": 0.8,
+   "clip": 202,
+   "ground": 149,
+   "hand_scale": 1.9,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "0",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 85,
+    "side": 87,
+    "back": 85
+   },
    "opaque": {
-    "front": 96281,
-    "side": 81265,
-    "back": 97036,
-    "side_offhand": 81339
+    "front": 102584,
+    "side": 82860,
+    "back": 103234
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 2308,
-    "side": 1088,
-    "back": 2105,
-    "side_offhand": 0
+    "front": 12860,
+    "side": 15461,
+    "back": 9397
    },
    "delta": {
-    "front": 2459,
-    "side": 1115,
-    "back": 2260,
-    "side_offhand": 0
+    "front": 13770,
+    "side": 15908,
+    "back": 9722
    },
    "alone": {
-    "front": 3337,
-    "side": 1355,
-    "back": 3327,
-    "side_offhand": 1346
+    "front": 17822,
+    "side": 18099,
+    "back": 17832
    },
    "seen": {
-    "front": 0.6916,
-    "side": 0.803,
-    "back": 0.6327,
-    "side_offhand": 0.0
+    "front": 0.7216,
+    "side": 0.8542,
+    "back": 0.527
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.4165,
+    0.4257,
+    2.2082
+   ],
+   "local_ext": [
+    0.2153,
+    0.2211,
+    1.1622
+   ],
+   "mid_px": 84.0,
+   "mid_px_world_was": 85.1,
+   "best_minor": 87,
+   "show": 1.036,
    "proving_views": 3
   },
   "crossbow_common": {
    "model": "assets/gear/dungeon/crossbow_common.glb",
    "verts": 395,
-   "checked": 202,
-   "reach": 0.277,
-   "drop": 0.276,
-   "span": 0.122,
-   "tip_z": 0.917,
+   "checked": 214,
+   "reach": 0.08,
+   "drop": 0.114,
+   "span": 0.69,
+   "tip_z": 0.72,
    "hero_h": 2.45,
-   "clip": 98,
+   "clip": 40,
    "ground": 0,
-   "hand_scale": 0.8,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 35,
+    "side": 41,
+    "back": 51
+   },
    "opaque": {
-    "front": 94212,
-    "side": 81505,
-    "back": 94969,
-    "side_offhand": 81339
+    "front": 95025,
+    "side": 82892,
+    "back": 95803
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 726,
-    "side": 2039,
-    "back": 175,
-    "side_offhand": 0
+    "front": 2610,
+    "side": 2264,
+    "back": 864
    },
    "delta": {
-    "front": 1059,
-    "side": 3674,
-    "back": 175,
-    "side_offhand": 0
+    "front": 2694,
+    "side": 2421,
+    "back": 933
    },
    "alone": {
-    "front": 1838,
-    "side": 3071,
-    "back": 1809,
-    "side_offhand": 3073
+    "front": 2790,
+    "side": 3076,
+    "back": 3038
    },
    "seen": {
-    "front": 0.395,
-    "side": 0.664,
-    "back": 0.0967,
-    "side_offhand": 0.0
+    "front": 0.9355,
+    "side": 0.736,
+    "back": 0.2844
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
-   "proving_views": 1
+   "ext": [
+    0.1942,
+    0.6535,
+    0.69
+   ],
+   "local_ext": [
+    0.1945,
+    0.6382,
+    0.691
+   ],
+   "mid_px": 127.6,
+   "mid_px_world_was": 130.7,
+   "best_minor": 51,
+   "show": 0.4,
+   "proving_views": 2
   },
   "crossbow_uncommon": {
    "model": "assets/gear/dungeon/crossbow_uncommon.glb",
    "verts": 531,
-   "checked": 338,
-   "reach": 0.414,
-   "drop": 0.414,
-   "span": 0.149,
-   "tip_z": 1.055,
+   "checked": 350,
+   "reach": 0.095,
+   "drop": 0.114,
+   "span": 1.023,
+   "tip_z": 0.735,
    "hero_h": 2.45,
-   "clip": 127,
+   "clip": 74,
    "ground": 0,
-   "hand_scale": 0.8,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 35,
+    "side": 46,
+    "back": 56
+   },
    "opaque": {
-    "front": 94463,
-    "side": 81517,
-    "back": 95128,
-    "side_offhand": 81392
+    "front": 95893,
+    "side": 83559,
+    "back": 96554
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 1400,
-    "side": 3147,
-    "back": 1102,
-    "side_offhand": 95
+    "front": 4350,
+    "side": 3010,
+    "back": 1617
    },
    "delta": {
-    "front": 1828,
-    "side": 5093,
-    "back": 1387,
-    "side_offhand": 110
+    "front": 4496,
+    "side": 3191,
+    "back": 1727
    },
    "alone": {
-    "front": 2985,
-    "side": 4053,
-    "back": 3006,
-    "side_offhand": 4054
+    "front": 4465,
+    "side": 3853,
+    "back": 4582
    },
    "seen": {
-    "front": 0.469,
-    "side": 0.7765,
-    "back": 0.3666,
-    "side_offhand": 0.0234
+    "front": 0.9742,
+    "side": 0.7812,
+    "back": 0.3529
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2093,
+    0.7498,
+    1.0234
+   ],
+   "local_ext": [
+    0.2098,
+    0.7584,
+    1.0352
+   ],
+   "mid_px": 151.7,
+   "mid_px_world_was": 150.0,
+   "best_minor": 56,
+   "show": 0.369,
    "proving_views": 3
   },
   "crossbow_rare": {
    "model": "assets/gear/dungeon/crossbow_rare.glb",
    "verts": 688,
-   "checked": 500,
-   "reach": 0.418,
-   "drop": 0.418,
-   "span": 0.151,
-   "tip_z": 1.059,
+   "checked": 514,
+   "reach": 0.122,
+   "drop": 0.114,
+   "span": 1.033,
+   "tip_z": 0.762,
    "hero_h": 2.45,
-   "clip": 194,
+   "clip": 116,
    "ground": 0,
-   "hand_scale": 0.8,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "minor": {
+    "front": 39,
+    "side": 52,
+    "back": 60
+   },
    "opaque": {
-    "front": 94424,
-    "side": 81562,
-    "back": 95096,
-    "side_offhand": 81413
+    "front": 95691,
+    "side": 84048,
+    "back": 96353
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 1209,
-    "side": 3752,
-    "back": 1832,
-    "side_offhand": 146
+    "front": 4003,
+    "side": 3503,
+    "back": 1402
    },
    "delta": {
-    "front": 1637,
-    "side": 5717,
-    "back": 2446,
-    "side_offhand": 176
+    "front": 4167,
+    "side": 3649,
+    "back": 1514
    },
    "alone": {
-    "front": 2767,
-    "side": 4676,
-    "back": 2728,
-    "side_offhand": 4670
+    "front": 4090,
+    "side": 4275,
+    "back": 4220
    },
    "seen": {
-    "front": 0.4369,
-    "side": 0.8024,
-    "back": 0.6716,
-    "side_offhand": 0.0313
+    "front": 0.9787,
+    "side": 0.8194,
+    "back": 0.3322
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2361,
+    0.7425,
+    1.0325
+   ],
+   "local_ext": [
+    0.2366,
+    0.7409,
+    1.0445
+   ],
+   "mid_px": 148.2,
+   "mid_px_world_was": 148.5,
+   "best_minor": 60,
+   "show": 0.405,
    "proving_views": 3
   },
   "axeDouble_common": {
@@ -1059,48 +1339,62 @@
    "clip": 60,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 88,
+    "side": 40,
+    "back": 88
+   },
    "opaque": {
     "front": 98118,
-    "side": 81265,
-    "back": 98889,
-    "side_offhand": 81339
+    "side": 81266,
+    "back": 98885
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 4197,
-    "side": 1616,
-    "back": 3955,
-    "side_offhand": 0
+    "front": 4203,
+    "side": 1607,
+    "back": 3952
    },
    "delta": {
-    "front": 4429,
-    "side": 1650,
-    "back": 4173,
-    "side_offhand": 0
+    "front": 4424,
+    "side": 1644,
+    "back": 4179
    },
    "alone": {
-    "front": 4853,
-    "side": 1906,
-    "back": 4858,
-    "side_offhand": 1904
+    "front": 4859,
+    "side": 1904,
+    "back": 4854
    },
    "seen": {
-    "front": 0.8648,
-    "side": 0.8478,
-    "back": 0.8141,
-    "side_offhand": 0.0
+    "front": 0.865,
+    "side": 0.844,
+    "back": 0.8142
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1946,
+    0.4382,
+    0.7064
+   ],
+   "local_ext": [
+    0.1863,
+    0.5477,
+    0.8903
+   ],
+   "mid_px": 87.6,
+   "mid_px_world_was": 87.6,
+   "best_minor": 88,
+   "show": 1.004,
    "proving_views": 3
   },
   "axeDouble_uncommon": {
@@ -1115,48 +1409,62 @@
    "clip": 25,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 128,
+    "side": 43,
+    "back": 128
+   },
    "opaque": {
-    "front": 101109,
-    "side": 81265,
-    "back": 101835,
-    "side_offhand": 81339
+    "front": 101093,
+    "side": 81266,
+    "back": 101849
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 7170,
-    "side": 2370,
-    "back": 6903,
-    "side_offhand": 0
+    "front": 7154,
+    "side": 2373,
+    "back": 6918
    },
    "delta": {
-    "front": 7454,
-    "side": 2406,
-    "back": 7217,
-    "side_offhand": 0
+    "front": 7453,
+    "side": 2410,
+    "back": 7219
    },
    "alone": {
-    "front": 7899,
-    "side": 2802,
-    "back": 7863,
-    "side_offhand": 2805
+    "front": 7889,
+    "side": 2807,
+    "back": 7880
    },
    "seen": {
-    "front": 0.9077,
-    "side": 0.8458,
-    "back": 0.8779,
-    "side_offhand": 0.0
+    "front": 0.9068,
+    "side": 0.8454,
+    "back": 0.8779
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2038,
+    0.6341,
+    0.7571
+   ],
+   "local_ext": [
+    0.1686,
+    0.7926,
+    0.9528
+   ],
+   "mid_px": 126.8,
+   "mid_px_world_was": 126.8,
+   "best_minor": 128,
+   "show": 1.009,
    "proving_views": 3
   },
   "axeDouble_rare": {
@@ -1171,48 +1479,62 @@
    "clip": 0,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 130,
+    "side": 48,
+    "back": 130
+   },
    "opaque": {
-    "front": 101208,
-    "side": 81265,
-    "back": 101929,
-    "side_offhand": 81339
+    "front": 101196,
+    "side": 81266,
+    "back": 101941
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 7333,
-    "side": 2692,
-    "back": 7000,
-    "side_offhand": 0
+    "front": 7325,
+    "side": 2693,
+    "back": 7010
    },
    "delta": {
-    "front": 7613,
-    "side": 2693,
-    "back": 7316,
-    "side_offhand": 0
+    "front": 7618,
+    "side": 2694,
+    "back": 7324
    },
    "alone": {
-    "front": 8111,
+    "front": 8108,
     "side": 2926,
-    "back": 8079,
-    "side_offhand": 2931
+    "back": 8098
    },
    "seen": {
-    "front": 0.9041,
-    "side": 0.92,
-    "back": 0.8664,
-    "side_offhand": 0.0
+    "front": 0.9034,
+    "side": 0.9204,
+    "back": 0.8656
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2325,
+    0.6464,
+    0.7541
+   ],
+   "local_ext": [
+    0.2754,
+    0.808,
+    0.9504
+   ],
+   "mid_px": 129.3,
+   "mid_px_world_was": 129.3,
+   "best_minor": 130,
+   "show": 1.006,
    "proving_views": 3
   },
   "shield_common": {
@@ -1227,48 +1549,62 @@
    "clip": 355,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 110,
+    "side": 30,
+    "back": 110
+   },
    "opaque": {
-    "front": 96642,
-    "side": 81267,
-    "back": 97406,
-    "side_offhand": 81339
+    "front": 96638,
+    "side": 81269,
+    "back": 97406
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 4825,
-    "side": 2140,
-    "back": 2685,
-    "side_offhand": 0
+    "front": 4830,
+    "side": 2157,
+    "back": 2689
    },
    "delta": {
-    "front": 4916,
-    "side": 2207,
-    "back": 2778,
-    "side_offhand": 0
+    "front": 4924,
+    "side": 2224,
+    "back": 2781
    },
    "alone": {
-    "front": 9633,
-    "side": 2780,
-    "back": 9631,
-    "side_offhand": 2779
+    "front": 9638,
+    "side": 2781,
+    "back": 9635
    },
    "seen": {
-    "front": 0.5009,
-    "side": 0.7698,
-    "back": 0.2788,
-    "side_offhand": 0.0
+    "front": 0.5011,
+    "side": 0.7756,
+    "back": 0.2791
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.1419,
+    0.544,
+    0.5503
+   ],
+   "local_ext": [
+    0.13,
+    0.6879,
+    0.6879
+   ],
+   "mid_px": 110.1,
+   "mid_px_world_was": 108.8,
+   "best_minor": 110,
+   "show": 0.999,
    "proving_views": 3
   },
   "shield_uncommon": {
@@ -1283,48 +1619,62 @@
    "clip": 343,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 122,
+    "side": 44,
+    "back": 122
+   },
    "opaque": {
-    "front": 97060,
-    "side": 81385,
-    "back": 97797,
-    "side_offhand": 81339
+    "front": 97061,
+    "side": 81388,
+    "back": 97797
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
-    "front": 6447,
-    "side": 3167,
-    "back": 3093,
-    "side_offhand": 0
+    "front": 6459,
+    "side": 3171,
+    "back": 3095
    },
    "delta": {
-    "front": 6562,
-    "side": 3180,
-    "back": 3202,
-    "side_offhand": 0
+    "front": 6570,
+    "side": 3186,
+    "back": 3202
    },
    "alone": {
-    "front": 10107,
-    "side": 3825,
-    "back": 10116,
-    "side_offhand": 3829
+    "front": 10111,
+    "side": 3831,
+    "back": 10117
    },
    "seen": {
-    "front": 0.6379,
-    "side": 0.828,
-    "back": 0.3058,
-    "side_offhand": 0.0
+    "front": 0.6388,
+    "side": 0.8277,
+    "back": 0.3059
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.2084,
+    0.6053,
+    0.6611
+   ],
+   "local_ext": [
+    0.1991,
+    0.7567,
+    0.8359
+   ],
+   "mid_px": 121.1,
+   "mid_px_world_was": 121.1,
+   "best_minor": 122,
+   "show": 1.008,
    "proving_views": 3
   },
   "shield_rare": {
@@ -1339,48 +1689,62 @@
    "clip": 140,
    "ground": 0,
    "hand_scale": 0.8,
+   "engine_mirrored": false,
+   "engine_rot_deg": null,
+   "minor": {
+    "front": 113,
+    "side": 68,
+    "back": 114
+   },
    "opaque": {
-    "front": 97400,
-    "side": 81454,
-    "back": 98099,
-    "side_offhand": 81339
+    "front": 97396,
+    "side": 81456,
+    "back": 98090
    },
    "border": {
     "front": 0.0,
     "side": 0.0,
-    "back": 0.0,
-    "side_offhand": 0.0
+    "back": 0.0
    },
    "vis": {
     "front": 6152,
-    "side": 3880,
-    "back": 4099,
-    "side_offhand": 0
+    "side": 3884,
+    "back": 4095
    },
    "delta": {
-    "front": 6375,
-    "side": 3938,
-    "back": 4257,
-    "side_offhand": 0
+    "front": 6378,
+    "side": 3939,
+    "back": 4266
    },
    "alone": {
-    "front": 11185,
-    "side": 4988,
-    "back": 11191,
-    "side_offhand": 4991
+    "front": 11183,
+    "side": 4996,
+    "back": 11190
    },
    "seen": {
-    "front": 0.55,
-    "side": 0.7779,
-    "back": 0.3663,
-    "side_offhand": 0.0
+    "front": 0.5501,
+    "side": 0.7774,
+    "back": 0.366
    },
    "outside": {
     "front": 0,
     "side": 0,
-    "back": 0,
-    "side_offhand": 0
+    "back": 0
    },
+   "ext": [
+    0.3326,
+    0.5603,
+    0.6999
+   ],
+   "local_ext": [
+    0.3635,
+    0.7004,
+    0.8742
+   ],
+   "mid_px": 112.1,
+   "mid_px_world_was": 112.1,
+   "best_minor": 114,
+   "show": 1.017,
    "proving_views": 3
   }
  }

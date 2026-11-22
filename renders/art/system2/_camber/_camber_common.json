@@ -1,0 +1,283 @@
+{
+ "ok": true,
+ "tier": "common",
+ "hand_scale": 1.0,
+ "x0_frac": 0.35,
+ "angles": [
+  0.0,
+  20.0,
+  30.0,
+  40.0,
+  55.0
+ ],
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "show_min": 0.7,
+ "errors": [],
+ "rows": [
+  {
+   "angle": 0.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.0
+   },
+   "clip": 40,
+   "ground": 0,
+   "ext": [
+    0.1942,
+    0.6535,
+    0.69
+   ],
+   "mid_px": 130.7,
+   "reach": 0.08,
+   "drop": 0.114,
+   "minor": {
+    "front": 35,
+    "side": 41,
+    "back": 51
+   },
+   "major": {
+    "front": 140,
+    "side": 132,
+    "back": 140
+   },
+   "alone": {
+    "front": 2790,
+    "side": 3076,
+    "back": 3038
+   },
+   "vis": {
+    "front": 2610,
+    "side": 2264,
+    "back": 864
+   },
+   "seen": {
+    "front": 0.9355,
+    "side": 0.736,
+    "back": 0.2844
+   },
+   "best_minor": 51,
+   "worst_minor": 35,
+   "show": 0.39
+  },
+  {
+   "angle": 20.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.1203
+   },
+   "clip": 40,
+   "ground": 0,
+   "ext": [
+    0.2705,
+    0.6535,
+    0.6652
+   ],
+   "mid_px": 130.7,
+   "reach": 0.156,
+   "drop": 0.114,
+   "minor": {
+    "front": 50,
+    "side": 61,
+    "back": 65
+   },
+   "major": {
+    "front": 134,
+    "side": 132,
+    "back": 134
+   },
+   "alone": {
+    "front": 2834,
+    "side": 3938,
+    "back": 3024
+   },
+   "vis": {
+    "front": 2664,
+    "side": 3122,
+    "back": 853
+   },
+   "seen": {
+    "front": 0.94,
+    "side": 0.7928,
+    "back": 0.2821
+   },
+   "best_minor": 65,
+   "worst_minor": 50,
+   "show": 0.497
+  },
+  {
+   "angle": 30.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.1793
+   },
+   "clip": 38,
+   "ground": 0,
+   "ext": [
+    0.3233,
+    0.623,
+    0.6536
+   ],
+   "mid_px": 124.6,
+   "reach": 0.209,
+   "drop": 0.114,
+   "minor": {
+    "front": 60,
+    "side": 71,
+    "back": 75
+   },
+   "major": {
+    "front": 126,
+    "side": 132,
+    "back": 126
+   },
+   "alone": {
+    "front": 2859,
+    "side": 4490,
+    "back": 3023
+   },
+   "vis": {
+    "front": 2694,
+    "side": 3680,
+    "back": 856
+   },
+   "seen": {
+    "front": 0.9423,
+    "side": 0.8196,
+    "back": 0.2832
+   },
+   "best_minor": 75,
+   "worst_minor": 60,
+   "show": 0.602
+  },
+  {
+   "angle": 40.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.2369
+   },
+   "clip": 36,
+   "ground": 0,
+   "ext": [
+    0.3703,
+    0.5623,
+    0.6536
+   ],
+   "mid_px": 112.5,
+   "reach": 0.256,
+   "drop": 0.114,
+   "minor": {
+    "front": 70,
+    "side": 80,
+    "back": 84
+   },
+   "major": {
+    "front": 114,
+    "side": 132,
+    "back": 114
+   },
+   "alone": {
+    "front": 2898,
+    "side": 4797,
+    "back": 3031
+   },
+   "vis": {
+    "front": 2726,
+    "side": 4026,
+    "back": 867
+   },
+   "seen": {
+    "front": 0.9406,
+    "side": 0.8393,
+    "back": 0.286
+   },
+   "best_minor": 84,
+   "worst_minor": 70,
+   "show": 0.747
+  },
+  {
+   "angle": 55.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.3198
+   },
+   "clip": 29,
+   "ground": 0,
+   "ext": [
+    0.4267,
+    0.4655,
+    0.6536
+   ],
+   "mid_px": 93.1,
+   "reach": 0.312,
+   "drop": 0.114,
+   "minor": {
+    "front": 80,
+    "side": 90,
+    "back": 95
+   },
+   "major": {
+    "front": 95,
+    "side": 132,
+    "back": 95
+   },
+   "alone": {
+    "front": 2943,
+    "side": 4993,
+    "back": 3070
+   },
+   "vis": {
+    "front": 2772,
+    "side": 4175,
+    "back": 913
+   },
+   "seen": {
+    "front": 0.9419,
+    "side": 0.8362,
+    "back": 0.2974
+   },
+   "best_minor": 95,
+   "worst_minor": 80,
+   "show": 1.02
+  }
+ ]
+}

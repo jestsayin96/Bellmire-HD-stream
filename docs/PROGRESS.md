@@ -4237,3 +4237,11 @@ DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
   redeemed, 0 bits, no account action. Read-only connect - but it should have been off. Next run sets the env var.
 - Chat bot asks (Gear.ARMOUR alias, REWORK_DIVISOR / OIL_PER_HEAD constants): not taken this hour - window spent on the owed defect. Open.
 - Lock: claim 08:08:13, claim+25 = 08:33 computed first, declared 08:30.
+
+## D-cycle - S94: THE BLOWER'S MB_NAME ROW LANDS - by_key 46 / MB_NAME 46, and Deadair enters the fogbound draw. 2026-11-21T17:12:42-06:00 (game build)
+- TAKE THIS NEXT (16:58 CT block) gave game build the Blower's MB_NAME / MB_FIT engine row; C-169 is on main (by_key.blower arrive 9 / act 7 / broken 4 / fall 8).
+- delve.gd MB_NAME += "blower": "Deadair" - read in TWO places, content's miniboss_feed._note_c169 ("Deadair") and art's CANON title (minibosses.py:16064). MB_FIT blower 1.01 (S93) unchanged; its "NO MB_NAME row yet" comment corrected. dungeon_hd.gd's S93 note updated (fogbound row already held blower).
+- tools/_s51_names.gd count line 45 -> 46. The key-SET check is the real guard and its drizzler red-proof still produces 4 named faults.
+- Battery, renders/cycles/s94/ (JESTS_NO_TWITCH=1): parse --quit-after 300 RC 0, 0 SCRIPT ERROR/Parse Error; S51_NAMES OK 176 checks (by_key 46, MB_FIT base 46, glb stems 48); S33_DRAW OK 191 checks - "blower fogbound ratio 1.01 lines true drawn 100/400", bodies 46, drawn-with-lines 32, held-for-lines 0 (S93 read 31 / 1); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2056; TOWNWALK in_solid=0/17937 raid 0/3465 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+- LOOKED: S33_LOOK OK (5 checks) with S33_KEY=blower - fitted h 2.47 vs knight 2.54, min y 0.000, no overlap; renders/cycles/s33/blower_1front.png viewed: stands on the floor beside the knight, bag and bellows read.
+- HONEST LIMIT / NEXT ROW: Deadair's ONE IDEA (C-169: the CLOCK - air drawn a stroke at a time, every delver slower each stroke, heaviest-laden gives out first, holing the bag stops it) is NOT built. MB_WAYS has no "blower" entry, so it fights as a fitted body with the generic loop and reads its arrive/fall lines. Its act/broken lines exist and wait for that behaviour. Not pulled early - needs a row.

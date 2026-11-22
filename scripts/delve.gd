@@ -412,7 +412,8 @@ const MB_FIT := {
 	"ferryman": 1.07,   # S71: art's _fit_ferryman_register.json pairs.ferryman.ratio (42nd, h 2.62 / hero 2.45, tag flooded - field 5, 3/3 proving views), copied not re-derived. MB_NAME row added at S72 once content C-149 wrote the feed
 	"winder": 0.96,   # S73: art's _fit_winder_register.json pairs.winder.ratio (43rd, Haulback in CANON, h 2.34 / hero 2.45, tag wood - field 5, 3/3 proving views, verdict GREEN), copied not re-derived. MB_NAME row added at S75 once content C-151 wrote the feed
 	"pitman": 0.94,   # S76: art's _fit_pitman_register.json pairs.pitman.ratio (44th, Underfoot in CANON, h 2.30, tag crypt - field 5, frame_edge 0 on all three views, fits_frame true), copied not re-derived
-	"tither": 0.99}   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
+	"tither": 0.99,   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
+	"blower": 1.01}   # S93: art's _fit_report.json pairs.blower.ratio (46th, Deadair in CANON, h 2.48 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S94 once content C-169 wrote the feed
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
@@ -439,7 +440,8 @@ const MB_NAME := {
 	"ferryman": "Slackwater",   # S72: content's miniboss_feed._note_c149 "Slackwater" and art's CANON title (minibosses.py:14501), both read
 	"winder": "Haulback",   # S75: content's miniboss_feed._note_c151 "Haulback" and art's CANON title (minibosses.py:14974), both read
 	"pitman": "Underfoot",   # S76: content's miniboss_feed._note_c152 "Underfoot" and art's CANON title (minibosses.py:15251), both read
-	"tither": "Tenthpart"}   # S89: art's CANON title (minibosses.py:15830); content has no by_key.tither yet, so miniboss_for holds the body out until its lines land
+	"tither": "Tenthpart",   # S89: art's CANON title (minibosses.py:15830); content's C-167 by_key.tither has landed, so miniboss_for draws the body (S91)
+	"blower": "Deadair"}   # S94: content's miniboss_feed._note_c169 "Deadair" and art's CANON title (minibosses.py:16064), both read; C-169 by_key.blower landed (9/7/4/8)
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

@@ -1053,7 +1053,13 @@
     "The smith sets down the hammer to watch them go.",
     "A boot-lace is retied on the stair, slow, then they are gone.",
     "The lamp-boy trims the wick twice and hands it over.",
-    "The baker's boy runs out with a hot roll, and is told off for it."
+    "The baker's boy runs out with a hot roll, and is told off for it.",
+    "The cobbler looks at the boots and says they will do.",
+    "Someone leaves a heel of bread on the wall and does not say whose.",
+    "The gate-ward counts them out. The count is written down.",
+    "A dog follows to the last house and sits.",
+    "The tinker slips a flint into the nearest pack and looks elsewhere.",
+    "The rope-maker tests each knot with a thumb and nods once."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1611,7 +1617,13 @@
     "A lamp is left in the window until the last of them is in.",
     "The chandler counts the stubs and writes down what was burned.",
     "Somebody finds a clean cloth for the blade and says nothing.",
-    "The ward sits on the well-edge a while with the lamp between their feet."
+    "The ward sits on the well-edge a while with the lamp between their feet.",
+    "The first one in sits on the step and unlaces slowly.",
+    "Water is heated before anyone asks for it.",
+    "The tally of packs matches the tally that left.",
+    "A bed is made up in the back room before it is needed.",
+    "The lamp-boy counts the burned wicks back into the tray.",
+    "The bell is rung once, and not for alarm."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4686,7 +4698,19 @@
     "Carried the water up. Did not carry it down.",
     "Left the stew on. Said back by dark.",
     "Tied off the last sack. Did not tie off the last knot.",
-    "Paid the tithe early and the debt late. Both were paid."
+    "Paid the tithe early and the debt late. Both were paid.",
+    "Sharpened every blade in the guild. Left his own dull.",
+    "Fed the hens before the stair. The hens were fed.",
+    "Swore at the rope. Trusted it anyway.",
+    "Stood the middle watch. Stood it to the end.",
+    "Wrote a name in the ledger. Is in it still.",
+    "Salted the road for the carts. Walked it on foot.",
+    "Kept three spare wicks. Used the third.",
+    "Said the stair was nothing. Counted it twice.",
+    "Packed bread for two days. Needed one.",
+    "Hauled the sledge to the pit-head. Went down behind it.",
+    "Washed the cup. Hung it on the peg. Did not drink from it again.",
+    "Knew every cellar in town. Did not know the last one."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -13829,6 +13853,44 @@
           "Whatever it cost, the floor is open again.",
           "Count what you kept."
         ]
+      },
+      "blower": {
+        "arrive": [
+          "Something ahead is drawing the air in.",
+          "A broad man in pit wool, working a bellows backwards. A pale ribbed bag rides high on his back.",
+          "He does not strike anyone. He draws the room empty, a stroke at a time.",
+          "Every stroke, everybody in here acts a little slower. Whoever carries the most gives out first.",
+          "Look at the bag. It stands one band fuller every stroke. That is how long the room has left.",
+          "Nothing done to the man slows the count. Hit him all you like.",
+          "Three iron patches are stitched over the bag. It has been holed in those places before.",
+          "Hole the bag and the count stops.",
+          "Half-worn hide, newer iron on it, and a man who has not lost his rhythm since you came in."
+        ],
+        "act": [
+          "The bellows draws. {name} is slower for it.",
+          "Another stroke. {name} feels the air go thin.",
+          "{name} is carrying the most, and it shows.",
+          "The bag stands a band fuller. {name} reaches for the next move and it comes late.",
+          "{name} breathes short. The bellows does not stop.",
+          "One stroke more. {name} is a half-beat behind.",
+          "{name} goes for the patch iron. The bag is a long way up his back."
+        ],
+        "broken": [
+          "The bag is holed. The air stops moving.",
+          "A rent in the hide at the patch iron. The count stops where it stands.",
+          "He works the handles and nothing draws. The bag hangs slack.",
+          "The bellows wheeze. The room has stopped getting emptier."
+        ],
+        "fall": [
+          "Deadair is down. The bellows hang slack in his hands.",
+          "The bag sags flat. The air comes back into the room.",
+          "Nobody is drawing on it now. Breathe.",
+          "The handles drop out of his grip and the count is gone.",
+          "He folds over the bag with his hands still on the bar.",
+          "Move how you like. Nothing is slowing you now.",
+          "The last stroke goes out of him and does not come back.",
+          "Take the bellows down. Mend the bag. Walk the floor."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13860,7 +13922,8 @@
     "_note_c152": "C-152: pitman feed lines (44th miniboss, Underfoot, crypt). Arrive 9 + fall 8, recent two-phase shape. Expected zero-hit key: DO NOT WIRE.",
     "_note_c154": "C-154: epitaphs +12, descend +12, cleared +12 (plain strings, same shape). Expected zero-hit key: DO NOT WIRE.",
     "_note_c158": "C-158: pitman (44th miniboss) gets act x7 and broken x4, the dependency the S79 way was held on. act lines take {name}, the delver the floor opened under. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c167": "C-167: tither (45th miniboss, Tenthpart, the first EXIT CONDITION: paid off or refused, not only killed) gets arrive x9, act x7, broken x4, fall x8 - the pitman's shape. act lines take {name}, the delver paying or refusing. fall lines are written to read true whether the tenth was paid or the body was beaten, since the encounter can end either way. Expected zero-hit key: DO NOT WIRE."
+    "_note_c167": "C-167: tither (45th miniboss, Tenthpart, the first EXIT CONDITION: paid off or refused, not only killed) gets arrive x9, act x7, broken x4, fall x8 - the pitman's shape. act lines take {name}, the delver paying or refusing. fall lines are written to read true whether the tenth was paid or the body was beaten, since the encounter can end either way. Expected zero-hit key: DO NOT WIRE.",
+    "_note_c169": "C-169: blower (46th miniboss, Deadair, the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives out first, nothing done to the man slows the count, holing the bag stops it) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither shape. act lines take {name}, the delver slowed or reaching for the patch iron. broken lines are the bag being holed (count stops). fall lines read true whether the bag was holed or the man beaten. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",
@@ -14361,5 +14424,6 @@
   "_note_c163": "C-163 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c164": "C-164 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
-  "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
+  "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
+  "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
 }

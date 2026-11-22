@@ -994,6 +994,58 @@ static func commands() -> Dictionary:
                 _guard_faults.append("ORDER GHOST")
                 push_error("COMMANDS_DATA ORDER GHOST: `order` names %d key(s) no command answers: %s" % [ghost.size(), ghost])
                 printerr("COMMANDS_DATA ORDER GHOST - `order` names %d dead key(s): %s" % [ghost.size(), ghost])
+        # B108: THE ALIAS COLUMN HAS BEEN PUBLISHED SINCE L14 AND NO ARM HAS EVER READ IT.
+        # I grepped my own file for an ALIAS tag before writing this - rc=1, no arm - and
+        # tools/_l14_test.gd:97-100 asks only whether an alias collides with ANOTHER APP's
+        # words, never whether it routes HERE. canonical() (:2996) is the only router: it
+        # returns `word` when `commands` already has it, otherwise the first key whose
+        # `aliases` list holds it. docs/COMMANDS.md publishes every alias as a route a viewer
+        # can type, so an alias that does not route is a published lie, and all four shapes
+        # below are silent in every gate today. Not fatal - the command still answers under
+        # its own name - so each says it out loud and carries on, the shape `order` uses above.
+        var al_bad: Array = []          # `aliases` is not an array: canonical() would call
+                                        # .has() on Nil and EVERY command stops routing
+        var al_shadow: Array = []       # the alias is also a command key, so cs.has(word)
+                                        # wins first and the alias never reaches this command
+        var al_clash: Array = []        # the same alias on two commands: whichever key the
+                                        # dictionary walks first wins, silently
+        var al_dead: Array = []         # handle() lowercases and splits on whitespace before
+                                        # canonical(), so upper case/blank/padded never arrives
+        var al_seen: Dictionary = {}
+        for k in cmd_d:
+            var av: Variant = (cmd_d[k] as Dictionary).get("aliases", [])
+            if typeof(av) != TYPE_ARRAY:
+                al_bad.append(String(k))
+                continue
+            for a in (av as Array):
+                if typeof(a) != TYPE_STRING:
+                    al_dead.append("%s:<%s>" % [k, type_string(typeof(a))])
+                    continue
+                var al_s := String(a)
+                if al_s.is_empty() or al_s != al_s.to_lower() or al_s.strip_edges() != al_s or al_s.contains(" "):
+                    al_dead.append("%s:%s" % [k, al_s])
+                if cmd_d.has(al_s):
+                    al_shadow.append("%s:%s" % [k, al_s])
+                if al_seen.has(al_s):
+                    al_clash.append("%s:%s (already %s)" % [k, al_s, al_seen[al_s]])
+                else:
+                    al_seen[al_s] = k
+        if not al_bad.is_empty():
+            _guard_faults.append("ALIAS UNUSABLE")
+            push_error("COMMANDS_DATA ALIAS UNUSABLE: `aliases` is not an array on %d command(s) - canonical() cannot route at all: %s" % [al_bad.size(), al_bad])
+            printerr("COMMANDS_DATA ALIAS UNUSABLE - `aliases` not an array on %d command(s): %s" % [al_bad.size(), al_bad])
+        if not al_shadow.is_empty():
+            _guard_faults.append("ALIAS SHADOW")
+            push_error("COMMANDS_DATA ALIAS SHADOW: %d alias(es) are also command keys, so they answer that command and never this one: %s" % [al_shadow.size(), al_shadow])
+            printerr("COMMANDS_DATA ALIAS SHADOW - %d alias(es) shadowed by a command key: %s" % [al_shadow.size(), al_shadow])
+        if not al_clash.is_empty():
+            _guard_faults.append("ALIAS CLASH")
+            push_error("COMMANDS_DATA ALIAS CLASH: %d alias(es) are declared on two commands and route by dictionary order: %s" % [al_clash.size(), al_clash])
+            printerr("COMMANDS_DATA ALIAS CLASH - %d alias(es) declared twice: %s" % [al_clash.size(), al_clash])
+        if not al_dead.is_empty():
+            _guard_faults.append("ALIAS DEAD")
+            push_error("COMMANDS_DATA ALIAS DEAD: %d published alias(es) can never reach canonical() as written: %s" % [al_dead.size(), al_dead])
+            printerr("COMMANDS_DATA ALIAS DEAD - %d published alias(es) unreachable: %s" % [al_dead.size(), al_dead])
         # B23: the earnability pass run over my own files. Every guard above stops at the key
         # it names, and five live reads sit one level below them. `ask` being a non-empty
         # dictionary says nothing about `topics`, and `ask.order` is the same instrument as

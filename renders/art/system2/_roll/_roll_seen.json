@@ -1,0 +1,149 @@
+[
+ {
+  "angle": 0,
+  "front": {
+   "alone": 2790,
+   "vis": 2610,
+   "seen": 0.935,
+   "minor": 35
+  },
+  "side": {
+   "alone": 3076,
+   "vis": 2264,
+   "seen": 0.736,
+   "minor": 41
+  },
+  "back": {
+   "alone": 3038,
+   "vis": 864,
+   "seen": 0.284,
+   "minor": 51
+  }
+ },
+ {
+  "angle": 20,
+  "front": {
+   "alone": 2788,
+   "vis": 2574,
+   "seen": 0.923,
+   "minor": 57
+  },
+  "side": {
+   "alone": 4798,
+   "vis": 3940,
+   "seen": 0.821,
+   "minor": 70
+  },
+  "back": {
+   "alone": 3129,
+   "vis": 865,
+   "seen": 0.276,
+   "minor": 64
+  }
+ },
+ {
+  "angle": 35,
+  "front": {
+   "alone": 2807,
+   "vis": 2629,
+   "seen": 0.937,
+   "minor": 87
+  },
+  "side": {
+   "alone": 5062,
+   "vis": 4238,
+   "seen": 0.837,
+   "minor": 99
+  },
+  "back": {
+   "alone": 3170,
+   "vis": 865,
+   "seen": 0.273,
+   "minor": 90
+  }
+ },
+ {
+  "angle": 50,
+  "front": {
+   "alone": 2909,
+   "vis": 2607,
+   "seen": 0.896,
+   "minor": 98
+  },
+  "side": {
+   "alone": 5023,
+   "vis": 4218,
+   "seen": 0.84,
+   "minor": 121
+  },
+  "back": {
+   "alone": 3181,
+   "vis": 849,
+   "seen": 0.267,
+   "minor": 98
+  }
+ },
+ {
+  "angle": 65,
+  "front": {
+   "alone": 3005,
+   "vis": 2625,
+   "seen": 0.874,
+   "minor": 72
+  },
+  "side": {
+   "alone": 4741,
+   "vis": 4044,
+   "seen": 0.853,
+   "minor": 128
+  },
+  "back": {
+   "alone": 3152,
+   "vis": 831,
+   "seen": 0.264,
+   "minor": 72
+  }
+ },
+ {
+  "angle": 80,
+  "front": {
+   "alone": 3100,
+   "vis": 2640,
+   "seen": 0.852,
+   "minor": 58
+  },
+  "side": {
+   "alone": 4512,
+   "vis": 3916,
+   "seen": 0.868,
+   "minor": 127
+  },
+  "back": {
+   "alone": 3119,
+   "vis": 992,
+   "seen": 0.318,
+   "minor": 59
+  }
+ },
+ {
+  "angle": 90,
+  "front": {
+   "alone": 3133,
+   "vis": 2692,
+   "seen": 0.859,
+   "minor": 55
+  },
+  "side": {
+   "alone": 4554,
+   "vis": 3954,
+   "seen": 0.868,
+   "minor": 126
+  },
+  "back": {
+   "alone": 3078,
+   "vis": 1202,
+   "seen": 0.391,
+   "minor": 55
+  }
+ }
+]

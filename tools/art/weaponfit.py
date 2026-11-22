@@ -97,6 +97,8 @@ import json
 import math
 import argparse
 
+import re
+
 import bpy
 import numpy as np
 from mathutils import Vector, Matrix, bvhtree
@@ -113,7 +115,12 @@ CELL_X, CELL_Y = 760, 760   # square: pass 2 cropped three swords and two dagger
                             # off a 520-wide cell once the carry went horizontal
 FRAME_H = 3.80               # metres of world height in the cell, fixed for all 24.
                              # 3.30 still cropped sword_rare (1.50 m of blade held out); this does not.
-GROUND_UP = 0.18
+GROUND_UP = 0.35           # the frame's bottom edge sits at -GROUND_UP. 0.18 cropped all
+                           # eight staff cells once the staff was carried at the engine's
+                           # real x1.9: its butt reaches z -0.216, BELOW THE FLOOR. The old
+                           # value hid the one thing those cells most needed to show, so the
+                           # bottom is dropped to -0.35 to keep the fault IN the picture
+                           # rather than clipped out of it.
 # az -90 is the CARRY side (handslot.r is at world x -0.49). See fault 4 above.
 VIEWS = [("front", 0.0), ("side", -90.0), ("back", 180.0)]
 CONTROL_VIEW = ("side_offhand", 90.0)
@@ -129,6 +136,153 @@ VIS_MIN = 900                # ...AND A RATIO IS BLIND TO SIZE. Found by looking
                              # A view must clear BOTH or it is not evidence.
 MIN_PROVING = 2              # a cell needs two views that actually show the weapon
 DIFF_EPS = 0.02
+
+# =============================================================================
+# *** FAULT 6, FOUND 21 NOV 16:4x CT. `vis` AND `seen` CANNOT SEE READABILITY,
+# *** AND THE SWEEP THAT PROVED IT MOVED NEITHER NUMBER.
+# =============================================================================
+# The register went GREEN on all 24 cells at 14:55 and the team lead, looking
+# at crossbow_common_side.png, still saw "a flat plank forward of the hand and
+# nothing a viewer would call a crossbow". Both were right.
+#
+# THE PROOF IS A SWEEP, NOT AN OPINION (tools/art/_s2_roll.py, seven angles of
+# roll about the slot's own forward axis, everything else frozen, one camera
+# per view shared by every angle):
+#
+#       roll   front vis   front seen   front minor   side minor
+#         0      2610        0.935          35            41     <- ships
+#        35      2629        0.937          87            99
+#        90      2692        0.859          55           126
+#
+# `vis` moves 3% across a sweep that takes the picture from an unreadable tray
+# to a crossbow anyone can name, and `seen` moves the WRONG WAY. Raising
+# VIS_MIN could never have caught this; it would only have failed the dagger.
+#
+# WHAT DOES SEPARATE THEM IS WHETHER THE CARRY EVER TURNS THE WEAPON'S BROADEST
+# FACE TO A CAMERA. `show` is the best view's silhouette MINOR extent divided
+# by the pixels the weapon's own MIDDLE world extent would subtend. A dagger is
+# a sliver and scores 1.03 because it shows all the breadth it has; the
+# crossbow is 0.69 x 0.64 m and scores 0.39 because its prod plane is level and
+# all three cameras are level, so every one of them catches it edge-on.
+#
+# MEASURED ON ALL 24 SHIPPED CELLS, 21 Nov 16:5x CT:
+#   crossbow_uncommon 0.37, crossbow_common 0.39, crossbow_rare 0.40
+#   ... and then NOTHING until axeDouble_common 1.00, through to hammer 1.06.
+# The distribution is bimodal with a 0.60-wide empty gap. SHOW_MIN is set in
+# that gap, not tuned to make anything pass or fail.
+#
+# *** THE DENOMINATOR USED TO MOVE, AND IT MOVED THE WRONG WAY. FIXED 21 NOV
+# *** 17:5x CT, AND THE NOTE THAT STOOD HERE BEFORE WAS WRONG.
+# What stood here said the world AABB "overstates the middle extent for a
+# canted weapon, so `show` is understated ... the conservative direction is
+# toward RED". I MEASURED IT AND IT IS THE OPPOSITE. Rotating a weapon changes
+# its world AABB, so the denominator was a property of the CARRY and not of the
+# weapon, and every change that improves the numerator shrinks it at the same
+# time. From tools/art/_s2_camber.py, crossbow_common, one body, one camera set:
+#
+#      camber  roll   best_minor   world mid_px   show(world)   show(fixed)
+#         0      0        51           130.7         0.390         0.390
+#         0     35        99           118.8         0.833         0.757
+#        40      0        84           112.5         0.747         0.643
+#        40     35        99            98.0         1.010         0.757
+#
+# The bottom row scores 1.01 on a weapon whose honest number is 0.757 - a 33%
+# unearned pass, and it is unearned in exactly the direction a lane fixing a
+# lath would push. A gate that rewards shrinking the weapon is not a gate.
+# THE DENOMINATOR IS NOW TAKEN IN THE MESH'S OWN LOCAL FRAME (times the
+# engine's hand_scale), which no carry rotation can touch. `show` therefore
+# answers only "how much of the breadth this weapon HAS does the carry turn to
+# a camera", which is the question it was built to ask.
+# RESIDUAL, SAID PLAINLY AND MEASURED RATHER THAN GUESSED: a change that
+# genuinely DEFORMS the mesh - bending the limbs, not rotating them - still
+# shrinks the local extent, so camber can still buy some of its own pass.
+# At 40 deg the local mid falls 0.6535 -> 0.5623 m, which is 14% (I wrote 4%
+# here from reasoning first, then measured it). Against the 33% above that is
+# an improvement and NOT a closure. A real OBB, or the max silhouette minor
+# over all orientations, would close it.
+SHOW_MIN = 0.70
+PX_PER_M = CELL_Y / FRAME_H
+
+
+# =============================================================================
+# *** FAULT 5, FOUND 21 NOV 14:3x CT BY RE-RUNNING THE REGISTER AND LOOKING. ***
+# THE REGISTER WAS MEASURING A CARRY THE ENGINE NO LONGER SHIPS.
+# =============================================================================
+# The plan said the crossbow red would "clear on its own" once the game build's
+# gear.gd fix landed (ada04de8, S20, `held_rot` -> Vector3(-90, 0, 90)). I re-ran
+# the register at 14:37 CT and it came back BIT-IDENTICAL: FAIL, crossbow_common
+# front seen 0.395 vis 726, side 0.664 vis 2039, back 0.097 vis 175. Not one digit
+# moved, because THIS FILE NEVER READ gear.gd. It carried all 24 models with the
+# identity correction and a flat HAND_SCALE of 0.8, so the engine's per-family
+# overrides could not reach it. The red was never stale; it was measuring a
+# different carry from the one that ships.
+#
+# AND THE RED UNDERSTATED IT. The one view the instrument called proving - side,
+# seen 0.664, vis 2039 - shows NO crossbow a viewer could name: 2039 px on a
+# 760x760 cell is 0.35% of the frame, a dark smudge merged into the body's own
+# shadow. I looked at crossbow_common_side.png before writing this. Same family as
+# the pass-11 fault: a number that answers "how much of it is unoccluded" when the
+# viewer's question is "can I see a crossbow".
+#
+# TWO FAMILIES ARE AFFECTED, NOT ONE. gear.gd overrides crossbow (rot, x1.0) AND
+# staff (rot, x1.9). The six staff cells were reading GREEN at x0.8 and no
+# rotation - a 0.9 m wand lying across the hip, not the 1.7 m staff that ships.
+# A green cell measuring the wrong carry is worse than the red one, because
+# nobody goes and looks at it.
+#
+# THE ROTATION IS DERIVED, NOT COPIED. Godot's Vector3(-90, 0, 90) is a YXZ euler
+# in Godot's axes against a glTF mesh in Godot's axes; this file is Blender, where
+# the importer sends glTF +Z to -Y and glTF +Y to +Z. Copying the three numbers
+# across that boundary is exactly how a wrong carry reads green. So the slot frame
+# and each mesh were MEASURED instead (tools/art/_s2_axisprobe.py, 14:4x CT):
+#   handslot.r in Blender world: +X -> (0, 0, -1) DOWN, +Y -> (-0.15, -0.99, 0)
+#   FORWARD, +Z -> (-0.99, 0.15, 0) ACROSS. Axis for axis the frame gear.gd's S19
+#   comment describes, which is what lets its INTENT be honoured here.
+#   crossbow_common.glb in Blender: dim (0.691, 0.638, 0.194), thin axis Z, prod
+#   symmetric on X (-0.345..0.345), stock asymmetric on Y (-0.533..0.105).
+# gear.gd's intent, in its own words: "mesh +Z -> slot +Y (stock forward), mesh +Y
+# -> slot -X (up), mesh +X -> slot -Z (prod across)" - read through the importer's
+# mapping, that is Blender mesh -Y -> slot +Y, +Z -> slot -X, +X -> slot -Z.
+# Each matrix below is asserted to be a proper rotation (det +1) before it is used.
+ENGINE_FAMS = ("crossbow", "staff")
+SLOT_ROT = {
+    # columns are where the mesh's local +X, +Y, +Z land in the slot frame
+    "crossbow": ((0, 0, -1), (0, -1, 0), (-1, 0, 0)),
+    "staff":    ((0, 0, 1), (0, 1, 0), (-1, 0, 0)),
+}
+
+
+def gear_overrides(gear_path):
+    """Read the engine's per-family hand_scale out of gear.gd. RED ON EMPTY:
+    a family this file claims to mirror and cannot find in gear.gd is a FAIL,
+    not a silent fall back to 0.8 - that silence is what hid this for four days."""
+    with open(gear_path, encoding="utf-8", errors="replace") as fh:
+        src = fh.read()
+    out, missing = {}, []
+    for fam in ENGINE_FAMS:
+        pat = r'path\.begins_with\(DUN \+ "%s_"\)\s*:\s*\n\s*return\s+([0-9.]+)' % fam
+        m = re.findall(pat, src)
+        rot = re.search(r'path\.begins_with\(DUN \+ "%s_"\)\s*:\s*\n\s*return Vector3\(([^)]*)\)' % fam, src)
+        if not m or not rot:
+            missing.append(fam)
+            continue
+        out[fam] = {"scale": float(m[-1]),
+                    "engine_rot_deg": [x.strip() for x in rot.group(1).split(",")]}
+    if missing:
+        raise SystemExit("WEAPONFIT FAIL - gear.gd carries no override this file could "
+                         "parse for: %s. Refusing to measure a carry I cannot verify "
+                         "against the engine." % ", ".join(missing))
+    return out
+
+
+def slot_matrix(fam):
+    cols = SLOT_ROT[fam]
+    M = Matrix(((cols[0][0], cols[1][0], cols[2][0]),
+                (cols[0][1], cols[1][1], cols[2][1]),
+                (cols[0][2], cols[1][2], cols[2][2])))
+    d = M.determinant()
+    assert abs(d - 1.0) < 1e-6, "%s slot rotation is not a proper rotation (det %.4f)" % (fam, d)
+    return M.to_4x4()
 
 
 def world_verts(objs):
@@ -219,6 +373,10 @@ def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
+    ap.add_argument("--gear", default="",
+                    help="scripts/gear.gd of the main repo. Default: the sibling "
+                         "checkout. The engine's per-family carry is READ from it, "
+                         "never copied into this file by hand.")
     ap.add_argument("--fams", default=",".join(FAMS))
     ap.add_argument("--control", action="store_true",
                     help="also shoot the old offhand-side camera, scored the same way")
@@ -238,6 +396,14 @@ def main():
     assert rig is not None, "no armature in the hero glb"
     assert hinfo["posed"], "hero is in REST pose - the idle action did not take"
     bpy.context.view_layer.update()
+    gear_path = a.gear or os.path.join(os.path.dirname(os.path.abspath(a.repo)),
+                                       "jests-hd-medieval-adventure", "scripts", "gear.gd")
+    if not os.path.exists(gear_path):
+        raise SystemExit("WEAPONFIT FAIL - cannot read the engine carry at %s. This "
+                         "register mirrors gear.gd; without it every cell would be "
+                         "measuring an assumption." % gear_path)
+    OVR = gear_overrides(gear_path)
+    print("WEAPONFIT engine carry read from %s: %s" % (gear_path, json.dumps(OVR)))
     pb = rig.pose.bones["handslot.r"]
     base = rig.matrix_world @ pb.matrix
     slot = base @ Vector((0, 0, 0))
@@ -272,7 +438,7 @@ def main():
     bmn, bmx, bpts = G.world_bounds(body)
     cz = (FRAME_H / 2.0) - GROUND_UP
 
-    reg, errors, blanks, clipped_frames, blind = {}, [], [], [], []
+    reg, errors, blanks, clipped_frames, blind, laths = {}, [], [], [], [], []
     body_only = {}
 
     for fam in fams:
@@ -285,10 +451,17 @@ def main():
                 for o in objs:
                     bpy.data.objects.remove(o, do_unlink=True)
                 continue
-            S = Matrix.Diagonal((HAND_SCALE,) * 3).to_4x4()
+            hs = OVR[fam]["scale"] if fam in OVR else HAND_SCALE
+            S = Matrix.Diagonal((hs,) * 3).to_4x4()
+            # The `show` denominator, taken BEFORE the carry is applied so no
+            # rotation can shrink it. See the note above SHOW_MIN.
+            lv = world_verts(meshes)
+            local_ext = (sorted([max(v[i] for v in lv) - min(v[i] for v in lv)
+                                 for i in range(3)]) if lv else None)
+            Rslot = slot_matrix(fam) if fam in SLOT_ROT else Matrix.Identity(4)
             for o in objs:
                 if o.parent is None:
-                    o.matrix_world = base @ S @ o.matrix_world
+                    o.matrix_world = base @ Rslot @ S @ o.matrix_world
             bpy.context.view_layer.update()
             wv = world_verts(meshes)
             if not wv:
@@ -307,7 +480,9 @@ def main():
                        reach=round(max(zs) - slot.z, 3), drop=round(slot.z - min(zs), 3),
                        span=round(max(v.x for v in wv) - min(v.x for v in wv), 3),
                        tip_z=round(max(zs), 3), hero_h=round(hinfo["h"], 3),
-                       clip=n_clip, ground=n_ground, hand_scale=HAND_SCALE)
+                       clip=n_clip, ground=n_ground, hand_scale=hs,
+                       engine_mirrored=(fam in OVR),
+                       engine_rot_deg=(OVR[fam]["engine_rot_deg"] if fam in OVR else None))
             allpts = bpts + wv
             outs, proving = {}, 0
             for vname, az in views:
@@ -331,6 +506,11 @@ def main():
                 C = render_to(os.path.join(tmpdir, "_w_%s_%s.png" % (key, vname)))
                 show(body, True)
 
+                cm = C[:, :, 3] > DIFF_EPS
+                if int(cm.sum()) >= 2:
+                    cys, cxs = np.nonzero(cm)
+                    rec.setdefault("minor", {})[vname] = int(min(cxs.max() - cxs.min() + 1,
+                                                                 cys.max() - cys.min() + 1))
                 op = int((B[:, :, 3] > DIFF_EPS).sum())
                 if op == 0:
                     blanks.append(os.path.basename(png))
@@ -368,6 +548,26 @@ def main():
                 rec.setdefault("seen", {})[vname] = round(seen, 4)
                 bpy.data.objects.remove(cam, do_unlink=True)
             rec["outside"] = outs
+            ext = sorted([max(v[i] for v in wv) - min(v[i] for v in wv) for i in range(3)])
+            mid_px = (local_ext[1] * hs * PX_PER_M) if local_ext else 0.0
+            rec["ext"] = [round(e, 4) for e in ext]
+            rec["local_ext"] = [round(e, 4) for e in local_ext] if local_ext else None
+            rec["mid_px"] = round(mid_px, 1)
+            rec["mid_px_world_was"] = round(ext[1] * PX_PER_M, 1)
+            mins = rec.get("minor", {})
+            if mid_px <= 1.0 or not mins:
+                # RED ON EMPTY. A `show` over a zero-width mesh, or over no
+                # measured view at all, is a ratio of nothing and must not read
+                # as a pass just because it computed.
+                errors.append("%s: cannot compute `show` - mid_px %.2f over %d measured "
+                              "views. This is a FAIL, not a 1.0." % (key, mid_px, len(mins)))
+            else:
+                rec["best_minor"] = max(mins.values())
+                rec["show"] = round(rec["best_minor"] / mid_px, 3)
+                if rec["show"] < SHOW_MIN:
+                    laths.append("%s: show %.2f (best view turns %d px of a possible %.0f to "
+                                 "the camera) - the carry never shows this weapon's broad face"
+                                 % (key, rec["show"], rec["best_minor"], mid_px))
             # the control camera is a measurement OF THE OLD VIEW, not evidence
             # for the cell - it must not be able to rescue a cell by existing.
             if (a.control and rec["seen"].get(CONTROL_VIEW[0], 0.0) >= SEEN_MIN
@@ -389,22 +589,26 @@ def main():
         errors.append("register has %d of %d cells" % (len(reg), want))
     if not reg:
         errors.append("EMPTY REGISTER - nothing was measured, this is a FAIL not a pass")
-    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind)
+    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind) and (not laths)
     out = dict(verdict="GREEN" if ok else "FAIL", ok=ok, hero=hinfo,
                handslot=[round(v, 4) for v in slot], cells=len(reg),
                views=[v for v, _ in views], seen_min=SEEN_MIN, vis_min=VIS_MIN,
-               min_proving=MIN_PROVING,
+               min_proving=MIN_PROVING, show_min=SHOW_MIN, px_per_m=PX_PER_M,
+               laths=laths,
                blanks=blanks, frame_clips=clipped_frames, blind_views=blind,
                errors=errors, models=reg)
     rp = os.path.join(outdir, "_fit_register.json")
     with open(rp, "w") as f:
         json.dump(out, f, indent=1)
-    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d errors=%d"
-          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind), len(errors)))
+    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d laths=%d errors=%d"
+          % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind),
+             len(laths), len(errors)))
     for e in errors:
         print("  ERROR", e)
     for e in blind:
         print("  BLIND", e)
+    for e in laths:
+        print("  LATH", e)
     print("WEAPONFIT_DONE", rp)
 
 

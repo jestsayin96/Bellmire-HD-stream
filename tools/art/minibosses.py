@@ -16041,3 +16041,390 @@ def tither():
 
 
 BUILDERS.update({"tither": tither})
+
+
+# ============================================================ 46 THE BLOWER
+# WHAT I CHECKED FOR BEFORE DESIGNING THIS, MEASURED OFF THIS FILE AND NOT
+# REMEMBERED: `ORDER` carries 45 keys (parsed, not grepped - every `ORDER =
+# ORDER + [...]` evaluated and concatenated) and I read all 45 idea strings out
+# of CANON before writing a word of this one. NOTHING IN THE SET IS A CLOCK.
+# The nearest four and why each is a different fight:
+#   stoker  (IT IS ONLY AS BIG AS THE FIRE) - a resource OUTSIDE the creature
+#           that the party starves. Here the resource is the room's own air and
+#           the creature is the one taking it; there is nothing to starve.
+#   rammer  (IT DROPS ON THE COUNT) - ONE telegraphed blow on a beat. A single
+#           event you step off, not a floor-wide cost that accrues every beat.
+#   snuffer (IT TAKES THE LIGHT) - takes a thing the party can SEE BY. This
+#           takes the thing they ACT with, and no lamp is touched.
+#   tither  (IT WILL BE PAID) - an exit condition the party chooses. This one
+#           cannot be paid and cannot be refused; it can only be holed.
+# So: the forty-sixth is the first body in the file whose fight has a running
+# cost per beat, and the cost is on ITS OWN BODY where a viewer can watch it.
+CANON.update({
+    "blower": ("Deadair", 2.48, (0.50, 0.53, 0.56), (0.86, 0.91, 0.96),
+               "fogbound", "IT TAKES THE AIR - it does not wound anybody and "
+               "it does not take anyone away. It works the bellows BACKWARDS "
+               "and draws the room empty a stroke at a time, and with the air "
+               "goes what the party does with it: every delver in here acts "
+               "slower on each stroke, and whoever is carrying the most gives "
+               "out first. Nothing done to the man slows the count. THE COUNT "
+               "IS THE BAG - it rides high on his back, pale and ribbed, and "
+               "it stands one band fuller every stroke, so a viewer can see "
+               "how long this room has left without being told a number. "
+               "HOLE THE BAG AND THE COUNT STOPS - and the bag says where to "
+               "put it: three iron patches are stitched over the places it "
+               "has been holed before. THIS IS THE ONLY FIGHT IN THIS FILE "
+               "RUN BY A CLOCK, and the clock is hung on the creature where "
+               "the party can reach it.",
+               0.48, "Something ahead is drawing the air in."),
+})
+ORDER = ORDER + ["blower"]
+
+# PER-SLOT MATERIALS - the Tither's rule, applied again because it is the one
+# that has worked twice: THE PALE THING IS THE THING THE MECHANIC IS COUNTED
+# ON, and the man is dark so he is read against it. Here the counter is THE BAG,
+# because the bag IS the clock. The man is pit wool and the handles are iron,
+# both dark, so neither competes with the one object a viewer must watch.
+# WEAR 0.48 IS NOT A FREE RUNG PICKED FOR NOVELTY - it is the rung that says
+# what this body is: a bag that gets holed often is a bag that gets re-stitched
+# often, so the leather is half-worn and the patch iron on it is NEWER than the
+# bag. That is Mr. E's second rule used to carry the mechanic rather than to
+# decorate it: the wear tells you the thing has a weakness and that the weakness
+# has been used before. 0.48 is also unoccupied in the ladder (nearest live
+# rungs 0.45 and 0.50), so it extends the set instead of repeating a step.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"blower"}
+
+OVERRIDE.update({
+    "blower": {
+        # THE MAN. Pit wool and soot, flat, no sheen. The least interesting
+        # value on the body on purpose.
+        'body': ((0.082, 0.086, 0.092), 0.92, 0.01),
+        # THE RIB BANDS, THE NOZZLE MOUTH, THE HANDLES AND THE PATCH IRON.
+        # Near black - these are the lines that make the pale bag read as
+        # RIBBED rather than as one smooth sack.
+        'dark': ((0.026, 0.027, 0.030), 0.74, 0.06),
+        # THE BAG. Half-worn hide, pale and cool, the brightest thing here and
+        # the only thing that needs to be legible at stream distance.
+        'bone': ((0.735, 0.715, 0.655), 0.56, 0.02),
+        # Eyes only, small, and FORWARD OF THE SHOULDER LINE. Nothing emissive
+        # goes anywhere near the back of this body: the back-lamp guard reads
+        # back/side chromaticity against the front view and a rear light source
+        # is the exact fault it was built to catch.
+        'glow': ((0.96, 0.94, 0.86), 2.0),
+    },
+})
+
+
+def _ribbag(P, pts, radii, flat=0.62, bands=2):
+    """THE BELLOWS BAG: a wedge-flattened lung that reads as RIBBED.
+
+    THE FAULT THIS SHAPE IS AIMED AT, and it is the one I expect to be the
+    open question after pass 1: a smooth swept tube at stream distance is a
+    SAUSAGE. A bellows is only a bellows because of its bands, and a band
+    drawn as a thin wire ring is under a pixel at the distance a viewer
+    actually watches this game from. So the bands are not applied TO the bag -
+    THE BAG IS MADE OF THEM: each gap between stations is cut into `bands`
+    truncated cones and the slot alternates bone/dark, so the ribbing is
+    geometry at full body scale and survives any resolution.
+
+    `flat` squashes the local DEPTH of every segment so the thing is a broad
+    flat LUNG, not a barrel. PASS 1 SQUASHED THE OTHER AXIS AND THAT WAS THE
+    RUN'S REAL FAULT: a wedge narrow in X sits entirely behind a man who is
+    wider than it, so the front view - the view a viewer actually watches the
+    fight from - showed no bag, no ribs and no clock at all. I looked at the
+    picture and it was a dark lump with a buckler. The bag must be WIDER THAN
+    THE SHOULDERS so it reads past the body from the front, and shallow in
+    depth so it stays a worked instrument rather than a sack.
+    """
+    # PASS 4 IS THIS LINE OF NUMBERS AND NOTHING ELSE. Passes 1-3 cut each
+    # station gap into EQUAL bands, so the pale leather and the dark groove
+    # got the same share of the body and the thing read as a STRIPED BARREL
+    # rather than as a worked bellows. Worse, at the top the dark half landed
+    # directly under the dark lid and the two merged into one black block that
+    # was the heaviest mass in both the front and the side view - I looked at
+    # the pass-3 side render and the crown of the bag is a dark square, not a
+    # board on leather. A real bellows is WIDE ROLLS AND NARROW GROOVES, so
+    # the cut is now 36 / 28 / 36: the groove keeps its silhouette, the pale
+    # rolls carry the body, and nothing dark is wide enough to merge with the
+    # lid.
+    CUTS = (0.00, 0.36, 0.64, 1.00)
+    SLOTS = ('bone', 'dark', 'bone')
+    out = []
+    n = len(pts)
+    for i in range(n - 1):
+        a, b = Vector(pts[i]), Vector(pts[i + 1])
+        ra, rb = radii[i], radii[i + 1]
+        for j in range(len(SLOTS)):
+            t0, t1 = CUTS[j], CUTS[j + 1]
+            p0, p1 = a + (b - a) * t0, a + (b - a) * t1
+            r0 = ra + (rb - ra) * t0
+            r1 = ra + (rb - ra) * t1
+            d = p1 - p0
+            seg = L.cone(r0, r1, d.length, 18)
+            slot = SLOTS[j]
+            # the dark bands are pulled IN slightly so they read as the groove
+            # between two pale rolls rather than as a stripe painted on a
+            # cylinder - a groove has a silhouette, a stripe does not.
+            k = 1.0 if slot == 'bone' else 0.90
+            P.raw(aim(seg, p0, d, (k, flat * k, 1.0)), slot)
+            out.append((p0, p1, r0, r1))
+    return out
+
+
+def blower():
+    """THE BLOWER - 46th. A man under two spars with a ribbed lung on his back.
+
+    SILHOUETTE ARGUMENT, which is the acceptance test: with the colour thrown
+    away this is a WEDGE ABOVE A MAN, crowned by two spars that reach forward
+    over his head, with a flared mouth coming round his hip to point at the
+    viewer. Nothing in the other forty-five has that outline: the nearest
+    masses are the Drillmaster's flat disc (a circle, edge-on from the side),
+    the Scrapwright's lopsided plate mound (no ribs, no spars) and the
+    Stackman's sheaves (a pile, not a worked instrument). A viewer who has
+    seen one of those does not mistake this for it.
+
+    THE THREE VIEWS ARE DELIBERATELY DIFFERENT, AND THAT IS THE BEADLE'S
+    LESSON APPLIED RATHER THAN RE-LEARNED. On the Beadle the pale band
+    carrying the eyes wrapped the head, so the figure read the same from front
+    and back and had NO FACING. Here:
+      FRONT  the dark hooded man, two eyes, the pale mouth of the nozzle
+             aimed out of the frame at you, and the bag's narrow edge rising
+             behind his shoulder - the wedge seen on its thin axis.
+      SIDE   the full wedge profile with every rib, the spars raked forward,
+             the nozzle's whole run from hip to mouth.
+      BACK   the pale ribbed face of the bag and the three patches, and NO
+             eyes, NO mouth, NO glow of any kind.
+    Three reads, one mechanic, and the facing is unambiguous from any of them.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here: minibossgen measures the real footprint
+    against floorgen's own corridor span and lid and the report says it.
+    """
+    P = Parts("blower")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # FRONT IS -Y. lordgen's front camera sits at az 0 -> (0, -1, el), so
+    # everything the mechanic is carried by must be placed with that in mind:
+    # the bag goes on +Y (the back), the mouth comes round to -Y (the front).
+    # ---------------------------------------------------------------- THE MAN
+    _open()
+    # legs, braced wide and planted. He does not chase anybody - he stands and
+    # he works - so the stance is wider than the Tither's and the knees are
+    # under the load rather than leaning into it.
+    # PASS 5 IS THE STANCE AND NOTHING ELSE. Through pass 4 the feet raked
+    # FORWARD of the hips while the whole bag hung behind the shoulders, and
+    # the side render reads exactly as that arrangement must: a man toppling
+    # backwards. Nobody carrying a load stands like that. The feet now plant
+    # UNDER AND SLIGHTLY BEHIND the hips and the torso comes FORWARD over
+    # them, which is both the posture that does not fall over and the posture
+    # of a man actually working a pair of handles - he is braced against the
+    # thing on his back, not hanging off it.
+    for s in (-1, 1):
+        pts = seat([(s * 0.205, 0.030, 0.76), (s * 0.275, 0.070, 0.40),
+                    (s * 0.300, 0.095, 0.090)], 0.142)
+        limb(P, pts, 0.142, 0.118, 'body')
+        P.add(L.box(0.310, 0.46, 0.125), 'body', loc=(s * 0.300, 0.030, 0.062))
+    # torso, carried FORWARD of the hips so the bag's mass is over the feet
+    limb(P, [(0.0, 0.055, 0.72), (0.0, -0.015, 1.06), (0.0, -0.070, 1.38)],
+         0.340, 0.272, 'body')
+    # the shoulder mass the spars and the bag straps sit on
+    P.add(L.sphere(0.330, 0.250, 0.205, 16, 10), 'body', loc=(0.0, -0.055, 1.395))
+    # hood: a low cowl, a dark mouth-void and two small eyes, ALL on -Y
+    P.add(L.sphere(0.252, 0.256, 0.240, 16, 10), 'body', loc=(0.0, -0.120, 1.575))
+    P.add(L.sphere(0.180, 0.134, 0.160, 14, 9), 'dark', loc=(0.0, -0.282, 1.538))
+    for s in (-1, 1):
+        P.add(L.sphere(0.042, 0.036, 0.040, 9, 7), 'glow',
+              loc=(s * 0.076, -0.378, 1.556))
+    # the two straps over the chest that carry the bag. Dark, and they are the
+    # reason the bag is not floating behind him.
+    for s in (-1, 1):
+        limb(P, [(s * 0.215, 0.235, 1.455), (s * 0.235, -0.175, 1.230),
+                 (s * 0.180, -0.120, 0.930)], 0.052, 0.044, 'dark')
+    _close("man")
+
+    # ------------------------------------------------------------ THE GAUGE
+    # PASS 6, PART TWO, AND THE ONLY THING THIS PASS ACTUALLY SHIPS. With
+    # option (a) refuted above, the note's option (b) is the one left: give
+    # the front its own face carrying the same count.
+    #
+    # WHAT IT IS, IN MR. E'S FIRST RULE'S TERMS - a thing that looks like what
+    # it is FOR. Not a dial, not an instrument panel, nothing with a needle on
+    # it. A TALLY BOARD hung on the two straps already crossing his chest,
+    # pale hide like the bag because it is OFF the bag, with eight dark rungs
+    # across it - one rung per band, the same eight bands the bag is built
+    # from. A man who works a bellows all day and must know how many strokes
+    # are left marks them where he can see them: on his own chest, upside
+    # down to him, right way up to whoever is standing in front of him. That
+    # is the whole idea and it is the plainest version of it I could find.
+    #
+    # It is also the only pale mass on the front half of this body other than
+    # the nozzle mouth, which is what the front needed: at pass 5 the front
+    # view was 4% lit pale and nearly all of that was two rims out at the
+    # edges. Nothing goes on the back or the sides - the back already reads,
+    # and the back-lamp guard reads back/side chromaticity against the front,
+    # so pale added FORWARD is the safe direction and pale added aft is the
+    # exact fault that guard exists to catch.
+    #
+    # Sized off the torso rather than guessed: the torso limb runs r0.340 at
+    # z0.72 to r0.272 at z1.38, so at z1.20 its front surface is y -0.327.
+    # The board's back face sits at -0.303, INSIDE that surface, so it is
+    # stitched on and not floating; its front face stands 0.030 proud. The
+    # straps pass at x +-0.18..0.235 over this height, so a board 0.24 wide
+    # hangs between them and touches neither.
+    GAUGE = os.environ.get("BLOWER_GAUGE", "1") != "0"
+    if GAUGE:
+        _open()
+        # THE FIRST PLACEMENT OF THIS BOARD WAS WRONG AND I CAUGHT IT BY
+        # LOOKING, NOT BY MEASURING - every number it produced was an
+        # improvement and the picture was worse. At GZ 1.200 with a dark lug
+        # across its top, the lug sat a tenth of a unit under the two eyes and
+        # spanned the same width, so the front view read as A FACE: two eyes,
+        # a wide banded grin under them, and the board below it a bib. That is
+        # the Beadle's lesson in a new costume - a body saying something it was
+        # never meant to say - and no count in _bagfacing.py can see it,
+        # because a misread is not a quantity. So: the board drops to 1.090,
+        # it loses 0.04 of height so it does not ride onto the hip, and THE TOP
+        # LUG IS GONE. Only the bottom lug remains, which is the one that reads
+        # as a board hung on strapping rather than as a jaw.
+        GZ, GH = 1.090, 0.400
+        P.add(L.box(0.240, 0.055, GH), 'bone', loc=(0.0, -0.330, GZ))
+        # the eight rungs, one per band of the bag, proud of the board so they
+        # throw their own line instead of being a painted-on stripe.
+        for i in range(8):
+            z = GZ - GH * 0.5 + GH * (i + 0.5) / 8.0
+            P.add(L.box(0.266, 0.020, 0.024), 'dark', loc=(0.0, -0.352, z))
+        # one dark lug, at the FOOT, where the board hangs off the strapping.
+        P.add(L.box(0.150, 0.070, 0.050), 'dark',
+              loc=(0.0, -0.330, GZ - (GH * 0.5 + 0.030)))
+        _close("gauge")
+
+    # ------------------------------------------------------------- THE HANDLES
+    # Two spars raked UP AND FORWARD over his head, with his hands on them.
+    # They are the only thing in this file that breaks the frame line above a
+    # head, and they say "this is worked" before the bag says what it is.
+    _open()
+    GRIP = [(-0.300, -0.030, 1.690), (0.300, -0.030, 1.690)]
+    for s, g in zip((-1, 1), GRIP):
+        P.raw(L.tube([(s * 0.235, 0.420, 1.245), (s * 0.275, 0.120, 1.520),
+                      (s * 0.300, -0.250, 1.830)],
+                     [0.050, 0.046, 0.040], 10), 'dark')
+        # the arm up to the grip
+        limb(P, [(s * 0.285, 0.040, 1.345), (s * 0.300, 0.010, 1.545),
+                 (g[0], g[1], g[2])], 0.112, 0.084, 'body')
+        # the fist on the spar
+        P.add(L.sphere(0.096, 0.088, 0.090, 12, 8), 'body', loc=g)
+    _close("handles")
+
+    # ----------------------------------------------------------------- THE BAG
+    # The clock. Eight alternating bands from above the shoulders down to the
+    # hip, flattened on X into a wedge.
+    _open()
+    STATIONS = [(0.0, 0.455, 1.660), (0.0, 0.440, 1.350), (0.0, 0.395, 1.090),
+                (0.0, 0.300, 0.880), (0.0, 0.170, 0.785)]
+    # WIDER THAN THE SHOULDERS ON PURPOSE. The man's shoulder mass is 0.330
+    # half-width; the bag's top band is 0.520, so 0.19 of pale ribbing stands
+    # clear on each side in the front view and the clock is readable from the
+    # view that matters. Pass 1's 0.430 behind a 0.62 X-squash left 0.27 - all
+    # of it inside the man's own outline.
+    RADII = [0.520, 0.495, 0.410, 0.300, 0.172]
+    # PASS 6, PART ONE: A HYPOTHESIS I RAN AND THEN KILLED. Leaving the knob
+    # in with its ORIGINAL default, because the next seat deserves the failed
+    # experiment and not just the conclusion.
+    #
+    # The open fault was that the bag is the clock and the party fights this
+    # from the FRONT, where the clock was not there. I measured it off the
+    # shipped pass-5 renders with tools/art/_bagfacing.py rather than trusting
+    # the eye alone: lit pale over the creature's own silhouette is 0.040 from
+    # the front against 0.181 from behind, and of the little pale the front
+    # does get, only 0.16 of it lies inside the middle half of the figure -
+    # two thin rims standing out beside him. That is the archway read, in
+    # numbers.
+    #
+    # The owed note offered two fixes and said to take ONE. I took the first -
+    # bring the bag's own flanks round toward the front camera by making the
+    # wedge less flat - and swept it at 0.58 / 0.74 / 0.88 with everything
+    # else frozen. IT GOES THE WRONG WAY:
+    #
+    #     flat       front litpale_share    front width_px
+    #     0.58  (shipped)      0.0401              196
+    #     0.74                 0.0329              196
+    #     0.88                 0.0296              196
+    #
+    # Deeper is WORSE from the front and not by a little. The reason is plain
+    # once the three renders are laid side by side, which I did and looked at:
+    # the bag is wide in X and banded in Z, so from the front the viewer sees
+    # the band EDGES nearly tangent to the view direction. They take grazing
+    # light whatever their depth, and added depth is added self-shadow. The
+    # front silhouette does not move one pixel wider at any value. So the
+    # first fix cannot work AT ALL - it is not a matter of finding the right
+    # number - and the note's option (a) is struck. Default stays 0.58, which
+    # is pass 5's geometry exactly; only the lid now derives from it instead
+    # of being a second number to keep in step.
+    FLAT = float(os.environ.get("BLOWER_FLAT", "0.58"))
+    _ribbag(P, STATIONS, RADII, flat=FLAT, bands=2)
+    # the top board - a bellows has a flat lid, and without it the stack reads
+    # as a cone with a dome on it.
+    P.add(L.box(1.085, 2.0 * RADII[0] * FLAT + 0.022, 0.055), 'dark',
+          loc=(0.0, 0.455, 1.676))
+    # THE THREE PATCHES. Iron plates stitched over old holes - they are where
+    # the party is being told to put the next one, and they are NEWER than the
+    # bag, which is what wear 0.48 is for. Each gets four pale rivets so it
+    # reads as fixed-on rather than as a dark smudge.
+    # One is on the LEFT FLANK where the front camera sees it past his
+    # shoulder, one on the back face and one low on the near side, so no view
+    # of this body is without the instruction.
+    for (px, py, pz, pw, ph) in ((-0.395, 0.400, 1.355, 0.150, 0.205),
+                                 (0.120, 0.690, 1.175, 0.165, 0.190),
+                                 (0.330, 0.560, 0.960, 0.150, 0.160)):
+        P.add(L.box(pw, 0.075, ph), 'dark', loc=(px, py, pz))
+        for dx in (-1, 1):
+            for dz in (-1, 1):
+                P.add(L.sphere(0.022, 0.022, 0.022, 8, 6), 'bone',
+                      loc=(px + dx * pw * 0.34, py - 0.030, pz + dz * ph * 0.34))
+    _close("bag")
+
+    # -------------------------------------------------------------- THE NOZZLE
+    # From the bag's foot, round the near hip, up to a FLARED MOUTH aimed at
+    # the front camera. The flare is the whole point: a plain pipe end at
+    # stream distance is a stick, and the one thing this mouth has to say is
+    # that something is going INTO it.
+    _open()
+    #
+    # PASS 3 IS THIS OBJECT AND NOTHING ELSE, AND IT IS A WRONG READ BEING
+    # FIXED RATHER THAN A WEAK ONE BEING STRENGTHENED. In passes 1 and 2 the
+    # mouth was aimed almost straight down the front camera's own axis, so
+    # what the camera got was a perfect PALE RING WITH A BLACK DISC IN IT at
+    # chest height - and that is a buckler. The body was saying IT BLOCKS,
+    # which is the Paviser's fight and not this one. A horn only reads as a
+    # horn when you can see INSIDE its wall, so the mouth is now swung down
+    # and outboard: the opening is an ellipse, the near wall catches the key
+    # light, and the dark throat sits at the far end of it instead of filling
+    # the whole circle. It is also SMALLER - at pass 2 it was the brightest
+    # mass on the body and it was out-shouting the bag, which is the one
+    # object here that must win.
+    RUN = [(0.0, 0.170, 0.785), (0.215, 0.055, 0.820), (0.330, -0.195, 0.880),
+           (0.330, -0.370, 0.845)]
+    P.raw(L.tube(RUN, [0.150, 0.124, 0.100, 0.086], 12), 'bone')
+    MOUTH = Vector((0.330, -0.405, 0.835))
+    DIR = Vector((-0.46, -0.78, -0.43))
+    P.raw(aim(L.cone(0.086, 0.176, 0.165, 20), MOUTH, DIR), 'bone')
+    # the throat, sunk and DARK - this is what says IT DRAWS IN. The Pitman's
+    # open fault answered in advance: an empty vessel with a lit interior reads
+    # as a lid or a plate, so the darkest value on this body is in here.
+    P.raw(aim(L.cone(0.070, 0.150, 0.128, 20), MOUTH + DIR.normalized() * 0.036,
+              DIR), 'dark')
+    _close("nozzle")
+
+    return P
+
+
+BUILDERS.update({"blower": blower})

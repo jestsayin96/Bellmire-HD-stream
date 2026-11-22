@@ -1,0 +1,501 @@
+{
+ "ok": true,
+ "tier": "common",
+ "hand_scale": 1.0,
+ "x0_frac": 0.35,
+ "angles": [
+  0.0,
+  30.0,
+  40.0
+ ],
+ "rolls": [
+  0.0,
+  20.0,
+  35.0
+ ],
+ "ref_mid_px": 130.70386522449553,
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "show_min": 0.7,
+ "errors": [],
+ "rows": [
+  {
+   "angle": 0.0,
+   "roll": 0.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.0
+   },
+   "clip": 40,
+   "ground": 0,
+   "ext": [
+    0.1942,
+    0.6535,
+    0.69
+   ],
+   "mid_px": 130.7,
+   "reach": 0.08,
+   "drop": 0.114,
+   "minor": {
+    "front": 35,
+    "side": 41,
+    "back": 51
+   },
+   "major": {
+    "front": 140,
+    "side": 132,
+    "back": 140
+   },
+   "alone": {
+    "front": 2790,
+    "side": 3076,
+    "back": 3038
+   },
+   "vis": {
+    "front": 2610,
+    "side": 2264,
+    "back": 864
+   },
+   "seen": {
+    "front": 0.9355,
+    "side": 0.736,
+    "back": 0.2844
+   },
+   "best_minor": 51,
+   "worst_minor": 35,
+   "show_live": 0.39,
+   "show": 0.39
+  },
+  {
+   "angle": 0.0,
+   "roll": 20.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.0
+   },
+   "clip": 35,
+   "ground": 0,
+   "ext": [
+    0.2808,
+    0.6488,
+    0.6652
+   ],
+   "mid_px": 129.8,
+   "reach": 0.155,
+   "drop": 0.126,
+   "minor": {
+    "front": 57,
+    "side": 70,
+    "back": 64
+   },
+   "major": {
+    "front": 134,
+    "side": 131,
+    "back": 134
+   },
+   "alone": {
+    "front": 2788,
+    "side": 4798,
+    "back": 3129
+   },
+   "vis": {
+    "front": 2574,
+    "side": 3940,
+    "back": 865
+   },
+   "seen": {
+    "front": 0.9232,
+    "side": 0.8212,
+    "back": 0.2764
+   },
+   "best_minor": 70,
+   "worst_minor": 57,
+   "show_live": 0.539,
+   "show": 0.536
+  },
+  {
+   "angle": 0.0,
+   "roll": 35.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.0
+   },
+   "clip": 35,
+   "ground": 0,
+   "ext": [
+    0.4351,
+    0.5945,
+    0.6437
+   ],
+   "mid_px": 118.9,
+   "reach": 0.23,
+   "drop": 0.205,
+   "minor": {
+    "front": 87,
+    "side": 99,
+    "back": 90
+   },
+   "major": {
+    "front": 120,
+    "side": 130,
+    "back": 120
+   },
+   "alone": {
+    "front": 2807,
+    "side": 5062,
+    "back": 3170
+   },
+   "vis": {
+    "front": 2629,
+    "side": 4238,
+    "back": 865
+   },
+   "seen": {
+    "front": 0.9366,
+    "side": 0.8372,
+    "back": 0.2729
+   },
+   "best_minor": 99,
+   "worst_minor": 87,
+   "show_live": 0.833,
+   "show": 0.757
+  },
+  {
+   "angle": 30.0,
+   "roll": 0.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.1793
+   },
+   "clip": 38,
+   "ground": 0,
+   "ext": [
+    0.3233,
+    0.623,
+    0.6536
+   ],
+   "mid_px": 124.6,
+   "reach": 0.209,
+   "drop": 0.114,
+   "minor": {
+    "front": 60,
+    "side": 71,
+    "back": 75
+   },
+   "major": {
+    "front": 126,
+    "side": 132,
+    "back": 126
+   },
+   "alone": {
+    "front": 2859,
+    "side": 4490,
+    "back": 3023
+   },
+   "vis": {
+    "front": 2694,
+    "side": 3680,
+    "back": 856
+   },
+   "seen": {
+    "front": 0.9423,
+    "side": 0.8196,
+    "back": 0.2832
+   },
+   "best_minor": 75,
+   "worst_minor": 60,
+   "show_live": 0.602,
+   "show": 0.574
+  },
+  {
+   "angle": 30.0,
+   "roll": 20.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.1793
+   },
+   "clip": 26,
+   "ground": 0,
+   "ext": [
+    0.4081,
+    0.5848,
+    0.6486
+   ],
+   "mid_px": 117.0,
+   "reach": 0.295,
+   "drop": 0.114,
+   "minor": {
+    "front": 78,
+    "side": 85,
+    "back": 91
+   },
+   "major": {
+    "front": 119,
+    "side": 131,
+    "back": 119
+   },
+   "alone": {
+    "front": 2852,
+    "side": 4359,
+    "back": 3082
+   },
+   "vis": {
+    "front": 2663,
+    "side": 3501,
+    "back": 849
+   },
+   "seen": {
+    "front": 0.9337,
+    "side": 0.8032,
+    "back": 0.2755
+   },
+   "best_minor": 91,
+   "worst_minor": 78,
+   "show_live": 0.778,
+   "show": 0.696
+  },
+  {
+   "angle": 30.0,
+   "roll": 35.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.1793
+   },
+   "clip": 15,
+   "ground": 0,
+   "ext": [
+    0.4462,
+    0.5155,
+    0.6435
+   ],
+   "mid_px": 103.1,
+   "reach": 0.336,
+   "drop": 0.11,
+   "minor": {
+    "front": 92,
+    "side": 97,
+    "back": 96
+   },
+   "major": {
+    "front": 105,
+    "side": 130,
+    "back": 105
+   },
+   "alone": {
+    "front": 2869,
+    "side": 4822,
+    "back": 3096
+   },
+   "vis": {
+    "front": 2609,
+    "side": 3952,
+    "back": 830
+   },
+   "seen": {
+    "front": 0.9094,
+    "side": 0.8196,
+    "back": 0.2681
+   },
+   "best_minor": 97,
+   "worst_minor": 92,
+   "show_live": 0.941,
+   "show": 0.742
+  },
+  {
+   "angle": 40.0,
+   "roll": 0.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.2369
+   },
+   "clip": 36,
+   "ground": 0,
+   "ext": [
+    0.3703,
+    0.5623,
+    0.6536
+   ],
+   "mid_px": 112.5,
+   "reach": 0.256,
+   "drop": 0.114,
+   "minor": {
+    "front": 70,
+    "side": 80,
+    "back": 84
+   },
+   "major": {
+    "front": 114,
+    "side": 132,
+    "back": 114
+   },
+   "alone": {
+    "front": 2898,
+    "side": 4797,
+    "back": 3031
+   },
+   "vis": {
+    "front": 2726,
+    "side": 4026,
+    "back": 867
+   },
+   "seen": {
+    "front": 0.9406,
+    "side": 0.8393,
+    "back": 0.286
+   },
+   "best_minor": 84,
+   "worst_minor": 70,
+   "show_live": 0.747,
+   "show": 0.643
+  },
+  {
+   "angle": 40.0,
+   "roll": 20.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.2369
+   },
+   "clip": 20,
+   "ground": 0,
+   "ext": [
+    0.4393,
+    0.5274,
+    0.6486
+   ],
+   "mid_px": 105.5,
+   "reach": 0.326,
+   "drop": 0.114,
+   "minor": {
+    "front": 84,
+    "side": 91,
+    "back": 96
+   },
+   "major": {
+    "front": 107,
+    "side": 131,
+    "back": 107
+   },
+   "alone": {
+    "front": 2879,
+    "side": 4553,
+    "back": 3060
+   },
+   "vis": {
+    "front": 2691,
+    "side": 3694,
+    "back": 846
+   },
+   "seen": {
+    "front": 0.9347,
+    "side": 0.8113,
+    "back": 0.2765
+   },
+   "best_minor": 96,
+   "worst_minor": 84,
+   "show_live": 0.91,
+   "show": 0.734
+  },
+  {
+   "angle": 40.0,
+   "roll": 35.0,
+   "camber": {
+    "xmax": 0.3455,
+    "x0": 0.1209,
+    "z0": 0.0159,
+    "moved": 76,
+    "total": 395,
+    "max_disp": 0.2369
+   },
+   "clip": 15,
+   "ground": 0,
+   "ext": [
+    0.4565,
+    0.4903,
+    0.6434
+   ],
+   "mid_px": 98.1,
+   "reach": 0.353,
+   "drop": 0.104,
+   "minor": {
+    "front": 96,
+    "side": 97,
+    "back": 99
+   },
+   "major": {
+    "front": 100,
+    "side": 130,
+    "back": 100
+   },
+   "alone": {
+    "front": 2916,
+    "side": 4472,
+    "back": 3079
+   },
+   "vis": {
+    "front": 2641,
+    "side": 3606,
+    "back": 872
+   },
+   "seen": {
+    "front": 0.9057,
+    "side": 0.8064,
+    "back": 0.2832
+   },
+   "best_minor": 99,
+   "worst_minor": 96,
+   "show_live": 1.01,
+   "show": 0.757
+  }
+ ]
+}

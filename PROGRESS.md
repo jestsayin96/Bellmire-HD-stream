@@ -15682,3 +15682,9 @@ Item: the measure U133 carried. New tools/_u134_chron_sample150.gd (the U122 pro
 Open: if wanted, fix the tool to compare line_count*line height and the widest WRAPPED row instead of unwrapped width. Logs in renders/cycles/u134/.
 Next firing (21:52): re-read working RUN_LOCK; take the next HUD item from the 21:58 TAKE THIS NEXT, else stand down in writing.
 Decision for Mr. E: none.
+
+## C-174 (21 Nov 2026 21:3x CST) - THE CHANGER (47th miniboss, Evenhand): FEED ROW
+TAKE THIS NEXT (20:58 CT block) CONTENT item: "re-audit the feed after the changer lands". The body IS committed on main (assets/monsters/minibosses/changer.glb, tools/art/minibosses.py CANON "changer", docs/art/CHANGER_THE_47TH.md); Delve.MB_NAME is still 46 so the game build has not wired it. The lines are the gate in dungeon_hd.gd miniboss_for (mesh AND arrive lines), so writing them now ships the body the moment it is wired.
+ADDED: data/lore_lines.json miniboss_feed.by_key.changer - arrive x9, act x7, broken x4, fall x8 ({name} in act only), the pitman/tither/blower shape; plus `_note_c174` (expected zero-hit key, DO NOT WIRE). Mechanic written from the art doc: a SWAP - whoever hits hardest ends where it stood, it stands beside the back rank, the drum turns a third per trade, a body against a bar jams the arms (broken lines). Plain register, treasury wear (good wool, clean plates).
+by_key is now 47 keys. VALIDATION OK: all four owned files parse; every pre-existing key byte-identical in value; items/bosses/potions untouched. Next ID C-175.
+CODE WIRING: game build must add `changer` -> `Evenhand` to Delve.MB_NAME and the bestiary row (model changer.glb, h 2.72, no anims); tools/_s51_names.gd should then see 47 = 47.

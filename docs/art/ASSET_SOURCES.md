@@ -486,3 +486,16 @@ added by a re-run.
 - Formats: glTF (with `.bin`), FBX and OBJ. The glTF set needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
 - The pack is a tools-and-props set (anvil, grindstone, journal, lantern, map, torch, wrench and similar), not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_RPGToolsBits_1.0_FREE`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - KayKit_ResourceBits_1.0_FREE (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit : Resource Bits (1.0) (folder `KayKit_ResourceBits_1.0_FREE`, nested one level as `KayKit_ResourceBits_1.0_FREE\KayKit_ResourceBits_1.0_FREE\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\KayKit_ResourceBits_1.0_FREE\KayKit_ResourceBits_1.0_FREE\License.txt` | 466 on disk: 76 glTF models (`Assets\gltf\`: 76 `.gltf` + 76 `.bin`, plus 1 `.png`), 77 `.fbx` (`Assets\fbx\`), 77 `.fbx` (`Assets\fbx(unity)\`), 153 `.obj`/`.mtl` set (`Assets\obj\`), 1 texture (`Textures\resource_bits_texture.png`), 1 `contents.png`, 3 `.url` (Discord, more assets, Patreon), 1 `License.txt` | permitted | not required; the licence says crediting is "not mandatory, but would be appreciated" |
+
+- Checked: every file under `_packs\KayKit_ResourceBits_1.0_FREE\` by walking the tree (466 files, counted with `find -type f`). The sibling `KayKit_ResourceBits_1.0_FREE.zip` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off `License.txt` on disk this run, not from a search snippet. The file reads, verbatim: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects." Crediting: "this is not mandatory, but would be appreciated".
+- The same file asks, as a courtesy and not as a condition of the grant, for support via Patreon or the EXTRA/SOURCE packs on itch.io.
+- Formats: glTF (with `.bin`) needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
+- The pack is a resource-props set (copper, gold, iron and silver bars, nuggets and stacks; fuel barrels and jerrycans; pallets; stone bricks and chunks; textiles; wood logs and planks; parts piles and cogs). It is not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_ResourceBits_1.0_FREE`. Nothing is redistributed AS an asset.

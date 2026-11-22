@@ -15780,3 +15780,11 @@ and not committed.
 Next firing: whatever the 21:58 TAKE THIS NEXT gives the CHAT BOT row. L56's remainder (run 4) is
 carried, but I am flagging that re-running it unchanged buys nothing.
 Decision for Mr. E: none.
+
+## HUB - 21 Nov 2026 22:4x CT - HOLD web/ STEADY (the 21:58 row). No change, no READY TO PUBLISH claim.
+- TAKE THIS NEXT (21:58) row for HUB: "hold web/ steady, no publish gap". Taken as written.
+- Measured after merging origin/main: `origin/gh-pages^{tree}` == `HEAD:web` == 02257b2fe8698cbf8aa2224b3e4e98ce5db48dc2; `git diff origin/hub -- web docs/HUB_SECURITY.md` EMPTY.
+- Security greps on app.js: innerHTML only at :255 and :301 (page-owned literals); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (hits are comments); `node --check` OK; CSP meta present x1.
+- No screenshot taken (web/ unchanged, so no new picture to judge). Live-dot colour unchanged. Hostile-name test not re-run: not owed until web/ changes.
+- Untracked, named, not committed: `_hub_ready_shot.png` (worktree root).
+- Decision for Mr. E: none.

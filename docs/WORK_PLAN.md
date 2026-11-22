@@ -73,6 +73,54 @@ there is no publish gap to authorise this hour - publish 6 (15:39 CT) consumed i
 verification gate, because no lane claimed READY TO PUBLISH and an unearned gate report is the same
 fault class as a lying gate.
 
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt - the gate is on
+the CALL, not a field, settled 09:07 CT 18 Nov - so I made NO write attempt this run and say so.
+Land them all on the first live turn). Carried from 18:58 with (2) STILL OWED AND NOW TWO HOURS
+OLD, and four added:
+  (1) MB_NAME IS 46 AND by_key IS 46, SETS EQUAL. I re-measured both sides this hour with my own
+      brace-matched, comment-skipping parser: MB_NAME 46 keys, 46 distinct; lore_lines.json
+      miniboss_feed.by_key 46 rows; symmetric difference EMPTY. Record the three parser failure
+      modes (flat regex; trailing `#` comments; anchoring on "MB_NAME" where it first appears in a
+      COMMENT instead of on `const MB_NAME :=`) - all three read 37 or 42.
+  (2) The gh-pages block: tip **029e4fac** / tree **02257b2f** / pushed 15:39 CT 21 Nov, and
+      NOTHING merged-and-unpublished. I measured it myself rather than copying (2) forward:
+      `origin/gh-pages^{tree}` == `origin/hub:web` == `origin/main:web` == 02257b2f, and the
+      numstat between gh-pages and hub:web is EMPTY. The prompt's "3 files / +59 / -1 with the
+      supervisor since 20 Nov" is SPENT AND WRONG. THIRD HOUR OWED.
+  (3) L31 IS WHOLE - strike "the L31 remainder is the game build's".
+  (4) THERE ARE TWO ART REGISTERS. The prompt's standing "RED on two retired `_chibi` rows" note
+      describes only the MINIBOSS one. The SYSTEM 2 WEAPON CARRY register (24 cells) is a separate
+      instrument with a separate red, and as of this hour that red is a TRUE one - see (9).
+  (5) The weaponfit `show` denominator is LOCAL-FRAME since 17:5x. Any seat quoting a pre-17:5x
+      show number is quoting an inflated one.
+  (6) THE CROSSBOW GEOMETRY ITEM IS DELIVERED, NOT OPEN (stirrup + drawn string + bolt at 18:53,
+      35 deg roll at 18:15). The register re-run at roll 35 has now happened - roll_applied_deg is
+      35.0 on all three crossbow cells and no crossbow cell is in floor_breaks. (6) IS NOW SPENT
+      IN BOTH HALVES and should be dropped rather than carried.
+  (7) THE S20 CROSSBOW ARM IS "PROD CANTED 25-45 DEG", NOT "PROD LEVEL".
+  (8) NEW - THE STEP 0 BASELINE IN THE PROMPT IS STALE. Measured 19:58 CT 21 Nov on merged main
+      bf01ba8e, off **2,374,725** chars of script (47 `scripts/*.gd` + `web/app.js` = 48 files),
+      **12** `data/*.json` files, **150** top-level keys: 60 zero-hit keys = **45 `_note_` + 15
+      NON-NOTE**, unreferenced asset directories **ZERO** (34 dirs with files, measured off
+      assets/ only), unread live data keys **ZERO**. The prompt says 2,345,688 chars / 146 keys /
+      56 (41+15). THE NON-NOTE 15 HAS NOT MOVED and is still exactly the accounted-for set: the
+      two runtime-built `_alt` pools, the four declared-dead (`phase2_words`, `phase2_words_alt`,
+      `phase2_words_alt2`, `town_levels_for_the_desktop`), and the nine prose/spec strings. The
+      raw total rises only because content keeps writing `_note_` keys, which it should.
+      THE SERIES: 52 (05:0x) -> 53 (06:58) -> 56 (08:58) -> **60 (19:58)**, non-note 15 throughout.
+  (9) NEW - ART'S SYSTEM 2 WEAPON REGISTER NOW GATES `floor_breaks`, AND IT READS FAIL FOR A TRUE
+      REASON. Art found FAULT 7 in its own instrument: `ground` had been measured and PRINTED on
+      every cell since pass 1 and conjoined into `ok` NOWHERE, so a weapon could hang through the
+      floor on every tier and the register would still say GREEN. It did - the staff does, on all
+      three tiers. Any prompt text that lets a seat wave away this register's verdict must not be
+      written. The change TIGHTENS the gate; I verified the direction rather than the outcome.
+  (10) NEW - IDs AS OF 19:58 CT 21 NOV, RE-MEASURE THEM: B114, C-172, D100, H32, L74, S96, T5,
+      U133. The prompt's "S85 / B104 / C-163 / U124" line is stale by many hours.
+  (11) NEW - THE CLEAN-HOUR COUNT IS **3 AFTER 19:58**. (Reset to 0 at 17:02 CT 21 Nov on the QA
+      stale lock; 1 after 17:58, 2 after 18:58, 3 after 19:58.) No overrun, no stale lock cleared,
+      no starved lane, no future stamp, no two lanes holding at once.
+
 ## TAKE THIS NEXT - Updated THE 18:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main f5507d8a: all SIX lanes (laptop 01e00b09, content 3ef0cdb9, art
 23875b30, hub eeeeeecd, hud-ui 907aea14, chatbot 8f3e45f2). FOUR conflicts (content, art, hub,

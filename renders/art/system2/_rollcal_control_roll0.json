@@ -1,0 +1,285 @@
+{
+ "verdict": "FAIL",
+ "ok": false,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "cells": 3,
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "seen_min": 0.15,
+ "vis_min": 900,
+ "min_proving": 2,
+ "show_min": 0.7,
+ "px_per_m": 200.0,
+ "roll_applied_deg": {},
+ "slot_rot_cal": {
+  "crossbow": [
+   "-90",
+   "0",
+   "90"
+  ],
+  "staff": [
+   "0",
+   "0",
+   "90"
+  ]
+ },
+ "laths": [
+  "crossbow_common: show 0.42 (best view turns 55 px of a possible 130 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_uncommon: show 0.41 (best view turns 64 px of a possible 154 to the camera) - the carry never shows this weapon's broad face",
+  "crossbow_rare: show 0.42 (best view turns 64 px of a possible 151 to the camera) - the carry never shows this weapon's broad face"
+ ],
+ "blanks": [],
+ "frame_clips": [],
+ "blind_views": [],
+ "errors": [],
+ "models": {
+  "crossbow_common": {
+   "model": "assets/gear/dungeon/crossbow_common.glb",
+   "verts": 745,
+   "checked": 526,
+   "reach": 0.088,
+   "drop": 0.14,
+   "span": 0.69,
+   "tip_z": 0.729,
+   "hero_h": 2.45,
+   "clip": 64,
+   "ground": 0,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "roll_applied_deg": 0.0,
+   "minor": {
+    "front": 52,
+    "side": 48,
+    "back": 55
+   },
+   "opaque": {
+    "front": 95412,
+    "side": 83388,
+    "back": 95803
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 3304,
+    "side": 2820,
+    "back": 865
+   },
+   "delta": {
+    "front": 3427,
+    "side": 3035,
+    "back": 935
+   },
+   "alone": {
+    "front": 3480,
+    "side": 3628,
+    "back": 3346
+   },
+   "seen": {
+    "front": 0.9494,
+    "side": 0.7773,
+    "back": 0.2585
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2284,
+    0.6535,
+    0.69
+   ],
+   "local_ext": [
+    0.2284,
+    0.6478,
+    0.691
+   ],
+   "mid_px": 129.6,
+   "mid_px_world_was": 130.7,
+   "best_minor": 55,
+   "show": 0.425,
+   "proving_views": 2
+  },
+  "crossbow_uncommon": {
+   "model": "assets/gear/dungeon/crossbow_uncommon.glb",
+   "verts": 881,
+   "checked": 662,
+   "reach": 0.095,
+   "drop": 0.184,
+   "span": 1.025,
+   "tip_z": 0.735,
+   "hero_h": 2.45,
+   "clip": 98,
+   "ground": 0,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "roll_applied_deg": 0.0,
+   "minor": {
+    "front": 64,
+    "side": 62,
+    "back": 57
+   },
+   "opaque": {
+    "front": 96400,
+    "side": 84409,
+    "back": 96659
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 5141,
+    "side": 3980,
+    "back": 1755
+   },
+   "delta": {
+    "front": 5319,
+    "side": 4255,
+    "back": 1887
+   },
+   "alone": {
+    "front": 5273,
+    "side": 4787,
+    "back": 5092
+   },
+   "seen": {
+    "front": 0.975,
+    "side": 0.8314,
+    "back": 0.3447
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2793,
+    0.7657,
+    1.0245
+   ],
+   "local_ext": [
+    0.2792,
+    0.7704,
+    1.0352
+   ],
+   "mid_px": 154.1,
+   "mid_px_world_was": 153.1,
+   "best_minor": 64,
+   "show": 0.415,
+   "proving_views": 3
+  },
+  "crossbow_rare": {
+   "model": "assets/gear/dungeon/crossbow_rare.glb",
+   "verts": 1038,
+   "checked": 826,
+   "reach": 0.122,
+   "drop": 0.166,
+   "span": 1.034,
+   "tip_z": 0.762,
+   "hero_h": 2.45,
+   "clip": 140,
+   "ground": 0,
+   "hand_scale": 1.0,
+   "engine_mirrored": true,
+   "engine_rot_deg": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "roll_applied_deg": 0.0,
+   "minor": {
+    "front": 61,
+    "side": 64,
+    "back": 60
+   },
+   "opaque": {
+    "front": 96306,
+    "side": 84708,
+    "back": 96413
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 5008,
+    "side": 4267,
+    "back": 1495
+   },
+   "delta": {
+    "front": 5190,
+    "side": 4452,
+    "back": 1620
+   },
+   "alone": {
+    "front": 5082,
+    "side": 5002,
+    "back": 4651
+   },
+   "seen": {
+    "front": 0.9854,
+    "side": 0.8531,
+    "back": 0.3214
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.288,
+    0.7523,
+    1.0338
+   ],
+   "local_ext": [
+    0.2879,
+    0.7563,
+    1.0445
+   ],
+   "mid_px": 151.3,
+   "mid_px_world_was": 150.5,
+   "best_minor": 64,
+   "show": 0.423,
+   "proving_views": 3
+  }
+ }
+}

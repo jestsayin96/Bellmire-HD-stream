@@ -15611,3 +15611,8 @@ Decision for Mr. E: none.
 TAKE THIS NEXT (19:58 block) HUB row: "nothing is unpublished ... Hold web/ steady". No row to build; web/ untouched this run.
 NUMBERS: origin/gh-pages^{tree} == origin/hub:web == origin/main:web == HEAD:web == 02257b2f (all equal, nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned) + comment mentions; outerHTML 0, eval( 0; insertAdjacentHTML/document.write/new Function appear only in the comment at app.js:10-11; 1 CSP meta. No new screenshot (web/ byte-identical to the published tree). Live-dot colour: unchanged from shipped. Untracked _hub_ready_shot.png is old and named here.
 Decision for Mr. E: none.
+
+## hub 21 Nov 21:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
+TAKE THIS NEXT (20:58 block) HUB row: "hold web/ steady. Nothing is unpublished." No row to build; web/ untouched this run.
+NUMBERS: origin/gh-pages^{tree} == origin/hub:web == HEAD:web == 02257b2f (git diff origin/hub -- web empty; nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only comment mentions); CSP meta present x1; index.html "only innerHTML ... two page-owned sites" comment true. Hostile-name test not owed (web/ unchanged). Live-dot colour: unchanged, no pass this run.
+Decision for Mr. E: none.

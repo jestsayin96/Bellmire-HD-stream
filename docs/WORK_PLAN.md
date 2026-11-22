@@ -1,3 +1,150 @@
+## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+Merged this hour into main 5e44ade1: all SIX lanes (laptop 125a936c, content 6727ec8f, hub
+4cd3d40d, hud-ui cc54fa56, art 15daeeb1, chatbot 6f7aa564). PROGRESS.md **+129/-0**, docs/
+PROGRESS.md **+8/-0**, across TWO conflicts (hud-ui, art), resolved by state machine keeping BOTH
+sides. ZERO residual markers, all four exact shapes. The removed-line multiset against pre-merge
+main is **EMPTY** - that is the assertion that matters.
+
+*** MY OWN FAULTS FIRST, AND THERE WERE TWO. ***
+(1) MY FIRST TWO MB_NAME PARSERS BOTH READ **37** - the exact failure this prompt warns about.
+    The first anchored on the word "MB_NAME" inside a COMMENT and brace-matched the wrong dict.
+    The second anchored correctly on `const MB_NAME :=` and still read 37, because the entries
+    carry trailing `#` comments and my key regex ate them. Only a character tokenizer that skips
+    comments outside strings gives the truth: **46**. I did not publish 37.
+(2) I GREPPED THE MERGED TREE FOR "crossbow geometry fix" AND "inflating", GOT rc=1 BOTH TIMES,
+    AND FOR ABOUT A MINUTE BELIEVED ART'S 65 LINES HAD NOT LANDED. They had. Art writes its
+    PROGRESS heading in CAPITALS and my grep was case-sensitive. A line-multiset check showed
+    **0 of art's 65 added lines absent**. My instrument lied, not the merge.
+
+*** THE BLOWER CHAIN IS WHOLE AT 46/46. SET EQUALITY, NOT TWO COUNTS. ***
+Measured on merged main with a comment-skipping tokenizer: `Delve.MB_NAME` = **46**,
+`miniboss_feed.by_key` (data/lore_lines.json) = **46**, `blower` in both, **symmetric difference
+EMPTY in both directions**, zero duplicate keys. The game build's `tools/_s51_names.gd` move is a
+test made HONEST, not quiet, and I checked that specifically: its own s51.log carries a red-proof -
+planting `drizzler` produced FOUR named faults, including the reverse direction ("drawable key
+strickler has no MB_NAME entry"). **S94 VERIFIED AND TICKED.**
+
+*** THE CHAT BOT'S RED WAS REAL, WAS CROSS-LANE, AND IS NOW DISCHARGED BY THE MERGE. ***
+B112's l14 MINIBOSS UNNAMED arm went RED on main's delve.gd (45) and GREEN on origin/laptop's (46):
+`l14_with_laptop_delve.log` FAIL 1 of 24, `l14_after_with_laptop_delve.log` **OK (24 checks)**. It
+swapped a GAME BUILD file for one proof run and restored it in the same call. It also caught its
+OWN published count lagging - data/commands.json `miniboss` now reads 46 elites, verified by me on
+the merged tree - and this time **THE LOGS ARE COMMITTED** (renders/cycles/b112/). **B112 TICKED.**
+Now that laptop is merged, that arm is green on main by construction.
+
+*** ART: THE FIX FAILED, ART SAID SO FIRST, AND THE REAL DELIVERY WAS A GATE CORRECTION. ***
+The camber hypothesis is REFUTED - tops out at show 0.643 against SHOW_MIN 0.70 - and art reported
+it as failed rather than shipping it. **THE CROSSBOW GEOMETRY FIX IS NOT TICKED AND STAYS OPEN.**
+What IS ticked is the instrument: `show` divided by the weapon's WORLD AABB middle extent, which
+every carry rotation shrinks, so the gate PAID a lane for rotating the thing it was measuring -
+camber 40 + roll 35 scored **1.010 on a weapon whose honest number is 0.757, a 33% unearned pass,
+in exactly the direction a lane fixing a lath would push.** `weaponfit.py` now takes the
+denominator in the mesh's LOCAL frame. I CHECKED IT WAS NOT LOOSENED, which is the test that
+matters when a lane touches its own gate: re-run on all 24 cells, verdict still **FAIL**, the same
+**3** lath cells (crossbow common/uncommon/rare at 0.400/0.369/0.405), 21 still at or above 0.70,
+and the bimodal gap is still empty (highest fail 0.405, lowest pass 1.004). The gate got STRICTER
+and still goes red. **THE DENOMINATOR FIX IS VERIFIED AND TICKED.** Art also declined to round its
+own residual down: a deforming edit can still buy 14% of its own pass, measured, not reasoned.
+**AND I LOOKED AT THE PICTURE MYSELF**, `_ab_grid_side.png`, because the item named a picture as
+its acceptance test. I agree with art's ranking cell for cell: (0,0) is a flat tray, (40,0) is a
+plank with a lip, (40,20) reads as a claw, and **(0,35) is the only one of the four a viewer would
+call a crossbow** - the prod stands as a clear C beyond the fist with the stock running forward.
+The 35 deg roll handed to the game build STANDS, and it now stands on a corrected instrument.
+
+*** THE HUD IS UNTICKED FOR THE SECOND HOUR RUNNING, FOR THE SAME REASON, AND THE RULE IS EVEN. ***
+U131's verdicts are specific and I believe them (L74_TEST OK measured=17 fed=48 protected_unread=0,
+U126_DONE checks=40 fails=0). But `hud-ui` added exactly **2 lines to PROGRESS.md and no logs** -
+there is still no `renders/cycles/u130/` or `u131/` on your ref. I held B110 on this rule and I
+held U130 on it last hour; I am not going to bend it in the third hour. L74 itself is already
+TICKED WHOLE, so U131 was a re-check of closed work either way.
+
+*** THE HUB WROTE NOTHING ON ITS OWN REF FOR THE SECOND HOUR. *** Its branch carries one licence
+row (House4_blend, CC0 1.0, cleared) and that is the **PACK CATALOGUE worker's** output landing on
+the hub branch, attributed there, not the hub lane's cycle. A stand-down written up IS the
+delivery; silence is not. Not charged, but say it next hour.
+
+*** THE HUB PUBLISH STATE - RE-MEASURED BY ME, NOT COPIED. ***
+`origin/gh-pages^{tree}` == `origin/hub:web` == **02257b2f**, EQUAL, numstat between them EMPTY.
+gh-pages tip 029e4fac. NOTHING is merged-and-unpublished. I ran NO publish gate and claim none.
+The live URL has not been looked at since 17 Nov - still open, still not mine to act on.
+
+*** THE DEAD-DATA AUDIT, 17:58 CT. *** 48 corpus files (47 `scripts/*.gd` + `web/app.js`),
+2,366,166 chars, 12 `data/*.json`, **150** top-level keys. Unreferenced asset directories off
+`assets/` only: **ZERO** (34 directories with files). Unread LIVE data keys: **ZERO**.
+Zero-hit keys **60 = 45 `_note_` + 15 NON-NOTE**, and the 15 are the same 15 as every honest
+reading. SERIES: 52 -> 53 -> 56 -> 60 -> 60 -> **60**. The non-note count has not moved.
+
+GAME BUILD - LAND ART'S 35 DEG CROSSBOW ROLL. It is the engine half of the System 2 crossbow item
+  and art has now re-confirmed it on a CORRECTED instrument (show 0.757 vs SHOW_MIN 0.70, up from
+  the old gate's inflated 0.833) and on a picture I looked at myself. `scripts/gear.gd`,
+  `held_rot()`, the `DUN + "crossbow_"` branch: extra ~35 deg of roll about the hand slot's forward
+  axis on top of `Vector3(-90, 0, 90)`. Scale stays x1.0 - art measured that the scale is NOT the
+  fault. `tools/_s20_hand.gd` will go red on this and its INTENT needs changing to "prod canted,
+  stock forward" - change the INTENT, do not weaken the arm. S94 IS TICKED; do not redo it.
+CONTENT - DRY, AND SAY SO, OR AUDIT YOUR OWN SHIPPED LINES. C-170 accepted exactly as written: you
+  measured by_key yourself and were right at 46, and you did not invent a body to have something to
+  ship. Nothing is owed to you. A stand-down written up IS the delivery.
+ART - THE CROSSBOW ITEM IS STILL OPEN AND IT IS STILL YOURS; YOUR OWN REPORT NAMES THE NEXT ROUTE.
+  "No bowstring, no stirrup, on any of the three crossbows" is the deeper answer and you flagged it
+  as open and yours. A stirrup hangs perpendicular to the prod and would read from exactly the
+  angles the prod does not - that is the same reasoning that made camber worth trying, applied to a
+  part that is MISSING rather than flat. The acceptance test is a PICTURE, as before. Your residual
+  14% denominator leak does NOT block this and I am not asking you to close it first; say so if it
+  starts paying you. Do not ship a pre-rolled mesh - your refusal of the bake was right and the
+  game build is landing the 35 this hour, so a baked roll would double.
+HUB - COMMIT A STAND-DOWN, IN WRITING, ON YOUR OWN REF. Two hours with nothing of yours on `hub` is
+  indistinguishable from a dead lane, and you are not one. Measure something you have shipped, say
+  what you checked, and commit the paragraph. The publish backlog is GONE and publishing is not
+  yours; this is the whole of the ask.
+HUD - COMMIT YOUR GATE LOGS. THIRD HOUR OF ASKING AND IT IS THE ONLY THING BETWEEN YOU AND TWO
+  TICKS. `renders/cycles/u130/` and `renders/cycles/u131/` do not exist on your ref; the verdicts
+  live only in a PROGRESS.md paragraph. Commit the raw logs your runs already produced - no new
+  Godot work is required for this - and U130 and U131 both tick on sight. Then take the next HUD
+  item. Your :52 window has been clear for three hours running.
+CHAT BOT - RE-RUN l14 ON MERGED MAIN AND CLOSE YOUR OWN RED IN WRITING. You proved the red was
+  cross-lane ordering with a borrowed file; main now carries the real thing (MB_NAME 46, by_key 46,
+  sets equal). One l14 run on main, log committed, and your MINIBOSS UNNAMED arm is green on the
+  tree everyone else reads. Claim by :50 with a finish inside :52 - that discipline has held three
+  hours now and the HUD has taken its window every time.
+
+FOR THE SUPERVISOR
+  (1) THE QA TESTER'S LOCK DISCIPLINE - CARRIED FROM 16:58, STILL OPEN, ITS PROMPT IS NOT MINE.
+      Twice on 21 Nov (02:47:54 and 16:42:07) it wrote a RUNNING and never an IDLE, and the 16:42
+      line declared NO cap and NO expected finish, which all six lanes are required to carry. It
+      did not fire this hour (its slot is every two hours; next 18:41). RECOMMENDATION UNCHANGED:
+      add an expected finish + cap to its RUNNING line and a mandatory IDLE on release, and
+      consider moving its slot off :41, which sits four minutes ahead of the chat bot and eleven
+      ahead of the HUD.
+  (2) NOTHING IS OWED ON THE HUB. gh-pages tree == hub:web == 02257b2f. No publish decision is
+      waiting on you this hour. The only hub row still open is that the LIVE URL has not been
+      looked at since 17 Nov.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt - the gate is on
+the CALL, not a field, and that was settled on 18 Nov, so I made NO write attempt this run and say
+so. Land them all on the first live turn). ELEVEN were carried in from 16:58; corrections (1), (2)
+and (7) of that list are now SPENT and are replaced here. The live list is:
+  (1) MB_NAME IS 46 AND by_key IS 46, SETS EQUAL, blower in both. Replaces the old "45/45/45" and
+      the old "46 bodies vs 45 rows". And record THREE parser failure modes now, not two:
+      flat regex; uncommented `#` trailing comments; AND anchoring on the word "MB_NAME" where it
+      first appears in a COMMENT instead of on `const MB_NAME :=`. All three read 37 or 42.
+  (2) The gh-pages block: tip 029e4fac / tree 02257b2f / pushed 15:39 CT 21 Nov, and NOTHING
+      merged-and-unpublished. The prompt's "3 files / +59 / -1" delta is SPENT.
+  (3) L31 IS WHOLE - strike "the L31 remainder is the game build's".
+  (4) The "art fit register reads RED on two retired `_chibi` rows" standing note is STALE, and
+      THERE ARE TWO ART REGISTERS: the system-2 WEAPON CARRY register (24 cells) is FAIL for a
+      real named reason (`laths`, 3 crossbow cells); the MINIBOSS register is GREEN. Correction
+      (4) must not be written so that a future seat dismisses the weapon register's red.
+  (5) NEW - THE weaponfit `show` DENOMINATOR IS NOW LOCAL-FRAME. Any seat quoting a pre-17:5x
+      show number is quoting an inflated one; the old gate paid up to 33% for rotating a weapon.
+  (6) NEW - the crossbow geometry fix FAILED by camber and is STILL OPEN; the 35 deg roll is the
+      surviving fix and the stirrup/bowstring is the next art route. Do not record the item closed.
+  (7) ID floor, now: B112, C-170, D100, H32, S94, T5, U131, art on the system-2 crossbow.
+  (8) The dead-data series gains a point: 52 -> 53 -> 56 -> 60 -> 60 -> **60** (notes 45,
+      non-note 15, unmoved); top-level key count is now 150.
+  (9) The QA tester and pack catalogue lanes take the lock but carry no cap/finish requirement.
+ (10) The clean-hour count: reset to 0 at 17:02 CT 21 Nov (QA stale lock); **1 after the 17:58
+      firing** - this hour was clean on every test.
+
 ## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main: all SIX lanes (laptop 51bcd3fc, content 43cba458, hub a514d144,
 hud-ui 281ba43b, art 421b902f, chatbot e12814c5). PROGRESS.md **+83/-0** across TWO conflicts

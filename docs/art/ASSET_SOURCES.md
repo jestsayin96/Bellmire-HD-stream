@@ -459,6 +459,19 @@ Method: directory listed and zip central directory read with Python `zipfile` (n
 - Checked: every file in `_packs\House4_blend\` by listing the tree (3 files), and the sibling `House4_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
 - Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House4_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+### 21 Nov 2026 - System 2: the three dungeon crossbows are MODIFIED in place (art)
+`assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb` are the **KayKit
+Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)** models already listed in the table
+above, now carrying a stirrup, a drawn bowstring and a bolt added procedurally
+by `tools/art/xbowparts.py` (+116 verts each; 395->511, 531->647, 688->804).
+CC0 explicitly permits modification and incorporation and requires no
+attribution; the row is kept anyway because every pack used gets recorded. The
+added geometry is original and procedural. Nothing is redistributed AS an
+asset. THE PRISTINE COPY, if these ever need restoring, is
+`_packs/kaykit_dungeon_pack_CC0/Models/gltf/crossbow_<tier>.gltf.glb`, and the
+generator REFUSES to run on an already augmented mesh - it asserts the vertex
+count against the pack's own 395/531/688 first, so a second stirrup cannot be
+added by a re-run.
 
 
 ## PACK CATALOGUE - KayKit_RPGToolsBits_1.0_FREE (21 Nov 2026, pack-catalogue firing)

@@ -260,8 +260,14 @@ static func held_rot(path: String) -> Vector3:
     ## body (AXIS: prod +X along world -Z). The wanted map in the slot frame (+Y forward, +X down, measured S19) is
     ## mesh +Z -> slot +Y (stock forward), mesh +Y -> slot -X (up), mesh +X -> slot -Z (prod across): Godot YXZ
     ## euler (-90, 0, 90), solved off that matrix, not guessed. tools/_s20_hand.gd gates prod level + stock forward.
+    ## S95: art's 35 deg ROLL about the slot's own forward axis (slot +Y), measured on the corrected local-frame
+    ## weaponfit gate (show 0.757 vs SHOW_MIN 0.70) and on the picture: held level the prod lay in a horizontal
+    ## plane and every camera caught it edge-on as a lath. Godot's YXZ euler is Basis = Ry * Rx * Rz with Ry
+    ## OUTERMOST, i.e. applied in the PARENT (slot) frame, so a roll about slot +Y is exactly the euler's y term:
+    ## Ry(35) * [Ry(0) Rx(-90) Rz(90)] == euler (-90, 35, 90). Derived, not guessed; scale stays x1.0.
+    ## tools/_s20_hand.gd now gates "prod CANTED 25-45 deg, stock forward" instead of "prod level".
     if path.begins_with(DUN + "crossbow_"):
-        return Vector3(-90, 0, 90)
+        return Vector3(-90, 35, 90)
     return Vector3.ZERO
 
 ## S20: the off hand's scale. The pack shield is built like the Adventurers' shields it replaces (face in the mesh

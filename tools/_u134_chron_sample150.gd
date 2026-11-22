@@ -81,6 +81,11 @@ func _probe(tag: String) -> void:
 		var font: Font = l.get_theme_font("font")
 		var fs := l.get_theme_font_size("font_size")
 		var sz: Vector2 = font.get_multiline_string_size(l.text, HORIZONTAL_ALIGNMENT_LEFT, l.size.x, fs)
+		# U135: the label wraps arbitrarily (autowrap) but get_multiline_string_size above uses word-bound
+		# breaks only, so an unbreakable 60-char name reads as 1472 px. Measure what the Label really lays out:
+		# rows x line height, and the widest row clamped to the label's own wrap width.
+		var rows := maxi(l.get_line_count(), 1)
+		sz = Vector2(minf(sz.x, l.size.x) if l.autowrap_mode != TextServer.AUTOWRAP_OFF else sz.x, rows * float(l.get_line_height()))
 		var left := l.get_global_rect().position.x
 		var right := left + sz.x
 		var bottom := l.get_global_rect().position.y + sz.y

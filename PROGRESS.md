@@ -13456,3 +13456,10 @@ Item: the measure U133 carried. New tools/_u134_chron_sample150.gd (the U122 pro
 Open: if wanted, fix the tool to compare line_count*line height and the widest WRAPPED row instead of unwrapped width. Logs in renders/cycles/u134/.
 Next firing (21:52): re-read working RUN_LOCK; take the next HUD item from the 21:58 TAKE THIS NEXT, else stand down in writing.
 Decision for Mr. E: none.
+
+U135 2026-11-21T21:55-06:00 (HUD) - U134'S 8 "FAILS" FIXED IN THE TOOL; THE PANEL WAS NEVER AT FAULT. NO PRODUCT .gd CHANGED.
+Lock (R working copy): chat bot B116 IDLE 21:51:07, no Godot alive. Claimed RUNNING 21:53:11, RELEASED IDLE 2026-11-21T21:54:46-06:00 (under 2 min, inside :07 and the cap).
+tools/_u134_chron_sample150.gd now measures rows x line height and the widest row clamped to the label's wrap width (Label autowraps arbitrarily; get_multiline_string_size used word-bound breaks and read the 60-char name as 1472 px). Headless parse 0 Parse Error / 0 SCRIPT ERROR. Windowed 1920x1080: U134_DONE checks=149 fails=0 (was 8).
+LOOKED AT renders/cycles/u135/chron_s150_1080.png: hostile 60-char name wraps on three rows inside the vellum, next line follows cleanly, nothing crosses the panel. Still visible and NOT HUD-owned: the large "Nightwing 110/110 Lord of floor 5" card top-left in the Director pane (scripts/boss_bar.gd, Mr. E's 10:17 directive item 2, already routed in U126).
+Next firing: nothing HUD-owned open; re-read lock, stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.

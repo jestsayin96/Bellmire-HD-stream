@@ -15821,3 +15821,55 @@ Item: WORK_PLAN TAKE THIS NEXT (21:58 block) row for HUD says "U135 is ticked; c
 Still visible and NOT HUD-owned: the Nightwing boss card top-left of the Director pane is scripts/boss_bar.gd (S98 ticked it gone on merged main; my U135 shot was pre-S98 tree).
 Next firing (23:52): re-read working RUN_LOCK; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none.
+
+## B117 (chat bot) - STOOD DOWN ON A LIVE HOLD; DRIFT CLEAN BOTH WAYS AND THE DOC IS LEVEL AT 32
+2026-11-21 22:45-22:52 CT. No Godot launched. No lock line written - I claimed nothing.
+
+THE STAND-DOWN, AND WHY IT IS NOT A STALE CLEAR. Last line of docs/RUN_LOCK.txt on `laptop`:
+`RUNNING 2026-11-21T22:07:47-06:00 (game build: merge + gates + item, expected finish 22:30,
+cap 22:32:47)` and NO IDLE from that lane follows it. Checked at 22:45:45 and again at 22:48:28:
+`tasklist | findstr /I godot` returned NOTHING both times, and origin/main's newest commit is
+eb98fb07 at 22:04:50 - nothing from the game build since it claimed. That is the stale SIGNATURE,
+and I did not act on it. The yield rule (Mr. E, 18 Nov) decides liveness by whether an IDLE from
+the same lane follows, NOT by whether a declared finish or a cap has passed - and that is exactly
+the case here, 16 minutes past its cap. A lane running short batteries looks dead between them.
+SECOND, INDEPENDENT REASON: an L56 soak is 4 runs x 2 min plus boot, which would still be running
+inside the HUD's usual :53 claim. Either reason alone is a stand-down; both hold.
+
+A WRITER DEFECT IN THE LOCK FILE THAT IS NOT MINE, REPORTED BECAUSE IT HURTS THE YIELD RULE.
+The HUD's `IDLE 2026-11-21T21:54:46-06:00 ... (HUD)` and the game build's `RUNNING
+2026-11-21T22:07:47-06:00` SHARE ONE LINE - the RUNNING was appended with no leading newline.
+The yield rule is read off THE LAST LINE, and this last line contains an IDLE and a RUNNING at
+once. I read it by lane tag rather than by position, which is why I still got the right answer.
+The game build's writer should end its append with a newline.
+
+MY OWN LOCK WRITER (team lead's row, 21:58). Three lines carry a literal unsubstituted `%s` where
+the stamp belongs: line 685 (B77, 06:47 today) and lines 1105 and 1107 (B116, tonight). There is
+no committed lock-writing script in this worktree - `grep -rl RUN_LOCK` over *.py/*.gd/*.md finds
+only prose - so the defect is in the per-firing bridge code, a `"RUNNING %s (...)"` string that
+was never formatted. THE STANDING LANE RULE, from now on: compute the stamp FIRST, assert it
+matches `^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[+-]\d\d:\d\d$`, and only then build the line - never
+emit a line whose stamp came from an unapplied format token. A stamp you did not read is a stamp
+you must not write. The three live `%s` lines are still recoverable: each carries its claim,
+cap, declared finish and release time inside its own prose.
+
+THE DRIFT AUDIT, BOTH DIRECTIONS, on merged main eb98fb07 (data/commands.json sha256 6b0efb51...):
+json parses, 32 commands, 31 aliases, `order` and `commands` keys are the SAME SET.
+  A) code -> json: every match-arm verb in scripts/chatcmd.gd has an entry or a declared alias.
+     The only exceptions are `testbits` / `testsub` / `testpoints`, which are gated to
+     `local_` ids at chatcmd.gd:206 and are deliberately unpublished - not drift.
+  B) json -> code: CLEAN. My first pass flagged SEVEN aliases (`armor`, `commands`, `sheet`,
+     `spotlight`, `stats`, `steel`, `watch`) as having no match arm. I chased it rather than
+     filing it: `canonical()` (chatcmd.gd:3117) maps alias -> command and is applied to `verb`
+     at line 133, BEFORE the match. An alias needs no arm of its own. MY FINDING WAS WRONG AND
+     I KILLED IT HERE INSTEAD OF PUBLISHING IT.
+  C) docs/COMMANDS.md: 32 table rows, SAME ORDER as `order` element for element, zero commands
+     missing, zero rows the data does not carry, and all 31 aliases published. No doc drift,
+     so nothing is owed on the generated file this hour.
+
+TWO STALE FIGURES IN MY OWN PROMPT, FOR THE TEAM LEAD. (1) The owed gate list says
+`tools/_commands_doc.gd` should print "COMMANDS_DOC wrote 26 commands". The data file carries 32.
+(2) B4's byte-identical emulation proof was measured over the 25-command data (5188 bytes); the
+file today is 8103 bytes over 32 commands. THAT PROOF DOES NOT COVER TODAY'S FILE and I am not
+leaning on it. The real generator still owes its no-op confirmation, and when it runs, the
+generator's bytes win.

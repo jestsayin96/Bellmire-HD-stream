@@ -1,0 +1,66 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Someone leaves a heel of bread on the wall and does not say whose.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 skeleton minion, 1 giant rat.
+FEED A ceremonial way runs dead straight to a door meant to stay shut.
+FEED Hero2 casts Smite at giant rat.
+FEED Hero6 casts Frost at giant rat.
+FEED Hero6 casts Bolt at skeleton minion.
+FEED Hero2 casts Bolt at skeleton minion.
+FEED Hero1 searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED A canteen goes round. It comes back lighter.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 puglin, 1 giant rat.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero6 casts bolt. The scar adds a verse of its own (7 vs DC 11).
+FEED Hero2 starts smite and the scar takes the last word (9 vs DC 11).
+FEED Hero1 casts Bolt at bog frog.
+FEED Hero2 casts Bolt at giant rat.
+FEED Hero1 searches (Investigation 21) and turns up 28 gold on floor 2.
+FEED Somebody sets a kettle on the coals. It sings before anyone sits.
+FEED Hero1 finds a vial of The Gleaner's Cup.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 cave bat, 1 cave spider, 1 drowned puglin.
+FEED Hero6 calls frost and the scar calls louder (1 vs DC 11).
+FEED Hero2 casts Bolt at slime.
+FEED Hero1's chain turns to smoke a breath too early (7 vs DC 11).
+FEED Hero2's smite goes out like a wet match (8 vs DC 11).
+FEED Hero6 casts Bolt at slime.
+FEED Hero1 casts Fire at slime.
+FEED The slime divides.
+FEED Hero5 turns on the wounded cave bat to finish it.
+FEED Hero7 turns on the wounded cave bat to finish it.
+FEED Hero2 casts Bolt at cave bat.
+FEED Hero6 casts Frost at cave bat.
+FEED Hero1 casts Bolt at slimeling.
+FEED Hero1 searches (Investigation 24) and turns up 44 gold on floor 3.
+FEED The door stays open behind them. The draught is clean.
+FEED Hero1 searches the chest - ...no loot... (Investigation 9 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 1 skeleton minion, 2 puglins.
+FEED The oil is running low.
+FEED Hero2 reaches for bolt and the scar flinches first (8 vs DC 12).
+FEED Hero1's bolt goes off a breath early - the scar is impatient (1 vs DC 12).
+FEED The slime divides.
+FEED Hero6 tightens a grip on frost. Nothing answers (11 vs DC 12).
+FEED Hero4 spots a spike trap (Perception 14 vs DC 12) and steps round it.
+FEED 1 drowned bone bowman, 1 drowned cave spider was waiting in the dark, and now it isn't.
+FEED Hero7 spots a dart trap (Perception 19 vs DC 12) and steps round it.
+FEED Hero1 searches (Investigation 11) and turns up 35 gold on floor 4.
+FEED Floor 4 silent. Nobody is missing - yet.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 120 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 24 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Hero6 is fitted with Reed-Cloth Robe. (+10 hp) Haggled 15% off (17).
+OFFFLOOR 0 of 1942 samples; INPROP 0; MON_INPROP 0 of 270; floor reached 4 frames 6296 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 1942 samples off the floor (home)

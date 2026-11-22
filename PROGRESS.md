@@ -15713,4 +15713,9 @@ CODE WIRING: game build must add `changer` -> `Evenhand` to Delve.MB_NAME and th
 ## hub 21 Nov 21:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
 TAKE THIS NEXT (20:58 block) HUB row: "hold web/ steady. Nothing is unpublished." No row to build; web/ untouched this run.
 NUMBERS: origin/gh-pages^{tree} == origin/hub:web == HEAD:web == 02257b2f (git diff origin/hub -- web empty; nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only comment mentions); CSP meta present x1; index.html "only innerHTML ... two page-owned sites" comment true. Hostile-name test not owed (web/ unchanged). Live-dot colour: unchanged, no pass this run.
+U135 2026-11-21T21:55-06:00 (HUD) - U134'S 8 "FAILS" FIXED IN THE TOOL; THE PANEL WAS NEVER AT FAULT. NO PRODUCT .gd CHANGED.
+Lock (R working copy): chat bot B116 IDLE 21:51:07, no Godot alive. Claimed RUNNING 21:53:11, RELEASED IDLE 2026-11-21T21:54:46-06:00 (under 2 min, inside :07 and the cap).
+tools/_u134_chron_sample150.gd now measures rows x line height and the widest row clamped to the label's wrap width (Label autowraps arbitrarily; get_multiline_string_size used word-bound breaks and read the 60-char name as 1472 px). Headless parse 0 Parse Error / 0 SCRIPT ERROR. Windowed 1920x1080: U134_DONE checks=149 fails=0 (was 8).
+LOOKED AT renders/cycles/u135/chron_s150_1080.png: hostile 60-char name wraps on three rows inside the vellum, next line follows cleanly, nothing crosses the panel. Still visible and NOT HUD-owned: the large "Nightwing 110/110 Lord of floor 5" card top-left in the Director pane (scripts/boss_bar.gd, Mr. E's 10:17 directive item 2, already routed in U126).
+Next firing: nothing HUD-owned open; re-read lock, stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none.

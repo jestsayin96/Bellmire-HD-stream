@@ -15329,3 +15329,29 @@ changed to "prod canted, stock forward".
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+## S95 - GAME BUILD: ART'S 35 DEG CROSSBOW ROLL LANDED (System 2 crossbow, engine half), 21 Nov 18:08-18:15 CT
+- ITEM: the 17:58 TAKE THIS NEXT block, "GAME BUILD - LAND ART'S 35 DEG CROSSBOW ROLL". S94 is ticked; not redone.
+- CHANGE: scripts/gear.gd held_rot(), the `DUN + "crossbow_"` branch: Vector3(-90, 0, 90) -> Vector3(-90, 35, 90).
+  DERIVED, not guessed: Godot's YXZ euler builds Basis = Ry * Rx * Rz with Ry OUTERMOST, i.e. applied in the parent
+  (hand slot) frame, so a roll about the slot's own forward axis (+Y, the S20 measurement) is exactly the euler's y
+  term: Ry(35) * [Rx(-90) Rz(90)] == (-90, 35, 90). Scale untouched (x1.0) - art measured the scale is not the fault.
+- GATE: tools/_s20_hand.gd - INTENT CHANGED, ARM NOT WEAKENED. Was "prod LEVEL" (|prod +X.y| <= 0.35); now "prod
+  CANTED 25-45 deg" (|+X.y| in [sin 25, sin 45] = [0.42, 0.71]), and it prints the cant per crossbow. The old level
+  carry would FAIL the new arm (|+X.y| was <= 0.35 by construction), and so would an upright prod. The stock-forward
+  arm is unchanged (+Z.z <= -0.6).
+- MEASURED (posed, world frame): common +X.y 0.56 = 34.0 deg, uncommon 0.47 = 28.3 deg, rare 0.57 = 35.0 deg; stock
+  +Z (0.26, 0.0, -0.96) on all three, i.e. still pointing the way the hero faces. The uncommon reads 6-7 deg less than
+  its siblings off the same euler - that is the pose/mesh, not the rotation, and it sits inside the band.
+- LOOKED AT renders/cycles/s20/s20_side.png and s20_ranger_crossbow_t1_close.png (fresh, 18:10 CT): from the side the
+  prod now stands as a C beyond the fist with the stock running forward - it reads as a crossbow, where the S20 carry
+  was a flat lath. I agree with the team lead's and art's (0,35) cell. The close shot is crowded by neighbouring heroes
+  (framing pre-dates this change) but shows the canted prod clearly.
+- VERDICT LINES (logs in renders/cycles/s95/): parse 0 SCRIPT ERROR / 0 Parse Error; S20_HEFT OK (11 shots, 0 failures);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2061 samples off the floor (home); TOWNWALK in_solid=0/17947
+  raid_in_solid=0/6192 PASS (the town.gd:826 _load_materials backtraces are the same pre-existing lines S94's log
+  carries); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- NOT DONE / FOR ART: the stirrup/bowstring route is art's and untouched here. Do NOT ship a pre-rolled mesh now - this
+  roll is live and a baked one would double it.
+- No live Twitch test this cycle. Lock: claim 2026-11-21T18:08:32-06:00, cap claim+25 = 18:33:32 computed before the
+  declared finish 18:30; IDLE written 2026-11-21T18:15:10-06:00.

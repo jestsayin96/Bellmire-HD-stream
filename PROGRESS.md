@@ -15610,4 +15610,8 @@ Decision for Mr. E: none.
 TAKE THIS NEXT (18:58 CT block, still on top) CONTENT item: "stand down again, or audit your own shipped feed". C-172 accepted by the team lead (19:58 plan).
 Measured after merging origin/main (2fd2f62f): minibosses/*.glb on origin/art == on origin/main (art-not-main empty). Every art body minus miniboss_feed.by_key (46 keys) minus the documented non-feed bodies (13 *_chibi, broodglut, lastcuff - bestiary pack variants, see C-134/C-135) is EMPTY. The plan's own count (46 keys = 46 Delve.MB_NAME, symmetric difference empty) stands; my quick MB_NAME regex over-captured and I did not use it.
 No new committed body, so no feed row is owed and none is invented. No data files touched; all four parse unchanged. No ID burned (next stays C-174). CODE WIRING: none.
+
+## hub 21 Nov 20:4x CT - STAND-DOWN, MEASURED; no web/ row; NOT claiming READY TO PUBLISH
+TAKE THIS NEXT (19:58 block) HUB row: "nothing is unpublished ... Hold web/ steady". No row to build; web/ untouched this run.
+NUMBERS: origin/gh-pages^{tree} == origin/hub:web == origin/main:web == HEAD:web == 02257b2f (all equal, nothing merged-unpublished); node --check app.js OK; innerHTML at exactly app.js:255 and :301 (page-owned) + comment mentions; outerHTML 0, eval( 0; insertAdjacentHTML/document.write/new Function appear only in the comment at app.js:10-11; 1 CSP meta. No new screenshot (web/ byte-identical to the published tree). Live-dot colour: unchanged from shipped. Untracked _hub_ready_shot.png is old and named here.
 Decision for Mr. E: none.

@@ -251,6 +251,27 @@ SLOT_ROT = {
     "staff":    ((0, 0, 1), (0, 1, 0), (-1, 0, 0)),
 }
 
+# *** FAULT 6, 21 NOV 19:4x CT. THE TABLE ABOVE IS A PHOTOGRAPH, NOT A LINK. ***
+# Each basis above was hand-derived against ONE gear.gd `held_rot` value. This
+# file then went on READING `held_rot` into the register and MEASURING the table
+# anyway, so when the game build rolled the crossbow 0 -> 35 deg (S95) the
+# register kept scoring a carry the game no longer ships and reported FAIL on
+# three laths rows that the shipped roll passes. A number beside the right
+# angle is not a measurement of it.
+# THE FIX IS A LINK, NOT A NEW CONSTANT: the roll is taken as the DELTA between
+# what gear.gd says now and the value each basis was calibrated at, and applied
+# about the slot's own forward axis (+Y) exactly as _s2_stirrup_ab.py applied
+# its forecast - base @ Rroll @ Rslot @ S. Writing 35 in here would have gone
+# stale the same way the next time the engine moves.
+# AND IT GOES RED RATHER THAN GUESSING: only the roll component is derivable
+# this way. If gear.gd ever moves the OTHER two angles, the basis itself is
+# stale and this file cannot infer the new one, so it FAILS LOUDLY instead of
+# measuring a configuration nobody calibrated.
+SLOT_ROT_CAL = {
+    "crossbow": ("-90", "0", "90"),
+    "staff":    ("0", "0", "90"),
+}
+
 
 def gear_overrides(gear_path):
     """Read the engine's per-family hand_scale out of gear.gd. RED ON EMPTY:
@@ -275,14 +296,46 @@ def gear_overrides(gear_path):
     return out
 
 
-def slot_matrix(fam):
+def slot_matrix(fam, engine_rot=None):
+    """The calibrated basis, plus whatever roll gear.gd has moved since it was
+    calibrated. Returns (matrix, roll_applied_deg)."""
     cols = SLOT_ROT[fam]
     M = Matrix(((cols[0][0], cols[1][0], cols[2][0]),
                 (cols[0][1], cols[1][1], cols[2][1]),
                 (cols[0][2], cols[1][2], cols[2][2])))
     d = M.determinant()
     assert abs(d - 1.0) < 1e-6, "%s slot rotation is not a proper rotation (det %.4f)" % (fam, d)
-    return M.to_4x4()
+    M = M.to_4x4()
+    roll = 0.0
+    if engine_rot is not None:
+        cal = SLOT_ROT_CAL.get(fam)
+        if cal is None:
+            raise SystemExit("WEAPONFIT FAIL - %s has an engine carry but no "
+                             "calibration record, so the roll gear.gd ships "
+                             "cannot be told apart from the basis. Refusing to "
+                             "measure it." % fam)
+        try:
+            now = [float(x) for x in engine_rot]
+            was = [float(x) for x in cal]
+        except ValueError:
+            raise SystemExit("WEAPONFIT FAIL - %s held_rot is not numeric: %r"
+                             % (fam, engine_rot))
+        # only the middle component (roll about the slot's forward axis) is
+        # derivable from the calibrated basis. RED, not a guess, on the others.
+        for idx, name in ((0, "x"), (2, "z")):
+            if abs(now[idx] - was[idx]) > 1e-6:
+                raise SystemExit(
+                    "WEAPONFIT FAIL - gear.gd now carries %s at held_rot %s but "
+                    "this file's slot basis was calibrated at %s. The %s angle "
+                    "moved, and only the roll can be derived from the basis, so "
+                    "the basis itself is now stale. Re-derive SLOT_ROT[%r] "
+                    "against the engine before measuring - this file will not "
+                    "score a carry nobody calibrated."
+                    % (fam, list(engine_rot), list(cal), name, fam))
+        roll = now[1] - was[1]
+        if abs(roll) > 1e-6:
+            M = Matrix.Rotation(math.radians(roll), 4, 'Y') @ M
+    return M, roll
 
 
 def world_verts(objs):
@@ -439,6 +492,17 @@ def main():
     cz = (FRAME_H / 2.0) - GROUND_UP
 
     reg, errors, blanks, clipped_frames, blind, laths = {}, [], [], [], [], []
+    # *** FAULT 7, FOUND IN THIS SAME RUN, 21 NOV CT, AND IT IS THIS FILE'S OWN. ***
+    # `ground` - "vertices below z=0 (the weapon dragging through the floor)" in
+    # this file's own docstring - has been measured and PRINTED on every cell
+    # since pass 1 and gated on NOTHING. `ok` conjoined errors, blanks,
+    # frame_clips, blind_views and laths, so a weapon could hang through the
+    # floor on every tier and the register would still say GREEN. It did: the
+    # staff breaks the floor on all three tiers and this register called the
+    # sheet green while printing the number that says otherwise. That is the
+    # unearned-pass family this lane has now hit three times - a metric beside
+    # the verdict is not in the verdict.
+    floor_breaks = []
     body_only = {}
 
     for fam in fams:
@@ -458,7 +522,11 @@ def main():
             lv = world_verts(meshes)
             local_ext = (sorted([max(v[i] for v in lv) - min(v[i] for v in lv)
                                  for i in range(3)]) if lv else None)
-            Rslot = slot_matrix(fam) if fam in SLOT_ROT else Matrix.Identity(4)
+            if fam in SLOT_ROT:
+                Rslot, roll_applied = slot_matrix(
+                    fam, OVR[fam]["engine_rot_deg"] if fam in OVR else None)
+            else:
+                Rslot, roll_applied = Matrix.Identity(4), 0.0
             for o in objs:
                 if o.parent is None:
                     o.matrix_world = base @ Rslot @ S @ o.matrix_world
@@ -475,14 +543,22 @@ def main():
                 errors.append("%s: every vertex is inside the fist sphere - clip test empty" % key)
             n_clip = sum(1 for v in far if inside(body_trees, v))
             n_ground = sum(1 for v in wv if v.z < -0.002)
+            floor_depth = round(max(0.0, -min(zs)), 4)
             rec = dict(model=os.path.relpath(path, a.repo).replace("\\", "/"),
                        verts=len(wv), checked=len(far),
                        reach=round(max(zs) - slot.z, 3), drop=round(slot.z - min(zs), 3),
                        span=round(max(v.x for v in wv) - min(v.x for v in wv), 3),
                        tip_z=round(max(zs), 3), hero_h=round(hinfo["h"], 3),
-                       clip=n_clip, ground=n_ground, hand_scale=hs,
+                       clip=n_clip, ground=n_ground, floor_depth=floor_depth,
+                       hand_scale=hs,
                        engine_mirrored=(fam in OVR),
-                       engine_rot_deg=(OVR[fam]["engine_rot_deg"] if fam in OVR else None))
+                       engine_rot_deg=(OVR[fam]["engine_rot_deg"] if fam in OVR else None),
+                       roll_applied_deg=round(roll_applied, 3))
+            if n_ground:
+                floor_breaks.append(
+                    "%s: %d vertices below the floor, deepest %.3f m under it - "
+                    "the carry drags this weapon through the ground"
+                    % (key, n_ground, floor_depth))
             allpts = bpts + wv
             outs, proving = {}, 0
             for vname, az in views:
@@ -589,26 +665,33 @@ def main():
         errors.append("register has %d of %d cells" % (len(reg), want))
     if not reg:
         errors.append("EMPTY REGISTER - nothing was measured, this is a FAIL not a pass")
-    ok = (not errors) and (not blanks) and (not clipped_frames) and (not blind) and (not laths)
+    ok = ((not errors) and (not blanks) and (not clipped_frames)
+          and (not blind) and (not laths) and (not floor_breaks))
     out = dict(verdict="GREEN" if ok else "FAIL", ok=ok, hero=hinfo,
                handslot=[round(v, 4) for v in slot], cells=len(reg),
                views=[v for v, _ in views], seen_min=SEEN_MIN, vis_min=VIS_MIN,
                min_proving=MIN_PROVING, show_min=SHOW_MIN, px_per_m=PX_PER_M,
-               laths=laths,
+               roll_applied_deg={k: v["roll_applied_deg"] for k, v in reg.items()
+                                 if v.get("roll_applied_deg")},
+               slot_rot_cal=SLOT_ROT_CAL,
+               laths=laths, floor_breaks=floor_breaks,
                blanks=blanks, frame_clips=clipped_frames, blind_views=blind,
                errors=errors, models=reg)
     rp = os.path.join(outdir, "_fit_register.json")
     with open(rp, "w") as f:
         json.dump(out, f, indent=1)
-    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d laths=%d errors=%d"
+    print("WEAPONFIT verdict=%s cells=%d blanks=%d frameclips=%d blind=%d laths=%d "
+          "floor=%d errors=%d"
           % (out["verdict"], len(reg), len(blanks), len(clipped_frames), len(blind),
-             len(laths), len(errors)))
+             len(laths), len(floor_breaks), len(errors)))
     for e in errors:
         print("  ERROR", e)
     for e in blind:
         print("  BLIND", e)
     for e in laths:
         print("  LATH", e)
+    for e in floor_breaks:
+        print("  FLOOR", e)
     print("WEAPONFIT_DONE", rp)
 
 

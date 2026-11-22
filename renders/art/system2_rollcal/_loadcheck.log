@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+LOADCHECK OK OWED blower meshes=4
+LOADCHECK OK OWED ferryman meshes=4
+LOADCHECK OK OWED hooper meshes=4
+LOADCHECK OK OWED pitman meshes=3
+LOADCHECK OK OWED relief meshes=4
+LOADCHECK OK OWED scraper meshes=4
+LOADCHECK OK OWED tither meshes=4
+LOADCHECK OK OWED winder meshes=4
+LOADCHECK OK CONTROL beadle meshes=4
+LOADCHECK OK CONTROL drillmaster meshes=4
+LOADCHECK_DONE checked=10 fails=0
+
+--- rc=0 ---
+DONE

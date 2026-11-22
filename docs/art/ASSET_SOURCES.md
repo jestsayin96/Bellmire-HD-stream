@@ -459,3 +459,30 @@ Method: directory listed and zip central directory read with Python `zipfile` (n
 - Checked: every file in `_packs\House4_blend\` by listing the tree (3 files), and the sibling `House4_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
 - Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House4_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+### 21 Nov 2026 - System 2: the three dungeon crossbows are MODIFIED in place (art)
+`assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb` are the **KayKit
+Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)** models already listed in the table
+above, now carrying a stirrup, a drawn bowstring and a bolt added procedurally
+by `tools/art/xbowparts.py` (+116 verts each; 395->511, 531->647, 688->804).
+CC0 explicitly permits modification and incorporation and requires no
+attribution; the row is kept anyway because every pack used gets recorded. The
+added geometry is original and procedural. Nothing is redistributed AS an
+asset. THE PRISTINE COPY, if these ever need restoring, is
+`_packs/kaykit_dungeon_pack_CC0/Models/gltf/crossbow_<tier>.gltf.glb`, and the
+generator REFUSES to run on an already augmented mesh - it asserts the vertex
+count against the pack's own 395/531/688 first, so a second stirrup cannot be
+added by a re-run.
+
+
+## PACK CATALOGUE - KayKit_RPGToolsBits_1.0_FREE (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit : RPG Tools Bits (1.0) (folder `KayKit_RPGToolsBits_1.0_FREE`, nested one level as `KayKit_RPGToolsBits_1.0_FREE\KayKit_RPGToolsBits_1.0_FREE\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\KayKit_RPGToolsBits_1.0_FREE\KayKit_RPGToolsBits_1.0_FREE\License.txt` | 339 on disk: 49 models in each of `Assets\gltf\` (`.gltf` + `.bin`), `Assets\fbx\` (`.fbx`), `Assets\fbx(unity)\` (`.fbx`), `Assets\obj\` (59 `.obj` + `.mtl`, incl. sub-parts); 21 `.png`; 3 `.url` (Patreon, Discord, more-assets links); 1 `.txt` (the licence) | permitted | not required; the licence asks for a credit "Kay Lousberg, www.kaylousberg.com" as optional |
+
+- Checked: every file under `_packs\KayKit_RPGToolsBits_1.0_FREE\` by walking the tree (339 files, counted with Python `os.walk`). The sibling `KayKit_RPGToolsBits_1.0_FREE.zip` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off `License.txt` on disk this run, not from a search snippet. The file reads, verbatim: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects." Crediting is stated as optional ("this is not mandatory").
+- The same file asks, as a courtesy and not as a condition of the grant, for support via the EXTRA/SOURCE tiers, a donation, or Patreon.
+- Formats: glTF (with `.bin`), FBX and OBJ. The glTF set needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
+- The pack is a tools-and-props set (anvil, grindstone, journal, lantern, map, torch, wrench and similar), not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_RPGToolsBits_1.0_FREE`. Nothing is redistributed AS an asset.

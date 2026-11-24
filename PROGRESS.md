@@ -17846,3 +17846,12 @@ main lacked it predates the merge that carried it). No Twitch, ZERO BITS.
 TAKE THIS NEXT (14:58 CT block, 24 Nov) CONTENT row (15:22): nothing unnamed, nothing unfed (54 bodies, 54 by_key keys, iceman fed in C-193, no 55th committed). Continued own lore tranche as C-192 did. Appended plain strings to existing pools; duplicates checked first (four collisions caught and reworded before write). No arrive/fall-only backfill (nothing reads them).
 VALIDATION OK: all four owned files json.load; only descend (585->593), cleared (570->578), barks.{enter,lord,hurt,drink} grew (+46 lines), plus new top-level `_note_c194`; every other key identical; existing pool entries identical (prefix compare). Edit was textual insertion.
 CODE WIRING: none - no new keys beyond the zero-hit `_note_c194`.
+
+## U155 - THE U62/U69 "REDS" WERE A 1152x648 WINDOW, NOT THE HUD, 2026-11-24 ~15:58-06:00 (15:52 firing)
+ITEM: WORK_PLAN 15:52 row (U154's two reds). Lock: R working RUN_LOCK last line = chat bot B135 IDLE 15:51:05, 0 Godot alive by process -> claimed (stamp 15:55:00 was ~30s ahead of the real clock, my slip), released ~15:58 (IDLE written). Windowed runs.
+ROOT CAUSE (one, explains everything): a bare --windowed run opens 1152x648. U62 lays the 4th scroller at x=1390..1830, so it was OFF-SCREEN: no ink = vacuous pass since it was added. And px8 is 5/6/7 at 1152 vs 8/10/12 at 1080p, so the "stripe overruns the rod 0.1-0.16px" was a small-window rounding artifact, not a ui_theme regression. No bisect needed: at --resolution 1920x1080 U62 = OK bad=0 measured=12 (all 4 scrollers find ink, stripe_top-ink_bot 0.72/0.82/0.24 at 100/125/150%, clear=true everywhere, rod_bot==stripe end).
+U69: header says "RED PROOF ... MUST print FAIL". The 1500x800 BossCard FAIL at 100%/150% IS the red-proof firing as designed (re-run at 1080p, identical). Not a defect. (Its final line says U69_REDPROOF FAIL, which reads like a failure - wording only, left alone.)
+CHANGED: tools/_u62_scales.gd only (no HUD .gd). Prints the capture size; capture smaller than 1920x1080 = NO VERDICT + bad. RED-PROVED: default --windowed (1152x648) -> 3x NO VERDICT, U62_SCALES FAIL bad=8; --resolution 1920x1080 -> OK bad=0 measured=12.
+PARSE: headless --quit-after 300 = 0 SCRIPT ERROR / Parse Error.
+RUN COMMAND to remember: --windowed --resolution 1920x1080 for every U-gate that lays out in 1080p coordinates (audit U40/U56/U88/U90/U91 for the same trap next).
+Logs committed (_u155_*.log). Decision for Mr. E: none.

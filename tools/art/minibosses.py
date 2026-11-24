@@ -17211,3 +17211,354 @@ def stopper():
 
 
 BUILDERS.update({"stopper": stopper})
+
+
+# ============================================================================
+# 49 THE ROPER - "Drawtight". IT TWISTS YOU TOGETHER.
+# ============================================================================
+# WHAT I CHECKED BEFORE I WROTE A LINE OF THIS, AND I MEASURED IT RATHER THAN
+# REMEMBERED IT. I parsed BUILDERS out of this file myself: 48 live bodies plus
+# the two drillmaster `_tall` variants and twelve retired `_chibi`. Then I read
+# the CANON `idea` string of every one of the 48 - not the function names, the
+# ideas - and sorted them by WHAT THE MECHANIC ACTS ON:
+#     damage       fuller, tanner, scrapwright, comfitmaker, strickler
+#     healing      leech, cook, sexton, pressman
+#     position     gaoler, winder, drover, hooper, changer, relief, ferryman,
+#                  hurdleman, dauber, porter, stackman, pitman, sluicekeeper,
+#                  sower, snarer
+#     who may act  beadle (calls the order), ferryman (one at a time),
+#                  fenman (whoever stirred)
+#     what you keep tallyman, sealer, reeve, tither, greener, tapster, loader
+#     the senses   snuffer (light), bellman (sound), dyer (the mark)
+#     the clock    stopper (the only deadline), rammer, stoker
+#     undo         scraper, winder, moulder
+# NOT ONE OF THE FORTY-EIGHT READS THE DISTANCE BETWEEN TWO HEROES. Every one
+# of them acts on a hero, on the room, or on the party as a lump. Where the
+# party STANDS RELATIVE TO ITSELF is a free variable in all forty-eight fights,
+# and it is the variable every party in this game quietly relies on, because
+# standing together is how a party heals, guards and buffs. The four nearest
+# and why each is a different fight:
+#   hurdleman (CUTS THE ROOM IN TWO) - the room decides who is apart, and the
+#             party's answer is to get back together. This one punishes exactly
+#             that answer.
+#   drover    (YOKES ONE OF YOU) - one hero to the creature. A link to the
+#             BOSS is a tether; a link between two HEROES is a formation.
+#   ferryman  (ONE AT A TIME) - about who may land a blow, not where anyone is.
+#   relief    (TAKES YOUR POST) - shuffles the order of a line that stays a
+#             line. Nothing moves closer to anything.
+# So the forty-ninth is the first body in this file whose fight is about the
+# SHAPE the party is standing in, and the counterplay costs real money: the one
+# thing that adds slack is a hero walking away from the others, which is the
+# one thing a party under pressure never wants to do.
+#
+# HEIGHT 2.46 m and WEAR 0.28 are BOTH UNOCCUPIED RUNGS - measured off CANON,
+# not picked for novelty (2.45 and 2.48 are live either side; 0.26 and 0.30 are
+# live either side). The height is argued, not spaced: the standard has to come
+# up over the top-man's head far enough that the finished rope runs ABOVE him,
+# because a rope that ran through him would make the two read as one tangle
+# instead of as a man working a frame. THEME grassland: a ropewalk is a long
+# open lane, which is what that floor is.
+CANON.update({
+    "roper": ("Drawtight", 2.46, (0.62, 0.58, 0.46), (0.92, 0.86, 0.64),
+              "grassland", "IT TWISTS YOU TOGETHER - it does not wound, it "
+              "takes nobody away and it does not touch the room. It works its "
+              "walk backing off from you and takes up slack, and every notch "
+              "draws the party's shape in: whoever is hindmost is hauled a "
+              "yard toward the middle. When the last of you is inside one "
+              "span it lays the rope, and from then on the party stands in ONE "
+              "PLACE - one footprint, so every sweep in the chamber lands on "
+              "all of you at once and the formation you were fighting in is "
+              "gone. THE THING TO READ IS THE TOP IT CARRIES: three strands go "
+              "into it off the floor and ONE rope comes out the back, which is "
+              "the whole fight in one object. Nothing you do to it adds slack. "
+              "The only thing that does is a hero walking OUT, away from the "
+              "others - which is the one move a party under pressure never "
+              "wants to make.",
+              0.28, "Something ahead is taking up slack."),
+})
+ORDER = ORDER + ["roper"]
+
+# PER-SLOT MATERIALS - the Tither's rule: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON. Here that is the THREE STRANDS, their three floor
+# pegs and the TOP they run into. Everything the creature merely USES - the
+# standard, the sheave, the drum, the laid rope, the cap - is dark timber and
+# iron, so the pale mass in the frame is exactly the mechanic and nothing else.
+# The laid rope is DARK on purpose even though it is the mechanic's output:
+# pale-on-pale would make three-in-one-out a single pale tangle, and the read
+# this body stakes itself on is THREE PALE LINES IN, ONE DARK LINE OUT.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"roper"}
+
+OVERRIDE.update({
+    "roper": {
+        'body': ((0.300, 0.250, 0.180), 0.90, 0.02),
+        'dark': ((0.072, 0.066, 0.056), 0.74, 0.10),
+        'bone': ((0.820, 0.770, 0.590), 0.72, 0.02),
+        # Eyes only, and they sit at y -0.035 - forward of the head's own
+        # front surface and 0.30 m forward of the shoulder line. Nothing
+        # emissive is aft of the shoulders; the back-lamp guard exists to
+        # catch exactly that and it must find nothing here.
+        'glow': ((1.000, 0.860, 0.520), 0.85),
+    },
+})
+
+
+def roper():
+    """IT TWISTS YOU TOGETHER. The 49th body. PASS 2.
+
+    *** PASS 1 PUT THE TOP IN FRONT OF HIS FACE AND I ONLY KNOW THAT BECAUSE I
+    *** LOOKED. Pass 1 carried the top at z 1.98 - above the hands, forward of
+    the head - and every number in the register was green: ok true, errors [],
+    0 blanks, 4 parts, 1039 faces, CORRIDOR-SAFE, UNDER-LID, height 2.46 to the
+    millimetre I designed. Then I opened front.png. The pale top was a blank
+    mass exactly where the face belongs, the head was GONE behind it, and the
+    two eyes read as nostrils on a lump. Nothing in the register can see that,
+    which is trap 5 in this file's own header wearing a new coat: an instrument
+    that cannot see is not a pass. The whole creature also read as a SURVEYOR'S
+    TRIPOD, because three even pale legs converging on a pale blob at head
+    height is a tripod no matter what the docstring calls it.
+
+    THE FIX IS HEIGHT, NOT SIZE. The top comes down to z 1.26 - chest height,
+    which is also where a ropewalk top-man actually carries it - and forward to
+    y -0.62. The head is then clear above the whole mechanic by 0.225 m of open
+    air, the hands come down to a working height instead of being held over his
+    own head, and the three strands fan from a CHEST-HEIGHT apex under a head
+    and a standard that both rise above them, which is not the shape of a
+    tripod.
+
+    SILHOUETTE ARGUMENT, WHICH IS THE ACCEPTANCE TEST: with the colour thrown
+    away this is A MAN LEANING BACK UNDER A TALL STANDARD, HOLDING A THING AT
+    HIS CHEST THAT THREE STRAIGHT LINES RUN INTO OFF THE FLOOR AND ONE LINE
+    LEAVES BY THE BACK. Three in, one out. NOT a hoop (stopper), NOT a board on
+    a pole (beadle), NOT a man under a load (thirteen of them), NOT a man
+    beside a post (changer, whose bars had to be deleted for reading as two
+    objects) - the strands come out of his OWN HANDS and the standard is
+    strapped to his OWN CHEST, so there is no view in which this is a man
+    standing next to a thing.
+
+    FRONT IS -Y, same as every body in this file: lordgen's front camera sits
+    at az 0 -> (0, -1, el). So the three strands, the pegs, the top and the
+    eyes all go to -Y; the standard, the sheave, the drum and the runners go to
+    +Y, where only the back camera finds them. THAT IS THE FACING, and it is
+    built in rather than hoped for: the Beadle shipped a register of perfect
+    numbers with a head that read the same from both sides.
+
+    WHAT THE STATIC BODY CLAIMS AND WHAT IT DOES NOT. It claims the IDEA - a
+    thing that gathers three into one. It does NOT claim a live gauge: slack is
+    a thing you see move, and this body ships with the strands laid DEAD
+    STRAIGHT and the finished rope hanging in a visible SAG, so the contrast
+    between three straight lines and one hanging curve says "those are under
+    tension and that one is not" in a single frame. If the game build ever
+    wants the gauge itself it is one parameter - the sag of the three strands -
+    and that is a wiring note, not a promise this mesh makes.
+
+    STATIC. No `anims` entry; bestiary.gd needs a `model` path only. THAT
+    WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+
+    ROOM-LOCK is not claimed here and must not be: the footprint runs from the
+    floor pegs at y -1.80 to the runner tails at +1.15 and minibossgen measures
+    it against floorgen's own corridor span. The gate says it, not this
+    docstring.
+    """
+    P = Parts("roper")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # Every strand, peg, handle and hand below is derived from these, so
+    # re-siting the top cannot leave a line hanging in air.
+    GROOVE = ((-0.130, -0.780, 1.185),
+              (0.000, -0.790, 1.410),
+              (0.130, -0.780, 1.185))
+    PEG = ((-0.520, -1.720, 0.030),
+           (0.000, -1.950, 0.030),
+           (0.520, -1.720, 0.030))
+
+    # ---------------------------------------------------------------- THE MAN
+    # A STRIDE, NOT A BRACE. He is WALKING BACKWARD - that is what a ropewalk
+    # is - so the legs split in y, not in x, and the side camera gets a stride
+    # out of it. Thirteen bodies in this file are stooped under a load and the
+    # Stopper presses one down from above; this one leans AWAY from a pull that
+    # comes out of its own hands, which is a third posture.
+    _open()
+    for s, dy in ((-1, -0.30), (1, 0.34)):
+        pts = seat([(s * 0.200, 0.040 + dy * 0.10, 0.840),
+                    (s * 0.235, dy * 0.66, 0.440),
+                    (s * 0.245, dy, 0.110)], 0.124)
+        limb(P, pts, 0.124, 0.100, 'body')
+        P.add(L.box(0.240, 0.420, 0.110), 'body',
+              loc=(s * 0.245, dy + (-0.08 if s < 0 else 0.06), 0.058))
+    limb(P, [(0.0, 0.020, 0.800), (0.0, 0.140, 1.120), (0.0, 0.260, 1.460)],
+         0.310, 0.240, 'body')
+    # A BELT. Pass 1's torso was one unbroken brown mass from hip to shoulder
+    # and it read as a sack. One dark ring at the waist costs 32 faces and is
+    # the cheapest readability there is.
+    P.raw(aim(L.cone(0.300, 0.300, 0.090, 16), (0.0, 0.118, 1.060),
+              (0.0, 0.345, 1.0)), 'dark')
+    P.add(L.sphere(0.300, 0.220, 0.180, 16, 10), 'body', loc=(0.0, 0.260, 1.470))
+    P.add(L.cone(0.142, 0.160, 0.055, 14), 'dark', loc=(0.0, 0.232, 1.540))
+    # The head pitched FORWARD of the lean: he is leaning back and looking at
+    # you, which is what puts the eyes on the front plane of the body. Its
+    # underside at z 1.490 clears the top's own crown at 1.475 - the fault pass
+    # 1 shipped - with the head centre a clear 0.225 above the top's axis.
+    P.add(L.sphere(0.200, 0.210, 0.220, 16, 10), 'body', loc=(0.0, 0.180, 1.700))
+    # A flat linen cap with a brim. NOT a hood - eleven bodies wear one and a
+    # twelfth is a re-skin of a silhouette, the same fault class as a re-skin
+    # of a mechanic.
+    P.add(L.cone(0.270, 0.270, 0.022, 16), 'dark', loc=(0.0, 0.172, 1.790))
+    P.add(L.cone(0.212, 0.196, 0.082, 16), 'dark', loc=(0.0, 0.172, 1.838))
+    _close("man")
+
+    # ---------------------------------------------------------------- THE EYES
+    # Head centre y 0.180 with ry 0.210 puts the face surface at y -0.030. The
+    # eyes are centred at -0.035, so they stand 0.005 PROUD of the wool and are
+    # not bedded in it. Nothing else emissive exists on this body, and the
+    # nearest pale object is now 0.225 m BELOW them rather than in front.
+    _open()
+    eyes(P, (0.0, 0.180, 1.742), 0.076, 0.040, -0.215, 'glow')
+    _close("face")
+
+    # ------------------------------------------------------------ THE STANDARD
+    # The tall upright he drags, with its cross-head and the sheave the laid
+    # rope runs over. It leans FORWARD over him (foot y 0.62, head y 0.46) so
+    # it reads as a thing being pulled rather than a thing standing still. Its
+    # top at z 2.460 is the tallest point on the body and is what the CANON
+    # height is measured to.
+    _open()
+    foot, head = Vector((0.0, 0.620, 0.210)), Vector((0.0, 0.460, 2.460))
+    d = head - foot
+    P.raw(aim(L.box(0.150, 0.150, d.length), (foot + head) * 0.5, d), 'dark')
+    # 0.90 wide, not pass 1's 0.74: the sheave had to move outboard to x 0.38
+    # to keep the laid rope off the face, and a sheave hung past the end of its
+    # own cross-head is the kind of thing that passes every number.
+    P.add(L.box(0.900, 0.170, 0.140), 'dark', loc=(0.0, 0.4685, 2.340))
+    # Hung on the FRONT face of the cross-head: face at y 0.3835, disc centre
+    # 0.310 with r 0.170, so it is bedded 0.073 into the timber.
+    # ON THE BACK FACE, not the front: pass 2 hung it forward and the rising
+    # run of the laid rope then crossed the head IN SIDE PROJECTION. See the
+    # rope's own note - that is the fault this sheave moved for.
+    P.raw(aim(L.cone(0.170, 0.170, 0.090, 16), (0.420, 0.620, 2.300), (1, 0, 0)), 'dark')
+    # The sledge: a deck and two runners, widened with the drum.
+    P.add(L.box(0.800, 0.520, 0.100), 'dark', loc=(0.0, 0.620, 0.160))
+    for s in (-1, 1):
+        P.add(L.box(0.110, 0.980, 0.120), 'dark', loc=(s * 0.340, 0.660, 0.060))
+    _close("frame")
+
+    # ------------------------------------------------------------- THE DRUM
+    # What the finished rope goes onto. Axis along x so the side camera sees a
+    # disc and the back camera sees a barrel - two different reads of one
+    # object from the two views that are not the front. Centred at x +0.10 and
+    # 0.70 long so its right flange at x +0.45 is under the rope coming down
+    # at x +0.380; the rope lands ON the drum and not beside it.
+    _open()
+    P.raw(aim(L.cone(0.260, 0.260, 0.700, 16), (0.100, 0.860, 0.520), (1, 0, 0)), 'dark')
+    for s, x in ((-1, -0.275), (1, 0.475)):
+        P.raw(aim(L.cone(0.300, 0.300, 0.050, 16), (x, 0.860, 0.520), (1, 0, 0)), 'dark')
+    _close("drum")
+
+    # -------------------------------------------------------------- THE TOP
+    # THE MECHANIC'S OWN OBJECT, and the only thing on this body a viewer has
+    # to understand: three strands go in the front of it and one rope comes out
+    # the back. A grooved double cone on a y axis - a fore cone the strands
+    # land on (tip y -0.850), a collar, and a tapered aft nose the laid rope
+    # leaves from at y -0.320. Crown at z 1.475, which is 0.225 below the head
+    # centre and 0.015 below the head's own underside: it cannot occlude the
+    # face from any camera at or above the horizon.
+    _open()
+    P.raw(aim(L.cone(0.090, 0.215, 0.230, 16), (0.0, -0.735, 1.260), (0, 1, 0)), 'bone')
+    P.raw(aim(L.cone(0.215, 0.215, 0.060, 16), (0.0, -0.590, 1.260), (0, 1, 0)), 'bone')
+    P.raw(aim(L.cone(0.205, 0.070, 0.240, 16), (0.0, -0.440, 1.260), (0, 1, 0)), 'bone')
+    # Two handles out of the collar at x +-0.275, inner ends at x +-0.190 and
+    # so INSIDE the collar's own radius of 0.215: the handles are in the timber
+    # and the hands that close on them are ON geometry. The Changer's far hand
+    # was found closing on air and a hand is placed on something in this file
+    # or it is not placed.
+    for s in (-1, 1):
+        P.raw(aim(L.cone(0.048, 0.044, 0.170, 10),
+                  (s * 0.275, -0.600, 1.235), (1, 0, 0)), 'dark')
+    _close("top")
+
+    # ------------------------------------------------------------- THE ARMS
+    # Both hands down and forward on the two handles, at the handle centres.
+    _open()
+    for s in (-1, 1):
+        limb(P, [(s * 0.290, 0.240, 1.420), (s * 0.345, -0.150, 1.330),
+                 (s * 0.278, -0.560, 1.248)], 0.098, 0.078, 'body')
+        P.add(L.sphere(0.086, 0.082, 0.082, 10, 7), 'body',
+              loc=(s * 0.275, -0.600, 1.235))
+    _close("arms")
+
+    # ---------------------------------------------------------- THE STRANDS
+    # THE PALE MASS, AND THE THING THE MECHANIC IS COUNTED ON. Three dead
+    # straight lines from the top's three grooves to three pegs in the floor.
+    # Straightness is the claim: these are under tension and the rope behind
+    # him is not, and that difference is visible in one still frame without a
+    # number or a caption. 0.034 at the top and 0.030 at the peg - thinner than
+    # pass 1's 0.040, which at tripod-leg thickness was half the reason the
+    # body read as an instrument rather than as rope.
+    _open()
+    for g, p in zip(GROOVE, PEG):
+        limb(P, [Vector(g), Vector(p)], 0.034, 0.030, 'bone', ring=7)
+        P.add(L.cone(0.070, 0.034, 0.280, 9), 'bone', loc=(p[0], p[1], 0.110))
+    _close("strands")
+
+    # --------------------------------------------------------- THE LAID ROPE
+    # ONE line out of the back of the top, outboard past his right side, up
+    # over the sheave and down to the drum with a SAG in the last run.
+    #
+    # *** PASS 3, AND THIS IS THE ONE MY OWN ARITHMETIC COULD NOT CATCH. ***
+    # Pass 2 took this rope forward-and-up at x 0.370-0.420, and I proved in
+    # writing that at z 1.700 it passes 0.170 OUTBOARD of a head whose rx is
+    # 0.200. That proof was CORRECT and the picture was still wrong: the SIDE
+    # camera collapses x, so a rope that misses the head by 0.170 in the world
+    # lay straight across the face in side.png. I only know because I opened
+    # the file. A clearance proved in the axis the camera throws away is not a
+    # clearance - that is trap 5 in a new coat and it is mine again.
+    #
+    # SO THE ROUTE IS NOW DECIDED IN THE PROJECTION, NOT IN THE WORLD. It
+    # leaves the top's nose, goes OUTBOARD AND LOW under the right arm, and
+    # climbs BEHIND the man: at z 1.490 - the head's own underside - it is at
+    # y 0.483 against the back of the head at 0.390, and at z 1.700 it is at
+    # 0.513. It is behind the head in the side view and outboard of it in the
+    # world, so both cameras get the same answer.
+    #
+    # THE WORLD-SPACE CLEARANCES STILL HOLD AND ARE STILL WORTH WRITING. Under
+    # the arm: the rope's (0.460, -0.100, 1.180) against the forearm at that y,
+    # which is (0.338, 1.342) - 0.203 apart on 0.098 + 0.054 = 0.152 of radius.
+    # Past the shoulder: (0.520, 0.420, 1.300) against a shoulder sphere of rx
+    # 0.300 and a torso surface at x 0.285. Past the leg: the rope is never
+    # below z 1.180 and the right leg's widest is x 0.355 at z 0.840.
+    _open()
+    limb(P, [(0.000, -0.320, 1.260), (0.460, -0.100, 1.180),
+             (0.520, 0.420, 1.300), (0.480, 0.620, 1.900),
+             (0.420, 0.620, 2.300)], 0.054, 0.054, 'dark', ring=7)
+    limb(P, arc((0.420, 0.620, 2.310), (0.420, 0.860, 0.800), -0.050, 7),
+         0.054, 0.054, 'dark', ring=7)
+    _close("rope")
+
+    # ------------------------------------------------------------ THE HARNESS
+    # THE TIE, and it is the Changer's and the Stopper's lesson applied in
+    # advance rather than re-learned: without this the body reads as A MAN
+    # STANDING IN FRONT OF A SLEDGE - two objects, not one creature. Two breast
+    # ropes from the standard's own side faces (x +-0.075 at y 0.490) to the
+    # two shoulder spheres. Both ends sit ON geometry: the standard's surface,
+    # and the shoulder ellipsoid at (+-0.260, 0.200, 1.440), which is inside
+    # (0.260/0.300)^2 + (0.060/0.220)^2 + (0.030/0.180)^2 = 0.86 < 1. They are
+    # placed to be SEEN in the views that would carry the fault: the left one
+    # leaves the shoulder OUTBOARD and FORWARD so the front camera gets its
+    # whole run, the right one leaves aft for the back camera.
+    _open()
+    limb(P, [(-0.260, 0.200, 1.440), (-0.180, 0.370, 1.510),
+             (-0.080, 0.490, 1.560)], 0.036, 0.030, 'dark')
+    limb(P, [(0.260, 0.240, 1.430), (0.180, 0.400, 1.500),
+             (0.080, 0.505, 1.555)], 0.036, 0.030, 'dark')
+    _close("harness")
+
+    return P
+
+
+BUILDERS.update({"roper": roper})

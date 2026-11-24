@@ -15874,8 +15874,138 @@ file today is 8103 bytes over 32 commands. THAT PROOF DOES NOT COVER TODAY'S FIL
 leaning on it. The real generator still owes its no-op confirmation, and when it runs, the
 generator's bytes win.
 
+## S100 - STAND-DOWN WITH TWO REFUSALS: THE STOPPER IS HELD OUT (NO FEED ROW), AND THE MANA ROW IS ALREADY CLOSED AT S89 (23 Nov 2026, 21:07 CST firing)
+Item: the 22:58 CT 21 Nov TAKE THIS NEXT game-build row (1)-(4). NOTE FIRST: every origin ref
+(main fad55334, laptop e86de311, art, content, hub, hud-ui, chatbot) last moved 21 Nov 23:06 CT -
+NOTHING has been pushed by any lane for ~46 hours. The lock ended on my own RUNNING
+2026-11-21T23:07:59-06:00 with no IDLE, no Godot alive and no commit since: STALE, cleared in
+writing at 2026-11-23T21:10 CT before claiming.
+(1) STOPPER: NOT WIRED, ON PURPOSE. content's by_key (origin/content 733ca1d5 and main) is 47 with
+no `stopper`. Brace-matched parse of `const MB_NAME` (comments stripped): 47 keys; set difference
+against by_key EMPTY BOTH WAYS. Adding Chokewell now would turn _s51_names red - held, as at S98.
+(2)+(3) LOCK WRITER: this run checked the file ends in CRLF before appending (it did), every line I
+wrote starts on its own line, and my IDLE is written BEFORE the commit so the ref carries it.
+(4) MANA - REFUSED AS ALREADY DONE. Item 1 of Mr. E's 10:17 directive was closed at S89 and TICKED
+at the 12:58 21 Nov firing: scripts/snapshot_pub.gd:618-625 publishes row["mana"] and
+row["mana_max"] off Roster.mana_max (option A, the hub sheet; web/app.js:880 manaBar, :1150).
+The row carried a closed half forward. No code changed this run.
+VERDICTS: parse --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error (renders/cycles/s100/parse.log);
+tools/_s51_names.gd -> "S51_NAMES OK 176 checks" (by_key 47, MB_FIT base 47, glb stems 49).
+Twitch: no live test. The parse boot joined #jestsayin96 read-only as usual; nothing posted, 0 bits.
+## C-176 (23 Nov 2026 21:3x CST) - THE STOPPER (48th miniboss, Chokewell): FEED ROW
+TAKE THIS NEXT (22:58 CT block, 21 Nov) CONTENT item: "the Stopper's feed row". Body is CANON + renders on main (tools/art/minibosses.py "stopper", wear 0.32, crypt); Delve.MB_NAME is still 47 so the game build has not wired it.
+ADDED: data/lore_lines.json miniboss_feed.by_key.stopper - arrive x9, act x7, broken x4, fall x8 ({name} in act only), the changer shape; plus `_note_c176` (expected zero-hit key, DO NOT WIRE). The DEADLINE is in the lines: five pegs, one drops per notch, room shut when the last drops, each notch costs wind, nothing done to the room buys time back, a shoulder under the ring holds the count (broken lines). Plain register, kept timber and worn pegs (wear 0.32).
+by_key is now 48 keys. VALIDATION OK: all four owned files parse; every pre-existing key byte-identical in value; items/bosses/potions untouched. phase2_words, phase2_words_alt, phase2_words_alt2 left unwired. Next ID C-177.
+CAUTION FOR GAME BUILD / ART: assets/monsters/minibosses/stopper.glb is NOT in the tree (changer.glb is), so the mesh half of the miniboss_for gate is still open; the lines alone will not stand it on a floor.
+CODE WIRING: game build adds `stopper` -> `Chokewell` to Delve.MB_NAME and the bestiary row (static, no anims, h 2.38) once the glb lands; tools/_s51_names.gd should then see 48 = 48.
+
+================================================================================
+ART - 2026-11-23 21:56 CT - THE 49TH MINIBOSS: THE ROPER ("Drawtight"),
+IT TWISTS YOU TOGETHER. SHIPPED AND PUSHED. THREE PASSES, AND BOTH FAULTS THAT
+MATTERED WERE INVISIBLE TO MY OWN REGISTER.
+================================================================================
+The plan's 22:58 ART row said HOLD and do not re-render the 47, and allowed a
+49th on the standing dry-lane permission. I re-rendered nothing. I measured the
+set before designing rather than trusting this prompt's list: a parse of
+BUILDERS in tools/art/minibosses.py gives 48 live bodies, 2 drillmaster `_tall`
+variants and 12 retired `_chibi`, and I read the CANON `idea` string of all 48
+and sorted them by what the mechanic ACTS ON. NOT ONE OF THE 48 READS THE
+DISTANCE BETWEEN TWO HEROES. The four nearest are argued apart in the file.
+
+FIT IS THE ACCEPTANCE TEST AND THE REGISTER WAS GREEN FOR BOTH FAULTS.
+  PASS 1 - ok true, errors [], 0 blanks, 4 parts, height 2.46 to the millimetre
+           designed. AND THE PALE TOP SAT IN FRONT OF HIS FACE: the head was
+           gone behind it and the two eyes read as nostrils on a lump. Only
+           front.png could say so. The top dropped from z 1.98 to chest at 1.26.
+  PASS 2 - I PROVED IN WRITING that the laid rope passes 0.170 OUTBOARD of a
+           head whose rx is 0.200. The proof was correct and side.png showed
+           the rope LYING STRAIGHT ACROSS THE FACE, because the side camera
+           collapses x. A CLEARANCE PROVED IN THE AXIS THE CAMERA THROWS AWAY
+           IS NOT A CLEARANCE. Rope rerouted outboard-and-low under the right
+           arm and up BEHIND him; the sheave moved to the cross-head's back
+           face. Decided in the projection now, not in the world.
+  PASS 3 - shipped. front, side, three_quarter, hero_front, hero_side and
+           hero_back all opened and looked at.
+
+WHAT I CAN STILL SEE AND AM NOT HIDING: at hero scale the FRONT view's biggest
+shape is the three ground-pinned pale lines, and they read as a STAND or tripod
+before they read as rope - the top is only a small pale apex from head-on. The
+side and three-quarter views carry the idea; the front carries the face. The
+next change, if it is wanted, is to grow the top so the apex is an object at
+stream distance, which costs a re-site of the hands because a bigger top fouls
+the chin - exactly the pass-1 fault - so it is not a one-liner and I did not
+take it on a HOLD row. The back HAS a facing (post, cross-head, drum, harness,
+no face), checked on purpose against the Beadle's defect.
+
+REGISTER: ok true, errors [], blanks 0 of 147 files, 60 rows (48 live + 11
+retired + roper). roper = 4 parts, 1078 faces, 1.32 x 3.17 x 2.46 m,
+CORRIDOR-SAFE, UNDER-LID with 7.04 m clear, floorgeom_stale false. Height 2.46
+and wear 0.28 are both unoccupied rungs measured off CANON. Fully procedural -
+no pack asset used, so no new licence line is owed in docs/art/ASSET_SOURCES.md.
+
+OWED ITEM CLOSED BY MEASUREMENT, NOT BY WORK: this prompt still carries
+"snarer_chibi.glb is committed with NO .glb.import sibling". It HAS one -
+assets/monsters/minibosses/snarer_chibi.glb.import is on disk and in the tree.
+Nothing is owed there and the line can be struck.
+
+FOR THE GAME BUILD: the Roper is NOT WIRED and I did not wire it. bestiary.gd
+needs a `model` path to assets/monsters/minibosses/roper.glb and NO `anims`
+entry - it is static. Delve.MB_NAME wants `"roper": "Drawtight"` AFTER content's
+feed row lands, the same hold you correctly applied to the changer and the
+stopper. Not room-locked: CORRIDOR-SAFE, no spawn gate needed.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.
 ## HUB standing check - 23 Nov 2026 21:4x CT (hub build run)
 TAKE THIS NEXT block (22:58 CT 21 Nov, newest on branch) row HUB = "hold web/ steady, no publish gap". Taken as written; web/ NOT edited.
 Measured on refs: origin/gh-pages tip 029e4fac, ^{tree} = 02257b2f == origin/hub:web == HEAD:web == origin/main:web = 02257b2f. No publish gap.
 Security greps on web/app.js: innerHTML at lines 255 and 301 only (both page-owned literals; lines 7/93/5137/5178 are comments); zero outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code. node --check OK. CSP meta present (1). index.html comment "only innerHTML ... two page-owned sites" still true.
 No READY TO PUBLISH claim. No web/ change, so hostile-name/state tests not re-owed. No screenshot taken (no UI change); live dot unchanged. Untracked _hub_ready_shot.png in W root is the old shot, named here, delete refused on this machine.
+U137 STAND-DOWN 2026-11-23T21:55-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 21:52:36-06:00: last line chat bot B117 IDLE 21:48:45 (claim 21:47:18, cap 22:12:18) with no RUNNING after it, tasklist showed no Godot alive - lock FREE; I did not claim because there is no owed run. Item: WORK_PLAN TAKE THIS NEXT (21:58 CT 21 Nov block, still the newest) says HUD nothing owed, keep committing logs; rarity-hue half of System 2 shipped (U55/U56, guarded U71/U74b/U76), L74 closed (U131/U135). L31/D41/D48/D61 are game-build files, L66 is hub H31. Prompt standing note on rarity-hue is stale for the ninth time. Next firing (22:52): re-read R working lock, take any new HUD row in the TAKE THIS NEXT block, else stand down again; any capture split into <=15 min chunks, release by :07. Decision for Mr. E: none.
+## B117 - 2026-11-23 21:45 CT (chat bot) - THE MINIBOSS COUNT WENT STALE AND MY OWN GUARD ARM CAUGHT IT; THE %s LOCK WRITER IS FIXED FORWARD
+Merged origin/main fad55334 into `chatbot` clean, no conflicts.
+
+**THE RED, AND IT IS MINE.** The four owed gates were green at B115 on 2fd2f62f. On fad55334 the
+first one went red: `L14_TEST FAIL 1 (24 checks)` - `no COMMANDS_DATA guard arm fired` was UNMET,
+one fired, `["MINIBOSS COUNT"]`. The arm at chatcmd.gd:2243 compares what `miniboss` publishes
+against `miniboss_feed.by_key`: **published 46, feed rows 47**. The feed went to 47 when the
+changer landed; my data file never followed. The guard was built for exactly this and it did its
+job two days after it was written. Fix: `data/commands.json`, the `miniboss` entry, "The 46 elites"
+-> "The 47 elites" in both `short` and `what`. Nothing else: a leaf-by-leaf parse of the file
+before and after gives **404 leaves, the key sets identical, exactly 2 changed values**.
+`docs/COMMANDS.md` was then regenerated by the REAL `tools/_commands_doc.gd`, not by hand and not
+by an emulation.
+
+**FOUR GATES GREEN on fad55334** after the fix: `--quit-after 300` rc=0, **0 SCRIPT ERROR, 0 Parse
+Error**; `L14_TEST OK (24 checks)` with `0 fired: []`, 32 rows, `unpublished []`, `stale []`;
+`TWITCH_PARSE OK (8 checks)`; `COMMANDS_DOC OK wrote 32 commands`.
+
+**THE `%s` LOCK WRITER - FIXED FORWARD, WHICH IS THE ONLY WAY IT CAN BE FIXED.** Lines 685, 1105
+and 1107 of docs/RUN_LOCK.txt still read `RUNNING %s` / `IDLE %s`; they are historical evidence and
+I did NOT rewrite them. The writer is not a tracked file - it is composed fresh each firing - so the
+fix is the pattern, recorded here so the next firing copies it rather than re-deriving it: build the
+line by CONCATENATION with the stamp already interpolated, then `assert '%s' not in line and '%d'
+not in line` and assert the stamp still carries `-06:00` BEFORE the write; and read the file's last
+byte and write a leading `\n` if it is not one, so a RUNNING can never weld onto another lane's
+IDLE. Both this run's RUNNING (21:47:18) and IDLE (21:48:45) went through those four guards. The
+file already ended in a newline, so the leading-newline guard did not fire this run - saying that
+plainly rather than claiming it saved me.
+
+**L56 IS NOT A SCHEDULING FAILURE, IT IS AN ARITHMETIC ONE, AND THE SCRIPT IS NOT MINE.** Measured
+off `tools/_l56_test.gd` and B116's own `_l56_soak.log`, not asserted: the script needs
+`START_FLOOR 3` + `FLOORS_PER 8` = floors 3..10 in each of `RUNS 4`, inside `RUN_CAP_FRAMES 7200`
+(2 min). The three runs that actually completed in that log visited **1, 3 and 5 floors** before
+the cap - never 8, not once. At the BEST observed rate (5 floors / 7200 frames) a single run needs
+~11,500 frames and the four-run soak needs **~13 minutes plus boot**; at the worst observed rate (1
+floor) a single run alone would need ~57,600 frames. So L56 as written cannot produce a verdict
+inside a 25-minute lock window except on a lucky draw, and the CAP HIT verdict is structural, not a
+lane's hurry. `tools/_l56_test.gd` is the game build's / QA's file: raising `RUN_CAP_FRAMES` or
+lowering `FLOORS_PER` is their call, and I have not touched it. I did not burn this window on a
+fourth soak with a determined outcome.
+
+My own drift scan printed a false positive - "in data not in md: [all 32]" - because MY regex
+expected rows starting `| !` and the generator writes `` | `!name` ``. The real gate disagrees with
+my scan and the gate is right: 32 rows, `unpublished []`, `stale []`, and every one of the 32 data
+entries appears as a literal in chatcmd.gd. Reporting my own instrument's error rather than the
+number it printed.

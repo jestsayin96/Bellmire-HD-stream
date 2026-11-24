@@ -13929,6 +13929,44 @@
           "The turnstile stands open. Nothing is owed.",
           "Count who is beside you."
         ]
+      },
+      "stopper": {
+        "arrive": [
+          "The air has gone thick. Something is seating a lid.",
+          "A man stood up through a wide flat ring at chest height. A cloth over his mouth, a lamp at his hip.",
+          "He does not come at anyone. He stands in the middle of the ring and screws it down.",
+          "Five pale pegs stand on the rim. One drops every notch.",
+          "When the last peg drops, the room is shut.",
+          "Every notch, everybody in here has a little less wind.",
+          "Nothing done to the room buys time back. Hit him all you like and the pegs still drop.",
+          "A shoulder under the ring and a lift will hold it. Whoever does that is not swinging.",
+          "Sound timber, kept iron, and pegs worn smooth where hands have been. He has done this before."
+        ],
+        "act": [
+          "A peg drops. {name} takes a shorter breath.",
+          "The ring comes down a notch. {name} feels it in the chest.",
+          "{name} swings hard. The pegs do not care.",
+          "Another notch. {name} is winning on damage and losing on air.",
+          "{name} counts the pegs off the rim. There are fewer.",
+          "The lamp at his hip has gone small. {name} breathes through the pain of it.",
+          "One peg left standing. {name} is out of notches to spend."
+        ],
+        "broken": [
+          "A shoulder under the ring. It holds where it stands.",
+          "The lid will not seat. A body is holding it up.",
+          "He leans on the haft and the ring does not go down. The pegs hold.",
+          "Nobody is swinging. The count stays where it is."
+        ],
+        "fall": [
+          "Chokewell is down. The ring lies crooked on the floor.",
+          "The pegs still standing stay standing. Nothing drops.",
+          "The lid is off. The air comes back thin, then full.",
+          "He lets go of the haft. The ring rolls half a turn and lies flat.",
+          "Breathe. Slowly first.",
+          "He is out of the ring, and the ring is empty.",
+          "The lamp at his hip burns steady again.",
+          "Count the pegs still up. Be glad of each one."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -13962,7 +14000,8 @@
     "_note_c158": "C-158: pitman (44th miniboss) gets act x7 and broken x4, the dependency the S79 way was held on. act lines take {name}, the delver the floor opened under. Expected zero-hit key: DO NOT WIRE.",
     "_note_c167": "C-167: tither (45th miniboss, Tenthpart, the first EXIT CONDITION: paid off or refused, not only killed) gets arrive x9, act x7, broken x4, fall x8 - the pitman's shape. act lines take {name}, the delver paying or refusing. fall lines are written to read true whether the tenth was paid or the body was beaten, since the encounter can end either way. Expected zero-hit key: DO NOT WIRE.",
     "_note_c169": "C-169: blower (46th miniboss, Deadair, the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives out first, nothing done to the man slows the count, holing the bag stops it) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither shape. act lines take {name}, the delver slowed or reaching for the patch iron. broken lines are the bag being holed (count stops). fall lines read true whether the bag was holed or the man beaten. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c174": "C-174: changer (47th miniboss, Evenhand, the first SWAP: whoever hits it hardest ends up standing where it stood and it stands where they were, beside the back rank; the drum on the post turns a third per trade; a body set against a bar jams the arms and stops the trade) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither/blower shape. act lines take {name}, the delver who struck hardest and was swapped. broken lines are the arms jammed (no trade). fall lines read true whether the arms were jammed or the man beaten. Body committed on main (assets/monsters/minibosses/changer.glb, art 47th); not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE."
+    "_note_c174": "C-174: changer (47th miniboss, Evenhand, the first SWAP: whoever hits it hardest ends up standing where it stood and it stands where they were, beside the back rank; the drum on the post turns a third per trade; a body set against a bar jams the arms and stops the trade) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither/blower shape. act lines take {name}, the delver who struck hardest and was swapped. broken lines are the arms jammed (no trade). fall lines read true whether the arms were jammed or the man beaten. Body committed on main (assets/monsters/minibosses/changer.glb, art 47th); not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
+    "_note_c176": "C-176: stopper (48th miniboss, Chokewell, crypt, wear 0.32, the first DEADLINE: five pegs on the ring's rim, one drops every notch, the room is shut when the last drops, each notch costs the party wind, nothing done to the room buys time back; a delver with a shoulder under the ring holds the count) gets arrive x9, act x7, broken x4, fall x8 - the changer shape. The clock is in the lines, not explained beside them. act lines take {name}, a delver feeling the notch. broken lines are the ring held up (count holds). Body is CANON + renders on main (tools/art/minibosses.py, docs/art); NO stopper.glb is committed yet, so the mesh half of the miniboss_for gate is still open. Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

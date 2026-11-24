@@ -1108,3 +1108,8 @@ IDLE %s - chat bot B116 CORRECTION to my own IDLE of 21:51:07, lock still releas
 
 RUNNING 2026-11-21T21:53:11-06:00 (HUD U135 windowed chronicle re-sample, expected finish 21:53+8min, cap +15)
 IDLE 2026-11-21T21:54:46-06:00 - HUD U135: chronicle re-sample, U134_DONE checks=149 fails=0. No Godot of mine alive. (HUD)RUNNING 2026-11-21T22:07:47-06:00 (game build: merge + gates + item, expected finish 22:30, cap 22:32:47)
+IDLE 2026-11-21T22:14:49-06:00 - game build S99: changer -> Evenhand in MB_NAME (47 = by_key 47), all gates green, pushed laptop 7f04982c. Claim 2026-11-21T22:07:47-06:00, cap 22:32:47, declared 22:30. No Godot of mine alive. (game build)
+RUNNING 2026-11-21T23:07:59-06:00 (game build: merge + gates + item, expected finish 23:30, cap computed first)
+IDLE 2026-11-23T21:08:29-06:00 - game build: clearing STALE claim RUNNING 2026-11-21T23:07:59-06:00 (game build) - no Godot alive, never released. (game build)
+RUNNING 2026-11-23T21:08:29-06:00 (game build: merge + gates + item, expected finish 21:33, cap 21:33:29)
+IDLE 2026-11-23T21:10:18-06:00 - game build S100: stand-down, stopper held (no feed row, MB_NAME 47 = by_key 47), mana row refused as closed at S89, S51_NAMES OK 176, parse 0 errors. Claim 2026-11-23T21:08:29-06:00, cap 21:33:29, declared 21:33. No Godot of mine alive. (game build)

@@ -138,6 +138,23 @@
   NO VERDICT and increment `_bad` rather than passing quietly. Claim at :52, cap claim+15, hard
   release at :07, and split any capture that will not finish.
 
+**LOCK DISCIPLINE AND THE RUNNING CLEAN-HOUR COUNT - 16:58 CT, 24 NOV 2026.**
+Four windows this hour, all read from R's WORKING copy of `docs/RUN_LOCK.txt`:
+  HUD U155 claim 15:55 / cap 16:10 / declared 16:03 / IDLE 15:58:12 - clean, released early.
+  game build S117 claim 16:08:37 / cap 16:33:37 / declared 16:33 / IDLE 16:16:43 - clean, early.
+  chat bot B136 claim 16:46:50 / cap 17:11:50 / declared 16:51:30 / IDLE 16:49:05 - clean, and it
+    claimed BEFORE :50 and released BEFORE :52, so the HUD kept its window. Ninth hour running.
+  HUD U156 claim 16:53:41 / cap 17:08:41 / declared 17:01 / IDLE 16:56:03 - clean.
+**No overrun, no claim over a live hold, no stale lock cleared, no starved lane, no future stamp,
+no two lanes holding at once.** Every RUNNING is followed by an IDLE from the same lane before the
+next RUNNING. I took no Godot lock and ran no gate; every verdict I report is a file I read.
+**THE COUNT: I AM RE-ANCHORING IT AT 1, AND THAT IS A FAULT OF MY OWN INSTRUMENT, NOT OF A LANE.**
+The last recorded reset was 0 at the **10:58 CT firing today** (chat bot B130, a future stamp). The
+12:58, 13:58, 14:58 and 15:58 blocks carried **no running count**, so "6" is a number no seat has
+measured and "0" would charge five hours that were probably clean. **It reads 1 for the 16:58 hour
+and the next seat may advance it to 2 - and EVERY seat from here on restates the number in this
+block**, so it stops drifting out of the plan the way it just did.
+
 **FOR THE SUPERVISOR:** Two things, neither urgent, neither mine.
   1. **PUBLISH 7 LANDED AT 15:30:43 CT** (gh-pages `5ce35f33`, "fix 0-byte turbary_hood.webp +
      zero-byte guard"). I verified the push: `origin/gh-pages^{tree}` `c03fa129`, and the web/ code

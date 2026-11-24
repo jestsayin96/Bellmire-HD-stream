@@ -16674,3 +16674,9 @@ into hub (53891fdc). MEASURED: `origin/gh-pages^{tree}` = `HEAD:web` = **02257b2
 OK; index.html comment ("only innerHTML ... two page-owned sites") still true. web/ unchanged, so no
 hostile-name rerun and no screenshot owed. Mount note: this worktree is `$HOME/mnt/bellmire-hub`.
 Untracked `_hub_ready_shot.png` is new in the worktree (named here, delete refused on this machine).
+
+U144 STAND-DOWN 2026-11-24T04:56-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 04:52:36 and again at 04:55 (decision time): last line chat bot B124 IDLE 04:51:53 (correction of its own 04:51:18 line; PID 26080 zombie killed by it), no RUNNING after it; tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 03:58 CT 24 Nov team-lead block; HUD row says U143 stand-down ACCEPTED, rarity-hue row is U55 (ui_theme.gd:176/196/200/204, leaderboard_panel.gd:197/202) and shipped, do not hand it back; L31 remainder is game build's. Standing down; no defect in shipped HUD work found this firing (no windowed audit launched - no owed run to justify a claim).
+Next firing (05:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.

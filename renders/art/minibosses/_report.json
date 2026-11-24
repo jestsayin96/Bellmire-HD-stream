@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "df29f583070102de4bb5582d3ff8e721c456da02",
+   "head": "c6a3f7917de965b5fe3cf4098c8d393ba3aeb1a7",
    "ref": "origin/main",
-   "ref_commit": "b5a1a13a5a6e7cb812ed27815a7ca099dde4e176",
+   "ref_commit": "5ab5ae20a04d5eca56384710edd841e4829cc233",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2933,24 +2933,24 @@
   "stiltman": {
    "title": "Downfast",
    "theme": "fogbound",
-   "idea": "IT IS QUICKER FOR EVERY LEG YOU TAKE - it crosses the room on four stilts and every one of them is breakable in plain sight, which is the trap: breaking one WORKS. It drops, its reach over your front line shortens, and it is FASTER - a shorter stride is a quicker one, and a thing at your own height does not have to stoop to get at you. Leave the stilts alone and it stands above the party and strikes down past the line into whoever is behind it; take them and you are fighting something low and quick with nothing left to break. It does not choose and it does not time anything: THE PARTY OWNS THE DECISION and both ways cost. THE THING TO READ IS THE LEGS: four pale bound cuffs at the hip and only THREE poles in them - it has already lost one, and it is already leaning.",
+   "idea": "IT IS ALREADY DOWN ONE AND IT IS QUICKER FOR IT - it crosses the room on stilts, it has already lost one, and the pole it feels the bottom with is the only thing holding that end up. The stilt that is left is breakable in plain sight, which is the trap: breaking it WORKS. It comes down, its reach over your front line is gone, and it is FASTER - a shorter stride is a quicker one, and a thing at your own height does not have to stoop to get at you, and it has nothing left to break. Leave it alone and it stands above the party and strikes down past the line into whoever is behind it. It does not choose and it does not time anything: THE PARTY OWNS THE DECISION and both ways cost. THE THING TO READ IS THE LEGS: two bound cuffs at the ankle, ONE POLE ON THE FLOOR and ONE SPLINTERED STUMP hanging clear of it, and a man braced on a crutch where his leg should be.",
    "wear": 0.62,
    "feed_line": "Something ahead is walking on poles, and one is gone.",
    "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 602,
+   "faces": 628,
    "size": [
-    1.34,
-    0.81,
+    1.24,
+    0.53,
     3.2
    ],
-   "footprint_span": 1.34,
+   "footprint_span": 1.24,
    "height_m": 3.2,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.659,
+   "corridor_margin_m": 9.762,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.3,
    "read_from": {
@@ -2964,11 +2964,11 @@
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.781435789491227,
-    "ortho": 3.6636645793914795,
+    "radius": 1.7357128477787915,
+    "ortho": 3.591784954071045,
     "clip": [
-     7.649636268615723,
-     18.536758422851562
+     7.322744846343994,
+     18.327051162719727
     ]
    },
    "views": [
@@ -2980,7 +2980,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs b5a1a13a5a6e7cb812ed27815a7ca099dde4e176 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5ab5ae20a04d5eca56384710edd841e4829cc233 sha bc3a603f",
  "blank_check": {
   "files": 156,
   "failures": []

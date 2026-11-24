@@ -1,0 +1,70 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Somebody checks the knots a second time.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 cave bats, 1 cave spider.
+FEED Someone swept this floor recently. Nobody has lived here in years.
+FEED Hero2 casts Smite at cave spider.
+FEED Hero6 casts Frost at cave bat.
+FEED Hero4 searches (Investigation 7) and turns up 8 gold on floor 1.
+FEED What was loud is quiet. What was ours, is ours.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave spiders, 1 skeleton minion, 1 bog frog.
+FEED Hero2 casts Bolt at cave spider.
+FEED Hero6 casts Bolt at cave spider.
+FEED Hero1 casts Bolt at cave spider.
+FEED Hero2 calls smite and the scar calls louder (8 vs DC 11).
+FEED Hero2 casts Bolt at cave spider.
+FEED Hero1 casts bolt and the floor answers instead (10 vs DC 11).
+FEED Hero6 casts Frost at cave spider.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero4 searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED Nothing moves on floor 2 but the dust.
+FEED Hero4 searches the chest - Successfully found loot!! 29 gold (Investigation 14 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 bone bowman, 1 drowned giant rat, 1 drowned slime, 1 hollowed risen bones.
+FEED Hero2 casts Smite at hollowed risen bones.
+FEED Hero2's bolt sputters like a wet wick (1 vs DC 11).
+FEED Hero6's bolt comes apart like wet rope (1 vs DC 11).
+FEED Hero6 casts Frost at drowned slime.
+FEED Hero2 casts Bolt at drowned slime.
+FEED Hero1 casts Chain Bolt at drowned slime.
+FEED Hero6 casts Frost at drowned slime.
+FEED The drowned slime divides.
+FEED Hero0 rolls a 20 - and the drowned slimeling is gone.
+FEED Hero3 turns on the wounded drowned slimeling to finish it.
+FEED Hero4 turns on the wounded drowned slimeling to finish it.
+FEED Hero5 turns on the wounded drowned slimeling to finish it.
+FEED Hero2 casts Ward at Hero5.
+FEED Hero4 searches (Investigation 10) and turns up 26 gold on floor 3.
+FEED Clear. Measure the grain, count the flasks, keep the door, go on.
+FEED Shadows peel off the walls - an ambush! 1 drowned puglin, 1 hollowed slime, 1 puglin surges in.
+FEED Hero1's bolt arrives late, and small (6 vs DC 11).
+FEED Hero7 turns on the wounded hollowed slimeling to finish it.
+FEED Hero6 turns on the wounded hollowed slimeling to finish it.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 4; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 risen bones, 2 drowned giant rats, 2 drowned slimes.
+FEED The oil is running low.
+FEED Hero6 mutters bolt, and the rune mutters back something else (1 vs DC 12).
+FEED The drowned slime divides.
+FEED Hero0 turns on the wounded drowned slimeling to finish it.
+FEED Hero7 turns on the wounded drowned slimeling to finish it.
+FEED Hero0 turns on the wounded drowned slimeling to finish it.
+FEED Hero4 searches (Investigation 18) and turns up 51 gold on floor 4.
+FEED Floor 4 is cleared. The stair above is a comfort.
+FEED Hero4 finds a vial of Shingler's Dram.
+FEED Hero4 searches the chest - Successfully found loot!! 49 gold (Investigation 17 vs DC 12).
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 185 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 27 kills between them.
+FEED Hero4 is fitted with Ford Leathers. (+10 hp) Haggled 14% off (16).
+FEED Hero7 is fitted with Tanner's Jerkin. (+10 hp) Haggled 11% off (13).
+OFFFLOOR 0 of 2165 samples; INPROP 0; MON_INPROP 0 of 277; floor reached 4 frames 7091 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2165 samples off the floor (home)

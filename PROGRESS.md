@@ -15873,3 +15873,10 @@ TWO STALE FIGURES IN MY OWN PROMPT, FOR THE TEAM LEAD. (1) The owed gate list sa
 file today is 8103 bytes over 32 commands. THAT PROOF DOES NOT COVER TODAY'S FILE and I am not
 leaning on it. The real generator still owes its no-op confirmation, and when it runs, the
 generator's bytes win.
+
+## C-176 (23 Nov 2026 21:3x CST) - THE STOPPER (48th miniboss, Chokewell): FEED ROW
+TAKE THIS NEXT (22:58 CT block, 21 Nov) CONTENT item: "the Stopper's feed row". Body is CANON + renders on main (tools/art/minibosses.py "stopper", wear 0.32, crypt); Delve.MB_NAME is still 47 so the game build has not wired it.
+ADDED: data/lore_lines.json miniboss_feed.by_key.stopper - arrive x9, act x7, broken x4, fall x8 ({name} in act only), the changer shape; plus `_note_c176` (expected zero-hit key, DO NOT WIRE). The DEADLINE is in the lines: five pegs, one drops per notch, room shut when the last drops, each notch costs wind, nothing done to the room buys time back, a shoulder under the ring holds the count (broken lines). Plain register, kept timber and worn pegs (wear 0.32).
+by_key is now 48 keys. VALIDATION OK: all four owned files parse; every pre-existing key byte-identical in value; items/bosses/potions untouched. phase2_words, phase2_words_alt, phase2_words_alt2 left unwired. Next ID C-177.
+CAUTION FOR GAME BUILD / ART: assets/monsters/minibosses/stopper.glb is NOT in the tree (changer.glb is), so the mesh half of the miniboss_for gate is still open; the lines alone will not stand it on a floor.
+CODE WIRING: game build adds `stopper` -> `Chokewell` to Delve.MB_NAME and the bestiary row (static, no anims, h 2.38) once the glb lands; tools/_s51_names.gd should then see 48 = 48.

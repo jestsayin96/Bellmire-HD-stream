@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+  ok   changer has a loadable body (res://assets/monsters/minibosses/changer.glb)
+  ok   ratio 1.11 == MB_FIT (art's measured)
+S33_MEASURE h=2.72 knight h=2.54 ratio_to_posed=1.11 min_y=0.000
+  ok   fitted height 2.72 == 2.72
+  ok   stands on the floor (min y 0.000)
+  ok   knight and body do not overlap in x (-0.97..0.97 vs 1.25..3.84)
+S33_SHOT fenman_1front
+S33_SHOT fenman_2side
+S33_SHOT fenman_3side90
+S33_LOOK OK (5 checks)

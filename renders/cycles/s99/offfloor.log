@@ -1,0 +1,75 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The guild post marks them out and does not look up.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 giant rat, 1 skeleton minion.
+FEED Every skull faces the door, and the door faces us.
+FEED Hero2 asks for smite. The scar is not taking requests (9 vs DC 10).
+FEED Hero6 casts Frost at giant rat.
+FEED Hero2 casts Bolt at skeleton minion.
+FEED The slime divides.
+FEED Hero2 casts Bolt at slimeling.
+FEED Hero6 starts frost, loses the thread, and finishes it badly (1 vs DC 10).
+FEED Hero4 searches (Investigation 5) and turns up 6 gold on floor 1.
+FEED They sit a moment. Then they stand.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 giant rat, 1 skeleton minion.
+FEED Hero1 rolls a 20 for initiative and is moving before anything else.
+FEED Hero6 rolls a 20 for initiative and is moving before anything else.
+FEED Hero6 casts Bolt at bog frog.
+FEED Hero2 casts Smite at bog frog.
+FEED Hero6 reaches for frost and the knot will not hold (9 vs DC 11).
+FEED Hero2 casts Bolt at giant rat.
+FEED Hero6 casts Bolt at giant rat.
+FEED Hero1's bolt lands on the wrong foe - the scar edits it (8 vs DC 11).
+FEED Hero2 begins smite. The torch gutters. Nothing follows (1 vs DC 11).
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero4 searches (Investigation 13) and turns up 23 gold on floor 2.
+FEED Finished. The next room has gone from silent to listening.
+FEED Hero4 finds a vial of Carrot Broth.
+FEED Hero4 searches the chest - Successfully found loot!! 42 gold (Investigation 24 vs DC 11).
+FEED Hero4 searches the chest - Successfully found loot!! 24 gold (Investigation 18 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 4; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 drowned slime, 2 drowned skeleton minions.
+FEED Hero2 casts Smite at drowned skeleton minion.
+FEED Hero2 casts Smite at drowned skeleton minion.
+FEED Hero6 casts Frost at drowned skeleton minion.
+FEED Hero2's smite curdles on the tongue and comes out wrong (7 vs DC 11).
+FEED Hero6 grips bolt and the words slide off (1 vs DC 11).
+FEED Hero6 casts Frost at drowned giant rat.
+FEED Hero2 casts Smite at drowned giant rat.
+FEED Hero1 is cut off and falls back to the others.
+FEED The drowned slime divides.
+FEED Hero5 rolls a 20 - and the drowned slimeling is gone.
+FEED Hero7 turns on the wounded drowned slimeling to finish it.
+FEED Hero1 is cut off and falls back to the others.
+FEED Hero2 casts Bolt at drowned slimeling.
+FEED Hero4 searches (Investigation 6) and turns up 26 gold on floor 3.
+FEED The lamp is trimmed. It will be wanted again soon enough.
+FEED Hero4 searches the chest - Successfully found loot!! 37 gold (Investigation 15 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 bone bowman, 2 slimes, 1 cave spider, 1 puglin.
+FEED The oil is running low.
+FEED Hero2's smite goes wrong - the scar answers (1 vs DC 12).
+FEED Hero6's bolt doubles back and finds them first (8 vs DC 12).
+FEED Hero1 casts Bolt at slime.
+FEED The slime divides.
+FEED Hero1 mutters chain twice. Neither takes (9 vs DC 12).
+FEED Hero4 searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Nothing moves. Someone checks twice anyway.
+FEED Hero4 finds a vial of Thatcher's Rub.
+FEED Hero4 spots a spike trap (Perception 16 vs DC 12) and steps round it.
+FEED Hero4 searches the chest - Successfully found loot!! 42 gold (Investigation 14 vs DC 12).
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 247 gold, 6 ore, 4 stone, 2 pieces of salvaged gear and 2 potions. 24 kills between them.
+FEED Hero4 is fitted with Ford Leathers. (+10 hp)
+OFFFLOOR 0 of 2067 samples; INPROP 0; MON_INPROP 0 of 259; floor reached 4 frames 6793 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2067 samples off the floor (home)

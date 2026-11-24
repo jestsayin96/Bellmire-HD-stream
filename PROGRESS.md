@@ -17823,3 +17823,100 @@ the container's (B130's four-minute-fast claim is the reason).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## D-S116 (game build, 24 Nov 2026 15:08-15:2x CT) - THE 54th IS NAMED: `iceman` -> "Hoarback" IN `Delve.MB_NAME`
+TAKE THIS NEXT (14:58 block) gave GAME BUILD: name the 54th, the blocker is gone. Measured first:
+`lore_lines.json miniboss_feed.by_key` holds 54 keys and `iceman` is one (C-193, arrive 9 / act 7 /
+broken 4 / fall 8, fall lines name Hoarback); art's CANON title Hoarback (minibosses.py:19421).
+Done, exactly the close S115 specified and nothing more:
+- scripts/delve.gd MB_NAME + `"iceman": "Hoarback"` (54 rows); the S115 MB_FIT comment updated.
+- tools/_s51_names.gd:64 and tools/_s107_gate.gd:43 move 53 -> 54 together. `_s63_props.gd:56`
+  left at 52 as told (different axis).
+- tools/_s115_iceman.gd: its header asked for the hold-out arm to flip when the lines landed - added
+  three hard arms (lines present, iceman IS drawn in mess, name == Hoarback). Old adaptive arms kept.
+Gates (verdict lines): PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (one ERROR line is the chat bot's
+own COMMANDS_DATA guard: commands.json publishes 53 vs 54 feed rows - the 53 -> 54 republish is the
+chat bot's 15:45 run per the plan, NOT mine, and it is the expected transient now the 54th is named);
+S51_NAMES OK 176 checks; S107_GATE OK 12 (MB_NAME size 54); S115_ICEMAN OK 10 (mess draws cook,
+loader, hooper, iceman - the 4000-pick sweep now draws it); TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2127 off the floor; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR; TOWNWALK ran,
+in_solid 0, stuck_on_route 0. iceman.glb.import is tracked on laptop (the chat bot's B134 note that
+main lacked it predates the merge that carried it). No Twitch, ZERO BITS.
+## C-194 (24 Nov 2026 15:3x CST, content) - OWN QUEUE, NOTHING UNFED; descend +8, cleared +8, barks.enter +8, barks.lord +6, barks.hurt +8, barks.drink +8
+TAKE THIS NEXT (14:58 CT block, 24 Nov) CONTENT row (15:22): nothing unnamed, nothing unfed (54 bodies, 54 by_key keys, iceman fed in C-193, no 55th committed). Continued own lore tranche as C-192 did. Appended plain strings to existing pools; duplicates checked first (four collisions caught and reworded before write). No arrive/fall-only backfill (nothing reads them).
+VALIDATION OK: all four owned files json.load; only descend (585->593), cleared (570->578), barks.{enter,lord,hurt,drink} grew (+46 lines), plus new top-level `_note_c194`; every other key identical; existing pool entries identical (prefix compare). Edit was textual insertion.
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c194`.
+
+## U155 - THE U62/U69 "REDS" WERE A 1152x648 WINDOW, NOT THE HUD, 2026-11-24 ~15:58-06:00 (15:52 firing)
+ITEM: WORK_PLAN 15:52 row (U154's two reds). Lock: R working RUN_LOCK last line = chat bot B135 IDLE 15:51:05, 0 Godot alive by process -> claimed (stamp 15:55:00 was ~30s ahead of the real clock, my slip), released ~15:58 (IDLE written). Windowed runs.
+ROOT CAUSE (one, explains everything): a bare --windowed run opens 1152x648. U62 lays the 4th scroller at x=1390..1830, so it was OFF-SCREEN: no ink = vacuous pass since it was added. And px8 is 5/6/7 at 1152 vs 8/10/12 at 1080p, so the "stripe overruns the rod 0.1-0.16px" was a small-window rounding artifact, not a ui_theme regression. No bisect needed: at --resolution 1920x1080 U62 = OK bad=0 measured=12 (all 4 scrollers find ink, stripe_top-ink_bot 0.72/0.82/0.24 at 100/125/150%, clear=true everywhere, rod_bot==stripe end).
+U69: header says "RED PROOF ... MUST print FAIL". The 1500x800 BossCard FAIL at 100%/150% IS the red-proof firing as designed (re-run at 1080p, identical). Not a defect. (Its final line says U69_REDPROOF FAIL, which reads like a failure - wording only, left alone.)
+CHANGED: tools/_u62_scales.gd only (no HUD .gd). Prints the capture size; capture smaller than 1920x1080 = NO VERDICT + bad. RED-PROVED: default --windowed (1152x648) -> 3x NO VERDICT, U62_SCALES FAIL bad=8; --resolution 1920x1080 -> OK bad=0 measured=12.
+PARSE: headless --quit-after 300 = 0 SCRIPT ERROR / Parse Error.
+RUN COMMAND to remember: --windowed --resolution 1920x1080 for every U-gate that lays out in 1080p coordinates (audit U40/U56/U88/U90/U91 for the same trap next).
+Logs committed (_u155_*.log). Decision for Mr. E: none.
+## B135 - 24 Nov 2026, 15:45 CT (chat bot) - THE PREDICTION WAS RIGHT AND I CHECKED IT ANYWAY: FOUR GATES GREEN, THE FIFTH THE INSTRUCTED ONE-KEY RED, PUBLISHED NOTHING
+ITEM: the team lead's 14:58 CHAT BOT row - "expect nothing to be owed at 15:45, measure both halves
+anyway, and if they disagree publish NOTHING and say so". I did not take the prediction on trust.
+It is right in every particular, and the measurement is below rather than a citation of the row.
+TREE: merged main `bc92b4e6`; my HEAD after ff of origin/chatbot (`74250c46`) then merge of main =
+`84c3d284`. 21 files, 0 conflict markers. Nothing of mine edited - `git status` on
+scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md is EMPTY both before and after the
+gates, which is also the COMMANDS_DOC no-op proof.
+
+BOTH HALVES AND THE PUBLISHED THIRD, MEASURED BY ME BEFORE I WROTE THE CLAIM LINE, comments
+STRIPPED BEFORE SPLITTING, string-aware, brace-matched and ANCHORED ON `const MB_NAME :=`
+(delve.gd:437 this merge, up one line from 436 last hour):
+  - `Delve.MB_NAME`                 = **53** keys, 0 dupes, `iceman` OUT
+  - `miniboss_feed.by_key`          = **54** keys, `iceman` IN
+  - `data/commands.json` publishes  = **53**, at EXACTLY two leaves (`commands.miniboss.short`
+    and `commands.miniboss.what`); 18000 bytes, 8 top keys, `commands.armoury.cost`
+    ("50 / 150 / 400 / 1000 gold by tier") matched my count regex and is NOT a count - named here
+    so the next run does not mistake it for a third leaf.
+  - drift BOTH directions: `by_key - MB_NAME` = `['iceman']` EXACTLY; `MB_NAME - by_key` = `[]`.
+THE HALVES DISAGREE 53 / 54, so the row's own unmet branch applies: I PUBLISHED NOTHING.
+THE 53 -> 54 REPUBLISH IS THE 16:45 RUN'S.
+
+WHY, READ OFF BOTH REFS AND NOT ASSUMED: the engine's S116 naming (`"iceman": "Hoarback"` in
+MB_NAME) is on `origin/laptop` **72eec323** and is NOT on `origin/main` **bc92b4e6**. I ran the same
+findstr against both: laptop prints the MB_NAME row; main prints only the `MB_FIT.iceman` 1.27 line,
+whose own comment still reads "NO MB_NAME row yet". That is the same one-merge lag this lane has now
+diagnosed four hours running, and the team lead has recorded it as its own rather than this lane's.
+
+FIVE GATES, behind a `--headless --import` pass run FIRST (all five finished 48.1 s after launch,
+so NOTHING was split or carried):
+| IMPORT | rc=0, 0 ERROR, 1047 reimport steps. One WARNING, pre-existing and not mine: missing .uid
+  for `res://tools/_b11_muster.gd`, re-created from cache |
+| PARSE (`--quit-after 300`) | rc=0, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error, 8 pre-existing
+  invalid-UID ext_resource WARNINGs on asset-kit .tres (MI_Cobble and siblings) |
+| TWITCH_PARSE | OK, 8 checks, 8 PASS. rc=0. The 2 ERROR lines in its stderr are MY OWN guard
+  firing the instructed transient at load, counted here and not hidden |
+| COMMANDS_DOC | OK wrote 32 commands, AND A TRUE NO-OP - `git status` on docs/COMMANDS.md is empty
+  AFTER the real generator ran, which is correct because I changed no data. Same 2 guard ERRORs |
+| L14_TEST | FAIL 1 of 24, AND THAT IS THE CORRECT ANSWER. The single FAIL is the clean-load
+  assertion ("no COMMANDS_DATA guard arm fired on the load"), and the two arms that fired are
+  MINIBOSS COUNT (published 53, feed rows 54) and MINIBOSS UNNAMED (`["iceman"]`) - the exact pair
+  the 14:58 row told this lane NOT to fix. BOTH COMMANDS.md drift arms PASS: 32 rows, unpublished
+  `[]`, stale `[]`, checked both directions |
+
+THE IMPORT OBSTRUCTION DID NOT RECUR, AND THIS IS THE FIFTH HOUR IT HAS HAD TO BE SWEPT: 1047
+untracked regenerable `*.import` files left by this run's own pass were removed before this commit.
+PROVED SAFE SET-WISE, NOT FILE-BY-FILE AS BEFORE: I intersected git's own untracked list with
+`git ls-files` and the overlap was `[]` - zero of the 1047 is tracked - then deleted only that set.
+Nothing tracked was touched. `iceman.glb.import` came in TRACKED on this merge (the engine lane
+committed it at S115), so unlike nightman last hour there was nothing of the 54th for me to generate.
+
+NOT MINE AND STILL OPEN, REPORTED A THIRD HOUR: `web/icons/items/hat/turbary_hood.webp` is 0 bytes
+on main and can never load. The fix is merged on `origin/hub` (9af5f21a) and the team lead's 14:58
+block recommends the supervisor AUTHORISE hub publish 7. It fails no gate of mine, which is exactly
+why it needs saying out loud again.
+
+ONE THING I DID BETTER THAN LAST HOUR AND WILL NAME, BECAUSE THIS LANE HAS GOT FOUR HAND-ROLLED
+COUNTS WRONG IN SIX HOURS: I hand-rolled NO count that a gate already answers. The 32 is
+COMMANDS_DOC's own number, the 8 is TWITCH_PARSE's, the 24 is L14_TEST's. The only numbers I
+computed myself are the three the republish decision turns on, and each was computed off the file
+rather than off a previous run's prose.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.
+Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.

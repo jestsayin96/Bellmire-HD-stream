@@ -1067,7 +1067,15 @@
     "The chandler presses a spare candle into a hand and will not take coin.",
     "The cooper raps a cask twice to show it is sound and puts it back.",
     "The old guard stands up when they pass. He sits again after.",
-    "Somebody has chalked the day on the gate post, as is done."
+    "Somebody has chalked the day on the gate post, as is done.",
+    "The ropewright checks the knot on the winch and checks it again.",
+    "A child counts the party at the gate. The number comes out right.",
+    "The baker leaves a loaf on the wall by the stair. It is gone by dusk, as always.",
+    "Somebody has swept the top step. Nobody says who.",
+    "The lamp-seller trims four wicks and hands them over without being asked.",
+    "The gatewarden writes the hour in the ledger. He writes it small.",
+    "A dog follows them to the stair and sits down at the edge of the light.",
+    "The chandler's wife counts candles into a sack and does not look up."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1639,7 +1647,15 @@
     "A pot of barley goes on the fire. It was always going to.",
     "The cooper keeps back a cask for the evening and says nothing of why.",
     "The bell-ringer sits with the rope in his lap and does not pull it.",
-    "The guild clerk opens the book to the right page and waits."
+    "The guild clerk opens the book to the right page and waits.",
+    "The washerwoman wrings out a sleeve and says the water was ready an hour ago.",
+    "The gatewarden strikes the hour from the ledger and writes the return beside it.",
+    "Somebody has kept the good bench by the fire. It is not the first time.",
+    "The ropewright lets the line slack and coils it without a word.",
+    "The baker sets out the heel of the loaf. The rest was for the others.",
+    "A child runs ahead to the guild door and holds it open.",
+    "The lamp-seller looks at the wicks they bring back and nods once.",
+    "The old guard has the kettle on. He says it was on anyway."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -2161,7 +2177,15 @@
       "Floor's dry. Let us keep it that way.",
       "Smell of tallow. Someone was here.",
       "Count heads. All here? Go.",
-      "Door sticks. Shoulder to it."
+      "Door sticks. Shoulder to it.",
+      "Cold air. Keep your voices down.",
+      "Torch up. Eyes on the floor.",
+      "Walls are damp. Mind the footing.",
+      "Close the door behind. Quietly.",
+      "Wait for the dark to settle. Then go.",
+      "Rope out. Anyone slips, we haul.",
+      "Stay in the light. Walk in pairs.",
+      "Same as last time. Slower."
     ],
     "lord": [
       "Hold together!",
@@ -2460,7 +2484,13 @@
       "That is the one. Hold.",
       "Do not break first.",
       "Whatever it does, stay together.",
-      "Count the exits. Then forget them."
+      "Count the exits. Then forget them.",
+      "It has heard us. Hold the line.",
+      "Do not look at the crown. Look at the feet.",
+      "One at a time. Let it come.",
+      "Nobody runs. Nobody follows.",
+      "Mind the door behind us. Keep it clear.",
+      "Whatever comes next, we came to do it."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -3060,7 +3090,15 @@
       "Do not stop for me.",
       "Rag round it. On we go.",
       "Cut worse shaving. Keep up.",
-      "Mind the left side. That is all."
+      "Mind the left side. That is all.",
+      "Still standing. Keep moving.",
+      "Tie it off. Talk later.",
+      "That one is mine. Do not fuss.",
+      "Sleeve is gone. Arm is not.",
+      "Bleeding stops or it does not. Walk.",
+      "Bite your lip. Hold the lamp.",
+      "Count it a lesson. A cheap one.",
+      "Shake it out. Back to it."
     ],
     "drink": [
       "Bottoms up.",
@@ -3345,7 +3383,15 @@
       "Cork out. Drink up.",
       "Sour. Do not complain.",
       "That clears the head.",
-      "Tastes like the cellar. Fine."
+      "Tastes like the cellar. Fine.",
+      "Swallow it whole. Do not taste it.",
+      "Warm going down. Good enough.",
+      "Bitter as bark. It will do.",
+      "Pass it round. Leave a swallow for the last.",
+      "Stopper in. Pocket it. On.",
+      "Not a drop left in the flask.",
+      "Fine brew. Do not say so aloud.",
+      "Smells of the herb-wife's shed. Works the same."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -14860,5 +14906,6 @@
   "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
   "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
   "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS).",
-  "_note_c192": "C-192 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 13:22: descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10. Plain strings appended to pools the engine already reads; no placeholders, no mechanics, no floor counts. Expected zero-hit key; do not wire."
+  "_note_c192": "C-192 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 13:22: descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10. Plain strings appended to pools the engine already reads; no placeholders, no mechanics, no floor counts. Expected zero-hit key; do not wire.",
+  "_note_c194": "C-194: own queue, no new body (54 bodies, 54 by_key keys, iceman fed in C-193). Appended plain strings to descend, cleared, barks.enter, barks.lord, barks.hurt, barks.drink. Expected zero-hit key."
 }

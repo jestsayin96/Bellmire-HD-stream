@@ -19736,3 +19736,414 @@ def iceman():
 
 
 BUILDERS.update({"iceman": iceman})
+
+
+# ------------------------------------------- 55 THE STRAKER: a wheel on the floor
+#
+# WHY THIS IS NOT A 55th COAT OF ONE OF THE FIFTY-FOUR. I parsed the `idea`
+# string out of every CANON entry this run (54 keys off ORDER, measured, not
+# recalled) and sorted them into classes before writing a line of geometry:
+#   summon/allies      drillmaster quartermaster ratcatcher sexton
+#   self-repair        scrapwright tanner
+#   take a hero away   gaoler hooper drover ferryman pressman
+#   light/air/floor    snuffer blower stopper pitman nightman
+#   change the room    hurdleman dauber sluicekeeper sower snarer boiler porter
+#   shuffle positions  changer relief winder roper
+#   take/lock kit      tallyman sealer reeve tapster almoner tither greener
+#   healing            cook leech
+#   target rules       dyer fenman paviser
+#   damage feedback    fuller comfitmaker
+#   copy / split       moulder jointer
+#   clocks + windows   iceman rammer panner scraper
+#   levelling          strickler loader
+#   reach and height   stackman stiltman
+#   false position     bellman
+#   order and choice   beadle
+#   tied to an object  stoker
+# NOT ONE OF THOSE FIFTY-FOUR PUTS A CONDITION ON **WHO** LANDS THE BLOWS.
+# Every one of them is about what a blow DOES, where a body STANDS, or what the
+# party HOLDS. This one is about the ROSTER: it will not be finished by a hand
+# that has not been in. The party's whole habit - find the hero who hits hardest
+# and give them every swing - is the one thing that cannot end this fight, and
+# the hero the party has been keeping out of reach has to be put in front of it.
+#
+# THREE NEIGHBOURS I CHECKED BY READING THEM, NOT BY MEMORY, BECAUSE EACH IS
+# ONE STEP AWAY AND ONE OF THEM NEARLY SANK THIS BODY:
+#   TANNER     "will not take the same blow twice" - a condition on the ANSWER
+#              (change your weapon or stop). This is a condition on the HAND.
+#              A party of one answer and four hands beats the tanner and cannot
+#              beat this; a party of four answers in one hand is the reverse.
+#   PAVISER    "keeps its face to you, and a blow into the board does nothing" -
+#              that is also a who-may-hit rule, and it is the closest thing in
+#              the file. But the paviser's rule is POSITIONAL and LIVE: it moves
+#              the board onto your best hitter every round and the counterplay
+#              is to get round the post. This one keeps no account of position
+#              at all and nothing it does can be out-manoeuvred; it keeps a
+#              LEDGER, the ledger only ever grows, and the party cannot undo an
+#              entry or be denied one. Different fight: the paviser asks who is
+#              standing where, this asks who has swung at all.
+#   BEADLE     "the party does not choose" - it takes the order away. This takes
+#              nothing away; the party chooses freely and the choice is simply
+#              not finished until everyone has made it once.
+#
+# *** THE VISUAL CLEARANCE THAT COST THE MOST THOUGHT: THE SLUICEKEEPER IS
+# *** ALREADY A SPOKED WHEEL, and the drillmaster is already a disc. I read
+# *** sluicekeeper() before placing a single point. Its handwheel is HIGH (z
+# *** 1.78), flat to the front camera (axis 'y'), hung in a post-and-screw
+# *** frame, pale hood above it, and carries NO pale at all on the wheel.
+# *** This wheel is ON THE FLOOR - its bottom ring touches z 0.0 - it is YAWED
+# *** 0.70 rad so neither camera gets it edge-on (the dyer's rule for the
+# *** tenter sheets), there is no frame and no screw anywhere near it, and the
+# *** only pale on this whole body is FOUR NAIL HEADS in its rim. A circle
+# *** standing on the ground beside a man leaning into it is not a circle hung
+# *** at head height in a frame, and I am checking that claim on the render and
+# *** not here.
+#
+# THE NAILS WERE NOT ALWAYS GOING TO BE NAILS, AND THE FIRST PLAN WAS WRONG ON
+# MR. E'S OWN FIRST RULE. I had them standing 0.155 proud on the radius, heads
+# out - four long tapers off the rim of a wheel. That is a BREAKING WHEEL, which
+# is gothic flourish of the exact kind Bellmire's register does not have, and it
+# would have been the prop doing the talking. A strake nail is a stubby thing
+# with a broad domed head and that is what it is built as: 0.095 proud, head
+# 0.118 across, wider than it is long, so it reads as DRIVEN IRON and cannot
+# read as a spike. The count survives because it is PALE ON DARK, which is how
+# the iceman's blocks carried theirs.
+#
+# THEME `wood` - three bodies before this one (snarer, drover, winder), one of
+# the four thinnest in the file (barracks 3, wood 3, firepit 3, confection 3,
+# counted off the CANON themes this run). A wheelwright is a wood trade.
+#
+# WEAR 0.44, AND IT IS A SPREAD AND NOT A SETTING (Mr. E's second rule). His
+# leather, his boots and his cap are old and the wheel is half-made work; THE
+# FOUR NAILS ARE NEW IRON OUT OF THE NAILER'S BAG THIS MORNING and are the one
+# thing on the body that is bright. The thing the mechanic is counted on is the
+# newest thing he owns, which is also true of how a tradesman keeps nails.
+CANON.update({
+    "straker": ("Everyhand", 2.40, (0.64, 0.58, 0.44), (1.00, 0.90, 0.62),
+                "wood", "IT WILL NOT GO DOWN TO ONE HAND - it is straking a "
+                "rim, and it will not be finished by anybody who has not put a "
+                "blow into it. Hurt it all you like with your best hand and it "
+                "cannot be ended; it keeps a ledger of WHICH OF YOU has struck "
+                "it, the ledger only grows, and until every hand in the party "
+                "is on it the last blow does nothing at all. So the party's "
+                "whole habit is the thing that fails here: the hero who carries "
+                "every fight cannot carry this one, and the hero the party has "
+                "spent the floor keeping out of reach has to be walked up to it "
+                "and made to swing. It does not choose, it has no phase and "
+                "there is nothing to out-manoeuvre - the condition is on the "
+                "party, not on the room. THE THING TO READ IS THE RIM: four "
+                "bright iron strakes laid on the tread of a wheel stood on the "
+                "floor beside him, one for every hand it is still waiting on, "
+                "and a hammer held down over the next one.",
+                0.44, "Someone is nailing a rim, and it is not finished."),
+})
+
+ORDER = ORDER + ["straker"]
+
+# PER-SLOT MATERIALS - THE TITHER'S AND THE ICEMAN'S ONE RULE: `bone` IS THE
+# COUNT AND NOTHING ELSE. Not the rim the strakes lie on, not the hammer
+# that nails them, not a mark on the head. Everything worn, carried and built is
+# `dark` or `body`, so the only light objects in the whole silhouette are the
+# four things a viewer has to be able to count.
+# AND THE HEAD CARRIES NO PALE AT ALL, which is the Beadle's measured fault
+# answered the way the panner, the stiltman and the iceman answered it: a dark
+# cap, eyes on -Y only, so the back view is a dark head over a dark wheel with
+# no nail heads in sight and cannot be taken for the front.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"straker"}
+
+OVERRIDE.update({
+    "straker": {
+        'body': ((0.246, 0.228, 0.186), 0.88, 0.03),   # old wool and leather
+        'dark': ((0.094, 0.090, 0.082), 0.74, 0.08),   # rim, spokes, hammer, cap
+        'bone': ((0.930, 0.902, 0.808), 0.34, 0.25),   # THE FOUR STRAKES ONLY
+        'glow': ((1.000, 0.880, 0.560), 0.70),         # eyes, forward only
+    },
+})
+
+
+def straker():
+    """IT WILL NOT GO DOWN TO ONE HAND. The 55th body.
+
+    THE ACCEPTANCE TEST IS A BRACED MAN LEANING INTO A WHEEL STOOD ON THE
+    FLOOR, HAMMER DOWN OVER ITS RIM - AND THE FOUR BRIGHT STRAKES ON THAT RIM
+    MUST BE COUNTABLE IN THE FRONT VIEW, IN THE SIDE VIEW AND BESIDE A HERO.
+    The count IS the mechanic, and a count a viewer cannot take is the
+    nightman's pass-1 lamp again.
+
+    *** PASS 2. WHAT PASS 1 SHIPPED AND WHY IT FAILED, FROM THE THREE RENDERS
+    *** I LOOKED AT AND NOT FROM ANY NUMBER IN THE REGISTER. Every number
+    *** passed: ok true, 0 blanks, 0 border clips, 4 materials, 1109 tris,
+    *** span 2.09 CORRIDOR-SAFE, UNDER-LID, hero ratio 0.98, GREEN - AND THE
+    *** COUNT COULD NOT BE TAKEN IN TWO OF THE THREE VIEWS.
+      FRONT   - THE COUNT READ THREE. Four nails stood radially off the rim;
+                the fourth sat on the rim's own silhouette edge where the yaw
+                foreshortens the arc to nothing, and was simply not there.
+      HERO    - THE COUNT READ ZERO. Beside the knight, at the distance this
+                creature is actually seen from, four 0.118 nail heads are four
+                grey nubs. A COUNT MADE OF DETAIL IS NOT A COUNT. The iceman
+                carried its count in MASS and that is why its count survived.
+      SIDE    - the count read four, and the WHEEL ATE THE MAN: both sat at
+                the same y, so a side ortho (which throws x away) put the disc
+                straight over his legs and left a head and two arms above a
+                wheel. The prop was doing all the work.
+      ALL     - THE HAMMER WAS A BAR ACROSS THE CHEST. A 0.52 haft swung from
+                a grip up at the far shoulder to a hit point on the far side
+                of the body draws one long horizontal through the whole
+                figure, and with the shoulder bar and both forearms beside it
+                the middle of the body was four parallel lines.
+    Six fixes, each a different fault, each separately readable in the pass-2
+    render:
+
+      FIX A - THE COUNT BECOMES MASS. The four nails are gone and the count is
+              now FOUR IRON STRAKES lying on the tread - 0.40 rad of arc each,
+              0.25 rad of bare dark rim between them. That is the trade told
+              properly as well as the count made legible: straking IS nailing
+              iron bands onto a rim one at a time, so four strakes left to
+              nail is four hands it is still waiting on, and the hammer in his
+              hand is the thing that ends each one.
+      FIX B - THE WHEEL CLEARS THE MAN IN BOTH ORTHO VIEWS, and it is a
+              placement and not a size cut, because a disc at this yaw cannot
+              be cleared by yaw. The front camera throws y away, so the wheel
+              is separated from him in X (wheel 0.33..1.03, man -0.54..-0.12).
+              The side camera throws x away, so it is separated in Y (wheel
+              -0.80..-0.20, man -0.25..+0.17) by standing it FORWARD of him,
+              where a wheelwright's wheel actually is. R 0.545 -> 0.460 with
+              it, so the wheel is half his height and not two thirds.
+      FIX C - THE HAMMER COMES OUT OF THE TORSO. The haft is 0.41 and near
+              VERTICAL, poised over the top-left strake, and both ends of it
+              sit forward and right of the trunk, so it crosses nothing.
+      FIX D - THE FAR ARM STOPS BEING THE SECOND HORIZONTAL. Pass 1 reached it
+              across the whole body to the rim. A hand that has to cross the
+              chest to get to the prop draws the same bar the hammer drew, so
+              it hangs at his own thigh instead and the silhouette opens.
+      FIX E - THE SHOULDER BAR 0.480 -> 0.430 and the shoulder balls 0.142 ->
+              0.152, the bar dropped 0.05. In the pass-1 front render the bar,
+              both forearms and the haft lined up and the head sat on them
+              like a bolt on a girder - the nightman's pass-2 fault, which the
+              iceman quoted and then shipped anyway, and which I have now done
+              a third time. Writing a fault down is not the same as checking
+              for it.
+      FIX F - THE PALE WAS NOT PALE. `bone` was metal 0.72 roughness 0.26, and
+              a mirror under a dim key renders DARK: in the front render the
+              count was one shade lighter than the rim it stood in. 0.25 /
+              0.34 - bright worked iron, not chrome. The count has to win on
+              VALUE against the dark it sits on or it is not a count.
+
+    *** PASS 3, FROM THE PASS-2 RENDERS. Fixes A-F all landed and I can see
+    *** each one: the count reads FOUR beside the knight where pass 2 read
+    *** ZERO, the wheel stands clear of the man in the side view, and there is
+    *** no bar across the chest. Four faults left, each measured on its own:
+      FIX G - THE ARM WAS THE BAR, NOT THE HAMMER. The hit point was the far
+              upper-left strake, which is 0.90 FORWARD of the shoulder in Y -
+              and the side camera throws X away, so the forearm and haft drew
+              one long horizontal from his shoulder to a hammer head floating
+              at the far left like a log. The hammer now lands on the TOP
+              strake: 0.43 forward instead of 0.90, and most of the reach is
+              in X where the side camera cannot see it. The strake centres
+              move 0.17 rad with it so that one of them IS the top.
+      FIX H - THE SIDE COUNT READ THREE AND A SLIVER, AND THE CAUSE WAS NOT
+              THE ANGLE. A strake tube of radius 0.062 lying on a rim tube of
+              radius 0.068 IS NARROWER THAN THE THING IT SITS ON, so at any
+              near-edge-on part of the arc the rim's own silhouette ate it.
+              0.084 at R+0.060, which stands 0.074 proud of the tread and is
+              wider than the rim from every angle there is. Derived off the
+              rim's own radius, so re-sizing the wheel cannot re-open it.
+      FIX I - THE CAP WAS A HUMP BEHIND THE SKULL in the side view - its back
+              edge sat 0.03 outside the head sphere. Depth 0.195 -> 0.165 and
+              0.035 further forward, so the whole brim is inside the skull's
+              rear line and only the front of it breaks the outline.
+      FIX E3- the shoulder bar once more, 0.430 -> 0.405 and 0.300 deep. It is
+              better than pass 1 and it is still a plank with a head on it.
+
+    *** PASS 4, FROM THE PASS-3 RENDERS. G, H and I all landed - the side
+    *** count reads FOUR where it read three and a sliver, the hammer reads as
+    *** a hammer in both orthos, and the cap's hump behind the skull is gone.
+    *** AND FIX G MOVED THE BAR RATHER THAN KILLING IT: with the hit point at
+    *** the top of the wheel, the near arm runs 0.75 in X and 0.36 in Z, which
+    *** is 26 degrees off horizontal - and the FRONT camera throws Y away, so
+    *** the front view got the straight pipe the side view had just lost. A
+    *** reach to a thing standing beside him is horizontal in the front ortho
+    *** and a reach to a thing standing in front of him is horizontal in the
+    *** side ortho; the only reach that is neither is a reach DOWNWARD.
+      FIX J - THE HAMMER LANDS ON THE STRAKE NEAREST HIM (t 2.22) and the
+              wheel comes in 0.10 in X. The near arm now falls 0.50 in Z over
+              0.34 in X and 0.69 in Y - 56 degrees below horizontal in the
+              front view and 36 in the side - so neither ortho gets a
+              horizontal, and a man nailing a rim works at the part of it he
+              can reach, which is the near side and not the top.
+      FIX K - THE FAR ARM WAS LOST IN THE TRUNK, which is the iceman's fix G
+              in the other arm: hanging straight down against a 0.21 trunk, it
+              was one dark mass with the body and the front view read a
+              one-armed man. The elbow swings 0.11 wider and the hand comes
+              0.095 forward of the apron line.
+      FIX L - THE SHOULDER BAR, THIRD TIME AND THIS TIME BY DELETION OF MASS
+              RATHER THAN BY TRIMMING. 0.405 x 0.300 x 0.148 -> 0.330 x 0.285
+              x 0.110, dropped another 0.030, so the two 0.152 shoulder balls
+              stand proud of it and the head sits on a NECK between two
+              shoulders instead of on a plank. Narrowing it twice did not work
+              because the fault was its HEIGHT in the silhouette, not its
+              width.
+
+    THE READ, in the order a viewer gets it:
+      MAN LEFT, WHEEL RIGHT AND FORWARD, ON THE GROUND. The wheel's bottom
+                ring sits on z 0.0 - stood up on the floor like a wheel
+                waiting to be tyred, not hung in a frame. That is the
+                SLUICEKEEPER CLEARANCE (its handwheel is high, flat to the
+                front camera, in a post-and-screw frame, and carries no pale
+                at all) and it is the first thing to check on the render.
+      YAWED 0.70 RAD so no camera gets it edge-on. A front ortho and a side
+                ortho of a wheel in the XZ plane give a circle and a BAR, and
+                a bar has no tread to carry strakes.
+      FOUR STRAKES spread 0.65 rad apart, 0.40 rad of iron and 0.25 rad of
+                bare rim between - the gap is 62% of a strake's own arc, so no
+                two can merge into one at stream distance. That is the
+                iceman's side-view lesson paid forward: two pale things at a
+                pitch narrower than their own size ARE one pale thing.
+      THE HAMMER held DOWN at the rim where the next strake is nailed, not
+                raised. A raised hammer would put the top of this mesh in the
+                prop, and `h` normalises on the whole body, so the man inside
+                would read short and the tool would do all the work.
+      TWO LEGS BRACED, the near one forward into the wheel, and a stoop.
+
+    Static: no `anims` entry. The ledger is ENGINE state, not geometry - the
+    mesh ships with all four strakes unnailed, which is the arrival state and
+    the only state the mechanic can be read in.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures span and lid.
+    """
+    P = Parts("straker")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.510
+    HIP = 1.000
+    WAIST = 1.180
+    CHEST = 1.520
+    SHO = 1.700
+    HEAD = 1.930
+
+    MX = -0.330                 # the man's axis; the wheel is to his right
+    STOOP = 0.130               # a shear off the hip, carried by everything above
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - STOOP * (v.z - HIP), v.z))
+
+    # ---- THE WHEEL. FIX B: forward of him and to his right, so the front
+    # camera separates it in X and the side camera separates it in Y.
+    R = 0.460
+    RIM = 0.068
+    YAW = 0.70
+    WC = Vector((0.580, -0.500, R + RIM))
+    U = Vector((math.cos(YAW), math.sin(YAW), 0.0))     # in-plane, horizontal
+    V = Vector((0.0, 0.0, 1.0))                         # in-plane, vertical
+    AX = Vector((-math.sin(YAW), math.cos(YAW), 0.0))   # the wheel's own axle
+
+    def _w(t, r):
+        return WC + U * (r * math.cos(t)) + V * (r * math.sin(t))
+
+    # ---- the legs: the near one forward into the wheel -----------------
+    _open()
+    for _i, _x in ((-1, MX - 0.185), (1, MX + 0.185)):
+        _fy = -0.150 if _i > 0 else 0.080
+        limb(P, seat([(_x, _fy, ANK), (_x * 1.02, _fy - 0.075, KNEE),
+                      (_x * 0.86, 0.020, HIP)], 0.108),
+             0.108, 0.134, 'dark')
+        P.add(L.box(0.215, 0.300, 0.072), 'dark',
+              loc=(_x, _fy - 0.075, 0.036))
+    P.add(L.box(0.430, 0.300, 0.180), 'body', loc=(MX, 0.0, HIP + 0.056))
+    _close("legs")
+
+    # ---- the trunk, a belt, the shoulder bar, a back -------------------
+    _open()
+    _W = _s((MX, -0.015, WAIST))
+    _C = _s((MX - 0.030, -0.045, CHEST))
+    limb(P, [(MX, 0.010, HIP + 0.090), tuple(_W), tuple(_C)],
+         0.208, 0.258, 'body')
+    P.add(L.box(0.390, 0.290, 0.068), 'dark',
+          loc=tuple(_s((MX, -0.015, WAIST + 0.028))), rot=(0.0, -0.14, 0.0))
+    # FIX E - narrower bar, dropped, rounder shoulders.
+    P.add(L.box(0.330, 0.285, 0.110), 'body',
+          loc=tuple(_s((MX - 0.030, -0.040, SHO - 0.080))))
+    for _s_i in (-1, 1):
+        P.add(L.sphere(0.152, 0.156, 0.130, 11, 8), 'body',
+              loc=tuple(_s((MX - 0.030 + _s_i * 0.232, -0.040, SHO - 0.070))))
+    # a back, because a tube's depth is its diameter
+    P.add(L.box(0.330, 0.220, 0.390), 'body',
+          loc=tuple(_s((MX - 0.020, 0.130, CHEST - 0.090))), rot=(0.11, 0.0, 0.0))
+    # the leather apron a man who drives nails all day wears - dark, and it
+    # hangs OFF the belt so the front view gets a value break at the waist
+    P.add(L.box(0.360, 0.070, 0.420), 'dark',
+          loc=tuple(_s((MX, -0.165, WAIST - 0.210))), rot=(-0.10, 0.0, 0.0))
+    _close("trunk")
+
+    # ---- the head: dark cap, NO PALE, eyes on -Y only -----------------
+    _open()
+    _HD = _s((MX - 0.040, -0.060, HEAD))
+    limb(P, [tuple(_s((MX - 0.030, -0.045, SHO + 0.022))),
+             tuple(_HD - Vector((0.0, 0.0, 0.135)))], 0.082, 0.094, 'body')
+    P.add(L.sphere(0.198, 0.204, 0.194, 14, 9), 'dark', loc=tuple(_HD))
+    # FIX E2 - a flat workman's cap that sits ON the head and forward of the
+    # face. Pass 1 put it high and deep and the stoop shear carried it back,
+    # so the side view read a hump behind the skull.
+    P.add(L.box(0.300, 0.165, 0.046), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.130, 0.105))), rot=(-0.12, 0.0, 0.0))
+    P.add(L.box(0.160, 0.050, 0.092), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.142, -0.060))))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.016))), 0.042, 0.023, -0.184)
+    _close("head")
+
+    # ---- the wheel: rim, hub, spokes. ALL DARK. -----------------------
+    _open()
+    _pts = [_w(TAU * i / 22.0, R) for i in range(23)]
+    P.raw(L.tube(_pts, [RIM] * len(_pts), 6), 'dark')
+    # the hub: short and fat, on the wheel's own axle
+    P.raw(aim(L.cone(0.126, 0.126, 0.240, 11),
+              tuple(WC - AX * 0.120), tuple(AX)), 'dark')
+    # EIGHT SPOKES. Even, so the wheel reads as made and not as broken.
+    for _k in range(8):
+        _t = TAU * _k / 8.0 + 0.19
+        _d = (_w(_t, 1.0) - WC).normalized()
+        limb(P, [tuple(WC + _d * 0.100), tuple(WC + _d * (R - 0.032))],
+             0.048, 0.040, 'dark')
+    _close("wheel")
+
+    # ---- THE COUNT. THE ONLY PALE ON THE BODY. FIX A. -----------------
+    # Four iron strakes lying on the tread, 0.40 rad of arc each with 0.25 rad
+    # of bare dark rim between them. Mass, not detail - see pass 2 above.
+    _open()
+    _ST = (2.87, 2.22, 1.57, 0.92)
+    for _t in _ST:
+        _arc = [_w(_t - 0.20 + 0.40 * k / 6.0, R + 0.060) for k in range(7)]
+        P.raw(L.tube(_arc, [0.084] * len(_arc), 6), 'bone')
+    _close("strakes")
+
+    # ---- the hammer. FIX C: short, near vertical, clear of the trunk. --
+    _open()
+    _HIT = _w(2.22, R + RIM + 0.150) + AX * 0.055
+    _GRIP = _HIT + Vector((0.075, 0.095, 0.360))
+    limb(P, [tuple(_GRIP), tuple(_HIT)], 0.040, 0.034, 'dark')
+    P.raw(aim(L.cone(0.080, 0.080, 0.225, 10),
+              tuple(_HIT - AX * 0.112), tuple(AX)), 'dark')
+    _close("hammer")
+
+    # ---- the arms. FIX D: hammer in the near hand, the far arm DOWN at
+    # his own thigh - it is not allowed to cross the chest to the rim.
+    _open()
+    _SR = _s((MX - 0.030 + 0.290, -0.040, SHO - 0.115))
+    _SL = _s((MX - 0.030 - 0.290, -0.040, SHO - 0.115))
+    limb(P, [tuple(_SR), tuple(_SR + Vector((0.135, -0.195, -0.355))),
+             tuple(_GRIP)], 0.082, 0.056, 'body')
+    limb(P, [tuple(_SL), tuple(_SL + Vector((-0.140, -0.120, -0.290))),
+             (MX - 0.470, -0.265, HIP + 0.030)], 0.082, 0.056, 'body')
+    _close("arms")
+    return P
+
+
+BUILDERS.update({"straker": straker})

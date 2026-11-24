@@ -1,3 +1,140 @@
+## TAKE THIS NEXT - Updated THE 13:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** ALL THREE HALVES READ 53 AND A 54th BODY NOW STANDS OUTSIDE ALL THREE. THE CASCADE REOPENS AT
+*** ONE STEP. Measured by me on merged main, comments STRIPPED BEFORE SPLITTING, brace-matched,
+*** string-aware and ANCHORED ON `const MB_NAME :=`, before I wrote one word of this block:
+***   `Delve.MB_NAME` = **53** (0 dupes)  |  `miniboss_feed.by_key` = **53**
+***   `data/commands.json` publishes **53** at EXACTLY two leaves (`/commands/miniboss/short`,
+***     `.what`), 18000 bytes, `armoury.cost` still the string '50 / 150 / 400 / 1000 gold by tier'.
+***   `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]** - ZERO DRIFT BOTH WAYS.
+*** THE ENGINE, THE FEED AND THE PUBLISHED HALF AGREE FOR THE FIRST TIME SINCE THE 51st. The 54th
+*** (`iceman`, art's "Hoarback") is on main as a BODY ONLY: in the register and the builders, in NO
+*** `MB_NAME`, NO `by_key`, NO published count. ONE STEP, 53 -> 54, and it is NOT payable at 14:45.
+
+*** MY OWN FAULT FIRST: I MISSED THE :07 DEADLINE. I finished verifying at 14:05 and the game build
+*** fires at 14:07, so this block may land after that lane has already read the 12:58 one. The cost
+*** is one cycle of the row below. The cause was mine and I am not dressing it up: I spent the time
+*** on art's renders, which is where the real defect in this hour was found - but the schedule is
+*** mine to hold and I did not hold it. GAME BUILD: if you read the 12:58 row, it is SPENT -
+*** `_s107_gate.gd` is already 53 on main (I verified line 43 myself) - and this row replaces it.
+
+*** WHAT I VERIFIED MYSELF AND TICKED, SO NO LANE RE-PROVES IT:
+***  - **S114 TICKED.** Read on main, not taken from the summary: `tools/_s107_gate.gd:43` now
+***    `_ok(mbn == 53, ...)` with the running note above it, and the sibling `_s63_props.gd:56` is
+***    UNTOUCHED at 52 exactly as my row said to leave it. That stale arm is closed.
+***  - **C-192 TICKED.** `data/lore_lines.json` parses; I diffed every top-level key against the
+***    pre-merge main: `descend` 577 -> 585, `cleared` 562 -> 570, `barks.hurt` +10, `.enter` +10,
+***    `.lord` +7, `.drink` +10 = **+53 lines exactly**, the number claimed. `by_key` stayed **53**,
+***    which is CORRECT - the 54th body did not exist when this lane fired at 13:22.
+***  - **ART'S 54th TICKED, AND I LOOKED AT THE PICTURES.** `iceman` / "Hoarback", 3.12 m, 1.27x the
+***    hero. Its fit row carries EVERY key the other 55 rows carry (I took the modal key set over all
+***    56 rows and diffed: nothing missing), measured THIS run - 3 proving views, `seen` 1.0 on all
+***    six cells, `fits_frame` true, all four frame edges 0 on disk and in-render, ground shadow
+***    measured on each view, `air_px_min` 159 on the tightest view (front). I opened the front and
+***    the back: it reads as a body from behind - rack, tongs and head all legible - which is the
+***    Beadle fault NOT repeated. The census ran AFTER the register (`register_mtime` 13:50:26,
+***    `measured_at` 13:51:29, both real CT stamps with tz and epoch) and covers **56 of 56**:
+***    31 measurable + 1 no_man + 24 not_measurable + 0 build_failed. `iceman` sits in
+***    `not_measurable` and that is RIGHT - the list means "no `man` span in the builder", a
+***    different axis from fit, and its spans are arms/blocks/frame/head/legs/tongs/trunk.
+***  - **HUB'S `--verify` RUN TICKED, AND I COUNTED IT MYSELF RATHER THAN READING THE LOG.** On the
+***    merged tree: **520** `.webp` under `web/icons/items`, **0** zero-byte - the log's own numbers,
+***    reproduced by my own `find`. Four checks per file plus the manifest->disk reverse. A negative
+***    result with the method shown, exactly as the row asked, and it is a delivery.
+***  - **U153 TICKED AS A NEGATIVE RESULT, WHICH IS WHAT I PROMISED TO TICK.** The HUD audited its
+***    own report-writers for art's printed-not-recomputed fault and found it ABSENT, with the method
+***    shown: only 3 writers exist, none carries a block forward, and the one reader feeding a
+***    verdict re-derives on every run. IT ALSO FOUND A SIBLING FAULT IN ITS OWN HOUSE and did not
+***    bury it - 8 gates print OK on `bad == 0` with NO DENOMINATOR, so an empty walked set reads
+***    identical to all-passed. It claimed NO lock for any of this. That is the row working.
+***  - **B133 TICKED.** The 51 -> 53 republish is PAID at exactly two leaves and I proved it by
+***    reading the file, not the claim: 53 at `/commands/miniboss/short` and `.what`, `armoury.cost`
+***    uncorrupted, 18000 bytes unchanged. All five gates green and L14_TEST back to 24 of 24.
+***    AND THE TWO LOCK INSTRUCTIONS I GAVE IT LANDED IN ONE HOUR: the IDLE is a MINIMAL line with
+***    the prose moved to PROGRESS.md, and it declared 13:51:30 and released at 13:50:45.
+
+*** A DEFECT I FOUND BY LOOKING AT THE PICTURE, NOT AT THE NUMBERS - AND EVERY NUMBER SAID GREEN.
+*** `renders/art/minibosses/_hero_scale.png` WAS **2280 x 10080** on main and IS NOW **2280 x 560**:
+*** 9,393,540 bytes down to 190,336. It is ONE cell - the hero beside Hoarback - over a canvas two
+*** thirds of which is empty black. The whole-house scale sheet is GONE. The proof that this is a
+*** bug and not a redesign is the asymmetry: `_contact_sheet.png` and `_silhouettes.png` are both
+*** still 1400 x 7896 and both GREW this run, so the other two sheets re-rendered all 56 rows while
+*** this one collapsed to the single body that was rendered. `_fit_report.json` is WHOLE and GREEN
+*** over all 56 - the JSON half is sound and I am not doubting it. It is the human-readable half
+*** that was gutted, and a register that is green in JSON while its picture shows 1 of 56 is the
+*** exact shape this house has been catching all week.
+
+- **GAME BUILD (14:07) - NAME THE 54th. `iceman`, art's name "Hoarback".**
+    The body is on main now: `assets/monsters/minibosses/iceman.glb`, in `tools/art/minibosses.py`
+    `ORDER`/`BUILDERS`, fit row GREEN, 3.12 m and 1.27x the hero. It is in NO `MB_NAME`, NO `by_key`
+    and NO published count. Do what you did for the 53rd: `Delve.MB_NAME["iceman"]`, an `MB_FIT`
+    entry, and a `THEME_MINIBOSS_MORE` row for whichever theme fits a man carrying cut ice. Carry
+    the running note in `_s51_names.gd` and `_s107_gate.gd` the way you carried the last two - BOTH
+    arms assert 53 today and BOTH become 54 the moment you name it. That is the same instrument you
+    fixed this hour; do not leave its sibling behind again.
+
+- **CONTENT (14:22) - FEED THE 54th: one `miniboss_feed.by_key["iceman"]` row.**
+    `by_key` is 53 and the 54th body exists now, which it did not when you fired at 13:22. Give it
+    the same shape the 53rd got. **Still do NOT backfill the 25 rows that carry only `arrive`/`fall`**
+    - that refusal was measured and is still right. The way comes first.
+
+- **ART (14:34) - REBUILD `_hero_scale.png` OVER THE WHOLE HOUSE. This is your own shipped defect.**
+    See the block above: 2280x10080 -> 2280x560, one cell over a black canvas, while your other two
+    sheets kept all 56 rows. Re-render it across every row in `pairs` the way the contact sheet and
+    the silhouette sheet do, and say the cell count in your commit. **Fixing a lying instrument is
+    not a new item and this one is yours.** Do NOT build a 55th body this hour. If the sheet is
+    genuinely meant to be one cell now, then say so in writing and make the OTHER two match - but
+    do not leave three sheets disagreeing about how many bodies this house has.
+
+- **HUB (14:37) - YOUR OWN QUEUE. Publish: NOTHING IS OWED AND YOU NEVER PUBLISH ANYWAY.**
+    Your icon fix and your zero-byte guard ARE merged and NOT published - that is with the supervisor
+    below, not with you. You claimed no "ready to publish" so I ran no publish gate.
+
+- **CHAT BOT (14:45) - NOTHING IS OWED ON THE COUNT AND HERE IS WHY, SO YOU DO NOT CHASE IT.**
+    Measure both halves yourself first as always. You will find **53 / 53 / 53** and ZERO drift, and
+    L14_TEST should read 24 of 24 with no transient. The 54th is named by the game build at 14:07 on
+    `laptop` and reaches `main` only at MY 14:58 merge - one hour behind you, exactly the structural
+    lag B132 wrote up. **THE 53 -> 54 REPUBLISH IS THE 15:45 RUN'S, not yours.** Do not publish a
+    number no half of main agrees with yet. Keep the minimal IDLE and the honest declaration - both
+    landed this hour and both are now the standard for this lane.
+
+- **HUD (14:52) - THE 8 GATES WITH NO DENOMINATOR. Your own finding, your own fix, and the engine
+    window at :52 is yours.** U62_SCALES, U88_WORN, U90 FEED_LOAD, U91 LONGNAME, U69_REDPROOF,
+    U56_HUE, THEME_SWEEP and U40_TEST all print OK on `bad == 0` and cannot tell "all passed" from
+    "none measured". Add the `n` counter to each print and FAIL on `n == 0`, with U58's
+    "%d colours walked" as the model, and RED-PROVE at least one of them by emptying the set it
+    walks. **This is fixing a lying instrument, not a new item.** The lock is free at :52 - the chat
+    bot released at 13:50:45 and has been told to declare inside :51:30 - so claim it and use it.
+
+**FOR THE SUPERVISOR: ONE PUBLISH DECISION IS WAITING, AND IT IS SMALL.**
+`origin/gh-pages` = **029e4fac**, tree **02257b2f**, pushed **21 Nov 15:39 CT**. `origin/main:web` is
+now **c03fa129** and they are NO LONGER identical - last hour all three trees matched and this hour
+the hub's work moved main. Re-measured by me, not copied; the per-file split is **4 files**:
+`NOTES.md` +5, `tools/make_item_icons.py` +42 (the four-check zero-byte guard), `tools/_verify_icons.log`
++5 (the 520-icon GREEN run), and the binary `icons/items/hat/turbary_hood.webp` (0 -> 2718 bytes).
+**MY RECOMMENDATION: publish, but there is no urgency.** It is one broken icon repaired plus a guard
+that stops the next one, not a feature. No lane claimed "ready to publish", so I ran NO publish
+verification gate and I am not reporting one. Say the word and I will do the subtree push by the
+proven plumbing method and verify the tree equality afterwards.
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+these all at once on the first LIVE turn Mr. E gives this seat).** Running list, newest first:
+1. THE ART FIT REGISTER STANDING NOTE IS STALE AND SAYS THE OPPOSITE OF THE TRUTH. The prompt says
+   its top-level verdict "reads RED / ok:false ... on two CARRIED unmeasured rows (snuffer_chibi,
+   tallyman_chibi)". Measured on the PRE-MERGE main this hour: `ok: true`, `verdict: "GREEN"`,
+   `red_summary.retired_red: []`, and BOTH `_chibi` rows carry full measurements with all three
+   views proving. It was already green before art touched anything today, so this is not a change
+   art made - the note has simply been wrong for some time. Strike it.
+2. THE FIT REGISTER ROW COUNT IN THE PROMPT IS STALE: it says "as of 21 Nov the fit register judges
+   46 rows, of which 44 are live bodies and two are retired `_chibi` cells". It is **56 rows / 54
+   live bodies / 2 retired** as of this hour. The prompt already warns not to trust its own count
+   here; this is the measurement to replace it with.
+3. THE PUBLISHED-HUB BLOCK IS STALE. The prompt says gh-pages is `05ac2679`, tree `9ca8051e`, pushed
+   19 Nov 20:06 CT, and that 3 files are merged-and-unpublished. Measured: `029e4fac`, tree
+   `02257b2f`, pushed **21 Nov 15:39 CT**. The 19 Nov SHA is struck the same way `45a7904` and
+   `40223be` already are.
+4. THE ID LIST IN STEP 5 IS STALE. Measured this hour: **B133, C-192, D100, H32, L74, S114, T5,
+   U153**, and art is on the 54th body (`iceman`), not "paviser pass 8".
+
 ## TAKE THIS NEXT - Updated THE 12:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS CLOSED AT 53 / 53. THE ENGINE AND THE FEED AGREE AND THE DRIFT IS ZERO BOTH WAYS.
 *** Measured by me on merged main `852543f2b5cb`, brace-matched, string-aware and ANCHORED ON

@@ -19002,3 +19002,369 @@ def stiltman():
 
 
 BUILDERS.update({"stiltman": stiltman})
+
+
+# =====================================================================
+# THE NIGHTMAN - THE 53rd BODY. Invented under Mr. E's standing permission
+# of 15 Nov 17:43; no lore, no canon dependency, no content-lane hook.
+#
+# WHAT I CHECKED FOR FIRST, MEASURED OFF THIS FILE AND NOT REMEMBERED:
+# 66 CANON rows, of which 14 are chibi/tall variants of a base, so 52
+# distinct bodies exist and this is the 53rd. I read every mechanic
+# headline in the file (57 strings of the form "IT <VERB>...") before
+# designing, so this is not a re-skin. The axis NOBODY in the set has is
+# LIGHT AS A SWITCH ON THE BOSS ITSELF. The Snuffer (Duskhollow) REMOVES
+# the room's light, which makes light a resource; this body is the one
+# that is GOVERNED by it, which is the opposite construction and only
+# works because the Snuffer established the resource.
+#
+# THE THEME IS `prison`, measured as one of the thinnest in the set:
+# barracks 3, prison 3, mess 3, wood 3, firepit 3, confection 3 bodies
+# against crypt 5 and fogbound 5. A nightman emptying the vault under
+# the cells is the honest fit, not a stretch to pad a thin theme.
+#
+# THE MECHANIC: IT WORKS IN THE DARK AND WAITS IN THE LIGHT. Its own
+# shuttered lamp hangs on its belt and the party can work the shutter.
+# OPEN, it stands dead still: it strikes nobody and it CANNOT BE HURT -
+# a lit nightman is simply a man standing in a room. SHUT, it can be
+# killed, and it works - and a thing that works in the dark is never
+# where you last struck it. The party owns the switch and both ways
+# cost, which is this house's best shape (the Stiltman's break-or-leave,
+# the Roper's one line) and it is a DECISION, not a timer.
+#
+# PLAINNESS IS THE VOICE (Mr. E's first rule). A nightman is a real
+# trade - the man who empties the vault after dark because nobody will
+# have it done in daylight. So: a tub, a long scoop, thigh boots, a
+# cloth over the face and a lamp he has to carry himself. No gothic
+# anything. The epitaph register would say "Came at night. Emptied it.
+# Went home."
+#
+# THE TITHER'S RULE IS OBEYED EXACTLY: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON, and here that is THE LAMP AND NOTHING ELSE.
+# The lantern box and its open shutter leaf are the only `bone` on the
+# whole body. The head carries NO pale panel at all - unlike the
+# Stiltman, which needed one - because a second pale mark would split
+# the count the mechanic is read off. The head is a dark hood with two
+# forward glow eyes, so the BACK VIEW HAS NO PALE AND NO EYES and the
+# figure cannot read the same from both ends. That is the Beadle's
+# measured facing fault answered by construction rather than by a
+# number.
+#
+# FAULT 7 (the Panner's pairwise eclipse) IS ANSWERED IN BOTH AXES, and
+# I placed the three carried objects to make it true rather than
+# checking afterwards and hoping:
+#   TUB     x -0.46  y +0.04  z 1.12
+#   LAMP    x +0.14  y -0.36  z 1.29
+#   SCOOP PAN x +0.70  y -0.34  z 0.09
+# The front camera (down -Y) projects x,z: the three sit at x -0.46 /
+# +0.14 / +0.70 and are separated by x alone. The side camera (along X)
+# projects y,z: the tub is +0.04 against the lamp's -0.36 (separated by
+# y), and the lamp is at z 1.29 against the pan's 0.09 (separated by z
+# by more than a metre). No view gets a single mass.
+#
+# WEAR 0.88 - the filthiest trade in the file, and justified rather than
+# dialled: this is the one man in Bellmire whose working clothes nobody
+# will wash. The LAMP is the exception and is deliberately the freshest
+# object on the body, the same argument as the Drillmaster's gong: a
+# working man keeps his instrument, and this man's instrument is the
+# only thing standing between him and the dark.
+#
+# ROOM-LOCK IS NOT CLAIMED HERE. minibossgen measures the real footprint
+# against floorgen's own corridor span and lid and writes the verdict.
+CANON.update({
+    "nightman": ("Nightwork", 2.30, (0.44, 0.42, 0.38), (1.00, 0.84, 0.46),
+                 "prison", "IT WORKS IN THE DARK AND WAITS IN THE LIGHT - "
+                 "its own shuttered lamp hangs on its belt and the party can "
+                 "work the shutter. OPEN, it stands dead still: it strikes "
+                 "nobody and IT CANNOT BE HURT - a lit nightman is just a man "
+                 "standing in a room, and you can walk past him, and he will "
+                 "still be there when you come back. SHUT, it can be killed - "
+                 "and it WORKS, and a thing that works in the dark is never "
+                 "where you last struck it. So the party owns the switch and "
+                 "both ways cost: hold the lamp open and nothing of it can be "
+                 "finished, shut it and you are fighting something you cannot "
+                 "keep hold of. It does not choose, it does not time anything "
+                 "and it has no phase. THE THING TO READ IS THE LAMP: it is "
+                 "the only bright object on the whole body, it hangs on his "
+                 "own belt where a hand can reach it, and the shutter leaf is "
+                 "standing open beside it.",
+                 0.88, "Someone is working down there, and he brought a lamp."),
+})
+ORDER = ORDER + ["nightman"]
+
+# PER-SLOT MATERIALS. `bone` IS THE LAMP AND THE LAMP ONLY - see the
+# Tither's rule above. `body` is the wool and the scraped iron pan of the
+# scoop, which is the one place I let a mid value off the man himself:
+# the pan sits at z 0.09 on a dark floor and a tarred pan there is a pan
+# nobody can see. `dark` is everything carried and everything worn -
+# tub staves, scoop shaft, belt, hood, thigh boots.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"nightman"}
+
+OVERRIDE.update({
+    "nightman": {
+        # PASS 3 FIX D - THE MAN WAS THE SAME VALUE AS HIS GEAR. At pass 2
+        # the wool read 0.196 against tarred 0.078 and in the render I
+        # looked at, the trunk, the belt, the boots, the tub and the shaft
+        # were ONE DARK MASS with a lamp stuck on it. Measured separately
+        # from fixes E and F below: 0.196 -> 0.262, which is the smallest
+        # move that puts daylight between what he IS and what he CARRIES.
+        'body': ((0.262, 0.252, 0.231), 0.90, 0.02),   # wool, and the pan
+        'dark': ((0.078, 0.074, 0.070), 0.82, 0.05),   # tub, shaft, boots, hood
+        'bone': ((0.862, 0.846, 0.782), 0.34, 0.26),   # THE LAMP ONLY
+        'glow': ((1.000, 0.900, 0.600), 0.95),         # flame, eyes forward only
+    },
+})
+
+
+def nightman():
+    """IT WORKS IN THE DARK AND WAITS IN THE LIGHT. The 53rd body.
+
+    THE ACCEPTANCE TEST IS A STOOPED WORKING MAN CARRYING A TUB, A LONG
+    SCOOP AND ONE LAMP, read at hero scale, front first. Everything
+    below serves that sentence:
+
+      THE STOOP     the trunk carries 0.17 forward off the hip. A man
+                    with a full tub on one hip and a scoop in the other
+                    hand is bent, and a straight trunk over a tub reads
+                    as a barrel on legs.
+      THE TUB       a wide shallow half-barrel on the LEFT hip, slung on
+                    a strap that crosses the chest. Wider than it is
+                    deep, so it reads as a thing carried open, not as a
+                    keg.
+      THE SCOOP     a long dark shaft from the right hand down and
+                    FORWARD to a pan on the floor well out in front.
+                    Three directions - upper arm, forearm, shaft - so
+                    the tool cannot merge into the arm holding it.
+      THE LAMP      a bone box on the belt with its shutter leaf
+                    standing open beside it and a glow core inside. The
+                    only pale on the body.
+      SHOULDERS     a bar 0.60 across over a 0.34 head and a belt that
+                    cuts the trunk at the waist. Head on a bar over a
+                    waist is the minimum a human silhouette needs.
+      TWO LEGS      ankles, knees, hips, a pelvis block, thigh boots.
+
+    Static: no `anims` entry. The lamp's shutter state is ENGINE state,
+    not geometry - the mesh ships with the shutter OPEN, which is the
+    arrival state and the state the mechanic has to be read in.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures it.
+    """
+    P = Parts("nightman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.600
+    HIP = 1.150
+    WAIST = 1.330
+    CHEST = 1.720
+    SHO = 1.880
+    HEAD = 2.120
+
+    # THE STOOP IS A SHEAR OFF THE HIP, not an offset and not a bend at
+    # one joint. The Stiltman's pass-5 lesson, applied on the first pass
+    # here rather than after three: a box does not become a man by being
+    # tilted, so the shear runs through every point above the hip and
+    # the shoulders and head carry it together.
+    STOOP = 0.170
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - STOOP * (v.z - HIP), v.z))
+
+    LX = -0.205
+    RX = 0.205
+
+    # ---- the legs and the thigh boots -----------------------------------
+    _open()
+    for _x in (LX, RX):
+        limb(P, [(_x, 0.010, ANK), (_x * 0.96, -0.030, KNEE),
+                 (_x * 0.80, 0.010, HIP)], 0.108, 0.132, 'dark')
+        P.add(L.box(0.215, 0.300, 0.070), 'dark',
+              loc=(_x, -0.050, 0.035))
+    P.add(L.box(0.430, 0.300, 0.175), 'body', loc=(0.0, 0.0, HIP + 0.055))
+    _close("legs")
+
+    # ---- the trunk, the belt, the shoulder bar --------------------------
+    _open()
+    _W = _s((0.0, -0.010, WAIST))
+    _C = _s((0.0, -0.030, CHEST))
+    limb(P, [(0.0, 0.010, HIP + 0.095), tuple(_W), tuple(_C)],
+         0.205, 0.258, 'body')
+    # THE BELT IS A DARK CUT, NOT DRESS - it is what makes the mass above
+    # it read as a chest, and it is also what the lamp hangs on.
+    P.add(L.box(0.390, 0.285, 0.072), 'dark',
+          loc=tuple(_s((0.0, -0.010, WAIST + 0.030))), rot=(0.0, -0.17, 0.0))
+    # PASS 2 FIX B - THE SHOULDER BAR IS NARROWER AND DEEPER.
+    # WHAT PASS 1 SHIPPED AND WHY IT FAILED: a bar 0.60 across and only
+    # 0.235 deep, with both arms leaving it almost level. In the front
+    # render I looked at, THE ARMS AND THE BAR WERE ONE HORIZONTAL SLAB
+    # running from the tub to the scoop, with the head sitting on it like
+    # a bolt on a girder. This is the Stiltman's pass-6 fault in a new
+    # place and it is worth writing down twice: a wide flat bar with
+    # things coming off it level is FURNITURE, whatever is above it.
+    # 0.60 -> 0.50 across and 0.235 -> 0.300 deep, so it is a pair of
+    # shoulders rather than a beam, and the side camera gets some chest.
+    P.add(L.box(0.500, 0.300, 0.145), 'body',
+          loc=tuple(_s((0.0, -0.030, SHO))), rot=(0.0, 0.0, 0.0))
+    for _s_i in (-1, 1):
+        P.add(L.sphere(0.126, 0.132, 0.112, 11, 8), 'body',
+              loc=tuple(_s((_s_i * 0.232, -0.030, SHO - 0.030))))
+    # PASS 2 FIX C - A BACK. The pass-1 body measured 1.65 wide and 0.91
+    # DEEP and the side render showed what that means: a post with a pail
+    # on it. The trunk is a tube, so its depth is its diameter and nothing
+    # else; a stooped man carrying a load has a back. This is a mass
+    # behind the chest, not dress.
+    P.add(L.box(0.330, 0.215, 0.430), 'body',
+          loc=tuple(_s((0.0, 0.130, CHEST - 0.090))), rot=(0.12, 0.0, 0.0))
+    _close("trunk")
+
+    # ---- the head: a dark hood, NO PALE, eyes on -Y only ---------------
+    _open()
+    _HD = _s((0.0, -0.055, HEAD))
+    limb(P, [tuple(_s((0.0, -0.035, SHO + 0.025))),
+             tuple(_HD - Vector((0.0, 0.0, 0.145)))], 0.082, 0.094, 'body')
+    # PASS 3 FIX E - THE HEAD WAS TOO SMALL. At pass 2 a 0.172 ball under
+    # a 0.50 shoulder bar read, on the side render, as a knob on a post.
+    # 0.172 -> 0.202, which is 0.40 across against the bar's 0.50 - the
+    # Stiltman's measured ratio for "this is a head", applied here rather
+    # than re-derived.
+    P.add(L.sphere(0.202, 0.206, 0.198, 14, 9), 'dark', loc=tuple(_HD))
+    # the cowl runs DOWN INTO the shoulders - a peak on a head reads as a
+    # lantern, which is the exact fault the Stiltman shipped at pass 4.
+    P.raw(aim(L.cone(0.104, 0.196, 0.215, 12),
+              tuple(_HD + Vector((0.0, 0.022, 0.040))), (0.0, 0.16, -1.0)), 'dark')
+    # THE CLOTH OVER THE MOUTH. Dark on dark on purpose: it is not meant
+    # to be a silhouette fact, it is meant to stop the hood reading as a
+    # bare ball, and a nightman covers his face because of the work.
+    P.add(L.box(0.168, 0.052, 0.098), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.148, -0.060))))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.020))), 0.042, 0.023, -0.188)
+    _close("head")
+
+    # ---- the tub on the left hip, and the strap that carries it --------
+    # WIDE AND SHALLOW. 0.68 across against 0.27 deep, so it reads as an
+    # open tub being carried and not as a cask - the Hooper already owns
+    # barrels and this must not read as one of his.
+    _open()
+    _TUB = Vector((-0.460, 0.040, 1.120))
+    P.raw(aim(L.cone(0.300, 0.340, 0.270, 14), tuple(_TUB), (0.10, 0.0, 1.0)),
+          'dark')
+    for _hz in (0.045, 0.215):
+        P.raw(aim(L.cone(0.330, 0.330, 0.028, 14),
+                  tuple(_TUB + Vector((0.0, 0.0, _hz))), (0.10, 0.0, 1.0)), 'dark')
+    # the strap: right shoulder, across the chest, onto the far tub rim.
+    limb(P, [tuple(_s((0.235, -0.085, SHO - 0.020))),
+             tuple(_s((0.020, -0.120, CHEST - 0.150))),
+             (-0.300, -0.060, 1.310), (-0.455, 0.020, 1.345)],
+         0.032, 0.026, 'dark')
+    _close("tub")
+
+    # ---- the scoop: shaft from the right hand to a pan on the floor ----
+    # THE OPEN TRIANGLE between the near arm, the trunk and the shaft is
+    # what says WORKING. Negative space is what a silhouette is made of.
+    _open()
+    _GRIP = Vector((0.395, -0.265, 1.430))
+    # PASS 3 FIX F - I ANSWERED FAULT 7 FOR THE TUB AND THE LAMP AND THEN
+    # BUILT A NEW ONE BETWEEN THE LAMP AND THE SHAFT. My pass-1 note
+    # separated the three CARRIED OBJECTS in both axes and was right about
+    # all three; what it never checked was the SHAFT BETWEEN them, which
+    # crosses every height. On the pass-2 side render the lamp sits right
+    # against the shaft and reads as mounted on it. Measured off the two
+    # lines rather than guessed: at the lamp's z the pass-2 shaft stood at
+    # y -0.29 and the lamp's back face at y -0.335 - a 0.045 gap, which is
+    # nothing. The pan goes forward to y -0.520 and the lamp forward and
+    # down to (-0.500, z 1.150), which opens it to 0.08 and puts the lamp
+    # clear in front of the tool on the one camera that could confuse them.
+    _PAN = Vector((0.700, -0.520, 0.090))
+    _dir = (_PAN - _GRIP).normalized()
+    P.raw(aim(L.cone(0.030, 0.040, (_GRIP - _PAN).length, 9),
+              tuple(_PAN), tuple(-_dir)), 'dark')
+    # THE PAN IS `body`, NOT `dark`, AND THAT IS THE ONE PLACE I BROKE
+    # THE TARRED-TOOL RULE ON PURPOSE: it sits at z 0.09 on a dark floor
+    # and a dark pan there is a pan nobody can see. A scraped iron pan
+    # polished by use is honestly lighter than tarred wood.
+    P.add(L.box(0.260, 0.320, 0.058), 'body',
+          loc=tuple(_PAN + Vector((0.030, -0.030, 0.0))), rot=(0.0, -0.10, 0.0))
+    P.raw(aim(L.cone(0.052, 0.034, 0.120, 8),
+              tuple(_PAN + Vector((0.0, 0.0, 0.028))), (0.22, 0.10, 1.0)), 'dark')
+    _close("scoop")
+
+    # ---- the arms ------------------------------------------------------
+    # Both thinner than the trunk and both clear of it for their whole
+    # length. An arm the same thickness as the chest is a second trunk,
+    # and an arm that touches the body all the way down is not an arm in
+    # a silhouette - it is trunk.
+    _open()
+    _SR = _s((0.278, -0.030, SHO - 0.045))
+    _SL = _s((-0.278, -0.030, SHO - 0.045))
+    # PASS 2 FIX B, SECOND HALF - THE ELBOWS DROP. At pass 1 each elbow
+    # sat 0.23-0.25 below the shoulder and 0.12 out, which is an arm held
+    # OUT, and two arms held out off one bar is the slab. They now hang:
+    # 0.37 down against 0.07 out, so the upper arm is nearly vertical and
+    # the forearm does the reaching. An arm that hangs is the cheapest
+    # human fact in a silhouette and pass 1 did not have it.
+    limb(P, [tuple(_SR), tuple(_SR + Vector((0.072, -0.090, -0.375))),
+             tuple(_GRIP)], 0.082, 0.058, 'body')
+    # the far arm goes DOWN then OUT onto the tub rim, so the hand is on
+    # the thing it is carrying and there is daylight under the armpit.
+    limb(P, [tuple(_SL), tuple(_SL + Vector((-0.062, -0.060, -0.390))),
+             (-0.430, -0.075, 1.330)], 0.082, 0.058, 'body')
+    _close("arms")
+
+    # ---- THE LAMP. THE ONLY PALE ON THE BODY. --------------------------
+    # On the belt, forward and to the right, where a hand can reach the
+    # shutter - which is the whole mechanic and the reason it is placed
+    # on a belt at all rather than hung off the scoop or carried.
+    _open()
+    # PASS 2 FIX A - THE LAMP. MEASURED SEPARATELY FROM FIX B BELOW.
+    # WHAT PASS 1 SHIPPED AND WHY IT FAILED: a 0.145 x 0.125 x 0.190 solid
+    # bone box with a glow sphere SEALED INSIDE IT. At hero scale, in the
+    # render I looked at, it read as A BELT POUCH - and the glow was worth
+    # nothing at all, because a light inside a closed box emits into the
+    # box. THE MECHANIC WAS INVISIBLE. That is the Tither's rule broken on
+    # the only body in the file whose whole idea is "the pale thing is a
+    # lamp", and no number in the register could see it: `seen 1.0` on
+    # three views, ratio 0.94, GREEN, blanks 0 - all true, all worthless.
+    # ASK WHAT THE HARNESS CANNOT SEE, which here was CONTRAST.
+    #
+    # THE FIX IS NOT "BIGGER". It is OPEN. The lantern is now built as a
+    # CAGE - bottom plate, top plate, two corner posts - with the glow
+    # block standing in the gap between them, so the flame is a LIT FACE
+    # the camera sees directly rather than a sphere behind bone. It is
+    # also pulled forward to y -0.44 and dropped to z 1.21 so the side
+    # camera gets it clear of the trunk instead of buried against it, and
+    # it is scaled to 0.24 x 0.21 x 0.33 - large for a belt lamp, and
+    # deliberately so, on the Drillmaster's precedent that a working man's
+    # instrument is the brightest object on him.
+    _LAMP = Vector((0.165, -0.500, 1.150))
+    for _dz, _th in ((-0.150, 0.034), (0.165, 0.030)):
+        P.add(L.box(0.240, 0.210, _th), 'bone',
+              loc=tuple(_LAMP + Vector((0.0, 0.0, _dz))))
+    for _px, _py in ((-0.098, 0.088), (0.098, 0.088)):
+        P.add(L.box(0.040, 0.040, 0.300), 'bone',
+              loc=tuple(_LAMP + Vector((_px, _py, 0.010))))
+    # THE FLAME IS THE OPEN FACE. A block, not a sphere: a sphere inside a
+    # cage still reads as a bead, and a block that fills the opening reads
+    # as a LIT LANTERN from every angle that can see into it.
+    P.add(L.box(0.168, 0.120, 0.260), 'glow',
+          loc=tuple(_LAMP + Vector((0.0, -0.030, 0.010))))
+    # THE SHUTTER LEAF, STANDING OPEN - the state the mechanic is read in.
+    # Swung wide off the outboard post so the front camera sees pale metal
+    # clear of the cage and the eye is told the lamp CAN be shut.
+    P.add(L.box(0.215, 0.028, 0.290), 'bone',
+          loc=tuple(_LAMP + Vector((0.215, 0.080, 0.010))), rot=(0.0, 0.0, -1.05))
+    # the hanger up to the belt - dark, so the lamp reads as hung, not as
+    # growing out of him.
+    limb(P, [tuple(_LAMP + Vector((0.0, 0.040, 0.185))),
+             tuple(_s((0.120, -0.150, WAIST + 0.030)))], 0.018, 0.018, 'dark')
+    _close("lamp")
+    return P
+
+
+BUILDERS.update({"nightman": nightman})

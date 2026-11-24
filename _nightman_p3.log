@@ -1,0 +1,22 @@
+
+===== minibossgen.py RC 0 =====
+RRIDOR-SAFE", "UNDER-LID", 4, 1046], "fuller": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1866], "stackman": [3.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1674], "dauber": [1.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1300], "sealer": [1.64, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "hooper": [1.4, "CORRIDOR-SAFE", "UNDER-LID", 4, 2209], "relief": [1.84, "CORRIDOR-SAFE", "UNDER-LID", 4, 1462], "scraper": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1266], "ferryman": [3.68, "CORRIDOR-SAFE", "UNDER-LID", 4, 1757], "winder": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 2233], "pitman": [3.1, "CORRIDOR-SAFE", "UNDER-LID", 3, 932], "tither": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1230], "blower": [1.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1928], "changer": [1.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 788], "stopper": [2.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 910], "roper": [3.15, "CORRIDOR-SAFE", "UNDER-LID", 4, 1403], "almoner": [2.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 939], "panner": [1.74, "CORRIDOR-SAFE", "UNDER-LID", 2, 958], "stiltman": [1.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 628], "nightman": [1.63, "CORRIDOR-SAFE", "UNDER-LID", 4, 701]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--ERR--
+
+===== minibossfit.py RC 0 =====
+": [1.08, 4.26, true], "hurdleman": [1.04, 4.84, true], "tanner": [1.12, 4.36, true], "reeve": [0.8, 5.12, true], "pressman": [1.16, 4.47, true], "strickler": [1.04, 3.67, true], "greener": [1.02, 4.57, true], "drover": [1.0, 5.45, true], "paviser": [1.09, 5.3, true], "fenman": [1.03, 4.35, true], "leech": [0.95, 4.12, true], "beadle": [1.2, 3.74, true], "rammer": [1.12, 3.89, true], "moulder": [1.18, 4.22, true], "fuller": [1.09, 5.15, true], "stackman": [1.16, 4.39, true], "dauber": [1.05, 3.52, true], "hooper": [0.96, 3.24, true], "scraper": [1.04, 3.76, true], "winder": [0.96, 4.86, true], "pitman": [0.94, 4.96, true], "comfitmaker": [0.93, 3.69, true], "dyer": [1.06, 4.74, true], "ferryman": [1.07, 4.23, true], "ratcatcher": [1.07, 5.47, true], "relief": [1.03, 3.61, true], "sealer": [0.99, 3.5, true], "tapster": [1.14, 4.9, true], "tither": [0.99, 4.25, true], "blower": [1.01, 3.31, true], "changer": [1.11, 3.21, true], "stopper": [0.97, 4.1, true], "roper": [1.0, 3.22, true], "almoner": [1.03, 4.46, true], "panner": [0.92, 3.6, true], "stiltman": [1.31, 3.1, true], "nightman": [0.94, 3.49, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--ERR--
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:514: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:388: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+ALLDONE

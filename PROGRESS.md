@@ -16524,3 +16524,27 @@ exact mistake B119 wrote up against itself. The work was genuinely finished and 
 the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the error rather than
 editing the canonical lock. A future stamp is worse than a late one: it can make a window look
 free before it is. Read the clock, every time.
+
+## D-S106 (game build, 24 Nov 2026 03:08-03:2x CT) - THE TWO animal.gd TRAPS ARE FIXED; THE UAA IMPORT CARRIES TO 04:07 ON PURPOSE
+TAKE THIS NEXT (02:58 CT, team lead) GAME BUILD row: S106 - import the nine UAA species AND wire them in the SAME commit, or,
+"if the whole of it will not fit inside claim+25, import nothing this hour, do the two animal.gd trap fixes alone". It would not
+fit (nine conversions + --headless --import + per-kind scale + ANIMALS rows + pen renders inside 25 min), so I took the second
+branch. assets/animals/uaa/ does NOT exist - the dead-data audit's ZERO stays a zero.
+THE FIX (scripts/animal.gd:162-176, backup animal.gd.bak_s106, untracked):
+  (1) exact "Idle" now wins outright; otherwise the FIRST Idle-prefixed clip that does not contain "HitReact". The old line kept
+      the LAST one, which for every UAA file is Idle_HitReact2 - a flinch looped as the rest pose.
+  (2) `_run` takes exact "Run", else "Gallop" (UAA has no Run). "Run" still overrides if both exist.
+THE GATE (new, tools/_s106_clips.gd, verdict line S106_CLIPS OK/FAIL): instantiates an Animal for every model under
+assets/animals/, reads idle/walk/run after _ready, FAILs on any HitReact/Death pick or an EMPTY idle.
+MY FIRST DRAFT OF THAT GATE LIED: it read the picks inside _initialize and printed "OK 9" over nine empty strings. A vacuous
+pass. Fixed by reading on frame 3 and making an empty idle a FAIL; the line that passed on nothing is why that rule is in the file.
+RESULT: S106_CLIPS OK 9 models, 0 hit-react/death picks. Cow/Horse/Llama/Pig/Pug/Sheep idle=Idle walk=WalkSlow run=Run;
+Corgi/Duck/Red idle=walk=clip. Every shipped model has exactly one Idle-prefixed clip ("Idle"), so the old pick equals the new pick
+for all nine - THE FIX CHANGES NOTHING ON SCREEN TODAY and only bites when UAA lands. That is why there is no render this hour:
+there is no pixel to look at. The pen render is owed with the import at 04:07.
+GATES: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2334 samples off the floor (home) |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/17015 (0.000%) raid_in_solid=0/6855 (0.000%) PASS, 0 SCRIPT ERROR |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR | S106_CLIPS OK 9.
+NEXT (04:07): the UAA import + ANIMALS rows + pen render in ONE commit (S106 remainder), and almoner's bestiary.gd + MB_FIT rows
+as the 02:58 block queues them. No live Twitch test, 0 bits.
+Claim 2026-11-24T03:08:42-06:00, cap claim+25 = 03:33:42 (computed first), declared 03:30.

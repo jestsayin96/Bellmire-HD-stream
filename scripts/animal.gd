@@ -161,9 +161,18 @@ func _ready() -> void:
                 _walk = s
             if s.begins_with("WalkSlow"):
                 _walk = s                     # grazing pace reads better
-            if s.begins_with("Idle"):
+            # S106 trap (1): the LAST Idle-prefixed clip used to win, so a UAA file
+            # ending Idle_HitReact2 looped a flinch as the rest pose. Exact "Idle"
+            # wins outright; otherwise the FIRST Idle-prefixed clip that is not a
+            # hit-react.
+            if s == "Idle":
                 _idle = s
+            elif s.begins_with("Idle") and _idle == "" and s.find("HitReact") < 0:
+                _idle = s
+            # S106 trap (2): UAA has no "Run" - its fast gait is "Gallop".
             if s == "Run":
+                _run = s
+            elif s == "Gallop" and _run == "":
                 _run = s
             if s == "clip":
                 _walk = s

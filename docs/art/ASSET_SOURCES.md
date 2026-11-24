@@ -631,3 +631,13 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Restriction that binds us: QAL s.3(a) forbids redistributing the Assets as a standalone asset, asset pack, or similar product. Shipping the monsters inside a game is allowed; re-exporting an Imp or Puglin file as a loose asset is not. This is the same line already recorded for the Imp/Puglin/broodglut rows above.
 - Scope note: this is the FREE Standard edition (its own licence file says it holds only part of the models). The SOURCE edition is not in `_packs\` and is not covered by this row.
 - Status: **CLEARED for use (QAL v1.0).** Licence gate satisfied for `Bestiary_Dungeon_Monsters_Kit`. Commercial use permitted; no attribution required. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Castle (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Castle (folder `_packs\Castle\`, nested one level as `_packs\Castle\Castle\`; sibling `Castle.zip` 75 MB, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder tree or in the zip listing. | 15 on disk: 11 `.FBX` (`Castle_Building_Blocks\`: Arch, Brick_Wall, Cathedral_Window, Cornice, Door, Narrow_Pillar, Pillar_Standalone, Pillar_Top, Wide_Pillar_No_Door, Wide_Pillar_With_Door, Windows), 3 `.tga` + 1 `.psd` (`Castle_Texture_Atlas\`: Castle_D, Castle_N, Castle_S, Castle_Master_Mat) | Unknown. Not granted on disk. | Unknown |
+
+- Checked: walked every file under `_packs\Castle\` (15 files, by extension) and listed the names inside `Castle.zip`. Searched for licence/copying/readme/terms/credit/url/pdf/html names: none. Grepped the binary texture and psd files for licence wording: the only hits were pixel-data noise, not licence text. The FBX header carries an empty author field.
+- The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.

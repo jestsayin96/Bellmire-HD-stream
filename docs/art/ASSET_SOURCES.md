@@ -731,3 +731,13 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - **Commercial use:** unknown, because no licence text was found. Not cleared for use.
 - **Attribution:** unknown.
 - **Action for Mr. E or the art lane:** find the original listing (the author or source page) and take its licence text, then put that text in this folder before any import.
+
+## PACK CATALOGUE - low-poly_RPG_item_collection_3 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| low-poly_RPG_item_collection_3 (folder `_packs\low-poly_RPG_item_collection_3\`, sibling `low-poly_RPG_item_collection_3.zip` 24.5 MB, 27 entries, not extracted) | not named in any file on disk | **NO LICENCE FILE FOUND** | none. No LICENSE, COPYING, README, credits or terms file in the folder or in the zip. | 27 on disk, agreeing with the zip entry for entry: 7 `.obj` (`bridge`, `conifer`, `house`, `rock`, `sign`, `tree`, `well`), 18 `.png` textures (each model has one or two numbered textures, plus `dirt`, `grass`, `pavement`, `sand`), `rpg items 3.blend` (13 MB), `rpg items 3.3ds` | not established | not established |
+
+- Checked: walked the folder (27 files, counted by extension), listed every zip entry with `python zipfile` (names only, not extracted), name-scanned both for licence, copying, readme, terms, credits and about (none), grepped every `.obj` header for licence, copyright, CC0, public domain, author and Quaternius or Kenney wording (no hits), and ran `strings` over the `.blend` and `.3ds` binaries for the same terms (no licence text; the only hits are Blender's own `author` metadata field name).
+- Naming note: the sibling `low-poly_RPG_item_collection_2` (catalogued 24 Nov, see above) is a different pack with the same no-licence result. Do not treat either as covered by the other.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Nothing from this pack goes into `assets/` until a licence is found: take the original listing's licence text from its author or source page and record it here under its own row.

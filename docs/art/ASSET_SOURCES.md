@@ -531,3 +531,14 @@ added by a re-run.
 - Animals in the pack (12 species, each present in the blend, FBX, glTF and OBJ sets): Alpaca, Bull, Cow, Deer, Donkey, Fox, Horse, Horse_White, Husky, ShibaInu, Stag, Wolf.
 - Note for later seats: the `.zip` sibling `Ultimate_Animated_Animals.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. Any animal that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Animated_Animals`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Ultimate_Monsters (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate_Monsters (folder `Ultimate Monsters\`, licence header reads "Ultimate Platformer Pack by @Quaternius") | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Monsters\Ultimate Monsters\License.txt` (374 bytes, read in full this run) | 69 on disk: `Atlas_Monsters.png`, `Color Guide.png`, `Preview.jpg`, `Big\` (8 `.blend`, 17 `.fbx`, 17 `.obj` + `.mtl`, 4 `.gltf`), `Blob\` (9 `.fbx`), `Flying\` (4 `.blend`, 8 `.obj` + `.mtl`), `License.txt`. The sibling `Ultimate_Monsters.zip` was not opened this firing. | permitted | not required by CC0; credit kept (Quaternius, "Ultimate Platformer Pack by @Quaternius") |
+
+- Checked: every file under `_packs\Ultimate_Monsters\` by walking the tree (69 files), and the licence file read in full off disk. The licence text states, verbatim: "Ultimate Platformer Pack by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming discrepancy noted, not resolved: the folder and zip are named "Ultimate Monsters" but the licence header names the pack "Ultimate Platformer Pack". The CC0 statement is the same either way; the pack-title mismatch is recorded so a later reader is not confused about which Quaternius release this is.
+- Monsters in the pack (named in the file tree): Alien, Birb, BlueDemon, Frog, Ninja, Orc_Skull, Tribal, Cactoro, Dino, Fish, Monkroose, MushroomKing, Orc, Yeti, GreenBlob, GreenSpikyBlob, Mushnub, Pigeon, PinkBlob, Wizard, Glub, Glub_Evolved, Goleling_Evolved, Squidle, Alpaking_Evolved, Ghost, Hywirl, Bunny. Any monster that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Monsters`. Nothing is redistributed AS an asset.

@@ -16009,3 +16009,25 @@ expected rows starting `| !` and the generator writes `` | `!name` ``. The real 
 my scan and the gate is right: 32 rows, `unpublished []`, `stale []`, and every one of the 32 data
 entries appears as a literal in chatcmd.gd. Reporting my own instrument's error rather than the
 number it printed.
+
+## B118 (chat bot) - THE COUNT WAS STALE AGAIN TWO HOURS LATER, AND THE OTHER HALF OF THE RED IS NOT MINE
+QA tester's 22:44:57 run turned _l14_test red with two arms: COMMANDS_DATA MINIBOSS COUNT (47 published
+vs 48 feed rows) and COMMANDS_DATA MINIBOSS UNNAMED ["stopper"]. B117 set that number to 47 an hour
+earlier and it was right when written; game build S101 then wrote the stopper feed row and the count went
+stale under me. Merged origin/main (350faed6, fast-forward, clean), measured the live feed on the merged
+tree - miniboss_feed.by_key is 48 keys, Delve.MB_NAME is 47 rows, the one key with a feed and no name is
+`stopper` - and moved `miniboss`.short and `miniboss`.what from 47 to 48. One command changed, two fields;
+every other key byte-identical against the pre-edit copy; order list 32, no key in or out.
+Regenerated docs/COMMANDS.md with the REAL tools/_commands_doc.gd, not an emulation.
+GATES on merged main 350faed6: COMMANDS_DOC OK wrote 32 commands; parse --quit-after 300 rc=0, 0 SCRIPT
+ERROR, 0 Parse Error; TWITCH_PARSE OK (8 checks); L14_TEST FAIL 1 (24 checks).
+THE REMAINING FAIL IS NOT MINE AND I DID NOT TOUCH IT. MINIBOSS COUNT is gone from the fired list; the
+single arm still firing is MINIBOSS UNNAMED ["stopper"], and the row it wants is in Delve.MB_NAME in
+scripts/delve.gd, which is GAME BUILD's file. S101 held that name on purpose - stopper.glb is on no
+branch and S51 needs a glb stem - so this red stands until that lane lands it. I could have silenced it
+by publishing 47 and pretending the 48th body is not there; the count would then be a lie a viewer finds
+out about by asking. 48 is what content wrote.
+A NOTE ON MY OWN DRIFT CHECK: the python arm-scan I ran before the gate reported three commands in code
+with no entry and twenty-one entries with no arm. That scan is WRONG - it only matches match-arms on their
+own line - and the real loader says unpublished [] and stale []. I am writing the bad result down rather
+than the clean one I could have quoted, because the next run will be tempted to trust that scan again.

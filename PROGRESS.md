@@ -15956,3 +15956,8 @@ stopper. Not room-locked: CORRIDOR-SAFE, no spawn gate needed.
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+## HUB standing check - 23 Nov 2026 21:4x CT (hub build run)
+TAKE THIS NEXT block (22:58 CT 21 Nov, newest on branch) row HUB = "hold web/ steady, no publish gap". Taken as written; web/ NOT edited.
+Measured on refs: origin/gh-pages tip 029e4fac, ^{tree} = 02257b2f == origin/hub:web == HEAD:web == origin/main:web = 02257b2f. No publish gap.
+Security greps on web/app.js: innerHTML at lines 255 and 301 only (both page-owned literals; lines 7/93/5137/5178 are comments); zero outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code. node --check OK. CSP meta present (1). index.html comment "only innerHTML ... two page-owned sites" still true.
+No READY TO PUBLISH claim. No web/ change, so hostile-name/state tests not re-owed. No screenshot taken (no UI change); live dot unchanged. Untracked _hub_ready_shot.png in W root is the old shot, named here, delete refused on this machine.

@@ -1,3 +1,179 @@
+## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** WRITTEN 03:0x CT ON 24 NOV AND LANDED ON `laptop` AT 03:05:02, BEFORE 03:07 - GAME BUILD, THIS
+*** ROW IS YOURS AT 03:07. The other five read it at :22 (content), :34 (art), :37 (hub),
+*** :45 (chat bot), :52 (HUD).
+*** CORRECTION ON MY OWN LINE, MADE INSIDE MY OWN RUN: an earlier version of this header said
+*** "I MISSED THE 03:07 GAME BUILD SYNC AND I OWN IT". THAT WAS FALSE. I wrote it while the block
+*** was still unpushed, predicting a slip instead of measuring one, then read the commit date -
+*** `c798c10b` 2026-11-24 03:05:02 -0600, two minutes inside. I was about to charge myself with a
+*** fault that did not happen, which is the same class of error as charging a lane with one. ***
+
+Merged this hour into main, up from **9f083c9c**: all SIX lanes (laptop e35e2dc4, content aab07417,
+hub 08ef47c8, hud-ui 6dce9eed, art 6112bd41, chatbot d2322933). THREE conflicts, all in root
+PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that matters:
+`diff --numstat 9f083c9c HEAD -- PROGRESS.md` reads **+109/-0** - ZERO lines removed - and a
+tree-wide grep on all FOUR exact marker shapes returns **zero hits**. Three-dot lane numstats sum
+to 111; the multiset shortfall is **exactly 2 blank lines and nothing else**, with zero lines in
+the merge that no lane wrote.
+**AND I CAUGHT MY OWN TWO-DOT ERROR MID-RUN.** My first numstat pass used `git diff 9f083c9c
+origin/<b>` and reported hub -109, hud-ui -2933, art -2810, with an 11-line "shortfall" including
+eight `=====` rule lines. All of that was the two-dot trap the prompt names. Re-run with
+`9f083c9c...origin/<b>` the shortfall is 2 blank lines. Do not read a deletion off a two-dot diff.
+
+*** THE CHAIN IS WHOLE AT 49 AND A 50th BODY IS NOW ON MERGED MAIN. THE CASCADE REOPENS. ***
+Measured by me on merged main with a brace-matched parse, not copied from any lane:
+`Delve.MB_NAME` **49** | `miniboss_feed.by_key` **49** | both set differences **empty** |
+`commands.json` published **49** (`.what` and `.short`). That link is level and stays level.
+`assets/monsters/minibosses/almoner.glb` (115,792 B) is now tracked on main and is in **no**
+`MB_NAME`, **no** feed row and **no** `bestiary.gd` entry. That is correct and expected - art held
+the name on purpose. The order is **CONTENT -> GAME BUILD -> CHAT BOT** and the rows below set it.
+(`broodglut` and `lastcuff` also have a `.glb` and no `MB_NAME` row. They are the bestiary-carried
+VARIANTS, not minibosses - the plan has carried that at lines 7878-7879 and 8068-8069 for days. I
+grepped before writing it up, so it is not a finding.)
+
+### GAME BUILD - S105 IS TICKED, AND I READ animal.gd MYSELF RATHER THAN TAKE THE TRAPS
+S105 ticked. The method is what earns it: you established System 11 off your own D-cycle headers
+(5 = S31, 6 = S43/45, 7 = S49, 8 = S50/S80, 9 = S82-84/S96, 10 ticked 17 Nov) and then went to the
+MASTER-VISION doc for the text of 11, rather than guessing. **I verified the two traps by opening
+the file, not by believing the line numbers.** `animal.gd:164-165` is
+`if s.begins_with("Idle"): _idle = s` with **no break**, so the LAST Idle-prefixed clip wins and a
+UAA file ending `Idle_HitReact2` would loop a flinch as the rest pose. `animal.gd:166` is
+`if s == "Run"` exactly, and UAA has `Gallop` and no `Run`. **Both traps are real.**
+**AND YOUR ZERO-HIT CLAIM IS RIGHT IN SUBSTANCE AND I WANT YOU TO SEE WHY I NEARLY SAID OTHERWISE.**
+My own `git grep -iE "alpaca|husky|shiba|stag|donkey" -- scripts/` returned **12 hits**. Every one
+is a substring: `stagger`, `stage`, `staggering`. No word boundary, no species. Your claim stands;
+my first instrument lied. Regex is not a parser, in my hands too.
+**S106 IS YOUR ITEM AND IT IS THE ONE YOU NAMED.** Convert the nine new species into
+`assets/animals/uaa/` with the CC0 note, `--headless --import`, fix traps (1) and (2), add the
+ANIMALS rows, render the pens and LOOK. **Your own constraint is binding and I am making it a
+condition of the tick: the import and the wiring land in the SAME commit.** An
+`assets/animals/uaa/` that nothing reads turns the dead-data audit's ZERO into a ONE, as you said
+yourself. If the whole of it will not fit inside claim+25, **import nothing this hour**, do the two
+`animal.gd` trap fixes alone (they are a defect in shipped code and are owed either way), and say
+so - that is a full delivery and the import carries to 04:07.
+**QUEUED FOR 04:07, NOT THIS HOUR:** `bestiary.gd` `almoner` (STATIC, `model` path only, no `anims`
+entry, `h = 2.52` measured - do not re-derive) and `MB_FIT["almoner"]` (ratio **1.03**, tag
+`"shrine"`, 3 proving views, copy from the register). `MB_NAME["almoner"]` waits on content's row.
+**THE CLOCK WAS FINE AND THE APOLOGY IS WITHDRAWN.** An earlier draft of this row apologised for
+missing your 03:07 sync. `laptop` carried this block at **c798c10b, 03:05:02 CT** - measured off the
+commit date, not predicted. The margin was two minutes and that is thinner than it should be, but
+nothing was missed and you were not starved.
+
+### CONTENT - YOU ARE NOT DRY ANY MORE. WRITE `by_key.almoner`, AND IT IS THE FIRST LINK
+Your own rule from C-181 - "write against a body only once it is on a committed art ref" - is now
+satisfied: `almoner.glb` is on **merged main**, not just on `origin/art`. C-181 was the right
+delivery and I verified the 49 myself before accepting it.
+**Write `miniboss_feed.by_key.almoner`.** Canon name **"Dolehand"**, theme **shrine**, from art's
+own `CANON` tuple in `tools/art/minibosses.py`. The mechanic as art scoped it against the engine:
+it **permutes the class the weapon dice are looked up under** while the body lives - art read
+`delve.gd:_hero_damage` -> `roster.weapon_dice(h)` and found it keys only on `h["class"]`, and
+**dropped** the prettier second half of its own idea rather than invent an engine term. Do not put
+back what art dropped: there is no per-hero equipped-item dictionary in the delve, so no line may
+imply one. **This is not a 50th you invented - it is the feed half of a body that already ships.**
+After you push, `feed` will read 50 and `MB_NAME` 49; that gap is correct and belongs to the game
+build at 04:07, not to you.
+
+### ART - THE 50th IS TICKED, AND I LOOKED AT THE FRONT AND THE SIDE BEFORE I SAID SO
+**The shield is gone and the oblong tray is why.** I opened `almoner/hero_front.png` at hero scale.
+The container reads as an open dark box carried out on the forearm - no disc, no rim, no charge
+read. Both halves of the mechanic are on screen in one glance: kit lying in the tray, and two pale
+pieces already out of the sack's mouth at the hip. That is what your pass-3/pass-4 note claims and
+it is what the picture shows. The side view backs your faults (4) and (5) exactly - the sack hides
+the far leg completely, and tray and sack fuse into one dark mass across the chest.
+**THE HEADLINE IS A CONFESSION AND THAT IS WHY IT IS GOOD.** "pass 1 shipped the shield its own
+docstring forbade" is a charge you laid against yourself, in a run where the shipped body has no
+shield. You wrote three paragraphs about not shipping a disc, tipped the pan to prove it, and
+shipped a disc - and the reason you gave is the real one: you asserted the kit was in the pan **by
+construction** and never asked whether a level camera can see INTO a pan at chest height. Fourth
+hour running of headline discipline.
+**ONE FAULT I SEE THAT YOUR SEVEN DO NOT NAME.** The tray, the sack and the hat are three separate
+dark masses around a pale column, and at hero scale the **tray is the brightest-contrast object in
+the silhouette** - the eye lands on the box, not the man. Your fault 1 says the pieces read as
+specks; mine is the step above it, that the container out-reads its own contents and its carrier.
+**YOUR NEXT ITEM: pass 5 on the almoner, and it is your own fault 1 plus mine.** Two pieces instead
+of three, bigger, and lift the tray's interior off the dark-on-dark you already named. **The
+acceptance test is the FRONT at hero scale**, same as the roper. If your measurement says the kit
+cannot be made legible without losing the tray read you just won, **write the refusal and stop** -
+that is a delivery, and the tray is worth more than the specks.
+The fit register judges **52** rows (50 live bodies + the two retired `_chibi`); do not quote 51,
+46 or 33. **And say which pass candidate you shipped** - last hour's md5 was `p8a` while the last
+log in the commit was `p8c`. You did not say it this time either.
+
+### CHAT BOT - B122 IS TICKED, AND THE SPLIT IS THE PART I AM CREDITING
+Verified on merged main, not taken: `git status` on `data/commands.json` and `scripts/chatcmd.gd`
+is empty, so nothing of yours moved; the published count is still **49** at both leaves; and
+`L14_TEST OK` with **zero guard arms** means B121's close **held across 33 commits of new main**.
+That is the thing worth re-proving and you re-proved it.
+**YOU SPLIT L56 RATHER THAN DECLARE A CROSSING, AND THAT IS THE YIELD RULE WORKING AS WRITTEN.**
+L56 needs up to 40 minutes, the HUD claims at :52, and you carried it instead of declaring. Mr. E's
+rule says split the job; you split the job without being told twice.
+**AND YOU CAUGHT YOUR OWN FUTURE STAMP.** You wrote `IDLE 02:50:40` when the clock read 02:49:39
+and corrected it in your own next line. The correction is right and it is why I trust the rest of
+your report - but **a future stamp in a lock line breaks the clean-hour count** whoever finds it,
+so this hour resets to 0. That is the rule, not a charge against your judgement: the fix is to read
+the clock at the moment you write the line, never to compute it from the claim.
+**YOUR ITEM: L56, the soak you carried.** Claim by **:50** with a declared finish **inside :52**, or
+if L56 genuinely cannot fit in that window, say so in one line and run the four gates instead -
+carrying it a second hour with a written reason is a delivery, running it over the HUD is not.
+**QUEUED, NOT THIS HOUR:** when a merged main carries `MB_NAME` 50, republish the elite count
+49 -> 50. Do not republish ahead of `MB_NAME`; that is the discipline that closed the last cascade.
+
+### HUD - U142 TICKED. SIXTH CORRECT STAND-DOWN AND THE LOCK READ WAS AT DECISION TIME
+You re-read the working `RUN_LOCK.txt` **at the moment you decided**, not at the top of the run, and
+you read the chat bot's correction line rather than its superseded stamp - that is exactly the
+reading the yield rule asks for. No window of yours was crossed this hour: QA 02:42-02:46 and the
+chat bot 02:46-02:49 both released before :52.
+**The rarity-hue row is still struck** - U55 shipped it at `ui_theme.gd:176`. Fifteenth time of
+asking, and you have been right every time.
+Next: stand down again, or audit a shipped U-item against its own committed capture. If you audit,
+pick the one whose own log shows the **tightest** margin, not the prettiest frame.
+
+### HUB - HOLD STEADY. NOTHING IS MERGED AND UNPUBLISHED, AND I RE-MEASURED BOTH TREES
+`origin/gh-pages^{tree}` == `origin/hub:web` == **02257b2f**, computed this hour, not copied;
+`git diff --numstat` between them is **empty**. gh-pages is **029e4fac**, pushed by the supervisor
+21 Nov 15:39 CT. No `web/` byte changed this hour and you claimed no READY TO PUBLISH, so **the
+publish gate was not owed and I ran none**.
+The `quaternius_rpg_characters_CC0` row is accurate: CC0 1.0 Universal, licence text read in full,
+and your row says plainly that the pack folder is one level deeper than its name and that any file
+entering `assets/` still needs its own row. That caveat is the valuable part. Nothing from the pack
+is in `assets/` yet, so the dead-data audit is untouched by it.
+Next: stand down and write it up, or catalogue the next uncatalogued `_packs/` entry.
+
+### FOR THE SUPERVISOR
+**Nothing is waiting on a decision.** Two things for awareness, neither needing a ruling:
+(1) a **50th** miniboss body (`almoner` / "Dolehand") is on merged main and the feed/name/publish
+cascade is reopening in the proven order - content this hour, game build at 04:07, chat bot after;
+(2) the hub publish backlog named in the :58 prompt remains **discharged** - gh-pages tree and
+`hub:web` are byte-equal at 02257b2f, re-measured this hour, and no lane has claimed READY TO
+PUBLISH since your 21 Nov push.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (land these on the first LIVE turn)
+Mechanical staleness in the :58 prompt, measured. A firing cannot write a prompt; this running list
+is here so one live turn can land them all. Items 1-5 carry forward from the 01:58 block, re-checked
+by me this hour and still owed; 6 is new.
+1. **THE ART FIT REGISTER STANDING NOTE IS STALE.** The prompt says the verdict "reads `RED /
+   ok:false` and has done for days". I read `_fit_report.json` on merged main this hour:
+   `ok: true`, `verdict: "GREEN"`, `red_summary.rows []`, `shipped_red []`, `retired_red []`,
+   `ok_shipped true`, `unproved_cells 0`, `stale_margin 0`, `blind_views 0`, `errors 0`. Replace the
+   note: the register is GREEN and a RED there should now be reported as a real event.
+2. **THE HUB PUBLISH BACKLOG IS DISCHARGED.** The prompt's "3 files / +59 / -1 ... with the
+   supervisor since 20 Nov" is spent, and its `05ac2679 / 9ca8051e` is stale. gh-pages is
+   **029e4fac**, tree **02257b2f**, equal to `origin/hub:web`, re-measured 03:0x CT 24 Nov.
+3. **THE MINIBOSS COUNT IN THE FREEZE SECTION.** "the fit register judges 46 rows, of which 44 are
+   live bodies" is now **52 rows / 50 live bodies + 2 retired `_chibi`** (51/49 an hour ago).
+4. **THE ID LINE.** "B104, C-163, D100, H32, L74, S85, T5, U124, art on paviser pass 8" is stale: as
+   of this hour it is **B122, C-181, S105, U142, and art on almoner pass 4**.
+5. **THE DEAD-DATA BASELINE COUNTS.** 146 top-level keys and 56 zero-hit (41 note + 15 non-note) are
+   stale - see this hour's audit numbers in the summary. The NON-NOTE **15** is the number that
+   carries the signal and it has not moved.
+6. **NEW - THE LOCK PROTOCOL HAS NO ROW FOR THE :41 QA TESTER OR THE :15 PACK WORKER.** The prompt
+   names both as real lock-takers judged by the same rule, but the window table runs :07-:40 game
+   build, :45 chat bot, :52-:07 HUD and gives neither a window. In practice QA has been claiming
+   02:42-02:46, inside the gap, and has not collided once - but that is luck, not a rule. A live
+   turn should write the two windows into the table, or say in one line that they are gap-fillers
+   with no reserved window. **Whether those two prompts are this seat's to edit has still never
+   been ruled on; this correction is to THIS prompt's table only.**
+
 ## TAKE THIS NEXT - Updated THE 01:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** WRITTEN 02:0x CT ON 24 NOV. `laptop` IS SYNCED FIRST, BEFORE 02:07 - GAME BUILD, THIS ROW IS
 *** YOURS AT 02:07. The other five lanes read it at :22 (content), :34 (art), :37 (hub),

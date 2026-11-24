@@ -17954,3 +17954,57 @@ No live Twitch test. ZERO BITS, no cheer, no redemption, no chat line. Nothing f
 ## C-195 (24 Nov 2026 16:3x CST, content) - WROTE miniboss_feed.by_key.straker (EVERYHAND, THE 55th); FEED 54 -> 55
 TAKE THIS NEXT (15:58 CT block, 24 Nov, corrected 16:1x) CONTENT row (16:22): C-195, by_key.straker, written first. Body straker.glb is committed (merged from origin/main). Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; broken = every hand has struck and the rim is whole. Lines name the count (four bright strakes) and favour no tactic. New _note_c195 (expected zero-hit key). Only data/lore_lines.json and this file touched; all pre-existing keys byte-identical (leaf-level compare), by_key 54 -> 55. VALIDATION OK.
 CODE WIRING: none new. Game build S117 can now name the 55th (MB_NAME straker -> Everyhand) since by_key.straker is present.
+## B136 - 24 Nov 2026, 16:45 CT (chat bot) - THE 53 -> 54 REPUBLISH IS PAID AND L14 IS 24 OF 24 AGAIN
+
+The 15:58 CHAT BOT row said the republish was owed and payable and told this lane not to
+re-diagnose the one-hour lag a fifth time. It was payable. It is paid.
+
+I RE-MEASURED ALL THREE MYSELF BEFORE TOUCHING THE FILE, on my own merged HEAD `35a9c6d2`
+(fast-forward of `origin/chatbot` `bb5eedaf`, then merge of `origin/main` `098f30d4`, 30 files,
+0 conflict markers, nothing of mine touched by the merge). Comments STRIPPED BEFORE SPLITTING,
+string-aware, brace-matched, anchored on `const MB_NAME :=`:
+  - `Delve.MB_NAME` = **54** keys, 0 duplicates, `iceman` IN, `straker` OUT.
+  - `miniboss_feed.by_key` = **54** keys.
+  - `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]**. Drift checked BOTH directions.
+The halves AGREE at 54, so the publish was payable and I paid it.
+
+THE EDIT, AND WHAT I PROVED ABOUT IT. `data/commands.json`: `commands.miniboss.short` and
+`commands.miniboss.what` moved from "The 53 elites" to "The 54 elites". That is BOTH leaves and
+there is no "53" left anywhere in the file. Then, against a pre-edit copy, flattened both trees to
+leaves and compared: keys gained **[]**, keys lost **[]**, changed leaves EXACTLY those two and
+nothing else, 8 top keys in the same order, `order` == `commands` keys at 32, `armoury.cost`
+untouched. 18000 bytes before and 18000 after, which is coincidence and not proof, so I did not
+lean on it.
+
+THE GENERATOR WON, AS THE PROMPT SAYS IT MUST. I did not hand-write a line of `docs/COMMANDS.md`.
+The real `tools/_commands_doc.gd` ran and rewrote it; the doc now reads "The 54 elites" because the
+data does, and L14_TEST checked it verbatim in both directions afterwards (32 rows, unpublished
+[], stale []). Note for the record that this hour COMMANDS_DOC was correctly NOT a no-op - last
+hour's true no-op was the proof that I had changed no data, and this hour's change to the file is
+the proof that I did.
+
+FIVE GATES, ALL GREEN, 45 seconds end to end (16:47:10 -> 16:47:55), so nothing was split or carried:
+  - IMPORT rc=0, 0 ERROR. Run FIRST because `straker.glb` landed in this merge.
+  - PARSE rc=0, `--quit-after 300`, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error. 16 WARNINGs, all of
+    them the pre-existing invalid-UID `ext_resource` lines on asset-kit `.tres` files.
+  - TWITCH_PARSE **OK (8 checks)**.
+  - COMMANDS_DOC **OK wrote 32 commands**.
+  - L14_TEST **OK (24 checks)** - back to 24 of 24 for the first time since the 51st-body cascade
+    opened. The two arms that were the instructed red an hour ago, MINIBOSS COUNT and MINIBOSS
+    UNNAMED, both pass now, and they pass because the count is right, not because anyone softened a
+    gate. The 15:58 row said L14 should return to 24 of 24 once this was paid and that the gate was
+    the finding if it did not. It did.
+
+THE 55th IS ON DISK AND IT IS IN NONE OF THE THREE HALVES, AND THAT IS NOT MINE TO FIX THIS HOUR.
+`straker.glb` is tracked on main, `MB_NAME` does not name it, `by_key` has no row for it, and so
+the published half at 54 is CORRECT right now, not behind. The next step in that cascade is
+content's `by_key.straker` (C-195) and then the engine's name; the republish to 55 is a later chat
+bot firing's and I will not pre-publish a body no half of the chain knows.
+
+I hand-rolled no count a gate already answers: 32 is COMMANDS_DOC's number, 8 is TWITCH_PARSE's,
+24 is L14_TEST's. The only numbers I computed are the three the decision turned on, each off the
+file rather than off a previous run's prose.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.
+Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.

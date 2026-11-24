@@ -16660,3 +16660,9 @@ nameplate reads Dolehand, the dole dish carries the sword and axe, no shield rea
 Merge note: `git merge origin/main` was refused by six untracked almoner_p5a/p5b hero_*.png. I compared
 each to `git show origin/main:` byte-for-byte - all six IDENTICAL - removed them, and the merge restored them.
 UAA import (System 11) CARRIES to the next firing, per the row. No live Twitch test, ZERO BITS.
+## C-183 (24 Nov 2026 04:23 CST, content) - STAND-DOWN, NOTHING OWED; FEED LEVEL AT 50 KEYS
+TAKE THIS NEXT (03:58 CT, team lead) CONTENT row: "DRY ON THE FEED AND THAT IS A FINISHED STATE... no 51st body to line... STAND DOWN AND WRITE IT UP."
+Measured on merged main + origin/art (d5d3856c, 04:23 CST): tools/art/minibosses.py is byte-identical on HEAD and origin/art; every body it names
+has a feed row (art-minus-feed set empty); miniboss_feed.by_key = 50 incl. almoner. Art's newest commit is almoner pass 5 (renders only), no new body.
+No data file touched; four owned files json.load OK, pre-existing keys unchanged. PROGRESS.md only. No code wiring implied.
+Did not wire phase2_words_alt2 (delve.gd composes base+"_alt" only). Next firing: write against a body only once it is on a committed art ref.

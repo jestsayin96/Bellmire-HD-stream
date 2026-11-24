@@ -17760,3 +17760,66 @@ BOTH FAILS PREDATE MY CHANGE: I ran the committed (HEAD) U62 and U69 scripts unm
 FINDINGS NEEDING A LOOK NEXT WINDOW: (1) U62: the 4th scroller (h=159/198/238) finds NO ink at any scale (ink=[9999,-1]) - it has passed vacuously since it was added; now reported as NO INK. Also clear=false at 100% h=96 (stripe ends 12.41 vs rod_bot 12.25) and 125% h=120 (14.62 vs 14.50): stripe overruns the rod by ~0.1-0.16px - contradicts the U65 'OK bad=0' record, so either ui_theme changed since 17 Nov or the U65 run differed; needs bisect. (2) U69: injected BossCard in Pane_director reads 1500x800; unclear whether this is the red-proof firing as designed or a regression; read the test header first.
 NOTE: windowed run connected to Twitch (TWITCH joined #jestsayin96, EventSub) and gear.gd:104 import-cache errors - the known cache difference, not a HUD fault.
 Decision for Mr. E: none.
+
+## B134 - 24 Nov 2026, 14:45 CT (chat bot) - NOTHING OWED ON THE COUNT, PROVED BEFORE THE CLAIM: ALL FIVE GATES GREEN AND THE 54th IS IN NONE OF THE THREE HALVES
+ITEM: the team lead's 13:58 CHAT BOT row - "nothing is owed on the count and here is why, so you do
+not chase it". I verified the row rather than trusting it, and it is right in every particular.
+TREE: merged main `303bd64a`; my HEAD after ff of origin/chatbot (`9867ba45`) then merge of main =
+`e8200cf7`. 0 conflict markers. Nothing of mine edited: `git status` on scripts/chatcmd.gd,
+data/commands.json and docs/COMMANDS.md is empty before and after the gates.
+
+BOTH HALVES AND THE PUBLISHED THIRD, MEASURED BY ME FIRST, comments STRIPPED BEFORE SPLITTING
+(the team lead's own 12:58 parser fault, kept out of my instrument) and ANCHORED ON
+`const MB_NAME :=`, brace-matched and string-aware:
+ - `Delve.MB_NAME` = **53**, 0 dupes, `iceman` OUT
+ - `miniboss_feed.by_key` = **53**, `iceman` OUT
+ - `data/commands.json` publishes **53** at EXACTLY two leaves (`/commands/miniboss/short`, `.what`),
+   18000 bytes, 8 top keys, `armoury.cost` still the string '50 / 150 / 400 / 1000 gold by tier'
+   (a recursive leaf walk for \b5[0-9]\b returns those three hits and nothing else)
+ - `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]** - ZERO DRIFT BOTH WAYS
+THE 54th (`iceman`, art's "Hoarback") IS A BODY ONLY: `assets/monsters/minibosses/iceman.glb`
+landed in THIS merge, and it is in no MB_NAME, no by_key and no published count. **SO I PUBLISHED
+NOTHING. The 53 -> 54 step is the 15:45 run's**, one hour behind the naming exactly as the
+structural lag B132 wrote up predicts. Publishing 54 this hour would have put the published half
+AHEAD of both engine halves - the opposite failure to the one this lane spent four hours paying off.
+
+FIVE GATES, IMPORT FIRST, ALL GREEN - and I called the exe straight from the bridge with
+subprocess.run, one gate per call, which is the fix B133 handed forward after its detached
+PowerShell launcher silently never ran twice:
+| gate | result |
+|---|---|
+| IMPORT | rc=0, 1048 reimport steps, **0 ERROR** |
+| PARSE (`--quit-after 300`) | rc=0, 21.2 s, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error, 24 pre-existing invalid-UID ext_resource WARNINGs on asset-kit .tres |
+| TWITCH_PARSE | OK (8 checks, 8 PASS) |
+| COMMANDS_DOC | OK wrote 32 commands **and a TRUE NO-OP** - git status on docs/COMMANDS.md empty after the real generator ran, correct because I changed no data |
+| L14_TEST | **OK (24 checks) - 24 of 24**, second hour running |
+WHY IMPORT RAN FIRST AND IT MATTERED: `iceman.glb` arrived in this merge with **no `.import`
+sibling** on main - the game build's S115 IDLE says ".import committed", and the file is not there.
+That is not a fault of theirs to chase at this distance (it may well sit on `laptop` after main's
+cut), but a parse gate run before an import pass would have met an unimported mesh.
+L14_TEST's three arms that matter to me all pass: COMMANDS_DATA guard 0 fired [], COMMANDS.md
+carries every published field (32 rows, unpublished []), and publishes nothing the data does not say
+(stale []) - drift checked BOTH directions, as every hour.
+
+SMALL AND NOT HIDDEN: `_l14_test.gd` ends with `ERROR: 2 resources still in use at exit`. rc=0 and
+every check printed ok, so the verdict stands; it is Godot's exit-leak notice on a `--script` run,
+not a failed arm. I am naming it because this lane counts ERROR lines out loud and that habit should
+not acquire a silent exception.
+
+CLEAN TREE, NO OBSTRUCTION THIS HOUR: 188 untracked files before the merge and **0 of them
+`.import`** - the first hour in five where my own earlier pass had not staged an obstruction for me,
+because B133 cleared its own. After the gates I removed 1072 untracked regenerable files (this run's
+`.import` pass plus my stale `_b1*` logs), each verified untracked with
+`git ls-files --error-unmatch`; nothing tracked touched.
+
+LOCK: claim 14:47:21-06:00, cap 15:12:21, declared finish **14:51:30** (inside the HUD's :52
+window), **released 14:48:31** - a minute and ten seconds under the declaration, and the window was
+handed over free well before the HUD's claim. Checked BY PROCESS before claiming and before
+releasing: `Get-Process Godot*` = 0 both times. The window was free to take: the QA tester's
+RUNNING 14:42:37 was followed by its own IDLE at 14:46:23, which under the yield rule releases it at
+once whatever finish it declared. Timestamps taken from the WINDOWS clock through the bridge, never
+the container's (B130's four-minute-fast claim is the reason).
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.
+Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.

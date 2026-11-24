@@ -1,0 +1,471 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+ERROR: Cannot open file 'res://.godot/imported/Donkey.gltf-9229af2c72d6d4ef3a69fc27a84b569e.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Donkey.gltf-9229af2c72d6d4ef3a69fc27a84b569e.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Donkey.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Alpaca.gltf-08f8d5a8600bb87fde00b0feeb8d3529.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Alpaca.gltf-08f8d5a8600bb87fde00b0feeb8d3529.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Alpaca.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Bull.gltf-d473041874f074f5ce319cea8ecc974a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Bull.gltf-d473041874f074f5ce319cea8ecc974a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Bull.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3270)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Husky.gltf-9551ab96adf37b8a425d9c679da4f671.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Husky.gltf-9551ab96adf37b8a425d9c679da4f671.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Husky.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/ShibaInu.gltf-162f07c38cff9a33d920a2d3ea2595a4.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/ShibaInu.gltf-162f07c38cff9a33d920a2d3ea2595a4.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/ShibaInu.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3284)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Fox.gltf-8844ea4c2952ed0980c33e4c275bf131.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3291)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Fox.gltf-8844ea4c2952ed0980c33e4c275bf131.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3291)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Fox.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3291)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Deer.gltf-1b160e9bbf946512e9e0a0a1d471e99d.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Deer.gltf-1b160e9bbf946512e9e0a0a1d471e99d.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Deer.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Deer.gltf-1b160e9bbf946512e9e0a0a1d471e99d.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Deer.gltf-1b160e9bbf946512e9e0a0a1d471e99d.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Deer.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Stag.gltf-40e3f85999dc455a1446de6a93184de8.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Stag.gltf-40e3f85999dc455a1446de6a93184de8.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Stag.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3295)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/Wolf.gltf-6e7db07b858dcf119f4c1b9d4df2f5db.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3297)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://.godot/imported/Wolf.gltf-6e7db07b858dcf119f4c1b9d4df2f5db.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3297)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Failed loading resource: res://assets/animals/uaa/Wolf.gltf.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _ready (res://scripts/animal.gd:140)
+       [1] _animal (res://scripts/town.gd:3175)
+       [2] _spawn_animals (res://scripts/town.gd:3297)
+       [3] _ready (res://scripts/town.gd:409)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+  injected oversize BossCard into 0 visible pane(s)
+  [100% grid] 10 elements
+     Chronicle:Control [P: (582.0, 366.0), S: (756.0, 283.0)]
+     @LineEdit@7260:LineEdit [P: (1314.0, 1021.5), S: (600.0, 52.0)]
+     Pane_director/@Label@7267:Label [P: (10.0, 62.0), S: (300.0, 42.0)]
+     Pane_director/@Label@7268:Label [P: (10.0, 10.0), S: (174.0, 48.0)]
+     Pane_bits/@Label@7274:Label [P: (1560.0, 62.0), S: (350.0, 42.0)]
+     Pane_bits/@Label@7275:Label [P: (1675.0, 10.0), S: (235.0, 48.0)]
+     Pane_subs/@Label@7281:Label [P: (10.0, 569.6), S: (350.0, 42.0)]
+     Pane_subs/@Label@7282:Label [P: (10.0, 517.6), S: (351.0, 48.0)]
+     Pane_points/@Label@7288:Label [P: (1535.0, 569.6), S: (375.0, 42.0)]
+     Pane_points/@Label@7289:Label [P: (1480.0, 517.6), S: (430.0, 48.0)]
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+  injected oversize BossCard into 0 visible pane(s)
+  [100% full] 3 elements
+     Chronicle:PanelContainer [P: (18.0, 631.0), S: (760.0, 431.0)]
+     @Label@7259:Label [P: (1660.0, 12.0), S: (260.0, 46.0)]
+     @LineEdit@7260:LineEdit [P: (1160.0, 1010.0), S: (742.0, 52.0)]
+  injected oversize BossCard into 0 visible pane(s)
+  [150% grid] 10 elements
+     Chronicle:Control [P: (585.0, 369.0), S: (750.0, 277.0)]
+     @LineEdit@7260:LineEdit [P: (1011.0, 1024.0), S: (900.0, 47.0)]
+     Pane_director/@Label@7267:Label [P: (15.0, 94.0), S: (451.0, 62.0)]
+     Pane_director/@Label@7268:Label [P: (15.0, 15.0), S: (261.0, 73.0)]
+     Pane_bits/@Label@7274:Label [P: (1380.0, 94.0), S: (525.0, 62.0)]
+     Pane_bits/@Label@7275:Label [P: (1551.0, 15.0), S: (354.0, 73.0)]
+     Pane_subs/@Label@7281:Label [P: (15.0, 601.6), S: (525.0, 62.0)]
+     Pane_subs/@Label@7282:Label [P: (15.0, 522.6), S: (527.0, 73.0)]
+     Pane_points/@Label@7288:Label [P: (1359.0, 589.6), S: (546.0, 62.0)]
+     Pane_points/@Label@7289:Label [P: (1367.0, 522.6), S: (538.0, 61.0)]
+  injected oversize BossCard into 0 visible pane(s)
+  [150% full] 3 elements
+     Chronicle:PanelContainer [P: (27.0, 570.0), S: (1140.0, 393.0)]
+     @Label@7259:Label [P: (1660.0, 12.0), S: (302.0, 68.0)]
+     @LineEdit@7260:LineEdit [P: (780.0, 975.0), S: (1113.0, 78.0)]
+U69_REDPROOF OK elements=26 arm=CONTROL(no injection, must be OK) inflated_fails=0

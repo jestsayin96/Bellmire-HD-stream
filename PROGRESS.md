@@ -18014,3 +18014,13 @@ Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to d
 - Greps: app.js innerHTML at :255 and :301 only (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta count 1; node --check OK; zero 0-byte png/webp under web/.
 - NUMBER: 0 code files differ from published; 1 notes file / +2 lines. Hostile-name test not re-run: no code changed. Not claiming READY TO PUBLISH.
 - Untracked, named: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine).
+
+
+## U156 - U69 BossCard RED PROVED DESIGNED, BOTH ARMS RUN, 2026-11-24T16:56:03-06:00 (16:52 firing)
+ITEM: WORK_PLAN 15:58 row HUD (16:52): show the U69 FAIL is the deliberately-inverted assertion, and show the gate GREEN with the inversion removed.
+Lock: R working RUN_LOCK last line = chat bot B136 IDLE 16:49:05, 0 Godot by process -> claimed 16:53:41 (declared 17:01), released 2026-11-24T16:56:03-06:00.
+CHANGED (tools/_u69_redproof.gd only, no HUD .gd): `-- control` user arg skips the BossCard injection; final line now prints arm= and inflated_fails=.
+RUN (--windowed --resolution 1920x1080): RED arm (injected) -> 'injected ... 1 visible pane' at 100% grid and 150% grid, FAIL 'named HUD element inflated past the in-pane skip' Pane_director/BossCard 1500x800 x2, U69_REDPROOF FAIL elements=26 inflated_fails=2. CONTROL arm (same gate, no injection) -> 0 injected, 0 FAIL lines, U69_REDPROOF OK elements=26 inflated_fails=0. The FAIL is therefore the injection and nothing in the real HUD; the gate can go both ways.
+NOTE: full-screen steps inject 0 (no visible Pane_ there) - by design, only the grid steps arm the proof.
+PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error lines.
+Logs: _u156_red.log, _u156_control.log. Decision for Mr. E: none.

@@ -17181,3 +17181,27 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last li
 07:15:58) and again BEFORE writing the IDLE line, not after - B124's lesson.
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
+
+## D-S110 (game build, 24 Nov 2026 08:08-08:1x CT) - panner.glb.import COMMITTED; SYSTEM 12 STEP S110b (FBX->glb + probe) DONE OFF-REPO, NOT WIRED
+TAKE THIS NEXT (07:58 CT, team lead, amended 08:04) GAME BUILD row: do NOT touch MB_NAME this hour (obeyed - delve.gd untouched); commit the
+missing panner.glb.import; then System 12.
+MERGE: origin/main fast-forwarded 48252d3b..b5a1a13a. It was BLOCKED first by an UNTRACKED assets/gear/wand_crystal.glb.import in R that main now
+tracks - compared byte-for-byte (CRLF-normalised) with origin/main's copy: IDENTICAL, so moved aside (C:\hd adventure\_gamebuild_bak\
+wand_crystal.glb.import.S110) and the merge went clean. Nothing lost.
+1. PANNER: --headless --import rc=0 in 7.8 s, 0 ERROR lines; assets/monsters/minibosses/panner.glb.import generated and committed here. Parse after
+   it reads 0 SCRIPT ERROR / 0 Parse Error, so the mesh now imports in every lane that pulls this. MB_NAME still 50 by design (09:07 row).
+2. SYSTEM 12 / S110b - converted the 20-body medieval subset of Quaternius Ultimate Animated Character Pack (Nov 2019) FBX->glb in a SEPARATE
+   `blender --background --factory-startup` process (the open Blender scene was never touched). Output STAGED OFF-REPO at
+   C:\hd adventure\_gb_s110_uacp\ (20 .glb, 13.2 MB, + _report.json) - NOT in assets/ yet, nothing wired, so nothing for the import to miss.
+   PROBE (all 20 ok): ONE shared rig `CharacterArmature`, 32 bones (Hips/Abdomen/Torso/Neck/Head, UpperArm/LowerArm/Fist L+R, UpperLeg/LowerLeg/
+   Foot L+R) - NOT KayKit names, confirming gear attach must be skipped or remapped (Fist.R is the hand socket). ELEVEN clips, same on every body:
+   Defeat, Idle, PickUp, Punch, RecieveHit (sic), Shoot_OneHanded, SitDown, StandUp, Victory, Walk, Walk_Carry - NO Run clip, so the role map must
+   fall back Run->Walk. Raw heights 3.06-4.21 units (FBX scale), zmin -0.019 - scale factor vs KayKit is the first thing S110c measures in Godot.
+   LICENCE: the pack ships no licence file and I did not find the pack's own page this run (searches surfaced only other Quaternius pages and
+   opengameart's "all CC0 uploader quaternius"). Mr. E's 16 Nov licence covers ALL Quaternius packs (commercial, no attribution), so use is
+   permitted; the per-pack page read stays owed before the glbs enter assets/, and I will write the LICENSE note beside them then.
+   NEXT (S110c): copy into assets/townsfolk/uacp/ with a LICENSE note, --import, measure Godot height vs KayKit ADV, then wire per role in
+   townsfolk.gd in ONE commit with a render - import and wiring together or neither.
+GATES on merged main b5a1a13a: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1950 | TWITCH_PARSE OK (8 checks)
+| TOWNWALK in_solid=0/17830 raid_in_solid=0/5934 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Logs: renders/cycles/s110/.
+No live Twitch test, ZERO BITS. Claim 08:08:47, cap claim+25 = 08:33:47 (computed first), declared 08:29, released 2026-11-24T08:14:49-06:00.

@@ -17135,3 +17135,49 @@ Lock read from R WORKING copy at decision time (2026-11-24T07:53:26-06:00): last
 Item: R WORK_PLAN top = 06:58 CT 24 Nov team-lead block; HUD row says U146 ticked as a stand-down, nothing HUD-owned open (MB_NAME/miniboss in no HUD file), rarity row is U55 and shipped - do not hand it back. Fifth dry cycle, put to the supervisor by the team lead. Fast-forwarded hud-ui to origin before writing.
 Next firing (08:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none (scope question on repeated HUD dry cycles is with the supervisor).
+## B127 - 2026-11-24 07:45 CT (chat bot) - FOUR GATES GREEN, AND THE 30 ERRORS WERE MINE
+Item taken: the TAKE THIS NEXT CHAT BOT row for 07:45 - the four engine gates on merged main,
+VERDICT LINES not return codes. Merged main 7b7203f0 into `chatbot` (fast-forward of
+origin/chatbot 638e3ea0 -> b911cd3f, then merge of main; no conflicts, 0 real conflict markers in
+PROGRESS.md - the 7 hits from a naive `^=======` grep are decoration, not markers).
+
+NOTHING OWED ON THE COUNT AND I MEASURED IT BEFORE TOUCHING A FILE. Brace-matched parse on merged
+main: `Delve.MB_NAME` 50 | `miniboss_feed.by_key` 50 | `commands.json` published 50 at both leaves
+(.commands.miniboss.short and .what), 18000 bytes, 32 keys. Set difference empty BOTH ways.
+`panner` - the 51st, whose renders and `docs/art/PANNER_THE_51ST.md` landed from art this hour - is
+in NEITHER MB_NAME nor the feed, so the 51 condition is UNMET and I republished nothing. Nothing of
+mine is edited this cycle: git status on scripts/chatcmd.gd, data/commands.json and
+docs/COMMANDS.md all empty.
+
+FOUR GATES, VERDICT LINES:
+  COMMANDS_DOC OK wrote 32 commands - and a TRUE no-op: git status on docs/COMMANDS.md empty after
+    the real tools/_commands_doc.gd ran. Doc carries 32 `!` rows.
+  TWITCH_PARSE OK (8 checks)
+  L14_TEST OK (24 checks) - 0 FAIL, 0 guard arms. Both doc arms quiet: 32 rows, unpublished [],
+    stale []. B121's close now held across a SEVENTH merged main.
+  parse --headless --path W6 --quit-after 300: rc=0, 0 SCRIPT ERROR, 0 Parse Error (21.5 s).
+
+THE PART WORTH KEEPING: THE FIRST PARSE CARRIED 30 `ERROR` LINES AND I DID NOT REPORT THEM AS A
+DEFECT ON MAIN. All 30 were resource-load failures on the nine UAA animal meshes the game build
+landed in S108 - "Cannot open file res://.godot/imported/<Animal>.gltf-<hash>.scn". The gate's own
+criterion (rc=0 / 0 SCRIPT ERROR / 0 Parse Error) was met, but B126 recorded "no ERROR in the parse
+section at all", so I would have been reporting a changed verdict either way. I ran it down:
+  1. RE-RAN the parse - identical, 30 ERRORs. Reproducible, not a flake.
+  2. Asked whether the game build had committed a .gltf without its buffers - the obvious defect.
+     IT HAD NOT: every .gltf embeds its buffer as a base64 data: URI (one embedded
+     `data:application/octet-stream` buffer each, `images: []`). The commit is complete.
+  3. Measured the cache: 9 `.gltf.import` files present, 664 `.scn` in `.godot/imported`, and
+     ZERO of them a UAA animal. The nine had never been imported in MY worktree.
+  4. PROVED it: `--headless --import` rc=0 in 9.6 s produced 18 files (9 .scn + 9 .md5), and the
+     re-parse came back rc=0 with 0 ERROR, 0 SCRIPT ERROR, 0 Parse Error.
+THE FAULT WAS MY WORKTREE'S MISSING IMPORT PASS, NOT MAIN AND NOT THE GAME BUILD. Same shape as
+the game build's own S103 note ("the mesh needed an import before any gate could see it"). Worth
+one sentence to the team lead and it is NOT new work: a lane whose `.godot/imported` cache already
+holds an asset cannot see this, so a newly-merged mesh reads clean in the lane that added it and
+red in every lane that did not. The import pass is the fix and it costs ten seconds.
+
+Lock: claim 07:47:07, cap 08:13 (claim+25), declared finish 07:52, released inside it. Window
+checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last line game build IDLE
+07:15:58) and again BEFORE writing the IDLE line, not after - B124's lesson.
+No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
+channel-point reward created, deleted or re-priced.

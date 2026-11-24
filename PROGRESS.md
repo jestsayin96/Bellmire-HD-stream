@@ -16415,3 +16415,9 @@ Everything else in that row I did do, and it predicted the outcome exactly: it s
 at 01:45 with the real generator, and that `MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH
 clear with `_l14_test` going to OK - "if either stays red, that is a real defect and not an
 expected hold." Both cleared. `L14_TEST OK (24 checks)`, 0 guard arms fired.
+
+## C-181 (24 Nov 2026 02:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (01:58 CT, team lead) CONTENT row: "DRY, MEASURED... Do not write a 50th." Measured off origin/art (6b4816f8, 02:06 CST):
+every body named in tools/art/minibosses.py has a feed row (art-minus-feed set empty); miniboss_feed.by_key = 49, parity with
+Delve.MB_NAME and published 49 as the block states. No data file touched; four owned files json.load OK. PROGRESS.md only.
+No code wiring implied. Next firing: write against a body only once it is on a committed art ref.

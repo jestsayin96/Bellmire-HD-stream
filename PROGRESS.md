@@ -17181,3 +17181,10 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last li
 07:15:58) and again BEFORE writing the IDLE line, not after - B124's lesson.
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
+
+### HUB 24 Nov 08:4x CT - standing check (TAKE THIS NEXT gave HUB row "standing check, unchanged")
+- Merged origin/main into hub (5e3390e7). `git diff origin/main HEAD -- web/ docs/HUB_SECURITY.md` and `git diff origin/hub HEAD -- web/` both EMPTY: web/ byte-identical; no web change, so no publish owed and READY TO PUBLISH is NOT claimed.
+- Security greps on app.js: innerHTML at exactly :255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (only comment mentions). `node --check app.js` OK. index.html comment "only innerHTML in app.js is two page-owned sites" still true. CSP meta intact.
+- Only non-constant href: app.js:2743 `link.href = uri`, gated by /^https:\/\/(www\.)?twitch\.tv\// with rel=noopener; pre-existing, unchanged, flagged for the team lead's awareness only.
+- Number: web/icons 3.3 MB, fonts 64 KB (under the 6 MB cap). origin/gh-pages = 029e4fac. No new untracked web files.
+- Licence findings this run: none new (no pack catalogue touched).

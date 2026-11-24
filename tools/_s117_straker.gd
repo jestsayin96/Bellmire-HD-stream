@@ -26,6 +26,11 @@ func _initialize() -> void:
 	_ok(drawn.has("drover") and drawn.has("winder"), "red-proof: drover and winder ARE drawn by the same sweep")
 	_ok(drawn.has("straker") == fed, "straker drawn exactly when its arrive lines exist (fed=%s)" % fed)
 	_ok(Delve.MB_NAME.has("straker") == false or fed, "no MB_NAME row ahead of the feed")
+	# S118: C-195 landed - the hold-out arm is flipped to HARD arms: fed, drawn in wood, named Everyhand.
+	_ok(fed, "S118: straker is fed (content's by_key.straker arrive lines)")
+	_ok(drawn.has("straker"), "S118: straker IS drawn by the wood sweep")
+	_ok(Delve.MB_NAME.get("straker", "") == "Everyhand", "S118: MB_NAME straker is Everyhand (got '%s')" % Delve.MB_NAME.get("straker", ""))
+	_ok(Delve.MB_NAME.size() == 55, "S118: MB_NAME is 55 (got %d)" % Delve.MB_NAME.size())
 	if _fails == 0:
 		print("S117_STRAKER OK %d" % _checks)
 	else:

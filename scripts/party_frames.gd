@@ -212,7 +212,11 @@ func _row(m: Dictionary, npc: bool, d: Delve = null) -> Control:
 			chip.add_theme_constant_override("separation", UiTheme.px(3))
 			chip.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			chip.add_child(StatusIconScript.new().setup(String(s[2]) if s.size() > 2 else "", String(s[0]), s[1] as Color, bool(s[3]) if s.size() > 3 else false, UiTheme.px(22)))
-			chip.add_child(UiTheme.label(String(s[0]), UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
+			# S118 (L31 remainder a): the duration beside the word - m["st"] holds seconds
+			var word := String(s[0])
+			if s.size() > 4 and float(s[4]) > 0.0:
+				word = "%s %ds" % [word, int(ceil(float(s[4])))]
+			chip.add_child(UiTheme.label(word, UiTheme.SMALL, (s[1] as Color).darkened(0.45)))
 			tags.add_child(chip)
 		col.add_child(tags)
 	return col

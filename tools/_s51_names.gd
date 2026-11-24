@@ -60,8 +60,8 @@ func _initialize() -> void:
 	# S93: 45 = the 42-row directive table + S75 winder + S76 pitman + S89 tither (+ S94 blower = 46). This line read 42 since S72 and went
 	# red at S75 with nobody re-reading it; the key-SET check below is the real guard, this is the count beside it.
 	# S99: + changer (Evenhand, 47th, C-174) = 47. S102: + roper (Drawtight, 49th body, C-177) = 48. S103: + stopper (Chokewell, 48th body, C-176, .glb on main 41f71825) = 49. S107: + almoner (Dolehand, 50th body, C-182, .import committed) = 50.
-	# S113: + panner (Onceround, S111) + stiltman (Downfast, S112) = 52 - S111 and S112 never moved this count, so this arm was red on main for two cycles; + nightman (Nightwork, 53rd, C-190) = 53. S116: + iceman (Hoarback, 54th, C-193) = 54.
-	_ok(Delve.MB_NAME.size() == 54, "MB_NAME is 54 (got %d)" % Delve.MB_NAME.size())
+	# S113: + panner (Onceround, S111) + stiltman (Downfast, S112) = 52 - S111 and S112 never moved this count, so this arm was red on main for two cycles; + nightman (Nightwork, 53rd, C-190) = 53. S116: + iceman (Hoarback, 54th, C-193) = 54. S118: + straker (Everyhand, 55th, C-195) = 55.
+	_ok(Delve.MB_NAME.size() == 55, "MB_NAME is 55 (got %d)" % Delve.MB_NAME.size())
 	var seen := {}
 	var bodies := 0
 	var fed := 0

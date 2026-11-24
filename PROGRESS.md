@@ -17920,3 +17920,34 @@ rather than off a previous run's prose.
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## D-S117 (game build, 24 Nov 2026 16:08-16:2x CT) - THE 55th BODY `straker` (Everyhand) IS FIT AND IN THE WOOD ROW; NAME HELD
+TAKE THIS NEXT (15:58 block, rewritten 16:1x) gave GAME BUILD: S117, the 55th's body row, HOLD THE NAME.
+Read art's CANON first: minibosses.py:19822 `"straker": ("Everyhand", 2.40, ..., "wood", ...)` - tag
+`wood` is field 5; _fit_report.json pairs.straker.ratio 0.98, fits_frame true, 3/3 proving views.
+Done (the S115 shape, nothing more):
+- scripts/delve.gd MB_FIT + `"straker": 0.98` (copied, not re-derived).
+- scripts/dungeon_hd.gd THEME_MINIBOSS_MORE wood += straker, with an S117 note.
+- assets/monsters/minibosses/straker.glb.import (made by --headless --import; the .glb had none).
+- tools/_s117_straker.gd: fit, row, model resolves, wood sweep red-proof (drover + winder drawn),
+  straker drawn EXACTLY when its arrive lines exist, no MB_NAME row ahead of the feed.
+NO MB_NAME ROW: by_key.straker is not on main (C-195 is content's 16:22 item). When it lands the close
+is one line `"straker": "Everyhand"` plus _s51_names.gd / _s107_gate.gd 54 -> 55 and hard arms in
+_s117_straker.gd (fed, drawn in wood, named Everyhand).
+Gates (verdict lines): PARSE 0 SCRIPT ERROR / 0 Parse Error; S117_STRAKER OK 7 (wood draws snarer,
+drover, winder - straker correctly held out, arrive lines false); S115_ICEMAN OK 10; S51_NAMES OK 176
+checks; S107_GATE OK 12 (MB_NAME 54); TWITCH_PARSE OK (8 checks) - the COMMANDS_DATA "published 53,
+feed rows 54" line is the chat bot's owed republish, not mine; OFFFLOOR_VERDICT OK 0 of 2188;
+TOWNWALK in_solid=0/18267 raid_in_solid=0/4664 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+Looked at: renders/art/minibosses/straker/hero_front.png - grey figure, hand on the rim of a
+block-rimmed spoked wheel, roughly hero height. Reads.
+L31 REMAINDER (second item) - GREPPED FOR THE BEHAVIOUR, NOT BUILT THIS RUN:
+- HEROES: ALREADY WIRED. party_frames.gd:214 draws status_icon.gd icons + the word per state off
+  Delve.statuses() (L31: [word, colour, key, bad]); delve.gd _tags_tick draws the words over each head.
+- MONSTERS: NOTHING TO SHOW. Every `_give(` in delve.gd (194, 1968, 1974, 2237-2467, 3253) targets a
+  party dict; monster.gd carries no condition state at all (only the enraged aura). D61.2 asks for
+  "the conditions the game already applies" - the game applies none to monsters. Closed by disproving.
+- GENUINELY OPEN, small: (a) no DURATION on the hero icon although m["st"] holds seconds; (b) D61.2's
+  "readable name the moment it is applied" - delve.gd _give computes `var was := has_st(m, name)` and
+  never uses it, so no on-apply line fires from there. Both are delve.gd/party_frames.gd - mine. Next run.
+No live Twitch test. ZERO BITS, no cheer, no redemption, no chat line. Nothing for Mr. E to decide.

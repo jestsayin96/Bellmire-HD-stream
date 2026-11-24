@@ -567,3 +567,13 @@ added by a re-run.
 - Naming note: the pack title in the licence is "KayKit : Character Animations", and the folder is `kaykit_character_animations_CC0`. Both refer to the same pack.
 - Note for later seats: the `.zip` sibling `kaykit_character_animations_CC0.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. The rigged character meshes these animations target are in the separate KayKit Dungeon Pack (already catalogued above), so any animation used with those meshes is a rig-compatibility question, not a licence question. Any file that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kaykit_character_animations_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - kenney_3d-road-tiles (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kenney_3d-road-tiles (folder `_packs\kenney_3d-road-tiles\`, sibling `kenney_3d-road-tiles.zip` not opened) | Kenney Vleugels for Kenney (www.kenney.nl) | **CC0 1.0 Universal (Public Domain)** | `_packs\kenney_3d-road-tiles\License.txt` | 915 on disk: 302 `.gltf`, 302 `.obj`, 302 `.mtl` (`Models\roadTile_001`-`roadTile_302`), 2 `.png` (`Preview.png`, `Sample.png`), 1 `.py` (`Convert\Three.js (Blender)\fixQuads.py`), 2 `.txt` (`License.txt`, `Convert\Three.js (Blender)\readme.txt`), 1 `.unitypackage` (`Unity package\roadPack_unity.unitypackage`), 3 `.url` (donation/social links) | Permitted: "You may use these textures/photographs in personal and commercial projects." | Not required. Credit to Kenney / www.kenney.nl is requested ("would be nice but is not mandatory"). |
+
+**Licence text read in full from disk this firing.** `License.txt` names the CC0 1.0 Universal URL (creativecommons.org/publicdomain/zero/1.0/) and states the commercial-use permission above. No share-alike, no non-commercial, no no-derivatives clause. The `Convert\Three.js (Blender)\readme.txt` is a conversion note only (Three.js needs quads; points to a third-party `fixQuads.py` gist) and states no separate licence. The `fixQuads.py` script is a third-party tool shipped in the pack and is NOT part of what enters `assets/`; do not import it.
+
+Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-road-tiles`. Any file that enters `assets/` still needs its own row.

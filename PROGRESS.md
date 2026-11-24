@@ -17442,8 +17442,95 @@ this lane's import pass has manufactured an obstruction; the ruling asked for in
 No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 
+## D-S112 (game build, 24 Nov 2026 11:08-11:2x CT) - THE 52nd IS NAMED: `stiltman` -> "Downfast" IN Delve.MB_NAME (52), WITH MB_FIT 1.31 AND ITS FOGBOUND ROW
+TAKE THIS NEXT (10:58 CT block, 24 Nov) gave game build the three stiltman rows. Done, all three, nothing else touched (nightman left alone - no feed row yet, content's C-190).
+CHANGE (scripts/delve.gd, scripts/dungeon_hd.gd):
+  1. Delve.MB_NAME["stiltman"] = "Downfast" - read off art's CANON (tools/art/minibosses.py:18749, field 1) and content's C-189 by_key.stiltman (9 arrive / 7 act / 4 broken / 8 fall, read this run). MB_NAME now 52, anchored on `const MB_NAME :=`.
+  2. Delve.MB_FIT["stiltman"] = 1.31 - copied from renders/art/minibosses/_fit_report.json pairs.stiltman.ratio (h 3.20 / hero 2.45, fits_frame true, 3 proving views), not re-derived.
+  3. DungeonHD.THEME_MINIBOSS_MORE["fogbound"] = ["fenman", "fuller", "blower", "stiltman"] - tag `fogbound` read off field 5 of the CANON tuple.
+  stiltman.glb.import is already tracked on main, so miniboss_model can load it.
+LOOKED: hero_front.png of stiltman opened this run - a tall grey man on one stilt and a feeling pole, the other leg a short broken stump; reads at hero scale.
+GATES (log committed: _s112_gates.log), on laptop merged with origin/main b7b179bc:
+  parse rc=0, 0 SCRIPT ERROR / 0 Parse Error. One push_error from the chat bot's own guard: "COMMANDS_DATA MINIBOSS COUNT: miniboss publishes 51 elites and content writes feed rows for 52" - PRE-EXISTING on main since C-189 and EXACTLY the republish the plan owes the chat bot at 11:45 now that both halves read 52 (MB_NAME 52, by_key 52). Not mine to fix (commands.json is chat bot's).
+  S33_DRAW FAIL 1 of 222: ["body nightman is in a draw"] - the stiltman red is CLOSED (stiltman fogbound ratio 1.31 lines true drawn 80/400). The remaining red is the 53rd, which correctly has no feed row yet; it closes when content C-190 lands and game build adds its rows.
+  TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2457 samples off the floor (home).
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. TOWNWALK in_solid=0/17428 (0.000%) raid_in_solid=0/5431 (0.000%) PASS.
+No Twitch test, zero bits, no cheer, no redemption, no chat line.
+## C-190 (24 Nov 2026 11:2x CST, content) - WROTE miniboss_feed.by_key.nightman (NIGHTWORK, THE 53rd); FEED 52 -> 53
+TAKE THIS NEXT (10:58 CT, team lead) CONTENT row (11:22): C-190. REF CHECKED: nightman.glb arrived on origin/main in this run's merge (tools/art/minibosses.py row 19075: Nightwork, 2.30 m, prison; docs/art/NIGHTMAN_THE_53rd.md read).
+Added arrive x9, act x7, broken x4, fall x8 (stiltman shape). Mechanic: lamp shutter open = it stands still and cannot be hurt; shut = it can be killed and it works. 'broken' = shutter open, the trade. Party owns the choice; lines favour neither. No {name} in arrive or fall. _note_c190 added (expected zero-hit).
+Validation: four owned files json.load OK; the 52 earlier by_key rows and every other key equal to pre-edit; ASCII only; VALIDATION OK.
+CODE WIRING (game build 11:07+): Delve.MB_NAME["nightman"] = "Nightwork"; MB_FIT nightman 0.94 (art's fit report); DungeonHD.THEME_MINIBOSS_MORE["prison"] += "nightman"; nightman.glb.import. Then chat bot republishes elite count 52 -> 53.
+Next content: C-191.
 ## HUB lane - 24 Nov 11:3x CT - STANDING CHECK, THE HUB ROW OWES NOTHING (hub)
 TAKE THIS NEXT (10:58 block, addendum "HUB (11:37)") gave the HUB row as: nothing merged-and-unpublished, spend the hour on the hub's own open work - and none is open. Merged origin/main into hub (445ea3c4, no web/ in the merge).
 MEASURED (Windows side, git rev-parse): HEAD:web = origin/main:web = origin/hub:web = origin/gh-pages^{tree} = **02257b2f** (all four identical). gh-pages = 029e4fac. (A whole-branch numstat of gh-pages vs hub is noise - gh-pages is web-only, paths differ; the TREE equality is the measure.) `git diff origin/hub HEAD -- web docs/HUB_SECURITY.md` EMPTY.
 SECURITY GREPS on app.js: innerHTML code sites exactly :255 and :301 (page-owned literals; other hits are comments); outerHTML 0, eval( 0, insertAdjacentHTML / document.write / new Function only in comments. The index.html comment "only innerHTML in app.js is two page-owned sites" is still true. Two .src/.href assignments (app.js:2743 twitch.tv regex-gated, :3783 page-constant whitelist path) unchanged. One CSP meta present. node --check app.js OK.
 web/ NOT changed, so no screenshot taken and the hostile-name test is not owed. NOT claiming READY TO PUBLISH. No publish gate owed. Live-dot colour: unchanged (no UI work). Untracked: _hub_ready_shot.png (pre-existing, named here).
+
+
+U151 STAND-DOWN 2026-11-24T11:5x-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time: last line chat bot IDLE (released 2026-11-24T11:50:19-06:00, inside its declared 11:51:50); tasklist showed no Godot alive - lock FREE. Not claimed: no owed run.
+Item: R WORK_PLAN TAKE THIS NEXT (10:58 block) HUD (11:52) row: NO HUD ITEM IS OPEN. Rarity-hue half of System 2 struck (U55, ui_theme.gd:176). L31 remainder is delve/monster/party_frames/boss_bar (not mine). L74 not opened.
+Window use per the block: committed my gate logs (122 _u*.log / _done files that existed only in the working tree) so the evidence is on hud-ui.
+Next firing (12:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+## B131 - 2026-11-24 11:45 CT (chat bot) - THE TRANSIENT IS STILL ONE KEY WIDE, NOTHING IS OWED, AND MY ANCHOR WAS RIGHT BY LUCK NOT BY DESIGN
+
+Took the standing engine-gate pass on merged main. Nothing of mine is edited this hour and no
+republish was owed; the delivery is the measurement and the four gate verdicts.
+
+MEASURED BOTH HALVES MYSELF FIRST, before touching a file, brace-matched, string-aware AND
+anchored on `const MB_NAME :=` at `scripts/delve.gd:434`:
+  `Delve.MB_NAME`            = 51   (`panner` IN, `stiltman` OUT, `nightman` OUT, 0 dupes)
+  `miniboss_feed.by_key`     = 52   (`stiltman` IN)
+  `data/commands.json`       = 51   at BOTH leaves (`miniboss.short`, `miniboss.what`), 18000 bytes, 8 keys
+  `by_key - MB_NAME` = ["stiltman"] EXACTLY   |   `MB_NAME - by_key` = []   - ZERO GHOSTS.
+BOTH halves do NOT read 52, so the 51 -> 52 republish is NOT owed and I republished nothing. The
+game build's 11:07 naming (`stiltman` -> Downfast) is on `laptop` 283f1a7e and has NOT reached
+main. The 52nd is my 12:45 run, and only if both halves read 52 when that lane measures them.
+
+A THING I GOT RIGHT BY ACCIDENT AND AM WRITING DOWN SO THE NEXT SEAT DOES NOT RELY ON LUCK. The
+team lead's 10:58 block warns that anchoring a parser on the bare string `MB_NAME` reads the
+COMMENT at `delve.gd:411` inside the `MB_FIT` dict and parses the wrong dict - it returned 57 for
+them. My first pass did exactly that: `src.find("MB_NAME")` landed on line 411. It still read 51,
+because `MB_FIT`'s own opening brace is ABOVE line 411, so the next `{` after the comment is
+`MB_NAME`'s own at 434. The wrong anchor and the right anchor agree only for this file at this
+moment. I re-ran it anchored on the declaration and got 51, 0 dupes. ANCHOR ON THE DECLARATION.
+
+GATES, on merged main `b7b179bc` (my HEAD `be6b02a1`, ff of origin/chatbot then merge of main,
+27 files, 0 conflict markers), behind a `--headless --import` pass I ran FIRST because
+`assets/monsters/minibosses/nightman.glb` (the 53rd body) landed this merge:
+  IMPORT        rc=0
+  PARSE         rc=0 - 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error, 5 pre-existing invalid-UID
+                ext_resource WARNINGs on asset-kit .tres
+  TWITCH_PARSE  OK (8 checks)
+  COMMANDS_DOC  OK wrote 32 commands AND A TRUE NO-OP - `git status` on docs/COMMANDS.md empty
+                after the real generator ran, which is correct because I changed no data
+  L14_TEST      FAIL 1 of 24 AND THAT IS THE CORRECT ANSWER, NOT A DEFECT. The single FAIL is the
+                clean-load assertion, and the two arms that fired are MINIBOSS COUNT (publishes
+                51, feed rows 52) and MINIBOSS UNNAMED (["stiltman"]) - exactly the pair the
+                transient predicts. Both COMMANDS.md drift arms pass: 32 rows, unpublished [],
+                stale []. `nightman` is in NEITHER half, so the 53rd arms nothing here yet.
+
+ONE DEFECT FOUND THAT IS NOT MINE AND NOT THE TRANSIENT. The import pass errors on
+`web/icons/items/hat/turbary_hood.webp`: `src_image_len == 0`, ERR_FILE_CORRUPT, "Error importing".
+The file is ZERO BYTES on main and has been since 17 Nov 08:47. `web/` is the hub lane's. It does
+not fail the parse behind it and no gate of mine goes red on it, which is why it has survived
+unnoticed; but the icon cannot ever load. HUB LANE: that file needs rewriting or deleting.
+
+THE IMPORT OBSTRUCTION DID NOT RECUR, AND I CLEARED IT THE WAY B130 DID. 1065 untracked
+regenerable `*.import` files my own earlier passes left in this worktree (web/icons/**) were
+removed BEFORE merging, each one verified untracked with `git ls-files --error-unmatch` first;
+nothing tracked was touched, and the merge came through with 0 conflicts. That is the fourth hour
+running that this lane's own import pass has staged an obstruction for itself.
+
+LOCK. Claim 11:48:03, cap 12:13:03, DECLARED FINISH 11:51:50 - inside :52, exactly as the team
+lead's 11:1x addendum binds this lane; the cap sits past :52 and the declaration does not. All
+five engine runs finished at 11:48:37, so nothing was split or carried. Window checked BY PROCESS
+before claiming and again before releasing. My container clock read 11:45:54 against cruzader's
+11:46:09 this hour - 15 s, not the 4 minutes B130 found - but the stamps below are taken from the
+Windows clock through the Blender bridge regardless, which is the standing instruction.
+
+No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.

@@ -1,0 +1,520 @@
+{
+ "key": "roper",
+ "errors": [],
+ "empty_spans": [
+  "front/harness",
+  "back/face"
+ ],
+ "views": {
+  "front": {
+   "subject_px": 39068,
+   "owned": {
+    "man": {
+     "px": 12276,
+     "frac": 0.3142,
+     "alone_px": 18716,
+     "shadow_px": 6080,
+     "bbox_px": [
+      101,
+      273
+     ],
+     "bbox_m": [
+      0.744,
+      2.012
+     ],
+     "dark_px": 2027,
+     "pale_px": 455,
+     "dark_frac": 0.1651
+    },
+    "face": {
+     "px": 247,
+     "frac": 0.0063,
+     "alone_px": 248,
+     "shadow_px": 182,
+     "bbox_px": [
+      33,
+      13
+     ],
+     "bbox_m": [
+      0.243,
+      0.096
+     ],
+     "dark_px": 3,
+     "pale_px": 192,
+     "dark_frac": 0.0121
+    },
+    "frame": {
+     "px": 7427,
+     "frac": 0.1901,
+     "alone_px": 12545,
+     "shadow_px": 2013,
+     "bbox_px": [
+      131,
+      341
+     ],
+     "bbox_m": [
+      0.965,
+      2.513
+     ],
+     "dark_px": 4263,
+     "pale_px": 114,
+     "dark_frac": 0.574
+    },
+    "drum": {
+     "px": 4426,
+     "frac": 0.1133,
+     "alone_px": 7730,
+     "shadow_px": 597,
+     "bbox_px": [
+      96,
+      82
+     ],
+     "bbox_m": [
+      0.707,
+      0.604
+     ],
+     "dark_px": 2828,
+     "pale_px": 140,
+     "dark_frac": 0.639
+    },
+    "top": {
+     "px": 4975,
+     "frac": 0.1273,
+     "alone_px": 5841,
+     "shadow_px": 1302,
+     "bbox_px": [
+      118,
+      84
+     ],
+     "bbox_m": [
+      0.869,
+      0.619
+     ],
+     "dark_px": 1681,
+     "pale_px": 2109,
+     "dark_frac": 0.3379
+    },
+    "arms": {
+     "px": 3688,
+     "frac": 0.0944,
+     "alone_px": 3885,
+     "shadow_px": 653,
+     "bbox_px": [
+      141,
+      75
+     ],
+     "bbox_m": [
+      1.039,
+      0.553
+     ],
+     "dark_px": 257,
+     "pale_px": 4,
+     "dark_frac": 0.0697
+    },
+    "strands": {
+     "px": 6109,
+     "frac": 0.1564,
+     "alone_px": 6180,
+     "shadow_px": 1366,
+     "bbox_px": [
+      156,
+      204
+     ],
+     "bbox_m": [
+      1.149,
+      1.503
+     ],
+     "dark_px": 450,
+     "pale_px": 4312,
+     "dark_frac": 0.0737
+    },
+    "rope": {
+     "px": 3813,
+     "frac": 0.0976,
+     "alone_px": 5261,
+     "shadow_px": 494,
+     "bbox_px": [
+      41,
+      194
+     ],
+     "bbox_m": [
+      0.302,
+      1.429
+     ],
+     "dark_px": 2577,
+     "pale_px": 6,
+     "dark_frac": 0.6758
+    },
+    "harness": {
+     "px": 0,
+     "frac": 0.0,
+     "alone_px": 825,
+     "shadow_px": 0,
+     "note": "owns no pixel in this view"
+    }
+   },
+   "border_px": 0,
+   "easel": {
+    "rows": 204,
+    "runs_max": 5,
+    "runs3_frac": 0.7647,
+    "cross_bands": 0,
+    "spread_monotone_frac": 0.8325,
+    "width_px": [
+     2,
+     156
+    ],
+    "on_body_px": 2755
+   },
+   "apex_share": 0.4488
+  },
+  "side": {
+   "subject_px": 49800,
+   "owned": {
+    "man": {
+     "px": 15641,
+     "frac": 0.3141,
+     "alone_px": 19240,
+     "shadow_px": 3089,
+     "bbox_px": [
+      144,
+      260
+     ],
+     "bbox_m": [
+      1.061,
+      1.916
+     ],
+     "dark_px": 4954,
+     "pale_px": 40,
+     "dark_frac": 0.3167
+    },
+    "face": {
+     "px": 132,
+     "frac": 0.0027,
+     "alone_px": 149,
+     "shadow_px": 12,
+     "bbox_px": [
+      12,
+      13
+     ],
+     "bbox_m": [
+      0.088,
+      0.096
+     ],
+     "dark_px": 1,
+     "pale_px": 109,
+     "dark_frac": 0.0076
+    },
+    "frame": {
+     "px": 10993,
+     "frac": 0.2207,
+     "alone_px": 12789,
+     "shadow_px": 1162,
+     "bbox_px": [
+      134,
+      340
+     ],
+     "bbox_m": [
+      0.987,
+      2.505
+     ],
+     "dark_px": 10136,
+     "pale_px": 0,
+     "dark_frac": 0.922
+    },
+    "drum": {
+     "px": 5847,
+     "frac": 0.1174,
+     "alone_px": 6187,
+     "shadow_px": 3608,
+     "bbox_px": [
+      83,
+      93
+     ],
+     "bbox_m": [
+      0.612,
+      0.685
+     ],
+     "dark_px": 5385,
+     "pale_px": 0,
+     "dark_frac": 0.921
+    },
+    "top": {
+     "px": 3974,
+     "frac": 0.0798,
+     "alone_px": 4911,
+     "shadow_px": 2663,
+     "bbox_px": [
+      95,
+      83
+     ],
+     "bbox_m": [
+      0.7,
+      0.612
+     ],
+     "dark_px": 1293,
+     "pale_px": 1632,
+     "dark_frac": 0.3254
+    },
+    "arms": {
+     "px": 3518,
+     "frac": 0.0706,
+     "alone_px": 4778,
+     "shadow_px": 2982,
+     "bbox_px": [
+      133,
+      64
+     ],
+     "bbox_m": [
+      0.98,
+      0.472
+     ],
+     "dark_px": 348,
+     "pale_px": 99,
+     "dark_frac": 0.0989
+    },
+    "strands": {
+     "px": 6016,
+     "frac": 0.1208,
+     "alone_px": 6059,
+     "shadow_px": 1679,
+     "bbox_px": [
+      168,
+      194
+     ],
+     "bbox_m": [
+      1.238,
+      1.429
+     ],
+     "dark_px": 581,
+     "pale_px": 4202,
+     "dark_frac": 0.0966
+    },
+    "rope": {
+     "px": 5276,
+     "frac": 0.1059,
+     "alone_px": 6467,
+     "shadow_px": 3690,
+     "bbox_px": [
+      146,
+      181
+     ],
+     "bbox_m": [
+      1.076,
+      1.334
+     ],
+     "dark_px": 4753,
+     "pale_px": 0,
+     "dark_frac": 0.9009
+    },
+    "harness": {
+     "px": 88,
+     "frac": 0.0018,
+     "alone_px": 836,
+     "shadow_px": 4,
+     "bbox_px": [
+      10,
+      19
+     ],
+     "bbox_m": [
+      0.074,
+      0.14
+     ],
+     "dark_px": 69,
+     "pale_px": 0,
+     "dark_frac": 0.7841
+    }
+   },
+   "border_px": 0,
+   "easel": {
+    "rows": 194,
+    "runs_max": 3,
+    "runs3_frac": 0.1495,
+    "cross_bands": 1,
+    "spread_monotone_frac": 0.6891,
+    "width_px": [
+     1,
+     90
+    ],
+    "on_body_px": 0
+   },
+   "apex_share": 0.3978
+  },
+  "back": {
+   "subject_px": 37406,
+   "owned": {
+    "man": {
+     "px": 11505,
+     "frac": 0.3076,
+     "alone_px": 18528,
+     "shadow_px": 1582,
+     "bbox_px": [
+      100,
+      268
+     ],
+     "bbox_m": [
+      0.737,
+      1.975
+     ],
+     "dark_px": 2401,
+     "pale_px": 24,
+     "dark_frac": 0.2087
+    },
+    "face": {
+     "px": 0,
+     "frac": 0.0,
+     "alone_px": 246,
+     "shadow_px": 1,
+     "note": "owns no pixel in this view"
+    },
+    "frame": {
+     "px": 12598,
+     "frac": 0.3368,
+     "alone_px": 12993,
+     "shadow_px": 2991,
+     "bbox_px": [
+      131,
+      343
+     ],
+     "bbox_m": [
+      0.965,
+      2.527
+     ],
+     "dark_px": 10313,
+     "pale_px": 4,
+     "dark_frac": 0.8186
+    },
+    "drum": {
+     "px": 7592,
+     "frac": 0.203,
+     "alone_px": 7740,
+     "shadow_px": 4166,
+     "bbox_px": [
+      147,
+      83
+     ],
+     "bbox_m": [
+      1.083,
+      0.612
+     ],
+     "dark_px": 3768,
+     "pale_px": 0,
+     "dark_frac": 0.4963
+    },
+    "top": {
+     "px": 335,
+     "frac": 0.009,
+     "alone_px": 5832,
+     "shadow_px": 672,
+     "bbox_px": [
+      122,
+      31
+     ],
+     "bbox_m": [
+      0.899,
+      0.228
+     ],
+     "dark_px": 131,
+     "pale_px": 35,
+     "dark_frac": 0.391
+    },
+    "arms": {
+     "px": 2025,
+     "frac": 0.0541,
+     "alone_px": 2967,
+     "shadow_px": 622,
+     "bbox_px": [
+      122,
+      53
+     ],
+     "bbox_m": [
+      0.899,
+      0.391
+     ],
+     "dark_px": 1103,
+     "pale_px": 10,
+     "dark_frac": 0.5447
+    },
+    "strands": {
+     "px": 1089,
+     "frac": 0.0291,
+     "alone_px": 5437,
+     "shadow_px": 153,
+     "bbox_px": [
+      155,
+      119
+     ],
+     "bbox_m": [
+      1.142,
+      0.877
+     ],
+     "dark_px": 201,
+     "pale_px": 398,
+     "dark_frac": 0.1846
+    },
+    "rope": {
+     "px": 4603,
+     "frac": 0.1231,
+     "alone_px": 5152,
+     "shadow_px": 3300,
+     "bbox_px": [
+      82,
+      208
+     ],
+     "bbox_m": [
+      0.604,
+      1.533
+     ],
+     "dark_px": 2877,
+     "pale_px": 0,
+     "dark_frac": 0.625
+    },
+    "harness": {
+     "px": 314,
+     "frac": 0.0084,
+     "alone_px": 723,
+     "shadow_px": 20,
+     "bbox_px": [
+      55,
+      15
+     ],
+     "bbox_m": [
+      0.405,
+      0.111
+     ],
+     "dark_px": 236,
+     "pale_px": 0,
+     "dark_frac": 0.7516
+    }
+   },
+   "border_px": 0,
+   "easel": {
+    "rows": 109,
+    "runs_max": 2,
+    "runs3_frac": 0.0,
+    "cross_bands": 1,
+    "spread_monotone_frac": 0.6944,
+    "width_px": [
+     2,
+     32
+    ],
+    "on_body_px": 70
+   },
+   "apex_share": 0.2353
+  }
+ },
+ "px_per_m": 135.714,
+ "frame_w": 5.6,
+ "bounds": [
+  -0.56656,
+  -1.99311,
+  0.0,
+  0.79676,
+  1.1553,
+  2.46
+ ],
+ "height_m": 2.46,
+ "engine": "BLENDER_EEVEE",
+ "tag": "_p8c",
+ "ok": true
+}

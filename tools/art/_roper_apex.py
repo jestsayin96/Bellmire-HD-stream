@@ -195,6 +195,7 @@ def probe(repo, key, outdir):
                                  % (key, vname, edge))
         lum = (0.2126 * FULL[:, :, 0] + 0.7152 * FULL[:, :, 1] +
                0.0722 * FULL[:, :, 2])
+        ALONE, OWNED = {}, {}
         for nm in spans:
             grp = byname.get(nm, [])
             if not grp:
@@ -218,6 +219,7 @@ def probe(repo, key, outdir):
             own = AL[:, :, 3] > EPS
             shadow = int((moved & ~own).sum())
             moved = moved & own
+            ALONE[nm], OWNED[nm] = own, moved
             n = int(moved.sum())
             ent = {"px": n, "frac": round(n / float(cell["subject_px"]), 4),
                    "alone_px": int(own.sum()), "shadow_px": shadow}
@@ -234,6 +236,13 @@ def probe(repo, key, outdir):
                 ent["pale_px"] = int((v > 0.55).sum())
                 ent["dark_frac"] = round(ent["dark_px"] / float(n), 4)
             cell["owned"][nm] = ent
+        # *** PASS 8 - THE LOWER HALF, AND THE APEX NUMBER CANNOT SEE IT. ***
+        # `apex_share` answers "is the top big beside the strands" and says
+        # nothing about the SHAPE the strands make. The drum passed and the
+        # easel below it did not, with apex_share 0.4639 on the very render
+        # that failed. So the easel gets its own instrument.
+        cell["easel"] = _easel(OWNED.get("strands"), ALONE.get("man"),
+                               rep, key, vname)
         ap = cell["owned"].get("top", {}).get("px", 0)
         st = cell["owned"].get("strands", {}).get("px", 0)
         if ap + st == 0:
@@ -245,6 +254,80 @@ def probe(repo, key, outdir):
             cell["apex_share"] = round(ap / float(ap + st), 4)
         rep["views"][vname] = cell
     return rep
+
+
+def _easel(owned, man_alone, rep, key, vname):
+    """IS THE LOWER HALF AN EASEL. Asked of the picture, not of the geometry.
+
+    An easel - or a surveyor's tripod, which is the word the team lead used
+    and the word pass 4 used before him - is not a colour or a thickness. It
+    is TWO PROPERTIES OF THE SILHOUETTE, and both are countable on the
+    strands' own VISIBLE pixels in one view:
+
+      1. THREE RUNS ON EVERY SCANLINE. Legs leave a point and never meet
+         again, so a horizontal cut anywhere below the apex crosses exactly
+         three of them. Cords that are being laid up cross one another, and a
+         crossing shows as a scanline where the run count DROPS and then
+         comes back. `cross_bands` counts those bands; a tripod scores 0 and
+         nothing else can.
+      2. THE SPREAD GROWS ON EVERY SCANLINE. Legs diverge monotonically.
+         `spread_monotone_frac` is the fraction of scanline steps where the
+         group gets no narrower going down. A tripod scores ~1.0.
+
+    `on_body_px` is the cost arm, not a virtue: strand pixels lying inside the
+    man's own silhouette. Pulling the splay in to kill the tripod is exactly
+    what drives this number up, and it is the shape Mr. E struck off the
+    Changer, so it is reported on every run whether it moved or not.
+
+    IT GOES RED ON EMPTY. A run-length statistic over zero scanlines reads
+    green and means nothing - that is this lane's own trap 4 and it has
+    already nearly cost one real fix.
+    """
+    out = {}
+    if owned is None or not owned.any():
+        rep["errors"].append("%s %s: strands own no pixel - the easel "
+                             "statistics are computed over nothing"
+                             % (key, vname))
+        return {"rows": 0, "note": "no strand pixels"}
+    ys = np.nonzero(owned.any(axis=1))[0]
+    y0, y1 = int(ys.min()), int(ys.max())
+    runs, width = [], []
+    for y in range(y0, y1 + 1):
+        row = owned[y]
+        if not row.any():
+            continue
+        d = np.diff(row.astype(np.int8))
+        n = int((d == 1).sum()) + (1 if row[0] else 0)
+        xs = np.nonzero(row)[0]
+        runs.append(n)
+        width.append(int(xs.max() - xs.min() + 1))
+    out["rows"] = len(runs)
+    if len(runs) < 8:
+        rep["errors"].append("%s %s: only %d strand scanlines"
+                             % (key, vname, len(runs)))
+        return out
+    out["runs_max"] = int(max(runs))
+    out["runs3_frac"] = round(sum(1 for r in runs if r >= 3) / float(len(runs)), 4)
+    # A crossing band: a stretch where the count sits BELOW the group's own
+    # maximum with full-count scanlines on both sides of it. The apex end is
+    # excluded by construction because it has nothing above it.
+    top = out["runs_max"]
+    bands, inside, seen_full = 0, False, False
+    for r in runs:
+        if r >= top:
+            if inside:
+                bands += 1
+                inside = False
+            seen_full = True
+        elif seen_full:
+            inside = True
+    out["cross_bands"] = bands
+    steps = [1 if width[i + 1] >= width[i] else 0 for i in range(len(width) - 1)]
+    out["spread_monotone_frac"] = round(sum(steps) / float(len(steps)), 4)
+    out["width_px"] = [int(min(width)), int(max(width))]
+    if man_alone is not None:
+        out["on_body_px"] = int((owned & man_alone).sum())
+    return out
 
 
 def main():

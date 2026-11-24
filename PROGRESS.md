@@ -17382,3 +17382,62 @@ Lock read from R WORKING copy at decision time: last line chat bot B130 IDLE 202
 Item: R WORK_PLAN TAKE THIS NEXT (09:58 block) HUD row (10:52) says nothing HUD-owned is open, eighth time; this hour's movement is delve.gd, dungeon_hd.gd, lore_lines.json, assets/monsters, tools/art, docs, renders - no HUD file. The standing rarity-hue half of System 2 is STRUCK: shipped as U55 (ui_theme.gd:176 / rarity_hue :196 / rarity_ink :200 / rarity_pip :204). L74 not opened under the freeze.
 Next firing (11:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none (cadence question remains with the supervisor).
+## B130 - 2026-11-24 10:45 (chat bot)
+
+THE REPUBLISH IS PAID AND THE CASCADE IS CLOSED AT 51. Both halves read 51 this hour, so the
+50 -> 51 that B129 correctly declined is now owed and done.
+
+I MEASURED BOTH HALVES MYSELF BEFORE TOUCHING A FILE, brace-matched and string-aware, on merged
+main `ca3a0a80` (my HEAD after merge `2d8b3fa0`; ff of origin/chatbot then merge of main, 27 files,
+0 conflict markers):
+  - `Delve.MB_NAME` = 51, 0 dupes, `panner` IN (it was OUT at 09:49 - scripts/delve.gd changed in
+    this very merge, which is what moved the count)
+  - `data/lore_lines.json` -> `miniboss_feed.by_key` = 51, `panner` IN
+  - `by_key - MB_NAME` = [] and `MB_NAME - by_key` = [] - ZERO DRIFT BOTH DIRECTIONS, zero ghosts
+  - `stiltman` is in NEITHER half, so the 52nd body still changes nothing here
+
+THE EDIT: two leaves in `data/commands.json`, `commands.miniboss.short` and `.what`, "The 50
+elites" -> "The 51 elites". Nothing else. Proved by a recursive walk of the parsed tree against a
+pre-edit copy: exactly 2 changed leaves, every other key byte-identical, top-level key order and
+command order identical, 32 keys, 18000 bytes before and after. `armoury.cost` ("50 / 150 / 400 /
+1000 gold by tier") contains a 50 and was deliberately left alone - a blind replace would have
+corrupted it.
+
+DRIFT CHECKED BOTH DIRECTIONS: `order` == `commands` (32 each, symmetric difference empty); every
+entry in the data is answered by code; nothing the code answers is unpublished. My first reverse
+sweep flagged 18 tokens and ALL EIGHTEEN WERE MY OWN REGEX'S FALSE POSITIVES - number-word maps
+("seven": 7), board kinds, internal dictionaries, and the `testbits`/`testsub`/`testpoints` test
+verbs that are deliberately unpublished. I checked each by hand rather than report a drift that
+was not there.
+
+FOUR GATES GREEN on the merged tree, behind a `--headless --import` pass run FIRST (8.2 s) because
+`stiltman.glb` changed bytes in this merge:
+  - parse: `--headless --quit-after 300` rc=0, 23.2 s, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error,
+    8 pre-existing WARNINGs (all one class: invalid UID on the asset-kit .tres materials)
+  - COMMANDS_DOC OK wrote 32 commands - NOT a no-op this hour, and correctly so: I changed the
+    data, so the real generator rewrote docs/COMMANDS.md and carried 51 into row 39. The generator
+    is the authority; I regenerated rather than hand-editing the doc.
+  - TWITCH_PARSE OK (8 checks, 8 PASS)
+  - L14_TEST OK - 24 of 24, UP FROM 23 of 24. The one FAIL at 09:49 was its clean-load assertion
+    with the MINIBOSS COUNT and MINIBOSS UNNAMED arms firing; this run reports "no COMMANDS_DATA
+    guard arm fired on the load (0 fired: [])". Both COMMANDS.md drift arms pass too: 32 rows,
+    unpublished [] and stale []. That is the cascade closing, measured by the real gate and not by
+    me.
+
+ONE THING I GOT WRONG AND AM NOT HIDING: MY LOCK STAMP IS FOUR MINUTES FAST. I stamped the claim
+`10:52:30-06:00`, but the Windows box wrote it at ~10:48:30 - my container's clock runs ~4 min
+ahead of cruzader's, and I took my timestamp from the container. B129's stamp was 2 min LATE and
+therefore conservative; mine errs the OTHER way, which is the dangerous direction, because the cap
+it declares (11:17:30) is four minutes more than I was entitled to. THE REAL CLAIM IS 10:48:30 AND
+THE REAL CAP IS 11:13:30. I released well inside both. Any lane reading the file should trust the
+Windows-side write time, not my stamp. The fix for the next seat: take the timestamp from the
+Windows side (the Blender bridge), never from the Linux container.
+
+The import-pass obstruction B129 and B128 both hit did NOT recur, because I cleared it before
+merging instead of after: I removed 520 untracked regenerable `web/icons/**/*.webp.import` files
+my own earlier import pass had left in this worktree, each verified untracked by
+`git ls-files --error-unmatch` before deletion. Nothing tracked was touched. Third hour in a row
+this lane's import pass has manufactured an obstruction; the ruling asked for in B129 still stands.
+
+No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.

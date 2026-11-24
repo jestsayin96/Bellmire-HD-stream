@@ -8893,10 +8893,10 @@
    "creature_h": 2.46,
    "hero_h": 2.45,
    "ratio": 1.0,
-   "pair_w": 3.24,
+   "pair_w": 3.22,
    "gap_x": 0.45,
    "margin_x": 0.12,
-   "air_x": 2.358,
+   "air_x": 2.375,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -8908,45 +8908,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 38786,
-      "vis": 38786,
-      "delta": 44642,
+      "alone": 37930,
+      "vis": 37930,
+      "delta": 44119,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43673,
-      "vis": 43673,
-      "delta": 49785,
+      "alone": 43677,
+      "vis": 43677,
+      "delta": 49922,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 48816,
-      "vis": 48816,
-      "delta": 56603,
+      "alone": 48101,
+      "vis": 48101,
+      "delta": 55765,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37769,
-      "vis": 37769,
-      "delta": 44895,
+      "alone": 37771,
+      "vis": 37771,
+      "delta": 44765,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 36911,
-      "vis": 36911,
-      "delta": 42314,
+      "alone": 36411,
+      "vis": 36411,
+      "delta": 41931,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44023,
-      "vis": 44023,
-      "delta": 49257,
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 49237,
       "seen": 1.0
      },
      "proves": true
@@ -8974,12 +8974,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 255360,
-     "shadow_px": 3745,
-     "mean": 0.4222,
-     "max": 0.7107,
+     "plane_px": 254600,
+     "shadow_px": 4018,
+     "mean": 0.4262,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 3560,
+     "rim_filled_px": 3305,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -8988,12 +8988,12 @@
      }
     },
     "side": {
-     "plane_px": 244720,
-     "shadow_px": 4430,
-     "mean": 0.382,
+     "plane_px": 243960,
+     "shadow_px": 4418,
+     "mean": 0.3816,
      "max": 0.7077,
      "error": null,
-     "rim_filled_px": 5908,
+     "rim_filled_px": 5825,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9002,12 +9002,12 @@
      }
     },
     "back": {
-     "plane_px": 253840,
-     "shadow_px": 3606,
-     "mean": 0.492,
+     "plane_px": 253080,
+     "shadow_px": 3567,
+     "mean": 0.495,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 3157,
+     "rim_filled_px": 3035,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9021,16 +9021,16 @@
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
-     159,
-     158
+     160,
+     159
     ],
     "side": [
-     34,
-     36
+     35,
+     37
     ],
     "back": [
-     158,
-     159
+     159,
+     160
     ]
    },
    "frame_edge_disk": {
@@ -9054,7 +9054,7 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 34,
+   "air_px_min": 35,
    "air_px_tightest_view": "side"
   }
  },

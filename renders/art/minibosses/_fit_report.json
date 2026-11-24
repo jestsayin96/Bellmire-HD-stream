@@ -9787,14 +9787,23 @@
   "note": "MEASURED 21 Nov 03:4x CT, not remembered: 264 of 264 cells read seen 1.0 and vis == alone in EVERY ONE. The method is sound - with/without through one locked camera - but place() holds measured air between the two bodies (air_px >= 8 in the tightest view of every row), so neither can ever hide the other and the answer is settled before the render. THIS CELL IS A TAKEN-BY-CONSTRUCTION PASS, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never again be cited as if it did. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone==0 still catches a blank or mis-aimed render. The question it was being read for is answered by `self_seen`."
  },
  "self_seen": {
-  "asks": "how much of THE MAN survives HIS OWN GEAR, per view - the viewer's question",
-  "instrument": "tools/art/_backread.py, 21 Nov 03:3x CT -> _backread/_selfseen_all.json",
+  "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
+  "instrument": "tools/art/_backread.py",
+  "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
-  "bar_provenance": "0.75, AND THE FIRST BAR I WROTE THIS RUN WAS 0.70 AND THE PICTURE OVERRULED IT. At 0.70 the boiler's side cell - the one defect the team lead handed me - printed GREEN on my own contact sheet by six thousandths (0.7057), while the tile shows a man substantially behind his own pan and pour. A bar that passes the fault it was built to catch is set too low. It is still a bar I CHOSE against nine pictures I looked at, not a measured constant, and NO VERDICT IN THIS FILE TURNS ON IT: it names rows, it does not fail them.",
-  "measured_bodies": 25,
-  "measured_cells": 75,
-  "unmeasured_bodies": 21,
-  "unmeasured": [
+  "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`.",
+  "instrument_errors": [
+   "panner: the man span merged to no object"
+  ],
+  "measured_cells": 93,
+  "measured_bodies": 31,
+  "no_man": [
+   "panner"
+  ],
+  "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
+  "census_measured_at": "run tools/art/_selfseen_census.py",
+  "not_measurable": [
    "bellman",
    "cook",
    "drillmaster",
@@ -9802,6 +9811,7 @@
    "hurdleman",
    "jointer",
    "loader",
+   "nightman",
    "porter",
    "quartermaster",
    "rammer",
@@ -9812,96 +9822,264 @@
    "snuffer",
    "snuffer_chibi",
    "sower",
+   "stiltman",
    "stoker",
    "tallyman",
    "tallyman_chibi",
    "tanner"
   ],
-  "unmeasured_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green. 21 of 46.",
+  "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
+  "uncovered": [],
+  "uncovered_reason": "MEASURABLE and carrying no self_seen cell - the instrument could have answered and did not. RED: this is the silent absence that hid nine bodies for three days.",
   "under_bar": [
    {
+    "rank": 1,
     "key": "fuller",
     "view": "side",
     "man_seen": 0.4611
    },
    {
+    "rank": 2,
     "key": "beadle",
     "view": "side",
     "man_seen": 0.5174
    },
    {
+    "rank": 3,
+    "key": "blower",
+    "view": "back",
+    "man_seen": 0.5228
+   },
+   {
+    "rank": 4,
     "key": "paviser",
     "view": "front",
     "man_seen": 0.574
    },
    {
+    "rank": 5,
     "key": "moulder",
     "view": "back",
     "man_seen": 0.5837
    },
    {
+    "rank": 6,
     "key": "dyer",
     "view": "back",
     "man_seen": 0.5949
    },
    {
+    "rank": 7,
+    "key": "roper",
+    "view": "back",
+    "man_seen": 0.6151
+   },
+   {
+    "rank": 8,
+    "key": "roper",
+    "view": "front",
+    "man_seen": 0.6163
+   },
+   {
+    "rank": 9,
     "key": "greener",
     "view": "back",
     "man_seen": 0.6257
    },
    {
+    "rank": 10,
     "key": "beadle",
     "view": "front",
     "man_seen": 0.6325
    },
    {
+    "rank": 11,
+    "key": "stopper",
+    "view": "side",
+    "man_seen": 0.6341
+   },
+   {
+    "rank": 12,
     "key": "ferryman",
     "view": "front",
     "man_seen": 0.6405
    },
    {
+    "rank": 13,
+    "key": "almoner",
+    "view": "side",
+    "man_seen": 0.6501
+   },
+   {
+    "rank": 14,
     "key": "beadle",
     "view": "back",
     "man_seen": 0.6854
    },
    {
+    "rank": 15,
     "key": "relief",
     "view": "front",
     "man_seen": 0.6887
    },
    {
+    "rank": 16,
     "key": "sealer",
     "view": "back",
     "man_seen": 0.6949
    },
    {
+    "rank": 17,
+    "key": "stopper",
+    "view": "front",
+    "man_seen": 0.6989
+   },
+   {
+    "rank": 18,
     "key": "boiler",
     "view": "side",
     "man_seen": 0.7057
    },
    {
+    "rank": 19,
     "key": "winder",
     "view": "front",
     "man_seen": 0.7102
    },
    {
+    "rank": 20,
     "key": "fenman",
     "view": "side",
     "man_seen": 0.7301
+   },
+   {
+    "rank": 21,
+    "key": "blower",
+    "view": "side",
+    "man_seen": 0.7469
    }
   ],
-  "looked_at": "renders/art/minibosses/_backread/_selfseen_worst_sheet.png - nine tiles, the eight worst cells plus pitman/side 0.9967 as the honest top end. The picture agrees with the number on eight of nine: fuller/side has no findable person in it; paviser's man is behind his own pavise but for a head and one arm; dyer/back and greener/back are a sliver of dark arm past hanging cloth; moulder/back is a pale ball with a man behind it; beadle/side reads as a barrel. THE ONE DISAGREEMENT IS THE FERRYMAN at 0.6405 front: a figure with a pole does read in that tile, and the score is pushed down by the punt and pole crossing him rather than by a body that cannot be found. There the number is the suspect, not the picture - it is named, not condemned.",
-  "note": "25 bodies x 3 views = 75 cells. The register's own `visibility.seen` reads 1.0 on every one of these same cells. THIS INSTRUMENT MOVES: 0.4611 to 0.9998, 14 cells under the bar. The boiler's 0.7057 side - the one defect the 02:58 row carried - is the TENTH worst in the house, and four bodies are worse on a view than the dyer and greener backs called out at 01:34. Red on empty is inherited from _backread: a man-alone mask under 500 px is RED, not 0.0 passed off as a reading."
+  "under_bar_count": 21,
+  "top_end": {
+   "key": "tither",
+   "view": "back",
+   "man_seen": 0.9999
+  },
+  "verdict": "GREEN"
  },
  "unproved_cells": [],
  "measured": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
   "nightman"
  ],
  "asked": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
   "nightman"
  ],
  "blank_check": {
-  "files": 3,
+  "files": 159,
   "failures": []
  },
  "red_summary": {
@@ -9911,6 +10089,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (55), re-derived from stored measurements; 1 of them rendered this run"
+ "rendered_this_run": 0,
+ "verdict_scope": "every row in pairs (55), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 55 judged from stored measurements)"
 }

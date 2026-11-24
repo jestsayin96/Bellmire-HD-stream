@@ -161,7 +161,8 @@
     "beadle_body_man",
     "beadle_dark_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "boiler": {
    "key": "boiler",
@@ -326,7 +327,8 @@
     "boiler_bone_man",
     "boiler_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "comfitmaker": {
    "key": "comfitmaker",
@@ -490,7 +492,8 @@
     "comfitmaker_bone_man",
     "comfitmaker_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "dauber": {
    "key": "dauber",
@@ -655,7 +658,8 @@
     "dauber_bone_man",
     "dauber_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "drover": {
    "key": "drover",
@@ -819,7 +823,8 @@
     "drover_dark_man",
     "drover_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "dyer": {
    "key": "dyer",
@@ -984,7 +989,8 @@
     "dyer_bone_man",
     "dyer_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "fenman": {
    "key": "fenman",
@@ -1147,7 +1153,8 @@
     "fenman_body_man",
     "fenman_dark_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "ferryman": {
    "key": "ferryman",
@@ -1311,7 +1318,8 @@
     "ferryman_dark_man",
     "ferryman_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "fuller": {
    "key": "fuller",
@@ -1476,7 +1484,8 @@
     "fuller_bone_man",
     "fuller_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "greener": {
    "key": "greener",
@@ -1639,7 +1648,8 @@
     "greener_dark_man",
     "greener_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "hooper": {
    "key": "hooper",
@@ -1804,7 +1814,8 @@
     "hooper_bone_man",
     "hooper_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "leech": {
    "key": "leech",
@@ -1968,7 +1979,8 @@
     "leech_bone_man",
     "leech_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "moulder": {
    "key": "moulder",
@@ -2132,7 +2144,8 @@
     "moulder_dark_man",
     "moulder_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "paviser": {
    "key": "paviser",
@@ -2296,7 +2309,8 @@
     "paviser_dark_man",
     "paviser_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "pitman": {
    "key": "pitman",
@@ -2459,7 +2473,8 @@
     "pitman_dark_man",
     "pitman_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "pressman": {
    "key": "pressman",
@@ -2624,7 +2639,8 @@
     "pressman_bone_man",
     "pressman_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "ratcatcher": {
    "key": "ratcatcher",
@@ -2788,7 +2804,8 @@
     "ratcatcher_dark_man",
     "ratcatcher_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "reeve": {
    "key": "reeve",
@@ -2952,7 +2969,8 @@
     "reeve_dark_man",
     "reeve_bone_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "relief": {
    "key": "relief",
@@ -3117,7 +3135,8 @@
     "relief_bone_man",
     "relief_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "scraper": {
    "key": "scraper",
@@ -3282,7 +3301,8 @@
     "scraper_bone_man",
     "scraper_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "sealer": {
    "key": "sealer",
@@ -3447,7 +3467,8 @@
     "sealer_bone_man",
     "sealer_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "stackman": {
    "key": "stackman",
@@ -3612,7 +3633,8 @@
     "stackman_bone_man",
     "stackman_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "strickler": {
    "key": "strickler",
@@ -3777,7 +3799,8 @@
     "strickler_bone_man",
     "strickler_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "tapster": {
    "key": "tapster",
@@ -3941,7 +3964,8 @@
     "tapster_dark_man",
     "tapster_bone_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
   },
   "winder": {
    "key": "winder",
@@ -4106,9 +4130,1034 @@
     "winder_bone_man",
     "winder_glow_man"
    ],
-   "engine": "BLENDER_EEVEE"
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "21 Nov 2026 03:3x CT"
+  },
+  "almoner": {
+   "key": "almoner",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 82518,
+     "man_seen_px": 76925,
+     "man_seen": 0.9322,
+     "value_creature": {
+      "px": 157763,
+      "p5": 0.1179,
+      "p50": 0.4308,
+      "p95": 0.5882,
+      "spread": 0.4703,
+      "dark_frac": 0.1531,
+      "bands": [
+       0.0695,
+       0.1764,
+       0.2165,
+       0.1606,
+       0.3374,
+       0.0364,
+       0.0032,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 76925,
+      "p5": 0.1611,
+      "p50": 0.4829,
+      "p95": 0.5417,
+      "spread": 0.3806,
+      "dark_frac": 0.0579,
+      "bands": [
+       0.0392,
+       0.1096,
+       0.1869,
+       0.267,
+       0.3806,
+       0.0162,
+       0.0005,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 73836,
+     "man_seen_px": 48002,
+     "man_seen": 0.6501,
+     "value_creature": {
+      "px": 99661,
+      "p5": 0.1404,
+      "p50": 0.3647,
+      "p95": 0.6386,
+      "spread": 0.4983,
+      "dark_frac": 0.1459,
+      "bands": [
+       0.0335,
+       0.2648,
+       0.2079,
+       0.1961,
+       0.2367,
+       0.0515,
+       0.0096,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 48002,
+      "p5": 0.228,
+      "p50": 0.4734,
+      "p95": 0.5509,
+      "spread": 0.3229,
+      "dark_frac": 0.0339,
+      "bands": [
+       0.0091,
+       0.1472,
+       0.1763,
+       0.341,
+       0.3142,
+       0.0107,
+       0.0014,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 82002,
+     "man_seen_px": 78622,
+     "man_seen": 0.9588,
+     "value_creature": {
+      "px": 153758,
+      "p5": 0.1443,
+      "p50": 0.3939,
+      "p95": 0.5778,
+      "spread": 0.4335,
+      "dark_frac": 0.185,
+      "bands": [
+       0.036,
+       0.2412,
+       0.2133,
+       0.1488,
+       0.3213,
+       0.0307,
+       0.0087,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 78622,
+      "p5": 0.2479,
+      "p50": 0.5067,
+      "p95": 0.5608,
+      "spread": 0.3129,
+      "dark_frac": 0.0191,
+      "bands": [
+       0.0106,
+       0.0532,
+       0.1424,
+       0.2394,
+       0.5544,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "bounds_control": [
+    -1.7047,
+    -0.86132,
+    0.0,
+    0.88894,
+    0.38015,
+    2.52
+   ],
+   "bounds_split": [
+    -1.7047,
+    -0.86132,
+    0.0,
+    0.88894,
+    0.38015,
+    2.52
+   ],
+   "objs_control": 4,
+   "objs_split": 7,
+   "item_counts": {
+    "inside": 15,
+    "outside": 22,
+    "total": 37
+   },
+   "man_objs": [
+    "almoner_body_man",
+    "almoner_dark_man",
+    "almoner_bone_man",
+    "almoner_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "blower": {
+   "key": "blower",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 124337,
+     "man_seen_px": 103226,
+     "man_seen": 0.8302,
+     "value_creature": {
+      "px": 165154,
+      "p5": 0.0815,
+      "p50": 0.2616,
+      "p95": 0.6454,
+      "spread": 0.5639,
+      "dark_frac": 0.2256,
+      "bands": [
+       0.065,
+       0.3255,
+       0.3997,
+       0.0286,
+       0.0904,
+       0.0855,
+       0.0054,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 103226,
+      "p5": 0.0731,
+      "p50": 0.2569,
+      "p95": 0.3239,
+      "spread": 0.2507,
+      "dark_frac": 0.1885,
+      "bands": [
+       0.0746,
+       0.3354,
+       0.5668,
+       0.0071,
+       0.0045,
+       0.0033,
+       0.0082,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "side": {
+     "man_alone_px": 106182,
+     "man_seen_px": 79304,
+     "man_seen": 0.7469,
+     "value_creature": {
+      "px": 171810,
+      "p5": 0.0852,
+      "p50": 0.2863,
+      "p95": 0.6941,
+      "spread": 0.6089,
+      "dark_frac": 0.2219,
+      "bands": [
+       0.0812,
+       0.2166,
+       0.3982,
+       0.0481,
+       0.1169,
+       0.1374,
+       0.0016,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 79304,
+      "p5": 0.0894,
+      "p50": 0.2771,
+      "p95": 0.3519,
+      "spread": 0.2625,
+      "dark_frac": 0.1732,
+      "bands": [
+       0.0814,
+       0.2159,
+       0.6622,
+       0.0153,
+       0.0148,
+       0.0074,
+       0.003,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 125287,
+     "man_seen_px": 65505,
+     "man_seen": 0.5228,
+     "value_creature": {
+      "px": 166001,
+      "p5": 0.1208,
+      "p50": 0.2927,
+      "p95": 0.6669,
+      "spread": 0.5462,
+      "dark_frac": 0.2163,
+      "bands": [
+       0.053,
+       0.2162,
+       0.3596,
+       0.0768,
+       0.1358,
+       0.1586,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 6
+     },
+     "value_man_visible": {
+      "px": 65505,
+      "p5": 0.1508,
+      "p50": 0.2779,
+      "p95": 0.4689,
+      "spread": 0.3182,
+      "dark_frac": 0.0905,
+      "bands": [
+       0.0356,
+       0.1519,
+       0.7155,
+       0.0582,
+       0.0258,
+       0.0131,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "bounds_control": [
+    -0.72331,
+    -0.85856,
+    0.0,
+    0.72331,
+    1.02343,
+    2.48
+   ],
+   "bounds_split": [
+    -0.72331,
+    -0.85856,
+    0.0,
+    0.72331,
+    1.02343,
+    2.48
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 12,
+    "outside": 47,
+    "total": 59
+   },
+   "man_objs": [
+    "blower_body_man",
+    "blower_dark_man",
+    "blower_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "changer": {
+   "key": "changer",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 91276,
+     "man_seen_px": 88210,
+     "man_seen": 0.9664,
+     "value_creature": {
+      "px": 124947,
+      "p5": 0.102,
+      "p50": 0.2667,
+      "p95": 0.6599,
+      "spread": 0.5579,
+      "dark_frac": 0.2753,
+      "bands": [
+       0.0766,
+       0.3157,
+       0.5188,
+       0.0138,
+       0.0108,
+       0.0644,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 88210,
+      "p5": 0.1059,
+      "p50": 0.2683,
+      "p95": 0.3257,
+      "spread": 0.2199,
+      "dark_frac": 0.1145,
+      "bands": [
+       0.0632,
+       0.1999,
+       0.7223,
+       0.0082,
+       0.0015,
+       0.0048,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "side": {
+     "man_alone_px": 74132,
+     "man_seen_px": 73593,
+     "man_seen": 0.9927,
+     "value_creature": {
+      "px": 110823,
+      "p5": 0.0625,
+      "p50": 0.2502,
+      "p95": 0.6448,
+      "spread": 0.5823,
+      "dark_frac": 0.3787,
+      "bands": [
+       0.1195,
+       0.3799,
+       0.4212,
+       0.0137,
+       0.0059,
+       0.0599,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 73593,
+      "p5": 0.0504,
+      "p50": 0.272,
+      "p95": 0.3255,
+      "spread": 0.2751,
+      "dark_frac": 0.2207,
+      "bands": [
+       0.1581,
+       0.2164,
+       0.6063,
+       0.018,
+       0.0002,
+       0.0011,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 92066,
+     "man_seen_px": 89893,
+     "man_seen": 0.9764,
+     "value_creature": {
+      "px": 125465,
+      "p5": 0.1404,
+      "p50": 0.2515,
+      "p95": 0.624,
+      "spread": 0.4837,
+      "dark_frac": 0.2596,
+      "bands": [
+       0.0409,
+       0.4454,
+       0.4501,
+       0.0121,
+       0.0028,
+       0.0487,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 2
+     },
+     "value_man_visible": {
+      "px": 89893,
+      "p5": 0.1359,
+      "p50": 0.263,
+      "p95": 0.3098,
+      "spread": 0.1739,
+      "dark_frac": 0.1191,
+      "bands": [
+       0.0436,
+       0.3325,
+       0.6075,
+       0.0164,
+       0.0,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 2
+     }
+    }
+   },
+   "bounds_control": [
+    -0.50147,
+    -0.433,
+    0.0,
+    0.84405,
+    0.91724,
+    2.72
+   ],
+   "bounds_split": [
+    -0.50147,
+    -0.433,
+    0.0,
+    0.84405,
+    0.91724,
+    2.72
+   ],
+   "objs_control": 4,
+   "objs_split": 5,
+   "item_counts": {
+    "inside": 14,
+    "outside": 13,
+    "total": 27
+   },
+   "man_objs": [
+    "changer_body_man",
+    "changer_dark_man",
+    "changer_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "panner": {
+   "key": "panner",
+   "errors": [
+    "panner: the man span merged to no object"
+   ],
+   "views": {},
+   "bounds_control": [
+    -0.91316,
+    -0.64107,
+    0.0,
+    0.82224,
+    0.72571,
+    2.26
+   ],
+   "bounds_split": [
+    -0.91316,
+    -0.64107,
+    0.0,
+    0.82224,
+    0.72571,
+    2.26
+   ],
+   "objs_control": 2,
+   "objs_split": 2,
+   "item_counts": {
+    "inside": 0,
+    "outside": 24,
+    "total": 24
+   },
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "roper": {
+   "key": "roper",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 67826,
+     "man_seen_px": 41801,
+     "man_seen": 0.6163,
+     "value_creature": {
+      "px": 141413,
+      "p5": 0.1143,
+      "p50": 0.2955,
+      "p95": 0.698,
+      "spread": 0.5837,
+      "dark_frac": 0.1469,
+      "bands": [
+       0.0583,
+       0.1888,
+       0.3233,
+       0.1912,
+       0.0849,
+       0.1534,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 6
+     },
+     "value_man_visible": {
+      "px": 41801,
+      "p5": 0.137,
+      "p50": 0.3935,
+      "p95": 0.5128,
+      "spread": 0.3758,
+      "dark_frac": 0.0627,
+      "bands": [
+       0.0451,
+       0.0979,
+       0.2966,
+       0.4158,
+       0.1287,
+       0.0158,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 69803,
+     "man_seen_px": 56341,
+     "man_seen": 0.8071,
+     "value_creature": {
+      "px": 174777,
+      "p5": 0.0947,
+      "p50": 0.2521,
+      "p95": 0.6943,
+      "spread": 0.5997,
+      "dark_frac": 0.1865,
+      "bands": [
+       0.1261,
+       0.3632,
+       0.1684,
+       0.1787,
+       0.0567,
+       0.107,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 6
+     },
+     "value_man_visible": {
+      "px": 56341,
+      "p5": 0.091,
+      "p50": 0.3661,
+      "p95": 0.4823,
+      "spread": 0.3912,
+      "dark_frac": 0.1946,
+      "bands": [
+       0.1361,
+       0.1673,
+       0.2491,
+       0.4329,
+       0.0142,
+       0.0005,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 67331,
+     "man_seen_px": 41417,
+     "man_seen": 0.6151,
+     "value_creature": {
+      "px": 136238,
+      "p5": 0.091,
+      "p50": 0.256,
+      "p95": 0.4285,
+      "spread": 0.3374,
+      "dark_frac": 0.1663,
+      "bands": [
+       0.1136,
+       0.3039,
+       0.4204,
+       0.145,
+       0.0121,
+       0.005,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 41417,
+      "p5": 0.1922,
+      "p50": 0.3543,
+      "p95": 0.4556,
+      "spread": 0.2634,
+      "dark_frac": 0.0741,
+      "bands": [
+       0.0118,
+       0.1807,
+       0.3712,
+       0.4322,
+       0.0036,
+       0.0004,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "bounds_control": [
+    -0.56656,
+    -1.99311,
+    0.0,
+    0.79676,
+    1.1553,
+    2.46
+   ],
+   "bounds_split": [
+    -0.56656,
+    -1.99311,
+    0.0,
+    0.79676,
+    1.1553,
+    2.46
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 11,
+    "outside": 34,
+    "total": 45
+   },
+   "man_objs": [
+    "roper_body_man",
+    "roper_dark_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "stopper": {
+   "key": "stopper",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 113710,
+     "man_seen_px": 79469,
+     "man_seen": 0.6989,
+     "value_creature": {
+      "px": 195856,
+      "p5": 0.0586,
+      "p50": 0.2339,
+      "p95": 0.6599,
+      "spread": 0.6014,
+      "dark_frac": 0.3414,
+      "bands": [
+       0.0957,
+       0.4501,
+       0.1866,
+       0.0191,
+       0.0274,
+       0.2182,
+       0.0029,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 79469,
+      "p5": 0.0546,
+      "p50": 0.2429,
+      "p95": 0.3039,
+      "spread": 0.2493,
+      "dark_frac": 0.3008,
+      "bands": [
+       0.1609,
+       0.3979,
+       0.4274,
+       0.0053,
+       0.0061,
+       0.0024,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "side": {
+     "man_alone_px": 95971,
+     "man_seen_px": 60859,
+     "man_seen": 0.6341,
+     "value_creature": {
+      "px": 174083,
+      "p5": 0.0594,
+      "p50": 0.6233,
+      "p95": 0.6905,
+      "spread": 0.6311,
+      "dark_frac": 0.2111,
+      "bands": [
+       0.1072,
+       0.1818,
+       0.1631,
+       0.0195,
+       0.0289,
+       0.4994,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 60859,
+      "p5": 0.0429,
+      "p50": 0.2327,
+      "p95": 0.3148,
+      "spread": 0.2719,
+      "dark_frac": 0.3568,
+      "bands": [
+       0.1921,
+       0.3423,
+       0.4394,
+       0.0123,
+       0.0049,
+       0.009,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 113730,
+     "man_seen_px": 87937,
+     "man_seen": 0.7732,
+     "value_creature": {
+      "px": 194993,
+      "p5": 0.0664,
+      "p50": 0.2348,
+      "p95": 0.6907,
+      "spread": 0.6243,
+      "dark_frac": 0.4161,
+      "bands": [
+       0.0894,
+       0.4621,
+       0.2121,
+       0.0126,
+       0.0143,
+       0.2076,
+       0.0019,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 87937,
+      "p5": 0.0546,
+      "p50": 0.2437,
+      "p95": 0.3,
+      "spread": 0.2453,
+      "dark_frac": 0.2763,
+      "bands": [
+       0.1403,
+       0.414,
+       0.4383,
+       0.0047,
+       0.0006,
+       0.0021,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "bounds_control": [
+    -1.0671,
+    -1.0671,
+    0.0,
+    1.17523,
+    1.0671,
+    2.38
+   ],
+   "bounds_split": [
+    -1.0671,
+    -1.0671,
+    0.0,
+    1.17523,
+    1.0671,
+    2.38
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 9,
+    "outside": 30,
+    "total": 39
+   },
+   "man_objs": [
+    "stopper_body_man",
+    "stopper_dark_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "tither": {
+   "key": "tither",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 145245,
+     "man_seen_px": 144494,
+     "man_seen": 0.9948,
+     "value_creature": {
+      "px": 164563,
+      "p5": 0.0885,
+      "p50": 0.29,
+      "p95": 0.5542,
+      "spread": 0.4656,
+      "dark_frac": 0.1596,
+      "bands": [
+       0.0883,
+       0.1666,
+       0.6509,
+       0.0243,
+       0.0486,
+       0.0052,
+       0.0158,
+       0.0003
+      ],
+      "bands_5pct": 3
+     },
+     "value_man_visible": {
+      "px": 144494,
+      "p5": 0.0846,
+      "p50": 0.2846,
+      "p95": 0.3423,
+      "spread": 0.2577,
+      "dark_frac": 0.1646,
+      "bands": [
+       0.1006,
+       0.1613,
+       0.7145,
+       0.0066,
+       0.0055,
+       0.0021,
+       0.0094,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "side": {
+     "man_alone_px": 118538,
+     "man_seen_px": 109530,
+     "man_seen": 0.924,
+     "value_creature": {
+      "px": 125383,
+      "p5": 0.1664,
+      "p50": 0.2846,
+      "p95": 0.559,
+      "spread": 0.3926,
+      "dark_frac": 0.1211,
+      "bands": [
+       0.0232,
+       0.2503,
+       0.6274,
+       0.035,
+       0.0391,
+       0.0087,
+       0.0163,
+       0.0
+      ],
+      "bands_5pct": 2
+     },
+     "value_man_visible": {
+      "px": 109530,
+      "p5": 0.1639,
+      "p50": 0.2838,
+      "p95": 0.3327,
+      "spread": 0.1688,
+      "dark_frac": 0.1219,
+      "bands": [
+       0.0266,
+       0.2588,
+       0.6835,
+       0.0126,
+       0.0083,
+       0.0033,
+       0.0069,
+       0.0
+      ],
+      "bands_5pct": 2
+     }
+    },
+    "back": {
+     "man_alone_px": 142304,
+     "man_seen_px": 142296,
+     "man_seen": 0.9999,
+     "value_creature": {
+      "px": 160221,
+      "p5": 0.1283,
+      "p50": 0.2689,
+      "p95": 0.3711,
+      "spread": 0.2428,
+      "dark_frac": 0.1281,
+      "bands": [
+       0.0488,
+       0.2493,
+       0.6529,
+       0.0133,
+       0.0129,
+       0.0116,
+       0.0107,
+       0.0003
+      ],
+      "bands_5pct": 2
+     },
+     "value_man_visible": {
+      "px": 142296,
+      "p5": 0.1163,
+      "p50": 0.267,
+      "p95": 0.3294,
+      "spread": 0.2132,
+      "dark_frac": 0.1242,
+      "bands": [
+       0.055,
+       0.2499,
+       0.6937,
+       0.0012,
+       0.0001,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "bounds_control": [
+    -0.61076,
+    -1.02996,
+    0.0,
+    1.77883,
+    0.51829,
+    2.42
+   ],
+   "bounds_split": [
+    -0.61076,
+    -1.02996,
+    0.0,
+    1.77883,
+    0.51829,
+    2.42
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 16,
+    "outside": 15,
+    "total": 31
+   },
+   "man_objs": [
+    "tither_body_man",
+    "tither_dark_man",
+    "tither_bone_man",
+    "tither_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "24 Nov 2026 11:3x CT"
   }
  },
- "errors": [],
- "ok": true
+ "errors": [
+  "panner: the man span merged to no object"
+ ],
+ "ok": false,
+ "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`."
 }

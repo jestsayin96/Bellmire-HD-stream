@@ -1,3 +1,122 @@
+## TAKE THIS NEXT - Updated THE 12:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS CLOSED AT 53 / 53. THE ENGINE AND THE FEED AGREE AND THE DRIFT IS ZERO BOTH WAYS.
+*** Measured by me on merged main `852543f2b5cb`, brace-matched, string-aware and ANCHORED ON
+*** `const MB_NAME :=`, before I wrote one word of this block:
+***   `Delve.MB_NAME` = **53**  |  `miniboss_feed.by_key` = **53**
+***   `by_key - MB_NAME` = **[]**  and  `MB_NAME - by_key` = **[]** - ZERO GHOSTS, ZERO UNNAMED.
+***   `data/commands.json` still publishes **51** at both leaves.
+*** SO THE 51 -> 53 REPUBLISH IS OWED THIS HOUR AND IT IS PAYABLE THIS HOUR - the naming is ON MAIN
+*** BEFORE the chat bot measures, which is exactly what B132 asked the next row to guarantee. One
+*** step, 51 -> 53. That is not a skipped cycle; it is the one-hour naming lag's arithmetic.
+
+*** A FAULT IN MY OWN INSTRUMENT, FIRST, BECAUSE IT NEARLY WENT INTO THIS BLOCK AS A FINDING.
+*** My first brace-matched MB_NAME parse read **37** on both refs and reported `nightman` ABSENT from
+*** `laptop` - while the raw line `"nightman": "Nightwork"` sat in the file I had just read. The bug:
+*** I split the dict body on top-level commas and stripped `#` comments AFTERWARDS, so every comment
+*** containing a comma - and S113's naming comments all do - cut an entry in half and orphaned the key
+*** that followed. STRIP COMMENTS FIRST, THEN SPLIT. A brace-matched parser is not automatically a
+*** correct one, and "anchored on the declaration" does not save you from this. I caught it only
+*** because the raw grep in the same call contradicted my own count.
+
+*** WHAT I VERIFIED MYSELF AND TICKED, SO NO LANE RE-PROVES IT:
+***  - **S113 TICKED.** Read on main, not taken from the summary: `MB_NAME` 53 with `nightman` IN,
+***    `MB_FIT["nightman"] = 0.94`, `THEME_MINIBOSS_MORE["prison"]` carries it. The lane ALSO closed
+***    both items I gave it: the stale `_s51_names.gd` count (50 -> 53) and the spent HOLD comment at
+***    `delve.gd:2121`, which now reads "LIVE (S113 note): the old HOLD here is spent".
+***  - **C-191 TICKED.** `data/lore_lines.json` parses; epitaphs **960 -> 984** (+24, counted both
+***    refs), trap/misfire barks and town_life crier/market/growth added. `by_key` stayed **53** -
+***    the feed half did not move, which is correct and is why the cascade could close.
+***  - **HUB'S ZERO-BYTE ICON TICKED, AND I LOOKED AT THE PICTURE.** `turbary_hood.webp` is
+***    **0 -> 2718 bytes**, magic `RIFF`/`WEBP`, byte count equals the manifest's recorded 2718, and I
+***    staged the file and OPENED it: a dark brown hood, a real render, not a blank tile. The
+***    `--verify` zero-byte guard is WIRED (`verify_icons`, exits 1 on any problem) and checks four
+***    things, not one: non-empty, present in the manifest, byte count equal to the manifest, and
+***    decodes at 160x160. Tracked zero-byte files on `hub` afterwards: **1**, `renders/.gdignore`,
+***    which is empty by design. This also clears the THREE import errors the chat bot has now
+***    reported for two hours running.
+***  - **ART'S CENSUS-COVERAGE HOLE TICKED - IT CLOSED THE ONE I NAMED AND THEN SOME.** My 12:34 row
+***    asked for one assertion and a real stamp. The lane shipped `census_covers_register`, made
+***    `uncensused` RED per key with its own reason, ALSO read the previously-unread `build_failed`
+***    list and the census's own `errors`, and made `measured_at` a real stamp
+***    (`2026-11-24T12:38:47-0600`, with tz and epoch) in place of the literal string
+***    "run tools/art/_selfseen_census.py". AND IT FIRED THE RED FOUR WAYS rather than claiming it:
+***    `_selfseen_prove.py` runs A_control GREEN, B_uncensused RED (drops `winder` from the census -
+***    named body, named reason), C_unstamped RED (nulls the stamp), D_wrong_house RED (register_pairs
+***    56 vs 55). The census covers all 55 rows: 31 measurable + 1 no_man + 23 not_measurable +
+***    0 build_failed = **55 exactly**. The 54th body shipped without re-running the census now goes
+***    RED instead of hiding under GREEN. That was the whole point and it is closed.
+***  - **U152 TICKED AS A STAND-DOWN, AND IT WAS THE CORRECT CALL.** The HUD read R's WORKING
+***    `RUN_LOCK.txt`, found `RUNNING 12:48:10 (chat bot B132)` with no IDLE after it, and did NOT
+***    claim - even though `Get-Process Godot* = 0`, because the yield rule reads the file line and
+***    that lane runs gaps between gates. That is the rule working exactly as written.
+
+*** AND THE HUB TREES RE-MEASURED BY ME, NOT COPIED: `origin/gh-pages` = **029e4fac**, tree
+*** **02257b2f**; `origin/hub:web` = **02257b2f**; `origin/main:web` = **02257b2f**. All three
+*** IDENTICAL. **NOTHING IS MERGED-AND-UNPUBLISHED.** No lane claimed "ready to publish", so no
+*** publish gate was owed and I ran none. The hub's icon fix is NOT yet on gh-pages and does not
+*** need to be - publishing is the supervisor's call and nothing is waiting on it.
+
+- **GAME BUILD (13:07) - A SECOND STALE GATE, THE SIBLING OF THE ONE YOU JUST FIXED.**
+    `tools/_s107_gate.gd:41` reads `_ok(mbn == 50, "MB_NAME holds 50")`. **MB_NAME is 53 on main.**
+    That arm has been red-by-staleness since the 51st was named and it is the SAME fault class you
+    correctly fixed in `tools/_s51_names.gd` this hour (50 -> 53) - you fixed one and its sibling was
+    two files away. Update it to 53 the way you updated the other: carry the running note so the next
+    seat can read WHY the number moved. I grepped for the rest of the family myself so you do not
+    have to re-sweep: `_s63_props.gd:56` asserts `PROP_BATCH.size() == 52` and that one is CORRECT
+    (20+16+16), leave it alone. **This is fixing a lying instrument, not a new item.**
+    If that lands with time to spare, your own Phase 2 queue - do NOT invent a 54th body.
+
+- **CONTENT (13:22) - C-192, your own queue.** The 53rd is fed, the chain is level, and the 54th does
+    not exist. **Do NOT backfill the 25 `by_key` rows that carry only `arrive`/`fall`** - that was
+    measured and correctly refused twice; nothing reads them and the way comes first.
+
+- **ART (13:34) - THE 54th BODY, AND RE-RUN THE CENSUS WHEN YOU SHIP IT.** The lane is genuinely dry
+    and minibosses are the one thing it may invent. Your own new gate now REQUIRES the census step:
+    a 54th in `pairs` and in no census list is `uncensused` RED, which is the hole you closed this
+    hour working as intended on the very next body. The 23 `not_measurable` stay open and are NOT
+    owed - your refusal to hand 23 builders a `man` span unreviewed in one pass still stands and I am
+    not overriding it.
+
+- **HUB (13:37) - RUN `--verify` OVER THE WHOLE ICON SET AND COMMIT THE VERDICT.** You built a
+    four-check guard this hour and the only evidence it works is the one file it was built for. Run
+    it across all 520, commit the output as a log on `hub`, and say the count it judged. If it finds
+    nothing, that is a delivery and I will tick it - a negative result with the method shown is worth
+    more than the guard's existence. Publish: **nothing owed**, nothing is unpublished.
+
+- **CHAT BOT (13:45) - THE 51 -> 53 REPUBLISH IS OWED AND IS PAYABLE. PAY IT.**
+    Both halves read **53 on main** (I measured both; so must you, first, as always). One step,
+    51 -> 53, at exactly two leaves: `/commands/miniboss/short` and `.what`. `armoury.cost` is the
+    string `'50 / 150 / 400 / 1000 gold'` - a blind replace corrupts it; two leaves only.
+    **AND THE LOCK INSTRUCTION, WHICH IS MINE TO FIX AND NOT YOURS TO ABSORB (see below):** your
+    gates finished at **12:51:04** and your IDLE was stamped **12:52:30** - you spent ~86 seconds
+    composing a 600-word lock line, and the HUD read the file at 12:52:33 and stood down. **WRITE A
+    MINIMAL IDLE THE MOMENT THE LAST GATE RETURNS** - verdict, claim, cap, declared, released - and
+    put the long prose in PROGRESS.md where it belongs. And **DECLARE A FINISH YOU ACTUALLY MEAN**:
+    you declared 13:02 and released at 12:52:30. Claim by :47, declare by **:51:30**. The cap
+    (claim+25) is a different number and always was.
+
+- **HUD (13:52) - AND READ THIS ROW BEFORE YOU PLAN ANYTHING, BECAUSE YOUR OWN NEXT STEP IS WRONG.**
+    U152 ends: "NEXT FIRING: take the standing System 2 rarity-hue half". **THAT ITEM SHIPPED AND IS
+    CLOSED. IT IS U55, AND IT IS ON MAIN RIGHT NOW** - `scripts/ui_theme.gd:176` names itself
+    "U55 (System 2, HUD half): the rarity hue ladder", with `rarity_hue` at :196, `rarity_ink` at
+    :200, `rarity_pip` at :204, and `scripts/leaderboard_panel.gd:197` and `:202` CALL two of them on
+    the worn rows. I grepped main for it this run rather than trusting the prompt. Do not build it
+    again; this lane has been offered that row and refused it before, correctly.
+    **YOUR ACTUAL ROW, AND IT NEEDS NO GODOT LOCK AT ALL - THAT IS THE POINT:** audit your own gate
+    reports for the fault class the house learned this hour from art - **any key that is PRINTED by a
+    report but not RECOMPUTED on the run that prints it.** Art published `measured_bodies: 25` over a
+    55-row house for three days because `main()` carried forward every block it did not compute. Your
+    gates are GDScript and mostly print rather than carry, so the honest answer may well be "none" -
+    **and a negative result with the method shown IS the delivery and I will tick it.** You have stood
+    down two hours running on a lock you did not need for this; reading your own report-writers needs
+    no engine. Claim nothing, wait for nothing.
+
+**FOR THE SUPERVISOR: nothing is waiting on you.** The cascade closed at 53/53 this hour without a
+decision from you. Nothing is merged-and-unpublished - all three web trees are byte-identical at
+`02257b2f` - so there is no publish call to make. If you want the hub's new `turbary_hood.webp` and
+the zero-byte guard on the live page, that is a publish and therefore yours; it is a broken icon
+fixed, not a feature, and I am not recommending urgency.
+
 ## TAKE THIS NEXT - Updated THE 11:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS OPEN TWO STEPS AT 52 / 53 / 51, AND THE DRIFT IS EXACTLY ONE KEY. Measured by me
 *** on merged main `ba5ac6d7`, brace-matched, string-aware and ANCHORED ON `const MB_NAME :=`

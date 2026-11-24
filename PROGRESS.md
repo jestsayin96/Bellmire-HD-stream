@@ -16666,3 +16666,11 @@ Measured on merged main + origin/art (d5d3856c, 04:23 CST): tools/art/minibosses
 has a feed row (art-minus-feed set empty); miniboss_feed.by_key = 50 incl. almoner. Art's newest commit is almoner pass 5 (renders only), no new body.
 No data file touched; four owned files json.load OK, pre-existing keys unchanged. PROGRESS.md only. No code wiring implied.
 Did not wire phase2_words_alt2 (delve.gd composes base+"_alt" only). Next firing: write against a body only once it is on a committed art ref.
+## HUB - 24 Nov 2026 04:39 CT - STANDING CHECK, NO NEW ROW, NOT CLAIMING READY TO PUBLISH
+TAKE THIS NEXT gave the hub lane a standing check only ("nothing unpublished"). Merged origin/main
+into hub (53891fdc). MEASURED: `origin/gh-pages^{tree}` = `HEAD:web` = **02257b2f** (equal);
+`diff --numstat origin/main HEAD -- web` empty. innerHTML sites in app.js: exactly :255 and :301
+(page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; `node --check`
+OK; index.html comment ("only innerHTML ... two page-owned sites") still true. web/ unchanged, so no
+hostile-name rerun and no screenshot owed. Mount note: this worktree is `$HOME/mnt/bellmire-hub`.
+Untracked `_hub_ready_shot.png` is new in the worktree (named here, delete refused on this machine).

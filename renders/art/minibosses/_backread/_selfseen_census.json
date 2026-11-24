@@ -11,8 +11,16 @@
     "sack",
     "strap"
    ],
-   "has_man_span": true,
    "items": 37,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     15
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     15
@@ -33,8 +41,16 @@
     "pegs",
     "staff"
    ],
-   "has_man_span": true,
    "items": 41,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     6,
+     10
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     6,
     10
@@ -45,8 +61,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 22,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -60,8 +79,16 @@
     "man",
     "nozzle"
    ],
-   "has_man_span": true,
    "items": 59,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     12
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     12
@@ -74,8 +101,16 @@
    "spans": [
     "man"
    ],
-   "has_man_span": true,
    "items": 33,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     16
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     16
@@ -86,8 +121,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 40,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -100,8 +138,16 @@
     "post",
     "token"
    ],
-   "has_man_span": true,
    "items": 27,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     14
@@ -119,8 +165,16 @@
     "nippers",
     "stand"
    ],
-   "has_man_span": true,
    "items": 38,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     6,
+     14
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     6,
     14
@@ -131,8 +185,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 31,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -140,8 +197,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 49,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -157,8 +217,16 @@
     "rightarm",
     "trowel"
    ],
-   "has_man_span": true,
    "items": 46,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     14
@@ -169,8 +237,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 31,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -178,8 +249,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 34,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -187,8 +261,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 34,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -196,8 +273,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 31,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -213,8 +293,16 @@
     "goad",
     "man"
    ],
-   "has_man_span": true,
    "items": 127,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     14
@@ -233,8 +321,16 @@
     "splashes",
     "vat"
    ],
-   "has_man_span": true,
    "items": 77,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     38,
+     63
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     38,
     63
@@ -252,8 +348,16 @@
     "tells",
     "withies"
    ],
-   "has_man_span": true,
    "items": 35,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     4,
+     9
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     4,
     9
@@ -272,8 +376,16 @@
     "stern",
     "wet"
    ],
-   "has_man_span": true,
    "items": 75,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     42,
+     62
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     42,
     62
@@ -293,8 +405,16 @@
     "stocks",
     "trough"
    ],
-   "has_man_span": true,
    "items": 67,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     32,
+     50
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     32,
     50
@@ -305,8 +425,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 33,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -314,8 +437,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 40,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -331,8 +457,16 @@
     "scraper",
     "taken"
    ],
-   "has_man_span": true,
    "items": 130,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     18
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     18
@@ -349,8 +483,16 @@
     "man",
     "rightarm"
    ],
-   "has_man_span": true,
    "items": 50,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     15
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     15
@@ -371,8 +513,28 @@
     "spares",
     "tool_arms"
    ],
-   "has_man_span": false,
    "items": 78,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     9
+    ],
+    [
+     9,
+     19
+    ],
+    [
+     19,
+     25
+    ]
+   ],
+   "man_parts": [
+    "man_lower",
+    "head",
+    "tool_arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -388,8 +550,33 @@
     "tongs",
     "trunk"
    ],
-   "has_man_span": false,
    "items": 35,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     33,
+     35
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -397,8 +584,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 58,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -414,8 +604,16 @@
     "horns",
     "man"
    ],
-   "has_man_span": true,
    "items": 36,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     6,
+     15
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     6,
     15
@@ -426,8 +624,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 40,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -440,8 +641,16 @@
     "flask",
     "man"
    ],
-   "has_man_span": true,
    "items": 79,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     39,
+     61
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     39,
     61
@@ -460,8 +669,33 @@
     "trunk",
     "tub"
    ],
-   "has_man_span": false,
    "items": 33,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     24,
+     26
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -477,8 +711,16 @@
     "mouth",
     "pan"
    ],
-   "has_man_span": true,
    "items": 24,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     24,
     24
@@ -497,8 +739,16 @@
     "seams",
     "strikes"
    ],
-   "has_man_span": true,
    "items": 32,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -515,8 +765,16 @@
     "pit",
     "spoil"
    ],
-   "has_man_span": true,
    "items": 51,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     35,
+     51
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     35,
     51
@@ -527,8 +785,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 45,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -536,8 +797,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 58,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -552,8 +816,16 @@
     "taken",
     "yoke"
    ],
-   "has_man_span": true,
    "items": 41,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -564,8 +836,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 35,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -573,8 +848,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 35,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -590,8 +868,16 @@
     "vacancy",
     "yoke"
    ],
-   "has_man_span": true,
    "items": 73,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -610,8 +896,16 @@
     "man",
     "spill"
    ],
-   "has_man_span": true,
    "items": 60,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     33,
+     41
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     33,
     41
@@ -629,8 +923,16 @@
     "man",
     "ratchet"
    ],
-   "has_man_span": true,
    "items": 36,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -651,8 +953,16 @@
     "strands",
     "top"
    ],
-   "has_man_span": true,
    "items": 45,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     11
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     11
@@ -670,8 +980,16 @@
     "slab",
     "stone"
    ],
-   "has_man_span": true,
    "items": 81,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     14
@@ -682,8 +1000,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 46,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -697,8 +1018,16 @@
     "press",
     "strip"
    ],
-   "has_man_span": true,
    "items": 43,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -709,8 +1038,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 75,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -718,8 +1050,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 62,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -727,8 +1062,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 39,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -736,8 +1074,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 84,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -745,8 +1086,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 32,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -754,8 +1098,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 59,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -763,8 +1110,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 66,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -772,8 +1122,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 44,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -781,8 +1134,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 41,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -790,8 +1146,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 48,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -806,8 +1165,16 @@
     "spill",
     "stack"
    ],
-   "has_man_span": true,
    "items": 72,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     45,
+     58
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     45,
     58
@@ -826,8 +1193,33 @@
     "stump",
     "trunk"
    ],
-   "has_man_span": false,
    "items": 27,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     9,
+     12
+    ],
+    [
+     12,
+     17
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     23,
+     27
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -835,8 +1227,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 37,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -844,8 +1239,11 @@
    "in_register": false,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 47,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -862,8 +1260,16 @@
     "ring",
     "straps"
    ],
-   "has_man_span": true,
    "items": 39,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     9
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     9
@@ -882,8 +1288,33 @@
     "trunk",
     "wheel"
    ],
-   "has_man_span": false,
    "items": 36,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     34,
+     36
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -900,8 +1331,16 @@
     "strickle",
     "weights"
    ],
-   "has_man_span": true,
    "items": 47,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     13
@@ -912,8 +1351,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 70,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -921,8 +1363,11 @@
    "in_register": true,
    "in_builders": true,
    "spans": [],
-   "has_man_span": false,
    "items": 60,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
    "man_span": null,
    "man_span_empty": false
   },
@@ -930,14 +1375,35 @@
    "in_register": true,
    "in_builders": true,
    "spans": [
+    "arms",
     "beam",
     "head",
     "man_lower",
     "rack",
     "work"
    ],
-   "has_man_span": false,
    "items": 52,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     29,
+     36
+    ],
+    [
+     36,
+     41
+    ],
+    [
+     42,
+     44
+    ]
+   ],
+   "man_parts": [
+    "man_lower",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -953,8 +1419,16 @@
     "tap",
     "tun"
    ],
-   "has_man_span": true,
    "items": 64,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     30,
+     41
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     30,
     41
@@ -968,8 +1442,16 @@
     "balance",
     "man"
    ],
-   "has_man_span": true,
    "items": 31,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     0,
+     16
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     0,
     16
@@ -987,8 +1469,16 @@
     "pawl",
     "ropes"
    ],
-   "has_man_span": true,
    "items": 61,
+   "man_from": "span",
+   "man_ranges": [
+    [
+     32,
+     49
+    ]
+   ],
+   "man_parts": [],
+   "has_man_span": true,
    "man_span": [
     32,
     49
@@ -997,11 +1487,11 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T16:00:15-0600",
+ "measured_at": "2026-11-24T16:45:35-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795557615.0632236,
- "register_mtime_epoch": 1795557497.6463342,
- "register_mtime": "2026-11-24T15:58:17-0600",
+ "measured_at_epoch": 1795560335.1653066,
+ "register_mtime_epoch": 1795557626.7580874,
+ "register_mtime": "2026-11-24T16:00:26-0600",
  "register_pairs": 57,
  "measurable": [
   "almoner",
@@ -1018,8 +1508,11 @@
   "fuller",
   "greener",
   "hooper",
+  "hurdleman",
+  "iceman",
   "leech",
   "moulder",
+  "nightman",
   "paviser",
   "pitman",
   "pressman",
@@ -1030,8 +1523,11 @@
   "scraper",
   "sealer",
   "stackman",
+  "stiltman",
   "stopper",
+  "straker",
   "strickler",
+  "tanner",
   "tapster",
   "tither",
   "winder"
@@ -1044,11 +1540,8 @@
   "cook",
   "drillmaster",
   "gaoler",
-  "hurdleman",
-  "iceman",
   "jointer",
   "loader",
-  "nightman",
   "porter",
   "quartermaster",
   "rammer",
@@ -1059,12 +1552,9 @@
   "snuffer",
   "snuffer_chibi",
   "sower",
-  "stiltman",
   "stoker",
-  "straker",
   "tallyman",
-  "tallyman_chibi",
-  "tanner"
+  "tallyman_chibi"
  ],
  "build_failed": [],
  "ok": true

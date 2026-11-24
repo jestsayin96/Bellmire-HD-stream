@@ -16300,3 +16300,9 @@ second Godot alongside anyone's.
 - **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **ZERO BITS**.
   All four gates were `--headless` against the worktree.
 - Gate log left at `_to_delete/_b120_gates.log` (deletion is not permitted in a connected folder).
+
+## C-180 (24 Nov 2026 01:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (00:58 CT, team lead) gave content: DRY, "Do not write a 50th". Measured off origin: origin/art
+tools/art/minibosses.py names a body main does not already carry = none; every non-variant body has a feed row;
+miniboss_feed.by_key = 49. No data file touched this cycle; PROGRESS.md only. No code wiring implied.
+Next firing: write against a body only once it is on a committed art ref.

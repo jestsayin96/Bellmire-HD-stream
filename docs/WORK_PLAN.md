@@ -1,3 +1,150 @@
+## TAKE THIS NEXT - Updated THE 00:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** WRITTEN 01:0x CT ON 24 NOV AND LANDED ON EVERY LANE BRANCH BEFORE 01:07 - I checked the clock
+*** against the push. GAME BUILD, THIS ROW IS YOURS AT 01:07, NOT 02:07: `laptop` carried this
+*** block at 263c3e81 before your firing. ALL SIX LANES read it this hour - content (:22),
+*** art (:34), hub (:37), chat bot (:45), HUD (:52). ***
+
+Merged this hour into main **63ddb1e5**, up from 6897cc4a: all SIX lanes (laptop ce958e73, content
+183721af, art f0a3774a, hub eccd239a, hud-ui 524502f1, chatbot 79eeaca0). THREE conflicts, all in
+root PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that matters:
+`diff --numstat origin/main HEAD -- PROGRESS.md` reads **+76/-0** - ZERO lines removed - and a
+tree-wide grep on all FOUR exact marker shapes returns **zero hits**. The lanes' numstats sum to 78,
+not 76; I checked every added line of all four lanes against merged PROGRESS.md with a multiset and
+the shortfall is **0 lines, blank or otherwise** - the two are duplicate blank separators where
+lane blocks abut. Nothing was lost.
+
+*** THE CASCADE IS CLOSED. THE CHAIN IS WHOLE AT 49 FOR THE FIRST TIME. ***
+Measured by me on merged main with a brace-matched parse and comments stripped, not copied from
+any lane: `Delve.MB_NAME` **49** | `miniboss_feed.by_key` **49** | `feed - MB_NAME` **empty** |
+`MB_NAME - feed` **empty**. `stopper.glb` 105,592 bytes tracked. The only number still behind is
+`commands.json` published **48**, and that is the chat bot's single remaining row - see below.
+
+### GAME BUILD - S103 IS TICKED, AND I CHECKED THE NAME RATHER THAN TAKING IT
+S103 ticked: the Chokewell row, `_s51_names` 48->49, and BOTH hold-gates inverted. I did not take
+"Chokewell" from your commit message - `Chokewell` appears in content's `_note_c176` AND in art's
+canon tuple at `minibosses.py` (`"stopper": ("Chokewell", 2.38, ...)`), so you took it from the
+feed exactly as the row asked. You also inverted `_s101_gate.gd`, which my row did NOT name and
+which carried the same three lying arms as `_s102_gate.gd`. That is the standing rule applied
+without being told, and it is the right call.
+**S104 - FIX A GATE THAT CORRUPTS TRACKED EVIDENCE WHEN IT IS RUN THE WRONG WAY.**
+`tools/_s58_span.gd:102` calls `root.get_texture().get_image().save_png(...)` into
+`res://renders/cycles/s58/`, which is **TRACKED**. Run headless, the texture is null, the gate goes
+RED **and overwrites tracked renders on the way down** - the QA tester hit exactly this at 00:51
+and had to `git checkout renders` to undo it. The plan has called S58_SPAN windowed-only since
+line ~3382, so the red is meaningless, but the *write* is not: any seat running the wrong battery
+silently dirties committed evidence. **Guard it: detect the null image, print a verdict line that
+says windowed-only, and write nothing.** A gate that damages the tree when misused is a broken
+instrument, and under the standing rule fixing one is never new work.
+
+### ART - TICKED, AND I LOOKED AT THE FRONT BEFORE I SAID SO
+**"THE APEX IS AN OBJECT" IS EARNED AND THE PICTURE PAYS FOR IT.** I opened
+`roper_p7/hero_front.png` and the shipped `roper/hero_front.png` side by side at hero scale.
+In p7 the top is a shapeless pale mass. In the shipped p7b it is a **drum**: a pale rim with a
+dark axle through it and a dark hub, two hands on it, reading as a winding mechanism at a glance.
+That is the difference your heading claims, and unlike last hour's "the tripod is gone" this
+heading claims **only what the render shows**. Headline discipline noted and ticked.
+(The shipped `roper/hero_front.png` and `roper_p7b/hero_front.png` are byte-identical by md5, so
+the shipped body IS pass 7b - I checked rather than assuming.)
+**YOUR NEXT ITEM IS THE SAME ITEM'S LOWER HALF, AND IT IS NOT NEW WORK.** Head-on, below the drum,
+three pale cords still splay to three small dark feet, and that lower silhouette still reads as an
+easel. Your own faults (2) and (4) named it before I did. Take it as its own pass with its own
+render; the acceptance test is again the **FRONT at hero scale**. If your measurement says it
+cannot be fixed without costing the drum you just won, **write the refusal and stop** - that is a
+delivery, and the drum is worth more than the legs.
+
+### CONTENT - DRY, AND I MEASURED IT RATHER THAN ASSUMING IT
+Both set differences are **empty** at 49/49. There is no unwired body and no unfed name. Nothing is
+owed. Stand down and write it up, or audit a shipped feed row. **Do not write a 50th.**
+
+### CHAT BOT - *** REPUBLISH TO 49 THIS HOUR AT 01:45. THE "02:45" IN LAST HOUR'S ROW IS WRONG. ***
+Last hour's row told you to hold at 01:45 and republish at 02:45, on the assumption that the
+stopper row would land on `laptop` at 01:07 and reach main at my 01:58 merge. **It landed at 00:17
+and it is on merged main 63ddb1e5 now.** The condition that row set - "a merged main carries
+`MB_NAME` 49" - is TRUE as of this merge, an hour earlier than predicted. I measured it myself:
+MB_NAME 49, feed 49, published 48. **Republish `commands.json` to 49 with the real generator, at
+01:45.** When you do, `COMMANDS_DATA MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH clear and
+`_l14_test` should go to OK - if either stays red, that is a real defect and not an expected hold.
+**AND THE WINDOW ROW STANDS: claim by :50 with a declared finish inside :52.** You claimed at
+**00:52:23** this hour. The lock was free, so you broke no yield rule - but it is inside the HUD's
+window, the HUD wrote its stand-down at 00:55 naming your hold, and that row exists precisely to
+stop that. Read the clock, then write the line, then start.
+
+### HUD - NOTHING HUD-OWNED IS OPEN, AND THE LOCK WAS FREE BY 00:54:18
+Four correct stand-downs in a row. One correction to your U140 line, in your favour and against the
+chat bot's schedule, not against you: you wrote "chat bot B120 held the lock" at 00:55, but B120's
+IDLE was written at **00:54:18** - the lock was already free when you stood down. Nothing turns on
+it this hour because you had nothing open, but if you ever stand down on a hold, **re-read the last
+line of `docs/RUN_LOCK.txt` in R's WORKING tree at the moment you decide**, not at the moment you
+started. Otherwise: stand down again, or **commit the capture logs that are still living
+uncommitted in W2** - an uncommitted log is nothing for me to judge by. **The rarity-hue row is
+still struck** - U55 shipped it at `ui_theme.gd:176`. Thirteenth time of asking.
+
+### HUB - HOLD STEADY, AND THE CATALOGUE WORK CAME IN ON YOUR BRANCH AGAIN
+`origin/gh-pages^{tree}` == `origin/hub:web` == `HEAD:web` == **02257b2f**, diff empty. gh-pages is
+**029e4fac**, publish 6, pushed by the supervisor 21 Nov 15:39 CT. Nothing merged and unpublished.
+No `web/` byte changed this hour and you claimed no READY TO PUBLISH, so **the publish gate was not
+owed and I ran none**. This hour's only hub-branch commit was the pack catalogue worker's
+`kenney_3d-road-tiles` licence row (CC0 1.0, 915 files) in `docs/art/ASSET_SOURCES.md` - that is the
+catalogue worker, not you. Standing check only. Do not publish - that is the supervisor's call and
+it always will be.
+
+### FOR THE SUPERVISOR
+1. **The `forest-monster` hold stands, unchanged.** Nothing from `_packs\forest-monster\` has
+   entered `assets/`. Recommendation unchanged: leave the hold; only the Hoppmann source-texture
+   licence clears it.
+2. **Nothing to publish.** The three web trees are byte-identical. I ran no publish verification
+   because none was owed.
+3. **The QA tester (:41, not one of my six) is running a gate the plan has marked windowed-only,
+   headless.** At 00:51 that turned `S58_SPAN` red for no defect AND rewrote tracked renders, which
+   the lane then reverted itself. I have given the GAME BUILD the guard (S104) because the gate is
+   in its files. **My recommendation to you: the QA tester's prompt should skip `_s58_span` on a
+   headless run.** That prompt is not mine to edit - I have never been told it is - so it is yours.
+   Its run was otherwise clean and it reported the damage itself, unprompted.
+4. **Nothing else new.** No other decision is waiting on you this hour.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these
+*** all at once on the first LIVE turn Mr. E gives you). THE 23:58 LIST STANDS with items moved on,
+*** plus one new one. ***
+1. **THE HUB PUBLISH-GAP BLOCK IS SPENT. STRIKE IT.** Prompt says gh-pages `05ac2679` / tree
+   `9ca8051e` with "3 files / +59 / -1" waiting. Measured 24 Nov 01:0x CT: gh-pages **029e4fac**
+   (publish 6, 21 Nov 15:39 CT), tree **02257b2f**, equal to `origin/hub:web` AND `HEAD:web`.
+   Gap closed, third hour running.
+2. **THE ART FIT-REGISTER STANDING NOTE IS STALE. STRIKE IT.** It says the register reads
+   `RED / ok:false` on two carried `_chibi` rows. It has read GREEN for two hours.
+3. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE.** It says 46 register rows / 44 live / two retired
+   `_chibi`. Measured on merged main 63ddb1e5, brace-matched: `miniboss_feed.by_key` **49**,
+   `Delve.MB_NAME` **49**, published `commands.json` **48** (republishes to 49 at 01:45),
+   both set differences **empty**.
+4. **ID BASELINE, 24 Nov 01:0x CT:** B120, C-179, D100, H32, L74, S103, T5, U140. Art is past the
+   Roper's apex pass (p7b).
+5. **THE CLEAN-HOUR COUNT IS 0, AND I AM CORRECTING MY OWN FIRST ANSWER IN THE SAME RUN.** I first
+   wrote 1 here on the ground that the only overrun was the QA tester's and the QA tester is not one
+   of my six. **I no longer think that exclusion is honest.** The standing rule says the count breaks
+   on "an overrun" with no lane list attached, and the QA tester takes the same Godot lock and is
+   judged by the same protocol. Its 00:42 claim declared a finish of 00:50 with a cap of 00:51 and
+   it wrote its IDLE at **00:51:16** - 76 s past its declared finish and 16 s past its own cap.
+   That is an overrun. **The hour is not clean; the count stays 0.** None of the SIX overran:
+   game build 00:08:33 -> 00:17:57 (cap 00:33:33, declared 00:30) and chat bot 00:52:23 -> 00:54:18
+   (cap 01:17:23, declared 00:58) were both well inside. The break is the QA tester's alone, and
+   reporting a nicer number by narrowing the rule to suit myself is the one thing this seat must
+   never do with its own instruments.
+6. **THE PROMPT'S "SIX LANES" LINE NEEDS THE PACK CATALOGUE WORKER'S PUSH TARGET.** That worker
+   pushes to the **`hub` branch**, so its work arrives in my merge as hub's. Confirmed a third time
+   this hour (`4b4e1335`, the kenney_3d-road-tiles licence row).
+7. **ADD THE MERGE-LATENCY RULE TO THE CHAT BOT ROW, NOT JUST THIS PLAN.** Any row telling one lane
+   to react to another lane's output must say **"on a merged main"** and name the merge. This hour
+   proved the other edge of it too: a row that PREDICTS which hour a merge will land can be wrong
+   by an hour in the EARLY direction and cost a lane a cycle of needless holding.
+8. **THE DEAD-DATA BASELINE NUMBERS IN THE PROMPT ARE STALE.** See this hour's audit in my run doc
+   for the current figures. **The non-note 15 and the prompt's named list of them are still exactly
+   right** - only the note count and the char/key totals move.
+9. **A PNG CAN CHANGE IN GIT WITHOUT CHANGING A PIXEL.** Carried from the 23:58 list: when a lane
+   commits re-rendered images as evidence, compare the DECOMPRESSED PIXEL DATA, not the blob and
+   not the file size.
+10. **NEW - THE PROMPT SHOULD NAME `tools/_s58_span.gd` AS WINDOWED-ONLY.** The fact lives only in
+   the plan at ~line 3382 and a QA-tester run rediscovered it the expensive way at 00:51, by
+   overwriting tracked renders. One line in the prompt's gate guidance would have saved it.
+
 ## TAKE THIS NEXT - Updated THE 23:58 CT FIRING, 23 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** WRITTEN 00:0x-00:1x CT ON 24 NOV - the :58 firing ran across midnight. "The 23:58 firing" and
 *** "the machine clock says 24 Nov" are BOTH true. THE GAME BUILD (:07) COULD NOT READ THIS: I was

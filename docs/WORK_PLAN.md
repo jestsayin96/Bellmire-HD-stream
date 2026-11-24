@@ -78,6 +78,46 @@ supervisor's call and it always will be.
    none was owed.
 3. **Nothing new.** No decision is waiting on you this hour.
 
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these
+*** all at once on the first LIVE turn Mr. E gives you). THE 22:58 LIST STANDS - these are its
+*** items with the numbers moved one step, plus two new ones. ***
+1. **THE HUB PUBLISH-GAP BLOCK IS SPENT. STRIKE IT.** Prompt says gh-pages `05ac2679` / tree
+   `9ca8051e` with "3 files / +59 / -1" waiting. Measured 24 Nov 00:1x CT: gh-pages **029e4fac**,
+   tree **02257b2f**, equal to `origin/hub:web` AND `origin/main:web`. Gap closed, second hour running.
+2. **THE ART FIT-REGISTER STANDING NOTE IS STALE. STRIKE IT.** Prompt says the register reads
+   `RED / ok:false` on two carried `_chibi` rows. Measured off `_changer_fit.log` this hour:
+   `verdict "GREEN"`, `ok: true`, **51 rows judged**, `red_summary.rows` **empty**, `shipped_red`
+   empty, `unproved_cells` empty.
+3. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE.** It says 46 register rows / 44 live / two retired
+   `_chibi`. Measured on merged main 41f71825 with a brace-matched parse: `miniboss_feed.by_key`
+   **49**, `Delve.MB_NAME` **48**, published `commands.json` **48**, fit register **51 rows**,
+   `MB_FIT` **60 keys**, **62** `.glb` tracked under `assets/monsters/minibosses/`.
+4. **ID BASELINE, 24 Nov 00:1x CT:** B119, C-178, D100, H32, L74, S102, T5, U139. Art has now
+   COMMITTED the 48th body (`stopper.glb`) and the 49th (the Roper) is wired and named.
+5. **THE CLEAN-HOUR COUNT IS 0.** It reset at this firing - not on an outage and not on a lane's
+   output, but on a FUTURE STAMP in the chat bot's B119 claim line (stamped 23:48:30 by arithmetic
+   while its own first process started 23:47:33). The lane reported it itself, unprompted. The 21:00
+   and 22:00 hours were clean; 23:00 is not.
+6. **THE PROMPT'S "SIX LANES" LINE NEEDS THE PACK CATALOGUE WORKER'S PUSH TARGET.** That worker
+   pushes to the **`hub` branch**, so its work arrives in my merge as hub's. A seat that does not
+   know this will credit the hub lane with catalogue work or miss it entirely. (Confirmed again
+   this hour: `a0c3f5f5`, the kaykit animations licence row, came in on `hub`.)
+7. **ADD THE MERGE-LATENCY RULE TO THE CHAT BOT ROW, NOT JUST THIS PLAN.** Any row that tells one
+   lane to react to another lane's output must say **"on a merged main"** and name the merge.
+8. **NEW - THE DEAD-DATA BASELINE NUMBERS IN THE PROMPT ARE STALE.** Prompt: 2,345,688 chars /
+   146 top-level keys / 56 zero-hit = 41 `_note_` + 15 non-note. Measured 24 Nov 00:1x on the same
+   48-file corpus: **2,376,818 chars**, 12 `data/*.json`, **150 keys**, **60 zero-hit = 45 `_note_`
+   + 15 non-note**. **The non-note 15 and the prompt's named list of them are still exactly right** -
+   only the note count and the char/key totals have moved. Update the figures, keep the list.
+9. **NEW - A PNG CAN CHANGE IN GIT WITHOUT CHANGING A PIXEL, AND THE PROMPT SHOULD SAY SO.** All
+   three `changer` catalogue renders changed blob SHA this hour at **identical byte size**, and the
+   decompressed IDAT hashes are **identical** - the images are the same picture. The naive reads are
+   both wrong: "the blob changed so it was re-rendered" and "identical size means nothing happened".
+   The rule to add beside "LOOK at the picture": **when a lane commits re-rendered images as
+   evidence, compare the DECOMPRESSED PIXEL DATA, not the blob and not the file size.** Here it
+   turned a suspected defect into the proof of the fix - see the ART tick in this hour's run doc.
+
+
 ## AMENDMENT TO THE 22:58 CT FIRING, 23 NOV 2026 - written 23:1x CT by the team lead, AFTER the
 ## block below it and AFTER the plan was synced. READ THIS WITH THE BLOCK BELOW, NOT INSTEAD OF IT.
 *** WHO CAN STILL READ THIS THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45),

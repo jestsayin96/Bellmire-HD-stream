@@ -9392,6 +9392,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 133,
    "air_px_tightest_view": "front"
+  },
+  "stiltman": {
+   "creature_h": 3.2,
+   "hero_h": 2.45,
+   "ratio": 1.31,
+   "pair_w": 3.2,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.397,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "stiltman",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 27050,
+      "vis": 27050,
+      "delta": 32289,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43680,
+      "vis": 43680,
+      "delta": 52384,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 19737,
+      "vis": 19737,
+      "delta": 32755,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37772,
+      "vis": 37772,
+      "delta": 41806,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 27099,
+      "vis": 27099,
+      "delta": 39627,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44007,
+      "vis": 44007,
+      "delta": 48752,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 199880,
+     "shadow_px": 2901,
+     "mean": 0.4597,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3127,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 202160,
+     "shadow_px": 2554,
+     "mean": 0.4683,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2664,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 199880,
+     "shadow_px": 2771,
+     "mean": 0.4416,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3222,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     162,
+     162
+    ],
+    "side": [
+     194,
+     196
+    ],
+    "back": [
+     162,
+     162
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 162,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -9559,10 +9727,10 @@
  },
  "unproved_cells": [],
  "measured": [
-  "panner"
+  "stiltman"
  ],
  "asked": [
-  "panner"
+  "stiltman"
  ],
  "blank_check": {
   "files": 3,
@@ -9576,5 +9744,5 @@
  },
  "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (53), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (54), re-derived from stored measurements; 1 of them rendered this run"
 }

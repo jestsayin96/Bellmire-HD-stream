@@ -4734,3 +4734,20 @@ ring" was a solid 1.28 m plate over the mouth).
   822 -> 958 faces, span 1.73 -> 1.74 m, still 2 materials, still CORRIDOR-SAFE
   and UNDER-LID, fit GREEN, 0 blanks, frame_edge zero in all three views.
   See docs/art/PANNER_THE_51ST.md for the pass-5 section and the arithmetic.
+
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `stiltman` | Downfast | 3.20 | fogbound | **IT IS QUICKER FOR EVERY LEG YOU TAKE** - four stilts, all breakable in plain sight. Breaking one WORKS: it drops, its reach over your line shortens, and it is faster. Leave them and it strikes down past your front rank. The party owns the decision and both ways cost | 0.62 | 1.34 |
+
+**THE 52nd IS BUILT AND IT DOES NOT READ YET - NOT READY TO WIRE.** Three
+passes on 24 Nov 08:4x-08:5x CT. Gate GREEN, ratio 1.31 (3.20 m, the TALLEST
+body in the set), span 1.34 m, CORRIDOR-SAFE, UNDER-LID, 602 faces, 0 blanks,
+frame_edge zero on all three views - and none of that is the point: at hero
+scale it reads as a SURVEYOR'S TRIPOD WITH A LAMP ON TOP, and the lost leg that
+the whole mechanic is staked on is invisible at that distance. It is committed
+rather than left in the worktree (the Beadle and the Panner were both caught
+that way) but `scripts/bestiary.gd` and `Delve.MB_NAME` must NOT take it yet.
+See docs/art/STILTMAN_THE_52ND.md - the fault list is five long and the next
+change is named: a fen cloak that makes the trunk read as a person, because the
+tripod read is fault 1 and everything else is smaller than it.

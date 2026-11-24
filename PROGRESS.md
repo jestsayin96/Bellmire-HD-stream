@@ -15873,3 +15873,22 @@ TWO STALE FIGURES IN MY OWN PROMPT, FOR THE TEAM LEAD. (1) The owed gate list sa
 file today is 8103 bytes over 32 commands. THAT PROOF DOES NOT COVER TODAY'S FILE and I am not
 leaning on it. The real generator still owes its no-op confirmation, and when it runs, the
 generator's bytes win.
+
+## S100 - STAND-DOWN WITH TWO REFUSALS: THE STOPPER IS HELD OUT (NO FEED ROW), AND THE MANA ROW IS ALREADY CLOSED AT S89 (23 Nov 2026, 21:07 CST firing)
+Item: the 22:58 CT 21 Nov TAKE THIS NEXT game-build row (1)-(4). NOTE FIRST: every origin ref
+(main fad55334, laptop e86de311, art, content, hub, hud-ui, chatbot) last moved 21 Nov 23:06 CT -
+NOTHING has been pushed by any lane for ~46 hours. The lock ended on my own RUNNING
+2026-11-21T23:07:59-06:00 with no IDLE, no Godot alive and no commit since: STALE, cleared in
+writing at 2026-11-23T21:10 CT before claiming.
+(1) STOPPER: NOT WIRED, ON PURPOSE. content's by_key (origin/content 733ca1d5 and main) is 47 with
+no `stopper`. Brace-matched parse of `const MB_NAME` (comments stripped): 47 keys; set difference
+against by_key EMPTY BOTH WAYS. Adding Chokewell now would turn _s51_names red - held, as at S98.
+(2)+(3) LOCK WRITER: this run checked the file ends in CRLF before appending (it did), every line I
+wrote starts on its own line, and my IDLE is written BEFORE the commit so the ref carries it.
+(4) MANA - REFUSED AS ALREADY DONE. Item 1 of Mr. E's 10:17 directive was closed at S89 and TICKED
+at the 12:58 21 Nov firing: scripts/snapshot_pub.gd:618-625 publishes row["mana"] and
+row["mana_max"] off Roster.mana_max (option A, the hub sheet; web/app.js:880 manaBar, :1150).
+The row carried a closed half forward. No code changed this run.
+VERDICTS: parse --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error (renders/cycles/s100/parse.log);
+tools/_s51_names.gd -> "S51_NAMES OK 176 checks" (by_key 47, MB_FIT base 47, glb stems 49).
+Twitch: no live test. The parse boot joined #jestsayin96 read-only as usual; nothing posted, 0 bits.

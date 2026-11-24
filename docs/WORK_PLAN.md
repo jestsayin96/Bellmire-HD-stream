@@ -1,3 +1,156 @@
+## TAKE THIS NEXT - Updated THE 21:58 CT FIRING, 23 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** READ THE DATE. The block below this one is dated 21 NOV and its rows are two days old. ***
+Merged this hour into main **cc6168a0**: all SIX lanes (laptop eef49179, content 4532722f, art
+4a830705, hub 9c9865ad, hud-ui 641f27aa, chatbot 010259f2). FIVE conflicts, every one in root
+PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that matters: against
+EACH merge's first parent, `diff --numstat ... -- PROGRESS.md` reads **+6/-0, +58/-0, +5/-0, +2/-0,
++46/-0** - ZERO lines removed at every step - and a multiset line-compare against all six lane refs
+finds **zero prose lines lost**. ZERO residual markers tree-wide on all four exact shapes.
+
+*** THE MACHINE WAS DOWN FOR 46 HOURS AND THAT IS THE REAL STORY OF THIS GAP. ***
+The lock file jumps straight from `RUNNING 2026-11-21T23:07:59` to `IDLE 2026-11-23T21:08:29`.
+No lane ran between 21 Nov 23:08 and 23 Nov 21:08 CT. main sat at fad55334 for two days. Every
+lane came back up this evening and all six shipped inside fifty minutes. NO LANE IS CHARGED FOR
+THE GAP and no lane's clean-hour record is marked by it.
+
+*** TICKED THIS HOUR - SIX ***
+- **C-176 (content) - THE STOPPER'S FEED ROW (48th, "Chokewell"). TICKED.** I parsed the file, not
+  the report: `miniboss_feed.by_key` now holds **48 keys**, and `stopper` carries the FULL four-group
+  shape `arrive / act / broken / fall` - the richer of the two shapes in that map (23 rows carry four
+  groups, 25 carry two), so it is not a stub. The voice is right and wear is a variable, not a style:
+  *"Sound timber, kept iron, and pegs worn smooth where hands have been. He has done this before."*
+- **ART - THE 49TH BODY: THE ROPER ("Drawtight"). TICKED AS A BODY, AND I LOOKED AT ALL THREE.**
+  Register exact to the row: `_report.json` holds **60 rows = 49 live + 11 retired `_chibi`**,
+  blank_check **147 files / 0 failures**, `floorgeom_stale` false; the fit register is `ok:true /
+  GREEN` with `shipped_red []`. Then I opened `hero_front`, `hero_side` and `hero_back` myself.
+  **Both faults the lane names are really fixed, and I checked them in the axis each one lives in.**
+  Pass 1: the head is clear of the pale top - hat, brim and two eyes all read, nothing in front of
+  the face. Pass 2: the rope does NOT lie across the face in `hero_side`; it runs out low and
+  forward, and the side view is where the idea actually lands - a man leaning his weight into a
+  winding post with the drum behind him. Back: post, cross-head, drum, harness, no face - a real
+  facing, checked on purpose against the Beadle defect of 18 Nov.
+  **AND THE LANE'S SELF-CRITICISM IS CORRECT, WHICH IS WHY I AM REPEATING IT RATHER THAN SOFTENING
+  IT:** from head-on the biggest shape IS three ground-pinned pale lines and it reads as a TRIPOD
+  before it reads as rope. The lane said so unprompted, on a HOLD row, and did not take the fix
+  because it fouls the chin. That is the pass-1 fault again and it was right to stop.
+- **B117 (chat bot) - THE MINIBOSS COUNT, AND THE `%s` LOCK WRITER. BOTH TICKED.** Its own
+  `COMMANDS_DATA` guard arm caught a real red two days after the arm was written: `miniboss`
+  published 46 against 47 feed rows. I checked the fix myself - `data/commands.json` `miniboss`
+  now reads **"The 47 elites"** in both `short` and `what`, and a brace-matched parse of
+  `Delve.MB_NAME` gives **47**, so published == MB_NAME at the moment it ran. Four gates green on
+  fad55334. The `%s` writer row carried over from 21 Nov is DISCHARGED: the lane fixed it FORWARD
+  (concatenate with the stamp interpolated, assert no `%s`/`%d`, assert the stamp carries `-06:00`,
+  write a leading newline if the file does not end in one) and both of its own lock lines this run
+  went through those four guards. It left lines 685/1105/1107 alone as historical evidence, which
+  is correct.
+- **HUB - THE STANDING CHECK. TICKED, AND IT CLOSES A STALE ROW IN MY OWN PROMPT.** Measured on the
+  refs by me, not taken from its report: `origin/gh-pages^{tree}` == `origin/hub:web` ==
+  `origin/main:web` == **02257b2f**, and `git diff` between gh-pages and hub's web tree is **EMPTY**.
+  **THERE IS NO PUBLISH GAP.** No READY TO PUBLISH claim was made and no web/ file changed, so the
+  publish gate is NOT owed and I ran none.
+- **U137 (HUD) - THE STAND-DOWN. TICKED; A WRITTEN STAND-DOWN IS THE DELIVERY.** No .gd changed, no
+  Godot claimed, nothing HUD-owned open. It read the lock from **R's WORKING copy** at 21:52:36,
+  saw the chat bot's `IDLE 21:48:45` with no RUNNING after it, correctly called the lock FREE - and
+  then did not claim it, because there was no owed run.
+- **S100 (game build) - THE STAND-DOWN, AND THE HOLD WAS THE RIGHT CALL. TICKED.** It held the
+  stopper's wiring because at **21:10** there was genuinely no feed row for it. Content pushed that
+  row at **21:23**, thirteen minutes later. The hold was correct when it was made and it is
+  discharged now - see its row below. It also refused the mana row as closed at S89 rather than
+  redoing it, and computed `cap claim+25` before writing its declared finish.
+
+*** NOT TICKED, AND WHY ***
+- **THE ROPER'S WIRING.** Not started, and correctly not started - the lane said in writing "the
+  Roper is NOT WIRED and I did not wire it". It is the game build's row two cycles out.
+- **`roper.glb` HAS NO `.glb.import` SIBLING - AND THIS IS NOT AN ART DEFECT. I NEARLY WROTE THAT IT
+  WAS.** 61 `.glb` are tracked under assets/monsters/minibosses/ and 60 `.glb.import`; the only one
+  missing is the body art shipped forty minutes ago. Before charging anyone I read the history of
+  who commits those siblings: `blower.glb.import` came in at **S93 (game build)**, `changer.glb.import`
+  at **S98 (team lead)**, `snarer_chibi.glb.import` at **S12b** - every one of them landed WITH the
+  wiring, never with the body. Art ships the `.glb`; the engine lane adds the sibling. The state is
+  normal for an unwired body and art is charged with nothing.
+
+*** THE CASCADE IS THREE DEEP AND THE ORDER MATTERS - DO NOT SHORT-CIRCUIT IT ***
+Measured on merged main cc6168a0 with a brace-matched parse, not a regex:
+  **49 bodies** (art) -> **48 feed rows** (content) -> **47 `MB_NAME` rows** (engine) -> **47
+  published** (chat bot).
+`stopper` has a feed row and NO `MB_NAME` row. `roper` has a body and no feed row. So on the tree
+as it stands, the chat bot's `COMMANDS_DATA` arm would fire TWICE if run right now - `MINIBOSS
+COUNT` (47 published vs 48 feed) and `MINIBOSS UNNAMED` (stopper). **BOTH ARE EXPECTED AND NEITHER
+IS A LANE'S FAULT** - they are the signature of a correctly-sequenced handoff caught mid-step.
+The order is: game build wires `stopper` -> chat bot republishes 48 -> content writes the roper's
+feed -> game build wires `roper` -> chat bot republishes 49. Do not republish the count before the
+`MB_NAME` row lands or the UNNAMED arm just moves rather than clears.
+
+*** THE SIX ROWS ***
+- **GAME BUILD - WIRE THE STOPPER. THE HOLD YOU CORRECTLY APPLIED AT S100 IS DISCHARGED: content's
+  feed row landed at 21:23 and I have parsed it.** `Delve.MB_NAME` wants `"stopper": "Chokewell"`,
+  the `MB_FIT` ratio copied from art's register (do not re-derive it), and the `stopper.glb.import`
+  sibling. Then re-run `tools/_s51_names.gd`. SECOND, IF THE WINDOW HOLDS: `tools/_l56_test.gd` is a
+  broken instrument and it is yours. The chat bot measured it off the script and B116's own soak
+  log: `START_FLOOR 3` + `FLOORS_PER 8` inside `RUN_CAP_FRAMES 7200` needs ~11,500 frames per run at
+  the BEST observed rate, so the four-run soak cannot produce a verdict inside a 25-minute lock
+  window except on a lucky draw. Fixing a lying instrument is not new work. **BUT THE THING I WILL
+  CHECK WHEN YOU DO IT: a soak that fires NOTHING must still reach the ceiling with total=0 and
+  still FAIL.** A test made quiet looks exactly like a test made honest.
+- **CONTENT - C-177: THE ROPER'S FEED ROW ("Drawtight", it twists you together).** Art shipped the
+  body at 21:56. Write the FULL four-group shape - `arrive / act / broken / fall` - as you did for
+  the stopper, not the two-group shape. The mechanic is the one no other body has: it reads the
+  DISTANCE BETWEEN TWO HEROES and pulls them together.
+- **ART - HOLD ON A 50TH. Take the Roper's front-read instead, and only if you judge it worth the
+  passes.** You named this yourself: head-on, the three ground-pinned pale lines read as a tripod
+  before they read as rope. That is your own shipped work and auditing it is not new work. You also
+  said the fix re-sites the hands because a bigger top fouls the chin - if that is still true after
+  a pass, say so and stop; a written refusal is the delivery. **DO NOT START A 50TH while the wiring
+  queue is two bodies deep** - that is my call on queueing, not a judgement on your output, and it is
+  the same fault this seat made in Phase 1.
+- **HUB - HOLD web/ STEADY. No publish gap exists and nothing is owed.** Standing check only:
+  re-measure the three trees, re-run the security greps on any web/ change. Do not publish; that is
+  the supervisor's call and there is nothing to publish.
+- **CHAT BOT - WAIT FOR THE `MB_NAME` ROW, THEN REPUBLISH 47 -> 48.** Until the game build lands
+  `"stopper": "Chokewell"`, your count arm firing is EXPECTED and is not a red you own - say so in
+  your run rather than chasing it. When the row lands: `data/commands.json` `miniboss` to "The 48
+  elites" in both `short` and `what`, regenerate `docs/COMMANDS.md` with the REAL
+  `tools/_commands_doc.gd`, then the four gates. Claim by :50 with a finish inside :52.
+- **HUD - NOTHING HUD-OWNED IS OPEN. Stand down and write it up, or commit logs.** Your prompt's
+  standing note on the rarity-hue half of System 2 is stale for the TENTH time - it shipped as
+  U55/U56 and you are right to keep refusing it. L31/D41/D48/D61 are game-build files; L66 is hub's.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these
+*** all at once on the first LIVE turn Mr. E gives you) ***
+1. **THE HUB PUBLISH-GAP BLOCK IS SPENT. STRIKE IT.** The prompt says gh-pages is `05ac2679` /
+   tree `9ca8051e` pushed 19 Nov, with "3 files / +59 / -1" waiting since 20 Nov. Measured 23 Nov
+   22:0x CT: gh-pages is **029e4fac**, tree **02257b2f**, pushed **21 Nov 15:39 CT** as "hub publish
+   6", and it EQUALS `origin/hub:web` and `origin/main:web`. The gap is closed; publish 6 consumed it.
+2. **THE ART FIT-REGISTER STANDING NOTE IS STALE. STRIKE IT.** The prompt says the register reads
+   `RED / ok:false` on two carried `_chibi` rows. Measured: `ok: true`, `verdict: "GREEN"`,
+   `red_summary.rows []`, `shipped_red []`, `retired_red []`, `ok_shipped true`, 51 pairs.
+3. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE.** It says the fit register judges 46 rows of which
+   44 are live and two are retired `_chibi`. Measured on cc6168a0: the body register `_report.json`
+   holds **60 rows = 49 live + 11 retired `_chibi`**; `MB_NAME` **47**; `miniboss_feed.by_key` **48**.
+4. **ID BASELINE, 23 Nov 22:0x CT:** B117, C-176, D100, H32, L74, S100, T5, U137, and art is on the
+   49th body (the Roper).
+5. **THE CLEAN-HOUR COUNT RESET TO 0 at 21:08 CT on 23 Nov** when the game build cleared the stale
+   `RUNNING 2026-11-21T23:07:59` claim left by the outage. It stood at 2 after 21 Nov 08:58.
+6. **A HISTORICAL MERGE STRIPPED FOUR SECTION-DIVIDER RULES FROM main's PROGRESS.md.** The 80-char
+   `=` rules: the merge-base carries 5, `origin/art` carries 7, main carried **1**. The four are the
+   signature of a blanket `^=======` PREFIX delete - the exact trap the prompt warns about, because
+   `^=======` matches an 80-character `=` rule. **ZERO prose lines were lost** (I multiset-compared
+   every lane ref against merged main: the only missing lines are the rules themselves). I did NOT
+   restore them - their original positions are not recoverable from the diff and guessing would be
+   churn in a 16,000-line file. Use `L == "======="` exact equality, never a prefix match.
+
+*** FOR THE SUPERVISOR ***
+- **NOTHING IS WAITING ON A DECISION OF YOURS.** There is no publish to authorise: gh-pages' tree
+  already equals `origin/hub:web` (both `02257b2f`), so publish 6 of 21 Nov consumed the whole gap
+  and the hub has nothing queued behind it.
+- **FOR INFORMATION, NOT FOR A DECISION: the project lost 46 hours.** No lane ran between 21 Nov
+  23:08 and 23 Nov 21:08 CT - the lock file jumps straight across it and main sat unmoved at
+  fad55334 for two days. All six lanes came back of their own accord this evening and all six
+  shipped within fifty minutes; the only residue was one stale `RUNNING` claim, which the game
+  build cleared itself after checking no Godot was alive. I have charged no lane and reset the
+  clean-hour count to 0 as the rule requires. Flagging it only because an hourly cadence that
+  silently misses 46 firings is worth your knowing about, not because I need anything.
+
 ## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 21 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 Merged this hour into main **42673a8b**: all SIX lanes (laptop 7f04982c, content f2e24f51, hub
 0d762c8a, hud-ui 78ce6f40, art 7ec49022, chatbot d3d6cd1e). FOUR conflicts (content, hub, hud-ui,

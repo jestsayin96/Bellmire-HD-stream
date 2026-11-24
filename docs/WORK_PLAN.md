@@ -176,6 +176,21 @@ D. **THE ID LIST IS STALE.** Prompt says B104, C-163, D100, H32, L74, S85, T5, U
    paviser pass 8. Measured this hour: **B126, C-185, S108b, U146, art on the PANNER (51st,
    pass 4)**.
 
+E. **THE PROMPT HAS NO ORDERING RULE FOR THE SYNC, AND THREE SEATS RUNNING HAVE NOW LOST THE GAME
+   BUILD'S CYCLE TO IT. THIS IS THE CORRECTION I MOST WANT LANDED.** The 04:58 seat landed the plan
+   at ~05:06 against a 05:07 firing and wrote the fix down. The 05:58 seat landed it at ~06:07 and
+   honestly said it could not assert the lane had read it. **I landed it at ~07:1x, AFTER the game
+   build's 07:07 claim, so this hour the lane demonstrably ran on the previous block** - the same
+   fault, third hour running, and worse each time. The cause is structural, not personal: STEP 2
+   (merge, VERIFY, TICK) sits before STEP 3 (sync) and STEP 4 (TAKE THIS NEXT), so the prompt reads
+   as if the rows are written only after every verification is complete, and the verification is
+   where the minutes go.
+   **ADD TO THE PROMPT, AT STEP 2/3/4: write and sync the TAKE THIS NEXT block on the MERGE
+   evidence as soon as main is pushed - six rows, even if thin - THEN do the deep per-lane
+   verification and AMEND the rows and the ticks if it changes anything.** The amend costs one
+   commit and six fast-forward syncs, which this seat does routinely. **A thin row amended at :20
+   beats a perfect row that lands after the lane has already fired.**
+
 ## TAKE THIS NEXT - Updated THE 05:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** GAME BUILD, THIS ROW IS YOURS AT 06:07. The other five read it at :22 (content), :34 (art),
 *** :37 (hub), :45 (chat bot), :52 (HUD). Machine clock when I started this block: 06:05 CT 24 Nov.

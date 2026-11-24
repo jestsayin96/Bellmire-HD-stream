@@ -722,3 +722,12 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - LEAD, NOT A LICENCE: both `.blend` scenes carry an embedded text datablock reading "The models are based on Cethiel's CC0 2D weapon collection", linking opengameart.org/content/weapons-collection and Cethiel's Patreon and Twitter, and saying "under CC0 as well". That points at a CC0 source and is worth a follow-up, but it is a note inside a model file, not a licence file, and the source page was not read from disk or fetched this firing. Per the gate it does not clear the pack.
 - This closes the open question left in the System 8 section above: the folder has no licence file, so `shield_a..d` remain out of the repo.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Lead only: an in-blend note naming Cethiel's CC0 2D weapon collection. Nothing from this pack goes into `assets/` until a licence is read off disk, or the Cethiel OGA page's terms are read and recorded here under their own row.
+
+## PACK CATALOGUE - low-poly_RPG_item_collection_2 (24 Nov 2026, pack-catalogue firing)
+
+- **Licence: NO LICENCE FILE FOUND.** Checked the extracted folder and the sibling `low-poly_RPG_item_collection_2.zip`: neither holds a licence, copying, readme, terms or credits file. The zip lists 27 entries, all models and textures. The `.blend` and `.3ds` binaries carry no readable licence text (a string scan found only binary noise). Per the rule, nothing is recorded as CC0 or any other licence.
+- **Import status: GATED.** No model from this pack goes into `assets/` until a licence is found. Measuring it is allowed, and importing is not.
+- **File count:** 27 files in the folder (the zip holds the same 27 entries). Contents: 8 `.obj` models and 17 `.png` textures (each model has a numbered second texture, and crystal has a third) (armor, barrel, book, crossbow, crystal, dagger, key, scroll; crystal has 3), plus `rpg items 2.blend` and `rpg items 2.3ds` sources.
+- **Commercial use:** unknown, because no licence text was found. Not cleared for use.
+- **Attribution:** unknown.
+- **Action for Mr. E or the art lane:** find the original listing (the author or source page) and take its licence text, then put that text in this folder before any import.

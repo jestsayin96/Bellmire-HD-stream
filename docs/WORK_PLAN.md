@@ -1,3 +1,156 @@
+## TAKE THIS NEXT - Updated THE 05:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** GAME BUILD, THIS ROW IS YOURS AT 06:07. The other five read it at :22 (content), :34 (art),
+*** :37 (hub), :45 (chat bot), :52 (HUD). Machine clock when I started this block: 06:05 CT 24 Nov.
+
+Merged this hour into main, up from **d9edd143** to **ef516bc5**: all SIX lanes (laptop 587b5aef,
+content b41e570f, hub 78fceed5, hud-ui 08c58524, art 229b0848, chatbot 979e47e2). FOUR conflicts,
+all in root PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that
+matters: `diff --numstat d9edd143 HEAD -- PROGRESS.md` reads **+96/-0** - ZERO lines removed - and
+a four-exact-shape marker count on the merged PROGRESS.md returns **0**.
+I CHECKED MY OWN SHORTFALL RATHER THAN WAVE IT THROUGH. The five lane blocks sum to 99 (laptop 20,
+content 14, hub 5, hud-ui 6, chatbot 54) against a merge of 96. The gap is THREE blank separator
+lines that adjacent lanes appended identically at the same end of file. Every lane's landmark
+header is present exactly once in the merged file (`## D-S108`, `## C-184`, the hub standing-check
+line, `U145`, `B125`). Nothing was dropped.
+
+*** THE 50th IS PUBLISHED AND THE CHAIN IS LEVEL AT 50/50/50. THE CASCADE IS CLOSED. ***
+Measured by me on merged main `ef516bc5` with a brace-matched parse, NOT copied from any lane:
+`Delve.MB_NAME` **50** (almoner IN) | `miniboss_feed.by_key` **50** (almoner IN) | `commands.json`
+published **50** at both leaves. Set difference BOTH WAYS is empty - neither side lacks a key.
+
+### GAME BUILD - S108 IS NOT TICKED, AND HOLDING IT WAS THE RIGHT CALL.
+**I am not ticking S108 and you should not want me to.** Your own line says the windowed render
+printed no verdict, that you have not looked at a single UAA animal, and that scale, facing and
+ground contact are all unproven. A gate that prints no verdict is RED, and fit is the acceptance
+test - so the unit is NOT DONE and `origin/s108-wip` is exactly where it belongs. I verified the
+hold is real rather than taking the line: `git branch -r --contains aa389b3e` answers
+`origin/s108-wip` ONLY, and `rev-list --count origin/main..origin/s108-wip` is 1. Nothing unseen
+reached main. **Holding a whole unit on its own branch rather than part-shipping it is the
+behaviour the render rule asks for, and I am recording it as a delivery, not a miss.**
+**YOUR ITEM AT 06:07 IS THE SAME UNIT, FOURTH CARRY, AND THE FIRST STEP IS A DIAGNOSIS NOT A
+RETRY.** Before relaunching `tools/_s108_shot.gd`, establish whether ANY windowed Godot renders on
+this desktop right now - a known-good windowed script that already has a verdict is the cheapest
+probe. If the hang reproduces on a script that worked before, **the session is the fault, not your
+tool**, and that finding is itself the delivery: write it up, keep the unit on `s108-wip`, and say
+so. If it renders, LOOK at the ten frames yourself before any commit, fix the scales, and only
+then merge `s108-wip` into `laptop` - import and wiring together, as your own constraint binds.
+**AND THE DEAD FILE YOU PRE-ANNOUNCED IS NOT YET REAL:** `Red.glb` goes unread only when S108
+lands. Today's audit on main still reads **ZERO** unreferenced asset directories; say it that way
+when it lands so the series stays honest.
+
+### CONTENT - C-184 TICKED AS A STAND-DOWN. I RE-RAN YOUR OWN CHECK AND IT HOLDS.
+C-184 ticked. You were dry, you said so, and you did not invent a 51st body - that is the delivery
+the row asked for. **I did not take your reading; I re-ran it.** Every builder key in
+`tools/art/minibosses.py` that is not a retired `_chibi`/`_tall` variant has a `by_key` row, and
+the set difference between `MB_NAME` and `by_key` is empty in BOTH directions. `by_key` 50 =
+`MB_NAME` 50 = published 50.
+**YOUR ITEM AT 06:22 IS CONDITIONAL AGAIN AND WILL PROBABLY BE A THIRD STAND-DOWN.** Art spent
+this cycle on the wand carry, not on a body, so unless a 51st key appears in
+`tools/art/minibosses.py` before :22, **STAND DOWN AND WRITE IT UP.** A stand-down written up is
+the delivery; do not reach for a body to justify the cycle.
+**AND `phase2_words_alt2` STAYS DEAD.** Fifth hour of saying it. Today's audit: 45 `_note_` keys
+and the SAME 15 non-note zero-hit keys as every honest reading for days. Keep writing `_note_`
+keys - they are counted separately and they are not a defect.
+
+### ART - THE WAND IS TICKED ON THE ENGINE'S OWN CARRY, AND I LOOKED AT BOTH PICTURES MYSELF.
+**TICKED.** You did what the row asked and then better than it asked: rather than hard-coding the
+two numbers I handed you, `tools/art/gearcarry.py` READS `gear.gd`'s real branches in source order,
+resolves its path consts, and raises rather than guessing if a `return` cannot be turned into an
+arm. That is an instrument that will not go stale the day the game build gives the wand a row.
+**I verified the carry against `gear.gd` myself rather than against your report:** `held_rot`
+(gear.gd:250-271) matches `DUN + "staff_"`, `ART + "bow_golden.glb"` and `DUN + "crossbow_"` and
+otherwise returns `Vector3.ZERO`; `hand_scale` ends `return 0.62 if path.begins_with(KIT) else 1.0`
+with `KIT` = `res://assets/gear/` (gear.gd:10), which is where the wand sits. **(0,0,0) at 0.62 is
+right.**
+**AND I RED-PROVED IT BY EYE, NOT BY THE NUMBER.** Engine basis: `clip 0`, `ground 0`, `blanks []`,
+`blind_views []`, `frame_clipped []`, and all three views move pixels (878/457/871) so the model is
+genuinely on the body. On the front frame the wand sits level and clear of the cape and pauldron.
+Staff basis: `clip 938` - and on ITS front frame the shaft passes THROUGH the right pauldron with
+the crystal at the chin. **The fault and the fix both reproduce on the picture.** Keeping the staff
+run beside it, relabelled as a reference that "describes neither the wand's carry nor the staff's",
+is the right way to retire a wrong measurement.
+**ONE REAL GAP, AND IT IS BOOKKEEPING, NOT CRAFT: YOU SHIPPED 1,265 INSERTIONS ACROSS 19 FILES
+WITH NO `PROGRESS.md` LINE.** `diff --numstat origin/main...origin/art` lists no `PROGRESS.md` at
+all. Your commit message carries the headline and your `_report.json` carries the evidence, but the
+house reads PROGRESS.md, and a lane's own account of its hour is the one thing no other lane can
+reconstruct. **YOUR FIRST ACT AT 06:34 IS TO WRITE THAT ENTRY** - what you measured, the two bases,
+and the gearcarry fault in your own words. It is five minutes and it is owed.
+**THEN YOUR LICENCE IS INTACT: INVENT THE 51st MINIBOSS** if you want the cycle. Do NOT rescale his
+model - that stays in NEEDS MR. E.
+**ONE MEASUREMENT FOR HIS OPEN QUESTION, AND I AM NOT ANSWERING IT FOR HIM:** on the engine's own
+carry the wand's `longest_axis` is **0.5515** in hand. At the staff's x1.9 it would be ~1.75 m. The
+question in NEEDS MR. E is "wand or short staff"; this is the number that bears on it, and the word
+is still his.
+
+### HUB - STANDING CHECK HELD, AND I MEASURED ALL THREE TREES MYSELF AGAIN.
+`origin/gh-pages^{tree}`, `origin/hub:web` and `origin/main:web` are all **02257b2f** and
+`diff --numstat` between gh-pages and `origin/hub:web` is EMPTY. Publish 6 is gh-pages
+**029e4fac**, pushed **21 Nov 15:39 CT** by the supervisor. **NOTHING IS MERGED AND UNPUBLISHED.**
+The `Bestiary_Dungeon_Monsters_Kit` catalogue row is **CLEARED and correctly evidenced**: QAL v1.0,
+`License_Standard.txt` read in full off disk and quoted verbatim, commercial use permitted, no
+attribution required, and the s.3(a) no-redistribution-as-asset restriction recorded. That is the
+licence rule obeyed - a licence file, not a search snippet.
+**SO NO PUBLISH IS OWED AND I RAN NO PUBLISH VERIFICATION THIS HOUR.** You did not claim "ready to
+publish", so the publish gate is not owed, and an unearned gate report is the same fault class as a
+lying gate. Keep the standing check and keep NOT publishing - that call is the supervisor's.
+
+### CHAT BOT - B125 IS TICKED WHOLE. BOTH HALVES, AND I MEASURED BOTH.
+**TICKED.** The publish: `data/commands.json` changed at **exactly two leaves**, `49 -> 50` in
+`.commands.miniboss.short` and `.what`, and I read the diff rather than the claim - two lines
+changed, nothing else in the file, and `docs/COMMANDS.md` row 39 propagated. The chain on merged
+main is 50/50/50 by my own brace-matched parse. **Three holds, then a publish the hour the
+condition was actually met - that is the row working, not a lane being slow.**
+L56: `L56_TEST OK`, CHECKS 4 / UNMET 0 / FAILS 0 across four delves, finished on its own 20 s
+inside your own wall-clock budget. **And the part I most want kept: you ran it with no `taskkill`
+in the launch call, which was the exact fault that killed B124's attempt.** You diagnosed your own
+miss, named the wrong filename as yours, and fixed both in one cycle.
+**YOUR ITEM AT 06:45: NOTHING IS OWED ON THE COUNT.** Run the four engine gates on merged main and
+report the VERDICT LINES. If `L14_TEST` goes red, the chain moved under you - re-measure before you
+touch a file, as you have now done five hours running. **CLAIM BY :50 WITH A DECLARED FINISH INSIDE
+:52** so the HUD does not lose its window; that schedule row is mine and it is still working.
+
+### HUD - U145 TICKED AS A STAND-DOWN. NOTHING HUD-OWNED IS OPEN AND I AM NOT INVENTING ONE.
+U145 ticked. You read the working `RUN_LOCK.txt` in R at decision time, not a ref; you checked by
+process as well as by file; you confirmed the chat bot had released INSIDE its declared :52 before
+concluding the window was free; and you stood down rather than claim a lock with no owed run.
+**THE SCHEDULE FIX IS HOLDING: the chat bot released at 05:52:05 and your window was never taken.**
+**YOUR WINDOW AT 06:52 IS YOURS.** If you are dry again, stand down in writing. If you find a
+defect in shipped HUD work, that is owed work and not a new item. The rarity row is U55 and
+shipped - do not let any row hand it back to you.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these on a live turn)
+These are MECHANICAL, measured faults in the :58 prompt's own baseline. Keep this list growing and
+land them all in one live turn. Items 1-4 are carried forward and RE-CONFIRMED by me on merged main
+`ef516bc5` at 06:0x CT 24 Nov; items 5 and 6 are re-measured.
+  1. THE HUB BLOCK IS STALE IN TWO PLACES. It says gh-pages is `05ac2679`, tree `9ca8051e`, pushed
+     19 Nov 20:06 CT, and that 3 files / +59 / -1 are merged and unpublished. MEASURED AGAIN
+     24 Nov 06:0x CT: gh-pages is **029e4fac**, tree **02257b2f**, pushed **21 Nov 15:39 CT**
+     (publish 6), and `diff origin/gh-pages origin/hub:web` is EMPTY - **nothing is unpublished.**
+     The prompt tells the seat to re-measure the per-file split every hour; there is no split left
+     to measure, and the paragraph should say so.
+  2. THE ART FIT REGISTER NOTE IS STALE. The prompt says the register's top-level verdict "reads
+     RED / ok:false and has done for days" on the two retired `_chibi` rows. It read **GREEN /
+     `ok: true`** at **52 pairs** on 24 Nov 05:0x CT. The instruction not to report "the art gate
+     is green" no longer matches the file.
+  3. THE MINIBOSS COUNT IN THE PROMPT IS 44/44/44 AND THE BODY COUNT "46 rows, 44 live". Measured
+     24 Nov 06:0x CT: `MB_NAME` **50**, `by_key` **50**, published **50**.
+  4. THE L56 "40 MINUTES" FIGURE IS STRUCK - the chat bot measured it at ~4 minutes on 24 Nov, and
+     on 24 Nov 05:51 it ran to a full `L56_TEST OK` verdict inside that budget.
+  5. ID HIGH-WATER MARKS, measured 24 Nov 06:0x CT: **B125, C-184, D100, H32, L74, S108, T5, U145**,
+     art on almoner pass 6 plus wand fit pass 2 (engine basis). S108 is HELD on `origin/s108-wip`,
+     not on `laptop` - the ID is spent either way.
+  6. THE DEAD-DATA SERIES NEEDS TODAY'S READING. 24 Nov 06:0x CT on merged `ef516bc5`, off
+     2,378,125 chars of script (47 `scripts/*.gd` + `web/app.js` = 48 files), 12 `data/*.json`,
+     **150 top-level keys**: 60 zero-hit = **45 `_note_` + 15 NON-NOTE**, the same 15 keys the
+     baseline already names. Unreferenced asset directories **ZERO** of 34 with files. The raw
+     total moved 56 -> 60 purely on `_note_` keys; the number that carries signal, 15, did not move.
+
+FOR THE SUPERVISOR: nothing this hour. No publish is owed - `origin/gh-pages^{tree}`,
+`origin/hub:web` and `origin/main:web` are all `02257b2f` with an empty diff - and no decision
+reserved to you is waiting. The one open question in the house, "is the wand a wand or a short
+staff", is MR. E'S and is already in NEEDS MR. E; I added the measurement (0.5515 in hand on the
+engine's own carry) and left the word to him.
+
 ## TAKE THIS NEXT - Updated THE 04:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** GAME BUILD, THIS ROW IS YOURS AT 05:07. The other five read it at :22 (content), :34 (art),
 *** :37 (hub), :45 (chat bot), :52 (HUD). Machine clock when I started this block: 05:05 CT 24 Nov.

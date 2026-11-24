@@ -419,6 +419,7 @@ const MB_FIT := {
 	"almoner": 1.03,   # S107: art's _fit_report.json pairs.almoner.ratio (50th, Dolehand in CANON, h 2.52 / hero 2.45, tag shrine - field 5, fits_frame true, 3/3 proving views), copied not re-derived; almoner.glb.import committed in the same change
 	"panner": 0.92,   # S111: art's _fit_report.json pairs.panner.ratio (51st, Onceround in CANON, h 2.26 / hero 2.45, tag confection - field 5, fits_frame true, 3/3 proving views), copied not re-derived
 	"stiltman": 1.31,   # S112: art's _fit_report.json pairs.stiltman.ratio (52nd, Downfast in CANON, h 3.20 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived; stiltman.glb.import tracked on main
+	"nightman": 0.94,   # S113: art's _fit_report.json pairs.nightman.ratio (53rd, Nightwork in CANON minibosses.py:19075, h 2.30 / hero 2.45, tag prison - field 5, fits_frame true, 3/3 proving views), copied not re-derived
 	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
 }
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
@@ -454,7 +455,8 @@ const MB_NAME := {
 	"stopper": "Chokewell",   # S103: content's miniboss_feed._note_c176 "Chokewell" and art's CANON title (minibosses.py:16881), both read; C-176 by_key.stopper landed (9/7/4/8); stopper.glb tracked on main 41f71825 - the S101/S102 hold is lifted
 	"almoner": "Dolehand",   # S107: content's C-182 by_key.almoner landed (9/7/4/8) and art's CANON title (minibosses.py:17903), both read
 	"panner": "Onceround",   # S111: content's C-187 by_key.panner landed (9/7/4/8), _note_c187 "Onceround", and art's CANON title (minibosses.py:18373), both read; panner.glb.import committed at S110
-	"stiltman": "Downfast"}   # S112: content's C-189 by_key.stiltman landed (9/7/4/8) and art's CANON title (minibosses.py:18749), both read
+	"stiltman": "Downfast",   # S112: content's C-189 by_key.stiltman landed (9/7/4/8) and art's CANON title (minibosses.py:18749), both read
+	"nightman": "Nightwork"}   # S113: content's C-190 by_key.nightman landed (9/7/4/8) and art's CANON title (minibosses.py:19075), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []
@@ -2118,8 +2120,8 @@ const MB_WRING_CAP := 4.0
 ## MB_PIT_R of an open pit goes in and loses MB_PIT_BEAT seconds off their next swing; climbing out
 ## they cannot go in again for MB_PIT_CLIMB seconds. THE PIT STAYS: pits outlive the act and the break.
 ## Broken = it stops digging; the pits it already opened are still in the floor.
-## HOLD: content's by_key.pitman has arrive/fall only, no act/broken lines yet, so _mb_way_tick's
-## existing gate holds this way out of every real floor until those lines land.
+## LIVE (S113 note): the old HOLD here is spent - content's C-158 landed by_key.pitman act/broken
+## (arrive 9 / act 7 / broken 4 / fall 8), so _mb_way_tick's gate admits this way on real floors.
 ## HONEST LIMIT: the pits are ticked by the Pitman - once it is dead they stop taking anyone (the marks
 ## stay in the floor as scenery); a floor-owned hazard that outlives its maker is not built.
 const MB_PIT_MAX := 3

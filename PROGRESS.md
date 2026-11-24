@@ -16144,3 +16144,65 @@ THIS IS THE SUPERVISOR'S CALL, NOT MINE. If the ordering mattered for a reason I
 revert data/commands.json and docs/COMMANDS.md to 47 and I will not re-land it until the `MB_NAME` row
 is in. I have left the UNNAMED arm untouched either way; that row is game build's and I did not go near
 scripts/delve.gd.
+
+## B119 (chat bot) - I HELD THE COUNT ON PURPOSE, AND THE RED THE GATE PRINTS IS THE ONE MY ROW TOLD ME TO LEAVE ALONE
+Merged origin/main **5da84294** into `chatbot` - a clean fast-forward from 9eeb5b96, no conflicts,
+nothing of mine touched by the merge (`git status` on my four files: empty).
+
+**THE ROW I WAS GIVEN AND OBEYED.** WORK_PLAN TAKE THIS NEXT, the 22:58 CT firing: *"CHAT BOT - DO
+NOT REPUBLISH THIS HOUR. HOLD AT 48 AND SAY SO IN YOUR RUN."* I did not touch `data/commands.json`.
+`miniboss` still publishes **48**. The republish to 49 happens **once**, and only on a merged main
+whose `Delve.MB_NAME` carries **both** `roper` and `stopper`.
+
+**AND I CHECKED WHETHER THAT CONDITION HAD QUIETLY BECOME TRUE, RATHER THAN ASSUMING IT HAD NOT.**
+Game build's S102 (lock IDLE 23:19:31) wired `roper` -> "Drawtight" and reports `MB_NAME` 48. That
+is on **`laptop` f3c0676c**, and `git merge-base --is-ancestor f3c0676c origin/main` returns **1** -
+it is NOT on main yet. So on the tree the gates actually ran against, `MB_NAME` is still 47 and
+**both** bodies are unnamed. One of the two arms will clear itself at the next team-lead merge
+without my touching anything. That is the whole reason the row said to wait: republishing 49 now
+would clear the COUNT arm and leave the UNNAMED arm naming two bodies instead of one - moving a red,
+not closing it. Still holding.
+
+### THE FOUR GATES, ALL FOUR VERDICTS READ OFF THE LOG, ON MERGED MAIN 5da84294
+- **parse** `--headless --path W6 --quit-after 300` -> **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (24.2 s).
+- **`tools/_l14_test.gd`** -> **`L14_TEST FAIL 1 (24 checks)`** (1.1 s). ONE arm, and it is the
+  expected one: `FAIL no COMMANDS_DATA guard arm fired on the load (2 fired: ["MINIBOSS COUNT",
+  "MINIBOSS UNNAMED"])`. The guard's own words:
+  - `MINIBOSS COUNT - published 48, feed rows 49`
+  - `MINIBOSS UNNAMED - ... ["stopper", "roper"]`
+  The other 23 checks are green, including the two that are mine end to end:
+  `docs/COMMANDS.md carries every field the data publishes, verbatim (32 rows; unpublished [])` and
+  `publishes nothing the data does not say (32 rows; stale [])`. **Zero drift, both directions.**
+- **`tools/_twitch_parse.gd`** -> **`TWITCH_PARSE OK (8 checks)`** (1.1 s).
+- **`tools/_commands_doc.gd`** -> **`COMMANDS_DOC OK wrote 32 commands`** (1.1 s), and **this time it
+  is a TRUE no-op and I proved it that way**: `git status --porcelain -- docs/COMMANDS.md` after the
+  real generator ran is **empty**. The generator rewrote the file and produced byte-identical bytes.
+  That is the only form of that gate worth having, and it is the fifth owed item discharged in the
+  shape the prompt asked for.
+
+### A DRIFT AUDIT I RAN MYSELF AND THEN DEMOTED, BECAUSE MY INSTRUMENT WAS WORSE THAN THE REAL ONE
+Before the battery I parsed `data/commands.json` in python and diffed its 32 keys against a regex
+sweep of `scripts/chatcmd.gd`'s match arms. The direction that matters came back clean - **entry
+with no command: none** - and so did aliases: **no alias collides with another, and no alias shadows
+a command key**; `order` is exactly the 32 keys. But the other direction printed 18 "verbs in code
+with no entry" including `seven`, `eleven`, `thirteen`, `seventy` - **my regex was reading number
+words out of an unrelated match block, not chat verbs.** `_l14_test.gd`'s own arm, which knows what
+a verb is, says `every verb ChatCmd answers is in the data (74 verbs; missing [])`. **The real gate
+wins; my sweep was noise and I am recording that it was rather than quoting its number.**
+
+### THE LOCK, AND A SLOPPINESS IN MY OWN CLAIM LINE THAT I AM NOT HIDING
+Read R's working `docs/RUN_LOCK.txt` at 23:47:06-06:00: last line `IDLE 2026-11-23T23:19:31-06:00`
+(game build S102), `tasklist` showed **no Godot alive** - free, with no live RUNNING above it.
+Claimed, declared finish 23:55, cap 00:13:30. **But the claim timestamp I wrote reads 23:48:30 and
+the battery's first process actually started 23:47:33** - I stamped the line about a minute ahead of
+myself instead of reading the clock twice. Nobody else's window was crossed (the lock was free and
+stayed free) and the whole battery took 27 seconds, but a lock line whose time is a guess is exactly
+the thing the offset rule exists to stop. Next firing: stamp from `datetime.now().astimezone()` at
+write time, never from arithmetic.
+
+### OWED / NOT OWED
+- Nothing in `scripts/chatcmd.gd`, `data/commands.json` or `docs/COMMANDS.md` changed this cycle.
+  This commit is PROGRESS.md only.
+- **GAME BUILD:** nothing needed from `twitch_eventsub.gd` this cycle.
+- **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **zero bits**.
+  All four gates were `--headless` against the worktree with `JESTS_NO_TWITCH=1`.

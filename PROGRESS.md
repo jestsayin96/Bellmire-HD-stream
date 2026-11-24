@@ -17319,3 +17319,13 @@ RESULT - THE FAULT AS ART HAD IT IS ABSENT:
  - U59_CONTRAST prints seen/checked computed in-run; U63_STRIPE prints gate_n computed in-run. Both are the honest shape.
 SIBLING FAULT FOUND (not the same, same family - a verdict with no denominator): U62_SCALES, U88_WORN, U90 FEED_LOAD, U91 LONGNAME, U69_REDPROOF, U56_HUE, THEME_SWEEP, U40_TEST print OK purely on `bad == 0`. If the set they walk came back EMPTY (e.g. U88 loops `_sat._list.get_children()`; a renamed list = zero rows) they would still print OK. Nothing is wrong today; the guard just cannot tell "all passed" from "none measured". NOT FIXED THIS HOUR: it needs a windowed run to prove, and the lock window is not mine. NEXT ENGINE WINDOW: add `n` counters to those 8 prints and FAIL on n==0 (U58's "%d colours walked" line is the model).
 Decision for Mr. E: none.
+
+
+## U154 - EMPTY-WALK GUARDS ON THE HUD GATES, 2026-11-24 ~14:58-06:00 (14:52 firing)
+ITEM: the sibling fault U153 found (verdict with no denominator). Rarity-hue half is U55, not rebuilt. Lock: R working RUN_LOCK last line was chat bot B134 IDLE 14:48:31, 0 Godot alive -> claimed 14:53:51 (declared 15:03), released ~14:58 (IDLE written). Windowed runs.
+CHANGED (tools only, no HUD .gd touched): _u40_pad_test, _u55_hue (U56_HUE), _u62_scales, _u69_redproof, _u88_worn now count what they walked and print it; zero walked = NO VERDICT + bad. THEME_SWEEP, FEED_LOAD, LONGNAME already had the guard.
+RUN: parse 0 SCRIPT ERROR / Parse Error. U40_TEST OK lines=8. U56_HUE OK walked=28. U88_WORN OK rows=15. U69_REDPROOF elements=26 but FAIL (2x BossCard 1500x800 'inflated past in-pane skip' @100%/150% grid). U62_SCALES FAIL.
+BOTH FAILS PREDATE MY CHANGE: I ran the committed (HEAD) U62 and U69 scripts unmodified: U62 bad=2, U69 FAIL, identical lines. 
+FINDINGS NEEDING A LOOK NEXT WINDOW: (1) U62: the 4th scroller (h=159/198/238) finds NO ink at any scale (ink=[9999,-1]) - it has passed vacuously since it was added; now reported as NO INK. Also clear=false at 100% h=96 (stripe ends 12.41 vs rod_bot 12.25) and 125% h=120 (14.62 vs 14.50): stripe overruns the rod by ~0.1-0.16px - contradicts the U65 'OK bad=0' record, so either ui_theme changed since 17 Nov or the U65 run differed; needs bisect. (2) U69: injected BossCard in Pane_director reads 1500x800; unclear whether this is the red-proof firing as designed or a regression; read the test header first.
+NOTE: windowed run connected to Twitch (TWITCH joined #jestsayin96, EventSub) and gear.gd:104 import-cache errors - the known cache difference, not a HUD fault.
+Decision for Mr. E: none.

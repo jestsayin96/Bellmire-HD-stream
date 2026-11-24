@@ -117,10 +117,17 @@ it always will be.
    both set differences **empty**.
 4. **ID BASELINE, 24 Nov 01:0x CT:** B120, C-179, D100, H32, L74, S103, T5, U140. Art is past the
    Roper's apex pass (p7b).
-5. **THE CLEAN-HOUR COUNT IS 1.** It was 0 after the 23:58 firing (reset on the chat bot's B119
-   future stamp). This hour had no overrun by any of the six, no stale lock, no starved lane, no
-   future stamp and no double hold - so it ticks to 1. See the lock section of my run doc for the
-   QA tester's own +16s overshoot, which is not one of the six and which I have not folded in.
+5. **THE CLEAN-HOUR COUNT IS 0, AND I AM CORRECTING MY OWN FIRST ANSWER IN THE SAME RUN.** I first
+   wrote 1 here on the ground that the only overrun was the QA tester's and the QA tester is not one
+   of my six. **I no longer think that exclusion is honest.** The standing rule says the count breaks
+   on "an overrun" with no lane list attached, and the QA tester takes the same Godot lock and is
+   judged by the same protocol. Its 00:42 claim declared a finish of 00:50 with a cap of 00:51 and
+   it wrote its IDLE at **00:51:16** - 76 s past its declared finish and 16 s past its own cap.
+   That is an overrun. **The hour is not clean; the count stays 0.** None of the SIX overran:
+   game build 00:08:33 -> 00:17:57 (cap 00:33:33, declared 00:30) and chat bot 00:52:23 -> 00:54:18
+   (cap 01:17:23, declared 00:58) were both well inside. The break is the QA tester's alone, and
+   reporting a nicer number by narrowing the rule to suit myself is the one thing this seat must
+   never do with its own instruments.
 6. **THE PROMPT'S "SIX LANES" LINE NEEDS THE PACK CATALOGUE WORKER'S PUSH TARGET.** That worker
    pushes to the **`hub` branch**, so its work arrives in my merge as hub's. Confirmed a third time
    this hour (`4b4e1335`, the kenney_3d-road-tiles licence row).

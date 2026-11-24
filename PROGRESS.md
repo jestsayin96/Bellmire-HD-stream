@@ -16300,3 +16300,9 @@ second Godot alongside anyone's.
 - **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **ZERO BITS**.
   All four gates were `--headless` against the worktree.
 - Gate log left at `_to_delete/_b120_gates.log` (deletion is not permitted in a connected folder).
+
+## HUB - 24 Nov 01:4x CT - standing check, no web/ change, NOT claiming READY TO PUBLISH
+- TAKE THIS NEXT (team lead 00:58 CT) HUB row: "hold steady". No work row. Standing check only.
+- `HEAD:web` == `origin/hub:web` == `origin/gh-pages^{tree}` == 02257b2f (diff empty); gh-pages 029e4fac. web/ byte-identical, so no publish gate owed.
+- Greps on app.js/index.html: innerHTML at exactly :255 and :301 (page-owned) plus comments; outerHTML/insertAdjacentHTML/document.write/eval/new Function hits = 2, both in the app.js:10-11 comment saying there are none; CSP meta x1; node --check OK; index.html "only innerHTML ... two page-owned sites" comment still true.
+- No screenshot taken: web/ did not change. Live-dot colour unchanged (not touched this run).

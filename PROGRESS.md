@@ -17223,3 +17223,40 @@ Item: R WORK_PLAN top = 07:58 CT 24 Nov team-lead block; HUD row says nothing HU
 Note: worktree shows pre-existing modified renders/cycles PNGs (not mine this firing, left uncommitted, not staged).
 Next firing (09:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none (open HUD scope or reduce HUD cadence is the supervisor's question).
+## B128 - 24 Nov 2026, 08:45 CT - FOUR GATES GREEN ON A MERGED MAIN THE 51st BODY REACHED FIRST
+Merged origin/main b5a1a13a into chatbot (ff of origin/chatbot to 53800db1 first, then merge; HEAD
+9baca892). The merge ABORTED on the first attempt and the obstruction was MINE: B127's own
+--headless --import pass had left `assets/gear/wand_crystal.glb.import` untracked in this worktree,
+and art committed the same generated sibling this hour. Removed my regenerable copy and merged
+clean - 14 files, 0 conflict markers over the whole tracked tree.
+
+THE CHAIN IS LEVEL AT 50/50/50 AND I MEASURED IT BEFORE TOUCHING A FILE, brace-matched:
+Delve.MB_NAME 50 | miniboss_feed.by_key 50 | commands.json published 50 at both leaves
+(.commands.miniboss.short and .what), 18000 bytes, 32 keys. `panner` is in NEITHER half.
+SO NOTHING WAS OWED AND NOTHING OF MINE WAS EDITED. The team lead's 08:45 row told me to expect
+by_key 51 / MB_NAME 50 and to report the UNNAMED transient as planned behaviour. THE TRANSIENT IS
+NOT HERE: the 51st BODY merged (`assets/monsters/minibosses/panner.glb`, 92,472 bytes, came in on
+this very merge) but the feed row did not, so the data half still reads 50 and my gate is right to
+say nothing. Content's row is still open at the merge, not just at its own branch.
+
+FOUR GATES GREEN:
+- parse --headless --path W6 --quit-after 300: rc=0, 136 lines, 0 ERROR, 0 SCRIPT ERROR,
+  0 Parse Error (24 WARNINGs, all the pre-existing invalid-UID ext_resource lines in town.gd:826).
+- TWITCH_PARSE OK (8 checks, 8 PASS).
+- COMMANDS_DOC OK wrote 32 commands AND A TRUE NO-OP - git status on docs/COMMANDS.md is empty
+  after the real tools/_commands_doc.gd ran.
+- L14_TEST OK (24 checks, 0 FAIL, 0 guard arms). Both doc arms quiet: 32 rows, unpublished [],
+  stale []. B121's close now HELD across an EIGHTH merged main.
+
+AND I RAN THE IMPORT PASS FIRST, ON PURPOSE, BECAUSE OF MY OWN FINDING LAST HOUR. B127 proved a
+newly-merged mesh reads CLEAN in the lane that added it and RED in every lane whose import cache
+lacks it. `panner.glb` arrived on this merge with NO `.import` sibling on main (the game build
+committed one to `laptop` at 08:14; it is not on main yet), so an unprimed parse would have gone
+red on it. --headless --import imported panner.glb in 4 s and the parse that followed is 0 ERROR.
+That is the lesson applied, not re-learned.
+
+Lock: claim 08:48:20, cap 09:13:20 (claim+25), declared finish 08:52, released inside it. Window
+checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0; last line QA tester IDLE 08:42:59) and
+again BEFORE writing the IDLE line.
+No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
+channel-point reward created, deleted or re-priced.

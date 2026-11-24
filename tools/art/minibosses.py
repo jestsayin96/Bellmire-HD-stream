@@ -17303,7 +17303,61 @@ OVERRIDE.update({
 
 
 def roper():
-    """IT TWISTS YOU TOGETHER. The 49th body. PASS 7 - THE APEX IS AN OBJECT.
+    """IT TWISTS YOU TOGETHER. The 49th body. PASS 8 - THE LOWER HALF.
+
+    *** PASS 8, 24 NOV 01:3x-01:5x CT. THE TEAM LEAD TICKED THE DRUM AND THEN
+    *** NAMED THE HALF UNDER IT: head-on, three pale cords splay to three
+    *** small dark feet and that lower silhouette is an EASEL. My own pass 7
+    *** faults (2) and (4) said it first. ONE VARIABLE: THE STRANDS LAY UP.
+    An easel is not a colour or a thickness - pass 5b already made the feet
+    dark iron and the read survived it. It is two properties of the
+    SILHOUETTE: three runs on every scanline, and a spread that grows on
+    every scanline. Cords being laid into a rope have neither, because they
+    wind round one another, and legs that crossed would fall over. So each
+    strand now rotates about the bundle axis by 180 deg across its run with a
+    sin(pi t) envelope - BOTH ENDS UNTOUCHED, so it still leaves its own
+    groove and still lands on its own peg, and the pegs, the bounds and the
+    corridor span are the shipped ones.
+
+    THE SWEEP, THREE ARMS, FRONT VIEW AT HERO SCALE, ALL MEASURED THROUGH THE
+    SAME LOCKED CAMERA (`_roper_apex.py`, which grew the `easel` block for
+    this pass):
+      LAY 0.000 (shipped p7b)  spread_monotone 0.9293  runs3 0.7889
+      LAY 0.190                spread_monotone 0.8325  runs3 0.7647
+      LAY 0.270  <- SHIPPED    spread_monotone 0.7488  runs3 0.5343
+      LAY 0.400  rejected BY EYE, not by a number: the cords curl like vines
+                 and one loops across the drum. The numbers liked it.
+    THE DRUM IS NOT PAID FOR THIS: `top` owns 4994 -> 4943 px front and
+    apex_share 0.4639 -> 0.4409, a 1% and a 5% move, and every point of this
+    change is below z 1.04. That was the standing condition on the item and it
+    is measured, not asserted.
+
+    THE INSTRUMENT'S OWN FAULT, FOUND IN ITS FIRST RUN AND NOT DRESSED UP.
+    `cross_bands` was meant to count crossings and IT CANNOT: a strand passing
+    behind the man is split into two runs by the occlusion, so the shipped p7b
+    - which has no crossing anywhere - scored 2. It is left in the report
+    because it is honest to show it, but nothing in this pass rests on it. The
+    numbers that earn their place are `spread_monotone_frac` and `runs3_frac`,
+    both of which fall monotonically with the lay.
+
+    WHAT I STILL SEE IN THE SHIPPED hero_front.png AND WILL NOT DRESS UP:
+      (1) the easel is gone and what replaced it is a LYRE - two cords bowing
+          out and back in to their feet. It reads as something flexible, not
+          yet unmistakably as rope being laid.
+      (2) the middle strand still crosses the torso and the right leg, and the
+          cost arm moved the wrong way: strand pixels inside the man's own
+          silhouette go 2834 -> 3311, up 17%. Curves, not bars, so it is not
+          the Changer shape Mr. E struck - but it is in that direction and the
+          next pass must not spend any more of it.
+      (3) the cords now arrive at the floor pins more vertically, so the pins
+          read a little more like the cord simply stopping than like an anchor.
+      (4) SIDE VIEW, NEW: the bundle now closes into a lens, and a lens can
+          read as ONE looped rope rather than three strands. It is better than
+          the three struts it replaces and it is a new thing to watch.
+      (5) carried from pass 7 and untouched here: the former is a slab edge-on
+          in the side view, and the belt ring is still hidden head-on.
+
+    ---- PASS 7 - THE APEX IS AN OBJECT, unchanged below ----
 
     *** PASS 7, 24 NOV 00:3x-01:2x CT. THE TEAM LEAD WOULD NOT TICK "THE
     *** TRIPOD IS GONE" AND HE WAS RIGHT NOT TO. He opened the three renders,
@@ -17688,9 +17742,68 @@ def roper():
     _open()
     SAG = float(os.environ.get("ROPER_SAG", "-0.085"))
     TWIST = float(os.environ.get("ROPER_TWIST", "0.105"))
+    # *** PASS 8 - THE LOWER HALF. ONE VARIABLE: THE THREE STRANDS LAY UP. ***
+    # The team lead ticked the drum and then named the half below it: head-on,
+    # three pale cords splay from the former to three small dark feet and that
+    # lower silhouette is an EASEL. My own faults (2) and (4) said the same
+    # thing first. THE DEFINITION OF THE SHAPE IS WHAT TELLS YOU THE FIX. An
+    # easel is three lines that LEAVE A POINT AND NEVER MEET AGAIN: the run
+    # count across any scanline is three, and the spread grows on every
+    # scanline from apex to floor. Nothing about colour, thickness or peg size
+    # touches either property - pass 5b already made the feet dark and the
+    # read survived it.
+    #
+    # WHAT A ROPEWALK HAS AND A TRIPOD LEG CANNOT: THE STRANDS WIND ROUND ONE
+    # ANOTHER ON THE WAY TO THE TOP. Three cords that CROSS in projection are
+    # not three legs, because legs that crossed would fall over. So the
+    # variable is a LAY: each strand is displaced sideways about the bundle's
+    # own axis by an angle that advances along the run, with a sin(pi t)
+    # envelope so BOTH ENDS ARE UNTOUCHED - it still leaves its own groove and
+    # still lands on its own peg.
+    #
+    # THREE THINGS IT DELIBERATELY DOES NOT COST, and each is measured rather
+    # than asserted:
+    #   THE DRUM. Every point of this change is below z 1.04 and no endpoint
+    #   moves, so the `top` span's owned pixels and `apex_share` must come out
+    #   of pass 8 unchanged. If they move, the lay has eaten the thing the
+    #   last pass won and the lay is wrong, not the drum.
+    #   THE FOOTPRINT. The pegs do not move, so the bounds and the corridor
+    #   span the gate measures are the shipped ones.
+    #   THE FLARE. Pass 4's note stands - pulling the pegs in puts pale bars
+    #   down the man's own body, which is the shape Mr. E stripped off the
+    #   Changer. The lay bends the middle of the run and leaves the splay.
+    # The cost it CAN have is the same one: a strand swung inboard at
+    # mid-span lying across the man. That is `strand_on_body_px` in the probe
+    # and it is reported whether it moved or not.
+    LAY = float(os.environ.get("ROPER_LAY", "0.270"))
+    LAYTURN = math.radians(float(os.environ.get("ROPER_LAYTURN", "180.0")))
+    # The bundle axis: the former's own centre down to the pegs' centroid. U
+    # is world x (the axis has no x component, so x is already perpendicular
+    # to it) and V is the remaining perpendicular - which points back and up,
+    # i.e. mostly INTO the front camera. That is deliberate: a lay whose
+    # displacement were all in V would be invisible head-on, which is pass 4's
+    # sag all over again. Half of every turn lands in U, where the front
+    # camera can see it.
+    _A0 = Vector((0.0, -0.780, TOP_Z))
+    _AX = (Vector((0.0, -1.800, 0.030)) - _A0).normalized()
+    _U = Vector((1.0, 0.0, 0.0))
+    _V = _AX.cross(_U).normalized()
+    # 9 segments with the lay off, so the control arm is the SHIPPED mesh to
+    # the vertex and not a re-tessellation of it; 15 with the lay on, because
+    # a helix through 9 points is a zigzag.
+    _NSEG = 9 if LAY == 0.0 else 15
     for g, p in zip(GROOVE, PEG):
-        limb(P, arc(Vector(g), Vector(p), SAG, 9, side=TWIST),
-             0.034, 0.030, 'bone', ring=7)
+        _pts = arc(Vector(g), Vector(p), SAG, _NSEG, side=TWIST)
+        if LAY:
+            _d0 = Vector(g) - _A0
+            _th0 = math.atan2(_d0.dot(_V), _d0.dot(_U))
+            for _k in range(len(_pts)):
+                _t = _k / (len(_pts) - 1.0)
+                _th = _th0 + LAYTURN * _t
+                _pts[_k] = _pts[_k] + (_U * math.cos(_th) +
+                                       _V * math.sin(_th)) * \
+                    (LAY * math.sin(math.pi * _t))
+        limb(P, _pts, 0.034, 0.030, 'bone', ring=7)
         # PASS 5, SECOND VARIABLE AND MEASURED ON ITS OWN PASS: the floor
         # anchors were PALE and 0.28 m tall, which is a tripod's shoe in both
         # colour and proportion - the same pale family as the strands, so the

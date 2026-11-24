@@ -1,3 +1,131 @@
+## TAKE THIS NEXT - Updated THE 15:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS CLOSED. THE CHAIN IS WHOLE AT 54 / 54 AND ZERO BODIES ARE UNNAMED FOR THE FIRST
+*** TIME SINCE THE 51st. Measured by me on merged main `41798efa`, not taken from any lane's claim,
+*** with a BRACE-MATCHED, STRING-AWARE parse anchored on `const MB_NAME :=` and comments stripped
+*** BEFORE splitting (the order my own parser got wrong at 12:58):
+***   `Delve.MB_NAME` = **54** keys, 0 duplicates, `"iceman": "Hoarback"` present.
+***   `miniboss_feed.by_key` = **54** keys, `iceman` present.
+***   `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]**. ZERO GHOSTS, ZERO UNNAMED.
+***   `data/commands.json` publishes **53** at its one `miniboss` leaf - the published half is the
+***   ONE step still behind, and it is PAYABLE THIS HOUR. See the CHAT BOT row.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **S116 TICKED.** `iceman -> Hoarback` in `MB_NAME` (54 rows), `_s107_gate.gd` and
+***    `_s51_names.gd` moved 53 -> 54, `_s115_iceman.gd` +4. The lane held this name at 14:08 rather
+***    than make a gate lie, and paid it the hour the blocker cleared. That is the yield behaviour
+***    the house wants and it is the second hour running this lane has shown it.
+***  - **C-194 TICKED, AND I COUNTED THE LANE'S OWN ARITHMETIC RATHER THAN READING ITS HEADLINE.**
+***    It claimed "descend/cleared +8 each, barks enter/lord/hurt/drink +30". Walked every leaf list
+***    of `lore_lines.json` and set-compared against pre-merge main in BOTH directions:
+***    `descend` 585->593, `cleared` 570->578, `barks/enter` 314->322, `barks/lord` 297->303,
+***    `barks/drink` 283->291, `barks/hurt` 294->302 - that is 8/8 and 8+6+8+8 = **30, exact**.
+***    **ZERO leaf lists lost, ZERO shrank**, one new key `_note_c194`. The `-7` in the numstat is
+***    bracket reflow, not deleted content - the sibling trap checked at LEAF level, not just at the
+***    top, because a top-level set compare would have passed a gutted list underneath it.
+***  - **U155 TICKED, AND IT IS THE BEST KIND OF CLOSE: A GATE THAT PASSED VACUOUSLY FOR MONTHS.**
+***    The U62 "4th scroller has no ink" red that U154 shipped and I sent back at 14:58 is not a HUD
+***    defect at all - the 4th scroller sits at x=1390..1830, so the 1152x648 DEFAULT WINDOW leaves it
+***    OFF-SCREEN entirely. I read the diff: `_u62_scales.gd` now prints the captured image size and,
+***    when the capture is narrower than 1920x1080, prints `U62 NO VERDICT` **and increments `_bad`**.
+***    That is a gate made HONEST, not quiet - the test can still go red, and it now goes red for the
+***    right reason. Measured=12 at 1920x1080. **NO LANE IS TO "FIX" THE 4th SCROLLER.**
+***  - **THE HUB'S STANDING AUDIT TICKED.** `web/` tree `c03fa129` == `origin/main:web` ==
+***    `origin/gh-pages` tree (publish 7). ZERO delta. app.js `innerHTML` at :255 and :301 only
+***    (page-owned), zero `outerHTML`/`insertAdjacentHTML`/`document.write`/`eval`/`new Function`,
+***    CSP meta present, `node --check` OK, zero 0-byte icons on hub AND on gh-pages. The lane did
+***    NOT claim ready-to-publish and correctly did not re-run the hostile-name test on an unchanged
+***    `web/`. I ran no publish gate: none was owed.
+***  - **THE PACK CATALOGUE ROW TICKED AS A SECOND NEGATIVE RESULT.**
+***    `low-poly_RPG_item_collection_2` logged in `docs/art/ASSET_SOURCES.md` with
+***    "Commercial use: unknown, because no licence text was found. Not cleared for use." Nothing
+***    imported. Two packs gated on two consecutive hours is the hard rule working, not a dry lane.
+***  - **B135 TICKED AS A CORRECT NON-PAYMENT, AND IT PREDICTED ITS OWN BLOCKER CORRECTLY.** MB_NAME
+***    53 / by_key 54 / published 53 at the time it ran, `by_key - MB_NAME = ['iceman']` exactly, so
+***    the halves disagreed and it published nothing. It read BOTH refs (`origin/laptop 72eec323`
+***    prints the row, `origin/main bc92b4e6` does not) instead of inferring. Four gates green; the
+***    fifth is the INSTRUCTED one-key red (L14_TEST 23 of 24, the two arms fired being MINIBOSS
+***    COUNT and MINIBOSS UNNAMED - exactly the pair it was told not to fix).
+***
+*** THE ONE-HOUR LAG THAT HAS BITTEN FOUR CONSECUTIVE CHAT BOT RUNS IS NOW SPENT, AND THE
+*** ARITHMETIC IS MINE, NOT THE LANE'S. The engine names at :07 on `laptop`; main advances only at
+*** my :58 merge; so a republish assigned to the same hour's :45 can never land. It is cleared this
+*** hour because BOTH halves are on main BEFORE the 16:45 firing. Chat bot: do not re-diagnose it a
+*** fifth time - just pay it.
+
+- **GAME BUILD (16:07) - THE 54th IS NAMED AND THE CASCADE IS CLOSED. DO NOT RE-NAME IT.** Verified
+  by me on main `41798efa`: MB_NAME 54, `"iceman": "Hoarback"`, zero unnamed, zero ghosts. Nothing is
+  owed on the chain. Your next item is the **L31 REMAINDER - the status-effect icons** (D61.1 already
+  landed the damage numbers; the open half lives in `delve.gd`, `monster.gd`, `party_frames.gd` and
+  `boss_bar.gd`, which is why it is yours and not the HUD's). **GREP FOR THE BEHAVIOUR, NOT FOR THE
+  NAME YOU EXPECT** before you write a line of it - this seat has twice told a lane something was
+  missing on a zero-hit name search and been wrong. If you find it already wired, close it as wired
+  and say so; closing by disproving counts fully.
+- **CONTENT (16:22) - C-195. KEEP PRODUCING, UNTHROTTLED.** C-194 is ticked and your arithmetic
+  checked to the line. The pools are read and nothing you write is wasted. Do NOT write to
+  `phase2_words`, `phase2_words_alt`, `phase2_words_alt2` or `town_levels_for_the_desktop` - all four
+  are declared dead - and keep writing `_note_` keys; they are expected and no lane is to wire one.
+- **ART (16:34) - COMMIT AND PUSH WHAT IS ALREADY IN YOUR WORKTREE. IT IS THE WHOLE ROW.** Measured
+  by me at 16:0x CT: `origin/art` (`5ff2c800`) carries **nothing but my 14:58 plan sync**, while your
+  worktree holds `renders/art/minibosses/_fit_report.json` and `_hero_scale.png` modified at
+  **16:00:26 CT**, `_report.json`/`_contact_sheet.png`/`_silhouettes.png` at 15:58:05,
+  `_backread/_selfseen_census.json` at 16:00:15, a **93-file** `_backread/*_ss_*.png` set, and
+  `docs/art/SELFSEEN_AUDIT_24NOV.md`. **A WORKTREE IS NOT A BRANCH.** I can see that work from the
+  device and I still cannot merge it, cannot tick it, and no other lane can read it - and if this
+  seat had only read the ref it would have charged you with a dry hour. The self-seen census is
+  exactly the instrument-honesty work this house rewards (a hand-written 46-body coverage block
+  carried for three days under `verdict: GREEN` over a 55-row register, with NINE bodies in neither
+  list). Push it and it gets ticked next hour. Second priority only after that: the 55th body - and
+  minibosses remain the one thing you may invent.
+- **HUB (16:37) - THE PACK CATALOGUE, AND THE GATE STAYS SHUT.** Publish 7 landed at 15:29 CT and
+  `web/` == `gh-pages` tree exactly; there is nothing merged-and-unpublished and nothing to chase.
+  `handpainted_weapons` and `low-poly_RPG_item_collection_2` both stay OUT of `assets/` until a real
+  licence text is on disk - an in-blend note or a search snippet is a LEAD, not a licence. Carry on
+  cataloguing; a logged negative result is a full delivery and has been ticked twice.
+- **HUD (16:52) - U156: THE U69 BossCard RED.** U155 closed the U62 red correctly and calls the U69
+  FAIL "the designed red-proof". **That is the one claim left unproved**, and it is the same shape as
+  the claim U154 made and U155 had to test: a gate that is SUPPOSED to fail looks exactly like a gate
+  that is failing. Show me the assertion that is deliberately inverted, and show the gate going GREEN
+  when the inversion is removed. If it turns out to be a real red, that is a better result, not a
+  worse one. **Claim by :50 with a declared finish inside :52** and keep the minimal IDLE - three
+  hours of clean windows have come from exactly that.
+- **CHAT BOT (16:45) - THE 53 -> 54 REPUBLISH IS OWED AND IT IS PAYABLE. PAY IT.** Both halves are on
+  `origin/main` **before** your firing for the first time in four hours: MB_NAME 54 and
+  `miniboss_feed.by_key` 54 on `41798efa`, measured by me, drift `[]` in both directions.
+  `data/commands.json` publishes **53**. Re-measure all three yourself exactly as you did at 15:48 -
+  comments stripped before splitting, string-aware, anchored on `const MB_NAME :=` - and if they
+  agree at 54, publish 54 at BOTH leaves. Do not re-diagnose the one-hour lag; it is spent and the
+  arithmetic is in the block above. L14_TEST should return to **24 of 24** once you have, and if it
+  does not, the gate is the finding.
+
+**FOR THE SUPERVISOR: nothing is waiting on you.** Publish 7 landed at 15:29 CT and I verified it
+independently this hour - `origin/gh-pages` tree == `origin/hub:web` == `origin/main:web` ==
+`c03fa129`, zero delta, zero 0-byte icons on either side. The 0-byte `turbary_hood.webp` that was
+live on the site at 14:58 is gone from the published tree. No publish is owed and no lane has claimed
+ready-to-publish.
+FOR INFORMATION ONLY, carried a third hour and still with no cost attached: the QA tester's :41 slot
+with an 8-minute cap runs to :49 and straddles the chat bot's :45 window. Its prompt is not mine. It
+did not fire this hour (it is two-hourly; next 16:41). If it costs a lane a cycle, it needs a
+schedule change and that is yours.
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; the first live
+turn should land all of these at once). ITEMS 1-3 ARE CARRIED, NOT NEW, AND I MARK THE CARRY:**
+1. *(CARRIED from the 12:58, 13:58 and 14:58 seats; re-measured by me this hour.)* The publish
+   baseline in the team lead prompt says `gh-pages 05ac2679 / tree 9ca8051e / 19 Nov 20:06`. It is
+   now **`5ce35f33` / tree `c03fa129` / 24 Nov 15:30 CT (publish 7)**, and the "merged and not
+   published: 3 files / +59 / -1" paragraph is **spent - the delta is ZERO**.
+2. *(CARRIED from the 13:58 and 14:58 seats; re-measured by me.)* The standing note "the art fit
+   register's top-level verdict reads RED / ok:false on two carried `_chibi` rows" is **stale**: the
+   register on `origin/art` reads `verdict: GREEN`, `errors []`, `unproved_cells []`, 55 pairs.
+3. *(CARRIED from the 12:58, 13:58 and 14:58 seats; re-measured by me.)* The miniboss count in the
+   prompt's freeze section says "46 rows, 44 live bodies". The fit register now holds **55 pairs**
+   and `MB_NAME` holds **54 named bodies**.
+4. **NEW this hour.** The prompt's Phase 2 section and its `Delve.MB_NAME` worked example are both
+   written around a chain that is BEHIND the published half. As of `41798efa` the engine and the feed
+   are **level at 54** and only `commands.json` (53) lags, by one chat bot cycle. The standing
+   example should say so, or the next seat will read the prompt and expect an unnamed body.
+5. **NEW this hour.** The ID line should read: **B135, C-194, D100, H32, L74, S116, T5, U155**, and
+   art is on the self-seen audit rather than "paviser pass 8".
+
 ## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE 54th BODY IS NAMEABLE FOR THE FIRST TIME: `by_key.iceman` IS ON MAIN. Measured by me on the
 *** merged tree 54b3d34c, not taken from any lane's claim: `data/lore_lines.json` ->

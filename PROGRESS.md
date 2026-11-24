@@ -17824,6 +17824,37 @@ NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or writt
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
 
+## D-S116 (game build, 24 Nov 2026 15:08-15:2x CT) - THE 54th IS NAMED: `iceman` -> "Hoarback" IN `Delve.MB_NAME`
+TAKE THIS NEXT (14:58 block) gave GAME BUILD: name the 54th, the blocker is gone. Measured first:
+`lore_lines.json miniboss_feed.by_key` holds 54 keys and `iceman` is one (C-193, arrive 9 / act 7 /
+broken 4 / fall 8, fall lines name Hoarback); art's CANON title Hoarback (minibosses.py:19421).
+Done, exactly the close S115 specified and nothing more:
+- scripts/delve.gd MB_NAME + `"iceman": "Hoarback"` (54 rows); the S115 MB_FIT comment updated.
+- tools/_s51_names.gd:64 and tools/_s107_gate.gd:43 move 53 -> 54 together. `_s63_props.gd:56`
+  left at 52 as told (different axis).
+- tools/_s115_iceman.gd: its header asked for the hold-out arm to flip when the lines landed - added
+  three hard arms (lines present, iceman IS drawn in mess, name == Hoarback). Old adaptive arms kept.
+Gates (verdict lines): PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (one ERROR line is the chat bot's
+own COMMANDS_DATA guard: commands.json publishes 53 vs 54 feed rows - the 53 -> 54 republish is the
+chat bot's 15:45 run per the plan, NOT mine, and it is the expected transient now the 54th is named);
+S51_NAMES OK 176 checks; S107_GATE OK 12 (MB_NAME size 54); S115_ICEMAN OK 10 (mess draws cook,
+loader, hooper, iceman - the 4000-pick sweep now draws it); TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2127 off the floor; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR; TOWNWALK ran,
+in_solid 0, stuck_on_route 0. iceman.glb.import is tracked on laptop (the chat bot's B134 note that
+main lacked it predates the merge that carried it). No Twitch, ZERO BITS.
+## C-194 (24 Nov 2026 15:3x CST, content) - OWN QUEUE, NOTHING UNFED; descend +8, cleared +8, barks.enter +8, barks.lord +6, barks.hurt +8, barks.drink +8
+TAKE THIS NEXT (14:58 CT block, 24 Nov) CONTENT row (15:22): nothing unnamed, nothing unfed (54 bodies, 54 by_key keys, iceman fed in C-193, no 55th committed). Continued own lore tranche as C-192 did. Appended plain strings to existing pools; duplicates checked first (four collisions caught and reworded before write). No arrive/fall-only backfill (nothing reads them).
+VALIDATION OK: all four owned files json.load; only descend (585->593), cleared (570->578), barks.{enter,lord,hurt,drink} grew (+46 lines), plus new top-level `_note_c194`; every other key identical; existing pool entries identical (prefix compare). Edit was textual insertion.
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c194`.
+
+## U155 - THE U62/U69 "REDS" WERE A 1152x648 WINDOW, NOT THE HUD, 2026-11-24 ~15:58-06:00 (15:52 firing)
+ITEM: WORK_PLAN 15:52 row (U154's two reds). Lock: R working RUN_LOCK last line = chat bot B135 IDLE 15:51:05, 0 Godot alive by process -> claimed (stamp 15:55:00 was ~30s ahead of the real clock, my slip), released ~15:58 (IDLE written). Windowed runs.
+ROOT CAUSE (one, explains everything): a bare --windowed run opens 1152x648. U62 lays the 4th scroller at x=1390..1830, so it was OFF-SCREEN: no ink = vacuous pass since it was added. And px8 is 5/6/7 at 1152 vs 8/10/12 at 1080p, so the "stripe overruns the rod 0.1-0.16px" was a small-window rounding artifact, not a ui_theme regression. No bisect needed: at --resolution 1920x1080 U62 = OK bad=0 measured=12 (all 4 scrollers find ink, stripe_top-ink_bot 0.72/0.82/0.24 at 100/125/150%, clear=true everywhere, rod_bot==stripe end).
+U69: header says "RED PROOF ... MUST print FAIL". The 1500x800 BossCard FAIL at 100%/150% IS the red-proof firing as designed (re-run at 1080p, identical). Not a defect. (Its final line says U69_REDPROOF FAIL, which reads like a failure - wording only, left alone.)
+CHANGED: tools/_u62_scales.gd only (no HUD .gd). Prints the capture size; capture smaller than 1920x1080 = NO VERDICT + bad. RED-PROVED: default --windowed (1152x648) -> 3x NO VERDICT, U62_SCALES FAIL bad=8; --resolution 1920x1080 -> OK bad=0 measured=12.
+PARSE: headless --quit-after 300 = 0 SCRIPT ERROR / Parse Error.
+RUN COMMAND to remember: --windowed --resolution 1920x1080 for every U-gate that lays out in 1080p coordinates (audit U40/U56/U88/U90/U91 for the same trap next).
+Logs committed (_u155_*.log). Decision for Mr. E: none.
 ## B135 - 24 Nov 2026, 15:45 CT (chat bot) - THE PREDICTION WAS RIGHT AND I CHECKED IT ANYWAY: FOUR GATES GREEN, THE FIFTH THE INSTRUCTED ONE-KEY RED, PUBLISHED NOTHING
 ITEM: the team lead's 14:58 CHAT BOT row - "expect nothing to be owed at 15:45, measure both halves
 anyway, and if they disagree publish NOTHING and say so". I did not take the prediction on trust.

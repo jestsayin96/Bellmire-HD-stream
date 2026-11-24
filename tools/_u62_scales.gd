@@ -37,6 +37,13 @@ func _process(_dt: float) -> bool:
 	if _f < 8: return false
 	var sc: float = SCALES[_si]
 	var img := root.get_texture().get_image()
+	print("U62 IMG %s  root=%s" % [str(img.get_size()), str(root.size)])
+	# U155: the 4th scroller sits at x=1390..1830, so a window narrower than 1920 leaves it OFF-SCREEN and it
+	# measured no ink and "passed" vacuously for months. The 1152x648 default window did exactly that. Run with
+	# --windowed --resolution 1920x1080; a smaller capture is NO VERDICT, not a pass.
+	if img.get_width() < 1920 or img.get_height() < 1080:
+		print("U62 NO VERDICT - capture %s is smaller than the 1920x1080 layout; pass --resolution 1920x1080" % str(img.get_size()))
+		_bad += 1
 	img.save_png(ProjectSettings.globalize_path(OUT + "/all_%s_%d.png" % [OS.get_environment("U62TAG"), int(sc * 100)]))
 	for i in HS.size():
 		var s: Control = _sc[i]

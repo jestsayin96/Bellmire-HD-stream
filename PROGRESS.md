@@ -17205,6 +17205,29 @@ wand_crystal.glb.import.S110) and the merge went clean. Nothing lost.
 GATES on merged main b5a1a13a: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1950 | TWITCH_PARSE OK (8 checks)
 | TOWNWALK in_solid=0/17830 raid_in_solid=0/5934 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Logs: renders/cycles/s110/.
 No live Twitch test, ZERO BITS. Claim 08:08:47, cap claim+25 = 08:33:47 (computed first), declared 08:29, released 2026-11-24T08:14:49-06:00.
+## D-S111 (game build, 24 Nov 2026 09:08-09:1x CT) - THE CASCADE IS CLOSED ON LAPTOP: `panner` -> "Onceround" IN Delve.MB_NAME (51), WITH MB_FIT AND ITS CONFECTION ROW
+TAKE THIS NEXT (08:58 CT, team lead) GAME BUILD row: add "panner": "Onceround" to Delve.MB_NAME; do NOT add the 52nd (stiltman). Obeyed both.
+MERGE: origin/main merged clean into laptop (34 files, art's panner ring pass + stiltman body + renders). Preconditions measured myself, brace-matched:
+by_key 51, MB_NAME 50 before the edit, by_key - MB_NAME = ['panner'] exactly, MB_NAME - by_key = [] (zero ghosts). CANON title read at
+tools/art/minibosses.py:18373 ("Onceround", 2.26, tag `confection` - field 5); content's _note_c187 agrees; feed panner arrive 9 / act 7 / broken 4 / fall 8.
+CHANGE (scripts/delve.gd, scripts/dungeon_hd.gd; backups *.bak_S111 not staged):
+  1. Delve.MB_NAME += "panner": "Onceround" -> 51 keys.
+  2. Delve.MB_FIT += "panner": 0.92 - art's _fit_report.json pairs.panner.ratio (h 2.26 / hero 2.45, fits_frame true, 3/3 proving views), copied not re-derived.
+     The row named only MB_NAME; without the fit and the theme row the body would have a name and never reach a floor, so the three parts of the
+     standing miniboss interlock went in together.
+  3. DungeonHD.THEME_MINIBOSS_MORE["confection"] = ["comfitmaker", "panner"] under art's own tag.
+GATES on merged laptop (logs renders/cycles/s111/): --import rc=0 (panner.glb, stiltman.glb) | parse --quit-after 300: 0 SCRIPT ERROR / 0 Parse Error
+| OFFFLOOR_VERDICT OK 0 of 2165 | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/16603 raid_in_solid=0/7232 PASS | DELVE_TEST OK ran 9001 frames,
+floor reached 2, 0 SCRIPT ERROR | MBFEED_TEST OK 82 checks | S33_DRAW: panner confection ratio 0.92 lines true drawn 120/400 - but the gate as a whole
+reads S33_DRAW FAIL 1 of 217: "body stiltman is in a draw". THAT RED IS THE DELIBERATE HOLD, NOT A DEFECT: stiltman.glb is now on main and art + team
+lead refused to wire it. It will clear when stiltman is ready and wired; I did not weaken the gate to hide it.
+EXPECTED NOISE, NOT MINE TO FIX: chatcmd's COMMANDS_DATA MINIBOSS COUNT push_error ("publishes 50 ... feed rows for 51") prints in parse/twitch -
+it predates this edit (content's feed went 51 at C-187) and the 50 -> 51 republish is the chat bot's 10:45 run per the plan.
+NOT DONE, SAID PLAINLY: no in-engine render of Onceround this hour (no miniboss render tool exists; art's panner hero_front/side/back renders are the
+picture). Onceround's ONE IDEA - shut until the pan comes round, blows on the shut wall do nothing - is NOT yet delve-side behaviour; it is a
+reskin until that is built. System 12 S110c (UACP townsfolk import + wiring) NOT started this hour - carried.
+No live Twitch test. ZERO BITS. Claim 09:08:54, cap claim+25 = 09:33:54 (computed first), declared 09:30, released 2026-11-24T09:15:33-06:00.
+
 ## C-187 (24 Nov 2026 08:24 CST, content) - WROTE miniboss_feed.by_key.panner (ONCEROUND, THE 51st); FEED 50 -> 51
 TAKE THIS NEXT (07:58 CT, team lead) CONTENT row: "THE CONDITION IS NOW MET AND YOU ARE FIRST IN THE CHAIN." REF CHECKED: git ls-tree on BOTH origin/main and origin/art gives assets/monsters/minibosses/panner.glb, blob 33af0ae1dabafd7dd506558daa29a7e1903dcf75, 92,472 bytes, tracked. Canon row read at tools/art/minibosses.py:18373 (Onceround, 2.26 m, confection).
 Added arrive x9, act x7, broken x4, fall x8. The mechanic is a drum shut until the pan comes round: blows on the wall do nothing, the party holds its blows together. No {name} in arrive or fall, no per-hero item named, no operator (art removed the man at pass 4; the crank turns itself). _note_c187 added (expected zero-hit).
@@ -17260,3 +17283,70 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0; last line QA tester
 again BEFORE writing the IDLE line.
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
+
+## C-188 (24 Nov 2026 09:2x CST, content) - STAND-DOWN, NOTHING OWED; DO NOT WRITE by_key.stiltman
+TAKE THIS NEXT (08:58 CT, team lead) CONTENT row (09:22): "C-187 IS TICKED AND YOU ARE DRY. DO NOT WRITE `by_key.stiltman`." Stand down in writing is the delivery.
+Measured, not trusted: miniboss_feed.by_key = 51 keys (last: panner). origin/art last touched tools/art/minibosses.py at c6a3f791 (08:54 CT): the 52nd body, Stiltman "Downfast", built, proved and NOT READY TO WIRE. `git grep stiltman origin/main -- data/lore_lines.json scripts/delve.gd` is empty, so no stiltman row exists and none was added. Writing one would open a second UNNAMED the game build must not close.
+Nothing written. No owned file touched; all four (items, lore_lines, bosses, potions) json.load OK, pre-existing keys unchanged by construction. VALIDATION OK.
+CODE WIRING: none. Next firing: write stiltman arrive/fall only when art's row says it reads at hero scale (a man on stilts who has lost one) AND the body is committed.
+U149 STAND-DOWN 2026-11-24T09:55-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (2026-11-24T09:53:06-06:00): last line chat bot B129 IDLE 09:49:06 (released inside its declared 09:52; its RUNNING 09:47:20/09:49:30 closed; game build S111 IDLE 09:15:33 closed); tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 08:58 CT 24 Nov team-lead block; HUD row says nothing HUD-owned open (this hour's movement is delve.gd, lore_lines.json, assets/monsters, tools/art, docs - no HUD file). Seventh dry cycle (U143-U149); cadence question is with the supervisor. Fast-forwarded hud-ui to origin 964eaf5c; removed my own regenerable untracked assets/gear/wand_crystal.glb.import first (import-cache byproduct blocking the ff).
+Next firing (10:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+## B129 - 24 Nov 2026, 09:45 CT - THE TRANSIENT ARRIVED AND MY GATE WENT RED ON PURPOSE
+Merged origin/main 5ab5ae20 into chatbot (ff of origin/chatbot to 566ea475 first, then merge; HEAD
+111da99b, 40 files, 0 conflict markers over the whole tracked tree).
+
+THE MID-CASCADE TRANSIENT IS HERE THIS HOUR, AND I MEASURED IT MYSELF BEFORE TOUCHING A FILE -
+brace-matched and string-aware, not quoted from the plan:
+  Delve.MB_NAME            = 50   (0 duplicates, `panner` OUT)
+  miniboss_feed.by_key      = 51   (`panner` IN)
+  data/commands.json        = 50 published at BOTH leaves (.commands.miniboss.short and .what),
+                                   18000 bytes, 32 keys
+  by_key - MB_NAME = ['panner'] EXACTLY.   MB_NAME - by_key = [] - ZERO GHOSTS.
+SO THE REPUBLISH IS NOT OWED AND I REPUBLISHED NOTHING. The 08:58 CHAT BOT row said to expect
+by_key 51 / MB_NAME 50 / published 50 at 09:45 and to leave it alone; that is exactly what the
+tree reads, so nothing of mine is edited (git status on scripts/chatcmd.gd, data/commands.json
+and docs/COMMANDS.md all empty). The 50 -> 51 republish is the 10:45 run, and only if BOTH halves
+read 51 when they are measured, brace-matched, at that moment.
+
+THREE GATES GREEN AND THE FOURTH IS THE INSTRUCTED RED:
+- parse --headless --path W6 --quit-after 300: rc=0, 0 ERROR, 0 SCRIPT ERROR, 0 Parse Error
+  (21.6 s, 10 pre-existing WARNINGs) - behind a --headless --import pass run FIRST, 4.2 s.
+- TWITCH_PARSE OK (8 checks, 8 PASS).
+- COMMANDS_DOC OK wrote 32 commands AND A TRUE NO-OP - git status on docs/COMMANDS.md empty after
+  the real tools/_commands_doc.gd ran; 32 rows in the doc.
+- L14_TEST FAIL 1 of 24 checks. THE FAIL IS CORRECT AND IS NOT A DEFECT. The single failing check
+  is its clean-load assertion, and the two arms that fired are the two the cascade mid-step must
+  fire: MINIBOSS COUNT (published 50, feed rows 51) and MINIBOSS UNNAMED (["panner"]). Both are
+  content's row having landed correctly ahead of the engine's. I did not touch the guard, did not
+  republish to silence COUNT, and did not add a MB_NAME row - that constant is the game build's.
+  B121's close is intact; it is being measured mid-cascade, not broken.
+
+TWO THINGS I GOT WRONG THIS RUN AND AM WRITING DOWN RATHER THAN BURYING:
+1. MY RUNNING LINE'S TIMESTAMP IS LATE. The process check read 0 Godot at 09:47:20 and I wrote
+   the claim at 09:47:20, but I stamped the line 09:49:30. The cap it declares (10:14:30) is
+   therefore 2 minutes CONSERVATIVE, not short, and the declared finish 09:52 was honoured
+   (released 09:49:06) - but a stamp that does not match the write is a defect in the one file
+   four lanes read to decide whether to launch. The real claim is 09:47:20. Stamp from the clock
+   read in the same call that appends the line.
+2. MY OWN by_key EMULATION READ 0 AND WAS WORTHLESS. I searched scripts/*.gd for
+   `miniboss_feed`; it lives in data/lore_lines.json, as chatcmd.gd:2232's own push_error says in
+   plain words. Third hour running that my python has been the only thing in the run that lied -
+   B126's naive drift regex, B127's generator emulation, now this. THE REAL GATE IS THE VERDICT.
+   I re-measured from the JSON and got 51; the 0 was mine.
+
+AND THE IMPORT PASS BLOCKED MY OWN MERGE FOR THE SECOND HOUR RUNNING. The merge ABORTED on
+`assets/monsters/minibosses/panner.glb.import` - untracked here because MY B128 import pass
+generated it (1158 bytes) and the game build has now committed theirs. I removed my regenerable
+copy, not theirs, and merged clean. Last hour it was `assets/gear/wand_crystal.glb.import`. The
+pattern is now established: priming the cache in this worktree manufactures an obstruction for the
+next merge of whichever lane commits the same generated sibling. Worth a ruling - either this lane
+stops leaving .import siblings untracked, or the lanes that own the meshes commit them in the same
+breath as the .glb.
+
+A 52nd body is also in this merge: `assets/monsters/minibosses/stiltman.glb`, with
+docs/art/STILTMAN_THE_52ND.md. It is in NEITHER half of my chain, so it changes nothing here yet.
+
+No live Twitch test. ZERO BITS, no cheer, no redemption, no chat line posted as bellmirebro.

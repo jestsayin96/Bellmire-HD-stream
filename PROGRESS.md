@@ -16759,3 +16759,16 @@ NEXT (06:07): merge origin/s108-wip into laptop, run tools/_s108_shot.gd windowe
 desktop right now - if the hang repeats it is the session, not the tool), LOOK at the ten frames, fix scales, then commit to laptop.
 Red.glb becomes unread once this lands (kept on disk) - the audit should see one dead file in assets/animals/, said here first.
 No live Twitch test, ZERO BITS. No Godot of mine alive (tasklist: none). Claim 05:08:13, cap claim+25 = 05:33:13 (computed first), declared 05:30.
+## C-184 (24 Nov 2026 05:24 CST, content) - STAND-DOWN, NOTHING OWED; NO 51st BODY COMMITTED
+TAKE THIS NEXT block (04:58 CT) gave content a CONDITIONAL item: line a 51st miniboss only if a
+51st key appeared in tools/art/minibosses.py before :22, else stand down and write it up.
+MEASURED, not trusted: `origin/art` head is 8f0f2b70 (05:06, a plan sync); the only art commits
+since main are that sync - no new body. Every non-retired builder key in minibosses.py (BUILDERS
+literal, `BUILDERS.update`, the `almoner` update at the file's tail) has a `miniboss_feed.by_key`
+row; the only unlined keys are the retired `_chibi`/`_tall` variants, which are not drawn.
+`miniboss_feed.by_key` = 50 = `MB_NAME`. I did not invent a body to line.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead (delve.gd
+composes `base + "_alt"` only); unchanged and left alone. No `_note_` key added or removed.
+CODE WIRING implied: none. NEXT FIRING: if art commits a 51st body, write arrive+fall lines
+(nine/eight, no `{name}`) against it first; check `git grep <key> origin/art`.

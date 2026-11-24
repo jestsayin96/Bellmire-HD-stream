@@ -13483,3 +13483,61 @@ two still match; say the word and it goes in the hour after the merge.
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+================================================================================
+ART - 2026-11-23 21:56 CT - THE 49TH MINIBOSS: THE ROPER ("Drawtight"),
+IT TWISTS YOU TOGETHER. SHIPPED AND PUSHED. THREE PASSES, AND BOTH FAULTS THAT
+MATTERED WERE INVISIBLE TO MY OWN REGISTER.
+================================================================================
+The plan's 22:58 ART row said HOLD and do not re-render the 47, and allowed a
+49th on the standing dry-lane permission. I re-rendered nothing. I measured the
+set before designing rather than trusting this prompt's list: a parse of
+BUILDERS in tools/art/minibosses.py gives 48 live bodies, 2 drillmaster `_tall`
+variants and 12 retired `_chibi`, and I read the CANON `idea` string of all 48
+and sorted them by what the mechanic ACTS ON. NOT ONE OF THE 48 READS THE
+DISTANCE BETWEEN TWO HEROES. The four nearest are argued apart in the file.
+
+FIT IS THE ACCEPTANCE TEST AND THE REGISTER WAS GREEN FOR BOTH FAULTS.
+  PASS 1 - ok true, errors [], 0 blanks, 4 parts, height 2.46 to the millimetre
+           designed. AND THE PALE TOP SAT IN FRONT OF HIS FACE: the head was
+           gone behind it and the two eyes read as nostrils on a lump. Only
+           front.png could say so. The top dropped from z 1.98 to chest at 1.26.
+  PASS 2 - I PROVED IN WRITING that the laid rope passes 0.170 OUTBOARD of a
+           head whose rx is 0.200. The proof was correct and side.png showed
+           the rope LYING STRAIGHT ACROSS THE FACE, because the side camera
+           collapses x. A CLEARANCE PROVED IN THE AXIS THE CAMERA THROWS AWAY
+           IS NOT A CLEARANCE. Rope rerouted outboard-and-low under the right
+           arm and up BEHIND him; the sheave moved to the cross-head's back
+           face. Decided in the projection now, not in the world.
+  PASS 3 - shipped. front, side, three_quarter, hero_front, hero_side and
+           hero_back all opened and looked at.
+
+WHAT I CAN STILL SEE AND AM NOT HIDING: at hero scale the FRONT view's biggest
+shape is the three ground-pinned pale lines, and they read as a STAND or tripod
+before they read as rope - the top is only a small pale apex from head-on. The
+side and three-quarter views carry the idea; the front carries the face. The
+next change, if it is wanted, is to grow the top so the apex is an object at
+stream distance, which costs a re-site of the hands because a bigger top fouls
+the chin - exactly the pass-1 fault - so it is not a one-liner and I did not
+take it on a HOLD row. The back HAS a facing (post, cross-head, drum, harness,
+no face), checked on purpose against the Beadle's defect.
+
+REGISTER: ok true, errors [], blanks 0 of 147 files, 60 rows (48 live + 11
+retired + roper). roper = 4 parts, 1078 faces, 1.32 x 3.17 x 2.46 m,
+CORRIDOR-SAFE, UNDER-LID with 7.04 m clear, floorgeom_stale false. Height 2.46
+and wear 0.28 are both unoccupied rungs measured off CANON. Fully procedural -
+no pack asset used, so no new licence line is owed in docs/art/ASSET_SOURCES.md.
+
+OWED ITEM CLOSED BY MEASUREMENT, NOT BY WORK: this prompt still carries
+"snarer_chibi.glb is committed with NO .glb.import sibling". It HAS one -
+assets/monsters/minibosses/snarer_chibi.glb.import is on disk and in the tree.
+Nothing is owed there and the line can be struck.
+
+FOR THE GAME BUILD: the Roper is NOT WIRED and I did not wire it. bestiary.gd
+needs a `model` path to assets/monsters/minibosses/roper.glb and NO `anims`
+entry - it is static. Delve.MB_NAME wants `"roper": "Drawtight"` AFTER content's
+feed row lands, the same hold you correctly applied to the changer and the
+stopper. Not room-locked: CORRIDOR-SAFE, no spawn gate needed.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

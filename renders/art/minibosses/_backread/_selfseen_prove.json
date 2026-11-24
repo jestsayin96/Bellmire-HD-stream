@@ -1,0 +1,135 @@
+{
+ "drop_key": "winder",
+ "register_rows": 55,
+ "arms": [
+  {
+   "arm": "A_control",
+   "verdict": "GREEN",
+   "rep_ok": true,
+   "pairs_seen": 55,
+   "census_measured_at": "2026-11-24T12:38:47-0600",
+   "census_register_pairs": 55,
+   "census_covers_register": true,
+   "uncensused": [],
+   "uncovered": [],
+   "build_failed": [],
+   "measured_bodies": 31,
+   "errors": []
+  },
+  {
+   "arm": "B_uncensused",
+   "verdict": "RED",
+   "rep_ok": false,
+   "pairs_seen": 55,
+   "census_measured_at": "2026-11-24T12:38:47-0600",
+   "census_register_pairs": 55,
+   "census_covers_register": false,
+   "uncensused": [
+    "winder"
+   ],
+   "uncovered": [],
+   "build_failed": [],
+   "measured_bodies": 31,
+   "errors": [
+    "winder: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py"
+   ]
+  },
+  {
+   "arm": "C_unstamped",
+   "verdict": "RED",
+   "rep_ok": false,
+   "pairs_seen": 55,
+   "census_measured_at": null,
+   "census_register_pairs": 55,
+   "census_covers_register": true,
+   "uncensused": [],
+   "uncovered": [],
+   "build_failed": [],
+   "measured_bodies": 31,
+   "errors": [
+    "self_seen: the census file carries NO measured_at stamp, so it was written by the pre-24-Nov-12:34 census and its age is unknowable - an un-ageable census is the snapshot this gate exists to abolish. Re-run tools/art/_selfseen_census.py"
+   ]
+  },
+  {
+   "arm": "D_wrong_house",
+   "verdict": "RED",
+   "rep_ok": false,
+   "pairs_seen": 56,
+   "census_measured_at": "2026-11-24T12:38:47-0600",
+   "census_register_pairs": 55,
+   "census_covers_register": false,
+   "uncensused": [
+    "_prove_56th"
+   ],
+   "uncovered": [],
+   "build_failed": [],
+   "measured_bodies": 31,
+   "errors": [
+    "_prove_56th: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py",
+    "self_seen: the census was taken over 55 register rows and is being read against 56 - it describes a different house. Re-run tools/art/_selfseen_census.py"
+   ]
+  },
+  {
+   "arm": "A_control_again",
+   "verdict": "GREEN",
+   "rep_ok": true,
+   "pairs_seen": 55,
+   "census_measured_at": "2026-11-24T12:38:47-0600",
+   "census_register_pairs": 55,
+   "census_covers_register": true,
+   "uncensused": [],
+   "uncovered": [],
+   "build_failed": [],
+   "measured_bodies": 31,
+   "errors": []
+  }
+ ],
+ "checks": [
+  {
+   "check": "A GREEN on the real census",
+   "pass": true,
+   "why": "the shipped tree must pass its own gate: GREEN"
+  },
+  {
+   "check": "A carries a REAL stamp",
+   "pass": true,
+   "why": "census_measured_at = '2026-11-24T12:38:47-0600'"
+  },
+  {
+   "check": "A says the census covers the register",
+   "pass": true,
+   "why": "census_covers_register = True"
+  },
+  {
+   "check": "B RED",
+   "pass": true,
+   "why": "verdict = RED"
+  },
+  {
+   "check": "B names the dropped key and nothing else",
+   "pass": true,
+   "why": "uncensused = ['winder'] (dropped 'winder')"
+  },
+  {
+   "check": "B reason string is the coverage one",
+   "pass": true,
+   "why": "errors = ['winder: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py']"
+  },
+  {
+   "check": "C RED on the missing stamp",
+   "pass": true,
+   "why": "verdict RED errors ['self_seen: the census file carries NO measured_at stamp, so it was written by the pre-24-Nov-12:34 census and its age is unknowable - an un-ageable census is the snapshot this gate exists to abolish. Re-run tools/art/_selfseen_census.py']"
+  },
+  {
+   "check": "D RED twice - the 56th row AND the row count",
+   "pass": true,
+   "why": "uncensused ['_prove_56th'] errors ['_prove_56th: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py', 'self_seen: the census was taken over 55 register rows and is being read against 56 - it describes a different house. Re-run tools/art/_selfseen_census.py']"
+  },
+  {
+   "check": "the arms left the shipped tree alone",
+   "pass": true,
+   "why": "A again = GREEN / 0 errors"
+  }
+ ],
+ "ok": true
+}

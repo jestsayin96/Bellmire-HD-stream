@@ -42,11 +42,23 @@ correct. An instrument that cannot report an unearned PASS can still report an
 unearned FAIL, and both are the same fault. It was found by opening the
 builder and reading the comment rather than trusting my own red.
 
+*** THE THIRD FAULT, HANDED TO THIS LANE BY THE TEAM LEAD 24 Nov 12:34 CT,
+*** AND IT IS A FAULT OF THIS FILE AND NOT ONLY OF ITS READER. *** The first
+cut of this census wrote NO STAMP. `minibossfit.derive_self_seen` therefore
+published `census_measured_at: "run tools/art/_selfseen_census.py"` - an
+INSTRUCTION standing where a measurement time belongs. A census with no time
+on it cannot be told from a fresh one, which is the same un-ageable snapshot
+this file was written to abolish, one level down. It now stamps itself in
+CENTRAL TIME, records the register's own mtime beside it so a reader can see
+which of the two is older, and `register_pairs` lets the reader catch a census
+taken over a smaller house than the one being judged.
+
   blender -b -noaudio -P tools/art/_selfseen_census.py -- --repo <repo>
 """
 import os
 import sys
 import json
+import time
 import argparse
 
 import bpy  # noqa: F401  (required: this module only runs inside Blender)
@@ -91,9 +103,25 @@ def main():
                 errs.append("%s: in the register with NO builder" % key)
         rows[key] = r
 
+    # *** A REAL STAMP, IN CENTRAL TIME. *** cruzader's clock is CT, so
+    # localtime is CT; the offset is written out so no reader has to assume
+    # it, and the register's own mtime sits beside it so "which is older" is
+    # answerable without a second command.
+    now = time.time()
+    try:
+        reg_m = os.path.getmtime(reg)
+    except OSError:
+        reg_m = None
     out = {
         "rows": rows,
         "errors": errs,
+        "measured_at": time.strftime("%Y-%m-%dT%H:%M:%S%z", time.localtime(now)),
+        "measured_at_tz": time.strftime("%Z", time.localtime(now)),
+        "measured_at_epoch": now,
+        "register_mtime_epoch": reg_m,
+        "register_mtime": (time.strftime("%Y-%m-%dT%H:%M:%S%z",
+                                         time.localtime(reg_m))
+                           if reg_m else None),
         "register_pairs": len(pairs),
         "measurable": sorted(k for k, r in rows.items()
                              if r["in_register"] and r.get("has_man_span") is True
@@ -112,9 +140,15 @@ def main():
     with open(p, "w") as fh:
         json.dump(out, fh, indent=1)
     print("[census] pairs=%d measurable=%d no_man=%d not_measurable=%d "
-          "build_failed=%d"
+          "build_failed=%d at=%s"
           % (out["register_pairs"], len(out["measurable"]), len(out["no_man"]),
-             len(out["not_measurable"]), len(out["build_failed"])), flush=True)
+             len(out["not_measurable"]), len(out["build_failed"]),
+             out["measured_at"]), flush=True)
+    covered = (set(out["measurable"]) | set(out["no_man"])
+               | set(out["not_measurable"]) | set(out["build_failed"]))
+    missing = sorted(set(pairs) - covered)
+    print("[census] pairs in NO list: %d %s"
+          % (len(missing), missing if missing else ""), flush=True)
     print("[census] wrote %s" % p, flush=True)
 
 

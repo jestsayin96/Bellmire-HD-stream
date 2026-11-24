@@ -9728,6 +9728,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 142,
    "air_px_tightest_view": "front"
+  },
+  "iceman": {
+   "creature_h": 3.12,
+   "hero_h": 2.45,
+   "ratio": 1.27,
+   "pair_w": 3.24,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.362,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "iceman",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 39094,
+      "vis": 39094,
+      "delta": 44366,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43669,
+      "vis": 43669,
+      "delta": 55904,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 30405,
+      "vis": 30405,
+      "delta": 39889,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37770,
+      "vis": 37770,
+      "delta": 42603,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 38515,
+      "vis": 38515,
+      "delta": 49549,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44038,
+      "vis": 44038,
+      "delta": 48810,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 208240,
+     "shadow_px": 3271,
+     "mean": 0.4387,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2657,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 208240,
+     "shadow_px": 3183,
+     "mean": 0.4259,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2448,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 209760,
+     "shadow_px": 3110,
+     "mean": 0.4414,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2663,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     159,
+     160
+    ],
+    "side": [
+     167,
+     162
+    ],
+    "back": [
+     160,
+     159
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 159,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -9802,13 +9970,19 @@
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "run tools/art/_selfseen_census.py",
+  "census_measured_at": "2026-11-24T13:51:29-0600",
+  "census_register_mtime": "2026-11-24T13:50:26-0600",
+  "census_register_pairs": 56,
+  "census_errors": [],
+  "build_failed": [],
+  "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
   "not_measurable": [
    "bellman",
    "cook",
    "drillmaster",
    "gaoler",
    "hurdleman",
+   "iceman",
    "jointer",
    "loader",
    "nightman",
@@ -9831,6 +10005,9 @@
   "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
   "uncovered": [],
   "uncovered_reason": "MEASURABLE and carrying no self_seen cell - the instrument could have answered and did not. RED: this is the silent absence that hid nine bodies for three days.",
+  "uncensused": [],
+  "uncensused_reason": "in the register and in NO census list - not measurable, not unmeasurable, not no-man, not failed. The census has never been ASKED about this body, so NOTHING here describes it and a GREEN verdict does not reach it. RED: this is how nine bodies hid under a green register for three days, and the 54th body shipped without re-running tools/art/_selfseen_census.py would hide the same way.",
+  "census_covers_register": true,
   "under_bar": [
    {
     "rank": 1,
@@ -9969,117 +10146,13 @@
  },
  "unproved_cells": [],
  "measured": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman",
-  "tither",
-  "blower",
-  "changer",
-  "stopper",
-  "roper",
-  "almoner",
-  "panner",
-  "stiltman",
-  "nightman"
+  "iceman"
  ],
  "asked": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman",
-  "tither",
-  "blower",
-  "changer",
-  "stopper",
-  "roper",
-  "almoner",
-  "panner",
-  "stiltman",
-  "nightman"
+  "iceman"
  ],
  "blank_check": {
-  "files": 159,
+  "files": 3,
   "failures": []
  },
  "red_summary": {
@@ -10089,6 +10162,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 0,
- "verdict_scope": "every row in pairs (55), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 55 judged from stored measurements)"
+ "rendered_this_run": 1,
+ "verdict_scope": "every row in pairs (56), re-derived from stored measurements; 1 of them rendered this run"
 }

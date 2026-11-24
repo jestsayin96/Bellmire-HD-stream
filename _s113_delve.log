@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Somebody checks the knots a second time.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 slime.
+FEED Somebody has been leaving fresh flowers. Nothing down here grows flowers.
+FEED DawnCleric rolls a 20 for initiative and is moving before anything else.
+T10s floor=1 state=fight foes=3 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage grips bolt and the words slide off (9 vs DC 10).
+T20s floor=1 state=fight foes=2 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+T30s floor=1 state=fight foes=1 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED DawnCleric casts Bolt at slime.
+FEED The slime divides.
+FEED MossyMage casts Chain Bolt at slimeling.
+FEED MossyMage searches (Investigation 22) and turns up 14 gold on floor 1.
+FEED The lamp is topped up. The breath comes slow.
+T40s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+T50s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+T60s floor=1 state=search foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T70s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+T80s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+T90s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED BigAxe spots a blade trap (Perception 18 vs DC 10) and steps round it.
+T100s floor=1 state=descend foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave bats, 1 bog frog, 1 slime.
+FEED The oil is running low.
+FEED DawnCleric's bolt spends itself on the stone instead (6 vs DC 11).
+T110s floor=2 state=fight foes=4 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED DawnCleric casts Smite at cave bat.
+T120s floor=2 state=fight foes=2 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+T130s floor=2 state=fight foes=2 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED MossyMage casts Bolt at bog frog.
+FEED DawnCleric casts Smite at bog frog.
+T140s floor=2 state=fight foes=1 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 114/114"]
+FEED DawnCleric casts Bolt at slime.
+FEED MossyMage casts Bolt at slime.
+FEED The slime divides.
+FEED MossyMage rolls a 20 searching the floor!
+FEED MossyMage searches (Investigation 24) and turns up 35 gold on floor 2.
+FEED One of them laughs once, short, and stops.
+FEED MossyMage finds a vial of Mirethistle Tincture.
+T150s floor=2 state=search foes=0 ["JestFan 108/108", "MossyMage 63/63", "DawnCleric 76/76", "BigAxe 107/114"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state search (capped at 9001 frames); engine error lines are still read off the log

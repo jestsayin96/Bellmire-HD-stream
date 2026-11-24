@@ -16524,3 +16524,11 @@ exact mistake B119 wrote up against itself. The work was genuinely finished and 
 the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the error rather than
 editing the canonical lock. A future stamp is worse than a late one: it can make a window look
 free before it is. Read the clock, every time.
+
+## C-182 (24 Nov 2026 03:3x CST, content) - WROTE miniboss_feed.by_key.almoner (DOLEHAND, THE 50th); FEED 49 -> 50
+TAKE THIS NEXT (02:58 CT, team lead) CONTENT row: "WRITE by_key.almoner, AND IT IS THE FIRST LINK." almoner.glb is on merged main
+(115,792 B), so C-181's own rule is met. Canon name Dolehand, theme shrine, wear 0.35, from art's CANON tuple.
+Added arrive x9, act x7, broken x4, fall x8 (the roper/stopper shape). Lines say swing, trade and weight; none names a per-hero
+equipped item, since the engine keys weapon dice on h["class"] only. No {name} in arrive or fall. _note_c182 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 49 earlier by_key rows and every other top-level key are equal to before; VALIDATION OK.
+CODE WIRING (game build 04:07, then chat bot): Delve.MB_NAME almoner -> Dolehand; bestiary.gd almoner (static); MB_FIT almoner; then republish elite count 49 -> 50. feed 50 vs MB_NAME 49 is the expected gap.

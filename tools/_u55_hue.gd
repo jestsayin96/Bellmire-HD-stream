@@ -8,6 +8,7 @@ var _s: Node
 var _layer: CanvasLayer
 var _out := ""
 var _bad := 0
+var _n := 0  # U154: rows + rungs actually walked
 func _lum(c: Color) -> float:
 	var f := func(v: float) -> float: return v / 12.92 if v <= 0.03928 else pow((v + 0.055) / 1.055, 2.4)
 	return 0.2126 * f.call(c.r) + 0.7152 * f.call(c.g) + 0.0722 * f.call(c.b)
@@ -48,6 +49,7 @@ func _check_rows(sc: float) -> void:
 	for h in _s._list.get_children():
 		if not (h is HBoxContainer) or h.get_child_count() < 3:
 			continue
+		_n += 1
 		var a: Label = h.get_child(1)
 		var b: Label = h.get_child(2)
 		var ra: Rect2 = a.get_global_rect()
@@ -101,6 +103,7 @@ func _process(_d: float) -> bool:
 			if not got.is_equal_approx(want): _bad += 1; print("FAIL uncommon != art pewter ", got, want)
 			else: print("uncommon == art pewter ", got)
 		for r in UiTheme.RARITY_INK:
+			_n += 1
 			var c := _cr(UiTheme.RARITY_INK[r], Color(0.93, 0.86, 0.69))
 			print("INK %s contrast %.2f" % [r, c])
 			if c < 4.5: _bad += 1; print("FAIL ink contrast ", r)
@@ -119,6 +122,7 @@ func _process(_d: float) -> bool:
 		_step += 1
 		_s = null
 		if _step >= 3:
-			print("U56_HUE ", "OK" if _bad == 0 else "FAIL %d" % _bad)
+			if _n == 0: print("U56_HUE NO VERDICT - 0 rows/rungs walked"); _bad += 1
+			print("U56_HUE ", "OK" if _bad == 0 else "FAIL %d" % _bad, " walked=", _n)
 			quit(0 if _bad == 0 else 1)
 	return false

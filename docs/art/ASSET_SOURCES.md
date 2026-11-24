@@ -542,3 +542,15 @@ added by a re-run.
 - Naming discrepancy noted, not resolved: the folder and zip are named "Ultimate Monsters" but the licence header names the pack "Ultimate Platformer Pack". The CC0 statement is the same either way; the pack-title mismatch is recorded so a later reader is not confused about which Quaternius release this is.
 - Monsters in the pack (named in the file tree): Alien, Birb, BlueDemon, Frog, Ninja, Orc_Skull, Tribal, Cactoro, Dino, Fish, Monkroose, MushroomKing, Orc, Yeti, GreenBlob, GreenSpikyBlob, Mushnub, Pigeon, PinkBlob, Wizard, Glub, Glub_Evolved, Goleling_Evolved, Squidle, Alpaking_Evolved, Ghost, Hywirl, Bunny. Any monster that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Monsters`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - forest-monster (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| forest-monster (folder `_packs\forest-monster\`; sibling `forest-monster.7z`, not opened) | Čestmír Dammer (CDmir), project www.kelgar.org, idea Torben | **CC0** (stated as "Creative Commons (CC0)", no version given) | `_packs\forest-monster\Licenses.txt` (589 bytes, read in full this run) | 10 on disk: `forest-monster-final.blend`, `Licenses.txt`, `texture\forest-monster-AO.png`, `-norm.png`, `-skin.png`, `-skin1.png`, `-spec.png`, `tree.png`, `tree-norm.png`, `tree-spec.png` | permitted (CC0) | not required by CC0; credit kept (CDmir / kelgar.org) |
+
+- Checked: every file under `_packs\forest-monster\` by walking the tree (10 files), and `Licenses.txt` read in full off disk. The file states, verbatim: "Author: Čestmír Dammer (CDmir) / License: Creative Commons (CC0) / Project: www.kelgar.org / Textures: UV-Teture was derived from textures by Rick Hoppmann."
+- Animations listed in the file (frame ranges, not separate files): Idle, Walk, melee hold, melee strike, melee charge, melee cooldown, Dying, Dead.
+- OPEN NOTE FOR MR. E, not resolved here: the UV texture is stated to be derived from textures by Rick Hoppmann, and the licence file gives no licence for those source textures. The model's CC0 statement is clear; the texture provenance is not. Confirm before any `forest-monster` texture enters `assets/`.
+- Note for later seats: the `.blend` was not opened, so the CC0 grant is recorded for the pack as published. Any monster that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0) for the model as stated. Texture provenance open (see note).** Nothing is redistributed AS an asset.

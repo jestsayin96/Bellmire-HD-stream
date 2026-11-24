@@ -16028,3 +16028,7 @@ TAKE THIS NEXT (21:58 CT block, 23 Nov) CONTENT item: "C-177: the Roper's feed r
 ADDED: data/lore_lines.json miniboss_feed.by_key.roper - arrive x9, act x7, broken x4, fall x8 ({name} in act only), the full stopper shape; plus `_note_c177` (expected zero-hit key, DO NOT WIRE). The mechanic is in the lines: every notch hauls the hindmost a yard toward the middle, one span lays the rope and the party stands as one footprint, nothing done to him adds slack, only a hero walking out does (broken lines). Plain register, worn-good hemp and frame (wear 0.28).
 by_key is now 49 keys = 49 bodies. VALIDATION OK: all four owned files parse; every pre-existing key unchanged in value; items/bosses/potions untouched. Next ID C-178.
 CODE WIRING: game build adds `roper` -> `Drawtight` to Delve.MB_NAME and the bestiary row, and commits roper.glb.import with the wiring; chat bot republishes the count after that (49 bodies / 49 feed rows).
+HUB 23 Nov 22:4x CT standing check (the TAKE THIS NEXT block's HUB row said hold web/ steady; no new row). Measured:
+web tree on gh-pages == origin/hub == origin/main == HEAD == 02257b2f (no publish gap, no READY TO PUBLISH claimed,
+no web/ file changed). app.js: node --check OK; innerHTML at exactly :255 and :301 (page-owned literals); the
+outerHTML/insertAdjacentHTML/document.write/eval/new Function matches are 2, both comment lines (:10-:11), zero code.

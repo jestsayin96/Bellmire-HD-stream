@@ -17456,3 +17456,9 @@ GATES (log committed: _s112_gates.log), on laptop merged with origin/main b7b179
   TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2457 samples off the floor (home).
   DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. TOWNWALK in_solid=0/17428 (0.000%) raid_in_solid=0/5431 (0.000%) PASS.
 No Twitch test, zero bits, no cheer, no redemption, no chat line.
+## C-190 (24 Nov 2026 11:2x CST, content) - WROTE miniboss_feed.by_key.nightman (NIGHTWORK, THE 53rd); FEED 52 -> 53
+TAKE THIS NEXT (10:58 CT, team lead) CONTENT row (11:22): C-190. REF CHECKED: nightman.glb arrived on origin/main in this run's merge (tools/art/minibosses.py row 19075: Nightwork, 2.30 m, prison; docs/art/NIGHTMAN_THE_53rd.md read).
+Added arrive x9, act x7, broken x4, fall x8 (stiltman shape). Mechanic: lamp shutter open = it stands still and cannot be hurt; shut = it can be killed and it works. 'broken' = shutter open, the trade. Party owns the choice; lines favour neither. No {name} in arrive or fall. _note_c190 added (expected zero-hit).
+Validation: four owned files json.load OK; the 52 earlier by_key rows and every other key equal to pre-edit; ASCII only; VALIDATION OK.
+CODE WIRING (game build 11:07+): Delve.MB_NAME["nightman"] = "Nightwork"; MB_FIT nightman 0.94 (art's fit report); DungeonHD.THEME_MINIBOSS_MORE["prison"] += "nightman"; nightman.glb.import. Then chat bot republishes elite count 52 -> 53.
+Next content: C-191.

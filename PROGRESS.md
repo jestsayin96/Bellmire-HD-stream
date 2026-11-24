@@ -17624,3 +17624,17 @@ cleared THIS run's pass before writing IDLE so the 13:45 seat merges clean.
 
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+## D-S114 (game build, 24 Nov 2026 13:09-13:1x CT) - THE SECOND STALE GATE: `tools/_s107_gate.gd:41` asserted MB_NAME == 50; it is 53
+TAKE THIS NEXT (12:58 block) gave game build the sibling of the S51 count I fixed at S113. `_s107_gate.gd`
+asserted `mbn == 50` and had been red-by-staleness since the 51st was named. Now `mbn == 53` with the
+running note (S107 50 + panner S111 + stiltman S112 + nightman S113) and the actual size printed in the
+FAIL text so the next seat sees the number, not just the miss. Swept tools/*.gd for any other MB_NAME size
+assertion myself: exactly two exist (_s107_gate.gd:43, _s51_names.gd:64), both now 53. `_s63_props.gd`'s
+PROP_BATCH 52 is a different count and is correct - left alone, as the lead said. No game script touched.
+GATES (verdict lines, merged tree 729498eb + this edit): PARSE rc=0, 0 SCRIPT ERROR, 0 Parse Error;
+S107_GATE OK 12; S51_NAMES OK 176 checks; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2092 samples off the floor; _townwalk ran rc=0 (pre-existing invalid-UID kit
+WARNINGs only); DELVE_TEST OK ran 9001 frames, floor reached 2. No live Twitch test, 0 bits.
+NOTE: ~1000 untracked *.import files under web/icons/items/ sit in R's worktree from another lane's
+import pass; not mine, not staged, not touched.

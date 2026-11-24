@@ -18531,11 +18531,61 @@ def panner():
     _RX = MN.cross(Vector((0.0, 0.0, 1.0))).normalized()
     _RY = MN.cross(_RX).normalized()
     _lip = PC + MN * (DEPTH * 0.5 - 0.010)
-    _pts = []
-    for _i in range(29):
-        _t = TAU * _i / 28.0
-        _pts.append(_lip + _RX * (R_OUT * math.cos(_t))
-                    + _RY * (R_OUT * math.sin(_t)))
+    # PASS 5: THE RING IS BROKEN UNDER THE HOPPER, AND THE PART BLAMED AT PASS 4
+    # WAS THE WRONG ONE. The standing fault 3 read "the hopper's CHUTE crosses
+    # the top of the mouth in front projection". It does not. I did the front
+    # projection in the mouth's own basis before touching anything: the chute
+    # runs (0.120, 0.120, 1.580) -> (0.150, -0.036, 1.325) and BOTH ends are
+    # already inside the opening's projected ellipse, so it hangs over the dark
+    # interior and never touches the pale annulus. THE HOPPER CONE is the part
+    # that cuts the ring - it spans z 1.570..1.900 at x 0.120 +/- 0.255 and
+    # crosses the ring's top arc (z ~ 1.87) dead centre. The picture
+    # (panner/hero_front.png) agrees, which is the half that closed it.
+    # AND THE ARITHMETIC EXPOSES WHY "MOVE THE CHUTE" IS NOT A FIX: the mouth is
+    # canted up and forward (MN.z > 0), so its projected disc owns the whole
+    # area above the drum. Anything that feeds the mouth from above must come
+    # down through the top arc or stop outside x < -0.61 / x > 0.90, where it is
+    # no longer over the pan at all. So the feed cannot move; the LIP can.
+    # THE FIX IS ONE OBJECT AND IT ANSWERS FAULT 5 AS WELL. Sweeping only part
+    # of the loop leaves a deliberate gap under the hopper: the hopper then
+    # passes THROUGH a gap instead of notching a closed ring, and an interrupted
+    # lip is a pan with a feed gap rather than the modern porthole shape that
+    # fault 5 records. The gap is derived from the hopper's own front-projected
+    # silhouette plus a margin - not a hand-picked angle - so it stays correct
+    # if the hopper moves.
+    _HOP_X = 0.120                        # hopper cone axis, front projection x
+    _HOP_Z0, _HOP_Z1 = 1.570, 1.900       # its z span
+    _HOP_R0, _HOP_R1 = 0.130, 0.255       # its radius at z0 and at z1
+    _GAPM = 0.085                         # clear margin either side of the feed
+
+    def _under_feed(_p):
+        """Is this lip point behind the hopper in FRONT projection (x, z)?"""
+        if _p.z < _HOP_Z0 - _GAPM:
+            return False
+        _f = min(max((_p.z - _HOP_Z0) / (_HOP_Z1 - _HOP_Z0), 0.0), 1.0)
+        return abs(_p.x - _HOP_X) <= (_HOP_R0 + (_HOP_R1 - _HOP_R0) * _f) + _GAPM
+
+    _NL = 57
+    _loop = []
+    for _i in range(_NL):
+        _t = TAU * _i / _NL
+        _loop.append(_lip + _RX * (R_OUT * math.cos(_t))
+                     + _RY * (R_OUT * math.sin(_t)))
+    _blk = [_under_feed(_p) for _p in _loop]
+    _runs = sum(1 for _i in range(_NL) if _blk[_i] and not _blk[(_i - 1) % _NL])
+    # GO RED ON A SHAPE I CANNOT REASON ABOUT rather than ship a lip with two
+    # gaps in it because the hopper moved. One run is a feed gap; two is a
+    # defect, and zero means there was never anything to break.
+    assert _runs <= 1, "panner lip: hopper blocks %d separate arcs" % _runs
+    # PAN_RING=closed restores pass 4's continuous loop so the A/B reproduces.
+    if os.environ.get("PAN_RING") == "closed" or _runs == 0:
+        _pts = _loop + [_loop[0]]
+    else:
+        _e = next(_i for _i in range(_NL)
+                  if _blk[_i] and not _blk[(_i + 1) % _NL])   # last blocked
+        _s = next(_i for _i in range(_NL)
+                  if _blk[_i] and not _blk[(_i - 1) % _NL])   # first blocked
+        _pts = [_loop[(_e + 1 + _k) % _NL] for _k in range((_s - _e - 1) % _NL)]
     P.raw(L.tube(_pts, [0.058] * len(_pts), 8), 'bone')
     # THE INNER FLOOR - AND ITS SLOT IS PASS 2, THE ONE CHANGE IN THAT PASS.
     # PASS 1 MADE IT PALE AND THE PICTURE REFUTED THE WHOLE DESIGN. A bowl whose
@@ -18644,3 +18694,215 @@ def panner():
 
 
 BUILDERS.update({"panner": panner})
+
+
+# ========================= 52 THE STILTMAN ==================================
+# WHAT THE SET ALREADY HAD, MEASURED OFF THIS FILE RATHER THAN REMEMBERED (51
+# bodies, 62 rows with the chibi variants). Read end to end before designing:
+# nothing in it is a COST TO PROGRESS. The nearest three are not it. The
+# Jointer COMES APART and both halves keep working - breaking it gives you two
+# problems, not a worse one. The Stackman GETS ABOVE YOUR REACH - a height
+# problem you solve by waiting. The Scrapwright RE-PLATES itself - you undo
+# work. None of them makes the party ASK WHETHER TO KEEP GOING: every one of
+# the fifty-one rewards damage, or punishes it on a timer the creature owns.
+#
+# THE STILTMAN OWNS NOTHING. The party owns the choice and it is a bad one
+# either way: it stands on four stilts, and every stilt is breakable in plain
+# sight. Break one and it drops, and a thing closer to the floor is a thing
+# with a shorter stride and a faster one - so the fight you are in gets harder
+# in exactly the way your own progress made it. Leave them and it reaches over
+# your front line from a height nobody can answer. There is no third option and
+# there is no right answer; there is a party that agrees about it and a party
+# that does not.
+#
+# AND THE BODY SHOWS THE MECHANIC WITHOUT A WORD, which is the whole reason it
+# is this trade and not another: ONE STILT IS ALREADY BROKEN when you meet it.
+# A fen walker that has lost a leg and is leaning on the other three is a
+# before-and-after a static body can hold, the same job the Panner's part-turned
+# mouth does. A viewer counts four pale cuffs and sees that only three have a
+# pole in them.
+#
+# FOGBOUND, which is a fen trade and one of the thinnest themes in the set.
+# Stilt walkers are real working people - herders and fishers crossing marsh -
+# so the register stays plain: long poles, bound cuffs, a hunched man.
+#
+# FAULT 7, RECORDED ON THE PANNER THIS HOUR, IS DESIGNED OUT HERE RATHER THAN
+# RE-LEARNED. Four legs placed on a symmetric square eclipse pairwise in BOTH
+# cameras - the Panner's frame reads as a single post from the side for exactly
+# that reason. So the front pair is wider in X than the back pair AND separated
+# from it in Y: the front camera (along -Y) separates them by X, the side
+# camera (along X) separates them by Y, and neither view gets a single post.
+CANON.update({
+    "stiltman": ("Downfast", 3.20, (0.62, 0.64, 0.60), (0.86, 0.92, 0.96),
+                 "fogbound", "IT IS QUICKER FOR EVERY LEG YOU TAKE - it crosses "
+                 "the room on four stilts and every one of them is breakable in "
+                 "plain sight, which is the trap: breaking one WORKS. It drops, "
+                 "its reach over your front line shortens, and it is FASTER - a "
+                 "shorter stride is a quicker one, and a thing at your own "
+                 "height does not have to stoop to get at you. Leave the stilts "
+                 "alone and it stands above the party and strikes down past the "
+                 "line into whoever is behind it; take them and you are fighting "
+                 "something low and quick with nothing left to break. It does "
+                 "not choose and it does not time anything: THE PARTY OWNS THE "
+                 "DECISION and both ways cost. THE THING TO READ IS THE LEGS: "
+                 "four pale bound cuffs at the hip and only THREE poles in them "
+                 "- it has already lost one, and it is already leaning.",
+                 0.62, "Something ahead is walking on poles, and one is gone."),
+})
+ORDER = ORDER + ["stiltman"]
+
+# PER-SLOT MATERIALS - THE TITHER'S RULE: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON, and here that is THE LEGS AND NOTHING ELSE. The four
+# cuffs at the hip and the four foot blocks are bone; the poles, the trunk, the
+# arms, the hood and the balance hook are all dark. The pale is deliberately
+# split into EIGHT SMALL MARKS rather than one mass, because what the viewer
+# has to do is COUNT - four sockets, three poles - and a count needs separable
+# marks. A single pale hip plate would read as one bright blob and answer
+# nothing.
+# AND THE FACE IS ONE PANEL ON -Y ONLY. The Beadle's measured fault was a pale
+# band that wrapped the head so the figure read the same from both ends; the
+# Panner answered it by having no face at all on the back. Here the head is
+# hooded dark and the only pale on it is a single forward panel, so the back
+# view gets a dark hood and a dark trunk on three dark poles.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"stiltman"}
+
+OVERRIDE.update({
+    "stiltman": {
+        'body': ((0.168, 0.172, 0.158), 0.88, 0.02),   # the man: wet fen wool
+        'dark': ((0.092, 0.094, 0.086), 0.78, 0.06),   # poles, trunk, hood
+        'bone': ((0.846, 0.838, 0.788), 0.44, 0.22),   # CUFFS AND FEET ONLY
+        'glow': ((0.860, 0.920, 0.960), 0.80),         # eyes, forward only
+    },
+})
+
+
+def stiltman():
+    """IT IS QUICKER FOR EVERY LEG YOU TAKE. The 52nd body.
+
+    THE FOUR STILTS ARE THE CREATURE. Everything else on it is there to say
+    which way is forward and that a man is driving it:
+
+      HIP PLATE   a short dark block at z 1.95 with FOUR pale cuffs round its
+                  edge. The cuffs are the count.
+      THREE POLES long tapered dark stilts, foot block at the bottom, bound
+                  into three of the four cuffs.
+      THE FOURTH  a SPLINTERED STUMP - the cuff is there and the pole is gone
+                  below 1.12. That is the before-and-after.
+      THE LEAN    the trunk leans 0.11 toward the lost corner, because a man on
+                  three legs of four does. It is the one thing that makes the
+                  missing pole read as LOST rather than as a design.
+
+    THE TWO CAMERAS GET DIFFERENT SEPARATIONS ON PURPOSE - see fault 7 above.
+    Front pair at x +/-0.46, y -0.30; back pair at x +/-0.26, y +0.34.
+
+    Static: no `anims` entry.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures the real footprint
+    against floorgen's own corridor span and lid and writes the verdict.
+    """
+    P = Parts("stiltman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 1.950                      # the hip plate's underside
+    # PASS 3: THE LEAN IS TRIPLED AND THE PLATFORM GOES WITH IT. At pass 2 the
+    # count was the only thing carrying the mechanic and the hero-scale render
+    # proved the count DOES NOT SURVIVE STREAM DISTANCE - four small pale cuffs
+    # on a dark plate are two pale smudges at that size. A TILT is a silhouette
+    # fact and survives any distance, so the thing that says "a leg is gone" is
+    # now the attitude of the whole body, with the count as the close-up
+    # confirmation rather than the only evidence.
+    LEAN = Vector((-0.330, 0.105, 0.0))   # toward the lost corner
+
+    # (x, y, pole-top, broken?)  - the lost one is the BACK LEFT
+    LEGS = [(0.460, -0.300, False), (-0.460, -0.300, False),
+            (0.260, 0.340, False), (-0.260, 0.340, True)]
+
+    # ---- the stilts themselves -------------------------------------------
+    _open()
+    for _lx, _ly, _broken in LEGS:
+        _top = Vector((_lx * 0.62, _ly * 0.52, HIP - 0.030))
+        if _broken:
+            # SPLINTERED: the pole stops short and its lower end is a ragged
+            # taper, not a foot. Nothing of it touches the ground.
+            _bot = Vector((_lx * 0.86, _ly * 0.80, 1.540))
+            P.raw(aim(L.cone(0.062, 0.022, (_top - _bot).length, 7),
+                      tuple(_bot), tuple((_top - _bot).normalized())), 'dark')
+            continue
+        _bot = Vector((_lx, _ly, 0.060))
+        P.raw(aim(L.cone(0.034, 0.064, (_top - _bot).length, 9),
+                  tuple(_bot), tuple((_top - _bot).normalized())), 'dark')
+        # the foot block - pale, because the foot is part of the count
+        P.add(L.box(0.175, 0.205, 0.062), 'bone', loc=(_lx, _ly, 0.031))
+    _close("stilts")
+
+    # ---- the hip plate and THE FOUR CUFFS --------------------------------
+    _open()
+    P.add(L.box(0.790, 0.640, 0.135), 'dark', loc=(-0.045, 0.030, HIP + 0.010))
+    for _lx, _ly, _broken in LEGS:
+        _c = Vector((_lx * 0.62, _ly * 0.52, HIP - 0.030))
+        _d = (Vector((_lx, _ly, 0.060)) - _c).normalized()
+        # a short pale sleeve round the pole's head. On the lost corner it is
+        # the same sleeve with nothing in it - the socket is what you count.
+        # PASS 2: THE CUFFS STAND PROUD OF THE PLATE INSTEAD OF UNDER IT.
+        # Pass 1 hung them below the hip block and the block HID them - the
+        # front render showed two pale pucks of four, so the one thing the
+        # viewer has to do (count four sockets against three poles) could not
+        # be done. They are longer now and seated so they rise THROUGH the
+        # plate, which is also what a real bound cuff does.
+        P.raw(aim(L.cone(0.098, 0.090, 0.300, 10),
+                  tuple(_c - _d * 0.120), tuple(-_d)), 'bone')
+    _close("cuffs")
+
+    # ---- the trunk, leaning toward the corner it lost --------------------
+    _open()
+    _T0 = Vector((0.0, 0.020, HIP + 0.090))
+    _T1 = _T0 + Vector((0.0, -0.030, 0.520)) + LEAN * 0.55
+    _T2 = _T0 + Vector((0.0, -0.090, 0.900)) + LEAN
+    limb(P, [tuple(_T0), tuple(_T1), tuple(_T2)], 0.215, 0.165, 'body')
+    P.add(L.box(0.470, 0.330, 0.072), 'dark', loc=tuple(_T0 + Vector((0, -0.010, 0.120))))
+    for _s in (-1, 1):
+        P.add(L.sphere(0.112, 0.104, 0.096, 11, 8), 'body',
+              loc=tuple(_T2 + Vector((_s * 0.205, 0.0, -0.040))))
+    _close("trunk")
+
+    # ---- the hood and the one pale panel on -Y ---------------------------
+    _open()
+    _H = _T2 + Vector((0.0, -0.030, 0.185))
+    P.add(L.sphere(0.148, 0.152, 0.150, 14, 9), 'dark', loc=tuple(_H))
+    P.raw(aim(L.cone(0.182, 0.052, 0.170, 12),
+              tuple(_H + Vector((0.0, 0.015, 0.040))), (0.0, 0.10, 1.0)), 'dark')
+    P.add(L.box(0.098, 0.036, 0.108), 'bone', loc=tuple(_H + Vector((0.0, -0.172, -0.012))))
+    eyes(P, tuple(_H + Vector((0.0, 0.0, 0.006))), 0.036, 0.020, -0.196)
+    _close("head")
+
+    # ---- the arms, and the balance hook in the near one ------------------
+    # A fen walker carries a pole to feel the bottom with. It is dark and it is
+    # NOT a stilt - it is thinner, it is held across the body and it does not
+    # reach the floor, so it cannot be miscounted as a fourth leg.
+    _open()
+    _HOOK = Vector((0.520, -0.330, 1.520))
+    limb(P, [tuple(_T2 + Vector((-0.205, 0.0, -0.040))),
+             tuple(_T2 + Vector((-0.280, -0.120, -0.430))),
+             tuple(_T2 + Vector((-0.235, -0.165, -0.700)))], 0.072, 0.052, 'body')
+    limb(P, [tuple(_T2 + Vector((0.205, 0.0, -0.040))),
+             tuple(_T2 + Vector((0.330, -0.150, -0.360))),
+             tuple(_HOOK)], 0.074, 0.054, 'body')
+    # PASS 2: THE FEELING POLE IS SHORTENED FROM 1.06 TO 0.56 AND RAKED
+    # ACROSS. At pass 1 it was long and near-parallel to the stilts, and in the
+    # hero-scale shot - the one that matters, because it is the stream
+    # distance - it read as a FOURTH LEG. That is the exact miscount this
+    # docstring claimed to have designed out, so it is cut back until it cannot
+    # be mistaken for a thing standing on the floor.
+    P.raw(aim(L.cone(0.028, 0.028, 0.560, 8), tuple(_HOOK + Vector((-0.070, 0.040, 0.230))),
+              (0.52, -0.16, -1.0)), 'dark')
+    _close("arms")
+    return P
+
+
+BUILDERS.update({"stiltman": stiltman})

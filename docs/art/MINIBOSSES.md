@@ -4706,14 +4706,48 @@ ring" was a solid 1.28 m plate over the mouth).
   in the set at two bodies.
 - **HOLD `MB_NAME["panner"]`** until content writes `by_key.panner`. The canon
   name is **"Onceround"**.
-- **THREE FAULTS STAND ON THE SHIPPED BODY** and are the next firing's work.
-  **The first one's blame was corrected on 24 Nov 07:34 CT and the correction
-  changes the fix:** it is the HOPPER CONE, not the chute, that cuts the pale
-  rim's top arc - the chute's two ends both fall inside the opening's projected
-  ellipse and never touch the annulus, measured in the mouth's own basis and
-  then confirmed by opening `panner/hero_front.png`. And nothing that feeds the
-  mouth from above can miss that arc, because the mouth is canted up and
-  forward, so **"move the chute" is not a fix.** The one change that answers it
-  and the porthole fault together is to BREAK THE RING under the hopper. The
-  comfits reading as rivets rather than sugar stands unchanged. See the 07:34
-  addendum in docs/art/PANNER_THE_51ST.md for the arithmetic.
+- **PASS 5 (24 Nov 08:4x CT) BROKE THE RING AND TWO OF THE THREE FAULTS ARE
+  CLOSED.** The lip is no longer a closed loop: `panner()` samples 57 points,
+  drops the 11 that fall behind the HOPPER CONE in front projection (its own
+  silhouette plus a 0.085 margin - derived, not a hand-picked angle) and sweeps
+  the remaining arc. The hopper now passes through a gap cut for it instead of
+  notching a closed ring, and an interrupted lip is a pan with a feed gap
+  rather than a porthole. **FAULT 3 CLOSED, FAULT 5 CLOSED.**
+  The blame correction from 07:34 stands and is why this is the fix: it was the
+  HOPPER CONE, not the chute, that cut the rim - the chute's two ends both fall
+  inside the opening's projected ellipse and never touch the annulus - and
+  nothing that feeds a mouth canted up and forward can miss that top arc, so
+  **"move the chute" was never a fix.** The feed could not move; the lip could.
+  **A/B at `panner_p4ring/` (closed) against `panner_p5ring/` (broken)**, three
+  views each: pale 6,724 -> 6,340 px, coverage 321 -> 308 deg, largest gap
+  39 -> 52 deg, creature bbox IDENTICAL. **THOSE NUMBERS CANNOT TELL A NOTCH
+  FROM A GAP** - both shapes show a gap at the top - so the picture decided it
+  and I opened it: in A the pale runs up to the hopper's edge and resumes, in B
+  the cut ends stand clear of the feed. `PAN_RING=closed` reproduces pass 4.
+  **STILL STANDING: FAULT 4** - the comfits are dark beads on a dark floor and
+  read as RIVETS, so the front reads as a bolted drum face and nothing says
+  sugar. **NEW FAULT 7, PRE-EXISTING AND NOT INTRODUCED HERE:** in the side
+  view the two near legs eclipse the two far legs along X, so the frame reads
+  as a SINGLE post and the body as a dish on a stand. Same family as the man's
+  pass-3 eclipse. Recorded, not fixed.
+  **THE BODY ON DISK CHANGED THIS HOUR**: `panner.glb` 92,472 -> 107,164 bytes,
+  822 -> 958 faces, span 1.73 -> 1.74 m, still 2 materials, still CORRIDOR-SAFE
+  and UNDER-LID, fit GREEN, 0 blanks, frame_edge zero in all three views.
+  See docs/art/PANNER_THE_51ST.md for the pass-5 section and the arithmetic.
+
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `stiltman` | Downfast | 3.20 | fogbound | **IT IS QUICKER FOR EVERY LEG YOU TAKE** - four stilts, all breakable in plain sight. Breaking one WORKS: it drops, its reach over your line shortens, and it is faster. Leave them and it strikes down past your front rank. The party owns the decision and both ways cost | 0.62 | 1.34 |
+
+**THE 52nd IS BUILT AND IT DOES NOT READ YET - NOT READY TO WIRE.** Three
+passes on 24 Nov 08:4x-08:5x CT. Gate GREEN, ratio 1.31 (3.20 m, the TALLEST
+body in the set), span 1.34 m, CORRIDOR-SAFE, UNDER-LID, 602 faces, 0 blanks,
+frame_edge zero on all three views - and none of that is the point: at hero
+scale it reads as a SURVEYOR'S TRIPOD WITH A LAMP ON TOP, and the lost leg that
+the whole mechanic is staked on is invisible at that distance. It is committed
+rather than left in the worktree (the Beadle and the Panner were both caught
+that way) but `scripts/bestiary.gd` and `Delve.MB_NAME` must NOT take it yet.
+See docs/art/STILTMAN_THE_52ND.md - the fault list is five long and the next
+change is named: a fen cloak that makes the trunk read as a person, because the
+tripod read is fault 1 and everything else is smaller than it.

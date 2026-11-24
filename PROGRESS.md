@@ -17534,3 +17534,6 @@ Windows clock through the Blender bridge regardless, which is the standing instr
 
 No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+## HUB 24 Nov 2026, 12:4x CT - the zero-byte item icon
+Took the 12:37 HUB row. turbary_hood.webp: 0 bytes -> 2718 (= manifest). Zero-byte sweep of web/ assets/ data/ scripts/ now returns NOTHING. Guard `make_item_icons.py --verify` red-proved on a re-zeroed copy, green on the tree. NUMBER: 1 zero-byte file of 520 (was), 0 (now). No READY TO PUBLISH claim.

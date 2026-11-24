@@ -1059,7 +1059,15 @@
     "The gate-ward counts them out. The count is written down.",
     "A dog follows to the last house and sits.",
     "The tinker slips a flint into the nearest pack and looks elsewhere.",
-    "The rope-maker tests each knot with a thumb and nods once."
+    "The rope-maker tests each knot with a thumb and nods once.",
+    "The ferrier checks the shoes on the pack mule, then the hero's boots, and charges for neither.",
+    "The widow at the corner house lights her lamp early.",
+    "Two children walk the party to the gate and are sent home at the gate.",
+    "The ward at the gate looks at the sky, then at the stair, and says the weather will hold.",
+    "The chandler presses a spare candle into a hand and will not take coin.",
+    "The cooper raps a cask twice to show it is sound and puts it back.",
+    "The old guard stands up when they pass. He sits again after.",
+    "Somebody has chalked the day on the gate post, as is done."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1623,7 +1631,15 @@
     "The tally of packs matches the tally that left.",
     "A bed is made up in the back room before it is needed.",
     "The lamp-boy counts the burned wicks back into the tray.",
-    "The bell is rung once, and not for alarm."
+    "The bell is rung once, and not for alarm.",
+    "The ostler has the mules watered before the first one reaches the yard.",
+    "The healer sets out her basin and does not ask who is hurt.",
+    "Someone hangs the wet cloaks by the stove in order of size.",
+    "The ward strikes the day off the gate post and chalks the next.",
+    "A pot of barley goes on the fire. It was always going to.",
+    "The cooper keeps back a cask for the evening and says nothing of why.",
+    "The bell-ringer sits with the rope in his lap and does not pull it.",
+    "The guild clerk opens the book to the right page and waits."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -2135,7 +2151,17 @@
       "Smells of rain down here.",
       "Quiet. Too quiet.",
       "Cold down here. Keep moving.",
-      "Dust on the stair. Nobody has been this way."
+      "Dust on the stair. Nobody has been this way.",
+      "Stair is dry. Good.",
+      "Mind the fourth step.",
+      "Draught from below. Stay close.",
+      "Lamps up. Quiet now.",
+      "Old rope on the wall. Do not trust it.",
+      "Boot prints. Not ours.",
+      "Floor's dry. Let us keep it that way.",
+      "Smell of tallow. Someone was here.",
+      "Count heads. All here? Go.",
+      "Door sticks. Shoulder to it."
     ],
     "lord": [
       "Hold together!",
@@ -2427,7 +2453,14 @@
       "Stand together.",
       "Do not look at the crown.",
       "Steady. Eyes up.",
-      "He has been waiting a long time."
+      "He has been waiting a long time.",
+      "Steady now. Do not run.",
+      "There. Keep the line.",
+      "Shields in. Slow breath.",
+      "That is the one. Hold.",
+      "Do not break first.",
+      "Whatever it does, stay together.",
+      "Count the exits. Then forget them."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -3017,7 +3050,17 @@
       "I am fine. Keep moving.",
       "Just a scratch.",
       "Tell nobody.",
-      "Bleeding. Not badly."
+      "Bleeding. Not badly.",
+      "Binds will hold.",
+      "It is only blood. Keep going.",
+      "Walk it off.",
+      "Not deep. Not yet.",
+      "Leave it. Move.",
+      "I have had worse on market day.",
+      "Do not stop for me.",
+      "Rag round it. On we go.",
+      "Cut worse shaving. Keep up.",
+      "Mind the left side. That is all."
     ],
     "drink": [
       "Bottoms up.",
@@ -3292,7 +3335,17 @@
       "That'll burn. Good.",
       "Swallow and move.",
       "Bitter. Works though.",
-      "Tastes of tin. Helps."
+      "Tastes of tin. Helps.",
+      "Hold your nose. Drink.",
+      "Foul stuff. Good stuff.",
+      "Down in one go.",
+      "Warm already. Good.",
+      "Smells of ditchwater. Works.",
+      "One swallow. Do not taste it.",
+      "Cork out. Drink up.",
+      "Sour. Do not complain.",
+      "That clears the head.",
+      "Tastes like the cellar. Fine."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -14767,5 +14820,6 @@
   "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
   "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
-  "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS)."
+  "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS).",
+  "_note_c192": "C-192 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 13:22: descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10. Plain strings appended to pools the engine already reads; no placeholders, no mechanics, no floor counts. Expected zero-hit key; do not wire."
 }

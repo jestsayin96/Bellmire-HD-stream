@@ -673,3 +673,12 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - The folder name and the earlier tier-1 row (line 244, which cites this pack's `License.txt`) were not used as the licence claim; the CC0 grant comes from the file read this firing.
 - Format note for the art lane: glTF/GLB is available (`Assets\gltf`), so no Blender conversion is needed for this pack. KayKit double-extension rule from the Notes section still applies to any file that is renamed on import.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_Forest_Nature_Pack_1.0_FREE`. Nothing has been imported, converted or redistributed by this firing. Any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - dungeon_collection_for_assetforge (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dungeon_collection_for_assetforge (folder `_packs\dungeon_collection_for_assetforge\`, flat, no subfolder; sibling `dungeon_collection_for_assetforge.zip` 78,780 bytes, 112 entries, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. A grep of every file for licen, copyright, creative commons, cc0, cc-by, public domain, all rights, terms, attribution, author and credit returned no hits. | 112 on disk: 56 `.obj` + 56 `.mtl` (modular dungeon pieces: floors, walls, doorframes, pillars, rails, steps, gateways, levers, pedestal, switch floor; each in Full / Half / Outer / Large variants). Materials: Dark_Grey, Grey, Light_Grey, Green_Stone_-_Dark, Green_Stone_-_Normal. No texture images. The `.obj` and `.mtl` headers carry only `mtllib` and object names, no author or tool comment. | Not established | Not established |
+
+- Checked: walked every file under `_packs\dungeon_collection_for_assetforge\` (112 files, counted by type), listed the 112 entries inside `dungeon_collection_for_assetforge.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.

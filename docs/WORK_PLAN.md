@@ -1,3 +1,83 @@
+## TAKE THIS NEXT - Updated THE 23:58 CT FIRING, 23 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** WRITTEN 00:0x-00:1x CT ON 24 NOV - the :58 firing ran across midnight. "The 23:58 firing" and
+*** "the machine clock says 24 Nov" are BOTH true. THE GAME BUILD (:07) COULD NOT READ THIS: I was
+*** still measuring when it fired, and a block written after :05 is the NEXT firing's row and says
+*** so on its face. GAME BUILD, YOUR ROW BELOW IS FOR THE 01:07 FIRING. The other five lanes -
+*** content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52) - read it this hour. ***
+
+Merged this hour into main **41f71825**, up from 5da84294: all SIX lanes (laptop f3c0676c, art
+bc9d7a55, content e2c0240b, hub 84c8aa71, hud-ui 2852fdbb, chatbot 385011ec). THREE conflicts,
+every one in root PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that
+matters: `diff --numstat origin/main HEAD -- PROGRESS.md` reads **+80/-0** - ZERO lines removed -
+and a tree-wide grep on all FOUR exact marker shapes returns **zero hits**. The lanes' own numstats
+sum to 83, not 80; I checked every added line of every lane against merged PROGRESS.md with a
+multiset and **not one is missing** - the three are duplicate blank separator lines where two
+lanes' blocks abut. No content was lost.
+
+*** THE CASCADE IS UNBLOCKED. `stopper.glb` IS ON MAIN. ***
+Measured by me on merged main, not copied: `assets/monsters/minibosses/stopper.glb` is tracked
+(105,592 bytes, nodes `stopper_body` / `stopper_bone` / `stopper_dark` / `stopper_glow`), and
+`git rev-parse 5da84294:assets/monsters/minibosses/stopper.glb` fails - it was on NO ref an hour
+ago and it is on main now. 62 `.glb` tracked. The chain today, brace-matched parse, not a regex:
+`miniboss_feed.by_key` **49** | `Delve.MB_NAME` **48** | `commands.json` published **48**.
+`feed - MB_NAME` = `stopper` ALONE. `MB_NAME - feed` = empty. The only thing left in the cascade is
+the stopper's name row, and the thing that blocked it is gone.
+
+### GAME BUILD - FOR THE 01:07 FIRING (you could not read this at 00:07)
+**S103: wire the stopper, and fix the gate you wrote to hold it.** Both preconditions are now true
+on merged main 41f71825: the mesh is tracked and content's feed row has been there since C-176.
+Take the CANON name from content's feed, not from this block - I am not going to hand you a string
+to copy.
+**AND IN THE SAME COMMIT, UPDATE `tools/_s102_gate.gd`.** It asserts
+`Delve.miniboss_model("stopper") == ""` ("stopper still has no mesh") and
+`not Delve.MB_NAME.has("stopper")`. **Both were correct when you wrote them an hour ago and both
+are false now.** S102_GATE will print FAIL on its next run on a tree with no defect in it. That is
+a lying instrument, and under the standing rule a lying instrument is never new work - fix it with
+the row that invalidates it, do not leave it red for a seat to rediscover.
+
+### ART - THE DEFERRED PASS IS NOW FIRST
+`stopper.glb` landed and the queue behind it is clear, so the item I held back at 23:1x is yours:
+**the Roper's head-on read.** Your own fault (1) names the fix - grow the top so the apex is an
+object at stream distance - and your own measurement says it costs a re-site of the hands. Take it
+as its own pass with its own render. **The acceptance test is the FRONT view at hero scale**; the
+side already reads and proves nothing here. If your measurement still says the fix fouls the chin,
+write the refusal and stop - that is a delivery.
+
+### CONTENT - DRY, AND I MEASURED IT RATHER THAN ASSUMING IT
+`MB_NAME - feed` is **empty** and your 49 keys cover the one unwired body. Nothing is owed. Stand
+down and write it up, or audit a shipped feed row. Do not write a 50th.
+
+### CHAT BOT - HOLD AT 48 ONE MORE HOUR, AND HERE IS THE EXACT HOUR IT CLEARS
+Published 48 now equals `MB_NAME` 48 on merged main - but the feed is 49, so the COUNT arm stays
+red and `MINIBOSS UNNAMED` is `["stopper"]` alone. **Both are expected; neither is yours.**
+Republish once to 49 when **a merged main** carries `MB_NAME` 49. On the schedule that is NOT this
+hour: the stopper row lands on `laptop` at 01:07 and reaches main at my 01:58 merge, so the first
+firing that can read it is **02:45**. At 00:45 and 01:45, hold and say you held. Claim by :50 with
+a declared finish inside :52 - that row has worked for three days, keep it.
+**AND READ THE CLOCK FOR YOUR LOCK LINE.** You caught this yourself at B119 and you were right to
+write it down: you stamped `23:48:30` by arithmetic while the first process started `23:47:33`.
+Read the clock, then write the line, then start.
+
+### HUD - NOTHING HUD-OWNED IS OPEN
+Three stand-downs in a row and all three were correct; U139 verified by diff (PROGRESS.md and the
+synced plan only, no `.gd`, no lock line, no Godot). Stand down again, or commit the capture logs
+that have been living uncommitted in W2. **The rarity-hue row is still struck** - U55 shipped it at
+`ui_theme.gd:176` and you are right to keep refusing it. Twelfth time of asking.
+
+### HUB - HOLD STEADY
+`origin/gh-pages^{tree}` == `origin/hub:web` == `origin/main:web`, diff empty, nothing merged and
+unpublished. No `web/` byte changed this hour and you claimed no READY TO PUBLISH, so the publish
+gate was not owed and **I ran none**. Standing check only. Do not publish - that is the
+supervisor's call and it always will be.
+
+### FOR THE SUPERVISOR
+1. **The `forest-monster` hold stands, unchanged.** Nothing from `_packs\forest-monster\` has
+   entered `assets/`. Recommendation is still: leave the hold; only the Hoppmann source-texture
+   licence clears it.
+2. **Nothing to publish.** The three web trees are identical. I ran no publish verification because
+   none was owed.
+3. **Nothing new.** No decision is waiting on you this hour.
+
 ## AMENDMENT TO THE 22:58 CT FIRING, 23 NOV 2026 - written 23:1x CT by the team lead, AFTER the
 ## block below it and AFTER the plan was synced. READ THIS WITH THE BLOCK BELOW, NOT INSTEAD OF IT.
 *** WHO CAN STILL READ THIS THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45),

@@ -16009,3 +16009,8 @@ expected rows starting `| !` and the generator writes `` | `!name` ``. The real 
 my scan and the gate is right: 32 rows, `unpublished []`, `stale []`, and every one of the 32 data
 entries appears as a literal in chatcmd.gd. Reporting my own instrument's error rather than the
 number it printed.
+
+HUB 23 Nov 22:4x CT standing check (the TAKE THIS NEXT block's HUB row said hold web/ steady; no new row). Measured:
+web tree on gh-pages == origin/hub == origin/main == HEAD == 02257b2f (no publish gap, no READY TO PUBLISH claimed,
+no web/ file changed). app.js: node --check OK; innerHTML at exactly :255 and :301 (page-owned literals); the
+outerHTML/insertAdjacentHTML/document.write/eval/new Function matches are 2, both comment lines (:10-:11), zero code.

@@ -16300,3 +16300,21 @@ second Godot alongside anyone's.
 - **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **ZERO BITS**.
   All four gates were `--headless` against the worktree.
 - Gate log left at `_to_delete/_b120_gates.log` (deletion is not permitted in a connected folder).
+
+## S104 - game build, 24 Nov 01:08-01:1x CT - `_s58_span.gd` no longer writes tracked renders when run the wrong way
+Row: TAKE THIS NEXT 00:58 CT, GAME BUILD S104. Cause: `tools/_s58_span.gd:102` saved the viewport image into
+TRACKED `res://renders/cycles/s58/` with no check; run headless it went RED and dirtied committed evidence
+(QA tester, 00:51). Fix: `_windowless()` refuses up front when `DisplayServer.get_name()=="headless"` or the
+rendering driver is dummy/empty, BEFORE the make_dir - prints `S58_SPAN WINDOWED-ONLY <why> - refused, nothing
+written` and quits. Second guard at the save: a null/empty viewport image also refuses instead of saving.
+Header comment lists the new verdict shape. Backup `tools/_s58_span.gd.bak_s104` (untracked).
+Proof, merged tree (origin/main 6ac00079 + laptop plan syncs):
+- headless run: `S58_SPAN WINDOWED-ONLY display server is headless - refused, nothing written`, 1.0 s;
+  `git status --short --untracked-files=no renders` EMPTY after it (no tracked render touched).
+- windowed 1920x1080 run: `S58_SPAN OK n=28` - the gate still passes where it belongs. Looked at the png: three
+  broodgluts (mossbacked / drowned / plain) standing, widths 10.406/10.927/10.406 as measured. The rewritten
+  tracked png was reverted with `git checkout` so this commit carries no render churn.
+Battery: parse rc=0, 0 SCRIPT ERROR, 0 Parse Error (21.5 s) | TWITCH_PARSE OK (8 checks) |
+OFFFLOOR_VERDICT OK 0 of 2307 | DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR | TOWNWALK in_solid=0/16540 PASS.
+Note: twitch run logs `COMMANDS_DATA MINIBOSS COUNT published 48, feed rows 49` - EXPECTED, the chat bot's
+republish row, not mine. No live Twitch test this run.

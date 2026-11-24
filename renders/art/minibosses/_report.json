@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "c6a3f7917de965b5fe3cf4098c8d393ba3aeb1a7",
+   "head": "f1cb6f03f3f221859af5aa20e16c944ab98b1934",
    "ref": "origin/main",
-   "ref_commit": "5ab5ae20a04d5eca56384710edd841e4829cc233",
+   "ref_commit": "ca3a0a80999f29cc542f53e573315f2b268a5857",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2950,7 +2950,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.762,
+   "corridor_margin_m": 9.76,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.3,
    "read_from": {
@@ -2976,13 +2976,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "nightman": {
+   "title": "Nightwork",
+   "theme": "prison",
+   "idea": "IT WORKS IN THE DARK AND WAITS IN THE LIGHT - its own shuttered lamp hangs on its belt and the party can work the shutter. OPEN, it stands dead still: it strikes nobody and IT CANNOT BE HURT - a lit nightman is just a man standing in a room, and you can walk past him, and he will still be there when you come back. SHUT, it can be killed - and it WORKS, and a thing that works in the dark is never where you last struck it. So the party owns the switch and both ways cost: hold the lamp open and nothing of it can be finished, shut it and you are fighting something you cannot keep hold of. It does not choose, it does not time anything and it has no phase. THE THING TO READ IS THE LAMP: it is the only bright object on the whole body, it hangs on his own belt where a hand can reach it, and the shutter leaf is standing open beside it.",
+   "wear": 0.88,
+   "feed_line": "Someone is working down there, and he brought a lamp.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 701,
+   "size": [
+    1.63,
+    1.08,
+    2.3
+   ],
+   "footprint_span": 1.63,
+   "height_m": 2.3,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.37,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.2,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5095849367021426,
+    "ortho": 2.6667256355285645,
+    "clip": [
+     6.683816432952881,
+     16.85015296936035
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 5ab5ae20a04d5eca56384710edd841e4829cc233 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs ca3a0a80999f29cc542f53e573315f2b268a5857 sha bc3a603f",
  "blank_check": {
-  "files": 156,
+  "files": 159,
   "failures": []
  }
 }

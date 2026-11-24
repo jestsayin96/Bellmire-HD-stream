@@ -9560,6 +9560,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 166,
    "air_px_tightest_view": "back"
+  },
+  "nightman": {
+   "creature_h": 2.3,
+   "hero_h": 2.45,
+   "ratio": 0.94,
+   "pair_w": 3.49,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.109,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "nightman",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 28918,
+      "vis": 28918,
+      "delta": 34159,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43681,
+      "vis": 43681,
+      "delta": 55439,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 20116,
+      "vis": 20116,
+      "delta": 27600,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37789,
+      "vis": 37789,
+      "delta": 42098,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 29251,
+      "vis": 29251,
+      "delta": 38817,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44022,
+      "vis": 44022,
+      "delta": 48992,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 198360,
+     "shadow_px": 3273,
+     "mean": 0.4525,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3073,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 199120,
+     "shadow_px": 2767,
+     "mean": 0.4254,
+     "max": 0.7117,
+     "error": null,
+     "rim_filled_px": 2531,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 198360,
+     "shadow_px": 2962,
+     "mean": 0.4596,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3018,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     142,
+     142
+    ],
+    "side": [
+     175,
+     176
+    ],
+    "back": [
+     142,
+     142
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 142,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -9727,10 +9895,10 @@
  },
  "unproved_cells": [],
  "measured": [
-  "stiltman"
+  "nightman"
  ],
  "asked": [
-  "stiltman"
+  "nightman"
  ],
  "blank_check": {
   "files": 3,
@@ -9744,5 +9912,5 @@
  },
  "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (54), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (55), re-derived from stored measurements; 1 of them rendered this run"
 }

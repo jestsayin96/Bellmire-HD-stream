@@ -1,3 +1,91 @@
+## TAKE THIS NEXT - Updated THE 08:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE MID-CASCADE TRANSIENT IS REAL THIS HOUR. It is exactly the state the 07:58 block predicted
+*** one cycle early, and it is now measured by me on merged main - brace-matched and string-aware,
+*** not quoted from any lane:
+***   `miniboss_feed.by_key` = **51** (`panner` IN)  |  `Delve.MB_NAME` = **50** (`panner` OUT)
+***   `data/commands.json` publishes **50** at both leaves (.commands.miniboss.short and .what)
+***   `by_key - MB_NAME` = **['panner']** EXACTLY.  `MB_NAME - by_key` = **[]** - ZERO GHOSTS.
+*** Content's C-187 landed at 08:24 and is TICKED. THE GAME BUILD CLOSES THE CASCADE AT 09:07.
+*** AND A WARNING THAT COST ME A COUNT THIS RUN: my first `MB_NAME` parse read **20**, because the
+*** dict puts SIX KEYS ON ONE LINE for its first seven rows and my regex was line-anchored. The
+*** correct answer is 50. This constant has now lied to five seats. Match the braces AND find every
+*** `"key":` in the body - do not anchor on the line.
+
+- **GAME BUILD (09:07) - CLOSE THE CASCADE. ADD `"panner": "Onceround"` TO `Delve.MB_NAME` in
+  `scripts/delve.gd`.** Every precondition is met and I measured each one myself, not from a lane
+  report: the feed row is on main (`miniboss_feed.by_key.panner`, arrive 9 / act 7 / broken 4 /
+  fall 8); the body is on main (`assets/monsters/minibosses/panner.glb`, 92,472 bytes); its
+  `.import` sibling is now on main too (your own S110); and the CANON title is **"Onceround"**,
+  read off `tools/art/minibosses.py:18373`, not remembered. This is the normal order the file
+  itself documents six times. Then **System 12**, still scoped and unstarted.
+  *** DO NOT ADD THE 52nd (`stiltman`). ART HAS REFUSED IT IN WRITING AND I AGREE BY EYE - see the
+  *** ART row. A body that does not read is not a body yet.
+- **CONTENT (09:22) - C-187 IS TICKED AND YOU ARE DRY. DO NOT WRITE `by_key.stiltman`.** The 52nd
+  body is committed but art has declared it NOT READY TO WIRE and I have confirmed that by opening
+  its render. Writing a feed row for it would open a SECOND `UNNAMED` that nobody can close, because
+  the game build must not name a body that does not read. Stand down in writing, or audit a shipped
+  feed row. A stand-down written up is the delivery and I will tick it.
+- **ART (09:34) - STILTMAN PASS 4, AND YOUR OWN VERDICT IS UPHELD.** I staged
+  `renders/art/minibosses/stiltman/hero_front.png` and looked at it rather than reading your numbers:
+  at hero scale it reads as a **surveyor's tripod with a lamp on top**. Four thin splayed poles, a
+  lantern-shaped head, stub arms that float off the trunk, and no human silhouette anywhere in it.
+  Your own three-pass write-up says exactly that and committing it anyway - so it is on a ref and
+  not WIP in a worktree - was the right call twice over. **The acceptance test is a MAN ON STILTS
+  WHO HAS LOST ONE, read at hero scale, front first.** The fit numbers are already green
+  (h 3.20 / ratio 1.31 / fits_frame true, 3/3 proving views) and they are not the problem.
+  Keep the standing untracked-`.glb` check; it has now caught two bodies.
+- **HUB (09:37) - standing check, unchanged, and NOTHING IS OWED.** I measured the three web trees
+  myself this run: `origin/gh-pages^{tree}` == `origin/hub:web` == `origin/main:web` ==
+  **02257b2f**, `git diff --numstat` between them **EMPTY**. gh-pages is **029e4fac**, publish 6,
+  pushed **21 Nov 15:39 CT**. You claimed no READY TO PUBLISH and none is owed, so I ran **no
+  publish verification** and I am saying so rather than reporting an unearned green. Keep the pack
+  catalogue findings coming - `dungeon_collection_2` with **NO LICENCE FILE FOUND** is the right
+  call, and I checked its blast radius: zero references in `scripts/`, `web/` or `data/`, nothing
+  under `assets/`, so the gate held and nothing waits on it.
+- **CHAT BOT (09:45) - THE `UNNAMED` ARM WILL FIRE ON `panner` AND THAT IS CORRECT. DO NOT REPORT
+  IT AS A DEFECT AND DO NOT "FIX" IT.** On merged main as it stands, `chatcmd.gd:2248` sees exactly
+  one body with a feed and no `MB_NAME` row. That is the cascade mid-step, it is the cheaper of the
+  two reds, and it is content's row landing correctly ahead of the engine's.
+  **AND THE REPUBLISH IS NOT OWED AT 09:45.** The game build writes `MB_NAME` at 09:07 onto
+  `laptop`; that does not reach `origin/main` until my 09:58 merge. So when you measure the chain
+  yourself at 09:45 you should find **by_key 51 / MB_NAME 50 / published 50** and republish
+  **NOTHING**. The 50 -> 51 republish is your **10:45** run, and only if BOTH halves read 51 when
+  you measure them, brace-matched, at that moment. Claim by :50 with a declared finish inside :52 -
+  that row is working, you kept it again this hour, keep it.
+- **HUD (09:52) - the window is yours and I went looking for HUD work a seventh time rather than
+  inventing one.** Nothing HUD-owned is open: this hour's whole movement is `scripts/delve.gd`,
+  `data/lore_lines.json`, `assets/monsters/`, `tools/art/` and `docs/` - not one HUD file.
+  U148 is TICKED as a correct stand-down. Stand down in writing again if dry. The cadence question
+  is with the supervisor, not with you, and it is now in its third hour there.
+
+**FOR THE SUPERVISOR:** (1) **THE HUD LANE HAS NOW HAD SIX CONSECUTIVE CORRECT DRY CYCLES**
+(U143-U148). Carried unchanged because the facts are unchanged: the cause is neither the lane nor
+the lock schedule, no HUD-owned file is touched by anything currently moving, and the freeze means
+I cannot open HUD scope myself. **RECOMMENDATION: one short question to Mr. E** - open HUD scope (a
+Phase 2 system with a HUD half would do it), or reduce the HUD cadence while the work is elsewhere.
+I have not asked him and I am not taking either decision.
+(2) **NO PUBLISH IS OWED** - three web trees equal at `02257b2f`, diff empty, measured this run.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these on a live turn)
+Carried forward and re-measured this run. Nothing here is new work; it is this seat's own house.
+1. **THE HUB BLOCK IN THE PROMPT IS WRONG IN BOTH ITS SHA AND ITS DELTA. STRIKE IT.** It says
+   gh-pages is `05ac2679` / tree `9ca8051e` / pushed 19 Nov 20:06, and that 3 files / +59 / -1 are
+   "merged and not published, with the supervisor since 20 Nov". **Measured: gh-pages is `029e4fac`,
+   tree `02257b2f`, pushed 21 Nov 15:39 CT (publish 6), and the merged-and-unpublished delta is
+   ZERO FILES.** That work was published three days ago. Fourth hour running this correction stands.
+2. **THE ART FIT-REGISTER STANDING NOTE IS STALE. STRIKE IT.** It says the register reads
+   `RED / ok:false` on two carried `_chibi` rows. Measured this run: `ok: true`, `verdict: GREEN`,
+   54 pairs, `errors []`, `blind_views []`, `unproved_cells []`, `red_summary.shipped_red []` AND
+   `retired_red []`. The two `_chibi` rows are still present in `pairs` and are no longer red.
+3. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE.** It says 46 register rows / 44 live / 44-44-44
+   chain. Measured on merged main this run: register **54 pairs** (52 bodies + 2 retired `_chibi`),
+   `by_key` **51**, `MB_NAME` **50**, published **50**.
+4. **ADD THE LINE-ANCHORED-REGEX TRAP TO THE `MB_NAME` WARNING.** The prompt warns that a flat regex
+   lies about this constant; it does not say WHY. The reason is that the first seven rows carry
+   **six keys per line**, so any parser anchored at line start reads 20. Mine did, this run.
+5. **ID BASELINE, 24 Nov 08:5x CT:** B128, C-187, D100, H32, L74, S110, T5, U148. Art is on the
+   **Stiltman**, pass 3 of an open item.
+
 ## TAKE THIS NEXT - Updated THE 07:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE 51st MINIBOSS BODY IS IN THE REPOSITORY. ART COMMITTED IT AT 07:3x (art 2e9b6dfd) AND IT IS
 *** MERGED TO MAIN a16fd195: `assets/monsters/minibosses/panner.glb`, 92,472 bytes, tracked, on a

@@ -16628,3 +16628,12 @@ writing. The window was free when I claimed: last line was the game build's IDLE
 `$HOME/mnt/jests-hd-medieval-adventure` and `$HOME/mnt/bellmire-bot` directly. The
 `$HOME/mnt/hd adventure/...` path in the prompts no longer resolves. Nothing is broken; the two
 repos are both reachable, just one level shallower.
+
+## HUB - 24 Nov 2026 04:39 CT - STANDING CHECK, NO NEW ROW, NOT CLAIMING READY TO PUBLISH
+TAKE THIS NEXT gave the hub lane a standing check only ("nothing unpublished"). Merged origin/main
+into hub (53891fdc). MEASURED: `origin/gh-pages^{tree}` = `HEAD:web` = **02257b2f** (equal);
+`diff --numstat origin/main HEAD -- web` empty. innerHTML sites in app.js: exactly :255 and :301
+(page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; `node --check`
+OK; index.html comment ("only innerHTML ... two page-owned sites") still true. web/ unchanged, so no
+hostile-name rerun and no screenshot owed. Mount note: this worktree is `$HOME/mnt/bellmire-hub`.
+Untracked `_hub_ready_shot.png` is new in the worktree (named here, delete refused on this machine).

@@ -16144,3 +16144,9 @@ THIS IS THE SUPERVISOR'S CALL, NOT MINE. If the ordering mattered for a reason I
 revert data/commands.json and docs/COMMANDS.md to 47 and I will not re-land it until the `MB_NAME` row
 is in. I have left the UNNAMED arm untouched either way; that row is game build's and I did not go near
 scripts/delve.gd.
+
+## C-178 (23 Nov 2026 23:2x CST) - STAND-DOWN, NOTHING OWED; FEED LEVEL AT 49 KEYS
+TAKE THIS NEXT (22:58 CT block + its 23:1x amendment, 23 Nov) gave CONTENT no open row: C-177 (the Roper, Drawtight) is TICKED there. Measured on merged main 5da84294: `miniboss_feed.by_key` 49 keys; every committed art body has a feed row; the only feed key without a .glb is `stopper` (art's uncommitted mesh, art's row; its feed row C-176 is in place). `broodglut` and `lastcuff` are bestiary pack-variants, not feed bodies (see _note_c134/c135). No 50th body exists, so no feed lines are owed.
+NO DATA FILE CHANGED. items/lore_lines/bosses/potions parse (VALIDATION OK, nothing edited, pre-existing keys trivially unchanged). Next ID C-179.
+CODE WIRING: none new. Standing: game build adds `roper` -> `Drawtight` (and `stopper` -> `Chokewell` once art commits stopper.glb) to Delve.MB_NAME; chat bot republishes the count once, after both rows land.
+Decision for Mr. E: none.

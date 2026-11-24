@@ -1,0 +1,426 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED JestFan takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED BigAxe takes the oath as an orc barbarian (came over the west road and stayed; sees in the dark). The most meat. Swings heavy, guards nothing.
+FEED BigAxe, JestFan descend into the deep with the memorial at their backs.
+FEED They carry 4 flasks of oil between them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 1 risen bones, 1 hollowed cave bat, 1 skeleton minion.
+FEED A ceremonial way runs dead straight to a door meant to stay shut.
+FEED JestFan rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=0.0 CUT fight_737442560713 shot=shoulder pri=85.0 why=start held_prev=0.0 pace=1.0 | fight_737442560713/shoulder=85.0(hurt 0.00), chat_2104/follow=49.5(chat 4s ago), hero_2104/follow=33.7(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 3.
+FEED BigAxe, JestFan get out alive, and come home with what they carried.
+FEED BigAxe, JestFan come home to Bellmire with 0 gold. 0 kills between them.
+DIRECTOR t=16.1 CUT chat_2104 shot=follow pri=47.6 why=max_hold held_prev=16.1 pace=1.0 | chat_2104/follow=47.6(chat 20s ago), hero_2101/follow=33.6(town life), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=27.2 CUT breath_27 shot=breath pri=20.0 why=breath held_prev=11.1 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=46.3(chat 31s ago), hero_2104/follow=26.0(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED Talen Stonehand settles in Bellmire, looking for work.
+DIRECTOR t=31.2 CUT hero_2101 shot=follow pri=32.0 why=better_after_min held_prev=4.0 pace=1.0 | chat_2104/follow=45.8(chat 35s ago REPEAT-held-out), hero_2101/follow=32.0(town life), tour_7/push=10.0(quiet baseline)
+DIRECTOR t=34.2 CUT fish_558312218013 shot=follow pri=54.0 why=hotter held_prev=3.0 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=45.5(chat 38s ago REPEAT-held-out), hero_2104/follow=28.6(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+DIRECTOR t=58.6 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=24.4 pace=1.0 | chat_2104/follow=42.6(chat 63s ago REPEAT-held-out), hero_2101/follow=33.0(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Osric Fenwick settles in Bellmire, looking for work.
+DIRECTOR t=61.6 CUT hero_2104 shot=follow pri=32.9 why=hotter held_prev=3.0 pace=1.4 | chat_2104/follow=42.3(chat 66s ago REPEAT-held-out), hero_2104/follow=32.9(town life), tour_6/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=69.7 CUT fish_556970040674 shot=follow pri=54.0 why=hotter held_prev=8.1 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), chat_2104/follow=41.3(chat 74s ago REPEAT-held-out), hero_2104/follow=31.8(town life), tour_6/push=10.0(quiet baseline)
+FEED Cort the Younger settles in Bellmire, looking for work.
+DIRECTOR t=94.9 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=25.2 pace=1.0 | fish_558312218013/follow=60.0(catch REPEAT-held-out), chat_2104/follow=38.4(chat 99s ago REPEAT-held-out), hero_2101/follow=32.2(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+DIRECTOR t=107.0 CUT chat_2104 shot=follow pri=37.0 why=hotter held_prev=12.0 pace=1.4 | chat_2104/follow=37.0(chat 111s ago), hero_2101/follow=31.5(town life REPEAT-held-out), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED Aldric Thatcher settles in Bellmire, looking for work.
+MUSTER timed out: dists=[90, 6, 71, 6, 137, 57, 78, 93] vis=true stay=false route=66 inside=false
+DIRECTOR t=126.2 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=19.3 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2104/follow=32.7(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=128.3 CUT fish_558312218013 shot=follow pri=60.0 why=hotter held_prev=2.0 pace=1.0 | fish_558312218013/follow=60.0(catch), hero_2101/follow=32.6(town life), tour_0/push=4.0(quiet baseline same-shot-6)
+FEED Aldric Fenwick and 2 others descend down past the guild post. The door is kept behind them.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 cave spider.
+FEED The lids are heavy, and some have been moved from the inside.
+DIRECTOR t=146.5 CUT fight_4028410921692 shot=shoulder pri=75.0 why=better_after_min held_prev=18.2 pace=1.0 | fight_4028410921692/shoulder=75.0(hurt 0.00), hero_2101/follow=26.2(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+FEED Aldric Coalfoot casts Bolt at cave spider.
+FEED The slime divides.
+FEED Aldric Coalfoot casts Bolt at slime.
+FEED Aldric Coalfoot speaks fire too quickly and the magic falls behind (8 vs DC 10).
+FEED Aldric Coalfoot casts Bolt at slimeling.
+FEED Aldric Fenwick searches (Investigation 15) and turns up 12 gold on floor 1.
+FEED The last of it falls, and the stillness has a weight.
+FEED Aldric Fenwick spots a blade trap (Perception 20 vs DC 10) and disarms it with thieves' tools (13).
+FEED Maela Rivers settles in Bellmire, looking for work.
+FEED Aldric Fenwick searches the chest - Successfully found loot!! 16 gold (Investigation 18 vs DC 10).
+FEED Aldric Fenwick and 2 others take a breather, and press on deeper.
+DIRECTOR t=162.5 CUT delve_4028410921692 shot=follow pri=45.0 why=max_hold held_prev=16.0 pace=1.0 | delve_4028410921692/follow=45.0(walking), hero_2101/follow=30.0(town life), tour_2/establishing=10.0(quiet baseline)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed slime, 1 cave spider, 1 giant rat, 1 skeleton minion.
+FEED Rolf Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Aldric Coalfoot's fire doubles back and finds them first (7 vs DC 11).
+FEED Aldric Coalfoot casts Bolt at cave spider.
+FEED Rolf Hollow steps on a plate - a stone from the ceiling! DEX 7 vs DC 11, 7 damage.
+FEED Aldric Coalfoot casts Fire at hollowed slime.
+FEED The hollowed slime divides.
+FEED Aldric Coalfoot turns on the wounded hollowed slimeling to finish it.
+FEED Aldric Fenwick searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Floor 2 cleared, and the lamps still lit.
+DIRECTOR t=173.6 CUT breath_173 shot=breath pri=20.0 why=breath held_prev=11.1 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), delve_4028410921692/follow=45.0(walking), hero_2104/follow=24.8(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Aldric Fenwick searches the chest - ...no loot... (Investigation 4 vs DC 11).
+DIRECTOR t=177.6 CUT hero_2101 shot=follow pri=30.3 why=better_after_min held_prev=4.0 pace=1.0 | delve_4028410921692/follow=45.0(walking REPEAT-held-out), hero_2101/follow=30.3(town life), tour_1/push=10.0(quiet baseline)
+FEED Aldric Fenwick and 2 others take a breather, and press on deeper.
+FEED Hilda Hollow settles in Bellmire, looking for work.
+FEED Aldric Fenwick finds a man in a cage still alive. He slips 42 gold to them on the way out, 3 ways to split it.
+FEED The guild's tenth is light at the top and heavy at the bottom.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave bat, 1 skeleton minion.
+FEED Somebody swept this floor. Recently.
+DIRECTOR t=186.7 CUT fight_5767285474526 shot=shoulder pri=75.0 why=hotter held_prev=9.2 pace=1.0 | fight_5767285474526/shoulder=75.0(hurt 0.00), delve_4028410921692/follow=45.0(walking REPEAT-held-out), hero_2104/follow=25.6(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+FEED Nessa Hollow casts Frost at cave bat.
+FEED Edda Stonehand casts Smite at cave bat.
+FEED Maela Hollow casts Frost at cave bat.
+FEED Maela Hollow's bolt goes wrong - the scar answers (7 vs DC 10).
+FEED Corvin the Younger casts Frost at skeleton minion.
+FEED The slime divides.
+FEED Edda Stonehand casts Bolt at slimeling.
+FEED Nessa Hollow casts Bolt at slimeling.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 giant rat, 1 drowned skeleton minion, 1 skeleton minion, 1 puglin.
+FEED The oil is running low.
+FEED Corvin the Younger works bolt and the room takes the benefit (9 vs DC 10).
+FEED Maela Hollow searches (Investigation 4) and turns up 8 gold on floor 1.
+FEED Finished, and the floor below has gone very still.
+FEED Maela Hollow spots a blade trap (Perception 10 vs DC 10) and steps round it.
+FEED Aldric Fenwick turns on the wounded skeleton minion to finish it.
+FEED Rolf Hollow turns on the wounded skeleton minion to finish it.
+FEED Aldric Fenwick searches (Investigation 19) and turns up 40 gold on floor 3.
+FEED Clear. Count the flasks; the count tells the same lie it always does.
+FEED Maela Hollow searches the chest - Successfully found loot!! 21 gold (Investigation 12 vs DC 10).
+FEED Nessa Hollow and 3 others take a breather, and press on deeper.
+FEED Aldric Fenwick searches the chest - Successfully found loot!! 37 gold (Investigation 18 vs DC 11).
+FEED Aldric Fenwick and 2 others take a breather, and press on deeper.
+FEED 4 creatures boil out of the dungeon!
+FEED Initiative: the raiders 5, the watch 3 - the raiders strike first.
+DIRECTOR t=200.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=13.2 pace=0.6 | raid/shoulder=95.0(raid live), fish_556970040674/follow=60.0(catch), delve_4028410921692/follow=45.0(walking REPEAT-held-out), delve_5767285474526/follow=45.0(walking), hero_2101/follow=32.7(town life REPEAT-held-out)
+FEED Aldric Fenwick touches the altar - a curse. Something older than the floor takes a bite.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 skeleton minion, 1 giant rat.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Rolf Hollow spots a fire grate (Perception 13 vs DC 11) and steps round it.
+DIRECTOR t=204.0 CUT lord_5767285474526 shot=shoulder pri=100.0 why=lord_rises held_prev=4.0 pace=0.6 | lord_5767285474526/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_5767285474526/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_558312218013/follow=60.0(catch REPEAT-held-out), delve_4028410921692/follow=45.0(walking REPEAT-held-out)
+FEED Edda Stonehand casts Smite at skeleton minion.
+FEED Corvin the Younger speaks frost; something else finishes it (9 vs DC 11).
+FEED Maela Hollow's frost goes somewhere, and not where it was sent (6 vs DC 11).
+FEED Nessa Hollow casts Frost at skeleton minion.
+FEED Rolf Hollow steps on a plate - darts! DEX 5 vs DC 11, 11 damage.
+FEED Maela Hollow casts Bolt at bog frog.
+FEED Nessa Hollow's bolt is swallowed whole by the scar (8 vs DC 11).
+FEED Corvin the Younger casts Bolt at bog frog.
+FEED Edda Stonehand casts Bolt at giant rat.
+FEED Nessa Hollow casts Bolt at giant rat.
+FEED Nessa Fenwick settles in Bellmire, looking for work.
+FEED Maela Hollow casts Bolt at Gnawbone.
+FEED Edda Stonehand casts Bolt at Gnawbone.
+FEED Edda Stonehand's smite folds in on itself - wild magic (6 vs DC 11).
+FEED Corvin the Younger casts Bolt at Gnawbone.
+FEED Nessa Hollow casts Bolt at Gnawbone.
+FEED Gnawbone shifts, and the fight changes with it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 puglins, 1 bone bowman, 1 skeleton minion, 1 drowned risen bones.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Maela Hollow casts Bolt at Gnawbone.
+FEED Gnawbone's children come squealing.
+FEED Edda Stonehand casts Bolt at Gnawbone.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nessa Hollow casts Frost at Gnawbone.
+FEED Aldric Coalfoot's fire doubles back and finds them first (9 vs DC 12).
+FEED Corvin the Younger casts Bolt at Gnawbone.
+FEED Gnawbone falls to Edda Stonehand.
+FEED Rolf Hollow should be dead - and stands back up (19).
+FEED Rolf Hollow the monk falls on floor 4 to the dark below. Level 2, 5 kills. !reroll to rise again.
+FEED Maela Hollow casts Frost at bog frog.
+FEED Edda Stonehand casts Bolt at bog frog.
+FEED Nessa Hollow casts Bolt at bog frog.
+FEED Gnawbone is slain on floor 2!
+FEED The hoard is split 4 ways - 13 gold each to Nessa Hollow, Edda Stonehand, Corvin the Younger, Maela Hollow.
+FEED Aldric Fenwick rolls a 20 on the death save - and gets up swinging.
+FEED Aldric Fenwick the rogue falls on floor 4 to the dark below. Level 2, 5 kills. !reroll to rise again.
+DIRECTOR t=213.1 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=9.1 pace=0.6 | raid/shoulder=95.0(raid live), death_4028410921692_212/hard_cut=90.0(death), death_4028410921692_213/hard_cut=90.0(death), fight_4028410921692/shoulder=77.1(hurt 0.21 REPEAT-held-out), fish_558312218013/follow=60.0(catch REPEAT-held-out)
+FEED Maela Hollow spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+FEED Aldric Coalfoot should be dead - and stands back up (13).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Aldric Fenwick and 2 others get out alive, and come home with what they carried.
+FEED Aldric Coalfoot comes home to Bellmire with 122 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 3 potions. 17 kills between them.
+DIRECTOR t=216.2 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), death_4028410921692_212/hard_cut=90.0(death), death_4028410921692_213/hard_cut=90.0(death), delve_5767285474526/follow=45.0(walking), hero_2104/follow=34.0(town life)
+FEED Nessa Hollow and 3 others take a breather, and press on deeper.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=222.2 CUT delve_5767285474526 shot=follow pri=45.0 why=shot_gone held_prev=6.0 pace=1.0 | delve_5767285474526/follow=45.0(walking), hero_2101/follow=32.7(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 1 drowned cave bat, 1 drowned risen bones, 1 cave bat.
+FEED Nessa Hollow spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Maela Hollow's frost flares, sputters, and lands on the chalk (8 vs DC 11).
+FEED Nessa Hollow's frost curdles before it leaves the hand (1 vs DC 11).
+DIRECTOR t=230.3 CUT fish_558312218013 shot=follow pri=54.0 why=better_after_min held_prev=8.1 pace=1.0 | fight_5767285474526/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_558312218013/follow=54.0(catch same-shot-6), hero_2104/follow=27.2(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Edda Stonehand casts bolt and the scar sneezes (8 vs DC 11).
+FEED The slime divides.
+FEED Maela Hollow searches (Investigation 7) and turns up 26 gold on floor 3.
+FEED Clear, and the only sound left is the lamps.
+FEED Maela Hollow searches the chest - ...no loot... (Investigation 7 vs DC 11).
+FEED Nessa Hollow and 3 others take a breather, and press on deeper.
+FEED Edda of the Ford settles in Bellmire, looking for work.
+FEED Maela Hollow steps on a grate - fire! DEX 16 vs DC 11, 7 damage (halved).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 2 skeleton minions, 2 cave bats.
+FEED The oil is running low.
+FEED Corvin the Younger's bolt answers to the ground instead (10 vs DC 12).
+FEED Nessa Hollow's frost folds in on itself - wild magic (11 vs DC 12).
+DIRECTOR t=248.5 CUT fish_556970040674 shot=follow pri=54.0 why=max_hold held_prev=18.2 pace=1.0 | fight_5767285474526/shoulder=81.5(hurt 0.65 REPEAT-held-out), fish_556970040674/follow=54.0(catch same-shot-6), hero_2101/follow=33.5(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Edda Stonehand calls smite and something older takes the call (6 vs DC 12).
+FEED The drowned slime divides.
+FEED Edda Stonehand breaks off to mend Nessa Hollow, who is nearly down.
+FEED Maela Hollow casts bolt and the floor answers instead (9 vs DC 12).
+FEED Nessa Hollow turns on the wounded drowned slimeling to finish it.
+FEED Corvin the Younger turns on the wounded drowned slimeling to finish it.
+FEED Maela Hollow turns on the wounded drowned slimeling to finish it.
+FEED Edda Stonehand turns on the wounded drowned slimeling to finish it.
+FEED Nessa Hollow has the wind back and turns to fight.
+FEED Maela Hollow searches (Investigation 8) and turns up 35 gold on floor 4.
+FEED Floor 4 gives it up. The lamps go lower.
+FEED Maela Hollow spots a spike trap (Perception 18 vs DC 12) and steps round it.
+FEED 1 cave bat, 1 skeleton minion was waiting in the dark, and now it isn't.
+FEED Nessa Hollow and 3 others take a breather, and press on deeper.
+FEED Nessa Hollow steps on a loose flagstone - darts! DEX 16 vs DC 12, 1 damage (halved).
+DIRECTOR t=266.7 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=18.2 pace=1.0 | delve_5767285474526/follow=45.0(walking REPEAT-held-out), hero_2101/follow=34.0(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton warrior, 2 bone bowmans, 1 hollowed risen bones, 1 hollowed cave spider.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=268.8 CUT lord_5767285474526 shot=shoulder pri=100.0 why=lord_rises held_prev=2.0 pace=1.0 | lord_5767285474526/shoulder=100.0(lord), fight_5767285474526/shoulder=76.3(hurt 0.13 REPEAT-held-out), fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2101/follow=33.8(town life), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED Maela Hollow's bolt goes off a breath early - the scar is impatient (11 vs DC 12).
+FEED Edda Stonehand's smite turns to smoke a breath too early (7 vs DC 12).
+FEED Nessa Coalfoot settles in Bellmire, looking for work.
+FEED Nessa Hollow casts frost and gets weather for it (10 vs DC 12).
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 15, the watch 9 - the raiders strike first.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Nessa Hollow sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Nessa Hollow spots a spike trap (Perception 15 vs DC 12) and steps round it.
+FEED A building is burning!
+FEED Corvin the Younger's frost curdles on the tongue and comes out wrong (8 vs DC 12).
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Maela Hollow casts Bolt at The Rattling Host.
+FEED Edda Stonehand casts Bolt at The Rattling Host.
+FEED Nessa Hollow casts Frost at The Rattling Host.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED Edda Stonehand breaks off to mend Maela Hollow, who is nearly down.
+FEED Nessa Hollow breaks off to mend Maela Hollow, who is nearly down.
+FEED Maela Hollow the sage falls on floor 5 to the dark below. Level 2, 8 kills. !reroll to rise again.
+FEED Edda Stonehand casts Smite at The Rattling Host.
+FEED Nessa Hollow casts Bolt at The Rattling Host.
+DIRECTOR t=279.0 CUT raid shot=shoulder pri=95.0 why=max_hold held_prev=10.3 pace=0.6 | raid/shoulder=95.0(raid live), death_5767285474526_279/hard_cut=90.0(death), fight_5767285474526/shoulder=74.1(hurt 0.51 same-shot-6), hero_2101/follow=31.3(town life), tour_0/push=10.0(quiet baseline)
+FEED Cort Ashwood goes down and claws back up. (CON save 17)
+FEED Cort Ashwood is killed by a bandit.
+FEED The Rattling Host falls to Edda Stonehand.
+FEED Nessa Hollow breaks off to mend Nessa Hollow, who is nearly down.
+FEED Nessa Hollow should be dead - and stands back up (12).
+FEED Edda Stonehand breaks off to mend Nessa Hollow, who is nearly down.
+FEED Corvin the Younger casts Frost at risen bones.
+FEED Edda Stonehand the cleric falls on floor 5 to the dark below. Level 2, 7 kills. !reroll to rise again.
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 15)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Corvin the Younger casts Frost at risen bones.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Nessa Hollow and 3 others get out alive, and come home with what they carried.
+FEED Nessa Hollow, Corvin the Younger come home to Bellmire with 142 gold, 6 ore, 4 stone, 1 piece of salvaged gear and 1 potion. 28 kills between them.
+FEED Nessa Hollow is fitted with leather. (+10 hp)
+FEED Corvin the Younger is fitted with leather. (+10 hp) Haggled 14% off (16).
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=286.1 CUT death_5767285474526_282 shot=hard_cut pri=90.0 why=death held_prev=7.1 pace=1.0 | death_5767285474526_282/hard_cut=90.0(death), fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2101/follow=34.8(town life), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=296.2 CUT hero_2104 shot=follow pri=32.2 why=max_hold held_prev=10.1 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2104/follow=32.2(town life), tour_0/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED A door that was shut yesterday has been propped open with a flask.
+FEED They carry 7 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 hollowed cave bat, 1 giant rat.
+FEED A funeral bell hangs mute, its clapper wrapped in cloth.
+FEED Dunn Coalfoot casts Smite at giant rat.
+DIRECTOR t=304.3 CUT breath_304 shot=breath pri=20.0 why=breath held_prev=8.1 pace=1.0 | fight_10822361321060/shoulder=75.0(hurt 0.00), hero_2101/follow=26.5(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Aldric Coalfoot casts Bolt at hollowed cave bat.
+FEED Dunn Coalfoot's smite splits in two, and neither half works (1 vs DC 10).
+FEED Dunn Coalfoot casts Smite at cave spider.
+FEED Aldric Coalfoot calls bolt and the scar calls louder (8 vs DC 10).
+L73_LOG t=0.0 CUT fight_737442560713 shot=shoulder pri=85.0 why=start held_prev=0.0 pace=1.0 | fight_737442560713/shoulder=85.0(hurt 0.00), chat_2104/follow=49.5(chat 4s ago), he
+L73_LOG t=16.1 CUT chat_2104 shot=follow pri=47.6 why=max_hold held_prev=16.1 pace=1.0 | chat_2104/follow=47.6(chat 20s ago), hero_2101/follow=33.6(town life), tour_0/push=10.0(q
+L73_LOG t=27.2 CUT breath_27 shot=breath pri=20.0 why=breath held_prev=11.1 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=46.3(chat 31s ago), hero
+L73_LOG t=31.2 CUT hero_2101 shot=follow pri=32.0 why=better_after_min held_prev=4.0 pace=1.0 | chat_2104/follow=45.8(chat 35s ago REPEAT-held-out), hero_2101/follow=32.0(town li
+L73_LOG t=34.2 CUT fish_558312218013 shot=follow pri=54.0 why=hotter held_prev=3.0 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=45.5(chat 38s ago
+L73_LOG t=58.6 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=24.4 pace=1.0 | chat_2104/follow=42.6(chat 63s ago REPEAT-held-out), hero_2101/follow=33.0(town life REPEAT-he
+L73_LOG t=61.6 CUT hero_2104 shot=follow pri=32.9 why=hotter held_prev=3.0 pace=1.4 | chat_2104/follow=42.3(chat 66s ago REPEAT-held-out), hero_2104/follow=32.9(town life), tour_
+L73_LOG t=69.7 CUT fish_556970040674 shot=follow pri=54.0 why=hotter held_prev=8.1 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), chat_2104/follow=41.3(chat 74s ago
+L73_LOG t=94.9 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=25.2 pace=1.0 | fish_558312218013/follow=60.0(catch REPEAT-held-out), chat_2104/follow=38.4(chat 99s ago REPEA
+L73_LOG t=107.0 CUT chat_2104 shot=follow pri=37.0 why=hotter held_prev=12.0 pace=1.4 | chat_2104/follow=37.0(chat 111s ago), hero_2101/follow=31.5(town life REPEAT-held-out), to
+L73_LOG t=126.2 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=19.3 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2104/follow=32.7(town life REPEAT-
+L73_LOG t=128.3 CUT fish_558312218013 shot=follow pri=60.0 why=hotter held_prev=2.0 pace=1.0 | fish_558312218013/follow=60.0(catch), hero_2101/follow=32.6(town life), tour_0/push
+L73_LOG t=146.5 CUT fight_4028410921692 shot=shoulder pri=75.0 why=better_after_min held_prev=18.2 pace=1.0 | fight_4028410921692/shoulder=75.0(hurt 0.00), hero_2101/follow=26.2(
+L73_LOG t=162.5 CUT delve_4028410921692 shot=follow pri=45.0 why=max_hold held_prev=16.0 pace=1.0 | delve_4028410921692/follow=45.0(walking), hero_2101/follow=30.0(town life), to
+L73_LOG t=173.6 CUT breath_173 shot=breath pri=20.0 why=breath held_prev=11.1 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), delve_4028410921692/follow=45.0(walking
+L73_LOG t=177.6 CUT hero_2101 shot=follow pri=30.3 why=better_after_min held_prev=4.0 pace=1.0 | delve_4028410921692/follow=45.0(walking REPEAT-held-out), hero_2101/follow=30.3(t
+L73_LOG t=186.7 CUT fight_5767285474526 shot=shoulder pri=75.0 why=hotter held_prev=9.2 pace=1.0 | fight_5767285474526/shoulder=75.0(hurt 0.00), delve_4028410921692/follow=45.0(w
+L73_LOG t=200.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=13.2 pace=0.6 | raid/shoulder=95.0(raid live), fish_556970040674/follow=60.0(catch), delve_4028410921692/foll
+L73_LOG t=204.0 CUT lord_5767285474526 shot=shoulder pri=100.0 why=lord_rises held_prev=4.0 pace=0.6 | lord_5767285474526/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fig
+L73_LOG t=213.1 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=9.1 pace=0.6 | raid/shoulder=95.0(raid live), death_4028410921692_212/hard_cut=90.0(death), death_40284109
+L73_LOG t=216.2 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), death_4028410921692_212/hard_cut=90.0(death), death_40284109
+L73_LOG t=222.2 CUT delve_5767285474526 shot=follow pri=45.0 why=shot_gone held_prev=6.0 pace=1.0 | delve_5767285474526/follow=45.0(walking), hero_2101/follow=32.7(town life REPE
+L73_LOG t=230.3 CUT fish_558312218013 shot=follow pri=54.0 why=better_after_min held_prev=8.1 pace=1.0 | fight_5767285474526/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_558312
+L73_LOG t=248.5 CUT fish_556970040674 shot=follow pri=54.0 why=max_hold held_prev=18.2 pace=1.0 | fight_5767285474526/shoulder=81.5(hurt 0.65 REPEAT-held-out), fish_556970040674/
+L73_LOG t=266.7 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=18.2 pace=1.0 | delve_5767285474526/follow=45.0(walking REPEAT-held-out), hero_2101/follow=34.0(town life REP
+L73_LOG t=268.8 CUT lord_5767285474526 shot=shoulder pri=100.0 why=lord_rises held_prev=2.0 pace=1.0 | lord_5767285474526/shoulder=100.0(lord), fight_5767285474526/shoulder=76.3(
+L73_LOG t=279.0 CUT raid shot=shoulder pri=95.0 why=max_hold held_prev=10.3 pace=0.6 | raid/shoulder=95.0(raid live), death_5767285474526_279/hard_cut=90.0(death), fight_57672854
+L73_LOG t=286.1 CUT death_5767285474526_282 shot=hard_cut pri=90.0 why=death held_prev=7.1 pace=1.0 | death_5767285474526_282/hard_cut=90.0(death), fish_556970040674/follow=60.0(
+L73_LOG t=296.2 CUT hero_2104 shot=follow pri=32.2 why=max_hold held_prev=10.1 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2104/follow=32.2(town life), 
+L73_LOG t=304.3 CUT breath_304 shot=breath pri=20.0 why=breath held_prev=8.1 pace=1.0 | fight_10822361321060/shoulder=75.0(hurt 0.00), hero_2101/follow=26.5(town life same-shot-6
+L73_TEST establish {  }
+L73_TEST tighten { "t": 0.416, "d0": 20.0, "hurt0": 0.0, "wounded": 1.429 }
+L73_TEST FAIL establish
+L73_TEST FAIL tighten
+L73_TEST death hold>=3s true, breath after false
+L73_TEST DONE fails=3

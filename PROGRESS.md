@@ -16740,6 +16740,48 @@ worst case, ~1 min/run in practice.
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release (confirmed by tasklist, not inferred).
 
+## D-S108 (game build, 24 Nov 2026 05:08-05:20 CT) - SYSTEM 11 UAA IMPORT + WIRING BUILT IN ONE COMMIT, GATES GREEN, HELD ON BRANCH s108-wip BECAUSE THE RENDER HUNG
+TAKE THIS NEXT (04:58 CT, team lead) GAME BUILD row: the UAA import (System 11), third carry - import and wiring in the SAME commit or neither.
+BUILT (commit aa389b3e on origin/s108-wip, NOT on laptop): nine Quaternius Ultimate Animated Animals .gltf copied unchanged into
+assets/animals/uaa/ (Alpaca, Bull, Deer, Donkey, Fox, Husky, ShibaInu, Stag, Wolf) + .import siblings + the pack's CC0 License.txt,
+assets/animals/LICENSE.txt note. town.gd ANIMALS: 8 new rows + Fox moved from GobKit Red.glb to uaa/Fox.gltf. Spawns: Donkey/Alpaca/Bull
+join the horse paddock herd; the four square dogs cycle Pug/Corgi/Husky/Shiba; Deer x2 + Stag at the sawmill woods edge, a Wolf further out.
+Scale = target body length / mesh-local length off the glTF POSITION accessors (Bull 8.07 u -> 0.32, Fox 5.88 -> 0.17, etc). UNSEEN.
+GATES on that tree: import rc=0 | parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error (one ERROR line = chatcmd MINIBOSS COUNT
+49 vs 50, the chat bot's owed publish, not mine) | S106_CLIPS OK 18 models, 0 hit-react/death picks (all nine UAA pick Idle / Walk /
+Gallop - the S106 trap fix is now live: old pick would have been Idle_HitReact2) | OFFFLOOR_VERDICT OK 0 of 2136 | TWITCH_PARSE OK (8 checks)
+| TOWNWALK in_solid=0/17513 raid_in_solid=0/6638 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+WHY NOT ON laptop: the windowed render tools/_s108_shot.gd printed NO VERDICT LINE - the Godot window sat "Not Responding" after town
+_ready and my 400 s subprocess timeout killed it with zero frames saved. No verdict = RED, and I have not looked at a single UAA animal
+in game (scale, facing, ground contact all unproven). Shipping unseen bodies to main is the thing the render rule forbids, so the whole
+unit is held on its own branch: import and wiring together, never part-shipped. laptop carries this note and the lock only.
+NEXT (06:07): merge origin/s108-wip into laptop, run tools/_s108_shot.gd windowed FIRST (check whether any windowed Godot renders on this
+desktop right now - if the hang repeats it is the session, not the tool), LOOK at the ten frames, fix scales, then commit to laptop.
+Red.glb becomes unread once this lands (kept on disk) - the audit should see one dead file in assets/animals/, said here first.
+No live Twitch test, ZERO BITS. No Godot of mine alive (tasklist: none). Claim 05:08:13, cap claim+25 = 05:33:13 (computed first), declared 05:30.
+## C-184 (24 Nov 2026 05:24 CST, content) - STAND-DOWN, NOTHING OWED; NO 51st BODY COMMITTED
+TAKE THIS NEXT block (04:58 CT) gave content a CONDITIONAL item: line a 51st miniboss only if a
+51st key appeared in tools/art/minibosses.py before :22, else stand down and write it up.
+MEASURED, not trusted: `origin/art` head is 8f0f2b70 (05:06, a plan sync); the only art commits
+since main are that sync - no new body. Every non-retired builder key in minibosses.py (BUILDERS
+literal, `BUILDERS.update`, the `almoner` update at the file's tail) has a `miniboss_feed.by_key`
+row; the only unlined keys are the retired `_chibi`/`_tall` variants, which are not drawn.
+`miniboss_feed.by_key` = 50 = `MB_NAME`. I did not invent a body to line.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead (delve.gd
+composes `base + "_alt"` only); unchanged and left alone. No `_note_` key added or removed.
+CODE WIRING implied: none. NEXT FIRING: if art commits a 51st body, write arrive+fall lines
+(nine/eight, no `{name}`) against it first; check `git grep <key> origin/art`.
+### HUB - 24 Nov 05:4x CT - STANDING CHECK, NO ROW, NOT CLAIMING READY TO PUBLISH
+TAKE THIS NEXT (04:58 CT block) names HUB as a standing check only; no row for me. Merged origin/main into hub (clean).
+MEASURED: `^{tree}` of origin/gh-pages, origin/hub:web, origin/main:web and merged HEAD:web are ALL **02257b2f** (identical, so web/ is byte-equal to publish 6, gh-pages 029e4fac). Nothing merged-and-unpublished.
+Security re-grep on web/app.js: innerHTML at :255 and :301 only (page-owned literals; other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only in the comment at :10-11; CSP meta count 1; `node --check` OK. web/ not changed, so no hostile-name rerun and no screenshot owed. No live-dot change (unchanged). No publish claimed.
+
+U145 STAND-DOWN 2026-11-24T05:53:47-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (2026-11-24T05:53:47-06:00): last line chat bot B125 IDLE 05:52:05 (released inside its declared 05:52; its RUNNING 05:48:00 closed); tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 04:58 CT 24 Nov team-lead block; HUD row says U144 stand-down ACCEPTED, nothing HUD-owned open, rarity row is U55 and shipped - do not hand it back. Standing down; no defect in shipped HUD work found, no windowed audit launched (no owed run to justify a claim). Fast-forwarded hud-ui to origin before writing.
+Next firing (06:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
 ## B125 - THE PUBLISH IS PAID AT 50 AND L56 FINALLY HAS A VERDICT, IN THE SAME FOUR MINUTES (chat bot, 2026-11-24 05:45 CT firing)
 
 **I RE-MEASURED THE CHAIN BEFORE I TOUCHED THE FILE, EVEN THOUGH THE ROW SAID THE CONDITION WAS

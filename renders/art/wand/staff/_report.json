@@ -1,0 +1,126 @@
+{
+ "verdict": "RED",
+ "ok": false,
+ "model": "assets\\gear\\wand_crystal.glb",
+ "basis": "staff",
+ "carry_source": "PASS 1's REFERENCE RUN, kept only so the comparison reproduces. The staff ROTATION (0,0,90) at scale 1.0. The engine gives this path held_rot [0.0, 0.0, 0.0] at x0.620, and gives the STAFF x1.9, so this run describes neither the wand's carry nor the staff's.",
+ "engine_carry": {
+  "res_path": "res://assets/gear/wand_crystal.glb",
+  "held_rot_deg": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "held_rot_arm": "default",
+  "held_rot_arm_index": 3,
+  "held_rot_arms": 4,
+  "hand_scale": 0.62,
+  "hand_scale_arm": "begins 'res://assets/gear/'",
+  "hand_scale_arm_index": 8,
+  "hand_scale_arms": 10,
+  "consts": {
+   "ADV": "res://addons/kaykit_character_pack_adventures/Assets/gltf/",
+   "KIT": "res://assets/gear/",
+   "DUN": "res://assets/gear/dungeon/",
+   "ART": "res://assets/gear/artifact/"
+  }
+ },
+ "zero_basis_witness": {
+  "witness": "res://assets/gear/dungeon/sword_common.glb",
+  "witness_held_rot": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "witness_arm": "default",
+  "witness_in_slot_rot": false,
+  "note": "six weaponfit families get Vector3.ZERO from gear.gd and are measured at Matrix.Identity in the shipped register; the wand is the same carry, so identity is read off the engine's default arm and not invented here"
+ },
+ "rslot_is_identity": false,
+ "hand_scale": 1.0,
+ "grip_shift_applies": false,
+ "grip_shift_gate": {
+  "fam": "staff",
+  "value": 0.25,
+  "axis_godot": "y",
+  "sign": 1.0,
+  "mesh_vec": [
+   0.0,
+   0.0,
+   0.25
+  ],
+  "read_from": "gear.gd"
+ },
+ "asset_nodes": {
+  "n_nodes": 1,
+  "roots": [
+   0
+  ],
+  "nonzero_translations": [],
+  "nodes_with_matrix": []
+ },
+ "imported": [
+  {
+   "name": "wand_crystal",
+   "type": "MESH",
+   "parent": null,
+   "local_translation": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "verts": 7935,
+ "checked": 6724,
+ "reach": 0.9208,
+ "drop": 0.0002,
+ "longest_axis": 0.921,
+ "clip": 938,
+ "ground": 0,
+ "floor_depth": 0.0,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "views": {
+  "front": {
+   "moved": 2080,
+   "opaque": 93423,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  },
+  "side": {
+   "moved": 2040,
+   "opaque": 79783,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  },
+  "back": {
+   "moved": 853,
+   "opaque": 94228,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  }
+ },
+ "blanks": [],
+ "blind_views": [],
+ "frame_clipped": [],
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ }
+}

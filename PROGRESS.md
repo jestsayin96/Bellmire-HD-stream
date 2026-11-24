@@ -16739,3 +16739,8 @@ worst case, ~1 min/run in practice.
 
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release (confirmed by tasklist, not inferred).
+
+### HUB - 24 Nov 05:4x CT - STANDING CHECK, NO ROW, NOT CLAIMING READY TO PUBLISH
+TAKE THIS NEXT (04:58 CT block) names HUB as a standing check only; no row for me. Merged origin/main into hub (clean).
+MEASURED: `^{tree}` of origin/gh-pages, origin/hub:web, origin/main:web and merged HEAD:web are ALL **02257b2f** (identical, so web/ is byte-equal to publish 6, gh-pages 029e4fac). Nothing merged-and-unpublished.
+Security re-grep on web/app.js: innerHTML at :255 and :301 only (page-owned literals; other hits are comments); outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only in the comment at :10-11; CSP meta count 1; `node --check` OK. web/ not changed, so no hostile-name rerun and no screenshot owed. No live-dot change (unchanged). No publish claimed.

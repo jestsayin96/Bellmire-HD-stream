@@ -414,7 +414,9 @@ const MB_FIT := {
 	"pitman": 0.94,   # S76: art's _fit_pitman_register.json pairs.pitman.ratio (44th, Underfoot in CANON, h 2.30, tag crypt - field 5, frame_edge 0 on all three views, fits_frame true), copied not re-derived
 	"tither": 0.99,   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
 	"blower": 1.01,   # S93: art's _fit_report.json pairs.blower.ratio (46th, Deadair in CANON, h 2.48 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S94 once content C-169 wrote the feed
-	"changer": 1.11}   # S98: art's _fit_report.json pairs.changer.ratio (47th, Evenhand in CANON, h 2.72 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived
+	"changer": 1.11,   # S98: art's _fit_report.json pairs.changer.ratio (47th, Evenhand in CANON, h 2.72 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived
+	"stopper": 0.97,   # S101: art's _fit_report.json pairs.stopper.ratio (48th, Chokewell in CANON, h 2.38 / hero 2.45, tag crypt - field 5, fits_frame true, 3/3 proving views), copied not re-derived. stopper.glb is NOT on any branch, so miniboss_model holds it out until art commits the mesh
+	"roper": 1.0}   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. No feed row yet, so no MB_NAME row and miniboss_for holds it out
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and

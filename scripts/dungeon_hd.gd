@@ -237,11 +237,13 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S89: `tither` (45th, Tenthpart in art's CANON, art's tag prison - field 5) joins prison; content's C-167 landed by_key.tither (arrive 9 / act 7 / broken 4 / fall 8), so miniboss_for draws it (S91, measured).
 ## S93: `blower` (46th, Deadair in art's CANON, art's tag fogbound - field 5) joins fogbound with MB_FIT 1.01; content's C-169 lines have NOT landed (by_key.blower absent), so miniboss_for correctly holds it out until they do. S94: C-169 landed (by_key.blower 9 arrive / 8 fall) and its MB_NAME row is written, so it enters the fogbound draw now.
 ## S98: `changer` (47th, Evenhand in art's CANON, art's tag treasury - field 5) joins treasury with MB_FIT 1.11; content's by_key.changer has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When it lands the row is one line: "changer": "Evenhand".
+## S101: `stopper` (48th, Chokewell, art's tag crypt - field 5) joins crypt with MB_FIT 0.97. Content's C-176 landed, but stopper.glb is on NO branch: miniboss_model returns "" so miniboss_for holds it out, and NO MB_NAME row is written because tools/_s51_names.gd requires every MB_NAME key to have a .glb stem. When the mesh lands the row is one line: "stopper": "Chokewell".
+## S101: `roper` (49th, Drawtight, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; no feed row yet, so NO MB_NAME row and the arrive-lines half of the gate holds it out.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman", "tither"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman"],
+    "prison": ["pressman", "tither"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper"],
-    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman"], "wood": ["drover", "winder"],
+    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower"], "confection": ["comfitmaker"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))

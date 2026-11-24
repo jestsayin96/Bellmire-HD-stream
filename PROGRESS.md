@@ -16144,3 +16144,83 @@ THIS IS THE SUPERVISOR'S CALL, NOT MINE. If the ordering mattered for a reason I
 revert data/commands.json and docs/COMMANDS.md to 47 and I will not re-land it until the `MB_NAME` row
 is in. I have left the UNNAMED arm untouched either way; that row is game build's and I did not go near
 scripts/delve.gd.
+
+## D-S102 (game build, 23 Nov 2026 23:08-23:2x CT) - THE ROPER IS NAMED AND DRAWN; THE STOPPER STAYS HELD; L56 GIVES ITS FIRST VERDICT
+**TAKE THIS NEXT (22:58 CT block) gave me: wire the roper, keep holding the stopper; SECOND, fix `tools/_l56_test.gd`.** Both done.
+- **ROPER.** `Delve.MB_NAME` gains `"roper": "Drawtight"` - read off content's `miniboss_feed._note_c177` AND art's CANON (minibosses.py:17262), both say Drawtight. `MB_FIT roper 1.0` untouched (S101, not re-derived). Feed shape parsed: arrive 9 / act 7 / broken 4 / fall 8. MB_NAME is now **48**. Roper is DRAWN: 1000 of 4000 grassland picks.
+- **STOPPER STILL HELD.** `git log --all -- assets/monsters/minibosses/stopper.glb` is EMPTY at 23:08 on merged main 5da84294 - the mesh is still on no branch, so no `"stopper": "Chokewell"` row. It wires in one line the hour art pushes it.
+- **CHAT BOT:** after this merges, the UNNAMED arm should name ONLY `stopper`. Do NOT republish 49 yet (per the block) - MB_NAME still lacks stopper.
+- **GATES re-cut, not bypassed:** `tools/_s101_gate.gd` had two roper-held asserts that are now false by design; moved to new `tools/_s102_gate.gd` (roper has mesh + lines + name + IS drawn; stopper no mesh, no name, never drawn; red-proof pitman drawn). `tools/_s51_names.gd` count line 47 -> 48 (it went red on the new row, as it should).
+- **L56 FIXED - the arithmetic, not the cap.** Each run now STARTS on a lord floor (alternating 5 / 10, `Bestiary.is_boss_floor` = floor % 5) and walks 2 floors, so the lord rises on the run's first floor. The cap now only excuses a check whose floors were never reached: the lord arm is a hard FAIL once any boss floor was entered, `lord_hp_mult` is always hard, and the trap arms read UNMET only while a run was capped before its own last floor. New `-- --redproof` blinds the observer while the delves still run.
+  - Real soak: lords Hollow King 115 (f5), Gravewyrm 333 (f10), Grubmother 230 (f5), Ossuary Lord 422 (f10); 2 killed; traps sprung 1, damage 14.0. **`L56_TEST OK` (4 checks, 0 unmet, 0 fails)** - the first verdict this instrument has ever produced.
+  - Red-proof: **`L56_TEST FAIL`** - `FAIL L45 lords RISE (0 kinds seen, 4 boss floors entered)`.
+  - **HONEST LIMIT, TEAM LEAD:** in the red-proof the two TRAP arms read UNMET, not FAIL, because ceiling was reached in 0 of 4 runs (runs 1-3 came home after one floor, run 4 capped on floor 10). So "fires nothing, reaches the ceiling, still FAILs" is PROVEN for the lord arm and is WRITTEN but NOT YET EXERCISED for the trap arms. Also the 1-trap sample is thin; the trap half wants more floors per run, which is a cap trade I did not make this hour. Pre-existing cosmetic: the per-run "floors_visited" print is cumulative.
+- VERDICTS: parse rc 0, 0 SCRIPT ERROR / 0 Parse Error; S102_GATE OK 9; S101_GATE OK 10; S51_NAMES OK 176 checks; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2085; TOWNWALK in_solid=0/15632 PASS; DELVE_TEST OK (9001 frames, 0 script errors); L56_TEST OK; L56 redproof L56_TEST FAIL (expected).
+## C-178 (23 Nov 2026 23:2x CST) - STAND-DOWN, NOTHING OWED; FEED LEVEL AT 49 KEYS
+TAKE THIS NEXT (22:58 CT block + its 23:1x amendment, 23 Nov) gave CONTENT no open row: C-177 (the Roper, Drawtight) is TICKED there. Measured on merged main 5da84294: `miniboss_feed.by_key` 49 keys; every committed art body has a feed row; the only feed key without a .glb is `stopper` (art's uncommitted mesh, art's row; its feed row C-176 is in place). `broodglut` and `lastcuff` are bestiary pack-variants, not feed bodies (see _note_c134/c135). No 50th body exists, so no feed lines are owed.
+NO DATA FILE CHANGED. items/lore_lines/bosses/potions parse (VALIDATION OK, nothing edited, pre-existing keys trivially unchanged). Next ID C-179.
+CODE WIRING: none new. Standing: game build adds `roper` -> `Drawtight` (and `stopper` -> `Chokewell` once art commits stopper.glb) to Delve.MB_NAME; chat bot republishes the count once, after both rows land.
+Decision for Mr. E: none.
+U139 STAND-DOWN 2026-11-23T23:53:06-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 23:52:28-06:00: last line chat bot B119 IDLE 23:49:47 (claim 23:48:30, cap 00:13:30) with no RUNNING after it; tasklist showed no Godot alive - lock FREE; I did not claim because there is no owed run. Item: R WORK_PLAN top = the 22:58 AMENDMENT plus the 21:58 23 Nov block; neither has a HUD row beyond the U138 tick, and the 21:58 row says "HUD - nothing HUD-owned is open. Stand down and write it up." Rarity-hue half of System 2 shipped (U55/U56, guarded U71/U74b/U76); L74 closed (U131/U135). L31/D41/D48/D61 are game-build files, L66 is hub H31. Prompt standing note on rarity-hue is stale for the twelfth time. Next firing (00:52): re-read R working lock, take any new HUD row, else stand down again; any capture split into <=15 min chunks, release by :07. Decision for Mr. E: none.
+## B119 (chat bot) - I HELD THE COUNT ON PURPOSE, AND THE RED THE GATE PRINTS IS THE ONE MY ROW TOLD ME TO LEAVE ALONE
+Merged origin/main **5da84294** into `chatbot` - a clean fast-forward from 9eeb5b96, no conflicts,
+nothing of mine touched by the merge (`git status` on my four files: empty).
+
+**THE ROW I WAS GIVEN AND OBEYED.** WORK_PLAN TAKE THIS NEXT, the 22:58 CT firing: *"CHAT BOT - DO
+NOT REPUBLISH THIS HOUR. HOLD AT 48 AND SAY SO IN YOUR RUN."* I did not touch `data/commands.json`.
+`miniboss` still publishes **48**. The republish to 49 happens **once**, and only on a merged main
+whose `Delve.MB_NAME` carries **both** `roper` and `stopper`.
+
+**AND I CHECKED WHETHER THAT CONDITION HAD QUIETLY BECOME TRUE, RATHER THAN ASSUMING IT HAD NOT.**
+Game build's S102 (lock IDLE 23:19:31) wired `roper` -> "Drawtight" and reports `MB_NAME` 48. That
+is on **`laptop` f3c0676c**, and `git merge-base --is-ancestor f3c0676c origin/main` returns **1** -
+it is NOT on main yet. So on the tree the gates actually ran against, `MB_NAME` is still 47 and
+**both** bodies are unnamed. One of the two arms will clear itself at the next team-lead merge
+without my touching anything. That is the whole reason the row said to wait: republishing 49 now
+would clear the COUNT arm and leave the UNNAMED arm naming two bodies instead of one - moving a red,
+not closing it. Still holding.
+
+### THE FOUR GATES, ALL FOUR VERDICTS READ OFF THE LOG, ON MERGED MAIN 5da84294
+- **parse** `--headless --path W6 --quit-after 300` -> **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (24.2 s).
+- **`tools/_l14_test.gd`** -> **`L14_TEST FAIL 1 (24 checks)`** (1.1 s). ONE arm, and it is the
+  expected one: `FAIL no COMMANDS_DATA guard arm fired on the load (2 fired: ["MINIBOSS COUNT",
+  "MINIBOSS UNNAMED"])`. The guard's own words:
+  - `MINIBOSS COUNT - published 48, feed rows 49`
+  - `MINIBOSS UNNAMED - ... ["stopper", "roper"]`
+  The other 23 checks are green, including the two that are mine end to end:
+  `docs/COMMANDS.md carries every field the data publishes, verbatim (32 rows; unpublished [])` and
+  `publishes nothing the data does not say (32 rows; stale [])`. **Zero drift, both directions.**
+- **`tools/_twitch_parse.gd`** -> **`TWITCH_PARSE OK (8 checks)`** (1.1 s).
+- **`tools/_commands_doc.gd`** -> **`COMMANDS_DOC OK wrote 32 commands`** (1.1 s), and **this time it
+  is a TRUE no-op and I proved it that way**: `git status --porcelain -- docs/COMMANDS.md` after the
+  real generator ran is **empty**. The generator rewrote the file and produced byte-identical bytes.
+  That is the only form of that gate worth having, and it is the fifth owed item discharged in the
+  shape the prompt asked for.
+
+### A DRIFT AUDIT I RAN MYSELF AND THEN DEMOTED, BECAUSE MY INSTRUMENT WAS WORSE THAN THE REAL ONE
+Before the battery I parsed `data/commands.json` in python and diffed its 32 keys against a regex
+sweep of `scripts/chatcmd.gd`'s match arms. The direction that matters came back clean - **entry
+with no command: none** - and so did aliases: **no alias collides with another, and no alias shadows
+a command key**; `order` is exactly the 32 keys. But the other direction printed 18 "verbs in code
+with no entry" including `seven`, `eleven`, `thirteen`, `seventy` - **my regex was reading number
+words out of an unrelated match block, not chat verbs.** `_l14_test.gd`'s own arm, which knows what
+a verb is, says `every verb ChatCmd answers is in the data (74 verbs; missing [])`. **The real gate
+wins; my sweep was noise and I am recording that it was rather than quoting its number.**
+
+### THE LOCK, AND A SLOPPINESS IN MY OWN CLAIM LINE THAT I AM NOT HIDING
+Read R's working `docs/RUN_LOCK.txt` at 23:47:06-06:00: last line `IDLE 2026-11-23T23:19:31-06:00`
+(game build S102), `tasklist` showed **no Godot alive** - free, with no live RUNNING above it.
+Claimed, declared finish 23:55, cap 00:13:30. **But the claim timestamp I wrote reads 23:48:30 and
+the battery's first process actually started 23:47:33** - I stamped the line about a minute ahead of
+myself instead of reading the clock twice. Nobody else's window was crossed (the lock was free and
+stayed free) and the whole battery took 27 seconds, but a lock line whose time is a guess is exactly
+the thing the offset rule exists to stop. Next firing: stamp from `datetime.now().astimezone()` at
+write time, never from arithmetic.
+
+### OWED / NOT OWED
+- Nothing in `scripts/chatcmd.gd`, `data/commands.json` or `docs/COMMANDS.md` changed this cycle.
+  This commit is PROGRESS.md only.
+- **GAME BUILD:** nothing needed from `twitch_eventsub.gd` this cycle.
+- **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **zero bits**.
+  All four gates were `--headless` against the worktree with `JESTS_NO_TWITCH=1`.

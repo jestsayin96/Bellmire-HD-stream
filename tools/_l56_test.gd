@@ -20,9 +20,22 @@ extends SceneTree
 ## check is still unmet, "L56 CAP HIT - NO VERDICT": a capped run never saw the floors the check
 ## needs, so its unmet check is the cap talking, not the game (D100, COORDINATION 15).
 
+## S102: the old span (START_FLOOR 3 + FLOORS_PER 8 = floors 3..10 per run) could not finish
+## inside RUN_CAP_FRAMES - B116's log shows runs reaching 1, 3 and 5 floors, never 8 - so every
+## soak ended "CAP HIT - NO VERDICT" by arithmetic. Each run now STARTS ON a lord floor
+## (Bestiary.is_boss_floor: floor % 5 == 0), alternating 5 and 10, and walks FLOORS_PER floors.
+## The lord rises on the run's first floor, so the L45 check is earnable within seconds.
+## And a cap no longer excuses everything: a check is UNMET (no verdict) only when a run was
+## capped BEFORE reaching its own last floor. A soak that reached the ceiling of every run and saw
+## nothing FAILS. Red-proof: `-- --redproof` blinds the observer (no trap_log, no lords recorded)
+## while the delves still run; it MUST print L56_TEST FAIL when the ceiling is reached.
 const RUNS := 4
-const FLOORS_PER := 8            # start at 3 -> up to floor 10, so TWO lord floors in each run
-const START_FLOOR := 3
+const FLOORS_PER := 2
+const START_FLOORS := [5, 10, 5, 10]
+var START_FLOOR := 5
+var _redproof := false
+var _ceiling_runs := 0           # runs that reached their own last floor
+var _boss_floors_entered := 0
 
 var _r: Roster
 var _d: Delve
@@ -42,21 +55,30 @@ var _tracked_lords: Array = []
 const RUN_CAP_FRAMES := 60 * 120  # 2 min per run - the lock's 25-minute rule bounds the whole soak
 var _capped: Array = []           # [run, deepest floor reached] for every run the cap ended
 
-func _ok(c: bool, what: String) -> void:
+var _hard_fails := 0              # S102: unmet checks the cap CANNOT excuse
+func _ok(c: bool, what: String, excusable := true) -> void:
 	_checks += 1
-	# a capped run cannot earn a FAIL: an unmet check reads UNMET so a grep for FAIL finds nothing
-	print("  %s %s" % ["ok  " if c else ("UNMET" if not _capped.is_empty() else "FAIL"), what])
+	# a capped run cannot earn a FAIL on a check it never reached the floors for: that check reads
+	# UNMET. A check whose floors WERE reached (excusable=false) fails whatever the cap did.
+	var excused := excusable and not _capped.is_empty()
+	print("  %s %s" % ["ok  " if c else ("UNMET" if excused else "FAIL"), what])
 	if not c:
 		_fails.append(what)
+		if not excused:
+			_hard_fails += 1
 
 func _initialize() -> void:
+	_redproof = OS.get_cmdline_user_args().has("--redproof")
+	if _redproof:
+		print("L56: REDPROOF - observer blinded, every live check must FAIL at the ceiling")
 	_r = Roster.new()
 	root.add_child(_r)
 	_start_run()
-	print("L56: soak begins - %d delves, start_floor=%d, %d floors each" % [RUNS, START_FLOOR, FLOORS_PER])
+	print("L56: soak begins - %d delves, start_floors=%s, %d floors each" % [RUNS, START_FLOORS, FLOORS_PER])
 
 func _start_run() -> void:
 	_run += 1
+	START_FLOOR = int(START_FLOORS[(_run - 1) % START_FLOORS.size()])
 	var ids: Array = []
 	var V := [
 		["l56_%d_1" % _run, "Aen", "knight"],
@@ -89,6 +111,10 @@ func _watch(delta: float) -> void:
 	if int(_d.floor_no) != _last_floor_seen:
 		_last_floor_seen = int(_d.floor_no)
 		_floors_visited += 1
+		if Bestiary.is_boss_floor(_last_floor_seen):
+			_boss_floors_entered += 1
+	if _redproof:
+		return
 	# a new lord on this floor - check every tick, not just at floor-change,
 	# because dun.lord may be set after we noticed the floor_no bump (entrance
 	# is call_deferred, and we poll once per physics tick)
@@ -108,7 +134,7 @@ func _watch(delta: float) -> void:
 			print("L56 [run %d] floor %d lord DOWN" % [_run, _last_floor_seen])
 
 func _agg_delve_trap() -> void:
-	if _d == null:
+	if _d == null or _redproof:
 		return
 	for k in _d.trap_log:
 		if k == "damage":
@@ -129,7 +155,9 @@ func _process(dt: float) -> bool:
 		return false
 	_watch(dt)
 	if _d.state == "home" or _f > RUN_CAP_FRAMES:
-		if _d.state != "home":
+		if _last_floor_seen >= START_FLOOR + FLOORS_PER - 1:
+			_ceiling_runs += 1
+		elif _d.state != "home":
 			_capped.append([_run, _last_floor_seen])
 			print("L56 [run %d] CAP HIT at floor %d of %d (state=%s)" % [_run, _last_floor_seen, START_FLOOR + FLOORS_PER - 1, _d.state])
 		_end_run()
@@ -150,8 +178,8 @@ func _process(dt: float) -> bool:
 		_ok(float(_agg_trap["damage"]) > 0.0, "L46: trap damage LANDS - a hero loses hp to a trap (%.1f total)"
 			% float(_agg_trap["damage"]))
 		# L45 GATE
-		_ok(_lords_seen.size() > 0, "L45: lords actually RISE on boss floors in play (%d kinds seen)"
-			% _lords_seen.size())
+		_ok(_lords_seen.size() > 0, "L45: lords actually RISE on boss floors in play (%d kinds seen, %d boss floors entered)"
+			% [_lords_seen.size(), _boss_floors_entered], _boss_floors_entered == 0)
 		# scaling: compare any lord recorded at both a shallow and a deep floor,
 		# or two distinct lords from different depths - a floor-10 lord should
 		# out-HP a floor-5 lord of comparable base
@@ -166,14 +194,15 @@ func _process(dt: float) -> bool:
 		var m5 := Bestiary.lord_hp_mult(5)
 		var m10 := Bestiary.lord_hp_mult(10)
 		print("  Bestiary.lord_hp_mult: floor 5 = %.2f, floor 10 = %.2f" % [m5, m10])
-		_ok(m10 > m5, "L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (%.2f vs %.2f)" % [m10, m5])
+		print("  ceiling reached in %d of %d runs; %d boss floor(s) entered" % [_ceiling_runs, RUNS, _boss_floors_entered])
+		_ok(m10 > m5, "L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (%.2f vs %.2f)" % [m10, m5], false)
 		print("")
-		print("CHECKS ", _checks, " UNMET " if not _capped.is_empty() else " FAILS ", _fails.size())
+		print("CHECKS ", _checks, " UNMET ", _fails.size() - _hard_fails, " FAILS ", _hard_fails)
 		for fl in _fails:
 			print("  - ", fl)
 		if _fails.is_empty():
 			print("L56_TEST OK")
-		elif not _capped.is_empty():
+		elif _hard_fails == 0 and not _capped.is_empty():
 			print("L56 CAP HIT - NO VERDICT (%d of %d runs capped [run, floor]: %s; %d check(s) unmet and unearnable)"
 				% [_capped.size(), RUNS, _capped, _fails.size()])
 		else:

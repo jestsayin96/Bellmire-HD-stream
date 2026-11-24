@@ -3136,7 +3136,16 @@ const ANIMALS := {
     "Pug":   ["res://assets/animals/Pug.glb", 0.17, 1.4],
     "Duck":  ["res://assets/animals/Duck.glb", 0.0019, 0.5],
     "Corgi": ["res://assets/animals/Corgi.glb", 0.0019, 1.5],
-    "Fox":   ["res://assets/animals/Red.glb", 0.0022, 1.3],
+    "Fox":   ["res://assets/animals/uaa/Fox.gltf", 0.17, 1.3],    # S108: UAA (System 11) replaces GobKit Red
+    # S108 System 11 - Quaternius Ultimate Animated Animals (CC0), scale = real body length / mesh length
+    "Alpaca": ["res://assets/animals/uaa/Alpaca.gltf", 0.33, 0.9],
+    "Bull":   ["res://assets/animals/uaa/Bull.gltf", 0.32, 0.8],
+    "Donkey": ["res://assets/animals/uaa/Donkey.gltf", 0.38, 0.9],
+    "Deer":   ["res://assets/animals/uaa/Deer.gltf", 0.39, 1.3],
+    "Stag":   ["res://assets/animals/uaa/Stag.gltf", 0.41, 1.2],
+    "Wolf":   ["res://assets/animals/uaa/Wolf.gltf", 0.27, 1.4],
+    "Husky":  ["res://assets/animals/uaa/Husky.gltf", 0.28, 1.5],
+    "Shiba":  ["res://assets/animals/uaa/ShibaInu.gltf", 0.22, 1.4],
     "Foal":  ["res://assets/animals/Horse.glb", 0.17, 0.9],
     "Hen":   ["proc:hen", 1.0, 0.7],
     "Cat":   ["proc:cat", 1.0, 0.9],
@@ -3257,6 +3266,9 @@ func _spawn_animals() -> void:
             for k in range(2):
                 _animal("Llama", pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
                 (animals[animals.size() - 1] as Animal).herd = pm
+            for kk in ["Donkey", "Alpaca", "Bull"]:      # S108 System 11: UAA stock in the paddock
+                _animal(kk, pd, pfw, psd, 11.5, 8.5, pd + psd * rng.randf_range(-8, 8) + pfw * rng.randf_range(-6, 6))
+                (animals[animals.size() - 1] as Animal).herd = pm
     # ducks on the slow water, a little flotilla at a few spots
     for xx in [-80.0, 12.0, 95.0, -150.0]:
         var x: float = float(xx)
@@ -3268,7 +3280,7 @@ func _spawn_animals() -> void:
     # dogs about town: round the square and the streets near it
     if _market_pos != Vector3.ZERO:
         for k in range(4):
-            var kind := "Pug" if k % 2 == 0 else "Corgi"
+            var kind: String = ["Pug", "Corgi", "Husky", "Shiba"][k % 4]   # S108: UAA dogs join the square
             _animal(kind, _market_pos, Vector3(0, 0, 1), Vector3(1, 0, 0), 9.0, 9.0,
                     _market_pos + Vector3(rng.randf_range(-6, 6), 0, rng.randf_range(-6, 6)))
             (animals[animals.size() - 1] as Animal).follow = true
@@ -3277,6 +3289,12 @@ func _spawn_animals() -> void:
         var sw: Vector3 = landmarks["lm_sawmill"][0]
         var fc := sw + Vector3(-18, 0, 30)
         _animal("Fox", fc, Vector3(0, 0, 1), Vector3(1, 0, 0), 10.0, 8.0, fc)
+        # S108 System 11: deer and a stag graze the same woods' edge, a lone wolf further out
+        var dc := sw + Vector3(-30, 0, 44)
+        for kk in ["Deer", "Deer", "Stag"]:
+            _animal(kk, dc, Vector3(0, 0, 1), Vector3(1, 0, 0), 12.0, 9.0, dc + Vector3(rng.randf_range(-8, 8), 0, rng.randf_range(-6, 6)))
+        var wc := sw + Vector3(-48, 0, 62)
+        _animal("Wolf", wc, Vector3(0, 0, 1), Vector3(1, 0, 0), 12.0, 10.0, wc)
     # birds: flocks that wheel and migrate over the valley, crows over the scar (D20c)
     var dark := StandardMaterial3D.new()
     dark.albedo_color = Color(0.08, 0.08, 0.1)

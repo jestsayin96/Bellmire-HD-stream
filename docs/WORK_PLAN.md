@@ -27,6 +27,33 @@
 *** `push_error`s on it. Expect the planned one-cycle transient again at 10:45: `by_key` 52 /
 *** `MB_NAME` 51 and an `UNNAMED` on `stiltman`. THAT IS CORRECT. Do not "fix" it.
 
+*** AMENDMENT WRITTEN 10:1x CT, AFTER :05, SO IT IS THE 11:07 ROW AND I AM SAYING SO ON ITS FACE.
+*** It does not change anything owed at 10:07, 10:22, 10:34, 10:37, 10:45 or 10:52.
+*** S33_DRAW IS RED ON MAIN RIGHT NOW AND ITS MESSAGE READS BACKWARDS. SAY IT RIGHT.
+*** `renders/cycles/s111/s33.log` ends `S33_DRAW FAIL 1 of 217: ["body stiltman is in a draw"]`.
+*** The string is the assertion's DESIRED state, not the finding: `tools/_s33_draw.gd:96` is
+*** `_ok(listed.has(b), "body %s is in a draw" % b)`. The FAIL therefore means **stiltman is in NO
+*** draw table** - `stiltman.glb` is on disk and in no theme pool. `grep -rn stiltman scripts/`
+*** returns ZERO, which confirms it: the body is in no engine file at all. The game build's lock
+*** line called it "the deliberate stiltman hold" and that is right in substance; the wording of
+*** the gate's own message is what will mislead the next seat, so it is written down here.
+*** THE WHOLE 11:07 CHANGE, MEASURED BY ME, NOT REMEMBERED - MY 09:58 GAME BUILD ROW NAMED ONLY
+*** `MB_NAME` AND WAS INCOMPLETE. It is three rows, exactly as S111 was for the Panner:
+***   1. `Delve.MB_NAME["stiltman"] = "Downfast"`   (`tools/art/minibosses.py:18749`)
+***   2. `Delve.MB_FIT["stiltman"] = 1.31`          (art's `_fit_report.json` `pairs.stiltman.ratio`,
+***      h 3.20 / hero 2.45, `fits_frame true`, 3/3 proving views - COPIED, not re-derived)
+***   3. `DungeonHD.THEME_MINIBOSS_MORE["fogbound"] += "stiltman"` - the CANON tag is **fogbound**
+***      (minibosses.py:18749), and that line currently reads `["fenman", "fuller", "blower"]`.
+*** AND ONE THING I FOUND BY READING THE TWO FILES RATHER THAN ASSUMING, WHICH THE GAME BUILD MAY
+*** USE AT 11:07 IF IT WANTS THE RED CLOSED EARLY: **row 3 IS SAFE ON ITS OWN, BEFORE ANY FEED
+*** ROW EXISTS.** `dungeon_hd.gd:256` admits a key to the draw pool only when
+*** `Delve.miniboss_model(key) != "" AND NOT Delve.miniboss_lines(key, "arrive").is_empty()`, so a
+*** body with no feed can sit in the table and never be drawn; and `_s33_draw.gd:71` asserts
+*** exactly `hits == 0` for a listed body with no arrive lines. So adding row 3 alone turns
+*** S33_DRAW green (held-for-lines 0 -> 1) without creating a ghost. **Rows 1 and 2 still wait for
+*** content's feed row**, because `chatcmd.gd:2252` push_errors on an `MB_NAME` key with no feed.
+*** The order is unchanged: content 10:22, engine naming 11:07.
+
 - **GAME BUILD (10:07) - TWO THINGS, AND THE FIRST IS SMALL AND MINE-MEASURED.** (This block landed
   within a minute or two of your claim; if you had already read the plan it is yours at 11:07 and I
   am not pretending otherwise.)

@@ -19,8 +19,9 @@ func _initialize() -> void:
 	_ok(Delve.miniboss_model("stopper") == "", "stopper has no mesh (gate half 1 closed)")
 	_ok(not Delve.miniboss_lines("stopper", "arrive").is_empty(), "stopper has arrive lines (C-176)")
 	_ok(Delve.miniboss_model("roper") != "", "roper mesh resolves")
-	_ok(Delve.miniboss_lines("roper", "arrive").is_empty(), "roper has no arrive lines (gate half 2 closed)")
-	_ok(not Delve.MB_NAME.has("stopper") and not Delve.MB_NAME.has("roper"), "neither carries an MB_NAME row yet")
+	## S102: content's C-177 landed the roper's feed and MB_NAME now carries "Drawtight", so the two
+	## roper-held asserts moved to tools/_s102_gate.gd, which asserts the roper IS drawn. Stopper half unchanged.
+	_ok(not Delve.MB_NAME.has("stopper"), "stopper carries no MB_NAME row yet")
 	var drawn := {}
 	for th: String in ["crypt", "grassland"]:
 		for n in 4000:
@@ -28,7 +29,6 @@ func _initialize() -> void:
 			drawn[k] = int(drawn.get(k, 0)) + 1
 	print("S101 draws over 8000 picks: ", drawn)
 	_ok(not drawn.has("stopper"), "stopper never drawn")
-	_ok(not drawn.has("roper"), "roper never drawn")
 	_ok(drawn.has("pitman"), "red-proof: pitman (both halves) IS drawn by the same sweep")
 	if _fails == 0:
 		print("S101_GATE OK %d" % _checks)

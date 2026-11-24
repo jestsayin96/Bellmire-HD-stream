@@ -117,6 +117,12 @@ DIFF_EPS = 0.02
 # pixels inside the border. The blank check and the border check pass it. This
 # test must not. See the proof recorded in docs/art/ at 15:51 CT.
 PROVE_RED = False
+# THE RED PATH FOR THE CENSUS-COVERAGE ASSERTION, set by --prove-census-red
+# <key>. It drops that one key from every census list IN MEMORY so the
+# `uncensused` red can be SEEN to fire. Nothing on disk is touched. A gate that
+# has never been seen to fail is not known to be able to - this is the same
+# rule that gave --prove-red, applied to the gate shipped this hour.
+PROVE_CENSUS_RED = ""
 
 
 def import_hero(repo):
@@ -896,6 +902,27 @@ def derive_self_seen(rep, repo):
     and `_selfseen_census.json` on every run, and `self_seen` is now RUN-OWNED
     so a stale block can never outlive the house it describes.
 
+    *** THE HOLE THIS FUNCTION STILL HAD WHEN IT SHIPPED, FOUND BY THE TEAM
+    *** LEAD 24 Nov 2026 12:34 CT BY READING THE CODE, ONE HOUR AFTER IT
+    *** LANDED - AND IT IS THE VERY FAULT ABOVE, ONE LEVEL DOWN. ***
+    The first cut INTERSECTED the census's three lists with `pairs` and never
+    asserted that those lists COVER `pairs`. On 24 Nov they did, all 55 rows,
+    zero on either side - and that is exactly how the hand-written block read
+    on 21 Nov. `_selfseen_census.json` is a FILE ON DISK written only when
+    someone runs `_selfseen_census.py`, so the 54th body shipped without
+    re-running it would sit in `pairs`, in NONE of the three lists, and this
+    block would read GREEN with that body INVISIBLE: nine bodies hid that way
+    for three days and the fix would have let the tenth hide the same way.
+    An intersection can only ever describe the rows the census happened to
+    know about; the question "does the census know about every row?" has to be
+    ASKED, and now is. `uncensused` is RED, per key, with its own reason.
+    Its twin is caught too: a census whose `register_pairs` disagrees with the
+    register it is being read against was taken over a different house.
+    AND `build_failed` IS NO LONGER SILENT. The census has always written that
+    fourth list and its own `errors`, and this block read NEITHER - so a body
+    whose builder RAISED was absent from the three lists and would have been
+    reported as merely uncensused, or before this change, not at all.
+
     THE ONE RED IT RAISES, and it is deliberately narrow: a body that the
     census says IS measurable and that has NO self_seen CELLS is RED. That
     covers both ways the gap appears - a body never fed to the instrument, and
@@ -958,6 +985,13 @@ def derive_self_seen(rep, repo):
         able = set(cen.get("measurable", []))
         unable = set(cen.get("not_measurable", []))
         noman = set(cen.get("no_man", []))
+        failed = set(cen.get("build_failed", []))
+        if PROVE_CENSUS_RED:
+            # --prove-census-red: make this one key unknown to the census so
+            # the coverage assertion can be WATCHED to fire. In memory only.
+            for _st in (able, unable, noman, failed):
+                _st.discard(PROVE_CENSUS_RED)
+            blk["prove_census_red"] = PROVE_CENSUS_RED
         blk["no_man"] = sorted(noman & pairs)
         blk["no_man_reason"] = (
             "the builder declares an EMPTY `man` span - a deliberate marker "
@@ -968,7 +1002,20 @@ def derive_self_seen(rep, repo):
             "panner MEASURABLE and turned the register red on a correct "
             "body, which is an unearned FAIL and the same fault as an "
             "unearned pass.")
-        blk["census_measured_at"] = "run tools/art/_selfseen_census.py"
+        # *** A REAL STAMP, OR A RED SAYING THERE ISN'T ONE. *** This key used
+        # to read the literal string "run tools/art/_selfseen_census.py" - an
+        # instruction standing where a time belongs, which is a census that
+        # cannot be told from a fresh one. An unstamped census file was written
+        # by the pre-12:34 script and must be re-run.
+        blk["census_measured_at"] = cen.get("measured_at")
+        blk["census_register_mtime"] = cen.get("register_mtime")
+        blk["census_register_pairs"] = cen.get("register_pairs")
+        blk["census_errors"] = list(cen.get("errors") or [])
+        blk["build_failed"] = sorted(failed & pairs)
+        blk["build_failed_reason"] = (
+            "the builder RAISED, so nothing was measurable and nothing is "
+            "claimed - that is RED, never an honest absence. This list and "
+            "the census's own `errors` were both unread until 24 Nov 12:3x.")
         blk["not_measurable"] = sorted(unable & pairs)
         blk["not_measurable_reason"] = (
             "no `man` span on the builder, so there is nothing to split and "
@@ -979,9 +1026,24 @@ def derive_self_seen(rep, repo):
             "MEASURABLE and carrying no self_seen cell - the instrument could "
             "have answered and did not. RED: this is the silent absence that "
             "hid nine bodies for three days.")
+        # *** THE COVERAGE ASSERTION. The three lists above are INTERSECTED
+        # with `pairs`; this is the only line that asks whether they COVER it.
+        uncensused = sorted(pairs - (able | unable | noman | failed))
+        blk["uncensused"] = uncensused
+        blk["uncensused_reason"] = (
+            "in the register and in NO census list - not measurable, not "
+            "unmeasurable, not no-man, not failed. The census has never been "
+            "ASKED about this body, so NOTHING here describes it and a GREEN "
+            "verdict does not reach it. RED: this is how nine bodies hid "
+            "under a green register for three days, and the 54th body shipped "
+            "without re-running tools/art/_selfseen_census.py would hide the "
+            "same way.")
+        blk["census_covers_register"] = not uncensused
     else:
-        able, unable, noman, uncovered = set(), set(), set(), []
+        able, unable, noman, failed = set(), set(), set(), set()
+        uncovered, uncensused = [], []
         blk["uncovered"] = []
+        blk["uncensused"] = []
         blk["census_missing"] = (
             "no _selfseen_census.json - coverage CANNOT be judged this run, "
             "and an unjudged coverage is not a green one.")
@@ -1002,6 +1064,29 @@ def derive_self_seen(rep, repo):
         errs.append("%s: MEASURABLE by the self_seen census and carrying NO "
                     "self_seen cell - an unasked instrument is RED, not green"
                     % key)
+    # THE COVERAGE ASSERTION'S OWN REASON STRING, PER KEY.
+    for key in blk.get("uncensused", []):
+        errs.append("%s: in the register and in NO self_seen census list - "
+                    "the census was never ASKED about this body, so nothing "
+                    "in the self_seen block describes it and GREEN cannot "
+                    "reach it. Re-run tools/art/_selfseen_census.py" % key)
+    for key in blk.get("build_failed", []):
+        errs.append("%s: the census reports its BUILDER RAISED - nothing was "
+                    "measurable because nothing built. RED, not absent" % key)
+    for ce in blk.get("census_errors", []):
+        errs.append("self_seen census: %s" % ce)
+    if cen is not None and not blk.get("census_measured_at"):
+        errs.append("self_seen: the census file carries NO measured_at stamp, "
+                    "so it was written by the pre-24-Nov-12:34 census and its "
+                    "age is unknowable - an un-ageable census is the snapshot "
+                    "this gate exists to abolish. Re-run "
+                    "tools/art/_selfseen_census.py")
+    _cp = blk.get("census_register_pairs")
+    if cen is not None and _cp is not None and _cp != len(pairs):
+        errs.append("self_seen: the census was taken over %d register rows and "
+                    "is being read against %d - it describes a different "
+                    "house. Re-run tools/art/_selfseen_census.py"
+                    % (_cp, len(pairs)))
     if cen is None and pairs:
         errs.append("self_seen: no census on record - coverage is unjudged, "
                     "and unjudged is not green")
@@ -1219,6 +1304,10 @@ def main():
     # each hides the other. A gate that has never been seen to fail is not
     # known to be able to. This flag must never be used for a shipped register.
     ap.add_argument("--prove-red", action="store_true")
+    # THE RED PATH FOR THE CENSUS-COVERAGE ASSERTION. Drops one key from every
+    # census list in memory so the `uncensused` red can be watched to fire.
+    # Never for a shipped register.
+    ap.add_argument("--prove-census-red", default="")
     # A/B ONLY. --evenlight carries the key/fill/rim round with the camera (see
     # the EVEN LIGHT note above); --tag writes into <key><tag>/ so an A/B can
     # never overwrite a shipped render.
@@ -1247,6 +1336,8 @@ def main():
         globals()["GROUND"] = False
     if args.prove_red:
         globals()["PROVE_RED"] = True
+    if args.prove_census_red:
+        globals()["PROVE_CENSUS_RED"] = args.prove_census_red
     if args.frame > 0.1:
         globals()["FRAME_W"] = args.frame
         globals()["FRAME_H"] = args.frame * CELL_Y / float(CELL_X)

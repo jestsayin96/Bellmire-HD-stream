@@ -16836,6 +16836,197 @@ No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, 
 either account.** No Godot of mine alive at release - checked by process BEFORE writing the IDLE
 line this time, not after.
 
+## D-S108b (game build, 24 Nov 2026 06:08-06:2x CT) - THE HANG WAS MY TOOL, NOT THE DESKTOP; SYSTEM 11 RENDERED, LOOKED AT, AND MERGED TO laptop
+TAKE THIS NEXT (05:58 CT, team lead) GAME BUILD row: S108, fourth carry, "the first step is a diagnosis not a retry".
+DIAGNOSIS: (1) windowed probe tools/_s58_span.gd ran windowed to `S58_SPAN OK n=28` rc=0 - the desktop renders. (2) The committed
+tools/_s108_shot.gd on origin/s108-wip (aa389b3e) was 37 LINES: it stopped after _near() with no _process, no camera, no quit and no
+verdict print, so the window idled after town _ready until my 400 s timeout. THE 05:1x HANG WAS MY OWN TRUNCATED FILE, NOT THE SESSION.
+FIX: completed the tool (camera, per-kind framing, S108_MEASURE line per animal = mesh AABB h/len/wid + foot gap vs height_at, PNG per kind).
+RENDER: `S108_SHOTS OK 9/9` windowed 1920x1080 -> renders/cycles/20261124_s108/. LOOKED AT ALL NINE: bull, donkey, husky, shiba, fox, deer,
+stag, wolf stand on the ground, upright, correctly facing, sensible beside the horses and chibi townsfolk; the alpaca is in the paddock but
+occluded by horses in its frame (measured, not seen clearly). MEASURED (h m / foot gap): Horse ref 1.86/0.00, Bull 1.47/-0.02, Donkey
+1.50/0.00, Alpaca 1.78/0.00, Husky 0.89/0.00, Shiba 0.68/0.00, Fox 0.46/0.00, Deer 1.67/-0.01, Stag 2.21/0.00 (antlers), Wolf 0.72/0.00.
+NO SCALE CHANGE NEEDED - every S108 scale stands. PRE-EXISTING, NOT S108: Corgi foot_gap -0.46 (GobKit Corgi.glb, sunk ~half its height)
+- noted for a later row, not touched here.
+MERGED origin/s108-wip into laptop (import + wiring together, as bound). Red.glb is now unread by town.gd (kept on disk) - the audit
+should see ONE dead file in assets/animals/ from this commit; until now it read zero.
+GATES on the merged tree: import rc=0 | parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1999 |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/16407 raid_in_solid=0/7404 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT
+ERROR | S106_CLIPS OK 18 models, 0 hit-react/death picks | S108_SHOTS OK 9/9 (windowed). No live Twitch test, ZERO BITS.
+Claim 06:08:31, cap claim+25 = 06:33:31 (computed first), declared 06:30.
+## C-185 (24 Nov 2026 06:2x CST, content) - STAND-DOWN, NOTHING OWED; NO 51st BODY COMMITTED
+TAKE THIS NEXT block (05:58 CT, 24 Nov) gave content a CONDITIONAL item: line a 51st miniboss only
+if a 51st key appeared in tools/art/minibosses.py before :22, else STAND DOWN and write it up.
+MEASURED, not trusted: `origin/art` head is 5fe51481 (06:06, a plan sync); the only art commit
+past main is that sync - the art lane spent the cycle on the wand carry (gearcarry.py), not a body.
+Every non-retired canon key in minibosses.py has a `miniboss_feed.by_key` row; the only unlined
+keys are the retired `_chibi`/`_tall` variants, which are not drawn. by_key = 50 = MB_NAME.
+I did not invent a body to line. Third stand-down in a row, and the right one.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead, left alone.
+No `_note_` key added or removed. CODE WIRING implied: none.
+NEXT FIRING: if art commits a 51st body, write arrive+fall lines (nine/eight, no `{name}`) first;
+check `git grep <key> origin/art`.
+## HUB standing check, 24 Nov 06:4x CT (hub lane)
+TAKE THIS NEXT gave the HUB row = STANDING CHECK, no build row. Merged origin/main (29ecd90c). origin/gh-pages^{tree}, origin/hub:web, origin/main:web, HEAD:web all 02257b2f; diff-tree gh-pages vs web EMPTY; publish 6 = gh-pages 029e4fac. app.js node --check OK; innerHTML only at :255 and :301 (page-owned); outerHTML/insertAdjacentHTML/document.write/eval/new Function = 0 in code (2 comment mentions); CSP meta present. web/ unchanged so no screenshot or hostile-name rerun owed. NOT claiming READY TO PUBLISH. Untracked _hub_ready_shot.png still named, delete refused.
+
+U146 STAND-DOWN 2026-11-24T06:56-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (06:5x-06:00) and by process: last line chat bot B126 IDLE 06:51:38 (released inside its declared 06:52; its RUNNING 06:49:45 closed; QA tester 06:46-06:49 also closed), tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 05:58 CT 24 Nov team-lead block; HUD row says U145 ticked as a stand-down, nothing HUD-owned open, rarity row is U55 and shipped - do not hand it back. Standing down; no defect in shipped HUD work found, no windowed audit launched (no owed run to justify a claim).
+Next firing (07:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+
+## 24 NOV 2026, 04:5x-05:5x CT - ART - THE WAND'S 938-VERT CLIP DOES NOT SURVIVE
+## THE ENGINE'S OWN CARRY, AND THE GREEN IS STILL NOT THE WHOLE ANSWER
+This entry is OWED AND LATE. The wand cycle shipped at 229b0848 - 1,265
+insertions across 19 files - with no line in this file at all. The team lead
+found it at 06:34 and he is right that no other lane can reconstruct my hour.
+Writing it now from the two registers on disk, not from the commit headline.
+
+WHAT I MEASURED, AND THE TWO BASES SIDE BY SIDE. One asset,
+assets/gear/wand_crystal.glb, 7,935 verts, rendered on the KayKit body in idle
+from front, side and back, twice - once at the carry the engine actually gives
+it and once at the staff carry pass 1 had assumed.
+  ENGINE BASIS (renders/art/wand/engine/_report.json) - held_rot (0,0,0) at
+  hand_scale 0.62. verdict GREEN, ok true. clip 0 of 5,959 checked, ground 0,
+  floor_depth 0, blanks [], blind_views [], frame_clipped []. reach 0.0457,
+  drop 0.0456, longest_axis 0.5515. All three views move pixels - front 878,
+  side 457, back 871 - so the thing is genuinely on the body and not a
+  register full of correct numbers about an absent object.
+  STAFF BASIS (renders/art/wand/staff/_report.json) - rotation (0,0,90) at
+  scale 1.0, kept beside it only so pass 1 reproduces. verdict RED, ok false.
+  clip 938, reach 0.9208, drop 0.0002, longest_axis 0.921. It reproduces pass
+  1 TO THE VERTEX.
+
+THE GEARCARRY FAULT, IN MY OWN WORDS, AND IT WAS MINE. Pass 1 printed as a
+CAVEAT what was actually a FAULT: it said gear.gd has no entry for this path,
+recorded carry_assumed: staff, and measured the staff basis. That reading was
+HALF. Both accessors key by path and BOTH END IN A DEFAULT ARM - held_rot
+falls through to Vector3.ZERO (arm 3 of 4), and hand_scale ends
+`0.62 if path.begins_with(KIT)`, with KIT = res://assets/gear/, which is
+exactly where the wand sits (arm 8 of 10). A reader that looks for a ROW and
+stops when there is none is not reading the function; it is reading the rows.
+So pass 1's clip 938 described a rotation the wand never gets, at a scale that
+is neither the wand's 0.62 nor the staff's own 1.9 - wrong about the wand and
+never right about the staff either. Same family as weaponfit FAULT 5 and
+FAULT 6 in a new shape.
+The fix is a READER, not a constant: tools/art/gearcarry.py walks the real
+branches of both functions in source order, resolves gear.gd's own path
+consts, raises rather than guessing if a `return` cannot be turned into an
+arm, and is checked against four rows the engine does carry before it is
+trusted on the wand - staff_ (0,0,90) x1.9, crossbow_ (-90,35,90) x1.0,
+bow_golden (0,0,90) x0.6, sword_common ZERO x0.8. If the game build ever gives
+the wand a row, this picks it up next run instead of going stale.
+
+AND THE GREEN IS NOT THE WHOLE ANSWER - ONLY THE PICTURE SAYS SO. At the
+engine carry the wand lies HORIZONTAL and ACROSS the body: a 0.55 m baton out
+of the fist on the front view, and on the side view a single blue dot at the
+hip with the shaft edge-on. My gate has no term for "points up" or "reads as a
+wand", so the gate is not what catches that. I looked. It is the S19 fault
+gear.gd names in its own words. _wandroll.py then swept the one family a
+calibrated basis can derive - the staff basis rolled about slot +Y, the
+crossbow's own S95 move - and every clip-0 row in the sweep is a HORIZONTAL
+one: standing it up from this handslot costs 1,370 clipped verts at x0.62 and
+938 at x1.0, because the idle fist hangs below the forearm and a rod standing
+out of it goes through the arm.
+
+I ALSO STRUCK A NOTE OF MY OWN THAT WAS NOT TRUE. Pass 1's comment claimed the
+glb carries +30.5 on X in its node transform. Re-measured against an asset git
+says is unchanged since d9a6a3d3: n_nodes 1, nonzero_translations [],
+nodes_with_matrix [], local translation [0,0,0]. The register now reads the
+glb's own JSON chunk for trs AND matrix, because a reader that checks only
+`translation` would call a matrix-carrying node clean - the same half-reading
+shape as the fault above.
+
+FOR THE GAME BUILD: NOTHING IS BLOCKED AND NOTHING IS WIRED BY ME. Nothing in
+scripts/ references wand_crystal.glb yet. At the shipped carry nothing is
+broken, so there is no defect to wire around.
+FOR MR. E: his model is NOT rescaled - it is his and it stays in NEEDS MR. E.
+The one number that bears on his open "wand or short staff" question is
+longest_axis 0.5515 in hand at the engine's carry; at the staff's x1.9 the
+same mesh would read about 1.75 m. The word is his, not mine.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.
+
+## 24 NOV 2026, 06:3x-07:0x CT - ART - THE PANNER IS THE 51st, AND THE PASS THAT
+## MOVED NOTHING IS THE ONE WORTH KEEPING
+FIRST ACT WAS THE OWED ONE: the wand cycle's PROGRESS entry, written above and
+pushed at 645d7958 before any new work started. Then the licence in the 06:34
+row: invent the 51st.
+
+WHAT I CHECKED FIRST, BY MEASURING. BUILDERS carries 64 keys, 50 of them
+non-variant bodies; CANON carries 50 rows; the two agree and they agree with
+the team lead's 50/50/50 on merged main. I then read all fifty `idea` phrases
+as MECHANICS, not as trades - and that killed my first two designs. A BRANDER
+("it marks one of you and the floor goes for the mark") is the DYER verbatim.
+A KNACKER ("everything else that dies in the room feeds it") is the
+RATCATCHER, whose row is better developed than mine was. I would have shipped
+the brander if I had gone by what I remembered of the set.
+
+THE GAP THAT IS ACTUALLY THERE: not one of the fifty makes the party HOLD ITS
+BLOWS. Every row answers what it does to you or what you must break; none
+answers WHEN you may hit it at all. So: PANNER / "Onceround", IT IS SHUT UNTIL
+THE PAN COMES ROUND - a closed drum on a crank with one opening that swings
+past once a turn, and blows on the shut wall do nothing at all. Theme
+confection, which was the thinnest in the set at two against the crypt's five.
+Height 2.26 and wear 0.14, both unused by the other fifty.
+
+PASS 2 IS THE FINDING AND IT IS A FAULT OF MINE. Pass 1 rendered as one
+enormous PALE DISC on legs - the pavise read my own docstring claims to design
+out. I diagnosed the pan's inner FLOOR, flipped it dark, re-rendered, and the
+front frame came back BYTE IDENTICAL at 432,898 bytes: not one pixel, same
+1,144 faces, GREEN both times. A change that cannot move the picture means the
+object I changed is not the object in the picture. THE PALE DISC WAS THE LIP
+RING: lordlib.cone caps BOTH ends and cap defaults True, so my "flared collar"
+was a solid plate 1.28 m across lying over the mouth. Pass 3 sweeps the lip as
+a real ring in the mouth's own basis and the opening reads - dark interior,
+pale edge, which is the inverse of what pass 1 built. 1,346 faces.
+
+GATES. Gen ok true, 62 rows, errors [], blank [], panner span 1.73
+CORRIDOR-SAFE and UNDER-LID (2.34 at pass 3, before the man came out) (corridor 11.0, lid 9.5, both read out of
+floorgen.gd this run). Fit verdict GREEN, ok true, errors [], blind_views [],
+panner proving 3 of 3, border and frame clean, hero 2.45 m measured not
+assumed.
+
+THE FIT PROOF, AND I OPENED ALL THREE. hero_front: the opening reads - dark
+bowl, pale rim, comfits as bumps, chute coming in. hero_side: the best view,
+the rim an ellipse with the drum wall behind it, so the DEPTH is visible and
+the cask read is answered by the picture. hero_back: the closed dark back and
+nothing pale - FACING HOLDS, checked on purpose against the Beadle defect.
+EVERY FAULT I CAN SEE, AND THERE ARE SIX: (1) the man is COMPLETELY ECLIPSED in
+the side view - he and the pan share a Y and the side camera looks along X, so
+no X separation can part them; (2) in the front view his forearms fold into a
+jumble because the crank is behind the pan from there, so he reads as a
+bystander and only works in the back view; (3) the hopper chute notches the top
+of the mouth in front projection; (4) the comfits read as RIVETS, not sugar -
+nothing in frame says confection; (5) the pale rim is a closed continuous ring
+and at stream distance reads slightly as a porthole, a modern shape; (6) the
+man's hat floats above a neckless head.
+PASS 4 ANSWERED THE MAN ON A RENDER RATHER THAN IN A SENTENCE. I built the
+machine without him at tag `_noman` and opened the pair. FRONT: plainly better
+- the crank and handle become visible for the FIRST TIME IN ANY VIEW, having
+been behind his body all along. SIDE: identical to within the eye, which is
+the proof and not a disappointment - a part whose removal changes a view by
+nothing was contributing nothing to that view. BACK: loses a figure that was
+only ever a back. So he is out; PAN_MAN=1 rebuilds him and pass 3's body is
+kept at renders/art/minibosses/panner_noman/ so the A/B reproduces.
+WHAT IT COST: faces 1,346 -> 822, span 2.34 -> 1.73 m, material meshes 4 -> 2,
+because the man was the only user of the wool slot AND the glow slot. THE
+SHIPPED BODY HAS NO EMISSIVE AT ALL - nothing for the back-lamp guard to find
+and nothing that reads as a face. Deliberate: this one is machinery, like the
+Porter's barred leaf.
+FAULTS 1, 2 AND 6 ARE CLOSED BY THAT. FAULTS 3, 4 AND 5 STILL STAND ON WHAT I
+SHIPPED - the chute notch, the rivet-not-sugar comfits, and the porthole read -
+and I am not pretending otherwise. Next firing, in that order.
+
+FOR THE GAME BUILD: NOT WIRED BY ME. bestiary.gd needs a `model` path to
+assets/monsters/minibosses/panner.glb and NO `anims` entry (static);
+Delve.MB_NAME wants `"panner": "Onceround"` after content's feed row lands.
+NOT ROOM-LOCKED: CORRIDOR-SAFE.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.
 ---
 
 ## B126 - 24 Nov 2026, 06:45 CT firing. FOUR GATES GREEN ON A SIXTH MERGED MAIN, NOTHING OWED, AND THE ONLY THING THAT LIED THIS HOUR WAS MY OWN PYTHON.

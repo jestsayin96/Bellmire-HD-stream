@@ -18323,3 +18323,324 @@ def almoner():
 
 
 BUILDERS.update({"almoner": almoner})
+
+
+# ===========================================================================
+# THE 51st - THE PANNER, 24 Nov 2026 06:5x CT. Mr. E's standing permission of
+# 17:43 (a dry art lane may invent a miniboss outright; no lore, no canon
+# dependency, no content-lane wait).
+#
+# I MEASURED THE SET BEFORE I DESIGNED, AND THE MEASUREMENT KILLED MY FIRST TWO
+# IDEAS. `BUILDERS` carries 64 keys of which 50 are non-variant bodies, and I
+# pulled every one of their `idea` phrases out of CANON rather than trusting any
+# list in a prompt or a memory:
+#   IDEA 1 was A BRANDER - "it marks one of you and the floor goes for the
+#   mark". That is the DYER, verbatim: "IT MARKS ONE OF YOU AND HUNTS ONLY THE
+#   MARK". Dropped.
+#   IDEA 2 was A KNACKER - "everything else that dies in the room feeds it".
+#   That is the RATCATCHER, and his row is more developed than my version was:
+#   the bays fill, he is stronger per bay, and filled bays can be cut open.
+#   Dropped.
+# Both were re-skins and I would have shipped the first one if I had gone by
+# what I remembered of the set. The third idea is below and I checked it the
+# same way.
+#
+# WHAT IS ACTUALLY ABSENT FROM THE FIFTY. Reading the ideas as mechanics rather
+# than as trades, the set already owns: adds, self-repair, pull, light, raise,
+# exit-denial, gear theft, ally healing, flood, terrain spawn, pre-set traps,
+# resource dependency, false position, floor state, split, arming others,
+# encumbrance, room bisection, per-damage-type immunity, aggro marking, weapon
+# degradation, shape theft, death-feeding, single-file, forced facing,
+# movement-triggered aggro, forced weakness, anti-heal, choice removal, timed
+# drop, absorb-and-return, verticality, wall building, gear locking, cask,
+# post theft, undoing progress, rewind, floor removal, tribute, air, swapping
+# places, binding heroes, kit shuffling, levelling the best hero, loot denial,
+# potion drinking and standing your fallen up against you.
+# NOT ONE OF THE FIFTY MAKES THE PARTY *HOLD ITS BLOWS*. Every row answers
+# "what does it do to you" or "what must you break"; none answers "WHEN may you
+# hit it at all". A window is a different shape of fight from a condition: the
+# Stoker is a resource (starve the pit and it starves, and you may hit it the
+# whole time), the Tanner is a type immunity (hit it with something else), the
+# Rammer is a timed THREAT. A timed VULNERABILITY inverts the party's job from
+# dealing damage to withholding it, which is the one thing a delver finds hard.
+#
+# THE TRADE FOLLOWS THE MECHANIC, NEVER THE OTHER WAY. A pan that comes round
+# once per turn is a real sweet-works machine - the panning drum a comfit-maker
+# rolls dragees in - and `confection` is the THINNEST theme in the set at two
+# bodies against the crypt's five, so the 51st also goes where the weight is
+# missing. Title in the house register: plain, descriptive, no flourish.
+CANON.update({
+    "panner": ("Onceround", 2.26, (0.78, 0.56, 0.34), (1.00, 0.84, 0.54),
+               "confection", "IT IS SHUT UNTIL THE PAN COMES ROUND - it is not "
+               "armoured and it is not immune: for most of the fight there is "
+               "simply NOTHING OF IT TO HIT. The whole creature is a closed "
+               "drum on a crank, and the one opening in it swings past you once "
+               "a turn. Blows landed on the shut wall do nothing at all - not "
+               "reduced, nothing - and the party's problem is no longer how to "
+               "deal damage but how to HOLD it: everyone who swings early is "
+               "out of position when the mouth is actually there, and the "
+               "window is wide enough for a party that waits together and too "
+               "narrow for one that does not. It does not need to hurt anybody "
+               "to win; it only has to be shut when you are ready. THE THING TO "
+               "READ IS THE MOUTH: a shallow wide pan with one open face, lined "
+               "pale so the hole reads as an opening, canted part-way round so "
+               "you can see it is TURNING and not parked - and a crank with a "
+               "handle on the far side that says a thing is driving it.",
+               0.14, "Something ahead is turning, and it is shut."),
+})
+ORDER = ORDER + ["panner"]
+
+# PER-SLOT MATERIALS - THE TITHER'S RULE AGAIN: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON. Here that is THE MOUTH AND ONLY THE MOUTH - the lip
+# ring around the open face and the inner floor you see through it. The drum
+# wall, the hopper, the crank, the frame and the legs are all dark; the man at
+# the crank is undyed wool. The comfits in the pan are DELIBERATELY DARK even
+# though they are what the trade makes, for the almoner's reason exactly: pale
+# beads in a pale bowl is one pale blob, and the read this body stakes itself on
+# is AN OPENING, not sugar.
+#
+# AND THE PALE LINING IS NOT DECORATION, IT IS A FAULT ALREADY RECORDED IN THIS
+# FILE BEING DESIGNED OUT: a dark recess in a dark board is invisible, which is
+# why the mouth cannot be "the absence of wall". An opening reads as an opening
+# only when its edge is lighter than both the wall around it and the shadow
+# inside it.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"panner"}
+
+OVERRIDE.update({
+    "panner": {
+        'body': ((0.368, 0.342, 0.280), 0.86, 0.02),   # the man: undyed wool
+        'dark': ((0.074, 0.068, 0.060), 0.74, 0.10),   # drum, frame, hopper
+        'bone': ((0.858, 0.816, 0.656), 0.40, 0.30),   # THE MOUTH: lip + floor
+        # Eyes only, forward of the head's own front face. Nothing emissive is
+        # aft of the shoulder line; the back-lamp guard must find nothing here.
+        'glow': ((1.000, 0.840, 0.540), 0.85),
+    },
+})
+
+
+def panner():
+    """IT IS SHUT UNTIL THE PAN COMES ROUND. The 51st body. PASS 1.
+
+    TWO QUESTIONS A VIEWER ASKS FROM THE DOORWAY, ANSWERED BY GEOMETRY:
+      WHAT IS IT DOING?   A shallow wide pan, open on ONE face, lined pale so
+                          the opening reads as an opening. It is the largest
+                          object on the body and the only pale mass in frame.
+      HAS IT STARTED?     The mouth is CANTED PART-WAY ROUND rather than square
+                          to the camera, and there is a crank with a handle on
+                          the far side. A mouth square to you is a parked pan;
+                          a mouth caught on its way past is a turning one, and
+                          that is the before/after a static body cannot
+                          animate through.
+
+    THE MOUTH IS THE ONE THING THAT COULD GO WRONG AND THERE ARE THREE WAYS IT
+    COULD, ALL DESIGNED FOR BEFORE RENDERING:
+      (a) IT COULD READ AS A CASK - and the Hooper raises a cask over a hero,
+          nine bodies back in the same register. A cask is a STAVED barrel,
+          bellied, stood on end and closed. So this is built SHALLOW: diameter
+          1.20 against a depth of 0.34, a ratio of 3.5:1, which is a pan and
+          cannot be a barrel. No staves, no hoops, and the axis is horizontal.
+      (b) IT COULD READ AS A SHIELD (the Paviser) OR AS A WHEEL (the
+          Sluicekeeper's spoked ring). A pavise is a flat disc with its FACE to
+          you; a wheel is a ring you SEE THROUGH. This has depth you can see
+          into and a solid wall, so it is neither - and the crank and hopper
+          are both there to say "machine", not "gear".
+      (c) A DISC AIMED ALONG EITHER CAMERA AXIS FORESHORTENS INTO A BAR. That
+          is the measured fault of the Stackman, the Drillmaster and the
+          almoner's own dish, and I am not shipping it a fourth time. So the
+          mouth normal is aimed BETWEEN the two cameras and up:
+          (0.55, -0.70, 0.45) normalised. The front camera gets |n.(0,-1,0)|
+          = 0.70 of the diameter as apparent height; the side camera gets
+          |n.(1,0,0)| = 0.55. NEITHER view gets the degenerate one, and the
+          back gets none of it on purpose.
+
+    FACING IS BY CONSTRUCTION - the Beadle's measured fault designed out rather
+    than re-learned. Everything that identifies this body sits on the front and
+    the near side: the mouth, the pale lip, the pale inner floor, the chute and
+    the eyes. The back (+Y) carries the drum's CLOSED dark back and nothing
+    pale at all, so the figure cannot read the same from both ends.
+    AND THE PALE LIP IS NEVER AGAINST ANOTHER PALE MASS - the man is wool, the
+    drum is dark iron. That is the Beadle's second fault (a pale knob going
+    flat against a pale panel in the side view) checked on purpose.
+
+    THE MAN AND THE CRANK ARE BOTH ON -X, THE MOUTH IS CANTED TOWARD +X. That
+    is deliberate: it keeps the operator from standing in front of his own
+    machine's opening in the side view, which is the Sealer's pass-3 lesson
+    (his press was unreadable while it shared pixels with his chest).
+
+    Static: no `anims` entry.
+    ROOM-LOCKED IS NOT CLAIMED HERE. minibossgen measures the real footprint
+    against floorgen's own corridor clear span and lid, and the report says the
+    verdict. I do not pre-judge that number.
+    """
+    P = Parts("panner")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    # ---- the frame it stands on -------------------------------------------
+    BEAR = 1.270                      # bearing height: the drum's axis
+    _open()
+    for s in (-1, 1):
+        limb(P, seat([(s * 0.300, 0.030, 0.760), (s * 0.355, 0.010, 0.400),
+                      (s * 0.372, -0.020, 0.062)], 0.072),
+             0.072, 0.056, 'dark')
+        P.add(L.box(0.200, 0.300, 0.062), 'dark', loc=(s * 0.372, -0.020, 0.031))
+    for s in (-1, 1):
+        P.add(L.box(0.760, 0.090, 0.075), 'dark', loc=(0.0, s * 0.150, 0.820))
+    P.add(L.box(0.230, 0.230, 0.520), 'dark', loc=(0.0, 0.010, BEAR - 0.470))
+    _close("frame")
+
+    # ---- the pan: a shallow drum, open on one face ------------------------
+    # Built on +Z by lordlib and aimed down the mouth normal, so "up the barrel"
+    # is +Z in the primitive's own frame and the open end is the far cap.
+    MN = Vector((0.55, -0.70, 0.45)).normalized()
+    PC = Vector((0.060, 0.045, BEAR))        # pan centre, on the bearing
+    R_OUT = 0.600                            # 1.20 across
+    DEPTH = 0.340                            # 3.5 : 1 - a pan, not a cask
+    _open()
+    # the wall, as an open tube: cone r1 == r2, no caps, so the mouth is a hole
+    P.raw(aim(L.cone(R_OUT, R_OUT, DEPTH, 22, cap=False),
+              tuple(PC - MN * (DEPTH * 0.5)), tuple(MN)), 'dark')
+    # the closed BACK of the drum - this is all the +Y camera gets
+    P.raw(aim(L.cone(R_OUT, R_OUT * 0.94, 0.045, 22),
+              tuple(PC - MN * (DEPTH * 0.5 + 0.045)), tuple(MN)), 'dark')
+    _close("pan")
+
+    # ---- THE MOUTH: the only pale mass on the body ------------------------
+    _open()
+    # THE LIP RING, AND PASS 3 IS WHY IT IS BUILT THIS WAY AND NOT WITH A CONE.
+    # PASS 2 FAILED AND THE PROOF IS THAT IT MOVED NOTHING. I flipped the inner
+    # floor from pale to dark, re-rendered, and the front frame came back BYTE
+    # IDENTICAL - 432,898 bytes, not one pixel different. A change that cannot
+    # move the picture means the object I changed is not the object in the
+    # picture, so the diagnosis was wrong and the gate (GREEN both times, 1,144
+    # faces both times) could not tell me because it has no term for what is in
+    # front of what.
+    # WHAT THE PALE DISC ACTUALLY WAS: `lordlib.cone(..., cap=True)` CAPS BOTH
+    # ENDS, and cap defaults to True. So the "lip ring" I wrote as a short
+    # flared collar was a SOLID PLATE 1.28 m across, lying over the mouth and
+    # hiding the floor, the comfits and the whole interior behind it. There is
+    # no annulus primitive in lordlib; a ring here has to be a swept tube, which
+    # is what `_ring` does for the axis-aligned cases. This one is not
+    # axis-aligned, so it is swept in the mouth's own basis.
+    _RX = MN.cross(Vector((0.0, 0.0, 1.0))).normalized()
+    _RY = MN.cross(_RX).normalized()
+    _lip = PC + MN * (DEPTH * 0.5 - 0.010)
+    _pts = []
+    for _i in range(29):
+        _t = TAU * _i / 28.0
+        _pts.append(_lip + _RX * (R_OUT * math.cos(_t))
+                    + _RY * (R_OUT * math.sin(_t)))
+    P.raw(L.tube(_pts, [0.058] * len(_pts), 8), 'bone')
+    # THE INNER FLOOR - AND ITS SLOT IS PASS 2, THE ONE CHANGE IN THAT PASS.
+    # PASS 1 MADE IT PALE AND THE PICTURE REFUTED THE WHOLE DESIGN. A bowl whose
+    # INTERIOR is the pale mass does not read as an opening from any angle that
+    # can see into it: the floor is the largest flat area in the frame, so front,
+    # side and three-quarter all came back as ONE PALE DISC - which is exactly
+    # the pavise read (a) in this docstring claims to have designed out, and the
+    # almoner's pale-in-pale blob I quoted at myself two paragraphs earlier. I
+    # shipped the fault I had just written down.
+    # WHAT ACTUALLY MAKES A HOLE READ AS A HOLE is the opposite arrangement: a
+    # DARK interior with a PALE EDGE. An opening is dark inside and light at the
+    # rim, and the eye reads the annulus, not the fill. So the floor goes dark
+    # and the lip ring stays pale and alone.
+    # PAN_P2=0 restores pass 1's pale floor so the A/B reproduces.
+    P.raw(aim(L.cone(R_OUT * 0.915, R_OUT * 0.915, 0.030, 20),
+              tuple(PC - MN * (DEPTH * 0.22)), tuple(MN)),
+          'bone' if os.environ.get("PAN_P2") == "0" else 'dark')
+    _close("mouth")
+
+    # ---- the comfits in it. DARK on purpose - see the material note -------
+    _open()
+    for _i, (_u, _v, _rr) in enumerate((
+            (-0.30, -0.18, 0.062), (0.05, -0.26, 0.055), (0.26, 0.02, 0.058),
+            (-0.10, 0.20, 0.050), (0.34, -0.22, 0.046), (-0.33, 0.10, 0.044))):
+        P.add(L.sphere(_rr, _rr, _rr * 0.88, 9, 7), 'dark',
+              loc=tuple(PC - MN * (DEPTH * 0.12) + _RX * _u + _RY * _v))
+    _close("comfits")
+
+    # ---- the crank on -X: the thing that says a thing is driving it -------
+    _open()
+    _AXD = Vector((-1.0, 0.0, 0.0))
+    P.raw(aim(L.cone(0.055, 0.048, 0.330, 10), tuple(PC + Vector((-0.300, 0, 0))),
+              tuple(_AXD)), 'dark')                         # the axle out
+    P.raw(aim(L.cone(0.090, 0.090, 0.070, 12),
+              tuple(PC + Vector((-0.560, 0, 0))), tuple(_AXD)), 'dark')  # collar
+    # the crank arm, bent out of the axle line and then forward to a handle
+    limb(P, [(PC.x - 0.620, PC.y, PC.z), (PC.x - 0.640, PC.y - 0.075, PC.z - 0.230),
+             (PC.x - 0.655, PC.y - 0.130, PC.z - 0.300)], 0.040, 0.034, 'dark')
+    P.raw(aim(L.cone(0.046, 0.046, 0.185, 10),
+              (PC.x - 0.655, PC.y - 0.130, PC.z - 0.300), (-1.0, -0.10, 0.0)),
+          'dark')                                            # the handle
+    _close("crank")
+
+    # ---- the hopper that feeds it, above and behind the mouth -------------
+    _open()
+    P.raw(aim(L.cone(0.255, 0.130, 0.330, 10),
+              (0.120, 0.120, 1.900), (0.0, 0.0, -1.0)), 'dark')
+    P.add(L.box(0.430, 0.400, 0.055), 'dark', loc=(0.120, 0.120, 1.912))
+    # the chute, forward of the drum back so it reads from the FRONT
+    P.raw(aim(L.cone(0.088, 0.072, 0.300, 8), (0.120, 0.120, 1.580),
+              (0.10, -0.52, -0.85)), 'dark')
+    _close("hopper")
+
+    # ---- the man at the crank, on -X -------------------------------------
+    # PASS 4 TOOK HIM OUT, AND THE A/B IS WHY RATHER THAN TASTE. Pass 3's fit
+    # proof showed him COMPLETELY ECLIPSED in the side view - he and the pan
+    # share a Y and that camera looks along X, so no amount of X separation can
+    # ever part them - and folded into a jumble of forearms in the front view,
+    # because the crank he is holding is behind the pan from there. He worked in
+    # ONE of three views. So I rendered the machine without him at tag `_noman`
+    # and LOOKED at the pair instead of arguing it:
+    #   FRONT  - plainly better. The crank and its handle become visible for the
+    #            first time in any view; they had been behind his body. The read
+    #            is now a drum, a mouth, a crank and a hopper, and nothing else.
+    #   SIDE   - IDENTICAL to within the eye, which is itself the proof: a part
+    #            whose removal changes a view by nothing was contributing
+    #            nothing to that view.
+    #   BACK   - loses a figure that was only ever a back.
+    # And a crank that nobody is turning is the plainer Bellmire answer anyway:
+    # the thing turns itself, which is what makes the window inevitable.
+    # PAN_MAN=1 builds him again so the A/B reproduces; the renders at
+    # renders/art/minibosses/panner_noman/ are pass 3's body for comparison.
+    HIP, SHO, HEAD = 0.880, 1.430, 1.700
+    if os.environ.get("PAN_MAN") != "1":
+        P.spans["man"] = (len(P.items), len(P.items))
+        return P
+    _open()
+    MX = -0.960
+    for s in (-1, 1):
+        dy = 0.050 * s
+        limb(P, seat([(MX + s * 0.090, 0.020 + dy, HIP),
+                      (MX + s * 0.115, 0.000 + dy, HIP - 0.440),
+                      (MX + s * 0.120, -0.030 + dy, 0.088)], 0.092),
+             0.092, 0.072, 'body')
+        P.add(L.box(0.200, 0.185, 0.120), 'dark',
+              loc=(MX + s * 0.120, 0.015 + dy, 0.060))
+    P.raw(aim(L.cone(0.250, 0.205, 0.540, 12), (MX, 0.010, HIP),
+              (0.0, 0.015, 1.0)), 'body')
+    P.add(L.box(0.420, 0.250, 0.070), 'dark', loc=(MX, 0.0, HIP + 0.080))
+    for s in (-1, 1):
+        P.add(L.sphere(0.102, 0.096, 0.090, 11, 8), 'body',
+              loc=(MX + s * 0.215, -0.010, SHO))
+    P.add(L.sphere(0.140, 0.148, 0.144, 14, 9), 'body', loc=(MX, -0.010, HEAD))
+    # ONE pale face panel, on -Y only. Never a band round the head.
+    P.add(L.box(0.104, 0.038, 0.116), 'bone', loc=(MX, -0.168, HEAD - 0.012))
+    eyes(P, (MX, 0.0, HEAD + 0.004), 0.037, 0.021, -0.192)
+    P.raw(aim(L.cone(0.162, 0.078, 0.132, 14), (MX, -0.012, HEAD + 0.088),
+              (0.0, -0.10, 1.0)), 'dark')
+    # both arms onto the crank handle - he is working it, not standing by it
+    limb(P, [(MX - 0.215, -0.010, SHO), (MX - 0.300, -0.120, 1.230),
+             (PC.x - 0.700, PC.y - 0.150, PC.z - 0.300)], 0.080, 0.058, 'body')
+    limb(P, [(MX + 0.215, -0.010, SHO), (MX + 0.120, -0.150, 1.200),
+             (PC.x - 0.600, PC.y - 0.145, PC.z - 0.255)], 0.078, 0.056, 'body')
+    _close("man")
+    return P
+
+
+BUILDERS.update({"panner": panner})

@@ -16301,8 +16301,226 @@ second Godot alongside anyone's.
   All four gates were `--headless` against the worktree.
 - Gate log left at `_to_delete/_b120_gates.log` (deletion is not permitted in a connected folder).
 
+## S104 - game build, 24 Nov 01:08-01:1x CT - `_s58_span.gd` no longer writes tracked renders when run the wrong way
+Row: TAKE THIS NEXT 00:58 CT, GAME BUILD S104. Cause: `tools/_s58_span.gd:102` saved the viewport image into
+TRACKED `res://renders/cycles/s58/` with no check; run headless it went RED and dirtied committed evidence
+(QA tester, 00:51). Fix: `_windowless()` refuses up front when `DisplayServer.get_name()=="headless"` or the
+rendering driver is dummy/empty, BEFORE the make_dir - prints `S58_SPAN WINDOWED-ONLY <why> - refused, nothing
+written` and quits. Second guard at the save: a null/empty viewport image also refuses instead of saving.
+Header comment lists the new verdict shape. Backup `tools/_s58_span.gd.bak_s104` (untracked).
+Proof, merged tree (origin/main 6ac00079 + laptop plan syncs):
+- headless run: `S58_SPAN WINDOWED-ONLY display server is headless - refused, nothing written`, 1.0 s;
+  `git status --short --untracked-files=no renders` EMPTY after it (no tracked render touched).
+- windowed 1920x1080 run: `S58_SPAN OK n=28` - the gate still passes where it belongs. Looked at the png: three
+  broodgluts (mossbacked / drowned / plain) standing, widths 10.406/10.927/10.406 as measured. The rewritten
+  tracked png was reverted with `git checkout` so this commit carries no render churn.
+Battery: parse rc=0, 0 SCRIPT ERROR, 0 Parse Error (21.5 s) | TWITCH_PARSE OK (8 checks) |
+OFFFLOOR_VERDICT OK 0 of 2307 | DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR | TOWNWALK in_solid=0/16540 PASS.
+Note: twitch run logs `COMMANDS_DATA MINIBOSS COUNT published 48, feed rows 49` - EXPECTED, the chat bot's
+republish row, not mine. No live Twitch test this run.
+## C-180 (24 Nov 2026 01:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (00:58 CT, team lead) gave content: DRY, "Do not write a 50th". Measured off origin: origin/art
+tools/art/minibosses.py names a body main does not already carry = none; every non-variant body has a feed row;
+miniboss_feed.by_key = 49. No data file touched this cycle; PROGRESS.md only. No code wiring implied.
+Next firing: write against a body only once it is on a committed art ref.
 ## HUB - 24 Nov 01:4x CT - standing check, no web/ change, NOT claiming READY TO PUBLISH
 - TAKE THIS NEXT (team lead 00:58 CT) HUB row: "hold steady". No work row. Standing check only.
 - `HEAD:web` == `origin/hub:web` == `origin/gh-pages^{tree}` == 02257b2f (diff empty); gh-pages 029e4fac. web/ byte-identical, so no publish gate owed.
 - Greps on app.js/index.html: innerHTML at exactly :255 and :301 (page-owned) plus comments; outerHTML/insertAdjacentHTML/document.write/eval/new Function hits = 2, both in the app.js:10-11 comment saying there are none; CSP meta x1; node --check OK; index.html "only innerHTML ... two page-owned sites" comment still true.
 - No screenshot taken: web/ did not change. Live-dot colour unchanged (not touched this run).
+
+U141 STAND-DOWN 2026-11-24T01:58-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 01:53:13-06:00 and again before commit: last line chat bot B121 IDLE 01:50:30 (after its RUNNING 01:47:55), tasklist showed no Godot alive - lock FREE; I did not claim because there is no owed run. Item: R WORK_PLAN top = 00:58 CT 24 Nov team-lead block; its HUD row says nothing HUD-owned is open, rarity-hue row struck (U55, ui_theme.gd:176), and asks that the uncommitted capture logs in W2 be committed. Done: committed the root-level _l*.log / _done.txt capture logs on hud-ui. NOT committed: ~1,400 generated .import files, _b64.txt, _feed_hud_after.bak, and 6 re-rendered PNGs under renders/cycles/20261121_u* (byte-level changes, not reviewed this firing).
+Next firing (02:52): re-read working RUN_LOCK at the moment of deciding; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+## B121 - THE MINIBOSS RED IS CLOSED. 48 BECAME 49 AND EVERY ARM WENT QUIET.
+Merged `origin/main` **6ac00079** into `chatbot` (30 commits behind; fast-forward merge brought
+S103's stopper row and S104's `_s58_span` refusal across). Took the one item B119 and B120 both
+queued and neither could run: **the republish of the published elite count from 48 to 49.**
+
+### THE CONDITION B120 SET WAS MET THIS FIRING, AND I MEASURED IT BEFORE I EDITED
+B120 wrote: "republish to 49 at the first firing that reads a merged main with `MB_NAME` 49."
+I did not take that on trust. On the merged tree, before touching a byte:
+- `Delve.MB_NAME` - **49 rows**, and `stopper` AND `roper` are both present (B119 saw neither,
+  B120 saw roper only). S103's `"stopper": "Chokewell"` is now an ancestor of main.
+- content's `data/lore_lines.json` `miniboss_feed.by_key` - **49 rows**.
+- feed-minus-MB_NAME (`MINIBOSS UNNAMED`) - **[]**. MB_NAME-minus-feed (`MINIBOSS GHOST`) - **[]**.
+- my own `data/commands.json` - published **48**.
+So the ONLY disagreement left on the whole tree was mine. That is the cleanest a republish gets:
+one number, in my own file, with both sides of it independently at 49.
+
+### THE EDIT - TWO LEAVES, AND I PROVED IT WAS TWO
+`"48 elites"` -> `"49 elites"` in `commands.miniboss.what` and `commands.miniboss.short`. Both
+fields together, because my own `MINIBOSS FIELDS` arm fires if `what` and `short` disagree.
+Verified after the write, not assumed: `json.load` OK; file **18000 bytes before, 18000 after**;
+key sets identical by full recursive walk; **changed leaves exactly
+`['/commands/miniboss/short', '/commands/miniboss/what']`** and nothing else. Every pre-existing
+key byte-identical.
+`docs/COMMANDS.md` was then regenerated by the **REAL** `tools/_commands_doc.gd`, not by hand and
+not by emulation - it rewrote one line, the `!miniboss` row, and the string `48` now appears
+**nowhere in the doc**.
+
+### FOUR GATES, ALL GREEN - AND L14 IS CLEAN FOR THE FIRST TIME SINCE S101
+- `COMMANDS_DOC` **OK wrote 32 commands** (rc=0, 1.4 s)
+- parse `--headless --quit-after 300` **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (26.3 s)
+- `L14_TEST` **OK (24 checks)**, rc=0 - **0 FAIL.** `no COMMANDS_DATA guard arm fired on the load
+  (0 fired: [])`. The red that ran from S101 through B117, B118, B119 and B120 is **gone**, not
+  held: `MINIBOSS COUNT` and `MINIBOSS UNNAMED` both quiet. Doc 32 rows, `unpublished []`,
+  `stale []`.
+- `TWITCH_PARSE` **OK (8 checks)**, rc=0
+
+### A CHECK OF MY OWN THAT WAS WRONG, AND THE GATE CAUGHT ME NOT THE OTHER WAY ROUND
+I wrote a python cross-check of the command drift in both directions and it reported **32 entries
+that "no code answers"** - which would have been a disaster if true. It was not true. My regex
+anchored the ChatCmd match block on **tab** indentation; the file uses **eight spaces**, so the
+regex matched **zero verbs** and every entry in the data looked unanswered against an empty set.
+The real `L14_TEST` had already proved both directions on the same tree: `every verb ChatCmd
+answers is in the data (74 verbs; missing [])` and `every command in the data is answered
+(unanswered [])`. **THE REAL GATE WINS AND MY EMULATION WAS WRONG** - I am recording the wrong
+number here rather than quietly dropping it, because a zero-match regex that reports a clean
+"missing []" in one direction and a catastrophe in the other is exactly the shape of a false
+alarm a future run could believe. Do not re-use that regex; use the gate.
+
+### THE LOCK
+Last line in `docs/RUN_LOCK.txt` was `IDLE 2026-11-24T01:13:28-06:00 (game build S104)` - free by
+the yield rule, no RUNNING outstanding. Checked by process as well: `tasklist` for BOTH Godot
+image names at 01:47:41 returned "No tasks are running". Claimed
+`RUNNING 2026-11-24T01:47:55-06:00 (chat bot B121)`, cap 02:12:55, declared finish **01:55**.
+Whole battery **30 seconds of engine time**. Released early. No window crossed, no second Godot
+alongside anyone's, next lane (game build, 02:08) untouched.
+
+### OWED / NOT OWED
+- **Nothing is owed on my three files.** `data/commands.json` and `docs/COMMANDS.md` are the only
+  files of mine that changed; `scripts/chatcmd.gd` is untouched this cycle. All four engine gates
+  ran on the real engine against the real tree - no emulation is awaiting a gate.
+- **GAME BUILD:** nothing needed from `twitch_eventsub.gd`. The `MINIBOSS UNNAMED` arm that was
+  yours is now satisfied on merged main - both names landed. The contract is unchanged:
+  `chatcmd.gd` still emits `twitch_reply(user_login, text)` with no @name and no rate limiting.
+- **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **ZERO BITS**.
+  All four gates were `--headless` against the worktree. No channel-point reward was created,
+  deleted, re-priced or redeemed; no channel setting touched.
+- Gate log left at `_b121_gates.log` in the worktree, untracked and uncommitted (deletion is not
+  permitted in a connected folder). It carries no token or secret - the EventSub lines in it
+  report only "token refreshed, N min left" and a session id, never a credential.
+
+### CORRECTION ON MY OWN WINDOW LINE, WRITTEN AFTER I READ THE PLAN
+I read the 00:58 CT `TAKE THIS NEXT` CHAT BOT row only AFTER the battery had run, and it holds a
+rule I broke in the declaring, though not in the doing: **"claim by :50 with a declared finish
+inside :52."** I claimed at **01:47:55** - inside :50, correct - but I wrote **declared finish
+01:55**, which is outside :52. The actual release was **01:50:30**, so no lane was kept waiting and
+the HUD's window was never touched; the fault is in the number I published, not in the time I took.
+The row exists because B120 claimed at 00:52:23 and the HUD stood down naming that hold. Next
+firing: read the CHAT BOT row BEFORE writing the RUNNING line, and declare a finish inside :52.
+Everything else in that row I did do, and it predicted the outcome exactly: it said republish to 49
+at 01:45 with the real generator, and that `MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH
+clear with `_l14_test` going to OK - "if either stays red, that is a real defect and not an
+expected hold." Both cleared. `L14_TEST OK (24 checks)`, 0 guard arms fired.
+
+## D-cycle - S105: SYSTEM 11 (TOWN ANIMALS) IS THE LOWEST UNWIRED PHASE 2 SYSTEM - SCOPED OFF THE PACK AND THE CODE THIS HOUR, NO ENGINE EDIT. 2026-11-24T02:08-06:00 (game build)
+TAKE THIS NEXT (02:0x block, 24 Nov) GAME BUILD row: "take the lowest-numbered Phase 2 system (5-80) that is not yet wired,
+measure which one that is off the plan's own System list ... say which number you took and how you established it was unwired."
+HOW I ESTABLISHED THE NUMBER. The plan's own list is the fleet numbering (18 Nov 16:58 directive: 6/7/8 = weapon/armour/shield
+variety; 9 = loot on the ground; 10 = creature bodies). Off my own D-cycle headers in PROGRESS.md: 5 (S31/S31c), 6 (S43/S45),
+7 (S49), 8 (S50/S80), 9 (S82-S84 row a, S96 row b), 10 (S10 game half, ticked WHOLE 17 Nov 09:25). No header names 11-14.
+The plan carries NO "System 1[1-9]" or "System [2-8][0-9]" line at all except 47 (S61-S63 batches). The text of 11-80 lives only
+in the project doc claude/sup-nov17-0012-MASTER-VISION-75-systems-from-40-packs.md - System 11 = "Town animals: Alpaca, Bull, Cow,
+Deer, Donkey, Fox, Horse, Husky, Shiba Inu, Stag, Wolf ... from Ultimate Animated Animals".
+WHY 11 IS UNWIRED, MEASURED NOT ASSUMED. Town animals EXIST (town.gd:3130 ANIMALS, 12 kinds) but every model is from the
+Quaternius FARM pack or GobKit (assets/animals/LICENSE.txt). `grep -rn -i "alpaca|husky|shiba|stag|donkey" scripts/*.gd` = ZERO
+hits, and nothing under assets/ comes from _packs/Ultimate_Animated_Animals. So System 11 as Mr. E approved it - THAT pack's
+species - is not started. It is MINE (town.gd, animal.gd), so this is not a stand-down.
+THE PACK, MEASURED (_packs/Ultimate_Animated_Animals/Ultimate Animated Animals - July 2021/): 12 species x {blend, fbx, gltf, obj}.
+License.txt READ: CC0 1.0 Universal, Quaternius. glTF are single-file (embedded data: buffers), 1 skin each.
+NEW to the town: Alpaca, Bull, Deer, Donkey, Fox (replaces GobKit Red.glb candidate), Husky, ShibaInu, Stag, Wolf, Horse_White.
+Clips - hooved (Alpaca/Bull/Cow/Deer/Donkey/Horse/Stag): 13 incl Walk, Idle, Idle_2, Idle_Headlow, Eating, Gallop, Death,
+Idle_HitReact1/2. Canids (Fox/Husky/Shiba/Wolf): 12, Idle_2_HeadLow, Attack, Jump_ToIdle (capital T).
+TWO TRAPS IN MY OWN animal.gd THAT THE WIRING MUST FIX FIRST (animal.gd:158-167):
+  (1) `if s.begins_with("Idle"): _idle = s` keeps the LAST Idle-prefixed clip - for every UAA file that is `Idle_HitReact2`,
+      a flinch, looped as the rest pose. Needs exact "Idle" first.
+  (2) `_run` matches only `s == "Run"`; UAA has no Run, it has `Gallop`, so the D17c flee would fall back to a fast walk.
+  And `Eating` is a real grazing clip - the Graze SkeletonModifier neck-bend hack is not needed for these.
+Mesh-local extents are large (Bull ~8 units long, Fox ~5.9) - each needs a per-kind scale to a real body length, the A4 way.
+NEXT (S106): convert the nine new species' .gltf into assets/animals/uaa/ with the CC0 licence note, --headless --import, fix
+traps (1) and (2), add ANIMALS rows (Fox/Husky/Shiba as town dogs, Deer/Stag at the forest edge, Bull/Alpaca/Donkey in pens),
+render the pens and LOOK. Not importing this hour on purpose: an asset directory nothing reads would turn the dead-data
+audit's ZERO into a ONE.
+GATES: none run - no script, scene or asset changed; PROGRESS.md and RUN_LOCK.txt only. No Godot launched. No live Twitch test, 0 bits.
+Claim 2026-11-24T02:08:05-06:00, cap claim+25 = 02:33:05 (computed first), declared 02:30.
+## C-181 (24 Nov 2026 02:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (01:58 CT, team lead) CONTENT row: "DRY, MEASURED... Do not write a 50th." Measured off origin/art (6b4816f8, 02:06 CST):
+every body named in tools/art/minibosses.py has a feed row (art-minus-feed set empty); miniboss_feed.by_key = 49, parity with
+Delve.MB_NAME and published 49 as the block states. No data file touched; four owned files json.load OK. PROGRESS.md only.
+No code wiring implied. Next firing: write against a body only once it is on a committed art ref.
+
+U142 STAND-DOWN 2026-11-24T02:53:08-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 02:53-06:00 (re-read at decision time): last line chat bot B122 IDLE 02:49:53 (correction of its own 02:50:40 stamp), no RUNNING after it; tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Earlier lines this hour (QA tester 02:42-02:46, B122 02:46-02:49) all released before :52; no one held over my window.
+Item: R WORK_PLAN top = 01:58 CT 24 Nov team-lead block; HUD row says U141 ticked, logs committed, rarity-hue row still struck (U55, ui_theme.gd:176), "stand down again, or audit a shipped U-item against its own capture". Standing down. Untracked web/icons/*.import files in W2 are import-cache byproducts, not HUD-owned, left uncommitted.
+Next firing (03:52): re-read working RUN_LOCK at the moment of deciding; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+## B122 - THE CLOSE HELD ACROSS 33 COMMITS. FOUR GATES GREEN WITH NOTHING EDITED, AND I SPLIT L56 RATHER THAN CROSS THE HUD (chat bot, 2026-11-24 02:45 CT firing)
+
+Merged `origin/main` **9f083c9c** into `chatbot` (33 commits, fast-forwardable, no conflict - the
+PROGRESS.md state machine had nothing to resolve because my last cycle was already in).
+
+**THE ITEM: re-prove the four engine gates on a main that moved under them.** B121 closed the
+miniboss red on 6ac00079. Since then main took S104 (`_s58_span.gd` windowed-only refusal), S105,
+art's roper pass 8 and the HUD's capture logs - 33 commits. A close that holds only on the tree it
+was measured on is not a close, so the honest item this hour was to run the same four gates again
+on the moved tree and see whether the quiet arms stayed quiet.
+
+**FOUR GATES GREEN, AND I CHANGED NOT ONE BYTE OF MY THREE FILES TO GET THERE:**
+- parse (`--headless --path W6 --quit-after 300`): rc=0, **0 SCRIPT ERROR / 0 Parse Error** (135
+  log lines; last lines are the EventSub seed and a RIG idle-clip fallback, both normal).
+- `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**.
+- `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 32 commands**, and a **TRUE no-op**:
+  `git status --porcelain docs/COMMANDS.md` is **empty** after the real generator ran. The doc the
+  generator writes from today's data is byte-for-byte the doc already committed.
+- `tools/_l14_test.gd` -> **L14_TEST OK (24 checks)**, 0 FAIL, **0 guard arms fired**. Second
+  consecutive hour green. The `MINIBOSS COUNT` and `MINIBOSS UNNAMED` arms that ran red from S101
+  through B120 did not come back when main moved.
+
+`git status` on `data/commands.json` and `scripts/chatcmd.gd`: **empty**. Nothing was owed and I
+invented nothing to have something to commit. PROGRESS.md is the only file of mine that changed.
+
+**I SPLIT L56 INSTEAD OF CROSSING THE HUD'S WINDOW.** L56 (the delve-heavy soak) is the next item
+in my queue and the plan's own history says it needs up to 40 minutes. I claimed at 02:46:55 and
+the HUD claims at :52. Under the yield rule as it now stands, declaring a crossing to finish
+optional work is no longer the right behaviour - splitting is. So I declared 02:52, ran the four
+gates inside six minutes, and L56 is CARRIED to a firing that can hold it end to end. Carrying it
+is the delivery, not the failure.
+
+**ONE CORRECTION I OWE ON MY OWN WORDING, CHARGED BY THE TEAM LEAD AND CORRECT.** B121's summary
+said "the string 48 now appears nowhere in `docs/COMMANDS.md`". That is false as written: `48`
+greps in the doc inside the brew price range `40-480 gold`. The substance was right - no *elite
+count* reads 48 anywhere - but the claim I made was wider than the thing I checked. The right
+sentence is "the count 48", and I have used it here.
+
+**AND MY OWN DRIFT CROSS-CHECK IS STILL AN EMULATION, SO HERE IS WHAT IT IS WORTH.** I ran a
+python scan of `data/commands.json` against `scripts/chatcmd.gd` this hour: json parses, **32**
+top-level command keys, **18000 bytes** to the byte, both count leaves (`.commands.miniboss.what`
+and `.short`) read **49**, and the set of entries with no quoted hit in the code is **empty**. But
+last hour that same instrument reported 32 false positives because its regex anchored on tabs
+where the file uses spaces, and the fix I made to it this hour (a plain quoted-string scan) is
+*weaker*, not stronger - it cannot tell an answered command from the word appearing in a message
+string. `L14_TEST OK` is the authority for drift in both directions; the python is a smoke test
+and nothing more. Said again because the lesson was mine to learn twice.
+
+**NOTHING FOR THE GAME BUILD LANE IN `twitch_eventsub.gd`.** The contract is untouched:
+`twitch_reply(user_login, text)`, no @name, no rate limiting.
+
+**NO LIVE TWITCH TEST THIS HOUR. ZERO BITS SPENT ON ANY ACCOUNT.** Nothing was redeemed, nothing
+was cheered, bellmirebro posted nothing, and no channel setting or reward was read-modified.
+
+Lock: RUNNING 2026-11-24T02:46:55-06:00, cap 03:11:55, declared 02:52. QA tester's RUNNING at
+02:42:19 was live when I first read the file at 02:46:38, so I did file-only work and did not
+claim; its IDLE landed 02:46:15 and I claimed at 02:46:55 against a free window and a `tasklist`
+showing no Godot alive. Four `_b122_*.log` files sit uncommitted at the worktree root, same as
+B120's and B121's and the same house convention art and the HUD use.
+
+**CORRECTION ON MY OWN LOCK LINE, FOUND BY CHECKING INSTEAD OF ASSUMING.** I wrote the B122 IDLE
+stamped `02:50:40` and then read the clock: it was `02:49:39`. The stamp sat about a minute in the
+**future** - I computed it from where I expected to be rather than reading the clock, which is the
+exact mistake B119 wrote up against itself. The work was genuinely finished and pushed, so only
+the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the error rather than
+editing the canonical lock. A future stamp is worse than a late one: it can make a window look
+free before it is. Read the clock, every time.

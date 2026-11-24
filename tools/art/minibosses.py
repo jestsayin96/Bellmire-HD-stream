@@ -17303,7 +17303,61 @@ OVERRIDE.update({
 
 
 def roper():
-    """IT TWISTS YOU TOGETHER. The 49th body. PASS 7 - THE APEX IS AN OBJECT.
+    """IT TWISTS YOU TOGETHER. The 49th body. PASS 8 - THE LOWER HALF.
+
+    *** PASS 8, 24 NOV 01:3x-01:5x CT. THE TEAM LEAD TICKED THE DRUM AND THEN
+    *** NAMED THE HALF UNDER IT: head-on, three pale cords splay to three
+    *** small dark feet and that lower silhouette is an EASEL. My own pass 7
+    *** faults (2) and (4) said it first. ONE VARIABLE: THE STRANDS LAY UP.
+    An easel is not a colour or a thickness - pass 5b already made the feet
+    dark iron and the read survived it. It is two properties of the
+    SILHOUETTE: three runs on every scanline, and a spread that grows on
+    every scanline. Cords being laid into a rope have neither, because they
+    wind round one another, and legs that crossed would fall over. So each
+    strand now rotates about the bundle axis by 180 deg across its run with a
+    sin(pi t) envelope - BOTH ENDS UNTOUCHED, so it still leaves its own
+    groove and still lands on its own peg, and the pegs, the bounds and the
+    corridor span are the shipped ones.
+
+    THE SWEEP, THREE ARMS, FRONT VIEW AT HERO SCALE, ALL MEASURED THROUGH THE
+    SAME LOCKED CAMERA (`_roper_apex.py`, which grew the `easel` block for
+    this pass):
+      LAY 0.000 (shipped p7b)  spread_monotone 0.9293  runs3 0.7889
+      LAY 0.190                spread_monotone 0.8325  runs3 0.7647
+      LAY 0.270  <- SHIPPED    spread_monotone 0.7488  runs3 0.5343
+      LAY 0.400  rejected BY EYE, not by a number: the cords curl like vines
+                 and one loops across the drum. The numbers liked it.
+    THE DRUM IS NOT PAID FOR THIS: `top` owns 4994 -> 4943 px front and
+    apex_share 0.4639 -> 0.4409, a 1% and a 5% move, and every point of this
+    change is below z 1.04. That was the standing condition on the item and it
+    is measured, not asserted.
+
+    THE INSTRUMENT'S OWN FAULT, FOUND IN ITS FIRST RUN AND NOT DRESSED UP.
+    `cross_bands` was meant to count crossings and IT CANNOT: a strand passing
+    behind the man is split into two runs by the occlusion, so the shipped p7b
+    - which has no crossing anywhere - scored 2. It is left in the report
+    because it is honest to show it, but nothing in this pass rests on it. The
+    numbers that earn their place are `spread_monotone_frac` and `runs3_frac`,
+    both of which fall monotonically with the lay.
+
+    WHAT I STILL SEE IN THE SHIPPED hero_front.png AND WILL NOT DRESS UP:
+      (1) the easel is gone and what replaced it is a LYRE - two cords bowing
+          out and back in to their feet. It reads as something flexible, not
+          yet unmistakably as rope being laid.
+      (2) the middle strand still crosses the torso and the right leg, and the
+          cost arm moved the wrong way: strand pixels inside the man's own
+          silhouette go 2834 -> 3311, up 17%. Curves, not bars, so it is not
+          the Changer shape Mr. E struck - but it is in that direction and the
+          next pass must not spend any more of it.
+      (3) the cords now arrive at the floor pins more vertically, so the pins
+          read a little more like the cord simply stopping than like an anchor.
+      (4) SIDE VIEW, NEW: the bundle now closes into a lens, and a lens can
+          read as ONE looped rope rather than three strands. It is better than
+          the three struts it replaces and it is a new thing to watch.
+      (5) carried from pass 7 and untouched here: the former is a slab edge-on
+          in the side view, and the belt ring is still hidden head-on.
+
+    ---- PASS 7 - THE APEX IS AN OBJECT, unchanged below ----
 
     *** PASS 7, 24 NOV 00:3x-01:2x CT. THE TEAM LEAD WOULD NOT TICK "THE
     *** TRIPOD IS GONE" AND HE WAS RIGHT NOT TO. He opened the three renders,
@@ -17688,9 +17742,68 @@ def roper():
     _open()
     SAG = float(os.environ.get("ROPER_SAG", "-0.085"))
     TWIST = float(os.environ.get("ROPER_TWIST", "0.105"))
+    # *** PASS 8 - THE LOWER HALF. ONE VARIABLE: THE THREE STRANDS LAY UP. ***
+    # The team lead ticked the drum and then named the half below it: head-on,
+    # three pale cords splay from the former to three small dark feet and that
+    # lower silhouette is an EASEL. My own faults (2) and (4) said the same
+    # thing first. THE DEFINITION OF THE SHAPE IS WHAT TELLS YOU THE FIX. An
+    # easel is three lines that LEAVE A POINT AND NEVER MEET AGAIN: the run
+    # count across any scanline is three, and the spread grows on every
+    # scanline from apex to floor. Nothing about colour, thickness or peg size
+    # touches either property - pass 5b already made the feet dark and the
+    # read survived it.
+    #
+    # WHAT A ROPEWALK HAS AND A TRIPOD LEG CANNOT: THE STRANDS WIND ROUND ONE
+    # ANOTHER ON THE WAY TO THE TOP. Three cords that CROSS in projection are
+    # not three legs, because legs that crossed would fall over. So the
+    # variable is a LAY: each strand is displaced sideways about the bundle's
+    # own axis by an angle that advances along the run, with a sin(pi t)
+    # envelope so BOTH ENDS ARE UNTOUCHED - it still leaves its own groove and
+    # still lands on its own peg.
+    #
+    # THREE THINGS IT DELIBERATELY DOES NOT COST, and each is measured rather
+    # than asserted:
+    #   THE DRUM. Every point of this change is below z 1.04 and no endpoint
+    #   moves, so the `top` span's owned pixels and `apex_share` must come out
+    #   of pass 8 unchanged. If they move, the lay has eaten the thing the
+    #   last pass won and the lay is wrong, not the drum.
+    #   THE FOOTPRINT. The pegs do not move, so the bounds and the corridor
+    #   span the gate measures are the shipped ones.
+    #   THE FLARE. Pass 4's note stands - pulling the pegs in puts pale bars
+    #   down the man's own body, which is the shape Mr. E stripped off the
+    #   Changer. The lay bends the middle of the run and leaves the splay.
+    # The cost it CAN have is the same one: a strand swung inboard at
+    # mid-span lying across the man. That is `strand_on_body_px` in the probe
+    # and it is reported whether it moved or not.
+    LAY = float(os.environ.get("ROPER_LAY", "0.270"))
+    LAYTURN = math.radians(float(os.environ.get("ROPER_LAYTURN", "180.0")))
+    # The bundle axis: the former's own centre down to the pegs' centroid. U
+    # is world x (the axis has no x component, so x is already perpendicular
+    # to it) and V is the remaining perpendicular - which points back and up,
+    # i.e. mostly INTO the front camera. That is deliberate: a lay whose
+    # displacement were all in V would be invisible head-on, which is pass 4's
+    # sag all over again. Half of every turn lands in U, where the front
+    # camera can see it.
+    _A0 = Vector((0.0, -0.780, TOP_Z))
+    _AX = (Vector((0.0, -1.800, 0.030)) - _A0).normalized()
+    _U = Vector((1.0, 0.0, 0.0))
+    _V = _AX.cross(_U).normalized()
+    # 9 segments with the lay off, so the control arm is the SHIPPED mesh to
+    # the vertex and not a re-tessellation of it; 15 with the lay on, because
+    # a helix through 9 points is a zigzag.
+    _NSEG = 9 if LAY == 0.0 else 15
     for g, p in zip(GROOVE, PEG):
-        limb(P, arc(Vector(g), Vector(p), SAG, 9, side=TWIST),
-             0.034, 0.030, 'bone', ring=7)
+        _pts = arc(Vector(g), Vector(p), SAG, _NSEG, side=TWIST)
+        if LAY:
+            _d0 = Vector(g) - _A0
+            _th0 = math.atan2(_d0.dot(_V), _d0.dot(_U))
+            for _k in range(len(_pts)):
+                _t = _k / (len(_pts) - 1.0)
+                _th = _th0 + LAYTURN * _t
+                _pts[_k] = _pts[_k] + (_U * math.cos(_th) +
+                                       _V * math.sin(_th)) * \
+                    (LAY * math.sin(math.pi * _t))
+        limb(P, _pts, 0.034, 0.030, 'bone', ring=7)
         # PASS 5, SECOND VARIABLE AND MEASURED ON ITS OWN PASS: the floor
         # anchors were PALE and 0.28 m tall, which is a tripod's shoe in both
         # colour and proportion - the same pale family as the strands, so the
@@ -17757,3 +17870,321 @@ def roper():
 
 
 BUILDERS.update({"roper": roper})
+
+
+# =============================================================== 50 THE ALMONER
+# THE IDEA IS NOT A RE-SKIN, AND I ESTABLISHED THAT BY PARSING THIS FILE, NOT BY
+# REMEMBERING IT. I pulled all 49 `idea` strings out of CANON with a regex this
+# run (49 parsed, 14 themes, shrine 3 / confection 2 the thinnest) and read every
+# one. The three near misses, written down because a reader will think of them:
+#
+#   THE TALLYMAN takes gear OFF the party, wears it and withdraws - a SUBTRACTION
+#     and a disengage. The Almoner subtracts nothing and never leaves; the same
+#     kit is still in the room and still in a delver's hands, in the WRONG hands.
+#   THE STRICKLER scrapes your best hero DOWN to the level - it flattens the
+#     party's ceiling. The Almoner does not change the party's total at all. It
+#     changes WHO HAS WHAT, which is a different thing: the sum is untouched and
+#     every role is wrong.
+#   THE CHANGER trades PLACES - position. The Almoner trades the thing in the
+#     hand, and position is untouched.
+#
+# AND THE MECHANIC IS SAID IN A TERM THE ENGINE ALREADY HAS, which is the
+# Blower's lesson applied in advance instead of re-learned. I read the engine
+# before I wrote the idea: `delve.gd:_hero_damage` gets its dice from
+# `roster.weapon_dice(h)` and the only thing it keys on is `h["class"]` - there
+# is NO per-hero equipped-item dictionary anywhere in the delve. So the honest
+# version of "it deals your kit out again" is A PERMUTATION OF THE CLASS THE
+# DICE ARE LOOKED UP UNDER while the body lives, and nothing else. I had a
+# second, prettier half - "your heavy armour ends up on the archer" - and I am
+# DROPPING IT AND SAYING SO, because per-hero equipment is not a term in this
+# engine and inventing one for a piece of art is how a wiring note becomes an
+# argument.
+CANON.update({
+    "almoner": ("Dolehand", 2.52, (0.74, 0.70, 0.58), (1.00, 0.92, 0.66),
+                "shrine", "IT DEALS YOUR KIT OUT AGAIN - it does not wound "
+                "anybody, it takes nothing out of the room and it does not "
+                "touch the floor. It holds the dole dish out and every delver "
+                "puts in, and then it gives back - to the wrong hand. While it "
+                "stands, each hero swings on ANOTHER hero's weapon dice: the "
+                "knight is working a healer's staff, the rogue is hauling a "
+                "greatsword it cannot lift. The party's total is UNCHANGED, "
+                "which is the whole point - nothing is weaker, everything is "
+                "in the wrong place, and the order you drilled is useless until "
+                "the dish goes down. THE THING TO READ IS THE PAIR IT CARRIES: "
+                "a dish held out with three pieces of kit lying in it, and a "
+                "sack at its hip with two more already dealt back out of the "
+                "mouth. In and out, on one body.",
+                0.35, "Something ahead is holding a dish out."),
+})
+ORDER = ORDER + ["almoner"]
+
+# PER-SLOT MATERIALS - THE TITHER'S RULE: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON. Here that is THE KIT AND ONLY THE KIT - the three
+# pieces lying in the dish and the two handles out of the sack mouth. The dish
+# itself, the sack, the straps, the hood and the boots are dark, and the man is
+# undyed wool. So the pale mass in the frame is exactly the five objects the
+# mechanic moves and nothing else; the dish is deliberately NOT pale even though
+# it is the mechanic's instrument, because pale-kit-in-a-pale-pan is one pale
+# blob and the read this body stakes itself on is KIT, IN A CONTAINER.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"almoner"}
+
+OVERRIDE.update({
+    "almoner": {
+        'body': ((0.355, 0.330, 0.268), 0.86, 0.02),   # undyed wool, not metal
+        'dark': ((0.068, 0.064, 0.058), 0.76, 0.08),   # iron pan, sack, straps
+        'bone': ((0.840, 0.800, 0.640), 0.42, 0.34),   # struck metal: THE KIT
+        # Eyes only, at y -0.218 - forward of the head's own front face and
+        # 0.21 m forward of the shoulder line. NOTHING emissive is aft of the
+        # shoulders; the back-lamp guard must find nothing here.
+        'glow': ((1.000, 0.900, 0.620), 0.85),
+    },
+})
+
+
+def almoner():
+    """IT DEALS YOUR KIT OUT AGAIN. The 50th body. PASS 1.
+
+    TWO QUESTIONS A VIEWER ASKS FROM THE DOORWAY, ANSWERED BY GEOMETRY:
+
+      WHAT IS IT DOING?   A wide dole dish held out level-ish on the left
+                          forearm with THREE pieces of kit lying in it - a
+                          sword, an axe, a flask. That is the "put in" half and
+                          it is the largest object on the body.
+      HAS IT STARTED?     A sack at the right hip, mouth gathered and tipped
+                          toward the camera, with TWO handles already sticking
+                          out of it at different angles. That is the "given
+                          back" half, and it is the before/after a static body
+                          cannot animate through: three still in the dish, two
+                          already dealt.
+
+    THE DISH IS THE ONE THING THAT COULD GO WRONG AND I DESIGNED FOR BOTH WAYS
+    IT COULD, BEFORE RENDERING:
+
+      (a) IT COULD READ AS A SHIELD - and the Paviser is a shield on a hinge,
+          four bodies away in the same register. A shield is a disc held
+          VERTICAL with its face to you. So this one is held with its mouth
+          UP: it is a pan, not a face.
+      (b) BUT A PAN HELD DEAD LEVEL IS INVISIBLE TO THE FRONT CAMERA - an ortho
+          camera at mid-height sees a horizontal disc edge-on, as a bar. That is
+          the Stackman's and the Drillmaster's measured fault (a mechanic aimed
+          along the camera axis foreshortens into nothing) and I am not shipping
+          it a third time.
+      So the dish is TIPPED 38 degrees out of horizontal toward -Y: the front
+      camera gets sin(38) = 0.616 of its diameter as apparent height, which is
+      an ellipse with things lying in it and cannot be a shield face; and the
+      side camera gets the full diameter edge-on as a tilted lip, which cannot
+      be a disc. Neither view gets the degenerate one.
+
+    AND IT IS HELD CLEAR OF THE BODY IN X AND IN -Y, which is the Sealer's
+    pass-3 lesson taken from his docstring rather than re-learned: his press was
+    unreadable while it shared pixels with his chest, and became a press the
+    moment it hung off his side in open air.
+
+    FACING IS BY CONSTRUCTION - the Beadle's measured fault designed out. The
+    front (-Y) carries the dish, the kit, the sack mouth, the two dealt handles
+    and ONE pale face panel; the back (+Y) carries the strap's return run and
+    the closed back of the sack, and nothing else. The pale band that wrapped
+    the Beadle's head and left that figure with no facing at all does not exist
+    here: the face is a panel on one side only.
+
+    Static: no `anims` entry.
+
+    ROOM-LOCKED IS NOT CLAIMED HERE. The widest extent is the dish rim in -X
+    against the dealt hilt in +X; minibossgen measures the real footprint
+    against floorgen's own corridor and lid and the report says the verdict. I
+    do not pre-judge that number.
+    """
+    P = Parts("almoner")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    HIP = 0.92
+    SHO = 1.52
+    HEAD = 1.80
+
+    # ------------------------------------------------ THE MAN: SQUARE AND SET
+    # An almoner doling out stands square - both hands are busy, one under the
+    # dish and one at the sack, so he cannot lean. That also keeps his stance
+    # different from the Dauber's one-forward-one-braced and the Drillmaster's
+    # lean. seat() lifts each limb by its own first segment so the literal 0.09
+    # at the ankle is honest and no raked leg floats.
+    _open()
+    for s in (-1, 1):
+        limb(P, seat([(s * 0.19, 0.02, HIP), (s * 0.23, 0.00, HIP - 0.46),
+                      (s * 0.24, -0.03, 0.090)], 0.104),
+             0.104, 0.082, 'body')
+        P.add(L.box(0.23, 0.38, 0.110), 'dark', loc=(s * 0.24, -0.06, 0.055))
+    P.raw(aim(L.cone(0.300, 0.250, 0.600, 12), (0.0, 0.01, HIP),
+              (0.0, 0.02, 1.0)), 'body')
+    P.add(L.box(0.500, 0.290, 0.080), 'dark', loc=(0.0, 0.00, HIP + 0.09))
+    for s in (-1, 1):
+        P.add(L.sphere(0.120, 0.112, 0.105, 11, 8), 'body',
+              loc=(s * 0.260, -0.010, SHO))
+    P.add(L.sphere(0.162, 0.170, 0.166, 14, 9), 'body', loc=(0.0, -0.010, HEAD))
+    # THE FACE: a flat pale panel at -Y ONLY, taller than it is wide so it reads
+    # as a face set back in a hood and not as a visor letterbox (the Sealer's
+    # pass-3 change D, copied deliberately).
+    P.add(L.box(0.118, 0.042, 0.132), 'bone', loc=(0.0, -0.190, HEAD - 0.015))
+    eyes(P, (0.0, 0.0, HEAD + 0.005), 0.042, 0.023, -0.218)
+    # a hood, dark, tipped slightly forward so the top of the head stays dark
+    # and the pale panel under it is the only bright thing up there.
+    P.raw(aim(L.cone(0.186, 0.088, 0.150, 14), (0.0, -0.012, HEAD + 0.100),
+              (0.0, -0.10, 1.0)), 'dark')
+    _close("man")
+
+    # ------------------------------------------- THE ARMS: BOTH ON THE MECHANIC
+    # The left forearm ends AT the dish centre and the right hand ends ON the
+    # sack neck, so neither prop floats: both ends sit on geometry. That is the
+    # Changer's and the Stopper's lesson applied in advance - without it this
+    # body is a man standing in front of two objects rather than one creature.
+    _open()
+    limb(P, [(-0.260, -0.010, SHO), (-0.520, -0.200, 1.270),
+             (-0.755, -0.325, 1.135)], 0.090, 0.068, 'body')
+    limb(P, [(0.260, -0.010, SHO), (0.390, -0.110, 1.290),
+             (0.450, -0.080, 1.090)], 0.088, 0.066, 'body')
+    _close("arms")
+
+    # -------------------------------------------------------------- THE DISH
+    # Built in its own local frame, mouth up local +Z, then tipped 38 deg about
+    # X (which sends local +Z to (0, -sin38, cos38)) and carried out to his
+    # left and forward. The kit rides the SAME transform, so the three pieces
+    # lie in the pan by construction and not by my arithmetic agreeing with
+    # itself in two places.
+    TILT = math.radians(38.0)
+    RX = Matrix.Rotation(TILT, 3, 'X')
+    # PASS 4, THE MEASURED FAULT OFF PASS 3's OWN front.png: the tray's
+    # inner end sat at local x -0.12 against a torso of radius 0.30, so the
+    # near rail ran BEHIND the gown and the thing read as a tray driven
+    # THROUGH the man. Derived, not dialled: half-length 0.46 + torso 0.30 +
+    # 0.02 clear = the carry point must be at least 0.78 outboard.
+    PC = Vector((-0.790, -0.345, 1.105))
+
+    def _dish(vf, slot):
+        vs, fs = vf
+        P.raw(([RX @ Vector(v) + PC for v in vs], fs), slot)
+
+    def _at(vf, loc):
+        vs, fs = vf
+        return ([Vector(v) + Vector(loc) for v in vs], fs)
+
+    _open()
+    # *** PASS 3, AND THIS IS THE CAUSE RATHER THAN THE SYMPTOM. ***
+    # Pass 1 shipped a shield. Pass 2 stood the kit up out of it, which DID put
+    # the pale half on screen - three objects instead of one stub - and the
+    # shield read SURVIVED IT, because only the axe crossed the rim and the
+    # sword lay flat across the disc face, where it read as a heraldic charge
+    # PAINTED ON a shield. Decorating a circle does not stop it being a circle.
+    # So the variable this pass is THE CONTAINER'S OUTLINE, not its contents:
+    # a shield is a DISC, so the dole vessel stops being one. It is now an
+    # oblong dole tray - floor, two end lips, two side rails, and a cleat
+    # underneath that sits on the forearm. A rectangle carried on one arm
+    # cannot be a shield in any view, it is plainer than a basin and more like
+    # what it is FOR (Mr. E's first rule), and a shallow tray tipped toward the
+    # camera shows its inside where a deep pan cannot.
+    # The tilt, the carry point, the arm and the kit's angles are UNTOUCHED.
+    _dish(_at(L.box(0.920, 0.440, 0.034), (0.0, 0.0, 0.017)), 'dark')
+    for _e in (-1, 1):
+        _dish(_at(L.box(0.034, 0.440, 0.100), (_e * 0.443, 0.0, 0.067)), 'dark')
+        _dish(_at(L.box(0.920, 0.030, 0.070), (0.0, _e * 0.205, 0.052)), 'dark')
+    _dish(_at(L.box(0.150, 0.300, 0.062), (0.0, 0.0, -0.045)), 'dark')
+    _close("dish")
+
+    # ------------------------------- THE KIT IN THE DISH: THE "PUT IN" HALF
+    #
+    # *** PASS 2, AND IT IS THE WHOLE RUN. I WROTE THREE PARAGRAPHS ABOUT NOT
+    # *** SHIPPING A SHIELD AND THEN SHIPPED ONE. ***
+    # Pass 1 laid all three pieces FLAT IN THE PAN at local z 0.07, under a rim
+    # whose top is at local z 0.14. I asserted "the kit lies in the pan by
+    # construction" and never asked the only question that matters: CAN THE
+    # CAMERA SEE INTO THE PAN? It cannot. The front camera is level and the pan
+    # is held at chest height, so it looks at the pan's OUTSIDE; the near rim
+    # occludes the whole heap. In front.png and three_quarter.png the entire
+    # pale half of this mechanic renders as ONE dark stub, and with nothing
+    # breaking its outline the pan is a plain dark circle on a left forearm -
+    # which is a SHIELD, and the Paviser is a shield, four bodies away in this
+    # same register. That is trap 5 in my own hands again: "it is in there" is
+    # a fact about the world and says nothing about what is visible.
+    # A 38 degree tilt cannot fix it either, and nor can 60: to show its inside
+    # to a level camera a pan must turn its mouth toward that camera, and a pan
+    # whose mouth faces the camera IS a disc face - the shield read comes back
+    # the moment the contents read. The two requirements fight, so the pan
+    # cannot carry this on its own.
+    # ONE VARIABLE, AND IT ANSWERS BOTH AT ONCE: THE KIT RIDES PROUD OF THE RIM.
+    # The three pieces now STAND UP out of the dish at three angles instead of
+    # lying in it - which is also what a dish piled with other people's gear
+    # actually looks like. The pale mass is then OUTSIDE the pan's silhouette
+    # and cannot be occluded by it, and the pan's outline is broken by three
+    # hafts, so it is a container with things in it and not a disc. The pan
+    # itself, its tilt, the arm and everything else are UNTOUCHED from pass 1.
+    _open()
+    # PASS 3, SECOND CHANGE AND NAMED AS ITS OWN RATHER THAN HIDDEN IN THE
+    # FIRST: pass 2's crossguard was a 4-segment cone laid flat and it rendered
+    # as a pale WEDGE lying on the tray - a UI arrow, not a guard. It is gone
+    # and the sword carries a plain bar instead. The three aim directions are
+    # written in WORLD terms and converted back into the tray's frame, because
+    # pass 2's were written in the tray's frame and the tilt then laid the
+    # sword nearly in the tray's own plane - a direction chosen in the frame
+    # the camera does not use is the same mistake as a clearance proved in the
+    # axis the camera throws away.
+    _dish(aim(L.cone(0.030, 0.011, 0.620, 4), (0.220, -0.060, 0.040),
+              (0.250, 0.278, 0.925)), 'bone')                     # blade
+    _dish(aim(L.cone(0.021, 0.019, 0.100, 8), (0.220, -0.060, 0.040),
+              (0.250, 0.278, 0.925)), 'dark')                     # grip
+    _dish(aim(L.cone(0.019, 0.019, 0.150, 6), (0.248, -0.029, 0.143),
+              (0.955, -0.295, 0.000)), 'bone')                    # the bar
+    _dish(aim(L.cone(0.023, 0.020, 0.560, 9), (-0.260, 0.000, 0.040),
+              (-0.300, 0.506, 0.811)), 'dark')                    # axe haft
+    _dish(aim(L.cone(0.110, 0.050, 0.095, 5), (-0.428, 0.283, 0.494),
+              (0.600, 0.330, 0.730)), 'bone')                     # axe head
+    _dish(_at(L.sphere(0.084, 0.084, 0.100, 12, 8), (-0.020, -0.100, 0.130)),
+          'bone')                                                 # flask
+    _dish(aim(L.cone(0.030, 0.024, 0.115, 9), (-0.020, -0.100, 0.215),
+              (0.0, 0.616, 0.788)), 'dark')                       # its neck
+    _close("kit")
+
+    # ------------------------------ THE SACK: THE "GIVEN BACK" HALF, AT HIS HIP
+    _open()
+    P.add(L.sphere(0.270, 0.240, 0.310, 14, 9), 'dark', loc=(0.460, 0.080, 0.780))
+    P.raw(aim(L.cone(0.158, 0.188, 0.150, 14), (0.448, 0.010, 1.030),
+              (0.10, -0.42, 0.90)), 'dark')
+    P.raw(aim(L.cone(0.192, 0.192, 0.026, 16), (0.462, -0.052, 1.122),
+              (0.10, -0.42, 0.90)), 'dark')
+    # TWO HANDLES ALREADY DEALT, at two angles, both leaving the mouth FORWARD
+    # so the front camera gets their whole run.
+    limb(P, [(0.470, -0.070, 1.110), (0.600, -0.200, 1.330),
+             (0.660, -0.258, 1.452)], 0.030, 0.026, 'bone')
+    P.add(L.sphere(0.046, 0.046, 0.044, 10, 7), 'bone', loc=(0.672, -0.272, 1.478))
+    limb(P, [(0.410, -0.040, 1.098), (0.338, -0.235, 1.272),
+             (0.300, -0.330, 1.338)], 0.028, 0.024, 'bone')
+    # PASS 4, SECOND CHANGE, NAMED ON ITS OWN: this was a 0.026-thick box and
+    # the front camera caught it edge-on - it rendered as a pale CHIP floating
+    # at his waist, read as a sticker rather than as an axe. A 5-segment cone
+    # aimed along the haft has no edge-on degenerate view.
+    P.raw(aim(L.cone(0.095, 0.046, 0.085, 5), (0.300, -0.330, 1.338),
+              (-0.34, -0.52, 0.78)), 'bone')
+    _close("sack")
+
+    # ------------------------------------------------------------- THE STRAP
+    # The tie that makes this one creature. It leaves the sack neck, crosses the
+    # chest FORWARD (so the front camera gets it), goes over the left shoulder
+    # and returns across the back - the only thing on the +Y side besides the
+    # sack's own closed back.
+    _open()
+    limb(P, [(0.448, -0.030, 1.055), (0.300, -0.150, 1.330),
+             (0.050, -0.185, 1.510), (-0.215, -0.095, 1.575)],
+         0.034, 0.030, 'dark')
+    limb(P, [(-0.215, -0.095, 1.575), (-0.105, 0.140, 1.460),
+             (0.300, 0.180, 1.100), (0.455, 0.145, 0.940)],
+         0.032, 0.030, 'dark')
+    _close("strap")
+
+    return P
+
+
+BUILDERS.update({"almoner": almoner})

@@ -13609,3 +13609,76 @@ trusting a cached sibling. Not room-locked: CORRIDOR-SAFE.
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+## 24 NOV 2026, 04:5x-05:5x CT - ART - THE WAND'S 938-VERT CLIP DOES NOT SURVIVE
+## THE ENGINE'S OWN CARRY, AND THE GREEN IS STILL NOT THE WHOLE ANSWER
+This entry is OWED AND LATE. The wand cycle shipped at 229b0848 - 1,265
+insertions across 19 files - with no line in this file at all. The team lead
+found it at 06:34 and he is right that no other lane can reconstruct my hour.
+Writing it now from the two registers on disk, not from the commit headline.
+
+WHAT I MEASURED, AND THE TWO BASES SIDE BY SIDE. One asset,
+assets/gear/wand_crystal.glb, 7,935 verts, rendered on the KayKit body in idle
+from front, side and back, twice - once at the carry the engine actually gives
+it and once at the staff carry pass 1 had assumed.
+  ENGINE BASIS (renders/art/wand/engine/_report.json) - held_rot (0,0,0) at
+  hand_scale 0.62. verdict GREEN, ok true. clip 0 of 5,959 checked, ground 0,
+  floor_depth 0, blanks [], blind_views [], frame_clipped []. reach 0.0457,
+  drop 0.0456, longest_axis 0.5515. All three views move pixels - front 878,
+  side 457, back 871 - so the thing is genuinely on the body and not a
+  register full of correct numbers about an absent object.
+  STAFF BASIS (renders/art/wand/staff/_report.json) - rotation (0,0,90) at
+  scale 1.0, kept beside it only so pass 1 reproduces. verdict RED, ok false.
+  clip 938, reach 0.9208, drop 0.0002, longest_axis 0.921. It reproduces pass
+  1 TO THE VERTEX.
+
+THE GEARCARRY FAULT, IN MY OWN WORDS, AND IT WAS MINE. Pass 1 printed as a
+CAVEAT what was actually a FAULT: it said gear.gd has no entry for this path,
+recorded carry_assumed: staff, and measured the staff basis. That reading was
+HALF. Both accessors key by path and BOTH END IN A DEFAULT ARM - held_rot
+falls through to Vector3.ZERO (arm 3 of 4), and hand_scale ends
+`0.62 if path.begins_with(KIT)`, with KIT = res://assets/gear/, which is
+exactly where the wand sits (arm 8 of 10). A reader that looks for a ROW and
+stops when there is none is not reading the function; it is reading the rows.
+So pass 1's clip 938 described a rotation the wand never gets, at a scale that
+is neither the wand's 0.62 nor the staff's own 1.9 - wrong about the wand and
+never right about the staff either. Same family as weaponfit FAULT 5 and
+FAULT 6 in a new shape.
+The fix is a READER, not a constant: tools/art/gearcarry.py walks the real
+branches of both functions in source order, resolves gear.gd's own path
+consts, raises rather than guessing if a `return` cannot be turned into an
+arm, and is checked against four rows the engine does carry before it is
+trusted on the wand - staff_ (0,0,90) x1.9, crossbow_ (-90,35,90) x1.0,
+bow_golden (0,0,90) x0.6, sword_common ZERO x0.8. If the game build ever gives
+the wand a row, this picks it up next run instead of going stale.
+
+AND THE GREEN IS NOT THE WHOLE ANSWER - ONLY THE PICTURE SAYS SO. At the
+engine carry the wand lies HORIZONTAL and ACROSS the body: a 0.55 m baton out
+of the fist on the front view, and on the side view a single blue dot at the
+hip with the shaft edge-on. My gate has no term for "points up" or "reads as a
+wand", so the gate is not what catches that. I looked. It is the S19 fault
+gear.gd names in its own words. _wandroll.py then swept the one family a
+calibrated basis can derive - the staff basis rolled about slot +Y, the
+crossbow's own S95 move - and every clip-0 row in the sweep is a HORIZONTAL
+one: standing it up from this handslot costs 1,370 clipped verts at x0.62 and
+938 at x1.0, because the idle fist hangs below the forearm and a rod standing
+out of it goes through the arm.
+
+I ALSO STRUCK A NOTE OF MY OWN THAT WAS NOT TRUE. Pass 1's comment claimed the
+glb carries +30.5 on X in its node transform. Re-measured against an asset git
+says is unchanged since d9a6a3d3: n_nodes 1, nonzero_translations [],
+nodes_with_matrix [], local translation [0,0,0]. The register now reads the
+glb's own JSON chunk for trs AND matrix, because a reader that checks only
+`translation` would call a matrix-carrying node clean - the same half-reading
+shape as the fault above.
+
+FOR THE GAME BUILD: NOTHING IS BLOCKED AND NOTHING IS WIRED BY ME. Nothing in
+scripts/ references wand_crystal.glb yet. At the shipped carry nothing is
+broken, so there is no defect to wire around.
+FOR MR. E: his model is NOT rescaled - it is his and it stays in NEEDS MR. E.
+The one number that bears on his open "wand or short staff" question is
+longest_axis 0.5515 in hand at the engine's carry; at the staff's x1.9 the
+same mesh would read about 1.75 m. The word is his, not mine.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

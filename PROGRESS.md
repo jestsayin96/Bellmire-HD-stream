@@ -17921,6 +17921,39 @@ NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or writt
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
 
+## D-S117 (game build, 24 Nov 2026 16:08-16:2x CT) - THE 55th BODY `straker` (Everyhand) IS FIT AND IN THE WOOD ROW; NAME HELD
+TAKE THIS NEXT (15:58 block, rewritten 16:1x) gave GAME BUILD: S117, the 55th's body row, HOLD THE NAME.
+Read art's CANON first: minibosses.py:19822 `"straker": ("Everyhand", 2.40, ..., "wood", ...)` - tag
+`wood` is field 5; _fit_report.json pairs.straker.ratio 0.98, fits_frame true, 3/3 proving views.
+Done (the S115 shape, nothing more):
+- scripts/delve.gd MB_FIT + `"straker": 0.98` (copied, not re-derived).
+- scripts/dungeon_hd.gd THEME_MINIBOSS_MORE wood += straker, with an S117 note.
+- assets/monsters/minibosses/straker.glb.import (made by --headless --import; the .glb had none).
+- tools/_s117_straker.gd: fit, row, model resolves, wood sweep red-proof (drover + winder drawn),
+  straker drawn EXACTLY when its arrive lines exist, no MB_NAME row ahead of the feed.
+NO MB_NAME ROW: by_key.straker is not on main (C-195 is content's 16:22 item). When it lands the close
+is one line `"straker": "Everyhand"` plus _s51_names.gd / _s107_gate.gd 54 -> 55 and hard arms in
+_s117_straker.gd (fed, drawn in wood, named Everyhand).
+Gates (verdict lines): PARSE 0 SCRIPT ERROR / 0 Parse Error; S117_STRAKER OK 7 (wood draws snarer,
+drover, winder - straker correctly held out, arrive lines false); S115_ICEMAN OK 10; S51_NAMES OK 176
+checks; S107_GATE OK 12 (MB_NAME 54); TWITCH_PARSE OK (8 checks) - the COMMANDS_DATA "published 53,
+feed rows 54" line is the chat bot's owed republish, not mine; OFFFLOOR_VERDICT OK 0 of 2188;
+TOWNWALK in_solid=0/18267 raid_in_solid=0/4664 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+Looked at: renders/art/minibosses/straker/hero_front.png - grey figure, hand on the rim of a
+block-rimmed spoked wheel, roughly hero height. Reads.
+L31 REMAINDER (second item) - GREPPED FOR THE BEHAVIOUR, NOT BUILT THIS RUN:
+- HEROES: ALREADY WIRED. party_frames.gd:214 draws status_icon.gd icons + the word per state off
+  Delve.statuses() (L31: [word, colour, key, bad]); delve.gd _tags_tick draws the words over each head.
+- MONSTERS: NOTHING TO SHOW. Every `_give(` in delve.gd (194, 1968, 1974, 2237-2467, 3253) targets a
+  party dict; monster.gd carries no condition state at all (only the enraged aura). D61.2 asks for
+  "the conditions the game already applies" - the game applies none to monsters. Closed by disproving.
+- GENUINELY OPEN, small: (a) no DURATION on the hero icon although m["st"] holds seconds; (b) D61.2's
+  "readable name the moment it is applied" - delve.gd _give computes `var was := has_st(m, name)` and
+  never uses it, so no on-apply line fires from there. Both are delve.gd/party_frames.gd - mine. Next run.
+No live Twitch test. ZERO BITS, no cheer, no redemption, no chat line. Nothing for Mr. E to decide.
+## C-195 (24 Nov 2026 16:3x CST, content) - WROTE miniboss_feed.by_key.straker (EVERYHAND, THE 55th); FEED 54 -> 55
+TAKE THIS NEXT (15:58 CT block, 24 Nov, corrected 16:1x) CONTENT row (16:22): C-195, by_key.straker, written first. Body straker.glb is committed (merged from origin/main). Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; broken = every hand has struck and the rim is whole. Lines name the count (four bright strakes) and favour no tactic. New _note_c195 (expected zero-hit key). Only data/lore_lines.json and this file touched; all pre-existing keys byte-identical (leaf-level compare), by_key 54 -> 55. VALIDATION OK.
+CODE WIRING: none new. Game build S117 can now name the 55th (MB_NAME straker -> Everyhand) since by_key.straker is present.
 ## B136 - 24 Nov 2026, 16:45 CT (chat bot) - THE 53 -> 54 REPUBLISH IS PAID AND L14 IS 24 OF 24 AGAIN
 
 The 15:58 CHAT BOT row said the republish was owed and payable and told this lane not to
@@ -17975,3 +18008,19 @@ file rather than off a previous run's prose.
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+## HUB 24 Nov 16:4x CT - standing audit, pack catalogue row (no new pack found; no row owed beyond a logged negative)
+- TAKE THIS NEXT (15:58 block) HUB row = pack catalogue, gate stays shut. No new licence text on disk, so nothing imported.
+- Merged origin/main into hub (22e94c33). web/ tree d27fe17c == origin/main:web. Vs gh-pages root tree c03fa129 (publish 7, 5ce35f33): ONE file, web/NOTES.md +2 lines (the 15:38 audit note). app.js/style.css/index.html byte-identical to published.
+- Greps: app.js innerHTML at :255 and :301 only (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta count 1; node --check OK; zero 0-byte png/webp under web/.
+- NUMBER: 0 code files differ from published; 1 notes file / +2 lines. Hostile-name test not re-run: no code changed. Not claiming READY TO PUBLISH.
+- Untracked, named: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine).
+
+
+## U156 - U69 BossCard RED PROVED DESIGNED, BOTH ARMS RUN, 2026-11-24T16:56:03-06:00 (16:52 firing)
+ITEM: WORK_PLAN 15:58 row HUD (16:52): show the U69 FAIL is the deliberately-inverted assertion, and show the gate GREEN with the inversion removed.
+Lock: R working RUN_LOCK last line = chat bot B136 IDLE 16:49:05, 0 Godot by process -> claimed 16:53:41 (declared 17:01), released 2026-11-24T16:56:03-06:00.
+CHANGED (tools/_u69_redproof.gd only, no HUD .gd): `-- control` user arg skips the BossCard injection; final line now prints arm= and inflated_fails=.
+RUN (--windowed --resolution 1920x1080): RED arm (injected) -> 'injected ... 1 visible pane' at 100% grid and 150% grid, FAIL 'named HUD element inflated past the in-pane skip' Pane_director/BossCard 1500x800 x2, U69_REDPROOF FAIL elements=26 inflated_fails=2. CONTROL arm (same gate, no injection) -> 0 injected, 0 FAIL lines, U69_REDPROOF OK elements=26 inflated_fails=0. The FAIL is therefore the injection and nothing in the real HUD; the gate can go both ways.
+NOTE: full-screen steps inject 0 (no visible Pane_ there) - by design, only the grid steps arm the proof.
+PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error lines.
+Logs: _u156_red.log, _u156_control.log. Decision for Mr. E: none.

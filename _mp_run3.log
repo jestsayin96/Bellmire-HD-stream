@@ -1,0 +1,156 @@
+
+=== C:\hd adventure\bellmire-art\tools\art\_manparts_prove.py
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cube.4442
+16:45:32 | INFO: glTF import finished in 0.01s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cylinder.272
+16:45:32 | INFO: glTF import finished in 0.00s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Sphere.004
+16:45:32 | INFO: glTF import finished in 0.00s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node spear_A
+16:45:32 | INFO: glTF import finished in 0.05s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node shield_A
+16:45:32 | INFO: glTF import finished in 0.00s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cube.144
+16:45:32 | INFO: glTF import finished in 0.01s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cylinder.019
+16:45:32 | INFO: glTF import finished in 0.01s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cylinder
+16:45:32 | INFO: glTF import finished in 0.01s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cube.001
+16:45:32 | INFO: glTF import finished in 0.00s
+16:45:32 | INFO: Data are loaded, start creating Blender stuff
+16:45:32 | INFO: Blender create Mesh node Cylinder.068
+16:45:32 | INFO: glTF import finished in 0.00s
+[manparts] A_control_clean      PASS  every shipped builder resolves with no error
+[manparts] A_parts_seen         PASS  exactly the 6 bodies that declare man_parts resolve from parts; saw 6
+[manparts] B_missing_is_red     PASS  a man_parts naming an undeclared span returns an ERROR and no ranges, so it CANNOT land in not_measurable: ["`man_parts` names span 'trunk', which the builder does not declare (it declares ['head'])"]
+[manparts] B_names_the_span     PASS  and the error names the span that is missing
+[manparts] C_ambiguous_is_red   PASS  declaring both a `man` span and man_parts is an error: ["both a `man` span and `man_parts` ('head',) are declared - which is the figure is then undefined"]
+[manparts] D_empty_is_red       PASS  an empty man_parts is an error, not an absence: ['`man_parts` is declared and empty - say nothing or say which spans; an empty declaration claims a split that is not there']
+[manparts] E_panner_marker_kept PASS  an EMPTY `man` span is still a deliberate marker and NOT an error - a machine with no operator cannot fail a can-you-see-the-man test
+[manparts] A_control_again      PASS  nothing left patched by the stub arms
+[manparts] by_source={'span': 32, 'parts': 6, '': 31} parts=['hurdleman', 'iceman', 'nightman', 'stiltman', 'straker', 'tanner']
+[manparts] VERDICT GREEN -> C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_manparts_prove.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+=== C:\hd adventure\bellmire-art\tools\art\_selfseen_census.py
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+16:45:34 | INFO: Data are loaded, start creating Blender stuff
+16:45:34 | INFO: Blender create Mesh node Cube.4442
+16:45:34 | INFO: glTF import finished in 0.01s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cylinder.272
+16:45:35 | INFO: glTF import finished in 0.00s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Sphere.004
+16:45:35 | INFO: glTF import finished in 0.00s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node spear_A
+16:45:35 | INFO: glTF import finished in 0.05s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node shield_A
+16:45:35 | INFO: glTF import finished in 0.00s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cube.144
+16:45:35 | INFO: glTF import finished in 0.01s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cylinder.019
+16:45:35 | INFO: glTF import finished in 0.01s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cylinder
+16:45:35 | INFO: glTF import finished in 0.01s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cube.001
+16:45:35 | INFO: glTF import finished in 0.00s
+16:45:35 | INFO: Data are loaded, start creating Blender stuff
+16:45:35 | INFO: Blender create Mesh node Cylinder.068
+16:45:35 | INFO: glTF import finished in 0.00s
+[census] pairs=57 measurable=37 no_man=1 not_measurable=19 build_failed=0 at=2026-11-24T16:45:35-0600
+[census] pairs in NO list: 0 
+[census] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_selfseen_census.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+=== C:\hd adventure\bellmire-art\tools\art\_backread.py
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+C:\hd adventure\bellmire-art\tools\art\_backread.py:197: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:03.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\icemanmp3_front.png'
+00:03.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:04.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\icemanmp3_side.png'
+00:04.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:05.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:05.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\icemanmp3_back.png'
+00:05.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:06.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] iceman done
+00:06.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\strakermp3_front.png'
+00:07.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:07.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:07.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\strakermp3_side.png'
+00:08.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:08.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:09.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\strakermp3_back.png'
+00:09.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:09.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] straker done
+00:10.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\nightmanmp3_front.png'
+00:10.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:10.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:11.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\nightmanmp3_side.png'
+00:11.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:11.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:12.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\nightmanmp3_back.png'
+00:12.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:12.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] nightman done
+00:13.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\stiltmanmp3_front.png'
+00:13.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:14.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:14.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\stiltmanmp3_side.png'
+00:14.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:15.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:15.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\stiltmanmp3_back.png'
+00:15.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:16.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] stiltman done
+00:16.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\hurdlemanmp3_front.png'
+00:16.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:17.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:17.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\hurdlemanmp3_side.png'
+00:18.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:18.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:18.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\hurdlemanmp3_back.png'
+00:19.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:19.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] hurdleman done
+00:19.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\tannermp3_front.png'
+00:20.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:20.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:21.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\tannermp3_side.png'
+00:21.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:21.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:22.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\tannermp3_back.png'
+00:22.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:23.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] tanner done
+[backread] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_backreadmp3.json ok=True
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+[ALLDONE]

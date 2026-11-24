@@ -1,0 +1,60 @@
+{
+ "checks": [
+  {
+   "check": "A_control_clean",
+   "pass": true,
+   "why": "every shipped builder resolves with no error"
+  },
+  {
+   "check": "A_parts_seen",
+   "pass": true,
+   "why": "exactly the 6 bodies that declare man_parts resolve from parts; saw 6"
+  },
+  {
+   "check": "B_missing_is_red",
+   "pass": true,
+   "why": "a man_parts naming an undeclared span returns an ERROR and no ranges, so it CANNOT land in not_measurable: [\"`man_parts` names span 'trunk', which the builder does not declare (it declares ['head'])\"]"
+  },
+  {
+   "check": "B_names_the_span",
+   "pass": true,
+   "why": "and the error names the span that is missing"
+  },
+  {
+   "check": "C_ambiguous_is_red",
+   "pass": true,
+   "why": "declaring both a `man` span and man_parts is an error: [\"both a `man` span and `man_parts` ('head',) are declared - which is the figure is then undefined\"]"
+  },
+  {
+   "check": "D_empty_is_red",
+   "pass": true,
+   "why": "an empty man_parts is an error, not an absence: ['`man_parts` is declared and empty - say nothing or say which spans; an empty declaration claims a split that is not there']"
+  },
+  {
+   "check": "E_panner_marker_kept",
+   "pass": true,
+   "why": "an EMPTY `man` span is still a deliberate marker and NOT an error - a machine with no operator cannot fail a can-you-see-the-man test"
+  },
+  {
+   "check": "A_control_again",
+   "pass": true,
+   "why": "nothing left patched by the stub arms"
+  }
+ ],
+ "by_source": {
+  "span": 32,
+  "parts": 6,
+  "": 31
+ },
+ "parts_bodies": [
+  "hurdleman",
+  "iceman",
+  "nightman",
+  "stiltman",
+  "straker",
+  "tanner"
+ ],
+ "span_bodies_n": 32,
+ "control_errors": [],
+ "ok": true
+}

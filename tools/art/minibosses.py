@@ -18697,103 +18697,121 @@ BUILDERS.update({"panner": panner})
 
 
 # ========================= 52 THE STILTMAN ==================================
-# WHAT THE SET ALREADY HAD, MEASURED OFF THIS FILE RATHER THAN REMEMBERED (51
-# bodies, 62 rows with the chibi variants). Read end to end before designing:
-# nothing in it is a COST TO PROGRESS. The nearest three are not it. The
-# Jointer COMES APART and both halves keep working - breaking it gives you two
-# problems, not a worse one. The Stackman GETS ABOVE YOUR REACH - a height
-# problem you solve by waiting. The Scrapwright RE-PLATES itself - you undo
-# work. None of them makes the party ASK WHETHER TO KEEP GOING: every one of
-# the fifty-one rewards damage, or punishes it on a timer the creature owns.
+# PASS 4, 24 Nov 2026. THE BODY IS REBUILT FROM THE LEGS UP AND THE MECHANIC
+# MOVED WITH IT, BECAUSE THREE PASSES OF DETAIL COULD NOT FIX A SHAPE THAT WAS
+# WRONG AT THE ROOT.
 #
-# THE STILTMAN OWNS NOTHING. The party owns the choice and it is a bad one
-# either way: it stands on four stilts, and every stilt is breakable in plain
-# sight. Break one and it drops, and a thing closer to the floor is a thing
-# with a shorter stride and a faster one - so the fight you are in gets harder
-# in exactly the way your own progress made it. Leave them and it reaches over
-# your front line from a height nobody can answer. There is no third option and
-# there is no right answer; there is a party that agrees about it and a party
-# that does not.
+# WHAT THE TEAM LEAD SAW AT PASS 3, AND I AGREE BY EYE ON MY OWN RENDER: at
+# hero scale it read as A SURVEYOR'S TRIPOD WITH A LAMP ON TOP. Four thin
+# splayed poles under a flat plate, a lantern-shaped head, stub arms floating
+# off the trunk, and no human silhouette anywhere in it. Every fit number was
+# green (h 3.20 / ratio 1.31 / fits_frame true, 3/3 proving views) and the
+# numbers were never the problem - the register has no term for "reads as
+# furniture", which is the fourth time this lane has shipped a green sheet over
+# a picture that does not read.
 #
-# AND THE BODY SHOWS THE MECHANIC WITHOUT A WORD, which is the whole reason it
-# is this trade and not another: ONE STILT IS ALREADY BROKEN when you meet it.
-# A fen walker that has lost a leg and is leaning on the other three is a
-# before-and-after a static body can hold, the same job the Panner's part-turned
-# mouth does. A viewer counts four pale cuffs and sees that only three have a
-# pole in them.
+# THE CAUSE WAS FOUR LEGS, AND IT COULD NOT BE DETAILED AWAY. A man has two.
+# Four splayed poles under a plate is a TABLE - an easel, a tripod, a trestle -
+# and no amount of hood, cuff or lean puts a person on top of a table. Passes
+# 2 and 3 both spent themselves on the wrong layer: pass 2 raised the cuffs so
+# the count could be seen, pass 3 tripled the lean so the count was not the
+# only evidence, and both were sound fixes to a body that was never going to
+# read. THE LESSON, WRITTEN DOWN SO THE NEXT PASS DOES NOT REPEAT IT: when
+# three passes of refinement do not move the read, stop refining and change the
+# shape.
+#
+# SO THE MECHANIC IS NOW TWO STILTS, NOT FOUR, and it loses nothing. Nothing
+# downstream is touched: content was told at 09:22 NOT to write a feed row for
+# this key, `Delve.MB_NAME` does not carry it, and the CANON entry lives in
+# this file, which is the art lane's own. The trade is identical and sharper:
+# it is ALREADY DOWN ONE when you meet it, braced on the pole it feels the
+# bottom with. Break the other and it comes down - lower, quicker, and with
+# nothing left to break. Leave it and it reaches over your front line from a
+# height nobody can answer. The party owns the choice and both ways cost. With
+# four legs that choice was made four times and meant less each time.
+#
+# AND THE TWO-LEG BODY IS WHAT CARRIES IT: a man with ONE POLE ON THE FLOOR,
+# ONE SPLINTERED STUMP HANGING CLEAR OF IT, and a crutch under the arm on the
+# side he lost. Three facts, all of them silhouette, all of them readable with
+# the colour thrown away. Two ground contacts and a limb that stops in mid-air
+# is a thing nobody has to be told about.
 #
 # FOGBOUND, which is a fen trade and one of the thinnest themes in the set.
 # Stilt walkers are real working people - herders and fishers crossing marsh -
 # so the register stays plain: long poles, bound cuffs, a hunched man.
 #
-# FAULT 7, RECORDED ON THE PANNER THIS HOUR, IS DESIGNED OUT HERE RATHER THAN
-# RE-LEARNED. Four legs placed on a symmetric square eclipse pairwise in BOTH
-# cameras - the Panner's frame reads as a single post from the side for exactly
-# that reason. So the front pair is wider in X than the back pair AND separated
-# from it in Y: the front camera (along -Y) separates them by X, the side
-# camera (along X) separates them by Y, and neither view gets a single post.
+# FAULT 7 (the Panner's pairwise eclipse) IS STILL ANSWERED, by a different
+# construction. The two poles that reach the floor are the stilt and the
+# crutch, and they are separated in BOTH axes: x -0.43 vs +0.88, y +0.07 vs
+# -0.26. The front camera (along -Y) separates them by x; the side camera
+# (along X) separates them by y. Neither view gets a single post.
 CANON.update({
     "stiltman": ("Downfast", 3.20, (0.62, 0.64, 0.60), (0.86, 0.92, 0.96),
-                 "fogbound", "IT IS QUICKER FOR EVERY LEG YOU TAKE - it crosses "
-                 "the room on four stilts and every one of them is breakable in "
-                 "plain sight, which is the trap: breaking one WORKS. It drops, "
-                 "its reach over your front line shortens, and it is FASTER - a "
+                 "fogbound", "IT IS ALREADY DOWN ONE AND IT IS QUICKER FOR IT - "
+                 "it crosses the room on stilts, it has already lost one, and "
+                 "the pole it feels the bottom with is the only thing holding "
+                 "that end up. The stilt that is left is breakable in plain "
+                 "sight, which is the trap: breaking it WORKS. It comes down, "
+                 "its reach over your front line is gone, and it is FASTER - a "
                  "shorter stride is a quicker one, and a thing at your own "
-                 "height does not have to stoop to get at you. Leave the stilts "
-                 "alone and it stands above the party and strikes down past the "
-                 "line into whoever is behind it; take them and you are fighting "
-                 "something low and quick with nothing left to break. It does "
-                 "not choose and it does not time anything: THE PARTY OWNS THE "
-                 "DECISION and both ways cost. THE THING TO READ IS THE LEGS: "
-                 "four pale bound cuffs at the hip and only THREE poles in them "
-                 "- it has already lost one, and it is already leaning.",
+                 "height does not have to stoop to get at you, and it has "
+                 "nothing left to break. Leave it alone and it stands above the "
+                 "party and strikes down past the line into whoever is behind "
+                 "it. It does not choose and it does not time anything: THE "
+                 "PARTY OWNS THE DECISION and both ways cost. THE THING TO READ "
+                 "IS THE LEGS: two bound cuffs at the ankle, ONE POLE ON THE "
+                 "FLOOR and ONE SPLINTERED STUMP hanging clear of it, and a man "
+                 "braced on a crutch where his leg should be.",
                  0.62, "Something ahead is walking on poles, and one is gone."),
 })
 ORDER = ORDER + ["stiltman"]
 
 # PER-SLOT MATERIALS - THE TITHER'S RULE: THE PALE THING IS THE THING THE
-# MECHANIC IS COUNTED ON, and here that is THE LEGS AND NOTHING ELSE. The four
-# cuffs at the hip and the four foot blocks are bone; the poles, the trunk, the
-# arms, the hood and the balance hook are all dark. The pale is deliberately
-# split into EIGHT SMALL MARKS rather than one mass, because what the viewer
-# has to do is COUNT - four sockets, three poles - and a count needs separable
-# marks. A single pale hip plate would read as one bright blob and answer
-# nothing.
+# MECHANIC IS COUNTED ON, and here that is THE LEGS AND NOTHING ELSE. Two
+# ankle cuffs and the one surviving foot block are bone; the poles, the crutch,
+# the hood and the belt are dark; the man himself is wet fen wool, a mid value
+# that separates him from the poles he stands on. THE CRUTCH CARRIES NO PALE AT
+# ALL, on purpose - pass 2 found the feeling pole being counted as a leg, and a
+# pale mark on it would invite exactly that again.
 # AND THE FACE IS ONE PANEL ON -Y ONLY. The Beadle's measured fault was a pale
 # band that wrapped the head so the figure read the same from both ends; the
 # Panner answered it by having no face at all on the back. Here the head is
 # hooded dark and the only pale on it is a single forward panel, so the back
-# view gets a dark hood and a dark trunk on three dark poles.
+# view gets a dark hood on a dark pole.
 OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"stiltman"}
 
 OVERRIDE.update({
     "stiltman": {
         'body': ((0.168, 0.172, 0.158), 0.88, 0.02),   # the man: wet fen wool
-        'dark': ((0.092, 0.094, 0.086), 0.78, 0.06),   # poles, trunk, hood
-        'bone': ((0.846, 0.838, 0.788), 0.44, 0.22),   # CUFFS AND FEET ONLY
+        'dark': ((0.092, 0.094, 0.086), 0.78, 0.06),   # poles, crutch, hood
+        'bone': ((0.846, 0.838, 0.788), 0.44, 0.22),   # CUFFS AND FOOT ONLY
         'glow': ((0.860, 0.920, 0.960), 0.80),         # eyes, forward only
     },
 })
 
 
 def stiltman():
-    """IT IS QUICKER FOR EVERY LEG YOU TAKE. The 52nd body.
+    """IT IS ALREADY DOWN ONE AND IT IS QUICKER FOR IT. The 52nd body.
 
-    THE FOUR STILTS ARE THE CREATURE. Everything else on it is there to say
-    which way is forward and that a man is driving it:
+    THE ACCEPTANCE TEST IS A MAN ON STILTS WHO HAS LOST ONE, read at hero
+    scale, front first. Everything below is in service of that one sentence:
 
-      HIP PLATE   a short dark block at z 1.95 with FOUR pale cuffs round its
-                  edge. The cuffs are the count.
-      THREE POLES long tapered dark stilts, foot block at the bottom, bound
-                  into three of the four cuffs.
-      THE FOURTH  a SPLINTERED STUMP - the cuff is there and the pole is gone
-                  below 1.12. That is the before-and-after.
-      THE LEAN    the trunk leans 0.11 toward the lost corner, because a man on
-                  three legs of four does. It is the one thing that makes the
-                  missing pole read as LOST rather than as a design.
-
-    THE TWO CAMERAS GET DIFFERENT SEPARATIONS ON PURPOSE - see fault 7 above.
-    Front pair at x +/-0.46, y -0.30; back pair at x +/-0.26, y +0.34.
+      TWO LEGS      ankles at 1.52, knees, hips, a pelvis block. A man has two
+                    legs and the pass-3 body had four, which is a trestle.
+      ONE POLE      the left stilt, foot block on the floor at 0.03.
+      ONE STUMP     the right one, bound in its cuff and SNAPPED at 1.06, with
+                    the splinters on the break. It does not reach the floor and
+                    the gap under it is the whole story.
+      THE CRUTCH    a thinner dark pole from the floor up under the near
+                    armpit, with the arm braced down its shaft. It is the third
+                    point of contact and it is what a man who has lost a leg
+                    DOES. It carries no pale so it cannot be counted as a leg.
+      SHOULDERS     a bar 0.66 across, wider than the 0.34 head, over a belt
+                    that cuts the trunk at the waist. A head on a bar over a
+                    waist is the minimum a human silhouette needs; the pass-3
+                    body had none of the three.
+      THE LEAN      the trunk leans 0.15 toward the crutch, because a man
+                    putting his weight on one does.
 
     Static: no `anims` entry.
     ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures the real footprint
@@ -18809,98 +18827,176 @@ def stiltman():
     def _close(name):
         P.spans[name] = (_m[0], len(P.items))
 
-    HIP = 1.950                      # the hip plate's underside
-    # PASS 3: THE LEAN IS TRIPLED AND THE PLATFORM GOES WITH IT. At pass 2 the
-    # count was the only thing carrying the mechanic and the hero-scale render
-    # proved the count DOES NOT SURVIVE STREAM DISTANCE - four small pale cuffs
-    # on a dark plate are two pale smudges at that size. A TILT is a silhouette
-    # fact and survives any distance, so the thing that says "a leg is gone" is
-    # now the attitude of the whole body, with the count as the close-up
-    # confirmation rather than the only evidence.
-    LEAN = Vector((-0.330, 0.105, 0.0))   # toward the lost corner
+    # PASS 6: THE MAN IS TALLER AND NARROWER AND THE SHEAR IS CUT BY HALF.
+    # Pass 5 killed the stepladder and bought a praying mantis: a 0.33 shear
+    # over a torso only 0.55 tall, with a shoulder bar rolled 0.30 rad on top
+    # of it, turned everything above the hip into a HORIZONTAL SLAB with a
+    # bucket on the end. The lesson is the same one in a new place - a torso
+    # as wide as it is tall is a box, and a box does not become a man by being
+    # tilted. So the hip drops, the shoulders rise, the chest comes back in,
+    # and the lean is a LEAN (0.16) rather than a bend.
+    # PASS 7: THE MAN AND THE POLES ARE SEPARATED, WHICH IS THE LAST THING
+    # STOPPING IT. Pass 6 produced a man - head, shoulders, two arms, a staff -
+    # and he read as A TALL THIN MAN WITH VERY LONG LEGS, not as a man ON
+    # STILTS. The cause is that the poles and the legs were the same thickness,
+    # the same value and the same length, so the eye had nowhere to put the
+    # join; the pale cuffs at the halfway mark read as knee wraps. TWO THINGS
+    # FIX IT AND BOTH ARE SILHOUETTE: the ankle goes UP, so the poles are the
+    # longer half of the figure and the man sits compactly on top of them, and
+    # the man is made THICKER than the poles he stands on. A thin thing under a
+    # thick thing is a prop; two equal things are one thing.
+    ANK = 1.950                      # both ankle cuffs sit here
+    KNEE = 2.230
+    HIP = 2.470
+    CHEST = 3.080
+    SHO = 3.170
+    HEAD = 3.370
+    # PASS 5: THE LEAN IS THE WHOLE FIX AND IT IS APPLIED AS A TILT, NOT AS AN
+    # OFFSET. Pass 4 put a man on two legs and the front render still read as a
+    # STEPLADDER: one stilt and one crutch, both long, both clean, both splayed
+    # the same amount from a symmetric body. Two equal diagonals under a
+    # straight trunk is an A-frame whatever is standing on it. A man putting
+    # his weight on a crutch is CROOKED, and crooked is the one thing a trestle
+    # can never be - so everything above the hip is sheared toward the lost
+    # side and the shoulder on that side drops with it.
+    TILT = 0.160
 
-    # (x, y, pole-top, broken?)  - the lost one is the BACK LEFT
-    LEGS = [(0.460, -0.300, False), (-0.460, -0.300, False),
-            (0.260, 0.340, False), (-0.260, 0.340, True)]
+    def _t(v):
+        v = Vector(v)
+        return Vector((v.x + TILT * (v.z - HIP), v.y, v.z))
 
-    # ---- the stilts themselves -------------------------------------------
+    LX = -0.300                      # the leg that still has its pole
+    RX = 0.285                       # the leg that lost it
+
+    _SFOOT = Vector((LX - 0.150, 0.080, 0.062))
+    # PASS 8: THE STUMP SWINGS FORWARD. At pass 7 it hung almost straight
+    # down, which reads from the front and is INVISIBLE from the side - the
+    # standing stilt eclipses it exactly, so the one view that is not the
+    # acceptance view loses the whole mechanic. A snapped pole still bound at
+    # the ankle swings, so it is swung out into -Y where the side camera can
+    # see it, and the askew angle reads as broken rather than as designed.
+    _SBREAK = Vector((RX + 0.115, -0.265, 1.330))
+
+    # ---- the one stilt that reaches the floor ----------------------------
     _open()
-    for _lx, _ly, _broken in LEGS:
-        _top = Vector((_lx * 0.62, _ly * 0.52, HIP - 0.030))
-        if _broken:
-            # SPLINTERED: the pole stops short and its lower end is a ragged
-            # taper, not a foot. Nothing of it touches the ground.
-            _bot = Vector((_lx * 0.86, _ly * 0.80, 1.540))
-            P.raw(aim(L.cone(0.062, 0.022, (_top - _bot).length, 7),
-                      tuple(_bot), tuple((_top - _bot).normalized())), 'dark')
-            continue
-        _bot = Vector((_lx, _ly, 0.060))
-        P.raw(aim(L.cone(0.034, 0.064, (_top - _bot).length, 9),
-                  tuple(_bot), tuple((_top - _bot).normalized())), 'dark')
-        # the foot block - pale, because the foot is part of the count
-        P.add(L.box(0.175, 0.205, 0.062), 'bone', loc=(_lx, _ly, 0.031))
-    _close("stilts")
+    _top = Vector((LX, -0.020, ANK + 0.030))
+    P.raw(aim(L.cone(0.040, 0.058, (_top - _SFOOT).length, 9),
+              tuple(_SFOOT), tuple((_top - _SFOOT).normalized())), 'dark')
+    P.add(L.box(0.200, 0.250, 0.064), 'bone',
+          loc=(_SFOOT.x, _SFOOT.y, 0.032))
+    _close("stilt")
 
-    # ---- the hip plate and THE FOUR CUFFS --------------------------------
+    # ---- the lost one: a stump that stops in mid-air ---------------------
+    # The splinters are four thin cones on the break. At hero scale they are a
+    # ragged end rather than four objects, which is the whole point - a clean
+    # cut would read as a DESIGN and a ragged one reads as DAMAGE.
     _open()
-    P.add(L.box(0.790, 0.640, 0.135), 'dark', loc=(-0.045, 0.030, HIP + 0.010))
-    for _lx, _ly, _broken in LEGS:
-        _c = Vector((_lx * 0.62, _ly * 0.52, HIP - 0.030))
-        _d = (Vector((_lx, _ly, 0.060)) - _c).normalized()
-        # a short pale sleeve round the pole's head. On the lost corner it is
-        # the same sleeve with nothing in it - the socket is what you count.
-        # PASS 2: THE CUFFS STAND PROUD OF THE PLATE INSTEAD OF UNDER IT.
-        # Pass 1 hung them below the hip block and the block HID them - the
-        # front render showed two pale pucks of four, so the one thing the
-        # viewer has to do (count four sockets against three poles) could not
-        # be done. They are longer now and seated so they rise THROUGH the
-        # plate, which is also what a real bound cuff does.
-        P.raw(aim(L.cone(0.098, 0.090, 0.300, 10),
-                  tuple(_c - _d * 0.120), tuple(-_d)), 'bone')
+    _stop = Vector((RX, -0.010, ANK + 0.030))
+    P.raw(aim(L.cone(0.036, 0.056, (_stop - _SBREAK).length, 9),
+              tuple(_SBREAK), tuple((_stop - _SBREAK).normalized())), 'dark')
+    for _sx, _sy in ((0.055, 0.014), (-0.044, 0.036), (0.016, -0.050),
+                     (-0.020, -0.030)):
+        P.raw(aim(L.cone(0.020, 0.0, 0.145, 5),
+                  tuple(_SBREAK + Vector((_sx * 0.45, _sy * 0.45, 0.025))),
+                  (_sx, _sy, -1.0)), 'dark')
+    _close("stump")
+
+    # ---- the two ankle cuffs: THE COUNT ----------------------------------
+    _open()
+    for _x, _down in ((LX, _SFOOT), (RX, _SBREAK)):
+        _c = Vector((_x, -0.015, ANK + 0.010))
+        _d = (Vector((_down.x, _down.y, _down.z)) - _c).normalized()
+        # PASS 7: A FAT SHORT BINDING, NOT A LONG SLEEVE. It has to read as
+        # the place the man ends and the pole begins, so it is wider than both
+        # and short enough that it cannot be mistaken for a boot top.
+        P.raw(aim(L.cone(0.132, 0.120, 0.215, 10),
+                  tuple(_c + _d * 0.095), tuple(-_d)), 'bone')
     _close("cuffs")
 
-    # ---- the trunk, leaning toward the corner it lost --------------------
+    # ---- the legs: ankle to knee to hip ----------------------------------
     _open()
-    _T0 = Vector((0.0, 0.020, HIP + 0.090))
-    _T1 = _T0 + Vector((0.0, -0.030, 0.520)) + LEAN * 0.55
-    _T2 = _T0 + Vector((0.0, -0.090, 0.900)) + LEAN
-    limb(P, [tuple(_T0), tuple(_T1), tuple(_T2)], 0.215, 0.165, 'body')
-    P.add(L.box(0.470, 0.330, 0.072), 'dark', loc=tuple(_T0 + Vector((0, -0.010, 0.120))))
-    for _s in (-1, 1):
-        P.add(L.sphere(0.112, 0.104, 0.096, 11, 8), 'body',
-              loc=tuple(_T2 + Vector((_s * 0.205, 0.0, -0.040))))
+    for _x in (LX, RX):
+        limb(P, [(_x, -0.010, ANK + 0.095), (_x * 0.92, -0.085, KNEE),
+                 (_x * 0.70, -0.010, HIP)], 0.112, 0.138, 'body')
+    P.add(L.box(0.450, 0.310, 0.180), 'body', loc=(0.0, -0.010, HIP + 0.058))
+    _close("legs")
+
+    # ---- the trunk: waist, belt, shoulder bar ----------------------------
+    _open()
+    _W = _t((0.0, -0.030, 2.790))
+    _C = _t((0.0, -0.055, CHEST))
+    limb(P, [(0.0, -0.010, HIP + 0.100), tuple(_W), tuple(_C)],
+         0.215, 0.272, 'body')
+    # THE BELT IS NOT DRESS. It is a dark cut across a mid-value trunk, and a
+    # cut at the waist is what makes the shape above it read as a CHEST.
+    P.add(L.box(0.400, 0.290, 0.074), 'dark', loc=tuple(_t((0.0, -0.030, 2.700))),
+          rot=(0.0, -0.16, 0.0))
+    # THE SHOULDER BAR IS TIPPED. The crutch side carries the weight, so that
+    # shoulder is the LOW one - a level bar on a tilted trunk reads as a table
+    # top and undoes the shear below it.
+    P.add(L.box(0.640, 0.245, 0.140), 'body', loc=tuple(_t((0.0, -0.045, SHO))),
+          rot=(0.0, 0.13, 0.0))
+    for _s, _dz in ((-1, 0.040), (1, -0.052)):
+        P.add(L.sphere(0.126, 0.120, 0.114, 11, 8), 'body',
+              loc=tuple(_t((_s * 0.296, -0.045, SHO - 0.025)) + Vector((0.0, 0.0, _dz))))
     _close("trunk")
 
     # ---- the hood and the one pale panel on -Y ---------------------------
     _open()
-    _H = _T2 + Vector((0.0, -0.030, 0.185))
-    P.add(L.sphere(0.148, 0.152, 0.150, 14, 9), 'dark', loc=tuple(_H))
-    P.raw(aim(L.cone(0.182, 0.052, 0.170, 12),
-              tuple(_H + Vector((0.0, 0.015, 0.040))), (0.0, 0.10, 1.0)), 'dark')
-    P.add(L.box(0.098, 0.036, 0.108), 'bone', loc=tuple(_H + Vector((0.0, -0.172, -0.012))))
-    eyes(P, tuple(_H + Vector((0.0, 0.0, 0.006))), 0.036, 0.020, -0.196)
+    # PASS 5: THE HEAD IS BIGGER AND THE HOOD'S SPIKE IS GONE. At pass 4 a
+    # 0.168 ball with a cone on it, under a level bar, read as a LANTERN - the
+    # same fault the pass-3 body had and the one the lead named. A head reads
+    # as a head when it is a round mass whose width is about half the shoulder
+    # bar's, with a cowl that runs DOWN INTO the shoulders instead of up into a
+    # point.
+    _HD = _t((0.0, -0.070, HEAD))
+    limb(P, [tuple(_t((0.0, -0.050, SHO + 0.030))),
+             tuple(_HD - Vector((0.0, 0.0, 0.150)))], 0.086, 0.098, 'body')
+    P.add(L.sphere(0.196, 0.200, 0.196, 14, 9), 'dark', loc=tuple(_HD))
+    # the cowl: a collar falling onto the shoulders, not a peak and not a brim
+    P.raw(aim(L.cone(0.118, 0.212, 0.230, 12),
+              tuple(_HD + Vector((0.0, 0.020, 0.045))), (0.06, 0.14, -1.0)), 'dark')
+    P.add(L.box(0.136, 0.044, 0.140), 'bone',
+          loc=tuple(_HD + Vector((0.0, -0.188, -0.014))))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.012))), 0.044, 0.025, -0.228)
     _close("head")
 
-    # ---- the arms, and the balance hook in the near one ------------------
-    # A fen walker carries a pole to feel the bottom with. It is dark and it is
-    # NOT a stilt - it is thinner, it is held across the body and it does not
-    # reach the floor, so it cannot be miscounted as a fourth leg.
+    # ---- the arms, and the crutch under the near one ---------------------
+    # THE OPEN TRIANGLE between the near arm, the trunk and the crutch is the
+    # thing that says BRACED. Negative space is what a silhouette is made of,
+    # and the pass-3 body had none - every part of it touched every other.
     _open()
-    _HOOK = Vector((0.520, -0.330, 1.520))
-    limb(P, [tuple(_T2 + Vector((-0.205, 0.0, -0.040))),
-             tuple(_T2 + Vector((-0.280, -0.120, -0.430))),
-             tuple(_T2 + Vector((-0.235, -0.165, -0.700)))], 0.072, 0.052, 'body')
-    limb(P, [tuple(_T2 + Vector((0.205, 0.0, -0.040))),
-             tuple(_T2 + Vector((0.330, -0.150, -0.360))),
-             tuple(_HOOK)], 0.074, 0.054, 'body')
-    # PASS 2: THE FEELING POLE IS SHORTENED FROM 1.06 TO 0.56 AND RAKED
-    # ACROSS. At pass 1 it was long and near-parallel to the stilts, and in the
-    # hero-scale shot - the one that matters, because it is the stream
-    # distance - it read as a FOURTH LEG. That is the exact miscount this
-    # docstring claimed to have designed out, so it is cut back until it cannot
-    # be mistaken for a thing standing on the floor.
-    P.raw(aim(L.cone(0.028, 0.028, 0.560, 8), tuple(_HOOK + Vector((-0.070, 0.040, 0.230))),
-              (0.52, -0.16, -1.0)), 'dark')
+    _SL = _t((-0.296, -0.045, SHO - 0.045)) + Vector((0.0, 0.0, 0.040))
+    _SR = _t((0.296, -0.045, SHO - 0.045)) + Vector((0.0, 0.0, -0.052))
+    # PASS 5: THE FAR ARM IS SWUNG OUT AND FORWARD. At pass 4 it hung flat
+    # against the trunk and disappeared into it, so the figure had one arm. An
+    # arm that touches the body along its whole length is not an arm in a
+    # silhouette; it is trunk.
+    # PASS 6: THINNER THAN THE TRUNK, AND CLEAR OF IT. An arm the same
+    # thickness as the chest is a second trunk. It hangs nearly straight with a
+    # small elbow, out and forward, so there is daylight between it and the
+    # body for its whole length.
+    limb(P, [tuple(_SL), tuple(_SL + Vector((-0.145, -0.165, -0.345))),
+             tuple(_SL + Vector((-0.150, -0.280, -0.690)))], 0.088, 0.062, 'body')
+    # THE CRUTCH, AND THE NEAR ARM OVER IT. The arm comes DOWN THE SHAFT from
+    # an armpit the crutch head is jammed into, which is a thing only a man
+    # does. Pass 4 ran the arm along the crutch's own line from the shoulder,
+    # so the two merged into one diagonal and the brace could not be seen.
+    _CT = Vector((0.700, -0.125, 2.620))
+    _CB = Vector((0.670, -0.345, 0.040))
+    _GRIP = Vector((0.686, -0.240, 2.340))
+    # THE ELBOW IS HIGH AND INBOARD and the forearm drops onto the shaft, so
+    # upper arm, forearm and crutch are three different directions and the
+    # brace is legible as a brace.
+    limb(P, [tuple(_SR), tuple(_SR + Vector((0.205, -0.195, -0.145))),
+             tuple(_GRIP)], 0.088, 0.062, 'body')
+    # Dark, and THINNER than the stilt so it cannot be counted as a leg. Its
+    # butt is pulled IN from the stilt's splay (x +0.69 against -0.43) so the
+    # two poles no longer make the stepladder that pass 4 rendered, and it is
+    # raked forward in Y so the side camera still separates them.
+    P.raw(aim(L.cone(0.034, 0.044, (_CT - _CB).length, 8),
+              tuple(_CB), tuple((_CT - _CB).normalized())), 'dark')
+    P.add(L.box(0.250, 0.118, 0.068), 'dark', loc=tuple(_CT), rot=(0.0, 0.20, 0.0))
     _close("arms")
     return P
 

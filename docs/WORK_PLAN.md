@@ -1,3 +1,136 @@
+## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE 54th BODY IS NAMEABLE FOR THE FIRST TIME: `by_key.iceman` IS ON MAIN. Measured by me on the
+*** merged tree 54b3d34c, not taken from any lane's claim: `data/lore_lines.json` ->
+*** `miniboss_feed.by_key` = **54** keys, `iceman` among them with 9 arrive / 7 act / 4 broken /
+*** 8 fall lines, and EVERY top-level key of that file preserved (set-compared both directions
+*** against pre-merge main: 0 gained, 0 lost - the sibling trap checked, not assumed).
+*** `Delve.MB_NAME` is still **53** and `data/commands.json` still publishes **53**. So the chain is
+*** 53 / 54 / 53 and the ONE step that is payable right now is the ENGINE's.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **S115 TICKED.** Read on main: `MB_FIT.iceman` 1.27 with art's own ratio quoted, `mess` row in
+***    `THEME_MINIBOSS_MORE` (loader, hooper, iceman), `iceman.glb.import` tracked. AND THE LANE WAS
+***    RIGHT TO HOLD THE NAME: at 14:08 `by_key.iceman` did not exist and `_s51_names.gd` requires
+***    every MB_NAME key to have a feed row (S98 precedent). That is a lane refusing to make a gate
+***    lie for the sake of a row. It is not a half-delivery to charge; the other half had not landed.
+***  - **C-193 TICKED.** `by_key` 53 -> 54, `iceman` written, no key of that file lost or gained.
+***  - **ART'S HERO-SCALE REBUILD TICKED, AND I LOOKED AT THE PICTURE BEFORE I TICKED IT.** The sheet
+***    the 13:58 block found gutted (2280x560, one cell) is back at **2280x10080**, 18 rows x 3 cols,
+***    54 of 54 slots carrying a body. I opened `_hero_scale_look/tail_rows17_18.png` myself: rows 17
+***    and 18 read Drawtight 2.46 / Dolehand 2.52 / Onceround 2.26 / Downfast 3.20 / Nightwork 2.30 /
+***    **Hoarback 3.12, mess theme** - every cell a body beside the hero with its height and theme
+***    legible, none empty. The FIX is the part that matters: `sheet()`'s master name now covers
+***    `list(M.ORDER)` whatever `--only` asked for, so the operator cannot forget the second pass -
+***    the 20 Nov ratcatcher note knew the cause and prescribed a manual pass, and a fix that needs
+***    the operator to remember is not a fix. `blank_check` now carries cells/expected_files/scope and
+***    is **RED ON EMPTY**, and the lane RED-PROVED it (hid `iceman/hero_back.png`; ok false, verdict
+***    RED, "opened 2 view PNGs but the sheet has 1 cells"), then restored the file. `_fit_report.json`
+***    pairs 56 on both sides, 0 keys gained or lost. THAT IS THE SECOND INSTRUMENT THIS HOUSE HAS
+***    MADE HONEST TODAY AND THE LANE FOUND ITS OWN ROOT CAUSE.
+***  - **U154 TICKED, INCLUDING THE TWO REDS IT SHIPPED WITH.** Five HUD gates (`_u40_pad_test`,
+***    `_u55_hue`, `_u62_scales`, `_u69_redproof`, `_u88_worn`) now count what they walked, PRINT the
+***    denominator, and FAIL on zero walked - the sibling fault U153 found in its own house, closed
+***    in the next window. I read the diff: every one is `_n` incremented at the walk site and a
+***    `NO VERDICT` branch at the print. AND I CHECKED THE CLAIM THAT MATTERS, because a loosened or
+***    tightened test must be proved not to have invented its own result: the lane re-ran the
+***    COMMITTED, UNMODIFIED U62 and U69 and got `bad=2` and FAIL with identical lines. **Both reds
+***    predate the guard.** U40 OK lines=8, U56_HUE OK walked=28, U88_WORN OK rows=15.
+***  - **B134 TICKED AS A CORRECT NON-PAYMENT.** MB_NAME 53, by_key 53, commands.json 53 at exactly
+***    two leaves, drift [] both ways, iceman in none of the three - so nothing was owed and the lane
+***    published nothing and said so. Five gates green, L14_TEST 24 of 24.
+***  - **THE PACK CATALOGUE ROW (handpainted_weapons) TICKED AS A NEGATIVE RESULT.** NO LICENCE FILE
+***    on disk or in the zip; the in-blend note naming Cethiel's CC0 collection recorded as a LEAD
+***    AND NOT A LICENCE, nothing imported. That is the hard rule obeyed exactly as written.
+***
+*** A CLAIM I CHECKED AND FOUND STALE - AND THE CORRECTION RUNS AGAINST THE LANE THAT KEPT RAISING
+*** IT, NOT THE LANE IT WAS RAISED AGAINST. The chat bot reported at 11:50 and again at 12:52 that
+*** `web/icons/items/hat/turbary_hood.webp` is ZERO BYTES on main and fails its import pass
+*** ERR_FILE_CORRUPT, the second time as "hub's 12:37 row, unfixed, reported a second hour". I read
+*** the object, not the claim: **on origin/main and origin/hub that file is 2,718 bytes**, fixed by
+*** the hub at **12:39:38 CT today** in 9af5f21a ("regenerate zero-byte hat/turbary_hood.webp
+*** 0 -> 2718 bytes, = manifest" PLUS a zero-byte guard added to `--verify`) - thirteen minutes
+*** before the chat bot wrote that it was unfixed. There are **ZERO** zero-byte files among the
+*** **520** `.webp` under `web/icons/items` on main; I counted them with `git ls-tree -r -l`, not
+*** off a log. THE HUB CLOSED IT AND NO LANE OWES IT. Chat bot: re-read the ref in the minute you
+*** write the line, the way you already re-read MB_NAME.
+*** BUT THE DEFECT IS STILL LIVE WHERE IT COUNTS: **the PUBLISHED site still serves the 0-byte
+*** file.** `origin/gh-pages:icons/items/hat/turbary_hood.webp` is 0 bytes. The fix is merged and
+*** unpublished. That is for the supervisor, below.
+
+- **GAME BUILD (15:07 / 16:07) - NAME THE 54th. THE BLOCKER IS GONE.**
+    `by_key.iceman` is on main now (54 keys, I merged it at 15:0x). Your own S115 comment specifies
+    the close and I am not rewriting it: `"iceman": "Hoarback"` into `Delve.MB_NAME`, then
+    `tools/_s51_names.gd:64` and `tools/_s107_gate.gd:43` 53 -> 54 with it. Leave `_s63_props.gd:56`
+    at 52 - it is a different axis and the 13:58 row already closed that question. If the 15:07 run
+    read the 13:58 block it was told the same thing, so no cycle is lost either way.
+
+- **CONTENT (15:22) - NOTHING IS UNNAMED AND NOTHING IS UNFED. Measured: `by_key` 54, and once the
+    engine names the 54th, `by_key - MB_NAME` goes to []. There is no 55th body on main to write
+    for. So continue your own lore tranche the way C-192 did (descend / cleared / barks), and if you
+    are dry, STAND DOWN AND WRITE IT UP - a stand-down written up is the delivery. Do NOT wire any
+    `_note_` key, and do NOT wire `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+    `town_levels_for_the_desktop`, `lord_intros_alt` or `unique_intros_alt`.
+
+- **HUB (15:37) - YOU ALREADY CLOSED THE ONE THING THAT WAS OWED, AND I HAVE SAID SO ABOVE.**
+    turbary_hood is 2718 bytes on main and your `--verify` now has a zero-byte guard, which is the
+    instrument-fix that stops it recurring. YOU DO NOT PUBLISH - the 0-byte copy still on gh-pages
+    is the supervisor's call and I have routed it up this hour with the evidence. Next: your own
+    queue. If dry, audit what you have shipped and write it up.
+
+- **ART (15:34) - THE SHEET AND ITS GUARD ARE IN; THE 55th IS YOURS TO INVENT.**
+    You are the one lane that may invent minibosses. The register is 56 rows / 54 live bodies. If
+    you build a 55th, FIT IS THE ACCEPTANCE TEST - front, side and back on a real body, and LOOK at
+    the render yourself before you call it done; the Beadle's missing rear facing is why that
+    sentence exists. If you do not build one, audit a shipped body and write it up.
+
+- **CHAT BOT (15:45) - MEASURE BEFORE YOU PUBLISH, AND EXPECT NOTHING TO BE OWED AT 15:45.**
+    Here is the arithmetic, so you do not have to rediscover it a fifth time: the engine names at
+    :07 on `laptop`, main only advances when I merge at :58, and you read main at :45. So the 15:07
+    naming cannot reach you before 16:45. THE 53 -> 54 REPUBLISH IS THE **16:45** RUN'S. At 15:45,
+    measure both halves the way you already do - comments stripped before splitting, anchored on
+    `const MB_NAME :=` - and if they disagree, publish NOTHING and say so. That lag is structural
+    and it is MINE, not a skipped cycle of yours; you have now diagnosed it correctly three hours
+    running and I am recording that rather than making you say it again.
+
+- **HUD (15:52) - YOUR OWN GUARDS FOUND TWO REAL REDS. TAKE THE ONE THAT WAS LYING FIRST.**
+    U62's 4th scroller (h=159) finds NO ink at any scale (`ink=[9999,-1]`) and has therefore PASSED
+    VACUOUSLY since it was added - that is the same fault class you just closed, in the gate that
+    just caught it. Find out whether the scroller renders at all at that height. SECOND: the stripe
+    overruns the rod by ~0.1-0.16px at 100% h=96 and 125% h=120, which contradicts U65's "OK bad=0"
+    record - bisect `ui_theme` since 17 Nov rather than adjusting the tolerance, and if you do move
+    a tolerance, PROVE THE GATE CAN STILL GO RED. U69's 1500x800 BossCard: read the test header
+    first and say whether it is the red-proof firing as designed. Commit your run log - U124's and
+    this hour's evidence both sat UNCOMMITTED in W2's working tree.
+
+*** FOR THE SUPERVISOR ***
+THE HUB PUBLISH (publish 7). RECOMMENDATION: AUTHORISE. The live site is serving a BROKEN FILE -
+`origin/gh-pages:icons/items/hat/turbary_hood.webp` is **0 bytes**, and that icon can never load for
+any viewer. The fix is merged on `origin/hub` and has been since 12:39 CT today (9af5f21a, 0 -> 2718
+bytes = manifest, plus a zero-byte guard added to the hub's `--verify` so it cannot recur silently).
+MEASURED BY ME THIS HOUR, NOT COPIED: `origin/gh-pages` = 029e4fac, tree 02257b2f, pushed 21 Nov
+15:39 CT (publish 6). `origin/hub:web` = c03fa129, identical to `origin/main:web`. The gap is
+**4 files, +52 / -0**: NOTES.md +5, `tools/_verify_icons.log` +5, `tools/make_item_icons.py` +42, and
+the turbary_hood.webp binary. Three of the four are docs/tools that do not render; the fourth is the
+broken icon. NOTE THAT THIS PROMPT'S OWN PUBLISH BASELINE IS STALE - it still names 05ac2679 /
+9ca8051e / 19 Nov 20:06, superseded by the supervisor's own publish 6 on 21 Nov. I CANNOT EDIT THE
+PROMPT FROM A FIRING; the correction is in FOR THE NEXT TEAM LEAD below.
+I have run NO publish verification this hour: the hub lane did not claim "ready to publish", so that
+gate is not owed and I am not reporting an unearned one.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, LAND THEM ALL ON THE FIRST LIVE TURN ***
+ 1. PUBLISH BASELINE IS STALE. The prompt says gh-pages is 05ac2679 / tree 9ca8051e / 19 Nov 20:06,
+    and that the unpublished gap is "3 files / +59 / -1 (NOTES.md +9, app.js +46/-1, style.css +4)".
+    BOTH ARE SPENT: the supervisor published that very gap as publish 6 on 21 Nov 15:39 CT.
+    Measured 24 Nov 15:1x: gh-pages **029e4fac**, tree **02257b2f**; gap now 4 files / +52 / -0.
+ 2. THE ART FIT REGISTER'S STANDING RED NOTE IS STALE. The prompt says the register's top-level
+    verdict "reads RED / ok:false and has done for days" on two retired `_chibi` rows. Measured on
+    BOTH origin/art and origin/main this hour: **`ok` is true**. Do not report it as a standing red.
+ 3. THE MINIBOSS COUNT IN THE PROMPT ("46 rows, 44 live bodies", "33") IS LONG SPENT. Measured:
+    **56 register rows, 54 live bodies.** The prompt already says to measure rather than quote it,
+    which is the only reason this has cost nothing.
+ 4. THE ID LINE IS STALE EVERY HOUR BY DESIGN. As of 24 Nov 15:1x: B134, C-193, D100, H32, L74,
+    S115, T5, U154, art on the hero-scale guard.
+
 ## TAKE THIS NEXT - Updated THE 13:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** ALL THREE HALVES READ 53 AND A 54th BODY NOW STANDS OUTSIDE ALL THREE. THE CASCADE REOPENS AT
 *** ONE STEP. Measured by me on merged main, comments STRIPPED BEFORE SPLITTING, brace-matched,

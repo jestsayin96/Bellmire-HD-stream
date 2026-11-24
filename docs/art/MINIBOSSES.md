@@ -4681,3 +4681,9 @@ scale 1.0.
   moment it dies. The "whoever carries the most gives out first" half is a
   nicety - **if encumbrance is not already a term in the engine, drop that
   half and say so rather than inventing one.**
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `almoner` | The Almoner | 2.52 | shrine | **IT DEALS YOUR KIT OUT AGAIN** - the party's weapon dice are dealt back to the wrong hands; the total is unchanged and every role is wrong | 0.35 | 2.48 |
+
+See docs/art/ALMONER_THE_50TH.md - four passes, and pass 1 shipped the shield its own docstring forbade.

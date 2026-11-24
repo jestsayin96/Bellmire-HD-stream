@@ -24,7 +24,7 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "645d79585f0229f89caa3428ba9f2835723263b6",
+   "head": "ab8fd3d1441291201053281d29c0c800dd690ca0",
    "ref": "origin/main",
    "ref_commit": "06621a77eab31308514c5d1a84c2f98c0217bf7c",
    "ref_gd_sha256_8": "bc3a603f",
@@ -2890,20 +2890,20 @@
    "wear": 0.14,
    "feed_line": "Something ahead is turning, and it is shut.",
    "pack_used": null,
-   "parts": 4,
+   "parts": 2,
    "engine": "BLENDER_EEVEE",
-   "faces": 1346,
+   "faces": 822,
    "size": [
-    2.34,
+    1.73,
     1.37,
     2.26
    ],
-   "footprint_span": 2.34,
+   "footprint_span": 1.73,
    "height_m": 2.26,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.663,
+   "corridor_margin_m": 9.27,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.24,
    "read_from": {
@@ -2917,11 +2917,11 @@
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.7634295257977541,
-    "ortho": 2.8188974857330322,
+    "radius": 1.5786217200504706,
+    "ortho": 2.6914117336273193,
     "clip": [
-     6.969648838043213,
-     18.800548553466797
+     6.620937824249268,
+     17.326906204223633
     ]
    },
    "views": [

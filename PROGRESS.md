@@ -13717,8 +13717,8 @@ was a solid plate 1.28 m across lying over the mouth. Pass 3 sweeps the lip as
 a real ring in the mouth's own basis and the opening reads - dark interior,
 pale edge, which is the inverse of what pass 1 built. 1,346 faces.
 
-GATES. Gen ok true, 62 rows, errors [], blank [], panner span 2.34
-CORRIDOR-SAFE and UNDER-LID (corridor 11.0, lid 9.5, both read out of
+GATES. Gen ok true, 62 rows, errors [], blank [], panner span 1.73
+CORRIDOR-SAFE and UNDER-LID (2.34 at pass 3, before the man came out) (corridor 11.0, lid 9.5, both read out of
 floorgen.gd this run). Fit verdict GREEN, ok true, errors [], blind_views [],
 panner proving 3 of 3, border and frame clean, hero 2.45 m measured not
 assumed.
@@ -13737,11 +13737,22 @@ of the mouth in front projection; (4) the comfits read as RIVETS, not sugar -
 nothing in frame says confection; (5) the pale rim is a closed continuous ring
 and at stream distance reads slightly as a porthole, a modern shape; (6) the
 man's hat floats above a neckless head.
-FAULTS 1 AND 2 ARE THE SAME MAN AND I DID NOT GUESS AT HIM IN A RUSHED PASS:
-either he moves forward in -Y so he parts from the pan in the side view, or he
-comes out and the body becomes a machine with a crank nobody is turning, which
-is plainer and kills three faults in one change. Next firing decides it on a
-render, not here.
+PASS 4 ANSWERED THE MAN ON A RENDER RATHER THAN IN A SENTENCE. I built the
+machine without him at tag `_noman` and opened the pair. FRONT: plainly better
+- the crank and handle become visible for the FIRST TIME IN ANY VIEW, having
+been behind his body all along. SIDE: identical to within the eye, which is
+the proof and not a disappointment - a part whose removal changes a view by
+nothing was contributing nothing to that view. BACK: loses a figure that was
+only ever a back. So he is out; PAN_MAN=1 rebuilds him and pass 3's body is
+kept at renders/art/minibosses/panner_noman/ so the A/B reproduces.
+WHAT IT COST: faces 1,346 -> 822, span 2.34 -> 1.73 m, material meshes 4 -> 2,
+because the man was the only user of the wool slot AND the glow slot. THE
+SHIPPED BODY HAS NO EMISSIVE AT ALL - nothing for the back-lamp guard to find
+and nothing that reads as a face. Deliberate: this one is machinery, like the
+Porter's barred leaf.
+FAULTS 1, 2 AND 6 ARE CLOSED BY THAT. FAULTS 3, 4 AND 5 STILL STAND ON WHAT I
+SHIPPED - the chute notch, the rivet-not-sugar comfits, and the porthole read -
+and I am not pretending otherwise. Next firing, in that order.
 
 FOR THE GAME BUILD: NOT WIRED BY ME. bestiary.gd needs a `model` path to
 assets/monsters/minibosses/panner.glb and NO `anims` entry (static);

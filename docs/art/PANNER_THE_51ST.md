@@ -85,11 +85,39 @@ tube radius 0.058). 1,346 faces. The mouth now reads as an opening: dark
 interior, pale edge. That is what makes a hole read as a hole, and it is the
 inverse of what pass 1 built.
 
+## PASS 4 - THE MAN CAME OUT, AND THE A/B DECIDED IT, NOT TASTE
+
+Pass 3's fault list below had two entries that were the same man, and rather
+than leave him to the next firing I rendered the machine without him at tag
+`_noman` and opened the pair.
+
+- **FRONT - plainly better.** The crank and its handle become visible for the
+  first time in ANY view; they had been behind his body the whole time. The
+  read is now a drum, a mouth, a crank and a hopper, and nothing else.
+- **SIDE - identical to within the eye.** That is the proof rather than a
+  disappointment: a part whose removal changes a view by nothing was
+  contributing nothing to that view.
+- **BACK - loses a figure that was only ever a back.**
+
+So he is out, and `PAN_MAN=1` builds him again so the A/B reproduces; pass 3's
+body is kept at `renders/art/minibosses/panner_noman/`. A crank that nobody is
+turning is the plainer Bellmire answer anyway - the thing turns itself, which
+is what makes the window inevitable.
+
+**WHAT THAT COST AND WHAT IT BOUGHT.** Faces 1,346 -> 822; footprint span
+2.34 -> 1.73 m; material meshes 4 -> 2, because the man was the only user of
+the wool slot AND of the glow slot. **THE BODY NOW HAS NO EMISSIVE AT ALL** -
+there is nothing for the back-lamp guard to find, and nothing to read as a
+face. That is a deliberate consequence and not an oversight: this one is
+machinery, like the Porter's barred leaf, not a creature with eyes.
+
 ## THE FIT PROOF - RENDERED ON A BODY AND I OPENED ALL THREE
 
 `minibossfit` GREEN, errors [], blind_views [], blanks none, border/frame
 clean, panner proving 3 of 3 views, measured beside a real KayKit Knight at
-scale 1.0 (hero 2.45 m measured, not assumed).
+scale 1.0 (hero 2.45 m measured, not assumed). Gen ok true, 62 rows,
+errors [], blank [], span **1.73 m CORRIDOR-SAFE and UNDER-LID**, 822 faces.
+The three descriptions below are of the SHIPPED pass-4 body.
 
 - **hero_front** - the opening reads. Dark bowl, pale rim, the comfits visible
   as bumps on the floor, the chute coming down into it. Scale beside the knight
@@ -102,7 +130,7 @@ scale 1.0 (hero 2.45 m measured, not assumed).
   body that reads the same from both ends) is designed out and confirmed by eye
   rather than by `seen: 1.0`.
 
-### EVERY FAULT I CAN SEE, AND THERE ARE SIX
+### EVERY FAULT I COULD SEE AT PASS 3 - SIX, AND PASS 4 CLOSED THREE
 
 1. **THE MAN IS ECLIPSED IN THE SIDE VIEW - COMPLETELY GONE.** He and the pan
    share a Y, and the side camera looks along X, so no amount of X separation
@@ -121,17 +149,18 @@ scale 1.0 (hero 2.45 m measured, not assumed).
    slightly as a porthole - a modern shape, not a medieval one.
 6. The man's hat sits above a head with no visible neck, so it floats.
 
-**THE OPEN QUESTION I AM NOT DECIDING ALONE:** fault 1 and 2 are the same man.
-Either he moves forward in -Y so he parts from the pan in the side view, or he
-comes out altogether and the body becomes a machine with a crank that nobody is
-turning - which is plainer, more Bellmire, and removes three faults in one
-change. I did not guess at it in a rushed pass.
+**FAULTS 1, 2 AND 6 ARE CLOSED BY PASS 4** - they were all the man, and he is
+out. **FAULTS 3, 4 AND 5 STILL STAND ON THE SHIPPED BODY** and I am not
+pretending otherwise: the chute still notches the top of the mouth in front
+projection, the comfits still read as rivets rather than sugar, and the closed
+pale rim still carries a faint porthole read at stream distance. Those are the
+next firing's work, in that order.
 
 ## WIRING - THE ART LANE DOES NOT DO THIS
 
 `scripts/bestiary.gd` needs a `model` path to
 `assets/monsters/minibosses/panner.glb` and **NO `anims` entry** - it is static.
 `Delve.MB_NAME` wants `"panner": "Onceround"` once content's feed row lands.
-**NOT ROOM-LOCKED: CORRIDOR-SAFE and UNDER-LID** - footprint span 2.34 m
+**NOT ROOM-LOCKED: CORRIDOR-SAFE and UNDER-LID** - footprint span 1.73 m
 against a corridor clear span of 11.0 m and a lid underside of 9.5 m, both read
 out of `scripts/floorgen.gd` this run by `tools/art/floorgeom.py`.

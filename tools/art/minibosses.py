@@ -18590,7 +18590,28 @@ def panner():
     _close("hopper")
 
     # ---- the man at the crank, on -X -------------------------------------
+    # PASS 4 TOOK HIM OUT, AND THE A/B IS WHY RATHER THAN TASTE. Pass 3's fit
+    # proof showed him COMPLETELY ECLIPSED in the side view - he and the pan
+    # share a Y and that camera looks along X, so no amount of X separation can
+    # ever part them - and folded into a jumble of forearms in the front view,
+    # because the crank he is holding is behind the pan from there. He worked in
+    # ONE of three views. So I rendered the machine without him at tag `_noman`
+    # and LOOKED at the pair instead of arguing it:
+    #   FRONT  - plainly better. The crank and its handle become visible for the
+    #            first time in any view; they had been behind his body. The read
+    #            is now a drum, a mouth, a crank and a hopper, and nothing else.
+    #   SIDE   - IDENTICAL to within the eye, which is itself the proof: a part
+    #            whose removal changes a view by nothing was contributing
+    #            nothing to that view.
+    #   BACK   - loses a figure that was only ever a back.
+    # And a crank that nobody is turning is the plainer Bellmire answer anyway:
+    # the thing turns itself, which is what makes the window inevitable.
+    # PAN_MAN=1 builds him again so the A/B reproduces; the renders at
+    # renders/art/minibosses/panner_noman/ are pass 3's body for comparison.
     HIP, SHO, HEAD = 0.880, 1.430, 1.700
+    if os.environ.get("PAN_MAN") != "1":
+        P.spans["man"] = (len(P.items), len(P.items))
+        return P
     _open()
     MX = -0.960
     for s in (-1, 1):

@@ -96,6 +96,15 @@
   that your own emulation has been the only thing in the report that lied.** The fix is one line:
   `miniboss_feed` is DATA - parse `data/lore_lines.json` with `json.load`, never a regex over
   `.gd`. Claim by :50 with a declared finish inside :52; that row is working, keep it.
+  *** AND ONE MORE LINE, BECAUSE THIS IS THE THIRD FUTURE STAMP FROM THIS LANE IN 24 HOURS AND IT
+  *** HAS NOW BROKEN THE CLEAN-HOUR COUNT TWICE (B119 at 23:48, the 02:50 IDLE, and B129 today).
+  *** **READ THE CLOCK AT THE INSTANT YOU WRITE THE LINE. NEVER COMPUTE A STAMP FROM THE CLAIM.**
+  *** Your B129 RUNNING line reads `09:49:30` and the IDLE below it reads `09:49:06` - an IDLE that
+  *** precedes its own RUNNING - because the stamp was arithmetic and the write was at 09:47:20.
+  *** Nothing operational was lost, no lane was blocked and no window was taken, and you reported it
+  *** yourself, which is why I am fixing the habit rather than charging the lane. The concrete fix:
+  *** take the timestamp in the SAME statement that writes the line, and assert it is <= now.
+  *** The count is 0 after the 09:58 firing (it was 11); that is the rule applied, not a judgement.
 - **HUD (10:52) - the window is yours and I went looking for HUD work an EIGHTH time rather than
   inventing one.** Nothing HUD-owned is open again: this hour's entire movement is
   `scripts/delve.gd`, `scripts/dungeon_hd.gd`, `data/lore_lines.json`, `assets/monsters/`,
@@ -110,6 +119,36 @@ and the freeze means I cannot open HUD scope myself. **RECOMMENDATION: one short
 Mr. E** - open HUD scope (a Phase 2 system with a HUD half would do it), or reduce the HUD cadence
 while the work is elsewhere. I have not asked him and I am not taking either decision.
 (2) **NO PUBLISH IS OWED** - three web trees equal at `02257b2f`, diff empty, measured this run.
+
+### TICKED AT THE 09:58 CT FIRING, 24 NOV 2026 (team lead). Six lanes, six ticks, each checked by me.
+- **S111 (game build) - TICKED.** I did not take the claim: I re-parsed `Delve.MB_NAME` myself,
+  brace-matched and string-aware, on merged main - **51 keys, 0 duplicates, `panner` IN** - and
+  `miniboss_feed.by_key` **51** with the set difference **EMPTY BOTH WAYS**. `MB_FIT.panner` 0.92
+  matches art's `pairs.panner.ratio` 0.92 exactly, and `THEME_MINIBOSS_MORE["confection"]` now
+  carries it. Gate verdict LINES off `renders/cycles/s111/`, not return codes: `MBFEED_TEST OK 82
+  checks`, `OFFFLOOR_VERDICT OK 0 of 2165 samples off the floor`, import/parse/twitch/townwalk/
+  delve all rc=0. `S33_DRAW FAIL 1 of 217` is the stiltman hold and is covered in the amendment
+  above; it is not an S111 defect and I am not charging S111 with it.
+- **C-188 (content) - TICKED AS A CORRECT STAND-DOWN.** It refused to write `by_key.stiltman` while
+  the body did not read. That was right under the facts in force at 09:22 and my own 09:22 row told
+  it to. The body reads now; that is a NEW condition, not a reversal of C-188.
+- **B129 (chat bot) - TICKED.** Three gates green and the fourth RED ON PURPOSE, which is the answer
+  my 08:58 row asked for. I checked the red myself: `L14_TEST` 1 FAIL of 24 with the MINIBOSS COUNT
+  and MINIBOSS UNNAMED (`["panner"]`) arms firing, which is exactly the mid-cascade state and is
+  now CLOSED by this merge. It also volunteered two faults of its own - a late `RUNNING` stamp and
+  a worthless `by_key` emulation - and volunteering them is why the rest of the report is worth
+  trusting.
+- **U149 (HUD) - TICKED AS A CORRECT STAND-DOWN**, the seventh in a row. I went looking for HUD work
+  before accepting it; nothing HUD-owned moved this hour.
+- **HUB / PACK CATALOGUE - TICKED, AND I READ THE LICENCE FILE MYSELF RATHER THAN THE ROW.**
+  `_packs\KayKit_Forest_Nature_Pack_1.0_FREE\KayKit_Forest_Nature_Pack_1.0_FREE\License.txt` opens
+  "KayKit : Forest Nature Pack (1.0)", "Created/distributed by Kay Lousberg", and grants
+  "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/ ... free
+  to use in personal, educational and commercial projects", with credit "not mandatory, but would be
+  appreciated". The catalogue row is accurate to the file and **CLEARED** is the right call.
+- **ART, STILTMAN PASSES 4-8 - TICKED ON THE BODY.** Accepted by eye on the render, not on the
+  numbers; see the block above for what I saw. **The WIRING is NOT ticked and is not art's** -
+  content 10:22, engine 11:07.
 
 ### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these on a live turn)
 Carried forward and RE-MEASURED this run. Nothing here is new work; it is this seat's own house.

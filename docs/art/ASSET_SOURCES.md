@@ -662,3 +662,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 
 - Checked: walked every file under `_packs\dungeon_collection_2\` (180 files, counted by type), listed the 180 entries inside `dungeon_collection_2.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all 180 text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - KayKit_Forest_Nature_Pack_1.0_FREE (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit_Forest_Nature_Pack_1.0_FREE (folder `_packs\KayKit_Forest_Nature_Pack_1.0_FREE\`, nested one level as `_packs\KayKit_Forest_Nature_Pack_1.0_FREE\KayKit_Forest_Nature_Pack_1.0_FREE\`; sibling `KayKit_Forest_Nature_Pack_1.0_FREE.zip` 6.4 MB, not opened this firing) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 (Creative Commons Zero)** | `...\KayKit_Forest_Nature_Pack_1.0_FREE\License.txt` (1,469 bytes, read in full off disk this firing) | 641 files on disk: 105 `.gltf` + 105 `.bin` (Assets\gltf), 210 `.fbx` (Assets\fbx and Assets\fbx(unity)), 105 `.obj` + 105 `.mtl` (Assets\obj), 7 `.png` (forest texture, sample, contents image), 1 `.txt` (License.txt), 3 `.url` (Discord, More KayKit Assets, Patreon). 105 distinct models; the same models appear in glTF, FBX and OBJ sets. | permitted: the licence says "free to use in personal, educational and commercial projects" | not required by CC0; the licence text asks for credit to Kay Lousberg, www.kaylousberg.com ("not mandatory, but would be appreciated") |
+
+- Checked: walked every file under the pack (641 files, counted by extension and by directory), listed the licence-named files (only `License.txt`), and read `License.txt` in full. The licence text states: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects."
+- The folder name and the earlier tier-1 row (line 244, which cites this pack's `License.txt`) were not used as the licence claim; the CC0 grant comes from the file read this firing.
+- Format note for the art lane: glTF/GLB is available (`Assets\gltf`), so no Blender conversion is needed for this pack. KayKit double-extension rule from the Notes section still applies to any file that is renamed on import.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_Forest_Nature_Pack_1.0_FREE`. Nothing has been imported, converted or redistributed by this firing. Any model that enters `assets/` still needs its own row.

@@ -554,3 +554,16 @@ added by a re-run.
 - OPEN NOTE FOR MR. E, not resolved here: the UV texture is stated to be derived from textures by Rick Hoppmann, and the licence file gives no licence for those source textures. The model's CC0 statement is clear; the texture provenance is not. Confirm before any `forest-monster` texture enters `assets/`.
 - Note for later seats: the `.blend` was not opened, so the CC0 grant is recorded for the pack as published. Any monster that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0) for the model as stated. Texture provenance open (see note).** Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - kaykit_character_animations_CC0 (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kaykit_character_animations_CC0 (KayKit : Character Animations 1.0; folder `_packs\kaykit_character_animations_CC0\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\kaykit_character_animations_CC0\License.txt` (638 bytes, read in full this run) | 53 | Yes. The licence reads: "free to use in personal, educational and commercial projects" | Not mandatory. The licence says crediting Kay Lousberg is "not mandatory"; recorded here anyway |
+
+- Checked: every file under `_packs\kaykit_character_animations_CC0\` by walking the tree (53 files), and `License.txt` read in full off disk. The file states, verbatim: "KayKit : Character Animations (1.0) / Created/distributed by Kay Lousberg (www.kaylousberg.com) / Creation date: 03/02/2021 15:00 / License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/".
+- File breakdown (by extension): 22 .fbx, 6 .obj, 6 .mtl, 3 .dae, 2 .glb, 1 .gltf, 7 .png (brand resources), 3 .pdf (Godot, Unity, Unreal implementation guides), 1 .txt, 2 .url (links only).
+- Content: one combined animation FBX (`Animations\KayKit Animated Character_v1.0.fbx`) plus 18 single-animation FBX files in `Animations\Single Animations\` (Attack(1h), BasePose, Block, Cheer, Climbing, Defeat, HeavyAttack, Hop, Idle, Jump, LayingDownIdle, Run, Shoot(1h), Shoot(2h), Shooting(1h), Shooting(2h), Walk, Wave). Also three static props in `Models\` (Case, Pencil, PrototypePete), each as obj/fbx/dae, with PrototypePete additionally as gltf.
+- Naming note: the pack title in the licence is "KayKit : Character Animations", and the folder is `kaykit_character_animations_CC0`. Both refer to the same pack.
+- Note for later seats: the `.zip` sibling `kaykit_character_animations_CC0.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. The rigged character meshes these animations target are in the separate KayKit Dungeon Pack (already catalogued above), so any animation used with those meshes is a rig-compatibility question, not a licence question. Any file that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kaykit_character_animations_CC0`. Nothing is redistributed AS an asset.

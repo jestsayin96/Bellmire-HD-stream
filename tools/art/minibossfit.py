@@ -865,6 +865,153 @@ def measure_disk_frames(repo, rep, tag=""):
         row["air_px_eps"] = DIFF_EPS
 
 
+# The self_seen bar. 0.75, CHOSEN against nine pictures on 21 Nov and kept:
+# it NAMES rows, it does not fail them. No verdict turns on its value - the
+# only self_seen RED is a coverage gap, which is a question of whether the
+# instrument was asked at all, not of where the bar sits.
+SELF_SEEN_BAR = 0.75
+
+
+def derive_self_seen(rep, repo):
+    """THE self_seen SUMMARY, DERIVED EVERY RUN - NEVER HAND-WRITTEN AGAIN.
+
+    *** THE DEFECT THIS CLOSES, FOUND 24 Nov 2026 11:3x CT BY THIS LANE IN ITS
+    *** OWN SHIPPED WORK, AND IT IS THE CARRY RULE'S SHADOW. ***
+    main() carries forward every top-level block it does not itself compute.
+    That rule is RIGHT and it is what stopped `ground` being nulled. But the
+    `self_seen` block it was carrying was written BY HAND on 21 Nov over a
+    46-body house, and the register has since grown to 55 rows. So for three
+    days this file published `measured_bodies: 25`, `unmeasured_bodies: 21`,
+    "21 of 46" - while NINE bodies sat in `pairs` in neither list. Not
+    measured, and not even in the "nothing is claimed for these" list. ABSENT,
+    under `verdict: GREEN` and `unproved_cells: []`.
+
+    Seven of those nine were MEASURABLE - their builders declare a `man` span,
+    so the instrument could have answered and was simply never asked. The
+    other two (nightman, stiltman) have no `man` span at all, which is an
+    honest absence that the file still never stated.
+
+    A hand-written census is a snapshot and a snapshot goes stale in silence.
+    This function makes it a MEASUREMENT, recomputed from `_selfseen_all.json`
+    and `_selfseen_census.json` on every run, and `self_seen` is now RUN-OWNED
+    so a stale block can never outlive the house it describes.
+
+    THE ONE RED IT RAISES, and it is deliberately narrow: a body that the
+    census says IS measurable and that has NO self_seen CELLS is RED. That
+    covers both ways the gap appears - a body never fed to the instrument, and
+    a body fed to it whose row came back empty (`panner`, whose `man` span
+    merges to no object). A body with no `man` span is NOT red: nothing can be
+    claimed for it, it is named as such, and that is an honest absence.
+
+    WHAT THIS BLOCK STILL DOES NOT SAY, AND THE PICTURE THAT PROVES IT:
+    self_seen measures OCCLUSION - how much of the man survives his own gear.
+    IT IS NOT A READABILITY SCORE AND MUST NEVER BE CITED AS ONE. On the
+    24 Nov sheets `tither/back` scores 0.9999, the best cell in the house, and
+    the tile is a featureless dark blob seen from behind; `almoner/side`
+    scores 0.6501, thirteenth worst, and the tile is a man who reads at a
+    glance - hat, arm, sack, ladle, legs. Nothing is in front of the tither,
+    which is all 0.9999 means. This is the `seen: 1.0` correction one rung up:
+    a high self_seen says the man is UNOBSTRUCTED, never that he READS.
+    """
+    outdir = os.path.join(repo, "renders", "art", "minibosses", "_backread")
+    blk = {
+        "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an "
+                "OCCLUSION measure, NOT a readability score (see the "
+                "docstring of derive_self_seen and the top-end tile).",
+        "instrument": "tools/art/_backread.py",
+        "census": "tools/art/_selfseen_census.py",
+        "bar": SELF_SEEN_BAR,
+        "derived": "recomputed this run - this block is RUN-OWNED and is "
+                   "never carried forward",
+    }
+    def _load(name):
+        try:
+            with open(os.path.join(outdir, name)) as fh:
+                return json.load(fh)
+        except Exception as exc:
+            blk.setdefault("load_errors", []).append("%s: %s" % (name, exc))
+            return None
+
+    allj = _load("_selfseen_all.json")
+    cen = _load("_selfseen_census.json")
+    pairs = set(rep.get("pairs", {}))
+    rows = (allj or {}).get("rows", {})
+
+    cells = []
+    with_cells = set()
+    for key, r in rows.items():
+        for view, c in (r.get("views") or {}).items():
+            if "man_seen" not in c:
+                continue
+            with_cells.add(key)
+            cells.append({"key": key, "view": view,
+                          "man_seen": float(c["man_seen"]),
+                          "measured_at": r.get("measured_at")})
+    cells.sort(key=lambda c: c["man_seen"])
+
+    blk["provenance"] = (allj or {}).get("provenance")
+    blk["instrument_errors"] = (allj or {}).get("errors", [])
+    blk["measured_cells"] = len(cells)
+    blk["measured_bodies"] = len(with_cells)
+
+    if cen:
+        able = set(cen.get("measurable", []))
+        unable = set(cen.get("not_measurable", []))
+        noman = set(cen.get("no_man", []))
+        blk["no_man"] = sorted(noman & pairs)
+        blk["no_man_reason"] = (
+            "the builder declares an EMPTY `man` span - a deliberate marker "
+            "that this body has no operator at all (panner pass 4 removed "
+            "his, by A/B, and left the empty span to say so). A machine with "
+            "no man cannot fail a can-you-see-the-man test. NOTHING IS "
+            "CLAIMED and this is NOT red - the first cut of this rule called "
+            "panner MEASURABLE and turned the register red on a correct "
+            "body, which is an unearned FAIL and the same fault as an "
+            "unearned pass.")
+        blk["census_measured_at"] = "run tools/art/_selfseen_census.py"
+        blk["not_measurable"] = sorted(unable & pairs)
+        blk["not_measurable_reason"] = (
+            "no `man` span on the builder, so there is nothing to split and "
+            "NOTHING IS CLAIMED for these rows - absent, not green.")
+        uncovered = sorted((able & pairs) - with_cells)
+        blk["uncovered"] = uncovered
+        blk["uncovered_reason"] = (
+            "MEASURABLE and carrying no self_seen cell - the instrument could "
+            "have answered and did not. RED: this is the silent absence that "
+            "hid nine bodies for three days.")
+    else:
+        able, unable, noman, uncovered = set(), set(), set(), []
+        blk["uncovered"] = []
+        blk["census_missing"] = (
+            "no _selfseen_census.json - coverage CANNOT be judged this run, "
+            "and an unjudged coverage is not a green one.")
+
+    blk["under_bar"] = [
+        {"rank": i + 1, "key": c["key"], "view": c["view"],
+         "man_seen": round(c["man_seen"], 4)}
+        for i, c in enumerate(cells) if c["man_seen"] < SELF_SEEN_BAR]
+    blk["under_bar_count"] = len(blk["under_bar"])
+    if cells:
+        top = cells[-1]
+        blk["top_end"] = {"key": top["key"], "view": top["view"],
+                          "man_seen": round(top["man_seen"], 4)}
+    rep["self_seen"] = blk
+
+    errs = []
+    for key in blk.get("uncovered", []):
+        errs.append("%s: MEASURABLE by the self_seen census and carrying NO "
+                    "self_seen cell - an unasked instrument is RED, not green"
+                    % key)
+    if cen is None and pairs:
+        errs.append("self_seen: no census on record - coverage is unjudged, "
+                    "and unjudged is not green")
+    for e in errs:
+        rep["errors"].append(e)
+        rep["ok"] = False
+    blk["verdict"] = "RED" if errs else "GREEN"
+    return blk
+
+
 def audit_rows(rep, asked):
     """THE TOP-LEVEL VERDICT, DERIVED FROM EVERY ROW IN THE FILE.
 
@@ -1110,7 +1257,13 @@ def main():
     _RUN_OWNED = ("ok", "errors", "verdict", "verdict_scope", "red_summary",
                   "blank_check", "rendered_this_run", "unproved_cells",
                   "blind_views", "stale_margin", "margin_derived", "measured",
-                  "asked")
+                  "asked",
+                  # *** `self_seen` IS RUN-OWNED FROM 24 Nov 2026. *** It was
+                  # carried for three days as a hand-written 21 Nov snapshot
+                  # over a house that had grown by nine bodies. It is now
+                  # DERIVED every run by derive_self_seen(); carrying it is
+                  # exactly the fault.
+                  "self_seen")
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
            "stale_margin": [], "margin_derived": [],
            "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
@@ -1252,6 +1405,13 @@ def main():
         import traceback
         rep["ok"] = False
         rep["errors"].append("measure_disk_frames: %s" % traceback.format_exc()[-600:])
+    try:
+        derive_self_seen(rep, args.repo)
+    except Exception:
+        import traceback
+        rep["ok"] = False
+        rep["errors"].append("derive_self_seen: %s"
+                             % traceback.format_exc()[-600:])
     audit_rows(rep, keys)
     # AND THE SAME QUESTION ABOUT THE CELLS NOBODY ASKED FOR THIS RUN. The
     # file accumulates: the first full run after this test shipped found

@@ -61,16 +61,26 @@ def collect(reg, bar):
     return cells
 
 
-def build(repo, worst, bar, out):
+def build(repo, worst, bar, out, skip=0):
     outdir = os.path.join(repo, "renders", "art", "minibosses", "_backread")
     with open(os.path.join(outdir, "_selfseen_all.json")) as fh:
         reg = json.load(fh)
     cells = collect(reg, bar)
     errors = []
-    if len(cells) < worst + 1:
-        errors.append("register holds %d cells, need %d" % (len(cells), worst + 1))
+    # *** --skip PAGES THROUGH THE RANKING. ADDED 24 Nov 11:4x CT. ***
+    # The 21 Nov sheet could only ever show the WORST 8, so ranks 9+ had never
+    # been looked at by anyone - and the under-bar list is now 21 cells long,
+    # which means thirteen of the register's own named faults had no picture
+    # behind them. A named cell nobody has seen is a number, not evidence.
+    if skip < 0 or worst < 1:
+        errors.append("skip %d / worst %d: nonsense window" % (skip, worst))
         return errors, None
-    pick = cells[:worst] + [cells[-1]]
+    if len(cells) < skip + worst + 1:
+        errors.append("register holds %d cells, need %d (skip %d + worst %d "
+                      "+ 1 top-end tile)"
+                      % (len(cells), skip + worst + 1, skip, worst))
+        return errors, None
+    pick = cells[skip:skip + worst] + [cells[-1]]
     for c in pick:
         c["png"] = os.path.join(outdir, "%s_ss_%s.png" % (c["key"], c["view"]))
         if not os.path.exists(c["png"]):
@@ -103,9 +113,9 @@ def build(repo, worst, bar, out):
 
     n_under = sum(1 for c in cells if c["under"])
     head_lines = [
-        "SELF-SEEN - the %d worst cells of %d, plus the best cell as the top "
-        "end.  bar %.2f: %d cells under it, across %d bodies."
-        % (worst, len(cells), bar, n_under, len(reg["rows"])),
+        "SELF-SEEN - cells ranked %d-%d of %d (worst first), plus the best "
+        "cell as the top end.  bar %.2f: %d under it, across %d bodies."
+        % (skip + 1, skip + worst, len(cells), bar, n_under, len(reg["rows"])),
         "Each tile: bar width IS the value, the white tick IS the bar, red is "
         "under it.  No cell is excused.",
     ]
@@ -163,7 +173,7 @@ def build(repo, worst, bar, out):
 
     sheet.save(out)
     return errors, {"out": out, "tiles": n, "cells": len(cells),
-                    "under": n_under, "bar": bar,
+                    "under": n_under, "bar": bar, "skip": skip,
                     "picked": [(c["key"], c["view"], c["value"], c["rank"])
                                for c in pick]}
 
@@ -172,12 +182,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
     ap.add_argument("--worst", type=int, default=8)
+    ap.add_argument("--skip", type=int, default=0,
+                    help="drop the N worst cells first, to page down the "
+                         "ranking - the top-end tile is always appended")
     ap.add_argument("--bar", type=float, default=0.75)
     ap.add_argument("--out", default="")
     a = ap.parse_args()
     out = a.out or os.path.join(a.repo, "renders", "art", "minibosses",
                                 "_backread", "_selfseen_worst_sheet.png")
-    errors, rep = build(a.repo, a.worst, a.bar, out)
+    errors, rep = build(a.repo, a.worst, a.bar, out, skip=a.skip)
     if errors:
         print("[sheet] RED:")
         for e in errors:

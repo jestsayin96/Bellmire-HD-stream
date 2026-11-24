@@ -16415,3 +16415,34 @@ Everything else in that row I did do, and it predicted the outcome exactly: it s
 at 01:45 with the real generator, and that `MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH
 clear with `_l14_test` going to OK - "if either stays red, that is a real defect and not an
 expected hold." Both cleared. `L14_TEST OK (24 checks)`, 0 guard arms fired.
+
+## D-cycle - S105: SYSTEM 11 (TOWN ANIMALS) IS THE LOWEST UNWIRED PHASE 2 SYSTEM - SCOPED OFF THE PACK AND THE CODE THIS HOUR, NO ENGINE EDIT. 2026-11-24T02:08-06:00 (game build)
+TAKE THIS NEXT (02:0x block, 24 Nov) GAME BUILD row: "take the lowest-numbered Phase 2 system (5-80) that is not yet wired,
+measure which one that is off the plan's own System list ... say which number you took and how you established it was unwired."
+HOW I ESTABLISHED THE NUMBER. The plan's own list is the fleet numbering (18 Nov 16:58 directive: 6/7/8 = weapon/armour/shield
+variety; 9 = loot on the ground; 10 = creature bodies). Off my own D-cycle headers in PROGRESS.md: 5 (S31/S31c), 6 (S43/S45),
+7 (S49), 8 (S50/S80), 9 (S82-S84 row a, S96 row b), 10 (S10 game half, ticked WHOLE 17 Nov 09:25). No header names 11-14.
+The plan carries NO "System 1[1-9]" or "System [2-8][0-9]" line at all except 47 (S61-S63 batches). The text of 11-80 lives only
+in the project doc claude/sup-nov17-0012-MASTER-VISION-75-systems-from-40-packs.md - System 11 = "Town animals: Alpaca, Bull, Cow,
+Deer, Donkey, Fox, Horse, Husky, Shiba Inu, Stag, Wolf ... from Ultimate Animated Animals".
+WHY 11 IS UNWIRED, MEASURED NOT ASSUMED. Town animals EXIST (town.gd:3130 ANIMALS, 12 kinds) but every model is from the
+Quaternius FARM pack or GobKit (assets/animals/LICENSE.txt). `grep -rn -i "alpaca|husky|shiba|stag|donkey" scripts/*.gd` = ZERO
+hits, and nothing under assets/ comes from _packs/Ultimate_Animated_Animals. So System 11 as Mr. E approved it - THAT pack's
+species - is not started. It is MINE (town.gd, animal.gd), so this is not a stand-down.
+THE PACK, MEASURED (_packs/Ultimate_Animated_Animals/Ultimate Animated Animals - July 2021/): 12 species x {blend, fbx, gltf, obj}.
+License.txt READ: CC0 1.0 Universal, Quaternius. glTF are single-file (embedded data: buffers), 1 skin each.
+NEW to the town: Alpaca, Bull, Deer, Donkey, Fox (replaces GobKit Red.glb candidate), Husky, ShibaInu, Stag, Wolf, Horse_White.
+Clips - hooved (Alpaca/Bull/Cow/Deer/Donkey/Horse/Stag): 13 incl Walk, Idle, Idle_2, Idle_Headlow, Eating, Gallop, Death,
+Idle_HitReact1/2. Canids (Fox/Husky/Shiba/Wolf): 12, Idle_2_HeadLow, Attack, Jump_ToIdle (capital T).
+TWO TRAPS IN MY OWN animal.gd THAT THE WIRING MUST FIX FIRST (animal.gd:158-167):
+  (1) `if s.begins_with("Idle"): _idle = s` keeps the LAST Idle-prefixed clip - for every UAA file that is `Idle_HitReact2`,
+      a flinch, looped as the rest pose. Needs exact "Idle" first.
+  (2) `_run` matches only `s == "Run"`; UAA has no Run, it has `Gallop`, so the D17c flee would fall back to a fast walk.
+  And `Eating` is a real grazing clip - the Graze SkeletonModifier neck-bend hack is not needed for these.
+Mesh-local extents are large (Bull ~8 units long, Fox ~5.9) - each needs a per-kind scale to a real body length, the A4 way.
+NEXT (S106): convert the nine new species' .gltf into assets/animals/uaa/ with the CC0 licence note, --headless --import, fix
+traps (1) and (2), add ANIMALS rows (Fox/Husky/Shiba as town dogs, Deer/Stag at the forest edge, Bull/Alpaca/Donkey in pens),
+render the pens and LOOK. Not importing this hour on purpose: an asset directory nothing reads would turn the dead-data
+audit's ZERO into a ONE.
+GATES: none run - no script, scene or asset changed; PROGRESS.md and RUN_LOCK.txt only. No Godot launched. No live Twitch test, 0 bits.
+Claim 2026-11-24T02:08:05-06:00, cap claim+25 = 02:33:05 (computed first), declared 02:30.

@@ -245,7 +245,7 @@ const THEME_MINIBOSS_MORE := {
     "prison": ["pressman", "tither"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper"], "wood": ["drover", "winder"],
-    "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower"], "confection": ["comfitmaker", "panner"]}
+    "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))
     if base == "":

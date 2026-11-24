@@ -17441,3 +17441,18 @@ this lane's import pass has manufactured an obstruction; the ruling asked for in
 
 No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+## D-S112 (game build, 24 Nov 2026 11:08-11:2x CT) - THE 52nd IS NAMED: `stiltman` -> "Downfast" IN Delve.MB_NAME (52), WITH MB_FIT 1.31 AND ITS FOGBOUND ROW
+TAKE THIS NEXT (10:58 CT block, 24 Nov) gave game build the three stiltman rows. Done, all three, nothing else touched (nightman left alone - no feed row yet, content's C-190).
+CHANGE (scripts/delve.gd, scripts/dungeon_hd.gd):
+  1. Delve.MB_NAME["stiltman"] = "Downfast" - read off art's CANON (tools/art/minibosses.py:18749, field 1) and content's C-189 by_key.stiltman (9 arrive / 7 act / 4 broken / 8 fall, read this run). MB_NAME now 52, anchored on `const MB_NAME :=`.
+  2. Delve.MB_FIT["stiltman"] = 1.31 - copied from renders/art/minibosses/_fit_report.json pairs.stiltman.ratio (h 3.20 / hero 2.45, fits_frame true, 3 proving views), not re-derived.
+  3. DungeonHD.THEME_MINIBOSS_MORE["fogbound"] = ["fenman", "fuller", "blower", "stiltman"] - tag `fogbound` read off field 5 of the CANON tuple.
+  stiltman.glb.import is already tracked on main, so miniboss_model can load it.
+LOOKED: hero_front.png of stiltman opened this run - a tall grey man on one stilt and a feeling pole, the other leg a short broken stump; reads at hero scale.
+GATES (log committed: _s112_gates.log), on laptop merged with origin/main b7b179bc:
+  parse rc=0, 0 SCRIPT ERROR / 0 Parse Error. One push_error from the chat bot's own guard: "COMMANDS_DATA MINIBOSS COUNT: miniboss publishes 51 elites and content writes feed rows for 52" - PRE-EXISTING on main since C-189 and EXACTLY the republish the plan owes the chat bot at 11:45 now that both halves read 52 (MB_NAME 52, by_key 52). Not mine to fix (commands.json is chat bot's).
+  S33_DRAW FAIL 1 of 222: ["body nightman is in a draw"] - the stiltman red is CLOSED (stiltman fogbound ratio 1.31 lines true drawn 80/400). The remaining red is the 53rd, which correctly has no feed row yet; it closes when content C-190 lands and game build adds its rows.
+  TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2457 samples off the floor (home).
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. TOWNWALK in_solid=0/17428 (0.000%) raid_in_solid=0/5431 (0.000%) PASS.
+No Twitch test, zero bits, no cheer, no redemption, no chat line.

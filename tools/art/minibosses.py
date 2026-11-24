@@ -17305,7 +17305,7 @@ OVERRIDE.update({
 def roper():
     """IT TWISTS YOU TOGETHER. The 49th body. PASS 8 - THE LOWER HALF.
 
-    *** PASS 8, 24 NOV 01:4x-02:2x CT. THE TEAM LEAD TICKED THE DRUM AND THEN
+    *** PASS 8, 24 NOV 01:3x-01:5x CT. THE TEAM LEAD TICKED THE DRUM AND THEN
     *** NAMED THE HALF UNDER IT: head-on, three pale cords splay to three
     *** small dark feet and that lower silhouette is an EASEL. My own pass 7
     *** faults (2) and (4) said it first. ONE VARIABLE: THE STRANDS LAY UP.

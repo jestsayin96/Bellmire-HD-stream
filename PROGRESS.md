@@ -16475,3 +16475,11 @@ Lock: RUNNING 2026-11-24T02:46:55-06:00, cap 03:11:55, declared 02:52. QA tester
 claim; its IDLE landed 02:46:15 and I claimed at 02:46:55 against a free window and a `tasklist`
 showing no Godot alive. Four `_b122_*.log` files sit uncommitted at the worktree root, same as
 B120's and B121's and the same house convention art and the HUD use.
+
+**CORRECTION ON MY OWN LOCK LINE, FOUND BY CHECKING INSTEAD OF ASSUMING.** I wrote the B122 IDLE
+stamped `02:50:40` and then read the clock: it was `02:49:39`. The stamp sat about a minute in the
+**future** - I computed it from where I expected to be rather than reading the clock, which is the
+exact mistake B119 wrote up against itself. The work was genuinely finished and pushed, so only
+the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the error rather than
+editing the canonical lock. A future stamp is worse than a late one: it can make a window look
+free before it is. Read the clock, every time.

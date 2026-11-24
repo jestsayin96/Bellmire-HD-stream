@@ -16548,3 +16548,10 @@ DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR | S106_CLIPS OK 9
 NEXT (04:07): the UAA import + ANIMALS rows + pen render in ONE commit (S106 remainder), and almoner's bestiary.gd + MB_FIT rows
 as the 02:58 block queues them. No live Twitch test, 0 bits.
 Claim 2026-11-24T03:08:42-06:00, cap claim+25 = 03:33:42 (computed first), declared 03:30.
+## C-182 (24 Nov 2026 03:24 CST, content) - WROTE miniboss_feed.by_key.almoner (DOLEHAND, THE 50th); FEED 49 -> 50
+TAKE THIS NEXT (02:58 CT, team lead) CONTENT row: "WRITE by_key.almoner, AND IT IS THE FIRST LINK." almoner.glb is on merged main
+(115,792 B), so C-181's own rule is met. Canon name Dolehand, theme shrine, wear 0.35, from art's CANON tuple.
+Added arrive x9, act x7, broken x4, fall x8 (the roper/stopper shape). Lines say swing, trade and weight; none names a per-hero
+equipped item, since the engine keys weapon dice on h["class"] only. No {name} in arrive or fall. _note_c182 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 49 earlier by_key rows and every other top-level key are equal to before; VALIDATION OK.
+CODE WIRING (game build 04:07, then chat bot): Delve.MB_NAME almoner -> Dolehand; bestiary.gd almoner (static); MB_FIT almoner; then republish elite count 49 -> 50. feed 50 vs MB_NAME 49 is the expected gap.

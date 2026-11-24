@@ -14005,6 +14005,44 @@
           "The dark rope is only rope now.",
           "Coil it or leave it. It will not pull."
         ]
+      },
+      "almoner": {
+        "arrive": [
+          "Something ahead is holding a dish out.",
+          "A man standing square in the lane, a flat dark tray on one forearm and a sack at his hip.",
+          "He does not strike anyone. Nothing in the room is taken.",
+          "Each of you walks up and puts in. It is how the dole has always gone.",
+          "Three pieces of kit lie in the tray. Two more are already coming out of the sack's mouth.",
+          "He gives back, and it is not the same dealing.",
+          "Every swing in the party now comes off another trade's weight.",
+          "The sum of you is the same. Every one of you is in the wrong place in it.",
+          "Plain wool, an iron dish, a worn sack, and a patient face."
+        ],
+        "act": [
+          "{name} swings and the weight is a stranger's.",
+          "The dish comes round. {name} is dealt a swing that was never theirs.",
+          "{name} reaches for the old stroke and it does not come.",
+          "Another turn of the dole. {name} stands in someone else's trade.",
+          "{name} hits like a different trade.",
+          "The dish is held out again. {name} puts in and is given back wrong.",
+          "Nobody is weaker. {name} is only holding the wrong end of the work."
+        ],
+        "broken": [
+          "The dish goes down. The old swing comes back.",
+          "A delver knocks the tray aside. Every hand finds its own weight.",
+          "He stumbles and the dealing stops. Hands remember.",
+          "The dole is spoilt. It will have to start again."
+        ],
+        "fall": [
+          "Dolehand is down. The dish rings on the floor.",
+          "The sack lies open. Nothing comes out of it.",
+          "Every swing is your own again.",
+          "Your hands know their own weight. Use it.",
+          "The dish is only iron now.",
+          "Dealt right again. Count the party and go on.",
+          "He hurt no one. Everyone is glad he is done.",
+          "Leave the sack. It has nothing more to give."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14040,7 +14078,8 @@
     "_note_c169": "C-169: blower (46th miniboss, Deadair, the first CLOCK: the room's air is drawn a stroke at a time, every delver acts slower each stroke, the heaviest-laden gives out first, nothing done to the man slows the count, holing the bag stops it) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither shape. act lines take {name}, the delver slowed or reaching for the patch iron. broken lines are the bag being holed (count stops). fall lines read true whether the bag was holed or the man beaten. Expected zero-hit key: DO NOT WIRE.",
     "_note_c174": "C-174: changer (47th miniboss, Evenhand, the first SWAP: whoever hits it hardest ends up standing where it stood and it stands where they were, beside the back rank; the drum on the post turns a third per trade; a body set against a bar jams the arms and stops the trade) gets arrive x9, act x7, broken x4, fall x8 - the pitman/tither/blower shape. act lines take {name}, the delver who struck hardest and was swapped. broken lines are the arms jammed (no trade). fall lines read true whether the arms were jammed or the man beaten. Body committed on main (assets/monsters/minibosses/changer.glb, art 47th); not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
     "_note_c176": "C-176: stopper (48th miniboss, Chokewell, crypt, wear 0.32, the first DEADLINE: five pegs on the ring's rim, one drops every notch, the room is shut when the last drops, each notch costs the party wind, nothing done to the room buys time back; a delver with a shoulder under the ring holds the count) gets arrive x9, act x7, broken x4, fall x8 - the changer shape. The clock is in the lines, not explained beside them. act lines take {name}, a delver feeling the notch. broken lines are the ring held up (count holds). Body is CANON + renders on main (tools/art/minibosses.py, docs/art); NO stopper.glb is committed yet, so the mesh half of the miniboss_for gate is still open. Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c177": "C-177: roper (49th miniboss, Drawtight, grassland, wear 0.28, the first body that reads the DISTANCE BETWEEN TWO HEROES: every notch hauls the hindmost a yard toward the middle, and when all are inside one span the rope is laid and the party stands as ONE footprint so every sweep lands on all of them; nothing done to the creature adds slack, only a hero walking out from the others) gets arrive x9, act x7, broken x4, fall x8 - the stopper shape. The mechanic is in the lines, not explained beside them. act lines take {name}, a delver being drawn in. broken lines are a hero walking wide (slack). Body is CANON + roper.glb committed on main (tools/art/minibosses.py, assets/monsters/minibosses/roper.glb); roper.glb.import sibling not yet committed (engine lane adds it with the wiring). Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE."
+    "_note_c177": "C-177: roper (49th miniboss, Drawtight, grassland, wear 0.28, the first body that reads the DISTANCE BETWEEN TWO HEROES: every notch hauls the hindmost a yard toward the middle, and when all are inside one span the rope is laid and the party stands as ONE footprint so every sweep lands on all of them; nothing done to the creature adds slack, only a hero walking out from the others) gets arrive x9, act x7, broken x4, fall x8 - the stopper shape. The mechanic is in the lines, not explained beside them. act lines take {name}, a delver being drawn in. broken lines are a hero walking wide (slack). Body is CANON + roper.glb committed on main (tools/art/minibosses.py, assets/monsters/minibosses/roper.glb); roper.glb.import sibling not yet committed (engine lane adds it with the wiring). Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
+    "_note_c182": "C-182: almoner (50th miniboss, Dolehand, shrine, wear 0.35, the dole dish: it takes nothing and wounds no one, every delver puts in and it gives back wrong, so while it stands each hero swings on another trade's weapon dice; the party total is unchanged, only the order is useless) gets arrive x9, act x7, broken x4, fall x8 - the roper shape. Written against almoner.glb on merged main. The lines say SWING and TRADE and WEIGHT and never name a per-hero equipped item, because the engine keys weapon dice on h['class'] only (art dropped the armour-on-the-archer half and so does this). No {name} in arrive or fall. Feed reads 50 against Delve.MB_NAME 49 until the game build adds the name row; that gap is expected. CODE WIRING: Delve.MB_NAME almoner -> Dolehand, bestiary.gd almoner (static), MB_FIT almoner, then republish elite count 49 -> 50. Expected zero-hit key: DO NOT WIRE."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

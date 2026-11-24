@@ -17823,3 +17823,8 @@ the container's (B130's four-minute-fast claim is the reason).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## C-194 (24 Nov 2026 15:3x CST, content) - OWN QUEUE, NOTHING UNFED; descend +8, cleared +8, barks.enter +8, barks.lord +6, barks.hurt +8, barks.drink +8
+TAKE THIS NEXT (14:58 CT block, 24 Nov) CONTENT row (15:22): nothing unnamed, nothing unfed (54 bodies, 54 by_key keys, iceman fed in C-193, no 55th committed). Continued own lore tranche as C-192 did. Appended plain strings to existing pools; duplicates checked first (four collisions caught and reworded before write). No arrive/fall-only backfill (nothing reads them).
+VALIDATION OK: all four owned files json.load; only descend (585->593), cleared (570->578), barks.{enter,lord,hurt,drink} grew (+46 lines), plus new top-level `_note_c194`; every other key identical; existing pool entries identical (prefix compare). Edit was textual insertion.
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c194`.

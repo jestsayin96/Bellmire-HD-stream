@@ -10,6 +10,7 @@ const OUT := "res://renders/cycles/20261117_u62"
 const HS := [96, 120, 150, 159]
 const SCALES := [1.0, 1.25, 1.5]
 var _bad := 0
+var _n := 0  # U154: scrollers whose ink was actually found
 
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
@@ -51,6 +52,8 @@ func _process(_dt: float) -> bool:
 			for xx in range(x0, x1):
 				if _near(img.get_pixel(xx, yy), UiTheme.WORD_HI, 0.05):
 					gy0 = mini(gy0, yy - oy); gy1 = maxi(gy1, yy - oy); break
+		if gy1 >= 0: _n += 1
+		else: print("U62 NO INK FOUND - this scroller measured nothing"); _bad += 1
 		var ink_bot := float(gy1 + 1)
 		var ok := ys0 >= ink_bot - 0.05 and ys1 <= rod_bot + 0.05
 		if not ok: _bad += 1
@@ -62,5 +65,5 @@ func _process(_dt: float) -> bool:
 	if _si < SCALES.size():
 		_build(); return false
 	UiTheme.set_scale(1.0)
-	print("U62_SCALES %s bad=%d" % ["OK" if _bad == 0 else "FAIL", _bad])
+	print("U62_SCALES %s bad=%d measured=%d" % ["OK" if _bad == 0 else "FAIL", _bad, _n])
 	return true

@@ -13,6 +13,7 @@ var _out := ""
 var _step := 0
 var _fed := 0
 var _bad := 0
+var _n := 0  # U154: elements audited
 const SC := [1.0, 1.5]
 const LINES := ["A trade caravan is sighted on the west road.", "Viewer1001 swings a sword at a raider - hit! 7 damage.",
 	"Viewer1002 gathers wood.", "The granary is down to 12 days of food - hunger looms.", "Viewer1004 hauls a sack of grain."]
@@ -71,7 +72,8 @@ func _process(_d: float) -> bool:
 		_step += 1
 		_fed = 0
 		if _step >= SC.size() * 2:
-			print("U69_REDPROOF ", "OK" if _bad == 0 else "FAIL")
+			if _n == 0: print("U69_REDPROOF NO VERDICT - 0 elements audited"); _bad += 1
+			print("U69_REDPROOF ", "OK" if _bad == 0 else "FAIL", " elements=", _n)
 			return true
 	return false
 func _audit(pct: int, full: bool) -> void:
@@ -101,6 +103,7 @@ func _audit(pct: int, full: bool) -> void:
 			if r.size.x < 4.0 or r.size.y < 4.0 or r.size.x * r.size.y >= 0.35 * scr.x * scr.y:
 				continue
 			items.append([str(k.name) + ":" + k.get_class(), r])
+	_n += items.size()
 	print("  [", tag, "] ", items.size(), " elements")
 	for it in items:
 		print("     ", it[0], " ", it[1])

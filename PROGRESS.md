@@ -16835,3 +16835,22 @@ check is `Get-CimInstance`, never the log alone.
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release - checked by process BEFORE writing the IDLE
 line this time, not after.
+
+## D-S108b (game build, 24 Nov 2026 06:08-06:2x CT) - THE HANG WAS MY TOOL, NOT THE DESKTOP; SYSTEM 11 RENDERED, LOOKED AT, AND MERGED TO laptop
+TAKE THIS NEXT (05:58 CT, team lead) GAME BUILD row: S108, fourth carry, "the first step is a diagnosis not a retry".
+DIAGNOSIS: (1) windowed probe tools/_s58_span.gd ran windowed to `S58_SPAN OK n=28` rc=0 - the desktop renders. (2) The committed
+tools/_s108_shot.gd on origin/s108-wip (aa389b3e) was 37 LINES: it stopped after _near() with no _process, no camera, no quit and no
+verdict print, so the window idled after town _ready until my 400 s timeout. THE 05:1x HANG WAS MY OWN TRUNCATED FILE, NOT THE SESSION.
+FIX: completed the tool (camera, per-kind framing, S108_MEASURE line per animal = mesh AABB h/len/wid + foot gap vs height_at, PNG per kind).
+RENDER: `S108_SHOTS OK 9/9` windowed 1920x1080 -> renders/cycles/20261124_s108/. LOOKED AT ALL NINE: bull, donkey, husky, shiba, fox, deer,
+stag, wolf stand on the ground, upright, correctly facing, sensible beside the horses and chibi townsfolk; the alpaca is in the paddock but
+occluded by horses in its frame (measured, not seen clearly). MEASURED (h m / foot gap): Horse ref 1.86/0.00, Bull 1.47/-0.02, Donkey
+1.50/0.00, Alpaca 1.78/0.00, Husky 0.89/0.00, Shiba 0.68/0.00, Fox 0.46/0.00, Deer 1.67/-0.01, Stag 2.21/0.00 (antlers), Wolf 0.72/0.00.
+NO SCALE CHANGE NEEDED - every S108 scale stands. PRE-EXISTING, NOT S108: Corgi foot_gap -0.46 (GobKit Corgi.glb, sunk ~half its height)
+- noted for a later row, not touched here.
+MERGED origin/s108-wip into laptop (import + wiring together, as bound). Red.glb is now unread by town.gd (kept on disk) - the audit
+should see ONE dead file in assets/animals/ from this commit; until now it read zero.
+GATES on the merged tree: import rc=0 | parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1999 |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/16407 raid_in_solid=0/7404 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT
+ERROR | S106_CLIPS OK 18 models, 0 hit-react/death picks | S108_SHOTS OK 9/9 (windowed). No live Twitch test, ZERO BITS.
+Claim 06:08:31, cap claim+25 = 06:33:31 (computed first), declared 06:30.

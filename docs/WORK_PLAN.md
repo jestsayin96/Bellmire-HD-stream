@@ -148,7 +148,7 @@ the 22:58 seat on 17 Nov.
      and art is on **almoner pass 5** (the 50th body). Also strike the L56 "40 minutes" figure
      wherever it appears: it is about four minutes.
 
-TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** WRITTEN 03:0x CT ON 24 NOV AND LANDED ON `laptop` AT 03:05:02, BEFORE 03:07 - GAME BUILD, THIS
 *** ROW IS YOURS AT 03:07. The other five read it at :22 (content), :34 (art), :37 (hub),
 *** :45 (chat bot), :52 (HUD).

@@ -2721,7 +2721,17 @@
       "Plate in the floor.",
       "Wire. Mind your shins.",
       "Stone gives under the heel.",
-      "Thread across the doorway."
+      "Thread across the doorway.",
+      "Dust is thinner in a line. Step wide.",
+      "Stone has been scraped here.",
+      "Hinge-pin in the lintel.",
+      "Floor sounds hollow. Hollow is wrong.",
+      "Spent bolt-ends on the flags.",
+      "Something clicked. Not me.",
+      "Fresh oil in the seams.",
+      "A brick sits proud. Leave it.",
+      "Slow down. The floor has a pattern.",
+      "Coin on the flag, and no one has taken it."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -3571,7 +3581,17 @@
       "Wrong word. Wrong word.",
       "Hands will not hold still.",
       "That was not it.",
-      "Lost it halfway through."
+      "Lost it halfway through.",
+      "Fumbled the last word.",
+      "Breath ran out before the verse.",
+      "The words came out in the wrong order.",
+      "Mind went white for a breath.",
+      "Fingers cramped on the mark.",
+      "I knew that one. I knew it.",
+      "Tongue slipped on the name.",
+      "The lamp flickered at the wrong word.",
+      "Too fast. Too fast.",
+      "Not that. Never that."
     ],
     "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key.",
     "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
@@ -4710,7 +4730,31 @@
     "Packed bread for two days. Needed one.",
     "Hauled the sledge to the pit-head. Went down behind it.",
     "Washed the cup. Hung it on the peg. Did not drink from it again.",
-    "Knew every cellar in town. Did not know the last one."
+    "Knew every cellar in town. Did not know the last one.",
+    "Shut the gate behind the others. Stayed on the wrong side of it.",
+    "Paid the tithe. Paid the rest in person.",
+    "Carried the rope. Did not need it twice.",
+    "Knew the stair by heart. The stair knew otherwise.",
+    "Sharpened the knife at dawn. Used it at dusk.",
+    "Said he would be back for supper.",
+    "Held the lamp steady. It was the last steady thing.",
+    "Left the cart at the quay and the debt at the inn.",
+    "Counted the doors. Missed one.",
+    "Took the front because the front needed taking.",
+    "Bound the wound and went on. The wound won.",
+    "Told the others to go. They went.",
+    "Kept the shield up. It was not the right direction.",
+    "Bought the good boots. Walked a long way in them.",
+    "Wrote home once. Meant to write twice.",
+    "Stood the last watch.",
+    "Knew the dark was thin here. It was thicker than that.",
+    "Mended nets, then fell in with the wrong tide.",
+    "Gave the last flask away, and did not need to be thanked.",
+    "Fed the hearth, shut the shutter, took the stair.",
+    "Left a boot-print at the third landing and nothing past it.",
+    "Laughed at the sign on the door. Read it afterwards.",
+    "Took the long way round. The long way was shorter.",
+    "Walked in singing. The song stopped before the walking did."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -6524,7 +6568,15 @@
       "Hearths banked, doors barred, children counted. Bellmire sleeps.",
       "The well-wardens report the water sweet. Drink freely.",
       "A fortnight without a funeral. Do not say it too loudly.",
-      "The guild post is open late. Bring a name, and bring a lantern."
+      "The guild post is open late. Bring a name, and bring a lantern.",
+      "The lamplighters ask for a spare ladder. Return the ladder.",
+      "Two barges at the quay and a third in sight. Mind your carts.",
+      "The wall-wardens will mend the east stair tomorrow. Use the west.",
+      "Rain by evening, say the ferrymen. Shutters, then.",
+      "A lost dog, brown, answers to nothing. Last seen at the bakery.",
+      "The tithe-clerk sits till dusk. He does not sit after dusk.",
+      "Fish at the ford and grain at the granary. Queue where the queue is.",
+      "The guild has paid out in full this week. Say thank you to the living."
     ],
     "market": [
       "Two coppers the carp, and the carp is grinning.",
@@ -6584,7 +6636,15 @@
       "Tallow, wicks, and a lamp-oil that does not stink.",
       "Wool by the fleece, spun by the skein, and the spinner will tell you the price twice.",
       "Apples from the east terrace. The last of the season, so take the lot.",
-      "Silver wire and plain rings, no scarglass. Honest work for the weddings."
+      "Silver wire and plain rings, no scarglass. Honest work for the weddings.",
+      "Salt by the scoop, and pepper by the pinch. Pinch is a coin.",
+      "Candle-ends cheap, for reading late.",
+      "Barley loaves, rye loaves, and a seed loaf the baker is proud of.",
+      "Cheese from the high pasture. Sharp, and sold by the wedge.",
+      "Leather straps, new and mended, and the cobbler's boy asleep behind them.",
+      "Smoked eel on a string, a copper the length of your hand.",
+      "Honey in clay pots. Bring the pot back, get a copper.",
+      "Ironmonger's seconds: good nails, bent heads, half price."
     ],
     "growth": [
       "The masons raised a new course on the wall today.",
@@ -6644,7 +6704,15 @@
       "Stone houses along the river now, where there were reed huts last year.",
       "The ferry has a roof, and the ferryman a bench.",
       "The granary has a lock, and the lock has a second key.",
-      "A school on the green. It has two benches and an excellent door."
+      "A school on the green. It has two benches and an excellent door.",
+      "The mill has a second wheel, and the miller a second apprentice.",
+      "Cobbles reached the tanners' lane this month. The tanners have opinions.",
+      "A fountain on the green. It runs. People stand and watch it run.",
+      "The wall-wardens have a proper hut now, with a stove.",
+      "The ford has a bridge, and the ferryman a grudge.",
+      "Lamp-posts on the high street, one to a house. The lamplighter is delighted.",
+      "The inn has added a second floor and a second chimney. Both draw.",
+      "A new bell for the quay, so the barges are counted in."
     ]
   },
   "propositions": {
@@ -14698,5 +14766,6 @@
   "_note_c164": "C-164 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c165": "C-165 pool top-up: epitaphs +12, descend +6, cleared +6. Zero-hit key, DO NOT WIRE. Lists are drawn from at random; no code change owed.",
   "_note_c166": "C-166: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
-  "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code."
+  "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
+  "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS)."
 }

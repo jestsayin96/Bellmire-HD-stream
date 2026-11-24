@@ -17551,3 +17551,7 @@ GATES (logs committed: _s113_*.log), on laptop merged with origin/main 6e5c451d:
   TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2037 samples off the floor (home). DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/18275 PASS.
 NOT DONE: the nightman's IDEA (dark-only, invulnerable while its lamp is open, the party works the shutter) is not yet a MB_WAYS way - it ships as a drawn, named body. That is a separate row when the plan gives it.
 No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line posted as bellmirebro.
+## C-191 (24 Nov 2026 12:4x CST, content) - OWN QUEUE, NO NEW BODY; epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each
+TAKE THIS NEXT (11:58 CT block, 24 Nov) CONTENT row (12:22): C-191, no new body to feed (53 bodies on main, 53 by_key keys, no 54th committed). Did not backfill the 25 arrive/fall-only rows (no reader outside MB_WAYS; all 18 MB_WAYS keys already carry act+broken). Added to existing plain-string pools only; duplicates checked against each pool first.
+VALIDATION OK: data/lore_lines.json json.load passes; only epitaphs (960->984), barks.trap, barks.misfire, town_life.{crier,market,growth} grew, plus new `_note_c191`; every other key identical; existing entries identical (prefix compare). Edit was textual insertion, so the git diff is additive only.
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c191`.

@@ -577,3 +577,13 @@ added by a re-run.
 **Licence text read in full from disk this firing.** `License.txt` names the CC0 1.0 Universal URL (creativecommons.org/publicdomain/zero/1.0/) and states the commercial-use permission above. No share-alike, no non-commercial, no no-derivatives clause. The `Convert\Three.js (Blender)\readme.txt` is a conversion note only (Three.js needs quads; points to a third-party `fixQuads.py` gist) and states no separate licence. The `fixQuads.py` script is a third-party tool shipped in the pack and is NOT part of what enters `assets/`; do not import it.
 
 Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-road-tiles`. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - kenney_retro-fantasy-kit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kenney_retro-fantasy-kit (Retro Fantasy Kit 2.0; folder `_packs\kenney_retro-fantasy-kit\`, sibling `kenney_retro-fantasy-kit.zip` not opened) | Kenney (www.kenney.nl) | **CC0 1.0 Universal (Public Domain)** | `_packs\kenney_retro-fantasy-kit\License.txt` (720 bytes, read in full this run) | 562 on disk: FBX, GLB and OBJ+MTL model sets (one file per piece, with a shared Textures folder in each format), `Previews\` (PNG per model), `Preview.png`, `Sample.png`, `Overview.html`, 3 `.url` link files | Yes. The licence reads: "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says crediting 'Kenney' or 'www.kenney.nl' is "not a requirement"; recorded here anyway |
+
+- Checked: every file under `_packs\kenney_retro-fantasy-kit\` by walking the tree (562 files), and `License.txt` read in full off disk. The file states, verbatim: "Retro Fantasy Kit (2.0) / Created/distributed by Kenney (www.kenney.nl) / Creation date: 19-02-2025 16:10 / License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/". `Overview.html` (line 157) independently links the same CC0 1.0 Universal URL.
+- Note for later seats: the `.zip` sibling was not opened this firing; the CC0 grant is recorded for the pack as published. Any file that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_retro-fantasy-kit`. Nothing is redistributed AS an asset.

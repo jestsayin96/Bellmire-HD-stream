@@ -587,3 +587,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Checked: every file under `_packs\kenney_retro-fantasy-kit\` by walking the tree (562 files), and `License.txt` read in full off disk. The file states, verbatim: "Retro Fantasy Kit (2.0) / Created/distributed by Kenney (www.kenney.nl) / Creation date: 19-02-2025 16:10 / License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/". `Overview.html` (line 157) independently links the same CC0 1.0 Universal URL.
 - Note for later seats: the `.zip` sibling was not opened this firing; the CC0 grant is recorded for the pack as published. Any file that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_retro-fantasy-kit`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - quaternius_rpg_characters_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| quaternius_rpg_characters_CC0 (the pack is titled "RPG Characters - Nov 2020"; folder `_packs\quaternius_rpg_characters_CC0\RPG Characters - Nov 2020\`, one level deeper than the folder name; no `.zip` sibling exists) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\quaternius_rpg_characters_CC0\RPG Characters - Nov 2020\License.txt` (read in full this run) | 60 on disk: 11 `.blend` (`Blends\`: Cleric, Monk, Ranger, Rogue, Warrior, Wizard, plus 5 weapon-only blends in `Blends\Only Weapons\`), 12 `.fbx` (`FBX\`, incl. `Only Weapons\` with 6 weapons and a Ranger arrow), 24 `.obj` + `.mtl` files, 12 pairs (`OBJ\`, incl. `Only Weapons\`), 11 `.png` (`Textures\`), `Preview.jpg`, `License.txt` | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\quaternius_rpg_characters_CC0\` by walking the tree (60 files), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming note: the folder is `quaternius_rpg_characters_CC0` but the pack inside is "RPG Characters - Nov 2020". Recorded so a later reader does not confuse it with other Quaternius RPG releases.
+- Not opened this firing: the 11 `.blend` files and the `.fbx`/`.obj` geometry. The CC0 grant is recorded for the pack as published. Any character or weapon that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_rpg_characters_CC0`. Nothing is redistributed AS an asset.

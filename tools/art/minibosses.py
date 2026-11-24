@@ -18531,11 +18531,61 @@ def panner():
     _RX = MN.cross(Vector((0.0, 0.0, 1.0))).normalized()
     _RY = MN.cross(_RX).normalized()
     _lip = PC + MN * (DEPTH * 0.5 - 0.010)
-    _pts = []
-    for _i in range(29):
-        _t = TAU * _i / 28.0
-        _pts.append(_lip + _RX * (R_OUT * math.cos(_t))
-                    + _RY * (R_OUT * math.sin(_t)))
+    # PASS 5: THE RING IS BROKEN UNDER THE HOPPER, AND THE PART BLAMED AT PASS 4
+    # WAS THE WRONG ONE. The standing fault 3 read "the hopper's CHUTE crosses
+    # the top of the mouth in front projection". It does not. I did the front
+    # projection in the mouth's own basis before touching anything: the chute
+    # runs (0.120, 0.120, 1.580) -> (0.150, -0.036, 1.325) and BOTH ends are
+    # already inside the opening's projected ellipse, so it hangs over the dark
+    # interior and never touches the pale annulus. THE HOPPER CONE is the part
+    # that cuts the ring - it spans z 1.570..1.900 at x 0.120 +/- 0.255 and
+    # crosses the ring's top arc (z ~ 1.87) dead centre. The picture
+    # (panner/hero_front.png) agrees, which is the half that closed it.
+    # AND THE ARITHMETIC EXPOSES WHY "MOVE THE CHUTE" IS NOT A FIX: the mouth is
+    # canted up and forward (MN.z > 0), so its projected disc owns the whole
+    # area above the drum. Anything that feeds the mouth from above must come
+    # down through the top arc or stop outside x < -0.61 / x > 0.90, where it is
+    # no longer over the pan at all. So the feed cannot move; the LIP can.
+    # THE FIX IS ONE OBJECT AND IT ANSWERS FAULT 5 AS WELL. Sweeping only part
+    # of the loop leaves a deliberate gap under the hopper: the hopper then
+    # passes THROUGH a gap instead of notching a closed ring, and an interrupted
+    # lip is a pan with a feed gap rather than the modern porthole shape that
+    # fault 5 records. The gap is derived from the hopper's own front-projected
+    # silhouette plus a margin - not a hand-picked angle - so it stays correct
+    # if the hopper moves.
+    _HOP_X = 0.120                        # hopper cone axis, front projection x
+    _HOP_Z0, _HOP_Z1 = 1.570, 1.900       # its z span
+    _HOP_R0, _HOP_R1 = 0.130, 0.255       # its radius at z0 and at z1
+    _GAPM = 0.085                         # clear margin either side of the feed
+
+    def _under_feed(_p):
+        """Is this lip point behind the hopper in FRONT projection (x, z)?"""
+        if _p.z < _HOP_Z0 - _GAPM:
+            return False
+        _f = min(max((_p.z - _HOP_Z0) / (_HOP_Z1 - _HOP_Z0), 0.0), 1.0)
+        return abs(_p.x - _HOP_X) <= (_HOP_R0 + (_HOP_R1 - _HOP_R0) * _f) + _GAPM
+
+    _NL = 57
+    _loop = []
+    for _i in range(_NL):
+        _t = TAU * _i / _NL
+        _loop.append(_lip + _RX * (R_OUT * math.cos(_t))
+                     + _RY * (R_OUT * math.sin(_t)))
+    _blk = [_under_feed(_p) for _p in _loop]
+    _runs = sum(1 for _i in range(_NL) if _blk[_i] and not _blk[(_i - 1) % _NL])
+    # GO RED ON A SHAPE I CANNOT REASON ABOUT rather than ship a lip with two
+    # gaps in it because the hopper moved. One run is a feed gap; two is a
+    # defect, and zero means there was never anything to break.
+    assert _runs <= 1, "panner lip: hopper blocks %d separate arcs" % _runs
+    # PAN_RING=closed restores pass 4's continuous loop so the A/B reproduces.
+    if os.environ.get("PAN_RING") == "closed" or _runs == 0:
+        _pts = _loop + [_loop[0]]
+    else:
+        _e = next(_i for _i in range(_NL)
+                  if _blk[_i] and not _blk[(_i + 1) % _NL])   # last blocked
+        _s = next(_i for _i in range(_NL)
+                  if _blk[_i] and not _blk[(_i - 1) % _NL])   # first blocked
+        _pts = [_loop[(_e + 1 + _k) % _NL] for _k in range((_s - _e - 1) % _NL)]
     P.raw(L.tube(_pts, [0.058] * len(_pts), 8), 'bone')
     # THE INNER FLOOR - AND ITS SLOT IS PASS 2, THE ONE CHANGE IN THAT PASS.
     # PASS 1 MADE IT PALE AND THE PICTURE REFUTED THE WHOLE DESIGN. A bowl whose

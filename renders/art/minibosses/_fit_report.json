@@ -9229,10 +9229,10 @@
    "creature_h": 2.26,
    "hero_h": 2.45,
    "ratio": 0.92,
-   "pair_w": 3.59,
+   "pair_w": 3.6,
    "gap_x": 0.45,
    "margin_x": 0.12,
-   "air_x": 2.008,
+   "air_x": 2.003,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -9244,45 +9244,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 39621,
-      "vis": 39621,
-      "delta": 45586,
+      "alone": 39472,
+      "vis": 39472,
+      "delta": 45503,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43669,
-      "vis": 43669,
-      "delta": 53613,
+      "alone": 43673,
+      "vis": 43673,
+      "delta": 53437,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 32553,
-      "vis": 32553,
-      "delta": 41047,
+      "alone": 32560,
+      "vis": 32560,
+      "delta": 41064,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37759,
-      "vis": 37759,
-      "delta": 43224,
+      "alone": 37767,
+      "vis": 37767,
+      "delta": 43236,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 38369,
-      "vis": 38369,
-      "delta": 48810,
+      "alone": 38164,
+      "vis": 38164,
+      "delta": 48604,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44024,
-      "vis": 44024,
-      "delta": 49705,
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 49750,
       "seen": 1.0
      },
      "proves": true
@@ -9310,12 +9310,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 208240,
-     "shadow_px": 4167,
-     "mean": 0.5075,
+     "plane_px": 209000,
+     "shadow_px": 4183,
+     "mean": 0.5068,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 2611,
+     "rim_filled_px": 2598,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9324,12 +9324,12 @@
      }
     },
     "side": {
-     "plane_px": 209760,
-     "shadow_px": 3859,
-     "mean": 0.4896,
+     "plane_px": 210520,
+     "shadow_px": 3849,
+     "mean": 0.4909,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 1984,
+     "rim_filled_px": 2010,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9338,12 +9338,12 @@
      }
     },
     "back": {
-     "plane_px": 208240,
-     "shadow_px": 4088,
-     "mean": 0.5139,
+     "plane_px": 209000,
+     "shadow_px": 4096,
+     "mean": 0.5149,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 2571,
+     "rim_filled_px": 2626,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,

@@ -17210,3 +17210,9 @@ TAKE THIS NEXT (07:58 CT, team lead) CONTENT row: "THE CONDITION IS NOW MET AND 
 Added arrive x9, act x7, broken x4, fall x8. The mechanic is a drum shut until the pan comes round: blows on the wall do nothing, the party holds its blows together. No {name} in arrive or fall, no per-hero item named, no operator (art removed the man at pass 4; the crank turns itself). _note_c187 added (expected zero-hit).
 Validation: all four owned files json.load OK; the 50 earlier by_key rows and every other top-level key equal to before; VALIDATION OK.
 CODE WIRING (game build 09:07): Delve.MB_NAME["panner"] = "Onceround" (NOT before this row is on a ref); MB_FIT panner from the fit report; panner.glb.import; theme confection draw. Then chat bot republishes elite count 50 -> 51. feed 51 vs MB_NAME 50 is the expected transient and chatcmd.gd will call panner UNNAMED until 09:07 - correct, not a defect.
+### HUB 24 Nov 08:4x CT - standing check (TAKE THIS NEXT gave HUB row "standing check, unchanged")
+- Merged origin/main into hub (5e3390e7). `git diff origin/main HEAD -- web/ docs/HUB_SECURITY.md` and `git diff origin/hub HEAD -- web/` both EMPTY: web/ byte-identical; no web change, so no publish owed and READY TO PUBLISH is NOT claimed.
+- Security greps on app.js: innerHTML at exactly :255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (only comment mentions). `node --check app.js` OK. index.html comment "only innerHTML in app.js is two page-owned sites" still true. CSP meta intact.
+- Only non-constant href: app.js:2743 `link.href = uri`, gated by /^https:\/\/(www\.)?twitch\.tv\// with rel=noopener; pre-existing, unchanged, flagged for the team lead's awareness only.
+- Number: web/icons 3.3 MB, fonts 64 KB (under the 6 MB cap). origin/gh-pages = 029e4fac. No new untracked web files.
+- Licence findings this run: none new (no pack catalogue touched).

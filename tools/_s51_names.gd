@@ -59,8 +59,8 @@ func _initialize() -> void:
 	_ok(TABLE.size() == 42, "directive table is 42 (36 + S65 dauber + S66 sealer + S67 hooper + S68 relief + S70 scraper + S72 ferryman)")
 	# S93: 45 = the 42-row directive table + S75 winder + S76 pitman + S89 tither (+ S94 blower = 46). This line read 42 since S72 and went
 	# red at S75 with nobody re-reading it; the key-SET check below is the real guard, this is the count beside it.
-	# S99: + changer (Evenhand, 47th, C-174) = 47. S102: + roper (Drawtight, 49th body, C-177) = 48; stopper (48th body) still held - no .glb on any branch.
-	_ok(Delve.MB_NAME.size() == 48, "MB_NAME is 48 (got %d)" % Delve.MB_NAME.size())
+	# S99: + changer (Evenhand, 47th, C-174) = 47. S102: + roper (Drawtight, 49th body, C-177) = 48. S103: + stopper (Chokewell, 48th body, C-176, .glb on main 41f71825) = 49.
+	_ok(Delve.MB_NAME.size() == 49, "MB_NAME is 49 (got %d)" % Delve.MB_NAME.size())
 	var seen := {}
 	var bodies := 0
 	var fed := 0

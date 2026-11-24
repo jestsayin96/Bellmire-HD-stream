@@ -35,7 +35,7 @@ Downloaded 2026-11-16 by the supervisor lane for D94 / D95.
 
 | Asset | Source | Licence | Notes |
 |---|---|---|---|
-| `assets/gear/wand_crystal.glb` | Supplied by Mr. E, 2026-11-16 05:03 | Mr. E's own — no third-party rights | Crystal-headed wand: dark tapered shaft, silver collar, blue faceted crystal. Raw drop was 306,024 tris / 24 MB with two 4096 and one 2048 map. Shipped version is decimated to 8,000 tris with three 1024 maps, 2.38 MB; silhouette, facets and collar all survive — checked on screen before commit. Origin moved to the BASE OF THE GRIP so it hangs off a hand bone. 0.147 x 0.218 x 0.921 units. The untouched original is kept OUT of git at `C:\hd adventure\_packs\_generated\wand_raw.glb`. |
+| `assets/gear/wand_crystal.glb` | Supplied by Mr. E, 2026-11-16 05:03 | Mr. E's own — no third-party rights | Crystal-headed wand: dark tapered shaft, silver collar, blue faceted crystal. Raw drop was 306,024 tris / 24 MB with two 4096 and one 2048 map. Shipped version is decimated to 8,000 tris with three 1024 maps, 2.38 MB; silhouette, facets and collar all survive — checked on screen before commit. Origin moved to the BASE OF THE GRIP so it hangs off a hand bone. 0.147 x 0.218 x 0.921 units. The untouched original is kept OUT of git at `C:\hd adventure\_packs\_generated\wand_raw.glb`. **24 Nov 2026 04:5x CT - A +30.5 X NODE TRANSLATION WAS BAKED OUT** (`tools/art/_wandbake.py`). The mesh-local origin was always at the base of the grip as described above, but the glTF NODE above it sat thirty metres out on X, so any consumer that respects the node transform - Godot's glTF import does, and a BoneAttachment3D parents the imported scene - would have placed this wand thirty metres from the hand. Found by the first fit render it has ever had (`tools/art/_wandfit.py`). 7,935 verts and 0.147 x 0.218 x 0.921 unchanged to six decimals; only the node offset moved. |
 
 **NOT YET FITTED TO A BODY.** It has not been rendered on a KayKit hero, so by the FIT IS THE
 ACCEPTANCE TEST rule it is not finished. At 0.921 long against a hero whose head sits at y
@@ -609,3 +609,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Naming note: the folder is `quaternius_ultimate_rpg_items_CC0` but the pack inside is "Ultimate RPG Items Pack - Aug 2019". Recorded so a later reader does not confuse it with the Quaternius "Ultimate Animated Character" or "Ultimate Nature" releases.
 - Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any item that enters `assets/` (potions, crystals, weapons, and so on) still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_ultimate_rpg_items_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - ultimate_nature_pack_by_quaternius (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| ultimate_nature_pack_by_quaternius (the pack is titled "Ultimate Nature Pack - Jun 2019"; folder `_packs\ultimate_nature_pack_by_quaternius\Ultimate Nature Pack - Jun 2019\`, one level deeper than the folder name; sibling `.zip` (22.99 MB) not opened this firing) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\ultimate_nature_pack_by_quaternius\Ultimate Nature Pack - Jun 2019\License.txt` (read in full this run) | 602 on disk: 150 `.blend`, 150 `.fbx`, 150 `.obj` + 150 `.mtl` (`OBJ\`), `Preview.jpg`, `License.txt` (counted by extension by walking the tree) | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\ultimate_nature_pack_by_quaternius\` by walking the tree (602 files), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Content note: nature set (rocks, tree stumps, wood logs, wheat, and many willow variants in plain, autumn, snow, and dead forms). Recorded so a later reader can find it by contents.
+- Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ultimate_nature_pack_by_quaternius`. Nothing is redistributed AS an asset.

@@ -17638,3 +17638,7 @@ OFFFLOOR_VERDICT OK 0 of 2092 samples off the floor; _townwalk ran rc=0 (pre-exi
 WARNINGs only); DELVE_TEST OK ran 9001 frames, floor reached 2. No live Twitch test, 0 bits.
 NOTE: ~1000 untracked *.import files under web/icons/items/ sit in R's worktree from another lane's
 import pass; not mine, not staged, not touched.
+## C-192 (24 Nov 2026 13:3x CST, content) - OWN QUEUE, NO NEW BODY; descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10
+TAKE THIS NEXT (12:58 CT block, 24 Nov) CONTENT row (13:22): C-192, own queue. 53 bodies on main, 53 by_key keys, no 54th committed on origin/art. Did not backfill the 25 arrive/fall-only rows (refused twice, nothing reads them). Appended plain strings to existing pools; duplicates checked first (two collisions caught and reworded before write).
+VALIDATION OK: data/lore_lines.json json.load passes; only descend, cleared and barks.{enter,lord,hurt,drink} grew (+53 lines), plus new `_note_c192`; every other key identical; existing pool entries identical (prefix compare).
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c192`.

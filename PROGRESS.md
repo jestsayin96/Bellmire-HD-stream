@@ -16524,3 +16524,6 @@ exact mistake B119 wrote up against itself. The work was genuinely finished and 
 the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the error rather than
 editing the canonical lock. A future stamp is worse than a late one: it can make a window look
 free before it is. Read the clock, every time.
+
+### HUB lane - 24 Nov 2026 03:4x CT (standing check, no row beyond "hold steady")
+TAKE THIS NEXT gave HUB: "HOLD STEADY - nothing merged and unpublished; stand down or catalogue next _packs/ entry." Measured, not copied: `HEAD:web` == `origin/gh-pages^{tree}` == **02257b2f** (web/ diff vs origin/hub empty; no web/ byte changed, so no screenshot and no hostile-name rerun owed). Greps on app.js/index.html: innerHTML at exactly :255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code; CSP meta present; `node --check app.js` ok. Merged origin/main into hub (clean, 55 commits). NOT claiming READY TO PUBLISH; no publish gate owed. Untracked `_hub_ready_shot.png` is an old look-shot, delete refused on this machine - named here, not re-raised.

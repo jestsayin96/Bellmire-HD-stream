@@ -164,3 +164,48 @@ next firing's work, in that order.
 **NOT ROOM-LOCKED: CORRIDOR-SAFE and UNDER-LID** - footprint span 1.73 m
 against a corridor clear span of 11.0 m and a lid underside of 9.5 m, both read
 out of `scripts/floorgen.gd` this run by `tools/art/floorgeom.py`.
+
+## 07:34 CT ADDENDUM - FAULT 3 BLAMES THE WRONG PART, AND I MEASURED IT BEFORE I LOOKED
+
+The required act this firing was committing the body (it was on no branch; see
+the push note). With the rest of the hour I went at the first of the three
+standing faults - "the hopper's chute crosses the top of the mouth in front
+projection" - and **the fault statement is wrong about WHICH PART does it.**
+
+I did the front-projection arithmetic in the mouth's own basis rather than
+eyeballing the render. Front projection is `(x, z)`; the mouth normal is
+`MN = (0.55, -0.70, 0.45).normalized()`, the lip ring is centred at
+`PC + MN*(DEPTH*0.5 - 0.010) = (0.144, -0.062, 1.339)` and its two projected
+semi-axes are `_RX*R_OUT = (-0.472, 0)` and `_RY*R_OUT = (0.167, -0.535)`.
+So the opening's silhouette in front view is an ellipse spanning
+`x -0.357 .. 0.645`, `z 0.804 .. 1.874`, with its top arc at `z ~ 1.85` across
+the band `x 0.0 .. 0.15`.
+
+- **THE CHUTE DOES NOT TOUCH THE RIM.** It runs `(0.120, 0.120, 1.580)` to
+  `(0.150, -0.036, 1.325)`; both ends are already INSIDE the ellipse, so it
+  hangs over the dark interior and never crosses the pale annulus.
+- **THE HOPPER CONE IS THE PART THAT CUTS THE RING.** It spans `z 1.570..1.900`
+  at `x 0.120 +/- 0.255`, so it crosses the top arc at `z ~ 1.85` dead centre,
+  in the one place the pale ring is widest in projection.
+
+**THEN I OPENED `panner/hero_front.png` AND THE PICTURE AGREES**, which is the
+order that matters: the dark hopper wedge sits ON the pale ring's top and
+plainly breaks it. I am keeping the habit the other way round for once - the
+number went first and the picture confirmed it - but the picture is still what
+closed it.
+
+**AND THE CONSTRAINT THE ARITHMETIC EXPOSES IS THE REAL FINDING: NOTHING THAT
+FEEDS THE MOUTH FROM ABOVE CAN AVOID THE TOP ARC.** The mouth is canted up and
+forward (`MN.z` is positive), so its projected disc owns the whole area above
+the drum. At `x = 0.12` the opening spans `z 0.844..1.851`; at `x = -0.30` it
+still spans `z 1.264..1.730`. A feed has to come down through that, or stop
+outside `x < -0.61` / `x > 0.90`, where it is no longer over the pan at all.
+**So "move the chute" is not a fix and the next firing should not try it.**
+
+**THE ONE CHANGE THAT ANSWERS FAULT 3 AND FAULT 5 TOGETHER: BREAK THE RING.**
+The rim is swept as a closed 29-point loop in the mouth's basis. Sweeping only
+part of that loop leaves a deliberate gap under the hopper - the hopper then
+passes through a gap instead of notching a closed ring, and an interrupted lip
+is a pan with a feed gap rather than the porthole fault 5 records. One change,
+one object, and it is the object the mechanic is counted on, so it gets its own
+pass and its own A/B - not a hurried one at the end of this hour.

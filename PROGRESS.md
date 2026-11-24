@@ -17090,9 +17090,94 @@ writing the IDLE line, not after: zero Godot alive.
 Nothing for the GAME BUILD lane in `twitch_eventsub.gd` this cycle. No live Twitch test:
 **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on either account.**
 
+## D-S109 (game build, 24 Nov 2026 07:08-07:2x CT) - L31 IS ALREADY CLOSED (THIRD REFUSAL, RE-PROVED); SYSTEM 12 SCOPED, NOT STARTED
+TAKE THIS NEXT (06:58 CT, team lead) GAME BUILD row, item 1: "measure whether the status-effect icons are wired in the dungeon fight; if so L31 closes".
+THEY ARE, AND L31 WAS ALREADY TICKED: WORK_PLAN.md:16177 `[x] GAME BUILD - L31c. TICKED 2026-11-18 01:5x CT` and :16436 `[x] ... THE L31 REMAINDER IS
+CLOSED`; :2559-2566 records the lead's own note that re-issuing it was wrong (S92 refused it once already). The only `[ ]` is the ORIGINAL row at
+:29663, never boxed when L31c ticked - that stray box is the source of the re-issue; recommend the lead boxes it so no seat hands it out again.
+WIRING, BY LINE: delve.gd:4002 statuses() returns [word, colour, key, bad]; party_frames.gd:3 preloads status_icon.gd and :214 builds a
+StatusIcon per state; delve.gd:4024 also tags states over heads; snapshot_pub.gd:265 publishes them. Commit 23c9951b (18 Nov 00:18).
+RE-PROVED ON MERGED MAIN 3920f251: `L31_ICONS OK 15` (party=8 states_wanted=15 icons=15 keyed_and_sized=15), `L31_FIT chips_past_bar=0`.
+LOOKED AT renders/cycles/l31/l31_icons_1080.png (re-rendered this run): every state chip carries its glyph badge in the state colour, bad
+states rimmed red, wrapped inside the 400 px frame, legible at 1080p. Nothing built - nothing was owed.
+ITEM 2 (next unticked Master Vision system) = SYSTEM 12, NPC variety, pack `_packs/ultimate_animated_character_pack` (Quaternius, Nov 2019).
+SCOPED ONLY, not started - it does not fit inside one claim and I will not start what I cannot finish:
+ - 52 models, FBX/OBJ/blend only, NO glTF and NO licence file in the pack. Licence page must be read before first use (next run).
+ - townsfolk.gd:254 loads every body from KayKit Adventurers (ADV) and then Gear.dress_role/clothe attach by KayKit bone names; a Quaternius
+   rig will not take that gear, and Rig.play clip names differ. So System 12 is a PER-ROLE body swap with its own clip map, gear skipped.
+ - Medieval-fit subset (my proposal, for the lead): Knight_Male, Knight_Golden_M/F, Soldier_M/F, BlueSoldier_M/F, Viking_M/F, Elf, Goblin_M/F,
+   Wizard, Witch, Worker_M/F, Chef_M/F, OldClassy_M/F. OUT as anachronisms: Suit, Cowboy, Casual*, Doctor*, Ninja*, Kimono, Pirate(?), Zombie, Cow, Pug.
+ - Plan: S109b convert the subset FBX->glb in Blender (new scene, never the open one), import, probe clip names + height vs KayKit; S109c wire by role
+   (cook->Chef, labourer->Worker, guard->Soldier, ...) in ONE commit with a render. Import and wiring together or neither, as S108.
+GATES on merged main 3920f251: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2055 | TWITCH_PARSE OK (8 checks)
+| TOWNWALK in_solid=0/18076 raid_in_solid=0/5940 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR | L31_ICONS OK 15.
+Logs: renders/cycles/s109/. No live Twitch test, ZERO BITS. Claim 07:08:49, cap claim+25 = 07:33:49 (computed first), declared 07:30.
+## C-186 (24 Nov 2026 07:2x CST, content) - STAND-DOWN, NOTHING OWED; panner.glb IS ON NO REF
+TAKE THIS NEXT block (06:58 CT, 24 Nov) gave content a CONDITIONAL item: write the `panner`
+`miniboss_feed.by_key` row only if `assets/monsters/minibosses/panner.glb` is on `origin/art`.
+CHECKED THE REF, NOT A WORKING DIRECTORY: after `fetch`, `ls-tree origin/art` and `ls-tree
+origin/main` on that path are both EMPTY, and `git log --all -- <path>` is EMPTY. `panner` is in
+tools/art/minibosses.py (8 hits on origin/art) but no mesh is committed. Art's head is 7a9ffeec,
+a plan sync. No mesh, no loadable body, so no lines: a by_key key with nothing behind it is the
+dead-data fault. Fourth stand-down in a row, and the right one.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead, left alone.
+No `_note_` key added or removed. CODE WIRING implied: none.
+NEXT FIRING: once panner.glb is on origin/art, write arrive+fall (nine/eight, no `{name}`) for `panner`.
 
 ## HUB lane - 24 Nov 07:4x CT - STANDING CHECK, NO ROW BUT THE STANDING CHECK (hub)
 TAKE THIS NEXT gave the HUB row as "the standing check, unchanged". Merged origin/main into hub (merge commit touches no web/).
 MEASURED: HEAD:web = origin/main:web = origin/hub:web = origin/gh-pages^{tree} = **02257b2f** (all four identical) - nothing merged and unpublished.
 SECURITY GREPS on app.js: innerHTML code sites exactly :255 and :301 (both page-owned literals; other hits are comments); outerHTML 0, eval( 0; insertAdjacentHTML / document.write / new Function appear only in the comment at :10-11. node --check app.js OK. One CSP meta present. web/ was not changed, so the hostile-name test is not owed.
 NOT claiming READY TO PUBLISH. No publish gate owed. Untracked: _hub_ready_shot.png (pre-existing, named here). Live-dot colour: unchanged, no UI work this run. Screenshot: none taken - web/ byte-identical.
+U147 STAND-DOWN 2026-11-24T07:53:26-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (2026-11-24T07:53:26-06:00): last line chat bot B127 IDLE 07:51:12 (released inside its declared 07:52; its RUNNING 07:47:07 closed; game build S109 IDLE 07:15:58 closed); tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 06:58 CT 24 Nov team-lead block; HUD row says U146 ticked as a stand-down, nothing HUD-owned open (MB_NAME/miniboss in no HUD file), rarity row is U55 and shipped - do not hand it back. Fifth dry cycle, put to the supervisor by the team lead. Fast-forwarded hud-ui to origin before writing.
+Next firing (08:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none (scope question on repeated HUD dry cycles is with the supervisor).
+## B127 - 2026-11-24 07:45 CT (chat bot) - FOUR GATES GREEN, AND THE 30 ERRORS WERE MINE
+Item taken: the TAKE THIS NEXT CHAT BOT row for 07:45 - the four engine gates on merged main,
+VERDICT LINES not return codes. Merged main 7b7203f0 into `chatbot` (fast-forward of
+origin/chatbot 638e3ea0 -> b911cd3f, then merge of main; no conflicts, 0 real conflict markers in
+PROGRESS.md - the 7 hits from a naive `^=======` grep are decoration, not markers).
+
+NOTHING OWED ON THE COUNT AND I MEASURED IT BEFORE TOUCHING A FILE. Brace-matched parse on merged
+main: `Delve.MB_NAME` 50 | `miniboss_feed.by_key` 50 | `commands.json` published 50 at both leaves
+(.commands.miniboss.short and .what), 18000 bytes, 32 keys. Set difference empty BOTH ways.
+`panner` - the 51st, whose renders and `docs/art/PANNER_THE_51ST.md` landed from art this hour - is
+in NEITHER MB_NAME nor the feed, so the 51 condition is UNMET and I republished nothing. Nothing of
+mine is edited this cycle: git status on scripts/chatcmd.gd, data/commands.json and
+docs/COMMANDS.md all empty.
+
+FOUR GATES, VERDICT LINES:
+  COMMANDS_DOC OK wrote 32 commands - and a TRUE no-op: git status on docs/COMMANDS.md empty after
+    the real tools/_commands_doc.gd ran. Doc carries 32 `!` rows.
+  TWITCH_PARSE OK (8 checks)
+  L14_TEST OK (24 checks) - 0 FAIL, 0 guard arms. Both doc arms quiet: 32 rows, unpublished [],
+    stale []. B121's close now held across a SEVENTH merged main.
+  parse --headless --path W6 --quit-after 300: rc=0, 0 SCRIPT ERROR, 0 Parse Error (21.5 s).
+
+THE PART WORTH KEEPING: THE FIRST PARSE CARRIED 30 `ERROR` LINES AND I DID NOT REPORT THEM AS A
+DEFECT ON MAIN. All 30 were resource-load failures on the nine UAA animal meshes the game build
+landed in S108 - "Cannot open file res://.godot/imported/<Animal>.gltf-<hash>.scn". The gate's own
+criterion (rc=0 / 0 SCRIPT ERROR / 0 Parse Error) was met, but B126 recorded "no ERROR in the parse
+section at all", so I would have been reporting a changed verdict either way. I ran it down:
+  1. RE-RAN the parse - identical, 30 ERRORs. Reproducible, not a flake.
+  2. Asked whether the game build had committed a .gltf without its buffers - the obvious defect.
+     IT HAD NOT: every .gltf embeds its buffer as a base64 data: URI (one embedded
+     `data:application/octet-stream` buffer each, `images: []`). The commit is complete.
+  3. Measured the cache: 9 `.gltf.import` files present, 664 `.scn` in `.godot/imported`, and
+     ZERO of them a UAA animal. The nine had never been imported in MY worktree.
+  4. PROVED it: `--headless --import` rc=0 in 9.6 s produced 18 files (9 .scn + 9 .md5), and the
+     re-parse came back rc=0 with 0 ERROR, 0 SCRIPT ERROR, 0 Parse Error.
+THE FAULT WAS MY WORKTREE'S MISSING IMPORT PASS, NOT MAIN AND NOT THE GAME BUILD. Same shape as
+the game build's own S103 note ("the mesh needed an import before any gate could see it"). Worth
+one sentence to the team lead and it is NOT new work: a lane whose `.godot/imported` cache already
+holds an asset cannot see this, so a newly-merged mesh reads clean in the lane that added it and
+red in every lane that did not. The import pass is the fix and it costs ten seconds.
+
+Lock: claim 07:47:07, cap 08:13 (claim+25), declared finish 07:52, released inside it. Window
+checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last line game build IDLE
+07:15:58) and again BEFORE writing the IDLE line, not after - B124's lesson.
+No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
+channel-point reward created, deleted or re-priced.

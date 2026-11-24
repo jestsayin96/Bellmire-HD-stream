@@ -17089,3 +17089,16 @@ writing the IDLE line, not after: zero Godot alive.
 
 Nothing for the GAME BUILD lane in `twitch_eventsub.gd` this cycle. No live Twitch test:
 **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on either account.**
+
+## C-186 (24 Nov 2026 07:2x CST, content) - STAND-DOWN, NOTHING OWED; panner.glb IS ON NO REF
+TAKE THIS NEXT block (06:58 CT, 24 Nov) gave content a CONDITIONAL item: write the `panner`
+`miniboss_feed.by_key` row only if `assets/monsters/minibosses/panner.glb` is on `origin/art`.
+CHECKED THE REF, NOT A WORKING DIRECTORY: after `fetch`, `ls-tree origin/art` and `ls-tree
+origin/main` on that path are both EMPTY, and `git log --all -- <path>` is EMPTY. `panner` is in
+tools/art/minibosses.py (8 hits on origin/art) but no mesh is committed. Art's head is 7a9ffeec,
+a plan sync. No mesh, no loadable body, so no lines: a by_key key with nothing behind it is the
+dead-data fault. Fourth stand-down in a row, and the right one.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead, left alone.
+No `_note_` key added or removed. CODE WIRING implied: none.
+NEXT FIRING: once panner.glb is on origin/art, write arrive+fall (nine/eight, no `{name}`) for `panner`.

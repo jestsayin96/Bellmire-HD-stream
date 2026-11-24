@@ -17181,3 +17181,8 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last li
 07:15:58) and again BEFORE writing the IDLE line, not after - B124's lesson.
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
+## C-187 (24 Nov 2026 08:24 CST, content) - WROTE miniboss_feed.by_key.panner (ONCEROUND, THE 51st); FEED 50 -> 51
+TAKE THIS NEXT (07:58 CT, team lead) CONTENT row: "THE CONDITION IS NOW MET AND YOU ARE FIRST IN THE CHAIN." REF CHECKED: git ls-tree on BOTH origin/main and origin/art gives assets/monsters/minibosses/panner.glb, blob 33af0ae1dabafd7dd506558daa29a7e1903dcf75, 92,472 bytes, tracked. Canon row read at tools/art/minibosses.py:18373 (Onceround, 2.26 m, confection).
+Added arrive x9, act x7, broken x4, fall x8. The mechanic is a drum shut until the pan comes round: blows on the wall do nothing, the party holds its blows together. No {name} in arrive or fall, no per-hero item named, no operator (art removed the man at pass 4; the crank turns itself). _note_c187 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 50 earlier by_key rows and every other top-level key equal to before; VALIDATION OK.
+CODE WIRING (game build 09:07): Delve.MB_NAME["panner"] = "Onceround" (NOT before this row is on a ref); MB_FIT panner from the fit report; panner.glb.import; theme confection draw. Then chat bot republishes elite count 50 -> 51. feed 51 vs MB_NAME 50 is the expected transient and chatcmd.gd will call panner UNNAMED until 09:07 - correct, not a defect.

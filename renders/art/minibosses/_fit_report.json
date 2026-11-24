@@ -22,6 +22,9 @@
    "hero_h": 2.45,
    "ratio": 0.9,
    "pair_w": 3.25,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.35,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -29,6 +32,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "drillmaster",
    "visibility": {
     "front": {
      "creature": {
@@ -140,9 +144,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 2.35,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      158,
@@ -179,15 +183,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 156,
-   "air_px_tightest_view": "front",
-   "views_dir": "drillmaster",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "gaoler": {
    "creature_h": 2.35,
    "hero_h": 2.45,
    "ratio": 0.96,
    "pair_w": 5.43,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.174,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -195,6 +200,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "gaoler",
    "visibility": {
     "front": {
      "creature": {
@@ -306,9 +312,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.17,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      11,
@@ -345,15 +351,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front",
-   "views_dir": "gaoler",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "scrapwright": {
    "creature_h": 2.0,
    "hero_h": 2.45,
    "ratio": 0.82,
    "pair_w": 4.62,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.977,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -361,6 +368,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "scrapwright",
    "visibility": {
     "front": {
      "creature": {
@@ -472,9 +480,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.98,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      65,
@@ -511,15 +519,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 65,
-   "air_px_tightest_view": "front",
-   "views_dir": "scrapwright",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "snuffer": {
    "creature_h": 2.6,
    "hero_h": 2.45,
    "ratio": 1.06,
    "pair_w": 3.37,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.227,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -527,6 +536,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "snuffer",
    "visibility": {
     "front": {
      "creature": {
@@ -638,9 +648,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 2.23,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      150,
@@ -677,15 +687,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 149,
-   "air_px_tightest_view": "front",
-   "views_dir": "snuffer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "sexton": {
    "creature_h": 2.45,
    "hero_h": 2.45,
    "ratio": 1.0,
    "pair_w": 4.06,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.536,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -693,6 +704,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "sexton",
    "visibility": {
     "front": {
      "creature": {
@@ -804,9 +816,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.54,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      103,
@@ -843,15 +855,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 103,
-   "air_px_tightest_view": "front",
-   "views_dir": "sexton",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "porter": {
    "creature_h": 2.3,
    "hero_h": 2.45,
    "ratio": 0.94,
    "pair_w": 5.39,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.214,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -859,6 +872,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "porter",
    "visibility": {
     "front": {
      "creature": {
@@ -970,9 +984,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.21,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      13,
@@ -1009,15 +1023,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front",
-   "views_dir": "porter",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "tallyman": {
    "creature_h": 2.15,
    "hero_h": 2.45,
    "ratio": 0.88,
    "pair_w": 3.75,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.85,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1025,6 +1040,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "tallyman",
    "visibility": {
     "front": {
      "creature": {
@@ -1136,9 +1152,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.85,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      125,
@@ -1175,15 +1191,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
-   "air_px_tightest_view": "front",
-   "views_dir": "tallyman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "cook": {
    "creature_h": 2.05,
    "hero_h": 2.45,
    "ratio": 0.84,
    "pair_w": 4.26,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.344,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1191,6 +1208,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "cook",
    "visibility": {
     "front": {
      "creature": {
@@ -1302,9 +1320,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.34,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      90,
@@ -1341,15 +1359,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front",
-   "views_dir": "cook",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "sluicekeeper": {
    "creature_h": 2.5,
    "hero_h": 2.45,
    "ratio": 1.02,
    "pair_w": 4.52,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.082,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1357,6 +1376,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "sluicekeeper",
    "visibility": {
     "front": {
      "creature": {
@@ -1468,9 +1488,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.08,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      72,
@@ -1507,15 +1527,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 72,
-   "air_px_tightest_view": "front",
-   "views_dir": "sluicekeeper",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "sower": {
    "creature_h": 2.25,
    "hero_h": 2.45,
    "ratio": 0.92,
    "pair_w": 5.36,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.241,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1523,6 +1544,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "sower",
    "visibility": {
     "front": {
      "creature": {
@@ -1634,9 +1656,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.24,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      15,
@@ -1673,15 +1695,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 15,
-   "air_px_tightest_view": "front",
-   "views_dir": "sower",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "snarer": {
    "creature_h": 2.3,
    "hero_h": 2.45,
    "ratio": 0.94,
    "pair_w": 5.11,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.492,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1689,6 +1712,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "snarer",
    "visibility": {
     "front": {
      "creature": {
@@ -1800,9 +1824,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.49,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      32,
@@ -1839,15 +1863,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 32,
-   "air_px_tightest_view": "front",
-   "views_dir": "snarer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "stoker": {
    "creature_h": 2.4,
    "hero_h": 2.45,
    "ratio": 0.98,
    "pair_w": 4.97,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.628,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -1855,6 +1880,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "stoker",
    "visibility": {
     "front": {
      "creature": {
@@ -1966,9 +1992,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.63,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      42,
@@ -2005,15 +2031,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "front",
-   "views_dir": "stoker",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "bellman": {
    "creature_h": 2.7,
    "hero_h": 2.45,
    "ratio": 1.1,
    "pair_w": 4.58,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.016,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -2021,6 +2048,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "bellman",
    "visibility": {
     "front": {
      "creature": {
@@ -2132,9 +2160,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.02,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      68,
@@ -2171,9 +2199,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front",
-   "views_dir": "bellman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "boiler": {
    "creature_h": 2.1,
@@ -2190,6 +2216,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "boiler",
    "visibility": {
     "front": {
      "creature": {
@@ -2201,7 +2228,7 @@
      "hero": {
       "alone": 43682,
       "vis": 43682,
-      "delta": 53677,
+      "delta": 53678,
       "seen": 1.0
      },
      "proves": true
@@ -2210,13 +2237,13 @@
      "creature": {
       "alone": 27067,
       "vis": 27067,
-      "delta": 32469,
+      "delta": 32427,
       "seen": 1.0
      },
      "hero": {
       "alone": 37779,
       "vis": 37779,
-      "delta": 43315,
+      "delta": 43225,
       "seen": 1.0
      },
      "proves": true
@@ -2225,13 +2252,13 @@
      "creature": {
       "alone": 36370,
       "vis": 36370,
-      "delta": 43739,
+      "delta": 44037,
       "seen": 1.0
      },
      "hero": {
       "alone": 44015,
       "vis": 44015,
-      "delta": 51026,
+      "delta": 50854,
       "seen": 1.0
      },
      "proves": true
@@ -2325,6 +2352,7 @@
    },
    "self_seen_worst": 0.7057,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      8,
@@ -2361,9 +2389,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "views_dir": "boiler",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "snuffer_chibi": {
    "creature_h": 2.6,
@@ -2706,6 +2732,9 @@
    "hero_h": 2.45,
    "ratio": 0.92,
    "pair_w": 4.04,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.559,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -2713,6 +2742,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "jointer",
    "visibility": {
     "front": {
      "creature": {
@@ -2824,9 +2854,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.56,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      105,
@@ -2863,15 +2893,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 105,
-   "air_px_tightest_view": "front",
-   "views_dir": "jointer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "quartermaster": {
    "creature_h": 2.35,
    "hero_h": 2.45,
    "ratio": 0.96,
    "pair_w": 4.48,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.122,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -2879,6 +2910,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "quartermaster",
    "visibility": {
     "front": {
      "creature": {
@@ -2990,9 +3022,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.12,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      75,
@@ -3029,15 +3061,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 75,
-   "air_px_tightest_view": "front",
-   "views_dir": "quartermaster",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "loader": {
    "creature_h": 2.65,
    "hero_h": 2.45,
    "ratio": 1.08,
    "pair_w": 4.26,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.344,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3045,6 +3078,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "loader",
    "visibility": {
     "front": {
      "creature": {
@@ -3156,9 +3190,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.34,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      90,
@@ -3195,15 +3229,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front",
-   "views_dir": "loader",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "hurdleman": {
    "creature_h": 2.55,
    "hero_h": 2.45,
    "ratio": 1.04,
    "pair_w": 4.84,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.756,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3211,6 +3246,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "hurdleman",
    "visibility": {
     "front": {
      "creature": {
@@ -3322,9 +3358,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.76,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      50,
@@ -3361,15 +3397,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 47,
-   "air_px_tightest_view": "side",
-   "views_dir": "hurdleman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "tanner": {
    "creature_h": 2.75,
    "hero_h": 2.45,
    "ratio": 1.12,
    "pair_w": 4.36,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.243,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3377,6 +3414,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "tanner",
    "visibility": {
     "front": {
      "creature": {
@@ -3488,9 +3526,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.24,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      83,
@@ -3527,15 +3565,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 83,
-   "air_px_tightest_view": "front",
-   "views_dir": "tanner",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "reeve": {
    "creature_h": 1.95,
    "hero_h": 2.45,
    "ratio": 0.8,
    "pair_w": 5.12,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.477,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3543,6 +3582,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "reeve",
    "visibility": {
     "front": {
      "creature": {
@@ -3654,9 +3694,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.48,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9214,
+     "man_alone_px": 37195,
+     "man_seen_px": 34271,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8541,
+     "man_alone_px": 23873,
+     "man_seen_px": 20391,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9869,
+     "man_alone_px": 36065,
+     "man_seen_px": 35592,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8541,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      31,
@@ -3693,37 +3755,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 31,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9214,
-     "man_alone_px": 37195,
-     "man_seen_px": 34271,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8541,
-     "man_alone_px": 23873,
-     "man_seen_px": 20391,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9869,
-     "man_alone_px": 36065,
-     "man_seen_px": 35592,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8541,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "reeve",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "pressman": {
    "creature_h": 2.85,
    "hero_h": 2.45,
    "ratio": 1.16,
    "pair_w": 4.47,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.131,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3731,6 +3772,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "pressman",
    "visibility": {
     "front": {
      "creature": {
@@ -3842,9 +3884,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.13,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9881,
+     "man_alone_px": 91940,
+     "man_seen_px": 90847,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8878,
+     "man_alone_px": 79572,
+     "man_seen_px": 70646,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.932,
+     "man_alone_px": 90463,
+     "man_seen_px": 84307,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8878,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      76,
@@ -3881,37 +3945,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 76,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9881,
-     "man_alone_px": 91940,
-     "man_seen_px": 90847,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8878,
-     "man_alone_px": 79572,
-     "man_seen_px": 70646,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.932,
-     "man_alone_px": 90463,
-     "man_seen_px": 84307,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8878,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "pressman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "strickler": {
    "creature_h": 2.55,
    "hero_h": 2.45,
    "ratio": 1.04,
    "pair_w": 3.67,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.929,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -3919,6 +3962,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "strickler",
    "visibility": {
     "front": {
      "creature": {
@@ -4030,9 +4074,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.93,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7748,
+     "man_alone_px": 93239,
+     "man_seen_px": 72243,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9086,
+     "man_alone_px": 80231,
+     "man_seen_px": 72894,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9385,
+     "man_alone_px": 91669,
+     "man_seen_px": 86032,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7748,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      130,
@@ -4069,31 +4135,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 45,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.7748,
-     "man_alone_px": 93239,
-     "man_seen_px": 72243,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9086,
-     "man_alone_px": 80231,
-     "man_seen_px": 72894,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9385,
-     "man_alone_px": 91669,
-     "man_seen_px": 86032,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.7748,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "strickler",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "greener": {
    "creature_h": 2.5,
@@ -4110,6 +4152,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "greener",
    "visibility": {
     "front": {
      "creature": {
@@ -4221,7 +4264,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8113,
+     "man_alone_px": 65322,
+     "man_seen_px": 52998,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8542,
+     "man_alone_px": 54696,
+     "man_seen_px": 46722,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6257,
+     "man_alone_px": 62532,
+     "man_seen_px": 39126,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6257,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      69,
@@ -4258,37 +4325,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.8113,
-     "man_alone_px": 65322,
-     "man_seen_px": 52998,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8542,
-     "man_alone_px": 54696,
-     "man_seen_px": 46722,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.6257,
-     "man_alone_px": 62532,
-     "man_seen_px": 39126,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.6257,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "greener",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "drover": {
    "creature_h": 2.44,
    "hero_h": 2.45,
    "ratio": 1.0,
    "pair_w": 5.45,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.147,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -4296,6 +4342,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "drover",
    "visibility": {
     "front": {
      "creature": {
@@ -4407,9 +4454,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.15,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9787,
+     "man_alone_px": 79925,
+     "man_seen_px": 78225,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9383,
+     "man_alone_px": 59451,
+     "man_seen_px": 55780,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.916,
+     "man_alone_px": 81305,
+     "man_seen_px": 74477,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.916,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      9,
@@ -4446,31 +4515,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9787,
-     "man_alone_px": 79925,
-     "man_seen_px": 78225,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9383,
-     "man_alone_px": 59451,
-     "man_seen_px": 55780,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.916,
-     "man_alone_px": 81305,
-     "man_seen_px": 74477,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.916,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "drover",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "paviser": {
    "creature_h": 2.68,
@@ -4487,6 +4532,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "paviser",
    "visibility": {
     "front": {
      "creature": {
@@ -4622,6 +4668,7 @@
    },
    "self_seen_worst": 0.574,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      20,
@@ -4658,15 +4705,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 17,
-   "air_px_tightest_view": "front",
-   "views_dir": "paviser",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "fenman": {
    "creature_h": 2.52,
    "hero_h": 2.45,
    "ratio": 1.03,
    "pair_w": 4.35,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.254,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -4674,6 +4722,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "fenman",
    "visibility": {
     "front": {
      "creature": {
@@ -4785,9 +4834,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.25,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9895,
+     "man_alone_px": 56458,
+     "man_seen_px": 55865,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7301,
+     "man_alone_px": 57115,
+     "man_seen_px": 41698,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.852,
+     "man_alone_px": 54556,
+     "man_seen_px": 46479,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7301,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      84,
@@ -4824,37 +4895,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 84,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9895,
-     "man_alone_px": 56458,
-     "man_seen_px": 55865,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.7301,
-     "man_alone_px": 57115,
-     "man_seen_px": 41698,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.852,
-     "man_alone_px": 54556,
-     "man_seen_px": 46479,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.7301,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "fenman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "leech": {
    "creature_h": 2.32,
    "hero_h": 2.45,
    "ratio": 0.95,
    "pair_w": 4.12,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.48,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -4862,6 +4912,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "leech",
    "visibility": {
     "front": {
      "creature": {
@@ -4973,9 +5024,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.48,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.967,
+     "man_alone_px": 98758,
+     "man_seen_px": 95497,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.84,
+     "man_alone_px": 103807,
+     "man_seen_px": 87201,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9713,
+     "man_alone_px": 101290,
+     "man_seen_px": 98388,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.84,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      100,
@@ -5012,37 +5085,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 99,
-   "air_px_tightest_view": "back",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.967,
-     "man_alone_px": 98758,
-     "man_seen_px": 95497,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.84,
-     "man_alone_px": 103807,
-     "man_seen_px": 87201,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9713,
-     "man_alone_px": 101290,
-     "man_seen_px": 98388,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.84,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "leech",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "back"
   },
   "beadle": {
    "creature_h": 2.95,
    "hero_h": 2.45,
    "ratio": 1.2,
    "pair_w": 3.74,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.864,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5050,6 +5102,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "beadle",
    "visibility": {
     "front": {
      "creature": {
@@ -5161,9 +5214,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.86,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6325,
+     "man_alone_px": 18402,
+     "man_seen_px": 11639,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.5174,
+     "man_alone_px": 17385,
+     "man_seen_px": 8995,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6854,
+     "man_alone_px": 17375,
+     "man_seen_px": 11908,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5174,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      126,
@@ -5200,37 +5275,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.6325,
-     "man_alone_px": 18402,
-     "man_seen_px": 11639,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.5174,
-     "man_alone_px": 17385,
-     "man_seen_px": 8995,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.6854,
-     "man_alone_px": 17375,
-     "man_seen_px": 11908,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.5174,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "beadle",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "rammer": {
    "creature_h": 2.75,
    "hero_h": 2.45,
    "ratio": 1.12,
    "pair_w": 3.89,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.711,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5238,6 +5292,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "rammer",
    "visibility": {
     "front": {
      "creature": {
@@ -5349,9 +5404,9 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.71,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      115,
@@ -5388,15 +5443,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 114,
-   "air_px_tightest_view": "front",
-   "views_dir": "rammer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "moulder": {
    "creature_h": 2.9,
    "hero_h": 2.45,
    "ratio": 1.18,
    "pair_w": 4.22,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.376,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5404,6 +5460,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "moulder",
    "visibility": {
     "front": {
      "creature": {
@@ -5515,9 +5572,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.38,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.977,
+     "man_alone_px": 56673,
+     "man_seen_px": 55370,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8554,
+     "man_alone_px": 44862,
+     "man_seen_px": 38374,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5837,
+     "man_alone_px": 56495,
+     "man_seen_px": 32977,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5837,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      93,
@@ -5554,37 +5633,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 93,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.977,
-     "man_alone_px": 56673,
-     "man_seen_px": 55370,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8554,
-     "man_alone_px": 44862,
-     "man_seen_px": 38374,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.5837,
-     "man_alone_px": 56495,
-     "man_seen_px": 32977,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.5837,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "moulder",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "fuller": {
    "creature_h": 2.66,
    "hero_h": 2.45,
    "ratio": 1.09,
    "pair_w": 5.15,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.446,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5592,6 +5650,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "fuller",
    "visibility": {
     "front": {
      "creature": {
@@ -5703,9 +5762,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.45,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9724,
+     "man_alone_px": 74791,
+     "man_seen_px": 72727,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.4611,
+     "man_alone_px": 52516,
+     "man_seen_px": 24216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 74205,
+     "man_seen_px": 74101,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.4611,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      29,
@@ -5742,37 +5823,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9724,
-     "man_alone_px": 74791,
-     "man_seen_px": 72727,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.4611,
-     "man_alone_px": 52516,
-     "man_seen_px": 24216,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9986,
-     "man_alone_px": 74205,
-     "man_seen_px": 74101,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.4611,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "fuller",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "stackman": {
    "creature_h": 2.84,
    "hero_h": 2.45,
    "ratio": 1.16,
    "pair_w": 4.39,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.208,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5780,6 +5840,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "stackman",
    "visibility": {
     "front": {
      "creature": {
@@ -5891,9 +5952,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.21,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9464,
+     "man_alone_px": 44682,
+     "man_seen_px": 42289,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9865,
+     "man_alone_px": 36239,
+     "man_seen_px": 35751,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9986,
+     "man_alone_px": 43849,
+     "man_seen_px": 43789,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.9464,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      81,
@@ -5930,37 +6013,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 21,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9464,
-     "man_alone_px": 44682,
-     "man_seen_px": 42289,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9865,
-     "man_alone_px": 36239,
-     "man_seen_px": 35751,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9986,
-     "man_alone_px": 43849,
-     "man_seen_px": 43789,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.9464,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "stackman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "dauber": {
    "creature_h": 2.58,
    "hero_h": 2.45,
    "ratio": 1.05,
    "pair_w": 3.52,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.084,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -5968,6 +6030,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "dauber",
    "visibility": {
     "front": {
      "creature": {
@@ -6079,9 +6142,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 2.08,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8214,
+     "man_alone_px": 56720,
+     "man_seen_px": 46590,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8344,
+     "man_alone_px": 48859,
+     "man_seen_px": 40766,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8459,
+     "man_alone_px": 55318,
+     "man_seen_px": 46792,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8214,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      140,
@@ -6118,37 +6203,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 138,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.8214,
-     "man_alone_px": 56720,
-     "man_seen_px": 46590,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8344,
-     "man_alone_px": 48859,
-     "man_seen_px": 40766,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.8459,
-     "man_alone_px": 55318,
-     "man_seen_px": 46792,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8214,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "dauber",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "hooper": {
    "creature_h": 2.36,
    "hero_h": 2.45,
    "ratio": 0.96,
    "pair_w": 3.24,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.36,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -6156,6 +6220,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "hooper",
    "visibility": {
     "front": {
      "creature": {
@@ -6267,9 +6332,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 2.36,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8912,
+     "man_alone_px": 98860,
+     "man_seen_px": 88104,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8914,
+     "man_alone_px": 85701,
+     "man_seen_px": 76397,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8718,
+     "man_alone_px": 97782,
+     "man_seen_px": 85242,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8718,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      159,
@@ -6306,37 +6393,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 153,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.8912,
-     "man_alone_px": 98860,
-     "man_seen_px": 88104,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8914,
-     "man_alone_px": 85701,
-     "man_seen_px": 76397,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.8718,
-     "man_alone_px": 97782,
-     "man_seen_px": 85242,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8718,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "hooper",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "scraper": {
    "creature_h": 2.55,
    "hero_h": 2.45,
    "ratio": 1.04,
    "pair_w": 3.76,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.839,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -6344,6 +6410,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "scraper",
    "visibility": {
     "front": {
      "creature": {
@@ -6455,9 +6522,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.84,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8864,
+     "man_alone_px": 88525,
+     "man_seen_px": 78465,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.7627,
+     "man_alone_px": 89888,
+     "man_seen_px": 68562,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9088,
+     "man_alone_px": 89285,
+     "man_seen_px": 81143,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7627,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      124,
@@ -6494,37 +6583,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 98,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.8864,
-     "man_alone_px": 88525,
-     "man_seen_px": 78465,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.7627,
-     "man_alone_px": 89888,
-     "man_seen_px": 68562,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9088,
-     "man_alone_px": 89285,
-     "man_seen_px": 81143,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.7627,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "scraper",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "winder": {
    "creature_h": 2.34,
    "hero_h": 2.45,
    "ratio": 0.96,
    "pair_w": 4.86,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.736,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -6532,6 +6600,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "winder",
    "visibility": {
     "front": {
      "creature": {
@@ -6643,9 +6712,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.74,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.7102,
+     "man_alone_px": 41437,
+     "man_seen_px": 29428,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9958,
+     "man_alone_px": 39233,
+     "man_seen_px": 39070,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.983,
+     "man_alone_px": 42498,
+     "man_seen_px": 41775,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.7102,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      49,
@@ -6682,31 +6773,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.7102,
-     "man_alone_px": 41437,
-     "man_seen_px": 29428,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9958,
-     "man_alone_px": 39233,
-     "man_seen_px": 39070,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.983,
-     "man_alone_px": 42498,
-     "man_seen_px": 41775,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.7102,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "winder",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "pitman": {
    "creature_h": 2.3,
@@ -6723,6 +6790,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "pitman",
    "visibility": {
     "front": {
      "creature": {
@@ -6858,6 +6926,7 @@
    },
    "self_seen_worst": 0.9967,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      43,
@@ -6894,15 +6963,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "back",
-   "views_dir": "pitman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "back"
   },
   "comfitmaker": {
    "creature_h": 2.28,
    "hero_h": 2.45,
    "ratio": 0.93,
    "pair_w": 3.69,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.907,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -6910,6 +6980,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "comfitmaker",
    "visibility": {
     "front": {
      "creature": {
@@ -7021,9 +7092,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.91,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9962,
+     "man_alone_px": 98629,
+     "man_seen_px": 98254,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8616,
+     "man_alone_px": 96309,
+     "man_seen_px": 82980,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9998,
+     "man_alone_px": 96037,
+     "man_seen_px": 96014,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8616,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      128,
@@ -7060,31 +7153,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 128,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9962,
-     "man_alone_px": 98629,
-     "man_seen_px": 98254,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8616,
-     "man_alone_px": 96309,
-     "man_seen_px": 82980,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9998,
-     "man_alone_px": 96037,
-     "man_seen_px": 96014,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8616,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "comfitmaker",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "dyer": {
    "creature_h": 2.6,
@@ -7101,6 +7170,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "dyer",
    "visibility": {
     "front": {
      "creature": {
@@ -7212,7 +7282,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
+   "self_seen": {
+    "front": {
+     "man_seen": 0.8787,
+     "man_alone_px": 49167,
+     "man_seen_px": 43205,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9094,
+     "man_alone_px": 38251,
+     "man_seen_px": 34787,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.5949,
+     "man_alone_px": 47971,
+     "man_seen_px": 28536,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.5949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      57,
@@ -7249,37 +7343,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.8787,
-     "man_alone_px": 49167,
-     "man_seen_px": 43205,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9094,
-     "man_alone_px": 38251,
-     "man_seen_px": 34787,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.5949,
-     "man_alone_px": 47971,
-     "man_seen_px": 28536,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.5949,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "dyer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "ferryman": {
    "creature_h": 2.62,
    "hero_h": 2.45,
    "ratio": 1.07,
    "pair_w": 4.23,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.371,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -7287,6 +7360,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "ferryman",
    "visibility": {
     "front": {
      "creature": {
@@ -7398,9 +7472,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.37,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6405,
+     "man_alone_px": 90080,
+     "man_seen_px": 57694,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8573,
+     "man_alone_px": 91234,
+     "man_seen_px": 78216,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.8063,
+     "man_alone_px": 92858,
+     "man_seen_px": 74876,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6405,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      92,
@@ -7437,31 +7533,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 0,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.6405,
-     "man_alone_px": 90080,
-     "man_seen_px": 57694,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8573,
-     "man_alone_px": 91234,
-     "man_seen_px": 78216,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.8063,
-     "man_alone_px": 92858,
-     "man_seen_px": 74876,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.6405,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "ferryman",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "ratcatcher": {
    "creature_h": 2.62,
@@ -7478,6 +7550,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "ratcatcher",
    "visibility": {
     "front": {
      "creature": {
@@ -7613,6 +7686,7 @@
    },
    "self_seen_worst": 0.9793,
    "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      8,
@@ -7649,15 +7723,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "views_dir": "ratcatcher",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "relief": {
    "creature_h": 2.52,
    "hero_h": 2.45,
    "ratio": 1.03,
    "pair_w": 3.61,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.994,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -7665,6 +7740,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "relief",
    "visibility": {
     "front": {
      "creature": {
@@ -7776,9 +7852,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 1.99,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.6887,
+     "man_alone_px": 84272,
+     "man_seen_px": 58035,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.9543,
+     "man_alone_px": 65269,
+     "man_seen_px": 62289,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.973,
+     "man_alone_px": 84216,
+     "man_seen_px": 81938,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6887,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      134,
@@ -7815,37 +7913,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 123,
-   "air_px_tightest_view": "side",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.6887,
-     "man_alone_px": 84272,
-     "man_seen_px": 58035,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.9543,
-     "man_alone_px": 65269,
-     "man_seen_px": 62289,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.973,
-     "man_alone_px": 84216,
-     "man_seen_px": 81938,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.6887,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "relief",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "sealer": {
    "creature_h": 2.42,
    "hero_h": 2.45,
    "ratio": 0.99,
    "pair_w": 3.5,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.102,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -7853,6 +7930,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "sealer",
    "visibility": {
     "front": {
      "creature": {
@@ -7964,9 +8042,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 2.1,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9395,
+     "man_alone_px": 100055,
+     "man_seen_px": 94001,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8129,
+     "man_alone_px": 81090,
+     "man_seen_px": 65922,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.6949,
+     "man_alone_px": 100398,
+     "man_seen_px": 69764,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.6949,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      142,
@@ -8003,37 +8103,16 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 142,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9395,
-     "man_alone_px": 100055,
-     "man_seen_px": 94001,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8129,
-     "man_alone_px": 81090,
-     "man_seen_px": 65922,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.6949,
-     "man_alone_px": 100398,
-     "man_seen_px": 69764,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.6949,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "sealer",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "tapster": {
    "creature_h": 2.8,
    "hero_h": 2.45,
    "ratio": 1.14,
    "pair_w": 4.9,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 0.697,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -8041,6 +8120,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "tapster",
    "visibility": {
     "front": {
      "creature": {
@@ -8152,9 +8232,31 @@
      }
     }
    },
+   "ground_from": "measured this run",
    "proving_views": 3,
-   "air_x": 0.7,
-   "air_x_derived": "FRAME_W - pair_w, arithmetic from the stored pair width - NOT a re-measurement",
+   "self_seen": {
+    "front": {
+     "man_seen": 0.9582,
+     "man_alone_px": 48973,
+     "man_seen_px": 46927,
+     "red": null
+    },
+    "side": {
+     "man_seen": 0.8299,
+     "man_alone_px": 34189,
+     "man_seen_px": 28372,
+     "red": null
+    },
+    "back": {
+     "man_seen": 0.9652,
+     "man_alone_px": 46919,
+     "man_seen_px": 45285,
+     "red": null
+    }
+   },
+   "self_seen_worst": 0.8299,
+   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      46,
@@ -8191,31 +8293,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 43,
-   "air_px_tightest_view": "front",
-   "self_seen": {
-    "front": {
-     "man_seen": 0.9582,
-     "man_alone_px": 48973,
-     "man_seen_px": 46927,
-     "red": null
-    },
-    "side": {
-     "man_seen": 0.8299,
-     "man_alone_px": 34189,
-     "man_seen_px": 28372,
-     "red": null
-    },
-    "back": {
-     "man_seen": 0.9652,
-     "man_alone_px": 46919,
-     "man_seen_px": 45285,
-     "red": null
-    }
-   },
-   "self_seen_worst": 0.8299,
-   "self_seen_from": "tools/art/_backread.py, 21 Nov 03:3x CT, _selfseen_all.json - with/without through one locked camera, bounds asserted unmoved under the split",
-   "views_dir": "tapster",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "tither": {
    "creature_h": 2.42,
@@ -8232,6 +8310,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "tither",
    "visibility": {
     "front": {
      "creature": {
@@ -8345,6 +8424,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      91,
@@ -8381,9 +8461,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 88,
-   "air_px_tightest_view": "front",
-   "views_dir": "tither",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "front"
   },
   "blower": {
    "creature_h": 2.48,
@@ -8400,6 +8478,7 @@
     "hero_side.png",
     "hero_back.png"
    ],
+   "views_dir": "blower",
    "visibility": {
     "front": {
      "creature": {
@@ -8513,6 +8592,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      154,
@@ -8549,9 +8629,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 118,
-   "air_px_tightest_view": "side",
-   "views_dir": "blower",
-   "views_from": "recorded on the row when it was rendered"
+   "air_px_tightest_view": "side"
   },
   "changer": {
    "creature_h": 2.72,
@@ -10069,46 +10147,7 @@
  "errors": [],
  "blind_views": [],
  "stale_margin": [],
- "margin_derived": [
-  "beadle",
-  "bellman",
-  "comfitmaker",
-  "cook",
-  "dauber",
-  "drillmaster",
-  "drover",
-  "fenman",
-  "ferryman",
-  "fuller",
-  "gaoler",
-  "hooper",
-  "hurdleman",
-  "jointer",
-  "leech",
-  "loader",
-  "moulder",
-  "porter",
-  "pressman",
-  "quartermaster",
-  "rammer",
-  "reeve",
-  "relief",
-  "scraper",
-  "scrapwright",
-  "sealer",
-  "sexton",
-  "sluicekeeper",
-  "snarer",
-  "snuffer",
-  "sower",
-  "stackman",
-  "stoker",
-  "strickler",
-  "tallyman",
-  "tanner",
-  "tapster",
-  "winder"
- ],
+ "margin_derived": [],
  "seen_min": 0.15,
  "vis_min": 700,
  "min_proving": 2,
@@ -10128,18 +10167,18 @@
   "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
   "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
-  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`.",
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`.",
   "instrument_errors": [
    "panner: the man span merged to no object"
   ],
-  "measured_cells": 93,
-  "measured_bodies": 31,
+  "measured_cells": 111,
+  "measured_bodies": 37,
   "no_man": [
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-24T16:00:15-0600",
-  "census_register_mtime": "2026-11-24T15:58:17-0600",
+  "census_measured_at": "2026-11-24T16:45:35-0600",
+  "census_register_mtime": "2026-11-24T16:00:26-0600",
   "census_register_pairs": 57,
   "census_errors": [],
   "build_failed": [],
@@ -10149,11 +10188,8 @@
    "cook",
    "drillmaster",
    "gaoler",
-   "hurdleman",
-   "iceman",
    "jointer",
    "loader",
-   "nightman",
    "porter",
    "quartermaster",
    "rammer",
@@ -10164,12 +10200,9 @@
    "snuffer",
    "snuffer_chibi",
    "sower",
-   "stiltman",
    "stoker",
-   "straker",
    "tallyman",
-   "tallyman_chibi",
-   "tanner"
+   "tallyman_chibi"
   ],
   "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
   "uncovered": [],
@@ -10204,121 +10237,139 @@
    },
    {
     "rank": 5,
+    "key": "tanner",
+    "view": "side",
+    "man_seen": 0.5759
+   },
+   {
+    "rank": 6,
     "key": "moulder",
     "view": "back",
     "man_seen": 0.5837
    },
    {
-    "rank": 6,
+    "rank": 7,
     "key": "dyer",
     "view": "back",
     "man_seen": 0.5949
    },
    {
-    "rank": 7,
+    "rank": 8,
     "key": "roper",
     "view": "back",
     "man_seen": 0.6151
    },
    {
-    "rank": 8,
+    "rank": 9,
     "key": "roper",
     "view": "front",
     "man_seen": 0.6163
    },
    {
-    "rank": 9,
+    "rank": 10,
+    "key": "tanner",
+    "view": "front",
+    "man_seen": 0.6173
+   },
+   {
+    "rank": 11,
     "key": "greener",
     "view": "back",
     "man_seen": 0.6257
    },
    {
-    "rank": 10,
+    "rank": 12,
     "key": "beadle",
     "view": "front",
     "man_seen": 0.6325
    },
    {
-    "rank": 11,
+    "rank": 13,
     "key": "stopper",
     "view": "side",
     "man_seen": 0.6341
    },
    {
-    "rank": 12,
+    "rank": 14,
     "key": "ferryman",
     "view": "front",
     "man_seen": 0.6405
    },
    {
-    "rank": 13,
+    "rank": 15,
     "key": "almoner",
     "view": "side",
     "man_seen": 0.6501
    },
    {
-    "rank": 14,
+    "rank": 16,
+    "key": "hurdleman",
+    "view": "back",
+    "man_seen": 0.6749
+   },
+   {
+    "rank": 17,
     "key": "beadle",
     "view": "back",
     "man_seen": 0.6854
    },
    {
-    "rank": 15,
+    "rank": 18,
     "key": "relief",
     "view": "front",
     "man_seen": 0.6887
    },
    {
-    "rank": 16,
+    "rank": 19,
     "key": "sealer",
     "view": "back",
     "man_seen": 0.6949
    },
    {
-    "rank": 17,
+    "rank": 20,
     "key": "stopper",
     "view": "front",
     "man_seen": 0.6989
    },
    {
-    "rank": 18,
+    "rank": 21,
     "key": "boiler",
     "view": "side",
     "man_seen": 0.7057
    },
    {
-    "rank": 19,
+    "rank": 22,
     "key": "winder",
     "view": "front",
     "man_seen": 0.7102
    },
    {
-    "rank": 20,
+    "rank": 23,
     "key": "fenman",
     "view": "side",
     "man_seen": 0.7301
    },
    {
-    "rank": 21,
+    "rank": 24,
     "key": "blower",
     "view": "side",
     "man_seen": 0.7469
    }
   ],
-  "under_bar_count": 21,
+  "under_bar_count": 24,
   "top_end": {
-   "key": "tither",
+   "key": "straker",
    "view": "back",
-   "man_seen": 0.9999
+   "man_seen": 1.0
   },
   "verdict": "GREEN"
  },
  "unproved_cells": [],
  "measured": [
-  "straker"
+  "boiler"
  ],
  "asked": [
-  "straker"
+  "boiler"
  ],
  "blank_check": {
   "files": 165,

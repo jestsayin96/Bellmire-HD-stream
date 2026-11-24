@@ -14,7 +14,8 @@ this fault. That is trap 5 in a new coat.
 
 SO THIS FILE ASKS THE VIEWER'S TWO QUESTIONS, PER VIEW:
 
-  1. CAN YOU SEE THE CREATURE AT ALL? The `man` span is merged into its own
+  1. CAN YOU SEE THE CREATURE AT ALL? The figure - the `man` span, or the
+     spans the builder names in its own `man_parts` - is merged into its own
      objects - SAME VERTS, SAME SLOTS, SAME MATERIALS, so the bounds and
      therefore the camera cannot move - and three frames go through ONE locked
      camera: everything (B), the man hidden (X), the man alone (Mo). A man
@@ -30,7 +31,10 @@ SO THIS FILE ASKS THE VIEWER'S TWO QUESTIONS, PER VIEW:
      more.
 
 IT GOES RED, NOT BLIND, ON EVERY WAY IT CAN FAIL:
-  - no `man` span on the key                  -> RED (nothing to measure)
+  - no `man` span and no `man_parts`          -> RED (nothing to measure)
+  - a `man_parts` naming a span the builder
+    does not declare                          -> RED (a declaration that misses
+                                                 is a lie, not an absence)
   - man-alone mask under 500 px               -> RED (the split grabbed nothing)
   - creature alpha under 2000 px              -> RED (blank or mis-aimed render)
   - item count not conserved across the split -> RED (geometry lost in the merge,
@@ -71,9 +75,12 @@ def _split_merge(key, items, mats, suffix=None, vcols=None):
     span = SPLIT["span"]
     if span is None:
         return _REAL_MERGE(key, items, mats, suffix=suffix, vcols=vcols)
-    a, b = span
-    inside = [it for i, it in enumerate(items) if a <= i < b]
-    outside = [it for i, it in enumerate(items) if not (a <= i < b)]
+    # RANGES, not one range, from 24 Nov 2026 16:5x CT. Three of the six bodies
+    # this closed author their arms AFTER the apparatus the arms must reach, so
+    # the figure is two ranges, not one. The partition is still a partition -
+    # the conservation assertion below counts it - and nothing moves.
+    inside = [it for i, it in enumerate(items) if M.in_ranges(i, span)]
+    outside = [it for i, it in enumerate(items) if not M.in_ranges(i, span)]
     SPLIT["counts"] = dict(inside=len(inside), outside=len(outside),
                            total=len(items))
     out = []
@@ -138,11 +145,21 @@ def measure(repo, key, outdir, tag=""):
     _clear()
     # --- split build ---------------------------------------------------------
     P = M.BUILDERS[key]()
-    spans = getattr(P, "spans", {}) or {}
-    if "man" not in spans:
-        rep["errors"].append("%s: no `man` span - nothing to measure" % key)
+    ranges, source, rerrs = M.man_ranges(P)
+    rep["man_from"] = source
+    rep["man_ranges"] = ranges
+    for e in rerrs:
+        # A DECLARATION THAT MISSES IS A LIE, NOT AN ABSENCE. A `man_parts`
+        # naming a span the builder does not declare goes RED here; it must
+        # never read as "nothing to measure", which is the quiet outcome.
+        rep["errors"].append("%s: %s" % (key, e))
+    if rerrs:
         return rep
-    SPLIT["span"] = spans["man"]
+    if not source:
+        rep["errors"].append("%s: no `man` span and no `man_parts` - nothing "
+                             "to measure" % key)
+        return rep
+    SPLIT["span"] = ranges
     M.merge_objs = _split_merge
     try:
         objs, meta = MG.build_miniboss(key)

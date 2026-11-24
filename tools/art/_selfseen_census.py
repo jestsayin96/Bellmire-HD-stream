@@ -30,8 +30,12 @@ is exactly how the nine went missing:
                    and left `P.spans["man"] = (len(P.items), len(P.items))` to
                    say so. A machine with no operator CANNOT fail a
                    can-you-see-the-man test. Nothing claimed, NOT red.
-  not_measurable - in the register, builder has NO `man` span at all: nothing
-                   to split, so NOTHING IS CLAIMED. Absent, not green.
+  not_measurable - in the register, and the builder names NO figure at all -
+                   no `man` span and no `man_parts`: nothing to split, so
+                   NOTHING IS CLAIMED. Absent, not green. READ THE FOURTH
+                   FAULT BELOW BEFORE TRUSTING THIS LIST: it has already been
+                   wrong about six bodies, and being wrong in THIS direction
+                   is silent.
   build_failed   - the builder raised. That is RED, never "unmeasurable".
 
 *** THE SECOND FAULT, CAUGHT 24 Nov 11:5x CT BEFORE IT SHIPPED. *** The first
@@ -85,14 +89,41 @@ def main():
                 P = M.BUILDERS[key]()
                 spans = getattr(P, "spans", {}) or {}
                 r["spans"] = sorted(spans.keys())
-                r["has_man_span"] = "man" in spans
                 r["items"] = len(getattr(P, "items", []) or [])
+                # *** THE FOURTH FAULT, FOUND 24 Nov 2026 16:4x CT BY THIS LANE
+                # *** IN ITS OWN SHIPPED CENSUS, ONE HOUR AFTER IT SHIPPED. ***
+                # This test was `"man" in spans`, and the list it fed said of
+                # 25 bodies "no `man` span at all: nothing to split, so
+                # NOTHING IS CLAIMED". For SIX of them that was false and the
+                # FOUR NEWEST BODIES IN THE HOUSE were among them - iceman the
+                # 54th and straker the 55th, ticked this very hour. Their
+                # builders split the figure from the gear seven ways, under
+                # `trunk`/`head`/`arms`/`legs` or `man_lower`/`tool_arms`
+                # instead of `man`, and a span-name match cannot see it.
+                # The resolution now lives in ONE place, minibosses.man_ranges,
+                # read by this census and by _backread's splitter, so the
+                # instrument and its coverage report can never disagree about
+                # what the figure is. The builder states its own parts; this
+                # file guesses no names.
+                ranges, source, rerrs = M.man_ranges(P)
+                r["man_from"] = source
+                r["man_ranges"] = ranges
+                r["man_parts"] = list(getattr(P, "man_parts", None) or [])
+                r["has_man_span"] = bool(source)
                 span = spans.get("man")
                 r["man_span"] = list(span) if span else None
                 # AN EMPTY SPAN IS A STATEMENT, NOT AN OMISSION. See the
                 # docstring: this is what stopped an unearned RED on panner.
-                r["man_span_empty"] = (bool(span is not None)
-                                       and span[0] >= span[1])
+                r["man_span_empty"] = bool(source) and not sum(
+                    max(0, b - a) for a, b in ranges)
+                for e in rerrs:
+                    # A BAD DECLARATION IS RED, NOT ABSENT. `has_man_span`
+                    # False would file it under not_measurable, where nothing
+                    # is claimed and nothing is reported - the quiet outcome
+                    # this census exists to abolish. It goes in errors, which
+                    # turns `ok` False and raises it in derive_self_seen.
+                    r["error"] = e
+                    errs.append("%s: %s" % (key, e))
             except Exception as exc:
                 r["error"] = "%s: %s" % (type(exc).__name__, exc)
                 r["has_man_span"] = None

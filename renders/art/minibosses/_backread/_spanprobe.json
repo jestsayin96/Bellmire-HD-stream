@@ -1,0 +1,356 @@
+{
+ "iceman": {
+  "items": 35,
+  "spans": {
+   "arms": [
+    33,
+    35
+   ],
+   "blocks": [
+    25,
+    30
+   ],
+   "frame": [
+    17,
+    25
+   ],
+   "head": [
+    11,
+    17
+   ],
+   "legs": [
+    0,
+    5
+   ],
+   "tongs": [
+    30,
+    33
+   ],
+   "trunk": [
+    5,
+    11
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "legs": [
+    0,
+    5
+   ],
+   "trunk": [
+    5,
+    11
+   ],
+   "head": [
+    11,
+    17
+   ],
+   "arms": [
+    33,
+    35
+   ]
+  },
+  "body_union": [
+   0,
+   35
+  ],
+  "body_contiguous": false,
+  "body_px_count": 19,
+  "has_man": false
+ },
+ "nightman": {
+  "items": 33,
+  "spans": {
+   "arms": [
+    24,
+    26
+   ],
+   "head": [
+    11,
+    17
+   ],
+   "lamp": [
+    26,
+    33
+   ],
+   "legs": [
+    0,
+    5
+   ],
+   "scoop": [
+    21,
+    24
+   ],
+   "trunk": [
+    5,
+    11
+   ],
+   "tub": [
+    17,
+    21
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "legs": [
+    0,
+    5
+   ],
+   "trunk": [
+    5,
+    11
+   ],
+   "head": [
+    11,
+    17
+   ],
+   "arms": [
+    24,
+    26
+   ]
+  },
+  "body_union": [
+   0,
+   26
+  ],
+  "body_contiguous": false,
+  "body_px_count": 19,
+  "has_man": false
+ },
+ "stiltman": {
+  "items": 27,
+  "spans": {
+   "arms": [
+    23,
+    27
+   ],
+   "cuffs": [
+    7,
+    9
+   ],
+   "head": [
+    17,
+    23
+   ],
+   "legs": [
+    9,
+    12
+   ],
+   "stilt": [
+    0,
+    2
+   ],
+   "stump": [
+    2,
+    7
+   ],
+   "trunk": [
+    12,
+    17
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "cuffs": [
+    7,
+    9
+   ],
+   "legs": [
+    9,
+    12
+   ],
+   "trunk": [
+    12,
+    17
+   ],
+   "head": [
+    17,
+    23
+   ],
+   "arms": [
+    23,
+    27
+   ]
+  },
+  "body_union": [
+   7,
+   27
+  ],
+  "body_contiguous": true,
+  "body_px_count": 20,
+  "has_man": false
+ },
+ "straker": {
+  "items": 36,
+  "spans": {
+   "arms": [
+    34,
+    36
+   ],
+   "hammer": [
+    32,
+    34
+   ],
+   "head": [
+    12,
+    18
+   ],
+   "legs": [
+    0,
+    5
+   ],
+   "strakes": [
+    28,
+    32
+   ],
+   "trunk": [
+    5,
+    12
+   ],
+   "wheel": [
+    18,
+    28
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "legs": [
+    0,
+    5
+   ],
+   "trunk": [
+    5,
+    12
+   ],
+   "head": [
+    12,
+    18
+   ],
+   "arms": [
+    34,
+    36
+   ]
+  },
+  "body_union": [
+   0,
+   36
+  ],
+  "body_contiguous": false,
+  "body_px_count": 20,
+  "has_man": false
+ },
+ "hurdleman": {
+  "items": 78,
+  "spans": {
+   "floor": [
+    73,
+    78
+   ],
+   "head": [
+    9,
+    19
+   ],
+   "hurdle": [
+    25,
+    43
+   ],
+   "man_lower": [
+    0,
+    9
+   ],
+   "spare0": [
+    43,
+    52
+   ],
+   "spare1": [
+    52,
+    61
+   ],
+   "spare2": [
+    61,
+    70
+   ],
+   "spares": [
+    43,
+    73
+   ],
+   "tool_arms": [
+    19,
+    25
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "man_lower": [
+    0,
+    9
+   ],
+   "head": [
+    9,
+    19
+   ],
+   "tool_arms": [
+    19,
+    25
+   ]
+  },
+  "body_union": [
+   0,
+   25
+  ],
+  "body_contiguous": true,
+  "body_px_count": 25,
+  "has_man": false
+ },
+ "tanner": {
+  "items": 52,
+  "spans": {
+   "arms": [
+    42,
+    44
+   ],
+   "beam": [
+    26,
+    29
+   ],
+   "head": [
+    36,
+    41
+   ],
+   "man_lower": [
+    29,
+    36
+   ],
+   "rack": [
+    0,
+    26
+   ],
+   "work": [
+    41,
+    52
+   ]
+  },
+  "uncovered_idx": [],
+  "body_spans": {
+   "man_lower": [
+    29,
+    36
+   ],
+   "head": [
+    36,
+    41
+   ],
+   "arms": [
+    42,
+    44
+   ]
+  },
+  "body_union": [
+   29,
+   44
+  ],
+  "body_contiguous": false,
+  "body_px_count": 14,
+  "has_man": false
+ }
+}

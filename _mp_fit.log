@@ -1,0 +1,1801 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+16:47:02 | INFO: Data are loaded, start creating Blender stuff
+16:47:02 | INFO: Blender create Mesh node Cube.125
+16:47:02 | INFO: Blender create Mesh node Cube.126
+16:47:02 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:02 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:02 | INFO: Blender create Mesh node Cube.128
+16:47:02 | INFO: Blender create Mesh node Cube.127
+16:47:02 | INFO: Blender create Mesh node Cube.003
+16:47:02 | INFO: Blender create Mesh node Cylinder.280
+16:47:02 | INFO: Blender create Mesh node Cylinder.005
+16:47:02 | INFO: Blender create Mesh node Cylinder.010
+16:47:02 | INFO: Blender create Mesh node Cylinder.022
+16:47:02 | INFO: Blender create Mesh node Cube.11839
+16:47:02 | INFO: Blender create Mesh node Cube.12993
+16:47:02 | INFO: Blender create Mesh node Cube.124
+16:47:02 | INFO: Blender create Mesh node Plane.004
+16:47:03 | INFO: glTF import finished in 0.58s
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:520: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:394: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+00:03.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drillmaster\hero_front.png'
+00:04.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:04.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:04.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:05.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:05.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drillmaster\hero_side.png'
+00:05.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:05.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:06.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:06.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:06.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drillmaster\hero_back.png'
+00:07.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:07.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:07.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:07.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:08 | INFO: Data are loaded, start creating Blender stuff
+16:47:08 | INFO: Blender create Mesh node Cube.125
+16:47:08 | INFO: Blender create Mesh node Cube.126
+16:47:08 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:08 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:08 | INFO: Blender create Mesh node Cube.128
+16:47:08 | INFO: Blender create Mesh node Cube.127
+16:47:08 | INFO: Blender create Mesh node Cube.003
+16:47:08 | INFO: Blender create Mesh node Cylinder.280
+16:47:08 | INFO: Blender create Mesh node Cylinder.005
+16:47:08 | INFO: Blender create Mesh node Cylinder.010
+16:47:08 | INFO: Blender create Mesh node Cylinder.022
+16:47:08 | INFO: Blender create Mesh node Cube.11839
+16:47:08 | INFO: Blender create Mesh node Cube.12993
+16:47:08 | INFO: Blender create Mesh node Cube.124
+16:47:08 | INFO: Blender create Mesh node Plane.004
+16:47:09 | INFO: glTF import finished in 0.58s
+00:09.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_front.png'
+00:09.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:09.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:10.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:10.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:11.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_side.png'
+00:11.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:11.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:12.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:12.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:12.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scrapwright\hero_back.png'
+00:13.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:13.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:13.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:14.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:16 | INFO: Data are loaded, start creating Blender stuff
+16:47:16 | INFO: Blender create Mesh node Cube.125
+16:47:16 | INFO: Blender create Mesh node Cube.126
+16:47:16 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:16 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:16 | INFO: Blender create Mesh node Cube.128
+16:47:16 | INFO: Blender create Mesh node Cube.127
+16:47:16 | INFO: Blender create Mesh node Cube.003
+16:47:16 | INFO: Blender create Mesh node Cylinder.280
+16:47:16 | INFO: Blender create Mesh node Cylinder.005
+16:47:16 | INFO: Blender create Mesh node Cylinder.010
+16:47:16 | INFO: Blender create Mesh node Cylinder.022
+16:47:16 | INFO: Blender create Mesh node Cube.11839
+16:47:16 | INFO: Blender create Mesh node Cube.12993
+16:47:16 | INFO: Blender create Mesh node Cube.124
+16:47:16 | INFO: Blender create Mesh node Plane.004
+16:47:18 | INFO: glTF import finished in 2.62s
+00:18.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_front.png'
+00:19.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:19.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:20.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:20.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:21.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_side.png'
+00:21.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:21.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:22.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:22.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:22.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\gaoler\hero_back.png'
+00:23.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:23.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:23.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:24.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:25 | INFO: Data are loaded, start creating Blender stuff
+16:47:25 | INFO: Blender create Mesh node Cube.125
+16:47:25 | INFO: Blender create Mesh node Cube.126
+16:47:25 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:25 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:25 | INFO: Blender create Mesh node Cube.128
+16:47:25 | INFO: Blender create Mesh node Cube.127
+16:47:25 | INFO: Blender create Mesh node Cube.003
+16:47:25 | INFO: Blender create Mesh node Cylinder.280
+16:47:25 | INFO: Blender create Mesh node Cylinder.005
+16:47:25 | INFO: Blender create Mesh node Cylinder.010
+16:47:25 | INFO: Blender create Mesh node Cylinder.022
+16:47:25 | INFO: Blender create Mesh node Cube.11839
+16:47:25 | INFO: Blender create Mesh node Cube.12993
+16:47:25 | INFO: Blender create Mesh node Cube.124
+16:47:25 | INFO: Blender create Mesh node Plane.004
+16:47:25 | INFO: glTF import finished in 0.70s
+00:25.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snuffer\hero_front.png'
+00:25.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:26.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:26.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:26.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:27.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snuffer\hero_side.png'
+00:27.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:27.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:27.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:28.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:28.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snuffer\hero_back.png'
+00:28.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:28.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:29.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:29.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:30 | INFO: Data are loaded, start creating Blender stuff
+16:47:30 | INFO: Blender create Mesh node Cube.125
+16:47:30 | INFO: Blender create Mesh node Cube.126
+16:47:30 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:30 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:30 | INFO: Blender create Mesh node Cube.128
+16:47:30 | INFO: Blender create Mesh node Cube.127
+16:47:30 | INFO: Blender create Mesh node Cube.003
+16:47:30 | INFO: Blender create Mesh node Cylinder.280
+16:47:30 | INFO: Blender create Mesh node Cylinder.005
+16:47:30 | INFO: Blender create Mesh node Cylinder.010
+16:47:30 | INFO: Blender create Mesh node Cylinder.022
+16:47:30 | INFO: Blender create Mesh node Cube.11839
+16:47:30 | INFO: Blender create Mesh node Cube.12993
+16:47:30 | INFO: Blender create Mesh node Cube.124
+16:47:30 | INFO: Blender create Mesh node Plane.004
+16:47:31 | INFO: glTF import finished in 0.71s
+00:31.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_front.png'
+00:31.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:31.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:32.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:32.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:32.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_side.png'
+00:33.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:33.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:33.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:33.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:34.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sexton\hero_back.png'
+00:34.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:34.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:35.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:35.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:36 | INFO: Data are loaded, start creating Blender stuff
+16:47:36 | INFO: Blender create Mesh node Cube.125
+16:47:36 | INFO: Blender create Mesh node Cube.126
+16:47:36 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:36 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:36 | INFO: Blender create Mesh node Cube.128
+16:47:36 | INFO: Blender create Mesh node Cube.127
+16:47:36 | INFO: Blender create Mesh node Cube.003
+16:47:36 | INFO: Blender create Mesh node Cylinder.280
+16:47:36 | INFO: Blender create Mesh node Cylinder.005
+16:47:36 | INFO: Blender create Mesh node Cylinder.010
+16:47:36 | INFO: Blender create Mesh node Cylinder.022
+16:47:36 | INFO: Blender create Mesh node Cube.11839
+16:47:36 | INFO: Blender create Mesh node Cube.12993
+16:47:36 | INFO: Blender create Mesh node Cube.124
+16:47:36 | INFO: Blender create Mesh node Plane.004
+16:47:37 | INFO: glTF import finished in 0.69s
+00:36.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\porter\hero_front.png'
+00:37.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:37.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:38.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:38.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:39.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\porter\hero_side.png'
+00:39.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:39.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:40.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:40.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:40.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\porter\hero_back.png'
+00:41.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:41.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:41.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:42.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:43 | INFO: Data are loaded, start creating Blender stuff
+16:47:43 | INFO: Blender create Mesh node Cube.125
+16:47:43 | INFO: Blender create Mesh node Cube.126
+16:47:43 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:43 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:43 | INFO: Blender create Mesh node Cube.128
+16:47:43 | INFO: Blender create Mesh node Cube.127
+16:47:43 | INFO: Blender create Mesh node Cube.003
+16:47:43 | INFO: Blender create Mesh node Cylinder.280
+16:47:43 | INFO: Blender create Mesh node Cylinder.005
+16:47:43 | INFO: Blender create Mesh node Cylinder.010
+16:47:43 | INFO: Blender create Mesh node Cylinder.022
+16:47:43 | INFO: Blender create Mesh node Cube.11839
+16:47:43 | INFO: Blender create Mesh node Cube.12993
+16:47:43 | INFO: Blender create Mesh node Cube.124
+16:47:43 | INFO: Blender create Mesh node Plane.004
+16:47:44 | INFO: glTF import finished in 0.68s
+00:43.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tallyman\hero_front.png'
+00:44.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:44.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:44.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:45.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:45.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tallyman\hero_side.png'
+00:45.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:45.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:46.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:46.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:46.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tallyman\hero_back.png'
+00:47.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:47.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:47.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:47.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:49 | INFO: Data are loaded, start creating Blender stuff
+16:47:49 | INFO: Blender create Mesh node Cube.125
+16:47:49 | INFO: Blender create Mesh node Cube.126
+16:47:49 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:49 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:49 | INFO: Blender create Mesh node Cube.128
+16:47:49 | INFO: Blender create Mesh node Cube.127
+16:47:49 | INFO: Blender create Mesh node Cube.003
+16:47:49 | INFO: Blender create Mesh node Cylinder.280
+16:47:49 | INFO: Blender create Mesh node Cylinder.005
+16:47:49 | INFO: Blender create Mesh node Cylinder.010
+16:47:49 | INFO: Blender create Mesh node Cylinder.022
+16:47:49 | INFO: Blender create Mesh node Cube.11839
+16:47:49 | INFO: Blender create Mesh node Cube.12993
+16:47:49 | INFO: Blender create Mesh node Cube.124
+16:47:49 | INFO: Blender create Mesh node Plane.004
+16:47:49 | INFO: glTF import finished in 0.73s
+00:49.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_front.png'
+00:49.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:50.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:50.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:51.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:51.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_side.png'
+00:51.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:52.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:52.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:52.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:53.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\cook\hero_back.png'
+00:53.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:53.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:54.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:54.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:47:55 | INFO: Data are loaded, start creating Blender stuff
+16:47:55 | INFO: Blender create Mesh node Cube.125
+16:47:55 | INFO: Blender create Mesh node Cube.126
+16:47:55 | INFO: Blender create Mesh node PrototypePete_body.020
+16:47:55 | INFO: Blender create Mesh node PrototypePete_head.001
+16:47:55 | INFO: Blender create Mesh node Cube.128
+16:47:55 | INFO: Blender create Mesh node Cube.127
+16:47:55 | INFO: Blender create Mesh node Cube.003
+16:47:55 | INFO: Blender create Mesh node Cylinder.280
+16:47:55 | INFO: Blender create Mesh node Cylinder.005
+16:47:55 | INFO: Blender create Mesh node Cylinder.010
+16:47:55 | INFO: Blender create Mesh node Cylinder.022
+16:47:55 | INFO: Blender create Mesh node Cube.11839
+16:47:55 | INFO: Blender create Mesh node Cube.12993
+16:47:55 | INFO: Blender create Mesh node Cube.124
+16:47:55 | INFO: Blender create Mesh node Plane.004
+16:47:56 | INFO: glTF import finished in 0.61s
+00:55.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sluicekeeper\hero_front.png'
+00:56.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:56.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:56.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:57.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:57.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sluicekeeper\hero_side.png'
+00:58.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:58.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:58.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:59.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:59.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sluicekeeper\hero_back.png'
+01:00.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:00.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:00.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:01.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:02 | INFO: Data are loaded, start creating Blender stuff
+16:48:02 | INFO: Blender create Mesh node Cube.125
+16:48:02 | INFO: Blender create Mesh node Cube.126
+16:48:02 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:02 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:02 | INFO: Blender create Mesh node Cube.128
+16:48:02 | INFO: Blender create Mesh node Cube.127
+16:48:02 | INFO: Blender create Mesh node Cube.003
+16:48:02 | INFO: Blender create Mesh node Cylinder.280
+16:48:02 | INFO: Blender create Mesh node Cylinder.005
+16:48:02 | INFO: Blender create Mesh node Cylinder.010
+16:48:02 | INFO: Blender create Mesh node Cylinder.022
+16:48:02 | INFO: Blender create Mesh node Cube.11839
+16:48:02 | INFO: Blender create Mesh node Cube.12993
+16:48:02 | INFO: Blender create Mesh node Cube.124
+16:48:02 | INFO: Blender create Mesh node Plane.004
+16:48:02 | INFO: glTF import finished in 0.62s
+01:02.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sower\hero_front.png'
+01:02.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:03.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:03.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:04.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sower\hero_side.png'
+01:04.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:05.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:05.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:05.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:06.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sower\hero_back.png'
+01:06.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:06.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:07.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:07.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:08 | INFO: Data are loaded, start creating Blender stuff
+16:48:08 | INFO: Blender create Mesh node Cube.125
+16:48:08 | INFO: Blender create Mesh node Cube.126
+16:48:08 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:08 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:08 | INFO: Blender create Mesh node Cube.128
+16:48:08 | INFO: Blender create Mesh node Cube.127
+16:48:08 | INFO: Blender create Mesh node Cube.003
+16:48:08 | INFO: Blender create Mesh node Cylinder.280
+16:48:08 | INFO: Blender create Mesh node Cylinder.005
+16:48:08 | INFO: Blender create Mesh node Cylinder.010
+16:48:08 | INFO: Blender create Mesh node Cylinder.022
+16:48:08 | INFO: Blender create Mesh node Cube.11839
+16:48:08 | INFO: Blender create Mesh node Cube.12993
+16:48:08 | INFO: Blender create Mesh node Cube.124
+16:48:08 | INFO: Blender create Mesh node Plane.004
+16:48:09 | INFO: glTF import finished in 0.65s
+01:08.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer\hero_front.png'
+01:09.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:09.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:09.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:10.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:10.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer\hero_side.png'
+01:11.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:11.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:11.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:12.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:12.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\snarer\hero_back.png'
+01:12.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:13.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:13.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:13.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:14 | INFO: Data are loaded, start creating Blender stuff
+16:48:14 | INFO: Blender create Mesh node Cube.125
+16:48:14 | INFO: Blender create Mesh node Cube.126
+16:48:14 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:14 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:14 | INFO: Blender create Mesh node Cube.128
+16:48:14 | INFO: Blender create Mesh node Cube.127
+16:48:14 | INFO: Blender create Mesh node Cube.003
+16:48:14 | INFO: Blender create Mesh node Cylinder.280
+16:48:14 | INFO: Blender create Mesh node Cylinder.005
+16:48:14 | INFO: Blender create Mesh node Cylinder.010
+16:48:14 | INFO: Blender create Mesh node Cylinder.022
+16:48:14 | INFO: Blender create Mesh node Cube.11839
+16:48:14 | INFO: Blender create Mesh node Cube.12993
+16:48:14 | INFO: Blender create Mesh node Cube.124
+16:48:14 | INFO: Blender create Mesh node Plane.004
+16:48:15 | INFO: glTF import finished in 0.61s
+01:14.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stoker\hero_front.png'
+01:15.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:15.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:16.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:16.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:16.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stoker\hero_side.png'
+01:17.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:17.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:17.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:18.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:18.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stoker\hero_back.png'
+01:18.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:19.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:19.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:19.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:20 | INFO: Data are loaded, start creating Blender stuff
+16:48:20 | INFO: Blender create Mesh node Cube.125
+16:48:20 | INFO: Blender create Mesh node Cube.126
+16:48:20 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:20 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:20 | INFO: Blender create Mesh node Cube.128
+16:48:20 | INFO: Blender create Mesh node Cube.127
+16:48:20 | INFO: Blender create Mesh node Cube.003
+16:48:20 | INFO: Blender create Mesh node Cylinder.280
+16:48:20 | INFO: Blender create Mesh node Cylinder.005
+16:48:21 | INFO: Blender create Mesh node Cylinder.010
+16:48:21 | INFO: Blender create Mesh node Cylinder.022
+16:48:21 | INFO: Blender create Mesh node Cube.11839
+16:48:21 | INFO: Blender create Mesh node Cube.12993
+16:48:21 | INFO: Blender create Mesh node Cube.124
+16:48:21 | INFO: Blender create Mesh node Plane.004
+16:48:21 | INFO: glTF import finished in 0.60s
+01:21.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_front.png'
+01:21.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:21.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:22.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:22.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:22.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_side.png'
+01:23.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:23.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:23.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:24.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:24.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\bellman\hero_back.png'
+01:25.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:25.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:25.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:25.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:27 | INFO: Data are loaded, start creating Blender stuff
+16:48:27 | INFO: Blender create Mesh node Cube.125
+16:48:27 | INFO: Blender create Mesh node Cube.126
+16:48:27 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:27 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:27 | INFO: Blender create Mesh node Cube.128
+16:48:27 | INFO: Blender create Mesh node Cube.127
+16:48:27 | INFO: Blender create Mesh node Cube.003
+16:48:27 | INFO: Blender create Mesh node Cylinder.280
+16:48:27 | INFO: Blender create Mesh node Cylinder.005
+16:48:27 | INFO: Blender create Mesh node Cylinder.010
+16:48:27 | INFO: Blender create Mesh node Cylinder.022
+16:48:27 | INFO: Blender create Mesh node Cube.11839
+16:48:27 | INFO: Blender create Mesh node Cube.12993
+16:48:27 | INFO: Blender create Mesh node Cube.124
+16:48:27 | INFO: Blender create Mesh node Plane.004
+16:48:27 | INFO: glTF import finished in 0.59s
+01:27.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\boiler\hero_front.png'
+01:27.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:27.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:28.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:28.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:29.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\boiler\hero_side.png'
+01:29.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:29.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:30.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:30.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:30.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\boiler\hero_back.png'
+01:30.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:31.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:31.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:31.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:32 | INFO: Data are loaded, start creating Blender stuff
+16:48:32 | INFO: Blender create Mesh node Cube.125
+16:48:32 | INFO: Blender create Mesh node Cube.126
+16:48:32 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:32 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:32 | INFO: Blender create Mesh node Cube.128
+16:48:32 | INFO: Blender create Mesh node Cube.127
+16:48:32 | INFO: Blender create Mesh node Cube.003
+16:48:32 | INFO: Blender create Mesh node Cylinder.280
+16:48:32 | INFO: Blender create Mesh node Cylinder.005
+16:48:32 | INFO: Blender create Mesh node Cylinder.010
+16:48:32 | INFO: Blender create Mesh node Cylinder.022
+16:48:32 | INFO: Blender create Mesh node Cube.11839
+16:48:32 | INFO: Blender create Mesh node Cube.12993
+16:48:32 | INFO: Blender create Mesh node Cube.124
+16:48:32 | INFO: Blender create Mesh node Plane.004
+16:48:33 | INFO: glTF import finished in 0.59s
+01:33.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\jointer\hero_front.png'
+01:33.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:33.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:33.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:34.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:34.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\jointer\hero_side.png'
+01:35.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:35.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:35.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:35.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:36.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\jointer\hero_back.png'
+01:36.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:36.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:37.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:37.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:38 | INFO: Data are loaded, start creating Blender stuff
+16:48:38 | INFO: Blender create Mesh node spear_A
+16:48:38 | INFO: glTF import finished in 0.01s
+16:48:38 | INFO: Data are loaded, start creating Blender stuff
+16:48:38 | INFO: Blender create Mesh node shield_A
+16:48:38 | INFO: glTF import finished in 0.00s
+16:48:38 | INFO: Data are loaded, start creating Blender stuff
+16:48:38 | INFO: Blender create Mesh node Cube.125
+16:48:38 | INFO: Blender create Mesh node Cube.126
+16:48:38 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:38 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:38 | INFO: Blender create Mesh node Cube.128
+16:48:38 | INFO: Blender create Mesh node Cube.127
+16:48:38 | INFO: Blender create Mesh node Cube.003
+16:48:38 | INFO: Blender create Mesh node Cylinder.280
+16:48:38 | INFO: Blender create Mesh node Cylinder.005
+16:48:38 | INFO: Blender create Mesh node Cylinder.010
+16:48:38 | INFO: Blender create Mesh node Cylinder.022
+16:48:38 | INFO: Blender create Mesh node Cube.11839
+16:48:38 | INFO: Blender create Mesh node Cube.12993
+16:48:38 | INFO: Blender create Mesh node Cube.124
+16:48:38 | INFO: Blender create Mesh node Plane.004
+16:48:39 | INFO: glTF import finished in 0.61s
+01:38.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\quartermaster\hero_front.png'
+01:39.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:39.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:40.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:40.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:40.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\quartermaster\hero_side.png'
+01:41.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:41.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:41.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:42.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:42.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\quartermaster\hero_back.png'
+01:42.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:43.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:43.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:43.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:44 | INFO: Data are loaded, start creating Blender stuff
+16:48:44 | INFO: Blender create Mesh node Cube.4442
+16:48:44 | INFO: glTF import finished in 0.01s
+16:48:44 | INFO: Data are loaded, start creating Blender stuff
+16:48:44 | INFO: Blender create Mesh node Cylinder.272
+16:48:44 | INFO: glTF import finished in 0.00s
+16:48:44 | INFO: Data are loaded, start creating Blender stuff
+16:48:44 | INFO: Blender create Mesh node Sphere.004
+16:48:44 | INFO: glTF import finished in 0.00s
+16:48:44 | INFO: Data are loaded, start creating Blender stuff
+16:48:45 | INFO: Blender create Mesh node Cube.125
+16:48:45 | INFO: Blender create Mesh node Cube.126
+16:48:45 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:45 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:45 | INFO: Blender create Mesh node Cube.128
+16:48:45 | INFO: Blender create Mesh node Cube.127
+16:48:45 | INFO: Blender create Mesh node Cube.003
+16:48:45 | INFO: Blender create Mesh node Cylinder.280
+16:48:45 | INFO: Blender create Mesh node Cylinder.005
+16:48:45 | INFO: Blender create Mesh node Cylinder.010
+16:48:45 | INFO: Blender create Mesh node Cylinder.022
+16:48:45 | INFO: Blender create Mesh node Cube.11839
+16:48:45 | INFO: Blender create Mesh node Cube.12993
+16:48:45 | INFO: Blender create Mesh node Cube.124
+16:48:45 | INFO: Blender create Mesh node Plane.004
+16:48:45 | INFO: glTF import finished in 0.59s
+01:45.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\loader\hero_front.png'
+01:45.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:46.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:46.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:46.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:46.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\loader\hero_side.png'
+01:47.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:47.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:47.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:48.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:48.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\loader\hero_back.png'
+01:48.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:49.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:49.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:49.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:50 | INFO: Data are loaded, start creating Blender stuff
+16:48:50 | INFO: Blender create Mesh node Cube.125
+16:48:50 | INFO: Blender create Mesh node Cube.126
+16:48:50 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:50 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:50 | INFO: Blender create Mesh node Cube.128
+16:48:50 | INFO: Blender create Mesh node Cube.127
+16:48:50 | INFO: Blender create Mesh node Cube.003
+16:48:50 | INFO: Blender create Mesh node Cylinder.280
+16:48:50 | INFO: Blender create Mesh node Cylinder.005
+16:48:50 | INFO: Blender create Mesh node Cylinder.010
+16:48:50 | INFO: Blender create Mesh node Cylinder.022
+16:48:50 | INFO: Blender create Mesh node Cube.11839
+16:48:50 | INFO: Blender create Mesh node Cube.12993
+16:48:50 | INFO: Blender create Mesh node Cube.124
+16:48:50 | INFO: Blender create Mesh node Plane.004
+16:48:51 | INFO: glTF import finished in 0.57s
+01:50.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hurdleman\hero_front.png'
+01:51.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:51.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:51.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:52.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:52.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hurdleman\hero_side.png'
+01:52.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:53.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+01:53.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+01:53.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+01:54.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hurdleman\hero_back.png'
+01:54.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+01:55.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+01:55.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+01:55.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:48:56 | INFO: Data are loaded, start creating Blender stuff
+16:48:56 | INFO: Blender create Mesh node Cube.125
+16:48:56 | INFO: Blender create Mesh node Cube.126
+16:48:56 | INFO: Blender create Mesh node PrototypePete_body.020
+16:48:56 | INFO: Blender create Mesh node PrototypePete_head.001
+16:48:56 | INFO: Blender create Mesh node Cube.128
+16:48:56 | INFO: Blender create Mesh node Cube.127
+16:48:56 | INFO: Blender create Mesh node Cube.003
+16:48:56 | INFO: Blender create Mesh node Cylinder.280
+16:48:56 | INFO: Blender create Mesh node Cylinder.005
+16:48:56 | INFO: Blender create Mesh node Cylinder.010
+16:48:56 | INFO: Blender create Mesh node Cylinder.022
+16:48:56 | INFO: Blender create Mesh node Cube.11839
+16:48:57 | INFO: Blender create Mesh node Cube.12993
+16:48:57 | INFO: Blender create Mesh node Cube.124
+16:48:57 | INFO: Blender create Mesh node Plane.004
+16:48:57 | INFO: glTF import finished in 0.59s
+01:57.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tanner\hero_front.png'
+01:57.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+01:57.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+01:58.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+01:58.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+01:59.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tanner\hero_side.png'
+01:59.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+01:59.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:00.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:00.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:00.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tanner\hero_back.png'
+02:01.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:01.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:01.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:02.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:03 | INFO: Data are loaded, start creating Blender stuff
+16:49:03 | INFO: Blender create Mesh node Cube.125
+16:49:03 | INFO: Blender create Mesh node Cube.126
+16:49:03 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:03 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:03 | INFO: Blender create Mesh node Cube.128
+16:49:03 | INFO: Blender create Mesh node Cube.127
+16:49:03 | INFO: Blender create Mesh node Cube.003
+16:49:03 | INFO: Blender create Mesh node Cylinder.280
+16:49:03 | INFO: Blender create Mesh node Cylinder.005
+16:49:03 | INFO: Blender create Mesh node Cylinder.010
+16:49:03 | INFO: Blender create Mesh node Cylinder.022
+16:49:03 | INFO: Blender create Mesh node Cube.11839
+16:49:03 | INFO: Blender create Mesh node Cube.12993
+16:49:03 | INFO: Blender create Mesh node Cube.124
+16:49:03 | INFO: Blender create Mesh node Plane.004
+16:49:03 | INFO: glTF import finished in 0.59s
+02:03.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\reeve\hero_front.png'
+02:04.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:04.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:04.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:05.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:05.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\reeve\hero_side.png'
+02:05.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:05.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:06.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:06.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:06.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\reeve\hero_back.png'
+02:07.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:07.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:07.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:07.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:08 | INFO: Data are loaded, start creating Blender stuff
+16:49:08 | INFO: Blender create Mesh node Cylinder
+16:49:08 | INFO: glTF import finished in 0.01s
+16:49:08 | INFO: Data are loaded, start creating Blender stuff
+16:49:08 | INFO: Blender create Mesh node Cube.001
+16:49:08 | INFO: glTF import finished in 0.01s
+16:49:08 | INFO: Data are loaded, start creating Blender stuff
+16:49:08 | INFO: Blender create Mesh node Cylinder.068
+16:49:08 | INFO: glTF import finished in 0.00s
+16:49:08 | INFO: Data are loaded, start creating Blender stuff
+16:49:08 | INFO: Blender create Mesh node Cube.125
+16:49:08 | INFO: Blender create Mesh node Cube.126
+16:49:08 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:08 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:08 | INFO: Blender create Mesh node Cube.128
+16:49:08 | INFO: Blender create Mesh node Cube.127
+16:49:08 | INFO: Blender create Mesh node Cube.003
+16:49:08 | INFO: Blender create Mesh node Cylinder.280
+16:49:08 | INFO: Blender create Mesh node Cylinder.005
+16:49:08 | INFO: Blender create Mesh node Cylinder.010
+16:49:08 | INFO: Blender create Mesh node Cylinder.022
+16:49:08 | INFO: Blender create Mesh node Cube.11839
+16:49:08 | INFO: Blender create Mesh node Cube.12993
+16:49:08 | INFO: Blender create Mesh node Cube.124
+16:49:08 | INFO: Blender create Mesh node Plane.004
+16:49:09 | INFO: glTF import finished in 0.60s
+02:09.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tapster\hero_front.png'
+02:09.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:09.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:10.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:10.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:10.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tapster\hero_side.png'
+02:11.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:11.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:11.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:12.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:12.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tapster\hero_back.png'
+02:12.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:13.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:13.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:13.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:15 | INFO: Data are loaded, start creating Blender stuff
+16:49:15 | INFO: Blender create Mesh node Cube.125
+16:49:15 | INFO: Blender create Mesh node Cube.126
+16:49:15 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:15 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:15 | INFO: Blender create Mesh node Cube.128
+16:49:15 | INFO: Blender create Mesh node Cube.127
+16:49:15 | INFO: Blender create Mesh node Cube.003
+16:49:15 | INFO: Blender create Mesh node Cylinder.280
+16:49:15 | INFO: Blender create Mesh node Cylinder.005
+16:49:15 | INFO: Blender create Mesh node Cylinder.010
+16:49:15 | INFO: Blender create Mesh node Cylinder.022
+16:49:15 | INFO: Blender create Mesh node Cube.11839
+16:49:15 | INFO: Blender create Mesh node Cube.12993
+16:49:15 | INFO: Blender create Mesh node Cube.124
+16:49:15 | INFO: Blender create Mesh node Plane.004
+16:49:15 | INFO: glTF import finished in 0.66s
+02:15.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pressman\hero_front.png'
+02:15.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:16.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:16.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:16.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:17.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pressman\hero_side.png'
+02:17.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:17.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:18.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:18.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:19.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pressman\hero_back.png'
+02:19.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:19.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:20.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:20.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:21 | INFO: Data are loaded, start creating Blender stuff
+16:49:21 | INFO: Blender create Mesh node Cube.144
+16:49:21 | INFO: glTF import finished in 0.01s
+16:49:21 | INFO: Data are loaded, start creating Blender stuff
+16:49:21 | INFO: Blender create Mesh node Cylinder.019
+16:49:21 | INFO: glTF import finished in 0.01s
+16:49:21 | INFO: Data are loaded, start creating Blender stuff
+16:49:21 | INFO: Blender create Mesh node Cube.125
+16:49:21 | INFO: Blender create Mesh node Cube.126
+16:49:21 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:21 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:21 | INFO: Blender create Mesh node Cube.128
+16:49:21 | INFO: Blender create Mesh node Cube.127
+16:49:21 | INFO: Blender create Mesh node Cube.003
+16:49:21 | INFO: Blender create Mesh node Cylinder.280
+16:49:21 | INFO: Blender create Mesh node Cylinder.005
+16:49:21 | INFO: Blender create Mesh node Cylinder.010
+16:49:21 | INFO: Blender create Mesh node Cylinder.022
+16:49:21 | INFO: Blender create Mesh node Cube.11839
+16:49:21 | INFO: Blender create Mesh node Cube.12993
+16:49:21 | INFO: Blender create Mesh node Cube.124
+16:49:21 | INFO: Blender create Mesh node Plane.004
+16:49:22 | INFO: glTF import finished in 0.59s
+02:22.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\strickler\hero_front.png'
+02:22.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:22.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:23.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:23.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:23.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\strickler\hero_side.png'
+02:24.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:24.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:24.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:25.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:25.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\strickler\hero_back.png'
+02:25.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:26.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:26.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:26.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:27 | INFO: Data are loaded, start creating Blender stuff
+16:49:27 | INFO: Blender create Mesh node Cube.125
+16:49:27 | INFO: Blender create Mesh node Cube.126
+16:49:27 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:27 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:27 | INFO: Blender create Mesh node Cube.128
+16:49:27 | INFO: Blender create Mesh node Cube.127
+16:49:27 | INFO: Blender create Mesh node Cube.003
+16:49:27 | INFO: Blender create Mesh node Cylinder.280
+16:49:27 | INFO: Blender create Mesh node Cylinder.005
+16:49:27 | INFO: Blender create Mesh node Cylinder.010
+16:49:27 | INFO: Blender create Mesh node Cylinder.022
+16:49:27 | INFO: Blender create Mesh node Cube.11839
+16:49:27 | INFO: Blender create Mesh node Cube.12993
+16:49:27 | INFO: Blender create Mesh node Cube.124
+16:49:27 | INFO: Blender create Mesh node Plane.004
+16:49:28 | INFO: glTF import finished in 0.57s
+02:27.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dyer\hero_front.png'
+02:28.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:28.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:29.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:29.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:30.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dyer\hero_side.png'
+02:30.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:30.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:31.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:31.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:31.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dyer\hero_back.png'
+02:32.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:32.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:32.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:33.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:34 | INFO: Data are loaded, start creating Blender stuff
+16:49:34 | INFO: Blender create Mesh node Cube.125
+16:49:34 | INFO: Blender create Mesh node Cube.126
+16:49:34 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:34 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:34 | INFO: Blender create Mesh node Cube.128
+16:49:34 | INFO: Blender create Mesh node Cube.127
+16:49:34 | INFO: Blender create Mesh node Cube.003
+16:49:34 | INFO: Blender create Mesh node Cylinder.280
+16:49:34 | INFO: Blender create Mesh node Cylinder.005
+16:49:34 | INFO: Blender create Mesh node Cylinder.010
+16:49:34 | INFO: Blender create Mesh node Cylinder.022
+16:49:34 | INFO: Blender create Mesh node Cube.11839
+16:49:34 | INFO: Blender create Mesh node Cube.12993
+16:49:34 | INFO: Blender create Mesh node Cube.124
+16:49:34 | INFO: Blender create Mesh node Plane.004
+16:49:35 | INFO: glTF import finished in 0.58s
+02:34.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\greener\hero_front.png'
+02:35.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:35.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:35.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:35.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:36.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\greener\hero_side.png'
+02:36.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:36.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:36.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:37.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:37.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\greener\hero_back.png'
+02:37.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:38.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:38.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:38.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:39 | INFO: Data are loaded, start creating Blender stuff
+16:49:39 | INFO: Blender create Mesh node Cube.125
+16:49:39 | INFO: Blender create Mesh node Cube.126
+16:49:39 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:39 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:39 | INFO: Blender create Mesh node Cube.128
+16:49:39 | INFO: Blender create Mesh node Cube.127
+16:49:39 | INFO: Blender create Mesh node Cube.003
+16:49:39 | INFO: Blender create Mesh node Cylinder.280
+16:49:39 | INFO: Blender create Mesh node Cylinder.005
+16:49:39 | INFO: Blender create Mesh node Cylinder.010
+16:49:39 | INFO: Blender create Mesh node Cylinder.022
+16:49:39 | INFO: Blender create Mesh node Cube.11839
+16:49:39 | INFO: Blender create Mesh node Cube.12993
+16:49:39 | INFO: Blender create Mesh node Cube.124
+16:49:39 | INFO: Blender create Mesh node Plane.004
+16:49:40 | INFO: glTF import finished in 0.62s
+02:39.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\moulder\hero_front.png'
+02:40.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:40.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:40.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:41.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:41.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\moulder\hero_side.png'
+02:41.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:42.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:42.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:42.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:43.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\moulder\hero_back.png'
+02:43.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:43.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:43.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:44.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:45 | INFO: Data are loaded, start creating Blender stuff
+16:49:45 | INFO: Blender create Mesh node Cube.125
+16:49:45 | INFO: Blender create Mesh node Cube.126
+16:49:45 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:45 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:45 | INFO: Blender create Mesh node Cube.128
+16:49:45 | INFO: Blender create Mesh node Cube.127
+16:49:45 | INFO: Blender create Mesh node Cube.003
+16:49:45 | INFO: Blender create Mesh node Cylinder.280
+16:49:45 | INFO: Blender create Mesh node Cylinder.005
+16:49:45 | INFO: Blender create Mesh node Cylinder.010
+16:49:45 | INFO: Blender create Mesh node Cylinder.022
+16:49:45 | INFO: Blender create Mesh node Cube.11839
+16:49:45 | INFO: Blender create Mesh node Cube.12993
+16:49:45 | INFO: Blender create Mesh node Cube.124
+16:49:45 | INFO: Blender create Mesh node Plane.004
+16:49:45 | INFO: glTF import finished in 0.61s
+02:45.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ratcatcher\hero_front.png'
+02:45.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:46.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:46.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:46.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:47.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ratcatcher\hero_side.png'
+02:47.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:47.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:48.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:48.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:49.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ratcatcher\hero_back.png'
+02:49.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:49.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:50.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:50.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:51 | INFO: Data are loaded, start creating Blender stuff
+16:49:51 | INFO: Blender create Mesh node Cube.125
+16:49:51 | INFO: Blender create Mesh node Cube.126
+16:49:51 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:51 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:51 | INFO: Blender create Mesh node Cube.128
+16:49:51 | INFO: Blender create Mesh node Cube.127
+16:49:51 | INFO: Blender create Mesh node Cube.003
+16:49:51 | INFO: Blender create Mesh node Cylinder.280
+16:49:51 | INFO: Blender create Mesh node Cylinder.005
+16:49:51 | INFO: Blender create Mesh node Cylinder.010
+16:49:51 | INFO: Blender create Mesh node Cylinder.022
+16:49:51 | INFO: Blender create Mesh node Cube.11839
+16:49:51 | INFO: Blender create Mesh node Cube.12993
+16:49:51 | INFO: Blender create Mesh node Cube.124
+16:49:51 | INFO: Blender create Mesh node Plane.004
+16:49:52 | INFO: glTF import finished in 0.59s
+02:51.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drover\hero_front.png'
+02:52.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:52.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:52.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:53.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+02:53.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drover\hero_side.png'
+02:54.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+02:54.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+02:54.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+02:54.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+02:55.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\drover\hero_back.png'
+02:55.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+02:56.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+02:56.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+02:56.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:49:57 | INFO: Data are loaded, start creating Blender stuff
+16:49:57 | INFO: Blender create Mesh node Cube.125
+16:49:57 | INFO: Blender create Mesh node Cube.126
+16:49:57 | INFO: Blender create Mesh node PrototypePete_body.020
+16:49:57 | INFO: Blender create Mesh node PrototypePete_head.001
+16:49:57 | INFO: Blender create Mesh node Cube.128
+16:49:57 | INFO: Blender create Mesh node Cube.127
+16:49:57 | INFO: Blender create Mesh node Cube.003
+16:49:57 | INFO: Blender create Mesh node Cylinder.280
+16:49:57 | INFO: Blender create Mesh node Cylinder.005
+16:49:57 | INFO: Blender create Mesh node Cylinder.010
+16:49:57 | INFO: Blender create Mesh node Cylinder.022
+16:49:57 | INFO: Blender create Mesh node Cube.11839
+16:49:57 | INFO: Blender create Mesh node Cube.12993
+16:49:57 | INFO: Blender create Mesh node Cube.124
+16:49:57 | INFO: Blender create Mesh node Plane.004
+16:49:58 | INFO: glTF import finished in 0.60s
+02:58.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\paviser\hero_front.png'
+02:58.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+02:59.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+02:59.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+02:59.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:00.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\paviser\hero_side.png'
+03:00.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:01.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:01.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:01.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:02.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\paviser\hero_back.png'
+03:02.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:02.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:03.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:03.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:04 | INFO: Data are loaded, start creating Blender stuff
+16:50:04 | INFO: Blender create Mesh node Cube.125
+16:50:04 | INFO: Blender create Mesh node Cube.126
+16:50:04 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:04 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:04 | INFO: Blender create Mesh node Cube.128
+16:50:04 | INFO: Blender create Mesh node Cube.127
+16:50:04 | INFO: Blender create Mesh node Cube.003
+16:50:04 | INFO: Blender create Mesh node Cylinder.280
+16:50:04 | INFO: Blender create Mesh node Cylinder.005
+16:50:04 | INFO: Blender create Mesh node Cylinder.010
+16:50:04 | INFO: Blender create Mesh node Cylinder.022
+16:50:04 | INFO: Blender create Mesh node Cube.11839
+16:50:04 | INFO: Blender create Mesh node Cube.12993
+16:50:04 | INFO: Blender create Mesh node Cube.124
+16:50:04 | INFO: Blender create Mesh node Plane.004
+16:50:05 | INFO: glTF import finished in 0.62s
+03:05.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fenman\hero_front.png'
+03:05.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:05.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:06.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:06.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:06.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fenman\hero_side.png'
+03:07.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:07.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:07.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:08.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:08.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fenman\hero_back.png'
+03:08.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:09.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:09.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:09.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:10 | INFO: Data are loaded, start creating Blender stuff
+16:50:10 | INFO: Blender create Mesh node Cube.125
+16:50:10 | INFO: Blender create Mesh node Cube.126
+16:50:11 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:11 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:11 | INFO: Blender create Mesh node Cube.128
+16:50:11 | INFO: Blender create Mesh node Cube.127
+16:50:11 | INFO: Blender create Mesh node Cube.003
+16:50:11 | INFO: Blender create Mesh node Cylinder.280
+16:50:11 | INFO: Blender create Mesh node Cylinder.005
+16:50:11 | INFO: Blender create Mesh node Cylinder.010
+16:50:11 | INFO: Blender create Mesh node Cylinder.022
+16:50:11 | INFO: Blender create Mesh node Cube.11839
+16:50:11 | INFO: Blender create Mesh node Cube.12993
+16:50:11 | INFO: Blender create Mesh node Cube.124
+16:50:11 | INFO: Blender create Mesh node Plane.004
+16:50:11 | INFO: glTF import finished in 0.60s
+03:11.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\comfitmaker\hero_front.png'
+03:11.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:11.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:12.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:12.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:12.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\comfitmaker\hero_side.png'
+03:13.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:13.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:13.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:14.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:14.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\comfitmaker\hero_back.png'
+03:14.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:14.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:15.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:15.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:16 | INFO: Data are loaded, start creating Blender stuff
+16:50:16 | INFO: Blender create Mesh node Cube.125
+16:50:16 | INFO: Blender create Mesh node Cube.126
+16:50:16 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:16 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:16 | INFO: Blender create Mesh node Cube.128
+16:50:16 | INFO: Blender create Mesh node Cube.127
+16:50:16 | INFO: Blender create Mesh node Cube.003
+16:50:16 | INFO: Blender create Mesh node Cylinder.280
+16:50:16 | INFO: Blender create Mesh node Cylinder.005
+16:50:16 | INFO: Blender create Mesh node Cylinder.010
+16:50:16 | INFO: Blender create Mesh node Cylinder.022
+16:50:16 | INFO: Blender create Mesh node Cube.11839
+16:50:16 | INFO: Blender create Mesh node Cube.12993
+16:50:16 | INFO: Blender create Mesh node Cube.124
+16:50:16 | INFO: Blender create Mesh node Plane.004
+16:50:17 | INFO: glTF import finished in 0.59s
+03:16.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\leech\hero_front.png'
+03:17.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:17.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:18.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:18.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:18.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\leech\hero_side.png'
+03:19.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:19.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:19.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:19.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:20.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\leech\hero_back.png'
+03:20.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:20.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:21.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:21.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:22 | INFO: Data are loaded, start creating Blender stuff
+16:50:22 | INFO: Blender create Mesh node Cube.125
+16:50:22 | INFO: Blender create Mesh node Cube.126
+16:50:22 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:22 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:22 | INFO: Blender create Mesh node Cube.128
+16:50:22 | INFO: Blender create Mesh node Cube.127
+16:50:22 | INFO: Blender create Mesh node Cube.003
+16:50:22 | INFO: Blender create Mesh node Cylinder.280
+16:50:22 | INFO: Blender create Mesh node Cylinder.005
+16:50:22 | INFO: Blender create Mesh node Cylinder.010
+16:50:22 | INFO: Blender create Mesh node Cylinder.022
+16:50:22 | INFO: Blender create Mesh node Cube.11839
+16:50:22 | INFO: Blender create Mesh node Cube.12993
+16:50:22 | INFO: Blender create Mesh node Cube.124
+16:50:22 | INFO: Blender create Mesh node Plane.004
+16:50:23 | INFO: glTF import finished in 0.62s
+03:22.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\beadle\hero_front.png'
+03:23.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:23.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:23.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:24.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:24.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\beadle\hero_side.png'
+03:24.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:24.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:25.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:25.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:26.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\beadle\hero_back.png'
+03:26.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:26.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:26.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:27.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:28 | INFO: Data are loaded, start creating Blender stuff
+16:50:28 | INFO: Blender create Mesh node Cube.125
+16:50:28 | INFO: Blender create Mesh node Cube.126
+16:50:28 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:28 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:28 | INFO: Blender create Mesh node Cube.128
+16:50:28 | INFO: Blender create Mesh node Cube.127
+16:50:28 | INFO: Blender create Mesh node Cube.003
+16:50:28 | INFO: Blender create Mesh node Cylinder.280
+16:50:28 | INFO: Blender create Mesh node Cylinder.005
+16:50:28 | INFO: Blender create Mesh node Cylinder.010
+16:50:28 | INFO: Blender create Mesh node Cylinder.022
+16:50:28 | INFO: Blender create Mesh node Cube.11839
+16:50:28 | INFO: Blender create Mesh node Cube.12993
+16:50:28 | INFO: Blender create Mesh node Cube.124
+16:50:28 | INFO: Blender create Mesh node Plane.004
+16:50:28 | INFO: glTF import finished in 0.62s
+03:28.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\rammer\hero_front.png'
+03:28.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:29.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:29.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:29.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:29.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\rammer\hero_side.png'
+03:30.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:30.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:30.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:31.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:31.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\rammer\hero_back.png'
+03:31.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:32.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:32.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:32.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:33 | INFO: Data are loaded, start creating Blender stuff
+16:50:33 | INFO: Blender create Mesh node Cube.125
+16:50:33 | INFO: Blender create Mesh node Cube.126
+16:50:33 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:33 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:33 | INFO: Blender create Mesh node Cube.128
+16:50:33 | INFO: Blender create Mesh node Cube.127
+16:50:33 | INFO: Blender create Mesh node Cube.003
+16:50:33 | INFO: Blender create Mesh node Cylinder.280
+16:50:33 | INFO: Blender create Mesh node Cylinder.005
+16:50:33 | INFO: Blender create Mesh node Cylinder.010
+16:50:33 | INFO: Blender create Mesh node Cylinder.022
+16:50:33 | INFO: Blender create Mesh node Cube.11839
+16:50:33 | INFO: Blender create Mesh node Cube.12993
+16:50:33 | INFO: Blender create Mesh node Cube.124
+16:50:33 | INFO: Blender create Mesh node Plane.004
+16:50:34 | INFO: glTF import finished in 0.59s
+03:34.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fuller\hero_front.png'
+03:34.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:34.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:35.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:35.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:36.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fuller\hero_side.png'
+03:36.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:36.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:37.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:37.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:38.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\fuller\hero_back.png'
+03:38.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:38.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:39.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:39.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:40 | INFO: Data are loaded, start creating Blender stuff
+16:50:40 | INFO: Blender create Mesh node Cube.125
+16:50:40 | INFO: Blender create Mesh node Cube.126
+16:50:40 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:40 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:40 | INFO: Blender create Mesh node Cube.128
+16:50:40 | INFO: Blender create Mesh node Cube.127
+16:50:40 | INFO: Blender create Mesh node Cube.003
+16:50:40 | INFO: Blender create Mesh node Cylinder.280
+16:50:40 | INFO: Blender create Mesh node Cylinder.005
+16:50:40 | INFO: Blender create Mesh node Cylinder.010
+16:50:40 | INFO: Blender create Mesh node Cylinder.022
+16:50:40 | INFO: Blender create Mesh node Cube.11839
+16:50:40 | INFO: Blender create Mesh node Cube.12993
+16:50:40 | INFO: Blender create Mesh node Cube.124
+16:50:40 | INFO: Blender create Mesh node Plane.004
+16:50:41 | INFO: glTF import finished in 0.65s
+03:41.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stackman\hero_front.png'
+03:41.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:41.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:42.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:42.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:43.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stackman\hero_side.png'
+03:43.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:43.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:44.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:44.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:44.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stackman\hero_back.png'
+03:45.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:45.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:45.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:46.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:47 | INFO: Data are loaded, start creating Blender stuff
+16:50:47 | INFO: Blender create Mesh node Cube.125
+16:50:47 | INFO: Blender create Mesh node Cube.126
+16:50:47 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:47 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:47 | INFO: Blender create Mesh node Cube.128
+16:50:47 | INFO: Blender create Mesh node Cube.127
+16:50:47 | INFO: Blender create Mesh node Cube.003
+16:50:47 | INFO: Blender create Mesh node Cylinder.280
+16:50:47 | INFO: Blender create Mesh node Cylinder.005
+16:50:47 | INFO: Blender create Mesh node Cylinder.010
+16:50:47 | INFO: Blender create Mesh node Cylinder.022
+16:50:47 | INFO: Blender create Mesh node Cube.11839
+16:50:47 | INFO: Blender create Mesh node Cube.12993
+16:50:47 | INFO: Blender create Mesh node Cube.124
+16:50:47 | INFO: Blender create Mesh node Plane.004
+16:50:48 | INFO: glTF import finished in 0.61s
+03:47.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dauber\hero_front.png'
+03:47.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:48.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:48.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:49.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:49.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dauber\hero_side.png'
+03:49.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:49.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:50.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:50.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:51.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\dauber\hero_back.png'
+03:51.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:51.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:51.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:52.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:53 | INFO: Data are loaded, start creating Blender stuff
+16:50:53 | INFO: Blender create Mesh node Cube.125
+16:50:53 | INFO: Blender create Mesh node Cube.126
+16:50:53 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:53 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:53 | INFO: Blender create Mesh node Cube.128
+16:50:53 | INFO: Blender create Mesh node Cube.127
+16:50:53 | INFO: Blender create Mesh node Cube.003
+16:50:53 | INFO: Blender create Mesh node Cylinder.280
+16:50:53 | INFO: Blender create Mesh node Cylinder.005
+16:50:53 | INFO: Blender create Mesh node Cylinder.010
+16:50:53 | INFO: Blender create Mesh node Cylinder.022
+16:50:53 | INFO: Blender create Mesh node Cube.11839
+16:50:53 | INFO: Blender create Mesh node Cube.12993
+16:50:53 | INFO: Blender create Mesh node Cube.124
+16:50:53 | INFO: Blender create Mesh node Plane.004
+16:50:53 | INFO: glTF import finished in 0.61s
+03:53.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sealer\hero_front.png'
+03:53.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:53.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:54.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:54.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:54.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sealer\hero_side.png'
+03:55.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+03:55.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+03:55.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+03:55.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+03:56.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\sealer\hero_back.png'
+03:56.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+03:56.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+03:56.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+03:57.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:50:58 | INFO: Data are loaded, start creating Blender stuff
+16:50:58 | INFO: Blender create Mesh node Cube.125
+16:50:58 | INFO: Blender create Mesh node Cube.126
+16:50:58 | INFO: Blender create Mesh node PrototypePete_body.020
+16:50:58 | INFO: Blender create Mesh node PrototypePete_head.001
+16:50:58 | INFO: Blender create Mesh node Cube.128
+16:50:58 | INFO: Blender create Mesh node Cube.127
+16:50:58 | INFO: Blender create Mesh node Cube.003
+16:50:58 | INFO: Blender create Mesh node Cylinder.280
+16:50:58 | INFO: Blender create Mesh node Cylinder.005
+16:50:58 | INFO: Blender create Mesh node Cylinder.010
+16:50:58 | INFO: Blender create Mesh node Cylinder.022
+16:50:58 | INFO: Blender create Mesh node Cube.11839
+16:50:58 | INFO: Blender create Mesh node Cube.12993
+16:50:58 | INFO: Blender create Mesh node Cube.124
+16:50:58 | INFO: Blender create Mesh node Plane.004
+16:50:58 | INFO: glTF import finished in 0.58s
+03:58.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hooper\hero_front.png'
+03:58.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+03:58.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+03:59.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+03:59.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+03:59.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hooper\hero_side.png'
+03:59.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:00.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:00.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:00.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:01.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\hooper\hero_back.png'
+04:01.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:01.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:01.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:02.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:03 | INFO: Data are loaded, start creating Blender stuff
+16:51:03 | INFO: Blender create Mesh node Cube.125
+16:51:03 | INFO: Blender create Mesh node Cube.126
+16:51:03 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:03 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:03 | INFO: Blender create Mesh node Cube.128
+16:51:03 | INFO: Blender create Mesh node Cube.127
+16:51:03 | INFO: Blender create Mesh node Cube.003
+16:51:03 | INFO: Blender create Mesh node Cylinder.280
+16:51:03 | INFO: Blender create Mesh node Cylinder.005
+16:51:03 | INFO: Blender create Mesh node Cylinder.010
+16:51:03 | INFO: Blender create Mesh node Cylinder.022
+16:51:03 | INFO: Blender create Mesh node Cube.11839
+16:51:03 | INFO: Blender create Mesh node Cube.12993
+16:51:03 | INFO: Blender create Mesh node Cube.124
+16:51:03 | INFO: Blender create Mesh node Plane.004
+16:51:03 | INFO: glTF import finished in 0.60s
+04:03.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\relief\hero_front.png'
+04:03.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:03.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:04.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:04.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:04.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\relief\hero_side.png'
+04:05.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:05.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:05.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:06.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:06.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\relief\hero_back.png'
+04:06.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:07.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:07.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:07.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:08 | INFO: Data are loaded, start creating Blender stuff
+16:51:08 | INFO: Blender create Mesh node Cube.125
+16:51:08 | INFO: Blender create Mesh node Cube.126
+16:51:08 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:08 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:08 | INFO: Blender create Mesh node Cube.128
+16:51:08 | INFO: Blender create Mesh node Cube.127
+16:51:08 | INFO: Blender create Mesh node Cube.003
+16:51:08 | INFO: Blender create Mesh node Cylinder.280
+16:51:08 | INFO: Blender create Mesh node Cylinder.005
+16:51:08 | INFO: Blender create Mesh node Cylinder.010
+16:51:08 | INFO: Blender create Mesh node Cylinder.022
+16:51:08 | INFO: Blender create Mesh node Cube.11839
+16:51:08 | INFO: Blender create Mesh node Cube.12993
+16:51:08 | INFO: Blender create Mesh node Cube.124
+16:51:08 | INFO: Blender create Mesh node Plane.004
+16:51:09 | INFO: glTF import finished in 0.60s
+04:09.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scraper\hero_front.png'
+04:09.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:09.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:10.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:10.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:10.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scraper\hero_side.png'
+04:11.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:11.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:11.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:12.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:12.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\scraper\hero_back.png'
+04:12.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:13.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:13.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:13.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:14 | INFO: Data are loaded, start creating Blender stuff
+16:51:14 | INFO: Blender create Mesh node Cube.125
+16:51:14 | INFO: Blender create Mesh node Cube.126
+16:51:14 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:14 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:14 | INFO: Blender create Mesh node Cube.128
+16:51:14 | INFO: Blender create Mesh node Cube.127
+16:51:14 | INFO: Blender create Mesh node Cube.003
+16:51:14 | INFO: Blender create Mesh node Cylinder.280
+16:51:14 | INFO: Blender create Mesh node Cylinder.005
+16:51:14 | INFO: Blender create Mesh node Cylinder.010
+16:51:14 | INFO: Blender create Mesh node Cylinder.022
+16:51:14 | INFO: Blender create Mesh node Cube.11839
+16:51:14 | INFO: Blender create Mesh node Cube.12993
+16:51:14 | INFO: Blender create Mesh node Cube.124
+16:51:14 | INFO: Blender create Mesh node Plane.004
+16:51:15 | INFO: glTF import finished in 0.60s
+04:14.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ferryman\hero_front.png'
+04:15.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:15.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:15.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:16.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:16.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ferryman\hero_side.png'
+04:16.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:16.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:17.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:17.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:18.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\ferryman\hero_back.png'
+04:18.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:19.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:19.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:19.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:21 | INFO: Data are loaded, start creating Blender stuff
+16:51:21 | INFO: Blender create Mesh node Cube.125
+16:51:21 | INFO: Blender create Mesh node Cube.126
+16:51:21 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:21 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:21 | INFO: Blender create Mesh node Cube.128
+16:51:21 | INFO: Blender create Mesh node Cube.127
+16:51:21 | INFO: Blender create Mesh node Cube.003
+16:51:21 | INFO: Blender create Mesh node Cylinder.280
+16:51:21 | INFO: Blender create Mesh node Cylinder.005
+16:51:21 | INFO: Blender create Mesh node Cylinder.010
+16:51:21 | INFO: Blender create Mesh node Cylinder.022
+16:51:21 | INFO: Blender create Mesh node Cube.11839
+16:51:21 | INFO: Blender create Mesh node Cube.12993
+16:51:21 | INFO: Blender create Mesh node Cube.124
+16:51:21 | INFO: Blender create Mesh node Plane.004
+16:51:21 | INFO: glTF import finished in 0.64s
+04:21.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\winder\hero_front.png'
+04:21.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:21.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:22.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:22.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:23.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\winder\hero_side.png'
+04:23.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:23.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:24.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:24.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:24.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\winder\hero_back.png'
+04:25.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:25.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:26.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:26.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:27 | INFO: Data are loaded, start creating Blender stuff
+16:51:27 | INFO: Blender create Mesh node Cube.125
+16:51:27 | INFO: Blender create Mesh node Cube.126
+16:51:27 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:27 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:27 | INFO: Blender create Mesh node Cube.128
+16:51:27 | INFO: Blender create Mesh node Cube.127
+16:51:27 | INFO: Blender create Mesh node Cube.003
+16:51:27 | INFO: Blender create Mesh node Cylinder.280
+16:51:27 | INFO: Blender create Mesh node Cylinder.005
+16:51:27 | INFO: Blender create Mesh node Cylinder.010
+16:51:27 | INFO: Blender create Mesh node Cylinder.022
+16:51:27 | INFO: Blender create Mesh node Cube.11839
+16:51:27 | INFO: Blender create Mesh node Cube.12993
+16:51:27 | INFO: Blender create Mesh node Cube.124
+16:51:27 | INFO: Blender create Mesh node Plane.004
+16:51:28 | INFO: glTF import finished in 0.62s
+04:28.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pitman\hero_front.png'
+04:28.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:29.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:29.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:30.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:30.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pitman\hero_side.png'
+04:30.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:31.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:31.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:31.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:32.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\pitman\hero_back.png'
+04:32.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:32.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:33.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:33.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:34 | INFO: Data are loaded, start creating Blender stuff
+16:51:34 | INFO: Blender create Mesh node Cube.125
+16:51:34 | INFO: Blender create Mesh node Cube.126
+16:51:34 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:34 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:34 | INFO: Blender create Mesh node Cube.128
+16:51:34 | INFO: Blender create Mesh node Cube.127
+16:51:34 | INFO: Blender create Mesh node Cube.003
+16:51:34 | INFO: Blender create Mesh node Cylinder.280
+16:51:34 | INFO: Blender create Mesh node Cylinder.005
+16:51:34 | INFO: Blender create Mesh node Cylinder.010
+16:51:34 | INFO: Blender create Mesh node Cylinder.022
+16:51:34 | INFO: Blender create Mesh node Cube.11839
+16:51:34 | INFO: Blender create Mesh node Cube.12993
+16:51:34 | INFO: Blender create Mesh node Cube.124
+16:51:34 | INFO: Blender create Mesh node Plane.004
+16:51:35 | INFO: glTF import finished in 0.62s
+04:34.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tither\hero_front.png'
+04:35.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:35.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:36.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:36.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:36.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tither\hero_side.png'
+04:37.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:37.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:38.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:38.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:38.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\tither\hero_back.png'
+04:39.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:39.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:39.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:40.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:41 | INFO: Data are loaded, start creating Blender stuff
+16:51:41 | INFO: Blender create Mesh node Cube.125
+16:51:41 | INFO: Blender create Mesh node Cube.126
+16:51:41 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:41 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:41 | INFO: Blender create Mesh node Cube.128
+16:51:41 | INFO: Blender create Mesh node Cube.127
+16:51:41 | INFO: Blender create Mesh node Cube.003
+16:51:41 | INFO: Blender create Mesh node Cylinder.280
+16:51:41 | INFO: Blender create Mesh node Cylinder.005
+16:51:41 | INFO: Blender create Mesh node Cylinder.010
+16:51:41 | INFO: Blender create Mesh node Cylinder.022
+16:51:41 | INFO: Blender create Mesh node Cube.11839
+16:51:41 | INFO: Blender create Mesh node Cube.12993
+16:51:41 | INFO: Blender create Mesh node Cube.124
+16:51:41 | INFO: Blender create Mesh node Plane.004
+16:51:41 | INFO: glTF import finished in 0.66s
+04:41.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\blower\hero_front.png'
+04:42.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:42.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:42.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:43.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:43.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\blower\hero_side.png'
+04:43.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:43.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:44.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:44.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:45.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\blower\hero_back.png'
+04:45.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:45.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:45.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:46.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:47 | INFO: Data are loaded, start creating Blender stuff
+16:51:47 | INFO: Blender create Mesh node Cube.125
+16:51:47 | INFO: Blender create Mesh node Cube.126
+16:51:47 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:47 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:47 | INFO: Blender create Mesh node Cube.128
+16:51:47 | INFO: Blender create Mesh node Cube.127
+16:51:47 | INFO: Blender create Mesh node Cube.003
+16:51:47 | INFO: Blender create Mesh node Cylinder.280
+16:51:47 | INFO: Blender create Mesh node Cylinder.005
+16:51:47 | INFO: Blender create Mesh node Cylinder.010
+16:51:47 | INFO: Blender create Mesh node Cylinder.022
+16:51:47 | INFO: Blender create Mesh node Cube.11839
+16:51:47 | INFO: Blender create Mesh node Cube.12993
+16:51:47 | INFO: Blender create Mesh node Cube.124
+16:51:47 | INFO: Blender create Mesh node Plane.004
+16:51:47 | INFO: glTF import finished in 0.60s
+04:47.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\changer\hero_front.png'
+04:47.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:48.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:48.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:48.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:49.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\changer\hero_side.png'
+04:49.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:49.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:49.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:50.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:50.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\changer\hero_back.png'
+04:50.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:51.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:51.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:51.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:53 | INFO: Data are loaded, start creating Blender stuff
+16:51:53 | INFO: Blender create Mesh node Cube.125
+16:51:53 | INFO: Blender create Mesh node Cube.126
+16:51:53 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:53 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:53 | INFO: Blender create Mesh node Cube.128
+16:51:53 | INFO: Blender create Mesh node Cube.127
+16:51:53 | INFO: Blender create Mesh node Cube.003
+16:51:53 | INFO: Blender create Mesh node Cylinder.280
+16:51:53 | INFO: Blender create Mesh node Cylinder.005
+16:51:53 | INFO: Blender create Mesh node Cylinder.010
+16:51:53 | INFO: Blender create Mesh node Cylinder.022
+16:51:53 | INFO: Blender create Mesh node Cube.11839
+16:51:53 | INFO: Blender create Mesh node Cube.12993
+16:51:53 | INFO: Blender create Mesh node Cube.124
+16:51:53 | INFO: Blender create Mesh node Plane.004
+16:51:53 | INFO: glTF import finished in 0.65s
+04:53.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper\hero_front.png'
+04:53.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+04:54.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+04:54.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+04:54.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+04:55.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper\hero_side.png'
+04:55.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+04:55.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+04:56.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+04:56.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+04:57.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper\hero_back.png'
+04:57.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+04:57.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+04:58.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+04:58.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:51:59 | INFO: Data are loaded, start creating Blender stuff
+16:51:59 | INFO: Blender create Mesh node Cube.125
+16:51:59 | INFO: Blender create Mesh node Cube.126
+16:51:59 | INFO: Blender create Mesh node PrototypePete_body.020
+16:51:59 | INFO: Blender create Mesh node PrototypePete_head.001
+16:51:59 | INFO: Blender create Mesh node Cube.128
+16:51:59 | INFO: Blender create Mesh node Cube.127
+16:51:59 | INFO: Blender create Mesh node Cube.003
+16:51:59 | INFO: Blender create Mesh node Cylinder.280
+16:51:59 | INFO: Blender create Mesh node Cylinder.005
+16:51:59 | INFO: Blender create Mesh node Cylinder.010
+16:51:59 | INFO: Blender create Mesh node Cylinder.022
+16:51:59 | INFO: Blender create Mesh node Cube.11839
+16:51:59 | INFO: Blender create Mesh node Cube.12993
+16:51:59 | INFO: Blender create Mesh node Cube.124
+16:51:59 | INFO: Blender create Mesh node Plane.004
+16:52:00 | INFO: glTF import finished in 0.60s
+04:59.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\roper\hero_front.png'
+05:00.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:00.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:00.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:01.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:01.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\roper\hero_side.png'
+05:02.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:02.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:02.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:03.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:03.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\roper\hero_back.png'
+05:03.829  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:04.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:04.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:04.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:05 | INFO: Data are loaded, start creating Blender stuff
+16:52:05 | INFO: Blender create Mesh node Cube.125
+16:52:05 | INFO: Blender create Mesh node Cube.126
+16:52:05 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:05 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:05 | INFO: Blender create Mesh node Cube.128
+16:52:05 | INFO: Blender create Mesh node Cube.127
+16:52:05 | INFO: Blender create Mesh node Cube.003
+16:52:05 | INFO: Blender create Mesh node Cylinder.280
+16:52:05 | INFO: Blender create Mesh node Cylinder.005
+16:52:05 | INFO: Blender create Mesh node Cylinder.010
+16:52:05 | INFO: Blender create Mesh node Cylinder.022
+16:52:05 | INFO: Blender create Mesh node Cube.11839
+16:52:05 | INFO: Blender create Mesh node Cube.12993
+16:52:05 | INFO: Blender create Mesh node Cube.124
+16:52:05 | INFO: Blender create Mesh node Plane.004
+16:52:06 | INFO: glTF import finished in 0.60s
+05:06.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\almoner\hero_front.png'
+05:06.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:06.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:07.079  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:07.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:07.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\almoner\hero_side.png'
+05:08.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:08.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:08.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:09.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:09.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\almoner\hero_back.png'
+05:09.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:10.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:10.329  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:10.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:11 | INFO: Data are loaded, start creating Blender stuff
+16:52:11 | INFO: Blender create Mesh node Cube.125
+16:52:11 | INFO: Blender create Mesh node Cube.126
+16:52:11 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:11 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:11 | INFO: Blender create Mesh node Cube.128
+16:52:11 | INFO: Blender create Mesh node Cube.127
+16:52:11 | INFO: Blender create Mesh node Cube.003
+16:52:11 | INFO: Blender create Mesh node Cylinder.280
+16:52:11 | INFO: Blender create Mesh node Cylinder.005
+16:52:11 | INFO: Blender create Mesh node Cylinder.010
+16:52:11 | INFO: Blender create Mesh node Cylinder.022
+16:52:11 | INFO: Blender create Mesh node Cube.11839
+16:52:11 | INFO: Blender create Mesh node Cube.12993
+16:52:11 | INFO: Blender create Mesh node Cube.124
+16:52:11 | INFO: Blender create Mesh node Plane.004
+16:52:12 | INFO: glTF import finished in 0.59s
+05:11.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\panner\hero_front.png'
+05:12.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:12.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:12.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:13.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:13.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\panner\hero_side.png'
+05:13.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:13.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:14.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:14.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:15.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\panner\hero_back.png'
+05:15.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:15.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:15.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:16.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:17 | INFO: Data are loaded, start creating Blender stuff
+16:52:17 | INFO: Blender create Mesh node Cube.125
+16:52:17 | INFO: Blender create Mesh node Cube.126
+16:52:17 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:17 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:17 | INFO: Blender create Mesh node Cube.128
+16:52:17 | INFO: Blender create Mesh node Cube.127
+16:52:17 | INFO: Blender create Mesh node Cube.003
+16:52:17 | INFO: Blender create Mesh node Cylinder.280
+16:52:17 | INFO: Blender create Mesh node Cylinder.005
+16:52:17 | INFO: Blender create Mesh node Cylinder.010
+16:52:17 | INFO: Blender create Mesh node Cylinder.022
+16:52:17 | INFO: Blender create Mesh node Cube.11839
+16:52:17 | INFO: Blender create Mesh node Cube.12993
+16:52:17 | INFO: Blender create Mesh node Cube.124
+16:52:17 | INFO: Blender create Mesh node Plane.004
+16:52:17 | INFO: glTF import finished in 0.62s
+05:17.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stiltman\hero_front.png'
+05:17.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:18.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:18.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:18.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:19.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stiltman\hero_side.png'
+05:19.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:19.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:19.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:20.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:20.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stiltman\hero_back.png'
+05:20.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:20.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:21.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:21.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:22 | INFO: Data are loaded, start creating Blender stuff
+16:52:22 | INFO: Blender create Mesh node Cube.125
+16:52:22 | INFO: Blender create Mesh node Cube.126
+16:52:22 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:22 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:22 | INFO: Blender create Mesh node Cube.128
+16:52:22 | INFO: Blender create Mesh node Cube.127
+16:52:22 | INFO: Blender create Mesh node Cube.003
+16:52:22 | INFO: Blender create Mesh node Cylinder.280
+16:52:22 | INFO: Blender create Mesh node Cylinder.005
+16:52:22 | INFO: Blender create Mesh node Cylinder.010
+16:52:22 | INFO: Blender create Mesh node Cylinder.022
+16:52:22 | INFO: Blender create Mesh node Cube.11839
+16:52:22 | INFO: Blender create Mesh node Cube.12993
+16:52:22 | INFO: Blender create Mesh node Cube.124
+16:52:22 | INFO: Blender create Mesh node Plane.004
+16:52:23 | INFO: glTF import finished in 0.60s
+05:22.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\nightman\hero_front.png'
+05:23.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:23.204  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:23.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:23.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:24.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\nightman\hero_side.png'
+05:24.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:24.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:24.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:25.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:25.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\nightman\hero_back.png'
+05:25.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:25.954  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:26.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:26.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:27 | INFO: Data are loaded, start creating Blender stuff
+16:52:27 | INFO: Blender create Mesh node Cube.125
+16:52:27 | INFO: Blender create Mesh node Cube.126
+16:52:27 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:27 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:27 | INFO: Blender create Mesh node Cube.128
+16:52:27 | INFO: Blender create Mesh node Cube.127
+16:52:27 | INFO: Blender create Mesh node Cube.003
+16:52:27 | INFO: Blender create Mesh node Cylinder.280
+16:52:27 | INFO: Blender create Mesh node Cylinder.005
+16:52:27 | INFO: Blender create Mesh node Cylinder.010
+16:52:27 | INFO: Blender create Mesh node Cylinder.022
+16:52:27 | INFO: Blender create Mesh node Cube.11839
+16:52:27 | INFO: Blender create Mesh node Cube.12993
+16:52:27 | INFO: Blender create Mesh node Cube.124
+16:52:27 | INFO: Blender create Mesh node Plane.004
+16:52:28 | INFO: glTF import finished in 0.62s
+05:27.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\iceman\hero_front.png'
+05:28.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:28.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:28.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:29.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:29.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\iceman\hero_side.png'
+05:29.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:29.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:30.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:30.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:30.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\iceman\hero_back.png'
+05:31.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:31.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:31.579  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:31.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+16:52:33 | INFO: Data are loaded, start creating Blender stuff
+16:52:33 | INFO: Blender create Mesh node Cube.125
+16:52:33 | INFO: Blender create Mesh node Cube.126
+16:52:33 | INFO: Blender create Mesh node PrototypePete_body.020
+16:52:33 | INFO: Blender create Mesh node PrototypePete_head.001
+16:52:33 | INFO: Blender create Mesh node Cube.128
+16:52:33 | INFO: Blender create Mesh node Cube.127
+16:52:33 | INFO: Blender create Mesh node Cube.003
+16:52:33 | INFO: Blender create Mesh node Cylinder.280
+16:52:33 | INFO: Blender create Mesh node Cylinder.005
+16:52:33 | INFO: Blender create Mesh node Cylinder.010
+16:52:33 | INFO: Blender create Mesh node Cylinder.022
+16:52:33 | INFO: Blender create Mesh node Cube.11839
+16:52:33 | INFO: Blender create Mesh node Cube.12993
+16:52:33 | INFO: Blender create Mesh node Cube.124
+16:52:33 | INFO: Blender create Mesh node Plane.004
+16:52:33 | INFO: glTF import finished in 0.60s
+05:33.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\straker\hero_front.png'
+05:33.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+05:33.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+05:33.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+05:34.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+05:34.454  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\straker\hero_side.png'
+05:34.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+05:35.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+05:35.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+05:35.704  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+05:36.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\straker\hero_back.png'
+05:36.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+05:36.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+05:36.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+05:37.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "GREEN", "ok": true, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": [], "blind_views": [], "proving": {"drillmaster": 3, "gaoler": 3, "scrapwright": 3, "snuffer": 3, "sexton": 3, "porter": 3, "tallyman": 3, "cook": 3, "sluicekeeper": 3, "sower": 3, "snarer": 3, "stoker": 3, "bellman": 3, "boiler": 3, "snuffer_chibi": 3, "tallyman_chibi": 3, "jointer": 3, "quartermaster": 3, "loader": 3, "hurdleman": 3, "tanner": 3, "reeve": 3, "pressman": 3, "strickler": 3, "greener": 3, "drover": 3, "paviser": 3, "fenman": 3, "leech": 3, "beadle": 3, "rammer": 3, "moulder": 3, "fuller": 3, "stackman": 3, "dauber": 3, "hooper": 3, "scraper": 3, "winder": 3, "pitman": 3, "comfitmaker": 3, "dyer": 3, "ferryman": 3, "ratcatcher": 3, "relief": 3, "sealer": 3, "tapster": 3, "tither": 3, "blower": 3, "changer": 3, "stopper": 3, "roper": 3, "almoner": 3, "panner": 3, "stiltman": 3, "nightman": 3, "iceman": 3, "straker": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[0, "ferryman", "side"], [8, "boiler", "front"], [8, "drover", "front"], [8, "ratcatcher", "front"], [11, "gaoler", "front"], [11, "porter", "front"]], "rows_judged": 57, "rendered": 55, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 165, "failures": [], "cells": 55, "expected_files": 165, "scope": "whole_house"}, "ratios": {"drillmaster": [0.9, 3.25, true], "gaoler": [0.96, 5.43, true], "scrapwright": [0.82, 4.62, true], "snuffer": [1.06, 3.37, true], "sexton": [1.0, 4.06, true], "porter": [0.94, 5.39, true], "tallyman": [0.88, 3.75, true], "cook": [0.84, 4.26, true], "sluicekeeper": [1.02, 4.52, true], "sower": [0.92, 5.36, true], "snarer": [0.94, 5.11, true], "stoker": [0.98, 4.97, true], "bellman": [1.1, 4.58, true], "boiler": [0.86, 5.47, true], "snuffer_chibi": [1.06, 4.21, true], "tallyman_chibi": [0.88, 3.58, true], "jointer": [0.92, 4.04, true], "quartermaster": [0.96, 4.48, true], "loader": [1.08, 4.26, true], "hurdleman": [1.04, 4.84, true], "tanner": [1.12, 4.36, true], "reeve": [0.8, 5.12, true], "pressman": [1.16, 4.47, true], "strickler": [1.04, 3.67, true], "greener": [1.02, 4.57, true], "drover": [1.0, 5.45, true], "paviser": [1.09, 5.3, true], "fenman": [1.03, 4.35, true], "leech": [0.95, 4.12, true], "beadle": [1.2, 3.74, true], "rammer": [1.12, 3.89, true], "moulder": [1.18, 4.22, true], "fuller": [1.09, 5.15, true], "stackman": [1.16, 4.39, true], "dauber": [1.05, 3.52, true], "hooper": [0.96, 3.24, true], "scraper": [1.04, 3.76, true], "winder": [0.96, 4.86, true], "pitman": [0.94, 4.96, true], "comfitmaker": [0.93, 3.69, true], "dyer": [1.06, 4.74, true], "ferryman": [1.07, 4.23, true], "ratcatcher": [1.07, 5.47, true], "relief": [1.03, 3.61, true], "sealer": [0.99, 3.5, true], "tapster": [1.14, 4.9, true], "tither": [0.99, 4.25, true], "blower": [1.01, 3.31, true], "changer": [1.11, 3.21, true], "stopper": [0.97, 4.1, true], "roper": [1.0, 3.22, true], "almoner": [1.03, 4.46, true], "panner": [0.92, 3.6, true], "stiltman": [1.31, 3.1, true], "nightman": [0.94, 3.49, true], "iceman": [1.27, 3.24, true], "straker": [0.98, 3.96, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+[ALLDONE]

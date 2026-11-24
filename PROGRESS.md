@@ -17723,3 +17723,12 @@ RESULT - THE FAULT AS ART HAD IT IS ABSENT:
  - U59_CONTRAST prints seen/checked computed in-run; U63_STRIPE prints gate_n computed in-run. Both are the honest shape.
 SIBLING FAULT FOUND (not the same, same family - a verdict with no denominator): U62_SCALES, U88_WORN, U90 FEED_LOAD, U91 LONGNAME, U69_REDPROOF, U56_HUE, THEME_SWEEP, U40_TEST print OK purely on `bad == 0`. If the set they walk came back EMPTY (e.g. U88 loops `_sat._list.get_children()`; a renamed list = zero rows) they would still print OK. Nothing is wrong today; the guard just cannot tell "all passed" from "none measured". NOT FIXED THIS HOUR: it needs a windowed run to prove, and the lock window is not mine. NEXT ENGINE WINDOW: add `n` counters to those 8 prints and FAIL on n==0 (U58's "%d colours walked" line is the model).
 Decision for Mr. E: none.
+
+
+## C-193 (24 Nov 2026 14:3x CST, content) - WROTE miniboss_feed.by_key.iceman (HOARBACK, THE 54th); FEED 53 -> 54
+ITEM: WORK_PLAN TAKE THIS NEXT, CONTENT (14:22) - feed the 54th, same shape the 53rd got. The 25 arrive/fall-only rows were NOT backfilled, as ruled.
+BODY CHECK: iceman.glb is on main (arrived in this run's merge of origin/main); canon row read in tools/art/minibosses.py (Hoarback, 3.12 m, mess).
+ADDED: by_key.iceman = arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; plus _note_c193 (expected zero-hit key).
+CANON: the cold is on a count. Four blocks on the rack and a fifth in the tongs; nothing the party does removes one. 'broken' is the thaw, not a hit landing - there is no weakness.
+VALIDATION OK: lore_lines.json parses; every pre-existing key equal to pre-edit copy; by_key 53 -> 54; only new keys are by_key.iceman and _note_c193.
+CODE WIRING: none new - by_key.iceman is the row the game build's MB_NAME 'iceman' entry reads. Published count (commands.json) 53 -> 54 remains the chat bot's, after main carries the name.

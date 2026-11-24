@@ -5409,6 +5409,8 @@ def hurdleman():
 
     _span("floor", _i_floor)
     P.used_pack = False
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the hurdle, the three spares and the floor are his gear.
+    P.man_parts = ("man_lower", "head", "tool_arms")
     return P
 
 
@@ -5675,8 +5677,18 @@ def tanner():
     # depth and the arms fall almost straight DOWN the picture to the beam.
     GL = (MX - 0.22, -0.56, 1.02)
     GR = (MX + 0.28, -0.54, 1.02)
+    _i_arms = len(P.items)
     limb(P, [SL, (MX - 0.21, -0.52, 1.14), GL], 0.080, 0.056, 'body')
     limb(P, [SR, (MX + 0.35, -0.50, 1.14), GR], 0.080, 0.056, 'body')
+    # HIS ARMS ARE HIS, NOT HIS WORK. They are authored inside the `work` block
+    # because they must reach the beam that block builds, and they were
+    # therefore inside the `work` SPAN - so the first man_parts written for this
+    # body (man_lower + head) measured a man WITHOUT ARMS and called the number
+    # his. Caught 24 Nov 2026 17:0x CT by opening the front render and counting
+    # the limbs against the span, which is the only reason it is not shipped.
+    # `arms` overlaps `work` on purpose: spans are labels, not a partition, and
+    # only the man_parts union is ever used to split.
+    _span("arms", _i_arms)
 
     # ---- THE FLESHING KNIFE. Pass 1 made it a thin TUBE and it came back as a
     # bent wire floating in front of the beam. A knife is a FLAT TAPERED PLATE,
@@ -5694,6 +5706,8 @@ def tanner():
     # rack so the man and his rack are obviously the same trade at a glance.
     _hide(P, MX - 0.26, -0.34, 1.06, 0.40, w=0.15, h=0.38, bow=0.060, laced=False)
     _span("work", _i_work)
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the rack, the beam and the work on it are his gear.
+    P.man_parts = ("man_lower", "head", "arms")
     return P
 
 
@@ -7113,6 +7127,94 @@ OVERRIDE = {
 
 
 VCOL_SLOTS = {}          # key -> set of slots whose material is vertex-driven
+
+
+# *** WHICH ITEMS ARE THE FIGURE - ONE DEFINITION, READ BY EVERY INSTRUMENT. ***
+# Added 24 Nov 2026 16:5x CT. `_backread.py` splits a body from its gear to ask
+# the viewer's question (render with and without the man through ONE camera and
+# count the pixels that moved), and it took a single CONTIGUOUS span named
+# `man`. `_selfseen_census.py` therefore tested `"man" in spans` and printed, of
+# 25 bodies, "no `man` span at all, so there is nothing to split".
+#
+# FOR SIX OF THOSE 25 THAT SENTENCE WAS FALSE, AND THE FOUR NEWEST BODIES IN THE
+# HOUSE WERE AMONG THEM. Measured off the builders by tools/art/_spanprobe.py:
+#   iceman   (54th) legs[0,5) trunk[5,11) head[11,17) + arms[33,35)
+#   straker  (55th) legs[0,5) trunk[5,12) head[12,18) + arms[34,36)
+#   nightman (53rd) legs[0,5) trunk[5,11) head[11,17) + arms[24,26)
+#   stiltman (52nd) legs[9,12) trunk[12,17) head[17,23) arms[23,27)
+#   hurdleman       man_lower[0,9) head[9,19) tool_arms[19,25)
+#   tanner          man_lower[29,36) head[36,41)
+# Every one splits its figure from its gear. Three of the six are not CONTIGUOUS
+# for one authoring reason: the arms must reach the apparatus, so they are built
+# after it exists and land last in P.items. The instrument could not see a
+# decomposition that was sitting right there under other names.
+#
+# THE FIX IS NOT A LIST OF NAMES THIS MODULE GUESSES. A guessed name set is how
+# an instrument reports an UNEARNED number - "trunk" is a man here and could be
+# a tree in the next builder - and an unearned pass and an unearned fail are the
+# same fault (the panner red, 24 Nov 11:5x). So the BUILDER states it, in its
+# own body, with `P.man_parts = ("trunk", "head", ...)`, naming spans it has
+# itself declared. This resolver verifies every name exists and returns RANGES,
+# never a merged guess; a `man_parts` naming a span that is not there is an
+# ERROR, not an absence, because a declaration that misses is a lie and must go
+# RED. Declaring both `man` and `man_parts` is ambiguous and is also an error.
+_NO_PARTS = object()
+
+
+def man_ranges(P):
+    """-> (ranges, source, errors). ranges is a list of [i0, i1) half-open
+    index ranges into P.items covering the figure and nothing else.
+
+    source is "span" (a single `man` span, the original form - unchanged),
+    "parts" (the builder's own `man_parts` declaration), or "" (neither, so
+    there is nothing to split and NOTHING IS CLAIMED - absent, not green).
+    An EMPTY range set from a `man` span stays an empty range set: the panner
+    marker `P.spans["man"] = (n, n)` is a deliberate statement that this
+    machine has no operator, and a machine with no man cannot fail a
+    can-you-see-the-man test."""
+    spans = dict(getattr(P, "spans", {}) or {})
+    # *** DECLARED-AND-EMPTY IS NOT UNDECLARED. *** `getattr(P, "man_parts",
+    # None)` plus `if parts:` made `man_parts = ()` fall through to the
+    # no-declaration branch, so a builder that said "my figure is nothing"
+    # landed in not_measurable, where NOTHING IS CLAIMED and nothing prints -
+    # the silent outcome this whole mechanism exists to abolish. Caught by
+    # arm D of _manparts_prove.py on the first firing of that harness, which
+    # is the only reason it is not shipped. The sentinel keeps the two apart.
+    parts = getattr(P, "man_parts", _NO_PARTS)
+    declared = parts is not _NO_PARTS
+    errs = []
+    if declared and "man" in spans:
+        return ([], "", ["both a `man` span and `man_parts` %s are declared - "
+                         "which is the figure is then undefined" % (tuple(parts),)])
+    if "man" in spans:
+        a, b = spans["man"]
+        return ([[int(a), int(b)]], "span", [])
+    if declared:
+        rng = []
+        for nm in parts:
+            if nm not in spans:
+                errs.append("`man_parts` names span %r, which the builder does "
+                            "not declare (it declares %s)"
+                            % (nm, sorted(spans)))
+                continue
+            a, b = spans[nm]
+            rng.append([int(a), int(b)])
+        if errs:
+            return ([], "", errs)
+        if not rng:
+            return ([], "", ["`man_parts` is declared and empty - say nothing "
+                             "or say which spans; an empty declaration claims "
+                             "a split that is not there"])
+        return (sorted(rng), "parts", [])
+    return ([], "", [])
+
+
+def in_ranges(i, ranges):
+    """True where index i falls in any half-open range."""
+    for a, b in ranges:
+        if a <= i < b:
+            return True
+    return False
 
 
 def merge_objs(key, items, mats, suffix=None, vcols=None):
@@ -18998,6 +19100,9 @@ def stiltman():
               tuple(_CB), tuple((_CT - _CB).normalized())), 'dark')
     P.add(L.box(0.250, 0.118, 0.068), 'dark', loc=tuple(_CT), rot=(0.0, 0.20, 0.0))
     _close("arms")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the stilt and the stump are gear, and so are the CUFFS that
+    # strap them on - a cuff is a thing he wears, not a part of him.
+    P.man_parts = ("legs", "trunk", "head", "arms")
     return P
 
 
@@ -19364,6 +19469,8 @@ def nightman():
     limb(P, [tuple(_LAMP + Vector((0.0, 0.040, 0.185))),
              tuple(_s((0.120, -0.150, WAIST + 0.030)))], 0.018, 0.018, 'dark')
     _close("lamp")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the tub, the scoop and the lamp are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
     return P
 
 
@@ -19732,6 +19839,8 @@ def iceman():
              (-0.430, 0.120, 1.840)],
          0.084, 0.058, 'body')
     _close("arms")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the frame, the ice blocks and the tongs are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
     return P
 
 
@@ -20143,6 +20252,8 @@ def straker():
     limb(P, [tuple(_SL), tuple(_SL + Vector((-0.140, -0.120, -0.290))),
              (MX - 0.470, -0.265, HIP + 0.030)], 0.082, 0.056, 'body')
     _close("arms")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). Here the wheel, the strakes and the hammer are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
     return P
 
 

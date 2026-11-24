@@ -5153,11 +5153,1104 @@
    ],
    "engine": "BLENDER_EEVEE",
    "measured_at": "24 Nov 2026 11:3x CT"
+  },
+  "iceman": {
+   "key": "iceman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 60774,
+     "man_seen_px": 57115,
+     "man_seen": 0.9398,
+     "value_creature": {
+      "px": 89640,
+      "p5": 0.1317,
+      "p50": 0.3022,
+      "p95": 0.7009,
+      "spread": 0.5692,
+      "dark_frac": 0.1279,
+      "bands": [
+       0.0483,
+       0.2458,
+       0.3738,
+       0.1261,
+       0.0266,
+       0.1654,
+       0.0106,
+       0.0033
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 57115,
+      "p5": 0.0933,
+      "p50": 0.2849,
+      "p95": 0.446,
+      "spread": 0.3527,
+      "dark_frac": 0.1481,
+      "bands": [
+       0.0656,
+       0.3099,
+       0.4236,
+       0.1923,
+       0.0026,
+       0.0048,
+       0.0011,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 40184,
+     "man_seen_px": 39476,
+     "man_seen": 0.9824,
+     "value_creature": {
+      "px": 69631,
+      "p5": 0.0773,
+      "p50": 0.3134,
+      "p95": 0.7084,
+      "spread": 0.6311,
+      "dark_frac": 0.0933,
+      "bands": [
+       0.0589,
+       0.1294,
+       0.4126,
+       0.1943,
+       0.0284,
+       0.1649,
+       0.0115,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 39476,
+      "p5": 0.1992,
+      "p50": 0.2991,
+      "p95": 0.4479,
+      "spread": 0.2487,
+      "dark_frac": 0.0506,
+      "bands": [
+       0.0093,
+       0.1826,
+       0.4794,
+       0.3275,
+       0.0002,
+       0.0011,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 60977,
+     "man_seen_px": 52207,
+     "man_seen": 0.8562,
+     "value_creature": {
+      "px": 88251,
+      "p5": 0.1051,
+      "p50": 0.283,
+      "p95": 0.688,
+      "spread": 0.5829,
+      "dark_frac": 0.1373,
+      "bands": [
+       0.0582,
+       0.2992,
+       0.3426,
+       0.1199,
+       0.0271,
+       0.1432,
+       0.0036,
+       0.006
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 52207,
+      "p5": 0.0891,
+      "p50": 0.2645,
+      "p95": 0.4342,
+      "spread": 0.3451,
+      "dark_frac": 0.1581,
+      "bands": [
+       0.0727,
+       0.3766,
+       0.3683,
+       0.1816,
+       0.0002,
+       0.0006,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     33,
+     35
+    ]
+   ],
+   "bounds_control": [
+    -0.83606,
+    -0.65904,
+    0.0,
+    0.5402,
+    0.54571,
+    3.12
+   ],
+   "bounds_split": [
+    -0.83606,
+    -0.65904,
+    0.0,
+    0.5402,
+    0.54571,
+    3.12
+   ],
+   "objs_control": 4,
+   "objs_split": 5,
+   "item_counts": {
+    "inside": 19,
+    "outside": 16,
+    "total": 35
+   },
+   "man_objs": [
+    "iceman_body_man",
+    "iceman_dark_man",
+    "iceman_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  },
+  "straker": {
+   "key": "straker",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 111211,
+     "man_seen_px": 110712,
+     "man_seen": 0.9955,
+     "value_creature": {
+      "px": 174425,
+      "p5": 0.0894,
+      "p50": 0.2947,
+      "p95": 0.5737,
+      "spread": 0.4843,
+      "dark_frac": 0.1722,
+      "bands": [
+       0.0782,
+       0.2274,
+       0.4109,
+       0.2029,
+       0.037,
+       0.033,
+       0.006,
+       0.0045
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 110712,
+      "p5": 0.0824,
+      "p50": 0.3148,
+      "p95": 0.4907,
+      "spread": 0.4084,
+      "dark_frac": 0.1631,
+      "bands": [
+       0.1011,
+       0.172,
+       0.3844,
+       0.3119,
+       0.0287,
+       0.0019,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 87232,
+     "man_seen_px": 78823,
+     "man_seen": 0.9036,
+     "value_creature": {
+      "px": 136737,
+      "p5": 0.1051,
+      "p50": 0.279,
+      "p95": 0.5824,
+      "spread": 0.4773,
+      "dark_frac": 0.1566,
+      "bands": [
+       0.0625,
+       0.2809,
+       0.3864,
+       0.202,
+       0.0323,
+       0.0222,
+       0.0138,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 78823,
+      "p5": 0.1829,
+      "p50": 0.3014,
+      "p95": 0.4745,
+      "spread": 0.2915,
+      "dark_frac": 0.0903,
+      "bands": [
+       0.0049,
+       0.2588,
+       0.3844,
+       0.3413,
+       0.0094,
+       0.0012,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 111121,
+     "man_seen_px": 111116,
+     "man_seen": 1.0,
+     "value_creature": {
+      "px": 174488,
+      "p5": 0.0625,
+      "p50": 0.2826,
+      "p95": 0.476,
+      "spread": 0.4135,
+      "dark_frac": 0.2413,
+      "bands": [
+       0.1201,
+       0.2415,
+       0.3534,
+       0.2476,
+       0.0123,
+       0.0144,
+       0.0055,
+       0.005
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 111116,
+      "p5": 0.1011,
+      "p50": 0.302,
+      "p95": 0.4635,
+      "spread": 0.3624,
+      "dark_frac": 0.1751,
+      "bands": [
+       0.0615,
+       0.2222,
+       0.3409,
+       0.3748,
+       0.0006,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     34,
+     36
+    ]
+   ],
+   "bounds_control": [
+    -0.96804,
+    -1.03149,
+    0.0,
+    1.12804,
+    0.23146,
+    2.4
+   ],
+   "bounds_split": [
+    -0.96804,
+    -1.03149,
+    0.0,
+    1.12804,
+    0.23146,
+    2.4
+   ],
+   "objs_control": 4,
+   "objs_split": 5,
+   "item_counts": {
+    "inside": 20,
+    "outside": 16,
+    "total": 36
+   },
+   "man_objs": [
+    "straker_body_man",
+    "straker_dark_man",
+    "straker_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  },
+  "nightman": {
+   "key": "nightman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 94958,
+     "man_seen_px": 87901,
+     "man_seen": 0.9257,
+     "value_creature": {
+      "px": 120155,
+      "p5": 0.0933,
+      "p50": 0.2706,
+      "p95": 0.6361,
+      "spread": 0.5428,
+      "dark_frac": 0.1311,
+      "bands": [
+       0.0667,
+       0.2938,
+       0.3009,
+       0.255,
+       0.0308,
+       0.0501,
+       0.0027,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 87901,
+      "p5": 0.0507,
+      "p50": 0.2639,
+      "p95": 0.4941,
+      "spread": 0.4434,
+      "dark_frac": 0.1679,
+      "bands": [
+       0.0889,
+       0.3333,
+       0.2414,
+       0.3061,
+       0.0204,
+       0.0089,
+       0.0011,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 61198,
+     "man_seen_px": 60510,
+     "man_seen": 0.9888,
+     "value_creature": {
+      "px": 83515,
+      "p5": 0.2185,
+      "p50": 0.2894,
+      "p95": 0.6428,
+      "spread": 0.4243,
+      "dark_frac": 0.0171,
+      "bands": [
+       0.0034,
+       0.2442,
+       0.3717,
+       0.2884,
+       0.0334,
+       0.0533,
+       0.0057,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 60510,
+      "p5": 0.2194,
+      "p50": 0.2902,
+      "p95": 0.491,
+      "spread": 0.2717,
+      "dark_frac": 0.0145,
+      "bands": [
+       0.001,
+       0.2248,
+       0.3712,
+       0.3683,
+       0.0334,
+       0.0014,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "back": {
+     "man_alone_px": 96274,
+     "man_seen_px": 93903,
+     "man_seen": 0.9754,
+     "value_creature": {
+      "px": 121546,
+      "p5": 0.1367,
+      "p50": 0.2602,
+      "p95": 0.4989,
+      "spread": 0.3622,
+      "dark_frac": 0.0946,
+      "bands": [
+       0.0436,
+       0.3441,
+       0.2933,
+       0.2765,
+       0.0386,
+       0.0028,
+       0.0012,
+       0.0
+      ],
+      "bands_5pct": 3
+     },
+     "value_man_visible": {
+      "px": 93903,
+      "p5": 0.1684,
+      "p50": 0.2714,
+      "p95": 0.4986,
+      "spread": 0.3302,
+      "dark_frac": 0.0631,
+      "bands": [
+       0.0285,
+       0.2778,
+       0.3264,
+       0.3366,
+       0.03,
+       0.0006,
+       0.0001,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     24,
+     26
+    ]
+   ],
+   "bounds_control": [
+    -0.77407,
+    -0.70449,
+    0.0,
+    0.85555,
+    0.37705,
+    2.3
+   ],
+   "bounds_split": [
+    -0.77407,
+    -0.70449,
+    0.0,
+    0.85555,
+    0.37705,
+    2.3
+   ],
+   "objs_control": 4,
+   "objs_split": 7,
+   "item_counts": {
+    "inside": 19,
+    "outside": 14,
+    "total": 33
+   },
+   "man_objs": [
+    "nightman_body_man",
+    "nightman_dark_man",
+    "nightman_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  },
+  "stiltman": {
+   "key": "stiltman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 40106,
+     "man_seen_px": 39579,
+     "man_seen": 0.9869,
+     "value_creature": {
+      "px": 51668,
+      "p5": 0.2446,
+      "p50": 0.3392,
+      "p95": 0.663,
+      "spread": 0.4184,
+      "dark_frac": 0.0202,
+      "bands": [
+       0.0055,
+       0.0525,
+       0.5481,
+       0.31,
+       0.0131,
+       0.0633,
+       0.0075,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 39579,
+      "p5": 0.2482,
+      "p50": 0.3653,
+      "p95": 0.4457,
+      "spread": 0.1974,
+      "dark_frac": 0.0222,
+      "bands": [
+       0.0059,
+       0.0482,
+       0.5221,
+       0.4039,
+       0.0043,
+       0.0155,
+       0.0002,
+       0.0
+      ],
+      "bands_5pct": 2
+     }
+    },
+    "side": {
+     "man_alone_px": 27074,
+     "man_seen_px": 26869,
+     "man_seen": 0.9924,
+     "value_creature": {
+      "px": 36232,
+      "p5": 0.2325,
+      "p50": 0.3157,
+      "p95": 0.6541,
+      "spread": 0.4215,
+      "dark_frac": 0.0139,
+      "bands": [
+       0.006,
+       0.0741,
+       0.6501,
+       0.1968,
+       0.0118,
+       0.051,
+       0.0103,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 26869,
+      "p5": 0.2549,
+      "p50": 0.3379,
+      "p95": 0.425,
+      "spread": 0.1701,
+      "dark_frac": 0.0144,
+      "bands": [
+       0.0049,
+       0.0278,
+       0.6894,
+       0.2644,
+       0.0047,
+       0.008,
+       0.0009,
+       0.0
+      ],
+      "bands_5pct": 2
+     }
+    },
+    "back": {
+     "man_alone_px": 39734,
+     "man_seen_px": 39303,
+     "man_seen": 0.9892,
+     "value_creature": {
+      "px": 51460,
+      "p5": 0.2143,
+      "p50": 0.3303,
+      "p95": 0.6292,
+      "spread": 0.4149,
+      "dark_frac": 0.0277,
+      "bands": [
+       0.0113,
+       0.1097,
+       0.5269,
+       0.2639,
+       0.034,
+       0.0507,
+       0.0034,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 39303,
+      "p5": 0.2138,
+      "p50": 0.3395,
+      "p95": 0.4171,
+      "spread": 0.2034,
+      "dark_frac": 0.0295,
+      "bands": [
+       0.0106,
+       0.0765,
+       0.5588,
+       0.3452,
+       0.0017,
+       0.0071,
+       0.0001,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     9,
+     12
+    ],
+    [
+     12,
+     17
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     23,
+     27
+    ]
+   ],
+   "bounds_control": [
+    -0.49355,
+    -0.34414,
+    0.0,
+    0.74415,
+    0.18396,
+    3.2
+   ],
+   "bounds_split": [
+    -0.49355,
+    -0.34414,
+    0.0,
+    0.74415,
+    0.18396,
+    3.2
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 18,
+    "outside": 9,
+    "total": 27
+   },
+   "man_objs": [
+    "stiltman_body_man",
+    "stiltman_dark_man",
+    "stiltman_bone_man",
+    "stiltman_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  },
+  "hurdleman": {
+   "key": "hurdleman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 93697,
+     "man_seen_px": 80759,
+     "man_seen": 0.8619,
+     "value_creature": {
+      "px": 225346,
+      "p5": 0.1474,
+      "p50": 0.4529,
+      "p95": 0.5583,
+      "spread": 0.4109,
+      "dark_frac": 0.0946,
+      "bands": [
+       0.0396,
+       0.1191,
+       0.1735,
+       0.3406,
+       0.325,
+       0.0005,
+       0.0003,
+       0.0014
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 80759,
+      "p5": 0.1202,
+      "p50": 0.4163,
+      "p95": 0.5625,
+      "spread": 0.4423,
+      "dark_frac": 0.1729,
+      "bands": [
+       0.0604,
+       0.172,
+       0.2133,
+       0.2772,
+       0.2721,
+       0.0003,
+       0.0008,
+       0.0038
+      ],
+      "bands_5pct": 5
+     }
+    },
+    "side": {
+     "man_alone_px": 70843,
+     "man_seen_px": 64403,
+     "man_seen": 0.9091,
+     "value_creature": {
+      "px": 189586,
+      "p5": 0.1163,
+      "p50": 0.4437,
+      "p95": 0.5325,
+      "spread": 0.4162,
+      "dark_frac": 0.2034,
+      "bands": [
+       0.1257,
+       0.1754,
+       0.1179,
+       0.2525,
+       0.3268,
+       0.0007,
+       0.0,
+       0.001
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 64403,
+      "p5": 0.1572,
+      "p50": 0.4079,
+      "p95": 0.5513,
+      "spread": 0.3941,
+      "dark_frac": 0.0784,
+      "bands": [
+       0.0333,
+       0.2294,
+       0.1507,
+       0.3378,
+       0.2456,
+       0.0001,
+       0.0001,
+       0.003
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 89934,
+     "man_seen_px": 60698,
+     "man_seen": 0.6749,
+     "value_creature": {
+      "px": 222769,
+      "p5": 0.1255,
+      "p50": 0.4356,
+      "p95": 0.5669,
+      "spread": 0.4414,
+      "dark_frac": 0.1907,
+      "bands": [
+       0.0478,
+       0.2238,
+       0.1071,
+       0.2549,
+       0.3664,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 60698,
+      "p5": 0.1202,
+      "p50": 0.279,
+      "p95": 0.5512,
+      "spread": 0.431,
+      "dark_frac": 0.2591,
+      "bands": [
+       0.0738,
+       0.3481,
+       0.2142,
+       0.2109,
+       0.153,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 5
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     9
+    ],
+    [
+     9,
+     19
+    ],
+    [
+     19,
+     25
+    ]
+   ],
+   "bounds_control": [
+    -1.55463,
+    -1.95998,
+    0.0,
+    1.42794,
+    1.01031,
+    2.55
+   ],
+   "bounds_split": [
+    -1.55463,
+    -1.95998,
+    0.0,
+    1.42794,
+    1.01031,
+    2.55
+   ],
+   "objs_control": 4,
+   "objs_split": 7,
+   "item_counts": {
+    "inside": 25,
+    "outside": 53,
+    "total": 78
+   },
+   "man_objs": [
+    "hurdleman_body_man",
+    "hurdleman_dark_man",
+    "hurdleman_bone_man",
+    "hurdleman_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  },
+  "tanner": {
+   "key": "tanner",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 40725,
+     "man_seen_px": 25138,
+     "man_seen": 0.6173,
+     "value_creature": {
+      "px": 168207,
+      "p5": 0.2549,
+      "p50": 0.5142,
+      "p95": 0.6647,
+      "spread": 0.4099,
+      "dark_frac": 0.0264,
+      "bands": [
+       0.0013,
+       0.0454,
+       0.1596,
+       0.176,
+       0.4371,
+       0.1663,
+       0.012,
+       0.0023
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 25138,
+      "p5": 0.1712,
+      "p50": 0.4425,
+      "p95": 0.6949,
+      "spread": 0.5238,
+      "dark_frac": 0.1355,
+      "bands": [
+       0.0066,
+       0.1538,
+       0.24,
+       0.1977,
+       0.1607,
+       0.2284,
+       0.004,
+       0.0088
+      ],
+      "bands_5pct": 5
+     }
+    },
+    "side": {
+     "man_alone_px": 35170,
+     "man_seen_px": 20253,
+     "man_seen": 0.5759,
+     "value_creature": {
+      "px": 138067,
+      "p5": 0.1759,
+      "p50": 0.5546,
+      "p95": 0.6658,
+      "spread": 0.4899,
+      "dark_frac": 0.0716,
+      "bands": [
+       0.0084,
+       0.083,
+       0.0724,
+       0.0882,
+       0.6286,
+       0.0849,
+       0.0226,
+       0.0118
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 20253,
+      "p5": 0.1843,
+      "p50": 0.4608,
+      "p95": 0.8902,
+      "spread": 0.7059,
+      "dark_frac": 0.1006,
+      "bands": [
+       0.0216,
+       0.1515,
+       0.1617,
+       0.2413,
+       0.1226,
+       0.1473,
+       0.0805,
+       0.0734
+      ],
+      "bands_5pct": 7
+     }
+    },
+    "back": {
+     "man_alone_px": 42438,
+     "man_seen_px": 40540,
+     "man_seen": 0.9553,
+     "value_creature": {
+      "px": 170597,
+      "p5": 0.2656,
+      "p50": 0.5419,
+      "p95": 0.6439,
+      "spread": 0.3784,
+      "dark_frac": 0.0264,
+      "bands": [
+       0.005,
+       0.0365,
+       0.1239,
+       0.1001,
+       0.5137,
+       0.2049,
+       0.0153,
+       0.0006
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 40540,
+      "p5": 0.2462,
+      "p50": 0.5401,
+      "p95": 0.6705,
+      "spread": 0.4243,
+      "dark_frac": 0.0302,
+      "bands": [
+       0.0094,
+       0.0412,
+       0.2599,
+       0.1286,
+       0.4845,
+       0.0691,
+       0.0072,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     29,
+     36
+    ],
+    [
+     36,
+     41
+    ],
+    [
+     42,
+     44
+    ]
+   ],
+   "bounds_control": [
+    -0.865,
+    -0.879,
+    0.0,
+    1.63064,
+    1.32974,
+    2.75
+   ],
+   "bounds_split": [
+    -0.865,
+    -0.879,
+    0.0,
+    1.63064,
+    1.32974,
+    2.75
+   ],
+   "objs_control": 4,
+   "objs_split": 7,
+   "item_counts": {
+    "inside": 14,
+    "outside": 38,
+    "total": 52
+   },
+   "man_objs": [
+    "tanner_body_man",
+    "tanner_dark_man",
+    "tanner_bone_man",
+    "tanner_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
   }
  },
  "errors": [
   "panner: the man span merged to no object"
  ],
  "ok": false,
- "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`."
+ "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`."
 }

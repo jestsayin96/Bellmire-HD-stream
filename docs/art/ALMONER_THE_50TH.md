@@ -107,3 +107,105 @@ and on the sack neck.
   SAYING SO** rather than inventing an engine term for a piece of art.
 - `almoner.glb` ships with **no `.glb.import` sibling** (same state as
   `snarer_chibi.glb`): a Godot run generates it. Nothing is blocked meanwhile.
+
+---
+
+# PASS 5 - 24 Nov 2026, 03:34-03:5x CT. TWO CHANGES SHIPPED, ONE REFUSED BY ITS OWN RENDER.
+
+The team lead's item, verbatim: *"pass 5 on the almoner, and it is your own fault 1
+plus mine. Two pieces instead of three, bigger, and lift the tray's interior off the
+dark-on-dark you already named. The acceptance test is the FRONT at hero scale."*
+
+## WHAT I CHECKED BEFORE I TOUCHED ANYTHING - MEASURED, NOT REMEMBERED
+
+- **The plan**, off `origin/main` this run, not off the prompt's queue list. The prompt
+  would have had me invent a 51st miniboss; the plan's TAKE-THIS-NEXT block names pass 5.
+- **The miniboss count**, parsed out of `tools/art/minibosses.py` myself: `BUILDERS`
+  carries the set, `renders/art/minibosses/_fit_report.json` judges **52** rows
+  (50 live + the two retired `_chibi`). The prompt's "thirty-three already exist" is
+  six days stale. I did not quote 33, 46 or 51.
+- **The existing body**, before changing it: `almoner()` already exists, is already in
+  `ORDER`, already exports, and already has a register row. Nothing was rebuilt.
+
+## THE THREE CHANGES, EACH MEASURED ON ITS OWN ARM
+
+| arm | the one variable | the picture |
+|---|---|---|
+| `p5a` | **A** - flask gone; sword and axe grown (blade 0.030→0.052 / 0.620→0.780, axe haft 0.023→0.036 / 0.560→0.700, head 0.110→0.175). Plus **A2**: the bar steps back half its length so it straddles the grip and is a crossguard, not a spur | the axe reads as an axe for the first time; the sword has a guard. Tray floor still near-black, so the team lead's fault is untouched |
+| `p5b` | **B** - the tray **floor only** leaves `dark` (0.068) for `body` (0.355). Rails, lips and cleat stay dark | the box stops being a black slab and becomes a container **with an inside** - which is the one thing a shield face can never have. Kit still specks, as expected |
+| shipped | **A + B** | both faults answered, and **they partly fight** - see below |
+| `p5c` | **C** - the two pieces trade ends of the tray | **REFUSED. See below.** |
+
+`renders/art/minibosses/_almoner_p5_tray_ab.png` is the tray at 3x in the first three
+arms, and it carries the finding neither arm shows alone: **B lifts the DARK half of
+the kit and spends contrast off the PALE half.** The axe haft and the sword grip now
+read along their whole length against the pale floor; the blade and the crossguard,
+which were crisp white-on-black in `p5a`, lose most of their value separation. A single
+floor value cannot favour a two-tone kit in both directions. B is still the right ship,
+because the dark half was invisible and the pale half is only reduced.
+
+## CHANGE C AND WHY IT IS IN THE FILE SWITCHED OFF
+
+The pale half's real competitor is not the floor at all - it is **his own forearm**,
+which enters the tray from +X and is the biggest bright mass inside the tray outline
+(my own pass-4 fault 2, which B made worse by closing the arm/floor/blade value gap).
+So I mirrored each piece in x: pale sword to the open -X end, dark axe to the +X end
+where the arm is.
+
+**The sword then read better than it ever has - and the axe swung its PALE HEAD up
+across the man's own hood and face panel.** At hero scale that is an axe struck into
+his head, and it puts a second bright mass beside the single pale panel that carries
+this body's FACING - the exact property the Beadle lost. Trading a legible sword for a
+body that reads as wounded and has no face is not a trade.
+
+**The thing I did not ask before rendering: mirroring a long piece mirrors the END of
+it, not its origin.** The axe's arc rules the +X end, not the sword's position. The
+flag stays, OFF (`ALM_P5C=1` reproduces it), and `renders/art/minibosses/almoner_p5c/`
+keeps the picture, so nobody re-derives this and ships it.
+
+## THE FIT PROOF - I LOOKED AT THE FRONT, THE SIDE AND THE BACK
+
+Shipped build is the **pure default path, no env set**, and its `hero_front.png` is
+byte-identical (`md5 a8b1e5ea…`) to the A+B arm rendered under explicit env - so the
+defaults really are A on, B on, C off.
+
+Register: verdict **GREEN**, 52 rows, errors `[]`, ratio **1.03** (2.52 / 2.45),
+pair width 4.46 m, `fits_frame` true, **3/3 proving views**, `frame_edge` **0 on all
+four borders in all three views**, blank check **150 files / 0 failures**,
+`blind_views` `[]`, `unproved_cells` `[]`, `stale_margin` `[]`.
+Mesh: **4 meshes** (the cap), **927 faces** (down from 1034 - the flask).
+Span **2.59 m** (up from 2.48; the kit got longer), **CORRIDOR-SAFE**, **UNDER-LID**.
+Height **2.52 m**, unchanged.
+
+### THE FAULTS I CAN STILL SEE. SEVEN, AND TWO OF THEM ARE NEW THIS PASS.
+
+1. **NEW - THE BLADE IS PALE-ON-PALE.** Change B's floor took the contrast off the
+   sword. It reads by its shading edges, not by its value. It is better than pass 4
+   and worse than the `p5a` arm, and that is a cost I am naming, not hiding.
+2. **NEW - THE RIGHT THIRD OF THE TRAY IS A PALE MUSH.** Forearm, floor and blade are
+   now three close values stacked in the same place. Pass 4's fault 2 is not fixed; B
+   changed its shape from "the arm out-reads the cargo" to "the arm merges with the
+   tray". **The next pass's one variable should be the ARM, not the kit** - move the
+   carry hand under the tray's near rail so the forearm leaves the tray's mouth.
+3. **THE AXE IS NOW THE WHOLE "PUT IN" HALF.** It reads; the sword half-reads. The
+   mechanic is "your kit, dealt out", and one legible piece carries it thinly.
+4. **FROM THE SIDE THE SACK STILL HIDES THE FAR LEG COMPLETELY** and the sack plus the
+   near leg read as one dark mass - the figure stands on a single post. Pass 4's fault
+   4, unchanged, untouched this pass.
+5. **FROM THE SIDE THE TWO DEALT HANDLES ARE INVISIBLE**, hidden behind the sack body.
+   "Two out" is a front and three-quarter read only. (Pass 4's fault 5 is **improved**:
+   the tray's two pieces now stand as two distinct uprights in the side view, where
+   three small ones were one jumble.)
+6. **THE FIGURE IS STILL NARROW AND LONG-LEGGED** beside the stocky knight. Pass 4's
+   fault 3, unchanged.
+7. **THE TRAY IS STILL THE LARGEST OBJECT ON THE BODY.** B stopped it being the
+   highest-CONTRAST object; it is still the biggest one, and the man is still the
+   smaller half of his own silhouette.
+
+### AND HERE IS WHAT MY HARNESS CANNOT SEE, THIS PASS
+
+`seen: 1.0`, `frame_edge: 0` and the blank check all passed on the **refused** arm too -
+the one with an axe in the man's face. Not one number in the register moved when the
+axe head crossed his hood. **The register measures whether a thing is on screen and
+inside the frame; it has no term for whether the pieces are in the right PLACE on the
+body.** Every verdict in this file is a floor, not a pass.

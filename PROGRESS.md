@@ -17842,3 +17842,7 @@ loader, hooper, iceman - the 4000-pick sweep now draws it); TWITCH_PARSE OK (8 c
 OFFFLOOR_VERDICT OK 0 of 2127 off the floor; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR; TOWNWALK ran,
 in_solid 0, stuck_on_route 0. iceman.glb.import is tracked on laptop (the chat bot's B134 note that
 main lacked it predates the merge that carried it). No Twitch, ZERO BITS.
+## C-194 (24 Nov 2026 15:3x CST, content) - OWN QUEUE, NOTHING UNFED; descend +8, cleared +8, barks.enter +8, barks.lord +6, barks.hurt +8, barks.drink +8
+TAKE THIS NEXT (14:58 CT block, 24 Nov) CONTENT row (15:22): nothing unnamed, nothing unfed (54 bodies, 54 by_key keys, iceman fed in C-193, no 55th committed). Continued own lore tranche as C-192 did. Appended plain strings to existing pools; duplicates checked first (four collisions caught and reworded before write). No arrive/fall-only backfill (nothing reads them).
+VALIDATION OK: all four owned files json.load; only descend (585->593), cleared (570->578), barks.{enter,lord,hurt,drink} grew (+46 lines), plus new top-level `_note_c194`; every other key identical; existing pool entries identical (prefix compare). Edit was textual insertion.
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c194`.

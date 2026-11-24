@@ -1534,11 +1534,51 @@ def main():
     G.purge()
     try:
         hero = rep["hero"] if rep["hero"] else {"h": 1.0}
-        bad, checked = sheet(args.repo, keys, hero, args.name, args.cols,
+        # *** THE MASTER SHEET IS THE WHOLE HOUSE OR IT IS A LIE. ***
+        # FOUND 24 Nov 2026 BY THE TEAM LEAD, BY LOOKING AT THE PICTURE WHILE
+        # EVERY NUMBER IN THIS FILE SAID GREEN. `_hero_scale.png` on main went
+        # 2280x10080 -> 2280x560 (9,393,540 -> 190,336 bytes): ONE cell, the
+        # 54th body, over a canvas two thirds empty, because a `--only iceman`
+        # run passed its OWN one key into sheet() and overwrote the master.
+        # The asymmetry is the proof it was a bug: `_contact_sheet.png` and
+        # `_silhouettes.png` are written by minibossgen.py over all of ORDER
+        # and both kept their 54 rows the same run.
+        # The 20 Nov ratcatcher note already knew this ("a per-key run writes
+        # _hero_scale.png out of its own keys alone") and the answer then was
+        # a SECOND `--sheet` pass by hand. A fix that depends on the operator
+        # remembering is not a fix - I forgot it at 14:03 and shipped a gutted
+        # sheet with a GREEN register beside it. So the master name now covers
+        # list(M.ORDER) no matter what `--only` asked for. sheet() only READS
+        # view PNGs off disk, so a per-key render still produces the whole
+        # house; a key with no views on disk shows up as `missing` in `bad`,
+        # which is the honest outcome and was previously INVISIBLE.
+        # A sheet asked for under its own --name keeps the caller's keys: that
+        # is a deliberate close-up, not the house register.
+        sheet_keys = list(M.ORDER) if args.name == "_hero_scale" else list(keys)
+        bad, checked = sheet(args.repo, sheet_keys, hero, args.name, args.cols,
                              args.tag, rep)
-        rep["blank_check"] = {"files": len(checked), "failures": [list(b) for b in bad]}
+        rep["blank_check"] = {"files": len(checked),
+                              "failures": [list(b) for b in bad],
+                              # say what was covered, or "0 failures" reads the
+                              # same whether 162 files passed or 3 were opened.
+                              "cells": len(sheet_keys),
+                              "expected_files": len(sheet_keys) * 3,
+                              "scope": ("whole_house"
+                                        if args.name == "_hero_scale" else "named_subset")}
         if bad:
             rep["ok"] = False
+        # *** RED ON EMPTY. *** A blank check over zero files has always read
+        # identical to a blank check that passed. Today's shipped register is
+        # the proof: `blank_check.files` was 3 with 0 failures beside a verdict
+        # covering 56 rows, and nothing went red. Same fault family as the HUD's
+        # eight gates with no denominator.
+        if len(checked) < len(sheet_keys) * 3:
+            rep["ok"] = False
+            rep["errors"].append(
+                "blank_check: opened %d view PNGs but the sheet has %d cells, "
+                "so %d files were never looked at. A check that skipped files "
+                "must not report green." % (len(checked), len(sheet_keys),
+                                            len(sheet_keys) * 3 - len(checked)))
     except Exception:
         import traceback
         rep["ok"] = False

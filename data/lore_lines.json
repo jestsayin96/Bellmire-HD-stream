@@ -14278,6 +14278,44 @@
           "Nightwork is down. The shutter is open and nobody has to close it.",
           "The cellar is clear. Go on up."
         ]
+      },
+      "iceman": {
+        "arrive": [
+          "The walls are sweating. It is getting colder, and the cold has a shape.",
+          "A squat man, bent double under a rack of cut blocks, tongs in the near hand.",
+          "Four pale blocks stacked up a dark frame, and a fifth hanging in the tongs.",
+          "Count them. You can do it from the door.",
+          "He is not coming for anyone. He is carrying.",
+          "While a block stands, the room is cold and everything in it is slow. Him as well.",
+          "The blocks go one at a time, in their own time. Nothing done to them hurries one.",
+          "Every round of cold is a round you were given. Spend it.",
+          "Wet wool, a good frame, boots mended at the toe. The ice was cut this morning and it shows."
+        ],
+        "act": [
+          "A block lets go of the stack. {name} feels the room get no warmer.",
+          "{name} swings and the arm comes through slow. So does everyone's.",
+          "The rack creaks. {name} counts what is left on it.",
+          "{name} breathes out and can see it.",
+          "{name} reaches the tongs and the cold is already there.",
+          "Four blocks. Then three. {name} had better be somewhere by then.",
+          "The fifth swings in the tongs. {name} watches it and not the man."
+        ],
+        "broken": [
+          "The last block goes. The room starts to thaw.",
+          "He sets the tongs down. He is not carrying any more.",
+          "The cold is off the room. He turns round.",
+          "Nothing took the stack down. It ran out, and now he is yours."
+        ],
+        "fall": [
+          "Hoarback is down. The rack comes off his back and the frame lies still.",
+          "The tongs are on the floor. There is nothing in them.",
+          "He carried it down here so the cellars would keep.",
+          "Water on the flags, going warm. That is all that is left of the stack.",
+          "A man with a rack, a pair of tongs and a day's cutting. That was what he had.",
+          "Nobody thanked him. The meat kept.",
+          "Hoarback is down. You can feel your hands again.",
+          "The cold lifts. Go on up."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14317,7 +14355,8 @@
     "_note_c182": "C-182: almoner (50th miniboss, Dolehand, shrine, wear 0.35, the dole dish: it takes nothing and wounds no one, every delver puts in and it gives back wrong, so while it stands each hero swings on another trade's weapon dice; the party total is unchanged, only the order is useless) gets arrive x9, act x7, broken x4, fall x8 - the roper shape. Written against almoner.glb on merged main. The lines say SWING and TRADE and WEIGHT and never name a per-hero equipped item, because the engine keys weapon dice on h['class'] only (art dropped the armour-on-the-archer half and so does this). No {name} in arrive or fall. Feed reads 50 against Delve.MB_NAME 49 until the game build adds the name row; that gap is expected. CODE WIRING: Delve.MB_NAME almoner -> Dolehand, bestiary.gd almoner (static), MB_FIT almoner, then republish elite count 49 -> 50. Expected zero-hit key: DO NOT WIRE.",
     "_note_c187": "C-187: panner (51st miniboss, Onceround, confection, 2.26 m, wear 0.14, the first body that is SHUT UNTIL THE PAN COMES ROUND: a closed drum on a crank with one opening that swings past once a turn; blows on the shut wall do nothing at all, so the party's job is to hold its blows together. Art body panner.glb committed and on origin/main and origin/art, blob 33af0ae1, 92,472 B, and canon row at tools/art/minibosses.py. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no machinery operator is named because art removed the man at pass 4 and the crank turns itself. Lines name no per-hero item. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE THIS KEY. Cascade order: this feed row first, then game build adds Delve.MB_NAME panner -> Onceround; feed 51 vs MB_NAME 50 is the expected gap until then.",
     "_note_c189": "C-189: stiltman (52nd miniboss, Downfast, fogbound, 3.20 m, ALREADY DOWN ONE: a man on stilts who has lost one, a crutch where the leg should be). The stilt that is left is breakable and breaking it works - his reach over the front line is gone and he is faster at your height; leaving it, he strikes down past the line into whoever is behind. The PARTY owns the decision and both ways cost; the lines name both and favour neither. Art body stiltman.glb tracked on BOTH origin/main and origin/art, blob 62aa562c, 71,716 B (ref checked via git ls-tree, not a worktree); canon row tools/art/minibosses.py:18749. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no per-hero item named. Zero-hit by design. NO LANE IS TO WIRE THIS KEY. Cascade: this row first, then game build (11:07) adds Delve.MB_NAME stiltman -> Downfast, MB_FIT stiltman 1.31, THEME_MINIBOSS_MORE fogbound += stiltman; feed 52 vs MB_NAME 51 is the expected transient until then.",
-    "_note_c190": "C-190: nightman feed row (Nightwork, the 53rd, prison). Canon: IT WORKS IN THE DARK AND WAITS IN THE LIGHT. Lamp shutter open: it stands dead still and cannot be hurt. Shut: it can be killed and it works. Lines are mechanic-neutral on the party's choice; 'broken' = shutter open (the trade). Expected zero-hit key."
+    "_note_c190": "C-190: nightman feed row (Nightwork, the 53rd, prison). Canon: IT WORKS IN THE DARK AND WAITS IN THE LIGHT. Lamp shutter open: it stands dead still and cannot be hurt. Shut: it can be killed and it works. Lines are mechanic-neutral on the party's choice; 'broken' = shutter open (the trade). Expected zero-hit key.",
+    "_note_c193": "C-193: iceman feed row (Hoarback, the 54th, mess). Canon from tools/art/minibosses.py CANON row: IT CARRIES THE COLD AND THE COLD IS ON A COUNT. Four blocks on the rack plus a fifth in the tongs; while a block stands the room is cold and all in it work slow, him included; blocks go one at a time in their own time, nothing the party does takes one off; when the last goes the room thaws and he sets the tongs down and turns round. No choice for the party to make but how to spend the given rounds; the lines name that and favour no tactic. 'broken' = the thaw (last block gone), not a hit landing - there is no weakness to strike. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body iceman.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

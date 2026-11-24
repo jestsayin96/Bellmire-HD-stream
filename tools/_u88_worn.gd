@@ -7,6 +7,7 @@ class FakeSheet extends Node:
 var _f := 0
 var _step := 0
 var _bad := 0
+var _n := 0  # U154: rows walked
 var _out := ""
 var _layer: CanvasLayer
 var _sat: Node
@@ -50,6 +51,7 @@ func _process(_d: float) -> bool:
 	if _f % 40 == 10 and _sat != null:
 		var p := _pips()
 		print("ROWS @", sc, " ", p)
+		_n += p.size()
 		var want := {"Scarglass Ring  (ring)": true, "Mender Wraps  (gloves)": true}
 		for k in p:
 			var low := String(k).to_lower()
@@ -65,6 +67,7 @@ func _process(_d: float) -> bool:
 		_step += 1
 		_sat = null
 		if _step >= 3:
-			print("U88_WORN ", "OK" if _bad == 0 else "FAIL %d" % _bad)
+			if _n == 0: print("U88_WORN NO VERDICT - 0 rows walked"); _bad += 1
+			print("U88_WORN ", "OK" if _bad == 0 else "FAIL %d" % _bad, " rows=", _n)
 			quit(0 if _bad == 0 else 1)
 	return false

@@ -1,0 +1,34 @@
+THE WHOLE-HOUSE SHEET GUARD - RED-PROVED 24 Nov 2026 14:4x CT (art lane).
+
+THE DEFECT (found by the team lead by LOOKING, while every number said GREEN):
+  _hero_scale.png on main was 2280x10080 and became 2280x560 - ONE cell over a
+  canvas two thirds empty - because the 14:03 `--only iceman` run passed its own
+  single key into sheet() and overwrote the master. _contact_sheet.png and
+  _silhouettes.png kept all 54 rows the same run because minibossgen.py writes
+  them over all of ORDER; that asymmetry is the proof it was a bug.
+  THE SAME ROOT CAUSE SHRANK THE CHECK: that run's blank_check opened 3 of 162
+  view PNGs and reported 0 failures beside a verdict covering 56 rows.
+  The 20 Nov ratcatcher note already knew the cause and the answer then was a
+  second `--sheet` pass BY HAND. I forgot it. A fix that needs the operator to
+  remember is not a fix.
+
+THE FIX (tools/art/minibossfit.py, the sheet() call site):
+  the master name `_hero_scale` now covers list(M.ORDER) whatever `--only` asked
+  for; a sheet asked for under its own --name keeps the caller's keys.
+  blank_check now reports cells/expected_files/scope, and RED ON EMPTY: a check
+  that opened fewer files than the sheet has cells cannot report green.
+
+AFTER: 2280x10080, 18 rows x 3 cols, 54 of 54 slots carry a body (lowest
+  non-background count 66,612 px), 0 empty slots. blank_check 162 files /
+  162 expected / 0 failures / scope whole_house. verdict GREEN, ok true,
+  pairs 56, no key lost or gained against the pre-run register.
+
+RED PROOF (the guard watched to fire, then restored):
+  iceman/hero_back.png moved aside; `--sheet --only iceman --name _redproof`
+  -> ok false, verdict RED,
+     blank {files 2, expected_files 3, cells 1, scope named_subset,
+            failures [[.../iceman/hero_back.png, "missing"]]}
+     errors += "blank_check: opened 2 view PNGs but the sheet has 1 cells, so 1
+                files were never looked at. A check that skipped files must not
+                report green."
+  file restored; _hero_scale.png byte-size unchanged by the proof run.

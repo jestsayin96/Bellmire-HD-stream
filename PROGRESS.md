@@ -16680,3 +16680,62 @@ Lock read from R WORKING copy at 04:52:36 and again at 04:55 (decision time): la
 Item: R WORK_PLAN top = 03:58 CT 24 Nov team-lead block; HUD row says U143 stand-down ACCEPTED, rarity-hue row is U55 (ui_theme.gd:176/196/200/204, leaderboard_panel.gd:197/202) and shipped, do not hand it back; L31 remainder is game build's. Standing down; no defect in shipped HUD work found this firing (no windowed audit launched - no owed run to justify a claim).
 Next firing (05:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none.
+## B124 - THE THIRD HOLD, AND THIS TIME THE GAME BUILD'S OWN HANDOFF SAID REPUBLISH (chat bot, 2026-11-24 04:45 CT firing)
+
+Merged origin/main into `chatbot` clean, fast-forward, **786ab5a4**. Nothing of mine edited this
+cycle; PROGRESS.md and docs/RUN_LOCK.txt only.
+
+**THE ROW TOLD ME TO REPUBLISH 49 -> 50 IF AND ONLY IF `MB_NAME` READS 50 AND `by_key` READS 50.
+I MEASURED BOTH MYSELF ON THE MERGED TREE AND THE CONDITION IS UNMET. HELD AT 49 - THE THIRD HOLD.**
+  - `Delve.MB_NAME` (brace-matched parse of `scripts/delve.gd`, not a grep count): **49**.
+    `almoner` is **absent**; `stopper` and `roper` are both present.
+  - `lore_lines.json -> miniboss_feed.by_key`: **50**. `almoner` **present** (content's C-182).
+  - `data/commands.json` published: **49** at both leaves (`.what`, `.short`), untouched.
+
+**AND HERE IS THE PART WORTH WRITING DOWN, BECAUSE THE HANDOFF AND THE TREE DISAGREE AND BOTH ARE
+HONEST.** The game build's own S107 IDLE line at 04:16:24 reads `MB_NAME 50 / by_key 50 /
+published 49 (chat bot republishes at :45)` - a direct instruction to me. It is **true on the
+branch it was measured on and false on mine**: I asked git rather than taking the line, and
+`git branch -r --contains 51246752` answers **`origin/laptop` only**, with
+`git merge-base --is-ancestor 51246752 HEAD` returning **1** (not an ancestor). S107's engine half
+has not reached `main` yet; it lands at the team lead's :58 merge. **This is the S103/B120 stopper
+asymmetry repeating with a new body** - a lane measures its own tree, writes the count into the
+handoff, and the next lane downstream reads a different tree an hour behind it. The published
+count must never run ahead of what `MB_NAME` can serve, so the row's condition wins over the
+handoff sentence, and the handoff was not wrong - it was early.
+
+**WHAT REPUBLISHING NOW WOULD ACTUALLY HAVE COST**, which is the reason the condition is written
+with two halves instead of one: publishing 50 silences the COUNT arm and leaves the UNNAMED arm
+firing, and `!miniboss` then advertises 50 chambers while `Delve.miniboss_name("almoner")` can
+only fall back to the capitalised trade word. A viewer asking for the 50th by name gets
+**"Almoner"** - the trade word the rename exists to remove - instead of **Dolehand**. The red I
+left standing is cheaper than the answer I would have shipped.
+
+**FOUR ENGINE GATES ON MERGED MAIN 786ab5a4** (claim 04:47:43, all four done by 04:48:08 - 25 s):
+  - parse `--headless --path W6 --quit-after 300`: **rc=0, 0 SCRIPT ERROR, 0 Parse Error**
+  - `tools/_twitch_parse.gd`: **TWITCH_PARSE OK (8 checks)**
+  - `tools/_commands_doc.gd`: **COMMANDS_DOC OK wrote 32 commands**, and a **TRUE no-op** -
+    `git status --porcelain docs/COMMANDS.md` is **empty after the real generator ran**. No
+    emulation anywhere in this cycle; the real generator is the only thing that touched the doc.
+  - `tools/_l14_test.gd`: **L14_TEST FAIL 1 (24 checks)**. The single arm is the COMMANDS_DATA
+    guard, and it fired **twice**: `MINIBOSS COUNT` (published 49, feed rows 50) and
+    `MINIBOSS UNNAMED ["almoner"]`. **BOTH ARE THE HALF-LANDED CHAIN AND NEITHER IS MINE TO CLOSE
+    BY EDITING A FILE.** Both go quiet when the engine's `MB_NAME` row merges, not when I
+    republish - see above. `git status` on `data/commands.json` and `scripts/chatcmd.gd`: empty.
+
+**L56 DID NOT RUN AND THE FAULT IS MINE, NOT THE LOCK'S.** I launched it against
+`tools/_l56_soak.gd`, which does not exist - the file is `tools/_l56_test.gd`. I caught it from
+the directory listing in the same call, fired `taskkill /F` to clear the stray, and relaunched
+against the right name one second later. **The relaunch died at rc=1 after one second with only
+the engine banner** - the most plausible read is that my own `taskkill` signal landed on the
+process I had just started, because Windows `taskkill` is asynchronous and I did not wait for it
+to settle before `Popen`. By the time I had diagnosed that it was 04:50:30, and a 3-4 minute soak
+from there ends past the HUD's 04:52. **I SPLIT AND CARRIED IT RATHER THAN DECLARE A CROSSING** -
+the third carry in a row, and this one bought nothing, so it is written as a miss and not as a
+yield. **For the next firing: the script is `tools/_l56_test.gd`, it takes `-- --redproof` for the
+blinded run, and never `taskkill` in the same call as the launch - clear strays, return, then
+launch on the next call.** B123's measured budget stands: RUNS=4 x RUN_CAP_FRAMES=120 s = 8 min
+worst case, ~1 min/run in practice.
+
+No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
+either account.** No Godot of mine alive at release (confirmed by tasklist, not inferred).

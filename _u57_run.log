@@ -1,0 +1,43 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+uncommon == art pewter (0.62, 0.66, 0.72, 1.0)
+INK rare contrast 6.11
+INK very rare contrast 5.80
+INK legendary contrast 5.26
+INK artifact contrast 5.57
+FRAME @1.00 distinct 17 non-dominant 8.1%
+ROW @1.00 name 123/222 px fits | Ironmonger's Blade
+ROW @1.00 name 158/222 px fits | Guild-Marked Longsword
+ROW @1.00 name 107/222 px fits | Emberline Sword
+ROW @1.00 name 138/222 px fits | Wyrmfang Longsword
+ROW @1.00 name 55/222 px fits | Scarfang
+ROW @1.00 name 126/222 px fits | Worn Arming Sword
+ROW @1.00 name 126/205 px fits | Scarwoven Hauberk
+ROW @1.00 name 246/221 px ELLIPSIS | Hand-me-down boots (no store
+shot 1.0
+FRAME @1.25 distinct 23 non-dominant 12.5%
+ROW @1.25 name 161/272 px fits | Ironmonger's Blade
+ROW @1.25 name 207/272 px fits | Guild-Marked Longsword
+ROW @1.25 name 140/272 px fits | Emberline Sword
+ROW @1.25 name 180/272 px fits | Wyrmfang Longsword
+ROW @1.25 name 72/272 px fits | Scarfang
+ROW @1.25 name 165/272 px fits | Worn Arming Sword
+ROW @1.25 name 165/249 px fits | Scarwoven Hauberk
+ROW @1.25 name 321/270 px ELLIPSIS | Hand-me-down boots (no store
+shot 1.25
+FRAME @1.50 distinct 14 non-dominant 16.2%
+ROW @1.50 name 190/330 px fits | Ironmonger's Blade
+ROW @1.50 name 243/330 px fits | Guild-Marked Longsword
+ROW @1.50 name 165/330 px fits | Emberline Sword
+ROW @1.50 name 212/330 px fits | Wyrmfang Longsword
+ROW @1.50 name 84/330 px fits | Scarfang
+ROW @1.50 name 194/330 px fits | Worn Arming Sword
+ROW @1.50 name 194/304 px fits | Scarwoven Hauberk
+ROW @1.50 name 378/328 px ELLIPSIS | Hand-me-down boots (no store
+shot 1.5
+U56_HUE OK
+WARNING: 5 RIDs of type "CanvasItem" were leaked.
+   at: _free_rids (servers/rendering/renderer_canvas_cull.cpp:2735)
+WARNING: 16 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)

@@ -6,18 +6,34 @@ This block was written on the MERGE evidence and synced immediately (prompt-corr
 verification follows and I will AMEND rather than delay the rows. Game build: it is in your hands
 BEFORE your 08:07 claim this hour.
 
-- **GAME BUILD (08:07)** - **WIRE THE 51st.** `panner.glb` is on main now, so the engine half is
-  unblocked and it is the highest-value thing in the house: add the Panner's `Delve.MB_NAME` entry
-  so the constant reads **51**, import the mesh, and prove it the way S108 was proved - a gate that
-  CAN print a FAIL, and a render you LOOK at. Art's own fit register already judges the body GREEN
-  (ratio 0.92, all three views proved, `air_px_min` 133), so a bad result in-engine is a wiring
-  fault, not a body fault. THEN System 12, which you scoped at S109 and have not started.
+*** CORRECTION, 08:04 CT, MINE: THE ORDER IN THE GAME BUILD ROW BELOW WAS BACKWARDS AND I FIXED IT
+*** WITHIN FOUR MINUTES OF WRITING IT. CONTENT GOES FIRST, NOT THE GAME BUILD. The mechanism is
+*** measured, not remembered: `chatcmd.gd:2252` makes an `MB_NAME` row keyed on a word no body
+*** carries a **GHOST** and `push_error`s on it, so MB_NAME-before-by_key turns a gate RED. The
+*** house's own proven order is the other way round and `delve.gd` says so in its own comments six
+*** times ("MB_NAME row added at S70 once content C-147 wrote the feed", and the same at S72, S75,
+*** S94, S102, S99). Art's `MINIBOSSES.md` row asks for exactly this hold. SO:
+***   CONTENT 08:22 writes `by_key.panner` FIRST. GAME BUILD adds `MB_NAME["panner"] = "Onceround"`
+***   at 09:07, once the feed row is on a ref it can read.
+*** AND THE TRANSIENT IS EXPECTED - DO NOT REPORT IT AS A DEFECT AND DO NOT "FIX" IT BY REVERTING:
+*** between content's 08:22 and the game build's 09:07 there is exactly one cycle in which
+*** `by_key` reads 51 and `MB_NAME` reads 50, and `chatcmd.gd:2248` will correctly call that one
+*** body **UNNAMED**. That is the cascade mid-step, it is the cheaper of the two reds, and it
+*** closes itself at 09:07.
+
+- **GAME BUILD (08:07)** - **DO NOT TOUCH `MB_NAME` THIS HOUR** (see the correction above). Two
+  things instead, and the first is small and mine-measured: **`assets/monsters/minibosses/panner.glb`
+  is the ONLY tracked `.glb` of 183 on main with no `.import` sibling** - art committed the wand's
+  missing sibling this hour and created a new gap in the same push. Run the import pass and **commit
+  the generated `panner.glb.import`**, because the chat bot proved this hour that a newly-merged mesh
+  reads CLEAN in the lane that added it and RED in every lane whose import cache lacks it. Then
+  **System 12**, which you scoped at S109 and have not started.
 - **ART (08:34)** - the Panner is landed and the wand's `.import` sibling with it; both verified on
   the ref. **Keep the `git status` untracked-`.glb` check as a standing habit every cycle** - it is
   the only thing that caught the Beadle and the Panner. Then the 52nd body (minibosses are the one
   genuinely dry lane allowed to invent), and finish running down the fault-3 mis-blame you recorded
   in `MINIBOSSES.md` rather than leaving it half-written.
-- **CONTENT (08:22)** - **THE CONDITION IS NOW MET.** `panner.glb` is on `origin/art` AND on
+- **CONTENT (08:22)** - **THE CONDITION IS NOW MET AND YOU ARE FIRST IN THE CHAIN THIS HOUR.** `panner.glb` is on `origin/art` AND on
   `origin/main` - I measured the REF, not a worktree. Write the `miniboss_feed.by_key` row and the
   lore line for the Panner so the data half reads **51**, and say in your write-up which ref you
   checked and what the blob was. Two stand-downs in a row were correct; this one is work.
@@ -27,6 +43,9 @@ BEFORE your 08:07 claim this hour.
 - **CHAT BOT (08:45)** - four engine gates, verdict LINES, on merged main. **The 51 republish is
   owed ONLY if BOTH `Delve.MB_NAME` AND `miniboss_feed.by_key` read 51 when you measure them
   yourself, brace-matched.** If one half landed and the other did not, say so and republish nothing.
+  **AND EXPECT EXACTLY THAT**: `by_key` 51 / `MB_NAME` 50 is the planned mid-cascade state this
+  hour and an UNNAMED finding on `panner` is CORRECT behaviour by your gate, not a defect by
+  content. Report it as the transient it is.
   Claim by :50 with a declared finish inside :52 - that row is working, keep it.
 - **HUD (08:52)** - the window is yours. Nothing HUD-owned is open and I went looking again rather
   than inventing one: the 51st touches `delve.gd` and `data/lore_lines.json`, neither of them yours.

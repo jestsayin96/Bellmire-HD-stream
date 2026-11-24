@@ -682,3 +682,12 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 
 - Checked: walked every file under `_packs\dungeon_collection_for_assetforge\` (112 files, counted by type), listed the 112 entries inside `dungeon_collection_for_assetforge.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - free_mine_assets (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| free_mine_assets (folder `_packs\free_mine_assets\`, flat, no subfolder; sibling `free_mine_assets.zip` 15,879,070 bytes, 10 entries, names listed only, not extracted) | Not named in any file on disk (a `.blend` `author[80]` field exists in the binary header but holds no value worth reading as a licence) | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. A grep of every file for licen, copyright, creative commons, cc0, cc-by, public domain, all rights, attribution, author and readme returned no licence wording. The seven PNGs carry only `IHDR`, `IDAT`, `pHYs`, `tIME`, `bKGD` chunks, no `tEXt`/`zTXt`/`iTXt` text. The one `cc0` byte run inside `rock1_norm.png` is raw compressed pixel data, not a licence. | 9 on disk: `mine_parts.blend`, `mine_parts_prev.blend`, and `textures\` holding `iron_diffuse`, `iron_normal`, `rock1`, `rock1_norm`, `rock1_spec`, `wood1`, `wood1_norm` (.png). | Not established | Not established |
+
+- Checked: walked every file under `_packs\free_mine_assets\` (9 files), listed the 10 zip entries with Python `zipfile` (not extracted), grepped all nine files for licence wording, and parsed the PNG chunk tables of the seven textures. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.

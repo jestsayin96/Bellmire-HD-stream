@@ -17823,3 +17823,69 @@ the container's (B130's four-minute-fast claim is the reason).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## B135 - 24 Nov 2026, 15:45 CT (chat bot) - THE PREDICTION WAS RIGHT AND I CHECKED IT ANYWAY: FOUR GATES GREEN, THE FIFTH THE INSTRUCTED ONE-KEY RED, PUBLISHED NOTHING
+ITEM: the team lead's 14:58 CHAT BOT row - "expect nothing to be owed at 15:45, measure both halves
+anyway, and if they disagree publish NOTHING and say so". I did not take the prediction on trust.
+It is right in every particular, and the measurement is below rather than a citation of the row.
+TREE: merged main `bc92b4e6`; my HEAD after ff of origin/chatbot (`74250c46`) then merge of main =
+`84c3d284`. 21 files, 0 conflict markers. Nothing of mine edited - `git status` on
+scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md is EMPTY both before and after the
+gates, which is also the COMMANDS_DOC no-op proof.
+
+BOTH HALVES AND THE PUBLISHED THIRD, MEASURED BY ME BEFORE I WROTE THE CLAIM LINE, comments
+STRIPPED BEFORE SPLITTING, string-aware, brace-matched and ANCHORED ON `const MB_NAME :=`
+(delve.gd:437 this merge, up one line from 436 last hour):
+  - `Delve.MB_NAME`                 = **53** keys, 0 dupes, `iceman` OUT
+  - `miniboss_feed.by_key`          = **54** keys, `iceman` IN
+  - `data/commands.json` publishes  = **53**, at EXACTLY two leaves (`commands.miniboss.short`
+    and `commands.miniboss.what`); 18000 bytes, 8 top keys, `commands.armoury.cost`
+    ("50 / 150 / 400 / 1000 gold by tier") matched my count regex and is NOT a count - named here
+    so the next run does not mistake it for a third leaf.
+  - drift BOTH directions: `by_key - MB_NAME` = `['iceman']` EXACTLY; `MB_NAME - by_key` = `[]`.
+THE HALVES DISAGREE 53 / 54, so the row's own unmet branch applies: I PUBLISHED NOTHING.
+THE 53 -> 54 REPUBLISH IS THE 16:45 RUN'S.
+
+WHY, READ OFF BOTH REFS AND NOT ASSUMED: the engine's S116 naming (`"iceman": "Hoarback"` in
+MB_NAME) is on `origin/laptop` **72eec323** and is NOT on `origin/main` **bc92b4e6**. I ran the same
+findstr against both: laptop prints the MB_NAME row; main prints only the `MB_FIT.iceman` 1.27 line,
+whose own comment still reads "NO MB_NAME row yet". That is the same one-merge lag this lane has now
+diagnosed four hours running, and the team lead has recorded it as its own rather than this lane's.
+
+FIVE GATES, behind a `--headless --import` pass run FIRST (all five finished 48.1 s after launch,
+so NOTHING was split or carried):
+| IMPORT | rc=0, 0 ERROR, 1047 reimport steps. One WARNING, pre-existing and not mine: missing .uid
+  for `res://tools/_b11_muster.gd`, re-created from cache |
+| PARSE (`--quit-after 300`) | rc=0, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error, 8 pre-existing
+  invalid-UID ext_resource WARNINGs on asset-kit .tres (MI_Cobble and siblings) |
+| TWITCH_PARSE | OK, 8 checks, 8 PASS. rc=0. The 2 ERROR lines in its stderr are MY OWN guard
+  firing the instructed transient at load, counted here and not hidden |
+| COMMANDS_DOC | OK wrote 32 commands, AND A TRUE NO-OP - `git status` on docs/COMMANDS.md is empty
+  AFTER the real generator ran, which is correct because I changed no data. Same 2 guard ERRORs |
+| L14_TEST | FAIL 1 of 24, AND THAT IS THE CORRECT ANSWER. The single FAIL is the clean-load
+  assertion ("no COMMANDS_DATA guard arm fired on the load"), and the two arms that fired are
+  MINIBOSS COUNT (published 53, feed rows 54) and MINIBOSS UNNAMED (`["iceman"]`) - the exact pair
+  the 14:58 row told this lane NOT to fix. BOTH COMMANDS.md drift arms PASS: 32 rows, unpublished
+  `[]`, stale `[]`, checked both directions |
+
+THE IMPORT OBSTRUCTION DID NOT RECUR, AND THIS IS THE FIFTH HOUR IT HAS HAD TO BE SWEPT: 1047
+untracked regenerable `*.import` files left by this run's own pass were removed before this commit.
+PROVED SAFE SET-WISE, NOT FILE-BY-FILE AS BEFORE: I intersected git's own untracked list with
+`git ls-files` and the overlap was `[]` - zero of the 1047 is tracked - then deleted only that set.
+Nothing tracked was touched. `iceman.glb.import` came in TRACKED on this merge (the engine lane
+committed it at S115), so unlike nightman last hour there was nothing of the 54th for me to generate.
+
+NOT MINE AND STILL OPEN, REPORTED A THIRD HOUR: `web/icons/items/hat/turbary_hood.webp` is 0 bytes
+on main and can never load. The fix is merged on `origin/hub` (9af5f21a) and the team lead's 14:58
+block recommends the supervisor AUTHORISE hub publish 7. It fails no gate of mine, which is exactly
+why it needs saying out loud again.
+
+ONE THING I DID BETTER THAN LAST HOUR AND WILL NAME, BECAUSE THIS LANE HAS GOT FOUR HAND-ROLLED
+COUNTS WRONG IN SIX HOURS: I hand-rolled NO count that a gate already answers. The 32 is
+COMMANDS_DOC's own number, the 8 is TWITCH_PARSE's, the 24 is L14_TEST's. The only numbers I
+computed myself are the three the republish decision turns on, and each was computed off the file
+rather than off a previous run's prose.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.
+Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.

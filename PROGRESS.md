@@ -17743,3 +17743,11 @@ S115_ICEMAN OK 7 (mess draws [cook, loader, hooper], iceman arrive lines false, 
 (by_key 53, MB_FIT base 54, glb stems 56); S107_GATE OK 12; TWITCH_PARSE OK (8 checks);
 OFFFLOOR_VERDICT OK 0 of 1923 samples off the floor; _townwalk rc=0, 0 SCRIPT ERROR; DELVE_TEST OK ran 9001 frames,
 floor reached 2. No live Twitch test, 0 bits, nothing redeemed or cheered.
+
+## C-193 (24 Nov 2026 14:3x CST, content) - WROTE miniboss_feed.by_key.iceman (HOARBACK, THE 54th); FEED 53 -> 54
+ITEM: WORK_PLAN TAKE THIS NEXT, CONTENT (14:22) - feed the 54th, same shape the 53rd got. The 25 arrive/fall-only rows were NOT backfilled, as ruled.
+BODY CHECK: iceman.glb is on main (arrived in this run's merge of origin/main); canon row read in tools/art/minibosses.py (Hoarback, 3.12 m, mess).
+ADDED: by_key.iceman = arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; plus _note_c193 (expected zero-hit key).
+CANON: the cold is on a count. Four blocks on the rack and a fifth in the tongs; nothing the party does removes one. 'broken' is the thaw, not a hit landing - there is no weakness.
+VALIDATION OK: lore_lines.json parses; every pre-existing key equal to pre-edit copy; by_key 53 -> 54; only new keys are by_key.iceman and _note_c193.
+CODE WIRING: none new - by_key.iceman is the row the game build's MB_NAME 'iceman' entry reads. Published count (commands.json) 53 -> 54 remains the chat bot's, after main carries the name.

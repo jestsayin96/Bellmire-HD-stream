@@ -9076,45 +9076,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 47840,
-      "vis": 47840,
-      "delta": 55128,
+      "alone": 47913,
+      "vis": 47913,
+      "delta": 55240,
       "seen": 1.0
      },
      "hero": {
       "alone": 43683,
       "vis": 43683,
-      "delta": 57584,
+      "delta": 57627,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 29166,
-      "vis": 29166,
-      "delta": 37283,
+      "alone": 30321,
+      "vis": 30321,
+      "delta": 38392,
       "seen": 1.0
      },
      "hero": {
       "alone": 37788,
       "vis": 37788,
-      "delta": 43630,
+      "delta": 43648,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 46690,
-      "vis": 46690,
-      "delta": 58786,
+      "alone": 46716,
+      "vis": 46716,
+      "delta": 58795,
       "seen": 1.0
      },
      "hero": {
       "alone": 44021,
       "vis": 44021,
-      "delta": 50471,
+      "delta": 50460,
       "seen": 1.0
      },
      "proves": true
@@ -9143,11 +9143,11 @@
    "ground": {
     "front": {
      "plane_px": 228000,
-     "shadow_px": 4669,
-     "mean": 0.457,
+     "shadow_px": 4714,
+     "mean": 0.4553,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 3115,
+     "rim_filled_px": 3099,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9157,11 +9157,11 @@
     },
     "side": {
      "plane_px": 234840,
-     "shadow_px": 3917,
-     "mean": 0.4471,
+     "shadow_px": 3928,
+     "mean": 0.4319,
      "max": 0.7077,
      "error": null,
-     "rim_filled_px": 2770,
+     "rim_filled_px": 2760,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -9171,11 +9171,11 @@
     },
     "back": {
      "plane_px": 228000,
-     "shadow_px": 4361,
-     "mean": 0.4702,
+     "shadow_px": 4352,
+     "mean": 0.4715,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 3715,
+     "rim_filled_px": 3735,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,

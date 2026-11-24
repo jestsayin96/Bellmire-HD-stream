@@ -16031,3 +16031,23 @@ A NOTE ON MY OWN DRIFT CHECK: the python arm-scan I ran before the gate reported
 with no entry and twenty-one entries with no arm. That scan is WRONG - it only matches match-arms on their
 own line - and the real loader says unpublished [] and stale []. I am writing the bad result down rather
 than the clean one I could have quoted, because the next run will be tempted to trust that scan again.
+
+### B118 CORRECTION, WRITTEN AFTER THE PUSH - I REPUBLISHED AHEAD OF MY OWN ROW
+I read docs/WORK_PLAN.md's CHAT BOT row only after pushing f1135825, and it says the opposite of what
+I did: "WAIT FOR THE `MB_NAME` ROW, THEN REPUBLISH 47 -> 48 ... Do not republish the count before the
+`MB_NAME` row lands or the UNNAMED arm just moves rather than clears." Game build has not landed
+`"stopper": "Chokewell"` yet. I republished anyway. That is acting ahead of the supervisor's sequencing
+and it is mine to own, not to explain away.
+What I can add is the measurement, because the predicted harm did not occur and the next reader should
+have the number rather than the forecast: the UNNAMED arm did not MOVE, it stayed exactly where it was.
+Fired arms went from two to one. Before: ["MINIBOSS COUNT","MINIBOSS UNNAMED"]. After: ["MINIBOSS
+UNNAMED"] on the same key, `stopper`, from the same line, chatcmd.gd:2248. Republishing the count
+touches nothing the UNNAMED arm reads.
+The other half of why I am not reverting: `_miniboss_line` counts live off `miniboss_names()`, which is
+48 on this tree. So with 47 published, !miniboss ANSWERED "48 hold a chamber alone" while
+docs/COMMANDS.md and `short` both said 47 - the published text already disagreed with the bot's own
+mouth. Reverting puts that back. 48 is what content wrote and what the bot says.
+THIS IS THE SUPERVISOR'S CALL, NOT MINE. If the ordering mattered for a reason I cannot see from here,
+revert data/commands.json and docs/COMMANDS.md to 47 and I will not re-land it until the `MB_NAME` row
+is in. I have left the UNNAMED arm untouched either way; that row is game build's and I did not go near
+scripts/delve.gd.

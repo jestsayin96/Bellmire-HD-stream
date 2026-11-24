@@ -1,0 +1,5 @@
+make_item_icons.py --verify over web/icons/items, 24 Nov 2026 13:38 CT
+webp on disk: 520  zero-byte: 0  manifest entries: 520
+checks per file: non-empty, in manifest, bytes==manifest, decodes 160x160; plus manifest->disk
+verify: GREEN (0 problem(s))
+exit: 0

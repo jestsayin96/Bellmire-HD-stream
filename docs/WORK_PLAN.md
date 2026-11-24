@@ -1,3 +1,132 @@
+## TAKE THIS NEXT - Updated THE 01:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** WRITTEN 02:0x CT ON 24 NOV. `laptop` IS SYNCED FIRST, BEFORE 02:07 - GAME BUILD, THIS ROW IS
+*** YOURS AT 02:07. The other five lanes read it at :22 (content), :34 (art), :37 (hub),
+*** :45 (chat bot), :52 (HUD). ***
+
+Merged this hour into main **33b60b54**, up from 6ac00079: all SIX lanes (laptop 53a4fbc3, content
+a92b6b92, hub b7b96995, hud-ui 995e389d, art 3c14ce0a, chatbot c62ce116). FOUR conflicts, all in
+root PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that matters:
+`diff --numstat 6ac00079 HEAD -- PROGRESS.md` reads **+115/-0** - ZERO lines removed - and a
+tree-wide grep on all FOUR exact marker shapes returns **zero hits**. The lanes' numstats sum to
+118; I ran a multiset of every added line against merged PROGRESS.md and the shortfall is
+**exactly 3 blank lines and nothing else** (duplicate blank separators where lane blocks abut),
+with zero lines appearing in the merge that no lane wrote. Nothing was lost.
+
+*** THE CASCADE IS CLOSED AT EVERY LINK FOR THE FIRST TIME. PUBLISHED NOW AGREES. ***
+Measured by me on merged main with a brace-matched parse, not copied from any lane:
+`Delve.MB_NAME` **49** | `miniboss_feed.by_key` **49** | both set differences **empty** |
+`commands.json` published **49**. The number that has lagged the chain since S101 is level. The
+`48` that still greps in `docs/COMMANDS.md` is inside the brew price range `40-480 gold` and is
+not an elite count - CHAT BOT, your line said "the string 48 now appears nowhere in it"; the
+substance is right but the wording is not. Say "the count 48", not "the string 48".
+
+### GAME BUILD - S104 IS TICKED, AND I READ THE GUARD RATHER THAN THE VERDICT
+S104 ticked. `tools/_s58_span.gd` now refuses windowless runs up front: `_windowless()` tests
+`DisplayServer.get_name() == "headless"` and a `""`/`"dummy"` rendering driver, and `_refuse()`
+prints `S58_SPAN WINDOWED-ONLY <why> - refused, nothing written`. Two things I checked that your
+summary did not claim: the `make_dir_recursive_absolute(OUT)` call now sits **after** the refusal,
+so a wrong-way run no longer even creates the directory, and the second guard at the texture grab
+returns **before** `img.save_png`. Tracked renders cannot be dirtied either way. **And I applied
+the standing loosening check**: the guard is narrow (null/empty image only), every `_ok()` check
+still runs ahead of it, and the refusal prints a verdict that cannot be read as a pass - so the
+gate was made honest, not quiet.
+**S105 - DO NOT TAKE L31. I nearly handed it to you and checked first.** The L31 remainder row at
+plan line 28739 re-routes "damage numbers, status-effect icons" to you, but `status_icon.gd`
+exists and `party_frames.gd:3` preloads it - D61 built the leftovers (plan line 30668). **That row
+is stale, not open.** Your item instead: **take the lowest-numbered Phase 2 system (5-80) that is
+not yet wired, measure which one that is off the plan's own System list rather than off any line
+in this block, and say in your summary which number you took and how you established it was
+unwired.** If your measurement says the lowest unwired one is not yours, name its owner and stand
+down - that is a delivery.
+
+### ART - PASS 8 IS TICKED, AND THE PICTURE PAYS FOR THE HEADING
+I put `roper/hero_front.png` at 6ac00079 next to the shipped one at hero scale and looked at both.
+**Before:** three straight pale cords splay from the drum to three small dark feet planted wide -
+a rigid symmetric tripod, unmistakably an easel. **After:** the cords bow outward and sweep down
+and *in*, gathering at the frame base with the splay gone; they read as slack rope hanging, not as
+legs standing. The triangle-on-three-points silhouette is broken. That is exactly what your
+heading claims and no more, and the side view backs it - the rope lays forward along the floor in
+a loop while the man leans into the frame. Headline discipline for the second hour running.
+**AND I AM CREDITING THE PART YOU WROTE AGAINST YOURSELF.** You titled the pass "my own
+crossing-counter cannot count crossings" and shipped anyway on the render. That is the right call
+and the right order: the apex numbers (`runs3_frac` 0.5343, `cross_bands` 1 on the front) are NOT
+what earned this tick - the picture is - and you said so before I could.
+**ONE THING YOUR SUMMARY DID NOT MENTION AND I CHECKED:** the shipped `hero_front.png` is
+byte-identical by md5 to **`roper_p8a`**, not to `p8c`, even though `_roper_p8c.log` is the last
+log in the commit. The ship is coherent (the ship log's apex report is tagged `_p8` and the fit
+register is GREEN), so nothing is wrong - but **say which candidate you shipped**, because a
+reader of your commit would assume p8c.
+**YOUR NEXT ITEM: your own choice of miniboss, your own invention - that lane is genuinely dry and
+you may invent.** The fit register judges **51** rows (49 live bodies + the two retired `_chibi`
+cells); do not quote "46" or "33" from anywhere.
+
+### CONTENT - DRY, MEASURED, AND NOTHING IS OWED
+`miniboss_feed.by_key` **49**, both set differences against `Delve.MB_NAME` **empty**. C-180's
+stand-down was the right delivery and I verified the 49 myself. **Do not write a 50th.** Stand
+down again and write it up, or audit a shipped feed row. The `_note_` keys are fine and you are
+not to stop writing them - the non-note zero-hit count is still exactly 15.
+
+### CHAT BOT - *** B121 IS TICKED. THE MINIBOSS RED IS CLOSED AND IT IS NOT HELD. ***
+Verified on merged main, not taken: `commands.json` is **18000 bytes** (your figure, to the byte),
+exactly two leaves carry the count (`.commands.miniboss.what` and `.short`), both read **49**, and
+a scan for any elite/miniboss string containing 48 returns **empty**. `L14_TEST OK` with the guard
+arms at zero is the real thing - the red that ran from S101 through B120 is gone, not deferred.
+**AND YOUR OWN CORRECTION IS THE REASON I TRUST THE REST.** You wrote up that your python drift
+cross-check reported 32 false positives because its regex anchored on tabs where the file uses
+spaces, and you ruled for the real gate over your own emulation. That is the `MB_NAME` lesson
+applied to your own instrument, unprompted.
+**THE WINDOW ROW STANDS AND YOU MET IT THIS HOUR:** you claimed at **01:47:55**, before :50.
+Your own correction notes the declared finish 01:55 sat outside :52 - noted, and it cost nobody
+anything because you released at 01:50:30 and the HUD's window was clear. Next hour: claim by :50
+**and** declare inside :52.
+
+### HUD - U141 TICKED. THE LOGS ARE COMMITTED AND THERE IS NOW SOMETHING TO JUDGE BY
+Fifth correct stand-down, and you did the second half of the row: 40-odd capture logs that were
+living uncommitted in W2 are on `hud-ui` now. That is the fix to the thing I charged you with last
+hour - an uncommitted log is nothing for me to judge by, and these are now judgeable.
+One note, not a charge: they landed at **repo root** (`_l36_parse.log`, `_l74_run.log`, ...). Art
+does the same, so it is house convention and I am not asking you to move them. **The rarity-hue
+row is still struck** - U55 shipped it at `ui_theme.gd:176`. Fourteenth time of asking.
+Next: stand down again, or audit a shipped U-item against its own capture.
+
+### HUB - HOLD STEADY. NOTHING IS MERGED AND UNPUBLISHED, AND I MEASURED BOTH TREES
+`origin/gh-pages^{tree}` == `origin/hub:web` == **02257b2f**, computed this hour, not copied.
+gh-pages is **029e4fac**, pushed by the supervisor 21 Nov 15:39 CT. **The 3-file / +59 / -1
+backlog that this seat's prompt still carries is GONE - it was published and the prompt is
+stale.** No `web/` byte changed this hour and you claimed no READY TO PUBLISH, so **the publish
+gate was not owed and I ran none**.
+The pack-catalogue worker's `kenney_retro-fantasy-kit` row came in on your branch again. **I did
+not take it - I read `_packs/kenney_retro-fantasy-kit/License.txt` off disk myself: 720 bytes to
+the byte, CC0 1.0 with the creativecommons.org URL, commercial use permitted, attribution "not a
+requirement".** The row is accurate and the pack is CLEARED. Nothing from it is in `assets/` yet.
+
+### FOR THE SUPERVISOR
+**Nothing is waiting on a decision.** Two things for your awareness, neither needing a ruling:
+(1) the hub publish backlog named in the team lead prompt is **discharged** - gh-pages tree and
+`hub:web` are byte-equal at 02257b2f since your 21 Nov publish, and the prompt's "3 files / +59 /
+-1" is stale; (2) the miniboss chain is **whole and published at 49/49/49** for the first time, so
+the cascade that has run since S101 is closed end to end.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (land these on the first LIVE turn)
+These are mechanical staleness in the :58 prompt, measured this hour. A firing cannot write a
+prompt; the running list is here so one live turn can land them all.
+1. **THE ART FIT REGISTER STANDING NOTE IS STALE.** The prompt says its verdict "reads `RED /
+   ok:false` and has done for days" on two carried `snuffer_chibi` / `tallyman_chibi` rows. I
+   walked the register's last twelve commits: it has read **GREEN / ok:true with `retired_red`
+   empty since 21 Nov 21:46 CT** - the last RED was 62a4dfc0 at 21 Nov 20:57. Six consecutive
+   registers are green. Replace the note: the register is GREEN, `unproved_cells`, `stale_margin`
+   and `blind_views` are all empty, and a seat should now report a RED there as a real event.
+2. **THE HUB PUBLISH BACKLOG IS DISCHARGED.** The prompt's "WHAT IS MERGED AND NOT PUBLISHED:
+   ... 3 files / +59 / -1 ... with the supervisor since 20 Nov" is spent. gh-pages is 029e4fac,
+   tree **02257b2f**, equal to `origin/hub:web`. The prompt's `05ac2679 / 9ca8051e` is also stale.
+3. **THE MINIBOSS COUNT IN THE FREEZE SECTION.** "the fit register judges 46 rows, of which 44 are
+   live bodies" is now **51 rows / 49 live bodies + 2 retired `_chibi`**.
+4. **THE ID LINE.** "B104, C-163, D100, H32, L74, S85, T5, U124, art on paviser pass 8" is stale:
+   as of this hour it is **B121, C-180, S104, U141, and art on roper pass 8**.
+5. **THE DEAD-DATA BASELINE COUNTS.** 146 top-level keys -> **150**; 56 zero-hit (41 note + 15
+   non-note) -> **60 (45 note + 15 non-note)**. The NON-NOTE 15 is unchanged and item-for-item
+   identical, which is the number that carries the signal.
+
 ## TAKE THIS NEXT - Updated THE 00:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** WRITTEN 01:0x CT ON 24 NOV AND LANDED ON EVERY LANE BRANCH BEFORE 01:07 - I checked the clock
 *** against the push. GAME BUILD, THIS ROW IS YOURS AT 01:07, NOT 02:07: `laptop` carried this

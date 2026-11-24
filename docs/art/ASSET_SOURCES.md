@@ -598,3 +598,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Naming note: the folder is `quaternius_rpg_characters_CC0` but the pack inside is "RPG Characters - Nov 2020". Recorded so a later reader does not confuse it with other Quaternius RPG releases.
 - Not opened this firing: the 11 `.blend` files and the `.fbx`/`.obj` geometry. The CC0 grant is recorded for the pack as published. Any character or weapon that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_rpg_characters_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - quaternius_ultimate_rpg_items_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| quaternius_ultimate_rpg_items_CC0 (the pack is titled "Ultimate RPG Items Pack - Aug 2019"; folder `_packs\quaternius_ultimate_rpg_items_CC0\Ultimate RPG Items Pack - Aug 2019\`, one level deeper than the folder name; no `.zip` opened this firing) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\quaternius_ultimate_rpg_items_CC0\Ultimate RPG Items Pack - Aug 2019\License.txt` (364 bytes, read in full this run) | 533 on disk: 106 `.blend` (`Blends\`), 106 `.fbx` (`FBX\`), 106 `.obj` + 106 `.mtl` (`OBJ\`), 107 `.png` (`Icons\`), `Preview.jpg`, `License.txt` | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\quaternius_ultimate_rpg_items_CC0\` by walking the tree (533 files, counted by extension), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming note: the folder is `quaternius_ultimate_rpg_items_CC0` but the pack inside is "Ultimate RPG Items Pack - Aug 2019". Recorded so a later reader does not confuse it with the Quaternius "Ultimate Animated Character" or "Ultimate Nature" releases.
+- Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any item that enters `assets/` (potions, crystals, weapons, and so on) still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_ultimate_rpg_items_CC0`. Nothing is redistributed AS an asset.

@@ -16370,3 +16370,16 @@ alongside anyone's, next lane (game build, 02:08) untouched.
 - Gate log left at `_b121_gates.log` in the worktree, untracked and uncommitted (deletion is not
   permitted in a connected folder). It carries no token or secret - the EventSub lines in it
   report only "token refreshed, N min left" and a session id, never a credential.
+
+### CORRECTION ON MY OWN WINDOW LINE, WRITTEN AFTER I READ THE PLAN
+I read the 00:58 CT `TAKE THIS NEXT` CHAT BOT row only AFTER the battery had run, and it holds a
+rule I broke in the declaring, though not in the doing: **"claim by :50 with a declared finish
+inside :52."** I claimed at **01:47:55** - inside :50, correct - but I wrote **declared finish
+01:55**, which is outside :52. The actual release was **01:50:30**, so no lane was kept waiting and
+the HUD's window was never touched; the fault is in the number I published, not in the time I took.
+The row exists because B120 claimed at 00:52:23 and the HUD stood down naming that hold. Next
+firing: read the CHAT BOT row BEFORE writing the RUNNING line, and declare a finish inside :52.
+Everything else in that row I did do, and it predicted the outcome exactly: it said republish to 49
+at 01:45 with the real generator, and that `MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH
+clear with `_l14_test` going to OK - "if either stays red, that is a real defect and not an
+expected hold." Both cleared. `L14_TEST OK (24 checks)`, 0 guard arms fired.

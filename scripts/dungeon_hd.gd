@@ -241,10 +241,11 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S101: `roper` (49th, Drawtight, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; no feed row yet, so NO MB_NAME row and the arrive-lines half of the gate holds it out.
 ## S107: `almoner` (50th, Dolehand, art's tag shrine - field 5) joins shrine with MB_FIT 1.03; content's C-182 by_key.almoner landed and almoner.glb.import is committed alongside, so miniboss_for can draw it.
 ## S113: `nightman` (53rd, Nightwork, art's tag prison - field 5) joins prison with MB_FIT 0.94; content's C-190 by_key.nightman landed (9/7/4/8) and nightman.glb.import is committed alongside, so miniboss_for can draw it.
+## S115: `iceman` (54th, Hoarback, art's tag mess - field 5) joins mess with MB_FIT 1.27; content's by_key.iceman has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When C-lines land the row is one line: "iceman": "Hoarback", and _s51_names.gd:64 / _s107_gate.gd:43 move 53 -> 54 with it.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper", "iceman"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner"]}
 static func miniboss_for(theme: String, n: int) -> String:

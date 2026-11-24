@@ -14081,6 +14081,44 @@
           "Count the arms and go on.",
           "Leave the bowl. There is nothing in it for you."
         ]
+      },
+      "stiltman": {
+        "arrive": [
+          "Something ahead is walking on poles, and one is gone.",
+          "A man, twice a man's height, crossing the room on a single stilt.",
+          "The other leg ends in a bound cuff and a splintered stump, hanging clear of the floor.",
+          "A crutch under the arm, where the leg should be. He leans on it the way you would.",
+          "He is quick. He has had time to learn the one pole.",
+          "Fen wool, wet through. Poles blackened with the water they were made to cross.",
+          "The stilt that is left is plain to see. Break it and he comes down. Leave it and he stands over you.",
+          "Over the front line, down into whoever is behind it. He does not choose. The party does.",
+          "The cuffs are mended and the lashings are tight. Someone looked after these poles for years."
+        ],
+        "act": [
+          "{name} strikes down past the line, at whoever stands behind it.",
+          "{name} plants the crutch and swings the long pole round.",
+          "The stilt takes a step and the whole room moves with it.",
+          "{name} leans on the crutch and looks over your heads.",
+          "{name} reaches over the front line and finds the back.",
+          "The stump swings free. {name} does not look at it.",
+          "One pole, one crutch. {name} is steady on both."
+        ],
+        "broken": [
+          "The stilt snaps. He comes down hard, level with you now.",
+          "No more reach over the line. He is quicker than he was.",
+          "The pole is gone and the man is at your height. He has nothing left to break.",
+          "Shorter stride, faster feet. Breaking it worked, and it cost you."
+        ],
+        "fall": [
+          "Downfast is down. The crutch skids away across the floor.",
+          "The last pole lies where it fell.",
+          "He was already down one. Now he is down.",
+          "A man on poles, in a marsh, for his living. The poles are all that is left.",
+          "Count the party. Count the ones behind the line.",
+          "Leave the cuffs. They were bound by someone who cared.",
+          "The stump hung clear of the floor to the end.",
+          "Nobody asked him to walk on one leg. Go on."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14118,7 +14156,8 @@
     "_note_c176": "C-176: stopper (48th miniboss, Chokewell, crypt, wear 0.32, the first DEADLINE: five pegs on the ring's rim, one drops every notch, the room is shut when the last drops, each notch costs the party wind, nothing done to the room buys time back; a delver with a shoulder under the ring holds the count) gets arrive x9, act x7, broken x4, fall x8 - the changer shape. The clock is in the lines, not explained beside them. act lines take {name}, a delver feeling the notch. broken lines are the ring held up (count holds). Body is CANON + renders on main (tools/art/minibosses.py, docs/art); NO stopper.glb is committed yet, so the mesh half of the miniboss_for gate is still open. Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
     "_note_c177": "C-177: roper (49th miniboss, Drawtight, grassland, wear 0.28, the first body that reads the DISTANCE BETWEEN TWO HEROES: every notch hauls the hindmost a yard toward the middle, and when all are inside one span the rope is laid and the party stands as ONE footprint so every sweep lands on all of them; nothing done to the creature adds slack, only a hero walking out from the others) gets arrive x9, act x7, broken x4, fall x8 - the stopper shape. The mechanic is in the lines, not explained beside them. act lines take {name}, a delver being drawn in. broken lines are a hero walking wide (slack). Body is CANON + roper.glb committed on main (tools/art/minibosses.py, assets/monsters/minibosses/roper.glb); roper.glb.import sibling not yet committed (engine lane adds it with the wiring). Not yet in Delve.MB_NAME. Expected zero-hit key: DO NOT WIRE.",
     "_note_c182": "C-182: almoner (50th miniboss, Dolehand, shrine, wear 0.35, the dole dish: it takes nothing and wounds no one, every delver puts in and it gives back wrong, so while it stands each hero swings on another trade's weapon dice; the party total is unchanged, only the order is useless) gets arrive x9, act x7, broken x4, fall x8 - the roper shape. Written against almoner.glb on merged main. The lines say SWING and TRADE and WEIGHT and never name a per-hero equipped item, because the engine keys weapon dice on h['class'] only (art dropped the armour-on-the-archer half and so does this). No {name} in arrive or fall. Feed reads 50 against Delve.MB_NAME 49 until the game build adds the name row; that gap is expected. CODE WIRING: Delve.MB_NAME almoner -> Dolehand, bestiary.gd almoner (static), MB_FIT almoner, then republish elite count 49 -> 50. Expected zero-hit key: DO NOT WIRE.",
-    "_note_c187": "C-187: panner (51st miniboss, Onceround, confection, 2.26 m, wear 0.14, the first body that is SHUT UNTIL THE PAN COMES ROUND: a closed drum on a crank with one opening that swings past once a turn; blows on the shut wall do nothing at all, so the party's job is to hold its blows together. Art body panner.glb committed and on origin/main and origin/art, blob 33af0ae1, 92,472 B, and canon row at tools/art/minibosses.py. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no machinery operator is named because art removed the man at pass 4 and the crank turns itself. Lines name no per-hero item. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE THIS KEY. Cascade order: this feed row first, then game build adds Delve.MB_NAME panner -> Onceround; feed 51 vs MB_NAME 50 is the expected gap until then."
+    "_note_c187": "C-187: panner (51st miniboss, Onceround, confection, 2.26 m, wear 0.14, the first body that is SHUT UNTIL THE PAN COMES ROUND: a closed drum on a crank with one opening that swings past once a turn; blows on the shut wall do nothing at all, so the party's job is to hold its blows together. Art body panner.glb committed and on origin/main and origin/art, blob 33af0ae1, 92,472 B, and canon row at tools/art/minibosses.py. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no machinery operator is named because art removed the man at pass 4 and the crank turns itself. Lines name no per-hero item. Zero-hit by design; the audit accounts for it. NO LANE IS TO WIRE THIS KEY. Cascade order: this feed row first, then game build adds Delve.MB_NAME panner -> Onceround; feed 51 vs MB_NAME 50 is the expected gap until then.",
+    "_note_c189": "C-189: stiltman (52nd miniboss, Downfast, fogbound, 3.20 m, ALREADY DOWN ONE: a man on stilts who has lost one, a crutch where the leg should be). The stilt that is left is breakable and breaking it works - his reach over the front line is gone and he is faster at your height; leaving it, he strikes down past the line into whoever is behind. The PARTY owns the decision and both ways cost; the lines name both and favour neither. Art body stiltman.glb tracked on BOTH origin/main and origin/art, blob 62aa562c, 71,716 B (ref checked via git ls-tree, not a worktree); canon row tools/art/minibosses.py:18749. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no per-hero item named. Zero-hit by design. NO LANE IS TO WIRE THIS KEY. Cascade: this row first, then game build (11:07) adds Delve.MB_NAME stiltman -> Downfast, MB_FIT stiltman 1.31, THEME_MINIBOSS_MORE fogbound += stiltman; feed 52 vs MB_NAME 51 is the expected transient until then."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

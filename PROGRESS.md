@@ -16563,3 +16563,68 @@ Lock read from R WORKING copy at 03:52:4x and again at 03:53:10-06:00 (decision 
 Item: R WORK_PLAN top = 02:58 CT 24 Nov team-lead block; HUD row says U142 ticked, sixth correct stand-down, rarity-hue row still struck (U55, ui_theme.gd:176), "stand down again, or audit a shipped U-item against its own committed capture". Standing down; no audit launched this hour (an audit needing a windowed render is not worth a claim with no owed run). Fast-forwarded hud-ui to origin c472094b (plan sync only) before writing.
 Next firing (04:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
 Decision for Mr. E: none.
+## B123 - L56 IS NOT A FORTY-MINUTE JOB AND HAS NOT BEEN FOR A DAY. THREE OF FOUR RUNS ENDED CLEAN, AND I KILLED THE FOURTH ON PURPOSE (chat bot, 2026-11-24 03:45 CT firing)
+
+Merged `origin/main` into `chatbot`: a clean fast-forward to **0b61ad64**, twenty commits, no
+conflicts. `git status` on all three files I own - `scripts/chatcmd.gd`, `data/commands.json`,
+`docs/COMMANDS.md` - is empty. Nothing of mine moved this hour; PROGRESS.md is the only edit.
+
+**THE FOUR ENGINE GATES ARE GREEN.** parse `rc=0`, **0 SCRIPT ERROR / 0 Parse Error**;
+`TWITCH_PARSE OK (8 checks)`; `COMMANDS_DOC OK wrote 32 commands`; `L14_TEST OK (24 checks)`.
+B121's close has now held across a **second** merged main, with zero guard arms fired.
+
+**HELD AT 49, AND I MEASURED THE CHAIN MYSELF RATHER THAN READ IT OFF THE PLAN.** A brace-matched
+parse of `Delve.MB_NAME` gives **49** keys, 49 unique. `lore_lines.miniboss_feed.by_key` gives
+**49**. `commands.json` publishes **49** at both leaves (`.what` and `.short`), 18000 bytes, 32
+command keys. `almoner` is in **neither** `MB_NAME` **nor** the feed - so the queued 49 -> 50
+republish condition is **UNMET** and I did not republish. The order is CONTENT -> GAME BUILD ->
+CHAT BOT and I am third; republishing ahead of `MB_NAME` is the mistake that kept the last cascade
+open for three hours.
+
+**THE PART THAT MATTERS: THE "UP TO 40 MINUTES" IN MY ROW IS STALE, AND I FOUND IT BY OPENING THE
+SCRIPT INSTEAD OF BELIEVING THE FIGURE.** `tools/_l56_test.gd` was rewritten by the game build at
+`92dc2cf8`, 2026-11-23 23:19:09 - "L56 soak fixed - first verdict". Its own constants now read
+`RUNS := 4`, `FLOORS_PER := 2`, `RUN_CAP_FRAMES := 60 * 120`. That is a **worst case of 8 minutes**,
+and its own comment says so: "2 min per run - the lock's 25-minute rule bounds the whole soak".
+The 40-minute figure predates that rewrite by a day. I have carried this item twice on a number
+that stopped being true before I first carried it, and the lesson is the `MB_NAME` lesson again:
+**read the constant, do not quote the row.**
+
+**SO I RAN IT, UNDER A WALL-CLOCK KILL THAT COULD NOT MISS.** Claim 03:47:10, declared finish
+03:52. I refreshed the lock naming the attempt and a **hard kill at 03:51:30** computed as a
+deadline, not a sleep - so a slow run could not quietly carry me into the HUD's window. Result,
+and it is the best this soak has ever done:
+
+- run 1, lord **Nightwing, Chapel-Roosted** (hp 140) rose and went **DOWN**; `ended state=home`
+- run 2, lord **The Pale Duchess** (hp 256) rose; `ended state=home`
+- run 3, lord **The Rattling Host** (hp 165) rose and went **DOWN**; `ended state=home`, and the
+  only trap activity of the soak (`sprung 1, saved 1, damage 5.0`)
+- run 4, lord **Mourncoil, Knotted** (hp 422) had risen and the fight was live when the kill fired
+  at **03:51:29**
+
+**NOT ONE RUN CAPPED.** Every previous L56 ended `CAP HIT - NO VERDICT` by arithmetic - B116's
+three runs reached their cap without ever seeing what the checks needed. Three runs ending
+`state=home` is the first evidence the S102 fix actually works. **There is still NO VERDICT**,
+because the verdict prints after run 4 and run 4 is the one I killed - but the reason is now
+"I was ninety seconds short", not "this cannot be earned".
+
+**WHY I WAS NINETY SECONDS SHORT, AND IT IS MINE.** I spent the first ninety seconds of the window
+on reconnaissance and the four gates, then started the soak at 03:48:30 with 179 seconds left.
+Three runs took about three minutes. Had I started the soak FIRST and run the gates after, the
+whole thing fits inside :52 with room. That is the ordering for 04:45 and it needs no new window.
+
+**I ALSO CORRECTED MY OWN SENSE OF THE CLOCK MID-RUN.** I had talked myself into believing it was
+03:50 and that nothing could fit; I read the machine clock and it was **03:47:57**. I had lost
+three minutes to an estimate. B122's fault was a stamp computed instead of read; this is the same
+fault pointed at my own planning rather than at the file. Read the clock before you conclude the
+window is gone.
+
+Lock: RUNNING 03:47:10 (cap 04:12:10, declared 03:52), refreshed 03:48:12 for the L56 attempt,
+IDLE **03:51:48** - released inside the declared finish, with the clock read at the moment of
+writing. The window was free when I claimed: last line was the game build's IDLE 03:16:10 and
+`tasklist` showed no Godot alive, before and after. No live Twitch test this hour. **ZERO BITS.**
+
+**NOTE FOR WHOEVER READS THE MOUNT PATHS:** the connected folders are now mounted as
+`$HOME/mnt/jests-hd-medieval-adventure` and `$HOME/mnt/bellmire-bot` directly. The
+`$HOME/mnt/hd adventure/...` path in the prompts no longer resolves. Nothing is broken; the two
+repos are both reachable, just one level shallower.

@@ -1,4 +1,154 @@
-## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+## TAKE THIS NEXT - Updated THE 03:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** GAME BUILD, THIS ROW IS YOURS AT 04:07. The other five read it at :22 (content), :34 (art),
+*** :37 (hub), :45 (chat bot), :52 (HUD). Machine clock at the top of this run: Tue 11/24/2026 03:58:56 CT.
+
+Merged this hour into main, up from **0b61ad64** to **7b6c866b**: all SIX lanes (laptop a49c2c3b,
+content bda4f3e2, hub b9d76b8f, hud-ui 1690f840, art c1a5c6fd, chatbot 3268bb33). FOUR conflicts,
+all in root PROGRESS.md, resolved by the state machine keeping BOTH sides. The assertion that
+matters: `diff --numstat origin/main HEAD -- PROGRESS.md` reads **+104/-0** - ZERO lines removed.
+Three-dot lane numstats sum to 111 (laptop 24, content 8, hub 3, hud-ui 6, chatbot 66 = 107);
+I checked the shortfall as a MULTISET rather than a total, and every one of the 107 added lines is
+present in the merge. The gap is **blank separator lines added identically by more than one lane**
+and nothing else. Zero lines in the merge that no lane wrote.
+
+*** THE 50th IS BUILT AND LINED AND THE ENGINE HALF IS THE ONLY THING LEFT. ***
+Measured by me on merged main 7b6c866b with a brace-matched parse, NOT copied from any lane:
+`Delve.MB_NAME` **49** (no almoner) | `miniboss_feed.by_key` **50** (almoner IN) |
+`commands.json` published **49** at both leaves. The link is DELIBERATELY uneven for one hour:
+content shipped the lines this cycle, the engine has not wired the body. CHAT BOT WAS RIGHT TO
+HOLD AT 49 AT 03:47 AND IS STILL RIGHT TO HOLD NOW - the published count must never run ahead of
+what `MB_NAME` can serve.
+
+*** AND HERE IS THE THING NO LANE HAS SAID, FOUND BY LISTING THE TREE RATHER THAN TRUSTING A ROW:
+*** `assets/monsters/minibosses/almoner.glb` IS THE ONLY ONE OF 63 `.glb` FILES ON MAIN WITH NO
+*** `.import` SIBLING. 63 meshes, 66 `.import` entries, and the set difference is exactly
+*** `almoner.glb.import`. THIS IS THE S103 LESSON REPEATING: the chokewell mesh stood in the crypt
+*** only after an import landed, because until the `.import` exists NO Godot gate can see the file
+*** at all - it will not fail, it will pass while loading nothing. Do not discover this at the gate.
+
+### GAME BUILD - S106 IS TICKED. WIRE THE 50th WHOLE, AND THE IMPORT IS PART OF "WHOLE".
+S106 ticked: I opened `scripts/animal.gd` myself rather than take the diff's word. Trap (1) is
+genuinely fixed and fixed in the right shape - exact `"Idle"` wins outright, and the fallback is
+the FIRST Idle-prefixed clip that is not a hit-react, so a UAA file ending `Idle_HitReact2` can no
+longer loop a flinch as the rest pose. Trap (2) is `Gallop` as run, guarded by `_run == ""` so a
+real `Run` still beats it. `tools/_s106_clips.gd` is a new gate and it reported OK 9. You kept
+your own condition and carried the UAA import rather than part-shipping it; that is the delivery
+the row asked for.
+**YOUR ITEM AT 04:07 IS THE 50th, AND IT IS FOUR THINGS IN ONE COMMIT:**
+  1. `assets/monsters/minibosses/almoner.glb.import` - commit the sibling. See the block above.
+  2. `Delve.MB_NAME["almoner"] = "Dolehand"` - content's feed row is already live at `by_key`.
+  3. `bestiary.gd` `almoner`: **STATIC**, `model` path only, **no `anims` entry**, `h = 2.52`
+     measured by art - DO NOT RE-DERIVE IT.
+  4. `MB_FIT["almoner"]`: ratio **1.03**, tag `"shrine"`, 3 proving views - copy from
+     `renders/art/minibosses/_fit_report.json`, do not re-measure.
+**THEN RE-READ THE CHAIN AND SAY THE THREE NUMBERS.** `MB_NAME`, `by_key`, published. The first two
+should read 50/50; the third stays 49 until the chat bot republishes at :45. That is correct, not a
+defect, and saying so is part of the tick.
+**THE UAA IMPORT (System 11) CARRIES AGAIN** if the 50th fills claim+25. Your own constraint still
+binds: the import and the wiring land in the SAME commit, or neither lands.
+
+### CONTENT - C-182 IS TICKED. YOU ARE DRY ON THE FEED AND THAT IS A FINISHED STATE.
+C-182 ticked. `by_key.almoner` is on merged main with arrive x9, act x7, broken x4, fall x8 - the
+stopper/roper shape, the mechanic carried in the lines and not explained beside them, and
+"Dolehand" used only where the name is earned. I read them; the dole reads as a dole and not as a
+fight, which is the hard part of this body. You also corrected your own cycle stamp to the machine
+clock inside your own run - that is the behaviour the house wants.
+**THE FEED IS NOW LEVEL WITH THE BODIES AT 50.** There is no 51st body to line. If art names one
+this hour you have an item at :22 next cycle; if it does not, **STAND DOWN AND WRITE IT UP** - a
+stand-down is a full delivery and closing counts as progress.
+**AND DO NOT WIRE `phase2_words_alt2`.** It returns zero hits for exactly the reason its two
+siblings do: `delve.gd:4022` composes `base + "_alt"` only, and there is no `alt2` anywhere in
+`scripts/`, `web/` or `tools/`. It is dead ON PURPOSE. Keep writing `_note_` keys; they are not a
+defect and the audit counts them separately.
+
+### ART - PASS 5 MERGED. THE REGISTER IS GREEN AT 52 AND I LOOKED AT THE BODY MYSELF.
+Almoner pass 5 merged. I opened `hero_front.png` and `hero_side.png` at full size rather than read
+the register. **The shield read is gone** - the oblong has a visible inside, which is the one thing
+a shield face cannot have, and that is change B doing exactly what its comment claims. The two
+surviving pieces read as a sword and an axe, not as litter. Change A is a SUBTRACTION and the axe
+head's origin was re-derived off the longer haft rather than left at the old length; that is the
+dependent-of-a-changed-length error that usually ships, and you caught it in your own comment.
+**CHANGE C IS THE BEST THING IN THE PASS.** You built it, rendered it, and the picture refused it -
+a mirrored axe reads as struck into the man's head and takes the one pale panel that carries his
+facing. You kept it behind an OFF-by-default flag so the evidence reproduces and nobody re-derives
+it. An item closed by DISPROVING it counts fully.
+**ONE OBSERVATION, NOT A RED, AND I AM NOT TURNING YOUR GATE:** in `hero_side.png` the sack is the
+dominant mass and covers the near leg entirely, so the lower body reads as one plinth-footed
+column. Every number says `seen 1.0 / proves true` on all three views, the fit register is GREEN,
+and the mechanic reads front and side - so this is a note for whenever you next open the body, not
+work I am assigning. Look at it yourself and decide; if you judge it fine, say so and it is closed.
+**YOUR LICENCE IS INTACT:** art may invent minibosses. The 51st is yours to name if you want it.
+
+### HUB - STANDING CHECK HELD. THERE IS NOTHING UNPUBLISHED, AND I MEASURED BOTH TREES MYSELF.
+`origin/gh-pages^{tree}` = **02257b2f** and `origin/hub:web` = **02257b2f**. They are EQUAL and
+`diff --numstat` between them is **empty**. Publish 6 (gh-pages 029e4fac) consumed everything.
+You also catalogued the `quaternius_ultimate_rpg_items_CC0` licence into
+`docs/art/ASSET_SOURCES.md` - CC0 1.0, verified on the pack's own page, which is the rule.
+**SO: NO PUBLISH IS OWED AND I RAN NO PUBLISH VERIFICATION THIS HOUR.** You did not claim "ready to
+publish", so the publish gate is not owed and an unearned gate report would be the same fault class
+as a lying gate. Keep doing the standing check and keep NOT publishing - that call is the
+supervisor's and has never been yours.
+
+### CHAT BOT - B123 IS TICKED, AND THE HOLD IS THE PART I AM TICKING.
+B123 ticked. Four engine gates green on merged main 0b61ad64. **The hold is the headline:** you
+measured `MB_NAME` 49, feed 49, published 49, found almoner in neither, and DID NOT republish. One
+hour later content shipped the feed row and the engine has not - so holding was right then and is
+right now. You also killed L56's run 4 on a hard wall-clock at 03:51:29 rather than cross the HUD's
+:52, and you corrected your own future-stamped IDLE inside your own run. Both are the behaviour the
+yield rule exists for.
+**AND YOU RETIRED A STALE NUMBER THE HOUSE HAS BEEN CARRYING: L56 IS NOT 40 MINUTES.** RUNS=4 x
+RUN_CAP_FRAMES=120 s = 8 min worst case, and runs 1-3 ended `state=home` in ~3 min with lords risen
+in each. **That is the first time that soak has ended home rather than capped.** The 40-minute
+figure is STRUCK from every row.
+**YOUR ITEM AT 04:45, IN THIS ORDER:**
+  1. Re-read the chain yourself. **IF AND ONLY IF `MB_NAME` reads 50 AND `by_key` reads 50**,
+     republish `commands.json` 49 -> 50 at **exactly the two leaves** (`.what`, `.short`) and
+     regenerate `docs/COMMANDS.md` with the REAL `tools/_commands_doc.gd`. If the engine has not
+     landed, **HOLD AT 49 AGAIN** and say so - a third hold is a delivery, not a stall.
+  2. L56 to a VERDICT. It now needs about four minutes, so it fits inside :45-:52 with room.
+     Claim by :50 at the latest with a declared finish inside :52.
+
+### HUD - U143 STAND-DOWN ACCEPTED. NOTHING HUD-OWNED IS OPEN AND I AM NOT INVENTING ONE.
+U143 is a clean stand-down: lock free, nothing HUD-owned open, written up. I checked and I agree -
+U124 closed the feed-clip question by disproving it, the rarity row is U55 and shipped long ago
+(`ui_theme.gd:176/196/200/204`, `leaderboard_panel.gd:197/202`), and the L31 remainder is the game
+build's, not yours. **DO NOT LET ANY ROW HAND YOU THE RARITY ROW AGAIN** - you refused it correctly
+eight times before a seat finally checked.
+**YOUR WINDOW AT 04:52 IS FREE AND IT IS YOURS.** The chat bot is claiming by :50 at the latest
+with a finish inside :52, so you should not lose it. If you are still dry, stand down again and say
+so; if you find a defect in shipped HUD work, that is owed and is not a new item.
+
+### FOR THE SUPERVISOR
+**Nothing is waiting on you.** gh-pages and `origin/hub:web` are the same tree (02257b2f), so there
+is nothing merged-and-unpublished and no publish decision is open. The last live-page look remains
+the 22:58 seat on 17 Nov.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task;
+### land these on the first LIVE turn, all at once). I did not attempt a write this run: the gate
+### is on the CALL, not a field, and it was settled on 18 Nov. Carrying forward plus these FIVE:
+  1. **THE ART FIT REGISTER NOTE IS WRONG AND IS STRUCK.** The prompt says the top-level verdict
+     "reads RED / ok:false and has done for days" on two carried `_chibi` rows. MEASURED THIS HOUR
+     ON BOTH `origin/main` AND `origin/art`: `ok: true`, `verdict: "GREEN"`, scope "every row in
+     pairs (52)". It is green on main as well as art, so it did NOT go green in this hour's diff -
+     the note has simply been stale. Replace the whole standing note.
+  2. **THE MINIBOSS COUNT.** The prompt says "46 rows, of which 44 are live bodies and two are
+     retired `_chibi` cells". It is **52 rows = 50 LIVE BODIES + 2 retired `_chibi`**, measured off
+     `_fit_report.json` `pairs`. Art judged 51 before this run and 52 after.
+  3. **THE HUB BLOCK IS TWO PUBLISHES STALE.** It says gh-pages is 05ac2679 / tree 9ca8051e pushed
+     19 Nov, with "3 files / +59 / -1 ... with the supervisor since 20 Nov". MEASURED: gh-pages is
+     **029e4fac**, tree **02257b2f**, publish 6, authorised 21 Nov 11:28 CT and pushed 21 Nov 15:38
+     CT, and it **equals `origin/hub:web`**. Nothing is unpublished. Strike the whole unpublished
+     paragraph.
+  4. **THE DEAD-DATA BASELINE.** Measured 24 Nov 04:0x CT on merged main 7b6c866b: 48 corpus files
+     (47 `scripts/*.gd` + `web/app.js`), **2,377,566** chars, 12 `data/*.json`, **150** top-level
+     keys, **60 zero-hit = 45 `_note_` + 15 NON-NOTE**, the same 15 as always. Unreferenced asset
+     directories **ZERO** of 34. Unread live data keys **ZERO**. Series of the non-note count:
+     15, 15, 15, 15 - it has not moved. The 07:58 "39 non-note / 81 total" stays struck.
+  5. **THE ID LIST.** As of 24 Nov 03:58 CT: B123, C-182, D100, H32, L74, **S106**, T5, **U143**,
+     and art is on **almoner pass 5** (the 50th body). Also strike the L56 "40 minutes" figure
+     wherever it appears: it is about four minutes.
+
+TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** WRITTEN 03:0x CT ON 24 NOV AND LANDED ON `laptop` AT 03:05:02, BEFORE 03:07 - GAME BUILD, THIS
 *** ROW IS YOURS AT 03:07. The other five read it at :22 (content), :34 (art), :37 (hub),
 *** :45 (chat bot), :52 (HUD).

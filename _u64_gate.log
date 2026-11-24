@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+U59 INK              on parch  10.63 ok
+U59 INK              on cream  13.85 ok
+U59 INK              on tan    9.77 ok
+U59 INK_SOFT         on parch  5.37 ok
+U59 INK_RED          on parch  5.69 ok
+U59 VIEWER           on parch  4.65 ok
+U59 ON_DARK          on plate  11.72 ok
+U59 ON_DARK_SOFT     on plate  6.92 ok
+U59 GOOD             on parch  4.60 ok
+U59 BAD              on parch  5.05 ok
+U59 TEAL_ON_PARCH    on parch  4.57 ok
+U59 TEAL_ON_DARK     on plate  7.80 ok
+U59 GOLD_ON_PARCH    on parch  4.65 ok
+U59 GOLD_ON_DARK     on plate  6.42 ok
+U59 WORD_HI          on rod    4.58 ok
+U59 TAG_GOLD         on tagout 14.47 ok
+U63 scale=1.00 h=96 cap=4.80 baseline=11.16 stripe=[11.16,11.80] rod_bot=11.80 CLEAR
+U63 scale=1.00 h=120 cap=6.00 baseline=12.66 stripe=[13.00,14.20] rod_bot=14.50 CLEAR
+U63 scale=1.00 h=150 cap=7.50 baseline=14.54 stripe=[16.00,17.50] rod_bot=17.88 CLEAR
+U63 scale=1.00 h=159 cap=7.95 baseline=15.10 stripe=[16.90,18.49] rod_bot=18.89 CLEAR
+U63 scale=1.25 h=120 cap=6.00 baseline=12.98 stripe=[13.00,14.20] rod_bot=14.50 CLEAR
+U63 scale=1.25 h=150 cap=7.50 baseline=14.86 stripe=[16.00,17.50] rod_bot=17.88 CLEAR
+U63 scale=1.25 h=187 cap=9.38 baseline=17.20 stripe=[19.75,21.63] rod_bot=22.09 CLEAR
+U63 scale=1.25 h=198 cap=9.94 baseline=17.90 stripe=[20.88,22.86] rod_bot=23.36 CLEAR
+U63 scale=1.50 h=144 cap=7.20 baseline=15.12 stripe=[15.40,16.84] rod_bot=17.20 CLEAR
+U63 scale=1.50 h=180 cap=9.00 baseline=17.37 stripe=[19.00,20.80] rod_bot=21.25 CLEAR
+U63 scale=1.50 h=225 cap=11.25 baseline=20.18 stripe=[23.50,25.75] rod_bot=26.31 CLEAR
+U63 scale=1.50 h=238 cap=11.93 baseline=21.03 stripe=[24.85,27.24] rod_bot=27.83 CLEAR
+U63_STRIPE OK 12 cells
+U59_CONTRAST OK 49 colours walked, 16 pairs, 0 unmeasured

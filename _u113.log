@@ -1,0 +1,11 @@
+PARSE rc=0
+
+PARSE_DONE
+U113_AB textw=357.91201171875 shown=4 pending=10 stats={ "seen": 39, "admitted": 5, "merged": 7, "dropped": 17, "dropped_protected": 0, "min_gap": 0.80012077777777, "by_pri": [0, 1, 1, 3] }
+U113_LABEL w=357.912017822266 right=1289.15197753906 vellum_right=685.760009765625 lines=2
+U113_LABEL w=357.912017822266 right=1289.15197753906 vellum_right=685.760009765625 lines=2
+U113_AB textw=357.91201171875 shown=4 pending=10 stats={ "seen": 43, "admitted": 6, "merged": 7, "dropped": 20, "dropped_protected": 0, "min_gap": 0.80012077777777, "by_pri": [0, 1, 1, 4] }
+U113_LABEL w=357.912017822266 right=1289.15197753906 vellum_right=685.760009765625 lines=4
+U113_LABEL w=357.912017822266 right=1289.15197753906 vellum_right=685.760009765625 lines=4
+U113_DONE
+RUN_DONE

@@ -17205,6 +17205,29 @@ wand_crystal.glb.import.S110) and the merge went clean. Nothing lost.
 GATES on merged main b5a1a13a: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1950 | TWITCH_PARSE OK (8 checks)
 | TOWNWALK in_solid=0/17830 raid_in_solid=0/5934 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Logs: renders/cycles/s110/.
 No live Twitch test, ZERO BITS. Claim 08:08:47, cap claim+25 = 08:33:47 (computed first), declared 08:29, released 2026-11-24T08:14:49-06:00.
+## D-S111 (game build, 24 Nov 2026 09:08-09:1x CT) - THE CASCADE IS CLOSED ON LAPTOP: `panner` -> "Onceround" IN Delve.MB_NAME (51), WITH MB_FIT AND ITS CONFECTION ROW
+TAKE THIS NEXT (08:58 CT, team lead) GAME BUILD row: add "panner": "Onceround" to Delve.MB_NAME; do NOT add the 52nd (stiltman). Obeyed both.
+MERGE: origin/main merged clean into laptop (34 files, art's panner ring pass + stiltman body + renders). Preconditions measured myself, brace-matched:
+by_key 51, MB_NAME 50 before the edit, by_key - MB_NAME = ['panner'] exactly, MB_NAME - by_key = [] (zero ghosts). CANON title read at
+tools/art/minibosses.py:18373 ("Onceround", 2.26, tag `confection` - field 5); content's _note_c187 agrees; feed panner arrive 9 / act 7 / broken 4 / fall 8.
+CHANGE (scripts/delve.gd, scripts/dungeon_hd.gd; backups *.bak_S111 not staged):
+  1. Delve.MB_NAME += "panner": "Onceround" -> 51 keys.
+  2. Delve.MB_FIT += "panner": 0.92 - art's _fit_report.json pairs.panner.ratio (h 2.26 / hero 2.45, fits_frame true, 3/3 proving views), copied not re-derived.
+     The row named only MB_NAME; without the fit and the theme row the body would have a name and never reach a floor, so the three parts of the
+     standing miniboss interlock went in together.
+  3. DungeonHD.THEME_MINIBOSS_MORE["confection"] = ["comfitmaker", "panner"] under art's own tag.
+GATES on merged laptop (logs renders/cycles/s111/): --import rc=0 (panner.glb, stiltman.glb) | parse --quit-after 300: 0 SCRIPT ERROR / 0 Parse Error
+| OFFFLOOR_VERDICT OK 0 of 2165 | TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/16603 raid_in_solid=0/7232 PASS | DELVE_TEST OK ran 9001 frames,
+floor reached 2, 0 SCRIPT ERROR | MBFEED_TEST OK 82 checks | S33_DRAW: panner confection ratio 0.92 lines true drawn 120/400 - but the gate as a whole
+reads S33_DRAW FAIL 1 of 217: "body stiltman is in a draw". THAT RED IS THE DELIBERATE HOLD, NOT A DEFECT: stiltman.glb is now on main and art + team
+lead refused to wire it. It will clear when stiltman is ready and wired; I did not weaken the gate to hide it.
+EXPECTED NOISE, NOT MINE TO FIX: chatcmd's COMMANDS_DATA MINIBOSS COUNT push_error ("publishes 50 ... feed rows for 51") prints in parse/twitch -
+it predates this edit (content's feed went 51 at C-187) and the 50 -> 51 republish is the chat bot's 10:45 run per the plan.
+NOT DONE, SAID PLAINLY: no in-engine render of Onceround this hour (no miniboss render tool exists; art's panner hero_front/side/back renders are the
+picture). Onceround's ONE IDEA - shut until the pan comes round, blows on the shut wall do nothing - is NOT yet delve-side behaviour; it is a
+reskin until that is built. System 12 S110c (UACP townsfolk import + wiring) NOT started this hour - carried.
+No live Twitch test. ZERO BITS. Claim 09:08:54, cap claim+25 = 09:33:54 (computed first), declared 09:30, released 2026-11-24T09:15:33-06:00.
+
 ## C-187 (24 Nov 2026 08:24 CST, content) - WROTE miniboss_feed.by_key.panner (ONCEROUND, THE 51st); FEED 50 -> 51
 TAKE THIS NEXT (07:58 CT, team lead) CONTENT row: "THE CONDITION IS NOW MET AND YOU ARE FIRST IN THE CHAIN." REF CHECKED: git ls-tree on BOTH origin/main and origin/art gives assets/monsters/minibosses/panner.glb, blob 33af0ae1dabafd7dd506558daa29a7e1903dcf75, 92,472 bytes, tracked. Canon row read at tools/art/minibosses.py:18373 (Onceround, 2.26 m, confection).
 Added arrive x9, act x7, broken x4, fall x8. The mechanic is a drum shut until the pan comes round: blows on the wall do nothing, the party holds its blows together. No {name} in arrive or fall, no per-hero item named, no operator (art removed the man at pass 4; the crank turns itself). _note_c187 added (expected zero-hit).

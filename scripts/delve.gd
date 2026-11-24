@@ -417,6 +417,7 @@ const MB_FIT := {
 	"changer": 1.11,   # S98: art's _fit_report.json pairs.changer.ratio (47th, Evenhand in CANON, h 2.72 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived
 	"stopper": 0.97,   # S101: art's _fit_report.json pairs.stopper.ratio (48th, Chokewell in CANON, h 2.38 / hero 2.45, tag crypt - field 5, fits_frame true, 3/3 proving views), copied not re-derived. stopper.glb is NOT on any branch, so miniboss_model holds it out until art commits the mesh
 	"almoner": 1.03,   # S107: art's _fit_report.json pairs.almoner.ratio (50th, Dolehand in CANON, h 2.52 / hero 2.45, tag shrine - field 5, fits_frame true, 3/3 proving views), copied not re-derived; almoner.glb.import committed in the same change
+	"panner": 0.92,   # S111: art's _fit_report.json pairs.panner.ratio (51st, Onceround in CANON, h 2.26 / hero 2.45, tag confection - field 5, fits_frame true, 3/3 proving views), copied not re-derived
 	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
 }
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
@@ -450,7 +451,8 @@ const MB_NAME := {
 	"changer": "Evenhand",   # S99: content's miniboss_feed._note_c174 "Evenhand" and art's CANON title (minibosses.py:16466), both read; C-174 by_key.changer landed (9/7/4/8)
 	"roper": "Drawtight",   # S102: content's miniboss_feed._note_c177 "Drawtight" and art's CANON title (minibosses.py:17262), both read; C-177 by_key.roper landed (9/7/4/8)
 	"stopper": "Chokewell",   # S103: content's miniboss_feed._note_c176 "Chokewell" and art's CANON title (minibosses.py:16881), both read; C-176 by_key.stopper landed (9/7/4/8); stopper.glb tracked on main 41f71825 - the S101/S102 hold is lifted
-	"almoner": "Dolehand"}   # S107: content's C-182 by_key.almoner landed (9/7/4/8) and art's CANON title (minibosses.py:17903), both read
+	"almoner": "Dolehand",   # S107: content's C-182 by_key.almoner landed (9/7/4/8) and art's CANON title (minibosses.py:17903), both read
+	"panner": "Onceround"}   # S111: content's C-187 by_key.panner landed (9/7/4/8), _note_c187 "Onceround", and art's CANON title (minibosses.py:18373), both read; panner.glb.import committed at S110
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

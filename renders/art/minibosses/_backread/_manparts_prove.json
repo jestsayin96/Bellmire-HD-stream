@@ -8,7 +8,12 @@
   {
    "check": "A_parts_seen",
    "pass": true,
-   "why": "exactly the 6 bodies that declare man_parts resolve from parts; saw 6"
+   "why": "every builder that declares man_parts resolves from parts: 23 declared, 23 resolved"
+  },
+  {
+   "check": "A_no_declaration_absent",
+   "pass": true,
+   "why": "and no declaring builder lands in the SILENT list: []"
   },
   {
    "check": "B_missing_is_red",
@@ -42,19 +47,52 @@
   }
  ],
  "by_source": {
-  "span": 32,
-  "parts": 6,
-  "": 31
+  "span": 33,
+  "parts": 23,
+  "": 13
  },
+ "declared_n": 23,
+ "absent_bodies": [
+  "boiler_chibi",
+  "cook_chibi",
+  "drillmaster_chibi",
+  "drillmaster_chibi_tall",
+  "gaoler_chibi",
+  "porter_chibi",
+  "sexton_chibi",
+  "sluicekeeper_chibi",
+  "snarer_chibi",
+  "snuffer_chibi",
+  "sower_chibi",
+  "stoker_chibi",
+  "tallyman_chibi"
+ ],
  "parts_bodies": [
+  "bellman",
+  "cook",
+  "drillmaster",
+  "drillmaster_tall",
+  "gaoler",
   "hurdleman",
   "iceman",
+  "jointer",
+  "loader",
   "nightman",
+  "porter",
+  "quartermaster",
+  "scrapwright",
+  "sexton",
+  "sluicekeeper",
+  "snarer",
+  "snuffer",
+  "sower",
   "stiltman",
+  "stoker",
   "straker",
+  "tallyman",
   "tanner"
  ],
- "span_bodies_n": 32,
+ "span_bodies_n": 33,
  "control_errors": [],
  "ok": true
 }

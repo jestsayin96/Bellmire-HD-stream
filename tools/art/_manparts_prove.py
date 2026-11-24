@@ -51,9 +51,12 @@ def _control():
             continue
         rng, src, e = M.man_ranges(P)
         by_src[src] = by_src.get(src, 0) + 1
-        rows[key] = {"from": src, "ranges": rng, "errors": e}
+        rows[key] = {"from": src, "ranges": rng, "errors": e,
+                     "declares": hasattr(P, "man_parts")}
         errs += ["%s: %s" % (key, x) for x in e]
-    return {"errors": errs, "by_source": by_src, "rows": rows}
+    return {"errors": errs, "by_source": by_src, "rows": rows,
+            "declared_n": sum(1 for r in rows.values() if r["declares"]),
+            "absent": sorted(k for k, r in rows.items() if r["from"] == "")}
 
 
 def main():
@@ -77,13 +80,25 @@ def main():
 
     ck("A_control_clean", not a["errors"],
        "every shipped builder resolves with no error")
-    # SIX, measured, not guessed: the six bodies _spanprobe.py found already
-    # splitting their figure from their gear under other span names. The first
-    # cut of this check said 7 from memory and FAILED on the real tree, which
-    # is the harness doing its job on its own author.
-    ck("A_parts_seen", a["by_source"].get("parts", 0) == 6,
-       "exactly the 6 bodies that declare man_parts resolve from parts; "
-       "saw %d" % a["by_source"].get("parts", 0))
+    # *** THIS CHECK WAS A LITERAL AND THE LITERAL WENT STALE IN ONE DAY. ***
+    # It read `== 6` - the six bodies _spanprobe.py found on 24 Nov 17:0x - and
+    # S118 then declared `man_parts` in seventeen more builders, so a CORRECT
+    # widening would have turned this harness red. A count that has to be
+    # hand-edited every time the thing it measures grows is the hand-written
+    # census fault one level down (the `self_seen` block, 24 Nov 11:4x).
+    # The invariant that does not go stale is the one this check was reaching
+    # for: EVERY BUILDER THAT DECLARES A FIGURE MUST RESOLVE FROM IT. Both
+    # sides are measured off the same tree in the same pass, so the check
+    # cannot be satisfied by editing a number, and it goes red the moment a
+    # declaration resolves to anything other than "parts" - including the
+    # silent "" outcome this whole mechanism exists to abolish.
+    ck("A_parts_seen", a["by_source"].get("parts", 0) == a["declared_n"],
+       "every builder that declares man_parts resolves from parts: %d declared, "
+       "%d resolved" % (a["declared_n"], a["by_source"].get("parts", 0)))
+    ck("A_no_declaration_absent",
+       not [k for k, r in a["rows"].items() if r["declares"] and r["from"] == ""],
+       "and no declaring builder lands in the SILENT list: %s"
+       % ([k for k, r in a["rows"].items() if r["declares"] and r["from"] == ""],))
     ck("B_missing_is_red", bool(b[2]) and b[1] == "" and not b[0],
        "a man_parts naming an undeclared span returns an ERROR and no "
        "ranges, so it CANNOT land in not_measurable: %s" % (b[2],))
@@ -100,6 +115,8 @@ def main():
        "nothing left patched by the stub arms")
 
     out = {"checks": checks, "by_source": a["by_source"],
+           "declared_n": a["declared_n"],
+           "absent_bodies": a["absent"],
            "parts_bodies": sorted(k for k, r in a["rows"].items()
                                   if r["from"] == "parts"),
            "span_bodies_n": a["by_source"].get("span", 0),

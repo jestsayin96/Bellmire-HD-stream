@@ -145,6 +145,19 @@ def drillmaster():
     He is a sergeant, not a champion: no crest, no cape, a kettle helm and a
     dun coat. The gong is the only kept thing on him."""
     P = Parts("drillmaster")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = -0.30                                   # the man stands left of centre
     # braced stance, short and wide. Boots are blocks so he reads as planted.
     for s in (-1, 1):
@@ -161,6 +174,7 @@ def drillmaster():
     P.add(aim(L.cone(0.21, 0.09, 0.17, 14), (X - 0.16, -0.16, 1.73), (0.0, 0.0, 1.0)), 'dark')
     P.add(aim(L.cone(0.29, 0.25, 0.035, 16), (X - 0.16, -0.16, 1.73), (0.0, 0.08, 1.0)), 'dark')
     eyes(P, (X - 0.16, 0.0, 1.70), 0.055, 0.028, -0.26)
+    _seg("man_core")
     # THE FRAME: a hip yoke swung out to his right, two uprights, one crossbar
     P.add(L.box(0.84, 0.12, 0.08), 'dark', loc=(X + 0.34, 0.24, 0.98), rot=(0.0, -0.12, 0.0))
     for s in (-1, 1):
@@ -180,16 +194,23 @@ def drillmaster():
         ring = [Vector((GX + r * math.cos(TAU * i / 26.0), 0.17,
                         GZ + r * math.sin(TAU * i / 26.0))) for i in range(27)]
         P.raw(L.tube(ring, 0.016, 6), 'dark')
+    _seg("gear_frame_gong")
     # THE MALLET, raised clear above the gong - a long haft and a heavy head
     limb(P, [(X + 0.14, -0.12, 1.42), (X + 0.44, -0.22, 1.60), (X + 0.56, -0.16, 1.80)],
          0.075, 0.055)
+    _seg("arm_r")
     limb(P, [(X + 0.56, -0.14, 1.80), (X + 0.86, 0.04, 2.40)], 0.040, 0.034, 'bone')
     P.raw(aim(L.cone(0.165, 0.165, 0.38, 12), (X + 0.86, 0.04, 2.40), (0.50, 0.30, 1.0)), 'dark')
     P.raw(aim(L.cone(0.175, 0.17, 0.045, 12), (X + 0.86, 0.04, 2.40), (0.50, 0.30, 1.0)), 'bone')
+    _seg("gear_mallet")
     # left arm down, a plain baton - the parade tool, not a weapon
     limb(P, [(X - 0.40, -0.12, 1.42), (X - 0.52, -0.20, 1.08), (X - 0.54, -0.26, 0.80)],
          0.075, 0.055)
+    _seg("arm_l")
     limb(P, [(X - 0.54, -0.26, 0.78), (X - 0.58, -0.30, 0.34)], 0.028, 0.022, 'bone')
+    _seg("gear_baton")
+    # THE FIGURE: man_core, arm_r, arm_l. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_r", "arm_l")
     return P
 
 
@@ -210,6 +231,19 @@ def scrapwright():
     That is the fight told in the silhouette: there is more where that came
     from."""
     P = Parts("scrapwright")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # three stubby feet under the skirt, mostly buried by the mass
     for ang in (0.3, 2.4, 4.5):
         x, y = 0.46 * math.cos(ang), 0.46 * math.sin(ang)
@@ -220,6 +254,7 @@ def scrapwright():
     P.add(L.sphere(0.74, 0.62, 0.68, 16, 11), 'dark', loc=(CX, CY, CZ), rot=(0.0, -0.22, 0.0))
     P.add(L.sphere(0.48, 0.44, 0.38, 14, 9), 'dark', loc=(CX - 0.26, CY - 0.08, CZ + 0.46),
           rot=(0.10, -0.40, 0.0))
+    _seg("mass")
     # PASS 3: the plates are laid ON the lump, tangent to its surface, not sunk
     # inside it. Pass 2 buried them and the thing came back a smooth boulder -
     # "it armours itself" has to be visible before the fight starts, or the
@@ -245,6 +280,7 @@ def scrapwright():
               loc=(at.x + n.x * 0.09, at.y + n.y * 0.09, at.z + n.z * 0.09))
     for z in (0.40, 0.64, 0.88):                                   # rivets
         P.add(L.sphere(0.05, 0.05, 0.05, 7, 5), 'dark', loc=(-1.12, -0.34, z))
+    _seg("gear_plates")
     # a thin crane neck OUT TO THE RIGHT, well clear of the lump
     limb(P, [(0.10, 0.04, 1.16), (0.40, -0.14, 1.48), (0.52, -0.30, 1.74)],
          0.090, 0.065, 'dark')
@@ -257,9 +293,13 @@ def scrapwright():
          0.105, 0.075, 'dark')
     P.raw(L.tube([(1.26, -0.62, 0.48), (1.46, -0.72, 0.30), (1.44, -0.76, 0.12),
                   (1.24, -0.72, 0.09)], [0.070, 0.058, 0.046, 0.030], 7), 'bone')
+    _seg("head_arm")
     # TWO SPARE PLATES, both on the side it feeds from - the ammunition
     P.add(L.box(0.72, 0.54, 0.065), 'body', loc=(1.08, -0.98, 0.035), rot=(0.0, 0.0, 0.55))
     P.add(L.box(0.58, 0.46, 0.065), 'body', loc=(1.36, -0.34, 0.035), rot=(0.05, 0.04, -0.6))
+    _seg("gear_spares")
+    # THE FIGURE: mass, head_arm. Everything else this builder adds is its gear.
+    P.man_parts = ("mass", "head_arm")
     return P
 
 
@@ -407,6 +447,19 @@ def gaoler():
 
     Everything about him is old, greased iron and leather."""
     P = Parts("gaoler")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # long thin legs, stooped hard forward over them
     for s in (-1, 1):
         limb(P, [(s * 0.15, 0.16, 1.16), (s * 0.20, -0.04, 0.62), (s * 0.23, 0.04, 0.07)],
@@ -425,15 +478,19 @@ def gaoler():
     P.raw(surf([[Vector((-0.17 + 0.17 * j, -0.50 - 0.03 * abs(j - 1), 2.02 - 0.10 * i))
                  for j in range(3)] for i in range(3)], 0.03), 'bone')
     eyes(P, (0.0, 0.0, 1.96), 0.055, 0.026, -0.54)
+    _seg("man_core")
     # short left arm, a ring of keys on the belt - plain working kit
     limb(P, [(-0.24, -0.22, 1.72), (-0.36, -0.32, 1.42), (-0.32, -0.34, 1.14)], 0.070, 0.050)
+    _seg("arm_l")
     ring = [Vector((-0.32 + 0.11 * math.cos(TAU * i / 14.0), -0.40,
                     1.02 + 0.11 * math.sin(TAU * i / 14.0))) for i in range(15)]
     P.raw(L.tube(ring, 0.014, 6), 'bone')
     for k in range(3):
         P.add(L.box(0.035, 0.02, 0.17), 'bone', loc=(-0.36 + k * 0.045, -0.41, 0.88))
+    _seg("gear_keys")
     # THE LONG ARM - heavier, half a metre further out, swung clear of the body
     limb(P, [(0.24, -0.20, 1.74), (0.72, -0.44, 1.52), (1.22, -0.58, 1.26)], 0.105, 0.075)
+    _seg("arm_r")
     # THE HOOK - a C of iron 0.70 m across. The mechanic, made readable.
     hook = [Vector((1.22 + 0.34 * math.cos(a), -0.60 + 0.07 * math.cos(a), 0.98 + 0.34 * math.sin(a)))
             for a in [1.75 - 4.3 * (i / 10.0) for i in range(11)]]
@@ -455,6 +512,9 @@ def gaoler():
     run = [end, Vector((-0.62, -0.30, 0.46)), Vector((-0.10, -0.62, 0.52)),
            Vector((0.60, -0.72, 0.86)), Vector((1.10, -0.66, 1.16))]
     _dragrun(P, run, tube=0.046)
+    _seg("gear_hook_chain")
+    # THE FIGURE: man_core, arm_l, arm_r. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_l", "arm_r")
     return P
 
 
@@ -470,6 +530,19 @@ def snuffer():
     head belongs. One live candle, in its own grip - the one it has already
     taken - is the only lit thing on it, and the only colour in the outline."""
     P = Parts("snuffer")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # tripod: three splayed legs on pads. It is furniture, not a man.
     for k in range(3):
         a = 0.52 + TAU * k / 3.0
@@ -485,6 +558,7 @@ def snuffer():
         limb(P, [(0.085 * math.cos(a), 0.085 * math.sin(a), 0.70),
                  (0.065 * math.cos(a), 0.065 * math.sin(a), 1.92)], 0.016, 0.014, 'bone')
     P.add(aim(L.cone(0.22, 0.13, 0.08, 12), (0.0, 0.0, 0.60), (0.0, 0.0, 1.0)), 'dark')
+    _seg("stand")
     # TWO CROSS-ARMS, one wide and one narrower above it - a T, then a t
     for z, half, n in ((1.46, 0.74, 4), (1.86, 0.50, 2)):
         bar = [Vector((-half, 0.0, z)), Vector((0.0, 0.0, z + 0.05)), Vector((half, 0.0, z))]
@@ -506,6 +580,7 @@ def snuffer():
         P.add(aim(L.cone(0.040, 0.034, 0.22 - 0.05 * (k % 3), 8), (x, y, 1.02), (0.0, 0.0, 1.0)), 'bone')
         P.add(L.sphere(0.014, 0.014, 0.014, 6, 4), 'dark',
               loc=(x, y, 1.02 + 0.22 - 0.05 * (k % 3)))
+    _seg("gear_candles")
     # THE HEAD: a wide snuffer cone, apex up, on a short neck
     limb(P, [(0.0, 0.0, 1.98), (0.0, -0.03, 2.12)], 0.060, 0.070, 'dark')
     P.raw(aim(L.cone(0.52, 0.02, 0.50, 20), (0.0, -0.03, 2.10), (0.0, 0.0, 1.0)), 'body')
@@ -516,11 +591,16 @@ def snuffer():
         P.raw(L.tube([Vector((0.49 * math.cos(a), -0.03 + 0.49 * math.sin(a), 2.12)),
                       Vector((0.18 * math.cos(a), -0.03 + 0.18 * math.sin(a), 2.40))],
                      0.014, 5), 'dark')
+    _seg("head")
     # the one light it has taken, held out on a small arm at chest height
     limb(P, [(0.06, -0.08, 1.30), (0.34, -0.34, 1.22), (0.46, -0.44, 1.30)], 0.045, 0.035, 'dark')
+    _seg("arm")
     P.add(aim(L.cone(0.10, 0.07, 0.05, 10), (0.46, -0.44, 1.30), (0.0, 0.0, 1.0)), 'dark')
     P.add(aim(L.cone(0.045, 0.038, 0.16, 9), (0.46, -0.44, 1.34), (0.0, 0.0, 1.0)), 'bone')
     P.add(L.sphere(0.045, 0.045, 0.075, 9, 7), 'glow', loc=(0.46, -0.44, 1.56))
+    _seg("gear_taken")
+    # THE FIGURE: stand, head, arm. Everything else this builder adds is its gear.
+    P.man_parts = ("stand", "head", "arm")
     return P
 
 
@@ -592,6 +672,19 @@ def sexton():
     He is a working sexton, not a wraith: a spade, a hod, a leather cowl, and
     the longest wear in the set because the crypt was here first."""
     P = Parts("sexton")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # feet planted wide and SHORT - everything above him is heavy
     for s in (-1, 1):
         limb(P, [(s * 0.19, 0.10, 0.88), (s * 0.26, -0.02, 0.48),
@@ -606,6 +699,7 @@ def sexton():
     P.add(L.sphere(0.175, 0.185, 0.175, 14, 9), 'dark', loc=(0.0, -0.42, 1.62))
     P.raw(aim(L.cone(0.25, 0.17, 0.07, 14), (0.0, -0.40, 1.70), (0.0, -0.30, 1.0)), 'dark')
     eyes(P, (0.0, 0.0, 1.62), 0.052, 0.024, -0.56)
+    _seg("man_core")
     # THE HOD FRAME: two uprights off the hips, raked back over his shoulders
     for s in (-1, 1):
         limb(P, [(s * 0.26, 0.16, 0.96), (s * 0.30, 0.26, 1.60),
@@ -654,10 +748,12 @@ def sexton():
     for s in (-1, 1):                       # and two side rails, same reason
         P.add(L.box(0.075, 0.10, 3 * pitch_z + 0.10), 'dark',
               loc=(s * (1.5 * pitch_x + 0.03), 0.37, 1.24 + pitch_z))
+    _seg("gear_hod")
     # THE SPADE - a long clean diagonal to the floor, the other way from the
     # grid's lean. Right arm down and back, both hands on the haft.
     limb(P, [(0.27, -0.26, 1.44), (0.46, -0.30, 1.14), (0.58, -0.28, 0.86)], 0.072, 0.054)
     limb(P, [(-0.27, -0.26, 1.44), (-0.10, -0.34, 1.10), (0.20, -0.32, 0.86)], 0.072, 0.054)
+    _seg("arms")
     limb(P, [(0.66, -0.26, 1.08), (0.94, -0.30, 0.40)], 0.055, 0.048, 'bone')
     # *** FOOT-PLANE PASS, CAUSE ONE OF TWO: THE SPADE DIGS PAST THE FLOOR. ***
     # Both blade pieces are aimed (0.36,-0.06,1.0) - raked 20 deg off vertical -
@@ -684,6 +780,9 @@ def sexton():
     for k, (dx, dy, r) in enumerate(((1.02, -0.62, 0.30), (1.26, -0.34, 0.22),
                                      (0.86, -0.86, 0.17))):
         P.add(L.sphere(r, r * 0.86, r * 0.42, 10, 7), 'dark', loc=(dx, dy, r * 0.42))
+    _seg("gear_spade")
+    # THE FIGURE: man_core, arms. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arms")
     return P
 
 
@@ -703,6 +802,19 @@ def porter():
     He is the keep's porter and the keep is kept: middling wear, the iron
     greased, the oak sound, and nothing decorative on him anywhere."""
     P = Parts("porter")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # square, planted, no stoop at all - he is a post
     for s in (-1, 1):
         limb(P, [(s * 0.22, 0.04, 0.96), (s * 0.26, 0.00, 0.50),
@@ -718,6 +830,7 @@ def porter():
     P.add(L.box(0.20, 0.035, 0.035), 'dark', loc=(0.0, -0.34, 1.84))
     eyes(P, (0.0, 0.0, 1.81), 0.058, 0.022, -0.36)
     P.raw(aim(L.cone(0.24, 0.20, 0.055, 16), (0.0, -0.16, 1.93), (0.0, 0.0, 1.0)), 'dark')
+    _seg("man_core")
     # THE LEAF - tall, banded oak on a slung strap behind him. Narrower than it
     # is tall on purpose, so the bar owns the width and the leaf owns the height.
     # PASS 2, after the silhouette sheet. Pass 1 put a 1.02 m leaf right behind
@@ -751,14 +864,19 @@ def porter():
         P.add(L.box(0.20, 0.23, 0.23), 'dark', loc=(s * 1.48, BY + s * 0.22, BZ + s * 0.27))
         P.add(aim(L.cone(0.115, 0.08, 0.15, 10), (s * 1.60, BY + s * 0.24, BZ + s * 0.29),
                   (s * 1.0, s * 0.14, s * 0.18)), 'dark')
+    _seg("gear_door_bar")
     for s in (-1, 1):                                       # arms out onto the bar
         limb(P, [(s * 0.32, -0.12, 1.52), (s * 0.46, -0.44, 1.40),
                  (s * 0.52, BY, BZ + s * 0.08)], 0.090, 0.068)
         P.add(L.box(0.17, 0.24, 0.24), 'dark', loc=(s * 0.52, BY, BZ + s * 0.09))
+    _seg("arms")
     # the socket brackets he will drive it into, carried on the belt
     for s in (-1, 1):
         P.add(aim(L.cone(0.11, 0.09, 0.20, 10), (s * 0.40, -0.26, 0.96),
                   (0.0, -0.25, -1.0)), 'dark')
+    _seg("gear_brackets")
+    # THE FIGURE: man_core, arms. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arms")
     return P
 
 
@@ -781,6 +899,19 @@ def tallyman():
     kept, and it is the only bright metal object in the file. A level 12
     Bellmire's treasury does not have a rusty tallyman in it."""
     P = Parts("tallyman")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # thin, long, upright - a clerk's build, not a fighter's
     for s in (-1, 1):
         limb(P, [(s * 0.13, 0.06, 1.02), (s * 0.17, 0.00, 0.54),
@@ -793,6 +924,7 @@ def tallyman():
     P.add(L.box(0.56, 0.06, 0.07), 'dark', loc=(0.0, -0.28, 0.86))
     P.add(L.box(0.20, 0.04, 0.035), 'dark', loc=(0.0, -0.29, 0.98))        # the slot
     P.add(L.box(0.14, 0.03, 0.02), 'glow', loc=(0.0, -0.305, 0.98))
+    _seg("man_lower")
     # THE COUNTING FRAME - four wires across the chest, beads on each. The
     # beads are the tally: what it has already had off you.
     FY, F0 = -0.20, 1.26
@@ -807,11 +939,14 @@ def tallyman():
             x = -0.40 + 0.80 * (k / max(1.0, n - 1.0)) * (0.62 if n > 4 else 0.9)
             P.add(L.sphere(0.052, 0.040, 0.052, 9, 6), 'body',
                   loc=(x, FY - 0.035, z))
+    _seg("gear_frame")
     # head: a narrow hooded lamp, a visor slit, a quill behind it. No face.
     P.add(L.box(0.26, 0.30, 0.30), 'body', loc=(0.0, -0.10, 1.86))
     P.add(aim(L.cone(0.20, 0.13, 0.09, 12), (0.0, -0.10, 2.02), (0.0, 0.0, 1.0)), 'dark')
     P.add(L.box(0.19, 0.04, 0.045), 'glow', loc=(0.0, -0.26, 1.88))
+    _seg("head")
     limb(P, [(0.10, 0.06, 1.98), (0.26, 0.20, 2.34)], 0.020, 0.008, 'bone')   # the quill
+    _seg("gear_quill")
     # LONG THIN ARMS with PINCHING FINGERS - it lifts, it does not hook.
     for s, reach in ((-1, 0.46), (1, 0.34)):
         limb(P, [(s * 0.17, -0.06, 1.66), (s * 0.44, -0.30, 1.52),
@@ -820,6 +955,7 @@ def tallyman():
         for f in (-1, 0, 1):
             limb(P, [(hx, -0.54, 1.32), (hx + s * 0.10 + f * 0.035, -0.66 - abs(f) * 0.02, 1.18)],
                  0.020, 0.012, 'bone')
+    _seg("arms")
     # WHAT IT HAS TAKEN - on cords off the frame. The receipt, modelled.
     # PASS 2, after the silhouette sheet. Pass 1 hung the kit on short cords
     # inside the body's own width, so every stolen piece fused with the torso
@@ -859,6 +995,9 @@ def tallyman():
     hang(0.00, 1.14, 'satchel')
     hang(0.58, 0.72, 'blade')
     hang(0.88, 0.34, 'ring')
+    _seg("gear_taken")
+    # THE FIGURE: man_lower, head, arms. Everything else this builder adds is its gear.
+    P.man_parts = ("man_lower", "head", "arms")
     return P
 
 
@@ -880,6 +1019,19 @@ def cook():
     but the pot itself is scoured bright inside the rim because a cook keeps
     his pot. Plainness is the voice - this is a man with a pot and a spoon."""
     P = Parts("cook")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # short bowed legs, taking a load on one side
     for s in (-1, 1):
         limb(P, [(s * 0.20 - 0.06, 0.08, 0.82), (s * 0.25 - 0.06, 0.00, 0.44),
@@ -897,6 +1049,7 @@ def cook():
     P.add(L.sphere(0.150, 0.165, 0.160, 14, 9), 'bone', loc=(-0.30, -0.18, 1.62))
     P.add(L.sphere(0.175, 0.180, 0.105, 14, 8), 'dark', loc=(-0.30, -0.16, 1.73))
     eyes(P, (-0.30, 0.0, 1.60), 0.054, 0.026, -0.28)
+    _seg("man_core")
     # THE YOKE across the shoulders, dipping to the loaded side
     yoke = [Vector((-0.96, -0.08, 1.46)), Vector((-0.26, -0.14, 1.56)),
             Vector((0.52, -0.08, 1.42)), Vector((0.96, -0.02, 1.30))]
@@ -925,8 +1078,10 @@ def cook():
     # the colour sheet - straw, or bones, anything but steam. Geometry cannot
     # do steam at this silhouette weight, so the heat is the lit pot surface
     # above and the delve's own particles can carry the rest.
+    _seg("gear_yoke_pot")
     # THE LADLE - long haft up and back over the other shoulder, a deep bowl
     limb(P, [(-0.56, -0.16, 1.36), (-0.74, -0.24, 1.14), (-0.82, -0.26, 0.92)], 0.072, 0.054)
+    _seg("arm")
     limb(P, [(-0.74, -0.14, 1.02), (-1.16, 0.06, 2.12)], 0.034, 0.028, 'bone')
     P.add(L.sphere(0.17, 0.17, 0.11, 14, 9), 'body', loc=(-1.22, 0.09, 2.24))
     P.add(aim(L.cone(0.175, 0.16, 0.05, 14), (-1.22, 0.09, 2.29), (0.10, -0.04, 1.0)), 'dark')
@@ -935,6 +1090,9 @@ def cook():
         P.add(aim(L.cone(0.115, 0.085, 0.055, 12), (-0.98, -0.04, 1.14 - k * 0.075),
                   (0.0, 0.0, 1.0)), 'bone')
     limb(P, [(-0.96, -0.06, 1.44), (-0.98, -0.04, 1.18)], 0.012, 0.012, 'dark')
+    _seg("gear_ladle_kit")
+    # THE FIGURE: man_core, arm. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm")
     return P
 
 
@@ -1035,6 +1193,19 @@ def sluicekeeper():
     Wear 0.95, the highest in the whole set and justified: this is the one
     thing down there that is never dry. Nothing on him is kept."""
     P = Parts("sluicekeeper")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = -0.42
     _legs(P, X, hip=0.88, stance=0.22)
     limb(P, [(X, 0.10, 0.82), (X - 0.04, 0.00, 1.14), (X - 0.10, -0.10, 1.40)], 0.25, 0.26)
@@ -1045,6 +1216,7 @@ def sluicekeeper():
     P.add(L.sphere(0.145, 0.160, 0.158, 14, 9), 'bone', loc=(X - 0.14, -0.14, 1.64))
     P.raw(aim(L.cone(0.235, 0.075, 0.30, 14), (X - 0.14, -0.12, 1.56), (0.06, -0.10, 1.0)), 'dark')
     eyes(P, (X - 0.14, 0.0, 1.62), 0.050, 0.025, -0.24)
+    _seg("man_core")
     # THE SLUICE FRAME on his right: two posts, a head beam, the screw between
     FX = X + 1.02
     for s in (-1, 1):
@@ -1072,11 +1244,17 @@ def sluicekeeper():
     P.add(L.box(0.60, 0.10, 0.055), 'glow', loc=(FX, 0.30, 0.44))
     # the tide line he carries with him: a shallow lit pool at his feet
     P.add(L.sphere(0.72, 0.52, 0.035, 20, 6), 'glow', loc=(X + 0.18, 0.04, 0.022))
+    _seg("gear_sluice")
     # his own hand on the stem, and a drag-board tucked under the far arm
     limb(P, [(X + 0.16, -0.12, 1.34), (FX - 0.22, 0.04, 1.44)], 0.072, 0.052)
+    _seg("arm_r")
     P.raw(L.membrane([(X - 0.92, -0.22, 0.86), (X - 0.30, -0.26, 1.04),
                       (X - 0.26, -0.26, 1.24), (X - 0.88, -0.22, 1.06)], 0.05), 'bone')
+    _seg("gear_board")
     limb(P, [(X - 0.34, -0.20, 1.32), (X - 0.60, -0.24, 1.08)], 0.070, 0.050)
+    _seg("arm_l")
+    # THE FIGURE: man_core, arm_r, arm_l. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_r", "arm_l")
     return P
 
 
@@ -1093,6 +1271,19 @@ def sower():
     three different heights, so the viewer can see it has been working before
     the fight starts. Wear 0.40: a farm tool, used hard and kept."""
     P = Parts("sower")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = -0.18
     _legs(P, X, hip=0.90, stance=0.26, boot=(0.28, 0.44, 0.10))
     limb(P, [(X, 0.10, 0.84), (X + 0.02, 0.00, 1.16), (X + 0.04, -0.12, 1.42)], 0.255, 0.255)
@@ -1103,12 +1294,14 @@ def sower():
     P.raw(aim(L.cone(0.44, 0.17, 0.055, 18), (X + 0.02, -0.16, 1.74), (0.0, 0.10, 1.0)), 'bone')
     P.add(aim(L.cone(0.17, 0.05, 0.14, 14), (X + 0.02, -0.16, 1.76), (0.0, 0.10, 1.0)), 'bone')
     eyes(P, (X + 0.02, 0.0, 1.64), 0.052, 0.026, -0.26)
+    _seg("man_core")
     # THE HOPPER - a slanted open box across the chest on a broad strap
     P.add(L.box(0.72, 0.34, 0.40), 'bone', loc=(X - 0.14, -0.34, 1.08), rot=(0.0, 0.22, 0.0))
     P.add(L.box(0.66, 0.28, 0.05), 'dark', loc=(X - 0.14, -0.34, 1.29), rot=(0.0, 0.22, 0.0))
     P.add(aim(L.cone(0.27, 0.25, 0.045, 16), (X - 0.14, -0.36, 1.30), (0.22, 0.0, 1.0)), 'glow')
     P.raw(L.membrane([(X + 0.16, -0.24, 1.44), (X + 0.26, -0.18, 1.40),
                       (X - 0.30, -0.44, 0.96), (X - 0.40, -0.48, 1.00)], 0.035), 'dark')
+    _seg("gear_hopper")
     # THE CAST: the far arm thrown wide and open, low, palm turned out.
     # 18 Nov - THE ARM IS 'dark' NOW, AND THE CAUSE WAS IN THE DEFAULTS. The
     # team lead found by eye that from the side the forearm, hand and hopper
@@ -1121,12 +1314,15 @@ def sower():
     limb(P, [(X - 0.25, -0.12, 1.40), (X - 0.72, -0.26, 1.18), (X - 1.06, -0.34, 1.02)],
          0.085, 0.060, 'dark')
     P.add(L.sphere(0.115, 0.095, 0.075, 10, 7), 'dark', loc=(X - 1.12, -0.36, 0.98))
+    _seg("arm_cast")
     for k in range(4):   # four seeds already in the air, clear of the hand
         P.add(L.sphere(0.042, 0.042, 0.042, 7, 5), 'glow',
               loc=(X - 1.30 - k * 0.17, -0.40 - k * 0.04, 0.92 - k * 0.14))
+    _seg("gear_seeds")
     # the near arm steadying the hopper
     limb(P, [(X + 0.33, -0.14, 1.40), (X + 0.30, -0.30, 1.16), (X + 0.14, -0.40, 1.08)],
          0.080, 0.056)
+    _seg("arm_near")
     # THREE SHOOTS ALREADY UP, behind him, crooked, diverging, three heights
     for s, (dx, dy, hh, bend) in enumerate(((0.62, 0.42, 1.74, 0.26),
                                             (1.05, 0.30, 1.18, -0.20),
@@ -1150,6 +1346,9 @@ def sower():
             sx = X + dx + bend * t + (0.16 if k % 2 else -0.16)
             P.raw(aim(L.cone(0.030, 0.0, 0.17, 6), (X + dx + bend * t, dy + 0.10 * t, z),
                       (sx - (X + dx + bend * t), 0.06, 0.34)), 'bone')
+    _seg("gear_shoots")
+    # THE FIGURE: man_core, arm_cast, arm_near. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_cast", "arm_near")
     return P
 
 
@@ -1168,6 +1367,19 @@ def snarer():
     the only curved lines in the fourteen, against a file of bars and discs.
     A long beating-pole takes the low diagonal. Wear 0.55: woodsman's kit."""
     P = Parts("snarer")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = 0.0
     _legs(P, X, hip=0.86, stance=0.20, boot=(0.24, 0.40, 0.10))
     # hunched: a man who works bent over, so the torso leans forward and down
@@ -1177,6 +1389,7 @@ def snarer():
     P.add(L.sphere(0.140, 0.155, 0.150, 14, 9), 'bone', loc=(X + 0.06, -0.30, 1.50))
     P.add(L.sphere(0.165, 0.150, 0.095, 14, 8), 'dark', loc=(X + 0.06, -0.28, 1.60))
     eyes(P, (X + 0.06, 0.0, 1.48), 0.050, 0.025, -0.30)
+    _seg("man_core")
     # THREE BENT SPRINGPOLES, rooted in the floor, arcing over and inward. Each
     # is a sapling under load: thick at the root, whippy at the tip, and the
     # bend carries past vertical so the tip hangs OVER the walking ground.
@@ -1204,16 +1417,22 @@ def snarer():
         # the trigger peg at the root, leaning the way the pole is pulled
         P.raw(aim(L.cone(0.034, 0.020, 0.34, 7), (X + rx - sgn * 0.14, ry + 0.06, 0.0),
                   (sgn * 0.26, 0.0, 1.0)), 'dark')
+    _seg("gear_snares")
     # THE BEATING POLE - a long clear diagonal low and to the front
     limb(P, [(X - 0.34, -0.40, 1.22), (X + 0.46, -0.66, 0.78), (X + 1.22, -0.88, 0.22)],
          0.045, 0.030, 'bone')
+    _seg("gear_pole")
     limb(P, [(X - 0.22, -0.30, 1.26), (X - 0.36, -0.42, 1.20)], 0.072, 0.052)
+    _seg("arm")
     P.add(L.sphere(0.075, 0.065, 0.065, 10, 7), 'dark', loc=(X + 1.26, -0.90, 0.19))
     # two pegs and a coil of cord on the ground beside him - he has been working
     for k in range(2):
         P.raw(aim(L.cone(0.030, 0.018, 0.30, 7), (X - 0.74 + k * 0.22, -0.46, 0.0),
                   (0.10, 0.0, 1.0)), 'bone')
     _ring(P, (X - 0.62, -0.52, 0.055), 0.21, 'z', 'dark', 0.028, 18)
+    _seg("gear_ground")
+    # THE FIGURE: man_core, arm. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm")
     return P
 
 
@@ -1230,6 +1449,19 @@ def stoker():
     standing off the far shoulder. Reads FIGURE, TALL FLUE, RAKE TO THE FLOOR.
     Wear 0.70: scorched iron. Nothing scorched is also bright."""
     P = Parts("stoker")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = -0.10
     _legs(P, X, hip=0.94, stance=0.23, boot=(0.28, 0.46, 0.13))
     # a squat heavy frame, square-shouldered. The chest is a box, not a barrel,
@@ -1247,6 +1479,7 @@ def stoker():
     P.add(L.sphere(0.135, 0.150, 0.145, 14, 9), 'bone', loc=(X - 0.06, -0.16, 1.68))
     P.add(aim(L.cone(0.205, 0.145, 0.12, 14), (X - 0.06, -0.16, 1.70), (0.0, 0.04, 1.0)), 'dark')
     eyes(P, (X - 0.06, 0.0, 1.66), 0.052, 0.030, -0.22)
+    _seg("man_core")
     # THE FLUE off the far shoulder: a tall narrow pipe, two bands, a lit mouth
     FX = X - 0.60
     limb(P, [(FX, 0.22, 1.30), (FX - 0.06, 0.24, 2.16)], 0.105, 0.088, 'dark')
@@ -1256,6 +1489,7 @@ def stoker():
     P.add(aim(L.cone(0.115, 0.145, 0.10, 12), (FX - 0.06, 0.24, 2.14), (-0.07, 0.0, 1.0)), 'dark')
     P.add(L.sphere(0.115, 0.115, 0.045, 12, 6), 'glow', loc=(FX - 0.07, 0.24, 2.23))
     limb(P, [(FX + 0.14, 0.18, 1.40), (FX + 0.02, 0.22, 1.32)], 0.050, 0.040, 'bone')
+    _seg("gear_flue")
     # THE RAKE - 1.9 m of haft running down into the floor on his right
     # *** FOOT-PLANE PASS, ONE THING: THE RAKE RIDES UP TO THE FLOOR. ***
     # The teeth are aimed (0.42,-0.10,-1.0), unit z -0.9181, 0.20 long from a
@@ -1277,7 +1511,9 @@ def stoker():
         P.raw(aim(L.cone(0.030, 0.0, 0.20, 6),
                   (X + 1.64 + k * 0.14, -0.78, 0.10 + RAKE_Z),
                   (0.42, -0.10, -1.0)), 'dark')
+    _seg("gear_rake")
     limb(P, [(X + 0.26, -0.10, 1.46), (X + 0.40, -0.22, 1.50)], 0.074, 0.054)
+    _seg("arm")
     # the fuel basket at his heels - the thing the party has to get to
     # SECOND CAUSE ON THIS BODY, MEASURED SEPARATELY FROM THE RAKE: the basket
     # is deliberately LEANING (0.0, 0.08, 1.0), and a tilted base circle does
@@ -1290,6 +1526,9 @@ def stoker():
         P.add(L.box(0.10, 0.10, 0.34), 'dark', loc=(X - 0.34 + k * 0.10, 0.54, 0.46),
               rot=(0.0, 0.18 - 0.16 * k, 0.0))
     P.add(L.sphere(0.30, 0.26, 0.05, 14, 6), 'glow', loc=(X - 0.30, 0.52, 0.06))
+    _seg("gear_basket")
+    # THE FIGURE: man_core, arm. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm")
     return P
 
 
@@ -1305,6 +1544,19 @@ def bellman():
     silhouette: one arm high left, one low right, neither mirroring the other.
     Wear 0.65: river damp, not ruin."""
     P = Parts("bellman")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = 0.0
     # no boots and no stance - a shroud reaching the floor. It does not walk
     # like the others and it should not stand like them either.
@@ -1315,19 +1567,23 @@ def bellman():
     P.add(L.sphere(0.135, 0.150, 0.165, 14, 9), 'dark', loc=(X - 0.04, -0.12, 2.06))
     P.raw(aim(L.cone(0.245, 0.055, 0.40, 16), (X - 0.04, -0.08, 1.92), (0.04, -0.14, 1.0)), 'bone')
     eyes(P, (X - 0.04, 0.0, 2.04), 0.048, 0.024, -0.22)
+    _seg("body")
     # ARM ONE - high, to its left, bell up and well clear of the hood
     limb(P, [(X - 0.14, -0.06, 1.88), (X - 0.58, -0.16, 2.08), (X - 1.02, -0.22, 2.26)],
          0.065, 0.044)
+    _seg("arm_hi")
     BX, BZ = X - 1.10, 2.16
     P.raw(aim(L.cone(0.07, 0.26, 0.34, 16, cap=False), (BX, -0.22, BZ - 0.34), (0.0, 0.0, 1.0)), 'body')
     _ring(P, (BX, -0.22, BZ - 0.345), 0.265, 'z', 'dark', 0.030, 16)
     P.add(L.sphere(0.055, 0.055, 0.075, 8, 6), 'glow', loc=(BX, -0.22, BZ - 0.42))
     limb(P, [(X - 1.04, -0.22, 2.24), (BX, -0.22, BZ)], 0.028, 0.024, 'dark')
+    _seg("gear_bell_hi")
     # ARM TWO - LOW, to its right, a smaller bell swinging by the hem. The two
     # arms are deliberately not a pair; a symmetrical pair reads as a posture
     # and this has to read as a TRICK.
     limb(P, [(X + 0.13, -0.08, 1.80), (X + 0.52, -0.22, 1.44), (X + 0.84, -0.30, 1.14)],
          0.062, 0.042)
+    _seg("arm_lo")
     CX, CZ = X + 0.90, 1.00
     P.raw(aim(L.cone(0.05, 0.185, 0.25, 14, cap=False), (CX, -0.30, CZ - 0.25), (0.0, 0.0, 1.0)), 'body')
     _ring(P, (CX, -0.30, CZ - 0.255), 0.19, 'z', 'dark', 0.026, 14)
@@ -1341,6 +1597,9 @@ def bellman():
     P.raw(aim(L.cone(0.045, 0.165, 0.23, 14, cap=False), (DX, 0.26, DZ - 0.23), (0.0, 0.0, 1.0)), 'body')
     _ring(P, (DX, 0.26, DZ - 0.235), 0.17, 'z', 'dark', 0.024, 14)
     limb(P, [(DX, 0.26, DZ + 0.08), (DX, 0.26, DZ)], 0.020, 0.018, 'dark')
+    _seg("gear_bells")
+    # THE FIGURE: body, arm_hi, arm_lo. Everything else this builder adds is its gear.
+    P.man_parts = ("body", "arm_hi", "arm_lo")
     return P
 
 
@@ -4328,6 +4587,19 @@ def jointer():
 
     Front is -Y here, same as the other fourteen."""
     P = Parts("jointer")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     GLOW_SEAM_Z = (0.96, 1.82)
 
     # ---- the two halves. A is the near/left half (mallet), B the far/right
@@ -4365,6 +4637,7 @@ def jointer():
         # hip socket the spare arm hangs on, both sides for symmetry of wear
         P.add(L.sphere(0.085, 0.080, 0.070, 10, 7), 'dark', loc=(X0 + s * 0.08, 0.13, 1.00))
 
+    _seg("halves")
     # ---- THE PIN. The mechanic, and the one long horizontal in the file.
     # It passes through both halves and stands 0.30 m proud at each end.
     limb(P, [(-0.95, -0.02, 1.40), (0.0, -0.03, 1.42), (0.95, -0.02, 1.44)],
@@ -4397,13 +4670,16 @@ def jointer():
                           Vector((s * 0.14, 0.14, z - 0.02))],
                          [0.030, 0.034, 0.032, 0.028], 7), 'bone')
 
+    _seg("gear_pin_seam")
     # ---- ARM 1: the mallet, hanging low off the near half. A long diagonal.
     limb(P, [(-0.46, -0.06, 1.72), (-0.70, -0.18, 1.40), (-0.73, -0.26, 1.08)],
          0.078, 0.056, 'body')
+    _seg("arm_mallet")
     limb(P, [(-0.73, -0.26, 1.06), (-0.80, -0.30, 0.54)], 0.036, 0.030, 'bone')
     P.raw(aim(L.cone(0.145, 0.145, 0.32, 12), (-0.82, -0.30, 0.44), (0.10, 0.10, 1.0)), 'dark')
     P.raw(aim(L.cone(0.152, 0.148, 0.045, 12), (-0.82, -0.30, 0.44), (0.10, 0.10, 1.0)), 'bone')
 
+    _seg("gear_mallet")
     # ---- ARM 2: PASS 4, AND THE CLAMP IS GONE BECAUSE I LOOKED AT IT. On the
     # pass-1 render the clamp read as a bracket and its jaws read as a second
     # pin cap - two of the three objects on the right-hand side were pretending
@@ -4412,6 +4688,7 @@ def jointer():
     # the far half still works.
     limb(P, [(0.44, -0.05, 1.56), (0.70, -0.18, 1.66), (0.82, -0.26, 1.74)],
          0.072, 0.052, 'body')
+    _seg("arm_saw")
     P.add(L.box(0.13, 0.17, 0.26), 'dark', loc=(0.86, -0.28, 1.80), rot=(0.0, 0.34, 0.0))
     # PASS 5: the blade is pulled in off the frame edge, and THE TEETH ARE ON
     # IT. At pass 4 they were a row of free cones standing clear of the blade -
@@ -4440,13 +4717,18 @@ def jointer():
     # as a dropped club. The peg is now modelled - a bone stub driven out of
     # the far half's hip - and the arm hangs ON it, touching, so the eye can
     # follow hip -> peg -> arm.
+    _seg("gear_saw")
     PEG = (0.40, 0.04, 1.16)
     P.raw(L.tube([Vector(PEG), Vector((0.62, 0.06, 1.14))], 0.035, 8), 'bone')
     P.add(L.sphere(0.062, 0.058, 0.052, 10, 7), 'dark', loc=(0.62, 0.06, 1.14))
+    _seg("gear_peg")
     limb(P, [(0.62, 0.06, 1.13), (0.67, 0.08, 0.92), (0.71, 0.10, 0.70)],
          0.064, 0.047, 'body')
     P.add(L.sphere(0.075, 0.068, 0.062, 10, 7), 'dark', loc=(0.72, 0.10, 0.66))
 
+    _seg("arm_spare")
+    # THE FIGURE: halves, arm_mallet, arm_saw, arm_spare. Everything else this builder adds is its gear.
+    P.man_parts = ("halves", "arm_mallet", "arm_saw", "arm_spare")
     # ---- PASS 6, AND THE SILHOUETTE SHEET IS WHY. The sheet - which IS the
     # acceptance test - frames every creature at the three_quarter view, 38
     # degrees (lordgen.VIEWS). This creature's one idea lives in a plane that
@@ -4656,6 +4938,19 @@ def quartermaster():
 
     Front is -Y here, same as the other fifteen."""
     P = Parts("quartermaster")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     X = 0.0
     SPEAR = _gear_mesh("spear_A")
     SHIELD = _gear_mesh("shield_A")
@@ -4682,6 +4977,7 @@ def quartermaster():
     P.add(L.box(0.62, 0.11, 0.26), 'dark', loc=(X, -0.20, 1.52), rot=(0.22, 0.0, 0.0))
     P.add(L.box(0.70, 0.30, 0.09), 'dark', loc=(X, -0.14, 1.66), rot=(0.14, 0.0, 0.0))
     eyes(P, (X, 0.0, 1.47), 0.050, 0.026, -0.26)
+    _seg("man_core")
     # PASS 2: the tally brand was a lollipop floating free beside the head. It
     # now grows OUT OF THE QUIVER at the back and leans, so it is rooted in
     # something and reads as a brand stuck in the stores.
@@ -4706,6 +5002,7 @@ def quartermaster():
         butt = (X + bx, 0.46, 1.00)
         _lay(P, SPEAR, 'bone', butt, (out_x, back_y - 0.34, 2.05), ln)
 
+    _seg("gear_brand")
     # ---- THE OFFERED SPEAR and the arm that holds it. The mechanic, and the
     # one long diagonal in the file that is neither level nor curved.
     # PASS 2: PASS 1 PUT THE OFFERED SPEAR BEHIND THE LEGS. On the three-quarter
@@ -4722,20 +5019,25 @@ def quartermaster():
     # and the ground store swapped to +X to keep them apart.
     limb(P, [(X - 0.30, -0.10, 1.34), (X - 0.62, -0.60, 1.20),
              (X - 0.95, -1.15, 1.05)], 0.090, 0.068, 'body')
+    _seg("arm_offer")
     _lay(P, SPEAR, 'bone', (X - 0.30, -1.05, 0.30), (-1.00, -0.25, 1.15), 2.00)
     # A HAND, NOT A BALL. The Porter's planks end in flat caps and read
     # unfinished at the tips; pass 1 repeated that with a plain sphere. A fist
     # with a thumb block over the shaft reads as GRIP at pane distance.
+    _seg("gear_offered")
     for hx, hy, hz, th in ((X - 0.95, -1.21, 1.04, -0.10), (X + 0.62, -0.36, 0.70, 0.09)):
         P.add(L.sphere(0.090, 0.086, 0.082, 10, 7), 'dark', loc=(hx, hy, hz))
         P.add(L.box(0.055, 0.14, 0.055), 'dark', loc=(hx + th, hy + 0.02, hz + 0.05))
+    _seg("hands")
     # the issue mark: a short lit band at the grip of the one being handed over
     limb(P, [(X - 0.86, -1.18, 0.96), (X - 1.02, -1.24, 1.14)], 0.028, 0.028, 'glow')
 
+    _seg("gear_mark")
     # ---- the other arm, down and in, resting on the stacked shields
     limb(P, [(X + 0.30, -0.08, 1.32), (X + 0.52, -0.22, 1.00),
              (X + 0.60, -0.34, 0.74)], 0.088, 0.066, 'body')
 
+    _seg("arm_down")
     # ---- THE STORE ON THE GROUND. Three shields leaning on the near leg, so
     # the thing reads as a store from the front where the sheaf foreshortens.
     # PASS 2: 0.78 m made each shield TALLER THAN THE TORSO and the stack read
@@ -4758,6 +5060,9 @@ def quartermaster():
         _lay(P, SPEAR, 'dark', (X + 1.62, -1.24 + k * 0.14, 0.05 + k * 0.045),
              (-1.0, 0.10, 0.04), 1.44)
 
+    _seg("gear_store")
+    # THE FIGURE: man_core, arm_offer, hands, arm_down. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_offer", "hands", "arm_down")
     P.used_pack = used_pack
     return P
 
@@ -4934,6 +5239,19 @@ def loader():
 
     Front is -Y here, same as the sixteen before it."""
     P = Parts("loader")
+    # S118, 24 Nov 2026 - THE FIGURE, STATED BY THIS BUILDER. See
+    # man_ranges(): this body was in the census `not_measurable` list, which
+    # is the SILENT outcome - nothing claimed and nothing printed - because it
+    # named no figure at all. The spans below are SEQUENTIAL: _seg() closes the
+    # range from the last boundary up to here, so every item lands in exactly
+    # one span and NO GEOMETRY MOVES - only index ranges are recorded.
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
     # PASS 2, AND THE PICTURE IS WHY. Pass 1 built all six stacked crates from
     # the pack mesh decimated to 90 faces, because six pack crates at usable
     # fidelity would have blown the set's face budget on their own. On the
@@ -4970,6 +5288,7 @@ def loader():
     P.add(L.box(0.46, 0.30, 0.07), 'dark', loc=(0.0, -0.44, 1.36), rot=(0.30, 0.0, 0.0))
     eyes(P, (0.0, -0.30, 1.22), 0.048, 0.025, -0.24)
 
+    _seg("man_core")
     # ---- THE BACK FRAME the column stands on. Two uprights off the hips and
     # one crossbar, so the stack is CARRIED and not balanced on a shoulder.
     # PASS 5, AND IT IS THE SIDE VIEW THAT SAYS SO. At pass 4 the column sat
@@ -5019,6 +5338,7 @@ def loader():
     P.add(L.box(0.11, 0.11, 0.13), 'dark', loc=(-0.46, -0.26, 1.46))
     P.add(L.sphere(0.060, 0.060, 0.068, 10, 7), 'glow', loc=(-0.46, -0.26, 1.57))
 
+    _seg("gear_load")
     # ---- THE BOOM, ON THE NEAR (-X) SIDE, where the three_quarter camera can
     # see it. A diagonal: 0.84 m across, 0.44 m down. Never level.
     limb(P, [(-0.30, -0.14, 1.26), (-0.70, -0.40, 1.04), (-1.14, -0.62, 0.82)],
@@ -5027,6 +5347,7 @@ def loader():
     # the chain, and THE CRATE THAT IS ABOUT TO BE YOURS, hanging off its end.
     # This one is REAL PACK GEOMETRY - it is the mechanic and it is the thing
     # the eye lands on.
+    _seg("arm_boom")
     limb(P, [(-1.14, -0.62, 0.80), (-1.16, -0.62, 0.62)], 0.022, 0.022, 'bone')
     _crate(P, CRATE, 'bone', -1.16, -0.62, 0.26, 0.46, 0.42, 0.36, 0.22)
     # PASS 2: the lit issue band ran 0.44 m and stood out past both sides of
@@ -5040,6 +5361,9 @@ def loader():
     _crate(P, KEG, 'bone', 0.82, -0.10, 0.0, 0.40, 0.40, 0.52)
     _crate(P, SACK, 'dark', 1.18, -0.52, 0.0, 0.44, 0.40, 0.34, 0.5)
 
+    _seg("gear_store")
+    # THE FIGURE: man_core, arm_boom. Everything else this builder adds is its gear.
+    P.man_parts = ("man_core", "arm_boom")
     P.used_pack = used_pack
     return P
 
@@ -12137,6 +12461,11 @@ def rammer():
     # Head ~0.46 across against a ~1.55 figure - a shade under a third, which
     # is where the KayKit bodies sit. Limbs short and thick, neck gone.
     GPX, GPY, GPZ = 0.62, 0.26, 1.40          # the grip - where the rope ends
+    # S118, 24 Nov 2026 - THE FIGURE. The hauler is the only man on this
+    # body and he is authored in one contiguous block from here to the end,
+    # so man_ranges() reads a plain `man` span. The frame, the pile, the
+    # chalk ring, the monkey and the rope are the machine he is loading.
+    _i_man = len(P.items)
     for _s in (-1, 1):
         limb(P, [(0.90 + _s * 0.14, 0.52, 0.64),
                  (0.90 + _s * 0.18, 0.46, 0.34),
@@ -12158,6 +12487,7 @@ def rammer():
          0.100, 0.076, 'body')
     P.add(L.sphere(0.092, 0.092, 0.082, 10, 7), 'body', loc=(GPX + 0.04, GPY - 0.01, GPZ - 0.02))
     P.add(L.sphere(0.088, 0.088, 0.078, 10, 7), 'body', loc=(GPX + 0.11, GPY + 0.07, GPZ - 0.12))
+    P.spans = {"man": (_i_man, len(P.items))}
     return P
 
 

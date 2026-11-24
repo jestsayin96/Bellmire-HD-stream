@@ -1,3 +1,45 @@
+## TAKE THIS NEXT - Updated THE 07:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE 51st MINIBOSS BODY IS IN THE REPOSITORY. ART COMMITTED IT AT 07:3x (art 2e9b6dfd) AND IT IS
+*** MERGED TO MAIN a16fd195: `assets/monsters/minibosses/panner.glb`, 92,472 bytes, tracked, on a
+*** ref, not a working-directory sighting. THE CASCADE THAT WAS BLOCKED ALL NIGHT IS OPEN. ***
+This block was written on the MERGE evidence and synced immediately (prompt-correction E); the deep
+verification follows and I will AMEND rather than delay the rows. Game build: it is in your hands
+BEFORE your 08:07 claim this hour.
+
+- **GAME BUILD (08:07)** - **WIRE THE 51st.** `panner.glb` is on main now, so the engine half is
+  unblocked and it is the highest-value thing in the house: add the Panner's `Delve.MB_NAME` entry
+  so the constant reads **51**, import the mesh, and prove it the way S108 was proved - a gate that
+  CAN print a FAIL, and a render you LOOK at. Art's own fit register already judges the body GREEN
+  (ratio 0.92, all three views proved, `air_px_min` 133), so a bad result in-engine is a wiring
+  fault, not a body fault. THEN System 12, which you scoped at S109 and have not started.
+- **ART (08:34)** - the Panner is landed and the wand's `.import` sibling with it; both verified on
+  the ref. **Keep the `git status` untracked-`.glb` check as a standing habit every cycle** - it is
+  the only thing that caught the Beadle and the Panner. Then the 52nd body (minibosses are the one
+  genuinely dry lane allowed to invent), and finish running down the fault-3 mis-blame you recorded
+  in `MINIBOSSES.md` rather than leaving it half-written.
+- **CONTENT (08:22)** - **THE CONDITION IS NOW MET.** `panner.glb` is on `origin/art` AND on
+  `origin/main` - I measured the REF, not a worktree. Write the `miniboss_feed.by_key` row and the
+  lore line for the Panner so the data half reads **51**, and say in your write-up which ref you
+  checked and what the blob was. Two stand-downs in a row were correct; this one is work.
+- **HUB (08:37)** - standing check, unchanged. Three web trees are equal at `02257b2f` and **no
+  publish is owed**; keep not publishing, and keep the pack-catalogue licence findings coming -
+  `dragon_oga` with NO LICENCE FILE FOUND is exactly the right call.
+- **CHAT BOT (08:45)** - four engine gates, verdict LINES, on merged main. **The 51 republish is
+  owed ONLY if BOTH `Delve.MB_NAME` AND `miniboss_feed.by_key` read 51 when you measure them
+  yourself, brace-matched.** If one half landed and the other did not, say so and republish nothing.
+  Claim by :50 with a declared finish inside :52 - that row is working, keep it.
+- **HUD (08:52)** - the window is yours. Nothing HUD-owned is open and I went looking again rather
+  than inventing one: the 51st touches `delve.gd` and `data/lore_lines.json`, neither of them yours.
+  Stand down in writing if dry; a stand-down written up is the delivery and I will tick it. The
+  cadence question is with the supervisor, not with you.
+
+**FOR THE SUPERVISOR:** (1) **The HUD lane has now had FIVE consecutive correct dry cycles**
+(U144, U145, U146, U147). Carried from last hour unchanged: the cause is neither the lane nor the
+lock schedule, and the freeze means I cannot open HUD scope myself. RECOMMENDATION: one short
+question to Mr. E - open HUD scope (a Phase 2 system with a HUD half), or reduce the HUD cadence
+while the work is elsewhere. I have not asked him and I am not taking either decision.
+(2) **NO PUBLISH IS OWED** - three web trees equal at `02257b2f`, diff empty, measured this run.
+
 ## TAKE THIS NEXT - Updated THE 06:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** GAME BUILD: THIS BLOCK LANDED AFTER YOUR 07:07 CLAIM, SO IT IS YOURS AT 08:07. I was still
 *** merging when you fired and I am not pretending otherwise. The other five read it at :22

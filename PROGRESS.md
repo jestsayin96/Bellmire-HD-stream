@@ -17534,3 +17534,67 @@ Windows clock through the Blender bridge regardless, which is the standing instr
 
 No live Twitch test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+## B132 - 2026-11-24 12:45 CT (chat bot) - THE REPUBLISH WAS PROMISED TO THIS HOUR AND IS STILL NOT OWED, BECAUSE THE NAMING NEVER REACHED MAIN
+
+The team lead's 11:58 CHAT BOT row told this lane the agreed number "will be 53, not 52" and that
+the 51 -> 53 two-step republish was mine this hour. IT IS NOT OWED, AND I PUBLISHED NOTHING.
+The condition the row itself set - BOTH halves reading the same number WHEN I MEASURE THEM - is
+unmet on main, so the row's own unmet branch applies: republish nothing and let L14's UNNAMED arm
+fire on `nightman`. Nothing of mine is edited; the delivery is the measurement, the five gate
+verdicts and the reason the promise could not be kept.
+
+MEASURED BOTH HALVES MYSELF FIRST, before touching a file, brace-matched, string-aware AND
+anchored on `const MB_NAME :=` at `scripts/delve.gd:435` (NOT on the bare string, which lands on
+the comment inside `MB_FIT`):
+  `Delve.MB_NAME`        = 52   (`panner` IN -> Onceround, `stiltman` IN -> Downfast, `nightman` OUT, 0 dupes)
+  `miniboss_feed.by_key` = 53   (`nightman` IN)
+  `data/commands.json`   = 51   at BOTH leaves (`miniboss.short`, `miniboss.what`), 18000 bytes, 8 top keys
+  `by_key - MB_NAME` = ["nightman"] EXACTLY   |   `MB_NAME - by_key` = []   - ZERO GHOSTS.
+
+WHY THE PROMISE COULD NOT BE KEPT, READ OFF BOTH REFS RATHER THAN ASSUMED. The game build's S113
+named `nightman` -> "Nightwork" at 12:07 and pushed `laptop`. I ran the SAME `findstr` for
+`"nightman": "` against both refs: `origin/laptop` f84202fa PRINTS the row, `origin/main`
+6e5c451d PRINTS NOTHING. The naming is one supervisor merge away from the tree every lane
+measures. THIS IS STRUCTURAL, NOT A FAULT IN ANY LANE, AND IT IS THE THIRD HOUR RUNNING: the game
+build names at :07 on `laptop`, main advances afterwards, so the publish that the same hour's plan
+assigns to :45 can only land at the NEXT :45. B130 paid 50 -> 51 one hour after the 50th was
+named; B131 could not pay 52; I cannot pay 53. SO THE 51 -> 53 REPUBLISH IS THE 13:45 RUN'S, and
+the published half being TWO behind is the arithmetic of that one-hour lag, not a skipped cycle.
+Whoever writes the next CHAT BOT row: assign the republish on the naming that is ON MAIN, not the
+one landing this hour, and the row will be payable in the hour it is written.
+
+GATES, on merged main `6e5c451d` (my HEAD `b80b1452`, ff of origin/chatbot then merge of main,
+0 conflict markers, nothing of mine edited), behind a `--headless --import` pass I ran FIRST:
+  IMPORT        rc=0, 12.7 s - the ONLY three errors are the hub's zero-byte icon (below)
+  PARSE         rc=0, 23.2 s - 0 SCRIPT ERROR / 0 Parse Error, 24 pre-existing invalid-UID
+                ext_resource WARNINGs on asset-kit .tres. TWO `ERROR:` lines, and BOTH are my own
+                COMMANDS_DATA guard firing the instructed transient - I am counting them, not
+                hiding them behind an earlier hour's "0 ERROR" habit.
+  TWITCH_PARSE  OK (8 checks, 8 PASS)
+  COMMANDS_DOC  OK wrote 32 commands AND A TRUE NO-OP - `git status` on docs/COMMANDS.md empty
+                after the real generator ran, which is correct because I changed no data
+  L14_TEST      FAIL 1 of 24 AND THAT IS THE CORRECT ANSWER, NOT A DEFECT. The single FAIL is the
+                clean-load assertion; the two arms that fired are MINIBOSS COUNT (publishes 51,
+                feed rows 53) and MINIBOSS UNNAMED (["nightman"]) - exactly the pair the 11:58
+                block told this lane to expect and NOT to fix. Both COMMANDS.md drift arms pass:
+                32 rows, unpublished [], stale [] - drift checked BOTH directions.
+
+ONE THING I GOT WRONG AND AM NOT HIDING. My own PowerShell row-count probe for docs/COMMANDS.md
+returned **0** - my pattern `^\| !` does not match the generated table's row shape. The real gate
+reads 32 rows twice over. MY NUMBER WAS WORTHLESS AND THE GATE'S IS THE VERDICT; this lane has now
+shipped a worthless hand-rolled count in four of the last five hours, and the lesson is the same
+one each time: do not hand-roll a count a real gate already prints.
+
+THE HUB'S ZERO-BYTE ICON IS STILL THERE AND STILL CANNOT LOAD. `web/icons/items/hat/turbary_hood.webp`
+is 0 bytes on main; the import pass fails it with `src_image_len == 0`, ERR_FILE_CORRUPT. It is the
+hub's 12:37 row and it is not fixed yet - reporting it a second hour so it is not lost.
+
+THE IMPORT OBSTRUCTION DID NOT RECUR, AND I CLEARED IT BEFORE MERGING, NOT AFTER. 1048 untracked
+regenerable `*.import` files my own earlier passes left in this worktree were removed first, each
+verified untracked with `git ls-files --error-unmatch` before deletion; nothing tracked was
+touched. Fifth hour this lane's own import pass has staged an obstruction for itself; I also
+cleared THIS run's pass before writing IDLE so the 13:45 seat merges clean.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.

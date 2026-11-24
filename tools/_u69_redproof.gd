@@ -14,10 +14,13 @@ var _step := 0
 var _fed := 0
 var _bad := 0
 var _n := 0  # U154: elements audited
+var _control := false  # U156: `-- control` skips the injection; the SAME gate must then print OK (proves the FAIL is the injection, not the HUD)
+var _inflated := 0  # U156: count of the named-element-inflated FAIL lines
 const SC := [1.0, 1.5]
 const LINES := ["A trade caravan is sighted on the west road.", "Viewer1001 swings a sword at a raider - hit! 7 damage.",
 	"Viewer1002 gathers wood.", "The granary is down to 12 days of food - hunger looms.", "Viewer1004 hauls a sack of grain."]
 func _initialize() -> void:
+	_control = "control" in OS.get_cmdline_user_args()
 	_out = ProjectSettings.globalize_path("res://renders/cycles/u69/")
 	DirAccess.make_dir_recursive_absolute(_out)
 	_t = (load("res://Town.tscn") as PackedScene).instantiate()
@@ -59,7 +62,7 @@ func _process(_d: float) -> bool:
 		var _inj := 0
 		for cl2 in root.find_children("*", "CanvasLayer", true, false):
 			for k2 in (cl2 as Node).get_children():
-				if k2 is Control and str(k2.name).begins_with("Pane_") and (k2 as Control).is_visible_in_tree() and _inj == 0:
+				if k2 is Control and str(k2.name).begins_with("Pane_") and (k2 as Control).is_visible_in_tree() and _inj == 0 and not _control:
 					var bc := Panel.new()
 					bc.name = "BossCard"
 					bc.size = Vector2(1500, 800)
@@ -73,7 +76,7 @@ func _process(_d: float) -> bool:
 		_fed = 0
 		if _step >= SC.size() * 2:
 			if _n == 0: print("U69_REDPROOF NO VERDICT - 0 elements audited"); _bad += 1
-			print("U69_REDPROOF ", "OK" if _bad == 0 else "FAIL", " elements=", _n)
+			print("U69_REDPROOF ", "OK" if _bad == 0 else "FAIL", " elements=", _n, " arm=", "CONTROL(no injection, must be OK)" if _control else "RED(injected, must FAIL)", " inflated_fails=", _inflated)
 			return true
 	return false
 func _audit(pct: int, full: bool) -> void:
@@ -92,7 +95,7 @@ func _audit(pct: int, full: bool) -> void:
 						var pr := (pc as Control).get_global_rect()
 						if pr.size.x * pr.size.y >= 0.20 * scr.x * scr.y and (str(pc.name).contains("Chronicle") or str(pc.name).contains("BossCard") or str(pc.name).contains("Feed")):
 							# U69: the 20% in-pane skip is for backdrops; a NAMED HUD element grown past it is the fault
-							print("FAIL named HUD element inflated past the in-pane skip @", tag, ": ", k.name, "/", pc.name, " ", pr); _bad += 1
+							print("FAIL named HUD element inflated past the in-pane skip @", tag, ": ", k.name, "/", pc.name, " ", pr); _bad += 1; _inflated += 1
 						if pr.size.x >= 4.0 and pr.size.y >= 4.0 and pr.size.x * pr.size.y < 0.20 * scr.x * scr.y:
 							items.append([str(k.name) + "/" + str(pc.name) + ":" + pc.get_class(), pr])
 				continue

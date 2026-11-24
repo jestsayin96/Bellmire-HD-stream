@@ -18024,3 +18024,9 @@ RUN (--windowed --resolution 1920x1080): RED arm (injected) -> 'injected ... 1 v
 NOTE: full-screen steps inject 0 (no visible Pane_ there) - by design, only the grid steps arm the proof.
 PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error lines.
 Logs: _u156_red.log, _u156_control.log. Decision for Mr. E: none.
+
+## C-196 (24 Nov 2026 17:3x CST, content) - NO 56th BODY, SO FEED DEPTH: townsfolk.trades time-of-day leaves +112 (28 trades x 4 slots, 2 -> 3 each)
+TAKE THIS NEXT (16:58 CT block, 24 Nov) CONTENT row (17:22): C-196, deepen the thinnest leaves; no by_key row for a body that does not exist. Checked origin/art: last body commit is the Straker (55th); no 56th committed. by_key stays 55 (straker IN), untouched.
+The thinnest real pools were the 112 trade morning/midday/evening/night leaves at 2 lines each (the only 1-line leaves are phase2 vault.inventory and carry.dropped_stays, single-purpose). Added exactly one plain line per leaf; duplicate-checked against every existing trade line and bark; all 112 unique. Condition tracks the trade's tier (high-tier trades are tidy, not worn). Per-leaf arithmetic: 112 leaves x (2 -> 3) = +112; 28 trades, every one touched, none skipped.
+VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list (leaf-level compare); only new top-level key is `_note_c196` (expected zero-hit). File round-trips byte-exact under indent=2 before editing, so no reformat noise.
+CODE WIRING: none - trade lines are already read by townsfolk code; only the new zero-hit `_note_c196` is unread.

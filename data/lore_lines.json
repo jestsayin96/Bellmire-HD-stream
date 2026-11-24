@@ -10178,19 +10178,23 @@
         ],
         "morning": [
           "Checks the ferry rope for fray before the first crossing.",
-          "Bails last night's rain out of the flat boat."
+          "Bails last night's rain out of the flat boat.",
+          "Wipes the rope-burn from his palms and thumbs the knot."
         ],
         "midday": [
           "Poles a cartload of turnips over, muttering the whole way.",
-          "Eats cold barley by the landing, one eye on the far bank."
+          "Eats cold barley by the landing, one eye on the far bank.",
+          "Tells a passenger the ford is shallow. It is not."
         ],
         "evening": [
           "Ties the ferry up and counts the day's coppers twice.",
-          "Sits on the jetty, feet dangling, naming the fish he missed."
+          "Sits on the jetty, feet dangling, naming the fish he missed.",
+          "Hauls the flat boat up on the mud and checks the plank."
         ],
         "night": [
           "Sleeps in the boat so the river never forgets him.",
-          "Hangs a lantern at the landing for anyone still out on the road."
+          "Hangs a lantern at the landing for anyone still out on the road.",
+          "Rows nobody anywhere, to keep the oars from forgetting."
         ]
       },
       "fishwife": {
@@ -10206,19 +10210,23 @@
         ],
         "morning": [
           "Guts the morning catch on the landing stones, gulls circling.",
-          "Chalks the day's prices on a slate and underlines the carp twice."
+          "Chalks the day's prices on a slate and underlines the carp twice.",
+          "Lays out the catch in rows, biggest at the front."
         ],
         "midday": [
           "Hawks trout across the market, voice like a rusty hinge.",
-          "Argues a copper off a cheese-monger, and wins."
+          "Argues a copper off a cheese-monger, and wins.",
+          "Sells a perch and swears it is a pike."
         ],
         "evening": [
           "Packs the unsold eels in wet reeds and curses the heat.",
-          "Scrubs her knife in the river and hums off-key."
+          "Scrubs her knife in the river and hums off-key.",
+          "Rinses the slate and rubs out the day's prices."
         ],
         "night": [
           "Smokes the last fish over a low fire, grumbling.",
-          "Counts silver by lamplight and does not share the total."
+          "Counts silver by lamplight and does not share the total.",
+          "Wraps a heel of fish in dock leaf for the cat at the door."
         ]
       },
       "reed_cutter": {
@@ -10234,19 +10242,23 @@
         ],
         "morning": [
           "Wades out at first light with a hooked knife and a bad back.",
-          "Stacks yesterday's reeds to dry against the north wall."
+          "Stacks yesterday's reeds to dry against the north wall.",
+          "Tests the knife on a thumbnail and nods."
         ],
         "midday": [
           "Binds reed bundles with a speed that shames the guild clerks.",
-          "Rests on a stump, chewing a stalk, watching the water."
+          "Rests on a stump, chewing a stalk, watching the water.",
+          "Carries a bundle taller than himself and does not complain."
         ],
         "evening": [
           "Hauls the last bundles in as the midges rise.",
-          "Smears mud on his neck against the bites and swears at the sky."
+          "Smears mud on his neck against the bites and swears at the sky.",
+          "Counts the day's bundles out loud, twice, same number."
         ],
         "night": [
           "Listens to the marsh from his doorstep, one boot off.",
-          "Mends his cutting knife by the fire, murmuring to it."
+          "Mends his cutting knife by the fire, murmuring to it.",
+          "Hangs his wet boots by the door and sits on the step."
         ]
       },
       "farmer": {
@@ -10262,19 +10274,23 @@
         ],
         "morning": [
           "Drives the ox out before the dew has dried.",
-          "Walks the furrows, kicking clods, finding fault."
+          "Walks the furrows, kicking clods, finding fault.",
+          "Looks at the sky, then the ox, then the sky again."
         ],
         "midday": [
           "Hoes the bean rows with a rhythm like a slow drum.",
-          "Eats bread and onion in the shade of a cart, sweating."
+          "Eats bread and onion in the shade of a cart, sweating.",
+          "Mends a hurdle with a knotted cord and a short oath."
         ],
         "evening": [
           "Hauls a sack to the granary and counts it into the ledger.",
-          "Leans on the fence rail, appraising a neighbour's wheat."
+          "Leans on the fence rail, appraising a neighbour's wheat.",
+          "Washes the dirt from his arms at the trough."
         ],
         "night": [
           "Checks the ox, checks the gate, checks the sky, checks again.",
-          "Sits up with the lamp low, tallying the harvest and the debt."
+          "Sits up with the lamp low, tallying the harvest and the debt.",
+          "Falls asleep at the table with the spoon still in his hand."
         ]
       },
       "well_keeper": {
@@ -10290,19 +10306,23 @@
         ],
         "morning": [
           "Draws the first bucket and tastes it, solemn as a priest.",
-          "Sweeps the well-yard and shoos a goose off the stone lip."
+          "Sweeps the well-yard and shoos a goose off the stone lip.",
+          "Checks the rope for rot before anyone asks for water."
         ],
         "midday": [
           "Winds bucket after bucket for a line of grumbling housewives.",
-          "Mends a frayed rope with a tongue-clucking patience."
+          "Mends a frayed rope with a tongue-clucking patience.",
+          "Pours a dipper for a tired carter and takes no coin."
         ],
         "evening": [
           "Rinses the lip stone and sets the lid against the evening dust.",
-          "Listens down the shaft for the old echo, then nods."
+          "Listens down the shaft for the old echo, then nods.",
+          "Wipes the bucket rim dry and hangs it up."
         ],
         "night": [
           "Latches the well-gate, jingling the key like a small bell.",
-          "Sits near the shaft in the dark, claiming it hums."
+          "Sits near the shaft in the dark, claiming it hums.",
+          "Counts the buckets drawn and chalks it on the post."
         ]
       },
       "herder": {
@@ -10318,19 +10338,23 @@
         ],
         "morning": [
           "Counts the flock out through the gate, lips moving.",
-          "Checks a ewe's hoof and talks to her as if she'd understand."
+          "Checks a ewe's hoof and talks to her as if she'd understand.",
+          "Walks the fence line and finds where the gap was."
         ],
         "midday": [
           "Lounges on a hillock with a crook, eyes half-shut, ears fully open.",
-          "Shears a sheep with the unconcern of long practice."
+          "Shears a sheep with the unconcern of long practice.",
+          "Whittles a peg with the flock grazing at his feet."
         ],
         "evening": [
           "Brings the flock home dusty and complaining, himself included.",
-          "Sits with the dog, sharing a heel of bread."
+          "Sits with the dog, sharing a heel of bread.",
+          "Wipes the dog's paws and checks for thorns."
         ],
         "night": [
           "Folds the sheep and counts them again, then once more for luck.",
-          "Whistles low through the dark so the flock knows he's there."
+          "Whistles low through the dark so the flock knows he's there.",
+          "Leans on the pen rail and says goodnight to each ewe."
         ]
       },
       "baker": {
@@ -10346,19 +10370,23 @@
         ],
         "morning": [
           "Fires the oven before dawn and swears at the flour sack.",
-          "Kneads dough on a table scarred by forty winters."
+          "Kneads dough on a table scarred by forty winters.",
+          "Dusts the board with flour and scores the first loaves."
         ],
         "midday": [
           "Slides loaves out on a long peel, face red as the coals.",
-          "Sells the heel to a child with a wink and nothing else."
+          "Sells the heel to a child with a wink and nothing else.",
+          "Sets a tray of buns to cool and watches them like a hawk."
         ],
         "evening": [
           "Sweeps the oven floor and counts the unsold, grimly.",
-          "Slices a stale loaf for the beggar at the back door."
+          "Slices a stale loaf for the beggar at the back door.",
+          "Wraps the last loaf in cloth for the morning."
         ],
         "night": [
           "Banks the coals low and sets the dough to rise for dawn.",
-          "Falls asleep on a flour sack, snoring like a bellows."
+          "Falls asleep on a flour sack, snoring like a bellows.",
+          "Rakes the ash from the oven mouth and shuts the iron door."
         ]
       },
       "guild_clerk": {
@@ -10374,19 +10402,23 @@
         ],
         "morning": [
           "Opens the guild post, unlocks the ledger and polishes a bronze seal.",
-          "Sharpens three quills and curses the ink."
+          "Sharpens three quills and curses the ink.",
+          "Blots yesterday's page and files it under the right hero."
         ],
         "midday": [
           "Stamps a hero's contract with a thunk of finality.",
-          "Argues a clause with a merchant, tapping the ledger like scripture."
+          "Argues a clause with a merchant, tapping the ledger like scripture.",
+          "Reads out a contract slowly so no one can say they missed a line."
         ],
         "evening": [
           "Totals the day's accounts and hums when the sum is good.",
-          "Locks the strongbox with a key on a string around his neck."
+          "Locks the strongbox with a key on a string around his neck.",
+          "Ties the day's papers in a bundle and sets them in the strongbox."
         ],
         "night": [
           "Reads one more contract by candlelight, not trusting the first reading.",
-          "Locks the post door, checks it, then checks it again."
+          "Locks the post door, checks it, then checks it again.",
+          "Trims the candle, signs one last page, and does not hurry."
         ]
       },
       "carter": {
@@ -10402,19 +10434,23 @@
         ],
         "morning": [
           "Greases the axle, whistling through the grease.",
-          "Harnesses the ox and speaks to it of delicate matters."
+          "Harnesses the ox and speaks to it of delicate matters.",
+          "Checks the ox's yoke for rubs before he loads a thing."
         ],
         "midday": [
           "Hauls a heaped cart through the market, shouting at everyone.",
-          "Unloads sacks at the granary, shoulder first."
+          "Unloads sacks at the granary, shoulder first.",
+          "Wedges a stone under a wheel and eats his bread on the tailboard."
         ],
         "evening": [
           "Unhitches the ox and rubs down its flanks.",
-          "Counts the day's loads into a battered tally book."
+          "Counts the day's loads into a battered tally book.",
+          "Sweeps the cart bed and stacks the empty sacks."
         ],
         "night": [
           "Sleeps under his cart with the ox for company.",
-          "Checks wheel spokes by lamplight, murmuring prayers to the road."
+          "Checks wheel spokes by lamplight, murmuring prayers to the road.",
+          "Pulls a tarp over the load and ties it three times."
         ]
       },
       "smith": {
@@ -10430,19 +10466,23 @@
         ],
         "morning": [
           "Rakes the forge awake and feeds it charcoal.",
-          "Sorts yesterday's bent nails for the scrap pile."
+          "Sorts yesterday's bent nails for the scrap pile.",
+          "Lays out his tongs in order and tests the bellows."
         ],
         "midday": [
           "Hammers a glowing bar, sparks flying, ears long since ruined.",
-          "Dunks a blade in the trough with a hiss like a snake."
+          "Dunks a blade in the trough with a hiss like a snake.",
+          "Hammers a hinge flat and holds it to the light."
         ],
         "evening": [
           "Banks the forge and wipes soot into a worse arrangement.",
-          "Counts the day's horseshoes into a clanking sack."
+          "Counts the day's horseshoes into a clanking sack.",
+          "Sweeps the scale from the anvil into a bucket."
         ],
         "night": [
           "Sleeps by the cooling anvil, ringing faintly in his ears.",
-          "Hangs the tongs on their hook, one by one, like a ritual."
+          "Hangs the tongs on their hook, one by one, like a ritual.",
+          "Quenches the last bar and lets the dark take the forge."
         ]
       },
       "brewer": {
@@ -10458,19 +10498,23 @@
         ],
         "morning": [
           "Stirs the mash with a paddle taller than a child.",
-          "Skims the froth off a vat and flicks it at the cat."
+          "Skims the froth off a vat and flicks it at the cat.",
+          "Rakes the malt over the drying floor, turning it with his feet."
         ],
         "midday": [
           "Rolls casks to the cart, grunting rhythm.",
-          "Tastes a ladle, frowns, adds salt, tastes again."
+          "Tastes a ladle, frowns, adds salt, tastes again.",
+          "Sniffs the vat, nods, and tells no one what he smelled."
         ],
         "evening": [
           "Pours the first round at the tavern, thick fingers around the tankard.",
-          "Lets the apprentice sweep the cellar floor and watches for theft."
+          "Lets the apprentice sweep the cellar floor and watches for theft.",
+          "Chalks the day's casks on the cellar door."
         ],
         "night": [
           "Sleeps in the brewhouse, nose full of yeast and ambition.",
-          "Counts the barrels twice and the empties three times."
+          "Counts the barrels twice and the empties three times.",
+          "Sets a ladle on the lip of the vat and lets it sit."
         ]
       },
       "miller": {
@@ -10486,19 +10530,23 @@
         ],
         "morning": [
           "Opens the sluice and lets the wheel groan awake.",
-          "Beats the flour dust from his apron in a pale cloud."
+          "Beats the flour dust from his apron in a pale cloud.",
+          "Greases the wheel shaft and listens to it turn."
         ],
         "midday": [
           "Weighs a farmer's sack and weighs it again, grinning.",
-          "Sweeps the millstone, humming a threshing song."
+          "Sweeps the millstone, humming a threshing song.",
+          "Feels a handful of flour between thumb and finger."
         ],
         "evening": [
           "Closes the sluice and the wheel slows like a tired breath.",
-          "Tallies the day's toll in chalk on a beam."
+          "Tallies the day's toll in chalk on a beam.",
+          "Rakes the sweepings into a sack. Nothing is wasted."
         ],
         "night": [
           "Sleeps on a flour sack, white as a ghost, and snores.",
-          "Listens to the wheel drip in the dark, content."
+          "Listens to the wheel drip in the dark, content.",
+          "Chalks the toll for the day and rubs it out with his sleeve."
         ]
       },
       "chandler": {
@@ -10514,19 +10562,23 @@
         ],
         "morning": [
           "Dips a row of wicks into hot tallow, wrinkling her nose.",
-          "Hangs finished candles on the line to harden."
+          "Hangs finished candles on the line to harden.",
+          "Checks the tallow for impurities and skims what rises."
         ],
         "midday": [
           "Sells candles to a queue of tired folk.",
-          "Trims wicks with sharp little scissors and sharper remarks."
+          "Trims wicks with sharp little scissors and sharper remarks.",
+          "Sets a new row of candles to cool on the sill."
         ],
         "evening": [
           "Lights the street lamp outside her shop with ceremony.",
-          "Wipes tallow from her fingers and counts unsold stock."
+          "Wipes tallow from her fingers and counts unsold stock.",
+          "Counts the day's wicks into their box."
         ],
         "night": [
           "Pours the last of the wax by a single, well-guarded flame.",
-          "Reads a chapbook by her own light, smug."
+          "Reads a chapbook by her own light, smug.",
+          "Snuffs the dipping pot and wipes the kettle clean."
         ]
       },
       "weaver": {
@@ -10542,19 +10594,23 @@
         ],
         "morning": [
           "Warps the loom with threads in a pattern only she can read.",
-          "Shakes lint from her sleeves and starts the shuttle."
+          "Shakes lint from her sleeves and starts the shuttle.",
+          "Sorts the day's thread by colour and nods at the blue."
         ],
         "midday": [
           "Throws the shuttle with the speed of a card sharp.",
-          "Haggles with a dyer over the price of madder."
+          "Haggles with a dyer over the price of madder.",
+          "Beats the weft tight and checks the selvage."
         ],
         "evening": [
           "Cuts the cloth from the loom and holds it to the window.",
-          "Folds the day's work with care and a long, tired sigh."
+          "Folds the day's work with care and a long, tired sigh.",
+          "Hangs a finished length over the rail to show the pattern."
         ],
         "night": [
           "Mends a torn cloak by lamplight, humming in the half-dark.",
-          "Dreams in warp and weft, they say, and wakes with knots."
+          "Dreams in warp and weft, they say, and wakes with knots.",
+          "Winds the last of the wool into a ball for the morning."
         ]
       },
       "innkeeper": {
@@ -10570,19 +10626,23 @@
         ],
         "morning": [
           "Changes the straw and sweeps up what the night left.",
-          "Counts the drunks asleep on the common room floor."
+          "Counts the drunks asleep on the common room floor.",
+          "Airs the blankets over the rail and counts the bedbugs, fewer than last week."
         ],
         "midday": [
           "Ladles stew for a table of hungry delvers.",
-          "Wipes a tankard with a rag that has seen worse."
+          "Wipes a tankard with a rag that has seen worse.",
+          "Puts a fresh barrel on the stand and tests the tap."
         ],
         "evening": [
           "Fills the room with noise, steam, and a bard who can't sing.",
-          "Collects coins at the bar, glaring at a friendly dispute."
+          "Collects coins at the bar, glaring at a friendly dispute.",
+          "Chalks the tabs on the slate by the fire."
         ],
         "night": [
           "Locks the cellar and the till, and sleeps with the keys under the pillow.",
-          "Hears boots on the stair and doesn't ask."
+          "Hears boots on the stair and doesn't ask.",
+          "Banks the hearth, bars the door, and leaves a lamp by the stair."
         ]
       },
       "chapel_keeper": {
@@ -10598,19 +10658,23 @@
         ],
         "morning": [
           "Sweeps the chapel floor and straightens the worn pews.",
-          "Lights the morning candle for those buried the day before."
+          "Lights the morning candle for those buried the day before.",
+          "Trims the wicks and sets out the day's candles."
         ],
         "midday": [
           "Hears a confession in the doorway, hand on a nervous shoulder.",
-          "Reads the list of the fallen aloud, slow, unhurried."
+          "Reads the list of the fallen aloud, slow, unhurried.",
+          "Wipes the dust from the names cut in the stone."
         ],
         "evening": [
           "Closes the chapel shutters against the evening wind.",
-          "Polishes the bell's silent lip with a respectful rag."
+          "Polishes the bell's silent lip with a respectful rag.",
+          "Closes the book of the fallen and lays his hand flat on it."
         ],
         "night": [
           "Keeps vigil by one candle, speaking to no one.",
-          "Rings the clapperless bell with his knuckle - a hush, not a sound."
+          "Rings the clapperless bell with his knuckle - a hush, not a sound.",
+          "Sits in the back pew with the door left a little open."
         ]
       },
       "gravedigger": {
@@ -10626,19 +10690,23 @@
         ],
         "morning": [
           "Marks out a fresh plot with string and a surly look.",
-          "Sharpens his spade on a stone, whistling softly."
+          "Sharpens his spade on a stone, whistling softly.",
+          "Leans on the spade and looks at the ground a while."
         ],
         "midday": [
           "Digs in rhythmic silence, shirt dark with sweat.",
-          "Eats lunch on a headstone and apologises to it."
+          "Eats lunch on a headstone and apologises to it.",
+          "Eats his bread at the cemetery wall, in the sun."
         ],
         "evening": [
           "Fills in the day's work and pats the mound.",
-          "Cleans his boots at the chapel gate and nods to the dead."
+          "Cleans his boots at the chapel gate and nods to the dead.",
+          "Washes the clay from the spade at the pump."
         ],
         "night": [
           "Sits among the stones with a flask, telling them the day's news.",
-          "Counts the graves, which is a habit rather than a hobby."
+          "Counts the graves, which is a habit rather than a hobby.",
+          "Stands at the last grave with his cap in his hands."
         ]
       },
       "apothecary": {
@@ -10654,19 +10722,23 @@
         ],
         "morning": [
           "Grinds herbs in a mortar the size of a head.",
-          "Labels yesterday's bottles with a spidery hand."
+          "Labels yesterday's bottles with a spidery hand.",
+          "Opens the shutters and sets the herb bundles to air."
         ],
         "midday": [
           "Measures drops with a trembling, practised spoon.",
-          "Treats a hero's scraped knuckle with unwarranted gravity."
+          "Treats a hero's scraped knuckle with unwarranted gravity.",
+          "Weighs out a powder twice and writes it down."
         ],
         "evening": [
           "Wipes down the counter and corks the rest.",
-          "Sells one last flask to a stumbling hero, charging triple."
+          "Sells one last flask to a stumbling hero, charging triple.",
+          "Wipes the scales and puts the weights back in their box."
         ],
         "night": [
           "Brews by candlelight, whispering rhymes to the pot.",
-          "Locks the poison shelf and hangs the key around his neck."
+          "Locks the poison shelf and hangs the key around his neck.",
+          "Reads a label three times before he lets a bottle go."
         ]
       },
       "mason": {
@@ -10682,19 +10754,23 @@
         ],
         "morning": [
           "Mixes mortar in a trough and tests it with a thumb.",
-          "Chalks a line along the next course and squints."
+          "Chalks a line along the next course and squints.",
+          "Checks the plumb line and moves the stone a finger's width."
         ],
         "midday": [
           "Taps a block with a hammer and listens to the ring.",
-          "Lifts a stone with the sort of grunt that has a history."
+          "Lifts a stone with the sort of grunt that has a history.",
+          "Wets a block and watches how fast it drinks."
         ],
         "evening": [
           "Washes lime from his hands, wincing at the cracks.",
-          "Steps back to admire the day's work and finds a flaw."
+          "Steps back to admire the day's work and finds a flaw.",
+          "Scrapes mortar from his trowel and tucks it in his belt."
         ],
         "night": [
           "Sleeps like a stone, which is the highest praise he knows.",
-          "Drinks to the wall, the quarry, and the knee that quit."
+          "Drinks to the wall, the quarry, and the knee that quit.",
+          "Runs a hand along the new course in the last light."
         ]
       },
       "cooper": {
@@ -10710,19 +10786,23 @@
         ],
         "morning": [
           "Shaves staves with a drawknife in long, curling strokes.",
-          "Steams a barrel to bend its belly."
+          "Steams a barrel to bend its belly.",
+          "Sorts staves by grain and sets the best aside."
         ],
         "midday": [
           "Hammers hoops down with the rhythm of a heartbeat.",
-          "Tests a finished cask with water, narrowing his eyes."
+          "Tests a finished cask with water, narrowing his eyes.",
+          "Drives the last hoop down and listens for the ring."
         ],
         "evening": [
           "Stacks the day's casks against the wall.",
-          "Sweeps shavings into a heap for the baker's fire."
+          "Sweeps shavings into a heap for the baker's fire.",
+          "Rolls the day's casks into a neat line."
         ],
         "night": [
           "Sleeps among barrels, dreaming he's a cask.",
-          "Taps one gently on his way to bed, and listens."
+          "Taps one gently on his way to bed, and listens.",
+          "Hangs the drawknife on its nail and rests his hands."
         ]
       },
       "tanner": {
@@ -10738,19 +10818,23 @@
         ],
         "morning": [
           "Scrapes a hide on a beam, face carefully blank.",
-          "Hangs the morning's work to dry, upwind of everyone."
+          "Hangs the morning's work to dry, upwind of everyone.",
+          "Opens the pit lid and turns his face away."
         ],
         "midday": [
           "Stirs the tanning pit with a pole and a martyr's face.",
-          "Cuts a strap and tests it between clenched teeth."
+          "Cuts a strap and tests it between clenched teeth.",
+          "Rubs oil into a strap until it shines."
         ],
         "evening": [
           "Washes his hands six times and still smells of work.",
-          "Sells a belt to a hero, haggling by principle."
+          "Sells a belt to a hero, haggling by principle.",
+          "Hangs the last hides to drip and walks upwind home."
         ],
         "night": [
           "Sleeps outside the town gate, for everyone's sake.",
-          "Counts hides by moonlight, mourning each one."
+          "Counts hides by moonlight, mourning each one.",
+          "Scrubs his arms to the elbow and sits apart from the fire."
         ]
       },
       "stabler": {
@@ -10766,19 +10850,23 @@
         ],
         "morning": [
           "Mucks the stalls with a pitchfork, whistling to the mares.",
-          "Fills the water trough and counts noses."
+          "Fills the water trough and counts noses.",
+          "Forks fresh straw into the stalls and checks each hoof."
         ],
         "midday": [
           "Brushes a destrier and whispers to it, as to a child.",
-          "Shoes a horse with the smith, trading insults."
+          "Shoes a horse with the smith, trading insults.",
+          "Rubs liniment on a lame mare's leg and talks low."
         ],
         "evening": [
           "Brings the horses in from the yard, one at a time, by name.",
-          "Checks the stall latches against a thieving wind."
+          "Checks the stall latches against a thieving wind.",
+          "Hangs the bridles in their order on the wall."
         ],
         "night": [
           "Sleeps in the loft, one ear tuned to hooves.",
-          "Sings a low lullaby to a nervous colt."
+          "Sings a low lullaby to a nervous colt.",
+          "Leans on a stall door with the lamp low and watches the horses settle."
         ]
       },
       "scribe": {
@@ -10794,19 +10882,23 @@
         ],
         "morning": [
           "Cuts a quill and mixes fresh ink with a sigh.",
-          "Sits at the high desk, squinting at yesterday's ledger."
+          "Sits at the high desk, squinting at yesterday's ledger.",
+          "Rules the page with a lead point and straightens his back."
         ],
         "midday": [
           "Copies a decree in an elegant hand, tongue between teeth.",
-          "Takes a hero's dictation and corrects the grammar."
+          "Takes a hero's dictation and corrects the grammar.",
+          "Reads his own line aloud and strikes out a word."
         ],
         "evening": [
           "Sands the day's pages and blows the dust away.",
-          "Packs his quills and counts the ink stains on his cuffs."
+          "Packs his quills and counts the ink stains on his cuffs.",
+          "Closes the ink pot and wipes the nib on a rag."
         ],
         "night": [
           "Writes the Chronicle by a single, steady candle.",
-          "Dips his quill one more time, just to finish the thought."
+          "Dips his quill one more time, just to finish the thought.",
+          "Covers the unfinished page and weighs the corners down."
         ]
       },
       "glassblower": {
@@ -10822,19 +10914,23 @@
         ],
         "morning": [
           "Fires the furnace to a roar and checks the blowpipe.",
-          "Gathers a glowing gob of glass on the end of an iron rod."
+          "Gathers a glowing gob of glass on the end of an iron rod.",
+          "Lays out the pipes and rods in the order he will need them."
         ],
         "midday": [
           "Blows a bubble, turns it, shapes it, lifts it to the window light.",
-          "Cracks a flawed flask, and starts again without complaint."
+          "Cracks a flawed flask, and starts again without complaint.",
+          "Turns a hot vessel in the light and lets it be."
         ],
         "evening": [
           "Cools the day's work on a rack and counts each piece.",
-          "Wraps a finished bottle in straw, with the care of a mother."
+          "Wraps a finished bottle in straw, with the care of a mother.",
+          "Sweeps the cullet into the bin to be melted again."
         ],
         "night": [
           "Banks the furnace and sits beside it, face aglow.",
-          "Polishes a single lens, humming in dim light."
+          "Polishes a single lens, humming in dim light.",
+          "Watches the annealing oven fade and does not leave it."
         ]
       },
       "wallwright": {
@@ -10850,19 +10946,23 @@
         ],
         "morning": [
           "Walks the wall-top at dawn, tapping stones with a mallet.",
-          "Inspects the gate and its great, groaning hinges."
+          "Inspects the gate and its great, groaning hinges.",
+          "Checks the plumb of the new course against the old."
         ],
         "midday": [
           "Oversees a crew raising a tower, shouting numbers.",
-          "Peers at a hairline crack and begins to sweat."
+          "Peers at a hairline crack and begins to sweat.",
+          "Steps back from the scaffold and counts the stones in the row."
         ],
         "evening": [
           "Marks the day's repairs in a battered notebook.",
-          "Stands at the gate and watches the road with a builder's pride."
+          "Stands at the gate and watches the road with a builder's pride.",
+          "Rolls up the drawings and ties them with a cord."
         ],
         "night": [
           "Does the night round, torch in hand, knuckles on stone.",
-          "Sleeps in the gatehouse with the wall at his back."
+          "Sleeps in the gatehouse with the wall at his back.",
+          "Walks the wall-top once more and stops at a stone he trusts."
         ]
       },
       "crier": {
@@ -10878,19 +10978,23 @@
         ],
         "morning": [
           "Clears his throat on the Market Cross like a man about to fight a goose.",
-          "Rehearses the morning proclamations in a whisper."
+          "Rehearses the morning proclamations in a whisper.",
+          "Warms his voice on a low note and tests the Cross."
         ],
         "midday": [
           "Bellows the news from the Market Cross to an unimpressed crowd.",
-          "Rings a hand-bell and recites the day's prices at speed."
+          "Rings a hand-bell and recites the day's prices at speed.",
+          "Reads the guild price list twice to be sure of the numbers."
         ],
         "evening": [
           "Calls out the closing of the market, voice cracked and proud.",
-          "Reads the guild notices to a handful of listeners."
+          "Reads the guild notices to a handful of listeners.",
+          "Folds the day's notices and hands the bell to the boy."
         ],
         "night": [
           "Sits on the cross steps, sipping honey-water for his throat.",
-          "Mutters the next day's news until he forgets it."
+          "Mutters the next day's news until he forgets it.",
+          "Says the town's name out loud, quietly, to nobody."
         ]
       },
       "guardsman": {
@@ -10906,19 +11010,23 @@
         ],
         "morning": [
           "Takes the morning watch with a yawn and a spear.",
-          "Polishes his helm and finds it dull anyway."
+          "Polishes his helm and finds it dull anyway.",
+          "Checks the gate bar and the watch-fire."
         ],
         "midday": [
           "Stands at the gate, face stern, stomach complaining.",
-          "Drills with the Commander's voice cracking like a whip."
+          "Drills with the Commander's voice cracking like a whip.",
+          "Counts the carts through the gate and says the number aloud."
         ],
         "evening": [
           "Hands the watch to the night guard, grumbling.",
-          "Shares a stew with the gate crew, swapping tall stories."
+          "Shares a stew with the gate crew, swapping tall stories.",
+          "Eats his bread standing, spear against the wall."
         ],
         "night": [
           "Walks the dark wall with a lantern and a frown.",
-          "Sits in the gatehouse, listening to the Ford murmur."
+          "Sits in the gatehouse, listening to the Ford murmur.",
+          "Looks down the road a long time and sees nothing, which is the job."
         ]
       },
       "bellkeeper": {
@@ -10934,19 +11042,23 @@
         ],
         "morning": [
           "Climbs the tower to look at a bell that cannot ring.",
-          "Dusts the bell's lip with a feather and a sigh."
+          "Dusts the bell's lip with a feather and a sigh.",
+          "Opens the shutters in the tower to let the morning in."
         ],
         "midday": [
           "Sits beneath the bell with a book, never reading it.",
-          "Answers a child's question about the clapper with a long, sad story."
+          "Answers a child's question about the clapper with a long, sad story.",
+          "Oils the hinge on the door under the bell."
         ],
         "evening": [
           "Sweeps the tower stair with ceremony.",
-          "Looks up at the bell as the sun sets, nodding at some private joke."
+          "Looks up at the bell as the sun sets, nodding at some private joke.",
+          "Winds the lamp up the rope and trims it for the night."
         ],
         "night": [
           "Stands very still below the bell, listening.",
-          "Locks the tower and leaves a candle in the window."
+          "Locks the tower and leaves a candle in the window.",
+          "Sits one step below the bell and says nothing for an hour."
         ]
       }
     },
@@ -14946,5 +15058,6 @@
   "_note_c168": "C-168: epitaph/descend/cleared top-up (+12/+6/+6). Zero-hit key by design, DO NOT WIRE. The three lists are drawn at random by existing code.",
   "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS).",
   "_note_c192": "C-192 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 13:22: descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10. Plain strings appended to pools the engine already reads; no placeholders, no mechanics, no floor counts. Expected zero-hit key; do not wire.",
-  "_note_c194": "C-194: own queue, no new body (54 bodies, 54 by_key keys, iceman fed in C-193). Appended plain strings to descend, cleared, barks.enter, barks.lord, barks.hurt, barks.drink. Expected zero-hit key."
+  "_note_c194": "C-194: own queue, no new body (54 bodies, 54 by_key keys, iceman fed in C-193). Appended plain strings to descend, cleared, barks.enter, barks.lord, barks.hurt, barks.drink. Expected zero-hit key.",
+  "_note_c196": "C-196 (24 Nov 2026, content): townsfolk.trades.<trade>.{morning,midday,evening,night} +1 line each, 28 trades, +112 lines (2 -> 3 per leaf). Appended only; existing lines untouched. EXPECTED ZERO-HIT KEY - no lane is to wire it."
 }

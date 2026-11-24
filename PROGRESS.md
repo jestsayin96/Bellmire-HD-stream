@@ -17920,3 +17920,10 @@ rather than off a previous run's prose.
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## HUB 24 Nov 16:4x CT - standing audit, pack catalogue row (no new pack found; no row owed beyond a logged negative)
+- TAKE THIS NEXT (15:58 block) HUB row = pack catalogue, gate stays shut. No new licence text on disk, so nothing imported.
+- Merged origin/main into hub (22e94c33). web/ tree d27fe17c == origin/main:web. Vs gh-pages root tree c03fa129 (publish 7, 5ce35f33): ONE file, web/NOTES.md +2 lines (the 15:38 audit note). app.js/style.css/index.html byte-identical to published.
+- Greps: app.js innerHTML at :255 and :301 only (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP meta count 1; node --check OK; zero 0-byte png/webp under web/.
+- NUMBER: 0 code files differ from published; 1 notes file / +2 lines. Hostile-name test not re-run: no code changed. Not claiming READY TO PUBLISH.
+- Untracked, named: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine).

@@ -2,6 +2,7 @@
 """Derive the hub's item-icon thumbnails and GENERATE the app.js whitelist (H32 pass 4).
 
 One command:   python3 web/tools/make_item_icons.py [--commit <art-commit-sha>]
+Guard only:    python3 web/tools/make_item_icons.py --verify    (no writes; exit 1 on any empty/short/undecodable icon)
 
 Reads (never writes):  assets/icons/items/<slot>/<key>.png   (the ART lane's originals, 256 px)
                        data/items.json                       (key -> display name)
@@ -32,10 +33,48 @@ here = os.path.dirname(os.path.abspath(__file__))
 repo = os.path.abspath(os.path.join(here, "..", ".."))
 ap = argparse.ArgumentParser()
 ap.add_argument("--commit", default="", help="source commit of assets/icons/items (read from git if omitted)")
+ap.add_argument("--verify", action="store_true", help="only check web/icons/items against its manifest; write nothing")
 args = ap.parse_args()
+
+
+def verify_icons(out_root):
+    """The zero-byte guard. hat/turbary_hood.webp sat at 0 bytes from 17 Nov while the manifest still said
+    2718 and no gate noticed. Every file under out_root must be non-empty, match the byte count the manifest
+    recorded, and decode as an image of THUMB x THUMB. Returns a list of problems (empty = clean)."""
+    bad = []
+    mp = os.path.join(out_root, "_manifest.json")
+    try:
+        man = json.load(open(mp, encoding="utf-8"))
+    except Exception as e:
+        return ["manifest unreadable: %s" % e]
+    listed = {f["path"]: f["bytes"] for f in man.get("files", [])}
+    for dp, _dn, fns in os.walk(out_root):
+        for fn in fns:
+            if not fn.endswith(".webp"): continue
+            full = os.path.join(dp, fn)
+            rel = os.path.relpath(full, out_root).replace(os.sep, "/")
+            n = os.path.getsize(full)
+            if n == 0: bad.append("ZERO BYTES: " + rel); continue
+            if rel not in listed: bad.append("not in manifest: " + rel)
+            elif listed[rel] != n: bad.append("size %d != manifest %d: %s" % (n, listed[rel], rel))
+            try:
+                with Image.open(full) as im:
+                    im.load()
+                    if im.size != (THUMB, THUMB): bad.append("size %s: %s" % (im.size, rel))
+            except Exception as e:
+                bad.append("undecodable (%s): %s" % (e, rel))
+    for rel in listed:
+        if not os.path.isfile(os.path.join(out_root, rel)): bad.append("in manifest, missing on disk: " + rel)
+    return bad
+
 
 src_root = os.path.join(repo, "assets", "icons", "items")
 out_root = os.path.join(repo, "web", "icons", "items")
+if args.verify:
+    problems = verify_icons(out_root)
+    for pr in problems: print("RED:", pr)
+    print("verify: %s (%d problem(s))" % ("RED" if problems else "GREEN", len(problems)))
+    sys.exit(1 if problems else 0)
 commit = args.commit
 if not commit:
     try:
@@ -101,4 +140,7 @@ else:
     sys.exit("markers not found in web/app.js")
 print("icons:", len(files), "named:", len(namemap), "conflicts:", len(conflicts), "no-name:", len(missing_name),
       "total bytes:", total, "(%.2f MB)" % (total / 1048576))
+problems = verify_icons(out_root)
+for pr in problems: print("RED:", pr)
+if problems: sys.exit("ICON GUARD RED: %d problem(s) above" % len(problems))
 if total > BUDGET: sys.exit("OVER BUDGET: %d bytes > %d" % (total, BUDGET))

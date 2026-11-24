@@ -691,3 +691,13 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 
 - Checked: walked every file under `_packs\free_mine_assets\` (9 files), listed the 10 zip entries with Python `zipfile` (not extracted), grepped all nine files for licence wording, and parsed the PNG chunk tables of the seven textures. The folder name carries no licence claim, so none is inferred from it.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - Medieval_Village_MegaKit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Medieval Village MegaKit, STANDARD (free) edition (folder `_packs\Medieval_Village_MegaKit\Medieval Village MegaKit[Standard]\`; sibling `Medieval_Village_MegaKit.zip` 161,003,471 bytes, 10 entries not extracted) | Quaternius (quaternius.com) | CC0 1.0 Universal | `License_Standard.txt`, read verbatim: "License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/" then "Models by @Quaternius" | 936 files on disk: 176 models each in FBX, glTF, OBJ (with 176 .mtl and 176 .bin companions), 54 PNG and 1 JPG textures, 1 TXT licence | Yes (CC0) | Not required. The file asks for Patreon and Discord support only. |
+
+- Checked: walked the whole pack folder with `find` (936 files, by extension), read `License_Standard.txt` in full, confirmed the CC0 1.0 grant. Nothing extracted, converted or imported.
+- Scope: the file says this is the STANDARD free edition, which holds only a portion of the models. The PRO and SOURCE editions are separate purchases and are not on disk. Nothing from them is covered by this entry.
+- Status: **CLEARED. CC0 1.0, usable for commercial use, no attribution required.** Covers only the 176 models in this folder.

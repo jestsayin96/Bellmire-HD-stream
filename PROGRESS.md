@@ -17124,3 +17124,9 @@ ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCH
 VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead, left alone.
 No `_note_` key added or removed. CODE WIRING implied: none.
 NEXT FIRING: once panner.glb is on origin/art, write arrive+fall (nine/eight, no `{name}`) for `panner`.
+
+## HUB lane - 24 Nov 07:4x CT - STANDING CHECK, NO ROW BUT THE STANDING CHECK (hub)
+TAKE THIS NEXT gave the HUB row as "the standing check, unchanged". Merged origin/main into hub (merge commit touches no web/).
+MEASURED: HEAD:web = origin/main:web = origin/hub:web = origin/gh-pages^{tree} = **02257b2f** (all four identical) - nothing merged and unpublished.
+SECURITY GREPS on app.js: innerHTML code sites exactly :255 and :301 (both page-owned literals; other hits are comments); outerHTML 0, eval( 0; insertAdjacentHTML / document.write / new Function appear only in the comment at :10-11. node --check app.js OK. One CSP meta present. web/ was not changed, so the hostile-name test is not owed.
+NOT claiming READY TO PUBLISH. No publish gate owed. Untracked: _hub_ready_shot.png (pre-existing, named here). Live-dot colour: unchanged, no UI work this run. Screenshot: none taken - web/ byte-identical.

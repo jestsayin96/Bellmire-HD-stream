@@ -17712,3 +17712,14 @@ was touched.
 
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+
+## U153 - HUD AUDIT, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T13:5x-06:00 (13:52 firing)
+ITEM: team lead's 12:58 HUD row - audit my own report-writers for any key PRINTED but not RECOMPUTED on the run that prints it (art's measured_bodies:25 fault). Rarity-hue is U55 (ui_theme.gd:176), not rebuilt. Lock: R working RUN_LOCK last line = chat bot B133 IDLE 13:50:45, 0 Godot alive; I claimed nothing (the audit is read-only, no engine needed).
+METHOD: grep over every HUD file and tools/_u*.gd / _theme_sweep / _fish_rarity for (a) any writer (store_string/store_line/JSON.stringify/FileAccess WRITE) and (b) any reader that feeds a printed verdict; then read each print line for literal or carried numbers.
+RESULT - THE FAULT AS ART HAD IT IS ABSENT:
+ - Only 3 writers exist: auto_director._log_cut (appends one line per cut, every field computed from the live cut: _clock/_held/_pace/_cands - nothing carried), _u40_pad_test (store_string(_hud.log_text()) - rewritten whole each run), nothing else. No JSON report, no carried-forward block anywhere.
+ - Only reader feeding a verdict is _u71_rarity_guard (reads art's icons.py and fishing.gd) and it re-derives rungs_py/ui_rungs/redproofs on every run and prints the counts.
+ - U59_CONTRAST prints seen/checked computed in-run; U63_STRIPE prints gate_n computed in-run. Both are the honest shape.
+SIBLING FAULT FOUND (not the same, same family - a verdict with no denominator): U62_SCALES, U88_WORN, U90 FEED_LOAD, U91 LONGNAME, U69_REDPROOF, U56_HUE, THEME_SWEEP, U40_TEST print OK purely on `bad == 0`. If the set they walk came back EMPTY (e.g. U88 loops `_sat._list.get_children()`; a renamed list = zero rows) they would still print OK. Nothing is wrong today; the guard just cannot tell "all passed" from "none measured". NOT FIXED THIS HOUR: it needs a windowed run to prove, and the lock window is not mine. NEXT ENGINE WINDOW: add `n` counters to those 8 prints and FAIL on n==0 (U58's "%d colours walked" line is the model).
+Decision for Mr. E: none.

@@ -1,3 +1,181 @@
+## TAKE THIS NEXT - Updated THE 06:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** GAME BUILD: THIS BLOCK LANDED AFTER YOUR 07:07 CLAIM, SO IT IS YOURS AT 08:07. I was still
+*** merging when you fired and I am not pretending otherwise. The other five read it at :22
+*** (content), :34 (art), :37 (hub), :45 (chat bot), :52 (HUD). Machine clock when I started this
+*** block: 07:0x CT 24 Nov.
+
+Merged this hour into main, up from **06621a77** to **4691f999**: all SIX lanes (laptop fd84f46e,
+content c4a09a16, hub b7b657c6, hud-ui e853213d, art 40de8d3e, chatbot 638e3ea0). FIVE conflicts,
+all in root PROGRESS.md, resolved by the state machine keeping BOTH sides.
+THE ASSERTIONS THAT MATTER: `diff --numstat origin/main HEAD -- PROGRESS.md` reads **+254/-0** -
+ZERO lines removed - and a four-exact-shape marker count over the whole tree returns **0**.
+I CHECKED MY OWN SHORTFALL RATHER THAN WAVE IT THROUGH. The six lane numstats sum to 257 against a
+merge of 254. I did NOT accept "probably blank lines": I rebuilt each lane's added lines as a
+MULTISET against the base and asked whether any of them is absent from the merged file. **Every
+lane: missing_count 0.** Nothing was dropped; the three-line gap is lines that two lanes appended
+identically and that therefore merge to one occurrence.
+
+*** THE CHAIN IS LEVEL AT 50/50/50 AND THE 51st IS NOT IN IT ANYWHERE. ***
+Measured by ME on merged main `4691f999`, brace-matched, not copied from any lane:
+`Delve.MB_NAME` **50** | `miniboss_feed.by_key` in `data/lore_lines.json` **50** | `commands.json`
+published **50** at both leaves. Set difference BOTH ways is empty. `panner` is in NEITHER.
+
+### GAME BUILD - S108 / SYSTEM 11 IS TICKED, AND I LOOKED AT THE PICTURES MYSELF.
+**TICKED.** You did the thing the held row asked for and you did it in the right order: you
+DIAGNOSED before you retried, and the diagnosis was that the fault was YOUR OWN truncated
+`tools/_s108_shot.gd` (37 lines, no `_process`, no quit, no verdict) and NOT the desktop - which
+you proved with a known-good windowed probe (`S58_SPAN OK`). Naming your own tool as the fault
+when the easy answer was "the session is broken" is the part I most want kept.
+**I VERIFIED IT RATHER THAN TAKING IT.** The gate CAN go red - `tools/_s108_shot.gd:101` prints
+`S108_SHOTS FAIL n/m` and `:104` a timeout FAIL - so `OK 9/9` is an earned verdict, not a quiet
+test. The wiring is real and not just an import: `town.gd` ANIMALS gains eight UAA rows and
+repoints `Fox` off GobKit `Red.glb`, and three spawn sites actually place them (paddock stock,
+square dogs, woods deer/stag/wolf). Import and wiring in ONE commit, as your own constraint binds.
+**THE LICENCE IS THE RULE OBEYED, NOT A SNIPPET:** `assets/animals/uaa/License.txt` is the pack's
+own file, copied beside the assets, and it reads CC0 1.0 Universal in full.
+**AND I LOOKED, BECAUSE FIT IS THE ACCEPTANCE TEST.** I opened two of the nine myself and chose
+them by risk, not by prettiness: `Stag.png` (deer and stag at the woods' edge, grounded, correctly
+sized against the trunks) and `Fox.png` - the Fox because its scale changed by a factor of ~77
+(`0.0022` -> `0.17`) when it moved packs, which is exactly where a silent giant would appear. It
+is fox-sized, grounded, mid-stride. No scale change needed, as you said.
+**YOUR PRE-ANNOUNCED DEAD FILE IS NOW REAL AND I MEASURED IT:** `Red.glb` returns ZERO hits across
+`scripts/*.gd` and `web/app.js`. Today's audit still reads **ZERO** unreferenced asset DIRECTORIES
+(35 now, up from 34 - the new `uaa/` - and it is referenced), so the directory series stays honest;
+`Red.glb` is a dead FILE inside a live directory, which is a different statement. Say it that way.
+**YOUR ITEM AT 08:07 - AND THE FIRST ONE IS A MEASUREMENT THAT MAY CLOSE AN ITEM FOR FREE.**
+1. **L31's remaining half may already be built.** The plan has carried "damage numbers,
+   status-effect icons" as open since 16 Nov; D61.1 landed the damage numbers, and
+   `party_frames.gd:3` already preloads `res://scripts/status_icon.gd`. MEASURE WHETHER THE
+   STATUS-EFFECT ICONS ARE ACTUALLY WIRED IN THE DUNGEON FIGHT. If they are, **L31 CLOSES** and
+   that is a full delivery - closing by disproving is how U124 spent its cycle and it was right.
+   If they are not, build them; it is your file and your item, not a new one.
+2. Then the next unticked system in Mr. E's own 80-system order. **DO NOT GO LOOKING FOR THE 51st
+   MINIBOSS THIS HOUR** - I measured it: `panner.glb` is on NO ref anywhere
+   (`git log --all -- assets/monsters/minibosses/panner.glb` is EMPTY). There is nothing to import.
+
+### ART - THE PANNER IS REAL, IT IS GOOD, AND IT IS HALF DELIVERED. I AM NOT TICKING IT.
+**NOT TICKED, AND THE REASON IS ONE UNTRACKED FILE.** You pushed the doc, the builder (+321), the
+fit rows and nine renders - and **you did not push the body.** `assets/monsters/minibosses/panner.glb`
+is `??` UNTRACKED in your worktree (92,472 bytes, written 06:55 CT), it is not gitignored
+(`check-ignore` rc=1), and `git log --all --` on that path returns EMPTY. **It is on no branch.**
+This is the Beadle again, and I checked the ref rather than your working directory before writing
+this row.
+**THE WORK ITSELF VERIFIES, AND I SAY SO SEPARATELY FROM THE BOOKKEEPING.** I read your fit row
+rather than your headline: `panner` ratio 0.92, `fits_frame true`, all three views `proves true`
+with `seen 1` on both bodies, `frame_edge` all zero on all three, `air_px_min` 133 at the front,
+`ground_from: measured this run`, and the register's own top line is `GREEN` with `red_summary.rows
+[]`, `shipped_red []`, `unproved_cells []`, `blind_views []`, `errors []`. **AND I LOOKED AT TWO
+FRAMES.** Front: the pan, hopper and crank read instantly at hero scale. Back: the drum closes,
+the crank still reads, and **it has a genuine facing from behind** - which is the exact thing the
+Beadle did not have and which no number in a fit register catches. Taking the man out in pass 4
+was right; the machine alone is the stronger silhouette.
+**AND YOU WROTE THE PROGRESS.md ENTRY I ASKED FOR.** 152 lines, the wand cycle and the gearcarry
+fault in your own words. That row is closed.
+**YOUR FIRST AND ONLY REQUIRED ACT AT 06:34 IS `git add assets/monsters/minibosses/panner.glb`
+AND PUSH IT.** It is one command and it is the whole difference between a 51st miniboss and a
+folder of pictures of one. Nothing downstream can move until it lands: content cannot write the
+`by_key` row, the game build cannot import a mesh that does not exist, and the chat bot cannot
+republish 50 -> 51. **Check your own `git status` for untracked `.glb` before you push, every
+cycle - that is the habit this costs you an hour without.**
+
+### CONTENT - C-185 TICKED AS A STAND-DOWN, AND I RE-RAN YOUR READING.
+**TICKED.** You were dry, you said so, and you did not reach for a body to justify the cycle.
+I did not take your reading: `MB_NAME` 50 = `by_key` 50 = published 50, set difference empty BOTH
+ways, measured by me on `4691f999`.
+**YOUR ITEM AT 07:22 IS CONDITIONAL AND THE CONDITION IS ART'S, NOT YOURS.** Art has built the
+51st (the PANNER - a crank-driven washing pan on a tripod) but **has not committed the mesh.**
+IF `assets/monsters/minibosses/panner.glb` IS ON `origin/art` WHEN YOU READ THIS: write the
+`miniboss_feed.by_key` row for `panner` plus its lore line, and say in your entry that you checked
+the REF and not a working directory. IF IT IS NOT: **STAND DOWN AND WRITE IT UP** - a fourth
+stand-down is the honest delivery and I will tick it as one. Do not write a `by_key` row for a body
+that does not exist; a key with no mesh behind it is the dead-data fault we spend an hour a day on.
+**AND `phase2_words_alt2` STAYS DEAD.** Sixth hour of saying it. Today's audit: **45** `_note_`
+keys and the SAME **15** non-note zero-hit keys as every honest reading for days. Raw total 60.
+Keep writing `_note_` keys; they are counted separately and they are not a defect.
+
+### HUB - STANDING CHECK TICKED. I MEASURED ALL THREE TREES MYSELF, AGAIN.
+**TICKED.** `origin/gh-pages^{tree}`, `origin/hub:web` and `origin/main:web` are **all 02257b2f**
+and `git diff --numstat` between gh-pages and `origin/hub:web` is **EMPTY**. Publish 6 is gh-pages
+**029e4fac**, pushed **21 Nov 15:39 CT**. **NOTHING IS MERGED AND UNPUBLISHED.** You did not claim
+"ready to publish", so the publish gate is NOT owed and **I ran no publish verification this hour**
+- saying so is the point; an unearned gate report is the same fault class as a lying gate.
+**THE PACK CATALOGUE'S `Castle` ROW IS CORRECT BEHAVIOUR AND I CHECKED THE BLAST RADIUS.**
+"NO LICENCE FILE FOUND, not cleared" is the licence rule working - a pack is not cleared on a
+search snippet. And it costs nothing: `Castle` appears in NO `res://` path in any `scripts/*.gd`
+and there is no castle asset directory, so nothing in the game depends on an uncleared pack.
+**YOUR ITEM AT 07:37: the standing check, unchanged.** Keep NOT publishing - that call is the
+supervisor's, not yours and not mine.
+
+### CHAT BOT - B126 TICKED, AND THE PART I AM TICKING IS THE REPORT YOU DIDN'T FILE.
+**TICKED.** Four gates green on merged main `06621a77`: parse rc=0 / 0 SCRIPT ERROR / 0 Parse
+Error; `TWITCH_PARSE OK` 8/8; `COMMANDS_DOC OK` 32 commands AND a true no-op proved by an empty
+`git status` after the real generator ran; `L14_TEST OK` 24 checks, 0 FAIL, 0 guard arms - B121's
+close now held across a SIXTH merged main.
+**AND YOU SUPPRESSED YOUR OWN FINDING BECAUSE IT WAS WRONG.** Your naive regex over `chatcmd.gd`
+produced 18 false "code-no-entry" and 13 false "entry-no-code" hits, you recognised it as the same
+flat-regex-on-multi-line-GDScript fault B121 wrote up, and you reported the REAL gate's drift arms
+as the verdict instead of publishing your own noise. **That is the single most expensive habit in
+this house and you exercised it unprompted.**
+**YOU ALSO HELD THE COUNT CORRECTLY FOR THE RIGHT REASON** - you measured 50/50/50 before touching
+a file and republished nothing. I re-measured and agree.
+**YOUR ITEM AT 07:45: the four engine gates on merged main, verdict LINES not return codes.**
+NOTHING IS OWED ON THE COUNT unless BOTH `MB_NAME` and `by_key` read 51 - and they will not unless
+art pushes `panner.glb` first. If `L14_TEST` goes red, the chain moved under you: re-measure before
+you touch a file, as you have now done six hours running. **CLAIM BY :50 WITH A DECLARED FINISH
+INSIDE :52** so the HUD does not lose its window. That schedule row is mine and it is still working.
+
+### HUD - U146 TICKED AS A STAND-DOWN. FOURTH DRY CYCLE, AND THAT IS NOW MINE TO ANSWER, NOT YOURS.
+**TICKED.** You read the working `RUN_LOCK.txt` in R at decision time rather than a ref, you
+checked by process as well as by file, and you stood down rather than claim a lock with no owed run.
+**THE SCHEDULE FIX IS STILL HOLDING:** the chat bot claimed 06:49:45 and released 06:51:38, INSIDE
+its declared :52, and your window was free. You have not lost a window since the fix.
+**I WENT LOOKING FOR HUD-OWNED WORK AND I AM TELLING YOU I FOUND NONE RATHER THAN INVENTING ONE.**
+I checked whether the miniboss chain moving to 50 had left anything unresolved on your side:
+`MB_NAME` and `miniboss` appear in NO HUD-owned file - not `boss_bar.gd`, not `party_frames.gd`,
+not `feed_hud.gd`, not `ui_theme.gd`. There is no stale name to fix. The rarity row is U55 and
+shipped - do not let any row hand it back to you. L31's open half is the GAME BUILD's by the
+16 Nov re-route and I have just handed it to them; it is not yours.
+**YOUR WINDOW AT 07:52 IS YOURS. If you are dry, stand down in writing and I will tick it.** If you
+find a defect in shipped HUD work, that is owed work and not a new item. **Four stand-downs in a
+row is not your failure - it is a scope question above both of us, and I have put it to the
+supervisor this hour rather than leaving you to absorb it quietly.**
+
+### FOR THE SUPERVISOR - THE 06:58 CT FIRING, 24 NOV 2026
+1. **THE HUD LANE HAS HAD FOUR CONSECUTIVE DRY CYCLES (U144, U145, U146 and almost certainly
+   07:52).** Every one was a correct, well-evidenced stand-down and I have ticked them as
+   deliveries. The cause is not the lane and not the lock schedule: I measured that no HUD-owned
+   file is touched by anything currently moving, and the freeze means I cannot open new HUD scope
+   myself. **RECOMMENDATION: this is worth one short question to Mr. E** - whether he wants HUD
+   scope opened (a Phase 2 system with a HUD half would do it), or the HUD lane's cadence reduced
+   while the work is elsewhere. I am not taking either decision and I have not asked him.
+2. **NO PUBLISH IS OWED.** gh-pages, `origin/hub:web` and `origin/main:web` are all tree
+   `02257b2f`; publish 6 (`029e4fac`) consumed everything on 21 Nov 15:39 CT. Nothing for you to
+   authorise this hour. Recorded so the question does not get re-asked.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (land these on the first LIVE turn)
+These are MECHANICAL faults in THIS SEAT'S OWN PROMPT (trig_01AiNVX4tT9xupV9p8b928fB). A firing
+cannot write a scheduled task - attempted once per the rule, refused, because a firing has no live
+turn in which approval can be asked. Landing them is a live turn's job. ADD TO THIS LIST, DO NOT
+RESET IT.
+A. **THE HUB BLOCK IS TWO PUBLISHES STALE.** It says gh-pages is `05ac2679` / tree `9ca8051e`
+   pushed 19 Nov 20:06 CT, and that "3 files / +59 / -1 (NOTES.md +9, app.js +46/-1, style.css +4)
+   has been with the supervisor since 20 Nov". **BOTH ARE WRONG.** Publish 6 landed 21 Nov
+   15:39 CT as `029e4fac`, tree `02257b2f`, and it consumed exactly that +59/-1. The correct text
+   is: gh-pages `029e4fac`, tree `02257b2f`, pushed 21 Nov 15:39 CT; NOTHING merged-and-unpublished.
+   (The PLAN has carried this correctly since the 05:58 firing - it is the PROMPT that is stale.)
+B. **THE STANDING NOTE ON THE ART FIT REGISTER IS STALE.** The prompt says it "reads RED /
+   ok:false and has done for days" on two carried `_chibi` rows. Measured on `origin/art` today:
+   `ok: true`, `verdict: GREEN`, `red_summary.rows []`, `shipped_red []`, **`retired_red []`**,
+   53 pairs. The two retired rows no longer hold it red. The instruction "do not report the art
+   gate is green" is now itself the wrong instruction.
+C. **THE MINIBOSS COUNTS IN THE PROMPT ARE STALE BY SIX.** It says the fit register judges 46 rows
+   / 44 live bodies, and `MB_NAME` is 44/44/44. Today: register 53 pairs, chain 50/50/50. The
+   prompt already says never to quote its own counts as current; these are the numbers that prove
+   why.
+D. **THE ID LIST IS STALE.** Prompt says B104, C-163, D100, H32, L74, S85, T5, U124, art on
+   paviser pass 8. Measured this hour: **B126, C-185, S108b, U146, art on the PANNER (51st,
+   pass 4)**.
+
 ## TAKE THIS NEXT - Updated THE 05:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** GAME BUILD, THIS ROW IS YOURS AT 06:07. The other five read it at :22 (content), :34 (art),
 *** :37 (hub), :45 (chat bot), :52 (HUD). Machine clock when I started this block: 06:05 CT 24 Nov.

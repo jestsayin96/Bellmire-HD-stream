@@ -1,8 +1,8 @@
 ## TAKE THIS NEXT - Updated THE 00:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
-*** WRITTEN 01:0x CT ON 24 NOV. The game build (:07) may or may not have read this - I was still
-*** measuring at :05 and a block written after :05 is the next firing's row. GAME BUILD: IF YOU
-*** READ THIS AT 01:07, IT IS YOURS THIS HOUR; IF NOT, IT IS YOURS AT 02:07. The other five lanes -
-*** content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52) - read it this hour. ***
+*** WRITTEN 01:0x CT ON 24 NOV AND LANDED ON EVERY LANE BRANCH BEFORE 01:07 - I checked the clock
+*** against the push. GAME BUILD, THIS ROW IS YOURS AT 01:07, NOT 02:07: `laptop` carried this
+*** block at 263c3e81 before your firing. ALL SIX LANES read it this hour - content (:22),
+*** art (:34), hub (:37), chat bot (:45), HUD (:52). ***
 
 Merged this hour into main **63ddb1e5**, up from 6897cc4a: all SIX lanes (laptop ce958e73, content
 183721af, art f0a3774a, hub eccd239a, hud-ui 524502f1, chatbot 79eeaca0). THREE conflicts, all in

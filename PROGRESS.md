@@ -16835,3 +16835,66 @@ check is `Get-CimInstance`, never the log alone.
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release - checked by process BEFORE writing the IDLE
 line this time, not after.
+
+---
+
+## B126 - 24 Nov 2026, 06:45 CT firing. FOUR GATES GREEN ON A SIXTH MERGED MAIN, NOTHING OWED, AND THE ONLY THING THAT LIED THIS HOUR WAS MY OWN PYTHON.
+
+Merged `origin/main` **06621a77** into `chatbot` - fast-forward, no conflicts, HEAD **0a17e454**.
+`origin/chatbot` was ahead of my local by the team lead's WORK_PLAN push, so I merged that first
+(B124's push rejection taught this lane to fetch and merge `origin/chatbot` before `origin/main`).
+
+### NOTHING WAS OWED ON THE COUNT, AND I MEASURED THE CHAIN BEFORE TOUCHING A FILE
+The team lead's row said the cascade is closed at 50/50/50. I did not take the line. On my own
+merged tree, with a brace-matched parse rather than a line count:
+- `Delve.MB_NAME` -> **50 keys, `almoner` IN**
+- `lore_lines.json` -> `miniboss_feed.by_key` -> **50, `almoner` IN**
+- `data/commands.json` -> published **50** at both leaves (`.commands.miniboss.short`, `.what`),
+  **18000 bytes, 32 keys, json.load clean**
+
+Level at 50/50/50, so the republish condition is UNMET and there is **no fourth hold and no fifth
+publish**. `git status` on `data/commands.json`, `scripts/chatcmd.gd` and `docs/COMMANDS.md` is
+**empty** - this cycle edited none of my three files, and that is the correct outcome, not a miss.
+
+### THE FOUR GATES, VERDICT LINES AS PRINTED
+- `tools/_commands_doc.gd` -> **`COMMANDS_DOC OK wrote 32 commands`** (1.1 s), and a **TRUE no-op**:
+  `git status --porcelain docs/COMMANDS.md` is empty *after* the real generator ran. The generator
+  wins over any emulation and it changed nothing, which is what a level chain should produce.
+- `tools/_l14_test.gd` -> **`L14_TEST OK (24 checks)`**, 0 FAIL, **0 guard arms fired**. Both doc
+  arms quiet: *"carries every field the data publishes, verbatim (32 rows; unpublished [])"* and
+  *"publishes nothing the data does not say (32 rows; stale [])"*. B121's close has now HELD across
+  a **sixth** merged main. The `MINIBOSS COUNT` and `MINIBOSS UNNAMED` arms that fired in B124 stay
+  quiet.
+- `tools/_twitch_parse.gd` -> **`TWITCH_PARSE OK (8 checks)`**, all eight PASS including the split
+  packet and the four-per-frame / rest-next-frame pair.
+- parse `--headless --path W6 --quit-after 300` -> **rc=0, 0 SCRIPT ERROR, 0 Parse Error** (21.7 s).
+  The parse section carries **no `ERROR` line at all**; the only stderr in the whole run is
+  leak-at-exit noise from `_l14_test` (5 ObjectDB instances, 2 resources) which is Godot's own
+  shutdown accounting, not a script fault.
+
+### THE THING I WILL NOT LET STAND: MY OWN DRIFT EMULATION WAS GARBAGE
+Before the gates I ran a quick python drift cross-check over `scripts/chatcmd.gd` and it reported
+**18 commands "in code with no entry"** (`accessories`, `brews`, `score`, `six`, `seven`,
+`thirteen`, `testbits`, `testsub`...) and **13 entries "no command answers"** (`armoury`,
+`bestiary`, `miniboss`, `town`...). **Every one of those 31 is false.** The regex was scraping
+`"word":` and `cmd == "word"` out of unrelated dictionaries and number-word tables; the real
+dispatch does not look like that. `_l14_test.gd`'s own arms check the same two directions properly
+and both came back **empty** (`missing []`, `unanswered []`), over 74 verbs. **This is the exact
+class of fault B121 wrote up - a regex that anchors on the wrong shape - and the rule holds: the
+real gate wins and the emulation was wrong.** It is written here instead of in the summary as a
+finding, because an unproven emulation reported as a verdict is worse than no check.
+
+### THE WINDOW - HELD BY ANOTHER LANE, POLLED BY PROCESS, NOT CLAIMED OVER
+The lock's last line at my firing was `RUNNING 06:43:10 (QA tester, check-only, cap 06:50)` with
+**no IDLE from that lane**, and `Get-Process 'Godot*'` returned **2** - genuinely alive, despite
+"check-only" in the claim. The QA tester then re-claimed at 06:46:45. I did **not** claim over a
+live hold: I polled the lock line and the process count every 6 s and waited for
+`IDLE 06:49:35 - QA tester re-run 255 scripts, 3 flagged` **with Get-Process 0** before writing my
+own RUNNING at 06:49:45. Git fetch/merge and the whole chain measurement were done while waiting -
+file-only work, no Godot - so the wait cost the lane nothing. All four gates then ran 06:49:57 ->
+06:50:22 under a hard wall-clock kill set at 06:51:40 that never had to fire. Released **06:51:38**,
+inside the declared 06:52, and the HUD's :52 window was never entered. Process checked **before**
+writing the IDLE line, not after: zero Godot alive.
+
+Nothing for the GAME BUILD lane in `twitch_eventsub.gd` this cycle. No live Twitch test:
+**ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on either account.**

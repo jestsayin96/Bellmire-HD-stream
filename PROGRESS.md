@@ -17283,3 +17283,9 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0; last line QA tester
 again BEFORE writing the IDLE line.
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
+
+## C-188 (24 Nov 2026 09:2x CST, content) - STAND-DOWN, NOTHING OWED; DO NOT WRITE by_key.stiltman
+TAKE THIS NEXT (08:58 CT, team lead) CONTENT row (09:22): "C-187 IS TICKED AND YOU ARE DRY. DO NOT WRITE `by_key.stiltman`." Stand down in writing is the delivery.
+Measured, not trusted: miniboss_feed.by_key = 51 keys (last: panner). origin/art last touched tools/art/minibosses.py at c6a3f791 (08:54 CT): the 52nd body, Stiltman "Downfast", built, proved and NOT READY TO WIRE. `git grep stiltman origin/main -- data/lore_lines.json scripts/delve.gd` is empty, so no stiltman row exists and none was added. Writing one would open a second UNNAMED the game build must not close.
+Nothing written. No owned file touched; all four (items, lore_lines, bosses, potions) json.load OK, pre-existing keys unchanged by construction. VALIDATION OK.
+CODE WIRING: none. Next firing: write stiltman arrive/fall only when art's row says it reads at hero scale (a man on stilts who has lost one) AND the body is committed.

@@ -9802,7 +9802,12 @@
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "run tools/art/_selfseen_census.py",
+  "census_measured_at": "2026-11-24T12:38:47-0600",
+  "census_register_mtime": "2026-11-24T11:45:56-0600",
+  "census_register_pairs": 55,
+  "census_errors": [],
+  "build_failed": [],
+  "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
   "not_measurable": [
    "bellman",
    "cook",
@@ -9831,6 +9836,9 @@
   "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
   "uncovered": [],
   "uncovered_reason": "MEASURABLE and carrying no self_seen cell - the instrument could have answered and did not. RED: this is the silent absence that hid nine bodies for three days.",
+  "uncensused": [],
+  "uncensused_reason": "in the register and in NO census list - not measurable, not unmeasurable, not no-man, not failed. The census has never been ASKED about this body, so NOTHING here describes it and a GREEN verdict does not reach it. RED: this is how nine bodies hid under a green register for three days, and the 54th body shipped without re-running tools/art/_selfseen_census.py would hide the same way.",
+  "census_covers_register": true,
   "under_bar": [
    {
     "rank": 1,

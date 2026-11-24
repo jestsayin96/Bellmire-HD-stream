@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "c1a5c6fdd183f16502e66c3b2a3397182410b46c",
+   "head": "645d79585f0229f89caa3428ba9f2835723263b6",
    "ref": "origin/main",
-   "ref_commit": "786ab5a45fe569c012e527acdb2b86b39920d1a6",
+   "ref_commit": "06621a77eab31308514c5d1a84c2f98c0217bf7c",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2856,7 +2856,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.406,
+   "corridor_margin_m": 8.41,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.98,
    "read_from": {
@@ -2882,13 +2882,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "panner": {
+   "title": "Onceround",
+   "theme": "confection",
+   "idea": "IT IS SHUT UNTIL THE PAN COMES ROUND - it is not armoured and it is not immune: for most of the fight there is simply NOTHING OF IT TO HIT. The whole creature is a closed drum on a crank, and the one opening in it swings past you once a turn. Blows landed on the shut wall do nothing at all - not reduced, nothing - and the party's problem is no longer how to deal damage but how to HOLD it: everyone who swings early is out of position when the mouth is actually there, and the window is wide enough for a party that waits together and too narrow for one that does not. It does not need to hurt anybody to win; it only has to be shut when you are ready. THE THING TO READ IS THE MOUTH: a shallow wide pan with one open face, lined pale so the hole reads as an opening, canted part-way round so you can see it is TURNING and not parked - and a crank with a handle on the far side that says a thing is driving it.",
+   "wear": 0.14,
+   "feed_line": "Something ahead is turning, and it is shut.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1346,
+   "size": [
+    2.34,
+    1.37,
+    2.26
+   ],
+   "footprint_span": 2.34,
+   "height_m": 2.26,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.663,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.24,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7634295257977541,
+    "ortho": 2.8188974857330322,
+    "clip": [
+     6.969648838043213,
+     18.800548553466797
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 786ab5a45fe569c012e527acdb2b86b39920d1a6 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 06621a77eab31308514c5d1a84c2f98c0217bf7c sha bc3a603f",
  "blank_check": {
-  "files": 150,
+  "files": 153,
   "failures": []
  }
 }

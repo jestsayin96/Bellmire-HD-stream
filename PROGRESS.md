@@ -13682,3 +13682,71 @@ same mesh would read about 1.75 m. The word is his, not mine.
 
 NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
 needs none. NO TWITCH TEST. 0 bits.
+
+## 24 NOV 2026, 06:3x-07:0x CT - ART - THE PANNER IS THE 51st, AND THE PASS THAT
+## MOVED NOTHING IS THE ONE WORTH KEEPING
+FIRST ACT WAS THE OWED ONE: the wand cycle's PROGRESS entry, written above and
+pushed at 645d7958 before any new work started. Then the licence in the 06:34
+row: invent the 51st.
+
+WHAT I CHECKED FIRST, BY MEASURING. BUILDERS carries 64 keys, 50 of them
+non-variant bodies; CANON carries 50 rows; the two agree and they agree with
+the team lead's 50/50/50 on merged main. I then read all fifty `idea` phrases
+as MECHANICS, not as trades - and that killed my first two designs. A BRANDER
+("it marks one of you and the floor goes for the mark") is the DYER verbatim.
+A KNACKER ("everything else that dies in the room feeds it") is the
+RATCATCHER, whose row is better developed than mine was. I would have shipped
+the brander if I had gone by what I remembered of the set.
+
+THE GAP THAT IS ACTUALLY THERE: not one of the fifty makes the party HOLD ITS
+BLOWS. Every row answers what it does to you or what you must break; none
+answers WHEN you may hit it at all. So: PANNER / "Onceround", IT IS SHUT UNTIL
+THE PAN COMES ROUND - a closed drum on a crank with one opening that swings
+past once a turn, and blows on the shut wall do nothing at all. Theme
+confection, which was the thinnest in the set at two against the crypt's five.
+Height 2.26 and wear 0.14, both unused by the other fifty.
+
+PASS 2 IS THE FINDING AND IT IS A FAULT OF MINE. Pass 1 rendered as one
+enormous PALE DISC on legs - the pavise read my own docstring claims to design
+out. I diagnosed the pan's inner FLOOR, flipped it dark, re-rendered, and the
+front frame came back BYTE IDENTICAL at 432,898 bytes: not one pixel, same
+1,144 faces, GREEN both times. A change that cannot move the picture means the
+object I changed is not the object in the picture. THE PALE DISC WAS THE LIP
+RING: lordlib.cone caps BOTH ends and cap defaults True, so my "flared collar"
+was a solid plate 1.28 m across lying over the mouth. Pass 3 sweeps the lip as
+a real ring in the mouth's own basis and the opening reads - dark interior,
+pale edge, which is the inverse of what pass 1 built. 1,346 faces.
+
+GATES. Gen ok true, 62 rows, errors [], blank [], panner span 2.34
+CORRIDOR-SAFE and UNDER-LID (corridor 11.0, lid 9.5, both read out of
+floorgen.gd this run). Fit verdict GREEN, ok true, errors [], blind_views [],
+panner proving 3 of 3, border and frame clean, hero 2.45 m measured not
+assumed.
+
+THE FIT PROOF, AND I OPENED ALL THREE. hero_front: the opening reads - dark
+bowl, pale rim, comfits as bumps, chute coming in. hero_side: the best view,
+the rim an ellipse with the drum wall behind it, so the DEPTH is visible and
+the cask read is answered by the picture. hero_back: the closed dark back and
+nothing pale - FACING HOLDS, checked on purpose against the Beadle defect.
+EVERY FAULT I CAN SEE, AND THERE ARE SIX: (1) the man is COMPLETELY ECLIPSED in
+the side view - he and the pan share a Y and the side camera looks along X, so
+no X separation can part them; (2) in the front view his forearms fold into a
+jumble because the crank is behind the pan from there, so he reads as a
+bystander and only works in the back view; (3) the hopper chute notches the top
+of the mouth in front projection; (4) the comfits read as RIVETS, not sugar -
+nothing in frame says confection; (5) the pale rim is a closed continuous ring
+and at stream distance reads slightly as a porthole, a modern shape; (6) the
+man's hat floats above a neckless head.
+FAULTS 1 AND 2 ARE THE SAME MAN AND I DID NOT GUESS AT HIM IN A RUSHED PASS:
+either he moves forward in -Y so he parts from the pan in the side view, or he
+comes out and the body becomes a machine with a crank nobody is turning, which
+is plainer and kills three faults in one change. Next firing decides it on a
+render, not here.
+
+FOR THE GAME BUILD: NOT WIRED BY ME. bestiary.gd needs a `model` path to
+assets/monsters/minibosses/panner.glb and NO `anims` entry (static);
+Delve.MB_NAME wants `"panner": "Onceround"` after content's feed row lands.
+NOT ROOM-LOCKED: CORRIDOR-SAFE.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

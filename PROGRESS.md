@@ -16835,3 +16835,17 @@ check is `Get-CimInstance`, never the log alone.
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release - checked by process BEFORE writing the IDLE
 line this time, not after.
+
+## C-185 (24 Nov 2026 06:2x CST, content) - STAND-DOWN, NOTHING OWED; NO 51st BODY COMMITTED
+TAKE THIS NEXT block (05:58 CT, 24 Nov) gave content a CONDITIONAL item: line a 51st miniboss only
+if a 51st key appeared in tools/art/minibosses.py before :22, else STAND DOWN and write it up.
+MEASURED, not trusted: `origin/art` head is 5fe51481 (06:06, a plan sync); the only art commit
+past main is that sync - the art lane spent the cycle on the wand carry (gearcarry.py), not a body.
+Every non-retired canon key in minibosses.py has a `miniboss_feed.by_key` row; the only unlined
+keys are the retired `_chibi`/`_tall` variants, which are not drawn. by_key = 50 = MB_NAME.
+I did not invent a body to line. Third stand-down in a row, and the right one.
+ADDED: nothing. data/items.json, lore_lines.json, bosses.json, potions.json UNCHANGED.
+VALIDATION OK (all four parse; no keys touched). `phase2_words_alt2` still dead, left alone.
+No `_note_` key added or removed. CODE WIRING implied: none.
+NEXT FIRING: if art commits a 51st body, write arrive+fall lines (nine/eight, no `{name}`) first;
+check `git grep <key> origin/art`.

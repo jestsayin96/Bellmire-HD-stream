@@ -446,7 +446,8 @@ const MB_NAME := {
 	"tither": "Tenthpart",   # S89: art's CANON title (minibosses.py:15830); content's C-167 by_key.tither has landed, so miniboss_for draws the body (S91)
 	"blower": "Deadair",   # S94: content's miniboss_feed._note_c169 "Deadair" and art's CANON title (minibosses.py:16064), both read; C-169 by_key.blower landed (9/7/4/8)
 	"changer": "Evenhand",   # S99: content's miniboss_feed._note_c174 "Evenhand" and art's CANON title (minibosses.py:16466), both read; C-174 by_key.changer landed (9/7/4/8)
-	"roper": "Drawtight"}   # S102: content's miniboss_feed._note_c177 "Drawtight" and art's CANON title (minibosses.py:17262), both read; C-177 by_key.roper landed (9/7/4/8). stopper ("Chokewell") STILL HELD - stopper.glb is on no branch
+	"roper": "Drawtight",   # S102: content's miniboss_feed._note_c177 "Drawtight" and art's CANON title (minibosses.py:17262), both read; C-177 by_key.roper landed (9/7/4/8)
+	"stopper": "Chokewell"}   # S103: content's miniboss_feed._note_c176 "Chokewell" and art's CANON title (minibosses.py:16881), both read; C-176 by_key.stopper landed (9/7/4/8); stopper.glb tracked on main 41f71825 - the S101/S102 hold is lifted
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

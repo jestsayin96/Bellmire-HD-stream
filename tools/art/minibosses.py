@@ -17303,7 +17303,65 @@ OVERRIDE.update({
 
 
 def roper():
-    """IT TWISTS YOU TOGETHER. The 49th body. PASS 3 - THE FRONT READ.
+    """IT TWISTS YOU TOGETHER. The 49th body. PASS 7 - THE APEX IS AN OBJECT.
+
+    *** PASS 7, 24 NOV 00:3x-01:2x CT. THE TEAM LEAD WOULD NOT TICK "THE
+    *** TRIPOD IS GONE" AND HE WAS RIGHT NOT TO. He opened the three renders,
+    *** confirmed the side and the back, and said head-on the dominant shape
+    *** is still a pale apex with three pale lines splaying to the floor. My
+    *** own fault (1) named the fix - grow the top so the apex is an OBJECT -
+    *** and my own note said it would foul the chin. IT DOES NOT, AND HERE IS
+    *** THE MEASUREMENT THAT SETTLES IT RATHER THAN THE SENTENCE THAT DIDN'T.
+    The head's underside is z 1.480 and the shipped crown was 1.475: FIVE
+    millimetres, which is why "grow it" read as "refuse it". The chin is not a
+    function of the radius alone, it is a function of the radius AND THE SEAT.
+    Drop the axis 1.260 -> 1.150 and take the radius 0.215 -> 0.300 and the
+    crown is 1.450 - THIRTY millimetres clear, six times the shipped margin,
+    with a former of nearly twice the area. The cost my old note predicted is
+    real and it is paid: the handles, both hands and both arms are re-sited,
+    and they are now DERIVED from TOP_R / TOP_Z so the next move costs one
+    number instead of eight.
+
+    TWO VARIABLES, TWO RENDER PASSES, MEASURED SEPARATELY (tools/art/
+    _roper_apex.py, front view, hero-scale ortho so one pixel here is one
+    pixel in the hero sheet). Every figure is a WITH/WITHOUT through one
+    locked camera intersected with the span's own silhouette - not mask_of,
+    which is trap 5:
+      7a SIZE   apex owned px 2422 -> 4814; apex_share (apex / apex+strands)
+                0.2808 -> 0.4573. AND IT MADE THE DISC BLANKER: dark_frac on
+                the top fell 0.069 -> 0.0395. Size alone does not answer
+                "a pale bowl".
+      7b FACE   a dark iron hub cap and three dark sockets on the groove
+                circle: dark_frac 0.0395 -> 0.3356 front, 0.2337 -> 0.3225
+                side, apex_share 0.4573 -> 0.4639.
+      CHIN      the `face` span owns 247 px front in ALL THREE arms -
+                baseline, 7a and 7b, unchanged to the pixel. The fix does not
+                touch the face; that is measured, not reasoned.
+
+    WHAT I STILL SEE IN roper_p7b/hero_front.png AND WILL NOT DRESS UP: the
+    three cords still splay from the former to three points on the floor, and
+    at stream distance that splay is still the strongest line in the shape -
+    THE TRIPOD IS WEAKER, NOT GONE, and I am not writing the heading that got
+    corrected last night. The former now reads as a wheel-like thing held in
+    two hands rather than as a bowl, which is what this pass was for. New
+    costs, both measured: the belt ring is now HIDDEN head-on (the `man` span
+    loses 1525 owned px front, 13580 -> 12055) because the bigger former
+    covers it, so the waist break only reads from the side and the back; and
+    the arms run 0.853 m shoulder-to-hand against 0.818 before, 4% longer.
+    In the side view the former reads a little slab-like now that it is
+    fatter without being longer in y.
+
+    THE INSTRUMENT FOUND ITS OWN FAULT BEFORE IT JUDGED ANYTHING. My first
+    version counted every pixel that MOVED when a span was removed, which
+    counts the span's SHADOW on the man as part of the span: it reported the
+    top as a 0.79 x 1.00 m object when the top is 0.43 m. A number that
+    counts a thing's shadow as the thing would have passed a small apex off
+    as a big one. The owned set is now intersected with the span's own
+    silhouette and the shadow is reported separately. Both baseline and both
+    arms above were measured with the CORRECTED instrument.
+
+    ---- the record of passes 1-6 follows, unchanged ----
+    PASS 3 - THE FRONT READ.
 
     *** PASS 2 SHIPPED, AND THE FRONT VIEW STILL READ AS A SURVEYOR'S TRIPOD.
     *** I SAID SO MYSELF ON THE HOLD ROW AND THE TEAM LEAD REPEATED IT RATHER
@@ -17416,9 +17474,33 @@ def roper():
 
     # Every strand, peg, handle and hand below is derived from these, so
     # re-siting the top cannot leave a line hanging in air.
-    GROOVE = ((-0.130, -0.780, 1.185),
-              (0.000, -0.790, 1.410),
-              (0.130, -0.780, 1.185))
+    # *** PASS 7 - THE APEX BECOMES AN OBJECT. ONE VARIABLE: THE TOP'S SIZE,
+    # *** AND THE SEAT IT SITS ON. ***
+    # The whole top block, both grooves and both handles, and therefore both
+    # hands and both arms, are now DERIVED from these two numbers, so growing
+    # the former cannot leave a strand, a handle or a hand hanging in air -
+    # which is the fault that made pass 1's re-site expensive enough to be
+    # called a refusal.
+    TOP_R = float(os.environ.get("ROPER_TOPR", "0.300"))   # was 0.215
+    TOP_Z = float(os.environ.get("ROPER_TOPZ", "1.150"))   # was 1.260
+    _fr = TOP_R / 0.215
+    # THE CHIN, AND IT IS WHY THE AXIS DROPS. The head's underside is at
+    # z 1.480 (centre 1.700, rz 0.220) and the front camera collapses y, so
+    # the top and the head do not have to touch in the world to touch on
+    # screen - pass 1 proved that the expensive way. At the shipped r 0.215 /
+    # z 1.260 the crown stood at 1.475: FIVE MILLIMETRES of projected air,
+    # which is why "grow it" read as "foul the chin". Dropping the axis buys
+    # the room: crown = 1.150 + 0.300 = 1.450, THIRTY millimetres clear - six
+    # times the margin the shipped body had, with a former twice the area.
+    # The assert is here and not in a docstring.
+    assert TOP_Z + TOP_R <= 1.450 + 1e-9, "the top's crown fouls the chin"
+    # Three grooves at 120 deg on a circle of 0.6977 * TOP_R, the top one at
+    # 12 o'clock. Same proportion as the shipped body; the circle grows with
+    # the former instead of being re-typed.
+    _gr = TOP_R * 0.6977
+    GROOVE = ((-0.8660 * _gr, -0.780, TOP_Z - 0.5 * _gr),
+              (0.000, -0.790, TOP_Z + _gr),
+              (0.8660 * _gr, -0.780, TOP_Z - 0.5 * _gr))
     PEG = ((-0.520, -1.720, 0.030),
            (0.000, -1.950, 0.030),
            (0.520, -1.720, 0.030))
@@ -17514,9 +17596,37 @@ def roper():
     # centre and 0.015 below the head's own underside: it cannot occlude the
     # face from any camera at or above the horizon.
     _open()
-    P.raw(aim(L.cone(0.090, 0.215, 0.230, 16), (0.0, -0.735, 1.260), (0, 1, 0)), 'bone')
-    P.raw(aim(L.cone(0.215, 0.215, 0.060, 16), (0.0, -0.590, 1.260), (0, 1, 0)), 'bone')
-    P.raw(aim(L.cone(0.205, 0.070, 0.240, 16), (0.0, -0.440, 1.260), (0, 1, 0)), 'bone')
+    P.raw(aim(L.cone(0.090 * _fr, TOP_R, 0.230, 16),
+              (0.0, -0.735, TOP_Z), (0, 1, 0)), 'bone')
+    P.raw(aim(L.cone(TOP_R, TOP_R, 0.060, 16),
+              (0.0, -0.590, TOP_Z), (0, 1, 0)), 'bone')
+    P.raw(aim(L.cone(0.205 * _fr, 0.070 * _fr, 0.240, 16),
+              (0.0, -0.440, TOP_Z), (0, 1, 0)), 'bone')
+    # *** PASS 7b, ITS OWN PASS AND ITS OWN RENDER: THE FORMER GETS A FACE. ***
+    # Pass 7a doubled the apex's owned pixels (2422 -> 4814 head-on at hero
+    # scale) and the picture got BLANKER, not better: `dark_frac` on the top
+    # fell 0.069 -> 0.0395, because a bigger cone seen end-on is a bigger
+    # featureless pale disc. That is fault (1) exactly - "a pale BOWL, not a
+    # grooved former" - and size was never going to answer it on its own.
+    # Structure is the second variable, and it is measured on its own run:
+    #   a DARK HUB CAP standing in front of the fore tip, so the middle of
+    #   the disc is iron and not wool; and
+    #   THREE DARK SOCKETS at the groove circle, each one standing proud of
+    #   the cone surface by 0.040, so each strand is seen ENTERING SOMETHING
+    #   instead of touching a smooth face.
+    # Head-on that is iron hub + three iron sockets at 120 deg on a pale
+    # disc, which is a grooved former and cannot be read as a bowl. The
+    # geometry of WHY they are visible, not hoped for: the fore cone's radius
+    # runs 0.126 (y -0.850) to TOP_R (y -0.620), so a feature at image radius
+    # R is only seen if it sits FORWARD of the surface that carries R. Both
+    # do, by construction, and the number that proves it is the top's own
+    # dark_frac through the same front camera.
+    if os.environ.get("ROPER_SLOTS", "1") != "0":
+        P.raw(aim(L.cone(0.126 * _fr, 0.090 * _fr, 0.070, 14),
+                  (0.0, -0.885, TOP_Z), (0, 1, 0)), 'dark')
+        for _g in GROOVE:
+            P.raw(aim(L.cone(0.062, 0.058, 0.110, 10),
+                      (_g[0], -0.765, _g[2]), (0, 1, 0)), 'dark')
     # Two handles out of the collar at x +-0.275, inner ends at x +-0.190 and
     # so INSIDE the collar's own radius of 0.215: the handles are in the timber
     # and the hands that close on them are ON geometry. The Changer's far hand
@@ -17524,17 +17634,20 @@ def roper():
     # or it is not placed.
     for s in (-1, 1):
         P.raw(aim(L.cone(0.048, 0.044, 0.170, 10),
-                  (s * 0.275, -0.600, 1.235), (1, 0, 0)), 'dark')
+                  (s * (TOP_R + 0.060), -0.600, TOP_Z - 0.025), (1, 0, 0)),
+              'dark')
     _close("top")
 
     # ------------------------------------------------------------- THE ARMS
     # Both hands down and forward on the two handles, at the handle centres.
     _open()
     for s in (-1, 1):
-        limb(P, [(s * 0.290, 0.240, 1.420), (s * 0.345, -0.150, 1.330),
-                 (s * 0.278, -0.560, 1.248)], 0.098, 0.078, 'body')
+        limb(P, [(s * 0.290, 0.240, 1.420),
+                 (s * (TOP_R + 0.130), -0.150, TOP_Z + 0.070),
+                 (s * (TOP_R + 0.063), -0.560, TOP_Z - 0.012)],
+             0.098, 0.078, 'body')
         P.add(L.sphere(0.086, 0.082, 0.082, 10, 7), 'body',
-              loc=(s * 0.275, -0.600, 1.235))
+              loc=(s * (TOP_R + 0.060), -0.600, TOP_Z - 0.025))
     _close("arms")
 
     # ---------------------------------------------------------- THE STRANDS
@@ -17615,7 +17728,7 @@ def roper():
     # 0.300 and a torso surface at x 0.285. Past the leg: the rope is never
     # below z 1.180 and the right leg's widest is x 0.355 at z 0.840.
     _open()
-    limb(P, [(0.000, -0.320, 1.260), (0.460, -0.100, 1.180),
+    limb(P, [(0.000, -0.320, TOP_Z), (0.460, -0.100, 1.180),
              (0.520, 0.420, 1.300), (0.480, 0.620, 1.900),
              (0.420, 0.620, 2.300)], 0.054, 0.054, 'dark', ring=7)
     limb(P, arc((0.420, 0.620, 2.310), (0.420, 0.860, 0.800), -0.050, 7),

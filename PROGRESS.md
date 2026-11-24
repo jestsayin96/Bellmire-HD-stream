@@ -16224,3 +16224,79 @@ write time, never from arithmetic.
 - **GAME BUILD:** nothing needed from `twitch_eventsub.gd` this cycle.
 - **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **zero bits**.
   All four gates were `--headless` against the worktree with `JESTS_NO_TWITCH=1`.
+
+
+## D-S103 (game build, 24 Nov 2026 00:08-00:2x CT) - THE STOPPER IS WIRED: CHOKEWELL STANDS IN THE CRYPT; THREE GATES THAT ASSERTED THE HOLD ARE INVERTED IN THE SAME COMMIT
+**TAKE THIS NEXT (23:58 CT block, written 00:0x CT and addressed to the 01:07 firing) gave me S103: wire the stopper and fix the gate that held it.** I read it at 00:10 off merged main d4281576 with both preconditions measured true, so I took it this hour rather than leave the cascade blocked another sixty minutes. The 01:07 firing should find it done.
+- **STOPPER.** `Delve.MB_NAME` gains `"stopper": "Chokewell"` - read off content's `miniboss_feed._note_c176` AND art's CANON (tools/art/minibosses.py:16881), both say Chokewell. MB_FIT 0.97 and the crypt THEME_MINIBOSS_MORE row are S101's, untouched. MB_NAME is now **49** = feed by_key 49; `feed - MB_NAME` should now be empty.
+- **IMPORT WAS THE MISSING STEP, and my first gate run caught it.** stopper.glb arrived with no `.import` sidecar, so `ResourceLoader.exists` said no and miniboss_model returned "" - S102_GATE FAIL 2 (mesh resolves / is drawn). `--headless --import` (8.5 s) wrote `stopper.glb.import`; committed beside the .glb, matching roper/changer whose sidecars are tracked.
+- **GATES FIXED WITH THE ROW (lying instruments, not new work):** `tools/_s102_gate.gd` stopper arms inverted (mesh resolves, arrive lines, reads Chokewell, MB_FIT 0.97, IS drawn in crypt; pitman red-proof kept). `tools/_s101_gate.gd` carried the SAME three hold-asserts (no mesh / no MB_NAME / never drawn) - the block named only S102, but S101 would have gone red too; inverted. `tools/_s51_names.gd` count 48 -> 49.
+- **RENDERED AND LOOKED AT.** `tools/_d96_fit.gd` gains `-- key=<k>:<theme>` to shoot one MORE-row body (its check floor scales to 5 per key; the 14-body run still owes 70). `renders/cycles/d96/stopper.png`: Chokewell beside the knight on crypt floor 13, ring at chest height with its pale pegs, cloth over the mouth, plate reads "Chokewell". Arrive fired with the body present; fall line fired on the kill.
+- **NOT DONE - the ONE IDEA.** The deadline (a peg drops every notch, the room shuts on the last; a shoulder under the ring holds the count) is NOT delve-side behaviour yet; Chokewell fights as the generic miniboss. That is its own row.
+- **CHAT BOT:** L14_TEST now fails ONLY on MINIBOSS COUNT (published 48 vs feed 49); MINIBOSS UNNAMED is GONE. Republish to 49 once this is on a merged main.
+- Verdicts: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error; S102_GATE OK 11; S101_GATE OK 10; S51_NAMES OK 176 checks; D96_FIT OK 5 checks (stopper, ratio 0.97/0.97); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2240; TOWNWALK PASS in_solid 0/18568; DELVE_TEST OK 9001 frames; L14_TEST FAIL 1 (chat bot's count arm, expected). No live Twitch test.
+## C-179 (24 Nov 2026 00:23 CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT gave content: DRY ("Do not write a 50th"). Measured: origin/art minibosses.py bodies with no
+feed row = none; main feed.by_key = 49. The stopper (C-176) and roper (C-177) rows are already live.
+No data file touched this cycle; PROGRESS.md only. No code wiring implied. Next firing: write against a
+body only once it is on a committed art ref.
+
+U140 STAND-DOWN 2026-11-24T00:55:00-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 00:52:30-06:00: last line is chat bot B120 RUNNING (claim 00:52:23, declared finish 00:58, cap 01:17:23) with no IDLE after it - the chat bot holds the lock, so I did not claim over it (yield rule). Item: R WORK_PLAN top = the 23:58 CT firing block (team lead); its HUD row reads "NOTHING HUD-OWNED IS OPEN" and its ID baseline lists U139 as my last. Rarity-hue half of System 2 shipped (U55/U56, guarded U71/U74b/U76); L74 closed (U131/U135). L31/D41/D48/D61 are game-build files, L66 is hub H31. Prompt standing note on rarity-hue is stale for the thirteenth time. Next firing (01:52): re-read R working lock, take any new HUD row in TAKE THIS NEXT, else stand down again; any capture split into <=15 min chunks, release by :07. Decision for Mr. E: none.
+## B120 - 2026-11-24 00:45 CT firing (chat bot). FOUR GATES GREEN-AS-EXPECTED ON MERGED MAIN 6897cc4a, PUBLISH HELD AT 48 ON PURPOSE, AND THE UNNAMED LIST SHRANK BY ONE WHILE I WATCHED
+
+### WHAT I TOOK
+The team lead's CHAT BOT row for this hour (written 00:0x CT, 24 Nov) says in plain words: **hold at
+48 one more hour, and here is the exact hour it clears.** So this cycle is the four owed engine gates
+on a merged main, plus the measurement that justifies the hold. No republish.
+
+### I MEASURED THE CHAIN MYSELF RATHER THAN COPYING THE ROW'S NUMBERS
+Brace-matched parse of `const MB_NAME` in `scripts/delve.gd` on my merged tree, not a regex over the
+whole file: **`MB_NAME` 48**, `roper` present, **`stopper` ABSENT**. `data/lore_lines.json`
+`miniboss_feed.by_key`: **49 rows**. `data/commands.json` `/commands/miniboss/short`+`/what`:
+**published 48**. So `published 48 == MB_NAME 48`, `feed - MB_NAME == {stopper}`. The row is right and
+the hold is right: republishing to 49 now would make the doc claim a name the engine cannot look up.
+
+**WHAT CHANGED SINCE B119, AND IT IS THE CASCADE MOVING:** at B119 `MINIBOSS UNNAMED` was
+`["stopper","roper"]`. This hour it is **`["stopper"]` alone** - S102's roper row reached main in the
+23:58 merge. The arm did not go quiet; it got one shorter. Game build's S103 (`laptop` 8a6a4ff7,
+`stopper` -> Chokewell, `MB_NAME` 49) is on `laptop` and **not an ancestor of my merged main**, which
+is exactly why `stopper` is still in the list. First firing that can republish: **02:45**.
+
+### THE FOUR GATES, ON MERGED MAIN 6897cc4a
+- `--headless --path . --quit-after 300`: **rc=0, 21.5 s, 0 SCRIPT ERROR, 0 Parse Error.** The only
+  stderr is town.gd's pre-existing `invalid UID` material warnings - not mine, not errors.
+- `tools/_twitch_parse.gd`: **TWITCH_PARSE OK (8 checks).**
+- `tools/_commands_doc.gd`: **COMMANDS_DOC OK wrote 32 commands**, and a **TRUE no-op** -
+  `git status --porcelain docs/COMMANDS.md` is **empty** after the real generator ran. The doc on
+  disk is byte-for-byte what the real generator writes from the current data.
+- `tools/_l14_test.gd`: **L14_TEST FAIL 1 (24 checks)**, and the single failing check is
+  `no COMMANDS_DATA guard arm fired on the load (2 fired: ["MINIBOSS COUNT", "MINIBOSS UNNAMED"])`.
+  **COUNT** = published 48 vs feed 49. **UNNAMED** = `["stopper"]`. **Both are the hold, both are
+  expected, and the second one is `Delve.MB_NAME` in `scripts/delve.gd` - GAME BUILD's file, not
+  mine.** My own guard arms are doing the job they were written for: they are describing a real gap
+  in the tree, on purpose, until the merge closes it.
+
+### THE LOCK - AND I READ THE CLOCK THIS TIME, BECAUSE LAST HOUR I DID NOT
+B119 stamped a claim a minute ahead of itself by arithmetic. Fixed procedure, used here: read
+`datetime.now().astimezone()`, write the line, then launch.
+Read R's working `docs/RUN_LOCK.txt` at **00:48:51-06:00**: last line `RUNNING 2026-11-24T00:42:05`
+(QA tester, declared 00:50, cap 00:51) with **no IDLE under it** - a LIVE hold, and `tasklist` showed
+**two live Godot processes**. I did NOT claim, and I did NOT clear it on the strength of the cap
+having passed - the yield rule says liveness is decided by a following IDLE, not by a declared
+finish. I polled every 10 s and did file-only measurement meanwhile. QA wrote
+`IDLE 2026-11-24T00:51:16-06:00` and the Godots were gone; I read the clock at **00:52:23**, wrote
+`RUNNING 2026-11-24T00:52:23-06:00 (chat bot B120)`, declared finish **00:58**, cap 01:17:23, and
+launched. Whole battery: **25 seconds of engine time**, released 00:53:xx. No window crossed, no
+second Godot alongside anyone's.
+
+### OWED / NOT OWED
+- Nothing in `scripts/chatcmd.gd`, `data/commands.json` or `docs/COMMANDS.md` changed this cycle.
+  This commit is PROGRESS.md only. The republish to 49 is a ONE-LINE-EACH edit to `short`/`what` plus
+  a regeneration, and it is queued for the first firing that reads a merged main carrying
+  `MB_NAME` 49.
+- **GAME BUILD:** nothing needed from `twitch_eventsub.gd` this cycle. `MINIBOSS UNNAMED ["stopper"]`
+  is yours and already delivered on `laptop` 8a6a4ff7 - it just has not been merged yet.
+- **No live Twitch test ran.** bellmirebro posted nothing, in any channel, and spent **ZERO BITS**.
+  All four gates were `--headless` against the worktree.
+- Gate log left at `_to_delete/_b120_gates.log` (deletion is not permitted in a connected folder).

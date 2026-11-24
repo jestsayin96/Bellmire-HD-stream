@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "e3435f14c0cb0c039e907b4b8971630856f15fb9",
+   "head": "7ec8a146187f29d40eefce66dbf6eb8954cd380a",
    "ref": "origin/main",
-   "ref_commit": "729498eba5b1b0fb3cd1528f9df0dd1b2e29ccd8",
+   "ref_commit": "bc92b4e6b36219438b52031f222c90c11a2b514f",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3044,7 +3044,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.624,
+   "corridor_margin_m": 9.62,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.38,
    "read_from": {
@@ -3070,13 +3070,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "straker": {
+   "title": "Everyhand",
+   "theme": "wood",
+   "idea": "IT WILL NOT GO DOWN TO ONE HAND - it is straking a rim, and it will not be finished by anybody who has not put a blow into it. Hurt it all you like with your best hand and it cannot be ended; it keeps a ledger of WHICH OF YOU has struck it, the ledger only grows, and until every hand in the party is on it the last blow does nothing at all. So the party's whole habit is the thing that fails here: the hero who carries every fight cannot carry this one, and the hero the party has spent the floor keeping out of reach has to be walked up to it and made to swing. It does not choose, it has no phase and there is nothing to out-manoeuvre - the condition is on the party, not on the room. THE THING TO READ IS THE RIM: four bright iron strakes laid on the tread of a wheel stood on the floor beside him, one for every hand it is still waiting on, and a hammer held down over the next one.",
+   "wear": 0.44,
+   "feed_line": "Someone is nailing a rim, and it is not finished.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 953,
+   "size": [
+    2.1,
+    1.26,
+    2.4
+   ],
+   "footprint_span": 2.1,
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.904,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7138093161525723,
+    "ortho": 2.8350839614868164,
+    "clip": [
+     7.057332992553711,
+     18.31720733642578
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 729498eba5b1b0fb3cd1528f9df0dd1b2e29ccd8 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs bc92b4e6b36219438b52031f222c90c11a2b514f sha bc3a603f",
  "blank_check": {
-  "files": 162,
+  "files": 165,
   "failures": []
  }
 }

@@ -8557,10 +8557,10 @@
    "creature_h": 2.72,
    "hero_h": 2.45,
    "ratio": 1.11,
-   "pair_w": 4.45,
+   "pair_w": 3.21,
    "gap_x": 0.45,
    "margin_x": 0.12,
-   "air_x": 1.153,
+   "air_x": 2.393,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -8568,49 +8568,49 @@
     "hero_side.png",
     "hero_back.png"
    ],
-   "views_dir": "changerch5",
+   "views_dir": "changer",
    "visibility": {
     "front": {
      "creature": {
-      "alone": 50318,
-      "vis": 50318,
-      "delta": 57362,
+      "alone": 41649,
+      "vis": 41649,
+      "delta": 46430,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43685,
-      "vis": 43685,
-      "delta": 53236,
+      "alone": 43667,
+      "vis": 43667,
+      "delta": 54799,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 43814,
-      "vis": 43814,
-      "delta": 53881,
+      "alone": 37030,
+      "vis": 37030,
+      "delta": 46100,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37776,
-      "vis": 37776,
-      "delta": 43856,
+      "alone": 37783,
+      "vis": 37783,
+      "delta": 42014,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 50790,
-      "vis": 50790,
-      "delta": 61596,
+      "alone": 41792,
+      "vis": 41792,
+      "delta": 55642,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44018,
-      "vis": 44018,
-      "delta": 50308,
+      "alone": 44016,
+      "vis": 44016,
+      "delta": 48057,
       "seen": 1.0
      },
      "proves": true
@@ -8638,12 +8638,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 276640,
-     "shadow_px": 4111,
-     "mean": 0.3756,
-     "max": 0.7077,
+     "plane_px": 204440,
+     "shadow_px": 2659,
+     "mean": 0.4809,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 4051,
+     "rim_filled_px": 2831,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -8652,12 +8652,12 @@
      }
     },
     "side": {
-     "plane_px": 274360,
-     "shadow_px": 3809,
-     "mean": 0.3634,
-     "max": 0.7103,
+     "plane_px": 204440,
+     "shadow_px": 2553,
+     "mean": 0.447,
+     "max": 0.7077,
      "error": null,
-     "rim_filled_px": 4127,
+     "rim_filled_px": 2820,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -8666,12 +8666,12 @@
      }
     },
     "back": {
-     "plane_px": 276640,
-     "shadow_px": 3976,
-     "mean": 0.3615,
-     "max": 0.7077,
+     "plane_px": 204440,
+     "shadow_px": 2462,
+     "mean": 0.478,
+     "max": 0.7103,
      "error": null,
-     "rim_filled_px": 3942,
+     "rim_filled_px": 2868,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -8685,16 +8685,16 @@
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
-     77,
-     77
+     161,
+     162
     ],
     "side": [
-     46,
-     48
+     156,
+     160
     ],
     "back": [
-     77,
-     77
+     162,
+     161
     ]
    },
    "frame_edge_disk": {
@@ -8718,7 +8718,343 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 46,
+   "air_px_min": 156,
+   "air_px_tightest_view": "side"
+  },
+  "stopper": {
+   "creature_h": 2.38,
+   "hero_h": 2.45,
+   "ratio": 0.97,
+   "pair_w": 4.1,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.496,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "stopper",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 49993,
+      "vis": 49993,
+      "delta": 58792,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43679,
+      "vis": 43679,
+      "delta": 56883,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 44335,
+      "vis": 44335,
+      "delta": 55959,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37761,
+      "vis": 37761,
+      "delta": 46065,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 49751,
+      "vis": 49751,
+      "delta": 63176,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44014,
+      "vis": 44014,
+      "delta": 52073,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 241680,
+     "shadow_px": 5840,
+     "mean": 0.301,
+     "max": 0.7117,
+     "error": null,
+     "rim_filled_px": 2693,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 242440,
+     "shadow_px": 5571,
+     "mean": 0.2836,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2734,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 241680,
+     "shadow_px": 5473,
+     "mean": 0.2981,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3054,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     100,
+     100
+    ],
+    "side": [
+     104,
+     105
+    ],
+    "back": [
+     100,
+     101
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 100,
+   "air_px_tightest_view": "front"
+  },
+  "roper": {
+   "creature_h": 2.46,
+   "hero_h": 2.45,
+   "ratio": 1.0,
+   "pair_w": 3.24,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.358,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "roper",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 38786,
+      "vis": 38786,
+      "delta": 44642,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43673,
+      "vis": 43673,
+      "delta": 49785,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 48816,
+      "vis": 48816,
+      "delta": 56603,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37769,
+      "vis": 37769,
+      "delta": 44895,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36911,
+      "vis": 36911,
+      "delta": 42314,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44023,
+      "vis": 44023,
+      "delta": 49257,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 255360,
+     "shadow_px": 3745,
+     "mean": 0.4222,
+     "max": 0.7107,
+     "error": null,
+     "rim_filled_px": 3560,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 244720,
+     "shadow_px": 4430,
+     "mean": 0.382,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 5908,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 253840,
+     "shadow_px": 3606,
+     "mean": 0.492,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3157,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     159,
+     158
+    ],
+    "side": [
+     34,
+     36
+    ],
+    "back": [
+     158,
+     159
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 34,
    "air_px_tightest_view": "side"
   }
  },
@@ -8887,105 +9223,13 @@
  },
  "unproved_cells": [],
  "measured": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman",
-  "tither",
-  "blower",
-  "changer"
+  "roper"
  ],
  "asked": [
-  "drillmaster",
-  "scrapwright",
-  "gaoler",
-  "snuffer",
-  "sexton",
-  "porter",
-  "tallyman",
-  "cook",
-  "sluicekeeper",
-  "sower",
-  "snarer",
-  "stoker",
-  "bellman",
-  "boiler",
-  "jointer",
-  "quartermaster",
-  "loader",
-  "hurdleman",
-  "tanner",
-  "reeve",
-  "tapster",
-  "pressman",
-  "strickler",
-  "dyer",
-  "greener",
-  "moulder",
-  "ratcatcher",
-  "drover",
-  "paviser",
-  "fenman",
-  "comfitmaker",
-  "leech",
-  "beadle",
-  "rammer",
-  "fuller",
-  "stackman",
-  "dauber",
-  "sealer",
-  "hooper",
-  "relief",
-  "scraper",
-  "ferryman",
-  "winder",
-  "pitman",
-  "tither",
-  "blower",
-  "changer"
+  "roper"
  ],
  "blank_check": {
-  "files": 141,
+  "files": 3,
   "failures": []
  },
  "red_summary": {
@@ -8995,6 +9239,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 0,
- "verdict_scope": "every row in pairs (49), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 49 judged from stored measurements)"
+ "rendered_this_run": 1,
+ "verdict_scope": "every row in pairs (51), re-derived from stored measurements; 1 of them rendered this run"
 }

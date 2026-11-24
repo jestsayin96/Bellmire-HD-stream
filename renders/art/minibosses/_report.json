@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "f3039bdd28ea34366661cbc0b6f69ae0d0301242",
+   "head": "7ec490225318ed8e8f21229bdc17869e777835f9",
    "ref": "origin/main",
-   "ref_commit": "eb98fb073dde9dc9cb5479d5a1924d7a77815b52",
+   "ref_commit": "fad5533409887eacac5c9c756a583814e109d81c",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2762,7 +2762,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.758,
+   "corridor_margin_m": 8.76,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.12,
    "read_from": {
@@ -2788,13 +2788,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "roper": {
+   "title": "Drawtight",
+   "theme": "grassland",
+   "idea": "IT TWISTS YOU TOGETHER - it does not wound, it takes nobody away and it does not touch the room. It works its walk backing off from you and takes up slack, and every notch draws the party's shape in: whoever is hindmost is hauled a yard toward the middle. When the last of you is inside one span it lays the rope, and from then on the party stands in ONE PLACE - one footprint, so every sweep in the chamber lands on all of you at once and the formation you were fighting in is gone. THE THING TO READ IS THE TOP IT CARRIES: three strands go into it off the floor and ONE rope comes out the back, which is the whole fight in one object. Nothing you do to it adds slack. The only thing that does is a hero walking OUT, away from the others - which is the one move a party under pressure never wants to make.",
+   "wear": 0.28,
+   "feed_line": "Something ahead is taking up slack.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1078,
+   "size": [
+    1.38,
+    3.17,
+    2.46
+   ],
+   "footprint_span": 3.17,
+   "height_m": 2.46,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.834,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.04,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.120167384174986,
+    "ortho": 4.875742435455322,
+    "clip": [
+     8.79200553894043,
+     20.612201690673828
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs eb98fb073dde9dc9cb5479d5a1924d7a77815b52 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs fad5533409887eacac5c9c756a583814e109d81c sha bc3a603f",
  "blank_check": {
-  "files": 144,
+  "files": 147,
   "failures": []
  }
 }

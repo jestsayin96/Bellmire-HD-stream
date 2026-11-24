@@ -17951,3 +17951,6 @@ L31 REMAINDER (second item) - GREPPED FOR THE BEHAVIOUR, NOT BUILT THIS RUN:
   "readable name the moment it is applied" - delve.gd _give computes `var was := has_st(m, name)` and
   never uses it, so no on-apply line fires from there. Both are delve.gd/party_frames.gd - mine. Next run.
 No live Twitch test. ZERO BITS, no cheer, no redemption, no chat line. Nothing for Mr. E to decide.
+## C-195 (24 Nov 2026 16:3x CST, content) - WROTE miniboss_feed.by_key.straker (EVERYHAND, THE 55th); FEED 54 -> 55
+TAKE THIS NEXT (15:58 CT block, 24 Nov, corrected 16:1x) CONTENT row (16:22): C-195, by_key.straker, written first. Body straker.glb is committed (merged from origin/main). Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; broken = every hand has struck and the rim is whole. Lines name the count (four bright strakes) and favour no tactic. New _note_c195 (expected zero-hit key). Only data/lore_lines.json and this file touched; all pre-existing keys byte-identical (leaf-level compare), by_key 54 -> 55. VALIDATION OK.
+CODE WIRING: none new. Game build S117 can now name the 55th (MB_NAME straker -> Everyhand) since by_key.straker is present.

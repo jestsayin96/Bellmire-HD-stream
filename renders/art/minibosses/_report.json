@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "f1cb6f03f3f221859af5aa20e16c944ab98b1934",
+   "head": "e3435f14c0cb0c039e907b4b8971630856f15fb9",
    "ref": "origin/main",
-   "ref_commit": "ca3a0a80999f29cc542f53e573315f2b268a5857",
+   "ref_commit": "729498eba5b1b0fb3cd1528f9df0dd1b2e29ccd8",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3023,13 +3023,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "iceman": {
+   "title": "Hoarback",
+   "theme": "mess",
+   "idea": "IT CARRIES THE COLD AND THE COLD IS ON A COUNT - cut blocks stacked up a back frame, and you can count them from across the room. While a block stands the room is cold and everything in it works slow, HIM INCLUDED: he is not fighting you, he is carrying. The blocks go one at a time in their own time and NOTHING THE PARTY DOES TAKES ONE OFF - you cannot break them, you cannot hurry them, you cannot stop them. When the last one goes the room thaws, and the man who was carrying sets the tongs down and turns round. So the fight is a clock you can SEE and cannot touch: every round of cold is a round you were GIVEN, and the party either spends it - ground, the rest of the room, position, the wounded - or is standing in front of him with nothing done when it runs out. It does not choose and it has no phase; the count is in the geometry. THE THING TO READ IS THE STACK: four pale blocks staggered up a dark frame over a dark man, and a fifth hanging in the tongs.",
+   "wear": 0.35,
+   "feed_line": "The walls are sweating, and it is getting colder.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 779,
+   "size": [
+    1.38,
+    1.2,
+    3.12
+   ],
+   "footprint_span": 1.38,
+   "height_m": 3.12,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.624,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.38,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8083085479956835,
+    "ortho": 3.6316075325012207,
+    "clip": [
+     7.722210884094238,
+     18.347124099731445
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs ca3a0a80999f29cc542f53e573315f2b268a5857 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 729498eba5b1b0fb3cd1528f9df0dd1b2e29ccd8 sha bc3a603f",
  "blank_check": {
-  "files": 159,
+  "files": 162,
   "failures": []
  }
 }

@@ -17625,6 +17625,23 @@ cleared THIS run's pass before writing IDLE so the 13:45 seat merges clean.
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 
+## D-S114 (game build, 24 Nov 2026 13:09-13:1x CT) - THE SECOND STALE GATE: `tools/_s107_gate.gd:41` asserted MB_NAME == 50; it is 53
+TAKE THIS NEXT (12:58 block) gave game build the sibling of the S51 count I fixed at S113. `_s107_gate.gd`
+asserted `mbn == 50` and had been red-by-staleness since the 51st was named. Now `mbn == 53` with the
+running note (S107 50 + panner S111 + stiltman S112 + nightman S113) and the actual size printed in the
+FAIL text so the next seat sees the number, not just the miss. Swept tools/*.gd for any other MB_NAME size
+assertion myself: exactly two exist (_s107_gate.gd:43, _s51_names.gd:64), both now 53. `_s63_props.gd`'s
+PROP_BATCH 52 is a different count and is correct - left alone, as the lead said. No game script touched.
+GATES (verdict lines, merged tree 729498eb + this edit): PARSE rc=0, 0 SCRIPT ERROR, 0 Parse Error;
+S107_GATE OK 12; S51_NAMES OK 176 checks; TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2092 samples off the floor; _townwalk ran rc=0 (pre-existing invalid-UID kit
+WARNINGs only); DELVE_TEST OK ran 9001 frames, floor reached 2. No live Twitch test, 0 bits.
+NOTE: ~1000 untracked *.import files under web/icons/items/ sit in R's worktree from another lane's
+import pass; not mine, not staged, not touched.
+## C-192 (24 Nov 2026 13:3x CST, content) - OWN QUEUE, NO NEW BODY; descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10
+TAKE THIS NEXT (12:58 CT block, 24 Nov) CONTENT row (13:22): C-192, own queue. 53 bodies on main, 53 by_key keys, no 54th committed on origin/art. Did not backfill the 25 arrive/fall-only rows (refused twice, nothing reads them). Appended plain strings to existing pools; duplicates checked first (two collisions caught and reworded before write).
+VALIDATION OK: data/lore_lines.json json.load passes; only descend, cleared and barks.{enter,lord,hurt,drink} grew (+53 lines), plus new `_note_c192`; every other key identical; existing pool entries identical (prefix compare).
+CODE WIRING: none - no new keys beyond the zero-hit `_note_c192`.
 ## B133 - 24 Nov 2026, 13:45 CT (chat bot) - THE 51 -> 53 REPUBLISH IS PAID AND THE TRANSIENT IS CLOSED: ALL FIVE GATES GREEN, L14_TEST 24/24
 
 THE ITEM, AND IT IS THE ONE THE 12:58 BLOCK ASSIGNED: pay the 51 -> 53 republish at exactly two
@@ -17695,3 +17712,14 @@ was touched.
 
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
+
+
+## U153 - HUD AUDIT, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T13:5x-06:00 (13:52 firing)
+ITEM: team lead's 12:58 HUD row - audit my own report-writers for any key PRINTED but not RECOMPUTED on the run that prints it (art's measured_bodies:25 fault). Rarity-hue is U55 (ui_theme.gd:176), not rebuilt. Lock: R working RUN_LOCK last line = chat bot B133 IDLE 13:50:45, 0 Godot alive; I claimed nothing (the audit is read-only, no engine needed).
+METHOD: grep over every HUD file and tools/_u*.gd / _theme_sweep / _fish_rarity for (a) any writer (store_string/store_line/JSON.stringify/FileAccess WRITE) and (b) any reader that feeds a printed verdict; then read each print line for literal or carried numbers.
+RESULT - THE FAULT AS ART HAD IT IS ABSENT:
+ - Only 3 writers exist: auto_director._log_cut (appends one line per cut, every field computed from the live cut: _clock/_held/_pace/_cands - nothing carried), _u40_pad_test (store_string(_hud.log_text()) - rewritten whole each run), nothing else. No JSON report, no carried-forward block anywhere.
+ - Only reader feeding a verdict is _u71_rarity_guard (reads art's icons.py and fishing.gd) and it re-derives rungs_py/ui_rungs/redproofs on every run and prints the counts.
+ - U59_CONTRAST prints seen/checked computed in-run; U63_STRIPE prints gate_n computed in-run. Both are the honest shape.
+SIBLING FAULT FOUND (not the same, same family - a verdict with no denominator): U62_SCALES, U88_WORN, U90 FEED_LOAD, U91 LONGNAME, U69_REDPROOF, U56_HUE, THEME_SWEEP, U40_TEST print OK purely on `bad == 0`. If the set they walk came back EMPTY (e.g. U88 loops `_sat._list.get_children()`; a renamed list = zero rows) they would still print OK. Nothing is wrong today; the guard just cannot tell "all passed" from "none measured". NOT FIXED THIS HOUR: it needs a windowed run to prove, and the lock window is not mine. NEXT ENGINE WINDOW: add `n` counters to those 8 prints and FAIL on n==0 (U58's "%d colours walked" line is the model).
+Decision for Mr. E: none.

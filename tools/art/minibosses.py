@@ -19368,3 +19368,371 @@ def nightman():
 
 
 BUILDERS.update({"nightman": nightman})
+
+
+# =====================================================================
+# THE 54th, 24 Nov 2026 - THE ICEMAN. Taken under Mr. E's standing
+# permission of 15 Nov 17:43 and on the team lead's 13:34 row, which named
+# the 54th body for this lane and said the census must be re-run with it.
+#
+# WHAT I CHECKED FIRST, MEASURED OFF THIS FILE AND NOT REMEMBERED: ORDER
+# carries 53 keys with no duplicates, which agrees with the team lead's
+# own `Delve.MB_NAME` = 53 on merged main. Then I read every `idea` string
+# in the file before designing, because a 54th that re-skins one of 53 is
+# worth nothing. THE WHOLE MECHANIC SPACE OF THE SET, as it stands:
+# summon / re-plate / drag / snuff / won't-stay-down / bar the way / split
+# in two / cut the room / re-deal your kit / drink your brews / drop on a
+# count / get above reach / reflect / hand you the only weapon / verdigris
+# your iron / pre-set the room / down one and quicker / paid by the tail /
+# shut until the pan / keep its face to you / heal the room / mark one /
+# plant thorn / pour and set / press your fallen / raise the water / ring
+# from the wrong place / rub out your last action / seal your pack /
+# strike you level / take and leave / one at a time / take the air / take
+# the floor / take the haul / take what stirs / take your post / take your
+# shape / trade places / twist you together / wall you in / weigh you down
+# / will be paid / won't let a wound close / won't take the same blow
+# twice / wind you back / work in the dark.
+#
+# THE ONE THING NONE OF THEM IS: A CLOCK THE PARTY CAN SEE AND CANNOT
+# TOUCH. Every timer in the set so far is a switch the party owns - the
+# Nightman's shutter, the Stoker's pit, the Sluicekeeper's winch. This one
+# runs on its own and runs DOWN, so the fight gets EASIER on a schedule
+# and the only question is what the party does with the rounds it is
+# given. That inverts the whole set: for the first time the correct play
+# can be to not trade at all.
+#
+# ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures span and lid.
+# THEME: `mess`, which with `workshop`, `wood`, `firepit` and `confection`
+# was one of the five thinnest at four bodies each (counted this run off
+# the CANON themes, not remembered). The stores are where ice is kept.
+
+# THE HEIGHT IS SET OFF THE MAN INSIDE THE LOAD, NOT OFF THE LOAD.
+# `h` is the in-game height the whole mesh is normalised to, and the
+# authored body is 2.93 tall of which the MAN is 2.18 - the rack and its
+# top block are the other 0.75. At the 2.50 I first wrote, the man inside
+# would have stood 1.87 against a hero the fit harness measures at 2.45,
+# so the thing carrying the load would have read as a short man and the
+# rack would have done all the work. 2.18 / 2.93 = 0.744, so h = 3.12
+# puts the man at 2.32 - just under a hero, which is what a working man
+# beside an adventurer should be - and the load rides over both their
+# heads, which is the point of it. Ratio against the hero: 1.27, between
+# the Beadle's 1.20 and the Stiltman's 1.31, so it is not a new extreme.
+CANON.update({
+    "iceman": ("Hoarback", 3.12, (0.56, 0.62, 0.66), (0.78, 0.90, 1.00),
+               "mess", "IT CARRIES THE COLD AND THE COLD IS ON A COUNT - "
+               "cut blocks stacked up a back frame, and you can count them "
+               "from across the room. While a block stands the room is cold "
+               "and everything in it works slow, HIM INCLUDED: he is not "
+               "fighting you, he is carrying. The blocks go one at a time in "
+               "their own time and NOTHING THE PARTY DOES TAKES ONE OFF - "
+               "you cannot break them, you cannot hurry them, you cannot "
+               "stop them. When the last one goes the room thaws, and the "
+               "man who was carrying sets the tongs down and turns round. So "
+               "the fight is a clock you can SEE and cannot touch: every "
+               "round of cold is a round you were GIVEN, and the party "
+               "either spends it - ground, the rest of the room, position, "
+               "the wounded - or is standing in front of him with nothing "
+               "done when it runs out. It does not choose and it has no "
+               "phase; the count is in the geometry. THE THING TO READ IS "
+               "THE STACK: four pale blocks staggered up a dark frame over a "
+               "dark man, and a fifth hanging in the tongs.",
+               0.35, "The walls are sweating, and it is getting colder."),
+})
+
+ORDER = ORDER + ["iceman"]
+
+# PER-SLOT MATERIALS - THE TITHER'S RULE: THE PALE THING IS THE THING THE
+# MECHANIC IS COUNTED ON, and here that is literally true - the pale thing
+# IS the count. `bone` is THE FIVE ICE BLOCKS AND NOTHING ELSE: not the
+# frame they sit on, not the straw between them, not the tongs, not one
+# mark on the head. Everything carried and everything worn is `dark`, so
+# the only light mass in the silhouette is the thing a viewer has to be
+# able to count.
+# THE ICE IS COLD-WHITE AND LOW-ROUGHNESS, which is the one place I move
+# off the set's warm bone on purpose: wet ice is not bone and the whole
+# body reads off that difference. Wear is 0.35 - his frame and boots are
+# used, and the load is NEW, which is honest for a thing cut this morning
+# and is also Mr. E's second rule: wear is a variable, never a style.
+# AND THE HEAD CARRIES NO PALE AT ALL. The Beadle's measured fault was a
+# pale band that wrapped the head so the figure read the same from both
+# ends; the Panner and the Stiltman both answered it, and this body does
+# too - a dark hood, eyes on -Y only, so the back view gets a dark hood
+# under a pale stack and cannot be mistaken for the front.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"iceman"}
+
+OVERRIDE.update({
+    "iceman": {
+        'body': ((0.198, 0.206, 0.212), 0.86, 0.03),   # the man: wet grey wool
+        'dark': ((0.086, 0.084, 0.080), 0.80, 0.05),   # frame, boots, hood, tongs, straw
+        'bone': ((0.818, 0.868, 0.906), 0.30, 0.10),   # THE FIVE BLOCKS ONLY
+        'glow': ((0.780, 0.900, 1.000), 0.75),         # eyes, forward only
+    },
+})
+
+
+def iceman():
+    """IT CARRIES THE COLD AND THE COLD IS ON A COUNT. The 54th body.
+
+    THE ACCEPTANCE TEST IS A SQUAT MAN BENT UNDER A RACK OF CUT BLOCKS,
+    TONGS IN THE NEAR HAND WITH A FIFTH BLOCK HANGING IN THEM - AND THE
+    FOUR ON THE RACK MUST BE COUNTABLE IN THE FRONT VIEW AND IN THE SIDE
+    VIEW. The count IS the mechanic; a count a viewer cannot take is the
+    Nightman's pass-1 lamp again.
+
+    *** PASS 2. WHAT PASS 1 SHIPPED AND WHY IT FAILED, FROM THE TWO
+    *** RENDERS I LOOKED AT AND NOT FROM ANY NUMBER IN THE REGISTER.
+    Pass 1 put four blocks on a narrow frame directly behind the man,
+    cross-stacked 0.25 left and right, with thin dark straw slats between
+    them. Every number passed: 0 blanks, 0 border clips, span 1.16
+    CORRIDOR-SAFE, 4 materials, 793 tris, GREEN. AND THE COUNT COULD NOT
+    BE TAKEN FROM EITHER CAMERA:
+      FRONT - the blocks read as four slabs floating AROUND HIS HEAD with
+              nothing under them. A front ortho throws depth away, so
+              "resting on a frame behind him" renders as "pinned in the
+              air beside him", and the two thin uprights passed in FRONT
+              of the blocks, one of them straight up the side of the
+              head like a spike.
+      SIDE  - WORSE, AND THIS IS THE ONE THAT MATTERS. The blocks are
+              stacked at a 0.030 pitch gap, so in a side ortho blocks 1+2
+              merged into one tall slab and 3+4 into another. THE COUNT
+              READ AS TWO. The straw slats that were supposed to separate
+              them were 0.024 thick and shallower than the blocks, so
+              they were invisible behind the block faces.
+    The fault is one fault with one cause: I BUILT A STACK AND NOT A
+    THING THAT CARRIES A STACK. Four fixes below, measured separately.
+
+      FIX A - THE RACK FRAMES THE BLOCKS. Two rails OUTSIDE the block
+              width with a SHELF UNDER EVERY BLOCK, each shelf wider
+              (0.62) and deeper (0.42) than the block it carries (0.44 x
+              0.34). So the front view gets a dark ladder with a pale
+              block in each bay - supported, countable, obviously carried
+              - and the side view gets a dark shelf line standing proud
+              of every block face, which is the only thing that can stop
+              two pale boxes merging into one.
+      FIX B - THE RACK IS CANTED HARD TO HIS LEFT, 0.55 over its height.
+              This is what takes the load OUT of the body's silhouette:
+              by the second bay the stack has walked clear of a 0.41 head
+              and every bay above it is pale against empty air. It also
+              tells the truth about the fight - he is not posed, he is
+              holding a leaning load up, which is what the far arm is
+              reaching for. The load also rides HIGH now, off the
+              shoulders rather than the hips, because that is where a
+              heavy rack is actually carried.
+      FIX C - THE SHOULDER BAR 0.54 -> 0.49 and the shoulder balls 0.132
+              -> 0.145. In the pass-1 front render the bar, the two
+              straps and a slat lined up into three horizontals and the
+              head sat on them like a bolt on a girder - the Nightman's
+              pass-2 fault, which I quoted in my own pass-1 comment and
+              then committed anyway. Rounder and narrower.
+      FIX D - THE TONGS BITE. Pass-1 jaws stopped 0.010 ABOVE the block
+              and were 0.028 thin, so the fifth block read as a suitcase
+              on a wire. The jaws now close to 0.845, inside the block's
+              top face at 0.858, and are 0.034.
+
+    *** PASS 3, FROM THE PASS-2 RENDERS. Fixes A-D all landed: the
+    *** front view now carries four countable pale bays clear of the
+    *** body and THE SIDE VIEW COUNTS FOUR, which pass 1 could not do at
+    *** all. Three faults left, and I could only see them because the
+    *** first one was fixed - each measured on its own:
+      FIX E - THE BLOCKS READ AS PANES, NOT AS ICE. 0.44 wide against
+              0.185 tall is a 2.4:1 slab, and four of those in a dark
+              frame is a glazier's rack of glass, not a load of cut pond
+              ice. A block is roughly cubic or it is not a block: 0.32 x
+              0.33 x 0.215. The shelves (0.62 -> 0.48) and the rails
+              (0.25 -> 0.20 off the axis) come in with them, because a
+              shelf overhanging its block by a third is the thing that
+              was making the whole load read as a LADDER.
+      FIX F - THE FIFTH BLOCK READ AS A SUITCASE in both views: a wide
+              pale box on a thin dark handle at hip height is luggage,
+              whatever it is called. Now near-cubic, smaller, hung ASKEW
+              and gripped on its SIDES rather than stopped on its top
+              face - a corner-on block in a pair of jaws is not a case.
+      FIX H - THE FIFTH BLOCK WENT FROM A SUITCASE TO A PAIL, which is
+              fix F half-done and worth writing out rather than quietly
+              re-tuning. The pass-3 jaws bowed OUT to 0.135 at mid-height
+              and back IN at the grip, and a dark arc standing over a
+              pale box is a bucket handle - the Hooper's language, on a
+              body that must not borrow it. REAL ICE TONGS CROSS: each
+              jaw now runs down on the side opposite its own handle, so
+              the pair reads as an X on a pin with a block hung under it,
+              and no arm bows.
+      FIX G - THE FAR ARM WAS LOST IN THE RAIL. Pass 2 put the steadying
+              hand 0.04 inboard of the rail it was steadying, so in the
+              front view forearm and rail were one dark line and the man
+              appeared to have one arm. The hand comes 0.12 FORWARD of
+              the rail and the elbow swings wider.
+
+    THE REST OF THE READ, unchanged from pass 1 and still the brief:
+      THE SQUAT     hip at 1.02 against the Nightman's 1.15, knees driven
+                    forward, a man compressed under weight. This is also
+                    what keeps him from reading as the Nightman, who
+                    stands stooped with a tub on one hip.
+      THE HEAD      dark hood, NO PALE, eyes on -Y only - the Beadle's
+                    facing fault answered, so the back view is a dark
+                    hood under a pale rack and cannot be taken for the
+                    front.
+      TWO LEGS      ankles, knees, hips, a pelvis block, wet thigh boots.
+
+    Static: no `anims` entry. The count is ENGINE state, not geometry -
+    the mesh ships with all five blocks, which is the arrival state and
+    the state the mechanic has to be read in.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures span and lid.
+    """
+    P = Parts("iceman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 1.020
+    WAIST = 1.200
+    CHEST = 1.580
+    SHO = 1.740
+    HEAD = 1.980
+
+    # THE STOOP IS A SHEAR OFF THE HIP, carried by every point above it.
+    STOOP = 0.150
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - STOOP * (v.z - HIP), v.z))
+
+    LX = -0.215
+    RX = 0.215
+
+    # ---- FIX B: THE RACK AXIS. Canted left and raked back as it rises.
+    RACK_TOP = 2.900
+    RACK_DX = -0.550
+    RACK_DY = 0.155
+
+    def _rx(z):
+        return RACK_DX * max(0.0, z - HIP) / (RACK_TOP - HIP)
+
+    def _ry(z):
+        return 0.175 + RACK_DY * max(0.0, z - HIP) / (RACK_TOP - HIP)
+
+    RAKE = math.atan2(RACK_DX, RACK_TOP - HIP)      # -0.284 rad
+
+    # ---- the legs: knees driven FORWARD, wet thigh boots --------------
+    _open()
+    for _x in (LX, RX):
+        limb(P, seat([(_x, 0.015, ANK), (_x * 0.98, -0.105, KNEE),
+                      (_x * 0.84, 0.015, HIP)], 0.112),
+             0.112, 0.138, 'dark')
+        P.add(L.box(0.225, 0.310, 0.075), 'dark', loc=(_x, -0.055, 0.038))
+    P.add(L.box(0.450, 0.310, 0.185), 'body', loc=(0.0, 0.0, HIP + 0.058))
+    _close("legs")
+
+    # ---- the trunk, the belt, the shoulder bar, a back ----------------
+    _open()
+    _W = _s((0.0, -0.010, WAIST))
+    _C = _s((0.0, -0.030, CHEST))
+    limb(P, [(0.0, 0.010, HIP + 0.095), tuple(_W), tuple(_C)],
+         0.215, 0.268, 'body')
+    P.add(L.box(0.400, 0.295, 0.070), 'dark',
+          loc=tuple(_s((0.0, -0.010, WAIST + 0.030))), rot=(0.0, -0.15, 0.0))
+    # FIX C - narrower bar, rounder shoulders.
+    P.add(L.box(0.490, 0.330, 0.150), 'body',
+          loc=tuple(_s((0.0, -0.025, SHO))))
+    for _s_i in (-1, 1):
+        P.add(L.sphere(0.145, 0.150, 0.126, 11, 8), 'body',
+              loc=tuple(_s((_s_i * 0.242, -0.025, SHO - 0.030))))
+    # A BACK, because the trunk is a tube and a tube's depth is its
+    # diameter. This is also what the rack is strapped against.
+    P.add(L.box(0.340, 0.225, 0.400), 'body',
+          loc=tuple(_s((0.0, 0.135, CHEST - 0.095))), rot=(0.12, 0.0, 0.0))
+    _close("trunk")
+
+    # ---- the head: dark hood, NO PALE, eyes on -Y only ---------------
+    _open()
+    _HD = _s((0.0, -0.050, HEAD))
+    limb(P, [tuple(_s((0.0, -0.030, SHO + 0.025))),
+             tuple(_HD - Vector((0.0, 0.0, 0.140)))], 0.084, 0.096, 'body')
+    P.add(L.sphere(0.205, 0.210, 0.200, 14, 9), 'dark', loc=tuple(_HD))
+    P.raw(aim(L.cone(0.106, 0.198, 0.218, 12),
+              tuple(_HD + Vector((0.0, 0.022, 0.040))), (0.0, 0.16, -1.0)), 'dark')
+    P.add(L.box(0.170, 0.052, 0.098), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.148, -0.062))))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.020))), 0.042, 0.023, -0.190)
+    _close("head")
+
+    # ---- FIX A + B: THE RACK. Two rails outside the blocks, a shelf
+    # under every block, the whole thing canted left off his shoulders.
+    _open()
+    _BZ = (1.950, 2.220, 2.490, 2.760)
+    for _s_i in (-1, 1):
+        limb(P, [(_rx(HIP - 0.02) + _s_i * 0.200, _ry(HIP), HIP - 0.020),
+                 (_rx(1.950) + _s_i * 0.200, _ry(1.950), 1.950),
+                 (_rx(RACK_TOP) + _s_i * 0.200, _ry(RACK_TOP), RACK_TOP)],
+             0.046, 0.032, 'dark')
+    # THE SHELVES. Wider AND deeper than the block above them, which is
+    # the whole of fix A: a shelf that does not stand proud of the block
+    # face cannot be seen from the side, and then two blocks are one.
+    for _z in _BZ:
+        _zs = _z - 0.1175
+        P.add(L.box(0.480, 0.400, 0.048), 'dark',
+              loc=(_rx(_zs), _ry(_zs), _zs), rot=(0.0, RAKE, 0.0))
+    # the straps: off the rack base, over each shoulder, onto the chest.
+    for _s_i in (-1, 1):
+        limb(P, [(_rx(1.550) + _s_i * 0.250, _ry(1.550), 1.550),
+                 tuple(_s((_s_i * 0.230, -0.060, SHO + 0.010))),
+                 tuple(_s((_s_i * 0.150, -0.230, CHEST - 0.230)))],
+             0.030, 0.026, 'dark')
+    _close("frame")
+
+    # ---- THE COUNT. THE ONLY PALE ON THE BODY. -----------------------
+    _open()
+    for _z in _BZ:
+        P.add(L.box(0.320, 0.330, 0.215), 'bone',
+              loc=(_rx(_z), _ry(_z), _z), rot=(0.0, RAKE, 0.0))
+    # THE FIFTH, hanging in the tongs: lowest, furthest forward, on the
+    # opposite side of the body from the rack, so no view can confuse it
+    # with the stack.
+    P.add(L.box(0.265, 0.265, 0.225), 'bone',
+          loc=(0.320, -0.440, 0.735), rot=(0.10, 0.13, 0.34))
+    _close("blocks")
+
+    # ---- the tongs. FIX D: the jaws close INTO the block. -------------
+    _open()
+    _PIV = Vector((0.300, -0.345, 1.120))
+    P.add(L.sphere(0.038, 0.038, 0.032, 9, 7), 'dark', loc=tuple(_PIV))
+    for _s_i in (-1, 1):
+        # FIX H2 - ONE LIMB PER ARM, THROUGH THE PIN. Fix H wrote the
+        # handle and the jaw as two separate limbs both STARTING at the
+        # pin, on opposite sides - and that is not a cross, it is a V
+        # over a V, which draws the same diamond the bowed version drew
+        # and rendered pixel-identical (799 tris both passes, and I
+        # could see no change in the picture). Two lines only cross if
+        # each one PASSES THROUGH the crossing point. Each arm is now a
+        # single polyline: handle top on one side, the pin, jaw tip on
+        # the other. The handles are longer and more open than the jaws,
+        # which is the other half of what makes tongs read as tongs.
+        limb(P, [(0.320 + _s_i * 0.112, -0.298, 1.372),
+                 tuple(_PIV),
+                 (0.320 - _s_i * 0.092, -0.440, 0.812)],
+             0.030, 0.026, 'dark')
+    _close("tongs")
+
+    # ---- the arms ------------------------------------------------------
+    # The near arm hangs to the tongs; THE FAR ARM GOES UP AND BACK onto
+    # the leaning rail, which is what a man steadying a canted load does
+    # and which opens the triangle of air between forearm, trunk and rack.
+    _open()
+    _SR = _s((0.300, -0.025, SHO - 0.045))
+    _SL = _s((-0.300, -0.025, SHO - 0.045))
+    limb(P, [tuple(_SR), tuple(_SR + Vector((0.070, -0.095, -0.350))),
+             (0.300, -0.330, 1.300)], 0.084, 0.058, 'body')
+    limb(P, [tuple(_SL), tuple(_SL + Vector((-0.115, -0.070, -0.265))),
+             (-0.430, 0.120, 1.840)],
+         0.084, 0.058, 'body')
+    _close("arms")
+    return P
+
+
+BUILDERS.update({"iceman": iceman})

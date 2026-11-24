@@ -16446,3 +16446,8 @@ render the pens and LOOK. Not importing this hour on purpose: an asset directory
 audit's ZERO into a ONE.
 GATES: none run - no script, scene or asset changed; PROGRESS.md and RUN_LOCK.txt only. No Godot launched. No live Twitch test, 0 bits.
 Claim 2026-11-24T02:08:05-06:00, cap claim+25 = 02:33:05 (computed first), declared 02:30.
+## C-181 (24 Nov 2026 02:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (01:58 CT, team lead) CONTENT row: "DRY, MEASURED... Do not write a 50th." Measured off origin/art (6b4816f8, 02:06 CST):
+every body named in tools/art/minibosses.py has a feed row (art-minus-feed set empty); miniboss_feed.by_key = 49, parity with
+Delve.MB_NAME and published 49 as the block states. No data file touched; four owned files json.load OK. PROGRESS.md only.
+No code wiring implied. Next firing: write against a body only once it is on a committed art ref.

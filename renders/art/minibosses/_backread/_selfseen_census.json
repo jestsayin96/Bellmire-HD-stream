@@ -963,6 +963,11 @@
   }
  },
  "errors": [],
+ "measured_at": "2026-11-24T12:38:47-0600",
+ "measured_at_tz": "Central Standard Time",
+ "measured_at_epoch": 1795545527.3488219,
+ "register_mtime_epoch": 1795542356.5132463,
+ "register_mtime": "2026-11-24T11:45:56-0600",
  "register_pairs": 55,
  "measurable": [
   "almoner",

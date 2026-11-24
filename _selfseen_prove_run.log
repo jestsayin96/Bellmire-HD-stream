@@ -1,0 +1,65 @@
+
+===== CENSUS =====
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cube.4442
+12:38:47 | INFO: glTF import finished in 0.02s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cylinder.272
+12:38:47 | INFO: glTF import finished in 0.00s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Sphere.004
+12:38:47 | INFO: glTF import finished in 0.00s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node spear_A
+12:38:47 | INFO: glTF import finished in 0.05s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node shield_A
+12:38:47 | INFO: glTF import finished in 0.01s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cube.144
+12:38:47 | INFO: glTF import finished in 0.03s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cylinder.019
+12:38:47 | INFO: glTF import finished in 0.02s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cylinder
+12:38:47 | INFO: glTF import finished in 0.01s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cube.001
+12:38:47 | INFO: glTF import finished in 0.01s
+12:38:47 | INFO: Data are loaded, start creating Blender stuff
+12:38:47 | INFO: Blender create Mesh node Cylinder.068
+12:38:47 | INFO: glTF import finished in 0.01s
+[census] pairs=55 measurable=31 no_man=1 not_measurable=23 build_failed=0 at=2026-11-24T12:38:47-0600
+[census] pairs in NO list: 0 
+[census] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_selfseen_census.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+
+RC=0
+
+===== PROVE =====
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+[prove] PASS A GREEN on the real census | the shipped tree must pass its own gate: GREEN
+[prove] PASS A carries a REAL stamp | census_measured_at = '2026-11-24T12:38:47-0600'
+[prove] PASS A says the census covers the register | census_covers_register = True
+[prove] PASS B RED | verdict = RED
+[prove] PASS B names the dropped key and nothing else | uncensused = ['winder'] (dropped 'winder')
+[prove] PASS B reason string is the coverage one | errors = ['winder: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py']
+[prove] PASS C RED on the missing stamp | verdict RED errors ['self_seen: the census file carries NO measured_at stamp, so it was written by the pre-24-Nov-12:34 census and its age is unknowable - an un-ageable census is the snapshot this gate exists to abolish. Re-run tools/art/_selfseen_census.py']
+[prove] PASS D RED twice - the 56th row AND the row count | uncensused ['_prove_56th'] errors ['_prove_56th: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py', 'self_seen: the census was taken over 55 register rows and is being read against 56 - it describes a different house. Re-run tools/art/_selfseen_census.py']
+[prove] PASS the arms left the shipped tree alone | A again = GREEN / 0 errors
+[prove] ALL ARMS AS EXPECTED  wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_selfseen_prove.json
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+
+RC=0
+
+===== DONE =====

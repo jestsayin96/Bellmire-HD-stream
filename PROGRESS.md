@@ -16035,3 +16035,71 @@ outerHTML/insertAdjacentHTML/document.write/eval/new Function matches are 2, bot
 
 U138 STAND-DOWN 2026-11-23T22:56-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
 Lock read from R WORKING copy at 22:53-06:00: last line chat bot B118 IDLE 22:50:41 (after its RUNNING 22:49:23), tasklist showed no Godot alive - lock FREE; I did not claim because there is no owed run. Item: WORK_PLAN TAKE THIS NEXT (21:58 CT 23 Nov block, newest) says "HUD - NOTHING HUD-OWNED IS OPEN. Stand down and write it up, or commit logs." Rarity-hue half of System 2 shipped (U55/U56, guarded U71/U74b/U76); L74 closed (U131/U135). L31/D41/D48/D61 are game-build files, L66 is hub H31. Prompt standing note on rarity-hue is stale for the eleventh time. Next firing (23:52): re-read R working lock, take any new HUD row in TAKE THIS NEXT, else stand down again; any capture split into <=15 min chunks, release by :07. Decision for Mr. E: none.
+
+================================================================================
+ART - 23 NOV 2026 22:48 CT - THE ROPER'S FRONT READ. THE TRIPOD IS GONE AND THE
+ARGUMENT I WROTE FOR STRAIGHTNESS IS STRUCK BY MY OWN RENDER.
+================================================================================
+
+THE TEAM LEAD'S ART ROW, TAKEN AS WRITTEN: hold on a 50th, audit the front read
+instead. I checked FIRST, by measuring and not by memory: 49 builders in
+tools/art/minibosses.py, 60 rows in the register, the Roper already on disk -
+so nothing new was modelled this run and nothing that exists was rebuilt.
+
+WHAT I LOOKED AT BEFORE TOUCHING ANYTHING. renders/art/minibosses/roper/
+hero_front.png as shipped. The fault is real and it is exactly what I named on
+the HOLD row: three dead straight pale lines from a pale apex at chest height
+down to three splayed PALE feet is a surveyor's tripod, and it reads as one
+before it reads as rope.
+
+I DID NOT TAKE THE OBVIOUS FIX, AND THE REASON IS A MEASUREMENT. Un-splaying the
+pegs kills the tripod and buys a worse shape: grooves sit at x -0.13/0/+0.13 and
+his legs at x +-0.245, so strands with no flare lie down the FRONT of his own
+body as three pale vertical bars - the shape Mr. E had stripped off the Changer
+at 22:38 on 21 Nov. The flare is load-bearing for the silhouette. A tripod leg's
+one impossible property is a BEND, so the bend is the variable.
+
+TWO VARIABLES, TWO RENDER PASSES, JUDGED SEPARATELY.
+  PASS 4 - z sag -0.085 (renders/art/minibosses/roper_p4). The SIDE view got
+  visibly better; the FRONT did not move. THE REASON IS WORTH MORE THAN THE
+  PASS: head-on the strands run near-VERTICALLY in projection, so a bow in z
+  displaces them ALONG their own projected direction and curves nothing the
+  front camera can see. A bow proved in the axis the camera throws away is not
+  a bow - the laid rope's own note in this function is the same trap, and this
+  is the third coat it has worn on this one body.
+  PASS 5 - x twist +0.105, kept together with the sag (roper_p5). Bows them
+  ACROSS the projected run, all three the same way, which is what laying three
+  strands into one rope actually does. The tripod read goes.
+  PASS 5b, ON ITS OWN PASS - the floor anchors (roper_p6). They were PALE cones
+  0.28 tall: a tripod's shoe in colour and in proportion, and the same pale
+  family as the strands, so the eye joined cord and foot into one continuous
+  leg. Now DARK iron pins at 0.150. The pale mass in that view is cord only.
+
+THE FIT PROOF, AND I OPENED ALL THREE. hero_front: three cords curve out of his
+hands to dark pins; no tripod. hero_side: better than the shipped version - the
+cords read as cordage instead of sticks, the man still leans into the post, the
+drum still behind him. hero_back: standard, cross-head, drum, no face - the
+facing still holds, checked on purpose against the Beadle defect.
+EVERY FAULT I CAN SEE, AND THERE ARE FOUR: (1) the top is a cone seen end-on and
+reads as a pale BOWL, not as a grooved former - the mechanic's own object is the
+least legible thing in the front view; (2) the three cords cross his torso and
+his right leg in projection and muddy the lower silhouette; (3) the twist leans
+the whole bundle one way, so the left cord ends further out than the right;
+(4) the dark pins are small enough that at stream distance the cords may look as
+though they end in bare floor.
+
+GATES. Gen ok true, 60 rows, errors [], floorgeom_stale false, blank check 147
+files / 0 failures. Fit ok true, verdict GREEN, 51 pairs, red_summary.rows [],
+shipped_red [], roper proving 3 of 3 views, border/frame_edge clean. Only
+roper's own numbers moved in _fit_report.json - I read the staged diff line by
+line to be sure no other row was nulled, which is the fault this file has
+already shipped once.
+
+FOR THE GAME BUILD: UNCHANGED AND STILL NOT WIRED BY ME. bestiary.gd needs a
+`model` path to assets/monsters/minibosses/roper.glb and NO `anims` entry (it is
+static); Delve.MB_NAME wants `"roper": "Drawtight"` after content's feed row
+lands. The .glb is 143,968 bytes now, not 128,088 - re-export it rather than
+trusting a cached sibling. Not room-locked: CORRIDOR-SAFE.
+
+NO GODOT RUN, NO LOCK CLAIMED, NO LOCK LINE WRITTEN - rendering only, which
+needs none. NO TWITCH TEST. 0 bits.

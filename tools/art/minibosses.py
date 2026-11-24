@@ -17303,7 +17303,52 @@ OVERRIDE.update({
 
 
 def roper():
-    """IT TWISTS YOU TOGETHER. The 49th body. PASS 2.
+    """IT TWISTS YOU TOGETHER. The 49th body. PASS 3 - THE FRONT READ.
+
+    *** PASS 2 SHIPPED, AND THE FRONT VIEW STILL READ AS A SURVEYOR'S TRIPOD.
+    *** I SAID SO MYSELF ON THE HOLD ROW AND THE TEAM LEAD REPEATED IT RATHER
+    *** THAN SOFTENING IT. THIS PASS IS THAT AUDIT, AND IT IS TWO VARIABLES
+    *** MEASURED ON TWO SEPARATE RENDER PASSES.
+    Pass 2 killed the tripod the APEX made (the top came down off his face).
+    What it left was the tripod the LEGS make: three dead straight pale lines
+    from a pale apex at chest height to three splayed PALE feet on the floor.
+
+    THE FIX IS NOT THE FLARE, AND I WORKED THAT OUT IN PROJECTION BEFORE
+    SPENDING A PASS ON IT. Pulling the pegs in to kill the splay puts the
+    strands INSIDE the man's own silhouette - grooves at x -0.13/0/+0.13
+    against legs at x +-0.245 - so the cure is three pale vertical bars down
+    the front of a body, which is the exact shape Mr. E had stripped off the
+    Changer. The flare is load-bearing. What a tripod leg cannot have is a
+    BEND, so the bend is the variable.
+
+    PASS 4 (z sag, -0.085). Helped the SIDE view a lot and the FRONT not at
+    all, and the reason is worth keeping: head-on the strands run nearly
+    VERTICALLY in projection, so a sag in z displaces them ALONG their own
+    projected direction and bows nothing the front camera can see. A bow
+    proved in the axis the camera throws away is not a bow - the laid rope's
+    own note in this function is the same trap and this is its third coat.
+
+    PASS 5 (x twist, +0.105, kept with the sag). Bows the strands ACROSS their
+    projected run, all three the same way, which is also what three strands
+    being laid into one rope actually do. The tripod read goes.
+
+    PASS 5b, ITS OWN PASS (the floor anchors). The pegs were PALE and 0.28
+    tall - a tripod's shoe in colour and proportion, and the same pale as the
+    cords, so the eye joined cord and foot into one leg. Now dark iron pins at
+    0.150. The pale mass in the front view is CORD AND NOTHING ELSE.
+
+    WHAT I STILL SEE IN hero_front.png AND AM NOT HIDING: the top is a cone
+    seen end-on and reads as a pale bowl, not as a grooved former; the three
+    cords still cross his torso and right leg in projection; the twist leans
+    the whole bundle one way; and the dark pins are small enough that at
+    stream distance the cords may look as though they end in bare floor.
+
+    *** THE STRAIGHTNESS ARGUMENT PASS 2 WROTE IS STRUCK. *** It said three
+    dead straight lines mean tension and the one sagging line behind him means
+    finished rope. That was a sentence, and the picture disagreed with it: a
+    rigid strut is dead straight and a cord never is, so straightness was
+    buying the tripod and selling nothing. The tension/slack contrast still
+    reads - the three are taut curves and the laid rope is a hanging one.
 
     *** PASS 1 PUT THE TOP IN FRONT OF HIS FACE AND I ONLY KNOW THAT BECAUSE I
     *** LOOKED. Pass 1 carried the top at z 1.98 - above the hands, forward of
@@ -17500,10 +17545,47 @@ def roper():
     # number or a caption. 0.034 at the top and 0.030 at the peg - thinner than
     # pass 1's 0.040, which at tripod-leg thickness was half the reason the
     # body read as an instrument rather than as rope.
+    #
+    # *** PASS 4 - THE FRONT READ. ONE VARIABLE: THE STRANDS GET A DROOP. ***
+    # The team lead and I both said the same thing about the shipped front
+    # view and neither of us was being kind about it: head-on, three dead
+    # straight pale lines running from a pale apex at chest height down to
+    # three splayed feet on the floor IS A SURVEYOR'S TRIPOD, and it reads as
+    # one before it reads as rope. Pass 2 killed the tripod the apex made and
+    # left the one the LEGS make.
+    #
+    # The argument pass 2 wrote for straightness - "three straight lines mean
+    # tension, the one hanging curve behind him means finished rope" - is a
+    # sentence, and the picture disagreed with it. A rigid strut is dead
+    # straight; a cord never is. So the thing that makes the front read as
+    # cordage is the one property no tripod leg can have, and it costs no
+    # height, no width and no re-sited hand: A SAG. The three strands now bow
+    # 0.085 m down at mid-span over a ~1.8 m run.
+    #
+    # WHY THIS VARIABLE AND NOT THE FLARE. The obvious fix was to pull the
+    # pegs in and kill the splay. I worked it in projection before touching
+    # it and it is the WRONG fix: grooves sit at x -0.13/0/+0.13 and the man's
+    # legs at x +-0.245, so un-splayed strands stop clearing his silhouette
+    # and lie down the FRONT of his own body as three pale vertical bars -
+    # which is the exact shape Mr. E had stripped off the Changer at 22:38 on
+    # 21 Nov. The flare is load-bearing for the silhouette. The droop is not.
+    #
+    # SIDE-SAFE BY CONSTRUCTION IN X, NOT IN Z - so the side view has to be
+    # re-opened, and it was: the sag moves in z, which the side camera sees.
     _open()
+    SAG = float(os.environ.get("ROPER_SAG", "-0.085"))
+    TWIST = float(os.environ.get("ROPER_TWIST", "0.105"))
     for g, p in zip(GROOVE, PEG):
-        limb(P, [Vector(g), Vector(p)], 0.034, 0.030, 'bone', ring=7)
-        P.add(L.cone(0.070, 0.034, 0.280, 9), 'bone', loc=(p[0], p[1], 0.110))
+        limb(P, arc(Vector(g), Vector(p), SAG, 9, side=TWIST),
+             0.034, 0.030, 'bone', ring=7)
+        # PASS 5, SECOND VARIABLE AND MEASURED ON ITS OWN PASS: the floor
+        # anchors were PALE and 0.28 m tall, which is a tripod's shoe in both
+        # colour and proportion - the same pale family as the strands, so the
+        # eye joined cord and foot into one continuous leg. They are now DARK
+        # iron pins at 0.150, the same dark as the sledge they belong to, so
+        # the pale mass in this view is CORD ONLY and the cords end where the
+        # floor starts instead of standing on feet.
+        P.add(L.cone(0.052, 0.022, 0.150, 9), 'dark', loc=(p[0], p[1], 0.056))
     _close("strands")
 
     # --------------------------------------------------------- THE LAID ROPE

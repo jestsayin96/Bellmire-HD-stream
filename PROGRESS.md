@@ -17182,9 +17182,81 @@ checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0 at 07:46:17; last li
 No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
 channel-point reward created, deleted or re-priced.
 
+## D-S110 (game build, 24 Nov 2026 08:08-08:1x CT) - panner.glb.import COMMITTED; SYSTEM 12 STEP S110b (FBX->glb + probe) DONE OFF-REPO, NOT WIRED
+TAKE THIS NEXT (07:58 CT, team lead, amended 08:04) GAME BUILD row: do NOT touch MB_NAME this hour (obeyed - delve.gd untouched); commit the
+missing panner.glb.import; then System 12.
+MERGE: origin/main fast-forwarded 48252d3b..b5a1a13a. It was BLOCKED first by an UNTRACKED assets/gear/wand_crystal.glb.import in R that main now
+tracks - compared byte-for-byte (CRLF-normalised) with origin/main's copy: IDENTICAL, so moved aside (C:\hd adventure\_gamebuild_bak\
+wand_crystal.glb.import.S110) and the merge went clean. Nothing lost.
+1. PANNER: --headless --import rc=0 in 7.8 s, 0 ERROR lines; assets/monsters/minibosses/panner.glb.import generated and committed here. Parse after
+   it reads 0 SCRIPT ERROR / 0 Parse Error, so the mesh now imports in every lane that pulls this. MB_NAME still 50 by design (09:07 row).
+2. SYSTEM 12 / S110b - converted the 20-body medieval subset of Quaternius Ultimate Animated Character Pack (Nov 2019) FBX->glb in a SEPARATE
+   `blender --background --factory-startup` process (the open Blender scene was never touched). Output STAGED OFF-REPO at
+   C:\hd adventure\_gb_s110_uacp\ (20 .glb, 13.2 MB, + _report.json) - NOT in assets/ yet, nothing wired, so nothing for the import to miss.
+   PROBE (all 20 ok): ONE shared rig `CharacterArmature`, 32 bones (Hips/Abdomen/Torso/Neck/Head, UpperArm/LowerArm/Fist L+R, UpperLeg/LowerLeg/
+   Foot L+R) - NOT KayKit names, confirming gear attach must be skipped or remapped (Fist.R is the hand socket). ELEVEN clips, same on every body:
+   Defeat, Idle, PickUp, Punch, RecieveHit (sic), Shoot_OneHanded, SitDown, StandUp, Victory, Walk, Walk_Carry - NO Run clip, so the role map must
+   fall back Run->Walk. Raw heights 3.06-4.21 units (FBX scale), zmin -0.019 - scale factor vs KayKit is the first thing S110c measures in Godot.
+   LICENCE: the pack ships no licence file and I did not find the pack's own page this run (searches surfaced only other Quaternius pages and
+   opengameart's "all CC0 uploader quaternius"). Mr. E's 16 Nov licence covers ALL Quaternius packs (commercial, no attribution), so use is
+   permitted; the per-pack page read stays owed before the glbs enter assets/, and I will write the LICENSE note beside them then.
+   NEXT (S110c): copy into assets/townsfolk/uacp/ with a LICENSE note, --import, measure Godot height vs KayKit ADV, then wire per role in
+   townsfolk.gd in ONE commit with a render - import and wiring together or neither.
+GATES on merged main b5a1a13a: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 1950 | TWITCH_PARSE OK (8 checks)
+| TOWNWALK in_solid=0/17830 raid_in_solid=0/5934 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR. Logs: renders/cycles/s110/.
+No live Twitch test, ZERO BITS. Claim 08:08:47, cap claim+25 = 08:33:47 (computed first), declared 08:29, released 2026-11-24T08:14:49-06:00.
+## C-187 (24 Nov 2026 08:24 CST, content) - WROTE miniboss_feed.by_key.panner (ONCEROUND, THE 51st); FEED 50 -> 51
+TAKE THIS NEXT (07:58 CT, team lead) CONTENT row: "THE CONDITION IS NOW MET AND YOU ARE FIRST IN THE CHAIN." REF CHECKED: git ls-tree on BOTH origin/main and origin/art gives assets/monsters/minibosses/panner.glb, blob 33af0ae1dabafd7dd506558daa29a7e1903dcf75, 92,472 bytes, tracked. Canon row read at tools/art/minibosses.py:18373 (Onceround, 2.26 m, confection).
+Added arrive x9, act x7, broken x4, fall x8. The mechanic is a drum shut until the pan comes round: blows on the wall do nothing, the party holds its blows together. No {name} in arrive or fall, no per-hero item named, no operator (art removed the man at pass 4; the crank turns itself). _note_c187 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 50 earlier by_key rows and every other top-level key equal to before; VALIDATION OK.
+CODE WIRING (game build 09:07): Delve.MB_NAME["panner"] = "Onceround" (NOT before this row is on a ref); MB_FIT panner from the fit report; panner.glb.import; theme confection draw. Then chat bot republishes elite count 50 -> 51. feed 51 vs MB_NAME 50 is the expected transient and chatcmd.gd will call panner UNNAMED until 09:07 - correct, not a defect.
 ### HUB 24 Nov 08:4x CT - standing check (TAKE THIS NEXT gave HUB row "standing check, unchanged")
 - Merged origin/main into hub (5e3390e7). `git diff origin/main HEAD -- web/ docs/HUB_SECURITY.md` and `git diff origin/hub HEAD -- web/` both EMPTY: web/ byte-identical; no web change, so no publish owed and READY TO PUBLISH is NOT claimed.
 - Security greps on app.js: innerHTML at exactly :255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (only comment mentions). `node --check app.js` OK. index.html comment "only innerHTML in app.js is two page-owned sites" still true. CSP meta intact.
 - Only non-constant href: app.js:2743 `link.href = uri`, gated by /^https:\/\/(www\.)?twitch\.tv\// with rel=noopener; pre-existing, unchanged, flagged for the team lead's awareness only.
 - Number: web/icons 3.3 MB, fonts 64 KB (under the 6 MB cap). origin/gh-pages = 029e4fac. No new untracked web files.
 - Licence findings this run: none new (no pack catalogue touched).
+
+U148 STAND-DOWN 2026-11-24T08:55-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (2026-11-24T08:53:29-06:00): last line chat bot B128 IDLE 08:50:33 (released inside its declared 08:52; its RUNNING 08:48:20 closed; QA tester 08:42 also closed); tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 07:58 CT 24 Nov team-lead block; HUD row says nothing HUD-owned open (the 51st touches delve.gd and data/lore_lines.json, neither HUD), stand down in writing if dry. Sixth dry cycle (U143-U148); cadence question is with the supervisor. Fast-forwarded hud-ui to origin (8969e57a, plan sync only) before writing.
+Note: worktree shows pre-existing modified renders/cycles PNGs (not mine this firing, left uncommitted, not staged).
+Next firing (09:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none (open HUD scope or reduce HUD cadence is the supervisor's question).
+## B128 - 24 Nov 2026, 08:45 CT - FOUR GATES GREEN ON A MERGED MAIN THE 51st BODY REACHED FIRST
+Merged origin/main b5a1a13a into chatbot (ff of origin/chatbot to 53800db1 first, then merge; HEAD
+9baca892). The merge ABORTED on the first attempt and the obstruction was MINE: B127's own
+--headless --import pass had left `assets/gear/wand_crystal.glb.import` untracked in this worktree,
+and art committed the same generated sibling this hour. Removed my regenerable copy and merged
+clean - 14 files, 0 conflict markers over the whole tracked tree.
+
+THE CHAIN IS LEVEL AT 50/50/50 AND I MEASURED IT BEFORE TOUCHING A FILE, brace-matched:
+Delve.MB_NAME 50 | miniboss_feed.by_key 50 | commands.json published 50 at both leaves
+(.commands.miniboss.short and .what), 18000 bytes, 32 keys. `panner` is in NEITHER half.
+SO NOTHING WAS OWED AND NOTHING OF MINE WAS EDITED. The team lead's 08:45 row told me to expect
+by_key 51 / MB_NAME 50 and to report the UNNAMED transient as planned behaviour. THE TRANSIENT IS
+NOT HERE: the 51st BODY merged (`assets/monsters/minibosses/panner.glb`, 92,472 bytes, came in on
+this very merge) but the feed row did not, so the data half still reads 50 and my gate is right to
+say nothing. Content's row is still open at the merge, not just at its own branch.
+
+FOUR GATES GREEN:
+- parse --headless --path W6 --quit-after 300: rc=0, 136 lines, 0 ERROR, 0 SCRIPT ERROR,
+  0 Parse Error (24 WARNINGs, all the pre-existing invalid-UID ext_resource lines in town.gd:826).
+- TWITCH_PARSE OK (8 checks, 8 PASS).
+- COMMANDS_DOC OK wrote 32 commands AND A TRUE NO-OP - git status on docs/COMMANDS.md is empty
+  after the real tools/_commands_doc.gd ran.
+- L14_TEST OK (24 checks, 0 FAIL, 0 guard arms). Both doc arms quiet: 32 rows, unpublished [],
+  stale []. B121's close now HELD across an EIGHTH merged main.
+
+AND I RAN THE IMPORT PASS FIRST, ON PURPOSE, BECAUSE OF MY OWN FINDING LAST HOUR. B127 proved a
+newly-merged mesh reads CLEAN in the lane that added it and RED in every lane whose import cache
+lacks it. `panner.glb` arrived on this merge with NO `.import` sibling on main (the game build
+committed one to `laptop` at 08:14; it is not on main yet), so an unprimed parse would have gone
+red on it. --headless --import imported panner.glb in 4 s and the parse that followed is 0 ERROR.
+That is the lesson applied, not re-learned.
+
+Lock: claim 08:48:20, cap 09:13:20 (claim+25), declared finish 08:52, released inside it. Window
+checked BY PROCESS BEFORE the claim (Get-Process Godot* = 0; last line QA tester IDLE 08:42:59) and
+again BEFORE writing the IDLE line.
+No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line posted as bellmirebro. No
+channel-point reward created, deleted or re-priced.

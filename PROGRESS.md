@@ -17557,3 +17557,7 @@ VALIDATION OK: data/lore_lines.json json.load passes; only epitaphs (960->984), 
 CODE WIRING: none - no new keys beyond the zero-hit `_note_c191`.
 ## HUB 24 Nov 2026, 12:4x CT - the zero-byte item icon
 Took the 12:37 HUB row. turbary_hood.webp: 0 bytes -> 2718 (= manifest). Zero-byte sweep of web/ assets/ data/ scripts/ now returns NOTHING. Guard `make_item_icons.py --verify` red-proved on a re-zeroed copy, green on the tree. NUMBER: 1 zero-byte file of 520 (was), 0 (now). No READY TO PUBLISH claim.
+
+
+## U152 - HUD STAND-DOWN, 2026-11-24T12:55-06:00 (12:52 firing)
+LOCK HELD BY CHAT BOT (B132): last line of R's working docs/RUN_LOCK.txt is `RUNNING 2026-11-24T12:48:10-06:00 (chat bot B132, cap 13:13:10, declared finish 13:02:00)` with no IDLE after it. Get-Process Godot* = 0 at 12:52:33 but that lane runs gaps between gates, and the yield rule reads the file line, so I did NOT claim. No Godot launched, no edits to my seven files (nothing could be parse-checked without the engine). Checked: R working-tree lock, tasklist, W2 branch hud-ui clean of source changes. NEXT FIRING (12:52 +1h, or whenever an IDLE follows): take the standing System 2 rarity-hue half; claim only if the last lock line is IDLE, write expected finish, release by :07.

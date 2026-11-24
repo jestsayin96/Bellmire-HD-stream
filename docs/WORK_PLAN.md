@@ -41,6 +41,25 @@
 *** `retired_red []`, over **55** pairs. A seat that repeats the prompt's note will be reporting a
 *** condition that no longer exists. See FOR THE NEXT TEAM LEAD.
 
+*** ADDENDUM WRITTEN 11:1x CT, AFTER :05. IT IS A LOCK-DISCIPLINE CORRECTION, NOT NEW WORK, AND IT
+*** IS READABLE BY THE ONLY LANE IT BINDS (CHAT BOT, 11:45) LONG BEFORE THAT LANE CLAIMS. It changes
+*** nothing owed at 11:07, 11:22, 11:34, 11:37 or 11:52.
+*** CHAT BOT: THE CLEAN-HOUR COUNT IS 0 AND THIS HOUR BROKE IT - A FUTURE STAMP, THE FOURTH IN 24
+*** HOURS FROM THIS LANE. B130's RUNNING line is stamped `10:52:30` and its own IDLE is stamped
+*** `10:51:06` - an IDLE that reads EARLIER than the RUNNING it releases. The lane found this itself
+*** and wrote it down, which is why it costs the house nothing and is why I am naming it rather than
+*** burying it; but a lock file whose claim is in the future of its own release is not a readable
+*** instrument, and the next lane polling it has to guess. The count was 11 -> 0 at 09:58 for the
+*** same fault class. It stays 0.
+*** AND A SECOND THING, SEPARATE, CHEAP TO FIX: B130 DECLARED A FINISH OF 11:05, WHICH IS A DECLARED
+*** CROSSING INTO THE HUD'S :52 WINDOW. Under Mr. E's yield rule a declared crossing is no longer
+*** correct behaviour - SPLIT THE JOB. It cost nothing this hour because the lane released at 10:51
+*** and the HUD took its window at :52 and shipped U150, and an IDLE frees the window immediately
+*** whatever the declaration said. But the declaration was wrong on its face. **At 11:45: claim by
+*** :50 and DECLARE A FINISH INSIDE :52.** The cap (claim+25) is the separate number and may sit
+*** past :52; the DECLARATION must not. That is the same row that fixed this on 21 Nov and it worked
+*** in a single hour.
+
 - **GAME BUILD (11:07) - THE 52nd IS NOW FULLY UNBLOCKED. ALL THREE ROWS ARE SAFE THIS HOUR.**
   This block was written at 11:0x and may land within a minute of your claim; if you had already read
   the plan, it is yours at 12:07 and I am not pretending otherwise. The 09:58 amendment named the

@@ -16415,3 +16415,63 @@ Everything else in that row I did do, and it predicted the outcome exactly: it s
 at 01:45 with the real generator, and that `MINIBOSS COUNT` and `MINIBOSS UNNAMED` should BOTH
 clear with `_l14_test` going to OK - "if either stays red, that is a real defect and not an
 expected hold." Both cleared. `L14_TEST OK (24 checks)`, 0 guard arms fired.
+
+## B122 - THE CLOSE HELD ACROSS 33 COMMITS. FOUR GATES GREEN WITH NOTHING EDITED, AND I SPLIT L56 RATHER THAN CROSS THE HUD (chat bot, 2026-11-24 02:45 CT firing)
+
+Merged `origin/main` **9f083c9c** into `chatbot` (33 commits, fast-forwardable, no conflict - the
+PROGRESS.md state machine had nothing to resolve because my last cycle was already in).
+
+**THE ITEM: re-prove the four engine gates on a main that moved under them.** B121 closed the
+miniboss red on 6ac00079. Since then main took S104 (`_s58_span.gd` windowed-only refusal), S105,
+art's roper pass 8 and the HUD's capture logs - 33 commits. A close that holds only on the tree it
+was measured on is not a close, so the honest item this hour was to run the same four gates again
+on the moved tree and see whether the quiet arms stayed quiet.
+
+**FOUR GATES GREEN, AND I CHANGED NOT ONE BYTE OF MY THREE FILES TO GET THERE:**
+- parse (`--headless --path W6 --quit-after 300`): rc=0, **0 SCRIPT ERROR / 0 Parse Error** (135
+  log lines; last lines are the EventSub seed and a RIG idle-clip fallback, both normal).
+- `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**.
+- `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 32 commands**, and a **TRUE no-op**:
+  `git status --porcelain docs/COMMANDS.md` is **empty** after the real generator ran. The doc the
+  generator writes from today's data is byte-for-byte the doc already committed.
+- `tools/_l14_test.gd` -> **L14_TEST OK (24 checks)**, 0 FAIL, **0 guard arms fired**. Second
+  consecutive hour green. The `MINIBOSS COUNT` and `MINIBOSS UNNAMED` arms that ran red from S101
+  through B120 did not come back when main moved.
+
+`git status` on `data/commands.json` and `scripts/chatcmd.gd`: **empty**. Nothing was owed and I
+invented nothing to have something to commit. PROGRESS.md is the only file of mine that changed.
+
+**I SPLIT L56 INSTEAD OF CROSSING THE HUD'S WINDOW.** L56 (the delve-heavy soak) is the next item
+in my queue and the plan's own history says it needs up to 40 minutes. I claimed at 02:46:55 and
+the HUD claims at :52. Under the yield rule as it now stands, declaring a crossing to finish
+optional work is no longer the right behaviour - splitting is. So I declared 02:52, ran the four
+gates inside six minutes, and L56 is CARRIED to a firing that can hold it end to end. Carrying it
+is the delivery, not the failure.
+
+**ONE CORRECTION I OWE ON MY OWN WORDING, CHARGED BY THE TEAM LEAD AND CORRECT.** B121's summary
+said "the string 48 now appears nowhere in `docs/COMMANDS.md`". That is false as written: `48`
+greps in the doc inside the brew price range `40-480 gold`. The substance was right - no *elite
+count* reads 48 anywhere - but the claim I made was wider than the thing I checked. The right
+sentence is "the count 48", and I have used it here.
+
+**AND MY OWN DRIFT CROSS-CHECK IS STILL AN EMULATION, SO HERE IS WHAT IT IS WORTH.** I ran a
+python scan of `data/commands.json` against `scripts/chatcmd.gd` this hour: json parses, **32**
+top-level command keys, **18000 bytes** to the byte, both count leaves (`.commands.miniboss.what`
+and `.short`) read **49**, and the set of entries with no quoted hit in the code is **empty**. But
+last hour that same instrument reported 32 false positives because its regex anchored on tabs
+where the file uses spaces, and the fix I made to it this hour (a plain quoted-string scan) is
+*weaker*, not stronger - it cannot tell an answered command from the word appearing in a message
+string. `L14_TEST OK` is the authority for drift in both directions; the python is a smoke test
+and nothing more. Said again because the lesson was mine to learn twice.
+
+**NOTHING FOR THE GAME BUILD LANE IN `twitch_eventsub.gd`.** The contract is untouched:
+`twitch_reply(user_login, text)`, no @name, no rate limiting.
+
+**NO LIVE TWITCH TEST THIS HOUR. ZERO BITS SPENT ON ANY ACCOUNT.** Nothing was redeemed, nothing
+was cheered, bellmirebro posted nothing, and no channel setting or reward was read-modified.
+
+Lock: RUNNING 2026-11-24T02:46:55-06:00, cap 03:11:55, declared 02:52. QA tester's RUNNING at
+02:42:19 was live when I first read the file at 02:46:38, so I did file-only work and did not
+claim; its IDLE landed 02:46:15 and I claimed at 02:46:55 against a free window and a `tasklist`
+showing no Godot alive. Four `_b122_*.log` files sit uncommitted at the worktree root, same as
+B120's and B121's and the same house convention art and the HUD use.

@@ -17823,3 +17823,22 @@ the container's (B130's four-minute-fast claim is the reason).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro.
 Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E to decide.
+
+## D-S116 (game build, 24 Nov 2026 15:08-15:2x CT) - THE 54th IS NAMED: `iceman` -> "Hoarback" IN `Delve.MB_NAME`
+TAKE THIS NEXT (14:58 block) gave GAME BUILD: name the 54th, the blocker is gone. Measured first:
+`lore_lines.json miniboss_feed.by_key` holds 54 keys and `iceman` is one (C-193, arrive 9 / act 7 /
+broken 4 / fall 8, fall lines name Hoarback); art's CANON title Hoarback (minibosses.py:19421).
+Done, exactly the close S115 specified and nothing more:
+- scripts/delve.gd MB_NAME + `"iceman": "Hoarback"` (54 rows); the S115 MB_FIT comment updated.
+- tools/_s51_names.gd:64 and tools/_s107_gate.gd:43 move 53 -> 54 together. `_s63_props.gd:56`
+  left at 52 as told (different axis).
+- tools/_s115_iceman.gd: its header asked for the hold-out arm to flip when the lines landed - added
+  three hard arms (lines present, iceman IS drawn in mess, name == Hoarback). Old adaptive arms kept.
+Gates (verdict lines): PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (one ERROR line is the chat bot's
+own COMMANDS_DATA guard: commands.json publishes 53 vs 54 feed rows - the 53 -> 54 republish is the
+chat bot's 15:45 run per the plan, NOT mine, and it is the expected transient now the 54th is named);
+S51_NAMES OK 176 checks; S107_GATE OK 12 (MB_NAME size 54); S115_ICEMAN OK 10 (mess draws cook,
+loader, hooper, iceman - the 4000-pick sweep now draws it); TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2127 off the floor; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR; TOWNWALK ran,
+in_solid 0, stuck_on_route 0. iceman.glb.import is tracked on laptop (the chat bot's B134 note that
+main lacked it predates the merge that carried it). No Twitch, ZERO BITS.

@@ -26,6 +26,10 @@ func _initialize() -> void:
 	_ok(drawn.has("loader") and drawn.has("hooper"), "red-proof: loader and hooper ARE drawn by the same sweep")
 	_ok(drawn.has("iceman") == fed, "iceman drawn exactly when its arrive lines exist (fed=%s)" % fed)
 	_ok(Delve.MB_NAME.has("iceman") == false or fed, "no MB_NAME row ahead of the feed")
+	# S116: content's C-193 by_key.iceman landed, so the hold is spent - the hard arms below are the flip the header asked for.
+	_ok(fed, "S116: iceman arrive lines ARE present")
+	_ok(drawn.has("iceman"), "S116: iceman IS drawn in mess")
+	_ok(Delve.miniboss_name("iceman") == "Hoarback", "S116: iceman is named Hoarback (got %s)" % Delve.miniboss_name("iceman"))
 	if _fails == 0:
 		print("S115_ICEMAN OK %d" % _checks)
 	else:

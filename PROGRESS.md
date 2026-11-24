@@ -16835,3 +16835,6 @@ check is `Get-CimInstance`, never the log alone.
 No live Twitch test. **ZERO BITS, no cheer, no redemption, no chat line posted, nothing touched on
 either account.** No Godot of mine alive at release - checked by process BEFORE writing the IDLE
 line this time, not after.
+
+## HUB standing check, 24 Nov 06:4x CT (hub lane)
+TAKE THIS NEXT gave the HUB row = STANDING CHECK, no build row. Merged origin/main (29ecd90c). origin/gh-pages^{tree}, origin/hub:web, origin/main:web, HEAD:web all 02257b2f; diff-tree gh-pages vs web EMPTY; publish 6 = gh-pages 029e4fac. app.js node --check OK; innerHTML only at :255 and :301 (page-owned); outerHTML/insertAdjacentHTML/document.write/eval/new Function = 0 in code (2 comment mentions); CSP meta present. web/ unchanged so no screenshot or hostile-name rerun owed. NOT claiming READY TO PUBLISH. Untracked _hub_ready_shot.png still named, delete refused.

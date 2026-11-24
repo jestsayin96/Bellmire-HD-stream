@@ -239,9 +239,10 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S98: `changer` (47th, Evenhand in art's CANON, art's tag treasury - field 5) joins treasury with MB_FIT 1.11; content's by_key.changer has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When it lands the row is one line: "changer": "Evenhand".
 ## S101: `stopper` (48th, Chokewell, art's tag crypt - field 5) joins crypt with MB_FIT 0.97. Content's C-176 landed, but stopper.glb is on NO branch: miniboss_model returns "" so miniboss_for holds it out, and NO MB_NAME row is written because tools/_s51_names.gd requires every MB_NAME key to have a .glb stem. When the mesh lands the row is one line: "stopper": "Chokewell".
 ## S101: `roper` (49th, Drawtight, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; no feed row yet, so NO MB_NAME row and the arrive-lines half of the gate holds it out.
+## S107: `almoner` (50th, Dolehand, art's tag shrine - field 5) joins shrine with MB_FIT 1.03; content's C-182 by_key.almoner landed and almoner.glb.import is committed alongside, so miniboss_for can draw it.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman", "tither"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
+    "prison": ["pressman", "tither"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer"], "mess": ["loader", "hooper"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper"], "wood": ["drover", "winder"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower"], "confection": ["comfitmaker"]}

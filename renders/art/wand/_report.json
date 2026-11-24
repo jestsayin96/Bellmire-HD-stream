@@ -1,0 +1,56 @@
+{
+ "verdict": "RED",
+ "ok": false,
+ "model": "assets\\gear\\wand_crystal.glb",
+ "carry_assumed": "staff",
+ "carry_note": "gear.gd has NO entry for this model - the carry is borrowed from the staff basis and is NOT a read of the engine. If the game build wires a different held_rot these numbers describe a carry the game does not ship.",
+ "verts": 7935,
+ "reach": 0.9208,
+ "drop": 0.0002,
+ "clip": 938,
+ "ground": 0,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "views": {
+  "front": {
+   "moved": 2080,
+   "opaque": 93423,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  },
+  "side": {
+   "moved": 2040,
+   "opaque": 79783,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  },
+  "back": {
+   "moved": 853,
+   "opaque": 94228,
+   "wand_verts_outside_frame": 0,
+   "frame_outside": 0
+  }
+ },
+ "blanks": [],
+ "blind_views": [],
+ "frame_clipped": [],
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ }
+}

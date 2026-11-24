@@ -18015,11 +18015,60 @@ def almoner():
     # lean. seat() lifts each limb by its own first segment so the literal 0.09
     # at the ankle is honest and no raked leg floats.
     _open()
+    # PASS 6 CHANGE B - THE STAGGER, AND IT IS THE ONE THAT WAS ACTUALLY WRONG.
+    # A1/A2/A3 all carved the FOOT and the side view still read as a post on a
+    # base, because the foot is about forty pixels tall in this render and a
+    # couple at stream distance - it cannot carry the read whatever shape it
+    # is. The thing that makes the KayKit knight beside him read as a MAN in
+    # the same side view is that his legs are at two different depths. The
+    # almoner's were at the SAME depth, so in an ortho side view they
+    # superimpose exactly into one column and the feet into one slab, and that
+    # column standing on that slab is a monument. So: a 0.11 at-ease stagger,
+    # one foot set back and one forward. This is NOT the lean the docstring
+    # above rules out - his weight stays even and both hands stay on the
+    # mechanic; it is only the two legs refusing to hide behind each other.
     for s in (-1, 1):
-        limb(P, seat([(s * 0.19, 0.02, HIP), (s * 0.23, 0.00, HIP - 0.46),
-                      (s * 0.24, -0.03, 0.090)], 0.104),
+        dy = 0.055 if s > 0 else -0.055
+        limb(P, seat([(s * 0.19, 0.02 + dy, HIP), (s * 0.23, 0.00 + dy, HIP - 0.46),
+                      (s * 0.24, -0.03 + dy, 0.090)], 0.104),
              0.104, 0.082, 'body')
-        P.add(L.box(0.23, 0.38, 0.110), 'dark', loc=(s * 0.24, -0.06, 0.055))
+        # PASS 6 CHANGE A - THE FOOT GETS A TOE. The team lead's 03:58 note on
+        # `hero_side.png` said the lower body reads as one plinth-footed column.
+        # I opened the side render at 4x and the note is RIGHT and understates
+        # it: the old foot was ONE box, 0.38 deep and a uniform 0.110 tall with
+        # square corners, so in side view the two feet overlap into a flat slab
+        # that is symmetric front-to-back. A slab like that has NO FACING, and
+        # a vertical leg standing on it reads as a post on a base, not a man.
+        # So the foot is now a tall heel block that STEPS DOWN to a lower toe
+        # reaching forward (front is -Y in this builder's frame - the face
+        # panel is at -Y). The footprint is deliberately unchanged within a
+        # thousandth (-0.26..+0.125 against the old -0.25..+0.13) so this is a
+        # silhouette change and NOT a size change: the corridor span and the
+        # lid height cannot move on it, and if they do I have a bug.
+        # A's FIRST SHAPE WAS WRONG AND I LOOKED AT IT BEFORE BELIEVING IT.
+        # Heel-block-plus-toe-block gave two square steps with a notch between
+        # them and read as a STAIR, not a foot - better than the plinth (it had
+        # a facing at last) but still not a foot. The cue that actually says
+        # "foot" in a side view on these bodies is the ANKLE BREAK: something
+        # LONG AND FLAT on the floor with something TALLER standing at the back
+        # of it. So: one flat foot running forward, and a short riser at the
+        # heel for the leg to land in. Reach -0.225..+0.115 against the old
+        # slab's -0.25..+0.13 - inside it on both ends, so the corridor span
+        # and lid height still cannot move, and the fit ratio is the check.
+        # A2 WAS WORSE THAN A1 AND THE PICTURE IS WHY I KNOW. A flat foot with a
+        # heel RISER behind it put the riser 0.14 deep against a leg 0.164 wide
+        # - so the riser hid INSIDE the leg's own side-view width and nothing
+        # showed but a flat slab again. That is trap 5 in a new costume: the
+        # part existed, it was the right size, and it could not be SEEN from
+        # the one camera that judges it. A part narrower than the limb in front
+        # of it contributes nothing to a side silhouette, and I will check that
+        # before I add one again.
+        # A3, SHIPPED: A1's heel-and-toe, but the toe is LONGER and HALF THE
+        # HEIGHT so the break reads as a toe rather than as the second tread of
+        # a stair. Reach -0.245..+0.125, inside the old slab's -0.25..+0.13 on
+        # both ends: the footprint still cannot grow.
+        P.add(L.box(0.23, 0.20, 0.135), 'dark', loc=(s * 0.24, 0.025 + dy, 0.0675))
+        P.add(L.box(0.21, 0.20, 0.055), 'dark', loc=(s * 0.24, -0.145 + dy, 0.0275))
     P.raw(aim(L.cone(0.300, 0.250, 0.600, 12), (0.0, 0.01, HIP),
               (0.0, 0.02, 1.0)), 'body')
     P.add(L.box(0.500, 0.290, 0.080), 'dark', loc=(0.0, 0.00, HIP + 0.09))

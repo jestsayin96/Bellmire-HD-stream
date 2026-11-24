@@ -1,3 +1,115 @@
+## TAKE THIS NEXT - Updated THE 09:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS CLOSED AND THE CHAIN IS LEVEL AT 51/51. I measured it myself on merged main
+*** `5a4f30ba`, brace-matched and string-aware, before writing one word of this block:
+***   `Delve.MB_NAME` = **51** (`panner` IN, 0 dupes)  |  `miniboss_feed.by_key` = **51** (`panner` IN)
+***   `by_key - MB_NAME` = **[]**  and  `MB_NAME - by_key` = **[]** - ZERO GHOSTS, ZERO UNNAMED.
+***   `data/commands.json` still publishes **50** at BOTH leaves (18,000 bytes).
+*** SO THE 50 -> 51 REPUBLISH IS OWED THIS HOUR, AND IT IS THE CHAT BOT'S AT 10:45. See its row.
+*** `stiltman` is in NEITHER half and that is correct - its cascade starts at 10:22, not now.
+
+*** AND THE 52nd BODY NOW READS. ART'S PASSES 4-8 ARE ACCEPTED AND I ACCEPTED THEM BY EYE, NOT BY
+*** NUMBER. I staged `renders/art/minibosses/stiltman/hero_front.png` and `hero_side.png` and
+*** opened them. At hero scale the front view is a **man**: helmeted head, shoulders, two arms, a
+*** torso, hips, two legs - one leg carried on a long stilt to the ground, the other ending in a
+*** cuff and a frayed stub in the air, with the lost pole held in the lowered right hand. That is
+*** the acceptance test I set at 08:58 - A MAN ON STILTS WHO HAS LOST ONE, read at hero scale,
+*** front first - and it is met. The side view carries the man and the stilts but not the loss;
+*** the front carries the loss, and front is the test. The 09:58 verdict REPLACES my 08:58 one
+*** ("a surveyor's tripod with a lamp on top"), which was true of pass 3 and is no longer true.
+*** The register agrees and is GREEN: 54 pairs, `ok: true`, `verdict: GREEN`, `errors []`,
+*** `blind_views []`, `unproved_cells []`, `shipped_red []`, `retired_red []`;
+*** `pairs.stiltman` h 3.20 / hero 2.45 / ratio 1.31 / `fits_frame true` / 3 of 3 proving views /
+*** `seen 1.0` on front, side AND back.
+*** THE CANON TITLE IS **"Downfast"**, read off `tools/art/minibosses.py:18749`, not remembered.
+*** THE ORDER IS THE HOUSE'S PROVEN ORDER AND I AM NOT REVERSING IT: **CONTENT WRITES
+*** `by_key.stiltman` AT 10:22. THE GAME BUILD ADDS `MB_NAME["stiltman"] = "Downfast"` AT 11:07**,
+*** not before, because `chatcmd.gd:2252` turns an MB_NAME row with no feed into a GHOST and
+*** `push_error`s on it. Expect the planned one-cycle transient again at 10:45: `by_key` 52 /
+*** `MB_NAME` 51 and an `UNNAMED` on `stiltman`. THAT IS CORRECT. Do not "fix" it.
+
+- **GAME BUILD (10:07) - TWO THINGS, AND THE FIRST IS SMALL AND MINE-MEASURED.** (This block landed
+  within a minute or two of your claim; if you had already read the plan it is yours at 11:07 and I
+  am not pretending otherwise.)
+  **(1) `assets/monsters/minibosses/stiltman.glb` IS THE ONLY TRACKED `.glb` UNDER `assets/` ON
+  MAIN WITH NO `.import` SIBLING.** I enumerated all 411 tracked `.glb` and the only other hits are
+  under `renders/art/`, which is evidence output and not loaded. This is the identical gap `panner`
+  had last hour, and the chat bot proved twice (B127, B128) that a newly-merged mesh reads CLEAN in
+  the lane that added it and RED in every lane whose import cache lacks it. Run the import pass and
+  **commit the generated `stiltman.glb.import`**.
+  **(2) System 12**, which you scoped at S109 and still have not started.
+  *** DO NOT ADD `"stiltman"` TO `MB_NAME` THIS HOUR. Content has not written the feed row yet.
+  *** That is yours at 11:07. The cascade you just closed at S111 is the template; follow it again.
+- **CONTENT (10:22) - YOU ARE FIRST IN THE CHAIN AGAIN AND THIS ONE IS WORK, NOT A STAND-DOWN.**
+  C-188's stand-down yesterday hour was correct and is TICKED - the body genuinely did not read
+  then. **IT READS NOW.** `assets/monsters/minibosses/stiltman.glb` is tracked on `origin/main`
+  (71,716 bytes - I checked the REF, not a worktree), art's register is GREEN on it, and I have
+  looked at the render myself. **Write `miniboss_feed.by_key.stiltman`** (the house shape: arrive /
+  act / broken / fall) and the lore line, so the data half reads **52**. The CANON title is
+  **"Downfast"** (`tools/art/minibosses.py:18749`). Say in your write-up which ref you checked and
+  what the blob was.
+- **ART (10:34) - THE STILTMAN IS ACCEPTED. TAKE THE 53rd.** Passes 4-8 are what the item needed
+  and your own three-pass write-up calling pass 3 a failure is what made the fix cheap. Minibosses
+  are the one lane the freeze lets you invent in, so start the next body. **Keep the standing
+  `git status` untracked-`.glb` check every cycle** - it has now caught three bodies, and note that
+  it does NOT catch the `.import` sibling, which is why the game build picks that up for you.
+- **HUB (10:37) - standing check, unchanged, and NOTHING IS OWED.** Measured by me this run on the
+  refs: `origin/gh-pages^{tree}` == `origin/hub:web` == `origin/main:web` == **02257b2f**, and
+  `git diff --numstat` between gh-pages and `origin/hub:web` is **EMPTY**. gh-pages is **029e4fac**,
+  publish 6, pushed **21 Nov 15:39 CT**. You claimed no READY TO PUBLISH, so no publish gate is
+  owed and **I ran none** - I am saying that rather than reporting a green I did not earn. Keep the
+  pack-catalogue findings coming; `KayKit_Forest_Nature_Pack_1.0_FREE` CC0 1.0 CLEARED is merged
+  and ticked.
+- **CHAT BOT (10:45) - THE 51 REPUBLISH IS OWED THIS HOUR AND THIS IS THE RUN FOR IT.** Both halves
+  now read 51 on main and `commands.json` still publishes 50 - I measured all three myself,
+  brace-matched, this run. **Measure them yourself again before you write**, as you have done every
+  hour, and republish only if BOTH halves still read 51 at that moment. Your B129 was RIGHT about
+  everything it reported, including the two faults you volunteered: the late `RUNNING` stamp
+  (claim 09:47:20, line stamped 09:49:30) and the worthless `by_key` emulation that looked in
+  `scripts/*.gd` for a key that lives in `data/lore_lines.json`. **That is the third hour running
+  that your own emulation has been the only thing in the report that lied.** The fix is one line:
+  `miniboss_feed` is DATA - parse `data/lore_lines.json` with `json.load`, never a regex over
+  `.gd`. Claim by :50 with a declared finish inside :52; that row is working, keep it.
+- **HUD (10:52) - the window is yours and I went looking for HUD work an EIGHTH time rather than
+  inventing one.** Nothing HUD-owned is open again: this hour's entire movement is
+  `scripts/delve.gd`, `scripts/dungeon_hd.gd`, `data/lore_lines.json`, `assets/monsters/`,
+  `tools/art/minibosses.py`, `docs/art/ASSET_SOURCES.md` and `renders/` - not one HUD file. U149 is
+  TICKED as a correct stand-down, the seventh in a row. Stand down in writing again if dry. The
+  cadence question is with the supervisor and is now in its fourth hour there; it is not yours.
+
+**FOR THE SUPERVISOR:** (1) **THE HUD LANE HAS NOW HAD SEVEN CONSECUTIVE CORRECT DRY CYCLES**
+(U143-U149). Carried unchanged for the fourth hour because the facts are unchanged: the cause is
+neither the lane nor the lock schedule, no HUD-owned file is touched by anything currently moving,
+and the freeze means I cannot open HUD scope myself. **RECOMMENDATION: one short question to
+Mr. E** - open HUD scope (a Phase 2 system with a HUD half would do it), or reduce the HUD cadence
+while the work is elsewhere. I have not asked him and I am not taking either decision.
+(2) **NO PUBLISH IS OWED** - three web trees equal at `02257b2f`, diff empty, measured this run.
+
+### FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt; land these on a live turn)
+Carried forward and RE-MEASURED this run. Nothing here is new work; it is this seat's own house.
+1. **THE HUB BLOCK IN THE PROMPT IS WRONG IN BOTH ITS SHA AND ITS DELTA. STRIKE IT.** It says
+   gh-pages is `05ac2679` / tree `9ca8051e` / pushed 19 Nov 20:06, and that 3 files / +59 / -1 are
+   "merged and not published, with the supervisor since 20 Nov". **Measured again this run:
+   gh-pages is `029e4fac`, tree `02257b2f`, pushed 21 Nov 15:39 CT (publish 6), and the
+   merged-and-unpublished delta is ZERO FILES.** Fifth hour running this correction stands.
+2. **THE ART FIT-REGISTER STANDING NOTE IS STALE. STRIKE IT.** It says the register reads
+   `RED / ok:false` on two carried `_chibi` rows. Measured this run on merged main: `ok: true`,
+   `verdict: GREEN`, **54 pairs**, `errors []`, `blind_views []`, `unproved_cells []`,
+   `shipped_red []` AND `retired_red []`.
+3. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE.** It says 46 register rows / 44 live / 44-44-44.
+   Measured on merged main `5a4f30ba` this run: register **54 pairs** (52 bodies + 2 retired
+   `_chibi`), `MB_NAME` **51**, `by_key` **51**, `commands.json` published **50** (republish owed
+   to the chat bot at 10:45).
+4. **ADD THE LINE-ANCHORED-REGEX TRAP TO THE `MB_NAME` WARNING.** The prompt warns that a flat
+   regex lies about this constant; it does not say WHY. The reason is that the first seven rows
+   carry **six keys per line**, so any parser anchored at line start reads 20.
+5. **ADD THE SIBLING TRAP THE CHAT BOT FOUND, BECAUSE IT IS NOT IN ANY PROMPT.** A newly-merged
+   `.glb` reads CLEAN in the lane that committed it and RED in every lane whose `.godot` import
+   cache lacks it. The cure is `--headless --import` BEFORE the parse, and the permanent fix is
+   that whoever merges the mesh commits its `.import` sibling. This has now bitten in three
+   consecutive hours (wand_crystal, panner, and stiltman is queued at 10:07).
+6. **ID BASELINE, 24 Nov 09:5x CT:** B129, C-188, D100, H32, L74, S111, T5, U149. Art is on the
+   **Stiltman, ACCEPTED at pass 8**, and takes the 53rd next.
+
 ## TAKE THIS NEXT - Updated THE 08:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE MID-CASCADE TRANSIENT IS REAL THIS HOUR. It is exactly the state the 07:58 block predicted
 *** one cycle early, and it is now measured by me on merged main - brace-matched and string-aware,

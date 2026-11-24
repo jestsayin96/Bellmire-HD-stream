@@ -209,3 +209,76 @@ passes through a gap instead of notching a closed ring, and an interrupted lip
 is a pan with a feed gap rather than the porthole fault 5 records. One change,
 one object, and it is the object the mechanic is counted on, so it gets its own
 pass and its own A/B - not a hurried one at the end of this hour.
+
+## PASS 5, 24 NOV 08:3x-08:4x CT - THE RING IS BROKEN AND FAULTS 3 AND 5 ARE CLOSED
+
+The 07:34 addendum above ended with a prescription and no change. This pass is
+that change, and nothing else: **one object, the lip ring.**
+
+**WHAT CHANGED.** `minibosses.panner()` no longer sweeps the lip as a closed
+29-point loop. It samples 57 points, asks of each whether it falls behind the
+HOPPER CONE in FRONT projection - the hopper's own silhouette, `x 0.120 +/-
+r(z)` over `z 1.570..1.900`, plus a clear margin of 0.085 - and sweeps only the
+complementary arc. The gap is DERIVED from the feed's geometry, not a
+hand-picked angle, so it stays correct if the hopper moves. 11 of 57 samples
+fall under the feed; the lip is an arc of the remaining 46.
+
+**IT GOES RED ON A SHAPE IT CANNOT REASON ABOUT.** The builder asserts the
+blocked samples form at most ONE contiguous run. One run is a feed gap; two
+would be a lip with two holes in it, which is a defect I would rather fail on
+than ship. `PAN_RING=closed` rebuilds pass 4's continuous loop so the A/B
+reproduces.
+
+**THE A/B, AND WHAT IT IS AND IS NOT.** `panner_p4ring/` (closed) against
+`panner_p5ring/` (broken), three views each, same rig, same light.
+
+| | A, pass 4 closed | B, pass 5 broken |
+|---|---|---|
+| pale pixels, front | 6,724 | 6,340 |
+| pale angular coverage about the mouth centre | 321 deg | 308 deg |
+| largest angular gap | 39 deg | 52 deg |
+| creature silhouette area, front | 38,514 px | 38,254 px |
+| creature bbox, front | 389,139 - 623,451 | **identical** |
+
+**THE NUMBERS CANNOT TELL A NOTCH FROM A GAP AND I AM NOT PRETENDING THEY CAN.**
+Both bodies show a gap in the pale ring at the top - in A because the hopper
+OCCLUDES the ring there, in B because the ring is not there. 39 deg against 52
+deg is the margin, nothing more. **The picture is what distinguishes them, and
+I opened it:** in A the pale annulus runs up to the hopper's dark edge and
+resumes on the other side, which is what reads as a notched ring; in B the
+lip's two cut ends stand clear of the feed on either side and the hopper comes
+down through open air. That is a pan with a feed gap, and the porthole read
+that fault 5 recorded is gone with it - the lip is no longer a closed circle.
+
+**TWO HONEST QUALIFICATIONS ON THE A/B ITSELF.**
+1. **IT IS NOT A SINGLE-OBJECT ISOLATION.** 6,371 front pixels changed on the
+   HERO's side of the frame as well. That is not geometry: `minibossfit` solves
+   the hero's horizontal placement from the measured bounds of the PAIR, the
+   creature's bounds moved by a few hundred pixels of rim, so the hero was
+   re-placed. The creature's own bounding box is byte-for-byte the same, which
+   is how I know the creature did not move.
+2. **THE CREATURE-SIDE DIFF IS WIDER THAN THE GAP** - 12,740 px spread down
+   rows 120-459, where the removed arc is a few hundred. The rest is shading:
+   a proud pale tube was lighting the mouth's interior, and taking part of it
+   away re-solves the ambient occlusion across the whole bowl. Worth saying,
+   because "12,740 pixels moved" on its own would read as a bigger change than
+   this is.
+
+### THE FAULT LIST AFTER PASS 5 - TWO CLOSED, ONE STANDING, ONE NEW
+
+- **FAULT 3 - CLOSED.** The feed no longer crosses a closed pale ring; it
+  passes through a gap cut for it. The part blamed at pass 3 (the chute) was
+  never the offender and the correction stands.
+- **FAULT 5 - CLOSED.** The lip is an interrupted arc, not a continuous ring,
+  so the modern porthole shape is designed out rather than disguised.
+- **FAULT 4 - STANDS, UNCHANGED, AND I LOOKED AGAIN TO BE SURE.** The comfits
+  are still dark beads on a dark floor and still read as RIVETS - from the
+  front the mouth reads as a bolted drum face. Nothing in the frame says
+  sugar. This was predicted to be untouched by this pass and it is.
+- **FAULT 7, NEW, AND IT IS THE SIDE VIEW.** The two near legs eclipse the two
+  far legs along X, so in the side view the frame reads as a SINGLE post and
+  the body reads as a standing mirror or a dish on a stand rather than a
+  machine on four legs. This is pre-existing - it is the same in the pass-4
+  render, I did not introduce it - and it is the same family as the man's
+  pass-3 eclipse: a part separated only in the axis that camera throws away.
+  Recorded, not fixed this pass.

@@ -652,3 +652,13 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Grepped the text-like files (`.obj`, `.mtl`, `.dae`) for licence, copyright, creative commons, CC0, public domain and all-rights wording: no hits. The `.mtl` names `dragon.png` as its only texture and carries no terms. The one raw grep hit was in `dragon_black.png`, an empty XMP `plus:CopyrightOwner` template field, which is binary noise and not a licence.
 - The folder name carries no licence claim, so none is inferred from it.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.
+
+
+## PACK CATALOGUE - dungeon_collection_2 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dungeon_collection_2 (folder `_packs\dungeon_collection_2\`, subfolder `Dungeon Set 2\`; sibling `dungeon_collection_2.zip` 269 KB, 180 entries, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder tree or in the zip listing. A grep of every file for licence, copyright, creative commons, CC0, CC-BY, public domain, all rights, terms of use, free to use and attribution returned no hits. | 180 on disk, all in `Dungeon Set 2\`: 90 `.obj` + 90 `.mtl` (dungeon props, walls, floors, traps, doors, pillars and steps; materials Dark_Grey, Grey, Iron, Steel, Wood, Dark_Wood, Red_Wood). No texture images. The `.obj` and `.mtl` headers carry no author or tool comment. | Not established | Not established |
+
+- Checked: walked every file under `_packs\dungeon_collection_2\` (180 files, counted by type), listed the 180 entries inside `dungeon_collection_2.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all 180 text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.

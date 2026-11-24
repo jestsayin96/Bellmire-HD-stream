@@ -620,3 +620,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Content note: nature set (rocks, tree stumps, wood logs, wheat, and many willow variants in plain, autumn, snow, and dead forms). Recorded so a later reader can find it by contents.
 - Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ultimate_nature_pack_by_quaternius`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Bestiary_Dungeon_Monsters_Kit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Bestiary_Dungeon_Monsters_Kit (the pack is titled "Bestiary - Dungeon Monsters Kit [Standard]", the FREE version; folder `_packs\Bestiary_Dungeon_Monsters_Kit\Bestiary - Dungeon Monsters Kit[Standard]\`) | Quaternius (patreon.com/quaternius) | **Quaternius Asset License (QAL) v1.0** (quaternius.com/license.html, "Last updated: 8/28/2026") | `Bestiary - Dungeon Monsters Kit[Standard]\License_Standard.txt` (read in full off disk this run) | 22 on disk: 2 `.fbx` (Exports\FBX (Unity)\), 2 `.glb` (Exports\GLB (Godot-Unreal)\), 2 preview `.png` (Importing_Godot.png, Importing_UnrealUnity.png), 13 texture `.png` (Textures\, plus Textures\Unreal Normals\ x2), `Preview.jpg`, `License_Standard.txt` | permitted: Section 2 grants use, modification and commercial exploitation of a Product with no fee, royalty or credit | not required (QAL s.2: "No attribution is required"); credit kept (Quaternius, "Models by @Quaternius") |
+
+- Checked: every file under `_packs\Bestiary_Dungeon_Monsters_Kit\` by walking the tree (22 files), and `License_Standard.txt` read in full off disk. The file states, verbatim: "License: Quaternius Asset License (QAL) v1.0 ... You can use these assets, free of charge, in personal, educational, and commercial games and other projects, with no credit required. You just can't resell or redistribute the assets themselves as assets."
+- Restriction that binds us: QAL s.3(a) forbids redistributing the Assets as a standalone asset, asset pack, or similar product. Shipping the monsters inside a game is allowed; re-exporting an Imp or Puglin file as a loose asset is not. This is the same line already recorded for the Imp/Puglin/broodglut rows above.
+- Scope note: this is the FREE Standard edition (its own licence file says it holds only part of the models). The SOURCE edition is not in `_packs\` and is not covered by this row.
+- Status: **CLEARED for use (QAL v1.0).** Licence gate satisfied for `Bestiary_Dungeon_Monsters_Kit`. Commercial use permitted; no attribution required. Nothing is redistributed AS an asset.

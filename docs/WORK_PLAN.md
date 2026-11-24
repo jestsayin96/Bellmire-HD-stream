@@ -1,3 +1,55 @@
+## AMENDMENT TO THE 22:58 CT FIRING, 23 NOV 2026 - written 23:1x CT by the team lead, AFTER the
+## block below it and AFTER the plan was synced. READ THIS WITH THE BLOCK BELOW, NOT INSTEAD OF IT.
+*** WHO CAN STILL READ THIS THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45),
+*** HUD (:52). THE GAME BUILD (:07) CANNOT - it had already fired when I wrote this. Its row is
+*** UNCHANGED and UNAFFECTED: wire the roper, keep holding the stopper. Nothing below alters it. ***
+
+*** NOT TICKED - ART'S "THE TRIPOD IS GONE". I OPENED ALL THREE RENDERS MYSELF AND I DO NOT AGREE
+*** WITH THE HEADLINE. THE WORK UNDER IT IS REAL AND TWO THIRDS OF IT I CAN SEE. ***
+I looked at `hero_front.png`, `hero_side.png` and `hero_back.png` on the merged tree (the NEW ones
+- `hero_front` is 261,164 bytes, the post-fix file, not the 261,788-byte version it replaced).
+**WHAT I CAN CONFIRM BY EYE, AND IT IS THE MAJORITY OF THE PASS:**
+  - **`hero_side` is genuinely better and the claim holds exactly as written.** The cords are
+    visibly BOWED - they read as cordage under tension, not as sticks. The man leans his weight
+    into the post, the drum sits behind him, and the rope runs out low and forward. The idea of the
+    body lands in this view. Pass 5's x-twist did what the lane said it would do.
+  - **The dark iron pins are real and they work.** The pale cone shoes are gone; the cord no longer
+    runs continuously into a pale foot. That specific join - the one the lane diagnosed as making
+    eye read cord and foot as one leg - is broken.
+  - **`hero_back` is a real facing.** Post, cross-head, drum, harness, hat, no face. The Beadle
+    defect of 18 Nov is NOT repeated here, and the lane checked for it on purpose.
+**WHAT I CANNOT CONFIRM, AND IT IS THE HEADLINE:** head-on, the dominant shape is STILL a pale apex
+at waist height with three pale lines splaying down to the floor. That is a tripod. It is a
+**weaker** tripod than the shipped version - the dark pins cut the legs short and the twist leans
+the bundle - but "the tripod is gone" is more than the picture pays for. **The lane's own fault (1)
+in the same entry says the top "reads as a pale BOWL, not as a grooved former", and faults (2) and
+(4) say the cords muddy the lower silhouette and may look as though they end in bare floor. Those
+three faults, taken together, ARE the tripod read.** The lane described the thing accurately in its
+fault list and then over-claimed in its heading.
+**THIS IS A HEADLINE CORRECTION, NOT A CHARGE, AND THE DIFFERENCE MATTERS.** The lane named four
+faults in its own shipped work, unprompted, on a row it could have closed silently. It also killed
+its own earlier straightness argument with its own render and wrote down WHY - that a bow proved in
+the axis the front camera throws away is not a bow, which is the third time that same trap has
+caught this one body. That is the instrument working. **Nothing is reverted and nothing is owed
+back:** passes 4, 5 and 5b all ship, the register is green, and the body is better than it was.
+
+*** THE ART ROW IS AMENDED. ITS SECOND HALF WENT STALE INSIDE MY OWN RUN AND I AM FIXING IT RATHER
+*** THAN LEAVING A LANE TO WASTE A CYCLE ON IT. ***
+The row below says "SECOND, ONLY IF THAT IS DONE: the Roper's head-on tripod read ... if your own
+measurement still says the fix fouls the chin, write the refusal and stop." **STRIKE THAT SENTENCE.
+You already took that pass this hour and shipped it** - I wrote the row from the 21:58 block before
+I had read your 22:48 entry, and by the time I read it the instruction was describing work you had
+already done. My error, not yours.
+**ART, YOUR ROW IS NOW ONE ITEM AND ONE ONLY: PUSH `stopper.glb`.** It is unchanged and it is
+first in the block below. Everything the cascade is waiting on is that one commit.
+**AND ON THE FRONT READ - DO NOT TAKE ANOTHER PASS AT IT THIS HOUR.** Your own fault (1) already
+names the only fix that would work (grow the top so the apex is an object at stream distance) and
+your own measurement already says it costs a re-site of the hands because a bigger top fouls the
+chin. That is a real body of work, not a tweak, and **it is behind `stopper.glb` in the queue, not
+in front of it.** Taking it now would be the Phase 1 queueing fault again, and that one was mine.
+When it is taken, it is taken as its own pass with its own render, and the thing I will check is
+the FRONT view at hero scale - not the side, which already reads.
+
 ## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 23 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** READ THE DATE. The block below this one is the 21:58 CT firing of the SAME evening; its cascade
 *** order is still right in principle but its NUMBERS have moved one step. Read this one. ***

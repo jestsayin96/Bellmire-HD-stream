@@ -870,6 +870,23 @@
    ],
    "man_span_empty": false
   },
+  "straker": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "hammer",
+    "head",
+    "legs",
+    "strakes",
+    "trunk",
+    "wheel"
+   ],
+   "has_man_span": false,
+   "items": 36,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "strickler": {
    "in_register": true,
    "in_builders": true,
@@ -980,12 +997,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T13:51:29-0600",
+ "measured_at": "2026-11-24T16:00:15-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795549889.1653771,
- "register_mtime_epoch": 1795549826.3814914,
- "register_mtime": "2026-11-24T13:50:26-0600",
- "register_pairs": 56,
+ "measured_at_epoch": 1795557615.0632236,
+ "register_mtime_epoch": 1795557497.6463342,
+ "register_mtime": "2026-11-24T15:58:17-0600",
+ "register_pairs": 57,
  "measurable": [
   "almoner",
   "beadle",
@@ -1044,6 +1061,7 @@
   "sower",
   "stiltman",
   "stoker",
+  "straker",
   "tallyman",
   "tallyman_chibi",
   "tanner"

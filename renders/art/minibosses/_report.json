@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "f0a3774a5033272c1b260a2bdaa20c13072fd10d",
+   "head": "6112bd419f1dc52f3c8ef88560d98f49ff131ebf",
    "ref": "origin/main",
-   "ref_commit": "6ac00079ff3245228eee008019ad9465215eb8d9",
+   "ref_commit": "0b61ad647792063a2d450b61a04eee1c978a578a",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -2809,7 +2809,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 7.852,
+   "corridor_margin_m": 7.85,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.04,
    "read_from": {
@@ -2835,13 +2835,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "almoner": {
+   "title": "Dolehand",
+   "theme": "shrine",
+   "idea": "IT DEALS YOUR KIT OUT AGAIN - it does not wound anybody, it takes nothing out of the room and it does not touch the floor. It holds the dole dish out and every delver puts in, and then it gives back - to the wrong hand. While it stands, each hero swings on ANOTHER hero's weapon dice: the knight is working a healer's staff, the rogue is hauling a greatsword it cannot lift. The party's total is UNCHANGED, which is the whole point - nothing is weaker, everything is in the wrong place, and the order you drilled is useless until the dish goes down. THE THING TO READ IS THE PAIR IT CARRIES: a dish held out with three pieces of kit lying in it, and a sack at its hip with two more already dealt back out of the mouth. In and out, on one body.",
+   "wear": 0.35,
+   "feed_line": "Something ahead is holding a dish out.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 927,
+   "size": [
+    2.59,
+    1.24,
+    2.52
+   ],
+   "footprint_span": 2.59,
+   "height_m": 2.52,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.406,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.98,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9117167053087007,
+    "ortho": 3.0747833251953125,
+    "clip": [
+     7.321665287017822,
+     19.58642578125
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 6ac00079ff3245228eee008019ad9465215eb8d9 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 0b61ad647792063a2d450b61a04eee1c978a578a sha bc3a603f",
  "blank_check": {
-  "files": 147,
+  "files": 150,
   "failures": []
  }
 }

@@ -18088,7 +18088,21 @@ def almoner():
     # what it is FOR (Mr. E's first rule), and a shallow tray tipped toward the
     # camera shows its inside where a deep pan cannot.
     # The tilt, the carry point, the arm and the kit's angles are UNTOUCHED.
-    _dish(_at(L.box(0.920, 0.440, 0.034), (0.0, 0.0, 0.017)), 'dark')
+    # *** PASS 5, CHANGE B - THE TEAM LEAD'S FAULT, NOT ONE OF MY SEVEN. ***
+    # At hero scale the tray was the BRIGHTEST-CONTRAST OBJECT IN THE
+    # SILHOUETTE: a near-black slab (dark = 0.068) against a white plate, so
+    # the eye landed on the box and not on the man carrying it or the kit in
+    # it. And its interior was the same 0.068 as the sword's grip and the axe's
+    # haft lying on it, so half of every piece of kit was dark-on-dark and
+    # could not be seen at all. ONE CHANGE ANSWERS BOTH: the FLOOR - and only
+    # the floor - leaves `dark` for `body` (0.355), the undyed wool mid-tone
+    # already on the model. No fifth material: the four-mesh cap holds.
+    # The rails, the end lips and the cleat stay `dark`, so the oblong still
+    # has a dark rim and still cannot be a shield; what changes is that the
+    # tray now has a VISIBLE INSIDE, which is the one thing a shield face can
+    # never have. MEASURED SEPARATELY: arm `p5b` (this alone, kit untouched).
+    _dish(_at(L.box(0.920, 0.440, 0.034), (0.0, 0.0, 0.017)),
+          'dark' if os.environ.get("ALM_P5B") == "0" else 'body')
     for _e in (-1, 1):
         _dish(_at(L.box(0.034, 0.440, 0.100), (_e * 0.443, 0.0, 0.067)), 'dark')
         _dish(_at(L.box(0.920, 0.030, 0.070), (0.0, _e * 0.205, 0.052)), 'dark')
@@ -18132,20 +18146,92 @@ def almoner():
     # sword nearly in the tray's own plane - a direction chosen in the frame
     # the camera does not use is the same mistake as a clearance proved in the
     # axis the camera throws away.
-    _dish(aim(L.cone(0.030, 0.011, 0.620, 4), (0.220, -0.060, 0.040),
-              (0.250, 0.278, 0.925)), 'bone')                     # blade
-    _dish(aim(L.cone(0.021, 0.019, 0.100, 8), (0.220, -0.060, 0.040),
-              (0.250, 0.278, 0.925)), 'dark')                     # grip
-    _dish(aim(L.cone(0.019, 0.019, 0.150, 6), (0.248, -0.029, 0.143),
-              (0.955, -0.295, 0.000)), 'bone')                    # the bar
-    _dish(aim(L.cone(0.023, 0.020, 0.560, 9), (-0.260, 0.000, 0.040),
-              (-0.300, 0.506, 0.811)), 'dark')                    # axe haft
-    _dish(aim(L.cone(0.110, 0.050, 0.095, 5), (-0.428, 0.283, 0.494),
-              (0.600, 0.330, 0.730)), 'bone')                     # axe head
-    _dish(_at(L.sphere(0.084, 0.084, 0.100, 12, 8), (-0.020, -0.100, 0.130)),
-          'bone')                                                 # flask
-    _dish(aim(L.cone(0.030, 0.024, 0.115, 9), (-0.020, -0.100, 0.215),
-              (0.0, 0.616, 0.788)), 'dark')                       # its neck
+    # *** PASS 5, CHANGE A - MY OWN FAULT 1, AND IT IS A SUBTRACTION. ***
+    # Three pieces read as litter in a dark box; only the axe had a shape. The
+    # sack's TWO dealt handles read better than the tray's THREE, which is the
+    # wrong way round because the tray is the headline. So the tray drops to
+    # two pieces and both grow. THE FLASK IS THE ONE THAT GOES: it was a
+    # sphere, the only piece with no edge and no haft, and a ball in a tray is
+    # the least like a weapon of the three - exactly the thing that made the
+    # heap read as litter. Two is also the count already proven legible on
+    # this same body, at the sack. MEASURED SEPARATELY: arm `p5a`.
+    #
+    # THE SCALE CHANGE IS DERIVED, NOT DIALLED. The two dealt handles at the
+    # sack are 0.030/0.026 limbs ~0.26 m long and they read; the tray's blade
+    # was 0.030 wide and 0.620 long at a camera distance where the tray's own
+    # 0.920 rail is the local unit. Freeing the flask's floor area lets each
+    # survivor take ~1.7x the width it had and stay inside the 0.920 x 0.440
+    # tray: blade 0.030 -> 0.052, axe haft 0.023 -> 0.036, axe head 0.110 ->
+    # 0.175. Lengths follow so nothing turns into a stub: 0.620 -> 0.780 and
+    # 0.560 -> 0.700. The axe head's origin is RE-DERIVED off the longer haft
+    # rather than left where the short one ended - a head still sitting at
+    # 0.560 along a 0.700 haft is a head skewered on a spike, and that is the
+    # class of error that ships when a length changes and its dependents do
+    # not.
+    _P5A = os.environ.get("ALM_P5A") != "0"
+    _BL_R, _BL_L = (0.052, 0.780) if _P5A else (0.030, 0.620)
+    _GR_R, _GR_L = (0.030, 0.150) if _P5A else (0.021, 0.100)
+    _AX_R, _AX_L = (0.036, 0.700) if _P5A else (0.023, 0.560)
+    _AH_R, _AH_L = (0.175, 0.150) if _P5A else (0.110, 0.095)
+    _BAR_R, _BAR_L = (0.028, 0.250) if _P5A else (0.019, 0.150)
+    # *** PASS 5, CHANGE C - MEASURED OFF THE p5a/p5b/shipped ZOOM, NOT GUESSED.
+    # `_almoner_p5_tray_ab.png` is the tray at 3x in all three arms, and it
+    # shows what neither arm alone did: change B lifts the DARK half of the kit
+    # (the axe haft and the sword grip now read along their whole length) and
+    # TAKES contrast off the PALE half, because the floor moved toward `bone`.
+    # And the pale half's real competitor is not the floor at all - it is HIS
+    # OWN FOREARM, which enters the tray from +X and is the largest bright mass
+    # inside the tray outline (my pass-4 fault 2, which change B made worse by
+    # closing the value gap between arm, floor and blade).
+    # So the two pieces were made to TRADE ENDS: the pale-headed sword to the
+    # -X end in open floor, the dark-hafted axe to the +X end where the arm is,
+    # by mirroring each piece's x origin and its aim's x component and nothing
+    # else. ONE VARIABLE: which end each piece is on.
+    #
+    # *** AND I RENDERED IT AND IT IS REFUSED. THE PICTURE SAID NO. ***
+    # It bought exactly what it was predicted to buy and spent more than that
+    # elsewhere. The sword at the -X end is the best this sword has ever read -
+    # a whole pale blade, a crossguard, no competition. But the axe, mirrored
+    # to +X, swings its PALE HEAD up across the man's own hood and face panel:
+    # at hero scale it reads as an axe struck into his head, and it puts a
+    # second bright mass next to the one pale panel that carries this body's
+    # FACING. Trading a legible sword for a body that reads as wounded and
+    # loses its face is not a trade. The axe's arc, not the sword's position,
+    # is what rules the +X end, and that is the thing I did not ask before
+    # rendering: mirroring a long piece mirrors the END OF IT, not its origin.
+    # Kept behind an OFF-by-default flag so the evidence is reproducible
+    # (`ALM_P5C=1`) and so nobody re-derives this and ships it.
+    # Its render is in `renders/art/minibosses/almoner_p5c/`.
+    _P5C = os.environ.get("ALM_P5C") == "1"
+    _cx = -1.0 if _P5C else 1.0
+    _SWD = Vector((0.250 * _cx, 0.278, 0.925)).normalized()
+    _AXD = Vector((-0.300 * _cx, 0.506, 0.811)).normalized()
+    _SW0 = Vector((0.220 * _cx, -0.060, 0.040))
+    _AX0 = Vector((-0.260 * _cx, 0.000, 0.040))
+    _dish(aim(L.cone(_BL_R, _BL_R * 0.31, _BL_L, 4), tuple(_SW0),
+              tuple(_SWD)), 'bone')                               # blade
+    _dish(aim(L.cone(_GR_R, _GR_R * 0.90, _GR_L, 8), tuple(_SW0),
+              tuple(_SWD)), 'dark')                               # grip
+    # PASS 5, CHANGE A2, NAMED ON ITS OWN RATHER THAN FOLDED INTO THE SCALE:
+    # the bar was a cone grown from the grip top in ONE direction, so it stuck
+    # out of one side of the blade only and read as a spur, not a crossguard.
+    # A guard is symmetric about the blade. Its origin now steps back half its
+    # own length along its own aim, so it straddles the grip. This is a shape
+    # fix and would be worth making at the old size too.
+    _BARD = Vector((0.955 * _cx, -0.295, 0.000)).normalized()
+    _BAR0 = _SW0 + _SWD * _GR_L + Vector((0.0, 0.0, 0.011)) - _BARD * (_BAR_L * 0.5)
+    _dish(aim(L.cone(_BAR_R, _BAR_R, _BAR_L, 6), tuple(_BAR0),
+              tuple(_BARD)), 'bone')                              # the bar
+    _dish(aim(L.cone(_AX_R, _AX_R * 0.86, _AX_L, 9), tuple(_AX0),
+              tuple(_AXD)), 'dark')                               # axe haft
+    _dish(aim(L.cone(_AH_R, _AH_R * 0.45, _AH_L, 5),
+              tuple(_AX0 + _AXD * _AX_L), (0.600, 0.330, 0.730)),
+          'bone')                                                 # axe head
+    if not _P5A:
+        _dish(_at(L.sphere(0.084, 0.084, 0.100, 12, 8),
+                  (-0.020, -0.100, 0.130)), 'bone')               # flask
+        _dish(aim(L.cone(0.030, 0.024, 0.115, 9), (-0.020, -0.100, 0.215),
+                  (0.0, 0.616, 0.788)), 'dark')                   # its neck
     _close("kit")
 
     # ------------------------------ THE SACK: THE "GIVEN BACK" HALF, AT HIS HIP

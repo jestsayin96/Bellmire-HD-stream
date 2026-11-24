@@ -1,3 +1,170 @@
+## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS OPEN AT 54 ENGINE / 55 FEED / 54 PUBLISHED, AND IT IS ONE LINE FROM CLOSED.
+*** Measured by me on merged main `6ae10724`, brace-matched, string-aware, comments stripped BEFORE
+*** splitting, anchored on `const MB_NAME :=` - not taken from any lane's claim:
+***   `Delve.MB_NAME` = **54** keys, 0 duplicates, `iceman` IN, `straker` **OUT**.
+***   `miniboss_feed.by_key` = **55** keys, `straker` **IN**.
+***   `data/commands.json` publishes **54** at BOTH `miniboss` leaves (`.what` and `.short`).
+***   `by_key - MB_NAME` = **['straker']**. `MB_NAME - by_key` = **[]**. ONE unnamed body, zero ghosts.
+***   `MB_FIT` = 66 rows, `straker` IN at 0.98; `dungeon_hd.gd` wood row holds `straker`.
+*** SO: the 55th has a body, a fit row, a theme row, an `.import` and a feed name. The ONLY thing it
+*** lacks is its ENGINE name, and that is one line in `MB_NAME`. Game build row below.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **S117 TICKED (body-row half, and the name was correctly HELD).** `MB_FIT "straker": 0.98`
+***    copied not re-derived, `THEME_MINIBOSS_MORE` wood += straker, `straker.glb.import` made by
+***    `--headless --import`, `tools/_s117_straker.gd` with a wood sweep red-proof. Gates print
+***    verdict LINES: S117_STRAKER OK 7, S115_ICEMAN OK 10, S51_NAMES OK 176, S107_GATE OK 12,
+***    OFFFLOOR OK 0 of 2188, TOWNWALK in_solid 0/18267, DELVE_TEST OK 9001 frames. It held the name
+***    because `by_key.straker` was not on its tree - correct, and the third hour running this lane
+***    has held a name rather than make a gate lie.
+***  - **C-195 TICKED.** `miniboss_feed.by_key.straker` ("Everyhand"): I parsed the JSON myself,
+***    `by_key` 54 -> **55**, `straker` present, one new expected-zero-hit key `_note_c195`, and only
+***    `data/lore_lines.json` + `PROGRESS.md` touched. This is the row that unblocks the engine.
+***  - **B136 TICKED AS A CORRECT PAYMENT - AND IT WENT STALE 22 MINUTES BEFORE IT WAS WRITTEN,
+***    THROUGH NO FAULT OF ITS MEASUREMENT. READ THE CHAT BOT ROW: THE FIX IS MINE, NOT YOURS.**
+***    It published 53 -> 54 at BOTH leaves (18,000 bytes before and after, 8 top keys, order==32,
+***    every other leaf byte-identical, `armoury.cost` intact - I re-checked all of that), rewrote
+***    `docs/COMMANDS.md` with the REAL `tools/_commands_doc.gd`, and printed FIVE green verdict
+***    lines in 45 s including **L14_TEST OK 24 of 24**. Its own row says "the 55th is in NONE of the
+***    three halves, so published 54 is correct". That was TRUE OF ITS TREE and FALSE OF THE HOUSE:
+***    content pushed `by_key.straker` to `origin/content` at **16:24:03**, and the lane merged
+***    `origin/main 098f30d4` (16:07) at 16:46. It measured exactly what it said it measured. The
+***    defect is that **main only advances at my :58 merge, so the :45 lane can never see the same
+***    hour's :22 content work.** Fixed in the chat bot row below.
+***  - **U156 TICKED, AND IT IS A RED-PROOF WITH A CONTROL ARM - THE SHAPE THIS HOUSE WANTS.**
+***    SAME gate, two arms, both printing verdict lines, both logs COMMITTED this time:
+***    `U69_REDPROOF FAIL elements=26 arm=RED(injected, must FAIL) inflated_fails=2` and
+***    `U69_REDPROOF OK elements=26 arm=CONTROL(no injection, must be OK) inflated_fails=0`.
+***    Identical element count on both arms is what makes the FAIL attributable to the injection
+***    rather than to the HUD. I read the diff: `_control` comes off `OS.get_cmdline_user_args()` and
+***    gates ONLY the injection, not the audit, so the test can still go red.
+***  - **ART'S CENSUS FIX TICKED, AND I RE-MEASURED THE HEADLINE RATHER THAN READING IT.**
+***    `_selfseen_census.json` on main: 57 register pairs = **37 measurable / 19 not_measurable /
+***    1 no_man (`panner`) / 0 build_failed**, measured 16:45:35. That is exactly SIX bodies out of
+***    `not_measurable`, which was 25. Four of the six are the newest in the house (52nd-55th). The
+***    cause is right: a span-NAME match (`"man" in spans`) cannot see a decomposition authored under
+***    other names, and `not_measurable` is the SILENT list - a body that drops into it "leaves
+***    measurement wearing a green file". The fix is a BUILDER declaration (`P.man_parts`) resolved by
+***    ONE function, `minibosses.man_ranges(P)`, read by the census AND by `_backread`'s splitter, so
+***    instrument and coverage report cannot disagree. I grepped the two surviving `"man" in spans`
+***    hits and **both are prose in the docstring, not code** - the name match is gone from the live
+***    path. `_manparts_prove.py` 8 checks, 6 parts-bodies, 32 span-bodies, 0 control errors.
+***    It also caught three faults in its own work, one of them the exact fault the mechanism was
+***    written to abolish (`man_parts = ()` read as undeclared and routed into the silent list).
+***  - **THE HUB'S STANDING AUDIT TICKED, AND IT CORRECTLY DID NOT ASK TO PUBLISH.** I compared the
+***    trees myself: `origin/gh-pages^{tree}` = `c03fa129`, `origin/hub:web` = `d27fe17c`, delta is
+***    **NOTES.md +2 and nothing else** - the web/ CODE on `hub` is byte-identical to publish 7. The
+***    lane did NOT claim ready-to-publish, so **I ran no publish verification; none was owed.** The
+***    free greps on my merged tree: `innerHTML` at app.js:255 and :301 only, both page-owned
+***    strings; the only `.src`/`.href` writes are a Twitch-URL-whitelisted link and a
+***    whitelist-chosen constant path; CSP meta intact with `default-src 'none'`.
+***  - **THE PACK CATALOGUE ROW TICKED AS A THIRD CONSECUTIVE NEGATIVE RESULT.**
+***    `low-poly_RPG_item_collection_3`: walked 27 files, listed every zip entry without extracting,
+***    name-scanned and grepped `.obj` headers, ran `strings` over the `.blend` and `.3ds`. **NO
+***    LICENCE FILE FOUND. NOT CLEARED.** Nothing imported. Three packs gated on three consecutive
+***    hours is the hard rule working, not a dry lane - and the row explicitly refuses to treat the
+***    sibling pack as covering it.
+***
+*** WHAT I DELIBERATELY DID NOT TICK: **the 55th body `straker` is NOT nameable and NOT done.**
+*** `MB_NAME` has 54 keys and `straker` is not one of them, and the published half says 54 against a
+*** feed of 55. Two steps, in this order: engine name (game build), then republish (chat bot).
+***
+*** **A STALE FACT IN MY OWN PROMPT, CORRECTED HERE BECAUSE A FIRING CANNOT EDIT A PROMPT.**
+*** The prompt's standing note says the art fit register's top-level verdict "reads RED / ok:false
+*** for days on two carried `_chibi` rows". **THAT IS NO LONGER TRUE.** On main `6ae10724`
+*** `_fit_report.json` reads `"verdict": "GREEN"`, `"ok": true`, scope "every row in pairs (57),
+*** re-derived from stored measurements; 1 of them rendered this run". The register is 57 rows, not
+*** 46. Do not quote the old RED note. Logged in FOR THE NEXT TEAM LEAD below.
+
+- **GAME BUILD (17:07) - S118: NAME THE 55th. THE BLOCKER YOU HELD FOR IS GONE.**
+  `miniboss_feed.by_key.straker` is on main `6ae10724` - I parsed it myself, 55 keys, `straker`
+  present, "Everyhand". Your own S117 row wrote the close: one line `"straker": "Everyhand"` in
+  `MB_NAME`, `_s51_names.gd` and `_s107_gate.gd` 54 -> 55, and the hard arms in
+  `tools/_s117_straker.gd` (fed, drawn in wood, named Everyhand). Do not re-derive the fit or the
+  theme row - both are already on main and I verified them. When MB_NAME reads 55 the chat bot's
+  republish becomes payable the same hour, so this row is the whole cascade.
+  Your SECOND item is the **two genuinely-open bits of the L31 REMAINDER that your own S117 row
+  isolated**, and nothing more: (a) no DURATION on the hero status icon although `m["st"]` holds
+  seconds; (b) `delve.gd _give` computes `var was := has_st(m, name)` and never uses it, so no
+  on-apply line fires from there. Both are in your files. **The MONSTER half is CLOSED BY
+  DISPROOF** - you grepped the behaviour and found `monster.gd` carries no condition state at all,
+  only the enraged aura. That close counts fully; do not reopen it and do not add monster state to
+  satisfy the item.
+- **CONTENT (17:22) - C-196: FEED DEPTH, AND THE 55th'S ROW IS DONE.** C-195 is ticked and verified;
+  `by_key` is 55 and `straker` reads well. There is **no 56th body on disk**, so do not write a
+  `by_key` row for one - a feed row for a body that does not exist is the ghost half of the drift
+  the house just spent five hours closing. Take the C-194 shape instead: deepen the leaf lists that
+  are thinnest, set-compare every leaf against main in BOTH directions before you claim a count,
+  and report the arithmetic per leaf rather than a headline. Keep writing `_note_` keys; they are
+  expected zero-hit keys and no lane is to wire one.
+- **ART (17:34) - CLOSE THE REMAINING 19 `not_measurable` BODIES, THE WAY YOU CLOSED THE SIX.**
+  Your own census names them: `bellman cook drillmaster gaoler jointer loader porter quartermaster
+  rammer scrapwright sexton sluicekeeper snarer snuffer sower stoker tallyman` plus the two RETIRED
+  `_chibi` cells (`snuffer_chibi`, `tallyman_chibi`). **The two `_chibi` rows are retired - do not
+  spend a pass on them; say in one line that they are retired and leave them.** For the other 17 the
+  method is already built and proved: read each builder, declare `P.man_parts` IN THE BUILDER, let
+  `man_ranges` resolve it, and go RED rather than absent on a bad declaration. Do not guess a name
+  set - that is the unearned-number fault your own doc warns about. `panner` is `no_man` and is
+  CORRECT (no operator); leave it, and do not let the coverage rule turn the register red on it
+  again. You may invent a 56th miniboss instead if you judge the census pass is the longer job -
+  minibosses are this lane's one genuinely dry licence - but say which you chose and why.
+- **HUB (17:37) - STANDING AUDIT, AND THERE IS NOTHING TO PUBLISH.** `origin/hub:web` is
+  byte-identical to publish 7 in CODE; the only delta is `NOTES.md +2`. Do not claim
+  ready-to-publish for a notes-only delta, and do not re-run the hostile-name test on an unchanged
+  `web/` - you were right not to, twice. Your audit this hour was correct and is ticked. Next:
+  keep the licence gate exactly as you are running it. Three packs in three hours have been gated
+  for a missing licence and that is the rule working; a fourth negative result is a full delivery
+  and you say so plainly rather than reaching for something to import.
+- **CHAT BOT (17:45) - REPUBLISH 54 -> 55, AND **MEASURE THE HALVES OFF THE LANE REFS, NOT OFF
+  MAIN**. THIS IS MY FIX FOR A DEFECT THAT COST YOU THIS HOUR, NOT A CORRECTION OF YOUR WORK.**
+  B136 is ticked: the payment was right, the gates were green, the arithmetic was yours and it was
+  sound. It went stale anyway, because **main only advances when I merge at :58**, so at :45 you are
+  reading a tree that cannot contain the same hour's :22 content work or :07 engine work. From now
+  on, when you measure the three halves, read them where they are written:
+    - engine `MB_NAME` from **`origin/laptop:scripts/delve.gd`**
+    - feed `by_key` from **`origin/content:data/lore_lines.json`**
+    - published count from `data/commands.json` on your own merged HEAD
+  `git fetch origin --prune` first, and say in your row which SHA you read each half from. If the
+  two source halves AGREE, the publish is payable even when main is behind; if they disagree, name
+  the drift and publish nothing, exactly as B135 did. **This hour, if MB_NAME on `origin/laptop`
+  reads 55, pay the 54 -> 55 republish at BOTH leaves.** Claim by **:50** with a declared finish
+  inside **:52** so the HUD keeps its window - you have honoured that for nine hours now.
+- **HUD (17:52) - YOUR WINDOW, AND U69 IS CLOSED.** U156 is ticked: the two-arm red-proof is the
+  shape this house wants, and committing both logs answered the one thing I sent back at 15:58.
+  U62 is closed too (U155, the off-screen 4th scroller - **no lane is to "fix" the 4th scroller**).
+  Pick your next U item from your own open list and keep the two habits that earned these ticks:
+  print a verdict LINE on every arm, and when a gate cannot see what it audits, make it print
+  NO VERDICT and increment `_bad` rather than passing quietly. Claim at :52, cap claim+15, hard
+  release at :07, and split any capture that will not finish.
+
+**FOR THE SUPERVISOR:** Two things, neither urgent, neither mine.
+  1. **PUBLISH 7 LANDED AT 15:30:43 CT** (gh-pages `5ce35f33`, "fix 0-byte turbary_hood.webp +
+     zero-byte guard"). I verified the push: `origin/gh-pages^{tree}` `c03fa129`, and the web/ code
+     on `origin/hub` is byte-identical to it. **Nothing is owed on the hub right now** - the only
+     unpublished delta is `NOTES.md +2`, which is documentation and not worth a push. **My
+     recommendation: no publish this hour.** I have not run a publish gate and the lane did not ask
+     for one.
+  2. **A PROMPT CORRECTION IS OWED AND A FIRING CANNOT LAND IT** (see FOR THE NEXT TEAM LEAD). The
+     team lead prompt's standing note on the art fit register being RED is now false - the register
+     reads GREEN / ok:true over 57 rows. It is a stale measurement in my own charter, not a decision;
+     I am recording it rather than acting outside my seat.
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN:**
+  - TEAM LEAD prompt, "A STANDING NOTE ON THE ART FIT REGISTER": it says the top-level verdict reads
+    `RED / ok:false` on two carried `_chibi` rows. **Now GREEN / ok:true**, scope "every row in pairs
+    (57)". Replace the note; keep the instruction not to charge a given hour's art work with it.
+  - TEAM LEAD prompt, the hub publish block: it says gh-pages is `05ac2679` / 19 Nov 20:06 CT.
+    **Now `5ce35f33`, tree `c03fa129`, pushed 24 Nov 15:30:43 CT (publish 7).** The surrounding
+    instruction to re-measure both trees every hour rather than copy the SHAs stays as written.
+  - TEAM LEAD prompt, STEP 5 ID list: as of the 16:58 firing the live IDs are B136, C-195, D100,
+    H32, L74, S117, T5, U156, and the art fit register judges **57** rows (not 46). The prompt's
+    "fit register judges 46 rows, 44 live bodies" sentence is stale.
+  - CHAT BOT prompt: it should carry the measure-off-the-lane-refs rule now in the chat bot row
+    above, because main cannot contain the same hour's :22 and :07 work at :45. The row is in the
+    plan and the plan is what the lane obeys, so nothing is blocked - but the prompt is the right
+    home for it.
+
 ## TAKE THIS NEXT - Updated THE 15:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** CORRECTED AT 16:1x CT, INSIDE MY OWN RUN, AND THE ORIGINAL SENTENCE IS LEFT BELOW SO THE
 *** CHANGE IS TRACEABLE. I wrote "THE CASCADE IS CLOSED" at 16:0x. **IT REOPENED AT 16:03:29 CT**,

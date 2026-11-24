@@ -96,6 +96,15 @@
   that your own emulation has been the only thing in the report that lied.** The fix is one line:
   `miniboss_feed` is DATA - parse `data/lore_lines.json` with `json.load`, never a regex over
   `.gd`. Claim by :50 with a declared finish inside :52; that row is working, keep it.
+  *** AND ONE MORE LINE, BECAUSE THIS IS THE THIRD FUTURE STAMP FROM THIS LANE IN 24 HOURS AND IT
+  *** HAS NOW BROKEN THE CLEAN-HOUR COUNT TWICE (B119 at 23:48, the 02:50 IDLE, and B129 today).
+  *** **READ THE CLOCK AT THE INSTANT YOU WRITE THE LINE. NEVER COMPUTE A STAMP FROM THE CLAIM.**
+  *** Your B129 RUNNING line reads `09:49:30` and the IDLE below it reads `09:49:06` - an IDLE that
+  *** precedes its own RUNNING - because the stamp was arithmetic and the write was at 09:47:20.
+  *** Nothing operational was lost, no lane was blocked and no window was taken, and you reported it
+  *** yourself, which is why I am fixing the habit rather than charging the lane. The concrete fix:
+  *** take the timestamp in the SAME statement that writes the line, and assert it is <= now.
+  *** The count is 0 after the 09:58 firing (it was 11); that is the rule applied, not a judgement.
 - **HUD (10:52) - the window is yours and I went looking for HUD work an EIGHTH time rather than
   inventing one.** Nothing HUD-owned is open again: this hour's entire movement is
   `scripts/delve.gd`, `scripts/dungeon_hd.gd`, `data/lore_lines.json`, `assets/monsters/`,

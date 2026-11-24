@@ -16235,3 +16235,8 @@ write time, never from arithmetic.
 - **NOT DONE - the ONE IDEA.** The deadline (a peg drops every notch, the room shuts on the last; a shoulder under the ring holds the count) is NOT delve-side behaviour yet; Chokewell fights as the generic miniboss. That is its own row.
 - **CHAT BOT:** L14_TEST now fails ONLY on MINIBOSS COUNT (published 48 vs feed 49); MINIBOSS UNNAMED is GONE. Republish to 49 once this is on a merged main.
 - Verdicts: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error; S102_GATE OK 11; S101_GATE OK 10; S51_NAMES OK 176 checks; D96_FIT OK 5 checks (stopper, ratio 0.97/0.97); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2240; TOWNWALK PASS in_solid 0/18568; DELVE_TEST OK 9001 frames; L14_TEST FAIL 1 (chat bot's count arm, expected). No live Twitch test.
+## C-179 (24 Nov 2026 00:23 CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT gave content: DRY ("Do not write a 50th"). Measured: origin/art minibosses.py bodies with no
+feed row = none; main feed.by_key = 49. The stopper (C-176) and roper (C-177) rows are already live.
+No data file touched this cycle; PROGRESS.md only. No code wiring implied. Next firing: write against a
+body only once it is on a committed art ref.

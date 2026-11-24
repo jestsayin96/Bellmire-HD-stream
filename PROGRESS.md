@@ -16525,5 +16525,106 @@ the stamp was wrong, and I appended a corrected IDLE at `02:49:53` naming the er
 editing the canonical lock. A future stamp is worse than a late one: it can make a window look
 free before it is. Read the clock, every time.
 
+## D-S106 (game build, 24 Nov 2026 03:08-03:2x CT) - THE TWO animal.gd TRAPS ARE FIXED; THE UAA IMPORT CARRIES TO 04:07 ON PURPOSE
+TAKE THIS NEXT (02:58 CT, team lead) GAME BUILD row: S106 - import the nine UAA species AND wire them in the SAME commit, or,
+"if the whole of it will not fit inside claim+25, import nothing this hour, do the two animal.gd trap fixes alone". It would not
+fit (nine conversions + --headless --import + per-kind scale + ANIMALS rows + pen renders inside 25 min), so I took the second
+branch. assets/animals/uaa/ does NOT exist - the dead-data audit's ZERO stays a zero.
+THE FIX (scripts/animal.gd:162-176, backup animal.gd.bak_s106, untracked):
+  (1) exact "Idle" now wins outright; otherwise the FIRST Idle-prefixed clip that does not contain "HitReact". The old line kept
+      the LAST one, which for every UAA file is Idle_HitReact2 - a flinch looped as the rest pose.
+  (2) `_run` takes exact "Run", else "Gallop" (UAA has no Run). "Run" still overrides if both exist.
+THE GATE (new, tools/_s106_clips.gd, verdict line S106_CLIPS OK/FAIL): instantiates an Animal for every model under
+assets/animals/, reads idle/walk/run after _ready, FAILs on any HitReact/Death pick or an EMPTY idle.
+MY FIRST DRAFT OF THAT GATE LIED: it read the picks inside _initialize and printed "OK 9" over nine empty strings. A vacuous
+pass. Fixed by reading on frame 3 and making an empty idle a FAIL; the line that passed on nothing is why that rule is in the file.
+RESULT: S106_CLIPS OK 9 models, 0 hit-react/death picks. Cow/Horse/Llama/Pig/Pug/Sheep idle=Idle walk=WalkSlow run=Run;
+Corgi/Duck/Red idle=walk=clip. Every shipped model has exactly one Idle-prefixed clip ("Idle"), so the old pick equals the new pick
+for all nine - THE FIX CHANGES NOTHING ON SCREEN TODAY and only bites when UAA lands. That is why there is no render this hour:
+there is no pixel to look at. The pen render is owed with the import at 04:07.
+GATES: parse rc=0, 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2334 samples off the floor (home) |
+TWITCH_PARSE OK (8 checks) | TOWNWALK in_solid=0/17015 (0.000%) raid_in_solid=0/6855 (0.000%) PASS, 0 SCRIPT ERROR |
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR | S106_CLIPS OK 9.
+NEXT (04:07): the UAA import + ANIMALS rows + pen render in ONE commit (S106 remainder), and almoner's bestiary.gd + MB_FIT rows
+as the 02:58 block queues them. No live Twitch test, 0 bits.
+Claim 2026-11-24T03:08:42-06:00, cap claim+25 = 03:33:42 (computed first), declared 03:30.
+## C-182 (24 Nov 2026 03:24 CST, content) - WROTE miniboss_feed.by_key.almoner (DOLEHAND, THE 50th); FEED 49 -> 50
+TAKE THIS NEXT (02:58 CT, team lead) CONTENT row: "WRITE by_key.almoner, AND IT IS THE FIRST LINK." almoner.glb is on merged main
+(115,792 B), so C-181's own rule is met. Canon name Dolehand, theme shrine, wear 0.35, from art's CANON tuple.
+Added arrive x9, act x7, broken x4, fall x8 (the roper/stopper shape). Lines say swing, trade and weight; none names a per-hero
+equipped item, since the engine keys weapon dice on h["class"] only. No {name} in arrive or fall. _note_c182 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 49 earlier by_key rows and every other top-level key are equal to before; VALIDATION OK.
+CODE WIRING (game build 04:07, then chat bot): Delve.MB_NAME almoner -> Dolehand; bestiary.gd almoner (static); MB_FIT almoner; then republish elite count 49 -> 50. feed 50 vs MB_NAME 49 is the expected gap.
 ### HUB lane - 24 Nov 2026 03:4x CT (standing check, no row beyond "hold steady")
 TAKE THIS NEXT gave HUB: "HOLD STEADY - nothing merged and unpublished; stand down or catalogue next _packs/ entry." Measured, not copied: `HEAD:web` == `origin/gh-pages^{tree}` == **02257b2f** (web/ diff vs origin/hub empty; no web/ byte changed, so no screenshot and no hostile-name rerun owed). Greps on app.js/index.html: innerHTML at exactly :255 and :301 (page-owned literals); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code; CSP meta present; `node --check app.js` ok. Merged origin/main into hub (clean, 55 commits). NOT claiming READY TO PUBLISH; no publish gate owed. Untracked `_hub_ready_shot.png` is an old look-shot, delete refused on this machine - named here, not re-raised.
+
+U143 STAND-DOWN 2026-11-24T03:54-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at 03:52:4x and again at 03:53:10-06:00 (decision time): last line chat bot B123 IDLE 03:51:48 (released inside its declared 03:52; its RUNNING 03:47:10/03:48:12 both closed), tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 02:58 CT 24 Nov team-lead block; HUD row says U142 ticked, sixth correct stand-down, rarity-hue row still struck (U55, ui_theme.gd:176), "stand down again, or audit a shipped U-item against its own committed capture". Standing down; no audit launched this hour (an audit needing a windowed render is not worth a claim with no owed run). Fast-forwarded hud-ui to origin c472094b (plan sync only) before writing.
+Next firing (04:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none.
+## B123 - L56 IS NOT A FORTY-MINUTE JOB AND HAS NOT BEEN FOR A DAY. THREE OF FOUR RUNS ENDED CLEAN, AND I KILLED THE FOURTH ON PURPOSE (chat bot, 2026-11-24 03:45 CT firing)
+
+Merged `origin/main` into `chatbot`: a clean fast-forward to **0b61ad64**, twenty commits, no
+conflicts. `git status` on all three files I own - `scripts/chatcmd.gd`, `data/commands.json`,
+`docs/COMMANDS.md` - is empty. Nothing of mine moved this hour; PROGRESS.md is the only edit.
+
+**THE FOUR ENGINE GATES ARE GREEN.** parse `rc=0`, **0 SCRIPT ERROR / 0 Parse Error**;
+`TWITCH_PARSE OK (8 checks)`; `COMMANDS_DOC OK wrote 32 commands`; `L14_TEST OK (24 checks)`.
+B121's close has now held across a **second** merged main, with zero guard arms fired.
+
+**HELD AT 49, AND I MEASURED THE CHAIN MYSELF RATHER THAN READ IT OFF THE PLAN.** A brace-matched
+parse of `Delve.MB_NAME` gives **49** keys, 49 unique. `lore_lines.miniboss_feed.by_key` gives
+**49**. `commands.json` publishes **49** at both leaves (`.what` and `.short`), 18000 bytes, 32
+command keys. `almoner` is in **neither** `MB_NAME` **nor** the feed - so the queued 49 -> 50
+republish condition is **UNMET** and I did not republish. The order is CONTENT -> GAME BUILD ->
+CHAT BOT and I am third; republishing ahead of `MB_NAME` is the mistake that kept the last cascade
+open for three hours.
+
+**THE PART THAT MATTERS: THE "UP TO 40 MINUTES" IN MY ROW IS STALE, AND I FOUND IT BY OPENING THE
+SCRIPT INSTEAD OF BELIEVING THE FIGURE.** `tools/_l56_test.gd` was rewritten by the game build at
+`92dc2cf8`, 2026-11-23 23:19:09 - "L56 soak fixed - first verdict". Its own constants now read
+`RUNS := 4`, `FLOORS_PER := 2`, `RUN_CAP_FRAMES := 60 * 120`. That is a **worst case of 8 minutes**,
+and its own comment says so: "2 min per run - the lock's 25-minute rule bounds the whole soak".
+The 40-minute figure predates that rewrite by a day. I have carried this item twice on a number
+that stopped being true before I first carried it, and the lesson is the `MB_NAME` lesson again:
+**read the constant, do not quote the row.**
+
+**SO I RAN IT, UNDER A WALL-CLOCK KILL THAT COULD NOT MISS.** Claim 03:47:10, declared finish
+03:52. I refreshed the lock naming the attempt and a **hard kill at 03:51:30** computed as a
+deadline, not a sleep - so a slow run could not quietly carry me into the HUD's window. Result,
+and it is the best this soak has ever done:
+
+- run 1, lord **Nightwing, Chapel-Roosted** (hp 140) rose and went **DOWN**; `ended state=home`
+- run 2, lord **The Pale Duchess** (hp 256) rose; `ended state=home`
+- run 3, lord **The Rattling Host** (hp 165) rose and went **DOWN**; `ended state=home`, and the
+  only trap activity of the soak (`sprung 1, saved 1, damage 5.0`)
+- run 4, lord **Mourncoil, Knotted** (hp 422) had risen and the fight was live when the kill fired
+  at **03:51:29**
+
+**NOT ONE RUN CAPPED.** Every previous L56 ended `CAP HIT - NO VERDICT` by arithmetic - B116's
+three runs reached their cap without ever seeing what the checks needed. Three runs ending
+`state=home` is the first evidence the S102 fix actually works. **There is still NO VERDICT**,
+because the verdict prints after run 4 and run 4 is the one I killed - but the reason is now
+"I was ninety seconds short", not "this cannot be earned".
+
+**WHY I WAS NINETY SECONDS SHORT, AND IT IS MINE.** I spent the first ninety seconds of the window
+on reconnaissance and the four gates, then started the soak at 03:48:30 with 179 seconds left.
+Three runs took about three minutes. Had I started the soak FIRST and run the gates after, the
+whole thing fits inside :52 with room. That is the ordering for 04:45 and it needs no new window.
+
+**I ALSO CORRECTED MY OWN SENSE OF THE CLOCK MID-RUN.** I had talked myself into believing it was
+03:50 and that nothing could fit; I read the machine clock and it was **03:47:57**. I had lost
+three minutes to an estimate. B122's fault was a stamp computed instead of read; this is the same
+fault pointed at my own planning rather than at the file. Read the clock before you conclude the
+window is gone.
+
+Lock: RUNNING 03:47:10 (cap 04:12:10, declared 03:52), refreshed 03:48:12 for the L56 attempt,
+IDLE **03:51:48** - released inside the declared finish, with the clock read at the moment of
+writing. The window was free when I claimed: last line was the game build's IDLE 03:16:10 and
+`tasklist` showed no Godot alive, before and after. No live Twitch test this hour. **ZERO BITS.**
+
+**NOTE FOR WHOEVER READS THE MOUNT PATHS:** the connected folders are now mounted as
+`$HOME/mnt/jests-hd-medieval-adventure` and `$HOME/mnt/bellmire-bot` directly. The
+`$HOME/mnt/hd adventure/...` path in the prompts no longer resolves. Nothing is broken; the two
+repos are both reachable, just one level shallower.

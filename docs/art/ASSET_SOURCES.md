@@ -641,3 +641,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Checked: walked every file under `_packs\Castle\` (15 files, by extension) and listed the names inside `Castle.zip`. Searched for licence/copying/readme/terms/credit/url/pdf/html names: none. Grepped the binary texture and psd files for licence wording: the only hits were pixel-data noise, not licence text. The FBX header carries an empty author field.
 - The folder name carries no licence claim, so none is inferred from it.
 - Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - dragon_oga (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dragon_oga (folder `_packs\dragon_oga\`, sibling `dragon_oga.zip` 1.35 MB, names listed only) | Not named in any licence file. Exporter metadata in the `.dae` files reads "Blender User" (an authoring-tool default, not a licence). | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. | 11 on disk: 5 `.dae` (`dragon.dae`, `dragon_attack.dae`, `dragon_die.dae`, `dragon_idle.dae`, `dragon_walk.dae`), 1 `.obj` + 1 `.mtl`, 2 `.blend` (`dragon-2_79b.blend`, `dragon-2_80.blend`), 2 `.png` (`dragon.png`, `dragon_black.png`). Zip holds the same 11 entries. | Not stated | Not stated |
+
+- Checked: walked every file under `_packs\dragon_oga\` (11 files) and listed the 11 entries inside `dragon_oga.zip`. No file name matches licence, copying, readme, terms, credit, url, about or pdf/html/json/md.
+- Grepped the text-like files (`.obj`, `.mtl`, `.dae`) for licence, copyright, creative commons, CC0, public domain and all-rights wording: no hits. The `.mtl` names `dragon.png` as its only texture and carries no terms. The one raw grep hit was in `dragon_black.png`, an empty XMP `plus:CopyrightOwner` template field, which is binary noise and not a licence.
+- The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.

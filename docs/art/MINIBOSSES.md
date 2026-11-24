@@ -4687,3 +4687,33 @@ scale 1.0.
 | `almoner` | The Almoner | 2.52 | shrine | **IT DEALS YOUR KIT OUT AGAIN** - the party's weapon dice are dealt back to the wrong hands; the total is unchanged and every role is wrong | 0.35 | 2.48 |
 
 See docs/art/ALMONER_THE_50TH.md - four passes, and pass 1 shipped the shield its own docstring forbade.
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `panner` | Onceround | 2.26 | confection | **IT IS SHUT UNTIL THE PAN COMES ROUND** - not armoured and not immune: for most of the fight there is nothing of it to hit. The one opening swings past once a turn, blows on the shut wall do nothing at all, and the party's job inverts from dealing damage to withholding it | 0.14 | 1.73 |
+
+See docs/art/PANNER_THE_51ST.md - four passes, and the pass that moved NOTHING
+is the finding (a byte-identical re-render proved the object I changed was not
+the object in the picture; `lordlib.cone` caps BOTH ends by default and my "lip
+ring" was a solid 1.28 m plate over the mouth).
+- `MB_FIT["panner"]`: ratio **0.92**, creature_h 2.26 against a hero measured
+  at 2.45, 3 proving views, `fits_frame true`, `frame_edge` all zero - **copy
+  it from `renders/art/minibosses/_fit_report.json`, do not re-derive it.**
+- **CORRIDOR-SAFE at 1.73 m, UNDER-LID. No spawn gate needed, not
+  room-locked.** 822 faces, two material meshes, **no emissive at all** - this
+  one is machinery, so there is nothing for the back-lamp guard to find.
+- theme **`confection`** for the set-piece roll, which was the thinnest theme
+  in the set at two bodies.
+- **HOLD `MB_NAME["panner"]`** until content writes `by_key.panner`. The canon
+  name is **"Onceround"**.
+- **THREE FAULTS STAND ON THE SHIPPED BODY** and are the next firing's work.
+  **The first one's blame was corrected on 24 Nov 07:34 CT and the correction
+  changes the fix:** it is the HOPPER CONE, not the chute, that cuts the pale
+  rim's top arc - the chute's two ends both fall inside the opening's projected
+  ellipse and never touch the annulus, measured in the mouth's own basis and
+  then confirmed by opening `panner/hero_front.png`. And nothing that feeds the
+  mouth from above can miss that arc, because the mouth is canted up and
+  forward, so **"move the chute" is not a fix.** The one change that answers it
+  and the porthole fault together is to BREAK THE RING under the hopper. The
+  comfits reading as rivets rather than sugar stands unchanged. See the 07:34
+  addendum in docs/art/PANNER_THE_51ST.md for the arithmetic.

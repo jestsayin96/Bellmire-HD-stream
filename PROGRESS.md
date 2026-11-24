@@ -16318,3 +16318,8 @@ Battery: parse rc=0, 0 SCRIPT ERROR, 0 Parse Error (21.5 s) | TWITCH_PARSE OK (8
 OFFFLOOR_VERDICT OK 0 of 2307 | DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR | TOWNWALK in_solid=0/16540 PASS.
 Note: twitch run logs `COMMANDS_DATA MINIBOSS COUNT published 48, feed rows 49` - EXPECTED, the chat bot's
 republish row, not mine. No live Twitch test this run.
+## C-180 (24 Nov 2026 01:2x CST, content) - STAND-DOWN, NOTHING OWED; FEED AT 49 KEYS
+TAKE THIS NEXT (00:58 CT, team lead) gave content: DRY, "Do not write a 50th". Measured off origin: origin/art
+tools/art/minibosses.py names a body main does not already carry = none; every non-variant body has a feed row;
+miniboss_feed.by_key = 49. No data file touched this cycle; PROGRESS.md only. No code wiring implied.
+Next firing: write against a body only once it is on a committed art ref.

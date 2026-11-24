@@ -1,3 +1,157 @@
+## TAKE THIS NEXT - Updated THE 10:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS OPEN AGAIN AT 52 / 51 / 51 AND THE DRIFT IS EXACTLY ONE KEY, MEASURED BY ME ON
+*** MERGED MAIN `771fd479`, BRACE-MATCHED AND STRING-AWARE, BEFORE I WROTE ONE WORD OF THIS BLOCK:
+***   `Delve.MB_NAME` = **51** (`panner` IN, `stiltman` OUT, `nightman` OUT, 0 dupes)
+***   `miniboss_feed.by_key` = **52** (`stiltman` IN - content's C-189 merged this hour)
+***   `data/commands.json` publishes **51** at BOTH leaves (chat bot's B130 republish, verified)
+***   `by_key - MB_NAME` = **["stiltman"]** EXACTLY  |  `MB_NAME - by_key` = **[]** - ZERO GHOSTS.
+*** THIS IS THE PLANNED ONE-CYCLE TRANSIENT, ONE HOUR LATE, AND IT IS CORRECT. It did not arrive at
+*** 10:45 because content wrote the feed row at 10:22 but the row only reached MAIN on this merge.
+*** DO NOT "FIX" IT. The 52nd is named by the game build at 11:07 and published by the chat bot at
+*** 11:45 - and only if BOTH halves read 52 at that moment, measured by that lane, not copied.
+
+*** AND I CAUGHT MY OWN PARSER LYING FIRST, SO THE NEXT SEAT KNOWS WHICH NUMBER TO TRUST. My first
+*** pass at `MB_NAME` returned **57 pairs**. It was wrong: it searched for the first occurrence of
+*** the string `MB_NAME` in `delve.gd`, which is a COMMENT at line 411 inside the `MB_FIT` dict, and
+*** then parsed the next `{` - the wrong dict entirely. The declaration is at **`delve.gd:434`**.
+*** Anchored on `const MB_NAME :=` the same parser reads **51**, 0 dupes, which is what the chat bot
+*** measured independently at B130. ANCHOR ON THE DECLARATION, NOT ON THE NAME.
+
+*** AND I NEARLY PUBLISHED A NINE-HOUR-OLD BLOCK AS THIS HOUR'S. My heredoc was refused
+*** (`/tmp` is not writable from this bridge) and `wc` on the same path then reported 169 lines of
+*** perfectly plausible content - THE 02:58 FIRING'S BLOCK, left behind by an earlier seat. The
+*** date-qualified landmark assertion the prompt demands (`THE 10:58 CT FIRING, 24 NOV 2026`,
+*** never the bare hour) returned 0 and stopped it. THAT ASSERTION IS NOT CEREMONY. Keep it, and
+*** write staging files under `$HOME`, never `/tmp`, from the device bridge.
+
+*** THE 53rd BODY IS ON MAIN AND I ACCEPTED IT BY EYE, NOT BY NUMBER. Art shipped the **NIGHTMAN**
+*** (`assets/monsters/minibosses/nightman.glb`, 81,348 bytes) with three proving views. I staged
+*** `hero_front.png`, `hero_side.png` and `hero_back.png` and opened all three. At hero scale it is a
+*** man: lean dark figure, a flat tub carried at the hip in one hand, a long-handled scraper reaching
+*** the floor in the other, a pale panel slung at the chest, and the head a plain hooded ball with two
+*** points of light. The TOOL AND THE TUB ARE THE READ, and they carry from the front, the side AND
+*** the back - the back view is the one I checked hardest, because the Beadle failed exactly there,
+*** and the nightman has a facing from behind. The register agrees: `pairs.nightman`
+*** h 2.30 / hero 2.45 / ratio **0.94**, `fits_frame true`, 3 of 3 proving views, `air_px` min 142 in
+*** the tightest view, every `frame_edge` 0 on disk, ground measured this run.
+*** *** AND THE STANDING NOTE IN THE TEAM LEAD PROMPT ABOUT THE ART FIT REGISTER IS NOW STALE. ***
+*** That note says the register's top-level verdict "reads RED / ok:false and has done for days" on
+*** two carried `_chibi` rows. ON MAIN RIGHT NOW IT READS **`verdict: GREEN`, `ok: true`**, with
+*** `errors []`, `blind_views []`, `unproved_cells []`, `red_summary.rows []`, `shipped_red []` AND
+*** `retired_red []`, over **55** pairs. A seat that repeats the prompt's note will be reporting a
+*** condition that no longer exists. See FOR THE NEXT TEAM LEAD.
+
+- **GAME BUILD (11:07) - THE 52nd IS NOW FULLY UNBLOCKED. ALL THREE ROWS ARE SAFE THIS HOUR.**
+  This block was written at 11:0x and may land within a minute of your claim; if you had already read
+  the plan, it is yours at 12:07 and I am not pretending otherwise. The 09:58 amendment named the
+  whole change and it was right; what has changed is that **the feed row is now on main**, so rows 1
+  and 2 no longer have to wait:
+    1. `Delve.MB_NAME["stiltman"] = "Downfast"`  (canon title, `tools/art/minibosses.py:18749`)
+    2. `Delve.MB_FIT["stiltman"] = 1.31`         (art's `_fit_report.json` `pairs.stiltman.ratio`,
+       h 3.20 / hero 2.45, `fits_frame true`, 3/3 proving views - COPY IT, do not re-derive it)
+    3. `DungeonHD.THEME_MINIBOSS_MORE["fogbound"] += "stiltman"` - the canon tag is **fogbound**,
+       and that line currently reads `["fenman", "fuller", "blower"]`.
+  I RE-MEASURED THE PRECONDITION MYSELF ON `771fd479`: `by_key["stiltman"]` EXISTS and its `arrive`
+  pool is 9 lines, so `chatcmd.gd:2252` cannot make a ghost of it and `dungeon_hd.gd:256` will admit
+  it to the draw pool. **S33_DRAW's red closes when row 3 lands** - and its message reads backwards:
+  `"body stiltman is in a draw"` is the assertion's WANTED state, so the FAIL means it is in NO draw.
+  Do NOT touch `nightman` - the 53rd has no feed row yet and is content's 11:22 item.
+- **CONTENT (11:22) - C-190: THE NIGHTMAN'S FEED ROW. THE 53rd. YOU ARE FIRST IN THE CHAIN AGAIN.**
+  C-189 is TICKED: `by_key.stiltman` landed with 9 arrive / 7 act / 4 broken / 8 fall - the changer
+  shape - and I read the lines, not just the count. They carry the loss (the bound cuff, the single
+  pole, the crutch) without explaining it, and the `broken` pool correctly makes breaking the stilt
+  a TRADE rather than a win. That is the voice.
+  Now write `miniboss_feed.by_key.nightman`. The body is on main and the canon is in
+  `docs/art/NIGHTMAN_THE_53rd.md` and `tools/art/minibosses.py` - READ THE CANON FOR ITS TITLE AND
+  TAG, do not take either from this block, because I have not read that file and will not pretend I
+  have. What the three renders show you, and I did look: tub, long scraper, pale panel at the chest,
+  hooded featureless head. PLAINNESS IS THE VOICE and wear is a variable.
+- **ART (11:34) - THE 54th, OR AUDIT. YOUR CHOICE AND BOTH ARE REAL WORK.**
+  The nightman is ACCEPTED and TICKED on the renders, above. Minibosses are the one thing this lane
+  may invent, so the 54th is yours if you want it; MEASURE THE COUNT OFF `tools/art/minibosses.py`
+  OR THE FIT REGISTER, never off a line in a prompt or in this block.
+  If you would rather audit: `self_seen` names **14 cells under your own 0.75 bar**, and the four
+  worst (`fuller`/side 0.4611, `beadle`/side 0.5174, `paviser`/front 0.5740, `moulder`/back 0.5837)
+  are bodies whose man is substantially lost behind his own gear. That is a defect in work this lane
+  shipped, so fixing one is not a new item. Say which you picked and why.
+- **HUB (11:37) - NOTHING IS OWED TO THE SUPERVISOR ON THE PUBLISH. I RE-MEASURED AND THE PROMPT
+  I CARRY IS WRONG.** `origin/gh-pages^{tree}` = `02257b2f` and `origin/hub:web` = `02257b2f` -
+  **IDENTICAL**, `git diff --numstat` between them is EMPTY. gh-pages is `029e4fac`, pushed
+  **21 Nov 15:38 CT** by the supervisor, who authorised the v6 consumption at 11:28 that day. The
+  team lead prompt still carries "3 files / +59 / -1 ... with the supervisor since 20 Nov" and two
+  dead SHAs (`05ac2679`, `45a7904`). ALL OF THAT IS STRUCK; see FOR THE NEXT TEAM LEAD.
+  So: **the hub has nothing merged-and-unpublished.** Your 11:37 is yours to spend on the hub's own
+  open work.
+  YOUR `dungeon_collection_for_assetforge` ROW IS ACCEPTED AND TICKED, AND THE "NOT CLEARED" IS THE
+  WHOLE VALUE OF IT. No licence file, no author, no URL, in the folder or the zip listing, and a
+  grep for ten licence words returned nothing. Under Mr. E's hard rule that pack is **unusable** -
+  not forbidden-by-licence, but UNPROVEN, which is the same practical answer. I CHECKED THAT NOTHING
+  IS ALREADY USING IT: no `.obj` or `.mtl` from that pack is tracked under `assets/`. Leave it
+  catalogued and uncleared. Do NOT import one file from it on a "probably CC0".
+- **CHAT BOT (11:45) - THE 51 -> 52 REPUBLISH, BUT ONLY IF BOTH HALVES READ 52 WHEN YOU LOOK.**
+  B130 is TICKED and I verified the republish leaf by leaf, not by eye: exactly two changed leaves in
+  `data/commands.json` (`miniboss.short`, `miniboss.what`), 50 -> 51, every other key byte-identical,
+  and `armoury.cost` ("50 / 150 / 400 / 1000 gold") correctly untouched. The doc row carried through.
+  That is the third hour running this lane has measured the chain itself before touching a file and
+  the second time it has reported its own instrument as the thing that lied. Keep doing both.
+  THIS HOUR: the game build names `stiltman` at 11:07. If `MB_NAME` reads 52 AND `by_key` reads 52
+  when you measure, the republish is owed and is yours. IF IT READS 51/52, THE CONDITION IS UNMET,
+  L14_TEST's UNNAMED arm firing on `stiltman` is the CORRECT answer, and you republish NOTHING.
+  AND YOUR CLOCK: B130's RUNNING stamp was **four minutes fast** because it was taken from the
+  container, which claimed a cap four minutes longer than earned. You named it yourself and that is
+  why it costs nothing. **Take every stamp from the Blender bridge (the Windows clock), never the
+  Linux side.** I verified my own container this run: it reads 17 s BEHIND cruzader, not ahead - so
+  the drift is per-container and cannot be corrected by a remembered offset. Read the clock.
+  YOUR IMPORT-PASS OBSTRUCTION, THIRD HOUR: B130 cleared 520 untracked regenerable
+  `web/icons/**/*.webp.import` files BEFORE merging and the merge ran clean. THAT IS THE RULING YOU
+  ASKED FOR, AND IT IS NOW WRITTEN WHERE YOU READ IT: **run your import pass, then delete every
+  untracked generated `.import` your pass produced before you merge, each one verified untracked
+  with `git ls-files --error-unmatch` first. Never remove a tracked one.** It is your own cache, it
+  is regenerable in seconds, and the lane that owns the mesh commits the real sibling.
+- **HUD (11:52) - NO HUD ITEM IS OPEN AND I AM NOT INVENTING ONE. U150'S STAND-DOWN IS TICKED.**
+  It is correct on every count: the lock was free, the rarity row IS struck (U55, `ui_theme.gd:176`)
+  and this lane was right to refuse it, and the L31 remainder lives in `delve.gd`, `monster.gd`,
+  `party_frames.gd` and `boss_bar.gd` - the game build's files, not yours. A stand-down written up IS
+  the delivery and it is ticked as one.
+  IF YOU STAND DOWN AGAIN, DO ONE THING WITH THE WINDOW: **commit your gate logs.** On 21 Nov U124's
+  whole evidence was an uncommitted `_u122.log` in W2's working tree - it verified fine, but on your
+  own branch there was nothing for a reviewer to judge by. A lane's evidence that exists only in a
+  working tree does not exist. That is a fault in work you shipped, not a new item.
+
+*** FOR THE SUPERVISOR: **nothing is waiting on you.** The hub publish delta I have been carrying up
+*** since 20 Nov IS CLOSED - you authorised it 11:28 CT on 21 Nov and pushed it at 15:38 that day,
+*** and I have now verified `origin/gh-pages^{tree}` == `origin/hub:web` == `02257b2f` with an EMPTY
+*** numstat between them. I ran NO publish verification this hour and none was owed: no lane claimed
+*** "ready to publish" and there is nothing unpublished to gate. This is a correction to my own
+*** standing block, not a request.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED. A FIRING CANNOT EDIT A SCHEDULED TASK; I
+*** ATTEMPTED NOTHING THIS RUN BECAUSE THE ANSWER IS SETTLED AND THE FIRST LIVE TURN SHOULD LAND
+*** THESE ALL AT ONCE, IN THE TEAM LEAD PROMPT (`trig_01AiNVX4tT9xupV9p8b928fB`):
+***  1. THE HUB BLOCK IS WRONG IN BOTH HALVES. Replace with: gh-pages is **029e4fac**, tree
+***     **02257b2f**, pushed **21 Nov 15:38 CT** (supervisor authorised 11:28 CT 21 Nov); and
+***     **origin/gh-pages^{tree} EQUALS origin/hub:web - NOTHING is merged-and-unpublished.** Strike
+***     "05ac2679 / tree 9ca8051e / 19 Nov 20:06" and strike the whole "3 files / +59 / -1, NOTES.md
+***     +9, web/app.js +46/-1, web/style.css +4, with the supervisor since 20 Nov" paragraph. Keep
+***     the instruction to RE-MEASURE BOTH TREES EVERY HOUR - it is the instruction that caught this.
+***  2. THE ART FIT REGISTER STANDING NOTE IS STALE. It says the verdict "reads RED / ok:false and
+***     has done for days" on two carried `_chibi` rows. On main `771fd479` it reads **GREEN /
+***     ok:true**, `red_summary.rows []`, `shipped_red []`, `retired_red []`, 55 pairs. Replace it
+***     with its surviving half: do not report "the art gate is green" as if it were this hour's
+***     work - diff it against main first.
+***  3. THE BODY COUNT. STEP 5 says "as of 21 Nov the fit register judges 46 rows, of which 44 are
+***     live bodies". It is **55 rows** on `771fd479` and the 53rd body (nightman) shipped this
+***     hour. The instruction under it - measure off `minibosses.py` or the register, never off a
+***     line in the prompt - is the part that matters and should stay word for word.
+***  4. THE ID LINE in STEP 5 is stale by design every hour; as of 10:58 CT 24 Nov it is B130,
+***     C-189, D100, H32, L74, S112, T5, U150, and art is on the nightman (53rd).
+***  5. ADD THE CHAT BOT IMPORT-PASS RULING to the chat bot prompt (`trig_01X4f9fEK6r64Hz2U3CLxeY9`)
+***     in the words used in that lane's row above. It has manufactured its own merge obstruction
+***     three hours running and solved it itself on the third; the prompt should carry the fix.
+***  6. THE STAGING-FILE RULE: write temp blocks under `$HOME` from the device bridge, NOT `/tmp`
+***     (refused, and a stale file of the same name from an earlier firing is still readable there -
+***     it nearly went into the plan this hour).
+
 ## TAKE THIS NEXT - Updated THE 09:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS CLOSED AND THE CHAIN IS LEVEL AT 51/51. I measured it myself on merged main
 *** `5a4f30ba`, brace-matched and string-aware, before writing one word of this block:

@@ -17370,3 +17370,8 @@ floor reached 2, 0 SCRIPT ERROR | S33_DRAW FAIL 1 of 217: ["body stiltman is in 
 state (_s33_draw.gd:96), so the FAIL means stiltman is in NO draw table. It is the hold, and closes at 11:07 with the fogbound row.
 Expected noise, not mine: COMMANDS_DATA MINIBOSS COUNT (published 50, feed 51) - the chat bot's 10:45 republish.
 No live Twitch test. ZERO BITS. Claim 10:08:33, cap claim+25 = 10:33:33 (computed first), declared 10:29.
+## C-189 (24 Nov 2026 10:2x CST, content) - WROTE miniboss_feed.by_key.stiltman (DOWNFAST, THE 52nd); FEED 51 -> 52
+TAKE THIS NEXT (09:58 CT, team lead) CONTENT row (10:22): "YOU ARE FIRST IN THE CHAIN AGAIN AND THIS ONE IS WORK." REF CHECKED: git ls-tree on BOTH origin/main and origin/art gives assets/monsters/minibosses/stiltman.glb, blob 62aa562c6624da9e0b58e8bfe73775cba661b211, 71,716 bytes, tracked. Canon row read at tools/art/minibosses.py:18749 (Downfast, 3.20 m, fogbound).
+Added arrive x9, act x7, broken x4, fall x8. Mechanic: a man on stilts who has lost one. Breaking the remaining stilt works but makes him faster at your height; leaving it, he strikes past the front line into the back. The party owns the choice and the lines favour neither. No {name} in arrive or fall, no per-hero item named. _note_c189 added (expected zero-hit).
+Validation: all four owned files json.load OK; the 51 earlier by_key rows and every other top-level key equal to HEAD; VALIDATION OK.
+CODE WIRING (game build 11:07): Delve.MB_NAME["stiltman"] = "Downfast"; MB_FIT stiltman 1.31 (art's fit report); DungeonHD.THEME_MINIBOSS_MORE["fogbound"] += "stiltman"; stiltman.glb.import. Then chat bot republishes elite count 51 -> 52. Feed 52 vs MB_NAME 51 (UNNAMED on stiltman at 10:45) is the planned transient - correct, not a defect.

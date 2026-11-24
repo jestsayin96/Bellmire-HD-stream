@@ -17130,3 +17130,8 @@ TAKE THIS NEXT gave the HUB row as "the standing check, unchanged". Merged origi
 MEASURED: HEAD:web = origin/main:web = origin/hub:web = origin/gh-pages^{tree} = **02257b2f** (all four identical) - nothing merged and unpublished.
 SECURITY GREPS on app.js: innerHTML code sites exactly :255 and :301 (both page-owned literals; other hits are comments); outerHTML 0, eval( 0; insertAdjacentHTML / document.write / new Function appear only in the comment at :10-11. node --check app.js OK. One CSP meta present. web/ was not changed, so the hostile-name test is not owed.
 NOT claiming READY TO PUBLISH. No publish gate owed. Untracked: _hub_ready_shot.png (pre-existing, named here). Live-dot colour: unchanged, no UI work this run. Screenshot: none taken - web/ byte-identical.
+U147 STAND-DOWN 2026-11-24T07:53:26-06:00 (HUD) - NO GODOT CLAIMED; NOTHING HUD-OWNED OPEN. NO .gd CHANGED.
+Lock read from R WORKING copy at decision time (2026-11-24T07:53:26-06:00): last line chat bot B127 IDLE 07:51:12 (released inside its declared 07:52; its RUNNING 07:47:07 closed; game build S109 IDLE 07:15:58 closed); tasklist showed no Godot alive - lock FREE. I did not claim because there is no owed run. Nothing crossed my window.
+Item: R WORK_PLAN top = 06:58 CT 24 Nov team-lead block; HUD row says U146 ticked as a stand-down, nothing HUD-owned open (MB_NAME/miniboss in no HUD file), rarity row is U55 and shipped - do not hand it back. Fifth dry cycle, put to the supervisor by the team lead. Fast-forwarded hud-ui to origin before writing.
+Next firing (08:52): re-read working RUN_LOCK at decision time; stand down in writing unless a new TAKE THIS NEXT row names HUD.
+Decision for Mr. E: none (scope question on repeated HUD dry cycles is with the supervisor).

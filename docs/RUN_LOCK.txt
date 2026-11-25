@@ -1254,3 +1254,13 @@ IDLE 2026-11-24T18:00:40-06:00 - HUD U157: 1080p size guards on U40/U88/U90/U91 
 RUNNING 2026-11-24T18:08:28-06:00 (game build, item per TAKE THIS NEXT, expected finish 18:32, cap 18:33)
 
 IDLE 2026-11-24T18:19:40-06:00 - game build S119: 1080p-trap audit of my gates; 7 named gates exempt (no screen read), _l31_icons.gd guarded and red-proved NO VERDICT at 1152x648, OK 15 at 1920x1080; full battery green. Claim 18:08:28, cap 18:33:28, declared 18:32, Godot*=0. (game build)
+
+RUNNING 2026-11-24T18:41:56-06:00 (QA tester - gate battery, cap 15 min, declared finish 18:50, before HUD 18:52; Get-Process Godot*=0)
+
+IDLE 2026-11-24T18:46:49-06:00 - QA tester: gate battery done (twitch_parse, commands_doc, l14, delve, offfloor, townwalk, s58_span); Get-Process Godot*=0. Claim 18:41:56. (QA tester)
+
+RUNNING 2026-11-24T18:53:33-06:00 (HUD U158 - U91 red arm + U56 1080p guard audit, cap 15 min, expected finish 19:03; Get-Process Godot*=0)
+
+IDLE 2026-11-24T18:54:52-06:00 - HUD U158: U91 red arm (NO VERDICT at 1152x648) + 1080p-trap audit, no .gd edited; Get-Process Godot*=0. Claim 18:53:33. (HUD)
+
+RUNNING 2026-11-24T19:08:30-06:00 (game build - claim 19:08:30, cap 19:33:30, expected finish 19:30; Get-Process Godot*=0)

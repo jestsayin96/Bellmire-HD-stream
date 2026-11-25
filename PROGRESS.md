@@ -18228,3 +18228,25 @@ is absent. If you move `CHAT_MAX_LEN`, my number has to follow it, and this row 
 that coupling. Nothing else is owed from you.
 
 Nothing for Mr. E to decide.
+
+## D-S120 (game build, 24 Nov 2026 19:08-19:2x CT) - THE 56th (WEIGHER, TRUEWEIGHT) GETS ITS FIT AND TREASURY ROW; IT IS NOT NAMED, BECAUSE CONTENT'S LINES HAVE NOT LANDED
+- TAKE THIS NEXT (18:58) said `MB_NAME["weigher"] = "Trueweight"` "exactly what S118 did for straker". S118 named straker
+  only AFTER C-195 landed; before that S117 wrote MB_FIT + theme row and NO name. `data/*.json` has ZERO hits for
+  weigher/Trueweight at 19:1x CT, and `tools/_s51_names.gd` _keyset_faults fails any MB_NAME key absent from
+  miniboss_feed.by_key. Writing the name now would turn S51 RED on my own change. So this is the S117 shape:
+  - delve.gd MB_FIT `"weigher": 1.04` (art's _fit_report.json pairs.weigher.ratio, h 2.55 / hero 2.45, 3/3 proving views).
+  - dungeon_hd.gd THEME_MINIBOSS_MORE treasury += weigher (art's CANON field 5 = "treasury", minibosses.py:20600).
+  - NO MB_NAME. When content's by_key.weigher lands it is one line, `"weigher": "Trueweight"`, and _s51_names.gd /
+    _s107_gate.gd move 55 -> 56 with it. Chat bot: nothing to republish yet - the engine still names 55.
+- New gate tools/_s120_weigher.gd: body resolves, LOADS and instantiates; lines absent; 400-draw treasury sweep never
+  draws weigher and DOES draw changer (red-proof). Flip the lines arm when content lands.
+- Looked at renders/art/minibosses/weigher/hero_front.png: a grey figure with a tipped weigh-beam, a pan each end.
+- Merge note: R's working tree held art's 56th files UNCOMMITTED/untracked (8 untracked + 3 modified), each
+  BYTE-IDENTICAL to origin/main (git hash-object == origin/main blob). Moved the untracked to C:\hd adventure\_gb_hold_1908
+  (copies of the 3 modified too), checked the 3 out, fast-forwarded to 5fd2fd42 - main restored the same bytes. Four
+  other art renders modified in the tree (_contact_sheet, _hero_scale, _report.json, _silhouettes) differ from main and
+  were NOT touched or staged.
+- B138 (chatcmd.gd +44) parsed clean in my battery: no SCRIPT ERROR / Parse Error anywhere in the log.
+- Verdicts: PARSE 0 errors; OFFFLOOR_VERDICT OK 0 of 2381; TWITCH_PARSE OK (8 checks); S51_NAMES OK 176 checks;
+  S107_GATE OK 12; DELVE_TEST OK ran 9001 frames, floor reached 2; TOWNWALK in_solid=0/19355 PASS; S120_WEIGHER OK 9.
+- No live Twitch test.

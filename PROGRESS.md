@@ -1,3 +1,35 @@
+## S138 - 25 Nov 2026, 15:09-15:2x CT (game build) - S137's SENTENCE IS ALREADY WRITTEN (docs/PROGRESS.md:4448); SYSTEM 13 (PET COMPANIONS) STEP 1: THE THREE UAA DOGS/FOX WALK AT HEEL IN HeroPet, BUT THE PICTURE SAYS THEY ARE A DIFFERENT STYLE
+TAKE THIS NEXT (14:58 CT) GAME BUILD row: (1) S137's own sentence on the picture, (2) then the next open Phase 2 system, named in the claim line.
+1. S137 SENTENCE - IT IS IN MY S137 ENTRY, NOT OWED. docs/PROGRESS.md:4448-4450 (NOTE: S137 was appended to docs/PROGRESS.md, not prepended
+   to this root PROGRESS.md - that is why a reader of this file did not find it). Verbatim: "MY SENTENCE: at the distance the player sees them,
+   the two families now read as one house style; the UACP skin is a touch paler/less pink than KayKit's painted faces close up, which I do not
+   count against it." S137 can be ticked whole on that line.
+2. NEXT PHASE 2 SYSTEM IN NUMBER ORDER = SYSTEM 13, PET COMPANIONS (Master Vision: Fox, Husky, Shiba Inu, Cat follow heroes; channel points pick).
+   (My claim line named it only as "TAKE THIS NEXT item" - written before I had read the row through; this entry names it. Charged to me.)
+   MEASURED BEFORE BUILDING - most of the system ALREADY EXISTS: scripts/hero_pet.gd (L13) is a heel-following pet, gear.gd:803-815 spawns it
+   from a `cos.pet` cosmetic, and items.json carries 36 `kind: pet` cosmetics (corgi, pug, duck, fox, farm young). What is MISSING is exactly
+   the Vision's species: there is NO husky or shiba pet, `pet_fox`/`pet_vixen`/`pet_cub`/`pet_dogfox` all point at the OLD GobKit Red.glb,
+   while the UAA Fox/Husky/ShibaInu (CC0, S108) sit in assets/animals/uaa used by the TOWN only. No CC0 cat model exists (animal.gd's cat is
+   hand-built "proc:cat", which HeroPet cannot load - ResourceLoader.exists fails and the pet silently does not appear).
+   NEW GATE tools/_s138_pet_probe.gd (windowed): five KayKit Knights, each with a HeroPet; controls = shipped pet_corgi and pet_fox(Red).
+   VERDICT: `S138_PETS OK 3 UAA pets load in HeroPet with walk+idle clips and heel height 0.2-0.9 m` - fox_uaa Walk/Idle h=0.40,
+   husky_uaa Walk/Idle h=0.80, shiba_uaa Walk/Idle h=0.62 (controls corgi 0.75, Red fox 0.94, both "clip"). HeroPet's clip pick did NOT hit the
+   S106 HitReact trap on these three files. NO ENGINE CHANGE WAS NEEDED to carry them.
+   LOOKED AT renders/cycles/s138/pets.png: the numbers pass and THE PICTURE DOES NOT. The two controls are chunky chibi animals that match the
+   KayKit knight; the UAA husky and shiba are slender, realistic-proportioned dogs on thin legs, and the UAA fox at scale 0.15 is a tiny stick
+   creature that disappears beside the knight's boot. At stream distance they read as a different art style from the pets beside them.
+   MY SENTENCE: the UAA animals are fit to walk at heel, but they are NOT yet the same house style as the shipped chibi pets, and the fox needs
+   roughly 0.22 not 0.15 to read at all.
+   WHAT THIS LEAVES, BY OWNER (nothing invented, nothing wired into data I do not own):
+   - CONTENT (data/items.json): pet_husky / pet_shiba rows and, if wanted, re-pointing pet_fox at res://assets/animals/uaa/Fox.gltf.
+     Model paths/scales proven above: Fox.gltf ~0.22, Husky.gltf 0.25, ShibaInu.gltf 0.20.
+   - LEAD / MR. E: whether the realistic-proportion UAA dogs are acceptable beside the chibi pets (style call - a picture question, the shot
+     is the evidence). The channel-points "pick your pet" half needs a reward, which only Mr. E may create.
+   - GAME BUILD (mine, next): if the style is accepted, a cat (proc:cat) path into HeroPet so the Vision's fourth species exists.
+GATES (merged main + this tool, no game script changed): parse 0 SCRIPT ERROR / 0 Parse Error. TWITCH_PARSE OK (8 checks).
+OFFFLOOR_VERDICT OK 0 of 2054. TOWNWALK in_solid=0/18093 raid_in_solid=0/6009 PASS. DELVE_TEST OK ran 9001 frames, 0 ERROR lines.
+No Twitch test, zero bits, no cheer, no redemption, no chat line.
+
 ## S136b - 25 Nov 2026, 13:10-13:20 CT (game build) - SYSTEM 12 S110c-3: THE 20 UACP BODIES ARE WIRED AND WALKING IN THE TOWN, PACK-NATIVE SKIN BEHIND ONE SWITCH; GEAR SKIPPED FOR THEM, NOT GUESSED
 
 TOOK: the 12:58 TAKE THIS NEXT game-build row, S110c-3, which landed on origin/laptop (plan sync 59fc8e0c) AFTER my

@@ -152,6 +152,21 @@ Looked at on the hero sheet at hero scale, front, side and back:
    flank took it to **427**. It is no longer blind and it is still the thinnest
    cue in the ten-body sample. Full write-up, the two arms I rejected and the
    faults I can still see: `docs/art/CUE_READ.md`, PASS 7.
+   **PASS 8 (25 Nov 06:4x CT) TOOK THE SECOND HALF OF IT - THE SEAMS NOW SIT
+   UNDER AN EARTH BROW** and no longer read as orange crescents lying on the
+   flank. The single change the 05:58 plan row named - the seam RADIUS - was
+   swept over three arms and **FAILED**: side 427 -> 329 -> 254 -> 196,
+   monotone down, and at 12x the seam is the same flat lozenge the whole way,
+   only smaller. That guess was mine: written into `CUE_READ.md` at pass 7 by
+   eye and quoted into the row from there. What answers it is geometry - a
+   proud earth ridge above each seam, whose unlit underside puts dark over
+   the light and whose edge cuts the glow's convex crown flat. Shipped at
+   `COLLIER_BROWR` 0.044: side **413**, so the cue is HELD, not paid for; the
+   front's two mid-height rim nicks **halved**, 144 px to 70; and the vent row
+   still carries **four blobs and exactly four**, re-counted, not asserted.
+   `COLLIER_BROW=0` renders byte-identical to the 7c body. It reads at
+   inspection distance more than at stream distance, and the side is still
+   the thinnest cue in the house. PASS 8 in `docs/art/CUE_READ.md`.
 3. ~~**The back carries no cue at all**~~ - **STRUCK 25 Nov 05:4x CT, AND IT IS
    THE ONE FAULT IN THIS LIST I GOT WRONG BY EYE.** I wrote this before the cue
    census existed, reasoning from construction (the vents ARE all on the -Y

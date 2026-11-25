@@ -1,0 +1,86 @@
+=== PASS 8 BROW ARM ===
+--- GEN_d rc=0 8.0s env={'COLLIER_BROW': '1'}
+6], "beadle": [1.87, "CORRIDOR-SAFE", "UNDER-LID", 4, 698], "rammer": [2.03, "CORRIDOR-SAFE", "UNDER-LID", 4, 1046], "fuller": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1866], "stackman": [3.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1674], "dauber": [1.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1300], "sealer": [1.64, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "hooper": [1.4, "CORRIDOR-SAFE", "UNDER-LID", 4, 2209], "relief": [1.84, "CORRIDOR-SAFE", "UNDER-LID", 4, 1462], "scraper": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1266], "ferryman": [3.68, "CORRIDOR-SAFE", "UNDER-LID", 4, 1757], "winder": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 2233], "pitman": [3.1, "CORRIDOR-SAFE", "UNDER-LID", 3, 932], "tither": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1230], "blower": [1.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1928], "changer": [1.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 788], "stopper": [2.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 910], "roper": [3.15, "CORRIDOR-SAFE", "UNDER-LID", 4, 1403], "almoner": [2.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 939], "panner": [1.74, "CORRIDOR-SAFE", "UNDER-LID", 2, 958], "stiltman": [1.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 628], "nightman": [1.63, "CORRIDOR-SAFE", "UNDER-LID", 4, 701], "iceman": [1.38, "CORRIDOR-SAFE", "UNDER-LID", 4, 779], "straker": [2.1, "CORRIDOR-SAFE", "UNDER-LID", 4, 953], "dredger": [1.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 820], "harrowman": [2.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 1216], "pledgeman": [1.67, "CORRIDOR-SAFE", "UNDER-LID", 3, 1932], "weigher": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 816], "crimp": [1.76, "CORRIDOR-SAFE", "UNDER-LID", 4, 1725], "timberman": [2.01, "CORRIDOR-SAFE", "UNDER-LID", 4, 1691], "collier": [2.16, "CORRIDOR-SAFE", "UNDER-LID", 4, 2765]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- FITA_d rc=0 5.1s env={'COLLIER_BROW': '1'}
+re-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p8dA\hero_back.png'
+00:04.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.687  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- FITC_d rc=0 7.1s env={'COLLIER_BROW': '1', 'MB_CUEOFF': 'both'}
+re-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p8dC\hero_back.png'
+00:04.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.546  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.796  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- CUE_d rc=0 2.0s env={'COLLIER_BROW': '1'}
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+CUEREAD ok=True pairs=3 errors=0 -> C:\hd adventure\bellmire-art\renders\art\minibosses\_cueread_p8d.json
+  collier      GREEN - cue reads on all three views           {'front': 3854, 'side': 429, 'back': 2525}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- GEN_z rc=0 8.1s env={'COLLIER_BROW': '0'}
+6], "beadle": [1.87, "CORRIDOR-SAFE", "UNDER-LID", 4, 698], "rammer": [2.03, "CORRIDOR-SAFE", "UNDER-LID", 4, 1046], "fuller": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1866], "stackman": [3.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1674], "dauber": [1.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1300], "sealer": [1.64, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "hooper": [1.4, "CORRIDOR-SAFE", "UNDER-LID", 4, 2209], "relief": [1.84, "CORRIDOR-SAFE", "UNDER-LID", 4, 1462], "scraper": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1266], "ferryman": [3.68, "CORRIDOR-SAFE", "UNDER-LID", 4, 1757], "winder": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 2233], "pitman": [3.1, "CORRIDOR-SAFE", "UNDER-LID", 3, 932], "tither": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1230], "blower": [1.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1928], "changer": [1.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 788], "stopper": [2.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 910], "roper": [3.15, "CORRIDOR-SAFE", "UNDER-LID", 4, 1403], "almoner": [2.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 939], "panner": [1.74, "CORRIDOR-SAFE", "UNDER-LID", 2, 958], "stiltman": [1.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 628], "nightman": [1.63, "CORRIDOR-SAFE", "UNDER-LID", 4, 701], "iceman": [1.38, "CORRIDOR-SAFE", "UNDER-LID", 4, 779], "straker": [2.1, "CORRIDOR-SAFE", "UNDER-LID", 4, 953], "dredger": [1.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 820], "harrowman": [2.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 1216], "pledgeman": [1.67, "CORRIDOR-SAFE", "UNDER-LID", 3, 1932], "weigher": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 816], "crimp": [1.76, "CORRIDOR-SAFE", "UNDER-LID", 4, 1725], "timberman": [2.01, "CORRIDOR-SAFE", "UNDER-LID", 4, 1691], "collier": [2.16, "CORRIDOR-SAFE", "UNDER-LID", 4, 2591]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- FITA_z rc=0 5.1s env={'COLLIER_BROW': '0'}
+re-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p8zA\hero_back.png'
+00:04.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- FITC_z rc=0 8.3s env={'COLLIER_BROW': '0', 'MB_CUEOFF': 'both'}
+re-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:05.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:05.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:05.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p8zC\hero_back.png'
+00:05.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:05.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:05.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:05.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- CUE_z rc=0 2.5s env={'COLLIER_BROW': '0'}
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+CUEREAD ok=True pairs=3 errors=0 -> C:\hd adventure\bellmire-art\renders\art\minibosses\_cueread_p8z.json
+  collier      GREEN - cue reads on all three views           {'front': 3902, 'side': 427, 'back': 2518}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+=== BROW DONE ===

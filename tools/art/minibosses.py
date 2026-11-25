@@ -23023,9 +23023,26 @@ def collier():
     # window is the one thing that moved between these three renders, so the
     # three numbers are comparable. If the side is still thin, the radius is
     # the next pass's single change and not this one's.
-    for zs, dc, dw, sink, rad in ((0.248, 103.0, 14.0, 0.020, 0.034),
-                                  (0.503, 92.0, 14.0, 0.018, 0.029),
-                                  (0.742, 99.0, 9.0, 0.015, 0.023)):
+    # *** PASS 8 - THE ONE THING CHANGED IS THE SEAM RADIUS. ***
+    # Pass 7's fault, named in `docs/art/CUE_READ.md`: the seams read as orange
+    # crescents lying ON the earth rather than light coming out from UNDER an
+    # earth lip. Measured cause, computed off `_courses` before a render was
+    # made: the tube centreline is pinned at `r0 - sink` sampled at `zs`, but
+    # the seam RISES 0.046 m across its span while the flank it sits in
+    # NARROWS (dR/dz is -0.43 to -0.57 over courses 1-3). So mid-span the
+    # earth has receded out from under a tube that did not follow it, and the
+    # tube stands +0.034 m PROUD of the flank there - a bead on the surface,
+    # which is exactly what a crescent is. The ends, where the arc is low and
+    # the taper is thin, tuck back in (-0.009).
+    # `COLLIER_SEAMR` scales `rad` and NOTHING ELSE. Bearings, bearing
+    # half-widths and sinks are FROZEN at their 7c values, so pass 8's three
+    # numbers are comparable with 7a/7b/7c. UNSET IS 1.0 AND THE SHIPPED PATH
+    # IS BYTE-FOR-BYTE WHAT IT WAS, which is the same discipline MB_CUEOFF
+    # keeps.
+    _SR = float(os.environ.get("COLLIER_SEAMR", "1.0"))
+    for zs, dc, dw, sink, rad in ((0.248, 103.0, 14.0, 0.020, 0.034 * _SR),
+                                  (0.503, 92.0, 14.0, 0.018, 0.029 * _SR),
+                                  (0.742, 99.0, 9.0, 0.015, 0.023 * _SR)):
         r0, xo, yo = _flank_r(zs)
         pts, radii = [], []
         n = 9
@@ -23040,6 +23057,52 @@ def collier():
                                yo + rr * -math.cos(a), zz)))
             radii.append(rad * (0.26 + 0.74 * math.sin(math.pi * t) ** 0.6))
         P.raw(L.tube(pts, radii, 7), 'glow')
+
+    # *** PASS 8, THE ARM THAT ACTUALLY ANSWERS FAULT 2: AN EARTH BROW. ***
+    # The radius sweep (0.80/0.62/0.45 of 7c) is in `docs/art/CUE_READ.md` and
+    # it FAILED on both instruments: side 427 -> 329 -> 254 -> 196, monotone
+    # down, and on the zoom the seam is the same flat orange lozenge the whole
+    # way, only smaller. Radius was the wrong variable and the picture is why:
+    # a crescent reads as a BEAD because its top edge is a convex orange arc
+    # against LIT earth, and shrinking the tube keeps that arc and shortens
+    # it. There is no dark earth anywhere above the seam to be a lip, so no
+    # value of the radius can put light under one.
+    # A brow is geometry, and it is one object: a thin earth ridge standing
+    # PROUD of the flank just above each seam, following the same arc wider at
+    # both ends. It does two things a radius cannot. Its underside faces down
+    # and is unlit, so there is dark directly over the light; and it clips the
+    # top of the glow, so the seam's upper boundary becomes a straight hard
+    # edge instead of a convex crown - which is the difference between light
+    # lying ON earth and light getting OUT from under it.
+    # It cannot add an ember: it is `body`, not `glow`, and FAULT 10 is about
+    # countable light. The front is re-counted anyway, because "it cannot" is
+    # the kind of sentence this file has already been wrong with once.
+    # SHIPPED AT 0.044. Three brow arms, one variable (the brow's own radius),
+    # bearings/sinks/seam radius all frozen: 0.030 -> side 429, 0.044 -> 413,
+    # 0.058 -> 339. 0.030 is a dark hairline and reads as a drawn stroke;
+    # 0.058 has mass but eats the top of the glow and starts reading as a dark
+    # worm LYING on the earth, which is the very fault this is here to fix,
+    # arriving upside down. 0.044 is the most lip for the least cue - 16 px.
+    _BR = float(os.environ.get("COLLIER_BROWR", "0.044"))
+    if os.environ.get("COLLIER_BROW", "1") != "0":
+        for zs, dc, dw, sink, rad in ((0.248, 103.0, 17.0, 0.020, 0.034),
+                                      (0.503, 92.0, 17.0, 0.018, 0.029),
+                                      (0.742, 99.0, 12.0, 0.015, 0.023)):
+            pts, radii = [], []
+            n = 9
+            zb = zs + rad + 0.020
+            for j in range(n):
+                t = j / (n - 1.0)
+                a = math.radians(dc - dw + 2.0 * dw * t)
+                zz = zb + 0.046 * math.sin(math.pi * t) + 0.030 * (t - 0.5)
+                rl, xo, yo = _flank_r(zz)
+                # PROUD of the earth it sits on, not sunk into it - a sod laid
+                # over the join, which is how a clamp is actually built
+                rr = rl + 0.014
+                pts.append(Vector((xo + rr * math.sin(a),
+                                   yo + rr * -math.cos(a), zz)))
+                radii.append(_BR * (0.40 + 0.60 * math.sin(math.pi * t) ** 0.5))
+            P.raw(L.tube(pts, radii, 7), 'body')
     _close("seams")
 
     # --------------------------------------------------------- THE FOUR PLUGS

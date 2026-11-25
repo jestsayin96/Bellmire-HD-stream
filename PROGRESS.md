@@ -17360,3 +17360,12 @@ RUN (--windowed --resolution 1920x1080): U40_TEST OK lines=9; U88_WORN OK rows=1
 RED ARM (default window): U40, U88, U90 each print NO VERDICT capture (1152.0, 648.0). U91 red arm not run (same 4-line guard, out of time).
 PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error.
 Logs: _u157.log, _u157_u91.log. NEXT: U91 red arm; audit remaining U-gates (U56 etc.) for the same trap. Decision for Mr. E: none.
+
+
+## U158 - U91 RED ARM RUN + THE REST OF THE 1080p-TRAP AUDIT: NO FURTHER GATE IS EXPOSED, 2026-11-24T18:57:00-06:00 (18:52 firing)
+ITEM: WORK_PLAN 16:58 HUD row ("pick your next U item from your own open list") -> U157's NEXT: U91 red arm; audit remaining U-gates for the capture-size trap.
+Lock: R working RUN_LOCK last line = QA tester IDLE 18:46:49, 0 Godot by process -> claimed 18:53:33 (declared 19:03, cap 19:08), IDLE written right after the run.
+RED ARM (default --windowed, 1152x648): "U91 NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080" - guard fires, no pass-by-accident. U40/U88/U90/U91 now all red-proved (log _u158_u91_red.log). The gear.gd:104 null-instantiate ERRORs in that log are the known worktree import-cache gap, not HUD.
+AUDIT (tools/*.gd that print verdicts and mention 1080p): _u121_hostile, _u122_chron_width, _u125/_u126_regress, _u134_chron_sample150 all force `root.size = Vector2i(1920,1080)` themselves (not capture-size dependent); _u58_contrast and _u61_stripe are headless-safe (own 1920x1080 holder / pure maths); _u104.._u117, _u3/_u4/_u9/_u25/_u26 *_shot are image dumps with no verdict; _u55/_u71 are data guards. Nothing else needs a NO VERDICT guard.
+CHANGED: no .gd edited (log + this note only). PARSE: n/a (no source change).
+NEXT: L74 feed/theme under load, or take whatever the 19:58 TAKE THIS NEXT names. Decision for Mr. E: none.

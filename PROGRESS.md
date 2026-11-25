@@ -17542,3 +17542,12 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - LOOK: fixed frames saved in renders/cycles/20261125_u181/fixed/ (host_s100/125/150_1080.png). The only frame viewed this run was by numbers; I did NOT open the PNGs before release - owed.
 - Lock: R working RUN_LOCK last line before me IDLE 15:20:28 (game build S138); tasklist Godot* = 0. Claim 15:53:28, cap 16:08:28.
 - CHANGED: scripts/feed_hud.gd (_stack_h), tools/_u181_probe.gd, logs, this note. Decision for Mr. E: none.
+
+## U182 (HUD, 25 Nov 16:5x CT) - WORST-CASE FRAME FOR U181: ONE HOSTILE RUN, NUMBERS INSIDE, BUT THE PICTURE I SHOT DOES NOT SHOW THE TIGHT STATE
+- TAKE THIS NEXT (15:58 block, `>>> HUD (:52) <<<`): "NOTHING NEW UNTIL U181 IS TICKED"; if free, shoot the WORST-CASE frame - the tightest rung of the U181 log (hostile s150, -4).
+- Found first: the only 150% frame I opened (renders/cycles/20261125_u181/fixed/host_s150_1080.png) is the PLAIN-names run (it says Plainname1). The hostile 150% frame was never photographed, as the team lead said.
+- Ran tools/_u182_probe.gd (= _u181_probe.gd with OUT -> 20261125_u182), windowed 1920x1080, HOSTILE names, no code change: U181_DONE checks=40 fails=0, 0 SCRIPT ERROR, 0 Parse Error. Worst newest-label-bottom minus vellum-bottom over all 33 sampled labels = -7 (inside). My per-rung split of this log was unreliable (group sizes 18/10/5 differ per sample), so I do NOT claim a per-rung figure; the U181 hostile s150 -4 stays the tightest recorded.
+- LOOK: opened renders/cycles/20261125_u182/host_s150_1080.png. It shows a clean Chronicle ("The Rattling Host rises...") inside the vellum at 150%. BUT it is shot at k=262, after the hostile smite lines have expired and been replaced by a lore line, so it is NOT the tight state. The numbers cover k=160..240; the picture does not. OWED: save the shot at the tightest k (probe `_save` inside `_probe_chron` at k=200) so the frame matches the number. Not done this window - did not re-claim the lock to chase it.
+- Red-proof still owed (deterministic fixed line set, old vs new `_stack_h`).
+- Lock: R working RUN_LOCK last line before me IDLE 16:50:23 (chat bot B160); tasklist Godot* = 0. Claim 16:53:31, cap 17:08:31, declared 17:03. IDLE written 16:55:25.
+- CHANGED: tools/_u182_probe.gd, _u182_run.log, renders/cycles/20261125_u182/, this note. No owned .gd file touched. Decision for Mr. E: none.

@@ -4511,3 +4511,33 @@ mismatch in numbers and in the picture, route the look up.
       husky 0.80 m, shiba 0.62 m. The ankle-height one is fox_uaa at scale 0.15 - my chosen probe scale, not an import
       fault; the one-line fix shape is that probe/items.json scale (0.15 -> ~0.28 for ~0.75 m). Not applied: UAA pets are
       not in items.json yet, and whether they ship at all is the look call.
+
+## D-cycle - S139b: THE PET RIDES A LIVE DELVE THROUGH _next_floor, A DEATH-SAVE REVIVE AND A REAL DEATH - THE GAP S139 NAMED, CLOSED BY A RUN. 2026-11-25T17:2x-06:00 (game build)
+ITEM: the TAKE THIS NEXT row still reads SYSTEM 13 STEP 2 (the 15:58 block; no newer game-build row). S139 (43f83784 + addendum
+73d2ab7c, in main, not yet ticked) already did step 2 in a PROBE SCENE and wrote down what it did not prove: "not a pet riding a
+live delve through _next_floor ... inference from the code, not a run". This cycle is that run. NO GAME SOURCE CHANGED.
+- NEW tools/_s139_pet_wire.gd (windowed; distinct from S139's _s139_pet_wiring.gd). A REAL Roster + Delve (max_floors 3), four
+  fresh heroes; A (knight) and B (barbarian) carry cos.pet = pet_corgi (shipped), C/D none so B's death does not trip the
+  retreat. Pets are hung by the real path (HeroBody.refresh -> Gear.rank_trim -> dress_cosmetics). Checks 45 frames after every
+  real _next_floor; on floor 2 drives A to 0 hp through the REAL Delve._hero_hit with the rng seeded to a natural 20 (the death
+  save stand-up) and B to 0 hp with its save spent (the real Death_A / fallen / roster.kill path); after-check 75 frames later.
+- VERDICT LINE: S139_PET_WIRE OK checks=25 fails=0 floors=3 state=home frames=20511. 0 SCRIPT ERROR / 0 Parse Error / 0 ERROR.
+    floor 1: A pet 1.27 m flat, B 1.39 m, dy 0.00 both   floor 2: A 1.23 m, B 1.50 m, dy 0.00   floor 3: A 1.27 m, dy 0.00
+    (the 1.2-1.5 m is HeroPet's own heel spot, 0.75 side + 0.55 back, plus the catch-up lag - not drift)
+    revive: "PetProbeA rolls a 20 on the death save - and gets up swinging." - same pet node, at heel afterwards
+    death:  "PetProbeB the barbarian falls on floor 2" - its pet stays 1.05 m from the corpse, no error, and is NOT carried to
+            floor 3 (_next_floor walks _alive() only) - S139's inference is now observed
+    one pet per body on every check; same node all run (no re-dress duplicated it).
+  FIVE runs of this probe, all shown: run 1 FAIL (two heroes, death arm on floor 1, the party retreated home before the
+  after-check); runs 2 and 3 OK checks=23 but the camera sat behind a wall / too close (re-aimed, no logic change); run 4 FAIL
+  (random fight held floor 1 past the 9001-frame cap); run 5 the verdict above (cap 24000). None was a pet fault.
+- PICTURE: renders/cycles/s139/floor2_pet.png (party at the floor-2 stair foot, overhead from behind). HONEST READ: the four
+  heroes, their rings and names read; I cannot pick the corgi out of the crowd at that pitch - it is 0.75 m and sits under the
+  party's own heads. The numbers above are the proof; the picture proves the floor and the party, not the dog. S139's heel.png
+  is still the pet picture.
+- THE LOOK: unchanged and still UP (S139 addendum: proportion, 3 of 5 clash; one-line reversible shape hero_pet.gd:22 chibi
+  squash gated on "/uaa/", or keep UAA dogs out of items.json). Not touched.
+- GATES (this tree, merged origin/main 17:09): parse 0 SCRIPT ERROR / 0 Parse Error. TWITCH_PARSE OK (8 checks).
+  OFFFLOOR_VERDICT OK 0 of 2200 samples. TOWNWALK in_solid=0/17994 raid_in_solid=0/3637 PASS. DELVE_TEST OK ran 9001 frames,
+  floor reached 2. All five logs 0 SCRIPT ERROR / 0 ERROR lines.
+- No Twitch test, zero bits, no cheer, no redemption, no chat line.

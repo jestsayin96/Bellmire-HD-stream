@@ -19171,3 +19171,18 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - Recent five (harrowman, pledgeman, crimp, timberman, collier) all 9 arrive / 8 fall, no act/broken where not owed (collier carries 8 act / 4 broken per C-205).
 - VALIDATION OK: no content file edited; only PROGRESS.md appended. CODE WIRING: none implied.
 Next content: C-207.
+
+## U169 - 2026-11-25T05:58:00-06:00 - HUD self-audit: THE GLUED-LOCK-LINE FAULT IS MINE, ROOT-CAUSED, WRITER DISCIPLINE FIXED. No Godot claimed, no source change.
+- TAKE THIS NEXT (05:0x block, U169): window is the HUD's, nothing owed; self-audit of own shipped work counts. Took the team lead's flagged item: glued `)RUNNING` after an IDLE ending `(HUD)`.
+- Lock read from R's WORKING tree by bytes: last line IDLE 05:48:51 chat bot B149; tasklist Godot* = 0; file ends in a newline now (1355 lines). I launched nothing and wrote no RUNNING/IDLE line this hour (no Godot work), so nothing for another lane to misread.
+- MEASURED: `)RUNNING` glued with no newline = 6 occurrences (16 Nov 13:10, 20 Nov 15:08, 20 Nov 22:08, 21 Nov 22:07, 24 Nov 15:08, 25 Nov 04:07). ALL SIX follow an IDLE line ending `(HUD)`: 6 of 84 HUD IDLE lines (7%) vs 0 of the other lanes' IDLE lines (452 IDLE lines total in the file). So the team lead is right and the cause is mine: my IDLE writes sometimes went in with open(..., "a").write(line) and no trailing "\n", so the next lane's append landed on the same line.
+- THE FIX (there is no lock-writer file in W2; the writer is the snippet each firing runs on the Windows bridge, so the fix is the snippet). Use this for every lock line from now on; self-tested on a temp file in the faulty state (file ending `(HUD)` with no newline -> `IDLE x (HUD)\nRUNNING y (art)\nIDLE z (HUD)\n`, selftest_ok True):
+    def append_lock(path, line):
+        data = open(path, "rb").read()
+        pre = b"" if (not data or data.endswith(b"\n")) else b"\n"   # heal a lane that left no newline
+        open(path, "ab").write(pre + line.rstrip("\r\n").encode("utf-8") + b"\n")  # and always end ours
+- Also verify after every IDLE write: read the last byte of the file; it must be 0x0a.
+- Reader side (for anyone testing "is the last line RUNNING"): a glued line starts IDLE and ends with RUNNING; test by `"RUNNING" in last_line and last_line.rindex("RUNNING") > last_line.rindex("IDLE")` or split on `)RUNNING` first. Not changed in anyone's code; noted only.
+- Not count-breaking: no overrun, no cleared lock, no two-lanes-at-once on any of the six occasions.
+- CHANGED: this note only. PARSE: n/a (no source change; seven HUD files untouched). LOOKED: n/a, no UI change, so no render this hour. Decision for Mr. E: none.
+- Next firing 06:52 is EVEN: stand down unless the plan reopens HUD.

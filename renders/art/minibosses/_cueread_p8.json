@@ -1,0 +1,46 @@
+{
+ "ok": true,
+ "errors": [],
+ "pairs_compared": 3,
+ "thresh_255": 8,
+ "slot": "both",
+ "arms": [
+  "_cueA",
+  "_cueC"
+ ],
+ "method": "A/B through one camera, pixels MOVED; glow->body swap",
+ "bodies": {
+  "collier": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 3830,
+     "body_px": 85928,
+     "cue_frac": 0.04457
+    },
+    "hero_side.png": {
+     "cue_px": 413,
+     "body_px": 75688,
+     "cue_frac": 0.00546
+    },
+    "hero_back.png": {
+     "cue_px": 2517,
+     "body_px": 87872,
+     "cue_frac": 0.02864
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 6760,
+   "weakest_view": [
+    "hero_side.png",
+    413
+   ]
+  }
+ },
+ "weakest_views_ranked": [
+  {
+   "key": "collier",
+   "cue_px": 413
+  }
+ ]
+}

@@ -215,3 +215,112 @@ here and in the file itself.
 `fits_frame true`, `margin_x 0.12`, `creature_h 2.10`, ok true, errors [],
 blind_views []. The seams are inside the silhouette, so the number the game
 build lane is copying this hour did not move.
+
+## PASS 8 - THE ROW'S NAMED VARIABLE WAS THE WRONG ONE, AND THE PICTURE SAID SO BEFORE THE NUMBER DID
+
+The 05:58 CT plan row: *"COLLIER PASS 8: THE EARTH LIP ... You named the
+single change yourself - the seam RADIUS - so that the light comes from UNDER
+a brow of earth instead of lying on it as a crescent. ONE VARIABLE, as in
+pass 7."* The row is quoting **this file**, PASS 7's own closing sentence.
+
+**I ran it exactly as written, and it failed on both instruments.** Then I
+found what does work and ran that the same way. Both are below.
+
+### ARM 1-3: THE SEAM RADIUS, SWEPT. ONE VARIABLE, BEARINGS AND SINKS FROZEN
+
+`COLLIER_SEAMR` scales `rad` on all three seams and nothing else. Unset is
+1.0 and the shipped path is byte-for-byte unchanged, the discipline
+`MB_CUEOFF` keeps.
+
+| arm | `COLLIER_SEAMR` | front | side | back |
+|-----|------|-------|------|------|
+| 7c shipped | 1.00 | 3902 | **427** | 2518 |
+| 8a | 0.80 | 3870 | **329** | 2493 |
+| 8b | 0.62 | 3854 | **254** | 2481 |
+| 8c | 0.45 | 3829 | **196** | 2467 |
+
+**Monotone down. Every arm pays side read and buys nothing.** And the number
+is the lesser half of it: `collier_p8/radius_sweep_zoom.png` and
+`radius_one_seam.png` are the four arms at 5x and 12x, and across all four
+the seam is **the same flat orange lozenge on the same flat grey panel, only
+smaller**. At 0.45 it is a dash. No arm has a lip in it anywhere.
+
+**WHY IT COULD NOT HAVE WORKED, AND I COULD HAVE KNOWN BEFORE RENDERING.**
+Computed off `_courses` before the first arm ran: the tube centreline is
+pinned at `r0 - sink` sampled at `zs`, but each seam RISES 0.046 m across its
+span while the flank it sits in NARROWS (dR/dz -0.43 to -0.57). Mid-span the
+earth has receded out from under a tube that did not follow it, so the tube
+stands **+0.034 m proud** of the flank there - a bead on a surface, which is
+what a crescent is. Shrinking the tube shrinks the bead and keeps the convex
+orange top edge against lit earth. **A crescent reads as a bead because of
+what is ABOVE it, and there is no dark earth above these seams at any
+radius.** I wrote "the radius is the next pass's single change" in this file
+at pass 7 from the look of the thing; it went into the plan row from here,
+the same way the struck back-is-blind sentence did. **Two files repeating one
+unmeasured guess of mine is the same fault as three did last hour.**
+
+### ARM 4: A BROW. ONE OBJECT, AND IT IS GEOMETRY, NOT A RADIUS
+
+A thin earth ridge standing **proud** of the flank just above each seam,
+following the same arc and wider at both ends, `body` not `glow`. It does the
+two things a radius cannot: its underside faces down and is unlit, so there
+is dark directly over the light; and it clips the top of the glow, so the
+seam's upper boundary is a straight hard edge instead of a convex crown.
+
+| arm | | front | side | back |
+|-----|---|-------|------|------|
+| 7c shipped | no brow | 3902 | 427 | 2518 |
+| 8d | brow 0.030 | 3854 | **429** | 2525 |
+
+**The cue is held, not paid for** - +2 on the side where the radius sweep
+cost up to 231. The front's -48 is not a loss: it is the brow partly covering
+the two mid-height rim nicks pass 7c knowingly allowed, **144 px of them down
+to 70**, and those are the marks 7a was rejected for.
+
+### ARM 5-6: THE BROW'S OWN RADIUS, SWEPT THE SAME WAY
+
+| arm | `COLLIER_BROWR` | front | side | back |
+|-----|------|-------|------|------|
+| 8d | 0.030 | 3854 | 429 | 2525 |
+| **8e SHIPPED** | **0.044** | **3830** | **413** | **2517** |
+| 8f | 0.058 | 3808 | 339 | 2500 |
+
+`collier_p8/brow_radius_arms.png`, four panels at 11x. 0.030 is a dark
+hairline and reads as a drawn stroke, not earth. 0.058 has mass but eats the
+top of the glow and **starts reading as a dark worm LYING on the earth -
+this fault arriving upside down**, and costs 90 px for it. **0.044 is the
+most lip for the least cue: 16 px.**
+
+### THE COUNT MECHANIC, RE-COUNTED RATHER THAN ASSERTED
+
+A brow is `body`, so it cannot be an ember - but "it cannot" is a sentence
+this file has already been wrong with once. Warm-pixel blobs on the front,
+shipped vs brow, measured: the vent row (y 392-405) carries **four blobs and
+exactly four, at identical sizes and positions in both arms** (412/399/112/25
+px at x 439/492/551/409). **Still four embers and only four, and no fifth at
+the vent row's height.** The only front pixels that moved are the two
+mid-height rim marks, which got smaller.
+
+### THE SWITCH IS HONEST
+
+`COLLIER_BROW=0` renders **byte-for-byte identical MD5s to the shipped 7c
+body on all three hero views** - front `af73ed1b`, side `b4e2f426`, back
+`1fccdbd6`. The brow is the only thing that moved.
+
+### WHAT I CAN STILL SEE WRONG, HAVING LOOKED AT ALL THREE VIEWS
+
+**THE BROW READS, AND IT READS AT INSPECTION DISTANCE MORE THAN AT STREAM
+DISTANCE.** That is the honest answer to the row's question. At 11x there is
+no argument: dark earth over light, the glow cut straight along its top. At
+hero scale it is a 1-2 px dark line and the side is still the thinnest cue in
+the ten-body sample. **It did not make this a good side view; it made the
+side view's light sit in the earth instead of on it.**
+
+1. The brow's left (low) end tapers to a hairline and leaves a small grey gap
+   between lip and glow on the lowest seam, so that third still reads as a
+   bead. The taper exponent, not the radius, is the lever.
+2. The top seam (z 0.742) is still the weakest of the three, crowded by the
+   crown shelf and the man's torso - unchanged from pass 7.
+3. The brow runs slightly past the glow's right end toward the rim.
+4. **NO THRESHOLD IS SET BY THIS PASS EITHER.** 413 is not "enough" and 196
+   was not "too few"; the bar still waits for the sweep over all 62.

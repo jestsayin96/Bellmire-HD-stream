@@ -1,0 +1,79 @@
+=== P8 SHIP (no env: brow on at 0.044, seam radius unchanged) ===
+--- GEN_SHIP rc=0 8.0s env={}
+SAFE", "UNDER-LID", 4, 1530], "stoker_chibi": [2.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1808], "snuffer_chibi": [2.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1258], "jointer": [2.18, "CORRIDOR-SAFE", "UNDER-LID", 4, 1005], "quartermaster": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 2804], "loader": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1221], "hurdleman": [2.98, "CORRIDOR-SAFE", "UNDER-LID", 4, 1790], "tanner": [2.5, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "reeve": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 1420], "tapster": [3.04, "CORRIDOR-SAFE", "UNDER-LID", 4, 2479], "pressman": [2.61, "CORRIDOR-SAFE", "UNDER-LID", 4, 1439], "strickler": [2.99, "CORRIDOR-SAFE", "UNDER-LID", 4, 3642], "dyer": [3.28, "CORRIDOR-SAFE", "UNDER-LID", 4, 2294], "greener": [2.71, "CORRIDOR-SAFE", "UNDER-LID", 4, 6433], "moulder": [2.36, "CORRIDOR-SAFE", "UNDER-LID", 4, 1987], "ratcatcher": [3.73, "CORRIDOR-SAFE", "UNDER-LID", 4, 1510], "drover": [3.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 5053], "paviser": [3.43, "CORRIDOR-SAFE", "UNDER-LID", 4, 731], "fenman": [2.48, "CORRIDOR-SAFE", "UNDER-LID", 4, 948], "comfitmaker": [1.83, "CORRIDOR-SAFE", "UNDER-LID", 4, 2626], "leech": [2.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 986], "beadle": [1.87, "CORRIDOR-SAFE", "UNDER-LID", 4, 698], "rammer": [2.03, "CORRIDOR-SAFE", "UNDER-LID", 4, 1046], "fuller": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1866], "stackman": [3.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1674], "dauber": [1.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1300], "sealer": [1.64, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "hooper": [1.4, "CORRIDOR-SAFE", "UNDER-LID", 4, 2209], "relief": [1.84, "CORRIDOR-SAFE", "UNDER-LID", 4, 1462], "scraper": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1266], "ferryman": [3.68, "CORRIDOR-SAFE", "UNDER-LID", 4, 1757], "winder": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 2233], "pitman": [3.1, "CORRIDOR-SAFE", "UNDER-LID", 3, 932], "tither": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1230], "blower": [1.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1928], "changer": [1.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 788], "stopper": [2.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 910], "roper": [3.15, "CORRIDOR-SAFE", "UNDER-LID", 4, 1403], "almoner": [2.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 939], "panner": [1.74, "CORRIDOR-SAFE", "UNDER-LID", 2, 958], "stiltman": [1.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 628], "nightman": [1.63, "CORRIDOR-SAFE", "UNDER-LID", 4, 701], "iceman": [1.38, "CORRIDOR-SAFE", "UNDER-LID", 4, 779], "straker": [2.1, "CORRIDOR-SAFE", "UNDER-LID", 4, 953], "dredger": [1.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 820], "harrowman": [2.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 1216], "pledgeman": [1.67, "CORRIDOR-SAFE", "UNDER-LID", 3, 1932], "weigher": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 816], "crimp": [1.76, "CORRIDOR-SAFE", "UNDER-LID", 4, 1725], "timberman": [2.01, "CORRIDOR-SAFE", "UNDER-LID", 4, 1691], "collier": [2.16, "CORRIDOR-SAFE", "UNDER-LID", 4, 2765]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- FIT_SHIP rc=0 8.5s env={}
+ammer": 3, "moulder": 3, "fuller": 3, "stackman": 3, "dauber": 3, "hooper": 3, "scraper": 3, "winder": 3, "pitman": 3, "comfitmaker": 3, "dyer": 3, "ferryman": 3, "ratcatcher": 3, "relief": 3, "sealer": 3, "tapster": 3, "tither": 3, "blower": 3, "changer": 3, "stopper": 3, "roper": 3, "almoner": 3, "panner": 3, "stiltman": 3, "nightman": 3, "iceman": 3, "straker": 3, "weigher": 3, "dredger": 3, "harrowman": 3, "pledgeman": 3, "crimp": 3, "timberman": 3, "collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[0, "ferryman", "side"], [8, "boiler", "front"], [8, "drover", "front"], [8, "ratcatcher", "front"], [11, "gaoler", "front"], [11, "porter", "front"]], "rows_judged": 64, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 186, "failures": [], "cells": 62, "expected_files": 186, "scope": "whole_house"}, "ratios": {"drillmaster": [0.9, 3.25, true], "gaoler": [0.96, 5.43, true], "scrapwright": [0.82, 4.62, true], "snuffer": [1.06, 3.37, true], "sexton": [1.0, 4.06, true], "porter": [0.94, 5.39, true], "tallyman": [0.88, 3.75, true], "cook": [0.84, 4.26, true], "sluicekeeper": [1.02, 4.52, true], "sower": [0.92, 5.36, true], "snarer": [0.94, 5.11, true], "stoker": [0.98, 4.97, true], "bellman": [1.1, 4.58, true], "boiler": [0.86, 5.47, true], "snuffer_chibi": [1.06, 4.21, true], "tallyman_chibi": [0.88, 3.58, true], "jointer": [0.92, 4.04, true], "quartermaster": [0.96, 4.48, true], "loader": [1.08, 4.26, true], "hurdleman": [1.04, 4.84, true], "tanner": [1.12, 4.36, true], "reeve": [0.8, 5.12, true], "pressman": [1.16, 4.47, true], "strickler": [1.04, 3.67, true], "greener": [1.02, 4.57, true], "drover": [1.0, 5.45, true], "paviser": [1.09, 5.3, true], "fenman": [1.03, 4.35, true], "leech": [0.95, 4.12, true], "beadle": [1.2, 3.74, true], "rammer": [1.12, 3.89, true], "moulder": [1.18, 4.22, true], "fuller": [1.09, 5.15, true], "stackman": [1.16, 4.39, true], "dauber": [1.05, 3.52, true], "hooper": [0.96, 3.24, true], "scraper": [1.04, 3.76, true], "winder": [0.96, 4.86, true], "pitman": [0.94, 4.96, true], "comfitmaker": [0.93, 3.69, true], "dyer": [1.06, 4.74, true], "ferryman": [1.07, 4.23, true], "ratcatcher": [1.07, 5.47, true], "relief": [1.03, 3.61, true], "sealer": [0.99, 3.5, true], "tapster": [1.14, 4.9, true], "tither": [0.99, 4.25, true], "blower": [1.01, 3.31, true], "changer": [1.11, 3.21, true], "stopper": [0.97, 4.1, true], "roper": [1.0, 3.22, true], "almoner": [1.03, 4.46, true], "panner": [0.92, 3.6, true], "stiltman": [1.31, 3.1, true], "nightman": [0.94, 3.49, true], "iceman": [1.27, 3.24, true], "straker": [0.98, 3.96, true], "weigher": [1.04, 4.48, true], "dredger": [0.98, 2.82, true], "harrowman": [1.0, 4.58, true], "pledgeman": [1.05, 3.53, true], "crimp": [0.99, 3.53, true], "timberman": [1.24, 3.87, true], "collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- BACKREAD rc=0 5.8s env={}
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:02.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\collier_front.png'
+00:02.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_front.png'
+00:02.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_front.png'
+00:02.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\collier_side.png'
+00:02.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_side.png'
+00:03.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_side.png'
+00:03.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\collier_back.png'
+00:03.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_nomam_back.png'
+00:03.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_tmp\_manonly_back.png'
+[backread] collier done
+[backread] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_backread\_backread.json ok=True
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- CUEA rc=0 5.2s env={}
+h_front.png'
+00:03.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:03.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:03.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:03.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_cueA\hero_side.png'
+00:03.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:03.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_cueA\hero_back.png'
+00:04.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 10 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3, "timberman": 3, "crimp": 3, "pledgeman": 3, "snuffer": 3, "leech": 3, "nightman": 3, "beadle": 3, "blower": 3, "stopper": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[99, "leech", "back"], [100, "stopper", "front"], [102, "collier", "side"], [113, "timberman", "front"], [118, "blower", "side"], [124, "beadle", "front"]], "rows_judged": 10, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true], "timberman": [1.24, 3.87, true], "crimp": [0.99, 3.53, true], "pledgeman": [1.05, 3.53, true], "snuffer": [1.06, 3.37, true], "leech": [0.95, 4.12, true], "nightman": [0.94, 3.49, true], "beadle": [1.2, 3.74, true], "blower": [1.01, 3.31, true], "stopper": [0.97, 4.1, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- CUEC rc=0 7.4s env={'MB_CUEOFF': 'both'}
+h_front.png'
+00:03.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:03.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:03.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:03.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_cueC\hero_side.png'
+00:03.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:04.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_cueC\hero_back.png'
+00:04.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 10 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3, "timberman": 3, "crimp": 3, "pledgeman": 3, "snuffer": 3, "leech": 3, "nightman": 3, "beadle": 3, "blower": 3, "stopper": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[99, "leech", "back"], [100, "stopper", "front"], [102, "collier", "side"], [113, "timberman", "front"], [118, "blower", "side"], [124, "beadle", "front"]], "rows_judged": 10, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true], "timberman": [1.24, 3.87, true], "crimp": [0.99, 3.53, true], "pledgeman": [1.05, 3.53, true], "snuffer": [1.06, 3.37, true], "leech": [0.95, 4.12, true], "nightman": [0.94, 3.49, true], "beadle": [1.2, 3.74, true], "blower": [1.01, 3.31, true], "stopper": [0.97, 4.1, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+--- CUE_SHIP rc=0 2.0s env={}
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+CUEREAD ok=True pairs=3 errors=0 -> C:\hd adventure\bellmire-art\renders\art\minibosses\_cueread_p8.json
+  collier      GREEN - cue reads on all three views           {'front': 3830, 'side': 413, 'back': 2517}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+=== SHIP DONE ===

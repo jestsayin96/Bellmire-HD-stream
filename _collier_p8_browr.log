@@ -1,0 +1,10 @@
+=== BROW RADIUS ARMS ===
+--- GEN_e rc=0 8.1s env={'COLLIER_BROWR': '0.044'}
+--- FITA_e rc=0 5.2s env={'COLLIER_BROWR': '0.044'}
+--- FITC_e rc=0 7.1s env={'COLLIER_BROWR': '0.044', 'MB_CUEOFF': 'both'}
+--- CUE_e rc=0 1.9s env={'COLLIER_BROWR': '0.044'}
+--- GEN_f rc=0 7.9s env={'COLLIER_BROWR': '0.058'}
+--- FITA_f rc=0 5.1s env={'COLLIER_BROWR': '0.058'}
+--- FITC_f rc=0 7.2s env={'COLLIER_BROWR': '0.058', 'MB_CUEOFF': 'both'}
+--- CUE_f rc=0 1.9s env={'COLLIER_BROWR': '0.058'}
+=== DONE ===

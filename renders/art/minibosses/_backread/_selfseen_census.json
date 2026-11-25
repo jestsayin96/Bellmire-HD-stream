@@ -1839,6 +1839,48 @@
    ],
    "man_span_empty": false
   },
+  "weigher": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "beam",
+    "chains",
+    "head",
+    "legs",
+    "pans",
+    "trunk"
+   ],
+   "items": 29,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     27,
+     29
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "winder": {
    "in_register": true,
    "in_builders": true,
@@ -1868,12 +1910,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T17:45:56-0600",
+ "measured_at": "2026-11-24T18:46:41-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795563956.3602567,
- "register_mtime_epoch": 1795560948.4998,
- "register_mtime": "2026-11-24T16:55:48-0600",
- "register_pairs": 57,
+ "measured_at_epoch": 1795567601.6641471,
+ "register_mtime_epoch": 1795567403.7594428,
+ "register_mtime": "2026-11-24T18:43:23-0600",
+ "register_pairs": 58,
  "measurable": [
   "almoner",
   "beadle",
@@ -1928,6 +1970,7 @@
   "tanner",
   "tapster",
   "tither",
+  "weigher",
   "winder"
  ],
  "no_man": [

@@ -159,7 +159,7 @@
     <button type="button" class="watchbtn" id="watchBtn">Night watch</button>
     <button type="button" class="watchbtn chatbtn-narrow" id="chatNarrowBtn" aria-controls="chatcol" aria-expanded="false">Guild chat</button>
     <button type="button" class="watchbtn hide" id="welcomeBtn">What is Bellmire?</button>
-    <a href="https://docs.google.com/forms/d/19bMpRDF6awFj8fdCZiSARBj5byV3txgtww9PVlxEwhY/viewform" target="_blank" rel="noopener noreferrer" class="watchbtn" id="suggestBtn">Suggestion Box</a>
+    <a href="#suggestions" class="watchbtn" id="suggestBtn">Suggestion Box</a>
     <span class="watchhint" id="watchHint">A dim, quiet page for a second screen.</span>
   </div>
 
@@ -450,9 +450,40 @@
 
   </main>
 
+  <!-- Suggestion Box: viewers submit bugs and suggestions. Data goes to Supabase (suggestions table,
+       anonymous insert via RLS, no read). Mr. E reviews them in the Supabase dashboard. The form
+       uses fetch() (governed by connect-src, not form-action), so form-action 'none' stays. No new
+       CSP origin needed — the same Supabase host the snapshot reads from. Client-side: 60-second
+       cooldown, 10-2000 char body, category required. -->
+  <section class="suggest-section" id="suggestions">
+    <h2 class="suggest-title">Suggestion Box</h2>
+    <p class="suggest-sub">Found a bug? Got an idea? Drop it here and Mr. E will see it.</p>
+    <form class="suggest-form" id="suggestForm" aria-label="Submit a suggestion">
+      <div class="suggest-row">
+        <label class="suggest-label" for="sugCat">Category</label>
+        <select class="suggest-input suggest-select" id="sugCat" required>
+          <option value="" disabled selected>Pick one</option>
+          <option value="bug">Bug report</option>
+          <option value="suggestion">Suggestion</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="suggest-row">
+        <label class="suggest-label" for="sugBody">Description</label>
+        <textarea class="suggest-input suggest-textarea" id="sugBody" required minlength="10" maxlength="2000" rows="4" placeholder="What happened, or what would you like to see?"></textarea>
+      </div>
+      <div class="suggest-row">
+        <label class="suggest-label" for="sugUser">Twitch username <span class="suggest-opt">(optional)</span></label>
+        <input class="suggest-input" id="sugUser" type="text" maxlength="100" placeholder="So we can follow up in chat">
+      </div>
+      <button type="submit" class="suggest-send" id="sugSend">Send</button>
+      <p class="suggest-status" id="sugStatus" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
   <footer>
     The page asks the town for news every minute while you have it open. The town only sends news while the stream's game is running.
-    <br>Bellmire HD &middot; JestSayin &middot; <a href="https://docs.google.com/forms/d/19bMpRDF6awFj8fdCZiSARBj5byV3txgtww9PVlxEwhY/viewform" target="_blank" rel="noopener noreferrer" class="footer-link">Suggestion Box</a>
+    <br>Bellmire HD &middot; JestSayin &middot; <a href="#suggestions" class="footer-link">Suggestion Box</a>
   </footer>
       </div>
     </div>

@@ -888,3 +888,18 @@ Method: folder walked recursively with `find` and extension-counted; sibling zip
 | Cleared for use | **YES - CC0 1.0.** Licence gate satisfied. The 20 Nov licence-gate list named `rocks` as having no licence file; that was wrong: `readme.txt` is present at the pack root and was read in full this firing. Any file that enters `assets/` still needs its own row. |
 
 Method: folder walked recursively with `find` (32 files, 6 directories); `readme.txt` read in full with `cat -A` to see line endings and hidden text, and hashed. Sibling `rocks.7z` not opened. No model or texture was opened as a licence source.
+
+## PACK CATALOGUE - ultimate_animated_character_pack (25 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\ultimate_animated_character_pack\` (inner folder `Ultimate Animated Character Pack - Nov 2019\`; sibling `ultimate_animated_character_pack.zip`, 48,430,012 bytes, checked by central-directory read with Python `zipfile`, not extracted: 213 entries = 209 files + 4 folder entries, zip comment empty, same contents as the folder) |
+| Author | Not stated by the pack itself. The 2019 name and the `Blends/`, `FBX/`, `OBJ/` layout match the Quaternius character set, but no author line was found in any file read, so nothing is attributed here |
+| Licence | **NO LICENCE FILE FOUND.** No LICENSE / License / copying / readme / credits / terms / eula / about / txt / md / html / pdf / url file in the folder or the zip, at any depth. The folder holds only `.blend`, `.fbx`, `.obj`, `.mtl` and one `Preview.png`. A case-insensitive text search of every `.obj` and `.mtl` for `licen`, `creative commons`, `CC0`, `CC-BY`, `copyright`, `public domain`, `attribution`, `quaternius` and `author` returned no hits. The 20 Nov licence-gate list also named this pack without a read; that is confirmed here. No licence is recorded from memory or from the source page. Nothing guessed. |
+| File count | 209 on disk: 52 x `.blend` (`Blends/`), 52 x `.fbx` (`FBX/`), 52 x `.obj` + 52 x `.mtl` (`OBJ/`), 1 x `Preview.png` (1920 x 1080 RGBA). No textures on disk. 4 subfolders. |
+| Contents | Animated base and character models (BaseCharacter, BlueSoldier_Female/Male, Casual2_Female and similar). Recorded so a later reader can find it by contents. |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until a licence file or an author licence is found on disk. |
+
+Method: folder walked with `find` (209 files, 5 directories including root), extension-counted; sibling zip read by central directory; licence-like names searched at every depth; case-insensitive grep of the `.obj` and `.mtl` text for licence terms returned nothing. The `.mtl` header was read only to confirm it is a Blender export. No `.blend`, `.fbx` or `.obj` body was opened as a licence source. Selection note: every other directory in `_packs` already has a catalogue entry; this pack appeared only in the 20 Nov gate list, so it was the next one unverified.

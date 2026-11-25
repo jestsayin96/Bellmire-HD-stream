@@ -872,3 +872,19 @@ Method: directory listed recursively and extension-counted with `find`; the sibl
 | Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until a licence file or an author licence is found on disk. This firing confirms against the disk the 20 Nov licence-gate listing, which had named the pack without a read. |
 
 Method: folder walked recursively with `find` and extension-counted; sibling zip read by central directory; licence-like filenames searched at every depth; case-insensitive grep of every file's text for licence terms returned nothing. No `.obj`, `.mtl` or `.fbx` was opened as a licence source. Only the `.mtl` header was looked at, to confirm it is a Blender export and carries no terms.
+
+## PACK CATALOGUE - rocks (25 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\rocks\` (sibling `rocks.7z`, 77,656,287 bytes, not opened) |
+| Author | Nobiax (named in the licence text as "Provided by Nobiax"; Yughues credited as the OpenGameArt/ShareCG handle) |
+| Licence | **CC0 1.0 Universal (Public Domain Dedication)**, read verbatim from `readme.txt` (885 bytes, SHA-256 `04bd29b2a8d12f4b86700c69a8d9ddf933ec8a43913017950c9948afe34bfcc2`). The file states the work is dedicated to the public domain, "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission." |
+| File count | 32 on disk across 6 directories: 5 x rock folders (`01`-`05`), each holding `diffuse.tga`, `normal.tga`, `specular.tga`, `preview.jpg`, `rock_0N.obj` and `rock_0N.fbx` (30 files), plus root `preview.jpg` and `readme.txt`. The `05` folder's FBX is named `rock_05..fbx` (double dot) - rename on import. |
+| Contents | Five rock models with their own diffuse, normal and specular maps. Recorded so a later reader can find it by contents. |
+| Commercial use | **Permitted.** CC0 1.0 grants it outright. |
+| Attribution | **Not required.** The readme asks for a link to the result ("Please, give me a link of the result at nobiax.deviantart.com ... or on Youtube"). That is a request, not a condition of the grant, so it is recorded here and not enforced. |
+| Forbidden-family check | None of CC-BY-NC, CC-BY-ND, CC-BY-SA apply. |
+| Cleared for use | **YES - CC0 1.0.** Licence gate satisfied. The 20 Nov licence-gate list named `rocks` as having no licence file; that was wrong: `readme.txt` is present at the pack root and was read in full this firing. Any file that enters `assets/` still needs its own row. |
+
+Method: folder walked recursively with `find` (32 files, 6 directories); `readme.txt` read in full with `cat -A` to see line endings and hidden text, and hashed. Sibling `rocks.7z` not opened. No model or texture was opened as a licence source.

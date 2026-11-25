@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "41eb433365453c20807efc8d1a561a6a88c6efbb",
+   "head": "39920cbd4666007bad3072f64ba69e9af54478db",
    "ref": "origin/main",
-   "ref_commit": "f828aa6a3f80bcbcd5d2d6d46d155f07137a83a2",
+   "ref_commit": "567240887c2856f5cf5eef773816a6a33e8ab223",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3373,7 +3373,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.988,
+   "corridor_margin_m": 8.99,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.45,
    "read_from": {
@@ -3399,13 +3399,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "collier": {
+   "title": "Halfblow",
+   "theme": "wood",
+   "idea": "YOUR OWN HEAVY BLOW IS WHAT OPENS IT - it is earthed shut on a live fire and every blow lands in full, but anything past a measured stroke bursts a vent and the flare takes the whole room. Take it down in half blows, or drive its four pale plugs into the vents first",
+   "wear": 0.38,
+   "feed_line": "Something in here is shut on a fire.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 2417,
+   "size": [
+    2.04,
+    2.16,
+    2.1
+   ],
+   "footprint_span": 2.16,
+   "height_m": 2.1,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.84,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.4,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.8179290622892157,
+    "ortho": 3.3261308670043945,
+    "clip": [
+     7.506062984466553,
+     18.956504821777344
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs f828aa6a3f80bcbcd5d2d6d46d155f07137a83a2 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 567240887c2856f5cf5eef773816a6a33e8ab223 sha bc3a603f",
  "blank_check": {
-  "files": 183,
+  "files": 186,
   "failures": []
  }
 }

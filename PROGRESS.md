@@ -19258,3 +19258,53 @@ Next content: C-207.
 - The writer remains the snippet each firing runs on the Windows bridge (no file in W2 to fix); canonical text is in U169 above. Check after every IDLE write: last byte of RUN_LOCK.txt is 0x0a.
 - CHANGED: this note only; seven HUD files untouched. PARSE/RENDER: n/a (no source change, no UI change). Decision for Mr. E: none.
 - Next firing 07:52 is ODD: stand down and commit a one-line note unless the plan reopens HUD.
+## B150 - 25 Nov 2026, 06:45 CT firing (chat bot) - A WRITTEN STAND-DOWN AS MY ROW ORDERED, AND I MEASURED "NOTHING IS OWED" INSTEAD OF REPEATING IT
+My row (team lead, 05:58 block): "**WRITTEN STAND-DOWN, AND CLAIM BY :50 IF YOU TAKE THE LOCK AT ALL.**
+B149 paid the republish, the COUNT arm is shut and the ask table is landed and proved silent on all five
+arms. Nothing is owed." I took the stand-down and claimed NO lock. The reason is not obedience: the two
+gates this lane owns were run on merged content TEN MINUTES before my slot and came back green, so a
+claim would have re-measured a fresh result and spent a window four lanes share.
+
+- THE LOCK: free when I looked, and I did not take it. Last line at 06:47:07 CT was
+  `IDLE 2026-11-25T06:46:57-06:00 - QA tester`, which closed `RUNNING 06:42:24 (QA tester)`. Inside that
+  run QA tester ran MY TWO GATES on R at 76edda17: **L14_TEST OK (24 checks)** with the MINIBOSS UNNAMED
+  arm now SILENT (S129 landed), and **COMMANDS_DOC OK 32**, plus parse rc 0 / 0 SCRIPT ERROR. The one
+  L14 FAIL that B147 and B149 both red-proved "not mine" is gone, and it went green on another lane's
+  merge exactly as B149 predicted it would. I am recording someone else's verdict as someone else's.
+- SYNC STATE, PROVED BY GIT, NOT ASSERTED: `git merge origin/main` on `chatbot` was a FAST-FORWARD -
+  W6 HEAD is now `63c488f4`, identical to `origin/main`. `git diff --numstat origin/main HEAD` over my
+  three files is **EMPTY**; `git log origin/main..HEAD` is **EMPTY**; `git status --porcelain` over my
+  three files + PROGRESS.md is **EMPTY**. So nothing of this lane's is held back in a working tree and
+  nothing is unmerged - the two ways this lane has previously lost work.
+- THE FOUR REGISTERS, RE-MEASURED BY ME ON THE MERGED TREE: `data/commands.json`
+  `commands.miniboss` short **62** and what **62**; `docs/COMMANDS.md:39` **62**;
+  `miniboss_feed.by_key` **62**. 21232 bytes on commands.json, the same figure B149 recorded.
+  32 command entries, `order` 32, `order` == key set. `/ask/order` 21 and `/ask/topics` 21, key sets equal.
+- DRIFT CHECKED BOTH WAYS, AND TWO OF MY OWN CHECKS WERE WRONG BEFORE THEY WERE RIGHT. I write both
+  down because a check that cries wolf is worse than no check:
+  1. My first pass flagged **4 ask topics with no reply** (`missed`, `myhero`, `commands`, `hub`). FALSE.
+     There are TWO legal topic shapes and I only knew one: 17 are reply-shape, 4 are redirect-shape
+     `{"cmd": ..., "phrases": [...]}` which route to a command instead of carrying their own line. All
+     21 have phrases, all 4 `cmd` targets are real commands, 0 malformed. My test demanded phrases AND
+     reply; the right test is phrases AND (reply XOR cmd).
+  2. My first pass flagged **7 published aliases with no dispatch key** (`armor`, `commands`, `sheet`,
+     `spotlight`, `stats`, `steel`, `watch`). FALSE, and the answer was in my own file: `handle()`
+     canonicalises an alias to its command BEFORE the `match`, and B108 already shipped the arm that
+     reads the alias column (ALIAS UNUSABLE / SHADOW / CLASH). I was measuring the wrong layer.
+  AFTER CORRECTING BOTH: 59 dispatch keys in the `match verb` block; **0 command entries with no
+  dispatch key**; **0 published aliases unroutable**; **0 entries without a literal in chatcmd.gd**.
+- THE ONLY CODE/DATA ASYMMETRY LEFT IS DELIBERATE AND I AM NAMING IT RATHER THAN LETTING IT LOOK CLEAN:
+  three dispatch verbs - `testbits`, `testsub`, `testpoints` - exist in `chatcmd.gd:204` with NO
+  `commands.json` entry and so no doc row. That is correct: the branch returns "" unless the caller's id
+  begins with `local_`, i.e. Mr. E's own chat box, and a Twitch viewer can never reach them. Publishing
+  them would advertise a route that answers nobody. Not drift, and not a new item.
+- NO CODE CHANGE, NO DATA CHANGE. `chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are
+  byte-identical to `origin/main`; this cycle's only diff is this PROGRESS.md block.
+- I DID NOT TOUCH `bug` OR `suggest`. My row forbids rewording them and says the Suggestion Box problem
+  I flagged is REAL but NOT MINE - the team lead has routed it to the supervisor with a recommendation
+  (publish gh-pages, but only after the Google Form has its three questions). I have nothing to add to it.
+- GAME BUILD: nothing owed in `twitch_eventsub.gd` this cycle.
+- TWITCH: no live test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+  posted as bellmirebro.
+- NEXT: at 07:45, whatever the plan's CHAT BOT row says. If it is silent, the honest state of this lane
+  is still nothing owed, and the next real work is L56 (delve-heavy soak) when a window is actually free.

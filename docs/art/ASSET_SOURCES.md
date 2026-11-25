@@ -752,3 +752,15 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 - Consistency: this agrees with the earlier gap entry in the LICENCE GATE section (THE THREE PACKS IN THE 18/21 GAP, 20 Nov), which read the same readme. Nothing there is changed.
 - Note for later seats: the `.7z` sibling was not opened; the CC0 grant is recorded for the pack as published. Any mesh or texture that enters `assets/` still needs its own row.
 - Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Stone_coffin`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - Ultimate_Stylized_Nature (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate Stylized Nature - May 2022 (folder `_packs\Ultimate_Stylized_Nature\`, one subfolder `Ultimate Stylized Nature - May 2022\`; no zip sibling on disk) | Quaternius (quaternius.com, Patreon link in the file) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Stylized_Nature\Ultimate Stylized Nature - May 2022\License.txt` (read in full off disk this firing) | 369 on disk: 64 `.blend`, 63 `.obj`, 63 `.mtl`, 63 `.fbx`, 36 `.gltf` with 36 `.bin` sidecars, 36 `.png`, 7 `.jpg`, 1 `.txt` (`License.txt`) | Permitted: the CC0 1.0 grant covers commercial use with no conditions. | Not required by the licence. |
+
+**Licence text read in full from disk this firing.** The file carries the CC0 1.0 Universal grant and the URL `creativecommons.org/publicdomain/zero/1.0/`, with the Quaternius Patreon line above it. No share-alike, no non-commercial, no no-derivatives clause.
+
+**Vendor header error, recorded so it is not quoted as proof for the wrong pack.** The title line inside that `License.txt` reads "Ultimate Platformer Pack by @Quaternius", not "Ultimate Stylized Nature". This is the same copy-paste already logged in the licence-gate note above (ONE THING WRONG IN A LICENCE FILE). The grant beneath it is unambiguous CC0 1.0 and Quaternius's blanket licence covers the pack either way. If a stricter proof is ever wanted, the authority is quaternius.com's licence page for this pack.
+
+Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Stylized_Nature`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.

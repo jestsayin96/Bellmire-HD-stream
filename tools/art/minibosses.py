@@ -22955,12 +22955,26 @@ def collier():
     # splits the +24 mark, and a +3.0 deg nudge of that ONE stake heals it
     # while SEVEN stakes stay exactly where they ship - no side-view cost, no
     # ring-gap risk, nothing else on the body moves.
-    _NUDGE = {}
-    _nd = os.environ.get("COLLIER_STAKENUDGE", "").strip()
+    # *** PASS 13 IS NOW THE SHIPPED DEFAULT. 09:58 CT ROW, 25 Nov. ***
+    # p13 is a STRICT improvement and it was sitting behind a flag because it
+    # does not close the headline count fault. "Does not fix the headline
+    # fault" is not a reason to leave a strict improvement unshipped: -42, -10
+    # and -78 are pixel-for-pixel what shipped before it, six stakes and the
+    # row height never move, and the +24 mark stops being SPLIT into 139+17.
+    # A viewer counting marks on the front view counted a 17 px crumb beside
+    # its own vent; now there is one mark there.
+    # THE OFF LEVER IS THE RED PROOF. `COLLIER_STAKENUDGE=0` (or `off`) puts
+    # every stake back on the 45 deg grid, which puts the +24 split BACK - that
+    # is how this pass is red-proved, and it is why the lever exists at all.
+    # It is NOT a tuning knob: nothing should ship with it set.
+    _NUDGE = {0: +3.0}
+    _nd = os.environ.get("COLLIER_STAKENUDGE", "").strip().lower()
     if _nd == "12":
         _NUDGE = {0: +3.0, 6: -6.5}     # DISPROVED: -78 got worse. Kept to reproduce.
     elif _nd == "13":
-        _NUDGE = {0: +3.0}              # the +24 split heal, and nothing else
+        _NUDGE = {0: +3.0}              # the shipped default, named explicitly
+    elif _nd in ("0", "off", "none"):
+        _NUDGE = {}                     # THE RED-PROVE LEVER: the +24 split returns
     for i in range(8):
         a = math.radians(_STAKEBASE + 45.0 * i + _NUDGE.get(i, 0.0))
         d = Vector((math.sin(a), -math.cos(a), 0.0))

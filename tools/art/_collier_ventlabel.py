@@ -10,15 +10,25 @@ seams. So the front A/B's SEVEN marks have been divided into "four vents and
 three somethings" BY EYE, and pass 8 ticked a count of four taken that way.
 A number that needs an eye to attribute it is not labelled, it is guessed.
 
-So this renders THREE arms through ONE LOCKED CAMERA:
-    full      - the body as it ships
-    glowoff   - MB_CUEOFF=glow, every glow swapped for body, no vertex moved
-    seamoff   - COLLIER_SEAMOFF=1, the three seams gone, vents untouched
-and takes two differences:
-    full - glowoff  = every lit mark (vents AND seams), which is what every
-                      previous pass measured and called "the vents"
-    seamoff - glowoff = THE VENTS ALONE
-    full - seamoff  = THE SEAMS ALONE
+So this renders FOUR arms through ONE LOCKED CAMERA:
+    full        - the body as it ships
+    glowoff     - MB_CUEOFF=glow, every glow swapped for body, no vertex moved
+    seamoff     - COLLIER_SEAMOFF=1, the three seams gone, vents untouched
+    seamglowoff - both at once: no seam geometry AND no glow
+and takes these differences:
+    full - glowoff        = every lit mark (vents AND seams)
+    seamoff - seamglowoff = THE VENTS ALONE
+    full - seamoff        = THE SEAMS ALONE
+
+*** IT USED TO BE THREE ARMS AND THE VENT LABEL WAS WRONG. 25 Nov 10:4x CT. ***
+`seamoff - glowoff` was called "the vents" from pass 10 to pass 13. It is not.
+`COLLIER_SEAMOFF` SKIPS BUILDING the seam tubes while `MB_CUEOFF=glow` leaves
+them standing and recolours them, so that difference also carries the shading
+of a body-coloured tube against the bare flank. It reported SEVEN vent marks on
+a four-vent body, three of them at the same centroids as three SEAM marks. The
+fourth arm removes the confound by construction rather than by tolerance, and
+the old difference is still written out, named IMPURE, so the fault can be
+reproduced instead of taken on trust.
 Each mark is then labelled by construction. The camera is measured ONCE off the
 full body and LOCKED, because a camera that re-fits per arm moves every pixel
 and the count reads green for nothing (the Beadle's pass-12 lesson).
@@ -29,8 +39,11 @@ else goes beside a picture somebody looked at.
 
 *** RED ON EMPTY, AND RED ON A DIFFERENCE THAT CANNOT EXIST. ***
   - any arm whose render is blank, or touches the frame border, is RED;
-  - `seamoff - glowoff` reading ZERO marks is RED: that is either a body with
-    no vents at all or an A/B that did not take;
+  - the vents-only difference reading ZERO marks is RED: that is either a body
+    with no vents at all or an A/B that did not take;
+  - ANY pixel that moved in BOTH the vents-only and the seams-only difference
+    is RED - a mark cannot be a vent and a seam at once, and a labelling that
+    is not disjoint makes every count in the file meaningless. Threshold-free;
   - `full - seamoff` reading ZERO marks is RED: COLLIER_SEAMOFF did nothing,
     so the labelling is a fiction and must not be believed;
   - a run that compared no pairs is RED.
@@ -150,6 +163,15 @@ def diff_marks(pa, pb):
              "cy": round(sum(q[0] for q in p) / len(p), 1)} for p in mk[:14]]
 
 
+def diff_mask(pa, pb):
+    """The boolean mask behind diff_marks - same test, no labelling."""
+    A, B = G.read_png(pa), G.read_png(pb)
+    assert A.shape == B.shape, "shape %s vs %s" % (A.shape, B.shape)
+    d = np.max(np.abs(A[..., :3] - B[..., :3]), axis=-1)
+    da = np.abs(A[..., 3] - B[..., 3])
+    return np.maximum(d, da) > THRESH
+
+
 def blank_and_border(path):
     a = G.read_png(path)
     al = a[..., 3]
@@ -182,8 +204,28 @@ def main():
     rig(scene, target, radius, info["aura"])
     paths = {"full": shoot(os.path.join(out, "full_front.png"), target, radius)}
 
+    # *** THE FOURTH ARM, ADDED 25 Nov 10:4x CT, AND IT EXISTS BECAUSE THE
+    # *** THREE-ARM LABELLING WAS WRONG AND I CAUGHT IT IN MY OWN OUTPUT. ***
+    # The 10:39 run printed SEVEN "vents only" marks on a body with FOUR vents,
+    # and three of them sat at the SAME centroids as three "seams only" marks -
+    # one of them identical to the pixel (px 5, cx 489.4, cy 299.2) in BOTH
+    # lists. A mark cannot be a vent and a seam at once, so the labelling was
+    # not disjoint and `vent_mark_count` was a LYING NUMBER.
+    # THE MECHANISM, and it is structural, not a tolerance:
+    #   `COLLIER_SEAMOFF=1` SKIPS BUILDING the three seam tubes (minibosses.py
+    #   :23224), while `MB_CUEOFF=glow` leaves those tubes standing and only
+    #   swaps their material. So `seamoff - glowoff` does not isolate the
+    #   vents: it also carries the shading difference between a body-coloured
+    #   seam tube and the plain flank where no tube exists at all.
+    # THE FIX IS A FOURTH ARM, NOT A TOLERANCE. With `seamglowoff` (seams gone
+    # AND glow off) the vents are read between two arms that BOTH have no seam
+    # geometry, so the only thing that differs is the vent emission:
+    #   vents_only = seamoff - seamglowoff     <- nothing to confound it
+    # The old difference is KEPT below under its own name, marked IMPURE, so
+    # the defect is reproducible by anyone who doubts this note.
     for name, kw in (("glowoff", dict(cueoff="glow")),
-                     ("seamoff", dict(seamoff=True))):
+                     ("seamoff", dict(seamoff=True)),
+                     ("seamglowoff", dict(cueoff="glow", seamoff=True))):
         o2, i2 = build(**kw)
         rig(scene, target, radius, i2["aura"])
         paths[name] = shoot(os.path.join(out, "%s_front.png" % name),
@@ -201,12 +243,46 @@ def main():
 
     rep["labels"]["all_lit__full_minus_glowoff"] = diff_marks(
         paths["full"], paths["glowoff"])
-    rep["labels"]["vents_only__seamoff_minus_glowoff"] = diff_marks(
-        paths["seamoff"], paths["glowoff"])
+    # THE CLEAN VENT LABEL: both arms have NO seam geometry.
+    rep["labels"]["vents_only__seamoff_minus_seamglowoff"] = diff_marks(
+        paths["seamoff"], paths["seamglowoff"])
     rep["labels"]["seams_only__full_minus_seamoff"] = diff_marks(
         paths["full"], paths["seamoff"])
+    # KEPT AND NAMED FOR WHAT IT IS. This is the difference every pass from 10
+    # to 13 called "the vents"; it is not, and leaving it in the file is how
+    # the next reader checks that claim instead of taking it from me.
+    rep["labels"]["IMPURE_legacy_vents__seamoff_minus_glowoff"] = diff_marks(
+        paths["seamoff"], paths["glowoff"])
 
-    v = rep["labels"]["vents_only__seamoff_minus_glowoff"]
+    # *** THE DISJOINTNESS ARM. NO THRESHOLD IN IT - a pixel that moved in
+    # *** BOTH differences is ambiguous BY CONSTRUCTION, and ZERO is the only
+    # *** reading that is a verdict on its own (05:58 ruling, 25 Nov).
+    # A vent is a thing the seams do not touch and a seam is a thing the vents
+    # do not touch, so the two masks must not share one pixel. If they do, no
+    # count in this file can be believed and it says so instead of printing a
+    # number beside the fault.
+    vmask = diff_mask(paths["seamoff"], paths["seamglowoff"])
+    smask = diff_mask(paths["full"], paths["seamoff"])
+    both = int(np.logical_and(vmask, smask).sum())
+    lmask = diff_mask(paths["seamoff"], paths["glowoff"])
+    rep["labels_disjoint"] = {
+        "vent_px": int(vmask.sum()), "seam_px": int(smask.sum()),
+        "shared_px": both,
+        "legacy_impure_vent_px": int(lmask.sum()),
+        "legacy_shared_px": int(np.logical_and(lmask, smask).sum()),
+        "_why": "a pixel in BOTH the vents-only and the seams-only difference "
+                "is labelled two ways at once. Threshold-free: the only "
+                "acceptable value is 0.",
+    }
+    if both:
+        rep["errors"].append(
+            "LABELLING IS NOT DISJOINT: %d pixels moved in BOTH the "
+            "vents-only and the seams-only difference, so a mark is being "
+            "called a vent and a seam at once and NO count in this file can "
+            "be believed. This is a fault in THIS INSTRUMENT, not in the "
+            "body - do not go looking for it on the collier. RED" % both)
+
+    v = rep["labels"]["vents_only__seamoff_minus_seamglowoff"]
     s = rep["labels"]["seams_only__full_minus_seamoff"]
     if not v:
         rep["errors"].append("VENTS-ONLY difference is EMPTY - either this body "
@@ -222,7 +298,8 @@ def main():
     dst = os.path.join(out, "_ventlabel.json")
     json.dump(rep, open(dst, "w"), indent=1)
     print("WROTE %s ok=%s" % (dst, rep["ok"]))
-    print("VENTS ONLY:", json.dumps(v))
+    print("VENTS ONLY (clean):", json.dumps(v))
+    print("DISJOINT   :", json.dumps(rep["labels_disjoint"]))
     print("SEAMS ONLY:", json.dumps(s))
     print("ALL LIT   :", json.dumps(rep["labels"]["all_lit__full_minus_glowoff"]))
     print("ERRORS    :", rep["errors"])

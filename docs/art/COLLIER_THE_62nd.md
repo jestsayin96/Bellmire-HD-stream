@@ -662,3 +662,172 @@ bite where a stake crosses the rim; the connected-component count reads them
 as one mark each and is happy. I only have that because I cropped the row at
 4x and looked. At 360p the notch is invisible, so it costs nothing at stream
 distance — but no number in this lane would have told me it was there.
+
+---
+
+# PASS 14 - p13 IS THE SHIPPED DEFAULT, AND TWO OF MY OWN CLAIMS WERE WRONG
+
+25 Nov 2026, 10:3x-10:5x CT. Taken off the 09:58 ART row: ship p13, fix the
+lying one-body gate. Both done. Both turned up something the row did not know.
+
+## (a) p13 SHIPS. `COLLIER_STAKENUDGE` IS NOW AN OFF LEVER, NOT AN ON LEVER
+
+`minibosses.py` now carries `_NUDGE = {0: +3.0}` as the DEFAULT. The env var
+keeps `12` (the disproved pair) and `13` (the default, named), and gains
+`0`/`off`/`none`, which puts all eight stakes back on the 45 deg grid. That
+off path is the RED PROOF and is the reason the lever still exists.
+
+Measured on four fresh renders through `_streamscale.py`, hero shot, all three
+views, every rung (artefacts committed: `collier_p14A/B`, `collier_p14offA/B`):
+
+| rung | FRONT shipped | FRONT lever-off |
+|---|---|---|
+| full  | **6** marks `[460, 449, 197, 38, 28, 23]` | **7** marks `[460, 449, 135, 38, 28, 23, 17]` |
+| 1080p | **6** `[189, 189, 85, 15, 12, 11]` | **7** `[189, 189, 59, 15, 12, 11, 10]` |
+| 720p  | **6** `[87, 84, 42, 10, 6, 6]` | **7** `[87, 84, 27, 10, 6, 6, 6]` |
+| 480p  | **6** `[43, 42, 22, 6, 4, 4]` | **7** `[43, 42, 14, 6, 4, 4, 2]` |
+| 360p  | **6** `[25, 25, 12, 5, 1, 1]` | **7** `[25, 25, 8, 5, 3, 1, 1]` |
+
+The +24 vent is ONE mark shipped and TWO (135 + 17) with the lever off, at
+EVERY rung. **RED-PROVED: unsetting it puts the split back.** I also looked at
+the two front crops at 5x side by side: shipped, the crescent is continuous
+with a dark withy notch bitten out of its right edge; lever-off, the same
+crescent is cut clean through and a separate orange slice stands to its right.
+The picture and the number agree.
+
+## *** AND "NO SIDE-VIEW COST" IS FALSE. I WROTE IT AND IT IS WRONG. ***
+
+The pass-13 entry above says p13 is a strict improvement with "no side cost",
+and the 09:58 row repeated it back to me as "a STRICT improvement at zero
+cost". **It is a trade, not a free gain, and my own fresh render says so:**
+
+| view | shipped | lever-off |
+|---|---|---|
+| side, full  | `[199, 173, **24**, 1]` | `[199, 173, **40**, 1]` |
+| side, 360p  | `[14, 11, **2**]` | `[14, 11, **4**]` |
+| back, every rung | identical | identical |
+
+The third side mark LOSES 40% of its area when p13 ships - 40 px to 24 px at
+full, 4 px to 2 px at 360p. I looked at the side crop at 5x and it is visible:
+the small orange sliver on the near mound is plainly fatter with the lever off.
+The reasoning behind the old claim was "six stakes do not move, so the side
+cannot change" - but the +22.5 stake is NOT edge-on to the side camera, and
+moving it 3 deg walks it across that vent's mouth.
+
+**WHY IT STILL SHIPS.** The side mark COUNT is unchanged at every rung (3 at
+360p both ways); what moves is the size of a sliver that was already far below
+anything a viewer resolves. The front loses a spurious 7th mark at every rung.
+So the trade is: a countable front mark healed, against an uncountable side
+sliver shrinking. That is worth taking - but it is a trade and the file should
+not say otherwise.
+
+## (b) THE LYING ONE-BODY GATE - ALREADY FIXED AT 07:5x, AND NOW PROVED BOTH WAYS
+
+The row carried this as open for a third hour. **It was not open.** The subset
+rule landed in `minibossfit.py` at 07:5x CT (commit d1df93ec) and I verified it
+by RUNNING it rather than by reading it. Four single-body runs this pass:
+
+    _fit_p14A / _fit_p14B / _fit_p14offA / _fit_p14offB
+    -> verdict GREEN, ok true, rows_judged 1, errors [], blind_views []
+
+`_fit_p9A.json` and `_fit_p9B.json` are simply artefacts written BEFORE that
+fix; the code behind them no longer exists. **A one-body run can be green.**
+
+**AND IT HAS NOT BEEN DEFANGED - red-proved in the same pass.** A run with
+`--prove-census-red collier`, which drops the key from every census list in
+memory, goes **RED on both arms**: the per-key `uncensused` red AND the
+"different house" red, because once collier is uncensused the run's rows are no
+longer a subset of what the census covers. So the arm is quiet exactly when the
+run is a covered subset and loud the moment it is not.
+
+The shipped register was re-rendered on the new body in the same pass:
+`_fit_report.json` ok true, GREEN, **64 pairs**, errors [], blind_views [],
+collier ratio 0.86 / 3.9 / fits_frame true.
+
+## *** THE VENT LABELLER WAS LYING AND I CAUGHT IT IN MY OWN OUTPUT ***
+
+`_collier_ventlabel.py` printed `vent_mark_count: 7` on a body with FOUR vents,
+and three of those "vents" sat at the SAME centroids as three "seam" marks -
+one of them, `px 5, cx 489.4, cy 299.2`, byte-identical in both lists. A mark
+cannot be a vent and a seam at once.
+
+**THE CAUSE IS STRUCTURAL, NOT A TOLERANCE.** `COLLIER_SEAMOFF=1` SKIPS
+BUILDING the three seam tubes; `MB_CUEOFF=glow` leaves them standing and only
+swaps the material. So `seamoff - glowoff` - the difference every pass from 10
+to 13 called "the vents" - also carries the shading of a body-coloured tube
+against bare flank.
+
+**THE FIX IS A FOURTH ARM.** `seamglowoff` (no seam geometry AND no glow) lets
+the vents be read between two arms that both lack the seams:
+`vents_only = seamoff - seamglowoff`. Measured, same body, same locked camera:
+
+    clean   vents_only  = 4 marks  [461, 452, 204, 41]   vent_px 1158
+    legacy  (impure)    = 7 marks                        vent_px 1198
+    shared with seams:   clean 0 px   |   legacy 40 px
+
+The 40 shared pixels ARE the defect, and they are the whole of the gap between
+1198 and 1158. The impure difference is still written to the json under
+`IMPURE_legacy_vents__seamoff_minus_glowoff` so the next reader can reproduce
+this rather than take it from me.
+
+A **disjointness arm** now guards it, with no threshold in it: any pixel moving
+in BOTH differences is RED, and its message says plainly that the fault is in
+the instrument and not on the body, so nobody goes hunting for it on the mesh.
+
+**NOTE THE TWO CAMERAS BEFORE ANYONE CALLS THIS A DISCREPANCY.** The labeller
+reports the third vent at 204 px and `_streamscale` at 197 px. They are
+different shots - the labeller renders the body ALONE through its own locked
+camera, `_streamscale` reads the hero pair shot. Both say ONE mark, which is
+the claim.
+
+## THE FIT PROOF, AND WHAT I CAN SEE IN IT
+
+Rendered on the posed knight, idle, front + side + back, and I looked at the
+contact sheet and at three 4-5x crops. Blank check 3/3 opaque, 0 failures,
+border clean, air_px_min 102 on the side, ratio 0.86, fits_frame true.
+
+Faults I can see, ALL PRE-EXISTING - p13 moved one stake three degrees and
+introduced none of them:
+1. **The operator is brown-on-brown with the clamp he stands on.** From the
+   side he separates from the mound only by silhouette against the background.
+   Put him on a lit floor and that separation is not guaranteed.
+2. **His head has almost no facing.** One small dark notch on one side of a
+   round pot head is the only cue; at stream scale he reads the same whichever
+   way he is turned. This is the Beadle's pale-band fault in a milder form.
+3. **The stake notch in the third vent's rim** (already recorded at pass 13) is
+   still there on the shipped body - the connected-component count reads the
+   notched crescent as one mark and is content. Invisible at 360p.
+4. The four front vents are 461 / 452 / 204 / 41 px. The fourth is still a
+   sliver and **the count still reads THREE at 360p.** p13 does not change
+   that and is not claimed to.
+
+## WHAT THIS HARNESS STILL CANNOT SEE
+
+It cannot see the operator's value separation, because every arm here renders
+against the same dark background and measures the cue, not the man. The
+disjointness arm catches a mislabelled mark; nothing in this file catches a
+correctly-labelled mark sitting on a surface the same colour as itself.
+
+## MEASURED FOR THE NEXT ART FIRING - THE MINIBOSS COUNT IS 62, NOT 33
+
+The :34 prompt says "THIRTY-THREE already exist as of 18 Nov" and tells the
+lane to measure the count off `tools/art/minibosses.py` rather than trust that
+line. I did, and **the line is stale by twenty-nine bodies.**
+
+A regex parse of the `BUILDERS = {` / `BUILDERS.update({` blocks gave 133 keys
+and 33 distinct with 16 duplicates - it matches nested dict literals and is
+NOT TO BE TRUSTED; 33 is very likely where the prompt's figure came from.
+Asked the module instead, at runtime inside Blender:
+
+    len(minibosses.BUILDERS) = 76 keys
+      - 14 of those are `_chibi` / `_tall` VARIANTS of a body already counted
+      - leaving **62 BASE BODIES**
+
+And it reconciles three ways, which is why I believe it:
+  - 62 base bodies == the team lead's brace-matched `Delve.MB_NAME` = 62;
+  - every one of the 62 has a row in `_fit_report.json`, none missing;
+  - the register's 64 rows == 62 + the two retired chibi rows
+    (`snuffer_chibi`, `tallyman_chibi`) and nothing else.
+
+**SO AN INVENTED MINIBOSS IS THE 63rd, NOT THE 34th.** Check the existing 62
+before designing, and count them this way - at runtime - not by regex.

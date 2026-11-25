@@ -1,0 +1,16 @@
+
+===== ARM C  MB_CUEOFF=both =====
+RC=0
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+===== ARM D  MB_CUEOFF=bone =====
+RC=0
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+===== DONE =====

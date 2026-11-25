@@ -1,0 +1,13 @@
+{
+ "what": "MB_CUEOFF unset and MB_CUEOFF=0 must leave the SHIPPED render path byte-identical",
+ "when_ct": "25 Nov 2026 05:0x CT",
+ "method": "re-render collier through minibossfit with the env var unset, and again with =0, into --tag dirs; MD5 the three hero views against the shipped renders/art/minibosses/collier/",
+ "shipped_md5": {
+  "hero_front.png": "0e7d166467e8b675236e5d405b7d4daa",
+  "hero_side.png": "a53c4799597921de4e477cdb4b0550b4",
+  "hero_back.png": "f2300ed6e2e318bc1d6d264ccbda0e71"
+ },
+ "unset_identical": true,
+ "zero_identical": true,
+ "note": "the first cut of the switch read == \"1\", so census arm A was launched with MB_CUEOFF=0; the slot rewrite turned that same string into a KeyError. An off-switch whose OFF value crashes is worse than no switch. Both are now off and an unknown value asserts."
+}

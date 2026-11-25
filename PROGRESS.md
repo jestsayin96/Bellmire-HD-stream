@@ -1,3 +1,45 @@
+## S134 - 25 Nov 2026, 11:08-11:2x CT (game build) - SYSTEM 12 STEP S110c-2: THE 20 UACP BODIES IMPORT, BUT THEY SHIPPED INVISIBLE AND THEN BLACK-SKINNED, SO NOTHING IS WIRED AND NOTHING ENTERS assets/ ON laptop
+
+TOOK: the 10:58 TAKE THIS NEXT game-build row - S110c-2, copy the 20 UACP glbs into assets/, import,
+wire per role with a PER-BODY scale, licence note beside them, prove any post-import instrument red.
+
+DONE (all on checkpoint branch `gamebuild-s134-wip`, NOT on laptop - see why below):
+- assets/characters/uacp/ : 20 .glb + LICENSE.txt (CC0, the S133 page read, quaternius.com/packs/
+  ultimatedanimatedcharacter.html). `--headless --import` 0 errors.
+- tools/_s134_uacp_scale.gd - loads the bodies as res:// PackedScenes (as the game will) and measures
+  a HEAD-BONE scale (hat-free) beside the AABB scale. FINDING: all 20 share one skeleton, Head bone
+  rest y = 2.167 on every body, KayKit ADV head y = 1.241 on all four -> k_head = 0.5728 FOR EVERY
+  BODY. The per-body spread S133 saw (3.147-4.292) is hats and hair: hat_bias -2% (Witch) to -28%
+  (Goblin_Male). S133's 0.7249 constant would have stood every UACP head ~27% above a KayKit head.
+  So "per-body scale" resolves to ONE number, but now for the right reason, and the table is printed.
+- FINDING 1, CAUGHT ONLY BY LOOKING: the first lineup render (renders/cycles/s134/lineup.png) drew
+  the KayKit bodies and NO UACP BODY AT ALL, while every number above measured fine. Cause: the
+  off-repo FBX->glb conversion wrote EVERY material (120/120) with base alpha 0.0 + alphaMode MASK,
+  so Godot imported ALPHA_SCISSOR at alpha 0. Fixed in the repo copies by rewriting the glb JSON
+  chunk (alpha 1, OPAQUE); the staging originals are untouched. The gate now counts cut-away
+  surfaces and was RED-PROVED ON THE REAL DEFECT: run against the pre-fix import it printed
+  `UACP_SCALE FAIL ok=0/20 fails=["BlueSoldier_Female: 6 surfaces cut away (alpha)", ...]`.
+- FINDING 2, ALSO ONLY BY LOOKING: after the fix the bodies draw, but SKIN IS BLACK - the "Skin"
+  material came through the conversion as baseColor 0.0134 grey (Worker_Male; the face plate is
+  right). That is the converter reading the wrong colour, not a lighting issue (metallic 0). I did
+  NOT invent a skin colour; the true one must be read off the pack source. That is S110c-2b.
+WHY NOTHING IS ON laptop: S108's rule - these bodies enter assets/ only in the commit that wires
+them - and black-skinned bodies must not be wired. The checkpoint holds the work; the worktree copy
+was moved out of R so no `git add -A` can sweep it in.
+NEXT (S110c-2b): fix Skin colour from the pack source (re-run the converter reading the right
+property, or patch from source values), re-render the lineup and LOOK, then wire per role in
+townsfolk.gd at k 0.5728 with the clip-prefix strip S133 found ("CharacterArmature|...|Idle").
+Gear.strip_props/dress_role assume KayKit bone names; UACP has Fist.L/Fist.R, so wiring must skip
+or remap gear for UACP bodies.
+
+GATES (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (twice, before and after the fix);
+UACP_SCALE OK 20 bodies imported from res://, per-body k 0.5728-0.5728 (head-bone, hat-free), 0
+cut-away surfaces; --redprove -> UACP_SCALE FAIL ok=20/21 ["Nobody_Redprove: not imported"];
+--redprove-bone -> UACP_SCALE FAIL ok=0/20 (no head bone); pre-fix -> FAIL 0/20 (cut away);
+OFFFLOOR_VERDICT OK 0 of 2112; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18117 PASS;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. Looked at lineup.png twice.
+No Twitch test, zero bits.
+
 ## B147 - 25 Nov 2026, 03:45 CT (chat bot) - THE 60 -> 61 REPUBLISH IS PAID AT THE FEED AND BOTH CARRIED CONFIRMATIONS RAN IN ONE WINDOW: COMMANDS_DOC OK 32, L14 23 OF 24, AND THE ONE RED IS AN UNMERGED S127
 
 TOOK: the TAKE THIS NEXT CHAT BOT row off merged main 56724088 - republish 60 -> 61, trigger the
@@ -19627,6 +19669,18 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
 
+## 25 Nov 2026, 11:3x CT - HUB build: CDN re-measure (10:58 row)
+- NUMBER: live HTML `document.lastModified` 09:49:18, script tag `app.js` (not `app.js?v=8`), read 11:39 CT with ?cb=1138. gh-pages 8d214d36 pushed 09:55:03 = 1h44 ago. NOT self-healed; cache-bust NOT confirmed landed. Form still works on the served HTML (row 4 proof, 10:40).
+- web/ unchanged; only web/NOTES.md +9 and this entry. Not claiming READY TO PUBLISH. No tokens anywhere.
+
+## U177 - 2026-11-25T11:56:00-06:00 - HUD: STAND-DOWN, NO HUD-OWNED PHASE 2 SYSTEM IS OPEN. No Godot claimed, no source change.
+- TAKE THIS NEXT (10:58 block, HUD (:52)): "next unticked Phase 2 system whose files are actually YOURS - NAME IT IN YOUR FIRST LINE; verify it is not already wired; if every HUD-owned one is wired, say so WITH LINE NUMBERS and stand down in writing".
+- Named: System 2 rarity-hue (the only HUD-owned Phase 2 system the plan names). It is WIRED by behaviour: ui_theme.gd:176 (U55 block), rarity_hue :196, rarity_ink :200, rarity_pip :204; called at leaderboard_panel.gd:197 (pip) and :202 (ink). Not re-opened, not rebuilt.
+- Not mine, not touched: boss_bar.gd / party_frames.gd / snapshot_pub.gd mana halves (listed in the 11:58 plan as the game build's); L31 remainder; L66 (H31).
+- Open candidate left unrouted: the "NOW FIGHTING" banner ghost behind the boss card at 150% (U108 docking, in auto_director/spotlight territory). Not started this window; would need a windowed 150% render, and I had under 14 min before :07 with the chat bot only just IDLE. Route it to HUD explicitly if wanted.
+- Lock: R working RUN_LOCK.txt last line = IDLE 11:48:24 chat bot B155; tasklist Godot* none at 11:52:47. Free, unclaimed by me; no RUNNING/IDLE line written.
+- Next firing 12:52: stand down unless the plan names a new HUD item; if the banner ghost is named, claim <=15 min with finish inside :07.
+- CHANGED: this note only. PARSE/RENDER: n/a. Decision for Mr. E: none.
 ## B155 - 25 Nov 2026, 11:45 CT firing (chat bot) - THE FOUR GATES B154 SPLIT OFF ARE PAID ON MERGED MAIN, AND BOTH DRIFT FINDINGS I RAISED TURNED OUT TO BE MY OWN MEASUREMENT
 - **Took the item my predecessor carried, not a new one.** B154 split its job under the yield rule and
   carried four engine gates to this firing, all green at B153 on `31727090` but UNPROVEN on merged

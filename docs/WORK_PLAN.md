@@ -1,3 +1,163 @@
+## TAKE THIS NEXT - Updated THE 21:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS OPEN TWO STEPS: 59 BODIES ON DISK / 58 FEED / 57 ENGINE / 56 PUBLISHED.
+*** Measured by me on merged main bab9ad25 - brace-matched, string-aware, comment-aware, anchored
+*** on the dict after `const MB_NAME :=` (my first regex missed it entirely because it expected
+*** `=` and the file says `:=`; I fixed the parser rather than quoting a count I could not stand on):
+***   `Delve.MB_NAME` = **57** keys, 0 duplicates. `dredger` IN (named **Finepass**), `weigher` IN.
+***   `miniboss_feed.by_key` = **58** keys. `harrowman` IN.
+***   `by_key - MB_NAME` = **['harrowman']**. `MB_NAME - by_key` = **[]**. The feed leads the engine
+***   by one, which is how this house runs. Art is now TWO ahead of the feed, not one.
+***   Bodies: **59** base bodies, 72 `.glb` and **72** `.glb.import` under assets/monsters/minibosses/
+***   - I ran art's own test myself and **zero** bodies lack an import sibling.
+***
+*** ===== THE 59th's FIT PROOF IS NOT ON ANY REF. IT IS IN ART'S WORKING TREE ONLY. =====
+*** This is the one thing I would not tick this hour, and I nearly ticked it off art's run doc.
+*** The doc quotes `MINIBOSSFIT ok=true, ratio 1.05, fits_frame true` for the Pledgeman and the
+*** numbers are real - I read them. But they are real **in W5's working copy**:
+***   `git status --porcelain` in W5 names ` M renders/art/minibosses/_fit_report.json` and
+***   ` M renders/art/minibosses/_report.json`. Last commit to touch `_fit_report.json` is
+***   **1991cd6f** - the 58th (harrowman) commit. The 59th's commits (47c8f7a7, 4ba265ea) do not.
+***   ON THE BRANCH: `_fit_report.json` pairs = **60** (58 live + 2 retired `_chibi`), no pledgeman;
+***   `_report.json.minibosses` = **68** rows, no pledgeman.
+***   IN W5's WORKING TREE: pairs = **61** WITH pledgeman (ratio 1.05, fits_frame true, air_x 2.066);
+***   report = **69** rows.
+*** Art's own committed census agrees and says so in its own numbers: `_selfseen_census.json` records
+*** `register_pairs: 61` at 21:48:23 against a register whose committed form holds 60. **THE
+*** INSTRUMENT ON THE REF HAS NEVER BEEN ASKED ABOUT THE 59th BODY, AND THAT IS RED, NOT GREEN** -
+*** which is art's own sentence from this hour's doc, applied to the one register it did not commit.
+*** THE SELF-SEEN HALF IS FINE AND IS COMMITTED: `_backread/_selfseen_all.json` = **59** rows,
+*** pledgeman IN, the other 58 untouched. It is the FIT register and the gen report that are missing.
+***
+*** AND I LOOKED AT THE PICTURE, AT THE FRAME ART'S OWN NUMBER CALLS WORST.
+*** `side.png` (man_seen 0.666 against a 0.75 bar, versus front 0.920 / back 0.928). The number and
+*** the picture agree: the board covers the carrier's head and a third of him is behind his own load.
+*** Pass 2's fix HOLDS - from the side you see through the board's frame, so it does not read as a
+*** shield, and the two-body read is unmistakable. Art's own fault #6 also holds: the three ties are
+*** straight, parallel and evenly spaced across a dark board, and **they still read as ladder rungs**.
+*** The pass-3 OVERRIDE fixed their CONTRAST, not their SHAPE, and a ladder is a shape. Art did not
+*** claim otherwise - it listed this as open - so this is agreement, not a charge.
+*** ONE THING I CAN ADD THAT THE DOC DOES NOT SAY: on `hero_front.png` at hero scale the pledge
+*** reads more as a bound BUNDLE than as a person - its head is a dark ovoid and the limbs do not
+*** separate. The two-body read survives; the two-PERSON read is weaker in front than in side.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **S122 TICKED (game build). THE 57th IS NAMED FINEPASS.** `MB_NAME` 56 -> 57, gained exactly
+***    `['dredger']`, lost `[]`. And the 20:58 seat's prediction was right again, both arms: the
+***    lane's own pre-fix run printed `S51_NAMES FAIL 2 of 177`, and all THREE hardcoded literals
+***    moved in the SAME commit - I opened each file and read the line rather than trusting the
+***    message: `_s51_names.gd:64`, `_s107_gate.gd:43`, `_s117_straker.gd:33`, all `== 57`.
+***    Verdicts: S51_NAMES OK 176, S107_GATE OK 12, S117_STRAKER OK 11, TWITCH_PARSE OK 8,
+***    OFFFLOOR OK 0/2216, TOWNWALK PASS, DELVE_TEST OK.
+***  - **C-200 TICKED (content).** `by_key` 57 -> 58, gained exactly `['harrowman']`, lost `[]`.
+***  - **U161 TICKED (HUD). THE U160 AUDIT IS NOW CLOSED WHOLE.** The guard is real in the source
+***    (`tools/_u69_redproof.gd:18` sets `_small`, :79-82 returns BEFORE the FAIL/OK print, so a
+***    small capture can never print either). RED-PROVED THREE WAYS AND **THE LOG IS COMMITTED** -
+***    `_u161_run.log`, 2,215 lines, and I read the three verdict lines out of it myself at :648
+***    `FAIL elements=26 arm=RED inflated_fails=2`, :1217 `OK elements=26 arm=CONTROL`, :1788
+***    `NO VERDICT - capture 1152x648`. The lane was told last hour to commit the log and it did.
+***  - **B141 TICKED (chat bot). THE HELP-LINE-CUT ARM IS RED-PROVED AND IT PRINTS.** A throwaway
+***    padded `commands.json` drove `help_line("")` to 480 chars; the arm fired both ways with its
+***    own arithmetic (453 = 480 cap minus `'@' + 25-char login + ' '`). The throwaway was restored
+***    and proved byte-identical by sha256, 18,000 bytes. **And it correctly did NOT republish**,
+***    having measured why: origin/main was still 56 at its claim time.
+***  - **THE HUB'S STANDING AUDIT TICKED, AND THE PACK CATALOGUE ROW WITH IT.** `web/` untouched.
+***    `kenney_fantasy-town-kit_2.0` catalogued CC0 1.0 off `License.txt` READ IN FULL OFF DISK -
+***    not off a search snippet, which is the rule and the reason the wrong ban once got made.
+***    847 files counted by extension. CLEARED. (That commit, 61933a04, came in on `hub` but is the
+***    pack-catalogue worker's, not the hub lane's - naming it so the attribution is not lost.)
+***  - **ART: THE 58th (HARROWMAN) IS TICKED WHOLE** - body, import, and its fit row IS in the
+***    committed register. **THE 59th (PLEDGEMAN) IS TICKED FOR BODY, IMPORT AND SELF-SEEN ONLY.**
+***
+*** WHAT I DID NOT TICK, ON PURPOSE:
+***  - **THE 59th's FIT.** Half delivered. See the block above. Not re-assigned, not rebuilt - the
+***    measurement exists and is good; it is one commit away from being judgeable.
+***  - **THE 58th's AND 59th's ENGINE HALVES.** Not half-delivered; they are the rows below.
+***
+*** MY OWN FAULTS THIS HOUR, BOTH CAUGHT BEFORE THEY REACHED A ROW:
+***  1. **I TRUNCATED A LOG I WAS JUDGING BY.** My first `git status` read of W5 clipped its output
+***     to the last 2,500 characters and I read `51 dirty, 0 of them non-webp` off it. **W5 actually
+***     has 2,168 dirty paths, 1,648 of them not `.webp.import`** - and the two files that matter,
+***     the fit register and the gen report, were in the part I had cut off. A clipped log is a lying
+***     instrument, in my own hands as much as a lane's. I re-ran it uncut before writing anything.
+***  2. **I HIT THE PROGRESS.md SUM TRAP THE 20:58 SEAT WROTE UP, AND IT IS RIGHT.** Lane sum 105,
+***     merged insertions **103**. The two missing are blank separator lines that coalesced. The
+***     sound assertions both PASS: **+103 / -0** (zero deletions) and every one of the five lanes'
+***     entries present in the merged file (S122, C-200, U161, B141, hub audit; art writes none).
+***     Residual markers in root PROGRESS.md, all four exact shapes: **0 / 0 / 0 / 0**. Three
+***     conflicts (content, hud-ui, chatbot), all in root PROGRESS.md, all kept BOTH SIDES.
+***
+*** -------------------- THE SIX ROWS --------------------
+*** GAME BUILD - **S123: NAME THE 58th, AND BUMP THE THREE LITERALS IN THE SAME COMMIT.** Add
+***   `MB_NAME["harrowman"] = "Overturn"` - canon agrees in two independent places, art's CANON row
+***   in `tools/art/minibosses.py` and content's C-200 feed row, and I read both. **IN THE SAME
+***   COMMIT** move all three hardcoded literals 57 -> 58: `tools/_s51_names.gd:64`,
+***   `tools/_s107_gate.gd:43`, `tools/_s117_straker.gd:33`. Arm A of `_s51_names` should be FIRING
+***   on `harrowman` before your fix - the body and its `.import` are on main and `by_key` has it.
+***   **If arm A is not firing, my reading is wrong and I want to be told.** Do NOT name the 59th
+***   in the same breath: `pledgeman` has no committed fit row yet (see above).
+*** CONTENT - **C-201: THE 59th's FEED ROW - `pledgeman`, canon name "Heldfast", tag treasury.**
+***   The body and its `.glb.import` are on main as of this hour, which is the same condition that
+***   licensed C-199 and C-200. The feed will then lead the engine by two; that is a consequence of
+***   art running ahead, not a new rule, and it is the game build that closes it.
+*** ART - **COMMIT THE TWO REGISTERS. THAT IS THE ROW, AND IT IS ONE COMMIT WITH NO RE-RENDER.**
+***   `renders/art/minibosses/_fit_report.json` and `renders/art/minibosses/_report.json` are
+***   MODIFIED-UNCOMMITTED in W5 and they hold the Pledgeman's ONLY fit proof. Commit them so the
+***   register judges 61 pairs against a 61-row house instead of 60. **Nothing to re-measure and
+***   nothing to re-render - you already did the work; it is not on the branch.** After that, and
+***   only if the window allows, the 60th is yours to invent under the standing dry-lane exception.
+***   Do not spend a cycle re-proving the Pledgeman: I looked at its worst frame and agree with your
+***   own fault list, #6 included.
+*** CHAT BOT - **B142: THE REPUBLISH IS OWED AGAIN, AND YOUR OWN IDLE LINE NAMED THE CONDITION.**
+***   S122 landed on main this hour, so `data/commands.json` (both `miniboss` leaves) and
+***   `docs/COMMANDS.md` are behind the engine. **MEASURE `origin/main`'s `MB_NAME` AT YOUR CLAIM
+***   AND PUBLISH THAT NUMBER, NOT THIS ROW'S** - it reads 57 as I write, and it will read 58 if the
+***   game build lands S123 at :07, which is likely. Regenerate COMMANDS.md with the real
+***   `tools/_commands_doc.gd`, never by hand, and search the whole file for a surviving stale count.
+***   **CLAIM BY :48, DECLARE A FINISH NO LATER THAN :51:30** - the row that fixed the HUD's window
+***   worked two hours running and it stays.
+*** HUD - **DRY, AND THAT IS THE CORRECT STATE. STAND DOWN IN WRITING, OR AUDIT YOUR OWN SHIPPED
+***   WORK.** U161 closed the last line of the U160 audit and I ticked it whole; there is no HUD item
+***   owed and the freeze forbids me inventing one. A stand-down written up IS the delivery. The
+***   rarity-hue half of System 2 is **U55 and shipped** - do not take it again.
+*** HUB - **NOTHING TO PUBLISH AND NOTHING TO CLAIM.** Measured by tree below. Keep the standing
+***   audit. Publishing is not yours and never has been.
+***
+*** FOR THE SUPERVISOR: **nothing is owed and nothing is waiting on you.** I re-measured both trees
+*** myself rather than copying the block above: `origin/gh-pages` is **5ce35f33**, tree **c03fa129**,
+*** pushed **24 Nov 15:30:43 CT** ("hub publish 7"); `origin/hub:web` is **405450bf**; and the ONLY
+*** difference between them is **`NOTES.md` +12 / -0** - documentation, not shipped web code. The
+*** hub lane did NOT claim ready-to-publish, so **the publish gate is not owed and I RAN NO PUBLISH
+*** VERIFICATION THIS HOUR**, which I say plainly because an unearned gate report is the same fault
+*** class as a lying gate. **RECOMMENDATION: no publish this hour.**
+***
+*** FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot land them; carry this list
+*** forward and land it all in the first live turn):
+***  - **CARRIED from 20:58, STILL OWED - TEAM LEAD prompt, STEP 2, the PROGRESS.md merge check.**
+***    "the insertions should equal the sum of what each lane added" is NOT SOUND. I hit it again
+***    this hour (sum 105, actual 103). Replace with: assert zero deletions, then assert every lane's
+***    added lines survive. Keep the four-exact-marker-shapes rule exactly as written.
+***  - **NEW - TEAM LEAD prompt, the STANDING NOTE ON THE ART FIT REGISTER, IS STALE AND IS WRONG
+***    IN BOTH ITS FACTS.** It says the register's top-level verdict "reads `RED / ok:false` and has
+***    done for days" on two carried `_chibi` rows, and that `shipped_red` is empty while `ok_shipped`
+***    is true. Measured on merged main this hour: **`ok` is `true` and `verdict` is `GREEN`**, and
+***    **the keys `ok_shipped` and `shipped_red` DO NOT EXIST IN THE FILE AT ALL** - the register's
+***    schema changed under the note. The two retired `_chibi` rows are still present and still
+***    carried. **This is NOT a new discovery and I checked before writing it that way**: the 20:58
+***    block already records the register as GREEN. It is the PROMPT that is stale, not the house.
+***  - **NEW - TEAM LEAD prompt, the gh-pages block.** It still names `05ac2679` / tree `9ca8051e`
+***    / 19 Nov 20:06 CT and a "3 files / +59 / -1" delta. All of it is superseded: publish 7 landed
+***    **24 Nov 15:30:43 CT** at **5ce35f33** / tree **c03fa129**, and the delta is one file,
+***    `NOTES.md` +12 / -0. The instruction to re-measure every hour is sound and I obeyed it; it is
+***    the quoted SHAs underneath it that are years of seats out of date.
+***  - **REFRESH, 21:58 CT 24 NOV.** Art fit register **60** rows on the ref (58 live + 2 retired
+***    `_chibi`), **61** in W5's working tree, GREEN. `Delve.MB_NAME` **57**, `by_key` **58**,
+***    published **56**, base bodies on disk **59**, 72 `.glb` and 72 `.glb.import`.
+***    DEAD-DATA BASELINE: **2,389,799 chars** over 48 files (`scripts/*.gd` + `web/app.js`), 12
+***    `data/*.json`, **155** top-level keys, **65** zero-hit = **50 `_note_` + the same 15
+***    NON-NOTE**, **35** asset directories with files, **ZERO** unreferenced, **ZERO** unread live
+***    data keys. The NON-NOTE 15 are byte-for-byte the baseline's 15 and the unread count DID NOT
+***    MOVE. LIVE IDs: **B141, C-200, D100, H32, L74, S122, T5, U161**, art on the 59th.
+
 ## TAKE THIS NEXT - Updated THE 20:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE 55-TO-56 STEP IS CLOSED AND LEVEL. THE CASCADE IS NOW OPEN ONE STEP AT 57 BODIES / 56
 *** ENGINE / 57 FEED / 56 PUBLISHED. Measured by me on merged main cd1cd3dc - brace-matched,

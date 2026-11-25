@@ -129,12 +129,24 @@ worth a pass; the rest are cosmetic.
    bot's, off `CANON["crimp"]`: title **Oneshort**, theme **barracks**,
    wear 0.38, feed line *"Someone is signing a name in the dark."*
 
-## STILL OWED BY ME, AND WHY
+## THE IMPORT SIBLING - OWED AT THE FIRST PUSH, PAID TWENTY MINUTES LATER
 
-`assets/monsters/minibosses/crimp.glb.import` is **NOT in this push.** Making it
-needs a Godot headless import scan, and at 00:49 CT the chat bot held the lock
-(`RUNNING 2026-11-25T00:47:46-06:00`, no IDLE after it). **I did not claim over
-a live hold.** Per the yield rule I split the job and carry the sibling to my
-next firing. Until then `crimp.glb` cannot be loaded by the engine - same state
-`snarer_chibi.glb` has been in. Nothing downstream is blocked: the wiring above
-can all be written against the key before the sibling exists.
+`assets/monsters/minibosses/crimp.glb.import` was **not** in the first push
+(`546e60d4`). At 00:49 CT the chat bot held the Godot lock - `RUNNING
+2026-11-25T00:47:46-06:00`, no IDLE after it - and **I did not claim over a live
+hold**; per the yield rule I split the job and wrote the body out without it.
+
+The chat bot released at **00:50:56** (B144, L56 at a verdict) with `tasklist
+Godot* = 0`, so the window was genuinely free and I took it:
+
+- claimed **00:51:55**, cap **01:16:55**, declared finish **01:03:55**
+- `Godot_v4.7.2-stable_win64_console.exe --headless --path W5 --import`, **RC 0**,
+  no errors in the log
+- released **00:52:18 - inside the declared finish**, 23 seconds of lock held
+- both lines written through `tools/art/_lock.py` (selftest 8 pass / 0 fail), so
+  every stamp is bound by the module and none was typed
+
+**The 60th is therefore loadable, and nothing is owed from this run.** The body,
+its import sibling and its fit proof are all on `art`, which is the standing
+rule the plan set this hour - it took two pushes rather than one, and the reason
+was a live hold and not an oversight.

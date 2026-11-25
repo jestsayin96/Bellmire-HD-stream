@@ -3023,6 +3023,50 @@ static func commands() -> Dictionary:
                     push_error("COMMANDS_DATA SHOP CAP CEILING: `%s`.what publishes level %d as the best a smithy reaches and economy.gd's SHOP_MAX_LEVEL is %d (\"%s\") - the doc either promises a tier no building can stock or hides one a grown town can, and D66's raise_shop() moves this number" % [sc_key, sc_top, sc_max, String(sc_rar[sc_max])])
                     printerr("COMMANDS_DATA SHOP CAP CEILING - `%s`.what tops out at level %d, SHOP_MAX_LEVEL is %d" % [sc_key, sc_top, sc_max])
         _cmds = parsed
+        # ---- B138: THE ONE THING THIS FILE PUBLISHES THAT IT NEVER MEASURED - THE LENGTH OF ITS
+        # OWN ANSWER. Every arm above checks whether a published WORD is true. None checks whether
+        # the line carrying it ARRIVES. twitch_eventsub.gd (the game build's) pastes "@<login> "
+        # on the front and, past CHAT_MAX_LEN, cuts the result and appends "...". That cut is the
+        # one drop in that whole function with NO _say_log beside it - the queue-full drop, the
+        # stale drop and the duplicate drop all log; truncation is silent. So a line of mine that
+        # grows past the cap loses its tail on stream and says so nowhere, and what sits at the
+        # tail of the longest line this file emits is the hub URL - the one thing a viewer needs
+        # when the answer was too long to finish.
+        # WHY IT IS A FAULT NOW AND WAS NOT BEFORE: help_line("") is built from `order`, so it
+        # grows whenever ANY lane adds a command, not when I touch anything. It is the only reply
+        # in this file whose length is decided by a list other lanes extend.
+        # TWO NUMBERS BELOW ARE MIRRORS OF ANOTHER LANE'S FILE AND ARE LABELLED AS SUCH:
+        # CHAT_MAX_LEN (480) and the 25-character ceiling Twitch puts on a login. I do not read
+        # them from twitch_eventsub.gd on purpose - this file must not fall over when that script
+        # is absent - so if the game build moves CHAT_MAX_LEN, this arm's number has to follow it,
+        # and my summary says so in the same breath. 25 is Twitch's own limit, not that lane's.
+        # MEASURED, NOT EMULATED: the lines come from help_line() itself, reading the cache set
+        # one line above, so the arm cannot drift from the function it guards. A key carrying
+        # neither `short` nor `what` is SKIPPED, not measured - help_line() would fault on it and
+        # the NO WHAT arm above already names it; crashing the loader here would turn a reported
+        # fault into a dead bot.
+        var hl_cap := 480            # mirror of twitch_eventsub.gd CHAT_MAX_LEN
+        var hl_pre := 1 + 25 + 1     # "@" + the longest login Twitch issues + " "
+        var hl_budget: int = hl_cap - hl_pre
+        var hl_over: Array[String] = []
+        var hl_rows: Array = [["!help", help_line("")]]
+        var hl_cs: Dictionary = (parsed as Dictionary).get("commands", {})
+        for hl_k in hl_cs.keys():
+            var hl_c: Variant = hl_cs[hl_k]
+            if not (hl_c is Dictionary):
+                continue
+            var hl_d: Dictionary = hl_c as Dictionary
+            if String(hl_d.get("short", "")) == "" and String(hl_d.get("what", "")) == "":
+                continue
+            hl_rows.append(["!help " + String(hl_k), help_line(String(hl_k))])
+        for hl_r in hl_rows:
+            var hl_len: int = String(hl_r[1]).length()
+            if hl_len > hl_budget:
+                hl_over.append("%s is %d chars, %d over" % [String(hl_r[0]), hl_len, hl_len - hl_budget])
+        if not hl_over.is_empty():
+            _guard_faults.append("HELP LINE CUT")
+            push_error("COMMANDS_DATA HELP LINE CUT: %d reply(s) this file publishes are longer than the %d characters that survive a worst-case \"@<login> \" prefix under a %d-char cap, so chat cuts the tail and appends \"...\" with nothing logged anywhere - the hub URL is what sits at that tail: %s" % [hl_over.size(), hl_budget, hl_cap, hl_over])
+            printerr("COMMANDS_DATA HELP LINE CUT - %d reply(s) over the %d-char budget and silently truncated on stream: %s" % [hl_over.size(), hl_budget, hl_over])
     return _cmds
 
 ## B101: a whole number written out in words, or -1 when this guard cannot read it. The satchel

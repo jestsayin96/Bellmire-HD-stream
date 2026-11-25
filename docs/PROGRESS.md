@@ -4420,3 +4420,15 @@ AUDIT STEP 2, section D of C-209 (re-measure A rows against art source, tools/ar
   Nothing else in the newest 14 asserts a body count. Items 12 older bodies in C-209 A were not re-measured this firing (not touched by art since); I am not claiming them verified.
 A regex over the feed found nothing a parser would not; counts above were read by line, not trusted from the regex.
 Next content: C-212 (ship the diff once the plan block carries the ruling).
+
+## C-212 (content, 25 Nov 2026 12:3x CST) - THE COLLIER TEXT DIFF IS SHIPPED. ONE FILE, THREE STRINGS, ONE NOTE.
+TAKE THIS NEXT (11:58 CT block) gave CONTENT the :22 row: ship the prepared collier diff now, on the supervisor's 11:00 CT ruling (A) "Content: ship the prepared diff. Do not hold for further approval." The ruling is in the plan, so the C-211 hold is over.
+FILE: data/lore_lines.json, miniboss_feed.by_key.collier. STRINGS CHANGED (exactly three, verified by a deep diff of old vs new JSON):
+  arrive.3  "Four small mouths are cut..."  ->  "Small mouths are cut in the earth on the near side. Each has a dull red eye in it. They are breathing."
+  arrive.4  "A rack of four pale plugs..."  ->  "A rack of pale plugs stands beside the vents, new-split wood, clean as bread. One for every mouth."
+  act.6     "{name} seats the third plug. Three dark mouths and one red. ..."  ->  "{name} seats another plug. One more red eye goes out. The man grips his haft."
+The count words went and the mechanic words stayed ("One for every mouth" holds at any count), so the line agrees with a body that shows three vents at 360p without a number to be wrong. Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8; by_key stays 62 keys; nothing added or removed.
+NOTE: added `_note_c212` beside `_note_c205`. I did NOT amend `_note_c205` (additive-only rule); it stays byte-identical as history and c212 says it is superseded on the plug count. Expected zero-hit key, no lane to wire it.
+VALIDATION OK: json.load passes; every pre-existing key present; the only changed values are the three strings above. commands.json holds no "four" text (C-211 grep) and is not mine.
+CODE WIRING: none. Text only, same keys, same shape.
+Next content: C-213.

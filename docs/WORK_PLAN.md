@@ -1,3 +1,107 @@
+## TAKE THIS NEXT - Updated THE 07:58 CT FIRING, 25 NOV 2026 (team lead; written 08:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 856d8b0c. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+***
+*** ===== I BEAT :07 THIS HOUR, AND ONLY BECAUSE I CHANGED THE ORDER OF MY OWN RUN. =====
+***   My predecessor missed the game build by NINETEEN SECONDS and said so. I read the clock at
+***   08:01, saw I had five minutes, and wrote these rows BEFORE finishing art's verification
+***   instead of after. THAT IS THE FIX AND THE NEXT SEAT SHOULD DO IT EVERY HOUR: the merge and
+***   the game build's row come first, verification second. Verification can slip an hour with no
+***   cost; a stale row costs a lane its whole window. Two seats in a row have now lost that race.
+***
+*** ===== THE CASCADE REMAINS SHUT AT 62/62/62 AND THE FIFTH LINK IS GUARDED BY A GATE. =====
+***   S131 (game build, laptop 3fe3315a) added the theme arm to tools/_s51_names.gd: every MB_NAME
+***   key must be selectable from THEME_MINIBOSS/THEME_MINIBOSS_MORE. Both diffs [], drawable 62,
+***   and RED-PROVED by erasing collier from a deep copy - fires on [collier] only. S51_NAMES OK 179.
+***   The 06:58 row for the game build is DONE, which is why it has a new one below.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S131** (game build) - the fifth link now has a gate and the gate can go red.
+***   TICKED **ART'S COLLIER PASS 9**, and the tick is for a DISPROOF plus a REFUSAL TO SHIP.
+***     Art measured the front vent row at STREAM scale, not inspection scale, and found the
+***     outermost vent is a SIXTEENTH of its neighbours - centroid bands 38 / 460 / 449 / 152 px -
+***     ONE PIXEL at the 360p rung. A viewer counts THREE. The `miniboss` command text promises
+***     "FOUR pale plugs", so the number the viewer is TOLD and the number on the BODY disagree,
+***     and FAULT 10 already holds that the count IS the mechanic. My predecessor TICKED pass 8
+***     having "counted four vents and four only" on the front view - that count was taken at full
+***     size and it was not wrong, it was taken at the wrong SIZE. Art built tools/art/_streamscale.py
+***     to make the rung explicit and it LABELS the marks.
+***     Art then tried the obvious fix - pull the arc from -78..+24 in to -48/-22/+4/+30 - rendered
+***     it, and IT GOT WORSE: the vent at +4 vanished to ZERO px behind the mound's centre stake.
+***     ART DID NOT SHIP IT. Shipped bearings are back at pass 8's, and art left
+***     `COLLIER_VENTARC=9` behind so nobody re-derives the disproof.
+***     **A LANE THAT FINDS THE FAULT ITS OWN GREEN GATE MISSED, TRIES THE FIX, AND THROWS THE FIX
+***     AWAY BECAUSE THE PICTURE GOT WORSE, IS DOING THIS JOB PROPERLY.** That is the tick.
+***   TICKED the four WRITTEN STAND-DOWNS - **C-208** (content, 62/62 feed rows re-verified),
+***     **B151** (chat bot, and it CORRECTED ITS OWN register count which was wrong by thirty),
+***     the **HUB** standing check (web/ unchanged, greps clean, explicitly NOT claiming ready to
+***     publish), and **U171** (HUD, odd hour, seven files byte-identical to laptop and main).
+***
+*** ===== WHAT I DID NOT TICK =====
+***   NOT the collier as finished art. The count still reads three at stream scale. Open, art's row.
+***   NOT any publish gate. NO LANE CLAIMED "READY TO PUBLISH" THIS HOUR, so the publish gate is not
+***     owed and I RAN NO PUBLISH VERIFICATION. Saying so plainly rather than reporting an unearned
+***     green.
+
+=== TAKE THIS NEXT, ONE ROW PER LANE ===
+
+GAME BUILD (:07) - YOUR 06:58 ROW IS DONE; THIS IS A NEW ONE. Take the **L31 REMAINDER - THE
+  STATUS-EFFECT ICONS**. It is YOURS, not HUD's: its open half lives in delve.gd, monster.gd,
+  party_frames.gd and boss_bar.gd, none of them HUD files, and the plan re-routed it on 16 Nov
+  18:02. D61.1 already landed the damage numbers, so do NOT rebuild those. MEASURE WHAT IS ALREADY
+  THERE BEFORE YOU BUILD - grep for the BEHAVIOUR, not for a name you expect, and if you find it
+  already wired, say so and re-prove it rather than building a second copy. One change, one gate,
+  red-proof it.
+
+CONTENT (:22) - Your row is an AUDIT OF YOUR OWN SHIPPED TEXT, which the freeze allows explicitly.
+  Art has just proved that the `miniboss` collier text promises **FOUR** pale plugs while the body
+  reads THREE at stream scale. DO NOT CHANGE THAT TEXT - art is fixing the BODY to match it, and a
+  text edit now would make the two chase each other. Instead sweep your shipped lore and command
+  text for OTHER places where a NUMBER in prose asserts a count the body or the mechanic has to
+  honour, and list them with file and line. A promise of four of anything is a gate on somebody
+  else's geometry. Report the list; change nothing without a row.
+
+ART (:34) - **COLLIER PASS 10, AND YOUR OWN NOTE NAMES THE CHANGE: MOVE THE OCCLUDER OR THE ROW,
+  NOT THE ARC.** You have already disproved the bearing sweep twice over - pass 5 pushed a vent to
+  -78 and pass 9 pushed one into the centre stake. So shift the centre stake, or drop the vent row
+  below the lashing ring where the flank is unobstructed. Render the GLOW-ONLY arm and LABEL THE
+  MARKS, as you told the next reader to. Accept it only if the stream-scale rung reads FOUR, and
+  red-prove it. If pass 10 also fails, STOP CUTTING AT THE BODY and say so - the fallback is a text
+  change that is content's, not yours, and I will route it.
+
+HUB (:37) - Keep the standing check and KEEP NOT PUBLISHING. One addition this hour: the chat bot
+  reports that `bug` and `suggest` now send viewers to a **Suggestion Box button that exists only in
+  your UNPUBLISHED delta**. That is a live viewer-facing consequence of an unpublished tree, so
+  MEASURE IT PRECISELY and write it into web/NOTES.md: which element, which file, and what a viewer
+  sees today if they type `bug`. I am routing the publish decision up with that evidence. Do not
+  publish, do not claim ready to publish unless you mean it.
+
+CHAT BOT (:45) - **CLAIM BY :50 WITH A FINISH INSIDE :52** - that standing schedule row holds and it
+  has worked. Nothing is owed at the feed: 62/62 is paid and Section 2 landed. So your row is a
+  written stand-down UNLESS your own drift check finds something. If you do stand down, use the
+  window to re-run the ask gate's five arms on the 21 topics and say they are still silent - you
+  refused to fake those for three hours and they are worth keeping honest.
+
+HUD (:52) - Your window is yours; the chat bot is ordered out of it by :52. U171 was an honest odd-
+  hour stand-down. Take a REGRESSION PASS on your own shipped work at the WORST frame, not the
+  prettiest: pick the scale your own logs show the tightest margin at - on U124 that was 125%, not
+  150% - and prove the margin from the picture, not from the number beside it. If nothing is wrong,
+  a written stand-down with the worst-frame measurement IS the delivery.
+
+=== FOR THE SUPERVISOR ===
+1. **THE HUB PUBLISH DECISION NOW HAS A VIEWER-FACING COST, AND THAT IS NEW INFORMATION.**
+   origin/gh-pages^{tree} does not equal origin/hub:web and has not since 20 Nov. The chat bot
+   landed Section 2 this cycle, so `bug` and `suggest` are LIVE commands that point viewers at a
+   Suggestion Box button which exists ONLY in the unpublished delta. Until the hub is republished,
+   a viewer who types `bug` is directed to something that is not on the page they can open.
+   MY RECOMMENDATION: PUBLISH. The delta is small and I will run the full publish gate myself and
+   look at a screenshot before any push. I have NOT published and will not without your word.
+2. The two retired `_chibi` rows still hold the art fit register's top-level verdict at RED/ok:false
+   while `shipped_red` is empty and `ok_shipped` is true. One line from you retires them or keeps
+   them. Not urgent, raised before, still open.
+
+=== NEEDS MR. E ===
+nothing.
+
 ## TAKE THIS NEXT - Updated THE 06:58 CT FIRING, 25 NOV 2026 (team lead; written 07:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 74e155dd. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 ***

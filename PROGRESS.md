@@ -70,7 +70,8 @@ dates into a red would be a gate that cries wolf - the exact fault b4abebb1 was 
 The count is published so the gap shrinks visibly instead of being forgotten.
 REGISTER AFTER THE CHANGE: verdict GREEN, ok true, 63 pairs, errors [], blind_views [],
 unproved_cells [], stale_margin [], red_summary.rows [], blank_check 183 files / 183 expected /
-0 failures / 61 cells. 4 of 63 rows stamped (snuffer_chibi, tallyman_chibi, beadle, timberman).
+0 failures / 61 cells. 4 of 63 rows stamped at that point (snuffer_chibi, tallyman_chibi,
+beadle, timberman) - and then I closed the rest of the gap in the same firing; see 8 below.
 
 ### 5. A CORRECTION TO THE OWED-CORRECTIONS LIST, MEASURED BEFORE I WROTE IT.
 Item 1 of the 01:58 list says the note's evidence keys "`shipped_red` / `ok_shipped` DO NOT EXIST IN
@@ -116,12 +117,59 @@ NEITHER IS AN ITEM AND I HAVE NOT TAKEN ONE. Both are shipped bodies, both are l
 walks [key + "_chibi", key]), and rebuilding either is a multi-pass job, not a tail-end fix. Named
 so the next seat can take it with its faults already written down.
 
+### 8. THE GAP IS NOT LEFT TO CLOSE ITSELF - 63 OF 63 ROWS NOW CARRY A DATE.
+A note that says "the gap closes as rows are re-measured" is a promise, and promises in a register
+are the thing this file exists to stop. So I re-measured the whole house in one sweep rather than
+shipping 59 undated rows: `minibossfit.py` over all 61 live bases, 02:5x CT, ~4 minutes.
+  RESULT: verdict GREEN, ok true, 63 pairs, errors [], blind_views [], unproved_cells [],
+  stale_margin [], red_summary.rows [], blank_check 183 files / 183 expected / 0 failures / 61
+  cells, 61 rendered, `rows_unstamped` **[]**, every row stamped 2026-11-25T02:5x-06:00.
+  AND IT IS A WHOLE-HOUSE REPRODUCIBILITY PROOF, NOT ONLY A STAMPING RUN: 61 bodies rebuilt and
+  re-rendered from scratch moved NO ratio, NO pair_w and NO `fits_frame` in any row. The only
+  staged pixels in the whole sweep were the contact sheet; every per-body render came back
+  byte-identical to what is committed.
+
+### 9. THE SWEEP FOUND A SECOND CARRIED BLOCK THAT HAD GONE STALE, AND I FIXED IT IN THE SAME SEAM.
+`visibility_scope` was a hand-written 21 Nov snapshot, carried forward ever since - the SAME fault
+the file's own `_RUN_OWNED` note records for `self_seen` ("carried for three days as a hand-written
+21 Nov snapshot over a house that had grown by nine bodies"). `self_seen` was made run-owned then;
+`visibility_scope` was not, and BOTH its figures had since gone false:
+  it said `cells: 264` - that is 44 rows x 3 views x 2 subjects. The house is 63 rows = **378**.
+  it argued "place() holds measured air between the two bodies (air_px >= 8 in the tightest view
+  of EVERY row), so neither can ever hide the other". **`ferryman/side` reads air_px 0** (2 at the
+  eps band). The air floor for the house is 0, not 8, and it has one row in it.
+I CHECKED THE CONCLUSION BEFORE CHANGING THE BLOCK, because a stale number does not by itself make
+an answer wrong: 378 of 378 cells still read `vis == alone`, ferryman included, so nothing occludes
+anything and "taken by construction" still holds. The defect was the ARGUMENT, not the verdict - and
+a block that argues from stale figures is one edit away from arguing for a wrong answer.
+`visibility_scope` is now DERIVED every run, like `self_seen`: cells, cells reading exactly 1.0,
+cells where vis differs from alone, the measured `air_px_floor`, and `rows_with_no_air`, which names
+the rows where the construction argument does NOT hold and the cell is therefore a real measurement.
+Today that list is exactly `["ferryman"]`. The standing lesson prose is kept verbatim in the block -
+it still does not say the body reads, and `seen: 1.0` still must not be cited as if it did.
+  RED ON EMPTY, PROVED AND NOT ASSERTED: `--name _vsredproof --sheet` builds a register with no rows
+  at all. It read `cells 0, taken_by_construction FALSE, air_px_floor null, verdict RED, ok false`.
+  A run that measured nothing cannot read as a pass. The two scratch files that proof left
+  (`_fit_vsredproof.json`, `_vsredproof.png`) are UNTRACKED and not in the commit; `rm` in a
+  connected folder returns "Operation not permitted" and I did not ask Mr. E to widen that for two
+  scratch files.
+
+### 10. TWO SHEETS THE 01:34 FIRING REGENERATED AND DID NOT COMMIT - PICKED UP HERE.
+`renders/art/minibosses/_contact_sheet.png` and `_silhouettes.png` were rewritten by that firing's
+generator pass at 01:54:07 CT, with the Timberman in them, and are not in 71df5c88 - so on
+`origin/art` both sheets have been showing a 60-body house since the 61st landed. They were sitting
+modified in the worktree when I opened it. I did not re-make them and I claim no work for them; I
+committed what that firing produced, which is the "a lane's worktree is not its branch" rule
+applied to somebody else's leftovers rather than only to my own.
+
 CENSUS, MEASURED WITH `ast` AND NOT REMEMBERED (tools/art/minibosses.py): ORDER = 61 distinct live
 bases, last `timberman`; BUILDERS = 75 keys = 61 bases + 12 `_chibi` + `drillmaster_tall` +
 `drillmaster_chibi_tall`. So the 62nd is the open one, not the 61st. The prompt's "THIRTY-THREE
 already exist" line is stale by 28.
 
-NO NEW BODY THIS FIRING AND NO GODOT LOCK CLAIMED - nothing in this run needed the engine, so I did
+NO NEW BODY THIS FIRING, AND THE 62nd IS THE OPEN ONE - I chose the register over a new body
+deliberately: a stale instrument that reports an unearned pass costs more than a 62nd miniboss is
+worth, and this one had two. NO GODOT LOCK CLAIMED - nothing in this run needed the engine, so I did
 not take the lock and did not write to docs/RUN_LOCK.txt. No .gd outside tools/art/ touched.
 WIRING OWED TO THE GAME BUILD BY THIS ENTRY: NONE. The Timberman's wiring is still owed and is
 unchanged from the 02:0x entry below (bestiary.gd row, MB_NAME["timberman"] = "Deadfall", the feed

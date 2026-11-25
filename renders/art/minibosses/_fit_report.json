@@ -146,6 +146,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:21-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -183,9 +185,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 156,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "gaoler": {
    "creature_h": 2.35,
@@ -316,6 +316,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:26-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -353,9 +355,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "scrapwright": {
    "creature_h": 2.0,
@@ -486,6 +486,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:24-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -523,9 +525,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 65,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "snuffer": {
    "creature_h": 2.6,
@@ -656,6 +656,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:29-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -693,9 +695,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 149,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "sexton": {
    "creature_h": 2.45,
@@ -826,6 +826,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:31-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -863,9 +865,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 103,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "porter": {
    "creature_h": 2.3,
@@ -996,6 +996,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:34-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1033,9 +1035,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 11,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "tallyman": {
    "creature_h": 2.15,
@@ -1166,6 +1166,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:36-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1203,9 +1205,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 124,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "cook": {
    "creature_h": 2.05,
@@ -1336,6 +1336,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:39-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1373,9 +1375,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "sluicekeeper": {
    "creature_h": 2.5,
@@ -1506,6 +1506,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:41-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1543,9 +1545,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 72,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "sower": {
    "creature_h": 2.25,
@@ -1676,6 +1676,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:44-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1713,9 +1715,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 15,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "snarer": {
    "creature_h": 2.3,
@@ -1846,6 +1846,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:46-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -1883,9 +1885,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 32,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "stoker": {
    "creature_h": 2.4,
@@ -2016,6 +2016,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:49-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -2053,9 +2055,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "bellman": {
    "creature_h": 2.7,
@@ -2186,6 +2186,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:52-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -2223,9 +2225,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "boiler": {
    "creature_h": 2.1,
@@ -2356,6 +2356,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:54-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9901,
@@ -2415,9 +2417,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "snuffer_chibi": {
    "creature_h": 2.6,
@@ -2888,6 +2888,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:57-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -2925,9 +2927,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 105,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "quartermaster": {
    "creature_h": 2.35,
@@ -3058,6 +3058,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:51:59-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -3095,9 +3097,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 75,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "loader": {
    "creature_h": 2.65,
@@ -3228,6 +3228,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:02-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -3265,9 +3267,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 90,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "hurdleman": {
    "creature_h": 2.55,
@@ -3398,6 +3398,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:05-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -3435,9 +3437,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 47,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "tanner": {
    "creature_h": 2.75,
@@ -3568,6 +3568,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:07-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -3605,9 +3607,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 83,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "reeve": {
    "creature_h": 1.95,
@@ -3738,6 +3738,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:10-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9214,
@@ -3797,9 +3799,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 31,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "pressman": {
    "creature_h": 2.85,
@@ -3930,6 +3930,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:15-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9881,
@@ -3989,9 +3991,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 76,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "strickler": {
    "creature_h": 2.55,
@@ -4122,6 +4122,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:18-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.7748,
@@ -4181,9 +4183,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 45,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "greener": {
    "creature_h": 2.5,
@@ -4314,6 +4314,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:23-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.8113,
@@ -4373,9 +4375,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 68,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "drover": {
    "creature_h": 2.44,
@@ -4506,6 +4506,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:32-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9787,
@@ -4565,9 +4567,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "paviser": {
    "creature_h": 2.68,
@@ -4698,6 +4698,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:34-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.574,
@@ -4757,9 +4759,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 17,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "fenman": {
    "creature_h": 2.52,
@@ -4890,6 +4890,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:37-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9895,
@@ -4949,9 +4951,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 84,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "leech": {
    "creature_h": 2.32,
@@ -5082,6 +5082,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:42-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.967,
@@ -5141,9 +5143,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 99,
-   "air_px_tightest_view": "back",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "back"
   },
   "beadle": {
    "creature_h": 2.95,
@@ -5274,7 +5274,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:47:45-06:00",
+   "measured_at": "2026-11-25T02:52:44-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -5466,6 +5466,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:47-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -5503,9 +5505,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 114,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "moulder": {
    "creature_h": 2.9,
@@ -5636,6 +5636,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:26-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.977,
@@ -5695,9 +5697,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 93,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "fuller": {
    "creature_h": 2.66,
@@ -5828,6 +5828,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:50-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9724,
@@ -5887,9 +5889,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "stackman": {
    "creature_h": 2.84,
@@ -6020,6 +6020,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:53-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9464,
@@ -6079,9 +6081,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 21,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "dauber": {
    "creature_h": 2.58,
@@ -6212,6 +6212,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:55-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.8214,
@@ -6271,9 +6273,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 138,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "hooper": {
    "creature_h": 2.36,
@@ -6404,6 +6404,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:00-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.8912,
@@ -6463,9 +6465,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 153,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "scraper": {
    "creature_h": 2.55,
@@ -6596,6 +6596,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:05-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.8864,
@@ -6655,9 +6657,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 98,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "winder": {
    "creature_h": 2.34,
@@ -6788,6 +6788,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:11-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.7102,
@@ -6847,9 +6849,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "pitman": {
    "creature_h": 2.3,
@@ -6980,6 +6980,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:13-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9998,
@@ -7039,9 +7041,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 42,
-   "air_px_tightest_view": "back",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "back"
   },
   "comfitmaker": {
    "creature_h": 2.28,
@@ -7172,6 +7172,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:39-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9962,
@@ -7231,9 +7233,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 128,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "dyer": {
    "creature_h": 2.6,
@@ -7364,6 +7364,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:21-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.8787,
@@ -7423,9 +7425,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 27,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "ferryman": {
    "creature_h": 2.62,
@@ -7556,6 +7556,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:08-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.6405,
@@ -7615,9 +7617,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 0,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "ratcatcher": {
    "creature_h": 2.62,
@@ -7748,6 +7748,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:29-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9874,
@@ -7807,9 +7809,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 8,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "relief": {
    "creature_h": 2.52,
@@ -7940,6 +7940,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:03-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.6887,
@@ -7999,9 +8001,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 123,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "sealer": {
    "creature_h": 2.42,
@@ -8132,6 +8132,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:58-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9395,
@@ -8191,9 +8193,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 142,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "tapster": {
    "creature_h": 2.8,
@@ -8324,6 +8324,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:52:13-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
      "man_seen": 0.9582,
@@ -8383,9 +8385,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 43,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "tither": {
    "creature_h": 2.42,
@@ -8516,6 +8516,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:16-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -8553,9 +8555,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 88,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "blower": {
    "creature_h": 2.48,
@@ -8686,6 +8686,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:19-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -8723,9 +8725,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 118,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "changer": {
    "creature_h": 2.72,
@@ -8856,6 +8856,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:21-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -8893,9 +8895,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 156,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "stopper": {
    "creature_h": 2.38,
@@ -9026,6 +9026,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:24-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9063,9 +9065,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 100,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "roper": {
    "creature_h": 2.46,
@@ -9196,6 +9196,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:27-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9233,9 +9235,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 35,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "almoner": {
    "creature_h": 2.52,
@@ -9366,6 +9366,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:29-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9403,9 +9405,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 76,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "panner": {
    "creature_h": 2.26,
@@ -9536,6 +9536,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:32-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9573,9 +9575,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 133,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "stiltman": {
    "creature_h": 3.2,
@@ -9706,6 +9706,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:35-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9743,9 +9745,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 166,
-   "air_px_tightest_view": "back",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "back"
   },
   "nightman": {
    "creature_h": 2.3,
@@ -9876,6 +9876,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:37-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -9913,9 +9915,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 142,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "iceman": {
    "creature_h": 3.12,
@@ -10046,6 +10046,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:39-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10083,9 +10085,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 159,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "straker": {
    "creature_h": 2.4,
@@ -10216,6 +10216,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:42-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10253,9 +10255,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 110,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "weigher": {
    "creature_h": 2.55,
@@ -10386,6 +10386,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:45-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10423,9 +10425,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 72,
-   "air_px_tightest_view": "front",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "front"
   },
   "dredger": {
    "creature_h": 2.39,
@@ -10556,6 +10556,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:47-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10593,9 +10595,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 160,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "harrowman": {
    "creature_h": 2.45,
@@ -10726,6 +10726,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:50-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10763,9 +10765,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 67,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "pledgeman": {
    "creature_h": 2.58,
@@ -10896,6 +10896,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:52-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -10933,9 +10935,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 136,
-   "air_px_tightest_view": "back",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "back"
   },
   "crimp": {
    "creature_h": 2.42,
@@ -11066,6 +11066,8 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
+   "measured_at": "2026-11-25T02:53:55-06:00",
+   "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
@@ -11103,9 +11105,7 @@
    },
    "air_px_eps": 0.02,
    "air_px_min": 129,
-   "air_px_tightest_view": "side",
-   "measured_at": null,
-   "measured_at_from": "unknown - this row was carried from before per-row stamping existed (added 25 Nov 2026 02:5x CT). Its numbers are not in doubt; their date is."
+   "air_px_tightest_view": "side"
   },
   "timberman": {
    "creature_h": 3.05,
@@ -11236,7 +11236,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:47:54-06:00",
+   "measured_at": "2026-11-25T02:55:50-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -11287,76 +11287,8 @@
  "min_proving": 2,
  "frame_w": 5.6,
  "margin_x": 0.12,
- "visibility_scope": {
-  "asks": "how much of each subject survives the OTHER subject, in the pair cell",
-  "cells": 264,
-  "cells_reading_exactly_1_0": 264,
-  "cells_where_vis_differs_from_alone": 0,
-  "taken_by_construction": true,
-  "note": "MEASURED 21 Nov 03:4x CT, not remembered: 264 of 264 cells read seen 1.0 and vis == alone in EVERY ONE. The method is sound - with/without through one locked camera - but place() holds measured air between the two bodies (air_px >= 8 in the tightest view of every row), so neither can ever hide the other and the answer is settled before the render. THIS CELL IS A TAKEN-BY-CONSTRUCTION PASS, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never again be cited as if it did. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone==0 still catches a blank or mis-aimed render. The question it was being read for is answered by `self_seen`."
- },
- "rows_unstamped": [
-  "almoner",
-  "bellman",
-  "blower",
-  "boiler",
-  "changer",
-  "comfitmaker",
-  "cook",
-  "crimp",
-  "dauber",
-  "dredger",
-  "drillmaster",
-  "drover",
-  "dyer",
-  "fenman",
-  "ferryman",
-  "fuller",
-  "gaoler",
-  "greener",
-  "harrowman",
-  "hooper",
-  "hurdleman",
-  "iceman",
-  "jointer",
-  "leech",
-  "loader",
-  "moulder",
-  "nightman",
-  "panner",
-  "paviser",
-  "pitman",
-  "pledgeman",
-  "porter",
-  "pressman",
-  "quartermaster",
-  "rammer",
-  "ratcatcher",
-  "reeve",
-  "relief",
-  "roper",
-  "scraper",
-  "scrapwright",
-  "sealer",
-  "sexton",
-  "sluicekeeper",
-  "snarer",
-  "snuffer",
-  "sower",
-  "stackman",
-  "stiltman",
-  "stoker",
-  "stopper",
-  "straker",
-  "strickler",
-  "tallyman",
-  "tanner",
-  "tapster",
-  "tither",
-  "weigher",
-  "winder"
- ],
- "provenance_note": "4 of 63 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
+ "rows_unstamped": [],
+ "provenance_note": "63 of 63 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "self_seen": {
   "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
   "instrument": "tools/art/_backread.py",
@@ -11581,6 +11513,18 @@
   "verdict": "GREEN"
  },
  "unproved_cells": [],
+ "visibility_scope": {
+  "asks": "how much of each subject survives the OTHER subject, in the pair cell",
+  "cells": 378,
+  "cells_reading_exactly_1_0": 378,
+  "cells_where_vis_differs_from_alone": 0,
+  "air_px_floor": 0,
+  "rows_with_no_air": [
+   "ferryman"
+  ],
+  "taken_by_construction": true,
+  "note": "DERIVED THIS RUN off the rows in this file, never carried. The method is sound - with/without through one locked camera - but place() holds air between the two bodies in almost every row, so mostly the answer is settled before the render. THIS IS A TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never be cited as if it did; `self_seen` answers that question. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone == 0 still catches a blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` is false when there are no cells at all, so a run that measured nothing cannot read as a pass. `rows_with_no_air` names the rows where the construction argument does NOT hold and the cell is therefore a real measurement - keep an eye on those."
+ },
  "measured": [
   "timberman"
  ],

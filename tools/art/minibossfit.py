@@ -1386,7 +1386,20 @@ def main():
                   # over a house that had grown by nine bodies. It is now
                   # DERIVED every run by derive_self_seen(); carrying it is
                   # exactly the fault.
-                  "self_seen")
+                  "self_seen",
+                  # *** `visibility_scope` IS RUN-OWNED FROM 25 Nov 2026. ***
+                  # Same fault as `self_seen`, found the same way - by
+                  # measuring it. It was a hand-written 21 Nov snapshot,
+                  # carried over a house that has since grown from 44 rows to
+                  # 63, and BOTH its numbers had gone false: it said "264
+                  # cells" (44 x 3 views x 2 subjects) against 378, and it
+                  # justified itself with "air_px >= 8 in the tightest view of
+                  # EVERY row" when `ferryman/side` reads 0. Its CONCLUSION
+                  # survived the check - 378 of 378 cells still read vis ==
+                  # alone, ferryman included - but a block that argues from
+                  # stale figures is one edit away from arguing for a wrong
+                  # answer. It is DERIVED now, every run, from the rows.
+                  "visibility_scope")
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
            "stale_margin": [], "margin_derived": [],
            "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
@@ -1559,6 +1572,53 @@ def main():
             _v["measured_at_from"] = _UNSTAMPED_FROM
     rep["rows_unstamped"] = sorted(k for k, v in rep["pairs"].items()
                                    if not v.get("measured_at"))
+    # *** THE PAIR-CELL OCCLUSION BLOCK, DERIVED - NEVER HAND-WRITTEN. ***
+    # See the note in _RUN_OWNED. Every figure below is counted off the rows
+    # in this file on this run; the prose is the standing lesson and the
+    # numbers are this run's.
+    _cells = _same = _one = 0
+    _floor = None
+    for _k, _v in rep["pairs"].items():
+        for _vn, _c in (_v.get("visibility") or {}).items():
+            for _who in ("creature", "hero"):
+                _o = _c.get(_who) or {}
+                if _o.get("alone") is None:
+                    continue
+                _cells += 1
+                if _o.get("vis") == _o.get("alone"):
+                    _same += 1
+                if _o.get("seen") == 1.0:
+                    _one += 1
+        _a = _v.get("air_px_min")
+        if _a is not None:
+            _floor = _a if _floor is None else min(_floor, _a)
+    _touch = sorted(k for k, v in rep["pairs"].items()
+                    if (v.get("air_px_min") or 0) <= 0)
+    rep["visibility_scope"] = {
+        "asks": "how much of each subject survives the OTHER subject, in the pair cell",
+        "cells": _cells,
+        "cells_reading_exactly_1_0": _one,
+        "cells_where_vis_differs_from_alone": _cells - _same,
+        "air_px_floor": _floor,
+        "rows_with_no_air": _touch,
+        "taken_by_construction": (_cells > 0 and _cells == _same),
+        "note": (
+            "DERIVED THIS RUN off the rows in this file, never carried. The "
+            "method is sound - with/without through one locked camera - but "
+            "place() holds air between the two bodies in almost every row, so "
+            "mostly the answer is settled before the render. THIS IS A "
+            "TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT "
+            "THAT MOVED - trap 4, an instrument that cannot move is not a "
+            "pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never "
+            "be cited as if it did; `self_seen` answers that question. What "
+            "it still earns: it goes red if a layout change ever puts the two "
+            "bodies in front of each other, and alone == 0 still catches a "
+            "blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` "
+            "is false when there are no cells at all, so a run that measured "
+            "nothing cannot read as a pass. `rows_with_no_air` names the rows "
+            "where the construction argument does NOT hold and the cell is "
+            "therefore a real measurement - keep an eye on those."),
+    }
     rep["provenance_note"] = (
         "%d of %d rows carry a measured_at. An unstamped row is NOT red - "
         "this block answers WHEN a stored measurement was taken, not whether "

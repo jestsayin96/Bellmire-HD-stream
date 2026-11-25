@@ -4501,3 +4501,13 @@ mismatch in numbers and in the picture, route the look up.
 - GATES: parse 0 SCRIPT ERROR / 0 Parse Error. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 1954. TOWNWALK in_solid=0/18007
   raid_in_solid=0/5522 PASS. DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR / 0 ERROR lines.
 - No Twitch test, zero bits, no cheer, no redemption, no chat line.
+- ADDENDUM (16:2x CT, after reading the lead's 15:58 pets.png note; no Godot, lock already IDLE): routing BOTH faults up,
+  as asked, with renders/cycles/s138/pets.png attached and "three of five clash, two do not" as the statement:
+  (a) STYLE: the two that sit right are the shipped controls (corgi, red fox - chibi, KayKit-like); the three that clash are
+      the UAA fox/husky/shiba. ONE CORRECTION TO THE NOTE, BY MEASUREMENT: the UAA bodies are NOT photo-textured -
+      S139_STYLE fox_uaa reports textured=0 of 5 surfaces (flat material colours, mean albedo sat 0.23). What clashes is
+      PROPORTION (realistic long-legged quadrupeds beside chibi heroes), not texture.
+  (b) SCALE, which S138 measured and I failed to SAY: S138_PETS heights corgi 0.75 m, red fox 0.94 m, fox_uaa 0.40 m,
+      husky 0.80 m, shiba 0.62 m. The ankle-height one is fox_uaa at scale 0.15 - my chosen probe scale, not an import
+      fault; the one-line fix shape is that probe/items.json scale (0.15 -> ~0.28 for ~0.75 m). Not applied: UAA pets are
+      not in items.json yet, and whether they ship at all is the look call.

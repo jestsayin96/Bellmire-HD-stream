@@ -18425,3 +18425,16 @@ AUDIT (read-only grep of all 25 tools/_u*.gd in W2, three sorts):
 RESULT: every owned verdict-printing gate is either size-forcing, size-guarded, size-independent or fails-loud. No owned gate can pass by accident at the wrong capture size. The one soft spot named for honesty: _u69's ratio thresholds are not tuned for sub-1080p, so a 1152x648 run could FALSE-FAIL (loud, wrong direction safe). If Mr. E/team lead wants it pinned, add the same one-line guard as U62 next time the lock is free and red-prove at 1152x648.
 CHANGED: this note only. PARSE: n/a (no source change).
 NEXT: if B140 has written IDLE by 20:52 next firing, optionally pin _u69 with the U62-style guard (claim <=15 min, release by :07); otherwise take whatever the next TAKE THIS NEXT names. Decision for Mr. E: none.
+
+## D-S122 (game build, 24 Nov 2026 21:08-21:1x CT) - THE 57th IS NAMED FINEPASS, FIT AND CONFECTION ROW IN THE SAME COMMIT, AND ALL THREE HARDCODED 56s MOVED TO 57
+- Item: TAKE THIS NEXT (20:58 CT) row GAME BUILD - S122.
+- THE TEAM LEAD'S READING WAS RIGHT, PROVED BY RUNNING: on merged main before the change, `tools/_s51_names.gd` printed `FAIL drawable key dredger has no MB_NAME entry` / `FAIL MB_NAME key set matches the live keys` / `S51_NAMES FAIL 2 of 177`. Arm A was firing on `dredger`.
+- THE ROW NAMED ONE LINE; THE PIPELINE NEEDED THREE. `dredger` had NO MB_FIT entry and NO THEME_MINIBOSS_MORE row on main (zero hits in scripts/*.gd). Added all three in one change:
+  - `Delve.MB_FIT["dredger"] = 0.98` - art's _fit_report.json pairs.dredger.ratio (h 2.39 / hero 2.45, fits_frame true, 3/3 proving views, air_px_min 160), copied not re-derived.
+  - `dungeon_hd.gd THEME_MINIBOSS_MORE["confection"]` += `dredger` - art's tag is field 5 of the CANON tuple, minibosses.py:20871 = `confection`, read not guessed.
+  - `Delve.MB_NAME["dredger"] = "Finepass"` - canon in art CANON minibosses.py:20871 and content `_note_c199`; by_key.dredger on main (9/8/4/8).
+- THREE literals moved 56 -> 57 in the same commit: tools/_s51_names.gd, tools/_s107_gate.gd, tools/_s117_straker.gd.
+- Verdict lines (logs in tmp_s122/, not committed): pre-fix `S51_NAMES FAIL 2 of 177`; after: parse 0 SCRIPT ERROR / 0 Parse Error; `S51_NAMES OK 176 checks`; `S107_GATE OK 12`; `S117_STRAKER OK 11`; `TWITCH_PARSE OK (8 checks)`; `OFFFLOOR_VERDICT OK 0 of 2216 samples off the floor (home)`; `TOWNWALK in_solid=0/16525 (0.000%) raid_in_solid=0/5767 (0.000%) PASS`; `DELVE_TEST OK ran 9001 frames, floor reached 2` with 0 SCRIPT ERROR.
+- ONE ERROR LINE IN THE PARSE LOG, NOT MINE AND NOW TRUE: `COMMANDS_DATA MINIBOSS COUNT: miniboss publishes 56 elites and content writes feed rows for 57`. With this commit the engine reaches 57, so the chat bot's republish 56 -> 57 is OWED once this merges. Chat bot's file; commands.json untouched.
+- No render: name string + fit ratio + theme row; the body was rendered and looked at by art and ticked by the team lead last hour.
+- No live Twitch test, zero bits.

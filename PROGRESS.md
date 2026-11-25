@@ -19106,3 +19106,25 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - LOOKED at renders/cycles/l74/l74_u167_150.png: Chronicle at 150% reads as one designed panel, 4 lines, fall/raid line on top, x5 merge visible, nothing clipped or overlapping the quadrant labels.
 - Guard question (U74b follow-up): parse_fish() end-finder not re-opened this hour; no nested brace in RARITY_COLOR today.
 - CHANGED: this note + log only. Decision for Mr. E: none. Next firing 04:52 is EVEN: stand down unless plan reopens HUD; 05:52 odd.
+
+## S128 - L56's TRAP HALF IS NO LONGER A COIN FLIP: THE OPPORTUNITY IS FORCED, THE OUTCOME IS NOT - 25 Nov 2026 04:1x CT (game build)
+- Row taken: TAKE THIS NEXT 03:58 CT block, GAME BUILD: `tools/_l56_test.gd` (B144 OK with 2 sprung, B145 UNMET 2 with 0 sprung, same blob).
+- CAUSE, read off `_b145_l56.log` rather than guessed: every run's trap_log was all zeros, spotted included - not one trap was even
+  MET. The party never walked within TRAP_REACH of one, and because the L46 checks were cap-excusable, "no opportunity" and
+  "a broken spring" printed the same UNMET.
+- FIX (test only, no game code touched): once per floor the first unmet ordinary trap (never a portcullis) is moved under the lead
+  living delver, and `Delve.force_trap_spot = 0` (the existing D83 hook) so a met trap is missed. The REAL `_traps_tick ->
+  _meet_trap -> _spring` path then has to fire it and land damage. L46 checks are now HARD whenever a placed trap was met; zero
+  placed traps met prints `L56 NO VERDICT - 0 placed traps met` and quits 2. Exit codes now OK 0 / FAIL 1 / NO VERDICT 2
+  (previously rc 0 on every verdict). force_trap_spot is reset to -1 before quitting.
+- GATES (verdict lines, logs committed `_s128_l56*.log`): `L56_TEST OK` - CHECKS 4 UNMET 0 FAILS 0, 4 placed / 4 met / 4 sprung,
+  29.0 damage, 4 lord kinds on 4 boss floors, lord_hp_mult 1.28 vs 1.00.
+  RED-PROVED TWO WAYS: `--nospring` (force_trap_spot = 1, the game path steps round every trap) -> `L56_TEST FAIL`, CHECKS 4
+  FAILS 2 (4 met, 0 sprung, 0.0 damage); `--redproof` (observer blinded) -> `L56_TEST FAIL`, CHECKS 4 FAILS 3.
+  Standing battery: parse --quit-after 300 rc 0, 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2093; TWITCH_PARSE OK
+  (8 checks); TOWNWALK in_solid=0/21015 raid 0/9520 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+- The three L56 variants ran in parallel to fit the window; all three reached a verdict. Process exit codes were not captured
+  this run - the verdict LINES are the result; rc 2 / rc 1 shape mirrors `_u40_pad_test.gd:41`.
+- Cascade note, NOT acted on (not my row this hour): art's 62nd body `collier` (Halfblow) landed on main with its import sibling
+  at 04:09; it needs MB_FIT + a theme row + MB_NAME once content feeds it - next row's work.
+- No live Twitch test: no account used, 0 bits, nothing redeemed or cheered, nothing posted. Not ticked - the team lead ticks.

@@ -1,0 +1,138 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The stair is damp and the lamp hisses.
+FEED They carry 56 flasks of oil between them.
+L56: soak begins - 4 delves, start_floors=[5, 10, 5, 10], 2 floors each
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed cave spider, 1 drowned skeleton warrior, 1 drowned bone sentinel, 1 hollowed bone sentinel, 1 drowned bone bowman.
+FEED A child drew the surface on this wall. Got it wrong.
+FEED Nightwing rises. Too fast to see coming.
+FEED The lamps duck all together, as if something passed over.
+FEED Corvin rolls a 20 for initiative and is moving before anything else.
+L56 [run 1] floor 5 trap PLACED: PoisonDart under Aen
+L56 [run 1] floor 5 LORD RISES: Nightwing hp=110
+FEED Aen steps on a loose flagstone - green darts! DEX 22 vs DC 12, 2 damage (halved).
+FEED Corvin casts Smite at drowned bone bowman.
+FEED Brel shapes bolt. A spark, a cough, no more (8 vs DC 12).
+FEED Corvin casts bolt. The scar adds a verse of its own (11 vs DC 12).
+FEED Corvin casts Smite at drowned bone sentinel.
+FEED Brel casts Bolt at drowned bone sentinel.
+FEED Brel casts Bolt at drowned skeleton warrior.
+FEED Brel casts Bolt at Nightwing.
+FEED Aen is badly hurt and breaks off, making for the way up.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Bats pour out of the dark around Nightwing.
+FEED Aen the knight falls on floor 5 to the dark below. Level 1, 0 kills. !reroll to rise again.
+FEED Brel turns on the wounded cave bat to finish it.
+FEED Corvin turns on the wounded cave bat to finish it.
+FEED Doria turns on the wounded cave bat to finish it.
+FEED Brel casts Fire at Nightwing.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Corvin.
+L56 [run 1] floor 5 lord DOWN
+FEED Brel searches (Investigation 19) and turns up 66 gold on floor 5.
+FEED Dust settles on the empty floor.
+FEED Brel searches the chest - Successfully found loot!! 51 gold (Investigation 23 vs DC 12).
+FEED Battered, the party climbs back out from floor 5.
+FEED Brel and 2 others come home to Bellmire with 117 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 7 kills between them.
+L56 [run 1] ended state=home floors_visited=1 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 1, "saved": 1, "damage": 2.0 }
+FEED The last of them pulls the gate to. Nobody says anything.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 4; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 wraithtouched pit wyrm, 1 sporeblown skeleton mage, 1 gorged scar adder, 1 scarborn imp, 3 gorged gloom bats, 1 wraithtouched skeleton warrior.
+FEED A cell door stands open, and the straw inside is fresh.
+FEED The Gravewyrm rises. The thing the dungeon was built to hold.
+FEED The floor lifts, very slightly, and settles.
+L56 [run 2] floor 10 trap PLACED: DartTrap under Aen
+L56 [run 2] floor 10 LORD RISES: The Gravewyrm hp=333
+FEED Aen steps on a loose flagstone - darts! DEX 10 vs DC 15, 14 damage.
+FEED Corvin pays for smite in the wrong coin (12 vs DC 15).
+FEED Brel casts Bolt at gorged gloom bat.
+FEED Corvin casts Bolt at gorged gloom bat.
+FEED Brel's bolt goes off a breath early - the scar is impatient (6 vs DC 15).
+FEED Corvin casts Bolt at gorged gloom bat.
+FEED Doria is badly hurt and breaks off, making for the way up.
+FEED Brel casts Chain Bolt at gorged gloom bat.
+FEED Corvin breaks off to mend Doria, who is nearly down.
+FEED Aen is badly hurt and breaks off, making for the way up.
+FEED Brel casts Bolt at gorged gloom bat.
+FEED Corvin is badly hurt and breaks off, making for the way up.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 10.
+FEED Aen and 3 others get out alive, and come home with what they carried.
+FEED Aen and 3 others come home to Bellmire with 0 gold. 0 kills between them.
+L56 [run 2] ended state=home floors_visited=2 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 1, "saved": 0, "damage": 14.0 }
+FEED The first step is slow. The second is not.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed cave spider, 3 skeleton warriors, 1 hollowed bone sentinel.
+FEED Somebody's washing hangs on a line that runs from a wall to nowhere.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The room exhales once, and the exhale is warm.
+L56 [run 3] floor 5 trap PLACED: PoisonDart under Aen
+L56 [run 3] floor 5 LORD RISES: The Grubmother hp=230
+FEED Aen steps on a loose flagstone - green darts! DEX 19 vs DC 12, 2 damage (halved).
+FEED Corvin casts Smite at hollowed bone sentinel.
+FEED Corvin's bolt fizzles in the throat. The scar has no use for it (6 vs DC 12).
+FEED Brel casts Bolt at hollowed bone sentinel.
+FEED Brel starts bolt and forgets the end of it (9 vs DC 12).
+FEED Corvin casts Smite at hollowed bone sentinel.
+FEED Brel casts Chain Bolt at hollowed bone sentinel.
+FEED Brel casts Bolt at skeleton warrior.
+FEED Brel casts Chain Bolt at skeleton warrior.
+FEED The Grubmother's brood spills out of her.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+L56 [run 3] CAP HIT at floor 5 of 6 (state=fight)
+L56 [run 3] ended state=fight floors_visited=3 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 1, "saved": 1, "damage": 2.0 }
+FEED The lamp is trimmed at the top, where the air is still good.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 7; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 scarborn pale cutthroat, 1 veilstruck imp, 2 veilstruck scar adders, 2 wraithtouched scar adders, 1 duskforged gravecaller, 1 skeleton rogue.
+FEED Food went in this morning. Nothing has come out.
+FEED Mourncoil rises. Frost comes off it in sheets.
+FEED The lamp's own heat gives up first.
+L56 [run 4] floor 10 trap PLACED: DartTrap under Aen
+L56 [run 4] floor 10 LORD RISES: Mourncoil hp=384
+FEED Aen steps on a loose flagstone - darts! DEX 13 vs DC 15, 11 damage.
+FEED Corvin casts Smite at veilstruck scar adder.
+FEED Brel casts Bolt at veilstruck scar adder.
+FEED Corvin's smite breaks apart over the stone (7 vs DC 15).
+FEED Brel's bolt goes off a breath early - the scar is impatient (14 vs DC 15).
+FEED Corvin casts Smite at veilstruck scar adder.
+FEED Brel casts Chain Bolt at veilstruck scar adder.
+FEED Doria is badly hurt and breaks off, making for the way up.
+FEED Doria should be dead - and stands back up (18).
+FEED Doria the barbarian falls on floor 10 to the dark below. Level 1, 0 kills. !reroll to rise again.
+FEED Brel casts Bolt at wraithtouched scar adder.
+FEED Aen is badly hurt and breaks off, making for the way up.
+FEED Aen should be dead - and stands back up (21).
+FEED Aen the knight falls on floor 10 to the dark below. Level 1, 1 kills. !reroll to rise again.
+FEED Brel casts Chain Bolt at wraithtouched scar adder.
+FEED Brel should be dead - and stands back up (19).
+FEED Brel is badly hurt and breaks off, making for the way up.
+FEED Brel the mage falls on floor 10 to the dark below. Level 1, 0 kills. !reroll to rise again.
+FEED Corvin the cleric falls on floor 10 to the dark below. Level 1, 1 kills. !reroll to rise again.
+FEED The scar keeps them all. No one comes home from floor 10.
+L56 [run 4] ended state=home floors_visited=4 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 1, "saved": 0, "damage": 11.0 }
+
+L56 SOAK SUMMARY
+  trap_log aggregate across 4 delves: { "spotted": 0, "disarmed": 0, "sprung": 4, "saved": 2, "damage": 29.0 }
+  lords seen: 4 kinds, 1 killed
+    Nightwing on floors { 5: 110.0 }
+    The Gravewyrm on floors { 10: 332.8 }
+    The Grubmother on floors { 5: 230.0 }
+    Mourncoil on floors { 10: 384.0 }
+  traps placed on a delver's path: 4, met: 4
+  ok   L46: traps actually SPRING in play (4 sprung across the soak, 4 placed traps met)
+  ok   L46: trap damage LANDS - a hero loses hp to a trap (29.0 total)
+  ok   L45: lords actually RISE on boss floors in play (4 kinds seen, 4 boss floors entered)
+  Bestiary.lord_hp_mult: floor 5 = 1.00, floor 10 = 1.28
+  ceiling reached in 0 of 4 runs; 4 boss floor(s) entered
+  ok   L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (1.28 vs 1.00)
+
+CHECKS 4 UNMET 0 FAILS 0
+L56_TEST OK

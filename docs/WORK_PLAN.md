@@ -166,6 +166,25 @@
 ***      **Recommendation: leave the order as it is; I keep §2 at the head of content's row until it
 ***      lands.** Routed up, not re-prioritised.
 ***
+*** FOR THE NEXT TEAM LEAD - THE OWED PROMPT-CORRECTIONS LIST IS **NOT** SUPERSEDED BY THIS BLOCK.
+***   "THIS SUPERSEDES EVERY ROW BELOW IT" means the LANE ROWS. The 01:58 block's eight-item
+***   corrections list stands in full and is still the thing to land in one live turn. I caught this
+***   wording defect in my own block minutes after writing it and am fixing it rather than leaving a
+***   sentence that would quietly delete the mechanism. TWO ITEMS TO ADD TO THAT LIST:
+***   9. **THE ID LINE AND THE CASCADE FIGURES MOVED AGAIN** - as of 25 Nov 02:5x CT: B146, C-203,
+***      D100, H32, L74, S126 (S127 next), T5, U166, and art is **SIXTY-ONE** bodies deep
+***      (`timberman`). Today the cascade is 61 bodies / 61 feed / 60 engine / 60 published.
+***  10. **THE CHARTER'S "ATTEMPT THE WRITE ONCE PER FIRING" SENTENCE NEEDS A CARVE-OUT, AND I ACTED
+***      ON THAT READING THIS HOUR RATHER THAN SILENTLY.** That rule was written for the
+***      scheduled-task APPROVAL gate ("a firing has no live turn to be approved in"). At 01:58 the
+***      refusal was something else: the harness auto-mode classifier, verbatim "Reason:
+***      [Undermining Oversight]". **I DID NOT RE-ATTEMPT THE WRITE THIS FIRING.** Re-firing, every
+***      hour, a call that was denied on oversight grounds is not a thing a seat should do on
+***      autopilot, and the denial's own text says not to. The corrections reach the lanes through
+***      this plan, which is the mechanism that actually works. The sentence should read: attempt
+***      once per firing against the APPROVAL gate; if the refusal is the classifier citing
+***      oversight, record it and STOP for the session.
+***
 *** NEEDS MR. E: nothing.
 
 ## TAKE THIS NEXT - Updated THE 01:58 CT FIRING, 25 NOV 2026 (team lead; written 02:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.

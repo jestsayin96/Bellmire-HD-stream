@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "6e53d73de985f0e4865e426c572740ceff0105cc",
+   "head": "08f7bc008f742b169331be2303081f1cfd4cc697",
    "ref": "origin/main",
-   "ref_commit": "c7a52247106c4401f8363a4eeec800bc821cc2f5",
+   "ref_commit": "6561041cf6e5220f25a904be9dd3fb0b63df5a78",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3446,13 +3446,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "overlooker": {
+   "title": "Velrick",
+   "theme": "workshop",
+   "idea": "IT STRIKES WHOEVER HAS DONE IT LEAST HARM - it does not pick a hero and it is not dealt a target: it goes for the one who has hurt it least, and it re-reads that the moment it changes. So the back of the room stops being the safe place. A healer who only heals, an archer who holds a shot, anyone who steps out to drink a flask - each of them becomes the target BY DOING THAT, and the hero who has been carrying the fight is the one it will not touch. Hitting it harder does not protect you; it only moves the mark onto whoever did not. The party cannot hold a line against it, because the line is what makes a back rank, and it answers a back rank by walking past the front one. THE THING TO READ IS THE HEAD: it is turned hard off his own shoulders and his cold eyes are on that line, with the pale mitt of his far arm held out level along it - so a viewer can see WHO he has picked before he moves, and can see the pick change.",
+   "wear": 0.18,
+   "feed_line": "Someone up ahead is being watched, and it is not the man in front.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 824,
+   "size": [
+    1.56,
+    1.23,
+    2.4
+   ],
+   "footprint_span": 1.56,
+   "height_m": 2.4,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.436,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.1,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.558335572086433,
+    "ortho": 2.8341567516326904,
+    "clip": [
+     6.593082904815674,
+     17.02530860900879
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs c7a52247106c4401f8363a4eeec800bc821cc2f5 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 6561041cf6e5220f25a904be9dd3fb0b63df5a78 sha bc3a603f",
  "blank_check": {
-  "files": 186,
+  "files": 189,
   "failures": []
  }
 }

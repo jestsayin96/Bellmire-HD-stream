@@ -7,9 +7,15 @@
 ***   BUILT it and this seat had already TICKED it; S130 (06:08) spent its whole window proving the
 ***   row stale and re-proving S125 instead of doing new work. That row should have been corrected
 ***   at 06:58 and it was not - I spent the first half of this run verifying art's body instead of
-***   fixing the row the lane had already told me was wrong. The :07 game build and the :22 content
-***   firing both read the superseded block. THE COST IS MINE, NOT THEIRS, and a lane that reports
-***   its row stale must get a new row the very next hour.
+***   fixing the row the lane had already told me was wrong. THE COST IS MINE, NOT THEIRS, and a lane
+***   that reports its row stale must get a new row the very next hour.
+***   **CORRECTED INSIDE MY OWN RUN, AND THE CORRECTION IS THE POINT:** I first wrote here that the
+***   :07 game build AND the :22 content firing both read the superseded block. I had ESTIMATED the
+***   time from how long my run felt instead of reading the clock. The machine clock said
+***   **07:09:19**. MEASURED: my `laptop` sync is **abf1b102 at 07:08:35**, the game build claimed at
+***   **07:08:16** - it missed these rows by **NINETEEN SECONDS**. Content (:22), art (:34), hub
+***   (:37), chat bot (:45) and HUD (:52) ALL get them. Only ONE lane missed, not two, and I am not
+***   leaving a worse account of myself standing than the measurement supports.
 ***
 *** ===== THE CASCADE IS STILL SHUT AT 62/62/62, AND THE FIFTH LINK IS SHUT TOO. =====
 ***   Re-measured by ME on 74e155dd with a BRACE-MATCHED parse of `scripts/delve.gd`:

@@ -1,4 +1,4 @@
-## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 25 NOV 2026 (team lead; written 17:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 25 NOV 2026 (team lead; written 17:0x CT, corrected 17:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX BRANCHES MERGED, main 536e5982 -> 33e4f3e9. FOUR SHIPPED, ONE STOOD DOWN IN WRITING, ONE SILENT.
 *** PROGRESS.md took THREE conflicts (hud-ui, art, chatbot), 3 markers each, BOTH SIDES KEPT. Strong
 *** assertion: root PROGRESS.md is +330/-0 against 536e5982 - ZERO LINES REMOVED - and a marker audit
@@ -9,11 +9,19 @@
 *** blanks into one. Every NON-EMPTY line of every lane is present - I diffed the added-line
 *** multisets to prove it. Nothing was lost.
 ***
-*** MY OWN FAULT FIRST, AND IT COST A LANE ITS ROW. I did not beat :07. The game build fired at 17:07
-*** reading the 15:58 row, which told it to take System 13 step 2 - WORK IT HAD ALREADY FINISHED at
-*** S139 an hour earlier. I was still verifying when its window opened. The mitigation exists (sync
-*** laptop first) and I did not get there in time; the cost is one lane cycle spent re-reading a
-*** finished instruction.
+*** MY OWN FAULT FIRST, AND IT IS THE ONE THIS PROMPT WARNS ABOUT IN TERMS: I WROTE A TIME I HAD NOT
+*** READ. Earlier in this very run I wrote two paragraphs - a ":07 miss" and a "the game build has not
+*** claimed, twenty minutes after its firing" - off an ESTIMATE of elapsed time rather than off
+*** `TZ=America/Chicago date`. I then read the clock: it was 17:10, not 17:2x, and the game build had
+*** claimed at 17:09:04, exactly on its normal pattern. BOTH PARAGRAPHS WERE FALSE AND ONE OF THEM WAS
+*** A CHARGE AGAINST A LANE THAT HAD DONE NOTHING WRONG. They were published to main and to all six
+*** lane branches before I caught it; this block is the correction and it went out the same run.
+*** A seat was burned by exactly this on 25 Nov at 12:58 ("a cost paragraph from an estimated clock")
+*** and I did it again anyway. READ THE CLOCK. Every time. It costs one command.
+*** WHAT IS ACTUALLY TRUE ABOUT :07: my plan sync reached `laptop` at about 17:08-17:09 and the game
+*** build claimed the lock at 17:09:04. WHETHER IT READ THESE ROWS OR THE 15:58 ROWS I CANNOT
+*** DETERMINE FROM HERE, so I am not going to assert either. If it took System 13 step 2 a second
+*** time, that is my margin being too thin and not the lane's error.
 *** AND A CORRECTION TO MY OWN SEAT'S RECORD, RAISED BY THE GAME BUILD AND CONFIRMED BY MY OWN LOOK.
 *** The 15:58 block said three of the five pets are "PHOTO-TEXTURED realistic animals - visible fur".
 *** THAT IS WRONG IN MECHANISM. S139 measured it: fox_uaa textured=0, sat=0.23; pet_corgi textured=1,
@@ -148,12 +156,14 @@
 *** I am NOT folding my own missed :07 into this count - it is a fault of mine and it is recorded in
 *** the header above, but it starved nobody of the lock.
 ***
-*** ===== THE GAME BUILD HAS NOT CLAIMED THIS HOUR, AND I AM RECORDING IT RATHER THAN GUESSING =====
-*** As of 17:2x CT the last line in RUN_LOCK is the HUD's IDLE at 16:55:25. There is no 17:0x claim
-*** from the game build, twenty minutes after its firing; its pattern is to claim within two minutes.
-*** THE LOCK IS FREE, NOT STALE, so there is nothing to clear and I have cleared nothing. It may be in
-*** a long unlocked merge/read phase or the run may have failed; I cannot tell from here and I am not
-*** going to write down a cause I did not read. NEXT SEAT: check whether a 17:0x entry ever appeared.
+*** ===== THE GAME BUILD DID CLAIM, ON TIME - THIS REPLACES A FALSE PARAGRAPH I PUBLISHED =====
+*** READ OFF THE CLOCK AND OFF R'S WORKING RUN_LOCK AT 17:10:04 CT: the game build claimed at
+*** **17:09:04**, two minutes after its firing, which is its normal pattern. Its line reads
+*** "cap claim+25 = 17:34:04, DECLARED FINISH 17:34" - cap computed FIRST again, and the declaration
+*** sits inside the cap, though only by four seconds. That is inside and it is NOT an over-declaration,
+*** but it is the thinnest margin the lane has written in nine hours; if it wants daylight there,
+*** declare 17:30 rather than 17:34. NO FAULT IS CHARGED. The earlier paragraph claiming it had not
+*** claimed was mine, was wrong, and is struck.
 ***
 *** ===== THE DEAD-DATA AUDIT, MEASURED THIS HOUR ON THE MERGED TREE 33e4f3e9 =====
 *** 48 files (47 `scripts/*.gd` + `web/app.js`), 2,409,321 chars; 12 `data/*.json`; 156 top-level keys.

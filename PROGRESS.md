@@ -18229,6 +18229,31 @@ that coupling. Nothing else is owed from you.
 
 Nothing for Mr. E to decide.
 
+## D-S120 (game build, 24 Nov 2026 19:08-19:2x CT) - THE 56th (WEIGHER, TRUEWEIGHT) GETS ITS FIT AND TREASURY ROW; IT IS NOT NAMED, BECAUSE CONTENT'S LINES HAVE NOT LANDED
+- TAKE THIS NEXT (18:58) said `MB_NAME["weigher"] = "Trueweight"` "exactly what S118 did for straker". S118 named straker
+  only AFTER C-195 landed; before that S117 wrote MB_FIT + theme row and NO name. `data/*.json` has ZERO hits for
+  weigher/Trueweight at 19:1x CT, and `tools/_s51_names.gd` _keyset_faults fails any MB_NAME key absent from
+  miniboss_feed.by_key. Writing the name now would turn S51 RED on my own change. So this is the S117 shape:
+  - delve.gd MB_FIT `"weigher": 1.04` (art's _fit_report.json pairs.weigher.ratio, h 2.55 / hero 2.45, 3/3 proving views).
+  - dungeon_hd.gd THEME_MINIBOSS_MORE treasury += weigher (art's CANON field 5 = "treasury", minibosses.py:20600).
+  - NO MB_NAME. When content's by_key.weigher lands it is one line, `"weigher": "Trueweight"`, and _s51_names.gd /
+    _s107_gate.gd move 55 -> 56 with it. Chat bot: nothing to republish yet - the engine still names 55.
+- New gate tools/_s120_weigher.gd: body resolves, LOADS and instantiates; lines absent; 400-draw treasury sweep never
+  draws weigher and DOES draw changer (red-proof). Flip the lines arm when content lands.
+- Looked at renders/art/minibosses/weigher/hero_front.png: a grey figure with a tipped weigh-beam, a pan each end.
+- Merge note: R's working tree held art's 56th files UNCOMMITTED/untracked (8 untracked + 3 modified), each
+  BYTE-IDENTICAL to origin/main (git hash-object == origin/main blob). Moved the untracked to C:\hd adventure\_gb_hold_1908
+  (copies of the 3 modified too), checked the 3 out, fast-forwarded to 5fd2fd42 - main restored the same bytes. Four
+  other art renders modified in the tree (_contact_sheet, _hero_scale, _report.json, _silhouettes) differ from main and
+  were NOT touched or staged.
+- B138 (chatcmd.gd +44) parsed clean in my battery: no SCRIPT ERROR / Parse Error anywhere in the log.
+- Verdicts: PARSE 0 errors; OFFFLOOR_VERDICT OK 0 of 2381; TWITCH_PARSE OK (8 checks); S51_NAMES OK 176 checks;
+  S107_GATE OK 12; DELVE_TEST OK ran 9001 frames, floor reached 2; TOWNWALK in_solid=0/19355 PASS; S120_WEIGHER OK 9.
+- No live Twitch test.
+## C-198 (24 Nov 2026 19:2x CST, content) - WROTE miniboss_feed.by_key.weigher (TRUEWEIGHT, THE 56th); FEED 55 -> 56
+TAKE THIS NEXT (18:58 CT block, 24 Nov) CONTENT row (:22): feed the 56th. Body weigher.glb is committed on origin/main (merged). Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Canon from the CANON row in tools/art/minibosses.py: IT MUST COME DOWN EVEN - tipped beam, a bright pan at each end, damage into the heavy pan paid back from the light one; the condition is where the party stands. Lines name the beam and the pans and favour no tactic; broken = the beam comes level. New _note_c198 (expected zero-hit key). MB_NAME (engine) still lacks weigher by my read of the plan block: the feed leads the engine, as it did for straker.
+VALIDATION OK: lore_lines.json parses; by_key 55 -> 56; every pre-existing key and value unchanged; only new keys are by_key.weigher and _note_c198. Edited lore_lines.json only.
+CODE WIRING: game build - add MB_NAME `"weigher": "Trueweight"` in delve.gd (the fall lines say "Trueweight is down"). Then the chat bot republishes 55 -> 56. Nobody should republish before the engine names it.
 ## HUB standing audit - 24 Nov 2026 19:4x CT (hub lane)
 TAKE THIS NEXT (18:58 block) gave HUB: stand down / standing audit. No row, no web/ edit.
 Measured: gh-pages 5ce35f33 (tree c03fa129); hub web tree 5c618bba. Blob SHAs app.js 139c143e,
@@ -18237,3 +18262,79 @@ NOTES.md +6/-0. node --check app.js OK. innerHTML at exactly app.js:255 and :301
 outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only inside comments (lines 10-11),
 zero in code. CSP meta present. No screenshot taken: web/ unchanged, so none owed.
 NOT claiming READY TO PUBLISH. Nothing for Mr. E to decide.
+
+
+## U159 - HUD STAND-DOWN, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T19:53:27-06:00 (19:52 firing)
+ITEM: R WORK_PLAN 18:58 TAKE THIS NEXT, HUD (:52) row: "your call, the U91 pair is closed, nothing is owed." Rarity-hue half of System 2 is shipped (U55/U56/U88, guarded U71/U74b); L74 is closed (U131).
+Lock: R working RUN_LOCK last line = chat bot B139 IDLE 19:49:11 (after its RUNNING 19:47:24); tasklist showed no Godot alive -> lock was FREE, but I claimed nothing because no run is owed. RUN_LOCK untouched.
+AUDIT (file-only): hud-ui 390bc84d is 255 commits behind origin/laptop, yet `git diff HEAD origin/laptop -- <my 7 files>` is EMPTY and `git log origin/laptop -- <my 7 files>` is empty: all seven HUD files are byte-identical to main, worktree clean. Nothing on main has touched the HUD since my last merge, so no re-gate is owed.
+CHANGED: this note only. PARSE: n/a (no source change).
+NEXT: take whatever the 19:58 TAKE THIS NEXT names; otherwise re-audit the seven files against origin/laptop. Decision for Mr. E: none.
+## B139 - 24 Nov 2026, 19:45 CT (chat bot) - THE GATE B138 OWED IS RUN AND THE HELP LINE CUT ARM DOES NOT FIRE: 101 CHARACTERS OF HEADROOM, AND THE GREEN IS NOT YET A PROOF
+
+The team lead did not tick B138 and was right not to: I had written a 44-line guard arm and never
+executed it. An unrun guard is not a verified guard. This cycle ran it.
+
+FIVE GATES, ALL GREEN, on merged HEAD 5fd2fd42 (`chatbot` fast-forwarded to `origin/main`, so
+B138's arm had already been merged and my own tree is the first thing to parse it):
+  IMPORT        rc=0, 0 ERROR
+  PARSE         rc=0, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error
+                (24 WARNINGs, all the pre-existing invalid-UID `ext_resource` ones on asset-kit .tres)
+  L14_TEST      OK (24 checks)
+  TWITCH_PARSE  OK (8 checks)
+  COMMANDS_DOC  OK wrote 32 commands - a TRUE no-op: my three owned files are CLEAN after it
+
+THE ARM'S VERDICT: it does NOT fire. Zero occurrences of `HELP LINE CUT` across all five logs. No
+reply this file publishes is losing its tail on stream today. The useful number is not the pass, it
+is the HEADROOM, because the length of `!help` is decided by a list other lanes extend:
+  !help            352 chars   (budget 453 = the 480 cap less "@" + a 25-char login + " ")
+  !help forge      180
+  !help inventory  168
+  !help enlist     152
+  33 rows measured, 32 commands in `order`. **101 characters spare** - roughly eleven more commands
+  at the ~9 characters a `!name ` costs, and then `!help` starts cutting and the hub URL at its tail
+  is the first thing to go.
+
+I PREDICTED THIS BEFORE THE GATE RAN, AND THEN CHECKED IT ANYWAY. I re-derived `help_line()`'s
+formula in python off `data/commands.json`, got "0 over, longest 352", and only then read the logs,
+which agreed exactly. That ordering is the point: a prediction is a thing to falsify with the real
+gate, never a substitute for running it. Had they disagreed, the gate would have won.
+
+WHAT I OWE MYSELF NEXT HOUR, AND IT IS THE SAME CHARGE THE TEAM LEAD LAID ON B138.
+The arm is green and has NEVER BEEN RED-PROVED. A guard that has only ever passed has not been shown
+able to fail, and COORDINATION 15's rule is that a gate which cannot go red is not a gate. The green
+above tells me today's replies fit; it does not yet tell me the arm would SAY SO if they did not.
+Next firing pads a throwaway copy of `data/commands.json` past 453 characters, runs the loader, and
+proves the arm PRINTS its line and appends the fault - then restores the file byte-for-byte. I did
+not do it this cycle because it needs a second Godot launch and that would have put me inside the
+HUD's 19:52 window to finish optional work. THE JOB IS SPLIT AND THE REMAINDER IS CARRIED; the yield
+rule says split, not cross, and a stand-down written up is a delivery.
+
+NO REPUBLISH THIS HOUR, AND 55 REMAINS CORRECT - THE FEED LED THE ENGINE.
+Measured off the LANE REFS, not off main, because main cannot hold the same hour's :07 and :22 work
+at :45:
+  `Delve.MB_NAME` (origin/laptop) = **55** keys, 0 duplicates, `straker` IN, `weigher` **OUT**
+  `miniboss_feed.by_key` (origin/content) = **56** keys, `weigher` **IN**
+  `by_key - MB_NAME` = **['weigher']**.  `MB_NAME - by_key` = **[]**.
+So the halves DISAGREE by exactly the new body, and the disagreement runs the other way from the
+usual: content fed the 56th, the engine has not named it. The game build's own 19:15 row says so in
+its own words - "weigher MB_FIT 1.04 + treasury row, no MB_NAME (content lines absent)". My row
+permits a republish ONLY if the engine and the feed BOTH carry `weigher`; the engine does not, so
+publishing **55** is not stale, it is the true count of named bodies, and I republished nothing.
+`data/commands.json` untouched: 18000 bytes, 55 at both `miniboss` leaves.
+
+ONE THING WORTH SAYING ABOUT WHY L14 IS GREEN AND NOT THE RED THE PLAN EXPECTED. The plan told me to
+expect `L14 MINIBOSS UNNAMED ['weigher']`. It did not fire, and the reason is not that the arm is
+blind: on MY OWN MERGED HEAD `by_key` reads **55** with `weigher` OUT, because content's 56th line is
+on `origin/content` and has not reached main either. Both halves of my tree are level at 55, so there
+is nothing for that arm to catch here. The drift is real but it lives BETWEEN the lane refs, which is
+exactly why the plan has me measure there and not on main. I checked rather than assume the green.
+
+FOR THE GAME BUILD LANE: nothing owed in `twitch_eventsub.gd` this cycle. The two numbers my arm
+mirrors from your file are unchanged and still labelled as mirrors - `CHAT_MAX_LEN` 480 and Twitch's
+own 25-character login ceiling. If you move `CHAT_MAX_LEN`, my 453 has to follow it. You now also
+have a concrete margin: `!help` sits 101 characters under the cut, and every command any lane adds
+spends about nine of them.
+
+No live Twitch test this cycle: ZERO BITS, no cheer, no redemption, no reward read or written, and no
+chat line posted as bellmirebro. Nothing for Mr. E to decide.

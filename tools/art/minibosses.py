@@ -20857,3 +20857,279 @@ def weigher():
 
 
 BUILDERS.update({"weigher": weigher})
+
+
+# --------------------------------------------------------------- 57 THE DREDGER
+# WEAR 0.16, AND IT IS A SPREAD, SAME ARGUMENT AS THE STRAKER'S NAILS AND THE
+# WEIGHER'S PANS. Confection work is CLEAN work - a shop that dusts sugar over
+# finished sweets cannot afford a dirty house - so the global wear is low. The
+# spread is inside the body: his coat and boots are floured and handled grey,
+# and THE SIEVE IS THE BEST-KEPT THING HE OWNS, because a blocked sieve dredges
+# nothing at all and the mesh is the only part of him that is counted on.
+# 0.16 is unused across the other fifty-six (0.14, 0.15 and 0.18 are taken).
+CANON.update({
+    "dredger": ("Finepass", 2.39, (0.66, 0.62, 0.56), (0.98, 0.96, 0.90),
+                "confection", "IT ONLY FEELS WHAT GETS THROUGH THE MESH - it "
+                "works a dredging sieve in front of it and that sieve IS the "
+                "creature's whole contact with the room. A heavy blow stops "
+                "dead on the bars: the harder it is swung the more certainly "
+                "it is caught and spent, which is the one thing a party never "
+                "tries, because every instinct says hit it harder. Only a "
+                "LIGHT hand passes the mesh, so the weakest hand in the file "
+                "is the only hand that scores, and the hero everybody normally "
+                "protects is the hero who has to do the killing while the rest "
+                "of the party keeps the room off them. It does not choose a "
+                "target, it has no phase, nothing summons and nothing splits - "
+                "the condition is on HOW HARD YOU SWING, which no other body "
+                "in this file asks about. THE THING TO READ IS THE SIEVE: one "
+                "big pale disc held low in both hands, barred across both ways "
+                "in black, and the bars are plainly what a blow would land on.",
+                0.16, "Something ahead is dusting the floor."),
+})
+
+ORDER = ORDER + ["dredger"]
+
+# PER-SLOT MATERIALS - THE WEIGHER'S RULE CARRIED FORWARD UNCHANGED: `bone` IS
+# THE MECHANIC AND NOTHING ELSE. Here that is THE SIEVE - its hoop and its face
+# sheet, which are one object. NOT the bars across it: those are what a blow is
+# caught ON and they must read as the OPPOSITE of the pale, which is the whole
+# reason they are dark. Not the belt, not the boots, not a mark on the head.
+# THE HEAD CARRIES NO PALE AT ALL - the Beadle's measured fault, answered the
+# way the panner, stiltman, iceman, straker and weigher answered it: a dark
+# hood, eyes on -Y only.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"dredger"}
+
+OVERRIDE.update({
+    "dredger": {
+        'body': ((0.236, 0.222, 0.200), 0.86, 0.03),   # floured coat and hose
+        'dark': ((0.082, 0.078, 0.074), 0.70, 0.10),   # THE BARS, hood, belt, boots
+        'bone': ((0.944, 0.930, 0.862), 0.30, 0.26),   # THE SIEVE ONLY - hoop and sheet
+        'glow': ((0.960, 0.940, 0.800), 0.70),         # eyes, forward only
+    },
+})
+
+
+def dredger():
+    """IT ONLY FEELS WHAT GETS THROUGH THE MESH. The 57th body.
+
+    THE ACCEPTANCE TEST IS A MAN WORKING A SIEVE LOW IN BOTH HANDS, AND THE
+    SIEVE MUST READ AS A SIEVE - a pale disc with BLACK BARS across it both
+    ways, not a pale smudge and not a blank dish - IN THE FRONT VIEW, THE SIDE
+    VIEW AND BESIDE A HERO. If a viewer cannot see the bars, the mechanic is
+    not on the model; it is only in this docstring.
+
+    WHAT THIS IS NOT, STATED BECAUSE THE SET IS 56 DEEP AND A RE-SKIN IS THE
+    EASY FAILURE HERE:
+      NOT THE PAVISER (29), which turns a board to FACE you. That armour is
+            aimed at a direction and is answered by moving. This is not aimed
+            at anybody and moving does not help.
+      NOT THE TANNER (19), whose immunity is per DAMAGE TYPE and is answered by
+            changing WHAT you swing. This is indifferent to type - a party of
+            one weapon beats it fine - and is answered by changing HOW HARD.
+      NOT THE STRICKLER (23), which scrapes your BEST hero's numbers down. That
+            is a stat being altered and the party still wants its heavy hand
+            swinging. Here the heavy hand is not weakened, it is IRRELEVANT,
+            and the party's job inverts: guard the weakest hero while they work.
+      NOT THE COMFITMAKER (31), which HANDS you the one thing that cuts it. The
+            tool there is an object to pick up. Here nobody is given anything -
+            the party already holds the answer and has to work out that it is
+            the hand it never leads with.
+      NOT THE FULLER (35), which SOAKS blows and gives them back. The fuller
+            still takes your hits; this one does not take the heavy hit at all,
+            and nothing is returned.
+      NOT THE HOOPER (38), whose object is a CASK - see FIX B, which is the
+            fault that nearly made this body one.
+      NOT THE WEIGHER (56), whose condition is WHERE THE PARTY STANDS. This one
+            does not care where anybody stands.
+    The family - a condition on the FORCE of the blow rather than its type, its
+    source, its direction or its timing - is new in this file, and that is the
+    whole reason this body was built.
+
+    THE FOUR FAULTS THIS BODY WAS SHIPPED WITH AT PASS 1 AND WHAT ANSWERED
+    THEM. Every one of them was found BY LOOKING, and two of them were found
+    standing beside a number of mine that said they were not there.
+
+    FIX A/A2 - THE SIDE VIEW HAD ONE BAR AND MY OWN NUMBER SAID IT HAD THREE.
+            Pass 1 ran three parallel bars along SIDE, and SIDE is very nearly
+            the side camera's own view axis, so each bar foreshortened to a
+            sliver. I had checked the FACE NORMAL'S projection (0.77 front,
+            0.55 side) and concluded the bars were safe - but the face being
+            visible says nothing about whether a LINE DRAWN ON IT is, because a
+            bar has a direction of its own. Pass 2 turned the bars to run along
+            OTHER, which keeps 0.97 of its length in the front ortho and 0.98
+            in the side one - and the side view STILL showed one bar, because
+            I had moved the direction and left the OFFSETS spread along SIDE,
+            so the three stood one behind another. A line's direction and the
+            axis its copies are spread along are two separate questions and
+            BOTH must clear both cameras; I answered one of them twice.
+            Three parallel bars cannot clear both - their offsets are forced
+            onto the axis perpendicular to them - so it is a GRID, which is
+            what a sieve has anyway. Whichever axis a camera collapses, the
+            other set still reads at full length.
+    FIX B - IT WAS A CASK, NOT A SIEVE. Pass 1's hoop was 0.260 deep on a 0.690
+            face and the side view read it as a pale barrel, which is the
+            HOOPER'S object (38) and the exact re-skin this body is argued not
+            to be. A dredging sieve is SHALLOW: 0.120, so the wall is a band
+            and not a body.
+    FIX C/E - THE FRONT VIEW READ AS A ONE-ARMED MAN. Pass 1 sat the sieve
+            against the chest on one flank, where it swallowed the whole near
+            arm - the straker FIX K fault, named in this very docstring and
+            then shipped anyway. Pass 3 moved it out and down and the arm was
+            STILL behind it, because a 0.690 disc carried on one flank is
+            simply where that arm has to be. A flank carry also read as a board
+            strapped on, which is the paviser again. It goes to CENTRE-FRONT
+            and LOW, held in BOTH HANDS at the rim's two side points, which is
+            how a man actually works a riddle over a floor: both arms then come
+            down OUTSIDE the trunk, near-vertical in the front ortho and
+            diagonal in the side one, so neither is the pipe-arm and neither is
+            hidden. Pass 3's carrying strap went with it - it crossed the chest
+            as a HORIZONTAL DARK ROD ending in mid-air at the rim, a pipe-arm
+            in all but name, and two hands on a rim need nothing to explain
+            them.
+    FIX F - THE SIDE CAMERA WAS LOOKING AT THE SIEVE'S BACK, AND ITS BACK WAS
+            BLANK. Pass 3 laid the grid proud of the front face only. The face
+            normal points off to one side, so from the other side the camera
+            saw a blank pale dish with three dark NUBS where the bar ends
+            cleared the rim. The number said the face was 0.55 visible and it
+            WAS - it was the wrong face. A sieve's mesh is a plane inside a
+            hoop and is seen from either side, so it is built that way: the
+            same grid proud at +AX and at -AX with the pale sheet between them.
+            No camera can now find a blank side of this object.
+
+    THE BARS ARE SIX A SIDE, NOT A FINE MESH. 0.028 radius pitched 0.168 apart
+    on a 0.660 face leaves 0.112 clear between them, wider than a bar is thick.
+    THE ICEMAN'S RULE - two pale things pitched closer than their own size are
+    one pale thing - run backwards: an accurate cross-hatch would collapse into
+    a single pale smudge at stream distance and the sieve would stop being a
+    sieve. Few and thick survives; dense and honest does not.
+
+    HE LEANS BACK, NOT FORWARD. Every other carrier in this file stoops into
+    its load; a man holding a wide tray out at arm's length leans AWAY from it
+    or he goes over. LEAN is negative here on purpose.
+
+    Static: no `anims` entry. The mesh ships as it is met.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures span and lid, and the
+    sieve's own reach is the number that decides it, not my opinion.
+    """
+    P = Parts("dredger")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 0.980
+    WAIST = 1.160
+    CHEST = 1.480
+    SHO = 1.660
+    HEAD = 1.900
+
+    LEAN = -0.075               # NEGATIVE: he leans back off the tray
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - LEAN * (v.z - HIP), v.z))
+
+    # ---- THE SIEVE. Yawed and tipped so neither ortho gets it flat on or
+    # edge on, and gridded on BOTH faces so neither ortho gets it blank.
+    YAWD = 0.62
+    TIPD = 0.30
+    AX = Vector((-math.sin(YAWD) * math.cos(TIPD),
+                 -math.cos(YAWD) * math.cos(TIPD),
+                 -math.sin(TIPD))).normalized()
+    SIDE = AX.cross(Vector((0.0, 0.0, 1.0))).normalized()   # across the face
+    OTHER = SIDE.cross(AX).normalized()                     # up the face
+    C = Vector((0.0, -0.560, 1.180))                        # hoop centre
+    RIM = 0.345
+    FACE = 0.330
+
+    # ---- the legs: planted wide, braced against the load out front ------
+    _open()
+    for _i in (-1, 1):
+        _x = 0.250 * _i
+        limb(P, seat([(_x, 0.0, ANK), (_x * 1.04, 0.022, KNEE),
+                      (_x * 0.80, -0.010, HIP)], 0.110),
+             0.110, 0.136, 'body')
+        P.add(L.box(0.222, 0.326, 0.074), 'dark', loc=(_x, -0.040, 0.037))
+    P.add(L.box(0.462, 0.296, 0.178), 'body', loc=(0.0, 0.0, HIP + 0.055))
+    _close("legs")
+
+    # ---- the trunk, the belt, a back for the side view, the shoulders ---
+    _open()
+    limb(P, [(0.0, 0.010, HIP + 0.090),
+             tuple(_s((0.0, -0.005, WAIST))),
+             tuple(_s((0.0, -0.030, CHEST)))],
+         0.212, 0.258, 'body')
+    P.add(L.box(0.416, 0.296, 0.070), 'dark',
+          loc=tuple(_s((0.0, -0.010, WAIST + 0.030))))
+    # a back: a tube's depth is only its diameter, and the side view is half
+    # the fit proof
+    P.add(L.box(0.336, 0.228, 0.396), 'body',
+          loc=tuple(_s((0.0, 0.140, CHEST - 0.095))), rot=(-0.08, 0.0, 0.0))
+    P.add(L.box(0.342, 0.288, 0.104), 'body',
+          loc=tuple(_s((0.0, -0.030, SHO - 0.085))))
+    for _i in (-1, 1):
+        P.add(L.sphere(0.152, 0.156, 0.130, 11, 8), 'body',
+              loc=tuple(_s((0.238 * _i, -0.030, SHO - 0.072))))
+    _close("trunk")
+
+    # ---- the head: dark hood, NO PALE, eyes on -Y only ------------------
+    _open()
+    _HD = Vector(tuple(_s((0.0, -0.050, HEAD))))
+    limb(P, [tuple(_s((0.0, -0.030, SHO + 0.015))),
+             tuple(_HD - Vector((0.0, 0.0, 0.140)))], 0.082, 0.094, 'body')
+    P.add(L.sphere(0.198, 0.204, 0.194, 14, 9), 'dark', loc=tuple(_HD))
+    P.add(L.sphere(0.214, 0.208, 0.148, 13, 8), 'dark',
+          loc=tuple(_HD + Vector((0.0, 0.028, 0.070))))
+    P.add(L.box(0.256, 0.118, 0.052), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.148, 0.058))), rot=(-0.16, 0.0, 0.0))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.010))), 0.044, 0.023, -0.186)
+    _close("head")
+
+    # ---- THE SIEVE ITSELF. THE ONLY PALE ON THE BODY. -------------------
+    # Mass, not detail: one shallow hoop and one sheet, read as one object.
+    _open()
+    P.raw(aim(L.cone(RIM, RIM, 0.120, 20), tuple(C - AX * 0.060), tuple(AX)),
+          'bone')
+    P.raw(aim(L.cone(FACE, FACE, 0.030, 20), tuple(C - AX * 0.015), tuple(AX)),
+          'bone')
+    _close("sieve")
+
+    # ---- THE BARS. DARK, GRIDDED, AND PROUD ON BOTH FACES (FIX A2 / F). -
+    _open()
+    for _sgn in (1.0, -1.0):
+        for _off in (-0.168, 0.0, 0.168):
+            _half = math.sqrt(max(0.0, FACE * FACE - _off * _off)) - 0.010
+            _st = C + AX * (0.048 * _sgn) + SIDE * _off - OTHER * _half
+            P.raw(aim(L.cone(0.028, 0.028, 2.0 * _half, 9), tuple(_st),
+                      tuple(OTHER)), 'dark')
+        for _off in (-0.168, 0.0, 0.168):
+            _half = math.sqrt(max(0.0, FACE * FACE - _off * _off)) - 0.010
+            _st = C + AX * (0.076 * _sgn) + OTHER * _off - SIDE * _half
+            P.raw(aim(L.cone(0.028, 0.028, 2.0 * _half, 9), tuple(_st),
+                      tuple(SIDE)), 'dark')
+    _close("bars")
+
+    # ---- the arms. BOTH on the rim, outside the trunk (FIX C/E). --------
+    _open()
+    _SN = _s((-0.288, -0.040, SHO - 0.110))
+    _SF = _s((0.288, -0.040, SHO - 0.110))
+    _GN = C + SIDE * (RIM - 0.020) - AX * 0.020
+    _GF = C - SIDE * (RIM - 0.020) - AX * 0.020
+    limb(P, [tuple(_SN), tuple(_SN + Vector((-0.070, -0.215, -0.190))),
+             tuple(_GN)], 0.082, 0.056, 'body')
+    limb(P, [tuple(_SF), tuple(_SF + Vector((0.070, -0.215, -0.190))),
+             tuple(_GF)], 0.082, 0.056, 'body')
+    _close("arms")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). The sieve and its
+    # bars are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
+    return P
+
+
+BUILDERS.update({"dredger": dredger})

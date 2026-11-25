@@ -422,6 +422,7 @@ const MB_FIT := {
 	"nightman": 0.94,   # S113: art's _fit_report.json pairs.nightman.ratio (53rd, Nightwork in CANON minibosses.py:19075, h 2.30 / hero 2.45, tag prison - field 5, fits_frame true, 3/3 proving views), copied not re-derived
 	"iceman": 1.27,   # S115: art's _fit_report.json pairs.iceman.ratio (54th, Hoarback in CANON minibosses.py:19421, h 3.12 / hero 2.45, tag mess - field 5, fits_frame true), copied not re-derived. MB_NAME row added at S116 once content's by_key.iceman (C-193) landed (S98 precedent)
 	"straker": 0.98,   # S117: art's _fit_report.json pairs.straker.ratio (55th, Everyhand in CANON minibosses.py:19822, h 2.40 / hero 2.45, tag wood - field 5, fits_frame true, 3/3 proving views), copied not re-derived. NO MB_NAME row until content's by_key.straker lands (S115 precedent)
+	"weigher": 1.04,   # S120: art's _fit_report.json pairs.weigher.ratio (56th, Trueweight in CANON minibosses.py:20600, h 2.55 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived. NO MB_NAME row until content's by_key.weigher lands (S117 precedent: tools/_s51_names.gd fails any MB_NAME key absent from by_key)
 	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
 }
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their

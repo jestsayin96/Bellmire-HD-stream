@@ -615,6 +615,9 @@ ol.rollfeed { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid
 /* edge 108.0px, circumradius 102.71px, inradius 81.62px */
 
 footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: center; margin-top: 22px; line-height: 1.6; }
+footer a.footer-link { color: var(--parch-dim); text-decoration: underline; text-decoration-color: var(--parch-dim); }
+footer a.footer-link:hover { color: var(--gold); text-decoration-color: var(--gold); }
+a.watchbtn { text-decoration: none; display: inline-flex; align-items: center; }
 
 /* ======================================================= wider screens */
 @media (min-width: 680px) {
@@ -1805,3 +1808,55 @@ html:not(.overlay):not(.watch) .stage-top nav { scrollbar-width: none; }
 .shop-sells b.rar-uncommon { border-bottom-color: var(--rar-uncommon); box-shadow: 0 1px 0 rgba(42,28,16,.6); } .shop-sells b.rar-rare { border-bottom-color: var(--rar-rare); }
 .shop-sells b.rar-very-rare, .shop-sells b.rar-epic { border-bottom-color: var(--rar-very-rare); } .shop-sells b.rar-legendary { border-bottom-color: var(--rar-legendary); }
 .shop-sells b.rar-artifact { border-bottom-color: var(--rar-artifact); }
+
+/* ===========================================================================
+   Suggestion Box (supervisor directive, 25 Nov 2026). An on-page form that
+   POSTs to Supabase via fetch (connect-src, not form-action). Same parchment
+   palette as every other panel; the teal accent marks the submit button.
+   =========================================================================== */
+.suggest-section {
+  max-width: 580px; margin: 32px auto 0; padding: 24px 20px 28px;
+  background: var(--parch); border: 2px solid var(--edge);
+  border-radius: 10px; color: var(--ink);
+}
+.suggest-title {
+  font-family: "Gloock", serif; font-size: 1.3rem; margin: 0 0 4px;
+  color: var(--ink-red);
+}
+.suggest-sub { margin: 0 0 16px; font-size: .88rem; color: var(--ink-2); }
+.suggest-row { margin-bottom: 12px; }
+.suggest-label { display: block; font-weight: 600; font-size: .85rem; margin-bottom: 4px; color: var(--ink); }
+.suggest-opt { font-weight: 400; color: var(--ink-soft); }
+.suggest-input {
+  display: block; width: 100%; box-sizing: border-box;
+  padding: 8px 10px; font: inherit; font-size: .9rem;
+  background: var(--parch-hi); color: var(--ink);
+  border: 1.5px solid var(--edge-2); border-radius: 5px;
+}
+.suggest-input:focus { outline: 2px solid var(--teal); outline-offset: 1px; border-color: var(--teal); }
+.suggest-select { cursor: pointer; }
+.suggest-textarea { resize: vertical; min-height: 80px; }
+.suggest-send {
+  display: inline-block; margin-top: 4px; padding: 9px 28px;
+  font: inherit; font-size: .9rem; font-weight: 700;
+  background: var(--teal); color: #fff; border: none; border-radius: 6px;
+  cursor: pointer; transition: background .15s;
+}
+.suggest-send:hover { background: var(--teal-br); }
+.suggest-send:disabled { opacity: .5; cursor: not-allowed; }
+.suggest-status { margin: 8px 0 0; font-size: .85rem; min-height: 1.2em; }
+.suggest-status.ok { color: var(--teal-ink); }
+.suggest-status.err { color: var(--ink-red); }
+
+/* Night watch: dim the suggestion box to match the page */
+html.watch .suggest-section {
+  background: var(--night-2); border-color: var(--edge-2); color: var(--parch-dim);
+}
+html.watch .suggest-title { color: var(--parch-dim); }
+html.watch .suggest-sub { color: var(--parch-lo); }
+html.watch .suggest-label { color: var(--parch-dim); }
+html.watch .suggest-input {
+  background: var(--char); color: var(--parch-dim);
+  border-color: rgba(109,72,36,.3);
+}
+html.watch .suggest-send { background: var(--teal-ink); color: var(--parch); }

@@ -1,3 +1,13 @@
+## HUB standing audit - 24 Nov 2026 21:38 CT (hub lane)
+TAKE THIS NEXT (20:58 block) HUB row: "NOTHING TO PUBLISH AND NOTHING TO CLAIM. Keep the standing audit." No row, no web/ edit.
+Measured fresh on origin/hub merged with origin/main: web/ walk = 539 files, 3,251,058 bytes, ZERO at 0 bytes.
+Trees: origin/gh-pages^{tree} c03fa129, origin/hub:web 405450bf (HEAD:web identical to origin/hub:web, web/ diff empty).
+Only delta gh-pages -> hub: NOTES.md +12/-0 (documentation). node --check app.js rc=0.
+innerHTML in code at exactly app.js:255 and :301 (page-owned); other hits are comments (7,93,5137,5178);
+outerHTML 0; insertAdjacentHTML/document.write/new Function only in the comment at lines 10-11; eval( 0.
+No screenshot and no hostile-name rerun: web/ unchanged, none owed. Live-dot colour: unchanged, no web edit.
+Merged origin/main into hub (no web/ change). NOT claiming READY TO PUBLISH. Nothing for Mr. E to decide.
+
 ## B140 - THE OWED REPUBLISH IS PAID AT 56, AND THE ONE RED LEFT IS PROVED NOT MINE BY RUNNING THE GATE AGAINST THE ENGINE'S OWN 56, 2026-11-24 20:45-21:0x CT (chat bot)
 
 Took: the republish the game build's own S121 handoff declared owed - "the chat bot's COMMANDS_DATA

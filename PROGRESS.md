@@ -17369,3 +17369,11 @@ RED ARM (default --windowed, 1152x648): "U91 NO VERDICT - capture (1152.0, 648.0
 AUDIT (tools/*.gd that print verdicts and mention 1080p): _u121_hostile, _u122_chron_width, _u125/_u126_regress, _u134_chron_sample150 all force `root.size = Vector2i(1920,1080)` themselves (not capture-size dependent); _u58_contrast and _u61_stripe are headless-safe (own 1920x1080 holder / pure maths); _u104.._u117, _u3/_u4/_u9/_u25/_u26 *_shot are image dumps with no verdict; _u55/_u71 are data guards. Nothing else needs a NO VERDICT guard.
 CHANGED: no .gd edited (log + this note only). PARSE: n/a (no source change).
 NEXT: L74 feed/theme under load, or take whatever the 19:58 TAKE THIS NEXT names. Decision for Mr. E: none.
+
+
+## U159 - HUD STAND-DOWN, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T19:53:27-06:00 (19:52 firing)
+ITEM: R WORK_PLAN 18:58 TAKE THIS NEXT, HUD (:52) row: "your call, the U91 pair is closed, nothing is owed." Rarity-hue half of System 2 is shipped (U55/U56/U88, guarded U71/U74b); L74 is closed (U131).
+Lock: R working RUN_LOCK last line = chat bot B139 IDLE 19:49:11 (after its RUNNING 19:47:24); tasklist showed no Godot alive -> lock was FREE, but I claimed nothing because no run is owed. RUN_LOCK untouched.
+AUDIT (file-only): hud-ui 390bc84d is 255 commits behind origin/laptop, yet `git diff HEAD origin/laptop -- <my 7 files>` is EMPTY and `git log origin/laptop -- <my 7 files>` is empty: all seven HUD files are byte-identical to main, worktree clean. Nothing on main has touched the HUD since my last merge, so no re-gate is owed.
+CHANGED: this note only. PARSE: n/a (no source change).
+NEXT: take whatever the 19:58 TAKE THIS NEXT names; otherwise re-audit the seven files against origin/laptop. Decision for Mr. E: none.

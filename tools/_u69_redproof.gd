@@ -15,6 +15,7 @@ var _fed := 0
 var _bad := 0
 var _n := 0  # U154: elements audited
 var _control := false  # U156: `-- control` skips the injection; the SAME gate must then print OK (proves the FAIL is the injection, not the HUD)
+var _small := ''  # U161: set when a capture is under the 1920x1080 layout - the verdict is then NO VERDICT, never FAIL/OK (U62 size-guard style)
 var _inflated := 0  # U156: count of the named-element-inflated FAIL lines
 const SC := [1.0, 1.5]
 const LINES := ["A trade caravan is sighted on the west road.", "Viewer1001 swings a sword at a raider - hit! 7 damage.",
@@ -75,6 +76,10 @@ func _process(_d: float) -> bool:
 		_step += 1
 		_fed = 0
 		if _step >= SC.size() * 2:
+			if _small != "":
+				# U161: ratio thresholds and the 20%/35% skips are tuned at 1080p; below it the audit can FALSE-FAIL or skip a real element
+				print("U69_REDPROOF NO VERDICT - capture ", _small, " is smaller than 1920x1080; pass --windowed --resolution 1920x1080")
+				return true
 			if _n == 0: print("U69_REDPROOF NO VERDICT - 0 elements audited"); _bad += 1
 			print("U69_REDPROOF ", "OK" if _bad == 0 else "FAIL", " elements=", _n, " arm=", "CONTROL(no injection, must be OK)" if _control else "RED(injected, must FAIL)", " inflated_fails=", _inflated)
 			return true
@@ -82,6 +87,8 @@ func _process(_d: float) -> bool:
 func _audit(pct: int, full: bool) -> void:
 	var tag := "%d%% %s" % [pct, "full" if full else "grid"]
 	var scr := Vector2(root.size)
+	if scr.x < 1920.0 or scr.y < 1080.0:
+		_small = "%dx%d" % [int(scr.x), int(scr.y)]
 	var items: Array = []
 	for cl in root.find_children("*", "CanvasLayer", true, false):
 		for k in (cl as Node).get_children():

@@ -17430,3 +17430,12 @@ NEXT: 01:52 is an ODD hour - read the 00:58 TAKE THIS NEXT; the standing item re
 - Re-audit after S126 landed the 60th name (game build, 02:17): after git fetch, origin/laptop 48b3f2c8, origin/main e24da4aa; `git diff --stat` over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme vs both refs = EMPTY. Nothing to re-gate.
 - CHANGED: this note only. PARSE: n/a (no source change). Decision for Mr. E: none.
 - Next firing 03:52 is ODD: work it - L74 (feed + theme under load) unless the plan says otherwise.
+
+## U167 - 2026-11-25T03:56:47-06:00 - L74 RE-VERIFIED (odd hour, worked), no .gd changed, lock released 03:56:26
+- Lock: R working-tree RUN_LOCK last line IDLE 03:49:40 chat bot B147, tasklist Godot* = 0 -> FREE. Claimed 03:54:12-06:00 (declared finish ~04:04, cap +15), released 03:56:26-06:00.
+- TAKE THIS NEXT named for HUD: L74 (feed + theme under load); rarity-hue half of System 2 is CLOSED at U55, not taken.
+- Audit: after fetch origin/laptop 45935af2, origin/main 56724088; git diff over the seven owned files vs both = EMPTY. The S127 61st-body change touched no HUD file.
+- Ran tools/_l74_test.gd WINDOWED 1920x1080 (log _u167_l74.log): L74_TEST OK - 17 lines measured of 48 fed, taken_off_unread=[0,1,0,0] (routine/normal/town/crit), protected_unread=0, dropped_protected=0, 0 SCRIPT ERROR from HUD files. The only errors are the known gear.gd:104 staff_common.glb import-cache noise from this worktree's thin .godot/imported (team lead traced it 18 Nov; not mine, not chased).
+- LOOKED at renders/cycles/l74/l74_u167_150.png: Chronicle at 150% reads as one designed panel, 4 lines, fall/raid line on top, x5 merge visible, nothing clipped or overlapping the quadrant labels.
+- Guard question (U74b follow-up): parse_fish() end-finder not re-opened this hour; no nested brace in RARITY_COLOR today.
+- CHANGED: this note + log only. Decision for Mr. E: none. Next firing 04:52 is EVEN: stand down unless plan reopens HUD; 05:52 odd.
